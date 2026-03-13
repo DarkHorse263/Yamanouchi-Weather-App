@@ -4,6 +4,17 @@ import { Card, LoadingScreen, ErrorScreen } from "@/components/ui-elements";
 import { Snowflake, Ruler, ThermometerSnowflake, Wind, CalendarDays } from "lucide-react";
 import { motion } from "framer-motion";
 
+function safeTime(raw: string | null | undefined): string {
+  if (!raw) return "Live";
+  try {
+    const d = new Date(raw);
+    if (isNaN(d.getTime())) return "Live";
+    return d.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" });
+  } catch {
+    return "Live";
+  }
+}
+
 export default function Resorts() {
   const { t } = useLanguage();
   const { data: resorts, isLoading, error } = useGetResorts({ query: { refetchInterval: 600000 } });
@@ -91,7 +102,7 @@ export default function Resorts() {
 
                   <div className="mt-4 pt-3 border-t border-border flex justify-between items-center text-[10px] text-muted-foreground uppercase font-bold tracking-wider">
                     <span>{resort.weatherStation || 'JMA Station'}</span>
-                    <span>{resort.sourceUpdatedAt ? format(new Date(resort.sourceUpdatedAt), 'HH:mm') : 'Live'}</span>
+                    <span>{safeTime(resort.sourceUpdatedAt)}</span>
                   </div>
                 </Card>
               </motion.div>

@@ -1,6 +1,8 @@
-# Workspace
+# Yamanouchi Snow Intelligence Platform
 
 ## Overview
+
+Bilingual (EN/JP) full-stack web application for Yamanouchi Town, Japan — a snow intelligence platform targeting international tourists on mobile browsers. Live snow data from Supabase, accommodation/dining/attractions from local PostgreSQL.
 
 pnpm workspace monorepo using TypeScript. Each package manages its own dependencies.
 
@@ -10,30 +12,56 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 - **Node.js version**: 24
 - **Package manager**: pnpm
 - **TypeScript version**: 5.9
+- **Frontend**: React + Vite + Tailwind CSS + Framer Motion + React Leaflet
 - **API framework**: Express 5
-- **Database**: PostgreSQL + Drizzle ORM
+- **Database**: PostgreSQL (Replit) + Drizzle ORM — for local places data
+- **External data**: Supabase (read-only) — for live snow/resort/storm data
 - **Validation**: Zod (`zod/v4`), `drizzle-zod`
 - **API codegen**: Orval (from OpenAPI spec)
 - **Build**: esbuild (CJS bundle)
+
+## Supabase Connection
+
+- URL: `https://rbeyhfotgpsigjpptcnl.supabase.co`
+- Key: Anon/publishable key embedded in `artifacts/api-server/src/lib/supabase.ts`
+- Override with env vars: `SUPABASE_URL`, `SUPABASE_ANON_KEY`
+- Tables used: `yamanouchi_resorts_today`, `yamanouchi_storms_today`, `powder_alerts_today`, `app_home_focus_today`, `top_snowfall_today`
+- Column names (snake_case): `resort_id`, `name`, `cluster`, `snow_24h_cm`, `snow_depth_cm`, `temp_now_c`, `wind_kmh`, `expected_snow_tomorrow_cm`, `latitude`, `longitude`, `elevation_m`, `station_name`, `last_updated_at`
+- Storm tracker columns: `storm_rank`, `snow_24h_cm`, `snow_48h_cm`, `snow_72h_cm`, `storm_level`, `headline`, `cluster`
+- Alert columns: `id`, `name`, `cluster`, `alert_type`, `headline`, `message`, `powder_probability`, `expected_snow_cm`, `created_at`
 
 ## Structure
 
 ```text
 artifacts-monorepo/
-├── artifacts/              # Deployable applications
-│   └── api-server/         # Express API server
-├── lib/                    # Shared libraries
+├── artifacts/
+│   ├── api-server/         # Express API server (port 8080)
+│   │   └── src/
+│   │       ├── routes/snow.ts      # Snow data (dashboard, resorts, map, outlook, alerts) → Supabase
+│   │       ├── routes/places.ts    # Accommodation, dining, attractions → local DB
+│   │       └── lib/supabase.ts     # Supabase client
+│   └── yamanouchi/         # React+Vite frontend (port 20651)
+│       └── src/
+│           ├── pages/      # Home, Resorts, Map, Outlook, Alerts, Stay, Eat, Explore
+│           ├── components/ # Layout, UI elements
+│           └── hooks/      # useLanguage (EN/JP toggle)
+├── lib/
 │   ├── api-spec/           # OpenAPI spec + Orval codegen config
 │   ├── api-client-react/   # Generated React Query hooks
 │   ├── api-zod/            # Generated Zod schemas from OpenAPI
-│   └── db/                 # Drizzle ORM schema + DB connection
-├── scripts/                # Utility scripts (single workspace package)
-│   └── src/                # Individual .ts scripts, run via `pnpm --filter @workspace/scripts run <script>`
-├── pnpm-workspace.yaml     # pnpm workspace (artifacts/*, lib/*, lib/integrations/*, scripts)
-├── tsconfig.base.json      # Shared TS options (composite, bundler resolution, es2022)
-├── tsconfig.json           # Root TS project references
-└── package.json            # Root package with hoisted devDeps
+│   └── db/                 # Drizzle ORM — accommodation, dining, attractions tables
+├── scripts/
+├── pnpm-workspace.yaml
+├── tsconfig.base.json
+├── tsconfig.json
+└── package.json
 ```
+
+## Local Database Tables (Replit PostgreSQL)
+
+- `accommodation` — 6 rows (hotels, ryokan, guesthouses)
+- `dining` — 7 rows (restaurants, bars, cafes)
+- `attractions` — 8 rows (nature, onsen, culture, activity)
 
 ## TypeScript & Composite Projects
 
