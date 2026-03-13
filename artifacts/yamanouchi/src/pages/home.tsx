@@ -263,7 +263,7 @@ export default function Home() {
                   </div>
                   <div className="flex-1 pl-3 text-center">
                     <p className="text-xs font-bold text-muted-foreground uppercase mb-1">Avg Temp</p>
-                    <p className="text-lg font-black text-red-600">{region.avgTemp ?? '--'}°C</p>
+                    <p className="text-lg font-black text-red-600">{region.avgTemp != null ? region.avgTemp.toFixed(1) : '--'}°C</p>
                   </div>
                 </div>
               </Card>
@@ -271,6 +271,24 @@ export default function Home() {
           </div>
         </motion.div>
       </div>
+
+      {/* DATA DISCLAIMER */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5 }}
+        className="mt-8 rounded-xl border border-border bg-muted/40 px-4 py-4"
+      >
+        <p className="text-xs font-semibold text-foreground/70 mb-1.5">
+          {t("Data Sources & Disclaimer", "データソース・免責事項")}
+        </p>
+        <p className="text-[11px] leading-relaxed text-muted-foreground">
+          {t(
+            "Snow depth and resort conditions are sourced from individual ski resort reporting networks. Temperature, wind, and snowfall forecasts are derived from Japan Meteorological Agency (JMA) numerical weather models, delivered via Open-Meteo. Data is refreshed hourly between 5 AM and 6 PM Japan Standard Time (JST) and is provided for general informational purposes only. Figures represent the best available data at time of publication and may not reflect current on-mountain conditions. Always verify conditions directly with individual resorts before skiing or snowboarding.",
+            "積雪深・ゲレンデ状況は各スキー場の報告ネットワークに基づきます。気温・風速・降雪量は、Open-Meteo経由の気象庁（JMA）数値予報モデルから取得しています。データは毎日午前5時〜午後6時（日本標準時）の間に1時間ごと更新されます。本情報は参考目的のみに提供されており、実際の状況と異なる場合があります。滑走前に必ず各スキー場へ直接ご確認ください。"
+          )}
+        </p>
+      </motion.div>
     </div>
   );
 }
