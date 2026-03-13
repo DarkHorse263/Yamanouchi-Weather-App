@@ -112,8 +112,34 @@ function buildDashboardFromResorts(resorts: ReturnType<typeof mapResortRow>[]) {
   const maxArr = (arr: number[]) => arr.length ? Math.max(...arr) : null;
 
   const now = new Date();
-  const nextUpdate = new Date(now);
-  nextUpdate.setMinutes(Math.ceil((now.getMinutes() + 1) / 60) * 60, 0, 0);
+
+  // All display times are in JST (UTC+9)
+  const JST_OFFSET_MS = 9 * 60 * 60 * 1000;
+  const nowJst = new Date(now.getTime() + JST_OFFSET_MS);
+  const jstHour = nowJst.getUTCHours();
+
+  // Updates run hourly between 5am and 6pm JST
+  const UPDATE_START = 5;   // 5:00 AM JST
+  const UPDATE_END = 18;    // 6:00 PM JST
+
+  let nextUpdateJst: Date;
+  if (jstHour >= UPDATE_START && jstHour < UPDATE_END - 1) {
+    // Within window and still updates ahead: next top-of-hour
+    nextUpdateJst = new Date(nowJst);
+    nextUpdateJst.setUTCHours(jstHour + 1, 0, 0, 0);
+  } else {
+    // Outside window (before 5am or past 6pm): next update is 5am
+    nextUpdateJst = new Date(nowJst);
+    if (jstHour >= UPDATE_END - 1) {
+      // After last update of the day, roll to tomorrow
+      nextUpdateJst.setUTCDate(nextUpdateJst.getUTCDate() + 1);
+    }
+    nextUpdateJst.setUTCHours(UPDATE_START, 0, 0, 0);
+  }
+
+  const fmtOpts: Intl.DateTimeFormatOptions = { hour: "2-digit", minute: "2-digit" };
+  const liveTimeStr = nowJst.toLocaleTimeString("en-US", { ...fmtOpts, timeZone: "UTC" });
+  const nextUpdateStr = nextUpdateJst.toLocaleTimeString("en-US", { ...fmtOpts, timeZone: "UTC" });
 
   const bestResort = [...resorts].sort((a, b) => (b.baseDepth ?? 0) - (a.baseDepth ?? 0))[0] || resorts[0];
 
@@ -134,8 +160,8 @@ function buildDashboardFromResorts(resorts: ReturnType<typeof mapResortRow>[]) {
 
   return {
     updatedAt: now.toISOString(),
-    liveTime: now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }),
-    nextUpdate: nextUpdate.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }),
+    liveTime: liveTimeStr,
+    nextUpdate: nextUpdateStr,
     totalSkiAreas: resorts.length,
     avgTemp: avg(temps) !== null ? Math.round((avg(temps) as number) * 10) / 10 : null,
     avgWind: avg(winds) !== null ? Math.round((avg(winds) as number) * 10) / 10 : null,
