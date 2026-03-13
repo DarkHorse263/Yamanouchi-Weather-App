@@ -268,22 +268,6 @@ export default function Home() {
               </Card>
             ))}
           </div>
-
-          {/* Quick links to guide */}
-          <div className="mt-4 grid grid-cols-3 gap-3">
-            {[
-              { href: "/guide", label: t("Where to Stay", "宿泊"), emoji: "🏨" },
-              { href: "/guide?tab=eat", label: t("Where to Eat", "食事"), emoji: "🍜" },
-              { href: "/guide?tab=explore", label: t("Explore", "観光"), emoji: "🌋" },
-            ].map(({ href, label, emoji }) => (
-              <Link key={href} href={href}>
-                <div className="flex flex-col items-center gap-1 p-3 rounded-2xl bg-secondary/60 hover:bg-secondary border border-border hover:border-primary/20 transition-all cursor-pointer text-center">
-                  <span className="text-2xl">{emoji}</span>
-                  <span className="text-xs font-bold text-muted-foreground leading-tight">{label}</span>
-                </div>
-              </Link>
-            ))}
-          </div>
         </motion.div>
       </div>
     </div>
