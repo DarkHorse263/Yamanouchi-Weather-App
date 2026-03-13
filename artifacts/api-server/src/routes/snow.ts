@@ -48,7 +48,8 @@ function mapResortRow(r: Record<string, unknown>, idx: number) {
     id: String(r.resort_id || r.id || fallback.id),
     name: resortName,
     nameJa: matched.nameJa ?? null,
-    region: String(r.cluster || r.region || fallback.region),
+    // If we can identify the resort by name, trust our fallback region over the Supabase cluster
+    region: matched.name === resortName ? matched.region : normalizeRegion(String(r.cluster || r.region || fallback.region)),
     regionJa: matched.regionJa ?? null,
     snow24h: r.snow_24h_cm !== undefined && r.snow_24h_cm !== null ? Number(r.snow_24h_cm) : null,
     baseDepth: r.snow_depth_cm !== undefined && r.snow_depth_cm !== null ? Number(r.snow_depth_cm) : null,
@@ -59,8 +60,9 @@ function mapResortRow(r: Record<string, unknown>, idx: number) {
     rank: idx + 1,
     weatherStation: r.station_name ? String(r.station_name) : null,
     sourceUpdatedAt: r.last_updated_at ? String(r.last_updated_at) : null,
-    lat: r.latitude !== undefined && r.latitude !== null ? Number(r.latitude) : (fallback.lat ?? null),
-    lng: r.longitude !== undefined && r.longitude !== null ? Number(r.longitude) : (fallback.lng ?? null),
+    // Prefer individual resort coords from fallback over Supabase weather-station cluster coords
+    lat: matched.lat ?? (r.latitude !== undefined && r.latitude !== null ? Number(r.latitude) : null),
+    lng: matched.lng ?? (r.longitude !== undefined && r.longitude !== null ? Number(r.longitude) : null),
     elevation: r.elevation_m !== undefined && r.elevation_m !== null ? Number(r.elevation_m) : null,
     websiteUrl: matched.websiteUrl ?? null,
   };
@@ -262,7 +264,13 @@ router.get("/map", async (_req, res): Promise<void> => {
     try {
       const { data } = await supabase.from("yamanouchi_resorts_today").select("*");
       if (data && data.length > 0) {
-        resorts = data.map(mapResortRow);
+        const supabaseResorts = data.map(mapResortRow).map(r => ({ ...r, region: normalizeRegion(r.region) }));
+        // Supplement with fallback for any regions not present in Supabase
+        const presentRegions = new Set(supabaseResorts.map(r => r.region));
+        const supplemental = FALLBACK_RESORTS
+          .filter(r => !presentRegions.has(normalizeRegion(r.region)))
+          .map(r => ({ ...r, region: normalizeRegion(r.region) })) as ReturnType<typeof mapResortRow>[];
+        resorts = [...supabaseResorts, ...supplemental];
       }
     } catch (err) {
       console.error("Map error:", err);
