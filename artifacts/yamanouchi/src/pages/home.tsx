@@ -8,9 +8,10 @@ import { Link } from "wouter";
 import { useEffect, useState } from "react";
 
 const HERO_SLIDES = [
-  { src: "hero-slide-1.jpg", label: "Shiga Kogen Highlands" },
-  { src: "hero-slide-2.jpg", label: "Ryuoo Summit" },
-  { src: "hero-slide-3.jpg", label: "Powder Days" },
+  { src: "hero-slide-1.jpg", label: "Shiga Kogen" },
+  { src: "hero-slide-2.jpg", label: "Fresh Tracks" },
+  { src: "hero-slide-3.jpg", label: "Shiga Kogen" },
+  { src: "hero-slide-4.jpg", label: "Snow Monsters" },
 ];
 
 function HeroSlideshow({ base }: { base: string }) {
