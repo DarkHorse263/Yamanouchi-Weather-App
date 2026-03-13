@@ -1,15 +1,28 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: Yamanouchi Snow Intelligence Platform API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: dashboard
+    description: Home dashboard data
+  - name: resorts
+    description: Ski resort conditions
+  - name: outlook
+    description: Snow outlook and forecasts
+  - name: alerts
+    description: Powder alerts
+  - name: accommodation
+    description: Accommodation listings
+  - name: dining
+    description: Restaurants and bars
+  - name: attractions
+    description: Local attractions
 paths:
   /healthz:
     get:
@@ -24,6 +37,363 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /dashboard:
+    get:
+      operationId: getDashboard
+      tags: [dashboard]
+      summary: Get home dashboard data
+      description: Returns aggregated conditions across all Yamanouchi ski areas
+      responses:
+        "200":
+          description: Dashboard data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dashboard"
+
+  /resorts:
+    get:
+      operationId: getResorts
+      tags: [resorts]
+      summary: List all ski resorts with live conditions
+      description: Returns all ski areas in Yamanouchi with current conditions grouped by region
+      responses:
+        "200":
+          description: Resort list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Resort"
+
+  /resorts/{id}:
+    get:
+      operationId: getResort
+      tags: [resorts]
+      summary: Get a single resort
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Resort detail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Resort"
+        "404":
+          description: Not found
+
+  /map:
+    get:
+      operationId: getMapData
+      tags: [resorts]
+      summary: Get resort map markers
+      description: Returns resort locations with coordinates for the map view
+      responses:
+        "200":
+          description: Map markers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MapMarker"
+
+  /outlook:
+    get:
+      operationId: getSnowOutlook
+      tags: [outlook]
+      summary: Get snow outlook forecast
+      description: Returns 24h/48h/72h snowfall forecasts by region
+      responses:
+        "200":
+          description: Snow outlook
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RegionOutlook"
+
+  /alerts:
+    get:
+      operationId: getPowderAlerts
+      tags: [alerts]
+      summary: Get powder alerts
+      description: Returns current powder alerts and recent storm events
+      responses:
+        "200":
+          description: Powder alerts
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AlertsData"
+
+  /accommodation:
+    get:
+      operationId: getAccommodation
+      tags: [accommodation]
+      summary: List accommodation
+      description: Returns hotels, ryokan, and other lodging in Yamanouchi
+      parameters:
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [hotel, ryokan, guesthouse, apartment, all]
+        - name: region
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Accommodation list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Accommodation"
+    post:
+      operationId: createAccommodation
+      tags: [accommodation]
+      summary: Create accommodation listing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateAccommodationBody"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Accommodation"
+
+  /accommodation/{id}:
+    patch:
+      operationId: updateAccommodation
+      tags: [accommodation]
+      summary: Update accommodation listing
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateAccommodationBody"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Accommodation"
+        "404":
+          description: Not found
+    delete:
+      operationId: deleteAccommodation
+      tags: [accommodation]
+      summary: Delete accommodation listing
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+        "404":
+          description: Not found
+
+  /dining:
+    get:
+      operationId: getDining
+      tags: [dining]
+      summary: List restaurants and bars
+      parameters:
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [restaurant, bar, cafe, all]
+        - name: region
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Dining list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DiningVenue"
+    post:
+      operationId: createDining
+      tags: [dining]
+      summary: Create dining listing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateDiningBody"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiningVenue"
+
+  /dining/{id}:
+    patch:
+      operationId: updateDining
+      tags: [dining]
+      summary: Update dining listing
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateDiningBody"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiningVenue"
+        "404":
+          description: Not found
+    delete:
+      operationId: deleteDining
+      tags: [dining]
+      summary: Delete dining listing
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+        "404":
+          description: Not found
+
+  /attractions:
+    get:
+      operationId: getAttractions
+      tags: [attractions]
+      summary: List local attractions
+      parameters:
+        - name: category
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [onsen, culture, nature, activity, shopping, all]
+        - name: region
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Attractions list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Attraction"
+    post:
+      operationId: createAttraction
+      tags: [attractions]
+      summary: Create attraction listing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateAttractionBody"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Attraction"
+
+  /attractions/{id}:
+    patch:
+      operationId: updateAttraction
+      tags: [attractions]
+      summary: Update attraction listing
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateAttractionBody"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Attraction"
+        "404":
+          description: Not found
+    delete:
+      operationId: deleteAttraction
+      tags: [attractions]
+      summary: Delete attraction listing
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+        "404":
+          description: Not found
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +404,661 @@ components:
       required:
         - status
 
+    Dashboard:
+      type: object
+      properties:
+        updatedAt:
+          type: string
+        liveTime:
+          type: string
+        nextUpdate:
+          type: string
+        totalSkiAreas:
+          type: integer
+        avgTemp:
+          type: ["number", "null"]
+        avgWind:
+          type: ["number", "null"]
+        topSnow24h:
+          type: ["number", "null"]
+        bestBase:
+          type: ["number", "null"]
+        bestResort:
+          $ref: "#/components/schemas/Resort"
+        regions:
+          type: array
+          items:
+            $ref: "#/components/schemas/RegionSummary"
+      required:
+        - updatedAt
+        - liveTime
+        - nextUpdate
+        - totalSkiAreas
+        - avgTemp
+        - avgWind
+        - topSnow24h
+        - bestBase
+        - bestResort
+        - regions
+
+    RegionSummary:
+      type: object
+      properties:
+        name:
+          type: string
+        nameJa:
+          type: string
+        resortCount:
+          type: integer
+        avgTemp:
+          type: ["number", "null"]
+        topSnow:
+          type: ["number", "null"]
+        bestBase:
+          type: ["number", "null"]
+      required:
+        - name
+        - nameJa
+        - resortCount
+        - avgTemp
+        - topSnow
+        - bestBase
+
+    Resort:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        nameJa:
+          type: ["string", "null"]
+        region:
+          type: string
+        regionJa:
+          type: ["string", "null"]
+        snow24h:
+          type: ["number", "null"]
+        baseDepth:
+          type: ["number", "null"]
+        temp:
+          type: ["number", "null"]
+        wind:
+          type: ["number", "null"]
+        snowTomorrow:
+          type: ["number", "null"]
+        snowScore:
+          type: ["number", "null"]
+        rank:
+          type: ["integer", "null"]
+        weatherStation:
+          type: ["string", "null"]
+        sourceUpdatedAt:
+          type: ["string", "null"]
+        lat:
+          type: ["number", "null"]
+        lng:
+          type: ["number", "null"]
+        elevation:
+          type: ["integer", "null"]
+        websiteUrl:
+          type: ["string", "null"]
+      required:
+        - id
+        - name
+        - region
+        - snow24h
+        - baseDepth
+        - temp
+        - wind
+        - snowTomorrow
+        - snowScore
+        - rank
+
+    MapMarker:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        nameJa:
+          type: ["string", "null"]
+        region:
+          type: string
+        lat:
+          type: number
+        lng:
+          type: number
+        snow24h:
+          type: ["number", "null"]
+        baseDepth:
+          type: ["number", "null"]
+        rank:
+          type: ["integer", "null"]
+        snowLevel:
+          type: string
+          enum: [heavy, moderate, light, none]
+      required:
+        - id
+        - name
+        - region
+        - lat
+        - lng
+        - snowLevel
+
+    RegionOutlook:
+      type: object
+      properties:
+        region:
+          type: string
+        regionJa:
+          type: string
+        rank:
+          type: integer
+        signal:
+          type: string
+        snow24h:
+          type: ["number", "null"]
+        snow48h:
+          type: ["number", "null"]
+        snow72h:
+          type: ["number", "null"]
+        level:
+          type: string
+          enum: [None, Low, Moderate, High, Extreme]
+        updatedAt:
+          type: string
+      required:
+        - region
+        - regionJa
+        - rank
+        - signal
+        - snow24h
+        - snow48h
+        - snow72h
+        - level
+        - updatedAt
+
+    AlertsData:
+      type: object
+      properties:
+        alerts:
+          type: array
+          items:
+            $ref: "#/components/schemas/PowderAlert"
+        stormTracker:
+          type: array
+          items:
+            $ref: "#/components/schemas/StormEvent"
+        updatedAt:
+          type: string
+      required:
+        - alerts
+        - stormTracker
+        - updatedAt
+
+    PowderAlert:
+      type: object
+      properties:
+        id:
+          type: string
+        resort:
+          type: string
+        region:
+          type: string
+        expectedSnow:
+          type: ["number", "null"]
+        alertLevel:
+          type: string
+          enum: [watch, warning, powder_day]
+        message:
+          type: string
+        messageJa:
+          type: ["string", "null"]
+        issuedAt:
+          type: string
+        expiresAt:
+          type: ["string", "null"]
+      required:
+        - id
+        - resort
+        - region
+        - alertLevel
+        - message
+        - issuedAt
+
+    StormEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        region:
+          type: string
+        totalSnow:
+          type: ["number", "null"]
+        peakSnow24h:
+          type: ["number", "null"]
+        startDate:
+          type: ["string", "null"]
+        status:
+          type: string
+          enum: [active, incoming, ended]
+        description:
+          type: string
+        descriptionJa:
+          type: ["string", "null"]
+      required:
+        - id
+        - region
+        - status
+        - description
+
+    Accommodation:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        nameJa:
+          type: ["string", "null"]
+        type:
+          type: string
+          enum: [hotel, ryokan, guesthouse, apartment]
+        region:
+          type: string
+        address:
+          type: ["string", "null"]
+        addressJa:
+          type: ["string", "null"]
+        description:
+          type: string
+        descriptionJa:
+          type: ["string", "null"]
+        priceRange:
+          type: ["string", "null"]
+        phone:
+          type: ["string", "null"]
+        email:
+          type: ["string", "null"]
+        websiteUrl:
+          type: ["string", "null"]
+        imageUrl:
+          type: ["string", "null"]
+        lat:
+          type: ["number", "null"]
+        lng:
+          type: ["number", "null"]
+        amenities:
+          type: ["string", "null"]
+        onsenAvailable:
+          type: boolean
+        skiInSkiOut:
+          type: boolean
+        featured:
+          type: boolean
+      required:
+        - id
+        - name
+        - type
+        - region
+        - description
+        - onsenAvailable
+        - skiInSkiOut
+        - featured
+
+    CreateAccommodationBody:
+      type: object
+      properties:
+        name:
+          type: string
+        nameJa:
+          type: ["string", "null"]
+        type:
+          type: string
+          enum: [hotel, ryokan, guesthouse, apartment]
+        region:
+          type: string
+        address:
+          type: ["string", "null"]
+        addressJa:
+          type: ["string", "null"]
+        description:
+          type: string
+        descriptionJa:
+          type: ["string", "null"]
+        priceRange:
+          type: ["string", "null"]
+        phone:
+          type: ["string", "null"]
+        email:
+          type: ["string", "null"]
+        websiteUrl:
+          type: ["string", "null"]
+        imageUrl:
+          type: ["string", "null"]
+        lat:
+          type: ["number", "null"]
+        lng:
+          type: ["number", "null"]
+        amenities:
+          type: ["string", "null"]
+        onsenAvailable:
+          type: boolean
+        skiInSkiOut:
+          type: boolean
+        featured:
+          type: boolean
+      required:
+        - name
+        - type
+        - region
+        - description
+        - onsenAvailable
+        - skiInSkiOut
+        - featured
+
+    UpdateAccommodationBody:
+      type: object
+      properties:
+        name:
+          type: ["string", "null"]
+        nameJa:
+          type: ["string", "null"]
+        type:
+          type: ["string", "null"]
+        region:
+          type: ["string", "null"]
+        address:
+          type: ["string", "null"]
+        addressJa:
+          type: ["string", "null"]
+        description:
+          type: ["string", "null"]
+        descriptionJa:
+          type: ["string", "null"]
+        priceRange:
+          type: ["string", "null"]
+        phone:
+          type: ["string", "null"]
+        email:
+          type: ["string", "null"]
+        websiteUrl:
+          type: ["string", "null"]
+        imageUrl:
+          type: ["string", "null"]
+        lat:
+          type: ["number", "null"]
+        lng:
+          type: ["number", "null"]
+        amenities:
+          type: ["string", "null"]
+        onsenAvailable:
+          type: ["boolean", "null"]
+        skiInSkiOut:
+          type: ["boolean", "null"]
+        featured:
+          type: ["boolean", "null"]
+
+    DiningVenue:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        nameJa:
+          type: ["string", "null"]
+        type:
+          type: string
+          enum: [restaurant, bar, cafe]
+        region:
+          type: string
+        address:
+          type: ["string", "null"]
+        addressJa:
+          type: ["string", "null"]
+        description:
+          type: string
+        descriptionJa:
+          type: ["string", "null"]
+        cuisine:
+          type: ["string", "null"]
+        cuisineJa:
+          type: ["string", "null"]
+        priceRange:
+          type: ["string", "null"]
+        phone:
+          type: ["string", "null"]
+        websiteUrl:
+          type: ["string", "null"]
+        imageUrl:
+          type: ["string", "null"]
+        lat:
+          type: ["number", "null"]
+        lng:
+          type: ["number", "null"]
+        openingHours:
+          type: ["string", "null"]
+        featured:
+          type: boolean
+      required:
+        - id
+        - name
+        - type
+        - region
+        - description
+        - featured
+
+    CreateDiningBody:
+      type: object
+      properties:
+        name:
+          type: string
+        nameJa:
+          type: ["string", "null"]
+        type:
+          type: string
+          enum: [restaurant, bar, cafe]
+        region:
+          type: string
+        address:
+          type: ["string", "null"]
+        addressJa:
+          type: ["string", "null"]
+        description:
+          type: string
+        descriptionJa:
+          type: ["string", "null"]
+        cuisine:
+          type: ["string", "null"]
+        cuisineJa:
+          type: ["string", "null"]
+        priceRange:
+          type: ["string", "null"]
+        phone:
+          type: ["string", "null"]
+        websiteUrl:
+          type: ["string", "null"]
+        imageUrl:
+          type: ["string", "null"]
+        lat:
+          type: ["number", "null"]
+        lng:
+          type: ["number", "null"]
+        openingHours:
+          type: ["string", "null"]
+        featured:
+          type: boolean
+      required:
+        - name
+        - type
+        - region
+        - description
+        - featured
+
+    UpdateDiningBody:
+      type: object
+      properties:
+        name:
+          type: ["string", "null"]
+        nameJa:
+          type: ["string", "null"]
+        type:
+          type: ["string", "null"]
+        region:
+          type: ["string", "null"]
+        address:
+          type: ["string", "null"]
+        addressJa:
+          type: ["string", "null"]
+        description:
+          type: ["string", "null"]
+        descriptionJa:
+          type: ["string", "null"]
+        cuisine:
+          type: ["string", "null"]
+        cuisineJa:
+          type: ["string", "null"]
+        priceRange:
+          type: ["string", "null"]
+        phone:
+          type: ["string", "null"]
+        websiteUrl:
+          type: ["string", "null"]
+        imageUrl:
+          type: ["string", "null"]
+        lat:
+          type: ["number", "null"]
+        lng:
+          type: ["number", "null"]
+        openingHours:
+          type: ["string", "null"]
+        featured:
+          type: ["boolean", "null"]
+
+    Attraction:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        nameJa:
+          type: ["string", "null"]
+        category:
+          type: string
+          enum: [onsen, culture, nature, activity, shopping]
+        region:
+          type: string
+        address:
+          type: ["string", "null"]
+        addressJa:
+          type: ["string", "null"]
+        description:
+          type: string
+        descriptionJa:
+          type: ["string", "null"]
+        admissionFee:
+          type: ["string", "null"]
+        phone:
+          type: ["string", "null"]
+        websiteUrl:
+          type: ["string", "null"]
+        imageUrl:
+          type: ["string", "null"]
+        lat:
+          type: ["number", "null"]
+        lng:
+          type: ["number", "null"]
+        openingHours:
+          type: ["string", "null"]
+        featured:
+          type: boolean
+      required:
+        - id
+        - name
+        - category
+        - region
+        - description
+        - featured
+
+    CreateAttractionBody:
+      type: object
+      properties:
+        name:
+          type: string
+        nameJa:
+          type: ["string", "null"]
+        category:
+          type: string
+          enum: [onsen, culture, nature, activity, shopping]
+        region:
+          type: string
+        address:
+          type: ["string", "null"]
+        addressJa:
+          type: ["string", "null"]
+        description:
+          type: string
+        descriptionJa:
+          type: ["string", "null"]
+        admissionFee:
+          type: ["string", "null"]
+        phone:
+          type: ["string", "null"]
+        websiteUrl:
+          type: ["string", "null"]
+        imageUrl:
+          type: ["string", "null"]
+        lat:
+          type: ["number", "null"]
+        lng:
+          type: ["number", "null"]
+        openingHours:
+          type: ["string", "null"]
+        featured:
+          type: boolean
+      required:
+        - name
+        - category
+        - region
+        - description
+        - featured
+
+    UpdateAttractionBody:
+      type: object
+      properties:
+        name:
+          type: ["string", "null"]
+        nameJa:
+          type: ["string", "null"]
+        category:
+          type: ["string", "null"]
+        region:
+          type: ["string", "null"]
+        address:
+          type: ["string", "null"]
+        addressJa:
+          type: ["string", "null"]
+        description:
+          type: ["string", "null"]
+        descriptionJa:
+          type: ["string", "null"]
+        admissionFee:
+          type: ["string", "null"]
+        phone:
+          type: ["string", "null"]
+        websiteUrl:
+          type: ["string", "null"]
+        imageUrl:
+          type: ["string", "null"]
+        lat:
+          type: ["number", "null"]
+        lng:
+          type: ["number", "null"]
+        openingHours:
+          type: ["string", "null"]
+        featured:
+          type: ["boolean", "null"]

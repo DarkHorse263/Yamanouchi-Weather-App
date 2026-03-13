@@ -1,0 +1,17 @@
+packages:
+  "framer-motion": "For premium page transitions and staggered list animations"
+  "react-leaflet": "For interactive resort and snow level mapping"
+  "leaflet": "Core mapping library required by react-leaflet"
+  "@types/leaflet": "Types for leaflet"
+  "clsx": "Utility for constructing className strings conditionally"
+  "tailwind-merge": "Utility to safely merge Tailwind CSS classes"
+  "date-fns": "For formatting update times and storm dates"
+
+images:
+  - path: "artifacts/yamanouchi/public/images/hero-mountains.png"
+    description: "Stunning abstract 3D stylized snowy mountain peaks at sunrise with a vibrant deep blue, cyan, and subtle magenta gradient sky, clean minimal geometric style"
+    aspect_ratio: "16:9"
+
+notes:
+  - Using generated hooks from @workspace/api-client-react as specified in implementation notes.
+  - Adding Leaflet CSS via standard import in Map component.
