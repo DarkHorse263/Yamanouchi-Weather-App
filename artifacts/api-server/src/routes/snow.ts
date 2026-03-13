@@ -1,6 +1,6 @@
 import { Router, type IRouter } from "express";
 import { getSupabase } from "../lib/supabase.js";
-import { getLiveWeather, getWeatherForRegion } from "../lib/weather-service.js";
+import { getLiveWeather, getWeatherForRegion, getFullWeatherOutlook } from "../lib/weather-service.js";
 import {
   GetDashboardResponse,
   GetResortsResponse,
@@ -380,6 +380,16 @@ router.get("/outlook", async (_req, res): Promise<void> => {
   } catch (err) {
     console.error("Outlook error:", err);
     res.json(GetSnowOutlookResponse.parse(fallbackOutlook));
+  }
+});
+
+router.get("/weather-outlook", async (_req, res): Promise<void> => {
+  try {
+    const data = await getFullWeatherOutlook();
+    res.json(data);
+  } catch (err) {
+    console.error("Weather outlook error:", err);
+    res.status(500).json({ error: "Failed to fetch weather outlook" });
   }
 });
 
