@@ -3,8 +3,54 @@ import { useLanguage } from "@/hooks/use-language";
 import { Card, StatTile, ErrorScreen } from "@/components/ui-elements";
 import { HourlyTimeline } from "@/components/hourly-timeline";
 import { Trophy, Wind, ThermometerSnowflake, Ruler, Snowflake, Activity, BellRing, ChevronRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
+import { useEffect, useState } from "react";
+
+const HERO_SLIDES = [
+  { src: "hero-slide-1.jpg", label: "Shiga Kogen Highlands" },
+  { src: "hero-slide-2.jpg", label: "Ryuoo Summit" },
+  { src: "hero-slide-3.jpg", label: "Powder Days" },
+];
+
+function HeroSlideshow({ base }: { base: string }) {
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent(prev => (prev + 1) % HERO_SLIDES.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <>
+      <AnimatePresence mode="sync">
+        <motion.img
+          key={current}
+          src={`${base}images/${HERO_SLIDES[current].src}`}
+          alt={HERO_SLIDES[current].label}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.2 }}
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+      </AnimatePresence>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10" />
+      {/* Slide dots */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-20">
+        {HERO_SLIDES.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrent(i)}
+            className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? "w-6 bg-white" : "w-1.5 bg-white/40"}`}
+          />
+        ))}
+      </div>
+    </>
+  );
+}
 
 function HomeSkeleton() {
   return (
@@ -83,12 +129,7 @@ export default function Home() {
         animate={{ opacity: 1, scale: 1 }}
         className="relative rounded-3xl overflow-hidden shadow-2xl shadow-primary/20 bg-mountain-dark"
       >
-        <img
-          src={`${import.meta.env.BASE_URL}images/hero-mountains.jpg`}
-          alt="Yamanouchi Mountains"
-          className="absolute inset-0 w-full h-full object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
+        <HeroSlideshow base={import.meta.env.BASE_URL} />
 
         <div className="relative z-10 p-6 md:p-10 flex flex-col min-h-[280px] justify-between">
           <div>
