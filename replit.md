@@ -40,6 +40,12 @@ artifacts-monorepo/
 │   │       ├── routes/snow.ts      # Snow data (dashboard, resorts, map, outlook, alerts) → Supabase
 │   │       ├── routes/places.ts    # Accommodation, dining, attractions → local DB
 │   │       └── lib/supabase.ts     # Supabase client
+│   ├── eigomenyu/          # Eigomenyu bilingual QR menu app (React+Vite, preview: /eigomenyu/)
+│   │   └── src/
+│   │       ├── pages/      # guest-menu, login, dashboard, not-found
+│   │       ├── lib/auth.tsx # localStorage-based auth (placeholder for future API auth)
+│   │       ├── lib/store.ts # localStorage data store with seed data & mock AI translation
+│   │       └── index.css   # Warm Japanese palette (earth tones, akane red, matcha green)
 │   └── yamanouchi/         # React+Vite frontend (port 20651)
 │       └── src/
 │           ├── pages/      # Home, Resorts, Map, Outlook, Alerts, Stay, Eat, Explore
