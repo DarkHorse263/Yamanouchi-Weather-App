@@ -19,7 +19,11 @@ import NotFound from "@/pages/not-found";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: 1,
+      retry: (failureCount, error) => {
+        // Never retry on abort errors — they're intentional cancellations
+        if ((error as any)?.name === "AbortError") return false;
+        return failureCount < 1;
+      },
       refetchOnWindowFocus: false,
     },
   },
