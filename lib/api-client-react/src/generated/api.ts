@@ -25,6 +25,18 @@ import type {
   CreateDiningBody,
   Dashboard,
   DiningVenue,
+  EigomenyuCreateMenuItemBody,
+  EigomenyuCreateRestaurantBody,
+  EigomenyuLoginBody,
+  EigomenyuLogoutResponse,
+  EigomenyuMenuItem,
+  EigomenyuOwner,
+  EigomenyuRegisterBody,
+  EigomenyuRestaurant,
+  EigomenyuTranslateBody,
+  EigomenyuTranslateResponse,
+  EigomenyuUpdateMenuItemBody,
+  EigomenyuUpdateRestaurantBody,
   GetAccommodationParams,
   GetAttractionsParams,
   GetDiningParams,
@@ -1640,4 +1652,1039 @@ export const useDeleteAttraction = <
   TContext
 > => {
   return useMutation(getDeleteAttractionMutationOptions(options));
+};
+
+/**
+ * @summary Register a new restaurant owner
+ */
+export const getEigomenyuRegisterUrl = () => {
+  return `/api/eigomenyu/auth/register`;
+};
+
+export const eigomenyuRegister = async (
+  eigomenyuRegisterBody: EigomenyuRegisterBody,
+  options?: RequestInit,
+): Promise<EigomenyuOwner> => {
+  return customFetch<EigomenyuOwner>(getEigomenyuRegisterUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(eigomenyuRegisterBody),
+  });
+};
+
+export const getEigomenyuRegisterMutationOptions = <
+  TError = ErrorType<void>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof eigomenyuRegister>>,
+    TError,
+    { data: BodyType<EigomenyuRegisterBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof eigomenyuRegister>>,
+  TError,
+  { data: BodyType<EigomenyuRegisterBody> },
+  TContext
+> => {
+  const mutationKey = ["eigomenyuRegister"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof eigomenyuRegister>>,
+    { data: BodyType<EigomenyuRegisterBody> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return eigomenyuRegister(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type EigomenyuRegisterMutationResult = NonNullable<
+  Awaited<ReturnType<typeof eigomenyuRegister>>
+>;
+export type EigomenyuRegisterMutationBody = BodyType<EigomenyuRegisterBody>;
+export type EigomenyuRegisterMutationError = ErrorType<void>;
+
+/**
+ * @summary Register a new restaurant owner
+ */
+export const useEigomenyuRegister = <
+  TError = ErrorType<void>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof eigomenyuRegister>>,
+    TError,
+    { data: BodyType<EigomenyuRegisterBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof eigomenyuRegister>>,
+  TError,
+  { data: BodyType<EigomenyuRegisterBody> },
+  TContext
+> => {
+  return useMutation(getEigomenyuRegisterMutationOptions(options));
+};
+
+/**
+ * @summary Log in as restaurant owner
+ */
+export const getEigomenyuLoginUrl = () => {
+  return `/api/eigomenyu/auth/login`;
+};
+
+export const eigomenyuLogin = async (
+  eigomenyuLoginBody: EigomenyuLoginBody,
+  options?: RequestInit,
+): Promise<EigomenyuOwner> => {
+  return customFetch<EigomenyuOwner>(getEigomenyuLoginUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(eigomenyuLoginBody),
+  });
+};
+
+export const getEigomenyuLoginMutationOptions = <
+  TError = ErrorType<void>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof eigomenyuLogin>>,
+    TError,
+    { data: BodyType<EigomenyuLoginBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof eigomenyuLogin>>,
+  TError,
+  { data: BodyType<EigomenyuLoginBody> },
+  TContext
+> => {
+  const mutationKey = ["eigomenyuLogin"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof eigomenyuLogin>>,
+    { data: BodyType<EigomenyuLoginBody> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return eigomenyuLogin(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type EigomenyuLoginMutationResult = NonNullable<
+  Awaited<ReturnType<typeof eigomenyuLogin>>
+>;
+export type EigomenyuLoginMutationBody = BodyType<EigomenyuLoginBody>;
+export type EigomenyuLoginMutationError = ErrorType<void>;
+
+/**
+ * @summary Log in as restaurant owner
+ */
+export const useEigomenyuLogin = <
+  TError = ErrorType<void>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof eigomenyuLogin>>,
+    TError,
+    { data: BodyType<EigomenyuLoginBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof eigomenyuLogin>>,
+  TError,
+  { data: BodyType<EigomenyuLoginBody> },
+  TContext
+> => {
+  return useMutation(getEigomenyuLoginMutationOptions(options));
+};
+
+/**
+ * @summary Log out current owner session
+ */
+export const getEigomenyuLogoutUrl = () => {
+  return `/api/eigomenyu/auth/logout`;
+};
+
+export const eigomenyuLogout = async (
+  options?: RequestInit,
+): Promise<EigomenyuLogoutResponse> => {
+  return customFetch<EigomenyuLogoutResponse>(getEigomenyuLogoutUrl(), {
+    ...options,
+    method: "POST",
+  });
+};
+
+export const getEigomenyuLogoutMutationOptions = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof eigomenyuLogout>>,
+    TError,
+    void,
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof eigomenyuLogout>>,
+  TError,
+  void,
+  TContext
+> => {
+  const mutationKey = ["eigomenyuLogout"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof eigomenyuLogout>>,
+    void
+  > = () => {
+    return eigomenyuLogout(requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type EigomenyuLogoutMutationResult = NonNullable<
+  Awaited<ReturnType<typeof eigomenyuLogout>>
+>;
+
+export type EigomenyuLogoutMutationError = ErrorType<unknown>;
+
+/**
+ * @summary Log out current owner session
+ */
+export const useEigomenyuLogout = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof eigomenyuLogout>>,
+    TError,
+    void,
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof eigomenyuLogout>>,
+  TError,
+  void,
+  TContext
+> => {
+  return useMutation(getEigomenyuLogoutMutationOptions(options));
+};
+
+/**
+ * @summary Get current authenticated owner
+ */
+export const getEigomenyuGetMeUrl = () => {
+  return `/api/eigomenyu/auth/me`;
+};
+
+export const eigomenyuGetMe = async (
+  options?: RequestInit,
+): Promise<EigomenyuOwner> => {
+  return customFetch<EigomenyuOwner>(getEigomenyuGetMeUrl(), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getEigomenyuGetMeQueryKey = () => {
+  return [`/api/eigomenyu/auth/me`] as const;
+};
+
+export const getEigomenyuGetMeQueryOptions = <
+  TData = Awaited<ReturnType<typeof eigomenyuGetMe>>,
+  TError = ErrorType<void>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof eigomenyuGetMe>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getEigomenyuGetMeQueryKey();
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof eigomenyuGetMe>>> = ({
+    signal,
+  }) => eigomenyuGetMe({ signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof eigomenyuGetMe>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type EigomenyuGetMeQueryResult = NonNullable<
+  Awaited<ReturnType<typeof eigomenyuGetMe>>
+>;
+export type EigomenyuGetMeQueryError = ErrorType<void>;
+
+/**
+ * @summary Get current authenticated owner
+ */
+
+export function useEigomenyuGetMe<
+  TData = Awaited<ReturnType<typeof eigomenyuGetMe>>,
+  TError = ErrorType<void>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof eigomenyuGetMe>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getEigomenyuGetMeQueryOptions(options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * @summary Create a new restaurant
+ */
+export const getEigomenyuCreateRestaurantUrl = () => {
+  return `/api/eigomenyu/restaurants`;
+};
+
+export const eigomenyuCreateRestaurant = async (
+  eigomenyuCreateRestaurantBody: EigomenyuCreateRestaurantBody,
+  options?: RequestInit,
+): Promise<EigomenyuRestaurant> => {
+  return customFetch<EigomenyuRestaurant>(getEigomenyuCreateRestaurantUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(eigomenyuCreateRestaurantBody),
+  });
+};
+
+export const getEigomenyuCreateRestaurantMutationOptions = <
+  TError = ErrorType<void>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof eigomenyuCreateRestaurant>>,
+    TError,
+    { data: BodyType<EigomenyuCreateRestaurantBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof eigomenyuCreateRestaurant>>,
+  TError,
+  { data: BodyType<EigomenyuCreateRestaurantBody> },
+  TContext
+> => {
+  const mutationKey = ["eigomenyuCreateRestaurant"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof eigomenyuCreateRestaurant>>,
+    { data: BodyType<EigomenyuCreateRestaurantBody> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return eigomenyuCreateRestaurant(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type EigomenyuCreateRestaurantMutationResult = NonNullable<
+  Awaited<ReturnType<typeof eigomenyuCreateRestaurant>>
+>;
+export type EigomenyuCreateRestaurantMutationBody =
+  BodyType<EigomenyuCreateRestaurantBody>;
+export type EigomenyuCreateRestaurantMutationError = ErrorType<void>;
+
+/**
+ * @summary Create a new restaurant
+ */
+export const useEigomenyuCreateRestaurant = <
+  TError = ErrorType<void>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof eigomenyuCreateRestaurant>>,
+    TError,
+    { data: BodyType<EigomenyuCreateRestaurantBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof eigomenyuCreateRestaurant>>,
+  TError,
+  { data: BodyType<EigomenyuCreateRestaurantBody> },
+  TContext
+> => {
+  return useMutation(getEigomenyuCreateRestaurantMutationOptions(options));
+};
+
+/**
+ * @summary Get restaurant by slug
+ */
+export const getEigomenyuGetRestaurantUrl = (slug: string) => {
+  return `/api/eigomenyu/restaurants/${slug}`;
+};
+
+export const eigomenyuGetRestaurant = async (
+  slug: string,
+  options?: RequestInit,
+): Promise<EigomenyuRestaurant> => {
+  return customFetch<EigomenyuRestaurant>(getEigomenyuGetRestaurantUrl(slug), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getEigomenyuGetRestaurantQueryKey = (slug: string) => {
+  return [`/api/eigomenyu/restaurants/${slug}`] as const;
+};
+
+export const getEigomenyuGetRestaurantQueryOptions = <
+  TData = Awaited<ReturnType<typeof eigomenyuGetRestaurant>>,
+  TError = ErrorType<void>,
+>(
+  slug: string,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof eigomenyuGetRestaurant>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getEigomenyuGetRestaurantQueryKey(slug);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof eigomenyuGetRestaurant>>
+  > = ({ signal }) =>
+    eigomenyuGetRestaurant(slug, { signal, ...requestOptions });
+
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!slug,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<typeof eigomenyuGetRestaurant>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type EigomenyuGetRestaurantQueryResult = NonNullable<
+  Awaited<ReturnType<typeof eigomenyuGetRestaurant>>
+>;
+export type EigomenyuGetRestaurantQueryError = ErrorType<void>;
+
+/**
+ * @summary Get restaurant by slug
+ */
+
+export function useEigomenyuGetRestaurant<
+  TData = Awaited<ReturnType<typeof eigomenyuGetRestaurant>>,
+  TError = ErrorType<void>,
+>(
+  slug: string,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof eigomenyuGetRestaurant>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getEigomenyuGetRestaurantQueryOptions(slug, options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * @summary Update a restaurant
+ */
+export const getEigomenyuUpdateRestaurantUrl = (slug: string) => {
+  return `/api/eigomenyu/restaurants/${slug}`;
+};
+
+export const eigomenyuUpdateRestaurant = async (
+  slug: string,
+  eigomenyuUpdateRestaurantBody: EigomenyuUpdateRestaurantBody,
+  options?: RequestInit,
+): Promise<EigomenyuRestaurant> => {
+  return customFetch<EigomenyuRestaurant>(
+    getEigomenyuUpdateRestaurantUrl(slug),
+    {
+      ...options,
+      method: "PATCH",
+      headers: { "Content-Type": "application/json", ...options?.headers },
+      body: JSON.stringify(eigomenyuUpdateRestaurantBody),
+    },
+  );
+};
+
+export const getEigomenyuUpdateRestaurantMutationOptions = <
+  TError = ErrorType<void>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof eigomenyuUpdateRestaurant>>,
+    TError,
+    { slug: string; data: BodyType<EigomenyuUpdateRestaurantBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof eigomenyuUpdateRestaurant>>,
+  TError,
+  { slug: string; data: BodyType<EigomenyuUpdateRestaurantBody> },
+  TContext
+> => {
+  const mutationKey = ["eigomenyuUpdateRestaurant"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof eigomenyuUpdateRestaurant>>,
+    { slug: string; data: BodyType<EigomenyuUpdateRestaurantBody> }
+  > = (props) => {
+    const { slug, data } = props ?? {};
+
+    return eigomenyuUpdateRestaurant(slug, data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type EigomenyuUpdateRestaurantMutationResult = NonNullable<
+  Awaited<ReturnType<typeof eigomenyuUpdateRestaurant>>
+>;
+export type EigomenyuUpdateRestaurantMutationBody =
+  BodyType<EigomenyuUpdateRestaurantBody>;
+export type EigomenyuUpdateRestaurantMutationError = ErrorType<void>;
+
+/**
+ * @summary Update a restaurant
+ */
+export const useEigomenyuUpdateRestaurant = <
+  TError = ErrorType<void>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof eigomenyuUpdateRestaurant>>,
+    TError,
+    { slug: string; data: BodyType<EigomenyuUpdateRestaurantBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof eigomenyuUpdateRestaurant>>,
+  TError,
+  { slug: string; data: BodyType<EigomenyuUpdateRestaurantBody> },
+  TContext
+> => {
+  return useMutation(getEigomenyuUpdateRestaurantMutationOptions(options));
+};
+
+/**
+ * @summary Get menu items for a restaurant
+ */
+export const getEigomenyuGetMenuItemsUrl = (slug: string) => {
+  return `/api/eigomenyu/restaurants/${slug}/items`;
+};
+
+export const eigomenyuGetMenuItems = async (
+  slug: string,
+  options?: RequestInit,
+): Promise<EigomenyuMenuItem[]> => {
+  return customFetch<EigomenyuMenuItem[]>(getEigomenyuGetMenuItemsUrl(slug), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getEigomenyuGetMenuItemsQueryKey = (slug: string) => {
+  return [`/api/eigomenyu/restaurants/${slug}/items`] as const;
+};
+
+export const getEigomenyuGetMenuItemsQueryOptions = <
+  TData = Awaited<ReturnType<typeof eigomenyuGetMenuItems>>,
+  TError = ErrorType<void>,
+>(
+  slug: string,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof eigomenyuGetMenuItems>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getEigomenyuGetMenuItemsQueryKey(slug);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof eigomenyuGetMenuItems>>
+  > = ({ signal }) =>
+    eigomenyuGetMenuItems(slug, { signal, ...requestOptions });
+
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!slug,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<typeof eigomenyuGetMenuItems>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type EigomenyuGetMenuItemsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof eigomenyuGetMenuItems>>
+>;
+export type EigomenyuGetMenuItemsQueryError = ErrorType<void>;
+
+/**
+ * @summary Get menu items for a restaurant
+ */
+
+export function useEigomenyuGetMenuItems<
+  TData = Awaited<ReturnType<typeof eigomenyuGetMenuItems>>,
+  TError = ErrorType<void>,
+>(
+  slug: string,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof eigomenyuGetMenuItems>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getEigomenyuGetMenuItemsQueryOptions(slug, options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * @summary Add a menu item to a restaurant
+ */
+export const getEigomenyuCreateMenuItemUrl = (slug: string) => {
+  return `/api/eigomenyu/restaurants/${slug}/items`;
+};
+
+export const eigomenyuCreateMenuItem = async (
+  slug: string,
+  eigomenyuCreateMenuItemBody: EigomenyuCreateMenuItemBody,
+  options?: RequestInit,
+): Promise<EigomenyuMenuItem> => {
+  return customFetch<EigomenyuMenuItem>(getEigomenyuCreateMenuItemUrl(slug), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(eigomenyuCreateMenuItemBody),
+  });
+};
+
+export const getEigomenyuCreateMenuItemMutationOptions = <
+  TError = ErrorType<void>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof eigomenyuCreateMenuItem>>,
+    TError,
+    { slug: string; data: BodyType<EigomenyuCreateMenuItemBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof eigomenyuCreateMenuItem>>,
+  TError,
+  { slug: string; data: BodyType<EigomenyuCreateMenuItemBody> },
+  TContext
+> => {
+  const mutationKey = ["eigomenyuCreateMenuItem"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof eigomenyuCreateMenuItem>>,
+    { slug: string; data: BodyType<EigomenyuCreateMenuItemBody> }
+  > = (props) => {
+    const { slug, data } = props ?? {};
+
+    return eigomenyuCreateMenuItem(slug, data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type EigomenyuCreateMenuItemMutationResult = NonNullable<
+  Awaited<ReturnType<typeof eigomenyuCreateMenuItem>>
+>;
+export type EigomenyuCreateMenuItemMutationBody =
+  BodyType<EigomenyuCreateMenuItemBody>;
+export type EigomenyuCreateMenuItemMutationError = ErrorType<void>;
+
+/**
+ * @summary Add a menu item to a restaurant
+ */
+export const useEigomenyuCreateMenuItem = <
+  TError = ErrorType<void>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof eigomenyuCreateMenuItem>>,
+    TError,
+    { slug: string; data: BodyType<EigomenyuCreateMenuItemBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof eigomenyuCreateMenuItem>>,
+  TError,
+  { slug: string; data: BodyType<EigomenyuCreateMenuItemBody> },
+  TContext
+> => {
+  return useMutation(getEigomenyuCreateMenuItemMutationOptions(options));
+};
+
+/**
+ * @summary Update a menu item
+ */
+export const getEigomenyuUpdateMenuItemUrl = (slug: string, id: number) => {
+  return `/api/eigomenyu/restaurants/${slug}/items/${id}`;
+};
+
+export const eigomenyuUpdateMenuItem = async (
+  slug: string,
+  id: number,
+  eigomenyuUpdateMenuItemBody: EigomenyuUpdateMenuItemBody,
+  options?: RequestInit,
+): Promise<EigomenyuMenuItem> => {
+  return customFetch<EigomenyuMenuItem>(
+    getEigomenyuUpdateMenuItemUrl(slug, id),
+    {
+      ...options,
+      method: "PATCH",
+      headers: { "Content-Type": "application/json", ...options?.headers },
+      body: JSON.stringify(eigomenyuUpdateMenuItemBody),
+    },
+  );
+};
+
+export const getEigomenyuUpdateMenuItemMutationOptions = <
+  TError = ErrorType<void>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof eigomenyuUpdateMenuItem>>,
+    TError,
+    { slug: string; id: number; data: BodyType<EigomenyuUpdateMenuItemBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof eigomenyuUpdateMenuItem>>,
+  TError,
+  { slug: string; id: number; data: BodyType<EigomenyuUpdateMenuItemBody> },
+  TContext
+> => {
+  const mutationKey = ["eigomenyuUpdateMenuItem"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof eigomenyuUpdateMenuItem>>,
+    { slug: string; id: number; data: BodyType<EigomenyuUpdateMenuItemBody> }
+  > = (props) => {
+    const { slug, id, data } = props ?? {};
+
+    return eigomenyuUpdateMenuItem(slug, id, data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type EigomenyuUpdateMenuItemMutationResult = NonNullable<
+  Awaited<ReturnType<typeof eigomenyuUpdateMenuItem>>
+>;
+export type EigomenyuUpdateMenuItemMutationBody =
+  BodyType<EigomenyuUpdateMenuItemBody>;
+export type EigomenyuUpdateMenuItemMutationError = ErrorType<void>;
+
+/**
+ * @summary Update a menu item
+ */
+export const useEigomenyuUpdateMenuItem = <
+  TError = ErrorType<void>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof eigomenyuUpdateMenuItem>>,
+    TError,
+    { slug: string; id: number; data: BodyType<EigomenyuUpdateMenuItemBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof eigomenyuUpdateMenuItem>>,
+  TError,
+  { slug: string; id: number; data: BodyType<EigomenyuUpdateMenuItemBody> },
+  TContext
+> => {
+  return useMutation(getEigomenyuUpdateMenuItemMutationOptions(options));
+};
+
+/**
+ * @summary Delete a menu item
+ */
+export const getEigomenyuDeleteMenuItemUrl = (slug: string, id: number) => {
+  return `/api/eigomenyu/restaurants/${slug}/items/${id}`;
+};
+
+export const eigomenyuDeleteMenuItem = async (
+  slug: string,
+  id: number,
+  options?: RequestInit,
+): Promise<void> => {
+  return customFetch<void>(getEigomenyuDeleteMenuItemUrl(slug, id), {
+    ...options,
+    method: "DELETE",
+  });
+};
+
+export const getEigomenyuDeleteMenuItemMutationOptions = <
+  TError = ErrorType<void>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof eigomenyuDeleteMenuItem>>,
+    TError,
+    { slug: string; id: number },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof eigomenyuDeleteMenuItem>>,
+  TError,
+  { slug: string; id: number },
+  TContext
+> => {
+  const mutationKey = ["eigomenyuDeleteMenuItem"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof eigomenyuDeleteMenuItem>>,
+    { slug: string; id: number }
+  > = (props) => {
+    const { slug, id } = props ?? {};
+
+    return eigomenyuDeleteMenuItem(slug, id, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type EigomenyuDeleteMenuItemMutationResult = NonNullable<
+  Awaited<ReturnType<typeof eigomenyuDeleteMenuItem>>
+>;
+
+export type EigomenyuDeleteMenuItemMutationError = ErrorType<void>;
+
+/**
+ * @summary Delete a menu item
+ */
+export const useEigomenyuDeleteMenuItem = <
+  TError = ErrorType<void>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof eigomenyuDeleteMenuItem>>,
+    TError,
+    { slug: string; id: number },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof eigomenyuDeleteMenuItem>>,
+  TError,
+  { slug: string; id: number },
+  TContext
+> => {
+  return useMutation(getEigomenyuDeleteMenuItemMutationOptions(options));
+};
+
+/**
+ * @summary Translate a Japanese dish name to English using AI
+ */
+export const getEigomenyuTranslateUrl = () => {
+  return `/api/eigomenyu/translate`;
+};
+
+export const eigomenyuTranslate = async (
+  eigomenyuTranslateBody: EigomenyuTranslateBody,
+  options?: RequestInit,
+): Promise<EigomenyuTranslateResponse> => {
+  return customFetch<EigomenyuTranslateResponse>(getEigomenyuTranslateUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(eigomenyuTranslateBody),
+  });
+};
+
+export const getEigomenyuTranslateMutationOptions = <
+  TError = ErrorType<void>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof eigomenyuTranslate>>,
+    TError,
+    { data: BodyType<EigomenyuTranslateBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof eigomenyuTranslate>>,
+  TError,
+  { data: BodyType<EigomenyuTranslateBody> },
+  TContext
+> => {
+  const mutationKey = ["eigomenyuTranslate"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof eigomenyuTranslate>>,
+    { data: BodyType<EigomenyuTranslateBody> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return eigomenyuTranslate(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type EigomenyuTranslateMutationResult = NonNullable<
+  Awaited<ReturnType<typeof eigomenyuTranslate>>
+>;
+export type EigomenyuTranslateMutationBody = BodyType<EigomenyuTranslateBody>;
+export type EigomenyuTranslateMutationError = ErrorType<void>;
+
+/**
+ * @summary Translate a Japanese dish name to English using AI
+ */
+export const useEigomenyuTranslate = <
+  TError = ErrorType<void>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof eigomenyuTranslate>>,
+    TError,
+    { data: BodyType<EigomenyuTranslateBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof eigomenyuTranslate>>,
+  TError,
+  { data: BodyType<EigomenyuTranslateBody> },
+  TContext
+> => {
+  return useMutation(getEigomenyuTranslateMutationOptions(options));
 };

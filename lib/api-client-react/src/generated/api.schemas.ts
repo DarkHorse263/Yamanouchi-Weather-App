@@ -555,6 +555,170 @@ export interface UpdateAttractionBody {
   featured?: boolean | null;
 }
 
+export interface EigomenyuRegisterBody {
+  email: string;
+  password: string;
+  name: string;
+}
+
+export interface EigomenyuLoginBody {
+  email: string;
+  password: string;
+}
+
+export interface EigomenyuOwner {
+  id: number;
+  email: string;
+  name: string;
+  createdAt: string;
+}
+
+export interface EigomenyuLogoutResponse {
+  message: string;
+}
+
+export interface EigomenyuCreateRestaurantBody {
+  slug: string;
+  name: string;
+  /** @nullable */
+  nameJa?: string | null;
+  /** @nullable */
+  address?: string | null;
+  /** @nullable */
+  imageUrl?: string | null;
+}
+
+export interface EigomenyuRestaurant {
+  id: number;
+  ownerId: number;
+  slug: string;
+  name: string;
+  /** @nullable */
+  nameJa?: string | null;
+  /** @nullable */
+  address?: string | null;
+  /** @nullable */
+  imageUrl?: string | null;
+  createdAt: string;
+}
+
+export interface EigomenyuUpdateRestaurantBody {
+  /** @nullable */
+  name?: string | null;
+  /** @nullable */
+  nameJa?: string | null;
+  /** @nullable */
+  address?: string | null;
+  /** @nullable */
+  imageUrl?: string | null;
+}
+
+export interface EigomenyuCreateMenuItemBody {
+  nameJa: string;
+  /** @nullable */
+  titleEn?: string | null;
+  /** @nullable */
+  descriptionEn?: string | null;
+  /** @nullable */
+  nameRomaji?: string | null;
+  /** @nullable */
+  namePhoneticEn?: string | null;
+  /** @nullable */
+  translationConfidence?: number | null;
+  /** @nullable */
+  translationWarnings?: string | null;
+  approved?: boolean;
+  /** @nullable */
+  category?: string | null;
+  /** @nullable */
+  priceRange?: string | null;
+  /** @nullable */
+  allergens?: string | null;
+  /** @nullable */
+  tags?: string | null;
+  /** @nullable */
+  imageUrl?: string | null;
+  sortOrder?: number;
+}
+
+export interface EigomenyuUpdateMenuItemBody {
+  /** @nullable */
+  nameJa?: string | null;
+  /** @nullable */
+  titleEn?: string | null;
+  /** @nullable */
+  descriptionEn?: string | null;
+  /** @nullable */
+  nameRomaji?: string | null;
+  /** @nullable */
+  namePhoneticEn?: string | null;
+  /** @nullable */
+  translationConfidence?: number | null;
+  /** @nullable */
+  translationWarnings?: string | null;
+  /** @nullable */
+  approved?: boolean | null;
+  /** @nullable */
+  category?: string | null;
+  /** @nullable */
+  priceRange?: string | null;
+  /** @nullable */
+  allergens?: string | null;
+  /** @nullable */
+  tags?: string | null;
+  /** @nullable */
+  imageUrl?: string | null;
+  /** @nullable */
+  sortOrder?: number | null;
+}
+
+export interface EigomenyuMenuItem {
+  id: number;
+  restaurantId: number;
+  nameJa: string;
+  /** @nullable */
+  titleEn?: string | null;
+  /** @nullable */
+  descriptionEn?: string | null;
+  /** @nullable */
+  nameRomaji?: string | null;
+  /** @nullable */
+  namePhoneticEn?: string | null;
+  /** @nullable */
+  translationConfidence?: number | null;
+  /** @nullable */
+  translationWarnings?: string | null;
+  approved: boolean;
+  /** @nullable */
+  category?: string | null;
+  /** @nullable */
+  priceRange?: string | null;
+  /** @nullable */
+  allergens?: string | null;
+  /** @nullable */
+  tags?: string | null;
+  /** @nullable */
+  imageUrl?: string | null;
+  sortOrder: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface EigomenyuTranslateBody {
+  nameJa: string;
+  /** @nullable */
+  hint?: string | null;
+}
+
+export interface EigomenyuTranslateResponse {
+  title_en: string;
+  description_en: string;
+  name_romaji: string;
+  name_phonetic_en: string;
+  confidence: number;
+  warnings: string[];
+}
+
 export type GetAccommodationParams = {
   type?: GetAccommodationType;
   region?: string;

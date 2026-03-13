@@ -23,6 +23,8 @@ tags:
     description: Restaurants and bars
   - name: attractions
     description: Local attractions
+  - name: eigomenyu
+    description: Eigomenyu QR menu system
 paths:
   /healthz:
     get:
@@ -393,6 +395,264 @@ paths:
           description: Deleted
         "404":
           description: Not found
+
+  /eigomenyu/auth/register:
+    post:
+      operationId: eigomenyuRegister
+      tags: [eigomenyu]
+      summary: Register a new restaurant owner
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EigomenyuRegisterBody"
+      responses:
+        "201":
+          description: Registered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EigomenyuOwner"
+        "409":
+          description: Email already registered
+
+  /eigomenyu/auth/login:
+    post:
+      operationId: eigomenyuLogin
+      tags: [eigomenyu]
+      summary: Log in as restaurant owner
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EigomenyuLoginBody"
+      responses:
+        "200":
+          description: Logged in
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EigomenyuOwner"
+        "401":
+          description: Invalid credentials
+
+  /eigomenyu/auth/logout:
+    post:
+      operationId: eigomenyuLogout
+      tags: [eigomenyu]
+      summary: Log out current owner session
+      responses:
+        "200":
+          description: Logged out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EigomenyuLogoutResponse"
+
+  /eigomenyu/auth/me:
+    get:
+      operationId: eigomenyuGetMe
+      tags: [eigomenyu]
+      summary: Get current authenticated owner
+      responses:
+        "200":
+          description: Current owner
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EigomenyuOwner"
+        "401":
+          description: Not authenticated
+
+  /eigomenyu/restaurants:
+    post:
+      operationId: eigomenyuCreateRestaurant
+      tags: [eigomenyu]
+      summary: Create a new restaurant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EigomenyuCreateRestaurantBody"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EigomenyuRestaurant"
+        "409":
+          description: Slug already taken
+
+  /eigomenyu/restaurants/{slug}:
+    get:
+      operationId: eigomenyuGetRestaurant
+      tags: [eigomenyu]
+      summary: Get restaurant by slug
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Restaurant details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EigomenyuRestaurant"
+        "404":
+          description: Not found
+    patch:
+      operationId: eigomenyuUpdateRestaurant
+      tags: [eigomenyu]
+      summary: Update a restaurant
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EigomenyuUpdateRestaurantBody"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EigomenyuRestaurant"
+        "404":
+          description: Not found
+
+  /eigomenyu/restaurants/{slug}/items:
+    get:
+      operationId: eigomenyuGetMenuItems
+      tags: [eigomenyu]
+      summary: Get menu items for a restaurant
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Menu items list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EigomenyuMenuItem"
+        "404":
+          description: Restaurant not found
+    post:
+      operationId: eigomenyuCreateMenuItem
+      tags: [eigomenyu]
+      summary: Add a menu item to a restaurant
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EigomenyuCreateMenuItemBody"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EigomenyuMenuItem"
+        "404":
+          description: Restaurant not found
+
+  /eigomenyu/restaurants/{slug}/items/{id}:
+    patch:
+      operationId: eigomenyuUpdateMenuItem
+      tags: [eigomenyu]
+      summary: Update a menu item
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EigomenyuUpdateMenuItemBody"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EigomenyuMenuItem"
+        "404":
+          description: Not found
+    delete:
+      operationId: eigomenyuDeleteMenuItem
+      tags: [eigomenyu]
+      summary: Delete a menu item
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+        "404":
+          description: Not found
+
+  /eigomenyu/translate:
+    post:
+      operationId: eigomenyuTranslate
+      tags: [eigomenyu]
+      summary: Translate a Japanese dish name to English using AI
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EigomenyuTranslateBody"
+      responses:
+        "200":
+          description: Translation result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EigomenyuTranslateResponse"
+        "401":
+          description: Authentication required
 
 components:
   schemas:
@@ -1062,3 +1322,257 @@ components:
           type: ["string", "null"]
         featured:
           type: ["boolean", "null"]
+
+    EigomenyuRegisterBody:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        name:
+          type: string
+      required:
+        - email
+        - password
+        - name
+
+    EigomenyuLoginBody:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      required:
+        - email
+        - password
+
+    EigomenyuOwner:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        name:
+          type: string
+        createdAt:
+          type: string
+      required:
+        - id
+        - email
+        - name
+        - createdAt
+
+    EigomenyuLogoutResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
+
+    EigomenyuCreateRestaurantBody:
+      type: object
+      properties:
+        slug:
+          type: string
+        name:
+          type: string
+        nameJa:
+          type: ["string", "null"]
+        address:
+          type: ["string", "null"]
+        imageUrl:
+          type: ["string", "null"]
+      required:
+        - slug
+        - name
+
+    EigomenyuRestaurant:
+      type: object
+      properties:
+        id:
+          type: integer
+        ownerId:
+          type: integer
+        slug:
+          type: string
+        name:
+          type: string
+        nameJa:
+          type: ["string", "null"]
+        address:
+          type: ["string", "null"]
+        imageUrl:
+          type: ["string", "null"]
+        createdAt:
+          type: string
+      required:
+        - id
+        - ownerId
+        - slug
+        - name
+        - createdAt
+
+    EigomenyuUpdateRestaurantBody:
+      type: object
+      properties:
+        name:
+          type: ["string", "null"]
+        nameJa:
+          type: ["string", "null"]
+        address:
+          type: ["string", "null"]
+        imageUrl:
+          type: ["string", "null"]
+
+    EigomenyuCreateMenuItemBody:
+      type: object
+      properties:
+        nameJa:
+          type: string
+        titleEn:
+          type: ["string", "null"]
+        descriptionEn:
+          type: ["string", "null"]
+        nameRomaji:
+          type: ["string", "null"]
+        namePhoneticEn:
+          type: ["string", "null"]
+        translationConfidence:
+          type: ["number", "null"]
+        translationWarnings:
+          type: ["string", "null"]
+        approved:
+          type: boolean
+        category:
+          type: ["string", "null"]
+        priceRange:
+          type: ["string", "null"]
+        allergens:
+          type: ["string", "null"]
+        tags:
+          type: ["string", "null"]
+        imageUrl:
+          type: ["string", "null"]
+        sortOrder:
+          type: integer
+      required:
+        - nameJa
+
+    EigomenyuUpdateMenuItemBody:
+      type: object
+      properties:
+        nameJa:
+          type: ["string", "null"]
+        titleEn:
+          type: ["string", "null"]
+        descriptionEn:
+          type: ["string", "null"]
+        nameRomaji:
+          type: ["string", "null"]
+        namePhoneticEn:
+          type: ["string", "null"]
+        translationConfidence:
+          type: ["number", "null"]
+        translationWarnings:
+          type: ["string", "null"]
+        approved:
+          type: ["boolean", "null"]
+        category:
+          type: ["string", "null"]
+        priceRange:
+          type: ["string", "null"]
+        allergens:
+          type: ["string", "null"]
+        tags:
+          type: ["string", "null"]
+        imageUrl:
+          type: ["string", "null"]
+        sortOrder:
+          type: ["integer", "null"]
+
+    EigomenyuMenuItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        restaurantId:
+          type: integer
+        nameJa:
+          type: string
+        titleEn:
+          type: ["string", "null"]
+        descriptionEn:
+          type: ["string", "null"]
+        nameRomaji:
+          type: ["string", "null"]
+        namePhoneticEn:
+          type: ["string", "null"]
+        translationConfidence:
+          type: ["number", "null"]
+        translationWarnings:
+          type: ["string", "null"]
+        approved:
+          type: boolean
+        category:
+          type: ["string", "null"]
+        priceRange:
+          type: ["string", "null"]
+        allergens:
+          type: ["string", "null"]
+        tags:
+          type: ["string", "null"]
+        imageUrl:
+          type: ["string", "null"]
+        sortOrder:
+          type: integer
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+      required:
+        - id
+        - restaurantId
+        - nameJa
+        - approved
+        - sortOrder
+        - createdAt
+        - updatedAt
+
+    EigomenyuTranslateBody:
+      type: object
+      properties:
+        nameJa:
+          type: string
+        hint:
+          type: ["string", "null"]
+      required:
+        - nameJa
+
+    EigomenyuTranslateResponse:
+      type: object
+      properties:
+        title_en:
+          type: string
+        description_en:
+          type: string
+        name_romaji:
+          type: string
+        name_phonetic_en:
+          type: string
+        confidence:
+          type: number
+        warnings:
+          type: array
+          items:
+            type: string
+      required:
+        - title_en
+        - description_en
+        - name_romaji
+        - name_phonetic_en
+        - confidence
+        - warnings

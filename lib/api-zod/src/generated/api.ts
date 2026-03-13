@@ -518,3 +518,224 @@ export const UpdateAttractionResponse = zod.object({
 export const DeleteAttractionParams = zod.object({
   id: zod.coerce.number(),
 });
+
+/**
+ * @summary Register a new restaurant owner
+ */
+export const EigomenyuRegisterBody = zod.object({
+  email: zod.string(),
+  password: zod.string(),
+  name: zod.string(),
+});
+
+/**
+ * @summary Log in as restaurant owner
+ */
+export const EigomenyuLoginBody = zod.object({
+  email: zod.string(),
+  password: zod.string(),
+});
+
+export const EigomenyuLoginResponse = zod.object({
+  id: zod.number(),
+  email: zod.string(),
+  name: zod.string(),
+  createdAt: zod.string(),
+});
+
+/**
+ * @summary Log out current owner session
+ */
+export const EigomenyuLogoutResponse = zod.object({
+  message: zod.string(),
+});
+
+/**
+ * @summary Get current authenticated owner
+ */
+export const EigomenyuGetMeResponse = zod.object({
+  id: zod.number(),
+  email: zod.string(),
+  name: zod.string(),
+  createdAt: zod.string(),
+});
+
+/**
+ * @summary Create a new restaurant
+ */
+export const EigomenyuCreateRestaurantBody = zod.object({
+  slug: zod.string(),
+  name: zod.string(),
+  nameJa: zod.string().nullish(),
+  address: zod.string().nullish(),
+  imageUrl: zod.string().nullish(),
+});
+
+/**
+ * @summary Get restaurant by slug
+ */
+export const EigomenyuGetRestaurantParams = zod.object({
+  slug: zod.coerce.string(),
+});
+
+export const EigomenyuGetRestaurantResponse = zod.object({
+  id: zod.number(),
+  ownerId: zod.number(),
+  slug: zod.string(),
+  name: zod.string(),
+  nameJa: zod.string().nullish(),
+  address: zod.string().nullish(),
+  imageUrl: zod.string().nullish(),
+  createdAt: zod.string(),
+});
+
+/**
+ * @summary Update a restaurant
+ */
+export const EigomenyuUpdateRestaurantParams = zod.object({
+  slug: zod.coerce.string(),
+});
+
+export const EigomenyuUpdateRestaurantBody = zod.object({
+  name: zod.string().nullish(),
+  nameJa: zod.string().nullish(),
+  address: zod.string().nullish(),
+  imageUrl: zod.string().nullish(),
+});
+
+export const EigomenyuUpdateRestaurantResponse = zod.object({
+  id: zod.number(),
+  ownerId: zod.number(),
+  slug: zod.string(),
+  name: zod.string(),
+  nameJa: zod.string().nullish(),
+  address: zod.string().nullish(),
+  imageUrl: zod.string().nullish(),
+  createdAt: zod.string(),
+});
+
+/**
+ * @summary Get menu items for a restaurant
+ */
+export const EigomenyuGetMenuItemsParams = zod.object({
+  slug: zod.coerce.string(),
+});
+
+export const EigomenyuGetMenuItemsResponseItem = zod.object({
+  id: zod.number(),
+  restaurantId: zod.number(),
+  nameJa: zod.string(),
+  titleEn: zod.string().nullish(),
+  descriptionEn: zod.string().nullish(),
+  nameRomaji: zod.string().nullish(),
+  namePhoneticEn: zod.string().nullish(),
+  translationConfidence: zod.number().nullish(),
+  translationWarnings: zod.string().nullish(),
+  approved: zod.boolean(),
+  category: zod.string().nullish(),
+  priceRange: zod.string().nullish(),
+  allergens: zod.string().nullish(),
+  tags: zod.string().nullish(),
+  imageUrl: zod.string().nullish(),
+  sortOrder: zod.number(),
+  createdAt: zod.string(),
+  updatedAt: zod.string(),
+});
+export const EigomenyuGetMenuItemsResponse = zod.array(
+  EigomenyuGetMenuItemsResponseItem,
+);
+
+/**
+ * @summary Add a menu item to a restaurant
+ */
+export const EigomenyuCreateMenuItemParams = zod.object({
+  slug: zod.coerce.string(),
+});
+
+export const EigomenyuCreateMenuItemBody = zod.object({
+  nameJa: zod.string(),
+  titleEn: zod.string().nullish(),
+  descriptionEn: zod.string().nullish(),
+  nameRomaji: zod.string().nullish(),
+  namePhoneticEn: zod.string().nullish(),
+  translationConfidence: zod.number().nullish(),
+  translationWarnings: zod.string().nullish(),
+  approved: zod.boolean().optional(),
+  category: zod.string().nullish(),
+  priceRange: zod.string().nullish(),
+  allergens: zod.string().nullish(),
+  tags: zod.string().nullish(),
+  imageUrl: zod.string().nullish(),
+  sortOrder: zod.number().optional(),
+});
+
+/**
+ * @summary Update a menu item
+ */
+export const EigomenyuUpdateMenuItemParams = zod.object({
+  slug: zod.coerce.string(),
+  id: zod.coerce.number(),
+});
+
+export const EigomenyuUpdateMenuItemBody = zod.object({
+  nameJa: zod.string().nullish(),
+  titleEn: zod.string().nullish(),
+  descriptionEn: zod.string().nullish(),
+  nameRomaji: zod.string().nullish(),
+  namePhoneticEn: zod.string().nullish(),
+  translationConfidence: zod.number().nullish(),
+  translationWarnings: zod.string().nullish(),
+  approved: zod.boolean().nullish(),
+  category: zod.string().nullish(),
+  priceRange: zod.string().nullish(),
+  allergens: zod.string().nullish(),
+  tags: zod.string().nullish(),
+  imageUrl: zod.string().nullish(),
+  sortOrder: zod.number().nullish(),
+});
+
+export const EigomenyuUpdateMenuItemResponse = zod.object({
+  id: zod.number(),
+  restaurantId: zod.number(),
+  nameJa: zod.string(),
+  titleEn: zod.string().nullish(),
+  descriptionEn: zod.string().nullish(),
+  nameRomaji: zod.string().nullish(),
+  namePhoneticEn: zod.string().nullish(),
+  translationConfidence: zod.number().nullish(),
+  translationWarnings: zod.string().nullish(),
+  approved: zod.boolean(),
+  category: zod.string().nullish(),
+  priceRange: zod.string().nullish(),
+  allergens: zod.string().nullish(),
+  tags: zod.string().nullish(),
+  imageUrl: zod.string().nullish(),
+  sortOrder: zod.number(),
+  createdAt: zod.string(),
+  updatedAt: zod.string(),
+});
+
+/**
+ * @summary Delete a menu item
+ */
+export const EigomenyuDeleteMenuItemParams = zod.object({
+  slug: zod.coerce.string(),
+  id: zod.coerce.number(),
+});
+
+/**
+ * @summary Translate a Japanese dish name to English using AI
+ */
+export const EigomenyuTranslateBody = zod.object({
+  nameJa: zod.string(),
+  hint: zod.string().nullish(),
+});
+
+export const EigomenyuTranslateResponse = zod.object({
+  title_en: zod.string(),
+  description_en: zod.string(),
+  name_romaji: zod.string(),
+  name_phonetic_en: zod.string(),
+  confidence: zod.number(),
+  warnings: zod.array(zod.string()),
+});

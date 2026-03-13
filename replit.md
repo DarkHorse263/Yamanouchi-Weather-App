@@ -49,7 +49,8 @@ artifacts-monorepo/
 │   ├── api-spec/           # OpenAPI spec + Orval codegen config
 │   ├── api-client-react/   # Generated React Query hooks
 │   ├── api-zod/            # Generated Zod schemas from OpenAPI
-│   └── db/                 # Drizzle ORM — accommodation, dining, attractions tables
+│   ├── db/                 # Drizzle ORM — accommodation, dining, attractions, eigomenyu tables
+│   └── integrations-anthropic-ai/ # Anthropic AI client (Replit AI Integrations proxy)
 ├── scripts/
 ├── pnpm-workspace.yaml
 ├── tsconfig.base.json
@@ -62,6 +63,9 @@ artifacts-monorepo/
 - `accommodation` — 6 rows (hotels, ryokan, guesthouses)
 - `dining` — 7 rows (restaurants, bars, cafes)
 - `attractions` — 8 rows (nature, onsen, culture, activity)
+- `owners` — Eigomenyu restaurant owners (email + bcrypt password auth)
+- `restaurants` — Eigomenyu restaurants (slug-based, linked to owners)
+- `menu_items` — Eigomenyu menu items (Japanese names, English translations, approval workflow)
 
 ## TypeScript & Composite Projects
 
@@ -85,7 +89,9 @@ Express 5 API server. Routes live in `src/routes/` and use `@workspace/api-zod` 
 - Entry: `src/index.ts` — reads `PORT`, starts Express
 - App setup: `src/app.ts` — mounts CORS, JSON/urlencoded parsing, routes at `/api`
 - Routes: `src/routes/index.ts` mounts sub-routers; `src/routes/health.ts` exposes `GET /health` (full path: `/api/health`)
-- Depends on: `@workspace/db`, `@workspace/api-zod`
+- Eigomenyu routes: `src/routes/eigomenyu/` — auth (register/login/logout/me), restaurants CRUD, menu items CRUD, AI translate
+- Session: `express-session` with HTTP-only cookie for owner auth
+- Depends on: `@workspace/db`, `@workspace/api-zod`, `@workspace/integrations-anthropic-ai`
 - `pnpm --filter @workspace/api-server run dev` — run the dev server
 - `pnpm --filter @workspace/api-server run build` — production esbuild bundle (`dist/index.cjs`)
 - Build bundles an allowlist of deps (express, cors, pg, drizzle-orm, zod, etc.) and externalizes the rest
