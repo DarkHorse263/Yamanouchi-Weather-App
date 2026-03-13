@@ -183,7 +183,7 @@ export default function Home() {
           colorClass="bg-gradient-to-br from-emerald-500 to-teal-700"
         />
         <StatTile
-          label={t("Top Snow 24h", "最大降雪(24h)")}
+          label={t("New Snow 24h", "新雪(24h)")}
           value={data.topSnow24h !== null ? data.topSnow24h : "--"}
           unit="cm"
           colorClass="bg-gradient-to-br from-blue-400 to-primary"
@@ -254,7 +254,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-center divide-x divide-border">
                   <div className="flex-1 pr-3 text-center">
-                    <p className="text-xs font-bold text-muted-foreground uppercase mb-1">Top Snow</p>
+                    <p className="text-xs font-bold text-muted-foreground uppercase mb-1">{t("New Snow 24h", "新雪24h")}</p>
                     <p className="text-lg font-black text-primary">{region.topSnow ?? 0} cm</p>
                   </div>
                   <div className="flex-1 px-3 text-center">
