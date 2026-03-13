@@ -18,12 +18,12 @@ export default function Explore() {
   if (isLoading) return <LoadingScreen />;
   if (error) return <ErrorScreen message={(error as any)?.message || "Network error"} />;
 
-  const filters: { value: FilterType, label: string }[] = [
-    { value: "all", label: "All" },
-    { value: "onsen", label: "Hot Springs" },
-    { value: "culture", label: "Culture" },
-    { value: "nature", label: "Nature" },
-    { value: "activity", label: "Activities" },
+  const filters: { value: FilterType, label: string, labelJa: string }[] = [
+    { value: "all", label: "All", labelJa: "すべて" },
+    { value: "onsen", label: "Hot Springs", labelJa: "温泉" },
+    { value: "culture", label: "Culture", labelJa: "文化" },
+    { value: "nature", label: "Nature", labelJa: "自然" },
+    { value: "activity", label: "Activities", labelJa: "アクティビティ" },
   ];
 
   return (
@@ -44,7 +44,7 @@ export default function Explore() {
                 : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
             }`}
           >
-            {f.label}
+            {t(f.label, f.labelJa)}
           </button>
         ))}
       </div>

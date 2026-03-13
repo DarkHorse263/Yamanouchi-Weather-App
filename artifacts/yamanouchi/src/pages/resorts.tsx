@@ -1,6 +1,7 @@
 import { useGetResorts } from "@workspace/api-client-react";
 import { useLanguage } from "@/hooks/use-language";
 import { Card, LoadingScreen, ErrorScreen } from "@/components/ui-elements";
+import { HourlyTimeline } from "@/components/hourly-timeline";
 import { Snowflake, Ruler, ThermometerSnowflake, Wind, CalendarDays } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -17,7 +18,7 @@ function safeTime(raw: string | null | undefined): string {
 
 export default function Resorts() {
   const { t } = useLanguage();
-  const { data: resorts, isLoading, error } = useGetResorts({ query: { refetchInterval: 600000 } });
+  const { data: resorts, isLoading, error } = useGetResorts({ query: { refetchInterval: 1800000 } });
 
   if (isLoading) return <LoadingScreen />;
   if (error) return <ErrorScreen message={(error as any)?.message || "Network error"} />;
@@ -37,6 +38,9 @@ export default function Resorts() {
         <h1 className="text-3xl md:text-4xl font-black text-mountain-dark">{t("Ski Resorts", "スキー場")}</h1>
         <p className="text-muted-foreground mt-2">{t("Live conditions across all Yamanouchi areas", "山ノ内町全エリアの最新コンディション")}</p>
       </div>
+
+      {/* Hourly update timeline */}
+      <HourlyTimeline lastUpdatedAt={resorts[0]?.sourceUpdatedAt} />
 
       {Object.entries(grouped).map(([region, regionResorts], regionIdx) => (
         <div key={region} className="space-y-4">

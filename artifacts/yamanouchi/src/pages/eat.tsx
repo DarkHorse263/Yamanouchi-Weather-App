@@ -18,11 +18,11 @@ export default function Eat() {
   if (isLoading) return <LoadingScreen />;
   if (error) return <ErrorScreen message={(error as any)?.message || "Network error"} />;
 
-  const filters: { value: FilterType, label: string }[] = [
-    { value: "all", label: "All" },
-    { value: "restaurant", label: "Restaurants" },
-    { value: "bar", label: "Bars" },
-    { value: "cafe", label: "Cafes" },
+  const filters: { value: FilterType, label: string, labelJa: string }[] = [
+    { value: "all", label: "All", labelJa: "すべて" },
+    { value: "restaurant", label: "Restaurants", labelJa: "レストラン" },
+    { value: "bar", label: "Bars", labelJa: "バー" },
+    { value: "cafe", label: "Cafes", labelJa: "カフェ" },
   ];
 
   return (
@@ -43,7 +43,7 @@ export default function Eat() {
                 : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
             }`}
           >
-            {f.label}
+            {t(f.label, f.labelJa)}
           </button>
         ))}
       </div>
@@ -56,12 +56,21 @@ export default function Eat() {
             transition={{ delay: idx * 0.05 }}
             key={venue.id}
           >
-            <Card className="h-full flex flex-col p-5 group hover:border-primary/30 transition-all duration-300">
-              <div className="flex justify-between items-start mb-3">
-                <Badge variant="default" className="text-[10px] bg-primary/10 text-primary">{venue.type}</Badge>
-                {venue.priceRange && <span className="font-bold text-emerald-600 text-sm">{venue.priceRange}</span>}
+            <Card className="h-full flex flex-col p-0 overflow-hidden group hover:shadow-xl transition-all duration-300">
+              <div className="h-40 bg-secondary relative overflow-hidden">
+                <img
+                  src={`${import.meta.env.BASE_URL}images/${venue.type === 'bar' ? 'bar' : 'restaurant'}.png`}
+                  alt={venue.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                <div className="absolute bottom-3 left-3 right-3 flex justify-between items-end">
+                  <Badge variant="default" className="text-[10px] bg-white/20 text-white border-white/30 backdrop-blur">{venue.type}</Badge>
+                  {venue.priceRange && <span className="font-bold text-white text-sm drop-shadow">{venue.priceRange}</span>}
+                </div>
               </div>
-              
+              <div className="p-4 flex flex-col flex-1">
               <h3 className="text-xl font-bold text-mountain-dark mb-1 leading-tight">
                 {t(venue.name, venue.nameJa)}
               </h3>
@@ -95,6 +104,7 @@ export default function Eat() {
                     </a>
                   </div>
                 )}
+              </div>
               </div>
             </Card>
           </motion.div>

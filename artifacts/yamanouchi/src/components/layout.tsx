@@ -175,10 +175,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </AnimatePresence>
       </main>
 
-      {/* Mobile Bottom Navigation Bar (Primary actions only) */}
+      {/* Mobile Bottom Navigation Bar (All destinations) */}
       <nav className="md:hidden fixed bottom-0 inset-x-0 glass border-t border-white/20 pb-safe z-40">
-        <div className="flex justify-around items-center px-2 h-16">
-          {NAV_ITEMS.slice(0, 5).map((item) => {
+        <div className="flex justify-around items-center px-1 h-16">
+          {NAV_ITEMS.map((item) => {
             const isActive = location === item.path;
             const Icon = item.icon;
             return (
@@ -186,17 +186,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 key={item.path} 
                 href={item.path}
                 className={cn(
-                  "flex flex-col items-center justify-center w-full h-full gap-1 transition-all duration-200",
+                  "flex flex-col items-center justify-center w-full h-full gap-0.5 transition-all duration-200",
                   isActive ? "text-primary" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 <div className={cn(
-                  "p-1.5 rounded-xl transition-all duration-300",
+                  "p-1 rounded-lg transition-all duration-300",
                   isActive ? "bg-primary/10" : ""
                 )}>
-                  <Icon className={cn("w-5 h-5", isActive ? "fill-primary/20" : "")} />
+                  <Icon className={cn("w-4 h-4", isActive ? "fill-primary/20" : "")} />
                 </div>
-                <span className="text-[10px] font-bold tracking-tight">
+                <span className="text-[8px] font-bold tracking-tight leading-none">
                   {t(item.label, item.labelJa)}
                 </span>
               </Link>

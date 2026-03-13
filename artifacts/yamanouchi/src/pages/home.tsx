@@ -1,13 +1,14 @@
 import { useGetDashboard } from "@workspace/api-client-react";
 import { useLanguage } from "@/hooks/use-language";
 import { Card, StatTile, LoadingScreen, ErrorScreen } from "@/components/ui-elements";
+import { HourlyTimeline } from "@/components/hourly-timeline";
 import { Trophy, Wind, ThermometerSnowflake, Ruler, Snowflake, Activity } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Home() {
   const { t } = useLanguage();
-  // Poll every 10 minutes (600,000 ms)
-  const { data, isLoading, error } = useGetDashboard({ query: { refetchInterval: 600000 } });
+  // Poll every 30 minutes to catch each hourly Supabase update (5AM–6PM JST)
+  const { data, isLoading, error } = useGetDashboard({ query: { refetchInterval: 1800000 } });
 
   if (isLoading) return <LoadingScreen />;
   if (error) return <ErrorScreen message={(error as any)?.message || "Network error"} />;
@@ -91,6 +92,15 @@ export default function Home() {
           unit="cm"
           colorClass="bg-gradient-to-br from-indigo-500 to-purple-700"
         />
+      </motion.div>
+
+      {/* HOURLY UPDATE TIMELINE */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.15 }}
+      >
+        <HourlyTimeline lastUpdatedAt={data.bestResort?.sourceUpdatedAt} />
       </motion.div>
 
       <div className="grid lg:grid-cols-3 gap-6 md:gap-8">

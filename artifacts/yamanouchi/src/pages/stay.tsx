@@ -18,12 +18,12 @@ export default function Stay() {
   if (isLoading) return <LoadingScreen />;
   if (error) return <ErrorScreen message={(error as any)?.message || "Network error"} />;
 
-  const filters: { value: FilterType, label: string }[] = [
-    { value: "all", label: "All" },
-    { value: "hotel", label: "Hotels" },
-    { value: "ryokan", label: "Ryokan" },
-    { value: "guesthouse", label: "Guesthouses" },
-    { value: "apartment", label: "Apartments" },
+  const filters: { value: FilterType, label: string, labelJa: string }[] = [
+    { value: "all", label: "All", labelJa: "すべて" },
+    { value: "hotel", label: "Hotels", labelJa: "ホテル" },
+    { value: "ryokan", label: "Ryokan", labelJa: "旅館" },
+    { value: "guesthouse", label: "Guesthouses", labelJa: "ゲストハウス" },
+    { value: "apartment", label: "Apartments", labelJa: "アパート" },
   ];
 
   return (
@@ -44,7 +44,7 @@ export default function Stay() {
                 : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
             }`}
           >
-            {f.label}
+            {t(f.label, f.labelJa)}
           </button>
         ))}
       </div>
@@ -59,13 +59,12 @@ export default function Stay() {
           >
             <Card className="h-full flex flex-col p-0 overflow-hidden group hover:shadow-xl transition-all duration-300">
               <div className="h-48 bg-secondary relative overflow-hidden">
-                {place.imageUrl ? (
-                  <img src={place.imageUrl} alt={place.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-slate-200">
-                    <span className="text-slate-400 text-4xl">🏨</span>
-                  </div>
-                )}
+                <img
+                  src={place.imageUrl || `${import.meta.env.BASE_URL}images/${place.type === 'ryokan' ? 'ryokan' : place.type === 'guesthouse' ? 'guesthouse' : 'hotel'}.png`}
+                  alt={place.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                />
                 {place.featured && (
                   <div className="absolute top-3 left-3 bg-amber-500 text-white text-xs font-black uppercase px-2 py-1 rounded-md shadow-md">
                     Featured

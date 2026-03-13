@@ -1,13 +1,30 @@
 import { useGetPowderAlerts } from "@workspace/api-client-react";
 import { useLanguage } from "@/hooks/use-language";
 import { Card, Badge, LoadingScreen, ErrorScreen } from "@/components/ui-elements";
-import { format } from "date-fns";
 import { BellRing, CloudLightning, Info } from "lucide-react";
 import { motion } from "framer-motion";
 
+function safeTime(raw: string | null | undefined): string {
+  if (!raw) return "";
+  try {
+    const d = new Date(raw);
+    if (isNaN(d.getTime())) return "";
+    return d.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" });
+  } catch { return ""; }
+}
+
+function safeDate(raw: string | null | undefined): string {
+  if (!raw) return "";
+  try {
+    const d = new Date(raw);
+    if (isNaN(d.getTime())) return "";
+    return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  } catch { return ""; }
+}
+
 export default function Alerts() {
   const { t } = useLanguage();
-  const { data, isLoading, error } = useGetPowderAlerts({ query: { refetchInterval: 600000 } });
+  const { data, isLoading, error } = useGetPowderAlerts({ query: { refetchInterval: 1800000 } });
 
   if (isLoading) return <LoadingScreen />;
   if (error) return <ErrorScreen message={(error as any)?.message || "Network error"} />;
@@ -59,7 +76,7 @@ export default function Alerts() {
                       <span className="font-bold opacity-90">{alert.resort}</span>
                     </div>
                     <span className="text-xs font-bold opacity-75">
-                      {format(new Date(alert.issuedAt), "HH:mm")}
+                      {safeTime(alert.issuedAt)}
                     </span>
                   </div>
                   
@@ -97,7 +114,7 @@ export default function Alerts() {
                 </Badge>
                 {storm.startDate && (
                   <span className="text-xs font-bold text-muted-foreground">
-                    {format(new Date(storm.startDate), "MMM d")}
+                    {safeDate(storm.startDate)}
                   </span>
                 )}
               </div>
