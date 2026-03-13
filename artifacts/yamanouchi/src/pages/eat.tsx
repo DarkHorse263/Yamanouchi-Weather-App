@@ -27,9 +27,21 @@ function mapsUrl(lat: number | null, lng: number | null, name: string) {
   return `https://maps.google.com/?q=${encodeURIComponent(name + " Yamanouchi Nagano Japan")}`;
 }
 
-function photoSrc(type: string, base: string) {
-  const map: Record<string, string> = { restaurant: "restaurant", bar: "bar", cafe: "restaurant" };
-  return `${base}images/${map[type] ?? "restaurant"}.png`;
+const ON_MOUNTAIN_REGIONS = ["Shiga Kogen", "Ryuoo"];
+
+function photoSrc(venue: { type: string; region: string; cuisine?: string | null }, base: string) {
+  const { type, region, cuisine } = venue;
+  const cuisineLower = (cuisine ?? "").toLowerCase();
+  if (type === "cafe") return `${base}images/cafe-mountain.png`;
+  if (type === "bar") {
+    return `${base}images/${cuisineLower.includes("sake") || cuisineLower.includes("日本酒") ? "bar-sake" : "bar-apres"}.png`;
+  }
+  if (type === "restaurant") {
+    if (ON_MOUNTAIN_REGIONS.includes(region)) return `${base}images/restaurant-ski-lodge.png`;
+    if (cuisineLower.includes("izakaya") || cuisineLower.includes("居酒屋")) return `${base}images/restaurant-izakaya.png`;
+    return `${base}images/restaurant-japanese.png`;
+  }
+  return `${base}images/restaurant.png`;
 }
 
 export default function Eat() {
@@ -160,7 +172,7 @@ function VenueGrid({ venues, t }: { venues: any[]; t: (en: string, ja: string | 
             {/* Photo */}
             <div className="h-36 bg-secondary relative overflow-hidden">
               <img
-                src={photoSrc(venue.type, import.meta.env.BASE_URL)}
+                src={photoSrc(venue, import.meta.env.BASE_URL)}
                 alt={venue.name}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}

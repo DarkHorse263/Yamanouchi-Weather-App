@@ -27,9 +27,16 @@ function mapsUrl(lat: number | null, lng: number | null, name: string) {
   return `https://maps.google.com/?q=${encodeURIComponent(name + " Yamanouchi Nagano Japan")}`;
 }
 
-function photoSrc(type: string, base: string) {
-  const map: Record<string, string> = { ryokan: "ryokan", hotel: "hotel", guesthouse: "guesthouse", apartment: "hotel" };
-  return `${base}images/${map[type] ?? "hotel"}.png`;
+const ON_MOUNTAIN_REGIONS = ["Shiga Kogen", "Ryuoo"];
+
+function photoSrc(place: { type: string; region: string; featured?: boolean }, base: string) {
+  const { type, region, featured } = place;
+  if (type === "ryokan") {
+    return `${base}images/${featured ? "ryokan-exterior" : "ryokan-room"}.png`;
+  }
+  if (type === "guesthouse") return `${base}images/guesthouse-cozy.png`;
+  if (type === "hotel" && ON_MOUNTAIN_REGIONS.includes(region)) return `${base}images/hotel-ski.png`;
+  return `${base}images/hotel.png`;
 }
 
 export default function Stay() {
@@ -160,7 +167,7 @@ function PlaceGrid({ places, t }: { places: any[]; t: (en: string, ja: string | 
             {/* Photo */}
             <div className="h-44 bg-secondary relative overflow-hidden">
               <img
-                src={photoSrc(place.type, import.meta.env.BASE_URL)}
+                src={photoSrc(place, import.meta.env.BASE_URL)}
                 alt={place.name}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
