@@ -2,7 +2,7 @@ import { useGetResorts } from "@workspace/api-client-react";
 import { useLanguage } from "@/hooks/use-language";
 import { Card, LoadingScreen, ErrorScreen } from "@/components/ui-elements";
 import { HourlyTimeline } from "@/components/hourly-timeline";
-import { Snowflake, Ruler, ThermometerSnowflake, Wind, CalendarDays } from "lucide-react";
+import { Snowflake, Ruler, ThermometerSnowflake, Wind, CalendarDays, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
 
 function safeTime(raw: string | null | undefined): string {
@@ -104,9 +104,22 @@ export default function Resorts() {
                     </div>
                   )}
 
-                  <div className="mt-4 pt-3 border-t border-border flex justify-between items-center text-[10px] text-muted-foreground uppercase font-bold tracking-wider">
-                    <span>{resort.weatherStation || 'JMA Station'}</span>
-                    <span>{safeTime(resort.sourceUpdatedAt)}</span>
+                  <div className="mt-4 pt-3 border-t border-border space-y-2">
+                    {resort.websiteUrl && (
+                      <a
+                        href={resort.websiteUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-1.5 w-full py-1.5 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary text-xs font-bold transition-colors"
+                      >
+                        <ExternalLink className="w-3 h-3" />
+                        {t("Official Website", "公式サイト")}
+                      </a>
+                    )}
+                    <div className="flex justify-between items-center text-[10px] text-muted-foreground uppercase font-bold tracking-wider">
+                      <span>{resort.weatherStation || 'JMA Station'}</span>
+                      <span>{safeTime(resort.sourceUpdatedAt)}</span>
+                    </div>
                   </div>
                 </Card>
               </motion.div>
