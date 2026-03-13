@@ -120,7 +120,7 @@ export default function MapView() {
                 <p className="text-xs text-gray-500 mb-2">{group.markers.length} {t("resorts", "スキー場")}</p>
                 <div className="grid grid-cols-2 gap-2 mb-3">
                   <div className="bg-blue-50 p-2 rounded text-center">
-                    <div className="text-xs text-blue-500 font-bold">New Snow 24h</div>
+                    <div className="text-xs text-blue-500 font-bold">New Snow Last 24hrs</div>
                     <div className="text-sm font-black text-blue-700">{group.topSnow} cm</div>
                   </div>
                   <div className="bg-indigo-50 p-2 rounded text-center">
