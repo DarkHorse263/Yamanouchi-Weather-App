@@ -2,45 +2,91 @@ import { useGetAccommodation } from "@workspace/api-client-react";
 import { useLanguage } from "@/hooks/use-language";
 import { Card, Badge, LoadingScreen, ErrorScreen } from "@/components/ui-elements";
 import { useState } from "react";
-import { MapPin, Phone, Globe, Bath, CableCar } from "lucide-react";
+import { MapPin, Phone, Globe, Bath, CableCar, ExternalLink, Mountain } from "lucide-react";
 import { motion } from "framer-motion";
 
-type FilterType = "all" | "hotel" | "ryokan" | "guesthouse" | "apartment";
+type LocationTab = "mountain" | "town";
+type FilterType = "all" | "hotel" | "ryokan" | "guesthouse";
+
+const ON_MOUNTAIN = ["Shiga Kogen", "Ryuoo"];
+
+const MOUNTAIN_AREAS = [
+  { region: "Shiga Kogen", label: "Shiga Kogen", labelJa: "志賀高原", desc: "21 linked ski areas", descJa: "21スキー場連結", url: "https://www.shigakogen.co.jp/english/" },
+  { region: "Ryuoo", label: "Ryuoo Ski Park", labelJa: "竜王スキーパーク", desc: "Japan's highest gondola", descJa: "日本最高所のゴンドラ", url: "https://www.ryuoo.com/en/" },
+];
+
+const TOWN_AREAS = [
+  { region: "Yudanaka", label: "Yudanaka", labelJa: "湯田中", desc: "Hot spring town & Snow Monkey gateway", descJa: "温泉街・スノーモンキー玄関口", emoji: "♨️" },
+  { region: "Shibu Onsen", label: "Shibu Onsen", labelJa: "渋温泉", desc: "Historic hot spring village", descJa: "歴史ある温泉村", emoji: "🏮" },
+  { region: "Sano", label: "Sano", labelJa: "佐野", desc: "Jigokudani Monkey Park area", descJa: "地獄谷野猿公苑エリア", emoji: "🐒" },
+  { region: "Yomase", label: "Yomase", labelJa: "夜間瀬", desc: "Onsen ski town", descJa: "温泉スキータウン", emoji: "⛷️" },
+];
+
+function mapsUrl(lat: number | null, lng: number | null, name: string) {
+  if (lat && lng) return `https://maps.google.com/?q=${lat},${lng}`;
+  return `https://maps.google.com/?q=${encodeURIComponent(name + " Yamanouchi Nagano Japan")}`;
+}
+
+function photoSrc(type: string, base: string) {
+  const map: Record<string, string> = { ryokan: "ryokan", hotel: "hotel", guesthouse: "guesthouse", apartment: "hotel" };
+  return `${base}images/${map[type] ?? "hotel"}.png`;
+}
 
 export default function Stay() {
   const { t } = useLanguage();
+  const [tab, setTab] = useState<LocationTab>("mountain");
   const [typeFilter, setTypeFilter] = useState<FilterType>("all");
-  
-  const { data, isLoading, error } = useGetAccommodation({ 
-    type: typeFilter === "all" ? undefined : typeFilter 
-  } as any); // using any here to bypass strict generated type checking if all isn't technically supported in query
+
+  const { data: all, isLoading, error } = useGetAccommodation({} as any);
 
   if (isLoading) return <LoadingScreen />;
   if (error) return <ErrorScreen message={(error as any)?.message || "Network error"} />;
 
-  const filters: { value: FilterType, label: string, labelJa: string }[] = [
+  const filtered = (all ?? []).filter(p =>
+    typeFilter === "all" || p.type === typeFilter
+  );
+
+  const mountain = filtered.filter(p => ON_MOUNTAIN.includes(p.region));
+  const town = filtered.filter(p => !ON_MOUNTAIN.includes(p.region));
+
+  const typeFilters: { value: FilterType; label: string; labelJa: string }[] = [
     { value: "all", label: "All", labelJa: "すべて" },
     { value: "hotel", label: "Hotels", labelJa: "ホテル" },
     { value: "ryokan", label: "Ryokan", labelJa: "旅館" },
     { value: "guesthouse", label: "Guesthouses", labelJa: "ゲストハウス" },
-    { value: "apartment", label: "Apartments", labelJa: "アパート" },
   ];
 
   return (
-    <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-8">
+    <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-6">
       <div>
         <h1 className="text-3xl md:text-4xl font-black text-mountain-dark">{t("Where to Stay", "宿泊施設")}</h1>
-        <p className="text-muted-foreground mt-2">{t("Find the perfect basecamp in Yamanouchi", "山ノ内町の完璧なベースキャンプを見つける")}</p>
+        <p className="text-muted-foreground mt-1">{t("Find the perfect basecamp in Yamanouchi", "山ノ内町の完璧なベースキャンプを見つける")}</p>
       </div>
 
-      <div className="flex overflow-x-auto hide-scrollbar gap-2 pb-2">
-        {filters.map(f => (
+      {/* Location tabs */}
+      <div className="flex rounded-xl bg-secondary p-1 gap-1">
+        {([["mountain", "⛷️ On Mountain", "⛷️ 山の上"] , ["town", "🏘️ In Town", "🏘️ 町内"]] as const).map(([v, en, ja]) => (
+          <button
+            key={v}
+            onClick={() => setTab(v)}
+            className={`flex-1 py-2.5 rounded-lg font-bold text-sm transition-all ${
+              tab === v ? "bg-white shadow text-mountain-dark" : "text-muted-foreground hover:text-mountain-dark"
+            }`}
+          >
+            {t(en, ja)}
+          </button>
+        ))}
+      </div>
+
+      {/* Type filters */}
+      <div className="flex overflow-x-auto hide-scrollbar gap-2 pb-1">
+        {typeFilters.map(f => (
           <button
             key={f.value}
             onClick={() => setTypeFilter(f.value)}
-            className={`px-4 py-2 rounded-full font-bold text-sm whitespace-nowrap transition-colors ${
-              typeFilter === f.value 
-                ? "bg-mountain-dark text-white" 
+            className={`px-4 py-1.5 rounded-full font-bold text-sm whitespace-nowrap transition-colors ${
+              typeFilter === f.value
+                ? "bg-mountain-dark text-white"
                 : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
             }`}
           >
@@ -49,82 +95,143 @@ export default function Stay() {
         ))}
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {data?.map((place, idx) => (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.05 }}
-            key={place.id}
-          >
-            <Card className="h-full flex flex-col p-0 overflow-hidden group hover:shadow-xl transition-all duration-300">
-              <div className="h-48 bg-secondary relative overflow-hidden">
-                <img
-                  src={place.imageUrl || `${import.meta.env.BASE_URL}images/${place.type === 'ryokan' ? 'ryokan' : place.type === 'guesthouse' ? 'guesthouse' : 'hotel'}.png`}
-                  alt={place.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
-                />
-                {place.featured && (
-                  <div className="absolute top-3 left-3 bg-amber-500 text-white text-xs font-black uppercase px-2 py-1 rounded-md shadow-md">
-                    Featured
+      {/* ON MOUNTAIN */}
+      {tab === "mountain" && (
+        <div className="space-y-8">
+          {MOUNTAIN_AREAS.map(area => {
+            const places = mountain.filter(p => p.region === area.region);
+            if (places.length === 0) return null;
+            return (
+              <section key={area.region}>
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <h2 className="text-xl font-black text-mountain-dark flex items-center gap-2">
+                      <Mountain className="w-5 h-5 text-primary" />
+                      {t(area.label, area.labelJa)}
+                    </h2>
+                    <p className="text-sm text-muted-foreground">{t(area.desc, area.descJa)}</p>
                   </div>
+                  {area.url && (
+                    <a href={area.url} target="_blank" rel="noreferrer"
+                      className="flex items-center gap-1 text-xs font-bold text-primary hover:underline shrink-0">
+                      <ExternalLink className="w-3 h-3" /> {t("Resort site", "リゾートサイト")}
+                    </a>
+                  )}
+                </div>
+                <PlaceGrid places={places} t={t} />
+              </section>
+            );
+          })}
+          {mountain.length === 0 && <EmptyState t={t} />}
+        </div>
+      )}
+
+      {/* IN TOWN */}
+      {tab === "town" && (
+        <div className="space-y-8">
+          {TOWN_AREAS.map(area => {
+            const places = town.filter(p => p.region === area.region);
+            if (places.length === 0) return null;
+            return (
+              <section key={area.region}>
+                <div className="mb-4">
+                  <h2 className="text-xl font-black text-mountain-dark">
+                    {area.emoji} {t(area.label, area.labelJa)}
+                  </h2>
+                  <p className="text-sm text-muted-foreground">{t(area.desc, area.descJa)}</p>
+                </div>
+                <PlaceGrid places={places} t={t} />
+              </section>
+            );
+          })}
+          {town.length === 0 && <EmptyState t={t} />}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function PlaceGrid({ places, t }: { places: any[]; t: (en: string, ja: string | null) => string }) {
+  return (
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {places.map((place, idx) => (
+        <motion.div key={place.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.05 }}>
+          <Card className="h-full flex flex-col p-0 overflow-hidden group hover:shadow-xl transition-all duration-300">
+            {/* Photo */}
+            <div className="h-44 bg-secondary relative overflow-hidden">
+              <img
+                src={photoSrc(place.type, import.meta.env.BASE_URL)}
+                alt={place.name}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+              />
+              {place.featured && (
+                <div className="absolute top-3 left-3 bg-amber-500 text-white text-[10px] font-black uppercase px-2 py-1 rounded-md shadow">
+                  {t("Featured", "おすすめ")}
+                </div>
+              )}
+              <div className="absolute bottom-3 right-3 flex gap-1.5">
+                {place.onsenAvailable && (
+                  <span title={t("Onsen", "温泉")} className="bg-white/90 backdrop-blur text-blue-600 p-1.5 rounded-full shadow-sm">
+                    <Bath className="w-3.5 h-3.5" />
+                  </span>
                 )}
-                <div className="absolute bottom-3 right-3 flex gap-1">
-                  {place.onsenAvailable && (
-                    <div className="bg-white/90 backdrop-blur text-blue-600 p-1.5 rounded-full shadow-sm" title="Onsen Available">
-                      <Bath className="w-4 h-4" />
-                    </div>
-                  )}
-                  {place.skiInSkiOut && (
-                    <div className="bg-white/90 backdrop-blur text-primary p-1.5 rounded-full shadow-sm" title="Ski-in / Ski-out">
-                      <CableCar className="w-4 h-4" />
-                    </div>
-                  )}
-                </div>
+                {place.skiInSkiOut && (
+                  <span title={t("Ski-in / Ski-out", "スキーイン・アウト")} className="bg-white/90 backdrop-blur text-primary p-1.5 rounded-full shadow-sm">
+                    <CableCar className="w-3.5 h-3.5" />
+                  </span>
+                )}
               </div>
-              
-              <div className="p-5 flex flex-col flex-1">
-                <div className="flex justify-between items-start mb-2">
-                  <Badge variant="outline" className="text-[10px]">{place.type}</Badge>
-                  {place.priceRange && <span className="font-bold text-emerald-600">{place.priceRange}</span>}
-                </div>
-                
-                <h3 className="text-xl font-bold text-mountain-dark mb-1">
-                  {t(place.name, place.nameJa)}
-                </h3>
-                
-                <p className="text-sm text-muted-foreground flex items-start gap-1.5 mb-3">
-                  <MapPin className="w-4 h-4 shrink-0 mt-0.5 text-primary" />
-                  <span className="line-clamp-1">{t(place.address || place.region, place.addressJa || place.region)}</span>
-                </p>
-                
-                <p className="text-sm line-clamp-3 mb-4 text-mountain-dark/80">
-                  {t(place.description, place.descriptionJa)}
-                </p>
-                
-                <div className="mt-auto pt-4 border-t border-border flex gap-3">
-                  {place.phone && (
-                    <a href={`tel:${place.phone}`} className="flex-1 flex justify-center items-center gap-2 py-2 rounded-xl bg-secondary text-mountain-dark font-bold text-sm hover:bg-secondary/80 transition-colors">
-                      <Phone className="w-4 h-4" /> Call
-                    </a>
-                  )}
-                  {place.websiteUrl && (
-                    <a href={place.websiteUrl} target="_blank" rel="noreferrer" className="flex-1 flex justify-center items-center gap-2 py-2 rounded-xl bg-primary text-white font-bold text-sm hover:bg-primary/90 transition-colors shadow-md shadow-primary/20">
-                      <Globe className="w-4 h-4" /> Book
-                    </a>
-                  )}
-                </div>
+            </div>
+
+            {/* Body */}
+            <div className="p-4 flex flex-col flex-1">
+              <div className="flex justify-between items-center mb-2">
+                <Badge variant="outline" className="text-[10px] capitalize">{t(place.type, null)}</Badge>
+                {place.priceRange && <span className="font-black text-emerald-600 text-sm">{place.priceRange}</span>}
               </div>
-            </Card>
-          </motion.div>
-        ))}
-        {data?.length === 0 && (
-          <div className="col-span-full py-12 text-center text-muted-foreground">
-            No accommodation found matching your criteria.
-          </div>
-        )}
-      </div>
+              <h3 className="font-bold text-mountain-dark leading-snug mb-1">{t(place.name, place.nameJa)}</h3>
+              <p className="text-xs text-muted-foreground flex items-center gap-1 mb-2">
+                <MapPin className="w-3 h-3 text-primary/70 shrink-0" />
+                {t(place.address || place.region, place.addressJa || place.region)}
+              </p>
+              <p className="text-sm text-mountain-dark/80 line-clamp-2 flex-1 mb-4">
+                {t(place.description, place.descriptionJa)}
+              </p>
+
+              {/* Actions */}
+              <div className="flex gap-2 mt-auto pt-3 border-t border-border">
+                <a
+                  href={mapsUrl(place.lat, place.lng, place.name)}
+                  target="_blank" rel="noreferrer"
+                  className="flex-1 flex justify-center items-center gap-1.5 py-2 rounded-xl bg-secondary text-mountain-dark font-bold text-xs hover:bg-secondary/80 transition-colors"
+                >
+                  <MapPin className="w-3.5 h-3.5" /> {t("Map", "地図")}
+                </a>
+                {place.phone && (
+                  <a href={`tel:${place.phone}`} className="flex-1 flex justify-center items-center gap-1.5 py-2 rounded-xl bg-secondary text-mountain-dark font-bold text-xs hover:bg-secondary/80 transition-colors">
+                    <Phone className="w-3.5 h-3.5" /> {t("Call", "電話")}
+                  </a>
+                )}
+                {place.websiteUrl && (
+                  <a href={place.websiteUrl} target="_blank" rel="noreferrer"
+                    className="flex-1 flex justify-center items-center gap-1.5 py-2 rounded-xl bg-primary text-white font-bold text-xs hover:bg-primary/90 transition-colors shadow-sm shadow-primary/20">
+                    <Globe className="w-3.5 h-3.5" /> {t("Book", "予約")}
+                  </a>
+                )}
+              </div>
+            </div>
+          </Card>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
+function EmptyState({ t }: { t: (en: string, ja: string) => string }) {
+  return (
+    <div className="py-16 text-center text-muted-foreground">
+      {t("No places found matching your filters.", "フィルターに一致する場所が見つかりません。")}
     </div>
   );
 }
