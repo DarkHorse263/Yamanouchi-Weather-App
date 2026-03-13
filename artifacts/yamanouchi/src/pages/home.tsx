@@ -1,5 +1,4 @@
 import { useGetDashboard } from "@workspace/api-client-react";
-import { format } from "date-fns";
 import { useLanguage } from "@/hooks/use-language";
 import { Card, StatTile, LoadingScreen, ErrorScreen } from "@/components/ui-elements";
 import { Trophy, Wind, ThermometerSnowflake, Ruler, Snowflake, Activity } from "lucide-react";
@@ -55,7 +54,7 @@ export default function Home() {
               <span className="text-white font-bold">{data.totalSkiAreas} {t("Ski Areas", "スキー場")}</span>
             </div>
             <div className="text-white/60 text-xs text-right">
-              {t("Next update", "次回更新")}: {format(new Date(data.nextUpdate), "HH:mm")}
+              {t("Next update", "次回更新")}: {data.nextUpdate}
             </div>
           </div>
         </div>
