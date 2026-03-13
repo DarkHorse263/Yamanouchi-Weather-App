@@ -1,5 +1,6 @@
 import { Router, type IRouter } from "express";
 import { getSupabase } from "../lib/supabase.js";
+import { getLiveWeather, getWeatherForRegion } from "../lib/weather-service.js";
 import {
   GetDashboardResponse,
   GetResortsResponse,
@@ -65,6 +66,42 @@ function mapResortRow(r: Record<string, unknown>, idx: number) {
   };
 }
 
+/** Normalize cluster/region names from Supabase to canonical form (e.g. "Shiga Kogen region" → "Shiga Kogen") */
+function normalizeRegion(raw: string): string {
+  return raw.replace(/\s+region$/i, "").trim();
+}
+
+/** Apply live Open-Meteo/JMA weather data to a list of resorts — only overrides if Supabase data is missing */
+async function applyLiveWeather<T extends { region: string; temp: number | null; wind: number | null; snow24h: number | null; snowTomorrow: number | null }>(
+  resorts: T[],
+  force = false
+): Promise<T[]> {
+  try {
+    const live = await getLiveWeather();
+    return resorts.map(r => {
+      const normalized = normalizeRegion(r.region);
+      const w = getWeatherForRegion(normalized, live);
+      if (!w) return { ...r, region: normalized };
+      // Only override fields that are missing from the source data (unless forced)
+      const needsTemp   = force || r.temp === null || r.temp === undefined;
+      const needsWind   = force || r.wind === null || r.wind === undefined;
+      const needsSnow   = force || r.snow24h === null || r.snow24h === undefined;
+      const needsTomrow = force || r.snowTomorrow === null || r.snowTomorrow === undefined;
+      return {
+        ...r,
+        region: normalized,
+        temp:         needsTemp   ? w.temp         : r.temp,
+        wind:         needsWind   ? w.wind         : r.wind,
+        snow24h:      needsSnow   ? w.snow24h      : r.snow24h,
+        snowTomorrow: needsTomrow ? w.snowTomorrow : r.snowTomorrow,
+      };
+    });
+  } catch (err) {
+    console.warn("Live weather fetch failed, using source values:", err);
+    return resorts.map(r => ({ ...r, region: normalizeRegion(r.region) }));
+  }
+}
+
 function buildDashboardFromResorts(resorts: ReturnType<typeof mapResortRow>[]) {
   const temps = resorts.filter(r => r.temp !== null).map(r => r.temp as number);
   const winds = resorts.filter(r => r.wind !== null).map(r => r.wind as number);
@@ -113,35 +150,36 @@ router.get("/dashboard", async (_req, res): Promise<void> => {
   const supabase = getSupabase();
 
   if (!supabase) {
-    const mapped = FALLBACK_RESORTS.map((r, i) => ({ ...r, temp: r.temp, wind: r.wind }));
-    const dashboard = buildDashboardFromResorts(mapped as ReturnType<typeof mapResortRow>[]);
+    const base = FALLBACK_RESORTS.map((r) => ({ ...r })) as ReturnType<typeof mapResortRow>[];
+    const mapped = await applyLiveWeather(base);
+    const dashboard = buildDashboardFromResorts(mapped);
     res.json(GetDashboardResponse.parse(dashboard));
     return;
   }
 
   try {
-    // Use app_home_focus_today for the top-level dashboard stats
-    const [homeFocusRes, resortsRes] = await Promise.all([
-      supabase.from("app_home_focus_today").select("*").limit(1).maybeSingle(),
-      supabase.from("yamanouchi_resorts_today").select("*"),
-    ]);
+    const { data } = await supabase.from("yamanouchi_resorts_today").select("*");
 
-    const resorts = (resortsRes.data || []).map(mapResortRow);
-    const dashboard = buildDashboardFromResorts(resorts as ReturnType<typeof mapResortRow>[]);
+    const supabaseResorts = await applyLiveWeather(
+      (data || []).map(mapResortRow) as ReturnType<typeof mapResortRow>[]
+    );
 
-    // Overlay top-level stats from app_home_focus_today if available
-    if (homeFocusRes.data) {
-      const hf = homeFocusRes.data as Record<string, unknown>;
-      if (hf.avg_temp_c !== null && hf.avg_temp_c !== undefined) dashboard.avgTemp = Number(hf.avg_temp_c);
-      if (hf.avg_wind_kmh !== null && hf.avg_wind_kmh !== undefined) dashboard.avgWind = Number(hf.avg_wind_kmh);
-      if (hf.max_snow_24h_cm !== null && hf.max_snow_24h_cm !== undefined) dashboard.topSnow24h = Number(hf.max_snow_24h_cm);
-      if (hf.resorts_count !== null && hf.resorts_count !== undefined) dashboard.totalSkiAreas = Number(hf.resorts_count);
-    }
+    // Supplement with fallback data for any regions missing from Supabase
+    const presentRegions = new Set(supabaseResorts.map(r => r.region));
+    const supplemental = await applyLiveWeather(
+      FALLBACK_RESORTS
+        .filter(r => !presentRegions.has(normalizeRegion(r.region)))
+        .map(r => ({ ...r })) as ReturnType<typeof mapResortRow>[],
+      true // force live weather on fallback entries
+    );
 
+    const resorts = [...supabaseResorts, ...supplemental];
+    const dashboard = buildDashboardFromResorts(resorts);
     res.json(GetDashboardResponse.parse(dashboard));
   } catch (err) {
     console.error("Dashboard error:", err);
-    const mapped = FALLBACK_RESORTS.map((r) => ({ ...r })) as ReturnType<typeof mapResortRow>[];
+    const base = FALLBACK_RESORTS.map((r) => ({ ...r })) as ReturnType<typeof mapResortRow>[];
+    const mapped = await applyLiveWeather(base, true);
     const dashboard = buildDashboardFromResorts(mapped);
     res.json(GetDashboardResponse.parse(dashboard));
   }
@@ -151,7 +189,8 @@ router.get("/resorts", async (_req, res): Promise<void> => {
   const supabase = getSupabase();
 
   if (!supabase) {
-    const resorts = FALLBACK_RESORTS.map((r) => ({ ...r }));
+    const base = FALLBACK_RESORTS.map((r) => ({ ...r })) as ReturnType<typeof mapResortRow>[];
+    const resorts = await applyLiveWeather(base);
     res.json(GetResortsResponse.parse(resorts));
     return;
   }
@@ -163,11 +202,19 @@ router.get("/resorts", async (_req, res): Promise<void> => {
 
     if (error) throw error;
 
-    const resorts = (data || []).map(mapResortRow);
-    res.json(GetResortsResponse.parse(resorts));
+    const supabaseResorts = await applyLiveWeather((data || []).map(mapResortRow));
+    const presentRegions = new Set(supabaseResorts.map(r => r.region));
+    const supplemental = await applyLiveWeather(
+      FALLBACK_RESORTS
+        .filter(r => !presentRegions.has(normalizeRegion(r.region)))
+        .map(r => ({ ...r })) as ReturnType<typeof mapResortRow>[],
+      true
+    );
+    res.json(GetResortsResponse.parse([...supabaseResorts, ...supplemental]));
   } catch (err) {
     console.error("Resorts error:", err);
-    res.json(GetResortsResponse.parse(FALLBACK_RESORTS));
+    const base = FALLBACK_RESORTS.map((r) => ({ ...r })) as ReturnType<typeof mapResortRow>[];
+    res.json(GetResortsResponse.parse(await applyLiveWeather(base, true)));
   }
 });
 
@@ -221,11 +268,29 @@ router.get("/map", async (_req, res): Promise<void> => {
 router.get("/outlook", async (_req, res): Promise<void> => {
   const supabase = getSupabase();
 
-  const fallbackOutlook = [
-    { region: "Shiga Kogen", regionJa: "志賀高原", rank: 1, signal: "Moderate snow signal across the area", snow24h: 0, snow48h: 0, snow72h: 0, level: "None" as const, updatedAt: new Date().toISOString() },
-    { region: "Ryuoo", regionJa: "竜王", rank: 2, signal: "Light snow signal across the area", snow24h: 0, snow48h: 0, snow72h: 0, level: "None" as const, updatedAt: new Date().toISOString() },
-    { region: "Yomase", regionJa: "夜間瀬", rank: 3, signal: "Light snow signal across the area", snow24h: 0, snow48h: 0, snow72h: 0, level: "None" as const, updatedAt: new Date().toISOString() },
+  let fallbackOutlook = [
+    { region: "Shiga Kogen", regionJa: "志賀高原", rank: 1, signal: "Conditions at Shiga Kogen", snow24h: 0, snow48h: 0, snow72h: 0, level: "None" as const, updatedAt: new Date().toISOString() },
+    { region: "Ryuoo",       regionJa: "竜王",   rank: 2, signal: "Conditions at Ryuoo",        snow24h: 0, snow48h: 0, snow72h: 0, level: "None" as const, updatedAt: new Date().toISOString() },
+    { region: "Yomase",      regionJa: "夜間瀬", rank: 3, signal: "Conditions at Yomase",       snow24h: 0, snow48h: 0, snow72h: 0, level: "None" as const, updatedAt: new Date().toISOString() },
   ];
+
+  try {
+    const live = await getLiveWeather();
+    fallbackOutlook = fallbackOutlook.map(o => {
+      const w = getWeatherForRegion(o.region, live);
+      if (!w) return o;
+      const total = w.snow24h + w.snowTomorrow;
+      let level: typeof o.level = "None";
+      if (total >= 40) level = "Extreme";
+      else if (total >= 20) level = "High";
+      else if (total >= 10) level = "Moderate";
+      else if (total > 0) level = "Low";
+      const signal = w.snow24h > 0
+        ? `${w.snow24h}cm fresh · ${w.temp}°C · ${w.wind}km/h`
+        : `${w.temp}°C · ${w.wind}km/h · No fresh snow`;
+      return { ...o, snow24h: w.snow24h, snow48h: w.snowTomorrow, snow72h: w.snowTomorrow, level, signal };
+    });
+  } catch (_) { /* keep defaults */ }
 
   if (!supabase) {
     res.json(GetSnowOutlookResponse.parse(fallbackOutlook));
