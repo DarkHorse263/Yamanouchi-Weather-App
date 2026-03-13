@@ -11,6 +11,7 @@ import Resorts from "@/pages/resorts";
 import MapView from "@/pages/map";
 import Outlook from "@/pages/outlook";
 import Alerts from "@/pages/alerts";
+import Guide from "@/pages/guide";
 import Stay from "@/pages/stay";
 import Eat from "@/pages/eat";
 import Explore from "@/pages/explore";
@@ -37,6 +38,7 @@ function Router() {
       <Route path="/map" component={MapView} />
       <Route path="/outlook" component={Outlook} />
       <Route path="/alerts" component={Alerts} />
+      <Route path="/guide" component={Guide} />
       <Route path="/stay" component={Stay} />
       <Route path="/eat" component={Eat} />
       <Route path="/explore" component={Explore} />

@@ -39,7 +39,7 @@ function photoSrc(place: { type: string; region: string; featured?: boolean }, b
   return `${base}images/hotel.png`;
 }
 
-export default function Stay() {
+export default function Stay({ embedded = false }: { embedded?: boolean }) {
   const { t } = useLanguage();
   const [tab, setTab] = useState<LocationTab>("mountain");
   const [typeFilter, setTypeFilter] = useState<FilterType>("all");
@@ -65,10 +65,12 @@ export default function Stay() {
 
   return (
     <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-6">
-      <div>
-        <h1 className="text-3xl md:text-4xl font-black text-mountain-dark">{t("Where to Stay", "宿泊施設")}</h1>
-        <p className="text-muted-foreground mt-1">{t("Find the perfect basecamp in Yamanouchi", "山ノ内町の完璧なベースキャンプを見つける")}</p>
-      </div>
+      {!embedded && (
+        <div>
+          <h1 className="text-3xl md:text-4xl font-black text-mountain-dark">{t("Where to Stay", "宿泊施設")}</h1>
+          <p className="text-muted-foreground mt-1">{t("Find the perfect basecamp in Yamanouchi", "山ノ内町の完璧なベースキャンプを見つける")}</p>
+        </div>
+      )}
 
       {/* Location tabs */}
       <div className="flex rounded-xl bg-secondary p-1 gap-1">

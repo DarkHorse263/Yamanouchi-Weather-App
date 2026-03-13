@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 type FilterType = "all" | "onsen" | "culture" | "nature" | "activity";
 
-export default function Explore() {
+export default function Explore({ embedded = false }: { embedded?: boolean }) {
   const { t } = useLanguage();
   const [categoryFilter, setCategoryFilter] = useState<FilterType>("all");
   const [mapExpanded, setMapExpanded] = useState(false);
@@ -29,10 +29,12 @@ export default function Explore() {
 
   return (
     <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-8">
-      <div>
-        <h1 className="text-3xl md:text-4xl font-black text-mountain-dark">{t("Explore Yamanouchi", "山ノ内を探索")}</h1>
-        <p className="text-muted-foreground mt-1">{t("Every hotel, restaurant, onsen and attraction — all in one place", "ホテル・レストラン・温泉・観光スポットをまとめて検索")}</p>
-      </div>
+      {!embedded && (
+        <div>
+          <h1 className="text-3xl md:text-4xl font-black text-mountain-dark">{t("Explore Yamanouchi", "山ノ内を探索")}</h1>
+          <p className="text-muted-foreground mt-1">{t("Every hotel, restaurant, onsen and attraction — all in one place", "ホテル・レストラン・温泉・観光スポットをまとめて検索")}</p>
+        </div>
+      )}
 
       {/* Official Interactive Map */}
       <div className="rounded-2xl overflow-hidden border border-border shadow-lg">

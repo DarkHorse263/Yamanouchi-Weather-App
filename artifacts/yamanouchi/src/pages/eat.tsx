@@ -44,7 +44,7 @@ function photoSrc(venue: { type: string; region: string; cuisine?: string | null
   return `${base}images/restaurant.png`;
 }
 
-export default function Eat() {
+export default function Eat({ embedded = false }: { embedded?: boolean }) {
   const { t } = useLanguage();
   const [tab, setTab] = useState<LocationTab>("mountain");
   const [typeFilter, setTypeFilter] = useState<FilterType>("all");
@@ -70,10 +70,12 @@ export default function Eat() {
 
   return (
     <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-6">
-      <div>
-        <h1 className="text-3xl md:text-4xl font-black text-mountain-dark">{t("Eat & Drink", "飲食")}</h1>
-        <p className="text-muted-foreground mt-1">{t("Refuel after a long day on the mountain", "山での長い一日の後のエネルギー補給")}</p>
-      </div>
+      {!embedded && (
+        <div>
+          <h1 className="text-3xl md:text-4xl font-black text-mountain-dark">{t("Eat & Drink", "飲食")}</h1>
+          <p className="text-muted-foreground mt-1">{t("Refuel after a long day on the mountain", "山での長い一日の後のエネルギー補給")}</p>
+        </div>
+      )}
 
       {/* Location tabs */}
       <div className="flex rounded-xl bg-secondary p-1 gap-1">
