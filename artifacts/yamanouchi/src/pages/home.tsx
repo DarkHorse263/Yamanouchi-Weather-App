@@ -84,11 +84,11 @@ export default function Home() {
         className="relative rounded-3xl overflow-hidden shadow-2xl shadow-primary/20 bg-mountain-dark"
       >
         <img
-          src={`${import.meta.env.BASE_URL}images/hero-mountains.png`}
+          src={`${import.meta.env.BASE_URL}images/hero-mountains.jpg`}
           alt="Yamanouchi Mountains"
-          className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-overlay"
+          className="absolute inset-0 w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-mountain-dark via-mountain-dark/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
 
         <div className="relative z-10 p-6 md:p-10 flex flex-col min-h-[280px] justify-between">
           <div>
