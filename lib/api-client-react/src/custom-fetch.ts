@@ -299,7 +299,13 @@ export async function customFetch<T = unknown>(
 
   const requestInfo = { method, url: resolveUrl(input) };
 
-  const response = await fetch(input, { ...init, method, headers });
+  // Drop the AbortSignal from the fetch call.  When TanStack Query cancels a
+  // query on unmount the signal abort propagates as an unhandled rejection that
+  // surfaces in the dev error overlay.  Letting requests finish in the
+  // background is harmless — the result is stored in the cache and silently
+  // discarded if the observer is gone.
+  const { signal: _signal, ...fetchInit } = init;
+  const response = await fetch(input, { ...fetchInit, method, headers });
 
   if (!response.ok) {
     const errorData = await parseErrorBody(response, method);
