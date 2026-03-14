@@ -1,8 +1,8 @@
 import { useGetDashboard, useGetPowderAlerts } from "@workspace/api-client-react";
 import { useLanguage } from "@/hooks/use-language";
-import { Card, StatTile, ErrorScreen } from "@/components/ui-elements";
+import { ErrorScreen } from "@/components/ui-elements";
 import { HourlyTimeline } from "@/components/hourly-timeline";
-import { Trophy, Wind, ThermometerSnowflake, Ruler, Snowflake, Activity, BellRing, ChevronRight } from "lucide-react";
+import { Trophy, Wind, ThermometerSnowflake, Ruler, Snowflake, BellRing, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import { useEffect, useState } from "react";
@@ -16,14 +16,10 @@ const HERO_SLIDES = [
 
 function HeroSlideshow({ base }: { base: string }) {
   const [current, setCurrent] = useState(0);
-
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrent(prev => (prev + 1) % HERO_SLIDES.length);
-    }, 5000);
-    return () => clearInterval(interval);
+    const t = setInterval(() => setCurrent(p => (p + 1) % HERO_SLIDES.length), 5000);
+    return () => clearInterval(t);
   }, []);
-
   return (
     <>
       <AnimatePresence mode="sync">
@@ -31,22 +27,16 @@ function HeroSlideshow({ base }: { base: string }) {
           key={current}
           src={`${base}images/${HERO_SLIDES[current].src}`}
           alt={HERO_SLIDES[current].label}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
           transition={{ duration: 1.2 }}
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
       </AnimatePresence>
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10" />
-      {/* Slide dots */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent" />
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-20">
         {HERO_SLIDES.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrent(i)}
-            className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? "w-6 bg-white" : "w-1.5 bg-white/40"}`}
-          />
+          <button key={i} onClick={() => setCurrent(i)}
+            className={`h-1 rounded-full transition-all duration-300 ${i === current ? "w-5 bg-white" : "w-1 bg-white/40"}`} />
         ))}
       </div>
     </>
@@ -55,31 +45,22 @@ function HeroSlideshow({ base }: { base: string }) {
 
 function HomeSkeleton() {
   return (
-    <div className="p-4 md:p-8 space-y-6 max-w-7xl mx-auto animate-pulse">
-      <div className="rounded-3xl bg-mountain-dark/80 min-h-[280px]" />
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {[...Array(4)].map((_, i) => (
-          <div key={i} className="h-24 rounded-2xl bg-secondary" />
-        ))}
-      </div>
-      <div className="h-28 rounded-2xl bg-secondary" />
-      <div className="grid lg:grid-cols-3 gap-6">
-        <div className="h-64 rounded-2xl bg-secondary" />
-        <div className="lg:col-span-2 grid sm:grid-cols-2 gap-4">
-          {[...Array(3)].map((_, i) => (
-            <div key={i} className="h-32 rounded-2xl bg-secondary" />
-          ))}
-        </div>
+    <div className="p-4 md:p-8 space-y-4 max-w-7xl mx-auto animate-pulse">
+      <div className="rounded-3xl bg-slate-200 min-h-[260px]" />
+      <div className="h-20 rounded-2xl bg-slate-100" />
+      <div className="h-16 rounded-2xl bg-slate-100" />
+      <div className="grid grid-cols-3 gap-3">
+        {[...Array(3)].map((_, i) => <div key={i} className="h-24 rounded-2xl bg-slate-100" />)}
       </div>
     </div>
   );
 }
 
 const ALERT_STYLES: Record<string, string> = {
-  powder_day: "bg-purple-600 border-purple-700",
-  warning:    "bg-red-600 border-red-700",
-  watch:      "bg-amber-500 border-amber-600",
-  info:       "bg-blue-600 border-blue-700",
+  powder_day: "bg-violet-600 border-violet-500",
+  warning:    "bg-rose-600 border-rose-500",
+  watch:      "bg-amber-500 border-amber-400",
+  info:       "bg-sky-600 border-sky-500",
 };
 
 export default function Home() {
@@ -94,30 +75,24 @@ export default function Home() {
   const activeAlerts = alertData?.alerts?.slice(0, 2) ?? [];
 
   return (
-    <div className="p-4 md:p-8 space-y-5 md:space-y-6 max-w-7xl mx-auto">
+    <div className="p-4 md:p-8 space-y-4 md:space-y-5 max-w-7xl mx-auto">
 
-      {/* POWDER ALERTS BANNER — only when active */}
+      {/* ALERTS */}
       {activeAlerts.length > 0 && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="space-y-2"
-        >
+        <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} className="space-y-2">
           {activeAlerts.map((alert) => (
             <Link key={alert.id} href="/alerts">
-              <div className={`flex items-center justify-between px-4 py-3 rounded-2xl border shadow-lg cursor-pointer text-white ${ALERT_STYLES[alert.alertLevel] ?? ALERT_STYLES.info}`}>
+              <div className={`flex items-center justify-between px-4 py-3 rounded-2xl border cursor-pointer text-white ${ALERT_STYLES[alert.alertLevel] ?? ALERT_STYLES.info}`}>
                 <div className="flex items-center gap-3">
                   <BellRing className="w-4 h-4 shrink-0 animate-pulse" />
                   <div>
-                    <span className="text-[10px] font-black uppercase tracking-widest opacity-80 block leading-none mb-0.5">
+                    <span className="text-[10px] font-black uppercase tracking-widest opacity-75 block leading-none mb-0.5">
                       {alert.alertLevel.replace("_", " ")}
                     </span>
-                    <span className="font-bold text-sm leading-tight">
-                      {t(alert.message, alert.messageJa)}
-                    </span>
+                    <span className="font-semibold text-sm">{t(alert.message, alert.messageJa)}</span>
                   </div>
                 </div>
-                <ChevronRight className="w-4 h-4 opacity-70 shrink-0" />
+                <ChevronRight className="w-4 h-4 opacity-60 shrink-0" />
               </div>
             </Link>
           ))}
@@ -126,169 +101,155 @@ export default function Home() {
 
       {/* HERO */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.97 }}
+        initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="relative rounded-3xl overflow-hidden shadow-2xl shadow-primary/20 bg-mountain-dark"
+        className="relative rounded-3xl overflow-hidden bg-slate-900 shadow-xl"
+        style={{ minHeight: 260 }}
       >
         <HeroSlideshow base={import.meta.env.BASE_URL} />
-
-        <div className="relative z-10 p-6 md:p-10 flex flex-col min-h-[280px] justify-between">
+        <div className="relative z-10 p-6 flex flex-col min-h-[260px] justify-between">
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <span className="flex h-2.5 w-2.5 rounded-full bg-red-500 animate-pulse" />
-              <span className="text-red-400 font-bold text-xs tracking-widest uppercase">
+              <span className="flex h-2 w-2 rounded-full bg-red-400 animate-pulse" />
+              <span className="text-white/60 font-semibold text-[11px] tracking-widest uppercase">
                 LIVE {t("DATA", "データ")}
               </span>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight mb-2">
-              {t("Yamanouchi Town", "山ノ内町")}
+            <h1 className="text-4xl font-black text-white tracking-tight leading-none mb-1.5">
+              {t("Yamanouchi", "山ノ内")}
             </h1>
-            <p className="text-ice-blue text-lg md:text-xl font-medium max-w-xl">
-              {t("Gateway to the Mountains", "山々への玄関口")}
-            </p>
-            <p className="text-white/70 font-medium text-sm mt-1">
+            <p className="text-white/70 text-sm font-medium">
               Shiga Kogen · Ryuoo · Yomase
             </p>
           </div>
-
-          <div className="flex flex-wrap items-end justify-between gap-4 mt-8">
-            <div className="glass-dark px-4 py-2 rounded-xl inline-flex items-center gap-2 border-white/10">
-              <Activity className="w-4 h-4 text-primary" />
-              <span className="text-white font-bold">{data.totalSkiAreas} {t("Ski Areas", "スキー場")}</span>
+          <div className="flex items-end justify-between mt-8">
+            <div className="text-white">
+              <span className="text-3xl font-black leading-none">{data.totalSkiAreas}</span>
+              <span className="text-white/60 text-sm font-medium ml-1.5">{t("ski areas", "スキー場")}</span>
             </div>
-            <div className="text-white/60 text-xs text-right">
+            <p className="text-white/45 text-xs">
               {t("Next update", "次回更新")}: {data.nextUpdate}
-            </div>
+            </p>
           </div>
         </div>
       </motion.div>
 
-      {/* STATS GRID */}
+      {/* CONDITIONS RAIL */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
-        className="grid grid-cols-2 lg:grid-cols-4 gap-4"
+        transition={{ delay: 0.08 }}
+        className="bg-slate-900 rounded-2xl overflow-hidden"
       >
-        <StatTile
-          label={t("Avg Temp", "平均気温")}
-          value={data.avgTemp !== null ? data.avgTemp : "--"}
-          unit="°C"
-          colorClass="bg-gradient-to-br from-red-500 to-rose-700"
-        />
-        <StatTile
-          label={t("Avg Wind", "平均風速")}
-          value={data.avgWind !== null ? data.avgWind : "--"}
-          unit="km/h"
-          colorClass="bg-gradient-to-br from-emerald-500 to-teal-700"
-        />
-        <StatTile
-          label={t("New Snow Last 24hrs", "新雪(過去24時間)")}
-          value={data.topSnow24h !== null ? data.topSnow24h : "--"}
-          unit="cm"
-          colorClass="bg-gradient-to-br from-blue-400 to-primary"
-        />
-        <StatTile
-          label={t("Best Base", "最大積雪")}
-          value={data.bestBase !== null ? data.bestBase : "--"}
-          unit="cm"
-          colorClass="bg-gradient-to-br from-indigo-500 to-purple-700"
-        />
+        <div className="grid grid-cols-4 divide-x divide-white/10">
+          {[
+            { label: t("Avg Temp", "平均気温"),       value: data.avgTemp !== null ? `${data.avgTemp}°` : "—",        sub: "°C",  color: "text-sky-300" },
+            { label: t("Avg Wind", "平均風速"),        value: data.avgWind !== null ? `${data.avgWind}` : "—",         sub: "km/h", color: "text-slate-300" },
+            { label: t("New Snow", "新雪 24h"),        value: data.topSnow24h !== null ? `${data.topSnow24h}` : "—",   sub: "cm",   color: "text-blue-300" },
+            { label: t("Best Base", "最大積雪"),       value: data.bestBase !== null ? `${data.bestBase}` : "—",       sub: "cm",   color: "text-indigo-300" },
+          ].map(({ label, value, sub, color }) => (
+            <div key={label} className="px-3 py-4 text-center">
+              <p className="text-[9px] font-bold uppercase tracking-wider text-white/40 mb-1.5 leading-tight">{label}</p>
+              <p className={`text-xl font-black leading-none ${color}`}>
+                {value}
+                <span className="text-xs font-medium text-white/30 ml-0.5">{sub}</span>
+              </p>
+            </div>
+          ))}
+        </div>
       </motion.div>
 
       {/* HOURLY TIMELINE */}
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}>
+      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12 }}>
         <HourlyTimeline lastUpdatedAt={data.bestResort?.sourceUpdatedAt} />
       </motion.div>
 
-      <div className="grid lg:grid-cols-3 gap-6">
-        {/* BEST RESORT */}
-        <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }} className="lg:col-span-1">
-          <div className="flex items-center gap-2 mb-4">
-            <Trophy className="w-5 h-5 text-amber-500" />
-            <h2 className="text-xl font-bold">{t("Best Snow Right Now", "現在のベストスノー")}</h2>
+      {/* BEST RESORT + REGIONS */}
+      <div className="grid lg:grid-cols-5 gap-4">
+
+        {/* Best Resort */}
+        <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.16 }} className="lg:col-span-2">
+          <div className="flex items-center gap-2 mb-3">
+            <Trophy className="w-4 h-4 text-amber-400" />
+            <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wider">{t("Best Snow Right Now", "ベストスノー")}</h2>
           </div>
-          <Card className="bg-gradient-to-br from-amber-50 to-orange-100 border-orange-200">
+          <div className="bg-white border border-border rounded-2xl p-5 shadow-sm">
             <div className="flex items-start justify-between mb-4">
               <div>
-                <span className="text-xs font-bold text-orange-600 uppercase tracking-wider">#1 Ranked</span>
-                <h3 className="text-2xl font-black text-mountain-dark leading-tight mt-1">
+                <p className="text-[10px] font-bold text-amber-500 uppercase tracking-wider mb-1">#1 Ranked</p>
+                <h3 className="text-lg font-black text-slate-900 leading-tight">
                   {t(data.bestResort.name, data.bestResort.nameJa)}
                 </h3>
-                <p className="text-sm font-medium text-muted-foreground">
+                <p className="text-xs text-slate-400 font-medium mt-0.5">
                   {t(data.bestResort.region, data.bestResort.regionJa)}
                 </p>
               </div>
-              <div className="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-xl">🥇</div>
+              <span className="text-2xl">🥇</span>
             </div>
-            <div className="grid grid-cols-2 gap-3 mt-4">
+            <div className="grid grid-cols-2 gap-2">
               {[
-                { icon: Snowflake, label: "24h Snow", value: `${data.bestResort.snow24h ?? 0} cm`, color: "text-blue-600" },
-                { icon: Ruler, label: "Base", value: `${data.bestResort.baseDepth ?? 0} cm`, color: "text-indigo-600" },
-                { icon: ThermometerSnowflake, label: "Temp", value: `${data.bestResort.temp ?? '--'}°C`, color: "text-red-600" },
-                { icon: Wind, label: "Wind", value: `${data.bestResort.wind ?? '--'} km/h`, color: "text-emerald-600" },
+                { icon: Snowflake,           label: t("24h Snow", "24h降雪"), value: `${data.bestResort.snow24h ?? 0} cm`,   color: "text-blue-600" },
+                { icon: Ruler,               label: t("Base", "積雪"),         value: `${data.bestResort.baseDepth ?? 0} cm`, color: "text-indigo-600" },
+                { icon: ThermometerSnowflake, label: t("Temp", "気温"),         value: `${data.bestResort.temp ?? '--'}°C`,   color: "text-slate-700" },
+                { icon: Wind,                label: t("Wind", "風速"),          value: `${data.bestResort.wind ?? '--'} km/h`, color: "text-slate-500" },
               ].map(({ icon: Icon, label, value, color }) => (
-                <div key={label} className="bg-white/60 p-3 rounded-xl">
-                  <div className={`flex items-center gap-1.5 ${color} mb-1`}>
-                    <Icon className="w-4 h-4" />
-                    <span className="text-xs font-bold uppercase">{label}</span>
+                <div key={label} className="bg-slate-50 rounded-xl px-3 py-2.5">
+                  <div className={`flex items-center gap-1 ${color} mb-1`}>
+                    <Icon className="w-3 h-3" />
+                    <span className="text-[9px] font-bold uppercase tracking-wider">{label}</span>
                   </div>
-                  <div className="text-lg font-black">{value}</div>
+                  <p className="text-base font-black text-slate-900">{value}</p>
                 </div>
               ))}
             </div>
-          </Card>
+          </div>
         </motion.div>
 
-        {/* REGIONAL OVERVIEW */}
-        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }} className="lg:col-span-2">
-          <h2 className="text-xl font-bold mb-4">{t("Regional Overview", "エリア概要")}</h2>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {data.regions.map((region, idx) => (
-              <Card key={idx} className="hover:border-primary/30 transition-colors">
-                <div className="flex justify-between items-center mb-3">
-                  <h3 className="font-bold text-lg">{t(region.name, region.nameJa)}</h3>
-                  <span className="text-xs font-bold bg-secondary px-2 py-1 rounded-md text-muted-foreground">
-                    {region.resortCount} resorts
+        {/* Regional overview */}
+        <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="lg:col-span-3">
+          <div className="flex items-center gap-2 mb-3">
+            <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wider">{t("Regional Overview", "エリア概要")}</h2>
+          </div>
+          <div className="space-y-3">
+            {data.regions.map((region) => (
+              <div key={region.name} className="bg-white border border-border rounded-2xl px-5 py-4 shadow-sm">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-bold text-slate-900">{t(region.name, region.nameJa)}</h3>
+                  <span className="text-[10px] font-bold bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full">
+                    {region.resortCount} {t("resorts", "スキー場")}
                   </span>
                 </div>
-                <div className="flex items-center divide-x divide-border">
-                  <div className="flex-1 pr-3 text-center">
-                    <p className="text-xs font-bold text-muted-foreground uppercase mb-1">{t("New Snow Last 24hrs", "新雪24h")}</p>
-                    <p className="text-lg font-black text-primary">{region.topSnow ?? 0} cm</p>
+                <div className="grid grid-cols-3 divide-x divide-slate-100">
+                  <div className="pr-4 text-center">
+                    <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-1">{t("New Snow", "新雪")}</p>
+                    <p className="text-lg font-black text-blue-600">{region.topSnow ?? 0}<span className="text-xs font-medium text-slate-400 ml-0.5">cm</span></p>
                   </div>
-                  <div className="flex-1 px-3 text-center">
-                    <p className="text-xs font-bold text-muted-foreground uppercase mb-1">Best Base</p>
-                    <p className="text-lg font-black text-indigo-600">{region.bestBase ?? 0} cm</p>
+                  <div className="px-4 text-center">
+                    <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-1">{t("Best Base", "最大積雪")}</p>
+                    <p className="text-lg font-black text-slate-800">{region.bestBase ?? 0}<span className="text-xs font-medium text-slate-400 ml-0.5">cm</span></p>
                   </div>
-                  <div className="flex-1 pl-3 text-center">
-                    <p className="text-xs font-bold text-muted-foreground uppercase mb-1">Avg Temp</p>
-                    <p className="text-lg font-black text-red-600">{region.avgTemp != null ? region.avgTemp.toFixed(1) : '--'}°C</p>
+                  <div className="pl-4 text-center">
+                    <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-1">{t("Avg Temp", "平均気温")}</p>
+                    <p className="text-lg font-black text-slate-700">{region.avgTemp != null ? region.avgTemp.toFixed(1) : '--'}<span className="text-xs font-medium text-slate-400 ml-0.5">°C</span></p>
                   </div>
                 </div>
-              </Card>
+              </div>
             ))}
           </div>
         </motion.div>
       </div>
 
-      {/* DATA DISCLAIMER */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-        className="mt-8 rounded-xl border border-border bg-muted/40 px-4 py-4"
-      >
-        <p className="text-xs font-semibold text-foreground/70 mb-1.5">
-          {t("Data Sources & Disclaimer", "データソース・免責事項")}
-        </p>
-        <p className="text-[11px] leading-relaxed text-muted-foreground">
+      {/* DISCLAIMER */}
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
+        className="rounded-xl border border-border/60 bg-slate-50 px-4 py-3">
+        <p className="text-[10px] leading-relaxed text-slate-400">
           {t(
-            "Snow depth and resort conditions are sourced from individual ski resort reporting networks. Temperature, wind, and snowfall forecasts are derived from Japan Meteorological Agency (JMA) numerical weather models, delivered via Open-Meteo. Data is refreshed hourly between 5 AM and 6 PM Japan Standard Time (JST) and is provided for general informational purposes only. Figures represent the best available data at time of publication and may not reflect current on-mountain conditions. Always verify conditions directly with individual resorts before skiing or snowboarding.",
-            "積雪深・ゲレンデ状況は各スキー場の報告ネットワークに基づきます。気温・風速・降雪量は、Open-Meteo経由の気象庁（JMA）数値予報モデルから取得しています。データは毎日午前5時〜午後6時（日本標準時）の間に1時間ごと更新されます。本情報は参考目的のみに提供されており、実際の状況と異なる場合があります。滑走前に必ず各スキー場へ直接ご確認ください。"
+            "Snow depth & conditions from resort reporting networks. Temperature, wind & forecasts from JMA via Open-Meteo. Updated hourly 5 AM–6 PM JST. For informational use only — verify directly with resorts before skiing.",
+            "積雪・ゲレンデ状況は各スキー場の報告に基づきます。気温・風・予報はOpen-Meteo経由の気象庁データ。毎日5時〜18時（JST）更新。参考情報です。滑走前に各スキー場へ直接ご確認ください。"
           )}
         </p>
       </motion.div>
+
     </div>
   );
 }
