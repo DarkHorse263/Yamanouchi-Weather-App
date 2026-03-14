@@ -3,6 +3,7 @@ import { useLanguage } from "@/hooks/use-language";
 import { LoadingScreen, ErrorScreen } from "@/components/ui-elements";
 import { motion } from "framer-motion";
 import { Mountain, MapPin, Radar } from "lucide-react";
+import { useState } from "react";
 
 interface ForecastDay {
   date: string;
@@ -196,12 +197,16 @@ function TownCard({ tw, t, idx }: { tw: TownWeather; t: (en: string, ja: string)
   );
 }
 
-// Windy embed centred on Yamanouchi / Shiga Kogen plateau — no API key required for the map embed
-const WINDY_RADAR_URL =
-  "https://embed.windy.com/embed2.html?lat=36.77&lon=138.45&detailLat=36.77&detailLon=138.45&zoom=9&level=surface&overlay=rain&product=radar&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1";
+const BASE_WINDY = "https://embed.windy.com/embed2.html?lat=36.77&lon=138.45&detailLat=36.77&detailLon=138.45&zoom=9&level=surface&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1";
+
+const WINDY_LAYERS = [
+  { key: "radar",     label: "Weather Radar",  labelJa: "気象レーダー",  url: `${BASE_WINDY}&overlay=radar` },
+  { key: "snowcover", label: "Snow Cover",     labelJa: "積雪状況",      url: `${BASE_WINDY}&overlay=snowcover` },
+];
 
 export default function Outlook() {
   const { t } = useLanguage();
+  const [radarLayer, setRadarLayer] = useState(WINDY_LAYERS[0]);
 
   const { data, isLoading, error } = useQuery<WeatherOutlook>({
     queryKey: ["weather-outlook"],
@@ -242,23 +247,41 @@ export default function Outlook() {
         animate={{ opacity: 1, y: 0 }}
         className="mb-8"
       >
-        <div className="flex items-center gap-2 mb-3">
-          <Radar className="w-4 h-4 text-primary" />
-          <h2 className="text-base font-bold text-slate-700 uppercase tracking-wide">
-            {t("Live Precipitation Radar", "降水レーダー（リアルタイム）")}
-          </h2>
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <Radar className="w-4 h-4 text-primary" />
+            <h2 className="text-base font-bold text-slate-700 uppercase tracking-wide">
+              {t(radarLayer.label, radarLayer.labelJa)}
+            </h2>
+          </div>
+          <div className="flex gap-1 bg-secondary rounded-xl p-1">
+            {WINDY_LAYERS.map(layer => (
+              <button
+                key={layer.key}
+                onClick={() => setRadarLayer(layer)}
+                className={`text-[11px] font-bold px-2.5 py-1 rounded-lg transition-all ${
+                  radarLayer.key === layer.key
+                    ? "bg-white text-primary shadow-sm"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {t(layer.label, layer.labelJa)}
+              </button>
+            ))}
+          </div>
         </div>
         <div className="rounded-2xl overflow-hidden border border-border shadow-sm" style={{ height: 320 }}>
           <iframe
-            src={WINDY_RADAR_URL}
-            title="Precipitation Radar — Yamanouchi / Shiga Kogen"
+            key={radarLayer.key}
+            src={radarLayer.url}
+            title={`${radarLayer.label} — Yamanouchi / Shiga Kogen`}
             className="w-full h-full border-0"
             allowFullScreen
             loading="lazy"
           />
         </div>
         <p className="text-[10px] text-muted-foreground mt-1.5 text-right">
-          {t("Powered by Windy · JMA radar data", "Windy提供 · 気象庁レーダーデータ")}
+          {t("Powered by Windy · JMA data", "Windy提供 · 気象庁データ")}
         </p>
       </motion.section>
 
