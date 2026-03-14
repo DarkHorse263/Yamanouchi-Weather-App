@@ -117,7 +117,7 @@ function MountainCard({ m, t, idx }: { m: MountainOutlook; t: (en: string, ja: s
 
       <div className="px-4 pt-3 pb-4">
         <p className="text-[10px] font-bold uppercase text-muted-foreground mb-2">
-          {t("7-Day Snow Forecast", "7日間降雪予報")}
+          {t("7-Day Forecast", "7日間予報")}
         </p>
         <div className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1 snap-x">
           {m.forecast.map((day) => {
@@ -129,10 +129,16 @@ function MountainCard({ m, t, idx }: { m: MountainOutlook; t: (en: string, ja: s
                 <div className="w-full bg-slate-100 rounded-full h-1.5 mb-1">
                   <div className={`h-1.5 rounded-full transition-all ${color}`} style={{ width: `${pct}%` }} />
                 </div>
-                <p className="text-sm font-black text-blue-700 leading-tight">
-                  {day.snowfall > 0 ? `${day.snowfall}cm` : "—"}
-                </p>
-                <p className="text-[10px] text-muted-foreground">{day.tempMin}° / {day.tempMax}°</p>
+                {day.snowfall > 0 && (
+                  <p className="text-sm font-black text-blue-700 leading-tight">❄️ {day.snowfall}cm</p>
+                )}
+                {day.rain > 0 && (
+                  <p className="text-[10px] font-bold text-sky-500 leading-tight">🌧 {day.rain}mm</p>
+                )}
+                {day.snowfall === 0 && day.rain === 0 && (
+                  <p className="text-sm font-black text-slate-400 leading-tight">—</p>
+                )}
+                <p className="text-[10px] text-muted-foreground mt-0.5">{day.tempMin}° / {day.tempMax}°</p>
               </div>
             );
           })}
