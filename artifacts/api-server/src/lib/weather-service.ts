@@ -85,15 +85,15 @@ const REGION_COORDS = [
   },
   {
     region: "Ryuoo",
-    lat: 36.678,
-    lon: 138.27,
+    lat: 36.779,
+    lon: 138.474,
     elevation: 1100,
     label: "Ryuoo (1100m)",
   },
   {
     region: "Yomase",
-    lat: 36.72,
-    lon: 138.35,
+    lat: 36.789,
+    lon: 138.411,
     elevation: 900,
     label: "Yomase (900m)",
   },
@@ -101,8 +101,8 @@ const REGION_COORDS = [
 
 const MOUNTAIN_OUTLOOK_COORDS = [
   { region: "Shiga Kogen", regionJa: "志賀高原", elevation: 1800, lat: 36.79, lon: 138.51 },
-  { region: "Ryuoo",       regionJa: "竜王",     elevation: 1100, lat: 36.678, lon: 138.27 },
-  { region: "Yomase",      regionJa: "夜間瀬",   elevation: 900,  lat: 36.72,  lon: 138.35 },
+  { region: "Ryuoo",       regionJa: "竜王",     elevation: 1100, lat: 36.779, lon: 138.474 },
+  { region: "Yomase",      regionJa: "夜間瀬",   elevation: 900,  lat: 36.789, lon: 138.411 },
 ];
 
 const TOWN_COORDS = [

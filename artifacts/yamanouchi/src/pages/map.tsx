@@ -56,8 +56,8 @@ type RegionGroup = {
 // Region center points — used as cluster anchor
 const REGION_CENTERS: Record<string, [number, number]> = {
   'Shiga Kogen': [36.800, 138.510],
-  'Ryuoo':       [36.678, 138.270],
-  'Yomase':      [36.720, 138.350],
+  'Ryuoo':       [36.779, 138.474],
+  'Yomase':      [36.789, 138.411],
 };
 
 // ---- Auto-fit controller ----
