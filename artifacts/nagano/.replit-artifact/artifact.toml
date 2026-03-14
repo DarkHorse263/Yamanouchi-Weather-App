@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/nagano/"
+title = "Nagano Snow Intelligence"
+version = "1.0.0"
+id = "artifacts/nagano"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+localPort = 24019
+name = "web"
+paths = ["/nagano/"]
+
+[services.development]
+run = "pnpm --filter @workspace/nagano run dev"
+
+[services.env]
+PORT = "24019"
+BASE_PATH = "/nagano/"
+
+[services.production]
+build = ["pnpm", "--filter", "@workspace/nagano", "run", "build"]
+publicDir = "artifacts/nagano/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"

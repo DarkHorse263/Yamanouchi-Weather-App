@@ -46,6 +46,12 @@ artifacts-monorepo/
 │   │       ├── lib/auth.tsx # localStorage-based auth (placeholder for future API auth)
 │   │       ├── lib/store.ts # localStorage data store with seed data & mock AI translation
 │   │       └── index.css   # Warm Japanese palette (earth tones, akane red, matcha green)
+│   ├── nagano/             # Nagano Snow Intelligence (React+Vite, preview: /nagano/)
+│   │   └── src/
+│   │       ├── pages/      # Home, Resorts, Map, Outlook, Alerts, Cams, Stay, Eat, Explore
+│   │       ├── components/ # Layout, UI elements, hourly timeline
+│   │       ├── data/       # Static seed data (80 resorts, alerts, weather, accommodation, dining, attractions)
+│   │       └── hooks/      # useLanguage (EN/JP toggle)
 │   └── yamanouchi/         # React+Vite frontend (port 20651)
 │       └── src/
 │           ├── pages/      # Home, Resorts, Map, Outlook, Alerts, Stay, Eat, Explore
