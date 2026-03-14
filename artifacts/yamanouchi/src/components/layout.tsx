@@ -6,6 +6,7 @@ import {
   Map as MapIcon,
   CloudSnow,
   BookOpen,
+  Video,
 } from "lucide-react";
 import { useLanguage } from "@/hooks/use-language";
 import { cn } from "@/lib/utils";
@@ -15,6 +16,7 @@ const NAV_ITEMS = [
   { path: "/resorts", icon: MountainSnow, label: "Resorts", labelJa: "スキー場" },
   { path: "/map",     icon: MapIcon,      label: "Map",     labelJa: "マップ" },
   { path: "/outlook", icon: CloudSnow,    label: "Outlook", labelJa: "予報" },
+  { path: "/cams",    icon: Video,        label: "Cams",    labelJa: "カメラ" },
   { path: "/guide",   icon: BookOpen,     label: "Guide",   labelJa: "ガイド" },
 ];
 
