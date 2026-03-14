@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useLanguage } from "@/hooks/use-language";
 import { LoadingScreen, ErrorScreen } from "@/components/ui-elements";
 import { motion } from "framer-motion";
-import { Thermometer, Wind, Snowflake, CloudRain, Mountain, MapPin } from "lucide-react";
+import { Mountain, MapPin, Radar } from "lucide-react";
 
 interface ForecastDay {
   date: string;
@@ -55,38 +55,26 @@ function weatherEmoji(code: number): string {
   return "⛈️";
 }
 
-function weatherLabel(code: number): string {
-  if (code === 0) return "Clear";
-  if (code <= 2) return "Partly Cloudy";
-  if (code === 3) return "Overcast";
-  if (code <= 48) return "Foggy";
-  if (code <= 55) return "Drizzle";
-  if (code <= 67) return "Rain";
-  if (code <= 77) return "Snow";
-  if (code <= 82) return "Showers";
-  if (code <= 86) return "Snow Showers";
-  return "Stormy";
+function weatherLabel(code: number, ja = false): string {
+  const labels: [number, string, string][] = [
+    [0,  "Clear",         "快晴"],
+    [2,  "Partly Cloudy", "晴れ時々曇り"],
+    [3,  "Overcast",      "曇り"],
+    [48, "Foggy",         "霧"],
+    [55, "Drizzle",       "霧雨"],
+    [67, "Rain",          "雨"],
+    [77, "Snow",          "雪"],
+    [82, "Showers",       "にわか雨"],
+    [86, "Snow Showers",  "にわか雪"],
+  ];
+  for (const [max, en, jp] of labels) if (code <= max) return ja ? jp : en;
+  return ja ? "嵐" : "Stormy";
 }
 
-function weatherLabelJa(code: number): string {
-  if (code === 0) return "快晴";
-  if (code <= 2) return "晴れ時々曇り";
-  if (code === 3) return "曇り";
-  if (code <= 48) return "霧";
-  if (code <= 55) return "霧雨";
-  if (code <= 67) return "雨";
-  if (code <= 77) return "雪";
-  if (code <= 82) return "にわか雨";
-  if (code <= 86) return "にわか雪";
-  return "嵐";
-}
-
-function snowLevelColor(snow: number): string {
-  if (snow >= 20) return "bg-blue-600";
-  if (snow >= 10) return "bg-blue-500";
-  if (snow >= 5) return "bg-blue-400";
-  if (snow > 0) return "bg-blue-300";
-  return "bg-slate-200";
+function snowBar(snow: number, max: number) {
+  const pct = Math.min(100, max > 0 ? (snow / max) * 100 : 0);
+  const color = snow >= 20 ? "bg-blue-600" : snow >= 10 ? "bg-blue-500" : snow >= 5 ? "bg-blue-400" : snow > 0 ? "bg-blue-300" : "bg-slate-200";
+  return { pct, color };
 }
 
 function MountainCard({ m, t, idx }: { m: MountainOutlook; t: (en: string, ja: string) => string; idx: number }) {
@@ -113,36 +101,40 @@ function MountainCard({ m, t, idx }: { m: MountainOutlook; t: (en: string, ja: s
 
       <div className="grid grid-cols-3 divide-x divide-border border-b border-border">
         <div className="px-3 py-2.5 text-center">
-          <p className="text-[10px] font-bold uppercase text-muted-foreground mb-0.5">Temp</p>
-          <p className="text-lg font-black text-red-600">{m.temp}°</p>
+          <p className="text-[10px] font-bold uppercase text-muted-foreground mb-0.5">{t("Temp", "気温")}</p>
+          <p className="text-lg font-black text-red-600">{m.temp}°C</p>
         </div>
         <div className="px-3 py-2.5 text-center">
-          <p className="text-[10px] font-bold uppercase text-muted-foreground mb-0.5">Wind</p>
+          <p className="text-[10px] font-bold uppercase text-muted-foreground mb-0.5">{t("Wind", "風速")}</p>
           <p className="text-lg font-black text-slate-700">{m.wind}<span className="text-xs font-medium ml-0.5">km/h</span></p>
         </div>
         <div className="px-3 py-2.5 text-center">
-          <p className="text-[10px] font-bold uppercase text-muted-foreground mb-0.5">Last 24h</p>
+          <p className="text-[10px] font-bold uppercase text-muted-foreground mb-0.5">{t("Last 24h", "24h降雪")}</p>
           <p className="text-lg font-black text-blue-600">{m.snow24h}<span className="text-xs font-medium ml-0.5">cm</span></p>
         </div>
       </div>
 
       <div className="px-4 pt-3 pb-4">
-        <p className="text-[10px] font-bold uppercase text-muted-foreground mb-2">3-Day Snow Forecast</p>
-        <div className="grid grid-cols-3 gap-2">
-          {m.forecast.map((day) => (
-            <div key={day.date} className="text-center">
-              <p className="text-[10px] font-bold text-muted-foreground mb-1">{day.dayLabel}</p>
-              <p className="text-sm mb-1.5">{weatherEmoji(day.weatherCode)}</p>
-              <div className="w-full bg-slate-100 rounded-full h-1.5 mb-1">
-                <div
-                  className={`h-1.5 rounded-full transition-all ${snowLevelColor(day.snowfall)}`}
-                  style={{ width: `${Math.min(100, (day.snowfall / maxSnow) * 100)}%` }}
-                />
+        <p className="text-[10px] font-bold uppercase text-muted-foreground mb-2">
+          {t("7-Day Snow Forecast", "7日間降雪予報")}
+        </p>
+        <div className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1 snap-x">
+          {m.forecast.map((day) => {
+            const { pct, color } = snowBar(day.snowfall, maxSnow);
+            return (
+              <div key={day.date} className="flex-shrink-0 w-[68px] snap-start text-center">
+                <p className="text-[10px] font-bold text-muted-foreground mb-1 truncate">{day.dayLabel}</p>
+                <p className="text-base mb-1">{weatherEmoji(day.weatherCode)}</p>
+                <div className="w-full bg-slate-100 rounded-full h-1.5 mb-1">
+                  <div className={`h-1.5 rounded-full transition-all ${color}`} style={{ width: `${pct}%` }} />
+                </div>
+                <p className="text-sm font-black text-blue-700 leading-tight">
+                  {day.snowfall > 0 ? `${day.snowfall}cm` : "—"}
+                </p>
+                <p className="text-[10px] text-muted-foreground">{day.tempMin}° / {day.tempMax}°</p>
               </div>
-              <p className="text-sm font-black text-blue-700">{day.snowfall > 0 ? `${day.snowfall}cm` : "—"}</p>
-              <p className="text-[10px] text-muted-foreground">{day.tempMin}° / {day.tempMax}°</p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </motion.div>
@@ -162,7 +154,7 @@ function TownCard({ tw, t, idx }: { tw: TownWeather; t: (en: string, ja: string)
           <MapPin className="w-4 h-4 text-sky-100" />
           <div>
             <p className="font-bold text-white text-sm leading-tight">{t(tw.location, tw.locationJa)}</p>
-            <p className="text-sky-200 text-[10px]">{tw.elevation}m · Base area</p>
+            <p className="text-sky-200 text-[10px]">{tw.elevation}m · {t("Base area", "麓エリア")}</p>
           </div>
         </div>
         <div className="text-right">
@@ -171,16 +163,22 @@ function TownCard({ tw, t, idx }: { tw: TownWeather; t: (en: string, ja: string)
         </div>
       </div>
 
-      <div className="px-4 py-3">
-        <p className="text-xs font-semibold text-muted-foreground mb-2">
-          {t(weatherLabel(tw.weatherCode), weatherLabelJa(tw.weatherCode))} · Wind {tw.wind} km/h
+      <div className="px-4 pt-3 pb-1">
+        <p className="text-xs font-medium text-muted-foreground mb-2">
+          {t(weatherLabel(tw.weatherCode), weatherLabel(tw.weatherCode, true))} · {t("Wind", "風速")} {tw.wind} km/h
         </p>
-        <div className="grid grid-cols-3 gap-2">
+      </div>
+
+      <div className="px-4 pb-4">
+        <p className="text-[10px] font-bold uppercase text-muted-foreground mb-2">
+          {t("7-Day Forecast", "7日間予報")}
+        </p>
+        <div className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1 snap-x">
           {tw.forecast.map((day) => (
-            <div key={day.date} className="bg-slate-50 rounded-xl p-2 text-center">
-              <p className="text-[10px] font-bold text-muted-foreground">{day.dayLabel}</p>
+            <div key={day.date} className="flex-shrink-0 w-[72px] snap-start bg-slate-50 rounded-xl p-2 text-center">
+              <p className="text-[10px] font-bold text-muted-foreground truncate">{day.dayLabel}</p>
               <p className="text-base my-0.5">{weatherEmoji(day.weatherCode)}</p>
-              <p className="text-xs font-bold text-slate-800">{day.tempMin}° / {day.tempMax}°</p>
+              <p className="text-xs font-bold text-slate-800 leading-tight">{day.tempMin}° / {day.tempMax}°</p>
               {day.snowfall > 0 && (
                 <p className="text-[10px] font-bold text-blue-600 mt-0.5">❄️ {day.snowfall}cm</p>
               )}
@@ -188,7 +186,7 @@ function TownCard({ tw, t, idx }: { tw: TownWeather; t: (en: string, ja: string)
                 <p className="text-[10px] font-bold text-sky-500 mt-0.5">🌧 {day.rain}mm</p>
               )}
               {day.precipitation === 0 && (
-                <p className="text-[10px] text-muted-foreground mt-0.5">Dry</p>
+                <p className="text-[10px] text-slate-400 mt-0.5">{t("Dry", "乾燥")}</p>
               )}
             </div>
           ))}
@@ -197,6 +195,10 @@ function TownCard({ tw, t, idx }: { tw: TownWeather; t: (en: string, ja: string)
     </motion.div>
   );
 }
+
+// Windy embed centred on Yamanouchi / Shiga Kogen plateau — no API key required for the map embed
+const WINDY_RADAR_URL =
+  "https://embed.windy.com/embed2.html?lat=36.77&lon=138.45&detailLat=36.77&detailLon=138.45&zoom=9&level=surface&overlay=rain&product=radar&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1";
 
 export default function Outlook() {
   const { t } = useLanguage();
@@ -215,22 +217,52 @@ export default function Outlook() {
   if (error || !data) return <ErrorScreen message={(error as any)?.message || "Network error"} />;
 
   const updated = new Date(data.updatedAt);
-  const timeStr = updated.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Tokyo" });
+  const timeStr = updated.toLocaleTimeString("en-US", {
+    hour: "2-digit", minute: "2-digit", timeZone: "Asia/Tokyo",
+  });
 
   return (
     <div className="p-4 md:p-8 max-w-4xl mx-auto pb-24">
-      <div className="mb-6">
+
+      <div className="mb-5">
         <h1 className="text-3xl md:text-4xl font-black text-mountain-dark">
           {t("Weather Outlook", "天気予報")}
         </h1>
         <p className="text-muted-foreground mt-1 text-sm">
-          {t("Mountains & base area · 3-day JMA forecast", "山岳・麓エリア · 3日間 気象庁予報")}
+          {t("7-day JMA forecast · Mountains & base area", "7日間 気象庁予報 · 山岳・麓エリア")}
         </p>
         <p className="text-xs font-bold text-primary mt-1.5 uppercase tracking-wide">
           {t(`Updated ${timeStr} JST`, `更新 ${timeStr} JST`)}
         </p>
       </div>
 
+      {/* RADAR */}
+      <motion.section
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mb-8"
+      >
+        <div className="flex items-center gap-2 mb-3">
+          <Radar className="w-4 h-4 text-primary" />
+          <h2 className="text-base font-bold text-slate-700 uppercase tracking-wide">
+            {t("Live Precipitation Radar", "降水レーダー（リアルタイム）")}
+          </h2>
+        </div>
+        <div className="rounded-2xl overflow-hidden border border-border shadow-sm" style={{ height: 320 }}>
+          <iframe
+            src={WINDY_RADAR_URL}
+            title="Precipitation Radar — Yamanouchi / Shiga Kogen"
+            className="w-full h-full border-0"
+            allowFullScreen
+            loading="lazy"
+          />
+        </div>
+        <p className="text-[10px] text-muted-foreground mt-1.5 text-right">
+          {t("Powered by Windy · JMA radar data", "Windy提供 · 気象庁レーダーデータ")}
+        </p>
+      </motion.section>
+
+      {/* MOUNTAIN SNOW FORECAST */}
       <section className="mb-8">
         <div className="flex items-center gap-2 mb-3">
           <Mountain className="w-4 h-4 text-slate-600" />
@@ -245,7 +277,8 @@ export default function Outlook() {
         </div>
       </section>
 
-      <section>
+      {/* TOWN & BASE AREA */}
+      <section className="mb-8">
         <div className="flex items-center gap-2 mb-3">
           <MapPin className="w-4 h-4 text-sky-500" />
           <h2 className="text-base font-bold text-slate-700 uppercase tracking-wide">
@@ -254,8 +287,8 @@ export default function Outlook() {
         </div>
         <p className="text-xs text-muted-foreground mb-3">
           {t(
-            "General weather for Yamanouchi Town and Nakano — ideal for planning travel, dining, and non-ski activities.",
-            "山ノ内町・中野市の一般的な天気情報です。移動・食事・観光など、スキー以外の計画にご活用ください。"
+            "General weather for Yamanouchi Town and Nakano — ideal for travel, dining, and non-ski planning.",
+            "山ノ内町・中野市の一般的な天気情報です。移動・食事・観光などにご活用ください。"
           )}
         </p>
         <div className="space-y-4">
@@ -265,12 +298,13 @@ export default function Outlook() {
         </div>
       </section>
 
-      <div className="mt-8 rounded-xl border border-border bg-muted/40 px-4 py-3">
+      {/* DISCLAIMER */}
+      <div className="rounded-xl border border-border bg-muted/40 px-4 py-3">
         <p className="text-[11px] leading-relaxed text-muted-foreground">
           <span className="font-semibold text-foreground/60">{t("Data Source", "データソース")}: </span>
           {t(
-            "Forecasts sourced from Japan Meteorological Agency (JMA) numerical weather models via Open-Meteo. Updated every 10 minutes. For accuracy always check with local authorities before travel.",
-            "予報データは、Open-Meteo経由の気象庁（JMA）数値予報モデルを使用しています。10分ごとに更新。移動前は必ず地元当局の情報もご確認ください。"
+            "Forecasts from Japan Meteorological Agency (JMA) numerical models via Open-Meteo. Radar from Windy / JMA. Updated every 10 minutes. JMA model accuracy is highest within 5 days — treat days 6–7 as indicative only.",
+            "予報データはOpen-Meteo経由の気象庁（JMA）数値予報モデルを使用。レーダーはWindy / 気象庁提供。10分ごとに更新。JMAモデルの精度は5日以内が最も高く、6〜7日目は参考値としてご利用ください。"
           )}
         </p>
       </div>

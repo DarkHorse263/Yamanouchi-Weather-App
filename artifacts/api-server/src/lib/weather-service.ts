@@ -126,7 +126,7 @@ async function fetchMountainOutlook(coord: typeof MOUNTAIN_OUTLOOK_COORDS[0]): P
     hourly: "snowfall",
     daily: "snowfall_sum,temperature_2m_max,temperature_2m_min,weather_code,rain_sum",
     timezone: "Asia/Tokyo",
-    forecast_days: "3",
+    forecast_days: "7",
     past_hours: "24",
     models: "jma_seamless",
   });
@@ -176,7 +176,7 @@ async function fetchTownWeather(coord: typeof TOWN_COORDS[0]): Promise<TownWeath
     current: "temperature_2m,wind_speed_10m,weather_code,precipitation",
     daily: "temperature_2m_max,temperature_2m_min,precipitation_sum,snowfall_sum,rain_sum,weather_code",
     timezone: "Asia/Tokyo",
-    forecast_days: "3",
+    forecast_days: "7",
     models: "jma_seamless",
   });
 
