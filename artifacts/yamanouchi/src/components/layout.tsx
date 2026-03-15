@@ -7,17 +7,19 @@ import {
   CloudSnow,
   BookOpen,
   Video,
+  Bus,
 } from "lucide-react";
 import { useLanguage } from "@/hooks/use-language";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
-  { path: "/",        icon: Home,         label: "Home",    labelJa: "ホーム" },
-  { path: "/resorts", icon: MountainSnow, label: "Resorts", labelJa: "スキー場" },
-  { path: "/map",     icon: MapIcon,      label: "Map",     labelJa: "マップ" },
-  { path: "/outlook", icon: CloudSnow,    label: "Outlook", labelJa: "予報" },
-  { path: "/cams",    icon: Video,        label: "Cams",    labelJa: "カメラ" },
-  { path: "/guide",   icon: BookOpen,     label: "Guide",   labelJa: "ガイド" },
+  { path: "/",           icon: Home,         label: "Home",      labelJa: "ホーム" },
+  { path: "/resorts",    icon: MountainSnow, label: "Resorts",   labelJa: "スキー場" },
+  { path: "/map",        icon: MapIcon,      label: "Map",       labelJa: "マップ" },
+  { path: "/outlook",    icon: CloudSnow,    label: "Outlook",   labelJa: "予報" },
+  { path: "/cams",       icon: Video,        label: "Cams",      labelJa: "カメラ" },
+  { path: "/transport",  icon: Bus,          label: "Transport", labelJa: "交通" },
+  { path: "/guide",      icon: BookOpen,     label: "Guide",     labelJa: "ガイド" },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -115,9 +117,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </AnimatePresence>
       </main>
 
-      {/* Mobile Bottom Nav — 5 tabs */}
+      {/* Mobile Bottom Nav — 7 tabs */}
       <nav className="md:hidden fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-xl border-t border-border/60 pb-safe z-40">
-        <div className="flex justify-around items-center px-2 h-16">
+        <div className="flex justify-around items-center px-1 h-14">
           {NAV_ITEMS.map((item) => {
             const active = isActive(item.path);
             const Icon = item.icon;
@@ -126,18 +128,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 key={item.path}
                 href={item.path}
                 className={cn(
-                  "flex flex-col items-center justify-center flex-1 h-full gap-1 transition-all duration-200",
+                  "flex flex-col items-center justify-center flex-1 h-full gap-0.5 transition-all duration-200",
                   active ? "text-primary" : "text-muted-foreground"
                 )}
               >
                 <div className={cn(
-                  "p-1.5 rounded-xl transition-all duration-200",
+                  "p-1 rounded-lg transition-all duration-200",
                   active ? "bg-primary/10" : ""
                 )}>
-                  <Icon className={cn("w-5 h-5", active ? "" : "opacity-60")} />
+                  <Icon className={cn("w-4 h-4", active ? "" : "opacity-60")} />
                 </div>
                 <span className={cn(
-                  "text-[10px] font-bold tracking-tight leading-none",
+                  "text-[9px] font-bold tracking-tight leading-none",
                   active ? "text-primary" : "text-muted-foreground"
                 )}>
                   {t(item.label, item.labelJa)}

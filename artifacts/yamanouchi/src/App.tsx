@@ -13,6 +13,7 @@ import Outlook from "@/pages/outlook";
 import Alerts from "@/pages/alerts";
 import Guide from "@/pages/guide";
 import Cams from "@/pages/cams";
+import Transport from "@/pages/transport";
 import Stay from "@/pages/stay";
 import Eat from "@/pages/eat";
 import Explore from "@/pages/explore";
@@ -41,6 +42,7 @@ function Router() {
       <Route path="/alerts" component={Alerts} />
       <Route path="/guide" component={Guide} />
       <Route path="/cams" component={Cams} />
+      <Route path="/transport" component={Transport} />
       <Route path="/stay" component={Stay} />
       <Route path="/eat" component={Eat} />
       <Route path="/explore" component={Explore} />
