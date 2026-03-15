@@ -128,6 +128,9 @@ export default function Home() {
             <p className="text-white/70 text-sm font-medium">
               {t("Gateway to the Mountains", "山々への玄関口")}
             </p>
+            <p className="text-white/45 text-xs font-medium mt-0.5">
+              Shiga Kogen · Ryuoo · Yomase
+            </p>
           </div>
           <div className="flex items-end justify-between mt-8">
             <div className="text-white">
