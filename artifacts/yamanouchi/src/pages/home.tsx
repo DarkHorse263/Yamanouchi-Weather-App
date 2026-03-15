@@ -123,10 +123,10 @@ export default function Home() {
               </span>
             </div>
             <h1 className="text-4xl font-black text-white tracking-tight leading-none mb-1.5">
-              {t("Yamanouchi", "山ノ内")}
+              {t("Yamanouchi Town", "山ノ内町")}
             </h1>
             <p className="text-white/70 text-sm font-medium">
-              Shiga Kogen · Ryuoo · Yomase
+              {t("Gateway to the Mountains", "山々への玄関口")}
             </p>
           </div>
           <div className="flex items-end justify-between mt-8">
