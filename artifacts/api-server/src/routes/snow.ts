@@ -144,6 +144,7 @@ function buildDashboardFromResorts(resorts: ReturnType<typeof mapResortRow>[]) {
   const nextUpdateStr = nextUpdateJst.toLocaleTimeString("en-US", { ...fmtOpts, timeZone: "UTC" });
 
   const bestResort = [...resorts].sort((a, b) => (b.baseDepth ?? 0) - (a.baseDepth ?? 0))[0] || resorts[0];
+  const topSnowResort = [...resorts].sort((a, b) => (b.snow24h ?? 0) - (a.snow24h ?? 0))[0] || resorts[0];
 
   const regionGroups = [
     { name: "Shiga Kogen", nameJa: "志賀高原" },
@@ -170,6 +171,7 @@ function buildDashboardFromResorts(resorts: ReturnType<typeof mapResortRow>[]) {
     topSnow24h: maxArr(snows),
     bestBase: maxArr(bases),
     bestResort,
+    topSnowResort,
     regions: regionGroups,
   };
 }

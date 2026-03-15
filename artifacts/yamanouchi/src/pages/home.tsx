@@ -7,6 +7,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import { useEffect, useState } from "react";
 
+function shortName(name: string): string {
+  return name
+    .replace(/^Shiga Kogen\s+/i, "")
+    .replace(/\s+(Ski Area|Ski Park|Onsen Ski Area|Ski Resort)$/i, "")
+    .trim();
+}
+
 const HERO_SLIDES = [
   { src: "hero-slide-1.jpg", label: "Shiga Kogen" },
   { src: "hero-slide-2.jpg", label: "Fresh Tracks" },
@@ -143,17 +150,22 @@ export default function Home() {
       >
         <div className="grid grid-cols-4 divide-x divide-white/10">
           {[
-            { label: t("Avg Temp", "平均気温"),       value: data.avgTemp !== null ? `${data.avgTemp}°` : "—",        sub: "°C",  color: "text-sky-300" },
-            { label: t("Avg Wind", "平均風速"),        value: data.avgWind !== null ? `${data.avgWind}` : "—",         sub: "km/h", color: "text-slate-300" },
-            { label: t("New Snow", "新雪 24h"),        value: data.topSnow24h !== null ? `${data.topSnow24h}` : "—",   sub: "cm",   color: "text-blue-300" },
-            { label: t("Best Base", "最大積雪"),       value: data.bestBase !== null ? `${data.bestBase}` : "—",       sub: "cm",   color: "text-indigo-300" },
-          ].map(({ label, value, sub, color }) => (
-            <div key={label} className="px-3 py-4 text-center">
-              <p className="text-[9px] font-bold uppercase tracking-wider text-white/40 mb-1.5 leading-tight">{label}</p>
+            { label: t("Avg Temp", "平均気温"),  value: data.avgTemp !== null ? `${data.avgTemp}°` : "—",       sub: "°C",   color: "text-sky-300",    resort: null },
+            { label: t("Avg Wind", "平均風速"),   value: data.avgWind !== null ? `${data.avgWind}` : "—",        sub: "km/h", color: "text-slate-300",  resort: null },
+            { label: t("New Snow", "新雪 24h"),   value: data.topSnow24h !== null ? `${data.topSnow24h}` : "—", sub: "cm",   color: "text-blue-300",   resort: data.topSnowResort },
+            { label: t("Best Base", "最大積雪"),  value: data.bestBase !== null ? `${data.bestBase}` : "—",      sub: "cm",   color: "text-indigo-300", resort: data.bestResort },
+          ].map(({ label, value, sub, color, resort }) => (
+            <div key={label} className="px-2 py-3 text-center flex flex-col items-center justify-center">
+              <p className="text-[9px] font-bold uppercase tracking-wider text-white/40 mb-1 leading-tight">{label}</p>
               <p className={`text-xl font-black leading-none ${color}`}>
                 {value}
                 <span className="text-xs font-medium text-white/30 ml-0.5">{sub}</span>
               </p>
+              {resort && (
+                <p className="text-[8px] font-semibold text-white/30 mt-1 leading-tight truncate w-full px-0.5">
+                  {t(shortName(resort.name), shortName(resort.nameJa ?? resort.name))}
+                </p>
+              )}
             </div>
           ))}
         </div>
