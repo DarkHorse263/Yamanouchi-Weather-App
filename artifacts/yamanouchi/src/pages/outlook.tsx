@@ -206,8 +206,9 @@ function TownCard({ tw, t, idx }: { tw: TownWeather; t: (en: string, ja: string)
 const BASE_WINDY = "https://embed.windy.com/embed2.html?lat=36.77&lon=138.45&detailLat=36.77&detailLon=138.45&zoom=9&level=surface&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1";
 
 const WINDY_LAYERS = [
-  { key: "radar",     label: "Weather Radar",  labelJa: "気象レーダー",  url: `${BASE_WINDY}&overlay=radar` },
-  { key: "snowcover", label: "Snow Cover",     labelJa: "積雪状況",      url: `${BASE_WINDY}&overlay=snowcover` },
+  { key: "radar",    label: "Live Radar",      labelJa: "降水レーダー",  url: `${BASE_WINDY}&overlay=radar` },
+  { key: "snowAccu", label: "Snow Forecast",   labelJa: "降雪予報",      url: `${BASE_WINDY}&overlay=snowAccu` },
+  { key: "pressure", label: "Storm Systems",   labelJa: "気圧配置",      url: `${BASE_WINDY}&overlay=pressure` },
 ];
 
 export default function Outlook() {
@@ -287,7 +288,10 @@ export default function Outlook() {
           />
         </div>
         <p className="text-[10px] text-muted-foreground mt-1.5 text-right">
-          {t("Powered by Windy · JMA data", "Windy提供 · 気象庁データ")}
+          {radarLayer.key === "radar"    && t("Live precipitation — rain & snow falling right now", "現在の降水状況（雨・雪）")}
+          {radarLayer.key === "snowAccu" && t("Forecast snow accumulation — total expected snowfall over coming days", "今後数日間の予想積雪量")}
+          {radarLayer.key === "pressure" && t("Atmospheric pressure — low pressure systems bring storms & snowfall", "気圧配置 — 低気圧の接近で降雪の可能性")}
+          {" · "}{t("Powered by Windy · JMA data", "Windy提供 · 気象庁データ")}
         </p>
       </motion.section>
 
