@@ -14,31 +14,41 @@ L.Icon.Default.mergeOptions({
 });
 
 const LEVEL_COLORS: Record<string, string> = {
-  heavy: '#E11D48',
+  heavy:    '#E11D48',
   moderate: '#F59E0B',
-  light: '#3B82F6',
-  none: '#94A3B8',
+  light:    '#3B82F6',
+  none:     '#94A3B8',
 };
 
-const createCustomIcon = (level: string, isTop: boolean, count?: number) => {
-  const color = LEVEL_COLORS[level] ?? LEVEL_COLORS.none;
-  const size = count && count > 1 ? 40 : 28;
-  const svg = count && count > 1 ? `
-    <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 40 40">
-      <circle cx="20" cy="20" r="18" fill="${color}" stroke="white" stroke-width="3"/>
-      <text x="20" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="white" font-family="sans-serif">${count}</text>
-    </svg>` : `
-    <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 28 36">
-      <path d="M14 0C8.477 0 4 4.477 4 10c0 7.5 10 22 10 22S24 17.5 24 10c0-5.523-4.477-10-10-10z" fill="${color}" stroke="white" stroke-width="2"/>
-      <circle cx="14" cy="10" r="4" fill="white"/>
-      ${isTop ? '<circle cx="22" cy="4" r="5" fill="#FBBF24" stroke="white" stroke-width="1.5"/>' : ''}
+const REGION_COLORS: Record<string, string> = {
+  'Shiga Kogen': '#6366F1',
+  'Ryuoo':       '#0EA5E9',
+  'Yomase':      '#10B981',
+};
+
+// Bounding boxes to zoom to when a region pill is tapped
+const REGION_BOUNDS: Record<string, [[number, number], [number, number]]> = {
+  'Shiga Kogen': [[36.780, 138.490], [36.825, 138.540]],
+  'Ryuoo':       [[36.770, 138.475], [36.800, 138.510]],
+  'Yomase':      [[36.775, 138.415], [36.810, 138.455]],
+};
+
+const createResortIcon = (snowLevel: string, regionColor: string, isTop: boolean) => {
+  const snowColor = LEVEL_COLORS[snowLevel] ?? LEVEL_COLORS.none;
+  const size = 26;
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size + 8}" viewBox="0 0 26 34">
+      <path d="M13 0C7.477 0 3 4.477 3 10c0 7.5 10 22 10 22S23 17.5 23 10C23 4.477 18.523 0 13 0z"
+        fill="${regionColor}" stroke="white" stroke-width="2"/>
+      <circle cx="13" cy="10" r="5" fill="${snowColor}" stroke="white" stroke-width="1.5"/>
+      ${isTop ? '<circle cx="21" cy="3" r="4.5" fill="#FBBF24" stroke="white" stroke-width="1.5"/>' : ''}
     </svg>`;
   return L.divIcon({
     html: svg,
     className: 'custom-leaflet-marker',
-    iconSize: [size, size],
-    iconAnchor: [size / 2, size],
-    popupAnchor: [0, -size]
+    iconSize:   [size, size + 8],
+    iconAnchor: [size / 2, size + 8],
+    popupAnchor: [0, -(size + 8)],
   });
 };
 
@@ -48,33 +58,19 @@ type MapMarker = {
   baseDepth: number | null; rank: number | null; snowLevel: string;
 };
 
-type RegionGroup = {
-  region: string; lat: number; lng: number;
-  markers: MapMarker[]; topSnow: number; level: string;
-};
-
-// Region center points — used as cluster anchor
-const REGION_CENTERS: Record<string, [number, number]> = {
-  'Shiga Kogen': [36.800, 138.510],
-  'Ryuoo':       [36.779, 138.474],
-  'Yomase':      [36.789, 138.411],
-};
-
-// ---- Auto-fit controller ----
-// Fits the Leaflet map to the given lat/lng points with padding, whenever `points` changes.
-function FitBoundsController({ points }: { points: [number, number][] }) {
+// Fits the map to given bounds whenever `target` changes
+function FitBoundsController({ target }: { target: [[number, number], [number, number]] | [number, number][] | null }) {
   const map = useMap();
   const prevKey = useRef("");
 
   useEffect(() => {
-    if (points.length === 0) return;
-    const key = points.map(p => p.join(",")).join("|");
+    if (!target) return;
+    const key = JSON.stringify(target);
     if (key === prevKey.current) return;
     prevKey.current = key;
-
-    const bounds = L.latLngBounds(points);
+    const bounds = L.latLngBounds(target as [number, number][]);
     map.fitBounds(bounds, { padding: [56, 56], maxZoom: 14 });
-  }, [points, map]);
+  }, [target, map]);
 
   return null;
 }
@@ -82,39 +78,36 @@ function FitBoundsController({ points }: { points: [number, number][] }) {
 export default function MapView() {
   const { t } = useLanguage();
   const { data: markers, isLoading, error } = useGetMapData({ query: { refetchInterval: 1800000 } });
-  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
+  const [zoomTarget, setZoomTarget] = useState<[[number, number], [number, number]] | [number, number][] | null>(null);
+  const [activeRegion, setActiveRegion] = useState<string | null>(null);
 
   if (isLoading) return <LoadingScreen />;
-  if (error) return <ErrorScreen message={(error as any)?.message || "Network error"} />;
+  if (error)    return <ErrorScreen message={(error as any)?.message || "Network error"} />;
   if (!markers) return null;
 
-  const regionGroups: RegionGroup[] = Object.entries(
-    (markers as MapMarker[]).reduce((acc, m) => {
-      if (!acc[m.region]) acc[m.region] = [];
-      acc[m.region].push(m);
-      return acc;
-    }, {} as Record<string, MapMarker[]>)
-  ).map(([region, resorts]) => {
-    const center = REGION_CENTERS[region] ?? [resorts[0].lat, resorts[0].lng];
-    const topSnow = Math.max(...resorts.map(r => r.snow24h ?? 0));
-    const level = topSnow > 15 ? 'heavy' : topSnow > 5 ? 'moderate' : topSnow > 0 ? 'light' : 'none';
-    return { region, lat: center[0], lng: center[1], markers: resorts, topSnow, level };
-  });
+  const allMarkers = markers as MapMarker[];
 
-  const selectedMarkers = selectedRegion
-    ? (markers as MapMarker[]).filter(m => m.region === selectedRegion)
-    : null;
+  // Initial fit — all resorts
+  const allPoints: [number, number][] = allMarkers.map(m => [m.lat, m.lng]);
+  const fitTarget = zoomTarget ?? allPoints;
 
-  // Points to fit: all region centres in overview, selected resort pins when drilled in
-  const fitPoints: [number, number][] = selectedMarkers
-    ? selectedMarkers.map(m => [m.lat, m.lng] as [number, number])
-    : regionGroups.map(g => [g.lat, g.lng] as [number, number]);
+  const regions = ['Shiga Kogen', 'Ryuoo', 'Yomase'];
+
+  function handleRegionPill(region: string) {
+    if (activeRegion === region) {
+      setActiveRegion(null);
+      setZoomTarget(allPoints);
+    } else {
+      setActiveRegion(region);
+      setZoomTarget(REGION_BOUNDS[region]);
+    }
+  }
 
   return (
     <div className="relative w-full h-[calc(100vh-4rem)] md:h-screen">
       <MapContainer
-        center={[36.760, 138.420]}
-        zoom={10}
+        center={[36.790, 138.480]}
+        zoom={11}
         className="w-full h-full z-0"
         zoomControl={false}
       >
@@ -123,54 +116,29 @@ export default function MapView() {
           url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
         />
 
-        <FitBoundsController points={fitPoints} />
+        <FitBoundsController target={fitTarget} />
 
-        {/* Region cluster markers */}
-        {!selectedRegion && regionGroups.map((group) => (
-          <Marker
-            key={group.region}
-            position={[group.lat, group.lng]}
-            icon={createCustomIcon(group.level, false, group.markers.length)}
-            eventHandlers={{ click: () => setSelectedRegion(group.region) }}
-          >
-            <Popup>
-              <div className="p-3 min-w-[200px]">
-                <h3 className="font-bold text-lg mb-1">{group.region}</h3>
-                <p className="text-xs text-gray-500 mb-2">{group.markers.length} {t("resorts", "スキー場")}</p>
-                <div className="grid grid-cols-2 gap-2 mb-3">
-                  <div className="bg-blue-50 p-2 rounded text-center">
-                    <div className="text-xs text-blue-500 font-bold">{t("New Snow 24h", "24h降雪")}</div>
-                    <div className="text-sm font-black text-blue-700">{group.topSnow} cm</div>
-                  </div>
-                  <div className="bg-indigo-50 p-2 rounded text-center">
-                    <div className="text-xs text-indigo-500 font-bold">{t("Resorts", "スキー場数")}</div>
-                    <div className="text-sm font-black text-indigo-700">{group.markers.length}</div>
-                  </div>
-                </div>
-                <button
-                  onClick={() => setSelectedRegion(group.region)}
-                  className="w-full text-xs bg-primary text-white rounded-lg py-1.5 font-bold"
-                >
-                  {t("View resorts", "スキー場を表示")}
-                </button>
-              </div>
-            </Popup>
-          </Marker>
-        ))}
-
-        {/* Individual resort markers */}
-        {selectedMarkers && selectedMarkers.map((marker) => (
+        {allMarkers.map((marker) => (
           <Marker
             key={marker.id}
             position={[marker.lat, marker.lng]}
-            icon={createCustomIcon(marker.snowLevel, marker.rank === 1)}
+            icon={createResortIcon(
+              marker.snowLevel,
+              REGION_COLORS[marker.region] ?? '#6366F1',
+              marker.rank === 1,
+            )}
           >
             <Popup>
               <div className="p-3 min-w-[180px]">
-                <h3 className="font-bold text-base text-gray-800 leading-tight mb-1">
-                  {t(marker.name, marker.nameJa)}{marker.rank === 1 ? " 🥇" : ""}
+                <p className="text-[10px] font-bold uppercase tracking-wide mb-0.5"
+                   style={{ color: REGION_COLORS[marker.region] }}>
+                  {marker.region}
+                </p>
+                <h3 className="font-bold text-base text-gray-800 leading-tight mb-2">
+                  {t(marker.name, marker.nameJa ?? marker.name)}
+                  {marker.rank === 1 ? " 🥇" : ""}
                 </h3>
-                <div className="grid grid-cols-2 gap-1.5 mt-2">
+                <div className="grid grid-cols-2 gap-1.5">
                   <div className="bg-blue-50 p-1.5 rounded text-center">
                     <div className="text-[9px] text-blue-500 font-bold uppercase">{t("24h Snow", "24h降雪")}</div>
                     <div className="text-sm font-black text-blue-700">{marker.snow24h ?? 0} cm</div>
@@ -186,27 +154,22 @@ export default function MapView() {
         ))}
       </MapContainer>
 
-      {/* Region filter pills */}
+      {/* Region zoom pills */}
       <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
-        {selectedRegion ? (
+        {regions.map(region => (
           <button
-            onClick={() => setSelectedRegion(null)}
-            className="bg-white/95 backdrop-blur shadow-lg border border-white/50 text-xs font-bold px-3 py-2 rounded-full text-primary flex items-center gap-1"
+            key={region}
+            onClick={() => handleRegionPill(region)}
+            className={`backdrop-blur shadow-lg border text-xs font-bold px-3 py-2 rounded-full flex items-center gap-1.5 transition-all ${
+              activeRegion === region
+                ? "bg-slate-800 text-white border-slate-700"
+                : "bg-white/95 border-white/50 text-gray-700"
+            }`}
           >
-            ← {t("All Regions", "全エリア")}
+            <span className="w-2 h-2 rounded-full" style={{ background: REGION_COLORS[region] }} />
+            {region}
           </button>
-        ) : (
-          regionGroups.map(g => (
-            <button
-              key={g.region}
-              onClick={() => setSelectedRegion(g.region)}
-              className="bg-white/95 backdrop-blur shadow-lg border border-white/50 text-xs font-bold px-3 py-2 rounded-full text-gray-700 flex items-center gap-1.5"
-            >
-              <span className="w-2 h-2 rounded-full" style={{ background: LEVEL_COLORS[g.level] }} />
-              {g.region}
-            </button>
-          ))
-        )}
+        ))}
       </div>
 
       {/* Legend */}
@@ -220,14 +183,20 @@ export default function MapView() {
           <div className="flex items-center gap-2"><span className="w-3 h-3 rounded-full bg-blue-500" /> {t("<5cm Light", "<5cm 小雪")}</div>
           <div className="flex items-center gap-2"><span className="w-3 h-3 rounded-full bg-slate-400" /> {t("None", "なし")}</div>
         </div>
+        <div className="mt-2.5 pt-2 border-t border-slate-200 space-y-1.5 text-xs font-medium">
+          {regions.map(r => (
+            <div key={r} className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full" style={{ background: REGION_COLORS[r] }} />
+              {r}
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* Tap hint */}
-      {!selectedRegion && (
-        <div className="absolute bottom-20 md:bottom-4 right-4 z-20 bg-primary/90 text-white text-xs font-bold px-3 py-2 rounded-xl shadow-lg">
-          {t("Tap region to zoom in", "エリアをタップして拡大")}
-        </div>
-      )}
+      {/* Hint */}
+      <div className="absolute bottom-20 md:bottom-4 right-4 z-20 bg-primary/90 text-white text-xs font-bold px-3 py-2 rounded-xl shadow-lg">
+        {t("Tap marker for details", "マーカーをタップ")}
+      </div>
     </div>
   );
 }
