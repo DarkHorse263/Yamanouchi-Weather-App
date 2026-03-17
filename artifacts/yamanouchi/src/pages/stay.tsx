@@ -9,18 +9,17 @@ import { bookingSearchUrl, bookingRegionUrl, bookingGeneralUrl } from "@/lib/boo
 type LocationTab = "mountain" | "town";
 type FilterType = "all" | "hotel" | "ryokan" | "guesthouse";
 
-const ON_MOUNTAIN = ["Shiga Kogen", "Ryuoo"];
+const ON_MOUNTAIN = ["Shiga Kogen", "Ryuoo", "Yomase"];
 
 const MOUNTAIN_AREAS = [
-  { region: "Shiga Kogen", label: "Shiga Kogen", labelJa: "志賀高原", desc: "21 linked ski areas", descJa: "21スキー場連結", url: "https://www.shigakogen.co.jp/english/" },
+  { region: "Shiga Kogen", label: "Shiga Kogen", labelJa: "志賀高原", desc: "21 linked ski areas · ~100 hotels", descJa: "21スキー場連結 · 約100軒", url: "https://www.shigakogen.co.jp/english/" },
   { region: "Ryuoo", label: "Ryuoo Ski Park", labelJa: "竜王スキーパーク", desc: "Japan's highest gondola", descJa: "日本最高所のゴンドラ", url: "https://www.ryuoo.com/en/" },
+  { region: "Yomase", label: "Yomase Onsen Ski Area", labelJa: "夜間瀬温泉スキー場", desc: "Family ski area with onsen village", descJa: "温泉街のファミリースキー場", url: null },
 ];
 
 const TOWN_AREAS = [
-  { region: "Yudanaka", label: "Yudanaka", labelJa: "湯田中", desc: "Hot spring town & Snow Monkey gateway", descJa: "温泉街・スノーモンキー玄関口", emoji: "♨️" },
-  { region: "Shibu Onsen", label: "Shibu Onsen", labelJa: "渋温泉", desc: "Historic hot spring village", descJa: "歴史ある温泉村", emoji: "🏮" },
-  { region: "Sano", label: "Sano", labelJa: "佐野", desc: "Jigokudani Monkey Park area", descJa: "地獄谷野猿公苑エリア", emoji: "🐒" },
-  { region: "Yomase", label: "Yomase", labelJa: "夜間瀬", desc: "Onsen ski town", descJa: "温泉スキータウン", emoji: "⛷️" },
+  { region: "Yudanaka", label: "Yudanaka Onsen", labelJa: "湯田中温泉", desc: "Hot spring town & Snow Monkey gateway", descJa: "温泉街・スノーモンキー玄関口", emoji: "♨️" },
+  { region: "Shibu Onsen", label: "Shibu Onsen", labelJa: "渋温泉", desc: "Historic hot spring village · ~30 ryokan", descJa: "歴史ある温泉村 · 約30軒の旅館", emoji: "🏮" },
 ];
 
 const TYPE_EMOJI: Record<string, string> = { hotel: "🏨", ryokan: "🏯", guesthouse: "🏠" };
