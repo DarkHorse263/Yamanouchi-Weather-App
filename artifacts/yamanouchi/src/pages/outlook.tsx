@@ -3,7 +3,10 @@ import { useLanguage } from "@/hooks/use-language";
 import { LoadingScreen, ErrorScreen } from "@/components/ui-elements";
 import { motion } from "framer-motion";
 import { Mountain, MapPin, Radar } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
 
 interface ForecastDay {
   date: string;
@@ -43,9 +46,19 @@ interface WeatherOutlook {
   updatedAt: string;
 }
 
+// Returns current JST timestamp rounded to 5-minute interval, formatted YYYYMMDDHHMMSS
+function jmaTimestamp(): string {
+  const now = new Date();
+  const jst = new Date(now.getTime() + 9 * 60 * 60 * 1000);
+  const min = Math.floor(jst.getUTCMinutes() / 5) * 5;
+  jst.setUTCMinutes(min, 0, 0);
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${jst.getUTCFullYear()}${pad(jst.getUTCMonth() + 1)}${pad(jst.getUTCDate())}${pad(jst.getUTCHours())}${pad(min)}00`;
+}
+
 function weatherEmoji(code: number): string {
   if (code === 0) return "☀️";
-  if (code <= 2) return "⛅";
+  if (code <= 2)  return "⛅";
   if (code === 3) return "☁️";
   if (code <= 48) return "🌫️";
   if (code <= 55) return "🌦️";
@@ -78,6 +91,79 @@ function snowBar(snow: number, max: number) {
   return { pct, color };
 }
 
+// Forces Leaflet to invalidate size when container mounts
+function MapResizer() {
+  const map = useMap();
+  useEffect(() => { setTimeout(() => map.invalidateSize(), 150); }, [map]);
+  return null;
+}
+
+type WeatherLayer = "radar" | "satellite";
+
+// JMA (Japan Meteorological Agency) public tile URLs — no API key required
+// Radar: high-resolution precipitation nowcast (hrpns)
+// Satellite: full-disk infrared composite (fd/hrit)
+function jmaRadarUrl(ts: string) {
+  return `https://www.jma.go.jp/bosai/jmatile/data/nowc/${ts}/none/${ts}/surf/hrpns/{z}/{x}/{y}.png`;
+}
+function jmaSatUrl(ts: string) {
+  return `https://www.jma.go.jp/bosai/jmatile/data/sat/${ts}/none/${ts}/surf/hrit/fd/{z}/{x}/{y}.png`;
+}
+
+function WeatherMap({ layer }: { layer: WeatherLayer }) {
+  const [ts, setTs] = useState(jmaTimestamp);
+
+  // Refresh timestamp every 5 minutes so tiles stay current
+  useEffect(() => {
+    const id = setInterval(() => setTs(jmaTimestamp()), 5 * 60 * 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const overlayUrl = layer === "radar" ? jmaRadarUrl(ts) : jmaSatUrl(ts);
+
+  return (
+    <MapContainer
+      center={[36.795, 138.490]}
+      zoom={8}
+      minZoom={5}
+      maxZoom={14}
+      className="w-full h-full z-0"
+      zoomControl={true}
+      scrollWheelZoom={false}
+    >
+      <MapResizer />
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>'
+        url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+      />
+      <TileLayer
+        key={`${layer}-${ts}`}
+        url={overlayUrl}
+        attribution='&copy; <a href="https://www.jma.go.jp/">JMA</a>'
+        opacity={0.75}
+        errorTileUrl=""
+      />
+    </MapContainer>
+  );
+}
+
+const WEATHER_LAYERS: { key: WeatherLayer; label: string; labelJa: string; desc: string; descJa: string }[] = [
+  {
+    key:     "radar",
+    label:   "Live Radar",
+    labelJa: "降水レーダー",
+    desc:    "JMA high-resolution precipitation nowcast — rain & snow falling right now",
+    descJa:  "気象庁高解像度降水ナウキャスト — 現在の降水状況",
+  },
+  {
+    key:     "satellite",
+    label:   "Satellite",
+    labelJa: "気象衛星",
+    desc:    "JMA infrared satellite — track incoming storm clouds & weather fronts",
+    descJa:  "気象庁赤外線衛星 — 接近する雲・前線の確認",
+  },
+];
+
 function MountainCard({ m, t, idx }: { m: MountainOutlook; t: (en: string, ja: string) => string; idx: number }) {
   const maxSnow = Math.max(...m.forecast.map(f => f.snowfall), 1);
   return (
@@ -95,9 +181,7 @@ function MountainCard({ m, t, idx }: { m: MountainOutlook; t: (en: string, ja: s
             <p className="text-slate-400 text-[10px]">{m.elevation}m elevation</p>
           </div>
         </div>
-        <div className="text-right">
-          <span className="text-2xl">{weatherEmoji(m.weatherCode)}</span>
-        </div>
+        <span className="text-2xl">{weatherEmoji(m.weatherCode)}</span>
       </div>
 
       <div className="grid grid-cols-3 divide-x divide-border border-b border-border">
@@ -203,17 +287,9 @@ function TownCard({ tw, t, idx }: { tw: TownWeather; t: (en: string, ja: string)
   );
 }
 
-const BASE_WINDY = "https://embed.windy.com/embed2.html?lat=36.77&lon=138.45&detailLat=36.77&detailLon=138.45&zoom=9&level=surface&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1";
-
-const WINDY_LAYERS = [
-  { key: "radar",    label: "Live Radar",      labelJa: "降水レーダー",  url: `${BASE_WINDY}&overlay=radar` },
-  { key: "snowAccu", label: "Snow Forecast",   labelJa: "降雪予報",      url: `${BASE_WINDY}&overlay=snowAccu` },
-  { key: "pressure", label: "Storm Systems",   labelJa: "気圧配置",      url: `${BASE_WINDY}&overlay=pressure` },
-];
-
 export default function Outlook() {
   const { t } = useLanguage();
-  const [radarLayer, setRadarLayer] = useState(WINDY_LAYERS[0]);
+  const [activeLayer, setActiveLayer] = useState<WeatherLayer>("radar");
 
   const { data, isLoading, error } = useQuery<WeatherOutlook>({
     queryKey: ["weather-outlook"],
@@ -233,6 +309,8 @@ export default function Outlook() {
     hour: "2-digit", minute: "2-digit", timeZone: "Asia/Tokyo",
   });
 
+  const currentLayer = WEATHER_LAYERS.find(l => l.key === activeLayer)!;
+
   return (
     <div className="p-4 md:p-8 max-w-4xl mx-auto pb-24">
 
@@ -248,7 +326,7 @@ export default function Outlook() {
         </p>
       </div>
 
-      {/* RADAR */}
+      {/* WEATHER MAP */}
       <motion.section
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
@@ -258,16 +336,16 @@ export default function Outlook() {
           <div className="flex items-center gap-2">
             <Radar className="w-4 h-4 text-primary" />
             <h2 className="text-base font-bold text-slate-700 uppercase tracking-wide">
-              {t(radarLayer.label, radarLayer.labelJa)}
+              {t(currentLayer.label, currentLayer.labelJa)}
             </h2>
           </div>
           <div className="flex gap-1 bg-secondary rounded-xl p-1">
-            {WINDY_LAYERS.map(layer => (
+            {WEATHER_LAYERS.map(layer => (
               <button
                 key={layer.key}
-                onClick={() => setRadarLayer(layer)}
+                onClick={() => setActiveLayer(layer.key)}
                 className={`text-[11px] font-bold px-2.5 py-1 rounded-lg transition-all ${
-                  radarLayer.key === layer.key
+                  activeLayer === layer.key
                     ? "bg-white text-primary shadow-sm"
                     : "text-muted-foreground hover:text-foreground"
                 }`}
@@ -277,21 +355,14 @@ export default function Outlook() {
             ))}
           </div>
         </div>
+
         <div className="rounded-2xl overflow-hidden border border-border shadow-sm" style={{ height: 320 }}>
-          <iframe
-            key={radarLayer.key}
-            src={radarLayer.url}
-            title={`${radarLayer.label} — Yamanouchi / Shiga Kogen`}
-            className="w-full h-full border-0"
-            allowFullScreen
-            loading="lazy"
-          />
+          <WeatherMap layer={activeLayer} />
         </div>
+
         <p className="text-[10px] text-muted-foreground mt-1.5 text-right">
-          {radarLayer.key === "radar"    && t("Live precipitation — rain & snow falling right now", "現在の降水状況（雨・雪）")}
-          {radarLayer.key === "snowAccu" && t("Forecast snow accumulation — total expected snowfall over coming days", "今後数日間の予想積雪量")}
-          {radarLayer.key === "pressure" && t("Atmospheric pressure — low pressure systems bring storms & snowfall", "気圧配置 — 低気圧の接近で降雪の可能性")}
-          {" · "}{t("Powered by Windy · JMA data", "Windy提供 · 気象庁データ")}
+          {t(currentLayer.desc, currentLayer.descJa)}
+          {" · "}{t("OpenStreetMap · JMA", "OpenStreetMap · 気象庁")}
         </p>
       </motion.section>
 
@@ -336,8 +407,8 @@ export default function Outlook() {
         <p className="text-[11px] leading-relaxed text-muted-foreground">
           <span className="font-semibold text-foreground/60">{t("Data Source", "データソース")}: </span>
           {t(
-            "Forecasts from Japan Meteorological Agency (JMA) numerical models via Open-Meteo. Radar from Windy / JMA. Updated every 10 minutes. JMA model accuracy is highest within 5 days — treat days 6–7 as indicative only.",
-            "予報データはOpen-Meteo経由の気象庁（JMA）数値予報モデルを使用。レーダーはWindy / 気象庁提供。10分ごとに更新。JMAモデルの精度は5日以内が最も高く、6〜7日目は参考値としてご利用ください。"
+            "Forecasts from Japan Meteorological Agency (JMA) via Open-Meteo. Radar & satellite from RainViewer. Map tiles from OpenStreetMap via CARTO. Updated every 10 minutes. JMA model accuracy is highest within 5 days — treat days 6–7 as indicative only.",
+            "予報データはOpen-Meteo経由の気象庁（JMA）数値予報モデルを使用。レーダー・衛星画像はRainViewer提供。地図タイルはCARTO経由のOpenStreetMap。10分ごとに更新。JMAモデルの精度は5日以内が最も高く、6〜7日目は参考値としてご利用ください。"
           )}
         </p>
       </div>
