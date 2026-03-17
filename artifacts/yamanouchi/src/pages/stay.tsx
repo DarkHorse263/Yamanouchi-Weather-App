@@ -1,8 +1,8 @@
 import { useGetAccommodation } from "@workspace/api-client-react";
 import { useLanguage } from "@/hooks/use-language";
-import { Card, Badge, LoadingScreen, ErrorScreen } from "@/components/ui-elements";
+import { LoadingScreen, ErrorScreen } from "@/components/ui-elements";
 import { useState } from "react";
-import { MapPin, Phone, Globe, Bath, CableCar, ExternalLink, Mountain, Search } from "lucide-react";
+import { MapPin, Phone, Bath, CableCar, Mountain, Search, Star, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
 import { bookingSearchUrl, bookingRegionUrl, bookingGeneralUrl } from "@/lib/booking";
 
@@ -23,41 +23,11 @@ const TOWN_AREAS = [
   { region: "Yomase", label: "Yomase", labelJa: "夜間瀬", desc: "Onsen ski town", descJa: "温泉スキータウン", emoji: "⛷️" },
 ];
 
+const TYPE_EMOJI: Record<string, string> = { hotel: "🏨", ryokan: "🏯", guesthouse: "🏠" };
+
 function mapsUrl(lat: number | null, lng: number | null, name: string) {
   if (lat && lng) return `https://maps.google.com/?q=${lat},${lng}`;
   return `https://maps.google.com/?q=${encodeURIComponent(name + " Yamanouchi Nagano Japan")}`;
-}
-
-const ON_MOUNTAIN_REGIONS = ["Shiga Kogen", "Ryuoo"];
-
-const HOTEL_MOUNTAIN_IMGS = ["hotel-ski.png", "hotel-mountain-lodge.png", "chalet-snow.png"];
-const HOTEL_TOWN_IMGS = ["hotel-town.png", "hotel.png"];
-const RYOKAN_MOUNTAIN_IMGS = ["ryokan-exterior.png", "ryokan-room.png"];
-const RYOKAN_TOWN_IMGS = ["ryokan-onsen.png", "ryokan-historic.png"];
-const GUESTHOUSE_MOUNTAIN_IMGS = ["guesthouse-cozy.png", "chalet-snow.png"];
-const GUESTHOUSE_TOWN_IMGS = ["guesthouse-backpacker.png", "guesthouse-cozy.png"];
-
-function nameHash(name: string): number {
-  let h = 0;
-  for (let i = 0; i < name.length; i++) h = ((h << 5) - h + name.charCodeAt(i)) | 0;
-  return Math.abs(h);
-}
-
-function photoSrc(place: { name: string; type: string; region: string; featured?: boolean }, base: string) {
-  const { name, type, region } = place;
-  const isMountain = ON_MOUNTAIN_REGIONS.includes(region);
-  const h = nameHash(name);
-
-  let pool: string[];
-  if (type === "ryokan") {
-    pool = isMountain ? RYOKAN_MOUNTAIN_IMGS : RYOKAN_TOWN_IMGS;
-  } else if (type === "guesthouse") {
-    pool = isMountain ? GUESTHOUSE_MOUNTAIN_IMGS : GUESTHOUSE_TOWN_IMGS;
-  } else {
-    pool = isMountain ? HOTEL_MOUNTAIN_IMGS : HOTEL_TOWN_IMGS;
-  }
-
-  return `${base}images/${pool[h % pool.length]}`;
 }
 
 export default function Stay({ embedded = false }: { embedded?: boolean }) {
@@ -85,12 +55,12 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
   ];
 
   return (
-    <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-6">
+    <div className="p-4 md:p-8 max-w-4xl mx-auto space-y-5 pb-24">
       {!embedded && (
         <>
           <div>
             <h1 className="text-3xl md:text-4xl font-black text-mountain-dark">{t("Where to Stay", "宿泊施設")}</h1>
-            <p className="text-muted-foreground mt-1">{t("Find the perfect basecamp in Yamanouchi", "山ノ内町の完璧なベースキャンプを見つける")}</p>
+            <p className="text-muted-foreground mt-1 text-sm">{t("Accommodation in Yamanouchi · Book via Booking.com", "山ノ内町の宿泊施設 · Booking.comで予約")}</p>
           </div>
 
           <a
@@ -102,7 +72,7 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-bold uppercase tracking-wider text-blue-200">Booking.com</p>
-                <p className="text-lg font-black mt-0.5">{t("Search Hotels in Yamanouchi", "山ノ内町のホテルを検索")}</p>
+                <p className="text-lg font-black mt-0.5">{t("Search All Hotels", "すべてのホテルを検索")}</p>
                 <p className="text-xs text-blue-200 mt-1">{t("Hotels, ryokans & guesthouses · Best price guarantee", "ホテル・旅館・ゲストハウス · 最低価格保証")}</p>
               </div>
               <Search className="w-8 h-8 text-white/80 group-hover:scale-110 transition-transform shrink-0 ml-3" />
@@ -145,34 +115,26 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
 
       {/* ON MOUNTAIN */}
       {tab === "mountain" && (
-        <div className="space-y-8">
+        <div className="space-y-6">
           {MOUNTAIN_AREAS.map(area => {
             const places = mountain.filter(p => p.region === area.region);
             if (places.length === 0) return null;
             return (
               <section key={area.region}>
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center justify-between mb-3">
                   <div>
-                    <h2 className="text-xl font-black text-mountain-dark flex items-center gap-2">
-                      <Mountain className="w-5 h-5 text-primary" />
+                    <h2 className="text-lg font-black text-mountain-dark flex items-center gap-2">
+                      <Mountain className="w-4 h-4 text-primary" />
                       {t(area.label, area.labelJa)}
                     </h2>
-                    <p className="text-sm text-muted-foreground">{t(area.desc, area.descJa)}</p>
+                    <p className="text-xs text-muted-foreground">{t(area.desc, area.descJa)}</p>
                   </div>
-                  <div className="flex items-center gap-3 shrink-0">
-                    <a href={bookingRegionUrl(area.region)} target="_blank" rel="noreferrer"
-                      className="flex items-center gap-1 text-xs font-bold text-blue-600 hover:underline">
-                      <Search className="w-3 h-3" /> Booking.com
-                    </a>
-                    {area.url && (
-                      <a href={area.url} target="_blank" rel="noreferrer"
-                        className="flex items-center gap-1 text-xs font-bold text-primary hover:underline">
-                        <ExternalLink className="w-3 h-3" /> {t("Resort site", "リゾートサイト")}
-                      </a>
-                    )}
-                  </div>
+                  <a href={bookingRegionUrl(area.region)} target="_blank" rel="noreferrer"
+                    className="flex items-center gap-1 text-xs font-bold text-blue-600 hover:underline shrink-0">
+                    <Search className="w-3 h-3" /> {t("Search area", "エリア検索")}
+                  </a>
                 </div>
-                <PlaceGrid places={places} t={t} />
+                <PlaceList places={places} t={t} />
               </section>
             );
           })}
@@ -182,25 +144,25 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
 
       {/* IN TOWN */}
       {tab === "town" && (
-        <div className="space-y-8">
+        <div className="space-y-6">
           {TOWN_AREAS.map(area => {
             const places = town.filter(p => p.region === area.region);
             if (places.length === 0) return null;
             return (
               <section key={area.region}>
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center justify-between mb-3">
                   <div>
-                    <h2 className="text-xl font-black text-mountain-dark">
+                    <h2 className="text-lg font-black text-mountain-dark">
                       {area.emoji} {t(area.label, area.labelJa)}
                     </h2>
-                    <p className="text-sm text-muted-foreground">{t(area.desc, area.descJa)}</p>
+                    <p className="text-xs text-muted-foreground">{t(area.desc, area.descJa)}</p>
                   </div>
                   <a href={bookingRegionUrl(area.region)} target="_blank" rel="noreferrer"
                     className="flex items-center gap-1 text-xs font-bold text-blue-600 hover:underline shrink-0">
-                    <Search className="w-3 h-3" /> Booking.com
+                    <Search className="w-3 h-3" /> {t("Search area", "エリア検索")}
                   </a>
                 </div>
-                <PlaceGrid places={places} t={t} />
+                <PlaceList places={places} t={t} />
               </section>
             );
           })}
@@ -211,79 +173,106 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
   );
 }
 
-function PlaceGrid({ places, t }: { places: any[]; t: (en: string, ja: string | null) => string; }) {
+function PlaceList({ places, t }: { places: any[]; t: (en: string, ja: string | null) => string }) {
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="space-y-2">
       {places.map((place, idx) => (
-        <motion.div key={place.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.05 }}>
-          <Card className="h-full flex flex-col p-0 overflow-hidden group hover:shadow-xl transition-all duration-300">
-            {/* Photo */}
-            <div className="h-44 bg-secondary relative overflow-hidden">
-              <img
-                src={photoSrc(place, import.meta.env.BASE_URL)}
-                alt={place.name}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
-              />
-              {place.featured && (
-                <div className="absolute top-3 left-3 bg-amber-500 text-white text-[10px] font-black uppercase px-2 py-1 rounded-md shadow">
-                  {t("Featured", "おすすめ")}
+        <motion.div
+          key={place.id}
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: idx * 0.04 }}
+        >
+          <a
+            href={bookingSearchUrl(place.name + " Yamanouchi Japan")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block bg-white border border-slate-200 rounded-xl p-3.5 hover:border-blue-300 hover:shadow-md transition-all duration-200 group"
+          >
+            <div className="flex items-start gap-3">
+              {/* Type icon */}
+              <div className="text-2xl mt-0.5 shrink-0">
+                {TYPE_EMOJI[place.type] || "🏨"}
+              </div>
+
+              {/* Details */}
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-0.5">
+                  <h3 className="font-bold text-slate-900 text-sm leading-snug truncate">
+                    {t(place.name, place.nameJa)}
+                  </h3>
+                  {place.featured && (
+                    <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500 shrink-0" />
+                  )}
                 </div>
+
+                <p className="text-xs text-muted-foreground flex items-center gap-1 mb-1.5">
+                  <MapPin className="w-2.5 h-2.5 shrink-0" />
+                  <span className="truncate">{t(place.address || place.region, place.addressJa || place.region)}</span>
+                </p>
+
+                <p className="text-xs text-slate-600 line-clamp-1 mb-2">
+                  {t(place.description, place.descriptionJa)}
+                </p>
+
+                {/* Tags */}
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <span className="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full capitalize">
+                    {t(place.type, null)}
+                  </span>
+                  {place.priceRange && (
+                    <span className="text-[10px] font-black text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">
+                      {place.priceRange}
+                    </span>
+                  )}
+                  {place.onsenAvailable && (
+                    <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full flex items-center gap-0.5">
+                      <Bath className="w-2.5 h-2.5" /> {t("Onsen", "温泉")}
+                    </span>
+                  )}
+                  {place.skiInSkiOut && (
+                    <span className="text-[10px] font-bold text-violet-600 bg-violet-50 px-2 py-0.5 rounded-full flex items-center gap-0.5">
+                      <CableCar className="w-2.5 h-2.5" /> {t("Ski-in/out", "直結")}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Book CTA */}
+              <div className="shrink-0 flex flex-col items-center gap-1 ml-1">
+                <div className="bg-blue-600 text-white text-[10px] font-black px-3 py-1.5 rounded-lg group-hover:bg-blue-700 transition-colors shadow-sm">
+                  {t("Book", "予約")}
+                </div>
+                <span className="text-[8px] text-blue-500 font-bold">Booking.com</span>
+              </div>
+            </div>
+
+            {/* Quick actions row */}
+            <div className="flex items-center gap-3 mt-2.5 pt-2.5 border-t border-slate-100 ml-9">
+              <span
+                onClick={(e) => { e.preventDefault(); window.open(mapsUrl(place.lat, place.lng, place.name), "_blank"); }}
+                className="text-[10px] font-bold text-slate-500 hover:text-blue-600 flex items-center gap-1 cursor-pointer"
+              >
+                <MapPin className="w-2.5 h-2.5" /> {t("Map", "地図")}
+              </span>
+              {place.phone && (
+                <span
+                  onClick={(e) => { e.preventDefault(); window.open(`tel:${place.phone}`); }}
+                  className="text-[10px] font-bold text-slate-500 hover:text-blue-600 flex items-center gap-1 cursor-pointer"
+                >
+                  <Phone className="w-2.5 h-2.5" /> {t("Call", "電話")}
+                </span>
               )}
-              <div className="absolute bottom-3 right-3 flex gap-1.5">
-                {place.onsenAvailable && (
-                  <span title={t("Onsen", "温泉")} className="bg-white/90 backdrop-blur text-blue-600 p-1.5 rounded-full shadow-sm">
-                    <Bath className="w-3.5 h-3.5" />
-                  </span>
-                )}
-                {place.skiInSkiOut && (
-                  <span title={t("Ski-in / Ski-out", "スキーイン・アウト")} className="bg-white/90 backdrop-blur text-primary p-1.5 rounded-full shadow-sm">
-                    <CableCar className="w-3.5 h-3.5" />
-                  </span>
-                )}
-              </div>
-            </div>
-
-            {/* Body */}
-            <div className="p-4 flex flex-col flex-1">
-              <div className="flex justify-between items-center mb-2">
-                <Badge variant="outline" className="text-[10px] capitalize">{t(place.type, null)}</Badge>
-                {place.priceRange && <span className="font-black text-emerald-600 text-sm">{place.priceRange}</span>}
-              </div>
-              <h3 className="font-bold text-mountain-dark leading-snug mb-1">{t(place.name, place.nameJa)}</h3>
-              <p className="text-xs text-muted-foreground flex items-center gap-1 mb-2">
-                <MapPin className="w-3 h-3 text-primary/70 shrink-0" />
-                {t(place.address || place.region, place.addressJa || place.region)}
-              </p>
-              <p className="text-sm text-mountain-dark/80 line-clamp-2 flex-1 mb-4">
-                {t(place.description, place.descriptionJa)}
-              </p>
-
-              {/* Actions */}
-              <div className="flex gap-2 mt-auto pt-3 border-t border-border">
-                <a
-                  href={mapsUrl(place.lat, place.lng, place.name)}
-                  target="_blank" rel="noreferrer"
-                  className="flex-1 flex justify-center items-center gap-1.5 py-2 rounded-xl bg-secondary text-mountain-dark font-bold text-xs hover:bg-secondary/80 transition-colors"
+              {place.websiteUrl && (
+                <span
+                  onClick={(e) => { e.preventDefault(); window.open(place.websiteUrl, "_blank"); }}
+                  className="text-[10px] font-bold text-slate-500 hover:text-blue-600 flex items-center gap-1 cursor-pointer"
                 >
-                  <MapPin className="w-3.5 h-3.5" /> {t("Map", "地図")}
-                </a>
-                {place.phone && (
-                  <a href={`tel:${place.phone}`} className="flex-1 flex justify-center items-center gap-1.5 py-2 rounded-xl bg-secondary text-mountain-dark font-bold text-xs hover:bg-secondary/80 transition-colors">
-                    <Phone className="w-3.5 h-3.5" /> {t("Call", "電話")}
-                  </a>
-                )}
-                <a
-                  href={bookingSearchUrl(place.name + " Yamanouchi Japan")}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 flex justify-center items-center gap-1.5 py-2 rounded-xl bg-blue-600 text-white font-bold text-xs hover:bg-blue-700 transition-colors shadow-sm shadow-blue-600/20"
-                >
-                  <Search className="w-3.5 h-3.5" /> {t("Book", "予約")}
-                </a>
-              </div>
+                  <ExternalLink className="w-2.5 h-2.5" /> {t("Website", "公式")}
+                </span>
+              )}
             </div>
-          </Card>
+          </a>
         </motion.div>
       ))}
     </div>
