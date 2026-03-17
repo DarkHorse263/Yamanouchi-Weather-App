@@ -110,6 +110,7 @@ export default function MapView() {
         zoom={11}
         className="w-full h-full z-0"
         zoomControl={false}
+        attributionControl={false}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'

@@ -120,6 +120,7 @@ function WeatherMap({ layer }: { layer: WeatherLayer }) {
       className="w-full h-full z-0"
       zoomControl={true}
       scrollWheelZoom={false}
+      attributionControl={false}
     >
       <MapResizer />
       <TileLayer
