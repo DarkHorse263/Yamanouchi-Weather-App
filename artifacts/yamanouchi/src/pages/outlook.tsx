@@ -98,34 +98,24 @@ function MapResizer() {
   return null;
 }
 
-type WeatherLayer = "radar" | "satellite";
+type WeatherLayer = "precipitation_new" | "clouds_new" | "temp_new" | "wind_new";
 
-// JMA (Japan Meteorological Agency) public tile URLs — no API key required
-// Radar: high-resolution precipitation nowcast (hrpns)
-// Satellite: full-disk infrared composite (fd/hrit)
-function jmaRadarUrl(ts: string) {
-  return `https://www.jma.go.jp/bosai/jmatile/data/nowc/${ts}/none/${ts}/surf/hrpns/{z}/{x}/{y}.png`;
-}
-function jmaSatUrl(ts: string) {
-  return `https://www.jma.go.jp/bosai/jmatile/data/sat/${ts}/none/${ts}/surf/hrit/fd/{z}/{x}/{y}.png`;
+const OWM_KEY = import.meta.env.VITE_OWM_API_KEY as string | undefined;
+
+function owmTileUrl(layer: WeatherLayer) {
+  return OWM_KEY
+    ? `https://tile.openweathermap.org/map/${layer}/{z}/{x}/{y}.png?appid=${OWM_KEY}`
+    : null;
 }
 
 function WeatherMap({ layer }: { layer: WeatherLayer }) {
-  const [ts, setTs] = useState(jmaTimestamp);
-
-  // Refresh timestamp every 5 minutes so tiles stay current
-  useEffect(() => {
-    const id = setInterval(() => setTs(jmaTimestamp()), 5 * 60 * 1000);
-    return () => clearInterval(id);
-  }, []);
-
-  const overlayUrl = layer === "radar" ? jmaRadarUrl(ts) : jmaSatUrl(ts);
+  const url = owmTileUrl(layer);
 
   return (
     <MapContainer
       center={[36.795, 138.490]}
-      zoom={8}
-      minZoom={5}
+      zoom={7}
+      minZoom={4}
       maxZoom={14}
       className="w-full h-full z-0"
       zoomControl={true}
@@ -136,31 +126,48 @@ function WeatherMap({ layer }: { layer: WeatherLayer }) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>'
         url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
       />
-      <TileLayer
-        key={`${layer}-${ts}`}
-        url={overlayUrl}
-        attribution='&copy; <a href="https://www.jma.go.jp/">JMA</a>'
-        opacity={0.75}
-        errorTileUrl=""
-      />
+      {url ? (
+        <TileLayer
+          key={layer}
+          url={url}
+          attribution='&copy; <a href="https://openweathermap.org/">OpenWeatherMap</a>'
+          opacity={0.7}
+        />
+      ) : (
+        <div />
+      )}
     </MapContainer>
   );
 }
 
 const WEATHER_LAYERS: { key: WeatherLayer; label: string; labelJa: string; desc: string; descJa: string }[] = [
   {
-    key:     "radar",
-    label:   "Live Radar",
-    labelJa: "降水レーダー",
-    desc:    "JMA high-resolution precipitation nowcast — rain & snow falling right now",
-    descJa:  "気象庁高解像度降水ナウキャスト — 現在の降水状況",
+    key:     "precipitation_new",
+    label:   "Radar",
+    labelJa: "レーダー",
+    desc:    "Live precipitation — rain & snow intensity right now",
+    descJa:  "現在の降水強度（雨・雪）",
   },
   {
-    key:     "satellite",
-    label:   "Satellite",
-    labelJa: "気象衛星",
-    desc:    "JMA infrared satellite — track incoming storm clouds & weather fronts",
-    descJa:  "気象庁赤外線衛星 — 接近する雲・前線の確認",
+    key:     "clouds_new",
+    label:   "Clouds",
+    labelJa: "雲",
+    desc:    "Cloud coverage — track incoming storm clouds & weather fronts",
+    descJa:  "雲量 — 接近する雲・前線の確認",
+  },
+  {
+    key:     "temp_new",
+    label:   "Temperature",
+    labelJa: "気温",
+    desc:    "Surface temperature across the region",
+    descJa:  "地表面気温",
+  },
+  {
+    key:     "wind_new",
+    label:   "Wind (km/h)",
+    labelJa: "風速 (km/h)",
+    desc:    "Wind speed — useful for assessing on-mountain conditions",
+    descJa:  "風速 — 山岳コンディション確認に",
   },
 ];
 
@@ -289,7 +296,7 @@ function TownCard({ tw, t, idx }: { tw: TownWeather; t: (en: string, ja: string)
 
 export default function Outlook() {
   const { t } = useLanguage();
-  const [activeLayer, setActiveLayer] = useState<WeatherLayer>("radar");
+  const [activeLayer, setActiveLayer] = useState<WeatherLayer>("precipitation_new");
 
   const { data, isLoading, error } = useQuery<WeatherOutlook>({
     queryKey: ["weather-outlook"],
@@ -332,37 +339,37 @@ export default function Outlook() {
         animate={{ opacity: 1, y: 0 }}
         className="mb-8"
       >
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-2">
-            <Radar className="w-4 h-4 text-primary" />
-            <h2 className="text-base font-bold text-slate-700 uppercase tracking-wide">
-              {t(currentLayer.label, currentLayer.labelJa)}
-            </h2>
-          </div>
-          <div className="flex gap-1 bg-secondary rounded-xl p-1">
-            {WEATHER_LAYERS.map(layer => (
-              <button
-                key={layer.key}
-                onClick={() => setActiveLayer(layer.key)}
-                className={`text-[11px] font-bold px-2.5 py-1 rounded-lg transition-all ${
-                  activeLayer === layer.key
-                    ? "bg-white text-primary shadow-sm"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {t(layer.label, layer.labelJa)}
-              </button>
-            ))}
-          </div>
+        <div className="flex items-center gap-2 mb-3">
+          <Radar className="w-4 h-4 text-primary" />
+          <h2 className="text-base font-bold text-slate-700 uppercase tracking-wide">
+            {t("Weather Map", "気象マップ")}
+          </h2>
         </div>
 
-        <div className="rounded-2xl overflow-hidden border border-border shadow-sm" style={{ height: 320 }}>
+        {/* Layer selector — 2×2 grid */}
+        <div className="grid grid-cols-4 gap-1.5 mb-3">
+          {WEATHER_LAYERS.map(layer => (
+            <button
+              key={layer.key}
+              onClick={() => setActiveLayer(layer.key)}
+              className={`text-[10px] font-bold py-1.5 px-1 rounded-xl transition-all text-center leading-tight ${
+                activeLayer === layer.key
+                  ? "bg-primary text-white shadow-sm"
+                  : "bg-secondary text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {t(layer.label, layer.labelJa)}
+            </button>
+          ))}
+        </div>
+
+        <div className="rounded-2xl overflow-hidden border border-border shadow-sm" style={{ height: 340 }}>
           <WeatherMap layer={activeLayer} />
         </div>
 
         <p className="text-[10px] text-muted-foreground mt-1.5 text-right">
           {t(currentLayer.desc, currentLayer.descJa)}
-          {" · "}{t("OpenStreetMap · JMA", "OpenStreetMap · 気象庁")}
+          {" · "}{t("OpenStreetMap · OpenWeatherMap", "OpenStreetMap · OpenWeatherMap")}
         </p>
       </motion.section>
 
