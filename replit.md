@@ -70,6 +70,17 @@ artifacts-monorepo/
 └── package.json
 ```
 
+## Booking.com Affiliate Integration
+
+- **Affiliate ID**: `75fd40675e05769d549b60370a6455d5`
+- **Helper module**: `artifacts/yamanouchi/src/lib/booking.ts` — exports `bookingSearchUrl()`, `bookingRegionUrl()`, `bookingGeneralUrl()`
+- **Placements**:
+  1. **Stay page** (`/stay`) — Blue search banner at top + "Book" buttons on each accommodation card + region-level Booking.com links
+  2. **Resorts page** (`/resorts`) — "Stay Nearby" link in each resort card footer
+  3. **Guide page** (`/guide`) — "Book a Stay" link in the header bar
+- **URL format**: `https://www.booking.com/searchresults.html?aid=AFFILIATE_ID&ss=QUERY`
+- **Revenue**: Commission on completed bookings (25-40% of Booking.com's cut), paid monthly via bank transfer
+
 ## Local Database Tables (Replit PostgreSQL)
 
 - `accommodation` — 6 rows (hotels, ryokan, guesthouses)

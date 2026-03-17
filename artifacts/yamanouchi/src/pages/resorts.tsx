@@ -2,8 +2,9 @@ import { useGetResorts } from "@workspace/api-client-react";
 import { useLanguage } from "@/hooks/use-language";
 import { LoadingScreen, ErrorScreen } from "@/components/ui-elements";
 import { HourlyTimeline } from "@/components/hourly-timeline";
-import { ExternalLink, CalendarDays } from "lucide-react";
+import { ExternalLink, CalendarDays, BedDouble } from "lucide-react";
 import { motion } from "framer-motion";
+import { bookingRegionUrl } from "@/lib/booking";
 
 function safeTime(raw: string | null | undefined): string {
   if (!raw) return "Live";
@@ -120,17 +121,28 @@ export default function Resorts() {
 
                     {/* Footer */}
                     <div className="flex items-center justify-between pt-1 border-t border-slate-100 gap-2">
-                      {resort.websiteUrl ? (
+                      <div className="flex items-center gap-3">
+                        {resort.websiteUrl && (
+                          <a
+                            href={resort.websiteUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1 text-[10px] font-bold text-blue-600 hover:text-blue-700 transition-colors"
+                          >
+                            <ExternalLink className="w-2.5 h-2.5" />
+                            {t("Website", "公式")}
+                          </a>
+                        )}
                         <a
-                          href={resort.websiteUrl}
+                          href={bookingRegionUrl(resort.region)}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center gap-1 text-[10px] font-bold text-blue-600 hover:text-blue-700 transition-colors"
                         >
-                          <ExternalLink className="w-2.5 h-2.5" />
-                          {t("Official Website", "公式サイト")}
+                          <BedDouble className="w-2.5 h-2.5" />
+                          {t("Stay Nearby", "周辺宿泊")}
                         </a>
-                      ) : <span />}
+                      </div>
                       <span className="text-[9px] text-slate-300 font-medium tabular-nums">
                         {safeTime(resort.sourceUpdatedAt)}
                       </span>
