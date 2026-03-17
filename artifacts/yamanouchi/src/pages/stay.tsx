@@ -30,14 +30,34 @@ function mapsUrl(lat: number | null, lng: number | null, name: string) {
 
 const ON_MOUNTAIN_REGIONS = ["Shiga Kogen", "Ryuoo"];
 
-function photoSrc(place: { type: string; region: string; featured?: boolean }, base: string) {
-  const { type, region, featured } = place;
+const HOTEL_MOUNTAIN_IMGS = ["hotel-ski.png", "hotel-mountain-lodge.png", "chalet-snow.png"];
+const HOTEL_TOWN_IMGS = ["hotel-town.png", "hotel.png"];
+const RYOKAN_MOUNTAIN_IMGS = ["ryokan-exterior.png", "ryokan-room.png"];
+const RYOKAN_TOWN_IMGS = ["ryokan-onsen.png", "ryokan-historic.png"];
+const GUESTHOUSE_MOUNTAIN_IMGS = ["guesthouse-cozy.png", "chalet-snow.png"];
+const GUESTHOUSE_TOWN_IMGS = ["guesthouse-backpacker.png", "guesthouse-cozy.png"];
+
+function nameHash(name: string): number {
+  let h = 0;
+  for (let i = 0; i < name.length; i++) h = ((h << 5) - h + name.charCodeAt(i)) | 0;
+  return Math.abs(h);
+}
+
+function photoSrc(place: { name: string; type: string; region: string; featured?: boolean }, base: string) {
+  const { name, type, region } = place;
+  const isMountain = ON_MOUNTAIN_REGIONS.includes(region);
+  const h = nameHash(name);
+
+  let pool: string[];
   if (type === "ryokan") {
-    return `${base}images/${featured ? "ryokan-exterior" : "ryokan-room"}.png`;
+    pool = isMountain ? RYOKAN_MOUNTAIN_IMGS : RYOKAN_TOWN_IMGS;
+  } else if (type === "guesthouse") {
+    pool = isMountain ? GUESTHOUSE_MOUNTAIN_IMGS : GUESTHOUSE_TOWN_IMGS;
+  } else {
+    pool = isMountain ? HOTEL_MOUNTAIN_IMGS : HOTEL_TOWN_IMGS;
   }
-  if (type === "guesthouse") return `${base}images/guesthouse-cozy.png`;
-  if (type === "hotel" && ON_MOUNTAIN_REGIONS.includes(region)) return `${base}images/hotel-ski.png`;
-  return `${base}images/hotel.png`;
+
+  return `${base}images/${pool[h % pool.length]}`;
 }
 
 export default function Stay({ embedded = false }: { embedded?: boolean }) {
