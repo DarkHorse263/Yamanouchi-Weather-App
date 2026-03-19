@@ -3,7 +3,7 @@ import { useLanguage } from "@/hooks/use-language";
 import { LoadingScreen, ErrorScreen } from "@/components/ui-elements";
 import { motion } from "framer-motion";
 import { Mountain, MapPin, Radar } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
@@ -98,25 +98,58 @@ function MapResizer() {
   return null;
 }
 
-type WeatherLayer = "precipitation_new" | "clouds_new" | "temp_new" | "wind_new";
+type WeatherLayer = "radar" | "satellite";
 
-const OWM_KEY = import.meta.env.VITE_OWM_API_KEY as string | undefined;
+interface RainViewerData {
+  host: string;
+  radar: { past: { path: string; time: number }[]; nowcast: { path: string; time: number }[] };
+  satellite: { infrared: { path: string; time: number }[] };
+}
 
-function owmTileUrl(layer: WeatherLayer) {
-  return OWM_KEY
-    ? `https://tile.openweathermap.org/map/${layer}/{z}/{x}/{y}.png?appid=${OWM_KEY}`
-    : null;
+function useRainViewer() {
+  const [data, setData] = useState<RainViewerData | null>(null);
+  useEffect(() => {
+    fetch("https://api.rainviewer.com/public/weather-maps.json")
+      .then(r => r.json())
+      .then(setData)
+      .catch(() => {});
+    const iv = setInterval(() => {
+      fetch("https://api.rainviewer.com/public/weather-maps.json")
+        .then(r => r.json())
+        .then(setData)
+        .catch(() => {});
+    }, 300000);
+    return () => clearInterval(iv);
+  }, []);
+  return data;
 }
 
 function WeatherMap({ layer }: { layer: WeatherLayer }) {
-  const url = owmTileUrl(layer);
+  const rv = useRainViewer();
+
+  const overlayUrl = useMemo(() => {
+    if (!rv) return null;
+    if (layer === "radar") {
+      const frames = [...(rv.radar?.past || []), ...(rv.radar?.nowcast || [])];
+      const latest = frames[frames.length - 1];
+      if (!latest) return null;
+      return `${rv.host}${latest.path}/256/{z}/{x}/{y}/2/1_1.png`;
+    }
+    if (layer === "satellite") {
+      const frames = rv.satellite?.infrared || [];
+      const latest = frames[frames.length - 1];
+      if (!latest) return null;
+      return `${rv.host}${latest.path}/256/{z}/{x}/{y}/0/0_0.png`;
+    }
+    return null;
+  }, [rv, layer]);
 
   return (
     <MapContainer
       center={[36.795, 138.490]}
       zoom={7}
       minZoom={4}
-      maxZoom={14}
+      maxZoom={7}
       className="w-full h-full z-0"
       zoomControl={true}
       scrollWheelZoom={false}
@@ -124,18 +157,15 @@ function WeatherMap({ layer }: { layer: WeatherLayer }) {
     >
       <MapResizer />
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>'
-        url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+        url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
       />
-      {url ? (
+      {overlayUrl && (
         <TileLayer
-          key={layer}
-          url={url}
-          attribution='&copy; <a href="https://openweathermap.org/">OpenWeatherMap</a>'
-          opacity={0.7}
+          key={layer + overlayUrl}
+          url={overlayUrl}
+          opacity={0.8}
+          tileSize={256}
         />
-      ) : (
-        <div />
       )}
     </MapContainer>
   );
@@ -143,32 +173,18 @@ function WeatherMap({ layer }: { layer: WeatherLayer }) {
 
 const WEATHER_LAYERS: { key: WeatherLayer; label: string; labelJa: string; desc: string; descJa: string }[] = [
   {
-    key:     "precipitation_new",
-    label:   "Radar",
-    labelJa: "レーダー",
-    desc:    "Live precipitation — rain & snow intensity right now",
-    descJa:  "現在の降水強度（雨・雪）",
+    key:     "radar",
+    label:   "Snow Radar",
+    labelJa: "降雪レーダー",
+    desc:    "Live precipitation radar — rain & snow intensity right now",
+    descJa:  "リアルタイム降水レーダー（雨・雪）",
   },
   {
-    key:     "clouds_new",
-    label:   "Clouds",
-    labelJa: "雲",
-    desc:    "Cloud coverage — track incoming storm clouds & weather fronts",
-    descJa:  "雲量 — 接近する雲・前線の確認",
-  },
-  {
-    key:     "temp_new",
-    label:   "Temperature",
-    labelJa: "気温",
-    desc:    "Surface temperature across the region",
-    descJa:  "地表面気温",
-  },
-  {
-    key:     "wind_new",
-    label:   "Wind (km/h)",
-    labelJa: "風速 (km/h)",
-    desc:    "Wind speed — useful for assessing on-mountain conditions",
-    descJa:  "風速 — 山岳コンディション確認に",
+    key:     "satellite",
+    label:   "Satellite",
+    labelJa: "衛星",
+    desc:    "Infrared satellite — track incoming weather systems & cloud cover",
+    descJa:  "赤外衛星画像 — 気象システムと雲の追跡",
   },
 ];
 
@@ -297,7 +313,7 @@ function TownCard({ tw, t, idx }: { tw: TownWeather; t: (en: string, ja: string)
 
 export default function Outlook() {
   const { t } = useLanguage();
-  const [activeLayer, setActiveLayer] = useState<WeatherLayer>("precipitation_new");
+  const [activeLayer, setActiveLayer] = useState<WeatherLayer>("radar");
 
   const { data, isLoading, error } = useQuery<WeatherOutlook>({
     queryKey: ["weather-outlook"],
@@ -370,7 +386,7 @@ export default function Outlook() {
 
         <p className="text-[10px] text-muted-foreground mt-1.5 text-right">
           {t(currentLayer.desc, currentLayer.descJa)}
-          {" · "}{t("OpenStreetMap · OpenWeatherMap", "OpenStreetMap · OpenWeatherMap")}
+          {" · "}{t("OpenStreetMap · RainViewer", "OpenStreetMap · RainViewer")}
         </p>
       </motion.section>
 
