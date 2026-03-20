@@ -98,6 +98,20 @@ function MapResizer() {
   return null;
 }
 
+type MapLayer = "all" | "radar" | "clouds" | "temp" | "snow";
+
+const OWM_KEY = import.meta.env.VITE_OWM_API_KEY as string | undefined;
+
+const MAP_TABS: { key: MapLayer; label: string; labelJa: string }[] = [
+  { key: "all",    label: "All Maps",       labelJa: "全マップ" },
+  { key: "radar",  label: "Radar",          labelJa: "レーダー" },
+  { key: "clouds", label: "Clouds",         labelJa: "雲" },
+  { key: "temp",   label: "Temp (°C)",      labelJa: "気温 (°C)" },
+  { key: "snow",   label: "Snow",           labelJa: "積雪" },
+];
+
+const BASE_TILE = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png";
+
 interface RainViewerData {
   host: string;
   radar: { past: { path: string; time: number }[]; nowcast: { path: string; time: number }[] };
@@ -139,9 +153,7 @@ function RadarOverlay({ host, frames }: { host: string; frames: { path: string; 
       newLayers[newLayers.length - 1].setOpacity(0.7);
     }
     setFrameIdx(frames.length - 1);
-    return () => {
-      newLayers.forEach(l => map.removeLayer(l));
-    };
+    return () => { newLayers.forEach(l => map.removeLayer(l)); };
   }, [map, host, frames]);
 
   const showFrame = useCallback((idx: number) => {
@@ -176,11 +188,7 @@ function RadarOverlay({ host, frames }: { host: string; frames: { path: string; 
       </button>
       <div className="flex-1 bg-white/90 backdrop-blur rounded-lg px-3 py-1.5 shadow border border-slate-200">
         <div className="flex items-center justify-between">
-          <span className="text-[10px] font-medium text-slate-500">
-            {frameIdx < (frames.length - (frames[frames.length-1]?.path.includes("nowcast") ? 0 : 0))
-              ? timeLabel + " JST"
-              : timeLabel + " JST"}
-          </span>
+          <span className="text-[10px] font-medium text-slate-500">{timeLabel} JST</span>
           <input
             type="range"
             min={0}
@@ -195,9 +203,32 @@ function RadarOverlay({ host, frames }: { host: string; frames: { path: string; 
   );
 }
 
-function WeatherMap() {
-  const rv = useRainViewer();
+function SingleLayerMap({ owmLayer, opacity = 0.7 }: { owmLayer: string; opacity?: number }) {
+  return (
+    <MapContainer
+      center={[36.795, 138.530]}
+      zoom={7}
+      minZoom={5}
+      maxZoom={10}
+      className="w-full h-full z-0"
+      zoomControl={true}
+      scrollWheelZoom={false}
+      attributionControl={false}
+    >
+      <MapResizer />
+      <TileLayer url={BASE_TILE} />
+      {OWM_KEY && (
+        <TileLayer
+          url={`https://tile.openweathermap.org/map/${owmLayer}/{z}/{x}/{y}.png?appid=${OWM_KEY}`}
+          opacity={opacity}
+        />
+      )}
+    </MapContainer>
+  );
+}
 
+function RadarMap() {
+  const rv = useRainViewer();
   const frames = useMemo(() => {
     if (!rv) return [];
     return [...(rv.radar?.past || []), ...(rv.radar?.nowcast || [])];
@@ -216,15 +247,94 @@ function WeatherMap() {
         attributionControl={false}
       >
         <MapResizer />
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+        <TileLayer url={BASE_TILE} />
         {rv && frames.length > 0 && (
           <RadarOverlay host={rv.host} frames={frames} />
         )}
       </MapContainer>
     </div>
   );
+}
+
+function AllMapsView() {
+  const rv = useRainViewer();
+  const frames = useMemo(() => {
+    if (!rv) return [];
+    return [...(rv.radar?.past || []), ...(rv.radar?.nowcast || [])];
+  }, [rv]);
+
+  const panels: { label: string; labelJa: string; content: React.ReactNode }[] = [
+    {
+      label: "Radar", labelJa: "レーダー",
+      content: (
+        <div className="relative w-full h-full">
+          <MapContainer center={[36.795, 138.530]} zoom={6} minZoom={5} maxZoom={7}
+            className="w-full h-full z-0" zoomControl={false} scrollWheelZoom={false} attributionControl={false}>
+            <MapResizer />
+            <TileLayer url={BASE_TILE} />
+            {rv && frames.length > 0 && <RadarOverlay host={rv.host} frames={frames} />}
+          </MapContainer>
+        </div>
+      ),
+    },
+    {
+      label: "Clouds", labelJa: "雲",
+      content: (
+        <MapContainer center={[36.795, 138.530]} zoom={6} minZoom={5} maxZoom={10}
+          className="w-full h-full z-0" zoomControl={false} scrollWheelZoom={false} attributionControl={false}>
+          <MapResizer />
+          <TileLayer url={BASE_TILE} />
+          {OWM_KEY && <TileLayer url={`https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=${OWM_KEY}`} opacity={0.7} />}
+        </MapContainer>
+      ),
+    },
+    {
+      label: "Temp (°C)", labelJa: "気温",
+      content: (
+        <MapContainer center={[36.795, 138.530]} zoom={6} minZoom={5} maxZoom={10}
+          className="w-full h-full z-0" zoomControl={false} scrollWheelZoom={false} attributionControl={false}>
+          <MapResizer />
+          <TileLayer url={BASE_TILE} />
+          {OWM_KEY && <TileLayer url={`https://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=${OWM_KEY}`} opacity={0.6} />}
+        </MapContainer>
+      ),
+    },
+    {
+      label: "Snow", labelJa: "積雪",
+      content: (
+        <MapContainer center={[36.795, 138.530]} zoom={6} minZoom={5} maxZoom={10}
+          className="w-full h-full z-0" zoomControl={false} scrollWheelZoom={false} attributionControl={false}>
+          <MapResizer />
+          <TileLayer url={BASE_TILE} />
+          {OWM_KEY && <TileLayer url={`https://tile.openweathermap.org/map/snow/{z}/{x}/{y}.png?appid=${OWM_KEY}`} opacity={0.8} />}
+        </MapContainer>
+      ),
+    },
+  ];
+
+  return (
+    <div className="grid grid-cols-2 gap-2 w-full h-full">
+      {panels.map(p => (
+        <div key={p.label} className="relative rounded-xl overflow-hidden border border-slate-200">
+          <div className="w-full" style={{ height: 170 }}>
+            {p.content}
+          </div>
+          <div className="absolute top-1.5 left-1.5 bg-white/90 backdrop-blur rounded px-2 py-0.5 text-[10px] font-bold text-slate-700 z-[500]">
+            {p.label}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function WeatherMapSection({ layer }: { layer: MapLayer }) {
+  if (layer === "all") return <AllMapsView />;
+  if (layer === "radar") return <RadarMap />;
+  if (layer === "clouds") return <SingleLayerMap owmLayer="clouds_new" />;
+  if (layer === "temp") return <SingleLayerMap owmLayer="temp_new" opacity={0.6} />;
+  if (layer === "snow") return <SingleLayerMap owmLayer="snow" opacity={0.8} />;
+  return null;
 }
 
 function MountainCard({ m, t, idx }: { m: MountainOutlook; t: (en: string, ja: string) => string; idx: number }) {
@@ -352,6 +462,7 @@ function TownCard({ tw, t, idx }: { tw: TownWeather; t: (en: string, ja: string)
 
 export default function Outlook() {
   const { t } = useLanguage();
+  const [activeLayer, setActiveLayer] = useState<MapLayer>("all");
   const { data, isLoading, error } = useQuery<WeatherOutlook>({
     queryKey: ["weather-outlook"],
     queryFn: async () => {
@@ -385,7 +496,7 @@ export default function Outlook() {
         </p>
       </div>
 
-      {/* LIVE RADAR */}
+      {/* WEATHER MAP */}
       <motion.section
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
@@ -394,17 +505,33 @@ export default function Outlook() {
         <div className="flex items-center gap-2 mb-3">
           <Radar className="w-4 h-4 text-primary" />
           <h2 className="text-base font-bold text-slate-700 uppercase tracking-wide">
-            {t("Live Radar", "ライブレーダー")}
+            {t("Weather Map", "気象マップ")}
           </h2>
         </div>
 
-        <div className="rounded-2xl overflow-hidden border border-border shadow-sm relative" style={{ height: 360 }}>
-          <WeatherMap />
+        <div className="flex gap-1.5 mb-3 overflow-x-auto pb-1">
+          {MAP_TABS.map(tab => (
+            <button
+              key={tab.key}
+              onClick={() => setActiveLayer(tab.key)}
+              className={`text-[11px] font-bold py-1.5 px-3 rounded-full transition-all whitespace-nowrap ${
+                activeLayer === tab.key
+                  ? "bg-primary text-white shadow-sm"
+                  : "bg-secondary text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {t(tab.label, tab.labelJa)}
+            </button>
+          ))}
+        </div>
+
+        <div className="rounded-2xl overflow-hidden border border-border shadow-sm relative"
+          style={{ height: activeLayer === "all" ? 370 : 360 }}>
+          <WeatherMapSection layer={activeLayer} />
         </div>
 
         <p className="text-[10px] text-muted-foreground mt-1.5 text-right">
-          {t("Animated precipitation radar — rain & snow", "降水レーダー（雨・雪）")}
-          {" · "}{t("OpenStreetMap · RainViewer", "OpenStreetMap · RainViewer")}
+          {t("OpenStreetMap · RainViewer · OpenWeatherMap", "OpenStreetMap · RainViewer · OpenWeatherMap")}
         </p>
       </motion.section>
 
