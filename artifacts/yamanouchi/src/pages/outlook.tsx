@@ -3,7 +3,7 @@ import { useLanguage } from "@/hooks/use-language";
 import { LoadingScreen, ErrorScreen } from "@/components/ui-elements";
 import { motion } from "framer-motion";
 import { Mountain, MapPin, Radar } from "lucide-react";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
@@ -98,8 +98,6 @@ function MapResizer() {
   return null;
 }
 
-type WeatherLayer = "radar" | "satellite";
-
 interface RainViewerData {
   host: string;
   radar: { past: { path: string; time: number }[]; nowcast: { path: string; time: number }[] };
@@ -109,84 +107,125 @@ interface RainViewerData {
 function useRainViewer() {
   const [data, setData] = useState<RainViewerData | null>(null);
   useEffect(() => {
-    fetch("https://api.rainviewer.com/public/weather-maps.json")
-      .then(r => r.json())
-      .then(setData)
-      .catch(() => {});
-    const iv = setInterval(() => {
+    const load = () =>
       fetch("https://api.rainviewer.com/public/weather-maps.json")
         .then(r => r.json())
         .then(setData)
         .catch(() => {});
-    }, 300000);
+    load();
+    const iv = setInterval(load, 300000);
     return () => clearInterval(iv);
   }, []);
   return data;
 }
 
-function WeatherMap({ layer }: { layer: WeatherLayer }) {
-  const rv = useRainViewer();
+function RadarOverlay({ host, frames }: { host: string; frames: { path: string; time: number }[] }) {
+  const map = useMap();
+  const layersRef = useRef<L.TileLayer[]>([]);
+  const animRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [frameIdx, setFrameIdx] = useState(frames.length - 1);
+  const [playing, setPlaying] = useState(true);
 
-  const overlayUrl = useMemo(() => {
-    if (!rv) return null;
-    if (layer === "radar") {
-      const frames = [...(rv.radar?.past || []), ...(rv.radar?.nowcast || [])];
-      const latest = frames[frames.length - 1];
-      if (!latest) return null;
-      return `${rv.host}${latest.path}/256/{z}/{x}/{y}/2/1_1.png`;
+  useEffect(() => {
+    layersRef.current.forEach(l => map.removeLayer(l));
+    const newLayers = frames.map(f => {
+      const url = `${host}${f.path}/256/{z}/{x}/{y}/6/1_1.png`;
+      const layer = L.tileLayer(url, { opacity: 0, zIndex: 10, tileSize: 256 });
+      layer.addTo(map);
+      return layer;
+    });
+    layersRef.current = newLayers;
+    if (newLayers.length > 0) {
+      newLayers[newLayers.length - 1].setOpacity(0.7);
     }
-    if (layer === "satellite") {
-      const frames = rv.satellite?.infrared || [];
-      const latest = frames[frames.length - 1];
-      if (!latest) return null;
-      return `${rv.host}${latest.path}/256/{z}/{x}/{y}/0/0_0.png`;
-    }
-    return null;
-  }, [rv, layer]);
+    setFrameIdx(frames.length - 1);
+    return () => {
+      newLayers.forEach(l => map.removeLayer(l));
+    };
+  }, [map, host, frames]);
+
+  const showFrame = useCallback((idx: number) => {
+    layersRef.current.forEach((l, i) => l.setOpacity(i === idx ? 0.7 : 0));
+    setFrameIdx(idx);
+  }, []);
+
+  useEffect(() => {
+    if (!playing || frames.length < 2) return;
+    let current = frameIdx;
+    const step = () => {
+      current = (current + 1) % frames.length;
+      showFrame(current);
+      animRef.current = setTimeout(step, current === frames.length - 1 ? 2000 : 500);
+    };
+    animRef.current = setTimeout(step, current === frames.length - 1 ? 2000 : 500);
+    return () => { if (animRef.current) clearTimeout(animRef.current); };
+  }, [playing, frames.length, showFrame]);
+
+  const ts = frames[frameIdx]?.time;
+  const timeLabel = ts
+    ? new Date(ts * 1000).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Tokyo" })
+    : "";
 
   return (
-    <MapContainer
-      center={[36.795, 138.490]}
-      zoom={7}
-      minZoom={4}
-      maxZoom={7}
-      className="w-full h-full z-0"
-      zoomControl={true}
-      scrollWheelZoom={false}
-      attributionControl={false}
-    >
-      <MapResizer />
-      <TileLayer
-        url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-      />
-      {overlayUrl && (
-        <TileLayer
-          key={layer + overlayUrl}
-          url={overlayUrl}
-          opacity={0.8}
-          tileSize={256}
-        />
-      )}
-    </MapContainer>
+    <div className="absolute bottom-2 left-2 right-2 z-[1000] flex items-center gap-2">
+      <button
+        onClick={() => setPlaying(p => !p)}
+        className="bg-white/90 backdrop-blur rounded-lg px-2.5 py-1.5 text-xs font-bold shadow border border-slate-200 shrink-0"
+      >
+        {playing ? "⏸" : "▶️"}
+      </button>
+      <div className="flex-1 bg-white/90 backdrop-blur rounded-lg px-3 py-1.5 shadow border border-slate-200">
+        <div className="flex items-center justify-between">
+          <span className="text-[10px] font-medium text-slate-500">
+            {frameIdx < (frames.length - (frames[frames.length-1]?.path.includes("nowcast") ? 0 : 0))
+              ? timeLabel + " JST"
+              : timeLabel + " JST"}
+          </span>
+          <input
+            type="range"
+            min={0}
+            max={frames.length - 1}
+            value={frameIdx}
+            onChange={e => { setPlaying(false); showFrame(Number(e.target.value)); }}
+            className="w-24 h-1 accent-blue-600"
+          />
+        </div>
+      </div>
+    </div>
   );
 }
 
-const WEATHER_LAYERS: { key: WeatherLayer; label: string; labelJa: string; desc: string; descJa: string }[] = [
-  {
-    key:     "radar",
-    label:   "Snow Radar",
-    labelJa: "降雪レーダー",
-    desc:    "Live precipitation radar — rain & snow intensity right now",
-    descJa:  "リアルタイム降水レーダー（雨・雪）",
-  },
-  {
-    key:     "satellite",
-    label:   "Satellite",
-    labelJa: "衛星",
-    desc:    "Infrared satellite — track incoming weather systems & cloud cover",
-    descJa:  "赤外衛星画像 — 気象システムと雲の追跡",
-  },
-];
+function WeatherMap() {
+  const rv = useRainViewer();
+
+  const frames = useMemo(() => {
+    if (!rv) return [];
+    return [...(rv.radar?.past || []), ...(rv.radar?.nowcast || [])];
+  }, [rv]);
+
+  return (
+    <div className="relative w-full h-full">
+      <MapContainer
+        center={[36.795, 138.530]}
+        zoom={7}
+        minZoom={5}
+        maxZoom={7}
+        className="w-full h-full z-0"
+        zoomControl={true}
+        scrollWheelZoom={false}
+        attributionControl={false}
+      >
+        <MapResizer />
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        {rv && frames.length > 0 && (
+          <RadarOverlay host={rv.host} frames={frames} />
+        )}
+      </MapContainer>
+    </div>
+  );
+}
 
 function MountainCard({ m, t, idx }: { m: MountainOutlook; t: (en: string, ja: string) => string; idx: number }) {
   const maxSnow = Math.max(...m.forecast.map(f => f.snowfall), 1);
@@ -313,8 +352,6 @@ function TownCard({ tw, t, idx }: { tw: TownWeather; t: (en: string, ja: string)
 
 export default function Outlook() {
   const { t } = useLanguage();
-  const [activeLayer, setActiveLayer] = useState<WeatherLayer>("radar");
-
   const { data, isLoading, error } = useQuery<WeatherOutlook>({
     queryKey: ["weather-outlook"],
     queryFn: async () => {
@@ -333,8 +370,6 @@ export default function Outlook() {
     hour: "2-digit", minute: "2-digit", timeZone: "Asia/Tokyo",
   });
 
-  const currentLayer = WEATHER_LAYERS.find(l => l.key === activeLayer)!;
-
   return (
     <div className="p-4 md:p-8 max-w-4xl mx-auto pb-24">
 
@@ -350,7 +385,7 @@ export default function Outlook() {
         </p>
       </div>
 
-      {/* WEATHER MAP */}
+      {/* LIVE RADAR */}
       <motion.section
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
@@ -359,33 +394,16 @@ export default function Outlook() {
         <div className="flex items-center gap-2 mb-3">
           <Radar className="w-4 h-4 text-primary" />
           <h2 className="text-base font-bold text-slate-700 uppercase tracking-wide">
-            {t("Weather Map", "気象マップ")}
+            {t("Live Radar", "ライブレーダー")}
           </h2>
         </div>
 
-        {/* Layer selector — 2×2 grid */}
-        <div className="grid grid-cols-4 gap-1.5 mb-3">
-          {WEATHER_LAYERS.map(layer => (
-            <button
-              key={layer.key}
-              onClick={() => setActiveLayer(layer.key)}
-              className={`text-[10px] font-bold py-1.5 px-1 rounded-xl transition-all text-center leading-tight ${
-                activeLayer === layer.key
-                  ? "bg-primary text-white shadow-sm"
-                  : "bg-secondary text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {t(layer.label, layer.labelJa)}
-            </button>
-          ))}
-        </div>
-
-        <div className="rounded-2xl overflow-hidden border border-border shadow-sm" style={{ height: 340 }}>
-          <WeatherMap layer={activeLayer} />
+        <div className="rounded-2xl overflow-hidden border border-border shadow-sm relative" style={{ height: 360 }}>
+          <WeatherMap />
         </div>
 
         <p className="text-[10px] text-muted-foreground mt-1.5 text-right">
-          {t(currentLayer.desc, currentLayer.descJa)}
+          {t("Animated precipitation radar — rain & snow", "降水レーダー（雨・雪）")}
           {" · "}{t("OpenStreetMap · RainViewer", "OpenStreetMap · RainViewer")}
         </p>
       </motion.section>
