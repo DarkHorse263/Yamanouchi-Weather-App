@@ -1,8 +1,9 @@
 import { useGetDashboard, useGetPowderAlerts } from "@workspace/api-client-react";
 import { useLanguage } from "@/hooks/use-language";
+import { useSeason } from "@/hooks/use-season";
 import { ErrorScreen } from "@/components/ui-elements";
 import { HourlyTimeline } from "@/components/hourly-timeline";
-import { Trophy, Wind, ThermometerSnowflake, Ruler, Snowflake, BellRing, ChevronRight } from "lucide-react";
+import { Trophy, Wind, ThermometerSnowflake, Ruler, Snowflake, BellRing, ChevronRight, TreePine, Mountain, Waves, Bike, Camera } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import { useEffect, useState } from "react";
@@ -70,10 +71,128 @@ const ALERT_STYLES: Record<string, string> = {
   info:       "bg-sky-600 border-sky-500",
 };
 
+const GREEN_HIGHLIGHTS = [
+  { icon: Mountain, name: "Shiga Kogen Hiking", nameJa: "志賀高原ハイキング", desc: "Alpine trails & wetlands", descJa: "高山トレイルと湿原" },
+  { icon: Camera, name: "Snow Monkey Park", nameJa: "地獄谷野猿公苑", desc: "Year-round wild macaques", descJa: "通年 野生のニホンザル" },
+  { icon: Waves, name: "SORA Terrace", nameJa: "SORAテラス", desc: "Cloud sea views at 1,770m", descJa: "標高1,770mの雲海" },
+  { icon: Bike, name: "Cycling Routes", nameJa: "サイクリングコース", desc: "Valley & mountain roads", descJa: "渓谷と山岳道路" },
+  { icon: Waves, name: "9 Bathhouse Tour", nameJa: "外湯めぐり", desc: "Shibu Onsen stone streets", descJa: "渋温泉の石畳" },
+  { icon: TreePine, name: "Autumn Colours", nameJa: "紅葉", desc: "Sep–Nov koyo season", descJa: "9〜11月 紅葉シーズン" },
+];
+
+function GreenHome({ t }: { t: (en: string, ja: string) => string }) {
+  return (
+    <div className="p-4 md:p-8 space-y-4 md:space-y-5 max-w-7xl mx-auto">
+      {/* GREEN HERO */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.98 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="relative rounded-3xl overflow-hidden shadow-xl"
+        style={{ minHeight: 260, background: "linear-gradient(135deg, #065f46 0%, #047857 40%, #34d399 100%)" }}
+      >
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")" }} />
+        <div className="relative z-10 p-6 flex flex-col min-h-[260px] justify-between">
+          <div>
+            <div className="flex items-center gap-2 mb-3">
+              <TreePine className="w-4 h-4 text-emerald-200" />
+              <span className="text-white/60 font-semibold text-[11px] tracking-widest uppercase">
+                {t("GREEN SEASON", "グリーンシーズン")}
+              </span>
+            </div>
+            <h1 className="text-4xl font-black text-white tracking-tight leading-none mb-1.5">
+              {t("Yamanouchi Town", "山ノ内町")}
+            </h1>
+            <p className="text-white/70 text-sm font-medium">
+              {t("Hiking, Onsen & Mountain Culture", "ハイキング・温泉・山岳文化")}
+            </p>
+            <p className="text-white/45 text-xs font-medium mt-0.5">
+              Shiga Kogen · Ryuoo · Shibu Onsen · Yudanaka
+            </p>
+          </div>
+          <div className="flex items-end justify-between mt-8">
+            <div className="text-white">
+              <span className="text-3xl font-black leading-none">8</span>
+              <span className="text-white/60 text-sm font-medium ml-1.5">{t("activities", "アクティビティ")}</span>
+            </div>
+            <Link href="/activities">
+              <span className="text-white/70 text-xs font-bold hover:text-white flex items-center gap-1">
+                {t("View all", "すべて見る")} <ChevronRight className="w-3 h-3" />
+              </span>
+            </Link>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* GREEN HIGHLIGHTS */}
+      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }}>
+        <div className="flex items-center gap-2 mb-3">
+          <TreePine className="w-4 h-4 text-emerald-600" />
+          <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wider">{t("Things to Do", "おすすめアクティビティ")}</h2>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+          {GREEN_HIGHLIGHTS.map((item, idx) => {
+            const Icon = item.icon;
+            return (
+              <motion.div
+                key={item.name}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 + idx * 0.05 }}
+              >
+                <Link href="/activities">
+                  <div className="bg-white border border-border rounded-2xl p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer h-full">
+                    <div className="w-8 h-8 rounded-xl bg-emerald-50 flex items-center justify-center mb-2">
+                      <Icon className="w-4 h-4 text-emerald-600" />
+                    </div>
+                    <h3 className="font-bold text-sm text-slate-900 leading-tight">{t(item.name, item.nameJa)}</h3>
+                    <p className="text-[10px] text-slate-400 mt-0.5">{t(item.desc, item.descJa)}</p>
+                  </div>
+                </Link>
+              </motion.div>
+            );
+          })}
+        </div>
+      </motion.div>
+
+      {/* QUICK LINKS */}
+      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+        <div className="grid grid-cols-3 gap-3">
+          {[
+            { href: "/stay", label: t("Find a Stay", "宿泊を探す"), labelJa: t("Hotels & Ryokans", "ホテル・旅館"), color: "bg-blue-50 text-blue-600" },
+            { href: "/transport", label: t("Getting Here", "アクセス"), labelJa: t("Trains & Buses", "電車・バス"), color: "bg-amber-50 text-amber-600" },
+            { href: "/guide", label: t("Town Guide", "ガイド"), labelJa: t("Tips & Info", "お役立ち情報"), color: "bg-violet-50 text-violet-600" },
+          ].map(link => (
+            <Link key={link.href} href={link.href}>
+              <div className={`${link.color} rounded-2xl p-4 text-center cursor-pointer hover:shadow-md transition-shadow`}>
+                <p className="font-bold text-sm">{link.label}</p>
+                <p className="text-[10px] opacity-70 mt-0.5">{link.labelJa}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* DISCLAIMER */}
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
+        className="rounded-xl border border-border/60 bg-slate-50 px-4 py-3">
+        <p className="text-[10px] leading-relaxed text-slate-400">
+          {t(
+            "Weather data from JMA via Open-Meteo. Activity information is for reference — confirm opening dates and conditions directly with operators.",
+            "気象データはOpen-Meteo経由の気象庁データ。アクティビティ情報は参考用です。営業日と状況は各施設へ直接ご確認ください。"
+          )}
+        </p>
+      </motion.div>
+    </div>
+  );
+}
+
 export default function Home() {
   const { t } = useLanguage();
-  const { data, isLoading, error } = useGetDashboard({ query: { refetchInterval: 1800000 } });
-  const { data: alertData } = useGetPowderAlerts({ query: { refetchInterval: 1800000 } });
+  const { isWinter } = useSeason();
+  const { data, isLoading, error } = useGetDashboard({ query: { refetchInterval: 1800000, enabled: isWinter } });
+  const { data: alertData } = useGetPowderAlerts({ query: { refetchInterval: 1800000, enabled: isWinter } });
+
+  if (!isWinter) return <GreenHome t={t} />;
 
   if (isLoading) return <HomeSkeleton />;
   if (error) return <ErrorScreen message={(error as any)?.message || "Network error"} />;
