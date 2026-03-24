@@ -100,8 +100,6 @@ function MapResizer() {
 
 type MapLayer = "radar" | "clouds" | "temp" | "snow";
 
-const OWM_KEY = import.meta.env.VITE_OWM_API_KEY as string | undefined;
-
 const MAP_TABS: { key: MapLayer; label: string; labelJa: string }[] = [
   { key: "radar",  label: "Radar",          labelJa: "レーダー" },
   { key: "clouds", label: "Clouds",         labelJa: "雲" },
@@ -218,9 +216,9 @@ function OverlaySwitcher({ activeLayer }: { activeLayer: MapLayer }) {
       owmRef.current = null;
     }
     const cfg = OWM_LAYERS[activeLayer];
-    if (cfg && OWM_KEY) {
+    if (cfg) {
       const layer = L.tileLayer(
-        `https://tile.openweathermap.org/map/${cfg.layer}/{z}/{x}/{y}.png?appid=${OWM_KEY}`,
+        `/api/weather-tile/${cfg.layer}/{z}/{x}/{y}`,
         { opacity: cfg.opacity, zIndex: 10 }
       );
       layer.addTo(map);
