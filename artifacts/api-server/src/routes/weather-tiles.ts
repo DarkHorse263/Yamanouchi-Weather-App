@@ -4,8 +4,9 @@ const router = Router();
 const VALID_LAYERS = ["precipitation_new", "clouds_new", "temp_new", "wind_new", "snow"];
 
 function getOwmKey(): string {
-  return process.env.VITE_OWM_API_KEY || process.env.OWM_API_KEY || "";
+  return process.env.OWM_API_KEY || process.env.VITE_OWM_API_KEY || "";
 }
+
 
 router.get("/weather-tile/:layer/:z/:x/:y", async (req, res) => {
   const { layer, z, x, y } = req.params;

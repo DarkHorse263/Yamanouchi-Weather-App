@@ -29,4 +29,9 @@ expertMode = true
 
   [nix]
   channel = "stable-25_05"
+
+[userenv]
+
+[userenv.shared]
+OWM_API_KEY = "dd8b383d8883198e744425d9e7ed11c3"
   
