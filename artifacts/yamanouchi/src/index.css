@@ -112,7 +112,8 @@
   box-shadow: none !important;
 }
 .snow-label-marker,
-.poi-marker {
+.poi-marker,
+.temp-label-marker {
   background: none !important;
   border: none !important;
 }

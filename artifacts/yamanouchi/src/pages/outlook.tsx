@@ -4,7 +4,7 @@ import { LoadingScreen, ErrorScreen } from "@/components/ui-elements";
 import { motion } from "framer-motion";
 import { Mountain, MapPin, Radar } from "lucide-react";
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
-import { MapContainer, TileLayer, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
@@ -202,9 +202,84 @@ function RadarOverlay({ host, frames }: { host: string; frames: { path: string; 
 
 const OWM_LAYERS: Record<string, { layer: string; opacity: number }> = {
   clouds: { layer: "clouds_new", opacity: 0.7 },
-  temp:   { layer: "temp_new",   opacity: 0.6 },
+  temp:   { layer: "temp_new",   opacity: 0.35 },
   snow:   { layer: "snow",       opacity: 0.8 },
 };
+
+interface TempStation {
+  key: string;
+  name: string;
+  nameJa: string;
+  lat: number;
+  lng: number;
+  elevation: number;
+  type: "mountain" | "town";
+}
+
+const TEMP_STATIONS: TempStation[] = [
+  { key: "shiga",     name: "Shiga Kogen",  nameJa: "志賀高原", lat: 36.805,  lng: 138.520, elevation: 1800, type: "mountain" },
+  { key: "ryuoo",     name: "Ryuoo",        nameJa: "竜王",     lat: 36.789,  lng: 138.486, elevation: 1100, type: "mountain" },
+  { key: "yomase",    name: "Yomase",       nameJa: "夜間瀬",   lat: 36.790,  lng: 138.430, elevation: 900,  type: "mountain" },
+  { key: "yamanouchi",name: "Yamanouchi",    nameJa: "山ノ内町", lat: 36.745,  lng: 138.415, elevation: 600,  type: "town" },
+  { key: "nakano",    name: "Nakano",       nameJa: "中野市",   lat: 36.742,  lng: 138.368, elevation: 350,  type: "town" },
+];
+
+function tempColor(temp: number): { text: string; bg: string; border: string } {
+  if (temp <= -10) return { text: '#7C3AED', bg: '#F5F3FF', border: '#DDD6FE' };
+  if (temp <= -5)  return { text: '#3B82F6', bg: '#EFF6FF', border: '#BFDBFE' };
+  if (temp <= 0)   return { text: '#0EA5E9', bg: '#F0F9FF', border: '#BAE6FD' };
+  if (temp <= 5)   return { text: '#059669', bg: '#ECFDF5', border: '#A7F3D0' };
+  if (temp <= 15)  return { text: '#D97706', bg: '#FFFBEB', border: '#FDE68A' };
+  if (temp <= 25)  return { text: '#EA580C', bg: '#FFF7ED', border: '#FED7AA' };
+  return { text: '#DC2626', bg: '#FEF2F2', border: '#FECACA' };
+}
+
+function createTempLabel(station: TempStation, temp: number, wind: number, emoji: string) {
+  const tc = tempColor(temp);
+  const isMtn = station.type === "mountain";
+  const html = `
+    <div style="
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: white;
+      border: 2px solid ${tc.border};
+      border-radius: 10px;
+      padding: 4px 8px 3px;
+      font-family: system-ui, sans-serif;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+      white-space: nowrap;
+      transform: translate(-50%, -100%);
+      min-width: 60px;
+      cursor: pointer;
+    ">
+      <span style="font-size:10px;font-weight:800;color:#64748b;letter-spacing:0.5px;line-height:1;margin-bottom:2px;">
+        ${isMtn ? '⛰️' : '🏘️'} ${station.name}
+      </span>
+      <span style="font-size:18px;font-weight:900;color:${tc.text};line-height:1;">
+        ${temp.toFixed(1)}°
+      </span>
+      <span style="font-size:9px;font-weight:600;color:#94a3b8;line-height:1;margin-top:1px;">
+        ${emoji} ${wind} km/h
+      </span>
+    </div>
+    <div style="
+      width:0;height:0;
+      border-left:5px solid transparent;
+      border-right:5px solid transparent;
+      border-top:6px solid ${tc.border};
+      margin:-1px auto 0;
+    "></div>
+  `;
+  return L.divIcon({
+    html,
+    className: 'temp-label-marker',
+    iconSize: [0, 0],
+    iconAnchor: [0, 0],
+    popupAnchor: [0, -58],
+  });
+}
 
 function OverlaySwitcher({ activeLayer }: { activeLayer: MapLayer }) {
   const map = useMap();
@@ -235,20 +310,31 @@ function OverlaySwitcher({ activeLayer }: { activeLayer: MapLayer }) {
   return null;
 }
 
-function WeatherMap({ activeLayer }: { activeLayer: MapLayer }) {
+interface TempReading {
+  station: TempStation;
+  temp: number;
+  wind: number;
+  weatherCode: number;
+}
+
+function WeatherMap({ activeLayer, tempReadings }: { activeLayer: MapLayer; tempReadings?: TempReading[] }) {
   const rv = useRainViewer();
   const frames = useMemo(() => {
     if (!rv) return [];
     return [...(rv.radar?.past || []), ...(rv.radar?.nowcast || [])];
   }, [rv]);
 
+  const showTemp = activeLayer === "temp" && tempReadings && tempReadings.length > 0;
+  const center: [number, number] = showTemp ? [36.775, 138.455] : [36.795, 138.530];
+  const zoom = showTemp ? 11 : 7;
+
   return (
     <div className="relative w-full h-full">
       <MapContainer
-        center={[36.795, 138.530]}
-        zoom={7}
+        center={center}
+        zoom={zoom}
         minZoom={5}
-        maxZoom={10}
+        maxZoom={13}
         className="w-full h-full z-0"
         zoomControl={true}
         scrollWheelZoom={false}
@@ -260,9 +346,51 @@ function WeatherMap({ activeLayer }: { activeLayer: MapLayer }) {
         {activeLayer === "radar" && rv && frames.length > 0 && (
           <RadarOverlay host={rv.host} frames={frames} />
         )}
+        {showTemp && <TempZoomer />}
+        {showTemp && tempReadings.map(({ station, temp, wind, weatherCode }) => (
+          <Marker
+            key={station.key}
+            position={[station.lat, station.lng]}
+            icon={createTempLabel(station, temp, wind, weatherEmoji(weatherCode))}
+          >
+            <Popup>
+              <div className="p-3 min-w-[160px]">
+                <div className="flex items-center gap-1.5 mb-1">
+                  <span className="text-xs">{station.type === "mountain" ? "⛰️" : "🏘️"}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-wide text-slate-500">
+                    {station.name}
+                  </span>
+                </div>
+                <p className="text-[10px] text-slate-400 mb-2">{station.elevation}m elevation</p>
+                <div className="grid grid-cols-2 gap-1.5">
+                  <div className="rounded-lg p-2 text-center" style={{ background: tempColor(temp).bg }}>
+                    <div className="text-[9px] font-bold uppercase" style={{ color: tempColor(temp).text }}>Temp</div>
+                    <div className="text-base font-black" style={{ color: tempColor(temp).text }}>{temp.toFixed(1)}°</div>
+                  </div>
+                  <div className="bg-slate-50 rounded-lg p-2 text-center">
+                    <div className="text-[9px] text-slate-500 font-bold uppercase">Wind</div>
+                    <div className="text-base font-black text-slate-700">{wind}<span className="text-[10px] ml-0.5">km/h</span></div>
+                  </div>
+                </div>
+              </div>
+            </Popup>
+          </Marker>
+        ))}
       </MapContainer>
     </div>
   );
+}
+
+function TempZoomer() {
+  const map = useMap();
+  useEffect(() => {
+    const bounds = L.latLngBounds(TEMP_STATIONS.map(s => [s.lat, s.lng] as [number, number]));
+    map.fitBounds(bounds, { padding: [30, 30], maxZoom: 11 });
+    return () => {
+      map.setView([36.795, 138.530], 7, { animate: true });
+    };
+  }, [map]);
+  return null;
 }
 
 function MountainCard({ m, t, idx }: { m: MountainOutlook; t: (en: string, ja: string) => string; idx: number }) {
@@ -401,6 +529,26 @@ export default function Outlook() {
     refetchInterval: 600000,
   });
 
+  const tempReadings: TempReading[] = useMemo(() => {
+    if (!data) return [];
+    const readings: TempReading[] = [];
+    const stationMap: Record<string, { temp: number; wind: number; weatherCode: number }> = {};
+    for (const m of data.mountains) {
+      const key = m.region.toLowerCase().replace(/\s+/g, '');
+      stationMap[key === 'shigakogen' ? 'shiga' : key] = { temp: m.temp, wind: m.wind, weatherCode: m.weatherCode };
+    }
+    for (const tw of data.towns) {
+      stationMap[tw.location.toLowerCase().replace(/\s+/g, '')] = { temp: tw.temp, wind: tw.wind, weatherCode: tw.weatherCode };
+    }
+    for (const station of TEMP_STATIONS) {
+      const match = stationMap[station.key];
+      if (match) {
+        readings.push({ station, temp: match.temp, wind: match.wind, weatherCode: match.weatherCode });
+      }
+    }
+    return readings;
+  }, [data]);
+
   if (isLoading) return <LoadingScreen />;
   if (error || !data) return <ErrorScreen message={(error as any)?.message || "Network error"} />;
 
@@ -453,8 +601,8 @@ export default function Outlook() {
           ))}
         </div>
 
-        <div className="rounded-2xl overflow-hidden border border-border shadow-sm relative" style={{ height: 360 }}>
-          <WeatherMap activeLayer={activeLayer} />
+        <div className="rounded-2xl overflow-hidden border border-border shadow-sm relative" style={{ height: activeLayer === "temp" ? 420 : 360 }}>
+          <WeatherMap activeLayer={activeLayer} tempReadings={tempReadings} />
         </div>
 
         <p className="text-[10px] text-muted-foreground mt-1.5 text-right">
