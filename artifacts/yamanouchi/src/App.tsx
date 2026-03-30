@@ -9,7 +9,7 @@ import { Layout } from "@/components/layout";
 import Home from "@/pages/home";
 import Resorts from "@/pages/resorts";
 import MapView from "@/pages/map";
-import Outlook from "@/pages/outlook";
+
 import Alerts from "@/pages/alerts";
 import Guide from "@/pages/guide";
 import Cams from "@/pages/cams";
@@ -39,7 +39,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/resorts" component={Resorts} />
       <Route path="/map" component={MapView} />
-      <Route path="/outlook" component={Outlook} />
+
       <Route path="/alerts" component={Alerts} />
       <Route path="/guide" component={Guide} />
       <Route path="/cams" component={Cams} />

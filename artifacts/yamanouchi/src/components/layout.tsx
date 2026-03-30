@@ -3,8 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Home,
   MountainSnow,
-  Map as MapIcon,
-  CloudSnow,
   CloudSun,
   BookOpen,
   Video,
@@ -23,8 +21,7 @@ type NavItem = { path: string; icon: any; label: string; labelJa: string };
 const WINTER_NAV: NavItem[] = [
   { path: "/",           icon: Home,         label: "Home",      labelJa: "ホーム" },
   { path: "/resorts",    icon: MountainSnow, label: "Resorts",   labelJa: "スキー場" },
-  { path: "/map",        icon: MapIcon,      label: "Map",       labelJa: "マップ" },
-  { path: "/outlook",    icon: CloudSnow,    label: "Outlook",   labelJa: "予報" },
+  { path: "/map",        icon: CloudSun,     label: "Weather",   labelJa: "天気" },
   { path: "/cams",       icon: Video,        label: "Cams",      labelJa: "カメラ" },
   { path: "/stay",       icon: BedDouble,    label: "Stay",      labelJa: "宿泊" },
   { path: "/transport",  icon: Bus,          label: "Transport", labelJa: "交通" },
@@ -34,8 +31,7 @@ const WINTER_NAV: NavItem[] = [
 const GREEN_NAV: NavItem[] = [
   { path: "/",           icon: Home,         label: "Home",      labelJa: "ホーム" },
   { path: "/activities", icon: TreePine,     label: "Activities", labelJa: "アクティビティ" },
-  { path: "/map",        icon: MapIcon,      label: "Map",       labelJa: "マップ" },
-  { path: "/outlook",    icon: CloudSun,     label: "Outlook",   labelJa: "予報" },
+  { path: "/map",        icon: CloudSun,     label: "Weather",   labelJa: "天気" },
   { path: "/cams",       icon: Video,        label: "Cams",      labelJa: "カメラ" },
   { path: "/stay",       icon: BedDouble,    label: "Stay",      labelJa: "宿泊" },
   { path: "/transport",  icon: Bus,          label: "Transport", labelJa: "交通" },

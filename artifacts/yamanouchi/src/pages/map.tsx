@@ -1,450 +1,394 @@
-import { useGetMapData } from "@workspace/api-client-react";
+import { useQuery } from "@tanstack/react-query";
 import { useLanguage } from "@/hooks/use-language";
-import { useSeason } from "@/hooks/use-season";
-import { LoadingScreen, ErrorScreen } from "@/components/ui-elements";
-import { useEffect, useRef, useState } from "react";
+import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { ChevronDown, ChevronUp, Layers, Mountain, MapPin, TreePine, Waves, Camera } from "lucide-react";
+import { CloudSun } from "lucide-react";
 
-delete (L.Icon.Default.prototype as any)._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
-  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-});
-
-const SNOW_LEVELS = {
-  heavy:    { color: '#E11D48', bg: '#FFF1F2', border: '#FECDD3' },
-  moderate: { color: '#D97706', bg: '#FFFBEB', border: '#FDE68A' },
-  light:    { color: '#2563EB', bg: '#EFF6FF', border: '#BFDBFE' },
-  none:     { color: '#64748B', bg: '#F8FAFC', border: '#E2E8F0' },
-};
-
-const REGION_COLORS: Record<string, string> = {
-  'Shiga Kogen': '#6366F1',
-  'Ryuoo':       '#0EA5E9',
-  'Yomase':      '#10B981',
-};
-
-const REGION_BOUNDS: Record<string, [[number, number], [number, number]]> = {
-  'Shiga Kogen': [[36.780, 138.490], [36.825, 138.540]],
-  'Ryuoo':       [[36.770, 138.475], [36.800, 138.510]],
-  'Yomase':      [[36.775, 138.415], [36.810, 138.455]],
-};
-
-const BASE_TILES = {
-  voyager: {
-    url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-    attr: '&copy; OSM &copy; CARTO',
-    label: 'Map',
-  },
-  terrain: {
-    url: 'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png',
-    attr: '&copy; Stamen &copy; OSM',
-    label: 'Terrain',
-  },
-  satellite: {
-    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-    attr: '&copy; Esri',
-    label: 'Satellite',
-  },
-};
-
-type TileKey = keyof typeof BASE_TILES;
-
-function shortResortName(name: string): string {
-  return name
-    .replace(/^Shiga Kogen\s+/i, '')
-    .replace(/\s+(Ski Area|Ski Park|Onsen Ski Area|Ski Resort)$/i, '')
-    .trim();
+function MapResizer() {
+  const map = useMap();
+  useEffect(() => { setTimeout(() => map.invalidateSize(), 150); }, [map]);
+  return null;
 }
 
-const createSnowLabel = (name: string, snow24h: number | null, baseDepth: number | null, snowLevel: string, regionColor: string, rank: number | null) => {
-  const level = SNOW_LEVELS[snowLevel as keyof typeof SNOW_LEVELS] ?? SNOW_LEVELS.none;
-  const short = shortResortName(name);
-  const displayName = short.length > 12 ? short.slice(0, 11) + '…' : short;
-  const snowVal = snow24h ?? 0;
-  const isTop = rank === 1;
+type MapLayer = "radar" | "clouds" | "temp" | "snow";
 
+const MAP_TABS: { key: MapLayer; label: string; labelJa: string }[] = [
+  { key: "radar",  label: "Radar",     labelJa: "レーダー" },
+  { key: "clouds", label: "Clouds",    labelJa: "雲" },
+  { key: "temp",   label: "Temp (°C)", labelJa: "気温 (°C)" },
+  { key: "snow",   label: "Snow",      labelJa: "積雪" },
+];
+
+const BASE_TILE = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png";
+
+interface RainViewerData {
+  host: string;
+  radar: { past: { path: string; time: number }[]; nowcast: { path: string; time: number }[] };
+  satellite: { infrared: { path: string; time: number }[] };
+}
+
+function useRainViewer() {
+  const [data, setData] = useState<RainViewerData | null>(null);
+  useEffect(() => {
+    const load = () =>
+      fetch("https://api.rainviewer.com/public/weather-maps.json")
+        .then(r => r.json())
+        .then(setData)
+        .catch(() => {});
+    load();
+    const iv = setInterval(load, 300000);
+    return () => clearInterval(iv);
+  }, []);
+  return data;
+}
+
+function RadarOverlay({ host, frames }: { host: string; frames: { path: string; time: number }[] }) {
+  const map = useMap();
+  const layersRef = useRef<L.TileLayer[]>([]);
+  const animRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [frameIdx, setFrameIdx] = useState(frames.length - 1);
+  const [playing, setPlaying] = useState(true);
+
+  useEffect(() => {
+    layersRef.current.forEach(l => map.removeLayer(l));
+    const newLayers = frames.map(f => {
+      const url = `${host}${f.path}/256/{z}/{x}/{y}/6/1_1.png`;
+      const layer = L.tileLayer(url, { opacity: 0, zIndex: 10, tileSize: 256 });
+      layer.addTo(map);
+      return layer;
+    });
+    layersRef.current = newLayers;
+    if (newLayers.length > 0) {
+      newLayers[newLayers.length - 1].setOpacity(0.7);
+    }
+    setFrameIdx(frames.length - 1);
+    return () => { newLayers.forEach(l => map.removeLayer(l)); };
+  }, [map, host, frames]);
+
+  const showFrame = useCallback((idx: number) => {
+    layersRef.current.forEach((l, i) => l.setOpacity(i === idx ? 0.7 : 0));
+    setFrameIdx(idx);
+  }, []);
+
+  useEffect(() => {
+    if (!playing || frames.length < 2) return;
+    let current = frameIdx;
+    const step = () => {
+      current = (current + 1) % frames.length;
+      showFrame(current);
+      animRef.current = setTimeout(step, current === frames.length - 1 ? 2000 : 500);
+    };
+    animRef.current = setTimeout(step, current === frames.length - 1 ? 2000 : 500);
+    return () => { if (animRef.current) clearTimeout(animRef.current); };
+  }, [playing, frames.length, showFrame]);
+
+  const ts = frames[frameIdx]?.time;
+  const timeLabel = ts
+    ? new Date(ts * 1000).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Tokyo" })
+    : "";
+
+  return (
+    <div className="absolute bottom-2 left-2 right-2 z-[1000] flex items-center gap-2">
+      <button
+        onClick={() => setPlaying(p => !p)}
+        className="bg-white/90 backdrop-blur rounded-lg px-2.5 py-1.5 text-xs font-bold shadow border border-slate-200 shrink-0"
+      >
+        {playing ? "⏸" : "▶️"}
+      </button>
+      <div className="flex-1 bg-white/90 backdrop-blur rounded-lg px-3 py-1.5 shadow border border-slate-200">
+        <div className="flex items-center justify-between">
+          <span className="text-[10px] font-medium text-slate-500">{timeLabel} JST</span>
+          <input
+            type="range"
+            min={0}
+            max={frames.length - 1}
+            value={frameIdx}
+            onChange={e => { setPlaying(false); showFrame(Number(e.target.value)); }}
+            className="w-24 h-1 accent-blue-600"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const OWM_LAYERS: Record<string, { layer: string; opacity: number }> = {
+  clouds: { layer: "clouds_new", opacity: 0.7 },
+  temp:   { layer: "temp_new",   opacity: 0.35 },
+  snow:   { layer: "snow",       opacity: 0.8 },
+};
+
+interface TempStation {
+  key: string;
+  name: string;
+  nameJa: string;
+  lat: number;
+  lng: number;
+  elevation: number;
+  type: "mountain" | "town";
+}
+
+const TEMP_STATIONS: TempStation[] = [
+  { key: "shiga",     name: "Shiga Kogen",  nameJa: "志賀高原", lat: 36.805,  lng: 138.520, elevation: 1800, type: "mountain" },
+  { key: "ryuoo",     name: "Ryuoo",        nameJa: "竜王",     lat: 36.789,  lng: 138.486, elevation: 1100, type: "mountain" },
+  { key: "yomase",    name: "Yomase",       nameJa: "夜間瀬",   lat: 36.790,  lng: 138.430, elevation: 900,  type: "mountain" },
+  { key: "yamanouchi",name: "Yamanouchi",    nameJa: "山ノ内町", lat: 36.745,  lng: 138.415, elevation: 600,  type: "town" },
+  { key: "nakano",    name: "Nakano",       nameJa: "中野市",   lat: 36.742,  lng: 138.368, elevation: 350,  type: "town" },
+];
+
+function weatherEmoji(code: number): string {
+  if (code === 0) return "☀️";
+  if (code <= 2)  return "⛅";
+  if (code === 3) return "☁️";
+  if (code <= 48) return "🌫️";
+  if (code <= 55) return "🌦️";
+  if (code <= 67) return "🌧️";
+  if (code <= 77) return "❄️";
+  if (code <= 82) return "🌦️";
+  if (code <= 86) return "🌨️";
+  return "⛈️";
+}
+
+function tempColor(temp: number): { text: string; bg: string; border: string } {
+  if (temp <= -10) return { text: '#7C3AED', bg: '#F5F3FF', border: '#DDD6FE' };
+  if (temp <= -5)  return { text: '#3B82F6', bg: '#EFF6FF', border: '#BFDBFE' };
+  if (temp <= 0)   return { text: '#0EA5E9', bg: '#F0F9FF', border: '#BAE6FD' };
+  if (temp <= 5)   return { text: '#059669', bg: '#ECFDF5', border: '#A7F3D0' };
+  if (temp <= 15)  return { text: '#D97706', bg: '#FFFBEB', border: '#FDE68A' };
+  if (temp <= 25)  return { text: '#EA580C', bg: '#FFF7ED', border: '#FED7AA' };
+  return { text: '#DC2626', bg: '#FEF2F2', border: '#FECACA' };
+}
+
+function createTempLabel(station: TempStation, temp: number, wind: number, emoji: string) {
+  const tc = tempColor(temp);
+  const isMtn = station.type === "mountain";
   const html = `
     <div style="
       position: relative;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 4px;
       background: white;
-      border: 2px solid ${isTop ? '#FBBF24' : regionColor};
-      border-radius: 8px;
-      padding: 2px 6px 2px 4px;
+      border: 2px solid ${tc.border};
+      border-radius: 10px;
+      padding: 4px 8px 3px;
       font-family: system-ui, sans-serif;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
       white-space: nowrap;
       transform: translate(-50%, -100%);
+      min-width: 60px;
       cursor: pointer;
     ">
-      ${isTop ? '<span style="position:absolute;top:-8px;right:-6px;font-size:10px;">⭐</span>' : ''}
-      <span style="
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 20px;
-        height: 20px;
-        border-radius: 5px;
-        background: ${level.bg};
-        border: 1px solid ${level.border};
-        font-size: 10px;
-        font-weight: 900;
-        color: ${level.color};
-        flex-shrink: 0;
-      ">${snowVal}</span>
-      <span style="
-        font-size: 10px;
-        font-weight: 700;
-        color: #334155;
-        line-height: 1.1;
-        max-width: 80px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      ">${displayName}</span>
+      <span style="font-size:10px;font-weight:800;color:#64748b;letter-spacing:0.5px;line-height:1;margin-bottom:2px;">
+        ${isMtn ? '⛰️' : '🏘️'} ${station.name}
+      </span>
+      <span style="font-size:18px;font-weight:900;color:${tc.text};line-height:1;">
+        ${temp.toFixed(1)}°
+      </span>
+      <span style="font-size:9px;font-weight:600;color:#94a3b8;line-height:1;margin-top:1px;">
+        ${emoji} ${wind} km/h
+      </span>
     </div>
     <div style="
-      width: 0; height: 0;
-      border-left: 5px solid transparent;
-      border-right: 5px solid transparent;
-      border-top: 6px solid ${isTop ? '#FBBF24' : regionColor};
-      margin: -1px auto 0;
+      width:0;height:0;
+      border-left:5px solid transparent;
+      border-right:5px solid transparent;
+      border-top:6px solid ${tc.border};
+      margin:-1px auto 0;
     "></div>
   `;
-
   return L.divIcon({
     html,
-    className: 'snow-label-marker',
+    className: 'temp-label-marker',
     iconSize: [0, 0],
     iconAnchor: [0, 0],
-    popupAnchor: [0, -36],
+    popupAnchor: [0, -58],
   });
-};
+}
 
-const GREEN_POIS = [
-  { name: "Jigokudani Monkey Park", nameJa: "地獄谷野猿公苑", lat: 36.7332, lng: 138.4621, type: "wildlife", icon: "🐒" },
-  { name: "SORA Terrace", nameJa: "SORAテラス", lat: 36.7892, lng: 138.4750, type: "viewpoint", icon: "☁️" },
-  { name: "Shiga Kogen Marshlands", nameJa: "志賀高原湿原", lat: 36.8050, lng: 138.5200, type: "hiking", icon: "🥾" },
-  { name: "Shibu Onsen", nameJa: "渋温泉", lat: 36.7462, lng: 138.4325, type: "onsen", icon: "♨️" },
-  { name: "Yudanaka Onsen", nameJa: "湯田中温泉", lat: 36.7444, lng: 138.4148, type: "onsen", icon: "♨️" },
-  { name: "Ryuoo Gondola", nameJa: "竜王ゴンドラ", lat: 36.7850, lng: 138.4855, type: "viewpoint", icon: "🚡" },
-  { name: "Kumanoyu Hiking", nameJa: "熊の湯ハイキング", lat: 36.8100, lng: 138.5280, type: "hiking", icon: "🥾" },
-  { name: "Yokoteyama Summit", nameJa: "横手山山頂", lat: 36.8155, lng: 138.5340, type: "hiking", icon: "⛰️" },
-];
-
-const createPoiIcon = (icon: string) => {
-  const html = `
-    <div style="
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      background: white;
-      border: 2px solid #059669;
-      border-radius: 50%;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      font-size: 16px;
-      transform: translate(-50%, -50%);
-      cursor: pointer;
-    ">${icon}</div>
-  `;
-  return L.divIcon({
-    html,
-    className: 'poi-marker',
-    iconSize: [0, 0],
-    iconAnchor: [0, 0],
-    popupAnchor: [0, -20],
-  });
-};
-
-type MapMarker = {
-  id: string; name: string; nameJa: string | null; region: string;
-  lat: number; lng: number; snow24h: number | null;
-  baseDepth: number | null; rank: number | null; snowLevel: string;
-};
-
-function FitBoundsController({ target }: { target: [[number, number], [number, number]] | [number, number][] | null }) {
+function OverlaySwitcher({ activeLayer }: { activeLayer: MapLayer }) {
   const map = useMap();
-  const prevKey = useRef("");
+  const owmRef = useRef<L.TileLayer | null>(null);
 
   useEffect(() => {
-    if (!target) return;
-    const key = JSON.stringify(target);
-    if (key === prevKey.current) return;
-    prevKey.current = key;
-    const bounds = L.latLngBounds(target as [number, number][]);
-    map.fitBounds(bounds, { padding: [40, 40], maxZoom: 14 });
-  }, [target, map]);
+    if (owmRef.current) {
+      map.removeLayer(owmRef.current);
+      owmRef.current = null;
+    }
+    const cfg = OWM_LAYERS[activeLayer];
+    if (cfg) {
+      const layer = L.tileLayer(
+        `/api/weather-tile/${cfg.layer}/{z}/{x}/{y}`,
+        { opacity: cfg.opacity, zIndex: 10 }
+      );
+      layer.addTo(map);
+      owmRef.current = layer;
+    }
+    return () => {
+      if (owmRef.current) {
+        map.removeLayer(owmRef.current);
+        owmRef.current = null;
+      }
+    };
+  }, [map, activeLayer]);
 
   return null;
 }
 
-function TileSwitcher({ active, onChange }: { active: TileKey; onChange: (k: TileKey) => void }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <div className="absolute top-4 right-4 z-20">
-      <button
-        onClick={() => setOpen(!open)}
-        className="bg-white/95 backdrop-blur shadow-lg border border-white/50 rounded-xl px-3 py-2 flex items-center gap-1.5 text-xs font-bold text-slate-700"
-      >
-        <Layers className="w-3.5 h-3.5" />
-        {BASE_TILES[active].label}
-      </button>
-      {open && (
-        <div className="mt-1 bg-white/95 backdrop-blur shadow-lg border border-white/50 rounded-xl overflow-hidden">
-          {(Object.keys(BASE_TILES) as TileKey[]).map(key => (
-            <button
-              key={key}
-              onClick={() => { onChange(key); setOpen(false); }}
-              className={`w-full text-left px-3 py-2 text-xs font-bold transition-colors ${
-                key === active ? 'bg-primary/10 text-primary' : 'text-slate-600 hover:bg-slate-50'
-              }`}
-            >
-              {BASE_TILES[key].label}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
-  );
+interface TempReading {
+  station: TempStation;
+  temp: number;
+  wind: number;
+  weatherCode: number;
 }
 
-function Legend({ isWinter, t }: { isWinter: boolean; t: (en: string, ja: string) => string }) {
-  const [collapsed, setCollapsed] = useState(false);
-  const regions = ['Shiga Kogen', 'Ryuoo', 'Yomase'];
+function TempZoomer() {
+  const map = useMap();
+  useEffect(() => {
+    const bounds = L.latLngBounds(TEMP_STATIONS.map(s => [s.lat, s.lng] as [number, number]));
+    map.fitBounds(bounds, { padding: [30, 30], maxZoom: 11 });
+    return () => {
+      map.setView([36.5, 137.5], 6, { animate: true });
+    };
+  }, [map]);
+  return null;
+}
 
-  if (!isWinter) {
-    return (
-      <div className="absolute bottom-20 md:bottom-4 left-4 z-20 bg-white/95 backdrop-blur-md rounded-xl shadow-lg border border-white/50 overflow-hidden">
-        <button
-          onClick={() => setCollapsed(!collapsed)}
-          className="w-full flex items-center justify-between px-3 py-2 text-xs font-bold text-slate-600"
-        >
-          <span>{t("Points of Interest", "スポット")}</span>
-          {collapsed ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-        </button>
-        {!collapsed && (
-          <div className="px-3 pb-2.5 space-y-1.5 text-xs font-medium border-t border-slate-100 pt-2">
-            <div className="flex items-center gap-2"><span>🥾</span> {t("Hiking", "ハイキング")}</div>
-            <div className="flex items-center gap-2"><span>♨️</span> {t("Onsen", "温泉")}</div>
-            <div className="flex items-center gap-2"><span>☁️</span> {t("Viewpoint", "展望台")}</div>
-            <div className="flex items-center gap-2"><span>🐒</span> {t("Wildlife", "野生動物")}</div>
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  return (
-    <div className="absolute bottom-20 md:bottom-4 left-4 z-20 bg-white/95 backdrop-blur-md rounded-xl shadow-lg border border-white/50 overflow-hidden">
-      <button
-        onClick={() => setCollapsed(!collapsed)}
-        className="w-full flex items-center justify-between px-3 py-2 text-xs font-bold text-slate-600"
-      >
-        <span>{t("Legend", "凡例")}</span>
-        {collapsed ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-      </button>
-      {!collapsed && (
-        <div className="px-3 pb-2.5 border-t border-slate-100 pt-2">
-          <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">{t("24h Snowfall", "24h降雪量")}</p>
-          <div className="space-y-1 text-xs font-medium">
-            {[
-              { level: 'heavy', label: '>15 cm' },
-              { level: 'moderate', label: '5–15 cm' },
-              { level: 'light', label: '<5 cm' },
-              { level: 'none', label: '0 cm' },
-            ].map(({ level, label }) => {
-              const s = SNOW_LEVELS[level as keyof typeof SNOW_LEVELS];
-              return (
-                <div key={level} className="flex items-center gap-2">
-                  <span className="w-5 h-4 rounded text-center text-[9px] font-black leading-4" style={{ background: s.bg, color: s.color, border: `1px solid ${s.border}` }}>
-                    {level === 'heavy' ? '20' : level === 'moderate' ? '8' : level === 'light' ? '3' : '0'}
-                  </span>
-                  <span className="text-slate-600">{label}</span>
-                </div>
-              );
-            })}
-          </div>
-          <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-1.5 mt-2.5">{t("Region", "エリア")}</p>
-          <div className="space-y-1 text-xs font-medium">
-            {regions.map(r => (
-              <div key={r} className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full" style={{ background: REGION_COLORS[r] }} />
-                <span className="text-slate-600">{r}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
-  );
+function ViewResetter({ activeLayer }: { activeLayer: MapLayer }) {
+  const map = useMap();
+  const prevLayer = useRef(activeLayer);
+  useEffect(() => {
+    if (prevLayer.current === "temp" && activeLayer !== "temp") {
+      map.setView([36.5, 137.5], 6, { animate: true });
+    }
+    prevLayer.current = activeLayer;
+  }, [activeLayer, map]);
+  return null;
 }
 
 export default function MapView() {
   const { t } = useLanguage();
-  const { isWinter } = useSeason();
-  const { data: markers, isLoading, error } = useGetMapData({ query: { refetchInterval: 1800000, enabled: isWinter } });
-  const [zoomTarget, setZoomTarget] = useState<[[number, number], [number, number]] | [number, number][] | null>(null);
-  const [activeRegion, setActiveRegion] = useState<string | null>(null);
-  const [tileKey, setTileKey] = useState<TileKey>('voyager');
+  const [activeLayer, setActiveLayer] = useState<MapLayer>("radar");
 
-  const regions = ['Shiga Kogen', 'Ryuoo', 'Yomase'];
+  const { data: outlookData } = useQuery({
+    queryKey: ["weather-outlook"],
+    queryFn: async () => {
+      const res = await fetch("/api/weather-outlook");
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return res.json();
+    },
+    refetchInterval: 600000,
+  });
 
-  if (isWinter && isLoading) return <LoadingScreen />;
-  if (isWinter && error) return <ErrorScreen message={(error as any)?.message || "Network error"} />;
-
-  const allMarkers = isWinter ? (markers as MapMarker[] ?? []) : [];
-  const allPoints: [number, number][] = allMarkers.length > 0
-    ? allMarkers.map(m => [m.lat, m.lng])
-    : GREEN_POIS.map(p => [p.lat, p.lng]);
-  const fitTarget = zoomTarget ?? allPoints;
-
-  function handleRegionPill(region: string) {
-    if (activeRegion === region) {
-      setActiveRegion(null);
-      setZoomTarget(allPoints);
-    } else {
-      setActiveRegion(region);
-      setZoomTarget(REGION_BOUNDS[region]);
+  const tempReadings: TempReading[] = useMemo(() => {
+    if (!outlookData) return [];
+    const readings: TempReading[] = [];
+    const stationMap: Record<string, { temp: number; wind: number; weatherCode: number }> = {};
+    for (const m of outlookData.mountains || []) {
+      const key = m.region.toLowerCase().replace(/\s+/g, '');
+      stationMap[key === 'shigakogen' ? 'shiga' : key] = { temp: m.temp, wind: m.wind, weatherCode: m.weatherCode };
     }
-  }
+    for (const tw of outlookData.towns || []) {
+      stationMap[tw.location.toLowerCase().replace(/\s+/g, '')] = { temp: tw.temp, wind: tw.wind, weatherCode: tw.weatherCode };
+    }
+    for (const station of TEMP_STATIONS) {
+      const match = stationMap[station.key];
+      if (match) {
+        readings.push({ station, temp: match.temp, wind: match.wind, weatherCode: match.weatherCode });
+      }
+    }
+    return readings;
+  }, [outlookData]);
 
-  const tile = BASE_TILES[tileKey];
+  const rv = useRainViewer();
+  const frames = useMemo(() => {
+    if (!rv) return [];
+    return [...(rv.radar?.past || []), ...(rv.radar?.nowcast || [])];
+  }, [rv]);
+
+  const showTemp = activeLayer === "temp" && tempReadings.length > 0;
 
   return (
     <div className="relative w-full h-[calc(100vh-4rem)] md:h-screen">
       <MapContainer
-        center={[36.780, 138.480]}
-        zoom={12}
+        center={[36.5, 137.5]}
+        zoom={6}
+        minZoom={4}
+        maxZoom={13}
         className="w-full h-full z-0"
-        zoomControl={false}
+        zoomControl={true}
+        scrollWheelZoom={true}
         attributionControl={false}
       >
-        <TileLayer
-          attribution={tile.attr}
-          url={tile.url}
-          key={tileKey}
-        />
-
-        <FitBoundsController target={fitTarget} />
-
-        {isWinter && allMarkers.map((marker) => (
+        <MapResizer />
+        <TileLayer url={BASE_TILE} />
+        <OverlaySwitcher activeLayer={activeLayer} />
+        <ViewResetter activeLayer={activeLayer} />
+        {activeLayer === "radar" && rv && frames.length > 0 && (
+          <RadarOverlay host={rv.host} frames={frames} />
+        )}
+        {showTemp && <TempZoomer />}
+        {showTemp && tempReadings.map(({ station, temp, wind, weatherCode }) => (
           <Marker
-            key={marker.id}
-            position={[marker.lat, marker.lng]}
-            icon={createSnowLabel(
-              marker.name,
-              marker.snow24h,
-              marker.baseDepth,
-              marker.snowLevel,
-              REGION_COLORS[marker.region] ?? '#6366F1',
-              marker.rank,
-            )}
+            key={station.key}
+            position={[station.lat, station.lng]}
+            icon={createTempLabel(station, temp, wind, weatherEmoji(weatherCode))}
           >
             <Popup>
-              <div className="p-3 min-w-[200px]">
+              <div className="p-3 min-w-[160px]">
                 <div className="flex items-center gap-1.5 mb-1">
-                  <span className="w-2.5 h-2.5 rounded-full" style={{ background: REGION_COLORS[marker.region] }} />
-                  <span className="text-[10px] font-bold uppercase tracking-wide" style={{ color: REGION_COLORS[marker.region] }}>
-                    {marker.region}
+                  <span className="text-xs">{station.type === "mountain" ? "⛰️" : "🏘️"}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-wide text-slate-500">
+                    {station.name}
                   </span>
-                  {marker.rank === 1 && <span className="text-xs ml-auto">⭐ #1</span>}
                 </div>
-                <h3 className="font-black text-sm text-slate-800 leading-tight mb-2.5">
-                  {t(marker.name, marker.nameJa ?? marker.name)}
-                </h3>
+                <p className="text-[10px] text-slate-400 mb-2">{station.elevation}m elevation</p>
                 <div className="grid grid-cols-2 gap-1.5">
-                  <div className="rounded-lg p-2 text-center" style={{ background: (SNOW_LEVELS[marker.snowLevel as keyof typeof SNOW_LEVELS] ?? SNOW_LEVELS.none).bg }}>
-                    <div className="text-[9px] font-bold uppercase tracking-wider" style={{ color: (SNOW_LEVELS[marker.snowLevel as keyof typeof SNOW_LEVELS] ?? SNOW_LEVELS.none).color }}>
-                      {t("24h Snow", "24h降雪")}
-                    </div>
-                    <div className="text-base font-black mt-0.5" style={{ color: (SNOW_LEVELS[marker.snowLevel as keyof typeof SNOW_LEVELS] ?? SNOW_LEVELS.none).color }}>
-                      {marker.snow24h ?? 0}<span className="text-[10px] font-semibold ml-0.5">cm</span>
-                    </div>
+                  <div className="rounded-lg p-2 text-center" style={{ background: tempColor(temp).bg }}>
+                    <div className="text-[9px] font-bold uppercase" style={{ color: tempColor(temp).text }}>Temp</div>
+                    <div className="text-base font-black" style={{ color: tempColor(temp).text }}>{temp.toFixed(1)}°</div>
                   </div>
-                  <div className="bg-indigo-50 rounded-lg p-2 text-center">
-                    <div className="text-[9px] text-indigo-500 font-bold uppercase tracking-wider">{t("Base", "積雪")}</div>
-                    <div className="text-base font-black text-indigo-700 mt-0.5">
-                      {marker.baseDepth ?? 0}<span className="text-[10px] font-semibold ml-0.5">cm</span>
-                    </div>
+                  <div className="bg-slate-50 rounded-lg p-2 text-center">
+                    <div className="text-[9px] text-slate-500 font-bold uppercase">Wind</div>
+                    <div className="text-base font-black text-slate-700">{wind}<span className="text-[10px] ml-0.5">km/h</span></div>
                   </div>
                 </div>
-              </div>
-            </Popup>
-          </Marker>
-        ))}
-
-        {!isWinter && GREEN_POIS.map((poi) => (
-          <Marker
-            key={poi.name}
-            position={[poi.lat, poi.lng]}
-            icon={createPoiIcon(poi.icon)}
-          >
-            <Popup>
-              <div className="p-3 min-w-[180px]">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-lg">{poi.icon}</span>
-                  <span className="text-[10px] font-bold uppercase tracking-wide text-emerald-600">{poi.type}</span>
-                </div>
-                <h3 className="font-black text-sm text-slate-800 leading-tight">
-                  {t(poi.name, poi.nameJa)}
-                </h3>
               </div>
             </Popup>
           </Marker>
         ))}
       </MapContainer>
 
-      {isWinter && (
-        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 flex gap-1.5">
-          <button
-            onClick={() => { setActiveRegion(null); setZoomTarget(allPoints); }}
-            className={`backdrop-blur shadow-lg border text-[11px] font-bold px-2.5 py-1.5 rounded-full transition-all ${
-              activeRegion === null
-                ? "bg-slate-800 text-white border-slate-700"
-                : "bg-white/95 border-white/50 text-gray-600"
-            }`}
-          >
-            {t("All", "全体")}
-          </button>
-          {regions.map(region => (
+      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20">
+        <div className="bg-white/95 backdrop-blur-md shadow-lg border border-white/50 rounded-full p-1 flex gap-1">
+          {MAP_TABS.map(tab => (
             <button
-              key={region}
-              onClick={() => handleRegionPill(region)}
-              className={`backdrop-blur shadow-lg border text-[11px] font-bold px-2.5 py-1.5 rounded-full flex items-center gap-1 transition-all ${
-                activeRegion === region
-                  ? "bg-slate-800 text-white border-slate-700"
-                  : "bg-white/95 border-white/50 text-gray-600"
+              key={tab.key}
+              onClick={() => setActiveLayer(tab.key)}
+              className={`text-[11px] font-bold py-1.5 px-3 rounded-full transition-all whitespace-nowrap ${
+                activeLayer === tab.key
+                  ? "bg-primary text-white shadow-sm"
+                  : "text-slate-500 hover:text-slate-800 hover:bg-slate-100"
               }`}
             >
-              <span className="w-2 h-2 rounded-full" style={{ background: REGION_COLORS[region] }} />
-              {region}
+              {t(tab.label, tab.labelJa)}
             </button>
           ))}
         </div>
-      )}
+      </div>
 
-      {!isWinter && (
-        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20">
-          <div className="bg-emerald-600/90 backdrop-blur text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
-            <TreePine className="w-3.5 h-3.5" />
-            {t("Green Season Points of Interest", "グリーンシーズン観光スポット")}
-          </div>
+      <div className="absolute top-16 left-4 z-20 bg-white/90 backdrop-blur rounded-xl shadow-lg border border-white/50 px-3 py-2 flex items-center gap-2">
+        <CloudSun className="w-4 h-4 text-primary" />
+        <div>
+          <p className="text-xs font-bold text-slate-700">{t("Japan Weather", "日本の天気")}</p>
+          <p className="text-[9px] text-slate-400">{t("Pinch to zoom · Drag to pan", "ピンチでズーム · ドラッグで移動")}</p>
         </div>
-      )}
-
-      <TileSwitcher active={tileKey} onChange={setTileKey} />
-      <Legend isWinter={isWinter} t={t} />
+      </div>
 
       <div className="absolute bottom-20 md:bottom-4 right-4 z-20 bg-white/90 backdrop-blur text-slate-500 text-[10px] font-medium px-2.5 py-1.5 rounded-lg shadow-md">
-        {t("Tap for details", "タップで詳細")}
+        {t("OpenStreetMap · RainViewer · OWM", "OpenStreetMap · RainViewer · OWM")}
       </div>
     </div>
   );

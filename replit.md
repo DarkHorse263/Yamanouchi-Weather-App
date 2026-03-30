@@ -54,7 +54,7 @@ artifacts-monorepo/
 │   │       └── hooks/      # useLanguage (EN/JP toggle)
 │   └── yamanouchi/         # React+Vite frontend (port 20651)
 │       └── src/
-│           ├── pages/      # Home, Resorts, Map, Outlook, Alerts, Stay, Eat, Explore, Activities
+│           ├── pages/      # Home, Resorts (+ resort map), Map (weather map), Alerts, Stay, Eat, Explore, Activities
 │           ├── components/ # Layout (season-aware nav), UI elements
 │           └── hooks/      # useLanguage (EN/JP), useSeason (Winter/Green toggle)
 ├── lib/
@@ -154,6 +154,9 @@ The Yamanouchi app supports a Winter/Green season toggle for year-round tourism:
 
 - **Hook**: `artifacts/yamanouchi/src/hooks/use-season.tsx` — React context with auto-detection (Dec–Mar = Winter, Apr–Nov = Green), localStorage persistence (`yamanouchi-season`), manual override
 - **Layout**: Season-aware navigation — Winter shows "Resorts" tab, Green shows "Activities" tab. Color scheme adapts (blue accent for winter, emerald for green)
+- **Nav tabs (7)**: Home, Resorts/Activities, Weather, Cams, Stay, Transport, Guide
+- **Weather tab** (`/map`): Full-screen weather map of Japan (Radar, Clouds, Temp, Snow overlays). Temp tab zooms to Yamanouchi with 5 station markers
+- **Resorts tab** (`/resorts`): Resort map (snow markers by region) + resort cards below. In green season shows POI markers instead
 - **Home page**: Winter mode shows live snow dashboard with API data. Green mode shows a dedicated green season hero with activity highlights grid
 - **Activities page**: `artifacts/yamanouchi/src/pages/activities.tsx` — 8 green season activities (hiking, Snow Monkey Park, SORA Terrace, cycling, onsen tours, etc.)
 - **API optimization**: Winter dashboard queries (`useGetDashboard`, `useGetPowderAlerts`) are disabled during green season via `enabled: isWinter`
