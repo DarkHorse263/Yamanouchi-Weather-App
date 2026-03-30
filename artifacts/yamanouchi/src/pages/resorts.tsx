@@ -32,9 +32,9 @@ const REGION_COLORS: Record<string, string> = {
 };
 
 const REGION_BOUNDS: Record<string, [[number, number], [number, number]]> = {
-  'Shiga Kogen': [[36.780, 138.490], [36.825, 138.540]],
-  'Ryuoo':       [[36.770, 138.475], [36.800, 138.510]],
-  'Yomase':      [[36.775, 138.415], [36.810, 138.455]],
+  'Shiga Kogen': [[36.785, 138.500], [36.845, 138.555]],
+  'Ryuoo':       [[36.770, 138.460], [36.795, 138.490]],
+  'Yomase':      [[36.780, 138.400], [36.800, 138.425]],
 };
 
 const BASE_TILES = {
@@ -67,7 +67,7 @@ function shortResortName(name: string): string {
 const createSnowLabel = (name: string, snow24h: number | null, baseDepth: number | null, snowLevel: string, regionColor: string, rank: number | null) => {
   const level = SNOW_LEVELS[snowLevel as keyof typeof SNOW_LEVELS] ?? SNOW_LEVELS.none;
   const short = shortResortName(name);
-  const displayName = short.length > 12 ? short.slice(0, 11) + '…' : short;
+  const displayName = short.length > 14 ? short.slice(0, 13) + '…' : short;
   const snowVal = snow24h ?? 0;
   const isTop = rank === 1;
 
@@ -76,48 +76,51 @@ const createSnowLabel = (name: string, snow24h: number | null, baseDepth: number
       position: relative;
       display: flex;
       align-items: center;
-      gap: 4px;
-      background: white;
-      border: 2px solid ${isTop ? '#FBBF24' : regionColor};
-      border-radius: 8px;
-      padding: 2px 6px 2px 4px;
-      font-family: system-ui, sans-serif;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      gap: 3px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border: 1.5px solid ${isTop ? '#F59E0B' : 'rgba(0,0,0,0.08)'};
+      border-left: 3px solid ${regionColor};
+      border-radius: 6px;
+      padding: 2px 5px 2px 4px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08), 0 0 1px rgba(0,0,0,0.05);
       white-space: nowrap;
       transform: translate(-50%, -100%);
       cursor: pointer;
     ">
-      ${isTop ? '<span style="position:absolute;top:-8px;right:-6px;font-size:10px;">⭐</span>' : ''}
       <span style="
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 20px;
-        height: 20px;
-        border-radius: 5px;
+        min-width: 18px;
+        height: 18px;
+        border-radius: 4px;
         background: ${level.bg};
-        border: 1px solid ${level.border};
-        font-size: 10px;
-        font-weight: 900;
+        font-size: 9px;
+        font-weight: 800;
         color: ${level.color};
         flex-shrink: 0;
+        padding: 0 2px;
       ">${snowVal}</span>
       <span style="
-        font-size: 10px;
-        font-weight: 700;
-        color: #334155;
+        font-size: 9px;
+        font-weight: 600;
+        color: #475569;
         line-height: 1.1;
         max-width: 80px;
         overflow: hidden;
         text-overflow: ellipsis;
+        letter-spacing: -0.01em;
       ">${displayName}</span>
     </div>
     <div style="
       width: 0; height: 0;
-      border-left: 5px solid transparent;
-      border-right: 5px solid transparent;
-      border-top: 6px solid ${isTop ? '#FBBF24' : regionColor};
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 4px solid rgba(255,255,255,0.95);
       margin: -1px auto 0;
+      filter: drop-shadow(0 1px 1px rgba(0,0,0,0.06));
     "></div>
   `;
 
@@ -126,7 +129,7 @@ const createSnowLabel = (name: string, snow24h: number | null, baseDepth: number
     className: 'snow-label-marker',
     iconSize: [0, 0],
     iconAnchor: [0, 0],
-    popupAnchor: [0, -36],
+    popupAnchor: [0, -30],
   });
 };
 
@@ -226,69 +229,57 @@ function TileSwitcher({ active, onChange }: { active: TileKey; onChange: (k: Til
 }
 
 function Legend({ isWinter, t }: { isWinter: boolean; t: (en: string, ja: string) => string }) {
-  const [collapsed, setCollapsed] = useState(false);
+  const [open, setOpen] = useState(false);
   const regions = ['Shiga Kogen', 'Ryuoo', 'Yomase'];
 
-  if (!isWinter) {
-    return (
-      <div className="absolute bottom-4 left-4 z-20 bg-white/95 backdrop-blur-md rounded-xl shadow-lg border border-white/50 overflow-hidden">
-        <button
-          onClick={() => setCollapsed(!collapsed)}
-          className="w-full flex items-center justify-between px-3 py-2 text-xs font-bold text-slate-600"
-        >
-          <span>{t("Points of Interest", "スポット")}</span>
-          {collapsed ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-        </button>
-        {!collapsed && (
-          <div className="px-3 pb-2.5 space-y-1.5 text-xs font-medium border-t border-slate-100 pt-2">
-            <div className="flex items-center gap-2"><span>🥾</span> {t("Hiking", "ハイキング")}</div>
-            <div className="flex items-center gap-2"><span>♨️</span> {t("Onsen", "温泉")}</div>
-            <div className="flex items-center gap-2"><span>☁️</span> {t("Viewpoint", "展望台")}</div>
-            <div className="flex items-center gap-2"><span>🐒</span> {t("Wildlife", "野生動物")}</div>
-          </div>
-        )}
-      </div>
-    );
-  }
+  if (!isWinter) return null;
 
   return (
-    <div className="absolute bottom-4 left-4 z-20 bg-white/95 backdrop-blur-md rounded-xl shadow-lg border border-white/50 overflow-hidden">
-      <button
-        onClick={() => setCollapsed(!collapsed)}
-        className="w-full flex items-center justify-between px-3 py-2 text-xs font-bold text-slate-600"
-      >
-        <span>{t("Legend", "凡例")}</span>
-        {collapsed ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-      </button>
-      {!collapsed && (
-        <div className="px-3 pb-2.5 border-t border-slate-100 pt-2">
-          <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">{t("24h Snowfall", "24h降雪量")}</p>
-          <div className="space-y-1 text-xs font-medium">
-            {[
-              { level: 'heavy', label: '>15 cm' },
-              { level: 'moderate', label: '5–15 cm' },
-              { level: 'light', label: '<5 cm' },
-              { level: 'none', label: '0 cm' },
-            ].map(({ level, label }) => {
-              const s = SNOW_LEVELS[level as keyof typeof SNOW_LEVELS];
-              return (
-                <div key={level} className="flex items-center gap-2">
-                  <span className="w-5 h-4 rounded text-center text-[9px] font-black leading-4" style={{ background: s.bg, color: s.color, border: `1px solid ${s.border}` }}>
-                    {level === 'heavy' ? '20' : level === 'moderate' ? '8' : level === 'light' ? '3' : '0'}
-                  </span>
-                  <span className="text-slate-600">{label}</span>
+    <div className="absolute bottom-4 left-4 z-20">
+      {!open ? (
+        <button
+          onClick={() => setOpen(true)}
+          className="bg-white/90 backdrop-blur-md shadow-sm border border-slate-200/60 rounded-lg px-2.5 py-1.5 flex items-center gap-1.5 text-[10px] font-semibold text-slate-500 hover:bg-white transition-colors"
+        >
+          <ChevronUp className="w-3 h-3" />
+          {t("Legend", "凡例")}
+        </button>
+      ) : (
+        <div className="bg-white/90 backdrop-blur-md shadow-sm border border-slate-200/60 rounded-lg overflow-hidden" style={{ minWidth: 130 }}>
+          <button
+            onClick={() => setOpen(false)}
+            className="w-full flex items-center justify-between px-2.5 py-1.5 text-[10px] font-semibold text-slate-500"
+          >
+            <span>{t("Legend", "凡例")}</span>
+            <ChevronDown className="w-3 h-3" />
+          </button>
+          <div className="px-2.5 pb-2 border-t border-slate-100/80 pt-1.5">
+            <div className="flex items-center gap-3 mb-1.5">
+              {[
+                { level: 'heavy' as const, label: '15+' },
+                { level: 'moderate' as const, label: '5–15' },
+                { level: 'light' as const, label: '<5' },
+                { level: 'none' as const, label: '0' },
+              ].map(({ level, label }) => {
+                const s = SNOW_LEVELS[level];
+                return (
+                  <div key={level} className="flex items-center gap-1">
+                    <span className="w-3 h-3 rounded text-center text-[7px] font-bold leading-3" style={{ background: s.bg, color: s.color }}>
+                      {level === 'heavy' ? '20' : level === 'moderate' ? '8' : level === 'light' ? '3' : '0'}
+                    </span>
+                    <span className="text-[8px] text-slate-400">{label}</span>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="flex items-center gap-2.5">
+              {regions.map(r => (
+                <div key={r} className="flex items-center gap-1">
+                  <span className="w-2 h-2 rounded-full" style={{ background: REGION_COLORS[r] }} />
+                  <span className="text-[8px] text-slate-500 font-medium">{r === 'Shiga Kogen' ? 'Shiga' : r}</span>
                 </div>
-              );
-            })}
-          </div>
-          <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-1.5 mt-2.5">{t("Region", "エリア")}</p>
-          <div className="space-y-1 text-xs font-medium">
-            {regions.map(r => (
-              <div key={r} className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full" style={{ background: REGION_COLORS[r] }} />
-                <span className="text-slate-600">{r}</span>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       )}
@@ -338,10 +329,10 @@ function ResortMap() {
   return (
     <div className="relative w-full rounded-2xl overflow-hidden border border-border shadow-sm" style={{ height: 380 }}>
       <MapContainer
-        center={[36.780, 138.480]}
+        center={[36.800, 138.500]}
         zoom={12}
         className="w-full h-full z-0"
-        zoomControl={false}
+        zoomControl={true}
         attributionControl={false}
       >
         <MapResizer />
