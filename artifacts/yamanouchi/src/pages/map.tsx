@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { CloudSun } from "lucide-react";
+import { CloudSun, Thermometer, Star } from "lucide-react";
 
 function MapResizer() {
   const map = useMap();
@@ -120,23 +120,18 @@ const OWM_LAYERS: Record<string, { layer: string; opacity: number }> = {
   snow:   { layer: "snow",       opacity: 0.8 },
 };
 
-interface TempStation {
+interface CityTemp {
   key: string;
   name: string;
   nameJa: string;
   lat: number;
   lng: number;
-  elevation: number;
-  type: "mountain" | "town";
+  temp: number | null;
+  weatherCode: number;
+  wind: number;
 }
 
-const TEMP_STATIONS: TempStation[] = [
-  { key: "shiga",     name: "Shiga Kogen",  nameJa: "志賀高原", lat: 36.805,  lng: 138.520, elevation: 1800, type: "mountain" },
-  { key: "ryuoo",     name: "Ryuoo",        nameJa: "竜王",     lat: 36.789,  lng: 138.486, elevation: 1100, type: "mountain" },
-  { key: "yomase",    name: "Yomase",       nameJa: "夜間瀬",   lat: 36.790,  lng: 138.430, elevation: 900,  type: "mountain" },
-  { key: "yamanouchi",name: "Yamanouchi",    nameJa: "山ノ内町", lat: 36.745,  lng: 138.415, elevation: 600,  type: "town" },
-  { key: "nakano",    name: "Nakano",       nameJa: "中野市",   lat: 36.742,  lng: 138.368, elevation: 350,  type: "town" },
-];
+const FEATURED_KEYS = new Set(["yamanouchi", "nagano", "hakuba", "nozawa", "myoko"]);
 
 function weatherEmoji(code: number): string {
   if (code === 0) return "☀️";
@@ -161,41 +156,42 @@ function tempColor(temp: number): { text: string; bg: string; border: string } {
   return { text: '#DC2626', bg: '#FEF2F2', border: '#FECACA' };
 }
 
-function createTempLabel(station: TempStation, temp: number, wind: number, emoji: string) {
-  const tc = tempColor(temp);
-  const isMtn = station.type === "mountain";
+function createCityTempLabel(city: CityTemp, isJa: boolean) {
+  if (city.temp === null) return null;
+  const tc = tempColor(city.temp);
+  const emoji = weatherEmoji(city.weatherCode);
+  const isFeatured = FEATURED_KEYS.has(city.key);
+  const displayName = isJa ? city.nameJa : city.name;
+
   const html = `
     <div style="
-      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
-      background: white;
-      border: 2px solid ${tc.border};
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      border: 1.5px solid ${isFeatured ? tc.text : tc.border};
       border-radius: 10px;
-      padding: 4px 8px 3px;
+      padding: ${isFeatured ? '4px 8px 3px' : '3px 6px 2px'};
       font-family: system-ui, sans-serif;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
       white-space: nowrap;
       transform: translate(-50%, -100%);
-      min-width: 60px;
-      cursor: pointer;
+      min-width: ${isFeatured ? '64px' : '48px'};
     ">
-      <span style="font-size:10px;font-weight:800;color:#64748b;letter-spacing:0.5px;line-height:1;margin-bottom:2px;">
-        ${isMtn ? '⛰️' : '🏘️'} ${station.name}
+      <span style="font-size:${isFeatured ? '9px' : '8px'};font-weight:${isFeatured ? '800' : '700'};color:#64748b;letter-spacing:0.3px;line-height:1;margin-bottom:1px;">
+        ${emoji} ${displayName}
       </span>
-      <span style="font-size:18px;font-weight:900;color:${tc.text};line-height:1;">
-        ${temp.toFixed(1)}°
+      <span style="font-size:${isFeatured ? '16px' : '13px'};font-weight:900;color:${tc.text};line-height:1;">
+        ${city.temp.toFixed(1)}°
       </span>
-      <span style="font-size:9px;font-weight:600;color:#94a3b8;line-height:1;margin-top:1px;">
-        ${emoji} ${wind} km/h
-      </span>
+      ${isFeatured ? `<span style="font-size:8px;font-weight:600;color:#94a3b8;line-height:1;margin-top:1px;">${city.wind} km/h</span>` : ''}
     </div>
     <div style="
       width:0;height:0;
-      border-left:5px solid transparent;
-      border-right:5px solid transparent;
-      border-top:6px solid ${tc.border};
+      border-left:4px solid transparent;
+      border-right:4px solid transparent;
+      border-top:5px solid ${isFeatured ? tc.text : tc.border};
       margin:-1px auto 0;
     "></div>
   `;
@@ -204,7 +200,7 @@ function createTempLabel(station: TempStation, temp: number, wind: number, emoji
     className: 'temp-label-marker',
     iconSize: [0, 0],
     iconAnchor: [0, 0],
-    popupAnchor: [0, -58],
+    popupAnchor: [0, -45],
   });
 }
 
@@ -237,21 +233,11 @@ function OverlaySwitcher({ activeLayer }: { activeLayer: MapLayer }) {
   return null;
 }
 
-interface TempReading {
-  station: TempStation;
-  temp: number;
-  wind: number;
-  weatherCode: number;
-}
-
 function TempZoomer() {
   const map = useMap();
   useEffect(() => {
-    const bounds = L.latLngBounds(TEMP_STATIONS.map(s => [s.lat, s.lng] as [number, number]));
-    map.fitBounds(bounds, { padding: [30, 30], maxZoom: 11 });
-    return () => {
-      map.setView([36.5, 137.5], 6, { animate: true });
-    };
+    map.setView([36.5, 137.5], 6, { animate: true });
+    return () => {};
   }, [map]);
   return null;
 }
@@ -269,46 +255,27 @@ function ViewResetter({ activeLayer }: { activeLayer: MapLayer }) {
 }
 
 export default function MapView() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [activeLayer, setActiveLayer] = useState<MapLayer>("radar");
 
-  const { data: outlookData } = useQuery({
-    queryKey: ["weather-outlook"],
+  const { data: japanTemps } = useQuery<{ cities: CityTemp[]; updatedAt: string }>({
+    queryKey: ["japan-temps"],
     queryFn: async () => {
-      const res = await fetch("/api/weather-outlook");
+      const res = await fetch("/api/japan-temps");
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       return res.json();
     },
     refetchInterval: 600000,
   });
 
-  const tempReadings: TempReading[] = useMemo(() => {
-    if (!outlookData) return [];
-    const readings: TempReading[] = [];
-    const stationMap: Record<string, { temp: number; wind: number; weatherCode: number }> = {};
-    for (const m of outlookData.mountains || []) {
-      const key = m.region.toLowerCase().replace(/\s+/g, '');
-      stationMap[key === 'shigakogen' ? 'shiga' : key] = { temp: m.temp, wind: m.wind, weatherCode: m.weatherCode };
-    }
-    for (const tw of outlookData.towns || []) {
-      stationMap[tw.location.toLowerCase().replace(/\s+/g, '')] = { temp: tw.temp, wind: tw.wind, weatherCode: tw.weatherCode };
-    }
-    for (const station of TEMP_STATIONS) {
-      const match = stationMap[station.key];
-      if (match) {
-        readings.push({ station, temp: match.temp, wind: match.wind, weatherCode: match.weatherCode });
-      }
-    }
-    return readings;
-  }, [outlookData]);
+  const cities = japanTemps?.cities ?? [];
+  const showTemp = activeLayer === "temp" && cities.length > 0;
 
   const rv = useRainViewer();
   const frames = useMemo(() => {
     if (!rv) return [];
     return [...(rv.radar?.past || []), ...(rv.radar?.nowcast || [])];
   }, [rv]);
-
-  const showTemp = activeLayer === "temp" && tempReadings.length > 0;
 
   return (
     <div className="relative w-full h-[calc(100vh-4rem)] md:h-screen">
@@ -330,35 +297,42 @@ export default function MapView() {
           <RadarOverlay host={rv.host} frames={frames} />
         )}
         {showTemp && <TempZoomer />}
-        {showTemp && tempReadings.map(({ station, temp, wind, weatherCode }) => (
-          <Marker
-            key={station.key}
-            position={[station.lat, station.lng]}
-            icon={createTempLabel(station, temp, wind, weatherEmoji(weatherCode))}
-          >
-            <Popup>
-              <div className="p-3 min-w-[160px]">
-                <div className="flex items-center gap-1.5 mb-1">
-                  <span className="text-xs">{station.type === "mountain" ? "⛰️" : "🏘️"}</span>
-                  <span className="text-[10px] font-bold uppercase tracking-wide text-slate-500">
-                    {station.name}
-                  </span>
-                </div>
-                <p className="text-[10px] text-slate-400 mb-2">{station.elevation}m elevation</p>
-                <div className="grid grid-cols-2 gap-1.5">
-                  <div className="rounded-lg p-2 text-center" style={{ background: tempColor(temp).bg }}>
-                    <div className="text-[9px] font-bold uppercase" style={{ color: tempColor(temp).text }}>Temp</div>
-                    <div className="text-base font-black" style={{ color: tempColor(temp).text }}>{temp.toFixed(1)}°</div>
+        {showTemp && cities.map(city => {
+          const icon = createCityTempLabel(city, lang === "ja");
+          if (!icon || city.temp === null) return null;
+          const tc = tempColor(city.temp);
+          const isFeatured = FEATURED_KEYS.has(city.key);
+          return (
+            <Marker
+              key={city.key}
+              position={[city.lat, city.lng]}
+              icon={icon}
+              zIndexOffset={isFeatured ? 1000 : 0}
+            >
+              <Popup>
+                <div className="p-3 min-w-[170px]">
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <span className="text-xs">{weatherEmoji(city.weatherCode)}</span>
+                    <span className="text-[11px] font-bold text-slate-700">
+                      {lang === "ja" ? city.nameJa : city.name}
+                    </span>
+                    {isFeatured && <Star className="w-3 h-3 text-amber-400 fill-amber-400" />}
                   </div>
-                  <div className="bg-slate-50 rounded-lg p-2 text-center">
-                    <div className="text-[9px] text-slate-500 font-bold uppercase">Wind</div>
-                    <div className="text-base font-black text-slate-700">{wind}<span className="text-[10px] ml-0.5">km/h</span></div>
+                  <div className="grid grid-cols-2 gap-1.5 mt-2">
+                    <div className="rounded-lg p-2 text-center" style={{ background: tc.bg }}>
+                      <div className="text-[9px] font-bold uppercase" style={{ color: tc.text }}>{t("Temp", "気温")}</div>
+                      <div className="text-base font-black" style={{ color: tc.text }}>{city.temp.toFixed(1)}°</div>
+                    </div>
+                    <div className="bg-slate-50 rounded-lg p-2 text-center">
+                      <div className="text-[9px] text-slate-500 font-bold uppercase">{t("Wind", "風")}</div>
+                      <div className="text-base font-black text-slate-700">{city.wind}<span className="text-[10px] ml-0.5">km/h</span></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Popup>
-          </Marker>
-        ))}
+              </Popup>
+            </Marker>
+          );
+        })}
       </MapContainer>
 
       <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20">
@@ -380,10 +354,16 @@ export default function MapView() {
       </div>
 
       <div className="absolute top-16 left-4 z-20 bg-white/90 backdrop-blur rounded-xl shadow-lg border border-white/50 px-3 py-2 flex items-center gap-2">
-        <CloudSun className="w-4 h-4 text-primary" />
+        {showTemp ? <Thermometer className="w-4 h-4 text-orange-500" /> : <CloudSun className="w-4 h-4 text-primary" />}
         <div>
-          <p className="text-xs font-bold text-slate-700">{t("Japan Weather", "日本の天気")}</p>
-          <p className="text-[9px] text-slate-400">{t("Pinch to zoom · Drag to pan", "ピンチでズーム · ドラッグで移動")}</p>
+          <p className="text-xs font-bold text-slate-700">
+            {showTemp ? t("Live Temperatures", "現在の気温") : t("Japan Weather", "日本の天気")}
+          </p>
+          <p className="text-[9px] text-slate-400">
+            {showTemp
+              ? t(`${cities.length} cities · Tap for details`, `${cities.length}都市 · タップで詳細`)
+              : t("Pinch to zoom · Drag to pan", "ピンチでズーム · ドラッグで移動")}
+          </p>
         </div>
       </div>
 
