@@ -1,8 +1,24 @@
 import { useLanguage } from "@/hooks/use-language";
+import { useSeason } from "@/hooks/use-season";
 import { motion } from "framer-motion";
 import { ExternalLink, Camera, Video, AlertTriangle } from "lucide-react";
 
-const CAMS = [
+type CamDef = {
+  id: string;
+  title: string;
+  titleJa: string;
+  subtitle: string;
+  subtitleJa: string;
+  url: string;
+  embedUrl: string;
+  icon: typeof Camera;
+  color: string;
+  note: string | null;
+  noteJa: string | null;
+  externalOnly: boolean;
+};
+
+const WINTER_CAMS: CamDef[] = [
   {
     id: "road",
     title: "Road Cameras",
@@ -20,7 +36,7 @@ const CAMS = [
   {
     id: "shiga-live",
     title: "Shiga Kogen Ski Cams",
-    titleJa: "志賀高原ライブカメラ",
+    titleJa: "志賀高原スキーライブカメラ",
     subtitle: "Official live cameras across Shiga Kogen ski areas",
     subtitleJa: "志賀高原各スキー場の公式ライブカメラ",
     url: "https://www.shigakogen.gr.jp/live/index.html",
@@ -47,8 +63,55 @@ const CAMS = [
   },
 ];
 
+const GREEN_CAMS: CamDef[] = [
+  {
+    id: "road",
+    title: "Road Cameras",
+    titleJa: "道路カメラ",
+    subtitle: "Hokushin Area — Nagano Prefecture live road conditions",
+    subtitleJa: "北信エリア — 長野県道路ライブカメラ",
+    url: "http://hokushin.pref-nagano-roadcamera.jp/index.htm",
+    embedUrl: "http://hokushin.pref-nagano-roadcamera.jp/index.htm",
+    icon: Camera,
+    color: "from-amber-600 to-orange-600",
+    note: "Opens Nagano Prefecture's live road camera network covering routes to Yamanouchi and Shiga Kogen.",
+    noteJa: "山ノ内・志賀高原へのルートをカバーする長野県道路カメラネットワーク。",
+    externalOnly: true,
+  },
+  {
+    id: "shiga-live",
+    title: "Shiga Kogen Live Cams",
+    titleJa: "志賀高原ライブカメラ",
+    subtitle: "Official live cameras across the Shiga Kogen highlands",
+    subtitleJa: "志賀高原一帯の公式ライブカメラ",
+    url: "https://www.shigakogen.gr.jp/live/index.html",
+    embedUrl: "https://www.shigakogen.gr.jp/live/index.html",
+    icon: Camera,
+    color: "from-emerald-600 to-teal-700",
+    note: null,
+    noteJa: null,
+    externalOnly: false,
+  },
+  {
+    id: "youtube",
+    title: "Ryuoo SORA Terrace Live",
+    titleJa: "竜王SORAテラス ライブ配信",
+    subtitle: "YouTube live stream — Ryuoo mountain & cloud sea views",
+    subtitleJa: "YouTube ライブ配信 — 竜王山頂・雲海ビュー",
+    url: "https://www.youtube.com/watch?v=z71WU9uXdEM",
+    embedUrl: "https://www.youtube.com/embed/z71WU9uXdEM?rel=0&modestbranding=1",
+    icon: Video,
+    color: "from-red-600 to-rose-700",
+    note: null,
+    noteJa: null,
+    externalOnly: false,
+  },
+];
+
 export default function Cams() {
   const { t } = useLanguage();
+  const { isWinter } = useSeason();
+  const CAMS = isWinter ? WINTER_CAMS : GREEN_CAMS;
 
   return (
     <div className="p-4 md:p-8 max-w-4xl mx-auto pb-28">
@@ -57,7 +120,10 @@ export default function Cams() {
           {t("Live Cams", "ライブカメラ")}
         </h1>
         <p className="text-muted-foreground mt-1 text-sm">
-          {t("Road & ski conditions · live feeds", "道路・スキー場状況 · ライブ映像")}
+          {isWinter
+            ? t("Road & ski conditions · live feeds", "道路・スキー場状況 · ライブ映像")
+            : t("Road & mountain conditions · live feeds", "道路・山岳状況 · ライブ映像")
+          }
         </p>
       </div>
 
@@ -130,10 +196,16 @@ export default function Cams() {
 
       <div className="mt-6 rounded-xl border border-border bg-muted/40 px-4 py-3">
         <p className="text-[11px] leading-relaxed text-muted-foreground">
-          {t(
-            "Camera feeds are operated by third parties. Availability may vary. Road cameras cover national and prefectural routes leading to Yamanouchi and Shiga Kogen. Check road conditions before driving in winter.",
-            "カメラ映像は各運営機関が管理しています。配信状況は変わる場合があります。道路カメラは山ノ内・志賀高原への国道・県道をカバーしています。冬季の運転前に必ずご確認ください。"
-          )}
+          {isWinter
+            ? t(
+                "Camera feeds are operated by third parties. Availability may vary. Road cameras cover national and prefectural routes leading to Yamanouchi and Shiga Kogen. Check road conditions before driving in winter.",
+                "カメラ映像は各運営機関が管理しています。配信状況は変わる場合があります。道路カメラは山ノ内・志賀高原への国道・県道をカバーしています。冬季の運転前に必ずご確認ください。"
+              )
+            : t(
+                "Camera feeds are operated by third parties. Availability may vary. Road cameras cover national and prefectural routes leading to Yamanouchi and Shiga Kogen.",
+                "カメラ映像は各運営機関が管理しています。配信状況は変わる場合があります。道路カメラは山ノ内・志賀高原への国道・県道をカバーしています。"
+              )
+          }
         </p>
       </div>
     </div>

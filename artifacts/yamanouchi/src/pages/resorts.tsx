@@ -144,22 +144,42 @@ const GREEN_POIS = [
   { name: "Yokoteyama Summit", nameJa: "横手山山頂", lat: 36.8155, lng: 138.5340, type: "hiking", icon: "⛰️" },
 ];
 
-const createPoiIcon = (icon: string) => {
+const createPoiIcon = (icon: string, name: string) => {
+  const shortName = name.length > 16 ? name.slice(0, 15) + '…' : name;
   const html = `
     <div style="
       display: flex;
       align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      background: white;
-      border: 2px solid #059669;
-      border-radius: 50%;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      font-size: 16px;
-      transform: translate(-50%, -50%);
+      gap: 3px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(0,0,0,0.06);
+      border-left: 3px solid #059669;
+      border-radius: 6px;
+      padding: 2px 5px 2px 3px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      white-space: nowrap;
+      transform: translate(-50%, -100%);
       cursor: pointer;
-    ">${icon}</div>
+    ">
+      <span style="font-size: 12px; line-height: 1;">${icon}</span>
+      <span style="
+        font-size: 9px;
+        font-weight: 600;
+        color: #475569;
+        line-height: 1.1;
+        letter-spacing: -0.01em;
+      ">${shortName}</span>
+    </div>
+    <div style="
+      width: 0; height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 4px solid rgba(255,255,255,0.95);
+      margin: -1px auto 0;
+      filter: drop-shadow(0 1px 1px rgba(0,0,0,0.06));
+    "></div>
   `;
   return L.divIcon({
     html,
@@ -393,7 +413,7 @@ function ResortMap() {
           <Marker
             key={poi.name}
             position={[poi.lat, poi.lng]}
-            icon={createPoiIcon(poi.icon)}
+            icon={createPoiIcon(poi.icon, poi.name)}
           >
             <Popup>
               <div className="p-3 min-w-[180px]">
@@ -489,6 +509,36 @@ export default function Resorts() {
       <div className="mb-6">
         <ResortMap />
       </div>
+
+      {!isWinter && (
+        <div className="space-y-6">
+          <div className="flex items-center gap-2 mb-1">
+            <TreePine className="w-4 h-4 text-emerald-600" />
+            <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wider">{t("Things to Do", "おすすめスポット")}</h2>
+          </div>
+          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-3">
+            {GREEN_POIS.map((poi, idx) => (
+              <motion.div
+                key={poi.name}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.04 }}
+                className="bg-white border border-slate-200 rounded-2xl p-4 flex items-start gap-3 hover:border-emerald-200 hover:shadow-sm transition-all duration-200"
+              >
+                <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center shrink-0 text-lg">
+                  {poi.icon}
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-slate-900 leading-snug">
+                    {t(poi.name, poi.nameJa)}
+                  </h3>
+                  <p className="text-[10px] text-slate-400 capitalize mt-0.5">{poi.type}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {isWinter && (
         <>

@@ -161,7 +161,7 @@ export default function Transport() {
               <div>
                 <p className="text-sm font-bold text-slate-800">{t("Free Resort Shuttle", "無料シャトルバス")}</p>
                 <p className="text-xs text-slate-500 mt-0.5">
-                  {t("Connects all 21 ski areas across Shiga Kogen", "志賀高原内21スキー場を全て結ぶ")}
+                  {t("Connects all areas across Shiga Kogen highlands", "志賀高原内全エリアを結ぶ")}
                 </p>
               </div>
             </div>
@@ -187,7 +187,7 @@ export default function Transport() {
               <div className="flex items-start gap-2">
                 <Info className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
                 <p className="text-xs text-slate-600">
-                  {t("Runs daily during ski season. Frequency varies by route — allow extra time between far-apart areas.", "スキーシーズン中は毎日運行。路線によって頻度が異なります。離れたエリア間は余裕を持って。")}
+                  {t("Runs daily during operating season. Frequency varies by route — allow extra time between far-apart areas.", "運行シーズン中は毎日運行。路線によって頻度が異なります。離れたエリア間は余裕を持って。")}
                 </p>
               </div>
             </div>
@@ -235,7 +235,7 @@ export default function Transport() {
             <div className="flex items-start gap-2 bg-blue-50 rounded-lg px-3 py-2">
               <Info className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
               <p className="text-xs text-blue-700">
-                {t("This bus also stops at the Snow Monkey Park on the way up and back — useful for combining both in one day.", "このバスは行き帰りに野猿公苑に停車。スキーとお猿を1日で楽しめます。")}
+                {t("This bus also stops at the Snow Monkey Park on the way up and back — useful for combining both in one day.", "このバスは行き帰りに野猿公苑に停車。志賀高原とお猿を1日で楽しめます。")}
               </p>
             </div>
 
@@ -415,7 +415,7 @@ export default function Transport() {
                 </div>
               </div>
               <p className="text-[10px] text-indigo-500">
-                {t("⚠ Does NOT cover buses to Shiga Kogen ski areas.", "⚠ 志賀高原スキー場行きバスには使用不可。")}
+                {t("⚠ Does NOT cover buses to Shiga Kogen resorts/areas.", "⚠ 志賀高原リゾート行きバスには使用不可。")}
               </p>
               <a
                 href="https://www.snowmonkeyresorts.com/access/snow-monkey-1-day-pass/"
@@ -431,7 +431,7 @@ export default function Transport() {
         </section>
 
         <p className="text-[10px] text-slate-400 text-center pb-2">
-          {t("Timetables correct as of Winter 2025/26. Always verify with operator before travel.", "時刻表は2025/26シーズン現在のものです。ご利用前に必ず運行会社にご確認ください。")}
+          {t("Timetables shown for reference. Schedules may differ by season — always verify with operator before travel.", "時刻表は参考情報です。シーズンにより変更の場合があります。ご利用前に必ず運行会社にご確認ください。")}
         </p>
       </div>
     </div>

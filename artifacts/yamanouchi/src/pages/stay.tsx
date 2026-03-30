@@ -1,5 +1,6 @@
 import { useGetAccommodation } from "@workspace/api-client-react";
 import { useLanguage } from "@/hooks/use-language";
+import { useSeason } from "@/hooks/use-season";
 import { LoadingScreen, ErrorScreen } from "@/components/ui-elements";
 import { useState } from "react";
 import { MapPin, Phone, Bath, CableCar, Mountain, Search, Star, ExternalLink } from "lucide-react";
@@ -11,10 +12,16 @@ type FilterType = "all" | "hotel" | "ryokan" | "guesthouse";
 
 const ON_MOUNTAIN = ["Shiga Kogen", "Ryuoo", "Yomase"];
 
-const MOUNTAIN_AREAS = [
+const WINTER_MOUNTAIN_AREAS = [
   { region: "Shiga Kogen", label: "Shiga Kogen", labelJa: "志賀高原", desc: "21 linked ski areas · ~100 hotels", descJa: "21スキー場連結 · 約100軒", url: "https://www.shigakogen.co.jp/english/" },
   { region: "Ryuoo", label: "Ryuoo Ski Park", labelJa: "竜王スキーパーク", desc: "Japan's highest gondola", descJa: "日本最高所のゴンドラ", url: "https://www.ryuoo.com/en/" },
   { region: "Yomase", label: "Yomase Onsen Ski Area", labelJa: "夜間瀬温泉スキー場", desc: "Family ski area with onsen village", descJa: "温泉街のファミリースキー場", url: null },
+];
+
+const GREEN_MOUNTAIN_AREAS = [
+  { region: "Shiga Kogen", label: "Shiga Kogen", labelJa: "志賀高原", desc: "Highland hiking & alpine nature · ~100 hotels", descJa: "高原ハイキングと高山自然 · 約100軒", url: "https://www.shigakogen.co.jp/english/" },
+  { region: "Ryuoo", label: "Ryuoo Mountain Park", labelJa: "竜王マウンテンパーク", desc: "SORA Terrace & cloud sea views", descJa: "SORAテラスと雲海", url: "https://www.ryuoo.com/en/" },
+  { region: "Yomase", label: "Yomase Onsen", labelJa: "夜間瀬温泉", desc: "Quiet onsen village in the mountains", descJa: "山あいの静かな温泉村", url: null },
 ];
 
 const TOWN_AREAS = [
@@ -31,8 +38,10 @@ function mapsUrl(lat: number | null, lng: number | null, name: string) {
 
 export default function Stay({ embedded = false }: { embedded?: boolean }) {
   const { t } = useLanguage();
+  const { isWinter } = useSeason();
   const [tab, setTab] = useState<LocationTab>("mountain");
   const [typeFilter, setTypeFilter] = useState<FilterType>("all");
+  const MOUNTAIN_AREAS = isWinter ? WINTER_MOUNTAIN_AREAS : GREEN_MOUNTAIN_AREAS;
 
   const { data: all, isLoading, error } = useGetAccommodation({} as any);
 
@@ -82,7 +91,7 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
 
       {/* Location tabs */}
       <div className="flex rounded-xl bg-secondary p-1 gap-1">
-        {([["mountain", "⛷️ On Mountain", "⛷️ 山の上"] , ["town", "🏘️ In Town", "🏘️ 町内"]] as const).map(([v, en, ja]) => (
+        {([["mountain", isWinter ? "⛷️ On Mountain" : "🏔️ On Mountain", isWinter ? "⛷️ 山の上" : "🏔️ 山の上"] , ["town", "🏘️ In Town", "🏘️ 町内"]] as const).map(([v, en, ja]) => (
           <button
             key={v}
             onClick={() => setTab(v)}
@@ -133,7 +142,7 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
                     <Search className="w-3 h-3" /> {t("Search area", "エリア検索")}
                   </a>
                 </div>
-                <PlaceList places={places} t={t} />
+                <PlaceList places={places} t={t} isWinter={isWinter} />
               </section>
             );
           })}
@@ -161,7 +170,7 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
                     <Search className="w-3 h-3" /> {t("Search area", "エリア検索")}
                   </a>
                 </div>
-                <PlaceList places={places} t={t} />
+                <PlaceList places={places} t={t} isWinter={isWinter} />
               </section>
             );
           })}
@@ -172,7 +181,7 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
   );
 }
 
-function PlaceList({ places, t }: { places: any[]; t: (en: string, ja: string | null) => string }) {
+function PlaceList({ places, t, isWinter = true }: { places: any[]; t: (en: string, ja: string | null) => string; isWinter?: boolean }) {
   return (
     <div className="space-y-2">
       {places.map((place, idx) => (
@@ -229,7 +238,7 @@ function PlaceList({ places, t }: { places: any[]; t: (en: string, ja: string | 
                       <Bath className="w-2.5 h-2.5" /> {t("Onsen", "温泉")}
                     </span>
                   )}
-                  {place.skiInSkiOut && (
+                  {place.skiInSkiOut && isWinter && (
                     <span className="text-[10px] font-bold text-violet-600 bg-violet-50 px-2 py-0.5 rounded-full flex items-center gap-0.5">
                       <CableCar className="w-2.5 h-2.5" /> {t("Ski-in/out", "直結")}
                     </span>
