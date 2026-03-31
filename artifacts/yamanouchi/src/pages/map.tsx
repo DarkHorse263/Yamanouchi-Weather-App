@@ -5,6 +5,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { CloudSun, Thermometer, Star } from "lucide-react";
+import { useSeason } from "@/hooks/use-season";
 
 function MapResizer() {
   const map = useMap();
@@ -12,13 +13,20 @@ function MapResizer() {
   return null;
 }
 
-type MapLayer = "radar" | "clouds" | "temp" | "snow";
+type MapLayer = "radar" | "clouds" | "temp" | "snow" | "rain";
 
-const MAP_TABS: { key: MapLayer; label: string; labelJa: string }[] = [
+const WINTER_TABS: { key: MapLayer; label: string; labelJa: string }[] = [
   { key: "radar",  label: "Radar",     labelJa: "レーダー" },
   { key: "clouds", label: "Clouds",    labelJa: "雲" },
   { key: "temp",   label: "Temp (°C)", labelJa: "気温 (°C)" },
   { key: "snow",   label: "Snow",      labelJa: "積雪" },
+];
+
+const GREEN_TABS: { key: MapLayer; label: string; labelJa: string }[] = [
+  { key: "radar",  label: "Radar",     labelJa: "レーダー" },
+  { key: "clouds", label: "Clouds",    labelJa: "雲" },
+  { key: "temp",   label: "Temp (°C)", labelJa: "気温 (°C)" },
+  { key: "rain",   label: "Rain",      labelJa: "降水" },
 ];
 
 const BASE_TILE = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png";
@@ -118,6 +126,7 @@ const OWM_LAYERS: Record<string, { layer: string; opacity: number }> = {
   clouds: { layer: "clouds_new", opacity: 0.7 },
   temp:   { layer: "temp_new",   opacity: 0.35 },
   snow:   { layer: "snow",       opacity: 0.8 },
+  rain:   { layer: "precipitation_new", opacity: 0.7 },
 };
 
 interface CityTemp {
@@ -256,7 +265,14 @@ function ViewResetter({ activeLayer }: { activeLayer: MapLayer }) {
 
 export default function MapView() {
   const { t, lang } = useLanguage();
+  const { isWinter } = useSeason();
   const [activeLayer, setActiveLayer] = useState<MapLayer>("radar");
+  const tabs = isWinter ? WINTER_TABS : GREEN_TABS;
+
+  useEffect(() => {
+    if (!isWinter && activeLayer === "snow") setActiveLayer("rain");
+    if (isWinter && activeLayer === "rain") setActiveLayer("snow");
+  }, [isWinter]);
 
   const { data: japanTemps } = useQuery<{ cities: CityTemp[]; updatedAt: string }>({
     queryKey: ["japan-temps"],
@@ -337,7 +353,7 @@ export default function MapView() {
 
       <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20">
         <div className="bg-white/95 backdrop-blur-md shadow-lg border border-white/50 rounded-full p-1 flex gap-1">
-          {MAP_TABS.map(tab => (
+          {tabs.map(tab => (
             <button
               key={tab.key}
               onClick={() => setActiveLayer(tab.key)}
