@@ -64,64 +64,26 @@ function shortResortName(name: string): string {
     .trim();
 }
 
-const createSnowLabel = (name: string, snow24h: number | null, baseDepth: number | null, snowLevel: string, regionColor: string, rank: number | null) => {
+const createSnowLabel = (name: string, snow24h: number | null, _baseDepth: number | null, snowLevel: string, regionColor: string, rank: number | null) => {
   const level = SNOW_LEVELS[snowLevel as keyof typeof SNOW_LEVELS] ?? SNOW_LEVELS.none;
-  const short = shortResortName(name);
-  const displayName = short.length > 14 ? short.slice(0, 13) + '…' : short;
   const snowVal = snow24h ?? 0;
   const isTop = rank === 1;
+  const size = isTop ? 28 : 22;
 
   const html = `
     <div style="
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 3px;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(8px);
-      border: 1.5px solid ${isTop ? '#F59E0B' : 'rgba(0,0,0,0.08)'};
-      border-left: 3px solid ${regionColor};
-      border-radius: 6px;
-      padding: 2px 5px 2px 4px;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.08), 0 0 1px rgba(0,0,0,0.05);
-      white-space: nowrap;
-      transform: translate(-50%, -100%);
+      width: ${size}px; height: ${size}px;
+      border-radius: 50%;
+      background: ${level.bg};
+      border: 2px solid ${isTop ? '#F59E0B' : regionColor};
+      display: flex; align-items: center; justify-content: center;
+      font-family: system-ui, sans-serif;
+      font-size: ${isTop ? '10px' : '9px'}; font-weight: 900;
+      color: ${level.color};
+      box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+      transform: translate(-50%, -50%);
       cursor: pointer;
-    ">
-      <span style="
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 18px;
-        height: 18px;
-        border-radius: 4px;
-        background: ${level.bg};
-        font-size: 9px;
-        font-weight: 800;
-        color: ${level.color};
-        flex-shrink: 0;
-        padding: 0 2px;
-      ">${snowVal}</span>
-      <span style="
-        font-size: 9px;
-        font-weight: 600;
-        color: #475569;
-        line-height: 1.1;
-        max-width: 80px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        letter-spacing: -0.01em;
-      ">${displayName}</span>
-    </div>
-    <div style="
-      width: 0; height: 0;
-      border-left: 4px solid transparent;
-      border-right: 4px solid transparent;
-      border-top: 4px solid rgba(255,255,255,0.95);
-      margin: -1px auto 0;
-      filter: drop-shadow(0 1px 1px rgba(0,0,0,0.06));
-    "></div>
+    ">${snowVal}</div>
   `;
 
   return L.divIcon({
@@ -129,64 +91,43 @@ const createSnowLabel = (name: string, snow24h: number | null, baseDepth: number
     className: 'snow-label-marker',
     iconSize: [0, 0],
     iconAnchor: [0, 0],
-    popupAnchor: [0, -30],
+    popupAnchor: [0, -(size / 2 + 2)],
   });
 };
 
 const GREEN_POIS = [
-  { name: "Jigokudani Monkey Park", nameJa: "地獄谷野猿公苑", lat: 36.7332, lng: 138.4621, type: "wildlife", icon: "🐒" },
-  { name: "SORA Terrace", nameJa: "SORAテラス", lat: 36.7892, lng: 138.4750, type: "viewpoint", icon: "☁️" },
-  { name: "Shiga Kogen Marshlands", nameJa: "志賀高原湿原", lat: 36.8050, lng: 138.5200, type: "hiking", icon: "🥾" },
-  { name: "Shibu Onsen", nameJa: "渋温泉", lat: 36.7462, lng: 138.4325, type: "onsen", icon: "♨️" },
-  { name: "Yudanaka Onsen", nameJa: "湯田中温泉", lat: 36.7444, lng: 138.4148, type: "onsen", icon: "♨️" },
-  { name: "Ryuoo Gondola", nameJa: "竜王ゴンドラ", lat: 36.7850, lng: 138.4855, type: "viewpoint", icon: "🚡" },
-  { name: "Kumanoyu Hiking", nameJa: "熊の湯ハイキング", lat: 36.8100, lng: 138.5280, type: "hiking", icon: "🥾" },
-  { name: "Yokoteyama Summit", nameJa: "横手山山頂", lat: 36.8155, lng: 138.5340, type: "hiking", icon: "⛰️" },
+  { name: "Jigokudani Monkey Park", nameJa: "地獄谷野猿公苑", lat: 36.7327, lng: 138.4618, type: "wildlife", icon: "🐒" },
+  { name: "SORA Terrace", nameJa: "SORAテラス", lat: 36.8503, lng: 138.4741, type: "viewpoint", icon: "☁️" },
+  { name: "Shiga Kogen Marshlands", nameJa: "志賀高原湿原", lat: 36.7948, lng: 138.5072, type: "hiking", icon: "🥾" },
+  { name: "Shibu Onsen", nameJa: "渋温泉", lat: 36.7407, lng: 138.4293, type: "onsen", icon: "♨️" },
+  { name: "Yudanaka Onsen", nameJa: "湯田中温泉", lat: 36.7415, lng: 138.4126, type: "onsen", icon: "♨️" },
+  { name: "Ryuoo Gondola", nameJa: "竜王ゴンドラ", lat: 36.7795, lng: 138.4738, type: "viewpoint", icon: "🚡" },
+  { name: "Kumanoyu Onsen", nameJa: "熊の湯温泉", lat: 36.8107, lng: 138.5248, type: "onsen", icon: "♨️" },
+  { name: "Yokoteyama Summit", nameJa: "横手山山頂", lat: 36.8200, lng: 138.5360, type: "hiking", icon: "⛰️" },
+  { name: "Magarikawa Firefly Park", nameJa: "まがりかわホタル公園", lat: 36.7540, lng: 138.4070, type: "nature", icon: "✨" },
+  { name: "Kaede no Mori", nameJa: "カエデの森", lat: 36.8000, lng: 138.5150, type: "nature", icon: "🍁" },
 ];
 
-const createPoiIcon = (icon: string, name: string) => {
-  const shortName = name.length > 16 ? name.slice(0, 15) + '…' : name;
+const createPoiIcon = (icon: string) => {
   const html = `
     <div style="
-      display: flex;
-      align-items: center;
-      gap: 3px;
+      width: 26px; height: 26px;
+      border-radius: 50%;
       background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(8px);
-      border: 1.5px solid rgba(0,0,0,0.06);
-      border-left: 3px solid #059669;
-      border-radius: 6px;
-      padding: 2px 5px 2px 3px;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-      white-space: nowrap;
-      transform: translate(-50%, -100%);
+      border: 2px solid #059669;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; line-height: 1;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+      transform: translate(-50%, -50%);
       cursor: pointer;
-    ">
-      <span style="font-size: 12px; line-height: 1;">${icon}</span>
-      <span style="
-        font-size: 9px;
-        font-weight: 600;
-        color: #475569;
-        line-height: 1.1;
-        letter-spacing: -0.01em;
-      ">${shortName}</span>
-    </div>
-    <div style="
-      width: 0; height: 0;
-      border-left: 4px solid transparent;
-      border-right: 4px solid transparent;
-      border-top: 4px solid rgba(255,255,255,0.95);
-      margin: -1px auto 0;
-      filter: drop-shadow(0 1px 1px rgba(0,0,0,0.06));
-    "></div>
+    ">${icon}</div>
   `;
   return L.divIcon({
     html,
     className: 'poi-marker',
     iconSize: [0, 0],
     iconAnchor: [0, 0],
-    popupAnchor: [0, -20],
+    popupAnchor: [0, -15],
   });
 };
 
@@ -413,7 +354,7 @@ function ResortMap() {
           <Marker
             key={poi.name}
             position={[poi.lat, poi.lng]}
-            icon={createPoiIcon(poi.icon, poi.name)}
+            icon={createPoiIcon(poi.icon)}
           >
             <Popup>
               <div className="p-3 min-w-[180px]">
