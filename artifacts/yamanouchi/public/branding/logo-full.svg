@@ -1,23 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 80" fill="none">
-  <defs>
-    <linearGradient id="zGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#3B82F6"/>
-      <stop offset="100%" stop-color="#06B6D4"/>
-    </linearGradient>
-  </defs>
-  <!-- "feel" in dark -->
-  <text x="0" y="58" font-family="'Inter','Helvetica Neue',Arial,sans-serif" font-size="52" font-weight="800" fill="#1E293B" letter-spacing="-2">feel</text>
-  <!-- stylised Z as mountain/ski-run -->
-  <g transform="translate(138,8)">
-    <!-- Z shape drawn as a mountain ridge path -->
-    <path d="M0,12 L28,12 L4,58 L32,58" stroke="url(#zGrad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-    <!-- small snow/trail dots along the diagonal -->
-    <circle cx="20" cy="26" r="2" fill="#3B82F6" opacity="0.5"/>
-    <circle cx="14" cy="38" r="1.5" fill="#06B6D4" opacity="0.6"/>
-    <circle cx="9" cy="49" r="1.8" fill="#3B82F6" opacity="0.4"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 60" fill="none">
+  <text x="0" y="46" font-family="Inter, system-ui, sans-serif" font-size="46" font-weight="200" letter-spacing="3" fill="#1E293B">feel</text>
+  <g transform="translate(142, 4)">
+    <path d="M2,6 L24,6" stroke="#1E293B" stroke-width="1.2" stroke-linecap="round"/>
+    <path d="M24,6 L16,20 L22,20 L14,34 L20,34 L6,52" stroke="#1E293B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path d="M2,52 L24,52" stroke="#1E293B" stroke-width="1.2" stroke-linecap="round"/>
   </g>
-  <!-- "like" in dark -->
-  <text x="172" y="58" font-family="'Inter','Helvetica Neue',Arial,sans-serif" font-size="52" font-weight="800" fill="#1E293B" letter-spacing="-2">like</text>
-  <!-- .com subtle -->
-  <text x="296" y="58" font-family="'Inter','Helvetica Neue',Arial,sans-serif" font-size="18" font-weight="600" fill="#94A3B8" letter-spacing="0">.com</text>
+  <text x="172" y="46" font-family="Inter, system-ui, sans-serif" font-size="46" font-weight="200" letter-spacing="3" fill="#1E293B">like</text>
 </svg>
