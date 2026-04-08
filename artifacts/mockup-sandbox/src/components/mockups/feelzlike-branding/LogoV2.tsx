@@ -1,46 +1,71 @@
 export function LogoV2() {
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center gap-20 p-12">
-      <div className="text-center">
-        <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-slate-400 mb-10">B — Switchback Z</p>
-        <svg viewBox="0 0 440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-[440px] h-[60px]">
-          <text x="0" y="46" fontFamily="Inter, system-ui, sans-serif" fontSize="46" fontWeight="200" letterSpacing="3" fill="#1E293B">feel</text>
-          <g transform="translate(142, 4)">
-            <path d="M2,6 L24,6" stroke="#1E293B" strokeWidth="1.2" strokeLinecap="round"/>
-            <path d="M24,6 L16,20 L22,20 L14,34 L20,34 L6,52" stroke="#1E293B" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-            <path d="M2,52 L24,52" stroke="#1E293B" strokeWidth="1.2" strokeLinecap="round"/>
-          </g>
-          <text x="172" y="46" fontFamily="Inter, system-ui, sans-serif" fontSize="46" fontWeight="200" letterSpacing="3" fill="#1E293B">like</text>
-        </svg>
-        <p className="text-[11px] text-slate-400 mt-6 tracking-wider">Zigzag switchbacks down the diagonal — like a real mountain trail map</p>
-      </div>
+    <div className="min-h-screen bg-white flex items-center justify-center p-8">
+      <svg viewBox="0 0 500 420" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-[500px] h-[420px]">
+        <defs>
+          <linearGradient id="peakSmall" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#BDE0F5"/>
+            <stop offset="100%" stopColor="#8ECAE6"/>
+          </linearGradient>
+          <linearGradient id="peakMid" x1="0.3" y1="0" x2="0.7" y2="1">
+            <stop offset="0%" stopColor="#8ECAE6"/>
+            <stop offset="100%" stopColor="#5B9FCC"/>
+          </linearGradient>
+          <linearGradient id="peakRight" x1="0.3" y1="0" x2="0.8" y2="1">
+            <stop offset="0%" stopColor="#4A90C4"/>
+            <stop offset="100%" stopColor="#2563EB"/>
+          </linearGradient>
+          <linearGradient id="trail" x1="0.1" y1="0" x2="0.9" y2="1">
+            <stop offset="0%" stopColor="#A8D8F0"/>
+            <stop offset="50%" stopColor="#6BB0D8"/>
+            <stop offset="100%" stopColor="#3B82D0"/>
+          </linearGradient>
+        </defs>
 
-      <div className="flex gap-16 items-end">
-        <div className="text-center">
-          <p className="text-[9px] font-medium uppercase tracking-[0.2em] text-slate-400 mb-4">Icon</p>
-          <div style={{ width: 64, height: 64, borderRadius: 16, background: '#0F172A', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 8px 32px rgba(0,0,0,0.12)' }}>
-            <svg viewBox="0 0 32 32" fill="none" className="w-8 h-8">
-              <path d="M6,7 L26,7" stroke="#E2E8F0" strokeWidth="1.5" strokeLinecap="round"/>
-              <path d="M26,7 L18,13 L24,13 L16,19 L22,19 L8,27" stroke="#E2E8F0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-              <path d="M6,27 L26,27" stroke="#E2E8F0" strokeWidth="1.5" strokeLinecap="round"/>
-            </svg>
-          </div>
-        </div>
-        <div className="text-center">
-          <p className="text-[9px] font-medium uppercase tracking-[0.2em] text-slate-400 mb-4">Dark</p>
-          <div style={{ background: '#0F172A', borderRadius: 16, padding: '20px 36px', boxShadow: '0 8px 32px rgba(0,0,0,0.12)' }}>
-            <svg viewBox="0 0 440 60" fill="none" className="w-[270px] h-[38px]">
-              <text x="0" y="46" fontFamily="Inter, system-ui, sans-serif" fontSize="46" fontWeight="200" letterSpacing="3" fill="#CBD5E1">feel</text>
-              <g transform="translate(142, 4)">
-                <path d="M2,6 L24,6" stroke="#94A3B8" strokeWidth="1.2" strokeLinecap="round"/>
-                <path d="M24,6 L16,20 L22,20 L14,34 L20,34 L6,52" stroke="#94A3B8" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-                <path d="M2,52 L24,52" stroke="#94A3B8" strokeWidth="1.2" strokeLinecap="round"/>
-              </g>
-              <text x="172" y="46" fontFamily="Inter, system-ui, sans-serif" fontSize="46" fontWeight="200" letterSpacing="3" fill="#CBD5E1">like</text>
-            </svg>
-          </div>
-        </div>
-      </div>
+        {/* Small left peak */}
+        <polygon points="95,250 140,168 185,250" fill="url(#peakSmall)"/>
+
+        {/* Left accent sliver */}
+        <polygon points="105,250 168,115 185,250" fill="#9CC8E0" opacity="0.6"/>
+
+        {/* Center tall peak */}
+        <polygon points="155,250 240,50 330,250" fill="url(#peakMid)"/>
+
+        {/* Right peak - darker blue */}
+        <polygon points="270,250 350,95 415,250" fill="url(#peakRight)"/>
+
+        {/* Swooping trail / ski run — S-curve winding through mountains */}
+        <path d="
+          M 120,175
+          C 145,168 195,148 240,148
+          C 290,148 340,168 370,185
+          C 395,198 400,212 385,222
+          C 365,235 325,225 285,228
+          C 245,232 205,248 180,268
+          C 160,284 155,300 165,315
+          C 178,330 215,335 255,340
+          C 285,344 310,352 325,362
+        " stroke="url(#trail)" strokeWidth="30" strokeLinecap="round" fill="none" opacity="0.82"/>
+
+        {/* White highlight on trail */}
+        <path d="
+          M 128,174
+          C 153,167 200,149 243,149
+          C 290,149 338,168 365,183
+          C 388,195 393,208 380,218
+          C 362,230 325,222 287,225
+          C 248,229 210,245 186,264
+          C 168,278 163,293 172,308
+          C 183,322 218,328 256,333
+          C 282,337 305,345 318,353
+        " stroke="white" strokeWidth="12" strokeLinecap="round" fill="none" opacity="0.3"/>
+
+        {/* Text: "feel" */}
+        <text x="62" y="400" fontFamily="Inter, 'Helvetica Neue', Arial, sans-serif" fontSize="70" fontWeight="600" fill="#0C2340" letterSpacing="-1">feel</text>
+
+        {/* Text: "like" — positioned after the trail gap */}
+        <text x="298" y="400" fontFamily="Inter, 'Helvetica Neue', Arial, sans-serif" fontSize="70" fontWeight="600" fill="#0C2340" letterSpacing="-1">like</text>
+      </svg>
     </div>
   );
 }
