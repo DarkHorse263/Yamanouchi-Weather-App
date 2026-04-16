@@ -1,6 +1,6 @@
 import { useLocation } from "wouter";
 import { motion } from "framer-motion";
-import { Search, MapPin, Snowflake, Sun, ChevronRight } from "lucide-react";
+import { Search, MapPin, ChevronRight } from "lucide-react";
 import { useState } from "react";
 
 const REGIONS = [
@@ -52,58 +52,56 @@ export default function Landing() {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="max-w-4xl mx-auto px-4 py-12 md:py-20">
+      <div className="max-w-2xl mx-auto px-4 pt-6 pb-10 md:pt-10 md:pb-16">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          transition={{ duration: 0.5 }}
+          className="text-center mb-5"
         >
-          <div className="w-48 md:w-56 mx-auto mb-8">
-            <img
-              src={`${import.meta.env.BASE_URL}branding/logo-colour.png?v=3`}
-              alt="feelzlike"
-              className="w-full h-auto"
-            />
-          </div>
-          <h1 className="text-3xl md:text-5xl font-bold text-slate-800 tracking-tight leading-tight mb-4">
+          <img
+            src={`${import.meta.env.BASE_URL}branding/logo-colour.png?v=3`}
+            alt="feelzlike"
+            className="w-28 md:w-36 mx-auto mb-4"
+          />
+          <h1 className="text-2xl md:text-4xl font-bold text-slate-800 tracking-tight leading-snug mb-2">
             I wonder what it{" "}
             <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
               feelzlike
             </span>{" "}
             in...
           </h1>
-          <p className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed">
-            Real-time weather intelligence, resort conditions, and local guides for
-            mountain regions around the world.
+          <p className="text-sm md:text-base text-slate-500 max-w-md mx-auto">
+            Real-time weather intelligence, resort conditions, and local guides
+            for mountain regions around the world.
           </p>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="max-w-lg mx-auto mb-14"
+          transition={{ duration: 0.4, delay: 0.15 }}
+          className="mb-5"
         >
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <input
               type="text"
               placeholder="Search a region..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-12 pr-4 py-4 rounded-2xl border border-slate-200 bg-white shadow-sm text-lg placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
+              className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent focus:bg-white transition-all"
             />
           </div>
         </motion.div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="space-y-3">
           {filtered.map((region, i) => (
             <motion.div
               key={region.id}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.3 + i * 0.1 }}
+              transition={{ duration: 0.35, delay: 0.2 + i * 0.08 }}
             >
               <button
                 onClick={() => {
@@ -112,43 +110,46 @@ export default function Landing() {
                 disabled={region.status !== "live"}
                 className="w-full text-left group"
               >
-                <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 hover:border-blue-300">
-                  <div className="relative h-40 overflow-hidden">
+                <div className="flex bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-md transition-all duration-200 hover:border-blue-300">
+                  <div className="relative w-28 md:w-36 shrink-0 overflow-hidden">
                     <img
                       src={region.image}
                       alt={region.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                    <div className="absolute bottom-3 left-3 flex items-center gap-1.5">
-                      <MapPin className="w-3.5 h-3.5 text-white/90" />
-                      <span className="text-white text-sm font-medium">{region.country}</span>
-                    </div>
                     {region.status === "coming-soon" && (
-                      <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-slate-600 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">
-                        Coming Soon
+                      <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+                        <span className="bg-white/90 backdrop-blur-sm text-slate-600 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">
+                          Soon
+                        </span>
                       </div>
                     )}
                     {region.status === "live" && (
-                      <div className="absolute top-3 right-3 bg-emerald-500 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full flex items-center gap-1">
-                        <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
+                      <div className="absolute top-1.5 left-1.5 bg-emerald-500 text-white text-[8px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full flex items-center gap-0.5">
+                        <span className="w-1 h-1 bg-white rounded-full animate-pulse" />
                         Live
                       </div>
                     )}
                   </div>
-                  <div className="p-4">
-                    <div className="flex items-center justify-between mb-1">
-                      <h3 className="font-bold text-slate-800 text-lg">{region.name}</h3>
+                  <div className="flex-1 p-3 flex flex-col justify-center min-w-0">
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="min-w-0">
+                        <h3 className="font-semibold text-slate-800 text-sm truncate">{region.name}</h3>
+                        <div className="flex items-center gap-1 mt-0.5">
+                          <MapPin className="w-3 h-3 text-slate-400 shrink-0" />
+                          <span className="text-xs text-slate-400">{region.country}</span>
+                        </div>
+                      </div>
                       {region.status === "live" && (
-                        <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all" />
+                        <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all shrink-0" />
                       )}
                     </div>
-                    <p className="text-sm text-slate-500 mb-3">{region.description}</p>
-                    <div className="flex gap-2">
+                    <p className="text-xs text-slate-500 mt-1 line-clamp-1">{region.description}</p>
+                    <div className="flex gap-1.5 mt-1.5">
                       {region.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="text-[11px] font-medium text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full"
+                          className="text-[10px] font-medium text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded"
                         >
                           {tag}
                         </span>
@@ -161,32 +162,16 @@ export default function Landing() {
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
-          className="mt-16 text-center"
-        >
-          <div className="flex items-center justify-center gap-6 text-sm text-slate-400">
-            <div className="flex items-center gap-1.5">
-              <Snowflake className="w-4 h-4" />
-              <span>Winter</span>
-            </div>
-            <span className="text-slate-300">|</span>
-            <div className="flex items-center gap-1.5">
-              <Sun className="w-4 h-4" />
-              <span>Green Season</span>
-            </div>
-          </div>
-          <p className="text-xs text-slate-400 mt-3">
+        <div className="mt-8 text-center">
+          <p className="text-[11px] text-slate-400">
             Weather-powered travel intelligence — year-round
           </p>
           <img
             src={`${import.meta.env.BASE_URL}branding/wordmark-colour.png?v=3`}
             alt="feelzlike"
-            className="w-32 mx-auto mt-6 opacity-60"
+            className="w-20 mx-auto mt-2 opacity-50"
           />
-        </motion.div>
+        </div>
       </div>
     </div>
   );
