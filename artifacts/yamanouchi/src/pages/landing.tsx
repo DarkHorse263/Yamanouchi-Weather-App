@@ -64,14 +64,16 @@ export default function Landing() {
             alt="feelzlike"
             className="w-44 md:w-56 mx-auto mb-4"
           />
-          <h1 className="text-2xl md:text-4xl font-bold text-slate-800 tracking-tight leading-snug mb-2 flex flex-wrap items-center justify-center gap-x-2">
-            <span>I wonder what it</span>
-            <img
-              src={`${import.meta.env.BASE_URL}branding/wordmark-inline.png?v=1`}
-              alt="feelzlike"
-              className="inline-block h-7 md:h-10 w-auto"
-            />
-            <span>in...</span>
+          <h1 className="text-2xl md:text-4xl font-bold text-slate-800 tracking-tight leading-snug mb-2 text-center">
+            <span className="block">I wonder what it</span>
+            <span className="flex items-center justify-center gap-x-2 mt-1">
+              <img
+                src={`${import.meta.env.BASE_URL}branding/wordmark-inline.png?v=1`}
+                alt="feelzlike"
+                className="inline-block h-7 md:h-10 w-auto"
+              />
+              <span>in...</span>
+            </span>
           </h1>
           <p className="text-sm md:text-base text-slate-500 max-w-md mx-auto">
             Real-time weather intelligence, resort conditions, and local guides
