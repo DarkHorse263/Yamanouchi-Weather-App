@@ -1,4 +1,4 @@
-import { Switch, Route, Router as WouterRouter } from "wouter";
+import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -6,6 +6,7 @@ import { LanguageProvider } from "@/hooks/use-language";
 import { SeasonProvider } from "@/hooks/use-season";
 import { Layout } from "@/components/layout";
 
+import Landing from "@/pages/landing";
 import Home from "@/pages/home";
 import Resorts from "@/pages/resorts";
 import MapView from "@/pages/map";
@@ -24,7 +25,6 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: (failureCount, error) => {
-        // Never retry on abort errors — they're intentional cancellations
         if ((error as any)?.name === "AbortError") return false;
         return failureCount < 1;
       },
@@ -33,23 +33,30 @@ const queryClient = new QueryClient({
   },
 });
 
-function Router() {
-  return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/resorts" component={Resorts} />
-      <Route path="/map" component={MapView} />
+function AppRouter() {
+  const [location] = useLocation();
 
-      <Route path="/alerts" component={Alerts} />
-      <Route path="/guide" component={Guide} />
-      <Route path="/cams" component={Cams} />
-      <Route path="/transport" component={Transport} />
-      <Route path="/stay" component={Stay} />
-      <Route path="/eat" component={Eat} />
-      <Route path="/explore" component={Explore} />
-      <Route path="/activities" component={Activities} />
-      <Route component={NotFound} />
-    </Switch>
+  if (location === "/welcome") {
+    return <Landing />;
+  }
+
+  return (
+    <Layout>
+      <Switch>
+        <Route path="/" component={Home} />
+        <Route path="/resorts" component={Resorts} />
+        <Route path="/map" component={MapView} />
+        <Route path="/alerts" component={Alerts} />
+        <Route path="/guide" component={Guide} />
+        <Route path="/cams" component={Cams} />
+        <Route path="/transport" component={Transport} />
+        <Route path="/stay" component={Stay} />
+        <Route path="/eat" component={Eat} />
+        <Route path="/explore" component={Explore} />
+        <Route path="/activities" component={Activities} />
+        <Route component={NotFound} />
+      </Switch>
+    </Layout>
   );
 }
 
@@ -60,9 +67,7 @@ function App() {
         <SeasonProvider>
         <TooltipProvider>
           <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-            <Layout>
-              <Router />
-            </Layout>
+            <AppRouter />
           </WouterRouter>
           <Toaster />
         </TooltipProvider>

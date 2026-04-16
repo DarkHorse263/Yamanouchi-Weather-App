@@ -1,10 +1,22 @@
-# Yamanouchi Snow Intelligence Platform
+# feelzlike — Weather Intelligence Platform
 
 ## Overview
 
-Bilingual (EN/JP) full-stack web application for Yamanouchi Town, Japan — a snow intelligence platform targeting international tourists on mobile browsers. Live snow data from Supabase, accommodation/dining/attractions from local PostgreSQL.
+**feelzlike** is a global, multi-region weather intelligence brand. The umbrella landing page (`/welcome`) introduces the platform with "I wonder what it feelzlike in..." and lets users browse/search regions. Each region is its own full app experience.
+
+Currently live: **Yamanouchi Town, Japan** — bilingual (EN/JP) full-stack PWA with snow/green season intelligence targeting international tourists. Live snow data from Supabase, accommodation/dining/attractions from local PostgreSQL.
+
+Future regions: Nagano Prefecture (Japan), Snowy Mountains (Australia).
 
 pnpm workspace monorepo using TypeScript. Each package manages its own dependencies.
+
+## Brand
+
+- **Name**: feelzlike / feelzlike.com
+- **Logo**: Mountain peaks + S-curve trail (PNG) at `public/branding/logo-colour.png`
+- **Wordmark**: Horizontal text logo at `public/branding/wordmark-colour.png`
+- **Colours**: Navy text (#0C2340), blue→cyan gradient accent
+- **Landing page**: `/welcome` — no nav chrome, shows logo, tagline, region search, region cards
 
 ## Stack
 
