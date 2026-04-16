@@ -60,9 +60,9 @@ export default function Landing() {
           className="text-center mb-5"
         >
           <img
-            src={`${import.meta.env.BASE_URL}branding/logo-colour.png?v=3`}
+            src={`${import.meta.env.BASE_URL}branding/logo-full.png?v=4`}
             alt="feelzlike"
-            className="w-28 md:w-36 mx-auto mb-4"
+            className="w-44 md:w-56 mx-auto mb-4"
           />
           <h1 className="text-2xl md:text-4xl font-bold text-slate-800 tracking-tight leading-snug mb-2">
             I wonder what it{" "}
