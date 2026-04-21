@@ -1,1 +1,2 @@
 attached_assets/Snowy-Mountains-Weather_1776809891474.zip filter=lfs diff=lfs merge=lfs -text
+yam.tar.gz filter=lfs diff=lfs merge=lfs -text
