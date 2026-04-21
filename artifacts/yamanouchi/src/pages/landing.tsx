@@ -12,7 +12,7 @@ const REGIONS = [
     description: "Snow monkeys, 21 ski resorts, hot springs",
     tags: ["Ski", "Onsen", "Snow Monkeys"],
     status: "live" as const,
-    path: "/",
+    path: "/home",
     image: "https://images.unsplash.com/photo-1522156373667-4c7234bbd804?w=400&h=250&fit=crop",
   },
   {

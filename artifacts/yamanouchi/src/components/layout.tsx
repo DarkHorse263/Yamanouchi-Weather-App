@@ -19,7 +19,7 @@ import { cn } from "@/lib/utils";
 type NavItem = { path: string; icon: any; label: string; labelJa: string };
 
 const WINTER_NAV: NavItem[] = [
-  { path: "/",           icon: Home,         label: "Home",      labelJa: "ホーム" },
+  { path: "/home",       icon: Home,         label: "Home",      labelJa: "ホーム" },
   { path: "/resorts",    icon: MountainSnow, label: "Resorts",   labelJa: "スキー場" },
   { path: "/map",        icon: CloudSun,     label: "Weather",   labelJa: "天気" },
   { path: "/cams",       icon: Video,        label: "Cams",      labelJa: "カメラ" },
@@ -29,7 +29,7 @@ const WINTER_NAV: NavItem[] = [
 ];
 
 const GREEN_NAV: NavItem[] = [
-  { path: "/",           icon: Home,         label: "Home",      labelJa: "ホーム" },
+  { path: "/home",       icon: Home,         label: "Home",      labelJa: "ホーム" },
   { path: "/activities", icon: TreePine,     label: "Activities", labelJa: "アクティビティ" },
   { path: "/map",        icon: CloudSun,     label: "Weather",   labelJa: "天気" },
   { path: "/cams",       icon: Video,        label: "Cams",      labelJa: "カメラ" },
@@ -85,7 +85,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const NAV_ITEMS = isWinter ? WINTER_NAV : GREEN_NAV;
 
   const isActive = (path: string) =>
-    path === "/" ? location === "/" : location.startsWith(path);
+    path === "/home" ? location === "/home" : location.startsWith(path);
 
   return (
     <div className="min-h-screen bg-background flex flex-col md:flex-row">

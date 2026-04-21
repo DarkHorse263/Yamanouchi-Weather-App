@@ -36,14 +36,14 @@ const queryClient = new QueryClient({
 function AppRouter() {
   const [location] = useLocation();
 
-  if (location === "/welcome") {
+  if (location === "/" || location === "/welcome") {
     return <Landing />;
   }
 
   return (
     <Layout>
       <Switch>
-        <Route path="/" component={Home} />
+        <Route path="/home" component={Home} />
         <Route path="/resorts" component={Resorts} />
         <Route path="/map" component={MapView} />
         <Route path="/alerts" component={Alerts} />
