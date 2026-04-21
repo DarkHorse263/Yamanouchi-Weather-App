@@ -1,4 +1,4 @@
-import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
+import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -6,7 +6,6 @@ import { LanguageProvider } from "@/hooks/use-language";
 import { SeasonProvider } from "@/hooks/use-season";
 import { Layout } from "@/components/layout";
 
-import Landing from "@/pages/landing";
 import Home from "@/pages/home";
 import Resorts from "@/pages/resorts";
 import MapView from "@/pages/map";
@@ -34,16 +33,10 @@ const queryClient = new QueryClient({
 });
 
 function AppRouter() {
-  const [location] = useLocation();
-
-  if (location === "/" || location === "/welcome") {
-    return <Landing />;
-  }
-
   return (
     <Layout>
       <Switch>
-        <Route path="/home" component={Home} />
+        <Route path="/" component={Home} />
         <Route path="/resorts" component={Resorts} />
         <Route path="/map" component={MapView} />
         <Route path="/alerts" component={Alerts} />

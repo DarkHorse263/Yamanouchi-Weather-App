@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "feelzlike"
+version = "1.0.0"
+id = "artifacts/feelzlike"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23968
+
+[services.development]
+run = "pnpm --filter @workspace/feelzlike run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/feelzlike", "run", "build" ]
+publicDir = "artifacts/feelzlike/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23968"
+BASE_PATH = "/"

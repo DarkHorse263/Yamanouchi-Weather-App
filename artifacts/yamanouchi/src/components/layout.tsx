@@ -19,7 +19,7 @@ import { cn } from "@/lib/utils";
 type NavItem = { path: string; icon: any; label: string; labelJa: string };
 
 const WINTER_NAV: NavItem[] = [
-  { path: "/home",       icon: Home,         label: "Home",      labelJa: "ホーム" },
+  { path: "/",           icon: Home,         label: "Home",      labelJa: "ホーム" },
   { path: "/resorts",    icon: MountainSnow, label: "Resorts",   labelJa: "スキー場" },
   { path: "/map",        icon: CloudSun,     label: "Weather",   labelJa: "天気" },
   { path: "/cams",       icon: Video,        label: "Cams",      labelJa: "カメラ" },
@@ -29,7 +29,7 @@ const WINTER_NAV: NavItem[] = [
 ];
 
 const GREEN_NAV: NavItem[] = [
-  { path: "/home",       icon: Home,         label: "Home",      labelJa: "ホーム" },
+  { path: "/",           icon: Home,         label: "Home",      labelJa: "ホーム" },
   { path: "/activities", icon: TreePine,     label: "Activities", labelJa: "アクティビティ" },
   { path: "/map",        icon: CloudSun,     label: "Weather",   labelJa: "天気" },
   { path: "/cams",       icon: Video,        label: "Cams",      labelJa: "カメラ" },
@@ -85,7 +85,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const NAV_ITEMS = isWinter ? WINTER_NAV : GREEN_NAV;
 
   const isActive = (path: string) =>
-    path === "/home" ? location === "/home" : location.startsWith(path);
+    path === "/" ? location === "/" : location.startsWith(path);
 
   return (
     <div className="min-h-screen bg-background flex flex-col md:flex-row">
@@ -93,13 +93,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
       {/* Desktop Sidebar */}
       <aside className="hidden md:flex flex-col w-64 fixed inset-y-0 left-0 bg-white border-r border-border z-50 shadow-sm">
         <div className="p-6">
-          <Link href="/welcome" className="block mb-2">
+          <a href="/" className="block mb-2">
             <img
               src={`${import.meta.env.BASE_URL}branding/wordmark-colour.png?v=3`}
               alt="feelzlike"
               className="h-10 w-auto"
             />
-          </Link>
+          </a>
           <p className="text-xs font-semibold text-slate-400 tracking-wide uppercase">Yamanouchi Town</p>
           <div className="mt-3">
             <SeasonToggle />
@@ -148,13 +148,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
       {/* Mobile Header */}
       <header className="md:hidden fixed top-0 inset-x-0 h-16 glass z-40 flex items-center justify-between px-4 border-b border-border/40">
-        <Link href="/welcome" className="flex items-center gap-2">
+        <a href="/" className="flex items-center gap-2">
           <img
             src={`${import.meta.env.BASE_URL}branding/wordmark-colour.png?v=3`}
             alt="feelzlike"
             className="h-6 w-auto"
           />
-        </Link>
+        </a>
         <div className="flex items-center gap-2">
           <SeasonToggle compact />
           <div className="flex bg-secondary p-0.5 rounded-md border border-border">

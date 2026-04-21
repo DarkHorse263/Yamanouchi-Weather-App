@@ -2,11 +2,13 @@
 
 ## Overview
 
-**feelzlike** is a global, multi-region weather intelligence brand. The umbrella landing page (`/welcome`) introduces the platform with "I wonder what it feelzlike in..." and lets users browse/search regions. Each region is its own full app experience.
+**feelzlike** is a global, multi-region weather intelligence brand. Each region is its own standalone app under the feelzlike umbrella.
 
-Currently live: **Yamanouchi Town, Japan** — bilingual (EN/JP) full-stack PWA with snow/green season intelligence targeting international tourists. Live snow data from Supabase, accommodation/dining/attractions from local PostgreSQL.
-
-Future regions: Nagano Prefecture (Japan), Snowy Mountains (Australia).
+**Architecture:**
+- `feelzlike` (master, at `/`) — landing page, region selector, brand hub. Adding a new region = create a new artifact + add one card to its region list.
+- `yamanouchi` (at `/yamanouchi/`) — first live region. Bilingual (EN/JP) full-stack PWA with snow/green season intelligence. Live snow data from Supabase, accommodation/dining/attractions from local PostgreSQL.
+- `nagano` (at `/nagano/`) — placeholder for Nagano Prefecture (coming soon).
+- Future regions: Snowy Mountains (Australia), etc.
 
 pnpm workspace monorepo using TypeScript. Each package manages its own dependencies.
 
