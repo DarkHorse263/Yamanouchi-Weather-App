@@ -8,8 +8,32 @@ import { motion } from "framer-motion";
 export default function Dashboard() {
   const { data, isLoading, error, refetch } = useGetWeather();
 
+  const base = import.meta.env.BASE_URL;
+
   return (
     <AppLayout>
+      {/* feelzlike wonder strip */}
+      <div className="bg-white border-b border-slate-200/70">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 text-center">
+          <img
+            src={`${base}branding/logo-full.png`}
+            alt="feelzlike"
+            className="w-32 md:w-40 mx-auto mb-3"
+          />
+          <h2 className="text-xl md:text-2xl font-bold text-slate-800 tracking-tight leading-snug">
+            <span className="block">I wonder what it</span>
+            <span className="flex items-center justify-center gap-x-2 mt-1 flex-wrap">
+              <img
+                src={`${base}branding/wordmark-inline.png`}
+                alt="feelzlike"
+                className="inline-block h-6 md:h-8 w-auto"
+              />
+              <span>in the Snowy Mountains...</span>
+            </span>
+          </h2>
+        </div>
+      </div>
+
       {/* Hero Section */}
       <div className="relative overflow-hidden bg-slate-900 text-white">
         <div className="absolute inset-0 z-0">

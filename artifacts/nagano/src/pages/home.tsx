@@ -101,6 +101,29 @@ export default function Home() {
       )}
 
       <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center pt-2 pb-4"
+      >
+        <img
+          src={`${import.meta.env.BASE_URL}branding/logo-full.png`}
+          alt="feelzlike"
+          className="w-28 md:w-36 mx-auto mb-3"
+        />
+        <h2 className="text-lg md:text-xl font-bold text-slate-800 tracking-tight leading-snug">
+          <span className="block">{t("I wonder what it", "今")}</span>
+          <span className="flex items-center justify-center gap-x-2 mt-1 flex-wrap">
+            <img
+              src={`${import.meta.env.BASE_URL}branding/wordmark-inline.png`}
+              alt="feelzlike"
+              className="inline-block h-5 md:h-7 w-auto"
+            />
+            <span>{t("in Nagano...", "の長野県は…")}</span>
+          </span>
+        </h2>
+      </motion.div>
+
+      <motion.div
         initial={{ opacity: 0, scale: 0.97 }}
         animate={{ opacity: 1, scale: 1 }}
         className="relative rounded-3xl overflow-hidden shadow-2xl shadow-primary/20 bg-mountain-dark"
