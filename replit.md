@@ -11,6 +11,7 @@
 - Live regions: Snowy Mountains (Australia, port 23491), Yamanouchi (Japan, port 20651)
 - Coming soon: Nagano (Japan, port 24019)
 - Snowy Mountains backend routes: `/api/weather`, `/api/bus-services`, `/api/webcams`, `/api/road-conditions`, `/api/lift-status`, `/api/radar` — handlers in `artifacts/api-server/src/routes/{weather,bus,webcams,roads,lifts,radar}.ts`
+- Eigomenyu was extracted to its own standalone Replit (April 2026) — no longer part of this monorepo.
 
 pnpm workspace monorepo using TypeScript. Each package manages its own dependencies.
 
