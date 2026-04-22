@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "Dy7O2bK1wO26T_TtA83mD"
+uri = "file://exports/eigomenyu-standalone.tar.gz"
+type = "unspecified"
+title = "Eigomenyu (standalone, ready to drop into a new Repl)"
