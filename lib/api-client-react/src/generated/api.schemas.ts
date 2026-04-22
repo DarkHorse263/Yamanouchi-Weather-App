@@ -719,6 +719,247 @@ export interface EigomenyuTranslateResponse {
   warnings: string[];
 }
 
+export interface CurrentWeather {
+  temperature: number;
+  feelsLike: number;
+  humidity: number;
+  windSpeed: number;
+  windDirection: number;
+  windDirectionCompass?: string;
+  windGust?: number;
+  weatherCode: number;
+  weatherDescription: string;
+  isDay: boolean;
+  snowDepth?: number;
+  precipitation: number;
+  cloudCover: number;
+  visibility?: number;
+  pressure?: number;
+  dewpoint?: number;
+  rainSince9am?: number;
+  dataSource?: string;
+  bomStation?: string;
+  bomObservationTime?: string;
+}
+
+export interface DailyForecast {
+  date: string;
+  maxTemp: number;
+  minTemp: number;
+  weatherCode: number;
+  weatherDescription: string;
+  precipitationSum: number;
+  snowfallSum: number;
+  windSpeedMax: number;
+  uvIndexMax?: number;
+  sunrise?: string;
+  sunset?: string;
+}
+
+export interface HourlyForecast {
+  time: string;
+  temperature: number;
+  weatherCode: number;
+  weatherDescription: string;
+  precipitation: number;
+  snowfall?: number;
+  windSpeed: number;
+  humidity: number;
+  feelsLike: number;
+  cloudCover?: number;
+}
+
+export interface LocationInfo {
+  id: string;
+  name: string;
+  elevation: number;
+  latitude: number;
+  longitude: number;
+  description: string;
+  bomStation?: string;
+  bomStationId?: string;
+}
+
+export interface LocationWeather {
+  location: LocationInfo;
+  current: CurrentWeather;
+  daily: DailyForecast[];
+  hourly: HourlyForecast[];
+  lastUpdated: string;
+}
+
+export interface WeatherResponse {
+  locations: LocationWeather[];
+  lastUpdated: string;
+}
+
+export interface BusScheduleEntry {
+  departure: string;
+  arrival: string;
+  from: string;
+  to: string;
+  days: string;
+  notes?: string;
+}
+
+export interface BusRoute {
+  id: string;
+  name: string;
+  description: string;
+  stops: string[];
+  schedule: BusScheduleEntry[];
+  notes?: string;
+  seasonalInfo?: string;
+}
+
+export interface BusServiceResponse {
+  provider: string;
+  phone: string;
+  website: string;
+  bookingInfo?: string;
+  routes: BusRoute[];
+}
+
+export interface Webcam {
+  id: string;
+  name: string;
+  description?: string;
+  imageUrl: string;
+  pageUrl: string;
+  elevation?: number;
+  direction?: string;
+  lastUpdated?: string;
+}
+
+export interface LocationWebcams {
+  locationId: string;
+  locationName: string;
+  webcams: Webcam[];
+  webcamPageUrl: string;
+}
+
+export interface WebcamResponse {
+  locations: LocationWebcams[];
+  lastUpdated: string;
+}
+
+export type RoadConditionCondition =
+  (typeof RoadConditionCondition)[keyof typeof RoadConditionCondition];
+
+export const RoadConditionCondition = {
+  open: "open",
+  closed: "closed",
+  "chains-required": "chains-required",
+  "reduced-speed": "reduced-speed",
+  caution: "caution",
+} as const;
+
+export interface RoadCondition {
+  id: string;
+  roadName: string;
+  segment: string;
+  condition: RoadConditionCondition;
+  description: string;
+  chainsRequired: boolean;
+  lastUpdated: string;
+  source: string;
+  detailUrl?: string;
+  affectedResorts?: string[];
+}
+
+export interface ChainFittingBay {
+  name: string;
+  location: string;
+  road: string;
+  description?: string;
+}
+
+export interface RoadConditionsResponse {
+  roads: RoadCondition[];
+  generalAdvice: string;
+  liveTrafficUrl: string;
+  lastUpdated: string;
+  chainFittingBays?: ChainFittingBay[];
+}
+
+export type LiftType = (typeof LiftType)[keyof typeof LiftType];
+
+export const LiftType = {
+  chairlift: "chairlift",
+  "t-bar": "t-bar",
+  poma: "poma",
+  gondola: "gondola",
+  "magic-carpet": "magic-carpet",
+  surface: "surface",
+} as const;
+
+export type LiftStatus = (typeof LiftStatus)[keyof typeof LiftStatus];
+
+export const LiftStatus = {
+  open: "open",
+  closed: "closed",
+  "on-hold": "on-hold",
+  "wind-hold": "wind-hold",
+  scheduled: "scheduled",
+} as const;
+
+export type LiftDifficulty =
+  (typeof LiftDifficulty)[keyof typeof LiftDifficulty];
+
+export const LiftDifficulty = {
+  beginner: "beginner",
+  intermediate: "intermediate",
+  advanced: "advanced",
+  "all-levels": "all-levels",
+} as const;
+
+export interface Lift {
+  id: string;
+  name: string;
+  type: LiftType;
+  status: LiftStatus;
+  openingTime?: string;
+  closingTime?: string;
+  verticalRise?: number;
+  capacity?: string;
+  difficulty?: LiftDifficulty;
+}
+
+export type ResortLiftStatusSeasonStatus =
+  (typeof ResortLiftStatusSeasonStatus)[keyof typeof ResortLiftStatusSeasonStatus];
+
+export const ResortLiftStatusSeasonStatus = {
+  "pre-season": "pre-season",
+  open: "open",
+  "late-season": "late-season",
+  closed: "closed",
+} as const;
+
+export interface ResortLiftStatus {
+  locationId: string;
+  locationName: string;
+  liftsOpen: number;
+  totalLifts: number;
+  lifts: Lift[];
+  runsOpen?: number;
+  totalRuns?: number;
+  snowCondition?: string;
+  seasonStatus: ResortLiftStatusSeasonStatus;
+  operatingHours?: string;
+  liftStatusUrl?: string;
+  lastUpdated: string;
+}
+
+export interface LiftStatusResponse {
+  resorts: ResortLiftStatus[];
+  lastUpdated: string;
+}
+
+export interface ErrorResponse {
+  error: string;
+  message: string;
+}
+
 export type GetAccommodationParams = {
   type?: GetAccommodationType;
   region?: string;

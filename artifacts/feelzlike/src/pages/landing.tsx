@@ -4,6 +4,17 @@ import { useState } from "react";
 
 const REGIONS = [
   {
+    id: "snowy-mountains",
+    name: "Snowy Mountains",
+    nameJa: "スノーウィー山脈",
+    country: "Australia",
+    description: "Australia's alpine playground — Perisher, Thredbo, Charlotte Pass",
+    tags: ["Ski", "Hiking", "Lakes"],
+    status: "live" as const,
+    href: "/snowy-mountains/",
+    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=250&fit=crop",
+  },
+  {
     id: "yamanouchi",
     name: "Yamanouchi Town",
     nameJa: "山ノ内町",
@@ -24,17 +35,6 @@ const REGIONS = [
     status: "coming-soon" as const,
     href: "#",
     image: "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?w=400&h=250&fit=crop",
-  },
-  {
-    id: "snowy-mountains",
-    name: "Snowy Mountains",
-    nameJa: "スノーウィー山脈",
-    country: "Australia",
-    description: "Australia's alpine playground — Perisher, Thredbo, Charlotte Pass",
-    tags: ["Ski", "Hiking", "Lakes"],
-    status: "coming-soon" as const,
-    href: "#",
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=250&fit=crop",
   },
 ];
 

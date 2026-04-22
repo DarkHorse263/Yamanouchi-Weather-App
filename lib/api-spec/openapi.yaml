@@ -653,6 +653,161 @@ paths:
                 $ref: "#/components/schemas/EigomenyuTranslateResponse"
         "401":
           description: Authentication required
+  /weather:
+    get:
+      operationId: getWeather
+      tags: [weather]
+      summary: Get weather for all resort locations
+      description: Returns current weather and 7-day forecast for Thredbo, Perisher, Charlotte's Pass, and Jindabyne
+      responses:
+        "200":
+          description: Weather data for all locations
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WeatherResponse"
+        "500":
+          description: Error fetching weather
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /weather/{locationId}:
+    get:
+      operationId: getLocationWeather
+      tags: [weather]
+      summary: Get weather for a specific location
+      description: Returns current weather and 7-day forecast for a specific resort location
+      parameters:
+        - name: locationId
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [thredbo, perisher, charlottes-pass, jindabyne]
+      responses:
+        "200":
+          description: Weather data for the location
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LocationWeather"
+        "404":
+          description: Location not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Error fetching weather
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /bus-services:
+    get:
+      operationId: getBusServices
+      tags: [bus]
+      summary: Get Cooma Coaches bus service information
+      description: Returns Cooma Coaches Snowy Mountains bus service routes and timetables
+      responses:
+        "200":
+          description: Bus service information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BusServiceResponse"
+  /webcams:
+    get:
+      operationId: getWebcams
+      tags: [webcams]
+      summary: Get all resort webcams
+      description: Returns webcam feeds for all resort locations
+      responses:
+        "200":
+          description: Webcam data for all locations
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WebcamResponse"
+  /webcams/{locationId}:
+    get:
+      operationId: getLocationWebcams
+      tags: [webcams]
+      summary: Get webcams for a specific location
+      description: Returns webcam feeds for a specific resort location
+      parameters:
+        - name: locationId
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [thredbo, perisher, charlottes-pass, jindabyne]
+      responses:
+        "200":
+          description: Webcam data for the location
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LocationWebcams"
+        "404":
+          description: Location not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /road-conditions:
+    get:
+      operationId: getRoadConditions
+      tags: [roads]
+      summary: Get alpine road conditions
+      description: Returns current road conditions for Snowy Mountains alpine roads from Transport for NSW
+      responses:
+        "200":
+          description: Road condition data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoadConditionsResponse"
+  /lift-status:
+    get:
+      operationId: getLiftStatus
+      tags: [lifts]
+      summary: Get lift status for all resorts
+      description: Returns current lift operating status for Thredbo, Perisher, and Charlotte's Pass
+      responses:
+        "200":
+          description: Lift status data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LiftStatusResponse"
+  /lift-status/{locationId}:
+    get:
+      operationId: getLocationLiftStatus
+      tags: [lifts]
+      summary: Get lift status for a specific resort
+      description: Returns lift operating status for a specific resort
+      parameters:
+        - name: locationId
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [thredbo, perisher, charlottes-pass]
+      responses:
+        "200":
+          description: Lift status for the location
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResortLiftStatus"
+        "404":
+          description: Location not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
 
 components:
   schemas:
@@ -1576,3 +1731,467 @@ components:
         - name_phonetic_en
         - confidence
         - warnings
+    CurrentWeather:
+      type: object
+      properties:
+        temperature:
+          type: number
+        feelsLike:
+          type: number
+        humidity:
+          type: number
+        windSpeed:
+          type: number
+        windDirection:
+          type: number
+        windDirectionCompass:
+          type: string
+        windGust:
+          type: number
+        weatherCode:
+          type: integer
+        weatherDescription:
+          type: string
+        isDay:
+          type: boolean
+        snowDepth:
+          type: number
+        precipitation:
+          type: number
+        cloudCover:
+          type: integer
+        visibility:
+          type: number
+        pressure:
+          type: number
+        dewpoint:
+          type: number
+        rainSince9am:
+          type: number
+        dataSource:
+          type: string
+        bomStation:
+          type: string
+        bomObservationTime:
+          type: string
+      required:
+        - temperature
+        - feelsLike
+        - humidity
+        - windSpeed
+        - windDirection
+        - weatherCode
+        - weatherDescription
+        - isDay
+        - precipitation
+        - cloudCover
+    DailyForecast:
+      type: object
+      properties:
+        date:
+          type: string
+        maxTemp:
+          type: number
+        minTemp:
+          type: number
+        weatherCode:
+          type: integer
+        weatherDescription:
+          type: string
+        precipitationSum:
+          type: number
+        snowfallSum:
+          type: number
+        windSpeedMax:
+          type: number
+        uvIndexMax:
+          type: number
+        sunrise:
+          type: string
+        sunset:
+          type: string
+      required:
+        - date
+        - maxTemp
+        - minTemp
+        - weatherCode
+        - weatherDescription
+        - precipitationSum
+        - snowfallSum
+        - windSpeedMax
+    HourlyForecast:
+      type: object
+      properties:
+        time:
+          type: string
+        temperature:
+          type: number
+        weatherCode:
+          type: integer
+        weatherDescription:
+          type: string
+        precipitation:
+          type: number
+        snowfall:
+          type: number
+        windSpeed:
+          type: number
+        humidity:
+          type: number
+        feelsLike:
+          type: number
+        cloudCover:
+          type: integer
+      required:
+        - time
+        - temperature
+        - weatherCode
+        - weatherDescription
+        - precipitation
+        - windSpeed
+        - humidity
+        - feelsLike
+    LocationInfo:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        elevation:
+          type: number
+        latitude:
+          type: number
+        longitude:
+          type: number
+        description:
+          type: string
+        bomStation:
+          type: string
+        bomStationId:
+          type: string
+      required:
+        - id
+        - name
+        - elevation
+        - latitude
+        - longitude
+        - description
+    LocationWeather:
+      type: object
+      properties:
+        location:
+          $ref: "#/components/schemas/LocationInfo"
+        current:
+          $ref: "#/components/schemas/CurrentWeather"
+        daily:
+          type: array
+          items:
+            $ref: "#/components/schemas/DailyForecast"
+        hourly:
+          type: array
+          items:
+            $ref: "#/components/schemas/HourlyForecast"
+        lastUpdated:
+          type: string
+      required:
+        - location
+        - current
+        - daily
+        - hourly
+        - lastUpdated
+    WeatherResponse:
+      type: object
+      properties:
+        locations:
+          type: array
+          items:
+            $ref: "#/components/schemas/LocationWeather"
+        lastUpdated:
+          type: string
+      required:
+        - locations
+        - lastUpdated
+    BusRoute:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        stops:
+          type: array
+          items:
+            type: string
+        schedule:
+          type: array
+          items:
+            $ref: "#/components/schemas/BusScheduleEntry"
+        notes:
+          type: string
+        seasonalInfo:
+          type: string
+      required:
+        - id
+        - name
+        - description
+        - stops
+        - schedule
+    BusScheduleEntry:
+      type: object
+      properties:
+        departure:
+          type: string
+        arrival:
+          type: string
+        from:
+          type: string
+        to:
+          type: string
+        days:
+          type: string
+        notes:
+          type: string
+      required:
+        - departure
+        - arrival
+        - from
+        - to
+        - days
+    BusServiceResponse:
+      type: object
+      properties:
+        provider:
+          type: string
+        phone:
+          type: string
+        website:
+          type: string
+        bookingInfo:
+          type: string
+        routes:
+          type: array
+          items:
+            $ref: "#/components/schemas/BusRoute"
+      required:
+        - provider
+        - phone
+        - website
+        - routes
+    Webcam:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        imageUrl:
+          type: string
+        pageUrl:
+          type: string
+        elevation:
+          type: number
+        direction:
+          type: string
+        lastUpdated:
+          type: string
+      required:
+        - id
+        - name
+        - imageUrl
+        - pageUrl
+    LocationWebcams:
+      type: object
+      properties:
+        locationId:
+          type: string
+        locationName:
+          type: string
+        webcams:
+          type: array
+          items:
+            $ref: "#/components/schemas/Webcam"
+        webcamPageUrl:
+          type: string
+      required:
+        - locationId
+        - locationName
+        - webcams
+        - webcamPageUrl
+    WebcamResponse:
+      type: object
+      properties:
+        locations:
+          type: array
+          items:
+            $ref: "#/components/schemas/LocationWebcams"
+        lastUpdated:
+          type: string
+      required:
+        - locations
+        - lastUpdated
+    RoadCondition:
+      type: object
+      properties:
+        id:
+          type: string
+        roadName:
+          type: string
+        segment:
+          type: string
+        condition:
+          type: string
+          enum: [open, closed, chains-required, reduced-speed, caution]
+        description:
+          type: string
+        chainsRequired:
+          type: boolean
+        lastUpdated:
+          type: string
+        source:
+          type: string
+        detailUrl:
+          type: string
+        affectedResorts:
+          type: array
+          items:
+            type: string
+      required:
+        - id
+        - roadName
+        - segment
+        - condition
+        - description
+        - chainsRequired
+        - lastUpdated
+        - source
+    RoadConditionsResponse:
+      type: object
+      properties:
+        roads:
+          type: array
+          items:
+            $ref: "#/components/schemas/RoadCondition"
+        generalAdvice:
+          type: string
+        liveTrafficUrl:
+          type: string
+        lastUpdated:
+          type: string
+        chainFittingBays:
+          type: array
+          items:
+            $ref: "#/components/schemas/ChainFittingBay"
+      required:
+        - roads
+        - generalAdvice
+        - liveTrafficUrl
+        - lastUpdated
+    ChainFittingBay:
+      type: object
+      properties:
+        name:
+          type: string
+        location:
+          type: string
+        road:
+          type: string
+        description:
+          type: string
+      required:
+        - name
+        - location
+        - road
+    Lift:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          enum: [chairlift, t-bar, poma, gondola, magic-carpet, surface]
+        status:
+          type: string
+          enum: [open, closed, on-hold, wind-hold, scheduled]
+        openingTime:
+          type: string
+        closingTime:
+          type: string
+        verticalRise:
+          type: number
+        capacity:
+          type: string
+        difficulty:
+          type: string
+          enum: [beginner, intermediate, advanced, all-levels]
+      required:
+        - id
+        - name
+        - type
+        - status
+    ResortLiftStatus:
+      type: object
+      properties:
+        locationId:
+          type: string
+        locationName:
+          type: string
+        liftsOpen:
+          type: integer
+        totalLifts:
+          type: integer
+        lifts:
+          type: array
+          items:
+            $ref: "#/components/schemas/Lift"
+        runsOpen:
+          type: integer
+        totalRuns:
+          type: integer
+        snowCondition:
+          type: string
+        seasonStatus:
+          type: string
+          enum: [pre-season, open, late-season, closed]
+        operatingHours:
+          type: string
+        liftStatusUrl:
+          type: string
+        lastUpdated:
+          type: string
+      required:
+        - locationId
+        - locationName
+        - liftsOpen
+        - totalLifts
+        - lifts
+        - seasonStatus
+        - lastUpdated
+    LiftStatusResponse:
+      type: object
+      properties:
+        resorts:
+          type: array
+          items:
+            $ref: "#/components/schemas/ResortLiftStatus"
+        lastUpdated:
+          type: string
+      required:
+        - resorts
+        - lastUpdated
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+      required:
+        - error
+        - message

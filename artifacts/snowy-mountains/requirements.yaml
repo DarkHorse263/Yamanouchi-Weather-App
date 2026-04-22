@@ -1,0 +1,18 @@
+packages:
+  "framer-motion": "Animations for page transitions and rich micro-interactions"
+  "recharts": "Data visualization for temperature and snow forecast charts"
+  "date-fns": "Human-readable date formatting for forecasts and schedules"
+  "clsx": "Utility for conditionally joining classNames"
+  "tailwind-merge": "Utility for merging tailwind classes safely"
+
+images:
+  - path: "artifacts/jindabyne-weather/public/images/hero-bg.png"
+    description: "Snow-covered alpine mountain peaks with a clear blue sky, minimal, cool tones, bright and inviting"
+    aspect_ratio: "16:9"
+  - path: "artifacts/jindabyne-weather/public/images/bus-hero.png"
+    description: "A modern coach bus driving on a snowy mountain road, minimal clean vector illustration style, alpine background"
+    aspect_ratio: "16:9"
+
+notes:
+  - Importing React Query hooks directly from @workspace/api-client-react
+  - Assuming API runs on the same host or is proxied via standard Vite setup

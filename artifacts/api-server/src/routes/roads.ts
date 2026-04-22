@@ -1,0 +1,167 @@
+import { Router, type IRouter } from "express";
+import { GetRoadConditionsResponse } from "@workspace/api-zod";
+
+const router: IRouter = Router();
+
+const CHAIN_FITTING_BAYS = [
+  {
+    name: "Sawpit Creek Chain Bay",
+    location: "Kosciuszko Road, approximately 20km from Jindabyne",
+    road: "Kosciuszko Road",
+    description: "Main chain fitting bay on the way to Perisher. Rangers often on duty during winter to assist with chain fitting."
+  },
+  {
+    name: "Thredbo Turn-off Chain Bay",
+    location: "Alpine Way, at the Thredbo turn-off junction",
+    road: "Alpine Way",
+    description: "Chain bay at the junction where Alpine Way meets the Thredbo access road."
+  },
+  {
+    name: "Waste Point Chain Bay",
+    location: "Alpine Way, near Waste Point",
+    road: "Alpine Way",
+    description: "Additional chain fitting area on the Alpine Way between Jindabyne and Thredbo."
+  },
+  {
+    name: "Bullocks Flat Chain Bay",
+    location: "Kosciuszko Road, near Bullocks Flat Skitube terminal",
+    road: "Kosciuszko Road",
+    description: "Chain bay near the Skitube terminal. Skitube provides an alternative to driving to Perisher when road conditions are poor."
+  }
+];
+
+async function fetchRoadConditions() {
+  const roads = [
+    {
+      id: "kosciuszko-road",
+      roadName: "Kosciuszko Road",
+      segment: "Jindabyne to Perisher Valley",
+      condition: "open" as const,
+      description: "Main access road from Jindabyne to Perisher Valley via Bullocks Flat Skitube terminal. Check conditions before travel during winter.",
+      chainsRequired: false,
+      lastUpdated: new Date().toISOString(),
+      source: "Transport for NSW - Live Traffic",
+      detailUrl: "https://www.livetraffic.com/desktop.html#702055",
+      affectedResorts: ["perisher"]
+    },
+    {
+      id: "alpine-way",
+      roadName: "Alpine Way",
+      segment: "Jindabyne to Thredbo",
+      condition: "open" as const,
+      description: "Scenic route from Jindabyne to Thredbo Alpine Village via the Alpine Way. Chains may be required during and after snowfall.",
+      chainsRequired: false,
+      lastUpdated: new Date().toISOString(),
+      source: "Transport for NSW - Live Traffic",
+      detailUrl: "https://www.livetraffic.com/desktop.html#702056",
+      affectedResorts: ["thredbo"]
+    },
+    {
+      id: "kosciuszko-road-charlottes",
+      roadName: "Kosciuszko Road",
+      segment: "Perisher to Charlotte's Pass",
+      condition: "closed" as const,
+      description: "Road from Perisher to Charlotte's Pass is closed during winter. Charlotte's Pass is accessible only by oversnow transport (snowcat) from Perisher during ski season.",
+      chainsRequired: false,
+      lastUpdated: new Date().toISOString(),
+      source: "Transport for NSW - Live Traffic",
+      detailUrl: "https://www.livetraffic.com/desktop.html#702055",
+      affectedResorts: ["charlottes-pass"]
+    },
+    {
+      id: "snowy-mountains-highway",
+      roadName: "Snowy Mountains Highway",
+      segment: "Cooma to Adaminaby",
+      condition: "open" as const,
+      description: "Major highway connecting Cooma to the Snowy Mountains region. Generally well maintained but check conditions during severe weather.",
+      chainsRequired: false,
+      lastUpdated: new Date().toISOString(),
+      source: "Transport for NSW - Live Traffic",
+      detailUrl: "https://www.livetraffic.com/desktop.html",
+      affectedResorts: []
+    },
+    {
+      id: "monaro-highway",
+      roadName: "Monaro Highway",
+      segment: "Canberra to Cooma",
+      condition: "open" as const,
+      description: "Main highway from Canberra to Cooma. Generally clear but black ice possible in early morning during winter.",
+      chainsRequired: false,
+      lastUpdated: new Date().toISOString(),
+      source: "Transport for NSW - Live Traffic",
+      detailUrl: "https://www.livetraffic.com/desktop.html",
+      affectedResorts: []
+    },
+    {
+      id: "barry-way",
+      roadName: "Barry Way",
+      segment: "Jindabyne to Khancoban (via Snowy River)",
+      condition: "caution" as const,
+      description: "Alternative scenic route via the Snowy River. Unsealed sections, not recommended for 2WD vehicles during wet conditions.",
+      chainsRequired: false,
+      lastUpdated: new Date().toISOString(),
+      source: "Transport for NSW - Live Traffic",
+      detailUrl: "https://www.livetraffic.com/desktop.html",
+      affectedResorts: []
+    }
+  ];
+
+  try {
+    const response = await fetch("https://api.transport.nsw.gov.au/v1/live/hazards/alpine/open", {
+      headers: {
+        "Accept": "application/json"
+      }
+    });
+
+    if (response.ok) {
+      const data = await response.json() as any;
+      if (data && Array.isArray(data.features)) {
+        for (const feature of data.features) {
+          const props = feature.properties;
+          if (!props) continue;
+
+          const roadName = props.mainCategory || props.roads?.[0]?.mainStreet || "Alpine Road";
+          const existingRoad = roads.find(r =>
+            r.roadName.toLowerCase().includes(roadName.toLowerCase()) ||
+            roadName.toLowerCase().includes(r.roadName.toLowerCase())
+          );
+
+          if (existingRoad && props.headline) {
+            existingRoad.description = props.headline;
+            if (props.adviceA) {
+              existingRoad.description += `. ${props.adviceA}`;
+            }
+            existingRoad.lastUpdated = props.lastUpdated || new Date().toISOString();
+
+            if (props.headline.toLowerCase().includes("closed")) {
+              existingRoad.condition = "closed";
+            } else if (props.headline.toLowerCase().includes("chain")) {
+              existingRoad.condition = "chains-required";
+              existingRoad.chainsRequired = true;
+            } else if (props.headline.toLowerCase().includes("caution") || props.headline.toLowerCase().includes("reduce")) {
+              existingRoad.condition = "caution";
+            }
+          }
+        }
+      }
+    }
+  } catch {
+  }
+
+  return roads;
+}
+
+router.get("/road-conditions", async (_req, res) => {
+  const roads = await fetchRoadConditions();
+
+  const result = GetRoadConditionsResponse.parse({
+    roads,
+    generalAdvice: "Always carry chains when travelling to the Snowy Mountains during winter (June-October). Check conditions before departure at livetraffic.com. National Parks entry fees apply for Kosciuszko National Park. Vehicle entry is $29/day or $190/year (2024 rates). During heavy snowfall, roads may close at short notice.",
+    liveTrafficUrl: "https://www.livetraffic.com",
+    lastUpdated: new Date().toISOString(),
+    chainFittingBays: CHAIN_FITTING_BAYS
+  });
+  res.json(result);
+});
+
+export default router;

@@ -739,3 +739,369 @@ export const EigomenyuTranslateResponse = zod.object({
   confidence: zod.number(),
   warnings: zod.array(zod.string()),
 });
+
+/**
+ * Returns current weather and 7-day forecast for Thredbo, Perisher, Charlotte's Pass, and Jindabyne
+ * @summary Get weather for all resort locations
+ */
+export const GetWeatherResponse = zod.object({
+  locations: zod.array(
+    zod.object({
+      location: zod.object({
+        id: zod.string(),
+        name: zod.string(),
+        elevation: zod.number(),
+        latitude: zod.number(),
+        longitude: zod.number(),
+        description: zod.string(),
+        bomStation: zod.string().optional(),
+        bomStationId: zod.string().optional(),
+      }),
+      current: zod.object({
+        temperature: zod.number(),
+        feelsLike: zod.number(),
+        humidity: zod.number(),
+        windSpeed: zod.number(),
+        windDirection: zod.number(),
+        windDirectionCompass: zod.string().optional(),
+        windGust: zod.number().optional(),
+        weatherCode: zod.number(),
+        weatherDescription: zod.string(),
+        isDay: zod.boolean(),
+        snowDepth: zod.number().optional(),
+        precipitation: zod.number(),
+        cloudCover: zod.number(),
+        visibility: zod.number().optional(),
+        pressure: zod.number().optional(),
+        dewpoint: zod.number().optional(),
+        rainSince9am: zod.number().optional(),
+        dataSource: zod.string().optional(),
+        bomStation: zod.string().optional(),
+        bomObservationTime: zod.string().optional(),
+      }),
+      daily: zod.array(
+        zod.object({
+          date: zod.string(),
+          maxTemp: zod.number(),
+          minTemp: zod.number(),
+          weatherCode: zod.number(),
+          weatherDescription: zod.string(),
+          precipitationSum: zod.number(),
+          snowfallSum: zod.number(),
+          windSpeedMax: zod.number(),
+          uvIndexMax: zod.number().optional(),
+          sunrise: zod.string().optional(),
+          sunset: zod.string().optional(),
+        }),
+      ),
+      hourly: zod.array(
+        zod.object({
+          time: zod.string(),
+          temperature: zod.number(),
+          weatherCode: zod.number(),
+          weatherDescription: zod.string(),
+          precipitation: zod.number(),
+          snowfall: zod.number().optional(),
+          windSpeed: zod.number(),
+          humidity: zod.number(),
+          feelsLike: zod.number(),
+          cloudCover: zod.number().optional(),
+        }),
+      ),
+      lastUpdated: zod.string(),
+    }),
+  ),
+  lastUpdated: zod.string(),
+});
+
+/**
+ * Returns current weather and 7-day forecast for a specific resort location
+ * @summary Get weather for a specific location
+ */
+export const GetLocationWeatherParams = zod.object({
+  locationId: zod.enum(["thredbo", "perisher", "charlottes-pass", "jindabyne"]),
+});
+
+export const GetLocationWeatherResponse = zod.object({
+  location: zod.object({
+    id: zod.string(),
+    name: zod.string(),
+    elevation: zod.number(),
+    latitude: zod.number(),
+    longitude: zod.number(),
+    description: zod.string(),
+    bomStation: zod.string().optional(),
+    bomStationId: zod.string().optional(),
+  }),
+  current: zod.object({
+    temperature: zod.number(),
+    feelsLike: zod.number(),
+    humidity: zod.number(),
+    windSpeed: zod.number(),
+    windDirection: zod.number(),
+    windDirectionCompass: zod.string().optional(),
+    windGust: zod.number().optional(),
+    weatherCode: zod.number(),
+    weatherDescription: zod.string(),
+    isDay: zod.boolean(),
+    snowDepth: zod.number().optional(),
+    precipitation: zod.number(),
+    cloudCover: zod.number(),
+    visibility: zod.number().optional(),
+    pressure: zod.number().optional(),
+    dewpoint: zod.number().optional(),
+    rainSince9am: zod.number().optional(),
+    dataSource: zod.string().optional(),
+    bomStation: zod.string().optional(),
+    bomObservationTime: zod.string().optional(),
+  }),
+  daily: zod.array(
+    zod.object({
+      date: zod.string(),
+      maxTemp: zod.number(),
+      minTemp: zod.number(),
+      weatherCode: zod.number(),
+      weatherDescription: zod.string(),
+      precipitationSum: zod.number(),
+      snowfallSum: zod.number(),
+      windSpeedMax: zod.number(),
+      uvIndexMax: zod.number().optional(),
+      sunrise: zod.string().optional(),
+      sunset: zod.string().optional(),
+    }),
+  ),
+  hourly: zod.array(
+    zod.object({
+      time: zod.string(),
+      temperature: zod.number(),
+      weatherCode: zod.number(),
+      weatherDescription: zod.string(),
+      precipitation: zod.number(),
+      snowfall: zod.number().optional(),
+      windSpeed: zod.number(),
+      humidity: zod.number(),
+      feelsLike: zod.number(),
+      cloudCover: zod.number().optional(),
+    }),
+  ),
+  lastUpdated: zod.string(),
+});
+
+/**
+ * Returns Cooma Coaches Snowy Mountains bus service routes and timetables
+ * @summary Get Cooma Coaches bus service information
+ */
+export const GetBusServicesResponse = zod.object({
+  provider: zod.string(),
+  phone: zod.string(),
+  website: zod.string(),
+  bookingInfo: zod.string().optional(),
+  routes: zod.array(
+    zod.object({
+      id: zod.string(),
+      name: zod.string(),
+      description: zod.string(),
+      stops: zod.array(zod.string()),
+      schedule: zod.array(
+        zod.object({
+          departure: zod.string(),
+          arrival: zod.string(),
+          from: zod.string(),
+          to: zod.string(),
+          days: zod.string(),
+          notes: zod.string().optional(),
+        }),
+      ),
+      notes: zod.string().optional(),
+      seasonalInfo: zod.string().optional(),
+    }),
+  ),
+});
+
+/**
+ * Returns webcam feeds for all resort locations
+ * @summary Get all resort webcams
+ */
+export const GetWebcamsResponse = zod.object({
+  locations: zod.array(
+    zod.object({
+      locationId: zod.string(),
+      locationName: zod.string(),
+      webcams: zod.array(
+        zod.object({
+          id: zod.string(),
+          name: zod.string(),
+          description: zod.string().optional(),
+          imageUrl: zod.string(),
+          pageUrl: zod.string(),
+          elevation: zod.number().optional(),
+          direction: zod.string().optional(),
+          lastUpdated: zod.string().optional(),
+        }),
+      ),
+      webcamPageUrl: zod.string(),
+    }),
+  ),
+  lastUpdated: zod.string(),
+});
+
+/**
+ * Returns webcam feeds for a specific resort location
+ * @summary Get webcams for a specific location
+ */
+export const GetLocationWebcamsParams = zod.object({
+  locationId: zod.enum(["thredbo", "perisher", "charlottes-pass", "jindabyne"]),
+});
+
+export const GetLocationWebcamsResponse = zod.object({
+  locationId: zod.string(),
+  locationName: zod.string(),
+  webcams: zod.array(
+    zod.object({
+      id: zod.string(),
+      name: zod.string(),
+      description: zod.string().optional(),
+      imageUrl: zod.string(),
+      pageUrl: zod.string(),
+      elevation: zod.number().optional(),
+      direction: zod.string().optional(),
+      lastUpdated: zod.string().optional(),
+    }),
+  ),
+  webcamPageUrl: zod.string(),
+});
+
+/**
+ * Returns current road conditions for Snowy Mountains alpine roads from Transport for NSW
+ * @summary Get alpine road conditions
+ */
+export const GetRoadConditionsResponse = zod.object({
+  roads: zod.array(
+    zod.object({
+      id: zod.string(),
+      roadName: zod.string(),
+      segment: zod.string(),
+      condition: zod.enum([
+        "open",
+        "closed",
+        "chains-required",
+        "reduced-speed",
+        "caution",
+      ]),
+      description: zod.string(),
+      chainsRequired: zod.boolean(),
+      lastUpdated: zod.string(),
+      source: zod.string(),
+      detailUrl: zod.string().optional(),
+      affectedResorts: zod.array(zod.string()).optional(),
+    }),
+  ),
+  generalAdvice: zod.string(),
+  liveTrafficUrl: zod.string(),
+  lastUpdated: zod.string(),
+  chainFittingBays: zod
+    .array(
+      zod.object({
+        name: zod.string(),
+        location: zod.string(),
+        road: zod.string(),
+        description: zod.string().optional(),
+      }),
+    )
+    .optional(),
+});
+
+/**
+ * Returns current lift operating status for Thredbo, Perisher, and Charlotte's Pass
+ * @summary Get lift status for all resorts
+ */
+export const GetLiftStatusResponse = zod.object({
+  resorts: zod.array(
+    zod.object({
+      locationId: zod.string(),
+      locationName: zod.string(),
+      liftsOpen: zod.number(),
+      totalLifts: zod.number(),
+      lifts: zod.array(
+        zod.object({
+          id: zod.string(),
+          name: zod.string(),
+          type: zod.enum([
+            "chairlift",
+            "t-bar",
+            "poma",
+            "gondola",
+            "magic-carpet",
+            "surface",
+          ]),
+          status: zod.enum([
+            "open",
+            "closed",
+            "on-hold",
+            "wind-hold",
+            "scheduled",
+          ]),
+          openingTime: zod.string().optional(),
+          closingTime: zod.string().optional(),
+          verticalRise: zod.number().optional(),
+          capacity: zod.string().optional(),
+          difficulty: zod
+            .enum(["beginner", "intermediate", "advanced", "all-levels"])
+            .optional(),
+        }),
+      ),
+      runsOpen: zod.number().optional(),
+      totalRuns: zod.number().optional(),
+      snowCondition: zod.string().optional(),
+      seasonStatus: zod.enum(["pre-season", "open", "late-season", "closed"]),
+      operatingHours: zod.string().optional(),
+      liftStatusUrl: zod.string().optional(),
+      lastUpdated: zod.string(),
+    }),
+  ),
+  lastUpdated: zod.string(),
+});
+
+/**
+ * Returns lift operating status for a specific resort
+ * @summary Get lift status for a specific resort
+ */
+export const GetLocationLiftStatusParams = zod.object({
+  locationId: zod.enum(["thredbo", "perisher", "charlottes-pass"]),
+});
+
+export const GetLocationLiftStatusResponse = zod.object({
+  locationId: zod.string(),
+  locationName: zod.string(),
+  liftsOpen: zod.number(),
+  totalLifts: zod.number(),
+  lifts: zod.array(
+    zod.object({
+      id: zod.string(),
+      name: zod.string(),
+      type: zod.enum([
+        "chairlift",
+        "t-bar",
+        "poma",
+        "gondola",
+        "magic-carpet",
+        "surface",
+      ]),
+      status: zod.enum(["open", "closed", "on-hold", "wind-hold", "scheduled"]),
+      openingTime: zod.string().optional(),
+      closingTime: zod.string().optional(),
+      verticalRise: zod.number().optional(),
+      capacity: zod.string().optional(),
+      difficulty: zod
+        .enum(["beginner", "intermediate", "advanced", "all-levels"])
+        .optional(),
+    }),
+  ),
+  runsOpen: zod.number().optional(),
+  totalRuns: zod.number().optional(),
+  snowCondition: zod.string().optional(),
+  seasonStatus: zod.enum(["pre-season", "open", "late-season", "closed"]),
+  operatingHours: zod.string().optional(),
+  liftStatusUrl: zod.string().optional(),
+  lastUpdated: zod.string(),
+});

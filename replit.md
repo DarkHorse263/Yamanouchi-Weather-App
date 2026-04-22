@@ -8,7 +8,9 @@
 - `feelzlike` (master, at `/`) — landing page, region selector, brand hub. Adding a new region = create a new artifact + add one card to its region list.
 - `yamanouchi` (at `/yamanouchi/`) — first live region. Bilingual (EN/JP) full-stack PWA with snow/green season intelligence. Live snow data from Supabase, accommodation/dining/attractions from local PostgreSQL.
 - `nagano` (at `/nagano/`) — placeholder for Nagano Prefecture (coming soon).
-- Future regions: Snowy Mountains (Australia), etc.
+- Live regions: Snowy Mountains (Australia, port 23491), Yamanouchi (Japan, port 20651)
+- Coming soon: Nagano (Japan, port 24019)
+- Snowy Mountains backend routes: `/api/weather`, `/api/bus-services`, `/api/webcams`, `/api/road-conditions`, `/api/lift-status`, `/api/radar` — handlers in `artifacts/api-server/src/routes/{weather,bus,webcams,roads,lifts,radar}.ts`
 
 pnpm workspace monorepo using TypeScript. Each package manages its own dependencies.
 
