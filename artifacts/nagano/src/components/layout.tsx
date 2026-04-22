@@ -10,6 +10,7 @@ import {
   UtensilsCrossed,
   Compass,
   BellRing,
+  ChevronLeft,
 } from "lucide-react";
 import { useLanguage } from "@/hooks/use-language";
 import { cn } from "@/lib/utils";
@@ -43,6 +44,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
       <aside className="hidden md:flex flex-col w-64 fixed inset-y-0 left-0 bg-white border-r border-border z-50 shadow-sm">
         <div className="p-6">
+          <a
+            href="/"
+            className="inline-flex items-center gap-1 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors mb-3"
+          >
+            <ChevronLeft className="w-4 h-4" />
+            {t("All regions", "全地域")}
+          </a>
           <h1 className="text-2xl font-display font-black text-mountain-dark tracking-tight leading-tight">
             Nagano<br /><span className="text-primary text-xl">Snow Intelligence</span>
           </h1>
@@ -92,9 +100,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </aside>
 
       <header className="md:hidden fixed top-0 inset-x-0 h-16 glass z-40 flex items-center justify-between px-4 border-b border-border/40">
-        <h1 className="text-xl font-display font-black text-mountain-dark tracking-tight">
-          Nagano <span className="text-primary">Snow</span>
-        </h1>
+        <div className="flex items-center gap-2">
+          <a
+            href="/"
+            aria-label={t("Back to all regions", "全地域へ戻る")}
+            className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-secondary transition-colors"
+          >
+            <ChevronLeft className="w-5 h-5 text-muted-foreground" />
+          </a>
+          <h1 className="text-xl font-display font-black text-mountain-dark tracking-tight">
+            Nagano <span className="text-primary">Snow</span>
+          </h1>
+        </div>
         <div className="flex bg-secondary p-0.5 rounded-md border border-border">
           {(["en", "ja"] as const).map((lang) => (
             <button

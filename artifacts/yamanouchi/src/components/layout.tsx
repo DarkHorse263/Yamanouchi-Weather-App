@@ -11,6 +11,7 @@ import {
   TreePine,
   Snowflake,
   Leaf,
+  ChevronLeft,
 } from "lucide-react";
 import { useLanguage } from "@/hooks/use-language";
 import { useSeason } from "@/hooks/use-season";
@@ -93,6 +94,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
       {/* Desktop Sidebar */}
       <aside className="hidden md:flex flex-col w-64 fixed inset-y-0 left-0 bg-white border-r border-border z-50 shadow-sm">
         <div className="p-6">
+          <a
+            href="/"
+            className="inline-flex items-center gap-1 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors mb-3"
+          >
+            <ChevronLeft className="w-4 h-4" />
+            {t("All regions", "全地域")}
+          </a>
           <a href="/" className="block mb-2">
             <img
               src={`${import.meta.env.BASE_URL}branding/wordmark-colour.png?v=3`}
@@ -148,13 +156,22 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
       {/* Mobile Header */}
       <header className="md:hidden fixed top-0 inset-x-0 h-16 glass z-40 flex items-center justify-between px-4 border-b border-border/40">
-        <a href="/" className="flex items-center gap-2">
-          <img
-            src={`${import.meta.env.BASE_URL}branding/wordmark-colour.png?v=3`}
-            alt="feelzlike"
-            className="h-6 w-auto"
-          />
-        </a>
+        <div className="flex items-center gap-2">
+          <a
+            href="/"
+            aria-label={t("Back to all regions", "全地域へ戻る")}
+            className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-secondary transition-colors"
+          >
+            <ChevronLeft className="w-5 h-5 text-muted-foreground" />
+          </a>
+          <a href="/" className="flex items-center gap-2">
+            <img
+              src={`${import.meta.env.BASE_URL}branding/wordmark-colour.png?v=3`}
+              alt="feelzlike"
+              className="h-6 w-auto"
+            />
+          </a>
+        </div>
         <div className="flex items-center gap-2">
           <SeasonToggle compact />
           <div className="flex bg-secondary p-0.5 rounded-md border border-border">
