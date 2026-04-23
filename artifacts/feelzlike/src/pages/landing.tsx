@@ -3,7 +3,6 @@ import {
   Search,
   MapPin,
   ChevronRight,
-  Mountain,
   ShieldCheck,
 } from "lucide-react";
 import { useState } from "react";
@@ -70,35 +69,51 @@ export default function Landing() {
           <div className="absolute inset-0 bg-gradient-to-b from-slate-900/55 via-slate-900/45 to-slate-900/85" />
         </div>
 
-        <div className="relative max-w-3xl mx-auto px-4 pt-10 pb-16 md:pt-16 md:pb-24 text-center">
-          {/* Wordmark — light version, no white box */}
+        <div className="relative max-w-3xl mx-auto px-4 pt-8 pb-16 md:pt-12 md:pb-24 text-center">
+          {/* Logo badge — intentional brand mark on photo */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex items-center justify-center gap-2 text-white text-2xl md:text-3xl font-black tracking-tight mb-6"
+            className="inline-flex items-center justify-center mb-6 md:mb-8"
           >
-            <Mountain className="w-7 h-7 md:w-8 md:h-8 text-white drop-shadow-md" strokeWidth={2.5} />
-            <span className="drop-shadow-md">feelzlike</span>
+            <div className="bg-white/95 backdrop-blur-sm rounded-2xl px-5 py-3 shadow-2xl ring-1 ring-white/40">
+              <img
+                src={`${base}branding/logo-full.png`}
+                alt="feelzlike"
+                className="h-12 md:h-14 w-auto"
+              />
+            </div>
           </motion.div>
 
+          {/* Tagline */}
           <motion.h1
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-3xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4 drop-shadow-lg"
+            className="text-3xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-3 drop-shadow-lg"
           >
-            Mountain weather you can actually trust.
+            <span className="block">I wonder what it</span>
+            <span className="inline-flex items-center justify-center gap-x-2 mt-1 flex-wrap">
+              <span className="bg-white/95 backdrop-blur-sm rounded-xl px-3 py-1 shadow-lg inline-flex items-center">
+                <img
+                  src={`${base}branding/wordmark-inline.png`}
+                  alt="feelzlike"
+                  className="h-7 md:h-10 w-auto"
+                />
+              </span>
+              <span>in…</span>
+            </span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-base md:text-lg text-white/85 max-w-xl mx-auto leading-relaxed mb-7 md:mb-9"
+            className="text-base md:text-lg text-white/90 max-w-xl mx-auto leading-relaxed mt-5 mb-7 md:mb-9 drop-shadow"
           >
-            Truthful forecasts for ski regions in Australia and Japan — plus the
-            cams, roads, lifts, and places to stay you need to make the call.
+            Mountain weather you can actually trust — plus the cams, roads,
+            lifts, and places to stay you need to make the call.
           </motion.p>
 
           {/* Search */}
