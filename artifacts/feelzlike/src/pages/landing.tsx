@@ -3,10 +3,6 @@ import {
   Search,
   MapPin,
   ChevronRight,
-  ThermometerSun,
-  Camera,
-  Car,
-  BedDouble,
   Mountain,
   ShieldCheck,
 } from "lucide-react";
@@ -48,12 +44,7 @@ const REGIONS = [
   },
 ];
 
-const FEATURES = [
-  { icon: ThermometerSun, label: "Live Weather", color: "text-amber-500", bg: "bg-amber-50" },
-  { icon: Camera,         label: "Webcams",      color: "text-blue-500",  bg: "bg-blue-50" },
-  { icon: Car,            label: "Road Status",  color: "text-rose-500",  bg: "bg-rose-50" },
-  { icon: BedDouble,      label: "Stay & Eat",   color: "text-emerald-500", bg: "bg-emerald-50" },
-];
+const COVERAGE = ["Live weather", "Webcams", "Road status", "Lifts", "Stay & eat"];
 
 export default function Landing() {
   const [search, setSearch] = useState("");
@@ -67,201 +58,191 @@ export default function Landing() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-white">
-      {/* Background flourish */}
-      <div className="absolute inset-x-0 top-0 h-[420px] overflow-hidden pointer-events-none">
-        <div className="absolute -top-32 -left-20 w-96 h-96 rounded-full bg-blue-200/40 blur-3xl" />
-        <div className="absolute -top-20 right-0 w-96 h-96 rounded-full bg-emerald-200/30 blur-3xl" />
-      </div>
-
-      <div className="relative max-w-3xl mx-auto px-4 pt-8 pb-12 md:pt-14 md:pb-20">
-        {/* Hero */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-8"
-        >
+    <div className="min-h-screen bg-slate-50">
+      {/* Photographic Hero */}
+      <header className="relative overflow-hidden">
+        <div className="absolute inset-0">
           <img
-            src={`${base}branding/logo-full.png`}
-            alt="feelzlike"
-            className="w-44 md:w-56 mx-auto mb-5 drop-shadow-sm"
+            src="https://images.unsplash.com/photo-1551524559-8af4e6624178?w=2000&h=1200&fit=crop"
+            alt=""
+            className="w-full h-full object-cover"
           />
-          <h1 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight leading-tight mb-3">
-            <span className="block">I wonder what it</span>
-            <span className="flex items-center justify-center gap-x-2 mt-1">
-              <img
-                src={`${base}branding/wordmark-inline.png`}
-                alt="feelzlike"
-                className="inline-block h-8 md:h-12 w-auto"
-              />
-              <span>in...</span>
-            </span>
-          </h1>
-          <p className="text-base md:text-lg text-slate-600 max-w-xl mx-auto leading-relaxed">
-            Mountain weather you can actually trust — plus the cams, roads,
-            lifts, and places to stay you need to make the call.
-          </p>
-
-          <div className="inline-flex items-center gap-1.5 mt-4 px-3 py-1 bg-emerald-50 border border-emerald-200 rounded-full">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-            <span className="text-[11px] font-bold text-emerald-700 tracking-wide uppercase">
-              Truth-First Mountain Intelligence
-            </span>
-          </div>
-        </motion.div>
-
-        {/* Feature row */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="grid grid-cols-4 gap-2 md:gap-4 mb-8"
-        >
-          {FEATURES.map((f, i) => {
-            const Icon = f.icon;
-            return (
-              <motion.div
-                key={f.label}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, delay: 0.15 + i * 0.05 }}
-                className="flex flex-col items-center text-center p-3 rounded-2xl bg-white border border-slate-100 shadow-sm"
-              >
-                <div className={`w-10 h-10 md:w-12 md:h-12 rounded-xl ${f.bg} flex items-center justify-center mb-2`}>
-                  <Icon className={`w-5 h-5 md:w-6 md:h-6 ${f.color}`} />
-                </div>
-                <span className="text-[10px] md:text-xs font-semibold text-slate-700 leading-tight">
-                  {f.label}
-                </span>
-              </motion.div>
-            );
-          })}
-        </motion.div>
-
-        {/* Search */}
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
-          className="mb-5"
-        >
-          <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-            <label htmlFor="region-search" className="sr-only">
-              Search mountain regions
-            </label>
-            <input
-              id="region-search"
-              type="text"
-              aria-label="Search mountain regions"
-              placeholder="Search a region — Snowy Mountains, Nagano, Yamanouchi..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-11 pr-4 py-3.5 rounded-2xl border border-slate-200 bg-white text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent shadow-sm transition-all"
-            />
-          </div>
-        </motion.div>
-
-        {/* Section label */}
-        <div className="flex items-center gap-2 mb-3 px-1">
-          <Mountain className="w-4 h-4 text-slate-400" />
-          <p className="text-[11px] font-bold text-slate-500 uppercase tracking-widest">
-            Live Mountain Regions
-          </p>
-          <div className="flex-1 h-px bg-slate-200/70 ml-1" />
-          <span className="text-[11px] text-slate-400 font-medium">
-            {filtered.length} {filtered.length === 1 ? "region" : "regions"}
-          </span>
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/55 via-slate-900/45 to-slate-900/85" />
         </div>
 
-        {/* Region cards */}
-        <div className="space-y-3">
-          {filtered.map((region, i) => {
-            const isLive = region.status === "live";
-            const Wrapper: any = isLive ? "a" : "div";
-            const wrapperProps = isLive ? { href: region.href } : {};
-            return (
-              <motion.div
-                key={region.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.35, delay: 0.25 + i * 0.08 }}
-              >
-                <Wrapper
-                  {...wrapperProps}
-                  className="block w-full text-left group"
+        <div className="relative max-w-3xl mx-auto px-4 pt-10 pb-16 md:pt-16 md:pb-24 text-center">
+          {/* Wordmark — light version, no white box */}
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center justify-center gap-2 text-white text-2xl md:text-3xl font-black tracking-tight mb-6"
+          >
+            <Mountain className="w-7 h-7 md:w-8 md:h-8 text-white drop-shadow-md" strokeWidth={2.5} />
+            <span className="drop-shadow-md">feelzlike</span>
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-3xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4 drop-shadow-lg"
+          >
+            Mountain weather you can actually trust.
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-base md:text-lg text-white/85 max-w-xl mx-auto leading-relaxed mb-7 md:mb-9"
+          >
+            Truthful forecasts for ski regions in Australia and Japan — plus the
+            cams, roads, lifts, and places to stay you need to make the call.
+          </motion.p>
+
+          {/* Search */}
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.3 }}
+            className="max-w-xl mx-auto"
+          >
+            <div className="relative">
+              <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+              <label htmlFor="region-search" className="sr-only">
+                Search mountain regions
+              </label>
+              <input
+                id="region-search"
+                type="text"
+                aria-label="Search mountain regions"
+                placeholder="Search a mountain region..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full pl-13 pr-4 py-4 md:py-5 rounded-2xl border-0 bg-white text-slate-900 text-base placeholder:text-slate-400 focus:outline-none focus:ring-4 focus:ring-white/30 shadow-2xl transition-all"
+                style={{ paddingLeft: "3.25rem" }}
+              />
+            </div>
+
+            {/* Coverage chips — descriptive, not clickable */}
+            <div className="flex flex-wrap items-center justify-center gap-x-1.5 gap-y-1 mt-5 text-[11px] md:text-xs text-white/75 font-medium">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-300 mr-0.5" />
+              <span className="text-emerald-300 font-semibold mr-2">
+                Truth-first coverage:
+              </span>
+              {COVERAGE.map((c, i) => (
+                <span key={c} className="inline-flex items-center">
+                  {c}
+                  {i < COVERAGE.length - 1 && (
+                    <span className="mx-1.5 text-white/35">·</span>
+                  )}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </header>
+
+      {/* Region list */}
+      <main className="relative max-w-3xl mx-auto px-4 -mt-8 md:-mt-10 pb-12 md:pb-20">
+        <div className="bg-white rounded-3xl shadow-xl p-4 md:p-6 border border-slate-100">
+          <div className="flex items-center gap-2 mb-3 px-1">
+            <p className="text-[11px] font-bold text-slate-500 uppercase tracking-widest">
+              Live Mountain Regions
+            </p>
+            <div className="flex-1 h-px bg-slate-200/70 ml-1" />
+            <span className="text-[11px] text-slate-400 font-medium">
+              {filtered.length} {filtered.length === 1 ? "region" : "regions"}
+            </span>
+          </div>
+
+          <div className="space-y-3">
+            {filtered.map((region, i) => {
+              const isLive = region.status === "live";
+              const Wrapper: any = isLive ? "a" : "div";
+              const wrapperProps = isLive ? { href: region.href } : {};
+              return (
+                <motion.div
+                  key={region.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, delay: 0.1 + i * 0.06 }}
                 >
-                  <div
-                    className={`relative flex bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-300 ${
-                      isLive
-                        ? "hover:shadow-xl hover:border-blue-300 hover:-translate-y-0.5 cursor-pointer"
-                        : "opacity-90 cursor-default"
-                    }`}
+                  <Wrapper
+                    {...wrapperProps}
+                    className="block w-full text-left group"
                   >
-                    <div className="relative w-32 md:w-44 shrink-0 overflow-hidden">
-                      <img
-                        src={region.image}
-                        alt={region.name}
-                        className={`w-full h-full object-cover ${
-                          isLive ? "group-hover:scale-110" : ""
-                        } transition-transform duration-700`}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/0" />
-                      {!isLive && (
-                        <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                          <span className="bg-white/95 backdrop-blur-sm text-slate-700 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">
-                            Soon
-                          </span>
-                        </div>
-                      )}
-                      {isLive && (
-                        <div className="absolute top-2 left-2 bg-emerald-500 text-white text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full flex items-center gap-1 shadow-md">
-                          <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
-                          Live
-                        </div>
-                      )}
-                    </div>
-                    <div className="flex-1 p-4 flex flex-col justify-center min-w-0">
-                      <div className="flex items-start justify-between gap-2">
-                        <div className="min-w-0">
-                          <h3 className="font-bold text-slate-900 text-base md:text-lg truncate leading-snug">
-                            {region.name}
-                          </h3>
-                          <div className="flex items-center gap-1 mt-0.5">
-                            <MapPin className="w-3 h-3 text-slate-400 shrink-0" />
-                            <span className="text-xs text-slate-500 font-medium">
-                              {region.country}
+                    <div
+                      className={`relative flex bg-white rounded-2xl border border-slate-200 overflow-hidden transition-all duration-300 ${
+                        isLive
+                          ? "hover:shadow-lg hover:border-blue-300 hover:-translate-y-0.5 cursor-pointer"
+                          : "opacity-90 cursor-default"
+                      }`}
+                    >
+                      <div className="relative w-32 md:w-44 shrink-0 overflow-hidden">
+                        <img
+                          src={region.image}
+                          alt={region.name}
+                          className={`w-full h-full object-cover ${
+                            isLive ? "group-hover:scale-110" : ""
+                          } transition-transform duration-700`}
+                        />
+                        {!isLive && (
+                          <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                            <span className="bg-white/95 backdrop-blur-sm text-slate-700 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">
+                              Soon
                             </span>
                           </div>
-                        </div>
+                        )}
                         {isLive && (
-                          <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all shrink-0 mt-1" />
+                          <div className="absolute top-2 left-2 bg-emerald-500 text-white text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full flex items-center gap-1 shadow-md">
+                            <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
+                            Live
+                          </div>
                         )}
                       </div>
-                      <p className="text-xs md:text-sm text-slate-600 mt-1.5 line-clamp-2 leading-relaxed">
-                        {region.description}
-                      </p>
-                      <div className="flex flex-wrap gap-1.5 mt-2">
-                        {region.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="text-[10px] font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md"
-                          >
-                            {tag}
-                          </span>
-                        ))}
+                      <div className="flex-1 p-4 flex flex-col justify-center min-w-0">
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="min-w-0">
+                            <h3 className="font-bold text-slate-900 text-base md:text-lg truncate leading-snug">
+                              {region.name}
+                            </h3>
+                            <div className="flex items-center gap-1 mt-0.5">
+                              <MapPin className="w-3 h-3 text-slate-400 shrink-0" />
+                              <span className="text-xs text-slate-500 font-medium">
+                                {region.country}
+                              </span>
+                            </div>
+                          </div>
+                          {isLive && (
+                            <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all shrink-0 mt-1" />
+                          )}
+                        </div>
+                        <p className="text-xs md:text-sm text-slate-600 mt-1.5 line-clamp-2 leading-relaxed">
+                          {region.description}
+                        </p>
+                        <div className="flex flex-wrap gap-1.5 mt-2">
+                          {region.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="text-[10px] font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Wrapper>
-              </motion.div>
-            );
-          })}
+                  </Wrapper>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
 
         {/* Footer */}
-        <div className="mt-12 pt-8 border-t border-slate-100 text-center">
+        <div className="mt-10 text-center">
           <p className="text-xs text-slate-500 font-medium mb-1">
             Built by mountain people, for mountain people.
           </p>
@@ -269,13 +250,8 @@ export default function Landing() {
             Real-time conditions sourced direct from official services
             (BOM, JMA, resort networks, transport authorities).
           </p>
-          <img
-            src={`${base}branding/wordmark-colour.png`}
-            alt="feelzlike"
-            className="w-20 mx-auto mt-4 opacity-50"
-          />
         </div>
-      </div>
+      </main>
     </div>
   );
 }
