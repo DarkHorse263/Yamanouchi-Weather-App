@@ -28,7 +28,12 @@ router.get("/bom-radar", async (req: Request, res: Response) => {
   try {
     const response = await fetch(bomUrl, {
       headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; SnowyMtsWeatherApp/1.0)",
+        // BOM blocks bot-style UAs on radar imagery; emulate a real browser.
+        "User-Agent":
+          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
+        Accept: "image/png,image/*,*/*;q=0.8",
+        "Accept-Language": "en-AU,en;q=0.9",
+        Referer: "http://www.bom.gov.au/products/IDR403.loop.shtml",
       },
     });
 

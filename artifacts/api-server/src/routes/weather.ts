@@ -49,10 +49,12 @@ const LOCATIONS: LocationConfig[] = [
     longitude: 148.3297,
     elevation: 1837,
     description: "Australia's highest ski resort and snowsure destination, accessible only by oversnow transport during winter.",
-    bomStation: "Charlotte Pass AWS",
-    bomStationId: "071003",
-    bomWmoId: 95916,
-    bomSecondaryStation: "Cabramurra AWS (nearest BOM station)"
+    // BOM has no AWS at Charlotte's Pass; the nearest (Cabramurra at ~1500m)
+    // would understate cold by hundreds of metres of lapse rate. We use
+    // elevation-corrected Open-Meteo as the truthful primary source instead.
+    bomStation: "Open-Meteo (no BOM station at 1837m)",
+    bomStationId: "",
+    bomWmoId: 0,
   },
   {
     id: "jindabyne",
@@ -120,6 +122,7 @@ interface BomObservation {
   weather: string | null;
   local_date_time: string | null;
   local_date_time_full: string | null;
+  aifstime_utc: string | null;
   name: string;
 }
 
@@ -150,6 +153,7 @@ function windDirToDegrees(dir: string | null): number {
 }
 
 async function fetchBomObservations(wmoId: number): Promise<BomObservation[] | null> {
+  if (!wmoId) return null;
   try {
     const response = await fetch(
       `http://www.bom.gov.au/fwo/IDN60801/IDN60801.${wmoId}.json`,
@@ -161,6 +165,21 @@ async function fetchBomObservations(wmoId: number): Promise<BomObservation[] | n
   } catch {
     return null;
   }
+}
+
+// BOM stations sometimes drop offline for hours. Treat any reading older than
+// this as stale so we don't display an old daytime peak as "current".
+const BOM_MAX_AGE_MS = 90 * 60 * 1000; // 90 minutes
+
+function isBomReadingFresh(obs: BomObservation | null | undefined): boolean {
+  // Prefer the UTC timestamp BOM provides; falling back to local-time would
+  // misinterpret the timezone on a UTC server and let stale data through.
+  const utc = obs?.aifstime_utc;
+  if (!utc || utc.length < 12) return false;
+  const iso = `${utc.slice(0, 4)}-${utc.slice(4, 6)}-${utc.slice(6, 8)}T${utc.slice(8, 10)}:${utc.slice(10, 12)}:00Z`;
+  const ms = Date.parse(iso);
+  if (Number.isNaN(ms)) return false;
+  return Date.now() - ms <= BOM_MAX_AGE_MS;
 }
 
 function parseBomDateTime(dtStr: string): Date {
@@ -192,8 +211,12 @@ async function fetchLocationWeather(location: LocationConfig) {
     throw new Error(`No weather data available for ${location.name} from any source`);
   }
 
-  const latestBom = bomObs?.[0] ?? null;
-  const latestSecondary = bomSecondaryObs?.[0] ?? null;
+  // Only trust BOM readings that are recent — stale stations cause the
+  // wildly inconsistent temperatures we were seeing across resorts.
+  const freshPrimary = bomObs?.[0] && isBomReadingFresh(bomObs[0]) ? bomObs[0] : null;
+  const freshSecondary = bomSecondaryObs?.[0] && isBomReadingFresh(bomSecondaryObs[0]) ? bomSecondaryObs[0] : null;
+  const latestBom = freshPrimary;
+  const latestSecondary = freshSecondary;
 
   const bomTemp = latestBom?.air_temp ?? latestSecondary?.air_temp;
   const bomFeelsLike = latestBom?.apparent_t ?? latestSecondary?.apparent_t;
@@ -339,6 +362,9 @@ async function fetchOpenMeteo(location: LocationConfig) {
   const params = new URLSearchParams({
     latitude: location.latitude.toString(),
     longitude: location.longitude.toString(),
+    // Critical: pass the resort's true elevation so Open-Meteo lapse-rate-corrects
+    // the temperature instead of returning the model's grid-cell surface value.
+    elevation: location.elevation.toString(),
     current: "temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m,snow_depth",
     hourly: "temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,cloud_cover,wind_speed_10m,snowfall",
     daily: "weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,snowfall_sum,wind_speed_10m_max,uv_index_max",

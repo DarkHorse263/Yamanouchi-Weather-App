@@ -62,6 +62,20 @@ export default defineConfig({
     port,
     host: "0.0.0.0",
     allowedHosts: true,
+    proxy: {
+      // Replit's outer proxy preserves the artifact base path on the way in,
+      // so requests arrive as `/snowy-mountains/api/...`. Strip the prefix
+      // before forwarding so the api-server matches its own `/api/*` routes.
+      [`${basePath}api`]: {
+        target: "http://localhost:8080",
+        changeOrigin: true,
+        rewrite: (p) => p.replace(new RegExp(`^${basePath}`), "/"),
+      },
+      "/api": {
+        target: "http://localhost:8080",
+        changeOrigin: true,
+      },
+    },
     fs: {
       strict: true,
       deny: ["**/.*"],

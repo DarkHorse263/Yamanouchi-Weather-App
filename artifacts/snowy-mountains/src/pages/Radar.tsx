@@ -21,12 +21,16 @@ const LAYER_URLS = {
 };
 
 function getRadarTimestamps(count: number = 6): string[] {
+  // BOM IDR403 publishes a new radar frame every 10 minutes with ~5 min
+  // publishing latency, so we anchor on the most recent fully-published slot.
   const timestamps: string[] = [];
   const now = new Date();
-  now.setMinutes(Math.floor(now.getMinutes() / 6) * 6, 0, 0);
-  
+  // step back 5 min to skip the not-yet-published current slot, then floor to 10
+  const anchor = new Date(now.getTime() - 5 * 60 * 1000);
+  anchor.setUTCMinutes(Math.floor(anchor.getUTCMinutes() / 10) * 10, 0, 0);
+
   for (let i = count - 1; i >= 0; i--) {
-    const t = new Date(now.getTime() - i * 6 * 60 * 1000);
+    const t = new Date(anchor.getTime() - i * 10 * 60 * 1000);
     const year = t.getUTCFullYear();
     const month = String(t.getUTCMonth() + 1).padStart(2, "0");
     const day = String(t.getUTCDate()).padStart(2, "0");
