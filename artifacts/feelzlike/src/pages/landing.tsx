@@ -58,50 +58,50 @@ export default function Landing() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      {/* Photographic Hero */}
+      {/* Bright snowy hero — chosen so dark-blue transparent logos read naturally */}
       <header className="relative overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1551524559-8af4e6624178?w=2000&h=1200&fit=crop"
+            src="https://images.unsplash.com/photo-1418985991508-e47386d96a71?w=2000&h=1200&fit=crop&q=80"
             alt=""
             className="w-full h-full object-cover"
+            onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/55 via-slate-900/45 to-slate-900/85" />
+          {/* Soft sky-to-snow wash; the logo art is dark blue and needs a light backdrop. */}
+          <div className="absolute inset-0 bg-gradient-to-b from-sky-100/85 via-white/40 to-slate-100/90" />
         </div>
 
         <div className="relative max-w-3xl mx-auto px-4 pt-8 pb-16 md:pt-12 md:pb-24 text-center">
-          {/* Logo badge — intentional brand mark on photo */}
+          {/* Transparent logo, no box */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center justify-center mb-6 md:mb-8"
+            className="flex justify-center mb-5 md:mb-7"
           >
-            <div className="bg-white/95 backdrop-blur-sm rounded-2xl px-5 py-3 shadow-2xl ring-1 ring-white/40">
-              <img
-                src={`${base}branding/logo-full.png`}
-                alt="feelzlike"
-                className="h-12 md:h-14 w-auto"
-              />
-            </div>
+            <img
+              src={`${base}branding/logo-full.png`}
+              alt="feelzlike"
+              className="h-20 md:h-24 w-auto"
+              style={{ mixBlendMode: "multiply" }}
+            />
           </motion.div>
 
-          {/* Tagline */}
+          {/* Tagline — dark text now that hero is light */}
           <motion.h1
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-3xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-3 drop-shadow-lg"
+            className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight leading-tight mb-3"
           >
             <span className="block">I wonder what it</span>
-            <span className="inline-flex items-center justify-center gap-x-2 mt-1 flex-wrap">
-              <span className="bg-white/95 backdrop-blur-sm rounded-xl px-3 py-1 shadow-lg inline-flex items-center">
-                <img
-                  src={`${base}branding/wordmark-inline.png`}
-                  alt="feelzlike"
-                  className="h-7 md:h-10 w-auto"
-                />
-              </span>
+            <span className="inline-flex items-baseline justify-center gap-x-2 mt-1 flex-wrap">
+              <img
+                src={`${base}branding/wordmark-inline.png`}
+                alt="feelzlike"
+                className="inline-block h-8 md:h-12 w-auto translate-y-1"
+                style={{ mixBlendMode: "multiply" }}
+              />
               <span>in…</span>
             </span>
           </motion.h1>
@@ -110,7 +110,7 @@ export default function Landing() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-base md:text-lg text-white/90 max-w-xl mx-auto leading-relaxed mt-5 mb-7 md:mb-9 drop-shadow"
+            className="text-base md:text-lg text-slate-700 max-w-xl mx-auto leading-relaxed mt-4 mb-7 md:mb-9 font-medium"
           >
             Mountain weather you can actually trust — plus the cams, roads,
             lifts, and places to stay you need to make the call.
@@ -135,22 +135,22 @@ export default function Landing() {
                 placeholder="Search a mountain region..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-13 pr-4 py-4 md:py-5 rounded-2xl border-0 bg-white text-slate-900 text-base placeholder:text-slate-400 focus:outline-none focus:ring-4 focus:ring-white/30 shadow-2xl transition-all"
+                className="w-full pr-4 py-4 md:py-5 rounded-2xl border border-slate-200 bg-white text-slate-900 text-base placeholder:text-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-200 focus:border-blue-400 shadow-2xl transition-all"
                 style={{ paddingLeft: "3.25rem" }}
               />
             </div>
 
-            {/* Coverage chips — descriptive, not clickable */}
-            <div className="flex flex-wrap items-center justify-center gap-x-1.5 gap-y-1 mt-5 text-[11px] md:text-xs text-white/75 font-medium">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-300 mr-0.5" />
-              <span className="text-emerald-300 font-semibold mr-2">
+            {/* Coverage line — descriptive, not clickable */}
+            <div className="flex flex-wrap items-center justify-center gap-x-1.5 gap-y-1 mt-5 text-[11px] md:text-xs text-slate-700 font-medium">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 mr-0.5" />
+              <span className="text-emerald-700 font-semibold mr-2">
                 Truth-first coverage:
               </span>
               {COVERAGE.map((c, i) => (
                 <span key={c} className="inline-flex items-center">
                   {c}
                   {i < COVERAGE.length - 1 && (
-                    <span className="mx-1.5 text-white/35">·</span>
+                    <span className="mx-1.5 text-slate-400">·</span>
                   )}
                 </span>
               ))}
@@ -195,7 +195,7 @@ export default function Landing() {
                           : "opacity-90 cursor-default"
                       }`}
                     >
-                      <div className="relative w-32 md:w-44 shrink-0 overflow-hidden">
+                      <div className="relative w-28 sm:w-36 md:w-44 shrink-0 overflow-hidden">
                         <img
                           src={region.image}
                           alt={region.name}
@@ -217,13 +217,13 @@ export default function Landing() {
                           </div>
                         )}
                       </div>
-                      <div className="flex-1 p-4 flex flex-col justify-center min-w-0">
+                      <div className="flex-1 p-3.5 md:p-4 flex flex-col justify-center min-w-0">
                         <div className="flex items-start justify-between gap-2">
                           <div className="min-w-0">
-                            <h3 className="font-bold text-slate-900 text-base md:text-lg truncate leading-snug">
+                            <h3 className="font-bold text-slate-900 text-lg md:text-xl leading-tight">
                               {region.name}
                             </h3>
-                            <div className="flex items-center gap-1 mt-0.5">
+                            <div className="flex items-center gap-1 mt-1">
                               <MapPin className="w-3 h-3 text-slate-400 shrink-0" />
                               <span className="text-xs text-slate-500 font-medium">
                                 {region.country}
@@ -234,7 +234,7 @@ export default function Landing() {
                             <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all shrink-0 mt-1" />
                           )}
                         </div>
-                        <p className="text-xs md:text-sm text-slate-600 mt-1.5 line-clamp-2 leading-relaxed">
+                        <p className="hidden sm:block text-xs md:text-sm text-slate-600 mt-2 line-clamp-2 leading-relaxed">
                           {region.description}
                         </p>
                         <div className="flex flex-wrap gap-1.5 mt-2">
