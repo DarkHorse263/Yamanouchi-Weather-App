@@ -1,5 +1,6 @@
 import { Router, type IRouter } from "express";
 import { GetWeatherResponse, GetLocationWeatherResponse, GetLocationWeatherParams } from "@workspace/api-zod";
+import { getEnsembleForecast } from "../lib/ensemble-forecast.js";
 
 const router: IRouter = Router();
 
@@ -419,6 +420,39 @@ router.get("/weather/:locationId", async (req, res) => {
     res.status(500).json({
       error: "WEATHER_FETCH_ERROR",
       message: error instanceof Error ? error.message : "Failed to fetch weather data"
+    });
+  }
+});
+
+/**
+ * Multi-source ensemble forecast: ECMWF + GFS + ICON + BOM ACCESS-G + MET Norway.
+ * Returns per-day mean, model spread, confidence rating, and per-source breakdown
+ * so the UI can be radically transparent about uncertainty.
+ */
+router.get("/forecast/:locationId", async (req, res) => {
+  try {
+    const { locationId } = GetLocationWeatherParams.parse(req.params);
+    const location = LOCATIONS.find(l => l.id === locationId);
+    if (!location) {
+      res.status(404).json({ error: "LOCATION_NOT_FOUND" });
+      return;
+    }
+    const ensemble = await getEnsembleForecast({
+      latitude: location.latitude,
+      longitude: location.longitude,
+      elevation: location.elevation,
+      region: "AU",
+      timezone: "Australia/Sydney",
+      days: 7,
+    });
+    res.json({
+      location: { id: location.id, name: location.name, elevation: location.elevation },
+      ...ensemble,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: "ENSEMBLE_FETCH_ERROR",
+      message: error instanceof Error ? error.message : "Failed to fetch ensemble forecast",
     });
   }
 });

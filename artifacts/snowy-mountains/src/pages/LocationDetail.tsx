@@ -5,6 +5,7 @@ import { LoadingState } from "@/components/ui/loading-state";
 import { ErrorState } from "@/components/ui/error-state";
 import { WeatherIcon } from "@/components/ui/weather-icon";
 import { ForecastChart } from "@/components/weather/ForecastChart";
+import { EnsembleForecast } from "@/components/weather/EnsembleForecast";
 import { formatTemp, formatSnow } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { MapPin, Wind, Droplets, Snowflake, Sunrise, Sunset, CalendarDays, BarChart2, Camera, Cable, CheckCircle2, XCircle, AlertCircle, Clock, Activity, Gauge, Thermometer, CloudRain, Eye, Navigation } from "lucide-react";
@@ -181,6 +182,11 @@ export default function LocationDetail() {
             </div>
             <ForecastChart data={hourly} metric={activeChartMetric} />
           </motion.div>
+
+          {/* Multi-model ensemble forecast (radical transparency) */}
+          <div className="lg:col-span-2">
+            <EnsembleForecast locationId={locationId} />
+          </div>
 
           {/* 7-Day Forecast */}
           <motion.div 
