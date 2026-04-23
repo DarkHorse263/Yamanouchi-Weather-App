@@ -41,10 +41,12 @@ function HeroSlideshow({ base }: { base: string }) {
       </AnimatePresence>
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10" />
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-20">
-        {HERO_SLIDES.map((_, i) => (
+        {HERO_SLIDES.map((s, i) => (
           <button
             key={i}
             onClick={() => setCurrent(i)}
+            aria-label={`Show slide ${i + 1}: ${s.label}`}
+            aria-current={i === current ? "true" : undefined}
             className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? "w-6 bg-white" : "w-1.5 bg-white/40"}`}
           />
         ))}
@@ -103,23 +105,16 @@ export default function Home() {
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center pt-2 pb-4"
+        className="text-center pt-2 pb-1"
       >
-        <img
-          src={`${import.meta.env.BASE_URL}branding/logo-full.png`}
-          alt="feelzlike"
-          className="w-28 md:w-36 mx-auto mb-3"
-        />
-        <h2 className="text-lg md:text-xl font-bold text-slate-800 tracking-tight leading-snug">
-          <span className="block">{t("I wonder what it", "今")}</span>
-          <span className="flex items-center justify-center gap-x-2 mt-1 flex-wrap">
-            <img
-              src={`${import.meta.env.BASE_URL}branding/wordmark-inline.png`}
-              alt="feelzlike"
-              className="inline-block h-5 md:h-7 w-auto"
-            />
-            <span>{t("in Nagano...", "の長野県は…")}</span>
-          </span>
+        <h2 className="text-base md:text-lg font-semibold text-slate-700 tracking-tight leading-snug inline-flex items-center gap-x-2 flex-wrap justify-center">
+          <span>{t("I wonder what it", "今")}</span>
+          <img
+            src={`${import.meta.env.BASE_URL}branding/wordmark-inline.png`}
+            alt="feelzlike"
+            className="inline-block h-5 md:h-6 w-auto"
+          />
+          <span>{t("in Nagano right now...", "の長野県は…")}</span>
         </h2>
       </motion.div>
 

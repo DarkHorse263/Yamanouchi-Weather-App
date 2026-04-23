@@ -51,11 +51,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <ChevronLeft className="w-4 h-4" />
             {t("All regions", "全地域")}
           </a>
-          <h1 className="text-2xl font-display font-black text-mountain-dark tracking-tight leading-tight">
-            Nagano<br /><span className="text-primary text-xl">Snow Intelligence</span>
-          </h1>
-          <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest mt-1">
-            {t("80 Ski Resorts", "80スキー場")}
+          <a href="/" className="block mb-2">
+            <img
+              src={`${import.meta.env.BASE_URL}branding/wordmark-colour.png`}
+              alt="feelzlike"
+              className="h-10 w-auto"
+            />
+          </a>
+          <p className="text-xs font-semibold text-slate-400 tracking-wide uppercase">
+            {t("Nagano Prefecture", "長野県")}
+          </p>
+          <p className="text-[10px] text-slate-400 mt-1">
+            {t("80 Ski Resorts · Japan", "80スキー場 · 日本")}
           </p>
         </div>
 
@@ -108,9 +115,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
           >
             <ChevronLeft className="w-5 h-5 text-muted-foreground" />
           </a>
-          <h1 className="text-xl font-display font-black text-mountain-dark tracking-tight">
-            Nagano <span className="text-primary">Snow</span>
-          </h1>
+          <a href="/" className="flex items-center gap-2">
+            <img
+              src={`${import.meta.env.BASE_URL}branding/wordmark-colour.png`}
+              alt="feelzlike"
+              className="h-6 w-auto"
+            />
+          </a>
         </div>
         <div className="flex bg-secondary p-0.5 rounded-md border border-border">
           {(["en", "ja"] as const).map((lang) => (

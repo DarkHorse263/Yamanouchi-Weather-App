@@ -181,3 +181,25 @@ The Yamanouchi app supports a Winter/Green season toggle for year-round tourism:
 ### `scripts` (`@workspace/scripts`)
 
 Utility scripts package. Each script is a `.ts` file in `src/` with a corresponding npm script in `package.json`. Run scripts via `pnpm --filter @workspace/scripts run <script>`. Scripts can import any workspace package (e.g., `@workspace/db`) by adding it as a dependency in `scripts/package.json`.
+
+## feelzlike Unified Design System (Apr 2026)
+
+All three region apps (snowy-mountains, nagano, yamanouchi) now share a unified "master sidebar" layout pattern (originally the Yamanouchi template):
+
+- **Desktop**: 264px white sidebar with `← All regions` back link, feelzlike wordmark image (`branding/wordmark-colour.png`), uppercase region caption (e.g. "SNOWY MOUNTAINS / NSW · Australia"), nav rail, optional secondary section, and language toggle in footer
+- **Mobile**: Top header with back arrow + small wordmark + region caption; bottom nav with primary + secondary nav items
+- **Wonder strip pattern**: Compact single-line `"I wonder what it [feelzlike wordmark] in [Region] right now..."` sits above the gradient hero card on each region's home page (no duplicated full logo since sidebar already shows branding)
+- **Branding assets**: `logo-full.png`, `wordmark-colour.png`, `wordmark-inline.png` are copied into each region's `public/branding/` folder
+
+### feelzlike Landing Page (`artifacts/feelzlike/src/pages/landing.tsx`)
+- Soft gradient background with blur orbs (sky-blue + emerald)
+- Hero: full logo + "I wonder what it [wordmark] in..." + tagline emphasising "Mountain weather you can actually trust" + green "TRUTH-FIRST MOUNTAIN INTELLIGENCE" badge
+- 4-feature icon row: Live Weather / Webcams / Road Status / Stay & Eat
+- Search input (a11y-labelled), then live region cards with image thumbnails, LIVE pulse badge, country, description, and tags
+- Footer: "Built by mountain people, for mountain people" + sourcing disclaimer
+
+### Snowy Mountains (`AppLayout.tsx`)
+- Primary nav: Weather, Cams, Radar, Roads, Lifts
+- Secondary nav: Bus Services (also surfaced in mobile bottom nav)
+- Resorts submenu: Thredbo, Perisher, Charlotte's Pass, Jindabyne
+- Dashboard hero: blue/navy gradient card with `bg-overlay` mountain image at 25%, LIVE · BOM AUSTRALIA badge, resort-town count chip
