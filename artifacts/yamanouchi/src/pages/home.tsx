@@ -197,8 +197,8 @@ function GreenHome({ t }: { t: (en: string, ja: string) => string }) {
         className="rounded-xl glass px-4 py-3">
         <p className="text-[10px] leading-relaxed text-muted-foreground/70">
           {t(
-            "Weather data from JMA via Open-Meteo. Activity information is for reference — confirm opening dates and conditions directly with operators.",
-            "気象データはOpen-Meteo経由の気象庁データ。アクティビティ情報は参考用です。営業日と状況は各施設へ直接ご確認ください。"
+            "Weather data from the Japan Meteorological Agency. Activity information is for reference — confirm opening dates and conditions directly with operators.",
+            "気象データは気象庁提供。アクティビティ情報は参考用です。営業日と状況は各施設へ直接ご確認ください。"
           )}
         </p>
       </motion.div>
@@ -410,8 +410,8 @@ export default function Home() {
         className="rounded-xl border border-border/60 bg-slate-50 px-4 py-3">
         <p className="text-[10px] leading-relaxed text-slate-400">
           {t(
-            "Snow depth & conditions from resort reporting networks. Temperature, wind & forecasts from JMA via Open-Meteo. Updated hourly 5 AM–6 PM JST. For informational use only — verify directly with resorts before skiing.",
-            "積雪・ゲレンデ状況は各スキー場の報告に基づきます。気温・風・予報はOpen-Meteo経由の気象庁データ。毎日5時〜18時（JST）更新。参考情報です。滑走前に各スキー場へ直接ご確認ください。"
+            "Snow depth & conditions from resort reporting networks. Temperature, wind & forecasts from the Japan Meteorological Agency. Updated hourly 5 AM–6 PM JST. For informational use only — verify directly with resorts before skiing.",
+            "積雪・ゲレンデ状況は各スキー場の報告に基づきます。気温・風・予報は気象庁提供。毎日5時〜18時（JST）更新。参考情報です。滑走前に各スキー場へ直接ご確認ください。"
           )}
         </p>
       </motion.div>

@@ -1,130 +1,149 @@
 import { motion } from "framer-motion";
-import {
-  Search,
-  MapPin,
-  ChevronRight,
-  ShieldCheck,
-} from "lucide-react";
+import { Search, MapPin, ArrowRight, ShieldCheck } from "lucide-react";
 import { useState } from "react";
 
 const REGIONS = [
   {
     id: "snowy-mountains",
     name: "Snowy Mountains",
-    nameJa: "スノーウィー山脈",
-    country: "Australia",
-    description: "Australia's alpine playground — Perisher, Thredbo, Charlotte's Pass",
-    tags: ["Ski", "Hiking", "Lakes"],
+    region: "New South Wales, Australia",
+    description:
+      "Australia's alpine country — Perisher, Thredbo, Charlotte Pass.",
+    tags: ["Snow", "Hiking", "Lakes"],
     status: "live" as const,
     href: "/snowy-mountains/",
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=500&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1517299321609-52687d1bc55a?w=1400&h=900&fit=crop&q=80",
+    coords: "36.5° S · 148.3° E",
   },
   {
     id: "yamanouchi",
     name: "Yamanouchi Town",
-    nameJa: "山ノ内町",
-    country: "Japan",
-    description: "Snow monkeys, 21 ski resorts, hot springs",
-    tags: ["Ski", "Onsen", "Snow Monkeys"],
+    region: "Nagano, Japan",
+    description:
+      "Snow monkeys, 21 ski areas, hot springs and stone-paved onsen streets.",
+    tags: ["Snow", "Onsen", "Culture"],
     status: "live" as const,
     href: "/yamanouchi/",
-    image: "https://images.unsplash.com/photo-1522156373667-4c7234bbd804?w=800&h=500&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1542640244-7e672d6cef4e?w=1400&h=900&fit=crop&q=80",
+    coords: "36.7° N · 138.4° E",
   },
   {
     id: "nagano",
     name: "Nagano Prefecture",
-    nameJa: "長野県",
-    country: "Japan",
-    description: "80 ski resorts across the Japan Alps — Hakuba, Shiga Kogen, Nozawa",
-    tags: ["Ski", "Culture", "Mountains"],
+    region: "Honshu, Japan",
+    description:
+      "80 ski areas across the Japan Alps — Hakuba, Shiga Kogen, Nozawa.",
+    tags: ["Snow", "Mountains", "Alps"],
     status: "live" as const,
     href: "/nagano/",
-    image: "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?w=800&h=500&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1610824352934-c10d87b700cc?w=1400&h=900&fit=crop&q=80",
+    coords: "36.6° N · 138.2° E",
   },
 ];
 
-const COVERAGE = ["Live weather", "Webcams", "Road status", "Lifts", "Stay & eat"];
+const COVERAGE = [
+  "Live weather",
+  "Webcams",
+  "Road status",
+  "Lifts",
+  "Stay & eat",
+];
 
 export default function Landing() {
   const [search, setSearch] = useState("");
-  const base = import.meta.env.BASE_URL;
 
-  const filtered = REGIONS.filter(
-    (r) =>
-      r.name.toLowerCase().includes(search.toLowerCase()) ||
-      r.country.toLowerCase().includes(search.toLowerCase()) ||
-      r.tags.some((t) => t.toLowerCase().includes(search.toLowerCase()))
-  );
+  const filtered = REGIONS.filter((r) => {
+    const q = search.toLowerCase();
+    return (
+      r.name.toLowerCase().includes(q) ||
+      r.region.toLowerCase().includes(q) ||
+      r.tags.some((t) => t.toLowerCase().includes(q))
+    );
+  });
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      {/* Bright snowy hero — chosen so dark-blue transparent logos read naturally */}
+    <div className="min-h-screen bg-[#0a0f1a] text-slate-100 antialiased">
+      {/* ─── HERO ─────────────────────────────────────── */}
       <header className="relative overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1418985991508-e47386d96a71?w=2000&h=1200&fit=crop&q=80"
+            src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=2400&h=1400&fit=crop&q=85"
             alt=""
-            className="w-full h-full object-cover"
-            onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+            className="w-full h-full object-cover opacity-55"
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).style.display = "none";
+            }}
           />
-          {/* Soft sky-to-snow wash; the logo art is dark blue and needs a light backdrop. */}
-          <div className="absolute inset-0 bg-gradient-to-b from-sky-100/85 via-white/40 to-slate-100/90" />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(10,15,26,0.55) 0%, rgba(10,15,26,0.65) 45%, rgba(10,15,26,0.95) 100%)",
+            }}
+          />
+          {/* grain */}
+          <div
+            className="absolute inset-0 opacity-[0.06] pointer-events-none mix-blend-overlay"
+            style={{
+              backgroundImage:
+                "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+            }}
+          />
         </div>
 
-        <div className="relative max-w-3xl mx-auto px-4 pt-8 pb-16 md:pt-12 md:pb-24 text-center">
-          {/* Transparent logo, no box */}
+        <div className="relative max-w-3xl mx-auto px-5 pt-12 pb-20 md:pt-20 md:pb-32">
+          {/* tiny brand line */}
           <motion.div
-            initial={{ opacity: 0, y: 8 }}
+            initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex justify-center mb-5 md:mb-7"
+            className="flex items-center gap-2 mb-8 md:mb-10"
           >
-            <img
-              src={`${base}branding/logo-full.png`}
-              alt="feelzlike"
-              className="h-20 md:h-24 w-auto"
-              style={{ mixBlendMode: "multiply" }}
-            />
+            <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
+            <span className="text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.22em] text-sky-300/90">
+              feelzlike · global mountain weather intelligence
+            </span>
           </motion.div>
 
-          {/* Tagline — dark text now that hero is light */}
+          {/* editorial headline */}
           <motion.h1
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight leading-tight mb-3"
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="font-serif text-4xl md:text-6xl lg:text-7xl tracking-[-0.02em] leading-[1.02] text-white"
+            style={{ fontFamily: "'Fraunces', Georgia, serif" }}
           >
-            <span className="block">I wonder what it</span>
-            <span className="inline-flex items-baseline justify-center gap-x-2 mt-1 flex-wrap">
-              <img
-                src={`${base}branding/wordmark-inline.png`}
-                alt="feelzlike"
-                className="inline-block h-8 md:h-12 w-auto translate-y-1"
-                style={{ mixBlendMode: "multiply" }}
-              />
-              <span>in…</span>
+            <span className="block font-light text-slate-300/90">I wonder what it</span>
+            <span className="block mt-1">
+              <em className="not-italic font-medium text-white">
+                feelz<span className="italic font-semibold text-sky-300">like</span>
+              </em>{" "}
+              <span className="font-light text-slate-300/90">in…</span>
             </span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-base md:text-lg text-slate-700 max-w-xl mx-auto leading-relaxed mt-4 mb-7 md:mb-9 font-medium"
+            transition={{ duration: 0.5, delay: 0.25 }}
+            className="text-sm md:text-base text-slate-300/80 max-w-xl mt-5 md:mt-7 leading-relaxed font-light"
           >
             Mountain weather you can actually trust — plus the cams, roads,
-            lifts, and places to stay you need to make the call.
+            lifts and places to stay you need to make the call.
           </motion.p>
 
-          {/* Search */}
+          {/* SEARCH */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.3 }}
-            className="max-w-xl mx-auto"
+            transition={{ duration: 0.5, delay: 0.35 }}
+            className="mt-8 md:mt-10"
           >
-            <div className="relative">
-              <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <div className="relative max-w-xl">
+              <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <label htmlFor="region-search" className="sr-only">
                 Search mountain regions
               </label>
@@ -132,25 +151,26 @@ export default function Landing() {
                 id="region-search"
                 type="text"
                 aria-label="Search mountain regions"
-                placeholder="Search a mountain region..."
+                placeholder="Search a mountain region…"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pr-4 py-4 md:py-5 rounded-2xl border border-slate-200 bg-white text-slate-900 text-base placeholder:text-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-200 focus:border-blue-400 shadow-2xl transition-all"
-                style={{ paddingLeft: "3.25rem" }}
+                className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white/[0.06] border border-white/10 text-slate-100 text-sm placeholder:text-slate-500 backdrop-blur-xl focus:outline-none focus:ring-2 focus:ring-sky-400/40 focus:border-sky-300/40 transition-all"
               />
             </div>
 
-            {/* Coverage line — descriptive, not clickable */}
-            <div className="flex flex-wrap items-center justify-center gap-x-1.5 gap-y-1 mt-5 text-[11px] md:text-xs text-slate-700 font-medium">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 mr-0.5" />
-              <span className="text-emerald-700 font-semibold mr-2">
-                Truth-first coverage:
+            {/* coverage line */}
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 mt-5 text-[11px] text-slate-400">
+              <span className="inline-flex items-center gap-1.5 text-emerald-300/90">
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span className="font-semibold uppercase tracking-[0.16em]">
+                  Truth-first
+                </span>
               </span>
               {COVERAGE.map((c, i) => (
                 <span key={c} className="inline-flex items-center">
-                  {c}
+                  <span>{c}</span>
                   {i < COVERAGE.length - 1 && (
-                    <span className="mx-1.5 text-slate-400">·</span>
+                    <span className="ml-3 text-slate-600">·</span>
                   )}
                 </span>
               ))}
@@ -159,112 +179,123 @@ export default function Landing() {
         </div>
       </header>
 
-      {/* Region list */}
-      <main className="relative max-w-3xl mx-auto px-4 -mt-8 md:-mt-10 pb-12 md:pb-20">
-        <div className="bg-white rounded-3xl shadow-xl p-4 md:p-6 border border-slate-100">
-          <div className="flex items-center gap-2 mb-3 px-1">
-            <p className="text-[11px] font-bold text-slate-500 uppercase tracking-widest">
-              Live Mountain Regions
+      {/* ─── REGIONS ──────────────────────────────────── */}
+      <main className="relative max-w-5xl mx-auto px-5 pb-20 md:pb-28">
+        <div className="flex items-end justify-between mb-6 md:mb-8">
+          <div>
+            <p className="text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500">
+              01 · Live regions
             </p>
-            <div className="flex-1 h-px bg-slate-200/70 ml-1" />
-            <span className="text-[11px] text-slate-400 font-medium">
-              {filtered.length} {filtered.length === 1 ? "region" : "regions"}
-            </span>
+            <h2
+              className="font-serif text-2xl md:text-3xl mt-1 text-white tracking-tight"
+              style={{ fontFamily: "'Fraunces', Georgia, serif" }}
+            >
+              Choose a mountain
+            </h2>
           </div>
-
-          <div className="space-y-3">
-            {filtered.map((region, i) => {
-              const isLive = region.status === "live";
-              const Wrapper: any = isLive ? "a" : "div";
-              const wrapperProps = isLive ? { href: region.href } : {};
-              return (
-                <motion.div
-                  key={region.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.35, delay: 0.1 + i * 0.06 }}
-                >
-                  <Wrapper
-                    {...wrapperProps}
-                    className="block w-full text-left group"
-                  >
-                    <div
-                      className={`relative flex bg-white rounded-2xl border border-slate-200 overflow-hidden transition-all duration-300 ${
-                        isLive
-                          ? "hover:shadow-lg hover:border-blue-300 hover:-translate-y-0.5 cursor-pointer"
-                          : "opacity-90 cursor-default"
-                      }`}
-                    >
-                      <div className="relative w-28 sm:w-36 md:w-44 shrink-0 overflow-hidden">
-                        <img
-                          src={region.image}
-                          alt={region.name}
-                          className={`w-full h-full object-cover ${
-                            isLive ? "group-hover:scale-110" : ""
-                          } transition-transform duration-700`}
-                        />
-                        {!isLive && (
-                          <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                            <span className="bg-white/95 backdrop-blur-sm text-slate-700 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">
-                              Soon
-                            </span>
-                          </div>
-                        )}
-                        {isLive && (
-                          <div className="absolute top-2 left-2 bg-emerald-500 text-white text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full flex items-center gap-1 shadow-md">
-                            <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
-                            Live
-                          </div>
-                        )}
-                      </div>
-                      <div className="flex-1 p-3.5 md:p-4 flex flex-col justify-center min-w-0">
-                        <div className="flex items-start justify-between gap-2">
-                          <div className="min-w-0">
-                            <h3 className="font-bold text-slate-900 text-lg md:text-xl leading-tight">
-                              {region.name}
-                            </h3>
-                            <div className="flex items-center gap-1 mt-1">
-                              <MapPin className="w-3 h-3 text-slate-400 shrink-0" />
-                              <span className="text-xs text-slate-500 font-medium">
-                                {region.country}
-                              </span>
-                            </div>
-                          </div>
-                          {isLive && (
-                            <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all shrink-0 mt-1" />
-                          )}
-                        </div>
-                        <p className="hidden sm:block text-xs md:text-sm text-slate-600 mt-2 line-clamp-2 leading-relaxed">
-                          {region.description}
-                        </p>
-                        <div className="flex flex-wrap gap-1.5 mt-2">
-                          {region.tags.map((tag) => (
-                            <span
-                              key={tag}
-                              className="text-[10px] font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </Wrapper>
-                </motion.div>
-              );
-            })}
-          </div>
+          <span className="text-[11px] text-slate-500 font-medium tabular-nums">
+            {filtered.length} {filtered.length === 1 ? "region" : "regions"}
+          </span>
         </div>
 
-        {/* Footer */}
-        <div className="mt-10 text-center">
-          <p className="text-xs text-slate-500 font-medium mb-1">
-            Built by mountain people, for mountain people.
-          </p>
-          <p className="text-[11px] text-slate-400">
-            Real-time conditions sourced direct from official services
-            (BOM, JMA, resort networks, transport authorities).
-          </p>
+        <div className="grid gap-4 md:gap-5">
+          {filtered.map((region, i) => (
+            <motion.a
+              key={region.id}
+              href={region.href}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.05 + i * 0.07 }}
+              className="group relative block overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] hover:border-white/20 hover:bg-white/[0.06] transition-all duration-500"
+            >
+              <div className="flex flex-col md:flex-row">
+                {/* image */}
+                <div className="relative w-full md:w-2/5 aspect-[16/10] md:aspect-auto overflow-hidden">
+                  <img
+                    src={region.image}
+                    alt={region.name}
+                    className="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#0a0f1a]/80 via-[#0a0f1a]/10 to-transparent" />
+                  <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/10">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-emerald-200">
+                      Live
+                    </span>
+                  </div>
+                </div>
+
+                {/* content */}
+                <div className="flex-1 p-5 md:p-7 flex flex-col justify-between min-w-0">
+                  <div>
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500 mb-1.5">
+                      <MapPin className="w-3 h-3 inline-block mr-1 -mt-0.5 text-slate-500" />
+                      {region.region}
+                    </p>
+                    <h3
+                      className="font-serif text-2xl md:text-3xl text-white tracking-tight leading-tight"
+                      style={{ fontFamily: "'Fraunces', Georgia, serif" }}
+                    >
+                      {region.name}
+                    </h3>
+                    <p className="text-sm text-slate-400 mt-2 leading-relaxed font-light line-clamp-2">
+                      {region.description}
+                    </p>
+                  </div>
+
+                  <div className="mt-5 flex items-center justify-between gap-3">
+                    <div className="flex flex-wrap gap-1.5">
+                      {region.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-[10px] font-medium uppercase tracking-wider text-slate-300/80 bg-white/[0.05] border border-white/10 px-2 py-1 rounded-md"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <span
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-300 group-hover:text-sky-200 group-hover:gap-2.5 transition-all whitespace-nowrap"
+                    >
+                      Open
+                      <ArrowRight className="w-4 h-4" />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </motion.a>
+          ))}
+        </div>
+
+        {/* trust footer */}
+        <div className="mt-14 md:mt-20 pt-10 border-t border-white/5">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500 mb-2">
+                02 · Where the data comes from
+              </p>
+              <p
+                className="font-serif text-xl md:text-2xl text-white tracking-tight max-w-lg leading-tight"
+                style={{ fontFamily: "'Fraunces', Georgia, serif" }}
+              >
+                Built by mountain people, for mountain people.
+              </p>
+              <p className="text-sm text-slate-400 mt-3 max-w-lg leading-relaxed font-light">
+                Real-time conditions sourced direct from official services —
+                national weather agencies, resort networks and transport
+                authorities. We surface the consensus, not a single guess.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-2 md:items-end text-[11px] text-slate-500">
+              <span className="font-semibold uppercase tracking-[0.18em] text-slate-400">
+                Sources
+              </span>
+              <span>Bureau of Meteorology · Australia</span>
+              <span>Japan Meteorological Agency · Japan</span>
+              <span>+ leading international forecast models</span>
+            </div>
+          </div>
         </div>
       </main>
     </div>

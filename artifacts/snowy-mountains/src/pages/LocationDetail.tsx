@@ -115,7 +115,7 @@ export default function LocationDetail() {
               </span>
             )}
             {current.dataSource !== "BOM" && (
-              <span className="byline text-muted-foreground">Source · {current.dataSource ?? "Open-Meteo"}</span>
+              <span className="byline text-muted-foreground">Source · {current.dataSource ?? "Bureau of Meteorology + international models"}</span>
             )}
             <span className="byline text-muted-foreground/60">Elev {location.elevation}m</span>
             {location.bomStation && current.dataSource !== "BOM" && (

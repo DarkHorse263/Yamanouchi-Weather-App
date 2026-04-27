@@ -63,9 +63,8 @@ export default function Dashboard() {
             className="mt-8 md:mt-12 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm"
           >
             <span className="byline text-muted-foreground">Reading from</span>
-            {["BOM", "ECMWF", "ICON", "MET Norway"].map((s) => (
-              <span key={s} className="font-display text-foreground/90 text-base">{s}</span>
-            ))}
+            <span className="font-display text-foreground/90 text-base">Bureau of Meteorology</span>
+            <span className="byline text-muted-foreground/60">+ 3 leading international models</span>
             <span className="ml-auto byline text-muted-foreground/70">Updated {updated}</span>
           </motion.div>
         </div>

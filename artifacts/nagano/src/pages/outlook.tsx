@@ -255,8 +255,8 @@ export default function Outlook() {
         <p className="text-[11px] leading-relaxed text-muted-foreground">
           <span className="font-semibold text-foreground/60">{t("Data Source", "データソース")}: </span>
           {t(
-            "Demo data for pitch purposes. In production, forecasts would come from JMA numerical models via Open-Meteo. Radar from Windy / JMA.",
-            "ピッチ用デモデータです。本番では、予報データはOpen-Meteo経由のJMA数値予報モデルから取得します。レーダーはWindy / 気象庁提供。"
+            "Demo data for pitch purposes. In production, forecasts come from the Japan Meteorological Agency plus leading international models. Radar from Windy / JMA.",
+            "ピッチ用デモデータです。本番では、予報は気象庁および主要国際モデルから取得します。レーダーはWindy / 気象庁提供。"
           )}
         </p>
       </div>
