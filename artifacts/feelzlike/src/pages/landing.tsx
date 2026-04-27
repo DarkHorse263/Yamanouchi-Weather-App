@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Search, MapPin, ArrowRight, ShieldCheck } from "lucide-react";
 import { useState } from "react";
-import lockupSnow from "@assets/feelzlike_colour_150426_1777272466909.png";
+import lockupSnow from "@assets/feelzlike_transparent/feelzlike_colour_150426_1777272466909_dark.png";
 
 const REGIONS = [
   {
@@ -103,13 +103,11 @@ export default function Landing() {
             transition={{ duration: 0.5 }}
             className="mb-8 md:mb-10"
           >
-            <div className="inline-flex items-center justify-center px-5 py-3 md:px-6 md:py-4 rounded-2xl bg-white/95 backdrop-blur-xl border border-white/20 shadow-[0_8px_30px_rgba(0,0,0,0.25)]">
-              <img
-                src={lockupSnow}
-                alt="feelzlike — global mountain weather intelligence"
-                className="h-14 md:h-16 w-auto"
-              />
-            </div>
+            <img
+              src={lockupSnow}
+              alt="feelzlike — global mountain weather intelligence"
+              className="h-20 md:h-24 w-auto -ml-2 md:-ml-3 drop-shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
+            />
             <div className="flex items-center gap-2 mt-4">
               <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
               <span className="text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.22em] text-sky-300/90">

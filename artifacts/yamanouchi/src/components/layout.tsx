@@ -13,7 +13,7 @@ import {
   Leaf,
   ChevronLeft,
 } from "lucide-react";
-import wordmarkSnow from "@assets/feelzlike_WordMarque_colour_160426_1777272466909.png";
+import wordmarkSnow from "@assets/feelzlike_transparent/feelzlike_WordMarque_colour_160426_1777272466909_dark.png";
 import { useLanguage } from "@/hooks/use-language";
 import { useSeason } from "@/hooks/use-season";
 import { cn } from "@/lib/utils";
@@ -103,9 +103,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
             {t("All regions", "全地域")}
           </a>
           <a href="/" className="block mb-2">
-            <span className="inline-flex items-center justify-center px-3 py-2 rounded-xl bg-white/95 backdrop-blur-md border border-white/10 shadow-sm">
-              <img src={wordmarkSnow} alt="feelzlike" className="h-7 w-auto" />
-            </span>
+            <img
+              src={wordmarkSnow}
+              alt="feelzlike"
+              className="h-8 w-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]"
+            />
           </a>
           <p className="byline mt-1.5 text-muted-foreground/70">Yamanouchi Town</p>
           <div className="mt-3">
