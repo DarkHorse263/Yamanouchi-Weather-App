@@ -60,7 +60,7 @@ export default function Resorts() {
   return (
     <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-6">
       <div className="mb-4">
-        <h1 className="text-3xl md:text-4xl font-black text-mountain-dark">{t("Ski Resorts", "スキー場")}</h1>
+        <h1 className="text-3xl md:text-4xl font-black text-foreground">{t("Ski Resorts", "スキー場")}</h1>
         <p className="text-muted-foreground mt-2">{t("All 80 Nagano Prefecture ski resorts", "長野県の全80スキー場")}</p>
       </div>
 
@@ -69,7 +69,7 @@ export default function Resorts() {
           onClick={() => setRegionFilter("all")}
           className={`px-4 py-1.5 rounded-full font-bold text-sm whitespace-nowrap transition-colors ${
             regionFilter === "all"
-              ? "bg-mountain-dark text-white"
+              ? "bg-foreground text-background"
               : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
           }`}
         >
@@ -81,7 +81,7 @@ export default function Resorts() {
             onClick={() => setRegionFilter(name)}
             className={`px-4 py-1.5 rounded-full font-bold text-sm whitespace-nowrap transition-colors ${
               regionFilter === name
-                ? "bg-mountain-dark text-white"
+                ? "bg-foreground text-background"
                 : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
             }`}
           >
@@ -134,7 +134,7 @@ export default function Resorts() {
                 <Card className="h-full flex flex-col hover:border-primary/40 transition-colors duration-300">
                   <div className="flex justify-between items-start mb-4">
                     <div>
-                      <h3 className="text-lg font-bold text-mountain-dark leading-tight">
+                      <h3 className="text-lg font-bold text-foreground leading-tight">
                         {t(resort.name, resort.nameJa)}
                       </h3>
                       <p className="text-xs text-muted-foreground">{resort.elevation}m</p>

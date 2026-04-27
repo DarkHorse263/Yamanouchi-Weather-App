@@ -8,7 +8,7 @@ export default function NotFound() {
         <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto text-primary">
           <MountainSnow className="w-12 h-12" />
         </div>
-        <h1 className="text-4xl font-black text-mountain-dark">Off Piste</h1>
+        <h1 className="text-4xl font-black text-foreground">Off Piste</h1>
         <p className="text-lg text-muted-foreground">
           Looks like you've skied out of bounds. This page doesn't exist.
         </p>

@@ -67,7 +67,7 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
       {!embedded && (
         <>
           <div>
-            <h1 className="text-3xl md:text-4xl font-black text-mountain-dark">{t("Where to Stay", "宿泊施設")}</h1>
+            <h1 className="text-3xl md:text-4xl font-black text-foreground">{t("Where to Stay", "宿泊施設")}</h1>
             <p className="text-muted-foreground mt-1 text-sm">{t("Accommodation in Yamanouchi · Book via Booking.com", "山ノ内町の宿泊施設 · Booking.comで予約")}</p>
           </div>
 
@@ -96,7 +96,7 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
             key={v}
             onClick={() => setTab(v)}
             className={`flex-1 py-2.5 rounded-lg font-bold text-sm transition-all ${
-              tab === v ? "bg-white shadow text-mountain-dark" : "text-muted-foreground hover:text-mountain-dark"
+              tab === v ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"
             }`}
           >
             {t(en, ja)}
@@ -112,7 +112,7 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
             onClick={() => setTypeFilter(f.value)}
             className={`px-4 py-1.5 rounded-full font-bold text-sm whitespace-nowrap transition-colors ${
               typeFilter === f.value
-                ? "bg-mountain-dark text-white"
+                ? "bg-foreground text-background"
                 : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
             }`}
           >
@@ -131,7 +131,7 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
               <section key={area.region}>
                 <div className="flex items-center justify-between mb-3">
                   <div>
-                    <h2 className="text-lg font-black text-mountain-dark flex items-center gap-2">
+                    <h2 className="text-lg font-black text-foreground flex items-center gap-2">
                       <Mountain className="w-4 h-4 text-primary" />
                       {t(area.label, area.labelJa)}
                     </h2>
@@ -160,7 +160,7 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
               <section key={area.region}>
                 <div className="flex items-center justify-between mb-3">
                   <div>
-                    <h2 className="text-lg font-black text-mountain-dark">
+                    <h2 className="text-lg font-black text-foreground">
                       {area.emoji} {t(area.label, area.labelJa)}
                     </h2>
                     <p className="text-xs text-muted-foreground">{t(area.desc, area.descJa)}</p>

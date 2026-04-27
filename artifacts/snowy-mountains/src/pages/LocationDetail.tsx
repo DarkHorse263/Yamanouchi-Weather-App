@@ -3,29 +3,46 @@ import { useGetLocationWeather, useGetLocationWebcams, useGetLocationLiftStatus 
 import { AppLayout } from "@/components/layout/AppLayout";
 import { LoadingState } from "@/components/ui/loading-state";
 import { ErrorState } from "@/components/ui/error-state";
-import { WeatherIcon } from "@/components/ui/weather-icon";
 import { ForecastChart } from "@/components/weather/ForecastChart";
 import { EnsembleForecast } from "@/components/weather/EnsembleForecast";
-import { formatTemp, formatSnow } from "@/lib/utils";
+import { formatTemp } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { MapPin, Wind, Droplets, Snowflake, Sunrise, Sunset, CalendarDays, BarChart2, Camera, Cable, CheckCircle2, XCircle, AlertCircle, Clock, Activity, Gauge, Thermometer, CloudRain, Eye, Navigation } from "lucide-react";
+import {
+  Wind,
+  Droplets,
+  Snowflake,
+  CalendarDays,
+  BarChart2,
+  Camera,
+  Cable,
+  CheckCircle2,
+  XCircle,
+  AlertCircle,
+  Clock,
+  Gauge,
+  Thermometer,
+  CloudRain,
+  Eye,
+  Navigation,
+  ArrowDown,
+} from "lucide-react";
 import { format, parseISO } from "date-fns";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { getImagery, skyGradient } from "@/lib/mountain-imagery";
 
 type LocationId = "thredbo" | "perisher" | "charlottes-pass" | "jindabyne";
 
 function getStatusColor(status: string) {
   switch (status) {
-    case "open": return "bg-green-500/10 text-green-700 dark:text-green-400 border-green-500/20";
-    case "closed": return "bg-slate-500/10 text-slate-700 dark:text-slate-400 border-slate-500/20";
-    case "wind-hold": return "bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/20";
-    case "on-hold": return "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400 border-yellow-500/20";
-    case "scheduled": return "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20";
-    default: return "bg-slate-500/10 text-slate-700 dark:text-slate-400 border-slate-500/20";
+    case "open": return "bg-emerald-500/15 text-emerald-300 border-emerald-500/30";
+    case "closed": return "bg-white/5 text-muted-foreground border-white/10";
+    case "wind-hold": return "bg-amber-500/15 text-amber-300 border-amber-500/30";
+    case "on-hold": return "bg-amber-500/15 text-amber-300 border-amber-500/30";
+    case "scheduled": return "bg-sky-500/15 text-sky-300 border-sky-500/30";
+    default: return "bg-white/5 text-muted-foreground border-white/10";
   }
 }
-
 function getStatusIcon(status: string) {
   switch (status) {
     case "open": return <CheckCircle2 className="w-3 h-3" />;
@@ -40,138 +57,177 @@ function getStatusIcon(status: string) {
 export default function LocationDetail() {
   const [, params] = useRoute("/location/:id");
   const locationId = params?.id as LocationId;
-  
-  const { data: weatherData, isLoading: weatherLoading, error: weatherError, refetch: weatherRefetch } = useGetLocationWeather(locationId, {
-    query: {
-      enabled: !!locationId,
-    }
-  });
 
-  const { data: webcamData } = useGetLocationWebcams(locationId, {
-    query: {
-      enabled: !!locationId,
-    }
-  });
-
+  const { data: weatherData, isLoading: weatherLoading, error: weatherError, refetch: weatherRefetch } = useGetLocationWeather(locationId, { query: { enabled: !!locationId } });
+  const { data: webcamData } = useGetLocationWebcams(locationId, { query: { enabled: !!locationId } });
   const isResort = locationId === "thredbo" || locationId === "perisher" || locationId === "charlottes-pass";
-  const { data: liftData } = useGetLocationLiftStatus(locationId as any, {
-    query: {
-      enabled: isResort,
-    }
-  });
+  const { data: liftData } = useGetLocationLiftStatus(locationId as any, { query: { enabled: isResort } });
 
   const [activeChartMetric, setActiveChartMetric] = useState<"temperature" | "snowfall" | "windSpeed">("temperature");
 
-  if (weatherLoading) return <AppLayout><LoadingState message={`Loading data for ${locationId}...`} /></AppLayout>;
+  if (weatherLoading) return <AppLayout><LoadingState message="Reading live conditions…" /></AppLayout>;
   if (weatherError || !weatherData) return <AppLayout><ErrorState error={weatherError} onRetry={() => weatherRefetch()} /></AppLayout>;
 
   const { location, current, daily, hourly } = weatherData;
+  const imagery = getImagery(locationId);
+  const sky = skyGradient({ tempC: current.temperature, description: current.weatherDescription });
+
+  const stats = [
+    { label: "Feels like", value: formatTemp(current.feelsLike), icon: Thermometer },
+    { label: "Wind", value: `${current.windSpeed} km/h${current.windDirectionCompass ? ` ${current.windDirectionCompass}` : ""}`, icon: Navigation },
+    ...(current.windGust ? [{ label: "Gusts", value: `${current.windGust} km/h`, icon: Wind }] : []),
+    { label: "Humidity", value: `${current.humidity}%`, icon: Droplets },
+    { label: "Snow depth", value: current.snowDepth != null ? `${current.snowDepth} cm` : "—", icon: Snowflake },
+    ...(current.dewpoint !== undefined ? [{ label: "Dew point", value: formatTemp(current.dewpoint), icon: Droplets }] : []),
+    ...(current.pressure !== undefined ? [{ label: "Pressure", value: `${current.pressure} hPa`, icon: Gauge }] : []),
+    ...(current.rainSince9am !== undefined ? [{ label: "Rain since 9am", value: `${current.rainSince9am} mm`, icon: CloudRain }] : []),
+    ...(current.visibility && current.visibility !== 10000 ? [{ label: "Visibility", value: `${(current.visibility / 1000).toFixed(0)} km`, icon: Eye }] : []),
+  ];
 
   return (
     <AppLayout>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 space-y-8">
-        
-        {/* Header Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="flex flex-col lg:flex-row gap-8 items-start lg:items-end justify-between bg-card p-8 md:p-10 rounded-3xl shadow-sm border border-border"
-        >
-          <div>
-            <div className="flex flex-wrap items-center gap-2 mb-3">
-              <div className="flex items-center gap-1.5 text-primary font-semibold bg-primary/10 w-fit px-4 py-1.5 rounded-full text-sm">
-                <MapPin className="w-4 h-4" />
-                <span>Elev: {location.elevation}m</span>
-              </div>
-              {location.bomStation && (
-                <div className="flex items-center gap-1.5 text-muted-foreground font-medium bg-muted w-fit px-4 py-1.5 rounded-full text-sm">
-                  <span>BOM: {location.bomStation}</span>
-                </div>
-              )}
-            </div>
-            <h1 className="text-4xl md:text-5xl font-display font-bold mb-4">{location.name}</h1>
-            <p className="text-muted-foreground text-lg max-w-xl leading-relaxed">
-              {location.description}
-            </p>
-          </div>
-          
-          <div className="flex flex-col items-end gap-3">
-            <div className="flex items-center gap-6 bg-secondary/30 p-6 rounded-2xl w-full lg:w-auto">
-              <WeatherIcon code={current.weatherCode} isDay={current.isDay} className="w-20 h-20 drop-shadow-md" />
-              <div>
-                <div className="text-6xl font-display font-bold tracking-tighter">
-                  {formatTemp(current.temperature)}
-                </div>
-                <div className="text-muted-foreground font-medium text-lg mt-1">
-                  {current.weatherDescription}
-                </div>
-              </div>
-            </div>
-            {current.dataSource === "BOM" && (
-              <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                <span className="font-bold text-amber-600 dark:text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-full uppercase tracking-wider">
-                  BOM Live Data
-                </span>
-                {current.bomStation && (
-                  <span className="text-muted-foreground/70">{current.bomStation}</span>
-                )}
-              </div>
-            )}
-          </div>
-        </motion.div>
+      {/* ─── Atmospheric hero ────────────────── */}
+      <section className="relative overflow-hidden grain isolate">
+        {/* Photo backdrop */}
+        <div className="absolute inset-0 -z-10">
+          <img src={imagery.hero} alt="" className="w-full h-full object-cover" loading="eager" />
+          {/* Sky-condition wash on top of the photo */}
+          <div className="absolute inset-0 opacity-70" style={{ background: sky.wash }} />
+          {/* Vignette + fade to background */}
+          <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/45 to-background" />
+          <div className="absolute inset-0" style={{ background: sky.glow }} />
+        </div>
 
-        {/* Current Stats Grid */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4"
-        >
-          {[
-            { label: "Feels Like", value: formatTemp(current.feelsLike), icon: Thermometer, color: "text-orange-500", bg: "bg-orange-500/10" },
-            { label: "Wind", value: `${current.windSpeed} km/h${current.windDirectionCompass ? ` ${current.windDirectionCompass}` : ""}`, icon: Navigation, color: "text-teal-500", bg: "bg-teal-500/10" },
-            ...(current.windGust ? [{ label: "Wind Gusts", value: `${current.windGust} km/h`, icon: Wind, color: "text-teal-600", bg: "bg-teal-600/10" }] : []),
-            { label: "Humidity", value: `${current.humidity}%`, icon: Droplets, color: "text-cyan-500", bg: "bg-cyan-500/10" },
-            { label: "Snow Depth", value: formatSnow(current.snowDepth), icon: Snowflake, color: "text-blue-500", bg: "bg-blue-500/10" },
-            ...(current.dewpoint !== undefined ? [{ label: "Dew Point", value: formatTemp(current.dewpoint), icon: Droplets, color: "text-indigo-500", bg: "bg-indigo-500/10" }] : []),
-            ...(current.pressure !== undefined ? [{ label: "Pressure", value: `${current.pressure} hPa`, icon: Gauge, color: "text-purple-500", bg: "bg-purple-500/10" }] : []),
-            ...(current.rainSince9am !== undefined ? [{ label: "Rain Since 9am", value: `${current.rainSince9am} mm`, icon: CloudRain, color: "text-sky-500", bg: "bg-sky-500/10" }] : []),
-            ...(current.visibility && current.visibility !== 10000 ? [{ label: "Visibility", value: `${(current.visibility / 1000).toFixed(0)} km`, icon: Eye, color: "text-slate-500", bg: "bg-slate-500/10" }] : []),
-          ].map((stat, i) => (
-            <div key={i} className="bg-card p-5 rounded-2xl border border-border/50 flex flex-col items-start gap-3 shadow-sm">
-              <div className={cn("p-2.5 rounded-xl", stat.bg)}>
-                <stat.icon className={cn("w-5 h-5", stat.color)} />
-              </div>
-              <div>
-                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-0.5">{stat.label}</p>
-                <p className="text-xl font-display font-bold">{stat.value}</p>
-              </div>
-            </div>
-          ))}
-        </motion.div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Hourly Forecast Chart */}
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className="lg:col-span-2 bg-card p-6 md:p-8 rounded-3xl border border-border shadow-sm"
+        <div className="relative max-w-7xl mx-auto px-5 md:px-10 pt-10 md:pt-20 pb-10 md:pb-16">
+          {/* Source byline */}
+          <motion.div
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex flex-wrap items-center gap-x-4 gap-y-1.5"
           >
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
-              <h2 className="text-2xl font-display font-bold flex items-center gap-2">
-                <BarChart2 className="text-primary w-6 h-6" />
-                24-Hour Trend
-              </h2>
-              <div className="flex bg-muted p-1 rounded-xl">
-                {(["temperature", "snowfall", "windSpeed"] as const).map(metric => (
+            {current.dataSource === "BOM" && (
+              <span className="inline-flex items-center gap-1.5 text-accent">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full rounded-full bg-accent opacity-60 animate-ping" />
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent" />
+                </span>
+                <span className="byline">BOM Live · {current.bomStation ?? "Australia"}</span>
+              </span>
+            )}
+            {current.dataSource !== "BOM" && (
+              <span className="byline text-muted-foreground">Source · {current.dataSource ?? "Open-Meteo"}</span>
+            )}
+            <span className="byline text-muted-foreground/60">Elev {location.elevation}m</span>
+            {location.bomStation && current.dataSource !== "BOM" && (
+              <span className="byline text-muted-foreground/60">BOM ref · {location.bomStation}</span>
+            )}
+          </motion.div>
+
+          {/* Headline + temperature, magazine block */}
+          <div className="mt-6 md:mt-10 grid md:grid-cols-12 gap-6 md:gap-10 items-end">
+            <div className="md:col-span-7">
+              <motion.h1
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="font-display font-medium text-foreground text-[clamp(3rem,8vw,5.5rem)] leading-[0.92] tracking-tight"
+              >
+                {location.name}
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.05 }}
+                className="mt-4 text-muted-foreground text-base md:text-lg max-w-xl font-light leading-relaxed"
+              >
+                {location.description}
+              </motion.p>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="md:col-span-5 relative"
+            >
+              <div className="halo" />
+              <div className="relative">
+                <div className="flex items-start gap-3">
+                  <span className="display-number text-foreground text-[clamp(7rem,18vw,11rem)]" data-numeric>
+                    {Math.round(current.temperature)}
+                  </span>
+                  <span className="font-display text-foreground/70 text-3xl md:text-4xl mt-4">°C</span>
+                </div>
+                <p className="byline text-muted-foreground mt-1">
+                  {current.weatherDescription} · feels {Math.round(current.feelsLike)}°
+                </p>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Scroll cue */}
+          <div className="mt-10 md:mt-14 flex items-center gap-2 text-muted-foreground/60">
+            <span className="byline">Live conditions below</span>
+            <ArrowDown className="w-3 h-3" />
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Body ───────────────────────────── */}
+      <div className="max-w-7xl mx-auto px-5 md:px-10 pb-20 space-y-6 md:space-y-8 -mt-2">
+        {/* Conditions strip — editorial data table feel */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+          className="glass rounded-3xl p-5 md:p-8"
+        >
+          <div className="flex items-end justify-between mb-5">
+            <div>
+              <p className="byline text-muted-foreground">01 · Conditions</p>
+              <h2 className="font-display font-semibold text-xl md:text-2xl mt-1">Right now</h2>
+            </div>
+            <p className="byline text-muted-foreground/70 hidden md:block">{stats.length} measurements</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-y-6 gap-x-4">
+            {stats.map((s, i) => (
+              <div key={i} className="group">
+                <div className="flex items-center gap-1.5 byline text-muted-foreground/80 mb-1.5">
+                  <s.icon className="w-3 h-3 text-muted-foreground/60" />
+                  {s.label}
+                </div>
+                <p className="font-display text-2xl md:text-3xl text-foreground tracking-tight" data-numeric>
+                  {s.value}
+                </p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* 24-hour trend + 7-day card */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="lg:col-span-2 glass rounded-3xl p-5 md:p-8"
+          >
+            <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-6 gap-3">
+              <div>
+                <p className="byline text-muted-foreground">02 · 24-hour trend</p>
+                <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
+                  <BarChart2 className="text-primary w-5 h-5" />
+                  How it's tracking
+                </h2>
+              </div>
+              <div className="flex bg-secondary/40 p-1 rounded-xl border border-white/5">
+                {(["temperature", "snowfall", "windSpeed"] as const).map((metric) => (
                   <button
                     key={metric}
                     onClick={() => setActiveChartMetric(metric)}
                     className={cn(
-                      "px-4 py-2 rounded-lg text-sm font-semibold capitalize transition-all",
-                      activeChartMetric === metric 
-                        ? "bg-card text-foreground shadow-sm" 
+                      "px-3 md:px-4 py-1.5 rounded-lg text-xs font-semibold capitalize transition-all",
+                      activeChartMetric === metric
+                        ? "bg-foreground text-background shadow-sm"
                         : "text-muted-foreground hover:text-foreground"
                     )}
                   >
@@ -183,35 +239,27 @@ export default function LocationDetail() {
             <ForecastChart data={hourly} metric={activeChartMetric} />
           </motion.div>
 
-          {/* Multi-model ensemble forecast (radical transparency) */}
-          <div className="lg:col-span-2">
-            <EnsembleForecast locationId={locationId} />
-          </div>
-
-          {/* 7-Day Forecast */}
-          <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
-            className="bg-card p-6 md:p-8 rounded-3xl border border-border shadow-sm"
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25 }}
+            className="glass rounded-3xl p-5 md:p-8"
           >
-            <h2 className="text-2xl font-display font-bold flex items-center gap-2 mb-6">
-              <CalendarDays className="text-primary w-6 h-6" />
-              7-Day Forecast
+            <p className="byline text-muted-foreground">03 · Outlook</p>
+            <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 mb-5 flex items-center gap-2">
+              <CalendarDays className="text-primary w-5 h-5" />
+              7-day forecast
             </h2>
-            <div className="space-y-4">
-              {daily.map((day, i) => (
-                <div key={day.date} className="flex items-center justify-between p-3 hover:bg-muted/50 rounded-xl transition-colors">
-                  <div className="w-1/3">
-                    <p className="font-semibold">{i === 0 ? "Today" : format(parseISO(day.date), "EEE")}</p>
-                    <p className="text-xs text-muted-foreground">{format(parseISO(day.date), "MMM d")}</p>
+            <div className="divide-y divide-white/5">
+              {daily.map((day: any, i: number) => (
+                <div key={day.date} className="flex items-center justify-between py-3">
+                  <div>
+                    <p className="font-medium text-foreground">{i === 0 ? "Today" : format(parseISO(day.date), "EEE")}</p>
+                    <p className="byline text-muted-foreground/60">{format(parseISO(day.date), "MMM d")}</p>
                   </div>
-                  <div className="flex items-center justify-center w-1/3">
-                    <WeatherIcon code={day.weatherCode} className="w-8 h-8" />
-                  </div>
-                  <div className="flex justify-end gap-3 w-1/3 font-display font-semibold">
-                    <span className="text-foreground">{Math.round(day.maxTemp)}°</span>
-                    <span className="text-muted-foreground">{Math.round(day.minTemp)}°</span>
+                  <div className="flex items-baseline gap-2.5 font-display" data-numeric>
+                    <span className="text-foreground text-lg">{Math.round(day.maxTemp)}°</span>
+                    <span className="text-muted-foreground/60 text-sm">{Math.round(day.minTemp)}°</span>
                   </div>
                 </div>
               ))}
@@ -219,31 +267,29 @@ export default function LocationDetail() {
           </motion.div>
         </div>
 
-        {/* Webcams and Lift Status */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Live Webcams Section */}
+        {/* Multi-model ensemble */}
+        <EnsembleForecast locationId={locationId} />
+
+        {/* Webcams + Lifts */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
           {webcamData && webcamData.webcams.length > 0 && (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="bg-card p-6 md:p-8 rounded-3xl border border-border shadow-sm"
+              transition={{ delay: 0.3 }}
+              className="glass rounded-3xl p-5 md:p-8"
             >
-              <h2 className="text-2xl font-display font-bold flex items-center gap-2 mb-6">
-                <Camera className="text-primary w-6 h-6" />
-                Live Webcams
+              <p className="byline text-muted-foreground">05 · Eyes on the mountain</p>
+              <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 mb-5 flex items-center gap-2">
+                <Camera className="text-primary w-5 h-5" />
+                Live webcams
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {webcamData.webcams.slice(0, 4).map((webcam) => (
-                  <div key={webcam.id} className="group overflow-hidden rounded-xl bg-muted relative aspect-video border border-border">
-                    <img 
-                      src={webcam.imageUrl} 
-                      alt={webcam.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-3">
-                      <p className="text-white text-sm font-semibold truncate drop-shadow-md">{webcam.name}</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {webcamData.webcams.slice(0, 4).map((webcam: any) => (
+                  <div key={webcam.id} className="group overflow-hidden rounded-2xl bg-black/40 relative aspect-video border border-white/10">
+                    <img src={webcam.imageUrl} alt={webcam.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent p-3">
+                      <p className="text-white text-xs font-semibold truncate">{webcam.name}</p>
                     </div>
                   </div>
                 ))}
@@ -251,60 +297,59 @@ export default function LocationDetail() {
             </motion.div>
           )}
 
-          {/* Lift Status Section */}
           {isResort && liftData && (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="bg-card p-6 md:p-8 rounded-3xl border border-border shadow-sm flex flex-col"
+              transition={{ delay: 0.35 }}
+              className="glass rounded-3xl p-5 md:p-8 flex flex-col"
             >
-              <div className="flex justify-between items-start mb-6">
-                <h2 className="text-2xl font-display font-bold flex items-center gap-2">
-                  <Cable className="text-primary w-6 h-6" />
-                  Lift Status
-                </h2>
+              <div className="flex justify-between items-start mb-5">
+                <div>
+                  <p className="byline text-muted-foreground">06 · Lift status</p>
+                  <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
+                    <Cable className="text-primary w-5 h-5" />
+                    On the snow
+                  </h2>
+                </div>
                 <div className={cn(
-                  "px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border",
-                  liftData.seasonStatus === 'open' ? "bg-green-500/10 text-green-700 border-green-500/20" :
-                  "bg-amber-500/10 text-amber-700 border-amber-500/20"
+                  "px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border",
+                  liftData.seasonStatus === "open" ? "bg-emerald-500/15 text-emerald-300 border-emerald-500/30" :
+                  "bg-amber-500/15 text-amber-300 border-amber-500/30"
                 )}>
-                  {liftData.seasonStatus.replace('-', ' ')}
+                  {liftData.seasonStatus.replace("-", " ")}
                 </div>
               </div>
 
-              <div className="flex gap-4 mb-6">
-                <div className="bg-muted/50 px-4 py-3 rounded-2xl flex-1 flex flex-col items-center justify-center">
-                  <p className="text-xs text-muted-foreground font-semibold uppercase mb-1">Lifts Open</p>
-                  <p className="text-2xl font-display font-bold leading-none">
-                    <span className="text-primary">{liftData.liftsOpen}</span>
-                    <span className="text-muted-foreground text-lg">/{liftData.totalLifts}</span>
+              <div className="flex gap-6 mb-5 pb-5 border-b border-white/5">
+                <div>
+                  <p className="byline text-muted-foreground/70 mb-1">Lifts open</p>
+                  <p className="font-display text-3xl text-foreground" data-numeric>
+                    <span className={liftData.liftsOpen > 0 ? "text-primary" : ""}>{liftData.liftsOpen}</span>
+                    <span className="text-muted-foreground/40 text-xl">/{liftData.totalLifts}</span>
                   </p>
                 </div>
-                {(liftData.runsOpen !== undefined && liftData.totalRuns !== undefined) && (
-                  <div className="bg-muted/50 px-4 py-3 rounded-2xl flex-1 flex flex-col items-center justify-center">
-                    <p className="text-xs text-muted-foreground font-semibold uppercase mb-1">Runs Open</p>
-                    <p className="text-2xl font-display font-bold leading-none">
-                      <span className="text-blue-500">{liftData.runsOpen}</span>
-                      <span className="text-muted-foreground text-lg">/{liftData.totalRuns}</span>
+                {liftData.runsOpen !== undefined && liftData.totalRuns !== undefined && (
+                  <div>
+                    <p className="byline text-muted-foreground/70 mb-1">Runs open</p>
+                    <p className="font-display text-3xl text-foreground" data-numeric>
+                      <span className={liftData.runsOpen > 0 ? "text-primary" : ""}>{liftData.runsOpen}</span>
+                      <span className="text-muted-foreground/40 text-xl">/{liftData.totalRuns}</span>
                     </p>
                   </div>
                 )}
               </div>
 
-              <div className="space-y-2 flex-1 overflow-y-auto max-h-[300px] pr-2">
-                {liftData.lifts.map((lift) => (
-                  <div key={lift.id} className="flex justify-between items-center p-3 rounded-xl hover:bg-muted/50 border border-transparent hover:border-border transition-colors">
+              <div className="space-y-1 flex-1 overflow-y-auto max-h-[280px] pr-1 hide-scrollbar">
+                {liftData.lifts.map((lift: any) => (
+                  <div key={lift.id} className="flex justify-between items-center px-2 py-2 rounded-lg hover:bg-white/5 transition-colors">
                     <div>
-                      <p className="font-semibold text-sm">{lift.name}</p>
-                      <p className="text-[10px] text-muted-foreground uppercase">{lift.type.replace('-', ' ')}</p>
+                      <p className="text-sm text-foreground">{lift.name}</p>
+                      <p className="byline text-muted-foreground/60">{lift.type.replace("-", " ")}</p>
                     </div>
-                    <div className={cn(
-                      "px-2 py-1 rounded-full text-[10px] font-bold border flex items-center gap-1",
-                      getStatusColor(lift.status)
-                    )}>
+                    <div className={cn("px-2 py-0.5 rounded-full text-[10px] font-semibold border flex items-center gap-1", getStatusColor(lift.status))}>
                       {getStatusIcon(lift.status)}
-                      <span className="capitalize">{lift.status.replace('-', ' ')}</span>
+                      <span className="capitalize">{lift.status.replace("-", " ")}</span>
                     </div>
                   </div>
                 ))}
@@ -313,6 +358,8 @@ export default function LocationDetail() {
           )}
         </div>
 
+        {/* Imagery credit */}
+        <p className="byline text-muted-foreground/40 text-center pt-4">Photography · {imagery.credit}</p>
       </div>
     </AppLayout>
   );

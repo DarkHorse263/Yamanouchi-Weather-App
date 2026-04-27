@@ -57,20 +57,20 @@ function HomeSkeleton() {
   return (
     <div className="p-4 md:p-8 space-y-4 max-w-7xl mx-auto animate-pulse">
       <div className="rounded-3xl bg-slate-200 min-h-[260px]" />
-      <div className="h-20 rounded-2xl bg-slate-100" />
-      <div className="h-16 rounded-2xl bg-slate-100" />
+      <div className="h-20 rounded-2xl bg-white/5" />
+      <div className="h-16 rounded-2xl bg-white/5" />
       <div className="grid grid-cols-3 gap-3">
-        {[...Array(3)].map((_, i) => <div key={i} className="h-24 rounded-2xl bg-slate-100" />)}
+        {[...Array(3)].map((_, i) => <div key={i} className="h-24 rounded-2xl bg-white/5" />)}
       </div>
     </div>
   );
 }
 
 const ALERT_STYLES: Record<string, string> = {
-  powder_day: "bg-violet-600 border-violet-500",
-  warning:    "bg-rose-600 border-rose-500",
-  watch:      "bg-amber-500 border-amber-400",
-  info:       "bg-sky-600 border-sky-500",
+  powder_day: "border-l-2 border-l-primary text-primary",
+  warning:    "border-l-2 border-l-rose-400 text-rose-300",
+  watch:      "border-l-2 border-l-amber-400 text-amber-300",
+  info:       "border-l-2 border-l-sky-400 text-sky-300",
 };
 
 const GREEN_HIGHLIGHTS = [
@@ -90,14 +90,10 @@ function GreenHome({ t }: { t: (en: string, ja: string) => string }) {
         animate={{ opacity: 1, y: 0 }}
         className="text-center pt-2 pb-1"
       >
-        <h2 className="text-base md:text-lg font-semibold text-slate-700 tracking-tight leading-snug inline-flex items-center gap-x-2 flex-wrap justify-center">
+        <h2 className="text-sm md:text-base font-light text-muted-foreground tracking-tight leading-snug inline-flex items-center gap-x-1.5 flex-wrap justify-center">
           <span>{t("I wonder what it", "今")}</span>
-          <img
-            src={`${import.meta.env.BASE_URL}branding/wordmark-inline.png`}
-            alt="feelzlike"
-            className="inline-block h-5 md:h-6 w-auto"
-          />
-          <span>{t("in Yamanouchi right now...", "の山ノ内町は…")}</span>
+          <span className="font-display font-medium italic text-foreground">feelz<span className="text-primary not-italic font-semibold">like</span></span>
+          <span>{t("in Yamanouchi right now…", "の山ノ内町は…")}</span>
         </h2>
       </motion.div>
 
@@ -105,14 +101,20 @@ function GreenHome({ t }: { t: (en: string, ja: string) => string }) {
       <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="relative rounded-3xl overflow-hidden shadow-xl"
-        style={{ minHeight: 260, background: "linear-gradient(135deg, #065f46 0%, #047857 40%, #34d399 100%)" }}
+        className="relative rounded-3xl overflow-hidden shadow-xl bg-slate-900"
+        style={{ minHeight: 260 }}
       >
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")" }} />
+        <img
+          src={`${import.meta.env.BASE_URL}images/hero-slide-1.jpg`}
+          alt="Yamanouchi green season"
+          className="absolute inset-0 w-full h-full object-cover opacity-50"
+        />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(6,33,28,0.85) 0%, rgba(8,18,30,0.6) 60%, rgba(8,18,30,0.4) 100%)" }} />
+        <div className="grain absolute inset-0 opacity-30" />
         <div className="relative z-10 p-6 flex flex-col min-h-[260px] justify-between">
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <TreePine className="w-4 h-4 text-emerald-200" />
+              <TreePine className="w-4 h-4 text-primary" />
               <span className="text-white/60 font-semibold text-[11px] tracking-widest uppercase">
                 {t("GREEN SEASON", "グリーンシーズン")}
               </span>
@@ -144,8 +146,8 @@ function GreenHome({ t }: { t: (en: string, ja: string) => string }) {
       {/* GREEN HIGHLIGHTS */}
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }}>
         <div className="flex items-center gap-2 mb-3">
-          <TreePine className="w-4 h-4 text-emerald-600" />
-          <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wider">{t("Things to Do", "おすすめアクティビティ")}</h2>
+          <TreePine className="w-4 h-4 text-primary" />
+          <h2 className="byline text-muted-foreground/80">{t("Things to Do", "おすすめアクティビティ")}</h2>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           {GREEN_HIGHLIGHTS.map((item, idx) => {
@@ -158,12 +160,12 @@ function GreenHome({ t }: { t: (en: string, ja: string) => string }) {
                 transition={{ delay: 0.1 + idx * 0.05 }}
               >
                 <Link href="/activities">
-                  <div className="bg-white border border-border rounded-2xl p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer h-full">
-                    <div className="w-8 h-8 rounded-xl bg-emerald-50 flex items-center justify-center mb-2">
-                      <Icon className="w-4 h-4 text-emerald-600" />
+                  <div className="glass rounded-2xl p-4 hover:bg-white/8 transition-colors cursor-pointer h-full">
+                    <div className="w-8 h-8 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-2">
+                      <Icon className="w-4 h-4 text-primary" />
                     </div>
-                    <h3 className="font-bold text-sm text-slate-900 leading-tight">{t(item.name, item.nameJa)}</h3>
-                    <p className="text-[10px] text-slate-400 mt-0.5">{t(item.desc, item.descJa)}</p>
+                    <h3 className="font-display font-medium text-sm text-foreground leading-tight">{t(item.name, item.nameJa)}</h3>
+                    <p className="text-[11px] text-muted-foreground/70 mt-1">{t(item.desc, item.descJa)}</p>
                   </div>
                 </Link>
               </motion.div>
@@ -176,9 +178,9 @@ function GreenHome({ t }: { t: (en: string, ja: string) => string }) {
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
         <div className="grid grid-cols-3 gap-3">
           {[
-            { href: "/stay", label: t("Find a Stay", "宿泊を探す"), labelJa: t("Hotels & Ryokans", "ホテル・旅館"), color: "bg-blue-50 text-blue-600" },
-            { href: "/transport", label: t("Getting Here", "アクセス"), labelJa: t("Trains & Buses", "電車・バス"), color: "bg-amber-50 text-amber-600" },
-            { href: "/guide", label: t("Town Guide", "ガイド"), labelJa: t("Tips & Info", "お役立ち情報"), color: "bg-violet-50 text-violet-600" },
+            { href: "/stay", label: t("Find a Stay", "宿泊を探す"), labelJa: t("Hotels & Ryokans", "ホテル・旅館"), color: "glass text-primary" },
+            { href: "/transport", label: t("Getting Here", "アクセス"), labelJa: t("Trains & Buses", "電車・バス"), color: "bg-amber-500/10 border border-amber-400/30 text-amber-300" },
+            { href: "/guide", label: t("Town Guide", "ガイド"), labelJa: t("Tips & Info", "お役立ち情報"), color: "glass text-primary" },
           ].map(link => (
             <Link key={link.href} href={link.href}>
               <div className={`${link.color} rounded-2xl p-4 text-center cursor-pointer hover:shadow-md transition-shadow`}>
@@ -192,8 +194,8 @@ function GreenHome({ t }: { t: (en: string, ja: string) => string }) {
 
       {/* DISCLAIMER */}
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
-        className="rounded-xl border border-border/60 bg-slate-50 px-4 py-3">
-        <p className="text-[10px] leading-relaxed text-slate-400">
+        className="rounded-xl glass px-4 py-3">
+        <p className="text-[10px] leading-relaxed text-muted-foreground/70">
           {t(
             "Weather data from JMA via Open-Meteo. Activity information is for reference — confirm opening dates and conditions directly with operators.",
             "気象データはOpen-Meteo経由の気象庁データ。アクティビティ情報は参考用です。営業日と状況は各施設へ直接ご確認ください。"
@@ -249,14 +251,10 @@ export default function Home() {
         animate={{ opacity: 1, y: 0 }}
         className="text-center pt-2 pb-1"
       >
-        <h2 className="text-base md:text-lg font-semibold text-slate-700 tracking-tight leading-snug inline-flex items-center gap-x-2 flex-wrap justify-center">
+        <h2 className="text-sm md:text-base font-light text-muted-foreground tracking-tight leading-snug inline-flex items-center gap-x-1.5 flex-wrap justify-center">
           <span>{t("I wonder what it", "今")}</span>
-          <img
-            src={`${import.meta.env.BASE_URL}branding/wordmark-inline.png`}
-            alt="feelzlike"
-            className="inline-block h-5 md:h-6 w-auto"
-          />
-          <span>{t("in Yamanouchi right now...", "の山ノ内町は…")}</span>
+          <span className="font-display font-medium italic text-foreground">feelz<span className="text-primary not-italic font-semibold">like</span></span>
+          <span>{t("in Yamanouchi right now…", "の山ノ内町は…")}</span>
         </h2>
       </motion.div>
 
@@ -302,7 +300,7 @@ export default function Home() {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.08 }}
-        className="bg-slate-900 rounded-2xl overflow-hidden"
+        className="glass rounded-2xl overflow-hidden"
       >
         <div className="grid grid-cols-4 divide-x divide-white/10">
           {[
@@ -341,7 +339,7 @@ export default function Home() {
             <Trophy className="w-4 h-4 text-amber-400" />
             <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wider">{t("Best Snow Right Now", "ベストスノー")}</h2>
           </div>
-          <div className="bg-white border border-border rounded-2xl p-5 shadow-sm">
+          <div className="glass rounded-2xl p-5">
             <div className="flex items-start justify-between mb-4">
               <div>
                 <p className="text-[10px] font-bold text-amber-500 uppercase tracking-wider mb-1">#1 Ranked</p>
@@ -380,10 +378,10 @@ export default function Home() {
           </div>
           <div className="space-y-3">
             {data.regions.map((region) => (
-              <div key={region.name} className="bg-white border border-border rounded-2xl px-5 py-4 shadow-sm">
+              <div key={region.name} className="glass rounded-2xl px-5 py-4">
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="font-bold text-slate-900">{t(region.name, region.nameJa)}</h3>
-                  <span className="text-[10px] font-bold bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full">
+                  <span className="text-[10px] font-bold bg-white/5 text-slate-500 px-2 py-0.5 rounded-full">
                     {region.resortCount} {t("resorts", "スキー場")}
                   </span>
                 </div>

@@ -26,7 +26,7 @@ export default function Explore() {
   return (
     <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-8">
       <div>
-        <h1 className="text-3xl md:text-4xl font-black text-mountain-dark">{t("Explore Nagano", "長野を探索")}</h1>
+        <h1 className="text-3xl md:text-4xl font-black text-foreground">{t("Explore Nagano", "長野を探索")}</h1>
         <p className="text-muted-foreground mt-1">{t("Attractions, onsen, culture and activities across the prefecture", "長野県全域の観光・温泉・文化・アクティビティ")}</p>
       </div>
 
@@ -37,7 +37,7 @@ export default function Explore() {
             onClick={() => setCategoryFilter(f.value)}
             className={`px-4 py-1.5 rounded-full font-bold text-sm whitespace-nowrap transition-colors ${
               categoryFilter === f.value
-                ? "bg-mountain-dark text-white"
+                ? "bg-foreground text-background"
                 : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
             }`}
           >
@@ -61,17 +61,17 @@ export default function Explore() {
                 </span>
                 <Badge
                   variant="default"
-                  className="absolute top-3 right-3 bg-white/90 backdrop-blur text-mountain-dark shadow-sm capitalize"
+                  className="absolute top-3 right-3 glass-strong text-foreground shadow-sm capitalize"
                 >
                   {item.category}
                 </Badge>
               </div>
 
               <div className="p-4 flex flex-col flex-1">
-                <h3 className="text-lg font-bold text-mountain-dark mb-1 leading-tight">
+                <h3 className="text-lg font-bold text-foreground mb-1 leading-tight">
                   {t(item.name, item.nameJa)}
                 </h3>
-                <p className="text-sm line-clamp-3 mb-4 text-mountain-dark/80 flex-1">
+                <p className="text-sm line-clamp-3 mb-4 text-muted-foreground flex-1">
                   {t(item.description, item.descriptionJa)}
                 </p>
 

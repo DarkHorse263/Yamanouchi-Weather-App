@@ -172,7 +172,7 @@ export default function Outlook() {
   return (
     <div className="p-4 md:p-8 max-w-4xl mx-auto pb-24">
       <div className="mb-5">
-        <h1 className="text-3xl md:text-4xl font-black text-mountain-dark">
+        <h1 className="text-3xl md:text-4xl font-black text-foreground">
           {t("Weather Outlook", "天気予報")}
         </h1>
         <p className="text-muted-foreground mt-1 text-sm">

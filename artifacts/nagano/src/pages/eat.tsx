@@ -41,7 +41,7 @@ export default function Eat() {
   return (
     <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-6">
       <div>
-        <h1 className="text-3xl md:text-4xl font-black text-mountain-dark">{t("Eat & Drink", "飲食")}</h1>
+        <h1 className="text-3xl md:text-4xl font-black text-foreground">{t("Eat & Drink", "飲食")}</h1>
         <p className="text-muted-foreground mt-1">{t("Dining across Nagano's ski regions", "長野県スキーエリアのダイニング")}</p>
       </div>
 
@@ -52,7 +52,7 @@ export default function Eat() {
             onClick={() => setTypeFilter(f.value)}
             className={`px-4 py-1.5 rounded-full font-bold text-sm whitespace-nowrap transition-colors ${
               typeFilter === f.value
-                ? "bg-mountain-dark text-white"
+                ? "bg-foreground text-background"
                 : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
             }`}
           >
@@ -82,13 +82,13 @@ export default function Eat() {
               </div>
 
               <div className="p-4 flex flex-col flex-1">
-                <h3 className="font-bold text-mountain-dark leading-snug mb-0.5">{t(venue.name, venue.nameJa)}</h3>
+                <h3 className="font-bold text-foreground leading-snug mb-0.5">{t(venue.name, venue.nameJa)}</h3>
                 {venue.cuisine && (
                   <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wide mb-2">
                     {t(venue.cuisine, venue.cuisineJa)}
                   </p>
                 )}
-                <p className="text-sm text-mountain-dark/80 line-clamp-2 flex-1 mb-3">
+                <p className="text-sm text-muted-foreground line-clamp-2 flex-1 mb-3">
                   {t(venue.description, venue.descriptionJa)}
                 </p>
 
@@ -109,7 +109,7 @@ export default function Eat() {
                   <a
                     href={mapsUrl(venue.lat, venue.lng, venue.name)}
                     target="_blank" rel="noreferrer"
-                    className="flex-1 flex justify-center items-center gap-1.5 py-2 rounded-xl bg-secondary text-mountain-dark font-bold text-xs hover:bg-secondary/80 transition-colors"
+                    className="flex-1 flex justify-center items-center gap-1.5 py-2 rounded-xl bg-secondary text-foreground font-bold text-xs hover:bg-secondary/80 transition-colors"
                   >
                     <MapPin className="w-3.5 h-3.5" /> {t("Map", "地図")}
                   </a>

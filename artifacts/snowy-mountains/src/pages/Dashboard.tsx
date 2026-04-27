@@ -4,108 +4,103 @@ import { LocationCard } from "@/components/weather/LocationCard";
 import { LoadingState } from "@/components/ui/loading-state";
 import { ErrorState } from "@/components/ui/error-state";
 import { motion } from "framer-motion";
-import { Activity } from "lucide-react";
+import { REGION_IMAGERY } from "@/lib/mountain-imagery";
 
 export default function Dashboard() {
   const { data, isLoading, error, refetch } = useGetWeather();
-  const base = import.meta.env.BASE_URL;
+  const updated = new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
 
   return (
     <AppLayout>
-      <div className="p-4 md:p-8 space-y-4 md:space-y-5 max-w-7xl mx-auto">
-        {/* feelzlike wonder strip */}
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center pt-2 pb-1"
-        >
-          <h2 className="text-base md:text-lg font-semibold text-slate-700 tracking-tight leading-snug inline-flex items-center gap-x-2 flex-wrap justify-center">
-            <span>I wonder what it</span>
-            <img
-              src={`${base}branding/wordmark-inline.png`}
-              alt="feelzlike"
-              className="inline-block h-5 md:h-6 w-auto"
-            />
-            <span>in the Snowy Mountains right now...</span>
-          </h2>
-        </motion.div>
+      {/* ─── Atmospheric hero ─────────────────────────── */}
+      <section className="relative overflow-hidden grain">
+        <div className="absolute inset-0">
+          <img
+            src={REGION_IMAGERY.hero}
+            alt=""
+            className="w-full h-full object-cover"
+            loading="eager"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/55 to-background" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-accent/5 mix-blend-overlay" />
+        </div>
 
-        {/* Gradient hero */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="relative rounded-3xl overflow-hidden shadow-xl"
-          style={{
-            minHeight: 240,
-            background: "linear-gradient(135deg, #0f172a 0%, #1e3a8a 40%, #60a5fa 100%)",
-          }}
-        >
-          <div className="absolute inset-0">
-            <img
-              src={`${base}images/hero-bg.png`}
-              alt=""
-              className="w-full h-full object-cover opacity-25 mix-blend-overlay"
-            />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-          <div className="relative z-10 p-6 md:p-8 flex flex-col min-h-[240px] justify-between">
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <span className="flex h-2 w-2 rounded-full bg-emerald-300 animate-pulse" />
-                <span className="text-white/80 font-semibold text-[11px] tracking-widest uppercase">
-                  LIVE · BOM Australia
-                </span>
-              </div>
-              <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight leading-none mb-2 drop-shadow-sm">
-                Snowy Mountains
-              </h1>
-              <p className="text-white/85 text-sm md:text-base font-medium">
-                Australia's Alpine Country
-              </p>
-              <p className="text-white/60 text-xs font-medium mt-1">
-                Thredbo · Perisher · Charlotte's Pass · Jindabyne
-              </p>
-            </div>
-            <div className="flex flex-wrap items-end justify-between gap-4 mt-6">
-              <div className="bg-white/10 backdrop-blur px-3.5 py-2 rounded-xl inline-flex items-center gap-2 border border-white/20">
-                <Activity className="w-4 h-4 text-blue-200" />
-                <span className="text-white font-bold text-sm">
-                  {data?.locations.length ?? 4} Resort Towns
-                </span>
-              </div>
-              <p className="text-white/55 text-[11px]">
-                Updated{" "}
-                {new Date().toLocaleTimeString([], {
-                  hour: "numeric",
-                  minute: "2-digit",
-                })}
-              </p>
-            </div>
-          </div>
-        </motion.div>
+        <div className="relative max-w-7xl mx-auto px-5 md:px-10 pt-14 md:pt-24 pb-12 md:pb-20">
+          {/* Live byline */}
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass border-white/10"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60 animate-ping" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+            </span>
+            <span className="byline text-foreground">LIVE · BOM Australia</span>
+          </motion.div>
 
-        {/* Location cards grid */}
+          <motion.h1
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.05 }}
+            className="display-number text-foreground text-[clamp(3.5rem,9vw,7rem)] mt-6 max-w-5xl"
+          >
+            Snowy Mountains
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="mt-3 text-muted-foreground text-base md:text-lg max-w-2xl font-light"
+          >
+            Truthful, source-cited mountain weather for Australia's alpine country.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.18 }}
+            className="mt-8 md:mt-12 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm"
+          >
+            <span className="byline text-muted-foreground">Reading from</span>
+            {["BOM", "ECMWF", "ICON", "MET Norway"].map((s) => (
+              <span key={s} className="font-display text-foreground/90 text-base">{s}</span>
+            ))}
+            <span className="ml-auto byline text-muted-foreground/70">Updated {updated}</span>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ─── Resort grid ─────────────────────────── */}
+      <section className="max-w-7xl mx-auto px-5 md:px-10 pb-20 -mt-6 md:-mt-10 relative z-10">
+        <div className="flex items-end justify-between mb-5">
+          <div>
+            <p className="byline text-muted-foreground">02 · Resort conditions</p>
+            <h2 className="font-display font-semibold text-2xl md:text-3xl mt-1">
+              Right now in the alps
+            </h2>
+          </div>
+          <p className="byline text-muted-foreground/70 hidden md:block">
+            {data?.locations.length ?? 4} towns · live
+          </p>
+        </div>
+
         {isLoading ? (
-          <div className="bg-card rounded-3xl shadow-md p-12">
-            <LoadingState message="Fetching latest resort conditions..." />
+          <div className="glass rounded-3xl p-12">
+            <LoadingState message="Reading live conditions…" />
           </div>
         ) : error ? (
-          <div className="bg-card rounded-3xl shadow-md p-12">
+          <div className="glass rounded-3xl p-12">
             <ErrorState error={error} onRetry={() => refetch()} />
           </div>
         ) : (
-          <div>
-            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 px-1">
-              Resort Conditions
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {data?.locations.map((loc, idx) => (
-                <LocationCard key={loc.location.id} data={loc} index={idx} />
-              ))}
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+            {data?.locations.map((loc: any, idx: number) => (
+              <LocationCard key={loc.location.id} data={loc} index={idx} />
+            ))}
           </div>
         )}
-      </div>
+      </section>
     </AppLayout>
   );
 }

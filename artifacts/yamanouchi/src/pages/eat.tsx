@@ -72,7 +72,7 @@ export default function Eat({ embedded = false }: { embedded?: boolean }) {
     <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-6">
       {!embedded && (
         <div>
-          <h1 className="text-3xl md:text-4xl font-black text-mountain-dark">{t("Eat & Drink", "飲食")}</h1>
+          <h1 className="text-3xl md:text-4xl font-black text-foreground">{t("Eat & Drink", "飲食")}</h1>
           <p className="text-muted-foreground mt-1">{t("Refuel after a long day on the mountain", "山での長い一日の後のエネルギー補給")}</p>
         </div>
       )}
@@ -84,7 +84,7 @@ export default function Eat({ embedded = false }: { embedded?: boolean }) {
             key={v}
             onClick={() => setTab(v)}
             className={`flex-1 py-2.5 rounded-lg font-bold text-sm transition-all ${
-              tab === v ? "bg-white shadow text-mountain-dark" : "text-muted-foreground hover:text-mountain-dark"
+              tab === v ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"
             }`}
           >
             {t(en, ja)}
@@ -100,7 +100,7 @@ export default function Eat({ embedded = false }: { embedded?: boolean }) {
             onClick={() => setTypeFilter(f.value)}
             className={`px-4 py-1.5 rounded-full font-bold text-sm whitespace-nowrap transition-colors ${
               typeFilter === f.value
-                ? "bg-mountain-dark text-white"
+                ? "bg-foreground text-background"
                 : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
             }`}
           >
@@ -119,7 +119,7 @@ export default function Eat({ embedded = false }: { embedded?: boolean }) {
               <section key={area.region}>
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <h2 className="text-xl font-black text-mountain-dark flex items-center gap-2">
+                    <h2 className="text-xl font-black text-foreground flex items-center gap-2">
                       <Mountain className="w-5 h-5 text-primary" />
                       {t(area.label, area.labelJa)}
                     </h2>
@@ -149,7 +149,7 @@ export default function Eat({ embedded = false }: { embedded?: boolean }) {
             return (
               <section key={area.region}>
                 <div className="mb-4">
-                  <h2 className="text-xl font-black text-mountain-dark">
+                  <h2 className="text-xl font-black text-foreground">
                     {area.emoji} {t(area.label, area.labelJa)}
                   </h2>
                   <p className="text-sm text-muted-foreground">{t(area.desc, area.descJa)}</p>
@@ -190,13 +190,13 @@ function VenueGrid({ venues, t }: { venues: any[]; t: (en: string, ja: string | 
 
             {/* Body */}
             <div className="p-4 flex flex-col flex-1">
-              <h3 className="font-bold text-mountain-dark leading-snug mb-0.5">{t(venue.name, venue.nameJa)}</h3>
+              <h3 className="font-bold text-foreground leading-snug mb-0.5">{t(venue.name, venue.nameJa)}</h3>
               {venue.cuisine && (
                 <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wide mb-2">
                   {t(venue.cuisine, venue.cuisineJa)}
                 </p>
               )}
-              <p className="text-sm text-mountain-dark/80 line-clamp-2 flex-1 mb-3">
+              <p className="text-sm text-muted-foreground line-clamp-2 flex-1 mb-3">
                 {t(venue.description, venue.descriptionJa)}
               </p>
 
@@ -219,7 +219,7 @@ function VenueGrid({ venues, t }: { venues: any[]; t: (en: string, ja: string | 
                 <a
                   href={mapsUrl(venue.lat, venue.lng, venue.name)}
                   target="_blank" rel="noreferrer"
-                  className="flex-1 flex justify-center items-center gap-1.5 py-2 rounded-xl bg-secondary text-mountain-dark font-bold text-xs hover:bg-secondary/80 transition-colors"
+                  className="flex-1 flex justify-center items-center gap-1.5 py-2 rounded-xl bg-secondary text-foreground font-bold text-xs hover:bg-secondary/80 transition-colors"
                 >
                   <MapPin className="w-3.5 h-3.5" /> {t("Map", "地図")}
                 </a>

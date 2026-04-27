@@ -5,7 +5,7 @@ import { Loader2 } from "lucide-react";
 export function Card({ className, children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn("bg-card rounded-2xl p-5 shadow-lg shadow-black/5 border border-border/50", className)}
+      className={cn("glass rounded-3xl p-5", className)}
       {...props}
     >
       {children}
@@ -17,19 +17,19 @@ export function StatTile({
   label,
   value,
   unit,
-  colorClass
+  colorClass: _colorClass,
 }: {
   label: string,
   value: string | number | React.ReactNode,
   unit?: string,
-  colorClass: string
+  colorClass?: string
 }) {
   return (
-    <div className={cn("rounded-2xl p-4 flex flex-col justify-between text-white shadow-lg", colorClass)}>
-      <span className="text-xs font-bold uppercase tracking-wider opacity-80">{label}</span>
-      <div className="mt-2 flex items-baseline gap-1">
-        <span className="text-2xl font-display font-bold leading-none">{value}</span>
-        {unit && <span className="text-sm font-medium opacity-80">{unit}</span>}
+    <div className="glass rounded-3xl p-5 flex flex-col justify-between min-h-[110px]">
+      <span className="byline text-muted-foreground">{label}</span>
+      <div className="mt-3 flex items-baseline gap-1.5">
+        <span className="display-number text-foreground text-4xl" data-numeric>{value}</span>
+        {unit && <span className="text-sm font-medium text-muted-foreground/80">{unit}</span>}
       </div>
     </div>
   );

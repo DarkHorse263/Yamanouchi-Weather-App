@@ -124,7 +124,7 @@ export default function Activities() {
   return (
     <div className="p-4 md:p-8 max-w-4xl mx-auto pb-24">
       <div className="mb-6">
-        <h1 className="text-3xl md:text-4xl font-black text-mountain-dark">
+        <h1 className="text-3xl md:text-4xl font-black text-foreground">
           {t("Green Season Activities", "グリーンシーズンのアクティビティ")}
         </h1>
         <p className="text-muted-foreground mt-1 text-sm">
@@ -152,7 +152,7 @@ export default function Activities() {
                     <Icon className="w-5 h-5 text-emerald-600" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-sm text-mountain-dark leading-tight">
+                    <h3 className="font-bold text-sm text-foreground leading-tight">
                       {t(a.name, a.nameJa)}
                     </h3>
                     <p className="text-[11px] text-muted-foreground mt-0.5">

@@ -11,7 +11,7 @@ export default function Cams() {
   return (
     <div className="p-4 md:p-8 max-w-4xl mx-auto pb-28">
       <div className="mb-6">
-        <h1 className="text-3xl md:text-4xl font-black text-mountain-dark">
+        <h1 className="text-3xl md:text-4xl font-black text-foreground">
           {t("Live Cams", "ライブカメラ")}
         </h1>
         <p className="text-muted-foreground mt-1 text-sm">

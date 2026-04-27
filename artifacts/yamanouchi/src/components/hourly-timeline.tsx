@@ -39,11 +39,11 @@ export function HourlyTimeline({ lastUpdatedAt, className }: HourlyTimelineProps
     : null;
 
   return (
-    <div className={cn("rounded-2xl border border-border bg-white p-4", className)}>
+    <div className={cn("rounded-2xl glass p-4", className)}>
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <Clock className="w-4 h-4 text-primary" />
-          <span className="text-sm font-bold text-mountain-dark">
+          <span className="text-sm font-bold text-foreground">
             {t("Today's Updates", "本日の更新スケジュール")}
           </span>
         </div>

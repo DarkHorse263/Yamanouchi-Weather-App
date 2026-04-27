@@ -31,7 +31,7 @@ export default function Explore({ embedded = false }: { embedded?: boolean }) {
     <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-8">
       {!embedded && (
         <div>
-          <h1 className="text-3xl md:text-4xl font-black text-mountain-dark">{t("Explore Yamanouchi", "山ノ内を探索")}</h1>
+          <h1 className="text-3xl md:text-4xl font-black text-foreground">{t("Explore Yamanouchi", "山ノ内を探索")}</h1>
           <p className="text-muted-foreground mt-1">{t("Every hotel, restaurant, onsen and attraction — all in one place", "ホテル・レストラン・温泉・観光スポットをまとめて検索")}</p>
         </div>
       )}
@@ -39,7 +39,7 @@ export default function Explore({ embedded = false }: { embedded?: boolean }) {
       {/* Official Interactive Map */}
       <div className="rounded-2xl overflow-hidden border border-border shadow-lg">
         {/* Map header */}
-        <div className="flex items-center justify-between px-4 py-3 bg-mountain-dark text-white">
+        <div className="flex items-center justify-between px-4 py-3 bg-foreground text-background">
           <div className="flex items-center gap-2">
             <Map className="w-4 h-4 text-primary" />
             <div>
@@ -68,7 +68,7 @@ export default function Explore({ embedded = false }: { embedded?: boolean }) {
         </div>
 
         {/* Category quick-links inside the map bar */}
-        <div className="flex gap-2 px-4 py-2 bg-mountain-dark/90 overflow-x-auto hide-scrollbar text-white/80 text-xs">
+        <div className="flex gap-2 px-4 py-2 glass-strong overflow-x-auto hide-scrollbar text-white/80 text-xs">
           {[
             { label: t("🏨 Stay", "🏨 宿泊"), url: "https://platinumaps.jp/d/yamanouchi?culture=en&c=stay" },
             { label: t("🍜 Eat", "🍜 飲食"), url: "https://platinumaps.jp/d/yamanouchi?culture=en&c=eat" },
@@ -114,7 +114,7 @@ export default function Explore({ embedded = false }: { embedded?: boolean }) {
       {/* Curated Highlights section */}
       {data && data.length > 0 && (
         <div>
-          <h2 className="text-xl font-black text-mountain-dark mb-1">{t("Curated Highlights", "おすすめスポット")}</h2>
+          <h2 className="text-xl font-black text-foreground mb-1">{t("Curated Highlights", "おすすめスポット")}</h2>
           <p className="text-sm text-muted-foreground mb-4">{t("Hand-picked attractions from our local team", "地元チームが厳選した観光スポット")}</p>
 
           <div className="flex overflow-x-auto hide-scrollbar gap-2 mb-5">
@@ -124,7 +124,7 @@ export default function Explore({ embedded = false }: { embedded?: boolean }) {
                 onClick={() => setCategoryFilter(f.value)}
                 className={`px-4 py-1.5 rounded-full font-bold text-sm whitespace-nowrap transition-colors ${
                   categoryFilter === f.value
-                    ? "bg-mountain-dark text-white"
+                    ? "bg-foreground text-background"
                     : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
                 }`}
               >
@@ -156,17 +156,17 @@ export default function Explore({ embedded = false }: { embedded?: boolean }) {
                     )}
                     <Badge
                       variant="default"
-                      className="absolute top-3 right-3 bg-white/90 backdrop-blur text-mountain-dark shadow-sm capitalize"
+                      className="absolute top-3 right-3 glass-strong text-foreground shadow-sm capitalize"
                     >
                       {item.category}
                     </Badge>
                   </div>
 
                   <div className="p-4 flex flex-col flex-1">
-                    <h3 className="text-lg font-bold text-mountain-dark mb-1 leading-tight">
+                    <h3 className="text-lg font-bold text-foreground mb-1 leading-tight">
                       {t(item.name, item.nameJa)}
                     </h3>
-                    <p className="text-sm line-clamp-3 mb-4 text-mountain-dark/80 flex-1">
+                    <p className="text-sm line-clamp-3 mb-4 text-muted-foreground flex-1">
                       {t(item.description, item.descriptionJa)}
                     </p>
 

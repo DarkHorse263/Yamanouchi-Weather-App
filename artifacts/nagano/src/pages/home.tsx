@@ -56,10 +56,10 @@ function HeroSlideshow({ base }: { base: string }) {
 }
 
 const ALERT_STYLES: Record<string, string> = {
-  powder_day: "bg-purple-600 border-purple-700",
-  warning:    "bg-red-600 border-red-700",
-  watch:      "bg-amber-500 border-amber-600",
-  info:       "bg-blue-600 border-blue-700",
+  powder_day: "border-l-2 border-l-primary text-primary",
+  warning:    "border-l-2 border-l-rose-400 text-rose-300",
+  watch:      "border-l-2 border-l-amber-400 text-amber-300",
+  info:       "border-l-2 border-l-sky-400 text-sky-300",
 };
 
 export default function Home() {
@@ -81,24 +81,27 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           className="space-y-2"
         >
-          {activeAlerts.map((alert) => (
-            <Link key={alert.id} href="/alerts">
-              <div className={`flex items-center justify-between px-4 py-3 rounded-2xl border shadow-lg cursor-pointer text-white ${ALERT_STYLES[alert.alertLevel] ?? ALERT_STYLES.info}`}>
-                <div className="flex items-center gap-3">
-                  <BellRing className="w-4 h-4 shrink-0 animate-pulse" />
-                  <div>
-                    <span className="text-[10px] font-black uppercase tracking-widest opacity-80 block leading-none mb-0.5">
-                      {t(alert.alertLevel.replace("_", " "), alert.alertLevel === "powder_day" ? "パウダーデー" : alert.alertLevel === "warning" ? "警報" : "注意報")}
-                    </span>
-                    <span className="font-bold text-sm leading-tight">
-                      {t(alert.message, alert.messageJa)}
-                    </span>
+          {activeAlerts.map((alert) => {
+            const accent = ALERT_STYLES[alert.alertLevel] ?? ALERT_STYLES.info;
+            return (
+              <Link key={alert.id} href="/alerts">
+                <div className={`flex items-center justify-between px-5 py-3 rounded-2xl glass cursor-pointer ${accent}`}>
+                  <div className="flex items-center gap-3">
+                    <BellRing className="w-4 h-4 shrink-0" />
+                    <div>
+                      <span className="byline opacity-80 block leading-none mb-1">
+                        {t(alert.alertLevel.replace("_", " "), alert.alertLevel === "powder_day" ? "パウダーデー" : alert.alertLevel === "warning" ? "警報" : "注意報")}
+                      </span>
+                      <span className="font-medium text-sm leading-tight text-foreground">
+                        {t(alert.message, alert.messageJa)}
+                      </span>
+                    </div>
                   </div>
+                  <ChevronRight className="w-4 h-4 opacity-50 shrink-0" />
                 </div>
-                <ChevronRight className="w-4 h-4 opacity-70 shrink-0" />
-              </div>
-            </Link>
-          ))}
+              </Link>
+            );
+          })}
         </motion.div>
       )}
 
@@ -107,21 +110,17 @@ export default function Home() {
         animate={{ opacity: 1, y: 0 }}
         className="text-center pt-2 pb-1"
       >
-        <h2 className="text-base md:text-lg font-semibold text-slate-700 tracking-tight leading-snug inline-flex items-center gap-x-2 flex-wrap justify-center">
+        <h2 className="text-sm md:text-base font-light text-muted-foreground tracking-tight leading-snug inline-flex items-center gap-x-1.5 flex-wrap justify-center">
           <span>{t("I wonder what it", "今")}</span>
-          <img
-            src={`${import.meta.env.BASE_URL}branding/wordmark-inline.png`}
-            alt="feelzlike"
-            className="inline-block h-5 md:h-6 w-auto"
-          />
-          <span>{t("in Nagano right now...", "の長野県は…")}</span>
+          <span className="font-display font-medium italic text-foreground">feelz<span className="text-primary not-italic font-semibold">like</span></span>
+          <span>{t("in Nagano right now…", "の長野県は…")}</span>
         </h2>
       </motion.div>
 
       <motion.div
         initial={{ opacity: 0, scale: 0.97 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="relative rounded-3xl overflow-hidden shadow-2xl shadow-primary/20 bg-mountain-dark"
+        className="relative rounded-3xl overflow-hidden shadow-2xl shadow-primary/20 bg-secondary"
       >
         <HeroSlideshow base={import.meta.env.BASE_URL} />
 
@@ -136,7 +135,7 @@ export default function Home() {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight mb-2">
               {t("Nagano Prefecture", "長野県")}
             </h1>
-            <p className="text-ice-blue text-lg md:text-xl font-medium max-w-xl">
+            <p className="text-primary text-lg md:text-xl font-medium max-w-xl">
               {t("Snow Intelligence Platform", "スノーインテリジェンスプラットフォーム")}
             </p>
             <p className="text-white/70 font-medium text-sm mt-1">
@@ -145,7 +144,7 @@ export default function Home() {
           </div>
 
           <div className="flex flex-wrap items-end justify-between gap-4 mt-8">
-            <div className="glass-dark px-4 py-2 rounded-xl inline-flex items-center gap-2 border-white/10">
+            <div className="glass px-4 py-2 rounded-xl inline-flex items-center gap-2 border-white/10">
               <Activity className="w-4 h-4 text-primary" />
               <span className="text-white font-bold">{data.totalSkiAreas} {t("Ski Resorts", "スキー場")}</span>
             </div>
@@ -198,32 +197,32 @@ export default function Home() {
             <Trophy className="w-5 h-5 text-amber-500" />
             <h2 className="text-xl font-bold">{t("Best Snow Right Now", "現在のベストスノー")}</h2>
           </div>
-          <Card className="bg-gradient-to-br from-amber-50 to-orange-100 border-orange-200">
+          <Card className="border-l-2 border-l-accent">
             <div className="flex items-start justify-between mb-4">
               <div>
-                <span className="text-xs font-bold text-orange-600 uppercase tracking-wider">{t("#1 Ranked", "1位")}</span>
-                <h3 className="text-2xl font-black text-mountain-dark leading-tight mt-1">
+                <span className="byline text-accent">{t("#1 Ranked", "1位")}</span>
+                <h3 className="font-display font-semibold text-2xl text-foreground leading-tight mt-1">
                   {t(data.bestResort.name, data.bestResort.nameJa)}
                 </h3>
-                <p className="text-sm font-medium text-muted-foreground">
+                <p className="text-sm text-muted-foreground mt-0.5">
                   {t(data.bestResort.region, data.bestResort.regionJa)}
                 </p>
               </div>
-              <div className="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-xl">🥇</div>
+              <div className="w-10 h-10 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center text-lg">🥇</div>
             </div>
-            <div className="grid grid-cols-2 gap-3 mt-4">
+            <div className="grid grid-cols-2 gap-y-4 gap-x-3 mt-4 pt-4 border-t border-white/5">
               {[
-                { icon: Snowflake, label: t("24h Snow", "24h降雪"), value: `${data.bestResort.snow24h ?? 0} cm`, color: "text-blue-600" },
-                { icon: Ruler, label: t("Base", "積雪"), value: `${data.bestResort.baseDepth ?? 0} cm`, color: "text-indigo-600" },
-                { icon: ThermometerSnowflake, label: t("Temp", "気温"), value: `${data.bestResort.temp ?? '--'}°C`, color: "text-red-600" },
-                { icon: Wind, label: t("Wind", "風速"), value: `${data.bestResort.wind ?? '--'} km/h`, color: "text-emerald-600" },
-              ].map(({ icon: Icon, label, value, color }) => (
-                <div key={label} className="bg-white/60 p-3 rounded-xl">
-                  <div className={`flex items-center gap-1.5 ${color} mb-1`}>
-                    <Icon className="w-4 h-4" />
-                    <span className="text-xs font-bold uppercase">{label}</span>
+                { icon: Snowflake, label: t("24h Snow", "24h降雪"), value: `${data.bestResort.snow24h ?? 0} cm` },
+                { icon: Ruler, label: t("Base", "積雪"), value: `${data.bestResort.baseDepth ?? 0} cm` },
+                { icon: ThermometerSnowflake, label: t("Temp", "気温"), value: `${data.bestResort.temp ?? '--'}°C` },
+                { icon: Wind, label: t("Wind", "風速"), value: `${data.bestResort.wind ?? '--'} km/h` },
+              ].map(({ icon: Icon, label, value }) => (
+                <div key={label}>
+                  <div className="flex items-center gap-1.5 text-muted-foreground/70 mb-1 byline">
+                    <Icon className="w-3 h-3" />
+                    {label}
                   </div>
-                  <div className="text-lg font-black">{value}</div>
+                  <div className="font-display text-xl text-foreground" data-numeric>{value}</div>
                 </div>
               ))}
             </div>

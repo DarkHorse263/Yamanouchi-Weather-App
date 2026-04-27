@@ -10,7 +10,7 @@ export default function Guide() {
   return (
     <div className="flex flex-col" style={{ height: "calc(100vh - 64px)" }}>
       <div className="flex items-center justify-between px-4 py-2.5 border-b border-border bg-background/95 backdrop-blur shrink-0">
-        <h1 className="text-base font-black text-mountain-dark">
+        <h1 className="text-base font-black text-foreground">
           {t("Visitor Guide", "観光ガイド")}
         </h1>
         <div className="flex items-center gap-3">

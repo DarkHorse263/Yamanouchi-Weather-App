@@ -18,17 +18,17 @@ export default function Alerts() {
 
   const getAlertColor = (level: string) => {
     switch (level) {
-      case 'powder_day': return 'bg-purple-500 text-white border-purple-600';
-      case 'warning': return 'bg-red-500 text-white border-red-600';
-      case 'watch': return 'bg-amber-500 text-white border-amber-600';
-      default: return 'bg-blue-500 text-white border-blue-600';
+      case 'powder_day': return 'glass border-l-2 border-l-primary text-foreground';
+      case 'warning': return 'glass border-l-2 border-l-rose-400 text-foreground';
+      case 'watch': return 'glass border-l-2 border-l-amber-400 text-foreground';
+      default: return 'glass border-l-2 border-l-sky-400 text-foreground';
     }
   };
 
   return (
     <div className="p-4 md:p-8 max-w-4xl mx-auto space-y-8">
       <div>
-        <h1 className="text-3xl md:text-4xl font-black text-mountain-dark flex items-center gap-3">
+        <h1 className="text-3xl md:text-4xl font-black text-foreground flex items-center gap-3">
           <BellRing className="w-8 h-8 text-primary" />
           {t("Powder Alerts", "パウダーアラート")}
         </h1>
@@ -36,12 +36,12 @@ export default function Alerts() {
       </div>
 
       <div className="space-y-6">
-        <h2 className="text-2xl font-bold text-mountain-dark">{t("Active Alerts", "現在のアラート")}</h2>
+        <h2 className="text-2xl font-bold text-foreground">{t("Active Alerts", "現在のアラート")}</h2>
 
         {data.alerts.length === 0 ? (
           <Card className="bg-secondary/50 border-dashed text-center py-12">
             <Info className="w-12 h-12 text-muted-foreground mx-auto mb-3 opacity-50" />
-            <h3 className="text-lg font-bold text-mountain-dark">{t("No active alerts", "現在アラートはありません")}</h3>
+            <h3 className="text-lg font-bold text-foreground">{t("No active alerts", "現在アラートはありません")}</h3>
             <p className="text-muted-foreground">{t("Conditions are stable.", "コンディションは安定しています。")}</p>
           </Card>
         ) : (
@@ -84,7 +84,7 @@ export default function Alerts() {
       </div>
 
       <div className="space-y-6 pt-8 border-t border-border">
-        <h2 className="text-2xl font-bold text-mountain-dark flex items-center gap-2">
+        <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
           <CloudLightning className="w-6 h-6 text-indigo-500" />
           {t("Storm Tracker", "ストームトラッカー")}
         </h2>
@@ -112,7 +112,7 @@ export default function Alerts() {
                 {storm.totalSnow && (
                   <div>
                     <span className="text-xs font-bold uppercase text-muted-foreground block">{t("Total", "合計")}</span>
-                    <span className="text-lg font-black text-mountain-dark">{storm.totalSnow} cm</span>
+                    <span className="text-lg font-black text-foreground">{storm.totalSnow} cm</span>
                   </div>
                 )}
                 {storm.peakSnow24h && (

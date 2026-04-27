@@ -57,34 +57,34 @@ export default function BusServices() {
               animate={{ opacity: 1, y: 0 }}
               className="w-full lg:w-1/3 shrink-0 space-y-6"
             >
-              <div className="bg-primary text-primary-foreground p-8 rounded-3xl shadow-lg">
-                <h2 className="text-2xl font-display font-bold mb-6">Service Provider</h2>
-                <p className="text-primary-foreground/90 font-medium text-lg mb-8">{data.provider}</p>
-                
-                <div className="space-y-4">
-                  <a href={`tel:${data.phone}`} className="flex items-center gap-4 hover:bg-black/10 p-3 rounded-xl transition-colors">
-                    <div className="p-2 bg-white/20 rounded-full">
-                      <Phone className="w-5 h-5" />
+              <div className="glass p-7 rounded-3xl">
+                <p className="byline text-muted-foreground mb-2">Service provider</p>
+                <h2 className="font-display font-semibold text-2xl text-foreground mb-5">{data.provider}</h2>
+
+                <div className="space-y-2">
+                  <a href={`tel:${data.phone}`} className="flex items-center gap-3 hover:bg-white/5 p-3 -mx-3 rounded-xl transition-colors text-foreground">
+                    <div className="p-2 rounded-full bg-primary/15 text-primary">
+                      <Phone className="w-4 h-4" />
                     </div>
-                    <span className="font-semibold">{data.phone}</span>
+                    <span className="font-medium">{data.phone}</span>
                   </a>
-                  
-                  <a href={data.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 hover:bg-black/10 p-3 rounded-xl transition-colors">
-                    <div className="p-2 bg-white/20 rounded-full">
-                      <Globe className="w-5 h-5" />
+
+                  <a href={data.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:bg-white/5 p-3 -mx-3 rounded-xl transition-colors text-foreground">
+                    <div className="p-2 rounded-full bg-primary/15 text-primary">
+                      <Globe className="w-4 h-4" />
                     </div>
-                    <span className="font-semibold break-all">Visit Website</span>
+                    <span className="font-medium break-all">Visit website</span>
                   </a>
                 </div>
               </div>
 
               {data.bookingInfo && (
-                <div className="bg-card border border-border p-8 rounded-3xl shadow-sm">
-                  <h3 className="font-display font-bold text-xl flex items-center gap-2 mb-4">
-                    <CalendarCheck className="w-5 h-5 text-primary" />
-                    Booking Info
+                <div className="glass p-7 rounded-3xl">
+                  <h3 className="font-display font-semibold text-lg flex items-center gap-2 mb-3 text-foreground">
+                    <CalendarCheck className="w-4 h-4 text-primary" />
+                    Booking info
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-muted-foreground text-sm leading-relaxed">
                     {data.bookingInfo}
                   </p>
                 </div>
