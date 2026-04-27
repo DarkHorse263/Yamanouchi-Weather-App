@@ -12,6 +12,7 @@ import {
   BellRing,
   ChevronLeft,
 } from "lucide-react";
+import wordmarkSnow from "@assets/feelzlike_WordMarque_colour_160426_1777272466909.png";
 import { useLanguage } from "@/hooks/use-language";
 import { cn } from "@/lib/utils";
 
@@ -52,8 +53,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
             {t("All regions", "全地域")}
           </a>
           <a href="/" className="block mt-4 mb-1.5">
-            <span className="font-display font-medium text-2xl tracking-tight text-foreground italic">
-              feelz<span className="text-primary not-italic font-semibold">like</span>
+            <span className="inline-flex items-center justify-center px-3 py-2 rounded-xl bg-white/95 backdrop-blur-md border border-white/10 shadow-sm">
+              <img src={wordmarkSnow} alt="feelzlike" className="h-6 w-auto" />
             </span>
           </a>
           <p className="font-display font-semibold text-base leading-tight text-foreground">
@@ -114,8 +115,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <span className="byline">{t("Regions", "戻る")}</span>
         </a>
         <a href="/" className="flex items-center">
-          <span className="font-display font-medium text-base tracking-tight text-foreground italic">
-            feelz<span className="text-primary not-italic font-semibold">like</span>
+          <span className="inline-flex items-center justify-center px-2.5 py-1.5 rounded-lg bg-white/95 backdrop-blur-md border border-white/10 shadow-sm">
+            <img src={wordmarkSnow} alt="feelzlike" className="h-4 w-auto" />
           </span>
         </a>
         <div className="flex bg-secondary/50 p-0.5 rounded-md border border-white/10">

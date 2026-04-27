@@ -13,6 +13,7 @@ import {
   Leaf,
   ChevronLeft,
 } from "lucide-react";
+import wordmarkSnow from "@assets/feelzlike_WordMarque_colour_160426_1777272466909.png";
 import { useLanguage } from "@/hooks/use-language";
 import { useSeason } from "@/hooks/use-season";
 import { cn } from "@/lib/utils";
@@ -102,8 +103,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
             {t("All regions", "全地域")}
           </a>
           <a href="/" className="block mb-2">
-            <span className="font-display italic text-3xl tracking-tight text-foreground">
-              feelz<span className="text-primary not-italic font-semibold">like</span>
+            <span className="inline-flex items-center justify-center px-3 py-2 rounded-xl bg-white/95 backdrop-blur-md border border-white/10 shadow-sm">
+              <img src={wordmarkSnow} alt="feelzlike" className="h-7 w-auto" />
             </span>
           </a>
           <p className="byline mt-1.5 text-muted-foreground/70">Yamanouchi Town</p>
@@ -163,8 +164,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <ChevronLeft className="w-5 h-5 text-muted-foreground" />
           </a>
           <a href="/" className="flex items-center gap-2">
-            <span className="font-display italic text-xl tracking-tight text-foreground leading-none">
-              feelz<span className="text-primary not-italic font-semibold">like</span>
+            <span className="inline-flex items-center justify-center px-2.5 py-1.5 rounded-lg bg-white/95 backdrop-blur-md border border-white/10 shadow-sm">
+              <img src={wordmarkSnow} alt="feelzlike" className="h-4 w-auto" />
             </span>
           </a>
         </div>

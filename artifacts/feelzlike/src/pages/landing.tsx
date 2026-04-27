@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Search, MapPin, ArrowRight, ShieldCheck } from "lucide-react";
 import { useState } from "react";
+import lockupSnow from "@assets/feelzlike_colour_150426_1777272466909.png";
 
 const REGIONS = [
   {
@@ -95,17 +96,26 @@ export default function Landing() {
         </div>
 
         <div className="relative max-w-3xl mx-auto px-5 pt-12 pb-20 md:pt-20 md:pb-32">
-          {/* tiny brand line */}
+          {/* brand lockup */}
           <motion.div
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex items-center gap-2 mb-8 md:mb-10"
+            className="mb-8 md:mb-10"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
-            <span className="text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.22em] text-sky-300/90">
-              feelzlike · global mountain weather intelligence
-            </span>
+            <div className="inline-flex items-center justify-center px-5 py-3 md:px-6 md:py-4 rounded-2xl bg-white/95 backdrop-blur-xl border border-white/20 shadow-[0_8px_30px_rgba(0,0,0,0.25)]">
+              <img
+                src={lockupSnow}
+                alt="feelzlike — global mountain weather intelligence"
+                className="h-14 md:h-16 w-auto"
+              />
+            </div>
+            <div className="flex items-center gap-2 mt-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
+              <span className="text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.22em] text-sky-300/90">
+                Global mountain weather intelligence
+              </span>
+            </div>
           </motion.div>
 
           {/* editorial headline */}
