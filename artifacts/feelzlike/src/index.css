@@ -140,9 +140,9 @@
   --chart-4: red; /*replace with H S L */
   --chart-5: red; /*replace with H S L */
 
-  --app-font-sans: 'Inter', sans-serif;
-  --app-font-serif: Georgia, serif;
-  --app-font-mono: Menlo, monospace;
+  --app-font-sans: 'DIN Pro', system-ui, sans-serif;
+  --app-font-serif: 'DIN Pro', system-ui, sans-serif;
+  --app-font-mono: 'DIN Pro', ui-monospace, Menlo, monospace;
   --radius: .5rem; /* 8px */
   --shadow-2xs: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0.00); /*replace with H S L */
   --shadow-xs: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0.00); /*replace with H S L */

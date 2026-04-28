@@ -113,7 +113,7 @@ export default function Landing() {
   return (
     <div
       className="min-h-screen bg-[#f6f8fb] text-slate-900 antialiased"
-      style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
+      style={{ fontFamily: "'DIN Pro', system-ui, sans-serif" }}
     >
       {/* ─── HERO ─────────────────────────────────────── */}
       <header className="relative bg-white">
@@ -260,7 +260,10 @@ export default function Landing() {
                     </p>
                     <h3
                       className="text-2xl md:text-3xl text-slate-900 tracking-tight leading-tight"
-                      style={{ fontFamily: "'Fraunces', Georgia, serif" }}
+                      style={{
+                        fontFamily: "'DIN Pro', system-ui, sans-serif",
+                        fontWeight: 700,
+                      }}
                     >
                       {region.name}
                     </h3>
@@ -315,7 +318,10 @@ export default function Landing() {
               </p>
               <p
                 className="text-xl md:text-2xl text-slate-900 tracking-tight max-w-lg leading-tight"
-                style={{ fontFamily: "'Fraunces', Georgia, serif" }}
+                style={{
+                  fontFamily: "'DIN Pro', system-ui, sans-serif",
+                  fontWeight: 700,
+                }}
               >
                 Built by mountain people, for mountain people.
               </p>
