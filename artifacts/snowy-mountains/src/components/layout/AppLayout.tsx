@@ -13,7 +13,7 @@ import {
 import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { InstallPrompt } from "./InstallPrompt";
-import wordmarkSnow from "@assets/feelzlike_dark/feelzlike_WordMarque_colour_160426_1777334678269_dark.png";
+import wordmark from "@assets/feelzlike_trimmed/feelzlike_WordMarque_colour_160426_1777334678269_trim.png";
 
 type NavItem = { path: string; icon: any; label: string };
 
@@ -38,15 +38,14 @@ const RESORTS = [
 
 export function AppLayout({ children }: { children: ReactNode }) {
   const [location] = useLocation();
-  const base = import.meta.env.BASE_URL;
 
   const isActive = (path: string) =>
     path === "/" ? location === "/" : location.startsWith(path);
 
   return (
     <div className="min-h-screen bg-background flex flex-col md:flex-row">
-      {/* Desktop Sidebar — refined dark column with editorial header */}
-      <aside className="hidden md:flex flex-col w-64 fixed inset-y-0 left-0 z-50 border-r border-border/60 bg-background/80 backdrop-blur-xl">
+      {/* Desktop sidebar — clean white column with hairline border */}
+      <aside className="hidden md:flex flex-col w-64 fixed inset-y-0 left-0 z-50 border-r border-border bg-white">
         <div className="px-6 pt-6 pb-5">
           <a
             href="/"
@@ -56,16 +55,12 @@ export function AppLayout({ children }: { children: ReactNode }) {
             All regions
           </a>
           <a href="/" className="block mt-4 mb-1.5">
-            <img
-              src={wordmarkSnow}
-              alt="feelzlike"
-              className="h-7 w-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]"
-            />
+            <img src={wordmark} alt="feelzlike" className="h-8 w-auto" />
           </a>
           <p className="font-display font-semibold text-base leading-tight text-foreground">
             Snowy Mountains
           </p>
-          <p className="byline mt-1.5 text-muted-foreground/70">NSW · Australia</p>
+          <p className="byline mt-1.5 text-muted-foreground/80">NSW · Australia</p>
         </div>
 
         <div className="rule mx-6" />
@@ -81,12 +76,12 @@ export function AppLayout({ children }: { children: ReactNode }) {
                 className={cn(
                   "group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-150 text-sm font-medium",
                   active
-                    ? "text-foreground bg-secondary/60"
-                    : "text-muted-foreground hover:bg-secondary/40 hover:text-foreground"
+                    ? "text-primary bg-primary/8"
+                    : "text-muted-foreground hover:bg-secondary hover:text-foreground"
                 )}
               >
                 {active && (
-                  <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full bg-primary shadow-[0_0_12px_hsl(var(--primary))]" />
+                  <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full bg-primary" />
                 )}
                 <Icon className={cn("w-4 h-4 transition-colors", active ? "text-primary" : "")} />
                 {item.label}
@@ -104,12 +99,12 @@ export function AppLayout({ children }: { children: ReactNode }) {
                 className={cn(
                   "group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-150 text-sm font-medium",
                   active
-                    ? "text-foreground bg-secondary/60"
-                    : "text-muted-foreground hover:bg-secondary/40 hover:text-foreground"
+                    ? "text-primary bg-primary/8"
+                    : "text-muted-foreground hover:bg-secondary hover:text-foreground"
                 )}
               >
                 {active && (
-                  <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full bg-primary shadow-[0_0_12px_hsl(var(--primary))]" />
+                  <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full bg-primary" />
                 )}
                 <Icon className={cn("w-4 h-4", active ? "text-primary" : "")} />
                 {item.label}
@@ -118,7 +113,7 @@ export function AppLayout({ children }: { children: ReactNode }) {
           })}
 
           <div className="pt-5 mt-3">
-            <p className="px-3 byline text-muted-foreground/60 mb-1.5">Resorts</p>
+            <p className="px-3 byline text-muted-foreground/70 mb-1.5">Resorts</p>
             {RESORTS.map((r) => {
               const active = location === r.path;
               return (
@@ -128,12 +123,12 @@ export function AppLayout({ children }: { children: ReactNode }) {
                   className={cn(
                     "group relative flex items-center gap-3 px-3 py-2 rounded-lg transition-all text-sm",
                     active
-                      ? "text-foreground bg-secondary/60 font-medium"
-                      : "text-muted-foreground/80 hover:text-foreground hover:bg-secondary/30"
+                      ? "text-primary bg-primary/8 font-medium"
+                      : "text-muted-foreground hover:text-foreground hover:bg-secondary"
                   )}
                 >
                   {active && (
-                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-4 rounded-full bg-primary shadow-[0_0_12px_hsl(var(--primary))]" />
+                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-4 rounded-full bg-primary" />
                   )}
                   <Mountain className={cn("w-3.5 h-3.5", active ? "text-primary" : "opacity-50")} />
                   {r.label}
@@ -144,11 +139,11 @@ export function AppLayout({ children }: { children: ReactNode }) {
         </nav>
 
         <div className="px-6 pb-5 pt-3">
-          <p className="byline text-muted-foreground/50">v0.2 · feelzlike</p>
+          <p className="byline text-muted-foreground/60">v0.2 · feelzlike</p>
         </div>
       </aside>
 
-      {/* Mobile header — translucent so atmospheric heroes show through */}
+      {/* Mobile header */}
       <header className="md:hidden fixed top-0 inset-x-0 h-14 z-40 flex items-center justify-between px-4 glass-strong">
         <a
           href="/"
@@ -159,11 +154,9 @@ export function AppLayout({ children }: { children: ReactNode }) {
           <span className="byline">Regions</span>
         </a>
         <a href="/" className="flex items-center">
-          <span className="inline-flex items-center justify-center px-2.5 py-1.5 rounded-lg bg-white/95 backdrop-blur-md border border-white/10 shadow-sm">
-            <img src={wordmarkSnow} alt="feelzlike" className="h-4 w-auto" />
-          </span>
+          <img src={wordmark} alt="feelzlike" className="h-6 w-auto" />
         </a>
-        <span className="byline text-muted-foreground/70">NSW</span>
+        <span className="byline text-muted-foreground/80">NSW</span>
       </header>
 
       {/* Main */}
@@ -182,7 +175,7 @@ export function AppLayout({ children }: { children: ReactNode }) {
         </AnimatePresence>
       </main>
 
-      {/* Mobile bottom nav — glass dock */}
+      {/* Mobile bottom nav */}
       <nav className="md:hidden fixed bottom-0 inset-x-0 z-40 glass-strong pb-safe">
         <div className="flex justify-around items-center px-1 h-16">
           {[...NAV_ITEMS, ...SECONDARY_ITEMS].map((item) => {
@@ -194,11 +187,11 @@ export function AppLayout({ children }: { children: ReactNode }) {
                 href={item.path}
                 className={cn(
                   "relative flex flex-col items-center justify-center flex-1 h-full gap-1 transition-all",
-                  active ? "text-primary" : "text-muted-foreground/70"
+                  active ? "text-primary" : "text-muted-foreground/80"
                 )}
               >
                 {active && (
-                  <span className="absolute top-1.5 w-8 h-0.5 rounded-full bg-primary shadow-[0_0_12px_hsl(var(--primary))]" />
+                  <span className="absolute top-1.5 w-8 h-0.5 rounded-full bg-primary" />
                 )}
                 <Icon className="w-4 h-4" />
                 <span className="text-[9px] font-semibold tracking-wider uppercase leading-none">

@@ -12,8 +12,8 @@ export default function Dashboard() {
 
   return (
     <AppLayout>
-      {/* ─── Atmospheric hero ─────────────────────────── */}
-      <section className="relative overflow-hidden grain">
+      {/* ─── Compact atmospheric hero ─────────────────────────── */}
+      <section className="relative overflow-hidden">
         <div className="absolute inset-0">
           <img
             src={REGION_IMAGERY.hero}
@@ -21,20 +21,20 @@ export default function Dashboard() {
             className="w-full h-full object-cover"
             loading="eager"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/55 to-background" />
-          <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-accent/5 mix-blend-overlay" />
+          {/* Light wash + fade to white at the bottom for clean handoff to content */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/55 to-background" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-5 md:px-10 pt-14 md:pt-24 pb-12 md:pb-20">
-          {/* Live byline */}
+        <div className="relative max-w-7xl mx-auto px-5 md:px-10 pt-10 md:pt-16 pb-10 md:pb-14">
+          {/* Live badge */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass border-white/10"
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass"
           >
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60 animate-ping" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+              <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60 animate-ping" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
             </span>
             <span className="byline text-foreground">LIVE · BOM Australia</span>
           </motion.div>
@@ -43,7 +43,7 @@ export default function Dashboard() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.05 }}
-            className="display-number text-foreground text-[clamp(3.5rem,9vw,7rem)] mt-6 max-w-5xl"
+            className="font-display font-semibold text-foreground text-[clamp(2.25rem,5.5vw,4rem)] tracking-tight mt-5 max-w-4xl leading-[1.05]"
           >
             Snowy Mountains
           </motion.h1>
@@ -51,7 +51,7 @@ export default function Dashboard() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="mt-3 text-muted-foreground text-base md:text-lg max-w-2xl font-light"
+            className="mt-3 text-muted-foreground text-base md:text-lg max-w-2xl"
           >
             Truthful, source-cited mountain weather for Australia's alpine country.
           </motion.p>
@@ -60,18 +60,18 @@ export default function Dashboard() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.18 }}
-            className="mt-8 md:mt-12 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm"
+            className="mt-6 md:mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm"
           >
             <span className="byline text-muted-foreground">Reading from</span>
-            <span className="font-display text-foreground/90 text-base">Bureau of Meteorology</span>
-            <span className="byline text-muted-foreground/60">+ 3 leading international models</span>
-            <span className="ml-auto byline text-muted-foreground/70">Updated {updated}</span>
+            <span className="font-display text-foreground text-base">Bureau of Meteorology</span>
+            <span className="byline text-muted-foreground/80">+ 3 leading international models</span>
+            <span className="ml-auto byline text-muted-foreground/80">Updated {updated}</span>
           </motion.div>
         </div>
       </section>
 
       {/* ─── Resort grid ─────────────────────────── */}
-      <section className="max-w-7xl mx-auto px-5 md:px-10 pb-20 -mt-6 md:-mt-10 relative z-10">
+      <section className="max-w-7xl mx-auto px-5 md:px-10 pb-20 -mt-2 md:-mt-4 relative z-10">
         <div className="flex items-end justify-between mb-5">
           <div>
             <p className="byline text-muted-foreground">02 · Resort conditions</p>
@@ -79,17 +79,17 @@ export default function Dashboard() {
               Right now in the alps
             </h2>
           </div>
-          <p className="byline text-muted-foreground/70 hidden md:block">
+          <p className="byline text-muted-foreground/80 hidden md:block">
             {data?.locations.length ?? 4} towns · live
           </p>
         </div>
 
         {isLoading ? (
-          <div className="glass rounded-3xl p-12">
+          <div className="rounded-2xl border border-border bg-card p-12">
             <LoadingState message="Reading live conditions…" />
           </div>
         ) : error ? (
-          <div className="glass rounded-3xl p-12">
+          <div className="rounded-2xl border border-border bg-card p-12">
             <ErrorState error={error} onRetry={() => refetch()} />
           </div>
         ) : (
