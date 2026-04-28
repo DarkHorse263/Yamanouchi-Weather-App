@@ -31,7 +31,7 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { getImagery, skyGradient } from "@/lib/mountain-imagery";
 
-type LocationId = "thredbo" | "perisher" | "charlottes-pass" | "jindabyne";
+type LocationId = "thredbo" | "perisher" | "charlottes-pass" | "selwyn" | "jindabyne";
 
 function getStatusColor(status: string) {
   switch (status) {
@@ -60,7 +60,7 @@ export default function LocationDetail() {
 
   const { data: weatherData, isLoading: weatherLoading, error: weatherError, refetch: weatherRefetch } = useGetLocationWeather(locationId, { query: { enabled: !!locationId } });
   const { data: webcamData } = useGetLocationWebcams(locationId, { query: { enabled: !!locationId } });
-  const isResort = locationId === "thredbo" || locationId === "perisher" || locationId === "charlottes-pass";
+  const isResort = locationId === "thredbo" || locationId === "perisher" || locationId === "charlottes-pass" || locationId === "selwyn";
   const { data: liftData } = useGetLocationLiftStatus(locationId as any, { query: { enabled: isResort } });
 
   const [activeChartMetric, setActiveChartMetric] = useState<"temperature" | "snowfall" | "windSpeed">("temperature");

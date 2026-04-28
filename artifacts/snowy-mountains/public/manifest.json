@@ -1,7 +1,7 @@
 {
   "name": "Snowy Mts Weather",
   "short_name": "Snowy Mts",
-  "description": "Live BOM weather, radar, webcams, road conditions & lift status for Thredbo, Perisher, Charlotte's Pass & Jindabyne",
+  "description": "Live BOM weather, radar, webcams, road conditions & lift status for Thredbo, Perisher, Charlotte's Pass, Selwyn & Jindabyne",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0f172a",

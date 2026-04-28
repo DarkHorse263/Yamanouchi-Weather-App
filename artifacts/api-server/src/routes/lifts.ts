@@ -357,6 +357,57 @@ const RESORT_LIFTS: ResortLiftData[] = [
     seasonStatus: getSeasonStatus(),
     operatingHours: "Lifts operate 9:00 AM - 4:00 PM during ski season",
     liftStatusUrl: "https://www.charlottespass.com.au/the-mountain/"
+  },
+  {
+    locationId: "selwyn",
+    locationName: "Selwyn",
+    lifts: [
+      {
+        id: "selwyn-wombat-quad",
+        name: "Wombat Quad",
+        type: "chairlift",
+        status: "closed",
+        openingTime: "08:30",
+        closingTime: "16:30",
+        capacity: "4-seater fixed grip",
+        difficulty: "all-levels"
+      },
+      {
+        id: "selwyn-possum-quad",
+        name: "Possum Quad",
+        type: "chairlift",
+        status: "closed",
+        openingTime: "08:30",
+        closingTime: "16:30",
+        capacity: "4-seater fixed grip",
+        difficulty: "intermediate"
+      },
+      {
+        id: "selwyn-beginners-carpet",
+        name: "Beginners Magic Carpet",
+        type: "magic-carpet",
+        status: "closed",
+        openingTime: "09:00",
+        closingTime: "16:00",
+        capacity: "Conveyor",
+        difficulty: "beginner"
+      },
+      {
+        id: "selwyn-easy-rider-carpet",
+        name: "Easy Rider Magic Carpet",
+        type: "magic-carpet",
+        status: "closed",
+        openingTime: "09:00",
+        closingTime: "16:00",
+        capacity: "Conveyor",
+        difficulty: "beginner"
+      }
+    ],
+    totalRuns: 12,
+    snowCondition: "Check selwynsnow.com.au for the latest snow report. Selwyn was rebuilt after the 2020 bushfires and reopened in June 2022.",
+    seasonStatus: getSeasonStatus(),
+    operatingHours: "Lifts operate 8:30 AM - 4:30 PM during ski season",
+    liftStatusUrl: "https://www.selwynsnow.com.au/"
   }
 ];
 

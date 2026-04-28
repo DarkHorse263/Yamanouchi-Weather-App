@@ -68,6 +68,21 @@ const LOCATIONS: LocationConfig[] = [
     bomStationId: "071014",
     bomWmoId: 94921,
     bomSecondaryStation: "Cooma Airport AWS (nearest BOM station)"
+  },
+  {
+    id: "selwyn",
+    name: "Selwyn",
+    latitude: -35.8383,
+    longitude: 148.5267,
+    elevation: 1492,
+    description: "Family-focused snow resort in northern Kosciuszko National Park, rebuilt in 2022 after the 2020 bushfires. Gentle terrain ideal for first-timers and families.",
+    // No BOM AWS at the resort. The nearest (Cabramurra) is ~10km north at
+    // slightly lower elevation, which would understate cold by hundreds of
+    // metres of lapse rate. Use elevation-corrected Open-Meteo as the
+    // truthful primary source instead.
+    bomStation: "Open-Meteo (no BOM station at resort)",
+    bomStationId: "",
+    bomWmoId: 0,
   }
 ];
 

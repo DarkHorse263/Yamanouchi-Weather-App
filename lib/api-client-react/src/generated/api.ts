@@ -2779,13 +2779,23 @@ export function useGetWeather<
  * @summary Get weather for a specific location
  */
 export const getGetLocationWeatherUrl = (
-  locationId: "thredbo" | "perisher" | "charlottes-pass" | "jindabyne",
+  locationId:
+    | "thredbo"
+    | "perisher"
+    | "charlottes-pass"
+    | "selwyn"
+    | "jindabyne",
 ) => {
   return `/api/weather/${locationId}`;
 };
 
 export const getLocationWeather = async (
-  locationId: "thredbo" | "perisher" | "charlottes-pass" | "jindabyne",
+  locationId:
+    | "thredbo"
+    | "perisher"
+    | "charlottes-pass"
+    | "selwyn"
+    | "jindabyne",
   options?: RequestInit,
 ): Promise<LocationWeather> => {
   return customFetch<LocationWeather>(getGetLocationWeatherUrl(locationId), {
@@ -2795,7 +2805,12 @@ export const getLocationWeather = async (
 };
 
 export const getGetLocationWeatherQueryKey = (
-  locationId: "thredbo" | "perisher" | "charlottes-pass" | "jindabyne",
+  locationId:
+    | "thredbo"
+    | "perisher"
+    | "charlottes-pass"
+    | "selwyn"
+    | "jindabyne",
 ) => {
   return [`/api/weather/${locationId}`] as const;
 };
@@ -2804,7 +2819,12 @@ export const getGetLocationWeatherQueryOptions = <
   TData = Awaited<ReturnType<typeof getLocationWeather>>,
   TError = ErrorType<ErrorResponse>,
 >(
-  locationId: "thredbo" | "perisher" | "charlottes-pass" | "jindabyne",
+  locationId:
+    | "thredbo"
+    | "perisher"
+    | "charlottes-pass"
+    | "selwyn"
+    | "jindabyne",
   options?: {
     query?: UseQueryOptions<
       Awaited<ReturnType<typeof getLocationWeather>>,
@@ -2849,7 +2869,12 @@ export function useGetLocationWeather<
   TData = Awaited<ReturnType<typeof getLocationWeather>>,
   TError = ErrorType<ErrorResponse>,
 >(
-  locationId: "thredbo" | "perisher" | "charlottes-pass" | "jindabyne",
+  locationId:
+    | "thredbo"
+    | "perisher"
+    | "charlottes-pass"
+    | "selwyn"
+    | "jindabyne",
   options?: {
     query?: UseQueryOptions<
       Awaited<ReturnType<typeof getLocationWeather>>,
@@ -3025,13 +3050,23 @@ export function useGetWebcams<
  * @summary Get webcams for a specific location
  */
 export const getGetLocationWebcamsUrl = (
-  locationId: "thredbo" | "perisher" | "charlottes-pass" | "jindabyne",
+  locationId:
+    | "thredbo"
+    | "perisher"
+    | "charlottes-pass"
+    | "selwyn"
+    | "jindabyne",
 ) => {
   return `/api/webcams/${locationId}`;
 };
 
 export const getLocationWebcams = async (
-  locationId: "thredbo" | "perisher" | "charlottes-pass" | "jindabyne",
+  locationId:
+    | "thredbo"
+    | "perisher"
+    | "charlottes-pass"
+    | "selwyn"
+    | "jindabyne",
   options?: RequestInit,
 ): Promise<LocationWebcams> => {
   return customFetch<LocationWebcams>(getGetLocationWebcamsUrl(locationId), {
@@ -3041,7 +3076,12 @@ export const getLocationWebcams = async (
 };
 
 export const getGetLocationWebcamsQueryKey = (
-  locationId: "thredbo" | "perisher" | "charlottes-pass" | "jindabyne",
+  locationId:
+    | "thredbo"
+    | "perisher"
+    | "charlottes-pass"
+    | "selwyn"
+    | "jindabyne",
 ) => {
   return [`/api/webcams/${locationId}`] as const;
 };
@@ -3050,7 +3090,12 @@ export const getGetLocationWebcamsQueryOptions = <
   TData = Awaited<ReturnType<typeof getLocationWebcams>>,
   TError = ErrorType<ErrorResponse>,
 >(
-  locationId: "thredbo" | "perisher" | "charlottes-pass" | "jindabyne",
+  locationId:
+    | "thredbo"
+    | "perisher"
+    | "charlottes-pass"
+    | "selwyn"
+    | "jindabyne",
   options?: {
     query?: UseQueryOptions<
       Awaited<ReturnType<typeof getLocationWebcams>>,
@@ -3095,7 +3140,12 @@ export function useGetLocationWebcams<
   TData = Awaited<ReturnType<typeof getLocationWebcams>>,
   TError = ErrorType<ErrorResponse>,
 >(
-  locationId: "thredbo" | "perisher" | "charlottes-pass" | "jindabyne",
+  locationId:
+    | "thredbo"
+    | "perisher"
+    | "charlottes-pass"
+    | "selwyn"
+    | "jindabyne",
   options?: {
     query?: UseQueryOptions<
       Awaited<ReturnType<typeof getLocationWebcams>>,
@@ -3271,13 +3321,13 @@ export function useGetLiftStatus<
  * @summary Get lift status for a specific resort
  */
 export const getGetLocationLiftStatusUrl = (
-  locationId: "thredbo" | "perisher" | "charlottes-pass",
+  locationId: "thredbo" | "perisher" | "charlottes-pass" | "selwyn",
 ) => {
   return `/api/lift-status/${locationId}`;
 };
 
 export const getLocationLiftStatus = async (
-  locationId: "thredbo" | "perisher" | "charlottes-pass",
+  locationId: "thredbo" | "perisher" | "charlottes-pass" | "selwyn",
   options?: RequestInit,
 ): Promise<ResortLiftStatus> => {
   return customFetch<ResortLiftStatus>(
@@ -3290,7 +3340,7 @@ export const getLocationLiftStatus = async (
 };
 
 export const getGetLocationLiftStatusQueryKey = (
-  locationId: "thredbo" | "perisher" | "charlottes-pass",
+  locationId: "thredbo" | "perisher" | "charlottes-pass" | "selwyn",
 ) => {
   return [`/api/lift-status/${locationId}`] as const;
 };
@@ -3299,7 +3349,7 @@ export const getGetLocationLiftStatusQueryOptions = <
   TData = Awaited<ReturnType<typeof getLocationLiftStatus>>,
   TError = ErrorType<ErrorResponse>,
 >(
-  locationId: "thredbo" | "perisher" | "charlottes-pass",
+  locationId: "thredbo" | "perisher" | "charlottes-pass" | "selwyn",
   options?: {
     query?: UseQueryOptions<
       Awaited<ReturnType<typeof getLocationLiftStatus>>,
@@ -3344,7 +3394,7 @@ export function useGetLocationLiftStatus<
   TData = Awaited<ReturnType<typeof getLocationLiftStatus>>,
   TError = ErrorType<ErrorResponse>,
 >(
-  locationId: "thredbo" | "perisher" | "charlottes-pass",
+  locationId: "thredbo" | "perisher" | "charlottes-pass" | "selwyn",
   options?: {
     query?: UseQueryOptions<
       Awaited<ReturnType<typeof getLocationLiftStatus>>,

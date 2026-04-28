@@ -42,6 +42,11 @@ export const LOCATION_IMAGERY: Record<string, Imagery> = {
     thumb: UNSPLASH("photo-1502134249126-9f3755a50d78", 800),
     credit: "Lake Jindabyne",
   },
+  selwyn: {
+    hero: UNSPLASH("photo-1531366936337-7c912a4589a7", 2000),
+    thumb: UNSPLASH("photo-1531366936337-7c912a4589a7", 800),
+    credit: "Selwyn · Northern Kosciuszko NP",
+  },
 };
 
 export function getImagery(locationId: string): Imagery {

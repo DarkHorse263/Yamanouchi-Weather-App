@@ -239,7 +239,7 @@ export default function Radar() {
             <div className="text-sm text-blue-900 dark:text-blue-200 space-y-2">
               <p className="font-semibold">Reading the snow radar</p>
               <p>
-                This BOM radar covers Thredbo, Perisher, Charlotte's Pass, and Jindabyne.
+                This BOM radar covers Thredbo, Perisher, Charlotte's Pass, Selwyn, and Jindabyne.
                 At alpine elevations (above ~1400m), precipitation shown on radar is typically
                 falling as snow when temperatures are at or below 0°C. Check the current
                 temperature on each resort's page to gauge whether precipitation is snow or rain.

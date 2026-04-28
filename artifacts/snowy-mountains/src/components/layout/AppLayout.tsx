@@ -33,6 +33,7 @@ const RESORTS = [
   { path: "/location/thredbo",          label: "Thredbo" },
   { path: "/location/perisher",         label: "Perisher" },
   { path: "/location/charlottes-pass",  label: "Charlotte's Pass" },
+  { path: "/location/selwyn",           label: "Selwyn" },
   { path: "/location/jindabyne",        label: "Jindabyne" },
 ];
 

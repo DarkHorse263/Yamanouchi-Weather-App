@@ -819,7 +819,13 @@ export const GetWeatherResponse = zod.object({
  * @summary Get weather for a specific location
  */
 export const GetLocationWeatherParams = zod.object({
-  locationId: zod.enum(["thredbo", "perisher", "charlottes-pass", "jindabyne"]),
+  locationId: zod.enum([
+    "thredbo",
+    "perisher",
+    "charlottes-pass",
+    "selwyn",
+    "jindabyne",
+  ]),
 });
 
 export const GetLocationWeatherResponse = zod.object({
@@ -950,7 +956,13 @@ export const GetWebcamsResponse = zod.object({
  * @summary Get webcams for a specific location
  */
 export const GetLocationWebcamsParams = zod.object({
-  locationId: zod.enum(["thredbo", "perisher", "charlottes-pass", "jindabyne"]),
+  locationId: zod.enum([
+    "thredbo",
+    "perisher",
+    "charlottes-pass",
+    "selwyn",
+    "jindabyne",
+  ]),
 });
 
 export const GetLocationWebcamsResponse = zod.object({
@@ -1067,7 +1079,7 @@ export const GetLiftStatusResponse = zod.object({
  * @summary Get lift status for a specific resort
  */
 export const GetLocationLiftStatusParams = zod.object({
-  locationId: zod.enum(["thredbo", "perisher", "charlottes-pass"]),
+  locationId: zod.enum(["thredbo", "perisher", "charlottes-pass", "selwyn"]),
 });
 
 export const GetLocationLiftStatusResponse = zod.object({

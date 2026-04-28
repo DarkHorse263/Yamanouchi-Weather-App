@@ -684,7 +684,7 @@ paths:
           required: true
           schema:
             type: string
-            enum: [thredbo, perisher, charlottes-pass, jindabyne]
+            enum: [thredbo, perisher, charlottes-pass, selwyn, jindabyne]
       responses:
         "200":
           description: Weather data for the location
@@ -742,7 +742,7 @@ paths:
           required: true
           schema:
             type: string
-            enum: [thredbo, perisher, charlottes-pass, jindabyne]
+            enum: [thredbo, perisher, charlottes-pass, selwyn, jindabyne]
       responses:
         "200":
           description: Webcam data for the location
@@ -794,7 +794,7 @@ paths:
           required: true
           schema:
             type: string
-            enum: [thredbo, perisher, charlottes-pass]
+            enum: [thredbo, perisher, charlottes-pass, selwyn]
       responses:
         "200":
           description: Lift status for the location
