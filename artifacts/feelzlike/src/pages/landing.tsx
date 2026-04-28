@@ -117,13 +117,13 @@ export default function Landing() {
           />
         </div>
 
-        <div className="relative max-w-3xl mx-auto px-5 pt-10 pb-16 md:pt-14 md:pb-24">
+        <div className="relative max-w-3xl mx-auto px-5 pt-10 pb-12 md:pt-14 md:pb-16 text-center">
           {/* main brand logo with mountain — centred */}
           <motion.div
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-6 md:mb-8 flex flex-col items-center text-center"
+            className="mb-6 md:mb-8 flex flex-col items-center"
           >
             <img
               src={mainLogo}
@@ -136,31 +136,11 @@ export default function Landing() {
             </span>
           </motion.div>
 
-          {/* editorial headline — wordmark sits inline as the brand */}
-          <motion.h1
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-6xl lg:text-7xl tracking-[-0.02em] leading-[1.05] text-slate-900"
-            style={{ fontFamily: "'Fraunces', Georgia, serif" }}
-          >
-            <span className="block font-light text-slate-500">I wonder what it</span>
-            <span className="mt-1 md:mt-2 flex flex-wrap items-baseline gap-x-3 md:gap-x-4">
-              <img
-                src={wordmark}
-                alt="feelzlike"
-                className="inline-block h-10 md:h-14 lg:h-16 w-auto translate-y-[0.18em] select-none"
-                draggable={false}
-              />
-              <span className="font-light text-slate-500">in…</span>
-            </span>
-          </motion.h1>
-
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.25 }}
-            className="text-sm md:text-base text-slate-600 max-w-xl mt-5 md:mt-7 leading-relaxed"
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-sm md:text-base text-slate-600 max-w-xl mx-auto leading-relaxed"
           >
             Stop guessing what it feelzlike up there. Town-first mountain
             weather you can actually trust—plus the cams, roads, and lift
@@ -171,10 +151,10 @@ export default function Landing() {
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.35 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
             className="mt-7 md:mt-9"
           >
-            <div className="relative max-w-xl">
+            <div className="relative max-w-xl mx-auto">
               <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <label htmlFor="region-search" className="sr-only">
                 Search mountain regions
@@ -186,7 +166,7 @@ export default function Landing() {
                 placeholder="Search a mountain region…"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500/30 focus:border-sky-500/50 transition-all"
+                className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500/30 focus:border-sky-500/50 transition-all text-left"
               />
             </div>
           </motion.div>
@@ -195,18 +175,27 @@ export default function Landing() {
 
       {/* ─── REGIONS ──────────────────────────────────── */}
       <main className="relative max-w-5xl mx-auto px-5 pb-20 md:pb-28">
-        <div className="flex items-end justify-between mb-6 md:mb-8">
-          <div>
-            <p className="text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500">
-              01 · Regions
-            </p>
-            <h2
-              className="text-2xl md:text-3xl mt-1 text-slate-900 tracking-tight"
-              style={{ fontFamily: "'Fraunces', Georgia, serif" }}
-            >
-              Choose a mountain town
-            </h2>
-          </div>
+        {/* editorial intro to the regions — wordmark sits inline as the brand */}
+        <motion.h2
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-3xl md:text-5xl lg:text-6xl tracking-[-0.02em] leading-[1.05] text-slate-900 mb-6 md:mb-10"
+          style={{ fontFamily: "'Fraunces', Georgia, serif" }}
+        >
+          <span className="block font-light text-slate-500">I wonder what it</span>
+          <span className="mt-1 md:mt-2 flex flex-wrap items-baseline gap-x-3 md:gap-x-4">
+            <img
+              src={wordmark}
+              alt="feelzlike"
+              className="inline-block h-9 md:h-12 lg:h-14 w-auto translate-y-[0.18em] select-none"
+              draggable={false}
+            />
+            <span className="font-light text-slate-500">in…</span>
+          </span>
+        </motion.h2>
+
+        <div className="flex items-end justify-end mb-4 md:mb-5">
           <span className="text-[11px] text-slate-500 font-medium tabular-nums">
             {filtered.length} {filtered.length === 1 ? "region" : "regions"}
           </span>
