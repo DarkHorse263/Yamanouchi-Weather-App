@@ -127,8 +127,9 @@ export default function Landing() {
               Stop guessing what it feelzlike in the mountains today.
             </span>
             <span className="block mt-2">
-              View mountain weather you can trust, plus see mountain cams, road
-              cams &amp; reports and lift status.
+              View mountain weather you can trust,
+              <br />
+              plus see mountain cams, road cams &amp; reports and lift status.
             </span>
             <span className="block mt-2">
               Everything you need to make the call in the morning.
