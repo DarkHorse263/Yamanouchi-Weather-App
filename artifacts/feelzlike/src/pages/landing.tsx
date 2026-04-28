@@ -155,12 +155,23 @@ export default function Landing() {
             </span>
           </motion.p>
 
+          {/* editorial cue to the regions — sits directly above the search,
+              with breathing room from the intro copy above. */}
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="text-sm md:text-base text-slate-600 max-w-xl mx-auto leading-relaxed mt-10 md:mt-14"
+          >
+            I wonder what it feelzlike in…
+          </motion.p>
+
           {/* SEARCH */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="mt-7 md:mt-9"
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="mt-3 md:mt-4"
           >
             <div className="relative max-w-xl mx-auto">
               <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
@@ -178,17 +189,6 @@ export default function Landing() {
               />
             </div>
           </motion.div>
-
-          {/* editorial intro to the regions — sits inside the same hero panel,
-              directly under the search. Plain type, matches the intro size. */}
-          <motion.p
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-sm md:text-base text-slate-600 max-w-xl mx-auto leading-relaxed mt-6 md:mt-8"
-          >
-            I wonder what it feelzlike in…
-          </motion.p>
         </div>
       </header>
 
