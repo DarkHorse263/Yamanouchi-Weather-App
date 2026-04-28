@@ -148,7 +148,14 @@ export default function Landing() {
             <br />
             See real-time mountain weather you can trust.
             <br />
-            Plus mountain cams, road cams, road reports, lift status.
+            <span className="md:hidden">
+              Plus mountain cams, road cams,
+              <br />
+              road reports, lift status.
+            </span>
+            <span className="hidden md:inline">
+              Plus mountain cams, road cams, road reports, lift status.
+            </span>
             <br />
             Everything you need to decide where to go today.
           </motion.p>
