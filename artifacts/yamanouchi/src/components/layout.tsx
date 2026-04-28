@@ -7,44 +7,42 @@ import {
   BookOpen,
   Video,
   Bus,
-  BedDouble,
   TreePine,
   Snowflake,
   Leaf,
   ChevronLeft,
 } from "lucide-react";
-import wordmarkSnow from "@assets/feelzlike_dark/feelzlike_WordMarque_colour_160426_1777334678269_dark.png";
+import wordmark from "@assets/feelzlike_trimmed/feelzlike_WordMarque_colour_160426_1777334678269_trim.png";
 import { useLanguage } from "@/hooks/use-language";
 import { useSeason } from "@/hooks/use-season";
 import { cn } from "@/lib/utils";
 
 type NavItem = { path: string; icon: any; label: string; labelJa: string };
 
+// Town-centric IA: town first → transport from town → ski destinations from town → rest
 const WINTER_NAV: NavItem[] = [
-  { path: "/",           icon: Home,         label: "Home",      labelJa: "ホーム" },
-  { path: "/resorts",    icon: MountainSnow, label: "Resorts",   labelJa: "スキー場" },
-  { path: "/map",        icon: CloudSun,     label: "Weather",   labelJa: "天気" },
-  { path: "/cams",       icon: Video,        label: "Cams",      labelJa: "カメラ" },
-  { path: "/stay",       icon: BedDouble,    label: "Stay",      labelJa: "宿泊" },
-  { path: "/transport",  icon: Bus,          label: "Transport", labelJa: "交通" },
-  { path: "/guide",      icon: BookOpen,     label: "Guide",     labelJa: "ガイド" },
+  { path: "/",           icon: Home,         label: "Town",       labelJa: "町" },
+  { path: "/transport",  icon: Bus,          label: "Transport",  labelJa: "交通" },
+  { path: "/resorts",    icon: MountainSnow, label: "Ski Areas",  labelJa: "スキー場" },
+  { path: "/map",        icon: CloudSun,     label: "Weather",    labelJa: "天気" },
+  { path: "/cams",       icon: Video,        label: "Cams",       labelJa: "カメラ" },
+  { path: "/guide",      icon: BookOpen,     label: "Guide",      labelJa: "ガイド" },
 ];
 
 const GREEN_NAV: NavItem[] = [
-  { path: "/",           icon: Home,         label: "Home",      labelJa: "ホーム" },
-  { path: "/activities", icon: TreePine,     label: "Activities", labelJa: "アクティビティ" },
-  { path: "/map",        icon: CloudSun,     label: "Weather",   labelJa: "天気" },
-  { path: "/cams",       icon: Video,        label: "Cams",      labelJa: "カメラ" },
-  { path: "/stay",       icon: BedDouble,    label: "Stay",      labelJa: "宿泊" },
-  { path: "/transport",  icon: Bus,          label: "Transport", labelJa: "交通" },
-  { path: "/guide",      icon: BookOpen,     label: "Guide",     labelJa: "ガイド" },
+  { path: "/",           icon: Home,         label: "Town",        labelJa: "町" },
+  { path: "/transport",  icon: Bus,          label: "Transport",   labelJa: "交通" },
+  { path: "/activities", icon: TreePine,     label: "Things to Do", labelJa: "体験" },
+  { path: "/map",        icon: CloudSun,     label: "Weather",     labelJa: "天気" },
+  { path: "/cams",       icon: Video,        label: "Cams",        labelJa: "カメラ" },
+  { path: "/guide",      icon: BookOpen,     label: "Guide",       labelJa: "ガイド" },
 ];
 
 function SeasonToggle({ compact = false }: { compact?: boolean }) {
   const { season, setSeason } = useSeason();
   const { t } = useLanguage();
   return (
-    <div className={cn("flex p-0.5 rounded-full border", season === "winter" ? "bg-secondary/40 border-white/10" : "bg-secondary/40 border-white/10")}>
+    <div className="flex p-0.5 rounded-full border border-border bg-secondary">
       <button
         onClick={() => setSeason("winter")}
         aria-label={t("Winter season", "冬シーズン")}
@@ -92,30 +90,31 @@ export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-background flex flex-col md:flex-row">
 
-      {/* Desktop Sidebar */}
-      <aside className="hidden md:flex flex-col w-64 fixed inset-y-0 left-0 bg-background/80 backdrop-blur-xl border-r border-border/60 z-50">
-        <div className="p-6">
+      {/* Desktop sidebar */}
+      <aside className="hidden md:flex flex-col w-64 fixed inset-y-0 left-0 bg-white border-r border-border z-50">
+        <div className="px-6 pt-6 pb-5">
           <a
             href="/"
-            className="inline-flex items-center gap-1 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors mb-3"
+            className="byline inline-flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
           >
-            <ChevronLeft className="w-4 h-4" />
+            <ChevronLeft className="w-3 h-3" />
             {t("All regions", "全地域")}
           </a>
-          <a href="/" className="block mb-2">
-            <img
-              src={wordmarkSnow}
-              alt="feelzlike"
-              className="h-8 w-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]"
-            />
+          <a href="/" className="block mt-4 mb-1.5">
+            <img src={wordmark} alt="feelzlike" className="h-8 w-auto" />
           </a>
-          <p className="byline mt-1.5 text-muted-foreground/70">Yamanouchi Town</p>
+          <p className="font-display font-semibold text-base leading-tight text-foreground">
+            {t("Yamanouchi Town", "山ノ内町")}
+          </p>
+          <p className="byline mt-1.5 text-muted-foreground/80">Nagano · Japan</p>
           <div className="mt-3">
             <SeasonToggle />
           </div>
         </div>
 
-        <nav className="flex-1 px-4 space-y-1.5 overflow-y-auto hide-scrollbar">
+        <div className="rule mx-6" />
+
+        <nav className="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto hide-scrollbar">
           {NAV_ITEMS.map((item) => {
             const active = isActive(item.path);
             const Icon = item.icon;
@@ -124,20 +123,23 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 key={item.path}
                 href={item.path}
                 className={cn(
-                  "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 font-medium",
+                  "group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-150 text-sm font-medium",
                   active
-                    ? isWinter ? "bg-primary/10 text-primary" : "bg-secondary/60 text-foreground"
+                    ? "text-primary bg-primary/8"
                     : "text-muted-foreground hover:bg-secondary hover:text-foreground"
                 )}
               >
-                <Icon className={cn("w-5 h-5", active ? (isWinter ? "text-primary" : "text-primary") : "text-muted-foreground")} />
+                {active && (
+                  <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full bg-primary" />
+                )}
+                <Icon className={cn("w-4 h-4", active ? "text-primary" : "")} />
                 {t(item.label, item.labelJa)}
               </Link>
             );
           })}
         </nav>
 
-        <div className="p-6 border-t border-border mt-auto">
+        <div className="px-6 pb-5 pt-3 border-t border-border">
           <div className="flex bg-secondary p-1 rounded-lg">
             {(["en", "ja"] as const).map((lang) => (
               <button
@@ -155,7 +157,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </div>
       </aside>
 
-      {/* Mobile Header */}
+      {/* Mobile header */}
       <header className="md:hidden fixed top-0 inset-x-0 h-14 glass-strong z-40 flex items-center justify-between px-4">
         <div className="flex items-center gap-2">
           <a
@@ -165,10 +167,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
           >
             <ChevronLeft className="w-5 h-5 text-muted-foreground" />
           </a>
-          <a href="/" className="flex items-center gap-2">
-            <span className="inline-flex items-center justify-center px-2.5 py-1.5 rounded-lg bg-white/95 backdrop-blur-md border border-white/10 shadow-sm">
-              <img src={wordmarkSnow} alt="feelzlike" className="h-4 w-auto" />
-            </span>
+          <a href="/" className="flex items-center">
+            <img src={wordmark} alt="feelzlike" className="h-6 w-auto" />
           </a>
         </div>
         <div className="flex items-center gap-2">
@@ -179,7 +179,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 key={lang}
                 onClick={() => setLanguage(lang)}
                 className={cn(
-                  "px-2.5 py-1 text-xs font-bold rounded-sm transition-all",
+                  "px-2 py-0.5 text-[10px] font-bold rounded-sm transition-all",
                   language === lang ? "bg-foreground text-background" : "text-muted-foreground"
                 )}
               >
@@ -190,7 +190,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </div>
       </header>
 
-      {/* Main Content */}
+      {/* Main */}
       <main className="flex-1 md:ml-64 w-full min-h-screen pt-16 md:pt-0 pb-24 md:pb-0">
         <AnimatePresence mode="wait">
           <motion.div
@@ -206,9 +206,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </AnimatePresence>
       </main>
 
-      {/* Mobile Bottom Nav */}
+      {/* Mobile bottom nav */}
       <nav className="md:hidden fixed bottom-0 inset-x-0 glass-strong pb-safe z-40">
-        <div className="flex justify-around items-center px-0.5 h-14">
+        <div className="flex justify-around items-center px-1 h-16">
           {NAV_ITEMS.map((item) => {
             const active = isActive(item.path);
             const Icon = item.icon;
@@ -217,20 +217,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 key={item.path}
                 href={item.path}
                 className={cn(
-                  "flex flex-col items-center justify-center flex-1 h-full gap-0.5 transition-all duration-200",
-                  active ? (isWinter ? "text-primary" : "text-primary") : "text-muted-foreground"
+                  "relative flex flex-col items-center justify-center flex-1 h-full gap-1 transition-all",
+                  active ? "text-primary" : "text-muted-foreground/80"
                 )}
               >
-                <div className={cn(
-                  "p-0.5 rounded-lg transition-all duration-200",
-                  active ? (isWinter ? "bg-primary/10" : "bg-primary/15") : ""
-                )}>
-                  <Icon className={cn("w-3.5 h-3.5", active ? "" : "opacity-60")} />
-                </div>
-                <span className={cn(
-                  "text-[8px] font-bold tracking-tight leading-none",
-                  active ? (isWinter ? "text-primary" : "text-primary") : "text-muted-foreground"
-                )}>
+                {active && (
+                  <span className="absolute top-1.5 w-8 h-0.5 rounded-full bg-primary" />
+                )}
+                <Icon className="w-4 h-4" />
+                <span className="text-[9px] font-semibold tracking-wider uppercase leading-none">
                   {t(item.label, item.labelJa)}
                 </span>
               </Link>

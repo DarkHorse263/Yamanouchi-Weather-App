@@ -5,7 +5,10 @@ import { Loader2 } from "lucide-react";
 export function Card({ className, children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn("glass rounded-3xl p-5", className)}
+      className={cn(
+        "rounded-2xl border border-border bg-card p-5 shadow-[0_1px_3px_rgba(15,23,42,0.04),0_8px_24px_-12px_rgba(15,23,42,0.08)]",
+        className,
+      )}
       {...props}
     >
       {children}
@@ -25,11 +28,11 @@ export function StatTile({
   colorClass?: string
 }) {
   return (
-    <div className="glass rounded-3xl p-5 flex flex-col justify-between min-h-[110px]">
+    <div className="rounded-2xl border border-border bg-card p-5 flex flex-col justify-between min-h-[110px] shadow-[0_1px_3px_rgba(15,23,42,0.04)]">
       <span className="byline text-muted-foreground">{label}</span>
       <div className="mt-3 flex items-baseline gap-1.5">
         <span className="display-number text-foreground text-4xl" data-numeric>{value}</span>
-        {unit && <span className="text-sm font-medium text-muted-foreground/80">{unit}</span>}
+        {unit && <span className="text-sm font-medium text-muted-foreground">{unit}</span>}
       </div>
     </div>
   );
@@ -40,7 +43,7 @@ export function Badge({ children, variant = 'default', className }: { children: 
     default: "bg-secondary text-secondary-foreground",
     primary: "bg-primary text-primary-foreground",
     destructive: "bg-destructive text-destructive-foreground",
-    outline: "border-2 border-border text-foreground bg-transparent"
+    outline: "border border-border text-foreground bg-transparent"
   };
 
   return (

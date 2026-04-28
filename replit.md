@@ -182,21 +182,41 @@ The Yamanouchi app supports a Winter/Green season toggle for year-round tourism:
 
 Utility scripts package. Each script is a `.ts` file in `src/` with a corresponding npm script in `package.json`. Run scripts via `pnpm --filter @workspace/scripts run <script>`. Scripts can import any workspace package (e.g., `@workspace/db`) by adding it as a dependency in `scripts/package.json`.
 
-## feelzlike Unified Design System (Apr 2026)
+## feelzlike Unified Design System (pivoted Apr 28 2026 → Direction A: Light + Clean)
 
-All three region apps (snowy-mountains, nagano, yamanouchi) now share a unified "master sidebar" layout pattern (originally the Yamanouchi template):
+All four apps (feelzlike master, snowy-mountains, yamanouchi, nagano) now share a single light, snow-forecast.com-inspired editorial palette.
 
-- **Desktop**: 264px white sidebar with `← All regions` back link, feelzlike wordmark image (`branding/wordmark-colour.png`), uppercase region caption (e.g. "SNOWY MOUNTAINS / NSW · Australia"), nav rail, optional secondary section, and language toggle in footer
-- **Mobile**: Top header with back arrow + small wordmark + region caption; bottom nav with primary + secondary nav items
-- **Wonder strip pattern**: Compact single-line `"I wonder what it [feelzlike wordmark] in [Region] right now..."` sits above the gradient hero card on each region's home page (no duplicated full logo since sidebar already shows branding)
-- **Branding assets**: `logo-full.png`, `wordmark-colour.png`, `wordmark-inline.png` are copied into each region's `public/branding/` folder
+**Light token set (identical across snowy-mountains, yamanouchi, nagano `index.css`):**
+- `--background: 210 25% 98%` (snow-bright surface)
+- `--foreground: 220 30% 12%` (deep ink)
+- `--primary: 210 90% 46%` (confident sky blue)
+- `--accent: 24 95% 48%` (alpine orange)
+- `--card: 0 0% 100%`, `--secondary: 210 18% 95%`, `--border: 220 15% 90%`
+- `--radius: 1rem`
+- Typography preserved: Fraunces display, Inter body, JetBrains Mono numerals
+- `.glass` and `.glass-strong` redefined for light (white→snow gradients with dark hairline borders)
 
-### feelzlike Landing Page (`artifacts/feelzlike/src/pages/landing.tsx`)
-- Soft gradient background with blur orbs (sky-blue + emerald)
-- Hero: full logo + "I wonder what it [wordmark] in..." + tagline emphasising "Mountain weather you can actually trust" + green "TRUTH-FIRST MOUNTAIN INTELLIGENCE" badge
-- 4-feature icon row: Live Weather / Webcams / Road Status / Stay & Eat
-- Search input (a11y-labelled), then live region cards with image thumbnails, LIVE pulse badge, country, description, and tags
-- Footer: "Built by mountain people, for mountain people" + sourcing disclaimer
+**Layout pattern (snowy-mountains, yamanouchi, nagano):**
+- Desktop: 264px **white** sidebar (`bg-white border-r border-border`), `← All regions` byline link, **trimmed colour wordmark** (`@assets/feelzlike_trimmed/feelzlike_WordMarque_colour_..._trim.png` at `h-8`), region caption, nav rail with primary-coloured active state and 0.5w accent bar.
+- Mobile: top `glass-strong` header with back chevron + `h-6` wordmark + EN/JA toggle; bottom nav with `text-primary` active state and 0.5h accent bar above active icon.
+
+**Town-centric IA (Apr 28 pivot):**
+- Each region is anchored on a **single base town**, not on resorts.
+- Yamanouchi nav: `Town · Transport · Ski Areas/Things to Do · Weather · Cams · Guide` — **Stay deliberately dropped from primary nav** (route still exists for legacy links, but no longer surfaced in nav or quick links). Transport elevated to position 2.
+- Snowy Mountains base town: Jindabyne. Yamanouchi base town: Yamanouchi Town.
+
+### Master landing (`artifacts/feelzlike/src/pages/landing.tsx`)
+- Light background with subtle alpine hero photo behind the headline (60% opacity, white scrim).
+- Editorial hero: large Fraunces "I wonder what it ***feelzlike*** in…" with "feelzlike" as italic display + "like" in primary blue.
+- Search input (a11y-labelled), TRUTH-FIRST coverage rail, then town-first region cards.
+- **Region cards** are full-width photo+content rows with real Wikimedia photos fetched at runtime via `https://en.wikipedia.org/api/rest_v1/page/summary/<TITLE>` (no key needed, CORS-enabled). Page slugs configured in `WIKI_SOURCES`: Jindabyne, Yamanouchi_Nagano, Hakuba_Nagano. Falls back to bundled Unsplash URL on fetch failure. Each Wikipedia-sourced image displays a small `WIKIPEDIA · <SOURCE>` credit pill bottom-right.
+- Card status badges: green pulsing `LIVE` for live regions, amber `SOON` for placeholders.
+
+### Nagano (`artifacts/nagano/src/pages/home.tsx`)
+- Replaced full prefecture dashboard with a clean **coming-soon** page (per user direction).
+- Editorial copy + planned-coverage chips (Hakuba Valley, Shiga Kogen, Nozawa Onsen, Madarao, Myoko, Togakushi, Karuizawa).
+- CTAs: "Open Yamanouchi Town" (primary) and "All regions".
+- Layout sidebar trimmed to single Home item.
 
 ### Snowy Mountains (`AppLayout.tsx`)
 - Primary nav: Weather, Cams, Radar, Roads, Lifts
