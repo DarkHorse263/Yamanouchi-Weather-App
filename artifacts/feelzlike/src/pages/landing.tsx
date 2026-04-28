@@ -153,20 +153,15 @@ export default function Landing() {
           </motion.div>
 
           {/* editorial intro to the regions — sits inside the same hero panel,
-              directly under the search. Plain type, not the logo. */}
-          <motion.h2
+              directly under the search. Plain type, matches the intro size. */}
+          <motion.p
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-2xl md:text-4xl lg:text-5xl tracking-[-0.02em] leading-[1.1] text-slate-900 mt-10 md:mt-14 max-w-xl mx-auto"
-            style={{ fontFamily: "'Fraunces', Georgia, serif" }}
+            className="text-sm md:text-base text-slate-600 max-w-xl mx-auto leading-relaxed mt-6 md:mt-8"
           >
-            <span className="font-light text-slate-500">I wonder what it </span>
-            <em className="not-italic font-medium text-slate-900">
-              feelz<span className="italic font-semibold text-sky-600">like</span>
-            </em>
-            <span className="font-light text-slate-500"> in…</span>
-          </motion.h2>
+            I wonder what it feelzlike in…
+          </motion.p>
         </div>
       </header>
 
