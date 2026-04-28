@@ -141,14 +141,14 @@ export default function Landing() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-sm md:text-base text-slate-600 max-w-xl mx-auto leading-relaxed"
+            style={{ textWrap: "balance" } as React.CSSProperties}
           >
             <span className="block">
               Stop guessing what it feelzlike in the mountains today.
             </span>
             <span className="block mt-2">
-              View mountain weather you can trust,
-              <br />
-              plus see mountain cams, road cams &amp; reports and lift status.
+              View mountain weather you can trust, plus see mountain cams, road
+              cams &amp; reports and lift status.
             </span>
             <span className="block mt-2">
               Everything you need to make the call in the morning.
