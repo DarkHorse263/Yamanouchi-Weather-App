@@ -9,19 +9,31 @@ import mainLogo from "@assets/feelzlike_transparent/feelzlike_colour_150426_1777
 const WIKI_SOURCES: Record<string, { title: string; credit: string }> = {
   "snowy-mountains": { title: "Jindabyne", credit: "Wikipedia · Jindabyne" },
   yamanouchi: { title: "Yamanouchi,_Nagano", credit: "Wikipedia · Yamanouchi" },
-  nagano: { title: "Hakuba,_Nagano", credit: "Wikipedia · Hakuba" },
+  nagano: { title: "Iiyama,_Nagano", credit: "Wikipedia · Iiyama" },
 };
 
-const REGIONS = [
+type Region = {
+  id: string;
+  name: string;
+  region: string;
+  baseTowns: string[];
+  mountains: string[];
+  tags: string[];
+  status: "live" | "soon";
+  href: string;
+  image: string;
+  coords: string;
+};
+
+const REGIONS: Region[] = [
   {
     id: "snowy-mountains",
     name: "Snowy Mountains",
     region: "New South Wales, Australia",
-    baseTown: "Jindabyne",
-    description:
-      "Australia's alpine country — Jindabyne base town, with Thredbo, Perisher and Charlotte Pass nearby.",
+    baseTowns: ["Jindabyne", "Berridale", "Cooma"],
+    mountains: ["Thredbo", "Perisher", "Charlottes Pass", "Mount Selwyn"],
     tags: ["Snow", "Hiking", "Lakes"],
-    status: "live" as const,
+    status: "live",
     href: "/snowy-mountains/",
     image:
       "https://images.unsplash.com/photo-1517299321609-52687d1bc55a?w=1400&h=900&fit=crop&q=80",
@@ -31,11 +43,10 @@ const REGIONS = [
     id: "yamanouchi",
     name: "Yamanouchi Town",
     region: "Nagano, Japan",
-    baseTown: "Yamanouchi",
-    description:
-      "Snow monkeys, 21 ski areas, hot springs and stone-paved onsen streets. Gateway to Shiga Kogen.",
+    baseTowns: ["Yudanaka", "Shibu Onsen", "Yomase"],
+    mountains: ["Shiga Kogen", "Yomase", "X-Jam", "Ryuoo"],
     tags: ["Snow", "Onsen", "Culture"],
-    status: "live" as const,
+    status: "live",
     href: "/yamanouchi/",
     image:
       "https://images.unsplash.com/photo-1542640244-7e672d6cef4e?w=1400&h=900&fit=crop&q=80",
@@ -43,17 +54,23 @@ const REGIONS = [
   },
   {
     id: "nagano",
-    name: "Nagano Prefecture",
-    region: "Honshu, Japan",
-    baseTown: null,
-    description:
-      "Prefecture-wide coverage of the Japan Alps — Hakuba, Shiga Kogen, Nozawa and beyond.",
-    tags: ["Snow", "Mountains", "Alps"],
-    status: "soon" as const,
+    name: "Iiyama",
+    region: "Nagano, Japan",
+    baseTowns: ["Iiyama", "Kijimadaira"],
+    mountains: [
+      "Madarao",
+      "Tangrum",
+      "Nozawa Onsen",
+      "Togari Onsen",
+      "The Cupid of Romance",
+      "Makinoiri Kogen Snow Park",
+    ],
+    tags: ["Snow", "Mountains", "Onsen"],
+    status: "soon",
     href: "/nagano/",
     image:
       "https://images.unsplash.com/photo-1610824352934-c10d87b700cc?w=1400&h=900&fit=crop&q=80",
-    coords: "36.6° N · 138.2° E",
+    coords: "36.9° N · 138.4° E",
   },
 ];
 
@@ -87,7 +104,9 @@ export default function Landing() {
     return (
       r.name.toLowerCase().includes(q) ||
       r.region.toLowerCase().includes(q) ||
-      r.tags.some((t) => t.toLowerCase().includes(q))
+      r.tags.some((t) => t.toLowerCase().includes(q)) ||
+      r.baseTowns.some((t) => t.toLowerCase().includes(q)) ||
+      r.mountains.some((m) => m.toLowerCase().includes(q))
     );
   });
 
@@ -245,14 +264,24 @@ export default function Landing() {
                     >
                       {region.name}
                     </h3>
-                    {region.baseTown && (
-                      <p className="text-[11px] font-medium text-sky-700 mt-1.5">
-                        Base town · {region.baseTown}
-                      </p>
-                    )}
-                    <p className="text-sm text-slate-600 mt-2 leading-relaxed line-clamp-2">
-                      {region.description}
-                    </p>
+                    <dl className="mt-3 space-y-2 text-sm leading-relaxed">
+                      <div className="flex flex-col sm:flex-row sm:gap-2">
+                        <dt className="text-[10px] font-semibold uppercase tracking-[0.18em] text-sky-700 sm:pt-1 sm:shrink-0 sm:w-24">
+                          Base towns
+                        </dt>
+                        <dd className="text-slate-700">
+                          {region.baseTowns.join(", ")}
+                        </dd>
+                      </div>
+                      <div className="flex flex-col sm:flex-row sm:gap-2">
+                        <dt className="text-[10px] font-semibold uppercase tracking-[0.18em] text-sky-700 sm:pt-1 sm:shrink-0 sm:w-24">
+                          Mountains
+                        </dt>
+                        <dd className="text-slate-700">
+                          {region.mountains.join(", ")}
+                        </dd>
+                      </div>
+                    </dl>
                   </div>
 
                   <div className="mt-5 flex items-center justify-between gap-3">
