@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Search, MapPin, ArrowRight, ShieldCheck, Clock } from "lucide-react";
 import { useEffect, useState } from "react";
 import wordmark from "@assets/feelzlike_trimmed/feelzlike_WordMarque_colour_160426_1777334678269_trim.png";
+import mainLogo from "@assets/feelzlike_transparent/feelzlike_colour_150426_1777272466909_transparent.png";
 
 // Wikipedia REST API page slugs for sourcing real, attributable photos.
 // We fetch the canonical Wikipedia "originalimage" thumbnail at runtime; if
@@ -118,20 +119,21 @@ export default function Landing() {
           />
         </div>
 
-        <div className="relative max-w-3xl mx-auto px-5 pt-10 pb-16 md:pt-16 md:pb-24">
-          {/* brand wordmark */}
+        <div className="relative max-w-3xl mx-auto px-5 pt-10 pb-16 md:pt-14 md:pb-24">
+          {/* main brand logo with mountain */}
           <motion.div
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-7 md:mb-9"
+            className="mb-6 md:mb-8 flex flex-col items-start"
           >
             <img
-              src={wordmark}
+              src={mainLogo}
               alt="feelzlike — global mountain weather intelligence"
-              className="h-12 md:h-14 w-auto -ml-1"
+              className="h-24 md:h-32 lg:h-36 w-auto -ml-2 select-none"
+              draggable={false}
             />
-            <div className="flex items-center gap-2 mt-3">
+            <div className="flex items-center gap-2 mt-3 ml-1">
               <span className="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse" />
               <span className="text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.22em] text-sky-700">
                 Global mountain weather intelligence
@@ -139,19 +141,22 @@ export default function Landing() {
             </div>
           </motion.div>
 
-          {/* editorial headline */}
+          {/* editorial headline — wordmark sits inline as the brand */}
           <motion.h1
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-6xl lg:text-7xl tracking-[-0.02em] leading-[1.02] text-slate-900"
+            className="text-4xl md:text-6xl lg:text-7xl tracking-[-0.02em] leading-[1.05] text-slate-900"
             style={{ fontFamily: "'Fraunces', Georgia, serif" }}
           >
             <span className="block font-light text-slate-500">I wonder what it</span>
-            <span className="block mt-1">
-              <em className="not-italic font-medium text-slate-900">
-                feelz<span className="italic font-semibold text-sky-600">like</span>
-              </em>{" "}
+            <span className="mt-1 md:mt-2 flex flex-wrap items-baseline gap-x-3 md:gap-x-4">
+              <img
+                src={wordmark}
+                alt="feelzlike"
+                className="inline-block h-10 md:h-14 lg:h-16 w-auto translate-y-[0.18em] select-none"
+                draggable={false}
+              />
               <span className="font-light text-slate-500">in…</span>
             </span>
           </motion.h1>
