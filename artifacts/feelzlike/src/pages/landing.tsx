@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Search, MapPin, ArrowRight, ShieldCheck, Clock } from "lucide-react";
+import { Search, MapPin, ArrowRight, Clock } from "lucide-react";
 import { useEffect, useState } from "react";
 import wordmark from "@assets/feelzlike_trimmed/feelzlike_WordMarque_colour_160426_1777334678269_trim.png";
 import mainLogo from "@assets/feelzlike_transparent/feelzlike_colour_150426_1777272466909_transparent.png";
@@ -57,8 +57,6 @@ const REGIONS = [
     coords: "36.6° N · 138.2° E",
   },
 ];
-
-const COVERAGE = ["Live weather", "Webcams", "Road status", "Transport", "Lifts"];
 
 export default function Landing() {
   const [search, setSearch] = useState("");
@@ -120,25 +118,22 @@ export default function Landing() {
         </div>
 
         <div className="relative max-w-3xl mx-auto px-5 pt-10 pb-16 md:pt-14 md:pb-24">
-          {/* main brand logo with mountain */}
+          {/* main brand logo with mountain — centred */}
           <motion.div
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-6 md:mb-8 flex flex-col items-start"
+            className="mb-6 md:mb-8 flex flex-col items-center text-center"
           >
             <img
               src={mainLogo}
-              alt="feelzlike — global mountain weather intelligence"
-              className="h-24 md:h-32 lg:h-36 w-auto -ml-2 select-none"
+              alt="feelzlike — resort town mountain weather"
+              className="h-24 md:h-32 lg:h-36 w-auto select-none"
               draggable={false}
             />
-            <div className="flex items-center gap-2 mt-3 ml-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse" />
-              <span className="text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.22em] text-sky-700">
-                Global mountain weather intelligence
-              </span>
-            </div>
+            <span className="mt-3 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.22em] text-sky-700">
+              Resort Town Mountain Weather
+            </span>
           </motion.div>
 
           {/* editorial headline — wordmark sits inline as the brand */}
@@ -167,8 +162,9 @@ export default function Landing() {
             transition={{ duration: 0.5, delay: 0.25 }}
             className="text-sm md:text-base text-slate-600 max-w-xl mt-5 md:mt-7 leading-relaxed"
           >
-            Town-first mountain weather you can actually trust — plus the cams,
-            roads, transport and lifts you need to make the call.
+            Stop guessing what it feelzlike up there. Town-first mountain
+            weather you can actually trust—plus the cams, roads, and lift
+            status you need to make the call.
           </motion.p>
 
           {/* SEARCH */}
@@ -192,24 +188,6 @@ export default function Landing() {
                 onChange={(e) => setSearch(e.target.value)}
                 className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500/30 focus:border-sky-500/50 transition-all"
               />
-            </div>
-
-            {/* coverage line */}
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 mt-5 text-[11px] text-slate-500">
-              <span className="inline-flex items-center gap-1.5 text-emerald-700">
-                <ShieldCheck className="w-3.5 h-3.5" />
-                <span className="font-semibold uppercase tracking-[0.16em]">
-                  Truth-first
-                </span>
-              </span>
-              {COVERAGE.map((c, i) => (
-                <span key={c} className="inline-flex items-center">
-                  <span>{c}</span>
-                  {i < COVERAGE.length - 1 && (
-                    <span className="ml-3 text-slate-300">·</span>
-                  )}
-                </span>
-              ))}
             </div>
           </motion.div>
         </div>
