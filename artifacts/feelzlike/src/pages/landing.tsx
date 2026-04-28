@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Search, MapPin, ArrowRight, Clock } from "lucide-react";
 import { useEffect, useState } from "react";
-import wordmark from "@assets/feelzlike_trimmed/feelzlike_WordMarque_colour_160426_1777334678269_trim.png";
 import mainLogo from "@assets/feelzlike_transparent/feelzlike_colour_150426_1777272466909_transparent.png";
 
 // Wikipedia REST API page slugs for sourcing real, attributable photos.
@@ -98,25 +97,7 @@ export default function Landing() {
       style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
     >
       {/* ─── HERO ─────────────────────────────────────── */}
-      <header className="relative overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=2400&h=1400&fit=crop&q=85"
-            alt=""
-            className="w-full h-full object-cover opacity-60"
-            onError={(e) => {
-              (e.currentTarget as HTMLImageElement).style.display = "none";
-            }}
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(246,248,251,0.35) 0%, rgba(246,248,251,0.55) 45%, rgba(246,248,251,0.98) 100%)",
-            }}
-          />
-        </div>
-
+      <header className="relative bg-white">
         <div className="relative max-w-3xl mx-auto px-5 pt-10 pb-12 md:pt-14 md:pb-16 text-center">
           {/* main brand logo with mountain — centred */}
           <motion.div
@@ -170,31 +151,27 @@ export default function Landing() {
               />
             </div>
           </motion.div>
+
+          {/* editorial intro to the regions — sits inside the same hero panel,
+              directly under the search. Plain type, not the logo. */}
+          <motion.h2
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="text-2xl md:text-4xl lg:text-5xl tracking-[-0.02em] leading-[1.1] text-slate-900 mt-10 md:mt-14 max-w-xl mx-auto"
+            style={{ fontFamily: "'Fraunces', Georgia, serif" }}
+          >
+            <span className="font-light text-slate-500">I wonder what it </span>
+            <em className="not-italic font-medium text-slate-900">
+              feelz<span className="italic font-semibold text-sky-600">like</span>
+            </em>
+            <span className="font-light text-slate-500"> in…</span>
+          </motion.h2>
         </div>
       </header>
 
       {/* ─── REGIONS ──────────────────────────────────── */}
-      <main className="relative max-w-5xl mx-auto px-5 pb-20 md:pb-28">
-        {/* editorial intro to the regions — wordmark sits inline as the brand */}
-        <motion.h2
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-3xl md:text-5xl lg:text-6xl tracking-[-0.02em] leading-[1.05] text-slate-900 mb-6 md:mb-10"
-          style={{ fontFamily: "'Fraunces', Georgia, serif" }}
-        >
-          <span className="block font-light text-slate-500">I wonder what it</span>
-          <span className="mt-1 md:mt-2 flex flex-wrap items-baseline gap-x-3 md:gap-x-4">
-            <img
-              src={wordmark}
-              alt="feelzlike"
-              className="inline-block h-9 md:h-12 lg:h-14 w-auto translate-y-[0.18em] select-none"
-              draggable={false}
-            />
-            <span className="font-light text-slate-500">in…</span>
-          </span>
-        </motion.h2>
-
+      <main className="relative max-w-5xl mx-auto px-5 pt-10 md:pt-14 pb-20 md:pb-28">
         <div className="flex items-end justify-end mb-4 md:mb-5">
           <span className="text-[11px] text-slate-500 font-medium tabular-nums">
             {filtered.length} {filtered.length === 1 ? "region" : "regions"}
