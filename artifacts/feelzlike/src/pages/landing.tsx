@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Search, MapPin, ArrowRight, ShieldCheck } from "lucide-react";
 import { useState } from "react";
-import lockupSnow from "@assets/feelzlike_transparent/feelzlike_colour_150426_1777272466909_dark.png";
+import lockupSnow from "@assets/feelzlike_dark/feelzlike_colour_150426_1777334678271_dark.png";
 
 const REGIONS = [
   {

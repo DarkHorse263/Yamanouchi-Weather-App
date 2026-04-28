@@ -13,7 +13,7 @@ import {
 import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { InstallPrompt } from "./InstallPrompt";
-import wordmarkSnow from "@assets/feelzlike_transparent/feelzlike_WordMarque_colour_160426_1777272466909_dark.png";
+import wordmarkSnow from "@assets/feelzlike_dark/feelzlike_WordMarque_colour_160426_1777334678269_dark.png";
 
 type NavItem = { path: string; icon: any; label: string };
 

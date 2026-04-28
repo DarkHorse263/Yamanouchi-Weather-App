@@ -12,7 +12,7 @@ import {
   BellRing,
   ChevronLeft,
 } from "lucide-react";
-import wordmarkSnow from "@assets/feelzlike_transparent/feelzlike_WordMarque_colour_160426_1777272466909_dark.png";
+import wordmarkSnow from "@assets/feelzlike_dark/feelzlike_WordMarque_colour_160426_1777334678269_dark.png";
 import { useLanguage } from "@/hooks/use-language";
 import { cn } from "@/lib/utils";
 
