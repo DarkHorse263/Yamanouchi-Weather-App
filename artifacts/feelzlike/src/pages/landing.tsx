@@ -123,9 +123,9 @@ export default function Landing() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-sm md:text-base text-slate-600 max-w-xl mx-auto leading-relaxed"
           >
-            Stop guessing what it feelzlike up there. Town-first mountain
-            weather you can actually trust—plus the cams, roads, and lift
-            status you need to make the call.
+            Stop guessing what it feelzlike up there today. Mountain weather
+            you can actually trust, plus mountain cams, road cams &amp; reports
+            and lift status you need to make the call.
           </motion.p>
 
           {/* SEARCH */}
