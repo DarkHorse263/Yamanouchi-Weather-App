@@ -7,9 +7,9 @@
 **Architecture:**
 - `feelzlike` (master, at `/`) — landing page, region selector, brand hub. Adding a new region = create a new artifact + add one card to its region list.
 - `yamanouchi` (at `/yamanouchi/`) — first live region. Bilingual (EN/JP) full-stack PWA with snow/green season intelligence. Live snow data from Supabase, accommodation/dining/attractions from local PostgreSQL.
-- `nagano` (at `/nagano/`) — placeholder for Nagano Prefecture (coming soon).
+- `iiyama` (at `/iiyama/`) — placeholder for Iiyama (Nagano), coming soon.
 - Live regions: Snowy Mountains (Australia, port 23491), Yamanouchi (Japan, port 20651)
-- Coming soon: Nagano (Japan, port 24019)
+- Coming soon: Iiyama (Japan, port 24019)
 - Snowy Mountains backend routes: `/api/weather`, `/api/bus-services`, `/api/webcams`, `/api/road-conditions`, `/api/lift-status`, `/api/radar` — handlers in `artifacts/api-server/src/routes/{weather,bus,webcams,roads,lifts,radar}.ts`
 - Eigomenyu was extracted to its own standalone Replit (April 2026) — no longer part of this monorepo.
 
@@ -63,7 +63,7 @@ artifacts-monorepo/
 │   │       ├── lib/auth.tsx # localStorage-based auth (placeholder for future API auth)
 │   │       ├── lib/store.ts # localStorage data store with seed data & mock AI translation
 │   │       └── index.css   # Warm Japanese palette (earth tones, akane red, matcha green)
-│   ├── nagano/             # Nagano Snow Intelligence (React+Vite, preview: /nagano/)
+│   ├── iiyama/             # Iiyama Snow Intelligence (React+Vite, preview: /iiyama/)
 │   │   └── src/
 │   │       ├── pages/      # Home, Resorts, Map, Outlook, Alerts, Cams, Stay, Eat, Explore
 │   │       ├── components/ # Layout, UI elements, hourly timeline
@@ -184,9 +184,9 @@ Utility scripts package. Each script is a `.ts` file in `src/` with a correspond
 
 ## feelzlike Unified Design System (pivoted Apr 28 2026 → Direction A: Light + Clean)
 
-All four apps (feelzlike master, snowy-mountains, yamanouchi, nagano) now share a single light, snow-forecast.com-inspired editorial palette.
+All four apps (feelzlike master, snowy-mountains, yamanouchi, iiyama) now share a single light, snow-forecast.com-inspired editorial palette.
 
-**Light token set (identical across snowy-mountains, yamanouchi, nagano `index.css`):**
+**Light token set (identical across snowy-mountains, yamanouchi, iiyama `index.css`):**
 - `--background: 210 25% 98%` (snow-bright surface)
 - `--foreground: 220 30% 12%` (deep ink)
 - `--primary: 210 90% 46%` (confident sky blue)
@@ -196,7 +196,7 @@ All four apps (feelzlike master, snowy-mountains, yamanouchi, nagano) now share 
 - Typography preserved: Fraunces display, Inter body, JetBrains Mono numerals
 - `.glass` and `.glass-strong` redefined for light (white→snow gradients with dark hairline borders)
 
-**Layout pattern (snowy-mountains, yamanouchi, nagano):**
+**Layout pattern (snowy-mountains, yamanouchi, iiyama):**
 - Desktop: 264px **white** sidebar (`bg-white border-r border-border`), `← All regions` byline link, **trimmed colour wordmark** (`@assets/feelzlike_trimmed/feelzlike_WordMarque_colour_..._trim.png` at `h-8`), region caption, nav rail with primary-coloured active state and 0.5w accent bar.
 - Mobile: top `glass-strong` header with back chevron + `h-6` wordmark + EN/JA toggle; bottom nav with `text-primary` active state and 0.5h accent bar above active icon.
 
@@ -212,7 +212,7 @@ All four apps (feelzlike master, snowy-mountains, yamanouchi, nagano) now share 
 - **Region cards** are full-width photo+content rows with real Wikimedia photos fetched at runtime via `https://en.wikipedia.org/api/rest_v1/page/summary/<TITLE>` (no key needed, CORS-enabled). Page slugs configured in `WIKI_SOURCES`: Jindabyne, Yamanouchi_Nagano, Hakuba_Nagano. Falls back to bundled Unsplash URL on fetch failure. Each Wikipedia-sourced image displays a small `WIKIPEDIA · <SOURCE>` credit pill bottom-right.
 - Card status badges: green pulsing `LIVE` for live regions, amber `SOON` for placeholders.
 
-### Nagano (`artifacts/nagano/src/pages/home.tsx`)
+### Iiyama (`artifacts/iiyama/src/pages/home.tsx`)
 - Replaced full prefecture dashboard with a clean **coming-soon** page (per user direction).
 - Editorial copy + planned-coverage chips (Hakuba Valley, Shiga Kogen, Nozawa Onsen, Madarao, Myoko, Togakushi, Karuizawa).
 - CTAs: "Open Yamanouchi Town" (primary) and "All regions".

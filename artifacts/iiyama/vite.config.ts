@@ -5,7 +5,7 @@ import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
 const port = Number(process.env.PORT) || 24019;
-const basePath = process.env.BASE_PATH || "/nagano/";
+const basePath = process.env.BASE_PATH || "/iiyama/";
 
 export default defineConfig({
   base: basePath,

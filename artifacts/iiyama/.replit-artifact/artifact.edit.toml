@@ -1,8 +1,8 @@
 kind = "web"
-previewPath = "/nagano/"
-title = "Nagano Snow Intelligence"
+previewPath = "/iiyama/"
+title = "Iiyama Snow Intelligence"
 version = "1.0.0"
-id = "artifacts/nagano"
+id = "artifacts/iiyama"
 router = "path"
 
 [[integratedSkills]]
@@ -12,18 +12,18 @@ version = "1.0.0"
 [[services]]
 localPort = 24019
 name = "web"
-paths = ["/nagano/"]
+paths = ["/iiyama/"]
 
 [services.development]
-run = "pnpm --filter @workspace/nagano run dev"
+run = "pnpm --filter @workspace/iiyama run dev"
 
 [services.env]
 PORT = "24019"
-BASE_PATH = "/nagano/"
+BASE_PATH = "/iiyama/"
 
 [services.production]
-build = ["pnpm", "--filter", "@workspace/nagano", "run", "build"]
-publicDir = "artifacts/nagano/dist/public"
+build = ["pnpm", "--filter", "@workspace/iiyama", "run", "build"]
+publicDir = "artifacts/iiyama/dist/public"
 serve = "static"
 
 [[services.production.rewrites]]

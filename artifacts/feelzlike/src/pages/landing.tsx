@@ -9,7 +9,7 @@ import mainLogo from "@assets/feelzlike_transparent/feelzlike_colour_150426_1777
 const WIKI_SOURCES: Record<string, { title: string; credit: string }> = {
   "snowy-mountains": { title: "Jindabyne", credit: "Wikipedia · Jindabyne" },
   yamanouchi: { title: "Yamanouchi,_Nagano", credit: "Wikipedia · Yamanouchi" },
-  nagano: { title: "Iiyama,_Nagano", credit: "Wikipedia · Iiyama" },
+  iiyama: { title: "Iiyama,_Nagano", credit: "Wikipedia · Iiyama" },
 };
 
 type Region = {
@@ -31,7 +31,7 @@ const REGIONS: Region[] = [
     name: "Snowy Mountains",
     region: "New South Wales, Australia",
     baseTowns: ["Jindabyne", "Berridale", "Cooma"],
-    mountains: ["Thredbo", "Perisher", "Charlottes Pass", "Mount Selwyn"],
+    mountains: ["Thredbo", "Perisher", "Charlotte Pass", "Mount Selwyn"],
     tags: ["Snow", "Hiking", "Lakes"],
     status: "live",
     href: "/snowy-mountains/",
@@ -53,13 +53,13 @@ const REGIONS: Region[] = [
     coords: "36.7° N · 138.4° E",
   },
   {
-    id: "nagano",
+    id: "iiyama",
     name: "Iiyama",
     region: "Nagano, Japan",
     baseTowns: ["Iiyama", "Kijimadaira"],
     mountains: [
       "Madarao",
-      "Tangrum",
+      "Tangram",
       "Nozawa Onsen",
       "Togari Onsen",
       "The Cupid of Romance",
@@ -67,7 +67,7 @@ const REGIONS: Region[] = [
     ],
     tags: ["Snow", "Mountains", "Onsen"],
     status: "soon",
-    href: "/nagano/",
+    href: "/iiyama/",
     image:
       "https://images.unsplash.com/photo-1610824352934-c10d87b700cc?w=1400&h=900&fit=crop&q=80",
     coords: "36.9° N · 138.4° E",

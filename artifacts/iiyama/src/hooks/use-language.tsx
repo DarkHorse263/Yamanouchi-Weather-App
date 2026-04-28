@@ -14,7 +14,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState<Language>("en");
 
   useEffect(() => {
-    const saved = localStorage.getItem("nagano-lang") as Language;
+    const saved = localStorage.getItem("iiyama-lang") as Language;
     if (saved === "en" || saved === "ja") {
       setLanguage(saved);
     }
@@ -22,7 +22,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   const handleSetLanguage = (lang: Language) => {
     setLanguage(lang);
-    localStorage.setItem("nagano-lang", lang);
+    localStorage.setItem("iiyama-lang", lang);
   };
 
   const t = (en: string | null | undefined, ja: string | null | undefined) => {
