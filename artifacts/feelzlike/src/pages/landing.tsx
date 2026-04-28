@@ -31,7 +31,7 @@ const REGIONS: Region[] = [
     name: "Snowy Mountains",
     region: "New South Wales, Australia",
     baseTowns: ["Jindabyne", "Berridale", "Cooma"],
-    mountains: ["Thredbo", "Perisher", "Charlotte Pass", "Mount Selwyn"],
+    mountains: ["Thredbo", "Perisher", "Charlotte Pass", "Selwyn"],
     tags: ["Snow", "Hiking", "Lakes"],
     status: "live",
     href: "/snowy-mountains/",
