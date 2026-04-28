@@ -161,7 +161,7 @@ export default function Landing() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-sm md:text-base text-slate-600 max-w-xl mx-auto leading-relaxed mt-10 md:mt-14"
+            className="text-sm md:text-base text-sky-700 max-w-xl mx-auto leading-relaxed mt-10 md:mt-14"
           >
             I wonder what it feelzlike in…
           </motion.p>
