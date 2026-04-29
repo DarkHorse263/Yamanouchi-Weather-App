@@ -1,7 +1,6 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Wind } from "lucide-react";
-import { LOCATION_IMAGERY } from "@/lib/mountain-imagery";
 
 interface Props {
   data: any;
@@ -11,7 +10,6 @@ interface Props {
 export function LocationCard({ data, index }: Props) {
   const loc = data.location;
   const cur = data.current;
-  const imagery = LOCATION_IMAGERY[loc.id];
   const temp = Math.round(cur.temperature);
   const feels = Math.round(cur.feelsLike);
   const wind = Math.round(cur.windSpeed);
@@ -26,32 +24,20 @@ export function LocationCard({ data, index }: Props) {
         href={`/location/${loc.id}`}
         className="group relative block overflow-hidden rounded-2xl border border-border bg-card shadow-[0_1px_3px_rgba(15,23,42,0.04),0_8px_24px_-12px_rgba(15,23,42,0.08)] hover:border-primary/30 hover:shadow-[0_2px_4px_rgba(15,23,42,0.06),0_12px_32px_-12px_rgba(15,23,42,0.12)] hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary/40"
       >
-        {/* Photo header - 16:10 banner */}
-        {imagery && (
-          <div className="relative aspect-[16/10] overflow-hidden bg-secondary">
-            <img
-              src={imagery.thumb}
-              alt=""
-              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-              loading="lazy"
-            />
-            {/* Top scrim only (so the chip + arrow read) - bottom kept clean */}
-            <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/30 to-transparent" />
-            <div className="absolute top-3 left-3">
-              <span className="byline text-white drop-shadow-sm">{loc.region ?? "NSW"}</span>
+        {/* Content */}
+        <div className="p-4 md:p-5">
+          <div className="flex items-start justify-between gap-3">
+            <div className="min-w-0">
+              <p className="byline text-muted-foreground/70">{loc.region ?? "NSW"}</p>
+              <h3 className="font-display font-semibold text-xl text-foreground tracking-tight leading-tight mt-0.5">
+                {loc.name}
+              </h3>
+              <p className="byline text-muted-foreground/80 mt-0.5">Elev {loc.elevation}m</p>
             </div>
-            <div className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center bg-white/90 backdrop-blur-sm border border-white/40 shadow-sm group-hover:bg-primary group-hover:text-white transition-colors">
+            <div className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center bg-secondary border border-border group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-colors">
               <ArrowUpRight className="w-4 h-4" />
             </div>
           </div>
-        )}
-
-        {/* Content */}
-        <div className="p-4 md:p-5">
-          <h3 className="font-display font-semibold text-xl text-foreground tracking-tight leading-tight">
-            {loc.name}
-          </h3>
-          <p className="byline text-muted-foreground/80 mt-0.5">Elev {loc.elevation}m</p>
 
           <div className="mt-3 flex items-baseline gap-1.5">
             <span className="display-number text-foreground text-5xl">{temp}</span>

@@ -29,7 +29,7 @@ import {
 import { format, parseISO } from "date-fns";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { getImagery, skyGradient } from "@/lib/mountain-imagery";
+import { skyGradient } from "@/lib/mountain-imagery";
 
 type LocationId = "thredbo" | "perisher" | "charlottes-pass" | "selwyn" | "jindabyne";
 
@@ -69,7 +69,6 @@ export default function LocationDetail() {
   if (weatherError || !weatherData) return <AppLayout><ErrorState error={weatherError} onRetry={() => weatherRefetch()} /></AppLayout>;
 
   const { location, current, daily, hourly } = weatherData;
-  const imagery = getImagery(locationId);
   const sky = skyGradient({ tempC: current.temperature, description: current.weatherDescription });
 
   const stats = [
@@ -88,13 +87,10 @@ export default function LocationDetail() {
     <AppLayout>
       {/* ─── Atmospheric hero ────────────────── */}
       <section className="relative overflow-hidden grain isolate">
-        {/* Photo backdrop */}
+        {/* Atmospheric backdrop - sky condition wash, no photo */}
         <div className="absolute inset-0 -z-10">
-          <img src={imagery.hero} alt="" className="w-full h-full object-cover" loading="eager" />
-          {/* Sky-condition wash on top of the photo */}
-          <div className="absolute inset-0 opacity-70" style={{ background: sky.wash }} />
-          {/* Vignette + fade to background */}
-          <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/45 to-background" />
+          <div className="absolute inset-0" style={{ background: sky.wash }} />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/60 to-background" />
           <div className="absolute inset-0" style={{ background: sky.glow }} />
         </div>
 
@@ -358,8 +354,6 @@ export default function LocationDetail() {
           )}
         </div>
 
-        {/* Imagery credit */}
-        <p className="byline text-muted-foreground/40 text-center pt-4">Photography · {imagery.credit}</p>
       </div>
     </AppLayout>
   );

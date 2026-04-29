@@ -4,7 +4,6 @@ import { LocationCard } from "@/components/weather/LocationCard";
 import { LoadingState } from "@/components/ui/loading-state";
 import { ErrorState } from "@/components/ui/error-state";
 import { motion } from "framer-motion";
-import { REGION_IMAGERY } from "@/lib/mountain-imagery";
 
 export default function Dashboard() {
   const { data, isLoading, error, refetch } = useGetWeather();
@@ -12,18 +11,9 @@ export default function Dashboard() {
 
   return (
     <AppLayout>
-      {/* ─── Compact atmospheric hero ─────────────────────────── */}
+      {/* ─── Compact hero ─────────────────────────── */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src={REGION_IMAGERY.hero}
-            alt=""
-            className="w-full h-full object-cover"
-            loading="eager"
-          />
-          {/* Light wash + fade to white at the bottom for clean handoff to content */}
-          <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/55 to-background" />
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-secondary/40 via-secondary/20 to-background" />
 
         <div className="relative max-w-7xl mx-auto px-5 md:px-10 pt-10 md:pt-16 pb-10 md:pb-14">
           {/* Live badge */}
