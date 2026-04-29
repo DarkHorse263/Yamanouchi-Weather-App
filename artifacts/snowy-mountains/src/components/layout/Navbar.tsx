@@ -22,8 +22,8 @@ const MORE_ITEMS: NavItem[] = [
   { href: "/location/thredbo", label: "Thredbo", icon: MountainSnow },
   { href: "/location/perisher", label: "Perisher", icon: MountainSnow },
   { href: "/location/charlottes-pass", label: "Charlotte's Pass", icon: MountainSnow },
-  { href: "/location/selwyn", label: "Selwyn", icon: MountainSnow },
   { href: "/location/jindabyne", label: "Jindabyne", icon: MountainSnow },
+  { href: "/location/selwyn", label: "Selwyn", icon: MountainSnow },
   { href: "/lift-status", label: "Lifts", icon: Cable },
   { href: "https://www.coomacoaches.com.au", label: "Bus Services", icon: Bus, external: true },
 ];
