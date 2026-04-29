@@ -160,14 +160,14 @@ export default function Landing() {
       </header>
 
       {/* ─── REGIONS ──────────────────────────────────── */}
-      <main className="relative max-w-5xl mx-auto px-5 pt-10 md:pt-14 pb-20 md:pb-28">
+      <main className="relative max-w-6xl mx-auto px-5 pt-10 md:pt-14 pb-20 md:pb-28">
         <div className="flex items-end justify-end mb-4 md:mb-5">
           <span className="text-[11px] text-slate-500 font-medium tabular-nums">
             {filtered.length} {filtered.length === 1 ? "region" : "regions"}
           </span>
         </div>
 
-        <div className="grid gap-2.5 md:gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
           {filtered.map((region, i) => (
             <motion.a
               key={region.id}
@@ -175,39 +175,38 @@ export default function Landing() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: 0.05 + i * 0.06 }}
-              className="group relative block rounded-xl border border-slate-200 bg-white hover:border-sky-300 hover:-translate-y-0.5 shadow-[0_1px_3px_rgba(15,23,42,0.04)] hover:shadow-[0_2px_4px_rgba(15,23,42,0.06),0_8px_20px_-12px_rgba(15,23,42,0.12)] transition-all duration-200"
+              className="group relative flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white hover:border-sky-400 hover:-translate-y-0.5 shadow-[0_1px_3px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_8px_rgba(15,23,42,0.06),0_12px_28px_-12px_rgba(56,128,210,0.25)] transition-all duration-200"
             >
-              <div className="p-3.5 md:p-4">
-                {/* top row: status + region + open arrow */}
-                <div className="flex items-center justify-between gap-3 mb-1.5">
-                  <div className="flex items-center gap-2 min-w-0">
-                    {region.status === "live" ? (
-                      <span className="inline-flex items-center gap-1 shrink-0">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                        <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-emerald-700">
-                          Live
-                        </span>
+              {/* logo-blue accent strip */}
+              <div className="h-1 w-full bg-gradient-to-r from-sky-400 via-sky-500 to-blue-700" />
+
+              <div className="flex-1 p-4 md:p-5 text-center md:text-left">
+                {/* status + location */}
+                <div className="flex items-center justify-center md:justify-start gap-2 flex-wrap">
+                  {region.status === "live" ? (
+                    <span className="inline-flex items-center gap-1 shrink-0 px-1.5 py-0.5 rounded-md bg-emerald-50 border border-emerald-200">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                      <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-emerald-700">
+                        Live
                       </span>
-                    ) : (
-                      <span className="inline-flex items-center gap-1 shrink-0">
-                        <Clock className="w-2.5 h-2.5 text-amber-600" />
-                        <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-amber-700">
-                          Soon
-                        </span>
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-1 shrink-0 px-1.5 py-0.5 rounded-md bg-amber-50 border border-amber-200">
+                      <Clock className="w-2.5 h-2.5 text-amber-600" />
+                      <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-amber-700">
+                        Soon
                       </span>
-                    )}
-                    <span className="text-[9px] text-slate-300">·</span>
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500 truncate">
-                      <MapPin className="w-2.5 h-2.5 inline-block mr-1 -mt-0.5 text-slate-400" />
-                      {region.region}
-                    </p>
-                  </div>
-                  <ArrowRight className="w-3.5 h-3.5 text-sky-700 shrink-0 group-hover:translate-x-0.5 transition-transform" />
+                    </span>
+                  )}
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-sky-700/80">
+                    <MapPin className="w-2.5 h-2.5 inline-block mr-1 -mt-0.5 text-sky-600/70" />
+                    {region.region}
+                  </p>
                 </div>
 
                 {/* name */}
                 <h3
-                  className="text-lg md:text-xl text-slate-900 tracking-tight leading-tight"
+                  className="mt-2 text-xl md:text-2xl text-blue-900 tracking-tight leading-tight group-hover:text-sky-700 transition-colors"
                   style={{
                     fontFamily: "'DIN Pro', system-ui, sans-serif",
                     fontWeight: 700,
@@ -216,25 +215,34 @@ export default function Landing() {
                   {region.name}
                 </h3>
 
+                {/* divider */}
+                <div className="mt-3 mb-3 mx-auto md:mx-0 h-px w-10 bg-gradient-to-r from-sky-400 to-blue-600" />
+
                 {/* compact meta */}
-                <dl className="mt-1.5 space-y-0.5 text-[12px] leading-snug">
-                  <div className="flex gap-2">
-                    <dt className="text-[10px] font-semibold uppercase tracking-[0.16em] text-sky-700 shrink-0 w-20 pt-0.5">
+                <dl className="space-y-1.5 text-[12px] leading-snug">
+                  <div>
+                    <dt className="text-[9px] font-semibold uppercase tracking-[0.18em] text-sky-700 mb-0.5">
                       Towns
                     </dt>
-                    <dd className="text-slate-700 truncate">
-                      {region.baseTowns.join(", ")}
+                    <dd className="text-slate-700">
+                      {region.baseTowns.join(" · ")}
                     </dd>
                   </div>
-                  <div className="flex gap-2">
-                    <dt className="text-[10px] font-semibold uppercase tracking-[0.16em] text-sky-700 shrink-0 w-20 pt-0.5">
+                  <div>
+                    <dt className="text-[9px] font-semibold uppercase tracking-[0.18em] text-sky-700 mb-0.5">
                       Mountains
                     </dt>
-                    <dd className="text-slate-700 truncate">
-                      {region.mountains.join(", ")}
+                    <dd className="text-slate-700">
+                      {region.mountains.join(" · ")}
                     </dd>
                   </div>
                 </dl>
+              </div>
+
+              {/* footer cue */}
+              <div className="border-t border-slate-100 bg-gradient-to-r from-sky-50/40 to-blue-50/40 px-4 py-2.5 md:px-5 flex items-center justify-center md:justify-end gap-1.5 text-[11px] font-semibold text-sky-700 group-hover:text-blue-700 transition-colors">
+                Open
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
               </div>
             </motion.a>
           ))}
