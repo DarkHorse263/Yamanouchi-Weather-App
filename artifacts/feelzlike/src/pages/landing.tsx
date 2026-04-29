@@ -1,16 +1,7 @@
 import { motion } from "framer-motion";
 import { Search, MapPin, ArrowRight, Clock } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import mainLogo from "@assets/feelzlike_transparent/feelzlike_colour_150426_1777272466909_transparent.png";
-
-// Wikipedia REST API page slugs for sourcing real, attributable photos.
-// We fetch the canonical Wikipedia "originalimage" thumbnail at runtime; if
-// the request fails, the hard-coded `image` below is used as a fallback.
-const WIKI_SOURCES: Record<string, { title: string; credit: string }> = {
-  "snowy-mountains": { title: "Jindabyne", credit: "Wikipedia · Jindabyne" },
-  yamanouchi: { title: "Yamanouchi,_Nagano", credit: "Wikipedia · Yamanouchi" },
-  iiyama: { title: "Iiyama,_Nagano", credit: "Wikipedia · Iiyama" },
-};
 
 type Region = {
   id: string;
@@ -21,7 +12,6 @@ type Region = {
   tags: string[];
   status: "live" | "soon";
   href: string;
-  image: string;
   coords: string;
 };
 
@@ -35,8 +25,6 @@ const REGIONS: Region[] = [
     tags: ["Snow", "Hiking", "Lakes"],
     status: "live",
     href: "/snowy-mountains/",
-    image:
-      "https://images.unsplash.com/photo-1517299321609-52687d1bc55a?w=1400&h=900&fit=crop&q=80",
     coords: "36.5° S · 148.3° E",
   },
   {
@@ -48,8 +36,6 @@ const REGIONS: Region[] = [
     tags: ["Snow", "Onsen", "Culture"],
     status: "live",
     href: "/yamanouchi/",
-    image:
-      "https://images.unsplash.com/photo-1542640244-7e672d6cef4e?w=1400&h=900&fit=crop&q=80",
     coords: "36.7° N · 138.4° E",
   },
   {
@@ -68,36 +54,12 @@ const REGIONS: Region[] = [
     tags: ["Snow", "Mountains", "Onsen"],
     status: "soon",
     href: "/iiyama/",
-    image:
-      "https://images.unsplash.com/photo-1610824352934-c10d87b700cc?w=1400&h=900&fit=crop&q=80",
     coords: "36.9° N · 138.4° E",
   },
 ];
 
 export default function Landing() {
   const [search, setSearch] = useState("");
-  const [wikiImages, setWikiImages] = useState<Record<string, string>>({});
-
-  // Fetch real Wikimedia photos for live regions on mount.
-  useEffect(() => {
-    const controller = new AbortController();
-    Object.entries(WIKI_SOURCES).forEach(([id, { title }]) => {
-      fetch(
-        `https://en.wikipedia.org/api/rest_v1/page/summary/${title}?redirect=true`,
-        { signal: controller.signal, headers: { Accept: "application/json" } },
-      )
-        .then((r) => (r.ok ? r.json() : null))
-        .then((data) => {
-          const url: string | undefined =
-            data?.originalimage?.source ?? data?.thumbnail?.source;
-          if (url) setWikiImages((prev) => ({ ...prev, [id]: url }));
-        })
-        .catch(() => {
-          /* graceful fallback to hard-coded image */
-        });
-    });
-    return () => controller.abort();
-  }, []);
 
   const filtered = REGIONS.filter((r) => {
     const q = search.toLowerCase();
@@ -205,110 +167,74 @@ export default function Landing() {
           </span>
         </div>
 
-        <div className="grid gap-4 md:gap-5">
+        <div className="grid gap-2.5 md:gap-3">
           {filtered.map((region, i) => (
             <motion.a
               key={region.id}
               href={region.href}
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.05 + i * 0.07 }}
-              className="group relative block overflow-hidden rounded-2xl border border-slate-200 bg-white hover:border-sky-300 hover:-translate-y-0.5 shadow-[0_1px_3px_rgba(15,23,42,0.04),0_8px_24px_-12px_rgba(15,23,42,0.08)] hover:shadow-[0_2px_4px_rgba(15,23,42,0.06),0_12px_32px_-12px_rgba(15,23,42,0.14)] transition-all duration-300"
+              transition={{ duration: 0.35, delay: 0.05 + i * 0.06 }}
+              className="group relative block rounded-xl border border-slate-200 bg-white hover:border-sky-300 hover:-translate-y-0.5 shadow-[0_1px_3px_rgba(15,23,42,0.04)] hover:shadow-[0_2px_4px_rgba(15,23,42,0.06),0_8px_20px_-12px_rgba(15,23,42,0.12)] transition-all duration-200"
             >
-              <div className="flex flex-col md:flex-row">
-                {/* image */}
-                <div className="relative w-full md:w-2/5 aspect-[16/10] md:aspect-auto overflow-hidden bg-slate-100">
-                  <img
-                    src={wikiImages[region.id] ?? region.image}
-                    alt={region.name}
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
-                    onError={(e) => {
-                      const img = e.currentTarget as HTMLImageElement;
-                      if (img.src !== region.image) img.src = region.image;
-                    }}
-                  />
-                  {/* small top-left scrim only so the chip reads */}
-                  <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/30 to-transparent pointer-events-none md:bg-gradient-to-r md:from-black/30 md:to-transparent md:h-full md:w-24" />
-                  <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-white/95 backdrop-blur-sm border border-white/40 shadow-sm">
+              <div className="p-3.5 md:p-4">
+                {/* top row: status + region + open arrow */}
+                <div className="flex items-center justify-between gap-3 mb-1.5">
+                  <div className="flex items-center gap-2 min-w-0">
                     {region.status === "live" ? (
-                      <>
+                      <span className="inline-flex items-center gap-1 shrink-0">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                         <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-emerald-700">
                           Live
                         </span>
-                      </>
+                      </span>
                     ) : (
-                      <>
+                      <span className="inline-flex items-center gap-1 shrink-0">
                         <Clock className="w-2.5 h-2.5 text-amber-600" />
                         <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-amber-700">
                           Soon
                         </span>
-                      </>
-                    )}
-                  </div>
-                  {wikiImages[region.id] && WIKI_SOURCES[region.id] && (
-                    <div className="absolute bottom-2 right-2 px-1.5 py-0.5 rounded-md bg-black/40 backdrop-blur-sm">
-                      <span className="text-[8px] font-medium uppercase tracking-wider text-white/85">
-                        {WIKI_SOURCES[region.id].credit}
                       </span>
-                    </div>
-                  )}
-                </div>
-
-                {/* content */}
-                <div className="flex-1 p-5 md:p-7 flex flex-col justify-between min-w-0">
-                  <div>
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500 mb-1.5">
-                      <MapPin className="w-3 h-3 inline-block mr-1 -mt-0.5 text-slate-500" />
+                    )}
+                    <span className="text-[9px] text-slate-300">·</span>
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500 truncate">
+                      <MapPin className="w-2.5 h-2.5 inline-block mr-1 -mt-0.5 text-slate-400" />
                       {region.region}
                     </p>
-                    <h3
-                      className="text-2xl md:text-3xl text-slate-900 tracking-tight leading-tight"
-                      style={{
-                        fontFamily: "'DIN Pro', system-ui, sans-serif",
-                        fontWeight: 700,
-                      }}
-                    >
-                      {region.name}
-                    </h3>
-                    <dl className="mt-3 space-y-2 text-sm leading-relaxed">
-                      <div className="flex flex-col sm:flex-row sm:gap-2">
-                        <dt className="text-[10px] font-semibold uppercase tracking-[0.18em] text-sky-700 sm:pt-1 sm:shrink-0 sm:w-24">
-                          Base towns
-                        </dt>
-                        <dd className="text-slate-700">
-                          {region.baseTowns.join(", ")}
-                        </dd>
-                      </div>
-                      <div className="flex flex-col sm:flex-row sm:gap-2">
-                        <dt className="text-[10px] font-semibold uppercase tracking-[0.18em] text-sky-700 sm:pt-1 sm:shrink-0 sm:w-24">
-                          Mountains
-                        </dt>
-                        <dd className="text-slate-700">
-                          {region.mountains.join(", ")}
-                        </dd>
-                      </div>
-                    </dl>
                   </div>
-
-                  <div className="mt-5 flex items-center justify-between gap-3">
-                    <div className="flex flex-wrap gap-1.5">
-                      {region.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-[10px] font-medium uppercase tracking-wider text-slate-600 bg-slate-100 border border-slate-200 px-2 py-1 rounded-md"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-700 group-hover:text-sky-900 group-hover:gap-2.5 transition-all whitespace-nowrap">
-                      Open
-                      <ArrowRight className="w-4 h-4" />
-                    </span>
-                  </div>
+                  <ArrowRight className="w-3.5 h-3.5 text-sky-700 shrink-0 group-hover:translate-x-0.5 transition-transform" />
                 </div>
+
+                {/* name */}
+                <h3
+                  className="text-lg md:text-xl text-slate-900 tracking-tight leading-tight"
+                  style={{
+                    fontFamily: "'DIN Pro', system-ui, sans-serif",
+                    fontWeight: 700,
+                  }}
+                >
+                  {region.name}
+                </h3>
+
+                {/* compact meta */}
+                <dl className="mt-1.5 space-y-0.5 text-[12px] leading-snug">
+                  <div className="flex gap-2">
+                    <dt className="text-[10px] font-semibold uppercase tracking-[0.16em] text-sky-700 shrink-0 w-20 pt-0.5">
+                      Towns
+                    </dt>
+                    <dd className="text-slate-700 truncate">
+                      {region.baseTowns.join(", ")}
+                    </dd>
+                  </div>
+                  <div className="flex gap-2">
+                    <dt className="text-[10px] font-semibold uppercase tracking-[0.16em] text-sky-700 shrink-0 w-20 pt-0.5">
+                      Mountains
+                    </dt>
+                    <dd className="text-slate-700 truncate">
+                      {region.mountains.join(", ")}
+                    </dd>
+                  </div>
+                </dl>
               </div>
             </motion.a>
           ))}
@@ -374,7 +300,6 @@ export default function Landing() {
                 <span className="font-semibold text-slate-700">Mapping &amp; imagery</span>
                 <span>OpenWeatherMap · weather tiles</span>
                 <span>BOM radar · NSW alpine</span>
-                <span>Wikimedia Commons · region photos</span>
               </div>
             </div>
           </div>
