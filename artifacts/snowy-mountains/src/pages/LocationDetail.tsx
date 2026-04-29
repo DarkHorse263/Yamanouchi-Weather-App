@@ -25,9 +25,46 @@ import {
   Eye,
   Navigation,
   ArrowDown,
+  Sun,
+  Cloud,
+  CloudSun,
+  CloudDrizzle,
+  CloudSnow,
+  CloudFog,
+  CloudLightning,
+  Sunrise,
+  Sunset,
 } from "lucide-react";
 import { format, parseISO } from "date-fns";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+function WeatherIcon({ code, isDay = true, className = "w-5 h-5" }: { code: number | null | undefined; isDay?: boolean; className?: string }) {
+  if (code == null) return <Cloud className={className} />;
+  if (code === 0) return <Sun className={className} />;
+  if (code === 1 || code === 2) return isDay ? <CloudSun className={className} /> : <Cloud className={className} />;
+  if (code === 3) return <Cloud className={className} />;
+  if (code === 45 || code === 48) return <CloudFog className={className} />;
+  if (code >= 51 && code <= 57) return <CloudDrizzle className={className} />;
+  if (code >= 61 && code <= 67) return <CloudRain className={className} />;
+  if (code >= 71 && code <= 77) return <CloudSnow className={className} />;
+  if (code >= 80 && code <= 82) return <CloudRain className={className} />;
+  if (code >= 85 && code <= 86) return <CloudSnow className={className} />;
+  if (code >= 95) return <CloudLightning className={className} />;
+  return <Cloud className={className} />;
+}
+
+function formatAgo(iso: string | undefined | null, now: number): string {
+  if (!iso) return "-";
+  const t = new Date(iso).getTime();
+  if (Number.isNaN(t)) return "-";
+  const diffSec = Math.max(0, Math.round((now - t) / 1000));
+  if (diffSec < 60) return "just now";
+  const min = Math.round(diffSec / 60);
+  if (min < 60) return `${min} min ago`;
+  const hr = Math.round(min / 60);
+  if (hr < 24) return `${hr}h ago`;
+  return `${Math.round(hr / 24)}d ago`;
+}
 import { cn } from "@/lib/utils";
 import { skyGradient } from "@/lib/mountain-imagery";
 
@@ -64,11 +101,20 @@ export default function LocationDetail() {
   const { data: liftData } = useGetLocationLiftStatus(locationId as any, { query: { enabled: isResort } });
 
   const [activeChartMetric, setActiveChartMetric] = useState<"temperature" | "snowfall" | "windSpeed">("temperature");
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 30_000);
+    return () => clearInterval(id);
+  }, []);
 
   if (weatherLoading) return <AppLayout><LoadingState message="Reading live conditions…" /></AppLayout>;
   if (weatherError || !weatherData) return <AppLayout><ErrorState error={weatherError} onRetry={() => weatherRefetch()} /></AppLayout>;
 
   const { location, current, daily, hourly } = weatherData;
+  // lastUpdated is the ISO UTC timestamp from when the server fetched/observed the reading.
+  // BOM's bomObservationTime is YYYYMMDDHHMMSS in local AU time and would need DST-aware parsing
+  // (AEST/AEDT swaps), so we deliberately use lastUpdated for the "X min ago" display.
+  const observedTime = (weatherData as any).lastUpdated as string | undefined;
   const sky = skyGradient({ tempC: current.temperature, description: current.weatherDescription });
 
   const stats = [
@@ -116,6 +162,12 @@ export default function LocationDetail() {
             <span className="byline text-muted-foreground/60">Elev {location.elevation}m</span>
             {location.bomStation && current.dataSource !== "BOM" && (
               <span className="byline text-muted-foreground/60">BOM ref · {location.bomStation}</span>
+            )}
+            {observedTime && (
+              <span className="byline text-muted-foreground/80 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/5 border border-white/10">
+                <Clock className="w-3 h-3" />
+                <span>Updated <span className="text-foreground tabular-nums">{formatAgo(observedTime, now)}</span></span>
+              </span>
             )}
           </motion.div>
 
@@ -199,69 +251,144 @@ export default function LocationDetail() {
           </div>
         </motion.div>
 
-        {/* 24-hour trend + 7-day card */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="lg:col-span-2 glass rounded-3xl p-5 md:p-8"
-          >
-            <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-6 gap-3">
-              <div>
-                <p className="byline text-muted-foreground">02 · 24-hour trend</p>
-                <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
-                  <BarChart2 className="text-primary w-5 h-5" />
-                  How it's tracking
-                </h2>
-              </div>
-              <div className="flex bg-secondary/40 p-1 rounded-xl border border-white/5">
-                {(["temperature", "snowfall", "windSpeed"] as const).map((metric) => (
-                  <button
-                    key={metric}
-                    onClick={() => setActiveChartMetric(metric)}
-                    className={cn(
-                      "px-3 md:px-4 py-1.5 rounded-lg text-xs font-semibold capitalize transition-all",
-                      activeChartMetric === metric
-                        ? "bg-foreground text-background shadow-sm"
-                        : "text-muted-foreground hover:text-foreground"
-                    )}
-                  >
-                    {metric.replace("Speed", "")}
-                  </button>
-                ))}
-              </div>
+        {/* 24-hour trend (full width) */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="glass rounded-3xl p-5 md:p-8"
+        >
+          <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-6 gap-3">
+            <div>
+              <p className="byline text-muted-foreground">02 · 24-hour trend</p>
+              <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
+                <BarChart2 className="text-primary w-5 h-5" />
+                How it's tracking
+              </h2>
             </div>
-            <ForecastChart data={hourly} metric={activeChartMetric} />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.25 }}
-            className="glass rounded-3xl p-5 md:p-8"
-          >
-            <p className="byline text-muted-foreground">03 · Outlook</p>
-            <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 mb-5 flex items-center gap-2">
-              <CalendarDays className="text-primary w-5 h-5" />
-              7-day forecast
-            </h2>
-            <div className="divide-y divide-white/5">
-              {daily.map((day: any, i: number) => (
-                <div key={day.date} className="flex items-center justify-between py-3">
-                  <div>
-                    <p className="font-medium text-foreground">{i === 0 ? "Today" : format(parseISO(day.date), "EEE")}</p>
-                    <p className="byline text-muted-foreground/60">{format(parseISO(day.date), "MMM d")}</p>
-                  </div>
-                  <div className="flex items-baseline gap-2.5 font-display" data-numeric>
-                    <span className="text-foreground text-lg">{Math.round(day.maxTemp)}°</span>
-                    <span className="text-muted-foreground/60 text-sm">{Math.round(day.minTemp)}°</span>
-                  </div>
-                </div>
+            <div className="flex bg-secondary/40 p-1 rounded-xl border border-white/5">
+              {(["temperature", "snowfall", "windSpeed"] as const).map((metric) => (
+                <button
+                  key={metric}
+                  onClick={() => setActiveChartMetric(metric)}
+                  className={cn(
+                    "px-3 md:px-4 py-1.5 rounded-lg text-xs font-semibold capitalize transition-all",
+                    activeChartMetric === metric
+                      ? "bg-foreground text-background shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  {metric.replace("Speed", "")}
+                </button>
               ))}
             </div>
-          </motion.div>
-        </div>
+          </div>
+          <ForecastChart data={hourly} metric={activeChartMetric} />
+        </motion.div>
+
+        {/* Snow-forecast-style dense 6-day mountain strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25 }}
+          className="glass rounded-3xl p-5 md:p-8"
+        >
+          <div className="flex items-end justify-between mb-5 gap-3">
+            <div>
+              <p className="byline text-muted-foreground">03 · Outlook</p>
+              <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
+                <CalendarDays className="text-primary w-5 h-5" />
+                {daily.length}-day mountain forecast
+              </h2>
+            </div>
+            <p className="byline text-muted-foreground/70 hidden md:block tabular-nums">
+              {location.elevation}m · top elevation
+            </p>
+          </div>
+
+          {(() => {
+            const days = daily.slice(0, 6);
+            const maxSnow = Math.max(0.1, ...days.map((d: any) => Number(d.snowfallSum) || 0));
+            const maxRain = Math.max(0.1, ...days.map((d: any) => Number(d.precipitationSum) || 0));
+            return (
+              <div className={cn("grid gap-px rounded-2xl overflow-hidden bg-white/5 border border-white/5",
+                days.length === 6 ? "grid-cols-3 sm:grid-cols-6" : "grid-cols-3 md:grid-cols-7")}
+              >
+                {days.map((day: any, i: number) => {
+                  const snow = Number(day.snowfallSum) || 0;
+                  const rain = Number(day.precipitationSum) || 0;
+                  const snowH = Math.round((snow / maxSnow) * 100);
+                  const rainH = Math.round((rain / maxRain) * 100);
+                  return (
+                    <div key={day.date} className="bg-background/40 px-2 py-3 md:px-3 md:py-4 flex flex-col items-center text-center gap-1.5">
+                      <p className="font-display text-sm md:text-base text-foreground tracking-tight">
+                        {i === 0 ? "Today" : format(parseISO(day.date), "EEE")}
+                      </p>
+                      <p className="byline text-muted-foreground/60 -mt-0.5">{format(parseISO(day.date), "d MMM")}</p>
+
+                      <div className="my-1 text-primary/90">
+                        <WeatherIcon code={day.weatherCode} className="w-7 h-7 md:w-9 md:h-9" />
+                      </div>
+                      <p className="text-[10px] text-muted-foreground/80 capitalize line-clamp-1 leading-tight min-h-[1.1em]">
+                        {(day.weatherDescription || "").toLowerCase()}
+                      </p>
+
+                      <div className="flex items-baseline justify-center gap-1.5 font-display mt-1" data-numeric>
+                        <span className="text-foreground text-lg md:text-xl">{Math.round(day.maxTemp)}°</span>
+                        <span className="text-muted-foreground/60 text-xs">{Math.round(day.minTemp)}°</span>
+                      </div>
+
+                      {/* snowfall / rainfall bars */}
+                      <div className="w-full flex items-end justify-center gap-1 h-9 mt-1.5" aria-hidden>
+                        <div className="flex flex-col items-center justify-end h-full">
+                          <div
+                            className="w-2.5 rounded-t-sm bg-sky-400/70"
+                            style={{ height: `${snow > 0 ? Math.max(8, snowH) : 0}%` }}
+                            title={`${snow.toFixed(1)} mm snow`}
+                          />
+                          <Snowflake className="w-2.5 h-2.5 text-sky-400/70 mt-0.5" />
+                        </div>
+                        <div className="flex flex-col items-center justify-end h-full">
+                          <div
+                            className="w-2.5 rounded-t-sm bg-blue-500/50"
+                            style={{ height: `${rain > 0 ? Math.max(8, rainH) : 0}%` }}
+                            title={`${rain.toFixed(1)} mm rain`}
+                          />
+                          <CloudRain className="w-2.5 h-2.5 text-blue-500/60 mt-0.5" />
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-1 text-[10px] tabular-nums text-muted-foreground/80 mt-0.5">
+                        <span className="text-sky-300/90">{snow > 0 ? `${snow.toFixed(snow >= 10 ? 0 : 1)}mm` : "-"}</span>
+                        <span className="text-muted-foreground/40">/</span>
+                        <span className="text-blue-300/90">{rain > 0 ? `${rain.toFixed(rain >= 10 ? 0 : 1)}mm` : "-"}</span>
+                      </div>
+
+                      {day.windSpeedMax != null && (
+                        <div className="flex items-center gap-1 text-[10px] text-muted-foreground/80 mt-1">
+                          <Wind className="w-2.5 h-2.5" />
+                          <span className="tabular-nums">{Math.round(day.windSpeedMax)}</span>
+                          <span>km/h</span>
+                        </div>
+                      )}
+
+                      {day.sunrise && day.sunset && (
+                        <div className="hidden md:flex items-center gap-2 text-[9px] text-muted-foreground/60 mt-1 pt-1 border-t border-white/5 w-full justify-center">
+                          <span className="inline-flex items-center gap-0.5"><Sunrise className="w-2.5 h-2.5" />{format(parseISO(day.sunrise), "H:mm")}</span>
+                          <span className="inline-flex items-center gap-0.5"><Sunset className="w-2.5 h-2.5" />{format(parseISO(day.sunset), "H:mm")}</span>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })()}
+
+          <div className="mt-3 flex items-center justify-end gap-3 text-[10px] text-muted-foreground/70">
+            <span className="inline-flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-sky-400/70" /> Snowfall</span>
+            <span className="inline-flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-blue-500/50" /> Rainfall</span>
+          </div>
+        </motion.div>
 
         {/* Multi-model ensemble */}
         <EnsembleForecast locationId={locationId} />

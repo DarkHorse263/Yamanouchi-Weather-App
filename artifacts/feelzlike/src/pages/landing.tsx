@@ -1,76 +1,156 @@
 import { motion } from "framer-motion";
-import { Search, MapPin, ArrowRight, Clock } from "lucide-react";
-import { useState } from "react";
+import {
+  Search,
+  MapPin,
+  ArrowRight,
+  Clock,
+  Wind,
+  Snowflake,
+  Sun,
+  Cloud,
+  CloudSun,
+  CloudRain,
+  CloudSnow,
+  CloudDrizzle,
+  CloudFog,
+  CloudLightning,
+} from "lucide-react";
+import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import mainLogo from "@assets/feelzlike_transparent/feelzlike_colour_150426_1777272466909_transparent.png";
 
-type Region = {
+// ─── types ─────────────────────────────────────────
+type RegionStatus = "live" | "soon";
+
+interface HeadlineReading {
+  locationName: string;
+  tempC: number;
+  feelsLikeC: number;
+  windKph: number;
+  windDirection: string;
+  windDirectionDeg: number | null;
+  description: string;
+  weatherCode: number | null;
+  snowfallMmNext24h: number;
+  observedAt: string;
+  source: string;
+  forecast: Array<{
+    date: string;
+    maxC: number;
+    minC: number;
+    weatherCode: number | null;
+    description: string;
+    precipMm: number;
+    snowfallMm: number;
+  }>;
+}
+
+interface Region {
   id: string;
   name: string;
+  country: string;
+  countryCode: "AU" | "JP";
   region: string;
+  status: RegionStatus;
+  href: string;
   baseTowns: string[];
   mountains: string[];
-  tags: string[];
-  status: "live" | "soon";
-  href: string;
-  coords: string;
-};
+  headlineLabel: string;
+  elevation?: number;
+  sourceLabel?: string;
+  headline: HeadlineReading | null;
+}
 
-const REGIONS: Region[] = [
-  {
-    id: "snowy-mountains",
-    name: "Snowy Mountains",
-    region: "New South Wales, Australia",
-    baseTowns: ["Jindabyne", "Berridale", "Cooma"],
-    mountains: ["Thredbo", "Perisher", "Charlotte Pass", "Selwyn"],
-    tags: ["Snow", "Hiking", "Lakes"],
-    status: "live",
-    href: "/snowy-mountains/",
-    coords: "36.5° S · 148.3° E",
-  },
-  {
-    id: "yamanouchi",
-    name: "Yamanouchi Town",
-    region: "Nagano, Japan",
-    baseTowns: ["Yudanaka", "Shibu Onsen", "Yomase"],
-    mountains: ["Shiga Kogen", "Yomase", "X-Jam", "Ryuoo"],
-    tags: ["Snow", "Onsen", "Culture"],
-    status: "live",
-    href: "/yamanouchi/",
-    coords: "36.7° N · 138.4° E",
-  },
-  {
-    id: "iiyama",
-    name: "Iiyama",
-    region: "Nagano, Japan",
-    baseTowns: ["Iiyama", "Kijimadaira"],
-    mountains: [
-      "Madarao",
-      "Tangram",
-      "Nozawa Onsen",
-      "Togari Onsen",
-      "The Cupid of Romance",
-      "Makinoiri Kogen Snow Park",
-    ],
-    tags: ["Snow", "Mountains", "Onsen"],
-    status: "soon",
-    href: "/iiyama/",
-    coords: "36.9° N · 138.4° E",
-  },
+interface RegionsResponse {
+  regions: Region[];
+  generatedAt: string;
+  sourceCount: number;
+  refreshIntervalMin: number;
+}
+
+// ─── helpers ───────────────────────────────────────
+
+const FALLBACK_REGIONS: Region[] = [
+  { id: "snowy-mountains", name: "Snowy Mountains", country: "Australia", countryCode: "AU", region: "New South Wales", status: "live", href: "/snowy-mountains/", baseTowns: ["Jindabyne", "Berridale", "Cooma"], mountains: ["Thredbo", "Perisher", "Charlotte Pass", "Selwyn"], headlineLabel: "Thredbo Top", headline: null },
+  { id: "yamanouchi", name: "Yamanouchi Town", country: "Japan", countryCode: "JP", region: "Nagano", status: "live", href: "/yamanouchi/", baseTowns: ["Yudanaka", "Shibu Onsen", "Yomase"], mountains: ["Shiga Kogen", "Yomase", "X-Jam", "Ryuoo"], headlineLabel: "Shiga Kogen", headline: null },
+  { id: "iiyama", name: "Iiyama", country: "Japan", countryCode: "JP", region: "Nagano", status: "soon", href: "/iiyama/", baseTowns: ["Iiyama", "Kijimadaira"], mountains: ["Madarao", "Tangram", "Nozawa Onsen", "Togari Onsen", "The Cupid of Romance", "Makinoiri Kogen Snow Park"], headlineLabel: "Madarao", headline: null },
 ];
+
+function WeatherIcon({ code, className = "w-4 h-4" }: { code: number | null; className?: string }) {
+  if (code == null) return <Cloud className={className} />;
+  if (code === 0) return <Sun className={className} />;
+  if (code === 1) return <CloudSun className={className} />;
+  if (code === 2) return <CloudSun className={className} />;
+  if (code === 3) return <Cloud className={className} />;
+  if (code === 45 || code === 48) return <CloudFog className={className} />;
+  if (code >= 51 && code <= 57) return <CloudDrizzle className={className} />;
+  if (code >= 61 && code <= 67) return <CloudRain className={className} />;
+  if (code >= 71 && code <= 77) return <CloudSnow className={className} />;
+  if (code >= 80 && code <= 82) return <CloudRain className={className} />;
+  if (code >= 85 && code <= 86) return <CloudSnow className={className} />;
+  if (code >= 95) return <CloudLightning className={className} />;
+  return <Cloud className={className} />;
+}
+
+function formatAgo(iso: string | undefined, now: number): string {
+  if (!iso) return "-";
+  const t = new Date(iso).getTime();
+  if (Number.isNaN(t)) return "-";
+  const diffSec = Math.max(0, Math.round((now - t) / 1000));
+  if (diffSec < 60) return "just now";
+  const min = Math.round(diffSec / 60);
+  if (min < 60) return `${min} min ago`;
+  const hr = Math.round(min / 60);
+  if (hr < 24) return `${hr}h ago`;
+  return `${Math.round(hr / 24)}d ago`;
+}
+
+function dayShort(iso: string, idx: number): string {
+  if (idx === 0) return "Today";
+  const d = new Date(iso + "T00:00:00");
+  return d.toLocaleDateString("en-US", { weekday: "short" });
+}
+
+// ─── component ─────────────────────────────────────
 
 export default function Landing() {
   const [search, setSearch] = useState("");
 
-  const filtered = REGIONS.filter((r) => {
+  const { data, dataUpdatedAt } = useQuery<RegionsResponse>({
+    queryKey: ["regions"],
+    queryFn: async () => {
+      const res = await fetch("/api/regions");
+      if (!res.ok) throw new Error("Failed to load regions");
+      return res.json();
+    },
+    staleTime: 5 * 60 * 1000,
+    refetchInterval: 15 * 60 * 1000,
+    refetchOnWindowFocus: true,
+  });
+
+  const regions = data?.regions ?? FALLBACK_REGIONS;
+  const generatedAt = data?.generatedAt;
+
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 30_000);
+    return () => clearInterval(id);
+  }, []);
+  void dataUpdatedAt;
+
+  const filtered = regions.filter((r) => {
     const q = search.toLowerCase();
     return (
       r.name.toLowerCase().includes(q) ||
       r.region.toLowerCase().includes(q) ||
-      r.tags.some((t) => t.toLowerCase().includes(q)) ||
+      r.country.toLowerCase().includes(q) ||
       r.baseTowns.some((t) => t.toLowerCase().includes(q)) ||
       r.mountains.some((m) => m.toLowerCase().includes(q))
     );
   });
+
+  const liveCount = regions.filter((r) => r.status === "live").length;
+  const totalMountains = regions.reduce((acc, r) => acc + r.mountains.length, 0);
 
   return (
     <div
@@ -80,7 +160,6 @@ export default function Landing() {
       {/* ─── HERO ─────────────────────────────────────── */}
       <header className="relative bg-white">
         <div className="relative max-w-3xl mx-auto px-5 pt-10 pb-12 md:pt-14 md:pb-16 text-center">
-          {/* main brand logo with mountain - centred */}
           <motion.div
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
@@ -122,13 +201,42 @@ export default function Landing() {
             Everything you need to decide where to go today.
           </motion.p>
 
-          {/* editorial cue to the regions - sits directly above the search,
-              with breathing room from the intro copy above. */}
+          {/* TRUST LINE */}
+          <motion.div
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.25 }}
+            className="mt-7 md:mt-9 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[11px] text-slate-600"
+          >
+            <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-emerald-50 border border-emerald-200">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60 animate-ping" />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+              </span>
+              <span className="font-semibold uppercase tracking-[0.16em] text-[9px] text-emerald-700">
+                {liveCount} live
+              </span>
+            </span>
+            <span className="text-slate-300">·</span>
+            <span>
+              <span className="font-semibold tabular-nums text-slate-700">{data?.sourceCount ?? 7}</span> official sources
+            </span>
+            <span className="text-slate-300 hidden sm:inline">·</span>
+            <span className="hidden sm:inline">
+              refreshed every <span className="tabular-nums font-semibold text-slate-700">{data?.refreshIntervalMin ?? 15}</span> min
+            </span>
+            <span className="text-slate-300">·</span>
+            <span className="tabular-nums">
+              updated {formatAgo(generatedAt, now)}
+            </span>
+          </motion.div>
+
+          {/* editorial cue */}
           <motion.p
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-sm md:text-base text-sky-700 max-w-xl mx-auto leading-relaxed mt-10 md:mt-14"
+            className="text-sm md:text-base text-sky-700 max-w-xl mx-auto leading-relaxed mt-8 md:mt-10"
           >
             I wonder what it feelzlike in…
           </motion.p>
@@ -161,92 +269,177 @@ export default function Landing() {
 
       {/* ─── REGIONS ──────────────────────────────────── */}
       <main className="relative max-w-6xl mx-auto px-5 pt-10 md:pt-14 pb-20 md:pb-28">
-        <div className="flex items-end justify-end mb-4 md:mb-5">
-          <span className="text-[11px] text-slate-500 font-medium tabular-nums">
+        <div className="flex items-end justify-between mb-4 md:mb-5 gap-3">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">
+            01 · Regions <span className="text-slate-300">·</span>{" "}
+            <span className="text-slate-400 normal-case font-medium tracking-normal">
+              {totalMountains} mountains tracked
+            </span>
+          </p>
+          <span className="text-[11px] text-slate-500 font-medium tabular-nums shrink-0">
             {filtered.length} {filtered.length === 1 ? "region" : "regions"}
           </span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
-          {filtered.map((region, i) => (
-            <motion.a
-              key={region.id}
-              href={region.href}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: 0.05 + i * 0.06 }}
-              className="group relative flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white hover:border-sky-400 hover:-translate-y-0.5 shadow-[0_1px_3px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_8px_rgba(15,23,42,0.06),0_12px_28px_-12px_rgba(56,128,210,0.25)] transition-all duration-200"
-            >
-              {/* logo-blue accent strip */}
-              <div className="h-1 w-full bg-gradient-to-r from-sky-400 via-sky-500 to-blue-700" />
+          {filtered.map((region, i) => {
+            const h = region.headline;
+            const isLive = region.status === "live";
 
-              <div className="flex-1 p-4 md:p-5 text-center md:text-left">
-                {/* status + location */}
-                <div className="flex items-center justify-center md:justify-start gap-2 flex-wrap">
-                  {region.status === "live" ? (
-                    <span className="inline-flex items-center gap-1 shrink-0 px-1.5 py-0.5 rounded-md bg-emerald-50 border border-emerald-200">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                      <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-emerald-700">
-                        Live
+            return (
+              <motion.a
+                key={region.id}
+                href={region.href}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.35, delay: 0.05 + i * 0.06 }}
+                className="group relative flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white hover:border-sky-400 hover:-translate-y-0.5 shadow-[0_1px_3px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_8px_rgba(15,23,42,0.06),0_12px_28px_-12px_rgba(56,128,210,0.25)] transition-all duration-200"
+              >
+                {/* logo-blue accent strip */}
+                <div className="h-1 w-full bg-gradient-to-r from-sky-400 via-sky-500 to-blue-700" />
+
+                <div className="flex-1 p-4 md:p-5 text-center md:text-left">
+                  {/* status + location */}
+                  <div className="flex items-center justify-center md:justify-start gap-2 flex-wrap">
+                    {isLive ? (
+                      <span className="inline-flex items-center gap-1 shrink-0 px-1.5 py-0.5 rounded-md bg-emerald-50 border border-emerald-200">
+                        <span className="relative flex h-1.5 w-1.5">
+                          <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60 animate-ping" />
+                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+                        </span>
+                        <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-emerald-700">
+                          Live
+                        </span>
                       </span>
-                    </span>
-                  ) : (
-                    <span className="inline-flex items-center gap-1 shrink-0 px-1.5 py-0.5 rounded-md bg-amber-50 border border-amber-200">
-                      <Clock className="w-2.5 h-2.5 text-amber-600" />
-                      <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-amber-700">
-                        Soon
+                    ) : (
+                      <span className="inline-flex items-center gap-1 shrink-0 px-1.5 py-0.5 rounded-md bg-amber-50 border border-amber-200">
+                        <Clock className="w-2.5 h-2.5 text-amber-600" />
+                        <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-amber-700">
+                          Soon
+                        </span>
                       </span>
-                    </span>
+                    )}
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-sky-700/80">
+                      <MapPin className="w-2.5 h-2.5 inline-block mr-1 -mt-0.5 text-sky-600/70" />
+                      {region.region}, {region.country}
+                    </p>
+                  </div>
+
+                  {/* name */}
+                  <h3
+                    className="mt-2 text-xl md:text-2xl text-blue-900 tracking-tight leading-tight group-hover:text-sky-700 transition-colors"
+                    style={{
+                      fontFamily: "'DIN Pro', system-ui, sans-serif",
+                      fontWeight: 700,
+                    }}
+                  >
+                    {region.name}
+                  </h3>
+
+                  {/* HEADLINE LIVE READING */}
+                  {isLive && h && (
+                    <div className="mt-3 pt-3 border-t border-slate-100">
+                      <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-sky-700 mb-2">
+                        {region.headlineLabel} <span className="text-slate-300">·</span> live
+                      </p>
+                      <div className="flex items-center justify-center md:justify-start gap-3">
+                        <div className="flex items-baseline gap-1">
+                          <span className="text-3xl md:text-4xl font-bold text-blue-900 tabular-nums leading-none">
+                            {Math.round(h.tempC)}
+                          </span>
+                          <span className="text-base text-sky-700 font-semibold">°C</span>
+                        </div>
+                        <div className="text-sky-600">
+                          <WeatherIcon code={h.weatherCode} className="w-7 h-7 md:w-8 md:h-8" />
+                        </div>
+                      </div>
+                      <p className="mt-1.5 text-xs text-slate-700 capitalize">
+                        {h.description.toLowerCase()} <span className="text-slate-400">·</span> feels {Math.round(h.feelsLikeC)}°
+                      </p>
+                      <div className="mt-2 flex items-center justify-center md:justify-start gap-3 text-[10px] text-slate-500">
+                        <span className="inline-flex items-center gap-1">
+                          <Wind className="w-3 h-3" />
+                          <span className="tabular-nums font-semibold text-slate-700">{h.windKph}</span>
+                          <span>km/h{h.windDirection ? ` ${h.windDirection}` : ""}</span>
+                        </span>
+                        {h.snowfallMmNext24h > 0 && (
+                          <>
+                            <span className="text-slate-300">·</span>
+                            <span className="inline-flex items-center gap-1">
+                              <Snowflake className="w-3 h-3 text-sky-500" />
+                              <span className="tabular-nums font-semibold text-slate-700">{h.snowfallMmNext24h.toFixed(1)}</span>
+                              <span>mm/24h</span>
+                            </span>
+                          </>
+                        )}
+                      </div>
+                    </div>
                   )}
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-sky-700/80">
-                    <MapPin className="w-2.5 h-2.5 inline-block mr-1 -mt-0.5 text-sky-600/70" />
-                    {region.region}
-                  </p>
+
+                  {!isLive && (
+                    <div className="mt-3 pt-3 border-t border-slate-100">
+                      <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-amber-700 mb-1.5">
+                        Live readings <span className="text-slate-300">·</span> launching soon
+                      </p>
+                      <p className="text-xs text-slate-500 leading-snug">
+                        We&apos;re wiring up JMA observations, Iiyama webcams and resort lift feeds for this region.
+                      </p>
+                    </div>
+                  )}
+
+                  {/* divider */}
+                  <div className="mt-4 mb-3 mx-auto md:mx-0 h-px w-10 bg-gradient-to-r from-sky-400 to-blue-600" />
+
+                  {/* compact meta */}
+                  <dl className="space-y-1.5 text-[12px] leading-snug">
+                    <div>
+                      <dt className="text-[9px] font-semibold uppercase tracking-[0.18em] text-sky-700 mb-0.5">
+                        Towns
+                      </dt>
+                      <dd className="text-slate-700">
+                        {region.baseTowns.join(" · ")}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="text-[9px] font-semibold uppercase tracking-[0.18em] text-sky-700 mb-0.5">
+                        Mountains
+                      </dt>
+                      <dd className="text-slate-700">
+                        {region.mountains.join(" · ")}
+                      </dd>
+                    </div>
+                  </dl>
                 </div>
 
-                {/* name */}
-                <h3
-                  className="mt-2 text-xl md:text-2xl text-blue-900 tracking-tight leading-tight group-hover:text-sky-700 transition-colors"
-                  style={{
-                    fontFamily: "'DIN Pro', system-ui, sans-serif",
-                    fontWeight: 700,
-                  }}
-                >
-                  {region.name}
-                </h3>
-
-                {/* divider */}
-                <div className="mt-3 mb-3 mx-auto md:mx-0 h-px w-10 bg-gradient-to-r from-sky-400 to-blue-600" />
-
-                {/* compact meta */}
-                <dl className="space-y-1.5 text-[12px] leading-snug">
-                  <div>
-                    <dt className="text-[9px] font-semibold uppercase tracking-[0.18em] text-sky-700 mb-0.5">
-                      Towns
-                    </dt>
-                    <dd className="text-slate-700">
-                      {region.baseTowns.join(" · ")}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="text-[9px] font-semibold uppercase tracking-[0.18em] text-sky-700 mb-0.5">
-                      Mountains
-                    </dt>
-                    <dd className="text-slate-700">
-                      {region.mountains.join(" · ")}
-                    </dd>
-                  </div>
-                </dl>
-              </div>
-
-              {/* footer cue */}
-              <div className="border-t border-slate-100 bg-gradient-to-r from-sky-50/40 to-blue-50/40 px-4 py-2.5 md:px-5 flex items-center justify-center md:justify-end gap-1.5 text-[11px] font-semibold text-sky-700 group-hover:text-blue-700 transition-colors">
-                Open
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-              </div>
-            </motion.a>
-          ))}
+                {/* footer cue */}
+                <div className="border-t border-slate-100 bg-gradient-to-r from-sky-50/50 to-blue-50/50 px-4 py-2.5 md:px-5 flex items-center justify-between gap-2 text-[11px] font-semibold text-sky-700 group-hover:text-blue-700 transition-colors">
+                  <span className="text-[10px] font-medium normal-case tracking-normal text-slate-500 truncate">
+                    {isLive && h ? (
+                      <>Updated <span className="tabular-nums text-slate-700">{formatAgo(h.observedAt, now)}</span></>
+                    ) : (
+                      <>Coming soon</>
+                    )}
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 shrink-0">
+                    Open
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                  </span>
+                </div>
+              </motion.a>
+            );
+          })}
         </div>
+
+        {filtered.length === 0 && (
+          <div className="rounded-xl border border-dashed border-slate-300 bg-white p-10 text-center">
+            <p className="text-sm text-slate-500">
+              No regions match &ldquo;<span className="text-slate-700 font-semibold">{search}</span>&rdquo; yet.
+            </p>
+            <p className="text-xs text-slate-400 mt-1.5">
+              We&apos;re expanding fast - try Snowy Mountains, Yamanouchi or Iiyama.
+            </p>
+          </div>
+        )}
 
         {/* trust footer */}
         <div className="mt-14 md:mt-20 pt-10 border-t border-slate-200">
