@@ -68,11 +68,6 @@ export default function Webcams() {
       {/* Hero Section */}
       <div className="relative overflow-hidden bg-slate-900 text-white">
         <div className="absolute inset-0 z-0">
-          <img 
-            src={`${import.meta.env.BASE_URL}images/hero-bg.png`}
-            alt="Mountain Webcams" 
-            className="w-full h-full object-cover opacity-50"
-          />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
         </div>
         

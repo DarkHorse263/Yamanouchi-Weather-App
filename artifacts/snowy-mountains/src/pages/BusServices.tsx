@@ -14,11 +14,6 @@ export default function BusServices() {
       {/* Hero Section */}
       <div className="relative overflow-hidden bg-slate-900 text-white border-b-4 border-primary">
         <div className="absolute inset-0 z-0">
-          <img 
-            src={`${import.meta.env.BASE_URL}images/bus-hero.png`}
-            alt="Mountain Bus Service" 
-            className="w-full h-full object-cover opacity-50"
-          />
           <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent" />
         </div>
         
