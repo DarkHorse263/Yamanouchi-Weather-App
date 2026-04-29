@@ -332,18 +332,50 @@ export default function Landing() {
               </p>
               <p className="text-sm text-slate-600 mt-3 max-w-lg leading-relaxed">
                 Real-time conditions sourced direct from official services —
-                national weather agencies, resort networks and transport
-                authorities. We surface the consensus, not a single guess.
+                the Bureau of Meteorology and Japan Meteorological Agency for
+                live observations, Transport for NSW for road conditions, and
+                each resort&apos;s own network for lift status. Forecasts blend
+                ECMWF, GFS, ICON, BOM ACCESS-G, JMA and MET Norway so you see
+                the consensus, not a single guess.
               </p>
             </div>
 
-            <div className="flex flex-col gap-2 md:items-end text-[11px] text-slate-500">
+            <div className="flex flex-col gap-3 md:items-end md:text-right text-[11px] text-slate-500">
               <span className="font-semibold uppercase tracking-[0.18em] text-slate-700">
                 Sources
               </span>
-              <span>Bureau of Meteorology · Australia</span>
-              <span>Japan Meteorological Agency · Japan</span>
-              <span>+ leading international forecast models</span>
+
+              <div className="flex flex-col gap-0.5">
+                <span className="font-semibold text-slate-700">Live observations</span>
+                <span>Bureau of Meteorology · Australia</span>
+                <span>Japan Meteorological Agency · Japan</span>
+                <span>Transport for NSW · Live Traffic</span>
+              </div>
+
+              <div className="flex flex-col gap-0.5">
+                <span className="font-semibold text-slate-700">Forecast ensemble</span>
+                <span>ECMWF IFS · Europe</span>
+                <span>GFS · NOAA, USA</span>
+                <span>ICON · DWD, Germany</span>
+                <span>BOM ACCESS-G · Australia</span>
+                <span>JMA Seamless · Japan</span>
+                <span>MET Norway Locationforecast</span>
+                <span className="text-slate-400">aggregated via Open-Meteo</span>
+              </div>
+
+              <div className="flex flex-col gap-0.5">
+                <span className="font-semibold text-slate-700">Resort &amp; transport</span>
+                <span>Thredbo · Perisher · Charlotte&apos;s Pass · Selwyn</span>
+                <span>Shiga Kogen · Iiyama Kogen</span>
+                <span>Cooma Coaches · Snowy Mountains</span>
+              </div>
+
+              <div className="flex flex-col gap-0.5">
+                <span className="font-semibold text-slate-700">Mapping &amp; imagery</span>
+                <span>OpenWeatherMap · weather tiles</span>
+                <span>BOM radar · NSW alpine</span>
+                <span>Wikimedia Commons · region photos</span>
+              </div>
             </div>
           </div>
         </div>
