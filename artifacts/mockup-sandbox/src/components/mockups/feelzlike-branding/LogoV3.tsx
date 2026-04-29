@@ -2,7 +2,7 @@ export function LogoV3() {
   return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-center gap-20 p-12">
       <div className="text-center">
-        <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-slate-400 mb-10">C — S-Curve Descent</p>
+        <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-slate-400 mb-10">C - S-Curve Descent</p>
         <svg viewBox="0 0 440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-[440px] h-[60px]">
           <text x="0" y="46" fontFamily="Inter, system-ui, sans-serif" fontSize="46" fontWeight="200" letterSpacing="3" fill="#1E293B">feel</text>
           <g transform="translate(144, 5)">
@@ -12,7 +12,7 @@ export function LogoV3() {
           </g>
           <text x="174" y="46" fontFamily="Inter, system-ui, sans-serif" fontSize="46" fontWeight="200" letterSpacing="3" fill="#1E293B">like</text>
         </svg>
-        <p className="text-[11px] text-slate-400 mt-6 tracking-wider">Smooth S-curve connecting the horizontals — gentle slope feel</p>
+        <p className="text-[11px] text-slate-400 mt-6 tracking-wider">Smooth S-curve connecting the horizontals - gentle slope feel</p>
       </div>
 
       <div className="flex gap-16 items-end">

@@ -13,7 +13,7 @@
  *     the world's most accurate global model; ICON is the German DWD
  *     model with strong mountain performance; GFS is the American model;
  *     BOM/JMA are the home-team national models.
- *   - MET Norway "Locationforecast 2.0" — Norwegian Met Office, considered
+ *   - MET Norway "Locationforecast 2.0" - Norwegian Met Office, considered
  *     one of the most accurate mountain forecast services in the world.
  *     Postprocesses ECMWF and adds their own corrections.
  *
@@ -93,10 +93,10 @@ const REGION_MODELS: Record<string, string[]> = {
 const MODEL_LABELS: Record<string, { label: string; detail: string }> = {
   ecmwf_ifs025: {
     label: "ECMWF IFS",
-    detail: "European Centre — world's most accurate global model",
+    detail: "European Centre - world's most accurate global model",
   },
   gfs_seamless: { label: "GFS", detail: "NOAA / US National Weather Service" },
-  icon_seamless: { label: "ICON", detail: "German DWD — strong mountain performance" },
+  icon_seamless: { label: "ICON", detail: "German DWD - strong mountain performance" },
   bom_access_global: { label: "BOM ACCESS-G", detail: "Australian Bureau of Meteorology" },
   jma_seamless: { label: "JMA", detail: "Japan Meteorological Agency" },
 };
@@ -206,7 +206,7 @@ async function fetchMetNorway(q: EnsembleQuery): Promise<{
   const meta: EnsembleSourceMeta = {
     id: "met_norway",
     label: "MET Norway",
-    detail: "Norwegian Met Office — gold standard mountain forecast (yr.no)",
+    detail: "Norwegian Met Office - gold standard mountain forecast (yr.no)",
     status: "failed",
   };
 

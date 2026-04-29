@@ -32,7 +32,7 @@ export default function Explore({ embedded = false }: { embedded?: boolean }) {
       {!embedded && (
         <div>
           <h1 className="text-3xl md:text-4xl font-black text-foreground">{t("Explore Yamanouchi", "山ノ内を探索")}</h1>
-          <p className="text-muted-foreground mt-1">{t("Every hotel, restaurant, onsen and attraction — all in one place", "ホテル・レストラン・温泉・観光スポットをまとめて検索")}</p>
+          <p className="text-muted-foreground mt-1">{t("Every hotel, restaurant, onsen and attraction - all in one place", "ホテル・レストラン・温泉・観光スポットをまとめて検索")}</p>
         </div>
       )}
 

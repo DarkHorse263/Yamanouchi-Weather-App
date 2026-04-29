@@ -233,7 +233,7 @@ function GreenHome({ t }: { t: (en: string, ja: string) => string }) {
         </div>
       </motion.div>
 
-      {/* QUICK LINKS — town-centric */}
+      {/* QUICK LINKS - town-centric */}
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
         <div className="grid grid-cols-3 gap-3">
           {[
@@ -260,7 +260,7 @@ function GreenHome({ t }: { t: (en: string, ja: string) => string }) {
         className="rounded-xl border border-border bg-secondary px-4 py-3">
         <p className="text-[10px] leading-relaxed text-muted-foreground">
           {t(
-            "Weather data from the Japan Meteorological Agency. Activity information is for reference — confirm opening dates and conditions directly with operators.",
+            "Weather data from the Japan Meteorological Agency. Activity information is for reference - confirm opening dates and conditions directly with operators.",
             "気象データは気象庁提供。アクティビティ情報は参考用です。営業日と状況は各施設へ直接ご確認ください。"
           )}
         </p>
@@ -373,10 +373,10 @@ export default function Home() {
       >
         <div className="grid grid-cols-4 divide-x divide-border">
           {[
-            { label: t("Avg Temp", "平均気温"),  value: data.avgTemp     != null ? `${data.avgTemp}°` : "—",  sub: "°C",   resort: null },
-            { label: t("Avg Wind", "平均風速"),   value: data.avgWind     != null ? `${data.avgWind}`  : "—",  sub: "km/h", resort: null },
-            { label: t("New Snow", "新雪 24h"),   value: data.topSnow24h  != null ? `${data.topSnow24h}` : "—", sub: "cm",   resort: data.topSnowResort },
-            { label: t("Best Base", "最大積雪"),  value: data.bestBase    != null ? `${data.bestBase}`  : "—",  sub: "cm",   resort: data.bestResort },
+            { label: t("Avg Temp", "平均気温"),  value: data.avgTemp     != null ? `${data.avgTemp}°` : "-",  sub: "°C",   resort: null },
+            { label: t("Avg Wind", "平均風速"),   value: data.avgWind     != null ? `${data.avgWind}`  : "-",  sub: "km/h", resort: null },
+            { label: t("New Snow", "新雪 24h"),   value: data.topSnow24h  != null ? `${data.topSnow24h}` : "-", sub: "cm",   resort: data.topSnowResort },
+            { label: t("Best Base", "最大積雪"),  value: data.bestBase    != null ? `${data.bestBase}`  : "-",  sub: "cm",   resort: data.bestResort },
           ].map(({ label, value, sub, resort }) => (
             <div key={label} className="px-2 py-4 text-center flex flex-col items-center justify-center">
               <p className="byline text-muted-foreground mb-1.5 leading-tight">{label}</p>
@@ -510,7 +510,7 @@ export default function Home() {
         className="rounded-xl border border-border bg-secondary px-4 py-3">
         <p className="text-[10px] leading-relaxed text-muted-foreground">
           {t(
-            "Snow depth & conditions from resort reporting networks. Temperature, wind & forecasts from the Japan Meteorological Agency. Updated hourly 5 AM–6 PM JST. For informational use only — verify directly with resorts before skiing.",
+            "Snow depth & conditions from resort reporting networks. Temperature, wind & forecasts from the Japan Meteorological Agency. Updated hourly 5 AM–6 PM JST. For informational use only - verify directly with resorts before skiing.",
             "積雪・ゲレンデ状況は各スキー場の報告に基づきます。気温・風・予報は気象庁提供。毎日5時〜18時（JST）更新。参考情報です。滑走前に各スキー場へ直接ご確認ください。"
           )}
         </p>

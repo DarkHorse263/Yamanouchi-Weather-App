@@ -43,7 +43,7 @@ export default function Home() {
           className="mt-4 text-muted-foreground text-base md:text-lg max-w-xl leading-relaxed"
         >
           {t(
-            "Prefecture-wide snow intelligence for the Japan Alps — Hakuba Valley, Shiga Kogen, Nozawa Onsen, Madarao and beyond — is in development.",
+            "Prefecture-wide snow intelligence for the Japan Alps - Hakuba Valley, Shiga Kogen, Nozawa Onsen, Madarao and beyond - is in development.",
             "白馬バレー、志賀高原、野沢温泉、斑尾など、日本アルプス全域のスノーインテリジェンスを準備中です。"
           )}
         </motion.p>

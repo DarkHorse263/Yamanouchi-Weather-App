@@ -155,11 +155,11 @@ export default function Resorts() {
                             <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wide">Base cm</p>
                           </div>
                           <div>
-                            <p className="text-base font-black text-slate-700">{resort.temp ?? '—'}°</p>
+                            <p className="text-base font-black text-slate-700">{resort.temp ?? '-'}°</p>
                             <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wide">Temp °C</p>
                           </div>
                           <div>
-                            <p className="text-base font-black text-slate-500">{resort.wind ?? '—'}</p>
+                            <p className="text-base font-black text-slate-500">{resort.wind ?? '-'}</p>
                             <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wide">Wind km/h</p>
                           </div>
                         </div>

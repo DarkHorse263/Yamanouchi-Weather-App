@@ -98,7 +98,7 @@ function MountainCard({ m, t, idx }: { m: MountainOutlook; t: (en: string, ja: s
                 </div>
                 {day.snowfall > 0 && <p className="text-sm font-black text-blue-700 leading-tight">❄️ {day.snowfall}cm</p>}
                 {day.rain > 0 && <p className="text-[10px] font-bold text-sky-500 leading-tight">🌧 {day.rain}mm</p>}
-                {day.snowfall === 0 && day.rain === 0 && <p className="text-sm font-black text-slate-400 leading-tight">—</p>}
+                {day.snowfall === 0 && day.rain === 0 && <p className="text-sm font-black text-slate-400 leading-tight">-</p>}
                 <p className="text-[10px] text-muted-foreground mt-0.5">{day.tempMin}° / {day.tempMax}°</p>
               </div>
             );
@@ -206,7 +206,7 @@ export default function Outlook() {
           <iframe
             key={radarLayer.key}
             src={radarLayer.url}
-            title={`${radarLayer.label} — Nagano Prefecture`}
+            title={`${radarLayer.label} - Nagano Prefecture`}
             className="w-full h-full border-0"
             allowFullScreen
             loading="lazy"
@@ -240,7 +240,7 @@ export default function Outlook() {
         </div>
         <p className="text-xs text-muted-foreground mb-3">
           {t(
-            "General weather for towns across Nagano Prefecture — ideal for travel, dining, and non-ski planning.",
+            "General weather for towns across Nagano Prefecture - ideal for travel, dining, and non-ski planning.",
             "長野県各町の一般的な天気情報です。移動・食事・観光などにご活用ください。"
           )}
         </p>

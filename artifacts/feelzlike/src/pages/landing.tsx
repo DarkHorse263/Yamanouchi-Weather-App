@@ -118,7 +118,7 @@ export default function Landing() {
       {/* ─── HERO ─────────────────────────────────────── */}
       <header className="relative bg-white">
         <div className="relative max-w-3xl mx-auto px-5 pt-10 pb-12 md:pt-14 md:pb-16 text-center">
-          {/* main brand logo with mountain — centred */}
+          {/* main brand logo with mountain - centred */}
           <motion.div
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
@@ -127,7 +127,7 @@ export default function Landing() {
           >
             <img
               src={mainLogo}
-              alt="feelzlike — resort town mountain weather"
+              alt="feelzlike - resort town mountain weather"
               className="h-24 md:h-32 lg:h-36 w-auto select-none"
               draggable={false}
             />
@@ -160,7 +160,7 @@ export default function Landing() {
             Everything you need to decide where to go today.
           </motion.p>
 
-          {/* editorial cue to the regions — sits directly above the search,
+          {/* editorial cue to the regions - sits directly above the search,
               with breathing room from the intro copy above. */}
           <motion.p
             initial={{ opacity: 0, y: 8 }}
@@ -331,7 +331,7 @@ export default function Landing() {
                 Built by mountain people, for mountain people.
               </p>
               <p className="text-sm text-slate-600 mt-3 max-w-lg leading-relaxed">
-                Real-time conditions sourced direct from official services —
+                Real-time conditions sourced direct from official services -
                 the Bureau of Meteorology and Japan Meteorological Agency for
                 live observations, Transport for NSW for road conditions, and
                 each resort&apos;s own network for lift status. Forecasts blend

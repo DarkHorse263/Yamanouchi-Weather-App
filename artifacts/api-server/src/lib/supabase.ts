@@ -1,6 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 
-// Published anon key — safe to embed (same key already in the iOS app)
+// Published anon key - safe to embed (same key already in the iOS app)
 const SUPABASE_URL =
   process.env.SUPABASE_URL ?? "https://rbeyhfotgpsigjpptcnl.supabase.co";
 const SUPABASE_ANON_KEY =

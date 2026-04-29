@@ -2,7 +2,7 @@ export function LogoV2() {
   return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-center gap-12 p-8">
       <div className="text-center">
-        <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-slate-400 mb-6">feelzlike.com — Final Logo</p>
+        <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-slate-400 mb-6">feelzlike.com - Final Logo</p>
         <img
           src="/__mockup/logo-full.png"
           alt="feelzlike logo"

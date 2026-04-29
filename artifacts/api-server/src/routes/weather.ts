@@ -227,7 +227,7 @@ async function fetchLocationWeather(location: LocationConfig) {
     throw new Error(`No weather data available for ${location.name} from any source`);
   }
 
-  // Only trust BOM readings that are recent — stale stations cause the
+  // Only trust BOM readings that are recent - stale stations cause the
   // wildly inconsistent temperatures we were seeing across resorts.
   const freshPrimary = bomObs?.[0] && isBomReadingFresh(bomObs[0]) ? bomObs[0] : null;
   const freshSecondary = bomSecondaryObs?.[0] && isBomReadingFresh(bomSecondaryObs[0]) ? bomSecondaryObs[0] : null;

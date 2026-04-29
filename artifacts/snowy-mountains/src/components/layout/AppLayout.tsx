@@ -45,7 +45,7 @@ export function AppLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen bg-background flex flex-col md:flex-row">
-      {/* Desktop sidebar — clean white column with hairline border */}
+      {/* Desktop sidebar - clean white column with hairline border */}
       <aside className="hidden md:flex flex-col w-64 fixed inset-y-0 left-0 z-50 border-r border-border bg-white">
         <div className="px-6 pt-6 pb-5">
           <a

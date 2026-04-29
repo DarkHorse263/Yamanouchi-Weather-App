@@ -18,7 +18,7 @@ import dinProBoldUrl from "@assets/DINPro-Bold_1777358240555.ttf";
     .catch(() => {});
 });
 
-// AbortErrors are benign — they happen when a fetch is cancelled because the
+// AbortErrors are benign - they happen when a fetch is cancelled because the
 // user navigated away before it completed. Suppress them so the dev overlay
 // doesn't show a false alarm.
 window.addEventListener("unhandledrejection", (event) => {

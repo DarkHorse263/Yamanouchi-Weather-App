@@ -246,7 +246,7 @@ export default function Radar() {
               </p>
               <p>
                 Green returns indicate light snowfall, yellow is moderate, and orange-to-red signals 
-                heavy snow or storm activity — great for powder days. Watch for systems 
+                heavy snow or storm activity - great for powder days. Watch for systems 
                 approaching from the west and southwest for the best snow events.
               </p>
             </div>

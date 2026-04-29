@@ -49,7 +49,7 @@
 }
 
 /*
- * Light editorial palette — "fresh utility":
+ * Light editorial palette - "fresh utility":
  * Snow-bright surface, deep ink type, confident blue primary, alpenglow accent.
  * Calm by default; photography is for region branding, not page chrome.
  */
@@ -109,7 +109,7 @@
  * Light surface utilities
  * ──────────────────────────────────────────────────────── */
 
-/* Light glass — for floating headers/nav over photography */
+/* Light glass - for floating headers/nav over photography */
 .glass {
   background: linear-gradient(180deg, hsla(0, 0%, 100%, 0.92), hsla(210, 25%, 98%, 0.85));
   backdrop-filter: blur(20px) saturate(140%);
@@ -149,7 +149,7 @@
 
 .rule { height: 1px; background: linear-gradient(90deg, transparent, hsla(220, 15%, 15%, 0.1), transparent); }
 
-/* Subtle film grain — for the rare photographic hero */
+/* Subtle film grain - for the rare photographic hero */
 .grain::after {
   content: "";
   position: absolute; inset: 0;

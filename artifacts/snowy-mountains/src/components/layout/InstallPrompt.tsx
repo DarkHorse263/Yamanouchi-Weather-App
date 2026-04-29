@@ -139,7 +139,7 @@ export function InstallPrompt() {
 
               <div className="px-6 pb-8 space-y-6">
                 <p className="text-muted-foreground text-sm">
-                  Install Snowy Mts Weather on your phone for instant access — just like a native app, with no app store needed.
+                  Install Snowy Mts Weather on your phone for instant access - just like a native app, with no app store needed.
                 </p>
 
                 {platform === "ios" && (
@@ -250,7 +250,7 @@ export function InstallPrompt() {
 
                 <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4">
                   <p className="text-sm text-blue-700 dark:text-blue-300 font-medium">
-                    Once installed, Snowy Mts Weather opens full-screen like a native app — no browser bars, instant access from your home screen.
+                    Once installed, Snowy Mts Weather opens full-screen like a native app - no browser bars, instant access from your home screen.
                   </p>
                 </div>
               </div>

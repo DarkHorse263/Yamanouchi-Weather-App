@@ -67,7 +67,7 @@ export function EnsembleForecast({ locationId }: Props) {
             Multi-model consensus
           </h2>
           <p className="text-sm text-muted-foreground mt-2 max-w-md leading-relaxed">
-            We combine {okSources.length} independent forecasts. You see the consensus and how much they disagree — never just one model's guess.
+            We combine {okSources.length} independent forecasts. You see the consensus and how much they disagree - never just one model's guess.
           </p>
         </div>
         <div className="flex flex-wrap gap-1.5">
@@ -130,9 +130,9 @@ export function EnsembleForecast({ locationId }: Props) {
                         <div key={p.source} className="flex items-center justify-between bg-white/[0.04] border border-white/5 rounded-lg px-3 py-2">
                           <span className="text-sm text-foreground/90">{p.source}</span>
                           <span className="font-mono text-xs text-muted-foreground" data-numeric>
-                            {p.tempMax !== undefined ? `${Math.round(p.tempMax)}°` : "—"}
+                            {p.tempMax !== undefined ? `${Math.round(p.tempMax)}°` : "-"}
                             {" / "}
-                            {p.tempMin !== undefined ? `${Math.round(p.tempMin)}°` : "—"}
+                            {p.tempMin !== undefined ? `${Math.round(p.tempMin)}°` : "-"}
                             {p.snow ? ` · ${p.snow.toFixed(0)}cm` : ""}
                           </span>
                         </div>
@@ -163,13 +163,13 @@ export function EnsembleForecast({ locationId }: Props) {
               <span className={cn("mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0", s.status === "ok" ? "bg-emerald-400" : "bg-rose-400/70")} />
               <div>
                 <span className="text-foreground/90 font-medium">{s.label}</span>
-                {s.detail && <span> — {s.detail}</span>}
+                {s.detail && <span> - {s.detail}</span>}
                 {s.status !== "ok" && <span className="text-rose-400/80"> (unavailable)</span>}
               </div>
             </div>
           ))}
           <p className="pt-2 italic text-muted-foreground/70">
-            Generated {format(parseISO(data.generatedAt), "PP p")}. Cached 30 min. Confidence reflects how much the models disagree — tighter spread = greater certainty.
+            Generated {format(parseISO(data.generatedAt), "PP p")}. Cached 30 min. Confidence reflects how much the models disagree - tighter spread = greater certainty.
           </p>
         </div>
       </details>

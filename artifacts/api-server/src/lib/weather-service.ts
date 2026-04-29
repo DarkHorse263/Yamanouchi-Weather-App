@@ -1,12 +1,12 @@
 /**
- * Weather Service — fetches live data from Open-Meteo using the JMA Seamless model.
+ * Weather Service - fetches live data from Open-Meteo using the JMA Seamless model.
  * Open-Meteo is free, requires no API key, and uses Japan Meteorological Agency (JMA)
  * data as its primary model for Japan coordinates.
  *
  * Sources:
- *   - JMA (Japan Meteorological Agency) — government official model, via Open-Meteo JMA Seamless
- *   - Japan Weather Association (JWA / tenki.jp) — same underlying JMA data refined
- *   - Weathernews Inc. — hyper-local; their proprietary data is not publicly accessible via API
+ *   - JMA (Japan Meteorological Agency) - government official model, via Open-Meteo JMA Seamless
+ *   - Japan Weather Association (JWA / tenki.jp) - same underlying JMA data refined
+ *   - Weathernews Inc. - hyper-local; their proprietary data is not publicly accessible via API
  *
  * Data is cached for 10 minutes. Each refresh fetches one request per region (3 total).
  */

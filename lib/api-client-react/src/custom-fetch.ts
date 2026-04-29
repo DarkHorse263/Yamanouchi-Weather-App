@@ -19,7 +19,7 @@ function resolveMethod(input: RequestInfo | URL, explicitMethod?: string): strin
   return "GET";
 }
 
-// Use loose check for URL — some runtimes (e.g. React Native) polyfill URL
+// Use loose check for URL - some runtimes (e.g. React Native) polyfill URL
 // differently, so `instanceof URL` can fail.
 function isUrl(input: RequestInfo | URL): input is URL {
   return typeof URL !== "undefined" && input instanceof URL;
@@ -112,7 +112,7 @@ function buildErrorMessage(response: Response, data: unknown): string {
     getStringField(data, "error_description") ??
     getStringField(data, "error");
 
-  if (title && detail) return `${prefix}: ${title} — ${detail}`;
+  if (title && detail) return `${prefix}: ${title} - ${detail}`;
   if (detail) return `${prefix}: ${detail}`;
   if (message) return `${prefix}: ${message}`;
   if (title) return `${prefix}: ${title}`;
@@ -302,7 +302,7 @@ export async function customFetch<T = unknown>(
   // Drop the AbortSignal from the fetch call.  When TanStack Query cancels a
   // query on unmount the signal abort propagates as an unhandled rejection that
   // surfaces in the dev error overlay.  Letting requests finish in the
-  // background is harmless — the result is stored in the cache and silently
+  // background is harmless - the result is stored in the cache and silently
   // discarded if the observer is gone.
   const { signal: _signal, ...fetchInit } = init;
   const response = await fetch(input, { ...fetchInit, method, headers });

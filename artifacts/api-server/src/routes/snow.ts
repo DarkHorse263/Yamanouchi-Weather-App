@@ -73,7 +73,7 @@ function normalizeRegion(raw: string): string {
   return raw.replace(/\s+region$/i, "").trim();
 }
 
-/** Apply live Open-Meteo/JMA weather data to a list of resorts — only overrides if Supabase data is missing */
+/** Apply live Open-Meteo/JMA weather data to a list of resorts - only overrides if Supabase data is missing */
 async function applyLiveWeather<T extends { region: string; temp: number | null; wind: number | null; snow24h: number | null; snowTomorrow: number | null }>(
   resorts: T[],
   force = false

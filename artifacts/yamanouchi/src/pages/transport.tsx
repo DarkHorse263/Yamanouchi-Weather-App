@@ -154,7 +154,7 @@ export default function Transport() {
 
         {/* ── SECTION 1: FREE SHUTTLE WITHIN SHIGA KOGEN ── */}
         <section>
-          <SectionHeader num="1" color="bg-green-600" title={t("Free Shuttle — Within Shiga Kogen", "無料シャトル — 志賀高原内")} />
+          <SectionHeader num="1" color="bg-green-600" title={t("Free Shuttle - Within Shiga Kogen", "無料シャトル - 志賀高原内")} />
           <div className="bg-white rounded-xl border border-slate-100 p-3.5 space-y-3">
             <div className="flex items-start gap-3">
               <Bus className="w-5 h-5 text-green-600 mt-0.5 shrink-0" />
@@ -181,13 +181,13 @@ export default function Transport() {
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
                 <p className="text-xs text-slate-600">
-                  {t("Central hub: Yamanoeki bus stop. All routes pass through here — it's where the express bus from Nagano also drops off.", "中心拠点は山ノ駅バス停。全路線がここを経由し、長野からの急行バスもここに到着します。")}
+                  {t("Central hub: Yamanoeki bus stop. All routes pass through here - it's where the express bus from Nagano also drops off.", "中心拠点は山ノ駅バス停。全路線がここを経由し、長野からの急行バスもここに到着します。")}
                 </p>
               </div>
               <div className="flex items-start gap-2">
                 <Info className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
                 <p className="text-xs text-slate-600">
-                  {t("Runs daily during operating season. Frequency varies by route — allow extra time between far-apart areas.", "運行シーズン中は毎日運行。路線によって頻度が異なります。離れたエリア間は余裕を持って。")}
+                  {t("Runs daily during operating season. Frequency varies by route - allow extra time between far-apart areas.", "運行シーズン中は毎日運行。路線によって頻度が異なります。離れたエリア間は余裕を持って。")}
                 </p>
               </div>
             </div>
@@ -235,13 +235,13 @@ export default function Transport() {
             <div className="flex items-start gap-2 bg-blue-50 rounded-lg px-3 py-2">
               <Info className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
               <p className="text-xs text-blue-700">
-                {t("This bus also stops at the Snow Monkey Park on the way up and back — useful for combining both in one day.", "このバスは行き帰りに野猿公苑に停車。志賀高原とお猿を1日で楽しめます。")}
+                {t("This bus also stops at the Snow Monkey Park on the way up and back - useful for combining both in one day.", "このバスは行き帰りに野猿公苑に停車。志賀高原とお猿を1日で楽しめます。")}
               </p>
             </div>
 
-            {/* Return times (Park → Yudanaka via Shiga) — these are what we have for winter */}
+            {/* Return times (Park → Yudanaka via Shiga) - these are what we have for winter */}
             <div>
-              <p className="text-xs font-bold text-slate-700 mb-1">{t("Return — Shiga Kogen → Yudanaka (Winter 2025/26)", "帰り — 志賀高原→湯田中（2025/26シーズン）")}</p>
+              <p className="text-xs font-bold text-slate-700 mb-1">{t("Return - Shiga Kogen → Yudanaka (Winter 2025/26)", "帰り - 志賀高原→湯田中（2025/26シーズン）")}</p>
               <p className="text-[10px] text-slate-400 mb-2">{t("Via Snow Monkey Park stop", "野猿公苑バス停経由")}</p>
               <TimetableBlock
                 title="Shiga Kogen (via Park) → Yudanaka"
@@ -273,9 +273,9 @@ export default function Transport() {
           <SectionHeader num="3" color="bg-blue-600" title={t("Getting to Yudanaka", "湯田中へのアクセス")} />
           <div className="bg-white rounded-xl border border-slate-100 p-3.5 space-y-4">
 
-            {/* Option A — Express Bus direct to Shiga Kogen */}
+            {/* Option A - Express Bus direct to Shiga Kogen */}
             <div>
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">{t("Fastest option — direct to Shiga Kogen", "最速 — 志賀高原直行")}</p>
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">{t("Fastest option - direct to Shiga Kogen", "最速 - 志賀高原直行")}</p>
               <div className="flex items-start gap-3">
                 <Bus className="w-5 h-5 text-blue-600 mt-0.5 shrink-0" />
                 <div className="flex-1">
@@ -292,7 +292,7 @@ export default function Transport() {
               <div className="mt-2 space-y-1.5">
                 <div className="flex items-start gap-2">
                   <Info className="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5" />
-                  <p className="text-xs text-slate-500">{t("Seats not guaranteed — arrive at Stop 23 early, especially weekends.", "座席は保証なし。特に週末は早めに。")}</p>
+                  <p className="text-xs text-slate-500">{t("Seats not guaranteed - arrive at Stop 23 early, especially weekends.", "座席は保証なし。特に週末は早めに。")}</p>
                 </div>
                 <div className="flex items-start gap-2">
                   <CreditCard className="w-3.5 h-3.5 text-green-500 shrink-0 mt-0.5" />
@@ -431,7 +431,7 @@ export default function Transport() {
         </section>
 
         <p className="text-[10px] text-slate-400 text-center pb-2">
-          {t("Timetables shown for reference. Schedules may differ by season — always verify with operator before travel.", "時刻表は参考情報です。シーズンにより変更の場合があります。ご利用前に必ず運行会社にご確認ください。")}
+          {t("Timetables shown for reference. Schedules may differ by season - always verify with operator before travel.", "時刻表は参考情報です。シーズンにより変更の場合があります。ご利用前に必ず運行会社にご確認ください。")}
         </p>
       </div>
     </div>

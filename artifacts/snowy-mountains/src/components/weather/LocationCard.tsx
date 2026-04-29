@@ -26,7 +26,7 @@ export function LocationCard({ data, index }: Props) {
         href={`/location/${loc.id}`}
         className="group relative block overflow-hidden rounded-2xl border border-border bg-card shadow-[0_1px_3px_rgba(15,23,42,0.04),0_8px_24px_-12px_rgba(15,23,42,0.08)] hover:border-primary/30 hover:shadow-[0_2px_4px_rgba(15,23,42,0.06),0_12px_32px_-12px_rgba(15,23,42,0.12)] hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary/40"
       >
-        {/* Photo header — 16:10 banner */}
+        {/* Photo header - 16:10 banner */}
         {imagery && (
           <div className="relative aspect-[16/10] overflow-hidden bg-secondary">
             <img
@@ -35,7 +35,7 @@ export function LocationCard({ data, index }: Props) {
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
               loading="lazy"
             />
-            {/* Top scrim only (so the chip + arrow read) — bottom kept clean */}
+            {/* Top scrim only (so the chip + arrow read) - bottom kept clean */}
             <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/30 to-transparent" />
             <div className="absolute top-3 left-3">
               <span className="byline text-white drop-shadow-sm">{loc.region ?? "NSW"}</span>
@@ -59,7 +59,7 @@ export function LocationCard({ data, index }: Props) {
           </div>
 
           <p className="text-foreground/85 text-sm font-medium capitalize tracking-tight mt-1">
-            {cur.description ?? "—"}
+            {cur.description ?? "-"}
           </p>
 
           <div className="mt-3 pt-3 border-t border-border flex items-center gap-3 text-[11px] text-muted-foreground">
