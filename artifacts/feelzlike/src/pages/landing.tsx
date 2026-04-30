@@ -111,6 +111,18 @@ function dayShort(iso: string, idx: number): string {
   return d.toLocaleDateString("en-US", { weekday: "short" });
 }
 
+// Snow-season detection per region. AU is southern-hemisphere (winter Jun–Sep);
+// JP is northern-hemisphere (winter Dec–Mar). Anything else on the card flips
+// to the green-season palette.
+function seasonForRegion(region: Region): "winter" | "green" {
+  const month = new Date().getMonth() + 1;
+  if (region.countryCode === "AU") {
+    return month >= 6 && month <= 9 ? "winter" : "green";
+  }
+  // JP and any other northern-hemisphere region we add later
+  return month >= 12 || month <= 3 ? "winter" : "green";
+}
+
 // ─── component ─────────────────────────────────────
 
 export default function Landing() {
@@ -285,6 +297,34 @@ export default function Landing() {
           {filtered.map((region, i) => {
             const h = region.headline;
             const isLive = region.status === "live";
+            const isGreen = seasonForRegion(region) === "green";
+
+            // Palette swap: when a region is in its green (off-snow) season,
+            // border + accent + type all flip from logo-blue to emerald so the
+            // viewer sees at a glance "this region isn't in snow ops right now".
+            // Tailwind needs literal class strings for purging — keep both
+            // branches as full literals.
+            const cardBorder = isGreen
+              ? "border-emerald-200 hover:border-emerald-500 hover:shadow-[0_4px_8px_rgba(15,23,42,0.06),0_12px_28px_-12px_rgba(16,160,90,0.28)]"
+              : "border-slate-200 hover:border-sky-400 hover:shadow-[0_4px_8px_rgba(15,23,42,0.06),0_12px_28px_-12px_rgba(56,128,210,0.25)]";
+            const accentStrip = isGreen
+              ? "bg-gradient-to-r from-emerald-400 via-emerald-500 to-emerald-700"
+              : "bg-gradient-to-r from-sky-400 via-sky-500 to-blue-700";
+            const locationLabel = isGreen ? "text-emerald-700/80" : "text-sky-700/80";
+            const locationIcon = isGreen ? "text-emerald-600/70" : "text-sky-600/70";
+            const nameClass = isGreen
+              ? "text-emerald-900 group-hover:text-emerald-700"
+              : "text-blue-900 group-hover:text-sky-700";
+            const sectionLabel = isGreen ? "text-emerald-700" : "text-sky-700";
+            const numberClass = isGreen ? "text-emerald-900" : "text-blue-900";
+            const unitClass = isGreen ? "text-emerald-700" : "text-sky-700";
+            const iconAccent = isGreen ? "text-emerald-600" : "text-sky-600";
+            const dividerClass = isGreen
+              ? "bg-gradient-to-r from-emerald-400 to-emerald-600"
+              : "bg-gradient-to-r from-sky-400 to-blue-600";
+            const footerStrip = isGreen
+              ? "bg-gradient-to-r from-emerald-50/60 to-emerald-50/40 text-emerald-700 group-hover:text-emerald-800"
+              : "bg-gradient-to-r from-sky-50/50 to-blue-50/50 text-sky-700 group-hover:text-blue-700";
 
             return (
               <motion.a
@@ -293,10 +333,10 @@ export default function Landing() {
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.35, delay: 0.05 + i * 0.06 }}
-                className="group relative flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white hover:border-sky-400 hover:-translate-y-0.5 shadow-[0_1px_3px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_8px_rgba(15,23,42,0.06),0_12px_28px_-12px_rgba(56,128,210,0.25)] transition-all duration-200"
+                className={`group relative flex flex-col overflow-hidden rounded-xl border bg-white hover:-translate-y-0.5 shadow-[0_1px_3px_rgba(15,23,42,0.04)] transition-all duration-200 ${cardBorder}`}
               >
-                {/* logo-blue accent strip */}
-                <div className="h-1 w-full bg-gradient-to-r from-sky-400 via-sky-500 to-blue-700" />
+                {/* season-aware accent strip */}
+                <div className={`h-1 w-full ${accentStrip}`} />
 
                 <div className="flex-1 p-4 md:p-5 text-center md:text-left">
                   {/* status + location */}
@@ -319,15 +359,15 @@ export default function Landing() {
                         </span>
                       </span>
                     )}
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-sky-700/80">
-                      <MapPin className="w-2.5 h-2.5 inline-block mr-1 -mt-0.5 text-sky-600/70" />
+                    <p className={`text-[10px] font-semibold uppercase tracking-[0.18em] ${locationLabel}`}>
+                      <MapPin className={`w-2.5 h-2.5 inline-block mr-1 -mt-0.5 ${locationIcon}`} />
                       {region.region}, {region.country}
                     </p>
                   </div>
 
                   {/* name */}
                   <h3
-                    className="mt-2 text-xl md:text-2xl text-blue-900 tracking-tight leading-tight group-hover:text-sky-700 transition-colors"
+                    className={`mt-2 text-xl md:text-2xl tracking-tight leading-tight transition-colors ${nameClass}`}
                     style={{
                       fontFamily: "'DIN Pro', system-ui, sans-serif",
                       fontWeight: 700,
@@ -339,17 +379,17 @@ export default function Landing() {
                   {/* HEADLINE LIVE READING */}
                   {isLive && h && (
                     <div className="mt-3 pt-3 border-t border-slate-100">
-                      <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-sky-700 mb-2">
+                      <p className={`text-[9px] font-semibold uppercase tracking-[0.18em] mb-2 ${sectionLabel}`}>
                         {region.headlineLabel} <span className="text-slate-300">·</span> live
                       </p>
                       <div className="flex items-center justify-center md:justify-start gap-3">
                         <div className="flex items-baseline gap-1">
-                          <span className="text-3xl md:text-4xl font-bold text-blue-900 tabular-nums leading-none">
+                          <span className={`text-3xl md:text-4xl font-bold tabular-nums leading-none ${numberClass}`}>
                             {Math.round(h.tempC)}
                           </span>
-                          <span className="text-base text-sky-700 font-semibold">°C</span>
+                          <span className={`text-base font-semibold ${unitClass}`}>°C</span>
                         </div>
-                        <div className="text-sky-600">
+                        <div className={iconAccent}>
                           <WeatherIcon code={h.weatherCode} className="w-7 h-7 md:w-8 md:h-8" />
                         </div>
                       </div>
@@ -366,7 +406,7 @@ export default function Landing() {
                           <>
                             <span className="text-slate-300">·</span>
                             <span className="inline-flex items-center gap-1">
-                              <Snowflake className="w-3 h-3 text-sky-500" />
+                              <Snowflake className={`w-3 h-3 ${isGreen ? "text-emerald-500" : "text-sky-500"}`} />
                               <span className="tabular-nums font-semibold text-slate-700">{h.snowfallMmNext24h.toFixed(1)}</span>
                               <span>mm/24h</span>
                             </span>
@@ -378,22 +418,19 @@ export default function Landing() {
 
                   {!isLive && (
                     <div className="mt-3 pt-3 border-t border-slate-100">
-                      <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-amber-700 mb-1.5">
-                        Live readings <span className="text-slate-300">·</span> launching soon
-                      </p>
-                      <p className="text-xs text-slate-500 leading-snug">
-                        We&apos;re wiring up JMA observations, Iiyama webcams and resort lift feeds for this region.
+                      <p className="text-xs font-medium text-slate-500 leading-snug">
+                        More Regions coming soon
                       </p>
                     </div>
                   )}
 
                   {/* divider */}
-                  <div className="mt-4 mb-3 mx-auto md:mx-0 h-px w-10 bg-gradient-to-r from-sky-400 to-blue-600" />
+                  <div className={`mt-4 mb-3 mx-auto md:mx-0 h-px w-10 ${dividerClass}`} />
 
                   {/* compact meta */}
                   <dl className="space-y-1.5 text-[12px] leading-snug">
                     <div>
-                      <dt className="text-[9px] font-semibold uppercase tracking-[0.18em] text-sky-700 mb-0.5">
+                      <dt className={`text-[9px] font-semibold uppercase tracking-[0.18em] mb-0.5 ${sectionLabel}`}>
                         Towns
                       </dt>
                       <dd className="text-slate-700">
@@ -401,7 +438,7 @@ export default function Landing() {
                       </dd>
                     </div>
                     <div>
-                      <dt className="text-[9px] font-semibold uppercase tracking-[0.18em] text-sky-700 mb-0.5">
+                      <dt className={`text-[9px] font-semibold uppercase tracking-[0.18em] mb-0.5 ${sectionLabel}`}>
                         Mountains
                       </dt>
                       <dd className="text-slate-700">
@@ -412,7 +449,7 @@ export default function Landing() {
                 </div>
 
                 {/* footer cue */}
-                <div className="border-t border-slate-100 bg-gradient-to-r from-sky-50/50 to-blue-50/50 px-4 py-2.5 md:px-5 flex items-center justify-between gap-2 text-[11px] font-semibold text-sky-700 group-hover:text-blue-700 transition-colors">
+                <div className={`border-t border-slate-100 px-4 py-2.5 md:px-5 flex items-center justify-between gap-2 text-[11px] font-semibold transition-colors ${footerStrip}`}>
                   <span className="text-[10px] font-medium normal-case tracking-normal text-slate-500 truncate">
                     {isLive && h ? (
                       <>Updated <span className="tabular-nums text-slate-700">{formatAgo(h.observedAt, now)}</span></>
