@@ -2,6 +2,7 @@ import express, { type Express, type Request } from "express";
 import cors from "cors";
 import path from "path";
 import rateLimit from "express-rate-limit";
+import * as Sentry from "@sentry/node";
 import router from "./routes";
 
 const app: Express = express();
@@ -46,5 +47,11 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(staticDir, "index.html"));
   });
 }
+
+// Sentry's express error handler must be registered AFTER all controllers and
+// before any other error middleware. It captures unhandled exceptions thrown
+// from request handlers (sync or async) and reports them with full request
+// context. No-ops if SENTRY_DSN_API is unset.
+Sentry.setupExpressErrorHandler(app);
 
 export default app;

@@ -1,3 +1,5 @@
+// MUST be the first import — see instrument.ts comment.
+import "./instrument";
 import app from "./app";
 
 const rawPort = process.env["PORT"];

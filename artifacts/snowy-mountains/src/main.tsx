@@ -1,4 +1,6 @@
+import "./instrument";
 import { createRoot } from "react-dom/client";
+import { reactErrorHandler } from "@sentry/react";
 import App from "./App";
 import "./index.css";
 import dinProUrl from "@assets/DINPro_1777358240556.ttf";
@@ -18,4 +20,8 @@ import dinProBoldUrl from "@assets/DINPro-Bold_1777358240555.ttf";
     .catch(() => {});
 });
 
-createRoot(document.getElementById("root")!).render(<App />);
+createRoot(document.getElementById("root")!, {
+  onUncaughtError: reactErrorHandler(),
+  onCaughtError: reactErrorHandler(),
+  onRecoverableError: reactErrorHandler(),
+}).render(<App />);
