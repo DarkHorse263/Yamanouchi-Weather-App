@@ -145,8 +145,18 @@ interface RegionPayload extends Omit<RegionConfig, "lat" | "lon" | "elevation" |
   headline: HeadlineReading | null;
 }
 
-const cache = new Map<string, { data: HeadlineReading; expires: number }>();
-const CACHE_TTL_MS = 5 * 60 * 1000;
+// ── Cache + dogpile protection ────────────────────────────────────────────
+// freshUntil: serve straight from cache, no upstream call
+// staleUntil: serve cached data immediately AND kick off a background refresh
+// past staleUntil: must wait for fresh data (or return null on failure)
+interface CacheEntry { data: HeadlineReading; freshUntil: number; staleUntil: number }
+const cache = new Map<string, CacheEntry>();
+const inFlight = new Map<string, Promise<HeadlineReading | null>>();
+const FRESH_MS = 5 * 60 * 1000;          // serve straight from cache for 5 min
+const STALE_MS = 6 * 60 * 60 * 1000;     // keep stale entries usable for 6 hours
+
+let cacheStats = { hits: 0, staleServed: 0, upstreamCalls: 0, upstreamFails: 0, coalesced: 0 };
+export function getCacheStats() { return { ...cacheStats, entries: cache.size, inFlight: inFlight.size }; }
 
 async function fetchHeadline(r: RegionConfig): Promise<HeadlineReading | null> {
   if (r.status === "soon" || !r.lat || !r.lon) return null;
@@ -154,8 +164,63 @@ async function fetchHeadline(r: RegionConfig): Promise<HeadlineReading | null> {
   const cacheKey = r.id;
   const now = Date.now();
   const cached = cache.get(cacheKey);
-  if (cached && cached.expires > now) return cached.data;
 
+  // Fresh hit — fastest path
+  if (cached && cached.freshUntil > now) {
+    cacheStats.hits++;
+    return cached.data;
+  }
+
+  // Coalesce: if a refresh is already in flight for this key, ride it
+  const existing = inFlight.get(cacheKey);
+  if (existing) {
+    cacheStats.coalesced++;
+    // If we have stale data, serve it immediately rather than waiting
+    if (cached && cached.staleUntil > now) {
+      cacheStats.staleServed++;
+      return cached.data;
+    }
+    return existing;
+  }
+
+  // Kick off the refresh
+  const refresh = fetchHeadlineUpstream(r)
+    .then((fresh) => {
+      if (fresh) {
+        cache.set(cacheKey, {
+          data: fresh,
+          freshUntil: Date.now() + FRESH_MS,
+          staleUntil: Date.now() + STALE_MS,
+        });
+        cacheStats.upstreamCalls++;
+        return fresh;
+      }
+      // Upstream gave us nothing usable
+      cacheStats.upstreamFails++;
+      return cached?.data ?? null;
+    })
+    .catch((err) => {
+      cacheStats.upstreamFails++;
+      console.warn(`[regions] headline fetch failed for ${r.id}:`, err);
+      return cached?.data ?? null; // serve stale on error if we have any
+    })
+    .finally(() => {
+      inFlight.delete(cacheKey);
+    });
+
+  inFlight.set(cacheKey, refresh);
+
+  // Stale-while-revalidate: serve cached data immediately, refresh runs in background
+  if (cached && cached.staleUntil > now) {
+    cacheStats.staleServed++;
+    return cached.data;
+  }
+
+  // No cache at all — must wait for fresh
+  return refresh;
+}
+
+async function fetchHeadlineUpstream(r: RegionConfig): Promise<HeadlineReading | null> {
   const params = new URLSearchParams({
     latitude: String(r.lat),
     longitude: String(r.lon),
@@ -231,22 +296,29 @@ async function fetchHeadline(r: RegionConfig): Promise<HeadlineReading | null> {
       }),
     };
 
-    cache.set(cacheKey, { data: headline, expires: now + CACHE_TTL_MS });
     return headline;
   } catch (err) {
-    console.warn(`[regions] headline fetch failed for ${r.id}:`, err);
-    return null;
+    console.warn(`[regions] upstream fetch failed for ${r.id}:`, err);
+    throw err; // let the caller fall back to stale cache
   }
 }
 
 router.get("/regions", async (_req, res) => {
   try {
-    const headlines = await Promise.all(REGIONS.map((r) => fetchHeadline(r)));
+    const headlines = await Promise.all(
+      REGIONS.map((r) => fetchHeadline(r).catch(() => null)),
+    );
     const regions: RegionPayload[] = REGIONS.map((r, i) => {
       const { lat, lon, model, timezone, ...rest } = r;
       void lat; void lon; void model; void timezone;
       return { ...rest, headline: headlines[i] };
     });
+    // Edge cache: serve fresh for 5 min, allow stale for 1h while revalidating.
+    // CDNs/proxies will absorb load; our server-side cache also coalesces.
+    res.set(
+      "Cache-Control",
+      "public, max-age=60, s-maxage=300, stale-while-revalidate=3600",
+    );
     res.json({
       regions,
       generatedAt: new Date().toISOString(),
@@ -257,6 +329,16 @@ router.get("/regions", async (_req, res) => {
     console.error("[regions] error:", err);
     res.status(500).json({ error: "REGIONS_FETCH_ERROR", message: String(err) });
   }
+});
+
+// Internal cache stats endpoint — useful for monitoring + debugging
+router.get("/regions/_stats", (_req, res) => {
+  res.json({
+    cache: getCacheStats(),
+    fresh_ms: FRESH_MS,
+    stale_ms: STALE_MS,
+    regions: REGIONS.map((r) => ({ id: r.id, status: r.status })),
+  });
 });
 
 export default router;

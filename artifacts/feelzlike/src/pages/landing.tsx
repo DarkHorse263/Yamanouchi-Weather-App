@@ -92,10 +92,10 @@ function WeatherIcon({ code, className = "w-4 h-4" }: { code: number | null; cla
   return <Cloud className={className} />;
 }
 
-function formatAgo(iso: string | undefined, now: number): string {
-  if (!iso) return "-";
+function formatAgo(iso: string | undefined, now: number, fallback = "loading…"): string {
+  if (!iso) return fallback;
   const t = new Date(iso).getTime();
-  if (Number.isNaN(t)) return "-";
+  if (Number.isNaN(t)) return fallback;
   const diffSec = Math.max(0, Math.round((now - t) / 1000));
   if (diffSec < 60) return "just now";
   const min = Math.round(diffSec / 60);
