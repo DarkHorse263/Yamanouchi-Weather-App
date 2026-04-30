@@ -9,6 +9,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@sentry/node": "^10.50.0",
     "@supabase/supabase-js": "^2.99.1",
     "@workspace/api-zod": "workspace:*",
     "@workspace/db": "workspace:*",
