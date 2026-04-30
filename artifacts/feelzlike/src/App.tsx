@@ -5,6 +5,7 @@ import Landing from "@/pages/landing";
 import NotFound from "@/pages/not-found";
 import { ConsentProvider } from "@/lib/consent";
 import { ConsentBanner } from "@/components/ConsentBanner";
+import { SentryTestButton } from "@/components/SentryTestButton";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ function App() {
             <Router />
           </WouterRouter>
           <ConsentBanner />
+          <SentryTestButton />
         </ConsentProvider>
       </TooltipProvider>
     </QueryClientProvider>

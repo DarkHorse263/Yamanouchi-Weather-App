@@ -6,12 +6,30 @@
  */
 import * as Sentry from "@sentry/node";
 
-const dsn = process.env["SENTRY_DSN_API"];
+const rawDsn = process.env["SENTRY_DSN_API"];
 const environment = process.env["NODE_ENV"] ?? "development";
 
-if (dsn) {
+// Validate that the DSN looks like a Sentry URL before handing it to the SDK.
+// A bad value (e.g. someone pasted code into the secret) would otherwise be
+// silently rejected by Sentry's internal validator while still triggering our
+// "initialised" log — leaving us with no error reporting and no warning.
+function isValidSentryDsn(value: string | undefined): value is string {
+  if (!value) return false;
+  try {
+    const u = new URL(value);
+    return (
+      (u.protocol === "https:" || u.protocol === "http:") &&
+      /^[a-f0-9]+$/i.test(u.username) &&
+      u.pathname.length > 1
+    );
+  } catch {
+    return false;
+  }
+}
+
+if (isValidSentryDsn(rawDsn)) {
   Sentry.init({
-    dsn,
+    dsn: rawDsn,
     environment,
     // 100% of traces in dev (cheap, useful), 10% in prod to stay within free quota.
     // Bump prod to 1.0 temporarily if you're hunting a specific issue.
@@ -22,6 +40,13 @@ if (dsn) {
   });
   // eslint-disable-next-line no-console
   console.log(`[sentry] initialised (env=${environment})`);
+} else if (rawDsn) {
+  // eslint-disable-next-line no-console
+  console.warn(
+    `[sentry] SENTRY_DSN_API is set but does not look like a valid DSN URL ` +
+      `(length=${rawDsn.length}, first8="${rawDsn.slice(0, 8)}"). ` +
+      `Skipping init. Expected format: https://<key>@o<orgid>.ingest.<region>.sentry.io/<projectid>`,
+  );
 } else {
   // eslint-disable-next-line no-console
   console.log("[sentry] disabled — SENTRY_DSN_API not set");

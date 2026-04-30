@@ -10,10 +10,12 @@ import roadsRouter from "./roads";
 import liftsRouter from "./lifts";
 import radarRouter from "./radar";
 import regionsRouter from "./regions";
+import sentryTestRouter from "./sentry-test";
 
 const router: IRouter = Router();
 
 router.use(healthRouter);
+router.use(sentryTestRouter);
 router.use(snowRouter);
 router.use(placesRouter);
 router.use(weatherTilesRouter);
