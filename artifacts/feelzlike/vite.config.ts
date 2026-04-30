@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
+import { sentryVitePlugin } from "@sentry/vite-plugin";
 
 const rawPort = process.env.PORT;
 
@@ -45,6 +46,28 @@ export default defineConfig({
           ),
         ]
       : []),
+    // Sentry plugin must come AFTER all other plugins so it sees the final
+    // bundle output. Only active during production builds when the auth token
+    // is provided — dev builds and PRs without the token simply skip upload.
+    ...(process.env.SENTRY_AUTH_TOKEN
+      ? [
+          sentryVitePlugin({
+            org: "navigate-work-digital",
+            project: "javascript-react",
+            authToken: process.env.SENTRY_AUTH_TOKEN,
+            sourcemaps: {
+              filesToDeleteAfterUpload: ["**/*.map"],
+            },
+            release: {
+              name: process.env.SENTRY_RELEASE
+                ? `feelzlike@${process.env.SENTRY_RELEASE}`
+                : undefined,
+              setCommits: { auto: true, ignoreMissing: true },
+            },
+            telemetry: false,
+          }),
+        ]
+      : []),
   ],
   resolve: {
     alias: {
@@ -57,6 +80,10 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    // "hidden" emits .map files (so the Sentry plugin can upload them) but
+    // omits the //# sourceMappingURL comment from the shipped JS — clients
+    // don't fetch maps, only Sentry uses them for symbolication.
+    sourcemap: "hidden",
   },
   server: {
     port,
