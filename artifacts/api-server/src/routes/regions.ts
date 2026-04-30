@@ -235,8 +235,14 @@ async function fetchHeadlineUpstream(r: RegionConfig): Promise<HeadlineReading |
   });
 
   try {
+    // Open-Meteo asks all integrators to identify themselves so they can reach
+    // out about quota / abuse before throttling. They're CC-BY 4.0; commercial
+    // use needs their commercial tier — see replit.md "External Dependencies".
     const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
       signal: AbortSignal.timeout(8000),
+      headers: {
+        "User-Agent": "feelzlike/1.0 (mountain-weather-pwa; contact: hello@feelzlike.app)",
+      },
     });
     if (!res.ok) throw new Error(`Open-Meteo ${res.status}`);
     const d: any = await res.json();

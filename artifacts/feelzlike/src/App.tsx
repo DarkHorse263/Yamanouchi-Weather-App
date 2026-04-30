@@ -3,6 +3,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Landing from "@/pages/landing";
 import NotFound from "@/pages/not-found";
+import { ConsentProvider } from "@/lib/consent";
+import { ConsentBanner } from "@/components/ConsentBanner";
 
 const queryClient = new QueryClient();
 
@@ -19,9 +21,12 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-          <Router />
-        </WouterRouter>
+        <ConsentProvider>
+          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+            <Router />
+          </WouterRouter>
+          <ConsentBanner />
+        </ConsentProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );
