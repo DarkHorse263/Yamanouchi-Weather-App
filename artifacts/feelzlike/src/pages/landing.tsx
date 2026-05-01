@@ -299,6 +299,30 @@ export default function Landing() {
             const isLive = region.status === "live";
             const isGreen = seasonForRegion(region) === "green";
 
+            // "Soon" regions (e.g. Iiyama) get a stripped-down placeholder
+            // card — red border, single centered "MORE REGIONS COMING SOON"
+            // line. No status pill, no name, no town/mountain meta, no link.
+            if (!isLive) {
+              return (
+                <motion.div
+                  key={region.id}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, delay: 0.05 + i * 0.06 }}
+                  className="relative flex items-center justify-center rounded-xl border-2 border-red-400 bg-white px-6 py-10 min-h-[220px] shadow-[0_1px_3px_rgba(15,23,42,0.04)]"
+                >
+                  <p
+                    className="text-center text-sm md:text-base font-bold uppercase tracking-[0.22em] text-red-600"
+                    style={{ fontFamily: "'DIN Pro', system-ui, sans-serif" }}
+                  >
+                    More regions
+                    <br />
+                    coming soon
+                  </p>
+                </motion.div>
+              );
+            }
+
             // Palette swap: when a region is in its green (off-snow) season,
             // border + accent + type all flip from logo-blue to emerald so the
             // viewer sees at a glance "this region isn't in snow ops right now".
