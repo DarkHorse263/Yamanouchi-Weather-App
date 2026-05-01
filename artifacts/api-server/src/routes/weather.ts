@@ -274,7 +274,14 @@ async function fetchLocationWeather(location: LocationConfig) {
     rainSince9am: safeParseFloat(bomRain),
     dataSource: hasBomData ? "BOM" : "Open-Meteo",
     bomStation: bomStationName,
-    bomObservationTime: bomObsTime ?? undefined
+    bomObservationTime: bomObsTime ?? undefined,
+    freezingLevel: (() => {
+      const v = om?.current?.freezing_level_height;
+      return typeof v === "number" && Number.isFinite(v) ? Math.round(v) : undefined;
+    })(),
+    snowfallNext24h: sumHourlySnowfall(om, 24),
+    snowfallNext48h: sumHourlySnowfall(om, 48),
+    snowfallNext72h: sumHourlySnowfall(om, 72),
   };
 
   const daily = om?.daily?.time?.map((date: string, i: number) => ({
@@ -374,6 +381,37 @@ function buildBomHourly(
   return hourlyReadings.reverse();
 }
 
+// Aggregate the next N hours of snowfall (cm of fresh snow per Open-Meteo).
+// Open-Meteo returns `hourly.time` as naive ISO strings ("YYYY-MM-DDTHH:MM")
+// in the requested `timezone`, with NO offset suffix. Date.parse() on the
+// server treats those as UTC, which would shift the window by ~10h on a UTC
+// host. We use the response's `utc_offset_seconds` to convert each local
+// timestamp into a true UTC instant before comparing against `Date.now()`.
+function sumHourlySnowfall(om: any, hours: number): number | undefined {
+  const arr = om?.hourly?.snowfall;
+  const times = om?.hourly?.time;
+  if (!Array.isArray(arr) || !Array.isArray(times)) return undefined;
+  const offsetSec = Number(om?.utc_offset_seconds) || 0;
+  const nowMs = Date.now();
+  // Allow the current hour bucket (which may have started up to 1h ago).
+  const cutoffMs = nowMs - 60 * 60 * 1000;
+  let total = 0;
+  let counted = 0;
+  for (let i = 0; i < arr.length && counted < hours; i++) {
+    // Parse the naive local string as if UTC, then subtract the timezone
+    // offset to recover the real UTC instant.
+    const localAsUtcMs = Date.parse(times[i] + "Z");
+    if (Number.isNaN(localAsUtcMs)) continue;
+    const t = localAsUtcMs - offsetSec * 1000;
+    if (t < cutoffMs) continue;
+    const v = Number(arr[i]);
+    if (Number.isFinite(v)) total += v;
+    counted++;
+  }
+  if (counted === 0) return undefined;
+  return Math.round(total * 10) / 10;
+}
+
 async function fetchOpenMeteo(location: LocationConfig) {
   const params = new URLSearchParams({
     latitude: location.latitude.toString(),
@@ -381,12 +419,13 @@ async function fetchOpenMeteo(location: LocationConfig) {
     // Critical: pass the resort's true elevation so Open-Meteo lapse-rate-corrects
     // the temperature instead of returning the model's grid-cell surface value.
     elevation: location.elevation.toString(),
-    current: "temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m,snow_depth",
-    hourly: "temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,cloud_cover,wind_speed_10m,snowfall",
+    current: "temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m,snow_depth,freezing_level_height",
+    hourly: "temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,cloud_cover,wind_speed_10m,snowfall,freezing_level_height",
     daily: "weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,snowfall_sum,wind_speed_10m_max,uv_index_max",
     timezone: "Australia/Sydney",
     forecast_days: "7",
-    forecast_hours: "24"
+    // 72 hours so we can derive next-24/48/72h cumulative snowfall on the server.
+    forecast_hours: "72"
   });
 
   const response = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`);

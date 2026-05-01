@@ -27,4 +27,12 @@ export interface CurrentWeather {
   dataSource?: string;
   bomStation?: string;
   bomObservationTime?: string;
+  /** Height of the 0°C isotherm above mean sea level, in metres (Open-Meteo). */
+  freezingLevel?: number;
+  /** Cumulative fresh snow over the next 24 hours, in centimetres (Open-Meteo `snowfall`). */
+  snowfallNext24h?: number;
+  /** Cumulative fresh snow over the next 48 hours, in centimetres (Open-Meteo `snowfall`). */
+  snowfallNext48h?: number;
+  /** Cumulative fresh snow over the next 72 hours, in centimetres (Open-Meteo `snowfall`). */
+  snowfallNext72h?: number;
 }

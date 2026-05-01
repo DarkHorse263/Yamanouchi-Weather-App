@@ -1774,6 +1774,18 @@ components:
           type: string
         bomObservationTime:
           type: string
+        freezingLevel:
+          type: number
+          description: Height of the 0°C isotherm above mean sea level, in metres (Open-Meteo).
+        snowfallNext24h:
+          type: number
+          description: Cumulative fresh snow over the next 24 hours, in centimetres (Open-Meteo `snowfall`).
+        snowfallNext48h:
+          type: number
+          description: Cumulative fresh snow over the next 48 hours, in centimetres (Open-Meteo `snowfall`).
+        snowfallNext72h:
+          type: number
+          description: Cumulative fresh snow over the next 72 hours, in centimetres (Open-Meteo `snowfall`).
       required:
         - temperature
         - feelsLike

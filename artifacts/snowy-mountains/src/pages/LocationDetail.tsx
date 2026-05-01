@@ -5,6 +5,8 @@ import { LoadingState } from "@/components/ui/loading-state";
 import { ErrorState } from "@/components/ui/error-state";
 import { ForecastChart } from "@/components/weather/ForecastChart";
 import { EnsembleForecast } from "@/components/weather/EnsembleForecast";
+import { MountainSnapshot } from "@/components/weather/MountainSnapshot";
+import { SafetyStrip } from "@/components/weather/SafetyStrip";
 import { formatTemp } from "@/lib/utils";
 import { motion } from "framer-motion";
 import {
@@ -127,6 +129,7 @@ export default function LocationDetail() {
     ...(current.pressure !== undefined ? [{ label: "Pressure", value: `${current.pressure} hPa`, icon: Gauge }] : []),
     ...(current.rainSince9am !== undefined ? [{ label: "Rain since 9am", value: `${current.rainSince9am} mm`, icon: CloudRain }] : []),
     ...(current.visibility && current.visibility !== 10000 ? [{ label: "Visibility", value: `${(current.visibility / 1000).toFixed(0)} km`, icon: Eye }] : []),
+    ...(current.freezingLevel !== undefined ? [{ label: "Freezing level", value: `${current.freezingLevel} m`, icon: Snowflake }] : []),
   ];
 
   return (
@@ -222,16 +225,30 @@ export default function LocationDetail() {
 
       {/* ─── Body ───────────────────────────── */}
       <div className="max-w-7xl mx-auto px-5 md:px-10 pb-20 space-y-6 md:space-y-8 -mt-2">
+        {/* Premium dashboard headline — animated rings, wind-hold alert, snowfall outlook */}
+        <MountainSnapshot
+          resortName={location.name}
+          elevation={location.elevation}
+          freezingLevel={current.freezingLevel}
+          gust={current.windGust}
+          windSpeed={current.windSpeed}
+          liftsOpen={liftData?.liftsOpen}
+          totalLifts={liftData?.totalLifts}
+          snowfallNext24h={current.snowfallNext24h}
+          snowfallNext48h={current.snowfallNext48h}
+          snowfallNext72h={current.snowfallNext72h}
+        />
+
         {/* Conditions strip - editorial data table feel */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15 }}
+          transition={{ delay: 0.22 }}
           className="glass rounded-3xl p-5 md:p-8"
         >
           <div className="flex items-end justify-between mb-5">
             <div>
-              <p className="byline text-muted-foreground">01 · Conditions</p>
+              <p className="byline text-muted-foreground">03 · Conditions</p>
               <h2 className="font-display font-semibold text-xl md:text-2xl mt-1">Right now</h2>
             </div>
             <p className="byline text-muted-foreground/70 hidden md:block">{stats.length} measurements</p>
@@ -260,7 +277,7 @@ export default function LocationDetail() {
         >
           <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-6 gap-3">
             <div>
-              <p className="byline text-muted-foreground">02 · 24-hour trend</p>
+              <p className="byline text-muted-foreground">04 · 24-hour trend</p>
               <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
                 <BarChart2 className="text-primary w-5 h-5" />
                 How it's tracking
@@ -295,7 +312,7 @@ export default function LocationDetail() {
         >
           <div className="flex items-end justify-between mb-5 gap-3">
             <div>
-              <p className="byline text-muted-foreground">03 · Outlook</p>
+              <p className="byline text-muted-foreground">05 · Outlook</p>
               <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
                 <CalendarDays className="text-primary w-5 h-5" />
                 {daily.length}-day mountain forecast
@@ -402,7 +419,7 @@ export default function LocationDetail() {
               transition={{ delay: 0.3 }}
               className="glass rounded-3xl p-5 md:p-8"
             >
-              <p className="byline text-muted-foreground">05 · Eyes on the mountain</p>
+              <p className="byline text-muted-foreground">07 · Eyes on the mountain</p>
               <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 mb-5 flex items-center gap-2">
                 <Camera className="text-primary w-5 h-5" />
                 Live webcams
@@ -429,7 +446,7 @@ export default function LocationDetail() {
             >
               <div className="flex justify-between items-start mb-5">
                 <div>
-                  <p className="byline text-muted-foreground">06 · Lift status</p>
+                  <p className="byline text-muted-foreground">08 · Lift status</p>
                   <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
                     <Cable className="text-primary w-5 h-5" />
                     On the snow
@@ -480,6 +497,8 @@ export default function LocationDetail() {
             </motion.div>
           )}
         </div>
+
+        <SafetyStrip />
 
       </div>
     </AppLayout>

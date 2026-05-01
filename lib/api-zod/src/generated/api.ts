@@ -778,6 +778,30 @@ export const GetWeatherResponse = zod.object({
         dataSource: zod.string().optional(),
         bomStation: zod.string().optional(),
         bomObservationTime: zod.string().optional(),
+        freezingLevel: zod
+          .number()
+          .optional()
+          .describe(
+            "Height of the 0°C isotherm above mean sea level, in metres (Open-Meteo).",
+          ),
+        snowfallNext24h: zod
+          .number()
+          .optional()
+          .describe(
+            "Cumulative fresh snow over the next 24 hours, in centimetres (Open-Meteo `snowfall`).",
+          ),
+        snowfallNext48h: zod
+          .number()
+          .optional()
+          .describe(
+            "Cumulative fresh snow over the next 48 hours, in centimetres (Open-Meteo `snowfall`).",
+          ),
+        snowfallNext72h: zod
+          .number()
+          .optional()
+          .describe(
+            "Cumulative fresh snow over the next 72 hours, in centimetres (Open-Meteo `snowfall`).",
+          ),
       }),
       daily: zod.array(
         zod.object({
@@ -860,6 +884,30 @@ export const GetLocationWeatherResponse = zod.object({
     dataSource: zod.string().optional(),
     bomStation: zod.string().optional(),
     bomObservationTime: zod.string().optional(),
+    freezingLevel: zod
+      .number()
+      .optional()
+      .describe(
+        "Height of the 0°C isotherm above mean sea level, in metres (Open-Meteo).",
+      ),
+    snowfallNext24h: zod
+      .number()
+      .optional()
+      .describe(
+        "Cumulative fresh snow over the next 24 hours, in centimetres (Open-Meteo `snowfall`).",
+      ),
+    snowfallNext48h: zod
+      .number()
+      .optional()
+      .describe(
+        "Cumulative fresh snow over the next 48 hours, in centimetres (Open-Meteo `snowfall`).",
+      ),
+    snowfallNext72h: zod
+      .number()
+      .optional()
+      .describe(
+        "Cumulative fresh snow over the next 72 hours, in centimetres (Open-Meteo `snowfall`).",
+      ),
   }),
   daily: zod.array(
     zod.object({
