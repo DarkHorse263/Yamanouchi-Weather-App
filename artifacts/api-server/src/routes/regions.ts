@@ -34,10 +34,13 @@ const REGIONS: RegionConfig[] = [
     href: "/snowy-mountains/",
     baseTowns: ["Jindabyne", "Berridale", "Cooma"],
     mountains: ["Thredbo", "Perisher", "Charlotte Pass", "Selwyn"],
-    headlineLabel: "Thredbo Top",
-    lat: -36.5054,
-    lon: 148.3089,
-    elevation: 1957,
+    // Headline reading is for the base town (Jindabyne, ~918m) — not the
+    // mountain peak — so the home page reflects what visitors actually feel
+    // when they arrive in town. Per-mountain peak forecasts live on the
+    // dedicated region page.
+    headlineLabel: "Jindabyne",
+    lat: -36.4137,
+    lon: 148.6207,
     timezone: "Australia/Sydney",
     sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
   },
@@ -51,10 +54,12 @@ const REGIONS: RegionConfig[] = [
     href: "/yamanouchi/",
     baseTowns: ["Yudanaka", "Shibu Onsen", "Yomase"],
     mountains: ["Shiga Kogen", "Yomase", "X-Jam", "Ryuoo"],
-    headlineLabel: "Shiga Kogen",
-    lat: 36.79,
-    lon: 138.51,
-    elevation: 1800,
+    // Headline reading is for the base town (Yudanaka Onsen, ~600m) — not
+    // the Shiga Kogen peak — so the home page shows what visitors feel on
+    // arrival. Per-mountain peak forecasts live on the dedicated region page.
+    headlineLabel: "Yudanaka",
+    lat: 36.7414,
+    lon: 138.4242,
     model: "jma_seamless",
     timezone: "Asia/Tokyo",
     sourceLabel: "JMA Seamless",
