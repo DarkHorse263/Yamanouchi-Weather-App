@@ -33,7 +33,10 @@ export function MetricRing({
   const range = Math.max(0.0001, max - min);
   const ratio = Math.min(1, Math.max(0, (value - min) / range));
 
-  const r = (size - strokeWidth) / 2;
+  // Leave a few pixels of padding inside the box so the rounded line cap and
+  // drop-shadow glow don't get clipped at the SVG edge.
+  const padding = 4;
+  const r = (size - strokeWidth) / 2 - padding;
   const cx = size / 2;
   const cy = size / 2;
   const C = 2 * Math.PI * r;
@@ -68,7 +71,7 @@ export function MetricRing({
         viewBox={`0 0 ${size} ${size}`}
         role={ariaLabel ? "img" : undefined}
         aria-label={ariaLabel}
-        className="-rotate-90"
+        className="-rotate-90 overflow-visible"
       >
         <circle
           cx={cx}
