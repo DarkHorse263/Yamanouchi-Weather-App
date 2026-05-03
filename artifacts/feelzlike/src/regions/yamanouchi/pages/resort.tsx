@@ -58,7 +58,9 @@ const PROFILES: Record<string, ResortProfile> = {
 const VALID_IDS = new Set(Object.keys(PROFILES));
 
 export default function ResortDetail() {
-  const [, params] = useRoute("/resort/:id");
+  const [, mParams] = useRoute("/mountain/:id");
+  const [, rParams] = useRoute("/resort/:id");
+  const params = mParams ?? rParams;
   const id = params?.id ?? "";
   const { t } = useLanguage();
 

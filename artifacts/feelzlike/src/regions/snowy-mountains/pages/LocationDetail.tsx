@@ -93,7 +93,9 @@ function getStatusIcon(status: string) {
 }
 
 export default function LocationDetail() {
-  const [, params] = useRoute("/resort/:id");
+  const [, mParams] = useRoute("/mountain/:id");
+  const [, rParams] = useRoute("/resort/:id");
+  const params = mParams ?? rParams;
   const locationId = params?.id as LocationId;
 
   const { data: weatherData, isLoading: weatherLoading, error: weatherError, refetch: weatherRefetch } = useGetLocationWeather(locationId, { query: { enabled: !!locationId } });
