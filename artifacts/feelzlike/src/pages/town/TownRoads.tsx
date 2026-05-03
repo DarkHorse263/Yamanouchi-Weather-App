@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useMemo } from "react";
 import { useGetRoadConditions } from "@workspace/api-client-react";
-import { AlertTriangle, Car, ExternalLink, MapPin, Navigation } from "lucide-react";
+import { AlertTriangle, Car, ExternalLink, Info, MapPin, Navigation } from "lucide-react";
 import { useRegion, useLanguage, useBaseTown, LiveBadge } from "@workspace/feelzlike-shell";
 
 function statusClasses(c: string): string {
@@ -19,7 +19,10 @@ export function TownRoads() {
   const { region } = useRegion();
   const { t } = useLanguage();
   const { town } = useBaseTown();
-  const query = useGetRoadConditions();
+  const dataAvailable = region.roadsSource?.dataAvailable ?? true;
+  const query = useGetRoadConditions({
+    query: { enabled: dataAvailable },
+  });
 
   const roads = useMemo(() => {
     if (!query.data || !town) return [];
@@ -56,14 +59,46 @@ export function TownRoads() {
               )}
             </p>
           </div>
-          <LiveBadge label={query.isFetching ? t("Loading", "読込中") : t("Live", "ライブ")} />
+          {dataAvailable && (
+            <LiveBadge label={query.isFetching ? t("Loading", "読込中") : t("Live", "ライブ")} />
+          )}
         </div>
         <div className="rule mt-6 mb-8" />
       </motion.header>
 
-      {query.isLoading && <RoadsSkeleton />}
+      {!dataAvailable && (
+        <div className="rounded-2xl border border-border bg-white p-6">
+          <div className="flex items-start gap-3">
+            <Info className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+            <div className="min-w-0">
+              <h3 className="font-display font-semibold text-base text-foreground">
+                {t("Live road data coming soon", "道路情報は近日公開")}
+              </h3>
+              <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
+                {t(
+                  `We don't yet pull live road conditions for ${region.name}. For now, please check the official source directly:`,
+                  `${region.name}の道路情報は現在準備中です。公式情報源をご確認ください：`,
+                )}
+              </p>
+              {region.roadsSource && (
+                <a
+                  href={region.roadsSource.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+                >
+                  {t(region.roadsSource.label, region.roadsSource.labelJa ?? region.roadsSource.label)}
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
-      {query.isError && (
+      {dataAvailable && query.isLoading && <RoadsSkeleton />}
+
+      {dataAvailable && query.isError && (
         <div className="rounded-2xl border border-border bg-white p-6">
           <p className="text-sm text-foreground">
             {t("Couldn't load road conditions.", "道路状況を読み込めませんでした。")}
@@ -71,7 +106,7 @@ export function TownRoads() {
         </div>
       )}
 
-      {!query.isLoading && query.data && roads.length > 0 && (
+      {dataAvailable && !query.isLoading && query.data && roads.length > 0 && (
         <div className="grid gap-4">
           {roads.map((road, idx) => (
             <motion.article
@@ -117,7 +152,10 @@ export function TownRoads() {
                   rel="noopener noreferrer"
                   className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
                 >
-                  {t("View on Live Traffic", "ライブトラフィックで見る")}
+                  {t(
+                    `View on ${region.roadsSource?.label ?? "official source"}`,
+                    `${region.roadsSource?.labelJa ?? region.roadsSource?.label ?? "公式情報"}で見る`,
+                  )}
                   <ExternalLink className="w-3 h-3" />
                 </a>
               )}
@@ -126,7 +164,7 @@ export function TownRoads() {
         </div>
       )}
 
-      {!query.isLoading && query.data && roads.length === 0 && (
+      {dataAvailable && !query.isLoading && query.data && roads.length === 0 && (
         <div className="rounded-2xl border border-border bg-white p-8 text-center">
           <Car className="w-8 h-8 text-muted-foreground/40 mx-auto" />
           <p className="text-sm text-muted-foreground mt-3">
@@ -138,10 +176,18 @@ export function TownRoads() {
         </div>
       )}
 
-      {query.data?.lastUpdated && (
+      {dataAvailable && query.data?.lastUpdated && region.roadsSource && (
         <p className="text-xs text-muted-foreground/70 mt-6 inline-flex items-center gap-1.5">
           <MapPin className="w-3 h-3" />
-          {t("Source", "情報源")}: {t("Live Traffic NSW", "Live Traffic NSW")}
+          {t("Source", "情報源")}:{" "}
+          <a
+            href={region.roadsSource.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-foreground hover:underline"
+          >
+            {t(region.roadsSource.label, region.roadsSource.labelJa ?? region.roadsSource.label)}
+          </a>
         </p>
       )}
     </div>

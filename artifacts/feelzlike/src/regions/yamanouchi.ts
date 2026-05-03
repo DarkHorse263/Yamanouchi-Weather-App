@@ -78,4 +78,10 @@ export const yamanouchiRegion: RegionConfig = {
     },
   ],
   footer: "v0.3 · feelzlike",
+  roadsSource: {
+    label: "Japan Road Traffic Information Center (JARTIC)",
+    labelJa: "日本道路交通情報センター (JARTIC)",
+    url: "https://www.jartic.or.jp/",
+    dataAvailable: false,
+  },
 };

@@ -99,4 +99,18 @@ export interface RegionConfig {
   baseTowns?: BaseTown[];
   /** Optional version/footer string */
   footer?: string;
+  /** Road conditions data source for this region. Drives the TownRoads page. */
+  roadsSource?: {
+    /** Display name of the source authority (e.g. "Live Traffic NSW"). */
+    label: string;
+    /** Japanese label, if applicable. */
+    labelJa?: string;
+    /** Public URL where users can see the official map / advisories. */
+    url: string;
+    /**
+     * Whether our backend currently returns live road data for this region.
+     * If false, the UI shows an honest "coming soon" panel instead of pretending.
+     */
+    dataAvailable: boolean;
+  };
 }

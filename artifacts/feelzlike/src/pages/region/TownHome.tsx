@@ -32,7 +32,8 @@ export function TownHome() {
   const { t } = useLanguage();
   const { town } = useBaseTown();
   const weatherQ = useGetWeather();
-  const roadsQ = useGetRoadConditions();
+  const roadsAvailable = region.roadsSource?.dataAvailable ?? true;
+  const roadsQ = useGetRoadConditions({ query: { enabled: roadsAvailable } });
   const townWeatherQ = useTownWeather(town?.lat, town?.lng);
 
   // Pick the closest mountain to this town that has live weather data.
@@ -98,21 +99,27 @@ export function TownHome() {
       ? Math.round(closest.entry.current.temperature).toString()
       : null;
   const weatherHint = closest?.entry.current?.weatherDescription ?? closest?.entry.location.name ?? "";
-  const roadValue = roadsSummary
-    ? roadsSummary.closed > 0
-      ? `${roadsSummary.closed}`
-      : `${roadsSummary.open}/${roadsSummary.total}`
-    : null;
-  const roadUnit = roadsSummary
-    ? roadsSummary.closed > 0
-      ? t("closed", "通行止")
-      : t("open", "開通")
-    : "";
-  const roadHint = roadsSummary
-    ? roadsSummary.warn > 0
-      ? t(`${roadsSummary.warn} with advisories`, `${roadsSummary.warn}件の警告`)
-      : t("All clear", "問題なし")
-    : t("Open / closed status", "開通・通行止情報");
+  const roadValue = !roadsAvailable
+    ? "—"
+    : roadsSummary
+      ? roadsSummary.closed > 0
+        ? `${roadsSummary.closed}`
+        : `${roadsSummary.open}/${roadsSummary.total}`
+      : null;
+  const roadUnit = !roadsAvailable
+    ? ""
+    : roadsSummary
+      ? roadsSummary.closed > 0
+        ? t("closed", "通行止")
+        : t("open", "開通")
+      : "";
+  const roadHint = !roadsAvailable
+    ? t("Coming soon for this region", "この地域は近日公開")
+    : roadsSummary
+      ? roadsSummary.warn > 0
+        ? t(`${roadsSummary.warn} with advisories`, `${roadsSummary.warn}件の警告`)
+        : t("All clear", "問題なし")
+      : t("Open / closed status", "開通・通行止情報");
 
   return (
     <div className="px-6 md:px-10 py-8 md:py-12 max-w-6xl mx-auto">

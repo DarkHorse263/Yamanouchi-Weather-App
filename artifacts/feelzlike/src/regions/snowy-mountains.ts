@@ -76,4 +76,9 @@ export const snowyMountainsRegion: RegionConfig = {
     },
   ],
   footer: "v0.3 · feelzlike",
+  roadsSource: {
+    label: "Live Traffic NSW",
+    url: "https://www.livetraffic.com",
+    dataAvailable: true,
+  },
 };
