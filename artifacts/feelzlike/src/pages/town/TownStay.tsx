@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
-import { ExternalLink, MapPin, Star, BedDouble } from "lucide-react";
+import { MapPin, Star, BedDouble } from "lucide-react";
 import { useRegion, useLanguage, useBaseTown, LiveBadge } from "@workspace/feelzlike-shell";
-import { useNearbyPlaces, bookingDeepLink, type NearbyPlace } from "@/lib/places";
+import { useNearbyPlaces, type NearbyPlace, type CountryCode } from "@/lib/places";
+import { StayPlatformBar } from "@/components/StayPlatformBar";
 
 export function TownStay() {
   const { region } = useRegion();
@@ -33,8 +34,8 @@ export function TownStay() {
             </h1>
             <p className="text-muted-foreground mt-3 max-w-xl">
               {t(
-                `Hotels, ryokan and lodges around ${town?.name ?? "town"} — search live availability on Booking.com.`,
-                `${town ? t(town.name, town.nameJa) : "町"}周辺のホテル・旅館・ロッジ。Booking.comで空室を検索できます。`,
+                `Hotels, ryokan and lodges around ${town?.name ?? "town"} — compare prices across the major booking sites.`,
+                `${town ? t(town.name, town.nameJa) : "町"}周辺のホテル・旅館・ロッジ。主要予約サイトで価格を比較。`,
               )}
             </p>
           </div>
@@ -43,27 +44,17 @@ export function TownStay() {
         <div className="rule mt-6 mb-8" />
       </motion.header>
 
-      {/* Booking.com banner — search the whole town */}
+      {/* Multi-platform booking banner — search the whole town across 6–8 sites */}
       {town && (
-        <a
-          href={bookingDeepLink({ query: `${town.name}, ${region.name}`, lat: town.lat, lng: town.lng })}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group flex items-center justify-between gap-4 rounded-2xl border border-border bg-gradient-to-br from-blue-50 to-white p-5 transition-all hover:border-primary/40 hover:shadow-md mb-8"
-        >
-          <div className="flex items-center gap-4">
-            <div className="rounded-xl bg-[#003580] text-white px-3 py-2 font-bold text-sm tracking-tight">Booking.com</div>
-            <div>
-              <p className="font-display font-semibold text-foreground">
-                {t(`Search all stays in ${town.name}`, `${t(town.name, town.nameJa)}の宿泊施設をすべて検索`)}
-              </p>
-              <p className="text-sm text-muted-foreground mt-0.5">
-                {t("Filter by dates, price and free cancellation", "日付・価格・無料キャンセルで絞込み")}
-              </p>
-            </div>
-          </div>
-          <ExternalLink className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-        </a>
+        <div className="mb-8">
+          <StayPlatformBar
+            variant="banner"
+            country={(region.shortTag as CountryCode) ?? "JP"}
+            query={`${town.name}, ${region.name}`}
+            lat={town.lat}
+            lng={town.lng}
+          />
+        </div>
       )}
 
       {query.isError && (
@@ -80,7 +71,14 @@ export function TownStay() {
       {!query.isLoading && places.length > 0 && (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {places.map((p) => (
-            <StayCard key={p.id} place={p} town={town!} regionName={region.name} t={t} />
+            <StayCard
+              key={p.id}
+              place={p}
+              town={town!}
+              regionName={region.name}
+              country={(region.shortTag as CountryCode) ?? "JP"}
+              t={t}
+            />
           ))}
         </div>
       )}
@@ -98,19 +96,15 @@ function StayCard({
   place,
   town,
   regionName,
+  country,
   t,
 }: {
   place: NearbyPlace;
   town: { name: string; lat: number; lng: number };
   regionName: string;
+  country: CountryCode;
   t: (en: string, ja?: string) => string;
 }) {
-  const bookingHref = bookingDeepLink({
-    query: `${place.name} ${town.name}`,
-    lat: place.lat ?? town.lat,
-    lng: place.lng ?? town.lng,
-  });
-
   return (
     <article className="rounded-2xl border border-border bg-white overflow-hidden hover:border-primary/40 hover:shadow-md transition-all flex flex-col">
       {place.photoUrl ? (
@@ -161,27 +155,32 @@ function StayCard({
           </div>
         )}
 
-        <div className="mt-auto pt-4 flex items-center gap-2">
-          <a
-            href={bookingHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg bg-[#003580] text-white text-xs font-semibold px-3 py-2 hover:bg-[#002a66] transition-colors"
-          >
-            {t("Book on Booking.com", "Booking.comで予約")}
-            <ExternalLink className="w-3 h-3" />
-          </a>
-          {place.googleMapsUri && (
-            <a
-              href={place.googleMapsUri}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={t("Open in Google Maps", "Googleマップで開く")}
-              className="inline-flex items-center justify-center rounded-lg border border-border text-xs font-semibold w-9 h-9 text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-colors"
-            >
-              <MapPin className="w-3.5 h-3.5" />
-            </a>
-          )}
+        <div className="mt-auto pt-4 space-y-2">
+          <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/70">
+            {t("Compare prices", "価格を比較")}
+          </p>
+          <div className="flex items-start gap-2">
+            <div className="flex-1">
+              <StayPlatformBar
+                variant="card"
+                country={country}
+                query={`${place.name} ${town.name}`}
+                lat={place.lat ?? town.lat}
+                lng={place.lng ?? town.lng}
+              />
+            </div>
+            {place.googleMapsUri && (
+              <a
+                href={place.googleMapsUri}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t("Open in Google Maps", "Googleマップで開く")}
+                className="shrink-0 inline-flex items-center justify-center rounded-md border border-border text-xs font-semibold w-7 h-7 text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-colors"
+              >
+                <MapPin className="w-3.5 h-3.5" />
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </article>

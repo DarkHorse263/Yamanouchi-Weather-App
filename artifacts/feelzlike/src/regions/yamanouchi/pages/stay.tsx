@@ -3,9 +3,13 @@ import { useLanguage } from "@workspace/feelzlike-shell";
 import { useSeason } from "@workspace/feelzlike-shell";
 import { LoadingScreen, ErrorScreen } from "../components/ui-elements";
 import { useState } from "react";
-import { MapPin, Phone, Bath, CableCar, Mountain, Search, Star, ExternalLink } from "lucide-react";
+import { MapPin, Phone, Bath, CableCar, Mountain, Search, Star, ExternalLink, BedDouble } from "lucide-react";
 import { motion } from "framer-motion";
-import { bookingSearchUrl, bookingRegionUrl, bookingGeneralUrl } from "../lib/booking";
+import { bookingSearchUrl, bookingRegionUrl } from "../lib/booking";
+import { StayPlatformBar } from "@/components/StayPlatformBar";
+import { useNearbyPlaces } from "@/lib/places";
+
+const YAMANOUCHI_CENTER = { lat: 36.7437, lng: 138.4214 };
 
 type LocationTab = "mountain" | "town";
 type FilterType = "all" | "hotel" | "ryokan" | "guesthouse";
@@ -68,24 +72,16 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
         <>
           <div>
             <h1 className="text-3xl md:text-4xl font-black text-foreground">{t("Where to Stay", "宿泊施設")}</h1>
-            <p className="text-muted-foreground mt-1 text-sm">{t("Accommodation in Yamanouchi · Book via Booking.com", "山ノ内町の宿泊施設 · Booking.comで予約")}</p>
+            <p className="text-muted-foreground mt-1 text-sm">{t("Accommodation in Yamanouchi · Compare 8 booking sites", "山ノ内町の宿泊施設 · 8つの予約サイトで比較")}</p>
           </div>
 
-          <a
-            href={bookingGeneralUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block rounded-2xl bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 shadow-lg hover:shadow-xl transition-all group"
-          >
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-xs font-bold uppercase tracking-wider text-blue-200">Booking.com</p>
-                <p className="text-lg font-black mt-0.5">{t("Search All Hotels", "すべてのホテルを検索")}</p>
-                <p className="text-xs text-blue-200 mt-1">{t("Hotels, ryokans & guesthouses · Best price guarantee", "ホテル・旅館・ゲストハウス · 最低価格保証")}</p>
-              </div>
-              <Search className="w-8 h-8 text-white/80 group-hover:scale-110 transition-transform shrink-0 ml-3" />
-            </div>
-          </a>
+          <StayPlatformBar
+            variant="banner"
+            country="JP"
+            query="Yamanouchi, Nagano, Japan"
+            lat={YAMANOUCHI_CENTER.lat}
+            lng={YAMANOUCHI_CENTER.lng}
+          />
         </>
       )}
 
@@ -177,7 +173,99 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
           {town.length === 0 && <EmptyState t={t} />}
         </div>
       )}
+
+      {/* Google Places — live discovery across all of Yamanouchi */}
+      <GooglePlacesStaySection t={t} />
     </div>
+  );
+}
+
+function GooglePlacesStaySection({ t }: { t: (en: string, ja: string | null) => string }) {
+  const { data, isLoading, error } = useNearbyPlaces({
+    lat: YAMANOUCHI_CENTER.lat,
+    lng: YAMANOUCHI_CENTER.lng,
+    radius: 8000,
+    kind: "stay",
+    max: 24,
+  });
+
+  const places = data ?? [];
+
+  return (
+    <section className="pt-4">
+      <div className="flex items-baseline justify-between gap-4 mb-3">
+        <div>
+          <h2 className="text-lg font-black text-foreground flex items-center gap-2">
+            <BedDouble className="w-4 h-4 text-primary" />
+            {t("More stays nearby", "周辺の宿泊施設")}
+          </h2>
+          <p className="text-xs text-muted-foreground">
+            {t("Live results from Google · compare across 8 booking sites", "Googleからのライブ結果 · 8つの予約サイトで比較")}
+          </p>
+        </div>
+        <span className="text-[10px] text-muted-foreground/70 uppercase tracking-wider">
+          {isLoading ? t("Loading", "読込中") : `${places.length} ${t("places", "件")}`}
+        </span>
+      </div>
+
+      {error && (
+        <div className="rounded-xl border border-border bg-white p-4 text-sm text-muted-foreground">
+          {t("Couldn't load nearby stays.", "周辺の宿泊施設を読み込めませんでした。")}
+        </div>
+      )}
+
+      {isLoading && (
+        <div className="grid sm:grid-cols-2 gap-3">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="h-32 rounded-xl bg-secondary animate-pulse" />
+          ))}
+        </div>
+      )}
+
+      {!isLoading && places.length > 0 && (
+        <div className="grid sm:grid-cols-2 gap-3">
+          {places.map((p) => (
+            <article key={p.id} className="rounded-xl border border-border bg-white overflow-hidden flex">
+              {p.photoUrl ? (
+                <img
+                  src={p.photoUrl}
+                  alt={p.name}
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                  className="w-28 h-auto object-cover shrink-0"
+                />
+              ) : (
+                <div className="w-28 bg-secondary flex items-center justify-center shrink-0">
+                  <BedDouble className="w-6 h-6 text-muted-foreground/40" />
+                </div>
+              )}
+              <div className="p-3 flex-1 min-w-0 flex flex-col">
+                <h3 className="font-bold text-sm text-foreground leading-tight truncate">{p.name}</h3>
+                <div className="flex items-center gap-2 text-[11px] text-muted-foreground mt-1">
+                  {p.rating !== undefined && (
+                    <span className="inline-flex items-center gap-0.5">
+                      <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+                      {p.rating.toFixed(1)}
+                      {p.ratingCount !== undefined && <span className="text-muted-foreground/60">({p.ratingCount})</span>}
+                    </span>
+                  )}
+                  {p.address && <span className="truncate">{p.address.split(",")[0]}</span>}
+                </div>
+                <div className="mt-auto pt-2">
+                  <StayPlatformBar
+                    variant="card"
+                    country="JP"
+                    query={`${p.name} Yamanouchi`}
+                    lat={p.lat ?? YAMANOUCHI_CENTER.lat}
+                    lng={p.lng ?? YAMANOUCHI_CENTER.lng}
+                  />
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </section>
   );
 }
 

@@ -12,6 +12,7 @@ import { RegionOverview } from "@/pages/region/RegionOverview";
 import { MountainsList } from "@/pages/region/MountainsList";
 import { TownLayout } from "@/layouts/TownLayout";
 import { RegionStub } from "@/pages/region/RegionStub";
+import { RegionStay } from "@/pages/region/RegionStay";
 import { snowyMountainsRouter } from "@/regions/snowy-mountains/router";
 import { yamanouchiRouter } from "@/regions/yamanouchi/router";
 import { iiyamaRouter } from "@/regions/iiyama/router";
@@ -25,6 +26,12 @@ export interface RegionRouter {
   Alerts?: () => ReactElement | null;
   /** Renders /:region/mountains/lifts (region-wide lifts roll-up) */
   LiftsAll?: () => ReactElement | null;
+  /** Renders /:region/stay (region-wide accommodation) */
+  Stay?: () => ReactElement | null;
+  /** Renders /:region/eat */
+  Eat?: () => ReactElement | null;
+  /** Renders /:region/explore */
+  Explore?: () => ReactElement | null;
 }
 
 const REGION_ROUTERS: Record<string, RegionRouter> = {
@@ -63,6 +70,15 @@ export function RegionLayout() {
         </Route>
         <Route path="/alerts">
           {routes.Alerts ? <routes.Alerts /> : <RegionStub title="Alerts" titleJa="警報" />}
+        </Route>
+        <Route path="/stay">
+          {routes.Stay ? <routes.Stay /> : <RegionStay />}
+        </Route>
+        <Route path="/eat">
+          {routes.Eat ? <routes.Eat /> : <RegionStub title="Eat" titleJa="食事" />}
+        </Route>
+        <Route path="/explore">
+          {routes.Explore ? <routes.Explore /> : <RegionStub title="Explore" titleJa="観光" />}
         </Route>
         {/* Town routes: /:town and /:town/* — must come last so reserved slugs match first */}
         <Route path="/:town/:rest*" component={TownLayout} />
