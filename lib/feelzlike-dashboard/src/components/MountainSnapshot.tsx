@@ -27,10 +27,40 @@ type Tone = "neutral" | "ok" | "info" | "caution" | "warn" | "alert";
 
 interface Tier {
   ringClass: string;
+  gradient: { from: string; to: string };
+  wash: string;
+  glowClass: string;
   tone: Tone;
   label: string;
   detail?: string;
 }
+
+const GRAD = {
+  emerald: { from: "hsl(160, 84%, 45%)", to: "hsl(190, 90%, 50%)" },
+  sky:     { from: "hsl(200, 95%, 55%)", to: "hsl(220, 90%, 60%)" },
+  amber:   { from: "hsl(38, 95%, 55%)",  to: "hsl(20, 95%, 55%)" },
+  orange:  { from: "hsl(24, 95%, 55%)",  to: "hsl(0, 90%, 60%)" },
+  rose:    { from: "hsl(345, 90%, 60%)", to: "hsl(280, 80%, 60%)" },
+  slate:   { from: "hsl(215, 16%, 65%)", to: "hsl(215, 16%, 50%)" },
+} as const;
+
+const WASH = {
+  emerald: "hsl(160, 84%, 45%)",
+  sky:     "hsl(210, 95%, 55%)",
+  amber:   "hsl(38, 95%, 55%)",
+  orange:  "hsl(24, 95%, 55%)",
+  rose:    "hsl(345, 90%, 60%)",
+  slate:   "hsl(215, 16%, 60%)",
+} as const;
+
+const GLOW = {
+  emerald: "bg-emerald-400/40",
+  sky:     "bg-sky-400/40",
+  amber:   "bg-amber-400/40",
+  orange:  "bg-orange-400/40",
+  rose:    "bg-rose-400/40",
+  slate:   "bg-slate-300/30",
+} as const;
 
 const TONE = {
   neutral: { dot: "bg-slate-400", text: "text-slate-500", banner: "bg-slate-50 border-slate-200/80 text-slate-700" },
@@ -41,27 +71,39 @@ const TONE = {
   alert:   { dot: "bg-rose-500", text: "text-rose-700", banner: "bg-rose-50/90 border-rose-200/90 text-rose-900" },
 } as const;
 
+function tier(palette: keyof typeof GRAD, tone: Tone, label: string, detail?: string): Tier {
+  return {
+    ringClass: `stroke-${palette}-500`,
+    gradient: GRAD[palette],
+    wash: WASH[palette],
+    glowClass: GLOW[palette],
+    tone,
+    label,
+    detail,
+  };
+}
+
 function classifyGust(gust: number | undefined, windSpeed: number): Tier {
   const g = gust ?? windSpeed;
-  if (g >= 90) return { ringClass: "stroke-rose-500", tone: "alert", label: "Wind-hold likely", detail: "Gondolas and chairs likely closed" };
-  if (g >= 70) return { ringClass: "stroke-orange-500", tone: "warn", label: "Chairs may hold", detail: "Exposed chairlifts at risk" };
-  if (g >= 50) return { ringClass: "stroke-amber-500", tone: "caution", label: "Slow operations possible", detail: "Exposed lifts may slow" };
-  return { ringClass: "stroke-emerald-500", tone: "ok", label: "All clear", detail: "Within operating limits" };
+  if (g >= 90) return tier("rose", "alert", "Wind-hold likely", "Gondolas and chairs likely closed");
+  if (g >= 70) return tier("orange", "warn", "Chairs may hold", "Exposed chairlifts at risk");
+  if (g >= 50) return tier("amber", "caution", "Slow operations possible", "Exposed lifts may slow");
+  return tier("emerald", "ok", "All clear", "Within operating limits");
 }
 
 function classifyFreezing(freezingLevel: number | undefined, summit: number, base: number): Tier {
-  if (freezingLevel == null) return { ringClass: "stroke-slate-400", tone: "neutral", label: "Awaiting model" };
-  if (freezingLevel <= base) return { ringClass: "stroke-sky-500", tone: "info", label: "Snow to base" };
-  if (freezingLevel <= summit) return { ringClass: "stroke-amber-500", tone: "caution", label: "Mid-mountain rain line" };
-  return { ringClass: "stroke-rose-500", tone: "alert", label: "Above summit · rain risk" };
+  if (freezingLevel == null) return tier("slate", "neutral", "Awaiting model");
+  if (freezingLevel <= base) return tier("sky", "info", "Snow to base");
+  if (freezingLevel <= summit) return tier("amber", "caution", "Mid-mountain rain line");
+  return tier("rose", "alert", "Above summit · rain risk");
 }
 
 function classifyLifts(open: number, total: number): Tier {
-  if (total === 0) return { ringClass: "stroke-slate-400", tone: "neutral", label: "Closed" };
+  if (total === 0) return tier("slate", "neutral", "Closed");
   const pct = open / total;
-  if (pct >= 0.7) return { ringClass: "stroke-emerald-500", tone: "ok", label: `${open} of ${total} operating` };
-  if (pct > 0) return { ringClass: "stroke-amber-500", tone: "caution", label: `${open} of ${total} operating` };
-  return { ringClass: "stroke-slate-400", tone: "neutral", label: `0 of ${total} operating` };
+  if (pct >= 0.7) return tier("emerald", "ok", `${open} of ${total} operating`);
+  if (pct > 0) return tier("amber", "caution", `${open} of ${total} operating`);
+  return tier("slate", "neutral", `0 of ${total} operating`);
 }
 
 export function MountainSnapshot({
@@ -150,6 +192,9 @@ export function MountainSnapshot({
           <MetricRing
             value={freezingLevel ?? 0}
             max={3000}
+            gradient={freezeTier.gradient}
+            innerWash={freezeTier.wash}
+            glowClassName={freezeTier.glowClass}
             ringClassName={freezeTier.ringClass}
             ariaLabel={`Freezing level ${freezingLevel ?? "unknown"} metres`}
             delay={0.05}
@@ -177,6 +222,9 @@ export function MountainSnapshot({
           <MetricRing
             value={Math.min(120, gust ?? windSpeed)}
             max={120}
+            gradient={windTier.gradient}
+            innerWash={windTier.wash}
+            glowClassName={windTier.glowClass}
             ringClassName={windTier.ringClass}
             ariaLabel={`Wind gusts ${gust ?? windSpeed} kilometres per hour`}
             delay={0.12}
@@ -197,6 +245,9 @@ export function MountainSnapshot({
             <MetricRing
               value={liftsOpen!}
               max={totalLifts!}
+              gradient={liftTier.gradient}
+              innerWash={liftTier.wash}
+              glowClassName={liftTier.glowClass}
               ringClassName={liftTier.ringClass}
               ariaLabel={`${liftsOpen} of ${totalLifts} lifts open`}
               delay={0.18}
