@@ -40,5 +40,31 @@ export const snowyMountainsRegion: RegionConfig = {
     { path: "/resort/jindabyne", label: "Jindabyne" },
     { path: "/resort/selwyn",    label: "Selwyn" },
   ],
+  baseTowns: [
+    {
+      id: "jindabyne",
+      name: "Jindabyne",
+      lat: -36.4106,
+      lng: 148.6206,
+      radiusM: 5000,
+      blurb: "Lakeside base town · 30 min to Thredbo & Perisher",
+    },
+    {
+      id: "berridale",
+      name: "Berridale",
+      lat: -36.3686,
+      lng: 148.8311,
+      radiusM: 4000,
+      blurb: "Quiet village stop on the Snowy Mountains Highway",
+    },
+    {
+      id: "cooma",
+      name: "Cooma",
+      lat: -36.2350,
+      lng: 149.1280,
+      radiusM: 6000,
+      blurb: "Regional hub · 1 hr to the snowfields",
+    },
+  ],
   footer: "v0.3 · feelzlike",
 };

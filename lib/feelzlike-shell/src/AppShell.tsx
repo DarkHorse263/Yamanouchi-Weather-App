@@ -6,6 +6,7 @@ import { cn } from "./cn";
 import { useRegion } from "./RegionProvider";
 import { useSeason } from "./SeasonProvider";
 import { useLanguage } from "./LanguageProvider";
+import { TownPicker } from "./TownPicker";
 import type { NavItem } from "./types";
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -55,6 +56,12 @@ export function AppShell({ children }: { children: ReactNode }) {
             {region.name}
           </p>
           <p className="byline mt-1.5 text-muted-foreground/80">{region.subtitle}</p>
+
+          {region.baseTowns && region.baseTowns.length > 0 && (
+            <div className="mt-4">
+              <TownPicker variant="sidebar" />
+            </div>
+          )}
 
           {(region.seasons || (region.language && region.language.locales.length > 1)) && (
             <div className="mt-4 flex items-center gap-2">
@@ -137,7 +144,11 @@ export function AppShell({ children }: { children: ReactNode }) {
         <Link href="/" className="flex items-center">
           <img src={region.brand.wordmarkUrl} alt="feelzlike" className="h-6 w-auto" />
         </Link>
-        <span className="byline text-muted-foreground/80">{region.shortTag}</span>
+        {region.baseTowns && region.baseTowns.length > 0 ? (
+          <TownPicker variant="compact" />
+        ) : (
+          <span className="byline text-muted-foreground/80">{region.shortTag}</span>
+        )}
       </header>
 
       {/* Main */}

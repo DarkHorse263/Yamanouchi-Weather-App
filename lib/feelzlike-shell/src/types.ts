@@ -34,6 +34,25 @@ export interface RegionLanguagePack {
   locales: Language[];
 }
 
+export interface BaseTown {
+  /** Stable id, e.g. "jindabyne". Used for persistence and Places filtering. */
+  id: string;
+  /** Display name, e.g. "Jindabyne" */
+  name: string;
+  /** Optional Japanese name */
+  nameJa?: string;
+  /** Centroid latitude, used to centre Places searches */
+  lat: number;
+  /** Centroid longitude */
+  lng: number;
+  /** Radius in metres for Places searches around the town */
+  radiusM?: number;
+  /** Short one-line tagline shown beneath the picker */
+  blurb?: string;
+  /** Optional JP tagline */
+  blurbJa?: string;
+}
+
 export interface RegionConfig {
   /** Stable id, e.g. "snowy-mountains". Used for URL path and localStorage. */
   id: string;
@@ -53,6 +72,8 @@ export interface RegionConfig {
   language?: RegionLanguagePack;
   /** Whether the region supports the winter↔green toggle in chrome */
   seasons?: boolean;
+  /** Base towns where guests typically stay. First entry is the default. */
+  baseTowns?: BaseTown[];
   /** Optional version/footer string */
   footer?: string;
 }

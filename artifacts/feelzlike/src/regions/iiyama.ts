@@ -38,5 +38,27 @@ export const iiyamaRegion: RegionConfig = {
     { path: "/resort/togari",        label: "Togari Onsen",    labelJa: "戸狩温泉" },
     { path: "/resort/nozawa-onsen",  label: "Nozawa Onsen",    labelJa: "野沢温泉" },
   ],
+  baseTowns: [
+    {
+      id: "iiyama-city",
+      name: "Iiyama City",
+      nameJa: "飯山市",
+      lat: 36.8517,
+      lng: 138.3667,
+      radiusM: 5000,
+      blurb: "Shinkansen station town · base for Madarao, Togari & Nozawa",
+      blurbJa: "新幹線駅の町 · 斑尾・戸狩・野沢への拠点",
+    },
+    {
+      id: "nozawa-onsen",
+      name: "Nozawa Onsen Village",
+      nameJa: "野沢温泉村",
+      lat: 36.9244,
+      lng: 138.4439,
+      radiusM: 2500,
+      blurb: "Ski-in onsen village · 13 free public baths",
+      blurbJa: "スキーイン温泉郷 · 無料外湯十三軒",
+    },
+  ],
   footer: "v0.3 · feelzlike",
 };

@@ -4,6 +4,7 @@ import {
   RegionProvider,
   SeasonProvider,
   LanguageProvider,
+  BaseTownProvider,
 } from "@workspace/feelzlike-shell";
 import { getRegion } from "@/regions";
 import { RegionStub } from "@/pages/region/RegionStub";
@@ -82,7 +83,9 @@ export function RegionLayout() {
 
   return (
     <RegionProvider region={region}>
-      <WouterBase base={`/${region.id}`}>{withSeason}</WouterBase>
+      <BaseTownProvider region={region}>
+        <WouterBase base={`/${region.id}`}>{withSeason}</WouterBase>
+      </BaseTownProvider>
     </RegionProvider>
   );
 }
