@@ -19,9 +19,8 @@ export default function RegionPicker() {
             What does the mountain feel like today?
           </h1>
           <p className="text-muted-foreground text-lg mt-4 max-w-2xl leading-relaxed">
-            Get the pulse of the peaks with real-time mountain weather, live road alerts,
-            and lift status. From transport updates to the best base-town spots, we bring
-            you the local word as it happens.
+            real-time mountain weather, live road alerts, and lift status. From transport
+            updates to the best base-town spots, we bring you the local word as it happens.
           </p>
           <p className="text-muted-foreground/80 text-base mt-3">
             Pick a region to see the live view.
