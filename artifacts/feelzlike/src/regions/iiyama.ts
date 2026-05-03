@@ -34,14 +34,16 @@ export const iiyamaRegion: RegionConfig = {
     { path: "/alerts",    icon: AlertTriangle,  label: "Alerts",    labelJa: "警報", group: "secondary" },
   ],
   resorts: [
-    { path: "/mountain/madarao",      label: "Madarao Kogen", labelJa: "斑尾高原" },
-    { path: "/mountain/togari",       label: "Togari Onsen",  labelJa: "戸狩温泉" },
-    { path: "/mountain/nozawa-onsen", label: "Nozawa Onsen",  labelJa: "野沢温泉" },
+    { path: "/mountain/madarao",      label: "Madarao Kogen",      labelJa: "斑尾高原" },
+    { path: "/mountain/tangram",      label: "Tangram Ski Circus", labelJa: "タングラムスキーサーカス" },
+    { path: "/mountain/togari",       label: "Togari Onsen",       labelJa: "戸狩温泉" },
+    { path: "/mountain/nozawa-onsen", label: "Nozawa Onsen",       labelJa: "野沢温泉" },
   ],
   mountains: [
-    { id: "madarao",      name: "Madarao Kogen",  nameJa: "斑尾高原",   elevationM: 1382, blurb: "Tree-run paradise · sister to Tangram", blurbJa: "ツリーランの聖地 · タングラムと連結" },
-    { id: "togari",       name: "Togari Onsen",   nameJa: "戸狩温泉",   elevationM: 1050, blurb: "Quieter local mountain · long groomers", blurbJa: "地元密着の静かな山 · ロングコース" },
-    { id: "nozawa-onsen", name: "Nozawa Onsen",   nameJa: "野沢温泉",   elevationM: 1650, blurb: "Iconic ski-in onsen village",            blurbJa: "象徴的なスキーイン温泉郷" },
+    { id: "madarao",      name: "Madarao Kogen",       nameJa: "斑尾高原",            elevationM: 1382, blurb: "Tree-run paradise · linked with Tangram",   blurbJa: "ツリーランの聖地 · タングラムと連結" },
+    { id: "tangram",      name: "Tangram Ski Circus",  nameJa: "タングラムスキーサーカス", elevationM: 1320, blurb: "Family-friendly · interconnected with Madarao", blurbJa: "ファミリー向け · 斑尾と接続" },
+    { id: "togari",       name: "Togari Onsen",        nameJa: "戸狩温泉",            elevationM: 1050, blurb: "Quieter local mountain · long groomers",     blurbJa: "地元密着の静かな山 · ロングコース" },
+    { id: "nozawa-onsen", name: "Nozawa Onsen",        nameJa: "野沢温泉",            elevationM: 1650, blurb: "Iconic ski-in onsen village",                blurbJa: "象徴的なスキーイン温泉郷" },
   ],
   baseTowns: [
     {
@@ -51,8 +53,9 @@ export const iiyamaRegion: RegionConfig = {
       lat: 36.8517,
       lng: 138.3667,
       radiusM: 5000,
-      blurb: "Shinkansen station town · base for Madarao, Togari & Nozawa",
-      blurbJa: "新幹線駅の町 · 斑尾・戸狩・野沢への拠点",
+      blurb: "Shinkansen station town · base for Madarao, Tangram, Togari & Nozawa",
+      blurbJa: "新幹線駅の町 · 斑尾・タングラム・戸狩・野沢への拠点",
+      nearbyMountainIds: ["madarao", "tangram", "togari", "nozawa-onsen"],
     },
     {
       id: "nozawa-onsen",
@@ -63,6 +66,7 @@ export const iiyamaRegion: RegionConfig = {
       radiusM: 2500,
       blurb: "Ski-in onsen village · 13 free public baths",
       blurbJa: "スキーイン温泉郷 · 無料外湯十三軒",
+      nearbyMountainIds: ["nozawa-onsen"],
     },
   ],
   footer: "v0.3 · feelzlike",

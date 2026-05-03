@@ -14,13 +14,17 @@ export default function RegionPicker() {
           transition={{ duration: 0.4 }}
         >
           <img src={wordmark} alt="feelzlike" className="h-9 md:h-10 w-auto" />
-          <p className="byline text-muted-foreground/70 mt-6">Mountain weather intelligence</p>
+          <p className="byline text-muted-foreground/70 mt-6">The skier &amp; snowboarder's bible</p>
           <h1 className="font-display font-semibold text-4xl md:text-6xl tracking-tight text-foreground mt-3 max-w-3xl leading-[1.05]">
             What does the mountain feel like today?
           </h1>
-          <p className="text-muted-foreground text-lg mt-4 max-w-2xl">
-            Live weather, road and lift conditions, transport and what to do — for
-            the people staying in base towns. Pick a region to begin.
+          <p className="text-muted-foreground text-lg mt-4 max-w-2xl leading-relaxed">
+            Get the pulse of the peaks with real-time mountain weather, live road alerts,
+            and lift status. From transport updates to the best base-town spots, we bring
+            you the local word as it happens.
+          </p>
+          <p className="text-muted-foreground/80 text-base mt-3">
+            Pick a region to see the live view.
           </p>
         </motion.header>
 
