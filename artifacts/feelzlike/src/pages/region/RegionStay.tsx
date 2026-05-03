@@ -1,8 +1,36 @@
 import { motion } from "framer-motion";
 import { BedDouble, MapPin, Star } from "lucide-react";
+import { useState } from "react";
 import { useRegion, useLanguage, LiveBadge } from "@workspace/feelzlike-shell";
 import { useNearbyPlaces } from "@/lib/places";
 import { StayPlatformBar } from "@/components/StayPlatformBar";
+
+type StayFilter = {
+  value: string;
+  label: string;
+  labelJa: string;
+  /** Regex matched (case-insensitive) against place name to keep it. `null` = "all". */
+  match: RegExp | null;
+};
+
+const JP_FILTERS: StayFilter[] = [
+  { value: "all", label: "All", labelJa: "すべて", match: null },
+  { value: "hotel", label: "Hotels", labelJa: "ホテル", match: /\b(hotel|inn|resort)\b/i },
+  { value: "ryokan", label: "Ryokan", labelJa: "旅館", match: /(ryokan|旅館|onsen|温泉)/i },
+  { value: "guesthouse", label: "Guesthouses", labelJa: "ゲストハウス", match: /(guest\s?house|hostel|lodge|pension|民宿|ゲストハウス)/i },
+];
+
+const AU_FILTERS: StayFilter[] = [
+  { value: "all", label: "All", labelJa: "すべて", match: null },
+  { value: "hotel", label: "Hotels", labelJa: "ホテル", match: /\b(hotel|inn|resort)\b/i },
+  { value: "motel", label: "Motels", labelJa: "モーテル", match: /\bmotel\b/i },
+  { value: "apartment", label: "Apartments", labelJa: "アパートメント", match: /\b(apartment|apartments|apt)\b/i },
+  { value: "unit", label: "Units", labelJa: "ユニット", match: /\b(unit|units|cabin|cabins|chalet|chalets|villa|villas|cottage|cottages|holiday\s?(park|home))\b/i },
+];
+
+function filtersForCountry(country: string): StayFilter[] {
+  return country.toUpperCase() === "JP" ? JP_FILTERS : AU_FILTERS;
+}
 
 /**
  * Region-wide accommodation page used as a default for any region whose
@@ -22,8 +50,15 @@ export function RegionStay() {
       : null,
   );
 
-  const places = query.data ?? [];
   const country = region.shortTag ?? "";
+  const filters = filtersForCountry(country);
+  const [activeFilter, setActiveFilter] = useState<string>("all");
+  const active = filters.find((f) => f.value === activeFilter) ?? filters[0];
+
+  const allPlaces = query.data ?? [];
+  const places = active.match
+    ? allPlaces.filter((p) => active.match!.test(p.name))
+    : allPlaces;
 
   return (
     <div className="px-6 md:px-10 py-8 md:py-12 max-w-6xl mx-auto">
@@ -46,7 +81,7 @@ export function RegionStay() {
         <div className="rule mt-6 mb-8" />
       </motion.header>
 
-      <div className="mb-8">
+      <div className="mb-6">
         <StayPlatformBar
           variant="banner"
           country={country}
@@ -54,6 +89,22 @@ export function RegionStay() {
           lat={center?.lat}
           lng={center?.lng}
         />
+      </div>
+
+      <div className="flex overflow-x-auto hide-scrollbar gap-2 pb-1 mb-6">
+        {filters.map((f) => (
+          <button
+            key={f.value}
+            onClick={() => setActiveFilter(f.value)}
+            className={`px-4 py-1.5 rounded-full font-bold text-sm whitespace-nowrap transition-colors ${
+              activeFilter === f.value
+                ? "bg-foreground text-background"
+                : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+            }`}
+          >
+            {t(f.label, f.labelJa)}
+          </button>
+        ))}
       </div>
 
       {query.isError && (
