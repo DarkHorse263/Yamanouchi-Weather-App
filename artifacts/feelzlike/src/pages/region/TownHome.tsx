@@ -1,9 +1,10 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { useMemo } from "react";
-import { ArrowUpRight, Car, Video, Bus, BedDouble, UtensilsCrossed, Compass } from "lucide-react";
+import { ArrowUpRight, Car, Video, Bus, BedDouble, UtensilsCrossed, Compass, CloudSun } from "lucide-react";
 import { useRegion, useLanguage, useBaseTown, LiveBadge } from "@workspace/feelzlike-shell";
 import { useGetWeather, useGetRoadConditions } from "@workspace/api-client-react";
+import { useTownWeather } from "@/lib/town-weather";
 
 function haversineKm(a: { lat: number; lng: number }, b: { lat: number; lng: number }): number {
   const R = 6371;
@@ -17,6 +18,7 @@ function haversineKm(a: { lat: number; lng: number }, b: { lat: number; lng: num
 }
 
 const TILES = [
+  { path: "/weather",   icon: CloudSun,        label: "Weather",   labelJa: "天気",   blurb: "Full in-town forecast — current, hourly, 7-day", blurbJa: "町の総合予報 — 現在・時間別・7日間" },
   { path: "/roads",     icon: Car,             label: "Roads",     labelJa: "道路",   blurb: "Live road conditions to the mountain", blurbJa: "山への道路状況" },
   { path: "/cams",      icon: Video,           label: "Cams",      labelJa: "ライブ", blurb: "Town and roadside webcams",            blurbJa: "町と路傍のライブカメラ" },
   { path: "/transport", icon: Bus,             label: "Transport", labelJa: "交通",   blurb: "Buses & shuttles from town",          blurbJa: "町からのバス・送迎" },
@@ -31,6 +33,7 @@ export function TownHome() {
   const { town } = useBaseTown();
   const weatherQ = useGetWeather();
   const roadsQ = useGetRoadConditions();
+  const townWeatherQ = useTownWeather(town?.lat, town?.lng);
 
   // Pick the closest mountain to this town that has live weather data.
   // Always scope to the current region's mountains (fall back to nearbyMountainIds when richer).
@@ -136,7 +139,27 @@ export function TownHome() {
       </motion.header>
 
       {/* Snapshot strip — live conditions */}
-      <section className="mt-8 grid sm:grid-cols-3 gap-3">
+      <section className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <SnapshotCard
+          label={t("In town now", "町の現在")}
+          value={
+            townWeatherQ.data?.current.temperature !== undefined && townWeatherQ.data?.current.temperature !== null
+              ? Math.round(townWeatherQ.data.current.temperature).toString()
+              : "—"
+          }
+          unit="°"
+          hint={
+            townWeatherQ.isLoading
+              ? t("Loading…", "読込中…")
+              : townWeatherQ.data
+                ? `${townWeatherQ.data.current.weatherDescription}${
+                    townWeatherQ.data.current.feelsLike !== null
+                      ? ` · feels ${Math.round(townWeatherQ.data.current.feelsLike)}°`
+                      : ""
+                  }`
+                : t("Weather unavailable", "天気情報なし")
+          }
+        />
         <SnapshotCard
           label={t("Nearest mountain", "最寄りの山")}
           value={tempValue ?? "—"}

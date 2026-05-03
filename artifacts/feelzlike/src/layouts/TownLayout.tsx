@@ -8,6 +8,7 @@ import { TownPlaces } from "@/pages/town/TownPlaces";
 import { TownRoads } from "@/pages/town/TownRoads";
 import { TownCams } from "@/pages/town/TownCams";
 import { TownTransport } from "@/pages/town/TownTransport";
+import { TownWeather } from "@/pages/town/TownWeather";
 
 /**
  * Wraps all /:town/* routes in a nested wouter base so children render with
@@ -34,6 +35,7 @@ export function TownLayout() {
     <WouterRouter base={`/${townId}`}>
       <Switch>
         <Route path="/" component={TownHome} />
+        <Route path="/weather" component={TownWeather} />
         <Route path="/roads" component={TownRoads} />
         <Route path="/cams" component={TownCams} />
         <Route path="/transport" component={TownTransport} />
