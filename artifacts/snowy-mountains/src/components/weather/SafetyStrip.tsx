@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ShieldAlert, ExternalLink, LifeBuoy, Mountain, Phone } from "lucide-react";
+import { ShieldAlert, ExternalLink, Mountain, Phone } from "lucide-react";
 
 interface SafetyLink {
   label: string;
@@ -35,13 +35,12 @@ export function SafetyStrip() {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.42 }}
-      className="glass rounded-3xl p-5 md:p-8"
+      className="glass rounded-3xl p-6 md:p-8"
     >
-      <div className="flex items-end justify-between mb-5 gap-3">
+      <div className="flex items-end justify-between mb-6 gap-3">
         <div>
           <p className="byline text-muted-foreground">09 · Safety</p>
-          <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
-            <LifeBuoy className="text-rose-600 w-5 h-5" />
+          <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 text-foreground">
             Before you head out
           </h2>
         </div>
@@ -59,24 +58,24 @@ export function SafetyStrip() {
               href={link.href}
               target={isPhone ? undefined : "_blank"}
               rel={isPhone ? undefined : "noreferrer"}
-              className="group flex items-start gap-3 p-4 rounded-2xl bg-slate-50/60 border border-slate-200/60 hover:border-rose-400/40 hover:bg-rose-500/5 transition-all"
+              className="group flex items-start gap-3 p-4 rounded-2xl border border-slate-200/70 hover:border-slate-400/60 hover:bg-slate-50/60 transition-colors"
             >
-              <div className="p-2 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-600 flex-none group-hover:bg-rose-500/15 transition-colors">
-                <link.icon className="w-4 h-4" />
+              <div className="p-2 rounded-lg bg-slate-100 text-slate-700 flex-none group-hover:bg-slate-200 transition-colors">
+                <link.icon className="w-4 h-4" strokeWidth={1.75} />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-foreground flex items-center gap-1.5 leading-tight">
+                <p className="text-[13px] font-semibold text-foreground flex items-center gap-1.5 leading-tight">
                   {link.label}
-                  {!isPhone && <ExternalLink className="w-3 h-3 text-muted-foreground/60 group-hover:text-rose-600/80 transition-colors" />}
+                  {!isPhone && <ExternalLink className="w-3 h-3 text-muted-foreground/50 group-hover:text-muted-foreground transition-colors" strokeWidth={1.75} />}
                 </p>
-                <p className="byline text-muted-foreground/80 mt-1 leading-snug">{link.detail}</p>
+                <p className="text-[11px] text-muted-foreground/80 mt-1 leading-snug">{link.detail}</p>
               </div>
             </a>
           );
         })}
       </div>
 
-      <p className="mt-4 text-[11px] text-muted-foreground/70 leading-relaxed">
+      <p className="mt-5 text-[11px] text-muted-foreground/70 leading-relaxed">
         feelzlike provides reference conditions only. Avalanche risk in the Australian Alps is generally low but real
         — wind-loaded slopes, cornices and tree wells have caused fatalities. Check current bulletins, carry safety
         gear, and ski with a partner when leaving patrolled terrain.

@@ -21,8 +21,8 @@ export function MetricRing({
   max,
   min = 0,
   size = 168,
-  strokeWidth = 12,
-  trackClassName = "stroke-slate-200/80",
+  strokeWidth = 8,
+  trackClassName = "stroke-slate-200",
   ringClassName = "stroke-primary",
   glowClassName,
   children,
@@ -90,7 +90,7 @@ export function MetricRing({
           strokeLinecap="round"
           strokeDasharray={C}
           style={{ strokeDashoffset: dashOffset }}
-          className={cn("drop-shadow-[0_0_6px_currentColor] transition-colors", ringClassName)}
+          className={cn("transition-colors", ringClassName)}
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
