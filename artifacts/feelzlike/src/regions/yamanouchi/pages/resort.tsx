@@ -53,11 +53,6 @@ const PROFILES: Record<string, ResortProfile> = {
     liftStatusUrl: "https://kitashiga.net/winter/",
     webcamUrl: "https://kitashiga.net/livecam/",
   },
-  "yakebitaiyama": {
-    websiteUrl: "https://www.princehotels.co.jp/ski/shigakogen-en/",
-    liftStatusUrl: "https://www.princehotels.co.jp/ski/shigakogen-en/winter/",
-    webcamUrl: "https://www.princehotels.co.jp/ski/shigakogen-en/winter/livecam/",
-  },
 };
 
 const VALID_IDS = new Set(Object.keys(PROFILES));

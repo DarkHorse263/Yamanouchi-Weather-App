@@ -35,15 +35,13 @@ export const yamanouchiRegion: RegionConfig = {
   ],
   resorts: [
     { path: "/mountain/shiga-kogen",   label: "Shiga Kogen",      labelJa: "志賀高原" },
-    { path: "/mountain/yakebitaiyama", label: "Yakebitaiyama",    labelJa: "焼額山" },
-    { path: "/mountain/kita-shiga",    label: "Kita-Shiga Kogen", labelJa: "北志賀高原" },
     { path: "/mountain/ryuoo",         label: "Ryuoo",            labelJa: "竜王" },
+    { path: "/mountain/kita-shiga",    label: "Kita-Shiga Kogen", labelJa: "北志賀高原" },
   ],
   mountains: [
-    { id: "shiga-kogen",   name: "Shiga Kogen",      nameJa: "志賀高原",    elevationM: 2307, blurb: "Japan's largest interconnected ski area · 18 resorts", blurbJa: "日本最大の連結スキー場 · 18エリア" },
-    { id: "yakebitaiyama", name: "Yakebitaiyama",    nameJa: "焼額山",      elevationM: 2009, blurb: "World Cup slopes inside Shiga Kogen",                  blurbJa: "志賀高原内のワールドカップ斜面" },
-    { id: "kita-shiga",    name: "Kita-Shiga Kogen", nameJa: "北志賀高原",  elevationM: 1930, blurb: "North-facing powder · close to Yomase",                blurbJa: "北向き斜面のパウダー · 夜間瀬に近い" },
+    { id: "shiga-kogen",   name: "Shiga Kogen",      nameJa: "志賀高原",    elevationM: 2307, blurb: "Japan's largest interconnected ski area · 18 sub-resorts incl. Yakebitaiyama", blurbJa: "日本最大の連結スキー場 · 焼額山を含む18エリア" },
     { id: "ryuoo",         name: "Ryuoo",            nameJa: "竜王",         elevationM: 1930, blurb: "Sea-of-clouds gondola summit",                          blurbJa: "雲海ゴンドラの山頂" },
+    { id: "kita-shiga",    name: "Kita-Shiga Kogen", nameJa: "北志賀高原",  elevationM: 1930, blurb: "North-facing powder · close to Yomase",                blurbJa: "北向き斜面のパウダー · 夜間瀬に近い" },
   ],
   baseTowns: [
     {
