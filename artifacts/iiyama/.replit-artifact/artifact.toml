@@ -1,6 +1,6 @@
 kind = "web"
-previewPath = "/iiyama/"
-title = "Iiyama Snow Intelligence"
+previewPath = "/_legacy-iiyama/"
+title = "[LEGACY] Iiyama Snow Intelligence"
 version = "1.0.0"
 id = "artifacts/iiyama"
 router = "path"
@@ -12,14 +12,14 @@ version = "1.0.0"
 [[services]]
 localPort = 24019
 name = "web"
-paths = ["/iiyama/"]
+paths = ["/_legacy-iiyama/"]
 
 [services.development]
 run = "pnpm --filter @workspace/iiyama run dev"
 
 [services.env]
 PORT = "24019"
-BASE_PATH = "/iiyama/"
+BASE_PATH = "/_legacy-iiyama/"
 
 [services.production]
 build = ["pnpm", "--filter", "@workspace/iiyama", "run", "build"]

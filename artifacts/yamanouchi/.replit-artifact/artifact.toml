@@ -1,6 +1,6 @@
 kind = "web"
-previewPath = "/yamanouchi/"
-title = "Yamanouchi Snow Intelligence"
+previewPath = "/_legacy-yamanouchi/"
+title = "[LEGACY] Yamanouchi Snow Intelligence"
 version = "1.0.0"
 id = "artifacts/yamanouchi"
 router = "path"
@@ -12,14 +12,14 @@ version = "1.0.0"
 [[services]]
 localPort = 20651
 name = "web"
-paths = ["/yamanouchi/"]
+paths = ["/_legacy-yamanouchi/"]
 
 [services.development]
 run = "pnpm --filter @workspace/yamanouchi run dev"
 
 [services.env]
 PORT = "20651"
-BASE_PATH = "/yamanouchi/"
+BASE_PATH = "/_legacy-yamanouchi/"
 
 [services.production]
 build = ["pnpm", "--filter", "@workspace/yamanouchi", "run", "build"]

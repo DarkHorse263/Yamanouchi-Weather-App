@@ -1,6 +1,6 @@
 kind = "web"
-previewPath = "/snowy-mountains/"
-title = "Snowy Mountains Snow Intelligence"
+previewPath = "/_legacy-snowy-mountains/"
+title = "[LEGACY] Snowy Mountains Snow Intelligence"
 version = "1.0.0"
 id = "artifacts/snowy-mountains"
 router = "path"
@@ -11,7 +11,7 @@ version = "1.0.0"
 
 [[services]]
 name = "web"
-paths = [ "/snowy-mountains/" ]
+paths = [ "/_legacy-snowy-mountains/" ]
 localPort = 23491
 
 [services.development]
@@ -28,4 +28,4 @@ to = "/index.html"
 
 [services.env]
 PORT = "23491"
-BASE_PATH = "/snowy-mountains/"
+BASE_PATH = "/_legacy-snowy-mountains/"
