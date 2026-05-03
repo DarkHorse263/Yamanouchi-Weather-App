@@ -157,7 +157,7 @@ router.get("/road-conditions", async (_req, res) => {
   const result = GetRoadConditionsResponse.parse({
     roads,
     generalAdvice: "Always carry chains when travelling to the Snowy Mountains during winter (June-October). Check conditions before departure at livetraffic.com. National Parks entry fees apply for Kosciuszko National Park. Vehicle entry is $29/day or $190/year (2024 rates). During heavy snowfall, roads may close at short notice.",
-    liveTrafficUrl: "https://www.livetraffic.com",
+    liveTrafficUrl: "https://www.livetraffic.com/maps?lat=-36.45&lng=148.45&zoom=10&layers=cameras",
     lastUpdated: new Date().toISOString(),
     chainFittingBays: CHAIN_FITTING_BAYS
   });
