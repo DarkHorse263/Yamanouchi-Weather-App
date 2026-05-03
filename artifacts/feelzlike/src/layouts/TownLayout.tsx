@@ -5,6 +5,9 @@ import { TownHome } from "@/pages/region/TownHome";
 import { TownSubpageStub } from "@/pages/region/TownSubpageStub";
 import { TownStay } from "@/pages/town/TownStay";
 import { TownPlaces } from "@/pages/town/TownPlaces";
+import { TownRoads } from "@/pages/town/TownRoads";
+import { TownCams } from "@/pages/town/TownCams";
+import { TownTransport } from "@/pages/town/TownTransport";
 
 /**
  * Wraps all /:town/* routes in a nested wouter base so children render with
@@ -31,30 +34,9 @@ export function TownLayout() {
     <WouterRouter base={`/${townId}`}>
       <Switch>
         <Route path="/" component={TownHome} />
-        <Route path="/roads">
-          <TownSubpageStub
-            title="Roads"
-            titleJa="道路"
-            description="Live conditions on the routes to the mountain."
-            descriptionJa="山までのルートの最新状況。"
-          />
-        </Route>
-        <Route path="/cams">
-          <TownSubpageStub
-            title="Cams"
-            titleJa="ライブカメラ"
-            description="Town and roadside webcams near you."
-            descriptionJa="町と路傍のライブカメラ。"
-          />
-        </Route>
-        <Route path="/transport">
-          <TownSubpageStub
-            title="Transport"
-            titleJa="交通"
-            description="Buses, shuttles and trains from town to the mountain."
-            descriptionJa="町から山までのバス・送迎・電車。"
-          />
-        </Route>
+        <Route path="/roads" component={TownRoads} />
+        <Route path="/cams" component={TownCams} />
+        <Route path="/transport" component={TownTransport} />
         <Route path="/stay" component={TownStay} />
         <Route path="/eat">
           <TownPlaces

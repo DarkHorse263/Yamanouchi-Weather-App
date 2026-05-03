@@ -123,8 +123,9 @@ router.get("/places/nearby", async (req, res) => {
 
     const out: PlaceOut[] = (data.places ?? []).map((p) => {
       const photoName = p.photos?.[0]?.name;
+      // Proxy photo through our server so the API key never reaches the browser.
       const photoUrl = photoName
-        ? `https://places.googleapis.com/v1/${photoName}/media?maxWidthPx=480&key=${encodeURIComponent(apiKey)}`
+        ? `/api/places/photo?name=${encodeURIComponent(photoName)}&w=480`
         : undefined;
       return {
         id: p.id,
@@ -151,6 +152,64 @@ router.get("/places/nearby", async (req, res) => {
       error: "FETCH_FAILED",
       message: err instanceof Error ? err.message : "Unknown error",
     });
+  }
+});
+
+/**
+ * Photo proxy: fetches the actual image bytes from Google with the server-side
+ * key and streams them back to the client. Keeps the key off the wire.
+ * Names look like "places/<placeId>/photos/<photoId>".
+ */
+router.get("/places/photo", async (req, res) => {
+  const apiKey = process.env["GOOGLE_PLACES_API_KEY"];
+  if (!apiKey) {
+    res.status(503).json({ error: "PLACES_NOT_CONFIGURED" });
+    return;
+  }
+  const name = String(req.query["name"] ?? "");
+  const widthRaw = Number(req.query["w"] ?? 480);
+  const width = Math.min(1600, Math.max(80, Number.isFinite(widthRaw) ? widthRaw : 480));
+
+  // Defensive: only allow well-formed photo names — must look like
+  // "places/<id>/photos/<id>" with safe characters. Blocks open-redirect / SSRF abuse.
+  if (!/^places\/[A-Za-z0-9_-]+\/photos\/[A-Za-z0-9_-]+$/.test(name)) {
+    res.status(400).json({ error: "BAD_NAME" });
+    return;
+  }
+
+  try {
+    const upstream = await fetch(
+      `https://places.googleapis.com/v1/${name}/media?maxWidthPx=${width}&key=${encodeURIComponent(apiKey)}`,
+      { redirect: "follow" },
+    );
+    if (!upstream.ok || !upstream.body) {
+      res.status(upstream.status === 404 ? 404 : 502).end();
+      return;
+    }
+    const ct = upstream.headers.get("content-type") ?? "image/jpeg";
+    res.setHeader("Content-Type", ct);
+    res.setHeader("Cache-Control", "public, max-age=86400, s-maxage=86400, immutable");
+
+    // Stream the bytes through; works in Node 18+ where fetch returns a Web ReadableStream.
+    const reader = upstream.body.getReader();
+    res.on("close", () => { reader.cancel().catch(() => {}); });
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      if (!res.write(value)) {
+        await new Promise<void>((resolve) => res.once("drain", resolve));
+      }
+    }
+    res.end();
+  } catch (err) {
+    if (!res.headersSent) {
+      res.status(503).json({
+        error: "FETCH_FAILED",
+        message: err instanceof Error ? err.message : "Unknown error",
+      });
+    } else {
+      res.end();
+    }
   }
 });
 

@@ -54,6 +54,7 @@ export const snowyMountainsRegion: RegionConfig = {
       lng: 148.6206,
       radiusM: 5000,
       blurb: "Lakeside base town · 30 min to Thredbo & Perisher",
+      nearbyMountainIds: ["thredbo", "perisher", "charlottes-pass"],
     },
     {
       id: "berridale",
@@ -62,6 +63,7 @@ export const snowyMountainsRegion: RegionConfig = {
       lng: 148.8311,
       radiusM: 4000,
       blurb: "Quiet village stop on the Snowy Mountains Highway",
+      nearbyMountainIds: ["thredbo", "perisher", "charlottes-pass", "selwyn"],
     },
     {
       id: "cooma",
@@ -70,6 +72,7 @@ export const snowyMountainsRegion: RegionConfig = {
       lng: 149.1280,
       radiusM: 6000,
       blurb: "Regional hub · 1 hr to the snowfields",
+      nearbyMountainIds: ["thredbo", "perisher", "charlottes-pass", "selwyn"],
     },
   ],
   footer: "v0.3 · feelzlike",

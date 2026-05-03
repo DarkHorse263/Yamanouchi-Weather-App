@@ -68,6 +68,8 @@ export interface BaseTown {
   blurb?: string;
   /** Optional JP tagline */
   blurbJa?: string;
+  /** Mountain ids accessible from this town. Used to scope roads/cams/transport. */
+  nearbyMountainIds?: string[];
 }
 
 export interface RegionConfig {

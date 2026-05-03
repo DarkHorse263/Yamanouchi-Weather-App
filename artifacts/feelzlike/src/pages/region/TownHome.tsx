@@ -1,7 +1,20 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+import { useMemo } from "react";
 import { ArrowUpRight, Car, Video, Bus, BedDouble, UtensilsCrossed, Compass } from "lucide-react";
 import { useRegion, useLanguage, useBaseTown, LiveBadge } from "@workspace/feelzlike-shell";
+import { useGetWeather, useGetRoadConditions } from "@workspace/api-client-react";
+
+function haversineKm(a: { lat: number; lng: number }, b: { lat: number; lng: number }): number {
+  const R = 6371;
+  const toRad = (d: number) => (d * Math.PI) / 180;
+  const dLat = toRad(b.lat - a.lat);
+  const dLng = toRad(b.lng - a.lng);
+  const lat1 = toRad(a.lat);
+  const lat2 = toRad(b.lat);
+  const h = Math.sin(dLat / 2) ** 2 + Math.sin(dLng / 2) ** 2 * Math.cos(lat1) * Math.cos(lat2);
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
 
 const TILES = [
   { path: "/roads",     icon: Car,             label: "Roads",     labelJa: "道路",   blurb: "Live road conditions to the mountain", blurbJa: "山への道路状況" },
@@ -16,6 +29,56 @@ export function TownHome() {
   const { region } = useRegion();
   const { t } = useLanguage();
   const { town } = useBaseTown();
+  const weatherQ = useGetWeather();
+  const roadsQ = useGetRoadConditions();
+
+  // Pick the closest mountain to this town that has live weather data.
+  // Always scope to the current region's mountains (fall back to nearbyMountainIds when richer).
+  const closest = useMemo(() => {
+    if (!town || !weatherQ.data) return null;
+    const regionIds = new Set(region.mountains?.map((m) => m.id) ?? []);
+    const nearbyIds = new Set(town.nearbyMountainIds ?? []);
+    const allowed = nearbyIds.size > 0 ? nearbyIds : regionIds;
+    const candidates = allowed.size > 0
+      ? weatherQ.data.locations.filter((l) => allowed.has(l.location.id))
+      : [];
+    if (candidates.length === 0) return null;
+    let best = candidates[0]!;
+    let bestKm = haversineKm(
+      { lat: town.lat, lng: town.lng },
+      { lat: best.location.latitude, lng: best.location.longitude },
+    );
+    for (const c of candidates.slice(1)) {
+      const km = haversineKm(
+        { lat: town.lat, lng: town.lng },
+        { lat: c.location.latitude, lng: c.location.longitude },
+      );
+      if (km < bestKm) {
+        best = c;
+        bestKm = km;
+      }
+    }
+    return { entry: best, km: bestKm };
+  }, [town, weatherQ.data]);
+
+  // Roads relevant to this town: open vs total
+  const roadsSummary = useMemo(() => {
+    if (!town || !roadsQ.data) return null;
+    const regionIds = new Set(region.mountains?.map((m) => m.id) ?? []);
+    const nearbyIds = new Set(town.nearbyMountainIds ?? []);
+    const allowed = nearbyIds.size > 0 ? nearbyIds : regionIds;
+    const townName = town.name.toLowerCase();
+    const relevant = roadsQ.data.roads.filter((r) => {
+      const affects = (r.affectedResorts ?? []).some((id) => allowed.has(id));
+      const mentioned = r.segment?.toLowerCase().includes(townName) || r.roadName?.toLowerCase().includes(townName);
+      return affects || mentioned;
+    });
+    if (relevant.length === 0) return null;
+    const open = relevant.filter((r) => r.condition === "open").length;
+    const closed = relevant.filter((r) => r.condition === "closed").length;
+    const warn = relevant.length - open - closed;
+    return { total: relevant.length, open, closed, warn };
+  }, [town, roadsQ.data, region]);
 
   if (!town) {
     return (
@@ -24,6 +87,29 @@ export function TownHome() {
       </div>
     );
   }
+
+  // ~1.5 min/km is a reasonable alpine-road estimate
+  const driveMinutes = closest ? Math.max(5, Math.round(closest.km * 1.5)) : null;
+  const tempValue =
+    closest?.entry.current?.temperature !== undefined
+      ? Math.round(closest.entry.current.temperature).toString()
+      : null;
+  const weatherHint = closest?.entry.current?.weatherDescription ?? closest?.entry.location.name ?? "";
+  const roadValue = roadsSummary
+    ? roadsSummary.closed > 0
+      ? `${roadsSummary.closed}`
+      : `${roadsSummary.open}/${roadsSummary.total}`
+    : null;
+  const roadUnit = roadsSummary
+    ? roadsSummary.closed > 0
+      ? t("closed", "通行止")
+      : t("open", "開通")
+    : "";
+  const roadHint = roadsSummary
+    ? roadsSummary.warn > 0
+      ? t(`${roadsSummary.warn} with advisories`, `${roadsSummary.warn}件の警告`)
+      : t("All clear", "問題なし")
+    : t("Open / closed status", "開通・通行止情報");
 
   return (
     <div className="px-6 md:px-10 py-8 md:py-12 max-w-6xl mx-auto">
@@ -49,25 +135,45 @@ export function TownHome() {
         <div className="rule mt-6" />
       </motion.header>
 
-      {/* Snapshot strip — placeholder until weather wiring */}
+      {/* Snapshot strip — live conditions */}
       <section className="mt-8 grid sm:grid-cols-3 gap-3">
         <SnapshotCard
-          label={t("In town now", "町の現在")}
-          value="—"
+          label={t("Nearest mountain", "最寄りの山")}
+          value={tempValue ?? "—"}
           unit="°"
-          hint={t("Weather coming soon", "天気は準備中")}
+          hint={
+            weatherQ.isLoading
+              ? t("Loading…", "読込中…")
+              : closest
+                ? `${closest.entry.location.name} · ${weatherHint}`
+                : t("Weather unavailable", "天気情報なし")
+          }
         />
         <SnapshotCard
           label={t("To the mountain", "山まで")}
-          value="—"
+          value={driveMinutes !== null ? `~${driveMinutes}` : "—"}
           unit={t("min", "分")}
-          hint={t("Drive time coming soon", "所要時間は準備中")}
+          hint={
+            closest
+              ? t(
+                  `${Math.round(closest.km)} km to ${closest.entry.location.name}`,
+                  `${closest.entry.location.name}まで約${Math.round(closest.km)}km`,
+                )
+              : t("Drive time unavailable", "所要時間なし")
+          }
         />
         <SnapshotCard
           label={t("Roads", "道路")}
-          value="—"
-          unit=""
-          hint={t("Open / closed status", "開通・通行止情報")}
+          value={roadValue ?? "—"}
+          unit={roadUnit}
+          hint={roadHint}
+          tone={
+            roadsSummary?.closed
+              ? "warn"
+              : roadsSummary?.warn
+                ? "caution"
+                : "ok"
+          }
         />
       </section>
 
@@ -82,7 +188,7 @@ export function TownHome() {
             return (
               <Link
                 key={tile.path}
-                href={`/${town.id}${tile.path}`}
+                href={tile.path}
                 className="group relative block rounded-2xl border border-border bg-white p-5 transition-all hover:border-primary/40 hover:shadow-md"
               >
                 <div className="flex items-start justify-between">
@@ -111,20 +217,30 @@ function SnapshotCard({
   value,
   unit,
   hint,
+  tone,
 }: {
   label: string;
   value: string;
   unit: string;
   hint: string;
+  tone?: "ok" | "caution" | "warn";
 }) {
+  const valueClass =
+    tone === "warn"
+      ? "text-red-600"
+      : tone === "caution"
+        ? "text-amber-600"
+        : tone === "ok"
+          ? "text-emerald-700"
+          : "text-foreground";
   return (
     <div className="rounded-2xl border border-border bg-white p-4">
       <p className="byline text-muted-foreground/70">{label}</p>
-      <p className="mt-2 font-display font-semibold text-3xl text-foreground tracking-tight">
+      <p className={`mt-2 font-display font-semibold text-3xl tracking-tight ${valueClass}`}>
         {value}
         <span className="text-base text-muted-foreground/70 ml-1">{unit}</span>
       </p>
-      <p className="text-[11px] text-muted-foreground/70 mt-1">{hint}</p>
+      <p className="text-[11px] text-muted-foreground/70 mt-1 line-clamp-1">{hint}</p>
     </div>
   );
 }
