@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { useBaseTown } from "@workspace/feelzlike-shell";
 import { TownHome } from "@/pages/region/TownHome";
 import { TownSubpageStub } from "@/pages/region/TownSubpageStub";
+import { TownStay } from "@/pages/town/TownStay";
+import { TownPlaces } from "@/pages/town/TownPlaces";
 
 /**
  * Wraps all /:town/* routes in a nested wouter base so children render with
@@ -53,28 +55,23 @@ export function TownLayout() {
             descriptionJa="町から山までのバス・送迎・電車。"
           />
         </Route>
-        <Route path="/stay">
-          <TownSubpageStub
-            title="Stay"
-            titleJa="宿泊"
-            description="Hotels, ryokan and lodges in this town."
-            descriptionJa="町内の宿泊施設。"
-          />
-        </Route>
+        <Route path="/stay" component={TownStay} />
         <Route path="/eat">
-          <TownSubpageStub
+          <TownPlaces
+            kind="eat"
             title="Eat"
             titleJa="食事"
-            description="Restaurants, izakaya and cafés in town."
-            descriptionJa="町内の飲食店。"
+            blurb="Restaurants, izakaya, cafés and bars near town."
+            blurbJa="町周辺のレストラン・居酒屋・カフェ・バー。"
           />
         </Route>
         <Route path="/explore">
-          <TownSubpageStub
+          <TownPlaces
+            kind="explore"
             title="Explore"
             titleJa="観光"
-            description="Off-mountain things to do near town."
-            descriptionJa="町周辺の観光・アクティビティ。"
+            blurb="Attractions, museums, parks and natural sights near town."
+            blurbJa="町周辺の観光地・博物館・公園・自然。"
           />
         </Route>
         <Route>
