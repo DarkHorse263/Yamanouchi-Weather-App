@@ -50,12 +50,12 @@ export default function RegionPicker() {
                 </h2>
                 <p className="text-muted-foreground text-sm mt-1">{region.subtitle}</p>
                 <div className="mt-5 flex flex-wrap gap-1.5">
-                  {region.resorts.slice(0, 4).map((r) => (
+                  {(region.mountains ?? []).slice(0, 4).map((m) => (
                     <span
-                      key={r.path}
+                      key={m.id}
                       className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] bg-secondary text-secondary-foreground"
                     >
-                      {r.label}
+                      {m.name}
                     </span>
                   ))}
                 </div>

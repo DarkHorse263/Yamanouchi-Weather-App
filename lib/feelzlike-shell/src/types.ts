@@ -22,6 +22,23 @@ export interface ResortLink {
   labelJa?: string;
 }
 
+export interface MountainLink {
+  /** Stable id, used in URL: /:region/mountain/:id */
+  id: string;
+  name: string;
+  nameJa?: string;
+  /** Optional summit/base elevation for card display */
+  elevationM?: number;
+  /** Short tagline shown on the region overview card */
+  blurb?: string;
+  blurbJa?: string;
+  /** Optional hero image url for the card */
+  imageUrl?: string;
+}
+
+/** Scope a NavItem belongs to. Determines which sidebar section renders it. */
+export type NavScope = "region" | "town" | "mountain";
+
 export interface RegionBrand {
   /** Wordmark image URL (resolved by the consuming app's Vite alias) */
   wordmarkUrl: string;
@@ -64,10 +81,14 @@ export interface RegionConfig {
   shortTag: string;
   /** Brand assets */
   brand: RegionBrand;
-  /** Sidebar nav items (region defines which it wants) */
+  /** Legacy flat nav (still consumed by some pages; new code uses navOverrides). */
   nav: NavItem[];
-  /** Resort quick-links shown beneath nav */
+  /** Resort quick-links shown beneath nav (legacy; superseded by `mountains`). */
   resorts: ResortLink[];
+  /** Mountains in this region. Used for the region overview cards and `/:region/mountain/:id`. */
+  mountains?: MountainLink[];
+  /** Optional per-scope nav overrides. If absent, sensible defaults are used. */
+  navOverrides?: Partial<Record<NavScope, NavItem[]>>;
   /** Localisation; omit if region is single-language English */
   language?: RegionLanguagePack;
   /** Whether the region supports the winter↔green toggle in chrome */

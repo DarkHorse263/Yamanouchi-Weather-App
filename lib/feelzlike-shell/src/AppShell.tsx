@@ -1,46 +1,113 @@
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, Mountain, Sun, Snowflake } from "lucide-react";
+import { ChevronLeft, Mountain as MountainIcon, Sun, Snowflake } from "lucide-react";
 import type { ReactNode } from "react";
 import { cn } from "./cn";
 import { useRegion } from "./RegionProvider";
 import { useSeason } from "./SeasonProvider";
 import { useLanguage } from "./LanguageProvider";
+import { useBaseTown } from "./BaseTownProvider";
 import { TownPicker } from "./TownPicker";
+import { DEFAULT_TOWN_NAV, DEFAULT_MOUNTAIN_NAV, DEFAULT_REGION_NAV } from "./defaultNav";
 import type { NavItem } from "./types";
+
+const RESERVED_TOWN_SLUGS = new Set(["mountain", "mountains", "radar", "alerts", "resort"]);
+
+interface ParsedScope {
+  scope: "region" | "town" | "mountain";
+  townId?: string;
+  /** Path within the town, e.g. "/", "/stay" */
+  townSubpath?: string;
+}
+
+function parseScope(location: string, townIds: Set<string>): ParsedScope {
+  const path = location === "" ? "/" : location;
+  if (path === "/") return { scope: "region" };
+
+  // Mountain-scope routes
+  if (
+    path === "/mountains" ||
+    path.startsWith("/mountains/") ||
+    path.startsWith("/mountain/") ||
+    path === "/radar" ||
+    path === "/alerts" ||
+    path.startsWith("/resort/") // legacy URL still maps to mountain scope
+  ) {
+    return { scope: "mountain" };
+  }
+
+  // Town-scope routes: /<townId>/...
+  const parts = path.split("/").filter(Boolean);
+  const first = parts[0];
+  if (first && !RESERVED_TOWN_SLUGS.has(first) && townIds.has(first)) {
+    const subpath = "/" + parts.slice(1).join("/");
+    return {
+      scope: "town",
+      townId: first,
+      townSubpath: subpath === "/" ? "/" : subpath.replace(/\/$/, ""),
+    };
+  }
+
+  return { scope: "region" };
+}
 
 export function AppShell({ children }: { children: ReactNode }) {
   const { region } = useRegion();
   const [location] = useLocation();
-  // Note: AppShell renders inside <WouterRouter base={`/${region.id}`}>, so
-  // `location` is region-relative ("/", "/cams") and <Link> prepends the base.
-  // Use raw region-relative paths for in-region nav, and "~/..." to escape
-  // the base for global routes (e.g. region picker).
+  const { towns, town: activeTown } = useBaseTown();
 
-  // useSeason throws when no provider; only call when seasons are enabled
   const seasonCtx = region.seasons ? useSeason() : null;
-  // useLanguage has a permissive fallback so calling it always is safe
   const lang = useLanguage();
   const t = (en: string, ja?: string) => lang.t(en, ja);
 
-  const visibleNav = region.nav.filter((item) => {
-    if (!item.season) return true;
-    if (!seasonCtx) return true;
-    return seasonCtx.season === item.season;
-  });
+  const townIdSet = new Set(towns.map((tn) => tn.id));
+  const parsed = parseScope(location, townIdSet);
 
-  const primaryNav = visibleNav.filter((i) => i.group !== "secondary");
-  const secondaryNav = visibleNav.filter((i) => i.group === "secondary");
+  // The town used for building town-section nav links: prefer URL, then provider
+  const navTown = parsed.townId
+    ? towns.find((tn) => tn.id === parsed.townId)
+    : activeTown;
 
-  const isActive = (path: string) => {
-    if (path === "/") return location === "/" || location === "";
+  const regionNav: NavItem[] = region.navOverrides?.region ?? DEFAULT_REGION_NAV;
+  const townNavRaw: NavItem[] = region.navOverrides?.town ?? DEFAULT_TOWN_NAV;
+  const mountainNavRaw: NavItem[] = region.navOverrides?.mountain ?? DEFAULT_MOUNTAIN_NAV;
+
+  const filterBySeason = (items: NavItem[]) =>
+    items.filter((it) => !it.season || !seasonCtx || seasonCtx.season === it.season);
+
+  const townNav = filterBySeason(townNavRaw);
+  const mountainNav = filterBySeason(mountainNavRaw);
+
+  // Build absolute (region-relative) hrefs for each scope's items
+  const townHref = (subpath: string) => {
+    if (!navTown) return "/";
+    const clean = subpath === "/" ? "" : subpath;
+    return `/${navTown.id}${clean}`;
+  };
+  const regionHref = (path: string) => path; // already region-relative
+  const mountainHref = (path: string) => path;
+
+  const isActiveTown = (subpath: string) =>
+    parsed.scope === "town" &&
+    navTown?.id === parsed.townId &&
+    (subpath === "/"
+      ? parsed.townSubpath === "/" || parsed.townSubpath === ""
+      : parsed.townSubpath === subpath ||
+        (parsed.townSubpath ?? "").startsWith(`${subpath}/`));
+
+  const isActiveRegion = (path: string) =>
+    path === "/" ? parsed.scope === "region" : location === path;
+
+  const isActiveMountain = (path: string) => {
+    if (path === "/mountains")
+      return location === "/mountains" || location.startsWith("/mountains/");
     return location === path || location.startsWith(`${path}/`);
   };
 
   return (
     <div className="min-h-screen bg-background flex flex-col md:flex-row">
       {/* Desktop sidebar */}
-      <aside className="hidden md:flex flex-col w-64 fixed inset-y-0 left-0 z-50 border-r border-border bg-white">
+      <aside className="hidden md:flex flex-col w-64 fixed inset-y-0 left-0 z-50 border-r border-border bg-white overflow-y-auto">
         <div className="px-6 pt-6 pb-5">
           <Link
             href="~/"
@@ -56,12 +123,6 @@ export function AppShell({ children }: { children: ReactNode }) {
             {region.name}
           </p>
           <p className="byline mt-1.5 text-muted-foreground/80">{region.subtitle}</p>
-
-          {region.baseTowns && region.baseTowns.length > 0 && (
-            <div className="mt-4">
-              <TownPicker variant="sidebar" />
-            </div>
-          )}
 
           {(region.seasons || (region.language && region.language.locales.length > 1)) && (
             <div className="mt-4 flex items-center gap-2">
@@ -83,28 +144,71 @@ export function AppShell({ children }: { children: ReactNode }) {
           )}
         </div>
 
-        <div className="rule mx-6" />
-
-        <nav className="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto hide-scrollbar">
-          {primaryNav.map((item) => (
-            <NavLink key={item.path} item={item} active={isActive(item.path)} t={t} />
+        <nav className="flex-1 px-3 pb-4 space-y-0.5">
+          {/* REGION */}
+          <SectionLabel>{t("Region", "地域")}</SectionLabel>
+          {regionNav.map((item) => (
+            <NavLink
+              key={item.path}
+              item={item}
+              href={regionHref(item.path)}
+              active={isActiveRegion(item.path)}
+              t={t}
+            />
           ))}
-          {secondaryNav.length > 0 && <div className="rule mx-3 my-3" />}
-          {secondaryNav.map((item) => (
-            <NavLink key={item.path} item={item} active={isActive(item.path)} t={t} />
+
+          {/* IN TOWN */}
+          {towns.length > 0 && (
+            <>
+              <div className="rule mx-3 my-3" />
+              <div className="px-3 mb-2 flex items-center justify-between gap-2">
+                <span className="byline text-muted-foreground/70">
+                  {t("In town", "町")}
+                </span>
+              </div>
+              <div className="px-3 mb-2">
+                <TownPicker variant="sidebar" preserveSubpath />
+              </div>
+              {navTown ? (
+                townNav.map((item) => (
+                  <NavLink
+                    key={item.path}
+                    item={item}
+                    href={townHref(item.path)}
+                    active={isActiveTown(item.path)}
+                    t={t}
+                  />
+                ))
+              ) : (
+                <p className="px-3 py-2 byline text-muted-foreground/60">
+                  {t("Pick a town to see options.", "町を選んでください")}
+                </p>
+              )}
+            </>
+          )}
+
+          {/* MOUNTAINS */}
+          <div className="rule mx-3 my-3" />
+          <SectionLabel>{t("Mountains", "スキー場")}</SectionLabel>
+          {mountainNav.map((item) => (
+            <NavLink
+              key={item.path}
+              item={item}
+              href={mountainHref(item.path)}
+              active={isActiveMountain(item.path)}
+              t={t}
+            />
           ))}
 
-          {region.resorts.length > 0 && (
-            <div className="pt-5 mt-3">
-              <p className="px-3 byline text-muted-foreground/70 mb-1.5">
-                {t("Resorts", "スキー場")}
-              </p>
-              {region.resorts.map((r) => {
-                const active = location === r.path;
+          {region.mountains && region.mountains.length > 0 && (
+            <div className="pt-3 mt-2">
+              {region.mountains.map((m) => {
+                const mPath = `/mountain/${m.id}`;
+                const active = location === mPath;
                 return (
                   <Link
-                    key={r.path}
-                    href={r.path}
+                    key={m.id}
+                    href={mPath}
                     className={cn(
                       "group relative flex items-center gap-3 px-3 py-2 rounded-lg transition-all text-sm",
                       active
@@ -115,10 +219,10 @@ export function AppShell({ children }: { children: ReactNode }) {
                     {active && (
                       <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-4 rounded-full bg-primary" />
                     )}
-                    <Mountain
+                    <MountainIcon
                       className={cn("w-3.5 h-3.5", active ? "text-primary" : "opacity-50")}
                     />
-                    {t(r.label, r.labelJa)}
+                    {t(m.name, m.nameJa)}
                   </Link>
                 );
               })}
@@ -127,7 +231,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         </nav>
 
         <div className="px-6 pb-5 pt-3">
-          <p className="byline text-muted-foreground/60">{region.footer ?? "v0.3 · feelzlike"}</p>
+          <p className="byline text-muted-foreground/60">{region.footer ?? "v0.4 · feelzlike"}</p>
         </div>
       </aside>
 
@@ -144,8 +248,8 @@ export function AppShell({ children }: { children: ReactNode }) {
         <Link href="/" className="flex items-center">
           <img src={region.brand.wordmarkUrl} alt="feelzlike" className="h-6 w-auto" />
         </Link>
-        {region.baseTowns && region.baseTowns.length > 0 ? (
-          <TownPicker variant="compact" />
+        {towns.length > 0 ? (
+          <TownPicker variant="compact" preserveSubpath />
         ) : (
           <span className="byline text-muted-foreground/80">{region.shortTag}</span>
         )}
@@ -167,27 +271,50 @@ export function AppShell({ children }: { children: ReactNode }) {
         </AnimatePresence>
       </main>
 
-      {/* Mobile bottom nav */}
+      {/* Mobile bottom nav: condensed, scope-aware */}
       <nav className="md:hidden fixed bottom-0 inset-x-0 z-40 glass-strong pb-safe">
         <div className="flex justify-around items-center px-1 h-16">
-          {[...primaryNav, ...secondaryNav].slice(0, 5).map((item) => {
-            const active = isActive(item.path);
+          {(parsed.scope === "town" && navTown
+            ? townNav.slice(0, 5).map((item) => ({
+                key: `t:${item.path}`,
+                href: townHref(item.path),
+                icon: item.icon,
+                label: t(item.label, item.labelJa),
+                active: isActiveTown(item.path),
+              }))
+            : [
+                {
+                  key: "region:overview",
+                  href: "/",
+                  icon: regionNav[0]?.icon ?? MountainIcon,
+                  label: t("Region", "地域"),
+                  active: parsed.scope === "region",
+                },
+                ...mountainNav.slice(0, 4).map((item) => ({
+                  key: `m:${item.path}`,
+                  href: item.path,
+                  icon: item.icon,
+                  label: t(item.label, item.labelJa),
+                  active: isActiveMountain(item.path),
+                })),
+              ]
+          ).map((item) => {
             const Icon = item.icon;
             return (
               <Link
-                key={item.path}
-                href={item.path}
+                key={item.key}
+                href={item.href}
                 className={cn(
                   "relative flex flex-col items-center justify-center flex-1 h-full gap-1 transition-all",
-                  active ? "text-primary" : "text-muted-foreground/80",
+                  item.active ? "text-primary" : "text-muted-foreground/80",
                 )}
               >
-                {active && (
+                {item.active && (
                   <span className="absolute top-1.5 w-8 h-0.5 rounded-full bg-primary" />
                 )}
                 <Icon className="w-4 h-4" />
                 <span className="text-[9px] font-semibold tracking-wider uppercase leading-none">
-                  {t(item.label, item.labelJa)}
+                  {item.label}
                 </span>
               </Link>
             );
@@ -198,19 +325,27 @@ export function AppShell({ children }: { children: ReactNode }) {
   );
 }
 
+function SectionLabel({ children }: { children: ReactNode }) {
+  return (
+    <p className="px-3 pt-2 pb-2 byline text-muted-foreground/70">{children}</p>
+  );
+}
+
 function NavLink({
   item,
+  href,
   active,
   t,
 }: {
   item: NavItem;
+  href: string;
   active: boolean;
   t: (en: string, ja?: string) => string;
 }) {
   const Icon = item.icon;
   return (
     <Link
-      href={item.path}
+      href={href}
       className={cn(
         "group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-150 text-sm font-medium",
         active

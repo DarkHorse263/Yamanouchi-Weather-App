@@ -35,10 +35,16 @@ export const snowyMountainsRegion: RegionConfig = {
     { path: "/alerts",    icon: AlertTriangle,  label: "Alerts",    group: "secondary" },
   ],
   resorts: [
-    { path: "/resort/thredbo",   label: "Thredbo" },
-    { path: "/resort/perisher",  label: "Perisher" },
-    { path: "/resort/jindabyne", label: "Jindabyne" },
-    { path: "/resort/selwyn",    label: "Selwyn" },
+    { path: "/mountain/thredbo",   label: "Thredbo" },
+    { path: "/mountain/perisher",  label: "Perisher" },
+    { path: "/mountain/charlottes-pass", label: "Charlotte's Pass" },
+    { path: "/mountain/selwyn",    label: "Selwyn" },
+  ],
+  mountains: [
+    { id: "thredbo",         name: "Thredbo",          elevationM: 2037, blurb: "NSW · the high one" },
+    { id: "perisher",        name: "Perisher",         elevationM: 2054, blurb: "NSW · the big one (4 resorts)" },
+    { id: "charlottes-pass", name: "Charlotte's Pass", elevationM: 1837, blurb: "NSW · ski-in village above the snowline" },
+    { id: "selwyn",          name: "Selwyn",           elevationM: 1614, blurb: "NSW · family beginner mountain" },
   ],
   baseTowns: [
     {

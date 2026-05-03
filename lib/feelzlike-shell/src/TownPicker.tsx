@@ -1,21 +1,45 @@
 import { useEffect, useRef, useState } from "react";
+import { useLocation } from "wouter";
 import { ChevronDown, MapPin, Check } from "lucide-react";
 import { cn } from "./cn";
 import { useBaseTown } from "./BaseTownProvider";
 import { useLanguage } from "./LanguageProvider";
 
 interface TownPickerProps {
-  /** Visual variant — "sidebar" is full width; "compact" fits the mobile header */
+  /** "sidebar" = full width pill; "compact" = small pill for the mobile header */
   variant?: "sidebar" | "compact";
   className?: string;
+  /**
+   * When true, switching towns navigates to the same sub-route under the new
+   * town (e.g. /jindabyne/stay → /berridale/stay). When false, navigates to
+   * /<newTown>/.
+   */
+  preserveSubpath?: boolean;
 }
 
-export function TownPicker({ variant = "sidebar", className }: TownPickerProps) {
+const RESERVED_TOWN_SLUGS = new Set(["mountain", "mountains", "radar", "alerts", "resort"]);
+
+export function TownPicker({
+  variant = "sidebar",
+  className,
+  preserveSubpath = false,
+}: TownPickerProps) {
   const { towns, town, setTownId } = useBaseTown();
+  const [location, navigate] = useLocation();
   const lang = useLanguage();
   const t = (en: string, ja?: string) => lang.t(en, ja);
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
+
+  // Keep selected town in sync with URL when on a /:town/* route
+  useEffect(() => {
+    const parts = (location || "/").split("/").filter(Boolean);
+    const first = parts[0];
+    if (first && !RESERVED_TOWN_SLUGS.has(first) && towns.some((tn) => tn.id === first)) {
+      if (town?.id !== first) setTownId(first);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
 
   useEffect(() => {
     if (!open) return;
@@ -37,6 +61,24 @@ export function TownPicker({ variant = "sidebar", className }: TownPickerProps) 
 
   const compact = variant === "compact";
 
+  const onPick = (id: string) => {
+    setTownId(id);
+    setOpen(false);
+
+    const parts = (location || "/").split("/").filter(Boolean);
+    const first = parts[0];
+    let target: string;
+
+    if (preserveSubpath && first && !RESERVED_TOWN_SLUGS.has(first) && towns.some((tn) => tn.id === first)) {
+      // We're on /<oldTown>/<rest> — swap the town segment, keep the rest
+      const rest = parts.slice(1).join("/");
+      target = rest ? `/${id}/${rest}` : `/${id}`;
+    } else {
+      target = `/${id}`;
+    }
+    navigate(target);
+  };
+
   return (
     <div ref={ref} className={cn("relative", className)}>
       <button
@@ -48,9 +90,7 @@ export function TownPicker({ variant = "sidebar", className }: TownPickerProps) 
         className={cn(
           "group inline-flex items-center gap-2 rounded-full border border-border bg-white transition-all",
           "hover:border-foreground/30 hover:shadow-sm",
-          compact
-            ? "px-2.5 py-1 text-[11px]"
-            : "w-full px-3 py-2 text-xs",
+          compact ? "px-2.5 py-1 text-[11px]" : "w-full px-3 py-2 text-xs",
         )}
       >
         <MapPin className={cn("text-primary", compact ? "w-3 h-3" : "w-3.5 h-3.5")} />
@@ -75,7 +115,7 @@ export function TownPicker({ variant = "sidebar", className }: TownPickerProps) 
           aria-label={t("Base towns", "拠点の町")}
           className={cn(
             "absolute z-50 mt-2 rounded-xl border border-border bg-white shadow-lg overflow-hidden",
-            compact ? "right-0 min-w-[180px]" : "left-0 right-0",
+            compact ? "right-0 min-w-[200px]" : "left-0 right-0",
           )}
         >
           <div className="px-3 py-2 byline text-muted-foreground/70 border-b border-border">
@@ -89,10 +129,7 @@ export function TownPicker({ variant = "sidebar", className }: TownPickerProps) 
                 type="button"
                 role="menuitemradio"
                 aria-checked={active}
-                onClick={() => {
-                  setTownId(opt.id);
-                  setOpen(false);
-                }}
+                onClick={() => onPick(opt.id)}
                 className={cn(
                   "w-full flex items-start gap-2 px-3 py-2.5 text-left transition-colors",
                   active ? "bg-primary/8" : "hover:bg-secondary",

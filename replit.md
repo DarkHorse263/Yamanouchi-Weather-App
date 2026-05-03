@@ -27,7 +27,12 @@ The project is a pnpm workspace monorepo using Node.js 24 and TypeScript 5.9.
 **Monorepo Structure:**
 - `artifacts/api-server`: Express API server for snow and local places data.
 - `artifacts/feelzlike`: The unified application serving the region picker and all regional content. Regional content is organized under `src/regions/<region>/`.
-- `lib/feelzlike-shell`: Shared components for region chrome (e.g., `AppShell`, `RegionProvider`, `SeasonProvider`, `LanguageProvider`, `BaseTownProvider`, `TownPicker`, `RegionConfig`). Implements a light "premium fintech" visual language.
+  - **Information architecture is 3-tier**: `Regions → Base Towns → Mountains`.
+    - `/:region` — Region overview (region weather + base-town cards + mountain cards).
+    - `/:region/:town` and `/:region/:town/{roads,cams,transport,stay,eat,explore}` — town-life pages, scoped to the selected base town. Routed via a nested `TownLayout` (Wouter base prefix).
+    - `/:region/mountains`, `/:region/mountain/:id` (legacy `/resort/:id` retained), `/:region/radar`, `/:region/alerts` — mountain/region-wide pages.
+  - Reserved town slugs (cannot collide with town ids): `mountain`, `mountains`, `radar`, `alerts`, `resort`.
+- `lib/feelzlike-shell`: Shared components for region chrome (e.g., `AppShell`, `RegionProvider`, `SeasonProvider`, `LanguageProvider`, `BaseTownProvider`, `TownPicker`, `RegionConfig`). Implements a light "premium fintech" visual language. AppShell renders three sectioned nav blocks (Region / In Town / Mountains); `defaultNav.ts` exports `DEFAULT_TOWN_NAV`, `DEFAULT_MOUNTAIN_NAV`, `DEFAULT_REGION_NAV` which regions can override via `RegionConfig.navOverrides`. `TownPicker` is URL-driven and navigates between towns while preserving the current sub-route.
 - `lib/feelzlike-dashboard`: Shared dashboard component package for consistent UI across regional resort detail pages.
 - `lib/api-spec`: OpenAPI 3.1 specification and Orval configuration.
 - `lib/api-client-react`: Generated React Query hooks and fetch client.

@@ -1,13 +1,20 @@
 export type {
   RegionConfig,
   NavItem,
+  NavScope,
   ResortLink,
+  MountainLink,
   RegionBrand,
   RegionLanguagePack,
   BaseTown,
   Season,
   Language,
 } from "./types";
+export {
+  DEFAULT_TOWN_NAV,
+  DEFAULT_MOUNTAIN_NAV,
+  DEFAULT_REGION_NAV,
+} from "./defaultNav";
 export { RegionProvider, useRegion } from "./RegionProvider";
 export { SeasonProvider, useSeason } from "./SeasonProvider";
 export { LanguageProvider, useLanguage } from "./LanguageProvider";
