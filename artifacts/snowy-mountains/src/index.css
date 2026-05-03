@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
+@source "../../../lib/feelzlike-dashboard/src/**/*.{ts,tsx}";
 
 @custom-variant dark (&:is(.dark *));
 
