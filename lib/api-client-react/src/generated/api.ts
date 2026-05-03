@@ -2784,7 +2784,13 @@ export const getGetLocationWeatherUrl = (
     | "perisher"
     | "charlottes-pass"
     | "selwyn"
-    | "jindabyne",
+    | "jindabyne"
+    | "shiga-kogen"
+    | "ryuoo"
+    | "kita-shiga"
+    | "madarao"
+    | "tangram"
+    | "togari",
 ) => {
   return `/api/weather/${locationId}`;
 };
@@ -2795,7 +2801,13 @@ export const getLocationWeather = async (
     | "perisher"
     | "charlottes-pass"
     | "selwyn"
-    | "jindabyne",
+    | "jindabyne"
+    | "shiga-kogen"
+    | "ryuoo"
+    | "kita-shiga"
+    | "madarao"
+    | "tangram"
+    | "togari",
   options?: RequestInit,
 ): Promise<LocationWeather> => {
   return customFetch<LocationWeather>(getGetLocationWeatherUrl(locationId), {
@@ -2810,7 +2822,13 @@ export const getGetLocationWeatherQueryKey = (
     | "perisher"
     | "charlottes-pass"
     | "selwyn"
-    | "jindabyne",
+    | "jindabyne"
+    | "shiga-kogen"
+    | "ryuoo"
+    | "kita-shiga"
+    | "madarao"
+    | "tangram"
+    | "togari",
 ) => {
   return [`/api/weather/${locationId}`] as const;
 };
@@ -2824,7 +2842,13 @@ export const getGetLocationWeatherQueryOptions = <
     | "perisher"
     | "charlottes-pass"
     | "selwyn"
-    | "jindabyne",
+    | "jindabyne"
+    | "shiga-kogen"
+    | "ryuoo"
+    | "kita-shiga"
+    | "madarao"
+    | "tangram"
+    | "togari",
   options?: {
     query?: UseQueryOptions<
       Awaited<ReturnType<typeof getLocationWeather>>,
@@ -2874,7 +2898,13 @@ export function useGetLocationWeather<
     | "perisher"
     | "charlottes-pass"
     | "selwyn"
-    | "jindabyne",
+    | "jindabyne"
+    | "shiga-kogen"
+    | "ryuoo"
+    | "kita-shiga"
+    | "madarao"
+    | "tangram"
+    | "togari",
   options?: {
     query?: UseQueryOptions<
       Awaited<ReturnType<typeof getLocationWeather>>,

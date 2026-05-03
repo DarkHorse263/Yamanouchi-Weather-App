@@ -1,10 +1,18 @@
 import { useLanguage } from "@/hooks/use-language";
 import { Card } from "@/components/ui-elements";
 import { HourlyTimeline } from "@/components/hourly-timeline";
-import { Snowflake, Ruler, ThermometerSnowflake, Wind, CalendarDays, ExternalLink, ArrowUpDown } from "lucide-react";
+import { Snowflake, Ruler, ThermometerSnowflake, Wind, CalendarDays, ExternalLink, ArrowUpDown, Activity } from "lucide-react";
 import { motion } from "framer-motion";
 import { useMemo, useState } from "react";
+import { Link } from "wouter";
 import { getSeededResorts, type Resort } from "@/data/resorts";
+
+// Maps a seeded resort.id to a slug supported by /resort/:id (live weather feed)
+const LIVE_RESORT_MAP: Record<string, string> = {
+  "madarao": "madarao",
+  "tangram": "tangram",
+  "togari-onsen": "togari",
+};
 
 type SortKey = "name" | "snow24h" | "baseDepth" | "elevation" | "temp";
 
@@ -176,7 +184,16 @@ export default function Resorts() {
                     </div>
                   )}
 
-                  <div className="mt-4 pt-3 border-t border-border">
+                  <div className="mt-4 pt-3 border-t border-border space-y-2">
+                    {LIVE_RESORT_MAP[resort.id] && (
+                      <Link
+                        href={`/resort/${LIVE_RESORT_MAP[resort.id]}`}
+                        className="flex items-center justify-center gap-1.5 w-full py-1.5 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 text-xs font-bold transition-colors"
+                      >
+                        <Activity className="w-3 h-3" />
+                        {t("Live conditions", "ライブ状況")}
+                      </Link>
+                    )}
                     {resort.websiteUrl && (
                       <a
                         href={resort.websiteUrl}

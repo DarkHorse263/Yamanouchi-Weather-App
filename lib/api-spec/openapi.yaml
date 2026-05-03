@@ -684,7 +684,18 @@ paths:
           required: true
           schema:
             type: string
-            enum: [thredbo, perisher, charlottes-pass, selwyn, jindabyne]
+            enum:
+              - thredbo
+              - perisher
+              - charlottes-pass
+              - selwyn
+              - jindabyne
+              - shiga-kogen
+              - ryuoo
+              - kita-shiga
+              - madarao
+              - tangram
+              - togari
       responses:
         "200":
           description: Weather data for the location

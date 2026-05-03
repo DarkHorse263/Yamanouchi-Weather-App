@@ -849,6 +849,12 @@ export const GetLocationWeatherParams = zod.object({
     "charlottes-pass",
     "selwyn",
     "jindabyne",
+    "shiga-kogen",
+    "ryuoo",
+    "kita-shiga",
+    "madarao",
+    "tangram",
+    "togari",
   ]),
 });
 

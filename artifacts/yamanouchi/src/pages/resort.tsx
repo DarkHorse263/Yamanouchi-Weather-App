@@ -21,10 +21,41 @@ import {
   AlertTriangle,
   PhoneCall,
   Map,
+  ExternalLink,
+  Cable,
+  Camera,
+  Globe,
 } from "lucide-react";
+import { motion } from "framer-motion";
 import { useLanguage } from "@/hooks/use-language";
 
-const VALID_IDS = new Set(["shiga-kogen", "ryuoo", "kita-shiga"]);
+type WeatherId = Parameters<typeof useGetLocationWeather>[0];
+
+interface ResortProfile {
+  websiteUrl: string;
+  liftStatusUrl: string;
+  webcamUrl: string;
+}
+
+const PROFILES: Record<string, ResortProfile> = {
+  "shiga-kogen": {
+    websiteUrl: "https://www.shigakogen.gr.jp/english/",
+    liftStatusUrl: "https://www.shigakogen.gr.jp/english/lift/",
+    webcamUrl: "https://www.shigakogen.gr.jp/english/livecamera/",
+  },
+  "ryuoo": {
+    websiteUrl: "https://www.ryuoo.com/en/",
+    liftStatusUrl: "https://www.ryuoo.com/en/winter/lift/",
+    webcamUrl: "https://www.ryuoo.com/en/winter/livecamera/",
+  },
+  "kita-shiga": {
+    websiteUrl: "https://kitashiga.net/",
+    liftStatusUrl: "https://kitashiga.net/winter/",
+    webcamUrl: "https://kitashiga.net/livecam/",
+  },
+};
+
+const VALID_IDS = new Set(Object.keys(PROFILES));
 
 export default function ResortDetail() {
   const [, params] = useRoute("/resort/:id");
@@ -32,7 +63,7 @@ export default function ResortDetail() {
   const { t } = useLanguage();
 
   const enabled = VALID_IDS.has(id);
-  const { data, isLoading, error } = useGetLocationWeather(id as any, {
+  const { data, isLoading, error } = useGetLocationWeather(id as WeatherId, {
     query: { enabled, refetchInterval: 600_000 },
   });
 
@@ -71,6 +102,7 @@ export default function ResortDetail() {
 
   const { location, current, daily } = data;
   const observedAt = (data as any).lastUpdated as string | undefined;
+  const profile = PROFILES[id];
 
   const stats: ConditionStat[] = [
     { label: t("Feels like", "体感"), value: `${Math.round(current.feelsLike)}°C`, icon: Thermometer },
@@ -156,6 +188,7 @@ export default function ResortDetail() {
         {daily && daily.length > 0 && (
           <MountainOutlook days={daily as any} elevation={location.elevation} />
         )}
+        <OfficialLinks profile={profile} resortName={location.name} t={t} />
         <SafetyStrip
           links={safetyLinks}
           subhead={t("Always check official sources before heading out.", "出発前に必ず公式情報をご確認ください。")}
@@ -166,5 +199,83 @@ export default function ResortDetail() {
         />
       </div>
     </div>
+  );
+}
+
+function OfficialLinks({
+  profile,
+  resortName,
+  t,
+}: {
+  profile: ResortProfile;
+  resortName: string;
+  t: (en: string, ja: string) => string;
+}) {
+  const links = [
+    {
+      label: t("Official website", "公式サイト"),
+      detail: t("Trail map, hours, tickets", "コース案内・営業時間・チケット"),
+      href: profile.websiteUrl,
+      icon: Globe,
+    },
+    {
+      label: t("Lift status", "リフト運行状況"),
+      detail: t("Live lift operating status", "リフトのライブ運行状況"),
+      href: profile.liftStatusUrl,
+      icon: Cable,
+    },
+    {
+      label: t("Live webcams", "ライブカメラ"),
+      detail: t("On-mountain camera feeds", "山頂・コースのライブ映像"),
+      href: profile.webcamUrl,
+      icon: Camera,
+    },
+  ];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.36 }}
+      className="glass rounded-3xl p-6 md:p-8"
+    >
+      <div className="flex items-end justify-between mb-6 gap-3">
+        <div>
+          <p className="byline text-muted-foreground">
+            06 · {t("Official sources", "公式情報")}
+          </p>
+          <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 text-foreground">
+            {t("Lifts & cameras", "リフト・カメラ")}
+          </h2>
+        </div>
+        <p className="byline text-muted-foreground/70 hidden md:block">{resortName}</p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+        {links.map((link) => (
+          <a
+            key={link.label}
+            href={link.href}
+            target="_blank"
+            rel="noreferrer"
+            className="group flex items-start gap-3 p-4 rounded-2xl border border-slate-200/70 hover:border-slate-400/60 hover:bg-slate-50/60 transition-colors"
+          >
+            <div className="p-2 rounded-lg bg-slate-100 text-slate-700 flex-none group-hover:bg-slate-200 transition-colors">
+              <link.icon className="w-4 h-4" strokeWidth={1.75} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-[13px] font-semibold text-foreground flex items-center gap-1.5 leading-tight">
+                {link.label}
+                <ExternalLink
+                  className="w-3 h-3 text-muted-foreground/50 group-hover:text-muted-foreground transition-colors"
+                  strokeWidth={1.75}
+                />
+              </p>
+              <p className="text-[11px] text-muted-foreground/80 mt-1 leading-snug">{link.detail}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </motion.div>
   );
 }

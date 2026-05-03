@@ -3,10 +3,19 @@ import { useLanguage } from "@/hooks/use-language";
 import { useSeason } from "@/hooks/use-season";
 import { LoadingScreen, ErrorScreen } from "@/components/ui-elements";
 import { HourlyTimeline } from "@/components/hourly-timeline";
-import { ExternalLink, CalendarDays, BedDouble, TreePine } from "lucide-react";
+import { ExternalLink, CalendarDays, BedDouble, TreePine, Activity } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "wouter";
 import { bookingRegionUrl } from "@/lib/booking";
 import { useState } from "react";
+
+// Maps a region label (as returned by the resorts API) to a /resort/:id slug
+const REGION_LIVE_MAP: Record<string, { slug: string; label: string; labelJa: string }> = {
+  "Shiga Kogen": { slug: "shiga-kogen", label: "Shiga Kogen live", labelJa: "志賀高原ライブ" },
+  "Ryuoo": { slug: "ryuoo", label: "Ryuoo live", labelJa: "竜王ライブ" },
+  "Kita Shiga": { slug: "kita-shiga", label: "Kita Shiga live", labelJa: "北志賀ライブ" },
+  "Kita-Shiga": { slug: "kita-shiga", label: "Kita Shiga live", labelJa: "北志賀ライブ" },
+};
 
 const SNOW_LEVELS = {
   heavy:    { color: '#E11D48', bg: '#FFF1F2', border: '#FECDD3' },
@@ -113,12 +122,23 @@ export default function Resorts() {
           </div>
 
           <div className="space-y-8">
-            {Object.entries(grouped).map(([region, regionResorts], regionIdx) => (
+            {Object.entries(grouped).map(([region, regionResorts], regionIdx) => {
+              const live = REGION_LIVE_MAP[region];
+              return (
               <div key={region}>
                 <div className="flex items-center gap-3 mb-3">
                   <h2 className="text-base font-black text-slate-900 uppercase tracking-wider">
                     {t(region, regionResorts[0]?.regionJa)}
                   </h2>
+                  {live && (
+                    <Link
+                      href={`/resort/${live.slug}`}
+                      className="inline-flex items-center gap-1 text-[10px] font-bold text-blue-600 hover:text-blue-700 uppercase tracking-wider"
+                    >
+                      <Activity className="w-3 h-3" />
+                      {t(live.label, live.labelJa)}
+                    </Link>
+                  )}
                   <div className="flex-1 h-px bg-slate-100" />
                   <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
                     {regionResorts.length} {t("resorts", "スキー場")}
@@ -213,7 +233,8 @@ export default function Resorts() {
                   })}
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         </>
       )}
