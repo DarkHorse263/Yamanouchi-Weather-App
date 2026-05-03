@@ -135,61 +135,77 @@ export default function LocationDetail() {
 
   return (
     <>
-      {/* ─── Atmospheric hero ────────────────── */}
-      <section className="relative overflow-hidden grain isolate">
-        {/* Atmospheric backdrop - sky condition wash, no photo */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute inset-0" style={{ background: sky.wash }} />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/60 to-background" />
-          <div className="absolute inset-0" style={{ background: sky.glow }} />
+      {/* ─── Aurora fintech hero ────────────────── */}
+      <section className="relative overflow-hidden isolate">
+        {/* Aurora backdrop */}
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <div
+            className="absolute -top-40 left-1/2 -translate-x-1/2 w-[1400px] h-[700px] rounded-full opacity-80"
+            style={{
+              background:
+                "radial-gradient(ellipse at center, hsla(210,90%,55%,0.28), transparent 55%), radial-gradient(ellipse at 28% 60%, hsla(265,85%,60%,0.22), transparent 60%), radial-gradient(ellipse at 75% 35%, hsla(180,90%,55%,0.22), transparent 60%)",
+              filter: "blur(40px)",
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                "linear-gradient(to bottom, transparent 65%, hsl(var(--background)) 100%), repeating-linear-gradient(0deg, hsla(220,30%,12%,0.04) 0px, hsla(220,30%,12%,0.04) 1px, transparent 1px, transparent 64px), repeating-linear-gradient(90deg, hsla(220,30%,12%,0.04) 0px, hsla(220,30%,12%,0.04) 1px, transparent 1px, transparent 64px)",
+            }}
+          />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-5 md:px-10 pt-10 md:pt-20 pb-10 md:pb-16">
-          {/* Source byline */}
+        <div className="relative max-w-7xl mx-auto px-5 md:px-10 pt-10 md:pt-16 pb-8 md:pb-12">
+          {/* Source byline + live pill */}
           <motion.div
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex flex-wrap items-center gap-x-4 gap-y-1.5"
+            className="flex flex-wrap items-center gap-x-3 gap-y-1.5"
           >
-            {current.dataSource === "BOM" && (
-              <span className="inline-flex items-center gap-1.5 text-accent">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full rounded-full bg-accent opacity-60 animate-ping" />
-                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent" />
-                </span>
-                <span className="byline">BOM Live · {current.bomStation ?? "Australia"}</span>
+            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-emerald-500/10 text-emerald-700 border border-emerald-500/20">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 animate-ping" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
               </span>
-            )}
+              {current.dataSource === "BOM" ? `BOM Live · ${current.bomStation ?? "AU"}` : "Live"}
+            </span>
             {current.dataSource !== "BOM" && (
-              <span className="byline text-muted-foreground">Source · {current.dataSource ?? "Bureau of Meteorology + international models"}</span>
+              <span className="byline text-muted-foreground/80">Source · {current.dataSource ?? "BOM + models"}</span>
             )}
-            <span className="byline text-muted-foreground/60">Elev {location.elevation}m</span>
-            {location.bomStation && current.dataSource !== "BOM" && (
-              <span className="byline text-muted-foreground/60">BOM ref · {location.bomStation}</span>
-            )}
+            <span className="byline text-muted-foreground/70">Elev {location.elevation}m</span>
             {observedTime && (
-              <span className="byline text-muted-foreground/80 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/5 border border-white/10">
+              <span className="byline text-muted-foreground/80 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-card border border-border">
                 <Clock className="w-3 h-3" />
                 <span>Updated <span className="text-foreground tabular-nums">{formatAgo(observedTime, now)}</span></span>
               </span>
             )}
           </motion.div>
 
-          {/* Headline + temperature, magazine block */}
+          {/* Headline + temperature */}
           <div className="mt-6 md:mt-10 grid md:grid-cols-12 gap-6 md:gap-10 items-end">
             <div className="md:col-span-7">
               <motion.h1
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="font-display font-medium text-foreground text-[clamp(3rem,8vw,5.5rem)] leading-[0.92] tracking-tight"
+                className="font-display font-semibold text-[clamp(3rem,8vw,5.5rem)] leading-[0.92] tracking-tight"
+                style={{ letterSpacing: "-0.035em" }}
               >
-                {location.name}
+                <span
+                  className="bg-clip-text text-transparent"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(120deg, hsl(220,30%,12%) 0%, hsl(210,90%,46%) 60%, hsl(265,85%,55%) 100%)",
+                  }}
+                >
+                  {location.name}
+                </span>
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.05 }}
-                className="mt-4 text-muted-foreground text-base md:text-lg max-w-xl font-light leading-relaxed"
+                className="mt-4 text-muted-foreground text-base md:text-lg max-w-xl leading-relaxed"
               >
                 {location.description}
               </motion.p>
@@ -201,10 +217,16 @@ export default function LocationDetail() {
               transition={{ delay: 0.1 }}
               className="md:col-span-5 relative"
             >
-              <div className="halo" />
               <div className="relative">
                 <div className="flex items-start gap-3">
-                  <span className="display-number text-foreground text-[clamp(7rem,18vw,11rem)]" data-numeric>
+                  <span
+                    className="display-number text-[clamp(7rem,18vw,11rem)] bg-clip-text text-transparent"
+                    data-numeric
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(135deg, hsl(210,90%,46%) 0%, hsl(265,85%,55%) 60%, hsl(180,90%,45%) 100%)",
+                    }}
+                  >
                     {Math.round(current.temperature)}
                   </span>
                   <span className="font-display text-foreground/70 text-3xl md:text-4xl mt-4">°C</span>
@@ -216,8 +238,67 @@ export default function LocationDetail() {
             </motion.div>
           </div>
 
+          {/* Live stat tiles */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.18 }}
+            className="mt-8 md:mt-12 grid grid-cols-2 md:grid-cols-4 gap-3"
+          >
+            {[
+              {
+                label: "Wind",
+                value: `${Math.round(current.windSpeed)}`,
+                unit: `km/h${current.windDirectionCompass ? ` ${current.windDirectionCompass}` : ""}`,
+                icon: Wind,
+                tint: "hsl(210,90%,46%)",
+              },
+              {
+                label: "Gusts",
+                value: current.windGust != null ? `${Math.round(current.windGust)}` : "—",
+                unit: "km/h",
+                icon: Navigation,
+                tint: "hsl(24,95%,48%)",
+              },
+              {
+                label: "Snow depth",
+                value: current.snowDepth != null ? `${current.snowDepth}` : "—",
+                unit: "cm",
+                icon: Snowflake,
+                tint: "hsl(190,90%,45%)",
+              },
+              {
+                label: "Freezing level",
+                value: current.freezingLevel != null ? `${current.freezingLevel.toLocaleString()}` : "—",
+                unit: "m",
+                icon: Thermometer,
+                tint: "hsl(265,85%,55%)",
+              },
+            ].map((s, i) => (
+              <div
+                key={i}
+                className="relative rounded-2xl overflow-hidden"
+                style={{
+                  background: `linear-gradient(135deg, ${s.tint}33, ${s.tint}11)`,
+                  padding: "1px",
+                }}
+              >
+                <div className="rounded-[15px] bg-card/80 backdrop-blur-md p-4 h-full">
+                  <div className="flex items-center gap-1.5 byline text-muted-foreground/80">
+                    <s.icon className="w-3 h-3" style={{ color: s.tint }} />
+                    {s.label}
+                  </div>
+                  <p className="mt-2 font-display font-semibold text-2xl md:text-3xl text-foreground tnum tracking-tight" data-numeric>
+                    {s.value}
+                    <span className="text-sm md:text-base text-muted-foreground/70 font-normal ml-1">{s.unit}</span>
+                  </p>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+
           {/* Scroll cue */}
-          <div className="mt-10 md:mt-14 flex items-center gap-2 text-muted-foreground/60">
+          <div className="mt-8 md:mt-10 flex items-center gap-2 text-muted-foreground/70">
             <span className="byline">Live conditions below</span>
             <ArrowDown className="w-3 h-3" />
           </div>
