@@ -53,6 +53,11 @@ const PROFILES: Record<string, ResortProfile> = {
     liftStatusUrl: "https://www.togari.jp/snow/",
     webcamUrl: "https://www.togari.jp/livecamera/",
   },
+  "nozawa-onsen": {
+    websiteUrl: "https://nozawaski.com/en/",
+    liftStatusUrl: "https://nozawaski.com/en/snow-report/",
+    webcamUrl: "https://nozawaski.com/en/live-camera/",
+  },
 };
 
 const VALID_IDS = new Set(Object.keys(PROFILES));
