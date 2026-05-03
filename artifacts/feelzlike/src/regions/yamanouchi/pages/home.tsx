@@ -272,8 +272,8 @@ function GreenHome({ t }: { t: (en: string, ja: string) => string }) {
 export default function Home() {
   const { t } = useLanguage();
   const { isWinter } = useSeason();
-  const { data, isLoading, error } = useGetDashboard({ query: { refetchInterval: 1800000, enabled: isWinter } });
-  const { data: alertData } = useGetPowderAlerts({ query: { refetchInterval: 1800000, enabled: isWinter } });
+  const { data, isLoading, error } = useGetDashboard({ query: { refetchInterval: 600000, enabled: isWinter } });
+  const { data: alertData } = useGetPowderAlerts({ query: { refetchInterval: 600000, enabled: isWinter } });
 
   if (!isWinter) return <GreenHome t={t} />;
 

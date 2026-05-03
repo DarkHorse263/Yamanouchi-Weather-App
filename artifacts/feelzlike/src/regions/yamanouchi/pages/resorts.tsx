@@ -56,7 +56,7 @@ function safeTime(raw: string | null | undefined): string {
 export default function Resorts() {
   const { t } = useLanguage();
   const { isWinter } = useSeason();
-  const { data: resorts, isLoading, error } = useGetResorts({ query: { refetchInterval: 1800000, enabled: isWinter } });
+  const { data: resorts, isLoading, error } = useGetResorts({ query: { refetchInterval: 600000, enabled: isWinter } });
 
   if (isWinter && isLoading) return <LoadingScreen />;
   if (isWinter && error) return <ErrorScreen message={(error as any)?.message || "Network error"} />;

@@ -24,7 +24,7 @@ function safeDate(raw: string | null | undefined): string {
 
 export default function Alerts() {
   const { t } = useLanguage();
-  const { data, isLoading, error } = useGetPowderAlerts({ query: { refetchInterval: 1800000 } });
+  const { data, isLoading, error } = useGetPowderAlerts({ query: { refetchInterval: 600000 } });
 
   if (isLoading) return <LoadingScreen />;
   if (error) return <ErrorScreen message={(error as any)?.message || "Network error"} />;
