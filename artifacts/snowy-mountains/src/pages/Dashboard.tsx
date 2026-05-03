@@ -5,9 +5,20 @@ import { LoadingState } from "@/components/ui/loading-state";
 import { ErrorState } from "@/components/ui/error-state";
 import { motion } from "framer-motion";
 
+const AU_LOCATION_IDS = new Set([
+  "thredbo",
+  "perisher",
+  "charlottes-pass",
+  "jindabyne",
+  "selwyn",
+]);
+
 export default function Dashboard() {
   const { data, isLoading, error, refetch } = useGetWeather();
   const updated = new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+  const auLocations = (data?.locations ?? []).filter((loc: any) =>
+    AU_LOCATION_IDS.has(loc.location?.id),
+  );
 
   return (
     <AppLayout>
@@ -70,7 +81,7 @@ export default function Dashboard() {
             </h2>
           </div>
           <p className="byline text-muted-foreground/80 hidden md:block">
-            {data?.locations.length ?? 4} towns · live
+            {auLocations.length || 4} towns · live
           </p>
         </div>
 
@@ -84,7 +95,7 @@ export default function Dashboard() {
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
-            {data?.locations.map((loc: any, idx: number) => (
+            {auLocations.map((loc: any, idx: number) => (
               <LocationCard key={loc.location.id} data={loc} index={idx} />
             ))}
           </div>
