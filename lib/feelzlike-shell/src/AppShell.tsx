@@ -9,8 +9,12 @@ import { useLanguage } from "./LanguageProvider";
 import type { NavItem } from "./types";
 
 export function AppShell({ children }: { children: ReactNode }) {
-  const { region, basePath, href } = useRegion();
+  const { region } = useRegion();
   const [location] = useLocation();
+  // Note: AppShell renders inside <WouterRouter base={`/${region.id}`}>, so
+  // `location` is region-relative ("/", "/cams") and <Link> prepends the base.
+  // Use raw region-relative paths for in-region nav, and "~/..." to escape
+  // the base for global routes (e.g. region picker).
 
   // useSeason throws when no provider; only call when seasons are enabled
   const seasonCtx = region.seasons ? useSeason() : null;
@@ -28,9 +32,8 @@ export function AppShell({ children }: { children: ReactNode }) {
   const secondaryNav = visibleNav.filter((i) => i.group === "secondary");
 
   const isActive = (path: string) => {
-    const target = href(path);
-    if (path === "/") return location === basePath || location === `${basePath}/`;
-    return location === target || location.startsWith(`${target}/`);
+    if (path === "/") return location === "/" || location === "";
+    return location === path || location.startsWith(`${path}/`);
   };
 
   return (
@@ -39,13 +42,13 @@ export function AppShell({ children }: { children: ReactNode }) {
       <aside className="hidden md:flex flex-col w-64 fixed inset-y-0 left-0 z-50 border-r border-border bg-white">
         <div className="px-6 pt-6 pb-5">
           <Link
-            href="/"
+            href="~/"
             className="byline inline-flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
           >
             <ChevronLeft className="w-3 h-3" />
             All regions
           </Link>
-          <Link href={basePath} className="block mt-4 mb-1.5">
+          <Link href="/" className="block mt-4 mb-1.5">
             <img src={region.brand.wordmarkUrl} alt="feelzlike" className="h-8 w-auto" />
           </Link>
           <p className="font-display font-semibold text-base leading-tight text-foreground">
@@ -77,11 +80,11 @@ export function AppShell({ children }: { children: ReactNode }) {
 
         <nav className="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto hide-scrollbar">
           {primaryNav.map((item) => (
-            <NavLink key={item.path} item={item} active={isActive(item.path)} href={href} t={t} />
+            <NavLink key={item.path} item={item} active={isActive(item.path)} t={t} />
           ))}
           {secondaryNav.length > 0 && <div className="rule mx-3 my-3" />}
           {secondaryNav.map((item) => (
-            <NavLink key={item.path} item={item} active={isActive(item.path)} href={href} t={t} />
+            <NavLink key={item.path} item={item} active={isActive(item.path)} t={t} />
           ))}
 
           {region.resorts.length > 0 && (
@@ -90,12 +93,11 @@ export function AppShell({ children }: { children: ReactNode }) {
                 {t("Resorts", "スキー場")}
               </p>
               {region.resorts.map((r) => {
-                const resortHref = href(r.path);
-                const active = location === resortHref;
+                const active = location === r.path;
                 return (
                   <Link
                     key={r.path}
-                    href={resortHref}
+                    href={r.path}
                     className={cn(
                       "group relative flex items-center gap-3 px-3 py-2 rounded-lg transition-all text-sm",
                       active
@@ -125,14 +127,14 @@ export function AppShell({ children }: { children: ReactNode }) {
       {/* Mobile header */}
       <header className="md:hidden fixed top-0 inset-x-0 h-14 z-40 flex items-center justify-between px-4 glass-strong">
         <Link
-          href="/"
+          href="~/"
           aria-label="Back to all regions"
           className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors"
         >
           <ChevronLeft className="w-4 h-4" />
           <span className="byline">{t("Regions", "地域")}</span>
         </Link>
-        <Link href={basePath} className="flex items-center">
+        <Link href="/" className="flex items-center">
           <img src={region.brand.wordmarkUrl} alt="feelzlike" className="h-6 w-auto" />
         </Link>
         <span className="byline text-muted-foreground/80">{region.shortTag}</span>
@@ -163,7 +165,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             return (
               <Link
                 key={item.path}
-                href={href(item.path)}
+                href={item.path}
                 className={cn(
                   "relative flex flex-col items-center justify-center flex-1 h-full gap-1 transition-all",
                   active ? "text-primary" : "text-muted-foreground/80",
@@ -188,18 +190,16 @@ export function AppShell({ children }: { children: ReactNode }) {
 function NavLink({
   item,
   active,
-  href,
   t,
 }: {
   item: NavItem;
   active: boolean;
-  href: (p: string) => string;
   t: (en: string, ja?: string) => string;
 }) {
   const Icon = item.icon;
   return (
     <Link
-      href={href(item.path)}
+      href={item.path}
       className={cn(
         "group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-150 text-sm font-medium",
         active

@@ -1,0 +1,147 @@
+import { useGetPowderAlerts } from "@workspace/api-client-react";
+import { useLanguage } from "@workspace/feelzlike-shell";
+import { Card, Badge, LoadingScreen, ErrorScreen } from "../components/ui-elements";
+import { BellRing, CloudLightning, Info } from "lucide-react";
+import { motion } from "framer-motion";
+
+function safeTime(raw: string | null | undefined): string {
+  if (!raw) return "";
+  try {
+    const d = new Date(raw);
+    if (isNaN(d.getTime())) return "";
+    return d.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" });
+  } catch { return ""; }
+}
+
+function safeDate(raw: string | null | undefined): string {
+  if (!raw) return "";
+  try {
+    const d = new Date(raw);
+    if (isNaN(d.getTime())) return "";
+    return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  } catch { return ""; }
+}
+
+export default function Alerts() {
+  const { t } = useLanguage();
+  const { data, isLoading, error } = useGetPowderAlerts({ query: { refetchInterval: 1800000 } });
+
+  if (isLoading) return <LoadingScreen />;
+  if (error) return <ErrorScreen message={(error as any)?.message || "Network error"} />;
+  if (!data) return null;
+
+  const getAlertColor = (level: string) => {
+    switch (level) {
+      case 'powder_day': return 'glass border-l-2 border-l-primary text-foreground';
+      case 'warning': return 'glass border-l-2 border-l-rose-400 text-foreground';
+      case 'watch': return 'glass border-l-2 border-l-amber-400 text-foreground';
+      default: return 'glass border-l-2 border-l-sky-400 text-foreground';
+    }
+  };
+
+  return (
+    <div className="p-4 md:p-8 max-w-4xl mx-auto space-y-8">
+      <div>
+        <h1 className="text-3xl md:text-4xl font-black text-foreground flex items-center gap-3">
+          <BellRing className="w-8 h-8 text-primary" />
+          {t("Powder Alerts", "パウダーアラート")}
+        </h1>
+        <p className="text-muted-foreground mt-2">{t("Real-time notifications for deep snow events", "深雪のリアルタイム通知")}</p>
+      </div>
+
+      <div className="space-y-6">
+        <h2 className="text-2xl font-bold text-foreground">{t("Active Alerts", "現在のアラート")}</h2>
+        
+        {data.alerts.length === 0 ? (
+          <Card className="bg-secondary/50 border-dashed text-center py-12">
+            <Info className="w-12 h-12 text-muted-foreground mx-auto mb-3 opacity-50" />
+            <h3 className="text-lg font-bold text-foreground">{t("No active alerts", "現在アラートはありません")}</h3>
+            <p className="text-muted-foreground">{t("Conditions are stable.", "コンディションは安定しています。")}</p>
+          </Card>
+        ) : (
+          <div className="grid gap-4">
+            {data.alerts.map((alert, idx) => (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.1 }}
+                key={alert.id}
+              >
+                <div className={`rounded-2xl p-5 border shadow-lg ${getAlertColor(alert.alertLevel)}`}>
+                  <div className="flex justify-between items-start mb-3">
+                    <div className="flex items-center gap-2">
+                      <span className="uppercase text-xs font-black tracking-wider px-2 py-1 bg-white/20 rounded-md">
+                        {alert.alertLevel.replace('_', ' ')}
+                      </span>
+                      <span className="font-bold opacity-90">{alert.resort}</span>
+                    </div>
+                    <span className="text-xs font-bold opacity-75">
+                      {safeTime(alert.issuedAt)}
+                    </span>
+                  </div>
+                  
+                  <h3 className="text-xl font-bold mb-2">
+                    {t(alert.message, alert.messageJa)}
+                  </h3>
+                  
+                  {alert.expectedSnow && (
+                    <div className="inline-flex items-center gap-2 bg-black/20 px-3 py-1.5 rounded-lg mt-2">
+                      <span className="text-sm font-bold uppercase opacity-80">Expected:</span>
+                      <span className="font-black text-lg">{alert.expectedSnow} cm</span>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div className="space-y-6 pt-8 border-t border-border">
+        <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
+          <CloudLightning className="w-6 h-6 text-indigo-500" />
+          {t("Storm Tracker", "ストームトラッカー")}
+        </h2>
+        
+        <div className="grid md:grid-cols-2 gap-4">
+          {data.stormTracker.map((storm) => (
+            <Card key={storm.id} className="relative overflow-hidden">
+              <div className={`absolute top-0 inset-x-0 h-1.5 ${storm.status === 'active' ? 'bg-red-500' : storm.status === 'incoming' ? 'bg-blue-500' : 'bg-slate-300'}`} />
+              
+              <div className="flex justify-between items-start mb-2">
+                <Badge variant={storm.status === 'active' ? 'destructive' : storm.status === 'incoming' ? 'primary' : 'outline'}>
+                  {storm.status}
+                </Badge>
+                {storm.startDate && (
+                  <span className="text-xs font-bold text-muted-foreground">
+                    {safeDate(storm.startDate)}
+                  </span>
+                )}
+              </div>
+              
+              <h3 className="text-lg font-bold mb-1">{t(storm.region, null)}</h3>
+              <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+                {t(storm.description, storm.descriptionJa)}
+              </p>
+              
+              <div className="flex gap-4 border-t border-border pt-3">
+                {storm.totalSnow && (
+                  <div>
+                    <span className="text-xs font-bold uppercase text-muted-foreground block">Total</span>
+                    <span className="text-lg font-black text-foreground">{storm.totalSnow} cm</span>
+                  </div>
+                )}
+                {storm.peakSnow24h && (
+                  <div>
+                    <span className="text-xs font-bold uppercase text-muted-foreground block">Peak 24h</span>
+                    <span className="text-lg font-black text-primary">{storm.peakSnow24h} cm</span>
+                  </div>
+                )}
+              </div>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}

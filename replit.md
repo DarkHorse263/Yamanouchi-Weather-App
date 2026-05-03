@@ -26,9 +26,9 @@ The project is a pnpm workspace monorepo using Node.js 24 and TypeScript 5.9.
 
 **Monorepo Structure:**
 - `artifacts/api-server`: Express API server exposing routes for snow data (Supabase) and local places data (PostgreSQL).
-- `artifacts/yamanouchi`: Full-stack PWA for the Yamanouchi region, supporting bilingual (EN/JP) content and season-aware features (Winter/Green).
-- `artifacts/iiyama`: PWA for the Iiyama region (Madarao, Tangram, Togari) with shared canonical resort detail at `/resort/:id`.
-- `artifacts/snowy-mountains`: Premium dashboard for the Australian Snowy Mountains (Thredbo, Perisher, Charlotte's Pass, Selwyn, Jindabyne) with BOM live observations.
+- `artifacts/feelzlike`: **The unified consolidated app** serving the region picker at `/` and all three regions at `/<region>/...`. Each region's pages live under `src/regions/<region>/{pages,components,lib,data}` and are wired through `src/regions/<region>/router.tsx`, dispatched by `src/layouts/RegionLayout.tsx`. Region routing uses `<WouterRouter base={"/"+region.id}>`, so AppShell uses **region-relative** links (`/cams`, `/resort/:id`) and `~/` to escape the base for global routes (e.g. "All regions").
+- `artifacts/{snowy-mountains,yamanouchi,iiyama}`: **LEGACY** — preserved at `/_legacy-*` paths for now; superseded by `feelzlike`. Pending deletion (T008) once T006/T007 land.
+- `lib/feelzlike-shell`: Shared region chrome (`AppShell`, `RegionProvider`, `SeasonProvider`, `LanguageProvider`, `RegionConfig` type). Single source for sidebar/mobile-nav, season + language toggles, light "premium fintech" visual language.
 - `lib/feelzlike-dashboard`: Shared dashboard component package (MetricRing, MountainSnapshot, ResortHero, LiveConditions, MountainOutlook, SafetyStrip) used by all regional artifacts so AU and JP resort detail pages stay visually identical. SafetyStrip accepts injectable region-specific links/disclaimer (BOM/000 for AU, JMA/110-119 for JP).
 - `lib/api-spec`: Contains OpenAPI 3.1 specification and Orval configuration for API codegen.
 - `lib/api-client-react`: Generated React Query hooks and fetch client.

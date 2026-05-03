@@ -7,6 +7,9 @@ import {
 } from "@workspace/feelzlike-shell";
 import { getRegion } from "@/regions";
 import { RegionStub } from "@/pages/region/RegionStub";
+import { SnowyMountainsRoutes } from "@/regions/snowy-mountains/router";
+import { YamanouchiRoutes } from "@/regions/yamanouchi/router";
+import { IiyamaRoutes } from "@/regions/iiyama/router";
 
 const ROUTES: Array<{ path: string; title: string; titleJa?: string }> = [
   { path: "/",          title: "Today",     titleJa: "今日" },
@@ -34,22 +37,30 @@ export function RegionLayout() {
 
   const inner = (
     <AppShell>
-      <Switch>
-        {ROUTES.map((r) => (
-          <Route key={r.path} path={r.path}>
-            {(routeParams: Record<string, string> | null) => (
-              <RegionStub
-                title={r.title}
-                titleJa={r.titleJa}
-                params={routeParams ?? undefined}
-              />
-            )}
+      {region.id === "snowy-mountains" ? (
+        <SnowyMountainsRoutes />
+      ) : region.id === "yamanouchi" ? (
+        <YamanouchiRoutes />
+      ) : region.id === "iiyama" ? (
+        <IiyamaRoutes />
+      ) : (
+        <Switch>
+          {ROUTES.map((r) => (
+            <Route key={r.path} path={r.path}>
+              {(routeParams: Record<string, string> | null) => (
+                <RegionStub
+                  title={r.title}
+                  titleJa={r.titleJa}
+                  params={routeParams ?? undefined}
+                />
+              )}
+            </Route>
+          ))}
+          <Route>
+            <RegionStub title="Not found" titleJa="ページが見つかりません" />
           </Route>
-        ))}
-        <Route>
-          <RegionStub title="Not found" titleJa="ページが見つかりません" />
-        </Route>
-      </Switch>
+        </Switch>
+      )}
     </AppShell>
   );
 

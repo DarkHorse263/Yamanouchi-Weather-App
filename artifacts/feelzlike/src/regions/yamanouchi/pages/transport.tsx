@@ -1,0 +1,891 @@
+import { useState } from "react";
+import { useLanguage } from "@workspace/feelzlike-shell";
+import { useSeason } from "@workspace/feelzlike-shell";
+import {
+  ExternalLink,
+  Train,
+  Bus,
+  Clock,
+  MapPin,
+  CreditCard,
+  Info,
+  ChevronDown,
+  ChevronUp,
+  Moon,
+  Ticket,
+  Footprints,
+  Car,
+  Phone,
+  Plane,
+  Mountain,
+  Bike,
+  AlertTriangle,
+} from "lucide-react";
+
+interface BusRow {
+  from: string;
+  to: string;
+  note?: string;
+}
+
+const KANBAYASHI_TO_PARK: BusRow[] = [
+  { from: "09:12", to: "09:22" },
+  { from: "10:42", to: "10:52" },
+  { from: "11:52", to: "12:02" },
+  { from: "13:32", to: "13:42" },
+  { from: "15:57", to: "16:07" },
+  { from: "18:42", to: "18:52" },
+];
+
+const KANBAYASHI_TO_YUDANAKA: BusRow[] = [
+  { from: "06:50", to: "07:04" },
+  { from: "08:20", to: "08:34" },
+  { from: "09:30", to: "09:44" },
+  { from: "11:00", to: "11:14" },
+  { from: "12:10", to: "12:24" },
+  { from: "13:50", to: "14:04" },
+  { from: "16:15", to: "16:29" },
+  { from: "18:55", to: "19:09" },
+];
+
+const SHIGA_PARK_TO_YUDANAKA: BusRow[] = [
+  { from: "09:21", to: "09:35" },
+  { from: "09:30", to: "09:44" },
+  { from: "11:00", to: "11:14" },
+  { from: "11:36", to: "11:50" },
+  { from: "12:10", to: "12:24" },
+  { from: "12:26", to: "12:40" },
+  { from: "12:38", to: "12:52" },
+  { from: "12:40", to: "12:54" },
+  { from: "13:25", to: "13:39" },
+  { from: "13:50", to: "14:04" },
+  { from: "14:26", to: "14:40" },
+  { from: "15:06", to: "15:20" },
+  { from: "16:15", to: "16:29" },
+  { from: "16:51", to: "17:05" },
+  { from: "17:56", to: "18:10" },
+  { from: "18:55", to: "19:09" },
+  { from: "19:01", to: "19:15" },
+];
+
+function SectionHeader({
+  num,
+  color,
+  title,
+}: {
+  num: string;
+  color: string;
+  title: string;
+}) {
+  return (
+    <div className="flex items-center gap-2 mb-2">
+      <div className={`w-6 h-6 rounded-full ${color} flex items-center justify-center shrink-0`}>
+        <span className="text-[10px] font-black text-white">{num}</span>
+      </div>
+      <h2 className="text-sm font-black text-slate-800 uppercase tracking-wide">{title}</h2>
+    </div>
+  );
+}
+
+function TimetableBlock({
+  title,
+  titleJa,
+  fromLabel,
+  toLabel,
+  rows,
+  t,
+}: {
+  title: string;
+  titleJa: string;
+  fromLabel: string;
+  toLabel: string;
+  rows: BusRow[];
+  t: (en: string, ja: string) => string;
+}) {
+  const [open, setOpen] = useState(false);
+  const preview = rows.slice(0, 5);
+  const rest = rows.slice(5);
+
+  return (
+    <div className="rounded-xl border border-slate-100 overflow-hidden">
+      <div className="bg-slate-50 px-3 py-2">
+        <span className="text-[11px] font-bold text-slate-600 uppercase tracking-wide">
+          {t(title, titleJa)}
+        </span>
+      </div>
+      <div className="px-3 py-2">
+        <div className="grid grid-cols-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 pb-1 border-b border-slate-100">
+          <span>{fromLabel}</span>
+          <span>{toLabel}</span>
+        </div>
+        {preview.map((r, i) => (
+          <div key={i} className="grid grid-cols-2 py-1 text-sm font-mono font-semibold text-slate-800 border-b border-slate-50 last:border-0">
+            <span>{r.from}</span>
+            <span>{r.to}</span>
+          </div>
+        ))}
+        {rest.length > 0 && open && rest.map((r, i) => (
+          <div key={i} className="grid grid-cols-2 py-1 text-sm font-mono font-semibold text-slate-800 border-b border-slate-50 last:border-0">
+            <span>{r.from}</span>
+            <span>{r.to}</span>
+          </div>
+        ))}
+        {rest.length > 0 && (
+          <button
+            onClick={() => setOpen(!open)}
+            className="w-full flex items-center justify-center gap-1 mt-1 py-1.5 text-xs font-semibold text-blue-600"
+          >
+            {open ? (
+              <><ChevronUp className="w-3.5 h-3.5" />{t("Show less", "閉じる")}</>
+            ) : (
+              <><ChevronDown className="w-3.5 h-3.5" />{t(`+${rest.length} more times`, `さらに+${rest.length}本`)}</>
+            )}
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default function Transport() {
+  const { t } = useLanguage();
+  const { isWinter } = useSeason();
+
+  // Green-season transport is a fundamentally different page:
+  // mountain shuttles & winter timetables aren't relevant, while car
+  // rental, walking the onsen towns and JR options become primary.
+  if (!isWinter) return <GreenTransport t={t} />;
+
+  return (
+    <div className="flex flex-col h-full overflow-y-auto">
+      <div className="px-4 pt-4 pb-0 shrink-0">
+        <h1 className="text-2xl font-black text-slate-900">{t("Getting Around", "交通・アクセス")}</h1>
+        <p className="text-xs text-slate-500 mt-0.5">{t("Shiga Kogen · Yamanouchi · Snow Monkey Park", "志賀高原・山ノ内・地獄谷野猿公苑")}</p>
+      </div>
+
+      <div className="px-4 pb-6 space-y-5 mt-4">
+
+        {/* ── SECTION 1: FREE SHUTTLE WITHIN SHIGA KOGEN ── */}
+        <section>
+          <SectionHeader num="1" color="bg-green-600" title={t("Free Shuttle - Within Shiga Kogen", "無料シャトル - 志賀高原内")} />
+          <div className="bg-white rounded-xl border border-slate-100 p-3.5 space-y-3">
+            <div className="flex items-start gap-3">
+              <Bus className="w-5 h-5 text-green-600 mt-0.5 shrink-0" />
+              <div>
+                <p className="text-sm font-bold text-slate-800">{t("Free Resort Shuttle", "無料シャトルバス")}</p>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  {t("Connects all areas across Shiga Kogen highlands", "志賀高原内全エリアを結ぶ")}
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2">
+              <div className="bg-green-50 rounded-lg px-3 py-2">
+                <p className="text-[10px] text-green-600 uppercase tracking-wide font-bold">{t("Cost", "料金")}</p>
+                <p className="text-base font-black text-green-800">{t("FREE", "無料")}</p>
+              </div>
+              <div className="bg-slate-50 rounded-lg px-3 py-2">
+                <p className="text-[10px] text-slate-400 uppercase tracking-wide font-bold">{t("Hours", "運行時間")}</p>
+                <p className="text-base font-black text-slate-800">08:30–17:30</p>
+              </div>
+            </div>
+
+            <div className="space-y-2 border-t border-slate-100 pt-3">
+              <div className="flex items-start gap-2">
+                <MapPin className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
+                <p className="text-xs text-slate-600">
+                  {t("Central hub: Yamanoeki bus stop. All routes pass through here - it's where the express bus from Nagano also drops off.", "中心拠点は山ノ駅バス停。全路線がここを経由し、長野からの急行バスもここに到着します。")}
+                </p>
+              </div>
+              <div className="flex items-start gap-2">
+                <Info className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+                <p className="text-xs text-slate-600">
+                  {t("Runs daily during operating season. Frequency varies by route - allow extra time between far-apart areas.", "運行シーズン中は毎日運行。路線によって頻度が異なります。離れたエリア間は余裕を持って。")}
+                </p>
+              </div>
+            </div>
+
+            <a
+              href="https://www.shigakogen.gr.jp/english/topics/shiga-kogen-bus-service-information.html#shuttlebus"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between w-full bg-green-50 rounded-lg px-3 py-2.5"
+            >
+              <div className="flex items-center gap-2">
+                <Clock className="w-4 h-4 text-green-700" />
+                <span className="text-xs font-bold text-green-800">{t("Shuttle Bus Map & Routes", "シャトルバス路線図")}</span>
+              </div>
+              <ExternalLink className="w-3.5 h-3.5 text-green-600" />
+            </a>
+          </div>
+        </section>
+
+        {/* ── SECTION 2: YUDANAKA ↔ SHIGA KOGEN ── */}
+        <section>
+          <SectionHeader num="2" color="bg-blue-600" title={t("Yudanaka → Shiga Kogen", "湯田中→志賀高原")} />
+          <div className="bg-white rounded-xl border border-slate-100 p-3.5 space-y-3">
+            <div className="flex items-start gap-3">
+              <Bus className="w-5 h-5 text-blue-600 mt-0.5 shrink-0" />
+              <div>
+                <p className="text-sm font-bold text-slate-800">{t("Shiga Kogen Line (Local Bus)", "志賀高原線（ローカルバス）")}</p>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  {t("Yudanaka Station → Snow Monkey Park → Yamanoeki (Shiga Kogen)", "湯田中駅 → 野猿公苑 → 山ノ駅（志賀高原）")}
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2">
+              <div className="bg-slate-50 rounded-lg px-3 py-2">
+                <p className="text-[10px] text-slate-400 uppercase tracking-wide font-bold">{t("Adult (one-way)", "大人(片道)")}</p>
+                <p className="text-base font-black text-slate-800">¥390</p>
+              </div>
+              <div className="bg-slate-50 rounded-lg px-3 py-2">
+                <p className="text-[10px] text-slate-400 uppercase tracking-wide font-bold">{t("Child (one-way)", "子供(片道)")}</p>
+                <p className="text-base font-black text-slate-800">¥200</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-2 bg-blue-50 rounded-lg px-3 py-2">
+              <Info className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+              <p className="text-xs text-blue-700">
+                {t("This bus also stops at the Snow Monkey Park on the way up and back - useful for combining both in one day.", "このバスは行き帰りに野猿公苑に停車。志賀高原とお猿を1日で楽しめます。")}
+              </p>
+            </div>
+
+            {/* Return times (Park → Yudanaka via Shiga) - these are what we have for winter */}
+            <div>
+              <p className="text-xs font-bold text-slate-700 mb-1">{t("Return - Shiga Kogen → Yudanaka (Winter 2025/26)", "帰り - 志賀高原→湯田中（2025/26シーズン）")}</p>
+              <p className="text-[10px] text-slate-400 mb-2">{t("Via Snow Monkey Park stop", "野猿公苑バス停経由")}</p>
+              <TimetableBlock
+                title="Shiga Kogen (via Park) → Yudanaka"
+                titleJa="志賀高原（公苑経由）→ 湯田中"
+                fromLabel={t("Park dep.", "公苑 発")}
+                toLabel={t("Yudanaka arr.", "湯田中 着")}
+                rows={SHIGA_PARK_TO_YUDANAKA}
+                t={t}
+              />
+            </div>
+
+            <a
+              href="https://www.snowmonkeyresorts.com/access/nagaden-local-bus-timetable/#Shiga-Kogen-Line-Timetable"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between w-full bg-blue-50 rounded-lg px-3 py-2.5"
+            >
+              <div className="flex items-center gap-2">
+                <Clock className="w-4 h-4 text-blue-600" />
+                <span className="text-xs font-bold text-blue-700">{t("Full Shiga Kogen Line Timetable (both directions)", "志賀高原線 全時刻表（上り・下り）")}</span>
+              </div>
+              <ExternalLink className="w-3.5 h-3.5 text-blue-500" />
+            </a>
+          </div>
+        </section>
+
+        {/* ── SECTION 3: GETTING TO YUDANAKA ── */}
+        <section>
+          <SectionHeader num="3" color="bg-blue-600" title={t("Getting to Yudanaka", "湯田中へのアクセス")} />
+          <div className="bg-white rounded-xl border border-slate-100 p-3.5 space-y-4">
+
+            {/* Option A - Express Bus direct to Shiga Kogen */}
+            <div>
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">{t("Fastest option - direct to Shiga Kogen", "最速 - 志賀高原直行")}</p>
+              <div className="flex items-start gap-3">
+                <Bus className="w-5 h-5 text-blue-600 mt-0.5 shrink-0" />
+                <div className="flex-1">
+                  <p className="text-sm font-bold text-slate-800">{t("Nagaden Express Bus", "長電急行バス")}</p>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    {t("Nagano Station East Exit, Stop 23 → Yamanoeki · ~70 min · no transfer needed", "長野駅東口23番→山ノ駅 · 約70分 · 乗り換えなし")}
+                  </p>
+                  <div className="flex gap-2 mt-2">
+                    <span className="bg-slate-100 rounded px-2 py-0.5 text-[11px] font-bold text-slate-700">¥3,200–3,800</span>
+                    <span className="bg-slate-100 rounded px-2 py-0.5 text-[11px] font-bold text-slate-700">{t("child ¥1,600–1,900", "子供 ¥1,600–1,900")}</span>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-2 space-y-1.5">
+                <div className="flex items-start gap-2">
+                  <Info className="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5" />
+                  <p className="text-xs text-slate-500">{t("Seats not guaranteed - arrive at Stop 23 early, especially weekends.", "座席は保証なし。特に週末は早めに。")}</p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <CreditCard className="w-3.5 h-3.5 text-green-500 shrink-0 mt-0.5" />
+                  <p className="text-xs text-slate-500">{t("Accepts tap-to-pay, PayPay, cash (¥1,000 notes / coins only).", "タッチ決済・PayPay・現金(千円札/硬貨)可。")}</p>
+                </div>
+              </div>
+              <a
+                href="https://www.shigakogen.gr.jp/english/topics/shiga-kogen-bus-service-information.html#express"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-xs text-blue-600 font-semibold mt-2"
+              >
+                <ExternalLink className="w-3 h-3" />
+                {t("Express bus timetable", "急行バス時刻表")}
+              </a>
+            </div>
+
+            <div className="border-t border-slate-100 pt-3">
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">{t("Via Nagano Dentetsu Railway → Yudanaka", "長野電鉄で湯田中へ")}</p>
+              <div className="flex items-start gap-3">
+                <Train className="w-5 h-5 text-slate-500 mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-sm font-bold text-slate-800">{t("Nagano Dentetsu (Nagaden)", "長野電鉄（長電）")}</p>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    {t("Nagano Station → Yudanaka Station · ~50 min · then local bus up to Shiga", "長野駅→湯田中駅 · 約50分 · その後ローカルバスで志賀高原へ")}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="border-t border-slate-100 pt-3">
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">{t("From Tokyo", "東京から")}</p>
+              <div className="space-y-3">
+                <div className="flex items-start gap-3">
+                  <Train className="w-5 h-5 text-blue-600 mt-0.5 shrink-0" />
+                  <div>
+                    <p className="text-sm font-bold text-slate-800">{t("Hokuriku Shinkansen", "北陸新幹線")}</p>
+                    <p className="text-xs text-slate-500 mt-0.5">{t("Tokyo Station → Nagano Station · ~90 min, then express bus or Nagaden", "東京駅→長野駅 · 約90分、その後急行バスまたは長電")}</p>
+                    <a href="https://www.jreast.co.jp/e/routemaps/hokurikushinkansen.html" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-blue-600 font-semibold mt-1">
+                      <ExternalLink className="w-3 h-3" />{t("JR East timetable", "JR東日本時刻表")}
+                    </a>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Moon className="w-5 h-5 text-indigo-500 mt-0.5 shrink-0" />
+                  <div>
+                    <p className="text-sm font-bold text-slate-800">{t('Night Bus "Snow Story"', 'ナイトバス「スノーストーリー」')}</p>
+                    <p className="text-xs text-slate-500 mt-0.5">{t("Tokyo Station → Shiga Kogen · departs midnight · direct", "東京駅→志賀高原 · 深夜0時発 · 直行")}</p>
+                    <div className="flex items-center gap-1.5 mt-1.5">
+                      <span className="text-[10px] text-indigo-400 font-bold">★</span>
+                      <p className="text-[11px] text-indigo-600 font-semibold">{t("Weekend Shiga: Fridays 21:00 · Jan 9–Mar 13, 2026 · book in advance", "ウィークエンド志賀: 毎金曜21:00発 · 要予約")}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── SECTION 4: SNOW MONKEY PARK ── */}
+        <section>
+          <SectionHeader num="4" color="bg-orange-500" title={t("Snow Monkey Park (Side Trip)", "地獄谷野猿公苑（観光）")} />
+          <div className="bg-white rounded-xl border border-slate-100 p-3.5 space-y-3">
+            <div className="flex items-start gap-3">
+              <Footprints className="w-5 h-5 text-orange-500 mt-0.5 shrink-0" />
+              <div>
+                <p className="text-sm font-bold text-slate-800">{t("Kanbayashi Line (Local Bus)", "神林線（ローカルバス）")}</p>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  {t("Yudanaka Station → Snow Monkey Park bus stop · ~10 min · then 2km walk to park", "湯田中駅→野猿公苑バス停 · 約10分 · その後2km歩き")}
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2">
+              <div className="bg-slate-50 rounded-lg px-3 py-2">
+                <p className="text-[10px] text-slate-400 uppercase tracking-wide font-bold">{t("Bus fare (one-way)", "バス運賃(片道)")}</p>
+                <p className="text-base font-black text-slate-800">¥390 / ¥200</p>
+              </div>
+              <div className="bg-slate-50 rounded-lg px-3 py-2">
+                <p className="text-[10px] text-slate-400 uppercase tracking-wide font-bold">{t("Park entry", "公苑入場料")}</p>
+                <p className="text-base font-black text-slate-800">¥800 / ¥400</p>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <TimetableBlock
+                title="Yudanaka → Snow Monkey Park (~10 min)"
+                titleJa="湯田中 → 野猿公苑バス停（約10分）"
+                fromLabel={t("Yudanaka dep.", "湯田中 発")}
+                toLabel={t("Park arr.", "野猿公苑 着")}
+                rows={KANBAYASHI_TO_PARK}
+                t={t}
+              />
+              <TimetableBlock
+                title="Snow Monkey Park → Yudanaka (~15 min)"
+                titleJa="野猿公苑 → 湯田中（約15分）"
+                fromLabel={t("Park dep.", "野猿公苑 発")}
+                toLabel={t("Yudanaka arr.", "湯田中 着")}
+                rows={KANBAYASHI_TO_YUDANAKA}
+                t={t}
+              />
+            </div>
+
+            {/* Snow Monkey Pass */}
+            <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-3 space-y-2">
+              <div className="flex items-center gap-1.5">
+                <Ticket className="w-4 h-4 text-indigo-600" />
+                <p className="text-xs font-black text-indigo-800">{t("Snow Monkey Pass (saves money)", "スノーモンキーパス（お得）")}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <p className="text-[10px] text-indigo-400 font-bold uppercase">{t("Express Bus version", "急行バス版")}</p>
+                  <p className="text-sm font-black text-indigo-900">¥6,800 / ¥3,400</p>
+                  <p className="text-[10px] text-indigo-500">{t("Park entry + return express bus", "入場料+往復急行バス")}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] text-indigo-400 font-bold uppercase">{t("Train version", "電車版")}</p>
+                  <p className="text-sm font-black text-indigo-900">¥5,100 / ¥2,550</p>
+                  <p className="text-[10px] text-indigo-500">{t("Park entry + Nagaden rail + local bus", "入場料+長電+ローカルバス")}</p>
+                </div>
+              </div>
+              <p className="text-[10px] text-indigo-500">
+                {t("⚠ Does NOT cover buses to Shiga Kogen resorts/areas.", "⚠ 志賀高原リゾート行きバスには使用不可。")}
+              </p>
+              <a
+                href="https://www.snowmonkeyresorts.com/access/snow-monkey-1-day-pass/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-xs font-semibold text-indigo-600"
+              >
+                <ExternalLink className="w-3 h-3" />
+                {t("Snow Monkey Pass details", "スノーモンキーパス詳細")}
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <p className="text-[10px] text-slate-400 text-center pb-2">
+          {t("Timetables shown for reference. Schedules may differ by season - always verify with operator before travel.", "時刻表は参考情報です。シーズンにより変更の場合があります。ご利用前に必ず運行会社にご確認ください。")}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// GREEN-SEASON TRANSPORT
+//
+// Apr–Nov visitors come for hiking, onsen, snow-monkey day trips and
+// the Shiga Kogen highland — a very different routing problem from
+// the winter ski-shuttle network. We surface:
+//   1. Long-haul: Tokyo → Nagano OR Tokyo → Iiyama by Hokuriku Shinkansen
+//   2. Last-mile: Nagano → Yudanaka by Nagaden train (the standard route)
+//   3. Self-drive & car rental (major Nagano-station rental desks)
+//   4. Walking the onsen towns (Yudanaka ↔ Shibu ↔ Kanbayashi)
+//   5. Shiga Kogen access in green season (sightseeing/hiking)
+//   6. Taxis & on-demand options
+//
+// All numeric prices/durations are widely-published reference figures —
+// the page warns at the bottom to confirm with the operator.
+// ─────────────────────────────────────────────────────────────────────
+function GreenTransport({ t }: { t: (en: string, ja: string) => string }) {
+  return (
+    <div className="flex flex-col h-full overflow-y-auto">
+      <div className="px-4 pt-4 pb-0 shrink-0">
+        <h1 className="text-2xl font-black text-slate-900">{t("Getting Around", "交通・アクセス")}</h1>
+        <p className="text-xs text-slate-500 mt-0.5">
+          {t("Green season · Yamanouchi · Yudanaka · Shibu · Shiga Kogen", "グリーンシーズン・山ノ内・湯田中・渋・志賀高原")}
+        </p>
+      </div>
+
+      {/* Quick-jump pill nav */}
+      <div className="px-4 mt-3">
+        <div className="flex flex-wrap gap-1.5">
+          {[
+            ["#sec-tokyo",  t("Tokyo → Yamanouchi", "東京から")],
+            ["#sec-nagano", t("Nagano → Yudanaka", "長野→湯田中")],
+            ["#sec-drive",  t("Self-Drive", "レンタカー")],
+            ["#sec-town",   t("Around Town", "町内移動")],
+            ["#sec-shiga",  t("Up to Shiga", "志賀へ")],
+            ["#sec-taxi",   t("Taxis", "タクシー")],
+          ].map(([href, label]) => (
+            <a key={href} href={href} className="text-[10px] font-bold uppercase tracking-wide bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full px-2.5 py-1">
+              {label}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div className="px-4 pb-6 space-y-5 mt-4">
+
+        {/* ── SECTION 1: TOKYO → YAMANOUCHI ── */}
+        <section id="sec-tokyo" className="scroll-mt-4">
+          <SectionHeader num="1" color="bg-emerald-600" title={t("From Tokyo to Yamanouchi", "東京から山ノ内へ")} />
+          <div className="bg-white rounded-xl border border-slate-100 p-3.5 space-y-4">
+
+            {/* Recommended: via Nagano */}
+            <div>
+              <p className="text-[10px] font-bold text-emerald-700 uppercase tracking-wider mb-2">
+                {t("Recommended · via Nagano", "おすすめ · 長野経由")}
+              </p>
+              <div className="flex items-start gap-3">
+                <Train className="w-5 h-5 text-emerald-600 mt-0.5 shrink-0" />
+                <div className="flex-1">
+                  <p className="text-sm font-bold text-slate-800">{t("Hokuriku Shinkansen · Tokyo → Nagano", "北陸新幹線・東京→長野")}</p>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    {t("Kagayaki (fastest) ~80 min · Hakutaka ~95 min · Asama (all stops) ~110 min", "かがやき(最速)約80分・はくたか約95分・あさま(各停)約110分")}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    <span className="bg-slate-100 rounded px-2 py-0.5 text-[11px] font-bold text-slate-700">{t("Reserved ¥8,540", "指定席 ¥8,540")}</span>
+                    <span className="bg-slate-100 rounded px-2 py-0.5 text-[11px] font-bold text-slate-700">{t("Non-reserved ¥8,020", "自由席 ¥8,020")}</span>
+                    <span className="bg-emerald-50 border border-emerald-100 rounded px-2 py-0.5 text-[11px] font-bold text-emerald-700">JR Pass {t("OK", "利用可")}</span>
+                  </div>
+                </div>
+              </div>
+              <p className="text-[11px] text-slate-500 mt-2 ml-8">
+                {t("→ then Nagaden train Nagano → Yudanaka (see Section 2, ~45 min)", "→ 長野駅から長電で湯田中へ（セクション2、約45分）")}
+              </p>
+            </div>
+
+            {/* Alternative: via Iiyama */}
+            <div className="border-t border-slate-100 pt-3">
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">
+                {t("Alternative · via Iiyama", "代替案 · 飯山経由")}
+              </p>
+              <div className="flex items-start gap-3">
+                <Train className="w-5 h-5 text-slate-500 mt-0.5 shrink-0" />
+                <div className="flex-1">
+                  <p className="text-sm font-bold text-slate-800">{t("Hokuriku Shinkansen · Tokyo → Iiyama", "北陸新幹線・東京→飯山")}</p>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    {t("Hakutaka ~110 min · only some services stop at Iiyama (check timetable)", "はくたか 約110分・飯山停車は一部列車のみ（要確認）")}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    <span className="bg-slate-100 rounded px-2 py-0.5 text-[11px] font-bold text-slate-700">{t("Reserved ¥9,180", "指定席 ¥9,180")}</span>
+                  </div>
+                </div>
+              </div>
+              <p className="text-[11px] text-slate-500 mt-2 ml-8">
+                {t("→ then Nagaden bus or local taxi Iiyama → Yudanaka (~30–40 min, ¥1,400 / taxi ~¥6,000)", "→ 長電バスまたはタクシーで飯山→湯田中（約30〜40分、バス¥1,400 / タクシー約¥6,000）")}
+              </p>
+            </div>
+
+            {/* Quick links */}
+            <div className="grid grid-cols-2 gap-2">
+              <a
+                href="https://www.jreast.co.jp/e/routemaps/hokurikushinkansen.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between bg-emerald-50 rounded-lg px-3 py-2"
+              >
+                <span className="text-[11px] font-bold text-emerald-800">{t("JR East timetable", "JR東日本時刻表")}</span>
+                <ExternalLink className="w-3.5 h-3.5 text-emerald-600" />
+              </a>
+              <a
+                href="https://www.eki-net.com/top/en/index.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between bg-emerald-50 rounded-lg px-3 py-2"
+              >
+                <span className="text-[11px] font-bold text-emerald-800">{t("Book Shinkansen seats", "新幹線予約")}</span>
+                <ExternalLink className="w-3.5 h-3.5 text-emerald-600" />
+              </a>
+            </div>
+
+            {/* Flight option */}
+            <div className="border-t border-slate-100 pt-3 flex items-start gap-2">
+              <Plane className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
+              <p className="text-[11px] text-slate-500">
+                {t("No commercial airport in Yamanouchi area. Closest: Matsumoto (~2.5 h drive) or Tokyo (Haneda/Narita) + Shinkansen.", "山ノ内周辺に空港なし。最寄りは松本空港(約2.5時間)または東京から新幹線。")}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── SECTION 2: NAGANO → YUDANAKA ── */}
+        <section id="sec-nagano" className="scroll-mt-4">
+          <SectionHeader num="2" color="bg-emerald-600" title={t("Nagano → Yudanaka", "長野→湯田中")} />
+          <div className="bg-white rounded-xl border border-slate-100 p-3.5 space-y-4">
+
+            {/* Snow Monkey Limited Express */}
+            <div>
+              <p className="text-[10px] font-bold text-emerald-700 uppercase tracking-wider mb-2">
+                {t("Recommended · Limited Express", "おすすめ · 特急")}
+              </p>
+              <div className="flex items-start gap-3">
+                <Train className="w-5 h-5 text-emerald-600 mt-0.5 shrink-0" />
+                <div className="flex-1">
+                  <p className="text-sm font-bold text-slate-800">{t("Nagaden \u201cSnow Monkey\u201d Limited Express", "長電特急「スノーモンキー」")}</p>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    {t("Nagano → Yudanaka · ~45 min · 1 transfer-free seat reserved", "長野→湯田中 · 約45分 · 全車指定席")}
+                  </p>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-2 mt-3">
+                <div className="bg-slate-50 rounded-lg px-3 py-2">
+                  <p className="text-[10px] text-slate-400 uppercase tracking-wide font-bold">{t("Adult", "大人")}</p>
+                  <p className="text-base font-black text-slate-800">¥1,290</p>
+                </div>
+                <div className="bg-slate-50 rounded-lg px-3 py-2">
+                  <p className="text-[10px] text-slate-400 uppercase tracking-wide font-bold">{t("Frequency", "運行頻度")}</p>
+                  <p className="text-sm font-black text-slate-800">{t("~hourly", "約1時間に1本")}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Local train */}
+            <div className="border-t border-slate-100 pt-3">
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">
+                {t("Cheaper · Local Train", "安い · 普通列車")}
+              </p>
+              <div className="flex items-start gap-3">
+                <Train className="w-5 h-5 text-slate-500 mt-0.5 shrink-0" />
+                <div className="flex-1">
+                  <p className="text-sm font-bold text-slate-800">{t("Nagaden Local Service", "長電普通列車")}</p>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    {t("Nagano → Yudanaka · ~70 min · all stops, no reservation", "長野→湯田中 · 約70分 · 各駅停車・予約不要")}
+                  </p>
+                  <div className="flex gap-2 mt-2">
+                    <span className="bg-slate-100 rounded px-2 py-0.5 text-[11px] font-bold text-slate-700">¥1,190</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Yukemuri pass */}
+            <div className="border-t border-slate-100 pt-3 bg-amber-50/60 -mx-3.5 -mb-3.5 px-3.5 py-3 rounded-b-xl">
+              <div className="flex items-center gap-1.5 mb-1.5">
+                <Ticket className="w-4 h-4 text-amber-600" />
+                <p className="text-xs font-black text-amber-800">{t("Yukemuri Pass · saves money", "ゆけむり号フリーきっぷ")}</p>
+              </div>
+              <p className="text-[11px] text-amber-700">
+                {t("¥2,500 adult · 1-day unrestricted Nagaden travel between Nagano ↔ Yudanaka including Limited Express seats. Worthwhile if you do a same-day return.", "大人¥2,500 · 長野⇔湯田中の長電1日乗り放題（特急含む）。日帰り往復ならお得。")}
+              </p>
+              <a
+                href="https://www.nagaden-net.co.jp/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-xs font-semibold text-amber-700 mt-2"
+              >
+                <ExternalLink className="w-3 h-3" />
+                {t("Nagaden Railway website", "長野電鉄サイト")}
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* ── SECTION 3: SELF-DRIVE / CAR RENTAL ── */}
+        <section id="sec-drive" className="scroll-mt-4">
+          <SectionHeader num="3" color="bg-emerald-600" title={t("Self-Drive & Car Rental", "レンタカー・自家用車")} />
+          <div className="bg-white rounded-xl border border-slate-100 p-3.5 space-y-4">
+
+            {/* Drive times */}
+            <div>
+              <div className="flex items-start gap-3">
+                <Car className="w-5 h-5 text-emerald-600 mt-0.5 shrink-0" />
+                <div className="flex-1">
+                  <p className="text-sm font-bold text-slate-800">{t("Driving to Yudanaka", "湯田中へのドライブ")}</p>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    {t("Joshin-etsu Expressway · exit at Shinshu-Nakano IC, ~15 min surface to Yudanaka", "上信越自動車道・信州中野ICから一般道で約15分")}
+                  </p>
+                </div>
+              </div>
+              <div className="grid grid-cols-3 gap-2 mt-3">
+                <div className="bg-slate-50 rounded-lg px-2.5 py-2 text-center">
+                  <p className="text-[10px] text-slate-400 uppercase font-bold">{t("From Tokyo", "東京から")}</p>
+                  <p className="text-sm font-black text-slate-800">~3.5 h</p>
+                </div>
+                <div className="bg-slate-50 rounded-lg px-2.5 py-2 text-center">
+                  <p className="text-[10px] text-slate-400 uppercase font-bold">{t("From Nagano", "長野から")}</p>
+                  <p className="text-sm font-black text-slate-800">~50 min</p>
+                </div>
+                <div className="bg-slate-50 rounded-lg px-2.5 py-2 text-center">
+                  <p className="text-[10px] text-slate-400 uppercase font-bold">{t("From Iiyama", "飯山から")}</p>
+                  <p className="text-sm font-black text-slate-800">~25 min</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Rental desks */}
+            <div className="border-t border-slate-100 pt-3">
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">
+                {t("Car rental at Nagano Station", "長野駅レンタカー")}
+              </p>
+              <div className="space-y-2">
+                {[
+                  { name: "Toyota Rent a Car", url: "https://rent.toyota.co.jp/en/" },
+                  { name: "Nippon Rent-A-Car", url: "https://www.nipponrentacar.co.jp/english/" },
+                  { name: "Times Car Rental", url: "https://rental.timescar.com/en/" },
+                  { name: "Nissan Rent a Car", url: "https://nissan-rentacar.com/english/" },
+                  { name: "Orix Rent-A-Car",   url: "https://car.orix.co.jp/eng/" },
+                ].map((c) => (
+                  <a key={c.name} href={c.url} target="_blank" rel="noopener noreferrer"
+                     className="flex items-center justify-between bg-slate-50 rounded-lg px-3 py-2">
+                    <span className="text-xs font-bold text-slate-700">{c.name}</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
+                  </a>
+                ))}
+              </div>
+              <p className="text-[11px] text-slate-500 mt-2">
+                {t("All require an International Driving Permit (IDP) issued under the 1949 Geneva Convention — your home licence alone is not accepted.", "国際運転免許証(1949年ジュネーブ条約)が必要。日本免許への切替も可。")}
+              </p>
+            </div>
+
+            {/* Parking */}
+            <div className="border-t border-slate-100 pt-3 flex items-start gap-2">
+              <Info className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+              <p className="text-[11px] text-slate-600">
+                {t("Most ryokans in Yudanaka, Shibu and Kanbayashi offer free parking — confirm at booking. Onsen-town streets are narrow; use the hotel lot rather than on-street.", "湯田中・渋・上林の旅館は無料駐車場ありが一般的(要確認)。温泉街は道幅狭く、路上駐車不可。")}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── SECTION 4: AROUND YUDANAKA / SHIBU / KANBAYASHI ── */}
+        <section id="sec-town" className="scroll-mt-4">
+          <SectionHeader num="4" color="bg-emerald-600" title={t("Around Yudanaka, Shibu & Kanbayashi", "湯田中・渋・上林を歩く")} />
+          <div className="bg-white rounded-xl border border-slate-100 p-3.5 space-y-4">
+
+            {/* Walking */}
+            <div>
+              <div className="flex items-start gap-3">
+                <Footprints className="w-5 h-5 text-emerald-600 mt-0.5 shrink-0" />
+                <div className="flex-1">
+                  <p className="text-sm font-bold text-slate-800">{t("Walking is the way", "徒歩がいちばん")}</p>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    {t("Yudanaka Station → Shibu Onsen ~15 min on foot · Shibu → Kanbayashi ~10 min · cobbled streets, wooden ryokans, nine public baths.", "湯田中駅→渋温泉 徒歩約15分・渋→上林 約10分・石畳の温泉街と九つの外湯。")}
+                  </p>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-2 mt-3">
+                <div className="bg-emerald-50 rounded-lg px-3 py-2">
+                  <p className="text-[10px] text-emerald-600 uppercase tracking-wide font-bold">{t("Yudanaka → Shibu", "湯田中→渋")}</p>
+                  <p className="text-base font-black text-emerald-800">~15 min</p>
+                </div>
+                <div className="bg-emerald-50 rounded-lg px-3 py-2">
+                  <p className="text-[10px] text-emerald-600 uppercase tracking-wide font-bold">{t("Shibu → Kanbayashi", "渋→上林")}</p>
+                  <p className="text-base font-black text-emerald-800">~10 min</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Hotel shuttles */}
+            <div className="border-t border-slate-100 pt-3">
+              <div className="flex items-start gap-3">
+                <Bus className="w-5 h-5 text-slate-500 mt-0.5 shrink-0" />
+                <div className="flex-1">
+                  <p className="text-sm font-bold text-slate-800">{t("Hotel pickup shuttles", "宿の送迎")}</p>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    {t("Most ryokans run a free shuttle from Yudanaka Station for guests with a reservation — call on arrival or arrange in advance.", "ほとんどの旅館で湯田中駅から無料送迎あり(要予約・要連絡)。")}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Nine baths pass */}
+            <div className="border-t border-slate-100 pt-3 bg-rose-50/60 -mx-3.5 px-3.5 py-3">
+              <div className="flex items-center gap-1.5 mb-1.5">
+                <Ticket className="w-4 h-4 text-rose-600" />
+                <p className="text-xs font-black text-rose-800">{t("Shibu Onsen Nine Baths Key", "渋温泉九湯めぐり")}</p>
+              </div>
+              <p className="text-[11px] text-rose-700">
+                {t("Stay overnight at any Shibu ryokan and you get a wooden key for free entry to all nine public bathhouses — a charming green-season ritual.", "渋温泉の旅館に宿泊すると九つの外湯を巡れる木札の鍵がもらえます。グリーンシーズンの定番。")}
+              </p>
+            </div>
+
+            {/* Bicycle */}
+            <div className="border-t border-slate-100 pt-3 flex items-start gap-2">
+              <Bike className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+              <p className="text-[11px] text-slate-600">
+                {t("Some hotels lend bicycles for free or a small fee — handy for the flat ride to the Snow Monkey Park trailhead at Kanbayashi (~2 km).", "一部の宿で自転車レンタル可。上林の地獄谷遊歩道入口(約2km)まで便利。")}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── SECTION 5: UP TO SHIGA KOGEN (GREEN SEASON) ── */}
+        <section id="sec-shiga" className="scroll-mt-4">
+          <SectionHeader num="5" color="bg-emerald-600" title={t("Up to Shiga Kogen", "志賀高原へ")} />
+          <div className="bg-white rounded-xl border border-slate-100 p-3.5 space-y-4">
+
+            {/* Local bus */}
+            <div>
+              <div className="flex items-start gap-3">
+                <Bus className="w-5 h-5 text-emerald-600 mt-0.5 shrink-0" />
+                <div className="flex-1">
+                  <p className="text-sm font-bold text-slate-800">{t("Nagaden Shiga Kogen Line", "長電バス志賀高原線")}</p>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    {t("Yudanaka Station → Hasuike / Yamanoeki · ~50 min · runs year-round, reduced frequency outside winter", "湯田中駅→蓮池/山ノ駅 · 約50分 · 通年運行(冬以外は本数少なめ)")}
+                  </p>
+                  <div className="flex gap-2 mt-2">
+                    <span className="bg-slate-100 rounded px-2 py-0.5 text-[11px] font-bold text-slate-700">¥1,400</span>
+                    <span className="bg-slate-100 rounded px-2 py-0.5 text-[11px] font-bold text-slate-700">{t("child ¥700", "子供 ¥700")}</span>
+                  </div>
+                </div>
+              </div>
+              <a
+                href="https://www.nagadenbus.co.jp/local/regular/shiga.php"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 mt-2"
+              >
+                <ExternalLink className="w-3 h-3" />
+                {t("Shiga Kogen Line timetable", "志賀高原線時刻表")}
+              </a>
+            </div>
+
+            {/* Drive up */}
+            <div className="border-t border-slate-100 pt-3">
+              <div className="flex items-start gap-3">
+                <Mountain className="w-5 h-5 text-emerald-600 mt-0.5 shrink-0" />
+                <div className="flex-1">
+                  <p className="text-sm font-bold text-slate-800">{t("Driving up · Route 292", "国道292号で")}</p>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    {t("Yudanaka → Hasuike ~30 min · continue on the Shiga–Kusatsu Highway over the Shibu-tōge pass for one of Japan's highest scenic drives.", "湯田中→蓮池 約30分・渋峠を越える志賀草津道路は日本屈指の絶景ドライブ。")}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Road closure warning */}
+            <div className="bg-amber-50 border border-amber-100 rounded-lg p-3 flex items-start gap-2">
+              <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+              <div>
+                <p className="text-xs font-bold text-amber-800">{t("Seasonal road closures", "通行止めに注意")}</p>
+                <p className="text-[11px] text-amber-700 mt-0.5">
+                  {t("The Shiga–Kusatsu Highway above Shibu-tōge typically closes mid-Nov to late-April (snow + volcanic gas). Lower Shiga Kogen access stays open year-round.", "志賀草津道路の渋峠以上は11月中旬〜4月下旬通行止め(積雪・火山ガス)。下部志賀高原は通年通行可。")}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── SECTION 6: TAXIS & ON-DEMAND ── */}
+        <section id="sec-taxi" className="scroll-mt-4">
+          <SectionHeader num="6" color="bg-emerald-600" title={t("Taxis & On-Demand", "タクシー・オンデマンド")} />
+          <div className="bg-white rounded-xl border border-slate-100 p-3.5 space-y-3">
+
+            <div className="flex items-start gap-3">
+              <Phone className="w-5 h-5 text-emerald-600 mt-0.5 shrink-0" />
+              <div className="flex-1">
+                <p className="text-sm font-bold text-slate-800">{t("Local taxi companies", "地元タクシー会社")}</p>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  {t("No Uber / ride-share in Yamanouchi. Phone or have your hotel reception book — most drivers don't speak English so a written destination helps.", "Uber等のライドシェア無し。電話または宿のフロント経由で予約。英語不可のため目的地を書いて渡すと安心。")}
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              {[
+                { name: t("Nakano Taxi", "中野タクシー"), phone: "0269-22-2840", area: t("Yudanaka / Shibu", "湯田中・渋") },
+                { name: t("Yudanaka Taxi", "湯田中タクシー"), phone: "0269-33-1221", area: t("Yudanaka / Shibu / park", "湯田中・渋・公苑") },
+                { name: t("Alpico Taxi (Nagano)", "アルピコタクシー(長野)"), phone: "026-228-1234", area: t("Nagano Station", "長野駅") },
+              ].map((c) => (
+                <div key={c.phone} className="flex items-center justify-between bg-slate-50 rounded-lg px-3 py-2">
+                  <div>
+                    <p className="text-xs font-bold text-slate-800">{c.name}</p>
+                    <p className="text-[10px] text-slate-500">{c.area}</p>
+                  </div>
+                  <a href={`tel:${c.phone}`} className="text-xs font-bold text-emerald-700 tabular-nums">{c.phone}</a>
+                </div>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-2 gap-2 border-t border-slate-100 pt-3">
+              <div className="bg-slate-50 rounded-lg px-3 py-2">
+                <p className="text-[10px] text-slate-400 uppercase tracking-wide font-bold">{t("Nagano → Yudanaka", "長野→湯田中")}</p>
+                <p className="text-sm font-black text-slate-800">~¥10,000–12,000</p>
+              </div>
+              <div className="bg-slate-50 rounded-lg px-3 py-2">
+                <p className="text-[10px] text-slate-400 uppercase tracking-wide font-bold">{t("Yudanaka → Park trailhead", "湯田中→遊歩道入口")}</p>
+                <p className="text-sm font-black text-slate-800">~¥1,500–2,000</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <p className="text-[10px] text-slate-400 text-center pb-2">
+          {t("Prices and durations shown for reference. Always verify with the operator before travel.", "料金・所要時間は参考情報です。ご利用前に運行会社へご確認ください。")}
+        </p>
+      </div>
+    </div>
+  );
+}
