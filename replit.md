@@ -27,7 +27,9 @@ The project is a pnpm workspace monorepo using Node.js 24 and TypeScript 5.9.
 **Monorepo Structure:**
 - `artifacts/api-server`: Express API server exposing routes for snow data (Supabase) and local places data (PostgreSQL).
 - `artifacts/yamanouchi`: Full-stack PWA for the Yamanouchi region, supporting bilingual (EN/JP) content and season-aware features (Winter/Green).
-- `artifacts/iiyama`: Placeholder for the Iiyama region, planned for future development as a "coming-soon" page.
+- `artifacts/iiyama`: PWA for the Iiyama region (Madarao, Tangram, Togari) with shared canonical resort detail at `/resort/:id`.
+- `artifacts/snowy-mountains`: Premium dashboard for the Australian Snowy Mountains (Thredbo, Perisher, Charlotte's Pass, Selwyn, Jindabyne) with BOM live observations.
+- `lib/feelzlike-dashboard`: Shared dashboard component package (MetricRing, MountainSnapshot, ResortHero, LiveConditions, MountainOutlook, SafetyStrip) used by all regional artifacts so AU and JP resort detail pages stay visually identical. SafetyStrip accepts injectable region-specific links/disclaimer (BOM/000 for AU, JMA/110-119 for JP).
 - `lib/api-spec`: Contains OpenAPI 3.1 specification and Orval configuration for API codegen.
 - `lib/api-client-react`: Generated React Query hooks and fetch client.
 - `lib/api-zod`: Generated Zod schemas for API validation.

@@ -8,6 +8,7 @@ import { Layout } from "@/components/layout";
 
 import Home from "@/pages/home";
 import Resorts from "@/pages/resorts";
+import ResortDetail from "@/pages/resort";
 import MapView from "@/pages/map";
 
 import Alerts from "@/pages/alerts";
@@ -38,6 +39,7 @@ function AppRouter() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/resorts" component={Resorts} />
+        <Route path="/resort/:id" component={ResortDetail} />
         <Route path="/map" component={MapView} />
         <Route path="/alerts" component={Alerts} />
         <Route path="/guide" component={Guide} />

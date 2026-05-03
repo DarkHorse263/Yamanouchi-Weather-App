@@ -16,6 +16,10 @@ interface LocationConfig {
   bomWmoId: number;
   bomSecondaryWmoId?: number;
   bomSecondaryStation?: string;
+  /** Open-Meteo timezone, defaults to "Australia/Sydney". JP locations use "Asia/Tokyo". */
+  timezone?: string;
+  /** ISO region code; AU=Australia, JP=Japan. Used for ensemble model selection. */
+  region?: "AU" | "JP";
 }
 
 const LOCATIONS: LocationConfig[] = [
@@ -83,7 +87,89 @@ const LOCATIONS: LocationConfig[] = [
     bomStation: "Open-Meteo (no BOM station at resort)",
     bomStationId: "",
     bomWmoId: 0,
-  }
+  },
+
+  // ─── Yamanouchi (Nagano, Japan) ──────────────────────────
+  {
+    id: "shiga-kogen",
+    name: "Shiga Kogen",
+    latitude: 36.7167,
+    longitude: 138.5000,
+    elevation: 2305,
+    description: "Japan's largest connected ski area, host of the 1998 Nagano Olympics. 18 interlinked resorts from 1340m base to 2305m summit at Yokoteyama.",
+    bomStation: "",
+    bomStationId: "",
+    bomWmoId: 0,
+    timezone: "Asia/Tokyo",
+    region: "JP",
+  },
+  {
+    id: "ryuoo",
+    name: "Ryuoo Ski Park",
+    latitude: 36.7536,
+    longitude: 138.4197,
+    elevation: 1930,
+    description: "Yamanouchi's signature gondola-served resort. SORA terrace at 1770m offers panoramic views over the Northern Alps. Three peaks, light powder, easy day-trip from Tokyo.",
+    bomStation: "",
+    bomStationId: "",
+    bomWmoId: 0,
+    timezone: "Asia/Tokyo",
+    region: "JP",
+  },
+  {
+    id: "kita-shiga",
+    name: "Kita Shiga Kogen",
+    latitude: 36.7506,
+    longitude: 138.4767,
+    elevation: 1700,
+    description: "Two linked resorts (Yomase and X-Jam Takaifuji) on the north flank of Shiga Kogen. Family terrain with night skiing and direct shuttle from Yudanaka onsen town.",
+    bomStation: "",
+    bomStationId: "",
+    bomWmoId: 0,
+    timezone: "Asia/Tokyo",
+    region: "JP",
+  },
+
+  // ─── Iiyama (Nagano, Japan) ──────────────────────────────
+  {
+    id: "madarao",
+    name: "Madarao Kogen",
+    latitude: 36.8525,
+    longitude: 138.3389,
+    elevation: 1382,
+    description: "Iiyama's powder magnet on the Niigata–Nagano border. Famous for ungroomed tree runs and Sea of Japan storms — averages over 13m of snow per season.",
+    bomStation: "",
+    bomStationId: "",
+    bomWmoId: 0,
+    timezone: "Asia/Tokyo",
+    region: "JP",
+  },
+  {
+    id: "tangram",
+    name: "Tangram Ski Circus",
+    latitude: 36.8639,
+    longitude: 138.3528,
+    elevation: 1240,
+    description: "Madarao's interlinked sister resort with a long single base-to-summit gondola. Sunnier east-facing slopes paired with the same legendary Iiyama powder belt.",
+    bomStation: "",
+    bomStationId: "",
+    bomWmoId: 0,
+    timezone: "Asia/Tokyo",
+    region: "JP",
+  },
+  {
+    id: "togari",
+    name: "Togari Onsen",
+    latitude: 36.9089,
+    longitude: 138.4222,
+    elevation: 1240,
+    description: "Family-friendly resort above Togari onsen village. Wide groomed cruisers, beginner zones, and one of Iiyama's longest top-to-bottom runs.",
+    bomStation: "",
+    bomStationId: "",
+    bomWmoId: 0,
+    timezone: "Asia/Tokyo",
+    region: "JP",
+  },
 ];
 
 const WEATHER_DESCRIPTIONS: Record<number, string> = {
@@ -422,7 +508,7 @@ async function fetchOpenMeteo(location: LocationConfig) {
     current: "temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m,snow_depth,freezing_level_height",
     hourly: "temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,cloud_cover,wind_speed_10m,snowfall,freezing_level_height",
     daily: "weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,snowfall_sum,wind_speed_10m_max,uv_index_max",
-    timezone: "Australia/Sydney",
+    timezone: location.timezone ?? "Australia/Sydney",
     forecast_days: "7",
     // 72 hours so we can derive next-24/48/72h cumulative snowfall on the server.
     forecast_hours: "72"
@@ -438,8 +524,22 @@ async function fetchOpenMeteo(location: LocationConfig) {
 
 router.get("/weather", async (_req, res) => {
   try {
-    const weatherPromises = LOCATIONS.map(fetchLocationWeather);
-    const locations = await Promise.all(weatherPromises);
+    // Use allSettled so a single Open-Meteo / BOM hiccup at one resort
+    // doesn't take down the entire /weather feed (which the AU dashboard
+    // depends on). Failed locations are dropped from the list and logged.
+    const settled = await Promise.all(
+      LOCATIONS.map(async (loc) => {
+        try {
+          return await fetchLocationWeather(loc);
+        } catch (err) {
+          console.warn(
+            `[weather] dropping ${loc.id}: ${err instanceof Error ? err.message : String(err)}`,
+          );
+          return null;
+        }
+      }),
+    );
+    const locations = settled.filter((x): x is NonNullable<typeof x> => x !== null);
 
     const result = GetWeatherResponse.parse({
       locations,
@@ -456,7 +556,9 @@ router.get("/weather", async (_req, res) => {
 
 router.get("/weather/:locationId", async (req, res) => {
   try {
-    const { locationId } = GetLocationWeatherParams.parse(req.params);
+    // Allow JP location IDs that aren't in the legacy AU-only enum.
+    // The path parameter is still validated below by checking against LOCATIONS.
+    const locationId = String(req.params.locationId ?? "");
     const location = LOCATIONS.find(l => l.id === locationId);
 
     if (!location) {
@@ -485,7 +587,7 @@ router.get("/weather/:locationId", async (req, res) => {
  */
 router.get("/forecast/:locationId", async (req, res) => {
   try {
-    const { locationId } = GetLocationWeatherParams.parse(req.params);
+    const locationId = String(req.params.locationId ?? "");
     const location = LOCATIONS.find(l => l.id === locationId);
     if (!location) {
       res.status(404).json({ error: "LOCATION_NOT_FOUND" });
@@ -495,8 +597,8 @@ router.get("/forecast/:locationId", async (req, res) => {
       latitude: location.latitude,
       longitude: location.longitude,
       elevation: location.elevation,
-      region: "AU",
-      timezone: "Australia/Sydney",
+      region: location.region ?? "AU",
+      timezone: location.timezone ?? "Australia/Sydney",
       days: 7,
     });
     res.json({
