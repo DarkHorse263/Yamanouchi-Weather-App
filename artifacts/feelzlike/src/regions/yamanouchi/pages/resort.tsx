@@ -158,8 +158,14 @@ export default function ResortDetail() {
       icon: AlertTriangle,
     },
     {
-      label: t("Emergency · 110 / 119", "緊急通報 · 110 / 119"),
-      detail: t("Police 110 · Fire & ambulance 119", "警察 110番 · 消防・救急 119番"),
+      label: t("Police · 110", "警察 · 110番"),
+      detail: t("Tap to call police directly", "タップで警察へ発信"),
+      href: "tel:110",
+      icon: PhoneCall,
+    },
+    {
+      label: t("Fire & ambulance · 119", "消防・救急 · 119番"),
+      detail: t("Tap to call fire / ambulance directly", "タップで消防・救急へ発信"),
       href: "tel:119",
       icon: PhoneCall,
     },
