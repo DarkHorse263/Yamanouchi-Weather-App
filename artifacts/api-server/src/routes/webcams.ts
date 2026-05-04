@@ -143,15 +143,6 @@ const WEBCAM_DATA: WebcamConfig[] = [
     webcamPageUrl: "https://www.livetraffic.com/desktop.html#/map/?lat=-36.45&lng=148.45&zoom=10",
     webcams: [
       {
-        id: "smh-cooma-livetraffic",
-        name: "Cooma · Snowy Mountains Hwy",
-        description: "Live Traffic NSW alpine camera at the Cooma gateway — last reliable check before the climb to Jindabyne. Opens directly on the Cooma camera in Live Traffic NSW.",
-        imageUrl: "https://www.livetraffic.com/Map/Resources/Cameras/Cooma.jpg",
-        pageUrl: "https://www.livetraffic.com/desktop.html#/map/?lat=-36.235&lng=149.13&zoom=15&layers=cameras",
-        type: "road",
-        roadName: "Snowy Mountains Highway",
-      },
-      {
         id: "smh-kosciuszko-perisher-valley",
         name: "Kosciuszko Rd and Perisher Valley",
         description: "Official Live Traffic NSW alpine camera at the Perisher Valley turnoff — the highest point on Kosciuszko Rd, often the first place to ice over. Image refreshes when TfNSW reactivates the camera for snow season.",
