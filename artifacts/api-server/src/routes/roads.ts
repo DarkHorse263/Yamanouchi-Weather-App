@@ -56,18 +56,32 @@ async function fetchRoadConditions() {
       detailUrl: "https://www.livetraffic.com/desktop.html#702056",
       affectedResorts: ["thredbo"]
     },
-    {
-      id: "kosciuszko-road-charlottes",
-      roadName: "Kosciuszko Road",
-      segment: "Perisher to Charlotte's Pass",
-      condition: "closed" as const,
-      description: "Road from Perisher to Charlotte's Pass is closed during winter. Charlotte's Pass is accessible only by oversnow transport (snowcat) from Perisher during ski season.",
-      chainsRequired: false,
-      lastUpdated: new Date().toISOString(),
-      source: "Transport for NSW - Live Traffic",
-      detailUrl: "https://www.livetraffic.com/desktop.html#702055",
-      affectedResorts: ["charlottes-pass"]
-    },
+    (() => {
+      // Perisher → Charlotte's Pass is closed by NPWS each winter from the
+      // Queen's Birthday long weekend (mid-June) until early October. Outside
+      // that window it is open to normal road traffic.
+      const now = new Date();
+      const month = now.getMonth(); // 0 = Jan
+      const day = now.getDate();
+      const isSnowSeasonClosure =
+        (month === 5 && day >= 10) || // 10 Jun onwards
+        month === 6 || month === 7 || month === 8 || // Jul–Sep
+        (month === 9 && day <= 10); // up to 10 Oct
+      return {
+        id: "kosciuszko-road-charlottes",
+        roadName: "Kosciuszko Road",
+        segment: "Perisher to Charlotte's Pass",
+        condition: (isSnowSeasonClosure ? "closed" : "open") as "closed" | "open",
+        description: isSnowSeasonClosure
+          ? "Closed for the snow season (mid-June to early October). Charlotte's Pass is accessible only by oversnow transport (snowcat) from Perisher during this period."
+          : "Open outside the snow season. Sealed alpine road from Perisher to Charlotte's Pass village — drive with care, rapid weather changes possible.",
+        chainsRequired: false,
+        lastUpdated: new Date().toISOString(),
+        source: "NSW NPWS / Transport for NSW",
+        detailUrl: "https://www.livetraffic.com/desktop.html#702055",
+        affectedResorts: ["charlottes-pass"],
+      };
+    })(),
     {
       id: "snowy-mountains-highway",
       roadName: "Snowy Mountains Highway",
