@@ -178,16 +178,6 @@ const WEBCAM_DATA: WebcamConfig[] = [
         type: "road",
         roadName: "Kosciuszko Road",
       },
-      {
-        id: "smh-thredbo-village",
-        name: "Thredbo Village · Alpine Way",
-        description: "Village arrival on the Alpine Way — shows actual road surface and chain conditions at the resort entrance.",
-        imageUrl: `${THREDBO_S3}/Coaster01.jpg`,
-        pageUrl: "https://www.thredbo.com.au/weather/snow-cams",
-        elevation: 1365,
-        type: "road",
-        roadName: "Alpine Way",
-      },
     ],
   },
 
