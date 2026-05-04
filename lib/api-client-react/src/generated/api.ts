@@ -3079,24 +3079,12 @@ export function useGetWebcams<
  * Returns webcam feeds for a specific resort location
  * @summary Get webcams for a specific location
  */
-export const getGetLocationWebcamsUrl = (
-  locationId:
-    | "thredbo"
-    | "perisher"
-    | "charlottes-pass"
-    | "selwyn"
-    | "jindabyne",
-) => {
+export const getGetLocationWebcamsUrl = (locationId: string) => {
   return `/api/webcams/${locationId}`;
 };
 
 export const getLocationWebcams = async (
-  locationId:
-    | "thredbo"
-    | "perisher"
-    | "charlottes-pass"
-    | "selwyn"
-    | "jindabyne",
+  locationId: string,
   options?: RequestInit,
 ): Promise<LocationWebcams> => {
   return customFetch<LocationWebcams>(getGetLocationWebcamsUrl(locationId), {
@@ -3105,14 +3093,7 @@ export const getLocationWebcams = async (
   });
 };
 
-export const getGetLocationWebcamsQueryKey = (
-  locationId:
-    | "thredbo"
-    | "perisher"
-    | "charlottes-pass"
-    | "selwyn"
-    | "jindabyne",
-) => {
+export const getGetLocationWebcamsQueryKey = (locationId: string) => {
   return [`/api/webcams/${locationId}`] as const;
 };
 
@@ -3120,12 +3101,7 @@ export const getGetLocationWebcamsQueryOptions = <
   TData = Awaited<ReturnType<typeof getLocationWebcams>>,
   TError = ErrorType<ErrorResponse>,
 >(
-  locationId:
-    | "thredbo"
-    | "perisher"
-    | "charlottes-pass"
-    | "selwyn"
-    | "jindabyne",
+  locationId: string,
   options?: {
     query?: UseQueryOptions<
       Awaited<ReturnType<typeof getLocationWebcams>>,
@@ -3170,12 +3146,7 @@ export function useGetLocationWebcams<
   TData = Awaited<ReturnType<typeof getLocationWebcams>>,
   TError = ErrorType<ErrorResponse>,
 >(
-  locationId:
-    | "thredbo"
-    | "perisher"
-    | "charlottes-pass"
-    | "selwyn"
-    | "jindabyne",
+  locationId: string,
   options?: {
     query?: UseQueryOptions<
       Awaited<ReturnType<typeof getLocationWebcams>>,

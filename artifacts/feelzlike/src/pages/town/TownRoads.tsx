@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { useMemo } from "react";
-import { useGetRoadConditions } from "@workspace/api-client-react";
-import { AlertTriangle, Car, ExternalLink, Info, MapPin, Navigation } from "lucide-react";
+import { useMemo, useState } from "react";
+import { useGetRoadConditions, useGetWebcams } from "@workspace/api-client-react";
+import { AlertTriangle, Camera, Car, ExternalLink, Info, MapPin, Navigation } from "lucide-react";
 import { useRegion, useLanguage, useBaseTown, LiveBadge } from "@workspace/feelzlike-shell";
 
 function statusClasses(c: string): string {
@@ -15,6 +15,64 @@ function statusClasses(c: string): string {
   }
 }
 
+function RoadCamCard({ cam, t }: { cam: { id: string; name: string; description?: string; imageUrl: string; pageUrl?: string; roadName?: string }; t: (en: string, ja?: string) => string }) {
+  const [imgError, setImgError] = useState(false);
+  return (
+    <article className="rounded-2xl border border-border bg-white overflow-hidden hover:border-primary/40 hover:shadow-md transition-all flex flex-col">
+      <div className="relative aspect-video bg-secondary overflow-hidden">
+        {!imgError ? (
+          <img
+            src={cam.imageUrl}
+            alt={cam.name}
+            loading="lazy"
+            referrerPolicy="no-referrer"
+            onError={() => setImgError(true)}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <a
+            href={cam.pageUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="absolute inset-0 flex flex-col items-center justify-center text-center p-4 hover:bg-secondary/60 transition-colors"
+          >
+            <Camera className="w-8 h-8 text-muted-foreground/40 mb-2" />
+            <p className="text-xs font-semibold text-foreground">
+              {t("Open live feed", "ライブ映像を開く")}
+            </p>
+            <p className="text-[11px] text-muted-foreground mt-1 inline-flex items-center gap-1">
+              {t("Source page", "ソースページ")} <ExternalLink className="w-3 h-3" />
+            </p>
+          </a>
+        )}
+        {cam.roadName && (
+          <div className="absolute top-3 left-3 rounded-full bg-white/90 backdrop-blur-md px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider inline-flex items-center gap-1 shadow-sm">
+            <Navigation className="w-3 h-3" />
+            {cam.roadName}
+          </div>
+        )}
+      </div>
+      <div className="p-4 flex-1 flex flex-col">
+        <h4 className="font-display font-semibold text-base text-foreground leading-tight">{cam.name}</h4>
+        {cam.description && (
+          <p className="text-xs text-muted-foreground mt-1.5 line-clamp-3 leading-relaxed">{cam.description}</p>
+        )}
+        {cam.pageUrl && !imgError && (
+          <a
+            href={cam.pageUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-auto pt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
+          >
+            {t("Open source page", "ソースページを開く")}
+            <ExternalLink className="w-3 h-3" />
+          </a>
+        )}
+      </div>
+    </article>
+  );
+}
+
 export function TownRoads() {
   const { region } = useRegion();
   const { t } = useLanguage();
@@ -23,6 +81,14 @@ export function TownRoads() {
   const query = useGetRoadConditions({
     query: { enabled: dataAvailable },
   });
+  const camsQuery = useGetWebcams();
+  const roadCams = useMemo(() => {
+    const loc = camsQuery.data?.locations.find((l) => l.locationId === `${region.id}-roads`);
+    return loc?.webcams.filter((w) => w.type === "road") ?? [];
+  }, [camsQuery.data, region.id]);
+  const roadCamsSourcePageUrl = useMemo(() => {
+    return camsQuery.data?.locations.find((l) => l.locationId === `${region.id}-roads`)?.webcamPageUrl;
+  }, [camsQuery.data, region.id]);
 
   const roads = useMemo(() => {
     if (!query.data || !town) return [];
@@ -174,6 +240,45 @@ export function TownRoads() {
             )}
           </p>
         </div>
+      )}
+
+      {roadCams.length > 0 && (
+        <motion.section
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="mt-12"
+        >
+          <div className="flex items-end justify-between mb-4 flex-wrap gap-2">
+            <div>
+              <h2 className="font-display font-semibold text-2xl text-foreground inline-flex items-center gap-2">
+                <Camera className="w-5 h-5 text-primary" />
+                {t("Roadside cams", "道路ライブカメラ")}
+              </h2>
+              <p className="text-sm text-muted-foreground mt-1">
+                {t(
+                  "Live looks at the actual road surface — chains, slush, ice.",
+                  "実際の路面のライブ映像 — チェーン、シャーベット、凍結。",
+                )}
+              </p>
+            </div>
+            {roadCamsSourcePageUrl && (
+              <a
+                href={roadCamsSourcePageUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-semibold text-primary hover:underline inline-flex items-center gap-1"
+              >
+                {t("All road cams", "全カメラ")} <ExternalLink className="w-3 h-3" />
+              </a>
+            )}
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {roadCams.map((cam) => (
+              <RoadCamCard key={cam.id} cam={cam} t={t} />
+            ))}
+          </div>
+        </motion.section>
       )}
 
       {dataAvailable && query.data?.lastUpdated && region.roadsSource && (

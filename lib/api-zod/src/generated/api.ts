@@ -997,6 +997,16 @@ export const GetWebcamsResponse = zod.object({
           elevation: zod.number().optional(),
           direction: zod.string().optional(),
           lastUpdated: zod.string().optional(),
+          type: zod
+            .enum(["mountain", "road", "village"])
+            .optional()
+            .describe(
+              "Camera type. `mountain` = on the ski hill (lifts, runs).\n`road` = roadside \/ road-surface camera (chain bays, alpine highways).\n`village` = base-town \/ village street view.\n",
+            ),
+          roadName: zod
+            .string()
+            .optional()
+            .describe("For road cams, the name of the road this camera is on."),
         }),
       ),
       webcamPageUrl: zod.string(),
@@ -1009,14 +1019,12 @@ export const GetWebcamsResponse = zod.object({
  * Returns webcam feeds for a specific resort location
  * @summary Get webcams for a specific location
  */
+export const getLocationWebcamsPathLocationIdRegExp = new RegExp(
+  "^[a-z0-9-]+$",
+);
+
 export const GetLocationWebcamsParams = zod.object({
-  locationId: zod.enum([
-    "thredbo",
-    "perisher",
-    "charlottes-pass",
-    "selwyn",
-    "jindabyne",
-  ]),
+  locationId: zod.coerce.string().regex(getLocationWebcamsPathLocationIdRegExp),
 });
 
 export const GetLocationWebcamsResponse = zod.object({
@@ -1032,6 +1040,16 @@ export const GetLocationWebcamsResponse = zod.object({
       elevation: zod.number().optional(),
       direction: zod.string().optional(),
       lastUpdated: zod.string().optional(),
+      type: zod
+        .enum(["mountain", "road", "village"])
+        .optional()
+        .describe(
+          "Camera type. `mountain` = on the ski hill (lifts, runs).\n`road` = roadside \/ road-surface camera (chain bays, alpine highways).\n`village` = base-town \/ village street view.\n",
+        ),
+      roadName: zod
+        .string()
+        .optional()
+        .describe("For road cams, the name of the road this camera is on."),
     }),
   ),
   webcamPageUrl: zod.string(),

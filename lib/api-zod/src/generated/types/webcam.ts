@@ -5,6 +5,7 @@
  * Yamanouchi Snow Intelligence Platform API
  * OpenAPI spec version: 0.1.0
  */
+import type { WebcamType } from "./webcamType";
 
 export interface Webcam {
   id: string;
@@ -15,4 +16,11 @@ export interface Webcam {
   elevation?: number;
   direction?: string;
   lastUpdated?: string;
+  /** Camera type. `mountain` = on the ski hill (lifts, runs).
+`road` = roadside / road-surface camera (chain bays, alpine highways).
+`village` = base-town / village street view.
+ */
+  type?: WebcamType;
+  /** For road cams, the name of the road this camera is on. */
+  roadName?: string;
 }

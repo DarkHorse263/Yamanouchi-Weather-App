@@ -828,6 +828,20 @@ export interface BusServiceResponse {
   routes: BusRoute[];
 }
 
+/**
+ * Camera type. `mountain` = on the ski hill (lifts, runs).
+`road` = roadside / road-surface camera (chain bays, alpine highways).
+`village` = base-town / village street view.
+
+ */
+export type WebcamType = (typeof WebcamType)[keyof typeof WebcamType];
+
+export const WebcamType = {
+  mountain: "mountain",
+  road: "road",
+  village: "village",
+} as const;
+
 export interface Webcam {
   id: string;
   name: string;
@@ -837,6 +851,13 @@ export interface Webcam {
   elevation?: number;
   direction?: string;
   lastUpdated?: string;
+  /** Camera type. `mountain` = on the ski hill (lifts, runs).
+`road` = roadside / road-surface camera (chain bays, alpine highways).
+`village` = base-town / village street view.
+ */
+  type?: WebcamType;
+  /** For road cams, the name of the road this camera is on. */
+  roadName?: string;
 }
 
 export interface LocationWebcams {

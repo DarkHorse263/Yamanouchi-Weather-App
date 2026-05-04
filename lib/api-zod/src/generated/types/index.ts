@@ -76,3 +76,4 @@ export * from "./updateDiningBody";
 export * from "./weatherResponse";
 export * from "./webcam";
 export * from "./webcamResponse";
+export * from "./webcamType";

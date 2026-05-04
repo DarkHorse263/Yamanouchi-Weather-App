@@ -753,7 +753,8 @@ paths:
           required: true
           schema:
             type: string
-            enum: [thredbo, perisher, charlottes-pass, selwyn, jindabyne]
+            pattern: "^[a-z0-9-]+$"
+            description: Webcam location id (resort id, town id, or `<region-id>-roads` for roadside cams).
       responses:
         "200":
           description: Webcam data for the location
@@ -2022,6 +2023,16 @@ components:
           type: string
         lastUpdated:
           type: string
+        type:
+          type: string
+          enum: [mountain, road, village]
+          description: |
+            Camera type. `mountain` = on the ski hill (lifts, runs).
+            `road` = roadside / road-surface camera (chain bays, alpine highways).
+            `village` = base-town / village street view.
+        roadName:
+          type: string
+          description: For road cams, the name of the road this camera is on.
       required:
         - id
         - name
