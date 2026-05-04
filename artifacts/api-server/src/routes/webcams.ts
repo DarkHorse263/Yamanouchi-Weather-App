@@ -95,8 +95,30 @@ const WEBCAM_DATA: WebcamConfig[] = [
   {
     locationId: "perisher",
     locationName: "Perisher",
-    webcamPageUrl: "https://www.perisher.com.au/the-mountain/web-cams",
-    webcams: [],
+    webcamPageUrl: "https://www.perisher.com.au/reports-cams/cams",
+    // Source: https://www.perisher.com.au/reports-cams/cams — all 12 official
+    // Perisher snowcams. Image URL pattern: /images/snowcams/X<id>.jpg.
+    webcams: ([
+      ["front", "Front Valley", "Beginner area looking up Front Valley from Perisher Centre — the heart of the resort."],
+      ["smiggin", "Smiggin Holes", "Smiggin Holes village — entry point to the Perisher network."],
+      ["bluecow", "Blue Cow", "Blue Cow summit looking across to Guthega and Mt Perisher."],
+      ["cowt", "Cow T-Bar", "Cow T-Bar / Brumby area — popular intermediate runs."],
+      ["cv", "Crackenback Valley", "Crackenback Valley looking down toward Pretty Valley."],
+      ["excelerator", "Excelerator Express", "Top of the Excelerator Express quad — wide alpine view."],
+      ["guthegamain", "Guthega Main", "Guthega base — the quietest village in the Perisher network."],
+      ["happy", "Happy Valley", "Happy Valley looking toward Mt Perisher — beginner / intermediate slopes."],
+      ["kosci", "Kosciuszko Chair", "Top of Mt Perisher Double Chair — looking out toward Mt Kosciuszko."],
+      ["mtp", "Mt Perisher", "Mt Perisher summit area — the highest lifted terrain in the resort."],
+      ["summit", "Perisher Summit", "Perisher summit panorama across the Main Range."],
+      ["v8", "V8 Express", "Top of the V8 Express quad — North Perisher terrain."],
+    ] as const).map(([slug, name, description]) => ({
+      id: `perisher-${slug}`,
+      name,
+      description,
+      imageUrl: `https://www.perisher.com.au/images/snowcams/X${slug}.jpg`,
+      pageUrl: `https://www.perisher.com.au/reports-cams/cams#X${slug}`,
+      type: "mountain" as const,
+    })),
   },
   {
     locationId: "charlottes-pass",

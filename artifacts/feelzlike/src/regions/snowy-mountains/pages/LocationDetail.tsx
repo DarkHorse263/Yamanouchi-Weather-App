@@ -499,21 +499,63 @@ export default function LocationDetail() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="glass rounded-3xl p-5 md:p-8"
+              className="glass rounded-3xl p-5 md:p-8 lg:col-span-2"
             >
-              <p className="byline text-muted-foreground">07 · Eyes on the mountain</p>
-              <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 mb-5 flex items-center gap-2">
-                <Camera className="text-primary w-5 h-5" />
-                Live webcams
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {webcamData.webcams.slice(0, 4).map((webcam: any) => (
-                  <div key={webcam.id} className="group overflow-hidden rounded-2xl bg-black/40 relative aspect-video border border-white/10">
-                    <img src={webcam.imageUrl} alt={webcam.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
-                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent p-3">
-                      <p className="text-white text-xs font-semibold truncate">{webcam.name}</p>
+              <div className="flex items-end justify-between mb-5 gap-4">
+                <div>
+                  <p className="byline text-muted-foreground">07 · Eyes on the mountain</p>
+                  <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
+                    <Camera className="text-primary w-5 h-5" />
+                    Live webcams
+                  </h2>
+                </div>
+                {webcamData.webcamPageUrl && (
+                  <a
+                    href={webcamData.webcamPageUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-semibold text-primary hover:underline whitespace-nowrap"
+                  >
+                    All cams ↗
+                  </a>
+                )}
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                {webcamData.webcams.map((webcam: any) => (
+                  <a
+                    key={webcam.id}
+                    href={webcam.pageUrl ?? webcam.imageUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block overflow-hidden rounded-2xl bg-muted/40 border border-border hover:border-primary/40 transition-colors"
+                  >
+                    <div className="relative aspect-video bg-muted/60 overflow-hidden">
+                      <img
+                        src={webcam.imageUrl}
+                        alt={webcam.name}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        loading="lazy"
+                        onError={(e) => {
+                          (e.currentTarget as HTMLImageElement).style.display = "none";
+                          const fb = e.currentTarget.nextElementSibling as HTMLElement | null;
+                          if (fb) fb.style.display = "flex";
+                        }}
+                      />
+                      <div
+                        style={{ display: "none" }}
+                        className="absolute inset-0 flex-col items-center justify-center text-muted-foreground text-[10px] gap-1 bg-muted/40"
+                      >
+                        <Camera className="w-5 h-5 opacity-50" />
+                        <span>Open live feed</span>
+                      </div>
                     </div>
-                  </div>
+                    <div className="px-3 py-2">
+                      <p className="font-semibold text-foreground text-xs truncate">{webcam.name}</p>
+                      {webcam.description && (
+                        <p className="text-[10px] text-muted-foreground mt-0.5 line-clamp-2">{webcam.description}</p>
+                      )}
+                    </div>
+                  </a>
                 ))}
               </div>
             </motion.div>
