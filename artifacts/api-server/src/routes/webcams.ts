@@ -143,16 +143,6 @@ const WEBCAM_DATA: WebcamConfig[] = [
     webcamPageUrl: "https://www.livetraffic.com/desktop.html#/map/?lat=-36.45&lng=148.45&zoom=10",
     webcams: [
       {
-        id: "smh-cabramurra",
-        name: "Cabramurra · Snowy Mountains Hwy",
-        description: "Snowy Hydro snow cam from Australia's highest town. Best indicator of snow on the Snowy Mountains Highway between Cooma and Khancoban.",
-        imageUrl: "https://www.snowyhydro.com.au/wp-content/uploads/Cabramurra-snow-cam.jpg",
-        pageUrl: "https://www.snowyhydro.com.au/snow-cams/",
-        elevation: 1488,
-        type: "road",
-        roadName: "Snowy Mountains Highway",
-      },
-      {
         id: "smh-cooma-livetraffic",
         name: "Cooma · Snowy Mountains Hwy",
         description: "Live Traffic NSW alpine camera at the Cooma gateway — last reliable check before the climb to Jindabyne. Opens directly on the Cooma camera in Live Traffic NSW.",
