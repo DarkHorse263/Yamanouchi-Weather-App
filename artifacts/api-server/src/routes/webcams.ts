@@ -152,16 +152,6 @@ const WEBCAM_DATA: WebcamConfig[] = [
         roadName: "Snowy Mountains Highway",
       },
       {
-        id: "smh-bullocks-flat",
-        name: "Bullocks Flat · Kosciuszko Rd",
-        description: "Skitube terminal area on Kosciuszko Road. Useful when deciding to drive on to Perisher or take the train. Opens the official Perisher cams page.",
-        imageUrl: "https://www.perisher.com.au/-/media/perisher/cams/skitube-bullocks.jpg",
-        pageUrl: "https://www.perisher.com.au/the-mountain/web-cams",
-        elevation: 1130,
-        type: "road",
-        roadName: "Kosciuszko Road",
-      },
-      {
         id: "smh-kosciuszko-perisher-valley",
         name: "Kosciuszko Rd and Perisher Valley",
         description: "Official Live Traffic NSW alpine camera at the Perisher Valley turnoff — the highest point on Kosciuszko Rd, often the first place to ice over. Image refreshes when TfNSW reactivates the camera for snow season.",
