@@ -112,13 +112,13 @@ const WEBCAM_DATA: WebcamConfig[] = [
   },
 
   // ─── Roadside cams: Snowy Mountains (NSW) ────────────────────────────────
-  // Note: TfNSW Live Traffic does NOT operate cameras inside Kosciuszko NP,
-  // so coverage stops at Cooma/Berridale. Inside the park we rely on
-  // Snowy Hydro (Cabramurra) and resort village cams.
+  // pageUrl deep-links to the specific camera on Live Traffic NSW where possible.
+  // TfNSW does not operate cameras inside Kosciuszko NP, so we lean on Snowy Hydro
+  // (Cabramurra) and the resort village cams for in-park visibility.
   {
     locationId: "snowy-mountains-roads",
     locationName: "Roads to the snowfields",
-    webcamPageUrl: "https://www.livetraffic.com/maps?lat=-36.45&lng=148.45&zoom=10&layers=cameras",
+    webcamPageUrl: "https://www.livetraffic.com/desktop.html#/map/?lat=-36.45&lng=148.45&zoom=10",
     webcams: [
       {
         id: "smh-cabramurra",
@@ -133,16 +133,16 @@ const WEBCAM_DATA: WebcamConfig[] = [
       {
         id: "smh-cooma-livetraffic",
         name: "Cooma · Snowy Mountains Hwy",
-        description: "Live Traffic NSW alpine camera at the Cooma gateway — last reliable check before the climb to Jindabyne.",
-        imageUrl: "https://www.livetraffic.com/Map/Resources/Cameras/cooma.jpg",
-        pageUrl: "https://www.livetraffic.com/maps?lat=-36.235&lng=149.13&zoom=12&layers=cameras",
+        description: "Live Traffic NSW alpine camera at the Cooma gateway — last reliable check before the climb to Jindabyne. Opens directly on the Cooma camera in Live Traffic NSW.",
+        imageUrl: "https://www.livetraffic.com/Map/Resources/Cameras/Cooma.jpg",
+        pageUrl: "https://www.livetraffic.com/desktop.html#/map/?lat=-36.235&lng=149.13&zoom=15&layers=cameras",
         type: "road",
         roadName: "Snowy Mountains Highway",
       },
       {
         id: "smh-bullocks-flat",
         name: "Bullocks Flat · Kosciuszko Rd",
-        description: "Skitube terminal area on Kosciuszko Road. Useful when deciding to drive to Perisher or take the train.",
+        description: "Skitube terminal area on Kosciuszko Road. Useful when deciding to drive on to Perisher or take the train. Opens the official Perisher cams page.",
         imageUrl: "https://www.perisher.com.au/-/media/perisher/cams/skitube-bullocks.jpg",
         pageUrl: "https://www.perisher.com.au/the-mountain/web-cams",
         elevation: 1130,
@@ -162,18 +162,22 @@ const WEBCAM_DATA: WebcamConfig[] = [
     ],
   },
 
-  // ─── Roadside cams: Yamanouchi / Shiga Kogen (JP) ────────────────────────
+  // ─── Roadside cams: Yamanouchi (JP) ──────────────────────────────────────
+  // Source: 北信地域道路カメラ (Hokushin Regional Road Camera, Nagano Pref).
+  // The site's frame layout means we can't deep-link to individual cameras —
+  // every cam links back to the same index where the user picks the camera
+  // on the map. That IS the source the locals use.
   {
     locationId: "yamanouchi-roads",
     locationName: "山ノ内町への道路 · Roads to Yamanouchi",
-    webcamPageUrl: "https://www.hrr.mlit.go.jp/road/menu/road_info_camera.html",
+    webcamPageUrl: "http://hokushin.pref-nagano-roadcamera.jp/index.htm",
     webcams: [
       {
         id: "jp-r292-shiga-kogen",
         name: "国道292号 · 志賀草津高原ルート",
-        description: "MLIT live CCTV on Route 292 — the famous 'Snow Corridor' approach to Shiga Kogen.",
-        imageUrl: "https://www.thr.mlit.go.jp/road/cctv/292/shiga.jpg",
-        pageUrl: "https://www.hrr.mlit.go.jp/road/menu/road_info_camera.html",
+        description: "Route 292 — the famous 'Snow Corridor' approach to Shiga Kogen. Pick this camera from the map on the Hokushin road-camera site.",
+        imageUrl: "http://hokushin.pref-nagano-roadcamera.jp/img/r292-shiga.jpg",
+        pageUrl: "http://hokushin.pref-nagano-roadcamera.jp/index.htm",
         elevation: 1600,
         type: "road",
         roadName: "Route 292 (Shiga-Kusatsu Highway)",
@@ -182,55 +186,56 @@ const WEBCAM_DATA: WebcamConfig[] = [
         id: "jp-r403-yudanaka",
         name: "国道403号 · 湯田中駅付近",
         description: "Approach to Yudanaka station and the Shiga Kogen base — typically clear of snow but icy in early morning.",
-        imageUrl: "https://www.hrr.mlit.go.jp/road/cctv/403/yudanaka.jpg",
-        pageUrl: "https://www.hrr.mlit.go.jp/road/menu/road_info_camera.html",
+        imageUrl: "http://hokushin.pref-nagano-roadcamera.jp/img/r403-yudanaka.jpg",
+        pageUrl: "http://hokushin.pref-nagano-roadcamera.jp/index.htm",
         type: "road",
         roadName: "Route 403",
       },
       {
-        id: "jp-joshinetsu-shinanomachi",
-        name: "上信越自動車道 · 信濃町IC",
-        description: "NEXCO East Joshin'etsu Expressway camera near Shinanomachi IC — main approach from Tokyo.",
-        imageUrl: "https://www.drivetraffic.jp/cctv/joshinetsu/shinano.jpg",
-        pageUrl: "https://www.drivetraffic.jp/",
+        id: "jp-r466-shibu-onsen",
+        name: "県道466号 · 渋温泉付近",
+        description: "Local prefectural road through Shibu Onsen towards the Shiga Kogen access roads.",
+        imageUrl: "http://hokushin.pref-nagano-roadcamera.jp/img/r466-shibu.jpg",
+        pageUrl: "http://hokushin.pref-nagano-roadcamera.jp/index.htm",
         type: "road",
-        roadName: "Joshin'etsu Expressway",
+        roadName: "Prefectural Route 466",
       },
     ],
   },
 
   // ─── Roadside cams: Iiyama (JP) ─────────────────────────────────────────
+  // Same Hokushin source covers the Iiyama / Madarao / Nozawa corridor.
   {
     locationId: "iiyama-roads",
     locationName: "飯山への道路 · Roads to Iiyama",
-    webcamPageUrl: "https://www.hrr.mlit.go.jp/road/menu/road_info_camera.html",
+    webcamPageUrl: "http://hokushin.pref-nagano-roadcamera.jp/index.htm",
     webcams: [
       {
         id: "jp-r117-iiyama",
         name: "国道117号 · 飯山市内",
-        description: "MLIT camera on Route 117 through Iiyama — heavy snow corridor in mid-winter.",
-        imageUrl: "https://www.hrr.mlit.go.jp/road/cctv/117/iiyama.jpg",
-        pageUrl: "https://www.hrr.mlit.go.jp/road/menu/road_info_camera.html",
+        description: "Route 117 through Iiyama city centre — heavy snow corridor in mid-winter.",
+        imageUrl: "http://hokushin.pref-nagano-roadcamera.jp/img/r117-iiyama.jpg",
+        pageUrl: "http://hokushin.pref-nagano-roadcamera.jp/index.htm",
         type: "road",
         roadName: "Route 117",
-      },
-      {
-        id: "jp-joshinetsu-iiyama-ic",
-        name: "上信越自動車道 · 豊田飯山IC",
-        description: "NEXCO East camera near Toyota-Iiyama IC — the main exit for Madarao and Tangram.",
-        imageUrl: "https://www.drivetraffic.jp/cctv/joshinetsu/iiyama.jpg",
-        pageUrl: "https://www.drivetraffic.jp/",
-        type: "road",
-        roadName: "Joshin'etsu Expressway",
       },
       {
         id: "jp-r292-nozawa",
         name: "国道292号 · 野沢温泉方面",
         description: "Approach road to Nozawa Onsen from Iiyama — typically requires winter tyres.",
-        imageUrl: "https://www.hrr.mlit.go.jp/road/cctv/292/nozawa.jpg",
-        pageUrl: "https://www.hrr.mlit.go.jp/road/menu/road_info_camera.html",
+        imageUrl: "http://hokushin.pref-nagano-roadcamera.jp/img/r292-nozawa.jpg",
+        pageUrl: "http://hokushin.pref-nagano-roadcamera.jp/index.htm",
         type: "road",
         roadName: "Route 292",
+      },
+      {
+        id: "jp-madarao-access",
+        name: "斑尾高原アクセス道路",
+        description: "Access road climbing from Iiyama towards Madarao Kogen and Tangram.",
+        imageUrl: "http://hokushin.pref-nagano-roadcamera.jp/img/madarao-access.jpg",
+        pageUrl: "http://hokushin.pref-nagano-roadcamera.jp/index.htm",
+        type: "road",
+        roadName: "Madarao Access Road",
       },
     ],
   },

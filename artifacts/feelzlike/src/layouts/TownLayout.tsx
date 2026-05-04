@@ -6,7 +6,6 @@ import { TownSubpageStub } from "@/pages/region/TownSubpageStub";
 import { TownStay } from "@/pages/town/TownStay";
 import { TownPlaces } from "@/pages/town/TownPlaces";
 import { TownRoads } from "@/pages/town/TownRoads";
-import { TownCams } from "@/pages/town/TownCams";
 import { TownTransport } from "@/pages/town/TownTransport";
 import { TownWeather } from "@/pages/town/TownWeather";
 
@@ -37,7 +36,9 @@ export function TownLayout() {
         <Route path="/" component={TownHome} />
         <Route path="/weather" component={TownWeather} />
         <Route path="/roads" component={TownRoads} />
-        <Route path="/cams" component={TownCams} />
+        <Route path="/cams">
+          <Redirect to="/roads" />
+        </Route>
         <Route path="/transport" component={TownTransport} />
         <Route path="/stay" component={TownStay} />
         <Route path="/eat">

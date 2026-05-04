@@ -1,7 +1,6 @@
 import {
   Home,
   Mountain,
-  Video,
   Car,
   Cable,
   Bus,
@@ -24,7 +23,6 @@ export const yamanouchiRegion: RegionConfig = {
   nav: [
     { path: "/",          icon: Home,           label: "Today",     labelJa: "今日" },
     { path: "/mountains", icon: Mountain,       label: "Mountains", labelJa: "スキー場" },
-    { path: "/cams",      icon: Video,          label: "Cams",      labelJa: "ライブ" },
     { path: "/roads",     icon: Car,            label: "Roads",     labelJa: "道路" },
     { path: "/lifts",     icon: Cable,          label: "Lifts",     labelJa: "リフト", season: "winter" },
     { path: "/transport", icon: Bus,            label: "Transport", labelJa: "交通", group: "secondary" },

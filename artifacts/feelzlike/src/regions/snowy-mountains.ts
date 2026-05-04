@@ -1,7 +1,6 @@
 import {
   Home,
   Mountain,
-  Video,
   Car,
   Cable,
   Bus,
@@ -24,7 +23,6 @@ export const snowyMountainsRegion: RegionConfig = {
   nav: [
     { path: "/",          icon: Home,           label: "Today" },
     { path: "/mountains", icon: Mountain,       label: "Mountains" },
-    { path: "/cams",      icon: Video,          label: "Cams" },
     { path: "/roads",     icon: Car,            label: "Roads" },
     { path: "/lifts",     icon: Cable,          label: "Lifts", season: "winter" },
     { path: "/radar",     icon: RadarIcon,      label: "Radar" },

@@ -1,7 +1,6 @@
 import {
   Home,
   Car,
-  Video,
   Bus,
   BedDouble,
   UtensilsCrossed,
@@ -17,7 +16,6 @@ import type { NavItem } from "./types";
 export const DEFAULT_TOWN_NAV: NavItem[] = [
   { path: "/",          icon: Home,            label: "Today",     labelJa: "今日" },
   { path: "/roads",     icon: Car,             label: "Roads",     labelJa: "道路" },
-  { path: "/cams",      icon: Video,           label: "Cams",      labelJa: "ライブ" },
   { path: "/transport", icon: Bus,             label: "Transport", labelJa: "交通" },
   { path: "/stay",      icon: BedDouble,       label: "Stay",      labelJa: "宿泊" },
   { path: "/eat",       icon: UtensilsCrossed, label: "Eat",       labelJa: "食事" },
