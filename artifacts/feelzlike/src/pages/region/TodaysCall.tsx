@@ -7,9 +7,11 @@ import {
   Wind,
   Thermometer,
   CloudFog,
-  Mountain as MountainIcon,
   Car,
   Sparkles,
+  ExternalLink,
+  Trophy,
+  TrendingUp,
 } from "lucide-react";
 import {
   useRegion,
@@ -25,19 +27,10 @@ import { useGetWeather } from "@workspace/api-client-react";
 /* ------------------------------------------------------------------ */
 
 interface MountainScore {
-  /** 0–100 composite score. Higher = better day on this mountain. */
   total: number;
-  /** Individual sub-scores so we can show what drove the call. */
-  sub: {
-    snow: number;     // depth + freshness
-    wind: number;     // calmer = better
-    temp: number;     // cold-but-not-stupid = better
-    visibility: number; // less cloud = better
-  };
-  /** Short headline e.g. "POWDER DAY" or "BLUEBIRD" */
+  sub: { snow: number; wind: number; temp: number; visibility: number };
   headline: string;
   headlineJa: string;
-  /** Tone class for the headline */
   tone: "powder" | "bluebird" | "fair" | "marginal" | "no-go";
 }
 
@@ -48,7 +41,8 @@ interface MountainRow {
   elevationM?: number;
   blurb?: string;
   blurbJa?: string;
-  /** Live weather snapshot (may be undefined if API hasn't returned this mountain) */
+  websiteUrl?: string;
+  parentId?: string;
   w: {
     temperature: number;
     feelsLike: number;
@@ -68,7 +62,6 @@ function clamp(n: number, lo: number, hi: number) {
   return Math.max(lo, Math.min(hi, n));
 }
 
-/** Snowfall-implying weather codes (Open-Meteo / WMO) */
 const SNOW_CODES = new Set([71, 73, 75, 77, 85, 86]);
 
 function scoreMountain(
@@ -87,19 +80,15 @@ function scoreMountain(
 
   const isSnowing = SNOW_CODES.has(w.weatherCode);
 
-  // ── Snow / surface (40 pts in winter, 0 in green) ────────────────
   let snow = 0;
   if (season === "winter") {
-    const depthScore = clamp(w.snowDepth * 25, 0, 30); // 1.2m+ → max
+    const depthScore = clamp(w.snowDepth * 25, 0, 30);
     const fallBonus = isSnowing ? 10 : 0;
     snow = clamp(depthScore + fallBonus, 0, 40);
   }
 
-  // ── Wind (25 pts; 0 km/h = best, ≥60 = unrideable) ───────────────
   const wind = clamp(25 - (w.windSpeed / 60) * 25, 0, 25);
 
-  // ── Temperature (20 pts) ─────────────────────────────────────────
-  // Winter sweet spot: -8 to -2 °C. Green sweet spot: 12 to 22 °C.
   let temp = 0;
   if (season === "winter") {
     const t = w.temperature;
@@ -116,18 +105,17 @@ function scoreMountain(
     else temp = clamp(8 - Math.abs(t - 17) * 0.5, 0, 8);
   }
 
-  // ── Visibility (15 pts; less cloud = better) ─────────────────────
-  const visibility = w.cloudCover !== undefined
-    ? clamp(15 - (w.cloudCover / 100) * 15, 0, 15)
-    : 8;
+  const visibility =
+    w.cloudCover !== undefined
+      ? clamp(15 - (w.cloudCover / 100) * 15, 0, 15)
+      : 8;
 
   const total = Math.round(
     season === "winter"
       ? snow + wind + temp + visibility
-      : wind + temp + visibility + 40, /* no snow penalty in green */
+      : wind + temp + visibility + 40,
   );
 
-  // ── Headline & tone ──────────────────────────────────────────────
   let headline = "Fair";
   let headlineJa = "まずまず";
   let tone: MountainScore["tone"] = "fair";
@@ -162,13 +150,7 @@ function scoreMountain(
     }
   }
 
-  return {
-    total,
-    sub: { snow, wind, temp, visibility },
-    headline,
-    headlineJa,
-    tone,
-  };
+  return { total, sub: { snow, wind, temp, visibility }, headline, headlineJa, tone };
 }
 
 /* ------------------------------------------------------------------ */
@@ -191,7 +173,6 @@ function haversineKm(
   return 2 * R * Math.asin(Math.sqrt(h));
 }
 
-/** Rough drive-time estimate: alpine roads avg ~50 km/h door-to-base. */
 function estimateMinutes(km: number): number {
   return Math.round((km / 50) * 60);
 }
@@ -235,9 +216,12 @@ export function TodaysCall() {
           elevationM: m.elevationM,
           blurb: m.blurb,
           blurbJa: m.blurbJa,
+          websiteUrl: m.websiteUrl,
+          parentId: m.parentId,
           w,
-          lat: entry?.location.latitude,
-          lng: entry?.location.longitude,
+          // Prefer config coords, fall back to weather location
+          lat: m.lat ?? entry?.location.latitude,
+          lng: m.lng ?? entry?.location.longitude,
           score: scoreMountain(w, season),
         };
       })
@@ -246,8 +230,28 @@ export function TodaysCall() {
 
   const winner = rows[0];
 
+  // Per-metric leaders so we can highlight the column winner in the matrix.
+  const leaders = useMemo(() => {
+    const valid = rows.filter((r) => r.w);
+    if (valid.length === 0) return null;
+    const max = (arr: MountainRow[], pick: (r: MountainRow) => number) =>
+      Math.max(...arr.map(pick));
+    const min = (arr: MountainRow[], pick: (r: MountainRow) => number) =>
+      Math.min(...arr.map(pick));
+    return {
+      snow: max(valid, (r) => r.w!.snowDepth),
+      wind: min(valid, (r) => r.w!.windSpeed),
+      // Coldest temp wins in winter, warmest in green
+      temp:
+        season === "winter"
+          ? min(valid, (r) => r.w!.temperature)
+          : max(valid, (r) => Math.abs(r.w!.temperature - 17) * -1),
+      cloud: min(valid, (r) => r.w!.cloudCover ?? 100),
+    };
+  }, [rows, season]);
+
   return (
-    <div className="px-6 md:px-10 py-8 md:py-12 max-w-6xl mx-auto">
+    <div className="px-6 md:px-10 py-8 md:py-12 max-w-7xl mx-auto">
       <motion.header
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
@@ -261,10 +265,10 @@ export function TodaysCall() {
             <h1 className="font-display font-semibold text-4xl md:text-5xl tracking-tight text-foreground mt-2">
               {t("Today's call", "今日の判断")}
             </h1>
-            <p className="text-muted-foreground mt-3 max-w-xl">
+            <p className="text-muted-foreground mt-3 max-w-2xl">
               {t(
-                `Where to head ${town?.name ? `from ${town.name}` : "today"}, ranked on live conditions. Higher score = better day on the hill.`,
-                `${town?.name ?? "今日"}からどこへ向かうか。ライブ気象に基づくスコア順。高いほど好条件。`,
+                `Every mountain in ${region.name}, scored on live snow, wind, temperature and visibility. ${town?.name ? `Drive estimates from ${town.name}.` : ""} Higher score = better day on the hill.`,
+                `${region.name}の全スキー場をライブ気象（積雪・風・気温・視界）でスコア化。${town?.name ? `${t(town.name, town.nameJa)}からの所要時間付き。` : ""}高得点ほど好条件です。`,
               )}
             </p>
           </div>
@@ -285,11 +289,14 @@ export function TodaysCall() {
 
       {!weatherQ.isLoading && !weatherQ.isError && rows.length === 0 && (
         <p className="text-muted-foreground">
-          {t("No mountains configured for this region yet.", "この地域にはまだスキー場が登録されていません。")}
+          {t(
+            "No mountains configured for this region yet.",
+            "この地域にはまだスキー場が登録されていません。",
+          )}
         </p>
       )}
 
-      {/* WINNER CARD */}
+      {/* WINNER BANNER */}
       {winner && (
         <motion.div
           key={winner.id}
@@ -298,99 +305,76 @@ export function TodaysCall() {
           transition={{ duration: 0.35 }}
           className="mb-6"
         >
-          <Link
-            href={`/mountain/${winner.id}`}
-            className="group relative block rounded-3xl border border-border bg-white overflow-hidden hover:border-primary/40 hover:shadow-md transition-all"
-          >
+          <div className="relative rounded-3xl border border-border bg-white overflow-hidden shadow-sm">
             <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary/60 via-primary to-primary/60" />
-            <div className="p-6 md:p-8">
-              <div className="flex items-start justify-between gap-4 flex-wrap">
-                <div>
-                  <div className="inline-flex items-center gap-2 byline text-primary mb-2">
-                    <Sparkles className="w-3.5 h-3.5" />
-                    {t("Top pick today", "本日のおすすめ")}
-                  </div>
-                  <h2 className="font-display font-semibold text-3xl md:text-4xl tracking-tight text-foreground">
-                    {t(winner.name, winner.nameJa)}
-                  </h2>
-                  <ToneBadge tone={winner.score.tone} text={t(winner.score.headline, winner.score.headlineJa)} />
+            <div className="grid md:grid-cols-[1fr_auto] gap-8 p-6 md:p-8 items-center">
+              <div className="min-w-0">
+                <div className="inline-flex items-center gap-2 byline text-primary mb-2">
+                  <Trophy className="w-3.5 h-3.5" />
+                  {t("Top pick today", "本日のおすすめ")}
                 </div>
-                <ScoreDial score={winner.score.total} />
+                <h2 className="font-display font-semibold text-3xl md:text-4xl tracking-tight text-foreground">
+                  {t(winner.name, winner.nameJa)}
+                </h2>
+                <div className="mt-2 flex items-center gap-3 flex-wrap">
+                  <ToneBadge
+                    tone={winner.score.tone}
+                    text={t(winner.score.headline, winner.score.headlineJa)}
+                  />
+                  {winner.elevationM && (
+                    <span className="byline text-muted-foreground/70">
+                      ELEV {winner.elevationM}M
+                    </span>
+                  )}
+                  {town && winner.lat !== undefined && winner.lng !== undefined && (
+                    <span className="byline text-muted-foreground/70 inline-flex items-center gap-1">
+                      <Car className="w-3 h-3" />
+                      {estimateMinutes(
+                        haversineKm(
+                          { lat: town.lat, lng: town.lng },
+                          { lat: winner.lat, lng: winner.lng },
+                        ),
+                      )}{" "}
+                      {t("min from", "分")} {t(town.name, town.nameJa)}
+                    </span>
+                  )}
+                </div>
+                <div className="mt-5 flex items-center gap-3 flex-wrap">
+                  <Link
+                    href={`/mountain/${winner.id}`}
+                    className="inline-flex items-center gap-1.5 rounded-lg bg-foreground text-background text-xs font-semibold px-4 py-2 hover:bg-foreground/90 transition-colors"
+                  >
+                    {t("Open mountain detail", "詳細を見る")}
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </Link>
+                  {winner.websiteUrl && (
+                    <a
+                      href={winner.websiteUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-lg border border-border text-xs font-semibold px-4 py-2 text-foreground hover:border-foreground/30 transition-colors"
+                    >
+                      {t("Resort website", "公式サイト")}
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  )}
+                </div>
               </div>
-              <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
-                {winner.w && (
-                  <>
-                    <Stat icon={Snowflake} label={t("Snow base", "積雪")} value={`${(winner.w.snowDepth ?? 0).toFixed(1)} m`} />
-                    <Stat icon={Wind} label={t("Wind", "風")} value={`${Math.round(winner.w.windSpeed)} km/h`} />
-                    <Stat icon={Thermometer} label={t("Temp", "気温")} value={`${Math.round(winner.w.temperature)}°`} />
-                    <Stat icon={CloudFog} label={t("Cloud", "雲")} value={winner.w.cloudCover !== undefined ? `${Math.round(winner.w.cloudCover)} %` : "—"} />
-                  </>
-                )}
-              </div>
-              {town && winner.lat !== undefined && winner.lng !== undefined && (
-                <JourneyLine town={town} mountainLat={winner.lat} mountainLng={winner.lng} t={t} />
-              )}
-              <div className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-primary">
-                {t("Open mountain", "詳細を見る")}
-                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </div>
+              <ScoreDial score={winner.score.total} />
             </div>
-          </Link>
+          </div>
         </motion.div>
       )}
 
-      {/* RANK LIST */}
-      {rows.length > 1 && (
-        <div className="space-y-3">
-          {rows.slice(1).map((row, idx) => (
-            <motion.div
-              key={row.id}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.05 + idx * 0.04 }}
-            >
-              <Link
-                href={`/mountain/${row.id}`}
-                className="group flex items-center gap-4 rounded-2xl border border-border bg-white p-4 md:p-5 hover:border-primary/40 hover:shadow-sm transition-all"
-              >
-                <div className="byline text-muted-foreground/60 w-6 text-center shrink-0">
-                  #{idx + 2}
-                </div>
-                <ScoreChip score={row.score.total} />
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-baseline gap-2 flex-wrap">
-                    <p className="font-display font-semibold text-base md:text-lg tracking-tight text-foreground truncate">
-                      {t(row.name, row.nameJa)}
-                    </p>
-                    <ToneBadge tone={row.score.tone} text={t(row.score.headline, row.score.headlineJa)} compact />
-                  </div>
-                  <div className="mt-1 flex items-center gap-3 flex-wrap text-xs text-muted-foreground">
-                    {row.w && (
-                      <>
-                        <span className="inline-flex items-center gap-1">
-                          <Snowflake className="w-3 h-3" /> {(row.w.snowDepth ?? 0).toFixed(1)} m
-                        </span>
-                        <span className="inline-flex items-center gap-1">
-                          <Wind className="w-3 h-3" /> {Math.round(row.w.windSpeed)} km/h
-                        </span>
-                        <span className="inline-flex items-center gap-1">
-                          <Thermometer className="w-3 h-3" /> {Math.round(row.w.temperature)}°
-                        </span>
-                      </>
-                    )}
-                    {town && row.lat !== undefined && row.lng !== undefined && (
-                      <span className="inline-flex items-center gap-1 text-foreground/70">
-                        <Car className="w-3 h-3" />
-                        {estimateMinutes(haversineKm({ lat: town.lat, lng: town.lng }, { lat: row.lat, lng: row.lng }))} min
-                      </span>
-                    )}
-                  </div>
-                </div>
-                <ArrowUpRight className="w-4 h-4 text-muted-foreground/50 group-hover:text-primary shrink-0" />
-              </Link>
-            </motion.div>
-          ))}
-        </div>
+      {/* COMPARISON MATRIX — the killer fintech-dashboard table */}
+      {rows.length > 0 && leaders && (
+        <ComparisonMatrix
+          rows={rows}
+          leaders={leaders}
+          town={town}
+          season={season}
+          t={t}
+        />
       )}
 
       {/* HOW WE SCORE */}
@@ -399,10 +383,12 @@ export function TodaysCall() {
           {t("How we score", "スコアの仕組み")}
         </summary>
         <div className="px-4 pb-4 text-sm text-muted-foreground space-y-2">
-          <p>{t(
-            "Each mountain gets a 0–100 composite score from live weather:",
-            "各スキー場をライブ気象から0〜100点で評価:",
-          )}</p>
+          <p>
+            {t(
+              "Each mountain gets a 0–100 composite score from live weather:",
+              "各スキー場をライブ気象から0〜100点で評価:",
+            )}
+          </p>
           <ul className="list-disc pl-5 space-y-1">
             <li>{t("Snow base + active snowfall (40 pts in winter)", "積雪 + 降雪 (冬季40点)")}</li>
             <li>{t("Wind speed — calmer is better (25 pts)", "風速 — 弱いほど高得点 (25点)")}</li>
@@ -422,27 +408,263 @@ export function TodaysCall() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Bits                                                               */
+/*  Comparison matrix                                                  */
 /* ------------------------------------------------------------------ */
 
-function Stat({
-  icon: Icon,
-  label,
-  value,
+function ComparisonMatrix({
+  rows,
+  leaders,
+  town,
+  season,
+  t,
 }: {
-  icon: React.ComponentType<{ className?: string }>;
-  label: string;
-  value: string;
+  rows: MountainRow[];
+  leaders: { snow: number; wind: number; temp: number; cloud: number };
+  town: { name: string; nameJa?: string; lat: number; lng: number } | null | undefined;
+  season: "winter" | "green";
+  t: (en: string, ja?: string) => string;
 }) {
   return (
-    <div>
-      <div className="byline text-muted-foreground/70 inline-flex items-center gap-1">
-        <Icon className="w-3 h-3" /> {label}
+    <div className="rounded-2xl border border-border bg-white overflow-hidden">
+      {/* Caption */}
+      <div className="flex items-end justify-between gap-3 px-5 md:px-6 py-4 border-b border-border bg-secondary/30">
+        <div>
+          <p className="byline text-muted-foreground/70 inline-flex items-center gap-1.5">
+            <TrendingUp className="w-3 h-3" />
+            {t("Side-by-side comparison", "横並び比較")}
+          </p>
+          <p className="font-display font-semibold text-lg tracking-tight text-foreground mt-0.5">
+            {t(
+              `${rows.length} mountains · ranked by score`,
+              `${rows.length}スキー場 · スコア順`,
+            )}
+          </p>
+        </div>
+        <p className="byline text-muted-foreground/60 hidden md:block">
+          {t("▲ = best in column", "▲ = 列内ベスト")}
+        </p>
       </div>
-      <p className="font-display font-semibold text-2xl tracking-tight text-foreground mt-1">
-        {value}
-      </p>
+
+      {/* Desktop table */}
+      <div className="hidden md:block overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="byline text-muted-foreground/70 bg-secondary/20 border-b border-border">
+              <th className="text-left px-5 py-3 font-semibold">{t("MOUNTAIN", "スキー場")}</th>
+              <th className="text-right px-3 py-3 font-semibold">{t("SCORE", "スコア")}</th>
+              <th className="text-right px-3 py-3 font-semibold">
+                <span className="inline-flex items-center gap-1 justify-end">
+                  <Snowflake className="w-3 h-3" /> {t("SNOW", "積雪")}
+                </span>
+              </th>
+              <th className="text-right px-3 py-3 font-semibold">
+                <span className="inline-flex items-center gap-1 justify-end">
+                  <Wind className="w-3 h-3" /> {t("WIND", "風")}
+                </span>
+              </th>
+              <th className="text-right px-3 py-3 font-semibold">
+                <span className="inline-flex items-center gap-1 justify-end">
+                  <Thermometer className="w-3 h-3" /> {t("TEMP", "気温")}
+                </span>
+              </th>
+              <th className="text-right px-3 py-3 font-semibold">
+                <span className="inline-flex items-center gap-1 justify-end">
+                  <CloudFog className="w-3 h-3" /> {t("CLOUD", "雲")}
+                </span>
+              </th>
+              <th className="text-right px-3 py-3 font-semibold">
+                <span className="inline-flex items-center gap-1 justify-end">
+                  <Car className="w-3 h-3" /> {t("DRIVE", "所要")}
+                </span>
+              </th>
+              <th className="px-5 py-3" />
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, idx) => {
+              const isLeader = idx === 0;
+              const km =
+                town && row.lat !== undefined && row.lng !== undefined
+                  ? haversineKm({ lat: town.lat, lng: town.lng }, { lat: row.lat, lng: row.lng })
+                  : null;
+              const drive = km !== null ? estimateMinutes(km) : null;
+
+              const w = row.w;
+              return (
+                <tr
+                  key={row.id}
+                  className={`border-b border-border last:border-0 ${isLeader ? "bg-primary/5" : "hover:bg-secondary/20"} transition-colors`}
+                >
+                  <td className="px-5 py-3">
+                    <Link
+                      href={`/mountain/${row.id}`}
+                      className="group inline-flex items-center gap-2"
+                    >
+                      <span className="byline text-muted-foreground/60 w-5 inline-block text-right">
+                        {idx + 1}
+                      </span>
+                      <span className="font-display font-semibold text-foreground group-hover:text-primary transition-colors">
+                        {t(row.name, row.nameJa)}
+                      </span>
+                      {row.parentId && (
+                        <span className="byline text-muted-foreground/50">
+                          · {t("sub", "サブ")}
+                        </span>
+                      )}
+                      <ToneBadge
+                        tone={row.score.tone}
+                        text={t(row.score.headline, row.score.headlineJa)}
+                        compact
+                      />
+                    </Link>
+                  </td>
+                  <td className="text-right px-3 py-3">
+                    <span
+                      className={`inline-flex items-center justify-end font-display font-semibold tabular-nums tracking-tight ${
+                        isLeader ? "text-primary text-2xl" : "text-foreground text-lg"
+                      }`}
+                    >
+                      {row.score.total}
+                    </span>
+                  </td>
+                  <MetricCell
+                    value={w ? `${w.snowDepth.toFixed(1)} m` : "—"}
+                    isLeader={
+                      season === "winter" && !!w && w.snowDepth === leaders.snow && w.snowDepth > 0
+                    }
+                  />
+                  <MetricCell
+                    value={w ? `${Math.round(w.windSpeed)} km/h` : "—"}
+                    isLeader={!!w && w.windSpeed === leaders.wind}
+                  />
+                  <MetricCell
+                    value={w ? `${Math.round(w.temperature)}°` : "—"}
+                    isLeader={
+                      !!w &&
+                      (season === "winter"
+                        ? w.temperature === leaders.temp
+                        : Math.abs(w.temperature - 17) * -1 === leaders.temp)
+                    }
+                  />
+                  <MetricCell
+                    value={w?.cloudCover !== undefined ? `${Math.round(w.cloudCover)}%` : "—"}
+                    isLeader={!!w && (w.cloudCover ?? 100) === leaders.cloud}
+                  />
+                  <td className="text-right px-3 py-3 tabular-nums text-foreground/80">
+                    {drive !== null ? (
+                      <span>
+                        {drive} {t("min", "分")}
+                      </span>
+                    ) : (
+                      "—"
+                    )}
+                  </td>
+                  <td className="px-5 py-3 text-right">
+                    {row.websiteUrl && (
+                      <a
+                        href={row.websiteUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={t("Resort website", "公式サイト")}
+                        className="inline-flex items-center justify-center w-7 h-7 rounded-md border border-border text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-colors"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Mobile stacked rows */}
+      <div className="md:hidden divide-y divide-border">
+        {rows.map((row, idx) => {
+          const w = row.w;
+          const km =
+            town && row.lat !== undefined && row.lng !== undefined
+              ? haversineKm({ lat: town.lat, lng: town.lng }, { lat: row.lat, lng: row.lng })
+              : null;
+          const drive = km !== null ? estimateMinutes(km) : null;
+          const isLeader = idx === 0;
+          return (
+            <Link
+              key={row.id}
+              href={`/mountain/${row.id}`}
+              className={`block p-4 ${isLeader ? "bg-primary/5" : ""}`}
+            >
+              <div className="flex items-center gap-3">
+                <span className="byline text-muted-foreground/60 w-5 text-right">
+                  {idx + 1}
+                </span>
+                <span
+                  className={`font-display font-semibold tabular-nums tracking-tight w-12 text-right ${
+                    isLeader ? "text-primary text-2xl" : "text-foreground text-lg"
+                  }`}
+                >
+                  {row.score.total}
+                </span>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <p className="font-display font-semibold text-foreground truncate">
+                      {t(row.name, row.nameJa)}
+                    </p>
+                    <ToneBadge
+                      tone={row.score.tone}
+                      text={t(row.score.headline, row.score.headlineJa)}
+                      compact
+                    />
+                  </div>
+                  <div className="mt-1 flex items-center gap-3 flex-wrap text-xs text-muted-foreground tabular-nums">
+                    <span className="inline-flex items-center gap-1">
+                      <Snowflake className="w-3 h-3" />
+                      {w ? `${w.snowDepth.toFixed(1)}m` : "—"}
+                    </span>
+                    <span className="inline-flex items-center gap-1">
+                      <Wind className="w-3 h-3" />
+                      {w ? `${Math.round(w.windSpeed)}` : "—"}
+                    </span>
+                    <span className="inline-flex items-center gap-1">
+                      <Thermometer className="w-3 h-3" />
+                      {w ? `${Math.round(w.temperature)}°` : "—"}
+                    </span>
+                    {drive !== null && (
+                      <span className="inline-flex items-center gap-1 text-foreground/70">
+                        <Car className="w-3 h-3" />
+                        {drive}min
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </Link>
+          );
+        })}
+      </div>
     </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Atoms                                                              */
+/* ------------------------------------------------------------------ */
+
+function MetricCell({ value, isLeader }: { value: string; isLeader: boolean }) {
+  return (
+    <td className="text-right px-3 py-3 tabular-nums">
+      <span
+        className={
+          isLeader
+            ? "inline-flex items-center gap-1 font-semibold text-emerald-700"
+            : "text-foreground/80"
+        }
+      >
+        {isLeader && <span className="text-emerald-600">▲</span>}
+        {value}
+      </span>
+    </td>
   );
 }
 
@@ -467,7 +689,7 @@ function ToneBadge({
             : "bg-rose-50 text-rose-700 border-rose-200";
   return (
     <span
-      className={`inline-flex items-center rounded-full border px-2 py-0.5 byline ${cls} ${compact ? "" : "mt-3"}`}
+      className={`inline-flex items-center rounded-full border px-2 py-0.5 byline ${cls} ${compact ? "" : ""}`}
     >
       {text}
     </span>
@@ -479,9 +701,17 @@ function ScoreDial({ score }: { score: number }) {
   const c = 2 * Math.PI * r;
   const offset = c * (1 - clamp(score, 0, 100) / 100);
   return (
-    <div className="relative w-24 h-24 shrink-0">
+    <div className="relative w-28 h-28 shrink-0">
       <svg viewBox="0 0 100 100" className="w-full h-full -rotate-90">
-        <circle cx="50" cy="50" r={r} fill="none" stroke="currentColor" className="text-secondary" strokeWidth="8" />
+        <circle
+          cx="50"
+          cy="50"
+          r={r}
+          fill="none"
+          stroke="currentColor"
+          className="text-secondary"
+          strokeWidth="8"
+        />
         <circle
           cx="50"
           cy="50"
@@ -495,48 +725,12 @@ function ScoreDial({ score }: { score: number }) {
           strokeLinecap="round"
         />
       </svg>
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="font-display font-semibold text-2xl tracking-tight text-foreground">
+      <div className="absolute inset-0 flex flex-col items-center justify-center">
+        <span className="font-display font-semibold text-3xl tracking-tight text-foreground tabular-nums">
           {score}
         </span>
+        <span className="byline text-muted-foreground/60 -mt-1">/100</span>
       </div>
-    </div>
-  );
-}
-
-function ScoreChip({ score }: { score: number }) {
-  return (
-    <div className="shrink-0 w-12 h-12 rounded-xl border border-border bg-secondary/40 flex items-center justify-center">
-      <span className="font-display font-semibold text-lg tracking-tight text-foreground">
-        {score}
-      </span>
-    </div>
-  );
-}
-
-function JourneyLine({
-  town,
-  mountainLat,
-  mountainLng,
-  t,
-}: {
-  town: { name: string; nameJa?: string; lat: number; lng: number };
-  mountainLat: number;
-  mountainLng: number;
-  t: (en: string, ja?: string) => string;
-}) {
-  const km = haversineKm({ lat: town.lat, lng: town.lng }, { lat: mountainLat, lng: mountainLng });
-  const min = estimateMinutes(km);
-  return (
-    <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-border bg-secondary/40 px-3 py-1.5 text-xs">
-      <Car className="w-3.5 h-3.5 text-muted-foreground" />
-      <span className="text-muted-foreground">
-        {t(`From ${town.name}`, `${t(town.name, town.nameJa)}から`)}
-      </span>
-      <span className="font-semibold text-foreground">
-        {min} min · {km.toFixed(0)} km
-      </span>
-      <span className="text-muted-foreground/60">{t("(est. drive)", "(目安)")}</span>
     </div>
   );
 }
@@ -547,15 +741,12 @@ function ScoreSkeleton() {
       <div className="rounded-3xl border border-border bg-white p-6 md:p-8 animate-pulse">
         <div className="h-4 w-24 bg-secondary rounded" />
         <div className="h-10 w-2/3 bg-secondary rounded mt-3" />
-        <div className="grid grid-cols-4 gap-4 mt-6">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="h-12 bg-secondary rounded" />
-          ))}
-        </div>
       </div>
-      {Array.from({ length: 3 }).map((_, i) => (
-        <div key={i} className="h-20 rounded-2xl border border-border bg-white animate-pulse" />
-      ))}
+      <div className="rounded-2xl border border-border bg-white p-6 animate-pulse">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div key={i} className="h-10 bg-secondary rounded mb-2" />
+        ))}
+      </div>
     </div>
   );
 }

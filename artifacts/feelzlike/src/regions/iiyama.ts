@@ -16,10 +16,10 @@ export const iiyamaRegion: RegionConfig = {
     { path: "/mountain/nozawa-onsen", label: "Nozawa Onsen",       labelJa: "野沢温泉" },
   ],
   mountains: [
-    { id: "madarao",      name: "Madarao Kogen",       nameJa: "斑尾高原",            elevationM: 1382, blurb: "Tree-run paradise · linked with Tangram",   blurbJa: "ツリーランの聖地 · タングラムと連結",     websiteUrl: "https://www.madarao.jp/winter/en/" },
-    { id: "tangram",      name: "Tangram Ski Circus",  nameJa: "タングラムスキーサーカス", elevationM: 1320, blurb: "Family-friendly · interconnected with Madarao", blurbJa: "ファミリー向け · 斑尾と接続",            websiteUrl: "https://www.hotel-tangram.com/ski/" },
-    { id: "togari",       name: "Togari Onsen",        nameJa: "戸狩温泉",            elevationM: 1050, blurb: "Quieter local mountain · long groomers",     blurbJa: "地元密着の静かな山 · ロングコース",       websiteUrl: "https://www.togari.jp/" },
-    { id: "nozawa-onsen", name: "Nozawa Onsen",        nameJa: "野沢温泉",            elevationM: 1650, blurb: "Iconic ski-in onsen village",                blurbJa: "象徴的なスキーイン温泉郷",                websiteUrl: "https://www.nozawaski.com/en/" },
+    { id: "madarao",      name: "Madarao Kogen",       nameJa: "斑尾高原",            elevationM: 1382, lat: 36.8525, lng: 138.3389, blurb: "Tree-run paradise · linked with Tangram",   blurbJa: "ツリーランの聖地 · タングラムと連結",     websiteUrl: "https://www.madarao.jp/winter/en/" },
+    { id: "tangram",      name: "Tangram Ski Circus",  nameJa: "タングラムスキーサーカス", elevationM: 1320, lat: 36.8639, lng: 138.3528, blurb: "Family-friendly · interconnected with Madarao", blurbJa: "ファミリー向け · 斑尾と接続",            websiteUrl: "https://www.hotel-tangram.com/ski/" },
+    { id: "togari",       name: "Togari Onsen",        nameJa: "戸狩温泉",            elevationM: 1050, lat: 36.9089, lng: 138.4222, blurb: "Quieter local mountain · long groomers",     blurbJa: "地元密着の静かな山 · ロングコース",       websiteUrl: "https://www.togari.jp/" },
+    { id: "nozawa-onsen", name: "Nozawa Onsen",        nameJa: "野沢温泉",            elevationM: 1650, lat: 36.9239, lng: 138.4486, blurb: "Iconic ski-in onsen village",                blurbJa: "象徴的なスキーイン温泉郷",                websiteUrl: "https://www.nozawaski.com/en/" },
   ],
   baseTowns: [
     {

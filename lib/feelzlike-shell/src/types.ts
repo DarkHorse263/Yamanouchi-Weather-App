@@ -36,6 +36,12 @@ export interface MountainLink {
   imageUrl?: string;
   /** Official mountain/resort website URL */
   websiteUrl?: string;
+  /** Approximate base/centroid latitude — single source of truth for journey/Today's call. */
+  lat?: number;
+  /** Approximate base/centroid longitude. */
+  lng?: number;
+  /** Optional parent mountain id when this entry is a sub-area of a larger ski area. */
+  parentId?: string;
 }
 
 /** Scope a NavItem belongs to. Determines which sidebar section renders it. */

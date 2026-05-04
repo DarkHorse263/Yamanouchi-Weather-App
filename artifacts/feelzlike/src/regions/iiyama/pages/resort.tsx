@@ -27,40 +27,38 @@ import {
   Globe,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { useLanguage } from "@workspace/feelzlike-shell";
+import { useLanguage, useRegion } from "@workspace/feelzlike-shell";
 
 type WeatherId = Parameters<typeof useGetLocationWeather>[0];
 
 interface ResortProfile {
-  websiteUrl: string;
-  liftStatusUrl: string;
-  webcamUrl: string;
+  websiteUrl?: string;
+  liftStatusUrl?: string;
+  webcamUrl?: string;
 }
 
+/**
+ * Curated lift / webcam URL overrides. Website URL is sourced from
+ * `region.mountains[].websiteUrl` so any new mountain works automatically.
+ */
 const PROFILES: Record<string, ResortProfile> = {
   "madarao": {
-    websiteUrl: "https://www.madarao.jp/ski/en/",
     liftStatusUrl: "https://www.madarao.jp/ski/en/snow-report/",
     webcamUrl: "https://www.madarao.jp/ski/en/livecamera/",
   },
   "tangram": {
-    websiteUrl: "https://www.tangram.jp/winter/",
     liftStatusUrl: "https://www.tangram.jp/winter/snow/",
     webcamUrl: "https://www.tangram.jp/winter/livecamera/",
   },
   "togari": {
-    websiteUrl: "https://www.togari.jp/",
     liftStatusUrl: "https://www.togari.jp/snow/",
     webcamUrl: "https://www.togari.jp/livecamera/",
   },
   "nozawa-onsen": {
-    websiteUrl: "https://nozawaski.com/en/",
     liftStatusUrl: "https://nozawaski.com/en/snow-report/",
     webcamUrl: "https://nozawaski.com/en/live-camera/",
   },
 };
-
-const VALID_IDS = new Set(Object.keys(PROFILES));
 
 export default function ResortDetail() {
   const [, mParams] = useRoute("/mountain/:id");
@@ -68,8 +66,10 @@ export default function ResortDetail() {
   const params = mParams ?? rParams;
   const id = params?.id ?? "";
   const { t } = useLanguage();
+  const { region } = useRegion();
 
-  const enabled = VALID_IDS.has(id);
+  const mountain = (region.mountains ?? []).find((m) => m.id === id);
+  const enabled = !!mountain;
   const { data, isLoading, error } = useGetLocationWeather(id as WeatherId, {
     query: { enabled, refetchInterval: 600_000 },
   });
@@ -81,7 +81,10 @@ export default function ResortDetail() {
           {t("Resort not found", "スキー場が見つかりません")}
         </h1>
         <p className="text-muted-foreground mt-2">
-          {t("Try Madarao, Tangram, or Togari.", "斑尾、タングラム、戸狩のいずれかをお試しください。")}
+          {t(
+            "We don't have a profile for this mountain yet.",
+            "このスキー場のプロフィールはまだありません。",
+          )}
         </p>
       </div>
     );
@@ -109,7 +112,10 @@ export default function ResortDetail() {
 
   const { location, current, daily } = data;
   const observedAt = (data as any).lastUpdated as string | undefined;
-  const profile = PROFILES[id];
+  const profile: ResortProfile = {
+    websiteUrl: mountain?.websiteUrl,
+    ...(PROFILES[id] ?? {}),
+  };
 
   const stats: ConditionStat[] = [
     { label: t("Feels like", "体感"), value: `${Math.round(current.feelsLike)}°C`, icon: Thermometer },
@@ -218,26 +224,29 @@ function OfficialLinks({
   resortName: string;
   t: (en: string, ja: string) => string;
 }) {
+  // Only render link tiles for URLs we actually have — never fake them.
   const links = [
-    {
+    profile.websiteUrl && {
       label: t("Official website", "公式サイト"),
       detail: t("Trail map, hours, tickets", "コース案内・営業時間・チケット"),
       href: profile.websiteUrl,
       icon: Globe,
     },
-    {
+    profile.liftStatusUrl && {
       label: t("Lift status", "リフト運行状況"),
       detail: t("Live lift operating status", "リフトのライブ運行状況"),
       href: profile.liftStatusUrl,
       icon: Cable,
     },
-    {
+    profile.webcamUrl && {
       label: t("Live webcams", "ライブカメラ"),
       detail: t("On-mountain camera feeds", "山頂・コースのライブ映像"),
       href: profile.webcamUrl,
       icon: Camera,
     },
-  ];
+  ].filter((x): x is { label: string; detail: string; href: string; icon: typeof Globe } => !!x);
+
+  if (links.length === 0) return null;
 
   return (
     <motion.div

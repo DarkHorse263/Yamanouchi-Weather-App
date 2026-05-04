@@ -27,35 +27,36 @@ import {
   Globe,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { useLanguage } from "@workspace/feelzlike-shell";
+import { useLanguage, useRegion } from "@workspace/feelzlike-shell";
 
 type WeatherId = Parameters<typeof useGetLocationWeather>[0];
 
 interface ResortProfile {
-  websiteUrl: string;
-  liftStatusUrl: string;
-  webcamUrl: string;
+  /** Optional override; falls back to mountain.websiteUrl from region config */
+  websiteUrl?: string;
+  liftStatusUrl?: string;
+  webcamUrl?: string;
 }
 
+/**
+ * Curated overrides for resort-specific deep-links (lift status pages, webcam
+ * indexes). The website URL is sourced from `region.mountains[].websiteUrl`
+ * by default — only override here if the resort uses a different page.
+ */
 const PROFILES: Record<string, ResortProfile> = {
   "shiga-kogen": {
-    websiteUrl: "https://www.shigakogen.gr.jp/english/",
     liftStatusUrl: "https://www.shigakogen.gr.jp/english/lift/",
     webcamUrl: "https://www.shigakogen.gr.jp/english/livecamera/",
   },
   "ryuoo": {
-    websiteUrl: "https://www.ryuoo.com/en/",
     liftStatusUrl: "https://www.ryuoo.com/en/winter/lift/",
     webcamUrl: "https://www.ryuoo.com/en/winter/livecamera/",
   },
   "kita-shiga": {
-    websiteUrl: "https://kitashiga.net/",
     liftStatusUrl: "https://kitashiga.net/winter/",
     webcamUrl: "https://kitashiga.net/livecam/",
   },
 };
-
-const VALID_IDS = new Set(Object.keys(PROFILES));
 
 export default function ResortDetail() {
   const [, mParams] = useRoute("/mountain/:id");
@@ -63,8 +64,12 @@ export default function ResortDetail() {
   const params = mParams ?? rParams;
   const id = params?.id ?? "";
   const { t } = useLanguage();
+  const { region } = useRegion();
 
-  const enabled = VALID_IDS.has(id);
+  // Source of truth for "is this a real mountain in this region" is the
+  // region config — so any mountain added to yamanouchi.ts works automatically.
+  const mountain = (region.mountains ?? []).find((m) => m.id === id);
+  const enabled = !!mountain;
   const { data, isLoading, error } = useGetLocationWeather(id as WeatherId, {
     query: { enabled, refetchInterval: 600_000 },
   });
@@ -76,7 +81,10 @@ export default function ResortDetail() {
           {t("Resort not found", "スキー場が見つかりません")}
         </h1>
         <p className="text-muted-foreground mt-2">
-          {t("Try Shiga Kogen, Ryuoo, or Kita Shiga.", "志賀高原、竜王、北志賀のいずれかをお試しください。")}
+          {t(
+            "We don't have a profile for this mountain yet.",
+            "このスキー場のプロフィールはまだありません。",
+          )}
         </p>
       </div>
     );
@@ -104,7 +112,10 @@ export default function ResortDetail() {
 
   const { location, current, daily } = data;
   const observedAt = (data as any).lastUpdated as string | undefined;
-  const profile = PROFILES[id];
+  const profile: ResortProfile = {
+    websiteUrl: mountain?.websiteUrl,
+    ...(PROFILES[id] ?? {}),
+  };
 
   const stats: ConditionStat[] = [
     { label: t("Feels like", "体感"), value: `${Math.round(current.feelsLike)}°C`, icon: Thermometer },
@@ -213,26 +224,29 @@ function OfficialLinks({
   resortName: string;
   t: (en: string, ja: string) => string;
 }) {
+  // Only render link tiles for URLs we actually have — never fake them.
   const links = [
-    {
+    profile.websiteUrl && {
       label: t("Official website", "公式サイト"),
       detail: t("Trail map, hours, tickets", "コース案内・営業時間・チケット"),
       href: profile.websiteUrl,
       icon: Globe,
     },
-    {
+    profile.liftStatusUrl && {
       label: t("Lift status", "リフト運行状況"),
       detail: t("Live lift operating status", "リフトのライブ運行状況"),
       href: profile.liftStatusUrl,
       icon: Cable,
     },
-    {
+    profile.webcamUrl && {
       label: t("Live webcams", "ライブカメラ"),
       detail: t("On-mountain camera feeds", "山頂・コースのライブ映像"),
       href: profile.webcamUrl,
       icon: Camera,
     },
-  ];
+  ].filter((x): x is { label: string; detail: string; href: string; icon: typeof Globe } => !!x);
+
+  if (links.length === 0) return null;
 
   return (
     <motion.div

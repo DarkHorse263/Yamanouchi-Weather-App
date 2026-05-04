@@ -281,6 +281,50 @@ export function TownRoads() {
         </motion.section>
       )}
 
+      {/* When the upstream source has no deep-linkable per-camera images
+          (e.g. the JP Hokushin road-camera map), surface a single honest
+          "open the official map" tile rather than fake duplicate cards. */}
+      {roadCams.length === 0 && roadCamsSourcePageUrl && (
+        <motion.section
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="mt-12"
+        >
+          <h2 className="font-display font-semibold text-2xl text-foreground inline-flex items-center gap-2 mb-4">
+            <Camera className="w-5 h-5 text-primary" />
+            {t("Roadside cams", "道路ライブカメラ")}
+          </h2>
+          <a
+            href={roadCamsSourcePageUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block rounded-2xl border border-border bg-white p-6 hover:border-primary/40 hover:shadow-md transition-all"
+          >
+            <div className="flex items-start gap-4">
+              <div className="shrink-0 w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+                <Camera className="w-5 h-5" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="font-display font-semibold text-foreground">
+                  {t("Open the official road-camera map", "公式の道路カメラマップを開く")}
+                </p>
+                <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
+                  {t(
+                    "The official source is an interactive map — pick the camera nearest your route. We don't fake images here.",
+                    "公式情報源はインタラクティブマップです。ルート上のカメラを選択してください。当アプリでは画像を捏造しません。",
+                  )}
+                </p>
+                <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-primary">
+                  {t("Open map", "マップを開く")}
+                  <ExternalLink className="w-3 h-3" />
+                </span>
+              </div>
+            </div>
+          </a>
+        </motion.section>
+      )}
+
       {dataAvailable && query.data?.lastUpdated && region.roadsSource && (
         <p className="text-xs text-muted-foreground/70 mt-6 inline-flex items-center gap-1.5">
           <MapPin className="w-3 h-3" />

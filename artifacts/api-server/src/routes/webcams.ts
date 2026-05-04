@@ -179,77 +179,21 @@ const WEBCAM_DATA: WebcamConfig[] = [
   // The site's frame layout means we can't deep-link to individual cameras —
   // every cam links back to the same index where the user picks the camera
   // on the map. That IS the source the locals use.
+  // The Hokushin Nagano prefecture road-camera service is an interactive map
+  // — it does not expose deep-linkable per-camera image URLs or pages. Rather
+  // than fake three identical-image cards, we surface a single honest tile per
+  // region that opens the official map where users pick the camera themselves.
   {
     locationId: "yamanouchi-roads",
     locationName: "山ノ内町への道路 · Roads to Yamanouchi",
     webcamPageUrl: "http://hokushin.pref-nagano-roadcamera.jp/index.htm",
-    webcams: [
-      {
-        id: "jp-r292-shiga-kogen",
-        name: "国道292号 · 志賀草津高原ルート",
-        description: "Route 292 — the famous 'Snow Corridor' approach to Shiga Kogen. Pick this camera from the map on the Hokushin road-camera site.",
-        imageUrl: "http://hokushin.pref-nagano-roadcamera.jp/img/r292-shiga.jpg",
-        pageUrl: "http://hokushin.pref-nagano-roadcamera.jp/index.htm",
-        elevation: 1600,
-        type: "road",
-        roadName: "Route 292 (Shiga-Kusatsu Highway)",
-      },
-      {
-        id: "jp-r403-yudanaka",
-        name: "国道403号 · 湯田中駅付近",
-        description: "Approach to Yudanaka station and the Shiga Kogen base — typically clear of snow but icy in early morning.",
-        imageUrl: "http://hokushin.pref-nagano-roadcamera.jp/img/r403-yudanaka.jpg",
-        pageUrl: "http://hokushin.pref-nagano-roadcamera.jp/index.htm",
-        type: "road",
-        roadName: "Route 403",
-      },
-      {
-        id: "jp-r466-shibu-onsen",
-        name: "県道466号 · 渋温泉付近",
-        description: "Local prefectural road through Shibu Onsen towards the Shiga Kogen access roads.",
-        imageUrl: "http://hokushin.pref-nagano-roadcamera.jp/img/r466-shibu.jpg",
-        pageUrl: "http://hokushin.pref-nagano-roadcamera.jp/index.htm",
-        type: "road",
-        roadName: "Prefectural Route 466",
-      },
-    ],
+    webcams: [],
   },
-
-  // ─── Roadside cams: Iiyama (JP) ─────────────────────────────────────────
-  // Same Hokushin source covers the Iiyama / Madarao / Nozawa corridor.
   {
     locationId: "iiyama-roads",
     locationName: "飯山への道路 · Roads to Iiyama",
     webcamPageUrl: "http://hokushin.pref-nagano-roadcamera.jp/index.htm",
-    webcams: [
-      {
-        id: "jp-r117-iiyama",
-        name: "国道117号 · 飯山市内",
-        description: "Route 117 through Iiyama city centre — heavy snow corridor in mid-winter.",
-        imageUrl: "http://hokushin.pref-nagano-roadcamera.jp/img/r117-iiyama.jpg",
-        pageUrl: "http://hokushin.pref-nagano-roadcamera.jp/index.htm",
-        type: "road",
-        roadName: "Route 117",
-      },
-      {
-        id: "jp-r292-nozawa",
-        name: "国道292号 · 野沢温泉方面",
-        description: "Approach road to Nozawa Onsen from Iiyama — typically requires winter tyres.",
-        imageUrl: "http://hokushin.pref-nagano-roadcamera.jp/img/r292-nozawa.jpg",
-        pageUrl: "http://hokushin.pref-nagano-roadcamera.jp/index.htm",
-        type: "road",
-        roadName: "Route 292",
-      },
-      {
-        id: "jp-madarao-access",
-        name: "斑尾高原アクセス道路",
-        description: "Access road climbing from Iiyama towards Madarao Kogen and Tangram.",
-        imageUrl: "http://hokushin.pref-nagano-roadcamera.jp/img/madarao-access.jpg",
-        pageUrl: "http://hokushin.pref-nagano-roadcamera.jp/index.htm",
-        type: "road",
-        roadName: "Madarao Access Road",
-      },
-    ],
+    webcams: [],
   },
 ];
 

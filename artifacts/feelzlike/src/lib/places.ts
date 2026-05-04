@@ -62,13 +62,16 @@ async function fetchNearby(args: NearbyArgs): Promise<NearbyPlace[]> {
   const data = (await res.json()) as { places: NearbyPlace[] };
   const places = data.places ?? [];
 
-  // Re-rank: bring the geographically-closest places to the top so adjacent
-  // towns (e.g. Yudanaka ↔ Shibu Onsen, ~600m apart) surface a meaningfully
-  // different "above the fold" list. Google's POPULARITY ranking is preserved
-  // as the secondary sort by virtue of stable sort within equal-distance ties.
+  // Re-rank AND hard-cap by requested radius. Google's Places API often returns
+  // results well outside the requested radius (especially for thinly-populated
+  // areas), which causes adjacent towns like Yudanaka ↔ Shibu Onsen (~600m apart)
+  // to surface near-identical lists. We drop anything beyond `radius * 1.05`
+  // (5% slack for geocoding noise) and then sort closest-first.
   const centre = { lat: args.lat, lng: args.lng };
+  const cap = (args.radius ?? 5000) * 1.05;
   return places
     .map((p, i) => ({ p, d: distMeters(centre, p), i }))
+    .filter((x) => x.d <= cap)
     .sort((a, b) => a.d - b.d || a.i - b.i)
     .map((x) => x.p);
 }
