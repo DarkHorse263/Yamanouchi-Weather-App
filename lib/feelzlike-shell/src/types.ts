@@ -86,7 +86,7 @@ export interface RegionConfig {
   /** Brand assets */
   brand: RegionBrand;
   /** Legacy flat nav (still consumed by some pages; new code uses navOverrides). */
-  nav: NavItem[];
+  nav?: NavItem[];
   /** Resort quick-links shown beneath nav (legacy; superseded by `mountains`). */
   resorts: ResortLink[];
   /** Mountains in this region. Used for the region overview cards and `/:region/mountain/:id`. */

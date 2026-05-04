@@ -13,6 +13,7 @@ import { MountainsList } from "@/pages/region/MountainsList";
 import { TownLayout } from "@/layouts/TownLayout";
 import { RegionStub } from "@/pages/region/RegionStub";
 import { RegionStay } from "@/pages/region/RegionStay";
+import { TodaysCall } from "@/pages/region/TodaysCall";
 import { snowyMountainsRouter } from "@/regions/snowy-mountains/router";
 import { yamanouchiRouter } from "@/regions/yamanouchi/router";
 import { iiyamaRouter } from "@/regions/iiyama/router";
@@ -54,6 +55,7 @@ export function RegionLayout() {
     <AppShell>
       <Switch>
         <Route path="/" component={RegionOverview} />
+        <Route path="/today" component={TodaysCall} />
         <Route path="/mountains" component={MountainsList} />
         <Route path="/mountains/lifts">
           {routes.LiftsAll ? <routes.LiftsAll /> : <RegionStub title="Lifts" titleJa="リフト運行" />}

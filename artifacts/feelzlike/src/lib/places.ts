@@ -34,6 +34,18 @@ function apiUrl(path: string): string {
   return `/api${path}`;
 }
 
+function distMeters(a: { lat: number; lng: number }, b: { lat?: number; lng?: number }): number {
+  if (b.lat === undefined || b.lng === undefined) return Number.POSITIVE_INFINITY;
+  const R = 6_371_000;
+  const toRad = (d: number) => (d * Math.PI) / 180;
+  const dLat = toRad(b.lat - a.lat);
+  const dLng = toRad(b.lng - a.lng);
+  const lat1 = toRad(a.lat);
+  const lat2 = toRad(b.lat);
+  const h = Math.sin(dLat / 2) ** 2 + Math.sin(dLng / 2) ** 2 * Math.cos(lat1) * Math.cos(lat2);
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+
 async function fetchNearby(args: NearbyArgs): Promise<NearbyPlace[]> {
   const params = new URLSearchParams({
     lat: String(args.lat),
@@ -48,7 +60,17 @@ async function fetchNearby(args: NearbyArgs): Promise<NearbyPlace[]> {
     throw new Error(`Places fetch failed (${res.status}): ${body.slice(0, 200)}`);
   }
   const data = (await res.json()) as { places: NearbyPlace[] };
-  return data.places ?? [];
+  const places = data.places ?? [];
+
+  // Re-rank: bring the geographically-closest places to the top so adjacent
+  // towns (e.g. Yudanaka ↔ Shibu Onsen, ~600m apart) surface a meaningfully
+  // different "above the fold" list. Google's POPULARITY ranking is preserved
+  // as the secondary sort by virtue of stable sort within equal-distance ties.
+  const centre = { lat: args.lat, lng: args.lng };
+  return places
+    .map((p, i) => ({ p, d: distMeters(centre, p), i }))
+    .sort((a, b) => a.d - b.d || a.i - b.i)
+    .map((x) => x.p);
 }
 
 export function useNearbyPlaces(args: NearbyArgs | null) {

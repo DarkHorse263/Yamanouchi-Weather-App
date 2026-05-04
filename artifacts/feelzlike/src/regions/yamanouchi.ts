@@ -1,14 +1,3 @@
-import {
-  Home,
-  Mountain,
-  Car,
-  Cable,
-  Bus,
-  BedDouble,
-  UtensilsCrossed,
-  Compass,
-  AlertTriangle,
-} from "lucide-react";
 import type { RegionConfig } from "@workspace/feelzlike-shell";
 import wordmark from "@assets/feelzlike_trimmed/feelzlike_WordMarque_colour_160426_1777334678269_trim.png";
 
@@ -20,17 +9,6 @@ export const yamanouchiRegion: RegionConfig = {
   brand: { wordmarkUrl: wordmark },
   seasons: true,
   language: { locales: ["en", "ja"] },
-  nav: [
-    { path: "/",          icon: Home,           label: "Today",     labelJa: "今日" },
-    { path: "/mountains", icon: Mountain,       label: "Mountains", labelJa: "スキー場" },
-    { path: "/roads",     icon: Car,            label: "Roads",     labelJa: "道路" },
-    { path: "/lifts",     icon: Cable,          label: "Lifts",     labelJa: "リフト", season: "winter" },
-    { path: "/transport", icon: Bus,            label: "Transport", labelJa: "交通", group: "secondary" },
-    { path: "/stay",      icon: BedDouble,      label: "Stay",      labelJa: "宿泊", group: "secondary" },
-    { path: "/eat",       icon: UtensilsCrossed,label: "Eat",       labelJa: "食事", group: "secondary" },
-    { path: "/explore",   icon: Compass,        label: "Explore",   labelJa: "観光", group: "secondary" },
-    { path: "/alerts",    icon: AlertTriangle,  label: "Alerts",    labelJa: "警報", group: "secondary" },
-  ],
   resorts: [
     { path: "/mountain/shiga-kogen",   label: "Shiga Kogen",      labelJa: "志賀高原" },
     { path: "/mountain/ryuoo",         label: "Ryuoo",            labelJa: "竜王" },
@@ -48,7 +26,7 @@ export const yamanouchiRegion: RegionConfig = {
       nameJa: "湯田中",
       lat: 36.7460,
       lng: 138.4280,
-      radiusM: 2500,
+      radiusM: 1200,
       blurb: "Onsen station town · gateway to Shiga Kogen",
       blurbJa: "温泉駅前 · 志賀高原への玄関口",
     },
@@ -58,7 +36,7 @@ export const yamanouchiRegion: RegionConfig = {
       nameJa: "渋温泉",
       lat: 36.7517,
       lng: 138.4286,
-      radiusM: 2000,
+      radiusM: 600,
       blurb: "Historic ryokan village · cobbled lanes & nine bathhouses",
       blurbJa: "歴史ある旅館街 · 石畳と九湯めぐり",
     },

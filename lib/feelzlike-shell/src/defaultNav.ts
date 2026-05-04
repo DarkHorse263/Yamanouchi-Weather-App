@@ -9,6 +9,7 @@ import {
   Cable,
   AlertTriangle,
   Radar as RadarIcon,
+  Sparkles,
 } from "lucide-react";
 import type { NavItem } from "./types";
 
@@ -24,6 +25,7 @@ export const DEFAULT_TOWN_NAV: NavItem[] = [
 
 /** Sidebar items for the "Mountains" section. Paths are RELATIVE to /:region. */
 export const DEFAULT_MOUNTAIN_NAV: NavItem[] = [
+  { path: "/today",           icon: Sparkles,      label: "Today's call",  labelJa: "今日の判断" },
   { path: "/mountains",       icon: Mountain,      label: "All mountains", labelJa: "スキー場一覧" },
   { path: "/mountains/lifts", icon: Cable,         label: "Lifts",         labelJa: "リフト", season: "winter" },
   { path: "/radar",           icon: RadarIcon,     label: "Radar",         labelJa: "気象レーダー" },

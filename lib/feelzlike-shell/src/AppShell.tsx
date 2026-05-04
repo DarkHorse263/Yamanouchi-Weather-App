@@ -29,6 +29,7 @@ function parseScope(location: string, townIds: Set<string>): ParsedScope {
     path === "/mountains" ||
     path.startsWith("/mountains/") ||
     path.startsWith("/mountain/") ||
+    path === "/today" ||
     path === "/radar" ||
     path === "/alerts" ||
     path.startsWith("/resort/") // legacy URL still maps to mountain scope
@@ -236,27 +237,54 @@ export function AppShell({ children }: { children: ReactNode }) {
       </aside>
 
       {/* Mobile header */}
-      <header className="md:hidden fixed top-0 inset-x-0 h-14 z-40 flex items-center justify-between px-4 glass-strong">
-        <Link
-          href="~/"
-          aria-label="Back to all regions"
-          className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors"
-        >
-          <ChevronLeft className="w-4 h-4" />
-          <span className="byline">{t("Regions", "地域")}</span>
-        </Link>
-        <Link href="/" className="flex items-center">
-          <img src={region.brand.wordmarkUrl} alt="feelzlike" className="h-6 w-auto" />
-        </Link>
-        {towns.length > 0 ? (
-          <TownPicker variant="compact" preserveSubpath />
-        ) : (
-          <span className="byline text-muted-foreground/80">{region.shortTag}</span>
+      <header className="md:hidden fixed top-0 inset-x-0 z-40 glass-strong">
+        <div className="h-14 flex items-center justify-between px-4">
+          <Link
+            href="~/"
+            aria-label="Back to all regions"
+            className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <ChevronLeft className="w-4 h-4" />
+            <span className="byline">{t("Regions", "地域")}</span>
+          </Link>
+          <Link href="/" className="flex items-center">
+            <img src={region.brand.wordmarkUrl} alt="feelzlike" className="h-6 w-auto" />
+          </Link>
+          {towns.length > 0 ? (
+            <TownPicker variant="compact" preserveSubpath />
+          ) : (
+            <span className="byline text-muted-foreground/80">{region.shortTag}</span>
+          )}
+        </div>
+        {(region.seasons || (region.language && region.language.locales.length > 1)) && (
+          <div className="flex items-center justify-end gap-2 px-4 pb-2 -mt-1">
+            {region.seasons && seasonCtx && (
+              <SeasonPill
+                season={seasonCtx.season}
+                onChange={seasonCtx.setSeason}
+                t={t}
+              />
+            )}
+            {region.language && region.language.locales.length > 1 && (
+              <LangPill
+                locales={region.language.locales}
+                current={lang.language}
+                onChange={lang.setLanguage}
+              />
+            )}
+          </div>
         )}
       </header>
 
       {/* Main */}
-      <main className="flex-1 md:ml-64 w-full min-h-screen pt-14 md:pt-0 pb-20 md:pb-0">
+      <main
+        className={cn(
+          "flex-1 md:ml-64 w-full min-h-screen md:pt-0 pb-20 md:pb-0",
+          (region.seasons || (region.language && region.language.locales.length > 1))
+            ? "pt-24"
+            : "pt-14",
+        )}
+      >
         <AnimatePresence mode="wait">
           <motion.div
             key={location}
