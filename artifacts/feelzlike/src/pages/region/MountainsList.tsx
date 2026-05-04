@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Mountain as MountainIcon, Activity } from "lucide-react";
+import { ArrowUpRight, Mountain as MountainIcon, Activity, ExternalLink } from "lucide-react";
 import { useRegion, useLanguage } from "@workspace/feelzlike-shell";
 
 export function MountainsList() {
@@ -168,6 +168,32 @@ export function MountainsList() {
                           </span>
                         </div>
                       </>
+                    )}
+
+                    {m.websiteUrl && (
+                      <span
+                        role="link"
+                        tabIndex={0}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          e.preventDefault();
+                          window.open(m.websiteUrl, "_blank", "noopener,noreferrer");
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            window.open(m.websiteUrl, "_blank", "noopener,noreferrer");
+                          }
+                        }}
+                        className="relative mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                      >
+                        <ExternalLink className="w-3 h-3" />
+                        {t("Official site", "公式サイト")}
+                        <span className="text-muted-foreground/50">
+                          {new URL(m.websiteUrl).hostname.replace(/^www\./, "")}
+                        </span>
+                      </span>
                     )}
                   </div>
                 </Link>

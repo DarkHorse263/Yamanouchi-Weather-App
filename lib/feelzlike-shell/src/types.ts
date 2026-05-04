@@ -34,6 +34,8 @@ export interface MountainLink {
   blurbJa?: string;
   /** Optional hero image url for the card */
   imageUrl?: string;
+  /** Official mountain/resort website URL */
+  websiteUrl?: string;
 }
 
 /** Scope a NavItem belongs to. Determines which sidebar section renders it. */
