@@ -1,7 +1,12 @@
 import { motion } from "framer-motion";
-import { MapPin, Star, BedDouble } from "lucide-react";
+import { MapPin, Star, BedDouble, ExternalLink } from "lucide-react";
 import { useRegion, useLanguage, useBaseTown, LiveBadge } from "@workspace/feelzlike-shell";
-import { useNearbyPlaces, type NearbyPlace, type CountryCode } from "@/lib/places";
+import {
+  useNearbyPlaces,
+  platformDeepLink,
+  type NearbyPlace,
+  type CountryCode,
+} from "@/lib/places";
 import { StayPlatformBar } from "@/components/StayPlatformBar";
 
 export function TownStay() {
@@ -155,32 +160,38 @@ function StayCard({
           </div>
         )}
 
-        <div className="mt-auto pt-4 space-y-2">
-          <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/70">
-            {t("Compare prices", "価格を比較")}
-          </p>
-          <div className="flex items-start gap-2">
-            <div className="flex-1">
-              <StayPlatformBar
-                variant="card"
-                country={country}
-                query={`${place.name} ${town.name}`}
-                lat={place.lat ?? town.lat}
-                lng={place.lng ?? town.lng}
-              />
-            </div>
-            {place.googleMapsUri && (
-              <a
-                href={place.googleMapsUri}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={t("Open in Google Maps", "Googleマップで開く")}
-                className="shrink-0 inline-flex items-center justify-center rounded-md border border-border text-xs font-semibold w-7 h-7 text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-colors"
-              >
-                <MapPin className="w-3.5 h-3.5" />
-              </a>
-            )}
-          </div>
+        {/*
+          Per-card we keep ONE primary CTA only ("Check availability"). The
+          full multi-platform spread already lives in the page-level banner
+          at the top of TownStay, so repeating 8 brand pills on every card
+          would be visual noise. Booking.com gives us the highest converting
+          property-name deep-link + best affiliate revenue.
+        */}
+        <div className="mt-auto pt-4 flex items-stretch gap-2">
+          <a
+            href={platformDeepLink("booking", {
+              query: `${place.name} ${town.name}`,
+              lat: place.lat ?? town.lat,
+              lng: place.lng ?? town.lng,
+            })}
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg bg-primary text-primary-foreground px-3 py-2 text-xs font-bold hover:bg-primary/90 transition-colors"
+          >
+            {t("Check availability", "空室を確認")}
+            <ExternalLink className="w-3 h-3 opacity-80" />
+          </a>
+          {place.googleMapsUri && (
+            <a
+              href={place.googleMapsUri}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t("Open in Google Maps", "Googleマップで開く")}
+              className="shrink-0 inline-flex items-center justify-center rounded-lg border border-border text-muted-foreground w-9 hover:text-foreground hover:border-foreground/30 transition-colors"
+            >
+              <MapPin className="w-4 h-4" />
+            </a>
+          )}
         </div>
       </div>
     </article>

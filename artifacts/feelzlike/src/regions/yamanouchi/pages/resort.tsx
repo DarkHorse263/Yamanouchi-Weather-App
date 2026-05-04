@@ -45,8 +45,24 @@ interface ResortProfile {
  */
 const PROFILES: Record<string, ResortProfile> = {
   "shiga-kogen": {
-    liftStatusUrl: "https://www.shigakogen.gr.jp/english/lift/",
+    // Mountain authority — real-time area-level lift map for all 18 areas.
+    liftStatusUrl: "https://www.shigakogen-ski.or.jp/",
     webcamUrl: "https://www.shigakogen.gr.jp/english/livecamera/",
+  },
+  "yakebitaiyama": {
+    liftStatusUrl: "https://www.shigakogen-ski.or.jp/",
+  },
+  "okushiga-kogen": {
+    liftStatusUrl: "https://www.shigakogen-ski.or.jp/",
+  },
+  "ichinose": {
+    liftStatusUrl: "https://www.shigakogen-ski.or.jp/",
+  },
+  "yokoteyama-shibutoge": {
+    liftStatusUrl: "https://www.shigakogen-ski.or.jp/",
+  },
+  "sunvalley-giant": {
+    liftStatusUrl: "https://www.shigakogen-ski.or.jp/",
   },
   "ryuoo": {
     liftStatusUrl: "https://www.ryuoo.com/en/winter/lift/",

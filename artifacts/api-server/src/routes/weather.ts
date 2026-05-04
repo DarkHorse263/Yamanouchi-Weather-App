@@ -181,6 +181,32 @@ const LOCATIONS: LocationConfig[] = [
     timezone: "Asia/Tokyo",
     region: "JP",
   },
+  {
+    id: "yokoteyama-shibutoge",
+    name: "Yokoteyama / Shibutoge",
+    latitude: 36.7044,
+    longitude: 138.5364,
+    elevation: 2307,
+    description: "Highest lift-served skiing in Japan. Long-season Kumanoyu, Yokoteyama and Shibutoge sub-area on the east edge of Shiga Kogen.",
+    bomStation: "",
+    bomStationId: "",
+    bomWmoId: 0,
+    timezone: "Asia/Tokyo",
+    region: "JP",
+  },
+  {
+    id: "sunvalley-giant",
+    name: "Sun Valley / Giant",
+    latitude: 36.7100,
+    longitude: 138.4700,
+    elevation: 1600,
+    description: "Gateway base near Hasuike — Sun Valley, Maruike, Hasuike and Giant. Easy beginner and family terrain at the entrance to Shiga Kogen.",
+    bomStation: "",
+    bomStationId: "",
+    bomWmoId: 0,
+    timezone: "Asia/Tokyo",
+    region: "JP",
+  },
 
   // ─── Iiyama (Nagano, Japan) ──────────────────────────────
   {
