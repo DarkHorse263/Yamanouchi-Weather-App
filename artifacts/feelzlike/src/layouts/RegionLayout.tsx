@@ -33,6 +33,11 @@ export interface RegionRouter {
   Eat?: () => ReactElement | null;
   /** Renders /:region/explore */
   Explore?: () => ReactElement | null;
+  /**
+   * Renders /:region/:town/transport when set; otherwise the generic
+   * region-isolated providers list (TownTransport) is shown.
+   */
+  Transport?: () => ReactElement | null;
 }
 
 const REGION_ROUTERS: Record<string, RegionRouter> = {

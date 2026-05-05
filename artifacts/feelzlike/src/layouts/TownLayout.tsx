@@ -1,6 +1,6 @@
 import { Switch, Route, Router as WouterRouter, useParams, Redirect } from "wouter";
 import { useEffect } from "react";
-import { useBaseTown } from "@workspace/feelzlike-shell";
+import { useBaseTown, useRegion } from "@workspace/feelzlike-shell";
 import { TownHome } from "@/pages/region/TownHome";
 import { TownSubpageStub } from "@/pages/region/TownSubpageStub";
 import { TownStay } from "@/pages/town/TownStay";
@@ -9,6 +9,16 @@ import { TownRoads } from "@/pages/town/TownRoads";
 import { TownTransport } from "@/pages/town/TownTransport";
 import { TownWeather } from "@/pages/town/TownWeather";
 import { TownCams } from "@/pages/town/TownCams";
+import { snowyMountainsRouter } from "@/regions/snowy-mountains/router";
+import { yamanouchiRouter } from "@/regions/yamanouchi/router";
+import { iiyamaRouter } from "@/regions/iiyama/router";
+import type { RegionRouter } from "@/layouts/RegionLayout";
+
+const REGION_ROUTERS: Record<string, RegionRouter> = {
+  "snowy-mountains": snowyMountainsRouter,
+  yamanouchi: yamanouchiRouter,
+  iiyama: iiyamaRouter,
+};
 
 /**
  * Wraps all /:town/* routes in a nested wouter base so children render with
@@ -19,6 +29,9 @@ export function TownLayout() {
   const params = useParams<{ town: string }>();
   const townId = params.town;
   const { towns, town, setTownId } = useBaseTown();
+  const { region } = useRegion();
+  const regionRoutes: RegionRouter = REGION_ROUTERS[region.id] ?? {};
+  const TransportPage = regionRoutes.Transport ?? TownTransport;
 
   useEffect(() => {
     if (!townId) return;
@@ -38,7 +51,7 @@ export function TownLayout() {
         <Route path="/weather" component={TownWeather} />
         <Route path="/roads" component={TownRoads} />
         <Route path="/cams" component={TownCams} />
-        <Route path="/transport" component={TownTransport} />
+        <Route path="/transport" component={TransportPage} />
         <Route path="/stay" component={TownStay} />
         <Route path="/eat">
           <TownPlaces

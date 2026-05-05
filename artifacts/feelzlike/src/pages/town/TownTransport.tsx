@@ -1,29 +1,55 @@
 import { motion } from "framer-motion";
 import { useMemo } from "react";
-import { useGetBusServices } from "@workspace/api-client-react";
-import { Bus, Phone, Globe, ArrowRight, CalendarCheck } from "lucide-react";
-import { useRegion, useLanguage, useBaseTown, LiveBadge } from "@workspace/feelzlike-shell";
+import {
+  Bus,
+  Phone,
+  Globe,
+  CalendarCheck,
+  Train,
+  Car,
+  Footprints,
+  Sparkles,
+} from "lucide-react";
+import {
+  useRegion,
+  useLanguage,
+  useBaseTown,
+  LiveBadge,
+} from "@workspace/feelzlike-shell";
+import type { RegionId } from "@workspace/api-client-react";
+import {
+  getProvidersForRegion,
+  type TransportProvider,
+} from "@/data/transport";
+import { assertProvidersForRegion } from "@/lib/regionGuard";
 
+/**
+ * Generic, region-isolated Transport page.
+ *
+ * - Reads providers from the per-region static data layer (no shared API
+ *   that could leak NSW data into a JP region — the original v0.3 bug).
+ * - Runs `assertProvidersForRegion` before render so any future drift is
+ *   caught loudly in dev and surfaced via Sentry in prod.
+ * - Used as the default Transport route for any region that does not
+ *   provide a custom override via `RegionRouter.Transport`.
+ *
+ * Yamanouchi ships a custom rich Transport page (winter timetables, kanji
+ * sections, etc.) wired through `yamanouchiRouter.Transport`, so JP towns
+ * never reach this generic component — but if they did, they would still
+ * see only Japanese providers thanks to the data layer + guard.
+ */
 export function TownTransport() {
   const { region } = useRegion();
   const { t } = useLanguage();
   const { town } = useBaseTown();
-  const query = useGetBusServices();
 
-  const routes = useMemo(() => {
-    if (!query.data || !town) return [];
-    const townName = town.name.toLowerCase();
-    return query.data.routes.filter((r) => {
-      const stops = (r.stops ?? []).some((s) => s.toLowerCase().includes(townName));
-      const inName = r.name?.toLowerCase().includes(townName) || r.description?.toLowerCase().includes(townName);
-      const sched = (r.schedule ?? []).some(
-        (s) =>
-          s.from?.toLowerCase().includes(townName) ||
-          s.to?.toLowerCase().includes(townName),
-      );
-      return stops || inName || sched;
+  const providers = useMemo<TransportProvider[]>(() => {
+    const all = getProvidersForRegion(region.id as RegionId);
+    return assertProvidersForRegion(all, region.id as RegionId, {
+      source: "transport providers",
+      page: `/${region.id}/${town?.id ?? ""}/transport`,
     });
-  }, [query.data, town]);
+  }, [region.id, town?.id]);
 
   return (
     <div className="px-6 md:px-10 py-8 md:py-12 max-w-6xl mx-auto">
@@ -35,170 +61,132 @@ export function TownTransport() {
         <div className="flex items-start justify-between gap-4 flex-wrap">
           <div>
             <p className="byline text-muted-foreground/70">
-              {region.name} · {town ? t(town.name, town.nameJa) : t("Town", "町")}
+              {region.name} ·{" "}
+              {town ? t(town.name, town.nameJa) : t("Town", "町")}
             </p>
             <h1 className="font-display font-semibold text-4xl md:text-5xl tracking-tight text-foreground mt-2">
               {t("Transport", "交通")}
             </h1>
             <p className="text-muted-foreground mt-3 max-w-xl">
               {t(
-                `Buses, shuttles and trains serving ${town?.name ?? "town"}.`,
+                `Buses, shuttles, trains and shared transport serving ${town?.name ?? "town"}.`,
                 `${town ? t(town.name, town.nameJa) : "町"}を発着するバス・送迎・電車。`,
               )}
             </p>
           </div>
-          <LiveBadge label={query.isFetching ? t("Loading", "読込中") : t("Schedules", "時刻表")} />
+          <LiveBadge label={t("Curated", "編集済")} />
         </div>
         <div className="rule mt-6 mb-8" />
       </motion.header>
 
-      {query.isError && (
-        <div className="rounded-2xl border border-border bg-white p-6">
-          <p className="text-sm">{t("Couldn't load transport info.", "交通情報を読み込めませんでした。")}</p>
+      {providers.length === 0 ? (
+        <div className="rounded-2xl border border-border bg-white p-8 text-center">
+          <Sparkles className="w-8 h-8 text-muted-foreground/40 mx-auto" />
+          <p className="text-sm text-muted-foreground mt-3">
+            {t(
+              "Transport listings for this region are launching soon.",
+              "この地域の交通情報は近日公開予定です。",
+            )}
+          </p>
         </div>
-      )}
-
-      {query.isLoading && <TransportSkeleton />}
-
-      {!query.isLoading && query.data && (
-        <div className="grid lg:grid-cols-[280px_1fr] gap-6">
-          {/* Provider sidebar */}
-          <aside className="space-y-4">
-            <div className="rounded-2xl border border-border bg-white p-5">
-              <p className="byline text-muted-foreground/70">{t("Provider", "運行会社")}</p>
-              <h2 className="font-display font-semibold text-lg text-foreground mt-1">{query.data.provider}</h2>
-              <div className="mt-4 space-y-2">
-                {query.data.phone && (
-                  <a
-                    href={`tel:${query.data.phone}`}
-                    className="inline-flex items-center gap-2 text-sm text-foreground hover:text-primary transition-colors"
-                  >
-                    <Phone className="w-4 h-4 text-primary" />
-                    {query.data.phone}
-                  </a>
-                )}
-                {query.data.website && (
-                  <a
-                    href={query.data.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-foreground hover:text-primary transition-colors"
-                  >
-                    <Globe className="w-4 h-4 text-primary" />
-                    {t("Visit website", "ウェブサイト")}
-                  </a>
-                )}
-              </div>
-            </div>
-
-            {query.data.bookingInfo && (
-              <div className="rounded-2xl border border-border bg-white p-5">
-                <h3 className="font-display font-semibold text-sm text-foreground inline-flex items-center gap-1.5">
-                  <CalendarCheck className="w-4 h-4 text-primary" />
-                  {t("Booking", "予約")}
-                </h3>
-                <p className="text-xs text-muted-foreground mt-2 leading-relaxed">{query.data.bookingInfo}</p>
-              </div>
-            )}
-          </aside>
-
-          {/* Routes */}
-          <div className="space-y-4">
-            {routes.length === 0 ? (
-              <div className="rounded-2xl border border-border bg-white p-8 text-center">
-                <Bus className="w-8 h-8 text-muted-foreground/40 mx-auto" />
-                <p className="text-sm text-muted-foreground mt-3">
-                  {t(
-                    `No routes serving ${town?.name ?? "this town"} found.`,
-                    `${town ? t(town.name, town.nameJa) : "この町"}を発着する路線は見つかりませんでした。`,
-                  )}
-                </p>
-              </div>
-            ) : (
-              routes.map((route, idx) => (
-                <motion.article
-                  key={route.id}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: idx * 0.05 }}
-                  className="rounded-2xl border border-border bg-white p-5"
-                >
-                  <h3 className="font-display font-semibold text-lg text-foreground">{route.name}</h3>
-                  {route.description && (
-                    <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{route.description}</p>
-                  )}
-
-                  {route.stops && route.stops.length > 0 && (
-                    <div className="mt-3 flex flex-wrap items-center gap-x-1 gap-y-1.5">
-                      {route.stops.map((s, i) => (
-                        <span key={i} className="inline-flex items-center gap-1 text-xs">
-                          <span
-                            className={`px-2 py-0.5 rounded-md font-medium ${
-                              s.toLowerCase().includes(town!.name.toLowerCase())
-                                ? "bg-primary/10 text-primary"
-                                : "bg-secondary text-secondary-foreground"
-                            }`}
-                          >
-                            {s}
-                          </span>
-                          {i < route.stops!.length - 1 && (
-                            <ArrowRight className="w-3 h-3 text-muted-foreground/50" />
-                          )}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-
-                  {route.schedule && route.schedule.length > 0 && (
-                    <div className="mt-4 rounded-xl border border-border overflow-hidden">
-                      <table className="w-full text-xs">
-                        <thead className="bg-secondary/50">
-                          <tr className="text-left text-muted-foreground">
-                            <th className="px-3 py-2 font-semibold">{t("Depart", "出発")}</th>
-                            <th className="px-3 py-2 font-semibold">{t("Arrive", "到着")}</th>
-                            <th className="px-3 py-2 font-semibold">{t("From → To", "発 → 着")}</th>
-                            <th className="px-3 py-2 font-semibold">{t("Days", "運行日")}</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {route.schedule.map((s, i) => (
-                            <tr key={i} className="border-t border-border">
-                              <td className="px-3 py-2 font-mono font-semibold">{s.departure}</td>
-                              <td className="px-3 py-2 font-mono">{s.arrival}</td>
-                              <td className="px-3 py-2 text-muted-foreground">{s.from} → {s.to}</td>
-                              <td className="px-3 py-2 text-muted-foreground">{s.days}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  )}
-
-                  {route.notes && (
-                    <p className="text-xs text-muted-foreground mt-3 italic">{route.notes}</p>
-                  )}
-                </motion.article>
-              ))
-            )}
-          </div>
+      ) : (
+        <div className="grid gap-4 sm:grid-cols-2">
+          {providers.map((p, idx) => (
+            <ProviderCard key={p.id} provider={p} index={idx} t={t} />
+          ))}
         </div>
       )}
     </div>
   );
 }
 
-function TransportSkeleton() {
+function typeIcon(type: TransportProvider["type"]) {
+  switch (type) {
+    case "train":
+      return Train;
+    case "shuttle":
+      return Footprints;
+    case "taxi":
+    case "rental_car":
+      return Car;
+    case "bus":
+    default:
+      return Bus;
+  }
+}
+
+function ProviderCard({
+  provider,
+  index,
+  t,
+}: {
+  provider: TransportProvider;
+  index: number;
+  t: (en: string, ja?: string) => string;
+}) {
+  const Icon = typeIcon(provider.type);
   return (
-    <div className="grid lg:grid-cols-[280px_1fr] gap-6">
-      <div className="rounded-2xl border border-border bg-white p-5 h-40 animate-pulse" />
-      <div className="space-y-4">
-        {Array.from({ length: 2 }).map((_, i) => (
-          <div key={i} className="rounded-2xl border border-border bg-white p-5">
-            <div className="h-5 w-1/3 rounded bg-secondary animate-pulse" />
-            <div className="h-3 w-2/3 rounded bg-secondary animate-pulse mt-2" />
-          </div>
-        ))}
+    <motion.article
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.04 }}
+      className="rounded-2xl border border-border bg-white p-5 flex flex-col"
+    >
+      <div className="flex items-start gap-3">
+        <div className="shrink-0 w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+          <Icon className="w-5 h-5" />
+        </div>
+        <div className="min-w-0 flex-1">
+          <h3 className="font-display font-semibold text-base text-foreground leading-tight">
+            {provider.name_local
+              ? t(provider.name, provider.name_local)
+              : provider.name}
+          </h3>
+          <p className="byline text-muted-foreground/70 mt-0.5">
+            {provider.operator}
+          </p>
+        </div>
       </div>
-    </div>
+
+      <p className="text-sm text-foreground/90 mt-3 leading-relaxed">
+        {provider.route_summary_local
+          ? t(provider.route_summary, provider.route_summary_local)
+          : provider.route_summary}
+      </p>
+
+      <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+        {provider.phone && (
+          <a
+            href={`tel:${provider.phone.replace(/\s+/g, "")}`}
+            className="inline-flex items-center gap-1.5 text-foreground hover:text-primary transition-colors"
+          >
+            <Phone className="w-4 h-4 text-primary" />
+            {provider.phone}
+          </a>
+        )}
+        {provider.website && (
+          <a
+            href={provider.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-foreground hover:text-primary transition-colors"
+          >
+            <Globe className="w-4 h-4 text-primary" />
+            {t("Website", "ウェブサイト")}
+          </a>
+        )}
+        {provider.schedule_url && (
+          <a
+            href={provider.schedule_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-foreground hover:text-primary transition-colors"
+          >
+            <CalendarCheck className="w-4 h-4 text-primary" />
+            {t("Timetable", "時刻表")}
+          </a>
+        )}
+      </div>
+    </motion.article>
   );
 }
