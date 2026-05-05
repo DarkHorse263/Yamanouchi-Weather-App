@@ -372,7 +372,7 @@ async function copyToClipboard(text: string): Promise<boolean> {
   return false;
 }
 
-function StayDetailSheet({ stay }: { stay: Stay }) {
+export function StayDetailSheet({ stay }: { stay: Stay }) {
   const [copied, setCopied] = useState(false);
   const mapsHref = buildMapsHref(stay);
   const allMountains = stay.drive_min_to_each_mountain ?? null;
