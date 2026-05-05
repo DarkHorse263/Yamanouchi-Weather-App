@@ -8,10 +8,16 @@ import { Router, type IRouter } from "express";
 
 const router: IRouter = Router();
 
+// IMPORTANT: every value below MUST be a Table A type accepted by Google Places (New)
+// `places:searchNearby`. The legacy v1 type `natural_feature` is NOT in Table A and
+// caused the upstream to return INVALID_ARGUMENT 400 ("Unsupported types: natural_feature."),
+// which surfaced to the client as 502 and a permanent loading skeleton on /:region/:town/explore.
+// Replaced with `national_park` + `hiking_area`, which cover the same outdoor/nature intent.
+// See: https://developers.google.com/maps/documentation/places/web-service/place-types#table-a
 const KIND_TO_TYPES: Record<string, string[]> = {
   stay:    ["lodging"],
   eat:     ["restaurant", "cafe", "bakery", "bar"],
-  explore: ["tourist_attraction", "museum", "park", "natural_feature"],
+  explore: ["tourist_attraction", "museum", "park", "national_park", "hiking_area"],
 };
 
 interface PlaceOut {

@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
-import { ExternalLink, MapPin, Star, UtensilsCrossed, Compass } from "lucide-react";
+import { AlertCircle, ExternalLink, MapPin, RefreshCw, Star, UtensilsCrossed, Compass } from "lucide-react";
 import { useRegion, useLanguage, useBaseTown, LiveBadge } from "@workspace/feelzlike-shell";
 import { useNearbyPlaces, type NearbyPlace, type PlaceKind } from "@/lib/places";
+import { Button } from "@/components/ui/button";
 
 interface Props {
   kind: Exclude<PlaceKind, "stay">;
@@ -16,8 +17,19 @@ export function TownPlaces({ kind, title, titleJa, blurb, blurbJa }: Props) {
   const { t } = useLanguage();
   const { town } = useBaseTown();
 
+  // Stay/Eat use the town's tight `radiusM` (e.g. Yudanaka 700m, Shibu 400m) to keep
+  // adjacent-town listings from duplicating. Explore is different: tourists pick a
+  // base town to reach iconic regional destinations (Jigokudani Monkey Park is ~3km
+  // from Yudanaka station — the whole reason people stay there). Use a wider floor
+  // for explore so those headline POIs actually surface.
+  const EXPLORE_MIN_RADIUS_M = 6000;
+  const radius =
+    kind === "explore"
+      ? Math.max(town?.radiusM ?? 5000, EXPLORE_MIN_RADIUS_M)
+      : (town?.radiusM ?? 5000);
+
   const query = useNearbyPlaces(
-    town ? { lat: town.lat, lng: town.lng, radius: town.radiusM ?? 5000, kind } : null,
+    town ? { lat: town.lat, lng: town.lng, radius, kind } : null,
   );
 
   const places = query.data ?? [];
@@ -46,11 +58,46 @@ export function TownPlaces({ kind, title, titleJa, blurb, blurbJa }: Props) {
       </motion.header>
 
       {query.isError && (
-        <div className="rounded-2xl border border-border bg-white p-6">
-          <p className="text-sm text-foreground">
-            {t("Couldn't load nearby places.", "周辺の場所を読み込めませんでした。")}{" "}
-            <span className="text-muted-foreground">{(query.error as Error)?.message}</span>
-          </p>
+        <div
+          role="alert"
+          className="rounded-2xl border border-destructive/30 bg-white p-6 md:p-8 max-w-2xl"
+        >
+          <div className="flex items-start gap-4">
+            <div className="rounded-xl bg-destructive/10 p-2.5 shrink-0">
+              <AlertCircle className="w-5 h-5 text-destructive" aria-hidden />
+            </div>
+            <div className="min-w-0 flex-1">
+              <h2 className="font-display font-semibold text-lg text-foreground">
+                {t("Couldn't load nearby places", "周辺の場所を読み込めませんでした")}
+              </h2>
+              <p className="text-sm text-muted-foreground mt-1.5">
+                {t(
+                  "We couldn't reach the places service just now. Please try again in a moment.",
+                  "周辺情報サービスに接続できませんでした。しばらくしてから再度お試しください。",
+                )}
+              </p>
+              {(query.error as Error | undefined)?.message && (
+                <p className="byline text-muted-foreground/70 mt-3 break-all">
+                  {(query.error as Error).message}
+                </p>
+              )}
+              <div className="mt-5">
+                <Button
+                  type="button"
+                  variant="default"
+                  size="sm"
+                  onClick={() => query.refetch()}
+                  disabled={query.isFetching}
+                >
+                  <RefreshCw
+                    className={`w-3.5 h-3.5 mr-1.5 ${query.isFetching ? "animate-spin" : ""}`}
+                    aria-hidden
+                  />
+                  {query.isFetching ? t("Retrying…", "再試行中…") : t("Try again", "再試行")}
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
       )}
 

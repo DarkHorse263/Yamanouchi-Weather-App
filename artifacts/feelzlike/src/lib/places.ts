@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import * as Sentry from "@sentry/react";
 
 export interface NearbyPlace {
   id: string;
@@ -54,10 +55,36 @@ async function fetchNearby(args: NearbyArgs): Promise<NearbyPlace[]> {
     kind: args.kind,
     max: String(args.max ?? 20),
   });
-  const res = await fetch(apiUrl(`/places/nearby?${params.toString()}`));
+  const url = apiUrl(`/places/nearby?${params.toString()}`);
+  let res: Response;
+  try {
+    res = await fetch(url);
+  } catch (networkErr) {
+    // Network-level failure (offline, DNS, CORS pre-flight blocked, etc.)
+    Sentry.addBreadcrumb({
+      category: "places",
+      level: "error",
+      message: "places.fetch.network_error",
+      data: { kind: args.kind, lat: args.lat, lng: args.lng },
+    });
+    Sentry.captureException(networkErr, {
+      tags: { feature: "places", kind: args.kind, source: "fetchNearby" },
+    });
+    throw networkErr;
+  }
   if (!res.ok) {
     const body = await res.text().catch(() => "");
-    throw new Error(`Places fetch failed (${res.status}): ${body.slice(0, 200)}`);
+    const err = new Error(`Places fetch failed (${res.status}): ${body.slice(0, 200)}`);
+    Sentry.addBreadcrumb({
+      category: "places",
+      level: "error",
+      message: "places.fetch.http_error",
+      data: { kind: args.kind, status: res.status, body: body.slice(0, 200) },
+    });
+    Sentry.captureException(err, {
+      tags: { feature: "places", kind: args.kind, status: String(res.status), source: "fetchNearby" },
+    });
+    throw err;
   }
   const data = (await res.json()) as { places: NearbyPlace[] };
   const places = data.places ?? [];
