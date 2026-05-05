@@ -1,0 +1,1219 @@
+[
+  {
+    "id": "kanaguya-rekishi-no-yado",
+    "name": "Rekishi no Yado Kanaguya",
+    "name_local": "歴史の宿 金具屋",
+    "type": "ryokan",
+    "town": "shibu_onsen",
+    "region": "yamanouchi",
+    "short_description": "The most iconic inn in Japan — a registered national cultural property whose Showa-era wooden facade is an archetype for Spirited Away.",
+    "long_description": "Founded around 1758 and rebuilt in glorious Showa-era timber, Kanaguya's four-storey illuminated facade on the main cobblestone street is one of the most photographed buildings in Japanese onsen culture. Corridors lit by low lanterns wind like streets between rooms, each uniquely designed. Eight natural spring baths are on-site — five private (no reservation needed, first-come), two indoor communal, and two outdoor rotenburo. A free 30-minute guided cultural tour of the building runs nightly before dinner. Kaiseki dinner and breakfast are included; rooms range from intimate 8-tatami suites to grand multi-room configurations.",
+    "address": "2202 Heion, Yamanouchi-machi, Shimotakai-gun, Nagano 381-0401",
+    "lat": 36.7478,
+    "lng": 138.4237,
+    "phone": "+81-269-33-3105",
+    "website": "https://kanaguya.com",
+    "price_band": "$$$$",
+    "photos": [
+      "https://kanaguya.com",
+      "https://www.travelynotes.com/blog-japan/a-night-at-kanaguya-a-review-of-a-traditional-ryokan-in-shibu-onsen"
+    ],
+    "source_urls": [
+      "https://kanaguya.com",
+      "https://www.travelynotes.com/blog-japan/a-night-at-kanaguya-a-review-of-a-traditional-ryokan-in-shibu-onsen",
+      "https://www.tripadvisor.com/Hotel_Review-g1117904-d1392777-Reviews-Rekishi_no_Yado_Kanaguya-Yamanouchi_machi_Shimotakai_gun_Nagano_Prefecture_Koshinetsu.html",
+      "https://www.jalan.net/yad330740/",
+      "https://asocialnomad.com/japan/shibu-onsen-ryokans/"
+    ],
+    "room_count": 29,
+    "amenities": [
+      "8 natural spring baths on-site (5 private, 2 indoor communal, 2 outdoor rotenburo)",
+      "Kuyu meguri key for all 9 public bathhouses",
+      "Nightly 30-minute cultural building tour",
+      "Kaiseki dinner and breakfast included",
+      "Yukata and haori jacket provided",
+      "Geta sandals for village walks",
+      "Air conditioning",
+      "Free WiFi",
+      "Luggage storage",
+      "Station pickup service available"
+    ],
+    "english_spoken": "limited",
+    "check_in": "15:00",
+    "check_out": "10:00",
+    "booking_links": {
+      "booking_com": null,
+      "agoda": null,
+      "jalan": "https://www.jalan.net/en/japan_hotels_ryokan/Ryokan/Nagano_Ryokan/Shiga_KitaShiga_Yudanakashibu_Ryokan/Yudanaka_Shibu_Shiga_Kogen_Ryokan/kanaguya/",
+      "rakuten": "https://travel.rakuten.com/usa/en-us/hotel_info_item/10123456902114",
+      "official": "https://kanaguya.com"
+    },
+    "onsen": "both",
+    "tattoo_policy": "private_only",
+    "meal_plan": "half_board",
+    "yukata_provided": "yes",
+    "nearest_mountain": "Shiga Kogen",
+    "drive_min_to_nearest_mountain": 35,
+    "drive_min_to_each_mountain": {
+      "shiga_kogen": 35,
+      "ryuoo": 20,
+      "yakebitai": 40
+    },
+    "country": "JP"
+  },
+  {
+    "id": "kokuya-shibu-onsen",
+    "name": "Shibu Onsen Kokuya",
+    "name_local": "古久屋",
+    "type": "ryokan",
+    "town": "shibu_onsen",
+    "region": "yamanouchi",
+    "short_description": "Established 1625 and now in its 16th generation — nine indoor baths drawing from six spring sources, with private open-air rooms.",
+    "long_description": "Kokuya stands at the geographical and spiritual heart of Shibu Onsen, operated by the same family for nearly 400 years. The current building dates from 1957 in faithful traditional style. Six distinct spring sources feed nine indoor baths (16 tubs total) — two of which are reservable private baths — plus three outdoor rotenburo, all 100% free-flow natural spring water. Ten rooms include private open-air baths. Kaiseki meals change monthly to reflect seasonality and use Shinshu premium ingredients; guests from overseas particularly appreciate the quality. The kuyu meguri key comes with every room.",
+    "address": "2200 Heion, Yamanouchi-machi, Shimotakai-gun, Nagano 381-0401",
+    "lat": 36.7476,
+    "lng": 138.4235,
+    "phone": "+81-269-33-2511",
+    "website": "https://www.ichizaemon.com/lang_en/",
+    "price_band": "$$$",
+    "photos": [
+      "https://www.ichizaemon.com/lang_en/"
+    ],
+    "source_urls": [
+      "https://www.ichizaemon.com/lang_en/",
+      "https://shibuonsen.net/stay/kokuya/",
+      "https://www.booking.com/hotel/jp/kokuya.html",
+      "https://www.tattoo-friendly.com/onsen/shibu-onsen/shibu-onsen-kokuya",
+      "https://whereandwander.com/the-complete-guide-to-shibu-onsen-and-the-nine-bathhouses/"
+    ],
+    "room_count": 20,
+    "amenities": [
+      "9 indoor baths (16 tubs total) from 6 spring sources",
+      "3 outdoor rotenburo",
+      "2 reservable private baths",
+      "10 rooms with private open-air bath",
+      "Kuyu meguri key for all 9 public bathhouses",
+      "Full kaiseki dining (monthly seasonal menu)",
+      "Yukata provided",
+      "Karaoke",
+      "Free parking",
+      "Station pickup"
+    ],
+    "english_spoken": "limited",
+    "check_in": "15:00",
+    "check_out": "10:00",
+    "booking_links": {
+      "booking_com": "https://www.booking.com/hotel/jp/kokuya.html",
+      "agoda": null,
+      "jalan": null,
+      "rakuten": null,
+      "official": "https://www.ichizaemon.com/lang_en/"
+    },
+    "onsen": "both",
+    "tattoo_policy": "private_only",
+    "meal_plan": "half_board",
+    "yukata_provided": "yes",
+    "nearest_mountain": "Shiga Kogen",
+    "drive_min_to_nearest_mountain": 35,
+    "drive_min_to_each_mountain": {
+      "shiga_kogen": 35,
+      "ryuoo": 20,
+      "yakebitai": 40
+    },
+    "country": "JP"
+  },
+  {
+    "id": "senshinkan-matsuya",
+    "name": "Senshinkan Matsuya",
+    "name_local": "洗心館 松屋",
+    "type": "ryokan",
+    "town": "shibu_onsen",
+    "region": "yamanouchi",
+    "short_description": "Beloved 11-room family ryokan on the main cobbled street — warm Kodama-family hospitality, two private onsens bookable free of charge.",
+    "long_description": "Run by the Kodama family for generations, Senshinkan Matsuya occupies a multi-storey wooden building right on Shibu's iconic main lane. Eleven tatami rooms — some with birch trees growing through the room, an old-inn quirk beloved by guests. Two private basement onsens can be reserved at no extra charge. Breakfast is notably inventive, changing daily. Stairs are steep; not suitable for those with limited mobility. The Kodamas are known for going above and beyond — luggage delivery, restaurant tips, early check-in if possible.",
+    "address": "2222 Hirao, Yamanouchi-machi, Shimotakai-gun, Nagano 381-0401",
+    "lat": 36.748,
+    "lng": 138.4238,
+    "phone": "+81-269-33-3181",
+    "website": "https://eihachi.com/english.html",
+    "price_band": "$$$",
+    "photos": [
+      "https://eihachi.com/english.html",
+      "https://www.tripadvisor.com/Hotel_Review-g1117904-d1440172-Reviews-Senshinkan_Matsuya-Yamanouchi_machi_Shimotakai_gun_Nagano_Prefecture_Koshinetsu_Chubu.html"
+    ],
+    "source_urls": [
+      "https://eihachi.com/english.html",
+      "https://www.tripadvisor.com/Hotel_Review-g1117904-d1440172-Reviews-Senshinkan_Matsuya-Yamanouchi_machi_Shimotakai_gun_Nagano_Prefecture_Koshinetsu_Chubu.html",
+      "https://www.unique-nagano.com/detail.php?l=en&id=306",
+      "https://www.expedia.com/Nagano-Hotels-Senshinkan-Matsuya.h33669094.Hotel-Information"
+    ],
+    "room_count": 11,
+    "amenities": [
+      "2 private basement onsens (bookable free of charge)",
+      "Communal indoor hot spring bath",
+      "Kuyu meguri key for all 9 public bathhouses",
+      "Kaiseki dinner and breakfast included",
+      "Yukata provided",
+      "Station pickup/luggage delivery on request",
+      "Free WiFi"
+    ],
+    "english_spoken": "limited",
+    "check_in": "15:00",
+    "check_out": "10:00",
+    "booking_links": {
+      "booking_com": null,
+      "agoda": null,
+      "expedia": "https://www.expedia.com/Nagano-Hotels-Senshinkan-Matsuya.h33669094.Hotel-Information",
+      "jalan": null,
+      "rakuten": null,
+      "official": "https://eihachi.com/english.html"
+    },
+    "onsen": "both",
+    "tattoo_policy": "private_only",
+    "meal_plan": "half_board",
+    "yukata_provided": "yes",
+    "nearest_mountain": "Shiga Kogen",
+    "drive_min_to_nearest_mountain": 35,
+    "drive_min_to_each_mountain": {
+      "shiga_kogen": 35,
+      "ryuoo": 20,
+      "yakebitai": 40
+    },
+    "country": "JP"
+  },
+  {
+    "id": "sakaeya-shunran-no-yado",
+    "name": "Shunran no Yado Sakaeya",
+    "name_local": "春蘭の宿 さかえや",
+    "type": "ryokan",
+    "town": "shibu_onsen",
+    "region": "yamanouchi",
+    "short_description": "Top-rated ryokan in the centre of the village, with private onsen rooms, exceptional kaiseki, and a generous 15-hour stay window.",
+    "long_description": "Sakaeya consistently ranks among the highest-reviewed ryokan in Shibu Onsen, praised for exemplary service, exquisite kaiseki (multi-course dinners), and a notable checkout policy allowing guests to stay up to 21 hours from check-in. Rooms are traditional tatami with futon; select rooms include private outdoor baths. The staff greet guests with green tea and seasonal sweets on arrival and go out of their way to assist with local logistics. Both English and Japanese meal requests are accommodated. Colourful yukata selection is a small delight.",
+    "address": "2149 Heion, Yamanouchi-machi, Shimotakai-gun, Nagano 381-0401",
+    "lat": 36.7482,
+    "lng": 138.4234,
+    "phone": "+81-269-33-2531",
+    "website": "https://e-sakaeya.jp",
+    "price_band": "$$$",
+    "photos": [
+      "https://e-sakaeya.jp",
+      "https://www.booking.com/hotel/jp/sakaeya.html"
+    ],
+    "source_urls": [
+      "https://e-sakaeya.jp",
+      "https://www.booking.com/hotel/jp/sakaeya.html",
+      "https://www.jalan.net/en/japan_hotels_ryokan/Ryokan/Nagano_Ryokan/Shiga_KitaShiga_Yudanakashibu_Ryokan/Yudanaka_Shibu_Shiga_Kogen_Ryokan/shunran_no_yado_sakaeya/",
+      "https://asocialnomad.com/japan/shibu-onsen-ryokans/",
+      "https://www.expedia.com/Nagano-Hotels-Shibu-Onsen-Sakaeya.h11605354.Hotel-Information"
+    ],
+    "room_count": 16,
+    "amenities": [
+      "Indoor and outdoor communal hot spring baths",
+      "Private outdoor baths in select rooms",
+      "Reservable private onsen with sauna",
+      "Kuyu meguri key for all 9 public bathhouses",
+      "Kaiseki dinner and Japanese/Western breakfast included",
+      "Yukata (colourful selection) provided",
+      "Free station pickup",
+      "Free WiFi",
+      "Bar on-site",
+      "Café on-site"
+    ],
+    "english_spoken": "yes",
+    "check_in": "15:00",
+    "check_out": "12:00",
+    "booking_links": {
+      "booking_com": "https://www.booking.com/hotel/jp/sakaeya.html",
+      "agoda": null,
+      "jalan": "https://www.jalan.net/en/japan_hotels_ryokan/Ryokan/Nagano_Ryokan/Shiga_KitaShiga_Yudanakashibu_Ryokan/Yudanaka_Shibu_Shiga_Kogen_Ryokan/shunran_no_yado_sakaeya/",
+      "rakuten": null,
+      "official": "https://e-sakaeya.jp"
+    },
+    "onsen": "both",
+    "tattoo_policy": "private_only",
+    "meal_plan": "half_board",
+    "yukata_provided": "yes",
+    "nearest_mountain": "Shiga Kogen",
+    "drive_min_to_nearest_mountain": 35,
+    "drive_min_to_each_mountain": {
+      "shiga_kogen": 35,
+      "ryuoo": 20,
+      "yakebitai": 40
+    },
+    "country": "JP"
+  },
+  {
+    "id": "furuya-kokuya",
+    "name": "Furuya Ryokan (Kokuya)",
+    "name_local": "古久屋",
+    "type": "ryokan",
+    "town": "shibu_onsen",
+    "region": "yamanouchi",
+    "short_description": "Note: 'Furuya' (古久屋) is the same establishment as Kokuya — the original romanization of the kanji differs by reading. See Kokuya listing.",
+    "long_description": "The property often listed as 'Furuya Ryokan' in English sources is the same inn as Kokuya (古久屋), a frequent transliteration variant. Founded in 1625, this 16th-generation family property remains one of Shibu Onsen's most celebrated inns. Guests receive the same nine-bath internal meguri and the public kuyu key. Please refer to the Kokuya entry for full details. When booking, confirm under the Japanese name 古久屋 or the English site at ichizaemon.com.",
+    "address": "2200 Heion, Yamanouchi-machi, Shimotakai-gun, Nagano 381-0401",
+    "lat": 36.7476,
+    "lng": 138.4235,
+    "phone": "+81-269-33-2511",
+    "website": "https://www.ichizaemon.com/lang_en/",
+    "price_band": "$$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.ichizaemon.com/lang_en/",
+      "https://shibuonsen.net/stay/kokuya/"
+    ],
+    "room_count": 20,
+    "amenities": [
+      "See Kokuya listing — identical property"
+    ],
+    "english_spoken": "limited",
+    "check_in": "15:00",
+    "check_out": "10:00",
+    "booking_links": {
+      "booking_com": "https://www.booking.com/hotel/jp/kokuya.html",
+      "official": "https://www.ichizaemon.com/lang_en/"
+    },
+    "onsen": "both",
+    "tattoo_policy": "private_only",
+    "meal_plan": "half_board",
+    "yukata_provided": "yes",
+    "nearest_mountain": "Shiga Kogen",
+    "drive_min_to_nearest_mountain": 35,
+    "drive_min_to_each_mountain": {
+      "shiga_kogen": 35,
+      "ryuoo": 20,
+      "yakebitai": 40
+    },
+    "country": "JP"
+  },
+  {
+    "id": "yorozuya",
+    "name": "Yorozuya",
+    "name_local": "よろづや旅館",
+    "type": "ryokan",
+    "town": "shibu_onsen",
+    "region": "yamanouchi",
+    "short_description": "Grand 28-room heritage inn built around 1789, with all rooms featuring private hot spring baths and a striking heritage public bath.",
+    "long_description": "Yorozuya is a substantial ryokan with a history stretching back to the late Edo period, now offering 28 rooms across its main building. Every room comes with its own private hot spring bath — a rare full-property commitment to in-room onsen — plus there is one additional reservable shared private bath. The public indoor baths are heritage-listed spaces. Dinner is the famous Shinshu wagyu beef, handled with a kaiseki precision that draws repeat guests. Both Japanese traditional and Western-style rooms with divan beds are available, making it one of the more accessible options for mixed-preference groups. Rated 9.4 on Expedia. A newer affiliated annex, Shoraiso (opened March 2024), offers five additional suites, all with open-air private baths.",
+    "address": "Heion, Yamanouchi-machi, Shimotakai-gun, Nagano 381-0401",
+    "lat": 36.7479,
+    "lng": 138.423,
+    "phone": "+81-269-33-3111",
+    "website": "https://www.yorozuya-jp.com",
+    "price_band": "$$$$",
+    "photos": [
+      "https://www.expedia.com/Yamanouchi-Hotels-Yorozuya.h10046447.Hotel-Information"
+    ],
+    "source_urls": [
+      "https://selected-ryokan.com/ryokan/yorozuya_snow-monkey_yudanaka-shibu_nagano.html",
+      "https://www.booking.com/hotel/jp/yorozuya.html",
+      "https://www.expedia.com/Yamanouchi-Hotels-Yorozuya.h10046447.Hotel-Information",
+      "https://www.tripadvisor.com/Hotel_Feature-g1117904-d2167456-zft1-Yorozuya.html"
+    ],
+    "room_count": 28,
+    "amenities": [
+      "All 28 rooms have private in-room hot spring baths",
+      "1 additional reservable private bath",
+      "Heritage public indoor baths (gender-separated)",
+      "Kuyu meguri key for all 9 public bathhouses",
+      "Kaiseki dinner with Shinshu wagyu beef",
+      "Breakfast included",
+      "Yukata provided",
+      "Bar on-site",
+      "Restaurant on-site",
+      "Massage/spa services",
+      "Free parking",
+      "Station pickup (meets guests at Yudanaka Station)"
+    ],
+    "english_spoken": "limited",
+    "check_in": "15:00",
+    "check_out": "10:00",
+    "booking_links": {
+      "booking_com": "https://www.booking.com/hotel/jp/yorozuya.html",
+      "agoda": null,
+      "jalan": null,
+      "rakuten": null,
+      "official": "https://www.yorozuya-jp.com"
+    },
+    "onsen": "both",
+    "tattoo_policy": "private_only",
+    "meal_plan": "half_board",
+    "yukata_provided": "yes",
+    "nearest_mountain": "Shiga Kogen",
+    "drive_min_to_nearest_mountain": 35,
+    "drive_min_to_each_mountain": {
+      "shiga_kogen": 35,
+      "ryuoo": 20,
+      "yakebitai": 40
+    },
+    "country": "JP"
+  },
+  {
+    "id": "onyado-suminoyu",
+    "name": "Onyado Suminoyu",
+    "name_local": "御宿 炭乃湯",
+    "type": "ryokan",
+    "town": "shibu_onsen",
+    "region": "yamanouchi",
+    "short_description": "12-room upscale ryokan with a 6th-floor panoramic rooftop rotenburo and Japanese-modern room interiors that suit solo travellers and couples.",
+    "long_description": "Suminoyu occupies a taller building than most Shibu inns, and makes excellent use of the height: the 6th-floor rooftop open-air bath offers panoramic views over the onsen town roofline to northern Shinshu mountain ranges. All-night bathing available. Rooms blend traditional tatami sensibility with modern comforts — Simmons semi-double beds in the twin rooms, kotatsu tables in tatami rooms, Bluetooth speakers, full smart toilets. Twelve rooms in total; frequently sells out. English spoken. Check-in from 1 PM, which is earlier than most ryokan in the village. Included in Rakuten Travel's recommended listings. Guests receive the kuyu key for the nine public bathhouses.",
+    "address": "Heion, Yamanouchi-machi, Shimotakai-gun, Nagano 381-0401",
+    "lat": 36.7481,
+    "lng": 138.424,
+    "phone": "+81-269-33-4126",
+    "website": "https://www.suminoyu.com/en.html",
+    "price_band": "$$$",
+    "photos": [
+      "https://www.suminoyu.com/en.html"
+    ],
+    "source_urls": [
+      "https://www.suminoyu.com/en.html",
+      "https://www.booking.com/hotel/jp/suminoyu.html",
+      "https://www.jalan.net/en/japan_hotels_ryokan/Ryokan/Nagano_Ryokan/Shiga_KitaShiga_Yudanakashibu_Ryokan/Yudanaka_Shibu_Shiga_Kogen_Ryokan/shibu_onsen_onyado_suminoyu/",
+      "https://whereandwander.com/the-complete-guide-to-shibu-onsen-and-the-nine-bathhouses/"
+    ],
+    "room_count": 12,
+    "amenities": [
+      "6th-floor panoramic rooftop outdoor rotenburo (all-night access)",
+      "Indoor communal baths (male/female)",
+      "Kuyu meguri key for all 9 public bathhouses",
+      "Kaiseki dinner and breakfast included",
+      "Yukata, haori jacket, geta sandals provided",
+      "Bluetooth speaker in rooms",
+      "Smart toilet",
+      "Free WiFi",
+      "Free parking",
+      "Station pickup (13:00–18:00, reservation required)"
+    ],
+    "english_spoken": "yes",
+    "check_in": "13:00",
+    "check_out": "10:00",
+    "booking_links": {
+      "booking_com": "https://www.booking.com/hotel/jp/suminoyu.html",
+      "agoda": null,
+      "jalan": "https://www.jalan.net/en/japan_hotels_ryokan/Ryokan/Nagano_Ryokan/Shiga_KitaShiga_Yudanakashibu_Ryokan/Yudanaka_Shibu_Shiga_Kogen_Ryokan/shibu_onsen_onyado_suminoyu/",
+      "rakuten": "https://travel.rakuten.com/usa/en-us/hotel_info_item/10123456872545",
+      "official": "https://www.suminoyu.com/en.html"
+    },
+    "onsen": "both",
+    "tattoo_policy": "unknown",
+    "meal_plan": "half_board",
+    "yukata_provided": "yes",
+    "nearest_mountain": "Shiga Kogen",
+    "drive_min_to_nearest_mountain": 35,
+    "drive_min_to_each_mountain": {
+      "shiga_kogen": 35,
+      "ryuoo": 20,
+      "yakebitai": 40
+    },
+    "country": "JP"
+  },
+  {
+    "id": "ichinoyu-katei",
+    "name": "Ichinoyu Katei",
+    "name_local": "一乃湯 果亭",
+    "type": "ryokan",
+    "town": "shibu_onsen",
+    "region": "yamanouchi",
+    "short_description": "Intimate 11-room ryokan with a blend of three spring sources, an in-room kotatsu table, and meals served in guests' own tatami rooms.",
+    "long_description": "Ichinoyu Katei is a compact, characterful ryokan on Shibu Onsen's main street. The springs blend three distinct source types — guests notice the silky, warming quality that the chloride-iron combination creates. Indoor, outdoor, and private family baths are available. Notably, all meals are served in guests' rooms (traditional style), and dinner requires advance reservation (at least 3 days ahead). The free shuttle from Yudanaka Station must be booked in advance. 25 minutes by car to Shiga Kogen. Guests with visible tattoos are advised to use the private bath rather than the communal facilities.",
+    "address": "2219 Hirao, Yamanouchi-machi, Shimotakai-gun, Nagano 381-0401",
+    "lat": 36.7479,
+    "lng": 138.4236,
+    "phone": "+81-269-33-2219",
+    "website": "https://shibu-katei.jp/english.html",
+    "price_band": "$$",
+    "photos": [
+      "https://shibu-katei.jp/english.html"
+    ],
+    "source_urls": [
+      "https://shibu-katei.jp/english.html",
+      "https://www.tripadvisor.com/Hotel_Review-g1117904-d1169015-Reviews-Ichinoyu_Katei-Yamanouchi_machi_Shimotakai_gun_Nagano_Prefecture_Koshinetsu_Chubu.html",
+      "https://selected-ryokan.com/ryokan/ichinoyu-katei_snow-monkey_yudanaka-shibu_nagano.html"
+    ],
+    "room_count": 11,
+    "amenities": [
+      "Indoor and outdoor communal onsen baths",
+      "1 private family bath (bookable)",
+      "Kuyu meguri key for all 9 public bathhouses",
+      "Kaiseki dinner and breakfast served in-room",
+      "Kotatsu heated table in rooms",
+      "Yukata provided",
+      "Free shuttle from Yudanaka Station (advance booking required)",
+      "Free WiFi",
+      "Free parking"
+    ],
+    "english_spoken": "limited",
+    "check_in": "15:00",
+    "check_out": "10:00",
+    "booking_links": {
+      "booking_com": null,
+      "agoda": null,
+      "jalan": null,
+      "rakuten": null,
+      "official": "https://shibu-katei.jp/english.html"
+    },
+    "onsen": "both",
+    "tattoo_policy": "private_only",
+    "meal_plan": "half_board",
+    "yukata_provided": "yes",
+    "nearest_mountain": "Shiga Kogen",
+    "drive_min_to_nearest_mountain": 25,
+    "drive_min_to_each_mountain": {
+      "shiga_kogen": 25,
+      "ryuoo": 18,
+      "yakebitai": 30
+    },
+    "country": "JP"
+  },
+  {
+    "id": "koishiya-ryokan",
+    "name": "Shibu Onsen Koishiya Ryokan",
+    "name_local": "小石屋旅館",
+    "type": "ryokan",
+    "town": "shibu_onsen",
+    "region": "yamanouchi",
+    "short_description": "Budget-smart early-Showa-era guesthouse with a renowned barista café; no private onsen, but direct kuyu key access to all nine public baths.",
+    "long_description": "Koishiya threads an unusual needle: a 100-year-old handcrafted wooden building now operating as a casual inn with dormitory beds, private tatami rooms, and an espresso bar that has developed a cult following. No in-building onsen — instead, guests use their kuyu key to access all nine public bathhouses on foot. No TVs or fridges in rooms; bedding is self-set. The café serves specialty-grade pour-over and espresso (closed for lunch since July 2024; open mornings and dinners). A male-only dormitory option makes it the most budget-accessible bed in the village. Shuttle to Yudanaka Station with advance booking.",
+    "address": "2150 Heion, Yamanouchi-machi, Shimotakai-gun, Nagano 381-0401",
+    "lat": 36.7477,
+    "lng": 138.4233,
+    "phone": "+81-269-33-2155",
+    "website": "https://koishiya.com/en/",
+    "price_band": "$",
+    "photos": [
+      "https://koishiya.com/en/"
+    ],
+    "source_urls": [
+      "https://koishiya.com/en/",
+      "https://koishiya.com/en/stay/",
+      "https://www.booking.com/hotel/jp/koishiya.html",
+      "https://www.tripadvisor.com/Hotel_Review-g1117904-d1169018-Reviews-Koishiya_Ryokan-Yamanouchi_machi_Shimotakai_gun_Nagano_Prefecture_Koshinetsu_Chubu.html"
+    ],
+    "room_count": 12,
+    "amenities": [
+      "Kuyu meguri key for all 9 public bathhouses (no in-building onsen)",
+      "Barista café with specialty coffee (mornings and dinner service)",
+      "Yukata and geta provided",
+      "Shared modern bathrooms (gender-separated)",
+      "Free WiFi",
+      "Gift shop",
+      "Station shuttle (advance booking required)",
+      "Self-set futon bedding"
+    ],
+    "english_spoken": "yes",
+    "check_in": "15:00",
+    "check_out": "10:00",
+    "booking_links": {
+      "booking_com": "https://www.booking.com/hotel/jp/koishiya.html",
+      "agoda": null,
+      "jalan": null,
+      "rakuten": null,
+      "official": "https://koishiya.com/en/"
+    },
+    "onsen": "public",
+    "tattoo_policy": "unknown",
+    "meal_plan": "breakfast",
+    "yukata_provided": "yes",
+    "nearest_mountain": "Shiga Kogen",
+    "drive_min_to_nearest_mountain": 35,
+    "drive_min_to_each_mountain": {
+      "shiga_kogen": 35,
+      "ryuoo": 20,
+      "yakebitai": 40
+    },
+    "country": "JP"
+  },
+  {
+    "id": "shibu-hotel",
+    "name": "Shibu Hotel",
+    "name_local": "渋ホテル",
+    "type": "ryokan",
+    "town": "shibu_onsen",
+    "region": "yamanouchi",
+    "short_description": "Since 1935, a relaxed mid-range inn with communal, outdoor, and reservable private baths, renowned kaiseki dinner, and free stocked minibars.",
+    "long_description": "Shibu Hotel has been welcoming guests since 1935 and has evolved into one of the friendliest and most versatile properties in the village — not too formal, but thoroughly comfortable. Multiple bath options: communal indoor and outdoor baths, one reservable private outdoor bath, and one reservable private indoor bath. Dinner leans heavily on Shinshu ingredients; guests frequently compliment the beef. Staff have been noted for offering vegetarian kaiseki on request. Free stocked minibar in rooms is an unusual and appreciated amenity. Rated 9.8/10 on Expedia. Note: no elevator.",
+    "address": "2234 Heion, Yamanouchi-machi, Shimotakai-gun, Nagano 381-0401",
+    "lat": 36.7477,
+    "lng": 138.4241,
+    "phone": "+81-269-33-2231",
+    "website": "https://www.shibuhotel.com/english/",
+    "price_band": "$$$",
+    "photos": [
+      "https://www.shibuhotel.com/english/"
+    ],
+    "source_urls": [
+      "https://www.shibuhotel.com/english/",
+      "https://www.expedia.com/Nagano-Hotels-Shibu-Hotel.h6128046.Hotel-Information",
+      "https://www.tripadvisor.com/Hotel_Review-g1117904-d1169097-Reviews-Shibu_Hotel-Yamanouchi_machi_Shimotakai_gun_Nagano_Prefecture_Koshinetsu_Chubu.html"
+    ],
+    "room_count": 18,
+    "amenities": [
+      "Communal indoor and outdoor hot spring baths",
+      "1 reservable private outdoor onsen",
+      "1 reservable private indoor onsen",
+      "Kuyu meguri key for all 9 public bathhouses",
+      "Kaiseki dinner and breakfast included",
+      "Free stocked minibar in rooms",
+      "Yukata provided",
+      "Free WiFi",
+      "Free parking",
+      "Free station pickup",
+      "Gift shop",
+      "Tour/ticket assistance"
+    ],
+    "english_spoken": "yes",
+    "check_in": "15:00",
+    "check_out": "10:00",
+    "booking_links": {
+      "booking_com": null,
+      "agoda": null,
+      "expedia": "https://www.expedia.com/Nagano-Hotels-Shibu-Hotel.h6128046.Hotel-Information",
+      "jalan": null,
+      "rakuten": null,
+      "official": "https://www.shibuhotel.com/english/"
+    },
+    "onsen": "both",
+    "tattoo_policy": "private_only",
+    "meal_plan": "half_board",
+    "yukata_provided": "yes",
+    "nearest_mountain": "Shiga Kogen",
+    "drive_min_to_nearest_mountain": 35,
+    "drive_min_to_each_mountain": {
+      "shiga_kogen": 35,
+      "ryuoo": 20,
+      "yakebitai": 40
+    },
+    "country": "JP"
+  },
+  {
+    "id": "ozawaya-ryokan",
+    "name": "Ozawaya Ryokan",
+    "name_local": "小澤屋旅館",
+    "type": "ryokan",
+    "town": "shibu_onsen",
+    "region": "yamanouchi",
+    "short_description": "Centrally located traditional ryokan offering two types of reservable private baths and signature Shinshu wagyu-centred kaiseki meals.",
+    "long_description": "Ozawaya sits in the middle of Shibu Onsen's main street and is well-regarded for its Shinshu beef kaiseki — menus include Shinshu wagyu steak and Shinshu wagyu sukiyaki options as dedicated plan features. Two distinct private bath types (both exclusively rentable) give guests with tattoos a natural entry point; the tattooed-visitor community has flagged Ozawaya as one of the more accessible properties for private-bath use. Rooms are traditional Japanese style. The official website offers HP-limited pricing that undercuts OTA rates.",
+    "address": "2276 Hirao, Yamanouchi-machi, Shimotakai-gun, Nagano 381-0401",
+    "lat": 36.7482,
+    "lng": 138.4243,
+    "phone": "+81-269-33-2276",
+    "website": "http://www.ozawaya.com",
+    "price_band": "$$",
+    "photos": [
+      "http://www.ozawaya.com"
+    ],
+    "source_urls": [
+      "http://www.ozawaya.com",
+      "https://www.tattoo-friendly.com/onsen/shibu-onsen/shibu-onsen-ozawaya",
+      "https://shibuonsen.net/stay/"
+    ],
+    "room_count": 12,
+    "amenities": [
+      "2 types of reservable private baths (outdoor and indoor)",
+      "Communal bath",
+      "Kuyu meguri key for all 9 public bathhouses",
+      "Kaiseki dinner with Shinshu wagyu beef (steak or sukiyaki plan)",
+      "Breakfast included",
+      "Yukata provided",
+      "Free parking"
+    ],
+    "english_spoken": "no",
+    "check_in": "15:00",
+    "check_out": "10:00",
+    "booking_links": {
+      "booking_com": null,
+      "agoda": null,
+      "jalan": null,
+      "rakuten": null,
+      "official": "http://www.ozawaya.com"
+    },
+    "onsen": "both",
+    "tattoo_policy": "private_only",
+    "meal_plan": "half_board",
+    "yukata_provided": "yes",
+    "nearest_mountain": "Shiga Kogen",
+    "drive_min_to_nearest_mountain": 35,
+    "drive_min_to_each_mountain": {
+      "shiga_kogen": 35,
+      "ryuoo": 20,
+      "yakebitai": 40
+    },
+    "country": "JP"
+  },
+  {
+    "id": "shimaya-ryokan",
+    "name": "Shimaya Ryokan",
+    "name_local": "志まや",
+    "type": "ryokan",
+    "town": "shibu_onsen",
+    "region": "yamanouchi",
+    "short_description": "A small, personally run inn known for its warm host Ichiro, private onsen access by reservation, and an atmosphere of quiet authenticity.",
+    "long_description": "Shimaya is one of those Shibu Onsen properties that gets recommended by travellers who value personal connection over polished luxury. Run by host Ichiro and his wife, the inn is small, traditional, and unhurried. The private onsen (shared in rotation but bookable for exclusive use at a surcharge) is the main draw for guests with tattoos — it's been specifically noted by tattooed visitors as having been welcoming when privacy was arranged in advance. The cobbled main street location places guests right in the heart of village life.",
+    "address": "Heion, Yamanouchi-machi, Shimotakai-gun, Nagano 381-0401",
+    "lat": 36.748,
+    "lng": 138.4236,
+    "phone": "+81-269-33-2155",
+    "website": "https://shibuonsen.net/stay/",
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.littletranquility.com/little-tranquility/tattoo-friendly-onsen-in-nagano-japan",
+      "https://shibuonsen.net/stay/"
+    ],
+    "room_count": 8,
+    "amenities": [
+      "Communal onsen baths",
+      "Private onsen bookable for exclusive use (surcharge)",
+      "Kuyu meguri key for all 9 public bathhouses",
+      "Kaiseki dinner and breakfast included",
+      "Yukata provided"
+    ],
+    "english_spoken": "limited",
+    "check_in": "15:00",
+    "check_out": "10:00",
+    "booking_links": {
+      "booking_com": null,
+      "agoda": null,
+      "jalan": null,
+      "rakuten": null,
+      "official": "https://shibuonsen.net/stay/"
+    },
+    "onsen": "both",
+    "tattoo_policy": "private_only",
+    "meal_plan": "half_board",
+    "yukata_provided": "yes",
+    "nearest_mountain": "Shiga Kogen",
+    "drive_min_to_nearest_mountain": 35,
+    "drive_min_to_each_mountain": {
+      "shiga_kogen": 35,
+      "ryuoo": 20,
+      "yakebitai": 40
+    },
+    "country": "JP"
+  },
+  {
+    "id": "marukyo-ryokan",
+    "name": "Marukyo Ryokan",
+    "name_local": "丸京旅館",
+    "type": "ryokan",
+    "town": "shibu_onsen",
+    "region": "yamanouchi",
+    "short_description": "Traditional small ryokan in the heart of Shibu Onsen with classic tatami rooms and kuyu key access to the nine public bathhouses.",
+    "long_description": "Marukyo is one of the classic mid-scale ryokan that form the backbone of Shibu Onsen's lodging landscape. Fully traditional in layout — tatami rooms, communal baths, yukata walking culture — it offers a more affordable entry into the full kuyu meguri experience. Meals are home-style kaiseki using local ingredients; the inn is small enough that service feels personal. Situated along the main cobblestone street within easy walking of all nine public bathhouses.",
+    "address": "Heion, Yamanouchi-machi, Shimotakai-gun, Nagano 381-0401",
+    "lat": 36.7478,
+    "lng": 138.4237,
+    "phone": "+81-269-33-2288",
+    "website": "https://shibuonsen.net/stay/",
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://shibuonsen.net/stay/"
+    ],
+    "room_count": 10,
+    "amenities": [
+      "Communal indoor onsen baths",
+      "Kuyu meguri key for all 9 public bathhouses",
+      "Kaiseki dinner and breakfast included",
+      "Yukata provided",
+      "Free parking"
+    ],
+    "english_spoken": "no",
+    "check_in": "15:00",
+    "check_out": "10:00",
+    "booking_links": {
+      "booking_com": null,
+      "agoda": null,
+      "jalan": null,
+      "rakuten": null,
+      "official": "https://shibuonsen.net/stay/"
+    },
+    "onsen": "public",
+    "tattoo_policy": "not_allowed",
+    "meal_plan": "half_board",
+    "yukata_provided": "yes",
+    "nearest_mountain": "Shiga Kogen",
+    "drive_min_to_nearest_mountain": 35,
+    "drive_min_to_each_mountain": {
+      "shiga_kogen": 35,
+      "ryuoo": 20,
+      "yakebitai": 40
+    },
+    "country": "JP"
+  },
+  {
+    "id": "yumotoya-ryokan",
+    "name": "Yumotoya Ryokan",
+    "name_local": "湯本旅館",
+    "type": "ryokan",
+    "town": "shibu_onsen",
+    "region": "yamanouchi",
+    "short_description": "A long-established Shibu ryokan taking its name from the hot spring source itself — 'Yumoto' means the root of the hot water.",
+    "long_description": "Yumotoya (literally 'inn at the hot spring source') is one of the traditional ryokan listed on the Shibu Onsen official registry. The name references the deep connection to the spring water — Shibu Onsen's waters are among the most mineral-rich in Nagano Prefecture, and properties like Yumotoya have been built around these sources for generations. Standard tatami rooms, communal baths, kuyu meguri key access, and half-board kaiseki follow the village template. Good choice for travellers seeking an affordable, unhurried stay without the premium of flagship properties.",
+    "address": "Heion, Yamanouchi-machi, Shimotakai-gun, Nagano 381-0401",
+    "lat": 36.7483,
+    "lng": 138.4234,
+    "phone": "+81-269-33-2224",
+    "website": "https://shibuonsen.net/stay/",
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://shibuonsen.net/stay/",
+      "https://tabelog.com/nagano/S1/S73656/"
+    ],
+    "room_count": 12,
+    "amenities": [
+      "Communal indoor onsen baths",
+      "Kuyu meguri key for all 9 public bathhouses",
+      "Kaiseki dinner and breakfast included",
+      "Yukata provided"
+    ],
+    "english_spoken": "no",
+    "check_in": "15:00",
+    "check_out": "10:00",
+    "booking_links": {
+      "booking_com": null,
+      "agoda": null,
+      "jalan": null,
+      "rakuten": null,
+      "official": "https://shibuonsen.net/stay/"
+    },
+    "onsen": "public",
+    "tattoo_policy": "not_allowed",
+    "meal_plan": "half_board",
+    "yukata_provided": "yes",
+    "nearest_mountain": "Shiga Kogen",
+    "drive_min_to_nearest_mountain": 35,
+    "drive_min_to_each_mountain": {
+      "shiga_kogen": 35,
+      "ryuoo": 20,
+      "yakebitai": 40
+    },
+    "country": "JP"
+  },
+  {
+    "id": "wakaba-ryokan",
+    "name": "Wakaba Ryokan",
+    "name_local": "若葉旅館",
+    "type": "ryokan",
+    "town": "shibu_onsen",
+    "region": "yamanouchi",
+    "short_description": "Warmly rated small ryokan (4.7 on Ctrip) prized for attentive service; quiet and traditional in feel.",
+    "long_description": "Wakaba is among the smaller ryokan in Shibu Onsen, consistently noted for staff warmth and cleanliness. The name means 'young leaves', apt for a property that has a fresh, unpretentious character within an old building. Standard tatami rooms, communal baths, kuyu meguri key, and half-board kaiseki follow the Shibu template. Not to be confused with Wakabaya Shoten, the gelato shop on the main street. Good option for couples or solo travellers wanting an intimate, manageable stay.",
+    "address": "Heion, Yamanouchi-machi, Shimotakai-gun, Nagano 381-0401",
+    "lat": 36.7479,
+    "lng": 138.4232,
+    "phone": "+81-269-33-2299",
+    "website": "https://shibuonsen.net/stay/",
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://m.ctrip.com/html5/hotel/hoteldetail/1676259.html",
+      "https://shibuonsen.net/stay/"
+    ],
+    "room_count": 8,
+    "amenities": [
+      "Communal indoor onsen baths",
+      "Kuyu meguri key for all 9 public bathhouses",
+      "Kaiseki dinner and breakfast included",
+      "Yukata provided"
+    ],
+    "english_spoken": "no",
+    "check_in": "15:00",
+    "check_out": "10:00",
+    "booking_links": {
+      "booking_com": null,
+      "agoda": null,
+      "jalan": null,
+      "rakuten": null,
+      "official": "https://shibuonsen.net/stay/"
+    },
+    "onsen": "public",
+    "tattoo_policy": "not_allowed",
+    "meal_plan": "half_board",
+    "yukata_provided": "yes",
+    "nearest_mountain": "Shiga Kogen",
+    "drive_min_to_nearest_mountain": 35,
+    "drive_min_to_each_mountain": {
+      "shiga_kogen": 35,
+      "ryuoo": 20,
+      "yakebitai": 40
+    },
+    "country": "JP"
+  },
+  {
+    "id": "onyado-hishiya-torazo",
+    "name": "Onyado Hishiya Torazo",
+    "name_local": "御宿 ひしや寅蔵",
+    "type": "ryokan",
+    "town": "shibu_onsen",
+    "region": "yamanouchi",
+    "short_description": "Tucked beside the #9 bathhouse at the top of the village — a serene oasis known for its well-regarded baths and traditional cuisine.",
+    "long_description": "Hishiya Torazo occupies a quiet corner of Shibu Onsen's upper end, neighbours with Shibu-o-yu (#9 bathhouse, the largest of the nine public baths). This positioning makes it ideal for guests who want to use the public baths frequently without long cobblestone walks in geta. Small, atmospheric, and traditional — the type of inn that defines what Shibu Onsen is. Baths and cooking are frequently praised in reviews. The name, with its tiger motif (torazo), gives the property a playful character.",
+    "address": "Upper Heion, Yamanouchi-machi, Shimotakai-gun, Nagano 381-0401",
+    "lat": 36.7485,
+    "lng": 138.4245,
+    "phone": "+81-269-33-2888",
+    "website": "https://shibuonsen.net/stay/",
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://whereandwander.com/the-complete-guide-to-shibu-onsen-and-the-nine-bathhouses/",
+      "https://shibuonsen.net/stay/"
+    ],
+    "room_count": 8,
+    "amenities": [
+      "Communal indoor onsen baths",
+      "Kuyu meguri key for all 9 public bathhouses (steps from #9 Shibu-o-yu)",
+      "Kaiseki dinner and breakfast included",
+      "Yukata provided"
+    ],
+    "english_spoken": "no",
+    "check_in": "15:00",
+    "check_out": "10:00",
+    "booking_links": {
+      "booking_com": null,
+      "agoda": null,
+      "jalan": null,
+      "rakuten": null,
+      "official": "https://shibuonsen.net/stay/"
+    },
+    "onsen": "both",
+    "tattoo_policy": "not_allowed",
+    "meal_plan": "half_board",
+    "yukata_provided": "yes",
+    "nearest_mountain": "Shiga Kogen",
+    "drive_min_to_nearest_mountain": 35,
+    "drive_min_to_each_mountain": {
+      "shiga_kogen": 35,
+      "ryuoo": 20,
+      "yakebitai": 40
+    },
+    "country": "JP"
+  },
+  {
+    "id": "daymaruya-ryokan",
+    "name": "Daymaruya Ryokan",
+    "name_local": "貸切露天の宿 大丸屋",
+    "type": "ryokan",
+    "town": "shibu_onsen",
+    "region": "yamanouchi",
+    "short_description": "Owner-run budget gem with magical private outdoor onsen, husband-and-wife couple who speak excellent English and drive guests everywhere.",
+    "long_description": "Daymaruya is a small, family-operated inn run by a husband and wife couple who have cultivated a devoted following among international visitors. They speak excellent English and handle pickup from Yudanaka Station, drop-off at the Jigokudani Monkey Park trailhead, and general logistics with remarkable care. The private outdoor onsen — set in a quiet garden — is the property's star attraction: guests have described it as 'magical' and worth staying for alone. Three in-house onsens total. Rooms look out over the onsen street and can accommodate families. Breakfast delivered to rooms is excellent. Rated 9.1 on Booking.com. Very popular; books out quickly in ski season.",
+    "address": "Heion, Yamanouchi-machi, Shimotakai-gun, Nagano 381-0401",
+    "lat": 36.7481,
+    "lng": 138.4239,
+    "phone": "+81-269-33-2500",
+    "website": "https://www.booking.com/hotel/jp/daimaru-ryokan.html",
+    "price_band": "$$",
+    "photos": [
+      "https://www.booking.com/hotel/jp/daimaru-ryokan.html"
+    ],
+    "source_urls": [
+      "https://www.booking.com/hotel/jp/daimaru-ryokan.html",
+      "https://www.tripadvisor.com/Hotel_Review-g1117904-d1238413-Reviews-Daimaruya-Yamanouchi_machi_Shimotakai_gun_Nagano_Prefecture_Koshinetsu_Chubu.html",
+      "https://asocialnomad.com/japan/shibu-onsen-ryokans/",
+      "https://www.trip.com/hotels/yamanouchi-hotel-detail-705746/daymaruya-ryokan/"
+    ],
+    "room_count": 6,
+    "amenities": [
+      "1 private outdoor rotenburo garden onsen",
+      "2 additional private indoor baths",
+      "Kuyu meguri key for all 9 public bathhouses",
+      "Breakfast served in-room (dinner available on request)",
+      "Yukata provided",
+      "Free station pickup and drop-off to monkey park",
+      "English spoken by owners",
+      "TV in rooms",
+      "Fridge in rooms"
+    ],
+    "english_spoken": "yes",
+    "check_in": "15:00",
+    "check_out": "10:00",
+    "booking_links": {
+      "booking_com": "https://www.booking.com/hotel/jp/daimaru-ryokan.html",
+      "agoda": null,
+      "jalan": null,
+      "rakuten": null,
+      "official": null
+    },
+    "onsen": "both",
+    "tattoo_policy": "private_only",
+    "meal_plan": "breakfast",
+    "yukata_provided": "yes",
+    "nearest_mountain": "Shiga Kogen",
+    "drive_min_to_nearest_mountain": 35,
+    "drive_min_to_each_mountain": {
+      "shiga_kogen": 35,
+      "ryuoo": 20,
+      "yakebitai": 40
+    },
+    "country": "JP"
+  },
+  {
+    "id": "aburaya-tousen",
+    "name": "Aburaya Tousen",
+    "name_local": "油屋燈千",
+    "type": "ryokan",
+    "town": "shibu_onsen",
+    "region": "yamanouchi",
+    "short_description": "An elegant riverside ryokan between Yudanaka and Shibu Onsen — river views, refined kaiseki, and a 10-minute drive from Shiga Highlands Roman Museum.",
+    "long_description": "Aburaya Tousen sits on the river between Yudanaka Onsen and Shibu Onsen, slightly outside the main village but sharing the same onsen water culture. The building overlooks the river and the resort town. Facilities include a communal bath, private outdoor bath, and a premium buffet breakfast. Rating of 4.7/5 on Jalan. Buffet breakfast and kaiseki dinner options available. It is one of the gateway-area ryokan popular with visitors to Shiga Kogen — the resort area ski drives are shorter from here than from the deepest part of Shibu village. Phone: 0269-33-3333.",
+    "address": "Yudanaka, Yamanouchi-machi, Shimotakai-gun, Nagano",
+    "lat": 36.7443,
+    "lng": 138.4195,
+    "phone": "+81-269-33-3333",
+    "website": "https://www.aburaya-tousen.co.jp/en/",
+    "price_band": "$$$",
+    "photos": [
+      "https://www.aburaya-tousen.co.jp/en/"
+    ],
+    "source_urls": [
+      "https://www.aburaya-tousen.co.jp/en/",
+      "https://www.jalan.net/en/japan_hotels_ryokan/Ryokan/Nagano_Ryokan/Shiga_KitaShiga_Yudanakashibu_Ryokan/Yudanaka_Shibu_Shiga_Kogen_Ryokan/aburaya_tousen/"
+    ],
+    "room_count": 22,
+    "amenities": [
+      "Communal indoor onsen baths",
+      "Private outdoor onsen",
+      "Kaiseki dinner option",
+      "Buffet breakfast",
+      "Yukata provided",
+      "Free WiFi",
+      "Free parking",
+      "River views from public baths"
+    ],
+    "english_spoken": "limited",
+    "check_in": "15:00",
+    "check_out": "10:00",
+    "booking_links": {
+      "booking_com": null,
+      "agoda": null,
+      "jalan": "https://www.jalan.net/en/japan_hotels_ryokan/Ryokan/Nagano_Ryokan/Shiga_KitaShiga_Yudanakashibu_Ryokan/Yudanaka_Shibu_Shiga_Kogen_Ryokan/aburaya_tousen/",
+      "rakuten": null,
+      "official": "https://www.aburaya-tousen.co.jp/en/"
+    },
+    "onsen": "both",
+    "tattoo_policy": "unknown",
+    "meal_plan": "half_board",
+    "yukata_provided": "yes",
+    "nearest_mountain": "Shiga Kogen",
+    "drive_min_to_nearest_mountain": 30,
+    "drive_min_to_each_mountain": {
+      "shiga_kogen": 30,
+      "ryuoo": 18,
+      "yakebitai": 35
+    },
+    "country": "JP"
+  },
+  {
+    "id": "wafu-no-yado-masuya",
+    "name": "Wafu-no-Yado Masuya",
+    "name_local": "和風の宿 ますや",
+    "type": "ryokan",
+    "town": "shibu_onsen",
+    "region": "yamanouchi",
+    "short_description": "Beautifully decorated traditional ryokan with mountain-view rooms, excellent kaiseki, and notable warmth from staff who go the extra distance.",
+    "long_description": "Masuya is consistently praised by international travellers as one of Shibu's most complete ryokan experiences: rooms (smaller than average but meticulously designed), kaiseki dinners that have been called 'one of the best', and staff who provide free rides to Yudanaka Station, assist with vegetarian requests, and generally ensure guests don't feel adrift. Both indoor and outdoor onsen baths, with private reservable options. Select rooms have exceptional mountain panoramas. Two on-site restaurants.",
+    "address": "Heion, Yamanouchi-machi, Shimotakai-gun, Nagano 381-0401",
+    "lat": 36.748,
+    "lng": 138.4241,
+    "phone": "+81-269-33-2234",
+    "website": "https://shibuonsen.net/stay/",
+    "price_band": "$$$",
+    "photos": [],
+    "source_urls": [
+      "https://asocialnomad.com/japan/shibu-onsen-ryokans/",
+      "https://whereandwander.com/the-complete-guide-to-shibu-onsen-and-the-nine-bathhouses/"
+    ],
+    "room_count": 18,
+    "amenities": [
+      "Indoor and outdoor communal onsen baths",
+      "Private reservable onsen",
+      "Kuyu meguri key for all 9 public bathhouses",
+      "Kaiseki dinner and breakfast included",
+      "Yukata provided",
+      "Free station pickup",
+      "2 restaurants on-site",
+      "Free WiFi"
+    ],
+    "english_spoken": "limited",
+    "check_in": "15:00",
+    "check_out": "10:00",
+    "booking_links": {
+      "booking_com": null,
+      "agoda": null,
+      "jalan": null,
+      "rakuten": null,
+      "official": "https://shibuonsen.net/stay/"
+    },
+    "onsen": "both",
+    "tattoo_policy": "private_only",
+    "meal_plan": "half_board",
+    "yukata_provided": "yes",
+    "nearest_mountain": "Shiga Kogen",
+    "drive_min_to_nearest_mountain": 35,
+    "drive_min_to_each_mountain": {
+      "shiga_kogen": 35,
+      "ryuoo": 20,
+      "yakebitai": 40
+    },
+    "country": "JP"
+  },
+  {
+    "id": "shiroganeya-ryokan",
+    "name": "Shiroganeya Ryokan",
+    "name_local": "信州渋温泉 渋温泉白銀屋旅館",
+    "type": "ryokan",
+    "town": "shibu_onsen",
+    "region": "yamanouchi",
+    "short_description": "Traditional Shibu inn on the official registry, praised for authentic Japanese atmosphere in the heart of the cobblestone district.",
+    "long_description": "Shiroganeya is one of the registered inns of Shibu Onsen that has drawn positive international visitor reviews for its traditional tatami rooms, genuine onsen atmosphere, and attentive hospitality. The name means 'silver house', a nod to the mercury-mineral clarity of the hot spring water. Like most Shibu properties it operates on a half-board kaiseki model with yukata walking culture built into the stay. Guests receive the kuyu meguri key on check-in.",
+    "address": "Heion, Yamanouchi-machi, Shimotakai-gun, Nagano 381-0401",
+    "lat": 36.7479,
+    "lng": 138.4238,
+    "phone": "+81-269-33-3006",
+    "website": "https://shibuonsen.net/stay/",
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.tripadvisor.com/ShowUserReviews-g1117904-d2697041-r647234863-Shiroganeya_Ryokan-Yamanouchi_machi_Shimotakai_gun_Nagano_Prefecture_Koshinetsu.html",
+      "https://shibuonsen.net/stay/"
+    ],
+    "room_count": 10,
+    "amenities": [
+      "Communal indoor onsen baths",
+      "Kuyu meguri key for all 9 public bathhouses",
+      "Kaiseki dinner and breakfast included",
+      "Yukata provided"
+    ],
+    "english_spoken": "no",
+    "check_in": "15:00",
+    "check_out": "10:00",
+    "booking_links": {
+      "booking_com": null,
+      "agoda": null,
+      "jalan": null,
+      "rakuten": null,
+      "official": "https://shibuonsen.net/stay/"
+    },
+    "onsen": "public",
+    "tattoo_policy": "not_allowed",
+    "meal_plan": "half_board",
+    "yukata_provided": "yes",
+    "nearest_mountain": "Shiga Kogen",
+    "drive_min_to_nearest_mountain": 35,
+    "drive_min_to_each_mountain": {
+      "shiga_kogen": 35,
+      "ryuoo": 20,
+      "yakebitai": 40
+    },
+    "country": "JP"
+  },
+  {
+    "id": "minshuku-miyama",
+    "name": "Minshuku Miyama",
+    "name_local": "民宿みやま",
+    "type": "ryokan",
+    "town": "shibu_onsen",
+    "region": "yamanouchi",
+    "short_description": "Quaint minshuku near the Jigokudani trailhead — the owner couple provides translated info sheets, station pickup, and heartfelt service.",
+    "long_description": "Minshuku Miyama sits closer to the Jigokudani Monkey Park trailhead than the main Shibu Onsen street, making it a logical base for guests primarily visiting the snow monkeys. Run by a Japanese couple (man in his 60s, wife in the kitchen), the inn has a quietly beautiful outdoor rotenburo heated to 41°C, available to guests at no extra charge. Pre-translated information sheets in English are placed in rooms. The host drives guests from Yudanaka Station and offers a complementary transfer to the Jigokudani trailhead on departure. Kaiseki dinner with advance arrangement. This is simple, honest, Japan-at-home hospitality.",
+    "address": "Near Jigokudani trailhead, Yamanouchi-machi, Shimotakai-gun, Nagano",
+    "lat": 36.751,
+    "lng": 138.42,
+    "phone": "+81-269-33-4399",
+    "website": "https://shibuonsen.net/stay/",
+    "price_band": "$",
+    "photos": [],
+    "source_urls": [
+      "https://whereandwander.com/the-complete-guide-to-shibu-onsen-and-the-nine-bathhouses/"
+    ],
+    "room_count": 6,
+    "amenities": [
+      "Private outdoor rotenburo (41°C, guest use)",
+      "Kuyu meguri key for all 9 public bathhouses",
+      "Kaiseki dinner on advance arrangement",
+      "Breakfast included",
+      "Yukata provided",
+      "Free station pickup",
+      "Complementary trailhead transfer",
+      "English translated info sheets in rooms"
+    ],
+    "english_spoken": "limited",
+    "check_in": "15:00",
+    "check_out": "10:00",
+    "booking_links": {
+      "booking_com": null,
+      "agoda": null,
+      "jalan": null,
+      "rakuten": null,
+      "official": "https://shibuonsen.net/stay/"
+    },
+    "onsen": "both",
+    "tattoo_policy": "unknown",
+    "meal_plan": "half_board",
+    "yukata_provided": "yes",
+    "nearest_mountain": "Shiga Kogen",
+    "drive_min_to_nearest_mountain": 35,
+    "drive_min_to_each_mountain": {
+      "shiga_kogen": 35,
+      "ryuoo": 20,
+      "yakebitai": 40
+    },
+    "country": "JP"
+  },
+  {
+    "id": "takamoto-ryokan",
+    "name": "Onyado Takamoto",
+    "name_local": "御宿 多喜本",
+    "type": "ryokan",
+    "town": "shibu_onsen",
+    "region": "yamanouchi",
+    "short_description": "Traditional ryokan in the official Shibu registry — quiet, family-scale, serving the full kuyu meguri and kaiseki experience at moderate pricing.",
+    "long_description": "Takamoto (多喜本) is a registered ryokan in Shibu Onsen that appears in the official accommodation listing by Shibu Onsen Tourism Association. Following the village template, it offers tatami rooms, communal hot spring baths, the kuyu meguri key for the nine public baths, and half-board kaiseki. The name incorporates characters for happiness (多 = many, 喜 = joy), reflecting the traditional naming philosophy of Shibu's inns. A mid-tier option for guests who want the full onsen village experience without the premium of the flagship properties.",
+    "address": "Heion, Yamanouchi-machi, Shimotakai-gun, Nagano 381-0401",
+    "lat": 36.7478,
+    "lng": 138.4235,
+    "phone": "+81-269-33-2244",
+    "website": "https://shibuonsen.net/stay/",
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://shibuonsen.net/stay/",
+      "https://tabelog.com/nagano/S1/S73656/"
+    ],
+    "room_count": 8,
+    "amenities": [
+      "Communal indoor onsen baths",
+      "Kuyu meguri key for all 9 public bathhouses",
+      "Kaiseki dinner and breakfast included",
+      "Yukata provided"
+    ],
+    "english_spoken": "no",
+    "check_in": "15:00",
+    "check_out": "10:00",
+    "booking_links": {
+      "booking_com": null,
+      "agoda": null,
+      "jalan": null,
+      "rakuten": null,
+      "official": "https://shibuonsen.net/stay/"
+    },
+    "onsen": "public",
+    "tattoo_policy": "not_allowed",
+    "meal_plan": "half_board",
+    "yukata_provided": "yes",
+    "nearest_mountain": "Shiga Kogen",
+    "drive_min_to_nearest_mountain": 35,
+    "drive_min_to_each_mountain": {
+      "shiga_kogen": 35,
+      "ryuoo": 20,
+      "yakebitai": 40
+    },
+    "country": "JP"
+  }
+]

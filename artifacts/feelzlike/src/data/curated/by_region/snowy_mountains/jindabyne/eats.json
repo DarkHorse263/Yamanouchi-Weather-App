@@ -1,0 +1,1481 @@
+[
+  {
+    "id": "sundance-bakehouse-jindabyne",
+    "name": "Sundance Bakehouse",
+    "name_local": null,
+    "type": "bakery",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Cult Jindabyne bakery open from 5:30am – the earliest breakfast stop in town for ski-day mornings.",
+    "long_description": "Sundance Bakehouse is the Snowy Mountains institution that skiers line up for before heading to the mountain. Opening at 5:30am daily – earlier than any other food outlet in Jindabyne – it serves freshly baked pies, pastries, gourmet sandwiches, rolls, slices and seriously good coffee. The Jindabyne flagship is in Nuggets Crossing Courtyard; sister stores open in winter at Bullocks Flat Skitube terminal and Perisher Valley. Famous locally for its pies and its early-morning ritual.",
+    "address": "Nuggets Crossing Courtyard, 6 Kosciuszko Road, Jindabyne NSW 2627",
+    "lat": -36.4148,
+    "lng": 148.61,
+    "phone": "+61 2 6456 2951",
+    "website": "http://www.sundancebakehouse.com.au",
+    "price_band": "$",
+    "photos": [],
+    "source_urls": [
+      "http://www.sundancebakehouse.com.au",
+      "https://www.tripadvisor.com/Restaurant_Review-g261617-d3318458-Reviews-Sundance_Bakehouse-Jindabyne_New_South_Wales.html",
+      "https://www.australiantraveller.com/nsw/snowy-mountains/jindabyne/jindabyne-restaurants/"
+    ],
+    "cuisine": [
+      "bakery",
+      "cafe"
+    ],
+    "hours": {
+      "monday": "05:30–18:00",
+      "tuesday": "05:30–18:00",
+      "wednesday": "05:30–18:00",
+      "thursday": "05:30–18:00",
+      "friday": "05:30–18:00",
+      "saturday": "05:30–18:00",
+      "sunday": "05:30–18:00"
+    },
+    "last_order_time": "17:45",
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "freshly baked pies",
+      "pastries",
+      "gourmet sandwiches and rolls",
+      "slices",
+      "takeaway coffee"
+    ],
+    "apres_ski": "no",
+    "takeaway": "yes",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "nimmitabel-bakery-jindabyne",
+    "name": "Nimmitabel Bakery",
+    "name_local": null,
+    "type": "bakery",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Traditional bakery founded in 1950, now with a cosy Jindabyne outpost featuring a fireplace and Seven Miles coffee.",
+    "long_description": "Nimmitabel Bakery has been using traditional baking methods since 1950 in the heritage town of Nimmitabel. Its Jindabyne outpost in Nuggets Crossing Shopping Centre has a cosy fireplace, making it an ideal morning stop before or after the mountain. Signature items include brekky wraps, homemade pies, and picnic hampers filled with pastries and snacks. Coffee is made with Seven Miles' Black Mountain beans.",
+    "address": "Shop 3, Nuggets Crossing Shopping Centre, 13 Kalkite Street, Jindabyne NSW 2627",
+    "lat": -36.4148,
+    "lng": 148.6095,
+    "phone": null,
+    "website": null,
+    "price_band": "$",
+    "photos": [],
+    "source_urls": [
+      "https://www.australiantraveller.com/nsw/snowy-mountains/jindabyne/jindabyne-restaurants/"
+    ],
+    "cuisine": [
+      "bakery",
+      "cafe"
+    ],
+    "hours": {
+      "monday": null,
+      "tuesday": null,
+      "wednesday": null,
+      "thursday": null,
+      "friday": null,
+      "saturday": null,
+      "sunday": null
+    },
+    "last_order_time": null,
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "brekky wrap",
+      "homemade pie",
+      "picnic hampers",
+      "Seven Miles Black Mountain coffee"
+    ],
+    "apres_ski": "no",
+    "takeaway": "yes",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "birchwood-cafe-jindabyne",
+    "name": "Birchwood",
+    "name_local": null,
+    "type": "cafe",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Best brunch spot in Jindabyne – modern Australian fusion cafe on Gippsland St with Single O coffee and all-day ski-day lunch packs.",
+    "long_description": "Birchwood is consistently rated the best cafe in Jindabyne for brunch and lunch. The menu spans granola bowls, avo on toast, Turkish eggs, B&E rolls, creamy soups, poke bowls and burgers, with alcohol available from 10am. Their standout ski-day Lunch Packs (sandwich, juice, veggie sticks, fruit, sweet slice) make packing mountain food effortless. Single O beans coffee and house-made kombucha complete the offering. Open 7am–2pm daily.",
+    "address": "Unit 3/3 Gippsland Street, Jindabyne NSW 2627",
+    "lat": -36.4161,
+    "lng": 148.6133,
+    "phone": "+61 2 6456 1880",
+    "website": "https://www.birchwoodjindabyne.au",
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.birchwoodjindabyne.au",
+      "https://www.tripadvisor.com/Restaurant_Review-g261617-d10400358-Reviews-Birchwood_Cafe-Jindabyne_New_South_Wales.html",
+      "https://www.australiantraveller.com/nsw/snowy-mountains/jindabyne/jindabyne-restaurants/"
+    ],
+    "cuisine": [
+      "modern Australian",
+      "cafe",
+      "brunch"
+    ],
+    "hours": {
+      "monday": "07:00–14:00",
+      "tuesday": "07:00–14:00",
+      "wednesday": "07:00–14:00",
+      "thursday": "07:00–14:00",
+      "friday": "07:00–14:00",
+      "saturday": "07:00–14:00",
+      "sunday": "07:00–14:00"
+    },
+    "last_order_time": "13:45",
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "Turkish eggs",
+      "avo on toast",
+      "B&E roll",
+      "poke bowl",
+      "burger",
+      "ski-day Lunch Packs",
+      "Single O coffee"
+    ],
+    "apres_ski": "no",
+    "takeaway": "yes",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "parc-cafe-jindabyne",
+    "name": "Parc Cafe",
+    "name_local": null,
+    "type": "cafe",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "All-day cafe at the Snowy Region Visitor Centre open from 6:30am – one of the earliest coffee stops before heading to the mountain.",
+    "long_description": "Parc Cafe sits inside the Snowy Region Visitor Centre on Kosciuszko Road, making it the ideal first stop before collecting national park day passes. Open from 6:30am Monday–Saturday and 8am Sundays, it serves Madding Crowd coffee, organic juices, smoothies, big brekkies, burritos, sambos and wraps. Local Jindabyne Brewing Co beers and Shut the Gate wines are also on tap. Live music runs in summer and the cafe is available for private functions in the evening.",
+    "address": "49 Kosciuszko Road (Snowy Region Visitor Centre), Jindabyne NSW 2627",
+    "lat": -36.4148,
+    "lng": 148.6095,
+    "phone": "+61 2 6456 2517",
+    "website": "https://www.parcjindy.com.au",
+    "price_band": "$",
+    "photos": [],
+    "source_urls": [
+      "https://www.parcjindy.com.au",
+      "https://www.nationalparks.nsw.gov.au/things-to-do/cafes-and-kiosks/parc-cafe",
+      "https://www.tripadvisor.com/Restaurant_Review-g261617-d4497203-Reviews-Parc-Jindabyne_New_South_Wales.html"
+    ],
+    "cuisine": [
+      "cafe",
+      "modern Australian"
+    ],
+    "hours": {
+      "monday": "06:30–16:00",
+      "tuesday": "06:30–16:00",
+      "wednesday": "06:30–16:00",
+      "thursday": "06:30–16:00",
+      "friday": "06:30–16:00",
+      "saturday": "06:30–16:00",
+      "sunday": "08:00–15:00"
+    },
+    "last_order_time": "15:45",
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "big brekkie",
+      "burritos",
+      "wraps",
+      "Madding Crowd coffee",
+      "local craft beer"
+    ],
+    "apres_ski": "no",
+    "takeaway": "yes",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "wildbrumby-distillery-cafe",
+    "name": "Wildbrumby Distillery & Cafe (Stillhouse Cafe)",
+    "name_local": null,
+    "type": "cafe",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Famous for its Snowy Mountains schnapps, gin and vodka – distillery cafe with Austrian-influenced menu, open Thu–Mon.",
+    "long_description": "Located on the Alpine Way between Jindabyne and Thredbo, Wildbrumby is the Snowy Mountains' most distinctive dining destination. The Stillhouse Cafe sits next to working distillery stills and offers a Continental-influenced menu featuring the distillery's signature gins, schnapps, glühwein and vodka in every drink. The organic raspberry patch, sculpture garden and outdoor terrace make it an exceptional apres-ski detour on the drive back from Thredbo. Reservations recommended on weekends. Famous locally as 'the schnapps place.'",
+    "address": "Corner of Wollondibby Road and The Alpine Way, Crackenback NSW 2627",
+    "lat": -36.452,
+    "lng": 148.487,
+    "phone": "+61 2 6457 1447",
+    "website": "https://wildbrumby.com",
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://wildbrumby.com/visit-us/distillery-door-cafe/",
+      "https://www.tripadvisor.com/Restaurant_Review-g1858103-d2625909-Reviews-Wildbrumby_Cafe-Crackenback_New_South_Wales.html",
+      "https://discoversnowymountains.com/things-to-do/wild-brumby-distillery-and-cafe/"
+    ],
+    "cuisine": [
+      "cafe",
+      "Austrian-influenced",
+      "distillery"
+    ],
+    "hours": {
+      "monday": "closed",
+      "tuesday": "distillery door only",
+      "wednesday": "distillery door only",
+      "thursday": "cafe open",
+      "friday": "cafe open",
+      "saturday": "cafe open",
+      "sunday": "cafe open"
+    },
+    "last_order_time": null,
+    "reservation": "recommended",
+    "reservation_link": "https://wildbrumby.com/visit-us/distillery-door-cafe/",
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "schnapps (raspberry, elderflower, pear)",
+      "gin and tonics with local botanicals",
+      "glühwein",
+      "daily-changing menu with local produce"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "yes",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "banjo-paterson-inn-clancys",
+    "name": "The Banjo Paterson Inn – Clancy's Brasserie & The Overflow",
+    "name_local": null,
+    "type": "pub",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Jindabyne's best-known pub complex with two restaurants, three bars and the Kosciuszko Brewhouse pouring craft ales on-site.",
+    "long_description": "The Banjo Paterson Inn is Jindabyne's quintessential apres-ski hub. Clancy's Brasserie serves pub classics including chicken schnitzel, Caesar salad, grilled Snowy River trout and a full grill selection. The Overflow is the more casual outlet, specialising in burgers and pizzas. Three bars – Musters Bar with outdoor terrace views of Lake Jindabyne, the sports bar and the Kosciuszko Brewhouse – mean there's always somewhere to watch the game or enjoy a Kosciuszko Pale Ale. Live music and nightly events run year-round.",
+    "address": "1 Kosciuszko Road, Jindabyne NSW 2627",
+    "lat": -36.4144,
+    "lng": 148.6119,
+    "phone": null,
+    "website": "https://www.banjopatersoninn.com.au",
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.banjopatersoninn.com.au",
+      "https://www.australiantraveller.com/nsw/snowy-mountains/jindabyne/jindabyne-restaurants/"
+    ],
+    "cuisine": [
+      "pub food",
+      "modern Australian",
+      "pizza",
+      "burgers",
+      "craft beer"
+    ],
+    "hours": {
+      "monday": "11:00–late",
+      "tuesday": "11:00–late",
+      "wednesday": "11:00–late",
+      "thursday": "11:00–late",
+      "friday": "11:00–late",
+      "saturday": "11:00–late",
+      "sunday": "11:00–late"
+    },
+    "last_order_time": "21:00",
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "Snowy River trout",
+      "chicken schnitzel",
+      "Kosciuszko Pale Ale",
+      "burgers (The Overflow)",
+      "pizza (The Overflow)"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "yes",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "lake-jindabyne-hotel-bistro",
+    "name": "Lake Jindabyne Hotel Bistro",
+    "name_local": null,
+    "type": "pub",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Lakefront pub bistro famous for legendary steaks, generous serves and panoramic lake views – a Jindabyne local institution.",
+    "long_description": "The Lake Jindabyne Hotel Bistro is widely regarded as serving the best pub food in the Snowy Mountains. The menu is classic Australian pub fare – generous steaks, schnitzels, lamb shanks, pork belly, pasta – but executed with care and at pub prices. The outdoor veranda with sweeping lake views and indoor sports bar make it great year-round, and the self-serve sauce station adds a casual, no-fuss vibe. A favourite for locals and visitors alike. 300-seat capacity with waterfront seating.",
+    "address": "21 McLure Circuit, Jindabyne NSW 2627",
+    "lat": -36.4138,
+    "lng": 148.6228,
+    "phone": "+61 2 6456 2203",
+    "website": null,
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.tripadvisor.com/Restaurant_Review-g261617-d8564566-Reviews-Lake_Jindabyne_Hotel_Bistro-Jindabyne_New_South_Wales.html",
+      "https://www.agfg.com.au/restaurant/lake-jindabyne-bistro-672"
+    ],
+    "cuisine": [
+      "pub food",
+      "Australian",
+      "steakhouse"
+    ],
+    "hours": {
+      "monday": "12:00–15:00, 17:30–21:00",
+      "tuesday": "12:00–15:00, 17:30–21:00",
+      "wednesday": "12:00–15:00, 17:30–21:00",
+      "thursday": "12:00–15:00, 17:30–21:00",
+      "friday": "12:00–15:00, 17:30–21:00",
+      "saturday": "12:00–15:00, 17:30–21:00",
+      "sunday": "12:00–15:00, 17:30–21:00"
+    },
+    "last_order_time": "20:45",
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "300g rump steak",
+      "chicken parmi",
+      "lamb shanks",
+      "chicken schnitzel",
+      "pizza"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "no",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "brumby-bar-grill",
+    "name": "Brumby Bar & Grill",
+    "name_local": null,
+    "type": "pub",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Gastropub open from 4pm to midnight daily, featuring craft beer, innovative pub fare and a strong local following.",
+    "long_description": "The Brumby Bar & Grill on Clyde Street is a lively gastropub open nightly from 4pm until midnight, making it one of the latest-closing venues in Jindabyne and a solid apres-ski pick. The menu combines classic pub fare (beer-battered fish and chips, schnitzel, burgers, steak) with a rotating selection of local craft beers. The outdoor area and relaxed vibe make it popular with locals and mountain visitors. Kitchen closes well before midnight – check on arrival.",
+    "address": "2 Clyde Street, Jindabyne NSW 2627",
+    "lat": -36.4147,
+    "lng": 148.6136,
+    "phone": "+61 2 6456 2526",
+    "website": "https://www.brumbybarandgrill.com",
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.tripadvisor.com.au/Restaurant_Review-g261617-d5791841-Reviews-Brumby_Bar_Grill-Jindabyne_New_South_Wales.html",
+      "https://www.agfg.com.au/restaurant/brumby-bar-grill-680",
+      "https://www.australiantraveller.com/nsw/snowy-mountains/jindabyne/jindabyne-restaurants/"
+    ],
+    "cuisine": [
+      "pub food",
+      "steakhouse",
+      "gastropub"
+    ],
+    "hours": {
+      "monday": "16:00–00:00",
+      "tuesday": "16:00–00:00",
+      "wednesday": "16:00–00:00",
+      "thursday": "16:00–00:00",
+      "friday": "16:00–00:00",
+      "saturday": "16:00–00:00",
+      "sunday": "16:00–00:00"
+    },
+    "last_order_time": "21:00",
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "chicken schnitzel",
+      "beer-battered fish and chips",
+      "burgers",
+      "steak",
+      "craft beer selection"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "no",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "cafe-darya",
+    "name": "Cafe Darya",
+    "name_local": null,
+    "type": "restaurant",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Authentic Persian restaurant – one of the most distinctive dining experiences in the Snowy Mountains, BYO and cash only.",
+    "long_description": "Cafe Darya is a beloved Snowy Mountains institution offering authentic Persian cuisine in a cosy, unpretentious setting at the Old Town Centre. Dishes like slow-braised camel with chilli, radish, fennel and chickpeas showcase bold Middle Eastern flavours and local produce. The restaurant is BYO (wine and beer) and cash only – making a trip to the bottle shop and ATM beforehand essential. Open Tuesday–Saturday from 6:30pm in winter, Thursday–Saturday off-season.",
+    "address": "Shop 3, Level 2, Snowy Mountains Plaza (Old Town Centre), Jindabyne NSW 2627",
+    "lat": -36.4145,
+    "lng": 148.611,
+    "phone": "+61 2 6457 1867",
+    "website": "https://www.cafedarya.com.au",
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.cafedarya.com.au",
+      "https://www.agfg.com.au/restaurant/cafe-darya-33503",
+      "https://www.yelp.com/biz/cafe-darya-jindabyne"
+    ],
+    "cuisine": [
+      "Persian",
+      "Middle Eastern"
+    ],
+    "hours": {
+      "monday": "closed",
+      "tuesday": "18:30–21:30 (winter/school holidays only)",
+      "wednesday": "18:30–21:30 (winter/school holidays only)",
+      "thursday": "18:30–21:30",
+      "friday": "18:30–21:30",
+      "saturday": "18:30–21:30",
+      "sunday": "closed"
+    },
+    "last_order_time": "21:00",
+    "reservation": "recommended",
+    "reservation_link": null,
+    "payment": "cash_only",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "slow-braised camel with chilli, radish, fennel and chickpeas",
+      "Persian lamb",
+      "baghali polo"
+    ],
+    "apres_ski": "no",
+    "takeaway": "no",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "bacco-italian-restaurant",
+    "name": "Bacco Italian Restaurant",
+    "name_local": null,
+    "type": "restaurant",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Family-friendly Italian restaurant open 7 days with dine-in, BYO wine and late-night takeaway pizza and pasta.",
+    "long_description": "Bacco on Kosciuszko Road is Jindabyne's go-to Italian, serving a broad menu of thin-crust pizzas, house-made pastas, veal scallopini, pollo bacco, affogato and lumberjack cake. It's particularly family-friendly and one of the few places in town open until midnight, making it the best late-night dine-in option. Takeaway pizza and pasta available via a separate phone line. Dine-in is à la carte with BYO wine.",
+    "address": "Shop 10C, Nuggets Crossing Shopping Centre / Kosciuszko Road, Jindabyne NSW 2627",
+    "lat": -36.4148,
+    "lng": 148.61,
+    "phone": "+61 2 6456 1420",
+    "website": "https://www.baccojindabyne.com",
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.baccojindabyne.com",
+      "https://www.tripadvisor.com/Restaurant_Review-g261617-d2089263-Reviews-Bacco_Italian_Restaurant-Jindabyne_New_South_Wales.html",
+      "https://www.australiantraveller.com/nsw/snowy-mountains/jindabyne/jindabyne-restaurants/"
+    ],
+    "cuisine": [
+      "Italian",
+      "pizza",
+      "pasta"
+    ],
+    "hours": {
+      "monday": "11:00–14:00, 17:00–00:00",
+      "tuesday": "11:00–14:00, 17:00–00:00",
+      "wednesday": "11:00–14:00, 17:00–00:00",
+      "thursday": "11:00–14:00, 17:00–00:00",
+      "friday": "11:00–14:00, 17:00–00:00",
+      "saturday": "11:00–14:00, 17:00–00:00",
+      "sunday": "11:00–14:00, 17:00–00:00"
+    },
+    "last_order_time": "23:45",
+    "reservation": "recommended",
+    "reservation_link": "tel:+61264561420",
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "pizzas",
+      "pollo bacco",
+      "veal scallopini",
+      "affogato",
+      "lumberjack cake"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "yes",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "takayama-restaurant-bar",
+    "name": "Takayama Restaurant & Bar",
+    "name_local": "高山",
+    "type": "restaurant",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Sleek Japanese izakaya-style restaurant in Nuggets Crossing open Tuesday–Saturday from 5:30pm – Sapporo on tap.",
+    "long_description": "Takayama brings Japanese izakaya mountain food to Jindabyne, inspired by the après-ski mountain hut culture of Japan. The menu features edamame, sushi rolls, pork gyoza, karaage chicken, katsu, tataki beef and ramen, complemented by Sapporo beer and yuzu cocktails. The sleek, modern interior seats intimate groups, and the team behind it also runs the town's other quality restaurants. Bookings are strongly recommended in peak ski season.",
+    "address": "Shop 19, Nuggets Crossing Shopping Centre, 5 Snowy River Avenue, Jindabyne NSW 2627",
+    "lat": -36.4148,
+    "lng": 148.6095,
+    "phone": "+61 2 6456 1133",
+    "website": "https://www.takayama.com.au",
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.takayama.com.au",
+      "https://www.tripadvisor.com/Restaurant_Review-g261617-d10031721-Reviews-Takayama_Restaurant_Bar-Jindabyne_New_South_Wales.html",
+      "https://www.australiantraveller.com/nsw/snowy-mountains/jindabyne/jindabyne-restaurants/"
+    ],
+    "cuisine": [
+      "Japanese",
+      "izakaya",
+      "Asian"
+    ],
+    "hours": {
+      "monday": "closed",
+      "tuesday": "17:30–21:00",
+      "wednesday": "17:30–21:00",
+      "thursday": "17:30–21:00",
+      "friday": "17:30–21:00",
+      "saturday": "17:30–21:00",
+      "sunday": "closed"
+    },
+    "last_order_time": "20:45",
+    "reservation": "required",
+    "reservation_link": "tel:+61264561133",
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "pork gyoza",
+      "karaage chicken",
+      "sushi rolls",
+      "ramen",
+      "Sapporo on tap",
+      "yuzu cocktail"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "no",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "embers-fireside-restaurant",
+    "name": "Embers Fireside Restaurant (Horizons Lake Jindabyne)",
+    "name_local": null,
+    "type": "restaurant",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Jindabyne's only premium fine-dining restaurant – Asian-Modern Australian menu with roaring winter fireplace, reservations essential.",
+    "long_description": "Embers Fireside Restaurant at Horizons Lake Jindabyne is the only upscale dining experience in the Snowy Mountains base town. The menu blends modern Australian and Asian influences: karaage chicken, sesame duck, fillet mignon, chilli garlic prawn pasta. Operating Tuesday–Saturday during off-season (October–May) and expanding to full winter hours, the roaring fireplace and lake-view setting make it the destination for date nights and special occasions. Call 02 6456 2562 to book.",
+    "address": "62 Kosciusko Road, Jindabyne NSW 2627",
+    "lat": -36.417,
+    "lng": 148.607,
+    "phone": "+61 2 6456 2562",
+    "website": "https://www.horizonslakejindabyne.com.au/eat-drink/",
+    "price_band": "$$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.horizonslakejindabyne.com.au/eat-drink/",
+      "https://www.australiantraveller.com/nsw/snowy-mountains/jindabyne/jindabyne-restaurants/"
+    ],
+    "cuisine": [
+      "modern Australian",
+      "Asian fusion",
+      "fine dining"
+    ],
+    "hours": {
+      "monday": "closed (off-season)",
+      "tuesday": "dinner only (off-season)",
+      "wednesday": "dinner only (off-season)",
+      "thursday": "dinner only",
+      "friday": "dinner only",
+      "saturday": "dinner only",
+      "sunday": "closed (off-season)"
+    },
+    "last_order_time": "21:00",
+    "reservation": "required",
+    "reservation_link": "tel:+61264562562",
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "karaage chicken",
+      "sesame duck",
+      "fillet mignon",
+      "chilli garlic prawn pasta"
+    ],
+    "apres_ski": "no",
+    "takeaway": "no",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "cocina-taqueria-jindabyne",
+    "name": "Cocina Taqueria",
+    "name_local": null,
+    "type": "restaurant",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Contemporary Mexican restaurant on Kosciuszko Road, under new ownership since 2024, open 7 nights from 5:30pm.",
+    "long_description": "Cocina Taqueria occupies a cosy upstairs space at 33 Kosciuszko Road and has been reinvigorated under new ownership since November 2024. The menu features tacos, burritos, ceviche, jalapeño poppers and Oaxacan lamb barbacoa, alongside tequila, mezcal and margaritas. With outdoor seating and an upstairs dining area, it's a popular choice for groups. Dinner service runs 7 nights from 5:30pm to 8:30pm.",
+    "address": "Shop 15/33 Kosciuszko Road, Jindabyne NSW 2627",
+    "lat": -36.4142,
+    "lng": 148.6113,
+    "phone": "+61 2 6457 2888",
+    "website": "https://www.cocina.com.au",
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.cocina.com.au",
+      "https://www.australiantraveller.com/nsw/snowy-mountains/jindabyne/jindabyne-restaurants/"
+    ],
+    "cuisine": [
+      "Mexican",
+      "Tex-Mex"
+    ],
+    "hours": {
+      "monday": "17:30–20:30",
+      "tuesday": "17:30–20:30",
+      "wednesday": "17:30–20:30",
+      "thursday": "17:30–20:30",
+      "friday": "17:30–20:30",
+      "saturday": "17:30–20:30",
+      "sunday": "17:30–20:30"
+    },
+    "last_order_time": "20:15",
+    "reservation": "recommended",
+    "reservation_link": "https://www.cocina.com.au",
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "Oaxacan lamb barbacoa tacos",
+      "ceviche",
+      "jalapeño poppers",
+      "margaritas",
+      "mezcal selection"
+    ],
+    "apres_ski": "no",
+    "takeaway": "yes",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "holly-go-lightly",
+    "name": "Holly Go Lightly",
+    "name_local": null,
+    "type": "bar",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Locals' favourite bar with beer garden, DJ nights, poutine and maple bacon burgers – open until 11pm Fri/Sat.",
+    "long_description": "Holly Go Lightly on Thredbo Terrace is the closest thing Jindabyne has to a proper night-life venue, with a beer garden, DJ sessions through winter and summer, and a menu that leans American-comfort: poutine, fried cheese balls, maple bacon burgers and beef cheeseburgers. The relaxed atmosphere makes it equally good for a quiet afternoon beer or a rowdy post-mountain session. Open from 3pm daily, until 11pm on weekends.",
+    "address": "6 Thredbo Terrace, Jindabyne NSW 2627",
+    "lat": -36.4152,
+    "lng": 148.6118,
+    "phone": null,
+    "website": null,
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.tripadvisor.com.au/Restaurant_Review-g261617-d23896476-Reviews-Holly_Go_Lightly-Jindabyne_New_South_Wales.html",
+      "https://www.visitnsw.com/destinations/snowy-mountains/jindabyne-area/jindabyne/food-and-drink/holly-go-lightly",
+      "https://www.australiantraveller.com/nsw/snowy-mountains/jindabyne/jindabyne-restaurants/"
+    ],
+    "cuisine": [
+      "bar food",
+      "American",
+      "pub food"
+    ],
+    "hours": {
+      "monday": "15:00–22:00",
+      "tuesday": "15:00–22:00",
+      "wednesday": "15:00–22:00",
+      "thursday": "15:00–22:00",
+      "friday": "15:00–23:00",
+      "saturday": "15:00–23:00",
+      "sunday": "15:00–22:00"
+    },
+    "last_order_time": "21:30",
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "poutine",
+      "fried cheese balls",
+      "maple bacon burger",
+      "beef cheeseburger"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "no",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "jindabyne-emporium",
+    "name": "Jindabyne Emporium",
+    "name_local": null,
+    "type": "bar",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Lake-view bar and eatery with daily 4–6pm Happy Hour, craft burgers, tacos and the best craft beer and lo-fi wine selection in town.",
+    "long_description": "Jindabyne Emporium occupies a level-1 space on Kosciuszko Road with sweeping Lake Jindabyne views. The happy hour runs daily from 4pm to 6pm ($8 schooners and wines), making it the best-value apres-ski drink in town. The food menu covers burgers, tacos, pork belly nuggets and cheeseburger spring rolls, backed by an extensive independent Australian craft beer list, natural/lo-fi wines and Aussie spirits. The setting is casual and the lake view spectacular at sunset.",
+    "address": "Level 1, Shop 14/33 Kosciuszko Road, Jindabyne NSW 2627",
+    "lat": -36.4142,
+    "lng": 148.6113,
+    "phone": null,
+    "website": "https://www.jindabyneemporium.com",
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.jindabyneemporium.com",
+      "https://www.australiantraveller.com/nsw/snowy-mountains/jindabyne/jindabyne-restaurants/"
+    ],
+    "cuisine": [
+      "bar food",
+      "American",
+      "burgers",
+      "craft beer"
+    ],
+    "hours": {
+      "monday": "12:00–22:00",
+      "tuesday": "12:00–22:00",
+      "wednesday": "12:00–22:00",
+      "thursday": "12:00–22:00",
+      "friday": "12:00–22:00",
+      "saturday": "12:00–22:00",
+      "sunday": "12:00–22:00"
+    },
+    "last_order_time": "21:30",
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "cheeseburger spring rolls",
+      "pork belly nuggets",
+      "burgers",
+      "tacos",
+      "daily Happy Hour $8 schooners 4–6pm"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "no",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "jindabyne-brewing-co",
+    "name": "Jindabyne Brewing Co",
+    "name_local": null,
+    "type": "bar",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Independent craft brewery with taproom on Nettin Circuit, open from midday weekends – try the Alpine Red X dark lager.",
+    "long_description": "Jindabyne Brewing Co is the town's only dedicated craft brewery and taproom, located on Nettin Circuit a short drive from the main strip. Flagship beers include Alpine Red X (dark lager) and Hefe Weiss (German wheat beer). The small kitchen puts out meat skewers, house chips and aioli to complement the pints. The taproom opens from 3pm Wednesday–Friday and noon on weekends, making it an ideal first stop on a non-ski afternoon.",
+    "address": "5 Nettin Circuit, Jindabyne NSW 2627",
+    "lat": -36.4175,
+    "lng": 148.6094,
+    "phone": null,
+    "website": "https://www.jindabynebrewing.com.au",
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.jindabynebrewing.com.au",
+      "https://www.tripadvisor.com/Attraction_Review-g261617-d12542601-Reviews-Jindabyne_Brewing-Jindabyne_New_South_Wales.html"
+    ],
+    "cuisine": [
+      "bar food",
+      "craft beer",
+      "share plates"
+    ],
+    "hours": {
+      "monday": "closed",
+      "tuesday": "closed",
+      "wednesday": "15:00–21:00",
+      "thursday": "15:00–21:00",
+      "friday": "15:00–21:00",
+      "saturday": "12:00–21:00",
+      "sunday": "12:00–21:00"
+    },
+    "last_order_time": "20:30",
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "Alpine Red X dark lager",
+      "Hefe Weiss wheat beer",
+      "meat skewers",
+      "house chips with aioli"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "no",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "panorama-thai",
+    "name": "Panorama Thai",
+    "name_local": null,
+    "type": "restaurant",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Thai restaurant on Nettin Circuit open 7 nights from 5pm – go-to for warming massaman curry after a cold day on the mountain.",
+    "long_description": "Panorama Thai on Nettin Circuit offers a reliable, warming Thai menu every evening from 5pm, making it one of the most convenient dinner options in Jindabyne. Standout dishes include massaman beef, chilli basil eggplant and the spicy pad kee mao. The relaxed setting and reasonable prices make it popular with families and ski groups. The same lakeside panorama views as the Panorama Jindabyne motel next door.",
+    "address": "16 Nettin Circuit, Jindabyne NSW 2627",
+    "lat": -36.4168,
+    "lng": 148.6095,
+    "phone": "+61 2 6456 2918",
+    "website": null,
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.tripadvisor.com.au/Restaurant_Review-g261617-d11903505-Reviews-Panorama-Jindabyne_New_South_Wales.html",
+      "https://www.australiantraveller.com/nsw/snowy-mountains/jindabyne/jindabyne-restaurants/"
+    ],
+    "cuisine": [
+      "Thai",
+      "Asian"
+    ],
+    "hours": {
+      "monday": "17:00–21:30",
+      "tuesday": "17:00–21:30",
+      "wednesday": "17:00–21:30",
+      "thursday": "17:00–21:30",
+      "friday": "17:00–21:30",
+      "saturday": "17:00–21:30",
+      "sunday": "17:00–21:30"
+    },
+    "last_order_time": "21:00",
+    "reservation": "recommended",
+    "reservation_link": "tel:+61264562918",
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "massaman beef curry",
+      "chilli basil eggplant",
+      "pad kee mao (spicy)",
+      "Thai iced tea"
+    ],
+    "apres_ski": "no",
+    "takeaway": "yes",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "beach-burrito-co-jindabyne",
+    "name": "Beach Burrito Co",
+    "name_local": null,
+    "type": "restaurant",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Casual Mexican chain with lake views, kids' DIY taco kits, tequila and margaritas – great for families.",
+    "long_description": "Beach Burrito Co occupies a level-3 perch on Kosciuszko Road with spectacular Lake Jindabyne views. The menu is reliably casual Mexican – tacos, quesadillas, burritos – with a strong cocktail list of tequilas, margaritas and sangria. The kids' menu includes a DIY taco kit, making it one of the most family-friendly dinner options in town. BYO is not permitted.",
+    "address": "Level 3, Shop 5/3 Kosciuszko Road, Jindabyne NSW 2627",
+    "lat": -36.4142,
+    "lng": 148.6113,
+    "phone": null,
+    "website": null,
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.australiantraveller.com/nsw/snowy-mountains/jindabyne/jindabyne-restaurants/"
+    ],
+    "cuisine": [
+      "Mexican",
+      "Tex-Mex"
+    ],
+    "hours": {
+      "monday": null,
+      "tuesday": null,
+      "wednesday": null,
+      "thursday": null,
+      "friday": null,
+      "saturday": null,
+      "sunday": null
+    },
+    "last_order_time": null,
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "tacos",
+      "burritos",
+      "quesadillas",
+      "margaritas",
+      "kids' DIY taco kit"
+    ],
+    "apres_ski": "no",
+    "takeaway": "yes",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "bebita-jindabyne",
+    "name": "Bebita",
+    "name_local": null,
+    "type": "cafe",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Wholesome fresh food cafe in Jindabyne's backstreets serving brunch, nachos, burrito bowls and spectacular cheesecakes.",
+    "long_description": "Bebita is tucked into a quiet spot on Snowy River Avenue, offering a relaxed alternative to the main strip. The menu covers coffee, fresh juices, salads, nachos, burrito bowls and tacos, with house-baked cheesecakes (mint choc, caramilk, Kit Kat) as the standout desserts. BYO wine and beer are welcome, and an outdoor terrace makes it a pleasant lunch spot in fine weather.",
+    "address": "1 Snowy River Avenue, Jindabyne NSW 2627",
+    "lat": -36.4148,
+    "lng": 148.6095,
+    "phone": null,
+    "website": null,
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.australiantraveller.com/nsw/snowy-mountains/jindabyne/jindabyne-restaurants/"
+    ],
+    "cuisine": [
+      "cafe",
+      "Mexican-inspired",
+      "modern Australian"
+    ],
+    "hours": {
+      "monday": null,
+      "tuesday": null,
+      "wednesday": null,
+      "thursday": null,
+      "friday": null,
+      "saturday": null,
+      "sunday": null
+    },
+    "last_order_time": null,
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "mint choc cheesecake",
+      "caramilk cheesecake",
+      "burrito bowl",
+      "nachos"
+    ],
+    "apres_ski": "no",
+    "takeaway": "no",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "stacks-pizza-jindabyne",
+    "name": "Stacks Pizza",
+    "name_local": null,
+    "type": "restaurant",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Casual BYO pizzeria serving dine-in, takeaway and by-the-slice pizza – Pontiac potato pizza is the local favourite.",
+    "long_description": "Stacks Pizza at 1 Kosciuszko Road (inside the Banjo Paterson Inn precinct) is Jindabyne's most accessible pizzeria, offering dine-in, takeaway and by-the-slice options. The menu covers all the classics – ham and pineapple, supreme, meat lovers, chorizo and boscaiola – with the Pontiac potato pizza standing out as the local favourite. BYO wine only.",
+    "address": "1 Kosciuszko Road, Jindabyne NSW 2627",
+    "lat": -36.4144,
+    "lng": 148.6119,
+    "phone": null,
+    "website": null,
+    "price_band": "$",
+    "photos": [],
+    "source_urls": [
+      "https://www.australiantraveller.com/nsw/snowy-mountains/jindabyne/jindabyne-restaurants/"
+    ],
+    "cuisine": [
+      "Italian",
+      "pizza"
+    ],
+    "hours": {
+      "monday": null,
+      "tuesday": null,
+      "wednesday": null,
+      "thursday": null,
+      "friday": null,
+      "saturday": null,
+      "sunday": null
+    },
+    "last_order_time": null,
+    "reservation": "not_accepted",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "Pontiac potato pizza",
+      "meat lovers pizza",
+      "boscaiola pizza",
+      "by-the-slice"
+    ],
+    "apres_ski": "no",
+    "takeaway": "yes",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "pinots-wine-bar",
+    "name": "Pinot's Wine Bar",
+    "name_local": null,
+    "type": "bar",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Best date-night spot in Jindabyne – intimate wine bar with artisan snacks, craft beer, cocktails and a curated wine list.",
+    "long_description": "Pinot's Wine Bar in Nuggets Crossing is Jindabyne's most intimate small bar, offering a carefully curated wine list, craft beers and cocktails alongside sophisticated bar snacks: toasted brioche with ricotta and white anchovies, pumpkin and truffle arancini balls, and a cheese board. The small, cosy space fills quickly in ski season, making it the top recommendation for couples seeking a relaxed but upscale evening out.",
+    "address": "Shop 18B, Nuggets Crossing Shopping Centre, Snowy River Avenue, Jindabyne NSW 2627",
+    "lat": -36.4148,
+    "lng": 148.6095,
+    "phone": null,
+    "website": null,
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.australiantraveller.com/nsw/snowy-mountains/jindabyne/jindabyne-restaurants/"
+    ],
+    "cuisine": [
+      "bar",
+      "wine bar",
+      "share plates"
+    ],
+    "hours": {
+      "monday": null,
+      "tuesday": null,
+      "wednesday": null,
+      "thursday": null,
+      "friday": null,
+      "saturday": null,
+      "sunday": null
+    },
+    "last_order_time": null,
+    "reservation": "recommended",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "toasted brioche with ricotta and white anchovies",
+      "pumpkin and truffle arancini",
+      "cheese board"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "no",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "jindabyne-bowling-club",
+    "name": "Jindabyne Bowling Club",
+    "name_local": null,
+    "type": "pub",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Family-friendly bowling club bistro with indoor playground, Thursday trivia and courtesy bus – best-value family dinner in town.",
+    "long_description": "The Jindabyne Bowling Club on Bay Street punches well above its weight as a family dining destination. The bistro menu covers burgers, prawn cutlets, chicken parmi and steak sandwiches at bowlo prices. An indoor playground keeps children occupied, Thursday trivia nights draw a local crowd, and the courtesy bus means you don't need to drive. A reliable, genuinely affordable option for large groups and families.",
+    "address": "2 Bay Street, Jindabyne NSW 2627",
+    "lat": -36.4135,
+    "lng": 148.6148,
+    "phone": null,
+    "website": null,
+    "price_band": "$",
+    "photos": [],
+    "source_urls": [
+      "https://www.australiantraveller.com/nsw/snowy-mountains/jindabyne/jindabyne-restaurants/"
+    ],
+    "cuisine": [
+      "pub food",
+      "Australian"
+    ],
+    "hours": {
+      "monday": null,
+      "tuesday": null,
+      "wednesday": null,
+      "thursday": null,
+      "friday": null,
+      "saturday": null,
+      "sunday": null
+    },
+    "last_order_time": null,
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "chicken parmi",
+      "prawn cutlets",
+      "steak sandwich",
+      "burger"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "no",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "woolworths-jindabyne",
+    "name": "Woolworths Jindabyne",
+    "name_local": null,
+    "type": "restaurant",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Full-size Woolworths supermarket open 7am–9pm every day – the primary grocery stop for self-catering ski accommodation.",
+    "long_description": "Woolworths in Nuggets Crossing Shopping Centre is the main supermarket in Jindabyne, stocking all grocery staples, fresh produce, deli items, pre-made meals, ski snacks, wine and beer. Open 7am–9pm every day of the year (closed Christmas Day), it's the essential first stop for self-contained accommodation guests. The extensive ready-meal range is popular for easy weeknight ski dinners. The BWS bottle shop is co-located.",
+    "address": "Shop 1, Nuggets Crossing Shopping Centre, 6 Kosciuszko Road, Jindabyne NSW 2627",
+    "lat": -36.4148,
+    "lng": 148.61,
+    "phone": "+61 2 6448 8000",
+    "website": "https://www.woolworths.com.au/shop/storelocator/nsw-jindabyne-1401",
+    "price_band": "$",
+    "photos": [],
+    "source_urls": [
+      "http://www.nuggetscrossing.com.au/woolworths/",
+      "https://www.woolworths.com.au/shop/storelocator/nsw-jindabyne-1401"
+    ],
+    "cuisine": [
+      "groceries",
+      "supermarket"
+    ],
+    "hours": {
+      "monday": "07:00–21:00",
+      "tuesday": "07:00–21:00",
+      "wednesday": "07:00–21:00",
+      "thursday": "07:00–21:00",
+      "friday": "07:00–21:00",
+      "saturday": "07:00–21:00",
+      "sunday": "07:00–21:00"
+    },
+    "last_order_time": "20:55",
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [],
+    "apres_ski": "no",
+    "takeaway": "yes",
+    "groceries": "yes",
+    "country": "AU"
+  },
+  {
+    "id": "bws-jindabyne",
+    "name": "BWS – Beer Wine Spirits (Nuggets Crossing)",
+    "name_local": null,
+    "type": "bar",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Bottle shop inside Nuggets Crossing Shopping Centre open 7 days – the primary liquor stop for Jindabyne self-catering guests.",
+    "long_description": "BWS Jindabyne is the main bottle shop in town, co-located with Woolworths in Nuggets Crossing Shopping Centre. It stocks a wide range of beer (including local craft), wine, spirits and RTDs. Open 9am–8pm Monday–Saturday and 10am–8pm Sunday (closed Christmas Day). For BYO restaurants like Cafe Darya and Bacco, an ATM and BWS trip should be planned before the dinner booking.",
+    "address": "Shop 1, Nuggets Crossing Shopping Centre, Kosciuszko Road, Jindabyne NSW 2627",
+    "lat": -36.4148,
+    "lng": 148.61,
+    "phone": "+61 2 6448 8003",
+    "website": "https://store.bws.com.au/storelocator/nsw-jindabyne-6448",
+    "price_band": "$",
+    "photos": [],
+    "source_urls": [
+      "http://www.nuggetscrossing.com.au/bws/",
+      "https://www.shopfully.com.au/stores/bws/48485/shop-1-nuggets-crossing-jindabyne-nsw-2627"
+    ],
+    "cuisine": [
+      "bottle shop",
+      "liquor"
+    ],
+    "hours": {
+      "monday": "09:00–20:00",
+      "tuesday": "09:00–20:00",
+      "wednesday": "09:00–20:00",
+      "thursday": "09:00–20:00",
+      "friday": "09:00–20:00",
+      "saturday": "09:00–20:00",
+      "sunday": "10:00–20:00"
+    },
+    "last_order_time": "19:55",
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [],
+    "apres_ski": "no",
+    "takeaway": "yes",
+    "groceries": "yes",
+    "country": "AU"
+  },
+  {
+    "id": "the-market-jindabyne",
+    "name": "The Market Jindabyne",
+    "name_local": null,
+    "type": "cafe",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Specialty food and coffee shop stocking local produce, cured meats, cheese, honey and artisan groceries plus great coffee.",
+    "long_description": "The Market Jindabyne on Snowy River Avenue is part specialty grocery, part cafe. It serves excellent coffee (matcha, juice included), toasties on local sourdough, pastries and smoothie bowls, while also stocking a curated selection of cured meats, cheeses, honey, preserves, organic fruit and vegetables. The combination of eat-in and take-home produce makes it a great morning stop before the mountain or a lazy afternoon browse.",
+    "address": "6/141 Snowy River Avenue, Jindabyne NSW 2627",
+    "lat": -36.4148,
+    "lng": 148.609,
+    "phone": null,
+    "website": null,
+    "price_band": "$",
+    "photos": [],
+    "source_urls": [
+      "https://www.australiantraveller.com/nsw/snowy-mountains/jindabyne/jindabyne-restaurants/"
+    ],
+    "cuisine": [
+      "cafe",
+      "specialty grocery",
+      "deli"
+    ],
+    "hours": {
+      "monday": null,
+      "tuesday": null,
+      "wednesday": null,
+      "thursday": null,
+      "friday": null,
+      "saturday": null,
+      "sunday": null
+    },
+    "last_order_time": null,
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "sourdough toastie",
+      "matcha latte",
+      "cured meats platter",
+      "artisan cheese selection"
+    ],
+    "apres_ski": "no",
+    "takeaway": "yes",
+    "groceries": "yes",
+    "country": "AU"
+  },
+  {
+    "id": "crackenback-farm-restaurant",
+    "name": "Crackenback Farm Restaurant",
+    "name_local": null,
+    "type": "restaurant",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Award-winning French country restaurant 5 min from Jindabyne with cathedral ceiling, open fire and the best wine list in the Snowies.",
+    "long_description": "Crackenback Farm Restaurant is consistently cited as one of the best dining experiences in the entire Snowy Mountains region. The Glenn Murcutt-designed dining room has a soaring cathedral ceiling and a roaring open fireplace in winter. The French country-farmhouse menu is produce-driven, seasonal and complemented by a well-selected wine list. In season it opens for both lunch and dinner; outside ski season, dinner only on selected days. Reservations are essential.",
+    "address": "Crackenback Valley, Crackenback NSW 2627",
+    "lat": -36.453,
+    "lng": 148.493,
+    "phone": "+61 2 6456 2601",
+    "website": "https://www.crackenback.com",
+    "price_band": "$$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.crackenback.com",
+      "https://www.tripadvisor.com/Hotel_Review-g1858103-d1216485-Reviews-Crackenback_Farm_Restaurant_Guesthouse-Crackenback_New_South_Wales.html"
+    ],
+    "cuisine": [
+      "French country",
+      "modern Australian",
+      "fine dining"
+    ],
+    "hours": {
+      "monday": "dinner (seasonal)",
+      "tuesday": "dinner (seasonal)",
+      "wednesday": "dinner (seasonal)",
+      "thursday": "dinner",
+      "friday": "lunch and dinner (winter season)",
+      "saturday": "lunch and dinner (winter season)",
+      "sunday": "lunch and dinner (winter season)"
+    },
+    "last_order_time": "20:30",
+    "reservation": "required",
+    "reservation_link": "tel:+61264562601",
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "seasonal French-Australian degustation",
+      "country farmhouse menu"
+    ],
+    "apres_ski": "no",
+    "takeaway": "no",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "squires-bar-bistro-horizons",
+    "name": "Squires Bar & Bistro (Horizons Lake Jindabyne)",
+    "name_local": null,
+    "type": "bar",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Hotel bar and bistro at Horizons with beer garden and cocktail bar – open while Embers Fireside Restaurant is closed.",
+    "long_description": "Squires Bar & Bistro is the casual dining and drinking outlet at Horizons Lake Jindabyne, remaining open year-round as a complement to the premium Embers Fireside Restaurant which opens seasonally. The beer garden and Squires Cocktail Bar offer relaxed dining, local beers, cocktails and bistro meals. The lakeside hotel setting and waterfront views make it a popular choice for groups staying at Horizons or passing through.",
+    "address": "62 Kosciusko Road, Jindabyne NSW 2627",
+    "lat": -36.417,
+    "lng": 148.607,
+    "phone": "+61 2 6456 2562",
+    "website": "https://www.horizonslakejindabyne.com.au/eat-drink/",
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.horizonslakejindabyne.com.au/eat-drink/"
+    ],
+    "cuisine": [
+      "bar food",
+      "modern Australian",
+      "cocktails"
+    ],
+    "hours": {
+      "monday": "varies",
+      "tuesday": "varies",
+      "wednesday": "varies",
+      "thursday": "varies",
+      "friday": "varies",
+      "saturday": "varies",
+      "sunday": "varies"
+    },
+    "last_order_time": null,
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "cocktails",
+      "local craft beer",
+      "bistro meals"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "no",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "jindabyne-iga-nuggets",
+    "name": "IGA / Local Grocer (formerly in Nuggets Crossing)",
+    "name_local": null,
+    "type": "cafe",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Local IGA-affiliated grocer in Jindabyne for top-up shopping when Woolworths is closed or too busy.",
+    "long_description": "Jindabyne has a local IGA-affiliated grocer in addition to Woolworths, providing a convenient option for top-up grocery shopping. Stocking fresh produce, packaged goods, snacks, drinks and some specialty items, it's useful during peak ski season when Woolworths can be extremely busy. Opening hours are shorter than Woolworths, so check before making a special trip. Location and exact hours should be verified on arrival as the store configuration changes.",
+    "address": "Nuggets Crossing Shopping Centre, Jindabyne NSW 2627",
+    "lat": -36.4148,
+    "lng": 148.61,
+    "phone": null,
+    "website": null,
+    "price_band": "$",
+    "photos": [],
+    "source_urls": [
+      "https://accommodationjindabyne.com/things-to-do-type/groceries/"
+    ],
+    "cuisine": [
+      "groceries",
+      "supermarket"
+    ],
+    "hours": {
+      "monday": "07:00–19:00",
+      "tuesday": "07:00–19:00",
+      "wednesday": "07:00–19:00",
+      "thursday": "07:00–19:00",
+      "friday": "07:00–19:00",
+      "saturday": "07:00–19:00",
+      "sunday": "07:00–19:00"
+    },
+    "last_order_time": null,
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [],
+    "apres_ski": "no",
+    "takeaway": "yes",
+    "groceries": "yes",
+    "country": "AU"
+  },
+  {
+    "id": "ampol-foodary-jindabyne",
+    "name": "Ampol Foodary Jindabyne",
+    "name_local": null,
+    "type": "cafe",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Service station with attached convenience store open from 6am – essential for early-morning fuel, snacks and hot drinks before heading to the mountain.",
+    "long_description": "The Ampol Foodary on Kosciuszko Road is the practical early-morning stop for ski-day fuel. Open from 6:00am seven days a week, it's one of the first businesses in Jindabyne to open and stocks petrol, diesel, hot drinks, packaged snacks, sandwiches and convenience groceries. Essential for self-contained apartment guests needing to fill the car and grab a quick bite before the mountain run.",
+    "address": "Kosciuszko Road, Jindabyne NSW 2627",
+    "lat": -36.4145,
+    "lng": 148.6105,
+    "phone": "+61 2 6456 2576",
+    "website": "https://locations.ampol.com.au/en/ampol-foodary-jindabyne",
+    "price_band": "$",
+    "photos": [],
+    "source_urls": [
+      "https://locations.ampol.com.au/en/ampol-foodary-jindabyne"
+    ],
+    "cuisine": [
+      "convenience",
+      "snacks",
+      "hot drinks"
+    ],
+    "hours": {
+      "monday": "06:00–20:00",
+      "tuesday": "06:00–20:00",
+      "wednesday": "06:00–20:00",
+      "thursday": "06:00–20:00",
+      "friday": "06:00–20:00",
+      "saturday": "06:00–20:00",
+      "sunday": "06:00–20:00"
+    },
+    "last_order_time": "19:55",
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "hot coffee",
+      "packaged snacks",
+      "fuel (unleaded 91, 95, 98, diesel)"
+    ],
+    "apres_ski": "no",
+    "takeaway": "yes",
+    "groceries": "yes",
+    "country": "AU"
+  },
+  {
+    "id": "metro-petroleum-jindabyne",
+    "name": "Metro Petroleum Jindabyne (East Jindabyne)",
+    "name_local": null,
+    "type": "cafe",
+    "town": "jindabyne",
+    "region": "snowy_mountains",
+    "short_description": "Second fuel and convenience stop in East Jindabyne, handy for Discovery Parks guests heading toward Perisher or Thredbo.",
+    "long_description": "Metro Petroleum on Kosciuszko Road in East Jindabyne is the second service station in the Jindabyne area, useful for guests staying on the eastern side of the lake at Discovery Parks or Siesta Villa. Open from 6:30am on weekdays and 7:30am weekends, it provides fuel, basic convenience goods and cold drinks. Often cheaper fuel than the main-strip station.",
+    "address": "5332 Kosciuszko Road, East Jindabyne NSW 2627",
+    "lat": -36.409,
+    "lng": 148.6265,
+    "phone": "+61 2 6456 7112",
+    "website": null,
+    "price_band": "$",
+    "photos": [],
+    "source_urls": [
+      "https://petrolspy.com.au/map/station/53e060e2e4b0b6abc8d163c6"
+    ],
+    "cuisine": [
+      "convenience",
+      "fuel"
+    ],
+    "hours": {
+      "monday": "06:30–18:30",
+      "tuesday": "06:30–18:30",
+      "wednesday": "06:30–18:30",
+      "thursday": "06:30–18:30",
+      "friday": "06:30–18:30",
+      "saturday": "07:30–18:30",
+      "sunday": "07:30–18:30"
+    },
+    "last_order_time": "18:25",
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "fuel (diesel, U91, U95, U98)",
+      "convenience snacks"
+    ],
+    "apres_ski": "no",
+    "takeaway": "yes",
+    "groceries": "yes",
+    "country": "AU"
+  }
+]

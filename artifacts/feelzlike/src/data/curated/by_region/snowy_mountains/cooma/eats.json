@@ -1,0 +1,1249 @@
+[
+  {
+    "id": "the-lott-cafe-cooma",
+    "name": "The Lott Cafe",
+    "name_local": null,
+    "type": "cafe",
+    "town": "cooma",
+    "region": "snowy_mountains",
+    "short_description": "Cooma's most-reviewed cafe; sharp espresso, fresh local produce, all-day breakfast.",
+    "long_description": "Open since 2007, The Lott Cafe has built a loyal following with a focus on fresh, local produce and seriously good coffee (Killerbee blend and Single-O Origins). With 419 TripAdvisor reviews, it is comfortably the most-reviewed eatery in town. The Sharp/Soho Street corner location puts it at the heart of the morning ski-day rush. Closes at 2pm, so best visited before hitting the mountain.",
+    "address": "177-179 Sharp Street, Cooma NSW 2630",
+    "lat": -36.236,
+    "lng": 149.1268,
+    "phone": "+61 2 6452 1414",
+    "website": "https://thelottcafe.com.au",
+    "price_band": "$$",
+    "photos": [
+      "https://thelottcafe.com.au"
+    ],
+    "source_urls": [
+      "https://thelottcafe.com.au",
+      "https://www.tripadvisor.com/Restaurants-g261610-Cooma_New_South_Wales.html",
+      "https://visitcooma.com.au/coffee-food-wine/cooma-coffee-food-the-lott-cafe-cooma-visitor-centre/"
+    ],
+    "cuisine": [
+      "cafe",
+      "australian",
+      "breakfast"
+    ],
+    "hours": {
+      "monday": "07:00-14:00",
+      "tuesday": "07:00-14:00",
+      "wednesday": "07:00-14:00",
+      "thursday": "07:00-14:00",
+      "friday": "07:00-14:00",
+      "saturday": "07:00-14:00",
+      "sunday": "07:00-14:00"
+    },
+    "last_order_time": "13:45",
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "all-day breakfast",
+      "fresh sandwiches",
+      "specialty coffee",
+      "seasonal produce dishes"
+    ],
+    "apres_ski": "no",
+    "takeaway": "yes",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "kuma-pies-pastries",
+    "name": "Kuma Pies and Pastries",
+    "name_local": null,
+    "type": "bakery",
+    "town": "cooma",
+    "region": "snowy_mountains",
+    "short_description": "Cooma's best bakery; legendary meat pies, flaky pastries, and apple turnovers on Sharp Street.",
+    "long_description": "Kuma Pies is a small artisan bakery tucked towards the southern end of Sharp Street, with a cosy back room warmed by an open fire in winter. The beef and mushroom pie and chicken and leek pie are regularly cited as among the best in NSW. Fresh pastries — cherry Danish, apple turnover, vanilla slice, hazelnut yumpie — are baked on-site daily. A mandatory stop for any Cooma visitor; peak-season queues indicate its cult status. TripAdvisor #1 Bakery in Cooma, 162 reviews.",
+    "address": "178-180 Sharp Street, Cooma NSW 2630",
+    "lat": -36.2365,
+    "lng": 149.127,
+    "phone": "+61 2 6452 6337",
+    "website": null,
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.tripadvisor.com.au/Restaurant_Review-g261610-d2516026-Reviews-Kuma_Pies_and_Pastries-Cooma_New_South_Wales.html",
+      "https://www.yelp.com/biz/kuma-pies-cooma"
+    ],
+    "cuisine": [
+      "bakery",
+      "australian",
+      "cafe"
+    ],
+    "hours": {
+      "monday": "08:00-17:00",
+      "tuesday": "08:00-17:00",
+      "wednesday": "08:00-17:00",
+      "thursday": "08:00-17:00",
+      "friday": "08:00-17:00",
+      "saturday": "08:00-15:00",
+      "sunday": "09:00-15:00"
+    },
+    "last_order_time": "16:45",
+    "reservation": "not_accepted",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "beef and mushroom pie",
+      "chicken and leek pie",
+      "apple turnover",
+      "cherry Danish",
+      "vanilla slice"
+    ],
+    "apres_ski": "no",
+    "takeaway": "yes",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "123-coffee-house",
+    "name": "123 Coffee House",
+    "name_local": null,
+    "type": "cafe",
+    "town": "cooma",
+    "region": "snowy_mountains",
+    "short_description": "All-day brunch café with Vietnamese dishes, fresh juices, and ONA coffee — open 7 days to 5pm.",
+    "long_description": "123 Coffee House sits at 123 Sharp Street and blends classic all-day brunch fare with a selection of Vietnamese dishes, fresh juices, and pre-made sandwiches. It uses ONA Coffee, a respected Canberra specialty roaster. Open 7 days from 7am to 5pm, it's one of the most accessible cafes in Cooma for late-morning après-drive coffee. Vegetarian and vegan options available.",
+    "address": "123 Sharp Street, Cooma NSW 2630",
+    "lat": -36.2355,
+    "lng": 149.126,
+    "phone": "+61 2 6452 3332",
+    "website": "https://123coffeehouse.com",
+    "price_band": "$",
+    "photos": [],
+    "source_urls": [
+      "https://www.tripadvisor.com/Restaurant_Review-g261610-d7974556-Reviews-123_Coffee_House-Cooma_New_South_Wales.html",
+      "https://www.yelp.com/biz/123-coffee-house-cooma-2"
+    ],
+    "cuisine": [
+      "cafe",
+      "vietnamese",
+      "breakfast",
+      "brunch"
+    ],
+    "hours": {
+      "monday": "07:00-17:00",
+      "tuesday": "07:00-17:00",
+      "wednesday": "07:00-17:00",
+      "thursday": "07:00-17:00",
+      "friday": "07:00-17:00",
+      "saturday": "07:00-17:00",
+      "sunday": "07:00-17:00"
+    },
+    "last_order_time": "16:45",
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "all-day breakfast",
+      "Vietnamese dishes",
+      "fresh juices",
+      "ONA coffee"
+    ],
+    "apres_ski": "no",
+    "takeaway": "yes",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "phas-thai-cooma",
+    "name": "Pha's Thai",
+    "name_local": null,
+    "type": "restaurant",
+    "town": "cooma",
+    "region": "snowy_mountains",
+    "short_description": "Popular Thai restaurant on Soho Street; 177 TripAdvisor reviews, lunch and dinner Tue–Sat.",
+    "long_description": "Pha's Thai recently moved from Sharp Street to 24 Soho Street in Cooma CBD. It is the most-reviewed Thai restaurant in the region and well regarded for authentic flavours and generous portions. Open Tuesday to Saturday for both lunch and dinner sessions. Closed Sunday and Monday. Online ordering and table bookings available through the website.",
+    "address": "24 Soho Street, Cooma NSW 2630",
+    "lat": -36.2352,
+    "lng": 149.1248,
+    "phone": "+61 2 6452 5489",
+    "website": "https://phasthai.com.au",
+    "price_band": "$$",
+    "photos": [
+      "https://phasthai.com.au"
+    ],
+    "source_urls": [
+      "https://phasthai.com.au",
+      "https://www.tripadvisor.com.au/Restaurant_Review-g261610-d3199961-Reviews-Pha_s_Thai-Cooma_New_South_Wales.html",
+      "https://visitcooma.com.au/coffee-food-wine/phas-thai-kitchen/"
+    ],
+    "cuisine": [
+      "thai",
+      "asian"
+    ],
+    "hours": {
+      "monday": "closed",
+      "tuesday": "11:30-14:00,17:30-21:30",
+      "wednesday": "11:30-14:00,17:30-21:30",
+      "thursday": "11:30-14:00,17:30-21:30",
+      "friday": "11:30-14:00,17:30-21:30",
+      "saturday": "17:30-21:30",
+      "sunday": "closed"
+    },
+    "last_order_time": "21:15",
+    "reservation": "recommended",
+    "reservation_link": "https://phasthai.com.au",
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "pad thai",
+      "green curry",
+      "massaman curry",
+      "Thai seafood"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "yes",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "roses-lebanese-restaurant",
+    "name": "Rose's Lebanese Restaurant",
+    "name_local": null,
+    "type": "restaurant",
+    "town": "cooma",
+    "region": "snowy_mountains",
+    "short_description": "Beloved Lebanese-Mediterranean restaurant on Massie Street; 283 reviews, Mon–Sat.",
+    "long_description": "Rose's Lebanese Restaurant on Massie Street is Cooma's most-loved ethnic restaurant, with 283 TripAdvisor reviews and consistent praise for hearty Lebanese and Mediterranean dishes. Open Monday to Saturday for lunch and dinner. The family atmosphere and generous meze platters have built a loyal following among locals and ski-season visitors alike. Closed Sunday.",
+    "address": "Shop 1, 69 Massie Street, Cooma NSW 2630",
+    "lat": -36.2349,
+    "lng": 149.1237,
+    "phone": "+61 2 6452 4512",
+    "website": null,
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.tripadvisor.com/Restaurant_Review-g261610-d2442672-Reviews-Rose_s_Lebanese_Restaurant-Cooma_New_South_Wales.html",
+      "https://visitcooma.com.au/coffee-food-wine/roses-lebanese-restaurant/"
+    ],
+    "cuisine": [
+      "lebanese",
+      "mediterranean"
+    ],
+    "hours": {
+      "monday": "11:30-14:00,18:00-21:00",
+      "tuesday": "11:30-14:00,18:00-21:00",
+      "wednesday": "11:30-14:00,18:00-21:00",
+      "thursday": "11:30-14:00,18:00-21:00",
+      "friday": "11:30-14:00,18:00-21:00",
+      "saturday": "11:30-14:00,18:00-21:00",
+      "sunday": "closed"
+    },
+    "last_order_time": "20:45",
+    "reservation": "recommended",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "meze platter",
+      "Lebanese lamb",
+      "falafel",
+      "hummus"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "yes",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "miss-heidis-tea-house",
+    "name": "Miss Heidi's Austrian Tea House",
+    "name_local": null,
+    "type": "cafe",
+    "town": "cooma",
+    "region": "snowy_mountains",
+    "short_description": "Alpine Austrian tea house near Mt Gladstone Lookout; schnitzel, strudel, Fri–Sat dinner.",
+    "long_description": "Miss Heidi's Austrian Tea House sits just below Mt Gladstone Lookout on the Snowy Mountains Highway, bringing an unexpected slice of alpine Europe to Cooma. Traditional Viennese schnitzel, Austrian pancakes with toppings, strudel, and Sacher torte fill the menu. Open 7 days until 5pm; Friday and Saturday dinner service 6–9pm brings the après-ski feel. With 205 TripAdvisor reviews it is one of the most distinctive dining experiences in the Monaro. Off-street parking available.",
+    "address": "Mt Gladstone Road, Snowy Mountains Highway, Cooma NSW 2630",
+    "lat": -36.2258,
+    "lng": 149.1146,
+    "phone": "+61 2 6452 1768",
+    "website": null,
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.tripadvisor.com/Restaurant_Review-g261610-d3439624-Reviews-Miss_Heidi_s_Tea_House-Cooma_New_South_Wales.html",
+      "https://www.agfg.com.au/restaurant/miss-heidis-austrian-tea-house-39664"
+    ],
+    "cuisine": [
+      "austrian",
+      "cafe",
+      "european"
+    ],
+    "hours": {
+      "monday": "10:00-15:00",
+      "tuesday": "10:00-17:00",
+      "wednesday": "10:00-17:00",
+      "thursday": "10:00-17:00",
+      "friday": "10:00-17:00,18:00-21:00",
+      "saturday": "10:00-17:00,18:00-21:00",
+      "sunday": "10:00-17:00"
+    },
+    "last_order_time": "20:45",
+    "reservation": "recommended",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "Viennese schnitzel",
+      "Austrian pancakes",
+      "apple strudel",
+      "Sacher torte"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "no",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "cooma-ex-services-club-bistro",
+    "name": "Cooma Ex-Services Club Bistro",
+    "name_local": null,
+    "type": "bar",
+    "town": "cooma",
+    "region": "snowy_mountains",
+    "short_description": "Largest club on the Monaro; affordable bistro meals open 7 days, members and visitors welcome.",
+    "long_description": "The Cooma Ex-Services Club on Vale Street is the largest club in the Snowy Monaro region, open 7 days a week from 10am. The in-house bistro serves generous portions at excellent value for money — one of Cooma's most popular dinner spots for ski visitors on a budget. Lunch 11:30am–2pm, dinner Sun–Tue 5–8:30pm and Wed–Sat 5–9pm. Non-members can attend as guests. Conference and function facilities also available.",
+    "address": "106 Vale Street, Cooma NSW 2630",
+    "lat": -36.234,
+    "lng": 149.122,
+    "phone": "+61 2 6452 1144",
+    "website": "https://www.coomaexservices.com.au",
+    "price_band": "$",
+    "photos": [],
+    "source_urls": [
+      "https://www.coomaexservices.com.au/welcome-to-cooma-ex-services-club/",
+      "https://visitcooma.com.au/coffee-food-wine/cooma-ex-servicemans-club-bistro/"
+    ],
+    "cuisine": [
+      "pub",
+      "australian",
+      "bar"
+    ],
+    "hours": {
+      "monday": "10:00-22:00",
+      "tuesday": "10:00-22:00",
+      "wednesday": "10:00-23:00",
+      "thursday": "10:00-23:00",
+      "friday": "10:00-00:00",
+      "saturday": "10:00-00:00",
+      "sunday": "10:00-22:00"
+    },
+    "last_order_time": "20:45",
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "schnitzel",
+      "steak",
+      "fish and chips",
+      "roast of the day"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "no",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "alpine-hotel-bistro",
+    "name": "Alpine Hotel Bistro",
+    "name_local": null,
+    "type": "pub",
+    "town": "cooma",
+    "region": "snowy_mountains",
+    "short_description": "Central pub with 10 beers on tap, open fire, and bistro serving 7 days for lunch and dinner.",
+    "long_description": "The Alpine Hotel bistro on Sharp Street is a standout for pub dining in Cooma, with 10 beers on tap, an open fire in cooler months, and a menu that covers classics like steak, schnitzel, and chicken parmi. Lunch 12–2pm, dinner 6–9pm daily. The TripAdvisor-reviewed restaurant arm has 212 reviews and is popular for post-mountain dinners. Secure garage parking for motorcycles and special vehicles.",
+    "address": "170 Sharp Street, Cooma NSW 2630",
+    "lat": -36.2362,
+    "lng": 149.1265,
+    "phone": "+61 2 6452 1466",
+    "website": "https://www.alpinehotel.com.au",
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.tripadvisor.com/Restaurants-g261610-Cooma_New_South_Wales.html",
+      "https://www.accommodationaustralia.com.au/accommodation/tasmania/nsw/cooma/alpine-hotel/31665"
+    ],
+    "cuisine": [
+      "pub",
+      "australian",
+      "bar"
+    ],
+    "hours": {
+      "monday": "12:00-14:00,18:00-21:00",
+      "tuesday": "12:00-14:00,18:00-21:00",
+      "wednesday": "12:00-14:00,18:00-21:00",
+      "thursday": "12:00-14:00,18:00-21:00",
+      "friday": "12:00-14:00,18:00-21:00",
+      "saturday": "12:00-14:00,18:00-21:00",
+      "sunday": "12:00-14:00,18:00-21:00"
+    },
+    "last_order_time": "20:45",
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "steak",
+      "chicken parmi",
+      "fish and chips",
+      "pub classics"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "no",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "royal-hotel-bistro",
+    "name": "Royal Hotel Bistro",
+    "name_local": null,
+    "type": "pub",
+    "town": "cooma",
+    "region": "snowy_mountains",
+    "short_description": "Heritage pub bistro in Cooma's 1858 Royal Hotel; Tue–Sun lunch and dinner.",
+    "long_description": "The Royal Bistro inside the State Heritage-listed Royal Hotel serves traditional Australian pub meals across multiple dining areas including the historic front verandah and outdoor sections. Open Tuesday to Sunday for lunch (12–2:30pm) and dinner (6–8:30pm). Consistently praised for good food and ice-cold beer in a genuinely historic setting. The front sandstone bar is one of the most atmospheric in the Monaro.",
+    "address": "59-61 Lambie Street (cnr Sharp & Lambie), Cooma NSW 2630",
+    "lat": -36.2379,
+    "lng": 149.1163,
+    "phone": "+61 2 6452 2132",
+    "website": "https://royalhotelcooma.com",
+    "price_band": "$",
+    "photos": [],
+    "source_urls": [
+      "https://publocation.com.au/pubs/nsw/cooma/royal-hotel",
+      "https://aroundus.com/p/4662466-royal-hotel-cooma"
+    ],
+    "cuisine": [
+      "pub",
+      "australian",
+      "bar"
+    ],
+    "hours": {
+      "monday": "closed",
+      "tuesday": "12:00-14:30,18:00-20:30",
+      "wednesday": "12:00-14:30,18:00-20:30",
+      "thursday": "12:00-14:30,18:00-20:30",
+      "friday": "12:00-14:30,18:00-20:30",
+      "saturday": "12:00-14:30,18:00-20:30",
+      "sunday": "12:00-14:30,18:00-20:30"
+    },
+    "last_order_time": "20:15",
+    "reservation": "recommended",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "steak",
+      "pub roast",
+      "schnitzel",
+      "seasonal specials"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "no",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "cooma-hotel-bar",
+    "name": "Cooma Hotel Bar & Bistro",
+    "name_local": null,
+    "type": "pub",
+    "town": "cooma",
+    "region": "snowy_mountains",
+    "short_description": "Oldest continuously operating hotel in Cooma (1862); bar, bistro, and drive-through bottle shop.",
+    "long_description": "The Cooma Hotel on Massie Street dates to 1862 and is the oldest continuously operating hotel in town. The current operator runs a lively bar open from 11am to late, a bistro with lunch and dinner, and a drive-through bottle shop for convenient post-mountain drinks. With a cinema and function rooms on-site, it is one of Cooma's more complete entertainment venues. 96 TripAdvisor reviews.",
+    "address": "79 Massie Street, Cooma NSW 2630",
+    "lat": -36.2348,
+    "lng": 149.1238,
+    "phone": "+61 2 6404 7530",
+    "website": null,
+    "price_band": "$",
+    "photos": [],
+    "source_urls": [
+      "https://visitcooma.com.au/coffee-food-wine/cooma-hotel/",
+      "https://www.tripadvisor.com/Restaurant_Review-g261610-d6107786-Reviews-Cooma_Hotel-Cooma_New_South_Wales.html"
+    ],
+    "cuisine": [
+      "pub",
+      "australian",
+      "bar"
+    ],
+    "hours": {
+      "monday": "11:00-00:00",
+      "tuesday": "11:00-00:00",
+      "wednesday": "11:00-00:00",
+      "thursday": "11:00-00:00",
+      "friday": "11:00-00:00",
+      "saturday": "11:00-00:00",
+      "sunday": "11:00-22:00"
+    },
+    "last_order_time": "20:30",
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "pub meals",
+      "schnitzel",
+      "steak"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "no",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "cooma-indian-restaurant",
+    "name": "Cooma Indian Restaurant",
+    "name_local": null,
+    "type": "restaurant",
+    "town": "cooma",
+    "region": "snowy_mountains",
+    "short_description": "North and South Indian cuisine on Sharp Street; dine-in and takeaway Tue–Sun.",
+    "long_description": "Cooma Indian Restaurant at 171 Sharp Street serves a broad menu spanning South Indian dishes and North Indian tandoori specialities. Open Tuesday to Saturday 11am–9pm and Sunday 12–9pm; closed Monday. A warm, welcoming family restaurant that has become a reliable post-ski dinner option, particularly for those craving spice after a cold mountain day. Takeaway available.",
+    "address": "171 Sharp Street, Cooma NSW 2630",
+    "lat": -36.2363,
+    "lng": 149.1265,
+    "phone": "+61 2 6452 2458",
+    "website": "https://coomaindian.com",
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.tripadvisor.com/Restaurant_Review-g261610-d11925062-Reviews-Cooma_indian_restaurant-Cooma_New_South_Wales.html"
+    ],
+    "cuisine": [
+      "indian",
+      "tandoori",
+      "south_indian"
+    ],
+    "hours": {
+      "monday": "closed",
+      "tuesday": "11:00-21:00",
+      "wednesday": "11:00-21:00",
+      "thursday": "11:00-21:00",
+      "friday": "11:00-21:00",
+      "saturday": "11:00-21:00",
+      "sunday": "12:00-21:00"
+    },
+    "last_order_time": "20:45",
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "butter chicken",
+      "lamb rogan josh",
+      "chicken tikka masala",
+      "dosa"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "yes",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "cooma-thai-restaurant",
+    "name": "Cooma Thai",
+    "name_local": null,
+    "type": "restaurant",
+    "town": "cooma",
+    "region": "snowy_mountains",
+    "short_description": "Budget Thai restaurant upstairs at 121 Sharp Street; open 7 days for lunch and dinner.",
+    "long_description": "Cooma Thai occupies the upstairs level of 121 Sharp Street and is the most accessible Thai option for budget diners, rated $ on TripAdvisor. Open 7 days for lunch (11am–2:30pm) and dinner (5–9pm). With 47 TripAdvisor reviews and a reputation for generous portions at low prices, it competes directly with Pha's Thai at a lower price point.",
+    "address": "Upstairs, 121 Sharp Street, Cooma NSW 2630",
+    "lat": -36.2357,
+    "lng": 149.1261,
+    "phone": "+61 405 754 592",
+    "website": null,
+    "price_band": "$",
+    "photos": [],
+    "source_urls": [
+      "https://www.tripadvisor.com/Restaurants-g261610-Cooma_New_South_Wales.html"
+    ],
+    "cuisine": [
+      "thai",
+      "asian"
+    ],
+    "hours": {
+      "monday": "11:00-14:30,17:00-21:00",
+      "tuesday": "11:00-14:30,17:00-21:00",
+      "wednesday": "11:00-14:30,17:00-21:00",
+      "thursday": "11:00-14:30,17:00-21:00",
+      "friday": "11:00-14:30,17:00-21:00",
+      "saturday": "11:00-14:30,17:00-21:00",
+      "sunday": "11:00-14:30,17:00-21:00"
+    },
+    "last_order_time": "20:45",
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "pad thai",
+      "fried rice",
+      "green curry",
+      "tom yum soup"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "yes",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "grand-court-chinese",
+    "name": "Grand Court Chinese Restaurant",
+    "name_local": null,
+    "type": "restaurant",
+    "town": "cooma",
+    "region": "snowy_mountains",
+    "short_description": "Chinese restaurant in Snowstop Village; open 7 days for lunch and dinner with late closing.",
+    "long_description": "Grand Court Chinese Restaurant at Snowstop Village serves a broad Cantonese and Chinese menu daily for lunch and dinner, closing at 10pm — making it one of the later-closing sit-down options in Cooma after a mountain day. Part of a small complex at 38 Sharp Street that also houses Domino's Pizza and KFC. 86 TripAdvisor reviews.",
+    "address": "38 Sharp Street (Snowstop Village), Cooma NSW 2630",
+    "lat": -36.2348,
+    "lng": 149.1238,
+    "phone": "+61 2 6452 4525",
+    "website": null,
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://www.tripadvisor.com/Restaurants-g261610-Cooma_New_South_Wales.html"
+    ],
+    "cuisine": [
+      "chinese",
+      "asian"
+    ],
+    "hours": {
+      "monday": "11:30-14:30,17:00-22:00",
+      "tuesday": "11:30-14:30,17:00-22:00",
+      "wednesday": "11:30-14:30,17:00-22:00",
+      "thursday": "11:30-14:30,17:00-22:00",
+      "friday": "11:30-14:30,17:00-22:00",
+      "saturday": "11:30-14:30,17:00-22:00",
+      "sunday": "11:30-14:30,17:00-22:00"
+    },
+    "last_order_time": "21:30",
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "Cantonese BBQ duck",
+      "fried rice",
+      "sweet and sour pork",
+      "dumplings"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "yes",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "sandi-hotbake",
+    "name": "Sandi's Hotbake",
+    "name_local": null,
+    "type": "bakery",
+    "town": "cooma",
+    "region": "snowy_mountains",
+    "short_description": "Early-opening bakery on Bombala Street; fresh bread and pastries from 6am Mon–Sat.",
+    "long_description": "Sandi's Hotbake at 26 Bombala Street is the place to stop for an early-morning fresh loaf or pastry before heading to the mountain. Opening at 6am Monday to Friday and closing at 4pm (Saturdays 6am–2pm), it caters squarely to the pre-dawn ski-day crowd. Located near the Cooma Visitor Centre area. Separate from the similarly-named 'Cooma Original Hotbake' on Sharp Street (which keeps different hours).",
+    "address": "26 Bombala Street, Cooma NSW 2630",
+    "lat": -36.2355,
+    "lng": 149.1247,
+    "phone": "+61 2 6452 2779",
+    "website": null,
+    "price_band": "$",
+    "photos": [],
+    "source_urls": [
+      "https://visitcooma.com.au/wp-content/uploads/2022/07/Dining-Guide-Cooma.pdf"
+    ],
+    "cuisine": [
+      "bakery",
+      "cafe"
+    ],
+    "hours": {
+      "monday": "06:00-16:00",
+      "tuesday": "06:00-16:00",
+      "wednesday": "06:00-16:00",
+      "thursday": "06:00-16:00",
+      "friday": "06:00-16:00",
+      "saturday": "06:00-14:00",
+      "sunday": "closed"
+    },
+    "last_order_time": "15:45",
+    "reservation": "not_accepted",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "fresh bread",
+      "meat pies",
+      "pastries",
+      "rolls"
+    ],
+    "apres_ski": "no",
+    "takeaway": "yes",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "capital-dial-a-pizza",
+    "name": "Capital Dial-A-Pizza",
+    "name_local": null,
+    "type": "restaurant",
+    "town": "cooma",
+    "region": "snowy_mountains",
+    "short_description": "Cooma's go-to pizza delivery/takeaway; open 7 days from 5pm to 11pm.",
+    "long_description": "Capital Dial-A-Pizza at 86a Sharp Street is a takeaway-and-delivery-only operation open every evening from 5pm to 11pm. With 191 TripAdvisor reviews and the lowest price band in town ($), it is the most popular post-mountain comfort food option for budget ski groups who don't want to venture out. No dine-in service.",
+    "address": "86a Sharp Street, Cooma NSW 2630",
+    "lat": -36.2352,
+    "lng": 149.1255,
+    "phone": "+61 2 6455 3388",
+    "website": null,
+    "price_band": "$",
+    "photos": [],
+    "source_urls": [
+      "https://visitcooma.com.au/wp-content/uploads/2022/07/Dining-Guide-Cooma.pdf",
+      "https://www.tripadvisor.com/Restaurants-g261610-Cooma_New_South_Wales.html"
+    ],
+    "cuisine": [
+      "pizza",
+      "fast_food"
+    ],
+    "hours": {
+      "monday": "17:00-23:00",
+      "tuesday": "17:00-23:00",
+      "wednesday": "17:00-23:00",
+      "thursday": "17:00-23:00",
+      "friday": "17:00-23:00",
+      "saturday": "17:00-23:00",
+      "sunday": "17:00-23:00"
+    },
+    "last_order_time": "22:45",
+    "reservation": "not_accepted",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "meat lovers pizza",
+      "garlic bread",
+      "potato wedges"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "yes",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "mcdonalds-cooma",
+    "name": "McDonald's Cooma",
+    "name_local": null,
+    "type": "restaurant",
+    "town": "cooma",
+    "region": "snowy_mountains",
+    "short_description": "24-hour drive-through on Sharp Street; practical early-morning ski-day stop.",
+    "long_description": "McDonald's on Sharp Street in central Cooma operates 24-hour drive-through and is a key practical resource for ski-season travellers who need early breakfast before heading to the mountain or late-night food after a long mountain day. Open 5am–10pm for dining room, 24hr drive-through.",
+    "address": "24 Sharp Street, Cooma NSW 2630",
+    "lat": -36.2345,
+    "lng": 149.1233,
+    "phone": "+61 2 6452 1210",
+    "website": "https://mcdonalds.com.au",
+    "price_band": "$",
+    "photos": [],
+    "source_urls": [
+      "https://visitcooma.com.au/wp-content/uploads/2022/07/Dining-Guide-Cooma.pdf"
+    ],
+    "cuisine": [
+      "fast_food",
+      "american"
+    ],
+    "hours": {
+      "monday": "00:00-00:00",
+      "tuesday": "00:00-00:00",
+      "wednesday": "00:00-00:00",
+      "thursday": "00:00-00:00",
+      "friday": "00:00-00:00",
+      "saturday": "00:00-00:00",
+      "sunday": "00:00-00:00"
+    },
+    "last_order_time": "23:59",
+    "reservation": "not_accepted",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "Big Mac",
+      "McMuffin",
+      "McCafe coffee",
+      "nuggets"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "yes",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "woolworths-cooma",
+    "name": "Woolworths Cooma",
+    "name_local": null,
+    "type": "restaurant",
+    "town": "cooma",
+    "region": "snowy_mountains",
+    "short_description": "Full-service supermarket on Vale Street; open 7am–10pm daily for ski supplies.",
+    "long_description": "Woolworths on Vale Street is the largest supermarket in Cooma, offering full grocery, deli, bakery, liquor (BWS attached), and household supplies. Open 7am to 10pm every day, it is the main provisioning stop for self-catered ski groups before heading up the mountain. Staffed checkout and self-serve options. Fresh food, ready meals, and ski-season provisions.",
+    "address": "12-20 Vale Street, Cooma NSW 2630",
+    "lat": -36.234,
+    "lng": 149.122,
+    "phone": "+61 2 6455 5300",
+    "website": "https://www.woolworths.com.au",
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://reviews.birdeye.com/woolworths-cooma-166670345515413",
+      "https://cooma-nsw.place-advisor.com/woolworths-cooma/"
+    ],
+    "cuisine": [
+      "grocery",
+      "supermarket"
+    ],
+    "hours": {
+      "monday": "07:00-22:00",
+      "tuesday": "07:00-22:00",
+      "wednesday": "07:00-22:00",
+      "thursday": "07:00-22:00",
+      "friday": "07:00-22:00",
+      "saturday": "07:00-22:00",
+      "sunday": "07:00-22:00"
+    },
+    "last_order_time": "21:55",
+    "reservation": "not_accepted",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [],
+    "apres_ski": "no",
+    "takeaway": "yes",
+    "groceries": "yes",
+    "country": "AU"
+  },
+  {
+    "id": "coles-cooma",
+    "name": "Coles Cooma",
+    "name_local": null,
+    "type": "restaurant",
+    "town": "cooma",
+    "region": "snowy_mountains",
+    "short_description": "Second major supermarket on Commissioner Street; 7am–9pm Mon–Sat, 8am–8pm Sun.",
+    "long_description": "Coles at 85–91 Commissioner Street provides the main alternative grocery option to Woolworths in Cooma, with convenient parking and a full range of fresh food, freezer goods, deli, bakery, and liquor. Standard Coles hours — 7am to 9pm on weekdays and Saturday, 8am to 8pm Sunday. Useful for self-catered groups who need a full shop before heading up to Jindabyne or the resorts.",
+    "address": "85-91 Commissioner Street, Cooma NSW 2630",
+    "lat": -36.2332,
+    "lng": 149.121,
+    "phone": "+61 2 6455 3000",
+    "website": "https://www.coles.com.au",
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://cooma-au.open-closed.org/coles-opening-hours-85-91-commissioner-st"
+    ],
+    "cuisine": [
+      "grocery",
+      "supermarket"
+    ],
+    "hours": {
+      "monday": "07:00-21:00",
+      "tuesday": "07:00-21:00",
+      "wednesday": "07:00-21:00",
+      "thursday": "07:00-21:00",
+      "friday": "07:00-21:00",
+      "saturday": "07:00-21:00",
+      "sunday": "08:00-20:00"
+    },
+    "last_order_time": "20:55",
+    "reservation": "not_accepted",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [],
+    "apres_ski": "no",
+    "takeaway": "yes",
+    "groceries": "yes",
+    "country": "AU"
+  },
+  {
+    "id": "bws-cooma",
+    "name": "BWS Cooma",
+    "name_local": null,
+    "type": "bar",
+    "town": "cooma",
+    "region": "snowy_mountains",
+    "short_description": "Beer, wine, and spirits bottle shop on Sharp Street; convenient for ski-trip provisioning.",
+    "long_description": "BWS (Beer Wine Spirits) at 45–47 Sharp Street is Cooma's most accessible standalone bottle shop for ski season visitors, stocking full range of beers, wines, spirits, and mixers. Adjacent to the main motel strip and café precinct. A key stop for self-catering groups heading to the snowfields.",
+    "address": "45-47 Sharp Street, Cooma NSW 2630",
+    "lat": -36.2347,
+    "lng": 149.1237,
+    "phone": null,
+    "website": "https://www.bws.com.au",
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://untappd.com/v/bws/6060432"
+    ],
+    "cuisine": [
+      "bottleshop",
+      "liquor"
+    ],
+    "hours": {
+      "monday": "10:00-20:00",
+      "tuesday": "10:00-20:00",
+      "wednesday": "10:00-20:00",
+      "thursday": "10:00-20:00",
+      "friday": "10:00-21:00",
+      "saturday": "10:00-21:00",
+      "sunday": "10:00-18:00"
+    },
+    "last_order_time": "20:45",
+    "reservation": "not_accepted",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [],
+    "apres_ski": "yes",
+    "takeaway": "yes",
+    "groceries": "yes",
+    "country": "AU"
+  },
+  {
+    "id": "cooma-hotel-bottle-shop",
+    "name": "Cooma Hotel Drive-Through Bottle Shop",
+    "name_local": null,
+    "type": "bar",
+    "town": "cooma",
+    "region": "snowy_mountains",
+    "short_description": "Drive-through bottle shop at Cooma Hotel on Massie Street; convenient for vehicle-based travellers.",
+    "long_description": "The Cooma Hotel on Massie Street operates a drive-through bottle shop — the most convenient format for car- and van-based ski visitors who don't want to park and walk. Part of the hotel's broader entertainment offering (bar, bistro, cinema). Open during the hotel's standard trading hours.",
+    "address": "79 Massie Street, Cooma NSW 2630",
+    "lat": -36.2348,
+    "lng": 149.1238,
+    "phone": "+61 2 6404 7530",
+    "website": null,
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://visitcooma.com.au/coffee-food-wine/cooma-hotel/"
+    ],
+    "cuisine": [
+      "bottleshop",
+      "liquor"
+    ],
+    "hours": {
+      "monday": "11:00-22:00",
+      "tuesday": "11:00-22:00",
+      "wednesday": "11:00-22:00",
+      "thursday": "11:00-22:00",
+      "friday": "11:00-23:00",
+      "saturday": "11:00-23:00",
+      "sunday": "11:00-20:00"
+    },
+    "last_order_time": "22:45",
+    "reservation": "not_accepted",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [],
+    "apres_ski": "yes",
+    "takeaway": "yes",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "metro-petroleum-cooma",
+    "name": "Metro Petroleum Cooma (24hr fuel)",
+    "name_local": null,
+    "type": "restaurant",
+    "town": "cooma",
+    "region": "snowy_mountains",
+    "short_description": "24-hour petrol station with convenience store on Sharp Street; Woolworths Rewards fuel discount.",
+    "long_description": "Metro Petroleum at 42 Sharp Street is open 24 hours a day, 7 days a week (5am–11pm listed, but has overnight trade), making it the key late-night fuel stop for ski-season travellers arriving or departing outside business hours. Woolworths Rewards fuel discounts apply. The convenience store carries basic food, drinks, and travel supplies. The Ampol station on Bombala Street advertises Woolworths Rewards discounts at 4c/litre.",
+    "address": "42 Sharp Street, Cooma NSW 2630",
+    "lat": -36.2346,
+    "lng": 149.1235,
+    "phone": "+61 2 6452 3550",
+    "website": "https://metropetroleum.com.au",
+    "price_band": "$",
+    "photos": [],
+    "source_urls": [
+      "https://petrolspy.com.au/map/station/521479630364043bef7217c8"
+    ],
+    "cuisine": [
+      "fuel",
+      "convenience_store"
+    ],
+    "hours": {
+      "monday": "05:00-23:00",
+      "tuesday": "05:00-23:00",
+      "wednesday": "05:00-23:00",
+      "thursday": "05:00-23:00",
+      "friday": "05:00-23:00",
+      "saturday": "05:00-23:00",
+      "sunday": "05:00-23:00"
+    },
+    "last_order_time": "22:55",
+    "reservation": "not_accepted",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [],
+    "apres_ski": "no",
+    "takeaway": "yes",
+    "groceries": "yes",
+    "country": "AU"
+  },
+  {
+    "id": "ampol-cooma",
+    "name": "Ampol Cooma",
+    "name_local": null,
+    "type": "restaurant",
+    "town": "cooma",
+    "region": "snowy_mountains",
+    "short_description": "Ampol service station on Sharp/Bombala corner; Woolworths Rewards 4c/litre discount.",
+    "long_description": "Ampol Cooma at 41 Sharp Street is the main branded fuel option on the Snowy Mountains Highway corridor through town. Open 6am–6:30pm weekdays (6am–6pm weekends). Offers Woolworths Rewards card discount of 4c per litre, as mentioned in local traveller reviews. A conventional servo with convenience items — not 24 hours.",
+    "address": "41 Sharp Street, Cooma NSW 2630",
+    "lat": -36.2347,
+    "lng": 149.1236,
+    "phone": "+61 437 466 529",
+    "website": "https://locations.ampol.com.au/en/ampol-cooma",
+    "price_band": "$",
+    "photos": [],
+    "source_urls": [
+      "https://touringuide.com/au/services/nsw/ampol-cooma",
+      "https://petrolspy.com.au/map/station/5212b1660364706598e39b74"
+    ],
+    "cuisine": [
+      "fuel",
+      "convenience_store"
+    ],
+    "hours": {
+      "monday": "06:00-18:30",
+      "tuesday": "06:00-18:30",
+      "wednesday": "06:00-18:30",
+      "thursday": "06:00-18:30",
+      "friday": "06:00-18:30",
+      "saturday": "06:00-18:00",
+      "sunday": "06:00-18:00"
+    },
+    "last_order_time": "18:15",
+    "reservation": "not_accepted",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [],
+    "apres_ski": "no",
+    "takeaway": "yes",
+    "groceries": "yes",
+    "country": "AU"
+  },
+  {
+    "id": "dominos-cooma",
+    "name": "Domino's Pizza Cooma",
+    "name_local": null,
+    "type": "restaurant",
+    "town": "cooma",
+    "region": "snowy_mountains",
+    "short_description": "Delivery pizza from Snowstop Village; open from 3pm (11am Fri–Sat) until 10pm.",
+    "long_description": "Domino's Pizza in Snowstop Village at 32 Sharp Street is a popular group-meal option for self-catered ski parties staying in Cooma motels. Online ordering and delivery available. Open Sunday–Thursday 3–9pm, Friday–Saturday 11am–10pm. The extended Friday and Saturday hours align well with ski-week arrivals.",
+    "address": "32 Sharp Street (Snowstop Village), Cooma NSW 2630",
+    "lat": -36.2347,
+    "lng": 149.1237,
+    "phone": "+61 2 6455 5420",
+    "website": "https://www.dominos.com.au",
+    "price_band": "$",
+    "photos": [],
+    "source_urls": [
+      "https://visitcooma.com.au/wp-content/uploads/2022/07/Dining-Guide-Cooma.pdf"
+    ],
+    "cuisine": [
+      "pizza",
+      "fast_food"
+    ],
+    "hours": {
+      "monday": "15:00-21:00",
+      "tuesday": "15:00-21:00",
+      "wednesday": "15:00-21:00",
+      "thursday": "15:00-21:00",
+      "friday": "11:00-22:00",
+      "saturday": "11:00-22:00",
+      "sunday": "15:00-21:00"
+    },
+    "last_order_time": "21:45",
+    "reservation": "not_accepted",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "Pepperoni Lover's",
+      "BBQ Meatlovers",
+      "garlic bread"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "yes",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "kfc-cooma",
+    "name": "KFC Cooma",
+    "name_local": null,
+    "type": "restaurant",
+    "town": "cooma",
+    "region": "snowy_mountains",
+    "short_description": "KFC outlet in Snowstop Village on Sharp Street; open 10:30am–10pm daily.",
+    "long_description": "KFC at the Snowstop Village complex covers the fast-food chicken gap in Cooma and is notable for being open until 10pm every day — later than most sit-down restaurants. A practical option for large groups arriving late from the mountain. Dine-in and takeaway.",
+    "address": "Sharp Street (Snowstop Village), Cooma NSW 2630",
+    "lat": -36.2347,
+    "lng": 149.1237,
+    "phone": "+61 2 6452 5777",
+    "website": "https://www.kfc.com.au",
+    "price_band": "$",
+    "photos": [],
+    "source_urls": [
+      "https://visitcooma.com.au/wp-content/uploads/2022/07/Dining-Guide-Cooma.pdf"
+    ],
+    "cuisine": [
+      "fast_food",
+      "chicken"
+    ],
+    "hours": {
+      "monday": "10:30-22:00",
+      "tuesday": "10:30-22:00",
+      "wednesday": "10:30-22:00",
+      "thursday": "10:30-22:00",
+      "friday": "10:30-22:00",
+      "saturday": "10:30-22:00",
+      "sunday": "10:30-22:00"
+    },
+    "last_order_time": "21:45",
+    "reservation": "not_accepted",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "Original Recipe chicken",
+      "Zinger burger",
+      "chips",
+      "Popcorn Chicken"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "yes",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "cisne-cafe-cooma",
+    "name": "CISNE",
+    "name_local": null,
+    "type": "cafe",
+    "town": "cooma",
+    "region": "snowy_mountains",
+    "short_description": "Modern café on Sharp Street; open 8am–3pm daily with Asian-influenced dishes.",
+    "long_description": "CISNE at 100 Sharp Street is a newer addition to the Cooma café scene offering a contemporary menu with Asian-influenced dishes alongside café staples. Listed on TripAdvisor's Café and Asian categories. Open 7 days from 8am to 3pm. A good mid-morning stop for those who miss the early Lott Cafe window or prefer a more modern setting.",
+    "address": "100 Sharp Street, Cooma NSW 2630",
+    "lat": -36.2354,
+    "lng": 149.1258,
+    "phone": "+61 2 6404 7761",
+    "website": null,
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://visitcooma.com.au/wp-content/uploads/2022/07/Dining-Guide-Cooma.pdf",
+      "https://www.tripadvisor.com/Restaurants-g261610-Cooma_New_South_Wales.html"
+    ],
+    "cuisine": [
+      "cafe",
+      "asian",
+      "breakfast"
+    ],
+    "hours": {
+      "monday": "08:00-15:00",
+      "tuesday": "08:00-15:00",
+      "wednesday": "08:00-15:00",
+      "thursday": "08:00-15:00",
+      "friday": "08:00-15:00",
+      "saturday": "08:00-15:00",
+      "sunday": "08:00-15:00"
+    },
+    "last_order_time": "14:45",
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "smashed avo toast",
+      "Asian-inspired brunch dishes",
+      "specialty coffee"
+    ],
+    "apres_ski": "no",
+    "takeaway": "yes",
+    "groceries": "no",
+    "country": "AU"
+  },
+  {
+    "id": "coffeys-hotel-cooma",
+    "name": "Coffey's Hotel",
+    "name_local": null,
+    "type": "pub",
+    "town": "cooma",
+    "region": "snowy_mountains",
+    "short_description": "Neighbourhood pub on Short Street; Chinese pub meals, open Wed–Sun noon to 9pm.",
+    "long_description": "Coffey's Hotel at 6 Short Street has a distinctive hybrid menu combining classic pub fare with Chinese dishes. Open Wednesday to Sunday from noon to 9pm, it is a quieter alternative to the main-street hotels. 36 TripAdvisor reviews reflect a local following. Good for skiers who want a quieter evening meal off the main drag.",
+    "address": "6 Short Street, Cooma NSW 2630",
+    "lat": -36.2348,
+    "lng": 149.1235,
+    "phone": "+61 2 6452 2064",
+    "website": null,
+    "price_band": "$$",
+    "photos": [],
+    "source_urls": [
+      "https://visitcooma.com.au/wp-content/uploads/2022/07/Dining-Guide-Cooma.pdf",
+      "https://www.tripadvisor.com/Restaurants-g261610-Cooma_New_South_Wales.html"
+    ],
+    "cuisine": [
+      "pub",
+      "chinese",
+      "australian"
+    ],
+    "hours": {
+      "monday": "closed",
+      "tuesday": "closed",
+      "wednesday": "12:00-21:00",
+      "thursday": "12:00-21:00",
+      "friday": "12:00-21:00",
+      "saturday": "12:00-21:00",
+      "sunday": "12:00-21:00"
+    },
+    "last_order_time": "20:45",
+    "reservation": "not_needed",
+    "reservation_link": null,
+    "payment": "cards_accepted",
+    "english_menu": "yes",
+    "signature_dishes": [
+      "Chinese pub meals",
+      "steak",
+      "schnitzel"
+    ],
+    "apres_ski": "yes",
+    "takeaway": "no",
+    "groceries": "no",
+    "country": "AU"
+  }
+]
