@@ -20,4 +20,10 @@ if (Number.isNaN(port) || port <= 0) {
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
+  // Start the powder-alert cron evaluator (every 3h). Disabled by setting
+  // ALERT_CRON_DISABLED=1 — useful when running multiple workers in
+  // production where you want only one to own the schedule.
+  import("./jobs/alertEvaluator.js")
+    .then((m) => m.startAlertCron())
+    .catch((err) => console.error("[boot] failed to start alert cron:", err));
 });

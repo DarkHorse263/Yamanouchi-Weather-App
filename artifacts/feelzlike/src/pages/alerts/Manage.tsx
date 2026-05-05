@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useGetAlertPreferences, useUpdateAlertPreferences, useUnsubscribeFromAlerts } from "@workspace/api-client-react";
-import { Loader2, AlertTriangle, Save, Trash2, CheckCircle2 } from "lucide-react";
+import { Loader2, AlertTriangle, Save, Trash2, CheckCircle2, BellRing, BellOff } from "lucide-react";
+import { ensurePushSubscription, disablePushSubscription, pushSupportStatus, explainStatus } from "@/lib/pushSubscribe";
 
 /**
  * Subscription management page. Reached from the link in every alert email:
@@ -41,6 +42,36 @@ export default function Manage() {
   const [savedAt, setSavedAt] = useState<number | null>(null);
   const [confirmingUnsub, setConfirmingUnsub] = useState(false);
   const [reason, setReason] = useState<string>("");
+  const [pushBusy, setPushBusy] = useState(false);
+  const [pushEnabled, setPushEnabled] = useState<boolean | null>(null);
+  const [pushMessage, setPushMessage] = useState<string | null>(null);
+  const pushStatus = pushSupportStatus();
+
+  useEffect(() => {
+    if (typeof navigator === "undefined" || !("serviceWorker" in navigator) || !("PushManager" in window)) {
+      setPushEnabled(false); return;
+    }
+    navigator.serviceWorker.getRegistration().then(async (reg) => {
+      if (!reg) { setPushEnabled(false); return; }
+      const sub = await reg.pushManager.getSubscription();
+      setPushEnabled(!!sub);
+    }).catch(() => setPushEnabled(false));
+  }, []);
+
+  const handleEnablePush = async () => {
+    setPushBusy(true); setPushMessage(null);
+    const r = await ensurePushSubscription(token);
+    if (r.ok) { setPushEnabled(true); setPushMessage("Browser notifications enabled."); }
+    else { setPushMessage(r.message); }
+    setPushBusy(false);
+  };
+  const handleDisablePush = async () => {
+    setPushBusy(true); setPushMessage(null);
+    await disablePushSubscription(token);
+    setPushEnabled(false);
+    setPushMessage("Browser notifications disabled on this device.");
+    setPushBusy(false);
+  };
 
   useEffect(() => {
     if (data?.subscriber) {
@@ -168,6 +199,27 @@ export default function Manage() {
             ))}
           </div>
           <p className="text-xs text-muted-foreground mt-2">Push notifications need browser permission. Set this up from any region's Alerts page.</p>
+        </Section>
+
+        <Section title="Browser notifications">
+          {pushStatus.supported ? (
+            pushEnabled ? (
+              <button onClick={handleDisablePush} disabled={pushBusy}
+                className="rounded-lg bg-rose-500/15 border border-rose-500/40 text-rose-300 font-bold text-sm px-4 py-2.5 flex items-center gap-2 disabled:opacity-50">
+                {pushBusy ? <Loader2 className="w-4 h-4 animate-spin" /> : <BellOff className="w-4 h-4" />}
+                Disable on this device
+              </button>
+            ) : (
+              <button onClick={handleEnablePush} disabled={pushBusy}
+                className="rounded-lg bg-primary/15 border border-primary/40 text-foreground font-bold text-sm px-4 py-2.5 flex items-center gap-2 disabled:opacity-50">
+                {pushBusy ? <Loader2 className="w-4 h-4 animate-spin" /> : <BellRing className="w-4 h-4" />}
+                Enable on this device
+              </button>
+            )
+          ) : (
+            <p className="text-xs text-muted-foreground bg-black/20 rounded-lg px-3 py-2">{explainStatus(pushStatus)}</p>
+          )}
+          {pushMessage && <p className="text-xs text-sky-300 mt-2">{pushMessage}</p>}
         </Section>
 
         {update.isError && <Banner kind="error" title="Save failed">Please try again.</Banner>}
