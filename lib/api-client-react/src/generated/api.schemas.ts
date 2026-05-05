@@ -1008,6 +1008,413 @@ export interface ErrorResponse {
   message: string;
 }
 
+/**
+ * Region slug used by the curated Stay/Eat dataset (underscore-separated to
+match the on-disk JSON files under artifacts/feelzlike/src/data/curated).
+Distinct from the canonical kebab-case `RegionId` enum used by live
+weather/webcam/road APIs — both coexist by design while we keep the
+curated dataset's existing slug taxonomy. Translation between the two
+styles happens at the resolver boundary in the frontend.
+
+ */
+export type StayEatRegionSlug =
+  (typeof StayEatRegionSlug)[keyof typeof StayEatRegionSlug];
+
+export const StayEatRegionSlug = {
+  snowy_mountains: "snowy_mountains",
+  yamanouchi: "yamanouchi",
+} as const;
+
+/**
+ * Curated-dataset town slug. Underscore-separated to match the on-disk JSON files (e.g. `shibu_onsen`, not `shibu-onsen`).
+ */
+export type TownSlug = (typeof TownSlug)[keyof typeof TownSlug];
+
+export const TownSlug = {
+  jindabyne: "jindabyne",
+  berridale: "berridale",
+  cooma: "cooma",
+  yudanaka: "yudanaka",
+  shibu_onsen: "shibu_onsen",
+  yomase: "yomase",
+} as const;
+
+/**
+ * Price tier rendered as 1–4 filled circles in the UI.
+ */
+export type PriceBand = (typeof PriceBand)[keyof typeof PriceBand];
+
+export const PriceBand = {
+  $: "$",
+  $$: "$$",
+  $$$: "$$$",
+  $$$$: "$$$$",
+} as const;
+
+export type EnglishSpoken = (typeof EnglishSpoken)[keyof typeof EnglishSpoken];
+
+export const EnglishSpoken = {
+  yes: "yes",
+  limited: "limited",
+  no: "no",
+} as const;
+
+export type YesNo = (typeof YesNo)[keyof typeof YesNo];
+
+export const YesNo = {
+  yes: "yes",
+  no: "no",
+} as const;
+
+export type YesLimitedNo = (typeof YesLimitedNo)[keyof typeof YesLimitedNo];
+
+export const YesLimitedNo = {
+  yes: "yes",
+  limited: "limited",
+  no: "no",
+} as const;
+
+/**
+ * Affiliate-and-direct booking URLs per provider. Any subset may be present; missing or null means "no link for this provider".
+ */
+export interface StayBookingLinks {
+  /** @nullable */
+  booking_com?: string | null;
+  /** @nullable */
+  agoda?: string | null;
+  /** @nullable */
+  airbnb?: string | null;
+  /** @nullable */
+  expedia?: string | null;
+  /** @nullable */
+  hotels_com?: string | null;
+  /** @nullable */
+  trip_com?: string | null;
+  /** @nullable */
+  jalan?: string | null;
+  /** @nullable */
+  rakuten?: string | null;
+  /** @nullable */
+  official?: string | null;
+}
+
+/**
+ * Day-by-day opening hours as free-form strings (e.g. "11:00–14:30, 17:00–21:00"). All keys optional.
+ */
+export interface EatHours {
+  /** @nullable */
+  monday?: string | null;
+  /** @nullable */
+  tuesday?: string | null;
+  /** @nullable */
+  wednesday?: string | null;
+  /** @nullable */
+  thursday?: string | null;
+  /** @nullable */
+  friday?: string | null;
+  /** @nullable */
+  saturday?: string | null;
+  /** @nullable */
+  sunday?: string | null;
+  /** @nullable */
+  closed?: string | null;
+}
+
+export type StayBaseType = (typeof StayBaseType)[keyof typeof StayBaseType];
+
+export const StayBaseType = {
+  ryokan: "ryokan",
+  hotel: "hotel",
+  lodge: "lodge",
+  apartment: "apartment",
+  airbnb: "airbnb",
+  hostel: "hostel",
+  minshuku: "minshuku",
+  guesthouse: "guesthouse",
+  resort: "resort",
+  motel: "motel",
+  cabin: "cabin",
+  bnb: "bnb",
+} as const;
+
+export type StayBaseDriveMinToEachMountain = {
+  [key: string]: number | null;
+} | null;
+
+/**
+ * Shared fields for every Stay record across both countries. Country-specific extras live on `StayAU` / `StayJP`.
+ */
+export interface StayBase {
+  id: string;
+  name: string;
+  /**
+   * Local-script name (kanji/katakana for Japan). Null for AU.
+   * @nullable
+   */
+  name_local: string | null;
+  type: StayBaseType;
+  town: TownSlug;
+  region: StayEatRegionSlug;
+  short_description: string;
+  long_description: string;
+  /** @nullable */
+  address: string | null;
+  /** @nullable */
+  lat: number | null;
+  /** @nullable */
+  lng: number | null;
+  /** @nullable */
+  phone: string | null;
+  /** @nullable */
+  website: string | null;
+  price_band: PriceBand | null;
+  photos: string[];
+  source_urls: string[];
+  /** @nullable */
+  room_count?: number | null;
+  amenities: string[];
+  english_spoken?: EnglishSpoken | null;
+  /** @nullable */
+  check_in?: string | null;
+  /** @nullable */
+  check_out?: string | null;
+  booking_links: StayBookingLinks;
+  /** @nullable */
+  nearest_mountain?: string | null;
+  /** @nullable */
+  drive_min_to_nearest_mountain?: number | null;
+  drive_min_to_each_mountain?: StayBaseDriveMinToEachMountain;
+  /** @nullable */
+  notes?: string | null;
+}
+
+export type StayAUCountry = (typeof StayAUCountry)[keyof typeof StayAUCountry];
+
+export const StayAUCountry = {
+  AU: "AU",
+} as const;
+
+export type StayAU = StayBase & {
+  country: StayAUCountry;
+  drying_room?: YesNo | null;
+  ski_storage?: YesNo | null;
+  pet_friendly?: YesNo | null;
+  self_contained?: YesNo | null;
+  /** @nullable */
+  distance_to_skitube_km?: number | null;
+  /** @nullable */
+  distance_to_thredbo_km?: number | null;
+  /** @nullable */
+  distance_to_perisher_km?: number | null;
+};
+
+export type StayJPCountry = (typeof StayJPCountry)[keyof typeof StayJPCountry];
+
+export const StayJPCountry = {
+  JP: "JP",
+} as const;
+
+/**
+ * @nullable
+ */
+export type StayJPOnsen = (typeof StayJPOnsen)[keyof typeof StayJPOnsen] | null;
+
+export const StayJPOnsen = {
+  none: "none",
+  private: "private",
+  public: "public",
+  both: "both",
+} as const;
+
+/**
+ * @nullable
+ */
+export type StayJPTattooPolicy =
+  | (typeof StayJPTattooPolicy)[keyof typeof StayJPTattooPolicy]
+  | null;
+
+export const StayJPTattooPolicy = {
+  allowed: "allowed",
+  private_only: "private_only",
+  not_allowed: "not_allowed",
+  unknown: "unknown",
+} as const;
+
+/**
+ * @nullable
+ */
+export type StayJPMealPlan =
+  | (typeof StayJPMealPlan)[keyof typeof StayJPMealPlan]
+  | null;
+
+export const StayJPMealPlan = {
+  none: "none",
+  breakfast: "breakfast",
+  dinner: "dinner",
+  kaiseki: "kaiseki",
+  half_board: "half_board",
+  full_board: "full_board",
+} as const;
+
+/**
+ * @nullable
+ */
+export type StayJPYukataProvided =
+  | (typeof StayJPYukataProvided)[keyof typeof StayJPYukataProvided]
+  | null;
+
+export const StayJPYukataProvided = {
+  yes: "yes",
+  no: "no",
+  unknown: "unknown",
+} as const;
+
+export type StayJP = StayBase & {
+  country: StayJPCountry;
+  /** @nullable */
+  onsen?: StayJPOnsen;
+  /** @nullable */
+  tattoo_policy?: StayJPTattooPolicy;
+  /** @nullable */
+  meal_plan?: StayJPMealPlan;
+  /** @nullable */
+  yukata_provided?: StayJPYukataProvided;
+  /** @nullable */
+  walk_min_to_yudanaka_station?: number | null;
+};
+
+export type Stay = StayAU | StayJP;
+
+export type EatBaseType = (typeof EatBaseType)[keyof typeof EatBaseType];
+
+export const EatBaseType = {
+  izakaya: "izakaya",
+  ramen: "ramen",
+  cafe: "cafe",
+  restaurant: "restaurant",
+  bar: "bar",
+  bakery: "bakery",
+  pub: "pub",
+  fast_food: "fast_food",
+  diner: "diner",
+  food_truck: "food_truck",
+  grocery: "grocery",
+  bottle_shop: "bottle_shop",
+  "service-station": "service-station",
+  supermarket: "supermarket",
+} as const;
+
+/**
+ * @nullable
+ */
+export type EatBaseReservation =
+  | (typeof EatBaseReservation)[keyof typeof EatBaseReservation]
+  | null;
+
+export const EatBaseReservation = {
+  required: "required",
+  recommended: "recommended",
+  not_needed: "not_needed",
+  not_accepted: "not_accepted",
+} as const;
+
+/**
+ * @nullable
+ */
+export type EatBasePayment =
+  | (typeof EatBasePayment)[keyof typeof EatBasePayment]
+  | null;
+
+export const EatBasePayment = {
+  cash_only: "cash_only",
+  cards_accepted: "cards_accepted",
+  both: "both",
+} as const;
+
+/**
+ * @nullable
+ */
+export type EatBaseEnglishMenu =
+  | (typeof EatBaseEnglishMenu)[keyof typeof EatBaseEnglishMenu]
+  | null;
+
+export const EatBaseEnglishMenu = {
+  yes: "yes",
+  picture_menu: "picture_menu",
+  limited: "limited",
+  no: "no",
+} as const;
+
+/**
+ * Shared fields for every Eat record across both countries. Country-specific extras live on `EatAU` / `EatJP`.
+ */
+export interface EatBase {
+  id: string;
+  name: string;
+  /** @nullable */
+  name_local: string | null;
+  type: EatBaseType;
+  town: TownSlug;
+  region: StayEatRegionSlug;
+  short_description: string;
+  long_description: string;
+  /** @nullable */
+  address: string | null;
+  /** @nullable */
+  lat: number | null;
+  /** @nullable */
+  lng: number | null;
+  /** @nullable */
+  phone: string | null;
+  /** @nullable */
+  website: string | null;
+  price_band: PriceBand | null;
+  photos: string[];
+  source_urls: string[];
+  cuisine: string[];
+  hours: EatHours;
+  /** @nullable */
+  last_order_time?: string | null;
+  /** @nullable */
+  reservation?: EatBaseReservation;
+  /** @nullable */
+  reservation_link?: string | null;
+  /** @nullable */
+  payment?: EatBasePayment;
+  /** @nullable */
+  english_menu?: EatBaseEnglishMenu;
+  signature_dishes: string[];
+  /** @nullable */
+  notes?: string | null;
+}
+
+export type EatAUCountry = (typeof EatAUCountry)[keyof typeof EatAUCountry];
+
+export const EatAUCountry = {
+  AU: "AU",
+} as const;
+
+export type EatAU = EatBase & {
+  country: EatAUCountry;
+  apres_ski?: YesNo | null;
+  takeaway?: YesNo | null;
+  groceries?: YesNo | null;
+};
+
+export type EatJPCountry = (typeof EatJPCountry)[keyof typeof EatJPCountry];
+
+export const EatJPCountry = {
+  JP: "JP",
+} as const;
+
+export type EatJP = EatBase & {
+  country: EatJPCountry;
+  vegetarian_friendly?: YesLimitedNo | null;
+  kid_friendly?: YesLimitedNo | null;
+};
+
+export type Eat = EatAU | EatJP;
+
 export type RegionFilterParameter = RegionId;
 
 export type GetPowderAlertsParams = {

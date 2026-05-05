@@ -25,6 +25,10 @@ tags:
     description: Local attractions
   - name: eigomenyu
     description: Eigomenyu QR menu system
+  - name: stays
+    description: Curated, region-aware Stay (accommodation) listings backed by the on-disk dataset under artifacts/feelzlike/src/data/curated.
+  - name: eats
+    description: Curated, region-aware Eat (food & drink) listings backed by the on-disk dataset under artifacts/feelzlike/src/data/curated.
 paths:
   /healthz:
     get:
@@ -861,6 +865,102 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
 
+  /regions/{region}/towns/{town}/stays:
+    get:
+      operationId: getTownStays
+      tags: [stays]
+      summary: List curated stays for a town
+      description: Returns every Stay record from the curated dataset for the given (region, town). Order matches the underlying JSON file (curator-controlled). Country-specific extras are exposed via the discriminated `country` field on each Stay.
+      parameters:
+        - $ref: "#/components/parameters/StayEatRegionPath"
+        - $ref: "#/components/parameters/StayEatTownPath"
+      responses:
+        "200":
+          description: List of Stay records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Stay"
+        "404":
+          description: Region or town slug not recognised
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /regions/{region}/towns/{town}/stays/{stayId}:
+    get:
+      operationId: getTownStay
+      tags: [stays]
+      summary: Get a single curated stay
+      parameters:
+        - $ref: "#/components/parameters/StayEatRegionPath"
+        - $ref: "#/components/parameters/StayEatTownPath"
+        - $ref: "#/components/parameters/StayIdPath"
+      responses:
+        "200":
+          description: Stay record
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Stay"
+        "404":
+          description: Region/town/stay slug not recognised
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /regions/{region}/towns/{town}/eats:
+    get:
+      operationId: getTownEats
+      tags: [eats]
+      summary: List curated eats for a town
+      description: Returns every Eat record from the curated dataset for the given (region, town). Country-specific extras are exposed via the discriminated `country` field on each Eat.
+      parameters:
+        - $ref: "#/components/parameters/StayEatRegionPath"
+        - $ref: "#/components/parameters/StayEatTownPath"
+      responses:
+        "200":
+          description: List of Eat records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Eat"
+        "404":
+          description: Region or town slug not recognised
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /regions/{region}/towns/{town}/eats/{eatId}:
+    get:
+      operationId: getTownEat
+      tags: [eats]
+      summary: Get a single curated eat
+      parameters:
+        - $ref: "#/components/parameters/StayEatRegionPath"
+        - $ref: "#/components/parameters/StayEatTownPath"
+        - $ref: "#/components/parameters/EatIdPath"
+      responses:
+        "200":
+          description: Eat record
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Eat"
+        "404":
+          description: Region/town/eat slug not recognised
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
 components:
   parameters:
     RegionFilter:
@@ -870,6 +970,34 @@ components:
       description: Optional region filter. Omit to receive data for every region. Must be one of the canonical region ids returned by `/api/regions`.
       schema:
         $ref: "#/components/schemas/RegionId"
+    StayEatRegionPath:
+      name: region
+      in: path
+      required: true
+      description: Curated-dataset region slug (underscore-separated, distinct from the kebab-case `RegionId` used by live weather APIs).
+      schema:
+        $ref: "#/components/schemas/StayEatRegionSlug"
+    StayEatTownPath:
+      name: town
+      in: path
+      required: true
+      description: Town slug within the region.
+      schema:
+        $ref: "#/components/schemas/TownSlug"
+    StayIdPath:
+      name: stayId
+      in: path
+      required: true
+      description: Stay record id (slug, unique within the curated dataset).
+      schema:
+        type: string
+    EatIdPath:
+      name: eatId
+      in: path
+      required: true
+      description: Eat record id (slug, unique within the curated dataset).
+      schema:
+        type: string
   schemas:
     RegionId:
       type: string
@@ -2294,3 +2422,389 @@ components:
       required:
         - error
         - message
+
+    StayEatRegionSlug:
+      type: string
+      enum:
+        - snowy_mountains
+        - yamanouchi
+      description: |
+        Region slug used by the curated Stay/Eat dataset (underscore-separated to
+        match the on-disk JSON files under artifacts/feelzlike/src/data/curated).
+        Distinct from the canonical kebab-case `RegionId` enum used by live
+        weather/webcam/road APIs — both coexist by design while we keep the
+        curated dataset's existing slug taxonomy. Translation between the two
+        styles happens at the resolver boundary in the frontend.
+
+    TownSlug:
+      type: string
+      enum:
+        - jindabyne
+        - berridale
+        - cooma
+        - yudanaka
+        - shibu_onsen
+        - yomase
+      description: Curated-dataset town slug. Underscore-separated to match the on-disk JSON files (e.g. `shibu_onsen`, not `shibu-onsen`).
+
+    PriceBand:
+      type: string
+      enum: ["$", "$$", "$$$", "$$$$"]
+      description: Price tier rendered as 1–4 filled circles in the UI.
+
+    EnglishSpoken:
+      type: string
+      enum: [yes, limited, no]
+
+    YesNo:
+      type: string
+      enum: [yes, no]
+
+    YesLimitedNo:
+      type: string
+      enum: [yes, limited, no]
+
+    StayBookingLinks:
+      type: object
+      description: Affiliate-and-direct booking URLs per provider. Any subset may be present; missing or null means "no link for this provider".
+      properties:
+        booking_com:
+          type: ["string", "null"]
+        agoda:
+          type: ["string", "null"]
+        airbnb:
+          type: ["string", "null"]
+        expedia:
+          type: ["string", "null"]
+        hotels_com:
+          type: ["string", "null"]
+        trip_com:
+          type: ["string", "null"]
+        jalan:
+          type: ["string", "null"]
+        rakuten:
+          type: ["string", "null"]
+        official:
+          type: ["string", "null"]
+
+    EatHours:
+      type: object
+      description: Day-by-day opening hours as free-form strings (e.g. "11:00–14:30, 17:00–21:00"). All keys optional.
+      properties:
+        monday:
+          type: ["string", "null"]
+        tuesday:
+          type: ["string", "null"]
+        wednesday:
+          type: ["string", "null"]
+        thursday:
+          type: ["string", "null"]
+        friday:
+          type: ["string", "null"]
+        saturday:
+          type: ["string", "null"]
+        sunday:
+          type: ["string", "null"]
+        closed:
+          type: ["string", "null"]
+
+    StayBase:
+      type: object
+      description: Shared fields for every Stay record across both countries. Country-specific extras live on `StayAU` / `StayJP`.
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        name_local:
+          type: ["string", "null"]
+          description: Local-script name (kanji/katakana for Japan). Null for AU.
+        type:
+          type: string
+          enum: [ryokan, hotel, lodge, apartment, airbnb, hostel, minshuku, guesthouse, resort, motel, cabin, bnb]
+        town:
+          $ref: "#/components/schemas/TownSlug"
+        region:
+          $ref: "#/components/schemas/StayEatRegionSlug"
+        short_description:
+          type: string
+        long_description:
+          type: string
+        address:
+          type: ["string", "null"]
+        lat:
+          type: ["number", "null"]
+        lng:
+          type: ["number", "null"]
+        phone:
+          type: ["string", "null"]
+        website:
+          type: ["string", "null"]
+        price_band:
+          oneOf:
+            - $ref: "#/components/schemas/PriceBand"
+            - type: "null"
+        photos:
+          type: array
+          items:
+            type: string
+        source_urls:
+          type: array
+          items:
+            type: string
+        room_count:
+          type: ["number", "null"]
+        amenities:
+          type: array
+          items:
+            type: string
+        english_spoken:
+          oneOf:
+            - $ref: "#/components/schemas/EnglishSpoken"
+            - type: "null"
+        check_in:
+          type: ["string", "null"]
+        check_out:
+          type: ["string", "null"]
+        booking_links:
+          $ref: "#/components/schemas/StayBookingLinks"
+        nearest_mountain:
+          type: ["string", "null"]
+        drive_min_to_nearest_mountain:
+          type: ["number", "null"]
+        drive_min_to_each_mountain:
+          oneOf:
+            - type: object
+              additionalProperties:
+                type: ["number", "null"]
+            - type: "null"
+        notes:
+          type: ["string", "null"]
+      required:
+        - id
+        - name
+        - name_local
+        - type
+        - town
+        - region
+        - short_description
+        - long_description
+        - address
+        - lat
+        - lng
+        - phone
+        - website
+        - price_band
+        - photos
+        - source_urls
+        - amenities
+        - booking_links
+
+    StayAU:
+      allOf:
+        - $ref: "#/components/schemas/StayBase"
+        - type: object
+          properties:
+            country:
+              type: string
+              enum: [AU]
+            drying_room:
+              oneOf:
+                - $ref: "#/components/schemas/YesNo"
+                - type: "null"
+            ski_storage:
+              oneOf:
+                - $ref: "#/components/schemas/YesNo"
+                - type: "null"
+            pet_friendly:
+              oneOf:
+                - $ref: "#/components/schemas/YesNo"
+                - type: "null"
+            self_contained:
+              oneOf:
+                - $ref: "#/components/schemas/YesNo"
+                - type: "null"
+            distance_to_skitube_km:
+              type: ["number", "null"]
+            distance_to_thredbo_km:
+              type: ["number", "null"]
+            distance_to_perisher_km:
+              type: ["number", "null"]
+          required:
+            - country
+
+    StayJP:
+      allOf:
+        - $ref: "#/components/schemas/StayBase"
+        - type: object
+          properties:
+            country:
+              type: string
+              enum: [JP]
+            onsen:
+              type: ["string", "null"]
+              enum: [none, private, public, both, null]
+            tattoo_policy:
+              type: ["string", "null"]
+              enum: [allowed, private_only, not_allowed, unknown, null]
+            meal_plan:
+              type: ["string", "null"]
+              enum: [none, breakfast, dinner, kaiseki, half_board, full_board, null]
+            yukata_provided:
+              type: ["string", "null"]
+              enum: [yes, no, unknown, null]
+            walk_min_to_yudanaka_station:
+              type: ["number", "null"]
+          required:
+            - country
+
+    Stay:
+      oneOf:
+        - $ref: "#/components/schemas/StayAU"
+        - $ref: "#/components/schemas/StayJP"
+      discriminator:
+        propertyName: country
+        mapping:
+          AU: "#/components/schemas/StayAU"
+          JP: "#/components/schemas/StayJP"
+
+    EatBase:
+      type: object
+      description: Shared fields for every Eat record across both countries. Country-specific extras live on `EatAU` / `EatJP`.
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        name_local:
+          type: ["string", "null"]
+        type:
+          type: string
+          enum: [izakaya, ramen, cafe, restaurant, bar, bakery, pub, fast_food, diner, food_truck, grocery, bottle_shop, service-station, supermarket]
+        town:
+          $ref: "#/components/schemas/TownSlug"
+        region:
+          $ref: "#/components/schemas/StayEatRegionSlug"
+        short_description:
+          type: string
+        long_description:
+          type: string
+        address:
+          type: ["string", "null"]
+        lat:
+          type: ["number", "null"]
+        lng:
+          type: ["number", "null"]
+        phone:
+          type: ["string", "null"]
+        website:
+          type: ["string", "null"]
+        price_band:
+          oneOf:
+            - $ref: "#/components/schemas/PriceBand"
+            - type: "null"
+        photos:
+          type: array
+          items:
+            type: string
+        source_urls:
+          type: array
+          items:
+            type: string
+        cuisine:
+          type: array
+          items:
+            type: string
+        hours:
+          $ref: "#/components/schemas/EatHours"
+        last_order_time:
+          type: ["string", "null"]
+        reservation:
+          type: ["string", "null"]
+          enum: [required, recommended, not_needed, not_accepted, null]
+        reservation_link:
+          type: ["string", "null"]
+        payment:
+          type: ["string", "null"]
+          enum: [cash_only, cards_accepted, both, null]
+        english_menu:
+          type: ["string", "null"]
+          enum: [yes, picture_menu, limited, no, null]
+        signature_dishes:
+          type: array
+          items:
+            type: string
+        notes:
+          type: ["string", "null"]
+      required:
+        - id
+        - name
+        - name_local
+        - type
+        - town
+        - region
+        - short_description
+        - long_description
+        - address
+        - lat
+        - lng
+        - phone
+        - website
+        - price_band
+        - photos
+        - source_urls
+        - cuisine
+        - hours
+        - signature_dishes
+
+    EatAU:
+      allOf:
+        - $ref: "#/components/schemas/EatBase"
+        - type: object
+          properties:
+            country:
+              type: string
+              enum: [AU]
+            apres_ski:
+              oneOf:
+                - $ref: "#/components/schemas/YesNo"
+                - type: "null"
+            takeaway:
+              oneOf:
+                - $ref: "#/components/schemas/YesNo"
+                - type: "null"
+            groceries:
+              oneOf:
+                - $ref: "#/components/schemas/YesNo"
+                - type: "null"
+          required:
+            - country
+
+    EatJP:
+      allOf:
+        - $ref: "#/components/schemas/EatBase"
+        - type: object
+          properties:
+            country:
+              type: string
+              enum: [JP]
+            vegetarian_friendly:
+              oneOf:
+                - $ref: "#/components/schemas/YesLimitedNo"
+                - type: "null"
+            kid_friendly:
+              oneOf:
+                - $ref: "#/components/schemas/YesLimitedNo"
+                - type: "null"
+          required:
+            - country
+
+    Eat:
+      oneOf:
+        - $ref: "#/components/schemas/EatAU"
+        - $ref: "#/components/schemas/EatJP"
+      discriminator:
+        propertyName: country
+        mapping:
+          AU: "#/components/schemas/EatAU"
+          JP: "#/components/schemas/EatJP"

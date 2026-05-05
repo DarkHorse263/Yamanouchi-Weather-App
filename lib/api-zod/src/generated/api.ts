@@ -1246,3 +1246,1073 @@ export const GetLocationLiftStatusResponse = zod.object({
   liftStatusUrl: zod.string().optional(),
   lastUpdated: zod.string(),
 });
+
+/**
+ * Returns every Stay record from the curated dataset for the given (region, town). Order matches the underlying JSON file (curator-controlled). Country-specific extras are exposed via the discriminated `country` field on each Stay.
+ * @summary List curated stays for a town
+ */
+export const GetTownStaysParams = zod.object({
+  region: zod
+    .enum(["snowy_mountains", "yamanouchi"])
+    .describe(
+      "Curated-dataset region slug (underscore-separated, distinct from the kebab-case `RegionId` used by live weather APIs).",
+    ),
+  town: zod
+    .enum([
+      "jindabyne",
+      "berridale",
+      "cooma",
+      "yudanaka",
+      "shibu_onsen",
+      "yomase",
+    ])
+    .describe("Town slug within the region."),
+});
+
+export const GetTownStaysResponseItem = zod.union([
+  zod
+    .object({
+      id: zod.string(),
+      name: zod.string(),
+      name_local: zod
+        .string()
+        .nullable()
+        .describe(
+          "Local-script name (kanji\/katakana for Japan). Null for AU.",
+        ),
+      type: zod.enum([
+        "ryokan",
+        "hotel",
+        "lodge",
+        "apartment",
+        "airbnb",
+        "hostel",
+        "minshuku",
+        "guesthouse",
+        "resort",
+        "motel",
+        "cabin",
+        "bnb",
+      ]),
+      town: zod
+        .enum([
+          "jindabyne",
+          "berridale",
+          "cooma",
+          "yudanaka",
+          "shibu_onsen",
+          "yomase",
+        ])
+        .describe(
+          "Curated-dataset town slug. Underscore-separated to match the on-disk JSON files (e.g. `shibu_onsen`, not `shibu-onsen`).",
+        ),
+      region: zod
+        .enum(["snowy_mountains", "yamanouchi"])
+        .describe(
+          "Region slug used by the curated Stay\/Eat dataset (underscore-separated to\nmatch the on-disk JSON files under artifacts\/feelzlike\/src\/data\/curated).\nDistinct from the canonical kebab-case `RegionId` enum used by live\nweather\/webcam\/road APIs — both coexist by design while we keep the\ncurated dataset's existing slug taxonomy. Translation between the two\nstyles happens at the resolver boundary in the frontend.\n",
+        ),
+      short_description: zod.string(),
+      long_description: zod.string(),
+      address: zod.string().nullable(),
+      lat: zod.number().nullable(),
+      lng: zod.number().nullable(),
+      phone: zod.string().nullable(),
+      website: zod.string().nullable(),
+      price_band: zod.union([
+        zod
+          .enum(["$", "$$", "$$$", "$$$$"])
+          .describe("Price tier rendered as 1–4 filled circles in the UI."),
+        zod.null(),
+      ]),
+      photos: zod.array(zod.string()),
+      source_urls: zod.array(zod.string()),
+      room_count: zod.number().nullish(),
+      amenities: zod.array(zod.string()),
+      english_spoken: zod
+        .union([zod.enum(["yes", "limited", "no"]), zod.null()])
+        .optional(),
+      check_in: zod.string().nullish(),
+      check_out: zod.string().nullish(),
+      booking_links: zod
+        .object({
+          booking_com: zod.string().nullish(),
+          agoda: zod.string().nullish(),
+          airbnb: zod.string().nullish(),
+          expedia: zod.string().nullish(),
+          hotels_com: zod.string().nullish(),
+          trip_com: zod.string().nullish(),
+          jalan: zod.string().nullish(),
+          rakuten: zod.string().nullish(),
+          official: zod.string().nullish(),
+        })
+        .describe(
+          'Affiliate-and-direct booking URLs per provider. Any subset may be present; missing or null means \"no link for this provider\".',
+        ),
+      nearest_mountain: zod.string().nullish(),
+      drive_min_to_nearest_mountain: zod.number().nullish(),
+      drive_min_to_each_mountain: zod
+        .union([zod.record(zod.string(), zod.number().nullable()), zod.null()])
+        .optional(),
+      notes: zod.string().nullish(),
+    })
+    .describe(
+      "Shared fields for every Stay record across both countries. Country-specific extras live on `StayAU` \/ `StayJP`.",
+    )
+    .and(
+      zod.object({
+        country: zod.enum(["AU"]),
+        drying_room: zod
+          .union([zod.enum(["yes", "no"]), zod.null()])
+          .optional(),
+        ski_storage: zod
+          .union([zod.enum(["yes", "no"]), zod.null()])
+          .optional(),
+        pet_friendly: zod
+          .union([zod.enum(["yes", "no"]), zod.null()])
+          .optional(),
+        self_contained: zod
+          .union([zod.enum(["yes", "no"]), zod.null()])
+          .optional(),
+        distance_to_skitube_km: zod.number().nullish(),
+        distance_to_thredbo_km: zod.number().nullish(),
+        distance_to_perisher_km: zod.number().nullish(),
+      }),
+    )
+    .and(
+      zod.object({
+        country: zod.enum(["AU"]),
+      }),
+    ),
+  zod
+    .object({
+      id: zod.string(),
+      name: zod.string(),
+      name_local: zod
+        .string()
+        .nullable()
+        .describe(
+          "Local-script name (kanji\/katakana for Japan). Null for AU.",
+        ),
+      type: zod.enum([
+        "ryokan",
+        "hotel",
+        "lodge",
+        "apartment",
+        "airbnb",
+        "hostel",
+        "minshuku",
+        "guesthouse",
+        "resort",
+        "motel",
+        "cabin",
+        "bnb",
+      ]),
+      town: zod
+        .enum([
+          "jindabyne",
+          "berridale",
+          "cooma",
+          "yudanaka",
+          "shibu_onsen",
+          "yomase",
+        ])
+        .describe(
+          "Curated-dataset town slug. Underscore-separated to match the on-disk JSON files (e.g. `shibu_onsen`, not `shibu-onsen`).",
+        ),
+      region: zod
+        .enum(["snowy_mountains", "yamanouchi"])
+        .describe(
+          "Region slug used by the curated Stay\/Eat dataset (underscore-separated to\nmatch the on-disk JSON files under artifacts\/feelzlike\/src\/data\/curated).\nDistinct from the canonical kebab-case `RegionId` enum used by live\nweather\/webcam\/road APIs — both coexist by design while we keep the\ncurated dataset's existing slug taxonomy. Translation between the two\nstyles happens at the resolver boundary in the frontend.\n",
+        ),
+      short_description: zod.string(),
+      long_description: zod.string(),
+      address: zod.string().nullable(),
+      lat: zod.number().nullable(),
+      lng: zod.number().nullable(),
+      phone: zod.string().nullable(),
+      website: zod.string().nullable(),
+      price_band: zod.union([
+        zod
+          .enum(["$", "$$", "$$$", "$$$$"])
+          .describe("Price tier rendered as 1–4 filled circles in the UI."),
+        zod.null(),
+      ]),
+      photos: zod.array(zod.string()),
+      source_urls: zod.array(zod.string()),
+      room_count: zod.number().nullish(),
+      amenities: zod.array(zod.string()),
+      english_spoken: zod
+        .union([zod.enum(["yes", "limited", "no"]), zod.null()])
+        .optional(),
+      check_in: zod.string().nullish(),
+      check_out: zod.string().nullish(),
+      booking_links: zod
+        .object({
+          booking_com: zod.string().nullish(),
+          agoda: zod.string().nullish(),
+          airbnb: zod.string().nullish(),
+          expedia: zod.string().nullish(),
+          hotels_com: zod.string().nullish(),
+          trip_com: zod.string().nullish(),
+          jalan: zod.string().nullish(),
+          rakuten: zod.string().nullish(),
+          official: zod.string().nullish(),
+        })
+        .describe(
+          'Affiliate-and-direct booking URLs per provider. Any subset may be present; missing or null means \"no link for this provider\".',
+        ),
+      nearest_mountain: zod.string().nullish(),
+      drive_min_to_nearest_mountain: zod.number().nullish(),
+      drive_min_to_each_mountain: zod
+        .union([zod.record(zod.string(), zod.number().nullable()), zod.null()])
+        .optional(),
+      notes: zod.string().nullish(),
+    })
+    .describe(
+      "Shared fields for every Stay record across both countries. Country-specific extras live on `StayAU` \/ `StayJP`.",
+    )
+    .and(
+      zod.object({
+        country: zod.enum(["JP"]),
+        onsen: zod
+          .union([
+            zod.literal("none"),
+            zod.literal("private"),
+            zod.literal("public"),
+            zod.literal("both"),
+            zod.literal(null),
+          ])
+          .nullish(),
+        tattoo_policy: zod
+          .union([
+            zod.literal("allowed"),
+            zod.literal("private_only"),
+            zod.literal("not_allowed"),
+            zod.literal("unknown"),
+            zod.literal(null),
+          ])
+          .nullish(),
+        meal_plan: zod
+          .union([
+            zod.literal("none"),
+            zod.literal("breakfast"),
+            zod.literal("dinner"),
+            zod.literal("kaiseki"),
+            zod.literal("half_board"),
+            zod.literal("full_board"),
+            zod.literal(null),
+          ])
+          .nullish(),
+        yukata_provided: zod
+          .union([
+            zod.literal("yes"),
+            zod.literal("no"),
+            zod.literal("unknown"),
+            zod.literal(null),
+          ])
+          .nullish(),
+        walk_min_to_yudanaka_station: zod.number().nullish(),
+      }),
+    )
+    .and(
+      zod.object({
+        country: zod.enum(["JP"]),
+      }),
+    ),
+]);
+export const GetTownStaysResponse = zod.array(GetTownStaysResponseItem);
+
+/**
+ * @summary Get a single curated stay
+ */
+export const GetTownStayParams = zod.object({
+  region: zod
+    .enum(["snowy_mountains", "yamanouchi"])
+    .describe(
+      "Curated-dataset region slug (underscore-separated, distinct from the kebab-case `RegionId` used by live weather APIs).",
+    ),
+  town: zod
+    .enum([
+      "jindabyne",
+      "berridale",
+      "cooma",
+      "yudanaka",
+      "shibu_onsen",
+      "yomase",
+    ])
+    .describe("Town slug within the region."),
+  stayId: zod.coerce
+    .string()
+    .describe("Stay record id (slug, unique within the curated dataset)."),
+});
+
+export const GetTownStayResponse = zod.union([
+  zod
+    .object({
+      id: zod.string(),
+      name: zod.string(),
+      name_local: zod
+        .string()
+        .nullable()
+        .describe(
+          "Local-script name (kanji\/katakana for Japan). Null for AU.",
+        ),
+      type: zod.enum([
+        "ryokan",
+        "hotel",
+        "lodge",
+        "apartment",
+        "airbnb",
+        "hostel",
+        "minshuku",
+        "guesthouse",
+        "resort",
+        "motel",
+        "cabin",
+        "bnb",
+      ]),
+      town: zod
+        .enum([
+          "jindabyne",
+          "berridale",
+          "cooma",
+          "yudanaka",
+          "shibu_onsen",
+          "yomase",
+        ])
+        .describe(
+          "Curated-dataset town slug. Underscore-separated to match the on-disk JSON files (e.g. `shibu_onsen`, not `shibu-onsen`).",
+        ),
+      region: zod
+        .enum(["snowy_mountains", "yamanouchi"])
+        .describe(
+          "Region slug used by the curated Stay\/Eat dataset (underscore-separated to\nmatch the on-disk JSON files under artifacts\/feelzlike\/src\/data\/curated).\nDistinct from the canonical kebab-case `RegionId` enum used by live\nweather\/webcam\/road APIs — both coexist by design while we keep the\ncurated dataset's existing slug taxonomy. Translation between the two\nstyles happens at the resolver boundary in the frontend.\n",
+        ),
+      short_description: zod.string(),
+      long_description: zod.string(),
+      address: zod.string().nullable(),
+      lat: zod.number().nullable(),
+      lng: zod.number().nullable(),
+      phone: zod.string().nullable(),
+      website: zod.string().nullable(),
+      price_band: zod.union([
+        zod
+          .enum(["$", "$$", "$$$", "$$$$"])
+          .describe("Price tier rendered as 1–4 filled circles in the UI."),
+        zod.null(),
+      ]),
+      photos: zod.array(zod.string()),
+      source_urls: zod.array(zod.string()),
+      room_count: zod.number().nullish(),
+      amenities: zod.array(zod.string()),
+      english_spoken: zod
+        .union([zod.enum(["yes", "limited", "no"]), zod.null()])
+        .optional(),
+      check_in: zod.string().nullish(),
+      check_out: zod.string().nullish(),
+      booking_links: zod
+        .object({
+          booking_com: zod.string().nullish(),
+          agoda: zod.string().nullish(),
+          airbnb: zod.string().nullish(),
+          expedia: zod.string().nullish(),
+          hotels_com: zod.string().nullish(),
+          trip_com: zod.string().nullish(),
+          jalan: zod.string().nullish(),
+          rakuten: zod.string().nullish(),
+          official: zod.string().nullish(),
+        })
+        .describe(
+          'Affiliate-and-direct booking URLs per provider. Any subset may be present; missing or null means \"no link for this provider\".',
+        ),
+      nearest_mountain: zod.string().nullish(),
+      drive_min_to_nearest_mountain: zod.number().nullish(),
+      drive_min_to_each_mountain: zod
+        .union([zod.record(zod.string(), zod.number().nullable()), zod.null()])
+        .optional(),
+      notes: zod.string().nullish(),
+    })
+    .describe(
+      "Shared fields for every Stay record across both countries. Country-specific extras live on `StayAU` \/ `StayJP`.",
+    )
+    .and(
+      zod.object({
+        country: zod.enum(["AU"]),
+        drying_room: zod
+          .union([zod.enum(["yes", "no"]), zod.null()])
+          .optional(),
+        ski_storage: zod
+          .union([zod.enum(["yes", "no"]), zod.null()])
+          .optional(),
+        pet_friendly: zod
+          .union([zod.enum(["yes", "no"]), zod.null()])
+          .optional(),
+        self_contained: zod
+          .union([zod.enum(["yes", "no"]), zod.null()])
+          .optional(),
+        distance_to_skitube_km: zod.number().nullish(),
+        distance_to_thredbo_km: zod.number().nullish(),
+        distance_to_perisher_km: zod.number().nullish(),
+      }),
+    )
+    .and(
+      zod.object({
+        country: zod.enum(["AU"]),
+      }),
+    ),
+  zod
+    .object({
+      id: zod.string(),
+      name: zod.string(),
+      name_local: zod
+        .string()
+        .nullable()
+        .describe(
+          "Local-script name (kanji\/katakana for Japan). Null for AU.",
+        ),
+      type: zod.enum([
+        "ryokan",
+        "hotel",
+        "lodge",
+        "apartment",
+        "airbnb",
+        "hostel",
+        "minshuku",
+        "guesthouse",
+        "resort",
+        "motel",
+        "cabin",
+        "bnb",
+      ]),
+      town: zod
+        .enum([
+          "jindabyne",
+          "berridale",
+          "cooma",
+          "yudanaka",
+          "shibu_onsen",
+          "yomase",
+        ])
+        .describe(
+          "Curated-dataset town slug. Underscore-separated to match the on-disk JSON files (e.g. `shibu_onsen`, not `shibu-onsen`).",
+        ),
+      region: zod
+        .enum(["snowy_mountains", "yamanouchi"])
+        .describe(
+          "Region slug used by the curated Stay\/Eat dataset (underscore-separated to\nmatch the on-disk JSON files under artifacts\/feelzlike\/src\/data\/curated).\nDistinct from the canonical kebab-case `RegionId` enum used by live\nweather\/webcam\/road APIs — both coexist by design while we keep the\ncurated dataset's existing slug taxonomy. Translation between the two\nstyles happens at the resolver boundary in the frontend.\n",
+        ),
+      short_description: zod.string(),
+      long_description: zod.string(),
+      address: zod.string().nullable(),
+      lat: zod.number().nullable(),
+      lng: zod.number().nullable(),
+      phone: zod.string().nullable(),
+      website: zod.string().nullable(),
+      price_band: zod.union([
+        zod
+          .enum(["$", "$$", "$$$", "$$$$"])
+          .describe("Price tier rendered as 1–4 filled circles in the UI."),
+        zod.null(),
+      ]),
+      photos: zod.array(zod.string()),
+      source_urls: zod.array(zod.string()),
+      room_count: zod.number().nullish(),
+      amenities: zod.array(zod.string()),
+      english_spoken: zod
+        .union([zod.enum(["yes", "limited", "no"]), zod.null()])
+        .optional(),
+      check_in: zod.string().nullish(),
+      check_out: zod.string().nullish(),
+      booking_links: zod
+        .object({
+          booking_com: zod.string().nullish(),
+          agoda: zod.string().nullish(),
+          airbnb: zod.string().nullish(),
+          expedia: zod.string().nullish(),
+          hotels_com: zod.string().nullish(),
+          trip_com: zod.string().nullish(),
+          jalan: zod.string().nullish(),
+          rakuten: zod.string().nullish(),
+          official: zod.string().nullish(),
+        })
+        .describe(
+          'Affiliate-and-direct booking URLs per provider. Any subset may be present; missing or null means \"no link for this provider\".',
+        ),
+      nearest_mountain: zod.string().nullish(),
+      drive_min_to_nearest_mountain: zod.number().nullish(),
+      drive_min_to_each_mountain: zod
+        .union([zod.record(zod.string(), zod.number().nullable()), zod.null()])
+        .optional(),
+      notes: zod.string().nullish(),
+    })
+    .describe(
+      "Shared fields for every Stay record across both countries. Country-specific extras live on `StayAU` \/ `StayJP`.",
+    )
+    .and(
+      zod.object({
+        country: zod.enum(["JP"]),
+        onsen: zod
+          .union([
+            zod.literal("none"),
+            zod.literal("private"),
+            zod.literal("public"),
+            zod.literal("both"),
+            zod.literal(null),
+          ])
+          .nullish(),
+        tattoo_policy: zod
+          .union([
+            zod.literal("allowed"),
+            zod.literal("private_only"),
+            zod.literal("not_allowed"),
+            zod.literal("unknown"),
+            zod.literal(null),
+          ])
+          .nullish(),
+        meal_plan: zod
+          .union([
+            zod.literal("none"),
+            zod.literal("breakfast"),
+            zod.literal("dinner"),
+            zod.literal("kaiseki"),
+            zod.literal("half_board"),
+            zod.literal("full_board"),
+            zod.literal(null),
+          ])
+          .nullish(),
+        yukata_provided: zod
+          .union([
+            zod.literal("yes"),
+            zod.literal("no"),
+            zod.literal("unknown"),
+            zod.literal(null),
+          ])
+          .nullish(),
+        walk_min_to_yudanaka_station: zod.number().nullish(),
+      }),
+    )
+    .and(
+      zod.object({
+        country: zod.enum(["JP"]),
+      }),
+    ),
+]);
+
+/**
+ * Returns every Eat record from the curated dataset for the given (region, town). Country-specific extras are exposed via the discriminated `country` field on each Eat.
+ * @summary List curated eats for a town
+ */
+export const GetTownEatsParams = zod.object({
+  region: zod
+    .enum(["snowy_mountains", "yamanouchi"])
+    .describe(
+      "Curated-dataset region slug (underscore-separated, distinct from the kebab-case `RegionId` used by live weather APIs).",
+    ),
+  town: zod
+    .enum([
+      "jindabyne",
+      "berridale",
+      "cooma",
+      "yudanaka",
+      "shibu_onsen",
+      "yomase",
+    ])
+    .describe("Town slug within the region."),
+});
+
+export const GetTownEatsResponseItem = zod.union([
+  zod
+    .object({
+      id: zod.string(),
+      name: zod.string(),
+      name_local: zod.string().nullable(),
+      type: zod.enum([
+        "izakaya",
+        "ramen",
+        "cafe",
+        "restaurant",
+        "bar",
+        "bakery",
+        "pub",
+        "fast_food",
+        "diner",
+        "food_truck",
+        "grocery",
+        "bottle_shop",
+        "service-station",
+        "supermarket",
+      ]),
+      town: zod
+        .enum([
+          "jindabyne",
+          "berridale",
+          "cooma",
+          "yudanaka",
+          "shibu_onsen",
+          "yomase",
+        ])
+        .describe(
+          "Curated-dataset town slug. Underscore-separated to match the on-disk JSON files (e.g. `shibu_onsen`, not `shibu-onsen`).",
+        ),
+      region: zod
+        .enum(["snowy_mountains", "yamanouchi"])
+        .describe(
+          "Region slug used by the curated Stay\/Eat dataset (underscore-separated to\nmatch the on-disk JSON files under artifacts\/feelzlike\/src\/data\/curated).\nDistinct from the canonical kebab-case `RegionId` enum used by live\nweather\/webcam\/road APIs — both coexist by design while we keep the\ncurated dataset's existing slug taxonomy. Translation between the two\nstyles happens at the resolver boundary in the frontend.\n",
+        ),
+      short_description: zod.string(),
+      long_description: zod.string(),
+      address: zod.string().nullable(),
+      lat: zod.number().nullable(),
+      lng: zod.number().nullable(),
+      phone: zod.string().nullable(),
+      website: zod.string().nullable(),
+      price_band: zod.union([
+        zod
+          .enum(["$", "$$", "$$$", "$$$$"])
+          .describe("Price tier rendered as 1–4 filled circles in the UI."),
+        zod.null(),
+      ]),
+      photos: zod.array(zod.string()),
+      source_urls: zod.array(zod.string()),
+      cuisine: zod.array(zod.string()),
+      hours: zod
+        .object({
+          monday: zod.string().nullish(),
+          tuesday: zod.string().nullish(),
+          wednesday: zod.string().nullish(),
+          thursday: zod.string().nullish(),
+          friday: zod.string().nullish(),
+          saturday: zod.string().nullish(),
+          sunday: zod.string().nullish(),
+          closed: zod.string().nullish(),
+        })
+        .describe(
+          'Day-by-day opening hours as free-form strings (e.g. \"11:00–14:30, 17:00–21:00\"). All keys optional.',
+        ),
+      last_order_time: zod.string().nullish(),
+      reservation: zod
+        .union([
+          zod.literal("required"),
+          zod.literal("recommended"),
+          zod.literal("not_needed"),
+          zod.literal("not_accepted"),
+          zod.literal(null),
+        ])
+        .nullish(),
+      reservation_link: zod.string().nullish(),
+      payment: zod
+        .union([
+          zod.literal("cash_only"),
+          zod.literal("cards_accepted"),
+          zod.literal("both"),
+          zod.literal(null),
+        ])
+        .nullish(),
+      english_menu: zod
+        .union([
+          zod.literal("yes"),
+          zod.literal("picture_menu"),
+          zod.literal("limited"),
+          zod.literal("no"),
+          zod.literal(null),
+        ])
+        .nullish(),
+      signature_dishes: zod.array(zod.string()),
+      notes: zod.string().nullish(),
+    })
+    .describe(
+      "Shared fields for every Eat record across both countries. Country-specific extras live on `EatAU` \/ `EatJP`.",
+    )
+    .and(
+      zod.object({
+        country: zod.enum(["AU"]),
+        apres_ski: zod.union([zod.enum(["yes", "no"]), zod.null()]).optional(),
+        takeaway: zod.union([zod.enum(["yes", "no"]), zod.null()]).optional(),
+        groceries: zod.union([zod.enum(["yes", "no"]), zod.null()]).optional(),
+      }),
+    )
+    .and(
+      zod.object({
+        country: zod.enum(["AU"]),
+      }),
+    ),
+  zod
+    .object({
+      id: zod.string(),
+      name: zod.string(),
+      name_local: zod.string().nullable(),
+      type: zod.enum([
+        "izakaya",
+        "ramen",
+        "cafe",
+        "restaurant",
+        "bar",
+        "bakery",
+        "pub",
+        "fast_food",
+        "diner",
+        "food_truck",
+        "grocery",
+        "bottle_shop",
+        "service-station",
+        "supermarket",
+      ]),
+      town: zod
+        .enum([
+          "jindabyne",
+          "berridale",
+          "cooma",
+          "yudanaka",
+          "shibu_onsen",
+          "yomase",
+        ])
+        .describe(
+          "Curated-dataset town slug. Underscore-separated to match the on-disk JSON files (e.g. `shibu_onsen`, not `shibu-onsen`).",
+        ),
+      region: zod
+        .enum(["snowy_mountains", "yamanouchi"])
+        .describe(
+          "Region slug used by the curated Stay\/Eat dataset (underscore-separated to\nmatch the on-disk JSON files under artifacts\/feelzlike\/src\/data\/curated).\nDistinct from the canonical kebab-case `RegionId` enum used by live\nweather\/webcam\/road APIs — both coexist by design while we keep the\ncurated dataset's existing slug taxonomy. Translation between the two\nstyles happens at the resolver boundary in the frontend.\n",
+        ),
+      short_description: zod.string(),
+      long_description: zod.string(),
+      address: zod.string().nullable(),
+      lat: zod.number().nullable(),
+      lng: zod.number().nullable(),
+      phone: zod.string().nullable(),
+      website: zod.string().nullable(),
+      price_band: zod.union([
+        zod
+          .enum(["$", "$$", "$$$", "$$$$"])
+          .describe("Price tier rendered as 1–4 filled circles in the UI."),
+        zod.null(),
+      ]),
+      photos: zod.array(zod.string()),
+      source_urls: zod.array(zod.string()),
+      cuisine: zod.array(zod.string()),
+      hours: zod
+        .object({
+          monday: zod.string().nullish(),
+          tuesday: zod.string().nullish(),
+          wednesday: zod.string().nullish(),
+          thursday: zod.string().nullish(),
+          friday: zod.string().nullish(),
+          saturday: zod.string().nullish(),
+          sunday: zod.string().nullish(),
+          closed: zod.string().nullish(),
+        })
+        .describe(
+          'Day-by-day opening hours as free-form strings (e.g. \"11:00–14:30, 17:00–21:00\"). All keys optional.',
+        ),
+      last_order_time: zod.string().nullish(),
+      reservation: zod
+        .union([
+          zod.literal("required"),
+          zod.literal("recommended"),
+          zod.literal("not_needed"),
+          zod.literal("not_accepted"),
+          zod.literal(null),
+        ])
+        .nullish(),
+      reservation_link: zod.string().nullish(),
+      payment: zod
+        .union([
+          zod.literal("cash_only"),
+          zod.literal("cards_accepted"),
+          zod.literal("both"),
+          zod.literal(null),
+        ])
+        .nullish(),
+      english_menu: zod
+        .union([
+          zod.literal("yes"),
+          zod.literal("picture_menu"),
+          zod.literal("limited"),
+          zod.literal("no"),
+          zod.literal(null),
+        ])
+        .nullish(),
+      signature_dishes: zod.array(zod.string()),
+      notes: zod.string().nullish(),
+    })
+    .describe(
+      "Shared fields for every Eat record across both countries. Country-specific extras live on `EatAU` \/ `EatJP`.",
+    )
+    .and(
+      zod.object({
+        country: zod.enum(["JP"]),
+        vegetarian_friendly: zod
+          .union([zod.enum(["yes", "limited", "no"]), zod.null()])
+          .optional(),
+        kid_friendly: zod
+          .union([zod.enum(["yes", "limited", "no"]), zod.null()])
+          .optional(),
+      }),
+    )
+    .and(
+      zod.object({
+        country: zod.enum(["JP"]),
+      }),
+    ),
+]);
+export const GetTownEatsResponse = zod.array(GetTownEatsResponseItem);
+
+/**
+ * @summary Get a single curated eat
+ */
+export const GetTownEatParams = zod.object({
+  region: zod
+    .enum(["snowy_mountains", "yamanouchi"])
+    .describe(
+      "Curated-dataset region slug (underscore-separated, distinct from the kebab-case `RegionId` used by live weather APIs).",
+    ),
+  town: zod
+    .enum([
+      "jindabyne",
+      "berridale",
+      "cooma",
+      "yudanaka",
+      "shibu_onsen",
+      "yomase",
+    ])
+    .describe("Town slug within the region."),
+  eatId: zod.coerce
+    .string()
+    .describe("Eat record id (slug, unique within the curated dataset)."),
+});
+
+export const GetTownEatResponse = zod.union([
+  zod
+    .object({
+      id: zod.string(),
+      name: zod.string(),
+      name_local: zod.string().nullable(),
+      type: zod.enum([
+        "izakaya",
+        "ramen",
+        "cafe",
+        "restaurant",
+        "bar",
+        "bakery",
+        "pub",
+        "fast_food",
+        "diner",
+        "food_truck",
+        "grocery",
+        "bottle_shop",
+        "service-station",
+        "supermarket",
+      ]),
+      town: zod
+        .enum([
+          "jindabyne",
+          "berridale",
+          "cooma",
+          "yudanaka",
+          "shibu_onsen",
+          "yomase",
+        ])
+        .describe(
+          "Curated-dataset town slug. Underscore-separated to match the on-disk JSON files (e.g. `shibu_onsen`, not `shibu-onsen`).",
+        ),
+      region: zod
+        .enum(["snowy_mountains", "yamanouchi"])
+        .describe(
+          "Region slug used by the curated Stay\/Eat dataset (underscore-separated to\nmatch the on-disk JSON files under artifacts\/feelzlike\/src\/data\/curated).\nDistinct from the canonical kebab-case `RegionId` enum used by live\nweather\/webcam\/road APIs — both coexist by design while we keep the\ncurated dataset's existing slug taxonomy. Translation between the two\nstyles happens at the resolver boundary in the frontend.\n",
+        ),
+      short_description: zod.string(),
+      long_description: zod.string(),
+      address: zod.string().nullable(),
+      lat: zod.number().nullable(),
+      lng: zod.number().nullable(),
+      phone: zod.string().nullable(),
+      website: zod.string().nullable(),
+      price_band: zod.union([
+        zod
+          .enum(["$", "$$", "$$$", "$$$$"])
+          .describe("Price tier rendered as 1–4 filled circles in the UI."),
+        zod.null(),
+      ]),
+      photos: zod.array(zod.string()),
+      source_urls: zod.array(zod.string()),
+      cuisine: zod.array(zod.string()),
+      hours: zod
+        .object({
+          monday: zod.string().nullish(),
+          tuesday: zod.string().nullish(),
+          wednesday: zod.string().nullish(),
+          thursday: zod.string().nullish(),
+          friday: zod.string().nullish(),
+          saturday: zod.string().nullish(),
+          sunday: zod.string().nullish(),
+          closed: zod.string().nullish(),
+        })
+        .describe(
+          'Day-by-day opening hours as free-form strings (e.g. \"11:00–14:30, 17:00–21:00\"). All keys optional.',
+        ),
+      last_order_time: zod.string().nullish(),
+      reservation: zod
+        .union([
+          zod.literal("required"),
+          zod.literal("recommended"),
+          zod.literal("not_needed"),
+          zod.literal("not_accepted"),
+          zod.literal(null),
+        ])
+        .nullish(),
+      reservation_link: zod.string().nullish(),
+      payment: zod
+        .union([
+          zod.literal("cash_only"),
+          zod.literal("cards_accepted"),
+          zod.literal("both"),
+          zod.literal(null),
+        ])
+        .nullish(),
+      english_menu: zod
+        .union([
+          zod.literal("yes"),
+          zod.literal("picture_menu"),
+          zod.literal("limited"),
+          zod.literal("no"),
+          zod.literal(null),
+        ])
+        .nullish(),
+      signature_dishes: zod.array(zod.string()),
+      notes: zod.string().nullish(),
+    })
+    .describe(
+      "Shared fields for every Eat record across both countries. Country-specific extras live on `EatAU` \/ `EatJP`.",
+    )
+    .and(
+      zod.object({
+        country: zod.enum(["AU"]),
+        apres_ski: zod.union([zod.enum(["yes", "no"]), zod.null()]).optional(),
+        takeaway: zod.union([zod.enum(["yes", "no"]), zod.null()]).optional(),
+        groceries: zod.union([zod.enum(["yes", "no"]), zod.null()]).optional(),
+      }),
+    )
+    .and(
+      zod.object({
+        country: zod.enum(["AU"]),
+      }),
+    ),
+  zod
+    .object({
+      id: zod.string(),
+      name: zod.string(),
+      name_local: zod.string().nullable(),
+      type: zod.enum([
+        "izakaya",
+        "ramen",
+        "cafe",
+        "restaurant",
+        "bar",
+        "bakery",
+        "pub",
+        "fast_food",
+        "diner",
+        "food_truck",
+        "grocery",
+        "bottle_shop",
+        "service-station",
+        "supermarket",
+      ]),
+      town: zod
+        .enum([
+          "jindabyne",
+          "berridale",
+          "cooma",
+          "yudanaka",
+          "shibu_onsen",
+          "yomase",
+        ])
+        .describe(
+          "Curated-dataset town slug. Underscore-separated to match the on-disk JSON files (e.g. `shibu_onsen`, not `shibu-onsen`).",
+        ),
+      region: zod
+        .enum(["snowy_mountains", "yamanouchi"])
+        .describe(
+          "Region slug used by the curated Stay\/Eat dataset (underscore-separated to\nmatch the on-disk JSON files under artifacts\/feelzlike\/src\/data\/curated).\nDistinct from the canonical kebab-case `RegionId` enum used by live\nweather\/webcam\/road APIs — both coexist by design while we keep the\ncurated dataset's existing slug taxonomy. Translation between the two\nstyles happens at the resolver boundary in the frontend.\n",
+        ),
+      short_description: zod.string(),
+      long_description: zod.string(),
+      address: zod.string().nullable(),
+      lat: zod.number().nullable(),
+      lng: zod.number().nullable(),
+      phone: zod.string().nullable(),
+      website: zod.string().nullable(),
+      price_band: zod.union([
+        zod
+          .enum(["$", "$$", "$$$", "$$$$"])
+          .describe("Price tier rendered as 1–4 filled circles in the UI."),
+        zod.null(),
+      ]),
+      photos: zod.array(zod.string()),
+      source_urls: zod.array(zod.string()),
+      cuisine: zod.array(zod.string()),
+      hours: zod
+        .object({
+          monday: zod.string().nullish(),
+          tuesday: zod.string().nullish(),
+          wednesday: zod.string().nullish(),
+          thursday: zod.string().nullish(),
+          friday: zod.string().nullish(),
+          saturday: zod.string().nullish(),
+          sunday: zod.string().nullish(),
+          closed: zod.string().nullish(),
+        })
+        .describe(
+          'Day-by-day opening hours as free-form strings (e.g. \"11:00–14:30, 17:00–21:00\"). All keys optional.',
+        ),
+      last_order_time: zod.string().nullish(),
+      reservation: zod
+        .union([
+          zod.literal("required"),
+          zod.literal("recommended"),
+          zod.literal("not_needed"),
+          zod.literal("not_accepted"),
+          zod.literal(null),
+        ])
+        .nullish(),
+      reservation_link: zod.string().nullish(),
+      payment: zod
+        .union([
+          zod.literal("cash_only"),
+          zod.literal("cards_accepted"),
+          zod.literal("both"),
+          zod.literal(null),
+        ])
+        .nullish(),
+      english_menu: zod
+        .union([
+          zod.literal("yes"),
+          zod.literal("picture_menu"),
+          zod.literal("limited"),
+          zod.literal("no"),
+          zod.literal(null),
+        ])
+        .nullish(),
+      signature_dishes: zod.array(zod.string()),
+      notes: zod.string().nullish(),
+    })
+    .describe(
+      "Shared fields for every Eat record across both countries. Country-specific extras live on `EatAU` \/ `EatJP`.",
+    )
+    .and(
+      zod.object({
+        country: zod.enum(["JP"]),
+        vegetarian_friendly: zod
+          .union([zod.enum(["yes", "limited", "no"]), zod.null()])
+          .optional(),
+        kid_friendly: zod
+          .union([zod.enum(["yes", "limited", "no"]), zod.null()])
+          .optional(),
+      }),
+    )
+    .and(
+      zod.object({
+        country: zod.enum(["JP"]),
+      }),
+    ),
+]);

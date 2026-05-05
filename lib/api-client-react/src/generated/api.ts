@@ -26,6 +26,7 @@ import type {
   CreateDiningBody,
   Dashboard,
   DiningVenue,
+  Eat,
   EigomenyuCreateMenuItemBody,
   EigomenyuCreateRestaurantBody,
   EigomenyuLoginBody,
@@ -56,6 +57,7 @@ import type {
   Resort,
   ResortLiftStatus,
   RoadConditionsResponse,
+  Stay,
   UpdateAccommodationBody,
   UpdateAttractionBody,
   UpdateDiningBody,
@@ -3512,6 +3514,531 @@ export function useGetLocationLiftStatus<
     locationId,
     options,
   );
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * Returns every Stay record from the curated dataset for the given (region, town). Order matches the underlying JSON file (curator-controlled). Country-specific extras are exposed via the discriminated `country` field on each Stay.
+ * @summary List curated stays for a town
+ */
+export const getGetTownStaysUrl = (
+  region: "snowy_mountains" | "yamanouchi",
+  town:
+    | "jindabyne"
+    | "berridale"
+    | "cooma"
+    | "yudanaka"
+    | "shibu_onsen"
+    | "yomase",
+) => {
+  return `/api/regions/${region}/towns/${town}/stays`;
+};
+
+export const getTownStays = async (
+  region: "snowy_mountains" | "yamanouchi",
+  town:
+    | "jindabyne"
+    | "berridale"
+    | "cooma"
+    | "yudanaka"
+    | "shibu_onsen"
+    | "yomase",
+  options?: RequestInit,
+): Promise<Stay[]> => {
+  return customFetch<Stay[]>(getGetTownStaysUrl(region, town), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getGetTownStaysQueryKey = (
+  region: "snowy_mountains" | "yamanouchi",
+  town:
+    | "jindabyne"
+    | "berridale"
+    | "cooma"
+    | "yudanaka"
+    | "shibu_onsen"
+    | "yomase",
+) => {
+  return [`/api/regions/${region}/towns/${town}/stays`] as const;
+};
+
+export const getGetTownStaysQueryOptions = <
+  TData = Awaited<ReturnType<typeof getTownStays>>,
+  TError = ErrorType<ErrorResponse>,
+>(
+  region: "snowy_mountains" | "yamanouchi",
+  town:
+    | "jindabyne"
+    | "berridale"
+    | "cooma"
+    | "yudanaka"
+    | "shibu_onsen"
+    | "yomase",
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getTownStays>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getGetTownStaysQueryKey(region, town);
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getTownStays>>> = ({
+    signal,
+  }) => getTownStays(region, town, { signal, ...requestOptions });
+
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!(region && town),
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<typeof getTownStays>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetTownStaysQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getTownStays>>
+>;
+export type GetTownStaysQueryError = ErrorType<ErrorResponse>;
+
+/**
+ * @summary List curated stays for a town
+ */
+
+export function useGetTownStays<
+  TData = Awaited<ReturnType<typeof getTownStays>>,
+  TError = ErrorType<ErrorResponse>,
+>(
+  region: "snowy_mountains" | "yamanouchi",
+  town:
+    | "jindabyne"
+    | "berridale"
+    | "cooma"
+    | "yudanaka"
+    | "shibu_onsen"
+    | "yomase",
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getTownStays>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetTownStaysQueryOptions(region, town, options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * @summary Get a single curated stay
+ */
+export const getGetTownStayUrl = (
+  region: "snowy_mountains" | "yamanouchi",
+  town:
+    | "jindabyne"
+    | "berridale"
+    | "cooma"
+    | "yudanaka"
+    | "shibu_onsen"
+    | "yomase",
+  stayId: string,
+) => {
+  return `/api/regions/${region}/towns/${town}/stays/${stayId}`;
+};
+
+export const getTownStay = async (
+  region: "snowy_mountains" | "yamanouchi",
+  town:
+    | "jindabyne"
+    | "berridale"
+    | "cooma"
+    | "yudanaka"
+    | "shibu_onsen"
+    | "yomase",
+  stayId: string,
+  options?: RequestInit,
+): Promise<Stay> => {
+  return customFetch<Stay>(getGetTownStayUrl(region, town, stayId), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getGetTownStayQueryKey = (
+  region: "snowy_mountains" | "yamanouchi",
+  town:
+    | "jindabyne"
+    | "berridale"
+    | "cooma"
+    | "yudanaka"
+    | "shibu_onsen"
+    | "yomase",
+  stayId: string,
+) => {
+  return [`/api/regions/${region}/towns/${town}/stays/${stayId}`] as const;
+};
+
+export const getGetTownStayQueryOptions = <
+  TData = Awaited<ReturnType<typeof getTownStay>>,
+  TError = ErrorType<ErrorResponse>,
+>(
+  region: "snowy_mountains" | "yamanouchi",
+  town:
+    | "jindabyne"
+    | "berridale"
+    | "cooma"
+    | "yudanaka"
+    | "shibu_onsen"
+    | "yomase",
+  stayId: string,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getTownStay>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getGetTownStayQueryKey(region, town, stayId);
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getTownStay>>> = ({
+    signal,
+  }) => getTownStay(region, town, stayId, { signal, ...requestOptions });
+
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!(region && town && stayId),
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<typeof getTownStay>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetTownStayQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getTownStay>>
+>;
+export type GetTownStayQueryError = ErrorType<ErrorResponse>;
+
+/**
+ * @summary Get a single curated stay
+ */
+
+export function useGetTownStay<
+  TData = Awaited<ReturnType<typeof getTownStay>>,
+  TError = ErrorType<ErrorResponse>,
+>(
+  region: "snowy_mountains" | "yamanouchi",
+  town:
+    | "jindabyne"
+    | "berridale"
+    | "cooma"
+    | "yudanaka"
+    | "shibu_onsen"
+    | "yomase",
+  stayId: string,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getTownStay>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetTownStayQueryOptions(
+    region,
+    town,
+    stayId,
+    options,
+  );
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * Returns every Eat record from the curated dataset for the given (region, town). Country-specific extras are exposed via the discriminated `country` field on each Eat.
+ * @summary List curated eats for a town
+ */
+export const getGetTownEatsUrl = (
+  region: "snowy_mountains" | "yamanouchi",
+  town:
+    | "jindabyne"
+    | "berridale"
+    | "cooma"
+    | "yudanaka"
+    | "shibu_onsen"
+    | "yomase",
+) => {
+  return `/api/regions/${region}/towns/${town}/eats`;
+};
+
+export const getTownEats = async (
+  region: "snowy_mountains" | "yamanouchi",
+  town:
+    | "jindabyne"
+    | "berridale"
+    | "cooma"
+    | "yudanaka"
+    | "shibu_onsen"
+    | "yomase",
+  options?: RequestInit,
+): Promise<Eat[]> => {
+  return customFetch<Eat[]>(getGetTownEatsUrl(region, town), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getGetTownEatsQueryKey = (
+  region: "snowy_mountains" | "yamanouchi",
+  town:
+    | "jindabyne"
+    | "berridale"
+    | "cooma"
+    | "yudanaka"
+    | "shibu_onsen"
+    | "yomase",
+) => {
+  return [`/api/regions/${region}/towns/${town}/eats`] as const;
+};
+
+export const getGetTownEatsQueryOptions = <
+  TData = Awaited<ReturnType<typeof getTownEats>>,
+  TError = ErrorType<ErrorResponse>,
+>(
+  region: "snowy_mountains" | "yamanouchi",
+  town:
+    | "jindabyne"
+    | "berridale"
+    | "cooma"
+    | "yudanaka"
+    | "shibu_onsen"
+    | "yomase",
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getTownEats>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getGetTownEatsQueryKey(region, town);
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getTownEats>>> = ({
+    signal,
+  }) => getTownEats(region, town, { signal, ...requestOptions });
+
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!(region && town),
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<typeof getTownEats>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetTownEatsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getTownEats>>
+>;
+export type GetTownEatsQueryError = ErrorType<ErrorResponse>;
+
+/**
+ * @summary List curated eats for a town
+ */
+
+export function useGetTownEats<
+  TData = Awaited<ReturnType<typeof getTownEats>>,
+  TError = ErrorType<ErrorResponse>,
+>(
+  region: "snowy_mountains" | "yamanouchi",
+  town:
+    | "jindabyne"
+    | "berridale"
+    | "cooma"
+    | "yudanaka"
+    | "shibu_onsen"
+    | "yomase",
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getTownEats>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetTownEatsQueryOptions(region, town, options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * @summary Get a single curated eat
+ */
+export const getGetTownEatUrl = (
+  region: "snowy_mountains" | "yamanouchi",
+  town:
+    | "jindabyne"
+    | "berridale"
+    | "cooma"
+    | "yudanaka"
+    | "shibu_onsen"
+    | "yomase",
+  eatId: string,
+) => {
+  return `/api/regions/${region}/towns/${town}/eats/${eatId}`;
+};
+
+export const getTownEat = async (
+  region: "snowy_mountains" | "yamanouchi",
+  town:
+    | "jindabyne"
+    | "berridale"
+    | "cooma"
+    | "yudanaka"
+    | "shibu_onsen"
+    | "yomase",
+  eatId: string,
+  options?: RequestInit,
+): Promise<Eat> => {
+  return customFetch<Eat>(getGetTownEatUrl(region, town, eatId), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getGetTownEatQueryKey = (
+  region: "snowy_mountains" | "yamanouchi",
+  town:
+    | "jindabyne"
+    | "berridale"
+    | "cooma"
+    | "yudanaka"
+    | "shibu_onsen"
+    | "yomase",
+  eatId: string,
+) => {
+  return [`/api/regions/${region}/towns/${town}/eats/${eatId}`] as const;
+};
+
+export const getGetTownEatQueryOptions = <
+  TData = Awaited<ReturnType<typeof getTownEat>>,
+  TError = ErrorType<ErrorResponse>,
+>(
+  region: "snowy_mountains" | "yamanouchi",
+  town:
+    | "jindabyne"
+    | "berridale"
+    | "cooma"
+    | "yudanaka"
+    | "shibu_onsen"
+    | "yomase",
+  eatId: string,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getTownEat>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getGetTownEatQueryKey(region, town, eatId);
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getTownEat>>> = ({
+    signal,
+  }) => getTownEat(region, town, eatId, { signal, ...requestOptions });
+
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!(region && town && eatId),
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<typeof getTownEat>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetTownEatQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getTownEat>>
+>;
+export type GetTownEatQueryError = ErrorType<ErrorResponse>;
+
+/**
+ * @summary Get a single curated eat
+ */
+
+export function useGetTownEat<
+  TData = Awaited<ReturnType<typeof getTownEat>>,
+  TError = ErrorType<ErrorResponse>,
+>(
+  region: "snowy_mountains" | "yamanouchi",
+  town:
+    | "jindabyne"
+    | "berridale"
+    | "cooma"
+    | "yudanaka"
+    | "shibu_onsen"
+    | "yomase",
+  eatId: string,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getTownEat>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetTownEatQueryOptions(region, town, eatId, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
     queryKey: QueryKey;
