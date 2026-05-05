@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
-import { BedDouble, MapPin, Star } from "lucide-react";
+import { Bed, BedDouble, MapPin, Star } from "lucide-react";
 import { useState } from "react";
 import { useRegion, useLanguage, LiveBadge } from "@workspace/feelzlike-shell";
 import { useNearbyPlaces } from "@/lib/places";
 import { StayPlatformBar } from "@/components/StayPlatformBar";
+import { EmptyStateCard } from "@/components/EmptyStateCard";
 
 type StayFilter = {
   value: string;
@@ -173,7 +174,15 @@ export function RegionStay() {
       )}
 
       {!query.isLoading && !query.isError && places.length === 0 && (
-        <p className="text-muted-foreground">{t("No stays found in this region.", "この地域に宿泊施設は見つかりませんでした。")}</p>
+        <EmptyStateCard
+          icon={Bed}
+          title={t("Stays launching this week", "宿泊リスト、今週公開")}
+          body={t(
+            `We're curating hand-picked hotels, ryokan and lodges across ${region.name}. In the meantime, the booking-site shortcuts above will get you straight to availability.`,
+            `${region.name}のホテル・旅館・ロッジを厳選中です。上の予約サイトから空室状況を直接確認できます。`,
+          )}
+          eta={t("ETA: Next 7 days", "公開予定：7日以内")}
+        />
       )}
     </div>
   );

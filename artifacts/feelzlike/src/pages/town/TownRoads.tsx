@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 import { useMemo, useState } from "react";
 import { useGetRoadConditions, useGetWebcams } from "@workspace/api-client-react";
-import { AlertTriangle, Camera, Car, ExternalLink, Info, MapPin, Navigation } from "lucide-react";
+import { AlertTriangle, Camera, Car, ExternalLink, MapPin, Navigation, Construction } from "lucide-react";
 import { useRegion, useLanguage, useBaseTown, LiveBadge } from "@workspace/feelzlike-shell";
+import { EmptyStateCard } from "@/components/EmptyStateCard";
 
 function statusClasses(c: string): string {
   switch (c) {
@@ -134,33 +135,23 @@ export function TownRoads() {
       </motion.header>
 
       {!dataAvailable && (
-        <div className="rounded-2xl border border-border bg-white p-6">
-          <div className="flex items-start gap-3">
-            <Info className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-            <div className="min-w-0">
-              <h3 className="font-display font-semibold text-base text-foreground">
-                {t("Live road data coming soon", "道路情報は近日公開")}
-              </h3>
-              <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
-                {t(
-                  `We don't yet pull live road conditions for ${region.name}. For now, please check the official source directly:`,
-                  `${region.name}の道路情報は現在準備中です。公式情報源をご確認ください：`,
-                )}
-              </p>
-              {region.roadsSource && (
-                <a
-                  href={region.roadsSource.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
-                >
-                  {t(region.roadsSource.label, region.roadsSource.labelJa ?? region.roadsSource.label)}
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              )}
-            </div>
-          </div>
-        </div>
+        <EmptyStateCard
+          icon={Construction}
+          title={t("Live road data coming soon", "道路情報は近日公開")}
+          body={t(
+            `We don't yet pull live road conditions for ${region.name}. In the meantime, the official source has the most up-to-date information.`,
+            `${region.name}のライブ道路情報は現在準備中です。それまでは公式情報源で最新情報をご確認ください。`,
+          )}
+          ctaLabel={
+            region.roadsSource
+              ? t(
+                  region.roadsSource.label,
+                  region.roadsSource.labelJa ?? region.roadsSource.label,
+                )
+              : undefined
+          }
+          ctaHref={region.roadsSource?.url}
+        />
       )}
 
       {dataAvailable && query.isLoading && <RoadsSkeleton />}
@@ -232,15 +223,14 @@ export function TownRoads() {
       )}
 
       {dataAvailable && !query.isLoading && query.data && roads.length === 0 && (
-        <div className="rounded-2xl border border-border bg-white p-8 text-center">
-          <Car className="w-8 h-8 text-muted-foreground/40 mx-auto" />
-          <p className="text-sm text-muted-foreground mt-3">
-            {t(
-              `No road advisories matching ${town?.name ?? "this town"} right now.`,
-              `${town ? t(town.name, town.nameJa) : "この町"}に該当する道路情報は現在ありません。`,
-            )}
-          </p>
-        </div>
+        <EmptyStateCard
+          icon={Car}
+          title={t("All clear", "情報なし")}
+          body={t(
+            `No road advisories matching ${town?.name ?? "this town"} right now — that's good news. Conditions can change quickly in winter; refresh before you head out.`,
+            `${town ? t(town.name, town.nameJa) : "この町"}に該当する道路情報は現在ありません — 朗報です。冬季は状況が急変するため、出発前に再度ご確認ください。`,
+          )}
+        />
       )}
 
       {roadCams.length > 0 && (

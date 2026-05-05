@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MapPin, Star, BedDouble, ExternalLink } from "lucide-react";
+import { Bed, MapPin, Star, BedDouble, ExternalLink } from "lucide-react";
 import { useRegion, useLanguage, useBaseTown, LiveBadge } from "@workspace/feelzlike-shell";
 import {
   useNearbyPlaces,
@@ -8,6 +8,7 @@ import {
   type CountryCode,
 } from "@/lib/places";
 import { StayPlatformBar } from "@/components/StayPlatformBar";
+import { EmptyStateCard } from "@/components/EmptyStateCard";
 
 export function TownStay() {
   const { region } = useRegion();
@@ -49,8 +50,10 @@ export function TownStay() {
         <div className="rule mt-6 mb-8" />
       </motion.header>
 
-      {/* Multi-platform booking banner — search the whole town across 6–8 sites */}
-      {town && (
+      {/* Multi-platform booking banner — search the whole town across 6–8 sites.
+          Hidden in the empty state so the EmptyStateCard owns the moment and the
+          platform bar renders once, directly below the card. */}
+      {town && !(places.length === 0 && !query.isLoading && !query.isError) && (
         <div className="mb-8">
           <StayPlatformBar
             variant="banner"
@@ -89,9 +92,31 @@ export function TownStay() {
       )}
 
       {!query.isLoading && !query.isError && places.length === 0 && (
-        <p className="text-muted-foreground">
-          {t("No stays found near this town.", "近隣の宿泊施設は見つかりませんでした。")}
-        </p>
+        <div className="space-y-8">
+          <EmptyStateCard
+            icon={Bed}
+            title={t("Stays launching this week", "宿泊リスト、今週公開")}
+            body={t(
+              `We're curating hand-picked ryokan, lodges and apartments near ${town?.name ?? "this town"}. In the meantime, browse availability on your favourite booking site.`,
+              `${town ? t(town.name, town.nameJa) : "この町"}周辺の旅館・ロッジ・アパートメントを厳選中です。それまでは下記のお気に入りの予約サイトからどうぞ。`,
+            )}
+            eta={t("ETA: Next 7 days", "公開予定：7日以内")}
+          />
+          {town && (
+            <div>
+              <p className="text-center text-[11px] font-bold uppercase tracking-wider text-muted-foreground/70 mb-3">
+                {t("Or search availability across major booking sites", "主要予約サイトで検索")}
+              </p>
+              <StayPlatformBar
+                variant="banner"
+                country={(region.shortTag as CountryCode) ?? "JP"}
+                query={`${town.name}, ${region.name}`}
+                lat={town.lat}
+                lng={town.lng}
+              />
+            </div>
+          )}
+        </div>
       )}
     </div>
   );

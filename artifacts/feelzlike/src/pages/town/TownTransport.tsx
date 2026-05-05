@@ -8,7 +8,6 @@ import {
   Train,
   Car,
   Footprints,
-  Sparkles,
 } from "lucide-react";
 import {
   useRegion,
@@ -22,6 +21,7 @@ import {
   type TransportProvider,
 } from "@/data/transport";
 import { assertProvidersForRegion } from "@/lib/regionGuard";
+import { EmptyStateCard } from "@/components/EmptyStateCard";
 
 /**
  * Generic, region-isolated Transport page.
@@ -80,15 +80,15 @@ export function TownTransport() {
       </motion.header>
 
       {providers.length === 0 ? (
-        <div className="rounded-2xl border border-border bg-white p-8 text-center">
-          <Sparkles className="w-8 h-8 text-muted-foreground/40 mx-auto" />
-          <p className="text-sm text-muted-foreground mt-3">
-            {t(
-              "Transport listings for this region are launching soon.",
-              "この地域の交通情報は近日公開予定です。",
-            )}
-          </p>
-        </div>
+        <EmptyStateCard
+          icon={Bus}
+          title={t("Transport launching soon", "交通情報、近日公開")}
+          body={t(
+            `We're verifying every bus, shuttle and rail option serving ${town?.name ?? region.name} so the listing is correct on day one.`,
+            `${town ? t(town.name, town.nameJa) : region.name}を発着するバス・送迎・電車を一つずつ確認中です。公開時には正確な情報をお届けします。`,
+          )}
+          eta={t("ETA: This sprint", "公開予定：このスプリント")}
+        />
       ) : (
         <div className="grid gap-4 sm:grid-cols-2">
           {providers.map((p, idx) => (

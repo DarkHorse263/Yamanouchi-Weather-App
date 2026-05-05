@@ -1,8 +1,13 @@
 import { motion } from "framer-motion";
-import { AlertCircle, ExternalLink, MapPin, RefreshCw, Star, UtensilsCrossed, Compass } from "lucide-react";
+import { AlertCircle, ExternalLink, MapPin, RefreshCw, Star, Utensils, UtensilsCrossed, Compass } from "lucide-react";
 import { useRegion, useLanguage, useBaseTown, LiveBadge } from "@workspace/feelzlike-shell";
 import { useNearbyPlaces, type NearbyPlace, type PlaceKind } from "@/lib/places";
 import { Button } from "@/components/ui/button";
+import { EmptyStateCard } from "@/components/EmptyStateCard";
+
+// TODO(feelzlike-launch): replace placeholder feedback address with the real
+// inbox before public launch. Grep `FEEDBACK_EMAIL` to find every reference.
+const FEEDBACK_EMAIL = "feedback@feelzlike.com";
 
 interface Props {
   kind: Exclude<PlaceKind, "stay">;
@@ -112,9 +117,28 @@ export function TownPlaces({ kind, title, titleJa, blurb, blurbJa }: Props) {
       )}
 
       {!query.isLoading && !query.isError && places.length === 0 && (
-        <p className="text-muted-foreground">
-          {t("Nothing found near this town yet.", "近隣には何も見つかりませんでした。")}
-        </p>
+        kind === "eat" ? (
+          <EmptyStateCard
+            icon={Utensils}
+            title={t("Eats launching shortly", "飲食リスト、まもなく公開")}
+            body={t(
+              `We're putting together a hand-picked guide to the best izakaya, ramen, cafés and bars in ${town?.name ?? "this town"}. Watch this space.`,
+              `${town ? t(town.name, town.nameJa) : "この町"}のおすすめ居酒屋・ラーメン・カフェ・バーを厳選中。お楽しみに。`,
+            )}
+            eta={t("ETA: Next 14 days", "公開予定：14日以内")}
+            ctaLabel={t("Suggest a spot", "おすすめを送る")}
+            ctaHref={`mailto:${FEEDBACK_EMAIL}?subject=${encodeURIComponent(`Eat suggestion · ${region.name} · ${town?.name ?? ""}`)}`}
+          />
+        ) : (
+          <EmptyStateCard
+            icon={Compass}
+            title={t("Nothing nearby just yet", "近隣にはまだ情報がありません")}
+            body={t(
+              `We couldn't find any attractions, parks or museums near ${town?.name ?? "this town"} on the map right now. Try a wider search or check back soon.`,
+              `${town ? t(town.name, town.nameJa) : "この町"}周辺の観光地・公園・博物館は現在見つかりません。範囲を広げるか、後ほど再度ご確認ください。`,
+            )}
+          />
+        )
       )}
     </div>
   );
