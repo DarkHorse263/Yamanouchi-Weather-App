@@ -10,7 +10,10 @@ import {
   Snowflake,
   Wind,
   Thermometer,
+  Award,
 } from "lucide-react";
+import { detectBestPowderWindow, POWDER_THRESHOLDS_AU, POWDER_THRESHOLDS_DEFAULT, type PowderWindow } from "@/types/weather";
+import { GRADE_STYLES } from "@/components/HourlyForecast";
 import {
   useRegion,
   useLanguage,
@@ -40,6 +43,72 @@ function haversineKm(
 const SNOW_CODES = new Set([71, 73, 75, 77, 85, 86]);
 function clamp(n: number, lo: number, hi: number) {
   return Math.max(lo, Math.min(hi, n));
+}
+
+function formatHourLabel(timeIso: string): string {
+  const h = Number(timeIso.slice(11, 13));
+  if (!Number.isFinite(h)) return "—";
+  const period = h < 12 ? "am" : "pm";
+  const display = h === 0 ? 12 : h > 12 ? h - 12 : h;
+  return `${display}${period}`;
+}
+function nextHourLabel(timeIso: string): string {
+  const h = Number(timeIso.slice(11, 13));
+  if (!Number.isFinite(h)) return "—";
+  const next = (h + 1) % 24;
+  const period = next < 12 ? "am" : "pm";
+  const display = next === 0 ? 12 : next > 12 ? next - 12 : next;
+  return `${display}${period}`;
+}
+
+function PowderSummaryCard({
+  best,
+  t,
+}: {
+  best: {
+    window: PowderWindow;
+    mountainId: string;
+    mountainName: string;
+    mountainNameJa: string;
+    startTimeIso: string;
+    endTimeIso: string;
+  };
+  t: (en: string, ja: string) => string;
+}) {
+  const startLabel = formatHourLabel(best.startTimeIso);
+  const endLabel = nextHourLabel(best.endTimeIso);
+  const style = GRADE_STYLES[best.window.grade];
+  return (
+    <Link
+      href={`/mountain/${best.mountainId}`}
+      className={`mt-6 group relative block rounded-2xl border px-5 py-4 transition-all hover:shadow-md ${style.badge}`}
+      aria-label={t(
+        `Best powder window today: ${best.window.grade.toUpperCase()} ${startLabel}-${endLabel} at ${best.mountainName}`,
+        `本日のベストパウダー: ${best.window.grade.toUpperCase()} ${startLabel}-${endLabel} ${best.mountainNameJa}`,
+      )}
+    >
+      <div className="flex items-center justify-between gap-3 flex-wrap">
+        <div className="flex items-center gap-3">
+          <Award className="w-5 h-5 flex-shrink-0" aria-hidden />
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-wider opacity-70">
+              {style.label} · {t("Best Powder Window today", "本日のベストパウダー")}
+            </p>
+            <p className="font-display font-semibold text-base mt-0.5 tabular-nums">
+              {startLabel}–{endLabel} ·{" "}
+              <span className="font-bold">
+                {t(best.mountainName, best.mountainNameJa)}
+              </span>
+            </p>
+            <p className="text-xs opacity-80 mt-0.5 tabular-nums">
+              {best.window.totalSnow}cm · {best.window.avgWind}km/h · {best.window.hours}h
+            </p>
+          </div>
+        </div>
+        <ArrowUpRight className="w-4 h-4 opacity-60 group-hover:opacity-100 transition-opacity" />
+      </div>
+    </Link>
+  );
 }
 
 interface MiniScore {
@@ -174,6 +243,37 @@ export function RegionOverview() {
 
   const top3 = scored.slice(0, 3);
 
+  // Cross-mountain Powder summary: detect each mountain's best window, then
+  // pick the single highest-quality across the region. Today only — clamp the
+  // hourly to the next 24h before scanning so we surface a "today" call,
+  // not a window that's actually 36h out. AU thresholds when the region is
+  // snowy-mountains; Japow thresholds elsewhere.
+  const bestPowderToday = useMemo(() => {
+    const thresholds = region.id === "snowy-mountains" ? POWDER_THRESHOLDS_AU : POWDER_THRESHOLDS_DEFAULT;
+    let best: { window: PowderWindow; mountainId: string; mountainName: string; mountainNameJa: string; startTimeIso: string; endTimeIso: string } | null = null;
+    for (const m of mountains) {
+      const entry = weatherQ.data?.locations.find(
+        (l: { location: { id: string } }) => l.location.id === m.id,
+      );
+      const hourly = entry?.hourly;
+      if (!hourly || hourly.length === 0) continue;
+      const next24 = hourly.slice(0, 24);
+      const win = detectBestPowderWindow(next24, thresholds);
+      if (!win) continue;
+      if (!best || win.qualityScore > best.window.qualityScore) {
+        best = {
+          window: win,
+          mountainId: m.id,
+          mountainName: m.name,
+          mountainNameJa: m.nameJa ?? m.name,
+          startTimeIso: next24[win.startIdx]?.time ?? "",
+          endTimeIso: next24[win.endIdx - 1]?.time ?? "",
+        };
+      }
+    }
+    return best;
+  }, [mountains, weatherQ.data, region.id]);
+
   return (
     <div className="px-6 md:px-10 py-8 md:py-12 max-w-6xl mx-auto">
       <motion.header
@@ -302,6 +402,15 @@ export function RegionOverview() {
             </div>
           </div>
         </motion.section>
+      )}
+
+      {/* Cross-mountain Powder summary — surfaces the single best window
+          across the region today, with a tap-through to that mountain. */}
+      {bestPowderToday && (
+        <PowderSummaryCard
+          best={bestPowderToday}
+          t={t}
+        />
       )}
 
       {towns.length > 0 && (

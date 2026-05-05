@@ -1,5 +1,5 @@
-import { useMemo } from "react";
-import { motion } from "framer-motion";
+import { useMemo, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Cloud,
   CloudDrizzle,
@@ -12,11 +12,14 @@ import {
   Sun,
   Wind,
   Sparkles,
+  X,
+  Award,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
-  detectPowderWindow,
+  detectPowderWindows,
   type HourlyForecast as HourlyForecastT,
+  type PowderGrade,
   type PowderThresholds,
   type PowderWindow,
 } from "@/types/weather";
@@ -33,7 +36,7 @@ interface Props {
   utcOffsetSeconds: number;
   /** How many hours forward to render. Default 48. */
   hours?: number;
-  /** Powder Window thresholds. Default = Japow (1cm/hr, <20km/h, ≥3h). */
+  /** Powder Window thresholds. Default = Japow (1cm/hr, <20km/h, ≥3h, ≤+2°C). */
   thresholds?: PowderThresholds;
   /** Optional EN/JA translator. If omitted, English-only. */
   t?: Tx;
@@ -76,7 +79,6 @@ function parseLocalAsFakeUtc(timeIso: string): number {
 /**
  * Format the wall-clock hour directly from the ISO string parts so the label
  * is always the resort's local hour regardless of the viewer's browser TZ.
- * (Using `format(parseISO(t), "ha")` would shift by the browser's offset.)
  */
 function formatHourLabel(timeIso: string): string {
   const h = Number(timeIso.slice(11, 13));
@@ -86,17 +88,67 @@ function formatHourLabel(timeIso: string): string {
   return `${display}${period}`;
 }
 
+/** Add 1 hour to an "Hh"-style label for the badge end-marker. */
+function nextHourLabel(timeIso: string): string {
+  const h = Number(timeIso.slice(11, 13));
+  if (!Number.isFinite(h)) return "—";
+  const next = (h + 1) % 24;
+  const period = next < 12 ? "am" : "pm";
+  const display = next === 0 ? 12 : next > 12 ? next - 12 : next;
+  return `${display}${period}`;
+}
+
+// ---------------------------------------------------------------------------
+// Grade styling — exported so PowderCalendar + RegionOverview reuse the same palette
+// ---------------------------------------------------------------------------
+
+export const GRADE_STYLES: Record<
+  PowderGrade,
+  {
+    /** Used for the highlighted hour cell. */
+    cell: string;
+    /** Used for the badge above the strip. */
+    badge: string;
+    /** Tone used in calendar pills. */
+    pill: string;
+    /** Plain label. */
+    label: string;
+    labelJa: string;
+  }
+> = {
+  gold: {
+    cell: "bg-amber-50 border-amber-300/70 ring-1 ring-amber-300/40 text-amber-900",
+    badge: "border-amber-300/70 bg-amber-50 text-amber-900",
+    pill: "bg-amber-100 text-amber-900 border-amber-300",
+    label: "GOLD",
+    labelJa: "ゴールド",
+  },
+  silver: {
+    cell: "bg-slate-100 border-slate-300/70 ring-1 ring-slate-300/40 text-slate-900",
+    badge: "border-slate-300/70 bg-slate-100 text-slate-900",
+    pill: "bg-slate-200 text-slate-900 border-slate-300",
+    label: "SILVER",
+    labelJa: "シルバー",
+  },
+  bronze: {
+    cell: "bg-orange-50 border-orange-300/70 ring-1 ring-orange-300/40 text-orange-900",
+    badge: "border-orange-300/70 bg-orange-50 text-orange-900",
+    pill: "bg-orange-100 text-orange-900 border-orange-300",
+    label: "BRONZE",
+    labelJa: "ブロンズ",
+  },
+};
+
 /**
- * "Next 48 hours" forecast strip with Powder Window detection.
+ * "Next 48 hours" forecast strip with multi-window Powder detection.
  *
  * Source: Open-Meteo hourly via /api/weather/locations/:id (timestamps are
  * naive ISO in the location's local timezone — we use `utcOffsetSeconds`
  * for past/future math and parse the hour digits directly for display).
  *
- * Filters the input to hours from now onward, slices to `hours`, and detects
- * the longest consecutive Powder Window (snowfall ≥ threshold AND wind <
- * threshold for ≥ minDuration hours). Hours inside the window get a sky-blue
- * highlight; the window is summarised in a badge above the strip.
+ * Renders ALL qualifying powder windows in the next `hours`, each tinted
+ * by GOLD/SILVER/BRONZE quality. Best (gold) windows get a subtle shimmer.
+ * Tap a badge to open a detail panel.
  */
 export function HourlyForecast({
   hourly,
@@ -107,6 +159,7 @@ export function HourlyForecast({
   sectionNumber = "04",
 }: Props) {
   const tx: Tx = t ?? ((en) => en);
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   const future = useMemo(() => {
     // "Now" projected into the resort's local wall clock, expressed as
@@ -122,10 +175,24 @@ export function HourlyForecast({
       .slice(0, hours);
   }, [hourly, hours, utcOffsetSeconds]);
 
-  const powder = useMemo(
-    () => detectPowderWindow(future, thresholds),
+  const windows = useMemo(
+    () => detectPowderWindows(future, thresholds),
     [future, thresholds],
   );
+
+  /**
+   * Lookup map: hour-index → (window, gradeStyle) so each cell knows which
+   * window it belongs to. Built once per render for O(1) lookup in the map.
+   */
+  const cellWindowMap = useMemo(() => {
+    const m = new Map<number, { win: PowderWindow; idx: number }>();
+    windows.forEach((win, idx) => {
+      for (let i = win.startIdx; i < win.endIdx; i++) {
+        m.set(i, { win, idx });
+      }
+    });
+    return m;
+  }, [windows]);
 
   if (future.length === 0) return null;
 
@@ -137,7 +204,7 @@ export function HourlyForecast({
       className="glass rounded-3xl p-5 md:p-8"
       aria-label={tx("Next 48 hours", "今後48時間")}
     >
-      <header className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between mb-5">
+      <header className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between mb-5">
         <div>
           <p className="byline text-muted-foreground">
             {sectionNumber} · {tx("Hour by hour", "時間別")}
@@ -147,8 +214,34 @@ export function HourlyForecast({
             {tx("Next 48 hours", "今後48時間")}
           </h2>
         </div>
-        {powder && <PowderBadge window={powder} hours={future} t={tx} />}
+        {windows.length > 0 && (
+          <div className="flex flex-wrap gap-2 md:justify-end">
+            {windows.map((win, idx) => (
+              <PowderBadge
+                key={`${win.startIdx}-${win.endIdx}`}
+                window={win}
+                hours={future}
+                t={tx}
+                onClick={() => setOpenIdx(idx)}
+                isExpanded={openIdx === idx}
+              />
+            ))}
+          </div>
+        )}
       </header>
+
+      {/* Detail card for the currently-open window (if any) */}
+      <AnimatePresence>
+        {openIdx !== null && windows[openIdx] && (
+          <PowderDetail
+            window={windows[openIdx]}
+            hours={future}
+            t={tx}
+            onClose={() => setOpenIdx(null)}
+            thresholds={thresholds}
+          />
+        )}
+      </AnimatePresence>
 
       {/* Horizontal scroll strip — native scroll-snap for mobile. Made
           keyboard-focusable so users can scroll with arrow keys. */}
@@ -162,20 +255,19 @@ export function HourlyForecast({
         )}
       >
         {future.map((h, i) => {
-          const inWindow =
-            !!powder && i >= powder.startIdx && i < powder.endIdx;
+          const cellWin = cellWindowMap.get(i);
           return (
             <HourCell
               key={`${h.time}-${i}`}
               hour={h}
-              inPowderWindow={inWindow}
+              powderGrade={cellWin?.win.grade ?? null}
               isFirst={i === 0}
             />
           );
         })}
       </div>
 
-      {!powder && future.some((h) => (h.snowfall ?? 0) > 0) && (
+      {windows.length === 0 && future.some((h) => (h.snowfall ?? 0) > 0) && (
         <p className="mt-3 text-[11px] text-muted-foreground/80 text-center">
           {tx(
             "Snow forecast — but no sustained Powder Window in the next 48h.",
@@ -189,28 +281,34 @@ export function HourlyForecast({
 
 function HourCell({
   hour,
-  inPowderWindow,
+  powderGrade,
   isFirst,
 }: {
   hour: HourlyForecastT;
-  inPowderWindow: boolean;
+  powderGrade: PowderGrade | null;
   isFirst: boolean;
 }) {
   const hourLabel = formatHourLabel(hour.time);
   const snow = Math.round((hour.snowfall ?? 0) * 10) / 10;
   const wind = Math.round(hour.windSpeed ?? 0);
   const temp = Math.round(hour.temperature ?? 0);
+  const cellTone = powderGrade ? GRADE_STYLES[powderGrade].cell : "bg-white/60 border-border";
+  const iconTone = powderGrade === "gold"
+    ? "text-amber-700"
+    : powderGrade === "silver"
+      ? "text-slate-700"
+      : powderGrade === "bronze"
+        ? "text-orange-700"
+        : "text-foreground/80";
 
   return (
     <div
       role="listitem"
       className={cn(
         "snap-start shrink-0 w-[58px] md:w-[64px] flex flex-col items-center gap-1 rounded-xl border px-1.5 py-2.5 transition-colors",
-        inPowderWindow
-          ? "bg-sky-50 border-sky-300/70 ring-1 ring-sky-300/40"
-          : "bg-white/60 border-border",
+        cellTone,
       )}
-      title={`${hourLabel} · ${temp}°C · ${snow > 0 ? `${snow}cm snow · ` : ""}${wind} km/h wind`}
+      title={`${hourLabel} · ${temp}°C · ${snow > 0 ? `${snow}cm snow · ` : ""}${wind} km/h wind${powderGrade ? ` · ${powderGrade.toUpperCase()} powder window` : ""}`}
     >
       <p
         className={cn(
@@ -220,7 +318,7 @@ function HourCell({
       >
         {isFirst ? "Now" : hourLabel}
       </p>
-      <div className={cn(inPowderWindow ? "text-sky-700" : "text-foreground/80")}>
+      <div className={iconTone}>
         <WeatherIcon code={hour.weatherCode} className="w-5 h-5" />
       </div>
       <p
@@ -230,7 +328,7 @@ function HourCell({
         {temp}°
       </p>
       {snow > 0 ? (
-        <div className="flex items-center gap-0.5 text-[10px] font-semibold text-sky-700 tabular-nums leading-none">
+        <div className={cn("flex items-center gap-0.5 text-[10px] font-semibold tabular-nums leading-none", iconTone)}>
           <Snowflake className="w-2.5 h-2.5" aria-hidden />
           {snow}
         </div>
@@ -245,50 +343,168 @@ function HourCell({
   );
 }
 
-/** Add 1 hour to an "Hh"-style label for the badge end-marker. */
-function nextHourLabel(timeIso: string): string {
-  const h = Number(timeIso.slice(11, 13));
-  if (!Number.isFinite(h)) return "—";
-  const next = (h + 1) % 24;
-  const period = next < 12 ? "am" : "pm";
-  const display = next === 0 ? 12 : next > 12 ? next - 12 : next;
-  return `${display}${period}`;
-}
-
+/**
+ * Compact powder window badge that appears above the hourly strip. Multiple
+ * badges may stack — one per non-overlapping window. Click to open the
+ * detail card. GOLD badges get a subtle shimmer overlay (Framer Motion).
+ */
 function PowderBadge({
   window,
   hours,
   t,
+  onClick,
+  isExpanded,
 }: {
   window: PowderWindow;
   hours: HourlyForecastT[];
   t: Tx;
+  onClick: () => void;
+  isExpanded: boolean;
 }) {
   const startTime = hours[window.startIdx]?.time;
   const endTime = hours[window.endIdx - 1]?.time;
   const startLabel = startTime ? formatHourLabel(startTime) : "";
-  // End label = the START of the hour AFTER the last in-window hour, so a
-  // 9am→11am inclusive window labels as "9am–12pm".
   const endLabel = endTime ? nextHourLabel(endTime) : "";
+  const style = GRADE_STYLES[window.grade];
 
   return (
-    <div
-      className="inline-flex items-center gap-2 rounded-2xl border border-sky-300/60 bg-sky-50 px-3 py-2 text-sky-900"
-      role="status"
-      aria-label={t("Powder Window detected", "パウダーウィンドウあり")}
+    <button
+      type="button"
+      onClick={onClick}
+      aria-expanded={isExpanded}
+      aria-label={t(
+        `${window.grade.toUpperCase()} Powder Window: ${startLabel}-${endLabel}, ${window.totalSnow}cm forecast`,
+        `${style.labelJa}パウダーウィンドウ: ${startLabel}-${endLabel}, ${window.totalSnow}cm 予報`,
+      )}
+      className={cn(
+        "relative inline-flex items-center gap-2 rounded-2xl border px-3 py-2 text-left overflow-hidden transition-all hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40",
+        style.badge,
+        isExpanded && "ring-2 ring-primary/40",
+      )}
     >
-      <Sparkles className="w-4 h-4 text-sky-600 flex-shrink-0" aria-hidden />
+      {window.grade === "gold" ? (
+        <Award className="w-4 h-4 text-amber-700 flex-shrink-0" aria-hidden />
+      ) : (
+        <Sparkles className="w-4 h-4 flex-shrink-0 opacity-80" aria-hidden />
+      )}
       <div className="leading-tight">
-        <p className="text-[10px] font-bold uppercase tracking-wider text-sky-600">
-          {t("Powder Window", "パウダーウィンドウ")}
+        <p className="text-[10px] font-bold uppercase tracking-wider opacity-80">
+          {style.label} · {t("Powder Window", "パウダーウィンドウ")}
         </p>
-        <p className="text-xs font-semibold text-sky-900 tabular-nums">
+        <p className="text-xs font-semibold tabular-nums">
           {startLabel}–{endLabel} ·{" "}
           <span className="font-bold">
-            {window.totalSnow}cm {t("forecast", "予報")}
+            {window.totalSnow}cm · {window.avgWind}km/h
           </span>
         </p>
       </div>
+      {/* GOLD shimmer overlay — diagonal sheen looping every 2.4s */}
+      {window.grade === "gold" && (
+        <motion.span
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(110deg, transparent 35%, rgba(255,255,255,0.55) 50%, transparent 65%)",
+            backgroundSize: "250% 100%",
+          }}
+          animate={{ backgroundPosition: ["200% 0%", "-100% 0%"] }}
+          transition={{ duration: 2.4, repeat: Infinity, ease: "linear" }}
+        />
+      )}
+    </button>
+  );
+}
+
+/**
+ * Expandable detail card explaining the metrics behind a powder window.
+ * Mounted once per click; closes on the X button or when the user clicks
+ * a different badge.
+ */
+function PowderDetail({
+  window,
+  hours,
+  t,
+  onClose,
+  thresholds,
+}: {
+  window: PowderWindow;
+  hours: HourlyForecastT[];
+  t: Tx;
+  onClose: () => void;
+  thresholds?: PowderThresholds;
+}) {
+  const startTime = hours[window.startIdx]?.time;
+  const endTime = hours[window.endIdx - 1]?.time;
+  const startLabel = startTime ? formatHourLabel(startTime) : "";
+  const endLabel = endTime ? nextHourLabel(endTime) : "";
+  const style = GRADE_STYLES[window.grade];
+  const isAU = thresholds?.minSnowfall === 0.5;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, height: 0 }}
+      animate={{ opacity: 1, height: "auto" }}
+      exit={{ opacity: 0, height: 0 }}
+      transition={{ duration: 0.2 }}
+      className={cn(
+        "mb-4 rounded-2xl border px-4 py-3 relative",
+        style.badge,
+      )}
+      role="region"
+      aria-label={t("Powder Window detail", "パウダーウィンドウ詳細")}
+    >
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label={t("Close", "閉じる")}
+        className="absolute top-2 right-2 p-1 rounded-md hover:bg-black/5"
+      >
+        <X className="w-3.5 h-3.5" aria-hidden />
+      </button>
+      <p className="text-[10px] font-bold uppercase tracking-wider opacity-70">
+        {style.label} · {t("Powder Window", "パウダーウィンドウ")}
+      </p>
+      <p className="font-display text-base font-semibold mt-0.5">
+        {startLabel}–{endLabel}
+      </p>
+      <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-3 text-[11px]">
+        <DetailStat
+          label={t("Total snow", "総降雪")}
+          value={`${window.totalSnow}cm`}
+        />
+        <DetailStat
+          label={t("Duration", "時間")}
+          value={`${window.hours}h`}
+        />
+        <DetailStat
+          label={t("Avg wind", "平均風速")}
+          value={`${window.avgWind}km/h`}
+        />
+        <DetailStat
+          label={t("Quality", "品質")}
+          value={`${window.qualityScore}/100`}
+        />
+      </div>
+      <p className="mt-3 text-[11px] opacity-80 leading-relaxed">
+        {t(
+          isAU
+            ? "AU thresholds: snowfall ≥0.5cm/hr, wind <25km/h, ≥3 consecutive hours, ≤+2°C."
+            : "Thresholds: snowfall ≥1cm/hr, wind <20km/h, ≥3 consecutive hours, ≤+2°C.",
+          isAU
+            ? "AU基準: 降雪0.5cm/時以上、風速25km/時未満、3時間以上連続、+2℃以下。"
+            : "基準: 降雪1cm/時以上、風速20km/時未満、3時間以上連続、+2℃以下。",
+        )}
+      </p>
+    </motion.div>
+  );
+}
+
+function DetailStat({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <p className="opacity-60 uppercase tracking-wider font-bold">{label}</p>
+      <p className="font-display text-sm font-semibold mt-0.5 tabular-nums">{value}</p>
     </div>
   );
 }

@@ -42,6 +42,16 @@ export interface MountainLink {
   lng?: number;
   /** Optional parent mountain id when this entry is a sub-area of a larger ski area. */
   parentId?: string;
+  /** True if the mountain has substantial beginner terrain + green runs from base. */
+  beginner_friendly?: boolean;
+  /** True if the mountain is steep / mostly black-diamond / not for newcomers. */
+  expert_only?: boolean;
+  /** True if the mountain runs ski school + magic carpet + crèche. */
+  kids_lessons?: boolean;
+  /** True if the mountain operates a terrain park (jumps / rails / pipe). */
+  terrain_park?: boolean;
+  /** True if the mountain has lift-served side-country / gated backcountry. */
+  backcountry_access?: boolean;
 }
 
 /** Scope a NavItem belongs to. Determines which sidebar section renders it. */

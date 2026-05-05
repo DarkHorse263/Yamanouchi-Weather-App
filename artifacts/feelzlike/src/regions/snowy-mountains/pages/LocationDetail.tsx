@@ -69,6 +69,9 @@ function formatAgo(iso: string | undefined | null, now: number): string {
 import { cn } from "../lib/utils";
 import { skyGradient } from "../lib/mountain-imagery";
 import { HourlyForecast } from "@/components/HourlyForecast";
+import { PowderCalendar } from "@/components/PowderCalendar";
+import { LiftWindHoldPanel } from "@/components/LiftWindHoldPanel";
+import { PowderFactorBadge } from "@/components/PowderFactorBadge";
 import { POWDER_THRESHOLDS_AU } from "@/types/weather";
 
 type LocationId = "thredbo" | "perisher" | "charlottes-pass" | "selwyn" | "jindabyne";
@@ -387,6 +390,14 @@ export default function LocationDetail() {
           <ForecastChart data={hourly} metric={activeChartMetric} />
         </motion.div>
 
+        {/* Backward-looking snow quality snapshot — pairs with the
+            forward-looking Powder Window strip immediately below. */}
+        <PowderFactorBadge
+          hourly={hourly}
+          t={(en) => en}
+          sectionNumber="04a"
+        />
+
         {/* Hour-by-hour next 48h with Powder Window detection.
             AU thresholds are relaxed (0.5cm/hr, <25km/h) — Australian
             snowfall rarely hits Japow benchmarks. */}
@@ -395,6 +406,21 @@ export default function LocationDetail() {
           utcOffsetSeconds={(weatherData as any).utcOffsetSeconds ?? 0}
           thresholds={POWDER_THRESHOLDS_AU}
           sectionNumber="04b"
+        />
+
+        {/* 7-day Powder Calendar — glanceable trip-planner overview */}
+        <PowderCalendar
+          hourly={hourly}
+          thresholds={POWDER_THRESHOLDS_AU}
+          sectionNumber="04c"
+        />
+
+        {/* Wind-hold prediction — only on AU mountains we have lift seed data for */}
+        <LiftWindHoldPanel
+          mountainId={locationId}
+          resortElevationM={location?.elevation ?? 1500}
+          hourly={hourly as any}
+          sectionNumber="04d"
         />
 
         {/* Snow-forecast-style dense 6-day mountain strip */}

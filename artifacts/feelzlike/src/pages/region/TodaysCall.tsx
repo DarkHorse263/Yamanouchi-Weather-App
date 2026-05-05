@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   ArrowUpRight,
   Snowflake,
@@ -12,6 +12,7 @@ import {
   ExternalLink,
   Trophy,
   TrendingUp,
+  UserCog,
 } from "lucide-react";
 import {
   useRegion,
@@ -22,7 +23,15 @@ import {
 } from "@workspace/feelzlike-shell";
 import { useGetWeather } from "@workspace/api-client-react";
 
-import { clamp, scoreMountain, type MountainScore } from "@/lib/mountainScore";
+import { clamp, type MountainScore } from "@/lib/mountainScore";
+import {
+  scoreMountainPersonalised,
+  buildWhyCopy,
+  type PersonalisedMountainScore,
+} from "@/lib/personalisedScore";
+import { useProfile } from "@/hooks/useProfile";
+import { ProfileSheet } from "@/components/ProfileSheet";
+import type { MountainTags } from "@/types/profile";
 
 /* ------------------------------------------------------------------ */
 /*  Row shape (page-local: weather + score per mountain)              */
@@ -49,7 +58,10 @@ interface MountainRow {
   } | null;
   lat?: number;
   lng?: number;
-  score: MountainScore;
+  /** PersonalisedMountainScore extends MountainScore — carries the same
+   * total/tone/headline fields plus baseTotal + modifiers. Existing reads
+   * of `.total`, `.tone`, `.headline`, `.headlineJa` all keep working. */
+  score: PersonalisedMountainScore;
 }
 
 /* ------------------------------------------------------------------ */
@@ -82,13 +94,41 @@ function estimateMinutes(km: number): number {
 
 export function TodaysCall() {
   const { region } = useRegion();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { town } = useBaseTown();
   const { season } = useSeason();
   const weatherQ = useGetWeather({ region: region.id });
 
+  // Sprint 4.1 — personalisation state
+  const { profile, hasOnboarded, isLoaded } = useProfile();
+  /** When false, the matrix scores all mountains with `personalised=false`
+   * so users can A/B compare against the raw weather-only ranking. */
+  const [personalised, setPersonalised] = useState(true);
+  const [sheetMode, setSheetMode] = useState<"onboarding" | "edit" | null>(null);
+  /** Once the user has interacted with onboarding in this tab session
+   * (Skip / Save / closed via X), suppress the auto-open until next page
+   * load. Belt-and-braces against re-open loops if hasOnboarded stays
+   * stale for a render. */
+  const [dismissedThisSession, setDismissedThisSession] = useState(false);
+
+  // Auto-open onboarding sheet on first /today visit. Now that useProfile
+  // is a shared store, hasOnboarded propagates synchronously after Save —
+  // but we keep the session guard for safety against future refactors.
+  useEffect(() => {
+    if (isLoaded && !hasOnboarded && !dismissedThisSession && sheetMode === null) {
+      setSheetMode("onboarding");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoaded, hasOnboarded, dismissedThisSession]);
+
   const rows: MountainRow[] = useMemo(() => {
     const mountains = region.mountains ?? [];
+    // When the toggle is off OR onboarding hasn't been completed, run the
+    // scorer with an empty-priorities profile so all modifier branches
+    // short-circuit — i.e. behaviourally identical to the base scoreMountain.
+    const effectiveProfile = personalised
+      ? profile
+      : { ...profile, priorities: [], skill_level: "intermediate" as const, risk_tolerance: "medium" as const };
     return mountains
       .map<MountainRow>((m) => {
         const entry = weatherQ.data?.locations.find(
@@ -108,6 +148,13 @@ export function TodaysCall() {
                 (c as { freezingLevel?: number | null }).freezingLevel ?? null,
             }
           : null;
+        const tags: MountainTags = {
+          beginner_friendly: m.beginner_friendly,
+          expert_only: m.expert_only,
+          kids_lessons: m.kids_lessons,
+          terrain_park: m.terrain_park,
+          backcountry_access: m.backcountry_access,
+        };
         return {
           id: m.id,
           name: m.name,
@@ -121,11 +168,11 @@ export function TodaysCall() {
           // Prefer config coords, fall back to weather location
           lat: m.lat ?? entry?.location.latitude,
           lng: m.lng ?? entry?.location.longitude,
-          score: scoreMountain(w, season),
+          score: scoreMountainPersonalised(w, season, tags, effectiveProfile),
         };
       })
       .sort((a, b) => b.score.total - a.score.total);
-  }, [region.mountains, weatherQ.data, season]);
+  }, [region.mountains, weatherQ.data, season, profile, personalised]);
 
   const winner = rows[0];
 
@@ -163,6 +210,12 @@ export function TodaysCall() {
             </p>
             <h1 className="font-display font-semibold text-4xl md:text-5xl tracking-tight text-foreground mt-2">
               {t("Today's call", "今日の判断")}
+              {personalised && hasOnboarded && (
+                <span className="ml-3 align-middle inline-flex items-center gap-1.5 rounded-full bg-primary/10 text-primary border border-primary/20 px-2.5 py-1 text-xs font-medium font-sans tracking-normal">
+                  <Sparkles className="w-3 h-3" />
+                  {t("personalised for you", "あなた仕様")}
+                </span>
+              )}
             </h1>
             <p className="text-muted-foreground mt-3 max-w-2xl">
               {t(
@@ -170,11 +223,49 @@ export function TodaysCall() {
                 `${region.name}の全スキー場をライブ気象（積雪・風・気温・視界）でスコア化。${town?.name ? `${t(town.name, town.nameJa)}からの所要時間付き。` : ""}高得点ほど好条件です。`,
               )}
             </p>
+            {/* Personalisation affordances: edit profile + show non-personalised toggle */}
+            <div className="mt-4 flex items-center gap-4 flex-wrap">
+              <button
+                type="button"
+                onClick={() => setSheetMode("edit")}
+                className="inline-flex items-center gap-1.5 rounded-md border border-border bg-white px-3 py-1.5 text-xs font-medium text-foreground hover:border-foreground/30 transition-colors"
+              >
+                <UserCog className="w-3.5 h-3.5" />
+                {hasOnboarded
+                  ? t("Edit profile", "プロフィール編集")
+                  : t("Personalise", "パーソナライズ")}
+              </button>
+              {hasOnboarded && (
+                <label className="inline-flex items-center gap-2 text-xs text-muted-foreground cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={!personalised}
+                    onChange={(e) => setPersonalised(!e.target.checked)}
+                    className="w-3.5 h-3.5 rounded border-border accent-primary"
+                  />
+                  {t("Show non-personalised", "汎用ランキングを表示")}
+                </label>
+              )}
+            </div>
           </div>
           <LiveBadge label={weatherQ.isFetching ? t("Loading", "読込中") : t("Live", "ライブ")} />
         </div>
         <div className="rule mt-6 mb-8" />
       </motion.header>
+
+      {/* Sprint 4.1 — UserProfile sheet (onboarding + edit modes share one component) */}
+      <ProfileSheet
+        open={sheetMode !== null}
+        onOpenChange={(open) => {
+          if (!open) {
+            // Mark this session as dismissed regardless of mode — prevents
+            // the auto-open effect from re-firing if hasOnboarded is briefly stale.
+            if (sheetMode === "onboarding") setDismissedThisSession(true);
+            setSheetMode(null);
+          }
+        }}
+        mode={sheetMode ?? "edit"}
+      />
 
       {weatherQ.isError && (
         <div className="rounded-2xl border border-border bg-white p-6">
@@ -273,6 +364,8 @@ export function TodaysCall() {
           town={town}
           season={season}
           t={t}
+          language={language}
+          showWhy={personalised && hasOnboarded}
         />
       )}
 
@@ -316,12 +409,17 @@ function ComparisonMatrix({
   town,
   season,
   t,
+  language,
+  showWhy,
 }: {
   rows: MountainRow[];
   leaders: { snow: number; wind: number; temp: number; cloud: number };
   town: { name: string; nameJa?: string; lat: number; lng: number } | null | undefined;
   season: "winter" | "green";
   t: (en: string, ja?: string) => string;
+  language: "en" | "ja";
+  /** When true, render the per-row "Why this ranks" copy under each name. */
+  showWhy: boolean;
 }) {
   return (
     <div className="rounded-2xl border border-border bg-white overflow-hidden">
@@ -416,6 +514,19 @@ function ComparisonMatrix({
                         compact
                       />
                     </Link>
+                    {/* Sprint 4.1 — "Why this ranks here for you" line */}
+                    {showWhy && (() => {
+                      const why = buildWhyCopy(row.score, language);
+                      if (!why) return null;
+                      return (
+                        <p className="mt-1 ml-7 text-xs text-primary/70 inline-flex items-center gap-1">
+                          <Sparkles className="w-3 h-3 shrink-0" />
+                          {idx === 0
+                            ? t(`Why #1 for you: ${why}`, `あなた向け1位の理由: ${why}`)
+                            : t(`Why for you: ${why}`, `あなた向けの理由: ${why}`)}
+                        </p>
+                      );
+                    })()}
                   </td>
                   <td className="text-right px-3 py-3">
                     <span
@@ -536,6 +647,17 @@ function ComparisonMatrix({
                       </span>
                     )}
                   </div>
+                  {/* Sprint 4.1 — mobile "why this ranks" copy */}
+                  {showWhy && (() => {
+                    const why = buildWhyCopy(row.score, language);
+                    if (!why) return null;
+                    return (
+                      <p className="mt-1 text-xs text-primary/70 inline-flex items-center gap-1">
+                        <Sparkles className="w-3 h-3 shrink-0" />
+                        {why}
+                      </p>
+                    );
+                  })()}
                 </div>
               </div>
             </Link>

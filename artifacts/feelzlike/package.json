@@ -11,7 +11,11 @@
     "data:smoke": "tsx scripts/curated-smoke.mts",
     "test:affiliate": "tsx src/lib/__tests__/affiliateLinks.test.ts",
     "test:openNow": "tsx src/lib/__tests__/openNow.test.ts",
-    "test:reservation": "tsx src/lib/__tests__/reservationLinks.test.ts"
+    "test:reservation": "tsx src/lib/__tests__/reservationLinks.test.ts",
+    "test:score": "tsx --test src/lib/__tests__/mountainScore.test.ts",
+    "test:windHold": "tsx --test src/lib/__tests__/windHoldPrediction.test.ts",
+    "test:powderFactor": "tsx --test src/lib/__tests__/powderFactor.test.ts",
+    "test:all": "tsx --test src/lib/__tests__/mountainScore.test.ts src/lib/__tests__/windHoldPrediction.test.ts src/lib/__tests__/powderFactor.test.ts"
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.10.0",

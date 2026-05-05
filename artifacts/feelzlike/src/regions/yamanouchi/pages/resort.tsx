@@ -29,6 +29,10 @@ import {
 import { motion } from "framer-motion";
 import { useLanguage, useRegion } from "@workspace/feelzlike-shell";
 import { HourlyForecast } from "@/components/HourlyForecast";
+import { PowderCalendar } from "@/components/PowderCalendar";
+import { MountainWebcams } from "@/components/MountainWebcams";
+import { LiftWindHoldPanel } from "@/components/LiftWindHoldPanel";
+import { PowderFactorBadge } from "@/components/PowderFactorBadge";
 
 type WeatherId = Parameters<typeof useGetLocationWeather>[0];
 
@@ -222,11 +226,32 @@ export default function ResortDetail() {
         />
         <LiveConditions stats={stats} />
         {hourly && hourly.length > 0 && (
+          <PowderFactorBadge hourly={hourly} t={t} sectionNumber="03b" />
+        )}
+        {hourly && hourly.length > 0 && (
           <HourlyForecast
             hourly={hourly}
             utcOffsetSeconds={(data as any).utcOffsetSeconds ?? 0}
             t={t}
             sectionNumber="04"
+          />
+        )}
+        {hourly && hourly.length > 0 && (
+          <PowderCalendar hourly={hourly} t={t} sectionNumber="05" />
+        )}
+        <MountainWebcams
+          mountainId={id}
+          sectionNumber="06"
+          t={t}
+          fallbackPageUrl={profile.webcamUrl}
+        />
+        {hourly && hourly.length > 0 && (
+          <LiftWindHoldPanel
+            mountainId={id}
+            resortElevationM={location.elevation}
+            hourly={hourly as any}
+            sectionNumber="07"
+            t={t}
           />
         )}
         {daily && daily.length > 0 && (
