@@ -3,3 +3,4 @@ export * from "./dining";
 export * from "./attractions";
 export * from "./users";
 export * from "./subscriptions";
+export * from "./alerts";

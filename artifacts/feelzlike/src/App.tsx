@@ -7,6 +7,9 @@ import { RegionLayout } from "@/layouts/RegionLayout";
 import { ConsentProvider } from "@/lib/consent";
 import { ConsentBanner } from "@/components/ConsentBanner";
 import { SentryTestButton } from "@/components/SentryTestButton";
+import AlertsVerify from "@/pages/alerts/Verify";
+import AlertsManage from "@/pages/alerts/Manage";
+import AlertsUnsubscribed from "@/pages/alerts/Unsubscribed";
 
 const queryClient = new QueryClient();
 
@@ -14,6 +17,11 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={RegionPicker} />
+      {/* Top-level alert pages — must come BEFORE the /:region catch-all so
+          tokenised email links don't get parsed as a region. */}
+      <Route path="/alerts/verify" component={AlertsVerify} />
+      <Route path="/alerts/manage" component={AlertsManage} />
+      <Route path="/alerts/unsubscribed" component={AlertsUnsubscribed} />
       <Route path="/:region/*?">
         <RegionLayout />
       </Route>

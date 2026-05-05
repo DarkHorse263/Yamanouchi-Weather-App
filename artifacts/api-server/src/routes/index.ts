@@ -13,6 +13,8 @@ import liftsRouter from "./lifts";
 import radarRouter from "./radar";
 import regionsRouter from "./regions";
 import sentryTestRouter from "./sentry-test";
+import alertsSubscriptionsRouter from "./alerts-subscriptions";
+import alertsPushRouter from "./alerts-push";
 
 const router: IRouter = Router();
 
@@ -30,5 +32,7 @@ router.use(roadsRouter);
 router.use(liftsRouter);
 router.use(radarRouter);
 router.use(regionsRouter);
+router.use(alertsSubscriptionsRouter);
+router.use(alertsPushRouter);
 
 export default router;

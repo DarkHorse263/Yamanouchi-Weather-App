@@ -149,6 +149,148 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
 
+  /alerts/subscribe:
+    post:
+      operationId: subscribeToAlerts
+      tags: [alerts]
+      summary: Subscribe to powder alerts
+      description: Creates (or updates) a powder-alert subscription for the given email and sends a verification email. Idempotent — re-submitting with the same email updates preferences.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubscribeRequest"
+      responses:
+        "200":
+          description: Subscription accepted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubscribeResponse"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /alerts/verify:
+    get:
+      operationId: verifyAlertSubscription
+      tags: [alerts]
+      summary: Confirm an email subscription via the link in the verification email
+      parameters:
+        - name: token
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Verified
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VerifyResponse"
+        "400":
+          description: Invalid or expired token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Subscriber not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /alerts/manage:
+    get:
+      operationId: getAlertPreferences
+      tags: [alerts]
+      summary: Load subscriber preferences via management token
+      parameters:
+        - name: token
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Preferences
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ManageResponse"
+        "400":
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    put:
+      operationId: updateAlertPreferences
+      tags: [alerts]
+      summary: Update subscriber preferences via management token
+      parameters:
+        - name: token
+          in: query
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePreferencesBody"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ManageResponse"
+        "400":
+          description: Invalid input or token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /alerts/unsubscribe:
+    post:
+      operationId: unsubscribeFromAlerts
+      tags: [alerts]
+      summary: One-click unsubscribe via tokenised link
+      parameters:
+        - name: token
+          in: query
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnsubscribeBody"
+      responses:
+        "200":
+          description: Unsubscribed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericOkResponse"
+        "400":
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
   /accommodation:
     get:
       operationId: getAccommodation
@@ -1265,6 +1407,170 @@ components:
         - region
         - status
         - description
+
+    SubscribeRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        regions:
+          type: array
+          items:
+            type: string
+          minItems: 1
+        mountains:
+          type: array
+          items:
+            type: string
+        snowfallThresholdCm:
+          type: integer
+          minimum: 5
+          maximum: 50
+        horizonHours:
+          type: integer
+          enum: [24, 48, 72]
+        delivery:
+          type: string
+          enum: [email, push, both]
+        timezone:
+          type: string
+        consent:
+          type: boolean
+          description: Must be true. Plain-English consent that we'll only email when the threshold is met and unsubscribe is one-click.
+      required:
+        - email
+        - regions
+        - consent
+
+    SubscribeResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        status:
+          type: string
+          enum: [verification_sent, already_verified]
+        message:
+          type: string
+        emailDelivered:
+          type: boolean
+        devVerifyUrl:
+          type: ["string", "null"]
+          description: Present only in development when no email provider is configured. Lets the developer click the verification link without an inbox.
+      required:
+        - ok
+        - status
+        - message
+
+    VerifyResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        email:
+          type: string
+        manageToken:
+          type: string
+        manageUrl:
+          type: string
+      required:
+        - ok
+        - email
+        - manageToken
+        - manageUrl
+
+    SubscriberPreferences:
+      type: object
+      properties:
+        email:
+          type: string
+        regions:
+          type: array
+          items:
+            type: string
+        mountains:
+          type: array
+          items:
+            type: string
+        snowfallThresholdCm:
+          type: integer
+        horizonHours:
+          type: integer
+        delivery:
+          type: string
+          enum: [email, push, both]
+        timezone:
+          type: string
+        verified:
+          type: boolean
+        unsubscribed:
+          type: boolean
+      required:
+        - email
+        - regions
+        - mountains
+        - snowfallThresholdCm
+        - horizonHours
+        - delivery
+        - timezone
+        - verified
+        - unsubscribed
+
+    ManageResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        subscriber:
+          $ref: "#/components/schemas/SubscriberPreferences"
+      required:
+        - ok
+        - subscriber
+
+    UpdatePreferencesBody:
+      type: object
+      properties:
+        regions:
+          type: array
+          items:
+            type: string
+          minItems: 1
+        mountains:
+          type: array
+          items:
+            type: string
+        snowfallThresholdCm:
+          type: integer
+          minimum: 5
+          maximum: 50
+        horizonHours:
+          type: integer
+          enum: [24, 48, 72]
+        delivery:
+          type: string
+          enum: [email, push, both]
+        timezone:
+          type: string
+      required:
+        - regions
+
+    UnsubscribeBody:
+      type: object
+      properties:
+        reason:
+          type: ["string", "null"]
+          description: Optional one of "too_many", "wrong_threshold", "not_relevant", "other".
+
+    GenericOkResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        message:
+          type: string
+      required:
+        - ok
 
     Accommodation:
       type: object

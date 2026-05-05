@@ -193,6 +193,139 @@ export interface AlertsData {
   updatedAt: string;
 }
 
+export type SubscribeRequestHorizonHours =
+  (typeof SubscribeRequestHorizonHours)[keyof typeof SubscribeRequestHorizonHours];
+
+export const SubscribeRequestHorizonHours = {
+  NUMBER_24: 24,
+  NUMBER_48: 48,
+  NUMBER_72: 72,
+} as const;
+
+export type SubscribeRequestDelivery =
+  (typeof SubscribeRequestDelivery)[keyof typeof SubscribeRequestDelivery];
+
+export const SubscribeRequestDelivery = {
+  email: "email",
+  push: "push",
+  both: "both",
+} as const;
+
+export interface SubscribeRequest {
+  email: string;
+  /** @minItems 1 */
+  regions: string[];
+  mountains?: string[];
+  /**
+   * @minimum 5
+   * @maximum 50
+   */
+  snowfallThresholdCm?: number;
+  horizonHours?: SubscribeRequestHorizonHours;
+  delivery?: SubscribeRequestDelivery;
+  timezone?: string;
+  /** Must be true. Plain-English consent that we'll only email when the threshold is met and unsubscribe is one-click. */
+  consent: boolean;
+}
+
+export type SubscribeResponseStatus =
+  (typeof SubscribeResponseStatus)[keyof typeof SubscribeResponseStatus];
+
+export const SubscribeResponseStatus = {
+  verification_sent: "verification_sent",
+  already_verified: "already_verified",
+} as const;
+
+export interface SubscribeResponse {
+  ok: boolean;
+  status: SubscribeResponseStatus;
+  message: string;
+  emailDelivered?: boolean;
+  /**
+   * Present only in development when no email provider is configured. Lets the developer click the verification link without an inbox.
+   * @nullable
+   */
+  devVerifyUrl?: string | null;
+}
+
+export interface VerifyResponse {
+  ok: boolean;
+  email: string;
+  manageToken: string;
+  manageUrl: string;
+}
+
+export type SubscriberPreferencesDelivery =
+  (typeof SubscriberPreferencesDelivery)[keyof typeof SubscriberPreferencesDelivery];
+
+export const SubscriberPreferencesDelivery = {
+  email: "email",
+  push: "push",
+  both: "both",
+} as const;
+
+export interface SubscriberPreferences {
+  email: string;
+  regions: string[];
+  mountains: string[];
+  snowfallThresholdCm: number;
+  horizonHours: number;
+  delivery: SubscriberPreferencesDelivery;
+  timezone: string;
+  verified: boolean;
+  unsubscribed: boolean;
+}
+
+export interface ManageResponse {
+  ok: boolean;
+  subscriber: SubscriberPreferences;
+}
+
+export type UpdatePreferencesBodyHorizonHours =
+  (typeof UpdatePreferencesBodyHorizonHours)[keyof typeof UpdatePreferencesBodyHorizonHours];
+
+export const UpdatePreferencesBodyHorizonHours = {
+  NUMBER_24: 24,
+  NUMBER_48: 48,
+  NUMBER_72: 72,
+} as const;
+
+export type UpdatePreferencesBodyDelivery =
+  (typeof UpdatePreferencesBodyDelivery)[keyof typeof UpdatePreferencesBodyDelivery];
+
+export const UpdatePreferencesBodyDelivery = {
+  email: "email",
+  push: "push",
+  both: "both",
+} as const;
+
+export interface UpdatePreferencesBody {
+  /** @minItems 1 */
+  regions: string[];
+  mountains?: string[];
+  /**
+   * @minimum 5
+   * @maximum 50
+   */
+  snowfallThresholdCm?: number;
+  horizonHours?: UpdatePreferencesBodyHorizonHours;
+  delivery?: UpdatePreferencesBodyDelivery;
+  timezone?: string;
+}
+
+export interface UnsubscribeBody {
+  /**
+   * Optional one of "too_many", "wrong_threshold", "not_relevant", "other".
+   * @nullable
+   */
+  reason?: string | null;
+}
+
+export interface GenericOkResponse {
+  ok: boolean;
+  message?: string;
+}
+
 export type AccommodationType =
   (typeof AccommodationType)[keyof typeof AccommodationType];
 
@@ -1424,6 +1557,22 @@ export type GetPowderAlertsParams = {
 
  */
   region?: RegionFilterParameter;
+};
+
+export type VerifyAlertSubscriptionParams = {
+  token: string;
+};
+
+export type GetAlertPreferencesParams = {
+  token: string;
+};
+
+export type UpdateAlertPreferencesParams = {
+  token: string;
+};
+
+export type UnsubscribeFromAlertsParams = {
+  token: string;
 };
 
 export type GetAccommodationParams = {

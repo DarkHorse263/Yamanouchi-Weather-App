@@ -192,6 +192,145 @@ export const GetPowderAlertsResponse = zod.object({
 });
 
 /**
+ * Creates (or updates) a powder-alert subscription for the given email and sends a verification email. Idempotent — re-submitting with the same email updates preferences.
+ * @summary Subscribe to powder alerts
+ */
+
+export const subscribeToAlertsBodySnowfallThresholdCmMin = 5;
+export const subscribeToAlertsBodySnowfallThresholdCmMax = 50;
+
+export const SubscribeToAlertsBody = zod.object({
+  email: zod.string().email(),
+  regions: zod.array(zod.string()).min(1),
+  mountains: zod.array(zod.string()).optional(),
+  snowfallThresholdCm: zod
+    .number()
+    .min(subscribeToAlertsBodySnowfallThresholdCmMin)
+    .max(subscribeToAlertsBodySnowfallThresholdCmMax)
+    .optional(),
+  horizonHours: zod
+    .union([zod.literal(24), zod.literal(48), zod.literal(72)])
+    .optional(),
+  delivery: zod.enum(["email", "push", "both"]).optional(),
+  timezone: zod.string().optional(),
+  consent: zod
+    .boolean()
+    .describe(
+      "Must be true. Plain-English consent that we'll only email when the threshold is met and unsubscribe is one-click.",
+    ),
+});
+
+export const SubscribeToAlertsResponse = zod.object({
+  ok: zod.boolean(),
+  status: zod.enum(["verification_sent", "already_verified"]),
+  message: zod.string(),
+  emailDelivered: zod.boolean().optional(),
+  devVerifyUrl: zod
+    .string()
+    .nullish()
+    .describe(
+      "Present only in development when no email provider is configured. Lets the developer click the verification link without an inbox.",
+    ),
+});
+
+/**
+ * @summary Confirm an email subscription via the link in the verification email
+ */
+export const VerifyAlertSubscriptionQueryParams = zod.object({
+  token: zod.coerce.string(),
+});
+
+export const VerifyAlertSubscriptionResponse = zod.object({
+  ok: zod.boolean(),
+  email: zod.string(),
+  manageToken: zod.string(),
+  manageUrl: zod.string(),
+});
+
+/**
+ * @summary Load subscriber preferences via management token
+ */
+export const GetAlertPreferencesQueryParams = zod.object({
+  token: zod.coerce.string(),
+});
+
+export const GetAlertPreferencesResponse = zod.object({
+  ok: zod.boolean(),
+  subscriber: zod.object({
+    email: zod.string(),
+    regions: zod.array(zod.string()),
+    mountains: zod.array(zod.string()),
+    snowfallThresholdCm: zod.number(),
+    horizonHours: zod.number(),
+    delivery: zod.enum(["email", "push", "both"]),
+    timezone: zod.string(),
+    verified: zod.boolean(),
+    unsubscribed: zod.boolean(),
+  }),
+});
+
+/**
+ * @summary Update subscriber preferences via management token
+ */
+export const UpdateAlertPreferencesQueryParams = zod.object({
+  token: zod.coerce.string(),
+});
+
+export const updateAlertPreferencesBodySnowfallThresholdCmMin = 5;
+export const updateAlertPreferencesBodySnowfallThresholdCmMax = 50;
+
+export const UpdateAlertPreferencesBody = zod.object({
+  regions: zod.array(zod.string()).min(1),
+  mountains: zod.array(zod.string()).optional(),
+  snowfallThresholdCm: zod
+    .number()
+    .min(updateAlertPreferencesBodySnowfallThresholdCmMin)
+    .max(updateAlertPreferencesBodySnowfallThresholdCmMax)
+    .optional(),
+  horizonHours: zod
+    .union([zod.literal(24), zod.literal(48), zod.literal(72)])
+    .optional(),
+  delivery: zod.enum(["email", "push", "both"]).optional(),
+  timezone: zod.string().optional(),
+});
+
+export const UpdateAlertPreferencesResponse = zod.object({
+  ok: zod.boolean(),
+  subscriber: zod.object({
+    email: zod.string(),
+    regions: zod.array(zod.string()),
+    mountains: zod.array(zod.string()),
+    snowfallThresholdCm: zod.number(),
+    horizonHours: zod.number(),
+    delivery: zod.enum(["email", "push", "both"]),
+    timezone: zod.string(),
+    verified: zod.boolean(),
+    unsubscribed: zod.boolean(),
+  }),
+});
+
+/**
+ * @summary One-click unsubscribe via tokenised link
+ */
+export const UnsubscribeFromAlertsQueryParams = zod.object({
+  token: zod.coerce.string(),
+});
+
+export const UnsubscribeFromAlertsBody = zod.object({
+  reason: zod
+    .string()
+    .nullish()
+    .describe(
+      'Optional one of \"too_many\", \"wrong_threshold\", \"not_relevant\", \"other\".',
+    ),
+});
+
+export const UnsubscribeFromAlertsResponse = zod.object({
+  ok: zod.boolean(),
+  message: zod.string().optional(),
+});
+
+/**
  * Returns hotels, ryokan, and other lodging in Yamanouchi
  * @summary List accommodation
  */

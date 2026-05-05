@@ -40,7 +40,9 @@ import type {
   EigomenyuUpdateMenuItemBody,
   EigomenyuUpdateRestaurantBody,
   ErrorResponse,
+  GenericOkResponse,
   GetAccommodationParams,
+  GetAlertPreferencesParams,
   GetAttractionsParams,
   GetDiningParams,
   GetLiftStatusParams,
@@ -52,15 +54,24 @@ import type {
   LiftStatusResponse,
   LocationWeather,
   LocationWebcams,
+  ManageResponse,
   MapMarker,
   RegionOutlook,
   Resort,
   ResortLiftStatus,
   RoadConditionsResponse,
   Stay,
+  SubscribeRequest,
+  SubscribeResponse,
+  UnsubscribeBody,
+  UnsubscribeFromAlertsParams,
   UpdateAccommodationBody,
+  UpdateAlertPreferencesParams,
   UpdateAttractionBody,
   UpdateDiningBody,
+  UpdatePreferencesBody,
+  VerifyAlertSubscriptionParams,
+  VerifyResponse,
   WeatherResponse,
   WebcamResponse,
 } from "./api.schemas";
@@ -631,6 +642,511 @@ export function useGetPowderAlerts<
 
   return { ...query, queryKey: queryOptions.queryKey };
 }
+
+/**
+ * Creates (or updates) a powder-alert subscription for the given email and sends a verification email. Idempotent — re-submitting with the same email updates preferences.
+ * @summary Subscribe to powder alerts
+ */
+export const getSubscribeToAlertsUrl = () => {
+  return `/api/alerts/subscribe`;
+};
+
+export const subscribeToAlerts = async (
+  subscribeRequest: SubscribeRequest,
+  options?: RequestInit,
+): Promise<SubscribeResponse> => {
+  return customFetch<SubscribeResponse>(getSubscribeToAlertsUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(subscribeRequest),
+  });
+};
+
+export const getSubscribeToAlertsMutationOptions = <
+  TError = ErrorType<ErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof subscribeToAlerts>>,
+    TError,
+    { data: BodyType<SubscribeRequest> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof subscribeToAlerts>>,
+  TError,
+  { data: BodyType<SubscribeRequest> },
+  TContext
+> => {
+  const mutationKey = ["subscribeToAlerts"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof subscribeToAlerts>>,
+    { data: BodyType<SubscribeRequest> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return subscribeToAlerts(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type SubscribeToAlertsMutationResult = NonNullable<
+  Awaited<ReturnType<typeof subscribeToAlerts>>
+>;
+export type SubscribeToAlertsMutationBody = BodyType<SubscribeRequest>;
+export type SubscribeToAlertsMutationError = ErrorType<ErrorResponse>;
+
+/**
+ * @summary Subscribe to powder alerts
+ */
+export const useSubscribeToAlerts = <
+  TError = ErrorType<ErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof subscribeToAlerts>>,
+    TError,
+    { data: BodyType<SubscribeRequest> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof subscribeToAlerts>>,
+  TError,
+  { data: BodyType<SubscribeRequest> },
+  TContext
+> => {
+  return useMutation(getSubscribeToAlertsMutationOptions(options));
+};
+
+/**
+ * @summary Confirm an email subscription via the link in the verification email
+ */
+export const getVerifyAlertSubscriptionUrl = (
+  params: VerifyAlertSubscriptionParams,
+) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? "null" : value.toString());
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0
+    ? `/api/alerts/verify?${stringifiedParams}`
+    : `/api/alerts/verify`;
+};
+
+export const verifyAlertSubscription = async (
+  params: VerifyAlertSubscriptionParams,
+  options?: RequestInit,
+): Promise<VerifyResponse> => {
+  return customFetch<VerifyResponse>(getVerifyAlertSubscriptionUrl(params), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getVerifyAlertSubscriptionQueryKey = (
+  params?: VerifyAlertSubscriptionParams,
+) => {
+  return [`/api/alerts/verify`, ...(params ? [params] : [])] as const;
+};
+
+export const getVerifyAlertSubscriptionQueryOptions = <
+  TData = Awaited<ReturnType<typeof verifyAlertSubscription>>,
+  TError = ErrorType<ErrorResponse>,
+>(
+  params: VerifyAlertSubscriptionParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof verifyAlertSubscription>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getVerifyAlertSubscriptionQueryKey(params);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof verifyAlertSubscription>>
+  > = ({ signal }) =>
+    verifyAlertSubscription(params, { signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof verifyAlertSubscription>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type VerifyAlertSubscriptionQueryResult = NonNullable<
+  Awaited<ReturnType<typeof verifyAlertSubscription>>
+>;
+export type VerifyAlertSubscriptionQueryError = ErrorType<ErrorResponse>;
+
+/**
+ * @summary Confirm an email subscription via the link in the verification email
+ */
+
+export function useVerifyAlertSubscription<
+  TData = Awaited<ReturnType<typeof verifyAlertSubscription>>,
+  TError = ErrorType<ErrorResponse>,
+>(
+  params: VerifyAlertSubscriptionParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof verifyAlertSubscription>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getVerifyAlertSubscriptionQueryOptions(params, options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * @summary Load subscriber preferences via management token
+ */
+export const getGetAlertPreferencesUrl = (
+  params: GetAlertPreferencesParams,
+) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? "null" : value.toString());
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0
+    ? `/api/alerts/manage?${stringifiedParams}`
+    : `/api/alerts/manage`;
+};
+
+export const getAlertPreferences = async (
+  params: GetAlertPreferencesParams,
+  options?: RequestInit,
+): Promise<ManageResponse> => {
+  return customFetch<ManageResponse>(getGetAlertPreferencesUrl(params), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getGetAlertPreferencesQueryKey = (
+  params?: GetAlertPreferencesParams,
+) => {
+  return [`/api/alerts/manage`, ...(params ? [params] : [])] as const;
+};
+
+export const getGetAlertPreferencesQueryOptions = <
+  TData = Awaited<ReturnType<typeof getAlertPreferences>>,
+  TError = ErrorType<ErrorResponse>,
+>(
+  params: GetAlertPreferencesParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getAlertPreferences>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getGetAlertPreferencesQueryKey(params);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof getAlertPreferences>>
+  > = ({ signal }) =>
+    getAlertPreferences(params, { signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getAlertPreferences>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetAlertPreferencesQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getAlertPreferences>>
+>;
+export type GetAlertPreferencesQueryError = ErrorType<ErrorResponse>;
+
+/**
+ * @summary Load subscriber preferences via management token
+ */
+
+export function useGetAlertPreferences<
+  TData = Awaited<ReturnType<typeof getAlertPreferences>>,
+  TError = ErrorType<ErrorResponse>,
+>(
+  params: GetAlertPreferencesParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getAlertPreferences>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetAlertPreferencesQueryOptions(params, options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * @summary Update subscriber preferences via management token
+ */
+export const getUpdateAlertPreferencesUrl = (
+  params: UpdateAlertPreferencesParams,
+) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? "null" : value.toString());
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0
+    ? `/api/alerts/manage?${stringifiedParams}`
+    : `/api/alerts/manage`;
+};
+
+export const updateAlertPreferences = async (
+  updatePreferencesBody: UpdatePreferencesBody,
+  params: UpdateAlertPreferencesParams,
+  options?: RequestInit,
+): Promise<ManageResponse> => {
+  return customFetch<ManageResponse>(getUpdateAlertPreferencesUrl(params), {
+    ...options,
+    method: "PUT",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(updatePreferencesBody),
+  });
+};
+
+export const getUpdateAlertPreferencesMutationOptions = <
+  TError = ErrorType<ErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof updateAlertPreferences>>,
+    TError,
+    {
+      data: BodyType<UpdatePreferencesBody>;
+      params: UpdateAlertPreferencesParams;
+    },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof updateAlertPreferences>>,
+  TError,
+  {
+    data: BodyType<UpdatePreferencesBody>;
+    params: UpdateAlertPreferencesParams;
+  },
+  TContext
+> => {
+  const mutationKey = ["updateAlertPreferences"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof updateAlertPreferences>>,
+    {
+      data: BodyType<UpdatePreferencesBody>;
+      params: UpdateAlertPreferencesParams;
+    }
+  > = (props) => {
+    const { data, params } = props ?? {};
+
+    return updateAlertPreferences(data, params, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type UpdateAlertPreferencesMutationResult = NonNullable<
+  Awaited<ReturnType<typeof updateAlertPreferences>>
+>;
+export type UpdateAlertPreferencesMutationBody =
+  BodyType<UpdatePreferencesBody>;
+export type UpdateAlertPreferencesMutationError = ErrorType<ErrorResponse>;
+
+/**
+ * @summary Update subscriber preferences via management token
+ */
+export const useUpdateAlertPreferences = <
+  TError = ErrorType<ErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof updateAlertPreferences>>,
+    TError,
+    {
+      data: BodyType<UpdatePreferencesBody>;
+      params: UpdateAlertPreferencesParams;
+    },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof updateAlertPreferences>>,
+  TError,
+  {
+    data: BodyType<UpdatePreferencesBody>;
+    params: UpdateAlertPreferencesParams;
+  },
+  TContext
+> => {
+  return useMutation(getUpdateAlertPreferencesMutationOptions(options));
+};
+
+/**
+ * @summary One-click unsubscribe via tokenised link
+ */
+export const getUnsubscribeFromAlertsUrl = (
+  params: UnsubscribeFromAlertsParams,
+) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? "null" : value.toString());
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0
+    ? `/api/alerts/unsubscribe?${stringifiedParams}`
+    : `/api/alerts/unsubscribe`;
+};
+
+export const unsubscribeFromAlerts = async (
+  params: UnsubscribeFromAlertsParams,
+  unsubscribeBody?: UnsubscribeBody,
+  options?: RequestInit,
+): Promise<GenericOkResponse> => {
+  return customFetch<GenericOkResponse>(getUnsubscribeFromAlertsUrl(params), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(unsubscribeBody),
+  });
+};
+
+export const getUnsubscribeFromAlertsMutationOptions = <
+  TError = ErrorType<ErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof unsubscribeFromAlerts>>,
+    TError,
+    { params: UnsubscribeFromAlertsParams; data: BodyType<UnsubscribeBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof unsubscribeFromAlerts>>,
+  TError,
+  { params: UnsubscribeFromAlertsParams; data: BodyType<UnsubscribeBody> },
+  TContext
+> => {
+  const mutationKey = ["unsubscribeFromAlerts"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof unsubscribeFromAlerts>>,
+    { params: UnsubscribeFromAlertsParams; data: BodyType<UnsubscribeBody> }
+  > = (props) => {
+    const { params, data } = props ?? {};
+
+    return unsubscribeFromAlerts(params, data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type UnsubscribeFromAlertsMutationResult = NonNullable<
+  Awaited<ReturnType<typeof unsubscribeFromAlerts>>
+>;
+export type UnsubscribeFromAlertsMutationBody = BodyType<UnsubscribeBody>;
+export type UnsubscribeFromAlertsMutationError = ErrorType<ErrorResponse>;
+
+/**
+ * @summary One-click unsubscribe via tokenised link
+ */
+export const useUnsubscribeFromAlerts = <
+  TError = ErrorType<ErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof unsubscribeFromAlerts>>,
+    TError,
+    { params: UnsubscribeFromAlertsParams; data: BodyType<UnsubscribeBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof unsubscribeFromAlerts>>,
+  TError,
+  { params: UnsubscribeFromAlertsParams; data: BodyType<UnsubscribeBody> },
+  TContext
+> => {
+  return useMutation(getUnsubscribeFromAlertsMutationOptions(options));
+};
 
 /**
  * Returns hotels, ryokan, and other lodging in Yamanouchi

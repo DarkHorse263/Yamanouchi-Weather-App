@@ -3,6 +3,7 @@ import { useLanguage } from "@workspace/feelzlike-shell";
 import { Card, Badge, LoadingScreen, ErrorScreen } from "../components/ui-elements";
 import { BellRing, CloudLightning, Info } from "lucide-react";
 import { motion } from "framer-motion";
+import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
 
 function safeTime(raw: string | null | undefined): string {
   if (!raw) return "";
@@ -95,6 +96,10 @@ export default function Alerts() {
             ))}
           </div>
         )}
+      </div>
+
+      <div className="pt-8 border-t border-border">
+        <AlertSubscribeForm defaultRegion="yamanouchi" />
       </div>
 
       <div className="space-y-6 pt-8 border-t border-border">

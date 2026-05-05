@@ -34,4 +34,5 @@ expertMode = true
 
 [userenv.shared]
 OWM_API_KEY = "dd8b383d8883198e744425d9e7ed11c3"
+VITE_VAPID_PUBLIC_KEY = "BCoXjQ2TUG8JM_ehyoZl5WLZLUgdQeaqzUVpohrgK0xoKPbFibCQhze5y3tHgV5rQTPOi8t961qEdM6g842h_zY"
   
