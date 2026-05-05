@@ -850,6 +850,12 @@ export const GetWeatherResponse = zod.object({
           cloudCover: zod.number().optional(),
         }),
       ),
+      utcOffsetSeconds: zod
+        .number()
+        .optional()
+        .describe(
+          'Location timezone offset from UTC, in seconds (e.g. 32400 for JST,\n39600 for AEDT). Open-Meteo returns hourly times as naive ISO\nstrings in this timezone, so clients need this offset to do\ntimezone-safe \"is this hour past or future\" comparisons regardless\nof the viewer\'s browser timezone.\n',
+        ),
       lastUpdated: zod.string(),
     }),
   ),
@@ -962,6 +968,12 @@ export const GetLocationWeatherResponse = zod.object({
       cloudCover: zod.number().optional(),
     }),
   ),
+  utcOffsetSeconds: zod
+    .number()
+    .optional()
+    .describe(
+      'Location timezone offset from UTC, in seconds (e.g. 32400 for JST,\n39600 for AEDT). Open-Meteo returns hourly times as naive ISO\nstrings in this timezone, so clients need this offset to do\ntimezone-safe \"is this hour past or future\" comparisons regardless\nof the viewer\'s browser timezone.\n',
+    ),
   lastUpdated: zod.string(),
 });
 

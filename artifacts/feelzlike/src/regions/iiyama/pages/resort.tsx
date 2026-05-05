@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage, useRegion } from "@workspace/feelzlike-shell";
+import { HourlyForecast } from "@/components/HourlyForecast";
 
 type WeatherId = Parameters<typeof useGetLocationWeather>[0];
 
@@ -110,7 +111,7 @@ export default function ResortDetail() {
     );
   }
 
-  const { location, current, daily } = data;
+  const { location, current, daily, hourly } = data;
   const observedAt = (data as any).lastUpdated as string | undefined;
   const profile: ResortProfile = {
     websiteUrl: mountain?.websiteUrl,
@@ -204,6 +205,14 @@ export default function ResortDetail() {
           modelSource="Open-Meteo · JMA · ECMWF"
         />
         <LiveConditions stats={stats} />
+        {hourly && hourly.length > 0 && (
+          <HourlyForecast
+            hourly={hourly}
+            utcOffsetSeconds={(data as any).utcOffsetSeconds ?? 0}
+            t={t}
+            sectionNumber="04"
+          />
+        )}
         {daily && daily.length > 0 && (
           <MountainOutlook days={daily as any} elevation={location.elevation} />
         )}

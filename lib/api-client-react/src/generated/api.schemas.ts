@@ -804,6 +804,13 @@ export interface LocationWeather {
   current: CurrentWeather;
   daily: DailyForecast[];
   hourly: HourlyForecast[];
+  /** Location timezone offset from UTC, in seconds (e.g. 32400 for JST,
+39600 for AEDT). Open-Meteo returns hourly times as naive ISO
+strings in this timezone, so clients need this offset to do
+timezone-safe "is this hour past or future" comparisons regardless
+of the viewer's browser timezone.
+ */
+  utcOffsetSeconds?: number;
   lastUpdated: string;
 }
 

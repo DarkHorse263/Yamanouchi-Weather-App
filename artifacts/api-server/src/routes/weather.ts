@@ -464,20 +464,27 @@ async function fetchLocationWeather(location: LocationConfig) {
   })) ?? [];
 
   const bomHourlyData = buildBomHourly(bomObs, bomSecondaryObs);
-  const hourly = bomHourlyData.length > 0
-    ? bomHourlyData
-    : om?.hourly?.time?.map((time: string, i: number) => ({
-        time,
-        temperature: om.hourly.temperature_2m[i],
-        weatherCode: om.hourly.weather_code[i],
-        weatherDescription: getWeatherDescription(om.hourly.weather_code[i]),
-        precipitation: om.hourly.precipitation[i],
-        snowfall: om.hourly.snowfall?.[i] ?? 0,
-        windSpeed: om.hourly.wind_speed_10m[i],
-        humidity: om.hourly.relative_humidity_2m[i],
-        feelsLike: om.hourly.apparent_temperature[i],
-        cloudCover: om.hourly.cloud_cover[i]
-      })) ?? [];
+  // Build the full Open-Meteo hourly array (next 72h forecast).
+  const omHourlyAll: any[] = om?.hourly?.time?.map((time: string, i: number) => ({
+    time,
+    temperature: om.hourly.temperature_2m[i],
+    weatherCode: om.hourly.weather_code[i],
+    weatherDescription: getWeatherDescription(om.hourly.weather_code[i]),
+    precipitation: om.hourly.precipitation[i],
+    snowfall: om.hourly.snowfall?.[i] ?? 0,
+    windSpeed: om.hourly.wind_speed_10m[i],
+    humidity: om.hourly.relative_humidity_2m[i],
+    feelsLike: om.hourly.apparent_temperature[i],
+    cloudCover: om.hourly.cloud_cover[i]
+  })) ?? [];
+  // Merge BOM past observations with Open-Meteo future forecast so a single
+  // `hourly` array serves both the existing 24h-trend chart (past) and the
+  // new "Next 48 hours" strip (future). When BOM is unavailable (JP, dropouts)
+  // Open-Meteo covers the full window. We dedupe by hour-string: any BOM hour
+  // that overlaps an OM hour wins (real observation > model).
+  const bomHours = new Set(bomHourlyData.map((h: any) => h.time));
+  const omFuture = omHourlyAll.filter((h: any) => !bomHours.has(h.time));
+  const hourly = [...bomHourlyData, ...omFuture];
 
   return {
     location: {
@@ -493,6 +500,10 @@ async function fetchLocationWeather(location: LocationConfig) {
     current,
     daily,
     hourly,
+    // Open-Meteo returns hourly `time` as naive ISO in this timezone (no
+    // offset). The client uses this to do timezone-safe past/future filtering
+    // for the "Next 48 hours" strip regardless of the viewer's browser TZ.
+    utcOffsetSeconds: Number(om?.utc_offset_seconds) || 0,
     lastUpdated: new Date().toISOString()
   };
 }

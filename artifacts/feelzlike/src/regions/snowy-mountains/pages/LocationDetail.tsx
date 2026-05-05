@@ -68,6 +68,8 @@ function formatAgo(iso: string | undefined | null, now: number): string {
 }
 import { cn } from "../lib/utils";
 import { skyGradient } from "../lib/mountain-imagery";
+import { HourlyForecast } from "@/components/HourlyForecast";
+import { POWDER_THRESHOLDS_AU } from "@/types/weather";
 
 type LocationId = "thredbo" | "perisher" | "charlottes-pass" | "selwyn" | "jindabyne";
 
@@ -384,6 +386,16 @@ export default function LocationDetail() {
           </div>
           <ForecastChart data={hourly} metric={activeChartMetric} />
         </motion.div>
+
+        {/* Hour-by-hour next 48h with Powder Window detection.
+            AU thresholds are relaxed (0.5cm/hr, <25km/h) — Australian
+            snowfall rarely hits Japow benchmarks. */}
+        <HourlyForecast
+          hourly={hourly}
+          utcOffsetSeconds={(weatherData as any).utcOffsetSeconds ?? 0}
+          thresholds={POWDER_THRESHOLDS_AU}
+          sectionNumber="04b"
+        />
 
         {/* Snow-forecast-style dense 6-day mountain strip */}
         <motion.div
