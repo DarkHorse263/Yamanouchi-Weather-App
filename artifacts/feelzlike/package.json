@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite --config vite.config.ts --host 0.0.0.0",
-    "build": "SENTRY_RELEASE=$(git rev-parse --short HEAD 2>/dev/null || date -u +nogit-%Y%m%dT%H%M%SZ) vite build --config vite.config.ts",
+    "sitemap": "node scripts/generate-sitemap.mjs",
+    "build": "node scripts/generate-sitemap.mjs && SENTRY_RELEASE=$(git rev-parse --short HEAD 2>/dev/null || date -u +nogit-%Y%m%dT%H%M%SZ) vite build --config vite.config.ts",
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "data:smoke": "tsx scripts/curated-smoke.mts",
@@ -89,6 +90,7 @@
   "dependencies": {
     "@sentry/react": "^10.50.0",
     "leaflet": "^1.9.4",
+    "react-helmet-async": "^3.0.0",
     "react-leaflet": "^5.0.0"
   }
 }

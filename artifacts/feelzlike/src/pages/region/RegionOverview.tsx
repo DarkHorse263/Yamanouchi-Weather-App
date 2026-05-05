@@ -23,6 +23,8 @@ import {
 } from "@workspace/feelzlike-shell";
 import { useGetWeather } from "@workspace/api-client-react";
 import { useMemo } from "react";
+import { PageMeta } from "@/lib/seo/PageMeta";
+import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
 
 function haversineKm(
   a: { lat: number; lng: number },
@@ -276,6 +278,22 @@ export function RegionOverview() {
 
   return (
     <div className="px-6 md:px-10 py-8 md:py-12 max-w-6xl mx-auto">
+      <PageMeta
+        title={`${region.name} — snow, lifts, roads & cams`}
+        description={`Live mountain weather, lift status, road conditions and webcams across ${region.name}. Powered by Open-Meteo + on-the-ground data.`}
+        path={`/${region.id}`}
+        jsonLd={[
+          placeSchema({
+            name: region.name,
+            url: `https://feelzlike.com/${region.id}`,
+            description: region.subtitle,
+          }),
+          breadcrumbSchema([
+            { name: "feelzlike", url: "https://feelzlike.com/" },
+            { name: region.name, url: `https://feelzlike.com/${region.id}` },
+          ]),
+        ]}
+      />
       <motion.header
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}

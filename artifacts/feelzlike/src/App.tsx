@@ -1,12 +1,18 @@
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import RegionPicker from "@/pages/RegionPicker";
+import Landing from "@/pages/landing";
 import NotFound from "@/pages/not-found";
 import { RegionLayout } from "@/layouts/RegionLayout";
-import { ConsentProvider } from "@/lib/consent";
+import { ConsentProvider, useConsent } from "@/lib/consent";
 import { ConsentBanner } from "@/components/ConsentBanner";
+import { InstallPrompt } from "@/components/InstallPrompt";
+import { OfflineBanner } from "@/components/OfflineBanner";
 import { SentryTestButton } from "@/components/SentryTestButton";
+import { AppErrorBoundary } from "@/components/AppErrorBoundary";
+import { identifyAnonUser, track } from "@/lib/analytics";
+import { useEffect } from "react";
+import { useLocation } from "wouter";
 import AlertsVerify from "@/pages/alerts/Verify";
 import AlertsManage from "@/pages/alerts/Manage";
 import AlertsUnsubscribed from "@/pages/alerts/Unsubscribed";
@@ -16,7 +22,7 @@ const queryClient = new QueryClient();
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={RegionPicker} />
+      <Route path="/" component={Landing} />
       {/* Top-level alert pages — must come BEFORE the /:region catch-all so
           tokenised email links don't get parsed as a region. */}
       <Route path="/alerts/verify" component={AlertsVerify} />
@@ -33,19 +39,50 @@ function Router() {
   );
 }
 
+/**
+ * Bridges the ConsentProvider into the analytics layer + records page-view
+ * breadcrumbs. Mounted inside ConsentProvider so it can read the choice and
+ * inside WouterRouter so `useLocation` stays bound to the right base path.
+ */
+function AnalyticsBridge() {
+  const consent = useConsent();
+  const [location] = useLocation();
+
+  // Identify (anon profile token) on mount and whenever consent flips.
+  useEffect(() => {
+    identifyAnonUser({ analyticsConsent: !!consent.choices?.analytics });
+  }, [consent.choices?.analytics]);
+
+  // Page-view breadcrumb on every route change. Cheap & always-on; helps
+  // crash reports show what the user was looking at when things broke.
+  // SECURITY: strip querystring + hash before logging — alert links carry
+  // HMAC tokens (?token=...) that must never reach Sentry breadcrumbs.
+  useEffect(() => {
+    const safePath = location.split(/[?#]/)[0] || "/";
+    track("page_view", { category: "navigation", data: { path: safePath } });
+  }, [location]);
+
+  return null;
+}
+
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <ConsentProvider>
-          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-            <Router />
-          </WouterRouter>
-          <ConsentBanner />
-          <SentryTestButton />
-        </ConsentProvider>
-      </TooltipProvider>
-    </QueryClientProvider>
+    <AppErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <ConsentProvider>
+            <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+              <AnalyticsBridge />
+              <Router />
+            </WouterRouter>
+            <ConsentBanner />
+            <InstallPrompt />
+            <OfflineBanner />
+            <SentryTestButton />
+          </ConsentProvider>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </AppErrorBoundary>
   );
 }
 

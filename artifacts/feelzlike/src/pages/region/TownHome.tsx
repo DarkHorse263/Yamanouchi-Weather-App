@@ -5,6 +5,8 @@ import { ArrowUpRight, Car, Video, Bus, BedDouble, UtensilsCrossed, Compass, Clo
 import { useRegion, useLanguage, useBaseTown, LiveBadge } from "@workspace/feelzlike-shell";
 import { useGetWeather, useGetRoadConditions } from "@workspace/api-client-react";
 import { useTownWeather } from "@/lib/town-weather";
+import { PageMeta } from "@/lib/seo/PageMeta";
+import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
 
 function haversineKm(a: { lat: number; lng: number }, b: { lat: number; lng: number }): number {
   const R = 6371;
@@ -123,6 +125,24 @@ export function TownHome() {
 
   return (
     <div className="px-6 md:px-10 py-8 md:py-12 max-w-6xl mx-auto">
+      <PageMeta
+        title={`${town.name} — weather, stays, roads & cams`}
+        description={`${town.name} in ${region.name}: in-town weather, road conditions to the mountain, webcams, transport, plus curated stays and eats.`}
+        path={`/${region.id}/${town.id}`}
+        jsonLd={[
+          placeSchema({
+            name: town.name,
+            url: `https://feelzlike.com/${region.id}/${town.id}`,
+            description: town.blurb,
+            latLng: town.lat && town.lng ? { lat: town.lat, lng: town.lng } : undefined,
+          }),
+          breadcrumbSchema([
+            { name: "feelzlike", url: "https://feelzlike.com/" },
+            { name: region.name, url: `https://feelzlike.com/${region.id}` },
+            { name: town.name, url: `https://feelzlike.com/${region.id}/${town.id}` },
+          ]),
+        ]}
+      />
       <motion.header
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}

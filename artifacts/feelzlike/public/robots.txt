@@ -1,0 +1,12 @@
+# feelzlike robots.txt
+# Search engines are welcome — we want lift/road/snow pages indexed.
+
+User-agent: *
+Allow: /
+
+# Don't waste crawl budget on token-gated alert pages.
+Disallow: /alerts/verify
+Disallow: /alerts/manage
+Disallow: /alerts/unsubscribed
+
+Sitemap: https://feelzlike.com/sitemap.xml

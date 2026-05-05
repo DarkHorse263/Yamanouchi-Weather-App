@@ -1,0 +1,187 @@
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Download, Share, X, Smartphone } from "lucide-react";
+import { isStandaloneMode, isIOSSafari } from "@/lib/registerSW";
+
+/**
+ * Non-intrusive PWA install prompt. Per playbook 6.2:
+ *  - Shows on Android/Desktop after the user has visited 3+ times (visit
+ *    counter persisted in localStorage). Triggered by the standard
+ *    `beforeinstallprompt` event.
+ *  - Shows iOS-specific copy on iOS Safari (which doesn't fire the event):
+ *    "Tap Share → Add to Home Screen" with a Share-icon hint.
+ *  - Hidden when already installed (`display-mode: standalone`).
+ *  - Dismissable; respects dismissal for 30 days.
+ *
+ * Visit counting:
+ *  - Increments on each fresh page load (not per route change).
+ *  - Stored as `feelzlike:visits` integer.
+ *
+ * Dismissal:
+ *  - Stored as `feelzlike:installPromptDismissedAt` ISO string.
+ *  - 30-day TTL — re-eligible after that.
+ */
+
+const VISIT_KEY = "feelzlike:visits";
+const DISMISSED_KEY = "feelzlike:installPromptDismissedAt";
+const ACCEPTED_KEY = "feelzlike:installAccepted";
+const VISIT_THRESHOLD = 3;
+const DISMISS_TTL_MS = 30 * 24 * 60 * 60 * 1000;
+
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
+}
+
+function readJSON<T>(key: string, fallback: T): T {
+  try {
+    const raw = window.localStorage.getItem(key);
+    return raw ? (JSON.parse(raw) as T) : fallback;
+  } catch {
+    return fallback;
+  }
+}
+function writeJSON(key: string, value: unknown): void {
+  try { window.localStorage.setItem(key, JSON.stringify(value)); } catch { /* noop */ }
+}
+
+function bumpVisitCount(): number {
+  const current = readJSON<number>(VISIT_KEY, 0);
+  const next = current + 1;
+  writeJSON(VISIT_KEY, next);
+  return next;
+}
+
+function isDismissalActive(): boolean {
+  const at = readJSON<string | null>(DISMISSED_KEY, null);
+  if (!at) return false;
+  const t = new Date(at).getTime();
+  if (Number.isNaN(t)) return false;
+  return Date.now() - t < DISMISS_TTL_MS;
+}
+
+export function InstallPrompt() {
+  const [show, setShow] = useState(false);
+  const [variant, setVariant] = useState<"android" | "ios">("android");
+  const [bipEvent, setBipEvent] = useState<BeforeInstallPromptEvent | null>(null);
+
+  useEffect(() => {
+    // Already installed → never show
+    if (isStandaloneMode()) return;
+    // Previously accepted → never show again on this device
+    if (readJSON<boolean>(ACCEPTED_KEY, false)) return;
+    // Recently dismissed → respect the 30-day cooldown
+    if (isDismissalActive()) return;
+
+    const visits = bumpVisitCount();
+    if (visits < VISIT_THRESHOLD) return;
+
+    if (isIOSSafari()) {
+      setVariant("ios");
+      setShow(true);
+      return;
+    }
+
+    // Android / Desktop Chrome path: wait for beforeinstallprompt
+    const handler = (e: Event) => {
+      e.preventDefault();
+      setBipEvent(e as BeforeInstallPromptEvent);
+      setVariant("android");
+      setShow(true);
+    };
+    window.addEventListener("beforeinstallprompt", handler);
+    return () => window.removeEventListener("beforeinstallprompt", handler);
+  }, []);
+
+  const dismiss = () => {
+    writeJSON(DISMISSED_KEY, new Date().toISOString());
+    setShow(false);
+  };
+
+  const install = async () => {
+    if (!bipEvent) return;
+    try {
+      await bipEvent.prompt();
+      const { outcome } = await bipEvent.userChoice;
+      if (outcome === "accepted") {
+        writeJSON(ACCEPTED_KEY, true);
+      } else {
+        writeJSON(DISMISSED_KEY, new Date().toISOString());
+      }
+    } catch {
+      writeJSON(DISMISSED_KEY, new Date().toISOString());
+    } finally {
+      setBipEvent(null);
+      setShow(false);
+    }
+  };
+
+  return (
+    <AnimatePresence>
+      {show && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+          transition={{ duration: 0.25 }}
+          role="dialog"
+          aria-label="Add FeelZlike to your home screen"
+          className="fixed inset-x-3 bottom-3 sm:inset-auto sm:right-4 sm:bottom-4 sm:max-w-sm z-[60]"
+        >
+          <div className="rounded-2xl bg-slate-900 text-white shadow-[0_24px_60px_-20px_rgba(2,6,23,0.6)] border border-white/10 p-4 sm:p-5">
+            <div className="flex items-start gap-3">
+              <div className="shrink-0 w-10 h-10 rounded-xl bg-sky-500/15 border border-sky-400/30 flex items-center justify-center">
+                <Smartphone className="w-5 h-5 text-sky-300" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-amber-300">
+                  Add to home screen
+                </p>
+                <p className="mt-1 text-sm font-semibold text-white leading-snug">
+                  Never miss a powder day.
+                </p>
+                {variant === "ios" ? (
+                  <p className="mt-1.5 text-[12px] text-white/70 leading-relaxed">
+                    Tap <Share className="w-3.5 h-3.5 inline-block mx-0.5 -mt-0.5 text-sky-300" />
+                    Share, then <span className="font-semibold text-white">Add to Home Screen</span>.
+                  </p>
+                ) : (
+                  <p className="mt-1.5 text-[12px] text-white/70 leading-relaxed">
+                    Install FeelZlike for instant access and powder alerts on your lock screen.
+                  </p>
+                )}
+                <div className="mt-3 flex items-center gap-2">
+                  {variant === "android" && (
+                    <button
+                      type="button"
+                      onClick={install}
+                      className="inline-flex items-center gap-1.5 rounded-lg bg-sky-500 hover:bg-sky-400 active:bg-sky-600 px-3 py-1.5 text-[12px] font-semibold transition-colors"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      Install
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    onClick={dismiss}
+                    className="text-[12px] text-white/60 hover:text-white/90 px-2 py-1.5 transition-colors"
+                  >
+                    Not now
+                  </button>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={dismiss}
+                aria-label="Dismiss install prompt"
+                className="shrink-0 text-white/40 hover:text-white/80 transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}

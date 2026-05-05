@@ -1,22 +1,201 @@
-/* FeelZlike powder alert service worker.
+/* FeelZlike service worker.
  *
- * Runs in the browser background once a user grants notification permission
- * and we POST their PushSubscription to the server. The server-side cron job
- * (alertEvaluator) calls web-push to enqueue a notification with a JSON
- * payload of { title, body, url, tag }.
+ * Two responsibilities:
+ *  1. POWDER PUSH NOTIFICATIONS (Sprint 5) — display server-pushed alerts
+ *     when forecast snowfall meets a subscriber's threshold.
+ *  2. OFFLINE / FAST-RELOAD CACHING (Sprint 6.2 PWA) — workbox-style
+ *     strategies hand-rolled with the Cache API so we don't need a build
+ *     step for the SW. Three strategies are wired:
+ *
+ *       cache-first        → static assets (JS/CSS hashed bundles, fonts,
+ *                            icons, images). They're immutable in vite's
+ *                            dist so cache-first is safe.
+ *       network-first      → HTML navigations + live weather/today's-call
+ *                            API calls. Network-first ensures the latest
+ *                            data wins online; falls back to cache offline.
+ *       stale-while-       → curated stay/eat JSON + the regions endpoint.
+ *         revalidate         Returns the cached copy instantly, refreshes
+ *                            in the background.
  *
  * No build step — this file ships as-is from /public.
  */
+
+const CACHE_VERSION = "v6";
+const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
+const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
+const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;
+
+// Pre-cached on install: the bare-minimum shell for the offline page to render.
+const PRECACHE_URLS = [
+  "/",
+  "/manifest.webmanifest",
+  "/icons/icon-192.png",
+  "/icons/icon-512.png",
+  "/icons/apple-touch-icon.png",
+];
 
 self.addEventListener("install", (event) => {
   // Activate the new SW immediately on first install so subscribers don't
   // wait until every tab is closed for the next deploy to take effect.
   self.skipWaiting();
+  event.waitUntil(
+    caches
+      .open(STATIC_CACHE)
+      // addAll fails atomically — wrap each URL so a single 404 doesn't
+      // nuke the whole pre-cache (icons may be missing in some envs).
+      .then((cache) =>
+        Promise.all(
+          PRECACHE_URLS.map((url) =>
+            cache.add(url).catch(() => undefined),
+          ),
+        ),
+      ),
+  );
 });
 
 self.addEventListener("activate", (event) => {
-  event.waitUntil(self.clients.claim());
+  // Wipe stale caches from previous deploys so we don't grow unbounded.
+  event.waitUntil(
+    (async () => {
+      const keep = new Set([STATIC_CACHE, RUNTIME_CACHE, DATA_CACHE]);
+      const names = await caches.keys();
+      await Promise.all(names.map((n) => (keep.has(n) ? null : caches.delete(n))));
+      await self.clients.claim();
+    })(),
+  );
 });
+
+// ─── Caching strategies ────────────────────────────────────────────────
+
+async function cacheFirst(request, cacheName) {
+  const cache = await caches.open(cacheName);
+  const cached = await cache.match(request);
+  if (cached) return cached;
+  try {
+    const response = await fetch(request);
+    if (response && response.ok) cache.put(request, response.clone());
+    return response;
+  } catch (err) {
+    return cached || Response.error();
+  }
+}
+
+async function networkFirst(request, cacheName, { timeoutMs = 4500 } = {}) {
+  const cache = await caches.open(cacheName);
+  try {
+    // Race the network against a timeout so flaky mobile connections don't
+    // hang the page indefinitely — fall back to cache if we time out.
+    const networkResponse = await Promise.race([
+      fetch(request),
+      new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("net-timeout")), timeoutMs),
+      ),
+    ]);
+    if (networkResponse && networkResponse.ok && request.method === "GET") {
+      cache.put(request, networkResponse.clone());
+    }
+    return networkResponse;
+  } catch (err) {
+    const cached = await cache.match(request);
+    if (cached) return cached;
+    // Last-resort: return the cached `/` shell for navigation requests so
+    // the React app can render its own offline banner. The shell lives in
+    // STATIC_CACHE (precached on install), not in this cache, so look there
+    // explicitly — otherwise deep-link offline navigations get a JSON 503.
+    if (request.mode === "navigate") {
+      const staticCache = await caches.open(STATIC_CACHE);
+      const shell = await staticCache.match("/");
+      if (shell) return shell;
+    }
+    return new Response(
+      JSON.stringify({ offline: true, error: "network-unreachable" }),
+      { status: 503, headers: { "Content-Type": "application/json" } },
+    );
+  }
+}
+
+async function staleWhileRevalidate(request, cacheName) {
+  const cache = await caches.open(cacheName);
+  const cached = await cache.match(request);
+  const networkPromise = fetch(request)
+    .then((response) => {
+      if (response && response.ok) cache.put(request, response.clone());
+      return response;
+    })
+    .catch(() => undefined);
+  return cached || (await networkPromise) || Response.error();
+}
+
+// ─── Fetch router ──────────────────────────────────────────────────────
+
+self.addEventListener("fetch", (event) => {
+  const { request } = event;
+  // Only handle GETs — POSTs/PUTs (alerts subscribe etc.) hit network direct.
+  if (request.method !== "GET") return;
+  const url = new URL(request.url);
+
+  // Skip cross-origin (Open-Meteo, OWM tiles) — they have their own caching.
+  if (url.origin !== self.location.origin) return;
+
+  // 1. Static asset bundles (immutable, hashed) → cache-first
+  //    Vite outputs to /assets/*-[hash].(js|css) plus /icons, /branding, /images.
+  if (
+    url.pathname.startsWith("/assets/") ||
+    url.pathname.startsWith("/icons/") ||
+    url.pathname.startsWith("/branding/") ||
+    url.pathname.startsWith("/images/") ||
+    url.pathname.endsWith(".woff2") ||
+    url.pathname.endsWith(".woff") ||
+    url.pathname.endsWith(".ttf") ||
+    url.pathname.endsWith(".png") ||
+    url.pathname.endsWith(".svg") ||
+    url.pathname.endsWith(".webp") ||
+    url.pathname.endsWith(".ico")
+  ) {
+    event.respondWith(cacheFirst(request, STATIC_CACHE));
+    return;
+  }
+
+  // 2a. SECURITY: never cache token-bearing or per-subscriber endpoints.
+  //     `/api/alerts/*` (verify/manage/unsubscribe) carries HMAC tokens and
+  //     subscriber data — keeping copies in Cache Storage would expose them
+  //     to any later script with origin access. Always go straight to net.
+  if (url.pathname.startsWith("/api/alerts")) return;
+
+  // 2b. Live weather, today's call, roads → network-first (4.5s timeout)
+  //     Anything that should reflect "right now" with offline fallback.
+  if (
+    url.pathname.startsWith("/api/weather") ||
+    url.pathname.startsWith("/api/today") ||
+    url.pathname.startsWith("/api/road")
+  ) {
+    event.respondWith(networkFirst(request, DATA_CACHE));
+    return;
+  }
+
+  // 3. Curated data + regions (changes occasionally) → stale-while-revalidate
+  if (
+    url.pathname.startsWith("/api/regions") ||
+    url.pathname.startsWith("/api/stays") ||
+    url.pathname.startsWith("/api/eats")
+  ) {
+    event.respondWith(staleWhileRevalidate(request, DATA_CACHE));
+    return;
+  }
+
+  // 4. Navigations (HTML page loads) → network-first with cached `/` fallback
+  if (request.mode === "navigate") {
+    event.respondWith(networkFirst(request, RUNTIME_CACHE));
+    return;
+  }
+
+  // Everything else → opportunistic stale-while-revalidate so we don't miss
+  // anything obviously cacheable (third-party scripts, etc.) without bloating
+  // the cache with one-off fetches.
+  event.respondWith(staleWhileRevalidate(request, RUNTIME_CACHE));
+});
+
+// ─── Push notifications (Sprint 5) ─────────────────────────────────────
 
 self.addEventListener("push", (event) => {
   let payload = { title: "FeelZlike", body: "Powder incoming.", url: "/", tag: "feelzlike-alert" };
@@ -29,8 +208,8 @@ self.addEventListener("push", (event) => {
     body: payload.body,
     tag: payload.tag,
     data: { url: payload.url || "/" },
-    icon: "/favicon.png",
-    badge: "/favicon.png",
+    icon: "/icons/icon-192.png",
+    badge: "/icons/icon-192.png",
     requireInteraction: false,
   };
   event.waitUntil(self.registration.showNotification(payload.title, opts));

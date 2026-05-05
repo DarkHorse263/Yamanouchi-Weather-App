@@ -17,7 +17,19 @@ import {
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+// The original logo is dark-on-transparent. We CSS-invert it to white-on-
+// transparent for the hero gradient (`_dark.png` has a checkerboard texture
+// baked into the export and isn't usable). filter: brightness(0) invert(1)
+// crushes the colour-channel detail to pure white but is the cleanest way
+// to keep the same artwork legible against the dark gradient.
 import mainLogo from "@assets/feelzlike_transparent/feelzlike_colour_150426_1777272466909_transparent.png";
+import { HeroBackdrop } from "@/components/home/HeroBackdrop";
+import { HomeTodaysCallStrip, type RegionHeadlineLite } from "@/components/home/HomeTodaysCallStrip";
+import { HomeCurationStrip } from "@/components/home/HomeCurationStrip";
+import { WhyFeelzlike } from "@/components/home/WhyFeelzlike";
+import { HomeFooter } from "@/components/home/HomeFooter";
+import { PageMeta } from "@/lib/seo/PageMeta";
+import { websiteSchema, organizationSchema } from "@/lib/seo/jsonLd";
 
 // ─── types ─────────────────────────────────────────
 type RegionStatus = "live" | "soon";
@@ -166,13 +178,45 @@ export default function Landing() {
   const liveCount = regions.filter((r) => r.status === "live").length;
   const totalMountains = regions.reduce((acc, r) => acc + r.mountains.length, 0);
 
+  // Lightweight projection of the regions data into the shape the
+  // Today's Call strip needs — keeps the strip's component decoupled from
+  // our local Region interface.
+  const callStripRegions: RegionHeadlineLite[] = regions
+    .filter((r) => r.status === "live")
+    .map((r) => ({
+      id: r.id,
+      name: r.name,
+      href: r.href,
+      countryCode: r.countryCode,
+      headlineLabel: r.headlineLabel,
+      headline: r.headline
+        ? {
+            tempC: r.headline.tempC,
+            feelsLikeC: r.headline.feelsLikeC,
+            windKph: r.headline.windKph,
+            snowfallMmNext24h: r.headline.snowfallMmNext24h,
+          }
+        : null,
+    }));
+
   return (
     <div
-      className="min-h-screen bg-[#f6f8fb] text-slate-900 antialiased"
+      className="relative isolate min-h-screen text-slate-900 antialiased bg-[#f6f8fb]"
       style={{ fontFamily: "'DIN Pro', system-ui, sans-serif" }}
     >
+      <PageMeta
+        title="feelzlike — mountain weather you can trust"
+        description="Real-time alpine weather, lift status, road conditions and live cams across the Snowy Mountains and Yamanouchi. Curated stays and eats from people who actually live there."
+        path="/"
+        jsonLd={[websiteSchema(), organizationSchema()]}
+      />
+      <HeroBackdrop />
       {/* ─── HERO ─────────────────────────────────────── */}
-      <header className="relative bg-white">
+      {/* The hero now sits ON TOP of the photo backdrop — bg-transparent
+          (was bg-white) so the gradient mountain scene shows through.
+          Text is forced white-on-dark via inline classes per element since
+          the slate-900 default would be illegible on the dark backdrop. */}
+      <header className="relative z-10">
         <div className="relative max-w-3xl mx-auto px-5 pt-10 pb-12 md:pt-14 md:pb-16 text-center">
           <motion.div
             initial={{ opacity: 0, y: 6 }}
@@ -183,10 +227,11 @@ export default function Landing() {
             <img
               src={mainLogo}
               alt="feelzlike - resort town mountain weather"
-              className="h-24 md:h-32 lg:h-36 w-auto select-none"
+              className="h-24 md:h-32 lg:h-36 w-auto select-none drop-shadow-[0_4px_18px_rgba(0,0,0,0.35)]"
+              style={{ filter: "brightness(0) invert(1) drop-shadow(0 4px 18px rgba(0,0,0,0.35))" }}
               draggable={false}
             />
-            <span className="mt-3 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.22em] text-sky-700">
+            <span className="mt-3 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.22em] text-sky-200/90">
               Resort Town Mountain Weather
             </span>
           </motion.div>
@@ -195,7 +240,7 @@ export default function Landing() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-sm md:text-base text-slate-600 max-w-xl mx-auto leading-relaxed"
+            className="text-sm md:text-base text-white/85 max-w-xl mx-auto leading-relaxed [text-shadow:0_1px_2px_rgba(0,0,0,0.4)]"
           >
             Stop guessing what it feelzlike
             <br />
@@ -220,26 +265,26 @@ export default function Landing() {
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.25 }}
-            className="mt-7 md:mt-9 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[11px] text-slate-600"
+            className="mt-7 md:mt-9 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[11px] text-white/80"
           >
-            <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-emerald-50 border border-emerald-200">
+            <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/40">
               <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60 animate-ping" />
-                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60 animate-ping" />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
               </span>
-              <span className="font-semibold uppercase tracking-[0.16em] text-[9px] text-emerald-700">
+              <span className="font-semibold uppercase tracking-[0.16em] text-[9px] text-emerald-200">
                 {liveCount} live
               </span>
             </span>
-            <span className="text-slate-300">·</span>
+            <span className="text-white/30">·</span>
             <span>
-              <span className="font-semibold tabular-nums text-slate-700">{data?.sourceCount ?? 7}</span> official sources
+              <span className="font-semibold tabular-nums text-white">{data?.sourceCount ?? 7}</span> official sources
             </span>
-            <span className="text-slate-300 hidden sm:inline">·</span>
+            <span className="text-white/30 hidden sm:inline">·</span>
             <span className="hidden sm:inline">
-              refreshed every <span className="tabular-nums font-semibold text-slate-700">{data?.refreshIntervalMin ?? 15}</span> min
+              refreshed every <span className="tabular-nums font-semibold text-white">{data?.refreshIntervalMin ?? 15}</span> min
             </span>
-            <span className="text-slate-300">·</span>
+            <span className="text-white/30">·</span>
             <span className="tabular-nums">
               updated {formatAgo(generatedAt, now)}
             </span>
@@ -250,7 +295,7 @@ export default function Landing() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-sm md:text-base text-sky-700 max-w-xl mx-auto leading-relaxed mt-8 md:mt-10"
+            className="text-sm md:text-base text-sky-200 max-w-xl mx-auto leading-relaxed mt-8 md:mt-10 [text-shadow:0_1px_2px_rgba(0,0,0,0.4)]"
           >
             I wonder what it feelzlike in…
           </motion.p>
@@ -263,7 +308,7 @@ export default function Landing() {
             className="mt-3 md:mt-4"
           >
             <div className="relative max-w-xl mx-auto">
-              <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+              <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 z-10" />
               <label htmlFor="region-search" className="sr-only">
                 Search mountain regions
               </label>
@@ -274,15 +319,18 @@ export default function Landing() {
                 placeholder="Search a mountain region…"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500/30 focus:border-sky-500/50 transition-all text-left"
+                className="relative w-full pl-12 pr-4 py-4 rounded-2xl bg-white/95 backdrop-blur border border-white/40 text-slate-900 text-sm placeholder:text-slate-400 shadow-[0_8px_32px_-12px_rgba(2,6,23,0.5)] focus:outline-none focus:ring-2 focus:ring-sky-400/40 focus:border-sky-400/60 transition-all text-left"
               />
             </div>
           </motion.div>
         </div>
       </header>
 
+      {/* ─── TODAY'S CALL · live in both regions ──────── */}
+      <HomeTodaysCallStrip regions={callStripRegions} />
+
       {/* ─── REGIONS ──────────────────────────────────── */}
-      <main className="relative max-w-6xl mx-auto px-5 pt-10 md:pt-14 pb-20 md:pb-28">
+      <main className="relative z-10 max-w-6xl mx-auto px-5 pt-10 md:pt-14 pb-12 md:pb-16">
         <div className="flex items-end justify-between mb-4 md:mb-5 gap-3">
           <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">
             01 · Regions <span className="text-slate-300">·</span>{" "}
@@ -505,8 +553,17 @@ export default function Landing() {
           </div>
         )}
 
-        {/* trust footer */}
-        <div className="mt-14 md:mt-20 pt-10 border-t border-slate-200">
+      </main>
+
+      {/* ─── CURATION DEPTH ───────────────────────────── */}
+      <HomeCurationStrip />
+
+      {/* ─── WHY FEELZLIKE (first-visit only) ─────────── */}
+      <WhyFeelzlike />
+
+      {/* ─── TRUST FOOTER (data sources) ──────────────── */}
+      <div className="relative z-10 max-w-6xl mx-auto px-5 mt-14 md:mt-20 pb-20 md:pb-28">
+        <div className="pt-10 border-t border-slate-200">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div>
               <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500 mb-2">
@@ -569,7 +626,10 @@ export default function Landing() {
             </div>
           </div>
         </div>
-      </main>
+      </div>
+
+      {/* ─── SITE FOOTER ──────────────────────────────── */}
+      <HomeFooter />
     </div>
   );
 }
