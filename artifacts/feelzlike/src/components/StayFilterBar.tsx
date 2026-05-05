@@ -342,12 +342,42 @@ export function getActiveFilterCount(f: StayFilters): number {
 // URL state hook
 // ──────────────────────────────────────────────────────────────────────────────
 
+// Filter param keys this bar owns. We only delete/write these on URL sync so
+// orthogonal page state (e.g. `?view=map` / `?stay={id}` set by TownStay)
+// survives a filter change. Keep in sync with parseFiltersFromSearch /
+// serializeFiltersToSearch — any new filter key MUST be added here too.
+const FILTER_PARAM_KEYS = [
+  "type",
+  "price",
+  "sort",
+  "dry",
+  "ski",
+  "pet",
+  "self",
+  "kmThredbo",
+  "kmSkitube",
+  "onsen",
+  "tattoo",
+  "meal",
+  "en",
+  "walk",
+] as const;
+
 function setUrlSearch(next: string): void {
   // history.replaceState bypasses base-path concerns and works with any
   // wouter base config. Dispatching popstate notifies wouter's useSearch
   // subscribers so the read-side stays consistent with the URL.
-  const url = next
-    ? `${window.location.pathname}?${next}${window.location.hash}`
+  //
+  // Preserve non-filter params: read current URL, delete the keys we own,
+  // then layer the new filter values on top. This keeps `view` and `stay`
+  // intact when the filter bar writes.
+  const cur = new URLSearchParams(window.location.search);
+  for (const k of FILTER_PARAM_KEYS) cur.delete(k);
+  const incoming = new URLSearchParams(next);
+  for (const [k, v] of incoming) cur.append(k, v);
+  const merged = cur.toString();
+  const url = merged
+    ? `${window.location.pathname}?${merged}${window.location.hash}`
     : `${window.location.pathname}${window.location.hash}`;
   window.history.replaceState(null, "", url);
   window.dispatchEvent(new Event("popstate"));

@@ -29,35 +29,22 @@ import {
 } from "@/components/ui/sheet";
 import type { Stay } from "@/types/stayEat";
 import { cn } from "@/lib/utils";
+import {
+  PROVIDERS,
+  PROVIDER_LABELS,
+  PROVIDER_SHORT_LABELS,
+  PROVIDER_BRAND_COLOURS,
+  buildBookingLinks,
+  type Provider,
+} from "@/lib/affiliateLinks";
 
-// Brand identity for affiliate buttons. The href is taken verbatim from the
-// curated `booking_links` field for now; Prompt 2.5 will wrap each href in
-// the `affiliateLinks` helper to inject affiliate ids.
-const PROVIDER_BRAND = {
-  booking_com: { label: "Booking.com", short: "Booking",  bg: "#003580", fg: "#ffffff" },
-  agoda:       { label: "Agoda",        short: "Agoda",    bg: "#5392f9", fg: "#ffffff" },
-  airbnb:      { label: "Airbnb",       short: "Airbnb",   bg: "#FF5A5F", fg: "#ffffff" },
-  expedia:     { label: "Expedia",      short: "Expedia",  bg: "#fcc917", fg: "#1a1a1a" },
-  hotels_com:  { label: "Hotels.com",   short: "Hotels",   bg: "#d22630", fg: "#ffffff" },
-  trip_com:    { label: "Trip.com",     short: "Trip",     bg: "#287dfa", fg: "#ffffff" },
-  jalan:       { label: "Jalan",        short: "Jalan",    bg: "#ff6600", fg: "#ffffff" },
-  rakuten:     { label: "Rakuten",      short: "Rakuten",  bg: "#bf0000", fg: "#ffffff" },
-} as const;
-
-type ProviderId = keyof typeof PROVIDER_BRAND;
-
-// Render order keeps the major OTAs first; matches typical user familiarity
-// (Booking → Agoda → Expedia first, regional providers last).
-const PROVIDER_ORDER: readonly ProviderId[] = [
-  "booking_com",
-  "agoda",
-  "expedia",
-  "hotels_com",
-  "trip_com",
-  "airbnb",
-  "jalan",
-  "rakuten",
-] as const;
+// Render order: keep the major OTAs first, then regional, then official last
+// (rendered by the website branch below). `tripadvisor` and `official` are
+// excluded here — Tripadvisor is a discovery surface (less booking intent),
+// and `official` has its own neutral-styled button further down.
+const PROVIDER_ORDER: readonly Provider[] = PROVIDERS.filter(
+  (p) => p !== "tripadvisor" && p !== "official",
+);
 
 const TYPE_BADGE: Record<Stay["type"], { label: string; className: string }> = {
   ryokan:     { label: "RYOKAN",     className: "bg-rose-50    text-rose-900    ring-rose-200" },
@@ -286,12 +273,17 @@ interface BookingButtonsProps {
 }
 
 function BookingButtons({ stay, variant = "card" }: BookingButtonsProps) {
-  const links = stay.booking_links;
+  // Single source of truth for booking URLs — `buildBookingLinks` returns
+  // only providers the data team curated (default mode), with affiliate IDs
+  // injected from env vars and JP-only providers filtered out of AU stays.
+  // See `lib/affiliateLinks.ts`.
+  const links = buildBookingLinks(stay);
   const provided = PROVIDER_ORDER.filter((id) => {
     const url = links[id];
     return typeof url === "string" && url.length > 0;
   });
-  if (provided.length === 0 && !stay.website) return null;
+  const officialHref = links.official;
+  if (provided.length === 0 && !officialHref) return null;
 
   const sizeCls =
     variant === "detail"
@@ -301,7 +293,9 @@ function BookingButtons({ stay, variant = "card" }: BookingButtonsProps) {
   return (
     <div className="flex flex-wrap items-center gap-1.5" onClick={(e) => e.stopPropagation()}>
       {provided.map((id) => {
-        const brand = PROVIDER_BRAND[id];
+        const brand = PROVIDER_BRAND_COLOURS[id];
+        const label = PROVIDER_LABELS[id];
+        const short = PROVIDER_SHORT_LABELS[id];
         const href = links[id];
         if (!href) return null;
         return (
@@ -310,21 +304,21 @@ function BookingButtons({ stay, variant = "card" }: BookingButtonsProps) {
             href={href}
             target="_blank"
             rel="noopener noreferrer sponsored"
-            aria-label={`Book ${stay.name} on ${brand.label}`}
+            aria-label={`Book ${stay.name} on ${label}`}
             className={cn(
               "inline-flex items-center gap-1 rounded-md font-bold transition-opacity hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground",
               sizeCls,
             )}
             style={{ backgroundColor: brand.bg, color: brand.fg }}
           >
-            {variant === "detail" ? brand.label : brand.short}
+            {variant === "detail" ? label : short}
             <ExternalLink className="h-3 w-3 opacity-80" aria-hidden />
           </a>
         );
       })}
-      {stay.website ? (
+      {officialHref ? (
         <a
-          href={stay.website}
+          href={officialHref}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`Visit official site for ${stay.name}`}
@@ -513,9 +507,27 @@ export function StayDetailSheet({ stay }: { stay: Stay }) {
 export interface StayCardProps {
   stay: Stay;
   className?: string;
+  /**
+   * Controlled detail-sheet open state. When omitted, the card runs in
+   * uncontrolled mode (Radix manages open/close internally — the original
+   * behavior). When provided, the parent owns the state — this is how
+   * `TownStay` URL-syncs the open sheet via `?stay={stayId}`.
+   */
+  open?: boolean;
+  /**
+   * Fired when the controlled sheet would change open state (Radix calls
+   * this on trigger click and on outside/escape close). Required when `open`
+   * is supplied; ignored otherwise.
+   */
+  onOpenChange?: (open: boolean) => void;
 }
 
-export function StayCard({ stay, className }: StayCardProps) {
+export function StayCard({
+  stay,
+  className,
+  open,
+  onOpenChange,
+}: StayCardProps) {
   const drives = topMountainChips(stay, 2);
   return (
     <article
@@ -528,7 +540,7 @@ export function StayCard({ stay, className }: StayCardProps) {
           buttons don't violate the no-button-inside-button HTML rule. */}
       <PhotoCarousel photos={stay.photos} name={stay.name} />
 
-      <Sheet>
+      <Sheet open={open} onOpenChange={onOpenChange}>
         <SheetTrigger asChild>
           <button
             type="button"

@@ -12,6 +12,11 @@ import {
 } from "@/components/ui/sheet";
 import { StayDetailSheet } from "@/components/StayCard";
 import { useIsMobile } from "@/hooks/use-mobile";
+import {
+  buildBookingLinks,
+  PROVIDER_LABELS,
+  type Provider,
+} from "@/lib/affiliateLinks";
 import type { Stay } from "@/types/stayEat";
 
 // Stay["type"] is a discriminated-union enum and not exported as a named
@@ -190,32 +195,32 @@ function PriceBand({ band }: { band: "$" | "$$" | "$$$" | "$$$$" | null }) {
   );
 }
 
-// Resolve the primary booking link for the popover "Book" button. Order
-// matches StayCard's PROVIDER_ORDER so behaviour is consistent.
-const POPOVER_PROVIDER_ORDER = [
-  "booking_com", "agoda", "expedia", "hotels_com",
-  "trip_com", "airbnb", "jalan", "rakuten",
-] as const;
+// Resolve the primary booking link for the popover "Book" button. Pulls from
+// the same `buildBookingLinks` helper as StayCard so affiliate IDs and
+// country-coverage rules are applied uniformly. Order matches the major-OTA
+// preference (Booking → Agoda → Expedia → Hotels.com → Trip.com → Airbnb →
+// Jalan → Rakuten); `tripadvisor` is skipped (discovery surface, low booking
+// intent), and `official` is the final fallback if nothing else is available.
+const POPOVER_PROVIDER_ORDER: readonly Provider[] = [
+  "booking_com",
+  "agoda",
+  "expedia",
+  "hotels_com",
+  "trip_com",
+  "airbnb",
+  "jalan",
+  "rakuten",
+];
 
 function primaryBookingHref(stay: Stay): { href: string; label: string } | null {
-  const links = stay.booking_links;
+  const links = buildBookingLinks(stay);
   for (const id of POPOVER_PROVIDER_ORDER) {
     const url = links[id];
     if (typeof url === "string" && url.length > 0) {
-      const labelMap: Record<string, string> = {
-        booking_com: "Booking.com",
-        agoda: "Agoda",
-        expedia: "Expedia",
-        hotels_com: "Hotels.com",
-        trip_com: "Trip.com",
-        airbnb: "Airbnb",
-        jalan: "Jalan",
-        rakuten: "Rakuten",
-      };
-      return { href: url, label: labelMap[id] ?? "Book" };
+      return { href: url, label: PROVIDER_LABELS[id] };
     }
   }
-  if (stay.website) return { href: stay.website, label: "Official site" };
+  if (links.official) return { href: links.official, label: PROVIDER_LABELS.official };
   return null;
 }
 

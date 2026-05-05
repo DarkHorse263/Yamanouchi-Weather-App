@@ -8,7 +8,8 @@
     "build": "SENTRY_RELEASE=$(git rev-parse --short HEAD 2>/dev/null || date -u +nogit-%Y%m%dT%H%M%SZ) vite build --config vite.config.ts",
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "data:smoke": "tsx scripts/curated-smoke.mts"
+    "data:smoke": "tsx scripts/curated-smoke.mts",
+    "test:affiliate": "tsx src/lib/__tests__/affiliateLinks.test.ts"
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.10.0",
