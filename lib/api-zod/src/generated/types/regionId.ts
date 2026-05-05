@@ -8,11 +8,12 @@
 
 /**
  * Canonical region identifier used across the FeelZlike platform.
+(Iiyama temporarily removed — see artifacts/api-server/src/lib/regions.ts.)
+
  */
 export type RegionId = (typeof RegionId)[keyof typeof RegionId];
 
 export const RegionId = {
   "snowy-mountains": "snowy-mountains",
   yamanouchi: "yamanouchi",
-  iiyama: "iiyama",
 } as const;

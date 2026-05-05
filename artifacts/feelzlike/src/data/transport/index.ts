@@ -21,10 +21,9 @@ import { YAMANOUCHI_TRANSPORT } from "./yamanouchi";
 const REGISTRY: Record<RegionId, TransportProviderList> = {
   "snowy-mountains": SNOWY_MOUNTAINS_TRANSPORT,
   yamanouchi: YAMANOUCHI_TRANSPORT,
-  // Iiyama transport is not yet curated. Returning an empty array keeps
-  // the page renderable (it shows a "launching soon" empty state) without
-  // leaking another region's data.
-  iiyama: [],
+  // Iiyama temporarily removed from the active region set — see
+  // artifacts/feelzlike/src/regions/index.ts. When restored, paste back the
+  // empty `iiyama: []` entry here.
 };
 
 // Loader-time integrity check.

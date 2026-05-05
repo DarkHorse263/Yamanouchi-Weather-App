@@ -210,45 +210,10 @@ const LOCATIONS: LocationConfig[] = [
   },
 
   // ─── Iiyama (Nagano, Japan) ──────────────────────────────
-  {
-    id: "madarao",
-    name: "Madarao Kogen",
-    latitude: 36.8525,
-    longitude: 138.3389,
-    elevation: 1382,
-    description: "Iiyama's powder magnet on the Niigata–Nagano border. Famous for ungroomed tree runs and Sea of Japan storms — averages over 13m of snow per season.",
-    bomStation: "",
-    bomStationId: "",
-    bomWmoId: 0,
-    timezone: "Asia/Tokyo",
-    region: "JP",
-  },
-  {
-    id: "tangram",
-    name: "Tangram Ski Circus",
-    latitude: 36.8639,
-    longitude: 138.3528,
-    elevation: 1240,
-    description: "Madarao's interlinked sister resort with a long single base-to-summit gondola. Sunnier east-facing slopes paired with the same legendary Iiyama powder belt.",
-    bomStation: "",
-    bomStationId: "",
-    bomWmoId: 0,
-    timezone: "Asia/Tokyo",
-    region: "JP",
-  },
-  {
-    id: "togari",
-    name: "Togari Onsen",
-    latitude: 36.9089,
-    longitude: 138.4222,
-    elevation: 1240,
-    description: "Family-friendly resort above Togari onsen village. Wide groomed cruisers, beginner zones, and one of Iiyama's longest top-to-bottom runs.",
-    bomStation: "",
-    bomStationId: "",
-    bomWmoId: 0,
-    timezone: "Asia/Tokyo",
-    region: "JP",
-  },
+  // Madarao / Tangram / Togari temporarily removed — see
+  // artifacts/api-server/src/lib/regions.ts. Removing them here also stops the
+  // /api/weather (no-region) handler from making 3 wasted Open-Meteo calls
+  // per request.
 ];
 
 const WEATHER_DESCRIPTIONS: Record<number, string> = {

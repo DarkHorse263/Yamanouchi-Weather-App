@@ -10,7 +10,9 @@ import type { RegionId } from "./regionId";
 
 export type GetWebcamsParams = {
   /**
-   * Canonical region identifier used across the FeelZlike platform.
-   */
+ * Canonical region identifier used across the FeelZlike platform.
+(Iiyama temporarily removed — see artifacts/api-server/src/lib/regions.ts.)
+
+ */
   region?: RegionFilterParameter;
 };

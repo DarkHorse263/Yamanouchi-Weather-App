@@ -16,7 +16,7 @@ import { RegionStay } from "@/pages/region/RegionStay";
 import { TodaysCall } from "@/pages/region/TodaysCall";
 import { snowyMountainsRouter } from "@/regions/snowy-mountains/router";
 import { yamanouchiRouter } from "@/regions/yamanouchi/router";
-import { iiyamaRouter } from "@/regions/iiyama/router";
+// Iiyama temporarily removed — see artifacts/feelzlike/src/regions/index.ts
 
 export interface RegionRouter {
   /** Renders /:region/mountain/:id (and /:region/resort/:id for legacy) */
@@ -43,7 +43,6 @@ export interface RegionRouter {
 const REGION_ROUTERS: Record<string, RegionRouter> = {
   "snowy-mountains": snowyMountainsRouter,
   "yamanouchi": yamanouchiRouter,
-  "iiyama": iiyamaRouter,
 };
 
 export function RegionLayout() {

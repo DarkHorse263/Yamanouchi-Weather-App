@@ -190,12 +190,7 @@ const WEBCAM_DATA: WebcamConfig[] = [
     webcamPageUrl: "http://hokushin.pref-nagano-roadcamera.jp/index.htm",
     webcams: [],
   },
-  {
-    locationId: "iiyama-roads",
-    locationName: "飯山への道路 · Roads to Iiyama",
-    webcamPageUrl: "http://hokushin.pref-nagano-roadcamera.jp/index.htm",
-    webcams: [],
-  },
+  // Iiyama-roads temporarily removed — see artifacts/api-server/src/lib/regions.ts
 ];
 
 router.get("/webcams", (req, res) => {

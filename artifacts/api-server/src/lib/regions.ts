@@ -3,7 +3,13 @@
  *
  * Matches the canonical region list returned by `/api/regions`.
  */
-export const REGION_IDS = ["snowy-mountains", "yamanouchi", "iiyama"] as const;
+// Iiyama is temporarily removed from the active region set while we focus on
+// shipping Snowy Mountains and Yamanouchi to v1.0. To re-enable, add "iiyama"
+// back to this tuple, restore the iiyama entry in `routes/regions.ts`, the
+// iiyama LOCATIONS in `routes/weather.ts`, the iiyama-roads webcam entry,
+// the iiyama enum value in `lib/api-spec/openapi.yaml`, and the LOCATION_TO_REGION
+// mappings below.
+export const REGION_IDS = ["snowy-mountains", "yamanouchi"] as const;
 export type RegionId = (typeof REGION_IDS)[number];
 
 export function isRegionId(value: unknown): value is RegionId {
@@ -34,12 +40,6 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "yokoteyama-shibutoge": "yamanouchi",
   "sunvalley-giant": "yamanouchi",
   "yamanouchi-roads": "yamanouchi",
-
-  // Iiyama, JP
-  "madarao": "iiyama",
-  "tangram": "iiyama",
-  "togari": "iiyama",
-  "iiyama-roads": "iiyama",
 };
 
 export function regionForLocation(locationId: string): RegionId | undefined {

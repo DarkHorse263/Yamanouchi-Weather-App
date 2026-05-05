@@ -876,8 +876,9 @@ components:
       enum:
         - snowy-mountains
         - yamanouchi
-        - iiyama
-      description: Canonical region identifier used across the FeelZlike platform.
+      description: |
+        Canonical region identifier used across the FeelZlike platform.
+        (Iiyama temporarily removed — see artifacts/api-server/src/lib/regions.ts.)
 
     HealthStatus:
       type: object

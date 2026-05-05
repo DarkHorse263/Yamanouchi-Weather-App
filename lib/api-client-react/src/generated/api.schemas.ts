@@ -7,13 +7,14 @@
  */
 /**
  * Canonical region identifier used across the FeelZlike platform.
+(Iiyama temporarily removed — see artifacts/api-server/src/lib/regions.ts.)
+
  */
 export type RegionId = (typeof RegionId)[keyof typeof RegionId];
 
 export const RegionId = {
   "snowy-mountains": "snowy-mountains",
   yamanouchi: "yamanouchi",
-  iiyama: "iiyama",
 } as const;
 
 export interface HealthStatus {
@@ -1011,8 +1012,10 @@ export type RegionFilterParameter = RegionId;
 
 export type GetPowderAlertsParams = {
   /**
-   * Canonical region identifier used across the FeelZlike platform.
-   */
+ * Canonical region identifier used across the FeelZlike platform.
+(Iiyama temporarily removed — see artifacts/api-server/src/lib/regions.ts.)
+
+ */
   region?: RegionFilterParameter;
 };
 
@@ -1065,28 +1068,36 @@ export const GetAttractionsCategory = {
 
 export type GetWeatherParams = {
   /**
-   * Canonical region identifier used across the FeelZlike platform.
-   */
+ * Canonical region identifier used across the FeelZlike platform.
+(Iiyama temporarily removed — see artifacts/api-server/src/lib/regions.ts.)
+
+ */
   region?: RegionFilterParameter;
 };
 
 export type GetWebcamsParams = {
   /**
-   * Canonical region identifier used across the FeelZlike platform.
-   */
+ * Canonical region identifier used across the FeelZlike platform.
+(Iiyama temporarily removed — see artifacts/api-server/src/lib/regions.ts.)
+
+ */
   region?: RegionFilterParameter;
 };
 
 export type GetRoadConditionsParams = {
   /**
-   * Canonical region identifier used across the FeelZlike platform.
-   */
+ * Canonical region identifier used across the FeelZlike platform.
+(Iiyama temporarily removed — see artifacts/api-server/src/lib/regions.ts.)
+
+ */
   region?: RegionFilterParameter;
 };
 
 export type GetLiftStatusParams = {
   /**
-   * Canonical region identifier used across the FeelZlike platform.
-   */
+ * Canonical region identifier used across the FeelZlike platform.
+(Iiyama temporarily removed — see artifacts/api-server/src/lib/regions.ts.)
+
+ */
   region?: RegionFilterParameter;
 };

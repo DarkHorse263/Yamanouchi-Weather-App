@@ -70,10 +70,12 @@ interface RegionsResponse {
 
 // ─── helpers ───────────────────────────────────────
 
+// Iiyama is temporarily hidden while we focus on shipping Snowy Mountains
+// and Yamanouchi to v1.0 — keep the line ready to re-paste below the
+// yamanouchi entry when re-enabling.
 const FALLBACK_REGIONS: Region[] = [
   { id: "snowy-mountains", name: "Snowy Mountains", country: "Australia", countryCode: "AU", region: "New South Wales", status: "live", href: "/snowy-mountains/", baseTowns: ["Jindabyne", "Berridale", "Cooma"], mountains: ["Thredbo", "Perisher", "Charlotte Pass", "Selwyn"], headlineLabel: "Thredbo Top", headline: null },
   { id: "yamanouchi", name: "Yamanouchi Town", country: "Japan", countryCode: "JP", region: "Nagano", status: "live", href: "/yamanouchi/", baseTowns: ["Yudanaka", "Shibu Onsen", "Yomase"], mountains: ["Shiga Kogen", "Yomase", "X-Jam", "Ryuoo"], headlineLabel: "Shiga Kogen", headline: null },
-  { id: "iiyama", name: "Iiyama", country: "Japan", countryCode: "JP", region: "Nagano", status: "soon", href: "/iiyama/", baseTowns: ["Iiyama", "Kijimadaira"], mountains: ["Madarao", "Tangram", "Nozawa Onsen", "Togari Onsen", "The Cupid of Romance", "Makinoiri Kogen Snow Park"], headlineLabel: "Madarao", headline: null },
 ];
 
 function WeatherIcon({ code, className = "w-4 h-4" }: { code: number | null; className?: string }) {
@@ -299,9 +301,10 @@ export default function Landing() {
             const isLive = region.status === "live";
             const isGreen = seasonForRegion(region) === "green";
 
-            // "Soon" regions (e.g. Iiyama) get a stripped-down placeholder
-            // card — red border, single centered "MORE REGIONS COMING SOON"
-            // line. No status pill, no name, no town/mountain meta, no link.
+            // "Soon" regions get a stripped-down placeholder card — red border,
+            // single centered "MORE REGIONS COMING SOON" line. No status pill,
+            // no name, no town/mountain meta, no link. (Currently no soon
+            // regions are listed — Iiyama is paused, see FALLBACK_REGIONS.)
             if (!isLive) {
               return (
                 <motion.div
@@ -497,7 +500,7 @@ export default function Landing() {
               No regions match &ldquo;<span className="text-slate-700 font-semibold">{search}</span>&rdquo; yet.
             </p>
             <p className="text-xs text-slate-400 mt-1.5">
-              We&apos;re expanding fast - try Snowy Mountains, Yamanouchi or Iiyama.
+              We&apos;re expanding fast - try Snowy Mountains or Yamanouchi.
             </p>
           </div>
         )}
@@ -554,7 +557,7 @@ export default function Landing() {
               <div className="flex flex-col gap-0.5">
                 <span className="font-semibold text-slate-700">Resort &amp; transport</span>
                 <span>Thredbo · Perisher · Charlotte&apos;s Pass · Selwyn</span>
-                <span>Shiga Kogen · Iiyama Kogen</span>
+                <span>Shiga Kogen · Yokoteyama</span>
                 <span>Cooma Coaches · Snowy Mountains</span>
               </div>
 

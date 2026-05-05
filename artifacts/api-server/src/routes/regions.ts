@@ -64,25 +64,7 @@ const REGIONS: RegionConfig[] = [
     timezone: "Asia/Tokyo",
     sourceLabel: "JMA Seamless",
   },
-  {
-    id: "iiyama",
-    name: "Iiyama",
-    country: "Japan",
-    countryCode: "JP",
-    region: "Nagano",
-    status: "soon",
-    href: "/iiyama/",
-    baseTowns: ["Iiyama", "Kijimadaira"],
-    mountains: [
-      "Madarao",
-      "Tangram",
-      "Nozawa Onsen",
-      "Togari Onsen",
-      "The Cupid of Romance",
-      "Makinoiri Kogen Snow Park",
-    ],
-    headlineLabel: "Madarao",
-  },
+  // Iiyama temporarily removed — see artifacts/api-server/src/lib/regions.ts
 ];
 
 const WEATHER_DESCRIPTIONS: Record<number, string> = {
