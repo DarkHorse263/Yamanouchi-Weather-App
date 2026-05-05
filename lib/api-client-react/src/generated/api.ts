@@ -42,6 +42,11 @@ import type {
   GetAccommodationParams,
   GetAttractionsParams,
   GetDiningParams,
+  GetLiftStatusParams,
+  GetPowderAlertsParams,
+  GetRoadConditionsParams,
+  GetWeatherParams,
+  GetWebcamsParams,
   HealthStatus,
   LiftStatusResponse,
   LocationWeather,
@@ -531,44 +536,60 @@ export function useGetSnowOutlook<
 }
 
 /**
- * Returns current powder alerts and recent storm events
+ * Returns current powder alerts and recent storm events. Powder alerts are currently Yamanouchi-only; other regions return an empty payload.
  * @summary Get powder alerts
  */
-export const getGetPowderAlertsUrl = () => {
-  return `/api/alerts`;
+export const getGetPowderAlertsUrl = (params?: GetPowderAlertsParams) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? "null" : value.toString());
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0
+    ? `/api/alerts?${stringifiedParams}`
+    : `/api/alerts`;
 };
 
 export const getPowderAlerts = async (
+  params?: GetPowderAlertsParams,
   options?: RequestInit,
 ): Promise<AlertsData> => {
-  return customFetch<AlertsData>(getGetPowderAlertsUrl(), {
+  return customFetch<AlertsData>(getGetPowderAlertsUrl(params), {
     ...options,
     method: "GET",
   });
 };
 
-export const getGetPowderAlertsQueryKey = () => {
-  return [`/api/alerts`] as const;
+export const getGetPowderAlertsQueryKey = (params?: GetPowderAlertsParams) => {
+  return [`/api/alerts`, ...(params ? [params] : [])] as const;
 };
 
 export const getGetPowderAlertsQueryOptions = <
   TData = Awaited<ReturnType<typeof getPowderAlerts>>,
-  TError = ErrorType<unknown>,
->(options?: {
-  query?: UseQueryOptions<
-    Awaited<ReturnType<typeof getPowderAlerts>>,
-    TError,
-    TData
-  >;
-  request?: SecondParameter<typeof customFetch>;
-}) => {
+  TError = ErrorType<ErrorResponse>,
+>(
+  params?: GetPowderAlertsParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getPowderAlerts>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getGetPowderAlertsQueryKey();
+  const queryKey = queryOptions?.queryKey ?? getGetPowderAlertsQueryKey(params);
 
   const queryFn: QueryFunction<Awaited<ReturnType<typeof getPowderAlerts>>> = ({
     signal,
-  }) => getPowderAlerts({ signal, ...requestOptions });
+  }) => getPowderAlerts(params, { signal, ...requestOptions });
 
   return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof getPowderAlerts>>,
@@ -580,7 +601,7 @@ export const getGetPowderAlertsQueryOptions = <
 export type GetPowderAlertsQueryResult = NonNullable<
   Awaited<ReturnType<typeof getPowderAlerts>>
 >;
-export type GetPowderAlertsQueryError = ErrorType<unknown>;
+export type GetPowderAlertsQueryError = ErrorType<ErrorResponse>;
 
 /**
  * @summary Get powder alerts
@@ -588,16 +609,19 @@ export type GetPowderAlertsQueryError = ErrorType<unknown>;
 
 export function useGetPowderAlerts<
   TData = Awaited<ReturnType<typeof getPowderAlerts>>,
-  TError = ErrorType<unknown>,
->(options?: {
-  query?: UseQueryOptions<
-    Awaited<ReturnType<typeof getPowderAlerts>>,
-    TError,
-    TData
-  >;
-  request?: SecondParameter<typeof customFetch>;
-}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
-  const queryOptions = getGetPowderAlertsQueryOptions(options);
+  TError = ErrorType<ErrorResponse>,
+>(
+  params?: GetPowderAlertsParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getPowderAlerts>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetPowderAlertsQueryOptions(params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
     queryKey: QueryKey;
@@ -2699,44 +2723,60 @@ export const useEigomenyuTranslate = <
 };
 
 /**
- * Returns current weather and 7-day forecast for Thredbo, Perisher, Charlotte's Pass, and Jindabyne
+ * Returns current weather and 7-day forecast for every configured resort. Pass `?region=` to restrict the response to a single region's resorts.
  * @summary Get weather for all resort locations
  */
-export const getGetWeatherUrl = () => {
-  return `/api/weather`;
+export const getGetWeatherUrl = (params?: GetWeatherParams) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? "null" : value.toString());
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0
+    ? `/api/weather?${stringifiedParams}`
+    : `/api/weather`;
 };
 
 export const getWeather = async (
+  params?: GetWeatherParams,
   options?: RequestInit,
 ): Promise<WeatherResponse> => {
-  return customFetch<WeatherResponse>(getGetWeatherUrl(), {
+  return customFetch<WeatherResponse>(getGetWeatherUrl(params), {
     ...options,
     method: "GET",
   });
 };
 
-export const getGetWeatherQueryKey = () => {
-  return [`/api/weather`] as const;
+export const getGetWeatherQueryKey = (params?: GetWeatherParams) => {
+  return [`/api/weather`, ...(params ? [params] : [])] as const;
 };
 
 export const getGetWeatherQueryOptions = <
   TData = Awaited<ReturnType<typeof getWeather>>,
   TError = ErrorType<ErrorResponse>,
->(options?: {
-  query?: UseQueryOptions<
-    Awaited<ReturnType<typeof getWeather>>,
-    TError,
-    TData
-  >;
-  request?: SecondParameter<typeof customFetch>;
-}) => {
+>(
+  params?: GetWeatherParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getWeather>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getGetWeatherQueryKey();
+  const queryKey = queryOptions?.queryKey ?? getGetWeatherQueryKey(params);
 
   const queryFn: QueryFunction<Awaited<ReturnType<typeof getWeather>>> = ({
     signal,
-  }) => getWeather({ signal, ...requestOptions });
+  }) => getWeather(params, { signal, ...requestOptions });
 
   return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof getWeather>>,
@@ -2757,15 +2797,18 @@ export type GetWeatherQueryError = ErrorType<ErrorResponse>;
 export function useGetWeather<
   TData = Awaited<ReturnType<typeof getWeather>>,
   TError = ErrorType<ErrorResponse>,
->(options?: {
-  query?: UseQueryOptions<
-    Awaited<ReturnType<typeof getWeather>>,
-    TError,
-    TData
-  >;
-  request?: SecondParameter<typeof customFetch>;
-}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
-  const queryOptions = getGetWeatherQueryOptions(options);
+>(
+  params?: GetWeatherParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getWeather>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetWeatherQueryOptions(params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
     queryKey: QueryKey;
@@ -3000,44 +3043,60 @@ export function useGetBusServices<
 }
 
 /**
- * Returns webcam feeds for all resort locations
+ * Returns webcam feeds for every configured location. Pass `?region=` to restrict the response to a single region's webcams.
  * @summary Get all resort webcams
  */
-export const getGetWebcamsUrl = () => {
-  return `/api/webcams`;
+export const getGetWebcamsUrl = (params?: GetWebcamsParams) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? "null" : value.toString());
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0
+    ? `/api/webcams?${stringifiedParams}`
+    : `/api/webcams`;
 };
 
 export const getWebcams = async (
+  params?: GetWebcamsParams,
   options?: RequestInit,
 ): Promise<WebcamResponse> => {
-  return customFetch<WebcamResponse>(getGetWebcamsUrl(), {
+  return customFetch<WebcamResponse>(getGetWebcamsUrl(params), {
     ...options,
     method: "GET",
   });
 };
 
-export const getGetWebcamsQueryKey = () => {
-  return [`/api/webcams`] as const;
+export const getGetWebcamsQueryKey = (params?: GetWebcamsParams) => {
+  return [`/api/webcams`, ...(params ? [params] : [])] as const;
 };
 
 export const getGetWebcamsQueryOptions = <
   TData = Awaited<ReturnType<typeof getWebcams>>,
-  TError = ErrorType<unknown>,
->(options?: {
-  query?: UseQueryOptions<
-    Awaited<ReturnType<typeof getWebcams>>,
-    TError,
-    TData
-  >;
-  request?: SecondParameter<typeof customFetch>;
-}) => {
+  TError = ErrorType<ErrorResponse>,
+>(
+  params?: GetWebcamsParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getWebcams>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getGetWebcamsQueryKey();
+  const queryKey = queryOptions?.queryKey ?? getGetWebcamsQueryKey(params);
 
   const queryFn: QueryFunction<Awaited<ReturnType<typeof getWebcams>>> = ({
     signal,
-  }) => getWebcams({ signal, ...requestOptions });
+  }) => getWebcams(params, { signal, ...requestOptions });
 
   return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof getWebcams>>,
@@ -3049,7 +3108,7 @@ export const getGetWebcamsQueryOptions = <
 export type GetWebcamsQueryResult = NonNullable<
   Awaited<ReturnType<typeof getWebcams>>
 >;
-export type GetWebcamsQueryError = ErrorType<unknown>;
+export type GetWebcamsQueryError = ErrorType<ErrorResponse>;
 
 /**
  * @summary Get all resort webcams
@@ -3057,16 +3116,19 @@ export type GetWebcamsQueryError = ErrorType<unknown>;
 
 export function useGetWebcams<
   TData = Awaited<ReturnType<typeof getWebcams>>,
-  TError = ErrorType<unknown>,
->(options?: {
-  query?: UseQueryOptions<
-    Awaited<ReturnType<typeof getWebcams>>,
-    TError,
-    TData
-  >;
-  request?: SecondParameter<typeof customFetch>;
-}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
-  const queryOptions = getGetWebcamsQueryOptions(options);
+  TError = ErrorType<ErrorResponse>,
+>(
+  params?: GetWebcamsParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getWebcams>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetWebcamsQueryOptions(params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
     queryKey: QueryKey;
@@ -3166,44 +3228,63 @@ export function useGetLocationWebcams<
 }
 
 /**
- * Returns current road conditions for Snowy Mountains alpine roads from Transport for NSW
+ * Returns current road conditions. The roads dataset is currently Snowy Mountains only; other regions return an empty roads list with an explanatory advice message.
  * @summary Get alpine road conditions
  */
-export const getGetRoadConditionsUrl = () => {
-  return `/api/road-conditions`;
+export const getGetRoadConditionsUrl = (params?: GetRoadConditionsParams) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? "null" : value.toString());
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0
+    ? `/api/road-conditions?${stringifiedParams}`
+    : `/api/road-conditions`;
 };
 
 export const getRoadConditions = async (
+  params?: GetRoadConditionsParams,
   options?: RequestInit,
 ): Promise<RoadConditionsResponse> => {
-  return customFetch<RoadConditionsResponse>(getGetRoadConditionsUrl(), {
+  return customFetch<RoadConditionsResponse>(getGetRoadConditionsUrl(params), {
     ...options,
     method: "GET",
   });
 };
 
-export const getGetRoadConditionsQueryKey = () => {
-  return [`/api/road-conditions`] as const;
+export const getGetRoadConditionsQueryKey = (
+  params?: GetRoadConditionsParams,
+) => {
+  return [`/api/road-conditions`, ...(params ? [params] : [])] as const;
 };
 
 export const getGetRoadConditionsQueryOptions = <
   TData = Awaited<ReturnType<typeof getRoadConditions>>,
-  TError = ErrorType<unknown>,
->(options?: {
-  query?: UseQueryOptions<
-    Awaited<ReturnType<typeof getRoadConditions>>,
-    TError,
-    TData
-  >;
-  request?: SecondParameter<typeof customFetch>;
-}) => {
+  TError = ErrorType<ErrorResponse>,
+>(
+  params?: GetRoadConditionsParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getRoadConditions>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getGetRoadConditionsQueryKey();
+  const queryKey =
+    queryOptions?.queryKey ?? getGetRoadConditionsQueryKey(params);
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof getRoadConditions>>
-  > = ({ signal }) => getRoadConditions({ signal, ...requestOptions });
+  > = ({ signal }) => getRoadConditions(params, { signal, ...requestOptions });
 
   return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof getRoadConditions>>,
@@ -3215,7 +3296,7 @@ export const getGetRoadConditionsQueryOptions = <
 export type GetRoadConditionsQueryResult = NonNullable<
   Awaited<ReturnType<typeof getRoadConditions>>
 >;
-export type GetRoadConditionsQueryError = ErrorType<unknown>;
+export type GetRoadConditionsQueryError = ErrorType<ErrorResponse>;
 
 /**
  * @summary Get alpine road conditions
@@ -3223,16 +3304,19 @@ export type GetRoadConditionsQueryError = ErrorType<unknown>;
 
 export function useGetRoadConditions<
   TData = Awaited<ReturnType<typeof getRoadConditions>>,
-  TError = ErrorType<unknown>,
->(options?: {
-  query?: UseQueryOptions<
-    Awaited<ReturnType<typeof getRoadConditions>>,
-    TError,
-    TData
-  >;
-  request?: SecondParameter<typeof customFetch>;
-}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
-  const queryOptions = getGetRoadConditionsQueryOptions(options);
+  TError = ErrorType<ErrorResponse>,
+>(
+  params?: GetRoadConditionsParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getRoadConditions>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetRoadConditionsQueryOptions(params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
     queryKey: QueryKey;
@@ -3242,44 +3326,60 @@ export function useGetRoadConditions<
 }
 
 /**
- * Returns current lift operating status for Thredbo, Perisher, and Charlotte's Pass
+ * Returns current lift operating status. Currently covers Thredbo, Perisher, Charlotte's Pass and Selwyn (Snowy Mountains).
  * @summary Get lift status for all resorts
  */
-export const getGetLiftStatusUrl = () => {
-  return `/api/lift-status`;
+export const getGetLiftStatusUrl = (params?: GetLiftStatusParams) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? "null" : value.toString());
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0
+    ? `/api/lift-status?${stringifiedParams}`
+    : `/api/lift-status`;
 };
 
 export const getLiftStatus = async (
+  params?: GetLiftStatusParams,
   options?: RequestInit,
 ): Promise<LiftStatusResponse> => {
-  return customFetch<LiftStatusResponse>(getGetLiftStatusUrl(), {
+  return customFetch<LiftStatusResponse>(getGetLiftStatusUrl(params), {
     ...options,
     method: "GET",
   });
 };
 
-export const getGetLiftStatusQueryKey = () => {
-  return [`/api/lift-status`] as const;
+export const getGetLiftStatusQueryKey = (params?: GetLiftStatusParams) => {
+  return [`/api/lift-status`, ...(params ? [params] : [])] as const;
 };
 
 export const getGetLiftStatusQueryOptions = <
   TData = Awaited<ReturnType<typeof getLiftStatus>>,
-  TError = ErrorType<unknown>,
->(options?: {
-  query?: UseQueryOptions<
-    Awaited<ReturnType<typeof getLiftStatus>>,
-    TError,
-    TData
-  >;
-  request?: SecondParameter<typeof customFetch>;
-}) => {
+  TError = ErrorType<ErrorResponse>,
+>(
+  params?: GetLiftStatusParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getLiftStatus>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getGetLiftStatusQueryKey();
+  const queryKey = queryOptions?.queryKey ?? getGetLiftStatusQueryKey(params);
 
   const queryFn: QueryFunction<Awaited<ReturnType<typeof getLiftStatus>>> = ({
     signal,
-  }) => getLiftStatus({ signal, ...requestOptions });
+  }) => getLiftStatus(params, { signal, ...requestOptions });
 
   return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof getLiftStatus>>,
@@ -3291,7 +3391,7 @@ export const getGetLiftStatusQueryOptions = <
 export type GetLiftStatusQueryResult = NonNullable<
   Awaited<ReturnType<typeof getLiftStatus>>
 >;
-export type GetLiftStatusQueryError = ErrorType<unknown>;
+export type GetLiftStatusQueryError = ErrorType<ErrorResponse>;
 
 /**
  * @summary Get lift status for all resorts
@@ -3299,16 +3399,19 @@ export type GetLiftStatusQueryError = ErrorType<unknown>;
 
 export function useGetLiftStatus<
   TData = Awaited<ReturnType<typeof getLiftStatus>>,
-  TError = ErrorType<unknown>,
->(options?: {
-  query?: UseQueryOptions<
-    Awaited<ReturnType<typeof getLiftStatus>>,
-    TError,
-    TData
-  >;
-  request?: SecondParameter<typeof customFetch>;
-}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
-  const queryOptions = getGetLiftStatusQueryOptions(options);
+  TError = ErrorType<ErrorResponse>,
+>(
+  params?: GetLiftStatusParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getLiftStatus>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetLiftStatusQueryOptions(params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
     queryKey: QueryKey;

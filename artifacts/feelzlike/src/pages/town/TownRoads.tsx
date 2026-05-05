@@ -78,10 +78,11 @@ export function TownRoads() {
   const { t } = useLanguage();
   const { town } = useBaseTown();
   const dataAvailable = region.roadsSource?.dataAvailable ?? true;
-  const query = useGetRoadConditions({
-    query: { enabled: dataAvailable },
-  });
-  const camsQuery = useGetWebcams();
+  const query = useGetRoadConditions(
+    { region: region.id },
+    { query: { enabled: dataAvailable } },
+  );
+  const camsQuery = useGetWebcams({ region: region.id });
   const roadCams = useMemo(() => {
     const loc = camsQuery.data?.locations.find((l) => l.locationId === `${region.id}-roads`);
     return loc?.webcams.filter((w) => w.type === "road") ?? [];

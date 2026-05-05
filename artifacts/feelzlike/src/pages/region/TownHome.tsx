@@ -31,9 +31,9 @@ export function TownHome() {
   const { region } = useRegion();
   const { t } = useLanguage();
   const { town } = useBaseTown();
-  const weatherQ = useGetWeather();
+  const weatherQ = useGetWeather({ region: region.id });
   const roadsAvailable = region.roadsSource?.dataAvailable ?? true;
-  const roadsQ = useGetRoadConditions({ query: { enabled: roadsAvailable } });
+  const roadsQ = useGetRoadConditions({ region: region.id }, { query: { enabled: roadsAvailable } });
   const townWeatherQ = useTownWeather(town?.lat, town?.lng);
 
   // Pick the closest mountain to this town that has live weather data.

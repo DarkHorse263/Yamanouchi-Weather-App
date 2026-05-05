@@ -142,7 +142,7 @@ export function RegionOverview() {
   const { towns, town } = useBaseTown();
   const seasonCtx = region.seasons ? useSeason() : null;
   const season = seasonCtx?.season ?? "winter";
-  const weatherQ = useGetWeather();
+  const weatherQ = useGetWeather({ region: region.id });
   const mountains = region.mountains ?? [];
 
   const scored = useMemo(() => {

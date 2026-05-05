@@ -28,7 +28,7 @@ function getStatusIcon(status: string) {
 }
 
 export default function LiftStatus() {
-  const { data, isLoading, error, refetch } = useGetLiftStatus();
+  const { data, isLoading, error, refetch } = useGetLiftStatus({ region: "snowy-mountains" });
 
   return (
     <>

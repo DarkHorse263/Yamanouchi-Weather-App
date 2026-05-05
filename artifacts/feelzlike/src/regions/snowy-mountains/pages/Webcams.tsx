@@ -60,7 +60,7 @@ function WebcamImage({ webcam }: { webcam: any }) {
 }
 
 export default function Webcams() {
-  const { data, isLoading, error, refetch } = useGetWebcams();
+  const { data, isLoading, error, refetch } = useGetWebcams({ region: "snowy-mountains" });
 
   return (
     <>

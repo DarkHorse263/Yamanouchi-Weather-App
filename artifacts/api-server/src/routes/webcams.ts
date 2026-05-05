@@ -1,5 +1,6 @@
 import { Router, type IRouter } from "express";
 import { GetWebcamsResponse, GetLocationWebcamsResponse, GetLocationWebcamsParams } from "@workspace/api-zod";
+import { locationMatchesRegion, parseRegionParam, RegionParamError } from "../lib/regions.js";
 
 const router: IRouter = Router();
 
@@ -197,12 +198,25 @@ const WEBCAM_DATA: WebcamConfig[] = [
   },
 ];
 
-router.get("/webcams", (_req, res) => {
-  const result = GetWebcamsResponse.parse({
-    locations: WEBCAM_DATA,
-    lastUpdated: new Date().toISOString(),
-  });
-  res.json(result);
+router.get("/webcams", (req, res) => {
+  try {
+    const region = parseRegionParam(req.query["region"]);
+    const locations = region
+      ? WEBCAM_DATA.filter((loc) => locationMatchesRegion(loc.locationId, region))
+      : WEBCAM_DATA;
+
+    const result = GetWebcamsResponse.parse({
+      locations,
+      lastUpdated: new Date().toISOString(),
+    });
+    res.json(result);
+  } catch (error) {
+    if (error instanceof RegionParamError) {
+      res.status(400).json({ error: "INVALID_REGION", message: error.message });
+      return;
+    }
+    throw error;
+  }
 });
 
 router.get("/webcams/:locationId", (req, res) => {

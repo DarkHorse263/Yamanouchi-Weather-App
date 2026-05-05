@@ -67,7 +67,7 @@ export function TownCams() {
   const { region } = useRegion();
   const { t } = useLanguage();
   const { town } = useBaseTown();
-  const query = useGetWebcams();
+  const query = useGetWebcams({ region: region.id });
 
   const locations = useMemo(() => {
     if (!query.data || !town) return [];

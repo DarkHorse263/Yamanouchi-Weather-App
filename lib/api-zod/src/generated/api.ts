@@ -150,9 +150,18 @@ export const GetSnowOutlookResponseItem = zod.object({
 export const GetSnowOutlookResponse = zod.array(GetSnowOutlookResponseItem);
 
 /**
- * Returns current powder alerts and recent storm events
+ * Returns current powder alerts and recent storm events. Powder alerts are currently Yamanouchi-only; other regions return an empty payload.
  * @summary Get powder alerts
  */
+export const GetPowderAlertsQueryParams = zod.object({
+  region: zod
+    .enum(["snowy-mountains", "yamanouchi", "iiyama"])
+    .optional()
+    .describe(
+      "Optional region filter. Omit to receive data for every region. Must be one of the canonical region ids returned by `\/api\/regions`.",
+    ),
+});
+
 export const GetPowderAlertsResponse = zod.object({
   alerts: zod.array(
     zod.object({
@@ -741,9 +750,18 @@ export const EigomenyuTranslateResponse = zod.object({
 });
 
 /**
- * Returns current weather and 7-day forecast for Thredbo, Perisher, Charlotte's Pass, and Jindabyne
+ * Returns current weather and 7-day forecast for every configured resort. Pass `?region=` to restrict the response to a single region's resorts.
  * @summary Get weather for all resort locations
  */
+export const GetWeatherQueryParams = zod.object({
+  region: zod
+    .enum(["snowy-mountains", "yamanouchi", "iiyama"])
+    .optional()
+    .describe(
+      "Optional region filter. Omit to receive data for every region. Must be one of the canonical region ids returned by `\/api\/regions`.",
+    ),
+});
+
 export const GetWeatherResponse = zod.object({
   locations: zod.array(
     zod.object({
@@ -979,9 +997,18 @@ export const GetBusServicesResponse = zod.object({
 });
 
 /**
- * Returns webcam feeds for all resort locations
+ * Returns webcam feeds for every configured location. Pass `?region=` to restrict the response to a single region's webcams.
  * @summary Get all resort webcams
  */
+export const GetWebcamsQueryParams = zod.object({
+  region: zod
+    .enum(["snowy-mountains", "yamanouchi", "iiyama"])
+    .optional()
+    .describe(
+      "Optional region filter. Omit to receive data for every region. Must be one of the canonical region ids returned by `\/api\/regions`.",
+    ),
+});
+
 export const GetWebcamsResponse = zod.object({
   locations: zod.array(
     zod.object({
@@ -1056,9 +1083,18 @@ export const GetLocationWebcamsResponse = zod.object({
 });
 
 /**
- * Returns current road conditions for Snowy Mountains alpine roads from Transport for NSW
+ * Returns current road conditions. The roads dataset is currently Snowy Mountains only; other regions return an empty roads list with an explanatory advice message.
  * @summary Get alpine road conditions
  */
+export const GetRoadConditionsQueryParams = zod.object({
+  region: zod
+    .enum(["snowy-mountains", "yamanouchi", "iiyama"])
+    .optional()
+    .describe(
+      "Optional region filter. Omit to receive data for every region. Must be one of the canonical region ids returned by `\/api\/regions`.",
+    ),
+});
+
 export const GetRoadConditionsResponse = zod.object({
   roads: zod.array(
     zod.object({
@@ -1096,9 +1132,18 @@ export const GetRoadConditionsResponse = zod.object({
 });
 
 /**
- * Returns current lift operating status for Thredbo, Perisher, and Charlotte's Pass
+ * Returns current lift operating status. Currently covers Thredbo, Perisher, Charlotte's Pass and Selwyn (Snowy Mountains).
  * @summary Get lift status for all resorts
  */
+export const GetLiftStatusQueryParams = zod.object({
+  region: zod
+    .enum(["snowy-mountains", "yamanouchi", "iiyama"])
+    .optional()
+    .describe(
+      "Optional region filter. Omit to receive data for every region. Must be one of the canonical region ids returned by `\/api\/regions`.",
+    ),
+});
+
 export const GetLiftStatusResponse = zod.object({
   resorts: zod.array(
     zod.object({

@@ -5,6 +5,17 @@
  * Yamanouchi Snow Intelligence Platform API
  * OpenAPI spec version: 0.1.0
  */
+/**
+ * Canonical region identifier used across the FeelZlike platform.
+ */
+export type RegionId = (typeof RegionId)[keyof typeof RegionId];
+
+export const RegionId = {
+  "snowy-mountains": "snowy-mountains",
+  yamanouchi: "yamanouchi",
+  iiyama: "iiyama",
+} as const;
+
 export interface HealthStatus {
   status: string;
 }
@@ -989,6 +1000,15 @@ export interface ErrorResponse {
   message: string;
 }
 
+export type RegionFilterParameter = RegionId;
+
+export type GetPowderAlertsParams = {
+  /**
+   * Canonical region identifier used across the FeelZlike platform.
+   */
+  region?: RegionFilterParameter;
+};
+
 export type GetAccommodationParams = {
   type?: GetAccommodationType;
   region?: string;
@@ -1035,3 +1055,31 @@ export const GetAttractionsCategory = {
   shopping: "shopping",
   all: "all",
 } as const;
+
+export type GetWeatherParams = {
+  /**
+   * Canonical region identifier used across the FeelZlike platform.
+   */
+  region?: RegionFilterParameter;
+};
+
+export type GetWebcamsParams = {
+  /**
+   * Canonical region identifier used across the FeelZlike platform.
+   */
+  region?: RegionFilterParameter;
+};
+
+export type GetRoadConditionsParams = {
+  /**
+   * Canonical region identifier used across the FeelZlike platform.
+   */
+  region?: RegionFilterParameter;
+};
+
+export type GetLiftStatusParams = {
+  /**
+   * Canonical region identifier used across the FeelZlike platform.
+   */
+  region?: RegionFilterParameter;
+};

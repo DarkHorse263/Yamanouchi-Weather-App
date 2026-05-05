@@ -1,5 +1,6 @@
 import { Router, type IRouter } from "express";
 import { GetRoadConditionsResponse } from "@workspace/api-zod";
+import { parseRegionParam, RegionParamError } from "../lib/regions.js";
 
 const router: IRouter = Router();
 
@@ -165,17 +166,36 @@ async function fetchRoadConditions() {
   return roads;
 }
 
-router.get("/road-conditions", async (_req, res) => {
-  const roads = await fetchRoadConditions();
+router.get("/road-conditions", async (req, res) => {
+  try {
+    const region = parseRegionParam(req.query["region"]);
 
-  const result = GetRoadConditionsResponse.parse({
-    roads,
-    generalAdvice: "Always carry chains when travelling to the Snowy Mountains during winter (June-October). Check conditions before departure at livetraffic.com. National Parks entry fees apply for Kosciuszko National Park. Vehicle entry is $29/day or $190/year (2024 rates). During heavy snowfall, roads may close at short notice.",
-    liveTrafficUrl: "https://www.livetraffic.com/maps?lat=-36.45&lng=148.45&zoom=10&layers=cameras",
-    lastUpdated: new Date().toISOString(),
-    chainFittingBays: CHAIN_FITTING_BAYS
-  });
-  res.json(result);
+    // Roads dataset is currently Snowy Mountains only. When other regions
+    // ask for road conditions, return an empty roads list rather than 404
+    // so the client can render a "no data yet" state cleanly.
+    const isAU = region === undefined || region === "snowy-mountains";
+    const roads = isAU ? await fetchRoadConditions() : [];
+    const chainFittingBays = isAU ? CHAIN_FITTING_BAYS : [];
+
+    const result = GetRoadConditionsResponse.parse({
+      roads,
+      generalAdvice: isAU
+        ? "Always carry chains when travelling to the Snowy Mountains during winter (June-October). Check conditions before departure at livetraffic.com. National Parks entry fees apply for Kosciuszko National Park. Vehicle entry is $29/day or $190/year (2024 rates). During heavy snowfall, roads may close at short notice."
+        : "Live road condition data is not yet available for this region.",
+      liveTrafficUrl: isAU
+        ? "https://www.livetraffic.com/maps?lat=-36.45&lng=148.45&zoom=10&layers=cameras"
+        : "",
+      lastUpdated: new Date().toISOString(),
+      chainFittingBays,
+    });
+    res.json(result);
+  } catch (error) {
+    if (error instanceof RegionParamError) {
+      res.status(400).json({ error: "INVALID_REGION", message: error.message });
+      return;
+    }
+    throw error;
+  }
 });
 
 export default router;

@@ -128,7 +128,9 @@ paths:
       operationId: getPowderAlerts
       tags: [alerts]
       summary: Get powder alerts
-      description: Returns current powder alerts and recent storm events
+      description: Returns current powder alerts and recent storm events. Powder alerts are currently Yamanouchi-only; other regions return an empty payload.
+      parameters:
+        - $ref: "#/components/parameters/RegionFilter"
       responses:
         "200":
           description: Powder alerts
@@ -136,6 +138,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AlertsData"
+        "400":
+          description: Invalid region value
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
 
   /accommodation:
     get:
@@ -658,7 +666,9 @@ paths:
       operationId: getWeather
       tags: [weather]
       summary: Get weather for all resort locations
-      description: Returns current weather and 7-day forecast for Thredbo, Perisher, Charlotte's Pass, and Jindabyne
+      description: Returns current weather and 7-day forecast for every configured resort. Pass `?region=` to restrict the response to a single region's resorts.
+      parameters:
+        - $ref: "#/components/parameters/RegionFilter"
       responses:
         "200":
           description: Weather data for all locations
@@ -666,6 +676,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/WeatherResponse"
+        "400":
+          description: Invalid region value
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
         "500":
           description: Error fetching weather
           content:
@@ -733,7 +749,9 @@ paths:
       operationId: getWebcams
       tags: [webcams]
       summary: Get all resort webcams
-      description: Returns webcam feeds for all resort locations
+      description: Returns webcam feeds for every configured location. Pass `?region=` to restrict the response to a single region's webcams.
+      parameters:
+        - $ref: "#/components/parameters/RegionFilter"
       responses:
         "200":
           description: Webcam data for all locations
@@ -741,6 +759,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/WebcamResponse"
+        "400":
+          description: Invalid region value
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
   /webcams/{locationId}:
     get:
       operationId: getLocationWebcams
@@ -773,7 +797,9 @@ paths:
       operationId: getRoadConditions
       tags: [roads]
       summary: Get alpine road conditions
-      description: Returns current road conditions for Snowy Mountains alpine roads from Transport for NSW
+      description: Returns current road conditions. The roads dataset is currently Snowy Mountains only; other regions return an empty roads list with an explanatory advice message.
+      parameters:
+        - $ref: "#/components/parameters/RegionFilter"
       responses:
         "200":
           description: Road condition data
@@ -781,12 +807,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/RoadConditionsResponse"
+        "400":
+          description: Invalid region value
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
   /lift-status:
     get:
       operationId: getLiftStatus
       tags: [lifts]
       summary: Get lift status for all resorts
-      description: Returns current lift operating status for Thredbo, Perisher, and Charlotte's Pass
+      description: Returns current lift operating status. Currently covers Thredbo, Perisher, Charlotte's Pass and Selwyn (Snowy Mountains).
+      parameters:
+        - $ref: "#/components/parameters/RegionFilter"
       responses:
         "200":
           description: Lift status data
@@ -794,6 +828,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LiftStatusResponse"
+        "400":
+          description: Invalid region value
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
   /lift-status/{locationId}:
     get:
       operationId: getLocationLiftStatus
@@ -822,7 +862,23 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
 
 components:
+  parameters:
+    RegionFilter:
+      name: region
+      in: query
+      required: false
+      description: Optional region filter. Omit to receive data for every region. Must be one of the canonical region ids returned by `/api/regions`.
+      schema:
+        $ref: "#/components/schemas/RegionId"
   schemas:
+    RegionId:
+      type: string
+      enum:
+        - snowy-mountains
+        - yamanouchi
+        - iiyama
+      description: Canonical region identifier used across the FeelZlike platform.
+
     HealthStatus:
       type: object
       properties:

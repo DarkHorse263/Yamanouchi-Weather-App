@@ -1,5 +1,6 @@
 import { Router, type IRouter } from "express";
 import { GetLiftStatusResponse, GetLocationLiftStatusResponse, GetLocationLiftStatusParams } from "@workspace/api-zod";
+import { locationMatchesRegion, parseRegionParam, RegionParamError } from "../lib/regions.js";
 
 const router: IRouter = Router();
 
@@ -424,20 +425,41 @@ function getResortData(): ResortLiftData[] {
   }));
 }
 
-router.get("/lift-status", (_req, res) => {
-  const resorts = getResortData();
+router.get("/lift-status", (req, res) => {
+  try {
+    const region = parseRegionParam(req.query["region"]);
+    const allResorts = getResortData();
+    const resorts = region
+      ? allResorts.filter((r) => locationMatchesRegion(r.locationId, region))
+      : allResorts;
 
-  const now = new Date().toISOString();
-  const result = GetLiftStatusResponse.parse({
-    resorts: resorts.map(r => ({
-      ...r,
-      liftsOpen: r.lifts.filter(l => l.status === "open").length,
-      totalLifts: r.lifts.length,
+    // Surface why a region has no resorts so debuggers + clients can render a
+    // sensible empty state. Header keeps the JSON shape stable / OpenAPI-clean.
+    if (region && resorts.length === 0) {
+      res.setHeader(
+        "X-Empty-Reason",
+        `Lift status data is not yet available for region '${region}'.`,
+      );
+    }
+
+    const now = new Date().toISOString();
+    const result = GetLiftStatusResponse.parse({
+      resorts: resorts.map(r => ({
+        ...r,
+        liftsOpen: r.lifts.filter(l => l.status === "open").length,
+        totalLifts: r.lifts.length,
+        lastUpdated: now
+      })),
       lastUpdated: now
-    })),
-    lastUpdated: now
-  });
-  res.json(result);
+    });
+    res.json(result);
+  } catch (error) {
+    if (error instanceof RegionParamError) {
+      res.status(400).json({ error: "INVALID_REGION", message: error.message });
+      return;
+    }
+    throw error;
+  }
 });
 
 router.get("/lift-status/:locationId", (req, res) => {

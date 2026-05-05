@@ -4,20 +4,10 @@ import { LoadingState } from "../components/ui/loading-state";
 import { ErrorState } from "../components/ui/error-state";
 import { motion } from "framer-motion";
 
-const AU_LOCATION_IDS = new Set([
-  "thredbo",
-  "perisher",
-  "charlottes-pass",
-  "jindabyne",
-  "selwyn",
-]);
-
 export default function Dashboard() {
-  const { data, isLoading, error, refetch } = useGetWeather();
+  const { data, isLoading, error, refetch } = useGetWeather({ region: "snowy-mountains" });
   const updated = new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
-  const auLocations = (data?.locations ?? []).filter((loc: any) =>
-    AU_LOCATION_IDS.has(loc.location?.id),
-  );
+  const auLocations = data?.locations ?? [];
 
   return (
     <>

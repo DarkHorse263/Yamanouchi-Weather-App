@@ -186,7 +186,7 @@ export function TodaysCall() {
   const { t } = useLanguage();
   const { town } = useBaseTown();
   const { season } = useSeason();
-  const weatherQ = useGetWeather();
+  const weatherQ = useGetWeather({ region: region.id });
 
   const rows: MountainRow[] = useMemo(() => {
     const mountains = region.mountains ?? [];

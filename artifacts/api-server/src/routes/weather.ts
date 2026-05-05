@@ -1,6 +1,7 @@
 import { Router, type IRouter } from "express";
 import { GetWeatherResponse, GetLocationWeatherResponse, GetLocationWeatherParams } from "@workspace/api-zod";
 import { getEnsembleForecast } from "../lib/ensemble-forecast.js";
+import { locationMatchesRegion, parseRegionParam, RegionParamError } from "../lib/regions.js";
 
 const router: IRouter = Router();
 
@@ -600,13 +601,18 @@ async function fetchOpenMeteo(location: LocationConfig) {
   return await response.json() as any;
 }
 
-router.get("/weather", async (_req, res) => {
+router.get("/weather", async (req, res) => {
   try {
+    const region = parseRegionParam(req.query["region"]);
+    const sources = region
+      ? LOCATIONS.filter((loc) => locationMatchesRegion(loc.id, region))
+      : LOCATIONS;
+
     // Use allSettled so a single Open-Meteo / BOM hiccup at one resort
     // doesn't take down the entire /weather feed (which the AU dashboard
     // depends on). Failed locations are dropped from the list and logged.
     const settled = await Promise.all(
-      LOCATIONS.map(async (loc) => {
+      sources.map(async (loc) => {
         try {
           return await fetchLocationWeather(loc);
         } catch (err) {
@@ -625,6 +631,10 @@ router.get("/weather", async (_req, res) => {
     });
     res.json(result);
   } catch (error) {
+    if (error instanceof RegionParamError) {
+      res.status(400).json({ error: "INVALID_REGION", message: error.message });
+      return;
+    }
     res.status(500).json({
       error: "WEATHER_FETCH_ERROR",
       message: error instanceof Error ? error.message : "Failed to fetch weather data"

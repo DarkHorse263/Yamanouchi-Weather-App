@@ -1,6 +1,7 @@
 import { Router, type IRouter } from "express";
 import { getSupabase } from "../lib/supabase.js";
 import { getLiveWeather, getWeatherForRegion, getFullWeatherOutlook } from "../lib/weather-service.js";
+import { parseRegionParam, RegionParamError } from "../lib/regions.js";
 import {
   GetDashboardResponse,
   GetResortsResponse,
@@ -395,7 +396,18 @@ router.get("/weather-outlook", async (_req, res): Promise<void> => {
   }
 });
 
-router.get("/alerts", async (_req, res): Promise<void> => {
+router.get("/alerts", async (req, res): Promise<void> => {
+  let region;
+  try {
+    region = parseRegionParam(req.query["region"]);
+  } catch (error) {
+    if (error instanceof RegionParamError) {
+      res.status(400).json({ error: "INVALID_REGION", message: error.message });
+      return;
+    }
+    throw error;
+  }
+
   const supabase = getSupabase();
 
   const fallbackAlerts = {
@@ -403,6 +415,18 @@ router.get("/alerts", async (_req, res): Promise<void> => {
     stormTracker: [],
     updatedAt: new Date().toISOString(),
   };
+
+  // Powder alerts are sourced from `powder_alerts_today`, which is
+  // currently Yamanouchi-only. For other regions return an empty payload
+  // (rather than 404) so the client can render a clean empty state.
+  if (region && region !== "yamanouchi") {
+    res.setHeader(
+      "X-Empty-Reason",
+      `Powder alerts are currently only published for region 'yamanouchi' (requested '${region}').`,
+    );
+    res.json(GetPowderAlertsResponse.parse(fallbackAlerts));
+    return;
+  }
 
   if (!supabase) {
     res.json(GetPowderAlertsResponse.parse(fallbackAlerts));

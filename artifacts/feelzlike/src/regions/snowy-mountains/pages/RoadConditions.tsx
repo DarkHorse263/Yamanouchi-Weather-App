@@ -18,7 +18,7 @@ function getStatusColor(condition: string) {
 }
 
 export default function RoadConditions() {
-  const { data, isLoading, error, refetch } = useGetRoadConditions();
+  const { data, isLoading, error, refetch } = useGetRoadConditions({ region: "snowy-mountains" });
 
   return (
     <>
