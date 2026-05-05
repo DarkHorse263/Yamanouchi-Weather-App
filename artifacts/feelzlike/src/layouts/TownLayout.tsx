@@ -4,6 +4,7 @@ import { useBaseTown, useRegion } from "@workspace/feelzlike-shell";
 import { TownHome } from "@/pages/region/TownHome";
 import { TownSubpageStub } from "@/pages/region/TownSubpageStub";
 import { TownStay } from "@/pages/town/TownStay";
+import { TownEat } from "@/pages/town/TownEat";
 import { TownPlaces } from "@/pages/town/TownPlaces";
 import { TownRoads } from "@/pages/town/TownRoads";
 import { TownTransport } from "@/pages/town/TownTransport";
@@ -52,15 +53,9 @@ export function TownLayout() {
         <Route path="/cams" component={TownCams} />
         <Route path="/transport" component={TransportPage} />
         <Route path="/stay" component={TownStay} />
-        <Route path="/eat">
-          <TownPlaces
-            kind="eat"
-            title="Eat"
-            titleJa="食事"
-            blurb="Restaurants, izakaya, cafés and bars near town."
-            blurbJa="町周辺のレストラン・居酒屋・カフェ・バー。"
-          />
-        </Route>
+        {/* /eat is the curated 121-entry food & drink dataset (Sprint 3).
+            Replaces the live-Google-Places TownPlaces variant. */}
+        <Route path="/eat" component={TownEat} />
         <Route path="/explore">
           <TownPlaces
             kind="explore"

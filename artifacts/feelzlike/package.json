@@ -9,7 +9,9 @@
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "data:smoke": "tsx scripts/curated-smoke.mts",
-    "test:affiliate": "tsx src/lib/__tests__/affiliateLinks.test.ts"
+    "test:affiliate": "tsx src/lib/__tests__/affiliateLinks.test.ts",
+    "test:openNow": "tsx src/lib/__tests__/openNow.test.ts",
+    "test:reservation": "tsx src/lib/__tests__/reservationLinks.test.ts"
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.10.0",
