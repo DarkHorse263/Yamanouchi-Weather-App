@@ -23,8 +23,6 @@ import { useQuery } from "@tanstack/react-query";
 // crushes the colour-channel detail to pure white but is the cleanest way
 // to keep the same artwork legible against the dark gradient.
 import mainLogo from "@assets/feelzlike_transparent/feelzlike_colour_150426_1777272466909_transparent.png";
-import { HeroBackdrop } from "@/components/home/HeroBackdrop";
-import { HomeTodaysCallStrip, type RegionHeadlineLite } from "@/components/home/HomeTodaysCallStrip";
 import { HomeCurationStrip } from "@/components/home/HomeCurationStrip";
 import { WhyFeelzlike } from "@/components/home/WhyFeelzlike";
 import { HomeFooter } from "@/components/home/HomeFooter";
@@ -178,30 +176,9 @@ export default function Landing() {
   const liveCount = regions.filter((r) => r.status === "live").length;
   const totalMountains = regions.reduce((acc, r) => acc + r.mountains.length, 0);
 
-  // Lightweight projection of the regions data into the shape the
-  // Today's Call strip needs — keeps the strip's component decoupled from
-  // our local Region interface.
-  const callStripRegions: RegionHeadlineLite[] = regions
-    .filter((r) => r.status === "live")
-    .map((r) => ({
-      id: r.id,
-      name: r.name,
-      href: r.href,
-      countryCode: r.countryCode,
-      headlineLabel: r.headlineLabel,
-      headline: r.headline
-        ? {
-            tempC: r.headline.tempC,
-            feelsLikeC: r.headline.feelsLikeC,
-            windKph: r.headline.windKph,
-            snowfallMmNext24h: r.headline.snowfallMmNext24h,
-          }
-        : null,
-    }));
-
   return (
     <div
-      className="relative isolate min-h-screen text-slate-900 antialiased bg-[#f6f8fb]"
+      className="relative isolate min-h-screen text-slate-900 antialiased bg-white"
       style={{ fontFamily: "'DIN Pro', system-ui, sans-serif" }}
     >
       <PageMeta
@@ -210,12 +187,9 @@ export default function Landing() {
         path="/"
         jsonLd={[websiteSchema(), organizationSchema()]}
       />
-      <HeroBackdrop />
       {/* ─── HERO ─────────────────────────────────────── */}
-      {/* The hero now sits ON TOP of the photo backdrop — bg-transparent
-          (was bg-white) so the gradient mountain scene shows through.
-          Text is forced white-on-dark via inline classes per element since
-          the slate-900 default would be illegible on the dark backdrop. */}
+      {/* Clean white hero — the colour logo is shown as-is (no invert filter)
+          and all hero text reverts to dark slate. */}
       <header className="relative z-10">
         <div className="relative max-w-3xl mx-auto px-5 pt-10 pb-12 md:pt-14 md:pb-16 text-center">
           <motion.div
@@ -227,11 +201,10 @@ export default function Landing() {
             <img
               src={mainLogo}
               alt="feelzlike - resort town mountain weather"
-              className="h-24 md:h-32 lg:h-36 w-auto select-none drop-shadow-[0_4px_18px_rgba(0,0,0,0.35)]"
-              style={{ filter: "brightness(0) invert(1) drop-shadow(0 4px 18px rgba(0,0,0,0.35))" }}
+              className="h-24 md:h-32 lg:h-36 w-auto select-none"
               draggable={false}
             />
-            <span className="mt-3 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.22em] text-sky-200/90">
+            <span className="mt-3 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.22em] text-sky-700/90">
               Resort Town Mountain Weather
             </span>
           </motion.div>
@@ -240,7 +213,7 @@ export default function Landing() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-sm md:text-base text-white/85 max-w-xl mx-auto leading-relaxed [text-shadow:0_1px_2px_rgba(0,0,0,0.4)]"
+            className="text-sm md:text-base text-slate-700 max-w-xl mx-auto leading-relaxed"
           >
             Stop guessing what it feelzlike
             <br />
@@ -265,26 +238,26 @@ export default function Landing() {
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.25 }}
-            className="mt-7 md:mt-9 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[11px] text-white/80"
+            className="mt-7 md:mt-9 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[11px] text-slate-500"
           >
-            <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/40">
+            <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-emerald-50 border border-emerald-200">
               <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60 animate-ping" />
-                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60 animate-ping" />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
               </span>
-              <span className="font-semibold uppercase tracking-[0.16em] text-[9px] text-emerald-200">
+              <span className="font-semibold uppercase tracking-[0.16em] text-[9px] text-emerald-700">
                 {liveCount} live
               </span>
             </span>
-            <span className="text-white/30">·</span>
+            <span className="text-slate-300">·</span>
             <span>
-              <span className="font-semibold tabular-nums text-white">{data?.sourceCount ?? 7}</span> official sources
+              <span className="font-semibold tabular-nums text-slate-900">{data?.sourceCount ?? 7}</span> official sources
             </span>
-            <span className="text-white/30 hidden sm:inline">·</span>
+            <span className="text-slate-300 hidden sm:inline">·</span>
             <span className="hidden sm:inline">
-              refreshed every <span className="tabular-nums font-semibold text-white">{data?.refreshIntervalMin ?? 15}</span> min
+              refreshed every <span className="tabular-nums font-semibold text-slate-900">{data?.refreshIntervalMin ?? 15}</span> min
             </span>
-            <span className="text-white/30">·</span>
+            <span className="text-slate-300">·</span>
             <span className="tabular-nums">
               updated {formatAgo(generatedAt, now)}
             </span>
@@ -295,7 +268,7 @@ export default function Landing() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-sm md:text-base text-sky-200 max-w-xl mx-auto leading-relaxed mt-8 md:mt-10 [text-shadow:0_1px_2px_rgba(0,0,0,0.4)]"
+            className="text-sm md:text-base text-sky-700 max-w-xl mx-auto leading-relaxed mt-8 md:mt-10"
           >
             I wonder what it feelzlike in…
           </motion.p>
@@ -319,15 +292,12 @@ export default function Landing() {
                 placeholder="Search a mountain region…"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="relative w-full pl-12 pr-4 py-4 rounded-2xl bg-white/95 backdrop-blur border border-white/40 text-slate-900 text-sm placeholder:text-slate-400 shadow-[0_8px_32px_-12px_rgba(2,6,23,0.5)] focus:outline-none focus:ring-2 focus:ring-sky-400/40 focus:border-sky-400/60 transition-all text-left"
+                className="relative w-full pl-12 pr-4 py-4 rounded-2xl bg-white border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 shadow-[0_2px_12px_-4px_rgba(15,23,42,0.08)] focus:outline-none focus:ring-2 focus:ring-sky-400/40 focus:border-sky-400/60 transition-all text-left"
               />
             </div>
           </motion.div>
         </div>
       </header>
-
-      {/* ─── TODAY'S CALL · live in both regions ──────── */}
-      <HomeTodaysCallStrip regions={callStripRegions} />
 
       {/* ─── REGIONS ──────────────────────────────────── */}
       <main className="relative z-10 max-w-6xl mx-auto px-5 pt-10 md:pt-14 pb-12 md:pb-16">
