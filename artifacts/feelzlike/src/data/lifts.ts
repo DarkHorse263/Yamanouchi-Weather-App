@@ -88,29 +88,43 @@ const SNOWY_MOUNTAINS: LiftSeed[] = [
  * gondolas + key chairs that actually hold to wind.
  */
 const YAMANOUCHI: LiftSeed[] = [
-  // YAKEBITAIYAMA — 1998 Olympic GS course
-  { id: "yakebi-gondola-1", mountainId: "yakebitaiyama", name: "Yakebitaiyama Gondola No.1", nameJa: "焼額山 第1ゴンドラ", baseElevation: 1500, topElevation: 2009, exposure: "exposed", windHoldThresholdKmh: 85, type: "gondola", verifiedAt: V },
-  { id: "yakebi-gondola-2", mountainId: "yakebitaiyama", name: "Yakebitaiyama Gondola No.2", nameJa: "焼額山 第2ゴンドラ", baseElevation: 1500, topElevation: 1900, exposure: "moderate", windHoldThresholdKmh: 90, type: "gondola", verifiedAt: V },
+  // ─── Shiga Kogen central area (Sun Valley / Maruike / Hasuike / Giant) ───
+  { id: "sun-valley-pair",       mountainId: "shiga-sun-valley",          name: "Sun Valley Pair",                nameJa: "サンバレーペア",          baseElevation: 1340, topElevation: 1500, exposure: "sheltered",       windHoldThresholdKmh: 85, type: "fixed_grip_chair", verifiedAt: V },
+  { id: "maruike-pair",          mountainId: "shiga-maruike",             name: "Maruike Pair",                   nameJa: "丸池ペア",                 baseElevation: 1500, topElevation: 1620, exposure: "sheltered",       windHoldThresholdKmh: 80, type: "fixed_grip_chair", verifiedAt: V },
+  { id: "hasuike-pair",          mountainId: "shiga-hasuike",             name: "Hasuike Pair",                   nameJa: "蓮池ペア",                 baseElevation: 1490, topElevation: 1620, exposure: "sheltered",       windHoldThresholdKmh: 80, type: "fixed_grip_chair", verifiedAt: V },
+  { id: "giant-pair",            mountainId: "shiga-giant",               name: "Giant Pair",                     nameJa: "ジャイアントペア",         baseElevation: 1500, topElevation: 1700, exposure: "moderate",        windHoldThresholdKmh: 75, type: "fixed_grip_chair", verifiedAt: V },
 
-  // OKUSHIGA KOGEN
-  { id: "okushiga-gondola", mountainId: "okushiga-kogen", name: "Okushiga Gondola", nameJa: "奥志賀ゴンドラ", baseElevation: 1530, topElevation: 1900, exposure: "moderate", windHoldThresholdKmh: 90, type: "gondola", verifiedAt: V },
+  // ─── Hoppo / Tateyama cluster — gondola access ────────────
+  { id: "hoppo-gondola",         mountainId: "shiga-hoppo-bunadaira",     name: "Hoppo Bunadaira Gondola",        nameJa: "発哺ブナ平ゴンドラ",       baseElevation: 1500, topElevation: 1830, exposure: "moderate",        windHoldThresholdKmh: 85, type: "gondola",          verifiedAt: V },
+  { id: "higashidate-gondola",   mountainId: "shiga-higashidateyama",     name: "Higashidateyama Gondola",        nameJa: "東館山ゴンドラ",           baseElevation: 1530, topElevation: 1994, exposure: "exposed",         windHoldThresholdKmh: 80, type: "gondola",          verifiedAt: V },
+  { id: "nishidate-pair",        mountainId: "shiga-nishidateyama",       name: "Nishidateyama Pair",             nameJa: "西館山ペア",               baseElevation: 1500, topElevation: 1900, exposure: "moderate",        windHoldThresholdKmh: 75, type: "fixed_grip_chair", verifiedAt: V },
 
-  // YOKOTEYAMA / SHIBUTOGE — Japan's highest lift-served terrain
-  { id: "yokoteyama-skyator", mountainId: "yokoteyama-shibutoge", name: "Yokoteyama Skyator", nameJa: "横手山 スカイレーター", baseElevation: 2000, topElevation: 2307, exposure: "highly_exposed", windHoldThresholdKmh: 60, type: "fixed_grip_chair", verifiedAt: V },
-  { id: "shibutoge-pair", mountainId: "yokoteyama-shibutoge", name: "Shibutoge Pair Lift", nameJa: "渋峠ペアリフト", baseElevation: 2150, topElevation: 2305, exposure: "highly_exposed", windHoldThresholdKmh: 60, type: "fixed_grip_chair", verifiedAt: V },
+  // ─── Terakoya / Takamagahara / Tannenomori ────────────────
+  { id: "terakoya-quad",         mountainId: "shiga-terakoya",            name: "Terakoya Quad",                  nameJa: "寺子屋クワッド",           baseElevation: 1900, topElevation: 2125, exposure: "highly_exposed", windHoldThresholdKmh: 60, type: "fixed_grip_chair", verifiedAt: V },
+  { id: "takamagahara-pair",     mountainId: "shiga-takamagahara",        name: "Takamagahara Pair",              nameJa: "高天ヶ原ペア",             baseElevation: 1800, topElevation: 2000, exposure: "exposed",         windHoldThresholdKmh: 70, type: "fixed_grip_chair", verifiedAt: V },
+  { id: "tannenomori-quad",      mountainId: "shiga-tannenomori-okojo",   name: "Tannenomori Okojo Quad",         nameJa: "タンネの森オコジョクワッド", baseElevation: 1620, topElevation: 1800, exposure: "sheltered",       windHoldThresholdKmh: 85, type: "fixed_grip_chair", verifiedAt: V },
 
-  // RYUOO — iconic SORA terrace
-  { id: "ryuoo-gondola", mountainId: "ryuoo", name: "Ryuoo Ropeway (SORA)", nameJa: "竜王ロープウェイ (SORA)", baseElevation: 850, topElevation: 1770, exposure: "exposed", windHoldThresholdKmh: 75, type: "gondola", verifiedAt: V },
-  { id: "ryuoo-paradise", mountainId: "ryuoo", name: "Paradise Quad", nameJa: "パラダイスクワッド", baseElevation: 1500, topElevation: 1900, exposure: "exposed", windHoldThresholdKmh: 70, type: "fixed_grip_chair", verifiedAt: V },
+  // ─── Ichinose cluster ─────────────────────────────────────
+  { id: "ichinose-family-quad",  mountainId: "shiga-ichinose-family",     name: "Ichinose Family Quad",           nameJa: "一の瀬ファミリークワッド",  baseElevation: 1600, topElevation: 1850, exposure: "moderate",        windHoldThresholdKmh: 80, type: "fixed_grip_chair", verifiedAt: V },
+  { id: "ichinose-diamond-quad", mountainId: "shiga-ichinose-diamond",    name: "Ichinose Diamond Quad",          nameJa: "一の瀬ダイヤモンドクワッド", baseElevation: 1650, topElevation: 1900, exposure: "exposed",         windHoldThresholdKmh: 75, type: "fixed_grip_chair", verifiedAt: V },
+  { id: "ichinose-yamano-pair",  mountainId: "shiga-ichinose-yamanokami", name: "Yama-no-kami Pair",              nameJa: "山の神ペア",               baseElevation: 1700, topElevation: 1850, exposure: "sheltered",       windHoldThresholdKmh: 85, type: "fixed_grip_chair", verifiedAt: V },
 
-  // SUN VALLEY / GIANT
-  { id: "sunvalley-pair", mountainId: "sunvalley-giant", name: "Sun Valley Pair", nameJa: "サンバレーペア", baseElevation: 1340, topElevation: 1500, exposure: "sheltered", windHoldThresholdKmh: 85, type: "fixed_grip_chair", verifiedAt: V },
+  // ─── East Shiga (Yakebitaiyama / Okushiga) ───────────────
+  { id: "yakebi-gondola-1",      mountainId: "shiga-yakebitaiyama",       name: "Yakebitaiyama Gondola No.1",     nameJa: "焼額山 第1ゴンドラ",       baseElevation: 1500, topElevation: 2009, exposure: "exposed",         windHoldThresholdKmh: 85, type: "gondola",          verifiedAt: V },
+  { id: "yakebi-gondola-2",      mountainId: "shiga-yakebitaiyama",       name: "Yakebitaiyama Gondola No.2",     nameJa: "焼額山 第2ゴンドラ",       baseElevation: 1500, topElevation: 1900, exposure: "moderate",        windHoldThresholdKmh: 90, type: "gondola",          verifiedAt: V },
+  { id: "okushiga-gondola",      mountainId: "shiga-okushiga-kogen",      name: "Okushiga Gondola",               nameJa: "奥志賀ゴンドラ",           baseElevation: 1530, topElevation: 1900, exposure: "moderate",        windHoldThresholdKmh: 90, type: "gondola",          verifiedAt: V },
 
-  // ICHINOSE
-  { id: "ichinose-quad", mountainId: "ichinose", name: "Ichinose Quad", nameJa: "一の瀬クワッド", baseElevation: 1600, topElevation: 1830, exposure: "moderate", windHoldThresholdKmh: 80, type: "fixed_grip_chair", verifiedAt: V },
+  // ─── Kumanoyu / Yokoteyama / Shibutoge — highest lift-served ───
+  { id: "kumanoyu-pair",         mountainId: "shiga-kumanoyu",            name: "Kumanoyu Pair",                  nameJa: "熊の湯ペア",               baseElevation: 1650, topElevation: 2000, exposure: "exposed",         windHoldThresholdKmh: 70, type: "fixed_grip_chair", verifiedAt: V },
+  { id: "yokoteyama-skyator",    mountainId: "shiga-yokoteyama",          name: "Yokoteyama Skyator",             nameJa: "横手山 スカイレーター",    baseElevation: 2000, topElevation: 2305, exposure: "highly_exposed", windHoldThresholdKmh: 60, type: "fixed_grip_chair", verifiedAt: V },
+  { id: "shibutoge-pair",        mountainId: "shiga-shibutoge",           name: "Shibutoge Pair Lift",            nameJa: "渋峠ペアリフト",           baseElevation: 2050, topElevation: 2172, exposure: "highly_exposed", windHoldThresholdKmh: 60, type: "fixed_grip_chair", verifiedAt: V },
 
-  // KITA-SHIGA
-  { id: "kita-shiga-quad", mountainId: "kita-shiga", name: "X-Jam Takaifuji Quad", nameJa: "X-JAM高井富士クワッド", baseElevation: 1100, topElevation: 1700, exposure: "moderate", windHoldThresholdKmh: 80, type: "fixed_grip_chair", verifiedAt: V },
+  // ─── Kita-Shiga (4 standalone resorts) ────────────────────
+  { id: "ryuoo-gondola",         mountainId: "ryuoo",                     name: "Ryuoo Ropeway (SORA)",           nameJa: "竜王ロープウェイ (SORA)",  baseElevation: 850,  topElevation: 1770, exposure: "exposed",         windHoldThresholdKmh: 75, type: "gondola",          verifiedAt: V },
+  { id: "ryuoo-paradise",        mountainId: "ryuoo",                     name: "Paradise Quad",                  nameJa: "パラダイスクワッド",       baseElevation: 1500, topElevation: 1900, exposure: "exposed",         windHoldThresholdKmh: 70, type: "fixed_grip_chair", verifiedAt: V },
+  { id: "xjam-quad",             mountainId: "xjam-takaifuji",            name: "X-Jam Takaifuji Quad",           nameJa: "X-JAM高井富士クワッド",     baseElevation: 1100, topElevation: 1330, exposure: "moderate",        windHoldThresholdKmh: 80, type: "fixed_grip_chair", verifiedAt: V },
+  { id: "yomase-pair",           mountainId: "yomase-onsen",              name: "Yomase Onsen Pair",              nameJa: "夜間瀬温泉ペア",           baseElevation: 600,  topElevation: 1240, exposure: "sheltered",       windHoldThresholdKmh: 85, type: "fixed_grip_chair", verifiedAt: V },
+  { id: "komaruyama-pair",       mountainId: "kita-shiga-komaruyama",     name: "Komaruyama Pair",                nameJa: "小丸山ペア",               baseElevation: 950,  topElevation: 1100, exposure: "sheltered",       windHoldThresholdKmh: 85, type: "fixed_grip_chair", verifiedAt: V },
 ];
 
 /**

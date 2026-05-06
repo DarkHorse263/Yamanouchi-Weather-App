@@ -9,12 +9,15 @@ import { Link } from "wouter";
 import { bookingRegionUrl } from "../lib/booking";
 import { useState } from "react";
 
-// Maps a region label (as returned by the resorts API) to a /resort/:id slug
+// Maps a region label (as returned by the resorts API) to a representative
+// /resort/:id slug for the region's "live" deep-link. After the Option B
+// 22-mountain refactor, the umbrella `shiga-kogen` and `kita-shiga` slugs no
+// longer exist as mountain entries — we link to the headline sub-area instead.
 const REGION_LIVE_MAP: Record<string, { slug: string; label: string; labelJa: string }> = {
-  "Shiga Kogen": { slug: "shiga-kogen", label: "Shiga Kogen live", labelJa: "志賀高原ライブ" },
+  "Shiga Kogen": { slug: "shiga-yakebitaiyama", label: "Yakebitaiyama live", labelJa: "焼額山ライブ" },
   "Ryuoo": { slug: "ryuoo", label: "Ryuoo live", labelJa: "竜王ライブ" },
-  "Kita Shiga": { slug: "kita-shiga", label: "Kita Shiga live", labelJa: "北志賀ライブ" },
-  "Kita-Shiga": { slug: "kita-shiga", label: "Kita Shiga live", labelJa: "北志賀ライブ" },
+  "Kita Shiga": { slug: "ryuoo", label: "Ryuoo live", labelJa: "竜王ライブ" },
+  "Kita-Shiga": { slug: "ryuoo", label: "Ryuoo live", labelJa: "竜王ライブ" },
 };
 
 const SNOW_LEVELS = {

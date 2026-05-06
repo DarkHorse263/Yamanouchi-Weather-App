@@ -52,159 +52,60 @@ const VERIFIED = "2026-05-05";
  * Source URLs come from each operator's official cam index page.
  */
 const YAMANOUCHI: Record<string, MountainWebcam[]> = {
-  "yakebitaiyama": [
-    {
-      id: "yakebi-base",
-      mountainId: "yakebitaiyama",
-      name: "Yakebitaiyama base · Prince Hotel",
-      nameJa: "焼額山 ベース · プリンスホテル前",
-      description: "View across the lower slopes from the Prince Hotel base lodge.",
-      descriptionJa: "プリンスホテル前から下部ゲレンデを望む",
-      embedType: "external",
-      pageUrl: "https://prince.jp/ski/shiga/livecamera/",
-      vantage: "base",
-      elevation: 1500,
-      source: "Prince Hotels & Resorts",
-      verifiedAt: VERIFIED,
-    },
-    {
-      id: "yakebi-summit",
-      mountainId: "yakebitaiyama",
-      name: "Yakebitaiyama summit",
-      nameJa: "焼額山 山頂",
-      description: "1998 Olympic GS course start — 2,009m peak.",
-      descriptionJa: "1998年五輪GS発走点 · 標高2,009m",
-      embedType: "external",
-      pageUrl: "https://prince.jp/ski/shiga/livecamera/",
-      vantage: "summit",
-      elevation: 2009,
-      source: "Prince Hotels & Resorts",
-      verifiedAt: VERIFIED,
-    },
+  // ─── Shiga Kogen central area ────────────────────────────
+  // The central sub-resorts (Sun Valley / Maruike / Hasuike / Giant /
+  // Hoppo Bunadaira / Tateyama / Takamagahara / Ichinose / Tannenomori)
+  // share the Shiga Kogen Tourism Association's central livecam page —
+  // we link each to it so users always get a verified live source.
+  "shiga-sun-valley": [
+    { id: "central-sun-valley", mountainId: "shiga-sun-valley", name: "Sun Valley base",            nameJa: "サンバレー ベース",            description: "Entry-level base on the Shiga loop road.",            descriptionJa: "志賀の入口の初心者向けベース",            embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/livecamera/", vantage: "base",   elevation: 1500, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
   ],
-  "okushiga-kogen": [
-    {
-      id: "okushiga-1",
-      mountainId: "okushiga-kogen",
-      name: "Okushiga Kogen base",
-      nameJa: "奥志賀高原 ベース",
-      description: "Shiga's quietest, longest groomers.",
-      descriptionJa: "志賀最奥のロングクルーザー",
-      embedType: "external",
-      pageUrl: "https://www.okushiga.jp/livecam.html",
-      vantage: "base",
-      elevation: 1530,
-      source: "Okushiga Kogen Resort",
-      verifiedAt: VERIFIED,
-    },
+  "shiga-hasuike": [
+    { id: "central-hasuike",    mountainId: "shiga-hasuike",    name: "Hasuike base · Shiga Kogen", nameJa: "蓮池 · 志賀高原センター",        description: "Pondside gateway to the eastern Shiga lift network.", descriptionJa: "蓮池のほとり · 東部リフト網の起点",          embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/livecamera/", vantage: "base",   elevation: 1550, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
   ],
-  "ichinose": [
-    {
-      id: "ichinose-family",
-      mountainId: "ichinose",
-      name: "Ichinose Family base",
-      nameJa: "一の瀬ファミリー ベース",
-      description: "Central Shiga gateway — easiest access to the lift network.",
-      descriptionJa: "志賀中心部 · リフトネット最大の起点",
-      embedType: "external",
-      pageUrl: "https://www.shigakogen.gr.jp/english/livecamera/",
-      vantage: "base",
-      elevation: 1600,
-      source: "Shiga Kogen Tourism Association",
-      verifiedAt: VERIFIED,
-    },
+  "shiga-higashidateyama": [
+    { id: "central-higashidate", mountainId: "shiga-higashidateyama", name: "Higashidateyama summit", nameJa: "東館山 山頂",                  description: "Central Shiga summit · gondola-served alpine bowls.",  descriptionJa: "中央の山頂 · ゴンドラの高所バーン",          embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/livecamera/", vantage: "summit", elevation: 1994, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
   ],
-  "yokoteyama-shibutoge": [
-    {
-      id: "shibutoge",
-      mountainId: "yokoteyama-shibutoge",
-      name: "Shibutoge Pass · Japan's highest lift-served cam",
-      nameJa: "渋峠 · 日本最高所索道のライブカメラ",
-      description: "2,307m — long-season Kumanoyu side.",
-      descriptionJa: "標高2,307m · ロングシーズンの熊の湯側",
-      embedType: "external",
-      pageUrl: "https://yokoteyama-shibutoge.com/livecam/",
-      vantage: "summit",
-      elevation: 2307,
-      source: "Yokoteyama / Shibutoge Resort",
-      verifiedAt: VERIFIED,
-    },
+  "shiga-terakoya": [
+    { id: "central-terakoya",   mountainId: "shiga-terakoya",   name: "Terakoya · Shiga's highest central", nameJa: "寺子屋 · 中央エリア最高所", description: "Steep mogul faces and powder pockets.",                descriptionJa: "急なコブ斜面とパウダー",                     embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/livecamera/", vantage: "summit", elevation: 2125, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
   ],
-  "sunvalley-giant": [
-    {
-      id: "sunvalley-giant-base",
-      mountainId: "sunvalley-giant",
-      name: "Sun Valley / Giant base",
-      nameJa: "サンバレー・ジャイアント ベース",
-      description: "Hasuike-side gateway, beginner & family terrain.",
-      descriptionJa: "蓮池側のゲートウェイ拠点",
-      embedType: "external",
-      pageUrl: "https://www.shigakogen.gr.jp/english/livecamera/",
-      vantage: "base",
-      elevation: 1500,
-      source: "Shiga Kogen Tourism Association",
-      verifiedAt: VERIFIED,
-    },
+  "shiga-ichinose-family": [
+    { id: "central-ichinose-family", mountainId: "shiga-ichinose-family", name: "Ichinose Family base", nameJa: "一の瀬ファミリー ベース",  description: "Central Shiga gateway — easiest access to the lift network.", descriptionJa: "志賀中心部 · リフトネット最大の起点",       embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/livecamera/", vantage: "base",   elevation: 1850, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
   ],
+
+  // ─── East Shiga — Prince Hotels operates Yakebitaiyama livecams ───
+  "shiga-yakebitaiyama": [
+    { id: "yakebi-base",        mountainId: "shiga-yakebitaiyama", name: "Yakebitaiyama base · Prince Hotel", nameJa: "焼額山 ベース · プリンスホテル前", description: "View across the lower slopes from the Prince Hotel base lodge.", descriptionJa: "プリンスホテル前から下部ゲレンデを望む", embedType: "external", pageUrl: "https://prince.jp/ski/shiga/livecamera/", vantage: "base",   elevation: 1500, source: "Prince Hotels & Resorts", verifiedAt: VERIFIED },
+    { id: "yakebi-summit",      mountainId: "shiga-yakebitaiyama", name: "Yakebitaiyama summit",              nameJa: "焼額山 山頂",                       description: "1998 Olympic GS course start — 2,009m peak.",                  descriptionJa: "1998年五輪GS発走点 · 標高2,009m",         embedType: "external", pageUrl: "https://prince.jp/ski/shiga/livecamera/", vantage: "summit", elevation: 2009, source: "Prince Hotels & Resorts", verifiedAt: VERIFIED },
+  ],
+  "shiga-okushiga-kogen": [
+    { id: "okushiga-1",         mountainId: "shiga-okushiga-kogen", name: "Okushiga Kogen base", nameJa: "奥志賀高原 ベース", description: "Shiga's quietest, longest groomers.", descriptionJa: "志賀最奥のロングクルーザー", embedType: "external", pageUrl: "https://www.okushiga.jp/livecam.html", vantage: "base", elevation: 1960, source: "Okushiga Kogen Resort", verifiedAt: VERIFIED },
+  ],
+
+  // ─── Highest lift-served zone — operated by Yokoteyama/Shibutoge resort ───
+  "shiga-kumanoyu": [
+    { id: "kumanoyu-base",      mountainId: "shiga-kumanoyu",   name: "Kumanoyu base", nameJa: "熊の湯 ベース", description: "North-facing high alpine · long-season natural snow.", descriptionJa: "北向き高所 · 自然雪のロングシーズン", embedType: "external", pageUrl: "https://www.kumanoyu.com/", vantage: "base", elevation: 2000, source: "Kumanoyu Ski Area", verifiedAt: VERIFIED },
+  ],
+  "shiga-yokoteyama": [
+    { id: "yokoteyama-summit",  mountainId: "shiga-yokoteyama", name: "Yokoteyama summit · 2,305m", nameJa: "横手山 山頂 · 標高2,305m", description: "Japan's highest lift-served summit · alpine views to the JP Alps.", descriptionJa: "日本最高所の索道山頂 · 日本アルプスを望む", embedType: "external", pageUrl: "https://yokoteyama-shibutoge.com/livecam/", vantage: "summit", elevation: 2305, source: "Yokoteyama / Shibutoge Resort", verifiedAt: VERIFIED },
+  ],
+  "shiga-shibutoge": [
+    { id: "shibutoge-pass",     mountainId: "shiga-shibutoge",  name: "Shibutoge Pass · Honshu's highest road",                              nameJa: "渋峠 · 本州最高所の道路",          description: "2,172m — sea-of-clouds backdrop, road closes Nov–Apr.",                       descriptionJa: "標高2,172m · 雲海と冬季閉鎖の峠",            embedType: "external", pageUrl: "https://yokoteyama-shibutoge.com/livecam/", vantage: "summit", elevation: 2172, source: "Yokoteyama / Shibutoge Resort", verifiedAt: VERIFIED },
+  ],
+
+  // ─── Kita-Shiga (4 standalone resorts, each runs its own cam page) ───
   "ryuoo": [
-    {
-      id: "ryuoo-sora",
-      mountainId: "ryuoo",
-      name: "Ryuoo SORA terrace · sea of clouds",
-      nameJa: "竜王 SORAテラス · 雲海",
-      description: "Iconic 1,770m gondola summit terrace.",
-      descriptionJa: "標高1,770m ゴンドラ山頂テラス",
-      embedType: "external",
-      pageUrl: "https://www.ryuoo.com/en/winter/livecamera/",
-      vantage: "summit",
-      elevation: 1770,
-      source: "Ryuoo Ski Park",
-      verifiedAt: VERIFIED,
-    },
-    {
-      id: "ryuoo-base",
-      mountainId: "ryuoo",
-      name: "Ryuoo base · gondola plaza",
-      nameJa: "竜王 ベース · ゴンドラ乗り場",
-      embedType: "external",
-      pageUrl: "https://www.ryuoo.com/en/winter/livecamera/",
-      vantage: "base",
-      elevation: 850,
-      source: "Ryuoo Ski Park",
-      verifiedAt: VERIFIED,
-    },
+    { id: "ryuoo-sora",         mountainId: "ryuoo",            name: "Ryuoo SORA terrace · sea of clouds", nameJa: "竜王 SORAテラス · 雲海",        description: "Iconic 1,770m gondola summit terrace.",                                       descriptionJa: "標高1,770m ゴンドラ山頂テラス",            embedType: "external", pageUrl: "https://www.ryuoo.com/en/winter/livecamera/", vantage: "summit", elevation: 1770, source: "Ryuoo Ski Park", verifiedAt: VERIFIED },
+    { id: "ryuoo-base",         mountainId: "ryuoo",            name: "Ryuoo base · gondola plaza",         nameJa: "竜王 ベース · ゴンドラ乗り場",  description: "Base lodge gondola plaza.",                                                   descriptionJa: "ゴンドラ乗り場のベース",                    embedType: "external", pageUrl: "https://www.ryuoo.com/en/winter/livecamera/", vantage: "base",   elevation: 850,  source: "Ryuoo Ski Park", verifiedAt: VERIFIED },
   ],
-  "kita-shiga": [
-    {
-      id: "kita-shiga-1",
-      mountainId: "kita-shiga",
-      name: "Kita-Shiga Kogen · X-Jam Takaifuji",
-      nameJa: "北志賀高原 · X-JAM高井富士",
-      description: "Family terrain + park, short hop from Yudanaka.",
-      descriptionJa: "ファミリー向けゲレンデ + パーク",
-      embedType: "external",
-      pageUrl: "https://kitashiga.net/livecam/",
-      vantage: "base",
-      elevation: 1100,
-      source: "Kita-Shiga Kogen Tourism",
-      verifiedAt: VERIFIED,
-    },
+  "xjam-takaifuji": [
+    { id: "xjam-takaifuji-base", mountainId: "xjam-takaifuji",  name: "X-Jam Takaifuji · park base",        nameJa: "X-JAM高井富士 · パークベース", description: "Park-focused base · biggest jib & jump features in north Nagano.",            descriptionJa: "パーク特化のベース · 北信最大のアイテム",   embedType: "external", pageUrl: "https://www.kitashiga.co.jp/livecam/",       vantage: "base",   elevation: 1100, source: "Kita-Shiga Kogen Tourism", verifiedAt: VERIFIED },
   ],
   "yomase-onsen": [
-    {
-      id: "yomase",
-      mountainId: "yomase-onsen",
-      name: "Yomase Onsen · river-side base",
-      nameJa: "夜間瀬温泉スキー場 · 川沿いベース",
-      description: "Locals' mountain · night skiing & onsen finish.",
-      descriptionJa: "地元のスキー場 · ナイター + 温泉",
-      embedType: "external",
-      pageUrl: "https://www.yomase.jp/livecam/",
-      vantage: "base",
-      elevation: 600,
-      source: "Yomase Onsen Resort",
-      verifiedAt: VERIFIED,
-    },
+    { id: "yomase",             mountainId: "yomase-onsen",     name: "Yomase Onsen · river-side base",     nameJa: "夜間瀬温泉スキー場 · 川沿いベース", description: "Locals' mountain · night skiing & onsen finish.",                          descriptionJa: "地元のスキー場 · ナイター + 温泉",          embedType: "external", pageUrl: "https://www.yomase.jp/livecam/",             vantage: "base",   elevation: 600,  source: "Yomase Onsen Resort", verifiedAt: VERIFIED },
+  ],
+  "kita-shiga-komaruyama": [
+    { id: "komaruyama-base",    mountainId: "kita-shiga-komaruyama", name: "Komaruyama · base lifts",       nameJa: "小丸山 · ベースリフト",         description: "Smallest Kita-Shiga resort · gentle beginner laps under the lifts.",          descriptionJa: "北志賀最小のスキー場 · 緩斜面の初心者向け", embedType: "external", pageUrl: "https://www.kitashiga.co.jp/livecam/",       vantage: "base",   elevation: 950,  source: "Kita-Shiga Kogen Tourism", verifiedAt: VERIFIED },
   ],
 };
 

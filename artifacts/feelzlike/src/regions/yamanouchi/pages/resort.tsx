@@ -47,33 +47,30 @@ interface ResortProfile {
  * Curated overrides for resort-specific deep-links (lift status pages, webcam
  * indexes). The website URL is sourced from `region.mountains[].websiteUrl`
  * by default — only override here if the resort uses a different page.
+ *
+ * After the Option B 22-mountain refactor, all 18 Shiga Kogen sub-areas share
+ * the same authority lift-status + webcam pages, so we derive those defaults
+ * from `parentId === "shiga-kogen"` instead of listing every slug.
  */
+const SHIGA_KOGEN_DEFAULTS: ResortProfile = {
+  liftStatusUrl: "https://www.shigakogen-ski.or.jp/",
+  webcamUrl: "https://www.shigakogen.gr.jp/english/livecamera/",
+};
+
 const PROFILES: Record<string, ResortProfile> = {
-  "shiga-kogen": {
-    // Mountain authority — real-time area-level lift map for all 18 areas.
-    liftStatusUrl: "https://www.shigakogen-ski.or.jp/",
-    webcamUrl: "https://www.shigakogen.gr.jp/english/livecamera/",
-  },
-  "yakebitaiyama": {
-    liftStatusUrl: "https://www.shigakogen-ski.or.jp/",
-  },
-  "okushiga-kogen": {
-    liftStatusUrl: "https://www.shigakogen-ski.or.jp/",
-  },
-  "ichinose": {
-    liftStatusUrl: "https://www.shigakogen-ski.or.jp/",
-  },
-  "yokoteyama-shibutoge": {
-    liftStatusUrl: "https://www.shigakogen-ski.or.jp/",
-  },
-  "sunvalley-giant": {
-    liftStatusUrl: "https://www.shigakogen-ski.or.jp/",
-  },
   "ryuoo": {
     liftStatusUrl: "https://www.ryuoo.com/en/winter/lift/",
     webcamUrl: "https://www.ryuoo.com/en/winter/livecamera/",
   },
-  "kita-shiga": {
+  "xjam-takaifuji": {
+    liftStatusUrl: "https://kitashiga.net/winter/",
+    webcamUrl: "https://kitashiga.net/livecam/",
+  },
+  "yomase-onsen": {
+    liftStatusUrl: "https://kitashiga.net/winter/",
+    webcamUrl: "https://kitashiga.net/livecam/",
+  },
+  "kita-shiga-komaruyama": {
     liftStatusUrl: "https://kitashiga.net/winter/",
     webcamUrl: "https://kitashiga.net/livecam/",
   },
@@ -133,8 +130,10 @@ export default function ResortDetail() {
 
   const { location, current, daily, hourly } = data;
   const observedAt = (data as any).lastUpdated as string | undefined;
+  const isShigaSubArea = mountain?.parentId === "shiga-kogen";
   const profile: ResortProfile = {
     websiteUrl: mountain?.websiteUrl,
+    ...(isShigaSubArea ? SHIGA_KOGEN_DEFAULTS : {}),
     ...(PROFILES[id] ?? {}),
   };
 

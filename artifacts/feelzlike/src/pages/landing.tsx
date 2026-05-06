@@ -87,7 +87,7 @@ interface RegionsResponse {
 // yamanouchi entry when re-enabling.
 const FALLBACK_REGIONS: Region[] = [
   { id: "snowy-mountains", name: "Snowy Mountains", country: "Australia", countryCode: "AU", region: "New South Wales", status: "live", href: "/snowy-mountains/", baseTowns: ["Jindabyne", "Berridale", "Cooma"], mountains: ["Thredbo", "Perisher", "Charlotte Pass", "Selwyn"], headlineLabel: "Thredbo Top", headline: null },
-  { id: "yamanouchi", name: "Yamanouchi Town", country: "Japan", countryCode: "JP", region: "Nagano", status: "live", href: "/yamanouchi/", baseTowns: ["Yudanaka", "Shibu Onsen", "Yomase"], mountains: ["Shiga Kogen", "Yomase", "X-Jam", "Ryuoo"], headlineLabel: "Shiga Kogen", headline: null },
+  { id: "yamanouchi", name: "Yamanouchi Town", country: "Japan", countryCode: "JP", region: "Nagano", status: "live", href: "/yamanouchi/", baseTowns: ["Yudanaka", "Shibu Onsen", "Yomase"], mountains: ["Yakebitaiyama", "Okushiga", "Yokoteyama", "Ryuoo", "X-Jam", "Yomase"], headlineLabel: "Yakebitaiyama", headline: null },
 ];
 
 function WeatherIcon({ code, className = "w-4 h-4" }: { code: number | null; className?: string }) {
