@@ -4,7 +4,7 @@ import { ChevronLeft, Mountain as MountainIcon, Sun, Snowflake } from "lucide-re
 import type { ReactNode } from "react";
 import { cn } from "./cn";
 import { useRegion } from "./RegionProvider";
-import { useSeason } from "./SeasonProvider";
+import { useOptionalSeason } from "./SeasonProvider";
 import { useLanguage } from "./LanguageProvider";
 import { useBaseTown } from "./BaseTownProvider";
 import { TownPicker } from "./TownPicker";
@@ -57,7 +57,10 @@ export function AppShell({ children }: { children: ReactNode }) {
   const [location] = useLocation();
   const { towns, town: activeTown } = useBaseTown();
 
-  const seasonCtx = region.seasons ? useSeason() : null;
+  // MUST be called unconditionally — a previous `region.seasons ? useSeason() : null`
+  // pattern violated the Rules of Hooks and silently broke the season toggle.
+  const maybeSeason = useOptionalSeason();
+  const seasonCtx = region.seasons ? maybeSeason : null;
   const lang = useLanguage();
   const t = (en: string, ja?: string) => lang.t(en, ja);
 

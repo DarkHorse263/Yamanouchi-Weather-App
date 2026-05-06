@@ -16,7 +16,7 @@ export {
   DEFAULT_REGION_NAV,
 } from "./defaultNav";
 export { RegionProvider, useRegion } from "./RegionProvider";
-export { SeasonProvider, useSeason } from "./SeasonProvider";
+export { SeasonProvider, useSeason, useOptionalSeason } from "./SeasonProvider";
 export { LanguageProvider, useLanguage } from "./LanguageProvider";
 export { BaseTownProvider, useBaseTown } from "./BaseTownProvider";
 export { AppShell } from "./AppShell";

@@ -60,3 +60,13 @@ export function useSeason(): SeasonContextValue {
   if (!ctx) throw new Error("useSeason must be used within a SeasonProvider");
   return ctx;
 }
+
+/**
+ * Non-throwing variant for callers (like AppShell) that may render outside
+ * a SeasonProvider — regions opt in via `region.seasons`. This MUST be used
+ * instead of a conditional `region.seasons ? useSeason() : null` call,
+ * which violates the Rules of Hooks and silently breaks state updates.
+ */
+export function useOptionalSeason(): SeasonContextValue | null {
+  return useContext(SeasonContext) ?? null;
+}

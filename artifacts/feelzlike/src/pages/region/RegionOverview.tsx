@@ -18,7 +18,7 @@ import {
   useRegion,
   useLanguage,
   useBaseTown,
-  useSeason,
+  useOptionalSeason,
   LiveBadge,
 } from "@workspace/feelzlike-shell";
 import { useGetWeather } from "@workspace/api-client-react";
@@ -211,7 +211,9 @@ export function RegionOverview() {
   const { region } = useRegion();
   const { t } = useLanguage();
   const { towns, town } = useBaseTown();
-  const seasonCtx = region.seasons ? useSeason() : null;
+  // Hook must be called unconditionally — see SeasonProvider.useOptionalSeason notes.
+  const maybeSeason = useOptionalSeason();
+  const seasonCtx = region.seasons ? maybeSeason : null;
   const season = seasonCtx?.season ?? "winter";
   const weatherQ = useGetWeather({ region: region.id });
   const mountains = region.mountains ?? [];
