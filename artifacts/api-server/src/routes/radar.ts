@@ -4,6 +4,7 @@ const router = Router();
 
 const ALLOWED_TRANSPARENCY = /^IDR\d+\.\w+\.png$/;
 const ALLOWED_RADAR = /^IDR\d+\.T\.\d+\.png$/;
+const ALLOWED_LOOP = /^IDR\d+\.gif$/;
 
 router.get("/bom-radar", async (req: Request, res: Response) => {
   const type = req.query.type as string;
@@ -19,6 +20,8 @@ router.get("/bom-radar", async (req: Request, res: Response) => {
   if (type === "transparency" && ALLOWED_TRANSPARENCY.test(file)) {
     bomUrl = `https://www.bom.gov.au/products/radar_transparencies/${file}`;
   } else if (type === "image" && ALLOWED_RADAR.test(file)) {
+    bomUrl = `https://www.bom.gov.au/radar/${file}`;
+  } else if (type === "loop" && ALLOWED_LOOP.test(file)) {
     bomUrl = `https://www.bom.gov.au/radar/${file}`;
   } else {
     res.status(400).json({ error: "Invalid type or file" });
