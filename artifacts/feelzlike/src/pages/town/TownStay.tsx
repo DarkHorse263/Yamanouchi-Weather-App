@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Bed, ExternalLink } from "lucide-react";
+import { Bed, ExternalLink, MapPin } from "lucide-react";
 
 import { useRegion, useLanguage, useBaseTown, LiveBadge } from "@workspace/feelzlike-shell";
 
@@ -10,6 +10,31 @@ import {
   type CountryCode,
   type StayPlatformId,
 } from "@/lib/places";
+
+/**
+ * Region-specific local accommodation providers, shown above the global
+ * OTA grid. These are direct/independent operators visitors usually
+ * can't find on Booking/Agoda — community-run booking pages, regional
+ * tourism boards, etc. Keep the list short: this is a curated callout,
+ * not a directory.
+ */
+interface LocalStayProvider {
+  name: string;
+  url: string;
+  blurbEn: string;
+  blurbJa: string;
+}
+
+const LOCAL_STAY_PROVIDERS: Record<string, LocalStayProvider[]> = {
+  "snowy-mountains": [
+    {
+      name: "Snowy Mountains Accommodation",
+      url: "https://snowymountainsaccommodation.au/",
+      blurbEn: "Independent regional booking site — Jindabyne, Thredbo, Perisher and surrounds.",
+      blurbJa: "地元独立予約サイト — ジンダバイン・スレッドボー・ペリッシャー周辺。",
+    },
+  ],
+};
 
 /**
  * TownStay — simplified affiliate-link card.
@@ -55,6 +80,7 @@ export function TownStay() {
   const townDisplayName = t(town.name, town.nameJa);
   const query = `${town.name}, ${region.name}`;
   const platforms = platformsForCountry(country);
+  const localProviders = LOCAL_STAY_PROVIDERS[region.id] ?? [];
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -83,6 +109,43 @@ export function TownStay() {
         </div>
         <div className="rule mt-6" />
       </motion.header>
+
+      {localProviders.length > 0 && (
+        <section className="px-6 md:px-10 pt-8">
+          <div className="rounded-2xl border border-blue-200 bg-white p-5 md:p-6 shadow-sm">
+            <p className="text-[11px] font-bold tracking-wider text-blue-700/80 uppercase">
+              {t("Local provider", "地元プロバイダー")}
+            </p>
+            <ul className="mt-3 space-y-3">
+              {localProviders.map((p) => (
+                <li key={p.url}>
+                  <a
+                    href={p.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-start gap-3 rounded-xl border border-blue-100 bg-blue-50/40 p-4 hover:bg-blue-50 hover:border-blue-300 transition-colors"
+                  >
+                    <div className="shrink-0 w-9 h-9 rounded-lg bg-blue-600 text-white flex items-center justify-center">
+                      <MapPin className="w-4 h-4" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-1.5">
+                        <p className="font-display font-semibold text-foreground text-sm md:text-base">
+                          {p.name}
+                        </p>
+                        <ExternalLink className="w-3.5 h-3.5 text-blue-600 opacity-70 group-hover:opacity-100" aria-hidden />
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-1 leading-snug">
+                        {t(p.blurbEn, p.blurbJa)}
+                      </p>
+                    </div>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
 
       <section className="px-6 md:px-10 pt-8 pb-16">
         <div className="rounded-2xl border border-border bg-gradient-to-br from-blue-50 via-white to-blue-50/40 p-6 md:p-8 shadow-sm">
