@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { useMemo } from "react";
-import { ArrowUpRight, Car, Video, Bus, BedDouble, UtensilsCrossed, Compass, CloudSun } from "lucide-react";
+import { ArrowUpRight, Car, Video, Bus, BedDouble, UtensilsCrossed, Compass, CloudSun, Mountain } from "lucide-react";
 import { useRegion, useLanguage, useBaseTown, LiveBadge } from "@workspace/feelzlike-shell";
 import { useGetWeather, useGetRoadConditions } from "@workspace/api-client-react";
 import { useTownWeather } from "@/lib/town-weather";
@@ -19,15 +19,28 @@ function haversineKm(a: { lat: number; lng: number }, b: { lat: number; lng: num
   return 2 * R * Math.asin(Math.sqrt(h));
 }
 
-const TILES = [
-  { path: "/weather",   icon: CloudSun,        label: "Weather",   labelJa: "天気",   blurb: "Full in-town forecast - current, hourly, 7-day", blurbJa: "町の総合予報 - 現在・時間別・7日間" },
-  { path: "/roads",     icon: Car,             label: "Roads",     labelJa: "道路",   blurb: "Live road conditions to the mountain", blurbJa: "山への道路状況" },
-  { path: "/cams",      icon: Video,           label: "Cams",      labelJa: "ライブ", blurb: "Town and roadside webcams",            blurbJa: "町と路傍のライブカメラ" },
-  { path: "/transport", icon: Bus,             label: "Transport", labelJa: "交通",   blurb: "Buses & shuttles from town",          blurbJa: "町からのバス・送迎" },
-  { path: "/stay",      icon: BedDouble,       label: "Stay",      labelJa: "宿泊",   blurb: "Hotels, ryokan and lodges nearby",     blurbJa: "近隣の宿泊施設" },
-  { path: "/eat",       icon: UtensilsCrossed, label: "Eat",       labelJa: "食事",   blurb: "Restaurants, izakaya, cafés in town",  blurbJa: "町の飲食店" },
-  { path: "/explore",   icon: Compass,         label: "Explore",   labelJa: "観光",   blurb: "Off-mountain things to do",           blurbJa: "山以外のアクティビティ" },
-] as const;
+type Tile = {
+  path: string;
+  icon: typeof CloudSun;
+  label: string;
+  labelJa: string;
+  blurb: string;
+  blurbJa: string;
+  /** When true, `path` is interpreted at the region scope (one wouter base
+   *  above the town), e.g. `/mountains` -> `/:region/mountains`. */
+  regionScoped?: boolean;
+};
+
+const TILES: readonly Tile[] = [
+  { path: "/weather",   icon: CloudSun,        label: "Weather",       labelJa: "天気",       blurb: "Full in-town forecast - current, hourly, 7-day", blurbJa: "町の総合予報 - 現在・時間別・7日間" },
+  { path: "/mountains", icon: Mountain,        label: "All mountains", labelJa: "スキー場一覧", blurb: "Every resort in the region with status & headline", blurbJa: "地域内すべてのスキー場と状況", regionScoped: true },
+  { path: "/roads",     icon: Car,             label: "Roads",         labelJa: "道路",       blurb: "Live road conditions to the mountain", blurbJa: "山への道路状況" },
+  { path: "/cams",      icon: Video,           label: "Cams",          labelJa: "ライブ",      blurb: "Town and roadside webcams",            blurbJa: "町と路傍のライブカメラ" },
+  { path: "/transport", icon: Bus,             label: "Transport",     labelJa: "交通",       blurb: "Buses & shuttles from town",          blurbJa: "町からのバス・送迎" },
+  { path: "/stay",      icon: BedDouble,       label: "Stay",          labelJa: "宿泊",       blurb: "Hotels, ryokan and lodges nearby",     blurbJa: "近隣の宿泊施設" },
+  { path: "/eat",       icon: UtensilsCrossed, label: "Eat",           labelJa: "食事",       blurb: "Restaurants, izakaya, cafés in town",  blurbJa: "町の飲食店" },
+  { path: "/explore",   icon: Compass,         label: "Explore",       labelJa: "観光",       blurb: "Off-mountain things to do",           blurbJa: "山以外のアクティビティ" },
+];
 
 export function TownHome() {
   const { region } = useRegion();
@@ -225,10 +238,16 @@ export function TownHome() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {TILES.map((tile) => {
             const Icon = tile.icon;
+            // region-scoped tiles (e.g. "All mountains") sit one wouter base
+            // above this town view, so prefix `~` to escape the town base
+            // and prepend the region id.
+            const href = tile.regionScoped
+              ? `~/${region.id}${tile.path}`
+              : tile.path;
             return (
               <Link
                 key={tile.path}
-                href={tile.path}
+                href={href}
                 className="group relative block rounded-2xl border border-border bg-white p-5 transition-all hover:border-primary/40 hover:shadow-md"
               >
                 <div className="flex items-start justify-between">
