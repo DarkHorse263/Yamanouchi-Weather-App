@@ -246,9 +246,7 @@ export default function Landing() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-sm md:text-base text-slate-700 max-w-xl mx-auto leading-relaxed"
           >
-            Stop guessing what it feelzlike
-            <br />
-            in the mountains today.
+            Stop guessing what it feelzlike in the mountains today.
             <br />
             See real-time mountain weather you can trust.
             <br />
@@ -277,7 +275,7 @@ export default function Landing() {
                 <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
               </span>
               <span className="font-semibold uppercase tracking-[0.16em] text-[9px] text-emerald-700">
-                {liveCount} live
+                {liveCount} {liveCount === 1 ? "region" : "regions"} live
               </span>
             </span>
             <span className="text-slate-300">·</span>
@@ -331,20 +329,11 @@ export default function Landing() {
       </header>
 
       {/* ─── REGIONS ──────────────────────────────────── */}
-      <main className="relative z-10 max-w-6xl mx-auto px-5 pt-10 md:pt-14 pb-12 md:pb-16">
-        <div className="flex items-end justify-between mb-4 md:mb-5 gap-3">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">
-            01 · Regions <span className="text-slate-300">·</span>{" "}
-            <span className="text-slate-400 normal-case font-medium tracking-normal">
-              {totalMountains} mountains tracked
-            </span>
-          </p>
-          <span className="text-[11px] text-slate-500 font-medium tabular-nums shrink-0">
-            {filtered.length} {filtered.length === 1 ? "region" : "regions"}
-          </span>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
+      <main className="relative z-10 max-w-5xl mx-auto px-5 pt-10 md:pt-14 pb-12 md:pb-16">
+        {/* Apr 2026 reset: removed the "01 · Regions · N mountains tracked"
+            header — with only two live regions the chrome dwarfed the
+            content. Cards now centre on the page in a 2-up grid. */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 max-w-3xl mx-auto">
           {filtered.map((region, i) => {
             const h = region.headline;
             const isLive = region.status === "live";
