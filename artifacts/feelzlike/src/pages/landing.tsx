@@ -580,72 +580,10 @@ export default function Landing() {
 
       </main>
 
-      {/* ─── TRUST FOOTER (data sources) ──────────────── */}
-      <div className="relative z-10 max-w-6xl mx-auto px-5 mt-14 md:mt-20 pb-20 md:pb-28">
-        <div className="pt-10 border-t border-slate-200">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-            <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500 mb-2">
-                02 · Where the data comes from
-              </p>
-              <p
-                className="text-xl md:text-2xl text-slate-900 tracking-tight max-w-lg leading-tight"
-                style={{
-                  fontFamily: "'DIN Pro', system-ui, sans-serif",
-                  fontWeight: 700,
-                }}
-              >
-                Built by mountain people, for mountain people.
-              </p>
-              <p className="text-sm text-slate-600 mt-3 max-w-lg leading-relaxed">
-                Real-time conditions sourced direct from official services -
-                the Bureau of Meteorology and Japan Meteorological Agency for
-                live observations, Transport for NSW for road conditions, and
-                each resort&apos;s own network for lift status. Forecasts blend
-                ECMWF, GFS, ICON, BOM ACCESS-G, JMA and MET Norway so you see
-                the consensus, not a single guess.
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-3 md:items-end md:text-right text-[11px] text-slate-500">
-              <span className="font-semibold uppercase tracking-[0.18em] text-slate-700">
-                Sources
-              </span>
-
-              <div className="flex flex-col gap-0.5">
-                <span className="font-semibold text-slate-700">Live observations</span>
-                <span>Bureau of Meteorology · Australia</span>
-                <span>Japan Meteorological Agency · Japan</span>
-                <span>Transport for NSW · Live Traffic</span>
-              </div>
-
-              <div className="flex flex-col gap-0.5">
-                <span className="font-semibold text-slate-700">Forecast ensemble</span>
-                <span>ECMWF IFS · Europe</span>
-                <span>GFS · NOAA, USA</span>
-                <span>ICON · DWD, Germany</span>
-                <span>BOM ACCESS-G · Australia</span>
-                <span>JMA Seamless · Japan</span>
-                <span>MET Norway Locationforecast</span>
-                <span className="text-slate-400">aggregated via Open-Meteo</span>
-              </div>
-
-              <div className="flex flex-col gap-0.5">
-                <span className="font-semibold text-slate-700">Resort &amp; transport</span>
-                <span>Thredbo · Perisher · Charlotte&apos;s Pass · Selwyn</span>
-                <span>Shiga Kogen · Yokoteyama</span>
-                <span>Cooma Coaches · Snowy Mountains</span>
-              </div>
-
-              <div className="flex flex-col gap-0.5">
-                <span className="font-semibold text-slate-700">Mapping &amp; imagery</span>
-                <span>OpenWeatherMap · weather tiles</span>
-                <span>BOM radar · NSW alpine</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* The old "02 · Where the data comes from" trust block lived here.
+          Apr 2026 reset: it now lives at /:region/sources (per region) so
+          attribution is reachable from anywhere in-app, not just the
+          landing footer. */}
 
       {/* ─── SITE FOOTER ──────────────────────────────── */}
       <HomeFooter />
