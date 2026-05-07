@@ -4,13 +4,13 @@ import type { TransportProviderList } from "@/types/transport";
  * Yamanouchi (Nagano, Japan) transport providers.
  *
  * Phone numbers and websites left as `null` where not directly verifiable
- * — we never guess. Bilingual `name_local` and `route_summary_local` are
+ * - we never guess. Bilingual `name_local` and `route_summary_local` are
  * provided for kanji rendering in the JP language.
  */
 export const YAMANOUCHI_TRANSPORT: TransportProviderList = [
   {
     id: "jp-nagaden-yudanaka-line",
-    name: "Nagano Dentetsu (Nagaden) — Yudanaka Line",
+    name: "Nagano Dentetsu (Nagaden) - Yudanaka Line",
     name_local: "長野電鉄 湯田中線",
     type: "train",
     operator: "Nagano Dentetsu Co., Ltd. (長野電鉄株式会社)",

@@ -21,7 +21,7 @@ interface PowderFactorBadgeProps {
 }
 
 /**
- * Powder Factor — backward-looking snow quality snapshot. Distinct from the
+ * Powder Factor - backward-looking snow quality snapshot. Distinct from the
  * forward-looking Powder Window strip (HourlyForecast) and 7-day calendar.
  *
  * Renders as a hero badge by default. Click the chevron to expand sub-scores
@@ -189,11 +189,11 @@ export function PowderFactorBadge({
                   <span>
                     {factor.rainedAfterSnow
                       ? t(
-                          "Rain fell after the last snow — expect crust, ice patches.",
+                          "Rain fell after the last snow - expect crust, ice patches.",
                           "降雪後に雨。アイスバーンに注意。",
                         )
                       : t(
-                          "Temperatures rose above +2°C after the last snow — likely refrozen surface.",
+                          "Temperatures rose above +2°C after the last snow - likely refrozen surface.",
                           "降雪後に気温が+2°Cを超えた。再凍結の可能性あり。",
                         )}
                   </span>
@@ -223,7 +223,7 @@ function SubScore({
   value: number;
   max: number;
 }) {
-  // Defensive against future callers passing 0 or non-finite max/value —
+  // Defensive against future callers passing 0 or non-finite max/value -
   // a NaN width would silently corrupt the bar visual.
   const safeMax = max > 0 ? max : 1;
   const safeValue = Number.isFinite(value) ? value : 0;

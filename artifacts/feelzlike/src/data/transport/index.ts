@@ -1,5 +1,5 @@
 /**
- * Region-isolated transport data — single source of truth for the
+ * Region-isolated transport data - single source of truth for the
  * Transport page and any future analytics/region-overview consumers.
  *
  * Loader-time invariants enforced here (so a curation drift never reaches
@@ -21,7 +21,7 @@ import { YAMANOUCHI_TRANSPORT } from "./yamanouchi";
 const REGISTRY: Record<RegionId, TransportProviderList> = {
   "snowy-mountains": SNOWY_MOUNTAINS_TRANSPORT,
   yamanouchi: YAMANOUCHI_TRANSPORT,
-  // Iiyama temporarily removed from the active region set — see
+  // Iiyama temporarily removed from the active region set - see
   // artifacts/feelzlike/src/regions/index.ts. When restored, paste back the
   // empty `iiyama: []` entry here.
 };
@@ -37,7 +37,7 @@ for (const [regionKey, providers] of Object.entries(REGISTRY) as [RegionId, Tran
     }
     if (!p.regions.includes(regionKey)) {
       throw new Error(
-        `[transport] provider '${p.id}' is registered under region '${regionKey}' but its regions[] is ${JSON.stringify(p.regions)} — missing self-reference`,
+        `[transport] provider '${p.id}' is registered under region '${regionKey}' but its regions[] is ${JSON.stringify(p.regions)} - missing self-reference`,
       );
     }
     const previous = seenIds.get(p.id);

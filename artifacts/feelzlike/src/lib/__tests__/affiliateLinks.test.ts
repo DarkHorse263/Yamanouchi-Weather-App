@@ -1,10 +1,10 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// affiliateLinks.test.ts — unit tests for the affiliate URL helper.
+// affiliateLinks.test.ts - unit tests for the affiliate URL helper.
 //
 // Run with:
 //   pnpm --filter @workspace/feelzlike test:affiliate
 //
-// We deliberately do NOT use vitest/jest here — the project already uses
+// We deliberately do NOT use vitest/jest here - the project already uses
 // `tsx` + `node:assert/strict` for its `data:smoke` script, and adding
 // vitest just for one helper would mean a new dev dependency, a config
 // file, and a test harness in CI. Same pattern, zero new deps.
@@ -49,7 +49,7 @@ function baseStayFields() {
   };
 }
 
-// AU stay with NO curated booking_links — only `website` (so `official`
+// AU stay with NO curated booking_links - only `website` (so `official`
 // is the lone curated provider in default mode).
 const auStayNoLinks: Stay = {
   ...baseStayFields(),
@@ -61,7 +61,7 @@ const auStayNoLinks: Stay = {
   region: "snowy_mountains",
 };
 
-// AU stay with TWO curated booking links — booking_com + agoda.
+// AU stay with TWO curated booking links - booking_com + agoda.
 const auStayCurated: Stay = {
   ...auStayNoLinks,
   id: "the-station-jindabyne",
@@ -99,7 +99,7 @@ const stayNoWebsite: Stay = {
   website: null,
 };
 
-// AU stay where the curated booking URL ALREADY contains an affiliate aid —
+// AU stay where the curated booking URL ALREADY contains an affiliate aid -
 // the helper must not double-write it.
 const auStayPreAid: Stay = {
   ...auStayNoLinks,
@@ -134,7 +134,7 @@ test("DEFAULT: stay with no curated booking_links shows only `official` (from we
   const links = buildBookingLinks(auStayNoLinks);
   // `official` (= website) is the only curated link
   assert.equal(links.official, "https://example.com", "official should equal stay.website");
-  // OTAs not curated — must NOT appear in default mode
+  // OTAs not curated - must NOT appear in default mode
   for (const p of ["booking_com", "agoda", "expedia", "hotels_com", "trip_com", "airbnb"] as Provider[]) {
     assert.equal(links[p], undefined, `${p} should be omitted in default mode (no curated URL)`);
   }
@@ -275,7 +275,7 @@ test("No affiliate ID → no affiliate-param leakage", () => {
 
 test("Curated URL with PRE-EXISTING aid → not double-written", () => {
   const links = buildBookingLinks(auStayPreAid, { idsOverride: { booking_com: "OURS" } });
-  // Should keep PRESET, not append OURS — single occurrence of `aid=` only
+  // Should keep PRESET, not append OURS - single occurrence of `aid=` only
   const matches = links.booking_com!.match(/[?&]aid=/g) ?? [];
   assert.equal(matches.length, 1, `expected single aid= param, got: ${links.booking_com}`);
   assert.ok(links.booking_com!.includes("aid=PRESET"), "PRESET aid should be preserved");

@@ -259,21 +259,21 @@ export default function LocationDetail() {
               },
               {
                 label: "Gusts",
-                value: current.windGust != null ? `${Math.round(current.windGust)}` : "—",
+                value: current.windGust != null ? `${Math.round(current.windGust)}` : "-",
                 unit: "km/h",
                 icon: Navigation,
                 tint: "hsl(24,95%,48%)",
               },
               {
                 label: "Snow depth",
-                value: current.snowDepth != null ? `${current.snowDepth}` : "—",
+                value: current.snowDepth != null ? `${current.snowDepth}` : "-",
                 unit: "cm",
                 icon: Snowflake,
                 tint: "hsl(190,90%,45%)",
               },
               {
                 label: "Freezing level",
-                value: current.freezingLevel != null ? `${current.freezingLevel.toLocaleString()}` : "—",
+                value: current.freezingLevel != null ? `${current.freezingLevel.toLocaleString()}` : "-",
                 unit: "m",
                 icon: Thermometer,
                 tint: "hsl(265,85%,55%)",
@@ -311,7 +311,7 @@ export default function LocationDetail() {
 
       {/* ─── Body ───────────────────────────── */}
       <div className="max-w-7xl mx-auto px-5 md:px-10 pb-20 space-y-6 md:space-y-8 -mt-2">
-        {/* Premium dashboard headline — animated rings, wind-hold alert, snowfall outlook */}
+        {/* Premium dashboard headline - animated rings, wind-hold alert, snowfall outlook */}
         <MountainSnapshot
           resortName={location.name}
           elevation={location.elevation}
@@ -390,7 +390,7 @@ export default function LocationDetail() {
         </motion.div>
 
         {/* Hour-by-hour next 48h with Powder Window detection.
-            AU thresholds are relaxed (0.5cm/hr, <25km/h) — Australian
+            AU thresholds are relaxed (0.5cm/hr, <25km/h) - Australian
             snowfall rarely hits Japow benchmarks. */}
         <HourlyForecast
           hourly={hourly}
@@ -510,7 +510,7 @@ export default function LocationDetail() {
           sectionNumber="07"
         />
 
-        {/* Powder Calendar intentionally NOT rendered for AU mountains —
+        {/* Powder Calendar intentionally NOT rendered for AU mountains -
             powder days are far rarer here than in Yamanouchi/Japan, so the
             calendar is restricted to JP regions where it's actually useful. */}
 

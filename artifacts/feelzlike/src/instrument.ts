@@ -4,7 +4,7 @@
  * other code touches them.
  *
  * If VITE_SENTRY_DSN is empty (e.g. local dev without the secret), Sentry
- * no-ops silently — nothing is sent and no console noise is produced.
+ * no-ops silently - nothing is sent and no console noise is produced.
  *
  * One Sentry React project is shared across the four SPAs (feelzlike,
  * snowy-mountains, yamanouchi, iiyama). The `artifact` tag below lets you

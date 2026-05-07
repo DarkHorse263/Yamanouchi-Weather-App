@@ -5,7 +5,7 @@
  * Required env vars:
  *   - VITE_VAPID_PUBLIC_KEY  (shared with client; reused server-side here)
  *   - VAPID_PRIVATE_KEY      (kept server-only)
- *   - ALERT_FROM_EMAIL       (mailto: contact for VAPID — required by the spec)
+ *   - ALERT_FROM_EMAIL       (mailto: contact for VAPID - required by the spec)
  */
 import webpush from "web-push";
 
@@ -16,7 +16,7 @@ function ensureConfigured(): boolean {
   const pub = process.env.VITE_VAPID_PUBLIC_KEY;
   const priv = process.env.VAPID_PRIVATE_KEY;
   if (!pub || !priv) {
-    console.warn("[pushSender] VAPID keys not set — web push disabled");
+    console.warn("[pushSender] VAPID keys not set - web push disabled");
     configured = false;
     return false;
   }

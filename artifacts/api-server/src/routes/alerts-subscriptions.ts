@@ -130,11 +130,11 @@ router.post("/alerts/subscribe", async (req, res): Promise<void> => {
     const id = row.id;
     // `unsubscribedAt` is always null here because the upsert just cleared it.
     // For the "already verified" short-circuit we look at the pre-upsert state
-    // — i.e. `verifiedAt` being non-null on the returned row.
+    // - i.e. `verifiedAt` being non-null on the returned row.
     const alreadyVerified = row.verifiedAt !== null;
 
     if (alreadyVerified) {
-      // Already opted-in — don't re-send a verification email; just confirm.
+      // Already opted-in - don't re-send a verification email; just confirm.
       res.json({
         ok: true,
         status: "already_verified",

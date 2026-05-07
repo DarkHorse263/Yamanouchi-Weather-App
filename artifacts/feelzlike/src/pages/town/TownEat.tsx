@@ -6,7 +6,7 @@ import { useRegion, useLanguage, useBaseTown, LiveBadge } from "@workspace/feelz
 import { EmptyStateCard } from "@/components/EmptyStateCard";
 
 /**
- * TownEat — simplified Google Maps launch pad.
+ * TownEat - simplified Google Maps launch pad.
  *
  * Per the Apr 2026 product reset: "Under Eats have a link to Google Places
  * or a Google Restaurant Search locked for the area." We were maintaining
@@ -17,7 +17,7 @@ import { EmptyStateCard } from "@/components/EmptyStateCard";
  * What it is now: a hero "Open in Google Maps" CTA centred on the town,
  * plus a small grid of pre-filtered category searches (restaurants,
  * cafes, izakaya/bars, takeaway, supermarkets). Google Maps handles the
- * rest — they have better data than we'd ever curate.
+ * rest - they have better data than we'd ever curate.
  */
 
 interface Category {
@@ -37,7 +37,7 @@ const CATEGORIES: Category[] = [
 ];
 
 function googleMapsSearch(query: string, lat: number, lng: number): string {
-  // Google Maps "search at coords" — `/maps/search/{query}/@lat,lng,zoom`
+  // Google Maps "search at coords" - `/maps/search/{query}/@lat,lng,zoom`
   // forces the result map to centre on the town, not the user's location.
   const q = encodeURIComponent(query);
   return `https://www.google.com/maps/search/${q}/@${lat},${lng},15z`;
@@ -84,8 +84,8 @@ export function TownEat() {
             </h1>
             <p className="text-muted-foreground mt-3 max-w-xl">
               {t(
-                `Find restaurants, cafes, izakaya and supermarkets around ${townDisplayName} on Google Maps — opening hours, reviews and directions all live there.`,
-                `${townDisplayName}周辺のレストラン・カフェ・居酒屋・スーパーをGoogleマップで検索 — 営業時間・レビュー・経路もそちらでご確認いただけます。`,
+                `Find restaurants, cafes, izakaya and supermarkets around ${townDisplayName} on Google Maps - opening hours, reviews and directions all live there.`,
+                `${townDisplayName}周辺のレストラン・カフェ・居酒屋・スーパーをGoogleマップで検索 - 営業時間・レビュー・経路もそちらでご確認いただけます。`,
               )}
             </p>
           </div>

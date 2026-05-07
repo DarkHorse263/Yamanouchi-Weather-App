@@ -24,7 +24,7 @@ interface Props {
 }
 
 /**
- * 7-day Powder Calendar — glanceable trip-planner forecast.
+ * 7-day Powder Calendar - glanceable trip-planner forecast.
  *
  * For each day in the next `days`, computes the best powder window (if any)
  * and renders a colour-coded pill: GOLD/SILVER/BRONZE for windows of that
@@ -111,7 +111,7 @@ function DayPill({ summary, t }: { summary: DailyPowderSummary; t: Tx }) {
         `${best.grade.toUpperCase()}ウィンドウ: ${best.hours}時間で${best.totalSnow}cm、風速${best.avgWind}km/h`,
       )
     : daySnow > 0
-      ? t(`${daySnow}cm forecast — no sustained window`, `${daySnow}cm予報 — 持続的なウィンドウなし`)
+      ? t(`${daySnow}cm forecast - no sustained window`, `${daySnow}cm予報 - 持続的なウィンドウなし`)
       : t("No snow forecast", "降雪予報なし");
 
   return (
@@ -137,7 +137,7 @@ function DayPill({ summary, t }: { summary: DailyPowderSummary; t: Tx }) {
           <Snowflake className="w-2.5 h-2.5" aria-hidden /> {daySnow}cm
         </p>
       ) : (
-        <p className="text-[10px] opacity-50 mt-1">—</p>
+        <p className="text-[10px] opacity-50 mt-1">-</p>
       )}
     </div>
   );

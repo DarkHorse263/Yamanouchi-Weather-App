@@ -7,7 +7,7 @@ import {
 
 /**
  * Adapter the auth layer plugs into. The middleware is intentionally
- * provider-agnostic — when Clerk / Replit Auth / Stripe is wired in, set the
+ * provider-agnostic - when Clerk / Replit Auth / Stripe is wired in, set the
  * resolver on app startup with `setSubscriptionResolver(...)` and every
  * `requireEntitlement(...)` route will start enforcing for real.
  *

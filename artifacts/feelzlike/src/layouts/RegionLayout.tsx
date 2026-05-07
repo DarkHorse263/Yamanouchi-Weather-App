@@ -15,7 +15,7 @@ import { RegionStay } from "@/pages/region/RegionStay";
 import { RegionSources } from "@/pages/region/RegionSources";
 import { snowyMountainsRouter } from "@/regions/snowy-mountains/router";
 import { yamanouchiRouter } from "@/regions/yamanouchi/router";
-// Iiyama temporarily removed — see artifacts/feelzlike/src/regions/index.ts
+// Iiyama temporarily removed - see artifacts/feelzlike/src/regions/index.ts
 
 export interface RegionRouter {
   /** Renders /:region/mountain/:id (and /:region/resort/:id for legacy) */
@@ -53,7 +53,7 @@ export function RegionLayout() {
 
   const hemisphere = region.id === "snowy-mountains" ? "south" : "north";
   const routes: RegionRouter = REGION_ROUTERS[region.id] ?? {};
-  // Default landing town for the region — first entry of baseTowns. Removes
+  // Default landing town for the region - first entry of baseTowns. Removes
   // the old "Region Overview" splash page and drops users straight into the
   // primary off-mountain town (Jindabyne for Snowy Mountains, Yudanaka for
   // Yamanouchi). Aligns with the product brief: stayers want town-first data.
@@ -76,7 +76,7 @@ export function RegionLayout() {
         <Route path="/mountain/:id">
           {routes.MountainDetail ? <routes.MountainDetail /> : <RegionStub title="Mountain" titleJa="スキー場" />}
         </Route>
-        {/* Legacy URL — keep working during transition */}
+        {/* Legacy URL - keep working during transition */}
         <Route path="/resort/:id">
           {routes.MountainDetail ? <routes.MountainDetail /> : <RegionStub title="Mountain" titleJa="スキー場" />}
         </Route>
@@ -96,7 +96,7 @@ export function RegionLayout() {
           {routes.Explore ? <routes.Explore /> : <RegionStub title="Explore" titleJa="観光" />}
         </Route>
         <Route path="/sources" component={RegionSources} />
-        {/* Town routes: /:town and /:town/* — must come last so reserved slugs match first */}
+        {/* Town routes: /:town and /:town/* - must come last so reserved slugs match first */}
         <Route path="/:town/:rest*" component={TownLayout} />
         <Route path="/:town" component={TownLayout} />
         <Route>

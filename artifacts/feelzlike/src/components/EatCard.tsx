@@ -46,7 +46,7 @@ import type { Eat } from "@/types/stayEat";
 import { cn } from "@/lib/utils";
 
 // ---------------------------------------------------------------------------
-// Type badge — every Eat.type from the schema covered (defensive: data may
+// Type badge - every Eat.type from the schema covered (defensive: data may
 // grow). Tone keeps the same warm/cool/neutral palette family as StayCard so
 // the two cards feel like siblings.
 // ---------------------------------------------------------------------------
@@ -68,7 +68,7 @@ const TYPE_BADGE: Record<Eat["type"], { label: string; className: string; icon: 
 };
 
 // ---------------------------------------------------------------------------
-// Price band — identical visual treatment to StayCard (4 dots, fill = level)
+// Price band - identical visual treatment to StayCard (4 dots, fill = level)
 // so the two card families render comparable price signals at a glance.
 // ---------------------------------------------------------------------------
 function PriceBand({ band }: { band: Eat["price_band"] }) {
@@ -95,7 +95,7 @@ function PriceBand({ band }: { band: Eat["price_band"] }) {
 }
 
 // ---------------------------------------------------------------------------
-// Photo placeholder — type-iconographic so a missing photo still says
+// Photo placeholder - type-iconographic so a missing photo still says
 // "this is a ramen shop" rather than reading as a generic empty card.
 // ---------------------------------------------------------------------------
 function Placeholder({ name, type }: { name: string; type: Eat["type"] }) {
@@ -142,7 +142,7 @@ function HeroPhoto({
       {valid.length === 0 ? (
         <Placeholder name={name} type={type} />
       ) : (
-        <PhotoFrame url={valid[0]} alt={`${name} — photo`} name={name} type={type} />
+        <PhotoFrame url={valid[0]} alt={`${name} - photo`} name={name} type={type} />
       )}
     </div>
   );
@@ -165,7 +165,7 @@ function PhotoCarousel({ photos, name, type }: { photos: readonly string[]; name
             <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
               <PhotoFrame
                 url={url}
-                alt={`${name} — photo ${i + 1} of ${valid.length}`}
+                alt={`${name} - photo ${i + 1} of ${valid.length}`}
                 name={name}
                 type={type}
               />
@@ -190,7 +190,7 @@ function PhotoCarousel({ photos, name, type }: { photos: readonly string[]; name
 }
 
 // ---------------------------------------------------------------------------
-// Open-now pill — colour-by-status. The actual `isOpenNow` body returns
+// Open-now pill - colour-by-status. The actual `isOpenNow` body returns
 // 'unknown' until Prompt 3.4 plugs in the timezone-aware logic; the badge
 // already auto-reschedules off `result.nextChange` so it'll start ticking
 // the moment 3.4 lands without any further wiring.
@@ -208,7 +208,7 @@ const OPEN_NOW_TONE: Record<OpenNowStatus, string> = {
 // transitions (AEDT↔AEST in Australia). Re-running classification at most
 // every 15 minutes bounds that drift to 15min in the worst case (the actual
 // open/closed STATUS is always correct because it's derived via Intl on each
-// evaluation — only the *scheduling* of the next re-render can drift).
+// evaluation - only the *scheduling* of the next re-render can drift).
 const OPEN_NOW_MAX_TIMER_MS = 15 * 60 * 1000;
 
 function OpenNowPill({ eat }: { eat: Eat }) {
@@ -216,7 +216,7 @@ function OpenNowPill({ eat }: { eat: Eat }) {
   // without a page refresh. We hold the result in state and refresh it on a
   // timer derived from the function's own `nextChange`. Falls back to a
   // 15-min poll when nextChange is unknown, and caps the timer at 15min
-  // even when nextChange is set (DST drift bound — see comment above).
+  // even when nextChange is set (DST drift bound - see comment above).
   const [result, setResult] = useState<OpenNowResult>(() => isOpenNow(eat));
   useEffect(() => {
     setResult(isOpenNow(eat));
@@ -254,7 +254,7 @@ function OpenNowPill({ eat }: { eat: Eat }) {
 }
 
 // ---------------------------------------------------------------------------
-// Cuisine chips — capped at 3 to keep the row scannable; "+N" overflow chip
+// Cuisine chips - capped at 3 to keep the row scannable; "+N" overflow chip
 // signals there's more in the detail sheet.
 // ---------------------------------------------------------------------------
 function CuisineChips({ cuisine, max = 3 }: { cuisine: readonly string[]; max?: number }) {
@@ -281,7 +281,7 @@ function CuisineChips({ cuisine, max = 3 }: { cuisine: readonly string[]; max?: 
 }
 
 // ---------------------------------------------------------------------------
-// Critical badges row — compact icons signalling traveller-relevant facts:
+// Critical badges row - compact icons signalling traveller-relevant facts:
 // payment, English menu, vegetarian, après-ski, takeaway, groceries.
 // Tone matches StayCard's FeatureChip system.
 // ---------------------------------------------------------------------------
@@ -319,7 +319,7 @@ function FeatureChip({
 function CriticalBadges({ eat }: { eat: Eat }) {
   const chips: React.ReactNode[] = [];
 
-  // Payment — only flag the noteworthy cases (cash-only is a real
+  // Payment - only flag the noteworthy cases (cash-only is a real
   // friction-point in rural Nagano; cards-accepted in Japan is worth
   // signalling). Don't show "cards accepted" for AU since it's the default
   // assumption and clutters the row.
@@ -329,7 +329,7 @@ function CriticalBadges({ eat }: { eat: Eat }) {
     chips.push(<FeatureChip key="cards" label="Cards OK" tone="ok" icon={CreditCard} />);
   }
 
-  // English menu — Japan-only signal; AU defaults to English so the chip
+  // English menu - Japan-only signal; AU defaults to English so the chip
   // would be noise.
   if (eat.country === "JP" && eat.english_menu) {
     if (eat.english_menu === "yes") {
@@ -339,7 +339,7 @@ function CriticalBadges({ eat }: { eat: Eat }) {
     } else if (eat.english_menu === "limited") {
       chips.push(<FeatureChip key="enltd" label="EN: limited" tone="warm" icon={Languages} />);
     }
-    // 'no' → silent (absence of the chip is the signal — no false promises)
+    // 'no' → silent (absence of the chip is the signal - no false promises)
   }
 
   if (eat.country === "AU") {
@@ -368,7 +368,7 @@ function CriticalBadges({ eat }: { eat: Eat }) {
 }
 
 // ---------------------------------------------------------------------------
-// Action helpers — phone link normaliser + maps deep-link (same shape as
+// Action helpers - phone link normaliser + maps deep-link (same shape as
 // StayCard so behaviour matches across surfaces).
 // ---------------------------------------------------------------------------
 function telHref(phone: string | null): string | null {
@@ -395,7 +395,7 @@ async function copyToClipboard(text: string): Promise<boolean> {
 }
 
 // ---------------------------------------------------------------------------
-// Action row — Reserve / Call / Directions. Reserve is conditional on
+// Action row - Reserve / Call / Directions. Reserve is conditional on
 // `reservation_link`; Call on `phone`; Directions on lat/lng. Buttons
 // stop-propagate so taps don't also trigger the parent sheet.
 // ---------------------------------------------------------------------------
@@ -459,7 +459,7 @@ function ActionRow({ eat, variant = "card" }: { eat: Eat; variant?: "card" | "de
 }
 
 // ---------------------------------------------------------------------------
-// Hours table — used in the detail sheet. Highlights the current weekday so
+// Hours table - used in the detail sheet. Highlights the current weekday so
 // the visitor immediately sees today's hours without parsing the table.
 // ---------------------------------------------------------------------------
 const DAY_ORDER: ReadonlyArray<{ key: keyof NonNullable<Eat["hours"]>; label: string }> = [
@@ -505,7 +505,7 @@ function HoursTable({ hours }: { hours: Eat["hours"] }) {
                 <span className="text-[9px] uppercase tracking-wider text-muted-foreground">today</span>
               ) : null}
             </span>
-            <span className="tabular-nums text-foreground/85">{value ? value : "—"}</span>
+            <span className="tabular-nums text-foreground/85">{value ? value : "-"}</span>
           </li>
         );
       })}
@@ -514,7 +514,7 @@ function HoursTable({ hours }: { hours: Eat["hours"] }) {
 }
 
 // ---------------------------------------------------------------------------
-// Detail sheet — exported so callers (e.g. TownEat's `?eat={id}` deep-link
+// Detail sheet - exported so callers (e.g. TownEat's `?eat={id}` deep-link
 // pattern) can render it standalone without re-mounting the card list.
 // Shape mirrors StayDetailSheet for visual consistency.
 // ---------------------------------------------------------------------------
@@ -645,7 +645,7 @@ export function EatDetailSheet({ eat }: { eat: Eat }) {
 // Main card. Controlled-open hooks (`open`/`onOpenChange`) match StayCard
 // exactly so TownEat can mount a single page-level <Sheet> wired to the
 // `?eat={id}` URL param (same idiom that 2.6 architect-fix established for
-// stays — avoids dead controlled state on every list card).
+// stays - avoids dead controlled state on every list card).
 // ---------------------------------------------------------------------------
 export interface EatCardProps {
   eat: Eat;
@@ -674,7 +674,7 @@ export function EatCard({ eat, className, open, onOpenChange }: EatCardProps) {
       />
 
       <Sheet open={open} onOpenChange={onOpenChange}>
-        {/* Single trigger covers the full text area — same focus-visible
+        {/* Single trigger covers the full text area - same focus-visible
             ring approach as StayCard so the two cards feel identical to
             keyboard users. */}
         <SheetTrigger asChild>

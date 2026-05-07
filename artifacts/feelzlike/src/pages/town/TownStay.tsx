@@ -14,7 +14,7 @@ import {
 /**
  * Region-specific local accommodation providers, shown above the global
  * OTA grid. These are direct/independent operators visitors usually
- * can't find on Booking/Agoda — community-run booking pages, regional
+ * can't find on Booking/Agoda - community-run booking pages, regional
  * tourism boards, etc. Keep the list short: this is a curated callout,
  * not a directory.
  */
@@ -30,14 +30,14 @@ const LOCAL_STAY_PROVIDERS: Record<string, LocalStayProvider[]> = {
     {
       name: "Snowy Mountains Accommodation",
       url: "https://snowymountainsaccommodation.au/",
-      blurbEn: "Independent regional booking site — Jindabyne, Thredbo, Perisher and surrounds.",
-      blurbJa: "地元独立予約サイト — ジンダバイン・スレッドボー・ペリッシャー周辺。",
+      blurbEn: "Independent regional booking site - Jindabyne, Thredbo, Perisher and surrounds.",
+      blurbJa: "地元独立予約サイト - ジンダバイン・スレッドボー・ペリッシャー周辺。",
     },
   ],
 };
 
 /**
- * TownStay — simplified affiliate-link card.
+ * TownStay - simplified affiliate-link card.
  *
  * Per the Apr 2026 product reset: "Under stays just have links to Booking
  * providers (make it simple). I'm going to become an affiliate of some of
@@ -54,7 +54,7 @@ const LOCAL_STAY_PROVIDERS: Record<string, LocalStayProvider[]> = {
  * IDs (when configured via `VITE_*_AFFILIATE_ID` env vars in
  * `lib/affiliateLinks.ts`) are auto-injected so we earn from clicks.
  *
- * No data, no filters, no curation — just a dependable launch pad.
+ * No data, no filters, no curation - just a dependable launch pad.
  */
 export function TownStay() {
   const { region } = useRegion();
@@ -183,7 +183,7 @@ export function TownStay() {
 
           <p className="mt-5 text-[11px] text-muted-foreground/70 leading-relaxed">
             {t(
-              "Links open in a new tab on the booking platform's site. Feelzlike may earn a commission from bookings made through these links — it never costs you extra.",
+              "Links open in a new tab on the booking platform's site. Feelzlike may earn a commission from bookings made through these links - it never costs you extra.",
               "リンクは予約サイトの別タブで開きます。これらのリンクからの予約はFeelzlikeに手数料が発生する場合がありますが、追加料金はありません。",
             )}
           </p>

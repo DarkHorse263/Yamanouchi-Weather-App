@@ -25,7 +25,7 @@ export function TownPlaces({ kind, title, titleJa, blurb, blurbJa }: Props) {
   // Stay/Eat use the town's tight `radiusM` (e.g. Yudanaka 700m, Shibu 400m) to keep
   // adjacent-town listings from duplicating. Explore is different: tourists pick a
   // base town to reach iconic regional destinations (Jigokudani Monkey Park is ~3km
-  // from Yudanaka station — the whole reason people stay there). Use a wider floor
+  // from Yudanaka station - the whole reason people stay there). Use a wider floor
   // for explore so those headline POIs actually surface.
   const EXPLORE_MIN_RADIUS_M = 6000;
   const radius =

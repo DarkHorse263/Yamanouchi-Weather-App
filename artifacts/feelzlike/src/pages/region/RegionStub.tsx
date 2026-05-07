@@ -48,7 +48,7 @@ export function RegionStub({ title, titleJa, params }: Props) {
               </p>
               <p className="text-muted-foreground mt-3 max-w-xl text-sm">
                 {t(
-                  "Same data, same look — now under one roof. We'll wire this page up next.",
+                  "Same data, same look - now under one roof. We'll wire this page up next.",
                   "同じデータ、同じデザイン。まもなくこのページを接続します。",
                 )}
               </p>

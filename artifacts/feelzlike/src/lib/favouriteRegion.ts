@@ -10,7 +10,7 @@
  * - To preserve the ability to *visit* the landing page (e.g. to switch
  *   regions or unfavourite), we set a `sessionStorage` skip-flag once we
  *   redirect. Subsequent navigations back to `/` in the same browser tab
- *   will then show the landing page normally — only a fresh tab/window
+ *   will then show the landing page normally - only a fresh tab/window
  *   will auto-redirect again.
  * - Reading + writing localStorage is wrapped in try/catch because Safari
  *   private mode + some embed contexts throw on access.
@@ -47,15 +47,15 @@ export function writeFavouriteRegion(regionId: string | null): void {
       localStorage.removeItem(KEY);
     }
     // Toggling the favourite means the user is on the landing page
-    // intentionally — mark the session-skip so we don't bounce them out
+    // intentionally - mark the session-skip so we don't bounce them out
     // immediately after they pin/unpin.
     markLandingVisited();
   } catch {
-    /* swallow — non-fatal */
+    /* swallow - non-fatal */
   }
 }
 
-/** Marks the current session as having visited landing — disables auto-redirect for the rest of the tab's life. */
+/** Marks the current session as having visited landing - disables auto-redirect for the rest of the tab's life. */
 export function markLandingVisited(): void {
   try {
     sessionStorage.setItem(SESSION_SKIP, "1");

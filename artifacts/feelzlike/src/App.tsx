@@ -23,7 +23,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Landing} />
-      {/* Top-level alert pages — must come BEFORE the /:region catch-all so
+      {/* Top-level alert pages - must come BEFORE the /:region catch-all so
           tokenised email links don't get parsed as a region. */}
       <Route path="/alerts/verify" component={AlertsVerify} />
       <Route path="/alerts/manage" component={AlertsManage} />
@@ -55,7 +55,7 @@ function AnalyticsBridge() {
 
   // Page-view breadcrumb on every route change. Cheap & always-on; helps
   // crash reports show what the user was looking at when things broke.
-  // SECURITY: strip querystring + hash before logging — alert links carry
+  // SECURITY: strip querystring + hash before logging - alert links carry
   // HMAC tokens (?token=...) that must never reach Sentry breadcrumbs.
   useEffect(() => {
     const safePath = location.split(/[?#]/)[0] || "/";

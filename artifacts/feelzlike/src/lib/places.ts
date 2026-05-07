@@ -130,7 +130,7 @@ export function bookingDeepLink(opts: {
 }
 
 // ============================================================
-// Multi-platform stay search — Booking.com + Airbnb + Agoda +
+// Multi-platform stay search - Booking.com + Airbnb + Agoda +
 // Trip.com + Hotels.com + Expedia, plus JP-only Rakuten & Jalan
 // ============================================================
 
@@ -163,7 +163,7 @@ export const STAY_PLATFORMS: Record<StayPlatformId, StayPlatform> = {
   jalan:   { id: "jalan",   label: "Jalan",           short: "Jalan",    brandColor: "#FF6E00", brandText: "#ffffff" },
 };
 
-/** Region tag — accepts country/region codes. "JP" adds Rakuten + Jalan; everything else is western only. */
+/** Region tag - accepts country/region codes. "JP" adds Rakuten + Jalan; everything else is western only. */
 export type CountryCode = string;
 
 /** Returns the ordered list of platforms to surface for a given country/region tag. */

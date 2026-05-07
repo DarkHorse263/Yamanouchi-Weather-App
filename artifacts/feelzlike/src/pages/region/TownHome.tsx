@@ -20,7 +20,7 @@ function haversineKm(a: { lat: number; lng: number }, b: { lat: number; lng: num
 }
 
 const TILES = [
-  { path: "/weather",   icon: CloudSun,        label: "Weather",   labelJa: "天気",   blurb: "Full in-town forecast — current, hourly, 7-day", blurbJa: "町の総合予報 — 現在・時間別・7日間" },
+  { path: "/weather",   icon: CloudSun,        label: "Weather",   labelJa: "天気",   blurb: "Full in-town forecast - current, hourly, 7-day", blurbJa: "町の総合予報 - 現在・時間別・7日間" },
   { path: "/roads",     icon: Car,             label: "Roads",     labelJa: "道路",   blurb: "Live road conditions to the mountain", blurbJa: "山への道路状況" },
   { path: "/cams",      icon: Video,           label: "Cams",      labelJa: "ライブ", blurb: "Town and roadside webcams",            blurbJa: "町と路傍のライブカメラ" },
   { path: "/transport", icon: Bus,             label: "Transport", labelJa: "交通",   blurb: "Buses & shuttles from town",          blurbJa: "町からのバス・送迎" },
@@ -102,7 +102,7 @@ export function TownHome() {
       : null;
   const weatherHint = closest?.entry.current?.weatherDescription ?? closest?.entry.location.name ?? "";
   const roadValue = !roadsAvailable
-    ? "—"
+    ? "-"
     : roadsSummary
       ? roadsSummary.closed > 0
         ? `${roadsSummary.closed}`
@@ -126,7 +126,7 @@ export function TownHome() {
   return (
     <div className="px-6 md:px-10 py-8 md:py-12 max-w-6xl mx-auto">
       <PageMeta
-        title={`${town.name} — weather, stays, roads & cams`}
+        title={`${town.name} - weather, stays, roads & cams`}
         description={`${town.name} in ${region.name}: in-town weather, road conditions to the mountain, webcams, transport, plus curated stays and eats.`}
         path={`/${region.id}/${town.id}`}
         jsonLd={[
@@ -165,14 +165,14 @@ export function TownHome() {
         <div className="rule mt-6" />
       </motion.header>
 
-      {/* Snapshot strip — live conditions */}
+      {/* Snapshot strip - live conditions */}
       <section className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
         <SnapshotCard
           label={t("In town now", "町の現在")}
           value={
             townWeatherQ.data?.current.temperature !== undefined && townWeatherQ.data?.current.temperature !== null
               ? Math.round(townWeatherQ.data.current.temperature).toString()
-              : "—"
+              : "-"
           }
           unit="°"
           hint={
@@ -189,7 +189,7 @@ export function TownHome() {
         />
         <SnapshotCard
           label={t("Nearest mountain", "最寄りの山")}
-          value={tempValue ?? "—"}
+          value={tempValue ?? "-"}
           unit="°"
           hint={
             weatherQ.isLoading
@@ -201,7 +201,7 @@ export function TownHome() {
         />
         <SnapshotCard
           label={t("To the mountain", "山まで")}
-          value={driveMinutes !== null ? `~${driveMinutes}` : "—"}
+          value={driveMinutes !== null ? `~${driveMinutes}` : "-"}
           unit={t("min", "分")}
           hint={
             closest
@@ -214,7 +214,7 @@ export function TownHome() {
         />
         <SnapshotCard
           label={t("Roads", "道路")}
-          value={roadValue ?? "—"}
+          value={roadValue ?? "-"}
           unit={roadUnit}
           hint={roadHint}
           tone={

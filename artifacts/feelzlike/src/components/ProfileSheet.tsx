@@ -25,7 +25,7 @@ import {
 import { useLanguage } from "@workspace/feelzlike-shell";
 
 /**
- * ProfileSheet — combined onboarding + edit experience for the UserProfile.
+ * ProfileSheet - combined onboarding + edit experience for the UserProfile.
  *
  * Two modes via the `mode` prop:
  *  - `onboarding`: 4-step wizard (skill → discipline → priorities → risk)
@@ -38,7 +38,7 @@ import { useLanguage } from "@workspace/feelzlike-shell";
  *
  * On mount the local form state is seeded from the persisted profile (so
  * the edit mode shows current values). The form state is committed to
- * localStorage only when the user clicks Save — escapes/cancels discard.
+ * localStorage only when the user clicks Save - escapes/cancels discard.
  */
 export function ProfileSheet({
   open,
@@ -80,7 +80,7 @@ export function ProfileSheet({
   }
 
   // ----- shared field renderers -----
-  // NOTE: Don't use explicit JSX generic syntax (<Component<T> ...>) — the
+  // NOTE: Don't use explicit JSX generic syntax (<Component<T> ...>) - the
   // Replit cartographer plugin injects data-replit-metadata attributes
   // before the generic and breaks the babel parser. TS infers the generic
   // from the props (value/onChange), so we don't need it explicitly.
@@ -166,7 +166,7 @@ export function ProfileSheet({
                       "30秒・4問。あなたに合うスキー場を順位付けします。"
                     )
                   : t(
-                      "Tweak anytime — Today's Call will re-rank instantly.",
+                      "Tweak anytime - Today's Call will re-rank instantly.",
                       "いつでも変更可能 · 今日の判断は即時に再評価されます。"
                     )}
               </SheetDescription>
@@ -279,7 +279,7 @@ export function ProfileSheet({
 }
 
 // ---------------------------------------------------------------------------
-// SegmentedField — single-select pill row, used for skill / discipline / risk
+// SegmentedField - single-select pill row, used for skill / discipline / risk
 // ---------------------------------------------------------------------------
 
 function SegmentedField<T extends string>({
@@ -297,7 +297,7 @@ function SegmentedField<T extends string>({
 }) {
   // Use radiogroup semantics so screen readers announce the current
   // selection + that the user can move between siblings.
-  // useId() generates a stable, whitespace-free ID — `label` may contain
+  // useId() generates a stable, whitespace-free ID - `label` may contain
   // spaces or non-ASCII characters (e.g. localised JP strings), which are
   // not valid IDREFs for aria-labelledby.
   const labelId = useId();
@@ -336,7 +336,7 @@ function SegmentedField<T extends string>({
 }
 
 // ---------------------------------------------------------------------------
-// MultiSelectField — checkbox-pill grid with a max-N cap
+// MultiSelectField - checkbox-pill grid with a max-N cap
 // ---------------------------------------------------------------------------
 
 function MultiSelectField<T extends string>({

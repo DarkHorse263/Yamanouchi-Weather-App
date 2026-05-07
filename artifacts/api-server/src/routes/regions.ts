@@ -34,8 +34,8 @@ const REGIONS: RegionConfig[] = [
     href: "/snowy-mountains/",
     baseTowns: ["Jindabyne", "Berridale", "Cooma"],
     mountains: ["Thredbo", "Perisher", "Charlotte Pass", "Selwyn"],
-    // Headline reading is for the base town (Jindabyne, ~918m) — not the
-    // mountain peak — so the home page reflects what visitors actually feel
+    // Headline reading is for the base town (Jindabyne, ~918m) - not the
+    // mountain peak - so the home page reflects what visitors actually feel
     // when they arrive in town. Per-mountain peak forecasts live on the
     // dedicated region page.
     headlineLabel: "Jindabyne",
@@ -54,8 +54,8 @@ const REGIONS: RegionConfig[] = [
     href: "/yamanouchi/",
     baseTowns: ["Yudanaka", "Shibu Onsen", "Yomase"],
     mountains: ["Shiga Kogen", "Yomase", "X-Jam", "Ryuoo"],
-    // Headline reading is for the base town (Yudanaka Onsen, ~600m) — not
-    // the Shiga Kogen peak — so the home page shows what visitors feel on
+    // Headline reading is for the base town (Yudanaka Onsen, ~600m) - not
+    // the Shiga Kogen peak - so the home page shows what visitors feel on
     // arrival. Per-mountain peak forecasts live on the dedicated region page.
     headlineLabel: "Yudanaka",
     lat: 36.7414,
@@ -64,7 +64,7 @@ const REGIONS: RegionConfig[] = [
     timezone: "Asia/Tokyo",
     sourceLabel: "JMA Seamless",
   },
-  // Iiyama temporarily removed — see artifacts/api-server/src/lib/regions.ts
+  // Iiyama temporarily removed - see artifacts/api-server/src/lib/regions.ts
 ];
 
 const WEATHER_DESCRIPTIONS: Record<number, string> = {
@@ -152,7 +152,7 @@ async function fetchHeadline(r: RegionConfig): Promise<HeadlineReading | null> {
   const now = Date.now();
   const cached = cache.get(cacheKey);
 
-  // Fresh hit — fastest path
+  // Fresh hit - fastest path
   if (cached && cached.freshUntil > now) {
     cacheStats.hits++;
     return cached.data;
@@ -203,7 +203,7 @@ async function fetchHeadline(r: RegionConfig): Promise<HeadlineReading | null> {
     return cached.data;
   }
 
-  // No cache at all — must wait for fresh
+  // No cache at all - must wait for fresh
   return refresh;
 }
 
@@ -224,7 +224,7 @@ async function fetchHeadlineUpstream(r: RegionConfig): Promise<HeadlineReading |
   try {
     // Open-Meteo asks all integrators to identify themselves so they can reach
     // out about quota / abuse before throttling. They're CC-BY 4.0; commercial
-    // use needs their commercial tier — see replit.md "External Dependencies".
+    // use needs their commercial tier - see replit.md "External Dependencies".
     const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
       signal: AbortSignal.timeout(8000),
       headers: {
@@ -246,7 +246,7 @@ async function fetchHeadlineUpstream(r: RegionConfig): Promise<HeadlineReading |
       return new Date(epochAsIfUtc - utcOffsetSec * 1000).toISOString();
     };
 
-    // Open-Meteo snowfall default unit is cm — *10 converts to mm
+    // Open-Meteo snowfall default unit is cm - *10 converts to mm
     const snowfallCm24 = Array.isArray(hourly.snowfall)
       ? hourly.snowfall.slice(0, 24).reduce((a: number, b: number) => a + (Number.isFinite(b) ? Number(b) : 0), 0)
       : 0;
@@ -324,7 +324,7 @@ router.get("/regions", async (_req, res) => {
   }
 });
 
-// Internal cache stats endpoint — useful for monitoring + debugging
+// Internal cache stats endpoint - useful for monitoring + debugging
 router.get("/regions/_stats", (_req, res) => {
   res.json({
     cache: getCacheStats(),

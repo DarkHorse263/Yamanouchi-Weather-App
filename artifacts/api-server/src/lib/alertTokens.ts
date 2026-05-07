@@ -19,10 +19,10 @@ const SECRET = (() => {
     throw new Error("ALERT_TOKEN_SECRET must be set (>=16 chars) in production. Generate: openssl rand -base64 48");
   }
   // Dev fallback: stable per-process random so tokens issued in one dev run
-  // don't validate after a restart (which is the right behaviour — devs should
+  // don't validate after a restart (which is the right behaviour - devs should
   // re-issue in dev).
   const dev = randomBytes(32).toString("base64url");
-  console.warn("[alertTokens] ALERT_TOKEN_SECRET not set — using ephemeral dev secret. Tokens will not survive a server restart.");
+  console.warn("[alertTokens] ALERT_TOKEN_SECRET not set - using ephemeral dev secret. Tokens will not survive a server restart.");
   return dev;
 })();
 

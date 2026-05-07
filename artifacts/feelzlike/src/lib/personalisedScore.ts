@@ -49,7 +49,7 @@ export interface PersonalisedMountainScore extends MountainScore {
  *  - risk_tolerance === 'high' → +5 (softens the natural wind/cloud penalties)
  *
  * NOTE: 'groomers', 'value', 'crowds' priorities are intentionally no-ops
- * in v1 — they require data we don't have yet (recent_groom timestamps,
+ * in v1 - they require data we don't have yet (recent_groom timestamps,
  * lift-ticket prices, day-of-week + storm-day proxy crowd estimates).
  * They're kept in the type so onboarding can capture intent and the UI
  * can show "your priority is queued for v2" hints.
@@ -85,7 +85,7 @@ export function scoreMountainPersonalised(
       modifiers.push({
         id: "beginner_too_hard",
         delta: -30,
-        reason: "Mostly expert terrain — could be intimidating",
+        reason: "Mostly expert terrain - could be intimidating",
         reasonJa: "上級者向けが中心",
       });
     }
@@ -176,18 +176,18 @@ export function scoreMountainPersonalised(
       modifiers.push({
         id: "risk_low_vis",
         delta: -15,
-        reason: "Heavy cloud cover — flat-light risk",
-        reasonJa: "厚い雲量 — フラットライトの恐れ",
+        reason: "Heavy cloud cover - flat-light risk",
+        reasonJa: "厚い雲量 - フラットライトの恐れ",
       });
     }
   } else if (profile.risk_tolerance === "high") {
-    // High risk: small flat boost — these users don't want soft conditions
+    // High risk: small flat boost - these users don't want soft conditions
     // suppressed by default thresholds.
     modifiers.push({
       id: "risk_high_send_it",
       delta: +5,
-      reason: "Send-it mode — wind/cloud penalties softened",
-      reasonJa: "攻めモード — 風と雲のペナルティ緩和",
+      reason: "Send-it mode - wind/cloud penalties softened",
+      reasonJa: "攻めモード - 風と雲のペナルティ緩和",
     });
   }
 

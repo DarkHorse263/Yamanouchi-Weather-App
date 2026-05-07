@@ -82,13 +82,13 @@ export default function StayFilterBarDemo() {
         <p className="text-[11px] font-bold tracking-wider uppercase text-muted-foreground">
           Component preview · Sprint 2 · Prompt 2.3
         </p>
-        <h1 className="font-display text-2xl mt-1">StayFilterBar — region-aware filters</h1>
+        <h1 className="font-display text-2xl mt-1">StayFilterBar - region-aware filters</h1>
         <p className="text-sm text-muted-foreground mt-2 max-w-3xl">
           Two regional datasets rendered through the same component. Snowy Mountains
           surfaces drying-room / ski-storage / pet-friendly / self-contained checkboxes
           plus distance-to-Thredbo and distance-to-Skitube sliders. Yamanouchi surfaces
           onsen / tattoo / meal-plan / English-spoken selects plus walk-to-Yudanaka
-          slider. Filter state syncs to the URL — share a filtered link and reload the
+          slider. Filter state syncs to the URL - share a filtered link and reload the
           page to see filters restored.
         </p>
       </header>

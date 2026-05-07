@@ -25,7 +25,7 @@ export interface EmptyStateCardProps {
   /** Override the default centred-card max width if needed. */
   className?: string;
   /**
-   * ARIA role override. Defaults to undefined — the inner `<h2>` is sufficient
+   * ARIA role override. Defaults to undefined - the inner `<h2>` is sufficient
    * landmark for SR users in most cases. Pass `"status"` if the card appears
    * post-fetch and you want it announced as a live region; pass `"region"` +
    * `aria-label` if it's the primary content of a page section.

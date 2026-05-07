@@ -458,7 +458,7 @@ export default function Transport() {
 // GREEN-SEASON TRANSPORT
 //
 // Apr–Nov visitors come for hiking, onsen, snow-monkey day trips and
-// the Shiga Kogen highland — a very different routing problem from
+// the Shiga Kogen highland - a very different routing problem from
 // the winter ski-shuttle network. We surface:
 //   1. Long-haul: Tokyo → Nagano OR Tokyo → Iiyama by Hokuriku Shinkansen
 //   2. Last-mile: Nagano → Yudanaka by Nagaden train (the standard route)
@@ -467,7 +467,7 @@ export default function Transport() {
 //   5. Shiga Kogen access in green season (sightseeing/hiking)
 //   6. Taxis & on-demand options
 //
-// All numeric prices/durations are widely-published reference figures —
+// All numeric prices/durations are widely-published reference figures -
 // the page warns at the bottom to confirm with the operator.
 // ─────────────────────────────────────────────────────────────────────
 function GreenTransport({ t }: { t: (en: string, ja: string) => string }) {
@@ -708,7 +708,7 @@ function GreenTransport({ t }: { t: (en: string, ja: string) => string }) {
                 ))}
               </div>
               <p className="text-[11px] text-slate-500 mt-2">
-                {t("All require an International Driving Permit (IDP) issued under the 1949 Geneva Convention — your home licence alone is not accepted.", "国際運転免許証(1949年ジュネーブ条約)が必要。日本免許への切替も可。")}
+                {t("All require an International Driving Permit (IDP) issued under the 1949 Geneva Convention - your home licence alone is not accepted.", "国際運転免許証(1949年ジュネーブ条約)が必要。日本免許への切替も可。")}
               </p>
             </div>
 
@@ -716,7 +716,7 @@ function GreenTransport({ t }: { t: (en: string, ja: string) => string }) {
             <div className="border-t border-slate-100 pt-3 flex items-start gap-2">
               <Info className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
               <p className="text-[11px] text-slate-600">
-                {t("Most ryokans in Yudanaka, Shibu and Kanbayashi offer free parking — confirm at booking. Onsen-town streets are narrow; use the hotel lot rather than on-street.", "湯田中・渋・上林の旅館は無料駐車場ありが一般的(要確認)。温泉街は道幅狭く、路上駐車不可。")}
+                {t("Most ryokans in Yudanaka, Shibu and Kanbayashi offer free parking - confirm at booking. Onsen-town streets are narrow; use the hotel lot rather than on-street.", "湯田中・渋・上林の旅館は無料駐車場ありが一般的(要確認)。温泉街は道幅狭く、路上駐車不可。")}
               </p>
             </div>
           </div>
@@ -757,7 +757,7 @@ function GreenTransport({ t }: { t: (en: string, ja: string) => string }) {
                 <div className="flex-1">
                   <p className="text-sm font-bold text-slate-800">{t("Hotel pickup shuttles", "宿の送迎")}</p>
                   <p className="text-xs text-slate-500 mt-0.5">
-                    {t("Most ryokans run a free shuttle from Yudanaka Station for guests with a reservation — call on arrival or arrange in advance.", "ほとんどの旅館で湯田中駅から無料送迎あり(要予約・要連絡)。")}
+                    {t("Most ryokans run a free shuttle from Yudanaka Station for guests with a reservation - call on arrival or arrange in advance.", "ほとんどの旅館で湯田中駅から無料送迎あり(要予約・要連絡)。")}
                   </p>
                 </div>
               </div>
@@ -770,7 +770,7 @@ function GreenTransport({ t }: { t: (en: string, ja: string) => string }) {
                 <p className="text-xs font-black text-rose-800">{t("Shibu Onsen Nine Baths Key", "渋温泉九湯めぐり")}</p>
               </div>
               <p className="text-[11px] text-rose-700">
-                {t("Stay overnight at any Shibu ryokan and you get a wooden key for free entry to all nine public bathhouses — a charming green-season ritual.", "渋温泉の旅館に宿泊すると九つの外湯を巡れる木札の鍵がもらえます。グリーンシーズンの定番。")}
+                {t("Stay overnight at any Shibu ryokan and you get a wooden key for free entry to all nine public bathhouses - a charming green-season ritual.", "渋温泉の旅館に宿泊すると九つの外湯を巡れる木札の鍵がもらえます。グリーンシーズンの定番。")}
               </p>
             </div>
 
@@ -778,7 +778,7 @@ function GreenTransport({ t }: { t: (en: string, ja: string) => string }) {
             <div className="border-t border-slate-100 pt-3 flex items-start gap-2">
               <Bike className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
               <p className="text-[11px] text-slate-600">
-                {t("Some hotels lend bicycles for free or a small fee — handy for the flat ride to the Snow Monkey Park trailhead at Kanbayashi (~2 km).", "一部の宿で自転車レンタル可。上林の地獄谷遊歩道入口(約2km)まで便利。")}
+                {t("Some hotels lend bicycles for free or a small fee - handy for the flat ride to the Snow Monkey Park trailhead at Kanbayashi (~2 km).", "一部の宿で自転車レンタル可。上林の地獄谷遊歩道入口(約2km)まで便利。")}
               </p>
             </div>
           </div>
@@ -851,7 +851,7 @@ function GreenTransport({ t }: { t: (en: string, ja: string) => string }) {
               <div className="flex-1">
                 <p className="text-sm font-bold text-slate-800">{t("Local taxi companies", "地元タクシー会社")}</p>
                 <p className="text-xs text-slate-500 mt-0.5">
-                  {t("No Uber / ride-share in Yamanouchi. Phone or have your hotel reception book — most drivers don't speak English so a written destination helps.", "Uber等のライドシェア無し。電話または宿のフロント経由で予約。英語不可のため目的地を書いて渡すと安心。")}
+                  {t("No Uber / ride-share in Yamanouchi. Phone or have your hotel reception book - most drivers don't speak English so a written destination helps.", "Uber等のライドシェア無し。電話または宿のフロント経由で予約。英語不可のため目的地を書いて渡すと安心。")}
                 </p>
               </div>
             </div>

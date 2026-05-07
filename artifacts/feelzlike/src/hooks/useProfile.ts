@@ -8,11 +8,11 @@ import {
 /**
  * Shared, single-source-of-truth localStorage-backed UserProfile store.
  *
- * IMPORTANT — same-tab vs cross-tab writes:
+ * IMPORTANT - same-tab vs cross-tab writes:
  *   The browser's `storage` event ONLY fires in OTHER tabs (not the one
  *   that called localStorage.setItem). An earlier implementation used
  *   per-hook useState mirrors which meant saving in ProfileSheet did NOT
- *   notify TodaysCall in the same tab — caller's `hasOnboarded` stayed
+ *   notify TodaysCall in the same tab - caller's `hasOnboarded` stayed
  *   stale until next mount, which let the onboarding sheet re-open in a
  *   loop after the user clicked Skip/Save.
  *
@@ -22,7 +22,7 @@ import {
  *   The `storage` event handler remains so cross-tab sync still works.
  *
  * SSR-safe via the third `getServerSnapshot` arg returning defaults.
- * Schema-versioned via `v: 1` — old records are dropped.
+ * Schema-versioned via `v: 1` - old records are dropped.
  */
 
 // ---------------------------------------------------------------------------
@@ -63,12 +63,12 @@ function setSnapshot(next: UserProfile) {
   try {
     window.localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(next));
   } catch {
-    /* quota exceeded / private mode — silent */
+    /* quota exceeded / private mode - silent */
   }
   notifyAll();
 }
 
-// Singleton cross-tab listener — installed exactly once on the first
+// Singleton cross-tab listener - installed exactly once on the first
 // browser-side subscribe. With N consumers we previously installed N
 // listeners and each invoked notifyAll(), causing N² notifications per
 // storage event. One listener + reference-counted teardown fixes that.
@@ -134,7 +134,7 @@ export function useProfile(): {
     setProfile,
     resetProfile,
     hasOnboarded: profile.onboardedAt !== null,
-    // Always true once useSyncExternalStore has run — getSnapshot reads
+    // Always true once useSyncExternalStore has run - getSnapshot reads
     // synchronously on the first render. Kept for callers that branch on it.
     isLoaded: true,
   };

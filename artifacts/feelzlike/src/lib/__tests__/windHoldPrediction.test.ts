@@ -50,7 +50,7 @@ describe("predictLiftStatus", () => {
     assert.ok(pred.hoursAtRisk > 0);
   });
 
-  it("applies exposure multiplier — sheltered lifts tolerate more wind", () => {
+  it("applies exposure multiplier - sheltered lifts tolerate more wind", () => {
     const sheltered: LiftSeed = { ...baseLift, exposure: "sheltered" };
     const exposed: LiftSeed = { ...baseLift, exposure: "exposed" };
     // Borderline conditions (~60km/h)
@@ -68,7 +68,7 @@ describe("predictLiftStatus", () => {
     assert.ok(order[shelteredPred.status] <= order[exposedPred.status]);
   });
 
-  it("applies altitude lapse — taller lifts have higher effective wind", () => {
+  it("applies altitude lapse - taller lifts have higher effective wind", () => {
     const tallLift: LiftSeed = { ...baseLift, topElevation: 2500 }; // 1000m above ref
     const shortLift: LiftSeed = { ...baseLift, topElevation: 1600 }; // 100m above ref
     const moderate: HourlyWindSample[] = Array.from({ length: 24 }, (_, i) => ({

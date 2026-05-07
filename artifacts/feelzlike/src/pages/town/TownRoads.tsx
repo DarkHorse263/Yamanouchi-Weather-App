@@ -227,8 +227,8 @@ export function TownRoads() {
           icon={Car}
           title={t("All clear", "情報なし")}
           body={t(
-            `No road advisories matching ${town?.name ?? "this town"} right now — that's good news. Conditions can change quickly in winter; refresh before you head out.`,
-            `${town ? t(town.name, town.nameJa) : "この町"}に該当する道路情報は現在ありません — 朗報です。冬季は状況が急変するため、出発前に再度ご確認ください。`,
+            `No road advisories matching ${town?.name ?? "this town"} right now - that's good news. Conditions can change quickly in winter; refresh before you head out.`,
+            `${town ? t(town.name, town.nameJa) : "この町"}に該当する道路情報は現在ありません - 朗報です。冬季は状況が急変するため、出発前に再度ご確認ください。`,
           )}
         />
       )}
@@ -248,8 +248,8 @@ export function TownRoads() {
               </h2>
               <p className="text-sm text-muted-foreground mt-1">
                 {t(
-                  "Live looks at the actual road surface — chains, slush, ice.",
-                  "実際の路面のライブ映像 — チェーン、シャーベット、凍結。",
+                  "Live looks at the actual road surface - chains, slush, ice.",
+                  "実際の路面のライブ映像 - チェーン、シャーベット、凍結。",
                 )}
               </p>
             </div>
@@ -302,7 +302,7 @@ export function TownRoads() {
                 </p>
                 <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
                   {t(
-                    "The official source is an interactive map — pick the camera nearest your route. We don't fake images here.",
+                    "The official source is an interactive map - pick the camera nearest your route. We don't fake images here.",
                     "公式情報源はインタラクティブマップです。ルート上のカメラを選択してください。当アプリでは画像を捏造しません。",
                   )}
                 </p>

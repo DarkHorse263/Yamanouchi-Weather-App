@@ -36,7 +36,7 @@ export interface MountainLink {
   imageUrl?: string;
   /** Official mountain/resort website URL */
   websiteUrl?: string;
-  /** Approximate base/centroid latitude — single source of truth for journey/Today's call. */
+  /** Approximate base/centroid latitude - single source of truth for journey/Today's call. */
   lat?: number;
   /** Approximate base/centroid longitude. */
   lng?: number;
@@ -112,7 +112,7 @@ export interface RegionConfig {
   name: string;
   /** Subtitle, e.g. "NSW · Australia" */
   subtitle: string;
-  /** Short tag, e.g. "NSW" — used in mobile chrome corner */
+  /** Short tag, e.g. "NSW" - used in mobile chrome corner */
   shortTag: string;
   /** Brand assets */
   brand: RegionBrand;
@@ -134,7 +134,7 @@ export interface RegionConfig {
   footer?: string;
   /**
    * Outbound tourism / official-info links rendered on the region's
-   * Explore page. Replaces the old live-Google-Places picker — the brief
+   * Explore page. Replaces the old live-Google-Places picker - the brief
    * was clear: just point people at the local tourism authorities.
    */
   tourismLinks?: TourismLink[];

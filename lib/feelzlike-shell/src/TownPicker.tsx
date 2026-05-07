@@ -70,7 +70,7 @@ export function TownPicker({
     let target: string;
 
     if (preserveSubpath && first && !RESERVED_TOWN_SLUGS.has(first) && towns.some((tn) => tn.id === first)) {
-      // We're on /<oldTown>/<rest> — swap the town segment, keep the rest
+      // We're on /<oldTown>/<rest> - swap the town segment, keep the rest
       const rest = parts.slice(1).join("/");
       target = rest ? `/${id}/${rest}` : `/${id}`;
     } else {

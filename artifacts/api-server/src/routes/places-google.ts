@@ -150,7 +150,7 @@ router.get("/places/nearby", async (req, res) => {
       };
     });
 
-    // Cache for 1 hour at the edge — Places data doesn't change minute to minute
+    // Cache for 1 hour at the edge - Places data doesn't change minute to minute
     res.setHeader("Cache-Control", "public, max-age=3600, s-maxage=3600");
     res.json({ places: out });
   } catch (err) {
@@ -176,7 +176,7 @@ router.get("/places/photo", async (req, res) => {
   const widthRaw = Number(req.query["w"] ?? 480);
   const width = Math.min(1600, Math.max(80, Number.isFinite(widthRaw) ? widthRaw : 480));
 
-  // Defensive: only allow well-formed photo names — must look like
+  // Defensive: only allow well-formed photo names - must look like
   // "places/<id>/photos/<id>" with safe characters. Blocks open-redirect / SSRF abuse.
   if (!/^places\/[A-Za-z0-9_-]+\/photos\/[A-Za-z0-9_-]+$/.test(name)) {
     res.status(400).json({ error: "BAD_NAME" });

@@ -1,11 +1,11 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// affiliateLinks.ts — single source of truth for accommodation deep-links.
+// affiliateLinks.ts - single source of truth for accommodation deep-links.
 //
 // WHY THIS EXISTS
 // Before this helper, every place that rendered a "Book on X" link
 // (StayCard, StayMap popover, future Eat reservation buttons) built its own
 // URL inline. When affiliate IDs come through from each programme, we don't
-// want to hunt down 6 places — we want to set an env var ONCE and have every
+// want to hunt down 6 places - we want to set an env var ONCE and have every
 // link in the app pick it up.
 //
 // SETTING AFFILIATE IDS (when programmes are approved):
@@ -13,15 +13,15 @@
 //     VITE_BOOKING_AFFILIATE_ID      e.g. "1234567"      (Booking.com aid)
 //     VITE_AGODA_AFFILIATE_ID        e.g. "1234567"      (Agoda cid)
 //     VITE_EXPEDIA_AFFILIATE_ID      e.g. "ABC.HOTEL.1"  (Expedia EAN affcid)
-//     VITE_HOTELS_AFFILIATE_ID                           (Hotels.com — same scheme as Expedia)
+//     VITE_HOTELS_AFFILIATE_ID                           (Hotels.com - same scheme as Expedia)
 //     VITE_TRIP_AFFILIATE_ID                             (Trip.com allianceid)
 //     VITE_AIRBNB_AFFILIATE_ID                           (Airbnb partner code)
 //     VITE_JALAN_AFFILIATE_ID                            (JP-only)
 //     VITE_RAKUTEN_AFFILIATE_ID                          (JP-only)
-//     VITE_TRIPADVISOR_AFFILIATE_ID                      (search URL, no inline injection — kept for parity)
+//     VITE_TRIPADVISOR_AFFILIATE_ID                      (search URL, no inline injection - kept for parity)
 //   Then redeploy. `affiliateStatus()` flips that provider from "pending" to "active".
 //
-// LINK STRATEGY (HYBRID — curated first, search fallback)
+// LINK STRATEGY (HYBRID - curated first, search fallback)
 // We have two URL sources for each provider:
 //   1) CURATED: a deep link the data team handpicked into `stay.booking_links`
 //      (or `stay.website` for `official`). Lands directly on the property page.
@@ -29,12 +29,12 @@
 //      results page, which works even when no direct deep link is curated.
 //
 // Default behaviour: ONLY return providers whose curated URL exists. This keeps
-// UI parity with the pre-helper StayCard (Prompt 2.2 behaviour) — a stay
+// UI parity with the pre-helper StayCard (Prompt 2.2 behaviour) - a stay
 // shows only the booking buttons the data team intended, never a misleading
 // "Book on Booking.com" button when the property isn't curated there.
 //
 // Opt-in `discoverAll: true` adds search URLs for every applicable provider
-// in addition to the curated ones — useful for future "discovery mode" surfaces
+// in addition to the curated ones - useful for future "discovery mode" surfaces
 // (e.g. "find this property elsewhere") but never the default StayCard render.
 //
 // Either way, affiliate IDs (when set) are injected onto every URL so we earn
@@ -59,7 +59,7 @@ export const PROVIDERS = [
 export type Provider = (typeof PROVIDERS)[number];
 
 // Country-coverage matrix. Providers omitted from a country build to `null`,
-// which `buildBookingLinks` filters out — so JP-only providers never appear
+// which `buildBookingLinks` filters out - so JP-only providers never appear
 // on AU stays and vice versa.
 const PROVIDER_COUNTRIES: Record<Provider, ReadonlyArray<"AU" | "JP">> = {
   booking_com: ["AU", "JP"],
@@ -104,7 +104,7 @@ export const AFFILIATE_IDS: Record<Provider, string | null> = {
   official: null,
 };
 
-/** Display name per provider — used by buttons and popovers. */
+/** Display name per provider - used by buttons and popovers. */
 export const PROVIDER_LABELS: Record<Provider, string> = {
   booking_com: "Booking.com",
   agoda: "Agoda",
@@ -150,7 +150,7 @@ export const PROVIDER_BRAND_COLOURS: Record<
   official: { bg: "#ffffff", fg: "#1a1a1a" },
 };
 
-// Pretty town labels — keep in sync with the curated town slugs in
+// Pretty town labels - keep in sync with the curated town slugs in
 // `src/types/stayEat.ts` (TOWN_SLUGS). Falls back to slug-deslugification
 // for any future town we haven't explicitly labelled.
 const TOWN_LABELS: Record<string, string> = {
@@ -182,7 +182,7 @@ function appendIfMissing(url: string, key: string, value: string): string {
   return `${url}${sep}${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
 }
 
-// Resolve the curated source URL for a provider — i.e. the URL the data team
+// Resolve the curated source URL for a provider - i.e. the URL the data team
 // handpicked into the stay record, or null if nothing was curated.
 //   - `official`     → `stay.website`
 //   - `tripadvisor`  → not in schema; always null (curated TA URLs not tracked)
@@ -196,9 +196,9 @@ function curatedUrlFor(stay: Stay, provider: Provider): string | null {
   if (provider === "tripadvisor") {
     return null;
   }
-  // Schema providers — type-narrowed via the explicit list of keys.
+  // Schema providers - type-narrowed via the explicit list of keys.
   const links = stay.booking_links;
-  // Index access — BookingLinksSchema covers all of these keys.
+  // Index access - BookingLinksSchema covers all of these keys.
   const url = (links as Record<string, string | null | undefined>)[provider];
   return typeof url === "string" && url.length > 0 ? url : null;
 }
@@ -248,7 +248,7 @@ const PROVIDER_RULES: Record<Provider, ProviderRules> = {
     affiliateParam: "c",
   },
   jalan: {
-    // JP catalogue — kanji query lands on the right region.
+    // JP catalogue - kanji query lands on the right region.
     searchUrl: (stay) =>
       `https://www.jalan.net/uw/uwp3000/uww3001init.do?keyword=${encodeURIComponent(buildSearchQuery(stay, { preferLocal: true }))}`,
     affiliateParam: "afid",
@@ -260,13 +260,13 @@ const PROVIDER_RULES: Record<Provider, ProviderRules> = {
   },
   tripadvisor: {
     // Tripadvisor's TAP partner programme uses server-side click tracking, not
-    // a URL parameter — so no affiliateParam.
+    // a URL parameter - so no affiliateParam.
     searchUrl: (stay) =>
       `https://www.tripadvisor.com/Search?q=${encodeURIComponent(buildSearchQuery(stay))}`,
     affiliateParam: null,
   },
   official: {
-    // Official sites have no search URL — they only ever come from the curated
+    // Official sites have no search URL - they only ever come from the curated
     // `stay.website`. `discoverAll` cannot synthesise an official URL.
     searchUrl: () => "",
     affiliateParam: null,
@@ -330,7 +330,7 @@ export function buildBookingLinks(
       continue;
     }
     if (discoverAll) {
-      // `official` has no search-URL fallback — skip even in discover mode.
+      // `official` has no search-URL fallback - skip even in discover mode.
       if (provider === "official") continue;
       const search = PROVIDER_RULES[provider].searchUrl(stay);
       out[provider] = injectAffiliate(provider, search, ids[provider]);
@@ -347,14 +347,14 @@ export function hasAffiliateId(provider: Provider): boolean {
 /**
  * Per-provider configuration status. `"active"` means we'll inject an
  * affiliate ID (or, for `official`, that the link works as-is); `"pending"`
- * means the link still works but doesn't earn — we're waiting on programme
+ * means the link still works but doesn't earn - we're waiting on programme
  * approval.
  */
 export function affiliateStatus(): Record<Provider, "active" | "pending"> {
   const out = {} as Record<Provider, "active" | "pending">;
   for (const id of PROVIDERS) {
     if (id === "official") {
-      out[id] = "active"; // direct site — never needs an affiliate ID
+      out[id] = "active"; // direct site - never needs an affiliate ID
     } else {
       out[id] = AFFILIATE_IDS[id] !== null ? "active" : "pending";
     }

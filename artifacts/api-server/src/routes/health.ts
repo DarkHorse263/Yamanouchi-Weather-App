@@ -19,7 +19,7 @@ router.get("/healthz", (_req, res) => {
   });
 });
 
-// /readyz: stricter — only OK if at least one region cache is warm.
+// /readyz: stricter - only OK if at least one region cache is warm.
 // Useful for load balancers that should hold traffic until upstream has been hit at least once.
 router.get("/readyz", (_req, res) => {
   const stats = getCacheStats();

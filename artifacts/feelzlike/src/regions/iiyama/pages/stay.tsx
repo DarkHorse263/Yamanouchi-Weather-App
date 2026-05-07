@@ -151,7 +151,7 @@ export default function Stay() {
         ))}
       </div>
 
-      {/* Google Places — live discovery across all of Iiyama */}
+      {/* Google Places - live discovery across all of Iiyama */}
       <GooglePlacesStaySection t={t} />
     </div>
   );

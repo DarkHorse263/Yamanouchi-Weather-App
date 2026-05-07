@@ -246,7 +246,7 @@ export default function Manage() {
             <Trash2 className="w-4 h-4" /> Unsubscribe from all alerts
           </summary>
           <div className="mt-3 space-y-3">
-            <p className="text-xs text-muted-foreground">Optional — let us know why so we can do better:</p>
+            <p className="text-xs text-muted-foreground">Optional - let us know why so we can do better:</p>
             <div className="grid grid-cols-2 gap-2 text-xs">
               {[
                 ["too_many", "Too many alerts"],

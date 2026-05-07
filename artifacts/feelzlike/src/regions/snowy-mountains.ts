@@ -15,7 +15,7 @@ export const snowyMountainsRegion: RegionConfig = {
     { path: "/mountain/selwyn",    label: "Selwyn" },
   ],
   mountains: [
-    // Terrain tags (Sprint 4.1) — sourced from official trail maps + AU resort positioning.
+    // Terrain tags (Sprint 4.1) - sourced from official trail maps + AU resort positioning.
     // Thredbo: highest vertical in AU, advanced skiers' choice, has terrain_park + lift-served backcountry.
     { id: "thredbo",         name: "Thredbo",          elevationM: 2037, lat: -36.5054, lng: 148.3089, blurb: "NSW · the high one",                          websiteUrl: "https://www.thredbo.com.au",        terrain_park: true, backcountry_access: true, kids_lessons: true },
     // Perisher: largest in southern hemisphere, 4 connected resorts → covers everything.

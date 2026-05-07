@@ -6,7 +6,7 @@ import { getStaysByRegion } from "@/data";
 
 // Two-region demo for the StayMap component. Each panel mounts a StayMap with
 // its own region's stays and that region's curated "today's #1 mountain" key
-// (faked here — the real consumer page in Prompt 2.6 will read it from
+// (faked here - the real consumer page in Prompt 2.6 will read it from
 // Today's Call). A toggle lets us flip the topMountainDriveKey to verify
 // markers recolour correctly.
 export default function StayMapDemo() {
@@ -31,7 +31,7 @@ export default function StayMapDemo() {
       <section className="space-y-3">
         <div className="flex items-center justify-between flex-wrap gap-2">
           <h2 className="font-display text-xl">
-            Snowy Mountains (NSW) — {auStays.length} stays
+            Snowy Mountains (NSW) - {auStays.length} stays
           </h2>
           <div className="flex items-center gap-2">
             <span className="text-xs text-muted-foreground">Top mountain:</span>
@@ -58,7 +58,7 @@ export default function StayMapDemo() {
       <section className="space-y-3">
         <div className="flex items-center justify-between flex-wrap gap-2">
           <h2 className="font-display text-xl">
-            Yamanouchi (JP) — {jpStays.length} stays
+            Yamanouchi (JP) - {jpStays.length} stays
           </h2>
           <div className="flex items-center gap-2">
             <span className="text-xs text-muted-foreground">Top mountain:</span>

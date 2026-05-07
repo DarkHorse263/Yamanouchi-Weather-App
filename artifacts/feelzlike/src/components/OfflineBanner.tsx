@@ -5,7 +5,7 @@ import { WifiOff } from "lucide-react";
 /**
  * Tiny "you're offline" banner. Slides down from the top when the browser
  * fires `offline`, hides on `online`. The SW continues to serve cached
- * weather + region data so the page itself doesn't go blank — this banner
+ * weather + region data so the page itself doesn't go blank - this banner
  * just acknowledges the state so users understand stale-looking timestamps.
  *
  * navigator.onLine isn't perfectly reliable (it's `false` when the radio is
@@ -41,7 +41,7 @@ export function OfflineBanner() {
           className="fixed top-0 inset-x-0 z-[70] bg-amber-500 text-amber-950 text-[12px] font-semibold py-2 px-4 flex items-center justify-center gap-2 shadow-md"
         >
           <WifiOff className="w-3.5 h-3.5" />
-          You're offline — showing last cached conditions.
+          You're offline - showing last cached conditions.
         </motion.div>
       )}
     </AnimatePresence>

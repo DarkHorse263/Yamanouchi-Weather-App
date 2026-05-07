@@ -1,4 +1,4 @@
-# FeelZlike — Stay + Eat Data Package v0.4
+# FeelZlike - Stay + Eat Data Package v0.4
 
 **228 curated entries across 6 base towns, ready to import into your app.**
 
@@ -44,7 +44,7 @@ feelzlike_package/
 
 **Snowy Mountains eats** support: apres_ski, takeaway, groceries (for IGA/bottle-o entries)
 
-**Yamanouchi eats** support: vegetarian_friendly (honest — mostly "limited" in rural Nagano), kid_friendly, english_menu (yes/picture_menu/no), payment (cash_only flag — critical in rural Japan)
+**Yamanouchi eats** support: vegetarian_friendly (honest - mostly "limited" in rural Nagano), kid_friendly, english_menu (yes/picture_menu/no), payment (cash_only flag - critical in rural Japan)
 
 ## Affiliate booking links
 
@@ -63,28 +63,28 @@ const AFFILIATE_IDS = {
 ```
 
 Apply at:
-- [Booking.com Affiliate Partner Program](https://www.booking.com/affiliate-program/v2/) — fast approval, works for both regions
-- [Agoda Partners](https://partners.agoda.com/) — fast approval, strong in Asia
-- [Airbnb Associates](https://www.airbnb.com/associates) — invite-only in some markets
-- [Expedia Group Affiliate](https://www.expediagroup.com/affiliate) — covers Expedia + Hotels.com
-- [Rakuten Travel Affiliate](https://affiliate.rakuten.co.jp/) — Japan-focused, app form is in Japanese
-- Jalan typically requires a Japanese business entity — skip for now
+- [Booking.com Affiliate Partner Program](https://www.booking.com/affiliate-program/v2/) - fast approval, works for both regions
+- [Agoda Partners](https://partners.agoda.com/) - fast approval, strong in Asia
+- [Airbnb Associates](https://www.airbnb.com/associates) - invite-only in some markets
+- [Expedia Group Affiliate](https://www.expediagroup.com/affiliate) - covers Expedia + Hotels.com
+- [Rakuten Travel Affiliate](https://affiliate.rakuten.co.jp/) - Japan-focused, app form is in Japanese
+- Jalan typically requires a Japanese business entity - skip for now
 
 ## Data quality notes
 
 - **No fabricated data.** Where a phone number, exact opening hour, or photo URL couldn't be verified from a primary source, that field is `null` rather than guessed.
 - **All Japanese venue names** include both kanji (`name_local`) and romanji (`name`).
-- **Tattoo policy** for ryokan was researched per-property using tattoo-friendly.com and primary sources. Where unverified, marked `unknown` (not `allowed`) — better to be honest with travellers.
+- **Tattoo policy** for ryokan was researched per-property using tattoo-friendly.com and primary sources. Where unverified, marked `unknown` (not `allowed`) - better to be honest with travellers.
 - **Cash-only flags** in Shibu Onsen reflect reality: 13 of 16 eats are cash-only.
-- **Payment, last-order times, English-menu support** are populated for Japanese eats — these are the make-or-break filters for international travellers.
+- **Payment, last-order times, English-menu support** are populated for Japanese eats - these are the make-or-break filters for international travellers.
 
 ## Known gaps to be honest about
 
-- Some Jindabyne phone numbers (Holly Go Lightly, Stacks Pizza, Beach Burrito Co) couldn't be verified — set to null
+- Some Jindabyne phone numbers (Holly Go Lightly, Stacks Pizza, Beach Burrito Co) couldn't be verified - set to null
 - Berridale Inn pub may have an electrical/operating issue worth verifying live
 - "Snow Ski Apartments" as a distinct Jindabyne property is included via the local accommodation portal with notes
-- Yomase deliberately has fewer entries — most travellers staying there eat at their lodge or drive to Yudanaka
-- Photos are sparse where official sites don't provide reusable URLs — recommend supplementing with your own or Booking.com listing images once affiliate is set up
+- Yomase deliberately has fewer entries - most travellers staying there eat at their lodge or drive to Yudanaka
+- Photos are sparse where official sites don't provide reusable URLs - recommend supplementing with your own or Booking.com listing images once affiliate is set up
 
 ## Schema reference
 

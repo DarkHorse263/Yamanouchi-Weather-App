@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 /**
  * Full-bleed hero backdrop for the homepage. Per playbook 6.1 we want a
- * curated set of 4-6 hero photos that rotate per visit — but with no
+ * curated set of 4-6 hero photos that rotate per visit - but with no
  * licensed photo library on hand yet, we ship a beautifully gradient-overlaid
  * placeholder per the playbook fallback ("a beautifully gradient-overlaid
  * stock photo with a TODO comment"). The variant rotation logic IS in place
@@ -95,7 +95,7 @@ export function HeroBackdrop() {
           fetchPriority="high"
         />
       )}
-      {/* Gradient layer — always rendered, sits over photo for legibility */}
+      {/* Gradient layer - always rendered, sits over photo for legibility */}
       <div
         className="absolute inset-0"
         style={{ background: variant.gradient }}
@@ -109,7 +109,7 @@ export function HeroBackdrop() {
           backgroundSize: "22px 22px",
         }}
       />
-      {/* Mountain-silhouette SVG arc anchored to the bottom of the hero —
+      {/* Mountain-silhouette SVG arc anchored to the bottom of the hero -
           adds shape so the gradient doesn't read as a flat panel. */}
       <svg
         viewBox="0 0 1200 320"

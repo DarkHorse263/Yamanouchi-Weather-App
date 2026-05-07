@@ -1,7 +1,7 @@
 /**
  * User profile schema for personalising "Today's Call" rankings.
  *
- * Profile lives in localStorage (key = `PROFILE_STORAGE_KEY`) — no server
+ * Profile lives in localStorage (key = `PROFILE_STORAGE_KEY`) - no server
  * persistence in v1, no auth required. The first /today visit triggers a
  * 30-second 4-question onboarding sheet; users can edit anytime via the
  * sidebar Profile button.
@@ -34,7 +34,7 @@ export interface UserProfile {
   risk_tolerance: RiskTolerance;
   /** When the user completed (or skipped) the onboarding sheet. */
   onboardedAt: string | null;
-  /** Schema version — bump if shape changes; old records are dropped. */
+  /** Schema version - bump if shape changes; old records are dropped. */
   v: 1;
 }
 

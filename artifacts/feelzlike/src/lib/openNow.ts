@@ -1,27 +1,27 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// openNow.ts — timezone-aware "is this eat open right now?" classifier.
+// openNow.ts - timezone-aware "is this eat open right now?" classifier.
 //
 // Policy decisions (locked here so the playbook spec doesn't drift across
-// callers — EatCard, EatFilterBar.applyEatFilters, EatFilterBar.applyEatSort
+// callers - EatCard, EatFilterBar.applyEatFilters, EatFilterBar.applyEatSort
 // all depend on a single source of truth):
 //
 //   • Timezone is DERIVED FROM `eat.country`. The curated schema deliberately
-//     does NOT carry a per-eat tz field — every AU eat is in NSW (Sydney
+//     does NOT carry a per-eat tz field - every AU eat is in NSW (Sydney
 //     wall-clock incl. DST), every JP eat is in Nagano (Tokyo wall-clock,
 //     no DST). If a third country is added later, extend `TZ_BY_COUNTRY`.
 //
 //   • Hours strings come from curated JSON in formats like:
 //       "06:30–14:00"                       (single range, en-dash)
 //       "11:30–15:00, 18:00–23:30"          (two ranges, comma-separated)
-//       "17:00–02:00"                       (overnight — closes next day)
+//       "17:00–02:00"                       (overnight - closes next day)
 //       "By appointment only"               (free-form → unparseable → ignored)
-//     The `closed` key (e.g. "3rd Wed of month") is NOT honoured — exception
+//     The `closed` key (e.g. "3rd Wed of month") is NOT honoured - exception
 //     dates are out of scope; we trust the per-day strings as the source of
 //     truth.
 //
 //   • `last_order_time` is curated as either a clean "HH:MM" or free-form
-//     ("14:00 (lunch) / 20:00 (dinner) — closes when soba sells out"). We
-//     intentionally do NOT let last-order influence open/closed status — the
+//     ("14:00 (lunch) / 20:00 (dinner) - closes when soba sells out"). We
+//     intentionally do NOT let last-order influence open/closed status - the
 //     visitor can still walk in to drink, and the multi-range parsing
 //     ambiguity ("which range does '20:00' apply to?") makes a robust
 //     implementation more brittle than valuable. Last-order is surfaced in
@@ -35,7 +35,7 @@
 //
 //   • `nextChange` is best-effort: a JS Date computed from `now + deltaMinutes`.
 //     The consumer (EatCard's OpenNowPill) uses this purely as a setTimeout
-//     trigger — the actual displayed time comes from re-running isOpenNow at
+//     trigger - the actual displayed time comes from re-running isOpenNow at
 //     that moment. Falls back to a 60-min poll when nextChange is unknown.
 //
 // ─────────────────────────────────────────────────────────────────────────────
@@ -115,7 +115,7 @@ export function isOpenNow(eat: Eat, now: Date = new Date()): OpenNowResult {
   try {
     zoned = getZonedNow(now, tz);
   } catch {
-    // Bad timezone string or environment without ICU data — degrade
+    // Bad timezone string or environment without ICU data - degrade
     // gracefully rather than throwing into the React render path.
     return { status: "unknown", message: "Hours unverified" };
   }
@@ -230,7 +230,7 @@ function hasAnyDayString(hours: Eat["hours"]): boolean {
 /**
  * Parse a single day's hours string into [openMin, closeMin] ranges.
  *
- * Tolerates: en-dash (–), em-dash (—), and hyphen (-) as range separators;
+ * Tolerates: en-dash (–), em-dash (-), and hyphen (-) as range separators;
  * spaces around the dash; comma-separated multi-ranges; and the "24:00"
  * literal as end-of-day.
  *
@@ -249,7 +249,7 @@ export function parseHoursDay(s: string | null | undefined): Range[] {
   const parts = s.split(",").map((p) => p.trim()).filter(Boolean);
   const ranges: Range[] = [];
   // Allow optional whitespace around the separator; accept en-dash, em-dash, hyphen.
-  const re = /^(\d{1,2}):(\d{2})\s*[-–—]\s*(\d{1,2}):(\d{2})$/;
+  const re = /^(\d{1,2}):(\d{2})\s*[-–-]\s*(\d{1,2}):(\d{2})$/;
   for (const part of parts) {
     const m = re.exec(part);
     if (!m) continue;
@@ -276,7 +276,7 @@ function formatMinuteOfDay(mins: number): string {
   // mins may be > 1440 for overnight ranges; normalize for display.
   const norm = ((mins % MINUTES_PER_DAY) + MINUTES_PER_DAY) % MINUTES_PER_DAY;
   // Special-case midnight (close at 00:00 reads as "midnight" rather than the
-  // ambiguous "00:00" — venues with hours like "17:00–00:00" are common AU
+  // ambiguous "00:00" - venues with hours like "17:00–00:00" are common AU
   // pubs that close at end-of-day, and "Open · until 00:00" parses to the
   // visitor as "closed already" instead of "closes at midnight").
   if (norm === 0) return "midnight";
@@ -329,7 +329,7 @@ function computeClosed(
     };
   }
 
-  // No openings in the next week. Don't auto-rerender — the data is stale
+  // No openings in the next week. Don't auto-rerender - the data is stale
   // or the venue is genuinely shuttered.
   // (eat is here for future logging hooks; intentionally unused.)
   void eat;

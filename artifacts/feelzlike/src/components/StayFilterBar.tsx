@@ -43,7 +43,7 @@ export type StaySortKey =
 
 // Playbook-pinned filterable type set. The dataset has additional types
 // (motel/cabin/bnb/minshuku/guesthouse/resort) that are intentionally NOT
-// surfaced as filter chips per Prompt 2.3 spec — they remain in the listing
+// surfaced as filter chips per Prompt 2.3 spec - they remain in the listing
 // but won't appear as toggleable filters.
 export const STAY_FILTERABLE_TYPES = [
   "hotel",
@@ -66,15 +66,15 @@ const STAY_TYPE_LABELS: Record<StayFilterableType, string> = {
 
 const PRICE_BANDS: readonly PriceBand[] = ["$", "$$", "$$$", "$$$$"];
 
-// AU sliders — each is a MAX-distance filter (show stays within X km).
+// AU sliders - each is a MAX-distance filter (show stays within X km).
 const AU_MAX_KM = 100;
-// JP slider — MAX walk-time to Yudanaka Station.
+// JP slider - MAX walk-time to Yudanaka Station.
 const JP_MAX_WALK_MIN = 30;
 
 export type OnsenFilter = "public" | "private" | "both";
 export type TattooFilter = "allowed" | "private_only" | "not_allowed";
 // "half_board_or_kaiseki" matches either the curated `half_board` OR
-// `kaiseki` enum on Stay.meal_plan — the playbook bundles them as a single
+// `kaiseki` enum on Stay.meal_plan - the playbook bundles them as a single
 // "Half-board (kaiseki)" UI option.
 export type MealFilter = "half_board_or_kaiseki" | "breakfast" | "none";
 export type EnglishFilter = "yes" | "limited_or_better";
@@ -145,7 +145,7 @@ export function applyStayFilters(stays: readonly Stay[], filters: StayFilters): 
         if (km > filters.maxKmSkitube) return false;
       }
     } else {
-      // JP filters apply to JP rows only — for AU rows they're tacitly
+      // JP filters apply to JP rows only - for AU rows they're tacitly
       // ignored above. For JP rows, an active JP filter excludes the row
       // when the field doesn't match.
       if (filters.onsen) {
@@ -345,7 +345,7 @@ export function getActiveFilterCount(f: StayFilters): number {
 // Filter param keys this bar owns. We only delete/write these on URL sync so
 // orthogonal page state (e.g. `?view=map` / `?stay={id}` set by TownStay)
 // survives a filter change. Keep in sync with parseFiltersFromSearch /
-// serializeFiltersToSearch — any new filter key MUST be added here too.
+// serializeFiltersToSearch - any new filter key MUST be added here too.
 const FILTER_PARAM_KEYS = [
   "type",
   "price",
@@ -475,7 +475,7 @@ function SortSelect({
   hasTopMountain: boolean;
 }) {
   // When today's #1 mountain isn't resolvable yet, the "drive_top" item is
-  // disabled — but the URL/default sort may still be "drive_top". Visually
+  // disabled - but the URL/default sort may still be "drive_top". Visually
   // fall back to "drive_nearest" in the trigger so the user doesn't see a
   // disabled item as the active value. The underlying state is left alone;
   // applyStaySort already silently falls through to nearest-mountain order

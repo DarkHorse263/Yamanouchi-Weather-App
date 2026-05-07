@@ -75,7 +75,7 @@ async function fetchRoadConditions() {
         condition: (isSnowSeasonClosure ? "closed" : "open") as "closed" | "open",
         description: isSnowSeasonClosure
           ? "Closed for the snow season (mid-June to early October). Charlotte's Pass is accessible only by oversnow transport (snowcat) from Perisher during this period."
-          : "Open outside the snow season. Sealed alpine road from Perisher to Charlotte's Pass village — drive with care, rapid weather changes possible.",
+          : "Open outside the snow season. Sealed alpine road from Perisher to Charlotte's Pass village - drive with care, rapid weather changes possible.",
         chainsRequired: false,
         lastUpdated: new Date().toISOString(),
         source: "NSW NPWS / Transport for NSW",

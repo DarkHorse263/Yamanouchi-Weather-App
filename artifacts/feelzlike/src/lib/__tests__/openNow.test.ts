@@ -1,10 +1,10 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// openNow.test.ts — unit tests for the timezone-aware open/closed classifier.
+// openNow.test.ts - unit tests for the timezone-aware open/closed classifier.
 //
 // Run with:
 //   pnpm --filter @workspace/feelzlike test:openNow
 //
-// Same harness convention as `affiliateLinks.test.ts` — tsx + node:assert,
+// Same harness convention as `affiliateLinks.test.ts` - tsx + node:assert,
 // no vitest dependency. Each test injects a fixed `now` Date so the
 // timezone math is deterministic across machines and CI.
 //
@@ -203,7 +203,7 @@ function test(name: string, fn: () => void) {
   }
 }
 
-console.log("\nopenNow.ts — unit tests\n");
+console.log("\nopenNow.ts - unit tests\n");
 
 test("AU cafe: open at 09:00 local (Mon)", () => {
   const eat = makeAU("cafe1", cafeHours);
@@ -355,7 +355,7 @@ test("Region timezone independence: same UTC instant → AU open, JP still close
 test("parseHoursDay: handles en-dash / hyphen / em-dash separators", () => {
   assert.deepEqual(parseHoursDay("06:30–14:00"), [{ openMin: 390, closeMin: 840 }]);
   assert.deepEqual(parseHoursDay("06:30-14:00"), [{ openMin: 390, closeMin: 840 }]);
-  assert.deepEqual(parseHoursDay("06:30—14:00"), [{ openMin: 390, closeMin: 840 }]);
+  assert.deepEqual(parseHoursDay("06:30-14:00"), [{ openMin: 390, closeMin: 840 }]);
   assert.deepEqual(parseHoursDay("06:30 – 14:00"), [{ openMin: 390, closeMin: 840 }]);
 });
 
@@ -366,7 +366,7 @@ test("parseHoursDay: drops malformed segments, keeps valid ones", () => {
   assert.deepEqual(ranges[1], { openMin: 1080, closeMin: 1410 });
 });
 
-test("DST: AU summer transition — status classification stays correct via Intl", () => {
+test("DST: AU summer transition - status classification stays correct via Intl", () => {
   // Australia switches AEST (UTC+10) → AEDT (UTC+11) on the 1st Sunday of
   // October at 02:00 local. 2024-10-06 02:00 AEST → clocks jump to 03:00 AEDT.
   // We can't use the `tzDate()` helper here (its winter-only +10 offset is
@@ -379,7 +379,7 @@ test("DST: AU summer transition — status classification stays correct via Intl
   assert.equal(rBefore.status, "open", "pre-DST: 08:00 AEST should be open");
 
   // Just AFTER transition: 2024-10-06T22:00Z = Mon 09:00 AEDT (UTC+11) → open
-  // (Uses Intl which honours AEDT — verifies status classification is DST-aware.)
+  // (Uses Intl which honours AEDT - verifies status classification is DST-aware.)
   const afterDst = new Date("2024-10-06T22:00:00Z");
   const rAfter = isOpenNow(cafe, afterDst);
   assert.equal(rAfter.status, "open", "post-DST: 09:00 AEDT should be open");

@@ -13,7 +13,7 @@ async function checkTokenNotRevoked(subscriberId: string, payload: { iat: number
 
 /**
  * Push-subscription endpoints. Auth via the same management token used for
- * /alerts/manage — the token holder identifies the subscriber, so the server
+ * /alerts/manage - the token holder identifies the subscriber, so the server
  * always knows which `subscriberId` a push subscription belongs to (we never
  * trust a client-supplied subscriber id).
  */
@@ -44,7 +44,7 @@ router.post("/alerts/push/subscribe", async (req, res): Promise<void> => {
   }
 
   try {
-    // Atomic upsert by endpoint — push services issue a single endpoint per
+    // Atomic upsert by endpoint - push services issue a single endpoint per
     // device, so re-subscribing with the same browser must update in place.
     // Read-then-write would race against the unique index and return 500 on
     // a fast double-subscribe (e.g. PWA reinstall).

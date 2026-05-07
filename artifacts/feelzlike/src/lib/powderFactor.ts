@@ -1,7 +1,7 @@
 import type { HourlyForecast } from "@workspace/api-client-react";
 
 /**
- * Powder Factor — a 0–100 quality score for snow currently on the mountain
+ * Powder Factor - a 0–100 quality score for snow currently on the mountain
  * (or about to fall), distinct from Powder Window which finds *upcoming*
  * snowfall events. Powder Factor answers: "if I was skiing right now, how
  * good is the snow?"
@@ -11,7 +11,7 @@ import type { HourlyForecast } from "@workspace/api-client-react";
  *   - temp at fall     (sweet spot: -8°C to -3°C → light dry crystals)
  *   - humidity at fall (lower = lighter, fluffier)
  *   - wind during fall (high wind compacts snow + creates wind slabs)
- *   - freshness        (hours since last snow — peak when fresh)
+ *   - freshness        (hours since last snow - peak when fresh)
  *   - destruction      (rain or thaw AFTER the snowfall = ice layer)
  *
  * Weights sum to 100 before destruction multiplier:
@@ -36,7 +36,7 @@ export type PowderQuality =
 export interface PowderFactor {
   /** Composite 0–100 score (after destruction multiplier). */
   score: number;
-  /** Quality bucket — drives label + colour. */
+  /** Quality bucket - drives label + colour. */
   quality: PowderQuality;
   /** EN label, e.g. "Premium powder". */
   label: string;
@@ -69,7 +69,7 @@ function clamp(n: number, lo: number, hi: number): number {
 }
 
 /**
- * Score amount: asymptotic — 0cm=0, 5cm≈11, 10cm≈19, 20cm≈28, 30cm≈32, ∞→35.
+ * Score amount: asymptotic - 0cm=0, 5cm≈11, 10cm≈19, 20cm≈28, 30cm≈32, ∞→35.
  * Formula: 35 * (1 - exp(-snow/15))
  */
 function scoreAmount(totalSnowCm: number): number {
@@ -147,10 +147,10 @@ function buildReason(
   thawedAfter: boolean,
 ): { en: string; ja: string } {
   if (rainedAfter) {
-    return { en: "Rain after snow — icy crust", ja: "降雪後に雨、アイスバーン" };
+    return { en: "Rain after snow - icy crust", ja: "降雪後に雨、アイスバーン" };
   }
   if (thawedAfter) {
-    return { en: "Thawed after snow — refrozen", ja: "降雪後に融解、再凍結" };
+    return { en: "Thawed after snow - refrozen", ja: "降雪後に融解、再凍結" };
   }
   if (totalSnowCm <= 0 || !isFinite(hoursSinceSnow)) {
     return { en: "No fresh snowfall on record", ja: "新雪の記録なし" };
@@ -207,7 +207,7 @@ export function computePowderFactor(
   const now = nowIso ? new Date(nowIso).getTime() : Date.now();
   if (!isFinite(now)) return empty;
 
-  // Filter to past hours within the window. We score what's already happened —
+  // Filter to past hours within the window. We score what's already happened -
   // the powder you'd ski *right now*, not what's coming. (Powder Window
   // handles forward-looking detection.)
   const windowStart = now - windowHours * 3600_000;
@@ -236,7 +236,7 @@ export function computePowderFactor(
     if (isSnowing && snowfall > 0) {
       totalSnow += snowfall;
       snowHours += 1;
-      // Per-field finite guards — Open-Meteo can return null/missing for
+      // Per-field finite guards - Open-Meteo can return null/missing for
       // any of these on edge data (e.g. station outages). Skip the field
       // independently rather than poisoning the whole average with NaN.
       if (isFinite(h.temperature)) {
@@ -253,7 +253,7 @@ export function computePowderFactor(
       }
       lastSnowTime = new Date(h.time).getTime();
     } else if (SNOW_CODES.has(h.weatherCode)) {
-      // Snowing but snowfall amount missing — count for freshness only.
+      // Snowing but snowfall amount missing - count for freshness only.
       lastSnowTime = new Date(h.time).getTime();
     }
   }
@@ -289,7 +289,7 @@ export function computePowderFactor(
 
   const sub = {
     amount: scoreAmount(totalSnow),
-    // If no snow hours, skip temp/humidity contribution — neither helps nor hurts.
+    // If no snow hours, skip temp/humidity contribution - neither helps nor hurts.
     temp: avgTemp !== null ? scoreTemp(avgTemp) : 0,
     humidity: avgHumidity !== null ? scoreHumidity(avgHumidity) : 0,
     wind: avgWind !== null ? scoreWind(avgWind) : 0,

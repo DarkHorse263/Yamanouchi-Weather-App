@@ -6,9 +6,9 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState, t
  * Meta Pixel, etc.) can ask `useConsent()` before firing.
  *
  * Categories follow the IAB TCF v2.2 / GDPR convention:
- *   - `necessary` — always true; cookies required for core functionality
- *   - `analytics` — first-party analytics (PostHog, GA, Plausible)
- *   - `ads` — third-party advertising and personalisation
+ *   - `necessary` - always true; cookies required for core functionality
+ *   - `analytics` - first-party analytics (PostHog, GA, Plausible)
+ *   - `ads` - third-party advertising and personalisation
  *
  * Decision is persisted to localStorage with a schema version, so we can
  * re-prompt users if our cookie/ads policy materially changes.
@@ -57,7 +57,7 @@ function save(choices: ConsentChoices) {
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(choices));
   } catch {
-    /* storage disabled — silently no-op, banner will reappear next visit */
+    /* storage disabled - silently no-op, banner will reappear next visit */
   }
 }
 
@@ -66,7 +66,7 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
 
   // Multi-tab sync: if the consent choice changes (set, updated, or cleared)
   // in another tab, mirror it into this tab's state so all open windows agree
-  // on what tracking is allowed. This matters for ad/analytics gating —
+  // on what tracking is allowed. This matters for ad/analytics gating -
   // without it a user could revoke consent in one tab and continue to be
   // tracked in another.
   useEffect(() => {

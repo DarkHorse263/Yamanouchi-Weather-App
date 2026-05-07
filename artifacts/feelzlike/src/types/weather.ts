@@ -5,7 +5,7 @@ export type { HourlyForecast };
 /**
  * Powder Window detection thresholds. Tuned per playbook:
  *   - Default ("Japow"): snowfall ≥ 1cm/hr AND wind < 20km/h, ≥3 consecutive hours.
- *   - AU/relaxed: snowfall ≥ 0.5cm/hr AND wind < 25km/h — Australian conditions
+ *   - AU/relaxed: snowfall ≥ 0.5cm/hr AND wind < 25km/h - Australian conditions
  *     rarely hit Japow thresholds, so we relax for the Snowy Mountains.
  *   - Temperature: must be < +2°C at fall (per Sprint 4 playbook spec).
  *   - Visibility: playbook specifies > 500m, but Open-Meteo's free tier does
@@ -40,7 +40,7 @@ export type PowderGrade = "gold" | "silver" | "bronze";
 export interface PowderWindow {
   /** Inclusive start index into the input hourly array. */
   startIdx: number;
-  /** Exclusive end index — `endIdx - 1` is the last hour in the window. */
+  /** Exclusive end index - `endIdx - 1` is the last hour in the window. */
   endIdx: number;
   /** Number of hours covered (= endIdx - startIdx). */
   hours: number;
@@ -83,7 +83,7 @@ function gradeFor(score: number): PowderGrade {
  *
  * Algorithm: walk the array tracking the current run; whenever the run
  * breaks (or we hit the end) and is ≥ minDuration, emit a window and reset.
- * This produces maximal non-overlapping windows — adjacent qualifying hours
+ * This produces maximal non-overlapping windows - adjacent qualifying hours
  * always belong to the same window, never split.
  */
 export function detectPowderWindows(
@@ -157,7 +157,7 @@ export function detectBestPowderWindow(
 export const detectPowderWindow = detectBestPowderWindow;
 
 // ---------------------------------------------------------------------------
-// 7-day Powder Calendar — daily best-window summary
+// 7-day Powder Calendar - daily best-window summary
 // ---------------------------------------------------------------------------
 
 export interface DailyPowderSummary {
@@ -171,12 +171,12 @@ export interface DailyPowderSummary {
 
 /**
  * Group `hourly` by local date (the YYYY-MM-DD prefix of the naive ISO
- * timestamp — already in resort-local time per Open-Meteo) and run
+ * timestamp - already in resort-local time per Open-Meteo) and run
  * `detectPowderWindows` per day. Returns the next `days` entries starting
  * at the first date in `hourly`.
  *
  * Indexes inside the returned `best` are LOCAL to that day's hourly slice
- * (0..23), not into the original input array — safe for daily-row UI.
+ * (0..23), not into the original input array - safe for daily-row UI.
  */
 export function dailyBestPowderWindows(
   hourly: HourlyForecast[],

@@ -15,7 +15,7 @@ import { Helmet } from "react-helmet-async";
 export interface PageMetaProps {
   title: string;
   description: string;
-  /** Path beginning with "/" — gets joined to the public origin. */
+  /** Path beginning with "/" - gets joined to the public origin. */
   path?: string;
   /** Absolute or origin-relative URL of the social-share image. */
   image?: string;
@@ -53,7 +53,7 @@ export function PageMeta({
     const src = image || DEFAULT_OG_IMAGE;
     return src.startsWith("http") ? src : `${origin}${src.startsWith("/") ? src : `/${src}`}`;
   })();
-  const fullTitle = title.includes(SITE_NAME) ? title : `${title} — ${SITE_NAME}`;
+  const fullTitle = title.includes(SITE_NAME) ? title : `${title} - ${SITE_NAME}`;
   const ldArray = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
 
   return (

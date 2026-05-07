@@ -97,21 +97,21 @@ const WEBCAM_DATA: WebcamConfig[] = [
     locationId: "perisher",
     locationName: "Perisher",
     webcamPageUrl: "https://www.perisher.com.au/reports-cams/cams",
-    // Source: https://www.perisher.com.au/reports-cams/cams — all 12 official
+    // Source: https://www.perisher.com.au/reports-cams/cams - all 12 official
     // Perisher snowcams. Image URL pattern: /images/snowcams/X<id>.jpg.
     webcams: ([
-      ["front", "Front Valley", "Beginner area looking up Front Valley from Perisher Centre — the heart of the resort."],
-      ["smiggin", "Smiggin Holes", "Smiggin Holes village — entry point to the Perisher network."],
+      ["front", "Front Valley", "Beginner area looking up Front Valley from Perisher Centre - the heart of the resort."],
+      ["smiggin", "Smiggin Holes", "Smiggin Holes village - entry point to the Perisher network."],
       ["bluecow", "Blue Cow", "Blue Cow summit looking across to Guthega and Mt Perisher."],
-      ["cowt", "Cow T-Bar", "Cow T-Bar / Brumby area — popular intermediate runs."],
+      ["cowt", "Cow T-Bar", "Cow T-Bar / Brumby area - popular intermediate runs."],
       ["cv", "Crackenback Valley", "Crackenback Valley looking down toward Pretty Valley."],
-      ["excelerator", "Excelerator Express", "Top of the Excelerator Express quad — wide alpine view."],
-      ["guthegamain", "Guthega Main", "Guthega base — the quietest village in the Perisher network."],
-      ["happy", "Happy Valley", "Happy Valley looking toward Mt Perisher — beginner / intermediate slopes."],
-      ["kosci", "Kosciuszko Chair", "Top of Mt Perisher Double Chair — looking out toward Mt Kosciuszko."],
-      ["mtp", "Mt Perisher", "Mt Perisher summit area — the highest lifted terrain in the resort."],
+      ["excelerator", "Excelerator Express", "Top of the Excelerator Express quad - wide alpine view."],
+      ["guthegamain", "Guthega Main", "Guthega base - the quietest village in the Perisher network."],
+      ["happy", "Happy Valley", "Happy Valley looking toward Mt Perisher - beginner / intermediate slopes."],
+      ["kosci", "Kosciuszko Chair", "Top of Mt Perisher Double Chair - looking out toward Mt Kosciuszko."],
+      ["mtp", "Mt Perisher", "Mt Perisher summit area - the highest lifted terrain in the resort."],
       ["summit", "Perisher Summit", "Perisher summit panorama across the Main Range."],
-      ["v8", "V8 Express", "Top of the V8 Express quad — North Perisher terrain."],
+      ["v8", "V8 Express", "Top of the V8 Express quad - North Perisher terrain."],
     ] as const).map(([slug, name, description]) => ({
       id: `perisher-${slug}`,
       name,
@@ -146,7 +146,7 @@ const WEBCAM_DATA: WebcamConfig[] = [
       {
         id: "smh-kosciuszko-perisher-valley",
         name: "Kosciuszko Rd and Perisher Valley",
-        description: "Official Live Traffic NSW alpine camera at the Perisher Valley turnoff — the highest point on Kosciuszko Rd, often the first place to ice over. Image refreshes when TfNSW reactivates the camera for snow season.",
+        description: "Official Live Traffic NSW alpine camera at the Perisher Valley turnoff - the highest point on Kosciuszko Rd, often the first place to ice over. Image refreshes when TfNSW reactivates the camera for snow season.",
         imageUrl: "https://webcams.transport.nsw.gov.au/livetraffic-webcams/cameras/kosciuszko_rd_&_perisher_valley_kosciuszko_national_park.jpeg",
         pageUrl: "https://webcams.transport.nsw.gov.au/livetraffic-webcams/cameras/kosciuszko_rd_&_perisher_valley_kosciuszko_national_park.jpeg",
         elevation: 1720,
@@ -156,7 +156,7 @@ const WEBCAM_DATA: WebcamConfig[] = [
       {
         id: "smh-kosciuszko-alpine-way",
         name: "Kosciuszko Rd & Alpine Way",
-        description: "Official Live Traffic NSW camera at the Kosciuszko Rd / Alpine Way junction near Jindabyne — the decision point between heading up to Perisher or across to Thredbo.",
+        description: "Official Live Traffic NSW camera at the Kosciuszko Rd / Alpine Way junction near Jindabyne - the decision point between heading up to Perisher or across to Thredbo.",
         imageUrl: "https://webcams.transport.nsw.gov.au/livetraffic-webcams/cameras/kosciuszko_rd_&_alpine_way_jindabyne.jpeg",
         pageUrl: "https://webcams.transport.nsw.gov.au/livetraffic-webcams/cameras/kosciuszko_rd_&_alpine_way_jindabyne.jpeg",
         type: "road",
@@ -165,7 +165,7 @@ const WEBCAM_DATA: WebcamConfig[] = [
       {
         id: "smh-kosciuszko-wilsons-valley",
         name: "Kosciuszko Road (Wilsons Valley)",
-        description: "Official Live Traffic NSW camera at Wilsons Valley between Sawpit Creek and Smiggin Holes — exposed alpine section, watch for chains.",
+        description: "Official Live Traffic NSW camera at Wilsons Valley between Sawpit Creek and Smiggin Holes - exposed alpine section, watch for chains.",
         imageUrl: "https://webcams.transport.nsw.gov.au/livetraffic-webcams/cameras/kosciuszko_road_wilsons_valley.jpeg",
         pageUrl: "https://webcams.transport.nsw.gov.au/livetraffic-webcams/cameras/kosciuszko_road_wilsons_valley.jpeg",
         elevation: 1580,
@@ -177,11 +177,11 @@ const WEBCAM_DATA: WebcamConfig[] = [
 
   // ─── Roadside cams: Yamanouchi (JP) ──────────────────────────────────────
   // Source: 北信地域道路カメラ (Hokushin Regional Road Camera, Nagano Pref).
-  // The site's frame layout means we can't deep-link to individual cameras —
+  // The site's frame layout means we can't deep-link to individual cameras -
   // every cam links back to the same index where the user picks the camera
   // on the map. That IS the source the locals use.
   // The Hokushin Nagano prefecture road-camera service is an interactive map
-  // — it does not expose deep-linkable per-camera image URLs or pages. Rather
+  // - it does not expose deep-linkable per-camera image URLs or pages. Rather
   // than fake three identical-image cards, we surface a single honest tile per
   // region that opens the official map where users pick the camera themselves.
   {
@@ -190,7 +190,7 @@ const WEBCAM_DATA: WebcamConfig[] = [
     webcamPageUrl: "http://hokushin.pref-nagano-roadcamera.jp/index.htm",
     webcams: [],
   },
-  // Iiyama-roads temporarily removed — see artifacts/api-server/src/lib/regions.ts
+  // Iiyama-roads temporarily removed - see artifacts/api-server/src/lib/regions.ts
 ];
 
 router.get("/webcams", (req, res) => {

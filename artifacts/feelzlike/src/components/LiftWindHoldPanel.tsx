@@ -13,7 +13,7 @@ interface LiftWindHoldPanelProps {
   mountainId: string;
   /** Mountain's reference elevation (resort base) in metres. */
   resortElevationM: number;
-  /** Hourly wind samples — uses the first 24 entries. */
+  /** Hourly wind samples - uses the first 24 entries. */
   hourly: HourlyWindSample[];
   sectionNumber?: string;
   t?: (en: string, ja?: string) => string;
@@ -116,8 +116,8 @@ export function LiftWindHoldPanel({
             <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0" />
             <span>
               {t(
-                `Watch ${lifts.find((l) => l.id === summary.worstLift?.liftId)?.name ?? "highest lifts"} — ${summary.worstLift.reason}`,
-                `${lifts.find((l) => l.id === summary.worstLift?.liftId)?.nameJa ?? lifts.find((l) => l.id === summary.worstLift?.liftId)?.name ?? "高所リフト"} 注意 — ${summary.worstLift.reason}`,
+                `Watch ${lifts.find((l) => l.id === summary.worstLift?.liftId)?.name ?? "highest lifts"} - ${summary.worstLift.reason}`,
+                `${lifts.find((l) => l.id === summary.worstLift?.liftId)?.nameJa ?? lifts.find((l) => l.id === summary.worstLift?.liftId)?.name ?? "高所リフト"} 注意 - ${summary.worstLift.reason}`,
               )}
             </span>
           </p>
@@ -214,8 +214,8 @@ export function LiftWindHoldPanel({
         <Info className="w-3 h-3 mt-0.5 flex-shrink-0" />
         <span>
           {t(
-            "Predictions only — lift operation depends on resort decisions. Always check resort site before driving.",
-            "予測のみ — リフトの運行は各スキー場の判断によります。出発前に必ず公式サイトをご確認ください。",
+            "Predictions only - lift operation depends on resort decisions. Always check resort site before driving.",
+            "予測のみ - リフトの運行は各スキー場の判断によります。出発前に必ず公式サイトをご確認ください。",
           )}
         </span>
       </p>

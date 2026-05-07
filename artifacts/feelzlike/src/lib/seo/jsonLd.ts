@@ -9,7 +9,7 @@
  *  - Restaurant / FoodEstablishment (curated eats)
  *  - BreadcrumbList (region/town navigation)
  *
- * Keep these light — only fields we have honest data for. Don't fabricate
+ * Keep these light - only fields we have honest data for. Don't fabricate
  * ratings, prices, or addresses.
  */
 

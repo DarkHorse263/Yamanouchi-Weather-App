@@ -174,7 +174,7 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
         </div>
       )}
 
-      {/* Google Places — live discovery across all of Yamanouchi */}
+      {/* Google Places - live discovery across all of Yamanouchi */}
       <GooglePlacesStaySection t={t} />
     </div>
   );

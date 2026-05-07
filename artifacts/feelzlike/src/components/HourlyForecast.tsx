@@ -82,7 +82,7 @@ function parseLocalAsFakeUtc(timeIso: string): number {
  */
 function formatHourLabel(timeIso: string): string {
   const h = Number(timeIso.slice(11, 13));
-  if (!Number.isFinite(h)) return "—";
+  if (!Number.isFinite(h)) return "-";
   const period = h < 12 ? "am" : "pm";
   const display = h === 0 ? 12 : h > 12 ? h - 12 : h;
   return `${display}${period}`;
@@ -91,7 +91,7 @@ function formatHourLabel(timeIso: string): string {
 /** Add 1 hour to an "Hh"-style label for the badge end-marker. */
 function nextHourLabel(timeIso: string): string {
   const h = Number(timeIso.slice(11, 13));
-  if (!Number.isFinite(h)) return "—";
+  if (!Number.isFinite(h)) return "-";
   const next = (h + 1) % 24;
   const period = next < 12 ? "am" : "pm";
   const display = next === 0 ? 12 : next > 12 ? next - 12 : next;
@@ -99,7 +99,7 @@ function nextHourLabel(timeIso: string): string {
 }
 
 // ---------------------------------------------------------------------------
-// Grade styling — exported so PowderCalendar + RegionOverview reuse the same palette
+// Grade styling - exported so PowderCalendar + RegionOverview reuse the same palette
 // ---------------------------------------------------------------------------
 
 export const GRADE_STYLES: Record<
@@ -143,7 +143,7 @@ export const GRADE_STYLES: Record<
  * "Next 48 hours" forecast strip with multi-window Powder detection.
  *
  * Source: Open-Meteo hourly via /api/weather/locations/:id (timestamps are
- * naive ISO in the location's local timezone — we use `utcOffsetSeconds`
+ * naive ISO in the location's local timezone - we use `utcOffsetSeconds`
  * for past/future math and parse the hour digits directly for display).
  *
  * Renders ALL qualifying powder windows in the next `hours`, each tinted
@@ -243,15 +243,15 @@ export function HourlyForecast({
         )}
       </AnimatePresence>
 
-      {/* Horizontal scroll strip — native scroll-snap for mobile. Made
+      {/* Horizontal scroll strip - native scroll-snap for mobile. Made
           keyboard-focusable so users can scroll with arrow keys. */}
       <div
         className="flex gap-1.5 overflow-x-auto pb-2 -mx-1 px-1 snap-x snap-mandatory hide-scrollbar focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded-xl"
         role="list"
         tabIndex={0}
         aria-label={tx(
-          "Hourly forecast — scroll horizontally for later hours",
-          "時間別予報 — 横スクロールで後の時間を表示",
+          "Hourly forecast - scroll horizontally for later hours",
+          "時間別予報 - 横スクロールで後の時間を表示",
         )}
       >
         {future.map((h, i) => {
@@ -270,7 +270,7 @@ export function HourlyForecast({
       {windows.length === 0 && future.some((h) => (h.snowfall ?? 0) > 0) && (
         <p className="mt-3 text-[11px] text-muted-foreground/80 text-center">
           {tx(
-            "Snow forecast — but no sustained Powder Window in the next 48h.",
+            "Snow forecast - but no sustained Powder Window in the next 48h.",
             "降雪はあるものの、今後48時間にパウダーウィンドウは見込まれません。",
           )}
         </p>
@@ -345,7 +345,7 @@ function HourCell({
 
 /**
  * Compact powder window badge that appears above the hourly strip. Multiple
- * badges may stack — one per non-overlapping window. Click to open the
+ * badges may stack - one per non-overlapping window. Click to open the
  * detail card. GOLD badges get a subtle shimmer overlay (Framer Motion).
  */
 function PowderBadge({
@@ -398,7 +398,7 @@ function PowderBadge({
           </span>
         </p>
       </div>
-      {/* GOLD shimmer overlay — diagonal sheen looping every 2.4s */}
+      {/* GOLD shimmer overlay - diagonal sheen looping every 2.4s */}
       {window.grade === "gold" && (
         <motion.span
           aria-hidden

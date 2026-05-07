@@ -3,7 +3,7 @@
  * `windHoldPrediction.ts` to predict which lifts are likely to spin given
  * the next-24h wind forecast.
  *
- * No competitor surfaces this — it's a genuinely original signal that
+ * No competitor surfaces this - it's a genuinely original signal that
  * matters massively in the Snowy Mountains (Perisher Mt P + V8 hold
  * constantly above 60km/h gusts) and at the highest Japanese summits
  * (Yokoteyama / Yakebitaiyama gondolas above 2,000m).
@@ -49,7 +49,7 @@ export interface LiftSeed {
 const V = "2026-05-05";
 
 /**
- * SNOWY MOUNTAINS (AU) — Thredbo, Perisher, Charlotte Pass, Selwyn.
+ * SNOWY MOUNTAINS (AU) - Thredbo, Perisher, Charlotte Pass, Selwyn.
  * Thresholds compiled from public lift-status histories + resort maps.
  */
 const SNOWY_MOUNTAINS: LiftSeed[] = [
@@ -83,7 +83,7 @@ const SNOWY_MOUNTAINS: LiftSeed[] = [
 ];
 
 /**
- * YAMANOUCHI (JP) — top gondolas + key chairs at the major sub-resorts.
+ * YAMANOUCHI (JP) - top gondolas + key chairs at the major sub-resorts.
  * Japan has way more lifts than we model; we focus on the high-altitude
  * gondolas + key chairs that actually hold to wind.
  */
@@ -94,7 +94,7 @@ const YAMANOUCHI: LiftSeed[] = [
   { id: "hasuike-pair",          mountainId: "shiga-hasuike",             name: "Hasuike Pair",                   nameJa: "蓮池ペア",                 baseElevation: 1490, topElevation: 1620, exposure: "sheltered",       windHoldThresholdKmh: 80, type: "fixed_grip_chair", verifiedAt: V },
   { id: "giant-pair",            mountainId: "shiga-giant",               name: "Giant Pair",                     nameJa: "ジャイアントペア",         baseElevation: 1500, topElevation: 1700, exposure: "moderate",        windHoldThresholdKmh: 75, type: "fixed_grip_chair", verifiedAt: V },
 
-  // ─── Hoppo / Tateyama cluster — gondola access ────────────
+  // ─── Hoppo / Tateyama cluster - gondola access ────────────
   { id: "hoppo-gondola",         mountainId: "shiga-hoppo-bunadaira",     name: "Hoppo Bunadaira Gondola",        nameJa: "発哺ブナ平ゴンドラ",       baseElevation: 1500, topElevation: 1830, exposure: "moderate",        windHoldThresholdKmh: 85, type: "gondola",          verifiedAt: V },
   { id: "higashidate-gondola",   mountainId: "shiga-higashidateyama",     name: "Higashidateyama Gondola",        nameJa: "東館山ゴンドラ",           baseElevation: 1530, topElevation: 1994, exposure: "exposed",         windHoldThresholdKmh: 80, type: "gondola",          verifiedAt: V },
   { id: "nishidate-pair",        mountainId: "shiga-nishidateyama",       name: "Nishidateyama Pair",             nameJa: "西館山ペア",               baseElevation: 1500, topElevation: 1900, exposure: "moderate",        windHoldThresholdKmh: 75, type: "fixed_grip_chair", verifiedAt: V },
@@ -114,7 +114,7 @@ const YAMANOUCHI: LiftSeed[] = [
   { id: "yakebi-gondola-2",      mountainId: "shiga-yakebitaiyama",       name: "Yakebitaiyama Gondola No.2",     nameJa: "焼額山 第2ゴンドラ",       baseElevation: 1500, topElevation: 1900, exposure: "moderate",        windHoldThresholdKmh: 90, type: "gondola",          verifiedAt: V },
   { id: "okushiga-gondola",      mountainId: "shiga-okushiga-kogen",      name: "Okushiga Gondola",               nameJa: "奥志賀ゴンドラ",           baseElevation: 1530, topElevation: 1900, exposure: "moderate",        windHoldThresholdKmh: 90, type: "gondola",          verifiedAt: V },
 
-  // ─── Kumanoyu / Yokoteyama / Shibutoge — highest lift-served ───
+  // ─── Kumanoyu / Yokoteyama / Shibutoge - highest lift-served ───
   { id: "kumanoyu-pair",         mountainId: "shiga-kumanoyu",            name: "Kumanoyu Pair",                  nameJa: "熊の湯ペア",               baseElevation: 1650, topElevation: 2000, exposure: "exposed",         windHoldThresholdKmh: 70, type: "fixed_grip_chair", verifiedAt: V },
   { id: "yokoteyama-skyator",    mountainId: "shiga-yokoteyama",          name: "Yokoteyama Skyator",             nameJa: "横手山 スカイレーター",    baseElevation: 2000, topElevation: 2305, exposure: "highly_exposed", windHoldThresholdKmh: 60, type: "fixed_grip_chair", verifiedAt: V },
   { id: "shibutoge-pair",        mountainId: "shiga-shibutoge",           name: "Shibutoge Pair Lift",            nameJa: "渋峠ペアリフト",           baseElevation: 2050, topElevation: 2172, exposure: "highly_exposed", windHoldThresholdKmh: 60, type: "fixed_grip_chair", verifiedAt: V },
@@ -128,10 +128,10 @@ const YAMANOUCHI: LiftSeed[] = [
 ];
 
 /**
- * IIYAMA (JP) — Madarao, Tangram, Togari, Nozawa Onsen.
+ * IIYAMA (JP) - Madarao, Tangram, Togari, Nozawa Onsen.
  */
 const IIYAMA: LiftSeed[] = [
-  // NOZAWA ONSEN — Hikage gondola is the iconic top-to-bottom lift
+  // NOZAWA ONSEN - Hikage gondola is the iconic top-to-bottom lift
   { id: "nozawa-hikage-gondola", mountainId: "nozawa-onsen", name: "Hikage Gondola", nameJa: "日影ゴンドラ", baseElevation: 590, topElevation: 1085, exposure: "sheltered", windHoldThresholdKmh: 90, type: "gondola", verifiedAt: V },
   { id: "nozawa-yamabiko-quad", mountainId: "nozawa-onsen", name: "Yamabiko Quad", nameJa: "やまびこクワッド", baseElevation: 1260, topElevation: 1650, exposure: "exposed", windHoldThresholdKmh: 75, type: "fixed_grip_chair", verifiedAt: V },
   { id: "nozawa-paradise-quad", mountainId: "nozawa-onsen", name: "Paradise Express", nameJa: "パラダイスエクスプレス", baseElevation: 1200, topElevation: 1500, exposure: "moderate", windHoldThresholdKmh: 80, type: "detachable", verifiedAt: V },

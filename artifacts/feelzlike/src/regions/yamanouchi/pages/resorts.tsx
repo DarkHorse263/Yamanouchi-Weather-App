@@ -12,7 +12,7 @@ import { useState } from "react";
 // Maps a region label (as returned by the resorts API) to a representative
 // /resort/:id slug for the region's "live" deep-link. After the Option B
 // 22-mountain refactor, the umbrella `shiga-kogen` and `kita-shiga` slugs no
-// longer exist as mountain entries — we link to the headline sub-area instead.
+// longer exist as mountain entries - we link to the headline sub-area instead.
 const REGION_LIVE_MAP: Record<string, { slug: string; label: string; labelJa: string }> = {
   "Shiga Kogen": { slug: "shiga-yakebitaiyama", label: "Yakebitaiyama live", labelJa: "焼額山ライブ" },
   "Ryuoo": { slug: "ryuoo", label: "Ryuoo live", labelJa: "竜王ライブ" },

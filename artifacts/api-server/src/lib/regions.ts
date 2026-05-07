@@ -29,7 +29,7 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "selwyn": "snowy-mountains",
   "snowy-mountains-roads": "snowy-mountains",
 
-  // Yamanouchi, JP — 22 mountains: 18 Shiga Kogen sub-areas + 4 Kita-Shiga resorts.
+  // Yamanouchi, JP - 22 mountains: 18 Shiga Kogen sub-areas + 4 Kita-Shiga resorts.
   "shiga-sun-valley": "yamanouchi",
   "shiga-maruike": "yamanouchi",
   "shiga-hasuike": "yamanouchi",
@@ -84,7 +84,7 @@ export function parseRegionParam(
 
   if (Array.isArray(raw)) {
     // Validate EVERY array entry. Reject mixed/invalid inputs rather than
-    // silently dropping them — a request like `?region=valid&region=bogus`
+    // silently dropping them - a request like `?region=valid&region=bogus`
     // should fail loudly.
     const values: string[] = [];
     for (const v of raw) {

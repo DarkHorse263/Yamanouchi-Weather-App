@@ -27,7 +27,7 @@ import { EmptyStateCard } from "@/components/EmptyStateCard";
  * Generic, region-isolated Transport page.
  *
  * - Reads providers from the per-region static data layer (no shared API
- *   that could leak NSW data into a JP region — the original v0.3 bug).
+ *   that could leak NSW data into a JP region - the original v0.3 bug).
  * - Runs `assertProvidersForRegion` before render so any future drift is
  *   caught loudly in dev and surfaced via Sentry in prod.
  * - Used as the default Transport route for any region that does not
@@ -35,7 +35,7 @@ import { EmptyStateCard } from "@/components/EmptyStateCard";
  *
  * Yamanouchi ships a custom rich Transport page (winter timetables, kanji
  * sections, etc.) wired through `yamanouchiRouter.Transport`, so JP towns
- * never reach this generic component — but if they did, they would still
+ * never reach this generic component - but if they did, they would still
  * see only Japanese providers thanks to the data layer + guard.
  */
 export function TownTransport() {

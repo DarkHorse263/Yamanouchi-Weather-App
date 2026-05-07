@@ -4,10 +4,10 @@
  * Defends against a class of bug where a record intended for one region
  * (e.g. an Australian bus operator) accidentally renders inside another
  * region's UI (e.g. the Yamanouchi Transport page). The bug shipped in
- * v0.3 — see Sprint 1, Prompt 1.1 of the Replit playbook.
+ * v0.3 - see Sprint 1, Prompt 1.1 of the Replit playbook.
  *
  * Behaviour:
- *  - dev: throws — surfaces the problem on first navigation.
+ *  - dev: throws - surfaces the problem on first navigation.
  *  - prod: never throws (we don't blank the page in front of a user); we
  *    log to console.error, drop a Sentry breadcrumb so we get telemetry
  *    if it ever recurs, and capture an exception so it shows up in the
@@ -64,7 +64,7 @@ export function assertProvidersForRegion<T extends RegionScoped>(
       },
     });
   } catch {
-    // Sentry not initialised (e.g. in unit tests) — swallow.
+    // Sentry not initialised (e.g. in unit tests) - swallow.
   }
 
   if (import.meta.env.DEV) {
@@ -80,7 +80,7 @@ export function assertProvidersForRegion<T extends RegionScoped>(
       tags: { regionGuard: "leak", region: regionId, source: opts.source },
     });
   } catch {
-    // Sentry not initialised — swallow.
+    // Sentry not initialised - swallow.
   }
   return records.filter((r) => r.regions.includes(regionId));
 }

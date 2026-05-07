@@ -4,7 +4,7 @@ import { Snowflake, AlertTriangle } from "lucide-react";
 // Reads the optional `?error=` querystring set by the GET /api/alerts/unsubscribe
 // redirect when the token couldn't be processed (invalid, revoked, server error).
 // We always render *something* so a user clicking from their inbox never sees a
-// raw JSON error — that's the whole point of the email-click landing page.
+// raw JSON error - that's the whole point of the email-click landing page.
 function readErrorFromQuery(): string | null {
   if (typeof window === "undefined") return null;
   const code = new URLSearchParams(window.location.search).get("error");

@@ -1,5 +1,5 @@
 /**
- * Transport providers — region-isolated data layer.
+ * Transport providers - region-isolated data layer.
  *
  * Each provider declares which `regions` it serves. The `regionGuard.ts`
  * helper enforces that no provider leaks into a region it doesn't belong to
@@ -24,7 +24,7 @@ export interface TransportProvider {
   type: TransportType;
   /** Operating company / brand if different from `name`. */
   operator: string;
-  /** Verified phone number, or `null` when unknown — never guess. */
+  /** Verified phone number, or `null` when unknown - never guess. */
   phone: string | null;
   /** Verified website URL, or `null` when unknown. */
   website: string | null;
@@ -36,7 +36,7 @@ export interface TransportProvider {
   schedule_url?: string | null;
   /**
    * Regions this provider serves. The regionGuard rejects any record where
-   * this array does not include the active region — the core anti-leak
+   * this array does not include the active region - the core anti-leak
    * mechanism.
    */
   regions: RegionId[];

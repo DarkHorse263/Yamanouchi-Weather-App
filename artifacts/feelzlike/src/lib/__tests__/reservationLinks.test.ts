@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// reservationLinks.test.ts — unit tests for the reservation deep-link builder.
+// reservationLinks.test.ts - unit tests for the reservation deep-link builder.
 //
 // Run with:
 //   pnpm --filter @workspace/feelzlike test:reservation
@@ -82,7 +82,7 @@ function test(name: string, fn: () => void) {
   }
 }
 
-console.log("\nreservationLinks.ts — unit tests\n");
+console.log("\nreservationLinks.ts - unit tests\n");
 
 test("Tabelog deep-link → primary = Tabelog", () => {
   const eat: Eat = makeJP({
@@ -207,7 +207,7 @@ test("Malformed reservation_link → falls back to 'official' label without thro
   assert.equal(r.primary?.provider, "official");
 });
 
-test("Phone normalization — surrounding whitespace, spaces, parens, dashes stripped", () => {
+test("Phone normalization - surrounding whitespace, spaces, parens, dashes stripped", () => {
   const r = buildReservationLinks(
     makeAU({ phone: "  +61 (2) 6452-1234  " }),
   );

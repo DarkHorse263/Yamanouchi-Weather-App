@@ -24,7 +24,7 @@ const AU_LINKS: SafetyLink[] = [
 
 const AU_DISCLAIMER =
   "feelzlike provides reference conditions only. Avalanche risk in the Australian Alps is generally low but real " +
-  "— wind-loaded slopes, cornices and tree wells have caused fatalities. Check current bulletins, carry safety " +
+  "- wind-loaded slopes, cornices and tree wells have caused fatalities. Check current bulletins, carry safety " +
   "gear, and ski with a partner when leaving patrolled terrain.";
 
 export function SafetyStrip() {

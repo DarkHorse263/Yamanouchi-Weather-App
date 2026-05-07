@@ -6,7 +6,7 @@
  * each other and you end up serving stale chunks after a code change.
  *
  * The SW itself (public/sw.js) implements push notifications AND offline
- * caching — see that file for the strategy table.
+ * caching - see that file for the strategy table.
  *
  * In dev, we proactively UNREGISTER any SW from a previous prod build so
  * developers don't get bitten by a stale cache from yesterday's preview.
@@ -20,7 +20,7 @@ export function registerServiceWorker(): void {
       .getRegistrations()
       .then((regs) => regs.forEach((r) => r.unregister()))
       .catch(() => {
-        /* noop — best-effort */
+        /* noop - best-effort */
       });
     return;
   }
@@ -46,7 +46,7 @@ export function registerServiceWorker(): void {
         });
       })
       .catch((err) => {
-        // Non-fatal — app still works without the SW. Surface to console
+        // Non-fatal - app still works without the SW. Surface to console
         // so prod issues are visible if a user reports trouble.
         // eslint-disable-next-line no-console
         console.warn("[sw] registration failed", err);
@@ -59,7 +59,7 @@ export function isStandaloneMode(): boolean {
   if (typeof window === "undefined") return false;
   // Modern: matchMedia. Legacy iOS: navigator.standalone.
   const mq = window.matchMedia("(display-mode: standalone)").matches;
-  // @ts-expect-error iOS-only legacy property — not in TS lib.
+  // @ts-expect-error iOS-only legacy property - not in TS lib.
   const ios = window.navigator.standalone === true;
   return mq || ios;
 }

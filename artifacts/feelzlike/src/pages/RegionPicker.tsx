@@ -68,7 +68,7 @@ export default function RegionPicker() {
         </div>
 
         <div className="rule mt-12 mb-6" />
-        <p className="byline text-muted-foreground/60">v0.3 · feelzlike — single app, all regions</p>
+        <p className="byline text-muted-foreground/60">v0.3 · feelzlike - single app, all regions</p>
       </div>
     </div>
   );

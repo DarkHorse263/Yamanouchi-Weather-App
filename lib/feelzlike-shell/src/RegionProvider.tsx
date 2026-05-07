@@ -3,7 +3,7 @@ import type { RegionConfig } from "./types";
 
 interface RegionContextValue {
   region: RegionConfig;
-  /** Region base path, e.g. "/snowy-mountains" — used to prefix sub-routes */
+  /** Region base path, e.g. "/snowy-mountains" - used to prefix sub-routes */
   basePath: string;
   /** Builds an absolute href from a region-relative path */
   href: (path: string) => string;

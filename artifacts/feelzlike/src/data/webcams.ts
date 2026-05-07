@@ -11,9 +11,9 @@
  *
  *   - "image":    Try `<img>` first; on error fall back to the external card
  *   - "iframe":   Sandboxed `<iframe>`; if blocked, the iframe simply renders
- *                 empty — we still surface the "Open live cam" CTA underneath
+ *                 empty - we still surface the "Open live cam" CTA underneath
  *   - "external": Render a branded hero card immediately with prominent
- *                 "Open live cam" CTA — no broken images, no waiting
+ *                 "Open live cam" CTA - no broken images, no waiting
  *
  * Default to "external" unless a URL has been verified to embed cleanly.
  * `verifiedAt` is the date a human last opened the source page and confirmed
@@ -34,7 +34,7 @@ export interface MountainWebcam {
   embedType: WebcamEmbedType;
   /** Required for "image" + "iframe". Not used for "external". */
   embedUrl?: string;
-  /** Always present — link to the resort's official cam page. */
+  /** Always present - link to the resort's official cam page. */
   pageUrl: string;
   vantage?: WebcamVantage;
   /** Metres above sea level if the source publishes it. */
@@ -48,14 +48,14 @@ export interface MountainWebcam {
 const VERIFIED = "2026-05-05";
 
 /**
- * Yamanouchi region — Shiga Kogen sub-resorts + Ryuoo + Kita-Shiga + Yomase.
+ * Yamanouchi region - Shiga Kogen sub-resorts + Ryuoo + Kita-Shiga + Yomase.
  * Source URLs come from each operator's official cam index page.
  */
 const YAMANOUCHI: Record<string, MountainWebcam[]> = {
   // ─── Shiga Kogen central area ────────────────────────────
   // The central sub-resorts (Sun Valley / Maruike / Hasuike / Giant /
   // Hoppo Bunadaira / Tateyama / Takamagahara / Ichinose / Tannenomori)
-  // share the Shiga Kogen Tourism Association's central livecam page —
+  // share the Shiga Kogen Tourism Association's central livecam page -
   // we link each to it so users always get a verified live source.
   "shiga-sun-valley": [
     { id: "central-sun-valley", mountainId: "shiga-sun-valley", name: "Sun Valley base",            nameJa: "サンバレー ベース",            description: "Entry-level base on the Shiga loop road.",            descriptionJa: "志賀の入口の初心者向けベース",            embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/livecamera/", vantage: "base",   elevation: 1500, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
@@ -70,19 +70,19 @@ const YAMANOUCHI: Record<string, MountainWebcam[]> = {
     { id: "central-terakoya",   mountainId: "shiga-terakoya",   name: "Terakoya · Shiga's highest central", nameJa: "寺子屋 · 中央エリア最高所", description: "Steep mogul faces and powder pockets.",                descriptionJa: "急なコブ斜面とパウダー",                     embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/livecamera/", vantage: "summit", elevation: 2125, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
   ],
   "shiga-ichinose-family": [
-    { id: "central-ichinose-family", mountainId: "shiga-ichinose-family", name: "Ichinose Family base", nameJa: "一の瀬ファミリー ベース",  description: "Central Shiga gateway — easiest access to the lift network.", descriptionJa: "志賀中心部 · リフトネット最大の起点",       embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/livecamera/", vantage: "base",   elevation: 1850, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
+    { id: "central-ichinose-family", mountainId: "shiga-ichinose-family", name: "Ichinose Family base", nameJa: "一の瀬ファミリー ベース",  description: "Central Shiga gateway - easiest access to the lift network.", descriptionJa: "志賀中心部 · リフトネット最大の起点",       embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/livecamera/", vantage: "base",   elevation: 1850, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
   ],
 
-  // ─── East Shiga — Prince Hotels operates Yakebitaiyama livecams ───
+  // ─── East Shiga - Prince Hotels operates Yakebitaiyama livecams ───
   "shiga-yakebitaiyama": [
     { id: "yakebi-base",        mountainId: "shiga-yakebitaiyama", name: "Yakebitaiyama base · Prince Hotel", nameJa: "焼額山 ベース · プリンスホテル前", description: "View across the lower slopes from the Prince Hotel base lodge.", descriptionJa: "プリンスホテル前から下部ゲレンデを望む", embedType: "external", pageUrl: "https://prince.jp/ski/shiga/livecamera/", vantage: "base",   elevation: 1500, source: "Prince Hotels & Resorts", verifiedAt: VERIFIED },
-    { id: "yakebi-summit",      mountainId: "shiga-yakebitaiyama", name: "Yakebitaiyama summit",              nameJa: "焼額山 山頂",                       description: "1998 Olympic GS course start — 2,009m peak.",                  descriptionJa: "1998年五輪GS発走点 · 標高2,009m",         embedType: "external", pageUrl: "https://prince.jp/ski/shiga/livecamera/", vantage: "summit", elevation: 2009, source: "Prince Hotels & Resorts", verifiedAt: VERIFIED },
+    { id: "yakebi-summit",      mountainId: "shiga-yakebitaiyama", name: "Yakebitaiyama summit",              nameJa: "焼額山 山頂",                       description: "1998 Olympic GS course start - 2,009m peak.",                  descriptionJa: "1998年五輪GS発走点 · 標高2,009m",         embedType: "external", pageUrl: "https://prince.jp/ski/shiga/livecamera/", vantage: "summit", elevation: 2009, source: "Prince Hotels & Resorts", verifiedAt: VERIFIED },
   ],
   "shiga-okushiga-kogen": [
     { id: "okushiga-1",         mountainId: "shiga-okushiga-kogen", name: "Okushiga Kogen base", nameJa: "奥志賀高原 ベース", description: "Shiga's quietest, longest groomers.", descriptionJa: "志賀最奥のロングクルーザー", embedType: "external", pageUrl: "https://www.okushiga.jp/livecam.html", vantage: "base", elevation: 1960, source: "Okushiga Kogen Resort", verifiedAt: VERIFIED },
   ],
 
-  // ─── Highest lift-served zone — operated by Yokoteyama/Shibutoge resort ───
+  // ─── Highest lift-served zone - operated by Yokoteyama/Shibutoge resort ───
   "shiga-kumanoyu": [
     { id: "kumanoyu-base",      mountainId: "shiga-kumanoyu",   name: "Kumanoyu base", nameJa: "熊の湯 ベース", description: "North-facing high alpine · long-season natural snow.", descriptionJa: "北向き高所 · 自然雪のロングシーズン", embedType: "external", pageUrl: "https://www.kumanoyu.com/", vantage: "base", elevation: 2000, source: "Kumanoyu Ski Area", verifiedAt: VERIFIED },
   ],
@@ -90,7 +90,7 @@ const YAMANOUCHI: Record<string, MountainWebcam[]> = {
     { id: "yokoteyama-summit",  mountainId: "shiga-yokoteyama", name: "Yokoteyama summit · 2,305m", nameJa: "横手山 山頂 · 標高2,305m", description: "Japan's highest lift-served summit · alpine views to the JP Alps.", descriptionJa: "日本最高所の索道山頂 · 日本アルプスを望む", embedType: "external", pageUrl: "https://yokoteyama-shibutoge.com/livecam/", vantage: "summit", elevation: 2305, source: "Yokoteyama / Shibutoge Resort", verifiedAt: VERIFIED },
   ],
   "shiga-shibutoge": [
-    { id: "shibutoge-pass",     mountainId: "shiga-shibutoge",  name: "Shibutoge Pass · Honshu's highest road",                              nameJa: "渋峠 · 本州最高所の道路",          description: "2,172m — sea-of-clouds backdrop, road closes Nov–Apr.",                       descriptionJa: "標高2,172m · 雲海と冬季閉鎖の峠",            embedType: "external", pageUrl: "https://yokoteyama-shibutoge.com/livecam/", vantage: "summit", elevation: 2172, source: "Yokoteyama / Shibutoge Resort", verifiedAt: VERIFIED },
+    { id: "shibutoge-pass",     mountainId: "shiga-shibutoge",  name: "Shibutoge Pass · Honshu's highest road",                              nameJa: "渋峠 · 本州最高所の道路",          description: "2,172m - sea-of-clouds backdrop, road closes Nov–Apr.",                       descriptionJa: "標高2,172m · 雲海と冬季閉鎖の峠",            embedType: "external", pageUrl: "https://yokoteyama-shibutoge.com/livecam/", vantage: "summit", elevation: 2172, source: "Yokoteyama / Shibutoge Resort", verifiedAt: VERIFIED },
   ],
 
   // ─── Kita-Shiga (4 standalone resorts, each runs its own cam page) ───
@@ -110,7 +110,7 @@ const YAMANOUCHI: Record<string, MountainWebcam[]> = {
 };
 
 /**
- * Iiyama region — Madarao, Tangram, Togari Onsen, Nozawa Onsen.
+ * Iiyama region - Madarao, Tangram, Togari Onsen, Nozawa Onsen.
  */
 const IIYAMA: Record<string, MountainWebcam[]> = {
   "madarao": [
@@ -208,7 +208,7 @@ const IIYAMA: Record<string, MountainWebcam[]> = {
 /**
  * Snowy Mountains has an existing API-driven webcam grid wired into
  * `LocationDetail.tsx` (sourced from the BOM/resort scrape). We don't
- * duplicate that here — the curated dataset only fills gaps where the
+ * duplicate that here - the curated dataset only fills gaps where the
  * API doesn't reach (i.e. the JP region).
  */
 const SNOWY_MOUNTAINS: Record<string, MountainWebcam[]> = {};

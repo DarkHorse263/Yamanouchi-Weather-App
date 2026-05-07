@@ -35,7 +35,7 @@ export function MountainWebcams({
   const [carouselIdx, setCarouselIdx] = useState(0);
   const headingId = useId();
 
-  // Auto-rotate cycles every 8s — pauses while modal is open.
+  // Auto-rotate cycles every 8s - pauses while modal is open.
   useEffect(() => {
     if (!autoRotate || cams.length < 2 || activeIdx !== null) return;
     const i = setInterval(() => {
@@ -44,7 +44,7 @@ export function MountainWebcams({
     return () => clearInterval(i);
   }, [autoRotate, cams.length, activeIdx]);
 
-  // Empty state — no curated cams. Surface the resort website fallback if
+  // Empty state - no curated cams. Surface the resort website fallback if
   // one was provided. Otherwise the section is hidden entirely.
   if (cams.length === 0) {
     if (!fallbackPageUrl) return null;
@@ -197,7 +197,7 @@ export function MountainWebcams({
 
       <p className="text-[11px] text-muted-foreground/70 mt-3">
         {t(
-          "Many resort cams are hotlink-protected — we link out to the source page where embeds fail.",
+          "Many resort cams are hotlink-protected - we link out to the source page where embeds fail.",
           "多くのスキー場ライブカメラは外部参照を制限しています。埋め込みできない場合はソースページへ移動します。",
         )}
       </p>
@@ -334,7 +334,7 @@ function WebcamMedia({
     );
   }
 
-  // External / fallback card — branded teaser pointing to the source.
+  // External / fallback card - branded teaser pointing to the source.
   return (
     <div
       className={`relative ${

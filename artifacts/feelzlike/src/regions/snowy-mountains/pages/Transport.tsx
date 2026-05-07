@@ -33,7 +33,7 @@ const SNOWY_MTNS_BUS_URL = "https://coomacoaches.com.au/snowy-mountains-bus-serv
  * "what stops here" breakouts. The remaining operators (Snowliner,
  * Greyhound, Murrays, NSW TrainLink, airport shuttles) sit underneath as
  * a supporting list. Same provider data the generic TownTransport reads
- * — just a region-aware presentation.
+ * - just a region-aware presentation.
  */
 
 const COOMA_COACHES_ID = "au-cooma-coaches";
@@ -89,7 +89,7 @@ export function SnowyTransport() {
               <div className="shrink-0 rounded-xl bg-white border border-blue-100 p-3 flex items-center justify-center">
                 <img
                   src={coomaCoachesLogo}
-                  alt="Cooma Coaches — Connecting the Snowy Mountains"
+                  alt="Cooma Coaches - Connecting the Snowy Mountains"
                   className="h-14 md:h-16 w-auto"
                   draggable={false}
                 />
@@ -132,7 +132,7 @@ export function SnowyTransport() {
               </div>
             </div>
 
-            {/* Snowy Mountains Bus Service breakout — Cooma Coaches' named
+            {/* Snowy Mountains Bus Service breakout - Cooma Coaches' named
                 daily Canberra ↔ Jindabyne service. Called out separately
                 so visitors know which Cooma Coaches product to actually
                 book. */}

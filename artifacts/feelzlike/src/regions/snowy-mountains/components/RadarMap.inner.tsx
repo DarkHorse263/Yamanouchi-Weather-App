@@ -3,7 +3,7 @@ import { useMemo } from "react";
 interface RadarMapInnerProps {
   center?: { lat: number; lng: number };
   zoom?: number;
-  /** Markers prop is accepted for API compatibility but ignored — Windy
+  /** Markers prop is accepted for API compatibility but ignored - Windy
    * controls its own basemap and we can't overlay custom markers on the
    * embed. Mountains are still labelled by Windy's own place names. */
   markers?: Array<{ id: string; name: string; lat: number; lng: number }>;
@@ -51,7 +51,7 @@ export default function RadarMapInner({
   return (
     <div className="relative w-full h-[520px] md:h-[640px] bg-slate-900">
       <iframe
-        title="Animated precipitation radar — Snowy Mountains"
+        title="Animated precipitation radar - Snowy Mountains"
         src={src}
         className="w-full h-full border-0"
         loading="lazy"

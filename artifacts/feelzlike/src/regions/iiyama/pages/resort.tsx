@@ -135,7 +135,7 @@ export default function ResortDetail() {
     { label: t("Humidity", "湿度"), value: `${current.humidity}%`, icon: Droplets },
     {
       label: t("Snow depth", "積雪"),
-      value: current.snowDepth != null ? `${current.snowDepth} cm` : "—",
+      value: current.snowDepth != null ? `${current.snowDepth} cm` : "-",
       icon: Snowflake,
     },
     ...(current.dewpoint !== undefined
@@ -246,7 +246,7 @@ export default function ResortDetail() {
           links={safetyLinks}
           subhead={t("Always check official sources before heading out.", "出発前に必ず公式情報をご確認ください。")}
           disclaimer={t(
-            "Conditions update every 10 minutes. Iiyama mountain weather changes fast — when in doubt, contact the resort directly.",
+            "Conditions update every 10 minutes. Iiyama mountain weather changes fast - when in doubt, contact the resort directly.",
             "状況は10分ごとに更新されます。飯山の山岳天候は急変します。判断に迷う場合はスキー場へ直接お問い合わせください。",
           )}
         />
@@ -264,7 +264,7 @@ function OfficialLinks({
   resortName: string;
   t: (en: string, ja: string) => string;
 }) {
-  // Only render link tiles for URLs we actually have — never fake them.
+  // Only render link tiles for URLs we actually have - never fake them.
   const links = [
     profile.websiteUrl && {
       label: t("Official website", "公式サイト"),

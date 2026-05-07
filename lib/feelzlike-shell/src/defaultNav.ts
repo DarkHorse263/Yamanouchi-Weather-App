@@ -26,7 +26,7 @@ export const DEFAULT_TOWN_NAV: NavItem[] = [
 /** Sidebar items for the "Mountains" section. Paths are RELATIVE to /:region. */
 export const DEFAULT_MOUNTAIN_NAV: NavItem[] = [
   // "Today's call" was retired in the Apr 2026 reset (live data wasn't
-  // ready to back the verdict UI). The route is gone — keep this nav list
+  // ready to back the verdict UI). The route is gone - keep this nav list
   // free of dead paths.
   { path: "/mountains",       icon: Mountain,      label: "All mountains", labelJa: "スキー場一覧" },
   { path: "/radar",           icon: RadarIcon,     label: "Radar",         labelJa: "気象レーダー" },

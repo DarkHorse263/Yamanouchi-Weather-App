@@ -8,7 +8,7 @@ import wordmark from "@assets/feelzlike_trimmed/feelzlike_WordMarque_colour_1604
  * Apr 2026 reset:
  * - Brand mark now uses the actual wordmark image (consistent with the
  *   region headers + RegionPicker), not the plain "FeelZlike" text.
- * - "Today's Call" links removed — the route was retired in this reset.
+ * - "Today's Call" links removed - the route was retired in this reset.
  * - Browse list now points at the Sources page (the new region-level
  *   attribution surface) instead of the old `/today` placeholder.
  *
@@ -57,11 +57,11 @@ export function HomeFooter() {
             About
           </p>
           <ul className="space-y-2 text-slate-700">
-            {/* TODO(launch): wire real Privacy / Terms pages — currently the
+            {/* TODO(launch): wire real Privacy / Terms pages - currently the
                 consent banner exposes preferences directly. */}
             <li><a className="hover:text-sky-700" href="#" onClick={(e) => { e.preventDefault(); window.dispatchEvent(new CustomEvent("feelzlike:open-consent")); }}>Privacy & cookies</a></li>
             <li><a className="hover:text-sky-700" href="mailto:hello@feelzlike.com">Contact</a></li>
-            <li><span className="text-slate-400">© {year} Navigate Work Digital — feelzlike</span></li>
+            <li><span className="text-slate-400">© {year} Navigate Work Digital - feelzlike</span></li>
           </ul>
         </div>
       </div>

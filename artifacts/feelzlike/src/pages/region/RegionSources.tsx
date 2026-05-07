@@ -4,7 +4,7 @@ import { Database, ExternalLink } from "lucide-react";
 import { useLanguage, useRegion, LiveBadge } from "@workspace/feelzlike-shell";
 
 /**
- * RegionSources — single source of truth for "where the data comes from".
+ * RegionSources - single source of truth for "where the data comes from".
  *
  * Lifted from the landing-page trust footer (Apr 2026 reset): users on a
  * region need the same attribution available at any time, not only from the
@@ -33,7 +33,7 @@ const FORECAST_ENSEMBLE: SourceGroup = {
   title: "Forecast ensemble",
   titleJa: "予報モデル",
   blurb: "Aggregated via Open-Meteo so you see the consensus, not a single guess.",
-  blurbJa: "Open-Meteo経由で集約 — 単一モデルの予測ではなく合意ベースの予報を表示。",
+  blurbJa: "Open-Meteo経由で集約 - 単一モデルの予測ではなく合意ベースの予報を表示。",
   items: [
     { label: "ECMWF IFS", detail: "Europe", url: "https://www.ecmwf.int/en/forecasts" },
     { label: "GFS", detail: "NOAA, USA", url: "https://www.nco.ncep.noaa.gov/pmb/products/gfs/" },
@@ -160,7 +160,7 @@ export function RegionSources() {
 
         <p className="text-[11px] text-muted-foreground/70 leading-relaxed max-w-2xl">
           {t(
-            "Feelzlike combines but does not replace any of the above sources. For official warnings always consult the issuing authority. We attribute every data point — if you spot something missing, let us know.",
+            "Feelzlike combines but does not replace any of the above sources. For official warnings always consult the issuing authority. We attribute every data point - if you spot something missing, let us know.",
             "Feelzlikeは上記の出典を統合表示するものであり、置き換えるものではありません。公式の警報・警告は必ず発表元を直接ご確認ください。",
           )}
         </p>

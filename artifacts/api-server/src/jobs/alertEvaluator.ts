@@ -12,7 +12,7 @@
  *     forecast snow ≥ QUIET_HOURS_OVERRIDE_CM (you'd want to know about that).
  *
  * Run modes:
- *   - `startAlertCron()` schedules the job (every 3h) — called from app boot
+ *   - `startAlertCron()` schedules the job (every 3h) - called from app boot
  *     in production.
  *   - `runAlertEvaluator()` runs the job once and is exposed via an admin
  *     endpoint for ad-hoc testing.
@@ -33,7 +33,7 @@ const QUIET_HOURS_OVERRIDE_CM = 50;
 const PER_SUBSCRIBER_RATE_LIMIT_HOURS = 12;
 const MAX_FAILURES_PER_24H = 3;
 // Anchor each region with a representative high-altitude point. The forecast
-// is a regional indicator, not a per-resort prediction — when we want
+// is a regional indicator, not a per-resort prediction - when we want
 // per-resort accuracy we'll move to per-mountain coords (the schema already
 // has subscriber.mountains[] for that).
 const REGION_ANCHORS: Record<RegionId, {
@@ -56,7 +56,7 @@ interface EvaluatorReport {
 /**
  * Insert a success=true claim row for a (subscriber, alertWindow, delivery)
  * triple. Returns `{claimed: true, id}` on success and `{claimed: false}` if
- * the partial unique index already holds a successful row — meaning another
+ * the partial unique index already holds a successful row - meaning another
  * evaluator run got there first.
  */
 async function claimDispatchSlot(values: {
@@ -121,7 +121,7 @@ export async function runAlertEvaluator(opts?: { dryRun?: boolean }): Promise<Ev
   for (const sub of active) {
     report.subscribersChecked++;
 
-    // Per-subscriber rate limit — last alert any region, in last 12h.
+    // Per-subscriber rate limit - last alert any region, in last 12h.
     if (sub.lastAlertedAt) {
       const ageH = (Date.now() - sub.lastAlertedAt.getTime()) / 3_600_000;
       if (ageH < PER_SUBSCRIBER_RATE_LIMIT_HOURS) {
@@ -153,7 +153,7 @@ export async function runAlertEvaluator(opts?: { dryRun?: boolean }): Promise<Ev
     }
 
     // Dedupe key uses the subscriber's LOCAL date, not UTC. With UTC, an AEDT
-    // user (UTC+11) would see the "daily" window roll over at 11am local —
+    // user (UTC+11) would see the "daily" window roll over at 11am local -
     // re-alerting them mid-morning, or suppressing a real new storm late
     // evening local. dateKey() now formats in `sub.timezone`.
     const alertWindow = `${bestMatch.region}:${dateKey(startedAt, sub.timezone)}`;
@@ -172,7 +172,7 @@ export async function runAlertEvaluator(opts?: { dryRun?: boolean }): Promise<Ev
       continue;
     }
 
-    // Failure backoff — if we've tried and failed >=3 times in the last 24h
+    // Failure backoff - if we've tried and failed >=3 times in the last 24h
     // with no success, stop hammering SMTP/push for this subscriber. Without
     // this, a permanently-bouncing address gets retried every cron tick
     // forever (lastAlertedAt is only bumped on success).
@@ -197,7 +197,7 @@ export async function runAlertEvaluator(opts?: { dryRun?: boolean }): Promise<Ev
     // success=true row before sending. If that insert hits the partial unique
     // index `alert_dispatched_success_uidx (subscriberId, alertWindow,
     // delivery) WHERE success=true`, another evaluator instance has already
-    // claimed this slot and we skip — preventing duplicate sends when two runs
+    // claimed this slot and we skip - preventing duplicate sends when two runs
     // overlap (e.g. cron + manual /internal/alerts/run). On send failure we
     // mark the row success=false so future runs can retry.
     const anchor = REGION_ANCHORS[bestMatch.region]!;
@@ -238,7 +238,7 @@ export async function runAlertEvaluator(opts?: { dryRun?: boolean }): Promise<Ev
       const targets = await db.select().from(pushSubscriptionsTable).where(eq(pushSubscriptionsTable.subscriberId, sub.id));
       // Push uses a single claim row for "push delivery to this subscriber for
       // this window". Per-endpoint failures (e.g. one stale browser) shouldn't
-      // unclaim the slot — we still consider push delivered if at least one
+      // unclaim the slot - we still consider push delivered if at least one
       // endpoint succeeded.
       const claim = targets.length > 0 ? await claimDispatchSlot({
         subscriberId: sub.id, mountain: anchor.displayName, region: bestMatch.region,
@@ -317,7 +317,7 @@ export function startAlertCron(): void {
   // Deployment that hits POST /api/internal/alerts/run instead so the job
   // doesn't depend on a server staying warm.
   if (process.env.ALERT_CRON_DISABLED === "1") {
-    console.log("[alertEvaluator] ALERT_CRON_DISABLED=1 — cron not started");
+    console.log("[alertEvaluator] ALERT_CRON_DISABLED=1 - cron not started");
     return;
   }
   cronTask = cron.schedule("0 */3 * * *", () => {

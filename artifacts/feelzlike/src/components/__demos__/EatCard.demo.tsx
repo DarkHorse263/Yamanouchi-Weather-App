@@ -9,7 +9,7 @@ interface DemoSpec {
 }
 
 // Six cards covering every type currently present in curated data, balanced
-// across both regions. One per major Eat.type — gives the visual reviewer one
+// across both regions. One per major Eat.type - gives the visual reviewer one
 // example of each badge colour and one example of each region's discriminated
 // extras (AU: après-ski/takeaway/groceries; JP: cash-only/EN-menu/picture).
 const SPECS: readonly DemoSpec[] = [
@@ -43,7 +43,7 @@ export default function EatCardDemo() {
         <p className="text-[11px] font-bold tracking-wider uppercase text-muted-foreground">
           Component preview · Sprint 3 · Prompt 3.2
         </p>
-        <h1 className="font-display text-2xl mt-1">EatCard — region-aware listing</h1>
+        <h1 className="font-display text-2xl mt-1">EatCard - region-aware listing</h1>
         <p className="text-sm text-muted-foreground mt-2 max-w-2xl">
           Six cards covering every Eat type present in the curated dataset. Same component
           renders both AU and JP records via the discriminated{" "}

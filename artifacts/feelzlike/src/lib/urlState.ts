@@ -7,8 +7,8 @@ import type { RegionSlug, TownSlug } from "@/types/stayEat";
  * Convert a `RegionConfig.id` (kebab-case URL slug, e.g. "snowy-mountains")
  * to the corresponding `RegionSlug` used by the curated dataset
  * (snake_case, e.g. "snowy_mountains"). The two are deliberately separate
- * conventions — kebab in URLs/RegionConfig, snake on disk and in the Zod
- * schemas — so the conversion is centralised here.
+ * conventions - kebab in URLs/RegionConfig, snake on disk and in the Zod
+ * schemas - so the conversion is centralised here.
  */
 export function regionIdToSlug(id: string): RegionSlug {
   return id.replace(/-/g, "_") as RegionSlug;
@@ -27,7 +27,7 @@ export function townIdToSlug(id: string): TownSlug {
 /**
  * Convert a `MountainLink.id` (kebab-case, e.g. "shiga-kogen") to the
  * snake_case key used inside `Stay.drive_min_to_each_mountain`. The dataset
- * keys are parent-resort granular only — sub-resorts (e.g. "okushiga-kogen")
+ * keys are parent-resort granular only - sub-resorts (e.g. "okushiga-kogen")
  * roll up to their parent ("shiga-kogen" → "shiga_kogen"). Pass the
  * resolved parent id (or the mountain itself when it has no parent).
  */
@@ -38,7 +38,7 @@ export function mountainIdToDriveKey(id: string): string {
 /**
  * Update a single URL search param without touching the rest. `value === null`
  * (or empty string) deletes the param. Uses `history.replaceState` (not push)
- * so successive filter / view changes don't pollute the back-button stack —
+ * so successive filter / view changes don't pollute the back-button stack -
  * matches the pattern already used by `StayFilterBar`.
  *
  * Dispatching `popstate` keeps wouter's `useSearch()` subscribers in sync,
@@ -49,7 +49,7 @@ export function setUrlParam(key: string, value: string | null): void {
 }
 
 /**
- * Atomic batch update — apply many param changes in a single
+ * Atomic batch update - apply many param changes in a single
  * `replaceState` + `popstate` cycle. Use this when you need to mutate
  * multiple keys at once (e.g. "Clear all filters" round-tripping 14 keys),
  * to avoid 14 separate render cycles and back-stack churn. Pass `null` /

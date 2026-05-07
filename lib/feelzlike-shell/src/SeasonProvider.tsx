@@ -63,7 +63,7 @@ export function useSeason(): SeasonContextValue {
 
 /**
  * Non-throwing variant for callers (like AppShell) that may render outside
- * a SeasonProvider — regions opt in via `region.seasons`. This MUST be used
+ * a SeasonProvider - regions opt in via `region.seasons`. This MUST be used
  * instead of a conditional `region.seasons ? useSeason() : null` call,
  * which violates the Rules of Hooks and silently breaks state updates.
  */

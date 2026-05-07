@@ -3,7 +3,7 @@
  *
  * Designed for per-town / per-mountain weather caches that will grow as we
  * onboard global regions. The existing `/api/regions` cache is bounded by
- * REGIONS.length (small, finite) so it doesn't need this — but any forthcoming
+ * REGIONS.length (small, finite) so it doesn't need this - but any forthcoming
  * cache keyed by an unbounded set (towns, mountains, ad-hoc geocoded queries)
  * should use this helper to avoid memory exhaustion.
  *
@@ -17,15 +17,15 @@
 
 export interface LruTtlEntry<V> {
   value: V;
-  /** True if within freshMs window — safe to return without revalidation. */
+  /** True if within freshMs window - safe to return without revalidation. */
   fresh: boolean;
-  /** True if past freshMs but within staleMs — return + revalidate in background. */
+  /** True if past freshMs but within staleMs - return + revalidate in background. */
   stale: boolean;
 }
 
 export interface LruTtlOptions {
   maxEntries: number;
-  /** Time the entry is "fresh" — return without revalidation. */
+  /** Time the entry is "fresh" - return without revalidation. */
   freshMs: number;
   /**
    * ADDITIONAL time after freshMs during which the entry is "stale"
@@ -53,7 +53,7 @@ export class LruTtlCache<V> {
       this.map.delete(key);
       return null;
     }
-    // Map preserves insertion order — re-insert to mark as recently used
+    // Map preserves insertion order - re-insert to mark as recently used
     this.map.delete(key);
     this.map.set(key, e);
     return { value: e.value, fresh: e.freshUntil > now, stale: e.freshUntil <= now };

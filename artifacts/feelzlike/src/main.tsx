@@ -1,4 +1,4 @@
-// Sentry must initialise before React is touched — see ./instrument.ts.
+// Sentry must initialise before React is touched - see ./instrument.ts.
 import "./instrument";
 import { createRoot } from "react-dom/client";
 import { reactErrorHandler } from "@sentry/react";

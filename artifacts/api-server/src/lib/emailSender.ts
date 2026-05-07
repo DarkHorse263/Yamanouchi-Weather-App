@@ -36,7 +36,7 @@ export async function sendEmail(args: SendArgs): Promise<SendResult> {
 
   // Reject obvious placeholder values to avoid silent failures in production
   if (apiKey.length < 10 || apiKey === "placeholder") {
-    console.warn("[emailSender] RESEND_API_KEY looks like a placeholder — skipping send");
+    console.warn("[emailSender] RESEND_API_KEY looks like a placeholder - skipping send");
     return { delivered: false, provider: "console", error: "placeholder_api_key" };
   }
 

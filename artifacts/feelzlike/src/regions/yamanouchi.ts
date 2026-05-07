@@ -9,7 +9,7 @@ export const yamanouchiRegion: RegionConfig = {
   brand: { wordmarkUrl: wordmark },
   seasons: true,
   language: { locales: ["en", "ja"] },
-  // Quick-pick nav strip — surfaces the most-asked-about mountains.
+  // Quick-pick nav strip - surfaces the most-asked-about mountains.
   // Today's Call ranks all 22 individually.
   resorts: [
     { path: "/mountain/shiga-yakebitaiyama",   label: "Yakebitaiyama",        labelJa: "焼額山" },
@@ -50,7 +50,7 @@ export const yamanouchiRegion: RegionConfig = {
     { id: "shiga-yakebitaiyama",       name: "Yakebitaiyama",             nameJa: "焼額山",                elevationM: 2009, lat: 36.8195, lng: 138.5310, blurb: "Highest Prince-run sub-resort · 1998 Olympic GS course",          blurbJa: "プリンス系最高峰 · 長野五輪GSコース",                websiteUrl: "https://prince.jp/ski/shiga/", parentId: "shiga-kogen", kids_lessons: true, terrain_park: true },
     { id: "shiga-okushiga-kogen",      name: "Okushiga Kogen",            nameJa: "奥志賀高原",            elevationM: 1960, lat: 36.8380, lng: 138.5480, blurb: "Quietest, longest groomers · powder pocket of Shiga",             blurbJa: "志賀最奥 · 静かなロングクルーザーとパウダー",        websiteUrl: "https://www.okushiga.jp/", parentId: "shiga-kogen", backcountry_access: true },
 
-    // ─── Kumanoyu / Yokoteyama / Shibutoge — highest lift-served in Japan ───
+    // ─── Kumanoyu / Yokoteyama / Shibutoge - highest lift-served in Japan ───
     { id: "shiga-kumanoyu",            name: "Kumanoyu",                  nameJa: "熊の湯",                elevationM: 2000, lat: 36.8107, lng: 138.5248, blurb: "North-facing high alpine · long-season natural snow",             blurbJa: "北向き高所 · 自然雪のロングシーズン",               websiteUrl: "https://www.kumanoyu.com/", parentId: "shiga-kogen" },
     { id: "shiga-yokoteyama",          name: "Yokoteyama",                nameJa: "横手山",                elevationM: 2305, lat: 36.7159, lng: 138.5450, blurb: "Japan's highest lift-served summit · alpine views to the JP Alps", blurbJa: "日本最高所の索道山頂 · 日本アルプスを望む",         websiteUrl: "https://yokoteyama-shibutoge.com/", parentId: "shiga-kogen", expert_only: true, backcountry_access: true },
     { id: "shiga-shibutoge",           name: "Shibutoge",                 nameJa: "渋峠",                  elevationM: 2172, lat: 36.7044, lng: 138.5364, blurb: "Highest skiable pass on Honshu · sea-of-clouds backdrop",          blurbJa: "本州最高所の峠 · 雲海の眺望",                       websiteUrl: "https://yokoteyama-shibutoge.com/", parentId: "shiga-kogen", expert_only: true, backcountry_access: true },
@@ -80,7 +80,7 @@ export const yamanouchiRegion: RegionConfig = {
       nameJa: "渋温泉",
       lat: 36.7517,
       lng: 138.4286,
-      // Just the historic cobbled village — 9 bath-houses + ryokan core.
+      // Just the historic cobbled village - 9 bath-houses + ryokan core.
       radiusM: 400,
       blurb: "Historic ryokan village · cobbled lanes & nine bathhouses",
       blurbJa: "歴史ある旅館街 · 石畳と九湯めぐり",

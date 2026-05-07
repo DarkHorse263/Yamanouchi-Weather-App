@@ -40,7 +40,7 @@ import {
 
 // Render order: keep the major OTAs first, then regional, then official last
 // (rendered by the website branch below). `tripadvisor` and `official` are
-// excluded here — Tripadvisor is a discovery surface (less booking intent),
+// excluded here - Tripadvisor is a discovery surface (less booking intent),
 // and `official` has its own neutral-styled button further down.
 const PROVIDER_ORDER: readonly Provider[] = PROVIDERS.filter(
   (p) => p !== "tripadvisor" && p !== "official",
@@ -127,7 +127,7 @@ function PhotoCarousel({ photos, name }: { photos: readonly string[]; name: stri
       <CarouselContent>
         {validPhotos.map((url, i) => (
           <CarouselItem key={`${url}-${i}`}>
-            <PhotoFrame url={url} alt={`${name} — photo ${i + 1} of ${validPhotos.length}`} name={name} />
+            <PhotoFrame url={url} alt={`${name} - photo ${i + 1} of ${validPhotos.length}`} name={name} />
           </CarouselItem>
         ))}
       </CarouselContent>
@@ -273,7 +273,7 @@ interface BookingButtonsProps {
 }
 
 function BookingButtons({ stay, variant = "card" }: BookingButtonsProps) {
-  // Single source of truth for booking URLs — `buildBookingLinks` returns
+  // Single source of truth for booking URLs - `buildBookingLinks` returns
   // only providers the data team curated (default mode), with affiliate IDs
   // injected from env vars and JP-only providers filtered out of AU stays.
   // See `lib/affiliateLinks.ts`.
@@ -336,7 +336,7 @@ function BookingButtons({ stay, variant = "card" }: BookingButtonsProps) {
 }
 
 function Globe({ className, ...rest }: { className?: string } & React.SVGProps<SVGSVGElement>) {
-  // Keep the import surface tiny — inline a hairline globe rather than pulling
+  // Keep the import surface tiny - inline a hairline globe rather than pulling
   // another lucide icon for one button. aria-hidden handled by caller.
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...rest}>
@@ -414,7 +414,7 @@ export function StayDetailSheet({ stay }: { stay: Stay }) {
                     <Mountain className="h-3.5 w-3.5 text-foreground/60" aria-hidden />
                     {titleCaseSlug(k)}
                   </span>
-                  <span className="font-semibold tabular-nums">{v == null ? "—" : `${v} min`}</span>
+                  <span className="font-semibold tabular-nums">{v == null ? "-" : `${v} min`}</span>
                 </li>
               ))}
             </ul>
@@ -495,7 +495,7 @@ export function StayDetailSheet({ stay }: { stay: Stay }) {
             Book this stay
           </h3>
           <div className="space-y-2">
-            <p className="text-[11px] text-muted-foreground">From $— · prices coming soon</p>
+            <p className="text-[11px] text-muted-foreground">From $- · prices coming soon</p>
             <BookingButtons stay={stay} variant="detail" />
           </div>
         </section>
@@ -509,8 +509,8 @@ export interface StayCardProps {
   className?: string;
   /**
    * Controlled detail-sheet open state. When omitted, the card runs in
-   * uncontrolled mode (Radix manages open/close internally — the original
-   * behavior). When provided, the parent owns the state — this is how
+   * uncontrolled mode (Radix manages open/close internally - the original
+   * behavior). When provided, the parent owns the state - this is how
    * `TownStay` URL-syncs the open sheet via `?stay={stayId}`.
    */
   open?: boolean;

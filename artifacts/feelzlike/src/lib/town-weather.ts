@@ -78,7 +78,7 @@ export function useTownWeather(lat: number | undefined, lng: number | undefined)
 }
 
 export function uvBand(uv: number | null): { label: string; tone: "ok" | "caution" | "warn" } {
-  if (uv == null) return { label: "—", tone: "ok" };
+  if (uv == null) return { label: "-", tone: "ok" };
   if (uv < 3) return { label: "Low", tone: "ok" };
   if (uv < 6) return { label: "Moderate", tone: "ok" };
   if (uv < 8) return { label: "High", tone: "caution" };
@@ -87,7 +87,7 @@ export function uvBand(uv: number | null): { label: string; tone: "ok" | "cautio
 }
 
 export function windBand(kph: number | null): { label: string; tone: "ok" | "caution" | "warn" } {
-  if (kph == null) return { label: "—", tone: "ok" };
+  if (kph == null) return { label: "-", tone: "ok" };
   if (kph < 20) return { label: "Light", tone: "ok" };
   if (kph < 40) return { label: "Moderate", tone: "ok" };
   if (kph < 60) return { label: "Strong", tone: "caution" };
@@ -95,7 +95,7 @@ export function windBand(kph: number | null): { label: string; tone: "ok" | "cau
 }
 
 export function visibilityKm(metres: number | null): string {
-  if (metres == null) return "—";
+  if (metres == null) return "-";
   if (metres >= 10000) return "10+ km";
   return `${(metres / 1000).toFixed(1)} km`;
 }

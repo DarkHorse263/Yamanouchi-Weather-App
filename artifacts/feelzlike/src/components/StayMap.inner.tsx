@@ -25,8 +25,8 @@ type StayType = Stay["type"];
 import { cn } from "@/lib/utils";
 
 // Tile sources. OSM is the default (no key). Cartocdn voyager is what the rest
-// of the app uses elsewhere — same look. Mapbox kicks in if a token is set in
-// VITE_MAPBOX_TOKEN; we never crash if the token is missing — we silently fall
+// of the app uses elsewhere - same look. Mapbox kicks in if a token is set in
+// VITE_MAPBOX_TOKEN; we never crash if the token is missing - we silently fall
 // back to the OSM voyager tiles.
 const FALLBACK_TILE_URL =
   "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png";
@@ -60,7 +60,7 @@ const BUCKET_COLOR: Record<DriveBucket, { fill: string; ring: string; label: str
 
 // Pick a per-stay drive minute to colour-code by. The "topMountainDriveKey"
 // param is the snake_case curated key (e.g. `thredbo`, `shiga_kogen`) of
-// today's #1 mountain — passed in from the page that owns Today's Call. If the
+// today's #1 mountain - passed in from the page that owns Today's Call. If the
 // stay has a value for that key in `drive_min_to_each_mountain`, use it;
 // otherwise we fall back to `drive_min_to_nearest_mountain`. If neither exists
 // the marker is gray.
@@ -101,7 +101,7 @@ const TYPE_PATHS: Record<StayType, string> = {
   resort:     "M3 21h18M5 21V8h14v13M9 12h2M9 16h2M13 12h2M13 16h2",
 };
 
-// Build a Leaflet divIcon for a single stay marker — coloured pin with the
+// Build a Leaflet divIcon for a single stay marker - coloured pin with the
 // type icon punched in white. Using divIcon (HTML) instead of L.icon (raster
 // PNG) means we don't need any image files; the colour ring + svg redraws
 // crisp at any zoom.
@@ -169,7 +169,7 @@ function MapBootstrap({ bounds }: { bounds: L.LatLngBoundsExpression | null }) {
   return null;
 }
 
-// PriceBand — tiny inline copy so we don't need to extend StayCard's exports.
+// PriceBand - tiny inline copy so we don't need to extend StayCard's exports.
 // `band` is the curated `"$" | "$$" | "$$$" | "$$$$"` string; we convert via
 // .length so the dot rendering uses a numeric count.
 function PriceBand({ band }: { band: "$" | "$$" | "$$$" | "$$$$" | null }) {
@@ -227,7 +227,7 @@ function primaryBookingHref(stay: Stay): { href: string; label: string } | null 
 // Compute distance using the haversine formula (km). Used by the "Locate me"
 // flow to recolour markers from the user's actual position. We translate km
 // to "drive minutes" with a coarse 0.8 km/min heuristic (≈48 km/h average for
-// alpine/town roads) — good enough for relative bucketing, with a clearly
+// alpine/town roads) - good enough for relative bucketing, with a clearly
 // different visual styling so users know it's an estimate.
 function haversineKm(a: { lat: number; lng: number }, b: { lat: number; lng: number }): number {
   const R = 6371;
@@ -256,7 +256,7 @@ export interface StayMapInnerProps {
   /**
    * Centre to use when no stay has lat/lng. Pass the town's centroid here
    * (from `RegionConfig.towns[].lat/lng`); the component does NOT fall back
-   * to anything sensible otherwise — without it, an empty geo-stays set
+   * to anything sensible otherwise - without it, an empty geo-stays set
    * renders at `[0,0]` (mid-Atlantic ocean).
    */
   fallbackCenter?: { lat: number; lng: number } | null;
@@ -348,7 +348,7 @@ export default function StayMapInner({
     });
   }, [geoStays, userPos, topMountainDriveKey]);
 
-  // Sheet state for "View details" — only one open at a time. Driven by stayId
+  // Sheet state for "View details" - only one open at a time. Driven by stayId
   // so the Sheet content is always for the most recently clicked marker.
   const [openStayId, setOpenStayId] = useState<string | null>(null);
   const openStay = useMemo(
@@ -356,7 +356,7 @@ export default function StayMapInner({
     [geoStays, openStayId],
   );
 
-  // The tile config — Mapbox if token is present, OSM/Carto otherwise. We
+  // The tile config - Mapbox if token is present, OSM/Carto otherwise. We
   // always emit OSM attribution because Mapbox styles still mostly use OSM
   // data underneath.
   const tileUrl = MAPBOX_TILE_URL ?? FALLBACK_TILE_URL;
@@ -370,7 +370,7 @@ export default function StayMapInner({
         "relative w-full",
         // Mobile: full-bleed, viewport-minus-header height. Desktop: 80vh.
         "h-[calc(100vh-4rem)] md:h-[80vh]",
-        // Round corners on desktop only — full-bleed on mobile is intentional.
+        // Round corners on desktop only - full-bleed on mobile is intentional.
         "md:rounded-2xl md:overflow-hidden md:border md:border-border",
         className,
       )}
@@ -412,7 +412,7 @@ export default function StayMapInner({
             <Marker key={markerKey} position={[stay.lat, stay.lng]} icon={icon}>
               <Popup minWidth={220} maxWidth={260}>
                 <div className="font-sans">
-                  {/* Photo strip — only the first photo, since the popup is
+                  {/* Photo strip - only the first photo, since the popup is
                       tight. Fall back to a coloured placeholder. */}
                   <div className="h-24 w-full overflow-hidden rounded-md bg-slate-100 mb-2">
                     {stay.photos[0] ? (
@@ -543,7 +543,7 @@ export default function StayMapInner({
         </div>
       ) : null}
 
-      {/* Sheet for "View details" — controlled by openStayId so a single
+      {/* Sheet for "View details" - controlled by openStayId so a single
           marker click drives the same StayCard detail surface. */}
       <Sheet
         open={openStay !== null}
@@ -551,7 +551,7 @@ export default function StayMapInner({
           if (!o) setOpenStayId(null);
         }}
       >
-        {/* Required by Radix even when controlled — render an offscreen
+        {/* Required by Radix even when controlled - render an offscreen
             trigger so the Sheet has a focus return target. */}
         <SheetTrigger asChild>
           <button type="button" className="sr-only" aria-hidden tabIndex={-1}>

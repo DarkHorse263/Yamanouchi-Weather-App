@@ -12,7 +12,7 @@ const environment = process.env["NODE_ENV"] ?? "development";
 // Validate that the DSN looks like a Sentry URL before handing it to the SDK.
 // A bad value (e.g. someone pasted code into the secret) would otherwise be
 // silently rejected by Sentry's internal validator while still triggering our
-// "initialised" log — leaving us with no error reporting and no warning.
+// "initialised" log - leaving us with no error reporting and no warning.
 function isValidSentryDsn(value: string | undefined): value is string {
   if (!value) return false;
   try {
@@ -49,5 +49,5 @@ if (isValidSentryDsn(rawDsn)) {
   );
 } else {
   // eslint-disable-next-line no-console
-  console.log("[sentry] disabled — SENTRY_DSN_API not set");
+  console.log("[sentry] disabled - SENTRY_DSN_API not set");
 }

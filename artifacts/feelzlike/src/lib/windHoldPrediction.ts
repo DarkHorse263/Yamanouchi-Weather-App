@@ -6,7 +6,7 @@
  * estimate effective wind at each lift's top station, then bucketed
  * against that lift's published operating threshold.
  *
- * This is a heuristic — actual lift operation depends on resort
+ * This is a heuristic - actual lift operation depends on resort
  * decisions (mech inspections, ice loading, etc.) that we cannot
  * forecast. The UI surfaces this clearly via the disclaimer.
  *
@@ -32,7 +32,7 @@ export interface HourlyWindSample {
 export interface WindHoldPrediction {
   liftId: string;
   status: WindHoldStatus;
-  /** 0-1 — how confident the model is in the bucket */
+  /** 0-1 - how confident the model is in the bucket */
   confidence: number;
   /** Human-readable explanation surfaced in the UI tooltip. */
   reason: string;
@@ -53,7 +53,7 @@ export interface WindHoldPrediction {
 }
 
 /**
- * Exposure multipliers — applied to the published threshold to get
+ * Exposure multipliers - applied to the published threshold to get
  * the *effective* threshold the lift's terrain actually allows.
  * sheltered terrain raises the threshold (more wind tolerated);
  * highly_exposed lowers it.
@@ -104,7 +104,7 @@ export function predictLiftStatus(
     };
   }
 
-  // Walk the forecast — track worst-case hour + count hours over threshold
+  // Walk the forecast - track worst-case hour + count hours over threshold
   let worstScore = -Infinity;
   let worstHour: WindHoldPrediction["worstHour"] = null;
   let hoursAtRisk = 0;
@@ -134,7 +134,7 @@ export function predictLiftStatus(
   else if (ratio <= 1.1) status = "possible_hold";
   else status = "likely_held";
 
-  // Confidence — how far from the bucket boundary we are
+  // Confidence - how far from the bucket boundary we are
   let confidence: number;
   if (status === "likely_open") {
     // The further below 0.7, the more confident
@@ -142,7 +142,7 @@ export function predictLiftStatus(
   } else if (status === "likely_held") {
     confidence = Math.min(1, 0.6 + (ratio - 1.1) * 1.0);
   } else {
-    // Possible hold — inherently uncertain
+    // Possible hold - inherently uncertain
     const distFromMid = Math.abs(ratio - 0.9);
     confidence = Math.max(0.35, 0.55 - distFromMid * 0.4);
   }
@@ -185,23 +185,23 @@ function buildReason(args: {
   const peakStr = `${worstHour.effectiveGustKmh}km/h gusts at top, threshold ${effectiveThreshold}km/h`;
 
   if (status === "likely_open") {
-    return `Likely open — peak ${peakStr}`;
+    return `Likely open - peak ${peakStr}`;
   }
   if (status === "likely_held") {
     if (hoursAtRisk >= totalHours * 0.6) {
-      return `Likely held most of the day — ${peakStr}`;
+      return `Likely held most of the day - ${peakStr}`;
     }
-    return `Likely held — ${peakStr}, ${hoursAtRisk}h above threshold`;
+    return `Likely held - ${peakStr}, ${hoursAtRisk}h above threshold`;
   }
   // possible_hold
   if (hoursAtRisk === 0) {
-    return `Borderline — peak ${peakStr}`;
+    return `Borderline - peak ${peakStr}`;
   }
-  return `Possible hold ${hoursAtRisk}h — ${peakStr}`;
+  return `Possible hold ${hoursAtRisk}h - ${peakStr}`;
 }
 
 /**
- * Predict for many lifts at once — common case for the mountain page.
+ * Predict for many lifts at once - common case for the mountain page.
  */
 export function predictMountainLifts(
   lifts: LiftSeed[],
@@ -220,7 +220,7 @@ export interface MountainWindHoldOutlook {
   likelyOpen: number;
   possibleHold: number;
   likelyHeld: number;
-  /** 0-1 — share of capacity expected open */
+  /** 0-1 - share of capacity expected open */
   openFraction: number;
   /** Worst-affected lift's prediction (for the headline copy) */
   worstLift: WindHoldPrediction | null;

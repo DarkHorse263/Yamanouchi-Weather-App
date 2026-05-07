@@ -46,7 +46,7 @@ interface ResortProfile {
 /**
  * Curated overrides for resort-specific deep-links (lift status pages, webcam
  * indexes). The website URL is sourced from `region.mountains[].websiteUrl`
- * by default — only override here if the resort uses a different page.
+ * by default - only override here if the resort uses a different page.
  *
  * After the Option B 22-mountain refactor, all 18 Shiga Kogen sub-areas share
  * the same authority lift-status + webcam pages, so we derive those defaults
@@ -85,7 +85,7 @@ export default function ResortDetail() {
   const { region } = useRegion();
 
   // Source of truth for "is this a real mountain in this region" is the
-  // region config — so any mountain added to yamanouchi.ts works automatically.
+  // region config - so any mountain added to yamanouchi.ts works automatically.
   const mountain = (region.mountains ?? []).find((m) => m.id === id);
   const enabled = !!mountain;
   const { data, isLoading, error } = useGetLocationWeather(id as WeatherId, {
@@ -150,7 +150,7 @@ export default function ResortDetail() {
     { label: t("Humidity", "湿度"), value: `${current.humidity}%`, icon: Droplets },
     {
       label: t("Snow depth", "積雪"),
-      value: current.snowDepth != null ? `${current.snowDepth} cm` : "—",
+      value: current.snowDepth != null ? `${current.snowDepth} cm` : "-",
       icon: Snowflake,
     },
     ...(current.dewpoint !== undefined
@@ -261,7 +261,7 @@ export default function ResortDetail() {
           links={safetyLinks}
           subhead={t("Always check official sources before heading out.", "出発前に必ず公式情報をご確認ください。")}
           disclaimer={t(
-            "Conditions update every 10 minutes. Mountain weather changes fast — when in doubt, contact the resort directly.",
+            "Conditions update every 10 minutes. Mountain weather changes fast - when in doubt, contact the resort directly.",
             "状況は10分ごとに更新されます。山の天気は急変します。判断に迷う場合はスキー場へ直接お問い合わせください。",
           )}
         />
@@ -279,7 +279,7 @@ function OfficialLinks({
   resortName: string;
   t: (en: string, ja: string) => string;
 }) {
-  // Only render link tiles for URLs we actually have — never fake them.
+  // Only render link tiles for URLs we actually have - never fake them.
   const links = [
     profile.websiteUrl && {
       label: t("Official website", "公式サイト"),

@@ -2,7 +2,7 @@
  * Source-of-truth mapping from subscription tier → entitlements (capabilities).
  *
  * Entitlements are checked by route handlers and middleware. They are NOT
- * checked by the client — premium features must be guarded server-side because
+ * checked by the client - premium features must be guarded server-side because
  * a paywall enforced only in the UI is not a paywall.
  *
  * Add a new premium feature in three steps:

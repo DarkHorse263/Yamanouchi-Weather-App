@@ -1,9 +1,9 @@
 /**
- * Branded HTML email templates. Inline styles only — most clients (Gmail,
+ * Branded HTML email templates. Inline styles only - most clients (Gmail,
  * Outlook desktop, Apple Mail) strip <style> blocks aggressively.
  *
  * Brand: navy (#0a1628) header, Lato/system body, sky-blue (#3b82f6) CTA.
- * Always include the unsubscribe footer on every alert email — both because
+ * Always include the unsubscribe footer on every alert email - both because
  * the playbook insists and because it's the law in AU (Spam Act 2003) + JP
  * (Act on Specified Commercial Transactions).
  */
@@ -63,7 +63,7 @@ export function verificationEmail(verifyUrl: string): { subject: string; html: s
       heading: "Confirm your subscription",
       bodyHtml: `<p>Thanks for signing up to powder alerts.</p>
         <p>Click the button below to confirm your email and activate your alerts. We won't send you anything until you do.</p>
-        <p style="font-size:13px;color:#64748b;">If you didn't sign up, just ignore this email — nothing happens until you click.</p>`,
+        <p style="font-size:13px;color:#64748b;">If you didn't sign up, just ignore this email - nothing happens until you click.</p>`,
       ctaLabel: "Confirm subscription",
       ctaUrl: verifyUrl,
       footerHtml: `If the button doesn't work, paste this URL into your browser:<br><span style="word-break:break-all;color:#3b82f6;">${verifyUrl}</span>`,
@@ -93,7 +93,7 @@ export function powderAlertEmail(opts: {
     ? `<h3 style="font-family:Georgia,serif;font-size:16px;color:${BRAND_NAVY};margin:24px 0 8px 0;">Also worth a look</h3>
        <ul style="margin:0;padding:0 0 0 20px;font-size:14px;color:#334155;line-height:1.8;">
          ${otherMountains.map((m) =>
-            `<li><strong>${m.name}</strong> — ${m.snowfallCm}cm${m.windKph != null ? `, wind ${m.windKph} km/h` : ""}${m.driveMins != null ? `, ${m.driveMins} min drive` : ""}</li>`
+            `<li><strong>${m.name}</strong> - ${m.snowfallCm}cm${m.windKph != null ? `, wind ${m.windKph} km/h` : ""}${m.driveMins != null ? `, ${m.driveMins} min drive` : ""}</li>`
           ).join("")}
        </ul>`
     : "";

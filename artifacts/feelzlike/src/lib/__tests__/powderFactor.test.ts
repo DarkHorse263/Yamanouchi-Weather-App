@@ -77,7 +77,7 @@ describe("computePowderFactor", () => {
     const f = computePowderFactor(hours, NOW);
     assert.ok(f.rainedAfterSnow, "should detect rain after snow");
     assert.ok(f.score <= 30, `rain-destroyed snow should be <=30, got ${f.score}`);
-    assert.equal(f.reason, "Rain after snow — icy crust");
+    assert.equal(f.reason, "Rain after snow - icy crust");
   });
 
   it("penalises thaw-after-snow short of full destruction", () => {
@@ -96,10 +96,10 @@ describe("computePowderFactor", () => {
     assert.ok(!f.rainedAfterSnow);
     // Thaw multiplier (×0.5) is less harsh than rain (×0.3)
     assert.ok(f.score < 50 && f.score > 0);
-    assert.equal(f.reason, "Thawed after snow — refrozen");
+    assert.equal(f.reason, "Thawed after snow - refrozen");
   });
 
-  it("decays freshness — old snow with no destruction degrades to decent or worse", () => {
+  it("decays freshness - old snow with no destruction degrades to decent or worse", () => {
     const hours: HourlyForecast[] = [];
     // Snow 47–40h ago, then nothing
     for (let i = -47; i <= -40; i++) {
@@ -119,7 +119,7 @@ describe("computePowderFactor", () => {
     );
   });
 
-  it("ignores future hours — only scores what already happened", () => {
+  it("ignores future hours - only scores what already happened", () => {
     const hours: HourlyForecast[] = [];
     // Future massive dump (should NOT count)
     for (let i = 1; i <= 24; i++) {
@@ -134,7 +134,7 @@ describe("computePowderFactor", () => {
 
   it("ignores hours older than the window (default 48h)", () => {
     const hours: HourlyForecast[] = [];
-    // 3 days old — outside window
+    // 3 days old - outside window
     for (let i = -72; i <= -50; i++) {
       hours.push(
         hour(i, { snowfall: 5, temperature: -7, humidity: 30, weatherCode: 75 }),
@@ -194,7 +194,7 @@ describe("computePowderFactor", () => {
       hours.push(
         hour(i, {
           snowfall: 1.5,
-          // Mix of valid and missing values — should compute averages from valid only.
+          // Mix of valid and missing values - should compute averages from valid only.
           temperature: i % 2 === 0 ? -6 : (NaN as number),
           humidity: i % 3 === 0 ? (undefined as unknown as number) : 40,
           windSpeed: i % 4 === 0 ? (NaN as number) : 8,
@@ -217,7 +217,7 @@ describe("computePowderFactor", () => {
         hour(i, { snowfall: 2, temperature: -6, humidity: 40, weatherCode: 73 }),
       );
     }
-    // Single isolated warm hour at +3°C — brief midday spike, not destructive.
+    // Single isolated warm hour at +3°C - brief midday spike, not destructive.
     hours.push(hour(-12, { temperature: 3, weatherCode: 0 }));
     // Surrounding hours stay cold.
     hours.push(hour(-11, { temperature: -1, weatherCode: 0 }));
@@ -248,7 +248,7 @@ describe("computePowderFactor", () => {
         hour(i, { snowfall: 2, temperature: -6, humidity: 40, weatherCode: 73 }),
       );
     }
-    // One strong warm hour — even brief +5°C will damage the surface.
+    // One strong warm hour - even brief +5°C will damage the surface.
     hours.push(hour(-12, { temperature: 5, weatherCode: 0 }));
     const f = computePowderFactor(hours, NOW);
     assert.ok(f.thawedAfterSnow, "+5°C single hour should still mark thaw");

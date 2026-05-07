@@ -12,7 +12,7 @@ import { TownWeather } from "@/pages/town/TownWeather";
 import { TownCams } from "@/pages/town/TownCams";
 import { snowyMountainsRouter } from "@/regions/snowy-mountains/router";
 import { yamanouchiRouter } from "@/regions/yamanouchi/router";
-// Iiyama temporarily removed — see artifacts/feelzlike/src/regions/index.ts
+// Iiyama temporarily removed - see artifacts/feelzlike/src/regions/index.ts
 import type { RegionRouter } from "@/layouts/RegionLayout";
 
 const REGION_ROUTERS: Record<string, RegionRouter> = {

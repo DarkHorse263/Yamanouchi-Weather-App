@@ -9,7 +9,7 @@ interface DemoSpec {
 }
 
 // The 4 demo stays explicitly named in the playbook (Prompt 2.2).
-// Note: Hotel Issa-tei is curated as `type: "ryokan"` (not "hotel") — we keep
+// Note: Hotel Issa-tei is curated as `type: "ryokan"` (not "hotel") - we keep
 // the playbook's wording in the caption since the chosen record is correct;
 // the type-badge will read RYOKAN, which is the truthful classification.
 const SPECS: readonly DemoSpec[] = [
@@ -40,7 +40,7 @@ export default function StayCardDemo() {
         <p className="text-[11px] font-bold tracking-wider uppercase text-muted-foreground">
           Component preview · Sprint 2 · Prompt 2.2
         </p>
-        <h1 className="font-display text-2xl mt-1">StayCard — region-aware listing</h1>
+        <h1 className="font-display text-2xl mt-1">StayCard - region-aware listing</h1>
         <p className="text-sm text-muted-foreground mt-2 max-w-2xl">
           Four cards: a Yamanouchi ryokan, a Yamanouchi hotel-style ryokan, a Jindabyne alpine
           resort, and a Berridale ski lodge. Same component renders both AU and JP records via

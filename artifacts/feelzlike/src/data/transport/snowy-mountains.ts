@@ -3,7 +3,7 @@ import type { TransportProviderList } from "@/types/transport";
 /**
  * Snowy Mountains (NSW, Australia) transport providers.
  *
- * Phone numbers and websites left as `null` when not directly verifiable —
+ * Phone numbers and websites left as `null` when not directly verifiable -
  * we never guess. The Cooma Coaches phone matches the long-standing entry
  * already returned by /api/bus-services.
  */
@@ -16,7 +16,7 @@ export const SNOWY_MOUNTAINS_TRANSPORT: TransportProviderList = [
     phone: "(02) 6452 1584",
     website: "https://www.coomacoaches.com.au",
     route_summary:
-      "Cooma's local operator — runs the Snowy Mountains Bus Service plus charters, school runs and ski-season shuttles to Perisher and Thredbo.",
+      "Cooma's local operator - runs the Snowy Mountains Bus Service plus charters, school runs and ski-season shuttles to Perisher and Thredbo.",
     schedule_url: "https://coomacoaches.com.au/snowy-mountains-bus-service/",
     regions: ["snowy-mountains"],
   },
@@ -52,7 +52,7 @@ export const SNOWY_MOUNTAINS_TRANSPORT: TransportProviderList = [
     phone: null,
     website: null,
     route_summary:
-      "Local taxi service around Jindabyne — useful for last-mile transfers to Perisher Skitube, Thredbo, accommodation and dinner runs.",
+      "Local taxi service around Jindabyne - useful for last-mile transfers to Perisher Skitube, Thredbo, accommodation and dinner runs.",
     regions: ["snowy-mountains"],
   },
 ];

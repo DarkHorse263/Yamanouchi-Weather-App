@@ -7,7 +7,7 @@ import type { RegionRouter } from "@/layouts/RegionLayout";
 
 // The RegionRouter contract is a zero-arg component (the layout calls it
 // without props). Some of these pages accept optional props for embedded
-// use elsewhere — wrap them so the type check stays strict.
+// use elsewhere - wrap them so the type check stays strict.
 function Stay() {
   return <StayPage />;
 }

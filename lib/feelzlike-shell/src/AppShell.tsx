@@ -56,7 +56,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   const [location] = useLocation();
   const { towns, town: activeTown } = useBaseTown();
 
-  // MUST be called unconditionally — a previous `region.seasons ? useSeason() : null`
+  // MUST be called unconditionally - a previous `region.seasons ? useSeason() : null`
   // pattern violated the Rules of Hooks and silently broke the season toggle.
   const maybeSeason = useOptionalSeason();
   const seasonCtx = region.seasons ? maybeSeason : null;

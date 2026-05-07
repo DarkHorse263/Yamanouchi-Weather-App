@@ -87,7 +87,7 @@ interface RegionsResponse {
 // ─── helpers ───────────────────────────────────────
 
 // Iiyama is temporarily hidden while we focus on shipping Snowy Mountains
-// and Yamanouchi to v1.0 — keep the line ready to re-paste below the
+// and Yamanouchi to v1.0 - keep the line ready to re-paste below the
 // yamanouchi entry when re-enabling.
 const FALLBACK_REGIONS: Region[] = [
   { id: "snowy-mountains", name: "Snowy Mountains", country: "Australia", countryCode: "AU", region: "New South Wales", status: "live", href: "/snowy-mountains/", baseTowns: ["Jindabyne", "Berridale", "Cooma"], mountains: ["Thredbo", "Perisher", "Charlotte Pass", "Selwyn"], headlineLabel: "Thredbo Top", headline: null },
@@ -213,13 +213,13 @@ export default function Landing() {
       style={{ fontFamily: "'DIN Pro', system-ui, sans-serif" }}
     >
       <PageMeta
-        title="feelzlike — mountain weather you can trust"
+        title="feelzlike - mountain weather you can trust"
         description="Real-time alpine weather, lift status, road conditions and live cams across the Snowy Mountains and Yamanouchi. Curated stays and eats from people who actually live there."
         path="/"
         jsonLd={[websiteSchema(), organizationSchema()]}
       />
       {/* ─── HERO ─────────────────────────────────────── */}
-      {/* Clean white hero — the colour logo is shown as-is (no invert filter)
+      {/* Clean white hero - the colour logo is shown as-is (no invert filter)
           and all hero text reverts to dark slate. */}
       <header className="relative z-10">
         <div className="relative max-w-3xl mx-auto px-5 pt-10 pb-12 md:pt-14 md:pb-16 text-center">
@@ -331,7 +331,7 @@ export default function Landing() {
       {/* ─── REGIONS ──────────────────────────────────── */}
       <main className="relative z-10 max-w-5xl mx-auto px-5 pt-10 md:pt-14 pb-12 md:pb-16">
         {/* Apr 2026 reset: removed the "01 · Regions · N mountains tracked"
-            header — with only two live regions the chrome dwarfed the
+            header - with only two live regions the chrome dwarfed the
             content. Cards now centre on the page in a 2-up grid. */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 max-w-3xl mx-auto">
           {filtered.map((region, i) => {
@@ -339,10 +339,10 @@ export default function Landing() {
             const isLive = region.status === "live";
             const isGreen = seasonForRegion(region) === "green";
 
-            // "Soon" regions get a stripped-down placeholder card — red border,
+            // "Soon" regions get a stripped-down placeholder card - red border,
             // single centered "MORE REGIONS COMING SOON" line. No status pill,
             // no name, no town/mountain meta, no link. (Currently no soon
-            // regions are listed — Iiyama is paused, see FALLBACK_REGIONS.)
+            // regions are listed - Iiyama is paused, see FALLBACK_REGIONS.)
             if (!isLive) {
               return (
                 <motion.div
@@ -367,7 +367,7 @@ export default function Landing() {
             // Palette swap: when a region is in its green (off-snow) season,
             // border + accent + type all flip from logo-blue to emerald so the
             // viewer sees at a glance "this region isn't in snow ops right now".
-            // Tailwind needs literal class strings for purging — keep both
+            // Tailwind needs literal class strings for purging - keep both
             // branches as full literals.
             const cardBorder = isGreen
               ? "border-emerald-200 hover:border-emerald-500 hover:shadow-[0_4px_8px_rgba(15,23,42,0.06),0_12px_28px_-12px_rgba(16,160,90,0.28)]"
@@ -402,7 +402,7 @@ export default function Landing() {
                 transition={{ duration: 0.35, delay: 0.05 + i * 0.06 }}
                 className={`group relative flex flex-col overflow-hidden rounded-xl border bg-white hover:-translate-y-0.5 shadow-[0_1px_3px_rgba(15,23,42,0.04)] transition-all duration-200 ${cardBorder}`}
               >
-                {/* favourite-region star — pinning a region makes us
+                {/* favourite-region star - pinning a region makes us
                     auto-redirect to it on the next fresh tab visit. */}
                 <button
                   type="button"

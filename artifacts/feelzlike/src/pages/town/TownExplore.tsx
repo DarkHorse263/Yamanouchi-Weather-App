@@ -6,7 +6,7 @@ import { useRegion, useLanguage, useBaseTown, LiveBadge } from "@workspace/feelz
 import { EmptyStateCard } from "@/components/EmptyStateCard";
 
 /**
- * TownExplore — region-tourism links list.
+ * TownExplore - region-tourism links list.
  *
  * Per the Apr 2026 product reset: "Explore have links to the local Tourism
  * Websites." The previous TownPlaces variant called Google Places to surface

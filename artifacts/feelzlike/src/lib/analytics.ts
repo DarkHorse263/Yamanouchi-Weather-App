@@ -2,7 +2,7 @@
  * Lightweight analytics layer over Sentry breadcrumbs.
  *
  * We deliberately don't ship a third-party analytics SDK (Plausible, GA,
- * PostHog) — that would mean another consent decision, another vendor, and
+ * PostHog) - that would mean another consent decision, another vendor, and
  * another network call on every page. Sentry is already loaded for crash
  * reporting; piggy-backing breadcrumbs on it gives us:
  *
@@ -12,7 +12,7 @@
  *   - zero additional bundle weight
  *
  * If/when we later want richer funnels we can pipe `track()` to a real
- * analytics backend — the call sites won't need to change.
+ * analytics backend - the call sites won't need to change.
  *
  * Consent: this layer respects the `analytics` choice from `lib/consent`.
  * When the user hasn't opted in, breadcrumbs are still added (Sentry
@@ -48,18 +48,18 @@ export function getProfileToken(): string {
 
 /**
  * Attach the anon profile token to the Sentry scope so every error report
- * is grouped per device. Idempotent — call from App on mount, plus after
+ * is grouped per device. Idempotent - call from App on mount, plus after
  * the user grants analytics consent.
  *
  * Consent gating: when `analyticsConsent` is false we explicitly clear the
  * Sentry user (so any previously-set token is removed within the session)
- * and skip writing a stable identifier. Crash reports still flow — they
+ * and skip writing a stable identifier. Crash reports still flow - they
  * just won't be grouped per device.
  */
 export function identifyAnonUser(opts: { analyticsConsent: boolean } = { analyticsConsent: false }): void {
   Sentry.setTag("analytics_consent", String(opts.analyticsConsent));
   if (!opts.analyticsConsent) {
-    // Explicitly null out — covers the case where consent was previously
+    // Explicitly null out - covers the case where consent was previously
     // granted then revoked within the same page lifetime.
     Sentry.setUser(null);
     return;
@@ -80,7 +80,7 @@ export type AnalyticsCategory =
 export interface TrackOptions {
   /** Bucket the event for filtering inside Sentry's breadcrumb panel. */
   category?: AnalyticsCategory;
-  /** Arbitrary structured payload — keep keys snake_case, values primitive. */
+  /** Arbitrary structured payload - keep keys snake_case, values primitive. */
   data?: Record<string, string | number | boolean | null | undefined>;
   /** "info" by default; bump to "warning" for soft errors worth surfacing. */
   level?: "info" | "warning" | "error";

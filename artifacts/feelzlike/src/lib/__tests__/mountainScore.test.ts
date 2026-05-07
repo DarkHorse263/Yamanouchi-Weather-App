@@ -1,5 +1,5 @@
 /**
- * Sprint 4.1 — personalised scoring tests.
+ * Sprint 4.1 - personalised scoring tests.
  *
  * Run via: pnpm --filter @workspace/feelzlike run test:score
  *
@@ -142,7 +142,7 @@ test("Expert + both flags → expert_match wins, expert_too_easy suppressed", ()
 });
 
 // ---------------------------------------------------------------------------
-// Priority rules — powder
+// Priority rules - powder
 // ---------------------------------------------------------------------------
 
 test("Powder priority on a snowing day → snow sub-score boost", () => {
@@ -172,7 +172,7 @@ test("Powder priority is a no-op in green season", () => {
 });
 
 // ---------------------------------------------------------------------------
-// Priority rules — park / backcountry / family
+// Priority rules - park / backcountry / family
 // ---------------------------------------------------------------------------
 
 test("Park priority + terrain_park → +10 boost", () => {
@@ -388,7 +388,7 @@ test("buildWhyCopy: returns Japanese reasons when lang='ja'", () => {
 // same set of mountains
 // ---------------------------------------------------------------------------
 
-test("E2E: powder hunter vs family ranker — same mountains, different #1", () => {
+test("E2E: powder hunter vs family ranker - same mountains, different #1", () => {
   // Mountain A: deep snow but expert-only no kids
   const expertResort: MountainTags = { expert_only: true, backcountry_access: true };
   // Mountain B: less snow but full family setup

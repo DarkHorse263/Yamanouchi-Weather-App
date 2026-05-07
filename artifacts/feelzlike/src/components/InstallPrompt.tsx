@@ -19,7 +19,7 @@ import { isStandaloneMode, isIOSSafari } from "@/lib/registerSW";
  *
  * Dismissal:
  *  - Stored as `feelzlike:installPromptDismissedAt` ISO string.
- *  - 30-day TTL — re-eligible after that.
+ *  - 30-day TTL - re-eligible after that.
  */
 
 const VISIT_KEY = "feelzlike:visits";

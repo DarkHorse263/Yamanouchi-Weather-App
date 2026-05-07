@@ -20,7 +20,7 @@ import type { MountainLink } from "@workspace/feelzlike-shell";
  *   row (e.g. the 18 Shiga Kogen sub-resorts collapse to one card you can
  *   open). Stand-alone mountains (no parentId) render flat as before.
  * - Palette tightened to white + blue family (sky/blue) per the brand
- *   pass — old purple/teal aurora and gradient name treatment are gone.
+ *   pass - old purple/teal aurora and gradient name treatment are gone.
  */
 
 interface ParentGroupMeta {
@@ -52,7 +52,7 @@ export function MountainsList() {
 
   return (
     <div className="relative">
-      {/* Soft blue backdrop — palette pass replaces the purple/teal aurora. */}
+      {/* Soft blue backdrop - palette pass replaces the purple/teal aurora. */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[420px] overflow-hidden">
         <div
           className="absolute -top-40 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] rounded-full opacity-60"
@@ -232,7 +232,7 @@ function ParentGroupCard({
           <div>
             <p className="byline text-muted-foreground/70">{t("Highest summit", "最高標高")}</p>
             <p className="display-number text-3xl text-blue-900 tnum mt-0.5">
-              {maxElev > 0 ? maxElev.toLocaleString() : "—"}
+              {maxElev > 0 ? maxElev.toLocaleString() : "-"}
               <span className="text-base text-muted-foreground/70 font-normal ml-1">m</span>
             </p>
           </div>

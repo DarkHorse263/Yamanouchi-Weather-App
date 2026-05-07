@@ -7,7 +7,7 @@ import { useConsent } from "@/lib/consent";
  *
  * Design notes:
  *  - Bottom-anchored, full-width, doesn't trap focus or block page reading.
- *  - Honours the "ads" + "analytics" categories independently — required to
+ *  - Honours the "ads" + "analytics" categories independently - required to
  *    pass IAB TCF / Google Funding Choices certification later.
  *  - All copy is plain English; replace with localised copy when i18n lands.
  */

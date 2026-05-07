@@ -54,8 +54,8 @@ export function TownWeather() {
             </h1>
             <p className="text-muted-foreground mt-3 max-w-xl">
               {t(
-                "Comprehensive in-town forecast — current, hourly and 7-day outlook.",
-                "町の総合天気予報 — 現在・時間別・7日間予報。",
+                "Comprehensive in-town forecast - current, hourly and 7-day outlook.",
+                "町の総合天気予報 - 現在・時間別・7日間予報。",
               )}
             </p>
           </div>
@@ -101,7 +101,7 @@ function Hero({
           <Icon className="w-16 h-16 text-primary" strokeWidth={1.4} />
           <div>
             <p className="font-display font-semibold text-6xl md:text-7xl tracking-tight text-foreground leading-none">
-              {current.temperature !== null ? Math.round(current.temperature) : "—"}
+              {current.temperature !== null ? Math.round(current.temperature) : "-"}
               <span className="text-3xl text-muted-foreground/70 align-top ml-1">°C</span>
             </p>
             <p className="text-muted-foreground mt-2">
@@ -140,7 +140,7 @@ function Conditions({
       <Stat
         icon={Wind}
         label={t("Wind", "風")}
-        value={current.windSpeed !== null ? `${Math.round(current.windSpeed)}` : "—"}
+        value={current.windSpeed !== null ? `${Math.round(current.windSpeed)}` : "-"}
         unit="km/h"
         hint={
           current.windDirectionCompass
@@ -152,35 +152,35 @@ function Conditions({
       <Stat
         icon={CompassIcon}
         label={t("Gusts", "突風")}
-        value={current.windGust !== null ? `${Math.round(current.windGust)}` : "—"}
+        value={current.windGust !== null ? `${Math.round(current.windGust)}` : "-"}
         unit="km/h"
         hint={t("Max 10-min", "最大10分")}
       />
       <Stat
         icon={Droplets}
         label={t("Humidity", "湿度")}
-        value={current.humidity !== null ? `${Math.round(current.humidity)}` : "—"}
+        value={current.humidity !== null ? `${Math.round(current.humidity)}` : "-"}
         unit="%"
         hint={current.dewpoint !== null ? `Dew ${Math.round(current.dewpoint)}°` : ""}
       />
       <Stat
         icon={Gauge}
         label={t("Pressure", "気圧")}
-        value={current.pressure !== null ? `${Math.round(current.pressure)}` : "—"}
+        value={current.pressure !== null ? `${Math.round(current.pressure)}` : "-"}
         unit="hPa"
         hint=""
       />
       <Stat
         icon={Eye}
         label={t("Visibility", "視程")}
-        value={visibilityKm(current.visibility).split(" ")[0] ?? "—"}
+        value={visibilityKm(current.visibility).split(" ")[0] ?? "-"}
         unit="km"
         hint=""
       />
       <Stat
         icon={Sun}
         label={t("UV", "UV")}
-        value={current.uvIndex !== null ? current.uvIndex.toFixed(1) : "—"}
+        value={current.uvIndex !== null ? current.uvIndex.toFixed(1) : "-"}
         unit=""
         hint={uv.label}
         tone={uv.tone}
@@ -201,13 +201,13 @@ function Today({
     <section className="mt-4 rounded-2xl border border-border bg-white p-5">
       <p className="byline text-muted-foreground/70">{t("Today", "今日")}</p>
       <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4">
-        <KV label={t("High", "最高")} value={daily.tempMax !== null ? `${Math.round(daily.tempMax)}°` : "—"} icon={Thermometer} />
-        <KV label={t("Low", "最低")} value={daily.tempMin !== null ? `${Math.round(daily.tempMin)}°` : "—"} icon={Thermometer} />
+        <KV label={t("High", "最高")} value={daily.tempMax !== null ? `${Math.round(daily.tempMax)}°` : "-"} icon={Thermometer} />
+        <KV label={t("Low", "最低")} value={daily.tempMin !== null ? `${Math.round(daily.tempMin)}°` : "-"} icon={Thermometer} />
         <KV label={t("Sunrise", "日の出")} value={fmtTime(daily.sunrise)} icon={Sunrise} />
         <KV label={t("Sunset", "日の入")} value={fmtTime(daily.sunset)} icon={Sunset} />
         <KV
           label={t("Rain chance", "降水確率")}
-          value={daily.precipitationProbabilityMax !== null ? `${daily.precipitationProbabilityMax}%` : "—"}
+          value={daily.precipitationProbabilityMax !== null ? `${daily.precipitationProbabilityMax}%` : "-"}
           icon={CloudRain}
         />
         <KV
@@ -255,7 +255,7 @@ function Hourly({
                 </p>
                 <Icon className="w-4 h-4 text-primary/80" strokeWidth={1.5} />
                 <p className="text-xs font-medium text-foreground mt-1">
-                  {h.temperature !== null ? Math.round(h.temperature) : "—"}°
+                  {h.temperature !== null ? Math.round(h.temperature) : "-"}°
                 </p>
                 <div className="h-12 w-full flex items-end mt-1">
                   <div
@@ -307,10 +307,10 @@ function Outlook({
               )}
               <p className="w-20 text-right text-sm">
                 <span className="font-medium text-foreground">
-                  {d.tempMax !== null ? Math.round(d.tempMax) : "—"}°
+                  {d.tempMax !== null ? Math.round(d.tempMax) : "-"}°
                 </span>
                 <span className="text-muted-foreground/70 ml-2">
-                  {d.tempMin !== null ? Math.round(d.tempMin) : "—"}°
+                  {d.tempMin !== null ? Math.round(d.tempMin) : "-"}°
                 </span>
               </p>
             </div>
@@ -388,10 +388,10 @@ function pickIcon(code: number | null, isDay: boolean): React.ComponentType<{ cl
 }
 
 function fmtTime(iso: string | null): string {
-  if (!iso) return "—";
+  if (!iso) return "-";
   // Open-Meteo returns naive local time like "2026-05-03T05:42"
   const m = iso.match(/T(\d{2}):(\d{2})/);
-  if (!m) return "—";
+  if (!m) return "-";
   return `${m[1]}:${m[2]}`;
 }
 

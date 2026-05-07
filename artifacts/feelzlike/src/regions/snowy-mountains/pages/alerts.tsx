@@ -4,7 +4,7 @@ import { BellRing, Info } from "lucide-react";
 /**
  * Snowy Mountains alerts page. Powder alerts (the GET /alerts data) are
  * Yamanouchi-only at the moment, so the AU page focuses on the subscription
- * surface — letting AU visitors opt in to alerts driven by the same forecast
+ * surface - letting AU visitors opt in to alerts driven by the same forecast
  * data already powering the AU mountain pages.
  */
 export default function Alerts() {

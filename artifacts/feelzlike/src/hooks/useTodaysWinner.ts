@@ -45,7 +45,7 @@ export interface UseTodaysWinnerResult {
  * Returns `null` when:
  * - the region has no mountains configured, OR
  * - the weather query is loading / errored, OR
- * - every mountain scored 0 (no live weather data for any of them — guard
+ * - every mountain scored 0 (no live weather data for any of them - guard
  *   against showing a meaningless "winner" when the API is silent).
  *
  * The Stay page degrades gracefully on null: `applyStaySort` falls through
@@ -55,7 +55,7 @@ export function useTodaysWinner(region: RegionConfig): UseTodaysWinnerResult {
   const { season } = useSeason();
   // `region.id` is the kebab string ("snowy-mountains" / "yamanouchi"); the
   // generated `RegionId` enum is the same string set, so the cast is
-  // tautological — required only because `RegionConfig.id` is typed loosely
+  // tautological - required only because `RegionConfig.id` is typed loosely
   // (`string`) over in `lib/feelzlike-shell` for forward-compatibility with
   // future regions.
   const weatherQ = useGetWeather({ region: region.id as RegionId });

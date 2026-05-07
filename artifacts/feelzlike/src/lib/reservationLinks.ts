@@ -1,15 +1,15 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// reservationLinks.ts — provider-aware reservation deep-link builder.
+// reservationLinks.ts - provider-aware reservation deep-link builder.
 //
 // Curated `reservation_link` strings come in 3 shapes (real-world inventory
 // across the 121-entry eat dataset, in order of frequency):
 //   1. JP booking platforms (tabelog.com, tablecheck.com, hotpepper.jp)
-//   2. `tel:` URIs (e.g. "tel:+61264561420") — common for AU pubs/restaurants
+//   2. `tel:` URIs (e.g. "tel:+61264561420") - common for AU pubs/restaurants
 //      where the venue takes bookings by phone only
 //   3. Direct restaurant URLs (e.g. "https://phasthai.com.au")
 //
 // Plus the AU-only surface for OpenTable / TheFork (none in the curated set
-// today but they're the dominant AU platforms — included pre-emptively so
+// today but they're the dominant AU platforms - included pre-emptively so
 // they Just Work the day someone curates one in).
 //
 // POLICY (the playbook spec, locked here for the Eat page + EatCard detail
@@ -20,7 +20,7 @@
 //   • Otherwise: build a ranked list of options
 //       1. `reservation_link` → provider-detected (tabelog/tablecheck/…)
 //       2. `phone` → `tel:${phone}` as a fallback "Call to reserve"
-//       3. `website` is intentionally NOT a reservation channel — pages that
+//       3. `website` is intentionally NOT a reservation channel - pages that
 //          only carry a website (no reservation_link, no phone) are treated
 //          as `status="unknown"` so the UI can fall back to a neutral
 //          "See website" affordance via the existing card-level website link.
@@ -29,7 +29,7 @@
 //     `phone`, we don't emit a second tel: option.
 //
 // CALLERS: TownEat (page-level "How to reserve" affordance), EatDetailSheet
-// (large CTA in the sheet header — preferred over the compact EatCard
+// (large CTA in the sheet header - preferred over the compact EatCard
 // ActionRow which uses a generic "Reserve" label for space reasons).
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -64,7 +64,7 @@ export interface ReservationLinks {
   /** Coarse-grained reservation status for the UI to switch on. */
   status: ReservationStatus;
   /**
-   * Human-readable summary of the status — safe to drop into a button or pill
+   * Human-readable summary of the status - safe to drop into a button or pill
    * regardless of status (e.g. "Reserve on Tabelog", "Walk-in only",
    * "No reservation needed", "See website").
    */
@@ -113,7 +113,7 @@ function normalizePhone(s: string | null | undefined): string {
 }
 
 /**
- * Build the reservation surface for an eat. Pure — never reads `Date.now()`
+ * Build the reservation surface for an eat. Pure - never reads `Date.now()`
  * or `window`. Safe to call during render and in tests.
  */
 export function buildReservationLinks(eat: Eat): ReservationLinks {
@@ -146,7 +146,7 @@ export function buildReservationLinks(eat: Eat): ReservationLinks {
   // 1) The curated reservation_link wins primacy.
   if (link) {
     if (link.toLowerCase().startsWith("tel:")) {
-      // The link is itself a tel: URI — synthesise a phone option directly so
+      // The link is itself a tel: URI - synthesise a phone option directly so
       // we don't double-emit later when we add `tel:${phone}`.
       const url = link;
       if (!seenUrls.has(url)) {

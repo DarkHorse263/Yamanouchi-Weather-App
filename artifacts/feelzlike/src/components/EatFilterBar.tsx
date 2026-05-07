@@ -50,7 +50,7 @@ import type { Eat, PriceBand, RegionSlug } from "@/types/stayEat";
 
 // Playbook-pinned filterable type set. The dataset has additional types
 // (bottle_shop / fast_food / diner / food_truck / minshuku-equivalents) that
-// are intentionally NOT surfaced as filter chips — they remain in the
+// are intentionally NOT surfaced as filter chips - they remain in the
 // listing but won't appear as toggleable filters. "Soba" is surfaced via
 // the cuisine multi-select rather than a type chip (the schema has no
 // `soba` type; soba shops are stored as `restaurant` with `cuisine: ["soba"]`).
@@ -135,12 +135,12 @@ export const DEFAULT_EAT_FILTERS: EatFilters = {
 };
 
 // ──────────────────────────────────────────────────────────────────────────────
-// Filter + sort helpers (exported for consumers — mirrors StayFilterBar).
+// Filter + sort helpers (exported for consumers - mirrors StayFilterBar).
 // ──────────────────────────────────────────────────────────────────────────────
 
 export function applyEatFilters(eats: readonly Eat[], filters: EatFilters): Eat[] {
   // Pre-compute the union of allowed schema types when type chips are active.
-  // Empty `filters.types` means "no type filter applied" — pass everything.
+  // Empty `filters.types` means "no type filter applied" - pass everything.
   const typeSet =
     filters.types.length === 0
       ? null
@@ -148,7 +148,7 @@ export function applyEatFilters(eats: readonly Eat[], filters: EatFilters): Eat[
           filters.types.flatMap((c) => TYPE_CHIP_MATCHES[c]),
         );
   // Cuisine match is case-insensitive (curated data mixes "Japanese" /
-  // "japanese" / "Japanese fusion" — see survey output) and uses substring
+  // "japanese" / "Japanese fusion" - see survey output) and uses substring
   // semantics so a "japanese" filter matches both "Japanese" and "Japanese
   // small plates".
   const cuisineSet =
@@ -244,7 +244,7 @@ function priceVal(e: Eat): number {
 }
 
 // ──────────────────────────────────────────────────────────────────────────────
-// URL serialization — same pattern as StayFilterBar (defensive parse,
+// URL serialization - same pattern as StayFilterBar (defensive parse,
 // minimal serialize, omit defaults).
 // ──────────────────────────────────────────────────────────────────────────────
 
@@ -264,7 +264,7 @@ export function parseEatFiltersFromSearch(search: string): EatFilters {
   }
   const cuisines = p.get("cuisine");
   if (cuisines) {
-    // Cuisine values are user-data-derived — be lenient on parse but cap
+    // Cuisine values are user-data-derived - be lenient on parse but cap
     // length so a malicious URL can't blow the query string.
     f.cuisines = cuisines
       .split(",")
@@ -334,7 +334,7 @@ export function getActiveEatFilterCount(f: EatFilters): number {
 }
 
 // ──────────────────────────────────────────────────────────────────────────────
-// URL state hook — preserves non-filter params (e.g. ?view=map / ?eat={id})
+// URL state hook - preserves non-filter params (e.g. ?view=map / ?eat={id})
 // the same way StayFilterBar does.
 // ──────────────────────────────────────────────────────────────────────────────
 
@@ -354,7 +354,7 @@ const EAT_FILTER_PARAM_KEYS = [
 ] as const;
 
 function setUrlSearch(next: string): void {
-  // Mirrors StayFilterBar.setUrlSearch — read current URL, delete only the
+  // Mirrors StayFilterBar.setUrlSearch - read current URL, delete only the
   // keys we own, layer the new filter values on top, replaceState +
   // popstate so wouter's useSearch subscribers re-read.
   const cur = new URLSearchParams(window.location.search);
@@ -563,7 +563,7 @@ function SingleSelect({
   );
 }
 
-// Cuisine multi-select — grouped popover with check marks. Built as a flat
+// Cuisine multi-select - grouped popover with check marks. Built as a flat
 // list (not a command-palette) because the cuisine union per town is
 // typically <30 items and a flat grid scans faster than a search box.
 function CuisineMultiSelect({
@@ -865,7 +865,7 @@ export function EatFilterBar({
 
   // Derive available types from the dataset (intersection with playbook
   // chip set). A chip appears only when at least one eat in the current
-  // listing actually has a matching schema type — avoids dead chips.
+  // listing actually has a matching schema type - avoids dead chips.
   const availableTypes = useMemo(() => {
     const present = new Set(eats.map((e) => e.type));
     return EAT_FILTERABLE_TYPES.filter((c) =>
@@ -881,7 +881,7 @@ export function EatFilterBar({
     for (const e of eats) {
       for (const c of e.cuisine) {
         const lc = c.toLowerCase();
-        // First-seen wins on casing — predictable for the curator.
+        // First-seen wins on casing - predictable for the curator.
         if (!seen.has(lc)) seen.set(lc, c);
       }
     }

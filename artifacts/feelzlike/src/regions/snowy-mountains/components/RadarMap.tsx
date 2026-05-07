@@ -4,7 +4,7 @@ import { Loader2 } from "lucide-react";
 const RadarMapInner = lazy(() => import("./RadarMap.inner"));
 
 export interface RadarMapProps {
-  /** Map centre — defaults to Snowy Mountains. */
+  /** Map centre - defaults to Snowy Mountains. */
   center?: { lat: number; lng: number };
   zoom?: number;
   markers?: Array<{ id: string; name: string; lat: number; lng: number }>;
