@@ -51,34 +51,29 @@ export function TownHome() {
   const roadsQ = useGetRoadConditions({ region: region.id }, { query: { enabled: roadsAvailable } });
   const townWeatherQ = useTownWeather(town?.lat, town?.lng);
 
-  // Pick the closest mountain to this town that has live weather data.
-  // Always scope to the current region's mountains (fall back to nearbyMountainIds when richer).
-  const closest = useMemo(() => {
-    if (!town || !weatherQ.data) return null;
+  // List every region mountain with live weather data, sorted by distance
+  // from this town. Used for the "To the mountains" panel so users can
+  // pick which resort to head to, not just the nearest one.
+  const mountainsByDistance = useMemo(() => {
+    if (!town || !weatherQ.data) return [];
     const regionIds = new Set(region.mountains?.map((m) => m.id) ?? []);
     const nearbyIds = new Set(town.nearbyMountainIds ?? []);
     const allowed = nearbyIds.size > 0 ? nearbyIds : regionIds;
     const candidates = allowed.size > 0
       ? weatherQ.data.locations.filter((l) => allowed.has(l.location.id))
       : [];
-    if (candidates.length === 0) return null;
-    let best = candidates[0]!;
-    let bestKm = haversineKm(
-      { lat: town.lat, lng: town.lng },
-      { lat: best.location.latitude, lng: best.location.longitude },
-    );
-    for (const c of candidates.slice(1)) {
-      const km = haversineKm(
-        { lat: town.lat, lng: town.lng },
-        { lat: c.location.latitude, lng: c.location.longitude },
-      );
-      if (km < bestKm) {
-        best = c;
-        bestKm = km;
-      }
-    }
-    return { entry: best, km: bestKm };
-  }, [town, weatherQ.data]);
+    return candidates
+      .map((entry) => {
+        const km = haversineKm(
+          { lat: town.lat, lng: town.lng },
+          { lat: entry.location.latitude, lng: entry.location.longitude },
+        );
+        // ~1.5 min/km is a reasonable alpine-road estimate
+        const min = Math.max(5, Math.round(km * 1.5));
+        return { entry, km, min };
+      })
+      .sort((a, b) => a.km - b.km);
+  }, [town, weatherQ.data, region]);
 
   // Roads relevant to this town: open vs total
   const roadsSummary = useMemo(() => {
@@ -107,8 +102,6 @@ export function TownHome() {
     );
   }
 
-  // ~1.5 min/km is a reasonable alpine-road estimate
-  const driveMinutes = closest ? Math.max(5, Math.round(closest.km * 1.5)) : null;
   const roadValue = !roadsAvailable
     ? "-"
     : roadsSummary
@@ -174,12 +167,11 @@ export function TownHome() {
       </motion.header>
 
       {/* Snapshot strip - live conditions
-          May 2026: dropped the standalone "Nearest mountain" temperature
-          tile. The "To the mountain" tile now leads with the mountain name
-          and shows distance + drive time directly underneath - one less
-          tile, less duplication, and a clearer answer to "where am I
-          going?". */}
-      <section className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          May 2026: "To the mountain" expanded into its own panel below
+          listing every mountain with km + drive time, so users can pick
+          where to head, not just see the nearest one. The strip now
+          carries In-town weather and the road summary. */}
+      <section className="mt-8 grid sm:grid-cols-2 gap-3">
         <SnapshotCard
           label={t("In town now", "町の現在")}
           value={
@@ -201,21 +193,6 @@ export function TownHome() {
           }
         />
         <SnapshotCard
-          label={t("To the mountain", "山まで")}
-          value={closest ? closest.entry.location.name : "-"}
-          unit=""
-          hint={
-            weatherQ.isLoading
-              ? t("Loading…", "読込中…")
-              : closest && driveMinutes !== null
-                ? t(
-                    `${Math.round(closest.km)} km · ~${driveMinutes} min`,
-                    `約${Math.round(closest.km)}km・約${driveMinutes}分`,
-                  )
-                : t("Drive time unavailable", "所要時間なし")
-          }
-        />
-        <SnapshotCard
           label={t("Roads", "道路")}
           value={roadValue ?? "-"}
           unit={roadUnit}
@@ -228,6 +205,60 @@ export function TownHome() {
                 : "ok"
           }
         />
+      </section>
+
+      {/* To the mountains - per-resort drive time list */}
+      <section className="mt-3">
+        <div className="rounded-2xl border border-border bg-white p-4">
+          <div className="flex items-center justify-between">
+            <p className="byline text-muted-foreground/70">
+              {t("To the mountains", "山まで")}
+            </p>
+            <Link
+              href={`~/${region.id}/mountains`}
+              className="byline text-primary inline-flex items-center gap-1 hover:underline"
+            >
+              {t("All mountains", "スキー場一覧")} <ArrowUpRight className="w-3 h-3" />
+            </Link>
+          </div>
+          {weatherQ.isLoading && mountainsByDistance.length === 0 ? (
+            <p className="text-sm text-muted-foreground mt-3">{t("Loading…", "読込中…")}</p>
+          ) : mountainsByDistance.length === 0 ? (
+            <p className="text-sm text-muted-foreground mt-3">
+              {t("Drive times unavailable", "所要時間なし")}
+            </p>
+          ) : (
+            <ul className="mt-2 divide-y divide-border/60">
+              {mountainsByDistance.map(({ entry, km, min }) => {
+                const temp = entry.current?.temperature;
+                return (
+                  <li
+                    key={entry.location.id}
+                    className="flex items-center justify-between gap-3 py-2.5"
+                  >
+                    <div className="min-w-0">
+                      <p className="font-display font-semibold text-base tracking-tight text-foreground truncate">
+                        {entry.location.name}
+                      </p>
+                      <p className="text-[12px] text-muted-foreground/80">
+                        {t(
+                          `${Math.round(km)} km · ~${min} min`,
+                          `約${Math.round(km)}km・約${min}分`,
+                        )}
+                      </p>
+                    </div>
+                    {temp !== undefined && temp !== null ? (
+                      <p className="font-display font-semibold text-xl text-foreground tabular-nums shrink-0">
+                        {Math.round(temp)}
+                        <span className="text-sm text-muted-foreground/70">°</span>
+                      </p>
+                    ) : null}
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </div>
       </section>
 
       {/* Town tiles */}
