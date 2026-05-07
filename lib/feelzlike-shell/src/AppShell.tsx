@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, Mountain as MountainIcon, Sun, Snowflake } from "lucide-react";
+import { ChevronLeft, Sun, Snowflake } from "lucide-react";
 import type { ReactNode } from "react";
 import { cn } from "./cn";
 import { useRegion } from "./RegionProvider";
@@ -203,34 +203,10 @@ export function AppShell({ children }: { children: ReactNode }) {
             />
           ))}
 
-          {region.mountains && region.mountains.length > 0 && (
-            <div className="pt-3 mt-2">
-              {region.mountains.map((m) => {
-                const mPath = `/mountain/${m.id}`;
-                const active = location === mPath;
-                return (
-                  <Link
-                    key={m.id}
-                    href={mPath}
-                    className={cn(
-                      "group relative flex items-center gap-3 px-3 py-2 rounded-lg transition-all text-sm",
-                      active
-                        ? "text-primary bg-primary/8 font-medium"
-                        : "text-muted-foreground hover:text-foreground hover:bg-secondary",
-                    )}
-                  >
-                    {active && (
-                      <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-4 rounded-full bg-primary" />
-                    )}
-                    <MountainIcon
-                      className={cn("w-3.5 h-3.5", active ? "text-primary" : "opacity-50")}
-                    />
-                    {t(m.name, m.nameJa)}
-                  </Link>
-                );
-              })}
-            </div>
-          )}
+          {/* May 2026: per-mountain links were duplicated here under the
+              Mountains section. The "All mountains" page already lists
+              every resort with status + headline, so the sidebar
+              expansion was redundant chrome. Removed for both regions. */}
         </nav>
 
         <div className="px-6 pb-5 pt-3">
