@@ -332,12 +332,15 @@ export function AppShell({ children }: { children: ReactNode }) {
               addMountain("/mountains");     // All mountains
               addTown("/roads");             // Roads
               addMountain("/radar");         // Radar
+              addTown("/transport");         // Transport
+              addTown("/stay");              // Stay
+              addTown("/eat");               // Eat
+              addTown("/explore");           // Explore
               addMountain("/alerts");        // Alerts
-              // Append any remaining town items in their original order
+              // Append any remaining items (future-proofing)
               townNav.forEach((it) => {
                 if (!seen.has(`t:${it.path}`)) addTown(it.path);
               });
-              // Append any remaining mountain items (future-proofing)
               mountainNav.forEach((it) => {
                 if (!seen.has(`m:${it.path}`)) addMountain(it.path);
               });
