@@ -61,7 +61,7 @@ export function EnsembleForecast({ locationId }: Props) {
     >
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <p className="byline text-muted-foreground">06 · Forecast intelligence</p>
+          <p className="byline text-muted-foreground">08 · Forecast intelligence</p>
           <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
             <Layers className="text-primary w-5 h-5" />
             Multi-model consensus

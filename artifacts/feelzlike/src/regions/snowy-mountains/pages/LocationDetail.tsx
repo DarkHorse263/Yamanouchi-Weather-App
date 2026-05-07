@@ -69,7 +69,6 @@ function formatAgo(iso: string | undefined | null, now: number): string {
 import { cn } from "../lib/utils";
 import { skyGradient } from "../lib/mountain-imagery";
 import { HourlyForecast } from "@/components/HourlyForecast";
-import { LiftWindHoldPanel } from "@/components/LiftWindHoldPanel";
 import { PowderFactorBadge } from "@/components/PowderFactorBadge";
 import { POWDER_THRESHOLDS_AU } from "@/types/weather";
 
@@ -389,14 +388,6 @@ export default function LocationDetail() {
           <ForecastChart data={hourly} metric={activeChartMetric} />
         </motion.div>
 
-        {/* Backward-looking snow quality snapshot — pairs with the
-            forward-looking Powder Window strip immediately below. */}
-        <PowderFactorBadge
-          hourly={hourly}
-          t={(en) => en}
-          sectionNumber="04a"
-        />
-
         {/* Hour-by-hour next 48h with Powder Window detection.
             AU thresholds are relaxed (0.5cm/hr, <25km/h) — Australian
             snowfall rarely hits Japow benchmarks. */}
@@ -404,19 +395,7 @@ export default function LocationDetail() {
           hourly={hourly}
           utcOffsetSeconds={(weatherData as any).utcOffsetSeconds ?? 0}
           thresholds={POWDER_THRESHOLDS_AU}
-          sectionNumber="04b"
-        />
-
-        {/* Powder Calendar intentionally NOT rendered for AU mountains —
-            powder days are far rarer here than in Yamanouchi/Japan, so the
-            calendar is restricted to JP regions where it's actually useful. */}
-
-        {/* Wind-hold prediction — only on AU mountains we have lift seed data for */}
-        <LiftWindHoldPanel
-          mountainId={locationId}
-          resortElevationM={location?.elevation ?? 1500}
-          hourly={hourly as any}
-          sectionNumber="04d"
+          sectionNumber="05"
         />
 
         {/* Snow-forecast-style dense 6-day mountain strip */}
@@ -428,7 +407,7 @@ export default function LocationDetail() {
         >
           <div className="flex items-end justify-between mb-5 gap-3">
             <div>
-              <p className="byline text-muted-foreground">05 · Outlook</p>
+              <p className="byline text-muted-foreground">06 · Outlook</p>
               <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
                 <CalendarDays className="text-primary w-5 h-5" />
                 {daily.length}-day mountain forecast
@@ -523,6 +502,17 @@ export default function LocationDetail() {
           </div>
         </motion.div>
 
+        {/* Backward-looking snow quality snapshot */}
+        <PowderFactorBadge
+          hourly={hourly}
+          t={(en) => en}
+          sectionNumber="07"
+        />
+
+        {/* Powder Calendar intentionally NOT rendered for AU mountains —
+            powder days are far rarer here than in Yamanouchi/Japan, so the
+            calendar is restricted to JP regions where it's actually useful. */}
+
         {/* Multi-model ensemble */}
         <EnsembleForecast locationId={locationId} />
 
@@ -537,7 +527,7 @@ export default function LocationDetail() {
             >
               <div className="flex items-end justify-between mb-5 gap-4">
                 <div>
-                  <p className="byline text-muted-foreground">07 · Eyes on the mountain</p>
+                  <p className="byline text-muted-foreground">09 · Eyes on the mountain</p>
                   <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
                     <Camera className="text-primary w-5 h-5" />
                     Live webcams
@@ -604,7 +594,7 @@ export default function LocationDetail() {
             >
               <div className="flex justify-between items-start mb-5">
                 <div>
-                  <p className="byline text-muted-foreground">08 · Lift status</p>
+                  <p className="byline text-muted-foreground">10 · Lift status</p>
                   <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
                     <Cable className="text-primary w-5 h-5" />
                     On the snow
@@ -656,7 +646,7 @@ export default function LocationDetail() {
           )}
         </div>
 
-        <SafetyStrip />
+        <SafetyStrip sectionNumber="11" />
 
       </div>
     </>
