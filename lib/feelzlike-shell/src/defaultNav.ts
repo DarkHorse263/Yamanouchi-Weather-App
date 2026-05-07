@@ -29,7 +29,6 @@ export const DEFAULT_MOUNTAIN_NAV: NavItem[] = [
   // ready to back the verdict UI). The route is gone — keep this nav list
   // free of dead paths.
   { path: "/mountains",       icon: Mountain,      label: "All mountains", labelJa: "スキー場一覧" },
-  { path: "/mountains/lifts", icon: Cable,         label: "Lifts",         labelJa: "リフト", season: "winter" },
   { path: "/radar",           icon: RadarIcon,     label: "Radar",         labelJa: "気象レーダー" },
   { path: "/alerts",          icon: AlertTriangle, label: "Alerts",        labelJa: "警報" },
 ];
