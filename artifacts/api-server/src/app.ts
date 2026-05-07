@@ -18,8 +18,29 @@ const app: Express = express();
 const trustProxyHops = Number.parseInt(process.env["TRUST_PROXY_HOPS"] ?? "1", 10);
 app.set("trust proxy", Number.isFinite(trustProxyHops) ? trustProxyHops : 1);
 
+// CORS — only allow the configured public app URL plus Replit's dev/preview
+// domains (for in-workspace previews). Reflecting any origin with
+// credentials becomes a CSRF foot-gun the moment we add cookie auth. Any
+// request with no Origin header (server-to-server, curl, same-origin) passes.
+const ALLOWED_ORIGIN_PATTERNS: RegExp[] = [
+  /^https?:\/\/localhost(?::\d+)?$/,
+  /^https?:\/\/127\.0\.0\.1(?::\d+)?$/,
+  /\.replit\.app$/,
+  /\.replit\.dev$/,
+  /\.repl\.co$/,
+];
+const explicitAppUrl = (process.env.APP_PUBLIC_URL ?? "").replace(/\/$/, "");
+function isOriginAllowed(origin: string): boolean {
+  if (explicitAppUrl && origin === explicitAppUrl) return true;
+  return ALLOWED_ORIGIN_PATTERNS.some((re) => re.test(origin));
+}
 app.use(cors({
-  origin: true,
+  origin: (origin, cb) => {
+    // No Origin = same-origin / server-side — always allow.
+    if (!origin) return cb(null, true);
+    if (isOriginAllowed(origin)) return cb(null, true);
+    return cb(new Error(`CORS: origin not allowed (${origin})`));
+  },
   credentials: true,
 }));
 app.use(express.json());

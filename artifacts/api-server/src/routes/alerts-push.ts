@@ -1,7 +1,15 @@
 import { Router, type IRouter } from "express";
-import { db, pushSubscriptionsTable } from "@workspace/db";
+import { db, pushSubscriptionsTable, alertSubscribersTable } from "@workspace/db";
 import { eq, and } from "drizzle-orm";
-import { verifyToken } from "../lib/alertTokens.js";
+import { verifyToken, isTokenStillValid } from "../lib/alertTokens.js";
+
+async function checkTokenNotRevoked(subscriberId: string, payload: { iat: number }): Promise<boolean> {
+  const rows = await db.select({ tokensInvalidatedAt: alertSubscribersTable.tokensInvalidatedAt })
+    .from(alertSubscribersTable).where(eq(alertSubscribersTable.id, subscriberId)).limit(1);
+  const row = rows[0];
+  if (!row) return false;
+  return isTokenStillValid(payload, row.tokensInvalidatedAt);
+}
 
 /**
  * Push-subscription endpoints. Auth via the same management token used for
@@ -18,6 +26,10 @@ router.post("/alerts/push/subscribe", async (req, res): Promise<void> => {
     res.status(400).json({ error: "INVALID_TOKEN", reason: result.reason });
     return;
   }
+  if (!(await checkTokenNotRevoked(result.payload.sub, result.payload))) {
+    res.status(400).json({ error: "INVALID_TOKEN", reason: "revoked" });
+    return;
+  }
 
   const body = (req.body ?? {}) as Record<string, unknown>;
   const endpoint = typeof body["endpoint"] === "string" ? body["endpoint"] : "";
@@ -32,23 +44,16 @@ router.post("/alerts/push/subscribe", async (req, res): Promise<void> => {
   }
 
   try {
-    // Upsert by endpoint — push services issue a single endpoint per device,
-    // so re-subscribing with the same browser updates the row instead of
-    // creating duplicates.
-    const existing = await db.select({ id: pushSubscriptionsTable.id })
-      .from(pushSubscriptionsTable)
-      .where(eq(pushSubscriptionsTable.endpoint, endpoint))
-      .limit(1);
-    if (existing.length > 0) {
-      await db.update(pushSubscriptionsTable)
-        .set({ subscriberId: result.payload.sub, p256dh, auth, userAgent, failureCount: 0 })
-        .where(eq(pushSubscriptionsTable.id, existing[0]!.id));
-    } else {
-      await db.insert(pushSubscriptionsTable).values({
-        subscriberId: result.payload.sub,
-        endpoint, p256dh, auth, userAgent,
+    // Atomic upsert by endpoint — push services issue a single endpoint per
+    // device, so re-subscribing with the same browser must update in place.
+    // Read-then-write would race against the unique index and return 500 on
+    // a fast double-subscribe (e.g. PWA reinstall).
+    await db.insert(pushSubscriptionsTable)
+      .values({ subscriberId: result.payload.sub, endpoint, p256dh, auth, userAgent })
+      .onConflictDoUpdate({
+        target: pushSubscriptionsTable.endpoint,
+        set: { subscriberId: result.payload.sub, p256dh, auth, userAgent, failureCount: 0 },
       });
-    }
     res.json({ ok: true });
   } catch (err) {
     console.error("[/alerts/push/subscribe] error:", err);
@@ -61,6 +66,10 @@ router.delete("/alerts/push/subscribe", async (req, res): Promise<void> => {
   const result = verifyToken(token, "manage");
   if (!result.ok) {
     res.status(400).json({ error: "INVALID_TOKEN", reason: result.reason });
+    return;
+  }
+  if (!(await checkTokenNotRevoked(result.payload.sub, result.payload))) {
+    res.status(400).json({ error: "INVALID_TOKEN", reason: "revoked" });
     return;
   }
   const body = (req.body ?? {}) as Record<string, unknown>;

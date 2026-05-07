@@ -32,6 +32,7 @@ interface TokenPayload {
   sub: string;
   kind: TokenKind;
   exp: number; // epoch seconds; 0 = never expires
+  iat: number; // epoch seconds; lets us invalidate all tokens issued before a cutoff
 }
 
 const KIND_TTL: Record<TokenKind, number> = {
@@ -54,8 +55,9 @@ function sign(payloadB64: string): string {
 
 export function issueToken(subscriberId: string, kind: TokenKind): string {
   const ttl = KIND_TTL[kind];
-  const exp = ttl === 0 ? 0 : Math.floor(Date.now() / 1000) + ttl;
-  const payload: TokenPayload = { sub: subscriberId, kind, exp };
+  const now = Math.floor(Date.now() / 1000);
+  const exp = ttl === 0 ? 0 : now + ttl;
+  const payload: TokenPayload = { sub: subscriberId, kind, exp, iat: now };
   const payloadB64 = b64urlEncode(Buffer.from(JSON.stringify(payload)));
   const sig = sign(payloadB64);
   return `${payloadB64}.${sig}`;
@@ -88,8 +90,23 @@ export function verifyToken(token: string, expectedKind?: TokenKind): TokenVerif
   if (typeof payload.sub !== "string" || typeof payload.kind !== "string" || typeof payload.exp !== "number") {
     return { ok: false, reason: "malformed" };
   }
+  // Tokens issued before this change won't have `iat`; treat missing as 0 so
+  // an `invalidatedAt` set after this change still invalidates them.
+  if (typeof payload.iat !== "number") payload.iat = 0;
   if (expectedKind && payload.kind !== expectedKind) return { ok: false, reason: "wrong_kind" };
   if (payload.exp !== 0 && payload.exp * 1000 < Date.now()) return { ok: false, reason: "expired" };
 
   return { ok: true, payload };
+}
+
+/**
+ * Returns true if a token's issued-at timestamp is at or after the given
+ * cutoff. Use to reject tokens that were issued before the subscriber
+ * performed a destructive action (e.g. unsubscribe).
+ */
+export function isTokenStillValid(payload: { iat: number }, invalidatedAt: Date | null): boolean {
+  if (!invalidatedAt) return true;
+  // `iat` is in epoch seconds; floor the cutoff to seconds for comparison.
+  const cutoffSec = Math.floor(invalidatedAt.getTime() / 1000);
+  return payload.iat >= cutoffSec;
 }

@@ -1,7 +1,7 @@
 import { Router, type IRouter } from "express";
 import { db, alertSubscribersTable } from "@workspace/db";
 import { eq } from "drizzle-orm";
-import { issueToken, verifyToken } from "../lib/alertTokens.js";
+import { issueToken, verifyToken, isTokenStillValid } from "../lib/alertTokens.js";
 import { sendEmail } from "../lib/emailSender.js";
 import { verificationEmail } from "../lib/emailTemplates.js";
 import { getAppPublicUrl } from "../lib/appUrl.js";
@@ -104,26 +104,34 @@ router.post("/alerts/subscribe", async (req, res): Promise<void> => {
   };
 
   try {
-    // Upsert by email so re-subscribing updates preferences instead of failing.
-    // If the row was previously unsubscribed, clear that flag (re-opt-in is
-    // explicit and has just gone through double opt-in again).
-    const existing = await db.select().from(alertSubscribersTable).where(eq(alertSubscribersTable.email, email)).limit(1);
-    let id: string;
-    let alreadyVerified = false;
-
-    if (existing.length === 0) {
-      const inserted = await db.insert(alertSubscribersTable).values(payload).returning({ id: alertSubscribersTable.id });
-      id = inserted[0]!.id;
-    } else {
-      const row = existing[0]!;
-      id = row.id;
-      alreadyVerified = row.verifiedAt !== null && row.unsubscribedAt === null;
-      await db.update(alertSubscribersTable).set({
-        ...payload,
-        unsubscribedAt: null,
-        unsubscribeReason: null,
-      }).where(eq(alertSubscribersTable.id, id));
-    }
+    // Atomic upsert by email. Two concurrent subscribe requests for the same
+    // address would race on a read-then-write and either duplicate-insert
+    // (violating the unique index) or both think they're the "first". The
+    // unique index on `email` plus ON CONFLICT DO UPDATE makes this single-shot.
+    // Re-opting-in clears the soft-unsubscribe flag because the user has just
+    // gone through double opt-in again.
+    const upserted = await db
+      .insert(alertSubscribersTable)
+      .values(payload)
+      .onConflictDoUpdate({
+        target: alertSubscribersTable.email,
+        set: {
+          ...payload,
+          unsubscribedAt: null,
+          unsubscribeReason: null,
+        },
+      })
+      .returning({
+        id: alertSubscribersTable.id,
+        verifiedAt: alertSubscribersTable.verifiedAt,
+        unsubscribedAt: alertSubscribersTable.unsubscribedAt,
+      });
+    const row = upserted[0]!;
+    const id = row.id;
+    // `unsubscribedAt` is always null here because the upsert just cleared it.
+    // For the "already verified" short-circuit we look at the pre-upsert state
+    // — i.e. `verifiedAt` being non-null on the returned row.
+    const alreadyVerified = row.verifiedAt !== null;
 
     if (alreadyVerified) {
       // Already opted-in — don't re-send a verification email; just confirm.
@@ -187,6 +195,25 @@ router.get("/alerts/verify", async (req, res): Promise<void> => {
   }
 });
 
+// Helper: load a subscriber and check the manage token hasn't been invalidated
+// by a previous destructive action. Returns null on failure (response sent).
+async function loadSubscriberForManageToken(
+  res: import("express").Response,
+  payload: { sub: string; iat: number },
+): Promise<typeof alertSubscribersTable.$inferSelect | null> {
+  const rows = await db.select().from(alertSubscribersTable).where(eq(alertSubscribersTable.id, payload.sub)).limit(1);
+  const row = rows[0];
+  if (!row) {
+    res.status(404).json({ error: "SUBSCRIBER_NOT_FOUND" });
+    return null;
+  }
+  if (!isTokenStillValid(payload, row.tokensInvalidatedAt)) {
+    res.status(400).json({ error: "INVALID_TOKEN", reason: "revoked" });
+    return null;
+  }
+  return row;
+}
+
 // ─── GET /alerts/manage?token=… ──────────────────────────────────────────
 router.get("/alerts/manage", async (req, res): Promise<void> => {
   const token = typeof req.query["token"] === "string" ? req.query["token"] : "";
@@ -196,12 +223,8 @@ router.get("/alerts/manage", async (req, res): Promise<void> => {
     return;
   }
   try {
-    const rows = await db.select().from(alertSubscribersTable).where(eq(alertSubscribersTable.id, result.payload.sub)).limit(1);
-    const row = rows[0];
-    if (!row) {
-      res.status(404).json({ error: "SUBSCRIBER_NOT_FOUND" });
-      return;
-    }
+    const row = await loadSubscriberForManageToken(res, result.payload);
+    if (!row) return;
     res.json({ ok: true, subscriber: publicSubscriberShape(row) });
   } catch (err) {
     console.error("[/alerts/manage GET] error:", err);
@@ -232,6 +255,8 @@ router.put("/alerts/manage", async (req, res): Promise<void> => {
     timezone: asTimezone(body["timezone"]),
   };
   try {
+    const existing = await loadSubscriberForManageToken(res, result.payload);
+    if (!existing) return;
     await db.update(alertSubscribersTable).set(update).where(eq(alertSubscribersTable.id, result.payload.sub));
     const rows = await db.select().from(alertSubscribersTable).where(eq(alertSubscribersTable.id, result.payload.sub)).limit(1);
     const row = rows[0];
@@ -246,30 +271,76 @@ router.put("/alerts/manage", async (req, res): Promise<void> => {
   }
 });
 
+// Shared logic for both GET (one-click email link) and POST (programmatic)
+// unsubscribe. Accepts either an unsub-kind token (forever-valid) or a
+// manage-kind token (so the management UI can unsubscribe without needing a
+// second token). Bumps `tokensInvalidatedAt` so previously-issued manage/unsub
+// tokens for this subscriber can no longer be replayed.
+async function performUnsubscribe(
+  token: string,
+  reason: string | null,
+): Promise<{ ok: true } | { ok: false; status: number; error: string; reason?: string }> {
+  const r1 = verifyToken(token, "unsub");
+  const result = r1.ok ? r1 : verifyToken(token, "manage");
+  if (!result.ok) return { ok: false, status: 400, error: "INVALID_TOKEN", reason: result.reason };
+
+  // Replay protection: reject if the token was issued before a previous
+  // tokensInvalidatedAt cutoff (e.g. user already clicked unsubscribe before).
+  const rows = await db.select({
+    id: alertSubscribersTable.id,
+    tokensInvalidatedAt: alertSubscribersTable.tokensInvalidatedAt,
+  }).from(alertSubscribersTable).where(eq(alertSubscribersTable.id, result.payload.sub)).limit(1);
+  const row = rows[0];
+  if (!row) return { ok: false, status: 404, error: "SUBSCRIBER_NOT_FOUND" };
+  if (!isTokenStillValid(result.payload, row.tokensInvalidatedAt)) {
+    return { ok: false, status: 400, error: "INVALID_TOKEN", reason: "revoked" };
+  }
+
+  await db.update(alertSubscribersTable).set({
+    unsubscribedAt: new Date(),
+    unsubscribeReason: reason,
+    tokensInvalidatedAt: new Date(),
+  }).where(eq(alertSubscribersTable.id, result.payload.sub));
+  return { ok: true };
+}
+
+// ─── GET /alerts/unsubscribe?token=… ─────────────────────────────────────
+// Exists so the "Unsubscribe" link in alert emails (a plain GET click from an
+// inbox) actually works. Required for AU Spam Act 2003 / CAN-SPAM compliance.
+// On success we redirect to the SPA confirmation page; on failure we redirect
+// to the same page with an `?error=` querystring so the user always sees
+// something rather than a raw JSON 400.
+router.get("/alerts/unsubscribe", async (req, res): Promise<void> => {
+  const token = typeof req.query["token"] === "string" ? req.query["token"] : "";
+  const base = getAppPublicUrl();
+  try {
+    const result = await performUnsubscribe(token, "email_link");
+    if (result.ok) {
+      res.redirect(302, `${base}/alerts/unsubscribed`);
+      return;
+    }
+    res.redirect(302, `${base}/alerts/unsubscribed?error=${encodeURIComponent(result.error)}`);
+  } catch (err) {
+    console.error("[/alerts/unsubscribe GET] error:", err);
+    res.redirect(302, `${base}/alerts/unsubscribed?error=UNSUB_FAILED`);
+  }
+});
+
 // ─── POST /alerts/unsubscribe?token=… ────────────────────────────────────
 router.post("/alerts/unsubscribe", async (req, res): Promise<void> => {
   const token = typeof req.query["token"] === "string" ? req.query["token"] : "";
-  // Accept either an unsub-kind token (forever-valid one-click links) or a
-  // manage-kind token (so the management page can also unsubscribe without
-  // needing a separate token).
-  const r1 = verifyToken(token, "unsub");
-  const result = r1.ok ? r1 : verifyToken(token, "manage");
-  if (!result.ok) {
-    res.status(400).json({ error: "INVALID_TOKEN", reason: result.reason });
-    return;
-  }
   const reason = typeof (req.body ?? {})["reason"] === "string"
     ? String((req.body as Record<string, unknown>)["reason"]).slice(0, 200)
     : null;
-
   try {
-    await db.update(alertSubscribersTable).set({
-      unsubscribedAt: new Date(),
-      unsubscribeReason: reason,
-    }).where(eq(alertSubscribersTable.id, result.payload.sub));
-    res.json({ ok: true, message: "You're unsubscribed." });
+    const result = await performUnsubscribe(token, reason);
+    if (result.ok) {
+      res.json({ ok: true, message: "You're unsubscribed." });
+      return;
+    }
+    res.status(result.status).json({ error: result.error, ...(result.reason ? { reason: result.reason } : {}) });
   } catch (err) {
-    console.error("[/alerts/unsubscribe] error:", err);
+    console.error("[/alerts/unsubscribe POST] error:", err);
     res.status(500).json({ error: "UNSUB_FAILED" });
   }
 });

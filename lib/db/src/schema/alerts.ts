@@ -29,6 +29,10 @@ export const alertSubscribersTable = pgTable(
     unsubscribedAt: timestamp("unsubscribed_at", { withTimezone: true }),
     unsubscribeReason: text("unsubscribe_reason"),
     lastAlertedAt: timestamp("last_alerted_at", { withTimezone: true }),
+    // Tokens issued before this cutoff (compared to their `iat` claim) are
+    // rejected. Bumped on destructive actions like unsubscribe so a leaked
+    // manage/unsub link can't be replayed afterwards.
+    tokensInvalidatedAt: timestamp("tokens_invalidated_at", { withTimezone: true }),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp("updated_at", { withTimezone: true })
       .notNull()
@@ -95,6 +99,12 @@ export const dispatchedAlertsTable = pgTable(
   (t) => [
     index("alert_dispatched_dedupe_idx").on(t.subscriberId, t.mountain, t.alertWindow),
     index("alert_dispatched_subscriber_recent_idx").on(t.subscriberId, t.sentAt),
+    // DB-level dedupe: at most one successful dispatch per
+    // (subscriber, alertWindow, delivery channel). Prevents duplicate sends
+    // when two evaluator runs overlap (e.g. cron + manual /internal/run).
+    uniqueIndex("alert_dispatched_success_uidx")
+      .on(t.subscriberId, t.alertWindow, t.delivery)
+      .where(sql`success = true`),
   ],
 );
 

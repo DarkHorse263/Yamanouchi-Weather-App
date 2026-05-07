@@ -22,9 +22,13 @@ router.post("/internal/alerts/run", async (req, res): Promise<void> => {
   const auth = req.header("authorization") ?? "";
   const provided = auth.startsWith("Bearer ") ? auth.slice(7) : "";
 
-  // In dev, allow without auth so devs can curl the endpoint freely. In any
-  // other env, require a non-empty secret AND a matching bearer.
-  if (process.env.NODE_ENV === "production") {
+  // Auth is required in every environment by default. To explicitly bypass
+  // for local development (e.g. curling the endpoint without setting up a
+  // secret), set ALLOW_UNAUTH_CRON=1. We do NOT key off NODE_ENV alone —
+  // a misconfigured deploy with NODE_ENV=development would otherwise expose
+  // an unauth alert-dispatch endpoint and become a spam vector.
+  const unauthAllowed = process.env.ALLOW_UNAUTH_CRON === "1" && process.env.NODE_ENV !== "production";
+  if (!unauthAllowed) {
     if (!expected || expected.length < 16 || !safeEqual(provided, expected)) {
       res.status(401).json({ error: "UNAUTHORIZED" });
       return;

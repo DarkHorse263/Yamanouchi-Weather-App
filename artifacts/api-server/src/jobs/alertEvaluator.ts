@@ -19,7 +19,7 @@
  */
 import cron from "node-cron";
 import { db, alertSubscribersTable, dispatchedAlertsTable, pushSubscriptionsTable } from "@workspace/db";
-import { eq, and, isNull, isNotNull, gte } from "drizzle-orm";
+import { eq, and, isNull, isNotNull, gte, count } from "drizzle-orm";
 import * as Sentry from "@sentry/node";
 import { getEnsembleForecast } from "../lib/ensemble-forecast.js";
 import { sendEmail } from "../lib/emailSender.js";
@@ -31,6 +31,7 @@ import type { RegionId } from "../lib/regions.js";
 
 const QUIET_HOURS_OVERRIDE_CM = 50;
 const PER_SUBSCRIBER_RATE_LIMIT_HOURS = 12;
+const MAX_FAILURES_PER_24H = 3;
 // Anchor each region with a representative high-altitude point. The forecast
 // is a regional indicator, not a per-resort prediction — when we want
 // per-resort accuracy we'll move to per-mountain coords (the schema already
@@ -49,7 +50,30 @@ interface EvaluatorReport {
   subscribersChecked: number;
   alertsSent: number;
   errors: number;
-  skipped: { dedupe: number; rateLimit: number; quietHours: number; belowThreshold: number };
+  skipped: { dedupe: number; rateLimit: number; quietHours: number; belowThreshold: number; failureBackoff: number };
+}
+
+/**
+ * Insert a success=true claim row for a (subscriber, alertWindow, delivery)
+ * triple. Returns `{claimed: true, id}` on success and `{claimed: false}` if
+ * the partial unique index already holds a successful row — meaning another
+ * evaluator run got there first.
+ */
+async function claimDispatchSlot(values: {
+  subscriberId: string; mountain: string; region: string; alertWindow: string;
+  snowfallCm: number; delivery: "email" | "push";
+}): Promise<{ claimed: true; id: string } | { claimed: false; id: string }> {
+  try {
+    const inserted = await db.insert(dispatchedAlertsTable).values({
+      ...values, success: true, errorMessage: null, payload: null,
+    }).returning({ id: dispatchedAlertsTable.id });
+    return { claimed: true, id: inserted[0]!.id };
+  } catch (err) {
+    // 23505 = Postgres unique_violation. Anything else is a real error.
+    const code = (err as { code?: string })?.code;
+    if (code === "23505") return { claimed: false, id: "" };
+    throw err;
+  }
 }
 
 export async function runAlertEvaluator(opts?: { dryRun?: boolean }): Promise<EvaluatorReport> {
@@ -58,7 +82,7 @@ export async function runAlertEvaluator(opts?: { dryRun?: boolean }): Promise<Ev
   const report: EvaluatorReport = {
     startedAt: startedAt.toISOString(), finishedAt: "",
     subscribersChecked: 0, alertsSent: 0, errors: 0,
-    skipped: { dedupe: 0, rateLimit: 0, quietHours: 0, belowThreshold: 0 },
+    skipped: { dedupe: 0, rateLimit: 0, quietHours: 0, belowThreshold: 0, failureBackoff: 0 },
   };
 
   Sentry.addBreadcrumb({ category: "alert-evaluator", message: `run started${dryRun ? " (dryRun)" : ""}`, level: "info" });
@@ -128,11 +152,11 @@ export async function runAlertEvaluator(opts?: { dryRun?: boolean }): Promise<Ev
       continue;
     }
 
-    // Dedupe — only suppress when we've already SUCCESSFULLY delivered to
-    // this subscriber for this region+window in the last 24h. Failed rows
-    // are kept in the audit log but don't block a retry, otherwise a
-    // transient SMTP/push 5xx would silently swallow the alert for a day.
-    const alertWindow = `${bestMatch.region}:${dateKey(startedAt)}`;
+    // Dedupe key uses the subscriber's LOCAL date, not UTC. With UTC, an AEDT
+    // user (UTC+11) would see the "daily" window roll over at 11am local —
+    // re-alerting them mid-morning, or suppressing a real new storm late
+    // evening local. dateKey() now formats in `sub.timezone`.
+    const alertWindow = `${bestMatch.region}:${dateKey(startedAt, sub.timezone)}`;
     const yesterday = new Date(Date.now() - 24 * 3_600_000);
     const recent = await db.select({ id: dispatchedAlertsTable.id })
       .from(dispatchedAlertsTable)
@@ -148,12 +172,34 @@ export async function runAlertEvaluator(opts?: { dryRun?: boolean }): Promise<Ev
       continue;
     }
 
+    // Failure backoff — if we've tried and failed >=3 times in the last 24h
+    // with no success, stop hammering SMTP/push for this subscriber. Without
+    // this, a permanently-bouncing address gets retried every cron tick
+    // forever (lastAlertedAt is only bumped on success).
+    const failureCountRows = await db.select({ n: count() })
+      .from(dispatchedAlertsTable)
+      .where(and(
+        eq(dispatchedAlertsTable.subscriberId, sub.id),
+        eq(dispatchedAlertsTable.success, false),
+        gte(dispatchedAlertsTable.sentAt, yesterday),
+      ));
+    if ((failureCountRows[0]?.n ?? 0) >= MAX_FAILURES_PER_24H) {
+      report.skipped.failureBackoff++;
+      continue;
+    }
+
     if (dryRun) {
       report.alertsSent++;
       continue;
     }
 
-    // Build email + push and dispatch.
+    // Build email + push and dispatch using a CLAIM-FIRST pattern: insert a
+    // success=true row before sending. If that insert hits the partial unique
+    // index `alert_dispatched_success_uidx (subscriberId, alertWindow,
+    // delivery) WHERE success=true`, another evaluator instance has already
+    // claimed this slot and we skip — preventing duplicate sends when two runs
+    // overlap (e.g. cron + manual /internal/alerts/run). On send failure we
+    // mark the row success=false so future runs can retry.
     const anchor = REGION_ANCHORS[bestMatch.region]!;
     const manageToken = issueToken(sub.id, "manage");
     const unsubToken = issueToken(sub.id, "unsub");
@@ -168,30 +214,54 @@ export async function runAlertEvaluator(opts?: { dryRun?: boolean }): Promise<Ev
 
     const dispatched = { emailOk: false, pushOk: false };
     if (sub.delivery === "email" || sub.delivery === "both") {
-      const r = await sendEmail({ to: sub.email, subject: tmpl.subject, html: tmpl.html, text: tmpl.text, tag: "powder_alert" });
-      dispatched.emailOk = r.delivered;
-      await db.insert(dispatchedAlertsTable).values({
+      const claim = await claimDispatchSlot({
         subscriberId: sub.id, mountain: anchor.displayName, region: bestMatch.region,
         alertWindow, snowfallCm: bestMatch.snowCm, delivery: "email",
-        success: r.delivered, errorMessage: r.error ?? null, payload: { provider: r.provider },
       });
+      if (!claim.claimed) {
+        report.skipped.dedupe++;
+      } else {
+        const r = await sendEmail({ to: sub.email, subject: tmpl.subject, html: tmpl.html, text: tmpl.text, tag: "powder_alert" });
+        dispatched.emailOk = r.delivered;
+        if (!r.delivered) {
+          await db.update(dispatchedAlertsTable)
+            .set({ success: false, errorMessage: r.error ?? null, payload: { provider: r.provider } })
+            .where(eq(dispatchedAlertsTable.id, claim.id));
+        } else {
+          await db.update(dispatchedAlertsTable)
+            .set({ payload: { provider: r.provider } })
+            .where(eq(dispatchedAlertsTable.id, claim.id));
+        }
+      }
     }
     if (sub.delivery === "push" || sub.delivery === "both") {
       const targets = await db.select().from(pushSubscriptionsTable).where(eq(pushSubscriptionsTable.subscriberId, sub.id));
-      for (const t of targets) {
-        const pr = await sendPush(
-          { endpoint: t.endpoint, keys: { p256dh: t.p256dh, auth: t.auth } },
-          { title: tmpl.subject, body: `${bestMatch.snowCm}cm forecast at ${anchor.displayName}`, url: `/${bestMatch.region}/today`, tag: alertWindow },
-        );
-        if (!pr.ok && pr.gone) {
-          await db.delete(pushSubscriptionsTable).where(eq(pushSubscriptionsTable.id, t.id));
+      // Push uses a single claim row for "push delivery to this subscriber for
+      // this window". Per-endpoint failures (e.g. one stale browser) shouldn't
+      // unclaim the slot — we still consider push delivered if at least one
+      // endpoint succeeded.
+      const claim = targets.length > 0 ? await claimDispatchSlot({
+        subscriberId: sub.id, mountain: anchor.displayName, region: bestMatch.region,
+        alertWindow, snowfallCm: bestMatch.snowCm, delivery: "push",
+      }) : { claimed: false as const, id: "" };
+      if (claim.claimed) {
+        const errors: string[] = [];
+        for (const t of targets) {
+          const pr = await sendPush(
+            { endpoint: t.endpoint, keys: { p256dh: t.p256dh, auth: t.auth } },
+            { title: tmpl.subject, body: `${bestMatch.snowCm}cm forecast at ${anchor.displayName}`, url: `/${bestMatch.region}/today`, tag: alertWindow },
+          );
+          if (!pr.ok && pr.gone) {
+            await db.delete(pushSubscriptionsTable).where(eq(pushSubscriptionsTable.id, t.id));
+          }
+          if (pr.ok) dispatched.pushOk = true;
+          else if (pr.error) errors.push(pr.error);
         }
-        if (pr.ok) dispatched.pushOk = true;
-        await db.insert(dispatchedAlertsTable).values({
-          subscriberId: sub.id, mountain: anchor.displayName, region: bestMatch.region,
-          alertWindow, snowfallCm: bestMatch.snowCm, delivery: "push",
-          success: pr.ok, errorMessage: pr.ok ? null : pr.error, payload: { endpoint: t.endpoint.slice(0, 60) + "…" },
-        });
+        if (!dispatched.pushOk) {
+          await db.update(dispatchedAlertsTable)
+            .set({ success: false, errorMessage: errors.join("; ").slice(0, 500) || "all endpoints failed" })
+            .where(eq(dispatchedAlertsTable.id, claim.id));
+        }
       }
     }
 
@@ -211,8 +281,21 @@ export async function runAlertEvaluator(opts?: { dryRun?: boolean }): Promise<Ev
   return report;
 }
 
-function dateKey(d: Date): string {
-  return d.toISOString().slice(0, 10);
+/**
+ * Derive a YYYY-MM-DD key in the subscriber's local timezone. Using UTC here
+ * caused the "daily" alert window to roll over mid-morning for non-UTC users,
+ * triggering duplicate alerts and missing late-evening storms.
+ */
+function dateKey(d: Date, timezone: string): string {
+  try {
+    // en-CA uses ISO YYYY-MM-DD formatting natively.
+    return new Intl.DateTimeFormat("en-CA", {
+      timeZone: timezone,
+      year: "numeric", month: "2-digit", day: "2-digit",
+    }).format(d);
+  } catch {
+    return d.toISOString().slice(0, 10);
+  }
 }
 
 function isQuietHour(tz: string): boolean {
