@@ -16,8 +16,8 @@ export const SNOWY_MOUNTAINS_TRANSPORT: TransportProviderList = [
     phone: "(02) 6452 1584",
     website: "https://www.coomacoaches.com.au",
     route_summary:
-      "Canberra → Cooma → Berridale → Jindabyne, plus resort shuttles to Perisher and Thredbo during the ski season.",
-    schedule_url: "https://www.coomacoaches.com.au",
+      "Cooma's local operator — runs the Snowy Mountains Bus Service plus charters, school runs and ski-season shuttles to Perisher and Thredbo.",
+    schedule_url: "https://coomacoaches.com.au/snowy-mountains-bus-service/",
     regions: ["snowy-mountains"],
   },
   {

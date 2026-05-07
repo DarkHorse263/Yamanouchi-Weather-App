@@ -21,6 +21,9 @@ import {
 
 import { SNOWY_MOUNTAINS_TRANSPORT } from "@/data/transport/snowy-mountains";
 import type { TransportProvider } from "@/types/transport";
+import coomaCoachesLogo from "@assets/CC_-_Colour_JM_Red_1778132452167.png";
+
+const SNOWY_MTNS_BUS_URL = "https://coomacoaches.com.au/snowy-mountains-bus-service/";
 
 /**
  * Snowy Mountains custom Transport page.
@@ -115,13 +118,18 @@ export function SnowyTransport() {
       {cooma && (
         <section className="px-6 md:px-10 pt-8">
           <article className="rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50 via-white to-blue-50/40 p-6 md:p-8 shadow-sm">
-            <div className="flex items-start gap-4">
-              <div className="shrink-0 w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center">
-                <Bus className="w-6 h-6" />
+            <div className="flex items-start gap-5 flex-wrap">
+              <div className="shrink-0 rounded-xl bg-white border border-blue-100 p-3 flex items-center justify-center">
+                <img
+                  src={coomaCoachesLogo}
+                  alt="Cooma Coaches — Connecting the Snowy Mountains"
+                  className="h-14 md:h-16 w-auto"
+                  draggable={false}
+                />
               </div>
               <div className="min-w-0 flex-1">
                 <p className="text-[11px] font-bold tracking-wider text-blue-700/80 uppercase">
-                  {t("Daily service · primary route", "毎日運行 · 主要路線")}
+                  {t("Local operator · runs the Snowy Mtns Bus Service", "地元事業者 · スノーマウンテンズバスサービス運営")}
                 </p>
                 <h2 className="font-display font-semibold text-2xl text-foreground mt-1">
                   {cooma.name}
@@ -153,23 +161,50 @@ export function SnowyTransport() {
                       <ExternalLink className="w-3 h-3 opacity-60" />
                     </a>
                   )}
-                  {cooma.schedule_url && (
+                </div>
+              </div>
+            </div>
+
+            {/* Snowy Mountains Bus Service breakout — Cooma Coaches' named
+                daily Canberra ↔ Jindabyne service. Called out separately
+                so visitors know which Cooma Coaches product to actually
+                book. */}
+            <div className="mt-6 pt-6 border-t border-blue-200/60">
+              <div className="rounded-xl border-2 border-blue-300 bg-white p-5">
+                <div className="flex items-start gap-3">
+                  <div className="shrink-0 w-10 h-10 rounded-lg bg-blue-600 text-white flex items-center justify-center">
+                    <Bus className="w-5 h-5" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-[11px] font-bold tracking-wider text-blue-700 uppercase">
+                      {t("Daily scheduled service", "毎日定期便")}
+                    </p>
+                    <h3 className="font-display font-semibold text-lg text-foreground mt-0.5">
+                      {t("Snowy Mountains Bus Service", "スノーマウンテンズバスサービス")}
+                    </h3>
+                    <p className="text-sm text-foreground/90 mt-2 leading-relaxed">
+                      {t(
+                        "Daily coach: Canberra → Cooma → Berridale → Jindabyne, with onward ski-season shuttles to Perisher and Thredbo. The route 90% of off-mountain visitors actually use.",
+                        "毎日運行：キャンベラ → クーマ → ベリデール → ジンダバイン。冬季はペリッシャー・スレッドボーへのシャトル接続あり。",
+                      )}
+                    </p>
                     <a
-                      href={cooma.schedule_url}
+                      href={SNOWY_MTNS_BUS_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 font-semibold text-foreground hover:text-blue-700"
+                      className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-800"
                     >
-                      <CalendarCheck className="w-4 h-4 text-blue-700" />
-                      {t("Timetable", "時刻表")}
+                      <CalendarCheck className="w-4 h-4" />
+                      {t("Timetable & fares", "時刻表・運賃")}
+                      <ExternalLink className="w-3 h-3 opacity-70" />
                     </a>
-                  )}
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Town stops breakout */}
-            <div className="mt-6 pt-6 border-t border-blue-200/60">
+            <div className="mt-6">
               <p className="text-[11px] font-bold tracking-wider text-blue-700/80 uppercase mb-3">
                 {t("Stops in this region", "この地域の停留所")}
               </p>
