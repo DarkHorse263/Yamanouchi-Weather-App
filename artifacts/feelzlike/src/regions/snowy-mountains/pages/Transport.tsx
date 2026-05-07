@@ -8,7 +8,6 @@ import {
   Train,
   Car,
   Footprints,
-  MapPin,
   ExternalLink,
 } from "lucide-react";
 
@@ -38,38 +37,6 @@ const SNOWY_MTNS_BUS_URL = "https://coomacoaches.com.au/snowy-mountains-bus-serv
  */
 
 const COOMA_COACHES_ID = "au-cooma-coaches";
-
-interface TownStopMeta {
-  id: "jindabyne" | "cooma" | "berridale";
-  labelEn: string;
-  labelJa: string;
-  blurbEn: string;
-  blurbJa: string;
-}
-
-const TOWN_STOPS: TownStopMeta[] = [
-  {
-    id: "jindabyne",
-    labelEn: "Jindabyne",
-    labelJa: "ジンダバイン",
-    blurbEn: "Final coach stop · the off-mountain hub for Perisher and Thredbo.",
-    blurbJa: "コーチ最終停留所 · ペリッシャー＆スレッドボーの拠点。",
-  },
-  {
-    id: "cooma",
-    labelEn: "Cooma",
-    labelJa: "クーマ",
-    blurbEn: "Regional gateway with Snowy Mountains Airport (OOM) and rail-coach interchange.",
-    blurbJa: "地域の玄関口 · スノーマウンテンズ空港 (OOM) と鉄道接続あり。",
-  },
-  {
-    id: "berridale",
-    labelEn: "Berridale",
-    labelJa: "ベリデール",
-    blurbEn: "Mid-route stop between Cooma and Jindabyne — useful if you're staying nearby.",
-    blurbJa: "クーマとジンダバインの中間停留所 · 周辺宿泊者向け。",
-  },
-];
 
 export function SnowyTransport() {
   const { region } = useRegion();
@@ -203,45 +170,6 @@ export function SnowyTransport() {
               </div>
             </div>
 
-            {/* Town stops breakout */}
-            <div className="mt-6">
-              <p className="text-[11px] font-bold tracking-wider text-blue-700/80 uppercase mb-3">
-                {t("Stops in this region", "この地域の停留所")}
-              </p>
-              <ul className="grid sm:grid-cols-3 gap-3">
-                {TOWN_STOPS.map((stop) => {
-                  const isCurrent = town?.id === stop.id;
-                  return (
-                    <li
-                      key={stop.id}
-                      className={`rounded-xl border p-4 ${
-                        isCurrent
-                          ? "border-blue-400 bg-white ring-1 ring-blue-300"
-                          : "border-border bg-white"
-                      }`}
-                    >
-                      <div className="flex items-center gap-2">
-                        <MapPin
-                          className={`w-4 h-4 ${isCurrent ? "text-blue-700" : "text-muted-foreground/70"}`}
-                          aria-hidden
-                        />
-                        <p className="font-display font-semibold text-foreground text-sm">
-                          {t(stop.labelEn, stop.labelJa)}
-                        </p>
-                        {isCurrent && (
-                          <span className="ml-auto text-[10px] font-bold text-blue-700 uppercase tracking-wider">
-                            {t("You", "現在地")}
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-xs text-muted-foreground mt-2 leading-snug">
-                        {t(stop.blurbEn, stop.blurbJa)}
-                      </p>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
           </article>
         </section>
       )}
