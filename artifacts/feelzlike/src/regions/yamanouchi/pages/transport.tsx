@@ -165,64 +165,12 @@ export default function Transport() {
 
       <div className="px-4 pb-6 space-y-5 mt-4">
 
-        {/* ── SECTION 1: FREE SHUTTLE WITHIN SHIGA KOGEN ── */}
+        {/* ── SECTION 1: YUDANAKA ↔ SHIGA KOGEN ──
+            Reordered May 2026: visitors staying in Yudanaka/Shibu need
+            the up-to-Shiga bus first; the in-Shiga free shuttle is only
+            useful once they're already up the mountain. */}
         <section>
-          <SectionHeader num="1" color="bg-green-600" title={t("Free Shuttle - Within Shiga Kogen", "無料シャトル - 志賀高原内")} />
-          <div className="bg-white rounded-xl border border-slate-100 p-3.5 space-y-3">
-            <div className="flex items-start gap-3">
-              <Bus className="w-5 h-5 text-green-600 mt-0.5 shrink-0" />
-              <div>
-                <p className="text-sm font-bold text-slate-800">{t("Free Resort Shuttle", "無料シャトルバス")}</p>
-                <p className="text-xs text-slate-500 mt-0.5">
-                  {t("Connects all areas across Shiga Kogen highlands", "志賀高原内全エリアを結ぶ")}
-                </p>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-2">
-              <div className="bg-green-50 rounded-lg px-3 py-2">
-                <p className="text-[10px] text-green-600 uppercase tracking-wide font-bold">{t("Cost", "料金")}</p>
-                <p className="text-base font-black text-green-800">{t("FREE", "無料")}</p>
-              </div>
-              <div className="bg-slate-50 rounded-lg px-3 py-2">
-                <p className="text-[10px] text-slate-400 uppercase tracking-wide font-bold">{t("Hours", "運行時間")}</p>
-                <p className="text-base font-black text-slate-800">08:30–17:30</p>
-              </div>
-            </div>
-
-            <div className="space-y-2 border-t border-slate-100 pt-3">
-              <div className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
-                <p className="text-xs text-slate-600">
-                  {t("Central hub: Yamanoeki bus stop. All routes pass through here - it's where the express bus from Nagano also drops off.", "中心拠点は山ノ駅バス停。全路線がここを経由し、長野からの急行バスもここに到着します。")}
-                </p>
-              </div>
-              <div className="flex items-start gap-2">
-                <Info className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
-                <p className="text-xs text-slate-600">
-                  {t("Runs daily during operating season. Frequency varies by route - allow extra time between far-apart areas.", "運行シーズン中は毎日運行。路線によって頻度が異なります。離れたエリア間は余裕を持って。")}
-                </p>
-              </div>
-            </div>
-
-            <a
-              href="https://www.shigakogen.gr.jp/english/topics/shiga-kogen-bus-service-information.html#shuttlebus"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-between w-full bg-green-50 rounded-lg px-3 py-2.5"
-            >
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-green-700" />
-                <span className="text-xs font-bold text-green-800">{t("Shuttle Bus Map & Routes", "シャトルバス路線図")}</span>
-              </div>
-              <ExternalLink className="w-3.5 h-3.5 text-green-600" />
-            </a>
-          </div>
-        </section>
-
-        {/* ── SECTION 2: YUDANAKA ↔ SHIGA KOGEN ── */}
-        <section>
-          <SectionHeader num="2" color="bg-blue-600" title={t("Yudanaka → Shiga Kogen", "湯田中→志賀高原")} />
+          <SectionHeader num="1" color="bg-blue-600" title={t("Yudanaka → Shiga Kogen", "湯田中→志賀高原")} />
           <div className="bg-white rounded-xl border border-slate-100 p-3.5 space-y-3">
             <div className="flex items-start gap-3">
               <Bus className="w-5 h-5 text-blue-600 mt-0.5 shrink-0" />
@@ -277,6 +225,61 @@ export default function Transport() {
                 <span className="text-xs font-bold text-blue-700">{t("Full Shiga Kogen Line Timetable (both directions)", "志賀高原線 全時刻表（上り・下り）")}</span>
               </div>
               <ExternalLink className="w-3.5 h-3.5 text-blue-500" />
+            </a>
+          </div>
+        </section>
+
+        {/* ── SECTION 2: FREE SHUTTLE WITHIN SHIGA KOGEN ── */}
+        <section>
+          <SectionHeader num="2" color="bg-green-600" title={t("Free Shuttle - Within Shiga Kogen", "無料シャトル - 志賀高原内")} />
+          <div className="bg-white rounded-xl border border-slate-100 p-3.5 space-y-3">
+            <div className="flex items-start gap-3">
+              <Bus className="w-5 h-5 text-green-600 mt-0.5 shrink-0" />
+              <div>
+                <p className="text-sm font-bold text-slate-800">{t("Free Resort Shuttle", "無料シャトルバス")}</p>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  {t("Connects all areas across Shiga Kogen highlands", "志賀高原内全エリアを結ぶ")}
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2">
+              <div className="bg-green-50 rounded-lg px-3 py-2">
+                <p className="text-[10px] text-green-600 uppercase tracking-wide font-bold">{t("Cost", "料金")}</p>
+                <p className="text-base font-black text-green-800">{t("FREE", "無料")}</p>
+              </div>
+              <div className="bg-slate-50 rounded-lg px-3 py-2">
+                <p className="text-[10px] text-slate-400 uppercase tracking-wide font-bold">{t("Hours", "運行時間")}</p>
+                <p className="text-base font-black text-slate-800">08:30–17:30</p>
+              </div>
+            </div>
+
+            <div className="space-y-2 border-t border-slate-100 pt-3">
+              <div className="flex items-start gap-2">
+                <MapPin className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
+                <p className="text-xs text-slate-600">
+                  {t("Central hub: Yamanoeki bus stop. All routes pass through here - it's where the express bus from Nagano also drops off.", "中心拠点は山ノ駅バス停。全路線がここを経由し、長野からの急行バスもここに到着します。")}
+                </p>
+              </div>
+              <div className="flex items-start gap-2">
+                <Info className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+                <p className="text-xs text-slate-600">
+                  {t("Runs daily during operating season. Frequency varies by route - allow extra time between far-apart areas.", "運行シーズン中は毎日運行。路線によって頻度が異なります。離れたエリア間は余裕を持って。")}
+                </p>
+              </div>
+            </div>
+
+            <a
+              href="https://www.shigakogen.gr.jp/english/topics/shiga-kogen-bus-service-information.html#shuttlebus"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between w-full bg-green-50 rounded-lg px-3 py-2.5"
+            >
+              <div className="flex items-center gap-2">
+                <Clock className="w-4 h-4 text-green-700" />
+                <span className="text-xs font-bold text-green-800">{t("Shuttle Bus Map & Routes", "シャトルバス路線図")}</span>
+              </div>
+              <ExternalLink className="w-3.5 h-3.5 text-green-600" />
             </a>
           </div>
         </section>
