@@ -96,11 +96,6 @@ export function TownHome() {
 
   // ~1.5 min/km is a reasonable alpine-road estimate
   const driveMinutes = closest ? Math.max(5, Math.round(closest.km * 1.5)) : null;
-  const tempValue =
-    closest?.entry.current?.temperature !== undefined
-      ? Math.round(closest.entry.current.temperature).toString()
-      : null;
-  const weatherHint = closest?.entry.current?.weatherDescription ?? closest?.entry.location.name ?? "";
   const roadValue = !roadsAvailable
     ? "-"
     : roadsSummary
@@ -165,8 +160,13 @@ export function TownHome() {
         <div className="rule mt-6" />
       </motion.header>
 
-      {/* Snapshot strip - live conditions */}
-      <section className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      {/* Snapshot strip - live conditions
+          May 2026: dropped the standalone "Nearest mountain" temperature
+          tile. The "To the mountain" tile now leads with the mountain name
+          and shows distance + drive time directly underneath - one less
+          tile, less duplication, and a clearer answer to "where am I
+          going?". */}
+      <section className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
         <SnapshotCard
           label={t("In town now", "町の現在")}
           value={
@@ -188,28 +188,18 @@ export function TownHome() {
           }
         />
         <SnapshotCard
-          label={t("Nearest mountain", "最寄りの山")}
-          value={tempValue ?? "-"}
-          unit="°"
+          label={t("To the mountain", "山まで")}
+          value={closest ? closest.entry.location.name : "-"}
+          unit=""
           hint={
             weatherQ.isLoading
               ? t("Loading…", "読込中…")
-              : closest
-                ? `${closest.entry.location.name} · ${weatherHint}`
-                : t("Weather unavailable", "天気情報なし")
-          }
-        />
-        <SnapshotCard
-          label={t("To the mountain", "山まで")}
-          value={driveMinutes !== null ? `~${driveMinutes}` : "-"}
-          unit={t("min", "分")}
-          hint={
-            closest
-              ? t(
-                  `${Math.round(closest.km)} km to ${closest.entry.location.name}`,
-                  `${closest.entry.location.name}まで約${Math.round(closest.km)}km`,
-                )
-              : t("Drive time unavailable", "所要時間なし")
+              : closest && driveMinutes !== null
+                ? t(
+                    `${Math.round(closest.km)} km · ~${driveMinutes} min`,
+                    `約${Math.round(closest.km)}km・約${driveMinutes}分`,
+                  )
+                : t("Drive time unavailable", "所要時間なし")
           }
         />
         <SnapshotCard
