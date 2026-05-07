@@ -277,65 +277,96 @@ export function AppShell({ children }: { children: ReactNode }) {
         </AnimatePresence>
       </main>
 
-      {/* Mobile bottom nav: condensed, scope-aware */}
+      {/* Mobile bottom nav: scope-aware, horizontally scrollable so every
+          link is reachable on phones. In town scope we splice the Mountains
+          section in right after "Today" - off-mountain decision support
+          relies on the mountain links being one tap away, not buried in a
+          desktop-only sidebar. */}
       <nav className="md:hidden fixed bottom-0 inset-x-0 z-40 glass-strong pb-safe">
-        <div className="flex justify-around items-center px-1 h-16">
-          {(parsed.scope === "town" && navTown
-            ? townNav.slice(0, 5).map((item) => ({
-                key: `t:${item.path}`,
-                href: townHref(item.path),
-                icon: item.icon,
-                label: t(item.label, item.labelJa),
-                active: isActiveTown(item.path),
-              }))
-            : [
-                // First region-nav item drives the mobile "Region" tab. With
-                // `/` repointed to redirect into baseTowns[0], we send mobile
-                // users to the *real* first region page (Sources by default)
-                // so the chrome navigation isn't a silent town-bounce.
-                ...(regionNav[0]
-                  ? [
-                      {
-                        key: `region:${regionNav[0].path}`,
-                        href: regionNav[0].path,
-                        icon: regionNav[0].icon,
-                        label: t(regionNav[0].label, regionNav[0].labelJa),
-                        active:
-                          parsed.scope === "region" &&
-                          (location === regionNav[0].path ||
-                            location.startsWith(regionNav[0].path + "/")),
-                      },
-                    ]
-                  : []),
-                ...mountainNav.slice(0, 4).map((item) => ({
+        <div className="flex items-center px-1 h-16 overflow-x-auto hide-scrollbar">
+          {(() => {
+            type Item = {
+              key: string;
+              href: string;
+              icon: NavItem["icon"];
+              label: string;
+              active: boolean;
+            };
+            const items: Item[] = [];
+            if (parsed.scope === "town" && navTown) {
+              const [first, ...rest] = townNav;
+              if (first) {
+                items.push({
+                  key: `t:${first.path}`,
+                  href: townHref(first.path),
+                  icon: first.icon,
+                  label: t(first.label, first.labelJa),
+                  active: isActiveTown(first.path),
+                });
+              }
+              mountainNav.forEach((item) => {
+                items.push({
                   key: `m:${item.path}`,
-                  href: item.path,
+                  href: mountainHref(item.path),
                   icon: item.icon,
                   label: t(item.label, item.labelJa),
                   active: isActiveMountain(item.path),
-                })),
-              ]
-          ).map((item) => {
-            const Icon = item.icon;
-            return (
-              <Link
-                key={item.key}
-                href={item.href}
-                className={cn(
-                  "relative flex flex-col items-center justify-center flex-1 h-full gap-1 transition-all",
-                  item.active ? "text-primary" : "text-muted-foreground/80",
-                )}
-              >
-                {item.active && (
-                  <span className="absolute top-1.5 w-8 h-0.5 rounded-full bg-primary" />
-                )}
-                <Icon className="w-4 h-4" />
-                <span className="text-[9px] font-semibold tracking-wider uppercase leading-none">
-                  {item.label}
-                </span>
-              </Link>
-            );
-          })}
+                });
+              });
+              rest.forEach((item) => {
+                items.push({
+                  key: `t:${item.path}`,
+                  href: townHref(item.path),
+                  icon: item.icon,
+                  label: t(item.label, item.labelJa),
+                  active: isActiveTown(item.path),
+                });
+              });
+            } else {
+              if (regionNav[0]) {
+                const r0 = regionNav[0];
+                items.push({
+                  key: `region:${r0.path}`,
+                  href: r0.path,
+                  icon: r0.icon,
+                  label: t(r0.label, r0.labelJa),
+                  active:
+                    parsed.scope === "region" &&
+                    (location === r0.path || location.startsWith(r0.path + "/")),
+                });
+              }
+              mountainNav.forEach((item) => {
+                items.push({
+                  key: `m:${item.path}`,
+                  href: mountainHref(item.path),
+                  icon: item.icon,
+                  label: t(item.label, item.labelJa),
+                  active: isActiveMountain(item.path),
+                });
+              });
+            }
+            return items.map((item) => {
+              const Icon = item.icon;
+              return (
+                <Link
+                  key={item.key}
+                  href={item.href}
+                  className={cn(
+                    "relative flex flex-col items-center justify-center shrink-0 h-full gap-1 px-3 min-w-[64px] transition-all",
+                    item.active ? "text-primary" : "text-muted-foreground/80",
+                  )}
+                >
+                  {item.active && (
+                    <span className="absolute top-1.5 w-8 h-0.5 rounded-full bg-primary" />
+                  )}
+                  <Icon className="w-4 h-4" />
+                  <span className="text-[9px] font-semibold tracking-wider uppercase leading-none whitespace-nowrap">
+                    {item.label}
+                  </span>
+                </Link>
+              );
+            });
+          })()}
         </div>
       </nav>
     </div>
