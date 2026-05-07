@@ -62,7 +62,7 @@ export function HomeFooter() {
             <li><a className="hover:text-sky-700" href="#" onClick={(e) => { e.preventDefault(); window.dispatchEvent(new CustomEvent("feelzlike:open-consent")); }}>Privacy & cookies</a></li>
             <li><a className="hover:text-sky-700" href="mailto:hello@feelzlike.com">Contact</a></li>
             <li><a className="hover:text-sky-700" href="mailto:photos@feelzlike.com">Photo credits</a></li>
-            <li><span className="text-slate-400">© {year} feelzlike</span></li>
+            <li><span className="text-slate-400">© {year} Navigate Work Digital — feelzlike</span></li>
           </ul>
         </div>
       </div>
