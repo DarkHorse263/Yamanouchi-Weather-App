@@ -14,17 +14,23 @@ import {
   CloudDrizzle,
   CloudFog,
   CloudLightning,
+  Star,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import {
+  readFavouriteRegion,
+  writeFavouriteRegion,
+  markLandingVisited,
+  landingAlreadyVisitedThisSession,
+  isKnownRegionId,
+} from "@/lib/favouriteRegion";
 // The original logo is dark-on-transparent. We CSS-invert it to white-on-
 // transparent for the hero gradient (`_dark.png` has a checkerboard texture
 // baked into the export and isn't usable). filter: brightness(0) invert(1)
 // crushes the colour-channel detail to pure white but is the cleanest way
 // to keep the same artwork legible against the dark gradient.
 import mainLogo from "@assets/feelzlike_transparent/feelzlike_colour_150426_1777272466909_transparent.png";
-import { HomeCurationStrip } from "@/components/home/HomeCurationStrip";
-import { WhyFeelzlike } from "@/components/home/WhyFeelzlike";
 import { HomeFooter } from "@/components/home/HomeFooter";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { websiteSchema, organizationSchema } from "@/lib/seo/jsonLd";
@@ -139,6 +145,31 @@ function seasonForRegion(region: Region): "winter" | "green" {
 
 export default function Landing() {
   const [search, setSearch] = useState("");
+
+  // Favourite-region state. Reading once on mount + a re-render trigger
+  // when the star is toggled keeps the UI in sync without a context.
+  const [favourite, setFavourite] = useState<string | null>(() => readFavouriteRegion());
+
+  // Auto-redirect to favourite on first visit of the session. Hard-coded
+  // to client-side `window.location` because we want a real navigation that
+  // hits the region's wouter router (not a SPA-level swap on the landing
+  // route). After redirect we mark the session-visited flag so coming back
+  // to "/" in this tab shows landing normally.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (landingAlreadyVisitedThisSession()) return;
+    const fav = readFavouriteRegion();
+    // Validate the favourite ID against the known-live region list so a
+    // stale entry (region renamed / paused) doesn't bounce users into a
+    // broken slug. Stale IDs get cleared and we just show landing.
+    if (!fav || !isKnownRegionId(fav)) {
+      if (fav && !isKnownRegionId(fav)) writeFavouriteRegion(null);
+      markLandingVisited();
+      return;
+    }
+    markLandingVisited();
+    window.location.replace(`/${fav}/`);
+  }, []);
 
   const { data, dataUpdatedAt } = useQuery<RegionsResponse>({
     queryKey: ["regions"],
@@ -371,6 +402,8 @@ export default function Landing() {
               ? "bg-gradient-to-r from-emerald-50/60 to-emerald-50/40 text-emerald-700 group-hover:text-emerald-800"
               : "bg-gradient-to-r from-sky-50/50 to-blue-50/50 text-sky-700 group-hover:text-blue-700";
 
+            const isFavourite = favourite === region.id;
+
             return (
               <motion.a
                 key={region.id}
@@ -380,6 +413,28 @@ export default function Landing() {
                 transition={{ duration: 0.35, delay: 0.05 + i * 0.06 }}
                 className={`group relative flex flex-col overflow-hidden rounded-xl border bg-white hover:-translate-y-0.5 shadow-[0_1px_3px_rgba(15,23,42,0.04)] transition-all duration-200 ${cardBorder}`}
               >
+                {/* favourite-region star — pinning a region makes us
+                    auto-redirect to it on the next fresh tab visit. */}
+                <button
+                  type="button"
+                  aria-label={isFavourite ? `Unpin ${region.name} as favourite` : `Pin ${region.name} as favourite`}
+                  aria-pressed={isFavourite}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const next = isFavourite ? null : region.id;
+                    writeFavouriteRegion(next);
+                    setFavourite(next);
+                  }}
+                  className={`absolute top-2.5 right-2.5 z-10 inline-flex h-7 w-7 items-center justify-center rounded-full border transition-colors ${
+                    isFavourite
+                      ? "border-amber-300 bg-amber-50 text-amber-500 hover:bg-amber-100"
+                      : "border-slate-200 bg-white/90 text-slate-300 hover:text-amber-500 hover:border-amber-300"
+                  }`}
+                >
+                  <Star className={`h-3.5 w-3.5 ${isFavourite ? "fill-amber-400" : ""}`} />
+                </button>
+
                 {/* season-aware accent strip */}
                 <div className={`h-1 w-full ${accentStrip}`} />
 
@@ -524,12 +579,6 @@ export default function Landing() {
         )}
 
       </main>
-
-      {/* ─── CURATION DEPTH ───────────────────────────── */}
-      <HomeCurationStrip />
-
-      {/* ─── WHY FEELZLIKE (first-visit only) ─────────── */}
-      <WhyFeelzlike />
 
       {/* ─── TRUST FOOTER (data sources) ──────────────── */}
       <div className="relative z-10 max-w-6xl mx-auto px-5 mt-14 md:mt-20 pb-20 md:pb-28">

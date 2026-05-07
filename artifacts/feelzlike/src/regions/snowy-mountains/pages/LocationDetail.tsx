@@ -69,7 +69,6 @@ function formatAgo(iso: string | undefined | null, now: number): string {
 import { cn } from "../lib/utils";
 import { skyGradient } from "../lib/mountain-imagery";
 import { HourlyForecast } from "@/components/HourlyForecast";
-import { PowderCalendar } from "@/components/PowderCalendar";
 import { LiftWindHoldPanel } from "@/components/LiftWindHoldPanel";
 import { PowderFactorBadge } from "@/components/PowderFactorBadge";
 import { POWDER_THRESHOLDS_AU } from "@/types/weather";
@@ -408,12 +407,9 @@ export default function LocationDetail() {
           sectionNumber="04b"
         />
 
-        {/* 7-day Powder Calendar — glanceable trip-planner overview */}
-        <PowderCalendar
-          hourly={hourly}
-          thresholds={POWDER_THRESHOLDS_AU}
-          sectionNumber="04c"
-        />
+        {/* Powder Calendar intentionally NOT rendered for AU mountains —
+            powder days are far rarer here than in Yamanouchi/Japan, so the
+            calendar is restricted to JP regions where it's actually useful. */}
 
         {/* Wind-hold prediction — only on AU mountains we have lift seed data for */}
         <LiftWindHoldPanel

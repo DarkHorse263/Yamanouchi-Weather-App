@@ -9,7 +9,7 @@ import {
   Cable,
   AlertTriangle,
   Radar as RadarIcon,
-  Sparkles,
+  Database,
 } from "lucide-react";
 import type { NavItem } from "./types";
 
@@ -25,14 +25,23 @@ export const DEFAULT_TOWN_NAV: NavItem[] = [
 
 /** Sidebar items for the "Mountains" section. Paths are RELATIVE to /:region. */
 export const DEFAULT_MOUNTAIN_NAV: NavItem[] = [
-  { path: "/today",           icon: Sparkles,      label: "Today's call",  labelJa: "今日の判断" },
+  // "Today's call" was retired in the Apr 2026 reset (live data wasn't
+  // ready to back the verdict UI). The route is gone — keep this nav list
+  // free of dead paths.
   { path: "/mountains",       icon: Mountain,      label: "All mountains", labelJa: "スキー場一覧" },
   { path: "/mountains/lifts", icon: Cable,         label: "Lifts",         labelJa: "リフト", season: "winter" },
   { path: "/radar",           icon: RadarIcon,     label: "Radar",         labelJa: "気象レーダー" },
   { path: "/alerts",          icon: AlertTriangle, label: "Alerts",        labelJa: "警報" },
 ];
 
-/** Sidebar items for the "Region" section (shown above town/mountain sections). Paths are RELATIVE to /:region. */
+/**
+ * Sidebar items for the "Region" section (shown above town/mountain sections).
+ * Paths are RELATIVE to /:region.
+ *
+ * Note: the old "Region overview" entry was dropped when `/` was repointed to
+ * redirect into the first base town (`baseTowns[0]`). The Region section now
+ * surfaces region-wide context like the data-source attribution page.
+ */
 export const DEFAULT_REGION_NAV: NavItem[] = [
-  { path: "/", icon: Home, label: "Region overview", labelJa: "地域概要" },
+  { path: "/sources", icon: Database, label: "Sources", labelJa: "データ出典" },
 ];

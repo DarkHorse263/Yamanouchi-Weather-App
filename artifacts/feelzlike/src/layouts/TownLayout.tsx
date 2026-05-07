@@ -5,7 +5,7 @@ import { TownHome } from "@/pages/region/TownHome";
 import { TownSubpageStub } from "@/pages/region/TownSubpageStub";
 import { TownStay } from "@/pages/town/TownStay";
 import { TownEat } from "@/pages/town/TownEat";
-import { TownPlaces } from "@/pages/town/TownPlaces";
+import { TownExplore } from "@/pages/town/TownExplore";
 import { TownRoads } from "@/pages/town/TownRoads";
 import { TownTransport } from "@/pages/town/TownTransport";
 import { TownWeather } from "@/pages/town/TownWeather";
@@ -53,18 +53,8 @@ export function TownLayout() {
         <Route path="/cams" component={TownCams} />
         <Route path="/transport" component={TransportPage} />
         <Route path="/stay" component={TownStay} />
-        {/* /eat is the curated 121-entry food & drink dataset (Sprint 3).
-            Replaces the live-Google-Places TownPlaces variant. */}
         <Route path="/eat" component={TownEat} />
-        <Route path="/explore">
-          <TownPlaces
-            kind="explore"
-            title="Explore"
-            titleJa="観光"
-            blurb="Attractions, museums, parks and natural sights near town."
-            blurbJa="町周辺の観光地・博物館・公園・自然。"
-          />
-        </Route>
+        <Route path="/explore" component={TownExplore} />
         <Route>
           <TownSubpageStub title="Not found" titleJa="ページが見つかりません" />
         </Route>

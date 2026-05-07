@@ -131,7 +131,7 @@ const QUALITY_LABELS: Record<PowderQuality, { en: string; ja: string }> = {
   soft_fast: { en: "Soft and fast", ja: "ソフト＆高速" },
   decent: { en: "Decent turns", ja: "まずまず" },
   hardpack: { en: "Hardpack", ja: "ハードパック" },
-  survival: { en: "Survival skiing", ja: "サバイバル滑走" },
+  survival: { en: "Tough conditions", ja: "厳しいコンディション" },
 };
 
 /**

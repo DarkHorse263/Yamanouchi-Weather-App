@@ -29,7 +29,6 @@ function parseScope(location: string, townIds: Set<string>): ParsedScope {
     path === "/mountains" ||
     path.startsWith("/mountains/") ||
     path.startsWith("/mountain/") ||
-    path === "/today" ||
     path === "/radar" ||
     path === "/alerts" ||
     path.startsWith("/resort/") // legacy URL still maps to mountain scope
@@ -314,13 +313,24 @@ export function AppShell({ children }: { children: ReactNode }) {
                 active: isActiveTown(item.path),
               }))
             : [
-                {
-                  key: "region:overview",
-                  href: "/",
-                  icon: regionNav[0]?.icon ?? MountainIcon,
-                  label: t("Region", "地域"),
-                  active: parsed.scope === "region",
-                },
+                // First region-nav item drives the mobile "Region" tab. With
+                // `/` repointed to redirect into baseTowns[0], we send mobile
+                // users to the *real* first region page (Sources by default)
+                // so the chrome navigation isn't a silent town-bounce.
+                ...(regionNav[0]
+                  ? [
+                      {
+                        key: `region:${regionNav[0].path}`,
+                        href: regionNav[0].path,
+                        icon: regionNav[0].icon,
+                        label: t(regionNav[0].label, regionNav[0].labelJa),
+                        active:
+                          parsed.scope === "region" &&
+                          (location === regionNav[0].path ||
+                            location.startsWith(regionNav[0].path + "/")),
+                      },
+                    ]
+                  : []),
                 ...mountainNav.slice(0, 4).map((item) => ({
                   key: `m:${item.path}`,
                   href: item.path,

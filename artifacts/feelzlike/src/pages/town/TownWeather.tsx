@@ -285,7 +285,7 @@ function Outlook({
   if (days.length === 0) return null;
   return (
     <section className="mt-4 rounded-2xl border border-border bg-white p-5">
-      <p className="byline text-muted-foreground/70">{t("6-day outlook", "6日間予報")}</p>
+      <p className="byline text-muted-foreground/70">{t("Next 6 days", "今後6日間")}</p>
       <div className="mt-3 divide-y divide-border">
         {days.map((d) => {
           const Icon = pickIcon(d.weatherCode, true);

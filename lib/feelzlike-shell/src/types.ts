@@ -69,6 +69,21 @@ export interface RegionLanguagePack {
   locales: Language[];
 }
 
+export interface TourismLink {
+  /** Display label, e.g. "Snowy Mountains – Destination NSW" */
+  label: string;
+  /** Optional Japanese label */
+  labelJa?: string;
+  /** Outbound URL */
+  url: string;
+  /** Optional one-liner shown beneath the title */
+  blurb?: string;
+  blurbJa?: string;
+  /** Optional grouping, e.g. "Tourism", "Resorts", "Transport" */
+  category?: string;
+  categoryJa?: string;
+}
+
 export interface BaseTown {
   /** Stable id, e.g. "jindabyne". Used for persistence and Places filtering. */
   id: string;
@@ -117,6 +132,12 @@ export interface RegionConfig {
   baseTowns?: BaseTown[];
   /** Optional version/footer string */
   footer?: string;
+  /**
+   * Outbound tourism / official-info links rendered on the region's
+   * Explore page. Replaces the old live-Google-Places picker — the brief
+   * was clear: just point people at the local tourism authorities.
+   */
+  tourismLinks?: TourismLink[];
   /** Road conditions data source for this region. Drives the TownRoads page. */
   roadsSource?: {
     /** Display name of the source authority (e.g. "Live Traffic NSW"). */

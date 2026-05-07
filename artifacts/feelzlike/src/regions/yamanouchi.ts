@@ -97,6 +97,16 @@ export const yamanouchiRegion: RegionConfig = {
     },
   ],
   footer: "v0.3 · feelzlike",
+  tourismLinks: [
+    { category: "Tourism", categoryJa: "観光", label: "Go Nagano – Yamanouchi", labelJa: "Go Nagano 山ノ内", url: "https://www.go-nagano.net/en/destination/yamanouchi" },
+    { category: "Tourism", categoryJa: "観光", label: "Snow Monkey Resorts – Visitor Guide", labelJa: "スノーモンキーリゾーツ", url: "https://www.snowmonkeyresorts.com/" },
+    { category: "Tourism", categoryJa: "観光", label: "Yamanouchi Town Tourism Association", labelJa: "山ノ内町観光連盟", url: "https://www.info-yamanouchi.net/" },
+    { category: "Attractions", categoryJa: "観光地", label: "Jigokudani Yaen-koen (Snow Monkey Park)", labelJa: "地獄谷野猿公苑", url: "https://jigokudani-yaenkoen.co.jp/" },
+    { category: "Resorts", categoryJa: "スキー場", label: "Shiga Kogen Ski Resorts", labelJa: "志賀高原スキー場", url: "https://www.shigakogen-ski.or.jp/" },
+    { category: "Resorts", categoryJa: "スキー場", label: "Ryuoo Ski Park", labelJa: "竜王スキーパーク", url: "https://www.ryuoo.com/" },
+    { category: "Resorts", categoryJa: "スキー場", label: "Kita-Shiga Kogen", labelJa: "北志賀高原", url: "https://www.kitashiga.co.jp/" },
+    { category: "Onsen", categoryJa: "温泉", label: "Shibu Onsen Ryokan Association", labelJa: "渋温泉旅館組合", url: "https://www.shibuonsen.net/" },
+  ],
   roadsSource: {
     label: "Japan Road Traffic Information Center (JARTIC)",
     labelJa: "日本道路交通情報センター (JARTIC)",

@@ -8,12 +8,11 @@ import {
   BaseTownProvider,
 } from "@workspace/feelzlike-shell";
 import { getRegion } from "@/regions";
-import { RegionOverview } from "@/pages/region/RegionOverview";
 import { MountainsList } from "@/pages/region/MountainsList";
 import { TownLayout } from "@/layouts/TownLayout";
 import { RegionStub } from "@/pages/region/RegionStub";
 import { RegionStay } from "@/pages/region/RegionStay";
-import { TodaysCall } from "@/pages/region/TodaysCall";
+import { RegionSources } from "@/pages/region/RegionSources";
 import { snowyMountainsRouter } from "@/regions/snowy-mountains/router";
 import { yamanouchiRouter } from "@/regions/yamanouchi/router";
 // Iiyama temporarily removed — see artifacts/feelzlike/src/regions/index.ts
@@ -54,12 +53,22 @@ export function RegionLayout() {
 
   const hemisphere = region.id === "snowy-mountains" ? "south" : "north";
   const routes: RegionRouter = REGION_ROUTERS[region.id] ?? {};
+  // Default landing town for the region — first entry of baseTowns. Removes
+  // the old "Region Overview" splash page and drops users straight into the
+  // primary off-mountain town (Jindabyne for Snowy Mountains, Yudanaka for
+  // Yamanouchi). Aligns with the product brief: stayers want town-first data.
+  const defaultTown = region.baseTowns?.[0]?.id;
 
   const inner = (
     <AppShell>
       <Switch>
-        <Route path="/" component={RegionOverview} />
-        <Route path="/today" component={TodaysCall} />
+        <Route path="/">
+          {defaultTown ? (
+            <Redirect to={`/${defaultTown}`} />
+          ) : (
+            <RegionStub title="Region" titleJa="リージョン" />
+          )}
+        </Route>
         <Route path="/mountains" component={MountainsList} />
         <Route path="/mountains/lifts">
           {routes.LiftsAll ? <routes.LiftsAll /> : <RegionStub title="Lifts" titleJa="リフト運行" />}
@@ -86,6 +95,7 @@ export function RegionLayout() {
         <Route path="/explore">
           {routes.Explore ? <routes.Explore /> : <RegionStub title="Explore" titleJa="観光" />}
         </Route>
+        <Route path="/sources" component={RegionSources} />
         {/* Town routes: /:town and /:town/* — must come last so reserved slugs match first */}
         <Route path="/:town/:rest*" component={TownLayout} />
         <Route path="/:town" component={TownLayout} />
