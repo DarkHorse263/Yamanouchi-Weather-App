@@ -1,33 +1,7 @@
 import { motion } from "framer-motion";
-import { Radar as RadarIcon, ExternalLink, Info, Snowflake } from "lucide-react";
+import { Radar as RadarIcon, ExternalLink, Info } from "lucide-react";
 
 import { RadarMap } from "../components/RadarMap";
-import { snowyMountainsRegion } from "@/regions/snowy-mountains";
-
-const LEGEND_ITEMS = [
-  { color: "#22d3ee", label: "Light" },
-  { color: "#0ea5e9", label: "" },
-  { color: "#22c55e", label: "Moderate" },
-  { color: "#eab308", label: "" },
-  { color: "#f97316", label: "Heavy" },
-  { color: "#ef4444", label: "" },
-  { color: "#a855f7", label: "Intense" },
-];
-
-const RADAR_MARKERS = [
-  ...snowyMountainsRegion.mountains.map((m) => ({
-    id: m.id,
-    name: m.name,
-    lat: m.lat,
-    lng: m.lng,
-  })),
-  ...snowyMountainsRegion.baseTowns.map((t) => ({
-    id: t.id,
-    name: t.name,
-    lat: t.lat,
-    lng: t.lng,
-  })),
-];
 
 export default function Radar() {
   return (
@@ -70,35 +44,20 @@ export default function Radar() {
           transition={{ delay: 0.2 }}
           className="bg-card border border-border rounded-2xl overflow-hidden"
         >
-          <RadarMap markers={RADAR_MARKERS} />
+          <RadarMap />
 
           <div className="p-4 sm:p-5 border-t border-border flex items-center justify-between gap-4 flex-wrap">
-            <div className="flex items-center gap-3 flex-wrap">
-              <span className="text-xs text-muted-foreground font-medium flex items-center gap-1">
-                <Snowflake className="w-3.5 h-3.5" />
-                Precipitation:
-              </span>
-              <div className="flex items-center gap-0.5">
-                {LEGEND_ITEMS.map((item, i) => (
-                  <div key={i} className="flex flex-col items-center">
-                    <div
-                      className="w-8 h-4 first:rounded-l last:rounded-r"
-                      style={{ backgroundColor: item.color }}
-                    />
-                    {item.label && (
-                      <span className="text-[10px] text-muted-foreground mt-1">{item.label}</span>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
+            <span className="text-xs text-muted-foreground">
+              Live BOM radar mosaic via Windy. Drag to pan, scroll to zoom, use the
+              timeline at the bottom to scrub.
+            </span>
             <a
               href="https://www.bom.gov.au/products/IDR403.loop.shtml"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
+              className="flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline shrink-0"
             >
-              BOM Captain&apos;s Flat radar <ExternalLink className="w-3 h-3" />
+              BOM Wagga Wagga radar <ExternalLink className="w-3 h-3" />
             </a>
           </div>
         </motion.div>
@@ -114,9 +73,9 @@ export default function Radar() {
             <div className="text-sm text-foreground space-y-2 leading-relaxed">
               <p className="font-semibold text-foreground">Reading the snow radar</p>
               <p className="text-muted-foreground">
-                The animation shows the past two hours of precipitation in 10-minute steps, sourced from the
-                global RainViewer cache (which mirrors BOM data for Australia). Press play to loop through
-                the frames or scrub the timeline to study a specific moment.
+                The animation shows the past two hours of precipitation plus a short nowcast, sourced from
+                the Bureau of Meteorology&apos;s national radar mosaic via Windy. Press play to loop through
+                the frames or drag the timeline to study a specific moment.
               </p>
               <p className="text-muted-foreground">
                 At alpine elevations (above ~1,400 m) precipitation typically falls as snow when the
