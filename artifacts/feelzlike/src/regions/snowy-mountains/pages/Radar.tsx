@@ -1,49 +1,35 @@
 import { motion } from "framer-motion";
-import { Radar as RadarIcon, ExternalLink, RefreshCw, Info, Snowflake } from "lucide-react";
-import { useState, useCallback, useEffect } from "react";
+import { Radar as RadarIcon, ExternalLink, Info, Snowflake } from "lucide-react";
 
-const BOM_RADAR_ID = "IDR403";
-const BOM_RADAR_RANGE = "128km";
-const BOM_RADAR_NAME = "Canberra (Captain's Flat)";
-
-const API_BASE = `${import.meta.env.BASE_URL}api/bom-radar`;
-
-/**
- * BOM migrated radar imagery in 2026: the per-frame PNGs at
- * `/radar/{IDR}.T.{ts}.png` now return 404. The animated loop GIF at
- * `/radar/{IDR}.gif` still works and is what bom.gov.au itself embeds.
- * It comes with all overlays (topography, locations, range rings)
- * already composited and animation built in — so we just render it as
- * a single image and let BOM handle playback.
- */
-function loopUrl(cacheKey: number) {
-  return `${API_BASE}?type=loop&file=${BOM_RADAR_ID}.gif&t=${cacheKey}`;
-}
+import { RadarMap } from "../components/RadarMap";
+import { snowyMountainsRegion } from "@/regions/snowy-mountains";
 
 const LEGEND_ITEMS = [
-  { color: "#00E500", label: "Light" },
-  { color: "#00C800", label: "" },
-  { color: "#FFFF00", label: "Moderate" },
-  { color: "#FFC800", label: "" },
-  { color: "#FF6400", label: "Heavy" },
-  { color: "#FF0000", label: "" },
-  { color: "#C80000", label: "Intense" },
+  { color: "#22d3ee", label: "Light" },
+  { color: "#0ea5e9", label: "" },
+  { color: "#22c55e", label: "Moderate" },
+  { color: "#eab308", label: "" },
+  { color: "#f97316", label: "Heavy" },
+  { color: "#ef4444", label: "" },
+  { color: "#a855f7", label: "Intense" },
+];
+
+const RADAR_MARKERS = [
+  ...snowyMountainsRegion.mountains.map((m) => ({
+    id: m.id,
+    name: m.name,
+    lat: m.lat,
+    lng: m.lng,
+  })),
+  ...snowyMountainsRegion.baseTowns.map((t) => ({
+    id: t.id,
+    name: t.name,
+    lat: t.lat,
+    lng: t.lng,
+  })),
 ];
 
 export default function Radar() {
-  const [cacheKey, setCacheKey] = useState(() => Date.now());
-  const [lastRefresh, setLastRefresh] = useState(new Date());
-
-  const refresh = useCallback(() => {
-    setCacheKey(Date.now());
-    setLastRefresh(new Date());
-  }, []);
-
-  useEffect(() => {
-    const autoRefresh = setInterval(refresh, 5 * 60 * 1000);
-    return () => clearInterval(autoRefresh);
-  }, [refresh]);
-
   return (
     <>
       <div className="relative overflow-hidden bg-slate-900 text-white">
@@ -71,7 +57,7 @@ export default function Radar() {
               <span className="text-primary">Radar</span>
             </h1>
             <p className="text-white/70 text-lg max-w-lg mt-4">
-              Live BOM precipitation radar covering the Snowy Mountains. Track snowfall, storms, and weather systems heading for the ski fields.
+              Live animated precipitation radar over the Snowy Mountains. Watch storms approach Thredbo, Perisher and Charlotte&apos;s Pass in real time.
             </p>
           </motion.div>
         </div>
@@ -82,55 +68,15 @@ export default function Radar() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-card border border-border rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
-        >
-          <div>
-            <p className="text-sm text-muted-foreground">
-              {BOM_RADAR_NAME} Radar &middot; {BOM_RADAR_RANGE} range
-            </p>
-            <p className="text-xs text-muted-foreground mt-1">
-              Last refreshed: {lastRefresh.toLocaleTimeString()} &middot; Auto-refreshes every 5 min
-            </p>
-          </div>
-          <div className="flex items-center gap-3">
-            <button
-              onClick={refresh}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium border border-border rounded-full hover:bg-muted transition-colors"
-            >
-              <RefreshCw className="w-4 h-4" />
-              Refresh
-            </button>
-            <a
-              href={`https://www.bom.gov.au/products/${BOM_RADAR_ID}.loop.shtml`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium border border-primary text-primary rounded-full hover:bg-primary/5 transition-colors"
-            >
-              View on BOM <ExternalLink className="w-3.5 h-3.5" />
-            </a>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
           className="bg-card border border-border rounded-2xl overflow-hidden"
         >
-          <div className="relative max-w-3xl mx-auto bg-[#000010]">
-            <img
-              key={cacheKey}
-              src={loopUrl(cacheKey)}
-              alt={`${BOM_RADAR_NAME} animated radar loop`}
-              className="block w-full h-auto"
-            />
-          </div>
+          <RadarMap markers={RADAR_MARKERS} />
 
-          <div className="p-4 sm:p-5 border-t border-border">
+          <div className="p-4 sm:p-5 border-t border-border flex items-center justify-between gap-4 flex-wrap">
             <div className="flex items-center gap-3 flex-wrap">
               <span className="text-xs text-muted-foreground font-medium flex items-center gap-1">
                 <Snowflake className="w-3.5 h-3.5" />
-                Precipitation intensity:
+                Precipitation:
               </span>
               <div className="flex items-center gap-0.5">
                 {LEGEND_ITEMS.map((item, i) => (
@@ -146,28 +92,36 @@ export default function Radar() {
                 ))}
               </div>
             </div>
+            <a
+              href="https://www.bom.gov.au/products/IDR403.loop.shtml"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
+            >
+              BOM Captain&apos;s Flat radar <ExternalLink className="w-3 h-3" />
+            </a>
           </div>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900 rounded-2xl p-5"
+          transition={{ delay: 0.3 }}
+          className="bg-card border border-border rounded-2xl p-5"
         >
           <div className="flex items-start gap-3">
-            <Info className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 shrink-0" />
-            <div className="text-sm text-blue-900 dark:text-blue-200 space-y-2">
-              <p className="font-semibold">Reading the snow radar</p>
-              <p>
-                This BOM radar covers Thredbo, Perisher, Charlotte&apos;s Pass, Selwyn, and Jindabyne.
-                At alpine elevations (above ~1400m), precipitation shown on radar is typically
-                falling as snow when temperatures are at or below 0°C. Check the current
-                temperature on each resort&apos;s page to gauge whether precipitation is snow or rain.
+            <Info className="w-5 h-5 text-primary mt-0.5 shrink-0" />
+            <div className="text-sm text-foreground space-y-2 leading-relaxed">
+              <p className="font-semibold text-foreground">Reading the snow radar</p>
+              <p className="text-muted-foreground">
+                The animation shows the past two hours of precipitation in 10-minute steps, sourced from the
+                global RainViewer cache (which mirrors BOM data for Australia). Press play to loop through
+                the frames or scrub the timeline to study a specific moment.
               </p>
-              <p>
-                Green returns indicate light snowfall, yellow is moderate, and orange-to-red signals
-                heavy snow or storm activity — great for powder days. Watch for systems
+              <p className="text-muted-foreground">
+                At alpine elevations (above ~1,400 m) precipitation typically falls as snow when the
+                temperature is at or below 0&deg;C. Cool blues mean light returns, greens and yellows are
+                moderate, and oranges through purple signal heavy storm activity. Watch for systems
                 approaching from the west and southwest for the best snow events.
               </p>
             </div>
