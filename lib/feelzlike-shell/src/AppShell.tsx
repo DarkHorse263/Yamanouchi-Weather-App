@@ -294,33 +294,52 @@ export function AppShell({ children }: { children: ReactNode }) {
             };
             const items: Item[] = [];
             if (parsed.scope === "town" && navTown) {
-              const [first, ...rest] = townNav;
-              if (first) {
+              // Hand-curated order so the most decision-critical links come
+              // first: Today (now), Mountains (where), Roads (drive), Radar
+              // (weather), Alerts (warnings), then the rest of the town nav.
+              const pushTown = (path: string) => {
+                const it = townNav.find((n) => n.path === path);
+                if (!it) return;
                 items.push({
-                  key: `t:${first.path}`,
-                  href: townHref(first.path),
-                  icon: first.icon,
-                  label: t(first.label, first.labelJa),
-                  active: isActiveTown(first.path),
+                  key: `t:${it.path}`,
+                  href: townHref(it.path),
+                  icon: it.icon,
+                  label: t(it.label, it.labelJa),
+                  active: isActiveTown(it.path),
                 });
-              }
-              mountainNav.forEach((item) => {
+              };
+              const pushMountain = (path: string) => {
+                const it = mountainNav.find((n) => n.path === path);
+                if (!it) return;
                 items.push({
-                  key: `m:${item.path}`,
-                  href: mountainHref(item.path),
-                  icon: item.icon,
-                  label: t(item.label, item.labelJa),
-                  active: isActiveMountain(item.path),
+                  key: `m:${it.path}`,
+                  href: mountainHref(it.path),
+                  icon: it.icon,
+                  label: t(it.label, it.labelJa),
+                  active: isActiveMountain(it.path),
                 });
+              };
+              const seen = new Set<string>();
+              const addTown = (p: string) => {
+                pushTown(p);
+                seen.add(`t:${p}`);
+              };
+              const addMountain = (p: string) => {
+                pushMountain(p);
+                seen.add(`m:${p}`);
+              };
+              addTown("/");                  // Today
+              addMountain("/mountains");     // All mountains
+              addTown("/roads");             // Roads
+              addMountain("/radar");         // Radar
+              addMountain("/alerts");        // Alerts
+              // Append any remaining town items in their original order
+              townNav.forEach((it) => {
+                if (!seen.has(`t:${it.path}`)) addTown(it.path);
               });
-              rest.forEach((item) => {
-                items.push({
-                  key: `t:${item.path}`,
-                  href: townHref(item.path),
-                  icon: item.icon,
-                  label: t(item.label, item.labelJa),
-                  active: isActiveTown(item.path),
-                });
+              // Append any remaining mountain items (future-proofing)
+              mountainNav.forEach((it) => {
+                if (!seen.has(`m:${it.path}`)) addMountain(it.path);
               });
             } else {
               if (regionNav[0]) {
