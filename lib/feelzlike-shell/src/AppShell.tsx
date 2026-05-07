@@ -107,6 +107,58 @@ export function AppShell({ children }: { children: ReactNode }) {
     return location === path || location.startsWith(`${path}/`);
   };
 
+  // Single source of truth for the combined town+mountain link order, used by
+  // both the desktop sidebar and the mobile bottom nav so they never drift.
+  type CombinedNavItem = {
+    key: string;
+    href: string;
+    icon: NavItem["icon"];
+    label: string;
+    active: boolean;
+  };
+  const buildCombinedNav = (): CombinedNavItem[] => {
+    const items: CombinedNavItem[] = [];
+    const seen = new Set<string>();
+    const pushTown = (path: string) => {
+      const it = townNav.find((n) => n.path === path);
+      if (!it || !navTown || seen.has(`t:${path}`)) return;
+      seen.add(`t:${path}`);
+      items.push({
+        key: `t:${it.path}`,
+        href: townHref(it.path),
+        icon: it.icon,
+        label: t(it.label, it.labelJa),
+        active: isActiveTown(it.path),
+      });
+    };
+    const pushMountain = (path: string) => {
+      const it = mountainNav.find((n) => n.path === path);
+      if (!it || seen.has(`m:${path}`)) return;
+      seen.add(`m:${path}`);
+      items.push({
+        key: `m:${it.path}`,
+        href: mountainHref(it.path),
+        icon: it.icon,
+        label: t(it.label, it.labelJa),
+        active: isActiveMountain(it.path),
+      });
+    };
+    pushTown("/");                  // Today
+    pushMountain("/mountains");     // All mountains
+    pushTown("/roads");             // Roads
+    pushMountain("/radar");         // Radar
+    pushTown("/transport");         // Transport
+    pushTown("/stay");              // Stay
+    pushTown("/eat");               // Eat
+    pushTown("/explore");           // Explore
+    pushMountain("/alerts");        // Alerts
+    // Future-proofing: append anything we forgot to enumerate above.
+    townNav.forEach((it) => pushTown(it.path));
+    mountainNav.forEach((it) => pushMountain(it.path));
+    return items;
+  };
+  const combinedNav = buildCombinedNav();
+
   return (
     <div className="min-h-screen bg-background flex flex-col md:flex-row">
       {/* Desktop sidebar */}
@@ -160,53 +212,47 @@ export function AppShell({ children }: { children: ReactNode }) {
             />
           ))}
 
-          {/* IN TOWN */}
+          {/* TOWN PICKER + COMBINED NAV
+              May 2026 (round 2): the desktop sidebar used to be split into
+              "In town" and "Mountains" sections. Users wanted the same
+              decision-flow ordering on every screen, so we collapsed both
+              sections into a single flat list driven by `combinedNav`,
+              identical to the mobile bottom nav. */}
           {towns.length > 0 && (
             <>
               <div className="rule mx-3 my-3" />
-              <div className="px-3 mb-2 flex items-center justify-between gap-2">
-                <span className="byline text-muted-foreground/70">
-                  {t("In town", "町")}
-                </span>
-              </div>
               <div className="px-3 mb-2">
                 <TownPicker variant="sidebar" preserveSubpath />
               </div>
-              {navTown ? (
-                townNav.map((item) => (
-                  <NavLink
-                    key={item.path}
-                    item={item}
-                    href={townHref(item.path)}
-                    active={isActiveTown(item.path)}
-                    t={t}
-                  />
-                ))
-              ) : (
-                <p className="px-3 py-2 byline text-muted-foreground/60">
-                  {t("Pick a town to see options.", "町を選んでください")}
-                </p>
-              )}
             </>
           )}
-
-          {/* MOUNTAINS */}
-          <div className="rule mx-3 my-3" />
-          <SectionLabel>{t("Mountains", "スキー場")}</SectionLabel>
-          {mountainNav.map((item) => (
-            <NavLink
-              key={item.path}
-              item={item}
-              href={mountainHref(item.path)}
-              active={isActiveMountain(item.path)}
-              t={t}
-            />
-          ))}
-
-          {/* May 2026: per-mountain links were duplicated here under the
-              Mountains section. The "All mountains" page already lists
-              every resort with status + headline, so the sidebar
-              expansion was redundant chrome. Removed for both regions. */}
+          {navTown || combinedNav.some((c) => c.key.startsWith("m:")) ? (
+            combinedNav.map((item) => {
+              const Icon = item.icon;
+              return (
+                <Link
+                  key={item.key}
+                  href={item.href}
+                  className={cn(
+                    "group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-150 text-sm font-medium",
+                    item.active
+                      ? "text-primary bg-primary/8"
+                      : "text-muted-foreground hover:bg-secondary hover:text-foreground",
+                  )}
+                >
+                  {item.active && (
+                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full bg-primary" />
+                  )}
+                  <Icon className={cn("w-4 h-4 transition-colors", item.active ? "text-primary" : "")} />
+                  {item.label}
+                </Link>
+              );
+            })
+          ) : (
+            <p className="px-3 py-2 byline text-muted-foreground/60">
+              {t("Pick a town to see options.", "町を選んでください")}
+            </p>
+          )}
         </nav>
 
         <div className="px-6 pb-5 pt-3">
@@ -277,97 +323,13 @@ export function AppShell({ children }: { children: ReactNode }) {
         </AnimatePresence>
       </main>
 
-      {/* Mobile bottom nav: scope-aware, horizontally scrollable so every
-          link is reachable on phones. In town scope we splice the Mountains
-          section in right after "Today" - off-mountain decision support
-          relies on the mountain links being one tap away, not buried in a
-          desktop-only sidebar. */}
+      {/* Mobile bottom nav: identical link order to the desktop sidebar
+          (driven by `combinedNav`), horizontally scrollable so every entry
+          is reachable on phones. */}
       <nav className="md:hidden fixed bottom-0 inset-x-0 z-40 glass-strong pb-safe">
         <div className="flex items-center px-1 h-16 overflow-x-auto hide-scrollbar">
           {(() => {
-            type Item = {
-              key: string;
-              href: string;
-              icon: NavItem["icon"];
-              label: string;
-              active: boolean;
-            };
-            const items: Item[] = [];
-            if (parsed.scope === "town" && navTown) {
-              // Hand-curated order so the most decision-critical links come
-              // first: Today (now), Mountains (where), Roads (drive), Radar
-              // (weather), Alerts (warnings), then the rest of the town nav.
-              const pushTown = (path: string) => {
-                const it = townNav.find((n) => n.path === path);
-                if (!it) return;
-                items.push({
-                  key: `t:${it.path}`,
-                  href: townHref(it.path),
-                  icon: it.icon,
-                  label: t(it.label, it.labelJa),
-                  active: isActiveTown(it.path),
-                });
-              };
-              const pushMountain = (path: string) => {
-                const it = mountainNav.find((n) => n.path === path);
-                if (!it) return;
-                items.push({
-                  key: `m:${it.path}`,
-                  href: mountainHref(it.path),
-                  icon: it.icon,
-                  label: t(it.label, it.labelJa),
-                  active: isActiveMountain(it.path),
-                });
-              };
-              const seen = new Set<string>();
-              const addTown = (p: string) => {
-                pushTown(p);
-                seen.add(`t:${p}`);
-              };
-              const addMountain = (p: string) => {
-                pushMountain(p);
-                seen.add(`m:${p}`);
-              };
-              addTown("/");                  // Today
-              addMountain("/mountains");     // All mountains
-              addTown("/roads");             // Roads
-              addMountain("/radar");         // Radar
-              addTown("/transport");         // Transport
-              addTown("/stay");              // Stay
-              addTown("/eat");               // Eat
-              addTown("/explore");           // Explore
-              addMountain("/alerts");        // Alerts
-              // Append any remaining items (future-proofing)
-              townNav.forEach((it) => {
-                if (!seen.has(`t:${it.path}`)) addTown(it.path);
-              });
-              mountainNav.forEach((it) => {
-                if (!seen.has(`m:${it.path}`)) addMountain(it.path);
-              });
-            } else {
-              if (regionNav[0]) {
-                const r0 = regionNav[0];
-                items.push({
-                  key: `region:${r0.path}`,
-                  href: r0.path,
-                  icon: r0.icon,
-                  label: t(r0.label, r0.labelJa),
-                  active:
-                    parsed.scope === "region" &&
-                    (location === r0.path || location.startsWith(r0.path + "/")),
-                });
-              }
-              mountainNav.forEach((item) => {
-                items.push({
-                  key: `m:${item.path}`,
-                  href: mountainHref(item.path),
-                  icon: item.icon,
-                  label: t(item.label, item.labelJa),
-                  active: isActiveMountain(item.path),
-                });
-              });
-            }
-            return items.map((item) => {
+            return combinedNav.map((item) => {
               const Icon = item.icon;
               return (
                 <Link
