@@ -1,0 +1,33 @@
+
+To provide people who are staying in the towns (off mountain) near resorts with the best, most up to date weather so they can choose where to ski or board each day.
+Don’t tell them which is best just provide all the weather information so they can make informed decisions.
+We need to provide up to date, live road information so they know if they’re driving what the roads are like, where there’s hold ups and where they may have to put chains on. Include Road Cams (what we have under Snowy mountains so far is great) where they’re available and if we don’t have API’s into them a link so people can view.
+We need to provide up to date resort/mountain weather, including forecasts, snow depths (winter), wind, lift info and snow cams, so they can see live data. It needs to be agnostic and fair. Let the consumers decide based on the information we provide.
+It needs to be better than anything else out there.
+It needs to be able to be sponsored by the Local Tourism Associations
+It needs to be really well branded as Feelzlike. We have a logo and word marque lets use them
+Lets make sure it’s clean modern, cutting edge (think fin tech) use the white and blues
+The information needs to easily transfer from Winter to Green season
+It needs to have the live updates, people want know what it feelzlike now not 4 hours ago
+It needs to eventually have a subscription added for premium updates
+It needs to be able to have advertising
+I need to be able ( with your help to promote it through Meta
+
+
+Some simple wins as I see it
+Under stays just have links to Booking providers (make it simple). I’m going to become an affiliate of some of them to help monetise.
+Under Eats have a link to Google Places or a Google Restaurant Search locked for the area
+Explore have links to the local Tourism Websites
+We don’t need survival skiing
+WE don’t need Today’s call
+The powder calendar should only show on Yamanouchi as it’s more likely to happen there v Australia
+What we build needs to be repeatable for the next regions we cover, once we have this up and running
+Ewe need to make sure that language used is relevant for the region
+You need to be able to save a region as your favourite so that is all that opens the second time you login
+When you click into the regions they should open as Jindabyne and Yudanaka
+Under 48 Hour forecast it needs to have a 7 or 14 day forecast
+Transport in Snowy Mountains should focus on Cooma Coaches and have links to other Transport Providers, also breakout snowy mountains bus service as this will be the service people will use from Jindabyne & Cooma and Berridale.
+Where the data comes from section and the sources needs to be in a tab
+Delete the depth section on home page
+Delete New here · why FeelZlike
+Shiga Kogen Resorts need to be grouped under Shiga Kogen with a drop down of all the resorts there instead of shown individually
