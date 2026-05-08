@@ -192,7 +192,7 @@ export function newsletterDigestEmail(opts: {
 }
 
 // ───────────────────────────────────────────────────────────────────────────
-// Snowy Mountains — Winter season outlook
+// Snowy Mountains - Winter season outlook
 // ───────────────────────────────────────────────────────────────────────────
 //
 // A different shape from the fortnightly digest: this is a one-off
@@ -222,16 +222,25 @@ export interface JulyWeekBlock {
   bullets: { label: string; value: string }[];
 }
 
+export interface SeasonSource {
+  label: string; // "Bureau of Meteorology long-range outlook"
+  informs: string; // "Temperature and rainfall trend for Jun-Sep"
+  url: string;
+}
+
 export interface SeasonOutlook {
   regionLabel: string; // "Snowy Mountains, AU"
   seasonLabel: string; // "Winter 2026"
   headline: string; // hero headline
   intro: string; // 2-3 sentence stand-first
-  months: SeasonMonthBlock[]; // June–September
+  months: SeasonMonthBlock[]; // June to September
   julyHeadline: string;
   julyRead: string; // overall July paragraph
   julyWeeks: JulyWeekBlock[]; // 4 weeks of July
   mountains: SeasonMountainBlock[];
+  methodologyHeadline: string;
+  methodologyRead: string; // 2-3 sentence narrative on how the outlook is built
+  sources: SeasonSource[];
   planAhead: { label: string; value: string }[];
   ctaLabel: string;
   ctaUrl: string;
@@ -337,6 +346,41 @@ export function sampleSnowySeasonOutlook(baseUrl: string): SeasonOutlook {
         note: "The highest village in Australia, reached by snow-cat from Perisher Valley. Quiet, slightly old-world, and home to some of the most reliable snow in the range.",
       },
     ],
+    methodologyHeadline: "How we built this read.",
+    methodologyRead:
+      "This outlook blends the Bureau of Meteorology's official seasonal guidance with snowpack data from Snowy Hydro, the resorts' own opening plans, and our own pattern-matching against the last fifteen Snowies winters. We do not run our own climate model. What we do is read the same public sources every serious snow watcher reads, then write the result in plain English. Where a number is a target, not a measurement, we say so. Where the modelling is uncertain, we say that too. Treat the week-by-week breakdown as a probable shape of the season, not a daily forecast. For that, check the alerts page in the week of travel.",
+    sources: [
+      {
+        label: "Bureau of Meteorology long-range outlook",
+        informs: "Temperature and rainfall trend across the Australian Alps for Jun-Sep",
+        url: "http://www.bom.gov.au/climate/outlooks/",
+      },
+      {
+        label: "Snowy Hydro snow depth records",
+        informs: "Historical baseline for Spencers Creek snow depth, used to gauge whether the season is tracking above or below average",
+        url: "https://www.snowyhydro.com.au/snowy-scheme/water-and-energy/snow-data/",
+      },
+      {
+        label: "Perisher and Thredbo snow reports",
+        informs: "Stated opening dates, lift status, snow-making capacity",
+        url: "https://www.perisher.com.au/snow-report",
+      },
+      {
+        label: "Mountainwatch model guidance",
+        informs: "Short and medium-range storm tracking for the Main Range",
+        url: "https://www.mountainwatch.com/snow-forecasts/australia/",
+      },
+      {
+        label: "Transport for NSW alpine road conditions",
+        informs: "Chain rules, road closures, and overnight ice warnings on the Alpine Way and Kosciuszko Road",
+        url: "https://www.livetraffic.com/",
+      },
+      {
+        label: "Destination NSW accommodation availability",
+        informs: "Aggregate room availability for Jindabyne, Thredbo Village and Charlotte's Pass",
+        url: "https://www.snowymountains.com.au/",
+      },
+    ],
     planAhead: [
       { label: "Lift passes", value: "Multi-day passes are cheaper before 30 June. After that, prices step up sharply through the holidays." },
       { label: "Accommodation", value: "Jindabyne and Thredbo village are already 80% booked for the week of 6 July. Berridale and Cooma still have rooms." },
@@ -380,6 +424,18 @@ function renderJulyWeek(w: JulyWeekBlock): string {
     </div>`;
 }
 
+function renderSourceRow(s: SeasonSource): string {
+  return `
+    <tr class="keep-together" style="page-break-inside:avoid;break-inside:avoid;">
+      <td style="padding:10px 0;border-top:1px solid ${BRAND.rule};vertical-align:top;width:42%;page-break-inside:avoid;break-inside:avoid;">
+        <a href="${s.url}" style="font-family:Georgia,'Times New Roman',serif;font-size:14px;color:${BRAND.skyDeep};font-weight:700;text-decoration:none;">${s.label}</a>
+      </td>
+      <td style="padding:10px 0 10px 14px;border-top:1px solid ${BRAND.rule};vertical-align:top;font-size:13px;color:${BRAND.ink};line-height:1.55;page-break-inside:avoid;break-inside:avoid;">
+        ${s.informs}
+      </td>
+    </tr>`;
+}
+
 function renderMountainRow(m: SeasonMountainBlock): string {
   return `
     <tr class="keep-together" style="page-break-inside:avoid;break-inside:avoid;">
@@ -406,6 +462,7 @@ export function snowySeasonOutlookEmail(opts: {
   const monthsRow = o.months.map(renderMonthCard).join("");
   const julyWeeks = o.julyWeeks.map(renderJulyWeek).join("");
   const mountainRows = o.mountains.map(renderMountainRow).join("");
+  const sourceRows = o.sources.map(renderSourceRow).join("");
   const planRows = o.planAhead
     .map(
       (p) =>
@@ -476,6 +533,21 @@ export function snowySeasonOutlookEmail(opts: {
           </table>
         </td></tr>
 
+        <tr><td style="padding:28px 36px 8px 36px;" class="section">
+          <div class="lede keep-together">
+            <div class="section-eyebrow" style="font-size:11px;color:${BRAND.skyDeep};text-transform:uppercase;letter-spacing:0.16em;font-weight:700;margin-bottom:8px;">How we forecast</div>
+            <h2 style="font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:700;color:${BRAND.navy};margin:0 0 10px 0;line-height:1.25;">${o.methodologyHeadline}</h2>
+            <p style="font-size:14px;line-height:1.65;color:${BRAND.ink};margin:0 0 14px 0;">${o.methodologyRead}</p>
+          </div>
+          <div class="keep-together" style="page-break-inside:avoid;break-inside:avoid;">
+            <div class="section-eyebrow" style="font-size:11px;color:${BRAND.skyDeep};text-transform:uppercase;letter-spacing:0.16em;font-weight:700;margin:6px 0 4px 0;">Sources</div>
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+              ${sourceRows}
+            </table>
+            <p style="font-size:11px;color:${BRAND.muted};line-height:1.5;margin:12px 0 0 0;font-style:italic;">Numbers in this preview are sample figures used to illustrate format. Production sends will carry the latest values from the sources above.</p>
+          </div>
+        </td></tr>
+
         <tr><td style="padding:28px 36px 8px 36px;" class="section keep-together">
           <div class="section-eyebrow" style="font-size:11px;color:${BRAND.skyDeep};text-transform:uppercase;letter-spacing:0.16em;font-weight:700;margin-bottom:8px;">Plan ahead</div>
           <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:${BRAND.paper};border-radius:10px;">
@@ -519,7 +591,9 @@ export function snowySeasonOutlookEmail(opts: {
     o.mountains
       .map((m) => `  ${m.name} (opens ${m.opens})\n    ${m.baseTarget}\n    ${m.note}`)
       .join("\n") +
-    `\n\nPLAN AHEAD\n` +
+    `\n\nHOW WE FORECAST\n${o.methodologyHeadline}\n${o.methodologyRead}\n\nSOURCES\n` +
+    o.sources.map((s) => `  ${s.label}\n    ${s.informs}\n    ${s.url}`).join("\n") +
+    `\n\nNote: numbers in this preview are sample figures used to illustrate format. Production sends will carry the latest values from the sources above.\n\nPLAN AHEAD\n` +
     o.planAhead.map((p) => `  ${p.label}: ${p.value}`).join("\n") +
     `\n\n${o.ctaLabel}: ${o.ctaUrl}\n\nUnsubscribe: ${opts.unsubscribeUrl}\n`;
 
