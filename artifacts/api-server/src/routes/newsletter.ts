@@ -3,7 +3,11 @@ import { db, newsletterSubscribersTable } from "@workspace/db";
 import { eq } from "drizzle-orm";
 import { issueToken, verifyToken, isTokenStillValid } from "../lib/alertTokens.js";
 import { sendEmail } from "../lib/emailSender.js";
-import { newsletterVerificationEmail, newsletterDigestEmail } from "../lib/newsletterEmailTemplates.js";
+import {
+  newsletterVerificationEmail,
+  newsletterDigestEmail,
+  snowySeasonOutlookEmail,
+} from "../lib/newsletterEmailTemplates.js";
 import { getAppPublicUrl } from "../lib/appUrl.js";
 import { REGION_IDS, type RegionId } from "../lib/regions.js";
 
@@ -269,11 +273,23 @@ router.get("/newsletter/preview", async (req, res): Promise<void> => {
     return;
   }
   const base = getAppPublicUrl();
-  const tmpl = newsletterDigestEmail({
-    baseUrl: base,
-    unsubscribeUrl: `${base}/newsletter/unsubscribed`,
-    manageUrl: `${base}/newsletter/manage`,
-  });
+  const type = typeof req.query["type"] === "string" ? req.query["type"] : "digest";
+  const tmpl =
+    type === "season-outlook"
+      ? snowySeasonOutlookEmail({
+          baseUrl: base,
+          unsubscribeUrl: `${base}/newsletter/unsubscribed`,
+          manageUrl: `${base}/newsletter/manage`,
+        })
+      : newsletterDigestEmail({
+          baseUrl: base,
+          unsubscribeUrl: `${base}/newsletter/unsubscribed`,
+          manageUrl: `${base}/newsletter/manage`,
+        });
+  const pdfFilename =
+    type === "season-outlook"
+      ? "feelzlike-snowy-winter-outlook.pdf"
+      : "feelzlike-digest-sample.pdf";
 
   if (req.query["format"] === "pdf") {
     if (pdfRenderInFlight) {
@@ -321,7 +337,7 @@ router.get("/newsletter/preview", async (req, res): Promise<void> => {
         res.setHeader("Content-Type", "application/pdf");
         res.setHeader(
           "Content-Disposition",
-          `inline; filename="feelzlike-digest-sample.pdf"`,
+          `inline; filename="${pdfFilename}"`,
         );
         res.send(Buffer.from(pdf));
       } finally {
