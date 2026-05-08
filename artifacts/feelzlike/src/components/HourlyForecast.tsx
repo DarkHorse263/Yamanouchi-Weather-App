@@ -207,7 +207,7 @@ export function HourlyForecast({
       <header className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between mb-5">
         <div>
           <p className="byline text-muted-foreground">
-            {sectionNumber} · {tx("Hour by hour", "時間別")}
+            {tx("Hour by hour", "時間別")}
           </p>
           <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
             <Snowflake className="text-primary w-5 h-5" aria-hidden />

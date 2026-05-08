@@ -69,7 +69,7 @@ export function PowderFactorBadge({
     >
       {sectionNumber && (
         <p className="byline text-muted-foreground/70 mb-2">
-          {sectionNumber} · {t("Powder Factor", "パウダーファクター")}
+          {t("Powder Factor", "パウダーファクター")}
         </p>
       )}
 

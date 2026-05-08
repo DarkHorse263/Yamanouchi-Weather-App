@@ -143,15 +143,19 @@ export function AppShell({ children }: { children: ReactNode }) {
         active: isActiveMountain(it.path),
       });
     };
+    // May 2026 v2: structural reset.
+    // - /mountains gone (accessed via "Weather in mountains" panel on Today)
+    // - /cams folded into /roads ("Roads & cams")
+    // - /radar folded into /weather ("Weather forecast")
+    // - Alerts remains but is rendered with a lock badge (paywalled UI)
     pushTown("/");                  // Today
-    pushMountain("/mountains");     // All mountains
-    pushTown("/roads");             // Roads
-    pushMountain("/radar");         // Radar
+    pushTown("/weather");           // Weather forecast
+    pushTown("/roads");             // Roads & cams
     pushTown("/transport");         // Transport
     pushTown("/stay");              // Stay
     pushTown("/eat");               // Eat
     pushTown("/explore");           // Explore
-    pushMountain("/alerts");        // Alerts
+    pushMountain("/alerts");        // Alerts (locked)
     // Future-proofing: append anything we forgot to enumerate above.
     townNav.forEach((it) => pushTown(it.path));
     mountainNav.forEach((it) => pushMountain(it.path));

@@ -71,6 +71,8 @@ import { skyGradient } from "../lib/mountain-imagery";
 import { HourlyForecast } from "@/components/HourlyForecast";
 import { PowderFactorBadge } from "@/components/PowderFactorBadge";
 import { POWDER_THRESHOLDS_AU } from "@/types/weather";
+import { PremiumGate } from "@workspace/feelzlike-shell";
+import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
 
 type LocationId = "thredbo" | "perisher" | "charlottes-pass" | "selwyn" | "jindabyne";
 
@@ -123,18 +125,30 @@ export default function LocationDetail() {
   const observedTime = (weatherData as any).lastUpdated as string | undefined;
   const sky = skyGradient({ tempC: current.temperature, description: current.weatherDescription });
 
+  // Snow next 24h: prefer the API-supplied value; otherwise sum the first
+  // 24 hourly snowfall buckets so the tile is never empty when we have
+  // hourly data.
+  const snow24h: number | null = (() => {
+    if (current.snowfallNext24h != null) return current.snowfallNext24h;
+    if (Array.isArray(hourly) && hourly.length > 0) {
+      return hourly
+        .slice(0, 24)
+        .reduce((sum: number, h: any) => sum + (Number(h.snowfall) || 0), 0);
+    }
+    return null;
+  })();
+
   const stats = [
     { label: "Feels like", value: formatTemp(current.feelsLike), icon: Thermometer },
     { label: "Wind", value: `${current.windSpeed} km/h${current.windDirectionCompass ? ` ${current.windDirectionCompass}` : ""}`, icon: Navigation },
     ...(current.windGust ? [{ label: "Gusts", value: `${current.windGust} km/h`, icon: Wind }] : []),
     { label: "Humidity", value: `${current.humidity}%`, icon: Droplets },
     { label: "Snow depth", value: current.snowDepth != null ? `${current.snowDepth} cm` : "-", icon: Snowflake },
-    ...(current.snowfallNext24h != null ? [{ label: "Snowfall (next 24h)", value: `${current.snowfallNext24h.toFixed(1)} cm`, icon: CloudSnow }] : []),
+    ...(snow24h != null ? [{ label: "Snow next 24h", value: `${snow24h.toFixed(1)} cm`, icon: CloudSnow }] : []),
     ...(current.dewpoint !== undefined ? [{ label: "Dew point", value: formatTemp(current.dewpoint), icon: Droplets }] : []),
     ...(current.pressure !== undefined ? [{ label: "Pressure", value: `${current.pressure} hPa`, icon: Gauge }] : []),
     ...(current.rainSince9am !== undefined ? [{ label: "Rain since 9am", value: `${current.rainSince9am} mm`, icon: CloudRain }] : []),
     ...(current.visibility && current.visibility !== 10000 ? [{ label: "Visibility", value: `${(current.visibility / 1000).toFixed(0)} km`, icon: Eye }] : []),
-    ...(current.freezingLevel !== undefined ? [{ label: "Freezing level", value: `${current.freezingLevel} m`, icon: Snowflake }] : []),
   ];
 
   return (
@@ -247,35 +261,38 @@ export default function LocationDetail() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.18 }}
-            className="mt-8 md:mt-12 grid grid-cols-2 md:grid-cols-4 gap-3"
+            className="mt-8 md:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-3"
           >
+            {/* May 2026 v2: Snow depth, Snow next 24h, Wind (with gusts as
+                a hint line). Freezing Level tile removed - rarely useful
+                off-mountain, lives inside Detailed Conditions for paying
+                users instead. */}
             {[
-              {
-                label: "Wind",
-                value: `${Math.round(current.windSpeed)}`,
-                unit: `km/h${current.windDirectionCompass ? ` ${current.windDirectionCompass}` : ""}`,
-                icon: Wind,
-                tint: "hsl(210,90%,46%)",
-              },
-              {
-                label: "Gusts",
-                value: current.windGust != null ? `${Math.round(current.windGust)}` : "-",
-                unit: "km/h",
-                icon: Navigation,
-                tint: "hsl(24,95%,48%)",
-              },
               {
                 label: "Snow depth",
                 value: current.snowDepth != null ? `${current.snowDepth}` : "-",
                 unit: "cm",
+                hint: undefined,
                 icon: Snowflake,
                 tint: "hsl(190,90%,45%)",
               },
               {
-                label: "Freezing level",
-                value: current.freezingLevel != null ? `${current.freezingLevel.toLocaleString()}` : "-",
-                unit: "m",
-                icon: Thermometer,
+                label: "Snow next 24h",
+                value: snow24h != null ? snow24h.toFixed(1) : "-",
+                unit: "cm",
+                hint: undefined,
+                icon: CloudSnow,
+                tint: "hsl(210,90%,46%)",
+              },
+              {
+                label: "Wind",
+                value: `${Math.round(current.windSpeed)}`,
+                unit: `km/h${current.windDirectionCompass ? ` ${current.windDirectionCompass}` : ""}`,
+                hint:
+                  current.windGust != null
+                    ? `Gusts ${Math.round(current.windGust)} km/h`
+                    : undefined,
+                icon: Wind,
                 tint: "hsl(265,85%,55%)",
               },
             ].map((s, i) => (
@@ -296,6 +313,9 @@ export default function LocationDetail() {
                     {s.value}
                     <span className="text-sm md:text-base text-muted-foreground/70 font-normal ml-1">{s.unit}</span>
                   </p>
+                  {s.hint && (
+                    <p className="text-[11px] text-muted-foreground/70 mt-1">{s.hint}</p>
+                  )}
                 </div>
               </div>
             ))}
@@ -311,95 +331,16 @@ export default function LocationDetail() {
 
       {/* ─── Body ───────────────────────────── */}
       <div className="max-w-7xl mx-auto px-5 md:px-10 pb-20 space-y-6 md:space-y-8 -mt-2">
-        {/* Premium dashboard headline - animated rings, wind-hold alert, snowfall outlook */}
-        <MountainSnapshot
-          resortName={location.name}
-          elevation={location.elevation}
-          freezingLevel={current.freezingLevel}
-          gust={current.windGust}
-          windSpeed={current.windSpeed}
-          liftsOpen={liftData?.liftsOpen}
-          totalLifts={liftData?.totalLifts}
-          snowfallNext24h={current.snowfallNext24h}
-          snowfallNext48h={current.snowfallNext48h}
-          snowfallNext72h={current.snowfallNext72h}
-        />
-
-        {/* Conditions strip - editorial data table feel */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.22 }}
-          className="glass rounded-3xl p-5 md:p-8"
-        >
-          <div className="flex items-end justify-between mb-5">
-            <div>
-              <p className="byline text-muted-foreground">03 · Conditions</p>
-              <h2 className="font-display font-semibold text-xl md:text-2xl mt-1">Right now</h2>
-            </div>
-            <p className="byline text-muted-foreground/70 hidden md:block">{stats.length} measurements</p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-y-6 gap-x-4">
-            {stats.map((s, i) => (
-              <div key={i} className="group">
-                <div className="flex items-center gap-1.5 byline text-muted-foreground/80 mb-1.5">
-                  <s.icon className="w-3 h-3 text-muted-foreground/60" />
-                  {s.label}
-                </div>
-                <p className="font-display text-2xl md:text-3xl text-foreground tracking-tight" data-numeric>
-                  {s.value}
-                </p>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* 24-hour trend (full width) */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="glass rounded-3xl p-5 md:p-8"
-        >
-          <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-6 gap-3">
-            <div>
-              <p className="byline text-muted-foreground">04 · 24-hour trend</p>
-              <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
-                <BarChart2 className="text-primary w-5 h-5" />
-                How it's tracking
-              </h2>
-            </div>
-            <div className="flex bg-secondary/40 p-1 rounded-xl border border-white/5">
-              {(["temperature", "snowfall", "windSpeed"] as const).map((metric) => (
-                <button
-                  key={metric}
-                  onClick={() => setActiveChartMetric(metric)}
-                  className={cn(
-                    "px-3 md:px-4 py-1.5 rounded-lg text-xs font-semibold capitalize transition-all",
-                    activeChartMetric === metric
-                      ? "bg-foreground text-background shadow-sm"
-                      : "text-muted-foreground hover:text-foreground"
-                  )}
-                >
-                  {metric.replace("Speed", "")}
-                </button>
-              ))}
-            </div>
-          </div>
-          <ForecastChart data={hourly} metric={activeChartMetric} />
-        </motion.div>
-
-        {/* Hour-by-hour next 48h with Powder Window detection.
-            AU thresholds are relaxed (0.5cm/hr, <25km/h) - Australian
-            snowfall rarely hits Japow benchmarks. */}
+        {/* HOUR BY HOUR - next 48h. AU thresholds (0.5cm/hr, <25km/h)
+            relaxed vs Japow benchmarks. */}
         <HourlyForecast
           hourly={hourly}
           utcOffsetSeconds={(weatherData as any).utcOffsetSeconds ?? 0}
           thresholds={POWDER_THRESHOLDS_AU}
-          sectionNumber="05"
         />
 
-        {/* Snow-forecast-style dense 6-day mountain strip */}
+        {/* WEATHER OUTLOOK - free 5-day mountain strip. Anything past day 5
+            is gated below in the Extended Outlook teaser. */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -408,10 +349,10 @@ export default function LocationDetail() {
         >
           <div className="flex items-end justify-between mb-5 gap-3">
             <div>
-              <p className="byline text-muted-foreground">06 · Outlook</p>
+              <p className="byline text-muted-foreground">Weather outlook</p>
               <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
                 <CalendarDays className="text-primary w-5 h-5" />
-                {daily.length}-day mountain forecast
+                5-day mountain forecast
               </h2>
             </div>
             <p className="byline text-muted-foreground/70 hidden md:block tabular-nums">
@@ -420,7 +361,7 @@ export default function LocationDetail() {
           </div>
 
           {(() => {
-            const days = daily.slice(0, 6);
+            const days = daily.slice(0, 5);
             const maxSnow = Math.max(0.1, ...days.map((d: any) => Number(d.snowfallSum) || 0));
             const maxRain = Math.max(0.1, ...days.map((d: any) => Number(d.precipitationSum) || 0));
             return (
@@ -503,21 +444,163 @@ export default function LocationDetail() {
           </div>
         </motion.div>
 
-        {/* Backward-looking snow quality snapshot */}
-        <PowderFactorBadge
-          hourly={hourly}
-          t={(en) => en}
-          sectionNumber="07"
-        />
+        {/* PREMIUM - Extended outlook 7/14/21 day. Free tier sees a blurred
+            tease of any remaining days the API gave us; subscribers get the
+            full extended horizon (we'll wire 14/21-day model data when the
+            API is ready). */}
+        <PremiumGate
+          title="Extended outlook 7 / 14 / 21 day"
+          titleJa="長期予報 7・14・21日"
+          blurb="See further out than the free 5-day window. Plan trips with confidence."
+          blurbJa="無料の5日予報を超える長期予報。旅行計画に最適。"
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.27 }}
+            className="glass rounded-3xl p-5 md:p-8"
+          >
+            <div className="flex items-end justify-between mb-5 gap-3">
+              <div>
+                <p className="byline text-muted-foreground">Weather outlook</p>
+                <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
+                  <CalendarDays className="text-primary w-5 h-5" />
+                  Extended (7 / 14 / 21 day)
+                </h2>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {daily.slice(5, 8).map((day: any) => (
+                <div key={day.date} className="rounded-2xl bg-background/40 border border-white/5 p-4 text-center">
+                  <p className="font-display text-base text-foreground">
+                    {format(parseISO(day.date), "EEE d MMM")}
+                  </p>
+                  <div className="my-2 text-primary/90 inline-block">
+                    <WeatherIcon code={day.weatherCode} className="w-7 h-7" />
+                  </div>
+                  <div className="flex items-baseline justify-center gap-1.5 font-display" data-numeric>
+                    <span className="text-foreground text-lg">{Math.round(day.maxTemp)}°</span>
+                    <span className="text-muted-foreground/60 text-xs">{Math.round(day.minTemp)}°</span>
+                  </div>
+                </div>
+              ))}
+              <div className="rounded-2xl border border-dashed border-white/10 p-4 text-center text-muted-foreground/70 text-xs">
+                14 / 21-day horizon coming soon
+              </div>
+            </div>
+          </motion.div>
+        </PremiumGate>
 
-        {/* Powder Calendar intentionally NOT rendered for AU mountains -
-            powder days are far rarer here than in Yamanouchi/Japan, so the
-            calendar is restricted to JP regions where it's actually useful. */}
+        {/* PREMIUM - Detailed conditions. Bundles MountainSnapshot, the
+            full conditions strip, the 24-hour ForecastChart trend, the
+            Powder Factor backwards-looking score and the multi-model
+            EnsembleForecast into one paid panel. */}
+        <PremiumGate
+          title="Detailed conditions"
+          titleJa="詳細コンディション"
+          blurb="The full instrument panel: snapshot rings, every measurement, 24-hour trend chart, powder score and multi-model consensus."
+          blurbJa="フル計器盤:スナップショット、全測定値、24時間推移、パウダースコア、マルチモデル合意。"
+        >
+          <div className="space-y-6 md:space-y-8">
+            <MountainSnapshot
+              resortName={location.name}
+              elevation={location.elevation}
+              freezingLevel={current.freezingLevel}
+              gust={current.windGust}
+              windSpeed={current.windSpeed}
+              liftsOpen={liftData?.liftsOpen}
+              totalLifts={liftData?.totalLifts}
+              snowfallNext24h={current.snowfallNext24h}
+              snowfallNext48h={current.snowfallNext48h}
+              snowfallNext72h={current.snowfallNext72h}
+            />
 
-        {/* Multi-model ensemble */}
-        <EnsembleForecast locationId={locationId} />
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.22 }}
+              className="glass rounded-3xl p-5 md:p-8"
+            >
+              <div className="flex items-end justify-between mb-5">
+                <div>
+                  <p className="byline text-muted-foreground">Conditions</p>
+                  <h2 className="font-display font-semibold text-xl md:text-2xl mt-1">Right now</h2>
+                </div>
+                <p className="byline text-muted-foreground/70 hidden md:block">{stats.length} measurements</p>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-y-6 gap-x-4">
+                {stats.map((s, i) => (
+                  <div key={i} className="group">
+                    <div className="flex items-center gap-1.5 byline text-muted-foreground/80 mb-1.5">
+                      <s.icon className="w-3 h-3 text-muted-foreground/60" />
+                      {s.label}
+                    </div>
+                    <p className="font-display text-2xl md:text-3xl text-foreground tracking-tight" data-numeric>
+                      {s.value}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
 
-        {/* Webcams + Lifts */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="glass rounded-3xl p-5 md:p-8"
+            >
+              <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-6 gap-3">
+                <div>
+                  <p className="byline text-muted-foreground">24-hour trend</p>
+                  <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
+                    <BarChart2 className="text-primary w-5 h-5" />
+                    How it's tracking
+                  </h2>
+                </div>
+                <div className="flex bg-secondary/40 p-1 rounded-xl border border-white/5">
+                  {(["temperature", "snowfall", "windSpeed"] as const).map((metric) => (
+                    <button
+                      key={metric}
+                      onClick={() => setActiveChartMetric(metric)}
+                      className={cn(
+                        "px-3 md:px-4 py-1.5 rounded-lg text-xs font-semibold capitalize transition-all",
+                        activeChartMetric === metric
+                          ? "bg-foreground text-background shadow-sm"
+                          : "text-muted-foreground hover:text-foreground"
+                      )}
+                    >
+                      {metric.replace("Speed", "")}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <ForecastChart data={hourly} metric={activeChartMetric} />
+            </motion.div>
+
+            <PowderFactorBadge hourly={hourly} t={(en) => en} sectionNumber="" />
+            <EnsembleForecast locationId={locationId} />
+          </div>
+        </PremiumGate>
+
+        {/* PREMIUM - Personalised alerts (UI only for now). */}
+        <PremiumGate
+          title="Powder & weather alerts"
+          titleJa="降雪・気象アラート"
+          blurb="Get a push when conditions hit. Set thresholds for snowfall, wind, freezing level."
+          blurbJa="条件達成時にプッシュ通知。降雪・風速・凍結高度を設定。"
+        >
+          <div className="glass rounded-3xl p-5 md:p-8">
+            <div className="mb-5">
+              <p className="byline text-muted-foreground">Alerts</p>
+              <h2 className="font-display font-semibold text-xl md:text-2xl mt-1">
+                Personalised triggers
+              </h2>
+            </div>
+            <AlertSubscribeForm defaultRegion="snowy-mountains" />
+          </div>
+        </PremiumGate>
+
+        {/* Webcams + Lifts (free) */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
           {webcamData && webcamData.webcams.length > 0 && (
             <motion.div
@@ -528,7 +611,7 @@ export default function LocationDetail() {
             >
               <div className="flex items-end justify-between mb-5 gap-4">
                 <div>
-                  <p className="byline text-muted-foreground">09 · Eyes on the mountain</p>
+                  <p className="byline text-muted-foreground">Eyes on the mountain</p>
                   <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
                     <Camera className="text-primary w-5 h-5" />
                     Live webcams
@@ -595,7 +678,7 @@ export default function LocationDetail() {
             >
               <div className="flex justify-between items-start mb-5">
                 <div>
-                  <p className="byline text-muted-foreground">10 · Lift status</p>
+                  <p className="byline text-muted-foreground">Lift status</p>
                   <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
                     <Cable className="text-primary w-5 h-5" />
                     On the snow
@@ -647,7 +730,7 @@ export default function LocationDetail() {
           )}
         </div>
 
-        <SafetyStrip sectionNumber="11" />
+        <SafetyStrip />
 
       </div>
     </>

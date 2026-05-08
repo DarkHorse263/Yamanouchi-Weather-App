@@ -13,7 +13,9 @@ import {
   Thermometer,
   Compass as CompassIcon,
 } from "lucide-react";
-import { useLanguage, useBaseTown, useRegion, LiveBadge } from "@workspace/feelzlike-shell";
+import { useLanguage, useBaseTown, useRegion, LiveBadge, UpdateStamp } from "@workspace/feelzlike-shell";
+import { RadarMap } from "@/regions/snowy-mountains/components/RadarMap";
+import { Radar as RadarIcon, ExternalLink } from "lucide-react";
 import {
   useTownWeather,
   uvBand,
@@ -50,14 +52,20 @@ export function TownWeather() {
               {region.name} · {t(town.name, town.nameJa)}
             </p>
             <h1 className="font-display font-semibold text-4xl md:text-5xl tracking-tight text-foreground mt-2">
-              {t("Weather in town", "町の天気")}
+              {t(`${town.name} weather forecast`, `${town.name}の天気予報`)}
             </h1>
             <p className="text-muted-foreground mt-3 max-w-xl">
               {t(
-                "Comprehensive in-town forecast - current, hourly and 7-day outlook.",
-                "町の総合天気予報 - 現在・時間別・7日間予報。",
+                "Current, hourly and 7-day outlook for town. Live snow radar below.",
+                "町の現在・時間別・7日間予報。下に降雪レーダー。",
               )}
             </p>
+            <UpdateStamp
+              lastUpdated={(q.data as any)?.current?.observedAt ?? null}
+              intervalMin={10}
+              source="Open-Meteo"
+              className="mt-3"
+            />
           </div>
           <LiveBadge label={t("Live", "ライブ")} />
         </div>
@@ -77,6 +85,7 @@ export function TownWeather() {
           <Today daily={q.data.daily[0]} t={t} />
           <Hourly hourly={q.data.hourly} t={t} />
           <Outlook days={q.data.daily.slice(1, 7)} t={t} />
+          {region.id === "snowy-mountains" && <Radar t={t} />}
           <p className="byline text-muted-foreground/60 mt-10">
             {t("Source: Open-Meteo · updated every 10 min", "出典: Open-Meteo · 10分毎に更新")}
           </p>
@@ -317,6 +326,40 @@ function Outlook({
           );
         })}
       </div>
+    </section>
+  );
+}
+
+function Radar({ t }: { t: (en: string, ja: string) => string }) {
+  // Radar absorbed into the weather page (May 2026 v2). The standalone
+  // /radar route was removed from the menu - users land here instead.
+  return (
+    <section className="mt-4 rounded-2xl border border-border bg-white overflow-hidden">
+      <div className="flex items-center justify-between gap-3 px-5 pt-5 pb-3 flex-wrap">
+        <div>
+          <p className="byline text-muted-foreground/70 inline-flex items-center gap-1.5">
+            <RadarIcon className="w-3 h-3" /> {t("Snow radar", "降雪レーダー")}
+          </p>
+          <h2 className="font-display font-semibold text-lg text-foreground mt-1">
+            {t("Live precipitation radar", "ライブ降水レーダー")}
+          </h2>
+        </div>
+        <a
+          href="https://www.bom.gov.au/products/IDR403.loop.shtml"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
+        >
+          BOM Wagga Wagga <ExternalLink className="w-3 h-3" />
+        </a>
+      </div>
+      <RadarMap />
+      <p className="text-[11px] text-muted-foreground/70 px-5 py-3 border-t border-border">
+        {t(
+          "Drag to pan, scroll to zoom, scrub the timeline. Above ~1,400 m, precipitation falls as snow when temps are at or below 0°C.",
+          "ドラッグでパン、スクロールでズーム。標高約1,400m以上で気温0°C以下なら降水は雪。",
+        )}
+      </p>
     </section>
   );
 }

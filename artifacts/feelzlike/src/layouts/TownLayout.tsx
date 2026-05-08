@@ -9,7 +9,6 @@ import { TownExplore } from "@/pages/town/TownExplore";
 import { TownRoads } from "@/pages/town/TownRoads";
 import { TownTransport } from "@/pages/town/TownTransport";
 import { TownWeather } from "@/pages/town/TownWeather";
-import { TownCams } from "@/pages/town/TownCams";
 import { snowyMountainsRouter } from "@/regions/snowy-mountains/router";
 import { yamanouchiRouter } from "@/regions/yamanouchi/router";
 // Iiyama temporarily removed - see artifacts/feelzlike/src/regions/index.ts
@@ -50,7 +49,12 @@ export function TownLayout() {
         <Route path="/" component={TownHome} />
         <Route path="/weather" component={TownWeather} />
         <Route path="/roads" component={TownRoads} />
-        <Route path="/cams" component={TownCams} />
+        {/* Cams folded into /roads ("Roads & cams") in May 2026 reset.
+            Keep /cams routable so existing bookmarks still land somewhere
+            useful instead of 404'ing. */}
+        <Route path="/cams">
+          <Redirect to="/roads" />
+        </Route>
         <Route path="/transport" component={TransportPage} />
         <Route path="/stay" component={TownStay} />
         <Route path="/eat" component={TownEat} />

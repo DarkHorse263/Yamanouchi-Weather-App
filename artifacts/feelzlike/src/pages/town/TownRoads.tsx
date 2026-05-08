@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useMemo, useState } from "react";
 import { useGetRoadConditions, useGetWebcams } from "@workspace/api-client-react";
 import { AlertTriangle, Camera, Car, ExternalLink, MapPin, Navigation, Construction } from "lucide-react";
-import { useRegion, useLanguage, useBaseTown, LiveBadge } from "@workspace/feelzlike-shell";
+import { useRegion, useLanguage, useBaseTown, LiveBadge, UpdateStamp } from "@workspace/feelzlike-shell";
 import { EmptyStateCard } from "@/components/EmptyStateCard";
 
 function statusClasses(c: string): string {
@@ -92,6 +92,17 @@ export function TownRoads() {
     return camsQuery.data?.locations.find((l) => l.locationId === `${region.id}-roads`)?.webcamPageUrl;
   }, [camsQuery.data, region.id]);
 
+  // Resort/mountain cams (folded in from the old /cams page in May 2026).
+  // Filter by the same nearby-mountain set the road list uses.
+  const resortCamLocations = useMemo(() => {
+    if (!camsQuery.data || !town) return [];
+    const regionIds = new Set(region.mountains?.map((m) => m.id) ?? []);
+    const nearbyIds = new Set(town.nearbyMountainIds ?? []);
+    const allowed = nearbyIds.size > 0 ? nearbyIds : regionIds;
+    if (allowed.size === 0) return [];
+    return camsQuery.data.locations.filter((loc) => allowed.has(loc.locationId));
+  }, [camsQuery.data, town, region]);
+
   const roads = useMemo(() => {
     if (!query.data || !town) return [];
     const regionIds = new Set(region.mountains?.map((m) => m.id) ?? []);
@@ -118,14 +129,27 @@ export function TownRoads() {
               {region.name} · {town ? t(town.name, town.nameJa) : t("Town", "町")}
             </p>
             <h1 className="font-display font-semibold text-4xl md:text-5xl tracking-tight text-foreground mt-2">
-              {t("Roads", "道路")}
+              {t("Road conditions & cams", "道路状況・ライブカメラ")}
             </h1>
             <p className="text-muted-foreground mt-3 max-w-xl">
               {t(
-                `Live conditions on the routes from ${town?.name ?? "town"} to the mountain.`,
-                `${town ? t(town.name, town.nameJa) : "町"}から山までのルートの最新状況。`,
+                `Live route conditions from ${town?.name ?? "town"} to the mountain, plus roadside and resort cams.`,
+                `${town ? t(town.name, town.nameJa) : "町"}から山までのルートの最新状況と路傍・リゾートカメラ。`,
               )}
             </p>
+            <UpdateStamp
+              lastUpdated={query.data?.lastUpdated ?? null}
+              intervalMin={15}
+              source={
+                region.roadsSource
+                  ? t(
+                      region.roadsSource.label,
+                      region.roadsSource.labelJa ?? region.roadsSource.label,
+                    )
+                  : undefined
+              }
+              className="mt-3"
+            />
           </div>
           {dataAvailable && (
             <LiveBadge label={query.isFetching ? t("Loading", "読込中") : t("Live", "ライブ")} />
@@ -313,6 +337,84 @@ export function TownRoads() {
               </div>
             </div>
           </a>
+        </motion.section>
+      )}
+
+      {/* RESORT CAMS - folded in from the old /cams page (May 2026 v2).
+          The road cams above show the road surface itself; these show the
+          mountain at the destination so users can decide whether the trip
+          is worth it. */}
+      {resortCamLocations.length > 0 && (
+        <motion.section
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+          className="mt-12"
+        >
+          <div className="flex items-end justify-between mb-4 gap-3 flex-wrap">
+            <div>
+              <h2 className="font-display font-semibold text-2xl text-foreground inline-flex items-center gap-2">
+                <Camera className="w-5 h-5 text-primary" />
+                {t("Mountain & resort cams", "山・リゾートのライブカメラ")}
+              </h2>
+              <p className="text-sm text-muted-foreground mt-1">
+                {t(
+                  "Live looks at the mountains - decide before you drive up.",
+                  "山のライブ映像 - 出発前にチェック。",
+                )}
+              </p>
+            </div>
+          </div>
+          <div className="space-y-10">
+            {resortCamLocations.map((loc) => (
+              <div key={loc.locationId}>
+                <div className="flex items-end justify-between mb-3">
+                  <h3 className="font-display font-semibold text-lg text-foreground">
+                    {loc.locationName}
+                  </h3>
+                  {loc.webcamPageUrl && (
+                    <a
+                      href={loc.webcamPageUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-semibold text-primary hover:underline inline-flex items-center gap-1"
+                    >
+                      {t("All cams", "全て")} <ExternalLink className="w-3 h-3" />
+                    </a>
+                  )}
+                </div>
+                {loc.webcams.length > 0 ? (
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {loc.webcams.map((w) => (
+                      <RoadCamCard
+                        key={w.id}
+                        cam={{
+                          id: w.id,
+                          name: w.name,
+                          description: w.description,
+                          imageUrl: w.imageUrl,
+                          pageUrl: w.pageUrl,
+                        }}
+                        t={t}
+                      />
+                    ))}
+                  </div>
+                ) : loc.webcamPageUrl ? (
+                  <a
+                    href={loc.webcamPageUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block rounded-2xl border border-border bg-white p-6 hover:border-primary/40 hover:shadow-md transition-all text-center"
+                  >
+                    <Camera className="w-7 h-7 text-primary mx-auto" />
+                    <p className="mt-2 text-sm font-semibold text-foreground">
+                      {t(`View ${loc.locationName} cams`, `${loc.locationName}のカメラを見る`)}
+                    </p>
+                  </a>
+                ) : null}
+              </div>
+            ))}
+          </div>
         </motion.section>
       )}
 

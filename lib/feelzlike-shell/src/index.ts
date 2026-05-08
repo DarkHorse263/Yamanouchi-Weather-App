@@ -22,4 +22,7 @@ export { BaseTownProvider, useBaseTown } from "./BaseTownProvider";
 export { AppShell } from "./AppShell";
 export { TownPicker } from "./TownPicker";
 export { LiveBadge } from "./LiveBadge";
+export { PremiumGate } from "./PremiumGate";
+export { UpdateStamp } from "./UpdateStamp";
+export { usePremium, setPremiumPreview } from "./usePremium";
 export { cn } from "./cn";
