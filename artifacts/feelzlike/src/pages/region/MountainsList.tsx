@@ -39,6 +39,12 @@ const PARENT_GROUP_META: Record<string, ParentGroupMeta> = {
     blurb: "Japan's largest interconnected ski area · 18 linked resorts on one lift pass",
     blurbJa: "日本最大の連結スキーエリア · 18のスキー場を1枚のリフト券で滑走",
   },
+  "kita-shiga": {
+    name: "Kita-Shiga Kogen",
+    nameJa: "北志賀高原",
+    blurb: "Western-slope cluster · 4 resorts separate from the Shiga Kogen pass system",
+    blurbJa: "西斜面のリゾート群 · 志賀高原のリフト券とは別系統の4スキー場",
+  },
 };
 
 export function MountainsList() {

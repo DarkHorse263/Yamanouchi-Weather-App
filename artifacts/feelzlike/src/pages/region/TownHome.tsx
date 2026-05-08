@@ -1,6 +1,6 @@
 import { Link } from "wouter";
-import { motion } from "framer-motion";
-import { useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useMemo, useState } from "react";
 import {
   ArrowUpRight,
   Car,
@@ -11,6 +11,8 @@ import {
   CloudSun,
   AlertTriangle,
   Lock,
+  ChevronDown,
+  Layers,
 } from "lucide-react";
 import {
   useRegion,
@@ -35,6 +37,25 @@ function haversineKm(a: { lat: number; lng: number }, b: { lat: number; lng: num
   const h = Math.sin(dLat / 2) ** 2 + Math.sin(dLng / 2) ** 2 * Math.cos(lat1) * Math.cos(lat2);
   return 2 * R * Math.asin(Math.sqrt(h));
 }
+
+// Display metadata for parent mountain groups (e.g. the Shiga Kogen umbrella
+// covering 18 sub-resorts). Kept local so TownHome's panel reads as a
+// self-contained unit; the standalone /mountains page has its own card-style
+// equivalent in MountainsList.tsx.
+const PARENT_GROUP_META: Record<string, { name: string; nameJa: string; blurb: string; blurbJa: string }> = {
+  "shiga-kogen": {
+    name: "Shiga Kogen Mountain Resort",
+    nameJa: "志賀高原マウンテンリゾート",
+    blurb: "18 linked resorts · one all-mountain lift pass",
+    blurbJa: "18スキー場連結 · オールマウンテン共通リフト券",
+  },
+  "kita-shiga": {
+    name: "Kita-Shiga Kogen Area",
+    nameJa: "北志賀高原エリア",
+    blurb: "4 resorts on the western slopes · separate from the Shiga pass",
+    blurbJa: "西斜面の4スキー場 · 志賀のリフト券とは別系統",
+  },
+};
 
 type Tile = {
   path: string;
@@ -153,6 +174,39 @@ export function TownHome() {
       });
   }, [town, weatherQ.data, region]);
 
+  // Fold sub-resorts into their parent group (e.g. Shiga Kogen's 18 areas
+  // collapse to one expandable row, Kita-Shiga's 4 collapse to another).
+  // Standalone mountains (no parentId) render flat alongside the groups
+  // in the region's curated display order.
+  type MountainRow = (typeof mountainsByDistance)[number];
+  type RenderItem =
+    | { kind: "single"; row: MountainRow }
+    | { kind: "group"; parentId: string; rows: MountainRow[] };
+  const mountainItems = useMemo<RenderItem[]>(() => {
+    if (mountainsByDistance.length === 0) return [];
+    const idToParent = new Map<string, string | undefined>(
+      (region.mountains ?? []).map((m) => [m.id, m.parentId]),
+    );
+    const out: RenderItem[] = [];
+    const groupAt = new Map<string, number>();
+    for (const row of mountainsByDistance) {
+      const pid = idToParent.get(row.entry.location.id);
+      if (!pid) {
+        out.push({ kind: "single", row });
+        continue;
+      }
+      const at = groupAt.get(pid);
+      if (at !== undefined) {
+        const g = out[at]!;
+        if (g.kind === "group") g.rows.push(row);
+      } else {
+        groupAt.set(pid, out.length);
+        out.push({ kind: "group", parentId: pid, rows: [row] });
+      }
+    }
+    return out;
+  }, [mountainsByDistance, region.mountains]);
+
   if (!town) {
     return (
       <div className="px-6 md:px-10 py-12 max-w-6xl mx-auto">
@@ -269,37 +323,22 @@ export function TownHome() {
             </p>
           ) : (
             <ul className="divide-y divide-border/60">
-              {mountainsByDistance.map(({ entry, km, min }) => {
-                const temp = entry.current?.temperature;
-                const desc = entry.current?.weatherDescription;
+              {mountainItems.map((item) => {
+                if (item.kind === "single") {
+                  return (
+                    <li key={item.row.entry.location.id}>
+                      <MountainResortRow row={item.row} regionId={region.id} t={t} />
+                    </li>
+                  );
+                }
                 return (
-                  <li key={entry.location.id}>
-                    <Link
-                      href={`~/${region.id}/mountain/${entry.location.id}`}
-                      className="group flex items-center justify-between gap-3 py-3 -mx-2 px-2 rounded-xl hover:bg-secondary/40 transition-colors"
-                    >
-                      <div className="min-w-0 flex-1">
-                        <p className="font-display font-semibold text-base tracking-tight text-foreground truncate group-hover:text-primary transition-colors">
-                          {entry.location.name}
-                        </p>
-                        <p className="text-[12px] text-muted-foreground/80 mt-0.5">
-                          {t(
-                            `${Math.round(km)} km · ~${min} min`,
-                            `約${Math.round(km)}km・約${min}分`,
-                          )}
-                          {desc ? ` · ${desc.toLowerCase()}` : ""}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-3 shrink-0">
-                        {temp !== undefined && temp !== null ? (
-                          <p className="font-display font-semibold text-2xl text-foreground tabular-nums">
-                            {Math.round(temp)}
-                            <span className="text-sm text-muted-foreground/70">°</span>
-                          </p>
-                        ) : null}
-                        <ArrowUpRight className="w-4 h-4 text-muted-foreground/50 group-hover:text-primary transition-colors" />
-                      </div>
-                    </Link>
+                  <li key={`group-${item.parentId}`}>
+                    <MountainParentGroupRow
+                      parentId={item.parentId}
+                      rows={item.rows}
+                      regionId={region.id}
+                      t={t}
+                    />
                   </li>
                 );
               })}
@@ -360,6 +399,145 @@ export function TownHome() {
           </div>
         </PremiumGate>
       </section>
+    </div>
+  );
+}
+
+// Single resort row - compact list item used both at the top level
+// (standalone mountains) and inside an expanded parent group.
+function MountainResortRow({
+  row,
+  regionId,
+  t,
+  indent = false,
+}: {
+  row: { entry: { location: { id: string; name: string; latitude: number; longitude: number }; current?: { temperature?: number | null; weatherDescription?: string | null } | null }; km: number; min: number };
+  regionId: string;
+  t: (en: string, ja: string) => string;
+  indent?: boolean;
+}) {
+  const { entry, km, min } = row;
+  const temp = entry.current?.temperature;
+  const desc = entry.current?.weatherDescription;
+  return (
+    <Link
+      href={`~/${regionId}/mountain/${entry.location.id}`}
+      className={`group flex items-center justify-between gap-3 py-3 -mx-2 px-2 rounded-xl hover:bg-secondary/40 transition-colors ${indent ? "pl-6" : ""}`}
+    >
+      <div className="min-w-0 flex-1">
+        <p className={`font-display font-semibold tracking-tight text-foreground truncate group-hover:text-primary transition-colors ${indent ? "text-sm" : "text-base"}`}>
+          {entry.location.name}
+        </p>
+        <p className="text-[12px] text-muted-foreground/80 mt-0.5">
+          {t(
+            `${Math.round(km)} km · ~${min} min`,
+            `約${Math.round(km)}km・約${min}分`,
+          )}
+          {desc ? ` · ${desc.toLowerCase()}` : ""}
+        </p>
+      </div>
+      <div className="flex items-center gap-3 shrink-0">
+        {temp !== undefined && temp !== null ? (
+          <p className={`font-display font-semibold text-foreground tabular-nums ${indent ? "text-xl" : "text-2xl"}`}>
+            {Math.round(temp)}
+            <span className="text-sm text-muted-foreground/70">°</span>
+          </p>
+        ) : null}
+        <ArrowUpRight className="w-4 h-4 text-muted-foreground/50 group-hover:text-primary transition-colors" />
+      </div>
+    </Link>
+  );
+}
+
+// Parent-group row: collapsed by default, shows aggregate stats. Tap to
+// expand and reveal each child resort as its own row.
+function MountainParentGroupRow({
+  parentId,
+  rows,
+  regionId,
+  t,
+}: {
+  parentId: string;
+  rows: Array<Parameters<typeof MountainResortRow>[0]["row"]>;
+  regionId: string;
+  t: (en: string, ja: string) => string;
+}) {
+  const [open, setOpen] = useState(false);
+  const meta = PARENT_GROUP_META[parentId] ?? {
+    name: parentId,
+    nameJa: parentId,
+    blurb: "",
+    blurbJa: "",
+  };
+  // Aggregate display: nearest distance + temp range across children that
+  // have current readings.
+  const minKm = rows.reduce((acc, r) => Math.min(acc, r.km), Number.POSITIVE_INFINITY);
+  const minMin = rows.reduce((acc, r) => Math.min(acc, r.min), Number.POSITIVE_INFINITY);
+  const temps = rows
+    .map((r) => r.entry.current?.temperature)
+    .filter((v): v is number => typeof v === "number");
+  const tMin = temps.length > 0 ? Math.min(...temps) : null;
+  const tMax = temps.length > 0 ? Math.max(...temps) : null;
+  const tempBadge =
+    tMin !== null && tMax !== null
+      ? tMin === tMax
+        ? `${Math.round(tMin)}°`
+        : `${Math.round(tMin)}° to ${Math.round(tMax)}°`
+      : null;
+
+  return (
+    <div>
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        className="group flex w-full items-center justify-between gap-3 py-3 -mx-2 px-2 rounded-xl hover:bg-secondary/40 transition-colors text-left"
+      >
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2">
+            <Layers className="w-3.5 h-3.5 text-primary/70 shrink-0" aria-hidden />
+            <p className="font-display font-semibold text-base tracking-tight text-foreground truncate group-hover:text-primary transition-colors">
+              {t(meta.name, meta.nameJa)}
+            </p>
+          </div>
+          <p className="text-[12px] text-muted-foreground/80 mt-0.5">
+            {t(
+              `${Math.round(minKm)} km · ~${minMin} min · ${rows.length} resorts`,
+              `約${Math.round(minKm)}km・約${minMin}分・${rows.length}スキー場`,
+            )}
+            {tempBadge ? ` · ${tempBadge}` : ""}
+          </p>
+        </div>
+        <div className="flex items-center gap-2 shrink-0">
+          <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold tracking-wider uppercase bg-primary/8 text-primary border border-primary/20">
+            {rows.length} {t("resorts", "スキー場")}
+          </span>
+          <ChevronDown
+            className={`w-4 h-4 text-muted-foreground/60 transition-transform ${open ? "rotate-180" : ""}`}
+            aria-hidden
+          />
+        </div>
+      </button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            key="children"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.22 }}
+            className="overflow-hidden"
+          >
+            <ul className="border-l-2 border-primary/15 ml-2 pl-1 mt-1 mb-2 divide-y divide-border/40">
+              {rows.map((r) => (
+                <li key={r.entry.location.id}>
+                  <MountainResortRow row={r} regionId={regionId} t={t} indent />
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
