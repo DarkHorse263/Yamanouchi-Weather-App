@@ -215,12 +215,15 @@ export interface SeasonMountainBlock {
   note: string; // 1 sentence colour
 }
 
-export interface JulyWeekBlock {
-  span: string; // "Mon 6 to Sun 12 Jul"
+export interface PeakWeekBlock {
+  span: string; // "Mon 6 to Sun 12 Jul" or "Mon 9 to Sun 15 Feb"
   headline: string; // "School holidays, biggest week of the year"
   read: string; // 2-3 sentences
   bullets: { label: string; value: string }[];
 }
+
+/** Back-compat alias. Older callers may still import the July-named type. */
+export type JulyWeekBlock = PeakWeekBlock;
 
 export interface SeasonSource {
   label: string; // "Bureau of Meteorology long-range outlook"
@@ -229,14 +232,16 @@ export interface SeasonSource {
 }
 
 export interface SeasonOutlook {
-  regionLabel: string; // "Snowy Mountains, AU"
-  seasonLabel: string; // "Winter 2026"
+  regionLabel: string; // "Snowy Mountains, AU" / "Yamanouchi, JP"
+  seasonLabel: string; // "Winter 2026 outlook" / "Winter 2025-26 outlook"
+  subjectShort: string; // "the snowies" / "yamanouchi" - used in the email subject line
   headline: string; // hero headline
   intro: string; // 2-3 sentence stand-first
-  months: SeasonMonthBlock[]; // June to September
-  julyHeadline: string;
-  julyRead: string; // overall July paragraph
-  julyWeeks: JulyWeekBlock[]; // 4 weeks of July
+  months: SeasonMonthBlock[]; // 4 month cards covering the season
+  peakLabel: string; // section eyebrow, e.g. "July spotlight" / "February spotlight"
+  peakHeadline: string;
+  peakRead: string; // overall paragraph for the peak month
+  peakWeeks: PeakWeekBlock[]; // 4 weeks of the peak month
   mountains: SeasonMountainBlock[];
   methodologyHeadline: string;
   methodologyRead: string; // 2-3 sentence narrative on how the outlook is built
@@ -250,6 +255,7 @@ export function sampleSnowySeasonOutlook(baseUrl: string): SeasonOutlook {
   return {
     regionLabel: "Snowy Mountains, AU",
     seasonLabel: "Winter 2026 outlook",
+    subjectShort: "the snowies",
     headline: "What it feelzlike for winter in the Snowies.",
     intro:
       "It is shaping up as a proper winter. After two thin years, the long-range models are pointing to a colder, wetter season across the Main Range, with the storm track sitting further north than usual. Opening weekend looks more ceremonial than skiable, but a run of southerly fronts from late June should put the season on its feet. By the time school holidays start, this should feel like the winter the Snowies has been waiting for.",
@@ -275,10 +281,11 @@ export function sampleSnowySeasonOutlook(baseUrl: string): SeasonOutlook {
         body: "Warm afternoons, soft corn, long runs in T-shirts. Lower elevations turn patchy by mid-month, but the high country usually holds until closing weekend on 4-5 October.",
       },
     ],
-    julyHeadline: "July: when the Snowies stops pretending.",
-    julyRead:
+    peakLabel: "July spotlight",
+    peakHeadline: "July: when the Snowies stops pretending.",
+    peakRead:
       "If only one month of this winter goes to plan, let it be this one. Current modelling has three to four cold fronts working their way across the range, with the biggest stretch landing in week two. Resort bases should sit between 70 and 110cm for most of the month, and the village of Jindabyne is already 80% booked for the week of 6 July. The pattern matters because, in good Julys, the Snowies skis as well as anywhere in the southern hemisphere. In bad ones, it doesn't ski at all. This one looks like the former.",
-    julyWeeks: [
+    peakWeeks: [
       {
         span: "Wed 1 to Sun 5 Jul",
         headline: "The calm before.",
@@ -392,6 +399,170 @@ export function sampleSnowySeasonOutlook(baseUrl: string): SeasonOutlook {
   };
 }
 
+// ───────────────────────────────────────────────────────────────────────────
+// Yamanouchi - Winter season outlook (NH winter, Dec-Mar)
+// ───────────────────────────────────────────────────────────────────────────
+//
+// Same structural shape as the Snowy outlook so the email reads as
+// the same product: hero, four-month strip, peak-month spotlight with
+// four week cards, mountain-by-mountain table, methodology + sources,
+// plan-ahead block, CTA. Peak month is February (deepest snow plus
+// Lunar New Year crowds).
+
+export function sampleYamanouchiSeasonOutlook(baseUrl: string): SeasonOutlook {
+  return {
+    regionLabel: "Yamanouchi, JP",
+    seasonLabel: "Winter 2025-26 outlook",
+    subjectShort: "yamanouchi",
+    headline: "What it feelzlike for winter in Yamanouchi.",
+    intro:
+      "After two warm starts in a row, the Sea of Japan is finally cold enough to do its job. The long-range guidance from JMA points to a near-normal winter on temperature and a slightly snowier-than-average one on precipitation, with the heaviest cycles concentrated in late January and through February. Shiga Kogen should be skiing top to bottom by Christmas, and the high country at Yokoteyama-Shibutoge should hold powder well into March. The monkeys, as ever, will be unbothered.",
+    months: [
+      {
+        month: "December",
+        label: "The opening",
+        body: "Lifts begin spinning in early December. Cover is thin and patchy until the first proper Sea of Japan cycle, usually around the 15th. By Christmas week, Shiga Kogen's central area is normally fully open and Okushiga is groomed end to end.",
+      },
+      {
+        month: "January",
+        label: "The cold settles in",
+        body: "Daily highs above the village rarely climb above zero. Snow comes in long, quiet cycles rather than single dumps. Kumanoyu and Yokoteyama-Shibutoge are the cold-snow benchmarks. Lunar New Year travellers begin arriving from late January.",
+      },
+      {
+        month: "February",
+        label: "The deep month",
+        body: "The heaviest snow of the year and the busiest fortnight of the season. Lunar New Year drives international demand; Japanese half-term break drives domestic. Powder mornings at Yakebitaiyama and Okushiga are the headline experience.",
+      },
+      {
+        month: "March",
+        label: "Sun and corn",
+        body: "Days lengthen, the sun gains real warmth, and the snow softens by lunchtime. The high country at Yokoteyama-Shibutoge holds winter conditions; the lower lifts at Sun Valley turn slushy. Onsen-and-ski combinations are at their best.",
+      },
+    ],
+    peakLabel: "February spotlight",
+    peakHeadline: "February: the month Yamanouchi delivers.",
+    peakRead:
+      "If a winter trip to Japan only gets one month, this is the one. The Siberian high parks itself over the continent, the Sea of Japan stays warm enough to feed moisture into every cold front, and Shiga Kogen sits directly in the firing line. Modelling has the heaviest cycle of the season landing in week two, with two more cycles either side. Lunar New Year falls on 17 February in 2026, which means the village fills up from the 14th and stays full until the 22nd. Book the front and back ends of the month if you want the snow without the crowds.",
+    peakWeeks: [
+      {
+        span: "Sun 1 to Sat 7 Feb",
+        headline: "The locals' week.",
+        read: "Cold and consistent. A weak front mid-week tops up cover at Okushiga and Yakebitaiyama before the bigger cycle arrives. Lift queues are short, restaurants are quiet, and the central Shiga loop bus runs to a relaxed timetable. The week most repeat visitors quietly recommend.",
+        bullets: [
+          { label: "New snow", value: "20-35cm across the week" },
+          { label: "Crowds", value: "Quiet, locals and early bookers" },
+          { label: "Best for", value: "Tree runs, long groomers, onsen evenings" },
+        ],
+      },
+      {
+        span: "Sun 8 to Sat 14 Feb",
+        headline: "The big cycle.",
+        read: "The heaviest stretch of the season on current modelling. A deep low parks south of Hokkaido and feeds Sea of Japan moisture into the Shiga ridgeline for three or four days. Expect 60 to 90cm at higher elevations, with knee-deep mornings at Yakebitaiyama and Okushiga and an excellent powder window at Yokoteyama-Shibutoge.",
+        bullets: [
+          { label: "New snow", value: "60-90cm Mon to Thu" },
+          { label: "Crowds", value: "Moderate, building toward Lunar New Year" },
+          { label: "Best for", value: "Powder mornings, gondola laps" },
+        ],
+      },
+      {
+        span: "Sun 15 to Sat 21 Feb",
+        headline: "Lunar New Year.",
+        read: "International arrivals peak. Yudanaka and Shibu Onsen book out from the 14th, and the Snow Monkey Park sees its busiest week of the year. On the hill, expect longer gondola queues at Yakebitaiyama and Ryuoo, easing markedly midweek and at the quieter sub-areas like Kumanoyu and Higashidateyama.",
+        bullets: [
+          { label: "New snow", value: "15-30cm midweek top-up" },
+          { label: "Crowds", value: "Heavy, especially weekends" },
+          { label: "Best for", value: "Quiet sub-areas, early starts, onsen towns" },
+        ],
+      },
+      {
+        span: "Sun 22 to Sat 28 Feb",
+        headline: "Powder, second helping.",
+        read: "International crowds thin from the 23rd. Modelling shows a second meaningful cycle around 25 to 26 February with another 30 to 50cm. The combination of fresh snow and emptying slopes makes this the best-value week of the month for travellers who can stay flexible.",
+        bullets: [
+          { label: "New snow", value: "30-50cm Wed to Thu" },
+          { label: "Crowds", value: "Easing fast after Lunar New Year" },
+          { label: "Best for", value: "Powder, value, fewer queues" },
+        ],
+      },
+    ],
+    mountains: [
+      {
+        name: "Shiga Kogen central",
+        opens: "Sat 6 Dec",
+        baseTarget: "180-260cm by late February",
+        note: "The biggest interconnected ski area in Japan. One lift pass, eighteen sub-areas, and a free shuttle bus tying them together. Easy to lose a day exploring without skiing the same run twice.",
+      },
+      {
+        name: "Yakebitaiyama",
+        opens: "Sat 6 Dec",
+        baseTarget: "200-280cm by late February",
+        note: "The Prince-run jewel of Shiga. Two gondolas, the 1998 Olympic GS course, and consistently the deepest cover in the central area. The default choice for international visitors.",
+      },
+      {
+        name: "Okushiga Kogen",
+        opens: "Sat 13 Dec",
+        baseTarget: "220-300cm by late February",
+        note: "The quietest, longest groomers in the range and the powder pocket of Shiga. End of the road, both literally and metaphorically. Worth the extra bus ride from the central loop.",
+      },
+      {
+        name: "Yokoteyama-Shibutoge",
+        opens: "Sat 22 Nov",
+        baseTarget: "150-220cm by late February",
+        note: "Honshu's highest lift-served terrain and the first Yamanouchi resort to open. Cold, exposed, and often the best snow in the country in mid-winter. Closes overnight in storms.",
+      },
+    ],
+    methodologyHeadline: "How we built this read.",
+    methodologyRead:
+      "This outlook combines the Japan Meteorological Agency's three-month seasonal forecast with snow depth records from the Shiga Kogen Tourist Association, the resorts' own opening schedules, and our own pattern-matching against the last fifteen Yamanouchi winters. We also lean on Snow Japan's network of local observers, which is the closest thing the Japanese alps has to a community snow report. We don't run our own model. What we do is read the same public sources every serious snow watcher reads, then write the result in plain English. Where a number is a target, not a measurement, we say so. Where the modelling is uncertain, we say that too.",
+    sources: [
+      {
+        label: "Japan Meteorological Agency seasonal outlook",
+        informs: "Temperature and precipitation trend for Honshu and the Sea of Japan side for Dec-Feb",
+        url: "https://www.data.jma.go.jp/gmd/cpd/longfcst/en/",
+      },
+      {
+        label: "Shiga Kogen Tourist Association snow report",
+        informs: "Daily snow depth at Sun Valley, Ichinose, Hasuike, Okushiga, and the central area",
+        url: "https://shigakogen.gr.jp/snow-report/",
+      },
+      {
+        label: "Prince Snow Resorts (Yakebitaiyama)",
+        informs: "Stated opening dates, lift status, snow-making capacity at Yakebitai",
+        url: "https://prince.jp/ski/shiga/",
+      },
+      {
+        label: "Snow Japan resort tracker",
+        informs: "Crowd-sourced snow conditions across Yamanouchi and the wider Nagano region",
+        url: "https://www.snowjapan.com/japan-ski-resorts/nagano-resorts",
+      },
+      {
+        label: "Nagano Prefecture road conditions",
+        informs: "Winter road status and overnight closures on Route 292 and the Shiga Kusatsu Highway over Shibutoge",
+        url: "https://www.koutsu.pref.nagano.lg.jp/",
+      },
+      {
+        label: "JNTO and Yamanouchi Tourism Association",
+        informs: "Expected visitor patterns around Lunar New Year and the Japanese half-term break",
+        url: "https://www.info-yamanouchi.net/en/",
+      },
+    ],
+    planAhead: [
+      { label: "Lift passes", value: "The Shiga Kogen all-mountain pass is cheaper than buying single sub-areas after day two. The Prince pass covers Yakebitaiyama and Karuizawa." },
+      { label: "Accommodation", value: "Shibu Onsen and Yudanaka book out for the week of Lunar New Year (14-22 Feb). Nakano City and Iiyama still have rooms during peak." },
+      { label: "Driving and transport", value: "The Hokuriku Shinkansen to Nagano then Nagaden Yudanaka line is faster than driving from Tokyo. Hire cars require winter tyres from December." },
+      { label: "Snow Monkey Park", value: "Open year-round. Coldest mornings see the most monkeys in the bath. Buy timed entry online during Lunar New Year week to skip the queue." },
+    ],
+    ctaLabel: "Open Yamanouchi",
+    ctaUrl: `${baseUrl}/yamanouchi/`,
+  };
+}
+
+/**
+ * Back-compat alias. Earlier code imports this name; new code should
+ * use `seasonOutlookEmail` directly with an explicit `outlook` arg.
+ */
+export const snowySeasonOutlookEmail = seasonOutlookEmail;
+
 function renderMonthCard(m: SeasonMonthBlock): string {
   return `
     <td valign="top" width="25%" style="padding:0 6px;page-break-inside:avoid;break-inside:avoid;">
@@ -403,7 +574,7 @@ function renderMonthCard(m: SeasonMonthBlock): string {
     </td>`;
 }
 
-function renderJulyWeek(w: JulyWeekBlock): string {
+function renderPeakWeek(w: PeakWeekBlock): string {
   const bullets = w.bullets
     .map(
       (b) =>
@@ -450,7 +621,7 @@ function renderMountainRow(m: SeasonMountainBlock): string {
     </tr>`;
 }
 
-export function snowySeasonOutlookEmail(opts: {
+export function seasonOutlookEmail(opts: {
   baseUrl: string;
   unsubscribeUrl: string;
   manageUrl?: string;
@@ -460,7 +631,7 @@ export function snowySeasonOutlookEmail(opts: {
   const logoUrl = `${opts.baseUrl}/branding/logo-full.png`;
 
   const monthsRow = o.months.map(renderMonthCard).join("");
-  const julyWeeks = o.julyWeeks.map(renderJulyWeek).join("");
+  const peakWeeks = o.peakWeeks.map(renderPeakWeek).join("");
   const mountainRows = o.mountains.map(renderMountainRow).join("");
   const sourceRows = o.sources.map(renderSourceRow).join("");
   const planRows = o.planAhead
@@ -519,11 +690,11 @@ export function snowySeasonOutlookEmail(opts: {
 
         <tr><td style="padding:28px 36px 8px 36px;" class="section--july">
           <div class="lede keep-together">
-            <div class="section-eyebrow" style="font-size:11px;color:${BRAND.skyDeep};text-transform:uppercase;letter-spacing:0.16em;font-weight:700;margin-bottom:8px;">July spotlight</div>
-            <h2 style="font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:700;color:${BRAND.navy};margin:0 0 10px 0;line-height:1.25;">${o.julyHeadline}</h2>
-            <p style="font-size:15px;line-height:1.65;color:${BRAND.ink};margin:0 0 18px 0;">${o.julyRead}</p>
+            <div class="section-eyebrow" style="font-size:11px;color:${BRAND.skyDeep};text-transform:uppercase;letter-spacing:0.16em;font-weight:700;margin-bottom:8px;">${o.peakLabel}</div>
+            <h2 style="font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:700;color:${BRAND.navy};margin:0 0 10px 0;line-height:1.25;">${o.peakHeadline}</h2>
+            <p style="font-size:15px;line-height:1.65;color:${BRAND.ink};margin:0 0 18px 0;">${o.peakRead}</p>
           </div>
-          ${julyWeeks}
+          ${peakWeeks}
         </td></tr>
 
         <tr><td style="padding:14px 36px 8px 36px;" class="section keep-together">
@@ -579,8 +750,8 @@ export function snowySeasonOutlookEmail(opts: {
     `feelzlike. ${o.regionLabel}. ${o.seasonLabel}.\n${o.headline}\n\n${o.intro}\n\n` +
     `THE SEASON AT A GLANCE\n` +
     o.months.map((m) => `  ${m.month} (${m.label}): ${m.body}`).join("\n") +
-    `\n\nJULY SPOTLIGHT\n${o.julyHeadline}\n${o.julyRead}\n\n` +
-    o.julyWeeks
+    `\n\n${o.peakLabel.toUpperCase()}\n${o.peakHeadline}\n${o.peakRead}\n\n` +
+    o.peakWeeks
       .map(
         (w) =>
           `  ${w.span}\n  ${w.headline}\n  ${w.read}\n` +
@@ -598,7 +769,7 @@ export function snowySeasonOutlookEmail(opts: {
     `\n\n${o.ctaLabel}: ${o.ctaUrl}\n\nUnsubscribe: ${opts.unsubscribeUrl}\n`;
 
   return {
-    subject: `feelzlike: ${o.seasonLabel.toLowerCase()} for the snowies`,
+    subject: `feelzlike: ${o.seasonLabel.toLowerCase()} for ${o.subjectShort}`,
     html,
     text,
   };

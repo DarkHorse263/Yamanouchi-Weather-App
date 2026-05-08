@@ -6,7 +6,9 @@ import { sendEmail } from "../lib/emailSender.js";
 import {
   newsletterVerificationEmail,
   newsletterDigestEmail,
-  snowySeasonOutlookEmail,
+  seasonOutlookEmail,
+  sampleSnowySeasonOutlook,
+  sampleYamanouchiSeasonOutlook,
 } from "../lib/newsletterEmailTemplates.js";
 import { getAppPublicUrl } from "../lib/appUrl.js";
 import { REGION_IDS, type RegionId } from "../lib/regions.js";
@@ -274,12 +276,17 @@ router.get("/newsletter/preview", async (req, res): Promise<void> => {
   }
   const base = getAppPublicUrl();
   const type = typeof req.query["type"] === "string" ? req.query["type"] : "digest";
+  const region = typeof req.query["region"] === "string" ? req.query["region"] : "snowy-mountains";
   const tmpl =
     type === "season-outlook"
-      ? snowySeasonOutlookEmail({
+      ? seasonOutlookEmail({
           baseUrl: base,
           unsubscribeUrl: `${base}/newsletter/unsubscribed`,
           manageUrl: `${base}/newsletter/manage`,
+          outlook:
+            region === "yamanouchi"
+              ? sampleYamanouchiSeasonOutlook(base)
+              : sampleSnowySeasonOutlook(base),
         })
       : newsletterDigestEmail({
           baseUrl: base,
@@ -288,7 +295,9 @@ router.get("/newsletter/preview", async (req, res): Promise<void> => {
         });
   const pdfFilename =
     type === "season-outlook"
-      ? "feelzlike-snowy-winter-outlook.pdf"
+      ? region === "yamanouchi"
+        ? "feelzlike-yamanouchi-winter-outlook.pdf"
+        : "feelzlike-snowy-winter-outlook.pdf"
       : "feelzlike-digest-sample.pdf";
 
   if (req.query["format"] === "pdf") {
