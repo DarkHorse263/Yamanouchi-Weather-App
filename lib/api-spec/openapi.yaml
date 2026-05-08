@@ -291,6 +291,94 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
 
+  /newsletter/subscribe:
+    post:
+      operationId: subscribeToNewsletter
+      tags: [newsletter]
+      summary: Subscribe to the feelzlike newsletter (general digest)
+      description: Creates (or updates) a newsletter subscription for the given email and sends a verification email. Idempotent — re-submitting with the same email updates preferences. Independent of powder alerts.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewsletterSubscribeRequest"
+      responses:
+        "200":
+          description: Subscription accepted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewsletterSubscribeResponse"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /newsletter/verify:
+    get:
+      operationId: verifyNewsletterSubscription
+      tags: [newsletter]
+      summary: Confirm a newsletter subscription via the verification email link
+      parameters:
+        - name: token
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Verified
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewsletterVerifyResponse"
+        "400":
+          description: Invalid or expired token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Subscriber not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /newsletter/unsubscribe:
+    post:
+      operationId: unsubscribeFromNewsletter
+      tags: [newsletter]
+      summary: One-click newsletter unsubscribe via tokenised link
+      parameters:
+        - name: token
+          in: query
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnsubscribeBody"
+      responses:
+        "200":
+          description: Unsubscribed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericOkResponse"
+        "400":
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
   /accommodation:
     get:
       operationId: getAccommodation
@@ -1590,6 +1678,62 @@ components:
           type: string
       required:
         - ok
+
+    NewsletterSubscribeRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        regions:
+          type: array
+          items:
+            type: string
+          description: Regions of interest. Empty array means "all regions".
+        cadence:
+          type: string
+          enum: [weekly, fortnightly, monthly]
+          description: How often the user wants to hear from us. Default fortnightly.
+        source:
+          type: ["string", "null"]
+          description: Optional free-text marker for which CTA the signup came from (e.g. "footer", "landing-cta").
+        consent:
+          type: boolean
+          description: Must be true. Plain-English consent that we'll only send the digest and that unsubscribe is one-click.
+      required:
+        - email
+        - consent
+
+    NewsletterSubscribeResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        status:
+          type: string
+          enum: [verification_sent, already_verified]
+        message:
+          type: string
+        emailDelivered:
+          type: boolean
+        devVerifyUrl:
+          type: ["string", "null"]
+          description: Present only in development when no email provider is configured.
+      required:
+        - ok
+        - status
+        - message
+
+    NewsletterVerifyResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        email:
+          type: string
+      required:
+        - ok
+        - email
 
     Accommodation:
       type: object

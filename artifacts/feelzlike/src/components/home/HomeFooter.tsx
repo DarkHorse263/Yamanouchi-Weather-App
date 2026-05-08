@@ -1,6 +1,7 @@
 import { Heart } from "lucide-react";
 
 import wordmark from "@assets/feelzlike_trimmed/feelzlike_WordMarque_colour_160426_1777334678269_trim.png";
+import { NewsletterSignup } from "../NewsletterSignup";
 
 /**
  * Site-wide footer for the homepage.
@@ -21,7 +22,7 @@ export function HomeFooter() {
   const year = new Date().getFullYear();
   return (
     <footer className="relative z-10 border-t border-slate-200 bg-white">
-      <div className="max-w-6xl mx-auto px-5 py-10 md:py-14 grid gap-8 md:grid-cols-4 text-sm">
+      <div className="max-w-6xl mx-auto px-5 py-10 md:py-14 grid gap-8 md:grid-cols-5 text-sm">
         <div className="md:col-span-2">
           <img
             src={wordmark}
@@ -37,6 +38,17 @@ export function HomeFooter() {
           <p className="mt-4 inline-flex items-center gap-1.5 text-[11px] text-slate-500">
             Built with <Heart className="w-3 h-3 text-rose-500 fill-rose-500" /> in Australia
           </p>
+        </div>
+
+        <div>
+          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500 mb-3">
+            The digest
+          </p>
+          <p className="text-[12.5px] text-slate-600 leading-snug mb-3">
+            A short read every fortnight on what the mountains are doing.
+            No daily noise.
+          </p>
+          <NewsletterSignup source="footer" />
         </div>
 
         <div>

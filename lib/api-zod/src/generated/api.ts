@@ -331,6 +331,79 @@ export const UnsubscribeFromAlertsResponse = zod.object({
 });
 
 /**
+ * Creates (or updates) a newsletter subscription for the given email and sends a verification email. Idempotent — re-submitting with the same email updates preferences. Independent of powder alerts.
+ * @summary Subscribe to the feelzlike newsletter (general digest)
+ */
+export const SubscribeToNewsletterBody = zod.object({
+  email: zod.string().email(),
+  regions: zod
+    .array(zod.string())
+    .optional()
+    .describe('Regions of interest. Empty array means \"all regions\".'),
+  cadence: zod
+    .enum(["weekly", "fortnightly", "monthly"])
+    .optional()
+    .describe("How often the user wants to hear from us. Default fortnightly."),
+  source: zod
+    .string()
+    .nullish()
+    .describe(
+      'Optional free-text marker for which CTA the signup came from (e.g. \"footer\", \"landing-cta\").',
+    ),
+  consent: zod
+    .boolean()
+    .describe(
+      "Must be true. Plain-English consent that we'll only send the digest and that unsubscribe is one-click.",
+    ),
+});
+
+export const SubscribeToNewsletterResponse = zod.object({
+  ok: zod.boolean(),
+  status: zod.enum(["verification_sent", "already_verified"]),
+  message: zod.string(),
+  emailDelivered: zod.boolean().optional(),
+  devVerifyUrl: zod
+    .string()
+    .nullish()
+    .describe(
+      "Present only in development when no email provider is configured.",
+    ),
+});
+
+/**
+ * @summary Confirm a newsletter subscription via the verification email link
+ */
+export const VerifyNewsletterSubscriptionQueryParams = zod.object({
+  token: zod.coerce.string(),
+});
+
+export const VerifyNewsletterSubscriptionResponse = zod.object({
+  ok: zod.boolean(),
+  email: zod.string(),
+});
+
+/**
+ * @summary One-click newsletter unsubscribe via tokenised link
+ */
+export const UnsubscribeFromNewsletterQueryParams = zod.object({
+  token: zod.coerce.string(),
+});
+
+export const UnsubscribeFromNewsletterBody = zod.object({
+  reason: zod
+    .string()
+    .nullish()
+    .describe(
+      'Optional one of \"too_many\", \"wrong_threshold\", \"not_relevant\", \"other\".',
+    ),
+});
+
+export const UnsubscribeFromNewsletterResponse = zod.object({
+  ok: zod.boolean(),
+  message: zod.string().optional(),
+});
+
+/**
  * Returns hotels, ryokan, and other lodging in Yamanouchi
  * @summary List accommodation
  */

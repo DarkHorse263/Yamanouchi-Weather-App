@@ -16,6 +16,7 @@ import sentryTestRouter from "./sentry-test";
 import alertsSubscriptionsRouter from "./alerts-subscriptions";
 import alertsPushRouter from "./alerts-push";
 import alertsInternalRouter from "./alerts-internal";
+import newsletterRouter from "./newsletter";
 
 const router: IRouter = Router();
 
@@ -36,5 +37,6 @@ router.use(regionsRouter);
 router.use(alertsSubscriptionsRouter);
 router.use(alertsPushRouter);
 router.use(alertsInternalRouter);
+router.use(newsletterRouter);
 
 export default router;

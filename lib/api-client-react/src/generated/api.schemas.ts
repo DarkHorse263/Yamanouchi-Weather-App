@@ -326,6 +326,58 @@ export interface GenericOkResponse {
   message?: string;
 }
 
+/**
+ * How often the user wants to hear from us. Default fortnightly.
+ */
+export type NewsletterSubscribeRequestCadence =
+  (typeof NewsletterSubscribeRequestCadence)[keyof typeof NewsletterSubscribeRequestCadence];
+
+export const NewsletterSubscribeRequestCadence = {
+  weekly: "weekly",
+  fortnightly: "fortnightly",
+  monthly: "monthly",
+} as const;
+
+export interface NewsletterSubscribeRequest {
+  email: string;
+  /** Regions of interest. Empty array means "all regions". */
+  regions?: string[];
+  /** How often the user wants to hear from us. Default fortnightly. */
+  cadence?: NewsletterSubscribeRequestCadence;
+  /**
+   * Optional free-text marker for which CTA the signup came from (e.g. "footer", "landing-cta").
+   * @nullable
+   */
+  source?: string | null;
+  /** Must be true. Plain-English consent that we'll only send the digest and that unsubscribe is one-click. */
+  consent: boolean;
+}
+
+export type NewsletterSubscribeResponseStatus =
+  (typeof NewsletterSubscribeResponseStatus)[keyof typeof NewsletterSubscribeResponseStatus];
+
+export const NewsletterSubscribeResponseStatus = {
+  verification_sent: "verification_sent",
+  already_verified: "already_verified",
+} as const;
+
+export interface NewsletterSubscribeResponse {
+  ok: boolean;
+  status: NewsletterSubscribeResponseStatus;
+  message: string;
+  emailDelivered?: boolean;
+  /**
+   * Present only in development when no email provider is configured.
+   * @nullable
+   */
+  devVerifyUrl?: string | null;
+}
+
+export interface NewsletterVerifyResponse {
+  ok: boolean;
+  email: string;
+}
+
 export type AccommodationType =
   (typeof AccommodationType)[keyof typeof AccommodationType];
 
@@ -1572,6 +1624,14 @@ export type UpdateAlertPreferencesParams = {
 };
 
 export type UnsubscribeFromAlertsParams = {
+  token: string;
+};
+
+export type VerifyNewsletterSubscriptionParams = {
+  token: string;
+};
+
+export type UnsubscribeFromNewsletterParams = {
   token: string;
 };
 

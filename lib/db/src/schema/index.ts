@@ -4,3 +4,4 @@ export * from "./attractions";
 export * from "./users";
 export * from "./subscriptions";
 export * from "./alerts";
+export * from "./newsletter";

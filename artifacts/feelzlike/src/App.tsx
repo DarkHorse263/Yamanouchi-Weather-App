@@ -16,6 +16,8 @@ import { useLocation } from "wouter";
 import AlertsVerify from "@/pages/alerts/Verify";
 import AlertsManage from "@/pages/alerts/Manage";
 import AlertsUnsubscribed from "@/pages/alerts/Unsubscribed";
+import NewsletterVerify from "@/pages/newsletter/Verify";
+import NewsletterUnsubscribed from "@/pages/newsletter/Unsubscribed";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +30,8 @@ function Router() {
       <Route path="/alerts/verify" component={AlertsVerify} />
       <Route path="/alerts/manage" component={AlertsManage} />
       <Route path="/alerts/unsubscribed" component={AlertsUnsubscribed} />
+      <Route path="/newsletter/verify" component={NewsletterVerify} />
+      <Route path="/newsletter/unsubscribed" component={NewsletterUnsubscribed} />
       <Route path="/:region/*?">
         <RegionLayout />
       </Route>

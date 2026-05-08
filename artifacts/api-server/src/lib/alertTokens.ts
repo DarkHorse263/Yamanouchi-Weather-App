@@ -26,7 +26,15 @@ const SECRET = (() => {
   return dev;
 })();
 
-export type TokenKind = "verify" | "manage" | "unsub";
+export type TokenKind =
+  | "verify"
+  | "manage"
+  | "unsub"
+  // Newsletter (general digest) subscribers — separate kinds so an alert
+  // token can never be misused to manage a newsletter subscription, and
+  // vice-versa. Same HMAC secret + signing infra.
+  | "nl_verify"
+  | "nl_unsub";
 
 interface TokenPayload {
   sub: string;
@@ -39,6 +47,8 @@ const KIND_TTL: Record<TokenKind, number> = {
   verify: 7 * 24 * 60 * 60,
   manage: 90 * 24 * 60 * 60,
   unsub: 0,
+  nl_verify: 7 * 24 * 60 * 60,
+  nl_unsub: 0,
 };
 
 function b64urlEncode(buf: Buffer): string {
