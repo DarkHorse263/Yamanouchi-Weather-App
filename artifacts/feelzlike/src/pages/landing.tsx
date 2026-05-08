@@ -302,29 +302,33 @@ export default function Landing() {
             I wonder what it feelzlike in…
           </motion.p>
 
-          {/* SEARCH */}
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="mt-3 md:mt-4"
-          >
-            <div className="relative max-w-xl mx-auto">
-              <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 z-10" />
-              <label htmlFor="region-search" className="sr-only">
-                Search mountain regions
-              </label>
-              <input
-                id="region-search"
-                type="text"
-                aria-label="Search mountain regions"
-                placeholder="Search a mountain region…"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="relative w-full pl-12 pr-4 py-4 rounded-2xl bg-white border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 shadow-[0_2px_12px_-4px_rgba(15,23,42,0.08)] focus:outline-none focus:ring-2 focus:ring-sky-400/40 focus:border-sky-400/60 transition-all text-left"
-              />
-            </div>
-          </motion.div>
+          {/* SEARCH - hidden until we have more regions live. The state and
+              filter logic are kept intact below so reinstating is just a
+              matter of unwrapping this block. */}
+          {false && (
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="mt-3 md:mt-4"
+            >
+              <div className="relative max-w-xl mx-auto">
+                <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 z-10" />
+                <label htmlFor="region-search" className="sr-only">
+                  Search mountain regions
+                </label>
+                <input
+                  id="region-search"
+                  type="text"
+                  aria-label="Search mountain regions"
+                  placeholder="Search a mountain region…"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="relative w-full pl-12 pr-4 py-4 rounded-2xl bg-white border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 shadow-[0_2px_12px_-4px_rgba(15,23,42,0.08)] focus:outline-none focus:ring-2 focus:ring-sky-400/40 focus:border-sky-400/60 transition-all text-left"
+                />
+              </div>
+            </motion.div>
+          )}
         </div>
       </header>
 
