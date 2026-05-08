@@ -223,17 +223,21 @@ export default function RadarMapInner({
           />
         )}
 
-        {/* Precipitation layer. Radar tiles top out at z=10. We render
-            the current frame only — React-Leaflet replaces the tile
-            cache cleanly on key change, and animation feels smooth at
-            700ms intervals. */}
+        {/* Precipitation layer.
+            maxNativeZoom: RainViewer's global radar mosaic only has real
+            data through z≈6 in the southern hemisphere (and similar in
+            most regions outside dense NA/EU radar coverage). Past that
+            their server returns a "Zoom Level Not Supported" placeholder
+            PNG that visually destroys the map. Capping native zoom at 6
+            tells Leaflet to fetch the z=6 tile and CSS-upscale it for
+            higher zooms, which is correct behaviour for a low-res field. */}
         {showRadar && manifest && currentRadar && (
           <TileLayer
             key={`rad-${currentRadar.time}`}
             url={radarTileUrl(manifest.host, currentRadar.path)}
             opacity={isNowcast ? 0.65 : 0.85}
             zIndex={400}
-            maxNativeZoom={10}
+            maxNativeZoom={6}
             attribution=""
           />
         )}
