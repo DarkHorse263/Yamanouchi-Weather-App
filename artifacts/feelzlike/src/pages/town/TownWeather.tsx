@@ -340,37 +340,34 @@ function Outlook({
   return (
     <section className="mt-4 rounded-2xl border border-border bg-white p-5">
       <p className="byline text-muted-foreground/70">{t("Next 6 days", "今後6日間")}</p>
-      <div className="mt-3 space-y-3">
+      <div className="mt-3 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
         {days.map((d) => {
           const Icon = pickIcon(d.weatherCode, true);
           return (
             <div
               key={d.date}
-              className="rounded-xl border border-border/70 bg-white p-4"
+              className="rounded-xl border border-border/70 bg-white p-3 flex flex-col items-center text-center"
             >
-              {/* Top row: day, icon, condition, temps */}
-              <div className="flex items-center gap-3">
-                <div className="w-24 shrink-0">
-                  <p className="text-sm font-semibold text-foreground leading-tight">
-                    {fmtDay(d.date)}
-                  </p>
-                </div>
-                <Icon className="w-6 h-6 text-primary/80 shrink-0" strokeWidth={1.5} />
-                <p className="flex-1 text-sm text-muted-foreground truncate">
-                  {d.weatherDescription}
-                </p>
-                <p className="text-right text-sm shrink-0">
-                  <span className="font-semibold text-foreground">
-                    {d.tempMax !== null ? Math.round(d.tempMax) : "-"}°
-                  </span>
-                  <span className="text-muted-foreground/70 ml-2">
-                    {d.tempMin !== null ? Math.round(d.tempMin) : "-"}°
-                  </span>
-                </p>
-              </div>
+              <p className="text-sm font-semibold text-foreground leading-tight">
+                {fmtDay(d.date)}
+              </p>
+              <Icon
+                className="w-8 h-8 text-primary/80 mt-3"
+                strokeWidth={1.5}
+              />
+              <p className="text-[11px] text-muted-foreground mt-2 line-clamp-2 min-h-[2.2em]">
+                {d.weatherDescription}
+              </p>
+              <p className="mt-2 text-sm">
+                <span className="font-semibold text-foreground">
+                  {d.tempMax !== null ? Math.round(d.tempMax) : "-"}°
+                </span>
+                <span className="text-muted-foreground/70 ml-2">
+                  {d.tempMin !== null ? Math.round(d.tempMin) : "-"}°
+                </span>
+              </p>
 
-              {/* Stat row: wind, sunrise, sunset, rain chance, snow */}
-              <div className="mt-3 grid grid-cols-2 sm:grid-cols-5 gap-x-4 gap-y-2 pt-3 border-t border-border/50">
+              <div className="mt-3 pt-3 border-t border-border/50 w-full space-y-1.5">
                 <DayStat
                   icon={Wind}
                   label={t("Wind", "風")}
@@ -392,7 +389,7 @@ function Outlook({
                 />
                 <DayStat
                   icon={CloudRain}
-                  label={t("Rain chance", "降水確率")}
+                  label={t("Rain", "雨")}
                   value={
                     d.precipitationProbabilityMax !== null
                       ? `${d.precipitationProbabilityMax}%`
@@ -401,7 +398,7 @@ function Outlook({
                 />
                 <DayStat
                   icon={CloudSnow}
-                  label={t("Snow", "降雪")}
+                  label={t("Snow", "雪")}
                   value={
                     d.snowfallSum !== null && d.snowfallSum > 0
                       ? `${d.snowfallSum.toFixed(1)} cm`
@@ -427,11 +424,11 @@ function DayStat({
   value: string;
 }) {
   return (
-    <div className="min-w-0">
-      <div className="flex items-center gap-1.5 byline text-muted-foreground/70">
+    <div className="flex items-center justify-between gap-2 text-[11px]">
+      <span className="inline-flex items-center gap-1 text-muted-foreground/70">
         <Icon className="w-3 h-3" strokeWidth={2} /> {label}
-      </div>
-      <p className="text-sm font-medium text-foreground mt-0.5 truncate">{value}</p>
+      </span>
+      <span className="font-medium text-foreground truncate">{value}</span>
     </div>
   );
 }
