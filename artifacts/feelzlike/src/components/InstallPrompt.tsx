@@ -4,29 +4,23 @@ import { Download, Share, X, Smartphone } from "lucide-react";
 import { isStandaloneMode, isIOSSafari } from "@/lib/registerSW";
 
 /**
- * Non-intrusive PWA install prompt. Per playbook 6.2:
- *  - Shows on Android/Desktop after the user has visited 3+ times (visit
- *    counter persisted in localStorage). Triggered by the standard
- *    `beforeinstallprompt` event.
- *  - Shows iOS-specific copy on iOS Safari (which doesn't fire the event):
- *    "Tap Share → Add to Home Screen" with a Share-icon hint.
- *  - Hidden when already installed (`display-mode: standalone`).
- *  - Dismissable; respects dismissal for 30 days.
+ * PWA install prompt - shown on every visit until the app is installed.
  *
- * Visit counting:
- *  - Increments on each fresh page load (not per route change).
- *  - Stored as `feelzlike:visits` integer.
- *
- * Dismissal:
- *  - Stored as `feelzlike:installPromptDismissedAt` ISO string.
- *  - 30-day TTL - re-eligible after that.
+ * Behaviour:
+ *  - Android/Desktop Chrome: waits for `beforeinstallprompt`, then offers
+ *    a one-tap Install button.
+ *  - iOS Safari (no `beforeinstallprompt` support): shows the Share-icon
+ *    instructions every visit.
+ *  - Hidden once installed (`display-mode: standalone` or iOS standalone).
+ *  - Hidden once the user has accepted the install on this device.
+ *  - "Not now" only closes the prompt for the current page - it reappears
+ *    on the next fresh page load until the app is actually installed.
+ *    (Earlier behaviour gated on 3+ visits and a 30-day dismissal cooldown;
+ *    those have been removed so the prompt is impossible to miss while we
+ *    drive install adoption.)
  */
 
-const VISIT_KEY = "feelzlike:visits";
-const DISMISSED_KEY = "feelzlike:installPromptDismissedAt";
 const ACCEPTED_KEY = "feelzlike:installAccepted";
-const VISIT_THRESHOLD = 3;
-const DISMISS_TTL_MS = 30 * 24 * 60 * 60 * 1000;
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -45,21 +39,6 @@ function writeJSON(key: string, value: unknown): void {
   try { window.localStorage.setItem(key, JSON.stringify(value)); } catch { /* noop */ }
 }
 
-function bumpVisitCount(): number {
-  const current = readJSON<number>(VISIT_KEY, 0);
-  const next = current + 1;
-  writeJSON(VISIT_KEY, next);
-  return next;
-}
-
-function isDismissalActive(): boolean {
-  const at = readJSON<string | null>(DISMISSED_KEY, null);
-  if (!at) return false;
-  const t = new Date(at).getTime();
-  if (Number.isNaN(t)) return false;
-  return Date.now() - t < DISMISS_TTL_MS;
-}
-
 export function InstallPrompt() {
   const [show, setShow] = useState(false);
   const [variant, setVariant] = useState<"android" | "ios">("android");
@@ -70,11 +49,6 @@ export function InstallPrompt() {
     if (isStandaloneMode()) return;
     // Previously accepted → never show again on this device
     if (readJSON<boolean>(ACCEPTED_KEY, false)) return;
-    // Recently dismissed → respect the 30-day cooldown
-    if (isDismissalActive()) return;
-
-    const visits = bumpVisitCount();
-    if (visits < VISIT_THRESHOLD) return;
 
     if (isIOSSafari()) {
       setVariant("ios");
@@ -93,10 +67,10 @@ export function InstallPrompt() {
     return () => window.removeEventListener("beforeinstallprompt", handler);
   }, []);
 
-  const dismiss = () => {
-    writeJSON(DISMISSED_KEY, new Date().toISOString());
-    setShow(false);
-  };
+  // "Not now" just closes for the current page render. We deliberately do
+  // not persist a dismissal - the prompt should reappear next visit until
+  // the user actually installs.
+  const dismiss = () => setShow(false);
 
   const install = async () => {
     if (!bipEvent) return;
@@ -105,11 +79,9 @@ export function InstallPrompt() {
       const { outcome } = await bipEvent.userChoice;
       if (outcome === "accepted") {
         writeJSON(ACCEPTED_KEY, true);
-      } else {
-        writeJSON(DISMISSED_KEY, new Date().toISOString());
       }
     } catch {
-      writeJSON(DISMISSED_KEY, new Date().toISOString());
+      /* swallow - the prompt closes either way */
     } finally {
       setBipEvent(null);
       setShow(false);
