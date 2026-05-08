@@ -177,10 +177,17 @@ export function RegionStay() {
         <EmptyStateCard
           icon={Bed}
           title={t("Stays launching this week", "宿泊リスト、今週公開")}
-          body={t(
-            `We're curating hand-picked hotels, ryokan and lodges across ${region.name}. In the meantime, the booking-site shortcuts above will get you straight to availability.`,
-            `${region.name}のホテル・旅館・ロッジを厳選中です。上の予約サイトから空室状況を直接確認できます。`,
-          )}
+          body={
+            country.toUpperCase() === "JP"
+              ? t(
+                  `We're curating hand-picked hotels, ryokan and lodges across ${region.name}. In the meantime, the booking-site shortcuts above will get you straight to availability.`,
+                  `${region.name}のホテル・旅館・ロッジを厳選中です。上の予約サイトから空室状況を直接確認できます。`,
+                )
+              : t(
+                  `We're curating hand-picked hotels, motels, lodges and apartments across ${region.name}. In the meantime, the booking-site shortcuts above will get you straight to availability.`,
+                  `${region.name}のホテル・モーテル・ロッジ・アパートメントを厳選中です。上の予約サイトから空室状況を直接確認できます。`,
+                )
+          }
           eta={t("ETA: Next 7 days", "公開予定：7日以内")}
         />
       )}

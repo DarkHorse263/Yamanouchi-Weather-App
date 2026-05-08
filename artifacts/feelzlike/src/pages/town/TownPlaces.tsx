@@ -121,10 +121,17 @@ export function TownPlaces({ kind, title, titleJa, blurb, blurbJa }: Props) {
           <EmptyStateCard
             icon={Utensils}
             title={t("Eats launching shortly", "飲食リスト、まもなく公開")}
-            body={t(
-              `We're putting together a hand-picked guide to the best izakaya, ramen, cafés and bars in ${town?.name ?? "this town"}. Watch this space.`,
-              `${town ? t(town.name, town.nameJa) : "この町"}のおすすめ居酒屋・ラーメン・カフェ・バーを厳選中。お楽しみに。`,
-            )}
+            body={
+              region.shortTag?.toUpperCase() === "JP"
+                ? t(
+                    `We're putting together a hand-picked guide to the best izakaya, ramen, cafés and bars in ${town?.name ?? "this town"}. Watch this space.`,
+                    `${town ? t(town.name, town.nameJa) : "この町"}のおすすめ居酒屋・ラーメン・カフェ・バーを厳選中。お楽しみに。`,
+                  )
+                : t(
+                    `We're putting together a hand-picked guide to the best restaurants, pubs, cafés and bars in ${town?.name ?? "this town"}. Watch this space.`,
+                    `${town ? t(town.name, town.nameJa) : "この町"}のおすすめレストラン・パブ・カフェ・バーを厳選中。お楽しみに。`,
+                  )
+            }
             eta={t("ETA: Next 14 days", "公開予定：14日以内")}
             ctaLabel={t("Suggest a spot", "おすすめを送る")}
             ctaHref={`mailto:${FEEDBACK_EMAIL}?subject=${encodeURIComponent(`Eat suggestion · ${region.name} · ${town?.name ?? ""}`)}`}

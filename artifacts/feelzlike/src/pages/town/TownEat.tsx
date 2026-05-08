@@ -28,13 +28,20 @@ interface Category {
   Icon: typeof Utensils;
 }
 
-const CATEGORIES: Category[] = [
-  { key: "restaurants", query: "restaurants", labelEn: "Restaurants", labelJa: "レストラン", Icon: Utensils },
-  { key: "cafes", query: "cafes", labelEn: "Cafes", labelJa: "カフェ", Icon: Coffee },
-  { key: "bars", query: "bars and izakaya", labelEn: "Bars & izakaya", labelJa: "バー・居酒屋", Icon: Beer },
-  { key: "takeaway", query: "takeaway", labelEn: "Takeaway", labelJa: "テイクアウト", Icon: Pizza },
-  { key: "supermarkets", query: "supermarkets", labelEn: "Supermarkets", labelJa: "スーパー", Icon: ShoppingBasket },
-];
+// Categories are region-aware so AU users don't see "izakaya" and JP users
+// don't see "pubs". Both sets share restaurants/cafes/takeaway/groceries.
+function categoriesForCountry(isJP: boolean): Category[] {
+  const bars: Category = isJP
+    ? { key: "bars", query: "bars and izakaya", labelEn: "Bars & izakaya", labelJa: "バー・居酒屋", Icon: Beer }
+    : { key: "bars", query: "pubs and bars", labelEn: "Pubs & bars", labelJa: "パブ・バー", Icon: Beer };
+  return [
+    { key: "restaurants", query: "restaurants", labelEn: "Restaurants", labelJa: "レストラン", Icon: Utensils },
+    { key: "cafes", query: "cafes", labelEn: "Cafes", labelJa: "カフェ", Icon: Coffee },
+    bars,
+    { key: "takeaway", query: "takeaway", labelEn: "Takeaway", labelJa: "テイクアウト", Icon: Pizza },
+    { key: "supermarkets", query: "supermarkets", labelEn: "Supermarkets", labelJa: "スーパー", Icon: ShoppingBasket },
+  ];
+}
 
 function googleMapsSearch(query: string, lat: number, lng: number): string {
   // Google Maps "search at coords" - `/maps/search/{query}/@lat,lng,zoom`
@@ -65,6 +72,14 @@ export function TownEat() {
 
   const townDisplayName = t(town.name, town.nameJa);
   const allFoodHref = googleMapsSearch(`food in ${town.name}`, town.lat, town.lng);
+  const isJP = region.shortTag?.toUpperCase() === "JP";
+  const categories = categoriesForCountry(isJP);
+  const subtitleEn = isJP
+    ? `Find restaurants, cafes, izakaya and supermarkets around ${townDisplayName} on Google Maps - opening hours, reviews and directions all live there.`
+    : `Find restaurants, cafes, pubs and supermarkets around ${townDisplayName} on Google Maps - opening hours, reviews and directions all live there.`;
+  const subtitleJa = isJP
+    ? `${townDisplayName}周辺のレストラン・カフェ・居酒屋・スーパーをGoogleマップで検索 - 営業時間・レビュー・経路もそちらでご確認いただけます。`
+    : `${townDisplayName}周辺のレストラン・カフェ・パブ・スーパーをGoogleマップで検索 - 営業時間・レビュー・経路もそちらでご確認いただけます。`;
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -83,10 +98,7 @@ export function TownEat() {
               {t("Eat", "食事")}
             </h1>
             <p className="text-muted-foreground mt-3 max-w-xl">
-              {t(
-                `Find restaurants, cafes, izakaya and supermarkets around ${townDisplayName} on Google Maps - opening hours, reviews and directions all live there.`,
-                `${townDisplayName}周辺のレストラン・カフェ・居酒屋・スーパーをGoogleマップで検索 - 営業時間・レビュー・経路もそちらでご確認いただけます。`,
-              )}
+              {t(subtitleEn, subtitleJa)}
             </p>
           </div>
           <LiveBadge label={t("Google Maps", "Googleマップ")} />
@@ -120,7 +132,7 @@ export function TownEat() {
           {t("Or jump to a category", "カテゴリーで探す")}
         </p>
         <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
-          {CATEGORIES.map(({ key, query, labelEn, labelJa, Icon }) => (
+          {categories.map(({ key, query, labelEn, labelJa, Icon }) => (
             <li key={key}>
               <a
                 href={googleMapsSearch(`${query} in ${town.name}`, town.lat, town.lng)}

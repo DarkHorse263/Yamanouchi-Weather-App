@@ -51,56 +51,67 @@ type Tile = {
 // and standalone Cams/Radar were removed: mountains accessed via the
 // "Weather in mountains" panel; cams + radar embedded inside their parent
 // pages.
-const SECTIONS: readonly Tile[] = [
-  {
-    path: "/weather",
-    icon: CloudSun,
-    label: "Weather forecast",
-    labelJa: "天気予報",
-    blurb: "Full in-town forecast with snow radar - current, hourly, 7-day",
-    blurbJa: "町の総合天気予報・雨雲レーダー - 現在・時間別・7日間",
-  },
-  {
-    path: "/roads",
-    icon: Car,
-    label: "Road conditions & cams",
-    labelJa: "道路状況・ライブカメラ",
-    blurb: "Live road conditions to the mountain plus roadside webcams",
-    blurbJa: "山への道路状況と路傍ライブカメラ",
-  },
-  {
-    path: "/transport",
-    icon: Bus,
-    label: "Transport",
-    labelJa: "交通",
-    blurb: "Buses & shuttles from town to the mountains",
-    blurbJa: "町から山へのバス・送迎",
-  },
-  {
-    path: "/stay",
-    icon: BedDouble,
-    label: "Stay",
-    labelJa: "宿泊",
-    blurb: "Hotels, ryokan and lodges nearby",
-    blurbJa: "近隣の宿泊施設",
-  },
-  {
-    path: "/eat",
-    icon: UtensilsCrossed,
-    label: "Eat",
-    labelJa: "食事",
-    blurb: "Restaurants, izakaya, cafés in town",
-    blurbJa: "町の飲食店",
-  },
-  {
-    path: "/explore",
-    icon: Compass,
-    label: "Explore",
-    labelJa: "観光",
-    blurb: "Off-mountain things to do",
-    blurbJa: "山以外のアクティビティ",
-  },
-];
+//
+// Stay/Eat blurbs are region-aware: Japan-specific terms (ryokan, izakaya)
+// only show on JP regions; AU regions get country-relevant copy
+// (motels, pubs) so a NSW user never sees Japanese accommodation/dining
+// terminology.
+function buildSections(isJP: boolean): readonly Tile[] {
+  return [
+    {
+      path: "/weather",
+      icon: CloudSun,
+      label: "Weather forecast",
+      labelJa: "天気予報",
+      blurb: "Full in-town forecast with snow radar - current, hourly, 7-day",
+      blurbJa: "町の総合天気予報・雨雲レーダー - 現在・時間別・7日間",
+    },
+    {
+      path: "/roads",
+      icon: Car,
+      label: "Road conditions & cams",
+      labelJa: "道路状況・ライブカメラ",
+      blurb: "Live road conditions to the mountain plus roadside webcams",
+      blurbJa: "山への道路状況と路傍ライブカメラ",
+    },
+    {
+      path: "/transport",
+      icon: Bus,
+      label: "Transport",
+      labelJa: "交通",
+      blurb: "Buses & shuttles from town to the mountains",
+      blurbJa: "町から山へのバス・送迎",
+    },
+    {
+      path: "/stay",
+      icon: BedDouble,
+      label: "Stay",
+      labelJa: "宿泊",
+      blurb: isJP
+        ? "Hotels, ryokan and lodges nearby"
+        : "Hotels, motels, lodges and apartments nearby",
+      blurbJa: "近隣の宿泊施設",
+    },
+    {
+      path: "/eat",
+      icon: UtensilsCrossed,
+      label: "Eat",
+      labelJa: "食事",
+      blurb: isJP
+        ? "Restaurants, izakaya, cafés in town"
+        : "Restaurants, pubs and cafés in town",
+      blurbJa: "町の飲食店",
+    },
+    {
+      path: "/explore",
+      icon: Compass,
+      label: "Explore",
+      labelJa: "観光",
+      blurb: "Off-mountain things to do",
+      blurbJa: "山以外のアクティビティ",
+    },
+  ];
+}
 
 export function TownHome() {
   const { region } = useRegion();
@@ -288,7 +299,7 @@ export function TownHome() {
 
       {/* SECTIONS - vertical stack in the order the brief specifies. */}
       <section className="mt-6 space-y-3">
-        {SECTIONS.map((tile) => {
+        {buildSections(region.shortTag?.toUpperCase() === "JP").map((tile) => {
           const Icon = tile.icon;
           return (
             <Link
