@@ -208,11 +208,18 @@ export interface SeasonMonthBlock {
   body: string; // 1-2 sentences
 }
 
+export interface MountainZone {
+  name: string; // "Central Area" / "Ryuoo Ski Park"
+  blurb?: string; // optional 1-sentence description
+  resorts?: string[]; // optional list of named sub-resorts inside this zone
+}
+
 export interface SeasonMountainBlock {
-  name: string; // "Perisher"
+  name: string; // "Perisher" / "Shiga Kogen Mountain Resort"
   opens: string; // "7 June"
   baseTarget: string; // "60-90cm by mid-July"
   note: string; // 1 sentence colour
+  zones?: MountainZone[]; // optional nested zones (rendered as a disclosed panel)
 }
 
 export interface PeakWeekBlock {
@@ -487,28 +494,71 @@ export function sampleYamanouchiSeasonOutlook(baseUrl: string): SeasonOutlook {
     ],
     mountains: [
       {
-        name: "Shiga Kogen central",
-        opens: "Sat 6 Dec",
-        baseTarget: "180-260cm by late February",
-        note: "The biggest interconnected ski area in Japan. One lift pass, eighteen sub-areas, and a free shuttle bus tying them together. Easy to lose a day exploring without skiing the same run twice.",
+        name: "Shiga Kogen Mountain Resort",
+        opens: "Sat 22 Nov to Sat 6 Dec (varies by zone)",
+        baseTarget: "180-280cm by late February",
+        note: "The largest interconnected ski area in Japan. Eighteen resorts, one all-mountain lift pass, and a free shuttle bus tying them together. Five distinct zones, from family terrain at Sun Valley to Honshu's highest lift-served snow at Yokoteyama-Shibutoge.",
+        zones: [
+          {
+            name: "Central Area",
+            blurb: "Thirteen interconnected fields. The heart of the resort, including the 1998 Olympic site at Higashidateyama.",
+            resorts: [
+              "Sun Valley",
+              "Maruike",
+              "Hasuike",
+              "Giant",
+              "Hoppo Bunadaira",
+              "Higashidateyama",
+              "Nishidateyama",
+              "Terakoya",
+              "Takamagahara Mammoth",
+              "Tannenomori Okojo",
+              "Ichinose Family",
+              "Ichinose Diamond",
+              "Ichinose Yamanokami",
+            ],
+          },
+          {
+            name: "Yakebitaiyama Area",
+            blurb: "Large Prince-run resort. Two gondolas and the 1998 Olympic GS course. The default choice for international visitors.",
+          },
+          {
+            name: "Okushiga Kogen Area",
+            blurb: "International facilities, back-country access, and the longest groomers in the system. End of the road.",
+          },
+          {
+            name: "Kumanoyu Area",
+            blurb: "Amphitheatre-shaped. Accumulates the deepest natural snow of any zone in the resort.",
+          },
+          {
+            name: "Yokoteyama & Shibutoge Area",
+            blurb: "Highest skiable point in Japan at 2,307m. First to open in November, often the coldest snow in the country mid-winter.",
+          },
+        ],
       },
       {
-        name: "Yakebitaiyama",
-        opens: "Sat 6 Dec",
-        baseTarget: "200-280cm by late February",
-        note: "The Prince-run jewel of Shiga. Two gondolas, the 1998 Olympic GS course, and consistently the deepest cover in the central area. The default choice for international visitors.",
-      },
-      {
-        name: "Okushiga Kogen",
-        opens: "Sat 13 Dec",
-        baseTarget: "220-300cm by late February",
-        note: "The quietest, longest groomers in the range and the powder pocket of Shiga. End of the road, both literally and metaphorically. Worth the extra bus ride from the central loop.",
-      },
-      {
-        name: "Yokoteyama-Shibutoge",
-        opens: "Sat 22 Nov",
-        baseTarget: "150-220cm by late February",
-        note: "Honshu's highest lift-served terrain and the first Yamanouchi resort to open. Cold, exposed, and often the best snow in the country in mid-winter. Closes overnight in storms.",
+        name: "Kita-Shiga Kogen Area",
+        opens: "Sat 13 Dec (most resorts)",
+        baseTarget: "100-180cm by late February",
+        note: "Western slopes of the Kita-Shiga range, separate from the Shiga Kogen pass system. Smaller in scale, easier to reach from Yudanaka, and often quieter on busy weekends.",
+        zones: [
+          {
+            name: "Ryuoo Ski Park",
+            blurb: "Skyland Express Ropeway carries up to 166 passengers to the summit. SORA terrace and sea-of-clouds views on clear mornings.",
+          },
+          {
+            name: "X-JAM Takaifuji",
+            blurb: "Park-focused. The biggest jib and jump features in north Nagano. Lift-and-onsen combo pass with Yomase.",
+          },
+          {
+            name: "Yomase Onsen Ski Resort",
+            blurb: "Frequently skied with Takaifuji on a combined pass. Mix of runs, night skiing, and an onsen finish.",
+          },
+          {
+            name: "Kita-shiga Komaruyama",
+            blurb: "Smallest of the Kita-Shiga group. Traditional, family-friendly, gentle beginner laps under the lifts.",
+          },
+        ],
       },
     ],
     methodologyHeadline: "How we built this read.",
@@ -608,6 +658,26 @@ function renderSourceRow(s: SeasonSource): string {
 }
 
 function renderMountainRow(m: SeasonMountainBlock): string {
+  // Optional disclosure-style zones panel. Renders as an expanded
+  // accordion (no JS in email) with a small caret + indented list.
+  const zonesPanel = m.zones && m.zones.length > 0
+    ? `<div style="margin:14px 0 0 0;padding:12px 14px;background:${BRAND.paper};border-radius:8px;page-break-inside:avoid;break-inside:avoid;">
+        <div style="font-size:11px;color:${BRAND.skyDeep};text-transform:uppercase;letter-spacing:0.14em;font-weight:700;margin-bottom:8px;">
+          <span style="display:inline-block;transform:translateY(-1px);">&#9662;</span> Zones (${m.zones.length})
+        </div>
+        ${m.zones
+          .map(
+            (z) => `<div style="margin:0 0 10px 0;padding:0 0 0 14px;border-left:2px solid ${BRAND.rule};page-break-inside:avoid;break-inside:avoid;">
+              <div style="font-family:Georgia,'Times New Roman',serif;font-size:14px;color:${BRAND.navy};font-weight:700;">${z.name}</div>
+              ${z.blurb ? `<div style="font-size:12px;color:${BRAND.ink};line-height:1.55;margin-top:2px;">${z.blurb}</div>` : ""}
+              ${z.resorts && z.resorts.length > 0
+                ? `<div style="font-size:11px;color:${BRAND.muted};line-height:1.6;margin-top:4px;">${z.resorts.join(" &middot; ")}</div>`
+                : ""}
+            </div>`,
+          )
+          .join("")}
+      </div>`
+    : "";
   return `
     <tr class="keep-together" style="page-break-inside:avoid;break-inside:avoid;">
       <td style="padding:12px 0;border-top:1px solid ${BRAND.rule};vertical-align:top;width:30%;page-break-inside:avoid;break-inside:avoid;">
@@ -617,6 +687,7 @@ function renderMountainRow(m: SeasonMountainBlock): string {
       <td style="padding:12px 0 12px 14px;border-top:1px solid ${BRAND.rule};vertical-align:top;page-break-inside:avoid;break-inside:avoid;">
         <div style="font-size:13px;color:${BRAND.skyDeep};font-weight:700;">${m.baseTarget}</div>
         <div style="font-size:13px;color:${BRAND.ink};line-height:1.55;margin-top:4px;">${m.note}</div>
+        ${zonesPanel}
       </td>
     </tr>`;
 }
@@ -760,7 +831,20 @@ export function seasonOutlookEmail(opts: {
       .join("\n\n") +
     `\n\nMOUNTAIN BY MOUNTAIN\n` +
     o.mountains
-      .map((m) => `  ${m.name} (opens ${m.opens})\n    ${m.baseTarget}\n    ${m.note}`)
+      .map((m) => {
+        const head = `  ${m.name} (opens ${m.opens})\n    ${m.baseTarget}\n    ${m.note}`;
+        if (!m.zones || m.zones.length === 0) return head;
+        const zoneText = m.zones
+          .map((z) => {
+            const blurb = z.blurb ? `      ${z.blurb}\n` : "";
+            const resorts = z.resorts && z.resorts.length > 0
+              ? `      Resorts: ${z.resorts.join(", ")}\n`
+              : "";
+            return `    ${z.name}\n${blurb}${resorts}`;
+          })
+          .join("");
+        return `${head}\n    Zones (${m.zones.length}):\n${zoneText}`;
+      })
       .join("\n") +
     `\n\nHOW WE FORECAST\n${o.methodologyHeadline}\n${o.methodologyRead}\n\nSOURCES\n` +
     o.sources.map((s) => `  ${s.label}\n    ${s.informs}\n    ${s.url}`).join("\n") +

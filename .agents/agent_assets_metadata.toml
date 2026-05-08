@@ -29,10 +29,10 @@ title = "Fortnightly digest (page-safe breaks)"
 id = "3cgUhkeTm1fOZlie7eKB6"
 uri = "file://exports/feelzlike-snowy-winter-outlook.pdf"
 type = "pdf"
-title = "Snowy winter outlook (regression check, unchanged)"
+title = "Snowy winter outlook (regression check)"
 
 [[outputs]]
 id = "6tFX9jfR5I0-AznKl2tFq"
 uri = "file://exports/feelzlike-yamanouchi-winter-outlook.pdf"
 type = "pdf"
-title = "Yamanouchi winter outlook (new, mirrors Snowy structure)"
+title = "Yamanouchi winter outlook (regrouped: Shiga Kogen + Kita-Shiga, with zones)"
