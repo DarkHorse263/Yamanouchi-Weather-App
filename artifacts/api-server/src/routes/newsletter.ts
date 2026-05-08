@@ -3,7 +3,7 @@ import { db, newsletterSubscribersTable } from "@workspace/db";
 import { eq } from "drizzle-orm";
 import { issueToken, verifyToken, isTokenStillValid } from "../lib/alertTokens.js";
 import { sendEmail } from "../lib/emailSender.js";
-import { newsletterVerificationEmail } from "../lib/newsletterEmailTemplates.js";
+import { newsletterVerificationEmail, newsletterDigestEmail } from "../lib/newsletterEmailTemplates.js";
 import { getAppPublicUrl } from "../lib/appUrl.js";
 import { REGION_IDS, type RegionId } from "../lib/regions.js";
 
@@ -237,6 +237,24 @@ router.post("/newsletter/unsubscribe", async (req, res): Promise<void> => {
     console.error("[/newsletter/unsubscribe POST] error:", err);
     res.status(500).json({ error: "UNSUB_FAILED" });
   }
+});
+
+// ─── GET /newsletter/preview (dev-only) ──────────────────────────────────
+// Renders a sample digest as HTML so we can review the template visually
+// without sending real email. Disabled in production.
+router.get("/newsletter/preview", (_req, res): void => {
+  if (process.env["NODE_ENV"] === "production") {
+    res.status(404).end();
+    return;
+  }
+  const base = getAppPublicUrl();
+  const tmpl = newsletterDigestEmail({
+    baseUrl: base,
+    unsubscribeUrl: `${base}/newsletter/unsubscribed`,
+    manageUrl: `${base}/newsletter/manage`,
+  });
+  res.setHeader("Content-Type", "text/html; charset=utf-8");
+  res.send(tmpl.html);
 });
 
 export default router;
