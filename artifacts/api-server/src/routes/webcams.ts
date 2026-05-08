@@ -28,8 +28,8 @@ const THREDBO_S3 = "https://thredbo-services-prod-s3-sftp-server-public.s3.ap-so
 // Display order for Snowy Mountains is curated (Perisher, Thredbo, Selwyn,
 // Charlotte's Pass) - Perisher and Thredbo are the flagship day-tripper
 // resorts and lead the list. Selwyn has no public webcams. Charlotte's Pass
-// is included for completeness even though it's a ski-in village, not a
-// day-tripper destination. Keep this order in sync with
+// is reachable as a day trip but only via oversnow transfer from Perisher
+// (DayTripper package), so it sits last. Keep this order in sync with
 // artifacts/feelzlike/src/regions/snowy-mountains.ts.
 const WEBCAM_DATA: WebcamConfig[] = [
   {

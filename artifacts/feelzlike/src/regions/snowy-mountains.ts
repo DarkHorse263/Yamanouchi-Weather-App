@@ -10,9 +10,11 @@ export const snowyMountainsRegion: RegionConfig = {
   seasons: true,
   // Curated display order across the app (May 2026): Perisher and Thredbo
   // are the two flagship day-tripper resorts and always lead. Selwyn is the
-  // family-beginner mountain. Charlotte's Pass is included because it forms
-  // part of the Snowy Mountains, but listed last - it's a ski-in village,
-  // not a day-tripper destination, so it shouldn't lead the list.
+  // family-beginner mountain. Charlotte's Pass is listed last because it's
+  // harder to reach - the village is snowbound in winter, so day-trippers
+  // need the oversnow transfer from Perisher Valley (DayTripper package
+  // required, ~30-45 min). It's a real day-trip option, just not as
+  // straightforward as driving up to Thredbo or Perisher.
   resorts: [
     { path: "/mountain/perisher",  label: "Perisher" },
     { path: "/mountain/thredbo",   label: "Thredbo" },
@@ -28,9 +30,10 @@ export const snowyMountainsRegion: RegionConfig = {
     // Selwyn: explicitly family-beginner, no expert terrain.
     { id: "selwyn",          name: "Selwyn",           elevationM: 1614, lat: -35.8383, lng: 148.5267, blurb: "NSW · family beginner mountain",             websiteUrl: "https://www.selwynsnow.com.au",     beginner_friendly: true, kids_lessons: true },
     // Charlotte's Pass: small ski-in village, mostly intermediate, kids' programs.
-    // Not a day-tripper resort (no public road access in winter - oversnow only),
-    // but included because it forms part of the Snowy Mountains.
-    { id: "charlottes-pass", name: "Charlotte's Pass", elevationM: 1837, lat: -36.4314, lng: 148.3297, blurb: "NSW · ski-in village above the snowline",    websiteUrl: "https://www.charlottepass.com.au",  beginner_friendly: true, kids_lessons: true },
+    // Day-trippable via the DayTripper package: park at Perisher Valley (or
+    // take the Skitube from Bullocks Flat), then oversnow vehicle ~30-45 min
+    // up to the village. Standard lift tickets are overnight-guests only.
+    { id: "charlottes-pass", name: "Charlotte's Pass", elevationM: 1837, lat: -36.4314, lng: 148.3297, blurb: "NSW · ski-in village · day trip via oversnow from Perisher", websiteUrl: "https://www.charlottepass.com.au", beginner_friendly: true, kids_lessons: true },
   ],
   baseTowns: [
     {
