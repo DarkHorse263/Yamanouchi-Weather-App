@@ -314,7 +314,7 @@ export default function LocationDetail() {
                     <span className="text-sm md:text-base text-muted-foreground/70 font-normal ml-1">{s.unit}</span>
                   </p>
                   {s.hint && (
-                    <p className="text-[11px] text-muted-foreground/70 mt-1">{s.hint}</p>
+                    <p className="text-xs text-muted-foreground/70 mt-1">{s.hint}</p>
                   )}
                 </div>
               </div>
@@ -662,7 +662,7 @@ export default function LocationDetail() {
                     <div className="px-3 py-2">
                       <p className="font-semibold text-foreground text-xs truncate">{webcam.name}</p>
                       {webcam.description && (
-                        <p className="text-[10px] text-muted-foreground mt-0.5 line-clamp-2">{webcam.description}</p>
+                        <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2">{webcam.description}</p>
                       )}
                     </div>
                   </a>

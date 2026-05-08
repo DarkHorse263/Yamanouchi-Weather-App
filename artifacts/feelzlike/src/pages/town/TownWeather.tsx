@@ -13,7 +13,7 @@ import {
   Thermometer,
   Compass as CompassIcon,
 } from "lucide-react";
-import { useLanguage, useBaseTown, useRegion, LiveBadge, UpdateStamp } from "@workspace/feelzlike-shell";
+import { useLanguage, useBaseTown, useRegion, LiveBadge, UpdateStamp, useOptionalSeason } from "@workspace/feelzlike-shell";
 import { RadarMap } from "@/regions/snowy-mountains/components/RadarMap";
 import { Radar as RadarIcon, ExternalLink } from "lucide-react";
 import {
@@ -92,6 +92,51 @@ export function TownWeather() {
         </>
       )}
     </div>
+  );
+}
+
+function Radar({ t }: { t: (en: string, ja: string) => string }) {
+  const seasonCtx = useOptionalSeason();
+  const season = seasonCtx?.season ?? "winter";
+  const headline = season === "winter"
+    ? t("Live snow + cloud radar", "ライブ降雪・雲レーダー")
+    : t("Live rain + cloud radar", "ライブ降雨・雲レーダー");
+  const byline = season === "winter"
+    ? t("Snow radar", "降雪レーダー")
+    : t("Rain radar", "降雨レーダー");
+  return (
+    <section className="mt-4 rounded-2xl border border-border bg-white overflow-hidden">
+      <div className="flex items-center justify-between gap-3 px-5 pt-5 pb-3 flex-wrap">
+        <div>
+          <p className="byline text-muted-foreground/70 inline-flex items-center gap-1.5">
+            <RadarIcon className="w-3 h-3" /> {byline}
+          </p>
+          <h2 className="font-display font-semibold text-lg text-foreground mt-1">
+            {headline}
+          </h2>
+        </div>
+        <a
+          href="https://www.rainviewer.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
+        >
+          RainViewer <ExternalLink className="w-3 h-3" />
+        </a>
+      </div>
+      <RadarMap season={season} />
+      <p className="text-xs text-muted-foreground/70 px-5 py-3 border-t border-border">
+        {season === "winter"
+          ? t(
+              "Toggle Overall / Clouds / Snow above the map. Above ~1,400 m, precipitation falls as snow when temps are at or below 0°C. Forecast frames show the next 30 minutes.",
+              "地図上のオーバーオール／雲／雪を切替。標高約1,400m以上で気温0°C以下なら降水は雪。予報フレームは今後30分の予測。",
+            )
+          : t(
+              "Toggle Overall / Clouds / Rain above the map. Forecast frames show the next 30 minutes.",
+              "地図上のオーバーオール／雲／雨を切替。予報フレームは今後30分の予測。",
+            )}
+      </p>
+    </section>
   );
 }
 
@@ -326,40 +371,6 @@ function Outlook({
           );
         })}
       </div>
-    </section>
-  );
-}
-
-function Radar({ t }: { t: (en: string, ja: string) => string }) {
-  // Radar absorbed into the weather page (May 2026 v2). The standalone
-  // /radar route was removed from the menu - users land here instead.
-  return (
-    <section className="mt-4 rounded-2xl border border-border bg-white overflow-hidden">
-      <div className="flex items-center justify-between gap-3 px-5 pt-5 pb-3 flex-wrap">
-        <div>
-          <p className="byline text-muted-foreground/70 inline-flex items-center gap-1.5">
-            <RadarIcon className="w-3 h-3" /> {t("Snow radar", "降雪レーダー")}
-          </p>
-          <h2 className="font-display font-semibold text-lg text-foreground mt-1">
-            {t("Live precipitation radar", "ライブ降水レーダー")}
-          </h2>
-        </div>
-        <a
-          href="https://www.bom.gov.au/products/IDR403.loop.shtml"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
-        >
-          BOM Wagga Wagga <ExternalLink className="w-3 h-3" />
-        </a>
-      </div>
-      <RadarMap />
-      <p className="text-[11px] text-muted-foreground/70 px-5 py-3 border-t border-border">
-        {t(
-          "Drag to pan, scroll to zoom, scrub the timeline. Above ~1,400 m, precipitation falls as snow when temps are at or below 0°C.",
-          "ドラッグでパン、スクロールでズーム。標高約1,400m以上で気温0°C以下なら降水は雪。",
-        )}
-      </p>
     </section>
   );
 }

@@ -443,10 +443,10 @@ export default function StayMapInner({
                     {stay.name}
                   </h3>
                   {stay.name_local ? (
-                    <p className="text-[11px] text-muted-foreground mt-0.5">{stay.name_local}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">{stay.name_local}</p>
                   ) : null}
 
-                  <p className="text-[11px] text-foreground/70 mt-1.5 tabular-nums">
+                  <p className="text-xs text-foreground/70 mt-1.5 tabular-nums">
                     {driveLabel}
                   </p>
 
@@ -521,7 +521,7 @@ export default function StayMapInner({
         <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1">
           Drive time {userPos ? "from you" : topMountainDriveKey ? `→ ${prettyMountainName(topMountainDriveKey)}` : "(nearest mountain)"}
         </div>
-        <div className="flex items-center gap-2 text-[10px] tabular-nums">
+        <div className="flex items-center gap-2 text-xs tabular-nums">
           {(["green", "yellow", "orange", "red"] as DriveBucket[]).map((b) => (
             <div key={b} className="flex items-center gap-1">
               <span

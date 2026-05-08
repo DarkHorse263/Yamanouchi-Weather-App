@@ -485,7 +485,7 @@ export default function Landing() {
                       <p className="mt-1.5 text-xs text-slate-700 capitalize">
                         {h.description.toLowerCase()} <span className="text-slate-400">·</span> feelzlike {Math.round(h.feelsLikeC)}°
                       </p>
-                      <div className="mt-2 flex items-center justify-center md:justify-start gap-3 text-[10px] text-slate-500">
+                      <div className="mt-2 flex items-center justify-center md:justify-start gap-3 text-xs text-slate-500">
                         <span className="inline-flex items-center gap-1">
                           <Wind className="w-3 h-3" />
                           <span className="tabular-nums font-semibold text-slate-700">{h.windKph}</span>
@@ -539,7 +539,7 @@ export default function Landing() {
 
                 {/* footer cue */}
                 <div className={`border-t border-slate-100 px-4 py-2.5 md:px-5 flex items-center justify-between gap-2 text-[11px] font-semibold transition-colors ${footerStrip}`}>
-                  <span className="text-[10px] font-medium normal-case tracking-normal text-slate-500 truncate">
+                  <span className="text-[11px] font-medium normal-case tracking-normal text-slate-500 truncate">
                     {isLive && h ? (
                       <>Updated <span className="tabular-nums text-slate-700">{formatAgo(h.observedAt, now)}</span></>
                     ) : (

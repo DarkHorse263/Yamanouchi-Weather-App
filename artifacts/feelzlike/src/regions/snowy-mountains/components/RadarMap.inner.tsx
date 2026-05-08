@@ -1,12 +1,15 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { MapContainer, TileLayer, ImageOverlay, Marker, Tooltip, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Tooltip, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { Cloud, CloudSnow, CloudRain, Layers, Pause, Play } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface RadarMapInnerProps {
   center?: { lat: number; lng: number };
   zoom?: number;
   markers?: Array<{ id: string; name: string; lat: number; lng: number }>;
+  season?: "winter" | "green";
 }
 
 const DEFAULT_CENTER = { lat: -36.42, lng: 148.42 };
@@ -20,45 +23,27 @@ const RESORT_PINS: Array<{ id: string; name: string; lat: number; lng: number }>
   { id: "jindabyne", name: "Jindabyne", lat: -36.4106, lng: 148.6206 },
 ];
 
-// IDR403 = Wagga Wagga 256 km radar.
-// The PNG covers a square centred on the radar; we project that square
-// into a lat/lng bounding box for Leaflet's ImageOverlay. BOM uses an
-// azimuthal-equidistant projection, so the box is approximate (perfect
-// at the centre, ~1-2% distortion at the edges) - well within tolerance
-// for the Snowy Mountains, which sit ~50-150 km from the radar.
-const RADAR = {
-  id: "IDR403",
-  centre: { lat: -35.1583, lng: 147.4575 }, // Wagga Wagga
-  rangeKm: 256,
-} as const;
+// RainViewer is a free public weather-tile API: global precipitation
+// radar (past 2hr + 30min nowcast) and Himawari/GOES infrared satellite
+// imagery (clouds). No API key required, CORS-friendly, ~256 KB per
+// frame. The /weather-maps.json manifest tells us which frames exist
+// and where to fetch the tiles from.
+const RAINVIEWER_MANIFEST = "https://api.rainviewer.com/public/weather-maps.json";
 
-function computeBounds(centre: { lat: number; lng: number }, rangeKm: number): L.LatLngBoundsExpression {
-  const dlat = rangeKm / 111.32;
-  const dlng = rangeKm / (111.32 * Math.cos((centre.lat * Math.PI) / 180));
-  return [
-    [centre.lat - dlat, centre.lng - dlng],
-    [centre.lat + dlat, centre.lng + dlng],
-  ];
+interface RvFrame {
+  time: number; // unix seconds
+  path: string; // "/v2/radar/{ts}" or "/v2/satellite/{ts}"
+}
+interface RvManifest {
+  host: string;
+  radar: { past: RvFrame[]; nowcast: RvFrame[] };
+  satellite: { infrared: RvFrame[] };
 }
 
-const RADAR_BOUNDS = computeBounds(RADAR.centre, RADAR.rangeKm);
+type LayerMode = "all" | "clouds" | "precip";
 
-// BOM transparency layers stack underneath / over the radar PNG to give
-// it geography. Order matters: background first, then topography, then
-// (radar between), then locations + range + legend on top.
-const TRANSPARENCY_BACKGROUND = `/api/bom-radar?type=transparency&file=${RADAR.id}.background.png`;
-const TRANSPARENCY_TOPOGRAPHY = `/api/bom-radar?type=transparency&file=${RADAR.id}.topography.png`;
-const TRANSPARENCY_LOCATIONS = `/api/bom-radar?type=transparency&file=${RADAR.id}.locations.png`;
-const TRANSPARENCY_RANGE = `/api/bom-radar?type=transparency&file=${RADAR.id}.range.png`;
-
-interface RadarFrame {
-  ts: string;
-  file: string;
-  url: string;
-}
-
-function useRadarFrames() {
-  const [frames, setFrames] = useState<RadarFrame[]>([]);
+function useRainviewerManifest() {
+  const [manifest, setManifest] = useState<RvManifest | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -66,11 +51,11 @@ function useRadarFrames() {
     let cancelled = false;
     async function load() {
       try {
-        const r = await fetch(`/api/bom-radar/frames?radar=${RADAR.id}&count=6`);
-        if (!r.ok) throw new Error(`frames ${r.status}`);
-        const data = await r.json();
+        const r = await fetch(RAINVIEWER_MANIFEST, { cache: "no-store" });
+        if (!r.ok) throw new Error(`manifest ${r.status}`);
+        const data = (await r.json()) as RvManifest;
         if (cancelled) return;
-        setFrames(data.frames ?? []);
+        setManifest(data);
         setError(null);
       } catch (e) {
         if (cancelled) return;
@@ -80,8 +65,8 @@ function useRadarFrames() {
       }
     }
     load();
-    // BOM publishes a new frame every 6 minutes; refresh the list every 5
-    // min so we pick up the next one as soon as it lands.
+    // RainViewer publishes a new radar frame every ~10 min. Refresh the
+    // manifest at the same cadence so we always have the latest nowcast.
     const id = window.setInterval(load, 5 * 60 * 1000);
     return () => {
       cancelled = true;
@@ -89,7 +74,7 @@ function useRadarFrames() {
     };
   }, []);
 
-  return { frames, loading, error };
+  return { manifest, loading, error };
 }
 
 function makePinIcon(label: string, accent: string): L.DivIcon {
@@ -114,25 +99,6 @@ const PIN_ICONS: Record<string, L.DivIcon> = {
   selwyn: makePinIcon("Selwyn", "#10b981"),
 };
 
-function RadarLayers({ frames, frameIndex }: { frames: RadarFrame[]; frameIndex: number }) {
-  // Pre-mount every frame at low/zero opacity. Switching opacity (rather
-  // than adding/removing layers) keeps the WebGL textures cached so the
-  // animation is smooth instead of flickering on each tick.
-  return (
-    <>
-      {frames.map((f, i) => (
-        <ImageOverlay
-          key={f.ts}
-          url={f.url}
-          bounds={RADAR_BOUNDS}
-          opacity={i === frameIndex ? 0.85 : 0}
-          zIndex={400}
-        />
-      ))}
-    </>
-  );
-}
-
 function RecenterOnChange({ center, zoom }: { center: [number, number]; zoom: number }) {
   const map = useMap();
   useEffect(() => {
@@ -141,37 +107,84 @@ function RecenterOnChange({ center, zoom }: { center: [number, number]; zoom: nu
   return null;
 }
 
+// RainViewer tile path:
+//   {host}{path}/{size}/{z}/{x}/{y}/{color}/{smooth}_{snow}.png
+// Color schemes documented at https://www.rainviewer.com/api.html.
+//   color=2 = "Universal Blue" — clean blue/green gradient, reads well
+//             on a topo basemap.
+//   smooth=1 enables bilinear smoothing.
+//   snow=1   tints sub-zero precip in cyan/white so snow vs rain is
+//            visually distinguishable on the same layer.
+function radarTileUrl(host: string, path: string): string {
+  return `${host}${path}/256/{z}/{x}/{y}/2/1_1.png`;
+}
+// Satellite (infrared) — color=0 = greyscale clouds, smooth=0, snow=0.
+function satelliteTileUrl(host: string, path: string): string {
+  return `${host}${path}/256/{z}/{x}/{y}/0/0_0.png`;
+}
+
 export default function RadarMapInner({
   center = DEFAULT_CENTER,
   zoom = DEFAULT_ZOOM,
   markers,
+  season = "winter",
 }: RadarMapInnerProps) {
-  const { frames, loading, error } = useRadarFrames();
+  const { manifest, loading, error } = useRainviewerManifest();
   const [frameIndex, setFrameIndex] = useState(0);
   const [playing, setPlaying] = useState(true);
+  const [mode, setMode] = useState<LayerMode>("all");
   const tickRef = useRef<number | null>(null);
 
-  // Animate frames at ~600ms per step. Pause when the user toggles play.
+  // Combined radar timeline: past frames followed by nowcast frames.
+  // Past = solid history, nowcast = predicted next 30 min (rendered
+  // with a subtle dashed-look opacity so users know it's a forecast).
+  const radarFrames = useMemo<RvFrame[]>(() => {
+    if (!manifest) return [];
+    return [...manifest.radar.past, ...manifest.radar.nowcast];
+  }, [manifest]);
+
+  const nowcastStart = manifest?.radar.past.length ?? 0;
+  const isNowcast = frameIndex >= nowcastStart;
+
+  // Latest satellite frame — clouds change slowly enough that animating
+  // them adds little; we just show the freshest infrared image.
+  const latestSatellite = useMemo<RvFrame | null>(() => {
+    const list = manifest?.satellite.infrared ?? [];
+    return list.length > 0 ? list[list.length - 1] : null;
+  }, [manifest]);
+
+  // Animate radar at ~700ms per frame, pause longer on the latest
+  // observed frame so the "now" moment is readable before nowcast loops.
   useEffect(() => {
-    if (!playing || frames.length === 0) return;
+    if (!playing || radarFrames.length === 0 || mode === "clouds") return;
     tickRef.current = window.setInterval(() => {
-      setFrameIndex((i) => (i + 1) % frames.length);
-    }, 600);
+      setFrameIndex((i) => (i + 1) % radarFrames.length);
+    }, 700);
     return () => {
       if (tickRef.current) window.clearInterval(tickRef.current);
     };
-  }, [playing, frames.length]);
+  }, [playing, radarFrames.length, mode]);
 
-  // Whenever the frame list refreshes, jump to the newest frame so users
-  // always start the next loop from "now".
+  // Whenever the manifest refreshes, jump to the most recent observed
+  // frame (end of past, just before nowcast) so the loop starts at "now".
   useEffect(() => {
-    if (frames.length > 0) setFrameIndex(frames.length - 1);
-  }, [frames.length]);
+    if (radarFrames.length > 0) {
+      setFrameIndex(Math.max(0, nowcastStart - 1));
+    }
+  }, [radarFrames.length, nowcastStart]);
 
   const pins = useMemo(() => markers ?? RESORT_PINS, [markers]);
-  const currentFrame = frames[frameIndex];
-  const stamp = currentFrame ? formatStamp(currentFrame.ts) : null;
+  const currentRadar = radarFrames[frameIndex];
+  const stamp = currentRadar ? formatStamp(currentRadar.time) : null;
   const centerTuple: [number, number] = [center.lat, center.lng];
+
+  const showRadar = mode === "all" || mode === "precip";
+  const showClouds = mode === "all" || mode === "clouds";
+
+  // Season-aware labels: same precip data, but in winter we frame it
+  // as "snow" because that's what users care about on the mountain.
+  const precipLabel = season === "winter" ? "Snow" : "Rain";
+  const PrecipIcon = season === "winter" ? CloudSnow : CloudRain;
 
   return (
     <div className="relative w-full h-[520px] md:h-[640px] bg-slate-100">
@@ -180,13 +193,12 @@ export default function RadarMapInner({
         zoom={zoom}
         scrollWheelZoom
         className="absolute inset-0 w-full h-full"
-        // Constrain the world a bit so panning doesn't wander off Australia.
-        minZoom={6}
+        minZoom={5}
         maxZoom={12}
       >
         <RecenterOnChange center={centerTuple} zoom={zoom} />
 
-        {/* OpenTopoMap basemap — terrain + ski runs underneath the radar. */}
+        {/* Topographic basemap: ski runs, contour lines, rivers. */}
         <TileLayer
           attribution='© <a href="https://opentopomap.org">OpenTopoMap</a> · © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
@@ -194,15 +206,37 @@ export default function RadarMapInner({
           maxNativeZoom={15}
         />
 
-        {/* BOM transparency stack: background tint + topography go below the
-            radar; locations + range rings sit above so they stay readable. */}
-        <ImageOverlay url={TRANSPARENCY_BACKGROUND} bounds={RADAR_BOUNDS} opacity={0.2} zIndex={300} />
-        <ImageOverlay url={TRANSPARENCY_TOPOGRAPHY} bounds={RADAR_BOUNDS} opacity={0.25} zIndex={350} />
+        {/* Cloud layer (infrared satellite). Sits below precip so storm
+            cells stay crisp on top of the cloud field.
+            maxNativeZoom: RainViewer satellite tops out around z=6;
+            past that the API returns a "Zoom Level Not Supported"
+            placeholder PNG. Capping native zoom makes Leaflet upscale
+            its z=6 tiles instead of requesting bad ones. */}
+        {showClouds && manifest && latestSatellite && (
+          <TileLayer
+            key={`sat-${latestSatellite.time}`}
+            url={satelliteTileUrl(manifest.host, latestSatellite.path)}
+            opacity={mode === "clouds" ? 0.75 : 0.55}
+            zIndex={300}
+            maxNativeZoom={4}
+            attribution=""
+          />
+        )}
 
-        <RadarLayers frames={frames} frameIndex={frameIndex} />
-
-        <ImageOverlay url={TRANSPARENCY_LOCATIONS} bounds={RADAR_BOUNDS} opacity={0.7} zIndex={500} />
-        <ImageOverlay url={TRANSPARENCY_RANGE} bounds={RADAR_BOUNDS} opacity={0.4} zIndex={510} />
+        {/* Precipitation layer. Radar tiles top out at z=10. We render
+            the current frame only — React-Leaflet replaces the tile
+            cache cleanly on key change, and animation feels smooth at
+            700ms intervals. */}
+        {showRadar && manifest && currentRadar && (
+          <TileLayer
+            key={`rad-${currentRadar.time}`}
+            url={radarTileUrl(manifest.host, currentRadar.path)}
+            opacity={isNowcast ? 0.65 : 0.85}
+            zIndex={400}
+            maxNativeZoom={10}
+            attribution=""
+          />
+        )}
 
         {pins.map((p) => (
           <Marker
@@ -217,60 +251,116 @@ export default function RadarMapInner({
         ))}
       </MapContainer>
 
-      {/* Floating control bar: play/pause + timestamp + frame scrubber. */}
-      <div className="absolute left-3 right-3 bottom-3 z-[1000] rounded-xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-lg px-3 py-2 flex items-center gap-3">
-        <button
-          type="button"
-          onClick={() => setPlaying((p) => !p)}
-          disabled={frames.length === 0}
-          className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-slate-900 text-white text-xs font-bold disabled:opacity-40"
-          aria-label={playing ? "Pause radar animation" : "Play radar animation"}
-        >
-          {playing ? "❚❚" : "▶"}
-        </button>
-        <div className="flex-1 min-w-0">
-          <div className="text-[11px] uppercase tracking-wide text-slate-500 font-semibold">
-            {loading
-              ? "Loading BOM Wagga Wagga radar…"
-              : error
-                ? "Radar unavailable"
-                : stamp
-                  ? `Frame ${frameIndex + 1} / ${frames.length} · ${stamp}`
-                  : "No recent frames"}
-          </div>
-          <input
-            type="range"
-            min={0}
-            max={Math.max(0, frames.length - 1)}
-            value={frameIndex}
-            onChange={(e) => {
-              setPlaying(false);
-              setFrameIndex(parseInt(e.target.value));
-            }}
-            disabled={frames.length === 0}
-            className="w-full mt-1 accent-slate-900"
-            aria-label="Radar frame scrubber"
-          />
-        </div>
-        <span className="text-[10px] text-slate-500 font-medium hidden sm:inline">
-          BOM IDR403 · 256 km
-        </span>
+      {/* Floating layer toggles (top-right). Three pills with icons +
+          short labels — fits cleanly on mobile too. */}
+      <div className="absolute top-3 right-3 z-[1000] flex flex-col gap-1 rounded-xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-lg p-1">
+        <ModePill
+          active={mode === "all"}
+          onClick={() => setMode("all")}
+          icon={Layers}
+          label="Overall"
+        />
+        <ModePill
+          active={mode === "clouds"}
+          onClick={() => setMode("clouds")}
+          icon={Cloud}
+          label="Clouds"
+        />
+        <ModePill
+          active={mode === "precip"}
+          onClick={() => setMode("precip")}
+          icon={PrecipIcon}
+          label={precipLabel}
+        />
       </div>
+
+      {/* Floating control bar (bottom): play/pause + timestamp + scrubber.
+          Hidden in clouds-only mode since there's nothing to animate. */}
+      {mode !== "clouds" && (
+        <div className="absolute left-3 right-3 bottom-3 z-[1000] rounded-xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-lg px-3 py-2 flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setPlaying((p) => !p)}
+            disabled={radarFrames.length === 0}
+            className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-slate-900 text-white disabled:opacity-40"
+            aria-label={playing ? "Pause radar animation" : "Play radar animation"}
+          >
+            {playing ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 ml-0.5" />}
+          </button>
+          <div className="flex-1 min-w-0">
+            <div className="text-xs uppercase tracking-wide text-slate-600 font-semibold flex items-center gap-2">
+              {loading
+                ? "Loading radar…"
+                : error
+                  ? "Radar unavailable"
+                  : stamp
+                    ? (
+                        <>
+                          <span className="tabular-nums">{stamp}</span>
+                          {isNowcast && (
+                            <span className="inline-flex items-center rounded-full bg-amber-100 text-amber-800 px-1.5 py-0.5 text-[10px] font-bold tracking-wide">
+                              FORECAST
+                            </span>
+                          )}
+                        </>
+                      )
+                    : "No frames"}
+            </div>
+            <input
+              type="range"
+              min={0}
+              max={Math.max(0, radarFrames.length - 1)}
+              value={frameIndex}
+              onChange={(e) => {
+                setPlaying(false);
+                setFrameIndex(parseInt(e.target.value));
+              }}
+              disabled={radarFrames.length === 0}
+              className="w-full mt-1 accent-slate-900"
+              aria-label="Radar frame scrubber"
+            />
+          </div>
+          <span className="text-[10px] text-slate-500 font-medium hidden sm:inline">
+            RainViewer · global radar
+          </span>
+        </div>
+      )}
     </div>
   );
 }
 
-// "202605080230" → "08 May 02:30 UTC" rendered in local time.
-function formatStamp(ts: string): string {
-  if (ts.length !== 12) return ts;
-  const yr = ts.slice(0, 4);
-  const mo = ts.slice(4, 6);
-  const da = ts.slice(6, 8);
-  const hh = ts.slice(8, 10);
-  const mm = ts.slice(10, 12);
-  const iso = `${yr}-${mo}-${da}T${hh}:${mm}:00Z`;
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return ts;
+function ModePill({
+  active,
+  onClick,
+  icon: Icon,
+  label,
+}: {
+  active: boolean;
+  onClick: () => void;
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        "inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors",
+        active
+          ? "bg-slate-900 text-white"
+          : "text-slate-700 hover:bg-slate-100",
+      )}
+      aria-pressed={active}
+    >
+      <Icon className="w-3.5 h-3.5" />
+      {label}
+    </button>
+  );
+}
+
+function formatStamp(unixSec: number): string {
+  const d = new Date(unixSec * 1000);
+  if (Number.isNaN(d.getTime())) return "";
   return d.toLocaleString(undefined, {
     hour: "2-digit",
     minute: "2-digit",

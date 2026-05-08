@@ -8,6 +8,8 @@ export interface RadarMapProps {
   center?: { lat: number; lng: number };
   zoom?: number;
   markers?: Array<{ id: string; name: string; lat: number; lng: number }>;
+  /** Drives the precip toggle label: "Snow" in winter, "Rain" in green season. */
+  season?: "winter" | "green";
 }
 
 export function RadarMap(props: RadarMapProps) {

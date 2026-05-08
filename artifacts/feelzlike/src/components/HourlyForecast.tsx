@@ -268,7 +268,7 @@ export function HourlyForecast({
       </div>
 
       {windows.length === 0 && future.some((h) => (h.snowfall ?? 0) > 0) && (
-        <p className="mt-3 text-[11px] text-muted-foreground/80 text-center">
+        <p className="mt-3 text-xs text-muted-foreground/80 text-center">
           {tx(
             "Snow forecast - but no sustained Powder Window in the next 48h.",
             "降雪はあるものの、今後48時間にパウダーウィンドウは見込まれません。",
@@ -468,7 +468,7 @@ function PowderDetail({
       <p className="font-display text-base font-semibold mt-0.5">
         {startLabel}–{endLabel}
       </p>
-      <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-3 text-[11px]">
+      <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
         <DetailStat
           label={t("Total snow", "総降雪")}
           value={`${window.totalSnow}cm`}
@@ -486,7 +486,7 @@ function PowderDetail({
           value={`${window.qualityScore}/100`}
         />
       </div>
-      <p className="mt-3 text-[11px] opacity-80 leading-relaxed">
+      <p className="mt-3 text-xs opacity-80 leading-relaxed">
         {t(
           isAU
             ? "AU thresholds: snowfall ≥0.5cm/hr, wind <25km/h, ≥3 consecutive hours, ≤+2°C."
