@@ -328,15 +328,15 @@ function HourCell({
         {temp}°
       </p>
       {snow > 0 ? (
-        <div className={cn("flex items-center gap-0.5 text-[10px] font-semibold tabular-nums leading-none", iconTone)}>
-          <Snowflake className="w-2.5 h-2.5" aria-hidden />
+        <div className={cn("flex items-center gap-1 text-xs font-semibold tabular-nums leading-none", iconTone)}>
+          <Snowflake className="w-3 h-3" aria-hidden />
           {snow}
         </div>
       ) : (
-        <div className="h-[12px]" aria-hidden />
+        <div className="h-[14px]" aria-hidden />
       )}
-      <div className="flex items-center gap-0.5 text-[9px] text-muted-foreground tabular-nums leading-none">
-        <Wind className="w-2.5 h-2.5" aria-hidden />
+      <div className="flex items-center gap-1 text-xs text-muted-foreground tabular-nums leading-none">
+        <Wind className="w-3 h-3" aria-hidden />
         {wind}
       </div>
     </div>

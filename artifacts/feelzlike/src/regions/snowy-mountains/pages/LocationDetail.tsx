@@ -374,61 +374,63 @@ export default function LocationDetail() {
                   const snowH = Math.round((snow / maxSnow) * 100);
                   const rainH = Math.round((rain / maxRain) * 100);
                   return (
-                    <div key={day.date} className="bg-background/40 px-2 py-3 md:px-3 md:py-4 flex flex-col items-center text-center gap-1.5">
-                      <p className="font-display text-sm md:text-base text-foreground tracking-tight">
+                    <div key={day.date} className="bg-background/40 px-3 py-4 md:px-4 md:py-5 flex flex-col items-center text-center gap-2">
+                      <p className="font-display font-medium text-base md:text-lg text-foreground tracking-tight">
                         {i === 0 ? "Today" : format(parseISO(day.date), "EEE")}
                       </p>
-                      <p className="byline text-muted-foreground/60 -mt-0.5">{format(parseISO(day.date), "d MMM")}</p>
+                      <p className="text-xs font-medium text-muted-foreground tabular-nums -mt-1">
+                        {format(parseISO(day.date), "d MMM")}
+                      </p>
 
-                      <div className="my-1 text-primary/90">
-                        <WeatherIcon code={day.weatherCode} className="w-7 h-7 md:w-9 md:h-9" />
+                      <div className="my-1.5 text-primary/90">
+                        <WeatherIcon code={day.weatherCode} className="w-9 h-9 md:w-11 md:h-11" />
                       </div>
-                      <p className="text-[10px] text-muted-foreground/80 capitalize line-clamp-1 leading-tight min-h-[1.1em]">
+                      <p className="text-xs text-muted-foreground capitalize line-clamp-1 leading-snug min-h-[1.1em]">
                         {(day.weatherDescription || "").toLowerCase()}
                       </p>
 
-                      <div className="flex items-baseline justify-center gap-1.5 font-display mt-1" data-numeric>
-                        <span className="text-foreground text-lg md:text-xl">{Math.round(day.maxTemp)}°</span>
-                        <span className="text-muted-foreground/60 text-xs">{Math.round(day.minTemp)}°</span>
+                      <div className="flex items-baseline justify-center gap-2 font-display mt-1" data-numeric>
+                        <span className="text-foreground text-2xl md:text-3xl font-medium">{Math.round(day.maxTemp)}°</span>
+                        <span className="text-muted-foreground text-base">{Math.round(day.minTemp)}°</span>
                       </div>
 
                       {/* snowfall / rainfall bars */}
-                      <div className="w-full flex items-end justify-center gap-1 h-9 mt-1.5" aria-hidden>
+                      <div className="w-full flex items-end justify-center gap-1.5 h-10 mt-2" aria-hidden>
                         <div className="flex flex-col items-center justify-end h-full">
                           <div
-                            className="w-2.5 rounded-t-sm bg-sky-400/70"
+                            className="w-3 rounded-t-sm bg-sky-400/80"
                             style={{ height: `${snow > 0 ? Math.max(8, snowH) : 0}%` }}
                             title={`${snow.toFixed(1)} mm snow`}
                           />
-                          <Snowflake className="w-2.5 h-2.5 text-sky-400/70 mt-0.5" />
+                          <Snowflake className="w-3 h-3 text-sky-400/80 mt-1" />
                         </div>
                         <div className="flex flex-col items-center justify-end h-full">
                           <div
-                            className="w-2.5 rounded-t-sm bg-blue-500/50"
+                            className="w-3 rounded-t-sm bg-blue-500/60"
                             style={{ height: `${rain > 0 ? Math.max(8, rainH) : 0}%` }}
                             title={`${rain.toFixed(1)} mm rain`}
                           />
-                          <CloudRain className="w-2.5 h-2.5 text-blue-500/60 mt-0.5" />
+                          <CloudRain className="w-3 h-3 text-blue-500/70 mt-1" />
                         </div>
                       </div>
-                      <div className="flex items-center gap-1 text-[10px] tabular-nums text-muted-foreground/80 mt-0.5">
-                        <span className="text-sky-300/90">{snow > 0 ? `${snow.toFixed(snow >= 10 ? 0 : 1)}mm` : "-"}</span>
-                        <span className="text-muted-foreground/40">/</span>
-                        <span className="text-blue-300/90">{rain > 0 ? `${rain.toFixed(rain >= 10 ? 0 : 1)}mm` : "-"}</span>
+                      <div className="flex items-center gap-1.5 text-xs tabular-nums text-foreground/80 mt-1">
+                        <span className="font-medium text-sky-700">{snow > 0 ? `${snow.toFixed(snow >= 10 ? 0 : 1)}mm` : "-"}</span>
+                        <span className="text-muted-foreground/50">/</span>
+                        <span className="font-medium text-blue-700">{rain > 0 ? `${rain.toFixed(rain >= 10 ? 0 : 1)}mm` : "-"}</span>
                       </div>
 
                       {day.windSpeedMax != null && (
-                        <div className="flex items-center gap-1 text-[10px] text-muted-foreground/80 mt-1">
-                          <Wind className="w-2.5 h-2.5" />
-                          <span className="tabular-nums">{Math.round(day.windSpeedMax)}</span>
+                        <div className="flex items-center gap-1 text-xs text-muted-foreground mt-1.5">
+                          <Wind className="w-3 h-3" />
+                          <span className="tabular-nums font-medium text-foreground/90">{Math.round(day.windSpeedMax)}</span>
                           <span>km/h</span>
                         </div>
                       )}
 
                       {day.sunrise && day.sunset && (
-                        <div className="hidden md:flex items-center gap-2 text-[9px] text-muted-foreground/60 mt-1 pt-1 border-t border-white/5 w-full justify-center">
-                          <span className="inline-flex items-center gap-0.5"><Sunrise className="w-2.5 h-2.5" />{format(parseISO(day.sunrise), "H:mm")}</span>
-                          <span className="inline-flex items-center gap-0.5"><Sunset className="w-2.5 h-2.5" />{format(parseISO(day.sunset), "H:mm")}</span>
+                        <div className="flex items-center gap-3 text-xs text-muted-foreground mt-1.5 pt-2 border-t border-border/50 w-full justify-center tabular-nums">
+                          <span className="inline-flex items-center gap-1"><Sunrise className="w-3 h-3" />{format(parseISO(day.sunrise), "H:mm")}</span>
+                          <span className="inline-flex items-center gap-1"><Sunset className="w-3 h-3" />{format(parseISO(day.sunset), "H:mm")}</span>
                         </div>
                       )}
                     </div>
@@ -438,9 +440,9 @@ export default function LocationDetail() {
             );
           })()}
 
-          <div className="mt-3 flex items-center justify-end gap-3 text-[10px] text-muted-foreground/70">
-            <span className="inline-flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-sky-400/70" /> Snowfall</span>
-            <span className="inline-flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-blue-500/50" /> Rainfall</span>
+          <div className="mt-3 flex items-center justify-end gap-4 text-xs text-muted-foreground">
+            <span className="inline-flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-sky-400/80" /> Snowfall</span>
+            <span className="inline-flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-blue-500/60" /> Rainfall</span>
           </div>
         </motion.div>
 
