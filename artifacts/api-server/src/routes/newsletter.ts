@@ -239,11 +239,32 @@ router.post("/newsletter/unsubscribe", async (req, res): Promise<void> => {
   }
 });
 
-// ─── GET /newsletter/preview (dev-only) ──────────────────────────────────
-// Renders a sample digest as HTML so we can review the template visually
-// without sending real email. Disabled in production.
-router.get("/newsletter/preview", (_req, res): void => {
-  if (process.env["NODE_ENV"] === "production") {
+// ─── GET /newsletter/preview ─────────────────────────────────────────────
+// Renders the digest as HTML for visual review, or as PDF (?format=pdf)
+// for the publisher to send manually.
+//
+// Hardening (per code review):
+//   1. Explicit enable flag. Defaults OFF in production. Setting
+//      NEWSLETTER_PREVIEW_ENABLED=true is required to expose either
+//      format outside dev. NODE_ENV alone is not trusted as a gate.
+//   2. PDF render concurrency cap. A single in-flight semaphore prevents
+//      spawning multiple Chromium instances (each ~150MB RSS) at once.
+//   3. PDF render timeout. Bounded at 15s so a stuck render can't pin
+//      the browser process indefinitely.
+//
+// SSRF note: the preview HTML embeds {baseUrl}/branding/logo-full.png,
+// where baseUrl comes from APP_PUBLIC_URL/REPLIT_DEV_DOMAIN env, never
+// from request input. No user-controlled path reaches Chromium.
+function isPreviewEnabled(): boolean {
+  if (process.env["NEWSLETTER_PREVIEW_ENABLED"] === "true") return true;
+  return process.env["NODE_ENV"] !== "production";
+}
+
+let pdfRenderInFlight = false;
+const PDF_RENDER_TIMEOUT_MS = 15_000;
+
+router.get("/newsletter/preview", async (req, res): Promise<void> => {
+  if (!isPreviewEnabled()) {
     res.status(404).end();
     return;
   }
@@ -253,6 +274,70 @@ router.get("/newsletter/preview", (_req, res): void => {
     unsubscribeUrl: `${base}/newsletter/unsubscribed`,
     manageUrl: `${base}/newsletter/manage`,
   });
+
+  if (req.query["format"] === "pdf") {
+    if (pdfRenderInFlight) {
+      res.status(429).json({
+        error: "RENDER_BUSY",
+        message: "Another PDF render is in progress. Try again shortly.",
+      });
+      return;
+    }
+    pdfRenderInFlight = true;
+    try {
+      const puppeteer = (await import("puppeteer")).default;
+      // Bundled puppeteer chromium is missing shared libs in this
+      // NixOS env. Resolve a system chromium binary via `which`
+      // (Nix store paths aren't stable). PUPPETEER_EXECUTABLE_PATH
+      // overrides for non-Nix deployments.
+      let executablePath = process.env["PUPPETEER_EXECUTABLE_PATH"];
+      if (!executablePath) {
+        const { execSync } = await import("node:child_process");
+        try {
+          executablePath = execSync("which chromium 2>/dev/null").toString().trim() || undefined;
+        } catch { /* leave undefined → puppeteer uses bundled */ }
+      }
+
+      const browser = await puppeteer.launch({
+        headless: true,
+        executablePath,
+        timeout: PDF_RENDER_TIMEOUT_MS,
+        args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      });
+      try {
+        const page = await browser.newPage();
+        page.setDefaultNavigationTimeout(PDF_RENDER_TIMEOUT_MS);
+        page.setDefaultTimeout(PDF_RENDER_TIMEOUT_MS);
+        await page.setContent(tmpl.html, {
+          waitUntil: "networkidle0",
+          timeout: PDF_RENDER_TIMEOUT_MS,
+        });
+        const pdf = await page.pdf({
+          format: "A4",
+          printBackground: true,
+          margin: { top: "12mm", right: "10mm", bottom: "14mm", left: "10mm" },
+          timeout: PDF_RENDER_TIMEOUT_MS,
+        });
+        res.setHeader("Content-Type", "application/pdf");
+        res.setHeader(
+          "Content-Disposition",
+          `inline; filename="feelzlike-digest-sample.pdf"`,
+        );
+        res.send(Buffer.from(pdf));
+      } finally {
+        await browser.close();
+      }
+    } catch (err) {
+      console.error("[newsletter] PDF render failed:", err);
+      if (!res.headersSent) {
+        res.status(500).json({ error: "PDF_RENDER_FAILED" });
+      }
+    } finally {
+      pdfRenderInFlight = false;
+    }
+    return;
+  }
+
   res.setHeader("Content-Type", "text/html; charset=utf-8");
   res.send(tmpl.html);
 });

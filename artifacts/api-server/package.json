@@ -19,6 +19,7 @@
     "express": "^5",
     "express-rate-limit": "^8.4.1",
     "node-cron": "^4.2.1",
+    "puppeteer": "^24.43.0",
     "resend": "^6.12.2",
     "web-push": "^3.6.7"
   },

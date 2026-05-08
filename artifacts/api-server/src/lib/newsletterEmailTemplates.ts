@@ -1,5 +1,22 @@
 import { brandedEmail } from "./emailTemplates.js";
 
+// `brandedEmail` is still the canonical chrome for transactional emails
+// (verification, alerts). The newsletter digest uses its own renderer
+// because the wordmark + headline + palette differ from the older
+// alerts chrome. Keep the import so existing call-sites elsewhere in
+// this module (verification email) continue to compile.
+
+// Brand palette pulled from the feelzlike wordmark + site nav.
+const BRAND = {
+  navy: "#0a2240",
+  ink: "#1a3556",
+  sky: "#3b82f6",
+  skyDeep: "#1e5fc7",
+  paper: "#f5f8fc",
+  rule: "#dbe5f0",
+  muted: "#5b6b80",
+};
+
 /**
  * Sample digest content used by the newsletter preview route. Real
  * digests will pull from the same Open-Meteo + radar + lifts data
@@ -61,31 +78,43 @@ function renderDigestSection(s: DigestSection): string {
     .map(
       (b) =>
         `<tr>
-          <td style="padding:6px 0;font-size:14px;color:#0a1628;font-weight:600;width:38%;vertical-align:top;">${b.label}</td>
-          <td style="padding:6px 0;font-size:14px;color:#334155;vertical-align:top;">${b.value}</td>
+          <td style="padding:7px 0;font-size:14px;color:${BRAND.navy};font-weight:600;width:40%;vertical-align:top;">${b.label}</td>
+          <td style="padding:7px 0;font-size:14px;color:${BRAND.ink};vertical-align:top;">${b.value}</td>
         </tr>`,
     )
     .join("");
   return `
-    <div style="margin:0 0 28px 0;padding:0 0 28px 0;border-bottom:1px solid #e2e8f0;">
-      <div style="font-size:11px;color:#3b82f6;text-transform:uppercase;letter-spacing:0.14em;font-weight:700;margin-bottom:6px;">${s.regionLabel}</div>
-      <h2 style="font-family:Georgia,serif;font-size:20px;font-weight:700;color:#0a1628;margin:0 0 10px 0;line-height:1.3;">${s.headline}</h2>
-      <p style="font-size:15px;line-height:1.6;color:#334155;margin:0 0 16px 0;">${s.feelzlikeRead}</p>
-      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:12px 0 16px 0;background:#f8fafc;border-radius:8px;padding:10px 14px;">
-        ${bullets}
+    <div style="margin:0 0 32px 0;padding:0 0 32px 0;border-bottom:1px solid ${BRAND.rule};">
+      <div style="font-size:11px;color:${BRAND.skyDeep};text-transform:uppercase;letter-spacing:0.16em;font-weight:700;margin-bottom:8px;">${s.regionLabel}</div>
+      <h2 style="font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:700;color:${BRAND.navy};margin:0 0 12px 0;line-height:1.25;">${s.headline}</h2>
+      <p style="font-size:15px;line-height:1.65;color:${BRAND.ink};margin:0 0 18px 0;">${s.feelzlikeRead}</p>
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:14px 0 18px 0;background:${BRAND.paper};border-radius:10px;">
+        <tr><td style="padding:10px 16px;">
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+            ${bullets}
+          </table>
+        </td></tr>
       </table>
-      <p style="font-size:13px;line-height:1.55;color:#64748b;margin:0 0 14px 0;font-style:italic;">${s.thisWeek}</p>
+      <p style="font-size:13px;line-height:1.6;color:${BRAND.muted};margin:0 0 16px 0;">${s.thisWeek}</p>
       <table role="presentation" cellpadding="0" cellspacing="0" style="margin:6px 0 0 0;">
-        <tr><td style="border-radius:6px;background:#3b82f6;">
-          <a href="${s.ctaUrl}" style="display:inline-block;padding:10px 20px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:13px;font-weight:700;color:#fff;text-decoration:none;letter-spacing:0.02em;">${s.ctaLabel}</a>
+        <tr><td style="border-radius:6px;background:${BRAND.sky};">
+          <a href="${s.ctaUrl}" style="display:inline-block;padding:11px 22px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:13px;font-weight:700;color:#fff;text-decoration:none;letter-spacing:0.02em;">${s.ctaLabel} &rarr;</a>
         </td></tr>
       </table>
     </div>`;
 }
 
 /**
- * The fortnightly digest. Two regions, "feelzlike read" up top, then
- * the punchy bullets, then off-mountain notes (drive / stay / eat).
+ * Build the full branded digest as a self-contained HTML document. We
+ * deliberately don't reuse `brandedEmail` here because the newsletter
+ * needs the lowercase feelzlike wordmark logo, the new "What it
+ * feelzlike in the mountains" headline, and the brand palette from
+ * the site (not the older alerts-email navy chrome).
+ *
+ * `logoUrl` should be an absolute URL the recipient's mail client can
+ * fetch. The feelzlike SPA serves the logo at /branding/logo-full.png,
+ * which the api-server proxies in production and which Vite serves in
+ * dev (same origin via the workspace proxy).
  */
 export function newsletterDigestEmail(opts: {
   baseUrl: string;
@@ -96,22 +125,54 @@ export function newsletterDigestEmail(opts: {
 }): { subject: string; html: string; text: string } {
   const sections = opts.sections ?? sampleDigest(opts.baseUrl);
   const dateLabel = opts.dateLabel ?? "This fortnight";
-  const body =
-    `<p style="font-size:13px;color:#64748b;margin:0 0 24px 0;text-transform:uppercase;letter-spacing:0.12em;font-weight:600;">${dateLabel}</p>` +
-    sections.map(renderDigestSection).join("");
+  const logoUrl = `${opts.baseUrl}/branding/logo-full.png`;
+  const headline = "What it feelzlike in the mountains";
 
-  const footerHtml = `You're receiving this because you subscribed to the feelzlike newsletter.<br>
-    <a href="${opts.unsubscribeUrl}" style="color:#3b82f6;text-decoration:underline;">Unsubscribe</a>${opts.manageUrl ? ` &middot; <a href="${opts.manageUrl}" style="color:#3b82f6;text-decoration:underline;">Manage preferences</a>` : ""}`;
+  const body = sections.map(renderDigestSection).join("");
 
-  const html = brandedEmail({
-    preheader: sections[0]?.headline ?? "Your fortnightly mountain read.",
-    heading: "What the mountains are doing",
-    bodyHtml: body,
-    footerHtml,
-  });
+  const footerHtml = `You're getting this because you subscribed to the feelzlike newsletter.<br>
+    <a href="${opts.unsubscribeUrl}" style="color:${BRAND.skyDeep};text-decoration:underline;">Unsubscribe</a>${opts.manageUrl ? ` &middot; <a href="${opts.manageUrl}" style="color:${BRAND.skyDeep};text-decoration:underline;">Manage preferences</a>` : ""}`;
+
+  const html = `<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${headline}</title></head>
+<body style="margin:0;padding:0;background:${BRAND.paper};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:${BRAND.navy};">
+  <span style="display:none!important;visibility:hidden;opacity:0;color:transparent;height:0;width:0;font-size:1px;line-height:1px;">${sections[0]?.headline ?? "Your mountain read."}</span>
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:${BRAND.paper};padding:28px 0;">
+    <tr><td align="center">
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="600" style="max-width:600px;background:#ffffff;border-radius:14px;overflow:hidden;box-shadow:0 1px 4px rgba(10,34,64,0.07);">
+
+        <!-- Header: logo + tagline. White background so the colour wordmark reads naturally. -->
+        <tr><td style="padding:28px 36px 20px 36px;text-align:center;border-bottom:1px solid ${BRAND.rule};">
+          <img src="${logoUrl}" alt="feelzlike" width="180" style="display:block;margin:0 auto 6px auto;width:180px;max-width:60%;height:auto;border:0;outline:none;text-decoration:none;">
+          <div style="font-size:11px;color:${BRAND.muted};text-transform:uppercase;letter-spacing:0.18em;margin-top:4px;">Mountain weather, told straight.</div>
+        </td></tr>
+
+        <!-- Hero -->
+        <tr><td style="padding:32px 36px 8px 36px;">
+          <div style="font-size:11px;color:${BRAND.skyDeep};text-transform:uppercase;letter-spacing:0.16em;font-weight:700;margin-bottom:10px;">${dateLabel}</div>
+          <h1 style="font-family:Georgia,'Times New Roman',serif;font-size:30px;font-weight:700;color:${BRAND.navy};margin:0 0 6px 0;line-height:1.2;letter-spacing:-0.005em;">${headline}</h1>
+          <div style="height:3px;width:48px;background:${BRAND.sky};border-radius:2px;margin:14px 0 0 0;"></div>
+        </td></tr>
+
+        <!-- Sections -->
+        <tr><td style="padding:28px 36px 8px 36px;">
+          ${body}
+        </td></tr>
+
+        <!-- Footer -->
+        <tr><td style="padding:20px 36px 24px 36px;font-size:12px;color:${BRAND.muted};line-height:1.55;background:${BRAND.paper};">
+          ${footerHtml}
+        </td></tr>
+      </table>
+      <div style="font-size:11px;color:${BRAND.muted};margin-top:14px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+        feelzlike &middot; Snowy Mountains, AU &middot; Yamanouchi, JP
+      </div>
+    </td></tr>
+  </table>
+</body></html>`;
 
   const text =
-    `feelzlike — ${dateLabel}\n\n` +
+    `feelzlike. ${headline}.\n${dateLabel}.\n\n` +
     sections
       .map(
         (s) =>
@@ -122,7 +183,7 @@ export function newsletterDigestEmail(opts: {
       .join("\n---\n\n") +
     `\nUnsubscribe: ${opts.unsubscribeUrl}\n`;
 
-  return { subject: "feelzlike: what the mountains are doing", html, text };
+  return { subject: `feelzlike: ${headline.toLowerCase()}`, html, text };
 }
 
 /**

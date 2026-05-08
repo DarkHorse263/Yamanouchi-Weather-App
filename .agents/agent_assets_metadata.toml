@@ -17,4 +17,10 @@ title = "Eigomenyu v2 (flash fix)"
 id = "r8dRc46-vwBVfl3sQq4mR"
 uri = "file://attached_assets/screenshots/f00f4d5d-4365-44ba-9092-bb91cd53e665-00-2whixtmda5rp4_pike_replit_dev_api_newsletter_preview.png"
 type = "image"
-title = "Newsletter sample digest preview"
+title = "feelzlike digest — email view"
+
+[[outputs]]
+id = "mM_UJDhVMiNS_XMLG1Wh_"
+uri = "file://exports/feelzlike-digest-sample.pdf"
+type = "pdf"
+title = "feelzlike digest — sample (PDF)"
