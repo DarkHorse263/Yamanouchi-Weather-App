@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, Sun, Snowflake } from "lucide-react";
+import { ChevronLeft, Sun, Snowflake, ArrowLeft } from "lucide-react";
 import type { ReactNode } from "react";
 import { cn } from "./cn";
 import { useRegion } from "./RegionProvider";
@@ -313,6 +313,12 @@ export function AppShell({ children }: { children: ReactNode }) {
             : "pt-14",
         )}
       >
+        {/* Back bar - shown on any "feature" subpage (a town subpage other
+            than the town home, or a mountain-scope page). Clicking prefers
+            browser history (so users return to the exact prior position),
+            and falls back to a sensible parent route when there's no
+            history entry to pop (e.g. deep-linked load). */}
+        <BackBar parsed={parsed} t={t} />
         <AnimatePresence mode="wait">
           <motion.div
             key={location}
@@ -357,6 +363,47 @@ export function AppShell({ children }: { children: ReactNode }) {
           })()}
         </div>
       </nav>
+    </div>
+  );
+}
+
+function BackBar({
+  parsed,
+  t,
+}: {
+  parsed: ParsedScope;
+  t: (en: string, ja?: string) => string;
+}) {
+  const [, setLocation] = useLocation();
+  // Show on mountain-scope pages and town subpages (but not the town home).
+  const show =
+    parsed.scope === "mountain" ||
+    (parsed.scope === "town" && parsed.townSubpath && parsed.townSubpath !== "/");
+  if (!show) return null;
+
+  // Fallback parent if there's no history to pop (deep link).
+  const fallback =
+    parsed.scope === "town" && parsed.townId ? `/${parsed.townId}` : "/";
+
+  const handleBack = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (typeof window !== "undefined" && window.history.length > 1) {
+      window.history.back();
+    } else {
+      setLocation(fallback);
+    }
+  };
+
+  return (
+    <div className="max-w-7xl mx-auto px-5 md:px-10 pt-3 md:pt-5">
+      <a
+        href={fallback}
+        onClick={handleBack}
+        className="inline-flex items-center gap-1.5 byline text-muted-foreground hover:text-foreground transition-colors px-2 py-1 -ml-2 rounded-md hover:bg-muted/40"
+      >
+        <ArrowLeft className="w-3.5 h-3.5" />
+        {t("Back", "戻る")}
+      </a>
     </div>
   );
 }
