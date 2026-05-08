@@ -33,7 +33,7 @@ const REGIONS: RegionConfig[] = [
     status: "live",
     href: "/snowy-mountains/",
     baseTowns: ["Jindabyne", "Berridale", "Cooma"],
-    mountains: ["Thredbo", "Perisher", "Charlotte Pass", "Selwyn"],
+    mountains: ["Perisher", "Thredbo", "Selwyn", "Charlotte's Pass"],
     // Headline reading is for the base town (Jindabyne, ~918m) - not the
     // mountain peak - so the home page reflects what visitors actually feel
     // when they arrive in town. Per-mountain peak forecasts live on the

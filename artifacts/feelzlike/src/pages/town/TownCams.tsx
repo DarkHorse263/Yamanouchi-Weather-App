@@ -69,13 +69,25 @@ export function TownCams() {
   const { town } = useBaseTown();
   const query = useGetWebcams({ region: region.id });
 
+  // Display order follows the region's curated mountain order (e.g. Snowy
+  // Mountains: Perisher, Thredbo, Selwyn, Charlotte's Pass) so the UI is
+  // independent of whatever order the backend returns.
   const locations = useMemo(() => {
     if (!query.data || !town) return [];
-    const regionIds = new Set(region.mountains?.map((m) => m.id) ?? []);
+    const orderedIds = region.mountains?.map((m) => m.id) ?? [];
+    const orderIndex = new Map(orderedIds.map((id, i) => [id, i]));
+    const regionIds = new Set(orderedIds);
     const nearbyIds = new Set(town.nearbyMountainIds ?? []);
     const allowed = nearbyIds.size > 0 ? nearbyIds : regionIds;
     if (allowed.size === 0) return [];
-    return query.data.locations.filter((loc) => allowed.has(loc.locationId));
+    return query.data.locations
+      .filter((loc) => allowed.has(loc.locationId))
+      .slice()
+      .sort((a, b) => {
+        const ai = orderIndex.get(a.locationId) ?? Number.MAX_SAFE_INTEGER;
+        const bi = orderIndex.get(b.locationId) ?? Number.MAX_SAFE_INTEGER;
+        return ai - bi;
+      });
   }, [query.data, town, region]);
 
   return (

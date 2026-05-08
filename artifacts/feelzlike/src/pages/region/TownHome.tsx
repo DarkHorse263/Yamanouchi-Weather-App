@@ -120,10 +120,16 @@ export function TownHome() {
   const weatherQ = useGetWeather({ region: region.id });
   const townWeatherQ = useTownWeather(town?.lat, town?.lng);
 
-  // List every region mountain with live weather data, sorted by distance.
+  // List every region mountain with live weather data in the region's
+  // curated display order (e.g. Snowy Mountains: Perisher, Thredbo,
+  // Selwyn, Charlotte's Pass). Distance is shown alongside but doesn't
+  // drive sort - the region config owns ordering so flagship resorts
+  // always lead even when a closer secondary mountain exists.
   const mountainsByDistance = useMemo(() => {
     if (!town || !weatherQ.data) return [];
-    const regionIds = new Set(region.mountains?.map((m) => m.id) ?? []);
+    const orderedIds = region.mountains?.map((m) => m.id) ?? [];
+    const orderIndex = new Map(orderedIds.map((id, i) => [id, i]));
+    const regionIds = new Set(orderedIds);
     const nearbyIds = new Set(town.nearbyMountainIds ?? []);
     const allowed = nearbyIds.size > 0 ? nearbyIds : regionIds;
     const candidates = allowed.size > 0
@@ -139,7 +145,12 @@ export function TownHome() {
         const min = Math.max(5, Math.round(km * 1.5));
         return { entry, km, min };
       })
-      .sort((a, b) => a.km - b.km);
+      .sort((a, b) => {
+        const ai = orderIndex.get(a.entry.location.id) ?? Number.MAX_SAFE_INTEGER;
+        const bi = orderIndex.get(b.entry.location.id) ?? Number.MAX_SAFE_INTEGER;
+        if (ai !== bi) return ai - bi;
+        return a.km - b.km;
+      });
   }, [town, weatherQ.data, region]);
 
   if (!town) {
