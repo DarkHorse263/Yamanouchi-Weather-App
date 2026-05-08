@@ -137,18 +137,16 @@ export function newsletterDigestEmail(opts: {
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${headline}</title></head>
 <body style="margin:0;padding:0;background:${BRAND.paper};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:${BRAND.navy};">
   <span style="display:none!important;visibility:hidden;opacity:0;color:transparent;height:0;width:0;font-size:1px;line-height:1px;">${sections[0]?.headline ?? "Your mountain read."}</span>
-  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:${BRAND.paper};padding:28px 0;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:${BRAND.paper};padding:36px 0 28px 0;">
+    <tr><td align="center" style="padding:0 0 24px 0;">
+      <img src="${logoUrl}" alt="feelzlike" width="280" style="display:block;margin:0 auto 8px auto;width:280px;max-width:80%;height:auto;border:0;outline:none;text-decoration:none;">
+      <div style="font-size:11px;color:${BRAND.muted};text-transform:uppercase;letter-spacing:0.2em;margin-top:6px;">Mountain weather, told straight.</div>
+    </td></tr>
     <tr><td align="center">
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="600" style="max-width:600px;background:#ffffff;border-radius:14px;overflow:hidden;box-shadow:0 1px 4px rgba(10,34,64,0.07);">
 
-        <!-- Header: logo + tagline. White background so the colour wordmark reads naturally. -->
-        <tr><td style="padding:28px 36px 20px 36px;text-align:center;border-bottom:1px solid ${BRAND.rule};">
-          <img src="${logoUrl}" alt="feelzlike" width="180" style="display:block;margin:0 auto 6px auto;width:180px;max-width:60%;height:auto;border:0;outline:none;text-decoration:none;">
-          <div style="font-size:11px;color:${BRAND.muted};text-transform:uppercase;letter-spacing:0.18em;margin-top:4px;">Mountain weather, told straight.</div>
-        </td></tr>
-
         <!-- Hero -->
-        <tr><td style="padding:32px 36px 8px 36px;">
+        <tr><td style="padding:36px 36px 8px 36px;">
           <div style="font-size:11px;color:${BRAND.skyDeep};text-transform:uppercase;letter-spacing:0.16em;font-weight:700;margin-bottom:10px;">${dateLabel}</div>
           <h1 style="font-family:Georgia,'Times New Roman',serif;font-size:30px;font-weight:700;color:${BRAND.navy};margin:0 0 6px 0;line-height:1.2;letter-spacing:-0.005em;">${headline}</h1>
           <div style="height:3px;width:48px;background:${BRAND.sky};border-radius:2px;margin:14px 0 0 0;"></div>
@@ -418,16 +416,15 @@ export function snowySeasonOutlookEmail(opts: {
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${o.headline}</title></head>
 <body style="margin:0;padding:0;background:${BRAND.paper};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:${BRAND.navy};">
   <span style="display:none!important;visibility:hidden;opacity:0;color:transparent;height:0;width:0;font-size:1px;line-height:1px;">${o.intro}</span>
-  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:${BRAND.paper};padding:28px 0;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:${BRAND.paper};padding:36px 0 28px 0;">
+    <tr><td align="center" style="padding:0 0 24px 0;">
+      <img src="${logoUrl}" alt="feelzlike" width="300" style="display:block;margin:0 auto 8px auto;width:300px;max-width:80%;height:auto;border:0;outline:none;text-decoration:none;">
+      <div style="font-size:11px;color:${BRAND.muted};text-transform:uppercase;letter-spacing:0.2em;margin-top:6px;">Mountain weather, told straight.</div>
+    </td></tr>
     <tr><td align="center">
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="640" style="max-width:640px;background:#ffffff;border-radius:14px;overflow:hidden;box-shadow:0 1px 4px rgba(10,34,64,0.07);">
 
-        <tr><td style="padding:28px 36px 20px 36px;text-align:center;border-bottom:1px solid ${BRAND.rule};">
-          <img src="${logoUrl}" alt="feelzlike" width="180" style="display:block;margin:0 auto 6px auto;width:180px;max-width:60%;height:auto;border:0;outline:none;text-decoration:none;">
-          <div style="font-size:11px;color:${BRAND.muted};text-transform:uppercase;letter-spacing:0.18em;margin-top:4px;">Mountain weather, told straight.</div>
-        </td></tr>
-
-        <tr><td style="padding:32px 36px 12px 36px;">
+        <tr><td style="padding:36px 36px 12px 36px;">
           <div style="font-size:11px;color:${BRAND.skyDeep};text-transform:uppercase;letter-spacing:0.16em;font-weight:700;margin-bottom:10px;">${o.regionLabel} &middot; ${o.seasonLabel}</div>
           <h1 style="font-family:Georgia,'Times New Roman',serif;font-size:30px;font-weight:700;color:${BRAND.navy};margin:0 0 6px 0;line-height:1.2;letter-spacing:-0.005em;">${o.headline}</h1>
           <p style="font-size:15px;line-height:1.65;color:${BRAND.ink};margin:14px 0 0 0;">${o.intro}</p>
