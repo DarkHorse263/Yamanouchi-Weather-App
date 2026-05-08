@@ -23,10 +23,10 @@ title = "feelzlike digest — email view"
 id = "mM_UJDhVMiNS_XMLG1Wh_"
 uri = "file://exports/feelzlike-digest-sample.pdf"
 type = "pdf"
-title = "Fortnightly digest (bigger logo, no white box)"
+title = "Fortnightly digest (page-safe breaks)"
 
 [[outputs]]
 id = "3cgUhkeTm1fOZlie7eKB6"
 uri = "file://exports/feelzlike-snowy-winter-outlook.pdf"
 type = "pdf"
-title = "Snowy Mountains winter outlook (bigger logo, no white box)"
+title = "Snowy winter outlook (editorial rewrite, page-safe breaks)"

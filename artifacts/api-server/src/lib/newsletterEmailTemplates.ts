@@ -84,8 +84,8 @@ function renderDigestSection(s: DigestSection): string {
     )
     .join("");
   return `
-    <div style="margin:0 0 32px 0;padding:0 0 32px 0;border-bottom:1px solid ${BRAND.rule};">
-      <div style="font-size:11px;color:${BRAND.skyDeep};text-transform:uppercase;letter-spacing:0.16em;font-weight:700;margin-bottom:8px;">${s.regionLabel}</div>
+    <div class="digest-section keep-together" style="margin:0 0 32px 0;padding:0 0 32px 0;border-bottom:1px solid ${BRAND.rule};page-break-inside:avoid;break-inside:avoid;">
+      <div class="section-eyebrow" style="font-size:11px;color:${BRAND.skyDeep};text-transform:uppercase;letter-spacing:0.16em;font-weight:700;margin-bottom:8px;">${s.regionLabel}</div>
       <h2 style="font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:700;color:${BRAND.navy};margin:0 0 12px 0;line-height:1.25;">${s.headline}</h2>
       <p style="font-size:15px;line-height:1.65;color:${BRAND.ink};margin:0 0 18px 0;">${s.feelzlikeRead}</p>
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:14px 0 18px 0;background:${BRAND.paper};border-radius:10px;">
@@ -134,7 +134,14 @@ export function newsletterDigestEmail(opts: {
     <a href="${opts.unsubscribeUrl}" style="color:${BRAND.skyDeep};text-decoration:underline;">Unsubscribe</a>${opts.manageUrl ? ` &middot; <a href="${opts.manageUrl}" style="color:${BRAND.skyDeep};text-decoration:underline;">Manage preferences</a>` : ""}`;
 
   const html = `<!DOCTYPE html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${headline}</title></head>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${headline}</title>
+<style>
+  @page { size: A4; margin: 14mm 10mm 16mm 10mm; }
+  .keep-together { page-break-inside: avoid; break-inside: avoid; }
+  .section-eyebrow, h1, h2, h3 { page-break-after: avoid; break-after: avoid; }
+  .digest-section { page-break-inside: avoid; break-inside: avoid; }
+</style>
+</head>
 <body style="margin:0;padding:0;background:${BRAND.paper};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:${BRAND.navy};">
   <span style="display:none!important;visibility:hidden;opacity:0;color:transparent;height:0;width:0;font-size:1px;line-height:1px;">${sections[0]?.headline ?? "Your mountain read."}</span>
   <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:${BRAND.paper};padding:36px 0 28px 0;">
@@ -236,67 +243,67 @@ export function sampleSnowySeasonOutlook(baseUrl: string): SeasonOutlook {
     seasonLabel: "Winter 2026 outlook",
     headline: "What it feelzlike for winter in the Snowies.",
     intro:
-      "A read on the season ahead. Cooler than last year on early models, with a wetter July than 2025. Opening weekend looks cold but light on snow, then a run of fronts from late June kicks the season into gear. July is shaping up as the month to book.",
+      "It is shaping up as a proper winter. After two thin years, the long-range models are pointing to a colder, wetter season across the Main Range, with the storm track sitting further north than usual. Opening weekend looks more ceremonial than skiable, but a run of southerly fronts from late June should put the season on its feet. By the time school holidays start, this should feel like the winter the Snowies has been waiting for.",
     months: [
       {
         month: "June",
-        label: "Opening run",
-        body: "Cold mornings, thin cover. Lifts spinning on machine-made snow opening weekend (7-9 Jun). First real fronts mid-month, mostly above 1,500m.",
+        label: "The slow start",
+        body: "Opening weekend on 7 June will be cold and clear, with cover thin and mostly machine-made. The first real fronts arrive mid-month, dusting the high country above 1,500m. Patient skiers only.",
       },
       {
         month: "July",
-        label: "Peak month",
-        body: "School holidays, the busiest two weeks of the year. Multiple cold fronts forecast. Bases should hit 90-120cm by month end if the pattern holds.",
+        label: "When it lands",
+        body: "School holidays bookend the busiest fortnight of the year, and the modelling is on side. Three to four cold fronts are likely, with bases climbing to 90-120cm by month's end. Book early or stay flexible.",
       },
       {
         month: "August",
-        label: "Powder window",
-        body: "Historically the deepest snow. Storm cycles every 5-7 days on the long-range. Best chairs spinning, fewer crowds than July.",
+        label: "The deep month",
+        body: "Historically the heaviest snow falls of the year. Long-range guidance shows storm cycles every five to seven days, with crowds well off their July peak. The connoisseur's month.",
       },
       {
         month: "September",
         label: "Spring lap",
-        body: "Warmer days, soft afternoons. Lower runs patchy by mid-month. Closing weekend usually 4-5 Oct.",
+        body: "Warm afternoons, soft corn, long runs in T-shirts. Lower elevations turn patchy by mid-month, but the high country usually holds until closing weekend on 4-5 October.",
       },
     ],
-    julyHeadline: "July: the month it actually feelzlike winter.",
+    julyHeadline: "July: when the Snowies stops pretending.",
     julyRead:
-      "Three to four cold fronts across the month on current modelling, with the biggest stretch landing in week two. Resort bases should sit 70-110cm for most of the month. Book accommodation now. Jindabyne and Thredbo village are already 80% booked for the second week.",
+      "If only one month of this winter goes to plan, let it be this one. Current modelling has three to four cold fronts working their way across the range, with the biggest stretch landing in week two. Resort bases should sit between 70 and 110cm for most of the month, and the village of Jindabyne is already 80% booked for the week of 6 July. The pattern matters because, in good Julys, the Snowies skis as well as anywhere in the southern hemisphere. In bad ones, it doesn't ski at all. This one looks like the former.",
     julyWeeks: [
       {
         span: "Wed 1 to Sun 5 Jul",
-        headline: "Cold and clear. Groomers week.",
-        read: "High pressure parks over the range. Cold mornings ( -8°C at 1,800m), bluebird most days. Snow-making running overnight. Good week for lessons and beginners.",
+        headline: "The calm before.",
+        read: "A high parks itself over the range and refuses to budge. Mornings start at -8°C at 1,800m and warm to bluebird, with snow-making humming through the night. The terrain is limited but the conditions are flattering, which is to say: an excellent week to put the kids in lessons or relearn what edges feel like.",
         bullets: [
           { label: "New snow", value: "5-10cm machine, no natural" },
-          { label: "Crowds", value: "Light. Pre-school holidays." },
+          { label: "Crowds", value: "Light, pre-holidays" },
           { label: "Best for", value: "Lessons, groomers, families" },
         ],
       },
       {
         span: "Mon 6 to Sun 12 Jul",
-        headline: "School holidays kick off. First big front Thursday.",
-        read: "Busiest week of the season. Front rolls in Thursday afternoon, drops 25-40cm into Friday across Perisher and Thredbo. Saturday clears for a powder day. Book parking in advance.",
+        headline: "The week everything turns.",
+        read: "School holidays open with a roar. The first serious front of the season rolls in late Thursday and parks over the range into Friday, dropping 25 to 40cm across Perisher and Thredbo before clearing for what should be a Saturday powder day for the ages. The catch: every other skier in the country has the same plan. Book parking now, not on the morning.",
         bullets: [
-          { label: "New snow", value: "30-45cm Thu-Fri" },
-          { label: "Crowds", value: "Heavy. School holidays." },
-          { label: "Best for", value: "Powder Sat, all-mountain" },
+          { label: "New snow", value: "30-45cm Thu to Fri" },
+          { label: "Crowds", value: "Heavy, school holidays" },
+          { label: "Best for", value: "Powder Saturday, all-mountain" },
         ],
       },
       {
         span: "Mon 13 to Sun 19 Jul",
-        headline: "Holidays continue. Mid-week storm cycle.",
-        read: "Second front Tue-Wed brings 15-25cm. Cold throughout. Midweek is the sweet spot: full lift access, fresh snow, and crowds easing slightly after the weekend.",
+        headline: "The locals' favourite.",
+        read: "A second front sweeps through Tuesday into Wednesday, laying down another 15 to 25cm on top of the previous week's haul. Cold air sticks around. Midweek is the sweet spot: every lift open, fresh snow underfoot, and the school-holiday throng thinning enough that lift queues become bearable again.",
         bullets: [
-          { label: "New snow", value: "20-30cm Tue-Wed" },
+          { label: "New snow", value: "20-30cm Tue to Wed" },
           { label: "Crowds", value: "Heavy weekend, easing midweek" },
           { label: "Best for", value: "Backcountry tours, all-mountain" },
         ],
       },
       {
         span: "Mon 20 to Fri 31 Jul",
-        headline: "Crowds drop. Two more fronts on the way.",
-        read: "School holidays end. Locals and weekenders only. Two more fronts on long-range models around 22-23 Jul and 28-29 Jul. Bases peak for the season around 110-130cm. Best value week of the month.",
+        headline: "The quiet finish.",
+        read: "School holidays end and the resorts breathe out. Long-range models point to two more fronts, around 22-23 July and again on 28-29 July, which should push bases to their seasonal peak of 110 to 130cm. Locals call this the best value fortnight of the year: full snow, half the people, and warmer afternoons that make it easy to stay out until the lifts close.",
         bullets: [
           { label: "New snow", value: "20-35cm across the fortnight" },
           { label: "Crowds", value: "Quiet weekdays" },
@@ -309,32 +316,32 @@ export function sampleSnowySeasonOutlook(baseUrl: string): SeasonOutlook {
         name: "Perisher",
         opens: "Sat 7 Jun",
         baseTarget: "70-110cm by late July",
-        note: "Largest resort. Front Valley and Smiggins open first; Blue Cow and Guthega follow once cover holds.",
+        note: "The biggest resort in the country and the easiest place to lose a friend for an afternoon. Front Valley and Smiggins open first; Blue Cow and Guthega follow once the cover holds.",
       },
       {
         name: "Thredbo",
         opens: "Sat 7 Jun",
         baseTarget: "75-115cm by late July",
-        note: "Highest lifted terrain in Australia. Top-to-bottom skiing earlier than Perisher most years.",
+        note: "Australia's highest lifted terrain, and the only resort here that consistently offers true top-to-bottom skiing in early July. Steeper, longer, and a touch wilder than Perisher.",
       },
       {
         name: "Selwyn",
         opens: "Sat 14 Jun (planned)",
         baseTarget: "30-50cm by late July",
-        note: "Lower elevation, family-focused. Snow-making expanded since the rebuild. Weekday only outside holidays.",
+        note: "Smaller, lower, and built for families. The post-fire rebuild brought in serious snow-making, but it remains a weekday-only proposition outside the holidays.",
       },
       {
         name: "Charlotte's Pass",
         opens: "Sat 14 Jun",
         baseTarget: "60-100cm by late July",
-        note: "Highest village in Australia. Snow-cat access only from Perisher Valley. Quiet. Often the best snow.",
+        note: "The highest village in Australia, reached by snow-cat from Perisher Valley. Quiet, slightly old-world, and home to some of the most reliable snow in the range.",
       },
     ],
     planAhead: [
-      { label: "Lift passes", value: "Buy multi-day before 30 Jun for early-bird pricing." },
-      { label: "Accommodation", value: "Jindabyne and Thredbo village 80% booked for week of 6 Jul." },
-      { label: "Driving", value: "Carry chains from 1 Jun. Alpine Way closes overnight if temps drop." },
-      { label: "Backcountry", value: "Avalanche risk briefings start 1 Jul on the alerts page." },
+      { label: "Lift passes", value: "Multi-day passes are cheaper before 30 June. After that, prices step up sharply through the holidays." },
+      { label: "Accommodation", value: "Jindabyne and Thredbo village are already 80% booked for the week of 6 July. Berridale and Cooma still have rooms." },
+      { label: "Driving", value: "Carry chains from 1 June. The Alpine Way closes overnight when temperatures crash, and the road from Berridale ices up before sunrise." },
+      { label: "Backcountry", value: "Avalanche risk briefings begin on 1 July on the alerts page. If you're heading off-piste, read them." },
     ],
     ctaLabel: "Open Snowy Mountains",
     ctaUrl: `${baseUrl}/snowy-mountains/`,
@@ -343,8 +350,8 @@ export function sampleSnowySeasonOutlook(baseUrl: string): SeasonOutlook {
 
 function renderMonthCard(m: SeasonMonthBlock): string {
   return `
-    <td valign="top" width="25%" style="padding:0 6px;">
-      <div style="background:${BRAND.paper};border-radius:10px;padding:14px 14px;height:100%;">
+    <td valign="top" width="25%" style="padding:0 6px;page-break-inside:avoid;break-inside:avoid;">
+      <div style="background:${BRAND.paper};border-radius:10px;padding:14px 14px;height:100%;page-break-inside:avoid;break-inside:avoid;">
         <div style="font-size:11px;color:${BRAND.skyDeep};text-transform:uppercase;letter-spacing:0.16em;font-weight:700;">${m.month}</div>
         <div style="font-family:Georgia,'Times New Roman',serif;font-size:15px;color:${BRAND.navy};font-weight:700;margin-top:4px;">${m.label}</div>
         <div style="font-size:13px;color:${BRAND.ink};line-height:1.55;margin-top:8px;">${m.body}</div>
@@ -363,7 +370,7 @@ function renderJulyWeek(w: JulyWeekBlock): string {
     )
     .join("");
   return `
-    <div style="margin:0 0 18px 0;padding:16px 18px;background:#ffffff;border:1px solid ${BRAND.rule};border-radius:10px;">
+    <div class="keep-together" style="margin:0 0 18px 0;padding:16px 18px;background:#ffffff;border:1px solid ${BRAND.rule};border-radius:10px;page-break-inside:avoid;break-inside:avoid;">
       <div style="font-size:11px;color:${BRAND.skyDeep};text-transform:uppercase;letter-spacing:0.14em;font-weight:700;">${w.span}</div>
       <div style="font-family:Georgia,'Times New Roman',serif;font-size:17px;color:${BRAND.navy};font-weight:700;margin-top:4px;line-height:1.3;">${w.headline}</div>
       <p style="font-size:14px;line-height:1.6;color:${BRAND.ink};margin:8px 0 10px 0;">${w.read}</p>
@@ -375,12 +382,12 @@ function renderJulyWeek(w: JulyWeekBlock): string {
 
 function renderMountainRow(m: SeasonMountainBlock): string {
   return `
-    <tr>
-      <td style="padding:12px 0;border-top:1px solid ${BRAND.rule};vertical-align:top;width:30%;">
+    <tr class="keep-together" style="page-break-inside:avoid;break-inside:avoid;">
+      <td style="padding:12px 0;border-top:1px solid ${BRAND.rule};vertical-align:top;width:30%;page-break-inside:avoid;break-inside:avoid;">
         <div style="font-family:Georgia,'Times New Roman',serif;font-size:16px;color:${BRAND.navy};font-weight:700;">${m.name}</div>
         <div style="font-size:12px;color:${BRAND.muted};margin-top:2px;">Opens ${m.opens}</div>
       </td>
-      <td style="padding:12px 0 12px 14px;border-top:1px solid ${BRAND.rule};vertical-align:top;">
+      <td style="padding:12px 0 12px 14px;border-top:1px solid ${BRAND.rule};vertical-align:top;page-break-inside:avoid;break-inside:avoid;">
         <div style="font-size:13px;color:${BRAND.skyDeep};font-weight:700;">${m.baseTarget}</div>
         <div style="font-size:13px;color:${BRAND.ink};line-height:1.55;margin-top:4px;">${m.note}</div>
       </td>
@@ -413,47 +420,64 @@ export function snowySeasonOutlookEmail(opts: {
     <a href="${opts.unsubscribeUrl}" style="color:${BRAND.skyDeep};text-decoration:underline;">Unsubscribe</a>${opts.manageUrl ? ` &middot; <a href="${opts.manageUrl}" style="color:${BRAND.skyDeep};text-decoration:underline;">Manage preferences</a>` : ""}`;
 
   const html = `<!DOCTYPE html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${o.headline}</title></head>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${o.headline}</title>
+<style>
+  @page { size: A4; margin: 14mm 10mm 16mm 10mm; }
+  /* Stop sections breaking across pages. Inline styles cover most
+     clients; this @media print block ensures Chromium honours the
+     same rules in PDF mode even where inline cascade is overridden. */
+  .keep-together { page-break-inside: avoid; break-inside: avoid; }
+  .section-eyebrow, h1, h2, h3 { page-break-after: avoid; break-after: avoid; }
+  .section { page-break-inside: avoid; break-inside: avoid; }
+  /* Allow the long July spotlight section itself to break, but each
+     week card inside it stays whole. */
+  .section--july { page-break-inside: auto; break-inside: auto; }
+  /* Keep the eyebrow + first paragraph with what follows. */
+  .lede { page-break-after: avoid; break-after: avoid; }
+</style>
+</head>
 <body style="margin:0;padding:0;background:${BRAND.paper};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:${BRAND.navy};">
   <span style="display:none!important;visibility:hidden;opacity:0;color:transparent;height:0;width:0;font-size:1px;line-height:1px;">${o.intro}</span>
   <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:${BRAND.paper};padding:36px 0 28px 0;">
-    <tr><td align="center" style="padding:0 0 24px 0;">
+    <tr><td align="center" style="padding:0 0 24px 0;" class="keep-together">
       <img src="${logoUrl}" alt="feelzlike" width="300" style="display:block;margin:0 auto 8px auto;width:300px;max-width:80%;height:auto;border:0;outline:none;text-decoration:none;">
       <div style="font-size:11px;color:${BRAND.muted};text-transform:uppercase;letter-spacing:0.2em;margin-top:6px;">Mountain weather, told straight.</div>
     </td></tr>
     <tr><td align="center">
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="640" style="max-width:640px;background:#ffffff;border-radius:14px;overflow:hidden;box-shadow:0 1px 4px rgba(10,34,64,0.07);">
 
-        <tr><td style="padding:36px 36px 12px 36px;">
-          <div style="font-size:11px;color:${BRAND.skyDeep};text-transform:uppercase;letter-spacing:0.16em;font-weight:700;margin-bottom:10px;">${o.regionLabel} &middot; ${o.seasonLabel}</div>
+        <tr><td style="padding:36px 36px 12px 36px;" class="section keep-together">
+          <div class="section-eyebrow" style="font-size:11px;color:${BRAND.skyDeep};text-transform:uppercase;letter-spacing:0.16em;font-weight:700;margin-bottom:10px;">${o.regionLabel} &middot; ${o.seasonLabel}</div>
           <h1 style="font-family:Georgia,'Times New Roman',serif;font-size:30px;font-weight:700;color:${BRAND.navy};margin:0 0 6px 0;line-height:1.2;letter-spacing:-0.005em;">${o.headline}</h1>
           <p style="font-size:15px;line-height:1.65;color:${BRAND.ink};margin:14px 0 0 0;">${o.intro}</p>
           <div style="height:3px;width:48px;background:${BRAND.sky};border-radius:2px;margin:18px 0 0 0;"></div>
         </td></tr>
 
-        <tr><td style="padding:24px 30px 8px 30px;">
-          <div style="font-size:11px;color:${BRAND.skyDeep};text-transform:uppercase;letter-spacing:0.16em;font-weight:700;padding:0 6px 10px 6px;">The season at a glance</div>
+        <tr><td style="padding:24px 30px 8px 30px;" class="section keep-together">
+          <div class="section-eyebrow" style="font-size:11px;color:${BRAND.skyDeep};text-transform:uppercase;letter-spacing:0.16em;font-weight:700;padding:0 6px 10px 6px;">The season at a glance</div>
           <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
             <tr>${monthsRow}</tr>
           </table>
         </td></tr>
 
-        <tr><td style="padding:28px 36px 8px 36px;">
-          <div style="font-size:11px;color:${BRAND.skyDeep};text-transform:uppercase;letter-spacing:0.16em;font-weight:700;margin-bottom:8px;">July spotlight</div>
-          <h2 style="font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:700;color:${BRAND.navy};margin:0 0 10px 0;line-height:1.25;">${o.julyHeadline}</h2>
-          <p style="font-size:15px;line-height:1.65;color:${BRAND.ink};margin:0 0 18px 0;">${o.julyRead}</p>
+        <tr><td style="padding:28px 36px 8px 36px;" class="section--july">
+          <div class="lede keep-together">
+            <div class="section-eyebrow" style="font-size:11px;color:${BRAND.skyDeep};text-transform:uppercase;letter-spacing:0.16em;font-weight:700;margin-bottom:8px;">July spotlight</div>
+            <h2 style="font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:700;color:${BRAND.navy};margin:0 0 10px 0;line-height:1.25;">${o.julyHeadline}</h2>
+            <p style="font-size:15px;line-height:1.65;color:${BRAND.ink};margin:0 0 18px 0;">${o.julyRead}</p>
+          </div>
           ${julyWeeks}
         </td></tr>
 
-        <tr><td style="padding:14px 36px 8px 36px;">
-          <div style="font-size:11px;color:${BRAND.skyDeep};text-transform:uppercase;letter-spacing:0.16em;font-weight:700;margin-bottom:8px;">Mountain by mountain</div>
+        <tr><td style="padding:14px 36px 8px 36px;" class="section keep-together">
+          <div class="section-eyebrow" style="font-size:11px;color:${BRAND.skyDeep};text-transform:uppercase;letter-spacing:0.16em;font-weight:700;margin-bottom:8px;">Mountain by mountain</div>
           <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
             ${mountainRows}
           </table>
         </td></tr>
 
-        <tr><td style="padding:28px 36px 8px 36px;">
-          <div style="font-size:11px;color:${BRAND.skyDeep};text-transform:uppercase;letter-spacing:0.16em;font-weight:700;margin-bottom:8px;">Plan ahead</div>
+        <tr><td style="padding:28px 36px 8px 36px;" class="section keep-together">
+          <div class="section-eyebrow" style="font-size:11px;color:${BRAND.skyDeep};text-transform:uppercase;letter-spacing:0.16em;font-weight:700;margin-bottom:8px;">Plan ahead</div>
           <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:${BRAND.paper};border-radius:10px;">
             <tr><td style="padding:10px 16px;">
               <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
@@ -523,8 +547,8 @@ export function newsletterVerificationEmail(verifyUrl: string): {
       preheader: "One click to confirm. We won't email you until you do.",
       heading: "Confirm your subscription",
       bodyHtml: `<p>Thanks for signing up to the feelzlike newsletter.</p>
-        <p>Click below to confirm. You'll get a short, plain-English read on what the next stretch of mountain weather will actually feel like — no hype, no daily noise.</p>
-        <p style="font-size:13px;color:#64748b;">If you didn't sign up, just ignore this email — nothing happens until you click.</p>`,
+        <p>Click below to confirm. You'll get a short, plain-English read on what the next stretch of mountain weather will actually feel like. No hype, no daily noise.</p>
+        <p style="font-size:13px;color:#64748b;">If you didn't sign up, just ignore this email. Nothing happens until you click.</p>`,
       ctaLabel: "Confirm subscription",
       ctaUrl: verifyUrl,
       footerHtml: `If the button doesn't work, paste this URL into your browser:<br><span style="word-break:break-all;color:#3b82f6;">${verifyUrl}</span>`,
