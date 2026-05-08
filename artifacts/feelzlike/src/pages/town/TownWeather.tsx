@@ -293,7 +293,7 @@ function Hourly({
       <div className="flex items-center justify-between">
         <p className="byline text-muted-foreground/70">{t("Next 24 hours", "24時間予報")}</p>
         <p className="text-[11px] text-muted-foreground/60">
-          {Math.round(minT)}° – {Math.round(maxT)}°
+          {Math.round(minT)}° to {Math.round(maxT)}°
         </p>
       </div>
       <div className="mt-4 -mx-2 overflow-x-auto">
@@ -340,38 +340,99 @@ function Outlook({
   return (
     <section className="mt-4 rounded-2xl border border-border bg-white p-5">
       <p className="byline text-muted-foreground/70">{t("Next 6 days", "今後6日間")}</p>
-      <div className="mt-3 divide-y divide-border">
+      <div className="mt-3 space-y-3">
         {days.map((d) => {
           const Icon = pickIcon(d.weatherCode, true);
           return (
-            <div key={d.date} className="flex items-center gap-4 py-3">
-              <p className="w-20 text-sm font-medium text-foreground">{fmtDay(d.date)}</p>
-              <Icon className="w-5 h-5 text-primary/80" strokeWidth={1.5} />
-              <p className="flex-1 text-sm text-muted-foreground truncate">
-                {d.weatherDescription}
-              </p>
-              {d.snowfallSum !== null && d.snowfallSum > 0 && (
-                <span className="text-xs text-blue-700 inline-flex items-center gap-1">
-                  <CloudSnow className="w-3 h-3" />
-                  {d.snowfallSum.toFixed(1)} cm
-                </span>
-              )}
-              {d.precipitationProbabilityMax !== null && d.precipitationProbabilityMax > 10 && (
-                <span className="text-xs text-blue-600">{d.precipitationProbabilityMax}%</span>
-              )}
-              <p className="w-20 text-right text-sm">
-                <span className="font-medium text-foreground">
-                  {d.tempMax !== null ? Math.round(d.tempMax) : "-"}°
-                </span>
-                <span className="text-muted-foreground/70 ml-2">
-                  {d.tempMin !== null ? Math.round(d.tempMin) : "-"}°
-                </span>
-              </p>
+            <div
+              key={d.date}
+              className="rounded-xl border border-border/70 bg-white p-4"
+            >
+              {/* Top row: day, icon, condition, temps */}
+              <div className="flex items-center gap-3">
+                <div className="w-24 shrink-0">
+                  <p className="text-sm font-semibold text-foreground leading-tight">
+                    {fmtDay(d.date)}
+                  </p>
+                </div>
+                <Icon className="w-6 h-6 text-primary/80 shrink-0" strokeWidth={1.5} />
+                <p className="flex-1 text-sm text-muted-foreground truncate">
+                  {d.weatherDescription}
+                </p>
+                <p className="text-right text-sm shrink-0">
+                  <span className="font-semibold text-foreground">
+                    {d.tempMax !== null ? Math.round(d.tempMax) : "-"}°
+                  </span>
+                  <span className="text-muted-foreground/70 ml-2">
+                    {d.tempMin !== null ? Math.round(d.tempMin) : "-"}°
+                  </span>
+                </p>
+              </div>
+
+              {/* Stat row: wind, sunrise, sunset, rain chance, snow */}
+              <div className="mt-3 grid grid-cols-2 sm:grid-cols-5 gap-x-4 gap-y-2 pt-3 border-t border-border/50">
+                <DayStat
+                  icon={Wind}
+                  label={t("Wind", "風")}
+                  value={
+                    d.windSpeedMax !== null
+                      ? `${Math.round(d.windSpeedMax)} km/h`
+                      : "-"
+                  }
+                />
+                <DayStat
+                  icon={Sunrise}
+                  label={t("Sunrise", "日の出")}
+                  value={fmtTime(d.sunrise)}
+                />
+                <DayStat
+                  icon={Sunset}
+                  label={t("Sunset", "日の入")}
+                  value={fmtTime(d.sunset)}
+                />
+                <DayStat
+                  icon={CloudRain}
+                  label={t("Rain chance", "降水確率")}
+                  value={
+                    d.precipitationProbabilityMax !== null
+                      ? `${d.precipitationProbabilityMax}%`
+                      : "-"
+                  }
+                />
+                <DayStat
+                  icon={CloudSnow}
+                  label={t("Snow", "降雪")}
+                  value={
+                    d.snowfallSum !== null && d.snowfallSum > 0
+                      ? `${d.snowfallSum.toFixed(1)} cm`
+                      : "0 cm"
+                  }
+                />
+              </div>
             </div>
           );
         })}
       </div>
     </section>
+  );
+}
+
+function DayStat({
+  icon: Icon,
+  label,
+  value,
+}: {
+  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  label: string;
+  value: string;
+}) {
+  return (
+    <div className="min-w-0">
+      <div className="flex items-center gap-1.5 byline text-muted-foreground/70">
+        <Icon className="w-3 h-3" strokeWidth={2} /> {label}
+      </div>
+      <p className="text-sm font-medium text-foreground mt-0.5 truncate">{value}</p>
+    </div>
   );
 }
 
