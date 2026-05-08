@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, Sun, Snowflake, ArrowLeft } from "lucide-react";
+import { ChevronLeft, Sun, Snowflake, ArrowLeft, Lock } from "lucide-react";
 import type { ReactNode } from "react";
 import { cn } from "./cn";
 import { useRegion } from "./RegionProvider";
@@ -115,6 +115,8 @@ export function AppShell({ children }: { children: ReactNode }) {
     icon: NavItem["icon"];
     label: string;
     active: boolean;
+    /** Show a small lock glyph next to the label (paywalled features). */
+    locked?: boolean;
   };
   const buildCombinedNav = (): CombinedNavItem[] => {
     const items: CombinedNavItem[] = [];
@@ -141,6 +143,10 @@ export function AppShell({ children }: { children: ReactNode }) {
         icon: it.icon,
         label: t(it.label, it.labelJa),
         active: isActiveMountain(it.path),
+        // Alerts is the only remaining mountain-scope entry and is
+        // paywalled in v2. Render a tiny lock glyph alongside the label
+        // so the gating is obvious in nav even before users click in.
+        locked: it.path === "/alerts",
       });
     };
     // May 2026 v2: structural reset.
@@ -248,7 +254,10 @@ export function AppShell({ children }: { children: ReactNode }) {
                     <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full bg-primary" />
                   )}
                   <Icon className={cn("w-4 h-4 transition-colors", item.active ? "text-primary" : "")} />
-                  {item.label}
+                  <span className="inline-flex items-center gap-1.5">
+                    {item.label}
+                    {item.locked && <Lock className="w-3 h-3 opacity-60" aria-label="Premium" />}
+                  </span>
                 </Link>
               );
             })
@@ -354,8 +363,9 @@ export function AppShell({ children }: { children: ReactNode }) {
                     <span className="absolute top-1.5 w-8 h-0.5 rounded-full bg-primary" />
                   )}
                   <Icon className="w-4 h-4" />
-                  <span className="text-[9px] font-semibold tracking-wider uppercase leading-none whitespace-nowrap">
+                  <span className="text-[9px] font-semibold tracking-wider uppercase leading-none whitespace-nowrap inline-flex items-center gap-1">
                     {item.label}
+                    {item.locked && <Lock className="w-2.5 h-2.5 opacity-60" aria-label="Premium" />}
                   </span>
                 </Link>
               );

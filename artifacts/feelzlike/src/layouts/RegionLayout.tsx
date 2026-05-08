@@ -80,8 +80,17 @@ export function RegionLayout() {
         <Route path="/resort/:id">
           {routes.MountainDetail ? <routes.MountainDetail /> : <RegionStub title="Mountain" titleJa="スキー場" />}
         </Route>
+        {/* /radar folded into /:town/weather (May 2026 v2 reset). Keep the
+            URL alive as a redirect so existing bookmarks land on the new
+            home for the radar (embedded inside Weather forecast). */}
         <Route path="/radar">
-          {routes.Radar ? <routes.Radar /> : <RegionStub title="Radar" titleJa="気象レーダー" />}
+          {defaultTown ? (
+            <Redirect to={`/${defaultTown}/weather`} />
+          ) : routes.Radar ? (
+            <routes.Radar />
+          ) : (
+            <RegionStub title="Radar" titleJa="気象レーダー" />
+          )}
         </Route>
         <Route path="/alerts">
           {routes.Alerts ? <routes.Alerts /> : <RegionStub title="Alerts" titleJa="警報" />}
