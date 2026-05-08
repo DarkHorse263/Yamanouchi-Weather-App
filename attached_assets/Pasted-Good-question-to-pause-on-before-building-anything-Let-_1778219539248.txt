@@ -1,0 +1,40 @@
+Good question to pause on before building anything. Let me lay out the landscape so you can pick a direction — no code changes yet, this is a "decide what we want" question.
+
+What we have today
+AU: BOM IDR403 radar, animated 6-frame loop, proxied through our API server. National weather service feed — same source every Australian app uses. 128km range from Captain's Flat near Canberra.
+JP: RainViewer (free aggregator that re-serves JMA's radar mesh, plus nowcast frames out to 30 min) overlaid on a CartoDB basemap, plus OpenWeatherMap tiles for clouds/temp/snow/rain on the same page.
+API key in pocket: OpenWeatherMap (precipitation, snow, temp, clouds, pressure, wind tile layers — all already accessible to us).
+What the competitors actually use
+Product	Live radar	Forecast / modelled snow
+AccuWeather	Own normalised tile mesh (BOM/JMA/NEXRAD ingested + their proprietary 2hr "future radar")	AccuWeather model
+Snow-Forecast	Doesn't really do radar — they show modelled snowfall heatmaps from their own GFS/ECMWF-driven engine. This is the bit skiers actually plan on.	Their own snow model
+Weatherzone (DTN)	BOM radar + DTN's lightning network	DTN's WRF model
+Mountain Watch	BOM radar + reseller of Snow-Forecast model	Snow-Forecast / DTN
+Weather.com (TWC/IBM)	NEXRAD + IBM GRAF normalised tiles	IBM GRAF
+Slopes	None — uses Apple WeatherKit / OWM for current conditions on resort cards	OWM forecast
+Ski Tracks	None (tracking app, not weather)	—
+Epic Pass app	None native — partners with OpenSnow	OpenSnow
+Ikon Pass app	Same — OpenSnow integration	OpenSnow
+Yukiyama (JP)	JMA tiles direct + occasional Windy embed	tenki.jp / JMA
+OpenSnow (the bar in skiing)	Aggregates BOM/JMA/NEXRAD same as us, but layers a proprietary snow-vs-rain freezing-line heatmap on top, plus terrain shading	Their own model + ECMWF
+The key insight: the gold-standard ski apps don't differentiate on radar — they differentiate on modelled snowfall + snow/rain line. Snow-Forecast built a whole business on a heatmap that says "20cm Wed night above 1500m" — radar is almost a secondary thing.
+
+Our options, ranked by effort
+Quick win — Windy.com embed (1-2 hours)
+Replace our radar page with https://embed.windy.com/embed2.html?overlay=radar&lat=… configured per-region. Free, no key, professional polish, includes time animation + altitude switcher + multiple overlays. Downside: external iframe, slightly off-brand.
+
+Stay native, upgrade the layers (~½ day)
+Keep BOM/RainViewer as the live layer, but add an OpenWeatherMap snowfall-rate tile + temperature-isolines tile on top so you can see precip type and intensity, not just rainfall reflectivity. This is what BOM alone can't show you — radar can't tell snow from rain. Uses our existing OWM key.
+
+The Snow-Forecast play (~1-2 days)
+Build a modelled snowfall heatmap from Open-Meteo's hourly snowfall grid (we already use Open-Meteo for hourly forecasts). Render it as a coloured overlay across the region with a 24h/48h/7-day toggle. This is the differentiator that actually helps people plan ski days. Free, no new API, our own brand.
+
+Pro-tier upgrade — paid commercial radar (~$50-500/mo)
+
+Tomorrow.io — best-in-class 0-2hr nowcast, ~$0-100/mo for our volume
+AerisWeather (Vaisala Xweather) — what serious weather apps use, ~$200+/mo
+Only worth it if (1) and (2) and (3) aren't enough.
+OpenSnow partnership — they have an embed widget for resorts. Worth investigating if we want to white-label rather than build.
+
+My recommendation
+Do (2) + (3) together. Keep BOM/JMA as the "what's happening right now" layer, add the OWM snowfall + temp overlay so AU users can see snow-vs-rain instantly, and build the Open-Meteo modelled-snowfall heatmap as the headline "Snow Forecast" view. That mirrors what Snow-Forecast and OpenSnow actually do, uses APIs we already pay nothing extra for, stays on-brand, and is the bit that converts a casual skier into a paying subscriber. Windy embed (1) is a sensible 1-day fallback if you want something better this week while we build (2)+(3).
