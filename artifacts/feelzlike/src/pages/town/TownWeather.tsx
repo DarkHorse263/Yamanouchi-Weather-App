@@ -119,7 +119,7 @@ function Hero({
                 <>
                   {" · "}
                   <span className="text-foreground/80">
-                    Feels like {Math.round(current.feelsLike)}°
+                    feelzlike {Math.round(current.feelsLike)}°
                   </span>
                 </>
               )}

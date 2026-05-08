@@ -221,7 +221,7 @@ export function TownHome() {
           townName={t(town.name, town.nameJa)}
           loadingLabel={t("Loading…", "読込中…")}
           unavailableLabel={t("Weather unavailable", "天気情報なし")}
-          feelsLabel={t("feels", "体感")}
+          feelsLabel={t("feelzlike", "体感")}
         />
       </section>
 

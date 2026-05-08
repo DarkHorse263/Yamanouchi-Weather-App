@@ -134,7 +134,7 @@ export function ResortHero({
                 <p className="byline text-muted-foreground mt-1">
                   {weatherDescription ?? ""}
                   {weatherDescription && feelsLikeC != null && " · "}
-                  {feelsLikeC != null && `feels ${Math.round(feelsLikeC)}°`}
+                  {feelsLikeC != null && `feelzlike ${Math.round(feelsLikeC)}°`}
                 </p>
               )}
             </div>

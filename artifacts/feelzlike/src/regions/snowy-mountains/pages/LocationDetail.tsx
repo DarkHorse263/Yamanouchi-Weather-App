@@ -139,7 +139,7 @@ export default function LocationDetail() {
   })();
 
   const stats = [
-    { label: "Feels like", value: formatTemp(current.feelsLike), icon: Thermometer },
+    { label: "feelzlike", value: formatTemp(current.feelsLike), icon: Thermometer },
     { label: "Wind", value: `${current.windSpeed} km/h${current.windDirectionCompass ? ` ${current.windDirectionCompass}` : ""}`, icon: Navigation },
     ...(current.windGust ? [{ label: "Gusts", value: `${current.windGust} km/h`, icon: Wind }] : []),
     { label: "Humidity", value: `${current.humidity}%`, icon: Droplets },
@@ -250,7 +250,7 @@ export default function LocationDetail() {
                   <span className="font-display text-foreground/70 text-3xl md:text-4xl mt-4">°C</span>
                 </div>
                 <p className="byline text-muted-foreground mt-1">
-                  {current.weatherDescription} · feels {Math.round(current.feelsLike)}°
+                  {current.weatherDescription} · feelzlike {Math.round(current.feelsLike)}°
                 </p>
               </div>
             </motion.div>

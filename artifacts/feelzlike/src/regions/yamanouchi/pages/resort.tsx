@@ -138,7 +138,7 @@ export default function ResortDetail() {
   };
 
   const stats: ConditionStat[] = [
-    { label: t("Feels like", "体感"), value: `${Math.round(current.feelsLike)}°C`, icon: Thermometer },
+    { label: t("feelzlike", "体感"), value: `${Math.round(current.feelsLike)}°C`, icon: Thermometer },
     {
       label: t("Wind", "風"),
       value: `${current.windSpeed} km/h${current.windDirectionCompass ? ` ${current.windDirectionCompass}` : ""}`,

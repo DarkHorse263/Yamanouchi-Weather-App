@@ -483,7 +483,7 @@ export default function Landing() {
                         </div>
                       </div>
                       <p className="mt-1.5 text-xs text-slate-700 capitalize">
-                        {h.description.toLowerCase()} <span className="text-slate-400">·</span> feels {Math.round(h.feelsLikeC)}°
+                        {h.description.toLowerCase()} <span className="text-slate-400">·</span> feelzlike {Math.round(h.feelsLikeC)}°
                       </p>
                       <div className="mt-2 flex items-center justify-center md:justify-start gap-3 text-[10px] text-slate-500">
                         <span className="inline-flex items-center gap-1">
