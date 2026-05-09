@@ -75,6 +75,10 @@ export const snowyMountainsRegion: RegionConfig = {
     { category: "Resorts", label: "Selwyn Snow Resort", url: "https://www.selwynsnow.com.au" },
     { category: "Resorts", label: "Charlotte's Pass", url: "https://www.charlottepass.com.au" },
   ],
+  weatherSource: {
+    label: "Open-Meteo + BOM",
+    labelJa: "Open-Meteo・BOM",
+  },
   roadsSource: {
     label: "Live Traffic NSW",
     url: "https://www.livetraffic.com",

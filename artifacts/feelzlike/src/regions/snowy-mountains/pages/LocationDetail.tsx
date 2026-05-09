@@ -186,7 +186,15 @@ export default function LocationDetail() {
                 <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 animate-ping" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
               </span>
-              {current.dataSource === "BOM" ? `BOM Live · ${current.bomStation ?? "AU"}` : "Live"}
+              {(() => {
+                if (current.dataSource !== "BOM") return "Live";
+                const raw = current.bomStation?.trim();
+                // Treat empty / placeholder values as "no station name" rather
+                // than rendering a literal "UNKNOWN" badge in the header.
+                const stationName =
+                  raw && raw.toUpperCase() !== "UNKNOWN" ? raw : location.name;
+                return `BOM Live · ${stationName}`;
+              })()}
             </span>
             {current.dataSource !== "BOM" && (
               <span className="byline text-muted-foreground/80">Source · {current.dataSource ?? "BOM + models"}</span>
@@ -694,6 +702,21 @@ export default function LocationDetail() {
                   {liftData.seasonStatus.replace("-", " ")}
                 </div>
               </div>
+
+              {/* Pre-season honesty pill: when no lifts are running and the
+                  resort is in its quiet half of the year, tell users the
+                  number is expected rather than letting "0/11" read as a
+                  cancellation. AU snow season opens early-to-mid June. */}
+              {(liftData.seasonStatus === "pre-season" || liftData.seasonStatus === "closed") && liftData.liftsOpen === 0 && (
+                <div className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-700 px-2.5 py-1 text-[11px] font-semibold">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-sky-500" />
+                  </span>
+                  {liftData.seasonStatus === "pre-season"
+                    ? "Pre-season · NSW lifts typically spin up early June"
+                    : "Off-season · NSW lifts close early October"}
+                </div>
+              )}
 
               <div className="flex gap-6 mb-5 pb-5 border-b border-white/5">
                 <div>

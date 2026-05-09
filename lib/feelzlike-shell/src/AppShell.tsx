@@ -470,6 +470,8 @@ function SeasonPill({
         type="button"
         onClick={() => onChange("winter")}
         aria-pressed={season === "winter"}
+        aria-label={t("Switch to winter view", "冬季表示に切替")}
+        title={t("Winter season", "冬季シーズン")}
         className={cn(
           "inline-flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-semibold tracking-wider uppercase transition-colors",
           season === "winter"
@@ -484,6 +486,8 @@ function SeasonPill({
         type="button"
         onClick={() => onChange("green")}
         aria-pressed={season === "green"}
+        aria-label={t("Switch to summer view", "夏季表示に切替")}
+        title={t("Summer (green) season", "夏季 (グリーン) シーズン")}
         className={cn(
           "inline-flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-semibold tracking-wider uppercase transition-colors",
           season === "green"
@@ -492,7 +496,7 @@ function SeasonPill({
         )}
       >
         <Sun className="w-3 h-3" />
-        {t("Green", "緑")}
+        {t("Summer", "夏")}
       </button>
     </div>
   );

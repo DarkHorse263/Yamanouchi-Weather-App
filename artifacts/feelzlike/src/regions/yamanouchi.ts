@@ -108,6 +108,10 @@ export const yamanouchiRegion: RegionConfig = {
     { category: "Resorts", categoryJa: "スキー場", label: "Kita-Shiga Kogen", labelJa: "北志賀高原", url: "https://www.kitashiga.co.jp/" },
     { category: "Onsen", categoryJa: "温泉", label: "Shibu Onsen Ryokan Association", labelJa: "渋温泉旅館組合", url: "https://www.shibuonsen.net/" },
   ],
+  weatherSource: {
+    label: "Open-Meteo + JMA",
+    labelJa: "Open-Meteo・気象庁",
+  },
   roadsSource: {
     label: "Japan Road Traffic Information Center (JARTIC)",
     labelJa: "日本道路交通情報センター (JARTIC)",

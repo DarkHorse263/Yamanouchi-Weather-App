@@ -138,6 +138,15 @@ export interface RegionConfig {
    * was clear: just point people at the local tourism authorities.
    */
   tourismLinks?: TourismLink[];
+  /**
+   * Short label for the weather data source(s) used by this region. Surfaces
+   * in the small UpdateStamp pill on the Today hub so JP pages don't credit
+   * BOM and AU pages don't credit JMA. Default fallback is "Open-Meteo".
+   */
+  weatherSource?: {
+    label: string;
+    labelJa?: string;
+  };
   /** Road conditions data source for this region. Drives the TownRoads page. */
   roadsSource?: {
     /** Display name of the source authority (e.g. "Live Traffic NSW"). */

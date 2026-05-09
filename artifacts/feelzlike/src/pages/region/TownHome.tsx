@@ -273,7 +273,14 @@ export function TownHome() {
             <UpdateStamp
               lastUpdated={lastUpdated}
               intervalMin={10}
-              source={t("Open-Meteo + BOM", "Open-Meteo・BOM")}
+              source={
+                region.weatherSource
+                  ? t(
+                      region.weatherSource.label,
+                      region.weatherSource.labelJa ?? region.weatherSource.label,
+                    )
+                  : "Open-Meteo"
+              }
               className="mt-3"
             />
           </div>

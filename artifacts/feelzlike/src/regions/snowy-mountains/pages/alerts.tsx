@@ -1,11 +1,16 @@
 import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
 import { BellRing, Info } from "lucide-react";
+import { PremiumGate } from "@workspace/feelzlike-shell";
 
 /**
  * Snowy Mountains alerts page. Powder alerts (the GET /alerts data) are
  * Yamanouchi-only at the moment, so the AU page focuses on the subscription
  * surface - letting AU visitors opt in to alerts driven by the same forecast
  * data already powering the AU mountain pages.
+ *
+ * The whole subscribe surface is wrapped in PremiumGate so the lock glyph
+ * users see in the sidebar (DEFAULT_MOUNTAIN_NAV) matches the page state -
+ * QA flagged the previous mismatch (lock in nav, free form on the page).
  */
 export default function Alerts() {
   return (
@@ -28,7 +33,14 @@ export default function Alerts() {
         </div>
       </div>
 
-      <AlertSubscribeForm defaultRegion="snowy-mountains" />
+      <PremiumGate
+        title="Powder & weather alerts"
+        titleJa="降雪・気象アラート"
+        blurb="Get a push when conditions hit. Set thresholds for snowfall, wind and freezing level."
+        blurbJa="条件達成時にプッシュ通知。降雪・風速・凍結高度を設定。"
+      >
+        <AlertSubscribeForm defaultRegion="snowy-mountains" />
+      </PremiumGate>
     </div>
   );
 }

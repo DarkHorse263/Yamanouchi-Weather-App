@@ -1,5 +1,5 @@
 import { useGetPowderAlerts } from "@workspace/api-client-react";
-import { useLanguage } from "@workspace/feelzlike-shell";
+import { useLanguage, PremiumGate } from "@workspace/feelzlike-shell";
 import { Card, Badge, LoadingScreen, ErrorScreen } from "../components/ui-elements";
 import { BellRing, CloudLightning, Info } from "lucide-react";
 import { motion } from "framer-motion";
@@ -99,7 +99,14 @@ export default function Alerts() {
       </div>
 
       <div className="pt-8 border-t border-border">
-        <AlertSubscribeForm defaultRegion="yamanouchi" />
+        <PremiumGate
+          title="Powder & weather alerts"
+          titleJa="降雪・気象アラート"
+          blurb="Get a push when conditions hit. Set thresholds for snowfall, wind and freezing level."
+          blurbJa="条件達成時にプッシュ通知。降雪・風速・凍結高度を設定。"
+        >
+          <AlertSubscribeForm defaultRegion="yamanouchi" />
+        </PremiumGate>
       </div>
 
       <div className="space-y-6 pt-8 border-t border-border">

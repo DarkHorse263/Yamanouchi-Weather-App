@@ -46,6 +46,10 @@ export const iiyamaRegion: RegionConfig = {
     },
   ],
   footer: "v0.3 · feelzlike",
+  weatherSource: {
+    label: "Open-Meteo + JMA",
+    labelJa: "Open-Meteo・気象庁",
+  },
   roadsSource: {
     label: "Japan Road Traffic Information Center (JARTIC)",
     labelJa: "日本道路交通情報センター (JARTIC)",

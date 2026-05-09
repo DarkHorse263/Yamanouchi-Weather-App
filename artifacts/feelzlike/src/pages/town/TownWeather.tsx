@@ -61,9 +61,16 @@ export function TownWeather() {
               )}
             </p>
             <UpdateStamp
-              lastUpdated={(q.data as any)?.current?.observedAt ?? null}
+              lastUpdated={q.data?.current?.time ?? null}
               intervalMin={10}
-              source="Open-Meteo"
+              source={
+                region.weatherSource
+                  ? t(
+                      region.weatherSource.label,
+                      region.weatherSource.labelJa ?? region.weatherSource.label,
+                    )
+                  : "Open-Meteo"
+              }
               className="mt-3"
             />
           </div>
@@ -87,7 +94,10 @@ export function TownWeather() {
           <Outlook days={q.data.daily.slice(1, 7)} t={t} />
           {region.id === "snowy-mountains" && <Radar t={t} />}
           <p className="byline text-muted-foreground/60 mt-10">
-            {t("Source: Open-Meteo · updated every 10 min", "出典: Open-Meteo · 10分毎に更新")}
+            {t(
+              `Source: ${region.weatherSource?.label ?? "Open-Meteo"} · updated every 10 min`,
+              `出典: ${region.weatherSource?.labelJa ?? region.weatherSource?.label ?? "Open-Meteo"} · 10分毎に更新`,
+            )}
           </p>
         </>
       )}

@@ -126,19 +126,21 @@ export function TownRoads() {
                 `${town ? t(town.name, town.nameJa) : "町"}から山までのルートの最新状況と路傍カメラ。`,
               )}
             </p>
-            <UpdateStamp
-              lastUpdated={query.data?.lastUpdated ?? null}
-              intervalMin={15}
-              source={
-                region.roadsSource
-                  ? t(
-                      region.roadsSource.label,
-                      region.roadsSource.labelJa ?? region.roadsSource.label,
-                    )
-                  : undefined
-              }
-              className="mt-3"
-            />
+            {dataAvailable && (
+              <UpdateStamp
+                lastUpdated={query.data?.lastUpdated ?? null}
+                intervalMin={15}
+                source={
+                  region.roadsSource
+                    ? t(
+                        region.roadsSource.label,
+                        region.roadsSource.labelJa ?? region.roadsSource.label,
+                      )
+                    : undefined
+                }
+                className="mt-3"
+              />
+            )}
           </div>
           {dataAvailable && (
             <LiveBadge label={query.isFetching ? t("Loading", "読込中") : t("Live", "ライブ")} />

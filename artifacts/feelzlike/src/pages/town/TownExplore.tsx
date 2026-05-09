@@ -50,10 +50,15 @@ export function TownExplore() {
               {t("Explore", "観光")}
             </h1>
             <p className="text-muted-foreground mt-3 max-w-xl">
-              {t(
-                `Official tourism, attraction, resort and onsen links for ${region.name}.`,
-                `${region.name}の公式観光・観光地・スキー場・温泉リンク集。`,
-              )}
+              {region.id === "yamanouchi" || region.id === "iiyama"
+                ? t(
+                    `Official tourism, attraction, resort and onsen links for ${region.name}.`,
+                    `${region.name}の公式観光・観光地・スキー場・温泉リンク集。`,
+                  )
+                : t(
+                    `Official tourism, national park and resort links for ${region.name}.`,
+                    `${region.name}の公式観光・国立公園・スキー場リンク集。`,
+                  )}
             </p>
           </div>
           <LiveBadge label={t("Curated", "厳選")} />
