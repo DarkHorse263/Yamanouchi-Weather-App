@@ -432,7 +432,8 @@ export default function Landing() {
                 <div className={`h-1 w-full ${accentStrip}`} />
 
                 <div className="flex-1 p-4 md:p-5 text-center md:text-left">
-                  {/* status + location */}
+                  {/* status pill row (location now lives under the country
+                      headline below) */}
                   <div className="flex items-center justify-center md:justify-start gap-2 flex-wrap">
                     {isLive ? (
                       <span className="inline-flex items-center gap-1 shrink-0 px-1.5 py-0.5 rounded-md bg-emerald-50 border border-emerald-200">
@@ -452,22 +453,36 @@ export default function Landing() {
                         </span>
                       </span>
                     )}
-                    <p className={`text-[10px] font-semibold uppercase tracking-[0.18em] ${locationLabel}`}>
-                      <MapPin className={`w-2.5 h-2.5 inline-block mr-1 -mt-0.5 ${locationIcon}`} />
-                      {region.region}, {region.country}
-                    </p>
                   </div>
 
-                  {/* name */}
+                  {/* country headline: flag + country name lead the card so
+                      visitors enter via country first. The whole card still
+                      clicks through to the region. Flag emoji uses
+                      regional-indicator pairs (🇦🇺 / 🇯🇵). aria-hidden on the
+                      flag because the country word that follows already
+                      announces it for screen readers. */}
                   <h3
-                    className={`mt-2 text-xl md:text-2xl tracking-tight leading-tight transition-colors ${nameClass}`}
+                    className={`mt-2 flex items-center justify-center md:justify-start gap-2.5 text-2xl md:text-3xl tracking-tight leading-tight transition-colors ${nameClass}`}
                     style={{
                       fontFamily: "'DIN Pro', system-ui, sans-serif",
                       fontWeight: 700,
                     }}
                   >
-                    {region.name}
+                    <span
+                      aria-hidden="true"
+                      className="text-[1.4em] leading-none select-none"
+                      style={{ fontFamily: '"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif' }}
+                    >
+                      {region.countryCode === "AU" ? "🇦🇺" : region.countryCode === "JP" ? "🇯🇵" : "🏔️"}
+                    </span>
+                    <span>{region.country}</span>
                   </h3>
+
+                  {/* region subtitle (e.g. "Snowy Mountains · New South Wales") */}
+                  <p className={`mt-1 text-[11px] font-semibold uppercase tracking-[0.18em] ${locationLabel}`}>
+                    <MapPin className={`w-2.5 h-2.5 inline-block mr-1 -mt-0.5 ${locationIcon}`} />
+                    {region.name} <span className="text-slate-300">·</span> {region.region}
+                  </p>
 
                   {/* HEADLINE LIVE READING */}
                   {isLive && h && (
