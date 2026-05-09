@@ -186,6 +186,30 @@ export default function Landing() {
   const regions = data?.regions ?? FALLBACK_REGIONS;
   const generatedAt = data?.generatedAt;
 
+  // Group regions by country so the landing surface is country-first. When a
+  // country has only one live region the country tile links straight to it;
+  // once we add a second region per country we'll graduate this to a per-
+  // country index page (`/au/`, `/jp/`).
+  type Country = {
+    code: "AU" | "JP";
+    name: string;
+    flag: string;
+    regions: Region[];
+  };
+  const countriesOrder: Country["code"][] = ["AU", "JP"];
+  const countryMeta: Record<Country["code"], { name: string; flag: string }> = {
+    AU: { name: "Australia", flag: "🇦🇺" },
+    JP: { name: "Japan", flag: "🇯🇵" },
+  };
+  const countries: Country[] = countriesOrder
+    .map((code) => ({
+      code,
+      name: countryMeta[code].name,
+      flag: countryMeta[code].flag,
+      regions: regions.filter((r) => r.countryCode === code),
+    }))
+    .filter((c) => c.regions.length > 0);
+
   const [now, setNow] = useState(() => Date.now());
   useEffect(() => {
     const id = setInterval(() => setNow(Date.now()), 30_000);
@@ -332,12 +356,70 @@ export default function Landing() {
         </div>
       </header>
 
-      {/* ─── REGIONS ──────────────────────────────────── */}
+      {/* ─── COUNTRIES ─────────────────────────────────
+          Country-first entry. Each tile shows flag + country name and links
+          to that country's regions. Today every country has exactly one live
+          region, so we link directly to it; when a country gains a second
+          region the click target becomes a country index page. */}
       <main className="relative z-10 max-w-5xl mx-auto px-5 pt-10 md:pt-14 pb-12 md:pb-16">
-        {/* Apr 2026 reset: removed the "01 · Regions · N mountains tracked"
-            header - with only two live regions the chrome dwarfed the
-            content. Cards now centre on the page in a 2-up grid. */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 max-w-3xl mx-auto">
+          {countries.map((country, i) => {
+            // Single live region per country today → link straight to it.
+            // Multi-region countries (future) get a country index route.
+            const liveRegions = country.regions.filter((r) => r.status === "live");
+            const href = liveRegions.length === 1
+              ? liveRegions[0].href
+              : `/${country.code.toLowerCase()}/`;
+            const liveCountInCountry = liveRegions.length;
+
+            return (
+              <motion.a
+                key={country.code}
+                href={href}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.35, delay: 0.05 + i * 0.06 }}
+                className="group relative flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white hover:-translate-y-0.5 hover:border-sky-400 hover:shadow-[0_4px_8px_rgba(15,23,42,0.06),0_12px_28px_-12px_rgba(56,128,210,0.25)] shadow-[0_1px_3px_rgba(15,23,42,0.04)] transition-all duration-200"
+              >
+                <div className="h-1 w-full bg-gradient-to-r from-sky-400 via-sky-500 to-blue-700" />
+
+                <div className="flex-1 px-6 py-10 md:py-12 flex flex-col items-center text-center">
+                  <span
+                    aria-hidden="true"
+                    className="text-6xl md:text-7xl leading-none select-none"
+                    style={{ fontFamily: '"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif' }}
+                  >
+                    {country.flag}
+                  </span>
+                  <h3
+                    className="mt-5 text-3xl md:text-4xl tracking-tight leading-tight text-blue-900 group-hover:text-sky-700 transition-colors"
+                    style={{ fontFamily: "'DIN Pro', system-ui, sans-serif", fontWeight: 700 }}
+                  >
+                    {country.name}
+                  </h3>
+                  <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-sky-700/80 inline-flex items-center gap-1.5">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60 animate-ping" />
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+                    </span>
+                    {liveCountInCountry} {liveCountInCountry === 1 ? "region live" : "regions live"}
+                  </p>
+                </div>
+
+                <div className="border-t border-slate-100 px-5 py-3 flex items-center justify-end gap-1.5 text-[12px] font-semibold text-sky-700 group-hover:text-blue-700 bg-gradient-to-r from-sky-50/50 to-blue-50/50 transition-colors">
+                  Explore
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+              </motion.a>
+            );
+          })}
+        </div>
+
+        {/* The detailed per-region cards below are kept hidden during the
+            country-first reset. They are still rendered to nothing via the
+            empty filter so we can revive them as a "regions in <country>"
+            grid on country index pages later. */}
+        <div className="hidden">
           {filtered.map((region, i) => {
             const h = region.headline;
             const isLive = region.status === "live";
