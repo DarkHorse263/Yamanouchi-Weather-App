@@ -609,4 +609,8 @@ router.get("/forecast/:locationId", async (req, res) => {
   }
 });
 
+/** All location ids served by `/weather/:locationId`. Source of truth used
+ *  by the boot-time location-id contract validator (lib/validate-locations). */
+export const WEATHER_LOCATION_IDS = LOCATIONS.map((l) => l.id);
+
 export default router;

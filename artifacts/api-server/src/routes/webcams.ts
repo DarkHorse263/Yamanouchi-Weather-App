@@ -236,4 +236,8 @@ router.get("/webcams/:locationId", (req, res) => {
   res.json(result);
 });
 
+/** All location ids served by `/webcams/:locationId`. Source of truth used
+ *  by the boot-time location-id contract validator (lib/validate-locations). */
+export const WEBCAM_LOCATION_IDS = WEBCAM_DATA.map((l) => l.locationId);
+
 export default router;

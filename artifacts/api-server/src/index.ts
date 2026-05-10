@@ -3,6 +3,12 @@
 // because OpenTelemetry can only patch modules that have not yet been imported.
 // Plain `import "./instrument"` here is too late - express has already loaded.
 import app from "./app";
+import { validateLocationContracts } from "./lib/validate-locations.js";
+
+// Fail fast if any served location id violates the OpenAPI path schemas
+// (regex `^[a-z0-9-]+$`). Cheap O(n) on boot, prevents the kind of drift
+// that previously hid VHC mountain ids from the generated client types.
+validateLocationContracts();
 
 const rawPort = process.env["PORT"];
 
