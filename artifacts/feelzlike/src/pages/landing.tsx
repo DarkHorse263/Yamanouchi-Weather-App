@@ -377,30 +377,30 @@ export default function Landing() {
               >
                 <div className="h-0.5 w-full bg-gradient-to-r from-sky-400 via-sky-500 to-blue-700" />
 
-                <div className="flex-1 px-4 py-5 md:px-5 md:py-7 flex flex-col items-center text-center">
+                <div className="flex-1 px-3 py-3.5 md:px-4 md:py-5 flex flex-col items-center text-center">
                   <span
                     aria-hidden="true"
-                    className="text-4xl md:text-5xl leading-none select-none"
+                    className="text-2xl md:text-3xl leading-none select-none"
                     style={{ fontFamily: '"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif' }}
                   >
                     {country.flag}
                   </span>
                   <h3
-                    className="mt-2.5 md:mt-3 text-xl md:text-2xl tracking-tight leading-tight text-blue-900 group-hover:text-sky-700 transition-colors"
+                    className="mt-1.5 md:mt-2 text-base md:text-lg tracking-tight leading-tight text-blue-900 group-hover:text-sky-700 transition-colors"
                     style={{ fontFamily: "'DIN Pro', system-ui, sans-serif", fontWeight: 700 }}
                   >
                     {country.name}
                   </h3>
-                  <p className="mt-1.5 md:mt-2 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.18em] text-sky-700/80 inline-flex items-center gap-1.5">
-                    <span className="relative flex h-1.5 w-1.5">
+                  <p className="mt-1 text-[9px] md:text-[10px] font-semibold uppercase tracking-[0.16em] text-sky-700/80 inline-flex items-center gap-1">
+                    <span className="relative flex h-1 w-1">
                       <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60 animate-ping" />
-                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+                      <span className="relative inline-flex rounded-full h-1 w-1 bg-emerald-500" />
                     </span>
                     {liveCountInCountry} {liveCountInCountry === 1 ? "region" : "regions"}
                   </p>
                 </div>
 
-                <div className="border-t border-slate-100 px-3.5 py-2 flex items-center justify-end gap-1 text-[11px] font-semibold text-sky-700 group-hover:text-blue-700 bg-gradient-to-r from-sky-50/50 to-blue-50/50 transition-colors">
+                <div className="border-t border-slate-100 px-3 py-1.5 flex items-center justify-end gap-1 text-[10px] font-semibold text-sky-700 group-hover:text-blue-700 bg-gradient-to-r from-sky-50/50 to-blue-50/50 transition-colors">
                   Explore
                   <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                 </div>
