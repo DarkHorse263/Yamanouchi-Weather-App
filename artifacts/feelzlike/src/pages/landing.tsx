@@ -240,20 +240,20 @@ export default function Landing() {
       {/* Clean white hero - the colour logo is shown as-is (no invert filter)
           and all hero text reverts to dark slate. */}
       <header className="relative z-10">
-        <div className="relative max-w-3xl mx-auto px-5 pt-10 pb-12 md:pt-14 md:pb-16 text-center">
+        <div className="relative max-w-3xl mx-auto px-5 pt-6 pb-7 md:pt-12 md:pb-14 text-center">
           <motion.div
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-6 md:mb-8 flex flex-col items-center"
+            className="mb-3 md:mb-7 flex flex-col items-center"
           >
             <img
               src={mainLogo}
               alt="feelzlike - resort town mountain weather"
-              className="h-24 md:h-32 lg:h-36 w-auto select-none"
+              className="h-16 md:h-32 lg:h-36 w-auto select-none"
               draggable={false}
             />
-            <span className="mt-3 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.22em] text-sky-700/90">
+            <span className="mt-2 md:mt-3 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.22em] text-sky-700/90">
               Resort Town Mountain Weather
             </span>
           </motion.div>
@@ -285,7 +285,7 @@ export default function Landing() {
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.25 }}
-            className="mt-7 md:mt-9 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[11px] text-slate-500"
+            className="mt-4 md:mt-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[11px] text-slate-500"
           >
             <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-emerald-50 border border-emerald-200">
               <span className="relative flex h-1.5 w-1.5">
@@ -315,7 +315,7 @@ export default function Landing() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-sm md:text-base text-sky-700 max-w-xl mx-auto leading-relaxed mt-8 md:mt-10"
+            className="text-sm md:text-base text-sky-700 max-w-xl mx-auto leading-relaxed mt-5 md:mt-9"
           >
             I wonder what it feelzlike in…
           </motion.p>
@@ -355,8 +355,8 @@ export default function Landing() {
           to that country's regions. Today every country has exactly one live
           region, so we link directly to it; when a country gains a second
           region the click target becomes a country index page. */}
-      <main className="relative z-10 max-w-5xl mx-auto px-5 pt-10 md:pt-14 pb-12 md:pb-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 max-w-3xl mx-auto">
+      <main className="relative z-10 max-w-5xl mx-auto px-5 pt-4 md:pt-10 pb-8 md:pb-14">
+        <div className="grid grid-cols-2 gap-2.5 md:gap-4 max-w-2xl mx-auto">
           {countries.map((country, i) => {
             // Always route via the country index page so the flow stays
             // Country > Region > Town for every country, regardless of how
@@ -375,34 +375,34 @@ export default function Landing() {
                 transition={{ duration: 0.35, delay: 0.05 + i * 0.06 }}
                 className="group relative flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white hover:-translate-y-0.5 hover:border-sky-400 hover:shadow-[0_4px_8px_rgba(15,23,42,0.06),0_12px_28px_-12px_rgba(56,128,210,0.25)] shadow-[0_1px_3px_rgba(15,23,42,0.04)] transition-all duration-200"
               >
-                <div className="h-1 w-full bg-gradient-to-r from-sky-400 via-sky-500 to-blue-700" />
+                <div className="h-0.5 w-full bg-gradient-to-r from-sky-400 via-sky-500 to-blue-700" />
 
-                <div className="flex-1 px-6 py-10 md:py-12 flex flex-col items-center text-center">
+                <div className="flex-1 px-4 py-5 md:px-5 md:py-7 flex flex-col items-center text-center">
                   <span
                     aria-hidden="true"
-                    className="text-6xl md:text-7xl leading-none select-none"
+                    className="text-4xl md:text-5xl leading-none select-none"
                     style={{ fontFamily: '"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif' }}
                   >
                     {country.flag}
                   </span>
                   <h3
-                    className="mt-5 text-3xl md:text-4xl tracking-tight leading-tight text-blue-900 group-hover:text-sky-700 transition-colors"
+                    className="mt-2.5 md:mt-3 text-xl md:text-2xl tracking-tight leading-tight text-blue-900 group-hover:text-sky-700 transition-colors"
                     style={{ fontFamily: "'DIN Pro', system-ui, sans-serif", fontWeight: 700 }}
                   >
                     {country.name}
                   </h3>
-                  <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-sky-700/80 inline-flex items-center gap-1.5">
+                  <p className="mt-1.5 md:mt-2 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.18em] text-sky-700/80 inline-flex items-center gap-1.5">
                     <span className="relative flex h-1.5 w-1.5">
                       <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60 animate-ping" />
                       <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
                     </span>
-                    {liveCountInCountry} {liveCountInCountry === 1 ? "region live" : "regions live"}
+                    {liveCountInCountry} {liveCountInCountry === 1 ? "region" : "regions"}
                   </p>
                 </div>
 
-                <div className="border-t border-slate-100 px-5 py-3 flex items-center justify-end gap-1.5 text-[12px] font-semibold text-sky-700 group-hover:text-blue-700 bg-gradient-to-r from-sky-50/50 to-blue-50/50 transition-colors">
+                <div className="border-t border-slate-100 px-3.5 py-2 flex items-center justify-end gap-1 text-[11px] font-semibold text-sky-700 group-hover:text-blue-700 bg-gradient-to-r from-sky-50/50 to-blue-50/50 transition-colors">
                   Explore
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                 </div>
               </motion.a>
             );

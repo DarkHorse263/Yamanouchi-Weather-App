@@ -30,7 +30,7 @@ export default function CountryHome({ code }: CountryHomeProps) {
       />
 
       <header className="relative z-10">
-        <div className="max-w-3xl mx-auto px-5 pt-10 pb-8 md:pt-14 md:pb-10 text-center">
+        <div className="max-w-3xl mx-auto px-5 pt-5 pb-5 md:pt-12 md:pb-8 text-center">
           <a
             href="/"
             className="inline-flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-[0.2em] text-sky-700/80 hover:text-sky-700 transition-colors"
@@ -42,30 +42,30 @@ export default function CountryHome({ code }: CountryHomeProps) {
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="mt-6 flex flex-col items-center"
+            className="mt-4 md:mt-6 flex flex-col items-center"
           >
             <span
               aria-hidden="true"
-              className="text-6xl md:text-7xl leading-none select-none"
+              className="text-4xl md:text-6xl leading-none select-none"
               style={{ fontFamily: '"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif' }}
             >
               {meta.flag}
             </span>
             <h1
-              className="mt-4 text-4xl md:text-5xl tracking-tight leading-tight text-blue-900"
+              className="mt-2.5 md:mt-4 text-2xl md:text-4xl tracking-tight leading-tight text-blue-900"
               style={{ fontFamily: "'DIN Pro', system-ui, sans-serif", fontWeight: 700 }}
             >
               {meta.name}
             </h1>
-            <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-sky-700/80">
+            <p className="mt-1.5 md:mt-3 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.2em] text-sky-700/80">
               Choose a region
             </p>
           </motion.div>
         </div>
       </header>
 
-      <main className="relative z-10 max-w-5xl mx-auto px-5 pb-12 md:pb-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 max-w-3xl mx-auto">
+      <main className="relative z-10 max-w-5xl mx-auto px-4 md:px-5 pb-8 md:pb-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 md:gap-4 max-w-3xl mx-auto">
           {regions.map((region, i) => {
             const towns = region.baseTowns ?? [];
             const mountains = region.mountains ?? [];
@@ -79,18 +79,18 @@ export default function CountryHome({ code }: CountryHomeProps) {
                 className="group relative flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white hover:-translate-y-0.5 hover:border-sky-400 hover:shadow-[0_4px_8px_rgba(15,23,42,0.06),0_12px_28px_-12px_rgba(56,128,210,0.25)] shadow-[0_1px_3px_rgba(15,23,42,0.04)] transition-all duration-200"
               >
                 <div className="h-1 w-full bg-gradient-to-r from-sky-400 via-sky-500 to-blue-700" />
-                <div className="flex-1 px-6 py-7 md:py-8 flex flex-col">
+                <div className="flex-1 px-4 py-4 md:px-6 md:py-7 flex flex-col">
                   <p className="byline text-sky-700/80 inline-flex items-center gap-1.5">
                     <MapPin className="w-3 h-3" />
                     {region.subtitle}
                   </p>
                   <h3
-                    className="mt-3 text-2xl md:text-3xl tracking-tight leading-tight text-blue-900 group-hover:text-sky-700 transition-colors"
+                    className="mt-2 md:mt-3 text-xl md:text-3xl tracking-tight leading-tight text-blue-900 group-hover:text-sky-700 transition-colors"
                     style={{ fontFamily: "'DIN Pro', system-ui, sans-serif", fontWeight: 700 }}
                   >
                     {region.name}
                   </h3>
-                  <div className="mt-4 grid grid-cols-2 gap-3 text-[12px]">
+                  <div className="mt-3 md:mt-4 grid grid-cols-2 gap-3 text-[12px]">
                     <div>
                       <p className="byline text-muted-foreground/70">Base towns</p>
                       <p className="mt-1 font-semibold text-slate-700 leading-snug">

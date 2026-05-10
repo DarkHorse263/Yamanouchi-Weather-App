@@ -77,7 +77,7 @@ export function MountainsList() {
         />
       </div>
 
-      <div className="relative px-6 md:px-10 py-10 md:py-14 max-w-6xl mx-auto">
+      <div className="relative px-4 md:px-10 py-6 md:py-10 max-w-6xl mx-auto">
         <motion.header
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}

@@ -14,7 +14,7 @@ export function TownSubpageStub({ title, titleJa, description, descriptionJa }: 
   const { town } = useBaseTown();
 
   return (
-    <div className="px-6 md:px-10 py-8 md:py-12 max-w-6xl mx-auto">
+    <div className="px-4 md:px-10 py-5 md:py-10 max-w-6xl mx-auto">
       <PageHeader
         byline={`${region.name} · ${town ? t(town.name, town.nameJa) : t("Town", "町")}`}
         title={t(title, titleJa)}

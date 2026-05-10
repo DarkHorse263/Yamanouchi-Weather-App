@@ -210,7 +210,7 @@ export function TownHome() {
 
   if (!town) {
     return (
-      <div className="px-6 md:px-10 py-12 max-w-6xl mx-auto">
+      <div className="px-4 md:px-10 py-6 md:py-10 max-w-6xl mx-auto">
         <p className="text-muted-foreground">{t("Loading town…", "読み込み中…")}</p>
       </div>
     );
@@ -236,7 +236,7 @@ export function TownHome() {
   })();
 
   return (
-    <div className="px-6 md:px-10 py-8 md:py-12 max-w-6xl mx-auto">
+    <div className="px-4 md:px-10 py-5 md:py-10 max-w-6xl mx-auto">
       <PageMeta
         title={`${town.name} - weather, stays, roads & cams`}
         description={`${town.name} in ${region.name}: in-town weather, road conditions to the mountain, webcams, transport, plus curated stays and eats.`}

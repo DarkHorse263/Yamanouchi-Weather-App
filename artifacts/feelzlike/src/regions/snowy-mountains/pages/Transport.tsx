@@ -55,7 +55,7 @@ export function SnowyTransport() {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <div className="px-6 md:px-10 pt-8 md:pt-12">
+      <div className="px-4 md:px-10 pt-5 md:pt-10">
         <PageHeader
           byline={`${region.name}${town ? ` · ${t(town.name, town.nameJa)}` : ""}`}
           title={t("Transport", "交通")}
@@ -69,7 +69,7 @@ export function SnowyTransport() {
 
       {/* Cooma Coaches hero */}
       {cooma && (
-        <section className="px-6 md:px-10 pt-8">
+        <section className="px-4 md:px-10 pt-5 md:pt-8">
           <article className="rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50 via-white to-blue-50/40 p-6 md:p-8 shadow-sm">
             <div className="flex items-start gap-5 flex-wrap">
               <div className="shrink-0 rounded-xl bg-white border border-blue-100 p-3 flex items-center justify-center">
@@ -161,7 +161,7 @@ export function SnowyTransport() {
       )}
 
       {/* Other operators */}
-      <section className="px-6 md:px-10 pt-8 pb-16">
+      <section className="px-4 md:px-10 pt-5 pb-10">
         <p className="text-[11px] font-bold tracking-wider text-muted-foreground/70 uppercase mb-3">
           {t("Other operators", "その他の事業者")}
         </p>

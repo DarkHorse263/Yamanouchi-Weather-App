@@ -61,7 +61,7 @@ export function RegionStay() {
     : allPlaces;
 
   return (
-    <div className="px-6 md:px-10 py-8 md:py-12 max-w-6xl mx-auto">
+    <div className="px-4 md:px-10 py-5 md:py-10 max-w-6xl mx-auto">
       <PageHeader
         byline={region.name}
         title={t("Stay", "宿泊")}

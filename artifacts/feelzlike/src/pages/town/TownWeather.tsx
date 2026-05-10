@@ -32,14 +32,14 @@ export function TownWeather() {
 
   if (!town) {
     return (
-      <div className="px-6 md:px-10 py-12 max-w-6xl mx-auto">
+      <div className="px-4 md:px-10 py-6 md:py-10 max-w-6xl mx-auto">
         <p className="text-muted-foreground">{t("Loading town…", "読み込み中…")}</p>
       </div>
     );
   }
 
   return (
-    <div className="px-6 md:px-10 py-8 md:py-12 max-w-6xl mx-auto">
+    <div className="px-4 md:px-10 py-5 md:py-10 max-w-6xl mx-auto">
       <PageHeader
         byline={`${region.name} · ${t(town.name, town.nameJa)}`}
         title={t(`${town.name} weather forecast`, `${town.name}の天気予報`)}

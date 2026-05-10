@@ -7,7 +7,7 @@ import wordmark from "@assets/feelzlike_trimmed/feelzlike_WordMarque_colour_1604
 export default function RegionPicker() {
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-5xl mx-auto px-6 md:px-10 pt-10 md:pt-16 pb-20">
+      <div className="max-w-5xl mx-auto px-4 md:px-10 pt-6 md:pt-12 pb-12">
         <motion.header
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}

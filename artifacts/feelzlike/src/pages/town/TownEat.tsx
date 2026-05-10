@@ -56,7 +56,7 @@ export function TownEat() {
 
   if (!town) {
     return (
-      <div className="px-6 md:px-10 py-12 max-w-6xl mx-auto">
+      <div className="px-4 md:px-10 py-6 md:py-10 max-w-6xl mx-auto">
         <EmptyStateCard
           icon={Utensils}
           title={t("Pick a town first", "町を選んでください")}
@@ -82,7 +82,7 @@ export function TownEat() {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <div className="px-6 md:px-10 pt-8 md:pt-12">
+      <div className="px-4 md:px-10 pt-5 md:pt-10">
         <PageHeader
           byline={`${region.name} · ${townDisplayName}`}
           title={t("Eat", "食事")}
@@ -92,7 +92,7 @@ export function TownEat() {
       </div>
 
       {/* Hero "all food" CTA */}
-      <section className="px-6 md:px-10 pt-8">
+      <section className="px-4 md:px-10 pt-5 md:pt-8">
         <a
           href={allFoodHref}
           target="_blank"
@@ -112,7 +112,7 @@ export function TownEat() {
       </section>
 
       {/* Category grid */}
-      <section className="px-6 md:px-10 pt-6 pb-16">
+      <section className="px-4 md:px-10 pt-5 pb-10">
         <p className="text-[11px] font-bold tracking-wider text-muted-foreground/70 uppercase mb-3">
           {t("Or jump to a category", "カテゴリーで探す")}
         </p>

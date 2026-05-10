@@ -26,7 +26,7 @@ export function RegionHome() {
   const countryMeta = country ? COUNTRY_META[country] : null;
 
   return (
-    <div className="px-6 md:px-10 py-8 md:py-12 max-w-6xl mx-auto">
+    <div className="px-4 md:px-10 py-5 md:py-10 max-w-6xl mx-auto">
       <PageMeta
         title={`${region.name} - pick a base town`}
         description={`Choose your base town in ${region.name}. Real-time weather, road conditions and live cams scoped to where you stay.`}
