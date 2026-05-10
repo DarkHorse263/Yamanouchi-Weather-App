@@ -3653,74 +3653,12 @@ export function useGetWeather<
  * Returns current weather and 7-day forecast for a specific resort location
  * @summary Get weather for a specific location
  */
-export const getGetLocationWeatherUrl = (
-  locationId:
-    | "thredbo"
-    | "perisher"
-    | "charlottes-pass"
-    | "selwyn"
-    | "jindabyne"
-    | "shiga-sun-valley"
-    | "shiga-maruike"
-    | "shiga-hasuike"
-    | "shiga-giant"
-    | "shiga-hoppo-bunadaira"
-    | "shiga-higashidateyama"
-    | "shiga-nishidateyama"
-    | "shiga-terakoya"
-    | "shiga-takamagahara"
-    | "shiga-tannenomori-okojo"
-    | "shiga-ichinose-family"
-    | "shiga-ichinose-diamond"
-    | "shiga-ichinose-yamanokami"
-    | "shiga-yakebitaiyama"
-    | "shiga-okushiga-kogen"
-    | "shiga-kumanoyu"
-    | "shiga-yokoteyama"
-    | "shiga-shibutoge"
-    | "ryuoo"
-    | "xjam-takaifuji"
-    | "yomase-onsen"
-    | "kita-shiga-komaruyama"
-    | "madarao"
-    | "tangram"
-    | "togari",
-) => {
+export const getGetLocationWeatherUrl = (locationId: string) => {
   return `/api/weather/${locationId}`;
 };
 
 export const getLocationWeather = async (
-  locationId:
-    | "thredbo"
-    | "perisher"
-    | "charlottes-pass"
-    | "selwyn"
-    | "jindabyne"
-    | "shiga-sun-valley"
-    | "shiga-maruike"
-    | "shiga-hasuike"
-    | "shiga-giant"
-    | "shiga-hoppo-bunadaira"
-    | "shiga-higashidateyama"
-    | "shiga-nishidateyama"
-    | "shiga-terakoya"
-    | "shiga-takamagahara"
-    | "shiga-tannenomori-okojo"
-    | "shiga-ichinose-family"
-    | "shiga-ichinose-diamond"
-    | "shiga-ichinose-yamanokami"
-    | "shiga-yakebitaiyama"
-    | "shiga-okushiga-kogen"
-    | "shiga-kumanoyu"
-    | "shiga-yokoteyama"
-    | "shiga-shibutoge"
-    | "ryuoo"
-    | "xjam-takaifuji"
-    | "yomase-onsen"
-    | "kita-shiga-komaruyama"
-    | "madarao"
-    | "tangram"
-    | "togari",
+  locationId: string,
   options?: RequestInit,
 ): Promise<LocationWeather> => {
   return customFetch<LocationWeather>(getGetLocationWeatherUrl(locationId), {
@@ -3729,39 +3667,7 @@ export const getLocationWeather = async (
   });
 };
 
-export const getGetLocationWeatherQueryKey = (
-  locationId:
-    | "thredbo"
-    | "perisher"
-    | "charlottes-pass"
-    | "selwyn"
-    | "jindabyne"
-    | "shiga-sun-valley"
-    | "shiga-maruike"
-    | "shiga-hasuike"
-    | "shiga-giant"
-    | "shiga-hoppo-bunadaira"
-    | "shiga-higashidateyama"
-    | "shiga-nishidateyama"
-    | "shiga-terakoya"
-    | "shiga-takamagahara"
-    | "shiga-tannenomori-okojo"
-    | "shiga-ichinose-family"
-    | "shiga-ichinose-diamond"
-    | "shiga-ichinose-yamanokami"
-    | "shiga-yakebitaiyama"
-    | "shiga-okushiga-kogen"
-    | "shiga-kumanoyu"
-    | "shiga-yokoteyama"
-    | "shiga-shibutoge"
-    | "ryuoo"
-    | "xjam-takaifuji"
-    | "yomase-onsen"
-    | "kita-shiga-komaruyama"
-    | "madarao"
-    | "tangram"
-    | "togari",
-) => {
+export const getGetLocationWeatherQueryKey = (locationId: string) => {
   return [`/api/weather/${locationId}`] as const;
 };
 
@@ -3769,37 +3675,7 @@ export const getGetLocationWeatherQueryOptions = <
   TData = Awaited<ReturnType<typeof getLocationWeather>>,
   TError = ErrorType<ErrorResponse>,
 >(
-  locationId:
-    | "thredbo"
-    | "perisher"
-    | "charlottes-pass"
-    | "selwyn"
-    | "jindabyne"
-    | "shiga-sun-valley"
-    | "shiga-maruike"
-    | "shiga-hasuike"
-    | "shiga-giant"
-    | "shiga-hoppo-bunadaira"
-    | "shiga-higashidateyama"
-    | "shiga-nishidateyama"
-    | "shiga-terakoya"
-    | "shiga-takamagahara"
-    | "shiga-tannenomori-okojo"
-    | "shiga-ichinose-family"
-    | "shiga-ichinose-diamond"
-    | "shiga-ichinose-yamanokami"
-    | "shiga-yakebitaiyama"
-    | "shiga-okushiga-kogen"
-    | "shiga-kumanoyu"
-    | "shiga-yokoteyama"
-    | "shiga-shibutoge"
-    | "ryuoo"
-    | "xjam-takaifuji"
-    | "yomase-onsen"
-    | "kita-shiga-komaruyama"
-    | "madarao"
-    | "tangram"
-    | "togari",
+  locationId: string,
   options?: {
     query?: UseQueryOptions<
       Awaited<ReturnType<typeof getLocationWeather>>,
@@ -3844,37 +3720,7 @@ export function useGetLocationWeather<
   TData = Awaited<ReturnType<typeof getLocationWeather>>,
   TError = ErrorType<ErrorResponse>,
 >(
-  locationId:
-    | "thredbo"
-    | "perisher"
-    | "charlottes-pass"
-    | "selwyn"
-    | "jindabyne"
-    | "shiga-sun-valley"
-    | "shiga-maruike"
-    | "shiga-hasuike"
-    | "shiga-giant"
-    | "shiga-hoppo-bunadaira"
-    | "shiga-higashidateyama"
-    | "shiga-nishidateyama"
-    | "shiga-terakoya"
-    | "shiga-takamagahara"
-    | "shiga-tannenomori-okojo"
-    | "shiga-ichinose-family"
-    | "shiga-ichinose-diamond"
-    | "shiga-ichinose-yamanokami"
-    | "shiga-yakebitaiyama"
-    | "shiga-okushiga-kogen"
-    | "shiga-kumanoyu"
-    | "shiga-yokoteyama"
-    | "shiga-shibutoge"
-    | "ryuoo"
-    | "xjam-takaifuji"
-    | "yomase-onsen"
-    | "kita-shiga-komaruyama"
-    | "madarao"
-    | "tangram"
-    | "togari",
+  locationId: string,
   options?: {
     query?: UseQueryOptions<
       Awaited<ReturnType<typeof getLocationWeather>>,

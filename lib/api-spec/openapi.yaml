@@ -934,37 +934,13 @@ paths:
           required: true
           schema:
             type: string
-            enum:
-              - thredbo
-              - perisher
-              - charlottes-pass
-              - selwyn
-              - jindabyne
-              - shiga-sun-valley
-              - shiga-maruike
-              - shiga-hasuike
-              - shiga-giant
-              - shiga-hoppo-bunadaira
-              - shiga-higashidateyama
-              - shiga-nishidateyama
-              - shiga-terakoya
-              - shiga-takamagahara
-              - shiga-tannenomori-okojo
-              - shiga-ichinose-family
-              - shiga-ichinose-diamond
-              - shiga-ichinose-yamanokami
-              - shiga-yakebitaiyama
-              - shiga-okushiga-kogen
-              - shiga-kumanoyu
-              - shiga-yokoteyama
-              - shiga-shibutoge
-              - ryuoo
-              - xjam-takaifuji
-              - yomase-onsen
-              - kita-shiga-komaruyama
-              - madarao
-              - tangram
-              - togari
+            pattern: "^[a-z0-9-]+$"
+            description: |
+              Weather location id (mountain, resort, town, or `<region-id>-roads`).
+              Permissive pattern - the server is the source of truth for which
+              ids resolve. Previously this was a hand-maintained enum that drifted
+              behind the LOCATIONS array (e.g. VHC mountains were missing), forcing
+              consumers to cast. Mirrors the `/webcams/{locationId}` schema.
       responses:
         "200":
           description: Weather data for the location

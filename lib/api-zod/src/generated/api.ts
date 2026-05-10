@@ -1078,39 +1078,12 @@ export const GetWeatherResponse = zod.object({
  * Returns current weather and 7-day forecast for a specific resort location
  * @summary Get weather for a specific location
  */
+export const getLocationWeatherPathLocationIdRegExp = new RegExp(
+  "^[a-z0-9-]+$",
+);
+
 export const GetLocationWeatherParams = zod.object({
-  locationId: zod.enum([
-    "thredbo",
-    "perisher",
-    "charlottes-pass",
-    "selwyn",
-    "jindabyne",
-    "shiga-sun-valley",
-    "shiga-maruike",
-    "shiga-hasuike",
-    "shiga-giant",
-    "shiga-hoppo-bunadaira",
-    "shiga-higashidateyama",
-    "shiga-nishidateyama",
-    "shiga-terakoya",
-    "shiga-takamagahara",
-    "shiga-tannenomori-okojo",
-    "shiga-ichinose-family",
-    "shiga-ichinose-diamond",
-    "shiga-ichinose-yamanokami",
-    "shiga-yakebitaiyama",
-    "shiga-okushiga-kogen",
-    "shiga-kumanoyu",
-    "shiga-yokoteyama",
-    "shiga-shibutoge",
-    "ryuoo",
-    "xjam-takaifuji",
-    "yomase-onsen",
-    "kita-shiga-komaruyama",
-    "madarao",
-    "tangram",
-    "togari",
-  ]),
+  locationId: zod.coerce.string().regex(getLocationWeatherPathLocationIdRegExp),
 });
 
 export const GetLocationWeatherResponse = zod.object({

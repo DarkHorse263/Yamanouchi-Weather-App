@@ -25,7 +25,10 @@ import {
   useLanguage,
   useRegion,
 } from "@workspace/feelzlike-shell";
-import { useGetLocationWeather } from "@workspace/api-client-react";
+import {
+  getGetLocationWeatherQueryKey,
+  useGetLocationWeather,
+} from "@workspace/api-client-react";
 
 /**
  * Region-agnostic mountain weather page.
@@ -49,13 +52,11 @@ export function MountainDetail() {
   const { region } = useRegion();
   const { t } = useLanguage();
 
-  // Cast - the openapi `/weather/{locationId}` enum hasn't been broadened to
-  // include VHC mountain ids yet (it lists snowy + yamanouchi only). The
-  // server already serves all of them; once the spec enum is widened and
-  // codegen is rerun, this cast can drop. Tracking issue: VHC ids missing
-  // from openapi.yaml ~ line 937.
-  const q = useGetLocationWeather(locationId as Parameters<typeof useGetLocationWeather>[0], {
-    query: { enabled: !!locationId },
+  const q = useGetLocationWeather(locationId, {
+    query: {
+      enabled: !!locationId,
+      queryKey: getGetLocationWeatherQueryKey(locationId),
+    },
   });
 
   const backHref = "~/" + region.id;

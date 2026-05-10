@@ -551,9 +551,10 @@ router.get("/weather", async (req, res) => {
 
 router.get("/weather/:locationId", async (req, res) => {
   try {
-    // Allow JP location IDs that aren't in the legacy AU-only enum.
-    // The path parameter is still validated below by checking against LOCATIONS.
-    const locationId = String(req.params.locationId ?? "");
+    // Validate the path-param shape via the generated zod schema (regex
+    // `^[a-z0-9-]+$`). The actual id->location resolution still happens
+    // against LOCATIONS below, which is the source of truth.
+    const { locationId } = GetLocationWeatherParams.parse(req.params);
     const location = LOCATIONS.find(l => l.id === locationId);
 
     if (!location) {
