@@ -14,6 +14,7 @@ import { TownLayout } from "@/layouts/TownLayout";
 import { RegionStub } from "@/pages/region/RegionStub";
 import { RegionStay } from "@/pages/region/RegionStay";
 import { RegionSources } from "@/pages/region/RegionSources";
+import { MountainDetail as GenericMountainDetail } from "@/pages/region/MountainDetail";
 import { snowyMountainsRouter } from "@/regions/snowy-mountains/router";
 import { yamanouchiRouter } from "@/regions/yamanouchi/router";
 // Iiyama temporarily removed - see artifacts/feelzlike/src/regions/index.ts
@@ -69,12 +70,17 @@ export function RegionLayout() {
         <Route path="/mountains/lifts">
           {routes.LiftsAll ? <routes.LiftsAll /> : <RegionStub title="Lifts" titleJa="リフト運行" />}
         </Route>
+        {/* Custom region routers (snowy-mountains, yamanouchi) ship richer
+            mountain pages with lifts/cams/etc. Regions without one (e.g.
+            VHC) fall back to the generic mountain weather page so tapping
+            a mountain row from a town's "Weather in mountains" panel always
+            lands on real conditions instead of a stub. */}
         <Route path="/mountain/:id">
-          {routes.MountainDetail ? <routes.MountainDetail /> : <RegionStub title="Mountain" titleJa="スキー場" />}
+          {routes.MountainDetail ? <routes.MountainDetail /> : <GenericMountainDetail />}
         </Route>
         {/* Legacy URL - keep working during transition */}
         <Route path="/resort/:id">
-          {routes.MountainDetail ? <routes.MountainDetail /> : <RegionStub title="Mountain" titleJa="スキー場" />}
+          {routes.MountainDetail ? <routes.MountainDetail /> : <GenericMountainDetail />}
         </Route>
         {/* /radar folded into /:town/weather (May 2026 v2 reset). Keep the
             URL alive as a redirect so existing bookmarks land on the new
