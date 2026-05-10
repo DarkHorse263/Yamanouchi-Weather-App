@@ -23,6 +23,10 @@ import {
 } from "@/data/transport";
 import { assertProvidersForRegion } from "@/lib/regionGuard";
 import { EmptyStateCard } from "@/components/EmptyStateCard";
+import {
+  RideshareUnavailableNotice,
+  townHasRideshare,
+} from "@/components/RideshareUnavailableNotice";
 
 /**
  * Generic, region-isolated Transport page.
@@ -63,7 +67,14 @@ export function TownTransport() {
         )}
         badge={<LiveBadge tone="onDark" label={t("Curated", "編集済")} />}
       />
-      <div className="mb-8" />
+      <div className="mb-6" />
+
+      {town && !townHasRideshare(town.id) && (
+        <RideshareUnavailableNotice
+          townName={t(town.name, town.nameJa)}
+          t={t}
+        />
+      )}
 
       {providers.length === 0 ? (
         <EmptyStateCard

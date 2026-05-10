@@ -1,6 +1,10 @@
 import { useState } from "react";
-import { useLanguage } from "@workspace/feelzlike-shell";
+import { useLanguage, useBaseTown } from "@workspace/feelzlike-shell";
 import { useSeason } from "@workspace/feelzlike-shell";
+import {
+  RideshareUnavailableNotice,
+  townHasRideshare,
+} from "@/components/RideshareUnavailableNotice";
 import {
   ExternalLink,
   Train,
@@ -150,11 +154,16 @@ function TimetableBlock({
 export default function Transport() {
   const { t } = useLanguage();
   const { isWinter } = useSeason();
+  const { town } = useBaseTown();
+  const showRideshareNotice = !!town && !townHasRideshare(town.id);
+  const rideshareTownName = town
+    ? t(town.name, town.nameJa)
+    : "";
 
   // Green-season transport is a fundamentally different page:
   // mountain shuttles & winter timetables aren't relevant, while car
   // rental, walking the onsen towns and JR options become primary.
-  if (!isWinter) return <GreenTransport t={t} />;
+  if (!isWinter) return <GreenTransport t={t} showRideshareNotice={showRideshareNotice} rideshareTownName={rideshareTownName} />;
 
   return (
     <div className="flex flex-col h-full overflow-y-auto">
@@ -164,6 +173,9 @@ export default function Transport() {
       </div>
 
       <div className="px-4 pb-6 space-y-5 mt-4">
+        {showRideshareNotice && (
+          <RideshareUnavailableNotice townName={rideshareTownName} t={t} />
+        )}
 
         {/* ── SECTION 1: YUDANAKA ↔ SHIGA KOGEN ──
             Reordered May 2026: visitors staying in Yudanaka/Shibu need
@@ -470,7 +482,15 @@ export default function Transport() {
 // All numeric prices/durations are widely-published reference figures -
 // the page warns at the bottom to confirm with the operator.
 // ─────────────────────────────────────────────────────────────────────
-function GreenTransport({ t }: { t: (en: string, ja: string) => string }) {
+function GreenTransport({
+  t,
+  showRideshareNotice,
+  rideshareTownName,
+}: {
+  t: (en: string, ja: string) => string;
+  showRideshareNotice: boolean;
+  rideshareTownName: string;
+}) {
   return (
     <div className="flex flex-col h-full overflow-y-auto">
       <div className="px-4 pt-4 pb-0 shrink-0">
@@ -499,6 +519,9 @@ function GreenTransport({ t }: { t: (en: string, ja: string) => string }) {
       </div>
 
       <div className="px-4 pb-6 space-y-5 mt-4">
+        {showRideshareNotice && (
+          <RideshareUnavailableNotice townName={rideshareTownName} t={t} />
+        )}
 
         {/* ── SECTION 1: TOKYO → YAMANOUCHI ── */}
         <section id="sec-tokyo" className="scroll-mt-4">

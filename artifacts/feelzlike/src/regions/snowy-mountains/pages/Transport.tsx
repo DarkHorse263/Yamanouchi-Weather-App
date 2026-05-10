@@ -21,6 +21,10 @@ import {
 
 import { SNOWY_MOUNTAINS_TRANSPORT } from "@/data/transport/snowy-mountains";
 import type { TransportProvider } from "@/types/transport";
+import {
+  RideshareUnavailableNotice,
+  townHasRideshare,
+} from "@/components/RideshareUnavailableNotice";
 import coomaCoachesLogo from "@assets/CC_-_Colour_JM_Red_1778132452167.png";
 
 const SNOWY_MTNS_BUS_URL = "https://coomacoaches.com.au/snowy-mountains-bus-service/";
@@ -66,6 +70,15 @@ export function SnowyTransport() {
           badge={<LiveBadge tone="onDark" label={t("Curated", "編集済")} />}
         />
       </div>
+
+      {town && !townHasRideshare(town.id) && (
+        <div className="px-4 md:px-10 pt-5">
+          <RideshareUnavailableNotice
+            townName={t(town.name, town.nameJa)}
+            t={t}
+          />
+        </div>
+      )}
 
       {/* Cooma Coaches hero */}
       {cooma && (
