@@ -59,7 +59,7 @@ export function EmptyStateCard({
         <Icon className="w-6 h-6" aria-hidden />
       </div>
 
-      <h2 className="font-display font-semibold text-2xl md:text-[28px] tracking-tight text-foreground mt-5">
+      <h2 className="font-display font-semibold text-2xl md:text-[28px] tracking-tight text-foreground mt-5 [text-wrap:balance]">
         {title}
       </h2>
 
@@ -70,7 +70,7 @@ export function EmptyStateCard({
         </div>
       )}
 
-      <p className="text-muted-foreground mt-4 max-w-md mx-auto leading-relaxed">
+      <p className="text-muted-foreground mt-4 max-w-md mx-auto leading-relaxed [text-wrap:pretty]">
         {body}
       </p>
 
