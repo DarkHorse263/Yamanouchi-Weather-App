@@ -1189,6 +1189,34 @@ export interface LiftStatusResponse {
   lastUpdated: string;
 }
 
+export interface VicEmergencyIncident {
+  id: string;
+  /** VicEmergency category (e.g. "Incident", "Warning", "Burn Area"). */
+  category: string;
+  /** VicEmergency sub-category (e.g. "Tree Down", "Road Crash", "Closure"). */
+  subCategory?: string;
+  status?: string;
+  sourceOrg?: string;
+  name: string;
+  location?: string;
+  description?: string;
+  url?: string;
+  /** Best-guess matched alpine road name (e.g. "Great Alpine Road"). */
+  roadName?: string;
+  /** VHC base town ids whose access roads are affected. */
+  nearbyTownIds?: string[];
+  lat?: number;
+  lng?: number;
+  updated: string;
+}
+
+export interface VicEmergencyResponse {
+  incidents: VicEmergencyIncident[];
+  lastUpdated: string;
+  source: string;
+  sourceUrl: string;
+}
+
 export interface ErrorResponse {
   error: string;
   message: string;
@@ -1708,6 +1736,13 @@ export type GetRoadConditionsParams = {
 
  */
   region?: RegionFilterParameter;
+};
+
+export type GetVicEmergencyIncidentsParams = {
+  /**
+   * Optional VHC base town id to narrow results to roads that serve that town.
+   */
+  town?: string;
 };
 
 export type GetLiftStatusParams = {

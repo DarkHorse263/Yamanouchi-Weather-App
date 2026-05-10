@@ -1066,6 +1066,36 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+  /vic-emergency-incidents:
+    get:
+      operationId: getVicEmergencyIncidents
+      tags: [roads]
+      summary: Get live VicEmergency incidents on Victoria's High Country alpine roads
+      description: |
+        Fetches active VicEmergency incidents and warnings (closures, crashes,
+        tree-down, fires) and filters them to the alpine road corridors that
+        serve Victoria's High Country base towns. No upstream API key required.
+        Cached server-side for 3 minutes.
+      parameters:
+        - name: town
+          in: query
+          required: false
+          description: Optional VHC base town id to narrow results to roads that serve that town.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: VicEmergency incidents on alpine roads
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VicEmergencyResponse"
+        "502":
+          description: Upstream feed unavailable
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
   /lift-status:
     get:
       operationId: getLiftStatus
@@ -2882,6 +2912,66 @@ components:
       required:
         - resorts
         - lastUpdated
+    VicEmergencyIncident:
+      type: object
+      properties:
+        id:
+          type: string
+        category:
+          type: string
+          description: VicEmergency category (e.g. "Incident", "Warning", "Burn Area").
+        subCategory:
+          type: string
+          description: VicEmergency sub-category (e.g. "Tree Down", "Road Crash", "Closure").
+        status:
+          type: string
+        sourceOrg:
+          type: string
+        name:
+          type: string
+        location:
+          type: string
+        description:
+          type: string
+        url:
+          type: string
+        roadName:
+          type: string
+          description: Best-guess matched alpine road name (e.g. "Great Alpine Road").
+        nearbyTownIds:
+          type: array
+          items:
+            type: string
+          description: VHC base town ids whose access roads are affected.
+        lat:
+          type: number
+        lng:
+          type: number
+        updated:
+          type: string
+      required:
+        - id
+        - category
+        - name
+        - updated
+    VicEmergencyResponse:
+      type: object
+      properties:
+        incidents:
+          type: array
+          items:
+            $ref: "#/components/schemas/VicEmergencyIncident"
+        lastUpdated:
+          type: string
+        source:
+          type: string
+        sourceUrl:
+          type: string
+      required:
+        - incidents
+        - lastUpdated
+        - source
+        - sourceUrl
     ErrorResponse:
       type: object
       properties:

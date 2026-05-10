@@ -1,9 +1,28 @@
 import { motion } from "framer-motion";
 import { useMemo, useState } from "react";
-import { useGetRoadConditions, useGetWebcams } from "@workspace/api-client-react";
-import { AlertTriangle, Camera, Car, ExternalLink, MapPin, Navigation, Construction } from "lucide-react";
+import {
+  useGetRoadConditions,
+  useGetWebcams,
+  useGetVicEmergencyIncidents,
+  getGetVicEmergencyIncidentsQueryKey,
+  type VicEmergencyResponse,
+  type VicEmergencyIncident,
+} from "@workspace/api-client-react";
+import {
+  AlertTriangle,
+  Camera,
+  Car,
+  ExternalLink,
+  MapPin,
+  Navigation,
+  Construction,
+  Flame,
+  CloudRain,
+  Mountain,
+} from "lucide-react";
 import { useRegion, useLanguage, useBaseTown, LiveBadge, UpdateStamp, PageHeader } from "@workspace/feelzlike-shell";
 import { EmptyStateCard } from "@/components/EmptyStateCard";
+import { getVhcCamsForTown } from "@/data/cams/victorias-high-country";
 
 function statusClasses(c: string): string {
   switch (c) {
@@ -92,6 +111,25 @@ export function TownRoads() {
     return camsQuery.data?.locations.find((l) => l.locationId === `${region.id}-roads`)?.webcamPageUrl;
   }, [camsQuery.data, region.id]);
 
+  // ── Victoria's High Country live alerts ───────────────────────────────
+  // VicTraffic has no public per-camera API and doesn't cover the alpine
+  // routes. VicEmergency is the only free, keyless feed for closures,
+  // crashes, tree-down and fires on the Great Alpine Road etc. We pull it
+  // server-side (cached 3 min) and narrow to roads serving this town.
+  const isVhc = region.id === "victorias-high-country";
+  const vicEmergencyParams = town ? { town: town.id } : undefined;
+  const vicEmergencyQuery = useGetVicEmergencyIncidents(vicEmergencyParams, {
+    query: {
+      queryKey: getGetVicEmergencyIncidentsQueryKey(vicEmergencyParams),
+      enabled: isVhc && !!town,
+      refetchInterval: 3 * 60_000,
+    },
+  });
+  const vhcResortCams = useMemo(
+    () => (isVhc && town ? getVhcCamsForTown(town.nearbyMountainIds) : []),
+    [isVhc, town],
+  );
+
   const roads = useMemo(() => {
     if (!query.data || !town) return [];
     const regionIds = new Set(region.mountains?.map((m) => m.id) ?? []);
@@ -138,6 +176,18 @@ export function TownRoads() {
         }
       />
       <div className="mb-8" />
+
+      {/* ── VHC live alerts section ─────────────────────────────────────
+          Surfaced above the static "data coming soon" card because it IS
+          live data, even though the per-road conditions table isn't wired
+          up for VHC yet. Source: VicEmergency (incidents + warnings). */}
+      {isVhc && town && (
+        <VhcAlertsSection
+          query={vicEmergencyQuery}
+          townName={t(town.name, town.nameJa)}
+          t={t}
+        />
+      )}
 
       {!dataAvailable && (
         <EmptyStateCard
@@ -236,6 +286,66 @@ export function TownRoads() {
             `${town ? t(town.name, town.nameJa) : "この町"}に該当する道路情報は現在ありません - 朗報です。冬季は状況が急変するため、出発前に再度ご確認ください。`,
           )}
         />
+      )}
+
+      {/* ── VHC resort snowcam deep-links ────────────────────────────────
+          We deep-link to each operator's official cam page rather than
+          mirror their image URLs (which rotate per season). One card per
+          mountain that this town serves. */}
+      {isVhc && vhcResortCams.length > 0 && (
+        <motion.section
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="mt-12"
+        >
+          <div className="mb-4">
+            <h2 className="font-display font-semibold text-2xl text-foreground inline-flex items-center gap-2">
+              <Mountain className="w-5 h-5 text-primary" />
+              {t("Resort snowcams", "リゾートライブカメラ")}
+            </h2>
+            <p className="text-sm text-muted-foreground mt-1">
+              {t(
+                `Live cams from the resorts ${town?.name ?? "this town"} serves. Each link opens the operator's official cam page.`,
+                `${town ? t(town.name, town.nameJa) : "この町"}が拠点となるリゾートのライブカメラ。各リンクは運営公式ページを開きます。`,
+              )}
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {vhcResortCams.map((cam) => (
+              <a
+                key={cam.mountainId}
+                href={cam.pageUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-2xl border border-border bg-white p-5 hover:border-primary/40 hover:shadow-md transition-all flex flex-col"
+              >
+                <div className="flex items-start gap-3">
+                  <div className="shrink-0 w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+                    <Camera className="w-5 h-5" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-display font-semibold text-base text-foreground leading-tight">
+                      {cam.resortName}
+                    </h3>
+                    {cam.cameraNote && (
+                      <p className="text-[11px] uppercase tracking-wider text-muted-foreground mt-0.5">
+                        {cam.cameraNote}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
+                  {cam.blurb}
+                </p>
+                <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-primary">
+                  {t("Open live cams", "ライブカメラを開く")}
+                  <ExternalLink className="w-3 h-3" />
+                </span>
+              </a>
+            ))}
+          </div>
+        </motion.section>
       )}
 
       {roadCams.length > 0 && (
@@ -337,6 +447,213 @@ export function TownRoads() {
       )}
     </div>
   );
+}
+
+// ── VHC live alerts section ─────────────────────────────────────────────
+// Pulled from VicEmergency (incidents + warnings feeds), filtered server-side
+// to alpine road corridors then narrowed to roads serving this town.
+
+function incidentIcon(category: string, subCategory: string | undefined) {
+  const c = `${category} ${subCategory ?? ""}`.toLowerCase();
+  if (/fire|burn|bushfire|grass/.test(c)) return Flame;
+  if (/storm|wind|rain|flood|weather|hail/.test(c)) return CloudRain;
+  if (/road|crash|tree|closure|hazard/.test(c)) return AlertTriangle;
+  return AlertTriangle;
+}
+
+function incidentToneClasses(category: string, subCategory: string | undefined) {
+  const c = `${category} ${subCategory ?? ""}`.toLowerCase();
+  if (/fire|burn|bushfire/.test(c))
+    return "border-red-200 bg-red-50/60 text-red-900";
+  if (/storm|wind|flood|weather/.test(c))
+    return "border-sky-200 bg-sky-50/60 text-sky-900";
+  if (/warning/.test(category.toLowerCase()))
+    return "border-amber-200 bg-amber-50/60 text-amber-900";
+  return "border-orange-200 bg-orange-50/60 text-orange-900";
+}
+
+function formatRelative(iso: string, t: (en: string, ja?: string) => string): string {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return iso;
+  const diffMs = Date.now() - d.getTime();
+  const m = Math.round(diffMs / 60_000);
+  if (m < 1) return t("just now", "たった今");
+  if (m < 60) return t(`${m} min ago`, `${m}分前`);
+  const h = Math.round(m / 60);
+  if (h < 24) return t(`${h} hr ago`, `${h}時間前`);
+  const days = Math.round(h / 24);
+  return t(`${days} d ago`, `${days}日前`);
+}
+
+function VhcAlertsSection({
+  query,
+  townName,
+  t,
+}: {
+  query: {
+    data?: VicEmergencyResponse;
+    isLoading: boolean;
+    isError: boolean;
+  };
+  townName: string;
+  t: (en: string, ja?: string) => string;
+}) {
+  const { data, isLoading, isError } = query;
+
+  return (
+    <motion.section
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.05 }}
+      className="mb-8"
+    >
+      <div className="flex items-end justify-between mb-3 flex-wrap gap-2">
+        <div>
+          <h2 className="font-display font-semibold text-2xl text-foreground inline-flex items-center gap-2">
+            <AlertTriangle className="w-5 h-5 text-primary" />
+            {t("Live alerts on alpine roads", "アルパイン道路のライブ警報")}
+          </h2>
+          <p className="text-sm text-muted-foreground mt-1">
+            {t(
+              `Active VicEmergency incidents and warnings on the access roads to ${townName}.`,
+              `${townName}へのアクセス道路に関するVicEmergencyの現在の警報・注意報。`,
+            )}
+          </p>
+        </div>
+        {data && (
+          <a
+            href={data.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs font-semibold text-primary hover:underline inline-flex items-center gap-1"
+          >
+            {t("VicEmergency", "VicEmergency")}
+            <ExternalLink className="w-3 h-3" />
+          </a>
+        )}
+      </div>
+
+      {isLoading && (
+        <div className="rounded-2xl border border-border bg-white p-5">
+          <div className="h-4 w-1/3 rounded bg-secondary animate-pulse" />
+          <div className="h-3 w-2/3 rounded bg-secondary animate-pulse mt-3" />
+        </div>
+      )}
+
+      {isError && (
+        <div className="rounded-2xl border border-border bg-white p-5">
+          <p className="text-sm text-foreground">
+            {t(
+              "Couldn't reach VicEmergency right now. Try again in a few minutes.",
+              "VicEmergencyに接続できませんでした。しばらくしてから再度お試しください。",
+            )}
+          </p>
+        </div>
+      )}
+
+      {!isLoading && !isError && data && data.incidents.length === 0 && (
+        <div className="rounded-2xl border border-emerald-200 bg-emerald-50/60 p-5">
+          <p className="text-sm text-emerald-900 inline-flex items-center gap-2">
+            <Car className="w-4 h-4" />
+            {t(
+              `No active alpine-road alerts near ${townName}.`,
+              `${townName}付近のアルパイン道路に現在の警報はありません。`,
+            )}
+          </p>
+          <p className="text-xs text-emerald-800/70 mt-1.5">
+            {t(
+              "Conditions can change quickly - refresh before you head out.",
+              "状況は急変することがあります。出発前に再度確認してください。",
+            )}
+          </p>
+        </div>
+      )}
+
+      {!isLoading && !isError && data && data.incidents.length > 0 && (
+        <div className="grid gap-3">
+          {data.incidents.map((inc: VicEmergencyIncident, idx: number) => {
+            const Icon = incidentIcon(inc.category, inc.subCategory);
+            const tone = incidentToneClasses(inc.category, inc.subCategory);
+            return (
+              <motion.article
+                key={inc.id}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.04 }}
+                className={`rounded-2xl border p-4 ${tone}`}
+              >
+                <div className="flex items-start gap-3">
+                  <div className="shrink-0 mt-0.5">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/70 border border-current/20">
+                        {inc.category}
+                        {inc.subCategory ? ` · ${inc.subCategory}` : ""}
+                      </span>
+                      {inc.status && (
+                        <span className="text-[10px] font-semibold uppercase tracking-wider opacity-70">
+                          {inc.status}
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="font-display font-semibold text-base mt-1.5 leading-tight">
+                      {inc.roadName ?? toTitleCaseSafe(inc.name)}
+                    </h3>
+                    {(inc.location || inc.roadName) && inc.name && (
+                      <p className="text-xs opacity-80 mt-0.5">
+                        {[inc.location, inc.roadName ? toTitleCaseSafe(inc.name) : null]
+                          .filter(Boolean)
+                          .join(" · ")}
+                      </p>
+                    )}
+                    {inc.description && (
+                      <p className="text-xs opacity-90 mt-2 leading-relaxed">
+                        {inc.description}
+                      </p>
+                    )}
+                    <div className="flex items-center gap-3 mt-2.5 text-[11px] opacity-70 flex-wrap">
+                      <span>{formatRelative(inc.updated, t)}</span>
+                      {inc.sourceOrg && <span>· {inc.sourceOrg}</span>}
+                      {typeof inc.lat === "number" && typeof inc.lng === "number" && (
+                        <a
+                          href={`https://www.google.com/maps/search/?api=1&query=${inc.lat},${inc.lng}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:underline inline-flex items-center gap-0.5"
+                        >
+                          <MapPin className="w-3 h-3" />
+                          {t("on map", "地図")}
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </motion.article>
+            );
+          })}
+        </div>
+      )}
+
+      {data && (
+        <p className="text-[11px] text-muted-foreground/70 mt-3">
+          {t("Source", "情報源")}: {data.source}
+        </p>
+      )}
+    </motion.section>
+  );
+}
+
+function toTitleCaseSafe(s: string): string {
+  if (!s) return s;
+  // EMV uses ALL CAPS for street names; convert to Title Case for display.
+  if (s !== s.toUpperCase()) return s;
+  return s
+    .toLowerCase()
+    .split(/\s+/)
+    .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w))
+    .join(" ");
 }
 
 function RoadsSkeleton() {

@@ -48,6 +48,7 @@ import type {
   GetLiftStatusParams,
   GetPowderAlertsParams,
   GetRoadConditionsParams,
+  GetVicEmergencyIncidentsParams,
   GetWeatherParams,
   GetWebcamsParams,
   HealthStatus,
@@ -77,6 +78,7 @@ import type {
   VerifyAlertSubscriptionParams,
   VerifyNewsletterSubscriptionParams,
   VerifyResponse,
+  VicEmergencyResponse,
   WeatherResponse,
   WebcamResponse,
 } from "./api.schemas";
@@ -4242,6 +4244,114 @@ export function useGetRoadConditions<
   },
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetRoadConditionsQueryOptions(params, options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * Fetches active VicEmergency incidents and warnings (closures, crashes,
+tree-down, fires) and filters them to the alpine road corridors that
+serve Victoria's High Country base towns. No upstream API key required.
+Cached server-side for 3 minutes.
+
+ * @summary Get live VicEmergency incidents on Victoria's High Country alpine roads
+ */
+export const getGetVicEmergencyIncidentsUrl = (
+  params?: GetVicEmergencyIncidentsParams,
+) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? "null" : value.toString());
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0
+    ? `/api/vic-emergency-incidents?${stringifiedParams}`
+    : `/api/vic-emergency-incidents`;
+};
+
+export const getVicEmergencyIncidents = async (
+  params?: GetVicEmergencyIncidentsParams,
+  options?: RequestInit,
+): Promise<VicEmergencyResponse> => {
+  return customFetch<VicEmergencyResponse>(
+    getGetVicEmergencyIncidentsUrl(params),
+    {
+      ...options,
+      method: "GET",
+    },
+  );
+};
+
+export const getGetVicEmergencyIncidentsQueryKey = (
+  params?: GetVicEmergencyIncidentsParams,
+) => {
+  return [`/api/vic-emergency-incidents`, ...(params ? [params] : [])] as const;
+};
+
+export const getGetVicEmergencyIncidentsQueryOptions = <
+  TData = Awaited<ReturnType<typeof getVicEmergencyIncidents>>,
+  TError = ErrorType<ErrorResponse>,
+>(
+  params?: GetVicEmergencyIncidentsParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getVicEmergencyIncidents>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getGetVicEmergencyIncidentsQueryKey(params);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof getVicEmergencyIncidents>>
+  > = ({ signal }) =>
+    getVicEmergencyIncidents(params, { signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getVicEmergencyIncidents>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetVicEmergencyIncidentsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getVicEmergencyIncidents>>
+>;
+export type GetVicEmergencyIncidentsQueryError = ErrorType<ErrorResponse>;
+
+/**
+ * @summary Get live VicEmergency incidents on Victoria's High Country alpine roads
+ */
+
+export function useGetVicEmergencyIncidents<
+  TData = Awaited<ReturnType<typeof getVicEmergencyIncidents>>,
+  TError = ErrorType<ErrorResponse>,
+>(
+  params?: GetVicEmergencyIncidentsParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getVicEmergencyIncidents>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetVicEmergencyIncidentsQueryOptions(params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
     queryKey: QueryKey;

@@ -1375,6 +1375,64 @@ export const GetRoadConditionsResponse = zod.object({
 });
 
 /**
+ * Fetches active VicEmergency incidents and warnings (closures, crashes,
+tree-down, fires) and filters them to the alpine road corridors that
+serve Victoria's High Country base towns. No upstream API key required.
+Cached server-side for 3 minutes.
+
+ * @summary Get live VicEmergency incidents on Victoria's High Country alpine roads
+ */
+export const GetVicEmergencyIncidentsQueryParams = zod.object({
+  town: zod.coerce
+    .string()
+    .optional()
+    .describe(
+      "Optional VHC base town id to narrow results to roads that serve that town.",
+    ),
+});
+
+export const GetVicEmergencyIncidentsResponse = zod.object({
+  incidents: zod.array(
+    zod.object({
+      id: zod.string(),
+      category: zod
+        .string()
+        .describe(
+          'VicEmergency category (e.g. \"Incident\", \"Warning\", \"Burn Area\").',
+        ),
+      subCategory: zod
+        .string()
+        .optional()
+        .describe(
+          'VicEmergency sub-category (e.g. \"Tree Down\", \"Road Crash\", \"Closure\").',
+        ),
+      status: zod.string().optional(),
+      sourceOrg: zod.string().optional(),
+      name: zod.string(),
+      location: zod.string().optional(),
+      description: zod.string().optional(),
+      url: zod.string().optional(),
+      roadName: zod
+        .string()
+        .optional()
+        .describe(
+          'Best-guess matched alpine road name (e.g. \"Great Alpine Road\").',
+        ),
+      nearbyTownIds: zod
+        .array(zod.string())
+        .optional()
+        .describe("VHC base town ids whose access roads are affected."),
+      lat: zod.number().optional(),
+      lng: zod.number().optional(),
+      updated: zod.string(),
+    }),
+  ),
+  lastUpdated: zod.string(),
+  source: zod.string(),
+  sourceUrl: zod.string(),
+});
+
+/**
  * Returns current lift operating status. Currently covers Thredbo, Perisher, Charlotte's Pass and Selwyn (Snowy Mountains).
  * @summary Get lift status for all resorts
  */
