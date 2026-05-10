@@ -18,11 +18,9 @@ import {
   Construction,
   Flame,
   CloudRain,
-  Mountain,
 } from "lucide-react";
 import { useRegion, useLanguage, useBaseTown, LiveBadge, UpdateStamp, PageHeader } from "@workspace/feelzlike-shell";
 import { EmptyStateCard } from "@/components/EmptyStateCard";
-import { getVhcCamsForTown } from "@/data/cams/victorias-high-country";
 
 function statusClasses(c: string): string {
   switch (c) {
@@ -125,11 +123,6 @@ export function TownRoads() {
       refetchInterval: 3 * 60_000,
     },
   });
-  const vhcResortCams = useMemo(
-    () => (isVhc && town ? getVhcCamsForTown(town.nearbyMountainIds) : []),
-    [isVhc, town],
-  );
-
   const roads = useMemo(() => {
     if (!query.data || !town) return [];
     const regionIds = new Set(region.mountains?.map((m) => m.id) ?? []);
@@ -189,7 +182,30 @@ export function TownRoads() {
         />
       )}
 
-      {!dataAvailable && (
+      {!dataAvailable && isVhc && (
+        <EmptyStateCard
+          icon={Camera}
+          title={t(
+            "No live road cameras in the High Country",
+            "ハイカントリーにはライブ道路カメラがありません",
+          )}
+          body={t(
+            "VicRoads and VicTraffic don't operate any live cameras on the alpine roads up here. The live alerts above (from VicEmergency) are the most current view of closures, fires and hazards on these routes.",
+            "VicRoadsとVicTrafficはこの一帯のアルパイン道路にライブカメラを設置していません。上記のライブ警報（VicEmergency）が、これらのルートの通行止め・火災・危険に関する最新情報です。",
+          )}
+          ctaLabel={
+            region.roadsSource
+              ? t(
+                  region.roadsSource.label,
+                  region.roadsSource.labelJa ?? region.roadsSource.label,
+                )
+              : undefined
+          }
+          ctaHref={region.roadsSource?.url}
+        />
+      )}
+
+      {!dataAvailable && !isVhc && (
         <EmptyStateCard
           icon={Construction}
           title={t("Live road data coming soon", "道路情報は近日公開")}
@@ -286,66 +302,6 @@ export function TownRoads() {
             `${town ? t(town.name, town.nameJa) : "この町"}に該当する道路情報は現在ありません - 朗報です。冬季は状況が急変するため、出発前に再度ご確認ください。`,
           )}
         />
-      )}
-
-      {/* ── VHC resort snowcam deep-links ────────────────────────────────
-          We deep-link to each operator's official cam page rather than
-          mirror their image URLs (which rotate per season). One card per
-          mountain that this town serves. */}
-      {isVhc && vhcResortCams.length > 0 && (
-        <motion.section
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="mt-12"
-        >
-          <div className="mb-4">
-            <h2 className="font-display font-semibold text-2xl text-foreground inline-flex items-center gap-2">
-              <Mountain className="w-5 h-5 text-primary" />
-              {t("Resort snowcams", "リゾートライブカメラ")}
-            </h2>
-            <p className="text-sm text-muted-foreground mt-1">
-              {t(
-                `Live cams from the resorts ${town?.name ?? "this town"} serves. Each link opens the operator's official cam page.`,
-                `${town ? t(town.name, town.nameJa) : "この町"}が拠点となるリゾートのライブカメラ。各リンクは運営公式ページを開きます。`,
-              )}
-            </p>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {vhcResortCams.map((cam) => (
-              <a
-                key={cam.mountainId}
-                href={cam.pageUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-2xl border border-border bg-white p-5 hover:border-primary/40 hover:shadow-md transition-all flex flex-col"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="shrink-0 w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
-                    <Camera className="w-5 h-5" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <h3 className="font-display font-semibold text-base text-foreground leading-tight">
-                      {cam.resortName}
-                    </h3>
-                    {cam.cameraNote && (
-                      <p className="text-[11px] uppercase tracking-wider text-muted-foreground mt-0.5">
-                        {cam.cameraNote}
-                      </p>
-                    )}
-                  </div>
-                </div>
-                <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
-                  {cam.blurb}
-                </p>
-                <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-primary">
-                  {t("Open live cams", "ライブカメラを開く")}
-                  <ExternalLink className="w-3 h-3" />
-                </span>
-              </a>
-            ))}
-          </div>
-        </motion.section>
       )}
 
       {roadCams.length > 0 && (
