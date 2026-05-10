@@ -86,11 +86,13 @@ interface RegionsResponse {
 
 // ─── helpers ───────────────────────────────────────
 
-// Iiyama is temporarily hidden while we focus on shipping Snowy Mountains
-// and Yamanouchi to v1.0 - keep the line ready to re-paste below the
-// yamanouchi entry when re-enabling.
+// Used when /api/regions is loading/failing - keep this in sync with the
+// live region set in `regions/index.ts` and `api-server/src/routes/regions.ts`
+// or Australia's region count will silently undercount on cold loads /
+// flaky mobile connections. Iiyama stays out until it's re-enabled.
 const FALLBACK_REGIONS: Region[] = [
   { id: "snowy-mountains", name: "Snowy Mountains", country: "Australia", countryCode: "AU", region: "New South Wales", status: "live", href: "/snowy-mountains/", baseTowns: ["Jindabyne", "Berridale", "Cooma"], mountains: ["Perisher", "Thredbo", "Selwyn", "Charlotte's Pass"], headlineLabel: "Jindabyne", headline: null },
+  { id: "victorias-high-country", name: "Victoria's High Country", country: "Australia", countryCode: "AU", region: "Victoria", status: "live", href: "/victorias-high-country/", baseTowns: ["Mansfield", "Bright", "Mount Beauty", "Harrietville", "Dinner Plain", "Marysville", "Warburton"], mountains: ["Mt Buller", "Mt Stirling", "Falls Creek", "Mt Hotham", "Mt Donna Buang", "Lake Mountain"], headlineLabel: "Bright", headline: null },
   { id: "yamanouchi", name: "Yamanouchi Town", country: "Japan", countryCode: "JP", region: "Nagano", status: "live", href: "/yamanouchi/", baseTowns: ["Yudanaka", "Shibu Onsen", "Yomase"], mountains: ["Yakebitaiyama", "Okushiga", "Yokoteyama", "Ryuoo", "X-Jam", "Yomase"], headlineLabel: "Yakebitaiyama", headline: null },
 ];
 

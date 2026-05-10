@@ -20,7 +20,12 @@
  * No build step — this file ships as-is from /public.
  */
 
-const CACHE_VERSION = "v6";
+// Bump this on any deploy that introduces a new region, route or asset
+// shape - the activate handler nukes any cache whose name doesn't match
+// the new version, forcing installed PWAs to re-fetch /api/regions and
+// the HTML shell instead of serving the previous deploy's cached copy.
+// v7: adds Victoria's High Country to the live region set.
+const CACHE_VERSION = "v7";
 const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
 const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;
