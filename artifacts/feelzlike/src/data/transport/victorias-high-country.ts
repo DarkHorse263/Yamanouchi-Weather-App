@@ -78,4 +78,48 @@ export const VICTORIAS_HIGH_COUNTRY_TRANSPORT: TransportProviderList = [
       "North East Victoria coach charter and private group transfers to Mt Hotham, Falls Creek and the broader High Country.",
     regions: ["victorias-high-country"],
   },
+  {
+    id: "au-mansfield-taxis",
+    name: "Mansfield Taxis",
+    type: "taxi",
+    operator: "Mansfield Taxis",
+    phone: "0408 579 268",
+    website: null,
+    route_summary:
+      "Local taxi based at 137 High St, Mansfield. Useful for last-mile transfers to accommodation, dinner runs and Mt Buller connections in winter.",
+    regions: ["victorias-high-country"],
+  },
+  {
+    id: "au-bright-taxi-service",
+    name: "Bright Taxi Service",
+    type: "taxi",
+    operator: "Bright Taxi Service (Porepunkah)",
+    phone: "0423 015 152",
+    website: null,
+    route_summary:
+      "24/7 local taxi covering Bright, Porepunkah and the Ovens Valley. Handy for airport pickups from Wangaratta and last-mile from Bright into the surrounding base towns.",
+    regions: ["victorias-high-country"],
+  },
+  {
+    id: "au-mt-beauty-taxi-transfers",
+    name: "Mt Beauty Taxi & Transfers",
+    type: "taxi",
+    operator: "Mt Beauty Taxi & Transfers",
+    phone: "0409 573 909",
+    website: null,
+    route_summary:
+      "Mt Beauty-based taxi and pre-booked transfers servicing Falls Creek, Mt Hotham, Bright, Albury/Wodonga and the Kiewa Valley. Snow, hike and bike transfers in season.",
+    regions: ["victorias-high-country"],
+  },
+  {
+    id: "au-snow-taxi",
+    name: "Snow Taxi",
+    type: "taxi",
+    operator: "Snow Taxi",
+    phone: null,
+    website: "https://snowtaxi.au",
+    route_summary:
+      "Pre-booked alpine taxi for door-to-door transfers between Harrietville, Mt Hotham and Dinner Plain. Tracked vehicles, driver allocation and ride-share option.",
+    regions: ["victorias-high-country"],
+  },
 ];
