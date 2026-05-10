@@ -86,4 +86,6 @@ export interface MountainTags {
   kids_lessons?: boolean;
   terrain_park?: boolean;
   backcountry_access?: boolean;
+  snow_play_only?: boolean;
+  nordic_focus?: boolean;
 }

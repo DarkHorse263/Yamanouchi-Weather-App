@@ -15,5 +15,6 @@ export type RegionId = (typeof RegionId)[keyof typeof RegionId];
 
 export const RegionId = {
   "snowy-mountains": "snowy-mountains",
+  "victorias-high-country": "victorias-high-country",
   yamanouchi: "yamanouchi",
 } as const;

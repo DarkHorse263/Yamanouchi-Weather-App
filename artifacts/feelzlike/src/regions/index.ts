@@ -1,6 +1,7 @@
 import type { RegionConfig } from "@workspace/feelzlike-shell";
 import { snowyMountainsRegion } from "./snowy-mountains";
 import { yamanouchiRegion } from "./yamanouchi";
+import { victoriasHighCountryRegion } from "./victorias-high-country";
 
 // Iiyama is temporarily removed from the active region set while we focus on
 // shipping Snowy Mountains and Yamanouchi to v1.0. Source files for the
@@ -9,6 +10,7 @@ import { yamanouchiRegion } from "./yamanouchi";
 // matching imports in `layouts/RegionLayout.tsx` and `layouts/TownLayout.tsx`.
 export const REGIONS: RegionConfig[] = [
   snowyMountainsRegion,
+  victoriasHighCountryRegion,
   yamanouchiRegion,
 ];
 

@@ -64,6 +64,25 @@ const REGIONS: RegionConfig[] = [
     timezone: "Asia/Tokyo",
     sourceLabel: "JMA Seamless",
   },
+  {
+    id: "victorias-high-country",
+    name: "Victoria's High Country",
+    country: "Australia",
+    countryCode: "AU",
+    region: "Victoria",
+    status: "live",
+    href: "/victorias-high-country/",
+    baseTowns: ["Mansfield", "Bright", "Mount Beauty", "Harrietville", "Dinner Plain", "Marysville", "Warburton"],
+    mountains: ["Mt Buller", "Falls Creek", "Mt Hotham", "Mt Stirling", "Lake Mountain", "Mt Donna Buang"],
+    // Headline reading is for the primary base town (Mansfield, ~320m) -
+    // the cattle country gateway to Buller & Stirling. Per-mountain peak
+    // forecasts live on the dedicated region page.
+    headlineLabel: "Mansfield",
+    lat: -37.0539,
+    lon: 146.0894,
+    timezone: "Australia/Melbourne",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
   // Iiyama temporarily removed - see artifacts/api-server/src/lib/regions.ts
 ];
 

@@ -8,6 +8,7 @@ export const snowyMountainsRegion: RegionConfig = {
   shortTag: "NSW",
   brand: { wordmarkUrl: wordmark },
   seasons: true,
+  hemisphere: "south",
   // Curated display order across the app (May 2026): Perisher and Thredbo
   // are the two flagship day-tripper resorts and always lead. Selwyn is the
   // family-beginner mountain. Charlotte's Pass is listed last because it's

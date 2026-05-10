@@ -41,6 +41,7 @@ const REGION_ANCHORS: Record<RegionId, {
   displayName: string;
 }> = {
   "snowy-mountains": { lat: -36.45, lon: 148.32, elevation: 1700, region: "AU", displayName: "Snowy Mountains" },
+  "victorias-high-country": { lat: -36.9779, lon: 147.1361, elevation: 1862, region: "AU", displayName: "Victoria's High Country" },
   "yamanouchi": { lat: 36.738, lon: 138.508, elevation: 1500, region: "JP", displayName: "Yamanouchi" },
 };
 

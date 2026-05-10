@@ -9,7 +9,7 @@
 // iiyama LOCATIONS in `routes/weather.ts`, the iiyama-roads webcam entry,
 // the iiyama enum value in `lib/api-spec/openapi.yaml`, and the LOCATION_TO_REGION
 // mappings below.
-export const REGION_IDS = ["snowy-mountains", "yamanouchi"] as const;
+export const REGION_IDS = ["snowy-mountains", "victorias-high-country", "yamanouchi"] as const;
 export type RegionId = (typeof REGION_IDS)[number];
 
 export function isRegionId(value: unknown): value is RegionId {
@@ -28,6 +28,22 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "jindabyne": "snowy-mountains",
   "selwyn": "snowy-mountains",
   "snowy-mountains-roads": "snowy-mountains",
+
+  // Victoria's High Country, AU - 6 mountains across 7 base towns.
+  "mt-buller": "victorias-high-country",
+  "mt-stirling": "victorias-high-country",
+  "falls-creek": "victorias-high-country",
+  "mt-hotham": "victorias-high-country",
+  "lake-mountain": "victorias-high-country",
+  "mt-donna-buang": "victorias-high-country",
+  "mansfield": "victorias-high-country",
+  "bright": "victorias-high-country",
+  "mount-beauty": "victorias-high-country",
+  "harrietville": "victorias-high-country",
+  "dinner-plain": "victorias-high-country",
+  "marysville": "victorias-high-country",
+  "warburton": "victorias-high-country",
+  "victorias-high-country-roads": "victorias-high-country",
 
   // Yamanouchi, JP - 22 mountains: 18 Shiga Kogen sub-areas + 4 Kita-Shiga resorts.
   "shiga-sun-valley": "yamanouchi",

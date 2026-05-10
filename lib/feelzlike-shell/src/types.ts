@@ -52,6 +52,12 @@ export interface MountainLink {
   terrain_park?: boolean;
   /** True if the mountain has lift-served side-country / gated backcountry. */
   backcountry_access?: boolean;
+  /** True if the mountain is primarily a snow play / tobogganing area
+   *  (no chairlift downhill skiing). E.g. Lake Mountain, Mt Donna Buang. */
+  snow_play_only?: boolean;
+  /** True if the mountain's main offering is cross-country / nordic skiing
+   *  rather than alpine downhill. E.g. Mt Stirling, Lake Mountain. */
+  nordic_focus?: boolean;
 }
 
 /** Scope a NavItem belongs to. Determines which sidebar section renders it. */
@@ -152,6 +158,12 @@ export interface RegionConfig {
   language?: RegionLanguagePack;
   /** Whether the region supports the winter↔green toggle in chrome */
   seasons?: boolean;
+  /**
+   * Earth hemisphere the region sits in. Drives season auto-detection
+   * (south → Jun-Sep is winter; north → Dec-Mar is winter). Defaults to
+   * "north" when omitted, so AU regions MUST set this explicitly.
+   */
+  hemisphere?: "north" | "south";
   /** Base towns where guests typically stay. First entry is the default. */
   baseTowns?: BaseTown[];
   /** Optional version/footer string */

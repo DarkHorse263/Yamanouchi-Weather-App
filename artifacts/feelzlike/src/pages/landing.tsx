@@ -238,7 +238,7 @@ export default function Landing() {
     >
       <PageMeta
         title="feelzlike - mountain weather you can trust"
-        description="Real-time alpine weather, lift status, road conditions and live cams across the Snowy Mountains and Yamanouchi. Curated stays and eats from people who actually live there."
+        description="Real-time alpine weather, lift status, road conditions and live cams across the Snowy Mountains, Victoria's High Country and Yamanouchi. Curated stays and eats from people who actually live there."
         path="/"
         jsonLd={[websiteSchema(), organizationSchema()]}
       />

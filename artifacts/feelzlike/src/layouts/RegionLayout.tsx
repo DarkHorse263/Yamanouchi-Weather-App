@@ -51,7 +51,7 @@ export function RegionLayout() {
 
   if (!region) return <Redirect to="/" />;
 
-  const hemisphere = region.id === "snowy-mountains" ? "south" : "north";
+  const hemisphere = region.hemisphere ?? "north";
   const routes: RegionRouter = REGION_ROUTERS[region.id] ?? {};
   // Default landing town for the region - first entry of baseTowns. Removes
   // the old "Region Overview" splash page and drops users straight into the

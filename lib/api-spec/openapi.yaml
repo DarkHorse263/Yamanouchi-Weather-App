@@ -1252,6 +1252,7 @@ components:
       type: string
       enum:
         - snowy-mountains
+        - victorias-high-country
         - yamanouchi
       description: |
         Canonical region identifier used across the FeelZlike platform.
