@@ -16,10 +16,12 @@
 import type { RegionId } from "@workspace/api-client-react";
 import type { TransportProvider, TransportProviderList } from "@/types/transport";
 import { SNOWY_MOUNTAINS_TRANSPORT } from "./snowy-mountains";
+import { VICTORIAS_HIGH_COUNTRY_TRANSPORT } from "./victorias-high-country";
 import { YAMANOUCHI_TRANSPORT } from "./yamanouchi";
 
 const REGISTRY: Record<RegionId, TransportProviderList> = {
   "snowy-mountains": SNOWY_MOUNTAINS_TRANSPORT,
+  "victorias-high-country": VICTORIAS_HIGH_COUNTRY_TRANSPORT,
   yamanouchi: YAMANOUCHI_TRANSPORT,
   // Iiyama temporarily removed from the active region set - see
   // artifacts/feelzlike/src/regions/index.ts. When restored, paste back the
