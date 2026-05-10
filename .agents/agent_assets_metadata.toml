@@ -36,3 +36,9 @@ id = "6tFX9jfR5I0-AznKl2tFq"
 uri = "file://exports/feelzlike-yamanouchi-winter-outlook.pdf"
 type = "pdf"
 title = "Yamanouchi winter outlook (regrouped: Shiga Kogen + Kita-Shiga, with zones)"
+
+[[outputs]]
+id = "VeAcL6ex75VX8YmNWh9xQ"
+uri = "file://.local/proposed-regions.md"
+type = "text"
+title = "Proposed regions for review (NZ + extra Nagano)"
