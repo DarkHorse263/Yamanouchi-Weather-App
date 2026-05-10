@@ -1,6 +1,7 @@
 import { Router, type IRouter } from "express";
 import { eq } from "drizzle-orm";
 import { db, accommodationTable, diningTable, attractionsTable } from "@workspace/db";
+import { requireAdminToken } from "../middlewares/require-admin-token.js";
 import {
   GetAccommodationResponse,
   GetDiningResponse,
@@ -37,7 +38,7 @@ router.get("/accommodation", async (req, res): Promise<void> => {
   res.json(GetAccommodationResponse.parse(rows));
 });
 
-router.post("/accommodation", async (req, res): Promise<void> => {
+router.post("/accommodation", requireAdminToken, async (req, res): Promise<void> => {
   const parsed = CreateAccommodationBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: parsed.error.message });
@@ -47,7 +48,7 @@ router.post("/accommodation", async (req, res): Promise<void> => {
   res.status(201).json(row);
 });
 
-router.patch("/accommodation/:id", async (req, res): Promise<void> => {
+router.patch("/accommodation/:id", requireAdminToken, async (req, res): Promise<void> => {
   const params = UpdateAccommodationParams.safeParse(req.params);
   if (!params.success) {
     res.status(400).json({ error: params.error.message });
@@ -70,7 +71,7 @@ router.patch("/accommodation/:id", async (req, res): Promise<void> => {
   res.json(row);
 });
 
-router.delete("/accommodation/:id", async (req, res): Promise<void> => {
+router.delete("/accommodation/:id", requireAdminToken, async (req, res): Promise<void> => {
   const params = DeleteAccommodationParams.safeParse(req.params);
   if (!params.success) {
     res.status(400).json({ error: params.error.message });
@@ -100,7 +101,7 @@ router.get("/dining", async (req, res): Promise<void> => {
   res.json(GetDiningResponse.parse(rows));
 });
 
-router.post("/dining", async (req, res): Promise<void> => {
+router.post("/dining", requireAdminToken, async (req, res): Promise<void> => {
   const parsed = CreateDiningBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: parsed.error.message });
@@ -110,7 +111,7 @@ router.post("/dining", async (req, res): Promise<void> => {
   res.status(201).json(row);
 });
 
-router.patch("/dining/:id", async (req, res): Promise<void> => {
+router.patch("/dining/:id", requireAdminToken, async (req, res): Promise<void> => {
   const params = UpdateDiningParams.safeParse(req.params);
   if (!params.success) {
     res.status(400).json({ error: params.error.message });
@@ -133,7 +134,7 @@ router.patch("/dining/:id", async (req, res): Promise<void> => {
   res.json(row);
 });
 
-router.delete("/dining/:id", async (req, res): Promise<void> => {
+router.delete("/dining/:id", requireAdminToken, async (req, res): Promise<void> => {
   const params = DeleteDiningParams.safeParse(req.params);
   if (!params.success) {
     res.status(400).json({ error: params.error.message });
@@ -163,7 +164,7 @@ router.get("/attractions", async (req, res): Promise<void> => {
   res.json(GetAttractionsResponse.parse(rows));
 });
 
-router.post("/attractions", async (req, res): Promise<void> => {
+router.post("/attractions", requireAdminToken, async (req, res): Promise<void> => {
   const parsed = CreateAttractionBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: parsed.error.message });
@@ -173,7 +174,7 @@ router.post("/attractions", async (req, res): Promise<void> => {
   res.status(201).json(row);
 });
 
-router.patch("/attractions/:id", async (req, res): Promise<void> => {
+router.patch("/attractions/:id", requireAdminToken, async (req, res): Promise<void> => {
   const params = UpdateAttractionParams.safeParse(req.params);
   if (!params.success) {
     res.status(400).json({ error: params.error.message });
@@ -196,7 +197,7 @@ router.patch("/attractions/:id", async (req, res): Promise<void> => {
   res.json(row);
 });
 
-router.delete("/attractions/:id", async (req, res): Promise<void> => {
+router.delete("/attractions/:id", requireAdminToken, async (req, res): Promise<void> => {
   const params = DeleteAttractionParams.safeParse(req.params);
   if (!params.success) {
     res.status(400).json({ error: params.error.message });
