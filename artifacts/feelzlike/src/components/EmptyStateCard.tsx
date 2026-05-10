@@ -1,4 +1,5 @@
 import type { LucideIcon } from "lucide-react";
+import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Clock4 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -15,7 +16,7 @@ import { Button } from "@/components/ui/button";
 export interface EmptyStateCardProps {
   icon: LucideIcon;
   title: string;
-  body: string;
+  body: ReactNode;
   /** Short ETA, e.g. "Next 7 days". Renders a pill below the headline. */
   eta?: string;
   /** Label for the optional CTA button. Required if `ctaHref` is set. */

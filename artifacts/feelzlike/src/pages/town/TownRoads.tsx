@@ -93,7 +93,7 @@ function RoadCamCard({ cam, t }: { cam: { id: string; name: string; description?
 
 export function TownRoads() {
   const { region } = useRegion();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { town } = useBaseTown();
   const dataAvailable = region.roadsSource?.dataAvailable ?? true;
   const query = useGetRoadConditions(
@@ -189,10 +189,21 @@ export function TownRoads() {
             "No live road cameras in the High Country",
             "ハイカントリーにはライブ道路カメラがありません",
           )}
-          body={t(
-            "VicRoads and VicTraffic don't operate any live cameras on the alpine roads up here. The live alerts above (from VicEmergency) are the most current view of closures, fires and hazards on these routes.",
-            "VicRoadsとVicTrafficはこの一帯のアルパイン道路にライブカメラを設置していません。上記のライブ警報（VicEmergency）が、これらのルートの通行止め・火災・危険に関する最新情報です。",
-          )}
+          body={
+            language === "ja" ? (
+              <>
+                VicRoadsとVicTrafficはアルパイン道路にライブカメラを設置していません。上記のライブ警報（VicEmergency）
+                <br />
+                が、これらのルートの通行止め・火災・危険に関する最新情報です。
+              </>
+            ) : (
+              <>
+                VicRoads and VicTraffic don't operate any live cameras on the alpine roads. The live alerts above (from VicEmergency)
+                <br />
+                are the most current view of closures, fires and hazards on these routes.
+              </>
+            )
+          }
           ctaLabel={
             region.roadsSource
               ? t(
