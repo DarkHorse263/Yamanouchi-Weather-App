@@ -33,6 +33,14 @@ const LOCAL_STAY_PROVIDERS: Record<string, LocalStayProvider[]> = {
       blurbJa: "地元独立予約サイト - ジンダバイン・スレッドボー・ペリッシャー周辺。",
     },
   ],
+  "victorias-high-country": [
+    {
+      name: "Visit Victoria's High Country",
+      url: "https://www.victoriashighcountry.com.au/accommodation",
+      blurbEn: "Official regional tourism directory - Mansfield, Bright, Mount Beauty and the alpine villages.",
+      blurbJa: "公式地域観光ディレクトリ - マンスフィールド、ブライト、マウントビューティーとアルパインビレッジ。",
+    },
+  ],
 };
 
 /**
