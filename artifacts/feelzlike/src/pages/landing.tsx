@@ -150,25 +150,19 @@ export default function Landing() {
   // when the star is toggled keeps the UI in sync without a context.
   const [favourite, setFavourite] = useState<string | null>(() => readFavouriteRegion());
 
-  // Auto-redirect to favourite on first visit of the session. Hard-coded
-  // to client-side `window.location` because we want a real navigation that
-  // hits the region's wouter router (not a SPA-level swap on the landing
-  // route). After redirect we mark the session-visited flag so coming back
-  // to "/" in this tab shows landing normally.
+  // Favourite-region auto-redirect was removed as part of the strict
+  // Country > Region > Town flow: every visitor sees the country picker
+  // first, no shortcuts. The favourite is still surfaced via the star
+  // toggle on country/region cards. Stale favourite IDs are cleaned up
+  // here so the UI never highlights a region that no longer exists.
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (landingAlreadyVisitedThisSession()) return;
     const fav = readFavouriteRegion();
-    // Validate the favourite ID against the known-live region list so a
-    // stale entry (region renamed / paused) doesn't bounce users into a
-    // broken slug. Stale IDs get cleared and we just show landing.
-    if (!fav || !isKnownRegionId(fav)) {
-      if (fav && !isKnownRegionId(fav)) writeFavouriteRegion(null);
-      markLandingVisited();
-      return;
+    if (fav && !isKnownRegionId(fav)) {
+      writeFavouriteRegion(null);
+      setFavourite(null);
     }
     markLandingVisited();
-    window.location.replace(`/${fav}/`);
   }, []);
 
   const { data, dataUpdatedAt } = useQuery<RegionsResponse>({
@@ -364,12 +358,12 @@ export default function Landing() {
       <main className="relative z-10 max-w-5xl mx-auto px-5 pt-10 md:pt-14 pb-12 md:pb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 max-w-3xl mx-auto">
           {countries.map((country, i) => {
-            // Single live region per country today → link straight to it.
-            // Multi-region countries (future) get a country index route.
+            // Always route via the country index page so the flow stays
+            // Country > Region > Town for every country, regardless of how
+            // many regions are live. Skipping the region picker (e.g. JP
+            // jumping straight to Yudanaka) breaks user mental model.
             const liveRegions = country.regions.filter((r) => r.status === "live");
-            const href = liveRegions.length === 1
-              ? liveRegions[0].href
-              : `/${country.code.toLowerCase()}/`;
+            const href = `/${country.code.toLowerCase()}/`;
             const liveCountInCountry = liveRegions.length;
 
             return (

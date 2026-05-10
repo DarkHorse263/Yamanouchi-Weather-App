@@ -21,3 +21,21 @@ export const REGION_BY_ID: Record<string, RegionConfig> = Object.fromEntries(
 export function getRegion(id: string): RegionConfig | undefined {
   return REGION_BY_ID[id];
 }
+
+// Country code each region belongs to. Drives the country-index pages
+// (`/au`, `/jp`) and lets the landing decide which regions belong under
+// which flag without re-deriving from `subtitle` strings. Keep in sync
+// when a new region is added.
+export type CountryCode = "AU" | "JP";
+export const REGION_COUNTRY: Record<string, CountryCode> = {
+  "snowy-mountains": "AU",
+  "victorias-high-country": "AU",
+  "yamanouchi": "JP",
+};
+export const COUNTRY_META: Record<CountryCode, { name: string; flag: string }> = {
+  AU: { name: "Australia", flag: "🇦🇺" },
+  JP: { name: "Japan", flag: "🇯🇵" },
+};
+export function regionsForCountry(code: CountryCode): RegionConfig[] {
+  return REGIONS.filter((r) => REGION_COUNTRY[r.id] === code);
+}

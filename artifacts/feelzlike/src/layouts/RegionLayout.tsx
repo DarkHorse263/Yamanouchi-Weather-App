@@ -1,5 +1,6 @@
 import type { ReactElement } from "react";
 import { Switch, Route, useParams, Redirect, Router as WouterRouter } from "wouter";
+import { RegionHome } from "@/pages/region/RegionHome";
 import {
   AppShell,
   RegionProvider,
@@ -53,22 +54,17 @@ export function RegionLayout() {
 
   const hemisphere = region.hemisphere ?? "north";
   const routes: RegionRouter = REGION_ROUTERS[region.id] ?? {};
-  // Default landing town for the region - first entry of baseTowns. Removes
-  // the old "Region Overview" splash page and drops users straight into the
-  // primary off-mountain town (Jindabyne for Snowy Mountains, Yudanaka for
-  // Yamanouchi). Aligns with the product brief: stayers want town-first data.
+  // Region home is a base-town picker (Country > Region > Town flow).
+  // Towns-first IA hard rule, see RegionConfig comment. Older versions
+  // auto-redirected `/` to the first base town; that shortcut hid the
+  // region landing for single-town-as-default users (e.g. JP went straight
+  // to Yudanaka, skipping Yamanouchi). The town picker is now always shown.
   const defaultTown = region.baseTowns?.[0]?.id;
 
   const inner = (
     <AppShell>
       <Switch>
-        <Route path="/">
-          {defaultTown ? (
-            <Redirect to={`/${defaultTown}`} />
-          ) : (
-            <RegionStub title="Region" titleJa="リージョン" />
-          )}
-        </Route>
+        <Route path="/" component={RegionHome} />
         <Route path="/mountains" component={MountainsList} />
         <Route path="/mountains/lifts">
           {routes.LiftsAll ? <routes.LiftsAll /> : <RegionStub title="Lifts" titleJa="リフト運行" />}

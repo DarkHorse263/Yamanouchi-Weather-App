@@ -18,6 +18,7 @@ import AlertsManage from "@/pages/alerts/Manage";
 import AlertsUnsubscribed from "@/pages/alerts/Unsubscribed";
 import NewsletterVerify from "@/pages/newsletter/Verify";
 import NewsletterUnsubscribed from "@/pages/newsletter/Unsubscribed";
+import CountryHome from "@/pages/CountryHome";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,13 @@ function Router() {
       <Route path="/alerts/unsubscribed" component={AlertsUnsubscribed} />
       <Route path="/newsletter/verify" component={NewsletterVerify} />
       <Route path="/newsletter/unsubscribed" component={NewsletterUnsubscribed} />
+      {/* Country index pages - must come before the /:region catch-all so
+          /au and /jp resolve to a regions-in-country picker, not the region
+          layout (which would 404 on the country code). */}
+      <Route path="/au"><CountryHome code="AU" /></Route>
+      <Route path="/au/"><CountryHome code="AU" /></Route>
+      <Route path="/jp"><CountryHome code="JP" /></Route>
+      <Route path="/jp/"><CountryHome code="JP" /></Route>
       <Route path="/:region/*?">
         <RegionLayout />
       </Route>
