@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import {
   Cloud,
   CloudRain,
@@ -13,7 +12,7 @@ import {
   Thermometer,
   Compass as CompassIcon,
 } from "lucide-react";
-import { useLanguage, useBaseTown, useRegion, LiveBadge, UpdateStamp, useOptionalSeason } from "@workspace/feelzlike-shell";
+import { useLanguage, useBaseTown, useRegion, LiveBadge, UpdateStamp, useOptionalSeason, PageHeader } from "@workspace/feelzlike-shell";
 import { RadarMap } from "@/regions/snowy-mountains/components/RadarMap";
 import { Radar as RadarIcon, ExternalLink } from "lucide-react";
 import {
@@ -41,43 +40,30 @@ export function TownWeather() {
 
   return (
     <div className="px-6 md:px-10 py-8 md:py-12 max-w-6xl mx-auto">
-      <motion.header
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        <div className="flex items-start justify-between gap-4 flex-wrap">
-          <div>
-            <p className="byline text-muted-foreground/70">
-              {region.name} · {t(town.name, town.nameJa)}
-            </p>
-            <h1 className="font-display font-semibold text-4xl md:text-5xl tracking-tight text-foreground mt-2">
-              {t(`${town.name} weather forecast`, `${town.name}の天気予報`)}
-            </h1>
-            <p className="text-muted-foreground mt-3 max-w-xl">
-              {t(
-                "Current, hourly and 7-day outlook for town. Live snow radar below.",
-                "町の現在・時間別・7日間予報。下に降雪レーダー。",
-              )}
-            </p>
-            <UpdateStamp
-              lastUpdated={q.data?.current?.time ?? null}
-              intervalMin={10}
-              source={
-                region.weatherSource
-                  ? t(
-                      region.weatherSource.label,
-                      region.weatherSource.labelJa ?? region.weatherSource.label,
-                    )
-                  : "Open-Meteo"
-              }
-              className="mt-3"
-            />
-          </div>
-          <LiveBadge label={t("Live", "ライブ")} />
-        </div>
-        <div className="rule mt-6" />
-      </motion.header>
+      <PageHeader
+        byline={`${region.name} · ${t(town.name, town.nameJa)}`}
+        title={t(`${town.name} weather forecast`, `${town.name}の天気予報`)}
+        description={t(
+          "Current, hourly and 7-day outlook for town. Live snow radar below.",
+          "町の現在・時間別・7日間予報。下に降雪レーダー。",
+        )}
+        stamp={
+          <UpdateStamp
+            tone="onDark"
+            lastUpdated={q.data?.current?.time ?? null}
+            intervalMin={10}
+            source={
+              region.weatherSource
+                ? t(
+                    region.weatherSource.label,
+                    region.weatherSource.labelJa ?? region.weatherSource.label,
+                  )
+                : "Open-Meteo"
+            }
+          />
+        }
+        badge={<LiveBadge tone="onDark" label={t("Live", "ライブ")} />}
+      />
 
       {q.isLoading ? (
         <p className="mt-10 text-muted-foreground">{t("Loading weather…", "天気を読込中…")}</p>

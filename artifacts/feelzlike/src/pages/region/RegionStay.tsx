@@ -1,7 +1,6 @@
-import { motion } from "framer-motion";
 import { Bed, BedDouble, MapPin, Star } from "lucide-react";
 import { useState } from "react";
-import { useRegion, useLanguage, LiveBadge } from "@workspace/feelzlike-shell";
+import { useRegion, useLanguage, LiveBadge, PageHeader } from "@workspace/feelzlike-shell";
 import { useNearbyPlaces } from "@/lib/places";
 import { StayPlatformBar } from "@/components/StayPlatformBar";
 import { EmptyStateCard } from "@/components/EmptyStateCard";
@@ -63,24 +62,16 @@ export function RegionStay() {
 
   return (
     <div className="px-6 md:px-10 py-8 md:py-12 max-w-6xl mx-auto">
-      <motion.header initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-        <div className="flex items-start justify-between gap-4 flex-wrap">
-          <div>
-            <p className="byline text-muted-foreground/70">{region.name}</p>
-            <h1 className="font-display font-semibold text-4xl md:text-5xl tracking-tight text-foreground mt-2">
-              {t("Stay", "宿泊")}
-            </h1>
-            <p className="text-muted-foreground mt-3 max-w-xl">
-              {t(
-                `Hotels, lodges and apartments across ${region.name}. Compare prices across the major booking sites.`,
-                `${region.name}のホテル・ロッジ・アパートメント。主要予約サイトで価格を比較。`,
-              )}
-            </p>
-          </div>
-          <LiveBadge label={query.isFetching ? t("Loading", "読込中") : t("Live", "ライブ")} />
-        </div>
-        <div className="rule mt-6 mb-8" />
-      </motion.header>
+      <PageHeader
+        byline={region.name}
+        title={t("Stay", "宿泊")}
+        description={t(
+          `Hotels, lodges and apartments across ${region.name}. Compare prices across the major booking sites.`,
+          `${region.name}のホテル・ロッジ・アパートメント。主要予約サイトで価格を比較。`,
+        )}
+        badge={<LiveBadge tone="onDark" label={query.isFetching ? t("Loading", "読込中") : t("Live", "ライブ")} />}
+      />
+      <div className="mb-8" />
 
       <div className="mb-6">
         <StayPlatformBar

@@ -1,7 +1,6 @@
-import { motion } from "framer-motion";
 import { Bed, ExternalLink, MapPin } from "lucide-react";
 
-import { useRegion, useLanguage, useBaseTown, LiveBadge } from "@workspace/feelzlike-shell";
+import { useRegion, useLanguage, useBaseTown, LiveBadge, PageHeader } from "@workspace/feelzlike-shell";
 
 import { EmptyStateCard } from "@/components/EmptyStateCard";
 import {
@@ -84,31 +83,17 @@ export function TownStay() {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <motion.header
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-        className="px-6 md:px-10 pt-8 md:pt-12"
-      >
-        <div className="flex items-start justify-between gap-4 flex-wrap">
-          <div>
-            <p className="byline text-muted-foreground/70">
-              {region.name} · {townDisplayName}
-            </p>
-            <h1 className="font-display font-semibold text-4xl md:text-5xl tracking-tight text-foreground mt-2">
-              {t("Stay", "宿泊")}
-            </h1>
-            <p className="text-muted-foreground mt-3 max-w-xl">
-              {t(
-                `Search availability around ${townDisplayName} on the major booking platforms. Each link is pre-filtered to the town.`,
-                `${townDisplayName}周辺の宿泊施設を主要予約サイトで検索。各リンクは町名で事前検索済みです。`,
-              )}
-            </p>
-          </div>
-          <LiveBadge label={t("Live search", "ライブ検索")} />
-        </div>
-        <div className="rule mt-6" />
-      </motion.header>
+      <div className="px-6 md:px-10 pt-8 md:pt-12">
+        <PageHeader
+          byline={`${region.name} · ${townDisplayName}`}
+          title={t("Stay", "宿泊")}
+          description={t(
+            `Search availability around ${townDisplayName} on the major booking platforms. Each link is pre-filtered to the town.`,
+            `${townDisplayName}周辺の宿泊施設を主要予約サイトで検索。各リンクは町名で事前検索済みです。`,
+          )}
+          badge={<LiveBadge tone="onDark" label={t("Live search", "ライブ検索")} />}
+        />
+      </div>
 
       {localProviders.length > 0 && (
         <section className="px-6 md:px-10 pt-8">

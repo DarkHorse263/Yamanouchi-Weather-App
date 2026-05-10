@@ -16,6 +16,7 @@ import {
   useBaseTown,
   useRegion,
   LiveBadge,
+  PageHeader,
 } from "@workspace/feelzlike-shell";
 
 import { SNOWY_MOUNTAINS_TRANSPORT } from "@/data/transport/snowy-mountains";
@@ -54,32 +55,17 @@ export function SnowyTransport() {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <motion.header
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-        className="px-6 md:px-10 pt-8 md:pt-12"
-      >
-        <div className="flex items-start justify-between gap-4 flex-wrap">
-          <div>
-            <p className="byline text-muted-foreground/70">
-              {region.name}
-              {town ? ` · ${t(town.name, town.nameJa)}` : ""}
-            </p>
-            <h1 className="font-display font-semibold text-4xl md:text-5xl tracking-tight text-foreground mt-2">
-              {t("Transport", "交通")}
-            </h1>
-            <p className="text-muted-foreground mt-3 max-w-2xl leading-relaxed">
-              {t(
-                "Buses, shuttles, trains and shared transport into the Snowy Mountains. Cooma Coaches is the daily Canberra ↔ Jindabyne lifeline.",
-                "スノーマウンテンズへのバス・送迎・電車。Cooma Coachesがキャンベラ ↔ ジンダバインの毎日運行の主要路線です。",
-              )}
-            </p>
-          </div>
-          <LiveBadge label={t("Curated", "編集済")} />
-        </div>
-        <div className="rule mt-6" />
-      </motion.header>
+      <div className="px-6 md:px-10 pt-8 md:pt-12">
+        <PageHeader
+          byline={`${region.name}${town ? ` · ${t(town.name, town.nameJa)}` : ""}`}
+          title={t("Transport", "交通")}
+          description={t(
+            "Buses, shuttles, trains and shared transport into the Snowy Mountains. Cooma Coaches is the daily Canberra ↔ Jindabyne lifeline.",
+            "スノーマウンテンズへのバス・送迎・電車。Cooma Coachesがキャンベラ ↔ ジンダバインの毎日運行の主要路線です。",
+          )}
+          badge={<LiveBadge tone="onDark" label={t("Curated", "編集済")} />}
+        />
+      </div>
 
       {/* Cooma Coaches hero */}
       {cooma && (

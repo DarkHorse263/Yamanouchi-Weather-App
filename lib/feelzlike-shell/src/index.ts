@@ -24,5 +24,7 @@ export { TownPicker } from "./TownPicker";
 export { LiveBadge } from "./LiveBadge";
 export { PremiumGate } from "./PremiumGate";
 export { UpdateStamp } from "./UpdateStamp";
+export { PageHeader } from "./PageHeader";
+export type { PageHeaderProps } from "./PageHeader";
 export { usePremium, setPremiumPreview } from "./usePremium";
 export { cn } from "./cn";

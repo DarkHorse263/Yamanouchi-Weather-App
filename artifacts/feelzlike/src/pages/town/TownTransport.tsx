@@ -14,6 +14,7 @@ import {
   useLanguage,
   useBaseTown,
   LiveBadge,
+  PageHeader,
 } from "@workspace/feelzlike-shell";
 import type { RegionId } from "@workspace/api-client-react";
 import {
@@ -53,31 +54,16 @@ export function TownTransport() {
 
   return (
     <div className="px-6 md:px-10 py-8 md:py-12 max-w-6xl mx-auto">
-      <motion.header
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        <div className="flex items-start justify-between gap-4 flex-wrap">
-          <div>
-            <p className="byline text-muted-foreground/70">
-              {region.name} ·{" "}
-              {town ? t(town.name, town.nameJa) : t("Town", "町")}
-            </p>
-            <h1 className="font-display font-semibold text-4xl md:text-5xl tracking-tight text-foreground mt-2">
-              {t("Transport", "交通")}
-            </h1>
-            <p className="text-muted-foreground mt-3 max-w-xl">
-              {t(
-                `Buses, shuttles, trains and shared transport serving ${town?.name ?? "town"}.`,
-                `${town ? t(town.name, town.nameJa) : "町"}を発着するバス・送迎・電車。`,
-              )}
-            </p>
-          </div>
-          <LiveBadge label={t("Curated", "編集済")} />
-        </div>
-        <div className="rule mt-6 mb-8" />
-      </motion.header>
+      <PageHeader
+        byline={`${region.name} · ${town ? t(town.name, town.nameJa) : t("Town", "町")}`}
+        title={t("Transport", "交通")}
+        description={t(
+          `Buses, shuttles, trains and shared transport serving ${town?.name ?? "town"}.`,
+          `${town ? t(town.name, town.nameJa) : "町"}を発着するバス・送迎・電車。`,
+        )}
+        badge={<LiveBadge tone="onDark" label={t("Curated", "編集済")} />}
+      />
+      <div className="mb-8" />
 
       {providers.length === 0 ? (
         <EmptyStateCard

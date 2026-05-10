@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useMemo, useState } from "react";
 import { useGetRoadConditions, useGetWebcams } from "@workspace/api-client-react";
 import { AlertTriangle, Camera, Car, ExternalLink, MapPin, Navigation, Construction } from "lucide-react";
-import { useRegion, useLanguage, useBaseTown, LiveBadge, UpdateStamp } from "@workspace/feelzlike-shell";
+import { useRegion, useLanguage, useBaseTown, LiveBadge, UpdateStamp, PageHeader } from "@workspace/feelzlike-shell";
 import { EmptyStateCard } from "@/components/EmptyStateCard";
 
 function statusClasses(c: string): string {
@@ -107,47 +107,37 @@ export function TownRoads() {
 
   return (
     <div className="px-6 md:px-10 py-8 md:py-12 max-w-6xl mx-auto">
-      <motion.header
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        <div className="flex items-start justify-between gap-4 flex-wrap">
-          <div>
-            <p className="byline text-muted-foreground/70">
-              {region.name} · {town ? t(town.name, town.nameJa) : t("Town", "町")}
-            </p>
-            <h1 className="font-display font-semibold text-4xl md:text-5xl tracking-tight text-foreground mt-2">
-              {t("Road conditions & cams", "道路状況・ライブカメラ")}
-            </h1>
-            <p className="text-muted-foreground mt-3 max-w-xl">
-              {t(
-                `Live route conditions from ${town?.name ?? "town"} to the mountain, plus roadside cams.`,
-                `${town ? t(town.name, town.nameJa) : "町"}から山までのルートの最新状況と路傍カメラ。`,
-              )}
-            </p>
-            {dataAvailable && (
-              <UpdateStamp
-                lastUpdated={query.data?.lastUpdated ?? null}
-                intervalMin={15}
-                source={
-                  region.roadsSource
-                    ? t(
-                        region.roadsSource.label,
-                        region.roadsSource.labelJa ?? region.roadsSource.label,
-                      )
-                    : undefined
-                }
-                className="mt-3"
-              />
-            )}
-          </div>
-          {dataAvailable && (
-            <LiveBadge label={query.isFetching ? t("Loading", "読込中") : t("Live", "ライブ")} />
-          )}
-        </div>
-        <div className="rule mt-6 mb-8" />
-      </motion.header>
+      <PageHeader
+        byline={`${region.name} · ${town ? t(town.name, town.nameJa) : t("Town", "町")}`}
+        title={t("Road conditions & cams", "道路状況・ライブカメラ")}
+        description={t(
+          `Live route conditions from ${town?.name ?? "town"} to the mountain, plus roadside cams.`,
+          `${town ? t(town.name, town.nameJa) : "町"}から山までのルートの最新状況と路傍カメラ。`,
+        )}
+        stamp={
+          dataAvailable ? (
+            <UpdateStamp
+              tone="onDark"
+              lastUpdated={query.data?.lastUpdated ?? null}
+              intervalMin={15}
+              source={
+                region.roadsSource
+                  ? t(
+                      region.roadsSource.label,
+                      region.roadsSource.labelJa ?? region.roadsSource.label,
+                    )
+                  : undefined
+              }
+            />
+          ) : undefined
+        }
+        badge={
+          dataAvailable ? (
+            <LiveBadge tone="onDark" label={query.isFetching ? t("Loading", "読込中") : t("Live", "ライブ")} />
+          ) : undefined
+        }
+      />
+      <div className="mb-8" />
 
       {!dataAvailable && (
         <EmptyStateCard

@@ -1,7 +1,6 @@
-import { motion } from "framer-motion";
 import { Compass, ExternalLink } from "lucide-react";
 
-import { useRegion, useLanguage, useBaseTown, LiveBadge } from "@workspace/feelzlike-shell";
+import { useRegion, useLanguage, useBaseTown, LiveBadge, PageHeader } from "@workspace/feelzlike-shell";
 
 import { EmptyStateCard } from "@/components/EmptyStateCard";
 
@@ -35,36 +34,24 @@ export function TownExplore() {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <motion.header
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-        className="px-6 md:px-10 pt-8 md:pt-12"
-      >
-        <div className="flex items-start justify-between gap-4 flex-wrap">
-          <div>
-            <p className="byline text-muted-foreground/70">
-              {region.name} · {townDisplayName}
-            </p>
-            <h1 className="font-display font-semibold text-4xl md:text-5xl tracking-tight text-foreground mt-2">
-              {t("Explore", "観光")}
-            </h1>
-            <p className="text-muted-foreground mt-3 max-w-xl">
-              {region.id === "yamanouchi" || region.id === "iiyama"
-                ? t(
-                    `Official tourism, attraction, resort and onsen links for ${region.name}.`,
-                    `${region.name}の公式観光・観光地・スキー場・温泉リンク集。`,
-                  )
-                : t(
-                    `Official tourism, national park and resort links for ${region.name}.`,
-                    `${region.name}の公式観光・国立公園・スキー場リンク集。`,
-                  )}
-            </p>
-          </div>
-          <LiveBadge label={t("Curated", "厳選")} />
-        </div>
-        <div className="rule mt-6" />
-      </motion.header>
+      <div className="px-6 md:px-10 pt-8 md:pt-12">
+        <PageHeader
+          byline={`${region.name} · ${townDisplayName}`}
+          title={t("Explore", "観光")}
+          description={
+            region.id === "yamanouchi" || region.id === "iiyama"
+              ? t(
+                  `Official tourism, attraction, resort and onsen links for ${region.name}.`,
+                  `${region.name}の公式観光・観光地・スキー場・温泉リンク集。`,
+                )
+              : t(
+                  `Official tourism, national park and resort links for ${region.name}.`,
+                  `${region.name}の公式観光・国立公園・スキー場リンク集。`,
+                )
+          }
+          badge={<LiveBadge tone="onDark" label={t("Curated", "厳選")} />}
+        />
+      </div>
 
       {links.length === 0 ? (
         <section className="px-6 md:px-10 pt-10 pb-16">

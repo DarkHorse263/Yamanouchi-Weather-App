@@ -20,6 +20,7 @@ import {
   useBaseTown,
   LiveBadge,
   UpdateStamp,
+  PageHeader,
   PremiumGate,
 } from "@workspace/feelzlike-shell";
 import { useGetWeather } from "@workspace/api-client-react";
@@ -254,40 +255,27 @@ export function TownHome() {
           ]),
         ]}
       />
-      <motion.header
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        <div className="flex items-start justify-between gap-4 flex-wrap">
-          <div>
-            <p className="byline text-muted-foreground/70">
-              {region.name} · {t("Base town", "拠点の町")}
-            </p>
-            <h1 className="font-display font-semibold text-4xl md:text-5xl tracking-tight text-foreground mt-2">
-              {t(town.name, town.nameJa)}
-            </h1>
-            {town.blurb && (
-              <p className="text-muted-foreground mt-3 max-w-xl">{t(town.blurb, town.blurbJa)}</p>
-            )}
-            <UpdateStamp
-              lastUpdated={lastUpdated}
-              intervalMin={10}
-              source={
-                region.weatherSource
-                  ? t(
-                      region.weatherSource.label,
-                      region.weatherSource.labelJa ?? region.weatherSource.label,
-                    )
-                  : "Open-Meteo"
-              }
-              className="mt-3"
-            />
-          </div>
-          <LiveBadge label={t("Live", "ライブ")} />
-        </div>
-        <div className="rule mt-6" />
-      </motion.header>
+      <PageHeader
+        byline={`${region.name} · ${t("Base town", "拠点の町")}`}
+        title={t(town.name, town.nameJa)}
+        description={town.blurb ? t(town.blurb, town.blurbJa) : undefined}
+        stamp={
+          <UpdateStamp
+            tone="onDark"
+            lastUpdated={lastUpdated}
+            intervalMin={10}
+            source={
+              region.weatherSource
+                ? t(
+                    region.weatherSource.label,
+                    region.weatherSource.labelJa ?? region.weatherSource.label,
+                  )
+                : "Open-Meteo"
+            }
+          />
+        }
+        badge={<LiveBadge tone="onDark" label={t("Live", "ライブ")} />}
+      />
 
       {/* TEMP IN TOWN NOW - single full-width snapshot tile.
           May 2026 v2 brief: Roads moved out of the strip and lives inside

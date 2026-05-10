@@ -10,6 +10,12 @@ interface UpdateStampProps {
   /** Optional source label (e.g. "BOM · Open-Meteo"). */
   source?: string;
   className?: string;
+  /**
+   * Visual tone. `light` (default) is muted text on a white surface.
+   * `onDark` is white-ish text suitable for placement on a coloured/gradient
+   * panel (e.g. inside `<PageHeader>`).
+   */
+  tone?: "light" | "onDark";
 }
 
 function toMs(v: string | Date | null | undefined): number | null {
@@ -46,6 +52,7 @@ export function UpdateStamp({
   intervalMin,
   source,
   className = "",
+  tone = "light",
 }: UpdateStampProps) {
   const { t } = useLanguage();
   const [now, setNow] = useState(() => Date.now());
@@ -54,11 +61,19 @@ export function UpdateStamp({
     return () => clearInterval(id);
   }, []);
 
+  // On a dark gradient, body copy needs full white to clear WCAG AA on the
+  // lightest gradient stop (sky-600 / emerald-700). Reserve translucency
+  // for non-text glyphs only (separator dot).
+  const baseColor = tone === "onDark" ? "text-white" : "text-muted-foreground/80";
+  const strongColor = tone === "onDark" ? "text-white" : "text-foreground";
+  const dimColor = tone === "onDark" ? "text-white/60" : "text-muted-foreground/40";
+  const noTimestampColor = tone === "onDark" ? "text-white" : "text-muted-foreground/70";
+
   const ms = toMs(lastUpdated);
   if (ms === null) {
     return (
       <span
-        className={`inline-flex items-center gap-1.5 text-[11px] text-muted-foreground/70 ${className}`}
+        className={`inline-flex items-center gap-1.5 text-[11px] ${noTimestampColor} ${className}`}
       >
         <Clock className="w-3 h-3" />
         {t("No timestamp", "更新時刻なし")}
@@ -72,26 +87,26 @@ export function UpdateStamp({
 
   return (
     <span
-      className={`inline-flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] text-muted-foreground/80 ${className}`}
+      className={`inline-flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] ${baseColor} ${className}`}
     >
       <span className="inline-flex items-center gap-1">
         <Clock className="w-3 h-3" />
         {t("Updated", "更新")}{" "}
-        <span className="text-foreground tabular-nums">
+        <span className={`${strongColor} tabular-nums`}>
           {formatAgo(ms, now, t)}
         </span>
       </span>
-      <span className="text-muted-foreground/40">·</span>
+      <span className={dimColor}>·</span>
       <span className="inline-flex items-center gap-1">
         <RefreshCw className="w-3 h-3" />
         {t("Next", "次回")}{" "}
-        <span className="text-foreground tabular-nums">
+        <span className={`${strongColor} tabular-nums`}>
           {formatUntil(untilMs, t)}
         </span>
       </span>
       {source ? (
         <>
-          <span className="text-muted-foreground/40">·</span>
+          <span className={dimColor}>·</span>
           <span className="truncate">{source}</span>
         </>
       ) : null}

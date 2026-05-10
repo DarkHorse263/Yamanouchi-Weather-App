@@ -1,7 +1,6 @@
-import { motion } from "framer-motion";
 import { Database, ExternalLink } from "lucide-react";
 
-import { useLanguage, useRegion, LiveBadge } from "@workspace/feelzlike-shell";
+import { useLanguage, useRegion, LiveBadge, PageHeader } from "@workspace/feelzlike-shell";
 
 /**
  * RegionSources - single source of truth for "where the data comes from".
@@ -129,29 +128,17 @@ export function RegionSources() {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <motion.header
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-        className="px-6 md:px-10 pt-8 md:pt-12"
-      >
-        <div className="flex items-start justify-between gap-4 flex-wrap">
-          <div>
-            <p className="byline text-muted-foreground/70">{region.name}</p>
-            <h1 className="font-display font-semibold text-4xl md:text-5xl tracking-tight text-foreground mt-2">
-              {t("Where the data comes from", "データの出典")}
-            </h1>
-            <p className="text-muted-foreground mt-3 max-w-2xl leading-relaxed">
-              {t(
-                `Real-time conditions for ${region.name} sourced direct from official services. Forecasts blend several global ensemble models so you see the consensus, not a single guess.`,
-                `${region.name}のリアルタイム情報は公式機関から直接取得しています。予報は複数のグローバル予報モデルを組み合わせ、合意ベースの予測を表示します。`,
-              )}
-            </p>
-          </div>
-          <LiveBadge label={t("Attribution", "出典")} />
-        </div>
-        <div className="rule mt-6" />
-      </motion.header>
+      <div className="px-6 md:px-10 pt-8 md:pt-12">
+        <PageHeader
+          byline={region.name}
+          title={t("Where the data comes from", "データの出典")}
+          description={t(
+            `Real-time conditions for ${region.name} sourced direct from official services. Forecasts blend several global ensemble models so you see the consensus, not a single guess.`,
+            `${region.name}のリアルタイム情報は公式機関から直接取得しています。予報は複数のグローバル予報モデルを組み合わせ、合意ベースの予測を表示します。`,
+          )}
+          badge={<LiveBadge tone="onDark" label={t("Attribution", "出典")} />}
+        />
+      </div>
 
       <section className="px-6 md:px-10 pt-8 pb-16 space-y-8">
         {groups.map((group) => (

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useRegion, useLanguage, useBaseTown, LiveBadge } from "@workspace/feelzlike-shell";
+import { useRegion, useLanguage, useBaseTown, LiveBadge, PageHeader } from "@workspace/feelzlike-shell";
 
 interface Props {
   title: string;
@@ -15,24 +15,17 @@ export function TownSubpageStub({ title, titleJa, description, descriptionJa }: 
 
   return (
     <div className="px-6 md:px-10 py-8 md:py-12 max-w-6xl mx-auto">
+      <PageHeader
+        byline={`${region.name} · ${town ? t(town.name, town.nameJa) : t("Town", "町")}`}
+        title={t(title, titleJa)}
+        description={description ? t(description, descriptionJa) : undefined}
+      />
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.3, delay: 0.05 }}
+        className="mt-8"
       >
-        <p className="byline text-muted-foreground/70">
-          {region.name} · {town ? t(town.name, town.nameJa) : t("Town", "町")}
-        </p>
-        <h1 className="font-display font-semibold text-4xl md:text-5xl tracking-tight text-foreground mt-2">
-          {t(title, titleJa)}
-        </h1>
-        {description && (
-          <p className="text-muted-foreground mt-3 max-w-xl">
-            {t(description, descriptionJa)}
-          </p>
-        )}
-        <div className="rule mt-6 mb-8" />
-
         <div className="glass rounded-2xl p-8 md:p-10">
           <div className="flex items-start justify-between gap-6 flex-wrap">
             <div>
