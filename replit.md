@@ -11,6 +11,7 @@
 - **Workflow**: Iterative development is preferred, with a focus on delivering functional features for each region.
 - **Interaction**: Prioritize architectural decisions over granular implementation details. Avoid making changes to areas not explicitly specified by the user.
 - **General working preferences**: The user prefers a light and clean design aesthetic, inspired by snow-forecast.com, with a consistent typography across all applications. All applications should share a unified design system. The user wants to see a town-centric information architecture, where each region is anchored on a single base town.
+- **REGION SHAPE — HARD RULE (every new region, no exceptions)**: Always lead with **towns**, then **mountains hang off each town**. The region home (`/:region/`) is a town picker. A town card surfaces the mountain(s) that town serves. Mountain detail is reached *via a town*, never as a flat top-level resort list. This is the basis for the app — confirm with the user before deviating, and remind the user of this rule when scoping a new region. See `RegionConfig` in `lib/feelzlike-shell/src/types.ts` for the data shape; the existing Snowy Mountains and Yamanouchi configs are the reference implementations.
 
 ## System Architecture
 

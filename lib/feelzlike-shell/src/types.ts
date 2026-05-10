@@ -105,6 +105,30 @@ export interface BaseTown {
   nearbyMountainIds?: string[];
 }
 
+/**
+ * RegionConfig — the data shape for every region (Snowy Mountains, Yamanouchi,
+ * Victoria's High Country, etc).
+ *
+ * ┌──────────────────────────────────────────────────────────────────────┐
+ * │ HARD RULE — every region must be TOWNS-FIRST, MOUNTAINS-HANG-OFF.    │
+ * │                                                                      │
+ * │ The region home (/:region/) is a town picker. Each town card         │
+ * │ surfaces the mountain(s) that town serves. Mountain detail is        │
+ * │ reached *via* a town, never as a flat top-level resort list.         │
+ * │                                                                      │
+ * │ This is the basis of the entire app's information architecture and   │
+ * │ user mental model — never lead with a mountains grid on a region     │
+ * │ home, even if the region only has one mountain. Confirm with the     │
+ * │ user before deviating.                                               │
+ * │                                                                      │
+ * │ Practically that means every new region MUST populate `baseTowns`    │
+ * │ with each town's `nearbyMountainIds` set so the region home can      │
+ * │ render town → mountain mappings.                                     │
+ * └──────────────────────────────────────────────────────────────────────┘
+ *
+ * Reference implementations: `artifacts/feelzlike/src/regions/snowy-mountains.ts`
+ * and `.../yamanouchi.ts`.
+ */
 export interface RegionConfig {
   /** Stable id, e.g. "snowy-mountains". Used for URL path and localStorage. */
   id: string;
