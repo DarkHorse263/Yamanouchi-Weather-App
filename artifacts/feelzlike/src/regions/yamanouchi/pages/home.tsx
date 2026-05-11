@@ -272,8 +272,8 @@ function GreenHome({ t }: { t: (en: string, ja: string) => string }) {
 export default function Home() {
   const { t } = useLanguage();
   const { isWinter } = useSeason();
-  const { data, isLoading, error } = useGetDashboard({ query: { refetchInterval: 600000, enabled: isWinter } });
-  const { data: alertData } = useGetPowderAlerts({ region: "yamanouchi" }, { query: { refetchInterval: 600000, enabled: isWinter } });
+  const { data, isLoading, error } = useGetDashboard({ query: { refetchInterval: 600000, enabled: isWinter } as never });
+  const { data: alertData } = useGetPowderAlerts({ region: "yamanouchi" }, { query: { refetchInterval: 600000, enabled: isWinter } as never });
 
   if (!isWinter) return <GreenHome t={t} />;
 
@@ -375,7 +375,10 @@ export default function Home() {
           {[
             { label: t("Avg Temp", "平均気温"),  value: data.avgTemp     != null ? `${data.avgTemp}°` : "-",  sub: "°C",   resort: null },
             { label: t("Avg Wind", "平均風速"),   value: data.avgWind     != null ? `${data.avgWind}`  : "-",  sub: "km/h", resort: null },
-            { label: t("New Snow", "新雪 24h"),   value: data.topSnow24h  != null ? `${data.topSnow24h}` : "-", sub: "cm",   resort: data.topSnowResort },
+            // `bestResort` is the only resort-context object the dashboard
+            // returns, so we tag both snow stats with it (the legacy
+            // `topSnowResort` field was removed from the schema).
+            { label: t("New Snow", "新雪 24h"),   value: data.topSnow24h  != null ? `${data.topSnow24h}` : "-", sub: "cm",   resort: data.bestResort },
             { label: t("Best Base", "最大積雪"),  value: data.bestBase    != null ? `${data.bestBase}`  : "-",  sub: "cm",   resort: data.bestResort },
           ].map(({ label, value, sub, resort }) => (
             <div key={label} className="px-2 py-4 text-center flex flex-col items-center justify-center">

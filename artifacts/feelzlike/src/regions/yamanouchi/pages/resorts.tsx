@@ -59,7 +59,7 @@ function safeTime(raw: string | null | undefined): string {
 export default function Resorts() {
   const { t } = useLanguage();
   const { isWinter } = useSeason();
-  const { data: resorts, isLoading, error } = useGetResorts({ query: { refetchInterval: 600000, enabled: isWinter } });
+  const { data: resorts, isLoading, error } = useGetResorts({ query: { refetchInterval: 600000, enabled: isWinter } as never });
 
   if (isWinter && isLoading) return <LoadingScreen />;
   if (isWinter && error) return <ErrorScreen message={(error as any)?.message || "Network error"} />;
@@ -121,7 +121,7 @@ export default function Resorts() {
       {isWinter && (
         <>
           <div className="mb-6">
-            <HourlyTimeline lastUpdatedAt={resorts[0]?.sourceUpdatedAt} />
+            <HourlyTimeline lastUpdatedAt={resorts?.[0]?.sourceUpdatedAt} />
           </div>
 
           <div className="space-y-8">

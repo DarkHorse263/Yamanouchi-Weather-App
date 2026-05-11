@@ -139,7 +139,7 @@ export function TownHome() {
   const { region } = useRegion();
   const { t } = useLanguage();
   const { town } = useBaseTown();
-  const weatherQ = useGetWeather({ region: region.id });
+  const weatherQ = useGetWeather({ region: region.id as never });
   const townWeatherQ = useTownWeather(town?.lat, town?.lng);
 
   // List every region mountain with live weather data in the region's

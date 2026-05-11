@@ -103,10 +103,10 @@ export default function LocationDetail() {
   const params = mParams ?? rParams;
   const locationId = params?.id as LocationId;
 
-  const { data: weatherData, isLoading: weatherLoading, error: weatherError, refetch: weatherRefetch } = useGetLocationWeather(locationId, { query: { enabled: !!locationId } });
-  const { data: webcamData } = useGetLocationWebcams(locationId, { query: { enabled: !!locationId } });
+  const { data: weatherData, isLoading: weatherLoading, error: weatherError, refetch: weatherRefetch } = useGetLocationWeather(locationId, { query: { enabled: !!locationId } as never });
+  const { data: webcamData } = useGetLocationWebcams(locationId, { query: { enabled: !!locationId } as never });
   const isResort = locationId === "thredbo" || locationId === "perisher" || locationId === "charlottes-pass" || locationId === "selwyn";
-  const { data: liftData } = useGetLocationLiftStatus(locationId as any, { query: { enabled: isResort } });
+  const { data: liftData } = useGetLocationLiftStatus(locationId as any, { query: { enabled: isResort } as never });
 
   const [activeChartMetric, setActiveChartMetric] = useState<"temperature" | "snowfall" | "windSpeed">("temperature");
   const [now, setNow] = useState(() => Date.now());

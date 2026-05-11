@@ -17,7 +17,6 @@ import { RegionSources } from "@/pages/region/RegionSources";
 import { MountainDetail as GenericMountainDetail } from "@/pages/region/MountainDetail";
 import { snowyMountainsRouter } from "@/regions/snowy-mountains/router";
 import { yamanouchiRouter } from "@/regions/yamanouchi/router";
-// Iiyama temporarily removed - see artifacts/feelzlike/src/regions/index.ts
 
 export interface RegionRouter {
   /** Renders /:region/mountain/:id (and /:region/resort/:id for legacy) */

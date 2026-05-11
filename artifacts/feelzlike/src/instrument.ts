@@ -7,7 +7,7 @@
  * no-ops silently - nothing is sent and no console noise is produced.
  *
  * One Sentry React project is shared across the four SPAs (feelzlike,
- * snowy-mountains, yamanouchi, iiyama). The `artifact` tag below lets you
+ * snowy-mountains, victorias-high-country, yamanouchi). The `artifact` tag below lets you
  * filter / split error budgets per region inside Sentry without paying for
  * four separate projects.
  */

@@ -23,9 +23,6 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   "snowy-mountains": SNOWY_MOUNTAINS_TRANSPORT,
   "victorias-high-country": VICTORIAS_HIGH_COUNTRY_TRANSPORT,
   yamanouchi: YAMANOUCHI_TRANSPORT,
-  // Iiyama temporarily removed from the active region set - see
-  // artifacts/feelzlike/src/regions/index.ts. When restored, paste back the
-  // empty `iiyama: []` entry here.
 };
 
 // Loader-time integrity check.

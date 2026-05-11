@@ -104,10 +104,10 @@ export function TownRoads() {
   // Always fetch — even regions without a live per-road table now return
   // structured chain-fitting requirement data, which we want to render.
   const query = useGetRoadConditions(
-    { region: region.id },
-    { query: { enabled: true } },
+    { region: region.id as never },
+    { query: { enabled: true } as never },
   );
-  const camsQuery = useGetWebcams({ region: region.id });
+  const camsQuery = useGetWebcams({ region: region.id as never });
   const roadCams = useMemo(() => {
     const loc = camsQuery.data?.locations.find((l) => l.locationId === `${region.id}-roads`);
     return loc?.webcams.filter((w) => w.type === "road") ?? [];

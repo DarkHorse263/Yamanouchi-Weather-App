@@ -3,11 +3,9 @@ import { snowyMountainsRegion } from "./snowy-mountains";
 import { yamanouchiRegion } from "./yamanouchi";
 import { victoriasHighCountryRegion } from "./victorias-high-country";
 
-// Iiyama is temporarily removed from the active region set while we focus on
-// shipping Snowy Mountains and Yamanouchi to v1.0. Source files for the
-// region (`./iiyama.ts`, `./iiyama/`) are kept on disk so the region can be
-// re-enabled with a single import + array entry restoration here, plus the
-// matching imports in `layouts/RegionLayout.tsx` and `layouts/TownLayout.tsx`.
+// Active region registry. Snowy Mountains + Victoria's High Country (AU)
+// and Yamanouchi (JP). Iiyama was retired from the registry on the way to
+// v1.0 - re-add it by importing its config and pushing into this array.
 export const REGIONS: RegionConfig[] = [
   snowyMountainsRegion,
   victoriasHighCountryRegion,

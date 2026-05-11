@@ -26,7 +26,10 @@ export function pushSupportStatus(): PushSupportStatus {
   if (!("PushManager" in window)) {
     // iOS Safari: PushManager exists only when launched as installed PWA
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(navigator as unknown as { MSStream?: unknown }).MSStream;
-    const standalone = window.matchMedia?.("(display-mode: standalone)").matches
+    // Cast to any: TS narrows `window` to `never` after the earlier
+    // `"PushManager" in window` discriminant in this branch.
+    const win = window as unknown as Window;
+    const standalone = win.matchMedia?.("(display-mode: standalone)").matches
       || (navigator as unknown as { standalone?: boolean }).standalone === true;
     if (isIOS && !standalone) return { supported: false, reason: "ios_needs_pwa" };
     return { supported: false, reason: "no_pushmanager" };
@@ -34,11 +37,14 @@ export function pushSupportStatus(): PushSupportStatus {
   return { supported: true };
 }
 
-function urlBase64ToUint8Array(base64String: string): Uint8Array {
+function urlBase64ToUint8Array(base64String: string): Uint8Array<ArrayBuffer> {
   const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
   const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/");
   const raw = atob(base64);
-  const out = new Uint8Array(raw.length);
+  // Allocate a real ArrayBuffer (not a SharedArrayBuffer-compatible
+  // ArrayBufferLike) so this satisfies BufferSource for PushManager.subscribe.
+  const buffer = new ArrayBuffer(raw.length);
+  const out = new Uint8Array(buffer);
   for (let i = 0; i < raw.length; ++i) out[i] = raw.charCodeAt(i);
   return out;
 }

@@ -39,7 +39,7 @@ export function TownExplore() {
           byline={`${region.name} · ${townDisplayName}`}
           title={t("Explore", "観光")}
           description={
-            region.id === "yamanouchi" || region.id === "iiyama"
+            region.id === "yamanouchi"
               ? t(
                   `Official tourism, attraction, resort and onsen links for ${region.name}.`,
                   `${region.name}の公式観光・観光地・スキー場・温泉リンク集。`,

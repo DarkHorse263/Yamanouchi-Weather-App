@@ -110,9 +110,12 @@ const YAMANOUCHI: Record<string, MountainWebcam[]> = {
 };
 
 /**
- * Iiyama region - Madarao, Tangram, Togari Onsen, Nozawa Onsen.
+ * Iiyama region webcams kept here as a dormant dataset. The region itself
+ * is no longer in the active region registry (see regions/index.ts), so
+ * `IIYAMA_DORMANT` is intentionally not spread into MOUNTAIN_WEBCAMS.
+ * Restore by spreading it back in if iiyama is ever re-enabled.
  */
-const IIYAMA: Record<string, MountainWebcam[]> = {
+const IIYAMA_DORMANT: Record<string, MountainWebcam[]> = {
   "madarao": [
     {
       id: "madarao-base",
@@ -213,9 +216,11 @@ const IIYAMA: Record<string, MountainWebcam[]> = {
  */
 const SNOWY_MOUNTAINS: Record<string, MountainWebcam[]> = {};
 
+// Reference IIYAMA_DORMANT once so TS doesn't drop it as an unused export.
+void IIYAMA_DORMANT;
+
 export const MOUNTAIN_WEBCAMS: Record<string, MountainWebcam[]> = {
   ...YAMANOUCHI,
-  ...IIYAMA,
   ...SNOWY_MOUNTAINS,
 };
 

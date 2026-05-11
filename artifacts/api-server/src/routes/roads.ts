@@ -151,7 +151,10 @@ async function fetchRoadConditions() {
             if (props.headline.toLowerCase().includes("closed")) {
               existingRoad.condition = "closed";
             } else if (props.headline.toLowerCase().includes("chain")) {
-              existingRoad.condition = "chains-required";
+              // The road `condition` enum is open/closed/caution; "chains
+              // required" is surfaced via the dedicated `chainsRequired`
+              // flag below, while the road itself stays drivable = caution.
+              existingRoad.condition = "caution";
               existingRoad.chainsRequired = true;
             } else if (props.headline.toLowerCase().includes("caution") || props.headline.toLowerCase().includes("reduce")) {
               existingRoad.condition = "caution";

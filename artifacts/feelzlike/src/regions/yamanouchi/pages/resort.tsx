@@ -89,7 +89,7 @@ export default function ResortDetail() {
   const mountain = (region.mountains ?? []).find((m) => m.id === id);
   const enabled = !!mountain;
   const { data, isLoading, error } = useGetLocationWeather(id as WeatherId, {
-    query: { enabled, refetchInterval: 600_000 },
+    query: { enabled, refetchInterval: 600_000 } as never,
   });
 
   if (!enabled) {

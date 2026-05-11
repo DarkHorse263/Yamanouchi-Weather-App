@@ -1,11 +1,26 @@
 import express, { type Express, type Request } from "express";
 import cors from "cors";
+import helmet from "helmet";
 import path from "path";
 import rateLimit from "express-rate-limit";
 import * as Sentry from "@sentry/node";
 import router from "./routes";
 
 const app: Express = express();
+
+// Helmet adds the standard security-header set (HSTS, nosniff,
+// Referrer-Policy etc). CSP, COEP and frameguard are off because:
+//  - the SPA inlines Vite-hashed bundles and would need a per-build nonce,
+//  - the Replit workspace previews the app inside a cross-origin iframe
+//    (so SAMEORIGIN frameguard would blank the preview), and
+//  - in production the same server serves the SPA, so a strict
+//    X-Frame-Options would also block any future embed-the-widget use case.
+// All other helmet defaults (HSTS, nosniff, Referrer-Policy, etc.) stay on.
+app.use(helmet({
+  contentSecurityPolicy: false,
+  crossOriginEmbedderPolicy: false,
+  frameguard: false,
+}));
 
 // Trust proxy hop count is configurable per deployment via TRUST_PROXY_HOPS.
 // The right value depends on infra topology:
@@ -41,7 +56,11 @@ app.use(cors({
     if (isOriginAllowed(origin)) return cb(null, true);
     return cb(new Error(`CORS: origin not allowed (${origin})`));
   },
-  credentials: true,
+  // No credentials: this API is bearer-token-or-session-token via query/body,
+  // never cookie auth. `credentials: true` combined with origin reflection is
+  // a CSRF foot-gun and the browser already rejects `Access-Control-Allow-
+  // Credentials: true` with `Access-Control-Allow-Origin: *` anyway.
+  credentials: false,
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -59,6 +78,19 @@ const apiLimiter = rateLimit({
   message: { error: "RATE_LIMITED", message: "Too many requests, slow down." },
 });
 
+// Tighter limiter for Google Places: each request costs real money against the
+// Maps Platform quota, and the typical user only needs a handful per session
+// (one per Explore/Stay/Eat panel load). 30/min/IP is generous for browsing,
+// brutal for scrapers. Layered ON TOP of `apiLimiter` (both must pass).
+const placesLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  limit: 30,
+  standardHeaders: "draft-7",
+  legacyHeaders: false,
+  message: { error: "RATE_LIMITED", message: "Too many places lookups, slow down." },
+});
+
+app.use("/api/places", placesLimiter);
 app.use("/api", apiLimiter, router);
 
 if (process.env.NODE_ENV === "production") {

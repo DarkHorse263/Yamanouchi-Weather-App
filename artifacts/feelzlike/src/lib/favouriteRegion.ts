@@ -23,9 +23,9 @@ const SESSION_SKIP = "feelzlike:landing-visited";
  * Allow-list of currently-live region IDs. The auto-redirect compares
  * against this so a stale localStorage entry from a renamed/removed
  * region doesn't bounce users to a broken slug. Keep in sync with the
- * region registry in `src/regions/index.ts` (Iiyama is currently paused).
+ * region registry in `src/regions/index.ts`.
  */
-const KNOWN_REGION_IDS = new Set(["snowy-mountains", "yamanouchi"]);
+const KNOWN_REGION_IDS = new Set(["snowy-mountains", "victorias-high-country", "yamanouchi"]);
 
 export function isKnownRegionId(id: string | null | undefined): id is string {
   return typeof id === "string" && KNOWN_REGION_IDS.has(id);

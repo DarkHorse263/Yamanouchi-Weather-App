@@ -264,7 +264,7 @@ function ViewResetter({ activeLayer }: { activeLayer: MapLayer }) {
 }
 
 export default function MapView() {
-  const { t, lang } = useLanguage();
+  const { t, language: lang } = useLanguage();
   const { isWinter } = useSeason();
   const [activeLayer, setActiveLayer] = useState<MapLayer>("radar");
   const tabs = isWinter ? WINTER_TABS : GREEN_TABS;
