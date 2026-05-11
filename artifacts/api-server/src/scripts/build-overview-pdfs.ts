@@ -156,7 +156,7 @@ const userBody = /* html */ `
     <tr><th>Town</th><th>Country</th><th>Mountains the town serves</th></tr>
     <tr><td><strong>Jindabyne</strong></td><td>NSW, Australia</td><td>Perisher <em class="middot">·</em> Thredbo <em class="middot">·</em> Charlotte Pass <em class="middot">·</em> Selwyn</td></tr>
     <tr><td><strong>Bright</strong></td><td>VIC, Australia</td><td>Hotham <em class="middot">·</em> Falls Creek <em class="middot">·</em> Mt Buller</td></tr>
-    <tr><td><strong>Yudanaka</strong></td><td>Nagano, Japan</td><td>Shiga Kogen (18 resorts grouped) <em class="middot">·</em> Nozawa Onsen <em class="middot">·</em> Madarao</td></tr>
+    <tr><td><strong>Yudanaka</strong></td><td>Nagano, Japan</td><td>Shiga Kogen (18 resorts grouped)</td></tr>
   </table>
 
   <h2>Winter and green season</h2>
@@ -224,7 +224,7 @@ const investorBody = /* html */ `
     <tr><th>Region</th><th>Base town</th><th>Resorts surfaced</th><th>Live integrations</th></tr>
     <tr><td>Snowy Mountains</td><td>Jindabyne</td><td>Perisher, Thredbo, Charlotte, Selwyn</td><td>BOM, NSW LiveTraffic, road cams</td></tr>
     <tr><td>Victoria's High Country</td><td>Bright</td><td>Hotham, Falls Creek, Mt Buller</td><td>BOM, VicEmergency, VicTraffic</td></tr>
-    <tr><td>Yamanouchi</td><td>Yudanaka</td><td>Shiga Kogen (18 grouped) + Nozawa, Madarao</td><td>JMA, RainViewer, OpenWeatherMap</td></tr>
+    <tr><td>Yamanouchi</td><td>Yudanaka</td><td>Shiga Kogen (18 grouped)</td><td>JMA, RainViewer, OpenWeatherMap</td></tr>
   </table>
 
   <h2>Why the shape repeats</h2>
