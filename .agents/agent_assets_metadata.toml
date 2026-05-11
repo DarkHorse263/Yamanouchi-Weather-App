@@ -54,3 +54,15 @@ id = "oJn_x5HyfY5_j8YIFGAk_"
 uri = "file://exports/feelzlike-investor-overview.pdf"
 type = "pdf"
 title = "feelzlike · investor overview (corrected)"
+
+[[outputs]]
+id = "8hwBCvSG8xFpc2yu3Ax44"
+uri = "file://artifacts/feelzlike/public/downloads/feelzlike-user-overview.pdf"
+type = "pdf"
+title = "feelzlike user overview (corrected)"
+
+[[outputs]]
+id = "0oHBoZAyl8OrYOxcjaSEB"
+uri = "file://artifacts/feelzlike/public/downloads/feelzlike-investor-overview.pdf"
+type = "pdf"
+title = "feelzlike investor overview (corrected)"
