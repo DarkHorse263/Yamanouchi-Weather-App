@@ -42,3 +42,15 @@ id = "VeAcL6ex75VX8YmNWh9xQ"
 uri = "file://.local/proposed-regions.md"
 type = "text"
 title = "Proposed regions for review (NZ + extra Nagano)"
+
+[[outputs]]
+id = "FKd5RXBPQeLc9M2gWcRjH"
+uri = "file://exports/feelzlike-user-overview.pdf"
+type = "pdf"
+title = "feelzlike — User overview"
+
+[[outputs]]
+id = "oJn_x5HyfY5_j8YIFGAk_"
+uri = "file://exports/feelzlike-investor-overview.pdf"
+type = "pdf"
+title = "feelzlike — Investor overview"
