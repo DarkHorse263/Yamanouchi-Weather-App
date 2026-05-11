@@ -133,8 +133,8 @@ export function PhotoLed() {
         {/* Country cards */}
         <section className="px-4 pt-5 pb-8 md:px-6">
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-            {/* Australia */}
-            <article className="rounded-2xl bg-white p-5 shadow-[0_8px_30px_rgb(15,23,42,0.08)] ring-1 ring-slate-100">
+            {/* Australia — snow season (May, southern hemisphere): blue */}
+            <article className="rounded-2xl bg-white p-5 shadow-[0_8px_30px_rgb(15,23,42,0.08)] ring-2 ring-sky-400/70">
               <header className="flex items-center gap-3">
                 <span aria-hidden className="text-3xl leading-none">
                   &#127462;&#127482;
@@ -143,12 +143,12 @@ export function PhotoLed() {
                   <h3 className="text-lg font-bold leading-tight tracking-tight text-sky-900">
                     Australia
                   </h3>
-                  <p className="mt-0.5 inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-emerald-700">
+                  <p className="mt-0.5 inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-sky-700">
                     <span className="relative inline-flex h-1.5 w-1.5">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-60" />
-                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-500 opacity-60" />
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-sky-500" />
                     </span>
-                    2 regions live
+                    Snow season &middot; 2 regions live
                   </p>
                 </div>
               </header>
@@ -187,8 +187,8 @@ export function PhotoLed() {
               </a>
             </article>
 
-            {/* Japan */}
-            <article className="rounded-2xl bg-white p-5 shadow-[0_8px_30px_rgb(15,23,42,0.08)] ring-1 ring-slate-100">
+            {/* Japan — off-snow season (May, northern hemisphere): emerald */}
+            <article className="rounded-2xl bg-white p-5 shadow-[0_8px_30px_rgb(15,23,42,0.08)] ring-2 ring-emerald-400/70">
               <header className="flex items-center gap-3">
                 <span aria-hidden className="text-3xl leading-none">
                   &#127471;&#127477;
@@ -202,7 +202,7 @@ export function PhotoLed() {
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-60" />
                       <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
                     </span>
-                    1 region live
+                    Green season &middot; 1 region live
                   </p>
                 </div>
               </header>
