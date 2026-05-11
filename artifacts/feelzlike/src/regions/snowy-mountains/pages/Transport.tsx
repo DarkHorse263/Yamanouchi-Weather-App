@@ -84,8 +84,8 @@ export function SnowyTransport() {
       {cooma && (
         <section className="px-4 md:px-10 pt-5 md:pt-8">
           <article className="rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50 via-white to-blue-50/40 p-6 md:p-8 shadow-sm">
-            <div className="flex items-start gap-5 flex-wrap">
-              <div className="shrink-0 rounded-xl bg-white border border-blue-100 p-3 flex items-center justify-center">
+            <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-5">
+              <div className="shrink-0 self-start rounded-xl bg-white border border-blue-100 p-3 flex items-center justify-center">
                 <img
                   src={coomaCoachesLogo}
                   alt="Cooma Coaches - Connecting the Snowy Mountains"
