@@ -57,7 +57,7 @@ const REGION_SOURCES: Record<string, SourceGroup[]> = {
       title: "Roads & transport",
       titleJa: "道路・交通",
       items: [
-        { label: "Transport for NSW – Live Traffic", labelJa: "ライブトラフィックNSW", url: "https://www.livetraffic.com" },
+        { label: "Transport for NSW - Live Traffic", labelJa: "ライブトラフィックNSW", url: "https://www.livetraffic.com" },
         { label: "Cooma Coaches", url: "https://www.coomacoaches.com.au" },
         { label: "NSW TrainLink", url: "https://transportnsw.info/regional" },
       ],
@@ -77,7 +77,7 @@ const REGION_SOURCES: Record<string, SourceGroup[]> = {
       titleJa: "地図・画像",
       items: [
         { label: "OpenWeatherMap weather tiles", url: "https://openweathermap.org" },
-        { label: "BOM radar – NSW alpine", url: "http://www.bom.gov.au/products/IDR713.loop.shtml" },
+        { label: "BOM radar - NSW alpine", url: "http://www.bom.gov.au/products/IDR713.loop.shtml" },
       ],
     },
     FORECAST_ENSEMBLE,
@@ -113,7 +113,7 @@ const REGION_SOURCES: Record<string, SourceGroup[]> = {
       titleJa: "地図・画像",
       items: [
         { label: "OpenWeatherMap weather tiles", url: "https://openweathermap.org" },
-        { label: "JMA radar – Nagano", labelJa: "気象庁レーダー（長野）", url: "https://www.jma.go.jp/bosai/nowc/" },
+        { label: "JMA radar - Nagano", labelJa: "気象庁レーダー（長野）", url: "https://www.jma.go.jp/bosai/nowc/" },
       ],
     },
     FORECAST_ENSEMBLE,

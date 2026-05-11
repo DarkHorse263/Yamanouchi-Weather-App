@@ -3,7 +3,7 @@ import { Mail, AlertTriangle } from "lucide-react";
 
 /**
  * Newsletter unsubscribe landing page. Reached from the GET redirect of
- * /api/newsletter/unsubscribe — gives a one-click email link a clear
+ * /api/newsletter/unsubscribe Â· gives a one-click email link a clear
  * confirmation surface (required for AU Spam Act / CAN-SPAM compliance).
  */
 function readErrorFromQuery(): string | null {

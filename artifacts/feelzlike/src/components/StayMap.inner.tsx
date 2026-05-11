@@ -52,8 +52,8 @@ function bucketDriveMin(min: number | null | undefined): DriveBucket {
 
 const BUCKET_COLOR: Record<DriveBucket, { fill: string; ring: string; label: string }> = {
   green:  { fill: "#16a34a", ring: "#bbf7d0", label: "≤15 min" },
-  yellow: { fill: "#ca8a04", ring: "#fef08a", label: "15–30 min" },
-  orange: { fill: "#ea580c", ring: "#fed7aa", label: "30–45 min" },
+  yellow: { fill: "#ca8a04", ring: "#fef08a", label: "15-30 min" },
+  orange: { fill: "#ea580c", ring: "#fed7aa", label: "30-45 min" },
   red:    { fill: "#dc2626", ring: "#fecaca", label: "45+ min" },
   gray:   { fill: "#64748b", ring: "#e2e8f0", label: "Drive time unknown" },
 };

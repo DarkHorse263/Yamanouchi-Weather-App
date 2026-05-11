@@ -101,7 +101,7 @@ export function TownRoads() {
   const { t, language } = useLanguage();
   const { town } = useBaseTown();
   const dataAvailable = region.roadsSource?.dataAvailable ?? true;
-  // Always fetch — even regions without a live per-road table now return
+  // Always fetch Â· even regions without a live per-road table now return
   // structured chain-fitting requirement data, which we want to render.
   const query = useGetRoadConditions(
     { region: region.id as never },

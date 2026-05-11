@@ -392,7 +392,7 @@ function PowderBadge({
           {style.label} · {t("Powder Window", "パウダーウィンドウ")}
         </p>
         <p className="text-xs font-semibold tabular-nums">
-          {startLabel}–{endLabel} ·{" "}
+          {startLabel}-{endLabel} ·{" "}
           <span className="font-bold">
             {window.totalSnow}cm · {window.avgWind}km/h
           </span>
@@ -466,7 +466,7 @@ function PowderDetail({
         {style.label} · {t("Powder Window", "パウダーウィンドウ")}
       </p>
       <p className="font-display text-base font-semibold mt-0.5">
-        {startLabel}–{endLabel}
+        {startLabel}-{endLabel}
       </p>
       <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
         <DetailStat

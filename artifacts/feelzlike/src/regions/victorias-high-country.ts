@@ -124,7 +124,7 @@ export const victoriasHighCountryRegion: RegionConfig = {
   footer: "v0.3 · feelzlike",
   tourismLinks: [
     { category: "Tourism", label: "Visit Victoria's High Country", url: "https://www.victoriashighcountry.com.au/", blurb: "Official regional tourism site" },
-    { category: "Tourism", label: "Visit Victoria – High Country", url: "https://www.visitvictoria.com/regions/high-country" },
+    { category: "Tourism", label: "Visit Victoria - High Country", url: "https://www.visitvictoria.com/regions/high-country" },
     { category: "Tourism", label: "Mansfield Mt Buller Tourism", url: "https://www.mansfieldmtbuller.com.au/" },
     { category: "Tourism", label: "Bright & Surrounds Tourism", url: "https://www.brightvic.com.au/" },
     { category: "National parks", label: "Alpine National Park (Parks Victoria)", url: "https://www.parks.vic.gov.au/places-to-see/parks/alpine-national-park" },

@@ -17,7 +17,7 @@ export const YAMANOUCHI_TRANSPORT: TransportProviderList = [
     phone: null,
     website: "https://www.nagaden-net.co.jp",
     route_summary:
-      "Nagano Station → Yudanaka Station via the Nagaden Yudanaka line. The Limited Express \"Yukemuri\" / \"Snow Monkey\" makes the trip in around 45–50 minutes; local services run more often.",
+      "Nagano Station → Yudanaka Station via the Nagaden Yudanaka line. The Limited Express \"Yukemuri\" / \"Snow Monkey\" makes the trip in around 45-50 minutes; local services run more often.",
     route_summary_local:
       "長野駅から湯田中駅まで長野電鉄湯田中線で約45〜50分（特急ゆけむり／スノーモンキー）。普通電車はより頻繁に運行。",
     schedule_url: "https://www.nagaden-net.co.jp/timetable/",
@@ -33,7 +33,7 @@ export const YAMANOUCHI_TRANSPORT: TransportProviderList = [
     website:
       "https://www.shigakogen.gr.jp/english/topics/shiga-kogen-bus-service-information.html",
     route_summary:
-      "Direct express bus from Nagano Station East Exit (Stop 23) to Yamanoeki / Shiga Kogen, ~70 minutes, no transfer needed. Adult ¥3,200–3,800 one-way.",
+      "Direct express bus from Nagano Station East Exit (Stop 23) to Yamanoeki / Shiga Kogen, ~70 minutes, no transfer needed. Adult ¥3,200-3,800 one-way.",
     route_summary_local:
       "長野駅東口23番乗り場から志賀高原（山ノ駅）まで急行バスで約70分・乗り換えなし。大人片道¥3,200〜3,800。",
     schedule_url:
@@ -50,7 +50,7 @@ export const YAMANOUCHI_TRANSPORT: TransportProviderList = [
     website:
       "https://www.snowmonkeyresorts.com/access/nagaden-local-bus-timetable/",
     route_summary:
-      "Yudanaka Station ↔ Snow Monkey Park ↔ Yamanoeki (Shiga Kogen) local bus connecting the onsen towns with the highland resorts. Adult one-way ¥390 (child ¥200) Yudanaka–Park.",
+      "Yudanaka Station ↔ Snow Monkey Park ↔ Yamanoeki (Shiga Kogen) local bus connecting the onsen towns with the highland resorts. Adult one-way ¥390 (child ¥200) Yudanaka-Park.",
     route_summary_local:
       "湯田中駅〜野猿公苑〜山ノ駅（志賀高原）を結ぶローカルバス。湯田中〜公苑間は大人片道¥390（子供¥200）。",
     schedule_url:

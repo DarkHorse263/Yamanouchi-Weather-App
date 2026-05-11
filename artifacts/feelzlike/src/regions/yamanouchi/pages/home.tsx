@@ -122,7 +122,7 @@ const GREEN_HIGHLIGHTS = [
   { icon: Waves, name: "SORA Terrace", nameJa: "SORAテラス", desc: "Cloud sea views at 1,770m", descJa: "標高1,770mの雲海" },
   { icon: Bike, name: "Cycling Routes", nameJa: "サイクリングコース", desc: "Valley & mountain roads", descJa: "渓谷と山岳道路" },
   { icon: Waves, name: "9 Bathhouse Tour", nameJa: "外湯めぐり", desc: "Shibu Onsen stone streets", descJa: "渋温泉の石畳" },
-  { icon: TreePine, name: "Autumn Colours", nameJa: "紅葉", desc: "Sep–Nov koyo season", descJa: "9〜11月 紅葉シーズン" },
+  { icon: TreePine, name: "Autumn Colours", nameJa: "紅葉", desc: "Sep-Nov koyo season", descJa: "9〜11月 紅葉シーズン" },
 ];
 
 function GreenHome({ t }: { t: (en: string, ja: string) => string }) {
@@ -513,7 +513,7 @@ export default function Home() {
         className="rounded-xl border border-border bg-secondary px-4 py-3">
         <p className="text-[10px] leading-relaxed text-muted-foreground">
           {t(
-            "Snow depth & conditions from resort reporting networks. Temperature, wind & forecasts from the Japan Meteorological Agency. Updated hourly 5 AM–6 PM JST. For informational use only - verify directly with resorts before skiing.",
+            "Snow depth & conditions from resort reporting networks. Temperature, wind & forecasts from the Japan Meteorological Agency. Updated hourly 5 AM-6 PM JST. For informational use only - verify directly with resorts before skiing.",
             "積雪・ゲレンデ状況は各スキー場の報告に基づきます。気温・風・予報は気象庁提供。毎日5時〜18時（JST）更新。参考情報です。滑走前に各スキー場へ直接ご確認ください。"
           )}
         </p>

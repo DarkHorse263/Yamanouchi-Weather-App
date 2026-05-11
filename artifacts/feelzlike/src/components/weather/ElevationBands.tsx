@@ -17,7 +17,7 @@ interface Props {
  *
  * Self-hides when `weatherUnlockedId` is undefined (mountain not mapped),
  * when the integration is unconfigured (no API keys), or when upstream
- * returns no data — the component is intentionally an additive layer
+ * returns no data Â· the component is intentionally an additive layer
  * over the existing Open-Meteo readings, not a replacement.
  */
 export function ElevationBands({ weatherUnlockedId }: Props) {

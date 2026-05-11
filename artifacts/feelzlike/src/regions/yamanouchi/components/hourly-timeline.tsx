@@ -54,7 +54,7 @@ export function HourlyTimeline({ lastUpdatedAt, className }: HourlyTimelineProps
           </div>
         ) : (
           <span className="text-xs font-medium text-muted-foreground">
-            {t("5AM – 6PM JST", "5時〜18時 JST")}
+            {t("5AM - 6PM JST", "5時〜18時 JST")}
           </span>
         )}
       </div>

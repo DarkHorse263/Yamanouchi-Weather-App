@@ -148,7 +148,7 @@ export function LiftWindHoldPanel({
                     </p>
                     <p className="text-[11px] text-muted-foreground tabular-nums">
                       {t(TYPE_LABEL[lift.type].en, TYPE_LABEL[lift.type].ja)} ·{" "}
-                      {lift.baseElevation}–{lift.topElevation}m
+                      {lift.baseElevation}-{lift.topElevation}m
                     </p>
                   </div>
                 </div>

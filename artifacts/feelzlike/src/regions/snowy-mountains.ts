@@ -67,9 +67,9 @@ export const snowyMountainsRegion: RegionConfig = {
   ],
   footer: "v0.3 · feelzlike",
   tourismLinks: [
-    { category: "Tourism", label: "Snowy Mountains – Destination NSW", url: "https://www.snowymountains.com.au/", blurb: "Official regional tourism site" },
-    { category: "Tourism", label: "Visit NSW – Snowy Mountains", url: "https://www.visitnsw.com/destinations/snowy-mountains" },
-    { category: "Tourism", label: "Snowy Valleys Council – Visitor Info", url: "https://www.visitsnowyvalleys.com.au/" },
+    { category: "Tourism", label: "Snowy Mountains - Destination NSW", url: "https://www.snowymountains.com.au/", blurb: "Official regional tourism site" },
+    { category: "Tourism", label: "Visit NSW - Snowy Mountains", url: "https://www.visitnsw.com/destinations/snowy-mountains" },
+    { category: "Tourism", label: "Snowy Valleys Council - Visitor Info", url: "https://www.visitsnowyvalleys.com.au/" },
     { category: "National parks", label: "Kosciuszko National Park (NPWS)", url: "https://www.nationalparks.nsw.gov.au/visit-a-park/parks/kosciuszko-national-park" },
     { category: "Resorts", label: "Perisher", url: "https://www.perisher.com.au" },
     { category: "Resorts", label: "Thredbo", url: "https://www.thredbo.com.au" },

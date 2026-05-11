@@ -33,7 +33,7 @@ const ACTIVITIES: Activity[] = [
     region: "Shiga Kogen",
     regionJa: "志賀高原",
     url: "https://www.shigakogen.co.jp/english/",
-    season: "May – Oct",
+    season: "May - Oct",
     seasonJa: "5月～10月",
   },
   {
@@ -57,7 +57,7 @@ const ACTIVITIES: Activity[] = [
     region: "Ryuoo",
     regionJa: "竜王",
     url: "https://www.ryuoo.com/en/",
-    season: "Jun – Nov",
+    season: "Jun - Nov",
     seasonJa: "6月～11月",
   },
   {
@@ -68,7 +68,7 @@ const ACTIVITIES: Activity[] = [
     icon: Bike,
     region: "Yomase · Yudanaka",
     regionJa: "夜間瀬・湯田中",
-    season: "Apr – Nov",
+    season: "Apr - Nov",
     seasonJa: "4月～11月",
   },
   {
@@ -91,7 +91,7 @@ const ACTIVITIES: Activity[] = [
     icon: TreePine,
     region: "Shiga Kogen",
     regionJa: "志賀高原",
-    season: "May – Oct",
+    season: "May - Oct",
     seasonJa: "5月～10月",
   },
   {
@@ -113,7 +113,7 @@ const ACTIVITIES: Activity[] = [
     icon: TreePine,
     region: "Shiga Kogen · Ryuoo",
     regionJa: "志賀高原・竜王",
-    season: "Sep – Nov",
+    season: "Sep - Nov",
     seasonJa: "9月～11月",
   },
 ];

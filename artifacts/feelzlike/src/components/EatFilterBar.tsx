@@ -498,7 +498,7 @@ function SortSelect({
         <SelectItem value="open_first">Open now first</SelectItem>
         <SelectItem value="price_asc">Price: low to high</SelectItem>
         <SelectItem value="price_desc">Price: high to low</SelectItem>
-        <SelectItem value="name_asc">Name A–Z</SelectItem>
+        <SelectItem value="name_asc">Name A-Z</SelectItem>
       </SelectContent>
     </Select>
   );

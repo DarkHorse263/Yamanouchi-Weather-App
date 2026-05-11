@@ -103,7 +103,7 @@ router.post("/newsletter/subscribe", async (req, res): Promise<void> => {
       res.json({
         ok: true,
         status: "already_verified",
-        message: "You're already on the list — preferences updated.",
+        message: "You're already on the list · preferences updated.",
       });
       return;
     }

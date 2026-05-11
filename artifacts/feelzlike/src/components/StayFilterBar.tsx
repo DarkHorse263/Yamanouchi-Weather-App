@@ -493,7 +493,7 @@ function SortSelect({
         <SelectItem value="drive_nearest">Drive time to nearest mountain</SelectItem>
         <SelectItem value="price_asc">Price: low to high</SelectItem>
         <SelectItem value="price_desc">Price: high to low</SelectItem>
-        <SelectItem value="name_asc">Name A–Z</SelectItem>
+        <SelectItem value="name_asc">Name A-Z</SelectItem>
       </SelectContent>
     </Select>
   );

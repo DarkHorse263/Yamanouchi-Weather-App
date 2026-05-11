@@ -91,7 +91,7 @@ function formatAgo(iso: string | undefined, now: number, fallback = "loading\u20
   return `${Math.round(hr / 24)}d ago`;
 }
 
-// AU = southern hemisphere (snow Jun–Sep), JP = northern (snow Dec–Mar).
+// AU = southern hemisphere (snow Jun-Sep), JP = northern (snow Dec-Mar).
 function seasonForCountry(code: "AU" | "JP"): "winter" | "green" {
   const month = new Date().getMonth() + 1;
   if (code === "AU") return month >= 6 && month <= 9 ? "winter" : "green";

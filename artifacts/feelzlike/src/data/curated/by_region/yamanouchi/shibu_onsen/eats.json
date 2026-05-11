@@ -28,13 +28,13 @@
       "Japanese"
     ],
     "hours": {
-      "monday": "11:30–15:00, 18:00–23:30",
-      "tuesday": "11:30–15:00, 18:00–23:30",
-      "wednesday": "11:30–15:00, 18:00–23:30",
-      "thursday": "11:30–15:00, 18:00–23:30",
-      "friday": "11:30–15:00, 18:00–23:30",
-      "saturday": "11:30–15:00, 18:00–23:30",
-      "sunday": "11:30–15:00, 18:00–23:30",
+      "monday": "11:30-15:00, 18:00-23:30",
+      "tuesday": "11:30-15:00, 18:00-23:30",
+      "wednesday": "11:30-15:00, 18:00-23:30",
+      "thursday": "11:30-15:00, 18:00-23:30",
+      "friday": "11:30-15:00, 18:00-23:30",
+      "saturday": "11:30-15:00, 18:00-23:30",
+      "sunday": "11:30-15:00, 18:00-23:30",
       "closed": "3rd and 5th Wednesday (except public holidays)"
     },
     "last_order_time": "14:00 (lunch) / 20:00 (dinner) - closes when soba sells out",
@@ -79,13 +79,13 @@
       "Japanese"
     ],
     "hours": {
-      "monday": "11:30–14:00 (approx.)",
-      "tuesday": "11:30–14:00 (approx.)",
+      "monday": "11:30-14:00 (approx.)",
+      "tuesday": "11:30-14:00 (approx.)",
       "wednesday": "closed (verify locally)",
-      "thursday": "11:30–14:00 (approx.)",
-      "friday": "11:30–14:00 (approx.)",
-      "saturday": "11:30–14:00 (approx.)",
-      "sunday": "11:30–14:00 (approx.)",
+      "thursday": "11:30-14:00 (approx.)",
+      "friday": "11:30-14:00 (approx.)",
+      "saturday": "11:30-14:00 (approx.)",
+      "sunday": "11:30-14:00 (approx.)",
       "note": "Hours vary seasonally; closes when sold out. Confirm before visiting."
     },
     "last_order_time": "13:30 (approx.)",
@@ -109,7 +109,7 @@
     "town": "shibu_onsen",
     "region": "yamanouchi",
     "short_description": "No-menu omakase izakaya - Shibu Onsen's Midnight Diner. The charismatic host cooks what he feels like; the result is always generous and often unforgettable.",
-    "long_description": "Chokkun is the most beloved eating destination in Shibu Onsen among international visitors, and its appeal has nothing to do with a menu - because there is no menu. The host (and often his partner) cooks an omakase sequence of whatever inspires him that evening: local fish, seasonal vegetables, tofu, mushrooms, sometimes ramen. Prices are remarkably low (around ¥1,500–¥2,500 per person including drinks). The sign on the door says 'come meet the funny owner'. Beer is sometimes poured by guests themselves from taps behind the counter. A polaroid wall tracks visitors from around the world. Vegetarian guests have been accommodated when they told the owner in advance. The single most important social spot in the village. Cash only; QR code payments accepted. Opens around 18:00–18:30.",
+    "long_description": "Chokkun is the most beloved eating destination in Shibu Onsen among international visitors, and its appeal has nothing to do with a menu - because there is no menu. The host (and often his partner) cooks an omakase sequence of whatever inspires him that evening: local fish, seasonal vegetables, tofu, mushrooms, sometimes ramen. Prices are remarkably low (around ¥1,500-¥2,500 per person including drinks). The sign on the door says 'come meet the funny owner'. Beer is sometimes poured by guests themselves from taps behind the counter. A polaroid wall tracks visitors from around the world. Vegetarian guests have been accommodated when they told the owner in advance. The single most important social spot in the village. Cash only; QR code payments accepted. Opens around 18:00-18:30.",
     "address": "2138 Heion, Yamanouchi-machi, Shimotakai-gun, Nagano",
     "lat": 36.7477,
     "lng": 138.4234,
@@ -129,13 +129,13 @@
       "ramen"
     ],
     "hours": {
-      "monday": "18:00–22:00 (approx.)",
-      "tuesday": "18:00–22:00 (approx.)",
+      "monday": "18:00-22:00 (approx.)",
+      "tuesday": "18:00-22:00 (approx.)",
       "wednesday": "closed (verify locally)",
-      "thursday": "18:00–22:00 (approx.)",
-      "friday": "18:00–22:00 (approx.)",
-      "saturday": "18:00–22:00 (approx.)",
-      "sunday": "18:00–22:00 (approx.)",
+      "thursday": "18:00-22:00 (approx.)",
+      "friday": "18:00-22:00 (approx.)",
+      "saturday": "18:00-22:00 (approx.)",
+      "sunday": "18:00-22:00 (approx.)",
       "note": "Irregular hours. Queue forms before opening. Confirm locally."
     },
     "last_order_time": "21:30 (approx.)",
@@ -180,13 +180,13 @@
       "Chinese-style"
     ],
     "hours": {
-      "monday": "11:00–14:00, 17:00–00:00",
+      "monday": "11:00-14:00, 17:00-00:00",
       "tuesday": "closed",
-      "wednesday": "11:00–14:00, 17:00–00:00",
-      "thursday": "11:00–14:00, 17:00–00:00",
-      "friday": "11:00–14:00, 17:00–00:00",
-      "saturday": "11:00–14:00, 17:00–00:00",
-      "sunday": "11:00–14:00, 17:00–00:00"
+      "wednesday": "11:00-14:00, 17:00-00:00",
+      "thursday": "11:00-14:00, 17:00-00:00",
+      "friday": "11:00-14:00, 17:00-00:00",
+      "saturday": "11:00-14:00, 17:00-00:00",
+      "sunday": "11:00-14:00, 17:00-00:00"
     },
     "last_order_time": "23:30",
     "reservation": "not_needed",
@@ -275,7 +275,7 @@
       "Japanese"
     ],
     "hours": {
-      "note": "Opens at 18:30. Closing time unconfirmed; typically 22:00–23:00. Verify locally."
+      "note": "Opens at 18:30. Closing time unconfirmed; typically 22:00-23:00. Verify locally."
     },
     "last_order_time": "22:00 (approx.)",
     "reservation": "not_needed",
@@ -298,7 +298,7 @@
     "town": "shibu_onsen",
     "region": "yamanouchi",
     "short_description": "The early-riser's anchor - opens at 6 AM in ski season, serves AeroPress and specialty pour-over, with a popular all-day breakfast plate.",
-    "long_description": "Yamanouchi Coffee has developed a cult following as the best-quality coffee in the Shibu Onsen/Yudanaka area. Run by a barista owner, it sources specialty-grade beans from BMC Coffee (a local Nagano roaster) and serves them via AeroPress, hand-drip, and espresso. The signature AeroPress (¥650) is the order. In winter (December–May) the shop opens at 6 AM - crucial for skiers heading to Shiga Kogen early. A hearty all-day breakfast plate using local ingredients is the most popular food item. Mobile pre-order available for 6:15 AM pickup. Free WiFi and power outlets. Located at Matsuda-ya building ground floor, 2226 Hirao. Closed Thursdays.",
+    "long_description": "Yamanouchi Coffee has developed a cult following as the best-quality coffee in the Shibu Onsen/Yudanaka area. Run by a barista owner, it sources specialty-grade beans from BMC Coffee (a local Nagano roaster) and serves them via AeroPress, hand-drip, and espresso. The signature AeroPress (¥650) is the order. In winter (December-May) the shop opens at 6 AM - crucial for skiers heading to Shiga Kogen early. A hearty all-day breakfast plate using local ingredients is the most popular food item. Mobile pre-order available for 6:15 AM pickup. Free WiFi and power outlets. Located at Matsuda-ya building ground floor, 2226 Hirao. Closed Thursdays.",
     "address": "2226 Hirao, Matsuda-ya 1F, Yamanouchi-machi, Shimotakai-gun, Nagano 381-0401",
     "lat": 36.748,
     "lng": 138.4238,
@@ -319,15 +319,15 @@
       "breakfast"
     ],
     "hours": {
-      "monday": "06:00–14:00 (Dec–May) / 07:00–15:00 (Jun–Nov)",
-      "tuesday": "06:00–14:00 (Dec–May) / 07:00–15:00 (Jun–Nov)",
-      "wednesday": "06:00–14:00 (Dec–May) / 07:00–15:00 (Jun–Nov)",
+      "monday": "06:00-14:00 (Dec-May) / 07:00-15:00 (Jun-Nov)",
+      "tuesday": "06:00-14:00 (Dec-May) / 07:00-15:00 (Jun-Nov)",
+      "wednesday": "06:00-14:00 (Dec-May) / 07:00-15:00 (Jun-Nov)",
       "thursday": "closed",
-      "friday": "06:00–14:00 (Dec–May) / 07:00–15:00 (Jun–Nov)",
-      "saturday": "06:00–14:00 (Dec–May) / 07:00–15:00 (Jun–Nov)",
-      "sunday": "06:00–14:00 (Dec–May) / 07:00–15:00 (Jun–Nov)"
+      "friday": "06:00-14:00 (Dec-May) / 07:00-15:00 (Jun-Nov)",
+      "saturday": "06:00-14:00 (Dec-May) / 07:00-15:00 (Jun-Nov)",
+      "sunday": "06:00-14:00 (Dec-May) / 07:00-15:00 (Jun-Nov)"
     },
-    "last_order_time": "13:30 (Dec–May) / 14:30 (Jun–Nov)",
+    "last_order_time": "13:30 (Dec-May) / 14:30 (Jun-Nov)",
     "reservation": "not_needed",
     "reservation_link": null,
     "payment": "both",
@@ -350,7 +350,7 @@
     "town": "shibu_onsen",
     "region": "yamanouchi",
     "short_description": "The in-house café of Koishiya Ryokan, open to outside guests for morning specialty coffee and a dinner service - the only dedicated barista café in the village.",
-    "long_description": "Open to non-staying guests, Koishiya's café is the most refined coffee destination in the village, using a Synesso Hydra-3 espresso machine and specialty-grade beans for hand-crafted lattes and pour-overs. Morning service (7:30–10:00) offers Japanese-style breakfast and baguette sandwiches alongside espresso drinks. Evening dinner service (18:00–21:30) provides a sit-down option for guests who don't have ryokan meals. Lunch and midday café service suspended since July 2024 with no confirmed return date. Last dinner order at 21:00. Both services require advance reservation. This is the primary dinner option for guests staying at Koishiya Ryokan (which doesn't include meals) or other B&B-style accommodation.",
+    "long_description": "Open to non-staying guests, Koishiya's café is the most refined coffee destination in the village, using a Synesso Hydra-3 espresso machine and specialty-grade beans for hand-crafted lattes and pour-overs. Morning service (7:30-10:00) offers Japanese-style breakfast and baguette sandwiches alongside espresso drinks. Evening dinner service (18:00-21:30) provides a sit-down option for guests who don't have ryokan meals. Lunch and midday café service suspended since July 2024 with no confirmed return date. Last dinner order at 21:00. Both services require advance reservation. This is the primary dinner option for guests staying at Koishiya Ryokan (which doesn't include meals) or other B&B-style accommodation.",
     "address": "2150 Heion, Yamanouchi-machi, Shimotakai-gun, Nagano",
     "lat": 36.7477,
     "lng": 138.4233,
@@ -371,9 +371,9 @@
       "Western"
     ],
     "hours": {
-      "morning": "07:30–10:00 (LO 09:30)",
+      "morning": "07:30-10:00 (LO 09:30)",
       "lunch": "closed until further notice",
-      "dinner": "18:00–21:30 (LO 21:00)",
+      "dinner": "18:00-21:30 (LO 21:00)",
       "note": "Reservation required at check-in for dinner. Lunch suspended since July 2024."
     },
     "last_order_time": "09:30 (morning) / 21:00 (dinner)",
@@ -419,7 +419,7 @@
       "sweets"
     ],
     "hours": {
-      "note": "Daytime hours, seasonal. Typically 10:00–17:00. Confirm locally."
+      "note": "Daytime hours, seasonal. Typically 10:00-17:00. Confirm locally."
     },
     "last_order_time": "16:30 (approx.)",
     "reservation": "not_needed",
@@ -463,13 +463,13 @@
       "washoku"
     ],
     "hours": {
-      "monday": "11:00–14:00, 17:30–21:30",
-      "tuesday": "11:00–14:00, 17:30–21:30",
+      "monday": "11:00-14:00, 17:30-21:30",
+      "tuesday": "11:00-14:00, 17:30-21:30",
       "wednesday": "closed",
-      "thursday": "17:30–21:30 (dinner only)",
-      "friday": "11:00–14:00, 17:30–21:30",
-      "saturday": "11:00–14:00, 17:30–21:30",
-      "sunday": "11:00–14:00, 17:30–21:30"
+      "thursday": "17:30-21:30 (dinner only)",
+      "friday": "11:00-14:00, 17:30-21:30",
+      "saturday": "11:00-14:00, 17:30-21:30",
+      "sunday": "11:00-14:00, 17:30-21:30"
     },
     "last_order_time": "21:00",
     "reservation": "recommended",
@@ -493,7 +493,7 @@
     "town": "shibu_onsen",
     "region": "yamanouchi",
     "short_description": "Small Chinese restaurant serving ramen at the entry to Shibu Onsen - one of the longest-operating food spots in the village.",
-    "long_description": "Rairaiken (来々軒, meaning 'come come inn' in Chinese-Japanese fusion naming) is an unpretentious Chinese-Japanese restaurant near the main approach to Shibu Onsen. Ramen is the anchor - simple, warming, and inexpensive. The address is 2300 Andai (slightly outside the main street concentration), making it a good option before or after arriving by bus. Local reviews note the 'tasty ramen at standard prices of ¥700–¥800 per bowl'. Phone: +81-269-33-2269. A reliable fallback when the soba shops are sold out.",
+    "long_description": "Rairaiken (来々軒, meaning 'come come inn' in Chinese-Japanese fusion naming) is an unpretentious Chinese-Japanese restaurant near the main approach to Shibu Onsen. Ramen is the anchor - simple, warming, and inexpensive. The address is 2300 Andai (slightly outside the main street concentration), making it a good option before or after arriving by bus. Local reviews note the 'tasty ramen at standard prices of ¥700-¥800 per bowl'. Phone: +81-269-33-2269. A reliable fallback when the soba shops are sold out.",
     "address": "2300 Andai, Yamanouchi-machi, Shimotakai-gun, Nagano",
     "lat": 36.7475,
     "lng": 138.4225,
@@ -517,7 +517,7 @@
     "payment": "cash_only",
     "english_menu": "no",
     "signature_dishes": [
-      "Ramen (¥700–800)",
+      "Ramen (¥700-800)",
       "Chinese-Japanese set meals"
     ],
     "vegetarian_friendly": "no",
@@ -532,7 +532,7 @@
     "town": "shibu_onsen",
     "region": "yamanouchi",
     "short_description": "The handful of traditional sweet and snack shops along the cobblestone main street - essential pauses between public bathhouses.",
-    "long_description": "Shibu Onsen's main street supports several small family-run shops selling traditional Japanese snacks that are integral to the kuyu meguri walk. These include: steamed manju (red-bean filled buns, often warm), senbei (grilled rice crackers, sometimes with miso or soy glaze), oyaki (Nagano's stuffed grilled dumplings - the best here use local wild vegetables like nozawana), and onsen tamago (eggs slow-cooked in spring water). Matsumoto Seika (松本製菓) is the best-known of these, listed on Tabelog as a wagashi (Japanese confectionery) shop. These are cash-only, seasonally variable, and typically open during daylight hours. They close early. This entry covers the category rather than a single shop because the street has 2–3 interchangeable small operators, and their stock and hours shift frequently.",
+    "long_description": "Shibu Onsen's main street supports several small family-run shops selling traditional Japanese snacks that are integral to the kuyu meguri walk. These include: steamed manju (red-bean filled buns, often warm), senbei (grilled rice crackers, sometimes with miso or soy glaze), oyaki (Nagano's stuffed grilled dumplings - the best here use local wild vegetables like nozawana), and onsen tamago (eggs slow-cooked in spring water). Matsumoto Seika (松本製菓) is the best-known of these, listed on Tabelog as a wagashi (Japanese confectionery) shop. These are cash-only, seasonally variable, and typically open during daylight hours. They close early. This entry covers the category rather than a single shop because the street has 2-3 interchangeable small operators, and their stock and hours shift frequently.",
     "address": "Main cobblestone street, Heion, Yamanouchi-machi, Shimotakai-gun, Nagano",
     "lat": 36.7479,
     "lng": 138.4237,
@@ -550,7 +550,7 @@
       "street food"
     ],
     "hours": {
-      "note": "Typically 09:00–17:00, some close by 16:00. Seasonal. Cash only."
+      "note": "Typically 09:00-17:00, some close by 16:00. Seasonal. Cash only."
     },
     "last_order_time": "16:30 (approx.)",
     "reservation": "not_accepted",
@@ -592,7 +592,7 @@
       "Japanese small plates"
     ],
     "hours": {
-      "note": "Evening only, typically 18:00–22:00. Verify locally."
+      "note": "Evening only, typically 18:00-22:00. Verify locally."
     },
     "last_order_time": "21:30 (approx.)",
     "reservation": "not_needed",
@@ -632,7 +632,7 @@
       "karaoke"
     ],
     "hours": {
-      "note": "Late evening only, typically 20:00–01:00. Irregular. Verify locally."
+      "note": "Late evening only, typically 20:00-01:00. Irregular. Verify locally."
     },
     "last_order_time": "00:30 (approx.)",
     "reservation": "not_needed",
@@ -672,7 +672,7 @@
       "Japanese"
     ],
     "hours": {
-      "note": "Evening only, typically 18:00–22:00. Verify locally as hours are irregular."
+      "note": "Evening only, typically 18:00-22:00. Verify locally as hours are irregular."
     },
     "last_order_time": "21:30 (approx.)",
     "reservation": "not_needed",
@@ -712,7 +712,7 @@
       "kaiseki-style"
     ],
     "hours": {
-      "note": "Lunch 12:00–14:00, Dinner 18:00–20:00. Reservation recommended. Verify locally."
+      "note": "Lunch 12:00-14:00, Dinner 18:00-20:00. Reservation recommended. Verify locally."
     },
     "last_order_time": "19:30 (dinner approx.)",
     "reservation": "recommended",

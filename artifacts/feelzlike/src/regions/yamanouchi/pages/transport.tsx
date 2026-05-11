@@ -262,7 +262,7 @@ export default function Transport() {
               </div>
               <div className="bg-slate-50 rounded-lg px-3 py-2">
                 <p className="text-[10px] text-slate-400 uppercase tracking-wide font-bold">{t("Hours", "運行時間")}</p>
-                <p className="text-base font-black text-slate-800">08:30–17:30</p>
+                <p className="text-base font-black text-slate-800">08:30-17:30</p>
               </div>
             </div>
 
@@ -312,8 +312,8 @@ export default function Transport() {
                     {t("Nagano Station East Exit, Stop 23 → Yamanoeki · ~70 min · no transfer needed", "長野駅東口23番→山ノ駅 · 約70分 · 乗り換えなし")}
                   </p>
                   <div className="flex gap-2 mt-2">
-                    <span className="bg-slate-100 rounded px-2 py-0.5 text-[11px] font-bold text-slate-700">¥3,200–3,800</span>
-                    <span className="bg-slate-100 rounded px-2 py-0.5 text-[11px] font-bold text-slate-700">{t("child ¥1,600–1,900", "子供 ¥1,600–1,900")}</span>
+                    <span className="bg-slate-100 rounded px-2 py-0.5 text-[11px] font-bold text-slate-700">¥3,200-3,800</span>
+                    <span className="bg-slate-100 rounded px-2 py-0.5 text-[11px] font-bold text-slate-700">{t("child ¥1,600-1,900", "子供 ¥1,600-1,900")}</span>
                   </div>
                 </div>
               </div>
@@ -371,7 +371,7 @@ export default function Transport() {
                     <p className="text-xs text-slate-500 mt-0.5">{t("Tokyo Station → Shiga Kogen · departs midnight · direct", "東京駅→志賀高原 · 深夜0時発 · 直行")}</p>
                     <div className="flex items-center gap-1.5 mt-1.5">
                       <span className="text-[10px] text-indigo-400 font-bold">★</span>
-                      <p className="text-[11px] text-indigo-600 font-semibold">{t("Weekend Shiga: Fridays 21:00 · Jan 9–Mar 13, 2026 · book in advance", "ウィークエンド志賀: 毎金曜21:00発 · 要予約")}</p>
+                      <p className="text-[11px] text-indigo-600 font-semibold">{t("Weekend Shiga: Fridays 21:00 · Jan 9-Mar 13, 2026 · book in advance", "ウィークエンド志賀: 毎金曜21:00発 · 要予約")}</p>
                     </div>
                   </div>
                 </div>
@@ -469,7 +469,7 @@ export default function Transport() {
 // ─────────────────────────────────────────────────────────────────────
 // GREEN-SEASON TRANSPORT
 //
-// Apr–Nov visitors come for hiking, onsen, snow-monkey day trips and
+// Apr-Nov visitors come for hiking, onsen, snow-monkey day trips and
 // the Shiga Kogen highland - a very different routing problem from
 // the winter ski-shuttle network. We surface:
 //   1. Long-haul: Tokyo → Nagano OR Tokyo → Iiyama by Hokuriku Shinkansen
@@ -570,7 +570,7 @@ function GreenTransport({
                 </div>
               </div>
               <p className="text-[11px] text-slate-500 mt-2 ml-8">
-                {t("→ then Nagaden bus or local taxi Iiyama → Yudanaka (~30–40 min, ¥1,400 / taxi ~¥6,000)", "→ 長電バスまたはタクシーで飯山→湯田中（約30〜40分、バス¥1,400 / タクシー約¥6,000）")}
+                {t("→ then Nagaden bus or local taxi Iiyama → Yudanaka (~30-40 min, ¥1,400 / taxi ~¥6,000)", "→ 長電バスまたはタクシーで飯山→湯田中（約30〜40分、バス¥1,400 / タクシー約¥6,000）")}
               </p>
             </div>
 
@@ -845,7 +845,7 @@ function GreenTransport({
                 <div className="flex-1">
                   <p className="text-sm font-bold text-slate-800">{t("Driving up · Route 292", "国道292号で")}</p>
                   <p className="text-xs text-slate-500 mt-0.5">
-                    {t("Yudanaka → Hasuike ~30 min · continue on the Shiga–Kusatsu Highway over the Shibu-tōge pass for one of Japan's highest scenic drives.", "湯田中→蓮池 約30分・渋峠を越える志賀草津道路は日本屈指の絶景ドライブ。")}
+                    {t("Yudanaka → Hasuike ~30 min · continue on the Shiga-Kusatsu Highway over the Shibu-tōge pass for one of Japan's highest scenic drives.", "湯田中→蓮池 約30分・渋峠を越える志賀草津道路は日本屈指の絶景ドライブ。")}
                   </p>
                 </div>
               </div>
@@ -857,7 +857,7 @@ function GreenTransport({
               <div>
                 <p className="text-xs font-bold text-amber-800">{t("Seasonal road closures", "通行止めに注意")}</p>
                 <p className="text-[11px] text-amber-700 mt-0.5">
-                  {t("The Shiga–Kusatsu Highway above Shibu-tōge typically closes mid-Nov to late-April (snow + volcanic gas). Lower Shiga Kogen access stays open year-round.", "志賀草津道路の渋峠以上は11月中旬〜4月下旬通行止め(積雪・火山ガス)。下部志賀高原は通年通行可。")}
+                  {t("The Shiga-Kusatsu Highway above Shibu-tōge typically closes mid-Nov to late-April (snow + volcanic gas). Lower Shiga Kogen access stays open year-round.", "志賀草津道路の渋峠以上は11月中旬〜4月下旬通行止め(積雪・火山ガス)。下部志賀高原は通年通行可。")}
                 </p>
               </div>
             </div>
@@ -898,11 +898,11 @@ function GreenTransport({
             <div className="grid grid-cols-2 gap-2 border-t border-slate-100 pt-3">
               <div className="bg-slate-50 rounded-lg px-3 py-2">
                 <p className="text-[10px] text-slate-400 uppercase tracking-wide font-bold">{t("Nagano → Yudanaka", "長野→湯田中")}</p>
-                <p className="text-sm font-black text-slate-800">~¥10,000–12,000</p>
+                <p className="text-sm font-black text-slate-800">~¥10,000-12,000</p>
               </div>
               <div className="bg-slate-50 rounded-lg px-3 py-2">
                 <p className="text-[10px] text-slate-400 uppercase tracking-wide font-bold">{t("Yudanaka → Park trailhead", "湯田中→遊歩道入口")}</p>
-                <p className="text-sm font-black text-slate-800">~¥1,500–2,000</p>
+                <p className="text-sm font-black text-slate-800">~¥1,500-2,000</p>
               </div>
             </div>
           </div>
