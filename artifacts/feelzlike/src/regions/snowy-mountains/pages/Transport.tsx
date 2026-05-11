@@ -85,15 +85,14 @@ export function SnowyTransport() {
                 />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-[11px] font-bold tracking-wider text-blue-700/80 uppercase">
-                  {t("Local operator · runs the Snowy Mtns Bus Service", "地元事業者 · スノーマウンテンズバスサービス運営")}
-                </p>
-                <h2 className="font-display font-semibold text-2xl text-foreground mt-1">
+                <h2 className="font-display font-semibold text-2xl text-foreground">
                   {cooma.name}
                 </h2>
-                <p className="text-sm text-muted-foreground mt-1">{cooma.operator}</p>
-                <p className="text-foreground/90 mt-4 leading-relaxed">
-                  {cooma.route_summary}
+                <p className="text-foreground/90 mt-3 leading-relaxed">
+                  {t(
+                    "Cooma's local operator. Cooma Coaches operates the Snowy Mountains Bus Service in winter plus charters and school runs.",
+                    "クーマの地元事業者。Cooma Coachesは冬季にスノーマウンテンズバスサービスを運行し、貸切バスやスクールバスも手がけています。",
+                  )}
                 </p>
 
                 <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
