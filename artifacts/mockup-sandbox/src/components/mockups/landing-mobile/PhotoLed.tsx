@@ -58,13 +58,13 @@ export function PhotoLed() {
       }}
     >
       <div className="mx-auto w-full max-w-md md:max-w-3xl lg:max-w-5xl">
-        {/* Header: clean white bar, logo in colour at full strength */}
-        <header className="flex flex-col items-center gap-2 px-6 pt-8 pb-5 text-center md:flex-row md:items-end md:justify-between md:gap-6 md:pt-10 md:pb-6">
+        {/* Header: clean white, full colour logo, generous breathing room */}
+        <header className="flex flex-col items-center gap-3 px-6 pt-8 pb-6 text-center md:pt-12 md:pb-8">
           <img
-            src="/__mockup/images/wordmark-inline.png"
+            src="/__mockup/images/logo-full-colour.png"
             alt="feelzlike"
             loading="eager"
-            className="h-10 w-auto md:h-12"
+            className="h-24 w-auto md:h-32"
           />
           <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">
             Resort town mountain weather
