@@ -29,6 +29,8 @@ tags:
     description: Curated, region-aware Stay (accommodation) listings backed by the on-disk dataset under artifacts/feelzlike/src/data/curated.
   - name: eats
     description: Curated, region-aware Eat (food & drink) listings backed by the on-disk dataset under artifacts/feelzlike/src/data/curated.
+  - name: elevation-forecast
+    description: Elevation-banded ski forecasts (upper / mid / lower lift) sourced from Weather Unlocked.
 paths:
   /healthz:
     get:
@@ -286,6 +288,38 @@ paths:
                 $ref: "#/components/schemas/GenericOkResponse"
         "400":
           description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /elevation-forecast/{resortId}:
+    get:
+      operationId: getElevationForecast
+      tags: [elevation-forecast]
+      summary: Elevation-banded 7-day ski forecast for a Weather Unlocked resort
+      description: |
+        Returns top / mid / bottom lift weather and snow for the next 7 days,
+        sourced from Weather Unlocked Ski Resort Forecast. The `resortId` is
+        the numeric Weather Unlocked resort id, mapped per-mountain in the
+        feelzlike region config (`MountainLink.weatherUnlockedId`).
+      parameters:
+        - name: resortId
+          in: path
+          required: true
+          description: Weather Unlocked numeric resort id.
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        "200":
+          description: Forecast envelope (forecast may be null when upstream returned no data or the integration is not configured).
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ElevationForecastResponse"
+        "400":
+          description: Invalid resort id.
           content:
             application/json:
               schema:
@@ -3396,3 +3430,115 @@ components:
         mapping:
           AU: "#/components/schemas/EatAU"
           JP: "#/components/schemas/EatJP"
+
+    ElevationBand:
+      type: object
+      description: Forecast values for a single elevation band (upper, mid, or lower lift).
+      properties:
+        tempMaxC:
+          type: number
+          nullable: true
+        tempMinC:
+          type: number
+          nullable: true
+        snowfallCm:
+          type: number
+          nullable: true
+        rainfallMm:
+          type: number
+          nullable: true
+      required:
+        - tempMaxC
+        - tempMinC
+        - snowfallCm
+        - rainfallMm
+
+    ElevationBandDay:
+      type: object
+      description: One day of elevation-banded forecast for a ski resort.
+      properties:
+        date:
+          type: string
+          description: ISO-8601 date (yyyy-mm-dd) or Weather Unlocked native date string.
+        weatherDescription:
+          type: string
+        freezingLevelM:
+          type: number
+          nullable: true
+        windAvgKmh:
+          type: number
+          nullable: true
+        windMaxKmh:
+          type: number
+          nullable: true
+        precipMm:
+          type: number
+          nullable: true
+        bands:
+          type: object
+          properties:
+            upper:
+              $ref: "#/components/schemas/ElevationBand"
+            mid:
+              $ref: "#/components/schemas/ElevationBand"
+            lower:
+              $ref: "#/components/schemas/ElevationBand"
+          required: [upper, mid, lower]
+      required:
+        - date
+        - weatherDescription
+        - freezingLevelM
+        - windAvgKmh
+        - windMaxKmh
+        - precipMm
+        - bands
+
+    ElevationForecast:
+      type: object
+      properties:
+        resortId:
+          type: integer
+        resortName:
+          type: string
+        source:
+          type: string
+          enum: [weather-unlocked]
+        upperLiftElevationM:
+          type: number
+          nullable: true
+        midLiftElevationM:
+          type: number
+          nullable: true
+        lowerLiftElevationM:
+          type: number
+          nullable: true
+        fetchedAt:
+          type: string
+          description: ISO-8601 timestamp string when the upstream forecast was fetched (kept as a plain string so generated zod schemas don't coerce to Date — the wire format is JSON text).
+        days:
+          type: array
+          items:
+            $ref: "#/components/schemas/ElevationBandDay"
+      required:
+        - resortId
+        - resortName
+        - source
+        - upperLiftElevationM
+        - midLiftElevationM
+        - lowerLiftElevationM
+        - fetchedAt
+        - days
+
+    ElevationForecastResponse:
+      type: object
+      description: Envelope describing whether the Weather Unlocked integration is configured and the forecast (when available).
+      properties:
+        configured:
+          type: boolean
+        forecast:
+          oneOf:
+            - $ref: "#/components/schemas/ElevationForecast"
+            - type: "null"
+      required:
+        - configured
+        - forecast

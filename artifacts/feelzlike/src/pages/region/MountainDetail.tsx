@@ -29,6 +29,7 @@ import {
   getGetLocationWeatherQueryKey,
   useGetLocationWeather,
 } from "@workspace/api-client-react";
+import { ElevationBands } from "@/components/weather/ElevationBands";
 
 /**
  * Region-agnostic mountain weather page.
@@ -58,6 +59,10 @@ export function MountainDetail() {
       queryKey: getGetLocationWeatherQueryKey(locationId),
     },
   });
+
+  // Pull the WU resort id from the region config, when mapped. Hidden when missing.
+  const weatherUnlockedId = region.mountains?.find((m) => m.id === locationId)
+    ?.weatherUnlockedId;
 
   const backHref = "~/" + region.id;
 
@@ -205,6 +210,10 @@ export function MountainDetail() {
               unit="m"
             />
           </section>
+
+          {/* Elevation-banded forecast (Weather Unlocked) - upper / mid / base
+              snow + temp. Self-hides when the mountain has no WU id mapped. */}
+          <ElevationBands weatherUnlockedId={weatherUnlockedId} />
 
           {/* Conditions strip - same look as TownWeather so users get a
               consistent reading regardless of region or location type. */}

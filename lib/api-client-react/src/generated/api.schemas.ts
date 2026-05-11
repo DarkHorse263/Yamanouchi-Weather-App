@@ -1691,6 +1691,63 @@ export type EatJP = EatBase & {
 
 export type Eat = EatAU | EatJP;
 
+/**
+ * Forecast values for a single elevation band (upper, mid, or lower lift).
+ */
+export interface ElevationBand {
+  tempMaxC: number | null;
+  tempMinC: number | null;
+  snowfallCm: number | null;
+  rainfallMm: number | null;
+}
+
+export type ElevationBandDayBands = {
+  upper: ElevationBand;
+  mid: ElevationBand;
+  lower: ElevationBand;
+};
+
+/**
+ * One day of elevation-banded forecast for a ski resort.
+ */
+export interface ElevationBandDay {
+  /** ISO-8601 date (yyyy-mm-dd) or Weather Unlocked native date string. */
+  date: string;
+  weatherDescription: string;
+  freezingLevelM: number | null;
+  windAvgKmh: number | null;
+  windMaxKmh: number | null;
+  precipMm: number | null;
+  bands: ElevationBandDayBands;
+}
+
+export type ElevationForecastSource =
+  (typeof ElevationForecastSource)[keyof typeof ElevationForecastSource];
+
+export const ElevationForecastSource = {
+  "weather-unlocked": "weather-unlocked",
+} as const;
+
+export interface ElevationForecast {
+  resortId: number;
+  resortName: string;
+  source: ElevationForecastSource;
+  upperLiftElevationM: number | null;
+  midLiftElevationM: number | null;
+  lowerLiftElevationM: number | null;
+  /** ISO-8601 timestamp string when the upstream forecast was fetched (kept as a plain string so generated zod schemas don't coerce to Date — the wire format is JSON text). */
+  fetchedAt: string;
+  days: ElevationBandDay[];
+}
+
+/**
+ * Envelope describing whether the Weather Unlocked integration is configured and the forecast (when available).
+ */
+export interface ElevationForecastResponse {
+  configured: boolean;
+  forecast: ElevationForecast | null;
+}
+
 export type RegionFilterParameter = RegionId;
 
 export type GetPowderAlertsParams = {

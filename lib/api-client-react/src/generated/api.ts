@@ -39,6 +39,7 @@ import type {
   EigomenyuTranslateResponse,
   EigomenyuUpdateMenuItemBody,
   EigomenyuUpdateRestaurantBody,
+  ElevationForecastResponse,
   ErrorResponse,
   GenericOkResponse,
   GetAccommodationParams,
@@ -1154,6 +1155,103 @@ export const useUnsubscribeFromAlerts = <
 > => {
   return useMutation(getUnsubscribeFromAlertsMutationOptions(options));
 };
+
+/**
+ * Returns top / mid / bottom lift weather and snow for the next 7 days,
+sourced from Weather Unlocked Ski Resort Forecast. The `resortId` is
+the numeric Weather Unlocked resort id, mapped per-mountain in the
+feelzlike region config (`MountainLink.weatherUnlockedId`).
+
+ * @summary Elevation-banded 7-day ski forecast for a Weather Unlocked resort
+ */
+export const getGetElevationForecastUrl = (resortId: number) => {
+  return `/api/elevation-forecast/${resortId}`;
+};
+
+export const getElevationForecast = async (
+  resortId: number,
+  options?: RequestInit,
+): Promise<ElevationForecastResponse> => {
+  return customFetch<ElevationForecastResponse>(
+    getGetElevationForecastUrl(resortId),
+    {
+      ...options,
+      method: "GET",
+    },
+  );
+};
+
+export const getGetElevationForecastQueryKey = (resortId: number) => {
+  return [`/api/elevation-forecast/${resortId}`] as const;
+};
+
+export const getGetElevationForecastQueryOptions = <
+  TData = Awaited<ReturnType<typeof getElevationForecast>>,
+  TError = ErrorType<ErrorResponse>,
+>(
+  resortId: number,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getElevationForecast>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getGetElevationForecastQueryKey(resortId);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof getElevationForecast>>
+  > = ({ signal }) =>
+    getElevationForecast(resortId, { signal, ...requestOptions });
+
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!resortId,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<typeof getElevationForecast>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetElevationForecastQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getElevationForecast>>
+>;
+export type GetElevationForecastQueryError = ErrorType<ErrorResponse>;
+
+/**
+ * @summary Elevation-banded 7-day ski forecast for a Weather Unlocked resort
+ */
+
+export function useGetElevationForecast<
+  TData = Awaited<ReturnType<typeof getElevationForecast>>,
+  TError = ErrorType<ErrorResponse>,
+>(
+  resortId: number,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getElevationForecast>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetElevationForecastQueryOptions(resortId, options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
 
 /**
  * Creates (or updates) a newsletter subscription for the given email and sends a verification email. Idempotent — re-submitting with the same email updates preferences. Independent of powder alerts.

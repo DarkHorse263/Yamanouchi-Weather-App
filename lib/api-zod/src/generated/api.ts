@@ -331,6 +331,94 @@ export const UnsubscribeFromAlertsResponse = zod.object({
 });
 
 /**
+ * Returns top / mid / bottom lift weather and snow for the next 7 days,
+sourced from Weather Unlocked Ski Resort Forecast. The `resortId` is
+the numeric Weather Unlocked resort id, mapped per-mountain in the
+feelzlike region config (`MountainLink.weatherUnlockedId`).
+
+ * @summary Elevation-banded 7-day ski forecast for a Weather Unlocked resort
+ */
+
+export const GetElevationForecastParams = zod.object({
+  resortId: zod.coerce
+    .number()
+    .min(1)
+    .describe("Weather Unlocked numeric resort id."),
+});
+
+export const GetElevationForecastResponse = zod
+  .object({
+    configured: zod.boolean(),
+    forecast: zod.union([
+      zod.object({
+        resortId: zod.number(),
+        resortName: zod.string(),
+        source: zod.enum(["weather-unlocked"]),
+        upperLiftElevationM: zod.number().nullable(),
+        midLiftElevationM: zod.number().nullable(),
+        lowerLiftElevationM: zod.number().nullable(),
+        fetchedAt: zod
+          .string()
+          .describe(
+            "ISO-8601 timestamp string when the upstream forecast was fetched (kept as a plain string so generated zod schemas don't coerce to Date — the wire format is JSON text).",
+          ),
+        days: zod.array(
+          zod
+            .object({
+              date: zod
+                .string()
+                .describe(
+                  "ISO-8601 date (yyyy-mm-dd) or Weather Unlocked native date string.",
+                ),
+              weatherDescription: zod.string(),
+              freezingLevelM: zod.number().nullable(),
+              windAvgKmh: zod.number().nullable(),
+              windMaxKmh: zod.number().nullable(),
+              precipMm: zod.number().nullable(),
+              bands: zod.object({
+                upper: zod
+                  .object({
+                    tempMaxC: zod.number().nullable(),
+                    tempMinC: zod.number().nullable(),
+                    snowfallCm: zod.number().nullable(),
+                    rainfallMm: zod.number().nullable(),
+                  })
+                  .describe(
+                    "Forecast values for a single elevation band (upper, mid, or lower lift).",
+                  ),
+                mid: zod
+                  .object({
+                    tempMaxC: zod.number().nullable(),
+                    tempMinC: zod.number().nullable(),
+                    snowfallCm: zod.number().nullable(),
+                    rainfallMm: zod.number().nullable(),
+                  })
+                  .describe(
+                    "Forecast values for a single elevation band (upper, mid, or lower lift).",
+                  ),
+                lower: zod
+                  .object({
+                    tempMaxC: zod.number().nullable(),
+                    tempMinC: zod.number().nullable(),
+                    snowfallCm: zod.number().nullable(),
+                    rainfallMm: zod.number().nullable(),
+                  })
+                  .describe(
+                    "Forecast values for a single elevation band (upper, mid, or lower lift).",
+                  ),
+              }),
+            })
+            .describe("One day of elevation-banded forecast for a ski resort."),
+        ),
+      }),
+      zod.null(),
+    ]),
+  })
+  .describe(
+    "Envelope describing whether the Weather Unlocked integration is configured and the forecast (when available).",
+  );
+
+/**
  * Creates (or updates) a newsletter subscription for the given email and sends a verification email. Idempotent — re-submitting with the same email updates preferences. Independent of powder alerts.
  * @summary Subscribe to the feelzlike newsletter (general digest)
  */

@@ -58,6 +58,13 @@ export interface MountainLink {
   /** True if the mountain's main offering is cross-country / nordic skiing
    *  rather than alpine downhill. E.g. Mt Stirling, Lake Mountain. */
   nordic_focus?: boolean;
+  /**
+   * Weather Unlocked Ski Resort Forecast resort id. Populates the
+   * top/mid/base elevation-banded forecast panel on mountain detail pages.
+   * Look up via the Weather Unlocked dashboard "My Resorts" or their
+   * resort directory. Leave undefined to hide the panel for that mountain.
+   */
+  weatherUnlockedId?: number;
 }
 
 /** Scope a NavItem belongs to. Determines which sidebar section renders it. */
