@@ -6,6 +6,7 @@
  * OpenAPI spec version: 0.1.0
  */
 import type { ChainFittingBay } from "./chainFittingBay";
+import type { ChainStatus } from "./chainStatus";
 import type { RoadCondition } from "./roadCondition";
 
 export interface RoadConditionsResponse {
@@ -14,4 +15,6 @@ export interface RoadConditionsResponse {
   liveTrafficUrl: string;
   lastUpdated: string;
   chainFittingBays?: ChainFittingBay[];
+  /** Per-mountain-approach chain-fitting requirement, structured for the "Am I required to fit chains?" UI block. */
+  chainStatuses?: ChainStatus[];
 }

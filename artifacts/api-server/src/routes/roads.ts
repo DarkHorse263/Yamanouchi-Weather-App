@@ -166,6 +166,179 @@ async function fetchRoadConditions() {
   return roads;
 }
 
+// ── Chain-status seeding ───────────────────────────────────────────────
+// Per-mountain-approach chain-fitting requirement, modelled after the Mt
+// Hotham public format ("Am I required to fit chains? — 2WD / AWD-4WD").
+// Today these are seasonal-rule defaults derived from the published rules
+// of each alpine authority; live overlay (resort feeds, BoM warnings) is
+// pending. We always emit them so the UI is informative year-round, with
+// `dataSource` flagging which is which.
+
+type ChainReq = "not-required" | "must-carry" | "must-fit";
+
+function isAuSnowSeason(now: Date): boolean {
+  const m = now.getMonth(); // 0-indexed
+  // AU resort road chain rules apply Queen's Birthday (mid-June) to early
+  // October. Match Kosciuszko Rd seasonal-closure window.
+  if (m === 5) return now.getDate() >= 10;
+  if (m === 6 || m === 7 || m === 8) return true;
+  if (m === 9) return now.getDate() <= 10;
+  return false;
+}
+
+function isJpSnowSeason(now: Date): boolean {
+  const m = now.getMonth();
+  return m === 11 || m <= 3; // Dec–Apr
+}
+
+function buildChainStatuses(regionId: string | undefined): Array<Record<string, unknown>> {
+  const now = new Date();
+  const issuedAt = now.toISOString();
+
+  if (regionId === "snowy-mountains" || regionId === undefined) {
+    const inSeason = isAuSnowSeason(now);
+    // NSW NPWS rule: in snow season, 2WDs into Kosciuszko NP must carry
+    // chains; AWD/4WD must carry. Fitting only when directed by rangers.
+    const chains2wd: ChainReq = inSeason ? "must-carry" : "not-required";
+    const chainsAwd: ChainReq = inSeason ? "must-carry" : "not-required";
+    return [
+      {
+        id: "perisher-kosciuszko-rd",
+        regionId: "snowy-mountains",
+        mountainId: "perisher",
+        mountainName: "Perisher",
+        approach: "Kosciuszko Road from Jindabyne",
+        status: "open",
+        chains2wd, chainsAwd,
+        note: inSeason
+          ? "Snow season: all vehicles must carry diamond-pattern chains. Rangers direct fitting at Sawpit Creek when conditions require."
+          : "Outside snow season · no chain requirement.",
+        issuedAt,
+        sourceLabel: "NSW NPWS · Kosciuszko alpine rules",
+        sourceUrl: "https://www.nationalparks.nsw.gov.au/things-to-do/alpine-driving",
+        dataSource: "seasonal-rule",
+      },
+      {
+        id: "thredbo-alpine-way",
+        regionId: "snowy-mountains",
+        mountainId: "thredbo",
+        mountainName: "Thredbo",
+        approach: "Alpine Way from Jindabyne",
+        status: "open",
+        chains2wd, chainsAwd,
+        note: inSeason
+          ? "Snow season: chains compulsory in vehicle. Bullocks Flat & Thredbo turn-off bays available."
+          : "Outside snow season · no chain requirement.",
+        issuedAt,
+        sourceLabel: "NSW NPWS · Kosciuszko alpine rules",
+        sourceUrl: "https://www.nationalparks.nsw.gov.au/things-to-do/alpine-driving",
+        dataSource: "seasonal-rule",
+      },
+    ];
+  }
+
+  if (regionId === "victorias-high-country") {
+    const inSeason = isAuSnowSeason(now);
+    // Victorian Alpine Resorts: in declared snow season, all vehicles
+    // (including AWD/4WD) must carry chains; fitting is enforced at
+    // resort entry when directed.
+    const chains2wd: ChainReq = inSeason ? "must-carry" : "not-required";
+    const chainsAwd: ChainReq = inSeason ? "must-carry" : "not-required";
+    const liveLabel = "Mt Hotham Resort · road status (pending live wire)";
+    return [
+      {
+        id: "hotham-harrietville",
+        regionId: "victorias-high-country",
+        mountainId: "mt-hotham",
+        mountainName: "Mt Hotham",
+        approach: "Harrietville Approach (Great Alpine Rd, north)",
+        status: "open",
+        chains2wd, chainsAwd,
+        note: inSeason
+          ? "Declared snow season. Carry diamond-pattern chains; fit when directed at Diamantina or resort entry."
+          : "Out of declared snow season · chains not required.",
+        issuedAt,
+        sourceLabel: liveLabel,
+        sourceUrl: "https://www.mthotham.com.au/the-mountain/road-conditions/",
+        dataSource: "seasonal-rule",
+      },
+      {
+        id: "hotham-omeo",
+        regionId: "victorias-high-country",
+        mountainId: "mt-hotham",
+        mountainName: "Mt Hotham",
+        approach: "Omeo Approach (Great Alpine Rd, south)",
+        status: "open",
+        chains2wd, chainsAwd,
+        note: inSeason
+          ? "Declared snow season. Carry chains. Dinner Plain to Hotham Village section enforced first."
+          : "Out of declared snow season · chains not required.",
+        issuedAt,
+        sourceLabel: liveLabel,
+        sourceUrl: "https://www.mthotham.com.au/the-mountain/road-conditions/",
+        dataSource: "seasonal-rule",
+      },
+      {
+        id: "falls-creek-bogong",
+        regionId: "victorias-high-country",
+        mountainId: "falls-creek",
+        mountainName: "Falls Creek",
+        approach: "Bogong High Plains Rd from Mount Beauty",
+        status: "open",
+        chains2wd, chainsAwd,
+        note: inSeason
+          ? "Declared snow season. Carry chains; fitting bay at Howmans Gap."
+          : "Out of declared snow season · chains not required.",
+        issuedAt,
+        sourceLabel: "Falls Creek Resort · road status (pending live wire)",
+        sourceUrl: "https://www.fallscreek.com.au/getting-here/",
+        dataSource: "seasonal-rule",
+      },
+      {
+        id: "buller-mirimbah",
+        regionId: "victorias-high-country",
+        mountainId: "mt-buller",
+        mountainName: "Mt Buller",
+        approach: "Mt Buller Rd from Mirimbah",
+        status: "open",
+        chains2wd, chainsAwd,
+        note: inSeason
+          ? "Declared snow season. Carry chains; entry gate at Mirimbah enforces."
+          : "Out of declared snow season · chains not required.",
+        issuedAt,
+        sourceLabel: "Mt Buller Resort · road status (pending live wire)",
+        sourceUrl: "https://www.mtbuller.com.au/Winter/explore/getting-here/road-report/",
+        dataSource: "seasonal-rule",
+      },
+    ];
+  }
+
+  if (regionId === "yamanouchi") {
+    const inSeason = isJpSnowSeason(now);
+    return [
+      {
+        id: "shiga-route-292",
+        regionId: "yamanouchi",
+        mountainId: "shiga-kogen",
+        mountainName: "Shiga Kogen",
+        approach: "Route 292 from Yudanaka",
+        status: "open",
+        chains2wd: (inSeason ? "must-fit" : "not-required") as ChainReq,
+        chainsAwd: (inSeason ? "must-carry" : "not-required") as ChainReq,
+        note: inSeason
+          ? "Winter tyres mandatory in Nagano. Chains required for 2WD vehicles on the Shiga loop above Kanbayashi when snow is on the road."
+          : "Outside snow season · no chain requirement.",
+        issuedAt,
+        sourceLabel: "Nagano Prefecture road bureau · winter rules (live feed pending)",
+        sourceUrl: "https://www.pref.nagano.lg.jp/douro/",
+        dataSource: "pending",
+      },
+    ];
+  }
+
+  return [];
+}
+
 router.get("/road-conditions", async (req, res) => {
   try {
     const region = parseRegionParam(req.query["region"]);
@@ -176,6 +349,7 @@ router.get("/road-conditions", async (req, res) => {
     const isAU = region === undefined || region === "snowy-mountains";
     const roads = isAU ? await fetchRoadConditions() : [];
     const chainFittingBays = isAU ? CHAIN_FITTING_BAYS : [];
+    const chainStatuses = buildChainStatuses(region);
 
     const result = GetRoadConditionsResponse.parse({
       roads,
@@ -187,6 +361,7 @@ router.get("/road-conditions", async (req, res) => {
         : "",
       lastUpdated: new Date().toISOString(),
       chainFittingBays,
+      chainStatuses,
     });
     res.json(result);
   } catch (error) {

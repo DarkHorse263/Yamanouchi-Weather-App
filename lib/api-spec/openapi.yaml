@@ -2789,11 +2789,63 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/ChainFittingBay"
+        chainStatuses:
+          type: array
+          description: Per-mountain-approach chain-fitting requirement, structured for the "Am I required to fit chains?" UI block.
+          items:
+            $ref: "#/components/schemas/ChainStatus"
       required:
         - roads
         - generalAdvice
         - liveTrafficUrl
         - lastUpdated
+    ChainStatus:
+      type: object
+      description: Chain-fitting requirement for a single mountain approach, broken out by vehicle drivetrain.
+      properties:
+        id:
+          type: string
+        regionId:
+          type: string
+        mountainId:
+          type: string
+        mountainName:
+          type: string
+        approach:
+          type: string
+          description: Human-readable approach name, e.g. "Harrietville Approach".
+        status:
+          type: string
+          enum: [open, closed, seasonal-closure]
+        chains2wd:
+          type: string
+          enum: [not-required, must-carry, must-fit]
+        chainsAwd:
+          type: string
+          enum: [not-required, must-carry, must-fit]
+        note:
+          type: string
+        issuedAt:
+          type: string
+        sourceLabel:
+          type: string
+        sourceUrl:
+          type: string
+        dataSource:
+          type: string
+          enum: [live, seasonal-rule, pending]
+          description: live = scraped from upstream now. seasonal-rule = derived from published rule + date. pending = source not yet wired.
+      required:
+        - id
+        - regionId
+        - mountainName
+        - approach
+        - status
+        - chains2wd
+        - chainsAwd
+        - issuedAt
+        - sourceLabel
+        - dataSource
     ChainFittingBay:
       type: object
       properties:

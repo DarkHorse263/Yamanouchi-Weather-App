@@ -1345,6 +1345,40 @@ export const GetRoadConditionsResponse = zod.object({
       }),
     )
     .optional(),
+  chainStatuses: zod
+    .array(
+      zod
+        .object({
+          id: zod.string(),
+          regionId: zod.string(),
+          mountainId: zod.string().optional(),
+          mountainName: zod.string(),
+          approach: zod
+            .string()
+            .describe(
+              'Human-readable approach name, e.g. \"Harrietville Approach\".',
+            ),
+          status: zod.enum(["open", "closed", "seasonal-closure"]),
+          chains2wd: zod.enum(["not-required", "must-carry", "must-fit"]),
+          chainsAwd: zod.enum(["not-required", "must-carry", "must-fit"]),
+          note: zod.string().optional(),
+          issuedAt: zod.string(),
+          sourceLabel: zod.string(),
+          sourceUrl: zod.string().optional(),
+          dataSource: zod
+            .enum(["live", "seasonal-rule", "pending"])
+            .describe(
+              "live = scraped from upstream now. seasonal-rule = derived from published rule + date. pending = source not yet wired.",
+            ),
+        })
+        .describe(
+          "Chain-fitting requirement for a single mountain approach, broken out by vehicle drivetrain.",
+        ),
+    )
+    .optional()
+    .describe(
+      'Per-mountain-approach chain-fitting requirement, structured for the \"Am I required to fit chains?\" UI block.',
+    ),
 });
 
 /**

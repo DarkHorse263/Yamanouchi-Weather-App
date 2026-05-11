@@ -12,13 +12,18 @@ import {
   AlertTriangle,
   Camera,
   Car,
+  CheckCircle2,
   ExternalLink,
   MapPin,
   Navigation,
   Construction,
   Flame,
   CloudRain,
+  Snowflake,
+  Truck,
+  XCircle,
 } from "lucide-react";
+import type { ChainStatus } from "@workspace/api-client-react";
 import { useRegion, useLanguage, useBaseTown, LiveBadge, UpdateStamp, PageHeader } from "@workspace/feelzlike-shell";
 import { EmptyStateCard } from "@/components/EmptyStateCard";
 
@@ -96,9 +101,11 @@ export function TownRoads() {
   const { t, language } = useLanguage();
   const { town } = useBaseTown();
   const dataAvailable = region.roadsSource?.dataAvailable ?? true;
+  // Always fetch — even regions without a live per-road table now return
+  // structured chain-fitting requirement data, which we want to render.
   const query = useGetRoadConditions(
     { region: region.id },
-    { query: { enabled: dataAvailable } },
+    { query: { enabled: true } },
   );
   const camsQuery = useGetWebcams({ region: region.id });
   const roadCams = useMemo(() => {
@@ -134,6 +141,28 @@ export function TownRoads() {
       const mentioned = r.segment?.toLowerCase().includes(townName) || r.roadName?.toLowerCase().includes(townName);
       return affects || mentioned;
     });
+  }, [query.data, town, region]);
+
+  // Chain-fitting requirement, narrowed to the mountains this town actually
+  // accesses. Falls back to all region mountains if the town hasn't declared
+  // a nearby list. Always shown so visitors know whether to chuck chains in
+  // the boot before driving up.
+  const chainStatuses = useMemo<ChainStatus[]>(() => {
+    if (!query.data?.chainStatuses?.length) return [];
+    if (!town) return query.data.chainStatuses;
+    // Build the set of mountain IDs this town accesses, AND the parent
+    // (umbrella) IDs they roll up into - in JP, sub-areas like
+    // `shiga-yakebitaiyama` roll up under `shiga-kogen`, so an umbrella
+    // chain status keyed to the parent must still resolve.
+    const allMountains = region.mountains ?? [];
+    const nearbyIds = new Set(town.nearbyMountainIds ?? allMountains.map((m) => m.id));
+    const allowed = new Set<string>(nearbyIds);
+    for (const m of allMountains) {
+      if (nearbyIds.has(m.id) && m.parentId) allowed.add(m.parentId);
+    }
+    return query.data.chainStatuses.filter(
+      (c) => !c.mountainId || allowed.has(c.mountainId),
+    );
   }, [query.data, town, region]);
 
   return (
@@ -180,6 +209,10 @@ export function TownRoads() {
           townName={t(town.name, town.nameJa)}
           t={t}
         />
+      )}
+
+      {chainStatuses.length > 0 && (
+        <ChainStatusSection statuses={chainStatuses} t={t} />
       )}
 
       {!dataAvailable && isVhc && (
@@ -621,6 +654,146 @@ function toTitleCaseSafe(s: string): string {
     .split(/\s+/)
     .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w))
     .join(" ");
+}
+
+// ── Chain-status section ────────────────────────────────────────────────
+// Modelled after the Mt Hotham public format: per-approach card with an
+// OPEN/CLOSED pill, "Am I required to fit chains?" headline, and the
+// answer split out for 2WD vs AWD/4WD. Issued time + source attribution
+// are shown so visitors can verify against the upstream feed.
+
+function chainBadge(req: ChainStatus["chains2wd"]): { label: string; tone: string; icon: typeof Snowflake } {
+  switch (req) {
+    case "must-fit":
+      return { label: "FITTING CHAINS", tone: "bg-red-50 text-red-800 border-red-300", icon: Snowflake };
+    case "must-carry":
+      return { label: "CARRY CHAINS", tone: "bg-amber-50 text-amber-800 border-amber-300", icon: AlertTriangle };
+    case "not-required":
+    default:
+      return { label: "NOT FITTING CHAINS", tone: "bg-emerald-50 text-emerald-800 border-emerald-300", icon: CheckCircle2 };
+  }
+}
+
+function statusBadge(s: ChainStatus["status"]): { label: string; tone: string; icon: typeof CheckCircle2 } {
+  if (s === "closed") return { label: "CLOSED", tone: "bg-red-600 text-white border-red-700", icon: XCircle };
+  if (s === "seasonal-closure") return { label: "SEASONAL CLOSURE", tone: "bg-slate-600 text-white border-slate-700", icon: XCircle };
+  return { label: "OPEN", tone: "bg-emerald-600 text-white border-emerald-700", icon: CheckCircle2 };
+}
+
+function dataSourceBadge(d: ChainStatus["dataSource"]): { label: string; tone: string } {
+  if (d === "live") return { label: "Live feed", tone: "text-emerald-700 bg-emerald-50 border-emerald-200" };
+  if (d === "seasonal-rule") return { label: "Seasonal rule", tone: "text-sky-700 bg-sky-50 border-sky-200" };
+  return { label: "Source pending", tone: "text-amber-700 bg-amber-50 border-amber-200" };
+}
+
+function ChainStatusSection({ statuses, t }: { statuses: ChainStatus[]; t: (en: string, ja?: string) => string }) {
+  return (
+    <motion.section
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.05 }}
+      className="mb-8"
+    >
+      <div className="mb-3">
+        <h2 className="font-display font-semibold text-2xl text-foreground inline-flex items-center gap-2">
+          <Snowflake className="w-5 h-5 text-primary" />
+          {t("Chain-fitting requirement", "チェーン装着要件")}
+        </h2>
+        <p className="text-sm text-muted-foreground mt-1">
+          {t(
+            "Per approach to each mountain, broken down by drivetrain. Carry diamond-pattern chains in your boot during snow season.",
+            "各マウンテンへのアプローチごと、駆動方式別。冬季はダイヤモンドパターンのチェーンを車内に常備してください。",
+          )}
+        </p>
+      </div>
+
+      <div className="grid gap-3 md:grid-cols-2">
+        {statuses.map((cs, idx) => {
+          const sb = statusBadge(cs.status);
+          const SbIcon = sb.icon;
+          const c2 = chainBadge(cs.chains2wd);
+          const C2Icon = c2.icon;
+          const ca = chainBadge(cs.chainsAwd);
+          const CaIcon = ca.icon;
+          const ds = dataSourceBadge(cs.dataSource);
+          return (
+            <motion.article
+              key={cs.id}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.04 }}
+              className="rounded-2xl border border-border bg-white p-4"
+            >
+              <header className="flex items-start justify-between gap-3 flex-wrap">
+                <div className="min-w-0">
+                  <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                    {cs.mountainName}
+                  </p>
+                  <h3 className="font-display font-semibold text-base text-foreground leading-tight mt-0.5">
+                    {cs.approach}
+                  </h3>
+                </div>
+                <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border ${sb.tone}`}>
+                  <SbIcon className="w-3 h-3" />
+                  {sb.label}
+                </span>
+              </header>
+
+              <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                {t("Am I required to fit chains?", "チェーン装着は必要ですか？")}
+              </p>
+
+              <div className="mt-2 grid grid-cols-2 gap-2">
+                <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-3">
+                  <div className="flex items-center gap-2 text-slate-700">
+                    <Car className="w-4 h-4" />
+                    <span className="text-xs font-bold uppercase tracking-wider">2WD</span>
+                  </div>
+                  <span className={`mt-2 inline-flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider border ${c2.tone}`}>
+                    <C2Icon className="w-3 h-3" />
+                    {c2.label}
+                  </span>
+                </div>
+                <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-3">
+                  <div className="flex items-center gap-2 text-slate-700">
+                    <Truck className="w-4 h-4" />
+                    <span className="text-xs font-bold uppercase tracking-wider">AWD/4WD</span>
+                  </div>
+                  <span className={`mt-2 inline-flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider border ${ca.tone}`}>
+                    <CaIcon className="w-3 h-3" />
+                    {ca.label}
+                  </span>
+                </div>
+              </div>
+
+              {cs.note && (
+                <p className="mt-3 text-xs text-foreground/80 leading-relaxed">{cs.note}</p>
+              )}
+
+              <footer className="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between gap-2 flex-wrap text-[10px]">
+                <span className={`inline-flex items-center px-1.5 py-0.5 rounded border font-semibold uppercase tracking-wider ${ds.tone}`}>
+                  {ds.label}
+                </span>
+                {cs.sourceUrl ? (
+                  <a
+                    href={cs.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground hover:underline"
+                  >
+                    {cs.sourceLabel}
+                    <ExternalLink className="w-2.5 h-2.5" />
+                  </a>
+                ) : (
+                  <span className="text-muted-foreground">{cs.sourceLabel}</span>
+                )}
+              </footer>
+            </motion.article>
+          );
+        })}
+      </div>
+    </motion.section>
+  );
 }
 
 function RoadsSkeleton() {

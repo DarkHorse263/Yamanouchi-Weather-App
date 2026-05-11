@@ -1108,12 +1108,74 @@ export interface ChainFittingBay {
   description?: string;
 }
 
+export type ChainStatusStatus =
+  (typeof ChainStatusStatus)[keyof typeof ChainStatusStatus];
+
+export const ChainStatusStatus = {
+  open: "open",
+  closed: "closed",
+  "seasonal-closure": "seasonal-closure",
+} as const;
+
+export type ChainStatusChains2wd =
+  (typeof ChainStatusChains2wd)[keyof typeof ChainStatusChains2wd];
+
+export const ChainStatusChains2wd = {
+  "not-required": "not-required",
+  "must-carry": "must-carry",
+  "must-fit": "must-fit",
+} as const;
+
+export type ChainStatusChainsAwd =
+  (typeof ChainStatusChainsAwd)[keyof typeof ChainStatusChainsAwd];
+
+export const ChainStatusChainsAwd = {
+  "not-required": "not-required",
+  "must-carry": "must-carry",
+  "must-fit": "must-fit",
+} as const;
+
+/**
+ * live = scraped from upstream now. seasonal-rule = derived from published rule + date. pending = source not yet wired.
+ */
+export type ChainStatusDataSource =
+  (typeof ChainStatusDataSource)[keyof typeof ChainStatusDataSource];
+
+export const ChainStatusDataSource = {
+  live: "live",
+  "seasonal-rule": "seasonal-rule",
+  pending: "pending",
+} as const;
+
+/**
+ * Chain-fitting requirement for a single mountain approach, broken out by vehicle drivetrain.
+ */
+export interface ChainStatus {
+  id: string;
+  regionId: string;
+  mountainId?: string;
+  mountainName: string;
+  /** Human-readable approach name, e.g. "Harrietville Approach". */
+  approach: string;
+  status: ChainStatusStatus;
+  chains2wd: ChainStatusChains2wd;
+  chainsAwd: ChainStatusChainsAwd;
+  note?: string;
+  issuedAt: string;
+  sourceLabel: string;
+  sourceUrl?: string;
+  /** live = scraped from upstream now. seasonal-rule = derived from published rule + date. pending = source not yet wired. */
+  dataSource: ChainStatusDataSource;
+}
+
 export interface RoadConditionsResponse {
   roads: RoadCondition[];
   generalAdvice: string;
   liveTrafficUrl: string;
   lastUpdated: string;
   chainFittingBays?: ChainFittingBay[];
+  /** Per-mountain-approach chain-fitting requirement, structured for the "Am I required to fit chains?" UI block. */
+  chainStatuses?: ChainStatus[];
 }
 
 export type LiftType = (typeof LiftType)[keyof typeof LiftType];
