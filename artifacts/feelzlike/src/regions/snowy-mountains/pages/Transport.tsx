@@ -71,15 +71,6 @@ export function SnowyTransport() {
         />
       </div>
 
-      {town && !townHasRideshare(town.id) && (
-        <div className="px-4 md:px-10 pt-5">
-          <RideshareUnavailableNotice
-            townName={t(town.name, town.nameJa)}
-            t={t}
-          />
-        </div>
-      )}
-
       {/* Cooma Coaches hero */}
       {cooma && (
         <section className="px-4 md:px-10 pt-5 md:pt-8">
@@ -174,7 +165,7 @@ export function SnowyTransport() {
       )}
 
       {/* Other operators */}
-      <section className="px-4 md:px-10 pt-5 pb-10">
+      <section className="px-4 md:px-10 pt-5">
         <p className="text-[11px] font-bold tracking-wider text-muted-foreground/70 uppercase mb-3">
           {t("Other operators", "その他の事業者")}
         </p>
@@ -184,6 +175,15 @@ export function SnowyTransport() {
           ))}
         </div>
       </section>
+
+      {town && !townHasRideshare(town.id) && (
+        <div className="px-4 md:px-10 pt-5 pb-10">
+          <RideshareUnavailableNotice
+            townName={t(town.name, town.nameJa)}
+            t={t}
+          />
+        </div>
+      )}
     </div>
   );
 }
