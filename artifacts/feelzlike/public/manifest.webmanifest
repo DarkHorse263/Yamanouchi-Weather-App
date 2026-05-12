@@ -1,7 +1,7 @@
 {
-  "name": "feelzlike — mountain weather you can trust",
+  "name": "feelzlike · weather for resort towns",
   "short_name": "feelzlike",
-  "description": "Real-time alpine weather, lift status, road conditions and live cams across the world's snow regions.",
+  "description": "Staying in a resort town? See live conditions across the Snowy Mountains, Victoria's High Country and Yamanouchi so you know where to go each day. Towns first, mountains second.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

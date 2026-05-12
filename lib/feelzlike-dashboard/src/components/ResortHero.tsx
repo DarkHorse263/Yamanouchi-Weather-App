@@ -58,18 +58,18 @@ export function ResortHero({
           and Victoria, instead of a flat white card. */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div
-          className="absolute -top-40 left-1/2 -translate-x-1/2 w-[1400px] h-[700px] rounded-full opacity-80"
+          className="absolute -top-32 left-1/2 -translate-x-1/2 w-[1600px] h-[820px] rounded-full opacity-95"
           style={{
             background:
-              "radial-gradient(ellipse at center, hsla(210,90%,55%,0.28), transparent 55%), radial-gradient(ellipse at 28% 60%, hsla(225,80%,60%,0.22), transparent 60%), radial-gradient(ellipse at 75% 35%, hsla(190,90%,55%,0.22), transparent 60%)",
-            filter: "blur(40px)",
+              "radial-gradient(ellipse at 50% 35%, hsla(210,95%,58%,0.55), transparent 60%), radial-gradient(ellipse at 25% 65%, hsla(230,85%,62%,0.45), transparent 62%), radial-gradient(ellipse at 78% 40%, hsla(190,95%,58%,0.42), transparent 62%)",
+            filter: "blur(36px)",
           }}
         />
         <div
           className="absolute inset-0"
           style={{
             backgroundImage:
-              "linear-gradient(to bottom, transparent 65%, hsl(var(--background)) 100%), repeating-linear-gradient(0deg, hsla(220,30%,12%,0.04) 0px, hsla(220,30%,12%,0.04) 1px, transparent 1px, transparent 64px), repeating-linear-gradient(90deg, hsla(220,30%,12%,0.04) 0px, hsla(220,30%,12%,0.04) 1px, transparent 1px, transparent 64px)",
+              "linear-gradient(to bottom, transparent 70%, hsl(var(--background)) 100%), repeating-linear-gradient(0deg, hsla(220,30%,12%,0.04) 0px, hsla(220,30%,12%,0.04) 1px, transparent 1px, transparent 64px), repeating-linear-gradient(90deg, hsla(220,30%,12%,0.04) 0px, hsla(220,30%,12%,0.04) 1px, transparent 1px, transparent 64px)",
           }}
         />
       </div>
