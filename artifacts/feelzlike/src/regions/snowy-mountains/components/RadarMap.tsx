@@ -11,7 +11,7 @@ export interface RadarMapProps {
   /** Drives the precip toggle label: "Snow" in winter, "Rain" in green season. */
   season?: "winter" | "green";
   /** Drives the Windy centre and Official radar source per region. */
-  region?: "snowy-mountains" | "vhc" | "yamanouchi";
+  region?: "snowy-mountains" | "victorias-high-country" | "yamanouchi";
 }
 
 export function RadarMap(props: RadarMapProps) {

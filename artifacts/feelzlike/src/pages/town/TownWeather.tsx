@@ -78,7 +78,7 @@ export function TownWeather() {
           <Today daily={q.data.daily[0]} t={t} />
           <Hourly hourly={q.data.hourly} t={t} />
           <Outlook days={q.data.daily.slice(1, 7)} t={t} />
-          {region.id === "snowy-mountains" && <Radar t={t} />}
+          <Radar t={t} />
           <p className="byline text-muted-foreground/60 mt-10">
             {t(
               `Source: ${region.weatherSource?.label ?? "Open-Meteo"} · updated every 10 min`,
@@ -92,6 +92,7 @@ export function TownWeather() {
 }
 
 function Radar({ t }: { t: (en: string, ja: string) => string }) {
+  const { region } = useRegion();
   const seasonCtx = useOptionalSeason();
   const season = seasonCtx?.season ?? "winter";
   const headline = season === "winter"
@@ -120,7 +121,7 @@ function Radar({ t }: { t: (en: string, ja: string) => string }) {
           RainViewer <ExternalLink className="w-3 h-3" />
         </a>
       </div>
-      <RadarMap season={season} region="snowy-mountains" />
+      <RadarMap season={season} region={region.id as "snowy-mountains" | "victorias-high-country" | "yamanouchi"} />
       <p className="text-xs text-muted-foreground/70 px-5 py-3 border-t border-border">
         {season === "winter"
           ? t(

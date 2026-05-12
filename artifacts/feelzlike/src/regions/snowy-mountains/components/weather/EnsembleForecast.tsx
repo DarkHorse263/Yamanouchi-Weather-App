@@ -66,9 +66,14 @@ export function EnsembleForecast({ locationId }: Props) {
             <Layers className="text-primary w-5 h-5" />
             Multi-model consensus
           </h2>
-          <p className="text-sm text-muted-foreground mt-2 max-w-md leading-relaxed">
-            We combine {okSources.length} independent forecasts. You see the consensus and how much they disagree - never just one model's guess.
+          <p className="text-sm text-muted-foreground mt-2 max-w-xl leading-relaxed">
+            One forecast can be wrong. {okSources.length} forecasts that all agree are usually right. We pull predictions from {okSources.length} independent global weather models, blend them into a single number, and show you how much they disagree.
           </p>
+          <ul className="text-xs text-muted-foreground/85 mt-3 space-y-1.5 max-w-xl leading-relaxed">
+            <li className="flex gap-2"><span className="text-emerald-400 mt-0.5">●</span><span><span className="text-foreground/90 font-medium">Green dot</span> · models agree, plan with confidence.</span></li>
+            <li className="flex gap-2"><span className="text-amber-400 mt-0.5">●</span><span><span className="text-foreground/90 font-medium">Amber dot</span> · some disagreement, check again closer to the day.</span></li>
+            <li className="flex gap-2"><span className="text-rose-400 mt-0.5">●</span><span><span className="text-foreground/90 font-medium">Red dot</span> · models disagree, don't lock in plans yet.</span></li>
+          </ul>
         </div>
         <div className="flex flex-wrap gap-1.5">
           {okSources.map((s) => (

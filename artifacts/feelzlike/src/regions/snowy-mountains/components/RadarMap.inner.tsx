@@ -13,7 +13,7 @@ interface RadarMapInnerProps {
   region?: RegionKey;
 }
 
-type RegionKey = "snowy-mountains" | "vhc" | "yamanouchi";
+type RegionKey = "snowy-mountains" | "victorias-high-country" | "yamanouchi";
 type ViewMode = "interactive" | "windy" | "official";
 
 interface RegionConfig {
@@ -38,7 +38,7 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       attribution: "Bureau of Meteorology · IDR403 · 256 km",
     },
   },
-  vhc: {
+  "victorias-high-country": {
     windy: { lat: -36.86, lon: 147.27, zoom: 9 },
     official: {
       label: "BOM Yarrawonga",

@@ -497,6 +497,81 @@ export default function LocationDetail() {
           </PremiumGate>
         )}
 
+        {/* FREE · LIFT STATUS · moved above the Detailed conditions
+            paywall so users see today's lift count before any paid
+            content. Lift Hold Likely (the wind-driven prediction)
+            sits inside the paid bundle below it. */}
+        {isResort && liftData && (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.18 }}
+            className="glass rounded-3xl p-5 md:p-8 flex flex-col"
+          >
+            <div className="flex justify-between items-start mb-5">
+              <div>
+                <p className="byline text-muted-foreground">Lift status</p>
+                <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
+                  <Cable className="text-primary w-5 h-5" />
+                  On the snow
+                </h2>
+              </div>
+              <div className={cn(
+                "px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border",
+                liftData.seasonStatus === "open" ? "bg-emerald-500/15 text-emerald-300 border-emerald-500/30" :
+                "bg-amber-500/15 text-amber-300 border-amber-500/30"
+              )}>
+                {liftData.seasonStatus.replace("-", " ")}
+              </div>
+            </div>
+
+            {(liftData.seasonStatus === "pre-season" || liftData.seasonStatus === "closed") && liftData.liftsOpen === 0 && (
+              <div className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-700 px-2.5 py-1 text-[11px] font-semibold">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-sky-500" />
+                </span>
+                {liftData.seasonStatus === "pre-season"
+                  ? "Pre-season · NSW lifts typically spin up early June"
+                  : "Off-season · NSW lifts close early October"}
+              </div>
+            )}
+
+            <div className="flex gap-6 mb-5 pb-5 border-b border-white/5">
+              <div>
+                <p className="byline text-muted-foreground/70 mb-1">Lifts open</p>
+                <p className="font-display text-3xl text-foreground" data-numeric>
+                  <span className={liftData.liftsOpen > 0 ? "text-primary" : ""}>{liftData.liftsOpen}</span>
+                  <span className="text-muted-foreground/40 text-xl">/{liftData.totalLifts}</span>
+                </p>
+              </div>
+              {liftData.runsOpen !== undefined && liftData.totalRuns !== undefined && (
+                <div>
+                  <p className="byline text-muted-foreground/70 mb-1">Runs open</p>
+                  <p className="font-display text-3xl text-foreground" data-numeric>
+                    <span className={liftData.runsOpen > 0 ? "text-primary" : ""}>{liftData.runsOpen}</span>
+                    <span className="text-muted-foreground/40 text-xl">/{liftData.totalRuns}</span>
+                  </p>
+                </div>
+              )}
+            </div>
+
+            <div className="space-y-1 flex-1 overflow-y-auto max-h-[280px] pr-1 hide-scrollbar">
+              {liftData.lifts.map((lift: any) => (
+                <div key={lift.id} className="flex justify-between items-center px-2 py-2 rounded-lg hover:bg-white/5 transition-colors">
+                  <div>
+                    <p className="text-sm text-foreground">{lift.name}</p>
+                    <p className="byline text-muted-foreground/60">{lift.type.replace("-", " ")}</p>
+                  </div>
+                  <div className={cn("px-2 py-0.5 rounded-full text-[10px] font-semibold border flex items-center gap-1", getStatusColor(lift.status))}>
+                    {getStatusIcon(lift.status)}
+                    <span className="capitalize">{lift.status.replace("-", " ")}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+
         {/* PREMIUM · detailed conditions · bundles the wind-driven lift
             hold banner, the 24-hour ForecastChart trend, the Powder Factor
             backwards-looking score and the multi-model EnsembleForecast
@@ -596,14 +671,15 @@ export default function LocationDetail() {
           </div>
         </PremiumGate>
 
-        {/* Webcams + Lifts (free) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+        {/* Webcams (free) · Lift Status was lifted above the Detailed
+            conditions paywall so it sits closer to free Conditions. */}
+        <div className="grid grid-cols-1 gap-6 md:gap-8">
           {webcamData && webcamData.webcams.length > 0 && (
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="glass rounded-3xl p-5 md:p-8 lg:col-span-2"
+              className="glass rounded-3xl p-5 md:p-8"
             >
               <div className="flex items-end justify-between mb-5 gap-4">
                 <div>
@@ -665,80 +741,6 @@ export default function LocationDetail() {
             </motion.div>
           )}
 
-          {isResort && liftData && (
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35 }}
-              className="glass rounded-3xl p-5 md:p-8 flex flex-col"
-            >
-              <div className="flex justify-between items-start mb-5">
-                <div>
-                  <p className="byline text-muted-foreground">Lift status</p>
-                  <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
-                    <Cable className="text-primary w-5 h-5" />
-                    On the snow
-                  </h2>
-                </div>
-                <div className={cn(
-                  "px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border",
-                  liftData.seasonStatus === "open" ? "bg-emerald-500/15 text-emerald-300 border-emerald-500/30" :
-                  "bg-amber-500/15 text-amber-300 border-amber-500/30"
-                )}>
-                  {liftData.seasonStatus.replace("-", " ")}
-                </div>
-              </div>
-
-              {/* Pre-season honesty pill: when no lifts are running and the
-                  resort is in its quiet half of the year, tell users the
-                  number is expected rather than letting "0/11" read as a
-                  cancellation. AU snow season opens early-to-mid June. */}
-              {(liftData.seasonStatus === "pre-season" || liftData.seasonStatus === "closed") && liftData.liftsOpen === 0 && (
-                <div className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-700 px-2.5 py-1 text-[11px] font-semibold">
-                  <span className="relative flex h-1.5 w-1.5">
-                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-sky-500" />
-                  </span>
-                  {liftData.seasonStatus === "pre-season"
-                    ? "Pre-season · NSW lifts typically spin up early June"
-                    : "Off-season · NSW lifts close early October"}
-                </div>
-              )}
-
-              <div className="flex gap-6 mb-5 pb-5 border-b border-white/5">
-                <div>
-                  <p className="byline text-muted-foreground/70 mb-1">Lifts open</p>
-                  <p className="font-display text-3xl text-foreground" data-numeric>
-                    <span className={liftData.liftsOpen > 0 ? "text-primary" : ""}>{liftData.liftsOpen}</span>
-                    <span className="text-muted-foreground/40 text-xl">/{liftData.totalLifts}</span>
-                  </p>
-                </div>
-                {liftData.runsOpen !== undefined && liftData.totalRuns !== undefined && (
-                  <div>
-                    <p className="byline text-muted-foreground/70 mb-1">Runs open</p>
-                    <p className="font-display text-3xl text-foreground" data-numeric>
-                      <span className={liftData.runsOpen > 0 ? "text-primary" : ""}>{liftData.runsOpen}</span>
-                      <span className="text-muted-foreground/40 text-xl">/{liftData.totalRuns}</span>
-                    </p>
-                  </div>
-                )}
-              </div>
-
-              <div className="space-y-1 flex-1 overflow-y-auto max-h-[280px] pr-1 hide-scrollbar">
-                {liftData.lifts.map((lift: any) => (
-                  <div key={lift.id} className="flex justify-between items-center px-2 py-2 rounded-lg hover:bg-white/5 transition-colors">
-                    <div>
-                      <p className="text-sm text-foreground">{lift.name}</p>
-                      <p className="byline text-muted-foreground/60">{lift.type.replace("-", " ")}</p>
-                    </div>
-                    <div className={cn("px-2 py-0.5 rounded-full text-[10px] font-semibold border flex items-center gap-1", getStatusColor(lift.status))}>
-                      {getStatusIcon(lift.status)}
-                      <span className="capitalize">{lift.status.replace("-", " ")}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          )}
         </div>
 
         <SafetyStrip />
