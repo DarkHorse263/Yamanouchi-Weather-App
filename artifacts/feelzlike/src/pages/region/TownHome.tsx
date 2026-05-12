@@ -59,6 +59,37 @@ const PARENT_GROUP_META: Record<string, { name: string; nameJa: string; blurb: s
   },
 };
 
+// Per-resort colour tints applied behind each row in the "Weather in
+// mountains" panel. Kept inside the sky/blue brand family (sky · indigo
+// · cyan · blue · teal · slate) so each row reads distinct without
+// breaking palette discipline. Keys are mountain ids OR parent-group
+// ids (for the Shiga Kogen / Kita Shiga umbrella rows). Class strings
+// are written as full literals so Tailwind's JIT can pick them up at
+// build time.
+const MOUNTAIN_TINTS: Record<string, { bg: string; hover: string; ring: string }> = {
+  // Snowy Mountains AU
+  perisher:           { bg: "bg-sky-100/70",     hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },
+  thredbo:            { bg: "bg-indigo-100/70",  hover: "hover:bg-indigo-200/70",  ring: "ring-indigo-300/50" },
+  selwyn:             { bg: "bg-cyan-100/70",    hover: "hover:bg-cyan-200/70",    ring: "ring-cyan-300/50" },
+  "charlottes-pass":  { bg: "bg-blue-100/70",    hover: "hover:bg-blue-200/70",    ring: "ring-blue-300/50" },
+  // Victoria's High Country AU
+  "mt-buller":        { bg: "bg-sky-100/70",     hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },
+  "mt-stirling":      { bg: "bg-teal-100/70",    hover: "hover:bg-teal-200/70",    ring: "ring-teal-300/50" },
+  "falls-creek":      { bg: "bg-indigo-100/70",  hover: "hover:bg-indigo-200/70",  ring: "ring-indigo-300/50" },
+  "mt-hotham":        { bg: "bg-blue-100/70",    hover: "hover:bg-blue-200/70",    ring: "ring-blue-300/50" },
+  "lake-mountain":    { bg: "bg-cyan-100/70",    hover: "hover:bg-cyan-200/70",    ring: "ring-cyan-300/50" },
+  "mt-donna-buang":   { bg: "bg-slate-100/70",   hover: "hover:bg-slate-200/70",   ring: "ring-slate-300/50" },
+  // Yamanouchi JP · parent groups (these render as the umbrella row)
+  "shiga-kogen":      { bg: "bg-indigo-100/70",  hover: "hover:bg-indigo-200/70",  ring: "ring-indigo-300/50" },
+  "kita-shiga":       { bg: "bg-cyan-100/70",    hover: "hover:bg-cyan-200/70",    ring: "ring-cyan-300/50" },
+};
+
+const FALLBACK_TINT = { bg: "bg-sky-50/70", hover: "hover:bg-sky-100/70", ring: "ring-sky-200/50" };
+
+function tintFor(id: string): { bg: string; hover: string; ring: string } {
+  return MOUNTAIN_TINTS[id] ?? FALLBACK_TINT;
+}
+
 type Tile = {
   path: string;
   icon: typeof CloudSun;
@@ -347,7 +378,7 @@ export function TownHome() {
               {t("Mountain conditions unavailable", "山の状況は取得不可")}
             </p>
           ) : (
-            <ul className="divide-y divide-border/60">
+            <ul className="space-y-2">
               {mountainItems.map((item) => {
                 if (item.kind === "single") {
                   return (
@@ -445,10 +476,18 @@ function MountainResortRow({
   const { entry, km, min } = row;
   const temp = entry.current?.temperature;
   const desc = entry.current?.weatherDescription;
+  // Indented child rows (inside an expanded parent group) keep the
+  // parent's tint so the visual grouping stays clear; only top-level
+  // rows get their own per-resort tint.
+  const tint = indent ? null : tintFor(entry.location.id);
   return (
     <Link
       href={`~/${regionId}/mountain/${entry.location.id}`}
-      className={`group flex items-center justify-between gap-3 py-3 -mx-2 px-2 rounded-xl hover:bg-secondary/40 transition-colors ${indent ? "pl-6" : ""}`}
+      className={
+        tint
+          ? `group flex items-center justify-between gap-3 px-3 py-3 rounded-xl ring-1 ${tint.bg} ${tint.hover} ${tint.ring} transition-colors`
+          : `group flex items-center justify-between gap-3 py-2.5 px-2 rounded-lg hover:bg-secondary/40 transition-colors ${indent ? "pl-5" : ""}`
+      }
     >
       <div className="min-w-0 flex-1">
         <p className={`font-display font-semibold tracking-tight text-foreground truncate group-hover:text-primary transition-colors ${indent ? "text-sm" : "text-base"}`}>
@@ -510,14 +549,15 @@ function MountainParentGroupRow({
         ? `${Math.round(tMin)}°`
         : `${Math.round(tMin)}° to ${Math.round(tMax)}°`
       : null;
+  const tint = tintFor(parentId);
 
   return (
-    <div>
+    <div className={`rounded-xl ring-1 ${tint.bg} ${tint.ring} overflow-hidden`}>
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="group flex w-full items-center justify-between gap-3 py-3 -mx-2 px-2 rounded-xl hover:bg-secondary/40 transition-colors text-left"
+        className={`group flex w-full items-center justify-between gap-3 px-3 py-3 ${tint.hover} transition-colors text-left`}
       >
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
@@ -554,7 +594,7 @@ function MountainParentGroupRow({
             transition={{ duration: 0.22 }}
             className="overflow-hidden"
           >
-            <ul className="border-l-2 border-primary/15 ml-2 pl-1 mt-1 mb-2 divide-y divide-border/40">
+            <ul className="border-t border-white/60 bg-white/40 px-2 py-1 divide-y divide-border/40">
               {rows.map((r) => (
                 <li key={r.entry.location.id}>
                   <MountainResortRow row={r} regionId={regionId} t={t} indent />
