@@ -210,17 +210,25 @@ export function AppShell({ children }: { children: ReactNode }) {
         </div>
 
         <nav className="flex-1 px-3 pb-4 space-y-0.5">
-          {/* REGION */}
-          <SectionLabel>{t("Region", "地域")}</SectionLabel>
-          {regionNav.map((item) => (
-            <NavLink
-              key={item.path}
-              item={item}
-              href={regionHref(item.path)}
-              active={isActiveRegion(item.path)}
-              t={t}
-            />
-          ))}
+          {/* REGION - rendered only if the region exposes any region-scope
+              items. May 2026: "Sources" moved into the homepage footer, so
+              for default regions this section is empty and we suppress the
+              header entirely (otherwise the sidebar shows a stray "Region"
+              label with nothing under it). */}
+          {regionNav.length > 0 && (
+            <>
+              <SectionLabel>{t("Region", "地域")}</SectionLabel>
+              {regionNav.map((item) => (
+                <NavLink
+                  key={item.path}
+                  item={item}
+                  href={regionHref(item.path)}
+                  active={isActiveRegion(item.path)}
+                  t={t}
+                />
+              ))}
+            </>
+          )}
 
           {/* TOWN PICKER + COMBINED NAV
               May 2026 (round 2): the desktop sidebar used to be split into

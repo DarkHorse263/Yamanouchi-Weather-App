@@ -22,6 +22,7 @@ import {
   UpdateStamp,
   PageHeader,
   PremiumGate,
+  useOptionalSeason,
 } from "@workspace/feelzlike-shell";
 import { useGetWeather } from "@workspace/api-client-react";
 import { useTownWeather } from "@/lib/town-weather";
@@ -139,7 +140,16 @@ export function TownHome() {
   const { region } = useRegion();
   const { t } = useLanguage();
   const { town } = useBaseTown();
-  const weatherQ = useGetWeather({ region: region.id as never });
+  const seasonCtx = useOptionalSeason();
+  // AU resorts + per-resort snow forecast belong to the snow season only.
+  // When the user flips the season pill to green, hide the "Weather in
+  // mountains" panel entirely (mirrors the yamanouchi pattern, where the
+  // resorts page is wholly replaced in green season).
+  const isGreen = region.seasons && seasonCtx?.season === "green";
+  const weatherQ = useGetWeather(
+    { region: region.id as never },
+    { query: { enabled: !isGreen } as never },
+  );
   const townWeatherQ = useTownWeather(town?.lat, town?.lng);
 
   // List every region mountain with live weather data in the region's
@@ -299,7 +309,27 @@ export function TownHome() {
       {/* WEATHER IN MOUNTAINS - per-resort drive time + live conditions.
           Each row is a click-through to the resort detail page. Replaces
           the old standalone "All mountains" page; users now reach mountains
-          straight from this list. */}
+          straight from this list.
+
+          Hidden during the green season: snow-only context (resorts, snow
+          forecast) doesn't apply once the lifts close. We swap in a tiny
+          off-season banner pointing users at the still-relevant town
+          surfaces (stay / eat / explore) below. */}
+      {isGreen ? (
+        <section className="mt-3">
+          <div className="rounded-2xl border border-emerald-200 bg-emerald-50/50 p-5">
+            <p className="byline text-emerald-700/80 mb-1">
+              {t("Off-season", "シーズンオフ")}
+            </p>
+            <p className="text-sm text-emerald-900 leading-snug">
+              {t(
+                "Resorts and the snow forecast pause for green season. Switch the season pill back to winter once snow returns - or scroll on for stay, eat and explore.",
+                "シーズンオフはスキー場と降雪予報を一時停止しています。雪が戻ったらシーズン切替を冬に戻してください。",
+              )}
+            </p>
+          </div>
+        </section>
+      ) : (
       <section className="mt-3">
         <div className="rounded-2xl border border-border bg-white p-5">
           <div className="flex items-center justify-between mb-3">
@@ -341,6 +371,7 @@ export function TownHome() {
           )}
         </div>
       </section>
+      )}
 
       {/* SECTIONS - vertical stack in the order the brief specifies. */}
       <section className="mt-6 space-y-3">

@@ -1,7 +1,7 @@
 import { useGetPowderAlerts } from "@workspace/api-client-react";
-import { useLanguage, PremiumGate } from "@workspace/feelzlike-shell";
+import { useLanguage, PremiumGate, useOptionalSeason } from "@workspace/feelzlike-shell";
 import { Card, Badge, LoadingScreen, ErrorScreen } from "../components/ui-elements";
-import { BellRing, CloudLightning, Info } from "lucide-react";
+import { BellRing, CloudLightning, Info, Sun } from "lucide-react";
 import { motion } from "framer-motion";
 import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
 
@@ -25,7 +25,31 @@ function safeDate(raw: string | null | undefined): string {
 
 export default function Alerts() {
   const { t } = useLanguage();
-  const { data, isLoading, error } = useGetPowderAlerts({ region: "yamanouchi" }, { query: { refetchInterval: 600000 } as never });
+  const seasonCtx = useOptionalSeason();
+  const isGreen = seasonCtx?.season === "green";
+  const { data, isLoading, error } = useGetPowderAlerts(
+    { region: "yamanouchi" },
+    { query: { refetchInterval: 600000, enabled: !isGreen } as never },
+  );
+
+  if (isGreen) {
+    return (
+      <div className="p-4 md:p-8 max-w-2xl mx-auto">
+        <div className="rounded-2xl border border-emerald-200 bg-emerald-50/60 p-8 md:p-10 text-center">
+          <Sun className="w-10 h-10 text-emerald-600 mx-auto mb-4" />
+          <h1 className="font-display font-semibold text-2xl md:text-3xl text-emerald-900">
+            {t("Powder alerts return for snow season", "パウダーアラートは冬季に再開します")}
+          </h1>
+          <p className="text-sm md:text-base text-emerald-800/80 mt-3 leading-relaxed">
+            {t(
+              "Snowfall thresholds aren't tracked over the green season. Switch the season pill back to winter once the forecast shows snow on the way.",
+              "グリーンシーズン中は降雪量を追跡していません。雪の予報が出始めたらシーズン切替を冬に戻してください。",
+            )}
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   if (isLoading) return <LoadingScreen />;
   if (error) return <ErrorScreen message={(error as any)?.message || "Network error"} />;
@@ -47,7 +71,7 @@ export default function Alerts() {
           <BellRing className="w-8 h-8 text-primary" />
           {t("Powder Alerts", "パウダーアラート")}
         </h1>
-        <p className="text-muted-foreground mt-2">{t("Real-time notifications for deep snow events", "深雪のリアルタイム通知")}</p>
+        <p className="text-muted-foreground mt-2">{t("Get notified when significant snow is forecast.", "まとまった降雪が予報されたら通知します。")}</p>
       </div>
 
       <div className="space-y-6">

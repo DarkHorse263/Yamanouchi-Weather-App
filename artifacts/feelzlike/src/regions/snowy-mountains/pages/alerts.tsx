@@ -1,6 +1,6 @@
 import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
-import { BellRing, Info } from "lucide-react";
-import { PremiumGate } from "@workspace/feelzlike-shell";
+import { BellRing, Info, Sun } from "lucide-react";
+import { PremiumGate, useOptionalSeason } from "@workspace/feelzlike-shell";
 
 /**
  * Snowy Mountains alerts page. Powder alerts (the GET /alerts data) are
@@ -8,11 +8,20 @@ import { PremiumGate } from "@workspace/feelzlike-shell";
  * surface - letting AU visitors opt in to alerts driven by the same forecast
  * data already powering the AU mountain pages.
  *
+ * Season-aware: hidden behind a "back in winter" placeholder during the
+ * green season so the page matches the rest of the snow-only surfaces in
+ * the app (resorts, snow forecast, etc.).
+ *
  * The whole subscribe surface is wrapped in PremiumGate so the lock glyph
  * users see in the sidebar (DEFAULT_MOUNTAIN_NAV) matches the page state -
  * QA flagged the previous mismatch (lock in nav, free form on the page).
  */
 export default function Alerts() {
+  const seasonCtx = useOptionalSeason();
+  const isGreen = seasonCtx?.season === "green";
+
+  if (isGreen) return <GreenSeasonNotice />;
+
   return (
     <div className="p-4 md:p-8 max-w-3xl mx-auto space-y-8">
       <div>
@@ -21,7 +30,7 @@ export default function Alerts() {
           Powder Alerts
         </h1>
         <p className="text-muted-foreground mt-2">
-          Get notified when significant snow is forecast in the Snowy Mountains.
+          Get notified when significant snow is forecast.
         </p>
       </div>
 
@@ -41,6 +50,22 @@ export default function Alerts() {
       >
         <AlertSubscribeForm defaultRegion="snowy-mountains" />
       </PremiumGate>
+    </div>
+  );
+}
+
+function GreenSeasonNotice() {
+  return (
+    <div className="p-4 md:p-8 max-w-2xl mx-auto">
+      <div className="rounded-2xl border border-emerald-200 bg-emerald-50/60 p-8 md:p-10 text-center">
+        <Sun className="w-10 h-10 text-emerald-600 mx-auto mb-4" />
+        <h1 className="font-display font-semibold text-2xl md:text-3xl text-emerald-900">
+          Powder alerts return for snow season
+        </h1>
+        <p className="text-sm md:text-base text-emerald-800/80 mt-3 leading-relaxed">
+          Snowfall thresholds aren't tracked over the green season. Switch the season pill back to winter once the forecast shows snow on the way.
+        </p>
+      </div>
     </div>
   );
 }

@@ -7,7 +7,6 @@ import {
   UtensilsCrossed,
   Compass,
   AlertTriangle,
-  Database,
 } from "lucide-react";
 import type { NavItem } from "./types";
 
@@ -30,13 +29,16 @@ export const DEFAULT_TOWN_NAV: NavItem[] = [
  * only remaining mountain-scope nav entry and is gated behind a paywall.
  */
 export const DEFAULT_MOUNTAIN_NAV: NavItem[] = [
-  { path: "/alerts", icon: AlertTriangle, label: "Alerts", labelJa: "警報" },
+  // Powder alerts only make sense in snow season — sidebar/bottom-nav hides
+  // the row entirely when the active region is in green season (the
+  // shell's `filterBySeason` does the work).
+  { path: "/alerts", icon: AlertTriangle, label: "Alerts", labelJa: "警報", season: "winter" },
 ];
 
 /**
- * Sidebar items for the "Region" section (shown above town/mountain sections).
- * Paths are RELATIVE to /:region.
+ * Sidebar items for the "Region" section.
+ * May 2026 footer reset: "Sources" moved into the homepage footer (combined
+ * dropdown under About), so the sidebar Region group renders empty and is
+ * hidden by AppShell. The /sources route stays mounted via the router.
  */
-export const DEFAULT_REGION_NAV: NavItem[] = [
-  { path: "/sources", icon: Database, label: "Sources", labelJa: "データ出典" },
-];
+export const DEFAULT_REGION_NAV: NavItem[] = [];
