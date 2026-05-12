@@ -9,13 +9,13 @@ import type { ElevationBandDay } from "./elevationBandDay";
 import type { ElevationForecastSource } from "./elevationForecastSource";
 
 export interface ElevationForecast {
-  resortId: number;
+  /** Display name echoed back from the request `name` parameter (may be empty). */
   resortName: string;
   source: ElevationForecastSource;
   upperLiftElevationM: number | null;
   midLiftElevationM: number | null;
   lowerLiftElevationM: number | null;
-  /** ISO-8601 timestamp string when the upstream forecast was fetched (kept as a plain string so generated zod schemas don't coerce to Date — the wire format is JSON text). */
+  /** ISO-8601 timestamp string when the upstream forecast was fetched (kept as a plain string so generated zod schemas don't coerce to Date · the wire format is JSON text). */
   fetchedAt: string;
   days: ElevationBandDay[];
 }

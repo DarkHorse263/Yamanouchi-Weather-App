@@ -8,10 +8,10 @@
 import type { ElevationBandDayBands } from "./elevationBandDayBands";
 
 /**
- * One day of elevation-banded forecast for a ski resort.
+ * One day of elevation-banded forecast for a mountain.
  */
 export interface ElevationBandDay {
-  /** ISO-8601 date (yyyy-mm-dd) or Weather Unlocked native date string. */
+  /** ISO-8601 date (yyyy-mm-dd). */
   date: string;
   weatherDescription: string;
   freezingLevelM: number | null;

@@ -70,6 +70,7 @@ export * from "./getAttractionsCategory";
 export * from "./getAttractionsParams";
 export * from "./getDiningParams";
 export * from "./getDiningType";
+export * from "./getElevationForecastParams";
 export * from "./getLiftStatusParams";
 export * from "./getPowderAlertsParams";
 export * from "./getRoadConditionsParams";

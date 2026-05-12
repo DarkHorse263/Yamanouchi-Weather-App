@@ -60,9 +60,13 @@ export function MountainDetail() {
     },
   });
 
-  // Pull the WU resort id from the region config, when mapped. Hidden when missing.
-  const weatherUnlockedId = region.mountains?.find((m) => m.id === locationId)
-    ?.weatherUnlockedId;
+  // Pull mountain coords + summit elevation from the region config so the
+  // elevation-banded forecast panel can request a 3-band Open-Meteo forecast.
+  const mountainCfg = region.mountains?.find((m) => m.id === locationId);
+  const elevLat = mountainCfg?.lat;
+  const elevLng = mountainCfg?.lng;
+  const elevSummitM = mountainCfg?.elevationM;
+  const elevName = mountainCfg?.name;
 
   const backHref = "~/" + region.id;
 
@@ -211,9 +215,15 @@ export function MountainDetail() {
             />
           </section>
 
-          {/* Elevation-banded forecast (Weather Unlocked) - upper / mid / base
-              snow + temp. Self-hides when the mountain has no WU id mapped. */}
-          <ElevationBands weatherUnlockedId={weatherUnlockedId} />
+          {/* Elevation-banded forecast (Open-Meteo) - upper / mid / base
+              snow + temp. Self-hides when coords or summit elevation are
+              missing for the mountain. */}
+          <ElevationBands
+            lat={elevLat}
+            lng={elevLng}
+            summitElevationM={elevSummitM}
+            name={elevName}
+          />
 
           {/* Conditions strip - same look as TownWeather so users get a
               consistent reading regardless of region or location type. */}

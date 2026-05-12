@@ -46,6 +46,7 @@ import type {
   GetAlertPreferencesParams,
   GetAttractionsParams,
   GetDiningParams,
+  GetElevationForecastParams,
   GetLiftStatusParams,
   GetPowderAlertsParams,
   GetRoadConditionsParams,
@@ -1157,23 +1158,38 @@ export const useUnsubscribeFromAlerts = <
 };
 
 /**
- * Returns top / mid / bottom lift weather and snow for the next 7 days,
-sourced from Weather Unlocked Ski Resort Forecast. The `resortId` is
-the numeric Weather Unlocked resort id, mapped per-mountain in the
-feelzlike region config (`MountainLink.weatherUnlockedId`).
+ * Returns top / mid / bottom band weather and snow for the next 7 days,
+sourced from Open-Meteo. The API server makes three Open-Meteo calls
+(one per elevation band) so the temperature lapse rate is applied per
+band. Provide the mountain coordinates and summit elevation; mid and
+base elevations are derived proportionally on the server.
 
- * @summary Elevation-banded 7-day ski forecast for a Weather Unlocked resort
+ * @summary Elevation-banded 7-day forecast for an arbitrary mountain
  */
-export const getGetElevationForecastUrl = (resortId: number) => {
-  return `/api/elevation-forecast/${resortId}`;
+export const getGetElevationForecastUrl = (
+  params: GetElevationForecastParams,
+) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? "null" : value.toString());
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0
+    ? `/api/elevation-forecast?${stringifiedParams}`
+    : `/api/elevation-forecast`;
 };
 
 export const getElevationForecast = async (
-  resortId: number,
+  params: GetElevationForecastParams,
   options?: RequestInit,
 ): Promise<ElevationForecastResponse> => {
   return customFetch<ElevationForecastResponse>(
-    getGetElevationForecastUrl(resortId),
+    getGetElevationForecastUrl(params),
     {
       ...options,
       method: "GET",
@@ -1181,15 +1197,17 @@ export const getElevationForecast = async (
   );
 };
 
-export const getGetElevationForecastQueryKey = (resortId: number) => {
-  return [`/api/elevation-forecast/${resortId}`] as const;
+export const getGetElevationForecastQueryKey = (
+  params?: GetElevationForecastParams,
+) => {
+  return [`/api/elevation-forecast`, ...(params ? [params] : [])] as const;
 };
 
 export const getGetElevationForecastQueryOptions = <
   TData = Awaited<ReturnType<typeof getElevationForecast>>,
   TError = ErrorType<ErrorResponse>,
 >(
-  resortId: number,
+  params: GetElevationForecastParams,
   options?: {
     query?: UseQueryOptions<
       Awaited<ReturnType<typeof getElevationForecast>>,
@@ -1202,19 +1220,14 @@ export const getGetElevationForecastQueryOptions = <
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
   const queryKey =
-    queryOptions?.queryKey ?? getGetElevationForecastQueryKey(resortId);
+    queryOptions?.queryKey ?? getGetElevationForecastQueryKey(params);
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof getElevationForecast>>
   > = ({ signal }) =>
-    getElevationForecast(resortId, { signal, ...requestOptions });
+    getElevationForecast(params, { signal, ...requestOptions });
 
-  return {
-    queryKey,
-    queryFn,
-    enabled: !!resortId,
-    ...queryOptions,
-  } as UseQueryOptions<
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof getElevationForecast>>,
     TError,
     TData
@@ -1227,14 +1240,14 @@ export type GetElevationForecastQueryResult = NonNullable<
 export type GetElevationForecastQueryError = ErrorType<ErrorResponse>;
 
 /**
- * @summary Elevation-banded 7-day ski forecast for a Weather Unlocked resort
+ * @summary Elevation-banded 7-day forecast for an arbitrary mountain
  */
 
 export function useGetElevationForecast<
   TData = Awaited<ReturnType<typeof getElevationForecast>>,
   TError = ErrorType<ErrorResponse>,
 >(
-  resortId: number,
+  params: GetElevationForecastParams,
   options?: {
     query?: UseQueryOptions<
       Awaited<ReturnType<typeof getElevationForecast>>,
@@ -1244,7 +1257,7 @@ export function useGetElevationForecast<
     request?: SecondParameter<typeof customFetch>;
   },
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
-  const queryOptions = getGetElevationForecastQueryOptions(resortId, options);
+  const queryOptions = getGetElevationForecastQueryOptions(params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
     queryKey: QueryKey;

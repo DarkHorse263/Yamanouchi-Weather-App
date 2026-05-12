@@ -293,33 +293,57 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
 
-  /elevation-forecast/{resortId}:
+  /elevation-forecast:
     get:
       operationId: getElevationForecast
       tags: [elevation-forecast]
-      summary: Elevation-banded 7-day ski forecast for a Weather Unlocked resort
+      summary: Elevation-banded 7-day forecast for an arbitrary mountain
       description: |
-        Returns top / mid / bottom lift weather and snow for the next 7 days,
-        sourced from Weather Unlocked Ski Resort Forecast. The `resortId` is
-        the numeric Weather Unlocked resort id, mapped per-mountain in the
-        feelzlike region config (`MountainLink.weatherUnlockedId`).
+        Returns top / mid / bottom band weather and snow for the next 7 days,
+        sourced from Open-Meteo. The API server makes three Open-Meteo calls
+        (one per elevation band) so the temperature lapse rate is applied per
+        band. Provide the mountain coordinates and summit elevation; mid and
+        base elevations are derived proportionally on the server.
       parameters:
-        - name: resortId
-          in: path
+        - name: lat
+          in: query
           required: true
-          description: Weather Unlocked numeric resort id.
+          description: Mountain latitude in decimal degrees.
           schema:
-            type: integer
+            type: number
+            minimum: -90
+            maximum: 90
+        - name: lng
+          in: query
+          required: true
+          description: Mountain longitude in decimal degrees.
+          schema:
+            type: number
+            minimum: -180
+            maximum: 180
+        - name: summitElevationM
+          in: query
+          required: true
+          description: Summit / top-of-lift elevation in metres.
+          schema:
+            type: number
             minimum: 1
+            maximum: 9000
+        - name: name
+          in: query
+          required: false
+          description: Optional display name for the mountain (echoed back in the response).
+          schema:
+            type: string
       responses:
         "200":
-          description: Forecast envelope (forecast may be null when upstream returned no data or the integration is not configured).
+          description: Forecast envelope (forecast may be null when upstream returned no data).
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ElevationForecastResponse"
         "400":
-          description: Invalid resort id.
+          description: Invalid query parameters.
           content:
             application/json:
               schema:
@@ -3455,11 +3479,11 @@ components:
 
     ElevationBandDay:
       type: object
-      description: One day of elevation-banded forecast for a ski resort.
+      description: One day of elevation-banded forecast for a mountain.
       properties:
         date:
           type: string
-          description: ISO-8601 date (yyyy-mm-dd) or Weather Unlocked native date string.
+          description: ISO-8601 date (yyyy-mm-dd).
         weatherDescription:
           type: string
         freezingLevelM:
@@ -3496,13 +3520,12 @@ components:
     ElevationForecast:
       type: object
       properties:
-        resortId:
-          type: integer
         resortName:
           type: string
+          description: Display name echoed back from the request `name` parameter (may be empty).
         source:
           type: string
-          enum: [weather-unlocked]
+          enum: [open-meteo]
         upperLiftElevationM:
           type: number
           nullable: true
@@ -3514,13 +3537,12 @@ components:
           nullable: true
         fetchedAt:
           type: string
-          description: ISO-8601 timestamp string when the upstream forecast was fetched (kept as a plain string so generated zod schemas don't coerce to Date — the wire format is JSON text).
+          description: ISO-8601 timestamp string when the upstream forecast was fetched (kept as a plain string so generated zod schemas don't coerce to Date · the wire format is JSON text).
         days:
           type: array
           items:
             $ref: "#/components/schemas/ElevationBandDay"
       required:
-        - resortId
         - resortName
         - source
         - upperLiftElevationM
@@ -3531,7 +3553,7 @@ components:
 
     ElevationForecastResponse:
       type: object
-      description: Envelope describing whether the Weather Unlocked integration is configured and the forecast (when available).
+      description: Envelope wrapping the elevation-banded forecast (forecast may be null when upstream returned no data).
       properties:
         configured:
           type: boolean

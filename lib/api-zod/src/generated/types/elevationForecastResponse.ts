@@ -8,7 +8,7 @@
 import type { ElevationForecast } from "./elevationForecast";
 
 /**
- * Envelope describing whether the Weather Unlocked integration is configured and the forecast (when available).
+ * Envelope wrapping the elevation-banded forecast (forecast may be null when upstream returned no data).
  */
 export interface ElevationForecastResponse {
   configured: boolean;

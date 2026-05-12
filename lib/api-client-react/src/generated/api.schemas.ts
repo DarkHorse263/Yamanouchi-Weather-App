@@ -1708,10 +1708,10 @@ export type ElevationBandDayBands = {
 };
 
 /**
- * One day of elevation-banded forecast for a ski resort.
+ * One day of elevation-banded forecast for a mountain.
  */
 export interface ElevationBandDay {
-  /** ISO-8601 date (yyyy-mm-dd) or Weather Unlocked native date string. */
+  /** ISO-8601 date (yyyy-mm-dd). */
   date: string;
   weatherDescription: string;
   freezingLevelM: number | null;
@@ -1725,23 +1725,23 @@ export type ElevationForecastSource =
   (typeof ElevationForecastSource)[keyof typeof ElevationForecastSource];
 
 export const ElevationForecastSource = {
-  "weather-unlocked": "weather-unlocked",
+  "open-meteo": "open-meteo",
 } as const;
 
 export interface ElevationForecast {
-  resortId: number;
+  /** Display name echoed back from the request `name` parameter (may be empty). */
   resortName: string;
   source: ElevationForecastSource;
   upperLiftElevationM: number | null;
   midLiftElevationM: number | null;
   lowerLiftElevationM: number | null;
-  /** ISO-8601 timestamp string when the upstream forecast was fetched (kept as a plain string so generated zod schemas don't coerce to Date — the wire format is JSON text). */
+  /** ISO-8601 timestamp string when the upstream forecast was fetched (kept as a plain string so generated zod schemas don't coerce to Date · the wire format is JSON text). */
   fetchedAt: string;
   days: ElevationBandDay[];
 }
 
 /**
- * Envelope describing whether the Weather Unlocked integration is configured and the forecast (when available).
+ * Envelope wrapping the elevation-banded forecast (forecast may be null when upstream returned no data).
  */
 export interface ElevationForecastResponse {
   configured: boolean;
@@ -1773,6 +1773,31 @@ export type UpdateAlertPreferencesParams = {
 
 export type UnsubscribeFromAlertsParams = {
   token: string;
+};
+
+export type GetElevationForecastParams = {
+  /**
+   * Mountain latitude in decimal degrees.
+   * @minimum -90
+   * @maximum 90
+   */
+  lat: number;
+  /**
+   * Mountain longitude in decimal degrees.
+   * @minimum -180
+   * @maximum 180
+   */
+  lng: number;
+  /**
+   * Summit / top-of-lift elevation in metres.
+   * @minimum 1
+   * @maximum 9000
+   */
+  summitElevationM: number;
+  /**
+   * Optional display name for the mountain (echoed back in the response).
+   */
+  name?: string;
 };
 
 export type VerifyNewsletterSubscriptionParams = {

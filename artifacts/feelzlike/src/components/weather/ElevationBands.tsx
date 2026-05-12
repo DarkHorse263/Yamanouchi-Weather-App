@@ -7,28 +7,41 @@ import {
 import { useLanguage } from "@workspace/feelzlike-shell";
 
 interface Props {
-  weatherUnlockedId: number | undefined;
+  lat: number | undefined;
+  lng: number | undefined;
+  summitElevationM: number | undefined;
+  name?: string;
 }
 
 /**
- * Elevation-banded 7-day forecast (upper / mid / lower lift) sourced from
- * Weather Unlocked. Renders a 3xN grid of snow + temp readings so skiers
- * can see how conditions differ between the summit and the village base.
+ * Elevation-banded 7-day forecast (upper / mid / lower) sourced from
+ * Open-Meteo. Renders a 3xN grid of snow + temp readings so skiers can
+ * see how conditions differ between the summit and the village base.
  *
- * Self-hides when `weatherUnlockedId` is undefined (mountain not mapped),
- * when the integration is unconfigured (no API keys), or when upstream
- * returns no data Â· the component is intentionally an additive layer
- * over the existing Open-Meteo readings, not a replacement.
+ * The API server makes three Open-Meteo calls (one per elevation band)
+ * so the temperature lapse rate is applied per band. Self-hides when
+ * coordinates or summit elevation are missing, or when upstream returns
+ * no data · this is an additive layer over the existing single-elevation
+ * readings, not a replacement.
  */
-export function ElevationBands({ weatherUnlockedId }: Props) {
+export function ElevationBands({ lat, lng, summitElevationM, name }: Props) {
   const { t } = useLanguage();
-  const enabled = typeof weatherUnlockedId === "number" && weatherUnlockedId > 0;
+  const enabled =
+    typeof lat === "number" &&
+    typeof lng === "number" &&
+    typeof summitElevationM === "number" &&
+    summitElevationM > 0;
 
-  const safeId = weatherUnlockedId ?? 0;
-  const q = useGetElevationForecast(safeId, {
+  const params = {
+    lat: lat ?? 0,
+    lng: lng ?? 0,
+    summitElevationM: summitElevationM ?? 0,
+    ...(name ? { name } : {}),
+  };
+  const q = useGetElevationForecast(params, {
     query: {
       enabled,
-      queryKey: getGetElevationForecastQueryKey(safeId),
+      queryKey: getGetElevationForecastQueryKey(params),
     },
   });
 
@@ -49,7 +62,7 @@ export function ElevationBands({ weatherUnlockedId }: Props) {
           {t("elevation forecast", "標高別予報")}
         </p>
         <p className="text-[11px] text-muted-foreground/60">
-          {t("source · weather unlocked", "出典 · weather unlocked")}
+          {t("source · open-meteo", "出典 · open-meteo")}
         </p>
       </div>
 

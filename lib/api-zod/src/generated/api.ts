@@ -331,19 +331,44 @@ export const UnsubscribeFromAlertsResponse = zod.object({
 });
 
 /**
- * Returns top / mid / bottom lift weather and snow for the next 7 days,
-sourced from Weather Unlocked Ski Resort Forecast. The `resortId` is
-the numeric Weather Unlocked resort id, mapped per-mountain in the
-feelzlike region config (`MountainLink.weatherUnlockedId`).
+ * Returns top / mid / bottom band weather and snow for the next 7 days,
+sourced from Open-Meteo. The API server makes three Open-Meteo calls
+(one per elevation band) so the temperature lapse rate is applied per
+band. Provide the mountain coordinates and summit elevation; mid and
+base elevations are derived proportionally on the server.
 
- * @summary Elevation-banded 7-day ski forecast for a Weather Unlocked resort
+ * @summary Elevation-banded 7-day forecast for an arbitrary mountain
  */
+export const getElevationForecastQueryLatMin = -90;
+export const getElevationForecastQueryLatMax = 90;
 
-export const GetElevationForecastParams = zod.object({
-  resortId: zod.coerce
+export const getElevationForecastQueryLngMin = -180;
+export const getElevationForecastQueryLngMax = 180;
+
+export const getElevationForecastQuerySummitElevationMMax = 9000;
+
+export const GetElevationForecastQueryParams = zod.object({
+  lat: zod.coerce
+    .number()
+    .min(getElevationForecastQueryLatMin)
+    .max(getElevationForecastQueryLatMax)
+    .describe("Mountain latitude in decimal degrees."),
+  lng: zod.coerce
+    .number()
+    .min(getElevationForecastQueryLngMin)
+    .max(getElevationForecastQueryLngMax)
+    .describe("Mountain longitude in decimal degrees."),
+  summitElevationM: zod.coerce
     .number()
     .min(1)
-    .describe("Weather Unlocked numeric resort id."),
+    .max(getElevationForecastQuerySummitElevationMMax)
+    .describe("Summit \/ top-of-lift elevation in metres."),
+  name: zod.coerce
+    .string()
+    .optional()
+    .describe(
+      "Optional display name for the mountain (echoed back in the response).",
+    ),
 });
 
 export const GetElevationForecastResponse = zod
@@ -351,25 +376,24 @@ export const GetElevationForecastResponse = zod
     configured: zod.boolean(),
     forecast: zod.union([
       zod.object({
-        resortId: zod.number(),
-        resortName: zod.string(),
-        source: zod.enum(["weather-unlocked"]),
+        resortName: zod
+          .string()
+          .describe(
+            "Display name echoed back from the request `name` parameter (may be empty).",
+          ),
+        source: zod.enum(["open-meteo"]),
         upperLiftElevationM: zod.number().nullable(),
         midLiftElevationM: zod.number().nullable(),
         lowerLiftElevationM: zod.number().nullable(),
         fetchedAt: zod
           .string()
           .describe(
-            "ISO-8601 timestamp string when the upstream forecast was fetched (kept as a plain string so generated zod schemas don't coerce to Date — the wire format is JSON text).",
+            "ISO-8601 timestamp string when the upstream forecast was fetched (kept as a plain string so generated zod schemas don't coerce to Date · the wire format is JSON text).",
           ),
         days: zod.array(
           zod
             .object({
-              date: zod
-                .string()
-                .describe(
-                  "ISO-8601 date (yyyy-mm-dd) or Weather Unlocked native date string.",
-                ),
+              date: zod.string().describe("ISO-8601 date (yyyy-mm-dd)."),
               weatherDescription: zod.string(),
               freezingLevelM: zod.number().nullable(),
               windAvgKmh: zod.number().nullable(),
@@ -408,14 +432,14 @@ export const GetElevationForecastResponse = zod
                   ),
               }),
             })
-            .describe("One day of elevation-banded forecast for a ski resort."),
+            .describe("One day of elevation-banded forecast for a mountain."),
         ),
       }),
       zod.null(),
     ]),
   })
   .describe(
-    "Envelope describing whether the Weather Unlocked integration is configured and the forecast (when available).",
+    "Envelope wrapping the elevation-banded forecast (forecast may be null when upstream returned no data).",
   );
 
 /**

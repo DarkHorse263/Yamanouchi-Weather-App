@@ -10,5 +10,5 @@ export type ElevationForecastSource =
   (typeof ElevationForecastSource)[keyof typeof ElevationForecastSource];
 
 export const ElevationForecastSource = {
-  "weather-unlocked": "weather-unlocked",
+  "open-meteo": "open-meteo",
 } as const;

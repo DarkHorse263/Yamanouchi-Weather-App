@@ -1,38 +1,48 @@
 import { Router, type IRouter } from "express";
-import { getElevationForecast, isConfigured } from "../lib/weatherUnlocked";
+import { getElevationForecast } from "../lib/openMeteoElevation";
 
 const router: IRouter = Router();
 
 /**
- * GET /api/elevation-forecast/:resortId
+ * GET /api/elevation-forecast?lat=&lng=&summitElevationM=&name=
  *
- * Returns a 7-day elevation-banded forecast (upper / mid / lower lift)
- * for a Weather Unlocked Ski Resort. The :resortId is the numeric WU
- * resort id, which is mapped per-mountain in the feelzlike region
- * config (`MountainLink.weatherUnlockedId`).
+ * Returns a 7-day elevation-banded forecast (upper / mid / lower) for an
+ * arbitrary mountain, sourced from Open-Meteo. The API server makes three
+ * calls (one per elevation band) so that the temperature lapse rate is
+ * applied per band.
  *
  * Responses:
- *   200 → { configured: true, forecast: ElevationForecast }
- *   200 → { configured: true, forecast: null }   when upstream had no data
- *   200 → { configured: false }                  when API keys are unset
- *   400 → invalid resort id
+ *   200 → { configured: true, forecast: ElevationForecast | null }
+ *   400 → invalid query parameters
  */
-router.get("/elevation-forecast/:resortId", async (req, res) => {
-  const resortId = Number(req.params.resortId);
-  if (!Number.isInteger(resortId) || resortId <= 0) {
+router.get("/elevation-forecast", async (req, res) => {
+  const lat = Number(req.query["lat"]);
+  const lng = Number(req.query["lng"]);
+  const summitElevationM = Number(req.query["summitElevationM"]);
+  const name =
+    typeof req.query["name"] === "string" ? req.query["name"] : undefined;
+
+  if (
+    !Number.isFinite(lat) ||
+    !Number.isFinite(lng) ||
+    Math.abs(lat) > 90 ||
+    Math.abs(lng) > 180
+  ) {
     res.status(400).json({
-      error: "BAD_RESORT_ID",
-      message: "resortId must be a positive integer",
+      error: "BAD_COORDS",
+      message: "lat must be in [-90,90] and lng in [-180,180]",
+    });
+    return;
+  }
+  if (!Number.isFinite(summitElevationM) || summitElevationM <= 0 || summitElevationM > 9000) {
+    res.status(400).json({
+      error: "BAD_ELEVATION",
+      message: "summitElevationM must be a positive number under 9000",
     });
     return;
   }
 
-  if (!isConfigured()) {
-    res.json({ configured: false, forecast: null });
-    return;
-  }
-
-  const forecast = await getElevationForecast(resortId);
+  const forecast = await getElevationForecast({ lat, lng, summitElevationM, name });
   res.json({ configured: true, forecast });
 });
 
