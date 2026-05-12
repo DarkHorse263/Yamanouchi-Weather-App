@@ -10,6 +10,8 @@ export interface RadarMapProps {
   markers?: Array<{ id: string; name: string; lat: number; lng: number }>;
   /** Drives the precip toggle label: "Snow" in winter, "Rain" in green season. */
   season?: "winter" | "green";
+  /** Drives the Windy centre and Official radar source per region. */
+  region?: "snowy-mountains" | "vhc" | "yamanouchi";
 }
 
 export function RadarMap(props: RadarMapProps) {

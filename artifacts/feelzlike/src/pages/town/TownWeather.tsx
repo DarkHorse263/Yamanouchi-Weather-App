@@ -120,7 +120,7 @@ function Radar({ t }: { t: (en: string, ja: string) => string }) {
           RainViewer <ExternalLink className="w-3 h-3" />
         </a>
       </div>
-      <RadarMap season={season} />
+      <RadarMap season={season} region="snowy-mountains" />
       <p className="text-xs text-muted-foreground/70 px-5 py-3 border-t border-border">
         {season === "winter"
           ? t(

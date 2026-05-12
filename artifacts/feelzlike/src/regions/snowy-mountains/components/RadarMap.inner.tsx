@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { MapContainer, TileLayer, Marker, Tooltip, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { Cloud, CloudSnow, CloudRain, Layers, Pause, Play } from "lucide-react";
+import { Cloud, CloudSnow, CloudRain, Layers, Pause, Play, Map as MapIcon, Radio, Globe2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface RadarMapInnerProps {
@@ -10,7 +10,53 @@ interface RadarMapInnerProps {
   zoom?: number;
   markers?: Array<{ id: string; name: string; lat: number; lng: number }>;
   season?: "winter" | "green";
+  region?: RegionKey;
 }
+
+type RegionKey = "snowy-mountains" | "vhc" | "yamanouchi";
+type ViewMode = "interactive" | "windy" | "official";
+
+interface RegionConfig {
+  windy: { lat: number; lon: number; zoom: number };
+  official: {
+    label: string;
+    /** Direct image URL we hotlink (e.g. BOM radar gif). null = link-out only. */
+    imageUrl: string | null;
+    /** Page URL for "open source" link. */
+    href: string;
+    attribution: string;
+  };
+}
+
+const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
+  "snowy-mountains": {
+    windy: { lat: -36.42, lon: 148.42, zoom: 9 },
+    official: {
+      label: "BOM Captain's Flat",
+      imageUrl: "https://www.bom.gov.au/radar/IDR403.gif",
+      href: "https://www.bom.gov.au/products/IDR403.loop.shtml",
+      attribution: "Bureau of Meteorology · IDR403 · 256 km",
+    },
+  },
+  vhc: {
+    windy: { lat: -36.86, lon: 147.27, zoom: 9 },
+    official: {
+      label: "BOM Yarrawonga",
+      imageUrl: "https://www.bom.gov.au/radar/IDR49.gif",
+      href: "https://www.bom.gov.au/products/IDR49.loop.shtml",
+      attribution: "Bureau of Meteorology · IDR49 · 256 km",
+    },
+  },
+  yamanouchi: {
+    windy: { lat: 36.74, lon: 138.42, zoom: 9 },
+    official: {
+      label: "JMA Nagano",
+      imageUrl: null,
+      href: "https://www.jma.go.jp/bosai/nowc/#zoom:9/lat:36.74/lon:138.42/colordepth:normal/elements:hrpns",
+      attribution: "Japan Meteorological Agency · JMA",
+    },
+  },
+};
 
 const DEFAULT_CENTER = { lat: -36.42, lng: 148.42 };
 const DEFAULT_ZOOM = 9;
@@ -128,7 +174,10 @@ export default function RadarMapInner({
   zoom = DEFAULT_ZOOM,
   markers,
   season = "winter",
+  region = "snowy-mountains",
 }: RadarMapInnerProps) {
+  const regionCfg = REGION_CONFIG[region];
+  const [view, setView] = useState<ViewMode>("interactive");
   const { manifest, loading, error } = useRainviewerManifest();
   const [frameIndex, setFrameIndex] = useState(0);
   const [playing, setPlaying] = useState(true);
@@ -156,6 +205,7 @@ export default function RadarMapInner({
   // Animate radar at ~700ms per frame, pause longer on the latest
   // observed frame so the "now" moment is readable before nowcast loops.
   useEffect(() => {
+    if (view !== "interactive") return;
     if (!playing || radarFrames.length === 0 || mode === "clouds") return;
     tickRef.current = window.setInterval(() => {
       setFrameIndex((i) => (i + 1) % radarFrames.length);
@@ -163,7 +213,7 @@ export default function RadarMapInner({
     return () => {
       if (tickRef.current) window.clearInterval(tickRef.current);
     };
-  }, [playing, radarFrames.length, mode]);
+  }, [view, playing, radarFrames.length, mode]);
 
   // Whenever the manifest refreshes, jump to the most recent observed
   // frame (end of past, just before nowcast) so the loop starts at "now".
@@ -186,8 +236,73 @@ export default function RadarMapInner({
   const precipLabel = season === "winter" ? "Snow" : "Rain";
   const PrecipIcon = season === "winter" ? CloudSnow : CloudRain;
 
+  // Windy embed URL — built per-region. Snow overlay in winter, rain in green.
+  const windyUrl = useMemo(() => {
+    const overlay = season === "winter" ? "snow" : "rain";
+    const params = new URLSearchParams({
+      lat: String(regionCfg.windy.lat),
+      lon: String(regionCfg.windy.lon),
+      detailLat: String(regionCfg.windy.lat),
+      detailLon: String(regionCfg.windy.lon),
+      zoom: String(regionCfg.windy.zoom),
+      level: "surface",
+      overlay,
+      product: "ecmwf",
+      menu: "",
+      message: "true",
+      marker: "",
+      calendar: "now",
+      type: "map",
+      location: "coordinates",
+      metricWind: "default",
+      metricTemp: "default",
+      radarRange: "-1",
+    });
+    return `https://embed.windy.com/embed2.html?${params.toString()}`;
+  }, [season, regionCfg.windy]);
+
   return (
     <div className="relative w-full h-[520px] md:h-[640px] bg-slate-100">
+      {/* View switcher (top-left). Three modes: our interactive leaflet
+          (default, with resort pins + nowcast), Windy (rich multi-layer),
+          and the official regional source (BOM gif, JMA link, etc). */}
+      <div className="absolute top-3 left-3 z-[1000] flex gap-1 rounded-xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-lg p-1">
+        <ModePill
+          active={view === "interactive"}
+          onClick={() => setView("interactive")}
+          icon={MapIcon}
+          label="Interactive"
+        />
+        <ModePill
+          active={view === "windy"}
+          onClick={() => setView("windy")}
+          icon={Globe2}
+          label="Windy"
+        />
+        <ModePill
+          active={view === "official"}
+          onClick={() => setView("official")}
+          icon={Radio}
+          label="Official"
+        />
+      </div>
+
+      {view === "windy" && (
+        <iframe
+          title="Windy weather map"
+          src={windyUrl}
+          className="absolute inset-0 w-full h-full border-0"
+          sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+          referrerPolicy="no-referrer"
+          loading="lazy"
+        />
+      )}
+
+      {view === "official" && (
+        <OfficialView official={regionCfg.official} />
+      )}
+
+      {view === "interactive" && (
       <MapContainer
         center={centerTuple}
         zoom={zoom}
@@ -254,9 +369,12 @@ export default function RadarMapInner({
           </Marker>
         ))}
       </MapContainer>
+      )}
 
       {/* Floating layer toggles (top-right). Three pills with icons +
-          short labels — fits cleanly on mobile too. */}
+          short labels — fits cleanly on mobile too. Only relevant for
+          the interactive leaflet view. */}
+      {view === "interactive" && (
       <div className="absolute top-3 right-3 z-[1000] flex flex-col gap-1 rounded-xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-lg p-1">
         <ModePill
           active={mode === "all"}
@@ -277,10 +395,11 @@ export default function RadarMapInner({
           label={precipLabel}
         />
       </div>
+      )}
 
       {/* Floating control bar (bottom): play/pause + timestamp + scrubber.
           Hidden in clouds-only mode since there's nothing to animate. */}
-      {mode !== "clouds" && (
+      {view === "interactive" && mode !== "clouds" && (
         <div className="absolute left-3 right-3 bottom-3 z-[1000] rounded-xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-lg px-3 py-2 flex items-center gap-3">
           <button
             type="button"
@@ -359,6 +478,54 @@ function ModePill({
       <Icon className="w-3.5 h-3.5" />
       {label}
     </button>
+  );
+}
+
+function OfficialView({ official }: { official: RegionConfig["official"] }) {
+  return (
+    <div className="absolute inset-0 flex flex-col bg-slate-100">
+      <div className="flex-1 grid place-items-center overflow-hidden p-4">
+        {official.imageUrl ? (
+          <img
+            src={official.imageUrl}
+            alt={official.label}
+            className="max-h-full max-w-full object-contain"
+            style={{ imageRendering: "pixelated" }}
+          />
+        ) : (
+          <div className="text-center max-w-sm px-4">
+            <p className="text-sm text-slate-700 font-semibold mb-2">
+              {official.label}
+            </p>
+            <p className="text-xs text-slate-500 mb-4">
+              This source can't be embedded directly. Open it in a new tab to
+              see the official live radar.
+            </p>
+            <a
+              href={official.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-full bg-slate-900 text-white text-xs font-semibold px-4 py-2 hover:bg-slate-800"
+            >
+              Open {official.label}
+            </a>
+          </div>
+        )}
+      </div>
+      <div className="absolute left-3 right-3 bottom-3 z-[1000] rounded-xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-lg px-3 py-2 flex items-center justify-between gap-3">
+        <div className="text-[11px] text-slate-600 font-medium truncate">
+          Source · {official.attribution}
+        </div>
+        <a
+          href={official.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[11px] font-semibold text-sky-700 hover:text-sky-900 whitespace-nowrap"
+        >
+          Open source →
+        </a>
+      </div>
+    </div>
   );
 }
 
