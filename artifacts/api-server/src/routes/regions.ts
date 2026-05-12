@@ -74,12 +74,13 @@ const REGIONS: RegionConfig[] = [
     href: "/victorias-high-country/",
     baseTowns: ["Mansfield", "Bright", "Mount Beauty", "Harrietville", "Dinner Plain", "Marysville", "Warburton"],
     mountains: ["Mt Buller", "Falls Creek", "Mt Hotham", "Mt Stirling", "Lake Mountain", "Mt Donna Buang"],
-    // Headline reading is for the primary base town (Mansfield, ~320m) -
-    // the cattle country gateway to Buller & Stirling. Per-mountain peak
-    // forecasts live on the dedicated region page.
-    headlineLabel: "Mansfield",
-    lat: -37.0539,
-    lon: 146.0894,
+    // Headline reading is for Mount Beauty (~357m) - closest sealed-road
+    // town to Falls Creek and the most-stayed base for Victoria's High
+    // Country off-mountain visitors. Per-mountain peak forecasts live on
+    // the dedicated region page.
+    headlineLabel: "Mount Beauty",
+    lat: -36.7327,
+    lon: 147.1696,
     timezone: "Australia/Melbourne",
     sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
   },

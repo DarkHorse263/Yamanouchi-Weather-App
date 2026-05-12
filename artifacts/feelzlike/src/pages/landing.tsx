@@ -68,7 +68,7 @@ interface RegionsResponse {
 // live region set in `regions/index.ts` and `api-server/src/routes/regions.ts`.
 const FALLBACK_REGIONS: Region[] = [
   { id: "snowy-mountains", name: "Snowy Mountains", country: "Australia", countryCode: "AU", region: "New South Wales", status: "live", href: "/snowy-mountains/", baseTowns: ["Jindabyne", "Berridale", "Cooma"], mountains: ["Perisher", "Thredbo", "Selwyn", "Charlotte's Pass"], headlineLabel: "Jindabyne", headline: null },
-  { id: "victorias-high-country", name: "Victoria\u2019s High Country", country: "Australia", countryCode: "AU", region: "Victoria", status: "live", href: "/victorias-high-country/", baseTowns: ["Bright", "Mansfield", "Mount Beauty", "Harrietville", "Dinner Plain"], mountains: ["Mt Buller", "Mt Stirling", "Falls Creek", "Mt Hotham"], headlineLabel: "Bright", headline: null },
+  { id: "victorias-high-country", name: "Victoria\u2019s High Country", country: "Australia", countryCode: "AU", region: "Victoria", status: "live", href: "/victorias-high-country/", baseTowns: ["Mount Beauty", "Bright", "Mansfield", "Harrietville", "Dinner Plain"], mountains: ["Mt Buller", "Mt Stirling", "Falls Creek", "Mt Hotham"], headlineLabel: "Mount Beauty", headline: null },
   { id: "yamanouchi", name: "Yamanouchi", country: "Japan", countryCode: "JP", region: "Nagano", status: "live", href: "/yamanouchi/", baseTowns: ["Yudanaka", "Shibu Onsen", "Yomase"], mountains: ["Shiga Kogen", "Ryuoo", "X-Jam", "Yomase"], headlineLabel: "Yudanaka", headline: null },
 ];
 
@@ -102,7 +102,7 @@ function seasonForCountry(code: "AU" | "JP"): "winter" | "green" {
 // is the town a visitor most likely stays in for that region.
 const PRIMARY_TOWN: Record<string, string> = {
   "snowy-mountains":         "Jindabyne",
-  "victorias-high-country":  "Bright",
+  "victorias-high-country":  "Mount Beauty",
   "yamanouchi":              "Yudanaka",
 };
 
