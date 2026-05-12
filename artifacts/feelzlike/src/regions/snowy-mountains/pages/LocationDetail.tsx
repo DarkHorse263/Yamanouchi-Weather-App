@@ -1,5 +1,7 @@
 import { useRoute } from "wouter";
 import { useGetLocationWeather, useGetLocationWebcams, useGetLocationLiftStatus } from "@workspace/api-client-react";
+import { MountainSnapshot } from "@workspace/feelzlike-dashboard";
+import { ElevationBands } from "@/components/weather/ElevationBands";
 import { LoadingState } from "../components/ui/loading-state";
 import { ErrorState } from "../components/ui/error-state";
 import { ForecastChart } from "../components/weather/ForecastChart";
@@ -427,15 +429,16 @@ export default function LocationDetail() {
           </div>
         </motion.div>
 
-        {/* PREMIUM - Extended outlook 7/14/21 day. Free tier sees a blurred
-            tease of any remaining days the API gave us; subscribers get the
-            full extended horizon (we'll wire 14/21-day model data when the
-            API is ready). */}
+        {/* PREMIUM · Next 6 days · the 5-day strip above is free; this
+            gates the 6-day+ outlook (extending to 7/14/21 once the model
+            data is wired). Renamed May 2026 v4 from "Extended outlook"
+            to align with the cross-region paywall sequence:
+            Next 6 days → Elevation forecast → Lift hold likely. */}
         <PremiumGate
-          title="Extended outlook 7 / 14 / 21 day"
-          titleJa="長期予報 7・14・21日"
-          blurb="See further out than the free 5-day window. Plan trips with confidence."
-          blurbJa="無料の5日予報を超える長期予報。旅行計画に最適。"
+          title="Next 6 days"
+          titleJa="今後6日間"
+          blurb="See further out than the free 5-day window · 7 / 14 / 21 day extended outlook for trip planning."
+          blurbJa="無料5日予報を超える長期予報 · 7・14・21日の見通しで旅行計画に。"
         >
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -474,6 +477,26 @@ export default function LocationDetail() {
           </motion.div>
         </PremiumGate>
 
+        {/* PREMIUM · Elevation forecast · upper / mid / base snow + temp.
+            Added May 2026 v4 to align with the cross-region paywall
+            sequence: Next 6 days → Elevation forecast → Lift hold likely.
+            Self-hides inside ElevationBands when coords/elevation missing. */}
+        {location.latitude != null && location.longitude != null && location.elevation != null && (
+          <PremiumGate
+            title="Elevation forecast"
+            titleJa="標高別予報"
+            blurb="See conditions across upper / mid / base elevations · snow and temperature for each band."
+            blurbJa="山頂・中腹・ベースの標高別コンディション · 降雪と気温。"
+          >
+            <ElevationBands
+              lat={location.latitude}
+              lng={location.longitude}
+              summitElevationM={location.elevation}
+              name={location.name}
+            />
+          </PremiumGate>
+        )}
+
         {/* PREMIUM · detailed conditions · bundles the wind-driven lift
             hold banner, the 24-hour ForecastChart trend, the Powder Factor
             backwards-looking score and the multi-model EnsembleForecast
@@ -487,15 +510,34 @@ export default function LocationDetail() {
           blurbJa="フル計器盤 · 24時間推移、パウダースコア、マルチモデル合意。"
         >
           <div className="space-y-6 md:space-y-8">
-            {/* LIFT HOLD LIKELY · May 2026 v3 · wind-driven prediction of
-                whether exposed chairs / gondolas are at risk of holding.
-                Self-hides when no wind data, so we render it bare (no
-                motion wrapper) to avoid leaving a space-y gap. */}
+            {/* LIFT HOLD LIKELY · wind-driven prediction of whether
+                exposed chairs / gondolas are at risk of holding. Self-
+                hides when no wind data, rendered bare (no motion wrapper)
+                to avoid leaving a space-y gap. */}
             <LiftHoldLikely
               variant="dark"
               windSpeedKmh={current.windSpeed}
               gustKmh={current.windGust}
             />
+
+            {/* DASHBOARD DIALS · MountainSnapshot rings · restored
+                May 2026 v4. Freezing level, gusts and incoming snow
+                at a glance. Sits inside the paid Detailed Conditions
+                bundle alongside the hold-likely call. */}
+            {location.elevation != null && current.windSpeed != null && (
+              <MountainSnapshot
+                resortName={location.name}
+                elevation={location.elevation}
+                freezingLevel={current.freezingLevel ?? undefined}
+                gust={current.windGust ?? undefined}
+                windSpeed={current.windSpeed}
+                liftsOpen={liftData?.liftsOpen}
+                totalLifts={liftData?.totalLifts}
+                snowfallNext24h={current.snowfallNext24h ?? undefined}
+                snowfallNext48h={current.snowfallNext48h ?? undefined}
+                snowfallNext72h={current.snowfallNext72h ?? undefined}
+              />
+            )}
 
             <motion.div
               initial={{ opacity: 0, y: 16 }}

@@ -4,10 +4,13 @@ import {
   ResortHero,
   LiveConditions,
   MountainOutlook,
+  MountainSnapshot,
   SafetyStrip,
   type ConditionStat,
   type SafetyLink,
 } from "@workspace/feelzlike-dashboard";
+import { PremiumGate } from "@workspace/feelzlike-shell";
+import { ElevationBands } from "@/components/weather/ElevationBands";
 import {
   Thermometer,
   Navigation,
@@ -212,26 +215,24 @@ export default function ResortDetail() {
       />
 
       <div className="max-w-7xl mx-auto px-5 md:px-10 pb-16 space-y-6 md:space-y-8 -mt-2">
-        {/* LIFT HOLD LIKELY · May 2026 v3 · replaces the MountainSnapshot
-            rings panel that used to live here (Freezing / Wind / Lifts).
-            The rings duplicated freezing-level + wind data already shown
-            in LiveConditions below; the new banner gives a clearer single
-            "should I bother going up?" signal driven by gust forecasts. */}
-        <LiftHoldLikely
-          windSpeedKmh={current.windSpeed}
-          gustKmh={current.windGust}
-        />
+        {/* ─── FREE ─────────────────────────────────────────────
+            Order (May 2026 v4 · request from product):
+              1. Conditions right now  (LiveConditions stats grid)
+              2. Next 24 hours         (HourlyForecast)
+              3. Powder factor + calendar + webcams (yamanouchi extras)
+            Lift hold likely, the 6-day outlook and elevation forecast
+            now sit behind the paywall further down. */}
         <LiveConditions stats={stats} />
-        {hourly && hourly.length > 0 && (
-          <PowderFactorBadge hourly={hourly} t={t} sectionNumber="03b" />
-        )}
         {hourly && hourly.length > 0 && (
           <HourlyForecast
             hourly={hourly}
             utcOffsetSeconds={(data as any).utcOffsetSeconds ?? 0}
             t={t}
-            sectionNumber="04"
+            sectionNumber="03"
           />
+        )}
+        {hourly && hourly.length > 0 && (
+          <PowderFactorBadge hourly={hourly} t={t} sectionNumber="04" />
         )}
         {hourly && hourly.length > 0 && (
           <PowderCalendar hourly={hourly} t={t} sectionNumber="05" />
@@ -242,17 +243,88 @@ export default function ResortDetail() {
           t={t}
           fallbackPageUrl={profile.webcamUrl}
         />
-        {hourly && hourly.length > 0 && (
-          <LiftWindHoldPanel
-            mountainId={id}
-            resortElevationM={location.elevation}
-            hourly={hourly as any}
-            sectionNumber="07"
-            t={t}
-          />
-        )}
+
+        {/* ─── PREMIUM ──────────────────────────────────────────
+            Next 6 days, elevation forecast and lift-hold likely all
+            gated. Free tier sees blurred preview + lock CTA. */}
+
+        {/* PremiumGate · Next 6 days */}
         {daily && daily.length > 0 && (
-          <MountainOutlook days={daily as any} elevation={location.elevation} />
+          <PremiumGate
+            title="Next 6 days"
+            titleJa="今後6日間"
+            blurb="Plan further out · 6-day mountain outlook with snow, wind and temperatures."
+            blurbJa="6日間の山岳予報 · 降雪・風速・気温の長期見通し。"
+          >
+            <MountainOutlook days={daily as any} elevation={location.elevation} />
+          </PremiumGate>
+        )}
+
+        {/* PremiumGate · Elevation forecast · upper / mid / base snow + temp.
+            Self-hides inside ElevationBands when coords are missing. */}
+        {mountain?.lat != null && mountain?.lng != null && mountain?.elevationM != null && (
+          <PremiumGate
+            title="Elevation forecast"
+            titleJa="標高別予報"
+            blurb="See conditions across upper / mid / base elevations · snow and temperature for each band."
+            blurbJa="山頂・中腹・ベースの標高別コンディション · 降雪と気温。"
+          >
+            <ElevationBands
+              lat={mountain.lat}
+              lng={mountain.lng}
+              summitElevationM={mountain.elevationM}
+              name={location.name}
+            />
+          </PremiumGate>
+        )}
+
+        {/* PremiumGate · Lift hold likely + dashboard rings (snapshot).
+            The wind-driven hold call sits alongside the at-a-glance
+            dials (freezing level, gusts, incoming snow). */}
+        <PremiumGate
+          title="Lift hold likely"
+          titleJa="リフトホールド予測"
+          blurb="Wind-driven lift-hold call plus the dashboard dials · freezing level, gusts, incoming snow at a glance."
+          blurbJa="風速ベースのリフトホールド判断と計器盤 · 凍結高度・突風・降雪を一目で。"
+        >
+          <div className="space-y-4">
+            <LiftHoldLikely
+              windSpeedKmh={current.windSpeed}
+              gustKmh={current.windGust}
+            />
+            {location.elevation != null && current.windSpeed != null && (
+              <MountainSnapshot
+                resortName={location.name}
+                elevation={location.elevation}
+                freezingLevel={current.freezingLevel ?? undefined}
+                gust={current.windGust ?? undefined}
+                windSpeed={current.windSpeed}
+                snowfallNext24h={current.snowfallNext24h ?? undefined}
+                snowfallNext48h={current.snowfallNext48h ?? undefined}
+                snowfallNext72h={current.snowfallNext72h ?? undefined}
+                modelSource="Open-Meteo · JMA · ECMWF"
+              />
+            )}
+          </div>
+        </PremiumGate>
+
+        {/* The mountain-specific lift wind-hold panel (per-lift gust
+            tolerances) stays gated as part of the deep operational view. */}
+        {hourly && hourly.length > 0 && (
+          <PremiumGate
+            title="Per-lift hold forecast"
+            titleJa="リフト別ホールド予測"
+            blurb="Hour-by-hour hold risk for each named lift on this mountain · uses lift-specific gust tolerances."
+            blurbJa="各リフトの時間別ホールドリスク · リフト固有の耐風基準を使用。"
+          >
+            <LiftWindHoldPanel
+              mountainId={id}
+              resortElevationM={location.elevation}
+              hourly={hourly as any}
+              sectionNumber="07"
+              t={t}
+            />
+          </PremiumGate>
         )}
         <OfficialLinks profile={profile} resortName={location.name} t={t} />
         <SafetyStrip

@@ -18,10 +18,12 @@ import {
 import {
   LiveBadge,
   PageHeader,
+  PremiumGate,
   UpdateStamp,
   useLanguage,
   useRegion,
 } from "@workspace/feelzlike-shell";
+import { MountainSnapshot } from "@workspace/feelzlike-dashboard";
 import {
   getGetLocationWeatherQueryKey,
   useGetLocationWeather,
@@ -168,30 +170,17 @@ export function MountainDetail() {
             </div>
           </section>
 
-          {/* Lift hold likely · wind-driven prediction of whether exposed
-              chairs and gondolas are at risk of holding today. Replaces the
-              old four-tile snow/wind/freezing strip; the same numbers are
-              shown below in the Conditions right now panel. */}
-          <LiftHoldLikely
-            windSpeedKmh={current.windSpeed ?? null}
-            gustKmh={current.windGust ?? null}
-          />
-
-          {/* Elevation-banded forecast (Open-Meteo) · upper / mid / base
-              snow + temp. Self-hides when coords or summit elevation are
-              missing for the mountain. */}
-          <ElevationBands
-            lat={elevLat}
-            lng={elevLng}
-            summitElevationM={elevSummitM}
-            name={elevName}
-          />
+          {/* ─── FREE ─────────────────────────────────────────────
+              Order (May 2026 v4 · request from product):
+                1. Conditions right now
+                2. Today
+                3. Next 24 hours
+              The wind/elevation/lift-hold panels moved below the paywall. */}
 
           {/* Conditions right now · snow depth, incoming snow, wind and
               freezing level. The four numbers an off-mountain skier is
-              actually deciding on. Replaces the older humidity/cloud/etc
-              secondary strip which lived here. */}
-          <section className="mt-4 rounded-2xl border border-border bg-white p-5">
+              actually deciding on. */}
+          <section className="mt-8 rounded-2xl border border-border bg-white p-5">
             <p className="byline text-muted-foreground/70">
               {t("conditions right now", "現在の状況")}
             </p>
@@ -321,9 +310,20 @@ export function MountainDetail() {
             </section>
           )}
 
-          {/* 6-day outlook */}
+          {/* ─── PREMIUM ──────────────────────────────────────────
+              Next 6 days, elevation forecast and lift-hold likely all
+              gated. Free tier sees blurred preview + lock CTA. */}
+
+          {/* PremiumGate · Next 6 days */}
           {daily.length > 1 && (
-            <section className="mt-4 rounded-2xl border border-border bg-white p-5">
+          <div className="mt-4">
+          <PremiumGate
+            title="Next 6 days"
+            titleJa="今後6日間"
+            blurb="Plan further out · 6-day mountain outlook with snow, wind and temperatures."
+            blurbJa="6日間の山岳予報 · 降雪・風速・気温の長期見通し。"
+          >
+            <section className="rounded-2xl border border-border bg-white p-5">
               <p className="byline text-muted-foreground/70">{t("Next 6 days", "今後6日間")}</p>
               <div className="mt-3 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
                 {daily.slice(1, 7).map((d) => {
@@ -373,7 +373,67 @@ export function MountainDetail() {
                 })}
               </div>
             </section>
+          </PremiumGate>
+          </div>
           )}
+
+          {/* PremiumGate · Elevation forecast · upper / mid / base snow + temp.
+              Self-hides when coords or summit elevation are missing. */}
+          {elevLat != null && elevLng != null && elevSummitM != null && (
+            <div className="mt-4">
+              <PremiumGate
+                title="Elevation forecast"
+                titleJa="標高別予報"
+                blurb="See conditions across upper / mid / base elevations · snow and temperature for each band."
+                blurbJa="山頂・中腹・ベースの標高別コンディション · 降雪と気温。"
+              >
+                <ElevationBands
+                  lat={elevLat}
+                  lng={elevLng}
+                  summitElevationM={elevSummitM}
+                  name={elevName}
+                />
+              </PremiumGate>
+            </div>
+          )}
+
+          {/* PremiumGate · Lift hold likely · wind-driven prediction
+              alongside the MountainSnapshot dashboard rings (freezing
+              level, wind, incoming snow at a glance). */}
+          <div className="mt-4">
+            <PremiumGate
+              title="Lift hold likely"
+              titleJa="リフトホールド予測"
+              blurb="Wind-driven lift-hold call plus the dashboard dials · freezing level, gusts, incoming snow at a glance."
+              blurbJa="風速ベースのリフトホールド判断と計器盤 · 凍結高度・突風・降雪を一目で。"
+            >
+              <div className="space-y-4">
+                <LiftHoldLikely
+                  windSpeedKmh={current.windSpeed ?? null}
+                  gustKmh={current.windGust ?? null}
+                />
+                {/* MountainSnapshot needs guaranteed `elevation` and
+                    `windSpeed` numbers per its prop contract; guard
+                    rather than coerce so the rings only render with
+                    real data. */}
+                {location?.elevation != null && current.windSpeed != null && (
+                  <MountainSnapshot
+                    resortName={location.name ?? ""}
+                    elevation={location.elevation}
+                    freezingLevel={current.freezingLevel ?? undefined}
+                    gust={current.windGust ?? undefined}
+                    windSpeed={current.windSpeed}
+                    snowfallNext24h={current.snowfallNext24h ?? undefined}
+                    snowfallNext48h={current.snowfallNext48h ?? undefined}
+                    snowfallNext72h={current.snowfallNext72h ?? undefined}
+                    modelSource={
+                      current.dataSource ?? region.weatherSource?.label ?? "Open-Meteo"
+                    }
+                  />
+                )}
+              </div>
+            </PremiumGate>
+          </div>
 
           <p className="byline text-muted-foreground/60 mt-10">
             {t(
@@ -419,6 +479,7 @@ type MountainWeather = {
     snowfallNext24h?: number | null;
     snowfallNext48h?: number | null;
     snowfallNext72h?: number | null;
+    windGust?: number | null;
   };
   daily: Array<{
     date: string;
