@@ -73,6 +73,7 @@ import { PowderFactorBadge } from "@/components/PowderFactorBadge";
 import { POWDER_THRESHOLDS_AU } from "@/types/weather";
 import { PremiumGate } from "@workspace/feelzlike-shell";
 import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
+import { LiftHoldLikely } from "@/components/weather/LiftHoldLikely";
 
 type LocationId = "thredbo" | "perisher" | "charlottes-pass" | "selwyn" | "jindabyne";
 
@@ -264,69 +265,44 @@ export default function LocationDetail() {
             </motion.div>
           </div>
 
-          {/* Live stat tiles */}
+          {/* CONDITIONS RIGHT NOW - May 2026 v3: was the dense 3-tile strip
+              (Snow depth / Snow next 24h / Wind+gusts). Replaced with the
+              full measurements panel that used to live inside the paid
+              Detailed Conditions block, since it's the first thing an
+              off-mountain skier actually wants to see. */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.18 }}
-            className="mt-8 md:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-3"
+            className="mt-8 md:mt-12 glass rounded-3xl p-5 md:p-8"
           >
-            {/* May 2026 v2: Snow depth, Snow next 24h, Wind (with gusts as
-                a hint line). Freezing Level tile removed - rarely useful
-                off-mountain, lives inside Detailed Conditions for paying
-                users instead. */}
-            {[
-              {
-                label: "Snow depth",
-                value: current.snowDepth != null ? `${current.snowDepth}` : "-",
-                unit: "cm",
-                hint: undefined,
-                icon: Snowflake,
-                tint: "hsl(190,90%,45%)",
-              },
-              {
-                label: "Snow next 24h",
-                value: snow24h != null ? snow24h.toFixed(1) : "-",
-                unit: "cm",
-                hint: undefined,
-                icon: CloudSnow,
-                tint: "hsl(210,90%,46%)",
-              },
-              {
-                label: "Wind",
-                value: `${Math.round(current.windSpeed)}`,
-                unit: `km/h${current.windDirectionCompass ? ` ${current.windDirectionCompass}` : ""}`,
-                hint:
-                  current.windGust != null
-                    ? `Gusts ${Math.round(current.windGust)} km/h`
-                    : undefined,
-                icon: Wind,
-                tint: "hsl(265,85%,55%)",
-              },
-            ].map((s, i) => (
-              <div
-                key={i}
-                className="relative rounded-2xl overflow-hidden"
-                style={{
-                  background: `linear-gradient(135deg, ${s.tint}33, ${s.tint}11)`,
-                  padding: "1px",
-                }}
-              >
-                <div className="rounded-[15px] bg-card/80 backdrop-blur-md p-4 h-full">
-                  <div className="flex items-center gap-1.5 byline text-muted-foreground/80">
-                    <s.icon className="w-3 h-3" style={{ color: s.tint }} />
+            <div className="flex items-end justify-between mb-5">
+              <div>
+                <p className="byline text-muted-foreground">Conditions</p>
+                <h2 className="font-display font-semibold text-xl md:text-2xl mt-1">
+                  Right now
+                </h2>
+              </div>
+              <p className="byline text-muted-foreground/70 hidden md:block">
+                {stats.length} measurements
+              </p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-y-6 gap-x-4">
+              {stats.map((s, i) => (
+                <div key={i} className="group">
+                  <div className="flex items-center gap-1.5 byline text-muted-foreground/80 mb-1.5">
+                    <s.icon className="w-3 h-3 text-muted-foreground/60" />
                     {s.label}
                   </div>
-                  <p className="mt-2 font-display font-semibold text-2xl md:text-3xl text-foreground tnum tracking-tight" data-numeric>
+                  <p
+                    className="font-display text-2xl md:text-3xl text-foreground tracking-tight"
+                    data-numeric
+                  >
                     {s.value}
-                    <span className="text-sm md:text-base text-muted-foreground/70 font-normal ml-1">{s.unit}</span>
                   </p>
-                  {s.hint && (
-                    <p className="text-xs text-muted-foreground/70 mt-1">{s.hint}</p>
-                  )}
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </motion.div>
 
           {/* Scroll cue */}
@@ -525,32 +501,21 @@ export default function LocationDetail() {
               snowfallNext72h={current.snowfallNext72h}
             />
 
+            {/* LIFT HOLD LIKELY - May 2026 v3: replaces the duplicate
+                Conditions Right Now panel that used to live here (now
+                lifted up into the hero so free users see it too). This is
+                the wind-driven prediction of whether exposed chairs and
+                gondolas are at risk of holding today. */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.22 }}
-              className="glass rounded-3xl p-5 md:p-8"
             >
-              <div className="flex items-end justify-between mb-5">
-                <div>
-                  <p className="byline text-muted-foreground">Conditions</p>
-                  <h2 className="font-display font-semibold text-xl md:text-2xl mt-1">Right now</h2>
-                </div>
-                <p className="byline text-muted-foreground/70 hidden md:block">{stats.length} measurements</p>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-y-6 gap-x-4">
-                {stats.map((s, i) => (
-                  <div key={i} className="group">
-                    <div className="flex items-center gap-1.5 byline text-muted-foreground/80 mb-1.5">
-                      <s.icon className="w-3 h-3 text-muted-foreground/60" />
-                      {s.label}
-                    </div>
-                    <p className="font-display text-2xl md:text-3xl text-foreground tracking-tight" data-numeric>
-                      {s.value}
-                    </p>
-                  </div>
-                ))}
-              </div>
+              <LiftHoldLikely
+                variant="dark"
+                windSpeedKmh={current.windSpeed}
+                gustKmh={current.windGust}
+              />
             </motion.div>
 
             <motion.div

@@ -4,6 +4,15 @@ import { useLanguage } from "@workspace/feelzlike-shell";
 interface Props {
   windSpeedKmh: number | null | undefined;
   gustKmh?: number | null | undefined;
+  /**
+   * Visual treatment.
+   * - `light` (default) · pastel tinted card on a light page background
+   *   (used by the generic Victoria's High Country mountain page).
+   * - `dark` · translucent glass card with white-on-aurora text (used by
+   *   the snowy-mountains aurora-fintech page where the surrounding
+   *   sections all use the `glass` panel treatment).
+   */
+  variant?: "light" | "dark";
 }
 
 type Tone = "ok" | "caution" | "warn" | "alert";
@@ -53,7 +62,7 @@ function classify(g: number): Tier {
   };
 }
 
-const TONE = {
+const TONE_LIGHT = {
   ok: {
     panel: "border-emerald-200 bg-emerald-50/60",
     chip: "bg-emerald-500",
@@ -84,6 +93,37 @@ const TONE = {
   },
 } as const;
 
+const TONE_DARK = {
+  ok: {
+    panel: "glass border-emerald-400/30",
+    chip: "bg-emerald-400",
+    text: "text-emerald-200",
+    detail: "text-emerald-100/70",
+    Icon: CheckCircle2,
+  },
+  caution: {
+    panel: "glass border-amber-400/40",
+    chip: "bg-amber-400",
+    text: "text-amber-200",
+    detail: "text-amber-100/75",
+    Icon: Wind,
+  },
+  warn: {
+    panel: "glass border-orange-400/50",
+    chip: "bg-orange-400",
+    text: "text-orange-200",
+    detail: "text-orange-100/80",
+    Icon: AlertTriangle,
+  },
+  alert: {
+    panel: "glass border-rose-400/60",
+    chip: "bg-rose-400",
+    text: "text-rose-200",
+    detail: "text-rose-100/80",
+    Icon: AlertTriangle,
+  },
+} as const;
+
 /**
  * Lift Hold Likely · a wind-driven prediction of whether exposed
  * chairlifts and gondolas are at risk of holding today. Uses gust
@@ -95,7 +135,11 @@ const TONE = {
  *   70-89      · chairs may hold
  *   >= 90      · wind-hold likely
  */
-export function LiftHoldLikely({ windSpeedKmh, gustKmh }: Props) {
+export function LiftHoldLikely({
+  windSpeedKmh,
+  gustKmh,
+  variant = "light",
+}: Props) {
   const { t } = useLanguage();
 
   const wind = typeof windSpeedKmh === "number" ? windSpeedKmh : null;
@@ -105,12 +149,13 @@ export function LiftHoldLikely({ windSpeedKmh, gustKmh }: Props) {
   if (driver == null) return null;
 
   const tier = classify(driver);
-  const palette = TONE[tier.tone];
+  const palette = (variant === "dark" ? TONE_DARK : TONE_LIGHT)[tier.tone];
   const PaletteIcon = palette.Icon;
+  const radius = variant === "dark" ? "rounded-3xl" : "rounded-2xl";
 
   return (
     <section
-      className={`mt-4 rounded-2xl border ${palette.panel} p-5`}
+      className={`${variant === "dark" ? "" : "mt-4 "}${radius} border ${palette.panel} p-5`}
       aria-label={t("Lift hold likely overview", "リフト運休見込み")}
     >
       <div className="flex items-start gap-4">
