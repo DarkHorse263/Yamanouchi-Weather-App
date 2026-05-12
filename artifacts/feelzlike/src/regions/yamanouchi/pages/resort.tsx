@@ -35,7 +35,6 @@ import { PowderCalendar } from "@/components/PowderCalendar";
 import { MountainWebcams } from "@/components/MountainWebcams";
 import { LiftWindHoldPanel } from "@/components/LiftWindHoldPanel";
 import { PowderFactorBadge } from "@/components/PowderFactorBadge";
-import { LiftHoldLikely } from "@/components/weather/LiftHoldLikely";
 
 type WeatherId = Parameters<typeof useGetLocationWeather>[0];
 
@@ -330,20 +329,16 @@ export default function ResortDetail() {
           </PremiumGate>
         )}
 
-        {/* PremiumGate · Lift hold likely + dashboard rings (snapshot).
-            The wind-driven hold call sits alongside the at-a-glance
-            dials (freezing level, gusts, incoming snow). */}
+        {/* Mountain dials only · the wind-driven lift-hold call was
+            removed here because the per-lift "will the lifts spin?"
+            panel below already delivers it with finer per-lift tolerances. */}
         <PremiumGate
-          title="Lift hold likely"
-          titleJa="リフトホールド予測"
-          blurb="Wind-driven lift-hold call plus the dashboard dials · freezing level, gusts, incoming snow at a glance."
-          blurbJa="風速ベースのリフトホールド判断と計器盤 · 凍結高度・突風・降雪を一目で。"
+          title="Mountain dials"
+          titleJa="マウンテン計器盤"
+          blurb="Freezing level, gusts and incoming snow at a glance."
+          blurbJa="凍結高度・突風・降雪を一目で。"
         >
           <div className="space-y-4">
-            <LiftHoldLikely
-              windSpeedKmh={current.windSpeed}
-              gustKmh={current.windGust}
-            />
             {location.elevation != null && current.windSpeed != null && (
               <MountainSnapshot
                 resortName={location.name}
