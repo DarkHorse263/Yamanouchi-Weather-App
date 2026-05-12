@@ -66,3 +66,9 @@ id = "0oHBoZAyl8OrYOxcjaSEB"
 uri = "file://artifacts/feelzlike/public/downloads/feelzlike-investor-overview.pdf"
 type = "pdf"
 title = "feelzlike investor overview (corrected)"
+
+[[outputs]]
+id = "mpY9qJBrf05ZWG-5v2jRv"
+uri = "file://exports/feelzlike-press-release.pdf"
+type = "pdf"
+title = "feelzlike · launch press release"
