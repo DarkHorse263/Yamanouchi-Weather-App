@@ -13,6 +13,28 @@
 - **General working preferences**: The user prefers a light and clean design aesthetic, inspired by snow-forecast.com, with a consistent typography across all applications. All applications should share a unified design system. The user wants to see a town-centric information architecture, where each region is anchored on a single base town.
 - **REGION SHAPE — HARD RULE (every new region, no exceptions)**: Always lead with **towns**, then **mountains hang off each town**. The region home (`/:region/`) is a town picker. A town card surfaces the mountain(s) that town serves. Mountain detail is reached *via a town*, never as a flat top-level resort list. This is the basis for the app — confirm with the user before deviating, and remind the user of this rule when scoping a new region. See `RegionConfig` in `lib/feelzlike-shell/src/types.ts` for the data shape; the existing Snowy Mountains and Yamanouchi configs are the reference implementations.
 
+- **MOUNTAIN DETAIL CANONICAL FORMAT — HARD RULE (every region, no exceptions)**: All three region "mountain detail" pages MUST render the same sections in the same order, with the same gating, using the SAME shared components. Reviewed and reconciled May 2026. To add a new region, copy this skeleton — do NOT invent a new section order.
+  - **Files**: AU Snowy → `regions/snowy-mountains/pages/LocationDetail.tsx`. JP → `regions/yamanouchi/pages/resort.tsx`. AU Vic + any new region with no custom layout → `pages/region/MountainDetail.tsx` (the generic).
+  - **Canonical section order** (top → bottom):
+    1. Page header / hero
+    2. **Hourly forecast** (free, next 48h, with Powder Window detector) — `<HourlyForecast>` from `@/components/HourlyForecast`. Must pass `thresholds={POWDER_THRESHOLDS_AU}` for AU regions; JP defaults to Japow thresholds in the component.
+    3. Premium · Next 6 days
+    4. Premium · **Elevation forecast** — `<ElevationBands>` from `@/components/weather/ElevationBands` (shared, mobile = stacked day cards, md+ = 5-col table). Self-hides when coords/elevation missing; gate with `hourly.length > 0 && location?.elevation != null`.
+    5. **PowderCalendar** (free, sits AFTER ElevationBands) — `<PowderCalendar>` from `@/components/PowderCalendar`. AU passes `thresholds={POWDER_THRESHOLDS_AU}`.
+    6. Premium · Mountain dials (MountainSnapshot rings)
+    7. Premium · **Per-lift hold forecast** — `<LiftWindHoldPanel>`. **MUST be page-level gated** by `getLiftsForMountain(<mountainId>).length > 0` so free users never see a lock card for a mountain with no lift seeds. PremiumGate alone is not enough — it still renders the lock chrome even when its child returns null.
+    8. Premium · **24h trend chart** — `<ForecastChart>` from `@/components/weather/ForecastChart` (shared).
+    9. Premium · **Ensemble forecast** — `<EnsembleForecast>` from `@/components/weather/EnsembleForecast` (shared).
+    10. Premium · Alerts (paywall card linking to `~/<region>/alerts`)
+    11. **Webcams** (free, last) — `<MountainWebcams>` from `@/components/MountainWebcams`.
+  - **Shared vs region-local**: `ElevationBands`, `ForecastChart`, `EnsembleForecast`, `HourlyForecast`, `PowderCalendar`, `LiftWindHoldPanel`, `MountainWebcams` ALL live under `artifacts/feelzlike/src/components/` and are imported from `@/components/...`. Do NOT fork these into region folders — region-local copies (and re-export shims) are an anti-pattern that already cost us a sync drift bug.
+  - **PowderFactorBadge is fully removed.** Do not reintroduce it.
+  - **No em/en dashes anywhere.** Only middot ·. Lowercase brand. (Project-wide rule, repeated here for the gate copy/blurbs that frequently get authored fresh.)
+
+- **TOWN HOME "Weather in mountains" PANEL — HARD RULE**: The mountain list on each base-town page (`pages/region/TownHome.tsx`) renders each resort with a per-resort colour tint defined in the local `MOUNTAIN_TINTS` map (keyed by mountain id, or by parent group id for umbrella rows like Shiga Kogen / Kita Shiga). Tints stay inside the sky/blue brand family (sky · indigo · cyan · blue · teal · slate). When adding a new mountain, add a new entry to `MOUNTAIN_TINTS` — the `FALLBACK_TINT` exists only as a safety net.
+
+- **ADDING A NEW REGION — CHECKLIST**: (1) Create `src/regions/<region-id>.ts` mirroring `snowy-mountains.ts` / `yamanouchi.ts` (mountains array with id/name/elevationM/lat/lng/blurb/websiteUrl, baseTowns array, parentId for umbrella groups); (2) register in `src/regions/index.ts` `REGIONS` and assign country in `REGION_COUNTRY`; (3) add region to `RegionLayout.tsx` `REGION_ROUTERS` ONLY if it needs custom pages — otherwise generic `pages/region/*` handles it; (4) add server-side: `artifacts/api-server/src/lib/regions.ts` `REGION_IDS` + `LOCATION_TO_REGION`, weather entries in `routes/weather.ts`, regions descriptor in `routes/regions.ts`; (5) update `lib/api-spec/openapi.yaml` `RegionId` enum and regen `pnpm --filter @workspace/api-zod run codegen && pnpm --filter @workspace/api-client-react run codegen` then `tsc -b lib/api-client-react --force`; (6) seed `data/lifts.ts` and `data/webcams.ts` for each mountain (or skip — page-level gates self-hide); (7) add per-resort tints to `MOUNTAIN_TINTS` in `pages/region/TownHome.tsx`; (8) add headline to `landing.tsx` `FALLBACK_REGIONS` + `routes/regions.ts` `headlineLabel`. The mountain detail page renders for free via the generic `pages/region/MountainDetail.tsx` because routing is data-driven (`region.mountains.find()`, not a hardcoded id whitelist).
+
 ## System Architecture
 
 The project is a pnpm workspace monorepo using Node.js 24 and TypeScript 5.9.

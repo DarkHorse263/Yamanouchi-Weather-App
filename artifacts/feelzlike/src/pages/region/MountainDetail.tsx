@@ -30,6 +30,7 @@ import {
 } from "@workspace/api-client-react";
 import { ElevationBands } from "@/components/weather/ElevationBands";
 import { HourlyForecast } from "@/components/HourlyForecast";
+import { POWDER_THRESHOLDS_AU } from "@/types/weather";
 import { PowderCalendar } from "@/components/PowderCalendar";
 import { LiftWindHoldPanel } from "@/components/LiftWindHoldPanel";
 import { MountainWebcams } from "@/components/MountainWebcams";
@@ -295,6 +296,7 @@ export function MountainDetail() {
                 hourly={hourly as any}
                 utcOffsetSeconds={(data as any).utcOffsetSeconds ?? 0}
                 t={t}
+                thresholds={POWDER_THRESHOLDS_AU}
                 sectionNumber=""
               />
             </div>

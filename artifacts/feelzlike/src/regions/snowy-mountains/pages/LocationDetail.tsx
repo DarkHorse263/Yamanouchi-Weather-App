@@ -71,6 +71,7 @@ import { cn } from "../lib/utils";
 import { HourlyForecast } from "@/components/HourlyForecast";
 import { PowderCalendar } from "@/components/PowderCalendar";
 import { LiftWindHoldPanel } from "@/components/LiftWindHoldPanel";
+import { getLiftsForMountain } from "@/data/lifts";
 import { POWDER_THRESHOLDS_AU } from "@/types/weather";
 import { PremiumGate } from "@workspace/feelzlike-shell";
 import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
@@ -631,8 +632,9 @@ export default function LocationDetail() {
 
         {/* PREMIUM · Per-lift hold forecast · hour-by-hour hold risk
             for each named lift on this mountain, using lift-specific
-            gust tolerances. Self-hides when no lift seeds defined. */}
-        {hourly && hourly.length > 0 && (
+            gust tolerances. Page-level gated by getLiftsForMountain so
+            free users don't see a lock for empty data (matches VIC). */}
+        {hourly && hourly.length > 0 && getLiftsForMountain(locationId).length > 0 && (
           <PremiumGate
             title="Per-lift hold forecast"
             titleJa="リフト別ホールド予測"

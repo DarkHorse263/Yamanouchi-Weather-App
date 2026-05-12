@@ -35,6 +35,7 @@ import { HourlyForecast } from "@/components/HourlyForecast";
 import { PowderCalendar } from "@/components/PowderCalendar";
 import { MountainWebcams } from "@/components/MountainWebcams";
 import { LiftWindHoldPanel } from "@/components/LiftWindHoldPanel";
+import { getLiftsForMountain } from "@/data/lifts";
 import { ForecastChart } from "@/components/weather/ForecastChart";
 import { EnsembleForecast } from "@/components/weather/EnsembleForecast";
 import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
@@ -363,8 +364,10 @@ export default function ResortDetail() {
         </PremiumGate>
 
         {/* The mountain-specific lift wind-hold panel (per-lift gust
-            tolerances) stays gated as part of the deep operational view. */}
-        {hourly && hourly.length > 0 && (
+            tolerances) stays gated as part of the deep operational view.
+            Page-level gated by getLiftsForMountain so free users don't
+            see a lock for empty data (matches VIC). */}
+        {hourly && hourly.length > 0 && getLiftsForMountain(id).length > 0 && (
           <PremiumGate
             title="Per-lift hold forecast"
             titleJa="リフト別ホールド予測"
