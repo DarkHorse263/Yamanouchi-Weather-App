@@ -75,7 +75,7 @@ const FALLBACK_REGIONS: Region[] = [
 const TOWN_SLIDES = [
   { src: "/towns/jindabyne.jpg",  town: "Jindabyne", region: "Snowy Mountains",            country: "NSW, Australia"   },
   { src: "/towns/mount-beauty.jpg", town: "Mount Beauty", region: "Victoria\u2019s High Country", country: "VIC, Australia" },
-  { src: "/towns/yudanaka.jpg",   town: "Yudanaka",  region: "Yamanouchi",                  country: "Nagano, Japan"   },
+  { src: "/towns/yudanaka-valley.jpg", town: "Yudanaka", region: "Yamanouchi",              country: "Nagano, Japan"   },
 ] as const;
 
 function formatAgo(iso: string | undefined, now: number, fallback = "loading\u2026"): string {
