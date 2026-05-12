@@ -64,10 +64,10 @@ function classify(g: number): Tier {
 
 const TONE_LIGHT = {
   ok: {
-    panel: "border-emerald-300 bg-emerald-50",
+    panel: "border-emerald-200 bg-white",
     chip: "bg-emerald-600",
-    text: "text-emerald-900",
-    detail: "text-emerald-900/85",
+    text: "text-slate-900",
+    detail: "text-slate-600",
     Icon: CheckCircle2,
   },
   caution: {
@@ -97,8 +97,8 @@ const TONE_DARK = {
   ok: {
     panel: "glass border-emerald-400/40",
     chip: "bg-emerald-400",
-    text: "text-emerald-300",
-    detail: "text-emerald-100",
+    text: "text-white",
+    detail: "text-slate-200",
     Icon: CheckCircle2,
   },
   caution: {

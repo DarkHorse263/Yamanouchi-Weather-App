@@ -9,6 +9,8 @@ import {
   Car,
   Footprints,
   ExternalLink,
+  Clock,
+  Ticket,
 } from "lucide-react";
 
 import {
@@ -162,6 +164,79 @@ export function SnowyTransport() {
           </article>
         </section>
       )}
+
+      {/* Skitube · Perisher's underground rail link from Bullocks Flat.
+          Sits between the Cooma Coaches hero and the other operators
+          because it is the only way to reach Perisher Valley by car
+          without chains in winter, and the only practical option after
+          dark / before lift access. */}
+      <section className="px-4 md:px-10 pt-5 md:pt-8">
+        <article className="rounded-2xl border border-sky-200 bg-gradient-to-br from-sky-50 via-white to-sky-50/40 p-6 md:p-8 shadow-sm">
+          <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-5">
+            <div className="shrink-0 self-start w-14 h-14 md:w-16 md:h-16 rounded-xl bg-sky-600 text-white flex items-center justify-center">
+              <Train className="w-7 h-7 md:w-8 md:h-8" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="text-[11px] font-bold tracking-wider text-sky-700 uppercase">
+                {t("Underground rail · Bullocks Flat ↔ Perisher", "地下鉄道 · ブロックスフラット ↔ ペリッシャー")}
+              </p>
+              <h2 className="font-display font-semibold text-2xl text-foreground mt-0.5">
+                {t("Skitube", "スキーチューブ")}
+              </h2>
+              <p className="text-foreground/90 mt-3 leading-relaxed">
+                {t(
+                  "The 8.5km cog railway from Bullocks Flat (Alpine Way) to Perisher Valley and Blue Cow. The only chain-free way into Perisher and the easiest way to reach the resort with luggage or kids in tow.",
+                  "アルパインウェイのブロックスフラットからペリッシャーバレー・ブルーカウまで結ぶ8.5kmのケーブル鉄道。チェーン不要でペリッシャーへ入れる唯一の方法。",
+                )}
+              </p>
+
+              <div className="mt-4 grid sm:grid-cols-2 gap-3">
+                <div className="rounded-xl border border-sky-100 bg-white p-4">
+                  <div className="flex items-center gap-2 text-sky-700">
+                    <Clock className="w-4 h-4" />
+                    <p className="text-[11px] font-bold tracking-wider uppercase">
+                      {t("Operating hours", "運行時間")}
+                    </p>
+                  </div>
+                  <p className="text-sm text-foreground/90 mt-2 leading-relaxed">
+                    {t(
+                      "Winter: first train 6:00am · last 11:00pm. Trains every 20 min in peak.",
+                      "冬季：始発6:00 · 最終23:00。ピーク時は20分間隔。",
+                    )}
+                  </p>
+                </div>
+                <div className="rounded-xl border border-sky-100 bg-white p-4">
+                  <div className="flex items-center gap-2 text-sky-700">
+                    <Ticket className="w-4 h-4" />
+                    <p className="text-[11px] font-bold tracking-wider uppercase">
+                      {t("Indicative fares", "参考運賃")}
+                    </p>
+                  </div>
+                  <p className="text-sm text-foreground/90 mt-2 leading-relaxed">
+                    {t(
+                      "Winter return adult ~ AUD 59 · child ~ AUD 32. Discounts when bundled with a Perisher lift pass. Confirm at perisher.com.au.",
+                      "冬季往復 大人約59豪ドル・子供約32豪ドル。リフト券との同時購入で割引。最新料金はperisher.com.auで確認。",
+                    )}
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
+                <a
+                  href="https://www.perisher.com.au/skitube"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 font-semibold text-foreground hover:text-sky-700"
+                >
+                  <Globe className="w-4 h-4 text-sky-700" />
+                  {t("Skitube info & timetable", "スキーチューブ案内・時刻表")}
+                  <ExternalLink className="w-3 h-3 opacity-60" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
 
       {/* Other operators */}
       <section className="px-4 md:px-10 pt-5">

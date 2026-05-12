@@ -53,7 +53,7 @@ export function MountainWebcams({
         <div className="flex items-end justify-between gap-3 mb-4">
           <div>
             <p className="byline text-muted-foreground/70">
-              {sectionNumber} · {t("Live cams", "ライブカメラ")}
+              {sectionNumber ? `${sectionNumber} · ` : ""}{t("Live cams", "ライブカメラ")}
             </p>
             <h2
               id={headingId}
@@ -98,7 +98,7 @@ export function MountainWebcams({
       <div className="flex items-end justify-between gap-3 mb-4 flex-wrap">
         <div>
           <p className="byline text-muted-foreground/70">
-            {sectionNumber} · {t("Live cams", "ライブカメラ")}
+            {sectionNumber ? `${sectionNumber} · ` : ""}{t("Live cams", "ライブカメラ")}
           </p>
           <h2
             id={headingId}

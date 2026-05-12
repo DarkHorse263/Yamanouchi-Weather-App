@@ -92,7 +92,7 @@ export function LiftWindHoldPanel({
       <div className="flex items-end justify-between gap-3 mb-4 flex-wrap">
         <div>
           <p className="byline text-muted-foreground/70">
-            {sectionNumber} · {t("Wind-hold outlook · next 24h", "ウィンドホールド予測 · 24時間")}
+            {sectionNumber ? `${sectionNumber} · ` : ""}{t("Wind-hold outlook · next 24h", "ウィンドホールド予測 · 24時間")}
           </p>
           <h2
             id={headingId}

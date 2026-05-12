@@ -77,6 +77,19 @@ import { LiftHoldLikely } from "@/components/weather/LiftHoldLikely";
 
 type LocationId = "thredbo" | "perisher" | "charlottes-pass" | "selwyn" | "jindabyne";
 
+/**
+ * Lift operating windows for the AU resorts. Times are NSW-published
+ * winter daily windows · Skitube to Perisher runs much earlier from
+ * Bullocks Flat. Used by the hero strip so visitors see first / last
+ * lifts before scrolling.
+ */
+const AU_LIFT_HOURS: Record<string, { hours: string; note?: string }> = {
+  thredbo: { hours: "First lifts 8:30am · last lifts 4:00pm" },
+  perisher: { hours: "First lifts 8:30am · last lifts 4:00pm", note: "Skitube from 6:00am" },
+  "charlottes-pass": { hours: "First lifts 9:00am · last lifts 4:00pm" },
+  selwyn: { hours: "First lifts 9:00am · last lifts 4:00pm" },
+};
+
 function getStatusColor(status: string) {
   switch (status) {
     case "open": return "bg-emerald-500/15 text-emerald-300 border-emerald-500/30";
@@ -204,6 +217,15 @@ export default function LocationDetail() {
               <span className="byline text-muted-foreground/80 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-card border border-border">
                 <Clock className="w-3 h-3" />
                 <span>Updated <span className="text-foreground tabular-nums">{formatAgo(observedTime, now)}</span></span>
+              </span>
+            )}
+            {AU_LIFT_HOURS[locationId] && (
+              <span className="byline text-muted-foreground/80 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-card border border-border">
+                <Clock className="w-3 h-3 text-primary" />
+                <span className="text-foreground">{AU_LIFT_HOURS[locationId].hours}</span>
+                {AU_LIFT_HOURS[locationId].note && (
+                  <span className="text-muted-foreground/70">· {AU_LIFT_HOURS[locationId].note}</span>
+                )}
               </span>
             )}
           </motion.div>
@@ -743,7 +765,7 @@ export default function LocationDetail() {
 
         </div>
 
-        <SafetyStrip />
+        <SafetyStrip resortId={locationId} />
 
       </div>
     </>

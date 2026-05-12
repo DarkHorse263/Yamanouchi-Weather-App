@@ -60,6 +60,41 @@ const SHIGA_KOGEN_DEFAULTS: ResortProfile = {
   webcamUrl: "https://www.shigakogen.gr.jp/english/livecamera/",
 };
 
+/**
+ * Lift operating windows for the Yamanouchi resorts. Most Shiga Kogen
+ * sub-areas run the same daytime window; X-JAM Takaifuji and Ryuoo add
+ * night skiing. We fall back to the generic Shiga Kogen window when a
+ * sub-area is not listed explicitly.
+ */
+const JP_LIFT_HOURS_DEFAULT = {
+  hours: "First lifts 8:30 · last lifts 16:30",
+  hoursJa: "始発リフト8:30 · 最終16:30",
+};
+const JP_LIFT_HOURS: Record<string, { hours: string; hoursJa: string; note?: string; noteJa?: string }> = {
+  ryuoo: {
+    hours: "First lifts 8:00 · last lifts 16:30",
+    hoursJa: "始発リフト8:00 · 最終16:30",
+    note: "Night skiing select dates · until 21:00",
+    noteJa: "ナイター営業日あり · 21:00まで",
+  },
+  "xjam-takaifuji": {
+    hours: "First lifts 8:00 · last lifts 17:00",
+    hoursJa: "始発リフト8:00 · 最終17:00",
+    note: "Night skiing daily · until 21:30",
+    noteJa: "毎日ナイター営業 · 21:30まで",
+  },
+  "yomase-onsen": {
+    hours: "First lifts 8:30 · last lifts 16:30",
+    hoursJa: "始発リフト8:30 · 最終16:30",
+    note: "Night skiing select dates · until 21:00",
+    noteJa: "ナイター営業日あり · 21:00まで",
+  },
+  "kita-shiga-komaruyama": {
+    hours: "First lifts 8:30 · last lifts 16:30",
+    hoursJa: "始発リフト8:30 · 最終16:30",
+  },
+};
+
 const PROFILES: Record<string, ResortProfile> = {
   "ryuoo": {
     liftStatusUrl: "https://www.ryuoo.com/en/winter/lift/",
@@ -215,34 +250,51 @@ export default function ResortDetail() {
       />
 
       <div className="max-w-7xl mx-auto px-5 md:px-10 pb-16 space-y-6 md:space-y-8 -mt-2">
+        {/* Operating hours strip · matches AU resort hero. Sits above
+            Conditions Right Now so visitors see first / last lifts before
+            scrolling. */}
+        {(() => {
+          const lh = JP_LIFT_HOURS[id] ?? JP_LIFT_HOURS_DEFAULT;
+          return (
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 -mb-2">
+              <span className="byline text-muted-foreground/80 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-card border border-border">
+                <Cable className="w-3 h-3 text-primary" />
+                <span className="text-foreground">
+                  {t(("hours" in lh ? lh.hours : JP_LIFT_HOURS_DEFAULT.hours), ("hoursJa" in lh ? lh.hoursJa : JP_LIFT_HOURS_DEFAULT.hoursJa))}
+                </span>
+                {"note" in lh && lh.note && (
+                  <span className="text-muted-foreground/70">· {t(lh.note, lh.noteJa ?? lh.note)}</span>
+                )}
+              </span>
+            </div>
+          );
+        })()}
+
         {/* ─── FREE ─────────────────────────────────────────────
-            Order (May 2026 v4 · request from product):
-              1. Conditions right now  (LiveConditions stats grid)
-              2. Next 24 hours         (HourlyForecast)
-              3. Powder factor + calendar + webcams (yamanouchi extras)
-            Lift hold likely, the 6-day outlook and elevation forecast
-            now sit behind the paywall further down. */}
+            Order matches AU resort pages (May 2026 v5):
+              1. Conditions right now
+              2. Hourly forecast (next 24h)
+              3. Powder factor (Yamanouchi extra)
+              4. Powder forecast (Yamanouchi extra)
+            Premium 6-day, elevation forecast, lift hold likely and
+            per-lift hold sit behind the paywall further down. Webcams,
+            official links and the safety strip sit at the bottom · same
+            position as AU. */}
         <LiveConditions stats={stats} />
         {hourly && hourly.length > 0 && (
           <HourlyForecast
             hourly={hourly}
             utcOffsetSeconds={(data as any).utcOffsetSeconds ?? 0}
             t={t}
-            sectionNumber="03"
+            sectionNumber=""
           />
         )}
         {hourly && hourly.length > 0 && (
-          <PowderFactorBadge hourly={hourly} t={t} sectionNumber="04" />
+          <PowderFactorBadge hourly={hourly} t={t} />
         )}
         {hourly && hourly.length > 0 && (
-          <PowderCalendar hourly={hourly} t={t} sectionNumber="05" />
+          <PowderCalendar hourly={hourly} t={t} sectionNumber="" />
         )}
-        <MountainWebcams
-          mountainId={id}
-          sectionNumber="06"
-          t={t}
-          fallbackPageUrl={profile.webcamUrl}
-        />
 
         {/* ─── PREMIUM ──────────────────────────────────────────
             Next 6 days, elevation forecast and lift-hold likely all
@@ -321,11 +373,21 @@ export default function ResortDetail() {
               mountainId={id}
               resortElevationM={location.elevation}
               hourly={hourly as any}
-              sectionNumber="07"
+              sectionNumber=""
               t={t}
             />
           </PremiumGate>
         )}
+
+        {/* Webcams · positioned after the gated detailed conditions to
+            match AU resort pages. */}
+        <MountainWebcams
+          mountainId={id}
+          sectionNumber=""
+          t={t}
+          fallbackPageUrl={profile.webcamUrl}
+        />
+
         <OfficialLinks profile={profile} resortName={location.name} t={t} />
         <SafetyStrip
           links={safetyLinks}

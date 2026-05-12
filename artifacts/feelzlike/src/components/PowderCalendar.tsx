@@ -24,7 +24,7 @@ interface Props {
 }
 
 /**
- * 7-day Powder Calendar - glanceable trip-planner forecast.
+ * 7-day Powder Forecast - glanceable trip-planner forecast.
  *
  * For each day in the next `days`, computes the best powder window (if any)
  * and renders a colour-coded pill: GOLD/SILVER/BRONZE for windows of that
@@ -56,16 +56,16 @@ export function PowderCalendar({
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.27 }}
       className="glass rounded-3xl p-5 md:p-8"
-      aria-label={tx("Powder Calendar", "パウダーカレンダー")}
+      aria-label={tx("Powder Forecast", "パウダー予報")}
     >
       <header className="flex items-end justify-between gap-3 mb-5">
         <div>
           <p className="byline text-muted-foreground">
-            {sectionNumber} · {tx("Plan ahead", "事前計画")}
+            {sectionNumber ? `${sectionNumber} · ` : ""}{tx("Plan ahead", "事前計画")}
           </p>
           <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
             <CalendarDays className="text-primary w-5 h-5" aria-hidden />
-            {tx("Powder Calendar", "パウダーカレンダー")}
+            {tx("Powder Forecast", "パウダー予報")}
           </h2>
         </div>
         <p className="byline text-muted-foreground/70 hidden md:block tabular-nums">

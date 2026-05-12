@@ -413,15 +413,17 @@ function BackBar({
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-5 md:px-10 pt-3 md:pt-5">
-      <a
-        href={fallback}
-        onClick={handleBack}
-        className="inline-flex items-center gap-1.5 byline text-muted-foreground hover:text-foreground transition-colors px-2 py-1 -ml-2 rounded-md hover:bg-muted/40"
-      >
-        <ArrowLeft className="w-3.5 h-3.5" />
-        {t("Back", "戻る")}
-      </a>
+    <div className="sticky top-14 md:top-0 z-30 bg-background/85 backdrop-blur-md border-b border-border/40">
+      <div className="max-w-7xl mx-auto px-4 md:px-10 py-2.5 md:py-3">
+        <a
+          href={fallback}
+          onClick={handleBack}
+          className="inline-flex items-center gap-2 text-sm font-semibold text-foreground hover:text-primary transition-colors px-3 py-2 -ml-2 rounded-lg hover:bg-muted/60 active:bg-muted/80"
+        >
+          <ArrowLeft className="w-4 h-4" strokeWidth={2.25} />
+          {t("Back", "戻る")}
+        </a>
+      </div>
     </div>
   );
 }
