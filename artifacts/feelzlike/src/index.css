@@ -180,3 +180,17 @@
 .pulse-soft { animation: pulse-soft 2.5s ease-in-out infinite; }
 
 .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+
+/*
+ * Global typography hygiene · prevent widows/orphans across the app.
+ * `text-wrap: pretty` lets the browser balance the last few lines so a
+ * single trailing word never gets stranded on its own line. `balance`
+ * is used on headings where line lengths should be evened up.
+ * Both are progressive enhancements · ignored gracefully where unsupported.
+ */
+p, li, dd, blockquote, figcaption, summary {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}

@@ -126,3 +126,27 @@ id = "_vA_vbFTWBGY2f5Ntv6Du"
 uri = "file://attached_assets/town_aerials/yudanaka_c_yamanouchi.jpg"
 type = "image"
 title = "Yudanaka C · Yamanouchi countryside · 612x408 · watermarked"
+
+[[outputs]]
+id = "NKe-ma4nqq-6rLtrFkSsy"
+uri = "file://attached_assets/town_aerials/jindabyne_snow_a_turo.jpg"
+type = "image"
+title = "Jindabyne snow A · lake on a snowy winter day · 1024x576 · clean"
+
+[[outputs]]
+id = "IJ24gV8FaOa0Fezq0obUj"
+uri = "file://attached_assets/town_aerials/jindabyne_snow_b_istock.jpg"
+type = "image"
+title = "Jindabyne snow B · lake during snowfall · 612x405 · iStock (buyable)"
+
+[[outputs]]
+id = "kPwQHDZSbCfDIpbKLdy_x"
+uri = "file://attached_assets/town_aerials/jindabyne_snow_c_snownews.jpg"
+type = "image"
+title = "Jindabyne snow C · snownews.com.au editorial · 1200x800 · some snow"
+
+[[outputs]]
+id = "p-RT3fXJR7ZaGnWxAseVv"
+uri = "file://attached_assets/town_aerials/bright_alt_harrietville.png"
+type = "image"
+title = "Harrietville (next town up the valley from Bright) · snow-capped mountains · 820x456"
