@@ -150,3 +150,57 @@ id = "p-RT3fXJR7ZaGnWxAseVv"
 uri = "file://attached_assets/town_aerials/bright_alt_harrietville.png"
 type = "image"
 title = "Harrietville (next town up the valley from Bright) · snow-capped mountains · 820x456"
+
+[[outputs]]
+id = "c8F0bP5tQfZkZ5gK-p_SH"
+uri = "file://attached_assets/town_aerials/jindabyne_valley_a_turo.jpg"
+type = "image"
+title = "Jindabyne A · lake on a snowy day, peaks behind · 1024x576"
+
+[[outputs]]
+id = "v-XYA0t7Csua-Ml6udzyP"
+uri = "file://attached_assets/town_aerials/jindabyne_valley_b_stilwell.jpg"
+type = "image"
+title = "Jindabyne B · from Mt Stilwell looking down on town & lake · 1000x1250 (vertical)"
+
+[[outputs]]
+id = "gWNQRFI0SgXUIqboP7QZW"
+uri = "file://attached_assets/town_aerials/bright_valley_a_mtbeauty.jpg"
+type = "image"
+title = "Bright/VHC A · Mount Beauty valley town with snow-capped peaks · 6055x2720 (closest match to Harrietville)"
+
+[[outputs]]
+id = "D8r_QOJd-jqqA0pzSDEEl"
+uri = "file://attached_assets/town_aerials/bright_valley_b_towong.png"
+type = "image"
+title = "Bright/VHC B · Towong valley town with snow-capped peaks · 1024x576"
+
+[[outputs]]
+id = "Lw9z9huJXq8gLRA5h6YOC"
+uri = "file://attached_assets/town_aerials/bright_valley_c_peakvisor.jpg"
+type = "image"
+title = "Bright/VHC C · Mt Beauty / Kiewa Valley · 1024x683"
+
+[[outputs]]
+id = "ujRMeqrByE5ZlaMNP6VBl"
+uri = "file://attached_assets/town_aerials/bright_valley_d_aerial.jpg"
+type = "image"
+title = "Bright/VHC D · high-country town aerial panorama · 1024x432"
+
+[[outputs]]
+id = "SkHgiKJuLBebBwJGEKrqY"
+uri = "file://attached_assets/town_aerials/yudanaka_valley_a_shibusnow.jpg"
+type = "image"
+title = "Yudanaka A · Shibu Onsen in winter snow · 1200x800"
+
+[[outputs]]
+id = "22TRk5F5hxmmXj-Kv5w7d"
+uri = "file://attached_assets/town_aerials/yudanaka_valley_b_yamanouchi.jpg"
+type = "image"
+title = "Yudanaka B · Yamanouchi town valley with snow-capped peaks · 808x600 (closest match to Harrietville)"
+
+[[outputs]]
+id = "y2IhkMj3mNOFC70y_uavk"
+uri = "file://attached_assets/town_aerials/yudanaka_valley_c_shiburiver.jpg"
+type = "image"
+title = "Yudanaka C · snowy river & mountains around Shibu Onsen · 640x427"
