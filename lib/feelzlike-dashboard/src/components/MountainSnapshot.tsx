@@ -118,7 +118,7 @@ export function MountainSnapshot({
   snowfallNext48h,
   snowfallNext72h,
   baseElevation,
-  sectionNumber = "02",
+  sectionNumber = "",
   heading = "Conditions at a glance",
   modelSource = "Open-Meteo · ECMWF",
 }: MountainSnapshotProps) {
@@ -150,7 +150,7 @@ export function MountainSnapshot({
     >
       <div className="flex items-end justify-between mb-6 gap-3">
         <div>
-          <p className="byline text-muted-foreground">{sectionNumber} · Mountain snapshot</p>
+          <p className="byline text-muted-foreground">{sectionNumber ? `${sectionNumber} · ` : ""}Mountain snapshot</p>
           <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 text-foreground">
             {heading}
           </h2>

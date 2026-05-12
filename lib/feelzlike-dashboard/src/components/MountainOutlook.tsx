@@ -60,7 +60,7 @@ export function MountainOutlook({
   days: rawDays,
   maxDays = 6,
   elevation,
-  sectionNumber = "05",
+  sectionNumber = "",
   heading,
 }: MountainOutlookProps) {
   const days = rawDays.slice(0, maxDays);
@@ -77,7 +77,7 @@ export function MountainOutlook({
     >
       <div className="flex items-end justify-between mb-6 gap-3">
         <div>
-          <p className="byline text-muted-foreground">{sectionNumber} · Outlook</p>
+          <p className="byline text-muted-foreground">{sectionNumber ? `${sectionNumber} · ` : ""}Outlook</p>
           <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2 text-foreground">
             <CalendarDays className="text-muted-foreground/70 w-5 h-5" strokeWidth={1.75} />
             {headingText}

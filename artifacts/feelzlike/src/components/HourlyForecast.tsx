@@ -156,7 +156,7 @@ export function HourlyForecast({
   hours = 48,
   thresholds,
   t,
-  sectionNumber = "04",
+  sectionNumber = "",
 }: Props) {
   const tx: Tx = t ?? ((en) => en);
   const [openIdx, setOpenIdx] = useState<number | null>(null);

@@ -24,7 +24,7 @@ export function SafetyStrip({
   links,
   subhead,
   disclaimer,
-  sectionNumber = "09",
+  sectionNumber = "",
   heading = "Before you head out",
 }: SafetyStripProps) {
   return (
@@ -36,7 +36,7 @@ export function SafetyStrip({
     >
       <div className="flex items-end justify-between mb-6 gap-3">
         <div>
-          <p className="byline text-muted-foreground">{sectionNumber} · Safety</p>
+          <p className="byline text-muted-foreground">{sectionNumber ? `${sectionNumber} · ` : ""}Safety</p>
           <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 text-foreground">
             {heading}
           </h2>

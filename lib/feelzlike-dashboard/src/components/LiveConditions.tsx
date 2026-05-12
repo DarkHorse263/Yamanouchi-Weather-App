@@ -15,7 +15,7 @@ export interface LiveConditionsProps {
 
 export function LiveConditions({
   stats,
-  sectionNumber = "03",
+  sectionNumber = "",
   heading = "Right now",
 }: LiveConditionsProps) {
   return (
@@ -27,7 +27,7 @@ export function LiveConditions({
     >
       <div className="flex items-end justify-between mb-6">
         <div>
-          <p className="byline text-muted-foreground">{sectionNumber} · Conditions</p>
+          <p className="byline text-muted-foreground">{sectionNumber ? `${sectionNumber} · ` : ""}Conditions</p>
           <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 text-foreground">
             {heading}
           </h2>

@@ -24,7 +24,7 @@ interface MountainWebcamsProps {
  */
 export function MountainWebcams({
   mountainId,
-  sectionNumber = "06",
+  sectionNumber = "",
   t: tProp,
   fallbackPageUrl,
 }: MountainWebcamsProps) {

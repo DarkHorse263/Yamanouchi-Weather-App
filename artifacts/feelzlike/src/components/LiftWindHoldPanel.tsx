@@ -55,7 +55,7 @@ export function LiftWindHoldPanel({
   mountainId,
   resortElevationM,
   hourly,
-  sectionNumber = "07",
+  sectionNumber = "",
   t: tProp,
 }: LiftWindHoldPanelProps) {
   const t = tProp ?? ((en: string) => en);

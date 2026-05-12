@@ -40,7 +40,7 @@ export function PowderCalendar({
   days = 7,
   thresholds,
   t,
-  sectionNumber = "06",
+  sectionNumber = "",
 }: Props) {
   const tx: Tx = t ?? ((en) => en);
   const summaries = useMemo(
