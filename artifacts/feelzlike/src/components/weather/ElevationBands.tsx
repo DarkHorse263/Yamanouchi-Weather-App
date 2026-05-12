@@ -66,7 +66,26 @@ export function ElevationBands({ lat, lng, summitElevationM, name }: Props) {
         </p>
       </div>
 
-      <div className="mt-4 overflow-x-auto -mx-2">
+      {/* MOBILE · stacked day cards (sm- only). The 5-column table below
+          gets too cramped at 390px wide, so on mobile we render one card
+          per day with the 3 elevation bands stacked vertically inside.
+          Easier to scan one day at a time. */}
+      <div className="mt-4 space-y-2 md:hidden">
+        {days.slice(0, 7).map((d, i) => (
+          <DayCard
+            key={d.date + i}
+            day={d}
+            idx={i}
+            upperM={upperM}
+            midM={midM}
+            lowerM={lowerM}
+            t={t}
+          />
+        ))}
+      </div>
+
+      {/* TABLET / DESKTOP · original 5-column table. */}
+      <div className="mt-4 overflow-x-auto -mx-2 hidden md:block">
         <table className="min-w-full text-sm border-separate border-spacing-0 px-2">
           <thead>
             <tr>
@@ -186,6 +205,134 @@ function BandCell({
         {snow != null ? `${snow.toFixed(1)} cm` : "·"}
       </p>
     </td>
+  );
+}
+
+type DayPayload = {
+  date: string;
+  weatherDescription?: string;
+  windMaxKmh?: number | null;
+  freezingLevelM?: number | null;
+  bands: {
+    upper: { tempMaxC: number | null; tempMinC: number | null; snowfallCm: number | null };
+    mid: { tempMaxC: number | null; tempMinC: number | null; snowfallCm: number | null };
+    lower: { tempMaxC: number | null; tempMinC: number | null; snowfallCm: number | null };
+  };
+};
+
+function DayCard({
+  day,
+  idx,
+  upperM,
+  midM,
+  lowerM,
+  t,
+}: {
+  day: DayPayload;
+  idx: number;
+  upperM: number | null;
+  midM: number | null;
+  lowerM: number | null;
+  t: (en: string, ja: string) => string;
+}) {
+  return (
+    <div className="rounded-xl border border-border/60 bg-white p-3">
+      <div className="flex items-baseline justify-between gap-2">
+        <div className="min-w-0">
+          <p className="font-display font-semibold text-foreground text-sm">
+            {fmtDay(day.date, idx)}
+          </p>
+          {day.weatherDescription && (
+            <p className="text-[11px] text-muted-foreground/70 mt-0.5 truncate">
+              {day.weatherDescription}
+            </p>
+          )}
+        </div>
+        <div className="text-right shrink-0">
+          <p className="font-display font-semibold text-foreground text-sm">
+            <span className="inline-flex items-center gap-1">
+              <Wind className="w-3 h-3 text-muted-foreground/70" />
+              {day.windMaxKmh != null ? `${Math.round(day.windMaxKmh)}` : "-"}
+              <span className="text-[11px] text-muted-foreground/70 font-normal">km/h</span>
+            </span>
+          </p>
+          {day.freezingLevelM != null && (
+            <p className="text-[11px] text-muted-foreground/70 mt-0.5">
+              {t("frz", "凍結")} · {Math.round(day.freezingLevelM)}m
+            </p>
+          )}
+        </div>
+      </div>
+      <div className="mt-2.5 divide-y divide-border/50 border-t border-border/50">
+        <BandRow
+          label={t("upper", "山頂")}
+          elevationM={upperM}
+          band={day.bands.upper}
+          tone="text-sky-700"
+        />
+        <BandRow
+          label={t("mid", "中腹")}
+          elevationM={midM}
+          band={day.bands.mid}
+          tone="text-sky-600"
+        />
+        <BandRow
+          label={t("base", "山麓")}
+          elevationM={lowerM}
+          band={day.bands.lower}
+          tone="text-sky-500"
+        />
+      </div>
+    </div>
+  );
+}
+
+function BandRow({
+  label,
+  elevationM,
+  band,
+  tone,
+}: {
+  label: string;
+  elevationM: number | null;
+  band: { tempMaxC: number | null; tempMinC: number | null; snowfallCm: number | null };
+  tone: string;
+}) {
+  const snow = band.snowfallCm;
+  const hasSnow = snow != null && snow > 0;
+  return (
+    <div className="flex items-center justify-between gap-3 py-2">
+      <div className={`inline-flex items-center gap-1.5 ${tone} min-w-0`}>
+        <Mountain className="w-3 h-3 shrink-0" />
+        <span className="text-[11px] uppercase tracking-wider font-medium">{label}</span>
+        {elevationM != null && (
+          <span className="text-[10px] text-muted-foreground/60 normal-case tracking-normal">
+            {elevationM}m
+          </span>
+        )}
+      </div>
+      <div className="flex items-center gap-3 shrink-0">
+        <span className="font-display font-semibold text-foreground text-sm tabular-nums">
+          <span className="inline-flex items-center gap-0.5">
+            <ArrowUp className="w-2.5 h-2.5 text-muted-foreground/60" />
+            {band.tempMaxC != null ? `${Math.round(band.tempMaxC)}°` : "-"}
+          </span>
+          <span className="mx-1 text-muted-foreground/40">·</span>
+          <span className="inline-flex items-center gap-0.5">
+            <ArrowDown className="w-2.5 h-2.5 text-muted-foreground/60" />
+            {band.tempMinC != null ? `${Math.round(band.tempMinC)}°` : "-"}
+          </span>
+        </span>
+        <span
+          className={`text-[11px] inline-flex items-center gap-1 tabular-nums w-[58px] justify-end ${
+            hasSnow ? "text-sky-700 font-medium" : "text-muted-foreground/60"
+          }`}
+        >
+          {hasSnow ? <Snowflake className="w-2.5 h-2.5" /> : <CloudSnow className="w-2.5 h-2.5" />}
+          {snow != null ? `${snow.toFixed(1)} cm` : "·"}
+        </span>
+      </div>
+    </div>
   );
 }
 
