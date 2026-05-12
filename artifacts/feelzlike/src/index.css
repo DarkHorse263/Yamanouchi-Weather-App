@@ -183,14 +183,20 @@
 
 /*
  * Global typography hygiene · prevent widows/orphans across the app.
- * `text-wrap: pretty` lets the browser balance the last few lines so a
- * single trailing word never gets stranded on its own line. `balance`
- * is used on headings where line lengths should be evened up.
+ *
+ * Headings + short body copy use `text-wrap: balance` (the browser
+ * caps this at ~10 lines, so it's safe to apply broadly · short blocks
+ * get evened out, long blocks fall back to normal wrap).
+ *
+ * Long-form blocks (article, prose, list items) use `text-wrap: pretty`
+ * which only fires the orphan-protection on multi-line paragraphs.
+ *
  * Both are progressive enhancements · ignored gracefully where unsupported.
  */
-p, li, dd, blockquote, figcaption, summary {
-  text-wrap: pretty;
-}
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6,
+p, blockquote, figcaption, summary, dt {
   text-wrap: balance;
+}
+article p, .prose p, li, dd {
+  text-wrap: pretty;
 }

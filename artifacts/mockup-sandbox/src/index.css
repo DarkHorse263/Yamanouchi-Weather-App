@@ -144,12 +144,16 @@
 }
 
 @layer base {
-  /* Prevent widows/orphans · last word never strands on its own line. */
-  p, li, dd, blockquote, figcaption, summary {
-    text-wrap: pretty;
-  }
-  h1, h2, h3, h4, h5, h6 {
+  /*
+   * Prevent widows/orphans · headings + short paragraphs balance line
+   * lengths; long-form prose uses `pretty` to avoid stranded words.
+   */
+  h1, h2, h3, h4, h5, h6,
+  p, blockquote, figcaption, summary, dt {
     text-wrap: balance;
+  }
+  article p, .prose p, li, dd {
+    text-wrap: pretty;
   }
 }
 
