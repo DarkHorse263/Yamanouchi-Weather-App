@@ -72,3 +72,57 @@ id = "mpY9qJBrf05ZWG-5v2jRv"
 uri = "file://exports/feelzlike-press-release.pdf"
 type = "pdf"
 title = "feelzlike · launch press release"
+
+[[outputs]]
+id = "JrLysJPT477o-JmotLAOx"
+uri = "file://attached_assets/town_aerials/jindabyne_a_airview.jpg"
+type = "image"
+title = "Jindabyne A · airviewonline aerial · 960x640 · likely watermarked"
+
+[[outputs]]
+id = "FFvXqCuuZ--ryH1apKYLP"
+uri = "file://attached_assets/town_aerials/jindabyne_b_istock.jpg"
+type = "image"
+title = "Jindabyne B · iStock summer aerial · 612x459 · watermarked"
+
+[[outputs]]
+id = "mXP1HLPIrM7NJB1SeAJAa"
+uri = "file://attached_assets/town_aerials/jindabyne_c_dusk.jpg"
+type = "image"
+title = "Jindabyne C · iStock dusk aerial · 612x459 · watermarked"
+
+[[outputs]]
+id = "eAVIlsmrAPs-fyQPlAFKs"
+uri = "file://attached_assets/town_aerials/bright_a_autumn105.jpg"
+type = "image"
+title = "Bright A · autumn aerial · 1500x844 · widescreen, clean"
+
+[[outputs]]
+id = "6nV-_3jBFbLoyPiV2VCOz"
+uri = "file://attached_assets/town_aerials/bright_b_autumn107.jpg"
+type = "image"
+title = "Bright B · autumn aerial · 1500x1125 · clean"
+
+[[outputs]]
+id = "1Q74KsJo1e51kkc1SAjFr"
+uri = "file://attached_assets/town_aerials/bright_c_autumn98.jpg"
+type = "image"
+title = "Bright C · autumn aerial · 1500x554 · ultra-wide, clean"
+
+[[outputs]]
+id = "MClJYXnbFvKPTe2jlcffM"
+uri = "file://attached_assets/town_aerials/yudanaka_a_gaijinpot.jpg"
+type = "image"
+title = "Yudanaka A · gaijinpot aerial · 1024x768 · clean"
+
+[[outputs]]
+id = "BxGWiC_CGaOMDe0hmcYte"
+uri = "file://attached_assets/town_aerials/yudanaka_b_shibu.jpg"
+type = "image"
+title = "Yudanaka B · Shibu Onsen aerial · 1024x575 · clean, widescreen"
+
+[[outputs]]
+id = "_vA_vbFTWBGY2f5Ntv6Du"
+uri = "file://attached_assets/town_aerials/yudanaka_c_yamanouchi.jpg"
+type = "image"
+title = "Yudanaka C · Yamanouchi countryside · 612x408 · watermarked"
