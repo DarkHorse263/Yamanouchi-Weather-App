@@ -69,7 +69,6 @@ function formatAgo(iso: string | undefined | null, now: number): string {
 }
 import { cn } from "../lib/utils";
 import { HourlyForecast } from "@/components/HourlyForecast";
-import { PowderFactorBadge } from "@/components/PowderFactorBadge";
 import { PowderCalendar } from "@/components/PowderCalendar";
 import { LiftWindHoldPanel } from "@/components/LiftWindHoldPanel";
 import { POWDER_THRESHOLDS_AU } from "@/types/weather";
@@ -345,17 +344,6 @@ export default function LocationDetail() {
           thresholds={POWDER_THRESHOLDS_AU}
         />
 
-        {/* FREE · Powder factor + 7-day powder calendar. Lifted out of
-            the Detailed conditions paywall in May 2026 v5 so AU pages
-            mirror the Yamanouchi free-tier order. AU thresholds keep
-            grading honest for the lower-snow Snowy range. */}
-        {hourly && hourly.length > 0 && (
-          <PowderFactorBadge hourly={hourly} t={(en) => en} sectionNumber="" />
-        )}
-        {hourly && hourly.length > 0 && (
-          <PowderCalendar hourly={hourly} thresholds={POWDER_THRESHOLDS_AU} sectionNumber="" />
-        )}
-
         {/* WEATHER OUTLOOK - free 5-day mountain strip. Anything past day 5
             is gated below in the Extended Outlook teaser. */}
         <motion.div
@@ -529,6 +517,15 @@ export default function LocationDetail() {
               name={location.name}
             />
           </PremiumGate>
+        )}
+
+        {/* FREE · 7-day powder forecast calendar. Moved to sit right after
+            Elevation forecast (May 2026 v6) so the powder outlook reads as
+            a continuation of the multi-day weather story rather than
+            interrupting the hour-by-hour strip. AU thresholds keep grading
+            honest for the lower-snow Snowy range. */}
+        {hourly && hourly.length > 0 && (
+          <PowderCalendar hourly={hourly} thresholds={POWDER_THRESHOLDS_AU} sectionNumber="" />
         )}
 
         {/* FREE · LIFT STATUS · moved above the Detailed conditions

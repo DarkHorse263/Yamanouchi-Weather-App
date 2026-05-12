@@ -35,7 +35,6 @@ import { HourlyForecast } from "@/components/HourlyForecast";
 import { PowderCalendar } from "@/components/PowderCalendar";
 import { MountainWebcams } from "@/components/MountainWebcams";
 import { LiftWindHoldPanel } from "@/components/LiftWindHoldPanel";
-import { PowderFactorBadge } from "@/components/PowderFactorBadge";
 import { ForecastChart } from "@/components/weather/ForecastChart";
 import { EnsembleForecast } from "@/components/weather/EnsembleForecast";
 import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
@@ -295,12 +294,6 @@ export default function ResortDetail() {
             sectionNumber=""
           />
         )}
-        {hourly && hourly.length > 0 && (
-          <PowderFactorBadge hourly={hourly} t={t} />
-        )}
-        {hourly && hourly.length > 0 && (
-          <PowderCalendar hourly={hourly} t={t} sectionNumber="" />
-        )}
 
         {/* ─── PREMIUM ──────────────────────────────────────────
             Next 6 days, elevation forecast and lift-hold likely all
@@ -334,6 +327,13 @@ export default function ResortDetail() {
               name={location.name}
             />
           </PremiumGate>
+        )}
+
+        {/* FREE · 7-day powder forecast calendar. Moved here (May 2026 v6)
+            to sit right after Elevation forecast so the powder outlook
+            reads as a continuation of the multi-day weather story. */}
+        {hourly && hourly.length > 0 && (
+          <PowderCalendar hourly={hourly} t={t} sectionNumber="" />
         )}
 
         {/* Mountain dials only · the wind-driven lift-hold call was

@@ -30,7 +30,6 @@ import {
 } from "@workspace/api-client-react";
 import { ElevationBands } from "@/components/weather/ElevationBands";
 import { HourlyForecast } from "@/components/HourlyForecast";
-import { PowderFactorBadge } from "@/components/PowderFactorBadge";
 import { PowderCalendar } from "@/components/PowderCalendar";
 import { LiftWindHoldPanel } from "@/components/LiftWindHoldPanel";
 import { MountainWebcams } from "@/components/MountainWebcams";
@@ -301,19 +300,6 @@ export function MountainDetail() {
             </div>
           )}
 
-          {/* FREE · Powder factor + 7-day powder calendar. Same free-tier
-              order as AU + JP. Self-hides when no hourly data. */}
-          {hourly.length > 0 && (
-            <div className="mt-4">
-              <PowderFactorBadge hourly={hourly as any} t={t} sectionNumber="" />
-            </div>
-          )}
-          {hourly.length > 0 && (
-            <div className="mt-4">
-              <PowderCalendar hourly={hourly as any} t={t} sectionNumber="" />
-            </div>
-          )}
-
           {/* ─── PREMIUM ──────────────────────────────────────────
               Next 6 days, elevation forecast and lift-hold likely all
               gated. Free tier sees blurred preview + lock CTA. */}
@@ -398,6 +384,15 @@ export function MountainDetail() {
                   name={elevName}
                 />
               </PremiumGate>
+            </div>
+          )}
+
+          {/* FREE · 7-day powder forecast calendar. Moved here (May 2026 v6)
+              to sit right after Elevation forecast so the powder outlook
+              reads as a continuation of the multi-day weather story. */}
+          {hourly.length > 0 && (
+            <div className="mt-4">
+              <PowderCalendar hourly={hourly as any} t={t} sectionNumber="" />
             </div>
           )}
 
