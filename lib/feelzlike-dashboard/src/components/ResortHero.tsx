@@ -52,13 +52,24 @@ export function ResortHero({
 
   return (
     <section className="relative overflow-hidden isolate">
-      {/* Calm fintech backdrop — single soft wash, no aurora blobs. */}
-      <div className="absolute inset-0 -z-10">
+      {/* Aurora backdrop · matches AU resort hero (sky · indigo · cyan
+          wash inside the brand family). Sits behind the hero content so
+          JP resort pages get the same coloured header as Snowy Mountains
+          and Victoria, instead of a flat white card. */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div
+          className="absolute -top-40 left-1/2 -translate-x-1/2 w-[1400px] h-[700px] rounded-full opacity-80"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, hsla(210,90%,55%,0.28), transparent 55%), radial-gradient(ellipse at 28% 60%, hsla(225,80%,60%,0.22), transparent 60%), radial-gradient(ellipse at 75% 35%, hsla(190,90%,55%,0.22), transparent 60%)",
+            filter: "blur(40px)",
+          }}
+        />
         <div
           className="absolute inset-0"
           style={{
-            background:
-              "radial-gradient(ellipse 90% 50% at 50% 0%, hsla(210, 40%, 92%, 0.55), transparent 65%)",
+            backgroundImage:
+              "linear-gradient(to bottom, transparent 65%, hsl(var(--background)) 100%), repeating-linear-gradient(0deg, hsla(220,30%,12%,0.04) 0px, hsla(220,30%,12%,0.04) 1px, transparent 1px, transparent 64px), repeating-linear-gradient(90deg, hsla(220,30%,12%,0.04) 0px, hsla(220,30%,12%,0.04) 1px, transparent 1px, transparent 64px)",
           }}
         />
       </div>
