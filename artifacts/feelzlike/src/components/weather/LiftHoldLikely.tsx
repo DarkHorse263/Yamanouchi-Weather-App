@@ -1,0 +1,161 @@
+import { AlertTriangle, Cable, CheckCircle2, Wind } from "lucide-react";
+import { useLanguage } from "@workspace/feelzlike-shell";
+
+interface Props {
+  windSpeedKmh: number | null | undefined;
+  gustKmh?: number | null | undefined;
+}
+
+type Tone = "ok" | "caution" | "warn" | "alert";
+
+interface Tier {
+  tone: Tone;
+  label: string;
+  labelJa: string;
+  detail: string;
+  detailJa: string;
+}
+
+function classify(g: number): Tier {
+  if (g >= 90) {
+    return {
+      tone: "alert",
+      label: "wind-hold likely",
+      labelJa: "運休の可能性大",
+      detail: "gondolas and chairs likely closed",
+      detailJa: "ゴンドラ・リフトとも運休の見込み",
+    };
+  }
+  if (g >= 70) {
+    return {
+      tone: "warn",
+      label: "chairs may hold",
+      labelJa: "リフト運休の恐れ",
+      detail: "exposed chairlifts at risk",
+      detailJa: "稜線寄りのリフトに影響",
+    };
+  }
+  if (g >= 50) {
+    return {
+      tone: "caution",
+      label: "slow operations possible",
+      labelJa: "減速運転の可能性",
+      detail: "exposed lifts may slow",
+      detailJa: "稜線寄りのリフトが減速の恐れ",
+    };
+  }
+  return {
+    tone: "ok",
+    label: "all clear",
+    labelJa: "通常運行",
+    detail: "winds within operating limits",
+    detailJa: "通常運行の範囲内",
+  };
+}
+
+const TONE = {
+  ok: {
+    panel: "border-emerald-200 bg-emerald-50/60",
+    chip: "bg-emerald-500",
+    text: "text-emerald-800",
+    detail: "text-emerald-700/80",
+    Icon: CheckCircle2,
+  },
+  caution: {
+    panel: "border-amber-200 bg-amber-50/70",
+    chip: "bg-amber-500",
+    text: "text-amber-900",
+    detail: "text-amber-800/80",
+    Icon: Wind,
+  },
+  warn: {
+    panel: "border-orange-200 bg-orange-50/70",
+    chip: "bg-orange-500",
+    text: "text-orange-900",
+    detail: "text-orange-800/80",
+    Icon: AlertTriangle,
+  },
+  alert: {
+    panel: "border-rose-200 bg-rose-50/80",
+    chip: "bg-rose-500",
+    text: "text-rose-900",
+    detail: "text-rose-800/80",
+    Icon: AlertTriangle,
+  },
+} as const;
+
+/**
+ * Lift Hold Likely · a wind-driven prediction of whether exposed
+ * chairlifts and gondolas are at risk of holding today. Uses gust
+ * when available, falls back to sustained wind speed.
+ *
+ * Thresholds match the dashboard MountainSnapshot classifier:
+ *   < 50 km/h  · all clear
+ *   50-69      · slow operations possible
+ *   70-89      · chairs may hold
+ *   >= 90      · wind-hold likely
+ */
+export function LiftHoldLikely({ windSpeedKmh, gustKmh }: Props) {
+  const { t } = useLanguage();
+
+  const wind = typeof windSpeedKmh === "number" ? windSpeedKmh : null;
+  const gust = typeof gustKmh === "number" ? gustKmh : null;
+  const driver = gust ?? wind;
+
+  if (driver == null) return null;
+
+  const tier = classify(driver);
+  const palette = TONE[tier.tone];
+  const PaletteIcon = palette.Icon;
+
+  return (
+    <section
+      className={`mt-4 rounded-2xl border ${palette.panel} p-5`}
+      aria-label={t("Lift hold likely overview", "リフト運休見込み")}
+    >
+      <div className="flex items-start gap-4">
+        <div className="flex flex-col items-center gap-1.5 flex-none">
+          <Cable
+            className={`w-5 h-5 ${palette.text}`}
+            strokeWidth={1.75}
+          />
+          <span className={`w-2 h-2 rounded-full ${palette.chip}`} aria-hidden="true" />
+        </div>
+
+        <div className="flex-1 min-w-0">
+          <p className="byline text-muted-foreground/70">
+            {t("lift hold likely", "リフト運休見込み")}
+          </p>
+          <p
+            className={`font-display font-semibold text-xl md:text-2xl tracking-tight mt-1 ${palette.text}`}
+          >
+            {t(tier.label, tier.labelJa)}
+          </p>
+          <p className={`text-sm mt-1 ${palette.detail}`}>
+            {t(tier.detail, tier.detailJa)}
+          </p>
+        </div>
+
+        <div className={`text-right flex-none ${palette.text}`}>
+          <div className="inline-flex items-center gap-1.5">
+            <PaletteIcon className="w-3.5 h-3.5 opacity-70" strokeWidth={2} />
+            <span className="byline opacity-70">
+              {gust != null ? t("gust", "突風") : t("wind", "風速")}
+            </span>
+          </div>
+          <p className="font-display font-semibold text-3xl md:text-4xl tracking-tight leading-none mt-2 tabular-nums">
+            {Math.round(driver)}
+            <span className="text-sm opacity-70 ml-1">km/h</span>
+          </p>
+          {gust != null && wind != null && (
+            <p className="text-[11px] opacity-70 mt-1 tabular-nums">
+              {t("avg", "平均")} {Math.round(wind)} km/h
+            </p>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default LiftHoldLikely;

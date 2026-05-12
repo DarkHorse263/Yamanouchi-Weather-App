@@ -7,9 +7,6 @@ import {
   CloudRain,
   CloudSnow,
   CloudSun,
-  Droplets,
-  Eye,
-  Gauge,
   Mountain as MountainIcon,
   Snowflake,
   Sun,
@@ -30,6 +27,7 @@ import {
   useGetLocationWeather,
 } from "@workspace/api-client-react";
 import { ElevationBands } from "@/components/weather/ElevationBands";
+import { LiftHoldLikely } from "@/components/weather/LiftHoldLikely";
 
 /**
  * Region-agnostic mountain weather page.
@@ -170,52 +168,13 @@ export function MountainDetail() {
             </div>
           </section>
 
-          {/* Snow + wind + freezing-level tiles - the three things skiers actually
-              want to see for a mountain (vs. a town). */}
-          <section className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <BigStat
-              icon={Snowflake}
-              label={t("Snow depth", "積雪")}
-              value={
-                current.snowDepth !== null && current.snowDepth !== undefined
-                  ? `${Math.round(current.snowDepth)}`
-                  : "-"
-              }
-              unit="cm"
-            />
-            <BigStat
-              icon={CloudSnow}
-              label={t("Snow next 24h", "24時間降雪")}
-              value={
-                current.snowfallNext24h !== null && current.snowfallNext24h !== undefined
-                  ? current.snowfallNext24h.toFixed(1)
-                  : "-"
-              }
-              unit="cm"
-            />
-            <BigStat
-              icon={Wind}
-              label={t("Wind", "風速")}
-              value={
-                current.windSpeed !== null && current.windSpeed !== undefined
-                  ? `${Math.round(current.windSpeed)}`
-                  : "-"
-              }
-              unit="km/h"
-            />
-            <BigStat
-              icon={Thermometer}
-              label={t("Freezing level", "凍結高度")}
-              value={
-                current.freezingLevel !== null && current.freezingLevel !== undefined
-                  ? `${Math.round(current.freezingLevel)}`
-                  : "-"
-              }
-              unit="m"
-            />
-          </section>
+          {/* Lift hold likely · wind-driven prediction of whether exposed
+              chairs and gondolas are at risk of holding today. Replaces the
+              old four-tile snow/wind/freezing strip; the same numbers are
+              shown below in the Conditions right now panel. */}
+          <LiftHoldLikely windSpeedKmh={current.windSpeed ?? null} />
 
-          {/* Elevation-banded forecast (Open-Meteo) - upper / mid / base
+          {/* Elevation-banded forecast (Open-Meteo) · upper / mid / base
               snow + temp. Self-hides when coords or summit elevation are
               missing for the mountain. */}
           <ElevationBands
@@ -225,69 +184,56 @@ export function MountainDetail() {
             name={elevName}
           />
 
-          {/* Conditions strip - same look as TownWeather so users get a
-              consistent reading regardless of region or location type. */}
-          <section className="mt-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-            <Stat
-              icon={Droplets}
-              label={t("Humidity", "湿度")}
-              value={
-                current.humidity !== null && current.humidity !== undefined
-                  ? `${Math.round(current.humidity)}`
-                  : "-"
-              }
-              unit="%"
-            />
-            <Stat
-              icon={CloudRain}
-              label={t("Precip", "降水")}
-              value={
-                current.precipitation !== null && current.precipitation !== undefined
-                  ? current.precipitation.toFixed(1)
-                  : "-"
-              }
-              unit="mm"
-            />
-            <Stat
-              icon={Cloud}
-              label={t("Cloud", "雲量")}
-              value={
-                current.cloudCover !== null && current.cloudCover !== undefined
-                  ? `${Math.round(current.cloudCover)}`
-                  : "-"
-              }
-              unit="%"
-            />
-            <Stat
-              icon={Eye}
-              label={t("Visibility", "視程")}
-              value={
-                current.visibility !== null && current.visibility !== undefined
-                  ? `${Math.round(current.visibility / 1000)}`
-                  : "-"
-              }
-              unit="km"
-            />
-            <Stat
-              icon={Gauge}
-              label={t("Wind dir", "風向")}
-              value={
-                current.windDirection !== null && current.windDirection !== undefined
-                  ? compass(current.windDirection)
-                  : "-"
-              }
-              unit=""
-            />
-            <Stat
-              icon={CloudSnow}
-              label={t("Snow next 72h", "72時間降雪")}
-              value={
-                current.snowfallNext72h !== null && current.snowfallNext72h !== undefined
-                  ? current.snowfallNext72h.toFixed(1)
-                  : "-"
-              }
-              unit="cm"
-            />
+          {/* Conditions right now · snow depth, incoming snow, wind and
+              freezing level. The four numbers an off-mountain skier is
+              actually deciding on. Replaces the older humidity/cloud/etc
+              secondary strip which lived here. */}
+          <section className="mt-4 rounded-2xl border border-border bg-white p-5">
+            <p className="byline text-muted-foreground/70">
+              {t("conditions right now", "現在の状況")}
+            </p>
+            <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <BigStat
+                icon={Snowflake}
+                label={t("Snow depth", "積雪")}
+                value={
+                  current.snowDepth !== null && current.snowDepth !== undefined
+                    ? `${Math.round(current.snowDepth)}`
+                    : "-"
+                }
+                unit="cm"
+              />
+              <BigStat
+                icon={CloudSnow}
+                label={t("Snow next 24h", "24時間降雪")}
+                value={
+                  current.snowfallNext24h !== null && current.snowfallNext24h !== undefined
+                    ? current.snowfallNext24h.toFixed(1)
+                    : "-"
+                }
+                unit="cm"
+              />
+              <BigStat
+                icon={Wind}
+                label={t("Wind", "風速")}
+                value={
+                  current.windSpeed !== null && current.windSpeed !== undefined
+                    ? `${Math.round(current.windSpeed)}`
+                    : "-"
+                }
+                unit="km/h"
+              />
+              <BigStat
+                icon={Thermometer}
+                label={t("Freezing level", "凍結高度")}
+                value={
+                  current.freezingLevel !== null && current.freezingLevel !== undefined
+                    ? `${Math.round(current.freezingLevel)}`
+                    : "-"
+                }
+                unit="m"
+              />
+            </div>
           </section>
 
           {/* Today summary */}
@@ -510,11 +456,6 @@ function pickIcon(
   return Cloud;
 }
 
-function compass(deg: number): string {
-  const dirs = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
-  return dirs[Math.round(deg / 45) % 8] ?? "-";
-}
-
 function fmtTime(iso: string | null | undefined): string {
   if (!iso) return "-";
   const m = iso.match(/T(\d{2}):(\d{2})/);
@@ -551,30 +492,6 @@ function BigStat({
       <p className="mt-2 font-display font-semibold text-2xl tracking-tight text-foreground">
         {value}
         <span className="text-sm text-muted-foreground/70 ml-1">{unit}</span>
-      </p>
-    </div>
-  );
-}
-
-function Stat({
-  icon: Icon,
-  label,
-  value,
-  unit,
-}: {
-  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
-  label: string;
-  value: string;
-  unit: string;
-}) {
-  return (
-    <div className="rounded-2xl border border-border bg-white p-4">
-      <div className="flex items-center gap-1.5 byline text-muted-foreground/70">
-        <Icon className="w-3 h-3" strokeWidth={2} /> {label}
-      </div>
-      <p className="mt-2 font-display font-semibold text-xl tracking-tight text-foreground">
-        {value}
-        {unit && <span className="text-sm text-muted-foreground/70 ml-1">{unit}</span>}
       </p>
     </div>
   );
