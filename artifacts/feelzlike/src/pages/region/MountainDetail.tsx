@@ -29,7 +29,18 @@ import {
   useGetLocationWeather,
 } from "@workspace/api-client-react";
 import { ElevationBands } from "@/components/weather/ElevationBands";
-import { LiftHoldLikely } from "@/components/weather/LiftHoldLikely";
+import { HourlyForecast } from "@/components/HourlyForecast";
+import { PowderFactorBadge } from "@/components/PowderFactorBadge";
+import { PowderCalendar } from "@/components/PowderCalendar";
+import { LiftWindHoldPanel } from "@/components/LiftWindHoldPanel";
+import { MountainWebcams } from "@/components/MountainWebcams";
+import { ForecastChart } from "@/components/weather/ForecastChart";
+import { EnsembleForecast } from "@/components/weather/EnsembleForecast";
+import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
+import { getLiftsForMountain } from "@/data/lifts";
+import { cn } from "@/lib/utils";
+import { BarChart2 } from "lucide-react";
+import { useState } from "react";
 
 /**
  * Region-agnostic mountain weather page.
@@ -52,6 +63,7 @@ export function MountainDetail() {
   const locationId = params?.id ?? "";
   const { region } = useRegion();
   const { t } = useLanguage();
+  const [activeChartMetric, setActiveChartMetric] = useState<"temperature" | "snowfall" | "windSpeed">("temperature");
 
   const q = useGetLocationWeather(locationId, {
     query: {
@@ -275,39 +287,31 @@ export function MountainDetail() {
             </section>
           )}
 
-          {/* Next 24 hours */}
+          {/* Hour by hour · shared component matches Yamanouchi + AU
+              resort pages so the powder window strip and grading look
+              the same across all 3 regions. */}
           {hourly.length > 0 && (
-            <section className="mt-4 rounded-2xl border border-border bg-white p-5">
-              <div className="flex items-center justify-between">
-                <p className="byline text-muted-foreground/70">{t("Next 24 hours", "24時間予報")}</p>
-              </div>
-              <div className="mt-4 -mx-2 overflow-x-auto">
-                <div className="flex gap-1 min-w-full px-2">
-                  {hourly.slice(0, 24).map((h, i) => {
-                    const HIcon = pickIcon(h.weatherCode, true);
-                    return (
-                      <div key={h.time} className="flex flex-col items-center min-w-[44px] flex-1">
-                        <p className="text-[10px] text-muted-foreground/70 mb-1">
-                          {i === 0 ? t("Now", "今") : fmtHour(h.time)}
-                        </p>
-                        <HIcon className="w-4 h-4 text-primary/80" strokeWidth={1.5} />
-                        <p className="text-xs font-medium text-foreground mt-1">
-                          {h.temperature !== null && h.temperature !== undefined
-                            ? Math.round(h.temperature)
-                            : "-"}
-                          °
-                        </p>
-                        {(h.snowfall ?? 0) > 0 && (
-                          <p className="text-[10px] text-sky-700 mt-1">
-                            {h.snowfall!.toFixed(1)}cm
-                          </p>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </section>
+            <div className="mt-4">
+              <HourlyForecast
+                hourly={hourly as any}
+                utcOffsetSeconds={(data as any).utcOffsetSeconds ?? 0}
+                t={t}
+                sectionNumber=""
+              />
+            </div>
+          )}
+
+          {/* FREE · Powder factor + 7-day powder calendar. Same free-tier
+              order as AU + JP. Self-hides when no hourly data. */}
+          {hourly.length > 0 && (
+            <div className="mt-4">
+              <PowderFactorBadge hourly={hourly as any} t={t} sectionNumber="" />
+            </div>
+          )}
+          {hourly.length > 0 && (
+            <div className="mt-4">
+              <PowderCalendar hourly={hourly as any} t={t} sectionNumber="" />
+            </div>
           )}
 
           {/* ─── PREMIUM ──────────────────────────────────────────
@@ -397,42 +401,145 @@ export function MountainDetail() {
             </div>
           )}
 
-          {/* PremiumGate · Lift hold likely · wind-driven prediction
-              alongside the MountainSnapshot dashboard rings (freezing
-              level, wind, incoming snow at a glance). */}
+          {/* PremiumGate · Mountain dials · MountainSnapshot rings only.
+              The wind-driven lift-hold call was removed because the
+              per-lift hold panel below delivers it with finer per-lift
+              gust tolerances. Order matches Yamanouchi + Snowy Mountains. */}
           <div className="mt-4">
             <PremiumGate
-              title="Lift hold likely"
-              titleJa="リフトホールド予測"
-              blurb="Wind-driven lift-hold call plus the dashboard dials · freezing level, gusts, incoming snow at a glance."
-              blurbJa="風速ベースのリフトホールド判断と計器盤 · 凍結高度・突風・降雪を一目で。"
+              title="Mountain dials"
+              titleJa="マウンテン計器盤"
+              blurb="Freezing level, gusts and incoming snow at a glance."
+              blurbJa="凍結高度・突風・降雪を一目で。"
             >
-              <div className="space-y-4">
-                <LiftHoldLikely
-                  windSpeedKmh={current.windSpeed ?? null}
-                  gustKmh={current.windGust ?? null}
+              {/* MountainSnapshot needs guaranteed `elevation` and
+                  `windSpeed` numbers per its prop contract; guard
+                  rather than coerce so the rings only render with
+                  real data. */}
+              {location?.elevation != null && current.windSpeed != null && (
+                <MountainSnapshot
+                  resortName={location.name ?? ""}
+                  elevation={location.elevation}
+                  freezingLevel={current.freezingLevel ?? undefined}
+                  gust={current.windGust ?? undefined}
+                  windSpeed={current.windSpeed}
+                  snowfallNext24h={current.snowfallNext24h ?? undefined}
+                  snowfallNext48h={current.snowfallNext48h ?? undefined}
+                  snowfallNext72h={current.snowfallNext72h ?? undefined}
+                  modelSource={
+                    current.dataSource ?? region.weatherSource?.label ?? "Open-Meteo"
+                  }
                 />
-                {/* MountainSnapshot needs guaranteed `elevation` and
-                    `windSpeed` numbers per its prop contract; guard
-                    rather than coerce so the rings only render with
-                    real data. */}
-                {location?.elevation != null && current.windSpeed != null && (
-                  <MountainSnapshot
-                    resortName={location.name ?? ""}
-                    elevation={location.elevation}
-                    freezingLevel={current.freezingLevel ?? undefined}
-                    gust={current.windGust ?? undefined}
-                    windSpeed={current.windSpeed}
-                    snowfallNext24h={current.snowfallNext24h ?? undefined}
-                    snowfallNext48h={current.snowfallNext48h ?? undefined}
-                    snowfallNext72h={current.snowfallNext72h ?? undefined}
-                    modelSource={
-                      current.dataSource ?? region.weatherSource?.label ?? "Open-Meteo"
-                    }
-                  />
-                )}
-              </div>
+              )}
             </PremiumGate>
+          </div>
+
+          {/* Per-lift hold · gated at page level (not just inside the
+              PremiumGate) because PremiumGate still renders a lock card
+              for free users even when its child returns null. Vic
+              mountains have no lift seeds today, so we skip the whole
+              section rather than tease a feature that has no data. */}
+          {hourly.length > 0 && location?.elevation != null && getLiftsForMountain(locationId).length > 0 && (
+            <div className="mt-4">
+              <PremiumGate
+                title="Per-lift hold forecast"
+                titleJa="リフト別ホールド予測"
+                blurb="Hour-by-hour hold risk for each named lift on this mountain · uses lift-specific gust tolerances."
+                blurbJa="各リフトの時間別ホールドリスク · リフト固有の耐風基準を使用。"
+              >
+                <LiftWindHoldPanel
+                  mountainId={locationId}
+                  resortElevationM={location.elevation}
+                  hourly={hourly as any}
+                  sectionNumber=""
+                  t={t}
+                />
+              </PremiumGate>
+            </div>
+          )}
+
+          {/* PremiumGate · 24-hour trend chart · interactive temp/snow/wind. */}
+          {hourly.length > 0 && (
+            <div className="mt-4">
+              <PremiumGate
+                title="24-hour trend"
+                titleJa="24時間推移"
+                blurb="Interactive chart · switch between temperature, snowfall and wind for the next 24 hours."
+                blurbJa="気温・降雪・風速を切り替えて24時間の推移を確認。"
+              >
+                <section className="rounded-2xl border border-border bg-white p-5 md:p-6">
+                  <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-5 gap-3">
+                    <div>
+                      <p className="byline text-muted-foreground/70">{t("24-hour trend", "24時間推移")}</p>
+                      <h2 className="font-display font-semibold text-xl mt-1 flex items-center gap-2">
+                        <BarChart2 className="text-primary w-5 h-5" />
+                        {t("How it's tracking", "推移")}
+                      </h2>
+                    </div>
+                    <div className="flex bg-secondary/40 p-1 rounded-xl border border-border/60">
+                      {(["temperature", "snowfall", "windSpeed"] as const).map((metric) => (
+                        <button
+                          key={metric}
+                          onClick={() => setActiveChartMetric(metric)}
+                          className={cn(
+                            "px-3 md:px-4 py-1.5 rounded-lg text-xs font-semibold capitalize transition-all",
+                            activeChartMetric === metric
+                              ? "bg-foreground text-background shadow-sm"
+                              : "text-muted-foreground hover:text-foreground"
+                          )}
+                        >
+                          {metric.replace("Speed", "")}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <ForecastChart data={hourly as any} metric={activeChartMetric} />
+                </section>
+              </PremiumGate>
+            </div>
+          )}
+
+          {/* PremiumGate · Ensemble forecast · multi-model consensus.
+              Self-hides when /api/forecast/{id} returns no data. */}
+          <div className="mt-4">
+            <PremiumGate
+              title="Ensemble forecast"
+              titleJa="アンサンブル予報"
+              blurb="Multi-model consensus · agreement across BOM, ECMWF and other models for the next 7 days."
+              blurbJa="BOM・ECMWFなど複数モデルの合意度を可視化（今後7日間）。"
+            >
+              <EnsembleForecast locationId={locationId} />
+            </PremiumGate>
+          </div>
+
+          {/* PremiumGate · Personalised triggers · push when conditions hit. */}
+          <div className="mt-4">
+            <PremiumGate
+              title="Powder & weather alerts"
+              titleJa="降雪・気象アラート"
+              blurb="Get a push when conditions hit. Set thresholds for snowfall, wind, freezing level."
+              blurbJa="条件達成時にプッシュ通知。降雪・風速・凍結高度を設定。"
+            >
+              <section className="rounded-2xl border border-border bg-white p-5 md:p-6">
+                <div className="mb-5">
+                  <p className="byline text-muted-foreground/70">{t("Alerts", "アラート")}</p>
+                  <h2 className="font-display font-semibold text-xl mt-1">
+                    {t("Personalised triggers", "パーソナライズされたトリガー")}
+                  </h2>
+                </div>
+                <AlertSubscribeForm defaultRegion={region.id as any} />
+              </section>
+            </PremiumGate>
+          </div>
+
+          {/* Webcams · same shared component used by Yamanouchi.
+              Self-hides when no webcam config exists for the mountain. */}
+          <div className="mt-4">
+            <MountainWebcams
+              mountainId={locationId}
+              sectionNumber=""
+              t={t}
+            />
           </div>
 
           <p className="byline text-muted-foreground/60 mt-10">
@@ -524,11 +631,6 @@ function fmtTime(iso: string | null | undefined): string {
   if (!iso) return "-";
   const m = iso.match(/T(\d{2}):(\d{2})/);
   return m ? `${m[1]}:${m[2]}` : "-";
-}
-
-function fmtHour(iso: string): string {
-  const m = iso.match(/T(\d{2}):/);
-  return m ? `${m[1]}h` : "";
 }
 
 function fmtDay(iso: string): string {

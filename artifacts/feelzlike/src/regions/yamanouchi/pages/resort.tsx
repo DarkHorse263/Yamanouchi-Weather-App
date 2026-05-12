@@ -30,11 +30,17 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage, useRegion } from "@workspace/feelzlike-shell";
+import { useState } from "react";
 import { HourlyForecast } from "@/components/HourlyForecast";
 import { PowderCalendar } from "@/components/PowderCalendar";
 import { MountainWebcams } from "@/components/MountainWebcams";
 import { LiftWindHoldPanel } from "@/components/LiftWindHoldPanel";
 import { PowderFactorBadge } from "@/components/PowderFactorBadge";
+import { ForecastChart } from "@/components/weather/ForecastChart";
+import { EnsembleForecast } from "@/components/weather/EnsembleForecast";
+import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
+import { cn } from "@/lib/utils";
+import { BarChart2 } from "lucide-react";
 
 type WeatherId = Parameters<typeof useGetLocationWeather>[0];
 
@@ -120,6 +126,7 @@ export default function ResortDetail() {
   const id = params?.id ?? "";
   const { t } = useLanguage();
   const { region } = useRegion();
+  const [activeChartMetric, setActiveChartMetric] = useState<"temperature" | "snowfall" | "windSpeed">("temperature");
 
   // Source of truth for "is this a real mountain in this region" is the
   // region config - so any mountain added to yamanouchi.ts works automatically.
@@ -374,6 +381,80 @@ export default function ResortDetail() {
           </PremiumGate>
         )}
 
+        {/* PREMIUM · 24-hour trend chart · interactive temp/snow/wind.
+            Added May 2026 v5 to match the AU resort paywall sequence. */}
+        {hourly && hourly.length > 0 && (
+          <PremiumGate
+            title="24-hour trend"
+            titleJa="24時間推移"
+            blurb="Interactive chart · switch between temperature, snowfall and wind for the next 24 hours."
+            blurbJa="気温・降雪・風速を切り替えて24時間の推移を確認。"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="glass rounded-3xl p-5 md:p-8"
+            >
+              <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-6 gap-3">
+                <div>
+                  <p className="byline text-muted-foreground">{t("24-hour trend", "24時間推移")}</p>
+                  <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
+                    <BarChart2 className="text-primary w-5 h-5" />
+                    {t("How it's tracking", "推移")}
+                  </h2>
+                </div>
+                <div className="flex bg-secondary/40 p-1 rounded-xl border border-white/5">
+                  {(["temperature", "snowfall", "windSpeed"] as const).map((metric) => (
+                    <button
+                      key={metric}
+                      onClick={() => setActiveChartMetric(metric)}
+                      className={cn(
+                        "px-3 md:px-4 py-1.5 rounded-lg text-xs font-semibold capitalize transition-all",
+                        activeChartMetric === metric
+                          ? "bg-foreground text-background shadow-sm"
+                          : "text-muted-foreground hover:text-foreground"
+                      )}
+                    >
+                      {metric.replace("Speed", "")}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <ForecastChart data={hourly as any} metric={activeChartMetric} />
+            </motion.div>
+          </PremiumGate>
+        )}
+
+        {/* PREMIUM · Ensemble forecast · multi-model consensus. Self-
+            hides when /api/forecast/{id} doesn't return data. */}
+        <PremiumGate
+          title="Ensemble forecast"
+          titleJa="アンサンブル予報"
+          blurb="Multi-model consensus · agreement across JMA, ECMWF and other models for the next 7 days."
+          blurbJa="JMA・ECMWFなど複数モデルの合意度を可視化（今後7日間）。"
+        >
+          <EnsembleForecast locationId={id} />
+        </PremiumGate>
+
+        {/* PREMIUM · Personalised triggers · push when conditions hit. */}
+        <PremiumGate
+          title="Powder & weather alerts"
+          titleJa="降雪・気象アラート"
+          blurb="Get a push when conditions hit. Set thresholds for snowfall, wind, freezing level."
+          blurbJa="条件達成時にプッシュ通知。降雪・風速・凍結高度を設定。"
+        >
+          <div className="glass rounded-3xl p-5 md:p-8">
+            <div className="mb-5">
+              <p className="byline text-muted-foreground">{t("Alerts", "アラート")}</p>
+              <h2 className="font-display font-semibold text-xl md:text-2xl mt-1">
+                {t("Personalised triggers", "パーソナライズされたトリガー")}
+              </h2>
+            </div>
+            <AlertSubscribeForm defaultRegion="yamanouchi" />
+          </div>
+        </PremiumGate>
+
         {/* Webcams · positioned after the gated detailed conditions to
             match AU resort pages. */}
         <MountainWebcams
@@ -440,7 +521,7 @@ function OfficialLinks({
       <div className="flex items-end justify-between mb-6 gap-3">
         <div>
           <p className="byline text-muted-foreground">
-            06 · {t("Official sources", "公式情報")}
+            {t("Official sources", "公式情報")}
           </p>
           <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 text-foreground">
             {t("Lifts & cameras", "リフト・カメラ")}

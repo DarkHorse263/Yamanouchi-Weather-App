@@ -70,10 +70,11 @@ function formatAgo(iso: string | undefined | null, now: number): string {
 import { cn } from "../lib/utils";
 import { HourlyForecast } from "@/components/HourlyForecast";
 import { PowderFactorBadge } from "@/components/PowderFactorBadge";
+import { PowderCalendar } from "@/components/PowderCalendar";
+import { LiftWindHoldPanel } from "@/components/LiftWindHoldPanel";
 import { POWDER_THRESHOLDS_AU } from "@/types/weather";
 import { PremiumGate } from "@workspace/feelzlike-shell";
 import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
-import { LiftHoldLikely } from "@/components/weather/LiftHoldLikely";
 
 type LocationId = "thredbo" | "perisher" | "charlottes-pass" | "selwyn" | "jindabyne";
 
@@ -344,6 +345,17 @@ export default function LocationDetail() {
           thresholds={POWDER_THRESHOLDS_AU}
         />
 
+        {/* FREE · Powder factor + 7-day powder calendar. Lifted out of
+            the Detailed conditions paywall in May 2026 v5 so AU pages
+            mirror the Yamanouchi free-tier order. AU thresholds keep
+            grading honest for the lower-snow Snowy range. */}
+        {hourly && hourly.length > 0 && (
+          <PowderFactorBadge hourly={hourly} t={(en) => en} sectionNumber="" />
+        )}
+        {hourly && hourly.length > 0 && (
+          <PowderCalendar hourly={hourly} thresholds={POWDER_THRESHOLDS_AU} sectionNumber="" />
+        )}
+
         {/* WEATHER OUTLOOK - free 5-day mountain strip. Anything past day 5
             is gated below in the Extended Outlook teaser. */}
         <motion.div
@@ -594,85 +606,101 @@ export default function LocationDetail() {
           </motion.div>
         )}
 
-        {/* PREMIUM · detailed conditions · bundles the wind-driven lift
-            hold banner, the 24-hour ForecastChart trend, the Powder Factor
-            backwards-looking score and the multi-model EnsembleForecast
-            into one paid panel. The MountainSnapshot rings panel was
-            removed in May 2026 v3 · its freezing-level + wind data are
-            already shown free in the Conditions Right Now panel above. */}
+        {/* PREMIUM · Mountain dials · MountainSnapshot rings only.
+            The wind-driven lift-hold call was removed here because the
+            per-lift hold panel below already delivers it with finer
+            per-lift gust tolerances. Order matches Yamanouchi (May 2026 v5). */}
         <PremiumGate
-          title="Detailed conditions"
-          titleJa="詳細コンディション"
-          blurb="The full instrument panel · 24-hour trend chart, powder score and multi-model consensus."
-          blurbJa="フル計器盤 · 24時間推移、パウダースコア、マルチモデル合意。"
+          title="Mountain dials"
+          titleJa="マウンテン計器盤"
+          blurb="Freezing level, gusts and incoming snow at a glance."
+          blurbJa="凍結高度・突風・降雪を一目で。"
         >
-          <div className="space-y-6 md:space-y-8">
-            {/* LIFT HOLD LIKELY · wind-driven prediction of whether
-                exposed chairs / gondolas are at risk of holding. Self-
-                hides when no wind data, rendered bare (no motion wrapper)
-                to avoid leaving a space-y gap. */}
-            <LiftHoldLikely
-              variant="dark"
-              windSpeedKmh={current.windSpeed}
-              gustKmh={current.windGust}
+          {location.elevation != null && current.windSpeed != null && (
+            <MountainSnapshot
+              resortName={location.name}
+              elevation={location.elevation}
+              freezingLevel={current.freezingLevel ?? undefined}
+              gust={current.windGust ?? undefined}
+              windSpeed={current.windSpeed}
+              liftsOpen={liftData?.liftsOpen}
+              totalLifts={liftData?.totalLifts}
+              snowfallNext24h={current.snowfallNext24h ?? undefined}
+              snowfallNext48h={current.snowfallNext48h ?? undefined}
+              snowfallNext72h={current.snowfallNext72h ?? undefined}
             />
+          )}
+        </PremiumGate>
 
-            {/* DASHBOARD DIALS · MountainSnapshot rings · restored
-                May 2026 v4. Freezing level, gusts and incoming snow
-                at a glance. Sits inside the paid Detailed Conditions
-                bundle alongside the hold-likely call. */}
-            {location.elevation != null && current.windSpeed != null && (
-              <MountainSnapshot
-                resortName={location.name}
-                elevation={location.elevation}
-                freezingLevel={current.freezingLevel ?? undefined}
-                gust={current.windGust ?? undefined}
-                windSpeed={current.windSpeed}
-                liftsOpen={liftData?.liftsOpen}
-                totalLifts={liftData?.totalLifts}
-                snowfallNext24h={current.snowfallNext24h ?? undefined}
-                snowfallNext48h={current.snowfallNext48h ?? undefined}
-                snowfallNext72h={current.snowfallNext72h ?? undefined}
-              />
-            )}
+        {/* PREMIUM · Per-lift hold forecast · hour-by-hour hold risk
+            for each named lift on this mountain, using lift-specific
+            gust tolerances. Self-hides when no lift seeds defined. */}
+        {hourly && hourly.length > 0 && (
+          <PremiumGate
+            title="Per-lift hold forecast"
+            titleJa="リフト別ホールド予測"
+            blurb="Hour-by-hour hold risk for each named lift on this mountain · uses lift-specific gust tolerances."
+            blurbJa="各リフトの時間別ホールドリスク · リフト固有の耐風基準を使用。"
+          >
+            <LiftWindHoldPanel
+              mountainId={locationId}
+              resortElevationM={location.elevation}
+              hourly={hourly as any}
+              sectionNumber=""
+            />
+          </PremiumGate>
+        )}
 
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="glass rounded-3xl p-5 md:p-8"
-            >
-              <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-6 gap-3">
-                <div>
-                  <p className="byline text-muted-foreground">24-hour trend</p>
-                  <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
-                    <BarChart2 className="text-primary w-5 h-5" />
-                    How it's tracking
-                  </h2>
-                </div>
-                <div className="flex bg-secondary/40 p-1 rounded-xl border border-white/5">
-                  {(["temperature", "snowfall", "windSpeed"] as const).map((metric) => (
-                    <button
-                      key={metric}
-                      onClick={() => setActiveChartMetric(metric)}
-                      className={cn(
-                        "px-3 md:px-4 py-1.5 rounded-lg text-xs font-semibold capitalize transition-all",
-                        activeChartMetric === metric
-                          ? "bg-foreground text-background shadow-sm"
-                          : "text-muted-foreground hover:text-foreground"
-                      )}
-                    >
-                      {metric.replace("Speed", "")}
-                    </button>
-                  ))}
-                </div>
+        {/* PREMIUM · 24-hour trend chart · interactive temp/snow/wind. */}
+        <PremiumGate
+          title="24-hour trend"
+          titleJa="24時間推移"
+          blurb="Interactive chart · switch between temperature, snowfall and wind for the next 24 hours."
+          blurbJa="気温・降雪・風速を切り替えて24時間の推移を確認。"
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="glass rounded-3xl p-5 md:p-8"
+          >
+            <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-6 gap-3">
+              <div>
+                <p className="byline text-muted-foreground">24-hour trend</p>
+                <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
+                  <BarChart2 className="text-primary w-5 h-5" />
+                  How it's tracking
+                </h2>
               </div>
-              <ForecastChart data={hourly} metric={activeChartMetric} />
-            </motion.div>
+              <div className="flex bg-secondary/40 p-1 rounded-xl border border-white/5">
+                {(["temperature", "snowfall", "windSpeed"] as const).map((metric) => (
+                  <button
+                    key={metric}
+                    onClick={() => setActiveChartMetric(metric)}
+                    className={cn(
+                      "px-3 md:px-4 py-1.5 rounded-lg text-xs font-semibold capitalize transition-all",
+                      activeChartMetric === metric
+                        ? "bg-foreground text-background shadow-sm"
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
+                  >
+                    {metric.replace("Speed", "")}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <ForecastChart data={hourly} metric={activeChartMetric} />
+          </motion.div>
+        </PremiumGate>
 
-            <PowderFactorBadge hourly={hourly} t={(en) => en} sectionNumber="" />
-            <EnsembleForecast locationId={locationId} />
-          </div>
+        {/* PREMIUM · Ensemble forecast · multi-model consensus. */}
+        <PremiumGate
+          title="Ensemble forecast"
+          titleJa="アンサンブル予報"
+          blurb="Multi-model consensus · agreement across BOM, ECMWF and other models for the next 7 days."
+          blurbJa="BOM・ECMWFなど複数モデルの合意度を可視化（今後7日間）。"
+        >
+          <EnsembleForecast locationId={locationId} />
         </PremiumGate>
 
         {/* PREMIUM - Personalised alerts (UI only for now). */}
