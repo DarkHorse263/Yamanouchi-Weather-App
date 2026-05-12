@@ -16,8 +16,8 @@ const SLIDES: Slide[] = [
     country: 'NSW, Australia',
   },
   {
-    src: '/__mockup/images/town-bright.jpg',
-    town: 'Bright',
+    src: '/__mockup/images/town-mount-beauty.jpg',
+    town: 'Mount Beauty',
     region: 'Victoria\u2019s High Country',
     country: 'VIC, Australia',
   },
