@@ -28,9 +28,8 @@ export function HomeFooter() {
             draggable={false}
           />
           <p className="mt-3 text-slate-600 max-w-md leading-relaxed text-[13px]">
-            Real-time mountain weather, road and lift status, and live
-            cams for the Snowy Mountains, Victoria's High Country and Yamanouchi. Built so you can
-            decide where to go today.
+            Real-time mountain weather, road status and traffic cams.
+            Built so you can decide where to go today.
           </p>
           <p className="mt-4 inline-flex items-center gap-1.5 text-[11px] text-slate-500">
             Built with <Heart className="w-3 h-3 text-rose-500 fill-rose-500" /> in Australia
