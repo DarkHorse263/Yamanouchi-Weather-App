@@ -2,7 +2,6 @@ import { useRoute } from "wouter";
 import { useGetLocationWeather } from "@workspace/api-client-react";
 import {
   ResortHero,
-  MountainSnapshot,
   LiveConditions,
   MountainOutlook,
   SafetyStrip,
@@ -33,6 +32,7 @@ import { PowderCalendar } from "@/components/PowderCalendar";
 import { MountainWebcams } from "@/components/MountainWebcams";
 import { LiftWindHoldPanel } from "@/components/LiftWindHoldPanel";
 import { PowderFactorBadge } from "@/components/PowderFactorBadge";
+import { LiftHoldLikely } from "@/components/weather/LiftHoldLikely";
 
 type WeatherId = Parameters<typeof useGetLocationWeather>[0];
 
@@ -212,16 +212,14 @@ export default function ResortDetail() {
       />
 
       <div className="max-w-7xl mx-auto px-5 md:px-10 pb-16 space-y-6 md:space-y-8 -mt-2">
-        <MountainSnapshot
-          resortName={location.name}
-          elevation={location.elevation}
-          freezingLevel={current.freezingLevel}
-          gust={current.windGust}
-          windSpeed={current.windSpeed}
-          snowfallNext24h={current.snowfallNext24h}
-          snowfallNext48h={current.snowfallNext48h}
-          snowfallNext72h={current.snowfallNext72h}
-          modelSource="Open-Meteo · JMA · ECMWF"
+        {/* LIFT HOLD LIKELY · May 2026 v3 · replaces the MountainSnapshot
+            rings panel that used to live here (Freezing / Wind / Lifts).
+            The rings duplicated freezing-level + wind data already shown
+            in LiveConditions below; the new banner gives a clearer single
+            "should I bother going up?" signal driven by gust forecasts. */}
+        <LiftHoldLikely
+          windSpeedKmh={current.windSpeed}
+          gustKmh={current.windGust}
         />
         <LiveConditions stats={stats} />
         {hourly && hourly.length > 0 && (

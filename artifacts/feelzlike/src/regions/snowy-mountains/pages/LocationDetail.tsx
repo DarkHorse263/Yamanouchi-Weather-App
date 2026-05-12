@@ -4,7 +4,6 @@ import { LoadingState } from "../components/ui/loading-state";
 import { ErrorState } from "../components/ui/error-state";
 import { ForecastChart } from "../components/weather/ForecastChart";
 import { EnsembleForecast } from "../components/weather/EnsembleForecast";
-import { MountainSnapshot } from "../components/weather/MountainSnapshot";
 import { SafetyStrip } from "../components/weather/SafetyStrip";
 import { formatTemp } from "../lib/utils";
 import { motion } from "framer-motion";
@@ -67,7 +66,6 @@ function formatAgo(iso: string | undefined | null, now: number): string {
   return `${Math.round(hr / 24)}d ago`;
 }
 import { cn } from "../lib/utils";
-import { skyGradient } from "../lib/mountain-imagery";
 import { HourlyForecast } from "@/components/HourlyForecast";
 import { PowderFactorBadge } from "@/components/PowderFactorBadge";
 import { POWDER_THRESHOLDS_AU } from "@/types/weather";
@@ -124,7 +122,6 @@ export default function LocationDetail() {
   // BOM's bomObservationTime is YYYYMMDDHHMMSS in local AU time and would need DST-aware parsing
   // (AEST/AEDT swaps), so we deliberately use lastUpdated for the "X min ago" display.
   const observedTime = (weatherData as any).lastUpdated as string | undefined;
-  const sky = skyGradient({ tempC: current.temperature, description: current.weatherDescription });
 
   // Snow next 24h: prefer the API-supplied value; otherwise sum the first
   // 24 hourly snowfall buckets so the tile is never empty when we have
@@ -278,9 +275,9 @@ export default function LocationDetail() {
           >
             <div className="flex items-end justify-between mb-5">
               <div>
-                <p className="byline text-muted-foreground">Conditions</p>
+                <p className="byline text-muted-foreground">conditions</p>
                 <h2 className="font-display font-semibold text-xl md:text-2xl mt-1">
-                  Right now
+                  right now
                 </h2>
               </div>
               <p className="byline text-muted-foreground/70 hidden md:block">
@@ -477,46 +474,28 @@ export default function LocationDetail() {
           </motion.div>
         </PremiumGate>
 
-        {/* PREMIUM - Detailed conditions. Bundles MountainSnapshot, the
-            full conditions strip, the 24-hour ForecastChart trend, the
-            Powder Factor backwards-looking score and the multi-model
-            EnsembleForecast into one paid panel. */}
+        {/* PREMIUM · detailed conditions · bundles the wind-driven lift
+            hold banner, the 24-hour ForecastChart trend, the Powder Factor
+            backwards-looking score and the multi-model EnsembleForecast
+            into one paid panel. The MountainSnapshot rings panel was
+            removed in May 2026 v3 · its freezing-level + wind data are
+            already shown free in the Conditions Right Now panel above. */}
         <PremiumGate
           title="Detailed conditions"
           titleJa="詳細コンディション"
-          blurb="The full instrument panel: snapshot rings, every measurement, 24-hour trend chart, powder score and multi-model consensus."
-          blurbJa="フル計器盤:スナップショット、全測定値、24時間推移、パウダースコア、マルチモデル合意。"
+          blurb="The full instrument panel · 24-hour trend chart, powder score and multi-model consensus."
+          blurbJa="フル計器盤 · 24時間推移、パウダースコア、マルチモデル合意。"
         >
           <div className="space-y-6 md:space-y-8">
-            <MountainSnapshot
-              resortName={location.name}
-              elevation={location.elevation}
-              freezingLevel={current.freezingLevel}
-              gust={current.windGust}
-              windSpeed={current.windSpeed}
-              liftsOpen={liftData?.liftsOpen}
-              totalLifts={liftData?.totalLifts}
-              snowfallNext24h={current.snowfallNext24h}
-              snowfallNext48h={current.snowfallNext48h}
-              snowfallNext72h={current.snowfallNext72h}
+            {/* LIFT HOLD LIKELY · May 2026 v3 · wind-driven prediction of
+                whether exposed chairs / gondolas are at risk of holding.
+                Self-hides when no wind data, so we render it bare (no
+                motion wrapper) to avoid leaving a space-y gap. */}
+            <LiftHoldLikely
+              variant="dark"
+              windSpeedKmh={current.windSpeed}
+              gustKmh={current.windGust}
             />
-
-            {/* LIFT HOLD LIKELY - May 2026 v3: replaces the duplicate
-                Conditions Right Now panel that used to live here (now
-                lifted up into the hero so free users see it too). This is
-                the wind-driven prediction of whether exposed chairs and
-                gondolas are at risk of holding today. */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.22 }}
-            >
-              <LiftHoldLikely
-                variant="dark"
-                windSpeedKmh={current.windSpeed}
-                gustKmh={current.windGust}
-              />
-            </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 16 }}

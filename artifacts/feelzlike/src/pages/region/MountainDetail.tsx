@@ -172,7 +172,10 @@ export function MountainDetail() {
               chairs and gondolas are at risk of holding today. Replaces the
               old four-tile snow/wind/freezing strip; the same numbers are
               shown below in the Conditions right now panel. */}
-          <LiftHoldLikely windSpeedKmh={current.windSpeed ?? null} />
+          <LiftHoldLikely
+            windSpeedKmh={current.windSpeed ?? null}
+            gustKmh={current.windGust ?? null}
+          />
 
           {/* Elevation-banded forecast (Open-Meteo) · upper / mid / base
               snow + temp. Self-hides when coords or summit elevation are
