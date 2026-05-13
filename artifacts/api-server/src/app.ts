@@ -122,4 +122,24 @@ if (process.env.NODE_ENV === "production") {
 // context. No-ops if SENTRY_DSN_API is unset.
 Sentry.setupExpressErrorHandler(app);
 
+// Final catch-all. Without this, anything thrown out of a route (e.g. a Zod
+// `.parse()` rejection) reaches Express's default handler, which serves an
+// HTML page containing the full stack trace and absolute file paths · a
+// classic info-disclosure leak. We always return a generic JSON envelope and
+// only include the error message in non-production envs.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+app.use((err: unknown, _req: Request, res: Response, _next: (e?: unknown) => void) => {
+  if (res.headersSent) return;
+  const isProd = process.env.NODE_ENV === "production";
+  const status = (err && typeof err === "object" && "status" in err && typeof (err as { status?: unknown }).status === "number")
+    ? (err as { status: number }).status
+    : 500;
+  // ZodError → 400 by convention (input shape mismatch is a client problem).
+  const isZod = err && typeof err === "object" && (err as { name?: string }).name === "ZodError";
+  res.status(isZod ? 400 : status).json({
+    error: isZod ? "INVALID_INPUT" : "INTERNAL_ERROR",
+    ...(isProd ? {} : { message: err instanceof Error ? err.message : String(err) }),
+  });
+});
+
 export default app;

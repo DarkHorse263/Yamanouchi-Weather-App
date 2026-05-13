@@ -463,14 +463,20 @@ router.get("/lift-status", (req, res) => {
 });
 
 router.get("/lift-status/:locationId", (req, res) => {
-  const { locationId } = GetLocationLiftStatusParams.parse(req.params);
+  // Don't run the strict OpenAPI enum-validator on the path param itself.
+  // It throws a ZodError for any non-Snowy resort id (mt-buller, ryuoo, …),
+  // which bubbles out of the handler as a 500 with an HTML stack trace
+  // (info disclosure). We always want a clean JSON 404 for unknown ids
+  // until lift coverage is expanded to other regions.
+  const locationId = String(req.params.locationId ?? "");
   const resorts = getResortData();
   const resort = resorts.find(r => r.locationId === locationId);
 
   if (!resort) {
+    const supported = resorts.map(r => r.locationId).join(", ");
     res.status(404).json({
       error: "LOCATION_NOT_FOUND",
-      message: `No lift data found for '${locationId}'. Lift status is available for: thredbo, perisher, charlottes-pass`
+      message: `No lift data for '${locationId}'. Currently supported: ${supported}`
     });
     return;
   }
