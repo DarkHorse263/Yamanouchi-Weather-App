@@ -15,15 +15,26 @@ import { createHmac, timingSafeEqual, randomBytes } from "node:crypto";
 const SECRET = (() => {
   const s = process.env.ALERT_TOKEN_SECRET;
   if (s && s.length >= 16) return s;
+  // Per-process random fallback. Used to throw in production to force the
+  // operator to set a stable secret · but that hard-fails the entire app
+  // boot (including the unrelated weather features) just because the alerts
+  // subsystem isn't fully configured. We now warn loudly instead, so the
+  // server still serves traffic while alert tokens issued by one instance
+  // won't validate on another or after a restart. Set ALERT_TOKEN_SECRET
+  // (>=16 chars, e.g. `openssl rand -base64 48`) before relying on alerts.
+  const fallback = randomBytes(32).toString("base64url");
   if (process.env.NODE_ENV === "production") {
-    throw new Error("ALERT_TOKEN_SECRET must be set (>=16 chars) in production. Generate: openssl rand -base64 48");
+    console.error(
+      "[alertTokens] ALERT_TOKEN_SECRET is missing or <16 chars in production · using ephemeral random secret. " +
+        "Alert/manage/unsubscribe links will NOT survive a restart and will NOT work across multiple instances. " +
+        "Set ALERT_TOKEN_SECRET (e.g. `openssl rand -base64 48`) in your deployment secrets to enable durable tokens.",
+    );
+  } else {
+    console.warn(
+      "[alertTokens] ALERT_TOKEN_SECRET not set · using ephemeral dev secret. Tokens will not survive a server restart.",
+    );
   }
-  // Dev fallback: stable per-process random so tokens issued in one dev run
-  // don't validate after a restart (which is the right behaviour - devs should
-  // re-issue in dev).
-  const dev = randomBytes(32).toString("base64url");
-  console.warn("[alertTokens] ALERT_TOKEN_SECRET not set - using ephemeral dev secret. Tokens will not survive a server restart.");
-  return dev;
+  return fallback;
 })();
 
 export type TokenKind =
