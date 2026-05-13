@@ -11,6 +11,7 @@ import wordmark from "@assets/feelzlike_trimmed/feelzlike_WordMarque_colour_1604
  *   Mount Beauty   -> Falls Creek (closest sealed road), Mt Hotham
  *   Harrietville   -> Mt Hotham (chains-fit point on the Great Alpine Rd)
  *   Dinner Plain   -> Mt Hotham (alpine village 10 min from the resort)
+ *   Omeo           -> Mt Hotham (southern Great Alpine Rd, Gippsland side)
  *   Marysville     -> Lake Mountain (gateway town)
  *   Warburton      -> Mt Donna Buang (closest town to the snow gum summit)
  *
@@ -119,6 +120,15 @@ export const victoriasHighCountryRegion: RegionConfig = {
       radiusM: 4000,
       blurb: "Yarra Valley town · closest base to Mt Donna Buang",
       nearbyMountainIds: ["mt-donna-buang"],
+    },
+    {
+      id: "omeo",
+      name: "Omeo",
+      lat: -37.0975,
+      lng: 147.5942,
+      radiusM: 4000,
+      blurb: "Southern Great Alpine Road · gateway to Hotham from Gippsland",
+      nearbyMountainIds: ["mt-hotham"],
     },
   ],
   footer: "v0.3 · feelzlike",
