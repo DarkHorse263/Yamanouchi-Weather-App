@@ -56,6 +56,20 @@ export const VICTORIAS_HIGH_COUNTRY_TRANSPORT: TransportProviderList = [
     mountains_served: ["falls-creek"],
   },
   {
+    id: "au-snow-bus-australia",
+    name: "Snow Bus Australia",
+    type: "bus",
+    operator: "Snow Bus Australia",
+    phone: null,
+    website: "https://www.snowbusaustralia.com.au",
+    route_summary:
+      "The Melbourne ski-coach. Daily winter services from Melbourne CBD and Tullamarine to Mt Buller, Mt Hotham, Falls Creek and Dinner Plain · the all-resort coach off-mountain visitors actually book.",
+    schedule_url: "https://www.snowbusaustralia.com.au",
+    regions: ["victorias-high-country"],
+    seasonality: "winter_only",
+    mountains_served: ["mt-buller", "falls-creek", "mt-hotham"],
+  },
+  {
     id: "au-snowball-express",
     name: "Snowball Express",
     type: "bus",

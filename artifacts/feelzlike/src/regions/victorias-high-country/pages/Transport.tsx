@@ -49,6 +49,14 @@ import {
  */
 
 const VLINE_ID = "au-vline-train-coach";
+/**
+ * Snow Bus Australia is the Melbourne → all-three-resorts ski-coach,
+ * analogous to Cooma Coaches' Snowy Mountains Bus Service in NSW. It
+ * gets a dedicated secondary hero card on every base town it runs
+ * through (Mansfield, Bright, Mt Beauty, Harrietville, Dinner Plain),
+ * sitting underneath the town's local mountain coach hero. Winter only.
+ */
+const MULTI_RESORT_HERO_ID = "au-snow-bus-australia";
 
 /**
  * Per-town primary coach operator. The "winter" entry takes precedence
@@ -102,6 +110,21 @@ export function VictoriasHighCountryTransport() {
   );
 
   /**
+   * Snow Bus Australia secondary hero. Only renders when the town's
+   * mountains overlap Snow Bus's served mountains AND it's winter (the
+   * record is `winter_only` so it self-hides in green season).
+   */
+  const multiResortHero = useMemo(() => {
+    if (isGreen) return undefined;
+    if (!town) return undefined;
+    const sb = allProviders.find((p) => p.id === MULTI_RESORT_HERO_ID);
+    if (!sb || sb.id === heroId || !sb.mountains_served) return undefined;
+    const townMtns = new Set(town.nearbyMountainIds ?? []);
+    const overlaps = sb.mountains_served.some((m) => townMtns.has(m));
+    return overlaps ? sb : undefined;
+  }, [allProviders, heroId, isGreen, town]);
+
+  /**
    * Apply town + season + role filters in one pass:
    *   - drop V/Line (it has its own hero)
    *   - drop the per-town hero (it has its own hero)
@@ -118,6 +141,7 @@ export function VictoriasHighCountryTransport() {
     return allProviders.filter((p) => {
       if (p.id === VLINE_ID) return false;
       if (heroId && p.id === heroId) return false;
+      if (multiResortHero && p.id === multiResortHero.id) return false;
       if (isGreen && p.seasonality === "winter_only") return false;
       if (p.mountains_served && townMountainIds.size > 0) {
         const overlaps = p.mountains_served.some((m) => townMountainIds.has(m));
@@ -125,7 +149,7 @@ export function VictoriasHighCountryTransport() {
       }
       return true;
     });
-  }, [allProviders, heroId, isGreen, townMountainIds]);
+  }, [allProviders, heroId, multiResortHero, isGreen, townMountainIds]);
 
   const buses = useMemo(
     () => visible.filter((p) => p.type === "bus" || p.type === "shuttle"),
@@ -280,6 +304,59 @@ export function VictoriasHighCountryTransport() {
                     >
                       <CalendarCheck className="w-4 h-4 text-blue-700" />
                       {t("Timetable & fares", "時刻表・運賃")}
+                      <ExternalLink className="w-3 h-3 opacity-60" />
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+      )}
+
+      {/* Snow Bus Australia · multi-resort Melbourne ski-coach.
+          Renders on every town it actually runs through (Mansfield,
+          Bright, Mt Beauty, Harrietville, Dinner Plain). Winter only. */}
+      {multiResortHero && (
+        <section className="px-4 md:px-10 pt-5 md:pt-8">
+          <article className="rounded-2xl border border-sky-200 bg-gradient-to-br from-sky-50 via-white to-sky-50/40 p-6 md:p-8 shadow-sm">
+            <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-5">
+              <div className="shrink-0 self-start w-14 h-14 md:w-16 md:h-16 rounded-xl bg-sky-600 text-white flex items-center justify-center">
+                <Bus className="w-7 h-7 md:w-8 md:h-8" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="text-[11px] font-bold tracking-wider text-sky-700 uppercase">
+                  {t(
+                    "Multi-resort Melbourne coach · winter",
+                    "メルボルン発スキーバス · 冬季",
+                  )}
+                </p>
+                <h2 className="font-display font-semibold text-2xl text-foreground mt-0.5">
+                  {multiResortHero.name}
+                </h2>
+                <p className="text-foreground/90 mt-3 leading-relaxed">
+                  {multiResortHero.route_summary}
+                </p>
+
+                <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
+                  {multiResortHero.phone && (
+                    <a
+                      href={`tel:${multiResortHero.phone.replace(/\s+/g, "")}`}
+                      className="inline-flex items-center gap-1.5 font-semibold text-foreground hover:text-sky-700"
+                    >
+                      <Phone className="w-4 h-4 text-sky-700" />
+                      {multiResortHero.phone}
+                    </a>
+                  )}
+                  {multiResortHero.website && (
+                    <a
+                      href={multiResortHero.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 font-semibold text-foreground hover:text-sky-700"
+                    >
+                      <Globe className="w-4 h-4 text-sky-700" />
+                      {t("Website & bookings", "ウェブサイト・予約")}
                       <ExternalLink className="w-3 h-3 opacity-60" />
                     </a>
                   )}
