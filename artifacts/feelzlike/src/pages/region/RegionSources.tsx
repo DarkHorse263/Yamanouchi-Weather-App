@@ -78,6 +78,7 @@ const REGION_SOURCES: Record<string, SourceGroup[]> = {
       items: [
         { label: "OpenWeatherMap weather tiles", url: "https://openweathermap.org" },
         { label: "BOM radar - NSW alpine", url: "http://www.bom.gov.au/products/IDR713.loop.shtml" },
+        { label: "Jindabyne Image \u00a9 Destination NSW", detail: "Photo courtesy Destination NSW", url: "https://www.destinationnsw.com.au" },
       ],
     },
     FORECAST_ENSEMBLE,

@@ -73,7 +73,7 @@ const FALLBACK_REGIONS: Region[] = [
 ];
 
 const TOWN_SLIDES = [
-  { src: "/towns/jindabyne.jpg",  town: "Jindabyne", region: "Snowy Mountains",            country: "NSW, Australia"   },
+  { src: "/towns/jindabyne.jpg",  town: "Jindabyne", region: "Snowy Mountains",            country: "NSW, Australia",   credit: "Image courtesy Destination NSW \u00a9" },
   { src: "/towns/mount-beauty.jpg", town: "Mount Beauty", region: "Victoria\u2019s High Country", country: "VIC, Australia" },
   { src: "/towns/yudanaka-valley.jpg", town: "Yudanaka", region: "Yamanouchi",              country: "Nagano, Japan"   },
 ] as const;
@@ -214,6 +214,11 @@ export default function Landing() {
                   {current.town}
                 </h2>
                 <p className="mt-0.5 text-xs text-white/70">{current.country}</p>
+                {"credit" in current && current.credit && (
+                  <p className="mt-1 text-[10px] uppercase tracking-[0.18em] text-white/55">
+                    {current.credit}
+                  </p>
+                )}
               </div>
               <div className="flex shrink-0 items-center gap-1.5 pb-1">
                 {TOWN_SLIDES.map((_, i) => (
