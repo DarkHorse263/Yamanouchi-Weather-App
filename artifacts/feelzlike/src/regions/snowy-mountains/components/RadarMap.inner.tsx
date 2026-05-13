@@ -181,11 +181,16 @@ const PIN_ICONS: Record<string, L.DivIcon> = Object.fromEntries(
   ),
 );
 
-function RecenterOnChange({ center, zoom }: { center: [number, number]; zoom: number }) {
+function RecenterOnChange({ lat, lng, zoom }: { lat: number; lng: number; zoom: number }) {
   const map = useMap();
+  // Pass primitive lat/lng/zoom as deps. Previously this took a tuple
+  // `center=[lat,lng]` whose array identity changed on every parent
+  // render, which fired `setView` continuously and snapped the map back
+  // mid-pan/zoom · effectively breaking interaction. Now it only runs
+  // when the actual coordinates change (e.g. user picks a new town).
   useEffect(() => {
-    map.setView(center, zoom, { animate: true });
-  }, [map, center, zoom]);
+    map.setView([lat, lng], zoom, { animate: true });
+  }, [map, lat, lng, zoom]);
   return null;
 }
 
@@ -357,7 +362,7 @@ export default function RadarMapInner({
         minZoom={5}
         maxZoom={12}
       >
-        <RecenterOnChange center={centerTuple} zoom={zoom} />
+        <RecenterOnChange lat={effectiveCenter.lat} lng={effectiveCenter.lng} zoom={zoom} />
 
         {/* Clean light basemap (CARTO Positron, free, no key, CDN-hosted).
             Soft grey roads + faint labels = maximum contrast for the
