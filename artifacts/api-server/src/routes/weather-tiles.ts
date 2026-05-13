@@ -47,7 +47,8 @@ const CACHE_TTL = 600_000;
 router.get("/japan-temps", async (_req, res) => {
   if (cachedTemps && Date.now() - cachedTemps.fetchedAt < CACHE_TTL) {
     res.set("Cache-Control", "public, max-age=300");
-    return res.json(cachedTemps.data);
+    res.json(cachedTemps.data);
+    return;
   }
 
   try {
@@ -76,7 +77,10 @@ router.get("/japan-temps", async (_req, res) => {
     res.json(payload);
   } catch (err) {
     console.error("Japan temps error:", err);
-    if (cachedTemps) return res.json(cachedTemps.data);
+    if (cachedTemps) {
+      res.json(cachedTemps.data);
+      return;
+    }
     res.status(502).json({ error: "Failed to fetch temperatures" });
   }
 });
@@ -85,12 +89,16 @@ router.get("/weather-tile/:layer/:z/:x/:y", async (req, res) => {
   const { layer, z, x, y } = req.params;
   const key = getOwmKey();
   if (!VALID_LAYERS.includes(layer) || !key) {
-    return res.status(400).send("Invalid layer or missing key");
+    res.status(400).send("Invalid layer or missing key");
+    return;
   }
   try {
     const url = `https://tile.openweathermap.org/map/${layer}/${z}/${x}/${y}.png?appid=${key}`;
     const resp = await fetch(url);
-    if (!resp.ok) return res.status(resp.status).send("Upstream error");
+    if (!resp.ok) {
+      res.status(resp.status).send("Upstream error");
+      return;
+    }
     res.set("Content-Type", "image/png");
     res.set("Cache-Control", "public, max-age=300");
     const buf = Buffer.from(await resp.arrayBuffer());

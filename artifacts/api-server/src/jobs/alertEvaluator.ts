@@ -17,7 +17,7 @@
  *   - `runAlertEvaluator()` runs the job once and is exposed via an admin
  *     endpoint for ad-hoc testing.
  */
-import cron from "node-cron";
+import cron, { type ScheduledTask } from "node-cron";
 import { db, alertSubscribersTable, dispatchedAlertsTable, pushSubscriptionsTable } from "@workspace/db";
 import { eq, and, isNull, isNotNull, gte, count } from "drizzle-orm";
 import * as Sentry from "@sentry/node";
@@ -309,18 +309,44 @@ function isQuietHour(tz: string): boolean {
   }
 }
 
-let cronTask: cron.ScheduledTask | null = null;
+let cronTask: ScheduledTask | null = null;
 
+/**
+ * Start the in-process alert evaluator cron.
+ *
+ * IMPORTANT — singleton semantics. The cron is OFF by default and only
+ * starts when `RUN_ALERT_CRON=1` is set. This guarantees that scaling
+ * the API to multiple replicas does NOT cause duplicate alert emails /
+ * push notifications · only the replica(s) explicitly opted in via the
+ * env var will tick.
+ *
+ * Recommended deployment patterns, in order of preference:
+ *   1. Replit Scheduled Deployment hitting POST /api/internal/alerts/run
+ *      every 3 hours. The web/API replicas all leave RUN_ALERT_CRON
+ *      unset · zero risk of duplicates regardless of replica count.
+ *   2. A single dedicated worker replica with RUN_ALERT_CRON=1 set,
+ *      while the user-facing replicas leave it unset.
+ *   3. Single-replica deployment (current default for Replit Autoscale
+ *      with min=max=1) with RUN_ALERT_CRON=1 set on that one replica.
+ *
+ * Legacy kill switch ALERT_CRON_DISABLED=1 is still honoured for
+ * backwards compatibility, but is now redundant since the default is
+ * already off.
+ */
 export function startAlertCron(): void {
   if (cronTask) return;
-  // Every 3 hours, on the hour. Replit dev workflows are long-running so this
-  // works fine in development. For Replit Deployments, prefer a Scheduled
-  // Deployment that hits POST /api/internal/alerts/run instead so the job
-  // doesn't depend on a server staying warm.
   if (process.env.ALERT_CRON_DISABLED === "1") {
-    console.log("[alertEvaluator] ALERT_CRON_DISABLED=1 - cron not started");
+    console.log("[alertEvaluator] ALERT_CRON_DISABLED=1 · cron not started");
     return;
   }
+  if (process.env.RUN_ALERT_CRON !== "1") {
+    console.log(
+      "[alertEvaluator] RUN_ALERT_CRON not set · cron not started on this replica. " +
+      "Set RUN_ALERT_CRON=1 on exactly one replica, or hit /api/internal/alerts/run from a Scheduled Deployment.",
+    );
+    return;
+  }
+  // Every 3 hours, on the hour.
   cronTask = cron.schedule("0 */3 * * *", () => {
     runAlertEvaluator().then((r) => {
       console.log(`[alertEvaluator] run done: sent=${r.alertsSent} checked=${r.subscribersChecked} errors=${r.errors}`);
@@ -329,5 +355,5 @@ export function startAlertCron(): void {
       Sentry.captureException(err, { tags: { component: "alert-evaluator-cron" } });
     });
   });
-  console.log("[alertEvaluator] cron scheduled (every 3 hours)");
+  console.log("[alertEvaluator] cron scheduled (every 3 hours, RUN_ALERT_CRON=1)");
 }

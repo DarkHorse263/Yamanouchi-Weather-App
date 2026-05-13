@@ -203,7 +203,7 @@ interface BomObservation {
   name: string;
 }
 
-function bomCloudToDescription(cloud: string | null, weather: string | null, openMeteoCode?: number): string {
+function bomCloudToDescription(cloud: string | null | undefined, weather: string | null | undefined, openMeteoCode?: number): string {
   if (weather && weather !== "-") return weather;
   if (cloud && cloud !== "-") {
     const c = cloud.toLowerCase();

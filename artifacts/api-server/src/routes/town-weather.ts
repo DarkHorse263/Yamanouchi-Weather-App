@@ -3,6 +3,49 @@ import { Router, type IRouter } from "express";
 const router: IRouter = Router();
 
 /**
+ * In-memory stale-on-error cache for /town-weather. Keyed by rounded
+ * lat/lng (≈110m precision so nearby town centres collide intentionally
+ * and the cache hit-rate stays useful). When Open-Meteo blips, we serve
+ * the most recent successful response for up to STALE_MAX_AGE_MS so
+ * users see slightly old data instead of a 502/503 spinner.
+ *
+ * Bound: 200 entries (we only have a few dozen towns; this is a safety
+ * cap for unexpected lat/lng query patterns).
+ */
+const STALE_MAX_AGE_MS = 6 * 60 * 60 * 1000; // 6h
+const STALE_CACHE_MAX_ENTRIES = 200;
+const staleCache = new Map<string, { payload: unknown; storedAt: number }>();
+
+function staleKey(lat: number, lng: number): string {
+  return `${lat.toFixed(3)},${lng.toFixed(3)}`;
+}
+
+function rememberFresh(key: string, payload: unknown): void {
+  // Delete existing entry first so re-inserting the same key doesn't
+  // count against the capacity check (and refreshes insertion order).
+  staleCache.delete(key);
+  if (staleCache.size >= STALE_CACHE_MAX_ENTRIES) {
+    const firstKey = staleCache.keys().next().value;
+    if (firstKey !== undefined) staleCache.delete(firstKey);
+  }
+  staleCache.set(key, { payload, storedAt: Date.now() });
+}
+
+function readStale(key: string): { payload: unknown; ageMs: number } | null {
+  const hit = staleCache.get(key);
+  if (!hit) return null;
+  const ageMs = Date.now() - hit.storedAt;
+  if (ageMs > STALE_MAX_AGE_MS) {
+    staleCache.delete(key);
+    return null;
+  }
+  // True-LRU: bump recency on read by re-inserting at tail of insertion order.
+  staleCache.delete(key);
+  staleCache.set(key, hit);
+  return { payload: hit.payload, ageMs };
+}
+
+/**
  * Comprehensive weather dashboard data for an arbitrary lat/lng (a base town,
  * not a fixed resort station). Powered by Open-Meteo (free, no key required).
  *
@@ -75,6 +118,17 @@ router.get("/town-weather", async (req, res) => {
     temperature_unit: "celsius",
   });
 
+  const cacheKey = staleKey(lat, lng);
+
+  const serveStale = (reason: string, status: number): boolean => {
+    const stale = readStale(cacheKey);
+    if (!stale) return false;
+    res.setHeader("Cache-Control", "public, max-age=60, s-maxage=60");
+    res.setHeader("X-Feelzlike-Stale", `1; reason=${reason}; age=${Math.round(stale.ageMs / 1000)}s; upstream-status=${status}`);
+    res.json(stale.payload);
+    return true;
+  };
+
   try {
     const upstream = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
       signal: AbortSignal.timeout(8000),
@@ -83,6 +137,7 @@ router.get("/town-weather", async (req, res) => {
       },
     });
     if (!upstream.ok) {
+      if (serveStale("upstream_not_ok", upstream.status)) return;
       res.status(502).json({ error: "UPSTREAM_FAILED", status: upstream.status });
       return;
     }
@@ -99,8 +154,7 @@ router.get("/town-weather", async (req, res) => {
     const hourly = d.hourly ?? { time: [] };
     const daily = d.daily ?? { time: [] };
 
-    res.setHeader("Cache-Control", "public, max-age=600, s-maxage=600");
-    res.json({
+    const payload = {
       coords: { lat, lng },
       timezone: d.timezone ?? "UTC",
       utcOffsetSeconds: d.utc_offset_seconds ?? 0,
@@ -128,8 +182,13 @@ router.get("/town-weather", async (req, res) => {
       },
       hourly: pickHourly(hourly),
       daily: pickDaily(daily),
-    });
+    };
+
+    rememberFresh(cacheKey, payload);
+    res.setHeader("Cache-Control", "public, max-age=600, s-maxage=600");
+    res.json(payload);
   } catch (err) {
+    if (serveStale("fetch_threw", 0)) return;
     res.status(503).json({
       error: "FETCH_FAILED",
       message: err instanceof Error ? err.message : "Unknown error",

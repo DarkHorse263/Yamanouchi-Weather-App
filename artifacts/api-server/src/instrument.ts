@@ -41,10 +41,14 @@ if (isValidSentryDsn(rawDsn)) {
   // eslint-disable-next-line no-console
   console.log(`[sentry] initialised (env=${environment})`);
 } else if (rawDsn) {
+  // The type guard narrows rawDsn to `never` here (it's not a valid DSN
+  // and the guard only said `value is string` for the positive case),
+  // so re-bind through the original env var to keep the diagnostic.
+  const bad = (process.env["SENTRY_DSN_API"] ?? "") as string;
   // eslint-disable-next-line no-console
   console.warn(
     `[sentry] SENTRY_DSN_API is set but does not look like a valid DSN URL ` +
-      `(length=${rawDsn.length}, first8="${rawDsn.slice(0, 8)}"). ` +
+      `(length=${bad.length}, first8="${bad.slice(0, 8)}"). ` +
       `Skipping init. Expected format: https://<key>@o<orgid>.ingest.<region>.sentry.io/<projectid>`,
   );
 } else {

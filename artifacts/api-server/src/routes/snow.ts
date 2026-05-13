@@ -198,7 +198,7 @@ router.get("/dashboard", async (_req, res): Promise<void> => {
   const supabase = getSupabase();
 
   if (!supabase) {
-    const base = FALLBACK_RESORTS.map((r) => ({ ...r })) as ReturnType<typeof mapResortRow>[];
+    const base = FALLBACK_RESORTS.map((r) => ({ ...r })) as unknown as ReturnType<typeof mapResortRow>[];
     const mapped = await applyLiveWeather(base);
     const dashboard = buildDashboardFromResorts(mapped);
     res.json(GetDashboardResponse.parse(dashboard));
@@ -217,7 +217,7 @@ router.get("/dashboard", async (_req, res): Promise<void> => {
     const supplemental = await applyLiveWeather(
       FALLBACK_RESORTS
         .filter(r => !presentRegions.has(normalizeRegion(r.region)))
-        .map(r => ({ ...r })) as ReturnType<typeof mapResortRow>[],
+        .map(r => ({ ...r })) as unknown as ReturnType<typeof mapResortRow>[],
       true // force live weather on fallback entries
     );
 
@@ -226,7 +226,7 @@ router.get("/dashboard", async (_req, res): Promise<void> => {
     res.json(GetDashboardResponse.parse(dashboard));
   } catch (err) {
     console.error("Dashboard error:", err);
-    const base = FALLBACK_RESORTS.map((r) => ({ ...r })) as ReturnType<typeof mapResortRow>[];
+    const base = FALLBACK_RESORTS.map((r) => ({ ...r })) as unknown as ReturnType<typeof mapResortRow>[];
     const mapped = await applyLiveWeather(base, true);
     const dashboard = buildDashboardFromResorts(mapped);
     res.json(GetDashboardResponse.parse(dashboard));
@@ -237,7 +237,7 @@ router.get("/resorts", async (_req, res): Promise<void> => {
   const supabase = getSupabase();
 
   if (!supabase) {
-    const base = FALLBACK_RESORTS.map((r) => ({ ...r })) as ReturnType<typeof mapResortRow>[];
+    const base = FALLBACK_RESORTS.map((r) => ({ ...r })) as unknown as ReturnType<typeof mapResortRow>[];
     const resorts = await applyLiveWeather(base);
     res.json(GetResortsResponse.parse(resorts));
     return;
@@ -255,13 +255,13 @@ router.get("/resorts", async (_req, res): Promise<void> => {
     const supplemental = await applyLiveWeather(
       FALLBACK_RESORTS
         .filter(r => !presentRegions.has(normalizeRegion(r.region)))
-        .map(r => ({ ...r })) as ReturnType<typeof mapResortRow>[],
+        .map(r => ({ ...r })) as unknown as ReturnType<typeof mapResortRow>[],
       true
     );
     res.json(GetResortsResponse.parse([...supabaseResorts, ...supplemental]));
   } catch (err) {
     console.error("Resorts error:", err);
-    const base = FALLBACK_RESORTS.map((r) => ({ ...r })) as ReturnType<typeof mapResortRow>[];
+    const base = FALLBACK_RESORTS.map((r) => ({ ...r })) as unknown as ReturnType<typeof mapResortRow>[];
     res.json(GetResortsResponse.parse(await applyLiveWeather(base, true)));
   }
 });
@@ -278,7 +278,7 @@ router.get("/resorts/:id", async (req, res): Promise<void> => {
 
 router.get("/map", async (_req, res): Promise<void> => {
   const supabase = getSupabase();
-  let resorts: ReturnType<typeof mapResortRow>[] = FALLBACK_RESORTS.map((r) => ({ ...r })) as ReturnType<typeof mapResortRow>[];
+  let resorts: ReturnType<typeof mapResortRow>[] = FALLBACK_RESORTS.map((r) => ({ ...r })) as unknown as ReturnType<typeof mapResortRow>[];
 
   if (supabase) {
     try {
@@ -289,7 +289,7 @@ router.get("/map", async (_req, res): Promise<void> => {
         const presentRegions = new Set(supabaseResorts.map(r => r.region));
         const supplemental = FALLBACK_RESORTS
           .filter(r => !presentRegions.has(normalizeRegion(r.region)))
-          .map(r => ({ ...r, region: normalizeRegion(r.region) })) as ReturnType<typeof mapResortRow>[];
+          .map(r => ({ ...r, region: normalizeRegion(r.region) })) as unknown as ReturnType<typeof mapResortRow>[];
         resorts = [...supabaseResorts, ...supplemental];
       }
     } catch (err) {
@@ -322,10 +322,23 @@ router.get("/map", async (_req, res): Promise<void> => {
 router.get("/outlook", async (_req, res): Promise<void> => {
   const supabase = getSupabase();
 
-  let fallbackOutlook = [
-    { region: "Shiga Kogen", regionJa: "志賀高原", rank: 1, signal: "Conditions at Shiga Kogen", snow24h: 0, snow48h: 0, snow72h: 0, level: "None" as const, updatedAt: new Date().toISOString() },
-    { region: "Ryuoo",       regionJa: "竜王",   rank: 2, signal: "Conditions at Ryuoo",        snow24h: 0, snow48h: 0, snow72h: 0, level: "None" as const, updatedAt: new Date().toISOString() },
-    { region: "Yomase",      regionJa: "夜間瀬", rank: 3, signal: "Conditions at Yomase",       snow24h: 0, snow48h: 0, snow72h: 0, level: "None" as const, updatedAt: new Date().toISOString() },
+  type OutlookLevel = "None" | "Low" | "Moderate" | "High" | "Extreme";
+  type OutlookRow = {
+    region: string;
+    regionJa: string;
+    rank: number;
+    signal: string;
+    snow24h: number;
+    snow48h: number;
+    snow72h: number;
+    level: OutlookLevel;
+    updatedAt: string;
+  };
+
+  let fallbackOutlook: OutlookRow[] = [
+    { region: "Shiga Kogen", regionJa: "志賀高原", rank: 1, signal: "Conditions at Shiga Kogen", snow24h: 0, snow48h: 0, snow72h: 0, level: "None", updatedAt: new Date().toISOString() },
+    { region: "Ryuoo",       regionJa: "竜王",   rank: 2, signal: "Conditions at Ryuoo",        snow24h: 0, snow48h: 0, snow72h: 0, level: "None", updatedAt: new Date().toISOString() },
+    { region: "Yomase",      regionJa: "夜間瀬", rank: 3, signal: "Conditions at Yomase",       snow24h: 0, snow48h: 0, snow72h: 0, level: "None", updatedAt: new Date().toISOString() },
   ];
 
   try {
@@ -334,7 +347,7 @@ router.get("/outlook", async (_req, res): Promise<void> => {
       const w = getWeatherForRegion(o.region, live);
       if (!w) return o;
       const total = w.snow24h + w.snowTomorrow;
-      let level: typeof o.level = "None";
+      let level: OutlookLevel = "None";
       if (total >= 40) level = "Extreme";
       else if (total >= 20) level = "High";
       else if (total >= 10) level = "Moderate";

@@ -131,14 +131,27 @@ async function fetchMountainOutlook(coord: typeof MOUNTAIN_OUTLOOK_COORDS[0]): P
     models: "jma_seamless",
   });
 
-  const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`);
+  const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
+    signal: AbortSignal.timeout(8000),
+  });
   if (!res.ok) throw new Error(`Open-Meteo ${res.status} for ${coord.region}`);
-  const d = await res.json();
-  const c = d.current;
+  const d = (await res.json()) as {
+    current?: { time?: string; temperature_2m?: number; wind_speed_10m?: number; weather_code?: number };
+    hourly?: { time?: string[]; snowfall?: number[] };
+    daily?: {
+      time?: string[];
+      snowfall_sum?: number[];
+      temperature_2m_max?: number[];
+      temperature_2m_min?: number[];
+      weather_code?: number[];
+      rain_sum?: number[];
+    };
+  };
+  const c = d.current ?? {};
 
   const hourlySnowfall: number[] = d.hourly?.snowfall ?? [];
   const hourlyTimes: string[] = d.hourly?.time ?? [];
-  const nowIdx = hourlyTimes.indexOf(c.time);
+  const nowIdx = hourlyTimes.indexOf(c.time ?? "");
   const past24 = nowIdx >= 0
     ? hourlySnowfall.slice(Math.max(0, nowIdx - 24), nowIdx + 1)
     : hourlySnowfall.slice(0, 24);
@@ -160,8 +173,8 @@ async function fetchMountainOutlook(coord: typeof MOUNTAIN_OUTLOOK_COORDS[0]): P
     region: coord.region,
     regionJa: coord.regionJa,
     elevation: coord.elevation,
-    temp: Math.round(c.temperature_2m * 10) / 10,
-    wind: Math.round(c.wind_speed_10m * 10) / 10,
+    temp: Math.round((c.temperature_2m ?? 0) * 10) / 10,
+    wind: Math.round((c.wind_speed_10m ?? 0) * 10) / 10,
     weatherCode: c.weather_code ?? 0,
     snow24h,
     forecast,
@@ -180,10 +193,23 @@ async function fetchTownWeather(coord: typeof TOWN_COORDS[0]): Promise<TownWeath
     models: "jma_seamless",
   });
 
-  const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`);
+  const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
+    signal: AbortSignal.timeout(8000),
+  });
   if (!res.ok) throw new Error(`Open-Meteo ${res.status} for ${coord.location}`);
-  const d = await res.json();
-  const c = d.current;
+  const d = (await res.json()) as {
+    current?: { temperature_2m?: number; wind_speed_10m?: number; weather_code?: number };
+    daily?: {
+      time?: string[];
+      temperature_2m_min?: number[];
+      temperature_2m_max?: number[];
+      snowfall_sum?: number[];
+      rain_sum?: number[];
+      precipitation_sum?: number[];
+      weather_code?: number[];
+    };
+  };
+  const c = d.current ?? {};
   const daily = d.daily ?? {};
 
   const forecast: ForecastDay[] = (daily.time ?? []).map((date: string, i: number) => ({
@@ -201,8 +227,8 @@ async function fetchTownWeather(coord: typeof TOWN_COORDS[0]): Promise<TownWeath
     location: coord.location,
     locationJa: coord.locationJa,
     elevation: coord.elevation,
-    temp: Math.round(c.temperature_2m * 10) / 10,
-    wind: Math.round(c.wind_speed_10m * 10) / 10,
+    temp: Math.round((c.temperature_2m ?? 0) * 10) / 10,
+    wind: Math.round((c.wind_speed_10m ?? 0) * 10) / 10,
     weatherCode: c.weather_code ?? 0,
     forecast,
   };
@@ -223,14 +249,18 @@ async function fetchRegionWeather(coord: (typeof REGION_COORDS)[0]): Promise<Reg
   });
 
   const url = `https://api.open-meteo.com/v1/forecast?${params}`;
-  const res = await fetch(url);
+  const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
   if (!res.ok) throw new Error(`Open-Meteo ${res.status} for ${coord.label}`);
 
-  const d = await res.json();
-  const c = d.current;
+  const d = (await res.json()) as {
+    current?: { time?: string; temperature_2m?: number; wind_speed_10m?: number; weather_code?: number };
+    hourly?: { time?: string[]; snowfall?: number[] };
+    daily?: { snowfall_sum?: number[] };
+  };
+  const c = d.current ?? {};
 
   const hourlySnowfall: number[] = d.hourly?.snowfall ?? [];
-  const currentTimeStr: string = c.time;
+  const currentTimeStr: string = c.time ?? "";
   const hourlyTimes: string[] = d.hourly?.time ?? [];
 
   const nowIdx = hourlyTimes.indexOf(currentTimeStr);
@@ -243,8 +273,8 @@ async function fetchRegionWeather(coord: (typeof REGION_COORDS)[0]): Promise<Reg
 
   return {
     region: coord.region,
-    temp: Math.round(c.temperature_2m * 10) / 10,
-    wind: Math.round(c.wind_speed_10m * 10) / 10,
+    temp: Math.round((c.temperature_2m ?? 0) * 10) / 10,
+    wind: Math.round((c.wind_speed_10m ?? 0) * 10) / 10,
     snow24h,
     snowTomorrow,
     weatherCode: c.weather_code ?? 0,
