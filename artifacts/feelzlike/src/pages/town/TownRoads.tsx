@@ -16,7 +16,6 @@ import {
   ExternalLink,
   MapPin,
   Navigation,
-  Construction,
   Flame,
   CloudRain,
   Snowflake,
@@ -24,7 +23,7 @@ import {
   XCircle,
 } from "lucide-react";
 import type { ChainStatus } from "@workspace/api-client-react";
-import { useRegion, useLanguage, useBaseTown, LiveBadge, UpdateStamp, PageHeader } from "@workspace/feelzlike-shell";
+import { useRegion, useLanguage, useBaseTown, useOptionalSeason, LiveBadge, UpdateStamp, PageHeader } from "@workspace/feelzlike-shell";
 import { EmptyStateCard } from "@/components/EmptyStateCard";
 
 function statusClasses(c: string): string {
@@ -100,6 +99,14 @@ export function TownRoads() {
   const { region } = useRegion();
   const { t, language } = useLanguage();
   const { town } = useBaseTown();
+  const seasonCtx = useOptionalSeason();
+  // Hide the chain-fitting section in JP when the user toggles to green
+  // season (per-user request). Scoped to JP only so AU regions keep
+  // showing chains regardless of the auto-detected hemisphere season -
+  // southern-hemisphere AU defaults to "green" in May, but the chain
+  // status still has to render for the off-season AU audience checking
+  // ahead of winter trips.
+  const hideChainsForSeason = region.id === "yamanouchi" && seasonCtx?.isGreen === true;
   const dataAvailable = region.roadsSource?.dataAvailable ?? true;
   // Always fetch Â· even regions without a live per-road table now return
   // structured chain-fitting requirement data, which we want to render.
@@ -211,7 +218,9 @@ export function TownRoads() {
         />
       )}
 
-      {chainStatuses.length > 0 && (
+      {/* Chain-fitting requirements only matter in snow season - in JP
+          we hide the section entirely when the user toggles to green. */}
+      {!hideChainsForSeason && chainStatuses.length > 0 && (
         <ChainStatusSection statuses={chainStatuses} t={t} />
       )}
 
@@ -249,25 +258,11 @@ export function TownRoads() {
         />
       )}
 
-      {!dataAvailable && !isVhc && (
-        <EmptyStateCard
-          icon={Construction}
-          title={t("Live road data coming soon", "道路情報は近日公開")}
-          body={t(
-            `We don't yet pull live road conditions for ${region.name}. In the meantime, the official source has the most up-to-date information.`,
-            `${region.name}のライブ道路情報は現在準備中です。それまでは公式情報源で最新情報をご確認ください。`,
-          )}
-          ctaLabel={
-            region.roadsSource
-              ? t(
-                  region.roadsSource.label,
-                  region.roadsSource.labelJa ?? region.roadsSource.label,
-                )
-              : undefined
-          }
-          ctaHref={region.roadsSource?.url}
-        />
-      )}
+      {/* "Live road data coming soon" panel removed - we now ship live
+          chain-fitting status above for regions like Yamanouchi, so the
+          coming-soon copy contradicted what's already on the page. If a
+          future region has neither per-road data nor chain status, add a
+          targeted empty state then rather than the old generic panel. */}
 
       {dataAvailable && query.isLoading && <RoadsSkeleton />}
 
