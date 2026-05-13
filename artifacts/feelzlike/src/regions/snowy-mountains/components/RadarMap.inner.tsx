@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { MapContainer, TileLayer, Marker, Tooltip, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { Cloud, CloudSnow, CloudRain, Layers, Pause, Play, Map as MapIcon, Radio, Globe2, Mountain, MountainSnow } from "lucide-react";
+import { Cloud, CloudSnow, CloudRain, Layers, Pause, Play, Map as MapIcon, Radio, Globe2, Mountain, MountainSnow, Wind, Thermometer } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface RadarMapInnerProps {
@@ -220,7 +220,25 @@ export default function RadarMapInner({
   const regionCfg = REGION_CONFIG[region];
   const regionDefaults = REGION_DEFAULTS[region];
   const effectiveCenter = center ?? regionDefaults.center;
-  const [view, setView] = useState<ViewMode>("interactive");
+  // In winter, the Expert view (Windy: snow + wind + temp + radar in
+  // one pannable map) is what users actually want · we lead with it.
+  // In green season, the lighter Interactive view (clean basemap + rain
+  // radar + town pins) is the better default.
+  const [view, setView] = useState<ViewMode>(season === "winter" ? "windy" : "interactive");
+  // Active Windy overlay · drives the Windy iframe's `overlay=` param.
+  // Snow in winter is the headline; users can flip to wind/temp/radar
+  // without leaving the page or learning Windy's UI.
+  const [windyOverlay, setWindyOverlay] = useState<"snow" | "wind" | "temp" | "rain">(
+    season === "winter" ? "snow" : "rain",
+  );
+
+  // Keep view + overlay defaults in step with the user's season toggle.
+  // Without this, flipping Winter↔Summer in the sidebar would leave the
+  // map stuck in the previous season's defaults until reload.
+  useEffect(() => {
+    setView(season === "winter" ? "windy" : "interactive");
+    setWindyOverlay(season === "winter" ? "snow" : "rain");
+  }, [season]);
   const { manifest, loading, error } = useRainviewerManifest();
   const [frameIndex, setFrameIndex] = useState(0);
   // Default to PAUSED. Autoplay swaps tile layers every 700ms which
@@ -291,9 +309,10 @@ export default function RadarMapInner({
   const precipLabel = season === "winter" ? "Snow" : "Rain";
   const PrecipIcon = season === "winter" ? CloudSnow : CloudRain;
 
-  // Windy embed URL — built per-region. Snow overlay in winter, rain in green.
+  // Windy embed URL — built per-region. The `overlay` param is driven
+  // by the user's current selection so the Snow/Wind/Temp/Radar pills
+  // re-render the iframe with the chosen layer at the same zoom.
   const windyUrl = useMemo(() => {
-    const overlay = season === "winter" ? "snow" : "rain";
     const params = new URLSearchParams({
       lat: String(regionCfg.windy.lat),
       lon: String(regionCfg.windy.lon),
@@ -301,7 +320,7 @@ export default function RadarMapInner({
       detailLon: String(regionCfg.windy.lon),
       zoom: String(regionCfg.windy.zoom),
       level: "surface",
-      overlay,
+      overlay: windyOverlay,
       product: "ecmwf",
       menu: "",
       message: "true",
@@ -314,7 +333,7 @@ export default function RadarMapInner({
       radarRange: "-1",
     });
     return `https://embed.windy.com/embed2.html?${params.toString()}`;
-  }, [season, regionCfg.windy]);
+  }, [windyOverlay, regionCfg.windy]);
 
   return (
     <div className="relative w-full h-[520px] md:h-[640px] bg-slate-100">
@@ -332,7 +351,7 @@ export default function RadarMapInner({
           active={view === "windy"}
           onClick={() => setView("windy")}
           icon={Globe2}
-          label="Windy"
+          label="Expert"
         />
         <ModePill
           active={view === "official"}
@@ -343,14 +362,45 @@ export default function RadarMapInner({
       </div>
 
       {view === "windy" && (
-        <iframe
-          title="Windy weather map"
-          src={windyUrl}
-          className="absolute inset-0 w-full h-full border-0"
-          sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
-          referrerPolicy="no-referrer"
-          loading="lazy"
-        />
+        <>
+          {/* Overlay switcher placed BEFORE the iframe in DOM order so
+              keyboard users hit the layer pills before tab-focus enters
+              the third-party Windy frame (which can trap focus). */}
+          <div className="absolute top-3 right-3 z-[1000] flex flex-col gap-1 rounded-xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-lg p-1">
+            <ModePill
+              active={windyOverlay === "snow"}
+              onClick={() => setWindyOverlay("snow")}
+              icon={CloudSnow}
+              label="Snow"
+            />
+            <ModePill
+              active={windyOverlay === "wind"}
+              onClick={() => setWindyOverlay("wind")}
+              icon={Wind}
+              label="Wind"
+            />
+            <ModePill
+              active={windyOverlay === "temp"}
+              onClick={() => setWindyOverlay("temp")}
+              icon={Thermometer}
+              label="Temp"
+            />
+            <ModePill
+              active={windyOverlay === "rain"}
+              onClick={() => setWindyOverlay("rain")}
+              icon={CloudRain}
+              label="Radar"
+            />
+          </div>
+          <iframe
+            title="Expert weather map · snow, wind, temperature and radar"
+            src={windyUrl}
+            className="absolute inset-0 w-full h-full border-0"
+            sandbox="allow-scripts allow-same-origin allow-popups"
+            referrerPolicy="no-referrer"
+            loading="lazy"
+          />
+        </>
       )}
 
       {view === "official" && (
