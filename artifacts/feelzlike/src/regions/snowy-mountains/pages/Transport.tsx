@@ -17,6 +17,7 @@ import {
   useLanguage,
   useBaseTown,
   useRegion,
+  useOptionalSeason,
   LiveBadge,
   PageHeader,
 } from "@workspace/feelzlike-shell";
@@ -44,19 +45,28 @@ const SNOWY_MTNS_BUS_URL = "https://coomacoaches.com.au/snowy-mountains-bus-serv
  */
 
 const COOMA_COACHES_ID = "au-cooma-coaches";
+// Operators / sub-services that only run during the AU ski season.
+// Hidden in green season (Dec-May) so visitors aren't told to book a
+// service that isn't operating.
+const WINTER_ONLY_OPERATOR_IDS = new Set(["au-snoexpress"]);
 
 export function SnowyTransport() {
   const { region } = useRegion();
   const { t } = useLanguage();
   const { town } = useBaseTown();
+  const seasonCtx = useOptionalSeason();
+  const isGreen = seasonCtx?.isGreen === true;
 
   const cooma = useMemo(
     () => SNOWY_MOUNTAINS_TRANSPORT.find((p) => p.id === COOMA_COACHES_ID),
     [],
   );
   const others = useMemo(
-    () => SNOWY_MOUNTAINS_TRANSPORT.filter((p) => p.id !== COOMA_COACHES_ID),
-    [],
+    () =>
+      SNOWY_MOUNTAINS_TRANSPORT.filter(
+        (p) => p.id !== COOMA_COACHES_ID && !(isGreen && WINTER_ONLY_OPERATOR_IDS.has(p.id)),
+      ),
+    [isGreen],
   );
 
   return (
@@ -65,10 +75,17 @@ export function SnowyTransport() {
         <PageHeader
           byline={`${region.name}${town ? ` · ${t(town.name, town.nameJa)}` : ""}`}
           title={t("Transport", "交通")}
-          description={t(
-            "Buses, shuttles, trains and shared transport into the Snowy Mountains. Cooma Coaches is the daily Canberra ↔ Jindabyne lifeline.",
-            "スノーマウンテンズへのバス・送迎・電車。Cooma Coachesがキャンベラ ↔ ジンダバインの毎日運行の主要路線です。",
-          )}
+          description={
+            isGreen
+              ? t(
+                  "Buses, charters and shared transport into the Snowy Mountains. Cooma Coaches handles the year-round work; the seasonal ski-shuttle network returns in winter.",
+                  "スノーマウンテンズへのバス・チャーター・送迎。年間を通じてはCooma Coachesが中心。冬季限定のスキーシャトル網は冬に再開します。",
+                )
+              : t(
+                  "Buses, shuttles, trains and shared transport into the Snowy Mountains. Cooma Coaches is the daily Canberra ↔ Jindabyne lifeline.",
+                  "スノーマウンテンズへのバス・送迎・電車。Cooma Coachesがキャンベラ ↔ ジンダバインの毎日運行の主要路線です。",
+                )
+          }
           badge={<LiveBadge tone="onDark" label={t("Curated", "編集済")} />}
         />
       </div>
@@ -91,10 +108,15 @@ export function SnowyTransport() {
                   {cooma.name}
                 </h2>
                 <p className="text-foreground/90 mt-3 leading-relaxed">
-                  {t(
-                    "Cooma's local operator. Cooma Coaches operates the Snowy Mountains Bus Service in winter plus charters and school runs.",
-                    "クーマの地元事業者。Cooma Coachesは冬季にスノーマウンテンズバスサービスを運行し、貸切バスやスクールバスも手がけています。",
-                  )}
+                  {isGreen
+                    ? t(
+                        "Cooma's local operator. Year-round charters, school runs and group bookings - the seasonal Snowy Mountains Bus Service to the resorts returns each winter.",
+                        "クーマの地元事業者。通年で貸切・スクール・団体予約を担当。冬季限定のスノーマウンテンズバスサービスは毎年冬に再開。",
+                      )
+                    : t(
+                        "Cooma's local operator. Cooma Coaches operates the Snowy Mountains Bus Service in winter plus charters and school runs.",
+                        "クーマの地元事業者。Cooma Coachesは冬季にスノーマウンテンズバスサービスを運行し、貸切バスやスクールバスも手がけています。",
+                      )}
                 </p>
 
                 <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
@@ -124,9 +146,9 @@ export function SnowyTransport() {
             </div>
 
             {/* Snowy Mountains Bus Service breakout - Cooma Coaches' named
-                daily Canberra ↔ Jindabyne service. Called out separately
-                so visitors know which Cooma Coaches product to actually
-                book. */}
+                ski-season Canberra ↔ Jindabyne service. Hidden in green
+                season because the daily route only runs in winter. */}
+            {!isGreen && (
             <div className="mt-6 pt-6 border-t border-blue-200/60">
               <div className="rounded-xl border-2 border-blue-300 bg-white p-5">
                 <div className="flex items-start gap-3">
@@ -160,6 +182,7 @@ export function SnowyTransport() {
                 </div>
               </div>
             </div>
+            )}
 
           </article>
         </section>
@@ -169,7 +192,10 @@ export function SnowyTransport() {
           Sits between the Cooma Coaches hero and the other operators
           because it is the only way to reach Perisher Valley by car
           without chains in winter, and the only practical option after
-          dark / before lift access. */}
+          dark / before lift access. Hidden in green season — Skitube
+          either doesn't run or runs heavily reduced summer service that
+          isn't reflected in this winter-priced card. */}
+      {!isGreen && (
       <section className="px-4 md:px-10 pt-5 md:pt-8">
         <article className="rounded-2xl border border-sky-200 bg-gradient-to-br from-sky-50 via-white to-sky-50/40 p-6 md:p-8 shadow-sm">
           <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-5">
@@ -237,6 +263,7 @@ export function SnowyTransport() {
           </div>
         </article>
       </section>
+      )}
 
       {/* Other operators */}
       <section className="px-4 md:px-10 pt-5">
