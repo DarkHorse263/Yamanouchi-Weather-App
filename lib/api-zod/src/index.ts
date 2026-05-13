@@ -7,4 +7,3 @@
 // `@workspace/api-zod/generated/types/<name>` if you ever need a pure
 // interface without pulling in zod.
 export * from "./generated/api";
-export * from "./generated/types";

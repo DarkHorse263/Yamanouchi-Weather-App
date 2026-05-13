@@ -40,8 +40,10 @@ router.post("/internal/alerts/run", async (req, res): Promise<void> => {
     const report = await runAlertEvaluator({ dryRun });
     res.json({ ok: true, dryRun, report });
   } catch (err) {
+    // Admin-gated, but still keep the response minimal · Sentry has the
+    // full error context server-side; cron consumers only need a status.
     console.error("[/internal/alerts/run] error:", err);
-    res.status(500).json({ error: "EVALUATOR_FAILED", message: err instanceof Error ? err.message : String(err) });
+    res.status(500).json({ error: "EVALUATOR_FAILED" });
   }
 });
 

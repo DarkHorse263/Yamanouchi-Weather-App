@@ -8,6 +8,13 @@ out-tsc
 .expo
 .expo-shared
 
+# secrets · never commit these. Real secrets live in Replit Secrets, not
+# .replit's [userenv.shared] block (which IS tracked). If you find a
+# secret in .replit, delete it via the secrets tab instead.
+.env
+.env.*
+!.env.example
+
 # dependencies
 node_modules
 

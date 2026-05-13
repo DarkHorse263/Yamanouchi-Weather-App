@@ -339,8 +339,11 @@ router.get("/regions", async (_req, res) => {
       refreshIntervalMin: 15,
     });
   } catch (err) {
+    // Log full error server-side (Sentry catches it via the express handler)
+    // but only surface a generic message to the client. Echoing String(err)
+    // can leak upstream URLs, stack snippets, or library internals.
     console.error("[regions] error:", err);
-    res.status(500).json({ error: "REGIONS_FETCH_ERROR", message: String(err) });
+    res.status(500).json({ error: "REGIONS_FETCH_ERROR" });
   }
 });
 
