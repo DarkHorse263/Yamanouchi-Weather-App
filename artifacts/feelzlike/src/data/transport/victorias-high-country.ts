@@ -60,7 +60,7 @@ export const VICTORIAS_HIGH_COUNTRY_TRANSPORT: TransportProviderList = [
     name: "Snow Bus Australia",
     type: "bus",
     operator: "Snow Bus Australia",
-    phone: null,
+    phone: "1300 781 221",
     website: "https://www.snowbusaustralia.com.au",
     route_summary:
       "The Melbourne ski-coach. Daily winter services from Melbourne CBD and Tullamarine to Mt Buller, Mt Hotham, Falls Creek and Dinner Plain · the all-resort coach off-mountain visitors actually book.",
