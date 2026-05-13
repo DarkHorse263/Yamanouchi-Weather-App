@@ -23,12 +23,22 @@ import {
   type TownWeatherDaily,
   type TownWeatherHourly,
 } from "@/lib/town-weather";
+import {
+  useTownEnsemble,
+  confidencePhrase,
+  confidenceTone,
+  type TownEnsembleDay,
+} from "@/lib/town-ensemble";
 
 export function TownWeather() {
   const { region } = useRegion();
   const { t } = useLanguage();
   const { town } = useBaseTown();
   const q = useTownWeather(town?.lat, town?.lng);
+  const ensembleQ = useTownEnsemble(town?.lat, town?.lng, region.id);
+  const ensembleByDate = new Map<string, TownEnsembleDay>(
+    (ensembleQ.data?.days ?? []).map((d) => [d.date, d]),
+  );
 
   if (!town) {
     return (
@@ -76,9 +86,9 @@ export function TownWeather() {
           {q.data._stale && <StaleNotice meta={q.data._stale} t={t} />}
           <Hero current={q.data.current} town={t(town.name, town.nameJa)} />
           <Conditions current={q.data.current} t={t} />
-          <Today daily={q.data.daily[0]} t={t} />
+          <Today daily={q.data.daily[0]} ensemble={q.data.daily[0] ? ensembleByDate.get(q.data.daily[0].date) : undefined} t={t} />
           <Hourly hourly={q.data.hourly} t={t} />
-          <Outlook days={q.data.daily.slice(1, 7)} t={t} />
+          <Outlook days={q.data.daily.slice(1, 7)} ensembleByDate={ensembleByDate} t={t} />
           <Radar t={t} />
           <p className="byline text-muted-foreground/60 mt-10">
             {t(
@@ -280,15 +290,20 @@ function Conditions({
 
 function Today({
   daily,
+  ensemble,
   t,
 }: {
   daily: TownWeatherDaily | undefined;
+  ensemble: TownEnsembleDay | undefined;
   t: (en: string, ja: string) => string;
 }) {
   if (!daily) return null;
   return (
     <section className="mt-4 rounded-2xl border border-border bg-white p-5">
-      <p className="byline text-muted-foreground/70">{t("Today", "今日")}</p>
+      <div className="flex items-center justify-between gap-3 flex-wrap">
+        <p className="byline text-muted-foreground/70">{t("Today", "今日")}</p>
+        {ensemble && <ConfidencePill day={ensemble} t={t} />}
+      </div>
       <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4">
         <KV label={t("High", "最高")} value={daily.tempMax !== null ? `${Math.round(daily.tempMax)}°` : "-"} icon={Thermometer} />
         <KV label={t("Low", "最低")} value={daily.tempMin !== null ? `${Math.round(daily.tempMin)}°` : "-"} icon={Thermometer} />
@@ -306,6 +321,44 @@ function Today({
         />
       </div>
     </section>
+  );
+}
+
+/**
+ * Coloured pill that summarises ensemble agreement for one day. Used
+ * inline on the Today header (large) and as a footer line on each
+ * Outlook card (small). Phrase + tone come from town-ensemble lib so the
+ * UI stays a thin renderer.
+ */
+function ConfidencePill({
+  day,
+  t,
+  small = false,
+}: {
+  day: TownEnsembleDay;
+  t: (en: string, ja: string) => string;
+  small?: boolean;
+}) {
+  const tone = confidenceTone(day.confidence);
+  const phrase = confidencePhrase(day);
+  // Japanese stays generic ("models agree" / "models disagree") rather than
+  // rebuilding the phrase generator in JP - over-translating numbers in two
+  // languages risks drift. Keep the dot+label informative either way.
+  const jaLabel =
+    day.confidence === "high"
+      ? "モデル一致 · 信頼度高"
+      : day.confidence === "medium"
+        ? "モデル不一致 · 直前に再確認"
+        : "モデル大きく不一致";
+  const sizeClass = small ? "text-[11px] px-2 py-0.5" : "text-xs px-2.5 py-1";
+  return (
+    <span
+      className={`inline-flex items-center gap-1.5 rounded-full border ${tone.pill} ${sizeClass} font-medium`}
+      title={`${day.sourcesCount} sources · spread ±${day.tempMaxSpread.toFixed(1)}°`}
+    >
+      <span className={`w-1.5 h-1.5 rounded-full ${tone.dot}`} aria-hidden="true" />
+      <span>{t(phrase, jaLabel)}</span>
+    </span>
   );
 }
 
@@ -366,9 +419,11 @@ function Hourly({
 
 function Outlook({
   days,
+  ensembleByDate,
   t,
 }: {
   days: TownWeatherDaily[];
+  ensembleByDate: Map<string, TownEnsembleDay>;
   t: (en: string, ja: string) => string;
 }) {
   if (days.length === 0) return null;
@@ -378,6 +433,7 @@ function Outlook({
       <div className="mt-3 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
         {days.map((d) => {
           const Icon = pickIcon(d.weatherCode, true);
+          const dayEnsemble = ensembleByDate.get(d.date);
           return (
             <div
               key={d.date}
@@ -441,10 +497,22 @@ function Outlook({
                   }
                 />
               </div>
+
+              {dayEnsemble && (
+                <div className="mt-2.5 w-full">
+                  <ConfidencePill day={dayEnsemble} t={t} small />
+                </div>
+              )}
             </div>
           );
         })}
       </div>
+      <p className="text-[10px] text-muted-foreground/60 mt-3 leading-relaxed">
+        {t(
+          "Confidence reflects how much the global weather models agree. Tap any day for hourly detail.",
+          "信頼度は世界の気象モデルの一致度。各日をタップで時間別へ。",
+        )}
+      </p>
     </section>
   );
 }
