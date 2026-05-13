@@ -27,7 +27,11 @@ if (dsn) {
     replaysOnErrorSampleRate: 1.0,
     integrations: [
       Sentry.browserTracingIntegration(),
-      Sentry.replayIntegration({ maskAllText: false, blockAllMedia: false }),
+      // Privacy-safe replay defaults: mask all text content and block media
+      // so session replay carries DOM structure + interactions only, never
+      // user-visible text, email inputs, or images. Aligns with the Privacy
+      // Policy claim that crash diagnostics are PII-redacted.
+      Sentry.replayIntegration({ maskAllText: true, blockAllMedia: true }),
     ],
     // Distribute trace headers to our own API so backend Sentry events link to
     // the originating browser transaction. Loose regex covers the dev proxy URL

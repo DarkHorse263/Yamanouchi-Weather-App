@@ -41,8 +41,16 @@ export function HomeFooter() {
             About
           </p>
           <ul className="space-y-2 text-slate-700">
-            {/* TODO(launch): wire real Privacy / Terms pages - currently the
-                consent banner exposes preferences directly. */}
+            <li>
+              <a className="hover:text-sky-700" href="/legal/privacy">
+                Privacy
+              </a>
+            </li>
+            <li>
+              <a className="hover:text-sky-700" href="/legal/terms">
+                Terms
+              </a>
+            </li>
             <li>
               <a
                 className="hover:text-sky-700"
@@ -52,7 +60,7 @@ export function HomeFooter() {
                   window.dispatchEvent(new CustomEvent("feelzlike:open-consent"));
                 }}
               >
-                Privacy & cookies
+                Cookie preferences
               </a>
             </li>
             <li>

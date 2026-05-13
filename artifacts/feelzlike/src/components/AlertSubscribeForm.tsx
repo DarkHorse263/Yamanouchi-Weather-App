@@ -220,7 +220,7 @@ export function AlertSubscribeForm({ defaultRegion }: Props) {
             "I agree to receive powder alerts at this email address. I can unsubscribe at any time. See the ",
             "このメールアドレスでパウダーアラートを受け取ることに同意します。いつでも購読解除できます。"
           )}
-          <a href="/privacy" className="underline hover:text-foreground">{t("privacy policy", "プライバシーポリシー")}</a>.
+          <a href="/legal/privacy" className="underline hover:text-foreground">{t("privacy policy", "プライバシーポリシー")}</a>.
         </span>
       </label>
 

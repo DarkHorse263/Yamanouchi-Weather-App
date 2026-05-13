@@ -31,7 +31,7 @@ export function ConsentBanner() {
           <p className="font-semibold text-slate-900">We use cookies for essential features and (with your permission) analytics + ads.</p>
           <p className="mt-1 text-xs text-slate-500">
             You can change your choice any time from the footer. See our{" "}
-            <a href="/privacy" className="underline underline-offset-2 hover:text-sky-700">
+            <a href="/legal/privacy" className="underline underline-offset-2 hover:text-sky-700">
               privacy policy
             </a>
             .
