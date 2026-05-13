@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { MapContainer, TileLayer, Marker, Tooltip, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { Cloud, CloudSnow, CloudRain, Layers, Pause, Play, Map as MapIcon, Radio, Globe2 } from "lucide-react";
+import { Cloud, CloudSnow, CloudRain, Layers, Pause, Play, Map as MapIcon, Radio, Globe2, Mountain } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface RadarMapInnerProps {
@@ -223,6 +223,11 @@ export default function RadarMapInner({
   // "repaint lag" when users zoom out. Users can hit play to animate.
   const [playing, setPlaying] = useState(false);
   const [mode, setMode] = useState<LayerMode>("all");
+  // Terrain off by default · clean light basemap (CARTO Positron) makes
+  // the precip blob far easier to read. AccuWeather plays it the same
+  // way · only show terrain on the dedicated "current conditions" map.
+  // Power users (planning a hike up Bogong) can flip it on.
+  const [showTerrain, setShowTerrain] = useState(false);
   const tickRef = useRef<number | null>(null);
 
   // Combined radar timeline: past frames followed by nowcast frames.
@@ -354,13 +359,31 @@ export default function RadarMapInner({
       >
         <RecenterOnChange center={centerTuple} zoom={zoom} />
 
-        {/* Topographic basemap: ski runs, contour lines, rivers. */}
+        {/* Clean light basemap (CARTO Positron, free, no key, CDN-hosted).
+            Soft grey roads + faint labels = maximum contrast for the
+            blue precip overlay. Terrain detail is intentionally off by
+            default and toggled in via the "Terrain" pill below. */}
         <TileLayer
-          attribution='© <a href="https://opentopomap.org">OpenTopoMap</a> · © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
-          subdomains={["a", "b", "c"]}
-          maxNativeZoom={15}
+          attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors · © <a href="https://carto.com/attributions">CARTO</a>'
+          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          subdomains={["a", "b", "c", "d"]}
+          maxNativeZoom={19}
         />
+
+        {/* Optional topographic overlay · semi-transparent so the basemap
+            labels still read through. Adds contour lines + ski runs +
+            shaded relief for users who want the terrain context. */}
+        {showTerrain && (
+          <TileLayer
+            key="terrain"
+            attribution='© <a href="https://opentopomap.org">OpenTopoMap</a>'
+            url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
+            subdomains={["a", "b", "c"]}
+            maxNativeZoom={15}
+            opacity={0.55}
+            zIndex={150}
+          />
+        )}
 
         {/* Cloud layer (infrared satellite). Sits below precip so storm
             cells stay crisp on top of the cloud field.
@@ -434,6 +457,13 @@ export default function RadarMapInner({
           onClick={() => setMode("precip")}
           icon={PrecipIcon}
           label={precipLabel}
+        />
+        <div className="my-1 h-px bg-slate-200" aria-hidden="true" />
+        <ModePill
+          active={showTerrain}
+          onClick={() => setShowTerrain((v) => !v)}
+          icon={Mountain}
+          label="Terrain"
         />
       </div>
       )}
