@@ -58,16 +58,50 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
   },
 };
 
-const DEFAULT_CENTER = { lat: -36.42, lng: 148.42 };
 const DEFAULT_ZOOM = 9;
 
-const RESORT_PINS: Array<{ id: string; name: string; lat: number; lng: number }> = [
-  { id: "perisher", name: "Perisher", lat: -36.3717, lng: 148.4086 },
-  { id: "thredbo", name: "Thredbo", lat: -36.5054, lng: 148.3089 },
-  { id: "charlottes-pass", name: "Charlotte's Pass", lat: -36.4314, lng: 148.3297 },
-  { id: "selwyn", name: "Selwyn", lat: -35.8383, lng: 148.5267 },
-  { id: "jindabyne", name: "Jindabyne", lat: -36.4106, lng: 148.6206 },
-];
+interface PinSpec { id: string; name: string; lat: number; lng: number; accent: string }
+
+// Per-region defaults: centre + pins. Used when the caller (e.g. the
+// town weather page) doesn't pass an explicit center/markers. Previously
+// the component always fell back to Snowy Mountains pins, which surfaced
+// Perisher/Thredbo/Jindabyne on VHC and Japan pages.
+const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number }; pins: PinSpec[] }> = {
+  "snowy-mountains": {
+    center: { lat: -36.42, lng: 148.42 },
+    pins: [
+      { id: "perisher", name: "Perisher", lat: -36.3717, lng: 148.4086, accent: "#f97316" },
+      { id: "thredbo", name: "Thredbo", lat: -36.5054, lng: 148.3089, accent: "#f97316" },
+      { id: "charlottes-pass", name: "Charlotte's Pass", lat: -36.4314, lng: 148.3297, accent: "#a855f7" },
+      { id: "selwyn", name: "Selwyn", lat: -35.8383, lng: 148.5267, accent: "#10b981" },
+      { id: "jindabyne", name: "Jindabyne", lat: -36.4106, lng: 148.6206, accent: "#0ea5e9" },
+    ],
+  },
+  "victorias-high-country": {
+    center: { lat: -36.86, lng: 147.27 },
+    pins: [
+      { id: "mt-buller", name: "Mt Buller", lat: -37.1456, lng: 146.4391, accent: "#f97316" },
+      { id: "mt-stirling", name: "Mt Stirling", lat: -37.1167, lng: 146.4500, accent: "#a855f7" },
+      { id: "falls-creek", name: "Falls Creek", lat: -36.8628, lng: 147.2778, accent: "#f97316" },
+      { id: "mt-hotham", name: "Mt Hotham", lat: -36.9779, lng: 147.1361, accent: "#f97316" },
+      { id: "lake-mountain", name: "Lake Mountain", lat: -37.5181, lng: 145.8983, accent: "#10b981" },
+      { id: "mt-donna-buang", name: "Mt Donna Buang", lat: -37.6961, lng: 145.6989, accent: "#10b981" },
+      { id: "mount-beauty", name: "Mount Beauty", lat: -36.7327, lng: 147.1696, accent: "#0ea5e9" },
+      { id: "bright", name: "Bright", lat: -36.7300, lng: 146.9617, accent: "#0ea5e9" },
+      { id: "mansfield", name: "Mansfield", lat: -37.0539, lng: 146.0894, accent: "#0ea5e9" },
+    ],
+  },
+  yamanouchi: {
+    center: { lat: 36.74, lng: 138.42 },
+    pins: [
+      { id: "shiga-kogen", name: "Shiga Kogen", lat: 36.7167, lng: 138.5083, accent: "#f97316" },
+      { id: "ryuoo", name: "Ryuoo", lat: 36.7458, lng: 138.4283, accent: "#f97316" },
+      { id: "kita-shiga", name: "Kita Shiga Kogen", lat: 36.7600, lng: 138.4750, accent: "#a855f7" },
+      { id: "yudanaka", name: "Yudanaka", lat: 36.7406, lng: 138.4222, accent: "#0ea5e9" },
+      { id: "shibu", name: "Shibu Onsen", lat: 36.7367, lng: 138.4214, accent: "#0ea5e9" },
+    ],
+  },
+};
 
 // RainViewer is a free public weather-tile API: global precipitation
 // radar (past 2hr + 30min nowcast) and Himawari/GOES infrared satellite
@@ -137,13 +171,15 @@ function makePinIcon(label: string, accent: string): L.DivIcon {
   });
 }
 
-const PIN_ICONS: Record<string, L.DivIcon> = {
-  jindabyne: makePinIcon("Jindabyne", "#0ea5e9"),
-  perisher: makePinIcon("Perisher", "#f97316"),
-  thredbo: makePinIcon("Thredbo", "#f97316"),
-  "charlottes-pass": makePinIcon("Charlotte's Pass", "#a855f7"),
-  selwyn: makePinIcon("Selwyn", "#10b981"),
-};
+// Build the pin icon cache from the region defaults so adding a region
+// only requires editing REGION_DEFAULTS above. Caller-supplied markers
+// (from the `markers` prop) fall back to a generic blue pin via
+// makePinIcon at render time.
+const PIN_ICONS: Record<string, L.DivIcon> = Object.fromEntries(
+  Object.values(REGION_DEFAULTS).flatMap((r) =>
+    r.pins.map((p) => [p.id, makePinIcon(p.name, p.accent)] as const),
+  ),
+);
 
 function RecenterOnChange({ center, zoom }: { center: [number, number]; zoom: number }) {
   const map = useMap();
@@ -170,17 +206,22 @@ function satelliteTileUrl(host: string, path: string): string {
 }
 
 export default function RadarMapInner({
-  center = DEFAULT_CENTER,
+  center,
   zoom = DEFAULT_ZOOM,
   markers,
   season = "winter",
   region = "snowy-mountains",
 }: RadarMapInnerProps) {
   const regionCfg = REGION_CONFIG[region];
+  const regionDefaults = REGION_DEFAULTS[region];
+  const effectiveCenter = center ?? regionDefaults.center;
   const [view, setView] = useState<ViewMode>("interactive");
   const { manifest, loading, error } = useRainviewerManifest();
   const [frameIndex, setFrameIndex] = useState(0);
-  const [playing, setPlaying] = useState(true);
+  // Default to PAUSED. Autoplay swaps tile layers every 700ms which
+  // visibly fights leaflet's zoom-level retiling and creates a long
+  // "repaint lag" when users zoom out. Users can hit play to animate.
+  const [playing, setPlaying] = useState(false);
   const [mode, setMode] = useState<LayerMode>("all");
   const tickRef = useRef<number | null>(null);
 
@@ -223,10 +264,10 @@ export default function RadarMapInner({
     }
   }, [radarFrames.length, nowcastStart]);
 
-  const pins = useMemo(() => markers ?? RESORT_PINS, [markers]);
+  const pins = useMemo(() => markers ?? regionDefaults.pins, [markers, regionDefaults]);
   const currentRadar = radarFrames[frameIndex];
   const stamp = currentRadar ? formatStamp(currentRadar.time) : null;
-  const centerTuple: [number, number] = [center.lat, center.lng];
+  const centerTuple: [number, number] = [effectiveCenter.lat, effectiveCenter.lng];
 
   const showRadar = mode === "all" || mode === "precip";
   const showClouds = mode === "all" || mode === "clouds";
