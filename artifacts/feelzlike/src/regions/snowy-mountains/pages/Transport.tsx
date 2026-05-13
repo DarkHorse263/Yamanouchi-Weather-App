@@ -28,6 +28,7 @@ import {
   RideshareUnavailableNotice,
   townHasRideshare,
 } from "@/components/RideshareUnavailableNotice";
+import { KosciuszkoParkFeeCard } from "@/regions/snowy-mountains/components/KosciuszkoParkFeeCard";
 import coomaCoachesLogo from "@assets/CC_-_Colour_JM_Red_1778132452167.png";
 
 const SNOWY_MTNS_BUS_URL = "https://coomacoaches.com.au/snowy-mountains-bus-service/";
@@ -264,6 +265,14 @@ export function SnowyTransport() {
         </article>
       </section>
       )}
+
+      {/* Kosciuszko NP vehicle entry fee · driving into the park costs a
+          per-vehicle fee separate from any lift pass. Sits between the
+          Skitube card and other operators because the Skitube exemption
+          tip inside the card flows directly off the rail option above. */}
+      <section className="px-4 md:px-10 pt-5 md:pt-8">
+        <KosciuszkoParkFeeCard variant="transport" t={t} />
+      </section>
 
       {/* Other operators */}
       <section className="px-4 md:px-10 pt-5">
