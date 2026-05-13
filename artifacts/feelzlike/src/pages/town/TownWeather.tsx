@@ -39,6 +39,10 @@ export function TownWeather() {
   const ensembleByDate = new Map<string, TownEnsembleDay>(
     (ensembleQ.data?.days ?? []).map((d) => [d.date, d]),
   );
+  // Season-aware page subtitle: avoid promising "snow radar" in green season
+  // (e.g. AU resorts in May). Falls back to winter when no SeasonProvider
+  // wraps the page, which preserves original copy in winter-only contexts.
+  const pageSeason = useOptionalSeason()?.season ?? "winter";
 
   if (!town) {
     return (
@@ -54,8 +58,12 @@ export function TownWeather() {
         byline={`${region.name} · ${t(town.name, town.nameJa)}`}
         title={t(`${town.name} weather forecast`, `${town.name}の天気予報`)}
         description={t(
-          "Current, hourly and 7-day outlook for town. Live snow radar below.",
-          "町の現在・時間別・7日間予報。下に降雪レーダー。",
+          pageSeason === "winter"
+            ? "Current, hourly and 7-day outlook for town. Live snow radar below."
+            : "Current, hourly and 7-day outlook for town. Live rain radar below.",
+          pageSeason === "winter"
+            ? "町の現在・時間別・7日間予報。下に降雪レーダー。"
+            : "町の現在・時間別・7日間予報。下に降雨レーダー。",
         )}
         stamp={
           <UpdateStamp
