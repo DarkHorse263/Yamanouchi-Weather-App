@@ -4,11 +4,13 @@ import { ArrowUpRight, MapPin, Mountain } from "lucide-react";
 import {
   useRegion,
   useLanguage,
+  useOptionalSeason,
   PageHeader,
 } from "@workspace/feelzlike-shell";
 import { REGION_COUNTRY, COUNTRY_META } from "@/regions";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { breadcrumbSchema } from "@/lib/seo/jsonLd";
+import { DailyPick } from "@/components/DailyPick";
 
 /**
  * Region landing - the second hop in the Country > Region > Town flow.
@@ -19,6 +21,11 @@ import { breadcrumbSchema } from "@/lib/seo/jsonLd";
 export function RegionHome() {
   const { region } = useRegion();
   const { t } = useLanguage();
+  const seasonCtx = useOptionalSeason();
+  // Daily Pick is winter-only · in summer the "best resort to ride today"
+  // doesn't make sense (most are closed). Limit to regions that ship a
+  // mountains list with stable ids so the API has something to score.
+  const showDailyPick = seasonCtx?.season === "winter" && (region.mountains ?? []).length > 0;
 
   const towns = region.baseTowns ?? [];
   const mountainsById = new Map((region.mountains ?? []).map((m) => [m.id, m]));
@@ -60,6 +67,16 @@ export function RegionHome() {
         title={region.name}
         description={t("Pick a base town to see weather, roads and cams scoped to where you stay.", "拠点の町を選んでください。天気・道路・カメラが滞在エリアに合わせて表示されます。")}
       />
+
+      {showDailyPick && (
+        <div className="mt-8">
+          <DailyPick
+            regionId={region.id}
+            resorts={(region.mountains ?? []).map((m) => ({ id: m.id, name: m.name }))}
+            resortHrefPattern="/mountain/:id"
+          />
+        </div>
+      )}
 
       {towns.length === 0 ? (
         <p className="mt-8 text-sm text-muted-foreground">

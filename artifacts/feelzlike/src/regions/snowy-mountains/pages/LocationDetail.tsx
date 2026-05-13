@@ -73,7 +73,8 @@ import { PowderCalendar } from "@/components/PowderCalendar";
 import { LiftWindHoldPanel } from "@/components/LiftWindHoldPanel";
 import { getLiftsForMountain } from "@/data/lifts";
 import { POWDER_THRESHOLDS_AU } from "@/types/weather";
-import { PremiumGate } from "@workspace/feelzlike-shell";
+import { PremiumGate, useOptionalSeason } from "@workspace/feelzlike-shell";
+import { ThredboSummer } from "../components/ThredboSummer";
 import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
 
 type LocationId = "thredbo" | "perisher" | "charlottes-pass" | "selwyn" | "jindabyne";
@@ -122,6 +123,14 @@ export default function LocationDetail() {
   const { data: webcamData } = useGetLocationWebcams(locationId, { query: { enabled: !!locationId } as never });
   const isResort = locationId === "thredbo" || locationId === "perisher" || locationId === "charlottes-pass" || locationId === "selwyn";
   const { data: liftData } = useGetLocationLiftStatus(locationId as any, { query: { enabled: isResort } as never });
+  // Snowy region opts in to season-aware UI · in summer the snow/lift
+  // panels make no sense, so we hide them and surface alternative content
+  // (Thredbo is the only resort that operates year-round, so it gets a
+  // dedicated summer panel; the others just drop the lift card).
+  const seasonCtx = useOptionalSeason();
+  const isSummer = seasonCtx?.season === "green";
+  const showLiftAndDials = !isSummer;
+  const showThredboSummer = isSummer && locationId === "thredbo";
 
   const [activeChartMetric, setActiveChartMetric] = useState<"temperature" | "snowfall" | "windSpeed">("temperature");
   const [now, setNow] = useState(() => Date.now());
@@ -529,11 +538,16 @@ export default function LocationDetail() {
           <PowderCalendar hourly={hourly} thresholds={POWDER_THRESHOLDS_AU} sectionNumber="" />
         )}
 
+        {showThredboSummer && <ThredboSummer />}
+
         {/* FREE · LIFT STATUS · moved above the Detailed conditions
             paywall so users see today's lift count before any paid
             content. Lift Hold Likely (the wind-driven prediction)
-            sits inside the paid bundle below it. */}
-        {isResort && liftData && (
+            sits inside the paid bundle below it.
+            Hidden in summer · snow/lift data is meaningless when resorts
+            are closed, and Thredbo's summer activities live in
+            <ThredboSummer /> above. */}
+        {showLiftAndDials && isResort && liftData && (
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -607,7 +621,10 @@ export default function LocationDetail() {
         {/* PREMIUM · Mountain dials · MountainSnapshot rings only.
             The wind-driven lift-hold call was removed here because the
             per-lift hold panel below already delivers it with finer
-            per-lift gust tolerances. Order matches Yamanouchi (May 2026 v5). */}
+            per-lift gust tolerances. Order matches Yamanouchi (May 2026 v5).
+            Same season gate as the lift card · the freezing-level / snow
+            rings are winter signals. */}
+        {showLiftAndDials && (
         <PremiumGate
           title="Mountain dials"
           titleJa="マウンテン計器盤"
@@ -629,6 +646,7 @@ export default function LocationDetail() {
             />
           )}
         </PremiumGate>
+        )}
 
         {/* PREMIUM · Per-lift hold forecast · hour-by-hour hold risk
             for each named lift on this mountain, using lift-specific
