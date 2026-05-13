@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { MapContainer, TileLayer, Marker, Tooltip, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { Cloud, CloudSnow, CloudRain, Layers, Pause, Play, Map as MapIcon, Radio, Globe2, Mountain } from "lucide-react";
+import { Cloud, CloudSnow, CloudRain, Layers, Pause, Play, Map as MapIcon, Radio, Globe2, Mountain, MountainSnow } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface RadarMapInnerProps {
@@ -233,6 +233,10 @@ export default function RadarMapInner({
   // way · only show terrain on the dedicated "current conditions" map.
   // Power users (planning a hike up Bogong) can flip it on.
   const [showTerrain, setShowTerrain] = useState(false);
+  // Ski pistes + lifts overlay (OpenSnowMap, free, OSM-derived). On by
+  // default in winter, off in green season since the runs aren't
+  // operating. Users can toggle either way regardless.
+  const [showPistes, setShowPistes] = useState(season === "winter");
   const tickRef = useRef<number | null>(null);
 
   // Combined radar timeline: past frames followed by nowcast frames.
@@ -390,6 +394,21 @@ export default function RadarMapInner({
           />
         )}
 
+        {/* Ski-specific overlay · OpenSnowMap renders graded piste lines
+            (green/blue/red/black per difficulty) plus chairlifts, gondolas
+            and cable-car routes. Free OSM-derived tiles, just attribution.
+            Sits above terrain but below precip so storm cells stay legible
+            on top of the runs. */}
+        {showPistes && (
+          <TileLayer
+            key="pistes"
+            attribution='Pistes <a href="https://www.opensnowmap.org/">OpenSnowMap</a> · data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://tiles.opensnowmap.org/pistes/{z}/{x}/{y}.png"
+            maxNativeZoom={18}
+            zIndex={250}
+          />
+        )}
+
         {/* Cloud layer (infrared satellite). Sits below precip so storm
             cells stay crisp on top of the cloud field.
             maxNativeZoom: RainViewer satellite tops out around z=6;
@@ -464,6 +483,12 @@ export default function RadarMapInner({
           label={precipLabel}
         />
         <div className="my-1 h-px bg-slate-200" aria-hidden="true" />
+        <ModePill
+          active={showPistes}
+          onClick={() => setShowPistes((v) => !v)}
+          icon={MountainSnow}
+          label="Pistes"
+        />
         <ModePill
           active={showTerrain}
           onClick={() => setShowTerrain((v) => !v)}
