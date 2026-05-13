@@ -73,6 +73,7 @@ export function TownWeather() {
         </p>
       ) : (
         <>
+          {q.data._stale && <StaleNotice meta={q.data._stale} t={t} />}
           <Hero current={q.data.current} town={t(town.name, town.nameJa)} />
           <Conditions current={q.data.current} t={t} />
           <Today daily={q.data.daily[0]} t={t} />
@@ -87,6 +88,43 @@ export function TownWeather() {
           </p>
         </>
       )}
+    </div>
+  );
+}
+
+function StaleNotice({
+  meta,
+  t,
+}: {
+  meta: import("@/lib/town-weather").TownWeatherStaleMeta;
+  t: (en: string, ja: string) => string;
+}) {
+  // Round to a friendly unit. <2min → "moments ago", <60min → "Xm ago",
+  // otherwise "Xh ago". Keeps the badge terse, matches brand voice.
+  const ageLabel = (() => {
+    const s = meta.ageSeconds;
+    if (s === null) return t("recently", "最近");
+    if (s < 120) return t("moments ago", "ほんの少し前");
+    if (s < 3600) return t(`${Math.round(s / 60)}m ago`, `${Math.round(s / 60)}分前`);
+    return t(`${Math.round(s / 3600)}h ago`, `${Math.round(s / 3600)}時間前`);
+  })();
+  return (
+    <div
+      role="status"
+      className="mt-6 rounded-2xl border border-amber-300/60 bg-amber-50 px-4 py-3 flex items-start gap-3"
+    >
+      <Cloud className="w-4 h-4 text-amber-700 mt-0.5 flex-shrink-0" strokeWidth={2} />
+      <div className="text-xs leading-relaxed">
+        <p className="font-semibold text-amber-900">
+          {t("Showing cached weather", "キャッシュ表示中")}
+        </p>
+        <p className="text-amber-800/90 mt-0.5">
+          {t(
+            `Live weather feed is having trouble · last good update ${ageLabel}.`,
+            `ライブ天気の取得に失敗しました · 最終取得は${ageLabel}。`,
+          )}
+        </p>
+      </div>
     </div>
   );
 }

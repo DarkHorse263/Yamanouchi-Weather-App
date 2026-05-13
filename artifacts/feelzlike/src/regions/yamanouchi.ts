@@ -112,6 +112,15 @@ export const yamanouchiRegion: RegionConfig = {
     { category: "Resorts", categoryJa: "スキー場", label: "Ryuoo Ski Park", labelJa: "竜王スキーパーク", url: "https://www.ryuoo.com/" },
     { category: "Resorts", categoryJa: "スキー場", label: "Kita-Shiga Kogen", labelJa: "北志賀高原", url: "https://www.kitashiga.co.jp/" },
     { category: "Onsen", categoryJa: "温泉", label: "Shibu Onsen Ryokan Association", labelJa: "渋温泉旅館組合", url: "https://www.shibuonsen.net/" },
+    // Backcountry safety · the Japan Avalanche Network (JAN) is the
+    // recognised national authority for avalanche bulletins in Japan and
+    // publishes Northern Nagano forecasts through the season. Surface it
+    // alongside the JMA volcanic warning page that covers Mt. Yokote /
+    // Shirane. Keep these prominent: Shiga sidecountry kills people every
+    // winter and we won't host backcountry users without surfacing the
+    // authoritative source.
+    { category: "Backcountry safety", categoryJa: "バックカントリー安全情報", label: "Japan Avalanche Network (JAN) · Northern Nagano bulletin", labelJa: "日本雪崩ネットワーク · 北信越エリア", url: "https://nadare.jp/" },
+    { category: "Backcountry safety", categoryJa: "バックカントリー安全情報", label: "JMA volcanic warning · Kusatsu-Shirane (above Shibutoge)", labelJa: "気象庁 · 草津白根山 火山情報", url: "https://www.jma.go.jp/bosai/volcano/" },
   ],
   weatherSource: {
     label: "Open-Meteo + JMA",

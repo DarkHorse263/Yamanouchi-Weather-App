@@ -55,6 +55,15 @@ export interface TownWeatherDaily {
   windGustMax: number | null;
 }
 
+export interface TownWeatherStaleMeta {
+  /** Approx age of the cached payload, in seconds. Parsed from `age=Xs`. */
+  ageSeconds: number | null;
+  /** "upstream-error" | "upstream-timeout" | other backend reason string. */
+  reason: string | null;
+  /** Upstream HTTP status that triggered the fallback (e.g. 502, 0 on net error). */
+  upstreamStatus: number | null;
+}
+
 export interface TownWeatherResponse {
   coords: { lat: number; lng: number };
   timezone: string;
@@ -62,6 +71,37 @@ export interface TownWeatherResponse {
   current: TownWeatherCurrent;
   hourly: TownWeatherHourly[];
   daily: TownWeatherDaily[];
+  /**
+   * Populated when the backend served this payload from the stale-on-error
+   * cache because the upstream weather API failed. Shape parsed out of the
+   * `X-Feelzlike-Stale` response header in the queryFn below. UI surfaces
+   * a small "served from cache" badge so users know data may be slightly old.
+   */
+  _stale?: TownWeatherStaleMeta | null;
+}
+
+/**
+ * Parse the X-Feelzlike-Stale header. Format set by the API:
+ *   `1; reason=<reason>; age=<n>s; upstream-status=<status>`
+ */
+function parseStaleHeader(value: string | null): TownWeatherStaleMeta | null {
+  if (!value) return null;
+  const parts = value.split(";").map((p) => p.trim());
+  if (parts[0] !== "1") return null;
+  const meta: TownWeatherStaleMeta = { ageSeconds: null, reason: null, upstreamStatus: null };
+  for (const p of parts.slice(1)) {
+    const [k, v] = p.split("=");
+    if (!k || v === undefined) continue;
+    if (k === "reason") meta.reason = v;
+    else if (k === "age") {
+      const n = parseInt(v.replace(/s$/, ""), 10);
+      if (!Number.isNaN(n)) meta.ageSeconds = n;
+    } else if (k === "upstream-status") {
+      const n = parseInt(v, 10);
+      if (!Number.isNaN(n)) meta.upstreamStatus = n;
+    }
+  }
+  return meta;
 }
 
 export function useTownWeather(lat: number | undefined, lng: number | undefined) {
@@ -72,7 +112,9 @@ export function useTownWeather(lat: number | undefined, lng: number | undefined)
     queryFn: async () => {
       const res = await fetch(`/api/town-weather?lat=${lat}&lng=${lng}`);
       if (!res.ok) throw new Error(`town-weather ${res.status}`);
-      return (await res.json()) as TownWeatherResponse;
+      const stale = parseStaleHeader(res.headers.get("X-Feelzlike-Stale"));
+      const body = (await res.json()) as TownWeatherResponse;
+      return { ...body, _stale: stale };
     },
   });
 }
