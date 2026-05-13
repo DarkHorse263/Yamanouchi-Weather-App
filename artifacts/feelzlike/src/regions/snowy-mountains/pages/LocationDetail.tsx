@@ -6,7 +6,6 @@ import { LoadingState } from "../components/ui/loading-state";
 import { ErrorState } from "../components/ui/error-state";
 import { ForecastChart } from "../components/weather/ForecastChart";
 import { EnsembleForecast } from "../components/weather/EnsembleForecast";
-import { KosciuszkoParkFeeCard } from "../components/KosciuszkoParkFeeCard";
 import { SafetyStrip } from "../components/weather/SafetyStrip";
 import { formatTemp } from "../lib/utils";
 import { motion } from "framer-motion";
@@ -528,20 +527,6 @@ export default function LocationDetail() {
             honest for the lower-snow Snowy range. */}
         {hourly && hourly.length > 0 && (
           <PowderCalendar hourly={hourly} thresholds={POWDER_THRESHOLDS_AU} sectionNumber="" />
-        )}
-
-        {/* FREE · Kosciuszko NP vehicle entry fee · sits above lift
-            status because it's the first logistics question for anyone
-            planning to drive in. Skitube exemption tip inside the card
-            tells Perisher visitors how to avoid it entirely. Gated to
-            resort pages (Thredbo, Perisher, Charlotte Pass, Selwyn) -
-            the only ones inside park boundaries. */}
-        {isResort && (
-          // LocationDetail is English-only (no useLanguage hook in this
-          // file or its parents) - pass an identity translator so the
-          // card renders English copy without forcing a page-wide i18n
-          // refactor for one component.
-          <KosciuszkoParkFeeCard variant="mountain" t={(en) => en} />
         )}
 
         {/* FREE · LIFT STATUS · moved above the Detailed conditions
