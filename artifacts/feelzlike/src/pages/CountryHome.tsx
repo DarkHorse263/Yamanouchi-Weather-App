@@ -68,7 +68,11 @@ export default function CountryHome({ code }: CountryHomeProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 md:gap-4 max-w-3xl mx-auto">
           {regions.map((region, i) => {
             const towns = region.baseTowns ?? [];
-            const mountains = region.mountains ?? [];
+            // Prefer the curated top-level rollup (e.g. Yamanouchi's 22
+            // sub-resorts collapse to "Shiga Kogen · Ryuoo · Yomase").
+            // Fall back to the raw mountains array for regions without one.
+            const mountainLabels = region.summaryMountains
+              ?? (region.mountains ?? []).map((m) => m.name);
             return (
               <motion.a
                 key={region.id}
@@ -101,8 +105,8 @@ export default function CountryHome({ code }: CountryHomeProps) {
                     <div>
                       <p className="byline text-muted-foreground/70">Mountains</p>
                       <p className="mt-1 font-semibold text-slate-700 leading-snug">
-                        {mountains.slice(0, 4).map((m) => m.name).join(" · ")}
-                        {mountains.length > 4 ? ` +${mountains.length - 4}` : ""}
+                        {mountainLabels.slice(0, 4).join(" · ")}
+                        {mountainLabels.length > 4 ? ` +${mountainLabels.length - 4}` : ""}
                       </p>
                     </div>
                   </div>

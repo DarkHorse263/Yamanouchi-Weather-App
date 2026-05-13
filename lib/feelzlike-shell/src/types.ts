@@ -159,6 +159,14 @@ export interface RegionConfig {
   resorts: ResortLink[];
   /** Mountains in this region. Used for the region overview cards and `/:region/mountain/:id`. */
   mountains?: MountainLink[];
+  /**
+   * Optional curated list of top-level mountain group names shown on the
+   * country home card (e.g. Yamanouchi rolls 22 sub-resorts up to
+   * "Shiga Kogen · Ryuoo · Yomase"). When omitted, the card falls back to
+   * the raw `mountains` array. Strings only · these are display labels,
+   * not links.
+   */
+  summaryMountains?: string[];
   /** Optional per-scope nav overrides. If absent, sensible defaults are used. */
   navOverrides?: Partial<Record<NavScope, NavItem[]>>;
   /** Localisation; omit if region is single-language English */

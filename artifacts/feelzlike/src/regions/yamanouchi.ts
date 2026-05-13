@@ -11,6 +11,11 @@ export const yamanouchiRegion: RegionConfig = {
   language: { locales: ["en", "ja"] },
   // Quick-pick nav strip - surfaces the most-asked-about mountains.
   // Today's Call ranks all 22 individually.
+  // Country-home card rollup: 22 sub-resorts collapse to the 3 top-level
+  // groups guests actually search for (Shiga Kogen as one ticket, plus
+  // Ryuoo and Yomase as standalone Kita-Shiga resorts). X-Jam and
+  // Komaruyama are intentionally hidden at this summary level.
+  summaryMountains: ["Shiga Kogen", "Ryuoo", "Yomase"],
   resorts: [
     { path: "/mountain/shiga-yakebitaiyama",   label: "Yakebitaiyama",        labelJa: "焼額山" },
     { path: "/mountain/shiga-okushiga-kogen",  label: "Okushiga Kogen",       labelJa: "奥志賀高原" },
