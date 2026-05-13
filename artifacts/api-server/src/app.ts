@@ -1,4 +1,4 @@
-import express, { type Express, type Request } from "express";
+import express, { type Express, type Request, type Response } from "express";
 import cors from "cors";
 import helmet from "helmet";
 import path from "path";
@@ -62,8 +62,23 @@ app.use(cors({
   // Credentials: true` with `Access-Control-Allow-Origin: *` anyway.
   credentials: false,
 }));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: "100kb" }));
+app.use(express.urlencoded({ extended: true, limit: "100kb" }));
+
+// Catch JSON parse errors (and any other body-parser SyntaxError) before they
+// bubble into Express's default HTML error page, which would leak a stack
+// trace. Returns a clean JSON 400 instead.
+app.use((err: unknown, _req: Request, res: Response, next: (e?: unknown) => void) => {
+  if (err && typeof err === "object" && "type" in err && (err as { type?: string }).type === "entity.parse.failed") {
+    res.status(400).json({ error: "INVALID_JSON" });
+    return;
+  }
+  if (err instanceof SyntaxError && "body" in err) {
+    res.status(400).json({ error: "INVALID_JSON" });
+    return;
+  }
+  next(err);
+});
 
 // ── Rate limiting ─────────────────────────────────────────────────────────
 // Generous default: 120 req/min per IP across the API. Health probes are exempt

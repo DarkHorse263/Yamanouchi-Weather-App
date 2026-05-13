@@ -1,4 +1,5 @@
 import { Router, type IRouter } from "express";
+import { z } from "zod";
 import { db, alertSubscribersTable } from "@workspace/db";
 import { eq } from "drizzle-orm";
 import { issueToken, verifyToken, isTokenStillValid } from "../lib/alertTokens.js";
@@ -55,6 +56,39 @@ function normaliseEmail(s: string): string {
   return s.trim().toLowerCase();
 }
 
+// Defence-in-depth body schemas. The existing as*() helpers still coerce
+// each field to a safe default; these schemas reject totally malformed
+// envelopes (non-objects, wrong-typed top-level fields) before anything else.
+const AlertsSubscribeBody = z
+  .object({
+    email: z.string().max(254),
+    consent: z.literal(true).or(z.boolean()),
+    regions: z.array(z.string()).optional(),
+    mountains: z.array(z.string()).optional(),
+    snowfallThresholdCm: z.union([z.number(), z.string()]).optional(),
+    horizonHours: z.union([z.number(), z.string()]).optional(),
+    delivery: z.string().optional(),
+    timezone: z.string().max(64).optional(),
+  })
+  .passthrough();
+
+const AlertsManagePutBody = z
+  .object({
+    regions: z.array(z.string()).optional(),
+    mountains: z.array(z.string()).optional(),
+    snowfallThresholdCm: z.union([z.number(), z.string()]).optional(),
+    horizonHours: z.union([z.number(), z.string()]).optional(),
+    delivery: z.string().optional(),
+    timezone: z.string().max(64).optional(),
+  })
+  .passthrough();
+
+const AlertsUnsubscribeBody = z
+  .object({
+    reason: z.string().max(200).optional(),
+  })
+  .passthrough();
+
 function publicSubscriberShape(row: {
   email: string; regions: string[]; mountains: string[];
   snowfallThresholdCm: number; horizonHours: number;
@@ -76,7 +110,12 @@ function publicSubscriberShape(row: {
 
 // ─── POST /alerts/subscribe ───────────────────────────────────────────────
 router.post("/alerts/subscribe", async (req, res): Promise<void> => {
-  const body = (req.body ?? {}) as Record<string, unknown>;
+  const schema = AlertsSubscribeBody.safeParse(req.body);
+  if (!schema.success) {
+    res.status(400).json({ error: "INVALID_BODY", message: "Request body is malformed." });
+    return;
+  }
+  const body = schema.data as Record<string, unknown>;
 
   if (!isValidEmail(body["email"])) {
     res.status(400).json({ error: "INVALID_EMAIL", message: "A valid email is required." });
@@ -240,7 +279,12 @@ router.put("/alerts/manage", async (req, res): Promise<void> => {
     res.status(400).json({ error: "INVALID_TOKEN", reason: result.reason });
     return;
   }
-  const body = (req.body ?? {}) as Record<string, unknown>;
+  const schema = AlertsManagePutBody.safeParse(req.body);
+  if (!schema.success) {
+    res.status(400).json({ error: "INVALID_BODY", message: "Request body is malformed." });
+    return;
+  }
+  const body = schema.data as Record<string, unknown>;
   const regions = asRegions(body["regions"]);
   if (regions.length === 0) {
     res.status(400).json({ error: "MISSING_REGIONS", message: "Pick at least one region." });
@@ -329,9 +373,12 @@ router.get("/alerts/unsubscribe", async (req, res): Promise<void> => {
 // ─── POST /alerts/unsubscribe?token=… ────────────────────────────────────
 router.post("/alerts/unsubscribe", async (req, res): Promise<void> => {
   const token = typeof req.query["token"] === "string" ? req.query["token"] : "";
-  const reason = typeof (req.body ?? {})["reason"] === "string"
-    ? String((req.body as Record<string, unknown>)["reason"]).slice(0, 200)
-    : null;
+  const schema = AlertsUnsubscribeBody.safeParse(req.body ?? {});
+  if (!schema.success) {
+    res.status(400).json({ error: "INVALID_BODY" });
+    return;
+  }
+  const reason = schema.data.reason ? schema.data.reason.slice(0, 200) : null;
   try {
     const result = await performUnsubscribe(token, reason);
     if (result.ok) {

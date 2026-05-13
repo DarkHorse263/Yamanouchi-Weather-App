@@ -40,8 +40,14 @@ interface RainViewerData {
 function useRainViewer() {
   const [data, setData] = useState<RainViewerData | null>(null);
   useEffect(() => {
+    // Proxy through our backend (caches for 60s, keeps the third-party
+    // host out of the browser CORS surface, lets us swap providers
+    // without a frontend release). BASE_URL is e.g. "/yamanouchi/" so
+    // the "/../api" trick resolves to "/api" regardless of region.
+    const apiBase = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/../api`.replace(/\/+$/, "");
+    const url = `${apiBase}/radar/rainviewer`;
     const load = () =>
-      fetch("https://api.rainviewer.com/public/weather-maps.json")
+      fetch(url)
         .then(r => r.json())
         .then(setData)
         .catch(() => {});

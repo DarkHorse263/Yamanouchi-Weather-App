@@ -167,4 +167,40 @@ router.get("/bom-radar/frames", async (req: Request, res: Response) => {
   }
 });
 
+// ─── RainViewer proxy ───────────────────────────────────────────────────
+// Yamanouchi's map uses RainViewer for radar tiles. Proxying the
+// weather-maps.json metadata call through the backend keeps the third-party
+// host out of the browser CORS surface, lets us cache server-side, and means
+// we can swap providers without a frontend release.
+//
+// The actual tile PNGs are still served direct from RainViewer's CDN
+// (response includes an absolute `host`). Only the discovery JSON is proxied.
+interface RainViewerCacheEntry {
+  payload: unknown;
+  fetchedAt: number;
+}
+let rainViewerCache: RainViewerCacheEntry | null = null;
+const RAINVIEWER_CACHE_MS = 60_000;
+
+router.get("/radar/rainviewer", async (_req: Request, res: Response) => {
+  if (rainViewerCache && Date.now() - rainViewerCache.fetchedAt < RAINVIEWER_CACHE_MS) {
+    res.setHeader("Cache-Control", "public, max-age=60");
+    res.json(rainViewerCache.payload);
+    return;
+  }
+  try {
+    const r = await fetch("https://api.rainviewer.com/public/weather-maps.json");
+    if (!r.ok) {
+      res.status(502).json({ error: "RAINVIEWER_UPSTREAM" });
+      return;
+    }
+    const payload = await r.json();
+    rainViewerCache = { payload, fetchedAt: Date.now() };
+    res.setHeader("Cache-Control", "public, max-age=60");
+    res.json(payload);
+  } catch {
+    res.status(502).json({ error: "RAINVIEWER_FETCH_FAILED" });
+  }
+});
+
 export default router;

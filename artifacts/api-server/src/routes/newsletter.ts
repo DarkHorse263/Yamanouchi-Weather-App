@@ -1,4 +1,5 @@
 import { Router, type IRouter } from "express";
+import { z } from "zod";
 import { db, newsletterSubscribersTable } from "@workspace/db";
 import { eq } from "drizzle-orm";
 import { issueToken, verifyToken, isTokenStillValid } from "../lib/alertTokens.js";
@@ -51,9 +52,33 @@ function normaliseEmail(s: string): string {
   return s.trim().toLowerCase();
 }
 
+// Defence-in-depth body schemas. The existing as*() helpers continue to
+// coerce field values to safe defaults; these schemas just reject totally
+// malformed envelopes (non-objects, wrong-typed top-level fields).
+const NewsletterSubscribeBody = z
+  .object({
+    email: z.string().max(254),
+    consent: z.literal(true).or(z.boolean()),
+    regions: z.array(z.string()).optional(),
+    cadence: z.string().optional(),
+    source: z.string().max(64).optional(),
+  })
+  .passthrough();
+
+const NewsletterUnsubscribeBody = z
+  .object({
+    reason: z.string().max(200).optional(),
+  })
+  .passthrough();
+
 // ─── POST /newsletter/subscribe ───────────────────────────────────────────
 router.post("/newsletter/subscribe", async (req, res): Promise<void> => {
-  const body = (req.body ?? {}) as Record<string, unknown>;
+  const schema = NewsletterSubscribeBody.safeParse(req.body);
+  if (!schema.success) {
+    res.status(400).json({ error: "INVALID_BODY", message: "Request body is malformed." });
+    return;
+  }
+  const body = schema.data as Record<string, unknown>;
 
   if (!isValidEmail(body["email"])) {
     res.status(400).json({ error: "INVALID_EMAIL", message: "A valid email is required." });
@@ -226,10 +251,13 @@ router.get("/newsletter/unsubscribe", async (req, res): Promise<void> => {
 // ─── POST /newsletter/unsubscribe?token=… ────────────────────────────────
 router.post("/newsletter/unsubscribe", async (req, res): Promise<void> => {
   const token = typeof req.query["token"] === "string" ? req.query["token"] : "";
-  const reason =
-    typeof (req.body ?? {})["reason"] === "string"
-      ? String((req.body as Record<string, unknown>)["reason"]).slice(0, 200)
-      : null;
+  // Body is optional for this endpoint; reject only if it's present and malformed.
+  const schema = NewsletterUnsubscribeBody.safeParse(req.body ?? {});
+  if (!schema.success) {
+    res.status(400).json({ error: "INVALID_BODY" });
+    return;
+  }
+  const reason = schema.data.reason ? schema.data.reason.slice(0, 200) : null;
   try {
     const result = await performNewsletterUnsubscribe(token, reason);
     if (result.ok) {

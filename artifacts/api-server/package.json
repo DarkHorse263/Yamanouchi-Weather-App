@@ -21,7 +21,8 @@
     "node-cron": "^4.2.1",
     "puppeteer": "^24.43.0",
     "resend": "^6.12.2",
-    "web-push": "^3.6.7"
+    "web-push": "^3.6.7",
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
