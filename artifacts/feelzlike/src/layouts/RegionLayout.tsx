@@ -17,6 +17,7 @@ import { RegionSources } from "@/pages/region/RegionSources";
 import { MountainDetail as GenericMountainDetail } from "@/pages/region/MountainDetail";
 import { snowyMountainsRouter } from "@/regions/snowy-mountains/router";
 import { yamanouchiRouter } from "@/regions/yamanouchi/router";
+import { victoriasHighCountryRouter } from "@/regions/victorias-high-country/router";
 
 export interface RegionRouter {
   /** Renders /:region/mountain/:id (and /:region/resort/:id for legacy) */
@@ -43,6 +44,7 @@ export interface RegionRouter {
 const REGION_ROUTERS: Record<string, RegionRouter> = {
   "snowy-mountains": snowyMountainsRouter,
   "yamanouchi": yamanouchiRouter,
+  "victorias-high-country": victoriasHighCountryRouter,
 };
 
 export function RegionLayout() {

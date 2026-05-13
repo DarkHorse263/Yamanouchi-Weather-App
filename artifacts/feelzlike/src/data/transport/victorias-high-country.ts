@@ -4,8 +4,13 @@ import type { TransportProviderList } from "@/types/transport";
  * Victoria's High Country (VIC, Australia) transport providers.
  *
  * Phone numbers and websites left as `null` when not directly verifiable -
- * we never guess. Operators verified May 2026; alpine resort coach
- * services are seasonal (winter only) where noted in route_summary.
+ * we never guess. Operators verified May 2026.
+ *
+ * Tagging contract used by the custom VHC Transport page:
+ * - `seasonality`: "winter_only" hides the card in AU green season.
+ * - `mountains_served`: enables per-town filtering (Mansfield gets only
+ *   Buller/Stirling ops; Bright gets Falls/Hotham; etc.). Omit for the
+ *   regional rail spine (V/Line) which is treated as universal.
  */
 export const VICTORIAS_HIGH_COUNTRY_TRANSPORT: TransportProviderList = [
   {
@@ -16,9 +21,11 @@ export const VICTORIAS_HIGH_COUNTRY_TRANSPORT: TransportProviderList = [
     phone: "1800 800 007",
     website: "https://www.vline.com.au",
     route_summary:
-      "Regional rail and connecting coaches across Victoria. Southern Cross to Wangaratta and Seymour by train, with V/Line coaches onward to Bright, Mansfield, Mt Beauty and Omeo.",
+      "Regional rail and connecting coaches across Victoria. Trains to Wangaratta and Seymour with V/Line coaches onward to Bright, Mt Beauty, Mansfield, Omeo and Dinner Plain. Lilydale buses serve Marysville and Warburton in the Yarra Ranges.",
     schedule_url: "https://www.vline.com.au/Timetables/Train-coach-timetables",
     regions: ["victorias-high-country"],
+    seasonality: "year_round",
+    // mountains_served omitted on purpose - V/Line is the universal spine.
   },
   {
     id: "au-mansfield-mt-buller-bus-lines",
@@ -28,9 +35,11 @@ export const VICTORIAS_HIGH_COUNTRY_TRANSPORT: TransportProviderList = [
     phone: "1800 800 905",
     website: "https://www.mmbl.com.au",
     route_summary:
-      "The Mt Buller bus. Daily Melbourne to Mt Buller winter coaches plus year-round Mansfield, Merrijig and Mirimbah shuttles to the village.",
+      "The Mt Buller bus. Daily Melbourne to Mt Buller winter coaches plus year-round Mansfield, Merrijig and Mirimbah shuttles to the village. Operates the in-resort village shuttle through the season.",
     schedule_url: "https://www.mmbl.com.au/winterservice",
     regions: ["victorias-high-country"],
+    seasonality: "year_round",
+    mountains_served: ["mt-buller", "mt-stirling"],
   },
   {
     id: "au-falls-creek-coach-service",
@@ -40,9 +49,11 @@ export const VICTORIAS_HIGH_COUNTRY_TRANSPORT: TransportProviderList = [
     phone: null,
     website: "https://fallscreekcoachservice.com.au",
     route_summary:
-      "Falls Creek's local operator. Albury and Mt Beauty connections to Falls Creek village, plus the village in-resort shuttle in winter.",
+      "Falls Creek's local operator. Albury and Mt Beauty connections to Falls Creek village, plus the in-resort village shuttle in winter. Also runs the Mt Beauty to Bogong Village summer service.",
     schedule_url: "https://fallscreekcoachservice.com.au/public-transport-timetables/",
     regions: ["victorias-high-country"],
+    seasonality: "year_round",
+    mountains_served: ["falls-creek"],
   },
   {
     id: "au-snowball-express",
@@ -52,9 +63,11 @@ export const VICTORIAS_HIGH_COUNTRY_TRANSPORT: TransportProviderList = [
     phone: "(03) 5751 1795",
     website: "https://www.snowballexpress.com.au",
     route_summary:
-      "Winter coach service from Melbourne to Mt Hotham and Dinner Plain via Bright and Harrietville. Local operator recommended by the resort.",
+      "Winter coach from Melbourne to Mt Hotham and Dinner Plain via Bright and Harrietville. The named Hotham coach for off-mountain visitors without a 4WD.",
     schedule_url: "https://www.snowballexpress.com.au/faqs-mt-hotham-bus.html",
     regions: ["victorias-high-country"],
+    seasonality: "winter_only",
+    mountains_served: ["mt-hotham"],
   },
   {
     id: "au-hotham-bus",
@@ -64,8 +77,10 @@ export const VICTORIAS_HIGH_COUNTRY_TRANSPORT: TransportProviderList = [
     phone: null,
     website: "https://www.hothambus.com",
     route_summary:
-      "Direct Melbourne to Mt Hotham winter coach service with pickups along the Hume and the Great Alpine Road.",
+      "Direct Melbourne to Mt Hotham winter coach with pickups along the Hume Freeway and the Great Alpine Road.",
     regions: ["victorias-high-country"],
+    seasonality: "winter_only",
+    mountains_served: ["mt-hotham"],
   },
   {
     id: "au-mt-hotham-bus-charter",
@@ -77,6 +92,8 @@ export const VICTORIAS_HIGH_COUNTRY_TRANSPORT: TransportProviderList = [
     route_summary:
       "North East Victoria coach charter and private group transfers to Mt Hotham, Falls Creek and the broader High Country.",
     regions: ["victorias-high-country"],
+    seasonality: "year_round",
+    mountains_served: ["mt-hotham", "falls-creek"],
   },
   {
     id: "au-mansfield-taxis",
@@ -88,6 +105,8 @@ export const VICTORIAS_HIGH_COUNTRY_TRANSPORT: TransportProviderList = [
     route_summary:
       "Local taxi based at 137 High St, Mansfield. Useful for last-mile transfers to accommodation, dinner runs and Mt Buller connections in winter.",
     regions: ["victorias-high-country"],
+    seasonality: "year_round",
+    mountains_served: ["mt-buller", "mt-stirling"],
   },
   {
     id: "au-bright-taxi-service",
@@ -99,6 +118,8 @@ export const VICTORIAS_HIGH_COUNTRY_TRANSPORT: TransportProviderList = [
     route_summary:
       "24/7 local taxi covering Bright, Porepunkah and the Ovens Valley. Handy for airport pickups from Wangaratta and last-mile from Bright into the surrounding base towns.",
     regions: ["victorias-high-country"],
+    seasonality: "year_round",
+    mountains_served: ["falls-creek", "mt-hotham"],
   },
   {
     id: "au-mt-beauty-taxi-transfers",
@@ -110,6 +131,8 @@ export const VICTORIAS_HIGH_COUNTRY_TRANSPORT: TransportProviderList = [
     route_summary:
       "Mt Beauty-based taxi and pre-booked transfers servicing Falls Creek, Mt Hotham, Bright, Albury/Wodonga and the Kiewa Valley. Snow, hike and bike transfers in season.",
     regions: ["victorias-high-country"],
+    seasonality: "year_round",
+    mountains_served: ["falls-creek", "mt-hotham"],
   },
   {
     id: "au-snow-taxi",
@@ -121,5 +144,7 @@ export const VICTORIAS_HIGH_COUNTRY_TRANSPORT: TransportProviderList = [
     route_summary:
       "Pre-booked alpine taxi for door-to-door transfers between Harrietville, Mt Hotham and Dinner Plain. Tracked vehicles, driver allocation and ride-share option.",
     regions: ["victorias-high-country"],
+    seasonality: "winter_only",
+    mountains_served: ["mt-hotham"],
   },
 ];

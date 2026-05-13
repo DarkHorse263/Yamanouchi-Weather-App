@@ -40,6 +40,21 @@ export interface TransportProvider {
    * mechanism.
    */
   regions: RegionId[];
+  /**
+   * Optional season filter for AU operators.
+   * - "year_round" (or omitted) renders in both winter and green seasons.
+   * - "winter_only" hides the provider in the AU green season (Dec-May)
+   *   so visitors aren't told to book a coach that isn't running.
+   */
+  seasonality?: "year_round" | "winter_only";
+  /**
+   * Mountain IDs (within the provider's region) this operator actually
+   * serves. Used by town-level Transport pages to filter the grid: a town
+   * only shows ops whose `mountains_served` overlaps that town's
+   * `nearbyMountainIds`. Omit/undefined means region-wide (e.g. V/Line is
+   * the universal rail spine - no per-mountain restriction).
+   */
+  mountains_served?: string[];
 }
 
 export type TransportProviderList = readonly TransportProvider[];

@@ -11,11 +11,13 @@ import { TownTransport } from "@/pages/town/TownTransport";
 import { TownWeather } from "@/pages/town/TownWeather";
 import { snowyMountainsRouter } from "@/regions/snowy-mountains/router";
 import { yamanouchiRouter } from "@/regions/yamanouchi/router";
+import { victoriasHighCountryRouter } from "@/regions/victorias-high-country/router";
 import type { RegionRouter } from "@/layouts/RegionLayout";
 
 const REGION_ROUTERS: Record<string, RegionRouter> = {
   "snowy-mountains": snowyMountainsRouter,
   yamanouchi: yamanouchiRouter,
+  "victorias-high-country": victoriasHighCountryRouter,
 };
 
 /**
