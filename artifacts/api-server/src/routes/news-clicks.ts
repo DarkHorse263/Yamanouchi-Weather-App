@@ -29,8 +29,9 @@ function hashIp(req: Request): string | null {
   const xff = (req.headers["x-forwarded-for"] as string | undefined)?.split(",")[0]?.trim();
   const raw = xff || req.ip || "";
   if (!raw) return null;
-  // Production REQUIRES a real secret · refuse to write the click rather than
-  // hash with a static dev salt that would let anyone reverse the IP.
+  // Production refuses to hash with a static dev salt (which would let anyone
+  // reverse the IP). Without a real secret we still record the click for
+  // analytics but with `ipHashShort = null` · we lose dedup but never leak.
   const secret = process.env.ALERT_TOKEN_SECRET;
   if (!secret) {
     if (process.env.NODE_ENV === "production") return null;

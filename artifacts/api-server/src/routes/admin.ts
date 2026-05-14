@@ -10,6 +10,8 @@ import {
 } from "@workspace/db";
 import { requireAdminUser } from "../middlewares/requireAdminUser.js";
 import { sendEmail } from "../lib/emailSender.js";
+import { issueToken } from "../lib/alertTokens.js";
+import { getAppPublicUrl } from "../lib/appUrl.js";
 
 /**
  * Admin router · mounted at /api/admin/*. Every route here goes through
@@ -18,8 +20,6 @@ import { sendEmail } from "../lib/emailSender.js";
  * out) vs 403 (logged in but not admin).
  */
 const router: IRouter = Router();
-
-router.use(requireAdminUser);
 
 /**
  * Origin-pinning guard for the entire admin surface · protects BOTH:
@@ -41,6 +41,19 @@ router.use((req: Request, res: Response, next) => {
   if (req.method === "OPTIONS") {
     return next();
   }
+  // Modern browsers always send Sec-Fetch-Site on fetch/navigation. If it
+  // says `same-origin` we know the request originated from the same site
+  // even when Origin and Referer are absent (e.g. same-origin GETs under
+  // some Referrer-Policy modes). `none` means user-typed URL/bookmark, so
+  // for an XHR endpoint we still require an Origin/Referer signal there.
+  const sfs = req.headers["sec-fetch-site"];
+  if (sfs === "same-origin") {
+    return next();
+  }
+  if (sfs && sfs !== "same-origin") {
+    res.status(403).json({ error: "CROSS_SITE_BLOCKED" });
+    return;
+  }
   const origin = req.headers.origin || req.headers.referer;
   if (!origin) {
     res.status(403).json({ error: "ORIGIN_REQUIRED" });
@@ -60,6 +73,11 @@ router.use((req: Request, res: Response, next) => {
   }
   next();
 });
+
+// Auth + admin allowlist runs AFTER the origin guard so cross-site requests
+// are rejected before the session cookie is even consulted (no auth oracle
+// for cross-site probes).
+router.use(requireAdminUser);
 
 // ── Identity probe ────────────────────────────────────────────────────────
 // Cheap GET so the admin SPA can detect "is the current user actually on the
@@ -412,12 +430,16 @@ router.post("/newsletter/campaigns/:id/send", async (req: Request, res: Response
       .replace(/[*_`#>]/g, "")
       .trim();
 
+    const baseUrl = getAppPublicUrl();
+
     // Test send · single recipient, no DB status change beyond marking last preview
     if (testEmail) {
       await sendEmail({
         to: testEmail,
         subject: `[TEST] ${campaign.subject}`,
-        html: html.replace("{{UNSUBSCRIBE_URL}}", "https://feelzlike.com/"),
+        // Test sends have no real subscriber row, so the unsubscribe link
+        // points back to the public landing page instead of a token URL.
+        html: html.replace("{{UNSUBSCRIBE_URL}}", `${baseUrl}/`),
         text: plain,
         tag: "newsletter-test",
       });
@@ -456,14 +478,16 @@ router.post("/newsletter/campaigns/:id/send", async (req: Request, res: Response
     let failed = 0;
     for (const r of recipients) {
       try {
+        // Per-recipient HMAC unsubscribe token · routes through the existing
+        // GET /api/newsletter/unsubscribe?token=… handler, which marks the
+        // subscriber as unsubscribed and redirects to /newsletter/unsubscribed.
+        const unsubToken = issueToken(r.id, "nl_unsub");
+        const unsubUrl = `${baseUrl}/api/newsletter/unsubscribe?token=${encodeURIComponent(unsubToken)}`;
         await sendEmail({
           to: r.email,
           subject: campaign.subject,
-          html: html.replace(
-            "{{UNSUBSCRIBE_URL}}",
-            `https://feelzlike.com/newsletter/unsubscribed`,
-          ),
-          text: plain,
+          html: html.replace("{{UNSUBSCRIBE_URL}}", unsubUrl),
+          text: `${plain}\n\nUnsubscribe: ${unsubUrl}`,
           tag: "newsletter-broadcast",
         });
         delivered++;

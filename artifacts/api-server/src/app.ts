@@ -22,6 +22,11 @@ app.use(helmet({
   contentSecurityPolicy: false,
   crossOriginEmbedderPolicy: false,
   frameguard: false,
+  // Helmet's default Referrer-Policy is `no-referrer`, which strips Referer
+  // on same-origin GETs. The admin origin-pinning guard relies on Origin
+  // OR Referer to detect same-origin browser fetches, so we relax to
+  // `strict-origin-when-cross-origin` (modern browser default).
+  referrerPolicy: { policy: "strict-origin-when-cross-origin" },
 }));
 
 // Trust proxy hop count is configurable per deployment via TRUST_PROXY_HOPS.
