@@ -5,3 +5,6 @@ export * from "./users";
 export * from "./subscriptions";
 export * from "./alerts";
 export * from "./newsletter";
+export * from "./auth";
+export * from "./news-clicks";
+export * from "./newsletter-campaigns";

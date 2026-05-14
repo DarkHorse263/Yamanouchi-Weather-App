@@ -2,9 +2,11 @@ import express, { type Express, type Request, type Response } from "express";
 import cors from "cors";
 import helmet from "helmet";
 import path from "path";
+import cookieParser from "cookie-parser";
 import rateLimit from "express-rate-limit";
 import * as Sentry from "@sentry/node";
 import router from "./routes";
+import { authMiddleware } from "./middlewares/authMiddleware.js";
 
 const app: Express = express();
 
@@ -56,12 +58,15 @@ app.use(cors({
     if (isOriginAllowed(origin)) return cb(null, true);
     return cb(new Error(`CORS: origin not allowed (${origin})`));
   },
-  // No credentials: this API is bearer-token-or-session-token via query/body,
-  // never cookie auth. `credentials: true` combined with origin reflection is
-  // a CSRF foot-gun and the browser already rejects `Access-Control-Allow-
-  // Credentials: true` with `Access-Control-Allow-Origin: *` anyway.
-  credentials: false,
+  // Credentials enabled so the session cookie issued by Replit Auth is sent
+  // on cross-origin requests from the SPA (preview iframe / *.replit.dev).
+  // CSRF risk is bounded by:
+  //   - the strict origin allowlist above (no `*` reflection),
+  //   - SameSite=Lax on the session cookie (no top-level POST CSRF), and
+  //   - all auth-mutating endpoints requiring a session+admin allowlist.
+  credentials: true,
 }));
+app.use(cookieParser());
 app.use(express.json({ limit: "100kb" }));
 app.use(express.urlencoded({ extended: true, limit: "100kb" }));
 
@@ -106,7 +111,10 @@ const placesLimiter = rateLimit({
 });
 
 app.use("/api/places", placesLimiter);
-app.use("/api", apiLimiter, router);
+// authMiddleware loads req.user from the session cookie/bearer token before
+// any route handler runs. Mounted on /api so every API route can inspect
+// `req.isAuthenticated()` / `req.user`. Public routes simply ignore it.
+app.use("/api", apiLimiter, authMiddleware, router);
 
 if (process.env.NODE_ENV === "production") {
   const staticDir = path.join(__dirname, "../../feelzlike/dist/public");

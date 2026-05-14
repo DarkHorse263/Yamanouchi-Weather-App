@@ -62,6 +62,7 @@
     "@workspace/api-client-react": "workspace:*",
     "@workspace/feelzlike-dashboard": "workspace:*",
     "@workspace/feelzlike-shell": "workspace:*",
+    "@workspace/replit-auth-web": "workspace:*",
     "class-variance-authority": "catalog:",
     "clsx": "catalog:",
     "cmdk": "^1.1.1",

@@ -22,6 +22,9 @@ import CountryHome from "@/pages/CountryHome";
 import Privacy from "@/pages/legal/Privacy";
 import Terms from "@/pages/legal/Terms";
 import News from "@/pages/News";
+import AdminStats from "@/pages/admin/AdminStats";
+import AdminTraffic from "@/pages/admin/AdminTraffic";
+import AdminNewsletter from "@/pages/admin/AdminNewsletter";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +46,11 @@ function Router() {
       <Route path="/legal/terms" component={Terms} />
       {/* News & updates · global feed, must precede /:region catch-all. */}
       <Route path="/news" component={News} />
+      {/* Admin dashboard · auth-gated, mounted before /:region catch-all so
+          /admin/* paths aren't parsed as region slugs. */}
+      <Route path="/admin" component={AdminStats} />
+      <Route path="/admin/traffic" component={AdminTraffic} />
+      <Route path="/admin/newsletter" component={AdminNewsletter} />
       {/* Country index pages - must come before the /:region catch-all so
           /au and /jp resolve to a regions-in-country picker, not the region
           layout (which would 404 on the country code). */}

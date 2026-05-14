@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { ChevronDown, Heart } from "lucide-react";
+import { ChevronDown, Heart, Shield } from "lucide-react";
+import { useAuth } from "@workspace/replit-auth-web";
 
 import wordmark from "@assets/feelzlike_trimmed/feelzlike_WordMarque_colour_160426_1777334678269_trim.png";
 
@@ -17,6 +18,10 @@ import wordmark from "@assets/feelzlike_trimmed/feelzlike_WordMarque_colour_1604
 export function HomeFooter() {
   const year = new Date().getFullYear();
   const [sourcesOpen, setSourcesOpen] = useState(false);
+  // Soft-render the admin link only for signed-in users. The /admin page
+  // itself does the real authorization check (server-side allowlist), so this
+  // is purely UI hygiene · non-admins simply never see the link.
+  const { isAuthenticated } = useAuth();
   return (
     <footer className="relative z-10 border-t border-slate-200 bg-white">
       <div className="max-w-6xl mx-auto px-5 py-10 md:py-14 grid gap-8 md:grid-cols-2 text-sm">
@@ -104,6 +109,14 @@ export function HomeFooter() {
                 </ul>
               )}
             </li>
+            {isAuthenticated && (
+              <li>
+                <a className="inline-flex items-center gap-1 hover:text-sky-700" href="/admin">
+                  <Shield className="w-3.5 h-3.5" aria-hidden />
+                  Admin
+                </a>
+              </li>
+            )}
             <li>
               <span className="text-slate-400">
                 © {year} Navigate Work Digital · feelzlike

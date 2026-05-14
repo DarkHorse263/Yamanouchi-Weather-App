@@ -20,6 +20,9 @@ import alertsPushRouter from "./alerts-push";
 import alertsInternalRouter from "./alerts-internal";
 import newsletterRouter from "./newsletter";
 import elevationForecastRouter from "./elevation-forecast";
+import authRouter from "./auth";
+import adminRouter from "./admin";
+import newsClicksRouter from "./news-clicks";
 
 const router: IRouter = Router();
 
@@ -44,5 +47,8 @@ router.use(alertsPushRouter);
 router.use(alertsInternalRouter);
 router.use(newsletterRouter);
 router.use(elevationForecastRouter);
+router.use(authRouter);
+router.use(newsClicksRouter);
+router.use("/admin", adminRouter);
 
 export default router;
