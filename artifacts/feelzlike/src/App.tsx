@@ -21,6 +21,7 @@ import NewsletterUnsubscribed from "@/pages/newsletter/Unsubscribed";
 import CountryHome from "@/pages/CountryHome";
 import Privacy from "@/pages/legal/Privacy";
 import Terms from "@/pages/legal/Terms";
+import News from "@/pages/News";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +41,8 @@ function Router() {
           aren't parsed as regions. */}
       <Route path="/legal/privacy" component={Privacy} />
       <Route path="/legal/terms" component={Terms} />
+      {/* News & updates · global feed, must precede /:region catch-all. */}
+      <Route path="/news" component={News} />
       {/* Country index pages - must come before the /:region catch-all so
           /au and /jp resolve to a regions-in-country picker, not the region
           layout (which would 404 on the country code). */}

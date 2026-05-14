@@ -11,6 +11,7 @@ import { REGION_COUNTRY, COUNTRY_META } from "@/regions";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { breadcrumbSchema } from "@/lib/seo/jsonLd";
 import { DailyPick } from "@/components/DailyPick";
+import { NewsStrip } from "@/components/news/NewsStrip";
 
 /**
  * Region landing - the second hop in the Country > Region > Town flow.
@@ -126,6 +127,8 @@ export function RegionHome() {
           })}
         </section>
       )}
+
+      <NewsStrip regionId={region.id} />
     </div>
   );
 }
