@@ -226,7 +226,7 @@ export function TownHome() {
         if (ai !== bi) return ai - bi;
         return a.km - b.km;
       });
-  }, [town, weatherQ.data, region]);
+  }, [town, weatherQ.data, region, isGreen, summerOpenMountainIds]);
 
   // Fold sub-resorts into their parent group (e.g. Shiga Kogen's 18 areas
   // collapse to one expandable row, Kita-Shiga's 4 collapse to another).
