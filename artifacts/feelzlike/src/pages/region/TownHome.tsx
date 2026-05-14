@@ -177,9 +177,17 @@ export function TownHome() {
   // mountains" panel entirely (mirrors the yamanouchi pattern, where the
   // resorts page is wholly replaced in green season).
   const isGreen = region.seasons && seasonCtx?.season === "green";
+  // Even in green season some mountains stay open (e.g. Thredbo for chairlift
+  // walks to Kosciuszko + downhill MTB). Keep the weather query running if
+  // the region has any `summerOpen` mountains so we can still surface them.
+  const summerOpenMountainIds = useMemo(
+    () => new Set((region.mountains ?? []).filter((m) => m.summerOpen).map((m) => m.id)),
+    [region.mountains],
+  );
+  const hasSummerOpenMountains = summerOpenMountainIds.size > 0;
   const weatherQ = useGetWeather(
     { region: region.id as never },
-    { query: { enabled: !isGreen } as never },
+    { query: { enabled: !isGreen || hasSummerOpenMountains } as never },
   );
   const townWeatherQ = useTownWeather(town?.lat, town?.lng);
 
@@ -195,8 +203,12 @@ export function TownHome() {
     const regionIds = new Set(orderedIds);
     const nearbyIds = new Set(town.nearbyMountainIds ?? []);
     const allowed = nearbyIds.size > 0 ? nearbyIds : regionIds;
+    // In green season, narrow to only mountains that actually operate in
+    // green season (e.g. Thredbo for chairlift walks + MTB). Other resorts
+    // genuinely shut, so listing them with stale weather would mislead.
+    const greenFilter = (id: string) => !isGreen || summerOpenMountainIds.has(id);
     const candidates = allowed.size > 0
-      ? weatherQ.data.locations.filter((l) => allowed.has(l.location.id))
+      ? weatherQ.data.locations.filter((l) => allowed.has(l.location.id) && greenFilter(l.location.id))
       : [];
     return candidates
       .map((entry) => {
@@ -346,7 +358,7 @@ export function TownHome() {
           forecast) doesn't apply once the lifts close. We swap in a tiny
           off-season banner pointing users at the still-relevant town
           surfaces (stay / eat / explore) below. */}
-      {isGreen ? (
+      {isGreen && mountainsByDistance.length === 0 ? (
         <section className="mt-3">
           <div className="rounded-2xl border border-emerald-200 bg-emerald-50/50 p-5">
             <p className="byline text-emerald-700/80 mb-1">
@@ -354,7 +366,7 @@ export function TownHome() {
             </p>
             <p className="text-sm text-emerald-900 leading-snug">
               {t(
-                "Resorts and the snow forecast pause for green season. Switch the season pill back to winter once snow returns - or scroll on for stay, eat and explore.",
+                "Resorts and the snow forecast pause for green season. Switch the season pill back to winter once snow returns · or scroll on for stay, eat and explore.",
                 "シーズンオフはスキー場と降雪予報を一時停止しています。雪が戻ったらシーズン切替を冬に戻してください。",
               )}
             </p>
@@ -365,12 +377,22 @@ export function TownHome() {
         <div className="rounded-2xl border border-border bg-white p-5">
           <div className="flex items-center justify-between mb-3">
             <p className="byline text-muted-foreground/70">
-              {t("Weather in mountains", "山の天気")}
+              {isGreen
+                ? t("Open in green season", "グリーンシーズン営業中")
+                : t("Weather in mountains", "山の天気")}
             </p>
             <p className="text-[11px] text-muted-foreground/60">
               {t("Tap a resort for full conditions", "リゾート名をタップで詳細")}
             </p>
           </div>
+          {isGreen && (
+            <p className="text-xs text-emerald-700/80 mb-3 leading-snug">
+              {t(
+                "Other resorts pause for green season. Switch the season pill back to winter once snow returns.",
+                "他のスキー場はグリーンシーズン休業。雪が戻ったらシーズン切替を冬に戻してください。",
+              )}
+            </p>
+          )}
           {weatherQ.isLoading && mountainsByDistance.length === 0 ? (
             <p className="text-sm text-muted-foreground py-4">{t("Loading…", "読込中…")}</p>
           ) : mountainsByDistance.length === 0 ? (

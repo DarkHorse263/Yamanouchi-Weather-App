@@ -27,7 +27,7 @@ export const snowyMountainsRegion: RegionConfig = {
     // Perisher: largest in southern hemisphere, 4 connected resorts → covers everything.
     { id: "perisher",        name: "Perisher",         elevationM: 2054, lat: -36.3717, lng: 148.4086, blurb: "NSW · the big one (4 resorts)",              websiteUrl: "https://www.perisher.com.au",       beginner_friendly: true, kids_lessons: true, terrain_park: true },
     // Thredbo: highest vertical in AU, advanced skiers' choice, has terrain_park + lift-served backcountry.
-    { id: "thredbo",         name: "Thredbo",          elevationM: 2037, lat: -36.5054, lng: 148.3089, blurb: "NSW · the high one",                          websiteUrl: "https://www.thredbo.com.au",        terrain_park: true, backcountry_access: true, kids_lessons: true },
+    { id: "thredbo",         name: "Thredbo",          elevationM: 2037, lat: -36.5054, lng: 148.3089, blurb: "NSW · the high one",                          websiteUrl: "https://www.thredbo.com.au",        terrain_park: true, backcountry_access: true, kids_lessons: true, summerOpen: true },
     // Selwyn: explicitly family-beginner, no expert terrain.
     { id: "selwyn",          name: "Selwyn",           elevationM: 1614, lat: -35.8383, lng: 148.5267, blurb: "NSW · family beginner mountain",             websiteUrl: "https://www.selwynsnow.com.au",     beginner_friendly: true, kids_lessons: true },
     // Charlotte's Pass: small ski-in village, mostly intermediate, kids' programs.

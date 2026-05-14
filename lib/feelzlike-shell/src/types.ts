@@ -58,6 +58,10 @@ export interface MountainLink {
   /** True if the mountain's main offering is cross-country / nordic skiing
    *  rather than alpine downhill. E.g. Mt Stirling, Lake Mountain. */
   nordic_focus?: boolean;
+  /** True if the mountain operates in the green season (chairlift-served
+   *  walks, MTB, alpine activities). Used to keep showing the resort in the
+   *  TownHome mountains panel after the snow lifts close. E.g. Thredbo. */
+  summerOpen?: boolean;
   /**
    * Weather Unlocked Ski Resort Forecast resort id. Populates the
    * top/mid/base elevation-banded forecast panel on mountain detail pages.
