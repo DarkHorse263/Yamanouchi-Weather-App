@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, Sun, Snowflake, ArrowLeft, Lock } from "lucide-react";
+import { ChevronLeft, Leaf, Snowflake, ArrowLeft, Lock } from "lucide-react";
 import type { ReactNode } from "react";
 import { cn } from "./cn";
 import { useRegion } from "./RegionProvider";
@@ -496,8 +496,8 @@ function SeasonPill({
         type="button"
         onClick={() => onChange("green")}
         aria-pressed={season === "green"}
-        aria-label={t("Switch to summer view", "夏季表示に切替")}
-        title={t("Summer (green) season", "夏季 (グリーン) シーズン")}
+        aria-label={t("Switch to green-season view", "グリーンシーズン表示に切替")}
+        title={t("Green season (spring, summer, autumn)", "グリーンシーズン (春・夏・秋)")}
         className={cn(
           "inline-flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-semibold tracking-wider uppercase transition-colors",
           season === "green"
@@ -505,8 +505,8 @@ function SeasonPill({
             : "text-muted-foreground hover:text-foreground",
         )}
       >
-        <Sun className="w-3 h-3" />
-        {t("Summer", "夏")}
+        <Leaf className="w-3 h-3" />
+        {t("Green", "グリーン")}
       </button>
     </div>
   );
