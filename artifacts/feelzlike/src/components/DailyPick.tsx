@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Snowflake, Wind, Sparkles, ArrowUpRight } from "lucide-react";
@@ -43,6 +43,17 @@ interface Scored {
 export function DailyPick({ regionId, resorts, resortHrefPattern = "/:id" }: Props) {
   const [pick, setPick] = useState<Scored | null>(null);
   const [error, setError] = useState<string | null>(null);
+  // Callers (RegionHome, TownHome) routinely pass `resorts` inline, so the
+  // array identity changes on every parent render. Depending on it directly
+  // re-fires the fetch every time setPick re-renders us · an infinite loop.
+  // Reduce to a stable string key derived from ids so the effect only re-runs
+  // when the set of resorts actually changes. We close over the latest
+  // `resorts` inside the effect via a ref-like read of the prop, which is
+  // safe because we always recompute `allowed` from the freshest value.
+  const resortsKey = useMemo(
+    () => resorts.map((r) => r.id).sort().join("|"),
+    [resorts],
+  );
 
   useEffect(() => {
     let cancelled = false;
@@ -82,7 +93,9 @@ export function DailyPick({ regionId, resorts, resortHrefPattern = "/:id" }: Pro
       })
       .catch((e) => { if (!cancelled) setError(e.message); });
     return () => { cancelled = true; };
-  }, [regionId, resorts]);
+    // resortsKey is the stable substitute for `resorts` (see comment above).
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [regionId, resortsKey]);
 
   if (error) return null;
   if (!pick) {

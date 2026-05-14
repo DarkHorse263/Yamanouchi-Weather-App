@@ -28,6 +28,7 @@ import { useGetWeather } from "@workspace/api-client-react";
 import { useTownWeather } from "@/lib/town-weather";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
+import { DailyPick } from "@/components/DailyPick";
 
 function haversineKm(a: { lat: number; lng: number }, b: { lat: number; lng: number }): number {
   const R = 6371;
@@ -329,6 +330,26 @@ export function TownHome() {
         }
         badge={<LiveBadge tone="onDark" label={t("Live", "ライブ")} />}
       />
+
+      {/* DAILY PICK · winter-only callout that surfaces the best resort
+          today by fresh snow + low wind. Scoped to this town's nearby
+          mountains so the recommendation is genuinely reachable from
+          here (Jindabyne sees Snowy resorts, Mount Beauty sees Vic
+          High Country, etc). Mirrors the RegionHome mount so a user
+          who lands on a town directly still sees the same headline
+          pick they would on the region overview. */}
+      {seasonCtx?.season === "winter" && mountainsByDistance.length > 0 && (
+        <div className="mt-8">
+          <DailyPick
+            regionId={region.id}
+            resorts={mountainsByDistance.map((r) => ({
+              id: r.entry.location.id,
+              name: r.entry.location.name,
+            }))}
+            resortHrefPattern={`~/${region.id}/mountain/:id`}
+          />
+        </div>
+      )}
 
       {/* TEMP IN TOWN NOW - single full-width snapshot tile.
           May 2026 v2 brief: Roads moved out of the strip and lives inside
