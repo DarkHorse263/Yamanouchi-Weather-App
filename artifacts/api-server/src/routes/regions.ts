@@ -84,7 +84,45 @@ const REGIONS: RegionConfig[] = [
     timezone: "Australia/Melbourne",
     sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
   },
-  // Iiyama temporarily removed - see artifacts/api-server/src/lib/regions.ts
+  {
+    id: "nozawa-onsen",
+    name: "Nozawa Onsen",
+    country: "Japan",
+    countryCode: "JP",
+    region: "Nagano",
+    status: "live",
+    href: "/nozawa-onsen/",
+    baseTowns: ["Nozawa Onsen"],
+    mountains: ["Nozawa Onsen"],
+    // Headline reading from the onsen village core (~565m) - what guests
+    // step out into off the bus from Iiyama Shinkansen.
+    headlineLabel: "Nozawa Onsen",
+    lat: 36.9243,
+    lon: 138.4485,
+    model: "jma_seamless",
+    timezone: "Asia/Tokyo",
+    sourceLabel: "JMA Seamless",
+  },
+  {
+    id: "iiyama",
+    name: "Iiyama",
+    country: "Japan",
+    countryCode: "JP",
+    region: "Nagano",
+    status: "live",
+    href: "/iiyama/",
+    baseTowns: ["Iiyama", "Madarao Kogen", "Togari Onsen", "Kijimadaira"],
+    mountains: ["Madarao", "Tangram", "Togari Onsen", "Kijimadaira", "Kijima Snow Park"],
+    // Headline reading from Iiyama City (~315m) - Hokuriku Shinkansen
+    // gateway and the rail-in pivot for the whole north-east Nagano
+    // resort cluster.
+    headlineLabel: "Iiyama",
+    lat: 36.8514,
+    lon: 138.3676,
+    model: "jma_seamless",
+    timezone: "Asia/Tokyo",
+    sourceLabel: "JMA Seamless",
+  },
 ];
 
 const WEATHER_DESCRIPTIONS: Record<number, string> = {

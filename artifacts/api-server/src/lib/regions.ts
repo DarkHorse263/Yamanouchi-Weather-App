@@ -3,13 +3,17 @@
  *
  * Matches the canonical region list returned by `/api/regions`.
  */
-// Iiyama is temporarily removed from the active region set while we focus on
-// shipping Snowy Mountains and Yamanouchi to v1.0. To re-enable, add "iiyama"
-// back to this tuple, restore the iiyama entry in `routes/regions.ts`, the
-// iiyama LOCATIONS in `routes/weather.ts`, the iiyama-roads webcam entry,
-// the iiyama enum value in `lib/api-spec/openapi.yaml`, and the LOCATION_TO_REGION
-// mappings below.
-export const REGION_IDS = ["snowy-mountains", "victorias-high-country", "yamanouchi"] as const;
+// Active region set · keep in sync with `lib/api-spec/openapi.yaml` RegionId
+// enum, `routes/regions.ts` REGIONS list, `routes/weather.ts` LOCATIONS,
+// `jobs/alertEvaluator.ts` REGION_ANCHORS, and the frontend region registry
+// at `artifacts/feelzlike/src/regions/index.ts`.
+export const REGION_IDS = [
+  "snowy-mountains",
+  "victorias-high-country",
+  "yamanouchi",
+  "nozawa-onsen",
+  "iiyama",
+] as const;
 export type RegionId = (typeof REGION_IDS)[number];
 
 export function isRegionId(value: unknown): value is RegionId {
@@ -69,6 +73,23 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "yomase-onsen": "yamanouchi",
   "kita-shiga-komaruyama": "yamanouchi",
   "yamanouchi-roads": "yamanouchi",
+
+  // Nozawa Onsen, JP · 1 mountain, 1 base town.
+  "nozawa-onsen": "nozawa-onsen",
+  "nozawa-onsen-village": "nozawa-onsen",
+  "nozawa-onsen-roads": "nozawa-onsen",
+
+  // Iiyama, JP · 5 mountains across 4 base towns.
+  "madarao": "iiyama",
+  "tangram": "iiyama",
+  "togari-onsen": "iiyama",
+  "kijimadaira": "iiyama",
+  "kijima-snow-park": "iiyama",
+  "iiyama": "iiyama",
+  "madarao-kogen": "iiyama",
+  "togari-onsen-village": "iiyama",
+  "kijimadaira-village": "iiyama",
+  "iiyama-roads": "iiyama",
 };
 
 export function regionForLocation(locationId: string): RegionId | undefined {

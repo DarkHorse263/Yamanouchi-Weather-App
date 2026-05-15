@@ -140,11 +140,17 @@ const LOCATIONS: LocationConfig[] = [
   { id: "yomase-onsen",              name: "Yomase Onsen",              latitude: 36.7714, longitude: 138.4253, elevation: 1240, description: "Locals' mountain on the Yomase river - night skiing, gentle terrain, onsen finish straight off the slopes.",             bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
   { id: "kita-shiga-komaruyama",     name: "Kita-shiga Komaruyama",     latitude: 36.7820, longitude: 138.4310, elevation: 1100, description: "Smallest Kita-Shiga resort - gentle beginner laps directly under the lifts, popular with school groups.",                  bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
 
+  // ─── Nozawa Onsen (Nagano, Japan) ────────────────────────
+  { id: "nozawa-onsen",              name: "Nozawa Onsen",              latitude: 36.9290, longitude: 138.4500, elevation: 1650, description: "Mt Kenashi summit · long groomers, tree runs and the Nagasaka Olympic course above the onsen village.",                bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+
   // ─── Iiyama (Nagano, Japan) ──────────────────────────────
-  // Madarao / Tangram / Togari temporarily removed - see
-  // artifacts/api-server/src/lib/regions.ts. Removing them here also stops the
-  // /api/weather (no-region) handler from making 3 wasted Open-Meteo calls
-  // per request.
+  // 5 mountains across 4 base towns · Madarao/Tangram lift-linked,
+  // Togari standalone, Kijimadaira + Kijima Snow Park share a village.
+  { id: "madarao",                   name: "Madarao",                   latitude: 36.9056, longitude: 138.2858, elevation: 1382, description: "Tree-run-famous Madarao · shared 2-mountain pass with Tangram across the ridge.",                                  bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "tangram",                   name: "Tangram",                   latitude: 36.8917, longitude: 138.2806, elevation: 1148, description: "Niigata-side base of the Madarao massif · family-oriented, lift-linked to Madarao.",                              bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "togari-onsen",              name: "Togari Onsen",              latitude: 36.8722, longitude: 138.4014, elevation: 1050, description: "Quiet onsen-side mountain · long beginner-intermediate runs above the village.",                                  bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "kijimadaira",               name: "Kijimadaira",               latitude: 36.8639, longitude: 138.4006, elevation: 1351, description: "'Romance no Kamisama' resort · wide groomers and family terrain on Mt Kayano.",                                  bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "kijima-snow-park",          name: "Kijima Snow Park",          latitude: 36.8556, longitude: 138.4108, elevation:  700, description: "Snow play and toboggan park (Makinoiri Kogen) · sledding, snow tubing, kids' first-time terrain.",              bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
 ];
 
 const WEATHER_DESCRIPTIONS: Record<number, string> = {

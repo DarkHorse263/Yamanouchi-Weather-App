@@ -43,6 +43,11 @@ const REGION_ANCHORS: Record<RegionId, {
   "snowy-mountains": { lat: -36.45, lon: 148.32, elevation: 1700, region: "AU", displayName: "Snowy Mountains" },
   "victorias-high-country": { lat: -36.9779, lon: 147.1361, elevation: 1862, region: "AU", displayName: "Victoria's High Country" },
   "yamanouchi": { lat: 36.738, lon: 138.508, elevation: 1500, region: "JP", displayName: "Yamanouchi" },
+  // Nozawa Onsen · single resort, anchor on Mt Kenashi summit.
+  "nozawa-onsen": { lat: 36.9290, lon: 138.4500, elevation: 1650, region: "JP", displayName: "Nozawa Onsen" },
+  // Iiyama · anchor on Madarao summit · the highest and most snow-prone
+  // point in the cluster, best regional proxy for powder alerts.
+  "iiyama": { lat: 36.9056, lon: 138.2858, elevation: 1382, region: "JP", displayName: "Iiyama" },
 };
 
 interface EvaluatorReport {

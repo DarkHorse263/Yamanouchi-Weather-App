@@ -155,7 +155,13 @@ export const GetSnowOutlookResponse = zod.array(GetSnowOutlookResponseItem);
  */
 export const GetPowderAlertsQueryParams = zod.object({
   region: zod
-    .enum(["snowy-mountains", "victorias-high-country", "yamanouchi"])
+    .enum([
+      "snowy-mountains",
+      "victorias-high-country",
+      "yamanouchi",
+      "nozawa-onsen",
+      "iiyama",
+    ])
     .optional()
     .describe(
       "Optional region filter. Omit to receive data for every region. Must be one of the canonical region ids returned by `\/api\/regions`.",
@@ -1079,7 +1085,13 @@ export const EigomenyuTranslateResponse = zod.object({
  */
 export const GetWeatherQueryParams = zod.object({
   region: zod
-    .enum(["snowy-mountains", "victorias-high-country", "yamanouchi"])
+    .enum([
+      "snowy-mountains",
+      "victorias-high-country",
+      "yamanouchi",
+      "nozawa-onsen",
+      "iiyama",
+    ])
     .optional()
     .describe(
       "Optional region filter. Omit to receive data for every region. Must be one of the canonical region ids returned by `\/api\/regions`.",
@@ -1330,7 +1342,13 @@ export const GetBusServicesResponse = zod.object({
  */
 export const GetWebcamsQueryParams = zod.object({
   region: zod
-    .enum(["snowy-mountains", "victorias-high-country", "yamanouchi"])
+    .enum([
+      "snowy-mountains",
+      "victorias-high-country",
+      "yamanouchi",
+      "nozawa-onsen",
+      "iiyama",
+    ])
     .optional()
     .describe(
       "Optional region filter. Omit to receive data for every region. Must be one of the canonical region ids returned by `\/api\/regions`.",
@@ -1416,7 +1434,13 @@ export const GetLocationWebcamsResponse = zod.object({
  */
 export const GetRoadConditionsQueryParams = zod.object({
   region: zod
-    .enum(["snowy-mountains", "victorias-high-country", "yamanouchi"])
+    .enum([
+      "snowy-mountains",
+      "victorias-high-country",
+      "yamanouchi",
+      "nozawa-onsen",
+      "iiyama",
+    ])
     .optional()
     .describe(
       "Optional region filter. Omit to receive data for every region. Must be one of the canonical region ids returned by `\/api\/regions`.",
@@ -1557,7 +1581,13 @@ export const GetVicEmergencyIncidentsResponse = zod.object({
  */
 export const GetLiftStatusQueryParams = zod.object({
   region: zod
-    .enum(["snowy-mountains", "victorias-high-country", "yamanouchi"])
+    .enum([
+      "snowy-mountains",
+      "victorias-high-country",
+      "yamanouchi",
+      "nozawa-onsen",
+      "iiyama",
+    ])
     .optional()
     .describe(
       "Optional region filter. Omit to receive data for every region. Must be one of the canonical region ids returned by `\/api\/regions`.",

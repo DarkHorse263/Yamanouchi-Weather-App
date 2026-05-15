@@ -37,7 +37,10 @@ const JAPAN_CITIES = [
   { key: "takayama", name: "Takayama", nameJa: "高山", lat: 36.140, lng: 137.252 },
   { key: "matsumoto", name: "Matsumoto", nameJa: "松本", lat: 36.238, lng: 137.972 },
   { key: "hakuba", name: "Hakuba", nameJa: "白馬", lat: 36.698, lng: 137.862 },
-  { key: "nozawa", name: "Nozawa Onsen", nameJa: "野沢温泉", lat: 36.920, lng: 138.634 },
+  // Nozawa Onsen village core · the previous lng 138.634 was ~16 km too
+  // far east and put the pin on the wrong side of the river.
+  { key: "nozawa", name: "Nozawa Onsen", nameJa: "野沢温泉", lat: 36.924, lng: 138.448 },
+  { key: "iiyama", name: "Iiyama", nameJa: "飯山", lat: 36.851, lng: 138.368 },
   { key: "myoko", name: "Myoko", nameJa: "妙高", lat: 36.862, lng: 138.252 },
 ];
 

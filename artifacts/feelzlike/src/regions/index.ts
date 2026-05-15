@@ -2,14 +2,18 @@ import type { RegionConfig } from "@workspace/feelzlike-shell";
 import { snowyMountainsRegion } from "./snowy-mountains";
 import { yamanouchiRegion } from "./yamanouchi";
 import { victoriasHighCountryRegion } from "./victorias-high-country";
+import { nozawaOnsenRegion } from "./nozawa-onsen";
+import { iiyamaRegion } from "./iiyama";
 
-// Active region registry. Snowy Mountains + Victoria's High Country (AU)
-// and Yamanouchi (JP). Iiyama was retired from the registry on the way to
-// v1.0 - re-add it by importing its config and pushing into this array.
+// Active region registry · AU: Snowy Mountains + Victoria's High Country.
+// JP: Yamanouchi (Shiga Kogen + Kita-Shiga), Nozawa Onsen (standalone),
+// Iiyama (Madarao/Tangram + Togari + Kijimadaira cluster).
 export const REGIONS: RegionConfig[] = [
   snowyMountainsRegion,
   victoriasHighCountryRegion,
   yamanouchiRegion,
+  nozawaOnsenRegion,
+  iiyamaRegion,
 ];
 
 export const REGION_BY_ID: Record<string, RegionConfig> = Object.fromEntries(
@@ -29,6 +33,8 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "snowy-mountains": "AU",
   "victorias-high-country": "AU",
   "yamanouchi": "JP",
+  "nozawa-onsen": "JP",
+  "iiyama": "JP",
 };
 export const COUNTRY_META: Record<CountryCode, { name: string; flag: string }> = {
   AU: { name: "Australia", flag: "🇦🇺" },
