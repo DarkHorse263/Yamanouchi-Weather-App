@@ -33,7 +33,7 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "selwyn": "snowy-mountains",
   "snowy-mountains-roads": "snowy-mountains",
 
-  // Victoria's High Country, AU - 6 mountains across 7 base towns.
+  // Victoria's High Country, AU · 6 mountains across 8 base towns.
   "mt-buller": "victorias-high-country",
   "mt-stirling": "victorias-high-country",
   "falls-creek": "victorias-high-country",
@@ -45,11 +45,12 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "mount-beauty": "victorias-high-country",
   "harrietville": "victorias-high-country",
   "dinner-plain": "victorias-high-country",
+  "omeo": "victorias-high-country",
   "marysville": "victorias-high-country",
   "warburton": "victorias-high-country",
   "victorias-high-country-roads": "victorias-high-country",
 
-  // Yamanouchi, JP - 22 mountains: 18 Shiga Kogen sub-areas + 4 Kita-Shiga resorts.
+  // Yamanouchi, JP · 22 entries: 18 Shiga Kogen sub-areas + 4 Kita-Shiga resorts (ryuoo, xjam-takaifuji, yomase-onsen, kita-shiga-komaruyama).
   "shiga-sun-valley": "yamanouchi",
   "shiga-maruike": "yamanouchi",
   "shiga-hasuike": "yamanouchi",

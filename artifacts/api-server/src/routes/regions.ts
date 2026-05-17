@@ -72,7 +72,7 @@ const REGIONS: RegionConfig[] = [
     region: "Victoria",
     status: "live",
     href: "/victorias-high-country/",
-    baseTowns: ["Mansfield", "Bright", "Mount Beauty", "Harrietville", "Dinner Plain", "Marysville", "Warburton"],
+    baseTowns: ["Mansfield", "Bright", "Mount Beauty", "Harrietville", "Dinner Plain", "Omeo", "Marysville", "Warburton"],
     mountains: ["Mt Buller", "Falls Creek", "Mt Hotham", "Mt Stirling", "Lake Mountain", "Mt Donna Buang"],
     // Headline reading is for Mount Beauty (~357m) - closest sealed-road
     // town to Falls Creek and the most-stayed base for Victoria's High
