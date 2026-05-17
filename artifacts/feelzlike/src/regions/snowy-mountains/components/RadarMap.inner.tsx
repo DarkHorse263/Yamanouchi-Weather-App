@@ -13,7 +13,12 @@ interface RadarMapInnerProps {
   region?: RegionKey;
 }
 
-type RegionKey = "snowy-mountains" | "victorias-high-country" | "yamanouchi";
+export type RegionKey =
+  | "snowy-mountains"
+  | "victorias-high-country"
+  | "yamanouchi"
+  | "nozawa-onsen"
+  | "iiyama";
 type ViewMode = "interactive" | "windy" | "official";
 
 interface RegionConfig {
@@ -53,6 +58,24 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       label: "JMA Nagano",
       imageUrl: null,
       href: "https://www.jma.go.jp/bosai/nowc/#zoom:9/lat:36.74/lon:138.42/colordepth:normal/elements:hrpns",
+      attribution: "Japan Meteorological Agency · JMA",
+    },
+  },
+  "nozawa-onsen": {
+    windy: { lat: 36.928, lon: 138.449, zoom: 10 },
+    official: {
+      label: "JMA Nagano",
+      imageUrl: null,
+      href: "https://www.jma.go.jp/bosai/nowc/#zoom:10/lat:36.928/lon:138.449/colordepth:normal/elements:hrpns",
+      attribution: "Japan Meteorological Agency · JMA",
+    },
+  },
+  iiyama: {
+    windy: { lat: 36.873, lon: 138.366, zoom: 10 },
+    official: {
+      label: "JMA Nagano",
+      imageUrl: null,
+      href: "https://www.jma.go.jp/bosai/nowc/#zoom:10/lat:36.873/lon:138.366/colordepth:normal/elements:hrpns",
       attribution: "Japan Meteorological Agency · JMA",
     },
   },
@@ -99,6 +122,24 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "kita-shiga", name: "Kita Shiga Kogen", lat: 36.7600, lng: 138.4750, accent: "#a855f7" },
       { id: "yudanaka", name: "Yudanaka", lat: 36.7406, lng: 138.4222, accent: "#0ea5e9" },
       { id: "shibu", name: "Shibu Onsen", lat: 36.7367, lng: 138.4214, accent: "#0ea5e9" },
+    ],
+  },
+  "nozawa-onsen": {
+    center: { lat: 36.928, lng: 138.449 },
+    pins: [
+      { id: "nozawa-onsen", name: "Nozawa Onsen", lat: 36.9278, lng: 138.4486, accent: "#f97316" },
+      { id: "nozawa-onsen-village", name: "Nozawa village", lat: 36.9219, lng: 138.4361, accent: "#0ea5e9" },
+    ],
+  },
+  iiyama: {
+    center: { lat: 36.873, lng: 138.366 },
+    pins: [
+      { id: "madarao", name: "Madarao", lat: 36.9056, lng: 138.2858, accent: "#f97316" },
+      { id: "tangram", name: "Tangram", lat: 36.8917, lng: 138.2806, accent: "#f97316" },
+      { id: "togari-onsen", name: "Togari Onsen", lat: 36.8722, lng: 138.4014, accent: "#a855f7" },
+      { id: "kijimadaira", name: "Kijimadaira", lat: 36.8639, lng: 138.4006, accent: "#a855f7" },
+      { id: "kijima-snow-park", name: "Kijima Snow Park", lat: 36.8556, lng: 138.4108, accent: "#10b981" },
+      { id: "iiyama", name: "Iiyama City", lat: 36.852, lng: 138.366, accent: "#0ea5e9" },
     ],
   },
 };

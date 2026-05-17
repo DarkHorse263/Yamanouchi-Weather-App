@@ -3,6 +3,8 @@ import { Loader2 } from "lucide-react";
 
 const RadarMapInner = lazy(() => import("./RadarMap.inner"));
 
+export type { RegionKey as RadarRegionKey } from "./RadarMap.inner";
+
 export interface RadarMapProps {
   /** Map centre - defaults to Snowy Mountains. */
   center?: { lat: number; lng: number };
@@ -11,7 +13,7 @@ export interface RadarMapProps {
   /** Drives the precip toggle label: "Snow" in winter, "Rain" in green season. */
   season?: "winter" | "green";
   /** Drives the Windy centre and Official radar source per region. */
-  region?: "snowy-mountains" | "victorias-high-country" | "yamanouchi";
+  region?: import("./RadarMap.inner").RegionKey;
 }
 
 export function RadarMap(props: RadarMapProps) {
