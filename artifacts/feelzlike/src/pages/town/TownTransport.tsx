@@ -13,6 +13,7 @@ import {
   useRegion,
   useLanguage,
   useBaseTown,
+  useOptionalSeason,
   LiveBadge,
   PageHeader,
 } from "@workspace/feelzlike-shell";
@@ -47,6 +48,7 @@ export function TownTransport() {
   const { region } = useRegion();
   const { t } = useLanguage();
   const { town } = useBaseTown();
+  const seasonCtx = useOptionalSeason();
 
   const providers = useMemo<TransportProvider[]>(() => {
     const all = getProvidersForRegion(region.id as RegionId);
@@ -58,13 +60,19 @@ export function TownTransport() {
     // require overlap with the active town's `nearbyMountainIds`. Rail
     // spines and region-wide ops (shinkansen, snow shuttles) leave
     // `mountains_served` undefined and surface in every town.
+    // Season filter: `seasonality: "winter_only"` ops self-hide when
+    // the user is browsing the green season toggle, so we don't promise
+    // a shuttle that isn't running.
     const townMountainIds = new Set(town?.nearbyMountainIds ?? []);
-    if (townMountainIds.size === 0) return guarded;
+    const isGreen = seasonCtx?.isGreen ?? false;
     return guarded.filter((p) => {
-      if (!p.mountains_served) return true;
-      return p.mountains_served.some((m) => townMountainIds.has(m));
+      if (isGreen && p.seasonality === "winter_only") return false;
+      if (townMountainIds.size > 0 && p.mountains_served) {
+        return p.mountains_served.some((m) => townMountainIds.has(m));
+      }
+      return true;
     });
-  }, [region.id, town?.id, town?.nearbyMountainIds]);
+  }, [region.id, town?.id, town?.nearbyMountainIds, seasonCtx?.isGreen]);
 
   return (
     <div className="px-4 md:px-10 py-5 md:py-10 max-w-6xl mx-auto">

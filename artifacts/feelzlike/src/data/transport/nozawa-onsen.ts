@@ -54,6 +54,21 @@ export const NOZAWA_ONSEN_TRANSPORT: TransportProviderList = [
     regions: ["nozawa-onsen"],
   },
   {
+    id: "jp-nozawa-village-shuttle",
+    name: "Nozawa Village Shuttle · free",
+    name_local: "野沢温泉村内シャトルバス・無料",
+    type: "shuttle",
+    operator: "Nozawa Onsen Tourist Association (野沢温泉観光協会)",
+    phone: null,
+    website: "https://nozawakanko.jp/",
+    route_summary:
+      "Free winter shuttle bus looping through Nozawa Onsen village · connects the main lodging clusters, the village centre and the Hikage gondola base. Saves the walk in ski boots between accommodation and the slopes. Runs through the ski season only.",
+    route_summary_local:
+      "冬季のみ運行する野沢温泉村内の無料シャトルバス。主要宿泊エリア・温泉街中心部・日影ゴンドラ乗り場を循環。スキーブーツでの移動が楽。スキーシーズン中のみ運行。",
+    regions: ["nozawa-onsen"],
+    seasonality: "winter_only",
+  },
+  {
     id: "jp-nagano-snow-shuttle-nozawa",
     name: "Nagano Snow Shuttle",
     name_local: "長野スノーシャトル",
