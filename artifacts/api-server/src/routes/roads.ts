@@ -339,6 +339,70 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
     ];
   }
 
+  if (regionId === "nozawa-onsen") {
+    const inSeason = isJpSnowSeason(now);
+    const chains2wd: ChainReq = inSeason ? "must-fit" : "not-required";
+    const chainsAwd: ChainReq = inSeason ? "must-carry" : "not-required";
+    return [
+      {
+        id: "nozawa-route-117",
+        regionId: "nozawa-onsen",
+        mountainId: "nozawa-onsen",
+        mountainName: "Nozawa Onsen",
+        approach: "Route 117 + Route 408 from Iiyama Shinkansen station",
+        status: "open",
+        chains2wd, chainsAwd,
+        note: inSeason
+          ? "Winter tyres mandatory in Nagano. Chains required for 2WD vehicles on the final climb into the onsen village when snow is on the road."
+          : "Outside snow season · no chain requirement.",
+        issuedAt,
+        sourceLabel: "Nagano Prefecture road bureau · winter rules (live feed pending)",
+        sourceUrl: "https://www.pref.nagano.lg.jp/douro/",
+        dataSource: "pending",
+      },
+    ];
+  }
+
+  if (regionId === "iiyama") {
+    const inSeason = isJpSnowSeason(now);
+    const chains2wd: ChainReq = inSeason ? "must-fit" : "not-required";
+    const chainsAwd: ChainReq = inSeason ? "must-carry" : "not-required";
+    return [
+      {
+        id: "iiyama-route-292-madarao",
+        regionId: "iiyama",
+        mountainId: "madarao",
+        mountainName: "Madarao Kogen",
+        approach: "Route 292 from Iiyama, then Madarao Kogen access road",
+        status: "open",
+        chains2wd, chainsAwd,
+        note: inSeason
+          ? "Winter tyres mandatory in Nagano. Chains required for 2WD on the Madarao access road · plateau road exposed to wind-drift."
+          : "Outside snow season · no chain requirement.",
+        issuedAt,
+        sourceLabel: "Nagano Prefecture road bureau · winter rules (live feed pending)",
+        sourceUrl: "https://www.pref.nagano.lg.jp/douro/",
+        dataSource: "pending",
+      },
+      {
+        id: "iiyama-route-117-togari-kijimadaira",
+        regionId: "iiyama",
+        mountainId: "togari-onsen",
+        mountainName: "Togari Onsen + Kijimadaira",
+        approach: "Route 117 north from Iiyama (Togari, Kijimadaira, Kijima Snow Park)",
+        status: "open",
+        chains2wd, chainsAwd,
+        note: inSeason
+          ? "Winter tyres mandatory in Nagano. Chains required for 2WD on the village approach roads after fresh snow."
+          : "Outside snow season · no chain requirement.",
+        issuedAt,
+        sourceLabel: "Nagano Prefecture road bureau · winter rules (live feed pending)",
+        sourceUrl: "https://www.pref.nagano.lg.jp/douro/",
+        dataSource: "pending",
+      },
+    ];
+  }
+
   return [];
 }
 

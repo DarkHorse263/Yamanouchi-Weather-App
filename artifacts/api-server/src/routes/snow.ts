@@ -1,7 +1,7 @@
 import { Router, type IRouter } from "express";
 import { getSupabase } from "../lib/supabase.js";
 import { getLiveWeather, getWeatherForRegion, getFullWeatherOutlook } from "../lib/weather-service.js";
-import { parseRegionParam, RegionParamError } from "../lib/regions.js";
+import { parseRegionParam, RegionParamError, LOCATION_TO_REGION } from "../lib/regions.js";
 import {
   GetDashboardResponse,
   GetResortsResponse,
@@ -446,32 +446,57 @@ router.get("/alerts", async (req, res): Promise<void> => {
     updatedAt: new Date().toISOString(),
   };
 
-  // Powder alerts are sourced from `powder_alerts_today`, which is
-  // currently Yamanouchi-only. For other regions return an empty payload
-  // (rather than 404) so the client can render a clean empty state.
-  if (region && region !== "yamanouchi") {
-    res.setHeader(
-      "X-Empty-Reason",
-      `Powder alerts are currently only published for region 'yamanouchi' (requested '${region}').`,
-    );
+  if (!supabase) {
+    if (region) {
+      res.setHeader(
+        "X-Empty-Reason",
+        `Powder alerts source (Supabase) unavailable for region '${region}'.`,
+      );
+    }
     res.json(GetPowderAlertsResponse.parse(fallbackAlerts));
     return;
   }
 
-  if (!supabase) {
-    res.json(GetPowderAlertsResponse.parse(fallbackAlerts));
-    return;
-  }
+  // Cluster → region mapping for the storm tracker (the `yamanouchi_storms_today`
+  // table uses `cluster` rather than a region id). Keys are lower-cased and
+  // trimmed before lookup so upstream casing/whitespace drift doesn't silently
+  // drop rows. Extend this map when the external Swift job starts publishing
+  // storms for other regions.
+  const CLUSTER_TO_REGION: Record<string, string> = {
+    "shiga kogen": "yamanouchi",
+    "kita-shiga": "yamanouchi",
+    "kita shiga": "yamanouchi",
+    "yamanouchi": "yamanouchi",
+    "nozawa onsen": "nozawa-onsen",
+    "nozawa": "nozawa-onsen",
+    "madarao": "iiyama",
+    "iiyama": "iiyama",
+    "togari": "iiyama",
+    "kijimadaira": "iiyama",
+  };
+  const lookupCluster = (raw: string): string | undefined =>
+    CLUSTER_TO_REGION[raw.trim().toLowerCase()];
 
   try {
     // powder_alerts_today columns (from Swift): id, report_date, resort_id, name, cluster, alert_type,
-    // headline, message, powder_index, powder_probability, expected_snow_cm, created_at
+    // headline, message, powder_index, powder_probability, expected_snow_cm, created_at.
+    // Region scoping is done post-query via LOCATION_TO_REGION (alerts) and
+    // CLUSTER_TO_REGION (storm tracker) so any region asking for /alerts
+    // gets a consistent shape · empty until rows for that region land.
     const [alertsRes, stormRes] = await Promise.all([
       supabase.from("powder_alerts_today").select("*").order("created_at", { ascending: false }),
       supabase.from("yamanouchi_storms_today").select("*").order("storm_rank", { ascending: true }),
     ]);
 
-    const alerts = (alertsRes.data || []).map((a: Record<string, unknown>, idx: number) => {
+    const alertsRaw = (alertsRes.data || []).filter((a: Record<string, unknown>) => {
+      if (!region) return true;
+      const resortId = String(a.resort_id || "").toLowerCase();
+      const cluster = String(a.cluster || "");
+      const byResort = resortId ? LOCATION_TO_REGION[resortId] : undefined;
+      const byCluster = cluster ? lookupCluster(cluster) : undefined;
+      return byResort === region || byCluster === region;
+    });
+    const alerts = alertsRaw.map((a: Record<string, unknown>, idx: number) => {
       const alertType = String(a.alert_type || a.headline || "watch").toLowerCase();
       let alertLevel: "watch" | "warning" | "powder_day" = "watch";
       if (alertType.includes("powder_day") || alertType.includes("powder day")) alertLevel = "powder_day";
@@ -490,7 +515,12 @@ router.get("/alerts", async (req, res): Promise<void> => {
       };
     });
 
-    const stormTracker = (stormRes.data || []).map((s: Record<string, unknown>, idx: number) => {
+    const stormsRaw = (stormRes.data || []).filter((s: Record<string, unknown>) => {
+      if (!region) return true;
+      const cluster = String(s.cluster || "");
+      return cluster ? lookupCluster(cluster) === region : false;
+    });
+    const stormTracker = stormsRaw.map((s: Record<string, unknown>, idx: number) => {
       const status = "active" as const;
       return {
         id: String(s.cluster || `storm-${idx}`),
@@ -503,6 +533,13 @@ router.get("/alerts", async (req, res): Promise<void> => {
         descriptionJa: null,
       };
     });
+
+    if (region && alerts.length === 0 && stormTracker.length === 0) {
+      res.setHeader(
+        "X-Empty-Reason",
+        `No powder alerts or storm signals published yet for region '${region}'. Source: Supabase powder_alerts_today / yamanouchi_storms_today.`,
+      );
+    }
 
     res.json(GetPowderAlertsResponse.parse({ alerts, stormTracker, updatedAt: new Date().toISOString() }));
   } catch (err) {

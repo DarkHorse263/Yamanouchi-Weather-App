@@ -138,7 +138,8 @@ paths:
       operationId: getPowderAlerts
       tags: [alerts]
       summary: Get powder alerts
-      description: Returns current powder alerts and recent storm events. Powder alerts are currently Yamanouchi-only; other regions return an empty payload.
+      description: |
+        Returns current powder alerts and recent storm events. The route accepts any canonical RegionId; results are filtered by `resort_id` (via LOCATION_TO_REGION) and storm `cluster` (via CLUSTER_TO_REGION). Regions without published rows return an empty payload with `X-Empty-Reason` header.
       parameters:
         - $ref: "#/components/parameters/RegionFilter"
       responses:

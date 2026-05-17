@@ -196,7 +196,65 @@ const WEBCAM_DATA: WebcamConfig[] = [
     webcamPageUrl: "http://hokushin.pref-nagano-roadcamera.jp/index.htm",
     webcams: [],
   },
-  // Iiyama-roads temporarily removed - see artifacts/api-server/src/lib/regions.ts
+
+  // ─── Roadside cams: Nozawa Onsen + Iiyama (JP) ────────────────────────
+  // Same Hokushin pref-Nagano regional camera map covers all of NE Nagano ·
+  // we surface a tile per region rather than fake per-camera deep links.
+  {
+    locationId: "nozawa-onsen-roads",
+    locationName: "野沢温泉への道路 · Roads to Nozawa Onsen",
+    webcamPageUrl: "http://hokushin.pref-nagano-roadcamera.jp/index.htm",
+    webcams: [],
+  },
+  {
+    locationId: "iiyama-roads",
+    locationName: "飯山エリアへの道路 · Roads to Iiyama",
+    webcamPageUrl: "http://hokushin.pref-nagano-roadcamera.jp/index.htm",
+    webcams: [],
+  },
+
+  // ─── Resort live-cam pages: Nozawa Onsen ──────────────────────────────
+  // Each resort publishes a live-cam landing page (JPG-refresh + occasional
+  // YouTube embeds). Linking to the official page rather than the raw
+  // stream because deep-link URLs change every season.
+  {
+    locationId: "nozawa-onsen",
+    locationName: "野沢温泉ライブカメラ · Nozawa Onsen live cams",
+    webcamPageUrl: "https://www.nozawaski.com/",
+    webcams: [],
+  },
+
+  // ─── Resort live-cam pages: Iiyama cluster ────────────────────────────
+  {
+    locationId: "madarao",
+    locationName: "斑尾ライブカメラ · Madarao live cam",
+    webcamPageUrl: "https://www.madarao.jp/",
+    webcams: [],
+  },
+  {
+    locationId: "tangram",
+    locationName: "タングラム ライブカメラ · Tangram live cam",
+    webcamPageUrl: "https://www.tangram.jp/ski/",
+    webcams: [],
+  },
+  {
+    locationId: "togari-onsen",
+    locationName: "戸狩温泉ライブカメラ · Togari Onsen live cam",
+    webcamPageUrl: "https://www.togari.jp/",
+    webcams: [],
+  },
+  {
+    locationId: "kijimadaira",
+    locationName: "木島平ライブカメラ · Kijimadaira live cam",
+    webcamPageUrl: "https://kijimadaira.jp/",
+    webcams: [],
+  },
+  {
+    locationId: "kijima-snow-park",
+    locationName: "キジマスノーパーク · Kijima Snow Park",
+    webcamPageUrl: "https://www.kijima-sp.jp/",
+    webcams: [],
+  },
 ];
 
 router.get("/webcams", (req, res) => {

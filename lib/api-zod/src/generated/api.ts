@@ -150,7 +150,8 @@ export const GetSnowOutlookResponseItem = zod.object({
 export const GetSnowOutlookResponse = zod.array(GetSnowOutlookResponseItem);
 
 /**
- * Returns current powder alerts and recent storm events. Powder alerts are currently Yamanouchi-only; other regions return an empty payload.
+ * Returns current powder alerts and recent storm events. The route accepts any canonical RegionId; results are filtered by `resort_id` (via LOCATION_TO_REGION) and storm `cluster` (via CLUSTER_TO_REGION). Regions without published rows return an empty payload with `X-Empty-Reason` header.
+
  * @summary Get powder alerts
  */
 export const GetPowderAlertsQueryParams = zod.object({
