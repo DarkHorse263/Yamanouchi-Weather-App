@@ -32,12 +32,12 @@ export const iiyamaRegion: RegionConfig = {
   brand: { wordmarkUrl: wordmark },
   seasons: true,
   language: { locales: ["en", "ja"] },
-  summaryMountains: ["Madarao + Tangram", "Togari Onsen", "Kijimadaira"],
+  summaryMountains: ["Madarao + Tangram", "Togari Onsen", "Kijimadaira · Romance no Kamisama"],
   resorts: [
     { path: "/mountain/madarao",       label: "Madarao",          labelJa: "斑尾" },
     { path: "/mountain/tangram",       label: "Tangram",          labelJa: "タングラム" },
     { path: "/mountain/togari-onsen",  label: "Togari Onsen",     labelJa: "戸狩温泉" },
-    { path: "/mountain/kijimadaira",   label: "Kijimadaira",      labelJa: "木島平" },
+    { path: "/mountain/kijimadaira",   label: "Kijimadaira · Romance no Kamisama", labelJa: "木島平 · ロマンスの神様" },
     { path: "/mountain/kijima-snow-park", label: "Kijima Snow Park", labelJa: "キジマスノーパーク" },
   ],
   mountains: [
@@ -83,7 +83,7 @@ export const iiyamaRegion: RegionConfig = {
     },
     {
       id: "kijimadaira",
-      name: "Kijimadaira Resort",
+      name: "Kijimadaira · Romance no Kamisama",
       nameJa: "木島平スキー場",
       elevationM: 1351,
       lat: 36.8639,
@@ -177,7 +177,7 @@ export const iiyamaRegion: RegionConfig = {
     { category: "Resorts", categoryJa: "スキー場", label: "Madarao Mountain Resort", labelJa: "斑尾高原スキー場", url: "https://www.madarao.jp/" },
     { category: "Resorts", categoryJa: "スキー場", label: "Tangram Ski Circus", labelJa: "タングラムスキーサーカス", url: "https://www.tangram.jp/ski/" },
     { category: "Resorts", categoryJa: "スキー場", label: "Togari Onsen Madarao", labelJa: "戸狩温泉スキー場", url: "https://www.togari.jp/" },
-    { category: "Resorts", categoryJa: "スキー場", label: "Kijimadaira Resort", labelJa: "木島平スキー場", url: "https://kijimadaira.jp/" },
+    { category: "Resorts", categoryJa: "スキー場", label: "Kijimadaira · Romance no Kamisama", labelJa: "スノーリゾート ロマンスの神様", url: "https://kijimadaira.jp/" },
     { category: "Resorts", categoryJa: "スキー場", label: "Kijima Snow Park", labelJa: "キジマスノーパーク", url: "https://www.kijima-sp.jp/" },
     { category: "Transport", categoryJa: "交通", label: "JR East · Hokuriku Shinkansen (Iiyama)", labelJa: "JR東日本 · 北陸新幹線 (飯山)", url: "https://www.jreast.co.jp/" },
     // Backcountry safety · the Madarao / Togari area sees regular

@@ -245,7 +245,7 @@ const WEBCAM_DATA: WebcamConfig[] = [
   },
   {
     locationId: "kijimadaira",
-    locationName: "木島平ライブカメラ · Kijimadaira live cam",
+    locationName: "ロマンスの神様 ライブカメラ · Kijimadaira (Romance no Kamisama) live cam",
     webcamPageUrl: "https://kijimadaira.jp/",
     webcams: [],
   },

@@ -112,7 +112,7 @@ const REGIONS: RegionConfig[] = [
     status: "live",
     href: "/iiyama/",
     baseTowns: ["Iiyama", "Madarao Kogen", "Togari Onsen", "Kijimadaira"],
-    mountains: ["Madarao", "Tangram", "Togari Onsen", "Kijimadaira", "Kijima Snow Park"],
+    mountains: ["Madarao", "Tangram", "Togari Onsen", "Kijimadaira · Romance no Kamisama", "Kijima Snow Park"],
     // Headline reading from Iiyama City (~315m) - Hokuriku Shinkansen
     // gateway and the rail-in pivot for the whole north-east Nagano
     // resort cluster.
