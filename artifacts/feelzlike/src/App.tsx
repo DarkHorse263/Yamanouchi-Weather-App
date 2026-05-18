@@ -8,6 +8,7 @@ import { ConsentProvider, useConsent } from "@/lib/consent";
 import { ConsentBanner } from "@/components/ConsentBanner";
 import { InstallPrompt } from "@/components/InstallPrompt";
 import { OfflineBanner } from "@/components/OfflineBanner";
+import { PullToRefresh } from "@/components/PullToRefresh";
 import { SentryTestButton } from "@/components/SentryTestButton";
 import { AppErrorBoundary } from "@/components/AppErrorBoundary";
 import { identifyAnonUser, track } from "@/lib/analytics";
@@ -108,6 +109,7 @@ function App() {
             <ConsentBanner />
             <InstallPrompt />
             <OfflineBanner />
+            <PullToRefresh />
             <SentryTestButton />
           </ConsentProvider>
         </TooltipProvider>
