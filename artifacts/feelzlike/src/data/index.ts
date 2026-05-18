@@ -33,7 +33,7 @@ function validate<T>(label: string, schema: z.ZodType<T>, raw: unknown): T {
   if (!parsed.success) {
     const issues = parsed.error.issues
       .slice(0, 5)
-      .map((issue) => `  • ${issue.path.join(".") || "(root)"} – ${issue.message}`)
+      .map((issue) => `  \u2022 ${issue.path.join(".") || "(root)"} \u00b7 ${issue.message}`)
       .join("\n");
     throw new Error(
       `[curated-data] Schema validation failed for ${label} (${parsed.error.issues.length} issue(s)):\n${issues}`,

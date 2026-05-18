@@ -308,11 +308,11 @@ export default function AdminNewsletter() {
                           </span>
                         </td>
                         <td className="tabular-nums">
-                          {c.deliveredCount ?? "—"}
+                          {c.deliveredCount ?? "\u00b7"}
                           {c.recipientCount != null ? ` / ${c.recipientCount}` : ""}
                         </td>
                         <td className="text-xs text-muted-foreground">
-                          {c.sentAt ? new Date(c.sentAt).toLocaleString() : "—"}
+                          {c.sentAt ? new Date(c.sentAt).toLocaleString() : "\u00b7"}
                         </td>
                       </tr>
                     ))}

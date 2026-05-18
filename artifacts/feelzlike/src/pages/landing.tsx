@@ -76,6 +76,7 @@ const TOWN_SLIDES = [
   { src: "/towns/jindabyne.jpg",  town: "Jindabyne", region: "Snowy Mountains",            country: "NSW, Australia",   credit: "Image courtesy Destination NSW \u00a9" },
   { src: "/towns/mount-beauty.jpg", town: "Mount Beauty", region: "Victoria\u2019s High Country", country: "VIC, Australia" },
   { src: "/towns/yudanaka-valley.jpg", town: "Yudanaka", region: "Yamanouchi",              country: "Nagano, Japan"   },
+  { src: "/towns/nozawa-onsen-village.jpg", town: "Nozawa Onsen", region: "Nozawa Onsen",   country: "Nagano, Japan",    credit: "Image courtesy Go Nagano (Nagano Prefecture Tourism)" },
 ] as const;
 
 function formatAgo(iso: string | undefined, now: number, fallback = "loading\u2026"): string {
@@ -167,7 +168,7 @@ export default function Landing() {
       style={{ fontFamily: "'DIN Pro', system-ui, sans-serif", ...pretty }}
     >
       <PageMeta
-        title="feelzlike \u2014 weather for resort towns"
+        title="feelzlike \u00b7 weather for resort towns"
         description="Staying in a resort town? See live conditions across the Snowy Mountains, Victoria's High Country and Yamanouchi so you know where to go each day. Towns first, mountains second."
         path="/"
         jsonLd={[websiteSchema(), organizationSchema()]}

@@ -85,7 +85,7 @@ export default function AdminStats() {
             <Kpi label="sponsored CTR share" value={
               stats.data.news.totalClicks > 0
                 ? `${Math.round((stats.data.news.sponsoredClicks / stats.data.news.totalClicks) * 100)}%`
-                : "—"
+                : "\u00b7"
             } sub="of all news clicks" />
           </div>
 
@@ -113,8 +113,8 @@ export default function AdminStats() {
                   {stats.data.news.top.map((r) => (
                     <tr key={r.newsId} className="border-t">
                       <td className="py-2 font-mono text-[11px]">{r.newsId}</td>
-                      <td>{r.source ?? "—"}</td>
-                      <td className="text-muted-foreground">{r.category ?? "—"}</td>
+                      <td>{r.source ?? "\u00b7"}</td>
+                      <td className="text-muted-foreground">{r.category ?? "\u00b7"}</td>
                       <td>
                         {r.sponsored ? (
                           <span className="px-1.5 py-0.5 rounded bg-amber-100 text-amber-900 text-[10px] uppercase font-bold">sponsored</span>
