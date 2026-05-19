@@ -25,6 +25,7 @@ import {
 import type { ChainStatus } from "@workspace/api-client-react";
 import { useRegion, useLanguage, useBaseTown, useOptionalSeason, LiveBadge, UpdateStamp, PageHeader } from "@workspace/feelzlike-shell";
 import { EmptyStateCard } from "@/components/EmptyStateCard";
+import { REGION_COUNTRY } from "@/regions";
 
 function statusClasses(c: string): string {
   switch (c) {
@@ -105,8 +106,11 @@ export function TownRoads() {
   // showing chains regardless of the auto-detected hemisphere season -
   // southern-hemisphere AU defaults to "green" in May, but the chain
   // status still has to render for the off-season AU audience checking
-  // ahead of winter trips.
-  const hideChainsForSeason = region.id === "yamanouchi" && seasonCtx?.isGreen === true;
+  // ahead of winter trips. Driven off REGION_COUNTRY so every JP region
+  // (yamanouchi, nozawa-onsen, iiyama, and any future JP additions)
+  // is covered automatically.
+  const hideChainsForSeason =
+    REGION_COUNTRY[region.id] === "JP" && seasonCtx?.isGreen === true;
   const dataAvailable = region.roadsSource?.dataAvailable ?? true;
   // Always fetch Â· even regions without a live per-road table now return
   // structured chain-fitting requirement data, which we want to render.
