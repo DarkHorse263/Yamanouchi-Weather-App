@@ -1,5 +1,10 @@
 import { Router, type IRouter } from "express";
 import { getSupabase } from "../lib/supabase.js";
+import {
+  getResortsTodayRows,
+  getStormsTodayRows,
+  getPowderAlertsTodayRows,
+} from "../lib/snowCache.js";
 import { getLiveWeather, getWeatherForRegion, getFullWeatherOutlook } from "../lib/weather-service.js";
 import { parseRegionParam, RegionParamError, LOCATION_TO_REGION } from "../lib/regions.js";
 import {
@@ -206,7 +211,7 @@ router.get("/dashboard", async (_req, res): Promise<void> => {
   }
 
   try {
-    const { data } = await supabase.from("yamanouchi_resorts_today").select("*");
+    const data = await getResortsTodayRows();
 
     const supabaseResorts = await applyLiveWeather(
       (data || []).map(mapResortRow) as ReturnType<typeof mapResortRow>[]
@@ -244,11 +249,7 @@ router.get("/resorts", async (_req, res): Promise<void> => {
   }
 
   try {
-    const { data, error } = await supabase
-      .from("yamanouchi_resorts_today")
-      .select("*");
-
-    if (error) throw error;
+    const data = await getResortsTodayRows();
 
     const supabaseResorts = await applyLiveWeather((data || []).map(mapResortRow));
     const presentRegions = new Set(supabaseResorts.map(r => r.region));
@@ -282,7 +283,7 @@ router.get("/map", async (_req, res): Promise<void> => {
 
   if (supabase) {
     try {
-      const { data } = await supabase.from("yamanouchi_resorts_today").select("*");
+      const data = await getResortsTodayRows();
       if (data && data.length > 0) {
         const supabaseResorts = data.map(mapResortRow).map(r => ({ ...r, region: normalizeRegion(r.region) }));
         // Supplement with fallback for any regions not present in Supabase
@@ -366,12 +367,7 @@ router.get("/outlook", async (_req, res): Promise<void> => {
 
   try {
     // yamanouchi_storms_today columns (from Swift): cluster, snow_24h_cm, snow_48h_cm, snow_72h_cm, storm_level, headline, storm_rank
-    const { data, error } = await supabase
-      .from("yamanouchi_storms_today")
-      .select("*")
-      .order("storm_rank", { ascending: true });
-
-    if (error) throw error;
+    const data = await getStormsTodayRows();
 
     if (!data || data.length === 0) {
       res.json(GetSnowOutlookResponse.parse(fallbackOutlook));
@@ -483,12 +479,12 @@ router.get("/alerts", async (req, res): Promise<void> => {
     // Region scoping is done post-query via LOCATION_TO_REGION (alerts) and
     // CLUSTER_TO_REGION (storm tracker) so any region asking for /alerts
     // gets a consistent shape · empty until rows for that region land.
-    const [alertsRes, stormRes] = await Promise.all([
-      supabase.from("powder_alerts_today").select("*").order("created_at", { ascending: false }),
-      supabase.from("yamanouchi_storms_today").select("*").order("storm_rank", { ascending: true }),
+    const [alertsData, stormsData] = await Promise.all([
+      getPowderAlertsTodayRows(),
+      getStormsTodayRows(),
     ]);
 
-    const alertsRaw = (alertsRes.data || []).filter((a: Record<string, unknown>) => {
+    const alertsRaw = (alertsData || []).filter((a: Record<string, unknown>) => {
       if (!region) return true;
       const resortId = String(a.resort_id || "").toLowerCase();
       const cluster = String(a.cluster || "");
@@ -515,7 +511,7 @@ router.get("/alerts", async (req, res): Promise<void> => {
       };
     });
 
-    const stormsRaw = (stormRes.data || []).filter((s: Record<string, unknown>) => {
+    const stormsRaw = (stormsData || []).filter((s: Record<string, unknown>) => {
       if (!region) return true;
       const cluster = String(s.cluster || "");
       return cluster ? lookupCluster(cluster) === region : false;
