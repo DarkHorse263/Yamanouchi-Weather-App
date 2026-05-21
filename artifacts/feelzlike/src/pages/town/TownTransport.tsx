@@ -75,7 +75,7 @@ export function TownTransport() {
   }, [region.id, town?.id, town?.nearbyMountainIds, seasonCtx?.isGreen]);
 
   return (
-    <div className="px-4 md:px-10 py-5 md:py-10 max-w-6xl mx-auto">
+    <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
       <PageHeader
         byline={`${region.name} · ${town ? t(town.name, town.nameJa) : t("Town", "町")}`}
         title={t("Transport", "交通")}
@@ -85,7 +85,7 @@ export function TownTransport() {
         )}
         badge={<LiveBadge tone="onDark" label={t("Curated", "編集済")} />}
       />
-      <div className="mb-6" />
+      <div className="mb-5" />
 
       {town && !townHasRideshare(town.id) && (
         <RideshareUnavailableNotice

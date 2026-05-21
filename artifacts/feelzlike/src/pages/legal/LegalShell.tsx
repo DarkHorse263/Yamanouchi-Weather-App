@@ -40,7 +40,7 @@ export function LegalShell({
         </div>
       </header>
 
-      <main className="max-w-3xl mx-auto px-5 py-10 md:py-14">
+      <main className="max-w-3xl mx-auto px-5 py-8 md:py-10">
         <p className="text-[11px] font-bold tracking-[0.22em] uppercase text-sky-700">
           Legal
         </p>
@@ -51,11 +51,11 @@ export function LegalShell({
           Last updated · {lastUpdated}
         </p>
 
-        <div className="mt-8 space-y-8 text-[15px] leading-relaxed text-slate-800">
+        <div className="mt-6 space-y-6 text-[15px] leading-relaxed text-slate-800">
           {children}
         </div>
 
-        <div className="mt-12 pt-6 border-t border-slate-200 flex flex-wrap gap-x-4 gap-y-2 text-sm text-slate-600">
+        <div className="mt-9 pt-5 border-t border-slate-200 flex flex-wrap gap-x-4 gap-y-2 text-sm text-slate-600">
           <Link href="/legal/privacy" className="hover:text-sky-700">
             Privacy
           </Link>

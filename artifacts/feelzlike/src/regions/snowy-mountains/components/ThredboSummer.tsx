@@ -20,7 +20,7 @@ export function ThredboSummer() {
       transition={{ delay: 0.15 }}
       className="glass rounded-3xl p-5 md:p-8 col-span-full"
     >
-      <div className="flex items-start justify-between gap-4 flex-wrap mb-5">
+      <div className="flex items-start justify-between gap-4 flex-wrap mb-4">
         <div>
           <p className="byline text-muted-foreground">Summer at Thredbo</p>
           <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
@@ -42,7 +42,7 @@ export function ThredboSummer() {
         </a>
       </div>
 
-      <div className="rule mb-5" />
+      <div className="rule mb-4" />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <SummerCard

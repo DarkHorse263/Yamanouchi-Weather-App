@@ -77,7 +77,7 @@ function RegionPanel({ spec }: { spec: RegionDemoSpec }) {
 
 export default function StayFilterBarDemo() {
   return (
-    <div className="mx-auto max-w-7xl p-6 space-y-8">
+    <div className="mx-auto max-w-7xl p-6 space-y-6">
       <header>
         <p className="text-[11px] font-bold tracking-wider uppercase text-muted-foreground">
           Component preview · Sprint 2 · Prompt 2.3

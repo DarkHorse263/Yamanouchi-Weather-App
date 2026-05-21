@@ -52,7 +52,7 @@ export function EmptyStateCard({
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className={`mx-auto max-w-xl rounded-2xl border border-border bg-white px-6 py-10 md:px-10 md:py-12 text-center ${className}`}
+      className={`mx-auto max-w-xl rounded-2xl border border-border bg-white px-6 py-8 md:px-10 md:py-9 text-center ${className}`}
       role={role}
       aria-label={ariaLabel}
     >
@@ -60,7 +60,7 @@ export function EmptyStateCard({
         <Icon className="w-6 h-6" aria-hidden />
       </div>
 
-      <h2 className="font-display font-semibold text-2xl md:text-[28px] tracking-tight text-foreground mt-5 [text-wrap:balance]">
+      <h2 className="font-display font-semibold text-2xl md:text-[28px] tracking-tight text-foreground mt-4 [text-wrap:balance]">
         {title}
       </h2>
 
@@ -76,7 +76,7 @@ export function EmptyStateCard({
       </p>
 
       {ctaLabel && ctaHref && (
-        <div className="mt-6">
+        <div className="mt-5">
           <Button
             asChild
             variant="default"

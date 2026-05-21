@@ -65,7 +65,7 @@ export default function Alerts() {
   };
 
   return (
-    <div className="p-4 md:p-8 max-w-4xl mx-auto space-y-8">
+    <div className="p-4 md:p-8 max-w-4xl mx-auto space-y-6">
       <div>
         <h1 className="text-3xl md:text-4xl font-black text-foreground flex items-center gap-3">
           <BellRing className="w-8 h-8 text-primary" />
@@ -74,11 +74,11 @@ export default function Alerts() {
         <p className="text-muted-foreground mt-2">{t("Get notified when significant snow is forecast.", "まとまった降雪が予報されたら通知します。")}</p>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-5">
         <h2 className="text-2xl font-bold text-foreground">{t("Active Alerts", "現在のアラート")}</h2>
         
         {data.alerts.length === 0 ? (
-          <Card className="bg-secondary/50 border-dashed text-center py-12">
+          <Card className="bg-secondary/50 border-dashed text-center py-9">
             <Info className="w-12 h-12 text-muted-foreground mx-auto mb-3 opacity-50" />
             <h3 className="text-lg font-bold text-foreground">{t("No active alerts", "現在アラートはありません")}</h3>
             <p className="text-muted-foreground">{t("Conditions are stable.", "コンディションは安定しています。")}</p>
@@ -122,7 +122,7 @@ export default function Alerts() {
         )}
       </div>
 
-      <div className="pt-8 border-t border-border">
+      <div className="pt-6 border-t border-border">
         <PremiumGate
           title="Powder & weather alerts"
           titleJa="降雪・気象アラート"
@@ -133,7 +133,7 @@ export default function Alerts() {
         </PremiumGate>
       </div>
 
-      <div className="space-y-6 pt-8 border-t border-border">
+      <div className="space-y-5 pt-6 border-t border-border">
         <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
           <CloudLightning className="w-6 h-6 text-indigo-500" />
           {t("Storm Tracker", "ストームトラッカー")}

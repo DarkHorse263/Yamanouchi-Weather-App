@@ -7,12 +7,12 @@ export function ErrorState({ error, onRetry }: { error: unknown; onRetry?: () =>
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        className="bg-destructive/10 p-6 rounded-full mb-6"
+        className="bg-destructive/10 p-6 rounded-full mb-5"
       >
         <AlertTriangle className="w-12 h-12 text-destructive" />
       </motion.div>
       <h2 className="text-2xl font-bold mb-2">Unable to load data</h2>
-      <p className="text-muted-foreground max-w-md mb-8">
+      <p className="text-muted-foreground max-w-md mb-6">
         We hit a blizzard trying to get this information. The servers might be temporarily down or unreachable.
       </p>
       {onRetry && (

@@ -1019,7 +1019,7 @@ export default function Transport() {
         </div>
       </div>
 
-      <div className="px-4 pb-6 space-y-5 mt-4">
+      <div className="px-4 pb-5 space-y-4 mt-4">
         {showRideshareNotice && (
           <RideshareUnavailableNotice townName={rideshareTownName} t={t} />
         )}

@@ -28,7 +28,7 @@ export function RideshareUnavailableNotice({
       transition={{ duration: 0.3 }}
       role="note"
       aria-label={t("Rideshare not available", "ライドシェアはご利用いただけません")}
-      className="mb-6 rounded-2xl border border-amber-200 bg-amber-50/70 p-4 sm:p-5 flex items-start gap-3"
+      className="mb-5 rounded-2xl border border-amber-200 bg-amber-50/70 p-4 sm:p-5 flex items-start gap-3"
     >
       <div className="shrink-0 w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center">
         <Smartphone className="w-5 h-5" aria-hidden="true" />

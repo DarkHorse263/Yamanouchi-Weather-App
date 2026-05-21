@@ -67,7 +67,7 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
   ];
 
   return (
-    <div className="p-4 md:p-8 max-w-4xl mx-auto space-y-5 pb-24">
+    <div className="p-4 md:p-8 max-w-4xl mx-auto space-y-4 pb-24">
       {!embedded && (
         <>
           <div>
@@ -119,7 +119,7 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
 
       {/* ON MOUNTAIN */}
       {tab === "mountain" && (
-        <div className="space-y-6">
+        <div className="space-y-5">
           {MOUNTAIN_AREAS.map(area => {
             const places = mountain.filter(p => p.region === area.region);
             if (places.length === 0) return null;
@@ -148,7 +148,7 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
 
       {/* IN TOWN */}
       {tab === "town" && (
-        <div className="space-y-6">
+        <div className="space-y-5">
           {TOWN_AREAS.map(area => {
             const places = town.filter(p => p.region === area.region);
             if (places.length === 0) return null;

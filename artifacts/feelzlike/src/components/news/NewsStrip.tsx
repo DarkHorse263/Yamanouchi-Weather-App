@@ -20,7 +20,7 @@ export function NewsStrip({ regionId, limit = 3 }: Props) {
   if (items.length === 0) return null;
 
   return (
-    <section className="mt-10">
+    <section className="mt-8">
       <div className="flex items-end justify-between mb-4">
         <div>
           <p className="byline text-muted-foreground inline-flex items-center gap-1.5">

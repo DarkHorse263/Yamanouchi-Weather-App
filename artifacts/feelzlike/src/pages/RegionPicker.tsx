@@ -7,14 +7,14 @@ import wordmark from "@assets/feelzlike_trimmed/feelzlike_WordMarque_colour_1604
 export default function RegionPicker() {
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-5xl mx-auto px-4 md:px-10 pt-6 md:pt-12 pb-12">
+      <div className="max-w-5xl mx-auto px-4 md:px-10 pt-5 md:pt-9 pb-9">
         <motion.header
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
           <img src={wordmark} alt="feelzlike" className="h-9 md:h-10 w-auto" />
-          <p className="byline text-muted-foreground/70 mt-6">The skier &amp; snowboarder's bible</p>
+          <p className="byline text-muted-foreground/70 mt-5">The skier &amp; snowboarder's bible</p>
           <h1 className="font-display font-semibold text-4xl md:text-6xl tracking-tight text-foreground mt-3 max-w-3xl leading-[1.05]">
             What does the mountain feel like today?
           </h1>
@@ -27,7 +27,7 @@ export default function RegionPicker() {
           </p>
         </motion.header>
 
-        <div className="rule mt-10 mb-8" />
+        <div className="rule mt-8 mb-6" />
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {REGIONS.map((region, i) => (
@@ -52,7 +52,7 @@ export default function RegionPicker() {
                   {region.name}
                 </h2>
                 <p className="text-muted-foreground text-sm mt-1">{region.subtitle}</p>
-                <div className="mt-5 flex flex-wrap gap-1.5">
+                <div className="mt-4 flex flex-wrap gap-1.5">
                   {(region.mountains ?? []).slice(0, 4).map((m) => (
                     <span
                       key={m.id}
@@ -67,7 +67,7 @@ export default function RegionPicker() {
           ))}
         </div>
 
-        <div className="rule mt-12 mb-6" />
+        <div className="rule mt-9 mb-5" />
         <p className="byline text-muted-foreground/60">v0.3 · feelzlike - single app, all regions</p>
       </div>
     </div>

@@ -127,7 +127,7 @@ const GREEN_HIGHLIGHTS = [
 
 function GreenHome({ t }: { t: (en: string, ja: string) => string }) {
   return (
-    <div className="p-4 md:p-8 space-y-5 md:space-y-6 max-w-7xl mx-auto">
+    <div className="p-4 md:p-8 space-y-4 md:space-y-5 max-w-7xl mx-auto">
       {/* Editorial intro */}
       <motion.div
         initial={{ opacity: 0, y: 8 }}
@@ -182,7 +182,7 @@ function GreenHome({ t }: { t: (en: string, ja: string) => string }) {
               Shiga Kogen · Ryuoo · Shibu Onsen · Yudanaka
             </p>
           </div>
-          <div className="flex items-end justify-between mt-6">
+          <div className="flex items-end justify-between mt-5">
             <div className="text-white">
               <span className="display-number text-4xl">8</span>
               <span className="text-white/70 text-sm font-medium ml-1.5">
@@ -284,7 +284,7 @@ export default function Home() {
   const activeAlerts = alertData?.alerts?.slice(0, 2) ?? [];
 
   return (
-    <div className="p-4 md:p-8 space-y-5 md:space-y-6 max-w-7xl mx-auto">
+    <div className="p-4 md:p-8 space-y-4 md:space-y-5 max-w-7xl mx-auto">
 
       {/* ALERTS */}
       {activeAlerts.length > 0 && (
@@ -352,7 +352,7 @@ export default function Home() {
               Shiga Kogen · Ryuoo · Yomase
             </p>
           </div>
-          <div className="flex items-end justify-between mt-6">
+          <div className="flex items-end justify-between mt-5">
             <div className="text-white">
               <span className="display-number text-4xl">{data.totalSkiAreas}</span>
               <span className="text-white/75 text-sm font-medium ml-1.5">{t("ski areas", "スキー場")}</span>

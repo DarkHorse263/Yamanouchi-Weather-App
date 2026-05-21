@@ -204,7 +204,7 @@ export function HourlyForecast({
       className="glass rounded-3xl p-5 md:p-8"
       aria-label={tx("Next 48 hours", "今後48時間")}
     >
-      <header className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between mb-5">
+      <header className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between mb-4">
         <div>
           <p className="byline text-muted-foreground">
             {tx("Hour by hour", "時間別")}

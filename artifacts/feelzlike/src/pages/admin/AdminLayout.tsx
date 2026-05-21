@@ -127,7 +127,7 @@ export function AdminLayout({ children, active }: Props) {
           </div>
         </div>
       </header>
-      <main className="max-w-6xl mx-auto px-6 py-8">{children}</main>
+      <main className="max-w-6xl mx-auto px-6 py-6">{children}</main>
     </div>
   );
 }

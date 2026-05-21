@@ -23,7 +23,7 @@ export default function Alerts() {
   if (isGreen) return <GreenSeasonNotice />;
 
   return (
-    <div className="p-4 md:p-8 max-w-3xl mx-auto space-y-8">
+    <div className="p-4 md:p-8 max-w-3xl mx-auto space-y-6">
       <div>
         <h1 className="text-3xl md:text-4xl font-black text-foreground flex items-center gap-3">
           <BellRing className="w-8 h-8 text-primary" />

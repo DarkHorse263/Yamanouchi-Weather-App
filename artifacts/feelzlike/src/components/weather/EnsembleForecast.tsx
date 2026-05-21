@@ -40,7 +40,7 @@ export function EnsembleForecast({ locationId }: Props) {
     return (
       <div className="glass rounded-3xl p-5 md:p-8 animate-pulse">
         <div className="h-3 w-24 bg-muted/50 rounded mb-3" />
-        <div className="h-6 w-48 bg-muted/40 rounded mb-5" />
+        <div className="h-6 w-48 bg-muted/40 rounded mb-4" />
         <div className="h-32 bg-muted/20 rounded" />
       </div>
     );
@@ -61,7 +61,7 @@ export function EnsembleForecast({ locationId }: Props) {
         </h2>
       </div>
 
-      <div className="rule mt-5 mb-2" />
+      <div className="rule mt-4 mb-2" />
 
       <div className="divide-y divide-white/5">
         {data.days.slice(0, 6).map((day, i) => {

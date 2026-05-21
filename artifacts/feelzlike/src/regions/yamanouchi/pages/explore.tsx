@@ -28,7 +28,7 @@ export default function Explore({ embedded = false }: { embedded?: boolean }) {
   ];
 
   return (
-    <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-8">
+    <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-6">
       {!embedded && (
         <div>
           <h1 className="text-3xl md:text-4xl font-black text-foreground">{t("Explore Yamanouchi", "山ノ内を探索")}</h1>
@@ -117,7 +117,7 @@ export default function Explore({ embedded = false }: { embedded?: boolean }) {
           <h2 className="text-xl font-black text-foreground mb-1">{t("Curated Highlights", "おすすめスポット")}</h2>
           <p className="text-sm text-muted-foreground mb-4">{t("Hand-picked attractions from our local team", "地元チームが厳選した観光スポット")}</p>
 
-          <div className="flex overflow-x-auto hide-scrollbar gap-2 mb-5">
+          <div className="flex overflow-x-auto hide-scrollbar gap-2 mb-4">
             {filters.map(f => (
               <button
                 key={f.value}

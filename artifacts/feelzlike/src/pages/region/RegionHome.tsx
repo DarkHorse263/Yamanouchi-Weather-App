@@ -34,7 +34,7 @@ export function RegionHome() {
   const countryMeta = country ? COUNTRY_META[country] : null;
 
   return (
-    <div className="px-4 md:px-10 py-5 md:py-10 max-w-6xl mx-auto">
+    <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
       <PageMeta
         title={`${region.name} - pick a base town`}
         description={`Choose your base town in ${region.name}. Real-time weather, road conditions and live cams scoped to where you stay.`}
@@ -70,7 +70,7 @@ export function RegionHome() {
       />
 
       {showDailyPick && (
-        <div className="mt-8">
+        <div className="mt-6">
           <DailyPick
             regionId={region.id}
             resorts={(region.mountains ?? []).map((m) => ({ id: m.id, name: m.name }))}
@@ -80,11 +80,11 @@ export function RegionHome() {
       )}
 
       {towns.length === 0 ? (
-        <p className="mt-8 text-sm text-muted-foreground">
+        <p className="mt-6 text-sm text-muted-foreground">
           {t("No base towns configured yet.", "拠点の町は未設定です。")}
         </p>
       ) : (
-        <section className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+        <section className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
           {towns.map((town, i) => {
             const nearby = (town.nearbyMountainIds ?? [])
               .map((id) => mountainsById.get(id)?.name)

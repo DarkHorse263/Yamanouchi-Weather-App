@@ -84,7 +84,7 @@ export function MountainDetail() {
 
   if (!locationId) {
     return (
-      <div className="px-4 md:px-10 py-6 md:py-10 max-w-6xl mx-auto">
+      <div className="px-4 md:px-10 py-5 md:py-8 max-w-6xl mx-auto">
         <p className="text-muted-foreground">
           {t("Mountain not specified.", "スキー場が指定されていません。")}
         </p>
@@ -100,7 +100,7 @@ export function MountainDetail() {
   const Icon = current ? pickIcon(current.weatherCode, current.isDay) : Cloud;
 
   return (
-    <div className="px-4 md:px-10 py-5 md:py-10 max-w-6xl mx-auto">
+    <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
       <Link
         href={backHref}
         className="inline-flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-[0.2em] text-sky-700/80 hover:text-sky-700 transition-colors"
@@ -134,11 +134,11 @@ export function MountainDetail() {
       </div>
 
       {q.isLoading ? (
-        <p className="mt-10 text-muted-foreground">
+        <p className="mt-8 text-muted-foreground">
           {t("Loading mountain conditions…", "山の状況を読込中…")}
         </p>
       ) : q.isError || !current ? (
-        <p className="mt-10 text-muted-foreground">
+        <p className="mt-8 text-muted-foreground">
           {t(
             "Mountain conditions unavailable right now.",
             "現在、山の状況を取得できません。",
@@ -147,7 +147,7 @@ export function MountainDetail() {
       ) : (
         <>
           {/* Hero - on-mountain temp, elevation, conditions blurb. */}
-          <section className="mt-8 rounded-2xl border border-border bg-white p-6 md:p-8">
+          <section className="mt-6 rounded-2xl border border-border bg-white p-6 md:p-8">
             <div className="flex items-start gap-6 flex-wrap">
               <div className="flex items-center gap-5">
                 <Icon className="w-16 h-16 text-primary" strokeWidth={1.4} />
@@ -192,7 +192,7 @@ export function MountainDetail() {
           {/* Conditions right now · snow depth, incoming snow, wind and
               freezing level. The four numbers an off-mountain skier is
               actually deciding on. */}
-          <section className="mt-8 rounded-2xl border border-border bg-white p-5">
+          <section className="mt-6 rounded-2xl border border-border bg-white p-5">
             <p className="byline text-muted-foreground/70">
               {t("conditions right now", "現在の状況")}
             </p>
@@ -465,7 +465,7 @@ export function MountainDetail() {
                 blurbJa="気温・降雪・風速を切り替えて24時間の推移を確認。"
               >
                 <section className="rounded-2xl border border-border bg-white p-5 md:p-6">
-                  <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-5 gap-3">
+                  <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-4 gap-3">
                     <div>
                       <p className="byline text-muted-foreground/70">{t("24-hour trend", "24時間推移")}</p>
                       <h2 className="font-display font-semibold text-xl mt-1 flex items-center gap-2">
@@ -518,7 +518,7 @@ export function MountainDetail() {
               blurbJa="条件達成時にプッシュ通知。降雪・風速・凍結高度を設定。"
             >
               <section className="rounded-2xl border border-border bg-white p-5 md:p-6">
-                <div className="mb-5">
+                <div className="mb-4">
                   <p className="byline text-muted-foreground/70">{t("Alerts", "アラート")}</p>
                   <h2 className="font-display font-semibold text-xl mt-1">
                     {t("Personalised triggers", "パーソナライズされたトリガー")}
@@ -539,7 +539,7 @@ export function MountainDetail() {
             />
           </div>
 
-          <p className="byline text-muted-foreground/60 mt-10">
+          <p className="byline text-muted-foreground/60 mt-8">
             {t(
               `Source: ${current.dataSource ?? region.weatherSource?.label ?? "Open-Meteo"} · elevation-corrected for ${location?.elevation ?? "?"}m`,
               `出典: ${current.dataSource ?? region.weatherSource?.labelJa ?? "Open-Meteo"} · 標高${location?.elevation ?? "?"}mに補正`,

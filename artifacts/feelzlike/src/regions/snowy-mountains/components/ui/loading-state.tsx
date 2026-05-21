@@ -3,7 +3,7 @@ import { Snowflake } from "lucide-react";
 
 export function LoadingState({ message = "Loading mountain data..." }: { message?: string }) {
   return (
-    <div className="w-full h-[60vh] flex flex-col items-center justify-center space-y-6">
+    <div className="w-full h-[60vh] flex flex-col items-center justify-center space-y-5">
       <motion.div
         animate={{ rotate: 360 }}
         transition={{ duration: 3, repeat: Infinity, ease: "linear" }}

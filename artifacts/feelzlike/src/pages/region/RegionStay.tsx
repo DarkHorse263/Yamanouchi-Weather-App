@@ -61,7 +61,7 @@ export function RegionStay() {
     : allPlaces;
 
   return (
-    <div className="px-4 md:px-10 py-5 md:py-10 max-w-6xl mx-auto">
+    <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
       <PageHeader
         byline={region.name}
         title={t("Stay", "宿泊")}
@@ -71,9 +71,9 @@ export function RegionStay() {
         )}
         badge={<LiveBadge tone="onDark" label={query.isFetching ? t("Loading", "読込中") : t("Live", "ライブ")} />}
       />
-      <div className="mb-8" />
+      <div className="mb-6" />
 
-      <div className="mb-6">
+      <div className="mb-5">
         <StayPlatformBar
           variant="banner"
           country={country}
@@ -83,7 +83,7 @@ export function RegionStay() {
         />
       </div>
 
-      <div className="flex overflow-x-auto hide-scrollbar gap-2 pb-1 mb-6">
+      <div className="flex overflow-x-auto hide-scrollbar gap-2 pb-1 mb-5">
         {filters.map((f) => (
           <button
             key={f.value}

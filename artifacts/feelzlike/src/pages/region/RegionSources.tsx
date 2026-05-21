@@ -129,7 +129,7 @@ export function RegionSources() {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <div className="px-4 md:px-10 pt-5 md:pt-10">
+      <div className="px-4 md:px-10 pt-4 md:pt-8">
         <PageHeader
           byline={region.name}
           title={t("Where the data comes from", "データの出典")}
@@ -141,7 +141,7 @@ export function RegionSources() {
         />
       </div>
 
-      <section className="px-4 md:px-10 pt-5 pb-10 space-y-8">
+      <section className="px-4 md:px-10 pt-4 pb-8 space-y-6">
         {groups.map((group) => (
           <SourceGroupCard key={group.title} group={group} t={t} />
         ))}

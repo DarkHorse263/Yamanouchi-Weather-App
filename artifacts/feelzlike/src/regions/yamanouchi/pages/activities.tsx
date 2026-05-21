@@ -123,7 +123,7 @@ export default function Activities() {
 
   return (
     <div className="p-4 md:p-8 max-w-4xl mx-auto pb-24">
-      <div className="mb-6">
+      <div className="mb-5">
         <h1 className="text-3xl md:text-4xl font-black text-foreground">
           {t("Green Season Activities", "グリーンシーズンのアクティビティ")}
         </h1>

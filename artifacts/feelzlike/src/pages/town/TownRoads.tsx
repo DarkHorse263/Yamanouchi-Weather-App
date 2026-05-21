@@ -177,7 +177,7 @@ export function TownRoads() {
   }, [query.data, town, region]);
 
   return (
-    <div className="px-4 md:px-10 py-5 md:py-10 max-w-6xl mx-auto">
+    <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
       <PageHeader
         byline={`${region.name} · ${town ? t(town.name, town.nameJa) : t("Town", "町")}`}
         title={t("Road conditions & cams", "道路状況・ライブカメラ")}
@@ -208,7 +208,7 @@ export function TownRoads() {
           ) : undefined
         }
       />
-      <div className="mb-8" />
+      <div className="mb-6" />
 
       {/* ── VHC live alerts section ─────────────────────────────────────
           Surfaced above the static "data coming soon" card because it IS
@@ -352,7 +352,7 @@ export function TownRoads() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="mt-12"
+          className="mt-9"
         >
           <div className="flex items-end justify-between mb-4 flex-wrap gap-2">
             <div>
@@ -394,7 +394,7 @@ export function TownRoads() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="mt-12"
+          className="mt-9"
         >
           <h2 className="font-display font-semibold text-2xl text-foreground inline-flex items-center gap-2 mb-4">
             <Camera className="w-5 h-5 text-primary" />
@@ -431,7 +431,7 @@ export function TownRoads() {
       )}
 
       {dataAvailable && query.data?.lastUpdated && region.roadsSource && (
-        <p className="text-xs text-muted-foreground/70 mt-6 inline-flex items-center gap-1.5">
+        <p className="text-xs text-muted-foreground/70 mt-5 inline-flex items-center gap-1.5">
           <MapPin className="w-3 h-3" />
           {t("Source", "情報源")}:{" "}
           <a
@@ -504,7 +504,7 @@ function VhcAlertsSection({
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.05 }}
-      className="mb-8"
+      className="mb-6"
     >
       <div className="flex items-end justify-between mb-3 flex-wrap gap-2">
         <div>
@@ -691,7 +691,7 @@ function ChainStatusSection({ statuses, t }: { statuses: ChainStatus[]; t: (en: 
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.05 }}
-      className="mb-8"
+      className="mb-6"
     >
       <div className="mb-3">
         <h2 className="font-display font-semibold text-2xl text-foreground inline-flex items-center gap-2">

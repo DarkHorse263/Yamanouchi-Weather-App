@@ -197,7 +197,7 @@ export default function LocationDetail() {
           />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-5 md:px-10 pt-10 md:pt-16 pb-8 md:pb-12">
+        <div className="relative max-w-7xl mx-auto px-5 md:px-10 pt-8 md:pt-16 pb-6 md:pb-9">
           {/* Source byline + live pill */}
           <motion.div
             initial={{ opacity: 0, y: 6 }}
@@ -241,7 +241,7 @@ export default function LocationDetail() {
           </motion.div>
 
           {/* Headline + temperature */}
-          <div className="mt-6 md:mt-10 grid md:grid-cols-12 gap-6 md:gap-10 items-end">
+          <div className="mt-5 md:mt-8 grid md:grid-cols-12 gap-6 md:gap-10 items-end">
             <div className="md:col-span-7">
               <motion.h1
                 initial={{ opacity: 0, y: 12 }}
@@ -305,9 +305,9 @@ export default function LocationDetail() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.18 }}
-            className="mt-8 md:mt-12 glass rounded-3xl p-5 md:p-8"
+            className="mt-6 md:mt-9 glass rounded-3xl p-5 md:p-8"
           >
-            <div className="flex items-end justify-between mb-5">
+            <div className="flex items-end justify-between mb-4">
               <div>
                 <p className="byline text-muted-foreground">conditions</p>
                 <h2 className="font-display font-semibold text-xl md:text-2xl mt-1">
@@ -318,7 +318,7 @@ export default function LocationDetail() {
                 {stats.length} measurements
               </p>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-y-6 gap-x-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-y-5 gap-x-4">
               {stats.map((s, i) => (
                 <div key={i} className="group">
                   <div className="flex items-center gap-1.5 byline text-muted-foreground/80 mb-1.5">
@@ -337,7 +337,7 @@ export default function LocationDetail() {
           </motion.div>
 
           {/* Scroll cue */}
-          <div className="mt-8 md:mt-10 flex items-center gap-2 text-muted-foreground/70">
+          <div className="mt-6 md:mt-8 flex items-center gap-2 text-muted-foreground/70">
             <span className="byline">Live conditions below</span>
             <ArrowDown className="w-3 h-3" />
           </div>
@@ -345,7 +345,7 @@ export default function LocationDetail() {
       </section>
 
       {/* ─── Body ───────────────────────────── */}
-      <div className="max-w-7xl mx-auto px-5 md:px-10 pb-20 space-y-6 md:space-y-8 -mt-2">
+      <div className="max-w-7xl mx-auto px-5 md:px-10 pb-20 space-y-5 md:space-y-6 -mt-2">
         {/* HOUR BY HOUR - next 48h. AU thresholds (0.5cm/hr, <25km/h)
             relaxed vs Japow benchmarks. */}
         <HourlyForecast
@@ -362,7 +362,7 @@ export default function LocationDetail() {
           transition={{ delay: 0.25 }}
           className="glass rounded-3xl p-5 md:p-8"
         >
-          <div className="flex items-end justify-between mb-5 gap-3">
+          <div className="flex items-end justify-between mb-4 gap-3">
             <div>
               <p className="byline text-muted-foreground">Weather outlook</p>
               <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
@@ -389,7 +389,7 @@ export default function LocationDetail() {
                   const snowH = Math.round((snow / maxSnow) * 100);
                   const rainH = Math.round((rain / maxRain) * 100);
                   return (
-                    <div key={day.date} className="bg-background/40 px-3 py-4 md:px-4 md:py-5 flex flex-col items-center text-center gap-2">
+                    <div key={day.date} className="bg-background/40 px-3 py-4 md:px-4 md:py-4 flex flex-col items-center text-center gap-2">
                       <p className="font-display font-medium text-base md:text-lg text-foreground tracking-tight">
                         {i === 0 ? "Today" : format(parseISO(day.date), "EEE")}
                       </p>
@@ -478,7 +478,7 @@ export default function LocationDetail() {
             transition={{ delay: 0.27 }}
             className="glass rounded-3xl p-5 md:p-8"
           >
-            <div className="flex items-end justify-between mb-5 gap-3">
+            <div className="flex items-end justify-between mb-4 gap-3">
               <div>
                 <p className="byline text-muted-foreground">Weather outlook</p>
                 <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
@@ -554,7 +554,7 @@ export default function LocationDetail() {
             transition={{ delay: 0.18 }}
             className="glass rounded-3xl p-5 md:p-8 flex flex-col"
           >
-            <div className="flex justify-between items-start mb-5">
+            <div className="flex justify-between items-start mb-4">
               <div>
                 <p className="byline text-muted-foreground">Lift status</p>
                 <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
@@ -582,7 +582,7 @@ export default function LocationDetail() {
               </div>
             )}
 
-            <div className="flex gap-6 mb-5 pb-5 border-b border-white/5">
+            <div className="flex gap-6 mb-4 pb-4 border-b border-white/5">
               <div>
                 <p className="byline text-muted-foreground/70 mb-1">Lifts open</p>
                 <p className="font-display text-3xl text-foreground" data-numeric>
@@ -681,7 +681,7 @@ export default function LocationDetail() {
             transition={{ delay: 0.2 }}
             className="glass rounded-3xl p-5 md:p-8"
           >
-            <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-6 gap-3">
+            <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-5 gap-3">
               <div>
                 <p className="byline text-muted-foreground">24-hour trend</p>
                 <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
@@ -728,7 +728,7 @@ export default function LocationDetail() {
           blurbJa="条件達成時にプッシュ通知。降雪・風速・凍結高度を設定。"
         >
           <div className="glass rounded-3xl p-5 md:p-8">
-            <div className="mb-5">
+            <div className="mb-4">
               <p className="byline text-muted-foreground">Alerts</p>
               <h2 className="font-display font-semibold text-xl md:text-2xl mt-1">
                 Personalised triggers
@@ -748,7 +748,7 @@ export default function LocationDetail() {
               transition={{ delay: 0.3 }}
               className="glass rounded-3xl p-5 md:p-8"
             >
-              <div className="flex items-end justify-between mb-5 gap-4">
+              <div className="flex items-end justify-between mb-4 gap-4">
                 <div>
                   <p className="byline text-muted-foreground">Eyes on the mountain</p>
                   <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">

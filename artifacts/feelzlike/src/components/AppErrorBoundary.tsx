@@ -26,7 +26,7 @@ export function AppErrorBoundary({ children }: { children: ReactNode }) {
             <button
               type="button"
               onClick={() => resetError()}
-              className="mt-6 inline-flex items-center gap-2 rounded-lg bg-sky-500 hover:bg-sky-400 px-4 py-2 text-sm font-semibold transition-colors"
+              className="mt-5 inline-flex items-center gap-2 rounded-lg bg-sky-500 hover:bg-sky-400 px-4 py-2 text-sm font-semibold transition-colors"
             >
               <RefreshCw className="w-4 h-4" />
               Try again

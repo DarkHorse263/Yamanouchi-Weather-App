@@ -17,7 +17,7 @@ export default function StayMapDemo() {
   const [jpTopKey, setJpTopKey] = useState<string>("shiga_kogen");
 
   return (
-    <div className="min-h-screen bg-background text-foreground p-6 space-y-12">
+    <div className="min-h-screen bg-background text-foreground p-6 space-y-9">
       <header className="space-y-2">
         <h1 className="font-display text-3xl">StayMap demo</h1>
         <p className="text-sm text-muted-foreground">

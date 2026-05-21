@@ -58,7 +58,7 @@ export function PowderCalendar({
       className="glass rounded-3xl p-5 md:p-8"
       aria-label={tx("Powder Forecast", "パウダー予報")}
     >
-      <header className="flex items-end justify-between gap-3 mb-5">
+      <header className="flex items-end justify-between gap-3 mb-4">
         <div>
           <p className="byline text-muted-foreground">
             {sectionNumber ? `${sectionNumber} · ` : ""}{tx("Plan ahead", "事前計画")}

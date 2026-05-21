@@ -36,7 +36,7 @@ export default function News() {
   }, [region, category]);
 
   return (
-    <div className="px-4 md:px-10 py-5 md:py-10 max-w-6xl mx-auto">
+    <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
       <PageMeta
         title="News & updates · feelzlike"
         description="Resort news, transport updates, season passes, gear and travel deals for the mountains feelzlike covers · Snowy Mountains, Victoria's High Country and Yamanouchi."
@@ -70,7 +70,7 @@ export default function News() {
         </p>
       </header>
 
-      <div className="mt-6 space-y-3">
+      <div className="mt-5 space-y-3">
         <FilterRow
           label="Region"
           options={REGION_FILTERS.map((r) => ({ id: r.id, label: r.label }))}
@@ -86,18 +86,18 @@ export default function News() {
       </div>
 
       {items.length === 0 ? (
-        <p className="mt-10 text-sm text-muted-foreground">
+        <p className="mt-8 text-sm text-muted-foreground">
           No items match these filters · try widening the region or category.
         </p>
       ) : (
-        <section className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <section className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {items.map((item) => (
             <NewsCard key={item.id} item={item} />
           ))}
         </section>
       )}
 
-      <p className="mt-10 pt-6 border-t border-border text-xs text-muted-foreground/70 max-w-2xl">
+      <p className="mt-8 pt-5 border-t border-border text-xs text-muted-foreground/70 max-w-2xl">
         Items marked sponsored may be affiliate or commercial links · feelzlike may earn a commission at no extra cost to you. Editorial picks are not paid for.
       </p>
     </div>

@@ -72,7 +72,7 @@ export default function Welcome() {
 
       <div className="mx-auto w-full max-w-md md:max-w-3xl lg:max-w-5xl">
         {/* HEADER ─────────────────────────────────────── */}
-        <header className="flex flex-col items-center gap-3 px-6 pt-8 pb-6 text-center md:pt-12 md:pb-8">
+        <header className="flex flex-col items-center gap-3 px-6 pt-6 pb-5 text-center md:pt-9 md:pb-6">
           <motion.img
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
@@ -134,7 +134,7 @@ export default function Welcome() {
         </section>
 
         {/* INTRO COPY ─────────────────────────────────── */}
-        <section className="px-6 pt-8 pb-2 text-center md:px-10 md:pt-10">
+        <section className="px-6 pt-6 pb-2 text-center md:px-10 md:pt-8">
           <motion.div
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
@@ -164,7 +164,7 @@ export default function Welcome() {
         </section>
 
         {/* CTA ────────────────────────────────────────── */}
-        <section className="px-6 pt-8 pb-12 text-center md:pt-12 md:pb-16">
+        <section className="px-6 pt-6 pb-9 text-center md:pt-9 md:pb-16">
           <motion.h1
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
@@ -175,7 +175,7 @@ export default function Welcome() {
             i wonder what it feelzlike&nbsp;in&hellip;
           </motion.h1>
 
-          <div className="relative mx-auto mt-5 flex h-32 w-32 items-center justify-center md:mt-7 md:h-40 md:w-40">
+          <div className="relative mx-auto mt-4 flex h-32 w-32 items-center justify-center md:mt-5 md:h-40 md:w-40">
             {/* drifting snowflakes around the mark */}
             {FLAKES.map((f, i) => (
               <motion.span
@@ -235,7 +235,7 @@ export default function Welcome() {
             </Link>
           </div>
 
-          <p className="mx-auto mt-6 max-w-sm text-[12px] leading-relaxed text-slate-500" style={balance}>
+          <p className="mx-auto mt-5 max-w-sm text-[12px] leading-relaxed text-slate-500" style={balance}>
             tap to pick a country
           </p>
         </section>

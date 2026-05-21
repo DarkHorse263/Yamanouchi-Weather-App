@@ -48,7 +48,7 @@ export default function Unsubscribed() {
             </p>
           </>
         )}
-        <div className="mt-6">
+        <div className="mt-5">
           <Link href="/" className="rounded-lg bg-primary text-primary-foreground font-bold text-sm px-5 py-2.5">
             Back to FeelZlike
           </Link>

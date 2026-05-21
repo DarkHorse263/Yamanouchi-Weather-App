@@ -34,7 +34,7 @@ export function TownExplore() {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <div className="px-4 md:px-10 pt-5 md:pt-10">
+      <div className="px-4 md:px-10 pt-4 md:pt-8">
         <PageHeader
           byline={`${region.name} · ${townDisplayName}`}
           title={t("Explore", "観光")}
@@ -54,7 +54,7 @@ export function TownExplore() {
       </div>
 
       {links.length === 0 ? (
-        <section className="px-4 md:px-10 pt-6 pb-10">
+        <section className="px-4 md:px-10 pt-5 pb-8">
           <EmptyStateCard
             icon={Compass}
             title={t("Explore links coming soon", "観光リンクは近日公開")}
@@ -65,7 +65,7 @@ export function TownExplore() {
           />
         </section>
       ) : (
-        <section className="px-4 md:px-10 pt-5 pb-10 space-y-8">
+        <section className="px-4 md:px-10 pt-4 pb-8 space-y-6">
           {Array.from(grouped.entries()).map(([category, items]) => (
             <div key={category}>
               <p className="text-[11px] font-bold tracking-wider text-muted-foreground/70 uppercase mb-3">

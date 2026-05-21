@@ -98,7 +98,7 @@ export function AlertSubscribeForm({ defaultRegion }: Props) {
   const canSubmit = !!email && regions.length > 0 && consent && !mutation.isPending;
 
   return (
-    <form id={formId} onSubmit={handleSubmit} className="rounded-2xl glass border border-border p-6 space-y-5">
+    <form id={formId} onSubmit={handleSubmit} className="rounded-2xl glass border border-border p-6 space-y-4">
       <div className="flex items-center gap-2">
         <BellRing className="w-5 h-5 text-primary" />
         <h3 className="text-lg font-bold text-foreground">{t("Subscribe to powder alerts", "パウダーアラートを購読")}</h3>

@@ -87,7 +87,7 @@ export default function Manage() {
     return <Shell><Banner kind="error" title="Missing token">The link in your email looks incomplete. Open it again from the email.</Banner></Shell>;
   }
   if (isLoading) {
-    return <Shell><div className="flex items-center justify-center py-12"><Loader2 className="w-6 h-6 animate-spin text-sky-400" /></div></Shell>;
+    return <Shell><div className="flex items-center justify-center py-9"><Loader2 className="w-6 h-6 animate-spin text-sky-400" /></div></Shell>;
   }
   if (isError || !data) {
     const reasonCode = (error as { data?: { reason?: string } } | null | undefined)?.data?.reason;
@@ -141,7 +141,7 @@ export default function Manage() {
 
   return (
     <Shell>
-      <div className="space-y-6">
+      <div className="space-y-5">
         <div>
           <h1 className="text-2xl font-black text-foreground">Your alerts</h1>
           <p className="text-sm text-muted-foreground mt-1">{sub.email}</p>
@@ -241,7 +241,7 @@ export default function Manage() {
           </div>
         )}
 
-        <details className="pt-6 border-t border-border" open={confirmingUnsub} onToggle={(e) => setConfirmingUnsub((e.target as HTMLDetailsElement).open)}>
+        <details className="pt-5 border-t border-border" open={confirmingUnsub} onToggle={(e) => setConfirmingUnsub((e.target as HTMLDetailsElement).open)}>
           <summary className="cursor-pointer text-sm text-rose-400 hover:text-rose-300 font-bold flex items-center gap-2">
             <Trash2 className="w-4 h-4" /> Unsubscribe from all alerts
           </summary>

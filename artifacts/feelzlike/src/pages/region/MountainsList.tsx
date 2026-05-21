@@ -77,7 +77,7 @@ export function MountainsList() {
         />
       </div>
 
-      <div className="relative px-4 md:px-10 py-6 md:py-10 max-w-6xl mx-auto">
+      <div className="relative px-4 md:px-10 py-5 md:py-8 max-w-6xl mx-auto">
         <motion.header
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
@@ -120,7 +120,7 @@ export function MountainsList() {
             </div>
           </div>
 
-          <div className="rule mt-8 mb-10" />
+          <div className="rule mt-6 mb-8" />
         </motion.header>
 
         {totalCount === 0 ? (
@@ -233,7 +233,7 @@ function ParentGroupCard({
           </p>
         )}
 
-        <div className="rule mt-5 mb-4" />
+        <div className="rule mt-4 mb-4" />
         <div className="flex items-end justify-between">
           <div>
             <p className="byline text-muted-foreground/70">{t("Highest summit", "最高標高")}</p>
@@ -349,7 +349,7 @@ function MountainCard({
 
         {m.elevationM !== undefined && (
           <>
-            <div className="rule mt-5 mb-4" />
+            <div className="rule mt-4 mb-4" />
             <div className="flex items-end justify-between">
               <div>
                 <p className="byline text-muted-foreground/70">

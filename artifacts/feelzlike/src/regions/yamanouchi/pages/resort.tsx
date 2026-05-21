@@ -255,7 +255,7 @@ export default function ResortDetail() {
         scrollCue={t("Live conditions below", "ライブ状況は下へ")}
       />
 
-      <div className="max-w-7xl mx-auto px-5 md:px-10 pb-16 space-y-6 md:space-y-8 -mt-2">
+      <div className="max-w-7xl mx-auto px-5 md:px-10 pb-16 space-y-5 md:space-y-6 -mt-2">
         {/* Operating hours strip · matches AU resort hero. Sits above
             Conditions Right Now so visitors see first / last lifts before
             scrolling. */}
@@ -399,7 +399,7 @@ export default function ResortDetail() {
               transition={{ delay: 0.2 }}
               className="glass rounded-3xl p-5 md:p-8"
             >
-              <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-6 gap-3">
+              <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-5 gap-3">
                 <div>
                   <p className="byline text-muted-foreground">{t("24-hour trend", "24時間推移")}</p>
                   <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
@@ -448,7 +448,7 @@ export default function ResortDetail() {
           blurbJa="条件達成時にプッシュ通知。降雪・風速・凍結高度を設定。"
         >
           <div className="glass rounded-3xl p-5 md:p-8">
-            <div className="mb-5">
+            <div className="mb-4">
               <p className="byline text-muted-foreground">{t("Alerts", "アラート")}</p>
               <h2 className="font-display font-semibold text-xl md:text-2xl mt-1">
                 {t("Personalised triggers", "パーソナライズされたトリガー")}
@@ -521,7 +521,7 @@ function OfficialLinks({
       transition={{ delay: 0.36 }}
       className="glass rounded-3xl p-6 md:p-8"
     >
-      <div className="flex items-end justify-between mb-6 gap-3">
+      <div className="flex items-end justify-between mb-5 gap-3">
         <div>
           <p className="byline text-muted-foreground">
             {t("Official sources", "公式情報")}

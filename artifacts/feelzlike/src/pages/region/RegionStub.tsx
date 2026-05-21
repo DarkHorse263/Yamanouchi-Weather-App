@@ -15,7 +15,7 @@ export function RegionStub({ title, titleJa, params }: Props) {
   const resortId = params?.id;
 
   return (
-    <div className="px-4 md:px-10 py-5 md:py-10 max-w-6xl mx-auto">
+    <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
       <PageHeader
         byline={`${region.name} · ${region.subtitle}`}
         title={
@@ -33,7 +33,7 @@ export function RegionStub({ title, titleJa, params }: Props) {
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3, delay: 0.05 }}
-        className="mt-8"
+        className="mt-6"
       >
         <div className="glass rounded-2xl p-8 md:p-12">
           <div className="flex items-start justify-between gap-6 flex-wrap">

@@ -39,14 +39,14 @@ export function TownWeather() {
 
   if (!town) {
     return (
-      <div className="px-4 md:px-10 py-6 md:py-10 max-w-6xl mx-auto">
+      <div className="px-4 md:px-10 py-5 md:py-8 max-w-6xl mx-auto">
         <p className="text-muted-foreground">{t("Loading town…", "読み込み中…")}</p>
       </div>
     );
   }
 
   return (
-    <div className="px-4 md:px-10 py-5 md:py-10 max-w-6xl mx-auto">
+    <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
       <PageHeader
         byline={`${region.name} · ${t(town.name, town.nameJa)}`}
         title={t(`${town.name} weather forecast`, `${town.name}の天気予報`)}
@@ -77,9 +77,9 @@ export function TownWeather() {
       />
 
       {q.isLoading ? (
-        <p className="mt-10 text-muted-foreground">{t("Loading weather…", "天気を読込中…")}</p>
+        <p className="mt-8 text-muted-foreground">{t("Loading weather…", "天気を読込中…")}</p>
       ) : q.isError || !q.data ? (
-        <p className="mt-10 text-muted-foreground">
+        <p className="mt-8 text-muted-foreground">
           {t("Weather data unavailable right now.", "現在、天気データを取得できません。")}
         </p>
       ) : (
@@ -91,7 +91,7 @@ export function TownWeather() {
           <Hourly hourly={q.data.hourly} t={t} />
           <Outlook days={q.data.daily.slice(1, 7)} t={t} />
           <Radar t={t} />
-          <p className="byline text-muted-foreground/60 mt-10">
+          <p className="byline text-muted-foreground/60 mt-8">
             {t(
               `Source: ${region.weatherSource?.label ?? "Open-Meteo"} · updated every 10 min`,
               `出典: ${region.weatherSource?.labelJa ?? region.weatherSource?.label ?? "Open-Meteo"} · 10分毎に更新`,
@@ -122,7 +122,7 @@ function StaleNotice({
   return (
     <div
       role="status"
-      className="mt-6 rounded-2xl border border-amber-300/60 bg-amber-50 px-4 py-3 flex items-start gap-3"
+      className="mt-5 rounded-2xl border border-amber-300/60 bg-amber-50 px-4 py-3 flex items-start gap-3"
     >
       <Cloud className="w-4 h-4 text-amber-700 mt-0.5 flex-shrink-0" strokeWidth={2} />
       <div className="text-xs leading-relaxed">
@@ -152,7 +152,7 @@ function Radar({ t }: { t: (en: string, ja: string) => string }) {
     : t("Rain radar", "降雨レーダー");
   return (
     <section className="mt-4 rounded-2xl border border-border bg-white overflow-hidden">
-      <div className="flex items-center justify-between gap-3 px-5 pt-5 pb-3 flex-wrap">
+      <div className="flex items-center justify-between gap-3 px-5 pt-4 pb-3 flex-wrap">
         <div>
           <p className="byline text-muted-foreground/70 inline-flex items-center gap-1.5">
             <RadarIcon className="w-3 h-3" /> {byline}
@@ -195,7 +195,7 @@ function Hero({
 }) {
   const Icon = pickIcon(current.weatherCode, current.isDay);
   return (
-    <section className="mt-8 rounded-2xl border border-border bg-white p-6 md:p-8">
+    <section className="mt-6 rounded-2xl border border-border bg-white p-6 md:p-8">
       <div className="flex items-start gap-6 flex-wrap">
         <div className="flex items-center gap-5">
           <Icon className="w-16 h-16 text-primary" strokeWidth={1.4} />

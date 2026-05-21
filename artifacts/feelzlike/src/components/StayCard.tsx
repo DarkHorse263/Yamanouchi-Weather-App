@@ -376,7 +376,7 @@ export function StayDetailSheet({ stay }: { stay: Stay }) {
       <div className="relative">
         <PhotoCarousel photos={stay.photos} name={stay.name} />
       </div>
-      <SheetHeader className="px-6 pt-5 text-left">
+      <SheetHeader className="px-6 pt-4 text-left">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <div className="flex items-center gap-2">
@@ -396,7 +396,7 @@ export function StayDetailSheet({ stay }: { stay: Stay }) {
         </SheetDescription>
       </SheetHeader>
 
-      <div className="px-6 py-4 space-y-5">
+      <div className="px-6 py-4 space-y-4">
         <p className="text-sm leading-relaxed text-foreground/90">{stay.long_description}</p>
 
         <FeatureBadges stay={stay} />

@@ -76,7 +76,7 @@ export default function Resorts() {
   return (
     <div className="p-4 md:p-8 max-w-7xl mx-auto">
 
-      <div className="mb-5">
+      <div className="mb-4">
         <h1 className="text-3xl font-black text-slate-900">
           {isWinter ? t("Ski Resorts", "スキー場") : t("Activities & Spots", "アクティビティ・スポット")}
         </h1>
@@ -89,7 +89,7 @@ export default function Resorts() {
       </div>
 
       {!isWinter && (
-        <div className="space-y-6">
+        <div className="space-y-5">
           <div className="flex items-center gap-2 mb-1">
             <TreePine className="w-4 h-4 text-emerald-600" />
             <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wider">{t("Things to Do", "おすすめスポット")}</h2>
@@ -120,11 +120,11 @@ export default function Resorts() {
 
       {isWinter && (
         <>
-          <div className="mb-6">
+          <div className="mb-5">
             <HourlyTimeline lastUpdatedAt={resorts?.[0]?.sourceUpdatedAt} />
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-6">
             {Object.entries(grouped).map(([region, regionResorts], regionIdx) => {
               const live = REGION_LIVE_MAP[region];
               return (

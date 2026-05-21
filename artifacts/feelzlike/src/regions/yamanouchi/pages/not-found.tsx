@@ -4,7 +4,7 @@ import { MountainSnow } from "lucide-react";
 export default function NotFound() {
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="text-center space-y-6 max-w-md">
+      <div className="text-center space-y-5 max-w-md">
         <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto text-primary">
           <MountainSnow className="w-12 h-12" />
         </div>

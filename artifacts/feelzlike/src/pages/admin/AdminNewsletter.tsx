@@ -165,7 +165,7 @@ export default function AdminNewsletter() {
         <AdminForbidden />
       ) : (
         <div className="grid lg:grid-cols-[1fr_minmax(0,520px)] gap-6">
-          <div className="space-y-5">
+          <div className="space-y-4">
             <div className="rounded-lg border bg-white p-5">
               <h2 className="text-sm font-semibold mb-3 lowercase">audience</h2>
               {stats.isLoading ? (

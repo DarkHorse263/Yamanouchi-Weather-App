@@ -69,7 +69,7 @@ export default function Eat({ embedded = false }: { embedded?: boolean }) {
   ];
 
   return (
-    <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-6">
+    <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-5">
       {!embedded && (
         <div>
           <h1 className="text-3xl md:text-4xl font-black text-foreground">{t("Eat & Drink", "飲食")}</h1>
@@ -111,7 +111,7 @@ export default function Eat({ embedded = false }: { embedded?: boolean }) {
 
       {/* ON MOUNTAIN */}
       {tab === "mountain" && (
-        <div className="space-y-8">
+        <div className="space-y-6">
           {MOUNTAIN_AREAS.map(area => {
             const venues = mountain.filter(v => v.region === area.region);
             if (venues.length === 0) return null;
@@ -142,7 +142,7 @@ export default function Eat({ embedded = false }: { embedded?: boolean }) {
 
       {/* IN TOWN */}
       {tab === "town" && (
-        <div className="space-y-8">
+        <div className="space-y-6">
           {TOWN_AREAS.map(area => {
             const venues = town.filter(v => v.region === area.region);
             if (venues.length === 0) return null;

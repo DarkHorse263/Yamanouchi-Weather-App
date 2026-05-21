@@ -70,7 +70,7 @@ export function TownStay() {
 
   if (!town) {
     return (
-      <div className="px-4 md:px-10 py-6 md:py-10 max-w-6xl mx-auto">
+      <div className="px-4 md:px-10 py-5 md:py-8 max-w-6xl mx-auto">
         <EmptyStateCard
           icon={Bed}
           title={t("Pick a town first", "町を選んでください")}
@@ -91,7 +91,7 @@ export function TownStay() {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <div className="px-4 md:px-10 pt-5 md:pt-10">
+      <div className="px-4 md:px-10 pt-4 md:pt-8">
         <PageHeader
           byline={`${region.name} · ${townDisplayName}`}
           title={t("Stay", "宿泊")}
@@ -104,7 +104,7 @@ export function TownStay() {
       </div>
 
       {localProviders.length > 0 && (
-        <section className="px-4 md:px-10 pt-5 md:pt-8">
+        <section className="px-4 md:px-10 pt-4 md:pt-6">
           <div className="rounded-2xl border border-blue-200 bg-white p-5 md:p-6 shadow-sm">
             <p className="text-[11px] font-bold tracking-wider text-blue-700/80 uppercase">
               {t("Local provider", "地元プロバイダー")}
@@ -140,9 +140,9 @@ export function TownStay() {
         </section>
       )}
 
-      <section className="px-4 md:px-10 pt-5 pb-10">
+      <section className="px-4 md:px-10 pt-4 pb-8">
         <div className="rounded-2xl border border-border bg-gradient-to-br from-blue-50 via-white to-blue-50/40 p-6 md:p-8 shadow-sm">
-          <div className="mb-5 flex items-start justify-between gap-3 flex-wrap">
+          <div className="mb-4 flex items-start justify-between gap-3 flex-wrap">
             <div>
               <p className="text-[11px] font-bold tracking-wider text-blue-700/80 uppercase">
                 {t("Search availability", "空室を検索")}
@@ -174,7 +174,7 @@ export function TownStay() {
             ))}
           </ul>
 
-          <p className="mt-5 text-[11px] text-muted-foreground/70 leading-relaxed">
+          <p className="mt-4 text-[11px] text-muted-foreground/70 leading-relaxed">
             {t(
               "Links open in a new tab on the booking platform's site. Feelzlike may earn a commission from bookings made through these links - it never costs you extra.",
               "リンクは予約サイトの別タブで開きます。これらのリンクからの予約はFeelzlikeに手数料が発生する場合がありますが、追加料金はありません。",

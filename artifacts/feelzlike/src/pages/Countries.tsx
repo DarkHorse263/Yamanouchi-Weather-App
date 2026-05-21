@@ -133,7 +133,7 @@ export default function Countries() {
 
       <div className="mx-auto w-full max-w-md md:max-w-3xl lg:max-w-5xl">
         {/* HEADER ─────────────────────────────────────── */}
-        <header className="flex flex-col items-center gap-3 px-6 pt-6 pb-4 text-center md:pt-10 md:pb-6">
+        <header className="flex flex-col items-center gap-3 px-6 pt-5 pb-4 text-center md:pt-8 md:pb-5">
           <a
             href="/"
             className="inline-flex items-center gap-1.5 self-start text-[12px] font-semibold uppercase tracking-[0.2em] text-sky-700/80 hover:text-sky-700 transition-colors"
@@ -160,7 +160,7 @@ export default function Countries() {
         </header>
 
         {/* COUNTRY CARDS ──────────────────────────────── */}
-        <section className="px-4 pt-4 pb-8 md:px-6">
+        <section className="px-4 pt-4 pb-6 md:px-6">
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
             {COUNTRIES.map((country, idx) => {
               const season = seasonForCountry(country.code);
@@ -233,7 +233,7 @@ export default function Countries() {
 
           {/* TRUST LINE */}
           <p
-            className="mx-auto mt-8 max-w-md text-center text-[11px] leading-relaxed text-slate-400"
+            className="mx-auto mt-6 max-w-md text-center text-[11px] leading-relaxed text-slate-400"
             style={balance}
           >
             {liveCount} {liveCount === 1 ? "region" : "regions"} live &middot;{" "}

@@ -1024,7 +1024,7 @@ function FilterSheetContent({
           Refine the stay list by type, price, mountain access, and region-specific amenities.
         </SheetDescription>
       </SheetHeader>
-      <div className="py-4 space-y-6">{regionFilters}</div>
+      <div className="py-4 space-y-5">{regionFilters}</div>
       <SheetFooter className="flex-row justify-between gap-2">
         <Button variant="ghost" size="sm" onClick={onClearAll} disabled={activeCount === 0}>
           Clear all{activeCount > 0 ? ` (${activeCount})` : ""}

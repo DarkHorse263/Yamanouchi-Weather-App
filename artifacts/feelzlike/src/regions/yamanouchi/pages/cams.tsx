@@ -115,7 +115,7 @@ export default function Cams() {
 
   return (
     <div className="p-4 md:p-8 max-w-4xl mx-auto pb-28">
-      <div className="mb-6">
+      <div className="mb-5">
         <h1 className="text-3xl md:text-4xl font-black text-foreground">
           {t("Live Cams", "ライブカメラ")}
         </h1>
@@ -127,7 +127,7 @@ export default function Cams() {
         </p>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-5">
         {CAMS.map((cam, idx) => {
           const Icon = cam.icon;
           return (
@@ -162,7 +162,7 @@ export default function Cams() {
               </div>
 
               {cam.externalOnly ? (
-                <div className="px-4 py-5 flex flex-col items-center gap-3 bg-slate-50 text-center">
+                <div className="px-4 py-4 flex flex-col items-center gap-3 bg-slate-50 text-center">
                   <AlertTriangle className="w-8 h-8 text-amber-500" />
                   <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
                     {t(cam.note!, cam.noteJa!)}
@@ -194,7 +194,7 @@ export default function Cams() {
         })}
       </div>
 
-      <div className="mt-6 rounded-xl border border-border bg-muted/40 px-4 py-3">
+      <div className="mt-5 rounded-xl border border-border bg-muted/40 px-4 py-3">
         <p className="text-[11px] leading-relaxed text-muted-foreground">
           {isWinter
             ? t(

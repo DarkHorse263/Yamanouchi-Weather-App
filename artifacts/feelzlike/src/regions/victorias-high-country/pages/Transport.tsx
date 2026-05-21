@@ -167,7 +167,7 @@ export function VictoriasHighCountryTransport() {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <div className="px-4 md:px-10 pt-5 md:pt-10">
+      <div className="px-4 md:px-10 pt-4 md:pt-8">
         <PageHeader
           byline={`${region.name}${town ? ` · ${t(town.name, town.nameJa)}` : ""}`}
           title={t("Transport", "交通")}
@@ -188,7 +188,7 @@ export function VictoriasHighCountryTransport() {
 
       {/* V/Line hero - regional spine, always shown */}
       {vline && (
-        <section className="px-4 md:px-10 pt-5 md:pt-8">
+        <section className="px-4 md:px-10 pt-4 md:pt-6">
           <article className="rounded-2xl border border-purple-200 bg-gradient-to-br from-purple-50 via-white to-purple-50/40 p-6 md:p-8 shadow-sm">
             <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-5">
               <div className="shrink-0 self-start w-14 h-14 md:w-16 md:h-16 rounded-xl bg-purple-700 text-white flex items-center justify-center">
@@ -205,7 +205,7 @@ export function VictoriasHighCountryTransport() {
                   {vline.route_summary}
                 </p>
 
-                <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
+                <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
                   {vline.phone && (
                     <a
                       href={`tel:${vline.phone.replace(/\s+/g, "")}`}
@@ -248,7 +248,7 @@ export function VictoriasHighCountryTransport() {
 
       {/* Per-town primary coach hero */}
       {hero && (
-        <section className="px-4 md:px-10 pt-5 md:pt-8">
+        <section className="px-4 md:px-10 pt-4 md:pt-6">
           <article className="rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50 via-white to-blue-50/40 p-6 md:p-8 shadow-sm">
             <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-5">
               <div className="shrink-0 self-start w-14 h-14 md:w-16 md:h-16 rounded-xl bg-blue-600 text-white flex items-center justify-center">
@@ -273,7 +273,7 @@ export function VictoriasHighCountryTransport() {
                   {hero.route_summary}
                 </p>
 
-                <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
+                <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
                   {hero.phone && (
                     <a
                       href={`tel:${hero.phone.replace(/\s+/g, "")}`}
@@ -318,7 +318,7 @@ export function VictoriasHighCountryTransport() {
           Renders on every town it actually runs through (Mansfield,
           Bright, Mt Beauty, Harrietville, Dinner Plain). Winter only. */}
       {multiResortHero && (
-        <section className="px-4 md:px-10 pt-5 md:pt-8">
+        <section className="px-4 md:px-10 pt-4 md:pt-6">
           <article className="rounded-2xl border border-sky-200 bg-gradient-to-br from-sky-50 via-white to-sky-50/40 p-6 md:p-8 shadow-sm">
             <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-5">
               <div className="shrink-0 self-start w-14 h-14 md:w-16 md:h-16 rounded-xl bg-sky-600 text-white flex items-center justify-center">
@@ -338,7 +338,7 @@ export function VictoriasHighCountryTransport() {
                   {multiResortHero.route_summary}
                 </p>
 
-                <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
+                <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
                   {multiResortHero.phone && (
                     <a
                       href={`tel:${multiResortHero.phone.replace(/\s+/g, "")}`}
@@ -369,7 +369,7 @@ export function VictoriasHighCountryTransport() {
 
       {/* No-coach honesty notice (Marysville, Warburton) */}
       {noLocalCoach && town && (
-        <section className="px-4 md:px-10 pt-5 md:pt-8">
+        <section className="px-4 md:px-10 pt-4 md:pt-6">
           <div className="rounded-2xl border border-amber-200 bg-amber-50/60 p-5 flex items-start gap-3">
             <div className="shrink-0 w-9 h-9 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center">
               <Info className="w-5 h-5" />
@@ -394,7 +394,7 @@ export function VictoriasHighCountryTransport() {
 
       {/* Other coach / shuttle operators (town-filtered) */}
       {buses.length > 0 && (
-        <section className="px-4 md:px-10 pt-5 md:pt-8">
+        <section className="px-4 md:px-10 pt-4 md:pt-6">
           <p className="text-[11px] font-bold tracking-wider text-muted-foreground/70 uppercase mb-3">
             {t("Other coach & shuttle operators", "その他のバス・送迎事業者")}
           </p>
@@ -408,7 +408,7 @@ export function VictoriasHighCountryTransport() {
 
       {/* Taxis & last mile (town-filtered) */}
       {taxis.length > 0 && (
-        <section className="px-4 md:px-10 pt-5 md:pt-8">
+        <section className="px-4 md:px-10 pt-4 md:pt-6">
           <p className="text-[11px] font-bold tracking-wider text-muted-foreground/70 uppercase mb-3">
             {t("Taxis & last mile", "タクシー・ラストマイル")}
           </p>
@@ -421,14 +421,14 @@ export function VictoriasHighCountryTransport() {
       )}
 
       {town && !townHasRideshare(town.id) && (
-        <div className="px-4 md:px-10 pt-5 pb-10">
+        <div className="px-4 md:px-10 pt-4 pb-8">
           <RideshareUnavailableNotice
             townName={t(town.name, town.nameJa)}
             t={t}
           />
         </div>
       )}
-      {!town && <div className="pb-10" />}
+      {!town && <div className="pb-8" />}
     </div>
   );
 }

@@ -88,7 +88,7 @@ export function LiftWindHoldPanel({
         : "text-rose-700 bg-rose-500/10 border-rose-500/30";
 
   return (
-    <section className="mt-10" aria-labelledby={headingId}>
+    <section className="mt-8" aria-labelledby={headingId}>
       <div className="flex items-end justify-between gap-3 mb-4 flex-wrap">
         <div>
           <p className="byline text-muted-foreground/70">

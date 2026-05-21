@@ -151,7 +151,7 @@ export function ProfileSheet({
         side="right"
         className="w-full sm:max-w-md flex flex-col gap-0 p-0"
       >
-        <SheetHeader className="px-6 pt-6 pb-4 border-b border-border">
+        <SheetHeader className="px-6 pt-5 pb-4 border-b border-border">
           <div className="flex items-start justify-between gap-4">
             <div className="space-y-1">
               <SheetTitle className="font-display text-xl tracking-tight">
@@ -188,7 +188,7 @@ export function ProfileSheet({
           )}
         </SheetHeader>
 
-        <div className="flex-1 overflow-y-auto px-6 py-6">
+        <div className="flex-1 overflow-y-auto px-6 py-5">
           {mode === "onboarding" ? (
             <motion.div
               key={step}
@@ -202,7 +202,7 @@ export function ProfileSheet({
               {STEPS[step].field}
             </motion.div>
           ) : (
-            <div className="space-y-8">
+            <div className="space-y-6">
               {STEPS.map((s) => (
                 <div key={s.title}>{s.field}</div>
               ))}

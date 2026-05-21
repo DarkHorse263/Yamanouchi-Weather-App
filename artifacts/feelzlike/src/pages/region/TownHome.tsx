@@ -264,7 +264,7 @@ export function TownHome() {
 
   if (!town) {
     return (
-      <div className="px-4 md:px-10 py-6 md:py-10 max-w-6xl mx-auto">
+      <div className="px-4 md:px-10 py-5 md:py-8 max-w-6xl mx-auto">
         <p className="text-muted-foreground">{t("Loading town…", "読み込み中…")}</p>
       </div>
     );
@@ -290,7 +290,7 @@ export function TownHome() {
   })();
 
   return (
-    <div className="px-4 md:px-10 py-5 md:py-10 max-w-6xl mx-auto">
+    <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
       <PageMeta
         title={`${town.name} - weather, stays, roads & cams`}
         description={`${town.name} in ${region.name}: in-town weather, road conditions to the mountain, webcams, transport, plus curated stays and eats.`}
@@ -339,7 +339,7 @@ export function TownHome() {
           who lands on a town directly still sees the same headline
           pick they would on the region overview. */}
       {seasonCtx?.season === "winter" && mountainsByDistance.length > 0 && (
-        <div className="mt-8">
+        <div className="mt-6">
           <DailyPick
             regionId={region.id}
             resorts={mountainsByDistance.map((r) => ({
@@ -356,7 +356,7 @@ export function TownHome() {
           "Road conditions & cams" below. The strip is now a single
           attention-grabbing card answering "what does it feel like here
           right now?" before users scan the rest of the page. */}
-      <section className="mt-8">
+      <section className="mt-6">
         <TempInTownNow
           label={t("Temp in town now", "町の現在気温")}
           temperature={townWeatherQ.data?.current.temperature ?? null}
@@ -448,7 +448,7 @@ export function TownHome() {
       )}
 
       {/* SECTIONS - vertical stack in the order the brief specifies. */}
-      <section className="mt-6 space-y-3">
+      <section className="mt-5 space-y-3">
         {buildSections(region.shortTag?.toUpperCase() === "JP").map((tile) => {
           const Icon = tile.icon;
           return (

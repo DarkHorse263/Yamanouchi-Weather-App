@@ -11,7 +11,7 @@ import { useAuth } from "@workspace/replit-auth-web";
  *   on mobile and overshadowing the home content above.
  * - Links collapsed to inline middot-separated row. Sources stays as a
  *   small dropdown so per-region attribution is one click away.
- * - Padding halved (py-6 md:py-8) so the footer no longer dominates short
+ * - Padding halved (py-5 md:py-6) so the footer no longer dominates short
  *   pages like Welcome and Countries.
  */
 export function HomeFooter() {
@@ -27,7 +27,7 @@ export function HomeFooter() {
 
   return (
     <footer className="relative z-10 border-t border-slate-200 bg-white">
-      <div className="mx-auto max-w-3xl px-5 py-6 md:py-8 text-center text-[12px] md:text-[13px]">
+      <div className="mx-auto max-w-3xl px-5 py-5 md:py-6 text-center text-[12px] md:text-[13px]">
         <nav
           aria-label="footer"
           className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5 leading-relaxed"

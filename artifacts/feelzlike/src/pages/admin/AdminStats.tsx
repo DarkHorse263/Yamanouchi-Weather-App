@@ -77,7 +77,7 @@ export default function AdminStats() {
       ) : stats.error ? (
         <div className="text-sm text-rose-700">failed to load stats · {stats.error.message}</div>
       ) : stats.data ? (
-        <div className="space-y-6">
+        <div className="space-y-5">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             <Kpi label="newsletter (verified)" value={stats.data.newsletter.verified} sub={`+${stats.data.newsletter.new7d} last 7d`} />
             <Kpi label="alerts (verified)" value={stats.data.alerts.verified} sub={`+${stats.data.alerts.new7d} last 7d`} />

@@ -49,7 +49,7 @@ export function MountainWebcams({
   if (cams.length === 0) {
     if (!fallbackPageUrl) return null;
     return (
-      <section className="mt-10" aria-labelledby={headingId}>
+      <section className="mt-8" aria-labelledby={headingId}>
         <div className="flex items-end justify-between gap-3 mb-4">
           <div>
             <p className="byline text-muted-foreground/70">
@@ -94,7 +94,7 @@ export function MountainWebcams({
   const activeCam = activeIdx !== null ? cams[activeIdx] : null;
 
   return (
-    <section className="mt-10" aria-labelledby={headingId}>
+    <section className="mt-8" aria-labelledby={headingId}>
       <div className="flex items-end justify-between gap-3 mb-4 flex-wrap">
         <div>
           <p className="byline text-muted-foreground/70">

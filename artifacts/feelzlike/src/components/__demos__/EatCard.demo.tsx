@@ -39,7 +39,7 @@ export default function EatCardDemo() {
 
   return (
     <div className="mx-auto max-w-5xl p-6">
-      <header className="mb-6">
+      <header className="mb-5">
         <p className="text-[11px] font-bold tracking-wider uppercase text-muted-foreground">
           Component preview · Sprint 3 · Prompt 3.2
         </p>

@@ -72,7 +72,7 @@ export function SnowyTransport() {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <div className="px-4 md:px-10 pt-5 md:pt-10">
+      <div className="px-4 md:px-10 pt-4 md:pt-8">
         <PageHeader
           byline={`${region.name}${town ? ` · ${t(town.name, town.nameJa)}` : ""}`}
           title={t("Transport", "交通")}
@@ -93,7 +93,7 @@ export function SnowyTransport() {
 
       {/* Cooma Coaches hero */}
       {cooma && (
-        <section className="px-4 md:px-10 pt-5 md:pt-8">
+        <section className="px-4 md:px-10 pt-4 md:pt-6">
           <article className="rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50 via-white to-blue-50/40 p-6 md:p-8 shadow-sm">
             <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-5">
               <div className="shrink-0 self-start rounded-xl bg-white border border-blue-100 p-3 flex items-center justify-center">
@@ -120,7 +120,7 @@ export function SnowyTransport() {
                       )}
                 </p>
 
-                <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
+                <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
                   {cooma.phone && (
                     <a
                       href={`tel:${cooma.phone.replace(/\s+/g, "")}`}
@@ -150,7 +150,7 @@ export function SnowyTransport() {
                 ski-season Canberra ↔ Jindabyne service. Hidden in green
                 season because the daily route only runs in winter. */}
             {!isGreen && (
-            <div className="mt-6 pt-6 border-t border-blue-200/60">
+            <div className="mt-5 pt-5 border-t border-blue-200/60">
               <div className="rounded-xl border-2 border-blue-300 bg-white p-5">
                 <div className="flex items-start gap-3">
                   <div className="shrink-0 w-10 h-10 rounded-lg bg-blue-600 text-white flex items-center justify-center">
@@ -197,7 +197,7 @@ export function SnowyTransport() {
           either doesn't run or runs heavily reduced summer service that
           isn't reflected in this winter-priced card. */}
       {!isGreen && (
-      <section className="px-4 md:px-10 pt-5 md:pt-8">
+      <section className="px-4 md:px-10 pt-4 md:pt-6">
         <article className="rounded-2xl border border-sky-200 bg-gradient-to-br from-sky-50 via-white to-sky-50/40 p-6 md:p-8 shadow-sm">
           <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-5">
             <div className="shrink-0 self-start w-14 h-14 md:w-16 md:h-16 rounded-xl bg-sky-600 text-white flex items-center justify-center">
@@ -270,12 +270,12 @@ export function SnowyTransport() {
           per-vehicle fee separate from any lift pass. Sits between the
           Skitube card and other operators because the Skitube exemption
           tip inside the card flows directly off the rail option above. */}
-      <section className="px-4 md:px-10 pt-5 md:pt-8">
+      <section className="px-4 md:px-10 pt-4 md:pt-6">
         <KosciuszkoParkFeeCard variant="transport" t={t} />
       </section>
 
       {/* Other operators */}
-      <section className="px-4 md:px-10 pt-5">
+      <section className="px-4 md:px-10 pt-4">
         <p className="text-[11px] font-bold tracking-wider text-muted-foreground/70 uppercase mb-3">
           {t("Other operators", "その他の事業者")}
         </p>
@@ -287,7 +287,7 @@ export function SnowyTransport() {
       </section>
 
       {town && !townHasRideshare(town.id) && (
-        <div className="px-4 md:px-10 pt-5 pb-10">
+        <div className="px-4 md:px-10 pt-4 pb-8">
           <RideshareUnavailableNotice
             townName={t(town.name, town.nameJa)}
             t={t}
