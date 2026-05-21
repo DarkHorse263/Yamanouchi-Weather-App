@@ -65,7 +65,7 @@ export default function Welcome() {
     >
       <PageMeta
         title="feelzlike \u00b7 real conditions for mountain travel"
-        description="real conditions for resort towns across australia and japan. snow, wind, roads, live cams \u00b7 plan your day from the town you're staying in."
+        description="In town and wondering what it's like on the mountain? feelzlike shows real conditions for mountain travel \u00b7 snow, wind, roads, live cams \u00b7 plus places to stay, eat and relax. Regions across Australia and Japan."
         path="/"
         jsonLd={[websiteSchema(), organizationSchema()]}
       />
@@ -135,19 +135,32 @@ export default function Welcome() {
 
         {/* INTRO COPY ─────────────────────────────────── */}
         <section className="px-6 pt-8 pb-2 text-center md:px-10 md:pt-10">
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="mx-auto max-w-xl text-[15px] leading-relaxed text-slate-700 md:text-base"
+            className="mx-auto max-w-xl space-y-4 text-[15px] leading-relaxed text-slate-700 md:text-base"
             style={balance}
           >
-            real conditions for mountain travel. we cover resort towns across
-            australia and japan &middot; the snow, the wind, the roads, the live cams.
-            plan your day from the town you&rsquo;re staying in, not a marketing
-            brochure. no guessing &middot; just what it actually feelzlike on the hill
-            today.
-          </motion.p>
+            <p>
+              In town and wondering what it&rsquo;s like on the mountain?
+              <br />
+              <span className="font-semibold text-slate-900">Welcome to feelzlike.</span>
+            </p>
+            <p>
+              We&rsquo;ll show you real conditions for mountain travel, so you
+              can see the snow, the wind, the roads, and the live cams in one
+              place. No guessing, just the real picture from the town
+              you&rsquo;re in. You can also find places to stay, eat &amp; relax.
+            </p>
+            <p>
+              So far we&rsquo;ve mapped regions in Australia and selected
+              regions in Japan with more to come.
+            </p>
+            <p className="text-slate-900">
+              Enjoy the feelzlike journey from your town.
+            </p>
+          </motion.div>
         </section>
 
         {/* CTA ────────────────────────────────────────── */}
