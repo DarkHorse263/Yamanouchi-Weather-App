@@ -198,16 +198,26 @@ export default function Welcome() {
               onClick={() => track("welcome_cta_click", { category: "navigation" })}
               className="group relative inline-flex h-28 w-28 items-center justify-center rounded-full bg-white shadow-[0_10px_40px_rgb(56,128,210,0.25)] ring-2 ring-sky-300/70 transition-all hover:ring-sky-400 hover:shadow-[0_14px_48px_rgb(56,128,210,0.32)] md:h-36 md:w-36"
             >
-              <motion.img
-                ref={markRef}
-                src="/branding/logo-mark.png"
-                alt="feelzlike"
-                onError={handleMarkError}
-                draggable={false}
-                className="h-20 w-auto select-none md:h-28"
-                animate={{ scale: [1, 1.04, 1] }}
-                transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
-              />
+              <picture>
+                {/* Modern browsers get the tiny 11KB webp; png is the safety
+                    net + onError fallback to the full logo if the mark file
+                    is ever missing. */}
+                <source srcSet="/branding/logo-mark.webp" type="image/webp" />
+                <motion.img
+                  ref={markRef}
+                  src="/branding/logo-mark.png"
+                  alt="feelzlike"
+                  onError={handleMarkError}
+                  draggable={false}
+                  width={256}
+                  height={256}
+                  fetchPriority="high"
+                  decoding="async"
+                  className="h-24 w-24 select-none object-contain md:h-32 md:w-32"
+                  animate={{ scale: [1, 1.04, 1] }}
+                  transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
+                />
+              </picture>
               <span className="sr-only">pick a country</span>
             </Link>
           </div>
