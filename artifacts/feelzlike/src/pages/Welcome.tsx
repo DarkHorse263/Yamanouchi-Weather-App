@@ -65,7 +65,7 @@ export default function Welcome() {
     >
       <PageMeta
         title="feelzlike \u00b7 real conditions for mountain travel"
-        description="In town and wondering what it's like on the mountain? feelzlike shows real conditions for mountain travel \u00b7 snow, wind, roads, live cams \u00b7 plus places to stay, eat and relax. Regions across Australia and Japan."
+        description="In town and wondering what it's like in the mountains? feelzlike shows real conditions for mountain travel \u00b7 snow, wind, roads, live cams \u00b7 plus places to stay, eat and relax. Regions across Australia and Japan."
         path="/"
         jsonLd={[websiteSchema(), organizationSchema()]}
       />
@@ -143,7 +143,7 @@ export default function Welcome() {
             style={balance}
           >
             <p>
-              In town and wondering what it&rsquo;s like on the mountain?
+              In town and wondering what it&rsquo;s like in the mountains?
               <br />
               <span className="font-semibold text-slate-900">Welcome to feelzlike.</span>
             </p>
