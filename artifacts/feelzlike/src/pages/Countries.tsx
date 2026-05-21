@@ -63,6 +63,16 @@ const FALLBACK_REGIONS: Region[] = [
   { id: "yamanouchi",             name: "Yamanouchi",                     country: "Japan",     countryCode: "JP", region: "Nagano",          status: "live", href: "/yamanouchi/",             baseTowns: ["Yudanaka", "Shibu Onsen", "Yomase"],                          mountains: ["Shiga Kogen", "Ryuoo", "X-Jam", "Yomase"],                   headlineLabel: "Yudanaka",     headline: null },
 ];
 
+// Map a region to the base town we surface in the country card. This is
+// the town a visitor most likely stays in for that region.
+const PRIMARY_TOWN: Record<string, string> = {
+  "snowy-mountains":         "Jindabyne",
+  "victorias-high-country":  "Mount Beauty",
+  "yamanouchi":              "Yudanaka",
+  "nozawa-onsen":            "Nozawa Onsen",
+  "iiyama":                  "Iiyama",
+};
+
 // AU = southern hemisphere (snow Jun-Sep), JP = northern (snow Dec-Mar).
 function seasonForCountry(code: "AU" | "JP"): "winter" | "green" {
   const month = new Date().getMonth() + 1;
@@ -168,15 +178,15 @@ export default function Countries() {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.1 + idx * 0.08 }}
-                  className={`group block rounded-2xl bg-white p-6 shadow-[0_8px_30px_rgb(15,23,42,0.08)] ring-2 ${ring} transition-transform hover:-translate-y-0.5`}
+                  className={`group block rounded-2xl bg-white p-5 shadow-[0_8px_30px_rgb(15,23,42,0.08)] ring-2 ${ring} transition-transform hover:-translate-y-0.5`}
                 >
-                  <div className="flex items-center gap-4">
-                    <span aria-hidden className="text-4xl leading-none">{country.flag}</span>
-                    <div className="min-w-0 flex-1">
-                      <h3 className="text-xl font-bold leading-tight tracking-tight text-sky-900 md:text-2xl">
+                  <header className="flex items-center gap-3">
+                    <span aria-hidden className="text-3xl leading-none">{country.flag}</span>
+                    <div className="min-w-0">
+                      <h3 className="text-lg font-bold leading-tight tracking-tight text-sky-900">
                         {country.name}
                       </h3>
-                      <p className={`mt-1 inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider ${pillText}`}>
+                      <p className={`mt-0.5 inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider ${pillText}`}>
                         <span className="relative inline-flex h-1.5 w-1.5">
                           <span className={`absolute inline-flex h-full w-full animate-ping rounded-full ${dot} opacity-60`} />
                           <span className={`relative inline-flex h-1.5 w-1.5 rounded-full ${dot}`} />
@@ -184,12 +194,38 @@ export default function Countries() {
                         {seasonLabel} &middot; {liveInCountry} {liveInCountry === 1 ? "region live" : "regions live"}
                       </p>
                     </div>
-                    <ArrowRight className="h-5 w-5 shrink-0 text-sky-700 transition-transform group-hover:translate-x-0.5" />
-                  </div>
+                  </header>
 
-                  <p className="mt-4 text-sm text-slate-600">
-                    {country.regions.map((r) => r.name).join(" \u00b7 ")}
-                  </p>
+                  <ul className="mt-4 space-y-2.5 text-sm leading-relaxed">
+                    {country.regions.map((r) => {
+                      const town = PRIMARY_TOWN[r.id] ?? r.headlineLabel ?? r.baseTowns[0];
+                      const temp = r.headline?.tempC;
+                      // Drop the trailing town if it duplicates the region
+                      // name (e.g. "Nozawa Onsen · Nozawa Onsen").
+                      const showTown = town && town.toLowerCase() !== r.name.toLowerCase();
+                      return (
+                        <li key={r.id} className="flex items-baseline justify-between gap-3">
+                          <span className="min-w-0 truncate text-slate-700">
+                            <span className="font-semibold text-slate-900">{r.name}</span>
+                            {showTown && (
+                              <>
+                                <span className="text-slate-400"> &middot; </span>
+                                {town}
+                              </>
+                            )}
+                          </span>
+                          <span className="shrink-0 text-base font-bold tabular-nums text-sky-900">
+                            {typeof temp === "number" ? `${Math.round(temp)}\u00B0C` : "\u2013"}
+                          </span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+
+                  <span className="mt-4 inline-flex items-center text-xs font-semibold tracking-wide text-sky-700 group-hover:text-sky-900">
+                    explore {country.name.toLowerCase()}
+                    <ArrowRight className="ml-1 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                  </span>
                 </motion.a>
               );
             })}
