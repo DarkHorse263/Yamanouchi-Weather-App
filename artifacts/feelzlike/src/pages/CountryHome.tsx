@@ -32,7 +32,7 @@ export default function CountryHome({ code }: CountryHomeProps) {
       <header className="relative z-10">
         <div className="max-w-3xl mx-auto px-5 pt-5 pb-5 md:pt-12 md:pb-8 text-center">
           <a
-            href="/"
+            href="/countries"
             className="inline-flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-[0.2em] text-sky-700/80 hover:text-sky-700 transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />

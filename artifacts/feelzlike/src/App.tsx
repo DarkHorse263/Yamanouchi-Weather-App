@@ -1,7 +1,8 @@
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import Landing from "@/pages/landing";
+import Welcome from "@/pages/Welcome";
+import Countries from "@/pages/Countries";
 import NotFound from "@/pages/not-found";
 import { RegionLayout } from "@/layouts/RegionLayout";
 import { ConsentProvider, useConsent } from "@/lib/consent";
@@ -32,7 +33,9 @@ const queryClient = new QueryClient();
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Landing} />
+      <Route path="/" component={Welcome} />
+      <Route path="/countries" component={Countries} />
+      <Route path="/countries/" component={Countries} />
       {/* Top-level alert pages - must come BEFORE the /:region catch-all so
           tokenised email links don't get parsed as a region. */}
       <Route path="/alerts/verify" component={AlertsVerify} />
