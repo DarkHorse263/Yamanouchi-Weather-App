@@ -720,23 +720,26 @@ export default function LocationDetail() {
           <EnsembleForecast locationId={locationId} />
         </PremiumGate>
 
-        {/* PREMIUM - Personalised alerts (UI only for now). */}
-        <PremiumGate
-          title="Powder & weather alerts"
-          titleJa="降雪・気象アラート"
-          blurb="Get a push when conditions hit. Set thresholds for snowfall, wind, freezing level."
-          blurbJa="条件達成時にプッシュ通知。降雪・風速・凍結高度を設定。"
-        >
-          <div className="glass rounded-3xl p-5 md:p-8">
-            <div className="mb-4">
-              <p className="byline text-muted-foreground">Alerts</p>
-              <h2 className="font-display font-semibold text-xl md:text-2xl mt-1">
-                Personalised triggers
-              </h2>
+        {/* PREMIUM - Personalised alerts (UI only for now).
+            Hidden in green season - powder alerts are snow-only. */}
+        {!isSummer && (
+          <PremiumGate
+            title="Powder & weather alerts"
+            titleJa="降雪・気象アラート"
+            blurb="Get a push when conditions hit. Set thresholds for snowfall, wind, freezing level."
+            blurbJa="条件達成時にプッシュ通知。降雪・風速・凍結高度を設定。"
+          >
+            <div className="glass rounded-3xl p-5 md:p-8">
+              <div className="mb-4">
+                <p className="byline text-muted-foreground">Alerts</p>
+                <h2 className="font-display font-semibold text-xl md:text-2xl mt-1">
+                  Personalised triggers
+                </h2>
+              </div>
+              <AlertSubscribeForm defaultRegion="snowy-mountains" />
             </div>
-            <AlertSubscribeForm defaultRegion="snowy-mountains" />
-          </div>
-        </PremiumGate>
+          </PremiumGate>
+        )}
 
         {/* Webcams (free) · Lift Status was lifted above the Detailed
             conditions paywall so it sits closer to free Conditions. */}

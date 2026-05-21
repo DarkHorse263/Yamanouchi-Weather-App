@@ -472,32 +472,35 @@ export function TownHome() {
         })}
 
         {/* ALERTS - paywalled. Render the same row look but with a lock so
-            users can see the offer without leaving the page. */}
-        <PremiumGate
-          tight
-          title="Powder & weather alerts"
-          titleJa="降雪・気象アラート"
-          blurb="Get a push when your conditions hit. Set thresholds for snow, wind, freezing level and more."
-          blurbJa="条件達成時にプッシュ通知。降雪量・風速・凍結高度などを設定。"
-          ctaHref={`~/${region.id}/alerts`}
-        >
-          <div className="flex items-center gap-4 rounded-2xl border border-border bg-white p-5">
-            <div className="shrink-0 w-11 h-11 rounded-xl bg-primary/8 text-primary inline-flex items-center justify-center">
-              <AlertTriangle className="w-5 h-5" />
+            users can see the offer without leaving the page.
+            Hidden in green season - powder alerts are snow-only. */}
+        {!isGreen && (
+          <PremiumGate
+            tight
+            title="Powder & weather alerts"
+            titleJa="降雪・気象アラート"
+            blurb="Get a push when your conditions hit. Set thresholds for snow, wind, freezing level and more."
+            blurbJa="条件達成時にプッシュ通知。降雪量・風速・凍結高度などを設定。"
+            ctaHref={`~/${region.id}/alerts`}
+          >
+            <div className="flex items-center gap-4 rounded-2xl border border-border bg-white p-5">
+              <div className="shrink-0 w-11 h-11 rounded-xl bg-primary/8 text-primary inline-flex items-center justify-center">
+                <AlertTriangle className="w-5 h-5" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="byline text-primary uppercase inline-flex items-center gap-1">
+                  {t("Alerts", "アラート")} <Lock className="w-3 h-3" />
+                </p>
+                <p className="text-sm text-muted-foreground mt-0.5 leading-snug">
+                  {t(
+                    "Powder, wind & freezing-level alerts straight to your phone.",
+                    "降雪・風速・凍結高度アラートをスマホに直接配信。",
+                  )}
+                </p>
+              </div>
             </div>
-            <div className="min-w-0 flex-1">
-              <p className="byline text-primary uppercase inline-flex items-center gap-1">
-                {t("Alerts", "アラート")} <Lock className="w-3 h-3" />
-              </p>
-              <p className="text-sm text-muted-foreground mt-0.5 leading-snug">
-                {t(
-                  "Powder, wind & freezing-level alerts straight to your phone.",
-                  "降雪・風速・凍結高度アラートをスマホに直接配信。",
-                )}
-              </p>
-            </div>
-          </div>
-        </PremiumGate>
+          </PremiumGate>
+        )}
       </section>
     </div>
   );

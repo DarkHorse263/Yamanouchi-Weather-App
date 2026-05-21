@@ -21,6 +21,7 @@ import {
   PremiumGate,
   UpdateStamp,
   useLanguage,
+  useOptionalSeason,
   useRegion,
 } from "@workspace/feelzlike-shell";
 import { MountainSnapshot } from "@workspace/feelzlike-dashboard";
@@ -63,6 +64,8 @@ export function MountainDetail() {
   const locationId = params?.id ?? "";
   const { region } = useRegion();
   const { t } = useLanguage();
+  const seasonCtx = useOptionalSeason();
+  const isGreen = seasonCtx?.season === "green";
   const [activeChartMetric, setActiveChartMetric] = useState<"temperature" | "snowfall" | "windSpeed">("temperature");
 
   const q = useGetLocationWeather(locationId, {
@@ -509,25 +512,28 @@ export function MountainDetail() {
             </PremiumGate>
           </div>
 
-          {/* PremiumGate · Personalised triggers · push when conditions hit. */}
-          <div className="mt-4">
-            <PremiumGate
-              title="Powder & weather alerts"
-              titleJa="降雪・気象アラート"
-              blurb="Get a push when conditions hit. Set thresholds for snowfall, wind, freezing level."
-              blurbJa="条件達成時にプッシュ通知。降雪・風速・凍結高度を設定。"
-            >
-              <section className="rounded-2xl border border-border bg-white p-5 md:p-6">
-                <div className="mb-4">
-                  <p className="byline text-muted-foreground/70">{t("Alerts", "アラート")}</p>
-                  <h2 className="font-display font-semibold text-xl mt-1">
-                    {t("Personalised triggers", "パーソナライズされたトリガー")}
-                  </h2>
-                </div>
-                <AlertSubscribeForm defaultRegion={region.id as any} />
-              </section>
-            </PremiumGate>
-          </div>
+          {/* PremiumGate · Personalised triggers · push when conditions hit.
+              Hidden in green season - powder alerts are snow-only. */}
+          {!isGreen && (
+            <div className="mt-4">
+              <PremiumGate
+                title="Powder & weather alerts"
+                titleJa="降雪・気象アラート"
+                blurb="Get a push when conditions hit. Set thresholds for snowfall, wind, freezing level."
+                blurbJa="条件達成時にプッシュ通知。降雪・風速・凍結高度を設定。"
+              >
+                <section className="rounded-2xl border border-border bg-white p-5 md:p-6">
+                  <div className="mb-4">
+                    <p className="byline text-muted-foreground/70">{t("Alerts", "アラート")}</p>
+                    <h2 className="font-display font-semibold text-xl mt-1">
+                      {t("Personalised triggers", "パーソナライズされたトリガー")}
+                    </h2>
+                  </div>
+                  <AlertSubscribeForm defaultRegion={region.id as any} />
+                </section>
+              </PremiumGate>
+            </div>
+          )}
 
           {/* Webcams · same shared component used by Yamanouchi.
               Self-hides when no webcam config exists for the mountain. */}
