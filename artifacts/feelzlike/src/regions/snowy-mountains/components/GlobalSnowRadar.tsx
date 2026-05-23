@@ -1,9 +1,21 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Loader2 } from "lucide-react";
-import { RadarMap, type RadarMapProps } from "./RadarMap";
+import { RadarMap, type RadarMapProps, type RadarRegionKey } from "./RadarMap";
 
-const RADAR_URL = "https://global-snow-radar.replit.app/";
+const RADAR_BASE_URL = "https://global-snow-radar.replit.app/";
 const LOAD_TIMEOUT_MS = 12_000;
+
+// Per-region centre + zoom passed to the radar app via its documented
+// URLSearchParams contract (lat/lon/zoom/units). Mirrors the windy
+// coords used by the local RadarMap so the iframe opens in the right
+// country every time, regardless of where the radar app last left off.
+const REGION_VIEW: Record<RadarRegionKey, { lat: number; lon: number; zoom: number }> = {
+  "snowy-mountains":         { lat: -36.42,  lon: 148.42,  zoom: 9 },
+  "victorias-high-country":  { lat: -36.86,  lon: 147.27,  zoom: 9 },
+  yamanouchi:                { lat: 36.74,   lon: 138.42,  zoom: 9 },
+  "nozawa-onsen":            { lat: 36.928,  lon: 138.449, zoom: 10 },
+  iiyama:                    { lat: 36.873,  lon: 138.366, zoom: 10 },
+};
 
 /**
  * GlobalSnowRadar
@@ -21,6 +33,21 @@ export function GlobalSnowRadar(props: RadarMapProps) {
   const [loaded, setLoaded] = useState(false);
   const [errored, setErrored] = useState(false);
   const timerRef = useRef<number | null>(null);
+
+  // Build a region-aware URL so the iframe opens centered on the
+  // country/region the user is currently viewing. The radar app reads
+  // lat/lon/zoom/units from URLSearchParams.
+  const radarUrl = useMemo(() => {
+    const view = props.region ? REGION_VIEW[props.region] : null;
+    if (!view) return RADAR_BASE_URL;
+    const params = new URLSearchParams({
+      lat: String(view.lat),
+      lon: String(view.lon),
+      zoom: String(view.zoom),
+      units: "metric",
+    });
+    return `${RADAR_BASE_URL}?${params.toString()}`;
+  }, [props.region]);
   // Ref guard so a late-firing timeout callback that was already
   // queued before `onLoad` cleared the timer cannot flip us into
   // the fallback after a successful load.
@@ -53,7 +80,8 @@ export function GlobalSnowRadar(props: RadarMapProps) {
         </div>
       )}
       <iframe
-        src={RADAR_URL}
+        key={radarUrl}
+        src={radarUrl}
         title="Global Snow Radar"
         loading="lazy"
         sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
