@@ -17,6 +17,23 @@ const REGION_VIEW: Record<RadarRegionKey, { lat: number; lon: number; zoom: numb
   iiyama:                    { lat: 36.873,  lon: 138.366, zoom: 10 },
 };
 
+// Only the US, Liberia and Myanmar use imperial units by convention.
+// We detect from navigator.language (e.g. "en-US", "en-LR", "my-MM");
+// everything else gets metric. SSR/Node fallback returns metric.
+const IMPERIAL_COUNTRIES = new Set(["US", "LR", "MM"]);
+function preferredUnits(): "imperial" | "metric" {
+  if (typeof navigator === "undefined") return "metric";
+  const langs: readonly string[] = navigator.languages?.length
+    ? navigator.languages
+    : [navigator.language ?? ""];
+  for (const tag of langs) {
+    const region = tag.split("-")[1]?.toUpperCase();
+    if (region && IMPERIAL_COUNTRIES.has(region)) return "imperial";
+    if (region) return "metric";
+  }
+  return "metric";
+}
+
 /**
  * GlobalSnowRadar
  *
@@ -36,7 +53,9 @@ export function GlobalSnowRadar(props: RadarMapProps) {
 
   // Build a region-aware URL so the iframe opens centered on the
   // country/region the user is currently viewing. The radar app reads
-  // lat/lon/zoom/units from URLSearchParams.
+  // lat/lon/zoom/units from URLSearchParams. Units follow the visitor's
+  // browser locale - imperial for US/Liberia/Myanmar, metric everywhere
+  // else (covers AU + JP natively, plus the rest of the world).
   const radarUrl = useMemo(() => {
     const view = props.region ? REGION_VIEW[props.region] : null;
     if (!view) return RADAR_BASE_URL;
@@ -44,7 +63,7 @@ export function GlobalSnowRadar(props: RadarMapProps) {
       lat: String(view.lat),
       lon: String(view.lon),
       zoom: String(view.zoom),
-      units: "metric",
+      units: preferredUnits(),
     });
     return `${RADAR_BASE_URL}?${params.toString()}`;
   }, [props.region]);
