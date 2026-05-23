@@ -13,7 +13,8 @@ import {
   Compass as CompassIcon,
 } from "lucide-react";
 import { useLanguage, useBaseTown, useRegion, LiveBadge, UpdateStamp, useOptionalSeason, PageHeader } from "@workspace/feelzlike-shell";
-import { RadarMap, type RadarRegionKey } from "@/regions/snowy-mountains/components/RadarMap";
+import { GlobalSnowRadar } from "@/regions/snowy-mountains/components/GlobalSnowRadar";
+import { type RadarRegionKey } from "@/regions/snowy-mountains/components/RadarMap";
 import { Radar as RadarIcon, ExternalLink } from "lucide-react";
 import {
   useTownWeather,
@@ -169,7 +170,7 @@ function Radar({ t }: { t: (en: string, ja: string) => string }) {
           RainViewer <ExternalLink className="w-3 h-3" />
         </a>
       </div>
-      <RadarMap season={season} region={region.id as RadarRegionKey} />
+      <GlobalSnowRadar season={season} region={region.id as RadarRegionKey} />
       <p className="text-xs text-muted-foreground/70 px-5 py-3 border-t border-border">
         {season === "winter"
           ? t(
