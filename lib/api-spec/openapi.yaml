@@ -1515,6 +1515,7 @@ components:
       enum:
         - snowy-mountains
         - victorias-high-country
+        - tasmania
         - yamanouchi
         - nozawa-onsen
         - iiyama

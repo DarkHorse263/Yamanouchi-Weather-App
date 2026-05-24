@@ -159,6 +159,7 @@ export const GetPowderAlertsQueryParams = zod.object({
     .enum([
       "snowy-mountains",
       "victorias-high-country",
+      "tasmania",
       "yamanouchi",
       "nozawa-onsen",
       "iiyama",
@@ -1089,6 +1090,7 @@ export const GetWeatherQueryParams = zod.object({
     .enum([
       "snowy-mountains",
       "victorias-high-country",
+      "tasmania",
       "yamanouchi",
       "nozawa-onsen",
       "iiyama",
@@ -1346,6 +1348,7 @@ export const GetWebcamsQueryParams = zod.object({
     .enum([
       "snowy-mountains",
       "victorias-high-country",
+      "tasmania",
       "yamanouchi",
       "nozawa-onsen",
       "iiyama",
@@ -1438,6 +1441,7 @@ export const GetRoadConditionsQueryParams = zod.object({
     .enum([
       "snowy-mountains",
       "victorias-high-country",
+      "tasmania",
       "yamanouchi",
       "nozawa-onsen",
       "iiyama",
@@ -1585,6 +1589,7 @@ export const GetLiftStatusQueryParams = zod.object({
     .enum([
       "snowy-mountains",
       "victorias-high-country",
+      "tasmania",
       "yamanouchi",
       "nozawa-onsen",
       "iiyama",

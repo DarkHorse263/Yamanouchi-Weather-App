@@ -42,6 +42,9 @@ const REGION_ANCHORS: Record<RegionId, {
 }> = {
   "snowy-mountains": { lat: -36.45, lon: 148.32, elevation: 1700, region: "AU", displayName: "Snowy Mountains" },
   "victorias-high-country": { lat: -36.9779, lon: 147.1361, elevation: 1862, region: "AU", displayName: "Victoria's High Country" },
+  // Tasmania · anchor on Ben Lomond summit (Legges Tor, the highest
+  // skiable point and the island's only commercial chairlift area).
+  "tasmania": { lat: -41.5378, lon: 147.6736, elevation: 1572, region: "AU", displayName: "Tasmania" },
   "yamanouchi": { lat: 36.738, lon: 138.508, elevation: 1500, region: "JP", displayName: "Yamanouchi" },
   // Nozawa Onsen · single resort, anchor on Mt Kenashi summit.
   "nozawa-onsen": { lat: 36.9290, lon: 138.4500, elevation: 1650, region: "JP", displayName: "Nozawa Onsen" },

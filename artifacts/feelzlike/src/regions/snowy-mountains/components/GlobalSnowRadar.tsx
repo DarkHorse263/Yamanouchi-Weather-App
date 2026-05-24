@@ -12,6 +12,7 @@ const LOAD_TIMEOUT_MS = 12_000;
 const REGION_VIEW: Record<RadarRegionKey, { lat: number; lon: number; zoom: number }> = {
   "snowy-mountains":         { lat: -36.42,  lon: 148.42,  zoom: 9 },
   "victorias-high-country":  { lat: -36.86,  lon: 147.27,  zoom: 9 },
+  tasmania:                  { lat: -41.54,  lon: 147.67,  zoom: 9 },
   yamanouchi:                { lat: 36.74,   lon: 138.42,  zoom: 9 },
   "nozawa-onsen":            { lat: 36.928,  lon: 138.449, zoom: 10 },
   iiyama:                    { lat: 36.873,  lon: 138.366, zoom: 10 },

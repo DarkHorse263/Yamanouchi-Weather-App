@@ -56,6 +56,7 @@ export type RegionId = (typeof RegionId)[keyof typeof RegionId];
 export const RegionId = {
   "snowy-mountains": "snowy-mountains",
   "victorias-high-country": "victorias-high-country",
+  tasmania: "tasmania",
   yamanouchi: "yamanouchi",
   "nozawa-onsen": "nozawa-onsen",
   iiyama: "iiyama",

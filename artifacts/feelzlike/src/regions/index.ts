@@ -4,13 +4,16 @@ import { yamanouchiRegion } from "./yamanouchi";
 import { victoriasHighCountryRegion } from "./victorias-high-country";
 import { nozawaOnsenRegion } from "./nozawa-onsen";
 import { iiyamaRegion } from "./iiyama";
+import { tasmaniaRegion } from "./tasmania";
 
-// Active region registry · AU: Snowy Mountains + Victoria's High Country.
-// JP: Yamanouchi (Shiga Kogen + Kita-Shiga), Nozawa Onsen (standalone),
-// Iiyama (Madarao/Tangram + Togari + Kijimadaira cluster).
+// Active region registry · AU: Snowy Mountains + Victoria's High Country
+// + Tasmania (Ben Lomond). JP: Yamanouchi (Shiga Kogen + Kita-Shiga),
+// Nozawa Onsen (standalone), Iiyama (Madarao/Tangram + Togari +
+// Kijimadaira cluster).
 export const REGIONS: RegionConfig[] = [
   snowyMountainsRegion,
   victoriasHighCountryRegion,
+  tasmaniaRegion,
   yamanouchiRegion,
   nozawaOnsenRegion,
   iiyamaRegion,
@@ -32,6 +35,7 @@ export type CountryCode = "AU" | "JP";
 export const REGION_COUNTRY: Record<string, CountryCode> = {
   "snowy-mountains": "AU",
   "victorias-high-country": "AU",
+  "tasmania": "AU",
   "yamanouchi": "JP",
   "nozawa-onsen": "JP",
   "iiyama": "JP",

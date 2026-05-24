@@ -10,6 +10,7 @@
 export const REGION_IDS = [
   "snowy-mountains",
   "victorias-high-country",
+  "tasmania",
   "yamanouchi",
   "nozawa-onsen",
   "iiyama",
@@ -49,6 +50,14 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "marysville": "victorias-high-country",
   "warburton": "victorias-high-country",
   "victorias-high-country-roads": "victorias-high-country",
+
+  // Tasmania, AU · 1 mountain (Ben Lomond · only commercial chairlift),
+  // 3 base towns (on-mountain village + Launceston + Hobart).
+  "ben-lomond": "tasmania",
+  "ben-lomond-base": "tasmania",
+  "launceston": "tasmania",
+  "hobart": "tasmania",
+  "tasmania-roads": "tasmania",
 
   // Yamanouchi, JP · 22 entries: 18 Shiga Kogen sub-areas + 4 Kita-Shiga resorts (ryuoo, xjam-takaifuji, yomase-onsen, kita-shiga-komaruyama).
   "shiga-sun-valley": "yamanouchi",

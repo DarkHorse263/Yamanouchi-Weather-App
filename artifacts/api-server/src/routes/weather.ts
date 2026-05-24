@@ -111,6 +111,15 @@ const LOCATIONS: LocationConfig[] = [
   { id: "marysville",      name: "Marysville",      latitude: -37.5128, longitude: 145.7497, elevation: 320,  description: "Yarra Ranges gateway town - 20 min drive to Lake Mountain.",                                                                                   bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
   { id: "warburton",       name: "Warburton",       latitude: -37.7553, longitude: 145.6906, elevation: 175,  description: "Yarra Valley town - closest base to Mt Donna Buang.",                                                                                          bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
 
+  // ─── Tasmania (TAS, Australia) ───────────────────────────
+  // 1 mountain (Ben Lomond · the only commercial chairlift) across 3 base
+  // towns (on-mountain village + Launceston + Hobart). No BOM AWS at the
+  // resort · Open-Meteo elevation-corrected is the primary source.
+  { id: "ben-lomond",      name: "Ben Lomond",      latitude: -41.5378, longitude: 147.6736, elevation: 1572, description: "Tasmania's only commercial chairlift operation · Legges Tor summit, weather-dependent and short windows reward locals.",                bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Hobart", region: "AU" },
+  { id: "ben-lomond-base", name: "Ben Lomond Base", latitude: -41.5392, longitude: 147.6486, elevation: 1450, description: "On-mountain village at the foot of the lifts · Carr Villa / Creek Inn precinct.",                                                       bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Hobart", region: "AU" },
+  { id: "launceston",      name: "Launceston",      latitude: -41.4332, longitude: 147.1442, elevation: 30,   description: "Closest city base for Ben Lomond · ~90 min drive via Jacobs Ladder.",                                                                    bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Hobart", region: "AU" },
+  { id: "hobart",          name: "Hobart",          latitude: -42.8821, longitude: 147.3272, elevation: 19,   description: "Tasmania's capital · long day-trips (~3 hrs each way) to Ben Lomond when conditions deliver.",                                           bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Hobart", region: "AU" },
+
   // ─── Yamanouchi (Nagano, Japan) ──────────────────────────
   // 22 individually-tracked mountains. Shiga Kogen is one Ikon-Pass connected
   // area but the lift authority groups it into 18 sub-resorts; we model each

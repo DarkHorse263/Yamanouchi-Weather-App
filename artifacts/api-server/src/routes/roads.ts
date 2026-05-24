@@ -316,6 +316,34 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
     ];
   }
 
+  if (regionId === "tasmania") {
+    // Tasmanian snow season is short and weather-dependent · roughly
+    // mid-June to early September. Reuse the AU snow-season helper
+    // (winter months in southern hemisphere) for chain rules on the
+    // Ben Lomond access road · Jacobs Ladder is the exposed pitch.
+    const inSeason = isAuSnowSeason(now);
+    const chains2wd: ChainReq = inSeason ? "must-fit" : "not-required";
+    const chainsAwd: ChainReq = inSeason ? "must-carry" : "not-required";
+    return [
+      {
+        id: "ben-lomond-access-road",
+        regionId: "tasmania",
+        mountainId: "ben-lomond",
+        mountainName: "Ben Lomond",
+        approach: "Ben Lomond access road · Jacobs Ladder switchbacks from Upper Blessington",
+        status: "open",
+        chains2wd, chainsAwd,
+        note: inSeason
+          ? "Tasmania snow season · chains required for 2WD on Jacobs Ladder when snow is on the road. Road closes at short notice in storms."
+          : "Outside snow season · no chain requirement.",
+        issuedAt,
+        sourceLabel: "Transport Tasmania · live traffic (live feed pending)",
+        sourceUrl: "https://www.transport.tas.gov.au/",
+        dataSource: "pending",
+      },
+    ];
+  }
+
   if (regionId === "yamanouchi") {
     const inSeason = isJpSnowSeason(now);
     return [

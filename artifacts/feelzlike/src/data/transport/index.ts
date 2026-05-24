@@ -17,6 +17,7 @@ import type { RegionId } from "@workspace/api-client-react";
 import type { TransportProvider, TransportProviderList } from "@/types/transport";
 import { SNOWY_MOUNTAINS_TRANSPORT } from "./snowy-mountains";
 import { VICTORIAS_HIGH_COUNTRY_TRANSPORT } from "./victorias-high-country";
+import { TASMANIA_TRANSPORT } from "./tasmania";
 import { YAMANOUCHI_TRANSPORT } from "./yamanouchi";
 import { NOZAWA_ONSEN_TRANSPORT } from "./nozawa-onsen";
 import { IIYAMA_TRANSPORT } from "./iiyama";
@@ -24,6 +25,7 @@ import { IIYAMA_TRANSPORT } from "./iiyama";
 const REGISTRY: Record<RegionId, TransportProviderList> = {
   "snowy-mountains": SNOWY_MOUNTAINS_TRANSPORT,
   "victorias-high-country": VICTORIAS_HIGH_COUNTRY_TRANSPORT,
+  tasmania: TASMANIA_TRANSPORT,
   yamanouchi: YAMANOUCHI_TRANSPORT,
   "nozawa-onsen": NOZAWA_ONSEN_TRANSPORT,
   iiyama: IIYAMA_TRANSPORT,

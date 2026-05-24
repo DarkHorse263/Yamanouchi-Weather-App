@@ -45,6 +45,25 @@ const REGIONS: RegionConfig[] = [
     sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
   },
   {
+    id: "tasmania",
+    name: "Tasmania",
+    country: "Australia",
+    countryCode: "AU",
+    region: "Tasmania",
+    status: "live",
+    href: "/tasmania/",
+    baseTowns: ["Ben Lomond Base", "Launceston", "Hobart"],
+    mountains: ["Ben Lomond"],
+    // Headline reading from Launceston (~30m) · closest city base and
+    // where most visiting skiers actually arrive. Ben Lomond summit
+    // forecast lives on the dedicated mountain page.
+    headlineLabel: "Launceston",
+    lat: -41.4332,
+    lon: 147.1442,
+    timezone: "Australia/Hobart",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
     id: "yamanouchi",
     name: "Yamanouchi Town",
     country: "Japan",

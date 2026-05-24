@@ -16,6 +16,7 @@ interface RadarMapInnerProps {
 export type RegionKey =
   | "snowy-mountains"
   | "victorias-high-country"
+  | "tasmania"
   | "yamanouchi"
   | "nozawa-onsen"
   | "iiyama";
@@ -50,6 +51,15 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       imageUrl: "https://www.bom.gov.au/radar/IDR49.gif",
       href: "https://www.bom.gov.au/products/IDR49.loop.shtml",
       attribution: "Bureau of Meteorology · IDR49 · 256 km",
+    },
+  },
+  tasmania: {
+    windy: { lat: -41.54, lon: 147.67, zoom: 9 },
+    official: {
+      label: "BOM Mt Koonya (Hobart)",
+      imageUrl: "https://www.bom.gov.au/radar/IDR761.gif",
+      href: "https://www.bom.gov.au/products/IDR761.loop.shtml",
+      attribution: "Bureau of Meteorology · IDR761 · 256 km",
     },
   },
   yamanouchi: {
@@ -112,6 +122,15 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "mount-beauty", name: "Mount Beauty", lat: -36.7327, lng: 147.1696, accent: "#0ea5e9" },
       { id: "bright", name: "Bright", lat: -36.7300, lng: 146.9617, accent: "#0ea5e9" },
       { id: "mansfield", name: "Mansfield", lat: -37.0539, lng: 146.0894, accent: "#0ea5e9" },
+    ],
+  },
+  tasmania: {
+    center: { lat: -41.54, lng: 147.67 },
+    pins: [
+      { id: "ben-lomond", name: "Ben Lomond", lat: -41.5378, lng: 147.6736, accent: "#f97316" },
+      { id: "ben-lomond-base", name: "Ben Lomond Base", lat: -41.5392, lng: 147.6486, accent: "#0ea5e9" },
+      { id: "launceston", name: "Launceston", lat: -41.4332, lng: 147.1442, accent: "#0ea5e9" },
+      { id: "hobart", name: "Hobart", lat: -42.8821, lng: 147.3272, accent: "#0ea5e9" },
     ],
   },
   yamanouchi: {
