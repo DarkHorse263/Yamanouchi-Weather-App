@@ -21,15 +21,34 @@ const REGION_VIEW: Record<RadarRegionKey, { lat: number; lon: number; zoom: numb
 // We detect from navigator.language (e.g. "en-US", "en-LR", "my-MM");
 // everything else gets metric. SSR/Node fallback returns metric.
 const IMPERIAL_COUNTRIES = new Set(["US", "LR", "MM"]);
+function regionFromTag(tag: string): string | null {
+  if (!tag) return null;
+  // Prefer Intl.Locale for BCP47-correct region extraction (handles
+  // script subtags like `zh-Hant-US`). Fall back to a naive parse if
+  // the runtime doesn't support it or the tag is malformed.
+  try {
+    const region = new Intl.Locale(tag).region;
+    if (region) return region.toUpperCase();
+  } catch {
+    /* fall through */
+  }
+  const parts = tag.split("-");
+  for (let i = 1; i < parts.length; i++) {
+    const part = parts[i];
+    if (/^[A-Za-z]{2}$/.test(part)) return part.toUpperCase();
+    if (/^\d{3}$/.test(part)) return part;
+  }
+  return null;
+}
 function preferredUnits(): "imperial" | "metric" {
   if (typeof navigator === "undefined") return "metric";
   const langs: readonly string[] = navigator.languages?.length
     ? navigator.languages
     : [navigator.language ?? ""];
   for (const tag of langs) {
-    const region = tag.split("-")[1]?.toUpperCase();
-    if (region && IMPERIAL_COUNTRIES.has(region)) return "imperial";
-    if (region) return "metric";
+    const region = regionFromTag(tag);
+    if (!region) continue;
+    return IMPERIAL_COUNTRIES.has(region) ? "imperial" : "metric";
   }
   return "metric";
 }
@@ -72,6 +91,17 @@ export function GlobalSnowRadar(props: RadarMapProps) {
   // the fallback after a successful load.
   const settledRef = useRef(false);
 
+  // When the URL changes (region switch), reset lifecycle state so
+  // the remounted iframe gets a fresh spinner, fresh timeout, and
+  // its onLoad/onError can fire again. Without this reset the iframe
+  // keyed remount would still see settledRef=true and loaded=true
+  // from the previous region, disabling spinner + fallback.
+  useEffect(() => {
+    settledRef.current = false;
+    setLoaded(false);
+    setErrored(false);
+  }, [radarUrl]);
+
   useEffect(() => {
     if (loaded || errored) return;
     timerRef.current = window.setTimeout(() => {
@@ -82,7 +112,7 @@ export function GlobalSnowRadar(props: RadarMapProps) {
     return () => {
       if (timerRef.current !== null) window.clearTimeout(timerRef.current);
     };
-  }, [loaded, errored]);
+  }, [loaded, errored, radarUrl]);
 
   if (errored) {
     return <RadarMap {...props} />;
@@ -102,9 +132,7 @@ export function GlobalSnowRadar(props: RadarMapProps) {
         key={radarUrl}
         src={radarUrl}
         title="Global Snow Radar"
-        loading="lazy"
         sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
-        referrerPolicy="no-referrer"
         className="absolute inset-0 h-full w-full border-0"
         onLoad={() => {
           if (settledRef.current) return;
