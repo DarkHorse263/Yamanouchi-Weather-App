@@ -79,6 +79,18 @@ export const yamanouchiRegion: RegionConfig = {
       radiusM: 700,
       blurb: "Onsen station town · gateway to Shiga Kogen",
       blurbJa: "温泉駅前 · 志賀高原への玄関口",
+      // Yudanaka is the rail/bus gateway to the entire Shiga Kogen system
+      // AND the Kita-Shiga lifts up the valley · list both umbrellas so the
+      // back-to-town link from any sub-resort resolves here by default.
+      nearbyMountainIds: [
+        "shiga-yakebitaiyama", "shiga-okushiga-kogen", "shiga-yakebitai-niseta",
+        "shiga-ichinose-family", "shiga-ichinose-diamond", "shiga-ichinose-yamanokami",
+        "shiga-takamagahara-mammoth", "shiga-tannenomori-okojo", "shiga-terakoya",
+        "shiga-higashidateyama", "shiga-nishidateyama", "shiga-giant",
+        "shiga-hasuike", "shiga-marunoike", "shiga-kumanoyu",
+        "shiga-kidoike-asahi", "shiga-yokoteyama", "shiga-shibutoge",
+        "ryuoo", "xjam-takaifuji", "yomase-onsen", "kita-shiga-komaruyama",
+      ],
     },
     {
       id: "shibu-onsen",
@@ -90,6 +102,15 @@ export const yamanouchiRegion: RegionConfig = {
       radiusM: 400,
       blurb: "Historic ryokan village · cobbled lanes & nine bathhouses",
       blurbJa: "歴史ある旅館街 · 石畳と九湯めぐり",
+      // Same Shiga gateway as Yudanaka · the village sits 600m up the road.
+      nearbyMountainIds: [
+        "shiga-yakebitaiyama", "shiga-okushiga-kogen", "shiga-yakebitai-niseta",
+        "shiga-ichinose-family", "shiga-ichinose-diamond", "shiga-ichinose-yamanokami",
+        "shiga-takamagahara-mammoth", "shiga-tannenomori-okojo", "shiga-terakoya",
+        "shiga-higashidateyama", "shiga-nishidateyama", "shiga-giant",
+        "shiga-hasuike", "shiga-marunoike", "shiga-kumanoyu",
+        "shiga-kidoike-asahi", "shiga-yokoteyama", "shiga-shibutoge",
+      ],
     },
     {
       id: "yomase",
@@ -100,6 +121,11 @@ export const yamanouchiRegion: RegionConfig = {
       radiusM: 1500,
       blurb: "Quieter base on the river · close to Kita-Shiga lifts",
       blurbJa: "夜間瀬川沿いの静かな拠点 · 北志賀のリフトに近い",
+      // Yomase is the natural base for the Kita-Shiga cluster on the
+      // western slopes (Ryuoo, X-Jam, Yomase Onsen, Komaruyama).
+      nearbyMountainIds: [
+        "ryuoo", "xjam-takaifuji", "yomase-onsen", "kita-shiga-komaruyama",
+      ],
     },
   ],
   footer: "v0.3 · feelzlike",

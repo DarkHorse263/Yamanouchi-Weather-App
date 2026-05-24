@@ -228,6 +228,54 @@ export function TownRoads() {
         <ChainStatusSection statuses={chainStatuses} t={t} />
       )}
 
+      {/* Truth-in-data for JP (and any non-VHC region) when we don't yet
+          have a live per-road table wired. JARTIC doesn't expose a free
+          public feed, so we render an explicit "not available · check
+          official source" panel rather than letting users assume the empty
+          page means roads are clear. Chain-fitting status (above) is still
+          shown when present · it's a separate official feed. */}
+      {!dataAvailable && !isVhc && (
+        <EmptyStateCard
+          icon={Navigation}
+          title={t(
+            "live road status not available for this region",
+            "この地域のライブ道路状況は取得できません",
+          )}
+          body={
+            language === "ja" ? (
+              <>
+                公的なライブ道路フィードは未連携です。最新の通行止め・規制情報は下記の公式ソースをご確認ください。
+                {chainStatuses.length > 0 && (
+                  <>
+                    <br />
+                    上のチェーン規制情報はリアルタイムで反映されています。
+                  </>
+                )}
+              </>
+            ) : (
+              <>
+                no public live road feed wired for this region yet · check the official source below for current closures and restrictions.
+                {chainStatuses.length > 0 && (
+                  <>
+                    <br />
+                    the chain-fitting status above does update live.
+                  </>
+                )}
+              </>
+            )
+          }
+          ctaLabel={
+            region.roadsSource
+              ? t(
+                  region.roadsSource.label,
+                  region.roadsSource.labelJa ?? region.roadsSource.label,
+                )
+              : undefined
+          }
+          ctaHref={region.roadsSource?.url}
+        />
+      )}
+
       {!dataAvailable && isVhc && (
         <EmptyStateCard
           icon={Camera}

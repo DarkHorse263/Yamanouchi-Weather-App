@@ -421,27 +421,7 @@ export function TownHome() {
               {t("Mountain conditions unavailable", "山の状況は取得不可")}
             </p>
           ) : (
-            <ul className="space-y-2">
-              {mountainItems.map((item) => {
-                if (item.kind === "single") {
-                  return (
-                    <li key={item.row.entry.location.id}>
-                      <MountainResortRow row={item.row} regionId={region.id} t={t} />
-                    </li>
-                  );
-                }
-                return (
-                  <li key={`group-${item.parentId}`}>
-                    <MountainParentGroupRow
-                      parentId={item.parentId}
-                      rows={item.rows}
-                      regionId={region.id}
-                      t={t}
-                    />
-                  </li>
-                );
-              })}
-            </ul>
+            <MountainsList items={mountainItems} regionId={region.id} t={t} />
           )}
         </div>
       </section>
@@ -503,6 +483,68 @@ export function TownHome() {
         )}
       </section>
     </div>
+  );
+}
+
+// Default number of mountain rows surfaced above the fold in TownHome.
+// Long lists (Yamanouchi's 22 resorts under Shiga + Kita-Shiga, etc.)
+// collapsed past this with a "see all (+N)" toggle so the page no longer
+// pushes the stay/eat/explore tiles miles below the fold.
+const MOUNTAINS_VISIBLE_DEFAULT = 3;
+
+function MountainsList({
+  items,
+  regionId,
+  t,
+}: {
+  items: Array<
+    | { kind: "single"; row: Parameters<typeof MountainResortRow>[0]["row"] }
+    | { kind: "group"; parentId: string; rows: Array<Parameters<typeof MountainResortRow>[0]["row"]> }
+  >;
+  regionId: string;
+  t: (en: string, ja: string) => string;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  const hiddenCount = Math.max(0, items.length - MOUNTAINS_VISIBLE_DEFAULT);
+  const visible = expanded ? items : items.slice(0, MOUNTAINS_VISIBLE_DEFAULT);
+  return (
+    <>
+      <ul className="space-y-2">
+        {visible.map((item) => {
+          if (item.kind === "single") {
+            return (
+              <li key={item.row.entry.location.id}>
+                <MountainResortRow row={item.row} regionId={regionId} t={t} />
+              </li>
+            );
+          }
+          return (
+            <li key={`group-${item.parentId}`}>
+              <MountainParentGroupRow
+                parentId={item.parentId}
+                rows={item.rows}
+                regionId={regionId}
+                t={t}
+              />
+            </li>
+          );
+        })}
+      </ul>
+      {hiddenCount > 0 && (
+        <button
+          type="button"
+          onClick={() => setExpanded((v) => !v)}
+          className="mt-3 inline-flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-[0.18em] text-sky-700/80 hover:text-sky-700 transition-colors"
+        >
+          {expanded
+            ? t("show fewer", "閉じる")
+            : t(`see all (+${hiddenCount})`, `すべて表示 (+${hiddenCount})`)}
+          <ChevronDown
+            className={`w-3.5 h-3.5 transition-transform ${expanded ? "rotate-180" : ""}`}
+          />
+        </button>
+      )}
+    </>
   );
 }
 

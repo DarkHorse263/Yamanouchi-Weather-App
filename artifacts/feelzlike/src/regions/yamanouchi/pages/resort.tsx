@@ -1,4 +1,4 @@
-import { useRoute } from "wouter";
+import { useRoute, Link } from "wouter";
 import { useGetLocationWeather } from "@workspace/api-client-react";
 import {
   ResortHero,
@@ -27,6 +27,7 @@ import {
   Cable,
   Camera,
   Globe,
+  ArrowLeft,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage, useRegion } from "@workspace/feelzlike-shell";
@@ -241,8 +242,25 @@ export default function ResortDetail() {
     },
   ];
 
+  // Back to base town · towns-first IA, fixes mountain dead-end.
+  const baseTown =
+    region.baseTowns?.find((bt) => bt.nearbyMountainIds?.includes(id)) ??
+    region.baseTowns?.[0] ??
+    null;
+
   return (
     <div className="bg-background">
+      {baseTown && (
+        <div className="max-w-7xl mx-auto px-5 md:px-10 pt-5 md:pt-7">
+          <Link
+            href={`~/${region.id}/${baseTown.id}`}
+            className="inline-flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-[0.2em] text-sky-700/80 hover:text-sky-700 transition-colors"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            {t(baseTown.name, baseTown.nameJa ?? baseTown.name)}
+          </Link>
+        </div>
+      )}
       <ResortHero
         name={location.name}
         description={location.description}

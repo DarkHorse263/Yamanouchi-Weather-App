@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { Link } from "wouter";
-import { markLandingVisited } from "@/lib/favouriteRegion";
+import { markLandingVisited, readLastTown, type LastTown } from "@/lib/favouriteRegion";
 import logoFullColour from "/branding/logo-full-colour.png?url";
 import { HomeFooter } from "@/components/home/HomeFooter";
 import { PageMeta } from "@/lib/seo/PageMeta";
@@ -32,10 +32,12 @@ const FLAKES: Array<{ x: number; y: number; size: number; delay: number; duratio
 export default function Welcome() {
   const [activeSlide, setActiveSlide] = useState(0);
   const markRef = useRef<HTMLImageElement | null>(null);
+  const [lastTown, setLastTown] = useState<LastTown | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     markLandingVisited();
+    setLastTown(readLastTown());
   }, []);
 
   useEffect(() => {
@@ -165,6 +167,29 @@ export default function Welcome() {
 
         {/* CTA ────────────────────────────────────────── */}
         <section className="px-6 pt-6 pb-9 text-center md:pt-9 md:pb-16">
+          {/* Return shortcut · skips the country/region pickers for users
+              who've already settled on a base town. Only renders when a
+              valid lastTown exists in localStorage (set on TownLayout mount). */}
+          {lastTown && (
+            <motion.div
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="mb-5 md:mb-7"
+            >
+              <Link
+                href={`/${lastTown.regionId}/${lastTown.townId}`}
+                onClick={() => track("welcome_last_town_click", { category: "navigation" })}
+                className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50/70 px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.18em] text-sky-700 transition-colors hover:border-sky-300 hover:bg-sky-100"
+              >
+                <span aria-hidden="true">&larr;</span>
+                <span className="normal-case tracking-normal text-sm font-medium text-sky-800">
+                  back to {lastTown.townName.toLowerCase()}
+                </span>
+              </Link>
+            </motion.div>
+          )}
+
           <motion.h1
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}

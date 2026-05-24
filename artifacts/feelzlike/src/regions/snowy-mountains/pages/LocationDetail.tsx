@@ -1,4 +1,5 @@
-import { useRoute } from "wouter";
+import { useRoute, Link } from "wouter";
+import { useRegion } from "@workspace/feelzlike-shell";
 import { useGetLocationWeather, useGetLocationWebcams, useGetLocationLiftStatus } from "@workspace/api-client-react";
 import { MountainSnapshot } from "@workspace/feelzlike-dashboard";
 import { ElevationBands } from "@/components/weather/ElevationBands";
@@ -27,6 +28,7 @@ import {
   Eye,
   Navigation,
   ArrowDown,
+  ArrowLeft,
   Sun,
   Cloud,
   CloudSun,
@@ -118,6 +120,7 @@ export default function LocationDetail() {
   const [, rParams] = useRoute("/resort/:id");
   const params = mParams ?? rParams;
   const locationId = params?.id as LocationId;
+  const { region } = useRegion();
 
   const { data: weatherData, isLoading: weatherLoading, error: weatherError, refetch: weatherRefetch } = useGetLocationWeather(locationId, { query: { enabled: !!locationId } as never });
   const { data: webcamData } = useGetLocationWebcams(locationId, { query: { enabled: !!locationId } as never });
@@ -198,6 +201,23 @@ export default function LocationDetail() {
         </div>
 
         <div className="relative max-w-7xl mx-auto px-5 md:px-10 pt-8 md:pt-16 pb-6 md:pb-9">
+          {/* Back to base town · towns-first IA · fixes mountain dead-end. */}
+          {(() => {
+            const baseTown =
+              region.baseTowns?.find((bt) => bt.nearbyMountainIds?.includes(locationId)) ??
+              region.baseTowns?.[0] ??
+              null;
+            if (!baseTown) return null;
+            return (
+              <Link
+                href={`~/${region.id}/${baseTown.id}`}
+                className="inline-flex items-center gap-1.5 mb-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-sky-700/80 hover:text-sky-700 transition-colors"
+              >
+                <ArrowLeft className="w-3.5 h-3.5" />
+                {baseTown.name}
+              </Link>
+            );
+          })()}
           {/* Source byline + live pill */}
           <motion.div
             initial={{ opacity: 0, y: 6 }}

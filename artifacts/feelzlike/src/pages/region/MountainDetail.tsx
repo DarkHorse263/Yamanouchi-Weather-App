@@ -83,7 +83,15 @@ export function MountainDetail() {
   const elevSummitM = mountainCfg?.elevationM;
   const elevName = mountainCfg?.name;
 
-  const backHref = "~/" + region.id;
+  // Back link goes to the BASE TOWN this mountain hangs off (towns-first IA),
+  // not the region home. Find the first base town whose nearbyMountainIds
+  // includes this mountain; fall back to region home only if no town claims it.
+  const baseTown =
+    region.baseTowns?.find((bt) => bt.nearbyMountainIds?.includes(locationId ?? "")) ??
+    region.baseTowns?.[0] ??
+    null;
+  const backHref = baseTown ? `~/${region.id}/${baseTown.id}` : `~/${region.id}`;
+  const backLabel = baseTown ? t(baseTown.name, baseTown.nameJa ?? baseTown.name) : t(region.name, region.name);
 
   if (!locationId) {
     return (
@@ -109,7 +117,7 @@ export function MountainDetail() {
         className="inline-flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-[0.2em] text-sky-700/80 hover:text-sky-700 transition-colors"
       >
         <ArrowLeft className="w-3.5 h-3.5" />
-        {t(region.name, region.name)}
+        {backLabel}
       </Link>
 
       <div className="mt-3">

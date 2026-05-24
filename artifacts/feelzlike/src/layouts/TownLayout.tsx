@@ -1,6 +1,7 @@
 import { Switch, Route, Router as WouterRouter, useParams, Redirect } from "wouter";
 import { useEffect } from "react";
 import { useBaseTown, useRegion } from "@workspace/feelzlike-shell";
+import { writeLastTown } from "@/lib/favouriteRegion";
 import { TownHome } from "@/pages/region/TownHome";
 import { TownSubpageStub } from "@/pages/region/TownSubpageStub";
 import { TownStay } from "@/pages/town/TownStay";
@@ -39,6 +40,22 @@ export function TownLayout() {
     if (town?.id !== townId) setTownId(townId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [townId]);
+
+  // Persist the last town the user visited so Welcome can offer a return
+  // shortcut on next visit. Writes the resolved BaseTown (not just the URL
+  // slug) so we can render its display name without re-loading region config.
+  useEffect(() => {
+    if (!townId) return;
+    const resolved = towns.find((t) => t.id === townId);
+    if (!resolved) return;
+    writeLastTown({
+      regionId: region.id,
+      townId: resolved.id,
+      townName: resolved.name,
+      townNameJa: resolved.nameJa,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [townId, region.id, towns]);
 
   if (!townId || !towns.some((t) => t.id === townId)) {
     return <Redirect to="/" />;

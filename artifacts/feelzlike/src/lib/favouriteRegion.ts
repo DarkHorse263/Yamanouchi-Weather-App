@@ -18,14 +18,31 @@
 
 const KEY = "feelzlike:favourite-region";
 const SESSION_SKIP = "feelzlike:landing-visited";
+const LAST_TOWN_KEY = "feelzlike:last-town";
+
+/**
+ * Shape stored under LAST_TOWN_KEY. Captures the last town hub the user
+ * actually visited so Welcome can offer a one-tap "back to <town>" shortcut
+ * above the country picker on return visits. Town name is denormalised so
+ * the shortcut renders without needing to load region configs first.
+ */
+export interface LastTown {
+  regionId: string;
+  townId: string;
+  townName: string;
+  townNameJa?: string;
+}
 
 /**
  * Allow-list of currently-live region IDs. The auto-redirect compares
  * against this so a stale localStorage entry from a renamed/removed
- * region doesn't bounce users to a broken slug. Keep in sync with the
- * region registry in `src/regions/index.ts`.
+ * region doesn't bounce users to a broken slug. Derived from the live
+ * registry so adding a region (nozawa-onsen, iiyama, future Tasmania) is
+ * automatically allow-listed · avoids the silent drop bug where a town
+ * write succeeds but the read rejects because the set was hand-maintained.
  */
-const KNOWN_REGION_IDS = new Set(["snowy-mountains", "victorias-high-country", "yamanouchi"]);
+import { REGIONS } from "@/regions";
+const KNOWN_REGION_IDS = new Set(REGIONS.map((r) => r.id));
 
 export function isKnownRegionId(id: string | null | undefined): id is string {
   return typeof id === "string" && KNOWN_REGION_IDS.has(id);
@@ -70,5 +87,41 @@ export function landingAlreadyVisitedThisSession(): boolean {
     return sessionStorage.getItem(SESSION_SKIP) === "1";
   } catch {
     return false;
+  }
+}
+
+export function readLastTown(): LastTown | null {
+  try {
+    const raw = localStorage.getItem(LAST_TOWN_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as Partial<LastTown>;
+    if (
+      typeof parsed?.regionId !== "string" ||
+      typeof parsed?.townId !== "string" ||
+      typeof parsed?.townName !== "string" ||
+      !isKnownRegionId(parsed.regionId)
+    ) {
+      return null;
+    }
+    return {
+      regionId: parsed.regionId,
+      townId: parsed.townId,
+      townName: parsed.townName,
+      townNameJa: typeof parsed.townNameJa === "string" ? parsed.townNameJa : undefined,
+    };
+  } catch {
+    return null;
+  }
+}
+
+export function writeLastTown(value: LastTown | null): void {
+  try {
+    if (value) {
+      localStorage.setItem(LAST_TOWN_KEY, JSON.stringify(value));
+    } else {
+      localStorage.removeItem(LAST_TOWN_KEY);
+    }
+  } catch {
+    /* swallow · non-fatal */
   }
 }
