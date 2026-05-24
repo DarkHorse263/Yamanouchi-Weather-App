@@ -1,6 +1,6 @@
 import React from 'react';
 import { cn } from "@/lib/utils";
-import { Loader2 } from "lucide-react";
+import { Loader2, CloudOff } from "lucide-react";
 
 export function Card({ className, children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
@@ -69,7 +69,7 @@ export function ErrorScreen({ message }: { message: string }) {
   return (
     <div className="w-full h-[60vh] flex flex-col items-center justify-center space-y-4 px-4 text-center">
       <div className="w-16 h-16 rounded-full bg-destructive/10 flex items-center justify-center">
-        <span className="text-2xl">❄️</span>
+        <CloudOff className="w-7 h-7 text-destructive" />
       </div>
       <h2 className="text-xl font-bold">Failed to load data</h2>
       <p className="text-muted-foreground">{message}</p>

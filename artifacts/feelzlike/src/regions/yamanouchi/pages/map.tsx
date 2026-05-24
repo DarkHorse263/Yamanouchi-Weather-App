@@ -148,18 +148,6 @@ interface CityTemp {
 
 const FEATURED_KEYS = new Set(["yamanouchi", "nagano", "hakuba", "nozawa", "myoko"]);
 
-function weatherEmoji(code: number): string {
-  if (code === 0) return "☀️";
-  if (code <= 2)  return "⛅";
-  if (code === 3) return "☁️";
-  if (code <= 48) return "🌫️";
-  if (code <= 55) return "🌦️";
-  if (code <= 67) return "🌧️";
-  if (code <= 77) return "❄️";
-  if (code <= 82) return "🌦️";
-  if (code <= 86) return "🌨️";
-  return "⛈️";
-}
 
 function tempColor(temp: number): { text: string; bg: string; border: string } {
   if (temp <= -10) return { text: '#7C3AED', bg: '#F5F3FF', border: '#DDD6FE' };
@@ -174,7 +162,6 @@ function tempColor(temp: number): { text: string; bg: string; border: string } {
 function createCityTempLabel(city: CityTemp, isJa: boolean) {
   if (city.temp === null) return null;
   const tc = tempColor(city.temp);
-  const emoji = weatherEmoji(city.weatherCode);
   const isFeatured = FEATURED_KEYS.has(city.key);
   const displayName = isJa ? city.nameJa : city.name;
 
@@ -195,7 +182,7 @@ function createCityTempLabel(city: CityTemp, isJa: boolean) {
       min-width: ${isFeatured ? '64px' : '48px'};
     ">
       <span style="font-size:${isFeatured ? '9px' : '8px'};font-weight:${isFeatured ? '800' : '700'};color:#64748b;letter-spacing:0.3px;line-height:1;margin-bottom:1px;">
-        ${emoji} ${displayName}
+        ${displayName}
       </span>
       <span style="font-size:${isFeatured ? '16px' : '13px'};font-weight:900;color:${tc.text};line-height:1;">
         ${city.temp.toFixed(1)}°
@@ -334,7 +321,6 @@ export default function MapView() {
               <Popup>
                 <div className="p-3 min-w-[170px]">
                   <div className="flex items-center gap-1.5 mb-1">
-                    <span className="text-xs">{weatherEmoji(city.weatherCode)}</span>
                     <span className="text-[11px] font-bold text-slate-700">
                       {lang === "ja" ? city.nameJa : city.name}
                     </span>

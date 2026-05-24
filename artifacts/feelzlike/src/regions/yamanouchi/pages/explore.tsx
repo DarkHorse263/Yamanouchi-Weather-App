@@ -2,7 +2,7 @@ import { useGetAttractions } from "@workspace/api-client-react";
 import { useLanguage } from "@workspace/feelzlike-shell";
 import { Card, Badge, LoadingScreen, ErrorScreen } from "../components/ui-elements";
 import { useState } from "react";
-import { MapPin, Ticket, Clock, ExternalLink, Map, Expand } from "lucide-react";
+import { MapPin, Ticket, Clock, ExternalLink, Map, Expand, BedDouble, Utensils, Droplets, Snowflake, PawPrint, Trees, Building, Mountain, type LucideIcon } from "lucide-react";
 import { motion } from "framer-motion";
 
 type FilterType = "all" | "onsen" | "culture" | "nature" | "activity";
@@ -70,19 +70,20 @@ export default function Explore({ embedded = false }: { embedded?: boolean }) {
         {/* Category quick-links inside the map bar */}
         <div className="flex gap-2 px-4 py-2 glass-strong overflow-x-auto hide-scrollbar text-white/80 text-xs">
           {[
-            { label: t("🏨 Stay", "🏨 宿泊"), url: "https://platinumaps.jp/d/yamanouchi?culture=en&c=stay" },
-            { label: t("🍜 Eat", "🍜 飲食"), url: "https://platinumaps.jp/d/yamanouchi?culture=en&c=eat" },
-            { label: t("♨️ Onsen", "♨️ 温泉"), url: "https://platinumaps.jp/d/yamanouchi?culture=en&c=onsen" },
-            { label: t("🎿 Ski", "🎿 スキー"), url: "https://platinumaps.jp/d/yamanouchi?culture=en&c=ski" },
-            { label: t("🐒 Monkeys", "🐒 野猿"), url: "https://platinumaps.jp/d/yamanouchi?culture=en&c=nature" },
+            { label: t("Stay", "宿泊"),    Icon: BedDouble,  url: "https://platinumaps.jp/d/yamanouchi?culture=en&c=stay" },
+            { label: t("Eat", "飲食"),     Icon: Utensils,   url: "https://platinumaps.jp/d/yamanouchi?culture=en&c=eat" },
+            { label: t("Onsen", "温泉"),   Icon: Droplets,   url: "https://platinumaps.jp/d/yamanouchi?culture=en&c=onsen" },
+            { label: t("Ski", "スキー"),   Icon: Snowflake,  url: "https://platinumaps.jp/d/yamanouchi?culture=en&c=ski" },
+            { label: t("Monkeys", "野猿"), Icon: PawPrint,   url: "https://platinumaps.jp/d/yamanouchi?culture=en&c=nature" },
           ].map(link => (
             <a
               key={link.label}
               href={link.url}
               target="_blank"
               rel="noreferrer"
-              className="whitespace-nowrap font-bold hover:text-white transition-colors px-2 py-1 rounded-md hover:bg-white/10"
+              className="inline-flex items-center gap-1.5 whitespace-nowrap font-bold hover:text-white transition-colors px-2 py-1 rounded-md hover:bg-white/10"
             >
+              <link.Icon className="w-3.5 h-3.5" />
               {link.label}
             </a>
           ))}
@@ -150,9 +151,15 @@ export default function Explore({ embedded = false }: { embedded?: boolean }) {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     ) : (
-                      <span className="text-5xl">
-                        {item.category === "onsen" ? "♨️" : item.category === "nature" ? "🌲" : item.category === "culture" ? "🏯" : "🎿"}
-                      </span>
+                      (() => {
+                        const FallbackIcon: LucideIcon =
+                          item.category === "onsen" ? Droplets :
+                          item.category === "nature" ? Trees :
+                          item.category === "culture" ? Building :
+                          item.category === "activity" ? Mountain :
+                          Snowflake;
+                        return <FallbackIcon className="w-14 h-14 text-primary/50" />;
+                      })()
                     )}
                     <Badge
                       variant="default"

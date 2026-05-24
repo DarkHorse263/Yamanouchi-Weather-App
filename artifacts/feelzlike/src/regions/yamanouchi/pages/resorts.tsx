@@ -3,7 +3,7 @@ import { useLanguage } from "@workspace/feelzlike-shell";
 import { useSeason } from "@workspace/feelzlike-shell";
 import { LoadingScreen, ErrorScreen } from "../components/ui-elements";
 import { HourlyTimeline } from "../components/hourly-timeline";
-import { ExternalLink, CalendarDays, BedDouble, TreePine, Activity } from "lucide-react";
+import { ExternalLink, CalendarDays, BedDouble, TreePine, Activity, PawPrint, Cloud, Mountain, Droplets, CableCar, Sparkles, Leaf, type LucideIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { bookingRegionUrl } from "../lib/booking";
@@ -33,17 +33,17 @@ const REGION_COLORS: Record<string, string> = {
   'Yomase':      '#10B981',
 };
 
-const GREEN_POIS = [
-  { name: "Jigokudani Monkey Park", nameJa: "地獄谷野猿公苑", type: "wildlife", icon: "🐒" },
-  { name: "SORA Terrace", nameJa: "SORAテラス", type: "viewpoint", icon: "☁️" },
-  { name: "Shiga Kogen Marshlands", nameJa: "志賀高原湿原", type: "hiking", icon: "🥾" },
-  { name: "Shibu Onsen", nameJa: "渋温泉", type: "onsen", icon: "♨️" },
-  { name: "Yudanaka Onsen", nameJa: "湯田中温泉", type: "onsen", icon: "♨️" },
-  { name: "Ryuoo Gondola", nameJa: "竜王ゴンドラ", type: "viewpoint", icon: "🚡" },
-  { name: "Kumanoyu Onsen", nameJa: "熊の湯温泉", type: "onsen", icon: "♨️" },
-  { name: "Yokoteyama Summit", nameJa: "横手山山頂", type: "hiking", icon: "⛰️" },
-  { name: "Magarikawa Firefly Park", nameJa: "まがりかわホタル公園", type: "nature", icon: "✨" },
-  { name: "Kaede no Mori", nameJa: "カエデの森", type: "nature", icon: "🍁" },
+const GREEN_POIS: { name: string; nameJa: string; type: string; Icon: LucideIcon }[] = [
+  { name: "Jigokudani Monkey Park", nameJa: "地獄谷野猿公苑", type: "wildlife", Icon: PawPrint },
+  { name: "SORA Terrace", nameJa: "SORAテラス", type: "viewpoint", Icon: Cloud },
+  { name: "Shiga Kogen Marshlands", nameJa: "志賀高原湿原", type: "hiking", Icon: Mountain },
+  { name: "Shibu Onsen", nameJa: "渋温泉", type: "onsen", Icon: Droplets },
+  { name: "Yudanaka Onsen", nameJa: "湯田中温泉", type: "onsen", Icon: Droplets },
+  { name: "Ryuoo Gondola", nameJa: "竜王ゴンドラ", type: "viewpoint", Icon: CableCar },
+  { name: "Kumanoyu Onsen", nameJa: "熊の湯温泉", type: "onsen", Icon: Droplets },
+  { name: "Yokoteyama Summit", nameJa: "横手山山頂", type: "hiking", Icon: Mountain },
+  { name: "Magarikawa Firefly Park", nameJa: "まがりかわホタル公園", type: "nature", Icon: Sparkles },
+  { name: "Kaede no Mori", nameJa: "カエデの森", type: "nature", Icon: Leaf },
 ];
 
 function safeTime(raw: string | null | undefined): string {
@@ -103,8 +103,8 @@ export default function Resorts() {
                 transition={{ delay: idx * 0.04 }}
                 className="bg-white border border-slate-200 rounded-2xl p-4 flex items-start gap-3 hover:border-emerald-200 hover:shadow-sm transition-all duration-200"
               >
-                <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center shrink-0 text-lg">
-                  {poi.icon}
+                <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center shrink-0">
+                  <poi.Icon className="w-5 h-5 text-emerald-600" />
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-slate-900 leading-snug">
@@ -165,7 +165,11 @@ export default function Resorts() {
                           <h3 className="text-sm font-bold text-slate-900 leading-snug">
                             {t(resort.name, resort.nameJa)}
                           </h3>
-                          {resort.rank === 1 && <span className="shrink-0 text-base">🥇</span>}
+                          {resort.rank === 1 && (
+                            <span className="shrink-0 inline-flex items-center justify-center w-5 h-5 rounded-full bg-amber-100 text-amber-700 text-[10px] font-black">
+                              1
+                            </span>
+                          )}
                         </div>
 
                         <div className="grid grid-cols-4 text-center">

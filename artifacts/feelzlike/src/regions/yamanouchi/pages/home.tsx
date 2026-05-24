@@ -422,7 +422,9 @@ export default function Home() {
                   {t(data.bestResort.region, data.bestResort.regionJa)}
                 </p>
               </div>
-              <span className="text-2xl">🥇</span>
+              <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-700 text-xs font-black">
+                1
+              </span>
             </div>
             <div className="grid grid-cols-2 gap-2">
               {[

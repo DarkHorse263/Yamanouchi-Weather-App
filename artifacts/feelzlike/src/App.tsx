@@ -23,6 +23,7 @@ import CountryHome from "@/pages/CountryHome";
 import Privacy from "@/pages/legal/Privacy";
 import Terms from "@/pages/legal/Terms";
 import News from "@/pages/News";
+import Premium from "@/pages/Premium";
 import AdminStats from "@/pages/admin/AdminStats";
 import AdminTraffic from "@/pages/admin/AdminTraffic";
 import AdminNewsletter from "@/pages/admin/AdminNewsletter";
@@ -49,6 +50,8 @@ function Router() {
       <Route path="/legal/terms" component={Terms} />
       {/* News & updates · global feed, must precede /:region catch-all. */}
       <Route path="/news" component={News} />
+      {/* Premium hub · plans, current tier, feature overview. */}
+      <Route path="/premium" component={Premium} />
       {/* Admin dashboard · auth-gated, mounted before /:region catch-all so
           /admin/* paths aren't parsed as region slugs. */}
       <Route path="/admin" component={AdminStats} />

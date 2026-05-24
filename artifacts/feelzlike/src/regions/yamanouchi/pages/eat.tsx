@@ -16,10 +16,10 @@ const MOUNTAIN_AREAS = [
 ];
 
 const TOWN_AREAS = [
-  { region: "Yudanaka", label: "Yudanaka", labelJa: "湯田中", desc: "Hot spring town & Snow Monkey gateway", descJa: "温泉街・スノーモンキー玄関口", emoji: "♨️" },
-  { region: "Shibu Onsen", label: "Shibu Onsen", labelJa: "渋温泉", desc: "Historic hot spring village", descJa: "歴史ある温泉村", emoji: "🏮" },
-  { region: "Sano", label: "Sano", labelJa: "佐野", desc: "Jigokudani Monkey Park area", descJa: "地獄谷野猿公苑エリア", emoji: "🐒" },
-  { region: "Yomase", label: "Yomase", labelJa: "夜間瀬", desc: "Onsen ski town", descJa: "温泉スキータウン", emoji: "⛷️" },
+  { region: "Yudanaka", label: "Yudanaka", labelJa: "湯田中", desc: "Hot spring town & Snow Monkey gateway", descJa: "温泉街・スノーモンキー玄関口" },
+  { region: "Shibu Onsen", label: "Shibu Onsen", labelJa: "渋温泉", desc: "Historic hot spring village", descJa: "歴史ある温泉村" },
+  { region: "Sano", label: "Sano", labelJa: "佐野", desc: "Jigokudani Monkey Park area", descJa: "地獄谷野猿公苑エリア" },
+  { region: "Yomase", label: "Yomase", labelJa: "夜間瀬", desc: "Onsen ski town", descJa: "温泉スキータウン" },
 ];
 
 function mapsUrl(lat: number | null, lng: number | null, name: string) {
@@ -79,7 +79,7 @@ export default function Eat({ embedded = false }: { embedded?: boolean }) {
 
       {/* Location tabs */}
       <div className="flex rounded-xl bg-secondary p-1 gap-1">
-        {([["mountain", "⛷️ On Mountain", "⛷️ 山の上"], ["town", "🏘️ In Town", "🏘️ 町内"]] as const).map(([v, en, ja]) => (
+        {([["mountain", "On Mountain", "山の上"], ["town", "In Town", "町内"]] as const).map(([v, en, ja]) => (
           <button
             key={v}
             onClick={() => setTab(v)}
@@ -150,7 +150,7 @@ export default function Eat({ embedded = false }: { embedded?: boolean }) {
               <section key={area.region}>
                 <div className="mb-4">
                   <h2 className="text-xl font-black text-foreground">
-                    {area.emoji} {t(area.label, area.labelJa)}
+                    {t(area.label, area.labelJa)}
                   </h2>
                   <p className="text-sm text-muted-foreground">{t(area.desc, area.descJa)}</p>
                 </div>

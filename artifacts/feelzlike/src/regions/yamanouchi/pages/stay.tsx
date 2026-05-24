@@ -3,7 +3,7 @@ import { useLanguage } from "@workspace/feelzlike-shell";
 import { useSeason } from "@workspace/feelzlike-shell";
 import { LoadingScreen, ErrorScreen } from "../components/ui-elements";
 import { useState } from "react";
-import { MapPin, Phone, Bath, CableCar, Mountain, Search, Star, ExternalLink, BedDouble } from "lucide-react";
+import { MapPin, Phone, Bath, CableCar, Mountain, Search, Star, ExternalLink, BedDouble, Hotel, Home, Building2, type LucideIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { bookingSearchUrl, bookingRegionUrl } from "../lib/booking";
 import { StayPlatformBar } from "@/components/StayPlatformBar";
@@ -29,11 +29,11 @@ const GREEN_MOUNTAIN_AREAS = [
 ];
 
 const TOWN_AREAS = [
-  { region: "Yudanaka", label: "Yudanaka Onsen", labelJa: "湯田中温泉", desc: "Hot spring town & Snow Monkey gateway", descJa: "温泉街・スノーモンキー玄関口", emoji: "♨️" },
-  { region: "Shibu Onsen", label: "Shibu Onsen", labelJa: "渋温泉", desc: "Historic hot spring village · ~30 ryokan", descJa: "歴史ある温泉村 · 約30軒の旅館", emoji: "🏮" },
+  { region: "Yudanaka", label: "Yudanaka Onsen", labelJa: "湯田中温泉", desc: "Hot spring town & Snow Monkey gateway", descJa: "温泉街・スノーモンキー玄関口" },
+  { region: "Shibu Onsen", label: "Shibu Onsen", labelJa: "渋温泉", desc: "Historic hot spring village · ~30 ryokan", descJa: "歴史ある温泉村 · 約30軒の旅館" },
 ];
 
-const TYPE_EMOJI: Record<string, string> = { hotel: "🏨", ryokan: "🏯", guesthouse: "🏠" };
+const TYPE_ICON: Record<string, LucideIcon> = { hotel: Hotel, ryokan: Building2, guesthouse: Home };
 
 function mapsUrl(lat: number | null, lng: number | null, name: string) {
   if (lat && lng) return `https://maps.google.com/?q=${lat},${lng}`;
@@ -87,7 +87,7 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
 
       {/* Location tabs */}
       <div className="flex rounded-xl bg-secondary p-1 gap-1">
-        {([["mountain", isWinter ? "⛷️ On Mountain" : "🏔️ On Mountain", isWinter ? "⛷️ 山の上" : "🏔️ 山の上"] , ["town", "🏘️ In Town", "🏘️ 町内"]] as const).map(([v, en, ja]) => (
+        {([["mountain", "On Mountain", "山の上"], ["town", "In Town", "町内"]] as const).map(([v, en, ja]) => (
           <button
             key={v}
             onClick={() => setTab(v)}
@@ -157,7 +157,7 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
                 <div className="flex items-center justify-between mb-3">
                   <div>
                     <h2 className="text-lg font-black text-foreground">
-                      {area.emoji} {t(area.label, area.labelJa)}
+                      {t(area.label, area.labelJa)}
                     </h2>
                     <p className="text-xs text-muted-foreground">{t(area.desc, area.descJa)}</p>
                   </div>
@@ -287,8 +287,11 @@ function PlaceList({ places, t, isWinter = true }: { places: any[]; t: (en: stri
           >
             <div className="flex items-start gap-3">
               {/* Type icon */}
-              <div className="text-2xl mt-0.5 shrink-0">
-                {TYPE_EMOJI[place.type] || "🏨"}
+              <div className="mt-0.5 shrink-0 w-9 h-9 rounded-lg bg-slate-100 flex items-center justify-center">
+                {(() => {
+                  const Icon = TYPE_ICON[place.type] || Hotel;
+                  return <Icon className="w-4 h-4 text-slate-600" />;
+                })()}
               </div>
 
               {/* Details */}

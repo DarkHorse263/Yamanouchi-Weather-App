@@ -1,7 +1,30 @@
 import type { ReactNode, MouseEvent } from "react";
-import { Lock, Sparkles } from "lucide-react";
+import { Lock, Sparkles, Gift } from "lucide-react";
 import { usePremium, setPremiumPreview } from "./usePremium";
 import { useLanguage } from "./LanguageProvider";
+
+function formatPromoDate(d: Date, isJa: boolean): string {
+  return d.toLocaleDateString(isJa ? "ja-JP" : "en-AU", {
+    month: "short",
+    day: "numeric",
+  });
+}
+
+function PromoPill({ endsAt, daysLeft }: { endsAt: Date; daysLeft: number }) {
+  const { language, t } = useLanguage();
+  const isJa = language === "ja";
+  return (
+    <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 px-3 py-1 text-[11px] font-bold">
+      <Gift className="w-3 h-3" />
+      <span>
+        {t(
+          `premium · free during launch · ends ${formatPromoDate(endsAt, false).toLowerCase()} · ${daysLeft}d left`,
+          `プレミアム · ローンチ期間中は無料 · ${formatPromoDate(endsAt, true)}まで · 残り${daysLeft}日`,
+        )}
+      </span>
+    </div>
+  );
+}
 
 interface PremiumGateProps {
   /** Title shown on the lock card. */
@@ -40,10 +63,23 @@ export function PremiumGate({
   ctaHref,
   tight,
 }: PremiumGateProps) {
-  const { isPremium } = usePremium();
+  const { isPremium, isPromoPeriod, daysLeftInPromo, promoEndsAt } = usePremium();
   const { t } = useLanguage();
 
-  if (isPremium) return <>{children}</>;
+  // During the launch promo we let users through but show a pill so they
+  // know this feature becomes paid later · sets expectation, avoids a
+  // surprise wall on day 61.
+  if (isPremium) {
+    if (isPromoPeriod && promoEndsAt) {
+      return (
+        <div>
+          <PromoPill endsAt={promoEndsAt} daysLeft={daysLeftInPromo} />
+          {children}
+        </div>
+      );
+    }
+    return <>{children}</>;
+  }
 
   // TODO(payments): replace with checkout redirect once Stripe is wired.
   const startTrial = (e: MouseEvent<HTMLAnchorElement>) => {
@@ -64,7 +100,7 @@ export function PremiumGate({
           </div>
           <div className="min-w-0 flex-1">
             <p className="byline text-primary inline-flex items-center gap-1.5">
-              <Sparkles className="w-3 h-3" /> {t("Premium", "プレミアム")}
+              <Sparkles className="w-3 h-3" /> {t("premium", "プレミアム")}
             </p>
             <h3 className="font-display font-semibold text-base text-foreground mt-0.5 leading-snug">
               {t(title, titleJa ?? title)}
@@ -78,10 +114,10 @@ export function PremiumGate({
                 onClick={startTrial}
                 className="inline-flex items-center justify-center gap-1.5 rounded-full bg-foreground text-background px-4 py-2 text-[13px] font-semibold hover:opacity-90 transition-opacity"
               >
-                {t("Start free trial", "無料トライアル開始")}
+                {t("start free trial", "無料トライアル開始")}
               </a>
               <p className="text-[11px] text-muted-foreground/70">
-                {t("No card needed during preview", "プレビュー中はカード不要")}
+                {t("no card needed during preview", "プレビュー中はカード不要")}
               </p>
             </div>
           </div>
@@ -109,7 +145,7 @@ export function PremiumGate({
             <Lock className="w-5 h-5" />
           </div>
           <p className="byline text-primary inline-flex items-center gap-1.5">
-            <Sparkles className="w-3 h-3" /> {t("Premium", "プレミアム")}
+            <Sparkles className="w-3 h-3" /> {t("premium", "プレミアム")}
           </p>
           <h3 className="font-display font-semibold text-xl text-foreground mt-1.5">
             {t(title, titleJa ?? title)}
@@ -122,11 +158,11 @@ export function PremiumGate({
             onClick={startTrial}
             className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-full bg-foreground text-background px-4 py-2 text-sm font-semibold hover:opacity-90 transition-opacity"
           >
-            {t("Start free trial", "無料トライアル開始")}
+            {t("start free trial", "無料トライアル開始")}
           </a>
           <p className="text-[11px] text-muted-foreground/70 mt-2.5">
             {t(
-              "No card needed during preview",
+              "no card needed during preview",
               "プレビュー中はカード不要",
             )}
           </p>
