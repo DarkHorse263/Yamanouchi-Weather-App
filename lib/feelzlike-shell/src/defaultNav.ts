@@ -7,6 +7,7 @@ import {
   UtensilsCrossed,
   Compass,
   AlertTriangle,
+  Sparkles,
 } from "lucide-react";
 import type { NavItem } from "./types";
 
@@ -33,6 +34,10 @@ export const DEFAULT_MOUNTAIN_NAV: NavItem[] = [
   // the row entirely when the active region is in green season (the
   // shell's `filterBySeason` does the work).
   { path: "/alerts", icon: AlertTriangle, label: "Alerts", labelJa: "警報", season: "winter" },
+  // Premium hub · year-round (lists alerts + every gated feature, handles
+  // tier status and the preview/upgrade CTA). Route is globally mounted
+  // (`/premium`) so it shows from any region/town context.
+  { path: "/premium", icon: Sparkles, label: "Premium", labelJa: "プレミアム" },
 ];
 
 /**

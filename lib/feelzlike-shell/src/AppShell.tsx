@@ -11,7 +11,7 @@ import { TownPicker } from "./TownPicker";
 import { DEFAULT_TOWN_NAV, DEFAULT_MOUNTAIN_NAV, DEFAULT_REGION_NAV } from "./defaultNav";
 import type { NavItem } from "./types";
 
-const RESERVED_TOWN_SLUGS = new Set(["mountain", "mountains", "radar", "alerts", "resort"]);
+const RESERVED_TOWN_SLUGS = new Set(["mountain", "mountains", "radar", "alerts", "resort", "premium"]);
 
 interface ParsedScope {
   scope: "region" | "town" | "mountain";
@@ -89,6 +89,14 @@ export function AppShell({ children }: { children: ReactNode }) {
   };
   const regionHref = (path: string) => path; // already region-relative
   const mountainHref = (path: string) => path;
+  // Some "mountain-scope" entries are actually globally-mounted routes
+  // (mounted by App.tsx BEFORE the /:region catch-all). The region's
+  // <WouterRouter base="/{region.id}"> would otherwise rewrite their
+  // hrefs to /:region/<path> and bounce them through TownLayout's
+  // unknown-town redirect. The `~/` prefix is wouter's documented
+  // escape that pins navigation to the app root.
+  const GLOBAL_MOUNTAIN_PATHS = new Set(["/premium"]);
+  const isGlobalMountainPath = (p: string) => GLOBAL_MOUNTAIN_PATHS.has(p);
 
   const isActiveTown = (subpath: string) =>
     parsed.scope === "town" &&
@@ -137,9 +145,14 @@ export function AppShell({ children }: { children: ReactNode }) {
       const it = mountainNav.find((n) => n.path === path);
       if (!it || seen.has(`m:${path}`)) return;
       seen.add(`m:${path}`);
+      // Global routes (e.g. /premium) need the `~/` root-escape so they
+      // don't get rewritten to /:region/<path> by the region's router base.
+      const href = isGlobalMountainPath(it.path)
+        ? `~${it.path}`
+        : mountainHref(it.path);
       items.push({
         key: `m:${it.path}`,
-        href: mountainHref(it.path),
+        href,
         icon: it.icon,
         label: t(it.label, it.labelJa),
         active: isActiveMountain(it.path),
@@ -162,6 +175,7 @@ export function AppShell({ children }: { children: ReactNode }) {
     pushTown("/eat");               // Eat
     pushTown("/explore");           // Explore
     pushMountain("/alerts");        // Alerts (locked)
+    pushMountain("/premium");       // Premium hub (year-round)
     // Future-proofing: append anything we forgot to enumerate above.
     townNav.forEach((it) => pushTown(it.path));
     mountainNav.forEach((it) => pushMountain(it.path));
