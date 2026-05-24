@@ -1,0 +1,26 @@
+fix the back-to-town dead end on MountainDetail · architect found it. add a ← thredbo button next to BackBar. one-liner change.
+shorten TownHome above-the-fold. "weather in mountains" can be 4-6 resorts deep before the user even sees roads/transport/stay tiles. collapse to top-3 with "see all" or move the section tiles above the resort list.
+set expectations on inconsistent regions. Vic+JP have no live road table · either hide that tab for those regions or show a one-line "live road status not available · official source →" so users don't think they're seeing stale data.
+bigger bets (real UX gains)
+the "today" answer block. swap the current Daily Pick for a single decision card that combines:
+
+best mountain today (your existing snow/wind ranking)
+recommended departure time (drive time + your "before roads get busy" promise)
+mode recommendation (drive vs transport based on day-of-week + parking pressure)
+keep the current "weather in mountains" list below as evidence.
+
+resort comparison matrix on TownHome. you already have per-mountain data · render the top 3-4 nearby resorts as a 4-column compact table: resort · feelzlike · snow last 24h · wind · drive time. one screen, no taps, "where today?" answered.
+
+parking page. even v1 with static data is a win:
+
+main carpark name, capacity, $ price, gates open time
+"fills by ~Xam on weekends/powder days" (curated, like your transport data)
+"alternative: skitube / overflow lot at X"
+wires straight into your "before the car parks fill" promise.
+
+unify roads + transport into "getting there" with a mode toggle at the top: drive | transport. keep both data sets but frame as one decision page.
+
+return-visit shortcut. 4 taps from welcome to a town is fine on first visit, painful on day 2. localStorage their last town and on / show "back to yudanaka →" above the country picker. one-line change, huge daily-use win.
+
+mountain villages alongside towns · you mentioned you like this. make it consistent: yamanouchi nests groups, snowys is flat. promote the JP grouping pattern (region → cluster → village → mountain) to the snowys (jindabyne/perisher village/thredbo village/charlotte pass) and vic (mt beauty/falls creek village/hotham village). same code path, richer mental model.
+
