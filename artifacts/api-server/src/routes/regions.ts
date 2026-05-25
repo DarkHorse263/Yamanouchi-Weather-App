@@ -45,6 +45,26 @@ const REGIONS: RegionConfig[] = [
     sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
   },
   {
+    id: "victorias-high-country",
+    name: "Victoria's High Country",
+    country: "Australia",
+    countryCode: "AU",
+    region: "Victoria",
+    status: "live",
+    href: "/victorias-high-country/",
+    baseTowns: ["Mansfield", "Bright", "Mount Beauty", "Harrietville", "Dinner Plain", "Omeo", "Marysville", "Warburton"],
+    mountains: ["Mt Buller", "Falls Creek", "Mt Hotham", "Mt Stirling", "Lake Mountain", "Mt Donna Buang"],
+    // Headline reading is for Mount Beauty (~357m) - closest sealed-road
+    // town to Falls Creek and the most-stayed base for Victoria's High
+    // Country off-mountain visitors. Per-mountain peak forecasts live on
+    // the dedicated region page.
+    headlineLabel: "Mount Beauty",
+    lat: -36.7327,
+    lon: 147.1696,
+    timezone: "Australia/Melbourne",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
     id: "tasmania",
     name: "Tasmania",
     country: "Australia",
@@ -82,26 +102,6 @@ const REGIONS: RegionConfig[] = [
     model: "jma_seamless",
     timezone: "Asia/Tokyo",
     sourceLabel: "JMA Seamless",
-  },
-  {
-    id: "victorias-high-country",
-    name: "Victoria's High Country",
-    country: "Australia",
-    countryCode: "AU",
-    region: "Victoria",
-    status: "live",
-    href: "/victorias-high-country/",
-    baseTowns: ["Mansfield", "Bright", "Mount Beauty", "Harrietville", "Dinner Plain", "Omeo", "Marysville", "Warburton"],
-    mountains: ["Mt Buller", "Falls Creek", "Mt Hotham", "Mt Stirling", "Lake Mountain", "Mt Donna Buang"],
-    // Headline reading is for Mount Beauty (~357m) - closest sealed-road
-    // town to Falls Creek and the most-stayed base for Victoria's High
-    // Country off-mountain visitors. Per-mountain peak forecasts live on
-    // the dedicated region page.
-    headlineLabel: "Mount Beauty",
-    lat: -36.7327,
-    lon: 147.1696,
-    timezone: "Australia/Melbourne",
-    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
   },
   {
     id: "nozawa-onsen",
