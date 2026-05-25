@@ -87,6 +87,14 @@ export function HomeFooter() {
         <p className="mt-3 text-[11px] text-slate-400">
           &copy; {year} Navigate Work Digital &middot; feelzlike
         </p>
+        <p className="mt-1.5 text-[11px] text-slate-400 max-w-xl mx-auto leading-relaxed">
+          some links to accommodation and travel partners are affiliate links
+          &middot; we may earn a commission if you book through them &middot;
+          this never changes the price you pay.{" "}
+          <a className="hover:text-sky-700 underline underline-offset-2" href="/legal/terms#affiliate-links">
+            more
+          </a>
+        </p>
       </div>
     </footer>
   );

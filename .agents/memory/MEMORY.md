@@ -1,0 +1,1 @@
+- [feelzlike brand voice extends to legal copy](feelzlike-brand-voice.md) — lowercase, middot ·, no em/en dashes, no emojis applies everywhere including footers and legal pages; section titles in Terms.tsx use title-case by existing convention, so don't "fix" that.

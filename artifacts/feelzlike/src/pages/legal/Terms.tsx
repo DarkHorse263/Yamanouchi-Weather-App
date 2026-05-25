@@ -21,7 +21,7 @@ import { LegalShell, Section } from "./LegalShell";
  */
 export default function Terms() {
   return (
-    <LegalShell title="Terms of Service" lastUpdated="13 May 2026">
+    <LegalShell title="Terms of Service" lastUpdated="25 May 2026">
       <p>
         These terms govern your use of feelzlike (the &ldquo;Service&rdquo;),
         operated by <strong>Navigate Work Digital Pty Ltd</strong>
@@ -249,7 +249,34 @@ export default function Terms() {
         </p>
       </Section>
 
-      <Section title="14 · Contact">
+      <Section title="14 · Affiliate links">
+        <p id="affiliate-links">
+          Some links on the Service to accommodation providers, travel
+          booking platforms, gear retailers and tour operators are
+          affiliate links. If you click through and complete a purchase
+          or booking, we may earn a commission from the partner at no
+          additional cost to you. The price you pay is the same whether
+          you use our link or go to the partner directly.
+        </p>
+        <p>
+          Affiliate revenue helps fund the editorial work on the
+          Service · weather data ingestion, road monitoring, town
+          research and the development of the Service itself. It does
+          not influence which mountains, towns, accommodations or
+          venues we cover, the order in which they appear, or the
+          conditions we report. We list partners because they are
+          relevant to the town you are reading about, not because we
+          earn from them.
+        </p>
+        <p>
+          Current affiliate partners include Booking.com (via Commission
+          Junction). We will update this section as additional partners
+          are added. If you have a question about an affiliate
+          relationship, contact us at the address in section 15.
+        </p>
+      </Section>
+
+      <Section title="15 · Contact">
         <p>
           Questions about these terms ·{" "}
           <a
