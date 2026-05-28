@@ -68,7 +68,14 @@ function formatDate(d: Date) {
 }
 
 export default function Premium() {
-  const { isPremium, isPromoPeriod, daysLeftInPromo, promoEndsAt } = usePremium();
+  const {
+    isPremium,
+    isPromoPeriod,
+    isPromoUpcoming,
+    daysLeftInPromo,
+    promoStartsAt,
+    promoEndsAt,
+  } = usePremium();
 
   return (
     <div className="min-h-screen bg-background">
@@ -99,16 +106,28 @@ export default function Premium() {
           className={`rounded-2xl border p-5 ${
             isPremium
               ? "bg-emerald-50/60 border-emerald-200"
+              : isPromoUpcoming
+              ? "bg-sky-50/60 border-sky-200"
               : "bg-white border-border"
           }`}
         >
           <div className="flex items-start gap-3">
             <div
               className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
-                isPremium ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-500"
+                isPremium
+                  ? "bg-emerald-100 text-emerald-700"
+                  : isPromoUpcoming
+                  ? "bg-sky-100 text-sky-700"
+                  : "bg-slate-100 text-slate-500"
               }`}
             >
-              {isPremium ? <Check className="w-5 h-5" /> : <Lock className="w-5 h-5" />}
+              {isPremium ? (
+                <Check className="w-5 h-5" />
+              ) : isPromoUpcoming ? (
+                <Gift className="w-5 h-5" />
+              ) : (
+                <Lock className="w-5 h-5" />
+              )}
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
@@ -127,10 +146,16 @@ export default function Premium() {
                   free until {formatDate(promoEndsAt)} · {daysLeftInPromo} days left
                 </p>
               )}
-              {!isPremium && (
+              {isPromoUpcoming && promoStartsAt && (
+                <p className="text-sm text-sky-800/90 mt-1 inline-flex items-center gap-1.5">
+                  <Gift className="w-3.5 h-3.5" />
+                  launch promo opens {formatDate(promoStartsAt)} · free for everyone for 2 months.
+                </p>
+              )}
+              {!isPremium && !isPromoUpcoming && (
                 <p className="text-sm text-muted-foreground mt-1">
-                  billing isn't live yet. tap the preview button below to try the
-                  premium surfaces in this build.
+                  the launch promo has wrapped. subscribe below to keep the
+                  premium surfaces.
                 </p>
               )}
             </div>
@@ -206,16 +231,39 @@ export default function Premium() {
           </div>
         </section>
 
-        {/* Pricing tease */}
-        <section className="rounded-2xl border border-dashed border-border bg-secondary/30 p-5">
+        {/* Pricing */}
+        <section className="rounded-2xl border border-border bg-white p-5">
           <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-            pricing
+            pricing · after the promo
           </p>
-          <p className="text-sm text-foreground mt-1.5 leading-relaxed">
-            launch promo runs free for everyone. after that, premium is a small
-            monthly fee · less than a chairlift coffee. billing details land
-            before the promo window closes.
-          </p>
+          <div className="grid sm:grid-cols-2 gap-3 mt-3">
+            <div className="rounded-xl border border-border bg-secondary/30 p-4">
+              <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                monthly
+              </p>
+              <p className="text-2xl font-black text-foreground mt-1">
+                $5.99 <span className="text-sm font-bold text-muted-foreground">aud / month</span>
+              </p>
+              <p className="text-[11px] text-muted-foreground mt-1">cancel anytime.</p>
+            </div>
+            <div className="rounded-xl border border-primary/30 bg-primary/5 p-4 relative">
+              <span className="absolute top-2 right-2 text-[9px] font-bold text-primary bg-primary/10 border border-primary/30 px-1.5 py-0.5 rounded-full uppercase tracking-wider">
+                save 16%
+              </span>
+              <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                yearly
+              </p>
+              <p className="text-2xl font-black text-foreground mt-1">
+                $60 <span className="text-sm font-bold text-muted-foreground">aud / year</span>
+              </p>
+              <p className="text-[11px] text-muted-foreground mt-1">$5 / month, billed yearly.</p>
+            </div>
+          </div>
+          {isPromoPeriod && (
+            <p className="text-xs text-muted-foreground mt-3 leading-relaxed">
+              you're inside the launch promo · nothing to pay until {promoEndsAt && formatDate(promoEndsAt)}. checkout opens before the promo wraps.
+            </p>
+          )}
         </section>
 
         <p className="text-[11px] text-muted-foreground/70 text-center pt-2">

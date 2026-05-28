@@ -16,7 +16,8 @@ import { useEffect, useState } from "react";
  *
  * Configure the promo window via the env var
  * `VITE_PREMIUM_PROMO_ENDS_AT` (ISO date string, e.g. "2026-07-24").
- * Leave it unset to disable the promo entirely.
+ * Falls back to the launch promo default below if unset. Set the var to
+ * an empty string to disable the promo entirely.
  *
  * Demo / preview: set localStorage `feelzlike.premium.preview` to `1` to
  * flip every gated section into the unlocked view. Useful for screenshots
@@ -29,6 +30,12 @@ import { useEffect, useState } from "react";
  */
 const STORAGE_KEY = "feelzlike.premium.preview";
 
+// Launch promo: free premium for everyone from 1 June 2026 → end of 1 August
+// 2026 (AU local time). Override via VITE_PREMIUM_PROMO_STARTS_AT /
+// VITE_PREMIUM_PROMO_ENDS_AT, or set either to an empty string to disable.
+const DEFAULT_PROMO_STARTS_AT = "2026-06-01";
+const DEFAULT_PROMO_ENDS_AT = "2026-08-01";
+
 function readPreview(): boolean {
   if (typeof window === "undefined") return false;
   try {
@@ -38,52 +45,92 @@ function readPreview(): boolean {
   }
 }
 
-function readPromoEndsAt(): Date | null {
-  // Vite injects VITE_* vars at build time. Guard for SSR / non-vite.
-  const raw =
-    typeof import.meta !== "undefined" &&
-    (import.meta as any)?.env?.VITE_PREMIUM_PROMO_ENDS_AT;
+/**
+ * Parse a promo boundary date.
+ * - `kind="start"` → date-only resolves to LOCAL midnight (promo opens at the
+ *   start of that day, user's clock).
+ * - `kind="end"`   → date-only resolves to LOCAL end-of-day (promo runs
+ *   through the end of that day, user's clock).
+ *
+ * Date-only "YYYY-MM-DD" would otherwise be parsed by `new Date()` as UTC
+ * midnight, which would silently flip the boundary hours early for users east
+ * of UTC. Full ISO timestamps (with explicit time + offset) are parsed as-is.
+ */
+function parsePromoBoundary(raw: string, kind: "start" | "end"): Date | null {
   if (!raw || typeof raw !== "string") return null;
-
-  // Date-only "YYYY-MM-DD" is parsed by `new Date()` as UTC midnight, which
-  // would silently end the promo hours early for users east of UTC (e.g.
-  // AU promo ending Aug 1 would die at 10am Sydney on Jul 31). Detect the
-  // date-only shape and treat it as LOCAL end-of-day (23:59:59.999) so the
-  // promo runs "through the end of that day, user's clock".
-  const dateOnly = /^\d{4}-\d{2}-\d{2}$/.test(raw.trim());
+  const trimmed = raw.trim();
+  const dateOnly = /^\d{4}-\d{2}-\d{2}$/.test(trimmed);
   if (dateOnly) {
-    const [y, m, day] = raw.trim().split("-").map(Number);
-    return new Date(y, m - 1, day, 23, 59, 59, 999);
+    const [y, m, day] = trimmed.split("-").map(Number);
+    return kind === "end"
+      ? new Date(y, m - 1, day, 23, 59, 59, 999)
+      : new Date(y, m - 1, day, 0, 0, 0, 0);
   }
-
-  // Full ISO timestamps (with explicit time + offset) are parsed as-is.
-  const d = new Date(raw);
+  const d = new Date(trimmed);
   if (isNaN(d.getTime())) return null;
   return d;
 }
 
-const PROMO_ENDS_AT = readPromoEndsAt();
+function readBoundary(
+  envKey: string,
+  defaultVal: string,
+  kind: "start" | "end",
+): Date | null {
+  // Vite injects VITE_* vars at build time. Guard for SSR / non-vite.
+  // Falls back to default if the var is undefined; treat an explicit empty
+  // string as "boundary disabled".
+  const envVal =
+    typeof import.meta !== "undefined"
+      ? (import.meta as any)?.env?.[envKey]
+      : undefined;
+  const raw = envVal === undefined ? defaultVal : envVal;
+  return parsePromoBoundary(raw, kind);
+}
 
-function computePromoState(now: Date = new Date()): {
+const PROMO_STARTS_AT = readBoundary(
+  "VITE_PREMIUM_PROMO_STARTS_AT",
+  DEFAULT_PROMO_STARTS_AT,
+  "start",
+);
+const PROMO_ENDS_AT = readBoundary(
+  "VITE_PREMIUM_PROMO_ENDS_AT",
+  DEFAULT_PROMO_ENDS_AT,
+  "end",
+);
+
+interface PromoState {
   isPromoPeriod: boolean;
+  isPromoUpcoming: boolean;
   daysLeftInPromo: number;
+  promoStartsAt: Date | null;
   promoEndsAt: Date | null;
-} {
-  if (!PROMO_ENDS_AT) {
-    return { isPromoPeriod: false, daysLeftInPromo: 0, promoEndsAt: null };
+}
+
+function computePromoState(now: Date = new Date()): PromoState {
+  const base = {
+    isPromoPeriod: false,
+    isPromoUpcoming: false,
+    daysLeftInPromo: 0,
+    promoStartsAt: PROMO_STARTS_AT,
+    promoEndsAt: PROMO_ENDS_AT,
+  };
+  if (!PROMO_ENDS_AT) return base;
+  // Not started yet → upcoming.
+  if (PROMO_STARTS_AT && now.getTime() < PROMO_STARTS_AT.getTime()) {
+    return { ...base, isPromoUpcoming: true };
   }
   const msLeft = PROMO_ENDS_AT.getTime() - now.getTime();
-  if (msLeft <= 0) {
-    return { isPromoPeriod: false, daysLeftInPromo: 0, promoEndsAt: PROMO_ENDS_AT };
-  }
+  if (msLeft <= 0) return base;
   const daysLeft = Math.max(0, Math.ceil(msLeft / (1000 * 60 * 60 * 24)));
-  return { isPromoPeriod: true, daysLeftInPromo: daysLeft, promoEndsAt: PROMO_ENDS_AT };
+  return { ...base, isPromoPeriod: true, daysLeftInPromo: daysLeft };
 }
 
 export interface PremiumState {
   isPremium: boolean;
   isPromoPeriod: boolean;
+  isPromoUpcoming: boolean;
   daysLeftInPromo: number;
+  promoStartsAt: Date | null;
   promoEndsAt: Date | null;
 }
 
@@ -110,7 +157,9 @@ export function usePremium(): PremiumState {
   return {
     isPremium,
     isPromoPeriod: promo.isPromoPeriod,
+    isPromoUpcoming: promo.isPromoUpcoming,
     daysLeftInPromo: promo.daysLeftInPromo,
+    promoStartsAt: promo.promoStartsAt,
     promoEndsAt: promo.promoEndsAt,
   };
 }
