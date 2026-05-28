@@ -280,11 +280,14 @@ export default function RadarMapInner({
   const regionCfg = REGION_CONFIG[region];
   const regionDefaults = REGION_DEFAULTS[region];
   const effectiveCenter = center ?? regionDefaults.center;
-  // In winter, the Expert view (Windy: snow + wind + temp + radar in
-  // one pannable map) is what users actually want · we lead with it.
-  // In green season, the lighter Interactive view (clean basemap + rain
-  // radar + town pins) is the better default.
-  const [view, setView] = useState<ViewMode>(season === "winter" ? "windy" : "interactive");
+  // Always lead with the Interactive view. It's the most resilient of
+  // the three: each layer (Carto basemap, RainViewer radar, OpenSnowMap
+  // pistes) renders independently and fails gracefully on its own. The
+  // Windy "Expert" tab depends on a single third-party iframe and the
+  // Official tab depends on a single BOM/JMA upstream · both have hard
+  // failure modes if that one dependency is down. Users can still flip
+  // to Expert or Official manually for the richer/authoritative views.
+  const [view, setView] = useState<ViewMode>("interactive");
   // Active Windy overlay · drives the Windy iframe's `overlay=` param.
   // Snow in winter is the headline; users can flip to wind/temp/radar
   // without leaving the page or learning Windy's UI.
@@ -292,11 +295,13 @@ export default function RadarMapInner({
     season === "winter" ? "snow" : "rain",
   );
 
-  // Keep view + overlay defaults in step with the user's season toggle.
-  // Without this, flipping Winter↔Summer in the sidebar would leave the
-  // map stuck in the previous season's defaults until reload.
+  // Keep the Windy overlay default in step with the user's season
+  // toggle (snow in winter, rain in green) so the Expert tab opens on
+  // the right layer if the user navigates to it. We no longer reset the
+  // active view on season change · users have explicitly picked Expert
+  // or Official if they're on it, and yanking them back to Interactive
+  // mid-session would be jarring.
   useEffect(() => {
-    setView(season === "winter" ? "windy" : "interactive");
     setWindyOverlay(season === "winter" ? "snow" : "rain");
   }, [season]);
   const { manifest, loading, error } = useRainviewerManifest();
@@ -464,7 +469,15 @@ export default function RadarMapInner({
       )}
 
       {view === "official" && (
-        <OfficialView official={regionCfg.official} />
+        // key by the source URL so switching regions remounts the view
+        // and resets its internal `imgFailed` state · otherwise a BOM
+        // outage on one region would persist the "open source" fallback
+        // when the user navigates to a different region whose image is
+        // actually loading fine.
+        <OfficialView
+          key={regionCfg.official.imageUrl ?? regionCfg.official.href}
+          official={regionCfg.official}
+        />
       )}
 
       {view === "interactive" && (
@@ -693,15 +706,21 @@ function ModePill({
 }
 
 function OfficialView({ official }: { official: RegionConfig["official"] }) {
+  // Track upstream image failure (BOM/JMA blocks our request, gif 404,
+  // network blip, etc.) so we can degrade gracefully to the same
+  // "open source" link-out we show for non-embeddable regions, instead
+  // of leaving the user with a broken image icon.
+  const [imgFailed, setImgFailed] = useState(false);
   return (
     <div className="absolute inset-0 flex flex-col bg-slate-100">
       <div className="flex-1 grid place-items-center overflow-hidden p-4">
-        {official.imageUrl ? (
+        {official.imageUrl && !imgFailed ? (
           <img
             src={official.imageUrl}
             alt={official.label}
             className="max-h-full max-w-full object-contain"
             style={{ imageRendering: "pixelated" }}
+            onError={() => setImgFailed(true)}
           />
         ) : (
           <div className="text-center max-w-sm px-4">

@@ -1,1 +1,2 @@
-- [feelzlike brand voice extends to legal copy](feelzlike-brand-voice.md) — lowercase, middot ·, no em/en dashes, no emojis applies everywhere including footers and legal pages; section titles in Terms.tsx use title-case by existing convention, so don't "fix" that.
+- [feelzlike brand voice](feelzlike-brand-voice.md) — lowercase, middot · required (NOT forbidden), no em/en dashes, no emojis, DIN Pro, sky/blue.
+- [feelzlike radar stability](feelzlike-radar-stability.md) — never reintroduce a cross-Replit iframe as the primary radar; in-repo RadarMap with independent layers is the durable pattern.
