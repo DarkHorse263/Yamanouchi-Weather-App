@@ -219,7 +219,7 @@ export default function Premium() {
         </section>
 
         <p className="text-[11px] text-muted-foreground/70 text-center pt-2">
-          navigate work digital pty ltd · feelzlike
+          © 2026 navigate work digital · feelzlike
         </p>
       </div>
     </div>
