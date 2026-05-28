@@ -15,7 +15,6 @@ import { useAuth } from "@workspace/replit-auth-web";
  *   pages like Welcome and Countries.
  */
 export function HomeFooter() {
-  const year = new Date().getFullYear();
   const [sourcesOpen, setSourcesOpen] = useState(false);
   // Soft-render the admin link only for signed-in users. The /admin page
   // itself does the real authorization check (server-side allowlist), so this
@@ -85,7 +84,7 @@ export function HomeFooter() {
         )}
 
         <p className="mt-3 text-[11px] text-slate-400">
-          &copy; {year} Navigate Work Digital &middot; feelzlike
+          &copy; 2026 Navigate Work Digital
         </p>
         <p className="mt-1.5 text-[11px] text-slate-400 max-w-xl mx-auto leading-relaxed">
           some links to accommodation and travel partners are affiliate links
