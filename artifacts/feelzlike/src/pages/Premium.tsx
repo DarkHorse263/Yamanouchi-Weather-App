@@ -18,6 +18,7 @@ interface Feature {
   title: string;
   blurb: string;
   status: "live" | "soon";
+  href?: string;
 }
 
 const FREE_FEATURES = [
@@ -50,8 +51,9 @@ const PREMIUM_FEATURES: Feature[] = [
   {
     Icon: CalendarRange,
     title: "multi-day trip planner",
-    blurb: "stack 3-7 days of conditions across your saved mountains.",
-    status: "soon",
+    blurb: "stack the next 7 days of conditions across your saved mountains.",
+    status: "live",
+    href: "/plan",
   },
   {
     Icon: WifiOff,
@@ -201,33 +203,53 @@ export default function Premium() {
             <Sparkles className="w-4 h-4 text-primary" /> premium
           </h2>
           <div className="grid sm:grid-cols-2 gap-3">
-            {PREMIUM_FEATURES.map((f) => (
-              <div
-                key={f.title}
-                className="rounded-2xl border border-border bg-white p-4 flex flex-col gap-2"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
-                    <f.Icon className="w-4 h-4" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2">
-                      <h3 className="text-sm font-black text-foreground leading-snug">
-                        {f.title}
-                      </h3>
-                      {f.status === "soon" && (
-                        <span className="text-[9px] font-bold text-amber-700 bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded-full uppercase tracking-wider">
-                          soon
-                        </span>
-                      )}
+            {PREMIUM_FEATURES.map((f) => {
+              const inner = (
+                <>
+                  <div className="flex items-start gap-3">
+                    <div className="w-9 h-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                      <f.Icon className="w-4 h-4" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2">
+                        <h3 className="text-sm font-black text-foreground leading-snug">
+                          {f.title}
+                        </h3>
+                        {f.status === "soon" && (
+                          <span className="text-[9px] font-bold text-amber-700 bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded-full uppercase tracking-wider">
+                            soon
+                          </span>
+                        )}
+                        {f.href && (
+                          <span className="text-[9px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-1.5 py-0.5 rounded-full uppercase tracking-wider">
+                            open
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    {f.blurb}
+                  </p>
+                </>
+              );
+              return f.href ? (
+                <Link
+                  key={f.title}
+                  href={f.href}
+                  className="rounded-2xl border border-border bg-white p-4 flex flex-col gap-2 hover:border-foreground transition-colors"
+                >
+                  {inner}
+                </Link>
+              ) : (
+                <div
+                  key={f.title}
+                  className="rounded-2xl border border-border bg-white p-4 flex flex-col gap-2"
+                >
+                  {inner}
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  {f.blurb}
-                </p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 

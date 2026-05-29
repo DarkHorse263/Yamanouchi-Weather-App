@@ -24,6 +24,7 @@ import Privacy from "@/pages/legal/Privacy";
 import Terms from "@/pages/legal/Terms";
 import News from "@/pages/News";
 import Premium from "@/pages/Premium";
+import TripPlanner from "@/pages/TripPlanner";
 import AdminStats from "@/pages/admin/AdminStats";
 import AdminTraffic from "@/pages/admin/AdminTraffic";
 import AdminNewsletter from "@/pages/admin/AdminNewsletter";
@@ -52,6 +53,9 @@ function Router() {
       <Route path="/news" component={News} />
       {/* Premium hub · plans, current tier, feature overview. */}
       <Route path="/premium" component={Premium} />
+      {/* Multi-day trip planner · premium-gated, mounted before /:region
+          catch-all so /plan isn't parsed as a region slug. */}
+      <Route path="/plan" component={TripPlanner} />
       {/* Admin dashboard · auth-gated, mounted before /:region catch-all so
           /admin/* paths aren't parsed as region slugs. */}
       <Route path="/admin" component={AdminStats} />
