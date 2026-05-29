@@ -51,7 +51,18 @@ function parseScope(location: string, townIds: Set<string>): ParsedScope {
   return { scope: "region" };
 }
 
-export function AppShell({ children }: { children: ReactNode }) {
+export function AppShell({
+  children,
+  isTownNavAvailable,
+}: {
+  children: ReactNode;
+  /**
+   * Optional per-town content gate. Return false to hide a town-nav item
+   * whose destination has no content yet (so people don't tap into empty
+   * "coming soon" pages). Defaults to showing everything.
+   */
+  isTownNavAvailable?: (path: string, townId: string) => boolean;
+}) {
   const { region } = useRegion();
   const [location] = useLocation();
   const { towns, town: activeTown } = useBaseTown();
@@ -132,6 +143,8 @@ export function AppShell({ children }: { children: ReactNode }) {
     const pushTown = (path: string) => {
       const it = townNav.find((n) => n.path === path);
       if (!it || !navTown || seen.has(`t:${path}`)) return;
+      // Hide entries whose destination has no content for this town yet.
+      if (isTownNavAvailable && !isTownNavAvailable(it.path, navTown.id)) return;
       seen.add(`t:${path}`);
       items.push({
         key: `t:${it.path}`,

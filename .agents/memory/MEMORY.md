@@ -2,3 +2,4 @@
 - [feelzlike radar stability](feelzlike-radar-stability.md) — never reintroduce a cross-Replit iframe as the primary radar; in-repo RadarMap with independent layers is the durable pattern.
 - [feelzlike premium promo](feelzlike-premium-promo.md) — promo window has BOTH start + end, date-only env vars must be parsed as LOCAL time, client gating is preview-only · server `requireEntitlement` is the paywall.
 - [feelzlike tsx test isolation](feelzlike-tsx-test-isolation.md) — pure logic needing `tsx --test` must NOT transitively import `@/regions` (PNG assets crash import); split pure file from catalog file.
+- [feelzlike town slug convention](feelzlike-town-slug-convention.md) — kebab ids (urls) vs snake slugs (dataset keys); convert via urlState helpers, never `as TownSlug` cast (silent empty lookups).

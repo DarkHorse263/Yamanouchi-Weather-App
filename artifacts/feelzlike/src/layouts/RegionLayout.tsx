@@ -12,6 +12,7 @@ import { getRegion } from "@/regions";
 import { MountainsList } from "@/pages/region/MountainsList";
 import { TownLayout } from "@/layouts/TownLayout";
 import { RegionStub } from "@/pages/region/RegionStub";
+import { townNavHasContent } from "@/lib/navContent";
 import { RegionStay } from "@/pages/region/RegionStay";
 import { RegionSources } from "@/pages/region/RegionSources";
 import { MountainDetail as GenericMountainDetail } from "@/pages/region/MountainDetail";
@@ -64,7 +65,9 @@ export function RegionLayout() {
   const defaultTown = region.baseTowns?.[0]?.id;
 
   const inner = (
-    <AppShell>
+    <AppShell
+      isTownNavAvailable={(path, townId) => townNavHasContent(region, townId, path)}
+    >
       <Switch>
         <Route path="/" component={RegionHome} />
         <Route path="/mountains" component={MountainsList} />

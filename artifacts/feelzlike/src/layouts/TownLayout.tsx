@@ -13,6 +13,7 @@ import { TownWeather } from "@/pages/town/TownWeather";
 import { snowyMountainsRouter } from "@/regions/snowy-mountains/router";
 import { yamanouchiRouter } from "@/regions/yamanouchi/router";
 import { victoriasHighCountryRouter } from "@/regions/victorias-high-country/router";
+import { townNavHasContent } from "@/lib/navContent";
 import type { RegionRouter } from "@/layouts/RegionLayout";
 
 const REGION_ROUTERS: Record<string, RegionRouter> = {
@@ -61,22 +62,37 @@ export function TownLayout() {
     return <Redirect to="/" />;
   }
 
+  // Sections with no content for this town are hidden from the nav; guard the
+  // routes too so a direct URL / old bookmark redirects home instead of landing
+  // on an empty "coming soon" page.
+  const gate = (path: string) => townNavHasContent(region, townId, path);
+
   return (
     <WouterRouter base={`/${townId}`}>
       <Switch>
         <Route path="/" component={TownHome} />
         <Route path="/weather" component={TownWeather} />
-        <Route path="/roads" component={TownRoads} />
+        <Route path="/roads">
+          {gate("/roads") ? <TownRoads /> : <Redirect to="/" />}
+        </Route>
         {/* Cams folded into /roads ("Roads & cams") in May 2026 reset.
             Keep /cams routable so existing bookmarks still land somewhere
             useful instead of 404'ing. */}
         <Route path="/cams">
           <Redirect to="/roads" />
         </Route>
-        <Route path="/transport" component={TransportPage} />
-        <Route path="/stay" component={TownStay} />
-        <Route path="/eat" component={TownEat} />
-        <Route path="/explore" component={TownExplore} />
+        <Route path="/transport">
+          {gate("/transport") ? <TransportPage /> : <Redirect to="/" />}
+        </Route>
+        <Route path="/stay">
+          {gate("/stay") ? <TownStay /> : <Redirect to="/" />}
+        </Route>
+        <Route path="/eat">
+          {gate("/eat") ? <TownEat /> : <Redirect to="/" />}
+        </Route>
+        <Route path="/explore">
+          {gate("/explore") ? <TownExplore /> : <Redirect to="/" />}
+        </Route>
         <Route>
           <TownSubpageStub title="Not found" titleJa="ページが見つかりません" />
         </Route>

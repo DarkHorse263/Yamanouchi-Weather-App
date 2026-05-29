@@ -1,0 +1,66 @@
+/**
+ * Per-town nav content gating.
+ *
+ * The town sidebar / bottom-nav (Today, Weather, Roads, Transport, Stay, Eat,
+ * Explore) is a fixed list, but not every town has real content behind every
+ * entry yet. Rather than route people into polished-but-empty "coming soon"
+ * pages, we hide the nav item entirely until the section has something to show.
+ *
+ * This predicate is the single source of truth for that decision · it reads the
+ * same static data layers the pages themselves render from, so the nav and the
+ * page never disagree. It lives in the artifact (not the shared shell) because
+ * the content data lives here; the shell takes it as an optional prop.
+ *
+ * Always-on entries (`/`, `/weather`) are never gated · every town has a today
+ * dashboard and a forecast.
+ */
+import type { RegionConfig } from "@workspace/feelzlike-shell";
+import type { RegionId } from "@workspace/api-client-react";
+import { getProvidersForRegion } from "@/data/transport";
+import { getStaysByTown, getEatsByTown } from "@/data";
+import { townIdToSlug } from "@/lib/urlState";
+
+/**
+ * Regions whose Roads & cams page actually renders content today. Roads is
+ * driven by live feeds rather than a single static array, so it can't be
+ * derived cheaply like the others:
+ *   · snowy-mountains       · Live Traffic NSW road conditions + cams
+ *   · victorias-high-country· VicEmergency alerts (fire/road) section
+ *   · yamanouchi            · curated road webcams
+ * The remaining regions have no wired feed yet, so the entry stays hidden.
+ * Add a region here the moment its roads feed or cams go live.
+ */
+const REGIONS_WITH_ROADS_CONTENT: ReadonlySet<string> = new Set([
+  "snowy-mountains",
+  "victorias-high-country",
+  "yamanouchi",
+]);
+
+/**
+ * Returns true when the given town-nav path has real content for this town and
+ * should be shown. Unknown paths default to visible so we never hide something
+ * we didn't explicitly reason about.
+ */
+export function townNavHasContent(
+  region: RegionConfig,
+  townId: string,
+  path: string,
+): boolean {
+  switch (path) {
+    case "/":
+    case "/weather":
+      return true;
+    case "/explore":
+      return (region.tourismLinks?.length ?? 0) > 0;
+    case "/transport":
+      return getProvidersForRegion(region.id as RegionId).length > 0;
+    case "/stay":
+      return getStaysByTown(townIdToSlug(townId)).length > 0;
+    case "/eat":
+      return getEatsByTown(townIdToSlug(townId)).length > 0;
+    case "/roads":
+      return REGIONS_WITH_ROADS_CONTENT.has(region.id);
+    default:
+      return true;
+  }
+}

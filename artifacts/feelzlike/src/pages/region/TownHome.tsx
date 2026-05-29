@@ -26,6 +26,7 @@ import {
 } from "@workspace/feelzlike-shell";
 import { useGetWeather } from "@workspace/api-client-react";
 import { useTownWeather } from "@/lib/town-weather";
+import { townNavHasContent } from "@/lib/navContent";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
 import { DailyPick } from "@/components/DailyPick";
@@ -429,7 +430,9 @@ export function TownHome() {
 
       {/* SECTIONS - vertical stack in the order the brief specifies. */}
       <section className="mt-5 space-y-3">
-        {buildSections(region.shortTag?.toUpperCase() === "JP").map((tile) => {
+        {buildSections(region.shortTag?.toUpperCase() === "JP")
+          .filter((tile) => !town || townNavHasContent(region, town.id, tile.path))
+          .map((tile) => {
           const Icon = tile.icon;
           return (
             <Link
