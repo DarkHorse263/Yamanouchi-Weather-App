@@ -316,10 +316,11 @@ export default function RadarMapInner({
   // way · only show terrain on the dedicated "current conditions" map.
   // Power users (planning a hike up Bogong) can flip it on.
   const [showTerrain, setShowTerrain] = useState(false);
-  // Ski pistes + lifts overlay (OpenSnowMap, free, OSM-derived). On by
-  // default in winter, off in green season since the runs aren't
-  // operating. Users can toggle either way regardless.
-  const [showPistes, setShowPistes] = useState(season === "winter");
+  // Ski pistes + lifts overlay (OpenSnowMap, free, OSM-derived). Off by
+  // default · the radar map opens with only the first (Overall) layer lit
+  // so the precip field reads cleanly. Users flip pistes/terrain on when
+  // they want the extra context.
+  const [showPistes, setShowPistes] = useState(false);
   const tickRef = useRef<number | null>(null);
 
   // Combined radar timeline: past frames followed by nowcast frames.

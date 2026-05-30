@@ -55,6 +55,7 @@ function Router() {
           (or stale links) home instead of showing an empty feed. Restore
           `component={News}` to bring the page back. */}
       <Route path="/news"><Redirect to="/" /></Route>
+      <Route path="/news/"><Redirect to="/" /></Route>
       {/* Premium hub · plans, current tier, feature overview. */}
       <Route path="/premium" component={Premium} />
       {/* Multi-day trip planner · premium-gated, mounted before /:region
