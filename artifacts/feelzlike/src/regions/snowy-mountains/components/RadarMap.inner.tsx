@@ -25,6 +25,8 @@ import {
   Snowflake,
   Droplet,
   Loader2,
+  Layers,
+  X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -416,6 +418,12 @@ export default function RadarMapInner({
   // switches the click readouts to °F / mph / inch.
   const [metric, setMetric] = useState(true);
 
+  // Layers panel collapses on small screens so it doesn't smother the
+  // map · open by default on >=md, a tap-to-open chip on phones.
+  const [panelOpen, setPanelOpen] = useState(
+    () => typeof window !== "undefined" && window.innerWidth >= 768,
+  );
+
   const [probe, setProbe] = useState<{ lat: number; lng: number } | null>(null);
   const [probeData, setProbeData] = useState<ProbeData | null>(null);
   const [probeLoading, setProbeLoading] = useState(false);
@@ -688,22 +696,43 @@ export default function RadarMapInner({
 
       {/* Weather Layers panel (top-right). Precip radar lit on load; the
           rest are point readouts surfaced on map click. Interactive only. */}
-      {view === "interactive" && (
+      {view === "interactive" && !panelOpen && (
+        <button
+          type="button"
+          onClick={() => setPanelOpen(true)}
+          className="absolute top-3 right-3 z-[1000] inline-flex items-center gap-1.5 rounded-xl bg-slate-900/90 backdrop-blur-md border border-white/10 shadow-lg px-3 py-2 text-white"
+          aria-label="Show weather layers"
+        >
+          <Layers className="w-4 h-4 text-sky-300" />
+          <span className="text-xs font-bold lowercase">layers</span>
+        </button>
+      )}
+      {view === "interactive" && panelOpen && (
         <div className="absolute top-3 right-3 z-[1000] w-64 max-w-[calc(100%-1.5rem)] rounded-2xl bg-slate-900/90 backdrop-blur-md border border-white/10 shadow-xl text-white">
-          <div className="flex items-center justify-between px-3 pt-3 pb-2">
+          <div className="flex items-center justify-between gap-2 px-3 pt-3 pb-2">
             <h3 className="text-sm font-bold lowercase leading-tight">weather layers</h3>
-            <button
-              type="button"
-              onClick={() => setMetric((m) => !m)}
-              className="flex items-center gap-1.5"
-              aria-pressed={metric}
-              aria-label="Toggle metric units"
-            >
-              <span className={cn("text-[10px] font-bold uppercase tracking-wide", metric ? "text-sky-300" : "text-slate-500")}>
-                metric
-              </span>
-              <Switch on={metric} />
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setMetric((m) => !m)}
+                className="flex items-center gap-1.5"
+                aria-pressed={metric}
+                aria-label="Toggle metric units"
+              >
+                <span className={cn("text-[10px] font-bold uppercase tracking-wide", metric ? "text-sky-300" : "text-slate-500")}>
+                  metric
+                </span>
+                <Switch on={metric} />
+              </button>
+              <button
+                type="button"
+                onClick={() => setPanelOpen(false)}
+                className="md:hidden -mr-1 p-1 text-slate-400 hover:text-white"
+                aria-label="Hide weather layers"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
           </div>
           <div className="px-2 pb-2 space-y-0.5">
             <LayerToggle
