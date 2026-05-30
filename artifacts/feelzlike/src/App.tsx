@@ -1,4 +1,4 @@
-import { Switch, Route, Router as WouterRouter } from "wouter";
+import { Switch, Route, Redirect, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Welcome from "@/pages/Welcome";
@@ -22,7 +22,9 @@ import NewsletterUnsubscribed from "@/pages/newsletter/Unsubscribed";
 import CountryHome from "@/pages/CountryHome";
 import Privacy from "@/pages/legal/Privacy";
 import Terms from "@/pages/legal/Terms";
-import News from "@/pages/News";
+// News & updates hidden until the feed is populated · the /news route below
+// redirects home for now. Restore this import + the route when content lands.
+// import News from "@/pages/News";
 import Premium from "@/pages/Premium";
 import TripPlanner from "@/pages/TripPlanner";
 import AdminStats from "@/pages/admin/AdminStats";
@@ -49,8 +51,10 @@ function Router() {
           aren't parsed as regions. */}
       <Route path="/legal/privacy" component={Privacy} />
       <Route path="/legal/terms" component={Terms} />
-      {/* News & updates · global feed, must precede /:region catch-all. */}
-      <Route path="/news" component={News} />
+      {/* News & updates · hidden until populated. Redirect any direct hits
+          (or stale links) home instead of showing an empty feed. Restore
+          `component={News}` to bring the page back. */}
+      <Route path="/news"><Redirect to="/" /></Route>
       {/* Premium hub · plans, current tier, feature overview. */}
       <Route path="/premium" component={Premium} />
       {/* Multi-day trip planner · premium-gated, mounted before /:region
