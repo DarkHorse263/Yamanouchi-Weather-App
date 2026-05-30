@@ -3,3 +3,5 @@
 - [feelzlike premium promo](feelzlike-premium-promo.md) — promo window has BOTH start + end, date-only env vars must be parsed as LOCAL time, client gating is preview-only · server `requireEntitlement` is the paywall.
 - [feelzlike tsx test isolation](feelzlike-tsx-test-isolation.md) — pure logic needing `tsx --test` must NOT transitively import `@/regions` (PNG assets crash import); split pure file from catalog file.
 - [feelzlike town slug convention](feelzlike-town-slug-convention.md) — kebab ids (urls) vs snake slugs (dataset keys); convert via urlState helpers, never `as TownSlug` cast (silent empty lookups).
+- [feelzlike region readiness model](feelzlike-region-routing.md) — nav is town-scoped + data-gated; region-level subpage routes are direct-URL-only and must redirect to region home, never show a stub.
+- [shell output token aliasing](shell-output-aliasing.md) — bash/rg/cat output in this env silently aliases some identifiers (NAV→ln, RegionStub→n); use the `read` tool for trustworthy content.

@@ -11,7 +11,6 @@ import {
 import { getRegion } from "@/regions";
 import { MountainsList } from "@/pages/region/MountainsList";
 import { TownLayout } from "@/layouts/TownLayout";
-import { RegionStub } from "@/pages/region/RegionStub";
 import { townNavHasContent } from "@/lib/navContent";
 import { RegionStay } from "@/pages/region/RegionStay";
 import { RegionSources } from "@/pages/region/RegionSources";
@@ -72,7 +71,7 @@ export function RegionLayout() {
         <Route path="/" component={RegionHome} />
         <Route path="/mountains" component={MountainsList} />
         <Route path="/mountains/lifts">
-          {routes.LiftsAll ? <routes.LiftsAll /> : <RegionStub title="Lifts" titleJa="リフト運行" />}
+          {routes.LiftsAll ? <routes.LiftsAll /> : <Redirect to="/" />}
         </Route>
         {/* Custom region routers (snowy-mountains, yamanouchi) ship richer
             mountain pages with lifts/cams/etc. Regions without one (e.g.
@@ -95,27 +94,27 @@ export function RegionLayout() {
           ) : routes.Radar ? (
             <routes.Radar />
           ) : (
-            <RegionStub title="Radar" titleJa="気象レーダー" />
+            <Redirect to="/" />
           )}
         </Route>
         <Route path="/alerts">
-          {routes.Alerts ? <routes.Alerts /> : <RegionStub title="Alerts" titleJa="警報" />}
+          {routes.Alerts ? <routes.Alerts /> : <Redirect to="/" />}
         </Route>
         <Route path="/stay">
           {routes.Stay ? <routes.Stay /> : <RegionStay />}
         </Route>
         <Route path="/eat">
-          {routes.Eat ? <routes.Eat /> : <RegionStub title="Eat" titleJa="食事" />}
+          {routes.Eat ? <routes.Eat /> : <Redirect to="/" />}
         </Route>
         <Route path="/explore">
-          {routes.Explore ? <routes.Explore /> : <RegionStub title="Explore" titleJa="観光" />}
+          {routes.Explore ? <routes.Explore /> : <Redirect to="/" />}
         </Route>
         <Route path="/sources" component={RegionSources} />
         {/* Town routes: /:town and /:town/* - must come last so reserved slugs match first */}
         <Route path="/:town/:rest*" component={TownLayout} />
         <Route path="/:town" component={TownLayout} />
         <Route>
-          <RegionStub title="Not found" titleJa="ページが見つかりません" />
+          <Redirect to="/" />
         </Route>
       </Switch>
     </AppShell>
