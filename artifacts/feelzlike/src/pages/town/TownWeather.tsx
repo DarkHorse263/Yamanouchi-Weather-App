@@ -144,8 +144,8 @@ function Radar({ t }: { t: (en: string, ja: string) => string }) {
   const seasonCtx = useOptionalSeason();
   const season = seasonCtx?.season ?? "winter";
   const headline = season === "winter"
-    ? t("Live snow + cloud radar", "ライブ降雪・雲レーダー")
-    : t("Live rain + cloud radar", "ライブ降雨・雲レーダー");
+    ? t("Live snow radar", "ライブ降雪レーダー")
+    : t("Live rain radar", "ライブ降雨レーダー");
   const byline = season === "winter"
     ? t("Snow radar", "降雪レーダー")
     : t("Rain radar", "降雨レーダー");
@@ -171,15 +171,10 @@ function Radar({ t }: { t: (en: string, ja: string) => string }) {
       </div>
       <RadarMap season={season} region={region.id as RadarRegionKey} />
       <p className="text-xs text-muted-foreground/70 px-5 py-3 border-t border-border">
-        {season === "winter"
-          ? t(
-              "Toggle Overall / Clouds / Snow above the map. Above ~1,400 m, precipitation falls as snow when temps are at or below 0°C. Forecast frames show the next 30 minutes.",
-              "地図上のオーバーオール／雲／雪を切替。標高約1,400m以上で気温0°C以下なら降水は雪。予報フレームは今後30分の予測。",
-            )
-          : t(
-              "Toggle Overall / Clouds / Rain above the map. Forecast frames show the next 30 minutes.",
-              "地図上のオーバーオール／雲／雨を切替。予報フレームは今後30分の予測。",
-            )}
+        {t(
+          "Precip radar is on by default · forecast frames show the next 30 minutes. Toggle snowfall, wind, temperature or rain risk, then click any point to read its values.",
+          "降水レーダーは初期状態でオン · 予報フレームは今後30分の予測。降雪・風・気温・雨リスクを切替え、地図上の任意の地点をタップすると値を表示します。",
+        )}
       </p>
     </section>
   );

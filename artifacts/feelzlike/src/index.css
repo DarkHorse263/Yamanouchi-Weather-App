@@ -200,3 +200,23 @@ p, blockquote, figcaption, summary, dt {
 article p, .prose p, li, dd {
   text-wrap: pretty;
 }
+
+/* Dark click-readout popup for the ski radar (RadarMap). Scoped via the
+   `feelzlike-probe-popup` class on the Leaflet popup so the rest of the
+   app's leaflet popups/tooltips keep their defaults. */
+.feelzlike-probe-popup .leaflet-popup-content-wrapper,
+.feelzlike-probe-popup .leaflet-popup-tip {
+  background: #0f172a;
+  color: #e2e8f0;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+.feelzlike-probe-popup .leaflet-popup-content {
+  margin: 10px 12px;
+}
+.feelzlike-probe-popup a.leaflet-popup-close-button {
+  color: #94a3b8;
+}
+.feelzlike-probe-popup a.leaflet-popup-close-button:hover {
+  color: #e2e8f0;
+}

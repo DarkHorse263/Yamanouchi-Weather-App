@@ -1,8 +1,31 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { MapContainer, TileLayer, Marker, Tooltip, useMap } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Tooltip,
+  CircleMarker,
+  Popup,
+  useMap,
+  useMapEvents,
+} from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { Cloud, CloudSnow, CloudRain, Layers, Pause, Play, Map as MapIcon, Radio, Globe2, Mountain, MountainSnow, Wind, Thermometer } from "lucide-react";
+import {
+  CloudSnow,
+  CloudRain,
+  Pause,
+  Play,
+  Map as MapIcon,
+  Radio,
+  Globe2,
+  Wind,
+  Thermometer,
+  Radar,
+  Snowflake,
+  Droplet,
+  Loader2,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface RadarMapInnerProps {
@@ -164,23 +187,19 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
 };
 
 // RainViewer is a free public weather-tile API: global precipitation
-// radar (past 2hr + 30min nowcast) and Himawari/GOES infrared satellite
-// imagery (clouds). No API key required, CORS-friendly, ~256 KB per
-// frame. The /weather-maps.json manifest tells us which frames exist
-// and where to fetch the tiles from.
+// radar (past 2hr + 30min nowcast). No API key required, CORS-friendly,
+// ~256 KB per frame. The /weather-maps.json manifest tells us which
+// frames exist and where to fetch the tiles from.
 const RAINVIEWER_MANIFEST = "https://api.rainviewer.com/public/weather-maps.json";
 
 interface RvFrame {
   time: number; // unix seconds
-  path: string; // "/v2/radar/{ts}" or "/v2/satellite/{ts}"
+  path: string; // "/v2/radar/{ts}"
 }
 interface RvManifest {
   host: string;
   radar: { past: RvFrame[]; nowcast: RvFrame[] };
-  satellite: { infrared: RvFrame[] };
 }
-
-type LayerMode = "all" | "clouds" | "precip";
 
 function useRainviewerManifest() {
   const [manifest, setManifest] = useState<RvManifest | null>(null);
@@ -222,8 +241,8 @@ function makePinIcon(label: string, accent: string): L.DivIcon {
     className: "feelzlike-radar-pin",
     html: `
       <div style="display:flex;flex-direction:column;align-items:center;pointer-events:auto;">
-        <div style="width:14px;height:14px;border-radius:9999px;background:${accent};box-shadow:0 0 0 3px rgba(255,255,255,0.95),0 1px 4px rgba(0,0,0,0.4);"></div>
-        <div style="margin-top:4px;padding:2px 8px;border-radius:9999px;background:rgba(15,23,42,0.92);color:#fff;font:600 11px/1.1 'Inter',system-ui,sans-serif;white-space:nowrap;letter-spacing:0.01em;box-shadow:0 1px 4px rgba(0,0,0,0.3);">${label}</div>
+        <div style="width:14px;height:14px;border-radius:9999px;background:${accent};box-shadow:0 0 0 3px rgba(15,23,42,0.85),0 1px 4px rgba(0,0,0,0.6);"></div>
+        <div style="margin-top:4px;padding:2px 8px;border-radius:9999px;background:rgba(15,23,42,0.92);color:#fff;font:600 11px/1.1 'DIN Pro','Inter',system-ui,sans-serif;white-space:nowrap;letter-spacing:0.01em;box-shadow:0 1px 4px rgba(0,0,0,0.4);">${label}</div>
       </div>
     `,
     iconSize: [80, 36],
@@ -257,17 +276,96 @@ function RecenterOnChange({ lat, lng, zoom }: { lat: number; lng: number; zoom: 
 // RainViewer tile path:
 //   {host}{path}/{size}/{z}/{x}/{y}/{color}/{smooth}_{snow}.png
 // Color schemes documented at https://www.rainviewer.com/api.html.
-//   color=2 = "Universal Blue" — clean blue/green gradient, reads well
-//             on a topo basemap.
+//   color=2 = "Universal Blue" — clean blue/green gradient.
 //   smooth=1 enables bilinear smoothing.
 //   snow=1   tints sub-zero precip in cyan/white so snow vs rain is
 //            visually distinguishable on the same layer.
 function radarTileUrl(host: string, path: string): string {
   return `${host}${path}/256/{z}/{x}/{y}/2/1_1.png`;
 }
-// Satellite (infrared) — color=0 = greyscale clouds, smooth=0, snow=0.
-function satelliteTileUrl(host: string, path: string): string {
-  return `${host}${path}/256/{z}/{x}/{y}/0/0_0.png`;
+
+// --- click-to-load point readout (Open-Meteo) ---------------------------
+
+interface ProbeData {
+  tempVal: number;
+  tempUnit: string;
+  windVal: number;
+  windDir: number;
+  windUnit: string;
+  snowVal: number;
+  snowUnit: string;
+  rainProb: number;
+  rainUnit: string;
+}
+
+type PointLayer = "snowfall" | "wind" | "temp" | "rainRisk";
+
+function round1(n: number): number {
+  return Math.round(n * 10) / 10;
+}
+
+function compassDir(deg: number): string {
+  const dirs = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
+  return dirs[Math.round(deg / 45) % 8];
+}
+
+// Registers a single map click handler. Only fires when at least one
+// point layer (snowfall/wind/temp/rain risk) is enabled · clicking with
+// only precip radar on does nothing, matching the layer-panel intent.
+function ClickProbe({ enabled, onPick }: { enabled: boolean; onPick: (lat: number, lng: number) => void }) {
+  useMapEvents({
+    click(e) {
+      if (enabled) onPick(e.latlng.lat, e.latlng.lng);
+    },
+  });
+  return null;
+}
+
+// A dot at the clicked point with its readout popup. Auto-opens on mount;
+// the parent remounts it (via key on coordinates) for each new click.
+function ProbeMarker({
+  lat,
+  lng,
+  children,
+}: {
+  lat: number;
+  lng: number;
+  children: React.ReactNode;
+}) {
+  const ref = useRef<L.CircleMarker>(null);
+  useEffect(() => {
+    ref.current?.openPopup();
+  }, []);
+  return (
+    <CircleMarker
+      ref={ref}
+      center={[lat, lng]}
+      radius={7}
+      pathOptions={{ color: "#38bdf8", weight: 2, fillColor: "#0ea5e9", fillOpacity: 0.5 }}
+    >
+      <Popup className="feelzlike-probe-popup" minWidth={170}>
+        {children}
+      </Popup>
+    </CircleMarker>
+  );
+}
+
+function ReadoutRow({
+  icon: Icon,
+  label,
+  value,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+  value: string;
+}) {
+  return (
+    <div className="flex items-center gap-2">
+      <Icon className="w-3.5 h-3.5 text-sky-300 shrink-0" />
+      <span className="text-[11px] text-slate-300 flex-1">{label}</span>
+      <span className="text-xs font-semibold text-white tabular-nums whitespace-nowrap">{value}</span>
+    </div>
+  );
 }
 
 export default function RadarMapInner({
@@ -280,52 +378,59 @@ export default function RadarMapInner({
   const regionCfg = REGION_CONFIG[region];
   const regionDefaults = REGION_DEFAULTS[region];
   const effectiveCenter = center ?? regionDefaults.center;
-  // Always lead with the Interactive view. It's the most resilient of
-  // the three: each layer (Carto basemap, RainViewer radar, OpenSnowMap
-  // pistes) renders independently and fails gracefully on its own. The
-  // Windy "Expert" tab depends on a single third-party iframe and the
-  // Official tab depends on a single BOM/JMA upstream · both have hard
-  // failure modes if that one dependency is down. Users can still flip
-  // to Expert or Official manually for the richer/authoritative views.
+  // Always lead with the Interactive view (the Ski Radar experience).
+  // It's the most resilient of the three: the dark basemap + RainViewer
+  // radar each render independently and fail gracefully on their own.
+  // The Windy "Expert" tab and Official tab each depend on a single
+  // third-party source · users can still flip to them manually.
   const [view, setView] = useState<ViewMode>("interactive");
   // Active Windy overlay · drives the Windy iframe's `overlay=` param.
-  // Snow in winter is the headline; users can flip to wind/temp/radar
-  // without leaving the page or learning Windy's UI.
   const [windyOverlay, setWindyOverlay] = useState<"snow" | "wind" | "temp" | "rain">(
     season === "winter" ? "snow" : "rain",
   );
 
-  // Keep the Windy overlay default in step with the user's season
-  // toggle (snow in winter, rain in green) so the Expert tab opens on
-  // the right layer if the user navigates to it. We no longer reset the
-  // active view on season change · users have explicitly picked Expert
-  // or Official if they're on it, and yanking them back to Interactive
-  // mid-session would be jarring.
+  // Keep the Windy overlay default in step with the user's season toggle
+  // (snow in winter, rain in green) so the Expert tab opens on the right
+  // layer if the user navigates to it.
   useEffect(() => {
     setWindyOverlay(season === "winter" ? "snow" : "rain");
   }, [season]);
+
   const { manifest, loading, error } = useRainviewerManifest();
   const [frameIndex, setFrameIndex] = useState(0);
   // Default to PAUSED. Autoplay swaps tile layers every 700ms which
-  // visibly fights leaflet's zoom-level retiling and creates a long
-  // "repaint lag" when users zoom out. Users can hit play to animate.
+  // visibly fights leaflet's zoom-level retiling. Users can hit play.
   const [playing, setPlaying] = useState(false);
-  const [mode, setMode] = useState<LayerMode>("all");
-  // Terrain off by default · clean light basemap (CARTO Positron) makes
-  // the precip blob far easier to read. AccuWeather plays it the same
-  // way · only show terrain on the dedicated "current conditions" map.
-  // Power users (planning a hike up Bogong) can flip it on.
-  const [showTerrain, setShowTerrain] = useState(false);
-  // Ski pistes + lifts overlay (OpenSnowMap, free, OSM-derived). Off by
-  // default · the radar map opens with only the first (Overall) layer lit
-  // so the precip field reads cleanly. Users flip pistes/terrain on when
-  // they want the extra context.
-  const [showPistes, setShowPistes] = useState(false);
+
+  // Weather Layers panel state. Precip Radar is the one layer lit on
+  // load (the animated RainViewer field); the others are point readouts
+  // that surface only when the user clicks a spot on the map.
+  const [showPrecip, setShowPrecip] = useState(true);
+  const [pointLayers, setPointLayers] = useState<Record<PointLayer, boolean>>({
+    snowfall: false,
+    wind: false,
+    temp: false,
+    rainRisk: false,
+  });
+  // Metric on by default · the rest of feelzlike is metric-first. Off
+  // switches the click readouts to °F / mph / inch.
+  const [metric, setMetric] = useState(true);
+
+  const [probe, setProbe] = useState<{ lat: number; lng: number } | null>(null);
+  const [probeData, setProbeData] = useState<ProbeData | null>(null);
+  const [probeLoading, setProbeLoading] = useState(false);
+  const [probeError, setProbeError] = useState<string | null>(null);
+
   const tickRef = useRef<number | null>(null);
 
+  const anyPointLayer =
+    pointLayers.snowfall || pointLayers.wind || pointLayers.temp || pointLayers.rainRisk;
+
+  function togglePoint(layer: PointLayer) {
+    setPointLayers((prev) => ({ ...prev, [layer]: !prev[layer] }));
+  }
+
   // Combined radar timeline: past frames followed by nowcast frames.
-  // Past = solid history, nowcast = predicted next 30 min (rendered
-  // with a subtle dashed-look opacity so users know it's a forecast).
   const radarFrames = useMemo<RvFrame[]>(() => {
     if (!manifest) return [];
     return [...manifest.radar.past, ...manifest.radar.nowcast];
@@ -334,25 +439,17 @@ export default function RadarMapInner({
   const nowcastStart = manifest?.radar.past.length ?? 0;
   const isNowcast = frameIndex >= nowcastStart;
 
-  // Latest satellite frame — clouds change slowly enough that animating
-  // them adds little; we just show the freshest infrared image.
-  const latestSatellite = useMemo<RvFrame | null>(() => {
-    const list = manifest?.satellite.infrared ?? [];
-    return list.length > 0 ? list[list.length - 1] : null;
-  }, [manifest]);
-
-  // Animate radar at ~700ms per frame, pause longer on the latest
-  // observed frame so the "now" moment is readable before nowcast loops.
+  // Animate radar at ~700ms per frame while precip is shown + playing.
   useEffect(() => {
     if (view !== "interactive") return;
-    if (!playing || radarFrames.length === 0 || mode === "clouds") return;
+    if (!playing || !showPrecip || radarFrames.length === 0) return;
     tickRef.current = window.setInterval(() => {
       setFrameIndex((i) => (i + 1) % radarFrames.length);
     }, 700);
     return () => {
       if (tickRef.current) window.clearInterval(tickRef.current);
     };
-  }, [view, playing, radarFrames.length, mode]);
+  }, [view, playing, showPrecip, radarFrames.length]);
 
   // Whenever the manifest refreshes, jump to the most recent observed
   // frame (end of past, just before nowcast) so the loop starts at "now".
@@ -362,22 +459,71 @@ export default function RadarMapInner({
     }
   }, [radarFrames.length, nowcastStart]);
 
+  // Drop the click readout when every point layer is switched off · there
+  // is nothing left to show, so the dot + popup shouldn't linger.
+  useEffect(() => {
+    if (!anyPointLayer) {
+      setProbe(null);
+      setProbeData(null);
+      setProbeError(null);
+    }
+  }, [anyPointLayer]);
+
+  // Fetch point values from Open-Meteo for the clicked spot. Re-runs when
+  // the user clicks a new point or flips the metric toggle (units change).
+  useEffect(() => {
+    if (!probe) return;
+    let cancelled = false;
+    setProbeLoading(true);
+    setProbeError(null);
+    const u = new URL("https://api.open-meteo.com/v1/forecast");
+    u.searchParams.set("latitude", probe.lat.toFixed(4));
+    u.searchParams.set("longitude", probe.lng.toFixed(4));
+    u.searchParams.set("current", "temperature_2m,wind_speed_10m,wind_direction_10m");
+    u.searchParams.set("daily", "snowfall_sum,precipitation_probability_max");
+    u.searchParams.set("forecast_days", "1");
+    u.searchParams.set("timezone", "auto");
+    u.searchParams.set("temperature_unit", metric ? "celsius" : "fahrenheit");
+    u.searchParams.set("wind_speed_unit", metric ? "kmh" : "mph");
+    u.searchParams.set("precipitation_unit", metric ? "mm" : "inch");
+    fetch(u.toString())
+      .then((r) => {
+        if (!r.ok) throw new Error(`open-meteo ${r.status}`);
+        return r.json();
+      })
+      .then((d) => {
+        if (cancelled) return;
+        const cu = d.current_units ?? {};
+        const du = d.daily_units ?? {};
+        setProbeData({
+          tempVal: Math.round(d.current?.temperature_2m ?? NaN),
+          tempUnit: cu.temperature_2m ?? "°",
+          windVal: Math.round(d.current?.wind_speed_10m ?? NaN),
+          windDir: d.current?.wind_direction_10m ?? 0,
+          windUnit: cu.wind_speed_10m ?? "",
+          snowVal: round1(d.daily?.snowfall_sum?.[0] ?? 0),
+          snowUnit: du.snowfall_sum ?? "cm",
+          rainProb: Math.round(d.daily?.precipitation_probability_max?.[0] ?? 0),
+          rainUnit: du.precipitation_probability_max ?? "%",
+        });
+      })
+      .catch((e) => {
+        if (!cancelled) setProbeError(String(e));
+      })
+      .finally(() => {
+        if (!cancelled) setProbeLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [probe, metric]);
+
   const pins = useMemo(() => markers ?? regionDefaults.pins, [markers, regionDefaults]);
   const currentRadar = radarFrames[frameIndex];
   const stamp = currentRadar ? formatStamp(currentRadar.time) : null;
   const centerTuple: [number, number] = [effectiveCenter.lat, effectiveCenter.lng];
 
-  const showRadar = mode === "all" || mode === "precip";
-  const showClouds = mode === "all" || mode === "clouds";
-
-  // Season-aware labels: same precip data, but in winter we frame it
-  // as "snow" because that's what users care about on the mountain.
-  const precipLabel = season === "winter" ? "Snow" : "Rain";
-  const PrecipIcon = season === "winter" ? CloudSnow : CloudRain;
-
-  // Windy embed URL — built per-region. The `overlay` param is driven
-  // by the user's current selection so the Snow/Wind/Temp/Radar pills
-  // re-render the iframe with the chosen layer at the same zoom.
+  // Windy embed URL — built per-region.
   const windyUrl = useMemo(() => {
     const params = new URLSearchParams({
       lat: String(regionCfg.windy.lat),
@@ -402,29 +548,14 @@ export default function RadarMapInner({
   }, [windyOverlay, regionCfg.windy]);
 
   return (
-    <div className="relative w-full h-[520px] md:h-[640px] bg-slate-100">
-      {/* View switcher (top-left). Three modes: our interactive leaflet
-          (default, with resort pins + nowcast), Windy (rich multi-layer),
-          and the official regional source (BOM gif, JMA link, etc). */}
-      <div className="absolute top-3 left-3 z-[1000] flex gap-1 rounded-xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-lg p-1">
-        <ModePill
-          active={view === "interactive"}
-          onClick={() => setView("interactive")}
-          icon={MapIcon}
-          label="Interactive"
-        />
-        <ModePill
-          active={view === "windy"}
-          onClick={() => setView("windy")}
-          icon={Globe2}
-          label="Expert"
-        />
-        <ModePill
-          active={view === "official"}
-          onClick={() => setView("official")}
-          icon={Radio}
-          label="Official"
-        />
+    <div className="relative w-full h-[520px] md:h-[640px] bg-slate-900">
+      {/* View switcher (top-left). Three modes: our interactive ski radar
+          (default · dark map, weather layers, click-to-read points), Windy
+          (rich multi-layer), and the official regional source. */}
+      <div className="absolute top-3 left-3 z-[1000] flex gap-1 rounded-xl bg-slate-900/90 backdrop-blur-md border border-white/10 shadow-lg p-1">
+        <TabPill active={view === "interactive"} onClick={() => setView("interactive")} icon={MapIcon} label="Interactive" />
+        <TabPill active={view === "windy"} onClick={() => setView("windy")} icon={Globe2} label="Expert" />
+        <TabPill active={view === "official"} onClick={() => setView("official")} icon={Radio} label="Official" />
       </div>
 
       {view === "windy" && (
@@ -433,30 +564,10 @@ export default function RadarMapInner({
               keyboard users hit the layer pills before tab-focus enters
               the third-party Windy frame (which can trap focus). */}
           <div className="absolute top-3 right-3 z-[1000] flex flex-col gap-1 rounded-xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-lg p-1">
-            <ModePill
-              active={windyOverlay === "snow"}
-              onClick={() => setWindyOverlay("snow")}
-              icon={CloudSnow}
-              label="Snow"
-            />
-            <ModePill
-              active={windyOverlay === "wind"}
-              onClick={() => setWindyOverlay("wind")}
-              icon={Wind}
-              label="Wind"
-            />
-            <ModePill
-              active={windyOverlay === "temp"}
-              onClick={() => setWindyOverlay("temp")}
-              icon={Thermometer}
-              label="Temp"
-            />
-            <ModePill
-              active={windyOverlay === "rain"}
-              onClick={() => setWindyOverlay("rain")}
-              icon={CloudRain}
-              label="Radar"
-            />
+            <ModePill active={windyOverlay === "snow"} onClick={() => setWindyOverlay("snow")} icon={CloudSnow} label="Snow" />
+            <ModePill active={windyOverlay === "wind"} onClick={() => setWindyOverlay("wind")} icon={Wind} label="Wind" />
+            <ModePill active={windyOverlay === "temp"} onClick={() => setWindyOverlay("temp")} icon={Thermometer} label="Temp" />
+            <ModePill active={windyOverlay === "rain"} onClick={() => setWindyOverlay("rain")} icon={CloudRain} label="Radar" />
           </div>
           <iframe
             title="Expert weather map · snow, wind, temperature and radar"
@@ -471,10 +582,7 @@ export default function RadarMapInner({
 
       {view === "official" && (
         // key by the source URL so switching regions remounts the view
-        // and resets its internal `imgFailed` state · otherwise a BOM
-        // outage on one region would persist the "open source" fallback
-        // when the user navigates to a different region whose image is
-        // actually loading fine.
+        // and resets its internal `imgFailed` state.
         <OfficialView
           key={regionCfg.official.imageUrl ?? regionCfg.official.href}
           official={regionCfg.official}
@@ -482,177 +590,200 @@ export default function RadarMapInner({
       )}
 
       {view === "interactive" && (
-      <MapContainer
-        center={centerTuple}
-        zoom={zoom}
-        scrollWheelZoom
-        className="absolute inset-0 w-full h-full"
-        minZoom={5}
-        maxZoom={12}
-      >
-        <RecenterOnChange lat={effectiveCenter.lat} lng={effectiveCenter.lng} zoom={zoom} />
+        <MapContainer
+          center={centerTuple}
+          zoom={zoom}
+          scrollWheelZoom
+          className="absolute inset-0 w-full h-full"
+          minZoom={4}
+          maxZoom={12}
+        >
+          <RecenterOnChange lat={effectiveCenter.lat} lng={effectiveCenter.lng} zoom={zoom} />
 
-        {/* Clean light basemap (CARTO Positron, free, no key, CDN-hosted).
-            Soft grey roads + faint labels = maximum contrast for the
-            blue precip overlay. Terrain detail is intentionally off by
-            default and toggled in via the "Terrain" pill below. */}
-        <TileLayer
-          attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors · © <a href="https://carto.com/attributions">CARTO</a>'
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-          subdomains={["a", "b", "c", "d"]}
-          maxNativeZoom={19}
-        />
-
-        {/* Optional topographic overlay · semi-transparent so the basemap
-            labels still read through. Adds contour lines + ski runs +
-            shaded relief for users who want the terrain context. */}
-        {showTerrain && (
+          {/* Esri world hillshade · shaded relief gives the dark map its
+              terrain feel (mountains read as ridges, not flat). Sits at
+              the bottom; the dark labels layer rides on top. */}
           <TileLayer
-            key="terrain"
-            attribution='© <a href="https://opentopomap.org">OpenTopoMap</a>'
-            url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
-            subdomains={["a", "b", "c"]}
-            maxNativeZoom={15}
-            opacity={0.55}
-            zIndex={150}
+            attribution='Hillshade © <a href="https://www.esri.com/">Esri</a>'
+            url="https://server.arcgisonline.com/ArcGIS/rest/services/Elevation/World_Hillshade/MapServer/tile/{z}/{y}/{x}"
+            maxNativeZoom={16}
           />
-        )}
 
-        {/* Ski-specific overlay · OpenSnowMap renders graded piste lines
-            (green/blue/red/black per difficulty) plus chairlifts, gondolas
-            and cable-car routes. Free OSM-derived tiles, just attribution.
-            Sits above terrain but below precip so storm cells stay legible
-            on top of the runs. */}
-        {showPistes && (
+          {/* Dark basemap (CARTO dark_all, free, no key, CDN-hosted).
+              Slightly transparent so the hillshade terrain bleeds through
+              while keeping the dark styling + grey labels. Maximum
+              contrast for the blue/cyan precip overlay on top. */}
           <TileLayer
-            key="pistes"
-            attribution='Pistes <a href="https://www.opensnowmap.org/">OpenSnowMap</a> · data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://tiles.opensnowmap.org/pistes/{z}/{x}/{y}.png"
-            maxNativeZoom={18}
-            zIndex={250}
+            attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors · © <a href="https://carto.com/attributions">CARTO</a>'
+            url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+            subdomains={["a", "b", "c", "d"]}
+            maxNativeZoom={19}
+            opacity={0.86}
           />
-        )}
 
-        {/* Cloud layer (infrared satellite). Sits below precip so storm
-            cells stay crisp on top of the cloud field.
-            maxNativeZoom: RainViewer satellite tops out around z=6;
-            past that the API returns a "Zoom Level Not Supported"
-            placeholder PNG. Capping native zoom makes Leaflet upscale
-            its z=6 tiles instead of requesting bad ones. */}
-        {showClouds && manifest && latestSatellite && (
-          <TileLayer
-            key={`sat-${latestSatellite.time}`}
-            url={satelliteTileUrl(manifest.host, latestSatellite.path)}
-            opacity={mode === "clouds" ? 0.75 : 0.55}
-            zIndex={300}
-            maxNativeZoom={4}
-            attribution=""
-          />
-        )}
+          {/* Precipitation layer.
+              maxNativeZoom: RainViewer's global radar mosaic only has real
+              data through z≈6 in most regions outside dense NA/EU radar
+              coverage. Past that their server returns a placeholder PNG.
+              Capping native zoom tells Leaflet to fetch the z=6 tile and
+              CSS-upscale it for higher zooms. */}
+          {showPrecip && manifest && currentRadar && (
+            <TileLayer
+              key={`rad-${currentRadar.time}`}
+              url={radarTileUrl(manifest.host, currentRadar.path)}
+              opacity={isNowcast ? 0.65 : 0.85}
+              zIndex={400}
+              maxNativeZoom={6}
+              attribution=""
+            />
+          )}
 
-        {/* Precipitation layer.
-            maxNativeZoom: RainViewer's global radar mosaic only has real
-            data through z≈6 in the southern hemisphere (and similar in
-            most regions outside dense NA/EU radar coverage). Past that
-            their server returns a "Zoom Level Not Supported" placeholder
-            PNG that visually destroys the map. Capping native zoom at 6
-            tells Leaflet to fetch the z=6 tile and CSS-upscale it for
-            higher zooms, which is correct behaviour for a low-res field. */}
-        {showRadar && manifest && currentRadar && (
-          <TileLayer
-            key={`rad-${currentRadar.time}`}
-            url={radarTileUrl(manifest.host, currentRadar.path)}
-            opacity={isNowcast ? 0.65 : 0.85}
-            zIndex={400}
-            maxNativeZoom={6}
-            attribution=""
-          />
-        )}
+          <ClickProbe enabled={anyPointLayer} onPick={(lat, lng) => setProbe({ lat, lng })} />
 
-        {pins.map((p) => (
-          <Marker
-            key={p.id}
-            position={[p.lat, p.lng]}
-            icon={PIN_ICONS[p.id] ?? makePinIcon(p.name, "#0ea5e9")}
-          >
-            <Tooltip direction="top" offset={[0, -10]} opacity={0.95}>
-              <span className="font-semibold">{p.name}</span>
-            </Tooltip>
-          </Marker>
-        ))}
-      </MapContainer>
+          {probe && (
+            <ProbeMarker key={`${probe.lat},${probe.lng}`} lat={probe.lat} lng={probe.lng}>
+              <div className="min-w-[150px]">
+                <div className="text-[10px] uppercase tracking-wide text-slate-400 font-semibold mb-1.5 tabular-nums">
+                  {probe.lat.toFixed(3)}, {probe.lng.toFixed(3)}
+                </div>
+                {probeLoading ? (
+                  <div className="flex items-center gap-2 text-xs text-slate-300 py-1">
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" /> loading…
+                  </div>
+                ) : probeError ? (
+                  <div className="text-xs text-amber-300 py-1">couldn't load · try again</div>
+                ) : probeData ? (
+                  <div className="space-y-1.5">
+                    {pointLayers.snowfall && (
+                      <ReadoutRow icon={Snowflake} label="snowfall · 24h" value={`${probeData.snowVal} ${probeData.snowUnit}`} />
+                    )}
+                    {pointLayers.temp && (
+                      <ReadoutRow icon={Thermometer} label="temperature" value={`${probeData.tempVal}${probeData.tempUnit}`} />
+                    )}
+                    {pointLayers.wind && (
+                      <ReadoutRow icon={Wind} label="wind" value={`${probeData.windVal} ${probeData.windUnit} ${compassDir(probeData.windDir)}`} />
+                    )}
+                    {pointLayers.rainRisk && (
+                      <ReadoutRow icon={Droplet} label="rain risk" value={`${probeData.rainProb}%`} />
+                    )}
+                  </div>
+                ) : null}
+              </div>
+            </ProbeMarker>
+          )}
+
+          {pins.map((p) => (
+            <Marker
+              key={p.id}
+              position={[p.lat, p.lng]}
+              icon={PIN_ICONS[p.id] ?? makePinIcon(p.name, "#0ea5e9")}
+            >
+              <Tooltip direction="top" offset={[0, -10]} opacity={0.95}>
+                <span className="font-semibold">{p.name}</span>
+              </Tooltip>
+            </Marker>
+          ))}
+        </MapContainer>
       )}
 
-      {/* Floating layer toggles (top-right). Three pills with icons +
-          short labels — fits cleanly on mobile too. Only relevant for
-          the interactive leaflet view. */}
+      {/* Weather Layers panel (top-right). Precip radar lit on load; the
+          rest are point readouts surfaced on map click. Interactive only. */}
       {view === "interactive" && (
-      <div className="absolute top-3 right-3 z-[1000] flex flex-col gap-1 rounded-xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-lg p-1">
-        <ModePill
-          active={mode === "all"}
-          onClick={() => setMode("all")}
-          icon={Layers}
-          label="Overall"
-        />
-        <ModePill
-          active={mode === "clouds"}
-          onClick={() => setMode("clouds")}
-          icon={Cloud}
-          label="Clouds"
-        />
-        <ModePill
-          active={mode === "precip"}
-          onClick={() => setMode("precip")}
-          icon={PrecipIcon}
-          label={precipLabel}
-        />
-        <div className="my-1 h-px bg-slate-200" aria-hidden="true" />
-        <ModePill
-          active={showPistes}
-          onClick={() => setShowPistes((v) => !v)}
-          icon={MountainSnow}
-          label="Pistes"
-        />
-        <ModePill
-          active={showTerrain}
-          onClick={() => setShowTerrain((v) => !v)}
-          icon={Mountain}
-          label="Terrain"
-        />
-      </div>
+        <div className="absolute top-3 right-3 z-[1000] w-64 max-w-[calc(100%-1.5rem)] rounded-2xl bg-slate-900/90 backdrop-blur-md border border-white/10 shadow-xl text-white">
+          <div className="flex items-center justify-between px-3 pt-3 pb-2">
+            <h3 className="text-sm font-bold lowercase leading-tight">weather layers</h3>
+            <button
+              type="button"
+              onClick={() => setMetric((m) => !m)}
+              className="flex items-center gap-1.5"
+              aria-pressed={metric}
+              aria-label="Toggle metric units"
+            >
+              <span className={cn("text-[10px] font-bold uppercase tracking-wide", metric ? "text-sky-300" : "text-slate-500")}>
+                metric
+              </span>
+              <Switch on={metric} />
+            </button>
+          </div>
+          <div className="px-2 pb-2 space-y-0.5">
+            <LayerToggle
+              icon={Radar}
+              title="precip radar"
+              desc="live animated precipitation from rainviewer · past 2h + 30min nowcast."
+              active={showPrecip}
+              onToggle={() => setShowPrecip((v) => !v)}
+            />
+            <LayerToggle
+              icon={Snowflake}
+              title="snowfall · 24h"
+              desc="forecast snow in the next 24 hours. shown when you click any point."
+              active={pointLayers.snowfall}
+              onToggle={() => togglePoint("snowfall")}
+            />
+            <LayerToggle
+              icon={Wind}
+              title="wind speed"
+              desc="10m wind speed and direction at the clicked point."
+              active={pointLayers.wind}
+              onToggle={() => togglePoint("wind")}
+            />
+            <LayerToggle
+              icon={Thermometer}
+              title="temperature"
+              desc="2m air temperature at the clicked point."
+              active={pointLayers.temp}
+              onToggle={() => togglePoint("temp")}
+            />
+            <LayerToggle
+              icon={Droplet}
+              title="rain risk"
+              desc="chance of liquid rain at the clicked point · the skier's nemesis."
+              active={pointLayers.rainRisk}
+              onToggle={() => togglePoint("rainRisk")}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Hint chip · only when a point layer is armed but nothing clicked
+          yet, so users know the readout is a click away. */}
+      {view === "interactive" && anyPointLayer && !probe && (
+        <div className="absolute left-1/2 -translate-x-1/2 bottom-20 z-[1000] rounded-full bg-slate-900/90 backdrop-blur-md border border-white/10 shadow-lg px-3 py-1.5 text-[11px] font-medium text-slate-200">
+          click anywhere on the map to read values here
+        </div>
       )}
 
       {/* Floating control bar (bottom): play/pause + timestamp + scrubber.
-          Hidden in clouds-only mode since there's nothing to animate. */}
-      {view === "interactive" && mode !== "clouds" && (
-        <div className="absolute left-3 right-3 bottom-3 z-[1000] rounded-xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-lg px-3 py-2 flex items-center gap-3">
+          Shown only when the precip radar layer is on. */}
+      {view === "interactive" && showPrecip && (
+        <div className="absolute left-3 right-3 bottom-3 z-[1000] rounded-xl bg-slate-900/90 backdrop-blur-md border border-white/10 shadow-lg px-3 py-2 flex items-center gap-3 text-white">
           <button
             type="button"
             onClick={() => setPlaying((p) => !p)}
             disabled={radarFrames.length === 0}
-            className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-slate-900 text-white disabled:opacity-40"
+            className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-sky-500 text-white disabled:opacity-40"
             aria-label={playing ? "Pause radar animation" : "Play radar animation"}
           >
             {playing ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 ml-0.5" />}
           </button>
           <div className="flex-1 min-w-0">
-            <div className="text-xs uppercase tracking-wide text-slate-600 font-semibold flex items-center gap-2">
+            <div className="text-xs uppercase tracking-wide text-slate-300 font-semibold flex items-center gap-2">
               {loading
-                ? "Loading radar…"
+                ? "loading radar…"
                 : error
-                  ? "Radar unavailable"
+                  ? "radar unavailable"
                   : stamp
                     ? (
                         <>
                           <span className="tabular-nums">{stamp}</span>
                           {isNowcast && (
-                            <span className="inline-flex items-center rounded-full bg-amber-100 text-amber-800 px-1.5 py-0.5 text-[10px] font-bold tracking-wide">
+                            <span className="inline-flex items-center rounded-full bg-amber-400/20 text-amber-300 px-1.5 py-0.5 text-[10px] font-bold tracking-wide">
                               FORECAST
                             </span>
                           )}
                         </>
                       )
-                    : "No frames"}
+                    : "no frames"}
             </div>
             <input
               type="range"
@@ -664,11 +795,11 @@ export default function RadarMapInner({
                 setFrameIndex(parseInt(e.target.value));
               }}
               disabled={radarFrames.length === 0}
-              className="w-full mt-1 accent-slate-900"
+              className="w-full mt-1 accent-sky-500"
               aria-label="Radar frame scrubber"
             />
           </div>
-          <span className="text-[10px] text-slate-500 font-medium hidden sm:inline">
+          <span className="text-[10px] text-slate-400 font-medium hidden sm:inline">
             RainViewer · global radar
           </span>
         </div>
@@ -677,6 +808,84 @@ export default function RadarMapInner({
   );
 }
 
+function Switch({ on }: { on: boolean }) {
+  return (
+    <span
+      className={cn(
+        "inline-flex h-4 w-7 shrink-0 items-center rounded-full px-0.5 transition-colors",
+        on ? "bg-sky-500" : "bg-slate-600",
+      )}
+      aria-hidden="true"
+    >
+      <span className={cn("h-3 w-3 rounded-full bg-white transition-transform", on ? "translate-x-3" : "translate-x-0")} />
+    </span>
+  );
+}
+
+function LayerToggle({
+  icon: Icon,
+  title,
+  desc,
+  active,
+  onToggle,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  desc: string;
+  active: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      className={cn(
+        "w-full flex gap-2.5 rounded-xl px-2.5 py-2 text-left transition-colors",
+        active ? "bg-white/10" : "hover:bg-white/5",
+      )}
+      aria-pressed={active}
+    >
+      <Icon className={cn("w-4 h-4 mt-0.5 shrink-0", active ? "text-sky-300" : "text-slate-400")} />
+      <span className="flex-1 min-w-0">
+        <span className="block text-xs font-semibold text-white lowercase">{title}</span>
+        <span className="block text-[10px] leading-snug text-slate-400 mt-0.5">{desc}</span>
+      </span>
+      <Switch on={active} />
+    </button>
+  );
+}
+
+// Dark-themed view tab (Interactive / Expert / Official) for the floating
+// switcher over the dark basemap.
+function TabPill({
+  active,
+  onClick,
+  icon: Icon,
+  label,
+}: {
+  active: boolean;
+  onClick: () => void;
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        "inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors",
+        active ? "bg-sky-500 text-white" : "text-slate-300 hover:bg-white/10",
+      )}
+      aria-pressed={active}
+    >
+      <Icon className="w-3.5 h-3.5" />
+      {label}
+    </button>
+  );
+}
+
+// Light-themed pill · used for the Windy Expert overlay switcher, which
+// floats over the (lighter) Windy iframe.
 function ModePill({
   active,
   onClick,
@@ -694,9 +903,7 @@ function ModePill({
       onClick={onClick}
       className={cn(
         "inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors",
-        active
-          ? "bg-slate-900 text-white"
-          : "text-slate-700 hover:bg-slate-100",
+        active ? "bg-slate-900 text-white" : "text-slate-700 hover:bg-slate-100",
       )}
       aria-pressed={active}
     >
