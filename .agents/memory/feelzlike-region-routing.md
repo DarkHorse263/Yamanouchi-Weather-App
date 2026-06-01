@@ -34,3 +34,20 @@ when a region needs a richer region-level page (e.g. Alerts, region-wide Stay).
 Open follow-up: the winter Alerts nav row still shows for regions lacking an
 Alerts router and now bounces to home — gate that nav row by capability if the
 dead-end feel matters.
+
+## Stay/Eat are universal launch pads (gate on real page needs, not legacy data)
+
+Since the Apr 2026 reset, town Stay (booking-platform affiliate deep links) and
+Eat (Google Maps category searches) need ONLY a town name + lat/lng — no curated
+dataset. They are free, never paywalled. So `townNavHasContent` returns `true`
+for `/stay` and `/eat` always (alongside `/` and `/weather`).
+
+**Why:** the gate was still keyed on legacy `getStaysByTown`/`getEatsByTown`
+curated arrays, which hid these working pages for towns without that old data
+(e.g. Bright + most VHC towns). A nav gate must reflect what the PAGE actually
+renders from, not a defunct data layer. `getStaysByTown`/`getEatsByTown` (and
+`useStayEat`) are now effectively legacy/unused in app runtime.
+
+**How to apply:** only gate a town nav entry when the page genuinely produces
+nothing without data (Roads feeds, Transport providers, Explore tourismLinks).
+Don't gate pages that work from town name + coords.

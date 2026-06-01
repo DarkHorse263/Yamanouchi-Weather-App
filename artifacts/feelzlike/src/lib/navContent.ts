@@ -11,14 +11,15 @@
  * page never disagree. It lives in the artifact (not the shared shell) because
  * the content data lives here; the shell takes it as an optional prop.
  *
- * Always-on entries (`/`, `/weather`) are never gated · every town has a today
- * dashboard and a forecast.
+ * Always-on entries (`/`, `/weather`, `/stay`, `/eat`) are never gated · every
+ * town has a today dashboard, a forecast, and the universal Stay (booking-
+ * platform deep links) + Eat (Google Maps category searches) launch pads. Those
+ * two pages work from just a town name + coordinates, so they ship free for
+ * every town and never sit behind the paywall.
  */
 import type { RegionConfig } from "@workspace/feelzlike-shell";
 import type { RegionId } from "@workspace/api-client-react";
 import { getProvidersForRegion } from "@/data/transport";
-import { getStaysByTown, getEatsByTown } from "@/data";
-import { townIdToSlug } from "@/lib/urlState";
 
 /**
  * Regions whose Roads & cams page actually renders content today. Roads is
@@ -49,15 +50,13 @@ export function townNavHasContent(
   switch (path) {
     case "/":
     case "/weather":
+    case "/stay":
+    case "/eat":
       return true;
     case "/explore":
       return (region.tourismLinks?.length ?? 0) > 0;
     case "/transport":
       return getProvidersForRegion(region.id as RegionId).length > 0;
-    case "/stay":
-      return getStaysByTown(townIdToSlug(townId)).length > 0;
-    case "/eat":
-      return getEatsByTown(townIdToSlug(townId)).length > 0;
     case "/roads":
       return REGIONS_WITH_ROADS_CONTENT.has(region.id);
     default:
