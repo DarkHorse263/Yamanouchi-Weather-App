@@ -629,22 +629,38 @@ export default function RadarMapInner({
             opacity={0.86}
           />
 
-          {/* Precipitation layer.
+          {/* Precipitation layers.
+              Every frame is mounted once as its own persistent TileLayer and
+              animation is driven purely by opacity · the active frame is
+              visible, all others sit at opacity 0 (still loaded, just hidden).
+              Previously we rendered a single TileLayer keyed by frame time,
+              which forced React to unmount + remount the layer on every frame
+              swap. A freshly mounted Leaflet layer starts blank and refetches
+              all tiles, so each step flashed a gap before tiles arrived. Keying
+              each frame by its own (stable) timestamp keeps it mounted for the
+              layer's lifetime, so stepping is an instant opacity flip with no
+              blank frame.
               maxNativeZoom: RainViewer's global radar mosaic only has real
               data through z≈6 in most regions outside dense NA/EU radar
               coverage. Past that their server returns a placeholder PNG.
               Capping native zoom tells Leaflet to fetch the z=6 tile and
               CSS-upscale it for higher zooms. */}
-          {showPrecip && manifest && currentRadar && (
-            <TileLayer
-              key={`rad-${currentRadar.time}`}
-              url={radarTileUrl(manifest.host, currentRadar.path)}
-              opacity={isNowcast ? 0.65 : 0.85}
-              zIndex={400}
-              maxNativeZoom={6}
-              attribution=""
-            />
-          )}
+          {showPrecip &&
+            manifest &&
+            radarFrames.map((frame, idx) => {
+              const active = idx === frameIndex;
+              const frameIsNowcast = idx >= nowcastStart;
+              return (
+                <TileLayer
+                  key={`rad-${frame.time}`}
+                  url={radarTileUrl(manifest.host, frame.path)}
+                  opacity={active ? (frameIsNowcast ? 0.65 : 0.85) : 0}
+                  zIndex={active ? 401 : 400}
+                  maxNativeZoom={6}
+                  attribution=""
+                />
+              );
+            })}
 
           <ClickProbe enabled={anyPointLayer} onPick={(lat, lng) => setProbe({ lat, lng })} />
 
