@@ -2,6 +2,7 @@ import { Router, type IRouter } from "express";
 import { GetWeatherResponse, GetLocationWeatherResponse, GetLocationWeatherParams } from "@workspace/api-zod";
 import { getEnsembleForecast } from "../lib/ensemble-forecast.js";
 import { locationMatchesRegion, parseRegionParam, RegionParamError } from "../lib/regions.js";
+import { fetchOpenWeatherMapAsOpenMeteo } from "../lib/openweathermap.js";
 
 const router: IRouter = Router();
 
@@ -298,7 +299,18 @@ async function fetchLocationWeather(location: LocationConfig) {
       : Promise.resolve(null)
   ]);
 
-  const openMeteoData = openMeteoResult;
+  // Forecast-source fallback: Open-Meteo is primary, but it periodically
+  // returns gateway 502s / throttles our egress IP. When it's down, every
+  // non-BOM location (all of VHC, Tasmania, Japan and the AU gateway towns)
+  // would otherwise hard-fail. Fall back to OpenWeatherMap, reshaped into
+  // the same payload, so those pages keep serving live conditions.
+  let openMeteoData = openMeteoResult;
+  let forecastSource = "Open-Meteo";
+  if (!openMeteoData) {
+    openMeteoData = await fetchOpenWeatherMapAsOpenMeteo(location).catch(() => null);
+    if (openMeteoData) forecastSource = "OpenWeatherMap";
+  }
+
   if (!openMeteoData && !bomObs && !bomSecondaryObs) {
     throw new Error(`No weather data available for ${location.name} from any source`);
   }
@@ -348,7 +360,7 @@ async function fetchLocationWeather(location: LocationConfig) {
     pressure: bomPressure ?? undefined,
     dewpoint: bomDewpoint ?? undefined,
     rainSince9am: safeParseFloat(bomRain),
-    dataSource: hasBomData ? "BOM" : "Open-Meteo",
+    dataSource: hasBomData ? "BOM" : forecastSource,
     bomStation: bomStationName,
     bomObservationTime: bomObsTime ?? undefined,
     freezingLevel: (() => {
@@ -515,12 +527,22 @@ async function fetchOpenMeteo(location: LocationConfig) {
     forecast_hours: "72"
   });
 
-  const response = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`);
-  if (!response.ok) {
-    throw new Error(`Open-Meteo API error: ${response.status}`);
+  // Bound the request: when Open-Meteo's gateway is degraded it can hang for
+  // tens of seconds, which would stall the whole page before the
+  // OpenWeatherMap fallback even gets a chance to run. Fail fast instead.
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 8000);
+  try {
+    const response = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
+      signal: controller.signal,
+    });
+    if (!response.ok) {
+      throw new Error(`Open-Meteo API error: ${response.status}`);
+    }
+    return await response.json() as any;
+  } finally {
+    clearTimeout(timer);
   }
-
-  return await response.json() as any;
 }
 
 router.get("/weather", async (req, res) => {
@@ -564,6 +586,54 @@ router.get("/weather", async (req, res) => {
   }
 });
 
+// ── Per-location weather cache ───────────────────────────────────────────
+// Weather upstreams (Open-Meteo, OpenWeatherMap, BOM) all have intermittent
+// outages. Caching the assembled payload lets us (a) cut upstream request
+// volume - which matters because Open-Meteo throttles our egress IP - and
+// (b) serve the last good reading when a refresh fails, instead of handing
+// the client a 500 that leaves it stuck on "Loading mountain conditions...".
+interface WeatherCacheEntry {
+  data: unknown;
+  freshUntil: number; // serve straight from cache until this time
+  staleUntil: number; // still serveable as a fallback when upstreams fail
+}
+const WEATHER_FRESH_MS = 10 * 60 * 1000; // 10 minutes
+const WEATHER_STALE_MS = 6 * 60 * 60 * 1000; // 6 hours
+const weatherCache = new Map<string, WeatherCacheEntry>();
+const weatherInflight = new Map<string, Promise<unknown>>();
+
+async function getLocationWeatherCached(location: LocationConfig): Promise<unknown> {
+  const now = Date.now();
+  const cached = weatherCache.get(location.id);
+  if (cached && cached.freshUntil > now) return cached.data;
+
+  // Coalesce concurrent refreshes for the same location into one upstream call.
+  let inflight = weatherInflight.get(location.id);
+  if (!inflight) {
+    inflight = (async () => {
+      const weatherData = await fetchLocationWeather(location);
+      const result = GetLocationWeatherResponse.parse(weatherData);
+      weatherCache.set(location.id, {
+        data: result,
+        freshUntil: Date.now() + WEATHER_FRESH_MS,
+        staleUntil: Date.now() + WEATHER_STALE_MS,
+      });
+      return result;
+    })().finally(() => weatherInflight.delete(location.id));
+    weatherInflight.set(location.id, inflight);
+  }
+
+  try {
+    return await inflight;
+  } catch (err) {
+    // On a failed refresh, serve the last good reading if it's still within
+    // the stale window rather than failing the request outright.
+    const fallback = weatherCache.get(location.id);
+    if (fallback && fallback.staleUntil > now) return fallback.data;
+    throw err;
+  }
+}
+
 router.get("/weather/:locationId", async (req, res) => {
   try {
     // Validate the path-param shape via the generated zod schema (regex
@@ -580,8 +650,7 @@ router.get("/weather/:locationId", async (req, res) => {
       return;
     }
 
-    const weatherData = await fetchLocationWeather(location);
-    const result = GetLocationWeatherResponse.parse(weatherData);
+    const result = await getLocationWeatherCached(location);
     res.json(result);
   } catch (error) {
     res.status(500).json({
