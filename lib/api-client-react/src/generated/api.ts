@@ -19,6 +19,7 @@ import type {
 import type {
   Accommodation,
   AlertsData,
+  AnnouncementsData,
   Attraction,
   AuthUserEnvelope,
   BeginBrowserLoginParams,
@@ -47,6 +48,7 @@ import type {
   GenericOkResponse,
   GetAccommodationParams,
   GetAlertPreferencesParams,
+  GetAnnouncementsParams,
   GetAttractionsParams,
   GetDiningParams,
   GetElevationForecastParams,
@@ -652,6 +654,105 @@ export function useGetPowderAlerts<
   },
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetPowderAlertsQueryOptions(params, options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * Returns published resort announcements (opening dates, snowmaking, lift status, events, conditions) for a region, pinned items first then newest first. Backed by the `resort_announcements` table in Postgres. Regions with no rows return an empty list.
+
+ * @summary Get resort announcements
+ */
+export const getGetAnnouncementsUrl = (params?: GetAnnouncementsParams) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? "null" : value.toString());
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0
+    ? `/api/announcements?${stringifiedParams}`
+    : `/api/announcements`;
+};
+
+export const getAnnouncements = async (
+  params?: GetAnnouncementsParams,
+  options?: RequestInit,
+): Promise<AnnouncementsData> => {
+  return customFetch<AnnouncementsData>(getGetAnnouncementsUrl(params), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getGetAnnouncementsQueryKey = (
+  params?: GetAnnouncementsParams,
+) => {
+  return [`/api/announcements`, ...(params ? [params] : [])] as const;
+};
+
+export const getGetAnnouncementsQueryOptions = <
+  TData = Awaited<ReturnType<typeof getAnnouncements>>,
+  TError = ErrorType<ErrorResponse>,
+>(
+  params?: GetAnnouncementsParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getAnnouncements>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getGetAnnouncementsQueryKey(params);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof getAnnouncements>>
+  > = ({ signal }) => getAnnouncements(params, { signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getAnnouncements>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetAnnouncementsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getAnnouncements>>
+>;
+export type GetAnnouncementsQueryError = ErrorType<ErrorResponse>;
+
+/**
+ * @summary Get resort announcements
+ */
+
+export function useGetAnnouncements<
+  TData = Awaited<ReturnType<typeof getAnnouncements>>,
+  TError = ErrorType<ErrorResponse>,
+>(
+  params?: GetAnnouncementsParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getAnnouncements>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetAnnouncementsQueryOptions(params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
     queryKey: QueryKey;

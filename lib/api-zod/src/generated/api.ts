@@ -200,6 +200,52 @@ export const GetPowderAlertsResponse = zod.object({
 });
 
 /**
+ * Returns published resort announcements (opening dates, snowmaking, lift status, events, conditions) for a region, pinned items first then newest first. Backed by the `resort_announcements` table in Postgres. Regions with no rows return an empty list.
+
+ * @summary Get resort announcements
+ */
+export const GetAnnouncementsQueryParams = zod.object({
+  region: zod
+    .enum([
+      "snowy-mountains",
+      "victorias-high-country",
+      "tasmania",
+      "yamanouchi",
+      "nozawa-onsen",
+      "iiyama",
+    ])
+    .optional()
+    .describe(
+      "Optional region filter. Omit to receive data for every region. Must be one of the canonical region ids returned by `\/api\/regions`.",
+    ),
+});
+
+export const GetAnnouncementsResponse = zod.object({
+  announcements: zod.array(
+    zod.object({
+      id: zod.string(),
+      region: zod.string(),
+      resort: zod.string().nullish(),
+      category: zod.enum([
+        "opening",
+        "snowmaking",
+        "lifts",
+        "event",
+        "conditions",
+        "general",
+      ]),
+      title: zod.string(),
+      body: zod.string().nullish(),
+      sourceName: zod.string().nullish(),
+      sourceUrl: zod.string().nullish(),
+      pinned: zod.boolean(),
+      publishedAt: zod.string(),
+    }),
+  ),
+  updatedAt: zod.string(),
+});
+
+/**
  * Creates (or updates) a powder-alert subscription for the given email and sends a verification email. Idempotent — re-submitting with the same email updates preferences.
  * @summary Subscribe to powder alerts
  */

@@ -9,6 +9,9 @@
 export * from "./accommodation";
 export * from "./accommodationType";
 export * from "./alertsData";
+export * from "./announcement";
+export * from "./announcementCategory";
+export * from "./announcementsData";
 export * from "./attraction";
 export * from "./attractionCategory";
 export * from "./authorizationSessionHeaderParameter";
@@ -71,6 +74,7 @@ export * from "./genericOkResponse";
 export * from "./getAccommodationParams";
 export * from "./getAccommodationType";
 export * from "./getAlertPreferencesParams";
+export * from "./getAnnouncementsParams";
 export * from "./getAttractionsCategory";
 export * from "./getAttractionsParams";
 export * from "./getDiningParams";

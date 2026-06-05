@@ -17,6 +17,8 @@ tags:
     description: Snow outlook and forecasts
   - name: alerts
     description: Powder alerts
+  - name: announcements
+    description: Resort announcements and updates feed
   - name: accommodation
     description: Accommodation listings
   - name: dining
@@ -149,6 +151,29 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AlertsData"
+        "400":
+          description: Invalid region value
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /announcements:
+    get:
+      operationId: getAnnouncements
+      tags: [announcements]
+      summary: Get resort announcements
+      description: |
+        Returns published resort announcements (opening dates, snowmaking, lift status, events, conditions) for a region, pinned items first then newest first. Backed by the `resort_announcements` table in Postgres. Regions with no rows return an empty list.
+      parameters:
+        - $ref: "#/components/parameters/RegionFilter"
+      responses:
+        "200":
+          description: Resort announcements
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnnouncementsData"
         "400":
           description: Invalid region value
           content:
@@ -1779,6 +1804,51 @@ components:
         - region
         - status
         - description
+
+    AnnouncementsData:
+      type: object
+      properties:
+        announcements:
+          type: array
+          items:
+            $ref: "#/components/schemas/Announcement"
+        updatedAt:
+          type: string
+      required:
+        - announcements
+        - updatedAt
+
+    Announcement:
+      type: object
+      properties:
+        id:
+          type: string
+        region:
+          type: string
+        resort:
+          type: ["string", "null"]
+        category:
+          type: string
+          enum: [opening, snowmaking, lifts, event, conditions, general]
+        title:
+          type: string
+        body:
+          type: ["string", "null"]
+        sourceName:
+          type: ["string", "null"]
+        sourceUrl:
+          type: ["string", "null"]
+        pinned:
+          type: boolean
+        publishedAt:
+          type: string
+      required:
+        - id
+        - region
+        - category
+        - title
+        - pinned
+        - publishedAt
 
     SubscribeRequest:
       type: object

@@ -238,6 +238,40 @@ export interface AlertsData {
   updatedAt: string;
 }
 
+export type AnnouncementCategory =
+  (typeof AnnouncementCategory)[keyof typeof AnnouncementCategory];
+
+export const AnnouncementCategory = {
+  opening: "opening",
+  snowmaking: "snowmaking",
+  lifts: "lifts",
+  event: "event",
+  conditions: "conditions",
+  general: "general",
+} as const;
+
+export interface Announcement {
+  id: string;
+  region: string;
+  /** @nullable */
+  resort?: string | null;
+  category: AnnouncementCategory;
+  title: string;
+  /** @nullable */
+  body?: string | null;
+  /** @nullable */
+  sourceName?: string | null;
+  /** @nullable */
+  sourceUrl?: string | null;
+  pinned: boolean;
+  publishedAt: string;
+}
+
+export interface AnnouncementsData {
+  announcements: Announcement[];
+  updatedAt: string;
+}
+
 export type SubscribeRequestHorizonHours =
   (typeof SubscribeRequestHorizonHours)[keyof typeof SubscribeRequestHorizonHours];
 
@@ -1800,6 +1834,14 @@ export type AuthorizationSessionHeaderParameter = string;
 export type RegionFilterParameter = RegionId;
 
 export type GetPowderAlertsParams = {
+  /**
+ * Canonical region identifier used across the FeelZlike platform.
+
+ */
+  region?: RegionFilterParameter;
+};
+
+export type GetAnnouncementsParams = {
   /**
  * Canonical region identifier used across the FeelZlike platform.
 

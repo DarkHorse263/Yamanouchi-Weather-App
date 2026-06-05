@@ -32,4 +32,16 @@ app.listen(port, () => {
   import("./jobs/alertEvaluator.js")
     .then((m) => m.startAlertCron())
     .catch((err) => console.error("[boot] failed to start alert cron:", err));
+
+  // Resort-announcements feed. Run ingestion once at boot so the feed has
+  // its seeded opening-weekend content immediately (idempotent), then start
+  // the periodic refresh cron (gated by RUN_ANNOUNCE_CRON, off by default).
+  import("./jobs/announcementsIngest.js")
+    .then(async (m) => {
+      await m.runAnnouncementsIngest().catch((err) =>
+        console.error("[boot] announcements ingest failed:", err),
+      );
+      m.startAnnouncementsCron();
+    })
+    .catch((err) => console.error("[boot] failed to start announcements ingest:", err));
 });

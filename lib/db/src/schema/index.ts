@@ -4,6 +4,7 @@ export * from "./attractions";
 export * from "./users";
 export * from "./subscriptions";
 export * from "./alerts";
+export * from "./announcements";
 export * from "./newsletter";
 export * from "./auth";
 export * from "./news-clicks";
