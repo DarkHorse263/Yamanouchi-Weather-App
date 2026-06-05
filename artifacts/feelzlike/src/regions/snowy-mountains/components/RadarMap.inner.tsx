@@ -602,6 +602,7 @@ export default function RadarMapInner({
           center={centerTuple}
           zoom={zoom}
           scrollWheelZoom
+          zoomControl={false}
           className="absolute inset-0 w-full h-full"
           minZoom={4}
           maxZoom={12}
@@ -917,14 +918,15 @@ function TabPill({
     <button
       type="button"
       onClick={onClick}
+      title={label}
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors",
+        "inline-flex items-center gap-1.5 rounded-lg px-2.5 py-2 text-xs font-semibold transition-colors",
         active ? "bg-sky-500 text-white" : "text-slate-300 hover:bg-white/10",
       )}
       aria-pressed={active}
     >
-      <Icon className="w-3.5 h-3.5" />
-      {label}
+      <Icon className="w-3.5 h-3.5 shrink-0" />
+      <span className="sr-only sm:not-sr-only">{label}</span>
     </button>
   );
 }
