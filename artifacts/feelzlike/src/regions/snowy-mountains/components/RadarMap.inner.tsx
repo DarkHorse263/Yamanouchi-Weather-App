@@ -120,6 +120,13 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
 
 const DEFAULT_ZOOM = 9;
 
+// How many radar frames either side of the current one stay mounted.
+// Keeping every frame mounted (~16) makes each zoom refetch all of them
+// at once and blanks the map on mobile after a big zoom-out/in (surfaced
+// by the "all of <country>" control); a small window keeps playback
+// flash-free while cutting tile churn well over 2x.
+const RADAR_WINDOW = 3;
+
 interface PinSpec { id: string; name: string; lat: number; lng: number; accent: string }
 
 // Per-region defaults: centre + pins. Used when the caller (e.g. the
@@ -132,8 +139,8 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
     pins: [
       { id: "perisher", name: "Perisher", lat: -36.3717, lng: 148.4086, accent: "#f97316" },
       { id: "thredbo", name: "Thredbo", lat: -36.5054, lng: 148.3089, accent: "#f97316" },
-      { id: "charlottes-pass", name: "Charlotte's Pass", lat: -36.4314, lng: 148.3297, accent: "#a855f7" },
-      { id: "selwyn", name: "Selwyn", lat: -35.8383, lng: 148.5267, accent: "#10b981" },
+      { id: "charlottes-pass", name: "Charlotte's Pass", lat: -36.4314, lng: 148.3297, accent: "#f97316" },
+      { id: "selwyn", name: "Selwyn", lat: -35.8383, lng: 148.5267, accent: "#f97316" },
       { id: "jindabyne", name: "Jindabyne", lat: -36.4106, lng: 148.6206, accent: "#0ea5e9" },
     ],
   },
@@ -141,11 +148,11 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
     center: { lat: -36.86, lng: 147.27 },
     pins: [
       { id: "mt-buller", name: "Mt Buller", lat: -37.1456, lng: 146.4391, accent: "#f97316" },
-      { id: "mt-stirling", name: "Mt Stirling", lat: -37.1167, lng: 146.4500, accent: "#a855f7" },
+      { id: "mt-stirling", name: "Mt Stirling", lat: -37.1167, lng: 146.4500, accent: "#f97316" },
       { id: "falls-creek", name: "Falls Creek", lat: -36.8628, lng: 147.2778, accent: "#f97316" },
       { id: "mt-hotham", name: "Mt Hotham", lat: -36.9779, lng: 147.1361, accent: "#f97316" },
-      { id: "lake-mountain", name: "Lake Mountain", lat: -37.5181, lng: 145.8983, accent: "#10b981" },
-      { id: "mt-donna-buang", name: "Mt Donna Buang", lat: -37.6961, lng: 145.6989, accent: "#10b981" },
+      { id: "lake-mountain", name: "Lake Mountain", lat: -37.5181, lng: 145.8983, accent: "#f97316" },
+      { id: "mt-donna-buang", name: "Mt Donna Buang", lat: -37.6961, lng: 145.6989, accent: "#f97316" },
       { id: "mount-beauty", name: "Mount Beauty", lat: -36.7327, lng: 147.1696, accent: "#0ea5e9" },
       { id: "bright", name: "Bright", lat: -36.7300, lng: 146.9617, accent: "#0ea5e9" },
       { id: "mansfield", name: "Mansfield", lat: -37.0539, lng: 146.0894, accent: "#0ea5e9" },
@@ -165,7 +172,7 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
     pins: [
       { id: "shiga-kogen", name: "Shiga Kogen", lat: 36.7167, lng: 138.5083, accent: "#f97316" },
       { id: "ryuoo", name: "Ryuoo", lat: 36.7458, lng: 138.4283, accent: "#f97316" },
-      { id: "kita-shiga", name: "Kita Shiga Kogen", lat: 36.7600, lng: 138.4750, accent: "#a855f7" },
+      { id: "kita-shiga", name: "Kita Shiga Kogen", lat: 36.7600, lng: 138.4750, accent: "#f97316" },
       { id: "yudanaka", name: "Yudanaka", lat: 36.7406, lng: 138.4222, accent: "#0ea5e9" },
       { id: "shibu", name: "Shibu Onsen", lat: 36.7367, lng: 138.4214, accent: "#0ea5e9" },
     ],
@@ -182,9 +189,9 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
     pins: [
       { id: "madarao", name: "Madarao", lat: 36.9056, lng: 138.2858, accent: "#f97316" },
       { id: "tangram", name: "Tangram", lat: 36.8917, lng: 138.2806, accent: "#f97316" },
-      { id: "togari-onsen", name: "Togari Onsen", lat: 36.8722, lng: 138.4014, accent: "#a855f7" },
-      { id: "kijimadaira", name: "Kijimadaira", lat: 36.8639, lng: 138.4006, accent: "#a855f7" },
-      { id: "kijima-snow-park", name: "Kijima Snow Park", lat: 36.8556, lng: 138.4108, accent: "#10b981" },
+      { id: "togari-onsen", name: "Togari Onsen", lat: 36.8722, lng: 138.4014, accent: "#f97316" },
+      { id: "kijimadaira", name: "Kijimadaira", lat: 36.8639, lng: 138.4006, accent: "#f97316" },
+      { id: "kijima-snow-park", name: "Kijima Snow Park", lat: 36.8556, lng: 138.4108, accent: "#f97316" },
       { id: "iiyama", name: "Iiyama City", lat: 36.852, lng: 138.366, accent: "#0ea5e9" },
     ],
   },
@@ -760,6 +767,16 @@ export default function RadarMapInner({
           {showPrecip &&
             manifest &&
             radarFrames.map((frame, idx) => {
+              // Only mount frames within a small window of the current one.
+              // Neighbours stay mounted at opacity 0 so stepping playback is
+              // flash-free, but we no longer carry all ~16 layers · that made
+              // every zoom refetch 16 tile sets and blanked the map on mobile
+              // after a big zoom-out/in. The window is CIRCULAR: playback wraps
+              // (last → 0), so frame 0 must already be mounted when the current
+              // frame is near the end · a linear window would flash on wrap.
+              const linear = Math.abs(idx - frameIndex);
+              const ring = Math.min(linear, radarFrames.length - linear);
+              if (ring > RADAR_WINDOW) return null;
               const active = idx === frameIndex;
               const frameIsNowcast = idx >= nowcastStart;
               return (
@@ -769,6 +786,7 @@ export default function RadarMapInner({
                   opacity={active ? (frameIsNowcast ? 0.65 : 0.85) : 0}
                   zIndex={active ? 401 : 400}
                   maxNativeZoom={6}
+                  updateWhenZooming={false}
                   attribution=""
                 />
               );
@@ -904,6 +922,21 @@ export default function RadarMapInner({
               active={pointLayers.rainRisk}
               onToggle={() => togglePoint("rainRisk")}
             />
+          </div>
+          <div className="border-t border-white/10 px-3 py-2.5 space-y-1">
+            <p className="text-[10px] font-bold uppercase tracking-wide text-slate-400 mb-1">map key</p>
+            <div className="flex items-center gap-2">
+              <span className="h-2.5 w-2.5 rounded-full shrink-0" style={{ background: "#0ea5e9" }} />
+              <span className="text-[11px] text-slate-300">town · base for your stay</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="h-2.5 w-2.5 rounded-full shrink-0" style={{ background: "#f97316" }} />
+              <span className="text-[11px] text-slate-300">ski resort</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="h-2.5 w-2.5 rounded-full shrink-0 bg-white/40" />
+              <span className="text-[11px] text-slate-300">dimmed pin · another region</span>
+            </div>
           </div>
         </div>
       )}
