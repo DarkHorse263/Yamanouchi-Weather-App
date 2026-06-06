@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -27,6 +27,8 @@ import {
   Loader2,
   Layers,
   X,
+  Maximize2,
+  Crosshair,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -187,6 +189,52 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
     ],
   },
 };
+
+// Which country each region sits in. Drives the cross-region grouping on
+// the interactive map: from any Australian region you can see every
+// Australian town + resort, and likewise within Japan. Kept local so the
+// map stays self-contained · keep in step with REGION_COUNTRY in
+// src/regions/index.ts.
+type MapCountry = "AU" | "JP";
+const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
+  "snowy-mountains": "AU",
+  "victorias-high-country": "AU",
+  tasmania: "AU",
+  yamanouchi: "JP",
+  "nozawa-onsen": "JP",
+  iiyama: "JP",
+};
+const COUNTRY_LABEL: Record<MapCountry, string> = { AU: "australia", JP: "japan" };
+const REGION_LABEL: Record<RegionKey, string> = {
+  "snowy-mountains": "snowy mountains",
+  "victorias-high-country": "victoria's high country",
+  tasmania: "tasmania",
+  yamanouchi: "yamanouchi",
+  "nozawa-onsen": "nozawa onsen",
+  iiyama: "iiyama",
+};
+
+interface CountryPin extends PinSpec {
+  region: RegionKey;
+  isCurrent: boolean;
+}
+
+// Every town + resort that shares a country with `region`, each tagged
+// with its home region. Lets the map show neighbouring regions' pins (so
+// you can browse Mt Buller while sitting on a Snowy Mountains page) and
+// frame the whole country via the "show all" control.
+function countryPinsFor(region: RegionKey): CountryPin[] {
+  const country = REGION_COUNTRY[region];
+  return (Object.keys(REGION_DEFAULTS) as RegionKey[])
+    .filter((key) => REGION_COUNTRY[key] === country)
+    .flatMap((key) =>
+      REGION_DEFAULTS[key].pins.map((p) => ({
+        ...p,
+        region: key,
+        isCurrent: key === region,
+      })),
+    );
+}
 
 // RainViewer is a free public weather-tile API: global precipitation
 // radar (past 2hr + 30min nowcast). No API key required, CORS-friendly,
@@ -370,6 +418,16 @@ function ReadoutRow({
   );
 }
 
+// Captures the Leaflet map instance so out-of-map controls (the
+// "show all" / "this region" buttons) can drive fitBounds / setView.
+function CaptureMap({ onReady }: { onReady: (map: L.Map) => void }) {
+  const map = useMap();
+  useEffect(() => {
+    onReady(map);
+  }, [map, onReady]);
+  return null;
+}
+
 export default function RadarMapInner({
   center,
   zoom = DEFAULT_ZOOM,
@@ -526,7 +584,33 @@ export default function RadarMapInner({
     };
   }, [probe, metric]);
 
-  const pins = useMemo(() => markers ?? regionDefaults.pins, [markers, regionDefaults]);
+  const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
+  const handleMapReady = useCallback((m: L.Map) => setMapInstance(m), []);
+
+  // Pins span the whole country the current region sits in, so you can
+  // browse neighbouring regions' towns + resorts without leaving the page.
+  // Caller-passed markers (none today) still take precedence.
+  const countryPins = useMemo(() => countryPinsFor(region), [region]);
+  const pins = useMemo<CountryPin[]>(
+    () =>
+      markers
+        ? markers.map((m) => ({ ...m, accent: "#0ea5e9", region, isCurrent: true }))
+        : countryPins,
+    [markers, countryPins, region],
+  );
+  const hasOtherRegions = useMemo(() => pins.some((p) => !p.isCurrent), [pins]);
+  const country = REGION_COUNTRY[region];
+
+  const showAllCountry = useCallback(() => {
+    if (!mapInstance || pins.length === 0) return;
+    const bounds = L.latLngBounds(pins.map((p) => [p.lat, p.lng] as [number, number]));
+    mapInstance.fitBounds(bounds, { padding: [56, 56], maxZoom: 9, animate: true });
+  }, [mapInstance, pins]);
+
+  const focusCurrentRegion = useCallback(() => {
+    if (!mapInstance) return;
+    mapInstance.setView([effectiveCenter.lat, effectiveCenter.lng], zoom, { animate: true });
+  }, [mapInstance, effectiveCenter.lat, effectiveCenter.lng, zoom]);
   const currentRadar = radarFrames[frameIndex];
   const stamp = currentRadar ? formatStamp(currentRadar.time) : null;
   const centerTuple: [number, number] = [effectiveCenter.lat, effectiveCenter.lng];
@@ -565,6 +649,32 @@ export default function RadarMapInner({
         <TabPill active={view === "windy"} onClick={() => setView("windy")} icon={Globe2} label="Expert" />
         <TabPill active={view === "official"} onClick={() => setView("official")} icon={Radio} label="Official" />
       </div>
+
+      {/* Cross-region framing · jump between the whole country's towns +
+          resorts and the current region. Interactive view only, and only
+          when there are neighbouring regions to show. */}
+      {view === "interactive" && hasOtherRegions && (
+        <div className="absolute top-16 left-3 z-[1000] flex gap-1 rounded-xl bg-slate-900/90 backdrop-blur-md border border-white/10 shadow-lg p-1">
+          <button
+            type="button"
+            onClick={showAllCountry}
+            title={`show all of ${COUNTRY_LABEL[country]}`}
+            className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-2 text-xs font-semibold text-slate-300 hover:bg-white/10 transition-colors"
+          >
+            <Maximize2 className="w-3.5 h-3.5 shrink-0" />
+            <span className="lowercase">all of {COUNTRY_LABEL[country]}</span>
+          </button>
+          <button
+            type="button"
+            onClick={focusCurrentRegion}
+            title="back to this region"
+            className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-2 text-xs font-semibold text-slate-300 hover:bg-white/10 transition-colors"
+          >
+            <Crosshair className="w-3.5 h-3.5 shrink-0" />
+            <span className="sr-only sm:not-sr-only">this region</span>
+          </button>
+        </div>
+      )}
 
       {view === "windy" && (
         <>
@@ -608,6 +718,7 @@ export default function RadarMapInner({
           maxZoom={12}
         >
           <RecenterOnChange lat={effectiveCenter.lat} lng={effectiveCenter.lng} zoom={zoom} />
+          <CaptureMap onReady={handleMapReady} />
 
           {/* Esri world hillshade · shaded relief gives the dark map its
               terrain feel (mountains read as ridges, not flat). Sits at
@@ -701,10 +812,16 @@ export default function RadarMapInner({
             <Marker
               key={p.id}
               position={[p.lat, p.lng]}
-              icon={PIN_ICONS[p.id] ?? makePinIcon(p.name, "#0ea5e9")}
+              icon={PIN_ICONS[p.id] ?? makePinIcon(p.name, p.accent ?? "#0ea5e9")}
+              opacity={p.isCurrent ? 1 : 0.78}
             >
               <Tooltip direction="top" offset={[0, -10]} opacity={0.95}>
                 <span className="font-semibold">{p.name}</span>
+                {!p.isCurrent && (
+                  <span className="block text-[10px] font-medium text-slate-500 lowercase">
+                    {REGION_LABEL[p.region]}
+                  </span>
+                )}
               </Tooltip>
             </Marker>
           ))}
