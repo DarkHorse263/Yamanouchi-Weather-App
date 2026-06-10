@@ -9,13 +9,6 @@ import { PageMeta } from "@/lib/seo/PageMeta";
 import { websiteSchema, organizationSchema } from "@/lib/seo/jsonLd";
 import { track } from "@/lib/analytics";
 
-const TOWN_SLIDES = [
-  { src: "/towns/jindabyne.jpg",            town: "Jindabyne",    region: "Snowy Mountains",            country: "NSW, Australia",  credit: "Image courtesy Destination NSW \u00a9" },
-  { src: "/towns/mount-beauty.jpg",         town: "Mount Beauty", region: "Victoria\u2019s High Country", country: "VIC, Australia" },
-  { src: "/towns/yudanaka-valley.jpg",      town: "Yudanaka",     region: "Yamanouchi",                 country: "Nagano, Japan"   },
-  { src: "/towns/nozawa-onsen-village.jpg", town: "Nozawa Onsen", region: "Nozawa Onsen",               country: "Nagano, Japan",   credit: "Image courtesy Go Nagano (Nagano Prefecture Tourism)" },
-] as const;
-
 const balance: CSSProperties = { textWrap: "balance" as CSSProperties["textWrap"] };
 const pretty:  CSSProperties = { textWrap: "pretty"  as CSSProperties["textWrap"] };
 
@@ -31,7 +24,6 @@ const FLAKES: Array<{ x: number; y: number; size: number; delay: number; duratio
 ];
 
 export default function Welcome() {
-  const [activeSlide, setActiveSlide] = useState(0);
   const markRef = useRef<HTMLImageElement | null>(null);
   const [lastTown, setLastTown] = useState<LastTown | null>(null);
 
@@ -40,16 +32,6 @@ export default function Welcome() {
     markLandingVisited();
     setLastTown(readLastTown());
   }, []);
-
-  useEffect(() => {
-    const id = window.setInterval(
-      () => setActiveSlide((i) => (i + 1) % TOWN_SLIDES.length),
-      5000,
-    );
-    return () => window.clearInterval(id);
-  }, []);
-
-  const current = TOWN_SLIDES[activeSlide];
 
   // If the mark-only asset isn't present yet, fall back to the full colour
   // logo so the CTA still renders. Drop /branding/logo-mark.png in when
@@ -93,81 +75,6 @@ export default function Welcome() {
 
         {/* NEAR YOU ─ location-first: local conditions + nearest region ─ */}
         <NearYou />
-
-        {/* HERO SLIDESHOW ─────────────────────────────── */}
-        <section className="relative mx-4 overflow-hidden rounded-2xl bg-slate-100 md:mx-6">
-          <div className="relative aspect-[4/3] w-full md:aspect-[16/9]">
-            {TOWN_SLIDES.map((s, i) => (
-              <img
-                key={s.src}
-                src={s.src}
-                alt={`${s.town}, ${s.country}`}
-                loading={i === 0 ? "eager" : "lazy"}
-                className="absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-out"
-                style={{ opacity: i === activeSlide ? 1 : 0 }}
-              />
-            ))}
-            <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-slate-900/75 via-slate-900/25 to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 md:p-7">
-              <div className="min-w-0">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/80">
-                  {current.region}
-                </p>
-                <h2 className="mt-1 text-2xl font-bold leading-tight text-white drop-shadow-sm md:text-3xl">
-                  {current.town}
-                </h2>
-                <p className="mt-0.5 text-xs text-white/70">{current.country}</p>
-                {"credit" in current && current.credit && (
-                  <p className="mt-1 text-[10px] uppercase tracking-[0.18em] text-white/55">
-                    {current.credit}
-                  </p>
-                )}
-              </div>
-              <div className="flex shrink-0 items-center gap-1.5 pb-1">
-                {TOWN_SLIDES.map((_, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    aria-label={`show slide ${i + 1}`}
-                    onClick={() => setActiveSlide(i)}
-                    className="h-1.5 rounded-full bg-white transition-all duration-500"
-                    style={{ width: i === activeSlide ? 22 : 6, opacity: i === activeSlide ? 1 : 0.55 }}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* INTRO COPY ─────────────────────────────────── */}
-        <section className="px-6 pt-6 pb-2 text-center md:px-10 md:pt-8">
-          <motion.div
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mx-auto max-w-xl space-y-4 text-[15px] leading-relaxed text-slate-700 md:text-base"
-            style={balance}
-          >
-            <p>
-              In town and wondering what it&rsquo;s like in the mountains?
-              <br />
-              <span className="font-semibold text-slate-900">Welcome to feelzlike.</span>
-            </p>
-            <p>
-              We&rsquo;ll show you real conditions for mountain travel, so you
-              can see the snow, the wind, the roads, and the live cams in one
-              place. No guessing, just the real picture from the town
-              you&rsquo;re in. You can also find places to stay, eat &amp; relax.
-            </p>
-            <p>
-              So far we&rsquo;ve mapped regions in Australia and selected
-              regions in Japan with more to come.
-            </p>
-            <p className="text-slate-900">
-              Enjoy the feelzlike journey from your town.
-            </p>
-          </motion.div>
-        </section>
 
         {/* CTA ────────────────────────────────────────── */}
         <section className="px-6 pt-6 pb-9 text-center md:pt-9 md:pb-16">
