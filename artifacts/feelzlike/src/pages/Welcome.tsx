@@ -3,6 +3,7 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { Link } from "wouter";
 import { markLandingVisited, readLastTown, type LastTown } from "@/lib/favouriteRegion";
 import logoFullColour from "/branding/logo-full-colour.png?url";
+import { NearYou } from "@/components/home/NearYou";
 import { HomeFooter } from "@/components/home/HomeFooter";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { websiteSchema, organizationSchema } from "@/lib/seo/jsonLd";
@@ -89,6 +90,9 @@ export default function Welcome() {
             real conditions for mountain travel
           </p>
         </header>
+
+        {/* NEAR YOU ─ location-first: local conditions + nearest region ─ */}
+        <NearYou />
 
         {/* HERO SLIDESHOW ─────────────────────────────── */}
         <section className="relative mx-4 overflow-hidden rounded-2xl bg-slate-100 md:mx-6">

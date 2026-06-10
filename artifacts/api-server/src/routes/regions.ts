@@ -1,4 +1,5 @@
 import { Router, type IRouter } from "express";
+import { LruTtlCache } from "../lib/lru-cache.js";
 
 const router: IRouter = Router();
 
@@ -412,6 +413,170 @@ router.get("/regions/_stats", (_req, res) => {
     stale_ms: STALE_MS,
     regions: REGIONS.map((r) => ({ id: r.id, status: r.status })),
   });
+});
+
+// ── Local weather (arbitrary coords) + nearest region ─────────────────────
+// Powers the location-first landing: given the visitor's GPS coordinates we
+// return (a) their current local conditions and (b) the nearest live mountain
+// region. Open-Meteo is the source for arbitrary coords - this is a plain
+// "where you are" reading (auto timezone, no elevation/model correction), not
+// a peak forecast. Results are cached by coarse (2dp ≈ 1.1km) coordinates so a
+// burst of nearby visitors stays a good citizen of Open-Meteo's shared quota.
+interface LocalCurrent {
+  tempC: number;
+  feelsLikeC: number;
+  windKph: number;
+  windDirection: string;
+  windDirectionDeg: number | null;
+  description: string;
+  weatherCode: number | null;
+  isDay: boolean;
+  observedAt: string;
+  source: string;
+}
+
+// Unlike the 6-key regions cache, this is keyed by an unbounded set of visitor
+// coordinates, so it must be bounded - the LRU caps memory and Open-Meteo quota
+// burn. Fresh for 10min; stale-but-servable for 6h so an upstream blip still
+// returns last-known local conditions.
+const localCache = new LruTtlCache<LocalCurrent>({
+  maxEntries: 5000,
+  freshMs: 10 * 60 * 1000,
+  staleMs: 6 * 60 * 60 * 1000,
+});
+
+function haversineKm(aLat: number, aLon: number, bLat: number, bLon: number): number {
+  const R = 6371;
+  const toRad = (d: number) => (d * Math.PI) / 180;
+  const dLat = toRad(bLat - aLat);
+  const dLon = toRad(bLon - aLon);
+  const h =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(aLat)) * Math.cos(toRad(bLat)) * Math.sin(dLon / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+
+function findNearestRegion(
+  lat: number,
+  lon: number,
+): { r: RegionConfig; distanceKm: number } | null {
+  let best: { r: RegionConfig; distanceKm: number } | null = null;
+  for (const r of REGIONS) {
+    if (r.status !== "live" || r.lat == null || r.lon == null) continue;
+    const distanceKm = haversineKm(lat, lon, r.lat, r.lon);
+    if (!best || distanceKm < best.distanceKm) best = { r, distanceKm };
+  }
+  return best;
+}
+
+async function fetchLocalCurrent(lat: number, lon: number): Promise<LocalCurrent | null> {
+  const params = new URLSearchParams({
+    latitude: String(lat),
+    longitude: String(lon),
+    current:
+      "temperature_2m,apparent_temperature,wind_speed_10m,wind_direction_10m,weather_code,is_day",
+    timezone: "auto",
+  });
+  try {
+    const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
+      signal: AbortSignal.timeout(8000),
+      headers: {
+        "User-Agent": "feelzlike/1.0 (mountain-weather-pwa; contact: hello@feelzlike.app)",
+      },
+    });
+    if (!res.ok) throw new Error(`Open-Meteo ${res.status}`);
+    const d: any = await res.json();
+    const cur = d.current ?? {};
+    const utcOffsetSec = Number.isFinite(d.utc_offset_seconds) ? Number(d.utc_offset_seconds) : 0;
+    const toIsoUtc = (localStr: string | undefined): string => {
+      if (!localStr) return new Date().toISOString();
+      const epochAsIfUtc = new Date(`${localStr}Z`).getTime();
+      if (Number.isNaN(epochAsIfUtc)) return new Date().toISOString();
+      return new Date(epochAsIfUtc - utcOffsetSec * 1000).toISOString();
+    };
+    const numOrNull = (v: unknown): number | null => (Number.isFinite(v) ? Number(v) : null);
+    const tempC = numOrNull(cur.temperature_2m);
+    if (tempC == null) return null;
+    const feelsLikeC = numOrNull(cur.apparent_temperature);
+    const windKph = numOrNull(cur.wind_speed_10m);
+    return {
+      tempC: Math.round(tempC),
+      feelsLikeC: feelsLikeC != null ? Math.round(feelsLikeC) : Math.round(tempC),
+      windKph: windKph != null ? Math.round(windKph) : 0,
+      windDirection: compass(cur.wind_direction_10m),
+      windDirectionDeg: numOrNull(cur.wind_direction_10m),
+      description: describe(cur.weather_code),
+      weatherCode: numOrNull(cur.weather_code),
+      isDay: cur.is_day === 1,
+      observedAt: toIsoUtc(cur.time),
+      source: "Open-Meteo",
+    };
+  } catch (err) {
+    console.warn("[local-weather] upstream fetch failed:", err);
+    return null;
+  }
+}
+
+router.get("/local-weather", async (req, res) => {
+  const lat = Number(req.query.latitude);
+  const lon = Number(req.query.longitude);
+  if (
+    !Number.isFinite(lat) ||
+    !Number.isFinite(lon) ||
+    lat < -90 ||
+    lat > 90 ||
+    lon < -180 ||
+    lon > 180
+  ) {
+    res.status(400).json({ error: "INVALID_COORDINATES" });
+    return;
+  }
+
+  try {
+    const key = `${lat.toFixed(2)},${lon.toFixed(2)}`;
+    const cached = localCache.get(key);
+    let current: LocalCurrent | null = cached?.fresh ? cached.value : null;
+    if (!current) {
+      const fresh = await fetchLocalCurrent(lat, lon);
+      if (fresh) {
+        localCache.set(key, fresh);
+        current = fresh;
+      } else if (cached) {
+        current = cached.value; // serve stale on upstream failure
+      }
+    }
+
+    const nearest = findNearestRegion(lat, lon);
+    const nearestRegion = nearest
+      ? {
+          id: nearest.r.id,
+          name: nearest.r.name,
+          country: nearest.r.country,
+          countryCode: nearest.r.countryCode,
+          href: nearest.r.href,
+          headlineLabel: nearest.r.headlineLabel,
+          distanceKm: Math.round(nearest.distanceKm),
+        }
+      : null;
+
+    if (!current && !nearestRegion) {
+      res.status(502).json({ error: "LOCAL_WEATHER_UNAVAILABLE" });
+      return;
+    }
+
+    // Per-visitor data keyed on their coordinates - mark private so shared
+    // CDNs/proxies never serve one person's location to another.
+    res.set("Cache-Control", "private, max-age=300");
+    res.json({
+      place: { latitude: lat, longitude: lon },
+      current,
+      nearestRegion,
+      generatedAt: new Date().toISOString(),
+    });
+  } catch (err) {
+    console.error("[local-weather] error:", err);
+    res.status(500).json({ error: "LOCAL_WEATHER_ERROR" });
+  }
 });
 
 export default router;
