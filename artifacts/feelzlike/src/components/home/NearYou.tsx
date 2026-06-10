@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import {
@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 import { track } from "@/lib/analytics";
+import { readLastTown } from "@/lib/favouriteRegion";
 
 // ── server payload (GET /api/local-weather) ────────────────────────
 interface LocalCurrent {
@@ -30,6 +31,8 @@ interface LocalCurrent {
   description: string;
   weatherCode: number | null;
   isDay: boolean;
+  todayMaxC: number | null;
+  todayMinC: number | null;
   observedAt: string;
   source: string;
 }
@@ -43,20 +46,88 @@ interface NearestRegion {
   distanceKm: number;
 }
 interface LocalWeatherResponse {
-  place: { latitude: number; longitude: number };
+  place: { latitude: number; longitude: number; name: string | null };
   current: LocalCurrent | null;
   nearestRegion: NearestRegion | null;
   generatedAt: string;
 }
 
-// Minimal slice of GET /api/regions we read to enrich the nearest-region row
-// with its current "feelzlike" temp. Shares the ["regions"] query cache with
-// the country picker so this never costs an extra request.
+// Slice of GET /api/regions we read to (a) enrich a region row with its current
+// "feelzlike" temp and (b) pick a fallback region when we don't have the
+// visitor's coordinates. Shares the ["regions"] query cache with the country
+// picker so this never costs an extra request.
+interface RegionLite {
+  id: string;
+  name: string;
+  href: string;
+  status: "live" | "soon";
+  headline: { feelsLikeC: number; tempC: number } | null;
+}
 interface RegionsLite {
-  regions: Array<{ id: string; headline: { feelsLikeC: number; tempC: number } | null }>;
+  regions: RegionLite[];
 }
 
-type GeoPhase = "locating" | "ready" | "denied" | "unsupported" | "error";
+// A region to surface as the tap-through. distanceKm is only set when we know
+// the visitor's location (the true "nearest" case); otherwise it's a softer
+// "suggested region" fallback so the row still works when location is off.
+interface SuggestedRegion {
+  id: string;
+  name: string;
+  href: string;
+  feelsLikeC: number | null;
+  distanceKm: number | null;
+}
+
+type GeoPhase =
+  | "checking" // working out the current permission state
+  | "prompt" // permission not yet granted -> show a one-tap "use my location"
+  | "locating" // actively resolving the position
+  | "ready" // have coords -> show local conditions
+  | "denied" // permission denied
+  | "unavailable" // a transient failure (timeout / position unavailable)
+  | "unsupported"; // browser has no geolocation at all
+
+// Remembered grant, used only when the browser lacks the Permissions API (older
+// Safari). With Permissions API present we trust the live permission state.
+const CONSENT_KEY = "feelzlike.geoConsent";
+// Last region we suggested, so a denied/offline returning visitor still gets a
+// sensible tap-through before any picker interaction.
+const LAST_NEAREST_KEY = "feelzlike.lastNearest";
+
+function readConsentGranted(): boolean {
+  try {
+    return localStorage.getItem(CONSENT_KEY) === "granted";
+  } catch {
+    return false;
+  }
+}
+function writeConsentGranted(): void {
+  try {
+    localStorage.setItem(CONSENT_KEY, "granted");
+  } catch {
+    /* private mode / storage disabled - non-fatal */
+  }
+}
+function readLastNearest(): NearestRegion | null {
+  try {
+    const raw = localStorage.getItem(LAST_NEAREST_KEY);
+    if (!raw) return null;
+    const p = JSON.parse(raw);
+    if (typeof p?.id === "string" && typeof p?.name === "string" && typeof p?.href === "string") {
+      return p as NearestRegion;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+function writeLastNearest(n: NearestRegion): void {
+  try {
+    localStorage.setItem(LAST_NEAREST_KEY, JSON.stringify(n));
+  } catch {
+    /* non-fatal */
+  }
+}
 
 // Open-Meteo WMO weather code -> lucide icon. Day/night only swaps the clear
 // glyph; everything else reads the same after dark.
@@ -77,17 +148,34 @@ const PANEL =
   "mx-4 overflow-hidden rounded-2xl border border-sky-100 bg-gradient-to-b from-sky-50/80 to-white shadow-[0_8px_30px_rgb(15,23,42,0.06)] md:mx-6";
 
 /**
- * Location-first landing block. On mount it asks for the visitor's location
- * and shows their current local conditions plus the nearest live mountain
- * region (a one-tap shortcut into it). Every state degrades gracefully - a
- * denial/timeout/unsupported browser collapses to a slim, low-emphasis row
- * (or nothing) so the "pick a country" flow below is always the fallback.
+ * Location-first landing block. It leads with the visitor's own current
+ * conditions (temperature, feels-like, conditions, today's range, wind) under a
+ * friendly place label, then offers the nearest live mountain region as a
+ * one-tap shortcut, then the "choose a region" picker continues below.
+ *
+ * Permission is handled without nagging: returning visitors are never
+ * auto-prompted. When permission is already granted we resolve silently; when
+ * it isn't, we show a single "use my location" tap instead of the weather card.
+ * Every state still surfaces a region suggestion (last-known or default) so the
+ * path into the mountains is always reachable.
  */
 export function NearYou() {
   const [coords, setCoords] = useState<{ lat: number; lon: number } | null>(null);
-  const [phase, setPhase] = useState<GeoPhase>("locating");
+  const [phase, setPhase] = useState<GeoPhase>("checking");
+  const [lastNearest, setLastNearest] = useState<NearestRegion | null>(null);
 
-  const requestLocation = useCallback(() => {
+  // Mirror of `phase` for the Permissions API onchange handler, so a grant that
+  // arrives right after the user's own tap doesn't re-trigger a request.
+  const phaseRef = useRef<GeoPhase>("checking");
+  useEffect(() => {
+    phaseRef.current = phase;
+  }, [phase]);
+
+  useEffect(() => {
+    setLastNearest(readLastNearest());
+  }, []);
+
+  const requestLocation = useCallback((userInitiated: boolean) => {
     if (typeof navigator === "undefined" || !("geolocation" in navigator)) {
       setPhase("unsupported");
       return;
@@ -97,17 +185,63 @@ export function NearYou() {
       (pos) => {
         setCoords({ lat: pos.coords.latitude, lon: pos.coords.longitude });
         setPhase("ready");
-        track("welcome_nearyou_located", { category: "weather" });
+        writeConsentGranted();
+        track("welcome_nearyou_located", {
+          category: "weather",
+          data: { initiated: userInitiated ? "tap" : "auto" },
+        });
       },
       (err) => {
-        setPhase(err.code === err.PERMISSION_DENIED ? "denied" : "error");
+        setPhase(err.code === err.PERMISSION_DENIED ? "denied" : "unavailable");
       },
       { enableHighAccuracy: false, timeout: 10000, maximumAge: 5 * 60 * 1000 },
     );
   }, []);
 
+  // Decide the opening behaviour from the *current* permission state so we never
+  // re-prompt a returning visitor. Granted -> resolve silently; prompt -> wait
+  // for an explicit tap; denied -> offer the tap but no auto-request.
   useEffect(() => {
-    requestLocation();
+    let cancelled = false;
+    if (typeof navigator === "undefined" || !("geolocation" in navigator)) {
+      setPhase("unsupported");
+      return;
+    }
+    const perms = (navigator as Navigator & { permissions?: Permissions }).permissions;
+    if (perms?.query) {
+      perms
+        .query({ name: "geolocation" as PermissionName })
+        .then((status) => {
+          if (cancelled) return;
+          const apply = (state: PermissionState) => {
+            // Skip if a tap is already resolving/resolved - avoids a flicker and
+            // a duplicate located event when onchange echoes the grant.
+            const busy = phaseRef.current === "locating" || phaseRef.current === "ready";
+            if (state === "granted") {
+              if (!busy) requestLocation(false);
+            } else if (state === "denied") {
+              setPhase("denied");
+            } else if (!busy) {
+              setPhase("prompt");
+            }
+          };
+          apply(status.state);
+          status.onchange = () => apply(status.state);
+        })
+        .catch(() => {
+          if (cancelled) return;
+          if (readConsentGranted()) requestLocation(false);
+          else setPhase("prompt");
+        });
+    } else if (readConsentGranted()) {
+      // No Permissions API: fall back to our own remembered grant.
+      requestLocation(false);
+    } else {
+      setPhase("prompt");
+    }
+    return () => {
+      cancelled = true;
+    };
   }, [requestLocation]);
 
   const localQuery = useQuery<LocalWeatherResponse>({
@@ -123,6 +257,8 @@ export function NearYou() {
     staleTime: 10 * 60 * 1000,
   });
 
+  // Always enabled (not gated on phase): the fallback region row needs this even
+  // when location is denied/unavailable.
   const regionsQuery = useQuery<RegionsLite>({
     queryKey: ["regions"],
     queryFn: async () => {
@@ -131,41 +267,73 @@ export function NearYou() {
       return res.json();
     },
     staleTime: 5 * 60 * 1000,
-    enabled: phase === "ready",
   });
 
-  // Nothing useful to show + no path to recover -> stay out of the way.
-  if (phase === "unsupported") return null;
+  // Persist the live nearest region so a future denied/offline visit can still
+  // suggest it.
+  const liveNearest = localQuery.data?.nearestRegion ?? null;
+  useEffect(() => {
+    if (liveNearest) {
+      writeLastNearest(liveNearest);
+      setLastNearest(liveNearest);
+    }
+  }, [liveNearest]);
 
-  if (phase === "denied" || phase === "error") {
-    return (
-      <section className="px-4 pt-4 md:px-6">
-        <div className={`${PANEL} flex items-center justify-between gap-3 px-4 py-3`}>
-          <p className="text-[13px] leading-snug text-slate-500">
-            {phase === "denied"
-              ? "location is off, so we can't show your local conditions"
-              : "we couldn't get your location just now"}
-          </p>
-          <button
-            type="button"
-            onClick={requestLocation}
-            className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-sky-200 bg-white px-3 py-1.5 text-[12px] font-semibold text-sky-700 transition-colors hover:border-sky-300 hover:bg-sky-50"
-          >
-            <LocateFixed className="h-3.5 w-3.5" />
-            try again
-          </button>
-        </div>
-      </section>
-    );
-  }
+  const regions = regionsQuery.data?.regions;
+  const tempFor = useCallback(
+    (id: string) => regions?.find((r) => r.id === id)?.headline?.feelsLikeC ?? null,
+    [regions],
+  );
+
+  // The region to surface. Prefer the true nearest (real distance); else fall
+  // back to last-known, then the user's last town, then the first live region.
+  const suggested = useMemo<SuggestedRegion | null>(() => {
+    if (liveNearest) {
+      return {
+        id: liveNearest.id,
+        name: liveNearest.name,
+        href: liveNearest.href,
+        feelsLikeC: tempFor(liveNearest.id),
+        distanceKm: liveNearest.distanceKm,
+      };
+    }
+    if (lastNearest) {
+      return {
+        id: lastNearest.id,
+        name: lastNearest.name,
+        href: lastNearest.href,
+        feelsLikeC: tempFor(lastNearest.id),
+        distanceKm: null,
+      };
+    }
+    const list = regions ?? [];
+    const lt = readLastTown();
+    const fromTown = lt ? list.find((r) => r.id === lt.regionId) : undefined;
+    const fallback = fromTown ?? list.find((r) => r.status === "live");
+    if (fallback) {
+      return {
+        id: fallback.id,
+        name: fallback.name,
+        href: fallback.href,
+        feelsLikeC: fallback.headline?.feelsLikeC ?? null,
+        distanceKm: null,
+      };
+    }
+    return null;
+  }, [liveNearest, lastNearest, regions, tempFor]);
 
   const local = localQuery.data?.current ?? null;
-  const nearest = localQuery.data?.nearestRegion ?? null;
-  const nearestTemp = nearest
-    ? regionsQuery.data?.regions.find((r) => r.id === nearest.id)?.headline?.feelsLikeC ?? null
-    : null;
+  const placeName = localQuery.data?.place?.name ?? null;
   const Icon = local ? weatherIcon(local.weatherCode, local.isDay) : Cloud;
-  const loading = phase === "locating" || (phase === "ready" && localQuery.isLoading);
+  const skeleton =
+    phase === "checking" ||
+    phase === "locating" ||
+    (phase === "ready" && localQuery.isLoading);
+  const showPrompt = phase === "prompt" || phase === "denied" || phase === "unavailable";
+
+  const todayRange: string[] = [];
+  if (local?.todayMaxC != null) todayRange.push(`high ${local.todayMaxC}\u00b0`);
+  if (local?.todayMinC != null) todayRange.push(`low ${local.todayMinC}\u00b0`);
 
   return (
     <section className="px-4 pt-4 md:px-6">
@@ -175,14 +343,14 @@ export function NearYou() {
         transition={{ duration: 0.45 }}
         className={PANEL}
       >
-        {/* LOCAL CONDITIONS ───────────────────────────── */}
+        {/* TOP: local conditions / loading / one-tap prompt ─────────── */}
         <div className="px-5 py-4">
           <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-sky-700/80">
             <MapPin className="h-3.5 w-3.5" />
-            where you are now
+            {phase === "ready" && placeName ? placeName.toLowerCase() : "where you are now"}
           </div>
 
-          {loading ? (
+          {skeleton ? (
             <div className="mt-3 flex items-center gap-4">
               <div className="h-12 w-12 animate-pulse rounded-full bg-sky-100" />
               <div className="space-y-2">
@@ -190,7 +358,7 @@ export function NearYou() {
                 <div className="h-3 w-40 animate-pulse rounded bg-slate-100" />
               </div>
             </div>
-          ) : local ? (
+          ) : phase === "ready" && local ? (
             <div className="mt-3 flex items-center gap-4">
               <Icon className="h-12 w-12 shrink-0 text-sky-500" strokeWidth={1.5} />
               <div className="min-w-0">
@@ -211,23 +379,57 @@ export function NearYou() {
                     </>
                   ) : null}
                 </p>
+                {todayRange.length > 0 ? (
+                  <p className="mt-0.5 text-[12px] tabular-nums text-slate-500">
+                    today &middot; {todayRange.join(" \u00b7 ")}
+                  </p>
+                ) : null}
               </div>
             </div>
-          ) : (
+          ) : phase === "ready" ? (
             <p className="mt-3 text-[13px] leading-snug text-slate-500">
               local conditions are unavailable right now
+            </p>
+          ) : showPrompt ? (
+            <div className="mt-3">
+              <p className="text-[13px] leading-snug text-slate-600">
+                {phase === "denied"
+                  ? "location is off, so we can't show your local conditions"
+                  : phase === "unavailable"
+                    ? "we couldn't get your location just now"
+                    : "see live conditions right where you are"}
+              </p>
+              <button
+                type="button"
+                onClick={() => requestLocation(true)}
+                className="mt-2.5 inline-flex items-center gap-1.5 rounded-full border border-sky-200 bg-white px-3.5 py-2 text-[12px] font-semibold text-sky-700 transition-colors hover:border-sky-300 hover:bg-sky-50"
+              >
+                <LocateFixed className="h-3.5 w-3.5" />
+                {phase === "unavailable" ? "try again" : "use my location"}
+              </button>
+              {phase === "denied" ? (
+                <p className="mt-2 text-[11px] leading-snug text-slate-400">
+                  you may need to allow location for this site in your browser
+                </p>
+              ) : null}
+            </div>
+          ) : (
+            // unsupported: no geolocation at all - no point offering a tap
+            <p className="mt-3 text-[13px] leading-snug text-slate-500">
+              this device can't share its location, but you can still explore the
+              mountains below
             </p>
           )}
         </div>
 
-        {/* NEAREST REGION ─────────────────────────────── */}
-        {nearest ? (
+        {/* REGION SUGGESTION (survives every state) ──────────────────── */}
+        {suggested ? (
           <Link
-            href={nearest.href}
+            href={suggested.href}
             onClick={() =>
               track("welcome_nearest_region_click", {
                 category: "navigation",
-                data: { region: nearest.id },
+                data: { region: suggested.id, kind: suggested.distanceKm != null ? "nearest" : "suggested" },
               })
             }
             className="group flex items-center justify-between gap-3 border-t border-sky-100 px-5 py-3.5 transition-colors hover:bg-sky-50/60"
@@ -236,15 +438,20 @@ export function NearYou() {
               <Mountain className="h-5 w-5 shrink-0 text-sky-600" strokeWidth={1.75} />
               <div className="min-w-0">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">
-                  nearest mountain region
+                  {suggested.distanceKm != null ? "nearest mountain region" : "suggested region"}
                 </p>
                 <p className="truncate text-[15px] font-semibold text-slate-900">
-                  {nearest.name.toLowerCase()}
+                  {suggested.name.toLowerCase()}
                 </p>
                 <p className="text-[12px] tabular-nums text-slate-500">
-                  {nearest.distanceKm.toLocaleString()} km away
-                  {typeof nearestTemp === "number" ? (
-                    <> &middot; feelzlike {nearestTemp}&deg;</>
+                  {suggested.distanceKm != null ? (
+                    <>{suggested.distanceKm.toLocaleString()} km away</>
+                  ) : null}
+                  {suggested.distanceKm != null && suggested.feelsLikeC != null ? " \u00b7 " : null}
+                  {suggested.feelsLikeC != null ? (
+                    <>feelzlike {suggested.feelsLikeC}&deg;</>
+                  ) : suggested.distanceKm == null ? (
+                    <>tap to explore the mountains</>
                   ) : null}
                 </p>
               </div>
@@ -254,10 +461,6 @@ export function NearYou() {
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </span>
           </Link>
-        ) : phase === "ready" && !loading ? (
-          <div className="border-t border-sky-100 px-5 py-3 text-[12px] text-slate-400">
-            pick a region below to explore the mountains
-          </div>
         ) : null}
       </motion.div>
     </section>

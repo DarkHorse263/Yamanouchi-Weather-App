@@ -431,6 +431,8 @@ interface LocalCurrent {
   description: string;
   weatherCode: number | null;
   isDay: boolean;
+  todayMaxC: number | null;
+  todayMinC: number | null;
   observedAt: string;
   source: string;
 }
@@ -443,6 +445,15 @@ const localCache = new LruTtlCache<LocalCurrent>({
   maxEntries: 5000,
   freshMs: 10 * 60 * 1000,
   staleMs: 6 * 60 * 60 * 1000,
+});
+
+// Reverse-geocoded place labels change far more slowly than weather, so they
+// get their own longer-lived bounded cache. Best-effort: a miss or failure just
+// means the client falls back to a neutral "where you are now" label.
+const placeNameCache = new LruTtlCache<string>({
+  maxEntries: 5000,
+  freshMs: 24 * 60 * 60 * 1000,
+  staleMs: 24 * 60 * 60 * 1000,
 });
 
 function haversineKm(aLat: number, aLon: number, bLat: number, bLon: number): number {
@@ -475,6 +486,8 @@ async function fetchLocalCurrent(lat: number, lon: number): Promise<LocalCurrent
     longitude: String(lon),
     current:
       "temperature_2m,apparent_temperature,wind_speed_10m,wind_direction_10m,weather_code,is_day",
+    daily: "temperature_2m_max,temperature_2m_min",
+    forecast_days: "1",
     timezone: "auto",
   });
   try {
@@ -499,6 +512,9 @@ async function fetchLocalCurrent(lat: number, lon: number): Promise<LocalCurrent
     if (tempC == null) return null;
     const feelsLikeC = numOrNull(cur.apparent_temperature);
     const windKph = numOrNull(cur.wind_speed_10m);
+    const daily = d.daily ?? {};
+    const todayMaxRaw = numOrNull(Array.isArray(daily.temperature_2m_max) ? daily.temperature_2m_max[0] : null);
+    const todayMinRaw = numOrNull(Array.isArray(daily.temperature_2m_min) ? daily.temperature_2m_min[0] : null);
     return {
       tempC: Math.round(tempC),
       feelsLikeC: feelsLikeC != null ? Math.round(feelsLikeC) : Math.round(tempC),
@@ -508,11 +524,39 @@ async function fetchLocalCurrent(lat: number, lon: number): Promise<LocalCurrent
       description: describe(cur.weather_code),
       weatherCode: numOrNull(cur.weather_code),
       isDay: cur.is_day === 1,
+      todayMaxC: todayMaxRaw != null ? Math.round(todayMaxRaw) : null,
+      todayMinC: todayMinRaw != null ? Math.round(todayMinRaw) : null,
       observedAt: toIsoUtc(cur.time),
       source: "Open-Meteo",
     };
   } catch (err) {
     console.warn("[local-weather] upstream fetch failed:", err);
+    return null;
+  }
+}
+
+// Friendly locality label for arbitrary coords via BigDataCloud's keyless
+// reverse-geocoder. Best-effort and non-blocking: any failure returns null and
+// the client falls back to a neutral label. Builds "Locality, Subdivision"
+// (e.g. "Jindabyne, New South Wales"), or the country name if finer detail is
+// missing.
+async function fetchPlaceName(lat: number, lon: number): Promise<string | null> {
+  try {
+    const res = await fetch(
+      `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`,
+      { signal: AbortSignal.timeout(6000) },
+    );
+    if (!res.ok) return null;
+    const d: any = await res.json();
+    const str = (v: unknown): string => (typeof v === "string" ? v.trim() : "");
+    const locality = str(d.city) || str(d.locality);
+    const region = str(d.principalSubdivision);
+    const country = str(d.countryName);
+    const parts = [locality, region].filter(Boolean);
+    if (parts.length > 0) return parts.join(", ");
+    return country || null;
+  } catch (err) {
+    console.warn("[local-weather] reverse-geocode failed:", err);
     return null;
   }
 }
@@ -534,17 +578,32 @@ router.get("/local-weather", async (req, res) => {
 
   try {
     const key = `${lat.toFixed(2)},${lon.toFixed(2)}`;
-    const cached = localCache.get(key);
-    let current: LocalCurrent | null = cached?.fresh ? cached.value : null;
-    if (!current) {
-      const fresh = await fetchLocalCurrent(lat, lon);
-      if (fresh) {
-        localCache.set(key, fresh);
-        current = fresh;
-      } else if (cached) {
-        current = cached.value; // serve stale on upstream failure
-      }
-    }
+    const cachedWeather = localCache.get(key);
+    const cachedName = placeNameCache.get(key);
+
+    // Resolve current conditions and the friendly place label together
+    // (cache-first, both best-effort) so a cold cache costs a single round-trip
+    // rather than two sequential ones.
+    const [current, placeName] = await Promise.all([
+      (async (): Promise<LocalCurrent | null> => {
+        if (cachedWeather?.fresh) return cachedWeather.value;
+        const fresh = await fetchLocalCurrent(lat, lon);
+        if (fresh) {
+          localCache.set(key, fresh);
+          return fresh;
+        }
+        return cachedWeather?.value ?? null; // serve stale on upstream failure
+      })(),
+      (async (): Promise<string | null> => {
+        if (cachedName?.fresh) return cachedName.value;
+        const fresh = await fetchPlaceName(lat, lon);
+        if (fresh) {
+          placeNameCache.set(key, fresh);
+          return fresh;
+        }
+        return cachedName?.value ?? null;
+      })(),
+    ]);
 
     const nearest = findNearestRegion(lat, lon);
     const nearestRegion = nearest
@@ -568,7 +627,7 @@ router.get("/local-weather", async (req, res) => {
     // CDNs/proxies never serve one person's location to another.
     res.set("Cache-Control", "private, max-age=300");
     res.json({
-      place: { latitude: lat, longitude: lon },
+      place: { latitude: lat, longitude: lon, name: placeName },
       current,
       nearestRegion,
       generatedAt: new Date().toISOString(),
