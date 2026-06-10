@@ -148,6 +148,11 @@ function weatherIcon(code: number | null, isDay: boolean): LucideIcon {
 const PANEL =
   "mx-4 overflow-hidden rounded-2xl border border-sky-100 bg-gradient-to-b from-sky-50/80 to-white shadow-[0_8px_30px_rgb(15,23,42,0.06)] md:mx-6";
 
+// Past this real distance the "nearest mountain region" framing reads oddly (a
+// visitor in Europe is ~16,000 km from the closest live region). Beyond it we
+// keep the honest distance but soften the copy so we never imply it's close.
+const FAR_REGION_KM = 1000;
+
 /**
  * Location-first landing block. It leads with the visitor's own current
  * conditions (temperature, feels-like, conditions, today's range, wind) under a
@@ -350,6 +355,10 @@ export function NearYou() {
     return null;
   }, [liveNearest, lastNearest, regions, tempFor]);
 
+  // Only meaningful for the true-nearest case (real distance known). When the
+  // closest live region is beyond the threshold we drop the "nearest" framing.
+  const isFar = suggested?.distanceKm != null && suggested.distanceKm >= FAR_REGION_KM;
+
   const local = localQuery.data?.current ?? null;
   const placeName = localQuery.data?.place?.name ?? null;
   const Icon = local ? weatherIcon(local.weatherCode, local.isDay) : Cloud;
@@ -481,7 +490,10 @@ export function NearYou() {
             onClick={() =>
               track("welcome_nearest_region_click", {
                 category: "navigation",
-                data: { region: suggested.id, kind: suggested.distanceKm != null ? "nearest" : "suggested" },
+                data: {
+                  region: suggested.id,
+                  kind: suggested.distanceKm != null ? (isFar ? "far" : "nearest") : "suggested",
+                },
               })
             }
             className="group flex items-center justify-between gap-3 border-t border-sky-100 px-5 py-3.5 transition-colors hover:bg-sky-50/60"
@@ -489,8 +501,17 @@ export function NearYou() {
             <div className="flex min-w-0 items-center gap-3">
               <Mountain className="h-5 w-5 shrink-0 text-sky-600" strokeWidth={1.75} />
               <div className="min-w-0">
+                {isFar ? (
+                  <p className="mb-1 text-[12px] leading-snug text-slate-500">
+                    the mountains are a long way from you, but here's where we cover
+                  </p>
+                ) : null}
                 <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">
-                  {suggested.distanceKm != null ? "nearest mountain region" : "suggested region"}
+                  {suggested.distanceKm == null
+                    ? "suggested region"
+                    : isFar
+                      ? "mountain region"
+                      : "nearest mountain region"}
                 </p>
                 <p className="truncate text-[15px] font-semibold text-slate-900">
                   {suggested.name.toLowerCase()}
