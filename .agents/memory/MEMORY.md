@@ -6,5 +6,6 @@
 - [feelzlike tsx test isolation](feelzlike-tsx-test-isolation.md) — pure logic needing `tsx --test` must NOT transitively import `@/regions` (PNG assets crash import); split pure file from catalog file.
 - [feelzlike town slug convention](feelzlike-town-slug-convention.md) — kebab ids (urls) vs snake slugs (dataset keys); convert via urlState helpers, never `as TownSlug` cast (silent empty lookups).
 - [feelzlike region readiness model](feelzlike-region-routing.md) — nav is town-scoped + data-gated; region-level subpage routes are direct-URL-only and must redirect to region home, never show a stub.
+- [feelzlike geolocation funnel](feelzlike-geolocation-funnel.md) — NearYou never auto-prompts; denied = re-enable guidance + reload (never silent retry); prompt/located/denied events measure grant rate.
 - [shell output token aliasing](shell-output-aliasing.md) — bash/rg/cat output in this env silently aliases some identifiers (NAV→ln, RegionStub→n); use the `read` tool for trustworthy content.
 - [monorepo project-reference rebuild](monorepo-project-reference-rebuild.md) — after codegen/schema edits, `tsc` consumers fail "no exported member" until you `tsc -b` the lib decls, even though dev server works.

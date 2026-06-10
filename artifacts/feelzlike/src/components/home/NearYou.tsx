@@ -14,6 +14,7 @@ import {
   MapPin,
   Moon,
   Mountain,
+  RotateCw,
   Sun,
   type LucideIcon,
 } from "lucide-react";
@@ -175,6 +176,18 @@ export function NearYou() {
     setLastNearest(readLastNearest());
   }, []);
 
+  // Funnel instrumentation: the one-tap entry impression is the denominator for
+  // measuring tap-through grant rate (welcome_nearyou_located with
+  // initiated:"tap") and the page-level grant rate (located vs page_view).
+  // Fire once per mount even if the phase briefly revisits "prompt".
+  const promptTrackedRef = useRef(false);
+  useEffect(() => {
+    if (phase === "prompt" && !promptTrackedRef.current) {
+      promptTrackedRef.current = true;
+      track("welcome_nearyou_prompt", { category: "weather" });
+    }
+  }, [phase]);
+
   const requestLocation = useCallback((userInitiated: boolean) => {
     if (typeof navigator === "undefined" || !("geolocation" in navigator)) {
       setPhase("unsupported");
@@ -192,7 +205,13 @@ export function NearYou() {
         });
       },
       (err) => {
-        setPhase(err.code === err.PERMISSION_DENIED ? "denied" : "unavailable");
+        const denied = err.code === err.PERMISSION_DENIED;
+        setPhase(denied ? "denied" : "unavailable");
+        track(denied ? "welcome_nearyou_denied" : "welcome_nearyou_unavailable", {
+          category: "weather",
+          level: "warning",
+          data: { initiated: userInitiated ? "tap" : "auto" },
+        });
       },
       { enableHighAccuracy: false, timeout: 10000, maximumAge: 5 * 60 * 1000 },
     );
@@ -226,6 +245,15 @@ export function NearYou() {
             }
           };
           apply(status.state);
+          // A returning visitor who already blocked us never makes a fresh
+          // request (so no error-callback event fires); record the impression
+          // once here so the funnel still sees them as a blocked outcome.
+          if (status.state === "denied") {
+            track("welcome_nearyou_denied", {
+              category: "weather",
+              data: { initiated: "check" },
+            });
+          }
           status.onchange = () => apply(status.state);
         })
         .catch(() => {
@@ -329,7 +357,10 @@ export function NearYou() {
     phase === "checking" ||
     phase === "locating" ||
     (phase === "ready" && localQuery.isLoading);
-  const showPrompt = phase === "prompt" || phase === "denied" || phase === "unavailable";
+  // A tap can plausibly succeed for "prompt" (first ask) and "unavailable"
+  // (transient failure). "denied" is intentionally excluded: re-requesting
+  // while hard-blocked re-fails silently, so it gets re-enable guidance instead.
+  const showTap = phase === "prompt" || phase === "unavailable";
 
   const todayRange: string[] = [];
   if (local?.todayMaxC != null) todayRange.push(`high ${local.todayMaxC}\u00b0`);
@@ -390,14 +421,12 @@ export function NearYou() {
             <p className="mt-3 text-[13px] leading-snug text-slate-500">
               local conditions are unavailable right now
             </p>
-          ) : showPrompt ? (
+          ) : showTap ? (
             <div className="mt-3">
               <p className="text-[13px] leading-snug text-slate-600">
-                {phase === "denied"
-                  ? "location is off, so we can't show your local conditions"
-                  : phase === "unavailable"
-                    ? "we couldn't get your location just now"
-                    : "see live conditions right where you are"}
+                {phase === "unavailable"
+                  ? "we couldn't get your location just now"
+                  : "see live conditions right where you are"}
               </p>
               <button
                 type="button"
@@ -405,13 +434,36 @@ export function NearYou() {
                 className="mt-2.5 inline-flex items-center gap-1.5 rounded-full border border-sky-200 bg-white px-3.5 py-2 text-[12px] font-semibold text-sky-700 transition-colors hover:border-sky-300 hover:bg-sky-50"
               >
                 <LocateFixed className="h-3.5 w-3.5" />
-                {phase === "unavailable" ? "try again" : "use my location"}
+                {phase === "unavailable" ? "try again" : "show my local conditions"}
               </button>
-              {phase === "denied" ? (
-                <p className="mt-2 text-[11px] leading-snug text-slate-400">
-                  you may need to allow location for this site in your browser
-                </p>
-              ) : null}
+            </div>
+          ) : phase === "denied" ? (
+            // Hard-blocked: a retry would re-fail silently, so guide the visitor
+            // through re-enabling and offer a reload (which re-checks permission)
+            // rather than a button that quietly does nothing.
+            <div className="mt-3">
+              <p className="text-[13px] leading-snug text-slate-600">
+                location is blocked for this site, so we can't show your local
+                conditions
+              </p>
+              <p className="mt-1.5 text-[12px] leading-snug text-slate-500">
+                tap the location icon in your browser's address bar, choose allow,
+                then reload
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  track("welcome_nearyou_reload", { category: "weather" });
+                  window.location.reload();
+                }}
+                className="mt-2.5 inline-flex items-center gap-1.5 rounded-full border border-sky-200 bg-white px-3.5 py-2 text-[12px] font-semibold text-sky-700 transition-colors hover:border-sky-300 hover:bg-sky-50"
+              >
+                <RotateCw className="h-3.5 w-3.5" />
+                reload
+              </button>
+              <span className="ml-2 text-[12px] text-slate-400">
+                or explore the mountains below
+              </span>
             </div>
           ) : (
             // unsupported: no geolocation at all - no point offering a tap
