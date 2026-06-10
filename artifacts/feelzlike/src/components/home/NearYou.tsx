@@ -387,8 +387,13 @@ export function NearYou() {
         <div className="px-5 py-4">
           <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-sky-700/80">
             <MapPin className="h-3.5 w-3.5" />
-            {phase === "ready" && placeName ? placeName.toLowerCase() : "where you are now"}
+            your current location
           </div>
+          {phase === "ready" && placeName ? (
+            <p className="mt-1 text-[13px] font-medium text-slate-700">
+              {placeName.toLowerCase()}
+            </p>
+          ) : null}
 
           {skeleton ? (
             <div className="mt-3 flex items-center gap-4">
