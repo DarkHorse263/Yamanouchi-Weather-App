@@ -109,6 +109,12 @@ export function useTownWeather(lat: number | undefined, lng: number | undefined)
     queryKey: ["town-weather", lat, lng],
     enabled: lat !== undefined && lng !== undefined,
     staleTime: 5 * 60 * 1000,
+    // Open-Meteo (free tier) occasionally blips or runs slow. The server already
+    // serves stale-on-error for known towns, but uncached visitor coords get a
+    // real 502/503. Cap retries at 1 so a genuine outage surfaces an error in
+    // bounded time (~16s worst case) instead of react-query's default 3 retries
+    // spinning for ~40s · which reads as a frozen "loading" hang.
+    retry: 1,
     queryFn: async () => {
       const res = await fetch(`/api/town-weather?lat=${lat}&lng=${lng}`);
       if (!res.ok) throw new Error(`town-weather ${res.status}`);

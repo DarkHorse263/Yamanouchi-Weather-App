@@ -282,11 +282,37 @@ export default function NearYouWeather() {
             </Link>
           </div>
         ) : weather.isLoading || (phase === "ready" && !weather.data && !weather.isError) ? (
-          <p className="mt-8 text-muted-foreground">loading weather…</p>
+          <p className="mt-8 text-muted-foreground">loading the forecast…</p>
         ) : weather.isError || !weather.data ? (
-          <p className="mt-8 text-muted-foreground">
-            weather data unavailable right now.
-          </p>
+          <div className="mt-8 rounded-2xl border border-border bg-white p-6 max-w-md">
+            <p className="text-[14px] leading-snug text-slate-600">
+              the weather service is being slow right now, so we couldn&rsquo;t
+              load your forecast
+            </p>
+            <button
+              type="button"
+              onClick={() => weather.refetch()}
+              disabled={weather.isFetching}
+              className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-sky-200 bg-white px-4 py-2 text-[13px] font-semibold text-sky-700 transition-colors hover:border-sky-300 hover:bg-sky-50 disabled:opacity-60"
+            >
+              <RotateCw className={`h-4 w-4 ${weather.isFetching ? "animate-spin" : ""}`} />
+              {weather.isFetching ? "trying…" : "try again"}
+            </button>
+            {nearest && (
+              <Link
+                href={nearest.href}
+                onClick={() =>
+                  track("near_you_page_region_click", {
+                    category: "navigation",
+                    data: { region: nearest.id, from: "error" },
+                  })
+                }
+                className="mt-4 block text-[13px] font-semibold text-sky-700 hover:text-sky-900"
+              >
+                or see {nearest.name.toLowerCase()} instead
+              </Link>
+            )}
+          </div>
         ) : (
           <>
             {weather.data._stale && <StaleNotice meta={weather.data._stale} t={t} />}
