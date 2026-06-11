@@ -10,6 +10,7 @@ import {
   CloudRain,
   CloudSnow,
   Cloudy,
+  Globe2,
   LocateFixed,
   MapPin,
   Moon,
@@ -536,6 +537,33 @@ export function NearYou() {
             </div>
             <span className="inline-flex shrink-0 items-center gap-1 text-[12px] font-semibold text-sky-700 group-hover:text-sky-900">
               see
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </span>
+          </Link>
+        ) : null}
+
+        {/* FAR VISITORS: when the closest live region is thousands of km away,
+            nudging toward that one distant region is a poor next step. Offer a
+            one-tap shortcut into the full country/region picker so they can jump
+            straight to where they actually care about. Only renders when isFar
+            (which already implies a known distance / suggested region above). */}
+        {isFar ? (
+          <Link
+            href="/countries"
+            onClick={() =>
+              track("welcome_see_all_areas_click", {
+                category: "navigation",
+                data: { from: "nearyou_far", region: suggested?.id },
+              })
+            }
+            className="group flex items-center justify-between gap-3 border-t border-sky-100 px-5 py-3 transition-colors hover:bg-sky-50/60"
+          >
+            <span className="inline-flex min-w-0 items-center gap-3 text-[13px] font-semibold text-slate-700">
+              <Globe2 className="h-5 w-5 shrink-0 text-sky-600" strokeWidth={1.75} />
+              see all areas we cover
+            </span>
+            <span className="inline-flex shrink-0 items-center gap-1 text-[12px] font-semibold text-sky-700 group-hover:text-sky-900">
+              pick
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </span>
           </Link>
