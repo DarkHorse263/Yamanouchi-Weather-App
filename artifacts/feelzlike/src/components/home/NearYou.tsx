@@ -22,6 +22,7 @@ import {
 import { Link } from "wouter";
 import { track } from "@/lib/analytics";
 import { readLastTown } from "@/lib/favouriteRegion";
+import { classifyRegionProximity } from "@/lib/regionProximity";
 
 // ── server payload (GET /api/local-weather) ────────────────────────
 interface LocalCurrent {
@@ -148,11 +149,6 @@ function weatherIcon(code: number | null, isDay: boolean): LucideIcon {
 
 const PANEL =
   "mx-4 overflow-hidden rounded-2xl border border-sky-100 bg-gradient-to-b from-sky-50/80 to-white shadow-[0_8px_30px_rgb(15,23,42,0.06)] md:mx-6";
-
-// Past this real distance the "nearest mountain region" framing reads oddly (a
-// visitor in Europe is ~16,000 km from the closest live region). Beyond it we
-// keep the honest distance but soften the copy so we never imply it's close.
-const FAR_REGION_KM = 1000;
 
 /**
  * Location-first landing block. It leads with the visitor's own current
@@ -358,7 +354,8 @@ export function NearYou() {
 
   // Only meaningful for the true-nearest case (real distance known). When the
   // closest live region is beyond the threshold we drop the "nearest" framing.
-  const isFar = suggested?.distanceKm != null && suggested.distanceKm >= FAR_REGION_KM;
+  const proximity = classifyRegionProximity(suggested?.distanceKm ?? null);
+  const isFar = proximity === "far";
 
   const local = localQuery.data?.current ?? null;
   const placeName = localQuery.data?.place?.name ?? null;
@@ -498,7 +495,7 @@ export function NearYou() {
                 category: "navigation",
                 data: {
                   region: suggested.id,
-                  kind: suggested.distanceKm != null ? (isFar ? "far" : "nearest") : "suggested",
+                  kind: proximity,
                 },
               })
             }

@@ -17,7 +17,8 @@
     "test:windHold": "tsx --test src/lib/__tests__/windHoldPrediction.test.ts",
     "test:powderFactor": "tsx --test src/lib/__tests__/powderFactor.test.ts",
     "test:tripPlanner": "tsx --test src/lib/__tests__/tripPlanner.test.ts",
-    "test:all": "tsx --test src/lib/__tests__/mountainScore.test.ts src/lib/__tests__/windHoldPrediction.test.ts src/lib/__tests__/powderFactor.test.ts src/lib/__tests__/tripPlanner.test.ts"
+    "test:regionProximity": "tsx --test src/lib/__tests__/regionProximity.test.ts",
+    "test:all": "tsx --test src/lib/__tests__/mountainScore.test.ts src/lib/__tests__/windHoldPrediction.test.ts src/lib/__tests__/powderFactor.test.ts src/lib/__tests__/tripPlanner.test.ts src/lib/__tests__/regionProximity.test.ts"
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.10.0",
