@@ -391,7 +391,16 @@ export function NearYou() {
               </div>
             </div>
           ) : phase === "ready" && local ? (
-            <div className="mt-3 flex items-center gap-4">
+            // Tap-through to the full local-weather page (forecast + radar).
+            // Permission is already granted here, so that page resolves coords
+            // silently on arrival.
+            <Link
+              href="/near-you"
+              onClick={() =>
+                track("welcome_nearyou_open", { category: "navigation" })
+              }
+              className="group mt-3 flex items-center gap-4"
+            >
               <Icon className="h-12 w-12 shrink-0 text-sky-500" strokeWidth={1.5} />
               <div className="min-w-0">
                 <div className="flex items-baseline gap-2">
@@ -416,8 +425,12 @@ export function NearYou() {
                     today &middot; {todayRange.join(" \u00b7 ")}
                   </p>
                 ) : null}
+                <p className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-semibold text-sky-700">
+                  see radar &amp; full forecast
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                </p>
               </div>
-            </div>
+            </Link>
           ) : phase === "ready" ? (
             <p className="mt-3 text-[13px] leading-snug text-slate-500">
               local conditions are unavailable right now

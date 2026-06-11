@@ -20,6 +20,7 @@ import AlertsUnsubscribed from "@/pages/alerts/Unsubscribed";
 import NewsletterVerify from "@/pages/newsletter/Verify";
 import NewsletterUnsubscribed from "@/pages/newsletter/Unsubscribed";
 import CountryHome from "@/pages/CountryHome";
+import NearYouWeather from "@/pages/NearYouWeather";
 import Privacy from "@/pages/legal/Privacy";
 import Terms from "@/pages/legal/Terms";
 // News & updates hidden until the feed is populated · the /news route below
@@ -39,6 +40,10 @@ function Router() {
       <Route path="/" component={Welcome} />
       <Route path="/countries" component={Countries} />
       <Route path="/countries/" component={Countries} />
+      {/* Visitor's own local weather + radar · mounted before the /:region
+          catch-all so /near-you isn't parsed as a region slug. */}
+      <Route path="/near-you" component={NearYouWeather} />
+      <Route path="/near-you/" component={NearYouWeather} />
       {/* Top-level alert pages - must come BEFORE the /:region catch-all so
           tokenised email links don't get parsed as a region. */}
       <Route path="/alerts/verify" component={AlertsVerify} />
