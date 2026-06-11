@@ -101,6 +101,11 @@ export function WeatherHero({
                 </>
               )}
             </p>
+            {current.observationSource && (
+              <p className="text-xs text-muted-foreground/60 mt-1">
+                observed · {current.observationSource.replace(/^JMA AMeDAS · /, "")}
+              </p>
+            )}
           </div>
         </div>
         <div className="ml-auto text-right">

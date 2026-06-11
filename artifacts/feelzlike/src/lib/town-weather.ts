@@ -21,6 +21,13 @@ export interface TownWeatherCurrent {
   visibility: number | null;
   uvIndex: number | null;
   dewpoint: number | null;
+  /**
+   * Set only when the model's current condition was reconciled against a real
+   * JMA AMeDAS surface observation (JP, dry->wet). Format "JMA AMeDAS · {station}".
+   * Absent/null means the condition is the raw forecast model. Drives the small
+   * "observed" provenance tag in WeatherHero.
+   */
+  observationSource?: string | null;
 }
 
 export interface TownWeatherHourly {

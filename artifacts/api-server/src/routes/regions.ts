@@ -1,6 +1,7 @@
 import { Router, type IRouter } from "express";
 import { LruTtlCache } from "../lib/lru-cache.js";
 import { fetchOpenWeatherMapAsOpenMeteo } from "../lib/openweathermap.js";
+import { reconcileDryToWet } from "../lib/amedas.js";
 
 const router: IRouter = Router();
 
@@ -368,6 +369,24 @@ async function fetchHeadlineUpstream(r: RegionConfig): Promise<HeadlineReading |
       }),
     };
 
+    // JMA AMeDAS reconciliation: correct a "clear" headline when a nearby
+    // Japanese station is actually reporting rain/snow at this moment.
+    if (r.countryCode === "JP" && r.lat != null && r.lon != null) {
+      const override = await reconcileDryToWet({
+        lat: r.lat,
+        lon: r.lon,
+        modelWeatherCode: headline.weatherCode,
+        tempC: headline.tempC,
+        refElevationM: numOrNull(d.elevation) ?? r.elevation ?? null,
+      });
+      if (override) {
+        headline.weatherCode = override.weatherCode;
+        headline.description = describe(override.weatherCode);
+        headline.source = `JMA AMeDAS \u00b7 ${override.stationName}`;
+        headline.observedAt = override.observedAt;
+      }
+    }
+
     return headline;
   } catch (err) {
     console.warn(`[regions] upstream fetch failed for ${r.id}:`, err);
@@ -481,6 +500,34 @@ function findNearestRegion(
   return best;
 }
 
+// Reconcile a model-derived current reading against real JMA AMeDAS surface
+// observations. When the model claims dry but a nearby Japanese station is
+// actually wet, swap in the observed condition (and credit the station) so the
+// headline never says "clear" while it rains. No-op outside Japan / when the
+// model already shows precipitation. Best-effort: any failure returns as-is.
+async function applyObservedOverride(
+  current: LocalCurrent,
+  lat: number,
+  lon: number,
+  refElevationM: number | null,
+): Promise<LocalCurrent> {
+  const override = await reconcileDryToWet({
+    lat,
+    lon,
+    modelWeatherCode: current.weatherCode,
+    tempC: current.tempC,
+    refElevationM,
+  });
+  if (!override) return current;
+  return {
+    ...current,
+    weatherCode: override.weatherCode,
+    description: describe(override.weatherCode),
+    source: `JMA AMeDAS \u00b7 ${override.stationName}`,
+    observedAt: override.observedAt,
+  };
+}
+
 async function fetchLocalCurrentFromOpenMeteo(
   lat: number,
   lon: number,
@@ -519,7 +566,7 @@ async function fetchLocalCurrentFromOpenMeteo(
     const daily = d.daily ?? {};
     const todayMaxRaw = numOrNull(Array.isArray(daily.temperature_2m_max) ? daily.temperature_2m_max[0] : null);
     const todayMinRaw = numOrNull(Array.isArray(daily.temperature_2m_min) ? daily.temperature_2m_min[0] : null);
-    return {
+    const base: LocalCurrent = {
       tempC: Math.round(tempC),
       feelsLikeC: feelsLikeC != null ? Math.round(feelsLikeC) : Math.round(tempC),
       windKph: windKph != null ? Math.round(windKph) : 0,
@@ -533,6 +580,9 @@ async function fetchLocalCurrentFromOpenMeteo(
       observedAt: toIsoUtc(cur.time),
       source: "Open-Meteo",
     };
+    // Open-Meteo returns the grid-cell elevation; use it to prefer same-altitude
+    // stations when reconciling against observations.
+    return applyObservedOverride(base, lat, lon, numOrNull(d.elevation));
   } catch (err) {
     console.warn("[local-weather] upstream fetch failed:", err);
     return null;
@@ -561,7 +611,7 @@ async function fetchLocalCurrentFromOwm(
     const daily = om.daily ?? {};
     const todayMaxRaw = numOrNull(Array.isArray(daily.temperature_2m_max) ? daily.temperature_2m_max[0] : null);
     const todayMinRaw = numOrNull(Array.isArray(daily.temperature_2m_min) ? daily.temperature_2m_min[0] : null);
-    return {
+    const base: LocalCurrent = {
       tempC: Math.round(tempC),
       feelsLikeC: feelsLikeC != null ? Math.round(feelsLikeC) : Math.round(tempC),
       windKph: windKph != null ? Math.round(windKph) : 0,
@@ -575,6 +625,8 @@ async function fetchLocalCurrentFromOwm(
       observedAt: new Date().toISOString(),
       source: "OpenWeatherMap",
     };
+    // No grid elevation on the OWM path; reconcile by distance alone.
+    return applyObservedOverride(base, lat, lon, null);
   } catch (err) {
     console.warn("[local-weather] OWM fallback failed:", err);
     return null;

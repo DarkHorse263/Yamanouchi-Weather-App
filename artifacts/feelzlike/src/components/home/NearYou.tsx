@@ -420,6 +420,11 @@ export function NearYou() {
                     </>
                   ) : null}
                 </p>
+                {local.source && local.source.startsWith("JMA AMeDAS") ? (
+                  <p className="mt-0.5 text-[11px] text-slate-400">
+                    observed &middot; {local.source.replace(/^JMA AMeDAS \u00b7 /, "")}
+                  </p>
+                ) : null}
                 {todayRange.length > 0 ? (
                   <p className="mt-0.5 text-[12px] tabular-nums text-slate-500">
                     today &middot; {todayRange.join(" \u00b7 ")}

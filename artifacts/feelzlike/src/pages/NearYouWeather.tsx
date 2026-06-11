@@ -133,6 +133,9 @@ function localToHeroCurrent(c: LocalCurrent): TownWeatherCurrent {
     visibility: null,
     uvIndex: null,
     dewpoint: null,
+    // Surface provenance only when it's a real observation, not a model source
+    // ("Open-Meteo"/"OpenWeatherMap"). Lets WeatherHero show the "observed" tag.
+    observationSource: c.source && c.source.startsWith("JMA AMeDAS") ? c.source : null,
   };
 }
 

@@ -1,4 +1,5 @@
 import { Router, type IRouter } from "express";
+import { reconcileDryToWet, isInJapan } from "../lib/amedas.js";
 
 const router: IRouter = Router();
 
@@ -183,6 +184,33 @@ router.get("/town-weather", async (req, res) => {
       hourly: pickHourly(hourly),
       daily: pickDaily(daily),
     };
+
+    // JMA AMeDAS reconciliation: when the model's current block says dry but a
+    // nearby Japanese station is actually wet, correct the condition (and the
+    // precipitation number) so the icon, description and rainfall agree with
+    // what's really falling. JP-only; no-op elsewhere / when already wet.
+    if (isInJapan(lat, lng)) {
+      const override = await reconcileDryToWet({
+        lat,
+        lon: lng,
+        modelWeatherCode: payload.current.weatherCode,
+        tempC: payload.current.temperature,
+        refElevationM: numOrNull((d as { elevation?: number }).elevation),
+      });
+      if (override) {
+        const obsMm = Math.round(override.rateMmh * 10) / 10;
+        payload.current.weatherCode = override.weatherCode;
+        payload.current.weatherDescription = describe(override.weatherCode);
+        (payload.current as Record<string, unknown>).observationSource =
+          `JMA AMeDAS \u00b7 ${override.stationName}`;
+        if (!(payload.current.precipitation && payload.current.precipitation > 0)) {
+          payload.current.precipitation = obsMm;
+        }
+        if (override.weatherCode < 70 && !(payload.current.rain && payload.current.rain > 0)) {
+          payload.current.rain = obsMm;
+        }
+      }
+    }
 
     rememberFresh(cacheKey, payload);
     res.setHeader("Cache-Control", "public, max-age=600, s-maxage=600");

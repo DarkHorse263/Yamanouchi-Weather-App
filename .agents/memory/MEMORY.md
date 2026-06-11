@@ -1,11 +1,12 @@
 - [feelzlike brand voice](feelzlike-brand-voice.md) — lowercase, middot · required (NOT forbidden), no em/en dashes, no emojis, DIN Pro, sky/blue.
 - [feelzlike radar stability](feelzlike-radar-stability.md) — never reintroduce a cross-Replit iframe as the primary radar; in-repo RadarMap with independent layers is the durable pattern.
 - [feelzlike map cross-region](feelzlike-map-cross-region.md) — interactive RadarMap shows ALL same-country towns/resorts (AU/JP grouped), not region-only; local REGION_COUNTRY duplicates registry on purpose.
-- [feelzlike weather source fallback](feelzlike-weather-source-fallback.md) — non-BOM needs OWM fallback reshaped to Open-Meteo; serve-stale cache is load-shedding; visitor /near-you must degrade per-section (radar from coords always; cheap current vs expensive forecast fail independently).
+- [feelzlike weather source fallback](feelzlike-weather-source-fallback.md) — non-BOM needs OWM fallback reshaped to Open-Meteo; serve-stale cache is load-shedding; /near-you degrades per-section.
+- [feelzlike observation reconciliation](feelzlike-observation-reconciliation.md) — "sunny while raining" is model lag; fix is JP-only dry->wet JMA AMeDAS override w/ elevation-aware station pick, fail-soft.
 - [feelzlike premium promo](feelzlike-premium-promo.md) — promo window has BOTH start + end, date-only env vars must be parsed as LOCAL time, client gating is preview-only · server `requireEntitlement` is the paywall.
 - [feelzlike tsx test isolation](feelzlike-tsx-test-isolation.md) — pure logic needing `tsx --test` must NOT transitively import `@/regions` (PNG assets crash import); split pure file from catalog file.
 - [feelzlike town slug convention](feelzlike-town-slug-convention.md) — kebab ids (urls) vs snake slugs (dataset keys); convert via urlState helpers, never `as TownSlug` cast (silent empty lookups).
 - [feelzlike region readiness model](feelzlike-region-routing.md) — nav is town-scoped + data-gated; region-level subpage routes are direct-URL-only and must redirect to region home, never show a stub.
-- [feelzlike geolocation funnel](feelzlike-geolocation-funnel.md) — NearYou never auto-prompts; denied = re-enable guidance + reload (never silent retry); prompt/located/denied events measure grant rate.
+- [feelzlike geolocation funnel](feelzlike-geolocation-funnel.md) — NearYou never auto-prompts; denied = re-enable guidance + reload, never silent retry.
 - [shell output token aliasing](shell-output-aliasing.md) — bash/rg/cat output in this env silently aliases some identifiers (NAV→ln, RegionStub→n); use the `read` tool for trustworthy content.
 - [monorepo project-reference rebuild](monorepo-project-reference-rebuild.md) — after codegen/schema edits, `tsc` consumers fail "no exported member" until you `tsc -b` the lib decls, even though dev server works.
