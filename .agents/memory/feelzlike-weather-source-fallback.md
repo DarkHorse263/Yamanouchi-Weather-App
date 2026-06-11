@@ -60,6 +60,12 @@ whole page on the heaviest request.
 - Distinguish loading from error per query: only show an "unavailable" notice on
   `query.isError`, never merely on `!query.data` (the in-flight gap would flash a
   false error after the hero already rendered).
+- The "always a fallback behind Open-Meteo" rule applies to EVERY Open-Meteo call
+  path, not just the town forecast route. Any direct Open-Meteo fetch you add (e.g.
+  the cheap visitor current-conditions endpoint) must route through the same
+  OpenWeatherMap fallback reshaper, or it fails in isolation when the egress IP is
+  throttled while other pages still work — surfacing as "local conditions are
+  unavailable right now" to visitors even though town pages are fine.
 
 **Why:** repeated "the /near-you page just hangs on loading weather" complaints.
 Town pages survive Open-Meteo throttling via the warm 6h serve-stale cache keyed

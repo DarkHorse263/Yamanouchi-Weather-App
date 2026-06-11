@@ -1,5 +1,6 @@
 import { Router, type IRouter } from "express";
 import { LruTtlCache } from "../lib/lru-cache.js";
+import { fetchOpenWeatherMapAsOpenMeteo } from "../lib/openweathermap.js";
 
 const router: IRouter = Router();
 
@@ -480,7 +481,10 @@ function findNearestRegion(
   return best;
 }
 
-async function fetchLocalCurrent(lat: number, lon: number): Promise<LocalCurrent | null> {
+async function fetchLocalCurrentFromOpenMeteo(
+  lat: number,
+  lon: number,
+): Promise<LocalCurrent | null> {
   const params = new URLSearchParams({
     latitude: String(lat),
     longitude: String(lon),
@@ -533,6 +537,57 @@ async function fetchLocalCurrent(lat: number, lon: number): Promise<LocalCurrent
     console.warn("[local-weather] upstream fetch failed:", err);
     return null;
   }
+}
+
+// OpenWeatherMap fallback for current conditions. Open-Meteo throttles the
+// Replit egress IP for sustained periods, and a cold visitor's unique coords
+// have no warm cache to serve from, so the cheap local-current request must
+// have the same fallback the town pages already use. Reuses the shared
+// reshaper (Open-Meteo object shape) and pulls just the current + today's
+// range out of it.
+async function fetchLocalCurrentFromOwm(
+  lat: number,
+  lon: number,
+): Promise<LocalCurrent | null> {
+  try {
+    const om = await fetchOpenWeatherMapAsOpenMeteo({ latitude: lat, longitude: lon });
+    if (!om) return null;
+    const cur = om.current ?? {};
+    const numOrNull = (v: unknown): number | null => (Number.isFinite(v) ? Number(v) : null);
+    const tempC = numOrNull(cur.temperature_2m);
+    if (tempC == null) return null;
+    const feelsLikeC = numOrNull(cur.apparent_temperature);
+    const windKph = numOrNull(cur.wind_speed_10m); // already km/h from the reshaper
+    const daily = om.daily ?? {};
+    const todayMaxRaw = numOrNull(Array.isArray(daily.temperature_2m_max) ? daily.temperature_2m_max[0] : null);
+    const todayMinRaw = numOrNull(Array.isArray(daily.temperature_2m_min) ? daily.temperature_2m_min[0] : null);
+    return {
+      tempC: Math.round(tempC),
+      feelsLikeC: feelsLikeC != null ? Math.round(feelsLikeC) : Math.round(tempC),
+      windKph: windKph != null ? Math.round(windKph) : 0,
+      windDirection: compass(cur.wind_direction_10m),
+      windDirectionDeg: numOrNull(cur.wind_direction_10m),
+      description: describe(cur.weather_code),
+      weatherCode: numOrNull(cur.weather_code),
+      isDay: cur.is_day === 1,
+      todayMaxC: todayMaxRaw != null ? Math.round(todayMaxRaw) : null,
+      todayMinC: todayMinRaw != null ? Math.round(todayMinRaw) : null,
+      observedAt: new Date().toISOString(),
+      source: "OpenWeatherMap",
+    };
+  } catch (err) {
+    console.warn("[local-weather] OWM fallback failed:", err);
+    return null;
+  }
+}
+
+// Resolve current conditions for arbitrary visitor coords, Open-Meteo first
+// with an OpenWeatherMap fallback. Never let a single degraded upstream leave
+// the visitor with "local conditions unavailable" when the other source works.
+async function fetchLocalCurrent(lat: number, lon: number): Promise<LocalCurrent | null> {
+  const direct = await fetchLocalCurrentFromOpenMeteo(lat, lon);
+  if (direct) return direct;
+  return fetchLocalCurrentFromOwm(lat, lon);
 }
 
 // Friendly locality label for arbitrary coords via BigDataCloud's keyless
