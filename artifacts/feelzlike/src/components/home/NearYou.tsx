@@ -14,7 +14,6 @@ import {
   LocateFixed,
   MapPin,
   Moon,
-  Mountain,
   RotateCw,
   Sun,
   type LucideIcon,
@@ -23,6 +22,7 @@ import { Link } from "wouter";
 import { track } from "@/lib/analytics";
 import { readLastTown } from "@/lib/favouriteRegion";
 import { classifyRegionProximity } from "@/lib/regionProximity";
+import { NearYouRegionRow, type SuggestedRegion } from "./NearYouRegionRow";
 
 // ── server payload (GET /api/local-weather) ────────────────────────
 interface LocalCurrent {
@@ -68,17 +68,6 @@ interface RegionLite {
 }
 interface RegionsLite {
   regions: RegionLite[];
-}
-
-// A region to surface as the tap-through. distanceKm is only set when we know
-// the visitor's location (the true "nearest" case); otherwise it's a softer
-// "suggested region" fallback so the row still works when location is off.
-interface SuggestedRegion {
-  id: string;
-  name: string;
-  href: string;
-  feelsLikeC: number | null;
-  distanceKm: number | null;
 }
 
 type GeoPhase =
@@ -488,9 +477,9 @@ export function NearYou() {
 
         {/* REGION SUGGESTION (survives every state) ──────────────────── */}
         {suggested ? (
-          <Link
-            href={suggested.href}
-            onClick={() =>
+          <NearYouRegionRow
+            suggested={suggested}
+            onSelect={() =>
               track("welcome_nearest_region_click", {
                 category: "navigation",
                 data: {
@@ -499,44 +488,7 @@ export function NearYou() {
                 },
               })
             }
-            className="group flex items-center justify-between gap-3 border-t border-sky-100 px-5 py-3.5 transition-colors hover:bg-sky-50/60"
-          >
-            <div className="flex min-w-0 items-center gap-3">
-              <Mountain className="h-5 w-5 shrink-0 text-sky-600" strokeWidth={1.75} />
-              <div className="min-w-0">
-                {isFar ? (
-                  <p className="mb-1 text-[12px] leading-snug text-slate-500">
-                    the mountains are a long way from you, but here's where we cover
-                  </p>
-                ) : null}
-                <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">
-                  {suggested.distanceKm == null
-                    ? "suggested region"
-                    : isFar
-                      ? "mountain region"
-                      : "nearest mountain region"}
-                </p>
-                <p className="truncate text-[15px] font-semibold text-slate-900">
-                  {suggested.name.toLowerCase()}
-                </p>
-                <p className="text-[12px] tabular-nums text-slate-500">
-                  {suggested.distanceKm != null ? (
-                    <>{suggested.distanceKm.toLocaleString()} km away</>
-                  ) : null}
-                  {suggested.distanceKm != null && suggested.feelsLikeC != null ? " \u00b7 " : null}
-                  {suggested.feelsLikeC != null ? (
-                    <>feelzlike {suggested.feelsLikeC}&deg;</>
-                  ) : suggested.distanceKm == null ? (
-                    <>tap to explore the mountains</>
-                  ) : null}
-                </p>
-              </div>
-            </div>
-            <span className="inline-flex shrink-0 items-center gap-1 text-[12px] font-semibold text-sky-700 group-hover:text-sky-900">
-              see
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </span>
-          </Link>
+          />
         ) : null}
 
         {/* FAR VISITORS: when the closest live region is thousands of km away,
