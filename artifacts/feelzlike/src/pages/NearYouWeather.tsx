@@ -12,7 +12,7 @@ import {
   RotateCw,
 } from "lucide-react";
 import { RadarMap, type RadarRegionKey } from "@/regions/snowy-mountains/components/RadarMap";
-import { useTownWeather } from "@/lib/town-weather";
+import { useTownWeather, type TownWeatherCurrent } from "@/lib/town-weather";
 import {
   StaleNotice,
   WeatherHero,
@@ -77,14 +77,63 @@ function readConsentGranted(): boolean {
   }
 }
 
+// The /api/local-weather "current" block · a small, cheap Open-Meteo request
+// that stays reliable even when the big /api/town-weather forecast request is
+// being throttled. We use it to render current conditions immediately and as a
+// fallback hero when the extended forecast is unavailable.
+interface LocalCurrent {
+  tempC: number;
+  feelsLikeC: number;
+  windKph: number;
+  windDirection: string;
+  windDirectionDeg: number | null;
+  description: string;
+  weatherCode: number | null;
+  isDay: boolean;
+  todayMaxC: number | null;
+  todayMinC: number | null;
+  observedAt: string;
+  source: string;
+}
+
 interface LocalWeatherResponse {
   place: { latitude: number; longitude: number; name: string | null };
+  current: LocalCurrent | null;
   nearestRegion: {
     id: string;
     name: string;
     href: string;
     distanceKm: number;
   } | null;
+}
+
+// Adapt the cheap local-current payload to the richer TownWeatherCurrent shape
+// the shared WeatherHero expects. Only the fields WeatherHero reads are
+// meaningful; the rest are null and never surfaced (the conditions grid, which
+// needs them, only renders when the full forecast is present).
+function localToHeroCurrent(c: LocalCurrent): TownWeatherCurrent {
+  return {
+    time: c.observedAt,
+    temperature: c.tempC,
+    feelsLike: c.feelsLikeC,
+    humidity: null,
+    isDay: c.isDay,
+    precipitation: null,
+    rain: null,
+    showers: null,
+    snowfall: null,
+    weatherCode: c.weatherCode,
+    weatherDescription: c.description,
+    cloudCover: null,
+    pressure: null,
+    windSpeed: c.windKph,
+    windDirection: c.windDirectionDeg,
+    windDirectionCompass: c.windDirection,
+    windGust: null,
+    visibility: null,
+    uvIndex: null,
+    dewpoint: null,
+  };
 }
 
 /**
@@ -196,6 +245,7 @@ export default function NearYouWeather() {
 
   const placeName = localQuery.data?.place?.name ?? null;
   const nearest = localQuery.data?.nearestRegion ?? null;
+  const localCurrent = localQuery.data?.current ?? null;
   const showTap = phase === "prompt" || phase === "unavailable";
 
   return (
@@ -281,50 +331,76 @@ export default function NearYouWeather() {
               explore the mountains we cover
             </Link>
           </div>
-        ) : weather.isLoading || (phase === "ready" && !weather.data && !weather.isError) ? (
-          <p className="mt-8 text-muted-foreground">loading the forecast…</p>
-        ) : weather.isError || !weather.data ? (
-          <div className="mt-8 rounded-2xl border border-border bg-white p-6 max-w-md">
-            <p className="text-[14px] leading-snug text-slate-600">
-              the weather service is being slow right now, so we couldn&rsquo;t
-              load your forecast
-            </p>
-            <button
-              type="button"
-              onClick={() => weather.refetch()}
-              disabled={weather.isFetching}
-              className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-sky-200 bg-white px-4 py-2 text-[13px] font-semibold text-sky-700 transition-colors hover:border-sky-300 hover:bg-sky-50 disabled:opacity-60"
-            >
-              <RotateCw className={`h-4 w-4 ${weather.isFetching ? "animate-spin" : ""}`} />
-              {weather.isFetching ? "trying…" : "try again"}
-            </button>
-            {nearest && (
-              <Link
-                href={nearest.href}
-                onClick={() =>
-                  track("near_you_page_region_click", {
-                    category: "navigation",
-                    data: { region: nearest.id, from: "error" },
-                  })
-                }
-                className="mt-4 block text-[13px] font-semibold text-sky-700 hover:text-sky-900"
-              >
-                or see {nearest.name.toLowerCase()} instead
-              </Link>
-            )}
-          </div>
         ) : (
           <>
-            {weather.data._stale && <StaleNotice meta={weather.data._stale} t={t} />}
-            <WeatherHero
-              current={weather.data.current}
-              town={placeName ?? "your location"}
-              placeLabel="your location"
-            />
-            <WeatherConditions current={weather.data.current} t={t} />
-            <WeatherToday daily={weather.data.daily[0]} t={t} />
-            <WeatherHourly hourly={weather.data.hourly} t={t} />
-            <WeatherOutlook days={weather.data.daily.slice(1, 7)} t={t} />
+            {/* Weather block · current conditions + forecast. Degrades on its
+                own: the heavy town-weather request is routinely throttled
+                upstream and even the cheap local-current can blip. The radar
+                below only needs coords, so it always renders regardless. */}
+            {(() => {
+              const full = weather.data;
+              const heroCurrent: TownWeatherCurrent | null = full
+                ? full.current
+                : localCurrent
+                  ? localToHeroCurrent(localCurrent)
+                  : null;
+
+              if (heroCurrent) {
+                return (
+                  <>
+                    {full?._stale && <StaleNotice meta={full._stale} t={t} />}
+                    <WeatherHero
+                      current={heroCurrent}
+                      town={placeName ?? "your location"}
+                      placeLabel="your location"
+                    />
+                    {full ? (
+                      <>
+                        <WeatherConditions current={full.current} t={t} />
+                        <WeatherToday daily={full.daily[0]} t={t} />
+                        <WeatherHourly hourly={full.hourly} t={t} />
+                        <WeatherOutlook days={full.daily.slice(1, 7)} t={t} />
+                      </>
+                    ) : weather.isError ? (
+                      <WeatherNotice
+                        title="extended forecast unavailable right now"
+                        body="the live weather feed is being slow, so the hourly and 7-day forecast couldn't load. current conditions and radar are up to date."
+                        isFetching={weather.isFetching}
+                        onRetry={() => weather.refetch()}
+                      />
+                    ) : (
+                      // Current conditions already render from the cheap
+                      // local-weather payload while the heavier hourly/7-day
+                      // forecast is still in flight · no false error during the gap.
+                      <p className="mt-4 text-[13px] text-muted-foreground">
+                        loading the hourly and 7-day forecast…
+                      </p>
+                    )}
+                  </>
+                );
+              }
+
+              if (weather.isLoading || localQuery.isLoading) {
+                return (
+                  <p className="mt-8 text-muted-foreground">
+                    loading current conditions…
+                  </p>
+                );
+              }
+
+              // Conditions failed entirely · the radar below still renders.
+              return (
+                <WeatherNotice
+                  title="live conditions unavailable right now"
+                  body="the weather feed is being slow, so we couldn't load current conditions. the live radar below is still up to date."
+                  isFetching={weather.isFetching}
+                  onRetry={() => {
+                    weather.refetch();
+                    localQuery.refetch();
+                  }}
+                />
+              );
+            })()}
 
             {coords && (
               <RadarSection
@@ -368,6 +444,38 @@ export default function NearYouWeather() {
       </main>
       <HomeFooter />
     </div>
+  );
+}
+
+// Inline amber notice for a partial-data state · the weather feed is slow but
+// the page stays useful (the radar always renders below). Used both when only
+// the extended forecast fails and when current conditions fail entirely.
+// Offers a one-tap retry.
+function WeatherNotice({
+  title,
+  body,
+  isFetching,
+  onRetry,
+}: {
+  title: string;
+  body: string;
+  isFetching: boolean;
+  onRetry: () => void;
+}) {
+  return (
+    <section className="mt-4 rounded-2xl border border-amber-300/60 bg-amber-50 px-5 py-4">
+      <p className="text-[13px] font-semibold text-amber-900">{title}</p>
+      <p className="mt-0.5 text-[12px] leading-relaxed text-amber-800/90">{body}</p>
+      <button
+        type="button"
+        onClick={onRetry}
+        disabled={isFetching}
+        className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-amber-300 bg-white px-4 py-2 text-[13px] font-semibold text-amber-800 transition-colors hover:bg-amber-100 disabled:opacity-60"
+      >
+        <RotateCw className={`h-4 w-4 ${isFetching ? "animate-spin" : ""}`} />
+        {isFetching ? "trying…" : "try again"}
+      </button>
+    </section>
   );
 }
 

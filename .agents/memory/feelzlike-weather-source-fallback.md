@@ -42,3 +42,27 @@ regions. OWM onecall 3.0 returns 401 (paid) — use the 2.5 endpoints only.
 - The per-region `weatherSource.label` (e.g. "Open-Meteo + BOM") is a STATIC
   attribution string, not a live readout — it won't say "OpenWeatherMap" while the
   fallback is active. That's intentional/accepted, not a bug.
+
+## visitor "near you" page must degrade per-section, not all-or-nothing
+
+**Rule:** the arbitrary-coords visitor page (NearYouWeather) must render each
+piece from its own data source and fail each piece independently — never gate the
+whole page on the heaviest request.
+- Radar (RainViewer/RadarMap) depends ONLY on coords → render it UNCONDITIONALLY
+  once located, as a sibling outside the weather block. It is the most reliable
+  thing on the page; burying it inside a weather success branch is the bug that
+  makes the page look "hung".
+- Current conditions come from the CHEAP `/api/local-weather` `current` block
+  (few vars, 1 day). The rich hourly/7-day comes from the EXPENSIVE
+  `/api/town-weather` (~41 vars × 7 days). Open-Meteo throttles the expensive
+  request far harder than the cheap one, so render the hero from local-current
+  first and treat the extended forecast as an enhancement.
+- Distinguish loading from error per query: only show an "unavailable" notice on
+  `query.isError`, never merely on `!query.data` (the in-flight gap would flash a
+  false error after the hero already rendered).
+
+**Why:** repeated "the /near-you page just hangs on loading weather" complaints.
+Town pages survive Open-Meteo throttling via the warm 6h serve-stale cache keyed
+by rounded lat/lng; a cold visitor's unique coords have NO warm entry, so the
+expensive request 503s with nothing to fall back on while the cheap request and
+the radar still work fine.
