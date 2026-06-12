@@ -377,6 +377,37 @@ function compassDir(deg: number): string {
   return dirs[Math.round(deg / 45) % 8];
 }
 
+// Smooths the precip field once it's CSS-upscaled past its native zoom.
+// RainViewer's mosaic carries real data only through z7 (z8+ is an empty
+// placeholder · verified AU + JP), so at town zooms Leaflet stretches the
+// coarse z7 tiles into hard blocks. We can't fetch finer radar, so we soften
+// the upscaled field with a blur that grows with how far past native we are.
+// The amount is written to a CSS custom property straight on the map
+// container · a DOM write, not React state, so the animation frames never
+// remount (which would reintroduce the tile-refetch flash). At or below the
+// native zoom the blur is 0, leaving the wide "all of <country>" view crisp.
+function RadarBlur({ nativeZoom }: { nativeZoom: number }) {
+  const map = useMap();
+  useEffect(() => {
+    const el = map.getContainer();
+    const apply = () => {
+      const over = Math.max(0, map.getZoom() - nativeZoom);
+      // A radar cell spans ~2^over screen-px once upscaled · blurring by a
+      // little over half a cell merges the steps into a gradient. Capped so
+      // deep zoom softens the blocks without fogging the whole field.
+      const px = over === 0 ? 0 : Math.min(9, Math.pow(2, over) * 0.55);
+      el.style.setProperty("--radar-blur", px === 0 ? "0px" : `${px.toFixed(2)}px`);
+    };
+    apply();
+    map.on("zoomend", apply);
+    return () => {
+      map.off("zoomend", apply);
+      el.style.removeProperty("--radar-blur");
+    };
+  }, [map, nativeZoom]);
+  return null;
+}
+
 // Registers a single map click handler. Only fires when at least one
 // point layer (snowfall/wind/temp/rain risk) is enabled · clicking with
 // only precip radar on does nothing, matching the layer-panel intent.
@@ -737,6 +768,7 @@ export default function RadarMapInner({
         >
           <RecenterOnChange lat={effectiveCenter.lat} lng={effectiveCenter.lng} zoom={zoom} />
           <CaptureMap onReady={handleMapReady} />
+          <RadarBlur nativeZoom={7} />
 
           {/* Esri world hillshade · shaded relief gives the dark map its
               terrain feel (mountains read as ridges, not flat). Sits at
@@ -794,6 +826,7 @@ export default function RadarMapInner({
               return (
                 <TileLayer
                   key={`rad-${frame.time}`}
+                  className="radar-fx"
                   url={radarTileUrl(manifest.host, frame.path)}
                   opacity={active ? (frameIsNowcast ? 0.65 : 0.85) : 0}
                   zIndex={active ? 401 : 400}

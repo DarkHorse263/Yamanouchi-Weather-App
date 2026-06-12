@@ -220,3 +220,12 @@ article p, .prose p, li, dd {
 .feelzlike-probe-popup a.leaflet-popup-close-button:hover {
   color: #e2e8f0;
 }
+
+/* Ski-radar precip smoothing. RainViewer's mosaic has real data only through
+   z7, so at town zooms Leaflet CSS-upscales the coarse tiles into hard blocks.
+   The RadarBlur helper writes a zoom-scaled --radar-blur onto the leaflet
+   container (0 at/under native zoom); this softens just the precip layers
+   (className "radar-fx") so they read as gradients, not pixels. */
+.leaflet-container .radar-fx {
+  filter: blur(var(--radar-blur, 0px));
+}
