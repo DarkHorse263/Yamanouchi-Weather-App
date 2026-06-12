@@ -4,6 +4,7 @@ import { Link } from "wouter";
 import { markLandingVisited, readLastTown, type LastTown } from "@/lib/favouriteRegion";
 import logoFullColour from "/branding/logo-full-colour.png?url";
 import { NearYou } from "@/components/home/NearYou";
+import { Favourites } from "@/components/home/Favourites";
 import { HomeFooter } from "@/components/home/HomeFooter";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { websiteSchema, organizationSchema } from "@/lib/seo/jsonLd";
@@ -75,6 +76,9 @@ export default function Welcome() {
 
         {/* NEAR YOU ─ location-first: local conditions + nearest region ─ */}
         <NearYou />
+
+        {/* FAVOURITES ─ saved towns for one-tap access (hidden if none) ─ */}
+        <Favourites />
 
         {/* CTA ────────────────────────────────────────── */}
         <section className="px-6 pt-6 pb-9 text-center md:pt-9 md:pb-16">

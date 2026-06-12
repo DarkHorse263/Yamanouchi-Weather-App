@@ -30,6 +30,7 @@ import { townNavHasContent } from "@/lib/navContent";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
 import { DailyPick } from "@/components/DailyPick";
+import { FavouriteStar } from "@/components/FavouriteStar";
 
 function haversineKm(a: { lat: number; lng: number }, b: { lat: number; lng: number }): number {
   const R = 6371;
@@ -331,6 +332,23 @@ export function TownHome() {
         }
         badge={<LiveBadge tone="onDark" label={t("Live", "ライブ")} />}
       />
+
+      {/* SAVE TO FAVOURITES · pins this town to the landing quick-access
+          list (up to 3). Sits right under the header so it reads as an
+          action on the town you're looking at. */}
+      <div className="mt-4">
+        <FavouriteStar
+          location={{
+            regionId: region.id,
+            townId: town.id,
+            townName: town.name,
+            townNameJa: town.nameJa,
+          }}
+          label={t("save town", "この町を保存")}
+          savedLabel={t("saved", "保存済み")}
+          fullHint={t("3 saved \u00b7 remove one first", "3件保存済み \u00b7 1件削除してください")}
+        />
+      </div>
 
       {/* DAILY PICK · winter-only callout that surfaces the best resort
           today by fresh snow + low wind. Scoped to this town's nearby
