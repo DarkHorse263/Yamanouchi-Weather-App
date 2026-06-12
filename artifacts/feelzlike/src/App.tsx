@@ -23,9 +23,7 @@ import CountryHome from "@/pages/CountryHome";
 import NearYouWeather from "@/pages/NearYouWeather";
 import Privacy from "@/pages/legal/Privacy";
 import Terms from "@/pages/legal/Terms";
-// News & updates hidden until the feed is populated · the /news route below
-// redirects home for now. Restore this import + the route when content lands.
-// import News from "@/pages/News";
+import News from "@/pages/News";
 import Premium from "@/pages/Premium";
 import TripPlanner from "@/pages/TripPlanner";
 import AdminStats from "@/pages/admin/AdminStats";
@@ -56,11 +54,10 @@ function Router() {
           aren't parsed as regions. */}
       <Route path="/legal/privacy" component={Privacy} />
       <Route path="/legal/terms" component={Terms} />
-      {/* News & updates · hidden until populated. Redirect any direct hits
-          (or stale links) home instead of showing an empty feed. Restore
-          `component={News}` to bring the page back. */}
-      <Route path="/news"><Redirect to="/" /></Route>
-      <Route path="/news/"><Redirect to="/" /></Route>
+      {/* News & updates · curated feed (now populated) + the home strip's
+          "see all news" target. */}
+      <Route path="/news" component={News} />
+      <Route path="/news/" component={News} />
       {/* Premium hub · plans, current tier, feature overview. */}
       <Route path="/premium" component={Premium} />
       {/* Multi-day trip planner · premium-gated, mounted before /:region

@@ -337,8 +337,19 @@ function RecenterOnChange({ lat, lng, zoom }: { lat: number; lng: number; zoom: 
 //   smooth=1 enables bilinear smoothing.
 //   snow=1   tints sub-zero precip in cyan/white so snow vs rain is
 //            visually distinguishable on the same layer.
+// Retina-aware tile resolution. On high-DPI screens (most phones, where
+// devicePixelRatio >= 2) the 256px radar tiles look noticeably blocky once
+// Leaflet upscales them past the radar's native zoom. Pulling RainViewer's
+// 512px source and letting the browser downsample it into the (default) 256
+// CSS-px tile slot keeps the precip layer crisp on mobile without changing
+// tile geometry · 1x desktops keep the lighter 256px tiles. (The dark basemap
+// is already retina via Leaflet's {r} token; the RainViewer URL has no {r},
+// so the size is picked here.)
+const RADAR_TILE_PX =
+  typeof window !== "undefined" && window.devicePixelRatio > 1 ? 512 : 256;
+
 function radarTileUrl(host: string, path: string): string {
-  return `${host}${path}/256/{z}/{x}/{y}/2/1_1.png`;
+  return `${host}${path}/${RADAR_TILE_PX}/{z}/{x}/{y}/2/1_1.png`;
 }
 
 // --- click-to-load point readout (Open-Meteo) ---------------------------
@@ -759,11 +770,12 @@ export default function RadarMapInner({
               each frame by its own (stable) timestamp keeps it mounted for the
               layer's lifetime, so stepping is an instant opacity flip with no
               blank frame.
-              maxNativeZoom: RainViewer's global radar mosaic only has real
-              data through z≈6 in most regions outside dense NA/EU radar
-              coverage. Past that their server returns a placeholder PNG.
-              Capping native zoom tells Leaflet to fetch the z=6 tile and
-              CSS-upscale it for higher zooms. */}
+              maxNativeZoom: verified empirically (AU + JP, Jun 2026) that
+              RainViewer's radar mosaic carries real data through z7 and
+              returns a uniform placeholder PNG at z8+. We cap native fetches
+              at z7 (the most detail available) and let Leaflet CSS-upscale
+              that for higher zooms · going to z8 would swap real precip for
+              blank placeholders. */}
           {showPrecip &&
             manifest &&
             radarFrames.map((frame, idx) => {
@@ -785,7 +797,7 @@ export default function RadarMapInner({
                   url={radarTileUrl(manifest.host, frame.path)}
                   opacity={active ? (frameIsNowcast ? 0.65 : 0.85) : 0}
                   zIndex={active ? 401 : 400}
-                  maxNativeZoom={6}
+                  maxNativeZoom={7}
                   updateWhenZooming={false}
                   attribution=""
                 />
