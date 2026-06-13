@@ -10,3 +10,4 @@
 - [feelzlike geolocation funnel](feelzlike-geolocation-funnel.md) — NearYou never auto-prompts; denied = re-enable guidance + reload, never silent retry.
 - [shell output token aliasing](shell-output-aliasing.md) — bash/rg/cat output in this env silently aliases some identifiers (NAV→ln, RegionStub→n); use the `read` tool for trustworthy content.
 - [monorepo project-reference rebuild](monorepo-project-reference-rebuild.md) — after codegen/schema edits, `tsc` consumers fail "no exported member" until you `tsc -b` the lib decls, even though dev server works.
+- [feelzlike location-weather endpoint](feelzlike-weather-endpoint-sharing.md) — single `/weather/:id` serves AU+JP; region-gate forecast_days (undefined region = AU); consumers slice-cap `daily`, audit for open-ended slices.

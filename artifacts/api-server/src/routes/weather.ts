@@ -522,7 +522,13 @@ async function fetchOpenMeteo(location: LocationConfig) {
     hourly: "temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,cloud_cover,wind_speed_10m,snowfall,freezing_level_height",
     daily: "weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,snowfall_sum,wind_speed_10m_max,uv_index_max",
     timezone: location.timezone ?? "Australia/Sydney",
-    forecast_days: "7",
+    // AU ski season (opened Jun 2026) runs the premium "extended" outlook out
+    // to 14 days · Open-Meteo's reliable ceiling is ~16, and accuracy past ~10
+    // is low so we stop at 14. JP resorts keep the 7-day window (their UI caps
+    // the outlook at 6 days anyway). Snowy Mtns entries have no `region` set →
+    // treated as AU. Free strips still slice(0,5)/slice(1,7), so only the AU
+    // resort premium section surfaces the extra days.
+    forecast_days: location.region === "JP" ? "7" : "14",
     // 72 hours so we can derive next-24/48/72h cumulative snowfall on the server.
     forecast_hours: "72"
   });

@@ -481,16 +481,16 @@ export default function LocationDetail() {
           </div>
         </motion.div>
 
-        {/* PREMIUM · Next 6 days · the 5-day strip above is free; this
-            gates the 6-day+ outlook (extending to 7/14/21 once the model
-            data is wired). Renamed May 2026 v4 from "Extended outlook"
-            to align with the cross-region paywall sequence:
-            Next 6 days → Elevation forecast → Lift hold likely. */}
+        {/* PREMIUM · Next 6 days · the 5-day strip above is free; this gates
+            the longer outlook, now wired to a real 14-day window from
+            Open-Meteo (AU resorts request forecast_days=14). Renamed May 2026
+            v4 from "Extended outlook" to align with the cross-region paywall
+            sequence: Next 6 days → Elevation forecast → Lift hold likely. */}
         <PremiumGate
           title="Next 6 days"
           titleJa="今後6日間"
-          blurb="See further out than the free 5-day window · 7 / 14 / 21 day extended outlook for trip planning."
-          blurbJa="無料5日予報を超える長期予報 · 7・14・21日の見通しで旅行計画に。"
+          blurb="See further out than the free 5-day window · 14-day extended outlook for trip planning."
+          blurbJa="無料5日予報を超える長期予報 · 14日間の見通しで旅行計画に。"
         >
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -503,12 +503,12 @@ export default function LocationDetail() {
                 <p className="byline text-muted-foreground">Weather outlook</p>
                 <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
                   <CalendarDays className="text-primary w-5 h-5" />
-                  Extended (7 / 14 / 21 day)
+                  Extended (14-day)
                 </h2>
               </div>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {daily.slice(5, 8).map((day: any) => (
+              {daily.slice(5, 14).map((day: any) => (
                 <div key={day.date} className="rounded-2xl bg-background/40 border border-white/5 p-4 text-center">
                   <p className="font-display text-base text-foreground">
                     {format(parseISO(day.date), "EEE d MMM")}
@@ -522,9 +522,6 @@ export default function LocationDetail() {
                   </div>
                 </div>
               ))}
-              <div className="rounded-2xl border border-dashed border-white/10 p-4 text-center text-muted-foreground/70 text-xs">
-                14 / 21-day horizon coming soon
-              </div>
             </div>
           </motion.div>
         </PremiumGate>
