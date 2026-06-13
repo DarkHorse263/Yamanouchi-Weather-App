@@ -233,6 +233,7 @@ export const GetAnnouncementsResponse = zod.object({
         "event",
         "conditions",
         "general",
+        "news",
       ]),
       title: zod.string(),
       body: zod.string().nullish(),

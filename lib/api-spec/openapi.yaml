@@ -1829,7 +1829,7 @@ components:
           type: ["string", "null"]
         category:
           type: string
-          enum: [opening, snowmaking, lifts, event, conditions, general]
+          enum: [opening, snowmaking, lifts, event, conditions, general, news]
         title:
           type: string
         body:

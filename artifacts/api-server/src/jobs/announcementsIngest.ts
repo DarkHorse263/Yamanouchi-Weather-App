@@ -24,6 +24,7 @@
  */
 import cron, { type ScheduledTask } from "node-cron";
 import { db, resortAnnouncementsTable, type InsertResortAnnouncement } from "@workspace/db";
+import { like } from "drizzle-orm";
 import * as Sentry from "@sentry/node";
 
 interface IngestReport {
@@ -31,6 +32,7 @@ interface IngestReport {
   finishedAt: string;
   seeded: number;
   sourcesOk: number;
+  sourcesEmpty: number;
   sourcesFailed: number;
 }
 
@@ -199,20 +201,172 @@ function parseThredbo(xml: string): InsertResortAnnouncement | null {
   };
 }
 
+// ── Generic RSS news (Mountainwatch, SnowsBest) ──────────────────────────────
+// We AGGREGATE, we do NOT republish: store only the headline, a short excerpt
+// and a link back to the original, attributed to the source. No full article
+// body, no source images. This mirrors how feed readers / news aggregators
+// operate and keeps us on the safe side of copyright + each publisher's ToS.
+//
+// AU snow-industry news is national, so it's fanned out into every Australian
+// region feed (the read endpoint is region-scoped). JP regions never get AU news.
+const AU_NEWS_REGIONS = [
+  "snowy-mountains",
+  "victorias-high-country",
+  "tasmania",
+] as const;
+
+// How many of the latest items to surface per feed. dedupeKeys are positional
+// ("slotN" by recency) so each refresh OVERWRITES the same N rows in place
+// instead of growing the table unbounded · no separate pruning job needed.
+const NEWS_ITEMS_PER_FEED = 4;
+
+// Only surface AU/NZ-relevant items. The source feeds also carry global
+// resort-guide entries (Japan, Europe, Canada) that aren't useful in the AU
+// region feeds, so we match on each item's <category> tags.
+const AU_NZ_RELEVANT =
+  /austral|au\/nz|new zealand|\bnz\b|\bnsw\b|victoria|tasmania|snowy|thredbo|perisher|charlotte pass|selwyn|falls creek|hotham|buller|kosciuszko/i;
+
+interface RssItem {
+  title: string;
+  link: string;
+  description: string;
+  pubDate: string;
+  categories: string[];
+}
+
+/**
+ * Strip HTML/CDATA, decode entities, drop WordPress feed boilerplate, remove
+ * emoji + en/em dashes, collapse whitespace and lowercase (brand voice).
+ */
+function cleanNewsText(raw: string): string {
+  const noTags = raw
+    .replace(/<!\[CDATA\[|\]\]>/g, "")
+    .replace(/<[^>]+>/g, " ");
+  return decodeEntities(noTags)
+    .replace(/the post .*?appeared first on.*$/i, "")
+    .replace(/continue reading.*$/i, "")
+    .replace(/\[(?:…|\.\.\.)\]/g, "")
+    .replace(/[\u2012-\u2015\u2212]/g, "-")
+    .replace(
+      /[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2190}-\u{21FF}\u{FE0F}\u{1F1E6}-\u{1F1FF}]/gu,
+      "",
+    )
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
+
+/** Parse up to `max` <item> blocks (newest first) with their categories. */
+function parseRssItems(xml: string, max: number): RssItem[] {
+  const items: RssItem[] = [];
+  const blocks = xml.match(/<item\b[\s\S]*?<\/item>/gi) ?? [];
+  for (const block of blocks) {
+    const pick = (tag: string): string => {
+      const m = block.match(
+        new RegExp(`<${tag}\\b[^>]*>([\\s\\S]*?)<\\/${tag}>`, "i"),
+      );
+      return m ? (m[1] ?? "") : "";
+    };
+    const title = cleanNewsText(pick("title"));
+    let link = pick("link").trim();
+    if (!link) {
+      const lm = block.match(/<link[^>]*href="([^"]+)"/i);
+      link = lm ? (lm[1] ?? "") : "";
+    }
+    link = decodeEntities(link).trim();
+    const description = pick("description") || pick("summary");
+    const pubDate = (pick("pubDate") || pick("published") || pick("updated")).trim();
+    const categories = [...block.matchAll(/<category[^>]*>([\s\S]*?)<\/category>/gi)].map(
+      (m) => decodeEntities(m[1] ?? ""),
+    );
+    if (title && /^https?:\/\//i.test(link)) {
+      items.push({ title, link, description, pubDate, categories });
+    }
+    if (items.length >= max) break;
+  }
+  return items;
+}
+
+/**
+ * Build news announcement rows from an RSS feed, fanned out across the AU
+ * regions. Each row links back to the original article (aggregation only).
+ */
+function buildNewsRows(
+  feedKey: string,
+  sourceName: string,
+  xml: string,
+): InsertResortAnnouncement[] {
+  const parsed = parseRssItems(xml, 30);
+  // A 200-OK HTML error page or a structurally-changed feed parses to zero
+  // <item>s. THROW so the caller preserves last-known-good rows instead of
+  // replacing them with an empty set. (A genuinely empty-but-valid feed is
+  // indistinguishable here and is treated the same way · rows preserved, the
+  // safe choice for an active publisher.)
+  if (parsed.length === 0) {
+    throw new Error(
+      `${sourceName}: no parseable RSS items (feed empty, malformed, or not RSS)`,
+    );
+  }
+  // Valid feed: an empty result here means "no AU/NZ-relevant items right now",
+  // which is a legitimate state the caller may clear stale rows for.
+  const items = parsed
+    .filter((it) => it.categories.some((c) => AU_NZ_RELEVANT.test(c)))
+    .slice(0, NEWS_ITEMS_PER_FEED);
+  if (items.length === 0) return [];
+  const rows: InsertResortAnnouncement[] = [];
+  for (const region of AU_NEWS_REGIONS) {
+    items.forEach((it, i) => {
+      const published = it.pubDate ? new Date(it.pubDate) : new Date();
+      const excerpt = cleanNewsText(it.description).slice(0, 220).trim();
+      rows.push({
+        dedupeKey: `src:${feedKey}:${region}:slot${i}`,
+        region,
+        resort: null,
+        category: "news",
+        title: it.title.slice(0, 140).trim(),
+        body: excerpt || null,
+        sourceName,
+        sourceUrl: it.link,
+        pinned: false,
+        status: "published",
+        publishedAt: Number.isNaN(published.getTime()) ? new Date() : published,
+      });
+    });
+  }
+  return rows;
+}
+
 interface LiveSource {
   key: string;
   url: string;
-  parse: (raw: string) => InsertResortAnnouncement | null;
+  parse: (raw: string) => InsertResortAnnouncement | InsertResortAnnouncement[] | null;
+  /**
+   * When set, a successful fetch REPLACES every row whose dedupeKey starts with
+   * this prefix · this self-heals when a feed drops items (or stops carrying
+   * relevant ones). A fetch failure throws before the delete, so existing rows
+   * stay put. Omit for single-card upsert sources like Thredbo.
+   */
+  replacePrefix?: string;
 }
 
 const LIVE_SOURCES: LiveSource[] = [
   { key: "thredbo-snow-report", url: "https://www.thredbo.com.au/feeds/snow-report/", parse: parseThredbo },
+  // National AU snow news · aggregated (headline + excerpt + link), fanned out
+  // across the AU region feeds. Both are WordPress sites exposing /feed/.
+  { key: "mountainwatch", url: "https://www.mountainwatch.com/feed/", parse: (raw) => buildNewsRows("mountainwatch", "Mountainwatch", raw), replacePrefix: "src:mountainwatch:" },
+  { key: "snowsbest", url: "https://www.snowsbest.com/feed/", parse: (raw) => buildNewsRows("snowsbest", "SnowsBest", raw), replacePrefix: "src:snowsbest:" },
 ];
 
 // ── Upsert ───────────────────────────────────────────────────────────────────
 
-async function upsert(row: InsertResortAnnouncement): Promise<void> {
-  await db
+// Either the root db handle or a transaction handle · both expose .insert.
+type DbExecutor = typeof db | Parameters<Parameters<typeof db.transaction>[0]>[0];
+
+async function upsert(
+  row: InsertResortAnnouncement,
+  exec: DbExecutor = db,
+): Promise<void> {
+  await exec
     .insert(resortAnnouncementsTable)
     .values(row)
     .onConflictDoUpdate({
@@ -237,7 +391,7 @@ export async function runAnnouncementsIngest(): Promise<IngestReport> {
   const startedAt = new Date();
   const report: IngestReport = {
     startedAt: startedAt.toISOString(), finishedAt: "",
-    seeded: 0, sourcesOk: 0, sourcesFailed: 0,
+    seeded: 0, sourcesOk: 0, sourcesEmpty: 0, sourcesFailed: 0,
   };
 
   // 1. Seeds — confirmed announcements. A failure here is a real bug (DB
@@ -251,13 +405,38 @@ export async function runAnnouncementsIngest(): Promise<IngestReport> {
   for (const src of LIVE_SOURCES) {
     try {
       const raw = await fetchText(src.url);
-      const row = src.parse(raw);
-      if (row) {
-        await upsert(row);
+      const parsed = src.parse(raw);
+      const rows = parsed == null ? [] : Array.isArray(parsed) ? parsed : [parsed];
+
+      if (src.replacePrefix) {
+        // Namespaced feeds own their whole dedupeKey prefix. Replace the set
+        // atomically (delete + reinsert in one tx) so a mid-write failure can't
+        // leave the feed half-populated. We only get here when parse SUCCEEDED
+        // (news parsers throw on malformed/empty feeds), so an empty `rows`
+        // legitimately means "no relevant items" and clearing stale rows is
+        // correct · a fetch/parse failure throws above, preserving rows.
+        const prefix = src.replacePrefix;
+        await db.transaction(async (tx) => {
+          await tx
+            .delete(resortAnnouncementsTable)
+            .where(like(resortAnnouncementsTable.dedupeKey, `${prefix}%`));
+          for (const row of rows) await upsert(row, tx);
+        });
+      } else {
+        for (const row of rows) await upsert(row);
+      }
+
+      if (rows.length > 0) {
         report.sourcesOk++;
+      } else if (src.replacePrefix) {
+        // Valid feed with no relevant items · not an ingestion failure.
+        report.sourcesEmpty++;
+        console.info(
+          `[announcementsIngest] source ${src.key}: feed valid, no relevant items (cleared stale rows)`,
+        );
       } else {
         report.sourcesFailed++;
-        console.warn(`[announcementsIngest] source ${src.key}: parser returned null`);
+        console.warn(`[announcementsIngest] source ${src.key}: parser returned no rows`);
       }
     } catch (err) {
       report.sourcesFailed++;
@@ -290,7 +469,7 @@ export function startAnnouncementsCron(): void {
   }
   cronTask = cron.schedule("*/30 * * * *", () => {
     runAnnouncementsIngest()
-      .then((r) => console.log(`[announcementsIngest] run done: seeded=${r.seeded} sourcesOk=${r.sourcesOk} failed=${r.sourcesFailed}`))
+      .then((r) => console.log(`[announcementsIngest] run done: seeded=${r.seeded} sourcesOk=${r.sourcesOk} empty=${r.sourcesEmpty} failed=${r.sourcesFailed}`))
       .catch((err) => {
         console.error("[announcementsIngest] run failed:", err);
         Sentry.captureException(err, { tags: { component: "announcements-ingest-cron" } });

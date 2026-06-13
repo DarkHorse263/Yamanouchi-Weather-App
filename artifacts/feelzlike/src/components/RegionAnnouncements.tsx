@@ -14,6 +14,7 @@ import {
   Mountain,
   Info,
   Pin,
+  Newspaper,
   ExternalLink,
 } from "lucide-react";
 
@@ -36,6 +37,7 @@ const CATEGORY_META: Record<
   event: { label: "event", icon: CalendarDays, accent: "border-l-violet-400" },
   conditions: { label: "conditions", icon: Mountain, accent: "border-l-blue-400" },
   general: { label: "update", icon: Info, accent: "border-l-slate-300" },
+  news: { label: "news", icon: Newspaper, accent: "border-l-amber-400" },
 };
 
 function relativeTime(raw: string): string {

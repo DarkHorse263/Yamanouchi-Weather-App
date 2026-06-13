@@ -16,4 +16,5 @@ export const AnnouncementCategory = {
   event: "event",
   conditions: "conditions",
   general: "general",
+  news: "news",
 } as const;
