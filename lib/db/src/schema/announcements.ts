@@ -37,6 +37,10 @@ export const resortAnnouncementsTable = pgTable(
     // 'published' | 'draft' | 'archived'
     status: text("status").notNull().default("published"),
     publishedAt: timestamp("published_at", { withTimezone: true }).notNull().defaultNow(),
+    // Optional relevance window. Time-sensitive announcements (e.g. an
+    // "opens saturday june 6" opening-weekend card) set this so they drop out
+    // of the feed automatically once the date has passed. Null = never expires.
+    expiresAt: timestamp("expires_at", { withTimezone: true }),
     // Stable idempotency key for upsert (seed / ingest re-runs).
     dedupeKey: text("dedupe_key").notNull(),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),

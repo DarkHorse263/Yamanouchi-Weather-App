@@ -1,6 +1,6 @@
 import { Router, type IRouter } from "express";
 import { db, resortAnnouncementsTable } from "@workspace/db";
-import { and, eq, desc } from "drizzle-orm";
+import { and, eq, desc, or, isNull, gt } from "drizzle-orm";
 import { parseRegionParam, RegionParamError } from "../lib/regions.js";
 
 /**
@@ -25,12 +25,19 @@ router.get("/announcements", async (req, res): Promise<void> => {
     throw err;
   }
 
+  // Hide time-sensitive cards (e.g. opening-weekend seeds) once their
+  // `expiresAt` has passed. Rows with no expiry never drop out.
+  const notExpired = or(
+    isNull(resortAnnouncementsTable.expiresAt),
+    gt(resortAnnouncementsTable.expiresAt, new Date()),
+  );
   const where = region
     ? and(
         eq(resortAnnouncementsTable.status, "published"),
         eq(resortAnnouncementsTable.region, region),
+        notExpired,
       )
-    : eq(resortAnnouncementsTable.status, "published");
+    : and(eq(resortAnnouncementsTable.status, "published"), notExpired);
 
   const rows = await db
     .select()

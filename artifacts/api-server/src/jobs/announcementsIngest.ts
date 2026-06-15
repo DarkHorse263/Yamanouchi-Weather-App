@@ -24,13 +24,14 @@
  */
 import cron, { type ScheduledTask } from "node-cron";
 import { db, resortAnnouncementsTable, type InsertResortAnnouncement } from "@workspace/db";
-import { like } from "drizzle-orm";
+import { like, eq } from "drizzle-orm";
 import * as Sentry from "@sentry/node";
 
 interface IngestReport {
   startedAt: string;
   finishedAt: string;
   seeded: number;
+  expired: number;
   sourcesOk: number;
   sourcesEmpty: number;
   sourcesFailed: number;
@@ -50,6 +51,7 @@ const SEEDS: Seed[] = [
     body: "the 2026 snow season kicks off this weekend. the kosciuszko express and friday flat beginner area spin first, snow permitting · check lifts & trails for the live morning report.",
     sourceName: "Thredbo", sourceUrl: "https://www.thredbo.com.au/",
     publishedAt: new Date("2026-06-05T07:00:00+10:00"),
+    expiresAt: new Date("2026-06-09T00:00:00+10:00"),
   },
   {
     dedupeKey: "seed:snowy-mountains:perisher-opening",
@@ -58,6 +60,7 @@ const SEEDS: Seed[] = [
     body: "perisher targets opening day on saturday for the king's birthday long weekend · terrain is confirmed each morning based on snow cover.",
     sourceName: "Perisher", sourceUrl: "https://www.perisher.com.au/",
     publishedAt: new Date("2026-06-05T06:55:00+10:00"),
+    expiresAt: new Date("2026-06-09T00:00:00+10:00"),
   },
   {
     dedupeKey: "seed:snowy-mountains:charlotte-pass-opening",
@@ -66,6 +69,7 @@ const SEEDS: Seed[] = [
     body: "charlotte pass is targeting the king's birthday long weekend, snow permitting · access is by oversnow transport from perisher.",
     sourceName: "Charlotte Pass", sourceUrl: "https://www.charlottepass.com.au/",
     publishedAt: new Date("2026-06-05T06:50:00+10:00"),
+    expiresAt: new Date("2026-06-09T00:00:00+10:00"),
   },
   {
     dedupeKey: "seed:snowy-mountains:selwyn-opening",
@@ -74,6 +78,7 @@ const SEEDS: Seed[] = [
     body: "selwyn snow resort is aiming to open for the king's birthday long weekend, with snowmaking running whenever temperatures allow.",
     sourceName: "Selwyn", sourceUrl: "https://selwynsnow.com.au/",
     publishedAt: new Date("2026-06-05T06:45:00+10:00"),
+    expiresAt: new Date("2026-06-09T00:00:00+10:00"),
   },
 
   // Victoria's High Country
@@ -84,6 +89,7 @@ const SEEDS: Seed[] = [
     body: "mt buller opens for the king's birthday long weekend · early-season terrain depends on snowmaking and natural falls, so check the morning lift report before driving up.",
     sourceName: "Mt Buller", sourceUrl: "https://www.mtbuller.com.au/",
     publishedAt: new Date("2026-06-05T07:00:00+10:00"),
+    expiresAt: new Date("2026-06-09T00:00:00+10:00"),
   },
   {
     dedupeKey: "seed:victorias-high-country:hotham-opening",
@@ -92,6 +98,7 @@ const SEEDS: Seed[] = [
     body: "mt hotham is targeting the king's birthday long weekend to start lifts, conditions permitting · snowmaking has been running on the cold nights.",
     sourceName: "Mt Hotham", sourceUrl: "https://www.hotham.com.au/",
     publishedAt: new Date("2026-06-05T06:55:00+10:00"),
+    expiresAt: new Date("2026-06-09T00:00:00+10:00"),
   },
   {
     dedupeKey: "seed:victorias-high-country:falls-creek-opening",
@@ -100,6 +107,7 @@ const SEEDS: Seed[] = [
     body: "falls creek opens for the king's birthday long weekend · opening terrain is confirmed each morning based on snow cover.",
     sourceName: "Falls Creek", sourceUrl: "https://www.fallscreek.com.au/",
     publishedAt: new Date("2026-06-05T06:50:00+10:00"),
+    expiresAt: new Date("2026-06-09T00:00:00+10:00"),
   },
   {
     dedupeKey: "seed:victorias-high-country:lake-mountain-opening",
@@ -108,6 +116,7 @@ const SEEDS: Seed[] = [
     body: "lake mountain opens for the long weekend for cross-country and toboggan runs when snow cover allows · check the resort before heading up.",
     sourceName: "Lake Mountain", sourceUrl: "https://www.lakemountainresort.com.au/",
     publishedAt: new Date("2026-06-05T06:45:00+10:00"),
+    expiresAt: new Date("2026-06-09T00:00:00+10:00"),
   },
 
   // Tasmania
@@ -118,6 +127,7 @@ const SEEDS: Seed[] = [
     body: "ben lomond, tasmania's main alpine field and only commercial chairlift, opens once enough snow falls · the king's birthday long weekend is the usual early target. watch the forecast before making the drive.",
     sourceName: "Ben Lomond", sourceUrl: null,
     publishedAt: new Date("2026-06-05T07:00:00+10:00"),
+    expiresAt: new Date("2026-06-09T00:00:00+10:00"),
   },
 ];
 
@@ -382,6 +392,7 @@ async function upsert(
         pinned: row.pinned ?? false,
         status: row.status ?? "published",
         publishedAt: row.publishedAt ?? new Date(),
+        expiresAt: row.expiresAt ?? null,
         updatedAt: new Date(),
       },
     });
@@ -391,12 +402,22 @@ export async function runAnnouncementsIngest(): Promise<IngestReport> {
   const startedAt = new Date();
   const report: IngestReport = {
     startedAt: startedAt.toISOString(), finishedAt: "",
-    seeded: 0, sourcesOk: 0, sourcesEmpty: 0, sourcesFailed: 0,
+    seeded: 0, expired: 0, sourcesOk: 0, sourcesEmpty: 0, sourcesFailed: 0,
   };
 
   // 1. Seeds — confirmed announcements. A failure here is a real bug (DB
-  //    down / schema drift), so let it surface.
+  //    down / schema drift), so let it surface. Time-sensitive seeds carry an
+  //    `expiresAt`; once that has passed we delete the row (if present) and skip
+  //    re-seeding so the card drops out of the feed automatically.
+  const now = new Date();
   for (const seed of SEEDS) {
+    if (seed.expiresAt && seed.expiresAt.getTime() <= now.getTime()) {
+      await db
+        .delete(resortAnnouncementsTable)
+        .where(eq(resortAnnouncementsTable.dedupeKey, seed.dedupeKey));
+      report.expired++;
+      continue;
+    }
     await upsert({ ...seed, status: "published" });
     report.seeded++;
   }
