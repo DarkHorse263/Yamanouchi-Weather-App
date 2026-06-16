@@ -305,6 +305,7 @@ function buildNewsRows(
   feedKey: string,
   sourceName: string,
   xml: string,
+  opts: { trustSource?: boolean } = {},
 ): InsertResortAnnouncement[] {
   const parsed = parseRssItems(xml, 30);
   // A 200-OK HTML error page or a structurally-changed feed parses to zero
@@ -317,11 +318,17 @@ function buildNewsRows(
       `${sourceName}: no parseable RSS items (feed empty, malformed, or not RSS)`,
     );
   }
-  // Valid feed: an empty result here means "no AU/NZ-relevant items right now",
-  // which is a legitimate state the caller may clear stale rows for.
-  const items = parsed
-    .filter((it) => it.categories.some((c) => AU_NZ_RELEVANT.test(c)))
-    .slice(0, NEWS_ITEMS_PER_FEED);
+  // Relevance gate. Global feeds (Mountainwatch, SnowsBest) also carry
+  // Japan/Europe/Canada resort-guide entries, so we keep only items whose
+  // <category> tags look AU/NZ · an empty result here is a legitimate "nothing
+  // relevant right now" the caller may clear stale rows for. AU-domain feeds
+  // (trustSource) are kept whole: they're already AU-focused and their feed
+  // tags are sparse, so the allowlist would wrongly drop nearly everything.
+  const items = (
+    opts.trustSource
+      ? parsed
+      : parsed.filter((it) => it.categories.some((c) => AU_NZ_RELEVANT.test(c)))
+  ).slice(0, NEWS_ITEMS_PER_FEED);
   if (items.length === 0) return [];
   const rows: InsertResortAnnouncement[] = [];
   for (const region of AU_NEWS_REGIONS) {
@@ -365,6 +372,10 @@ const LIVE_SOURCES: LiveSource[] = [
   // across the AU region feeds. Both are WordPress sites exposing /feed/.
   { key: "mountainwatch", url: "https://www.mountainwatch.com/feed/", parse: (raw) => buildNewsRows("mountainwatch", "Mountainwatch", raw), replacePrefix: "src:mountainwatch:" },
   { key: "snowsbest", url: "https://www.snowsbest.com/feed/", parse: (raw) => buildNewsRows("snowsbest", "SnowsBest", raw), replacePrefix: "src:snowsbest:" },
+  // AU-domain snow magazine · already AU-focused, so we trust the source and
+  // skip the AU/NZ category allowlist (its feed tags are sparse). Lower cadence
+  // than SnowsBest but adds genuinely local coverage the global filter misses.
+  { key: "snowaction", url: "https://www.snowaction.com.au/feed/", parse: (raw) => buildNewsRows("snowaction", "SnowAction", raw, { trustSource: true }), replacePrefix: "src:snowaction:" },
 ];
 
 // ── Upsert ───────────────────────────────────────────────────────────────────

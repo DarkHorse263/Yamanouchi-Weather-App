@@ -5,6 +5,7 @@ import { PageMeta } from "@/lib/seo/PageMeta";
 import { breadcrumbSchema } from "@/lib/seo/jsonLd";
 import { getAllNews, NEWS_CATEGORIES, type NewsCategory } from "@/data/news";
 import { NewsCard } from "@/components/news/NewsCard";
+import { useAnnouncements, announcementsToNewsItems } from "@/lib/news/announcements";
 
 type RegionFilter = "all" | "snowy-mountains" | "victorias-high-country" | "yamanouchi";
 
@@ -25,15 +26,22 @@ export default function News() {
   const [region, setRegion] = useState<RegionFilter>("all");
   const [category, setCategory] = useState<NewsCategory | "all">("all");
 
+  const annQuery = useAnnouncements();
+
   const items = useMemo(() => {
-    return getAllNews().filter((item) => {
-      if (region !== "all") {
-        if (item.regions !== "all" && !item.regions.includes(region)) return false;
-      }
-      if (category !== "all" && item.category !== category) return false;
-      return true;
-    });
-  }, [region, category]);
+    // Blend the automated announcements feed with the curated affiliate items so
+    // /news is never a dead end · adding more sources fills this page too.
+    const automated = announcementsToNewsItems(annQuery.data?.announcements ?? []);
+    return [...automated, ...getAllNews()]
+      .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+      .filter((item) => {
+        if (region !== "all") {
+          if (item.regions !== "all" && !item.regions.includes(region)) return false;
+        }
+        if (category !== "all" && item.category !== category) return false;
+        return true;
+      });
+  }, [region, category, annQuery.data]);
 
   return (
     <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">

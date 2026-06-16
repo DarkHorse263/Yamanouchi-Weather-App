@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import {
@@ -28,6 +27,11 @@ import {
   readLastTown,
 } from "@/lib/favouriteRegion";
 import { getRegion } from "@/regions";
+import {
+  useAnnouncements,
+  type Announcement,
+  type AnnouncementCategory,
+} from "@/lib/news/announcements";
 
 // How many blended items to show on the home strip. Kept short so the home
 // page stays scannable · "see all news" links through to the full feed.
@@ -36,32 +40,8 @@ const MAX_ITEMS = 4;
 // towns + last visited + favourite region, capped so the feed stays focused.
 const MAX_REGIONS = 3;
 
-// ── live announcements (GET /api/announcements) ────────────────────────
-// Resort-published updates ingested server-side. Shape mirrors the route in
-// api-server; we read only the fields the strip needs.
-type AnnouncementCategory =
-  | "opening"
-  | "snowmaking"
-  | "lifts"
-  | "event"
-  | "conditions"
-  | "general";
-
-interface Announcement {
-  id: string;
-  region: string;
-  resort: string;
-  category: AnnouncementCategory;
-  title: string;
-  body: string;
-  sourceName?: string | null;
-  sourceUrl?: string | null;
-  pinned: boolean;
-  publishedAt: string;
-}
-interface AnnouncementsResponse {
-  announcements: Announcement[];
-}
+// Live announcements (GET /api/announcements) and their NewsItem mapping live
+// in the shared module so the home strip and /news render the same feed.
 
 // Unified row model · curated link + live resort update collapse into one
 // shape so the strip can sort and render them together.
@@ -95,6 +75,7 @@ const ANNOUNCEMENT_ICON: Record<AnnouncementCategory, LucideIcon> = {
   event: CalendarDays,
   conditions: CloudSnow,
   general: Megaphone,
+  news: Newspaper,
 };
 
 /**
@@ -251,18 +232,10 @@ export function MountainNews() {
   const [regionIds] = useState<string[]>(personalisedRegions);
   const personalised = regionIds.length > 0;
 
-  // One request for all announcements (pinned-first, newest-first server-side);
-  // we scope client-side. Degrades silently · the curated news still renders.
-  const annQuery = useQuery<AnnouncementsResponse>({
-    queryKey: ["announcements", "home"],
-    queryFn: async () => {
-      const res = await fetch("/api/announcements");
-      if (!res.ok) throw new Error(`announcements ${res.status}`);
-      return res.json();
-    },
-    staleTime: 5 * 60 * 1000,
-    retry: 1,
-  });
+  // One shared request for all announcements (pinned-first, newest-first
+  // server-side); we scope client-side. Degrades silently · curated news still
+  // renders.
+  const annQuery = useAnnouncements();
 
   const feed = useMemo<FeedItem[]>(() => {
     const allNews = getAllNews();

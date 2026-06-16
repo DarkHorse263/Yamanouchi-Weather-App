@@ -5,9 +5,10 @@ description: How live snow-news RSS sources are aggregated, filtered, and self-h
 
 # feelzlike live news feeds
 
-Live "news" announcements come from publisher RSS feeds (SnowsBest, Mountainwatch)
-ingested in `announcementsIngest.ts`, fanned out across the AU region feeds and
-rendered in the region Alerts page.
+Live "news" announcements come from publisher RSS feeds (SnowsBest, Mountainwatch,
+SnowAction) ingested in `announcementsIngest.ts`, fanned out across the AU region
+feeds and served by `GET /api/announcements`. They render on the home strip, the
+region Alerts page, AND the global `/news` page (all three off the same feed).
 
 ## Legal posture (do not regress)
 Aggregate ONLY: headline + short excerpt + link-out + source attribution. Never
@@ -39,3 +40,25 @@ as stale rows. Three guards make this safe:
 **How to apply:** any new replacePrefix source must throw on structurally-invalid
 input before returning `[]`, or it will silently wipe its own rows on a publisher
 outage. Positional `slot<i>` dedupeKeys + prefix replacement keep growth bounded.
+
+## Per-source relevance policy (trustSource)
+`buildNewsRows(..., { trustSource })`. Global aggregators (Mountainwatch,
+SnowsBest) keep the AU/NZ `<category>` allowlist. AU-domain feeds (SnowAction)
+pass `trustSource:true` and SKIP the allowlist. **Why:** AU-domain snow magazines
+are already AU-focused but tag their feed sparsely, so the allowlist would wrongly
+drop nearly every item; their content can still be JP/NZ snow-travel
+(Hakuba/Queenstown) and that breadth is intentional. **How to apply:** new
+AU-domain sources → trustSource on; new global aggregators → leave it off so the
+allowlist protects the AU region feeds. trustSource does NOT bypass the
+throw-on-zero-parsed guard, so it can't wrongly clear its replacePrefix rows.
+
+## Surfaces (do not regress /news)
+The feed must reach BOTH the home strip and the full `/news` page, mapped onto the
+curated `NewsItem` shape via the shared module
+`feelzlike/src/lib/news/announcements.ts` (`useAnnouncements` +
+`announcementsToNewsItems`). **Why:** /news previously rendered ONLY the static
+curated affiliate list (`data/news.ts`), so the automated feed never reached it
+and the page looked stale/blank. The mapper COLLAPSES the AU region fan-out by
+`sourceUrl||title` into one card (regions = union) so "all regions" never shows the
+same story 3x; automated items are category "resort" + `sponsored:false` (only
+curated items carry affiliate links/pills).
