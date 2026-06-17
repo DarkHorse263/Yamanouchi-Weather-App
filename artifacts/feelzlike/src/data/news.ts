@@ -58,6 +58,39 @@ export interface NewsItem {
  * sponsored treatment is visible from the start.
  */
 export const NEWS_ITEMS: NewsItem[] = [
+  // Daily resort snow reports · link-out cards to each resort's official
+  // morning report page. No live numbers in-card (the resorts publish those
+  // client-side) · these are evergreen quick links during the AU season.
+  {
+    id: "perisher-snow-report",
+    title: "Perisher daily snow report",
+    blurb: "Official morning report from the resort · base and surface conditions, overnight snow and which lifts and runs are open today.",
+    url: "https://www.perisher.com.au/reports-cams/reports/snow-report",
+    source: "Perisher",
+    category: "resort",
+    regions: ["snowy-mountains"],
+    publishedAt: "2026-06-16",
+  },
+  {
+    id: "falls-creek-snow-report",
+    title: "Falls Creek daily snow report",
+    blurb: "Official morning report from the resort · base and surface conditions, overnight snow and today's open lifts and runs.",
+    url: "https://www.fallscreek.com.au/snowreport/",
+    source: "Falls Creek",
+    category: "resort",
+    regions: ["victorias-high-country"],
+    publishedAt: "2026-06-16",
+  },
+  {
+    id: "hotham-snow-report",
+    title: "Mt Hotham daily snow report",
+    blurb: "Official morning report from the resort · base and surface conditions, overnight snow and today's open lifts and runs.",
+    url: "https://www.mthotham.com.au/mountain/conditions/snow-reports",
+    source: "Mt Hotham",
+    category: "resort",
+    regions: ["victorias-high-country"],
+    publishedAt: "2026-06-16",
+  },
   {
     id: "thredbo-2026-season-pass",
     title: "Thredbo 2026 season pass · early bird closes soon",

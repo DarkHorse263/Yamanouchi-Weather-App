@@ -62,3 +62,17 @@ and the page looked stale/blank. The mapper COLLAPSES the AU region fan-out by
 `sourceUrl||title` into one card (regions = union) so "all regions" never shows the
 same story 3x; automated items are category "resort" + `sponsored:false` (only
 curated items carry affiliate links/pills).
+
+## Resort daily snow reports (link-out only)
+Perisher, Falls Creek and Mt Hotham are Vail AU resorts on three DIFFERENT site
+platforms (Perisher=Joomla, Falls Creek=WordPress, Hotham=DNN — note the
+`/Portals/0/` path) with NO clean public snow-report feed; the snow numbers are
+rendered client-side, so there's nothing stable to scrape or ingest. They live as
+static link-out cards in `data/news.ts` (category "resort") pointing at each
+resort's official report page, NOT via announcementsIngest. **Why:** these resorts
+publish email-style daily reports; link-out cards were chosen over fragile scraping
+and need zero maintenance. **How to apply:** don't add a LiveSource parser for these —
+only Thredbo (EVT LivePass XML) exposes a machine-readable feed. Canonical paths
+(re-derive from each homepage's nav, the guessed `/snow-report` URLs are soft-404s):
+Perisher `/reports-cams/reports/snow-report`, Falls Creek `/snowreport/`,
+Hotham `/mountain/conditions/snow-reports`.
