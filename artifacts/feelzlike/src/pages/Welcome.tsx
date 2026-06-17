@@ -75,18 +75,8 @@ export default function Welcome() {
           </p>
         </header>
 
-        {/* NEAR YOU ─ location-first: local conditions + nearest region ─ */}
-        <NearYou />
-
-        {/* FAVOURITES ─ saved towns for one-tap access (hidden if none) ─ */}
-        <Favourites />
-
-        {/* MOUNTAIN NEWS ─ curated feed + live resort updates, scoped to the
-            user's saved/visited regions when known ─ */}
-        <MountainNews />
-
         {/* CTA ────────────────────────────────────────── */}
-        <section className="px-6 pt-6 pb-9 text-center md:pt-9 md:pb-16">
+        <section className="px-6 pt-3 pb-6 text-center md:pt-4 md:pb-8">
           {/* Return shortcut · skips the country/region pickers for users
               who've already settled on a base town. Only renders when a
               valid lastTown exists in localStorage (set on TownLayout mount). */}
@@ -184,6 +174,16 @@ export default function Welcome() {
             tap to pick a country
           </p>
         </section>
+
+        {/* NEAR YOU ─ location-first: local conditions + nearest region ─ */}
+        <NearYou />
+
+        {/* FAVOURITES ─ saved towns for one-tap access (hidden if none) ─ */}
+        <Favourites />
+
+        {/* MOUNTAIN NEWS ─ curated feed + live resort updates, scoped to the
+            user's saved/visited regions when known ─ */}
+        <MountainNews />
 
         <HomeFooter />
       </div>
