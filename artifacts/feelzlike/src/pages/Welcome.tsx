@@ -5,7 +5,9 @@ import { markLandingVisited, readLastTown, type LastTown } from "@/lib/favourite
 import logoFullColour from "/branding/logo-full-colour.png?url";
 import { NearYou } from "@/components/home/NearYou";
 import { Favourites } from "@/components/home/Favourites";
-import { MountainNews } from "@/components/home/MountainNews";
+// MountainNews ("from the mountains" / news strip) is temporarily hidden ·
+// parked until we work out what to do with it and how we'll manage it.
+// import { MountainNews } from "@/components/home/MountainNews";
 import { HomeFooter } from "@/components/home/HomeFooter";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { websiteSchema, organizationSchema } from "@/lib/seo/jsonLd";
@@ -181,9 +183,10 @@ export default function Welcome() {
         {/* FAVOURITES ─ saved towns for one-tap access (hidden if none) ─ */}
         <Favourites />
 
-        {/* MOUNTAIN NEWS ─ curated feed + live resort updates, scoped to the
-            user's saved/visited regions when known ─ */}
-        <MountainNews />
+        {/* MOUNTAIN NEWS ─ temporarily hidden · the "from the mountains" / news
+            section is parked until we work out what to do with it and how we'll
+            manage it. Re-enable by restoring the import above + <MountainNews />. */}
+        {/* <MountainNews /> */}
 
         <HomeFooter />
       </div>
