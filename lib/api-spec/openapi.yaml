@@ -1544,6 +1544,10 @@ components:
         - yamanouchi
         - nozawa-onsen
         - iiyama
+        - queenstown
+        - wanaka
+        - mt-hutt
+        - ruapehu
       description: |
         Canonical region identifier used across the FeelZlike platform.
 

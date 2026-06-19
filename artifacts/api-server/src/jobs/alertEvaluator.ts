@@ -37,7 +37,7 @@ const MAX_FAILURES_PER_24H = 3;
 // per-resort accuracy we'll move to per-mountain coords (the schema already
 // has subscriber.mountains[] for that).
 const REGION_ANCHORS: Record<RegionId, {
-  lat: number; lon: number; elevation: number; region: "AU" | "JP";
+  lat: number; lon: number; elevation: number; region: "AU" | "JP" | "OTHER";
   displayName: string;
 }> = {
   "snowy-mountains": { lat: -36.45, lon: 148.32, elevation: 1700, region: "AU", displayName: "Snowy Mountains" },
@@ -51,6 +51,12 @@ const REGION_ANCHORS: Record<RegionId, {
   // Iiyama · anchor on Madarao summit · the highest and most snow-prone
   // point in the cluster, best regional proxy for powder alerts.
   "iiyama": { lat: 36.9056, lon: 138.2858, elevation: 1382, region: "JP", displayName: "Iiyama" },
+  // NZ · no national model in the ensemble, so region "OTHER" (global
+  // blend). Anchor each on its highest skiable summit.
+  "queenstown": { lat: -45.0556, lon: 168.8194, elevation: 1943, region: "OTHER", displayName: "Queenstown" },
+  "wanaka": { lat: -44.6311, lon: 168.8978, elevation: 2088, region: "OTHER", displayName: "Wanaka" },
+  "mt-hutt": { lat: -43.4707, lon: 171.5306, elevation: 2075, region: "OTHER", displayName: "Mt Hutt" },
+  "ruapehu": { lat: -39.3072, lon: 175.5286, elevation: 2300, region: "OTHER", displayName: "Ruapehu" },
 };
 
 interface EvaluatorReport {

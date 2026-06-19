@@ -18,10 +18,10 @@ interface LocationConfig {
   bomWmoId: number;
   bomSecondaryWmoId?: number;
   bomSecondaryStation?: string;
-  /** Open-Meteo timezone, defaults to "Australia/Sydney". JP locations use "Asia/Tokyo". */
+  /** Open-Meteo timezone, defaults to "Australia/Sydney". JP locations use "Asia/Tokyo", NZ uses "Pacific/Auckland". */
   timezone?: string;
-  /** ISO region code; AU=Australia, JP=Japan. Used for ensemble model selection. */
-  region?: "AU" | "JP";
+  /** ISO region code; AU=Australia, JP=Japan, NZ=New Zealand. Used for ensemble model selection + forecast horizon. */
+  region?: "AU" | "JP" | "NZ";
 }
 
 const LOCATIONS: LocationConfig[] = [
@@ -161,6 +161,27 @@ const LOCATIONS: LocationConfig[] = [
   { id: "togari-onsen",              name: "Togari Onsen",              latitude: 36.8722, longitude: 138.4014, elevation: 1050, description: "Quiet onsen-side mountain · long beginner-intermediate runs above the village.",                                  bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
   { id: "kijimadaira",               name: "Kijimadaira · Romance no Kamisama", latitude: 36.8639, longitude: 138.4006, elevation: 1351, description: "Rebranded 2023 from Kita-Shinshu Kijimadaira · wide groomers and family terrain on Mt Kayano.",                          bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
   { id: "kijima-snow-park",          name: "Kijima Snow Park",          latitude: 36.8556, longitude: 138.4108, elevation:  700, description: "Snow play and toboggan park (Makinoiri Kogen) · sledding, snow tubing, kids' first-time terrain.",              bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+
+  // ─── Queenstown (Otago, New Zealand) ─────────────────────
+  // Open-Meteo primary + OpenWeatherMap fallback · no national AWS feed
+  // wired for NZ, so bom* fields stay blank and there's no obs reconciler.
+  { id: "coronet-peak",              name: "Coronet Peak",              latitude: -44.9206, longitude: 168.7361, elevation: 1649, description: "Closest field to Queenstown · early-season snowmaking and night skiing above the Shotover.",                      bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Pacific/Auckland", region: "NZ" },
+  { id: "the-remarkables",           name: "The Remarkables",           latitude: -45.0556, longitude: 168.8194, elevation: 1943, description: "Higher, sheltered bowls across the lake · family and park terrain in the Remarkables range.",                     bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Pacific/Auckland", region: "NZ" },
+  { id: "queenstown",                name: "Queenstown",                latitude: -45.0312, longitude: 168.6626, elevation:  310, description: "South Island resort hub on Lake Wakatipu · the base town for Coronet Peak and The Remarkables.",               bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Pacific/Auckland", region: "NZ" },
+
+  // ─── Wanaka (Otago, New Zealand) ─────────────────────────
+  { id: "cardrona",                  name: "Cardrona",                  latitude: -44.8741, longitude: 168.9492, elevation: 1860, description: "Wide sunny groomers and NZ's biggest terrain parks on the Crown Range above Wanaka.",                         bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Pacific/Auckland", region: "NZ" },
+  { id: "treble-cone",               name: "Treble Cone",               latitude: -44.6311, longitude: 168.8978, elevation: 2088, description: "The steep one · big off-piste and the highest skiable terrain in the Southern Lakes.",                          bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Pacific/Auckland", region: "NZ" },
+  { id: "wanaka",                    name: "Wanaka",                    latitude: -44.7032, longitude: 169.1321, elevation:  300, description: "Laid-back lakeside base town · gateway to Cardrona and Treble Cone.",                                         bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Pacific/Auckland", region: "NZ" },
+
+  // ─── Mt Hutt (Canterbury, New Zealand) ───────────────────
+  { id: "mt-hutt",                   name: "Mt Hutt",                   latitude: -43.4707, longitude: 171.5306, elevation: 2075, description: "Canterbury's high-alpine basin · long season and the closest big field to Christchurch.",                      bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Pacific/Auckland", region: "NZ" },
+  { id: "methven",                   name: "Methven",                   latitude: -43.6333, longitude: 171.6500, elevation:  320, description: "Farm-town base at the foot of the Mt Hutt access road · about 35 min up to the lifts.",                        bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Pacific/Auckland", region: "NZ" },
+
+  // ─── Ruapehu (Central Plateau, New Zealand) ──────────────
+  { id: "whakapapa",                 name: "Whakapapa",                 latitude: -39.2547, longitude: 175.5619, elevation: 2020, description: "The big one on Mt Ruapehu's northwest face · varied terrain up to Knoll Ridge.",                              bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Pacific/Auckland", region: "NZ" },
+  { id: "turoa",                     name: "Turoa",                     latitude: -39.3072, longitude: 175.5286, elevation: 2300, description: "Ruapehu's southwest face above Ohakune · highest lifted terrain in New Zealand.",                           bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Pacific/Auckland", region: "NZ" },
+  { id: "ohakune",                   name: "Ohakune",                   latitude: -39.4181, longitude: 175.3956, elevation:  610, description: "Lively Turoa-side base town · the Ohakune Mountain Road climbs ~17 km to the lifts.",                        bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Pacific/Auckland", region: "NZ" },
 ];
 
 const WEATHER_DESCRIPTIONS: Record<number, string> = {
@@ -683,7 +704,9 @@ router.get("/forecast/:locationId", async (req, res) => {
       latitude: location.latitude,
       longitude: location.longitude,
       elevation: location.elevation,
-      region: location.region ?? "AU",
+      // NZ has no dedicated national model in the ensemble · fall back to the
+      // global blend ("OTHER"). JP keeps JMA, everything else is AU.
+      region: location.region === "JP" ? "JP" : location.region === "NZ" ? "OTHER" : "AU",
       timezone: location.timezone ?? "Australia/Sydney",
       days: 7,
     });

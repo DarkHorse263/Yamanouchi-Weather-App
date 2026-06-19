@@ -37,7 +37,7 @@ interface Region {
   id: string;
   name: string;
   country: string;
-  countryCode: "AU" | "JP";
+  countryCode: "AU" | "JP" | "NZ";
   region: string;
   status: RegionStatus;
   href: string;
@@ -61,6 +61,10 @@ const FALLBACK_REGIONS: Region[] = [
   { id: "snowy-mountains",        name: "Snowy Mountains",                country: "Australia", countryCode: "AU", region: "New South Wales", status: "live", href: "/snowy-mountains/",        baseTowns: ["Jindabyne", "Berridale", "Cooma"],                            mountains: ["Perisher", "Thredbo", "Selwyn", "Charlotte's Pass"],          headlineLabel: "Jindabyne",     headline: null },
   { id: "victorias-high-country", name: "Victoria\u2019s High Country",   country: "Australia", countryCode: "AU", region: "Victoria",        status: "live", href: "/victorias-high-country/", baseTowns: ["Mount Beauty", "Bright", "Mansfield", "Harrietville", "Dinner Plain"], mountains: ["Mt Buller", "Mt Stirling", "Falls Creek", "Mt Hotham"], headlineLabel: "Mount Beauty", headline: null },
   { id: "yamanouchi",             name: "Yamanouchi",                     country: "Japan",     countryCode: "JP", region: "Nagano",          status: "live", href: "/yamanouchi/",             baseTowns: ["Yudanaka", "Shibu Onsen", "Yomase"],                          mountains: ["Shiga Kogen", "Ryuoo", "X-Jam", "Yomase"],                   headlineLabel: "Yudanaka",     headline: null },
+  { id: "queenstown",             name: "Queenstown",                     country: "New Zealand", countryCode: "NZ", region: "Otago",          status: "live", href: "/queenstown/",            baseTowns: ["Queenstown"],                                                mountains: ["Coronet Peak", "The Remarkables"],                          headlineLabel: "Queenstown",   headline: null },
+  { id: "wanaka",                 name: "Wanaka",                         country: "New Zealand", countryCode: "NZ", region: "Otago",          status: "live", href: "/wanaka/",                baseTowns: ["Wanaka"],                                                    mountains: ["Cardrona", "Treble Cone"],                                  headlineLabel: "Wanaka",       headline: null },
+  { id: "mt-hutt",                name: "Mt Hutt",                        country: "New Zealand", countryCode: "NZ", region: "Canterbury",     status: "live", href: "/mt-hutt/",               baseTowns: ["Methven"],                                                   mountains: ["Mt Hutt"],                                                  headlineLabel: "Methven",      headline: null },
+  { id: "ruapehu",                name: "Ruapehu",                        country: "New Zealand", countryCode: "NZ", region: "Central Plateau", status: "live", href: "/ruapehu/",               baseTowns: ["Ohakune"],                                                   mountains: ["Whakapapa", "Turoa"],                                       headlineLabel: "Ohakune",      headline: null },
 ];
 
 // Map a region to the base town we surface in the country card. This is
@@ -71,12 +75,16 @@ const PRIMARY_TOWN: Record<string, string> = {
   "yamanouchi":              "Yudanaka",
   "nozawa-onsen":            "Nozawa Onsen",
   "iiyama":                  "Iiyama",
+  "queenstown":              "Queenstown",
+  "wanaka":                  "Wanaka",
+  "mt-hutt":                 "Methven",
+  "ruapehu":                 "Ohakune",
 };
 
-// AU = southern hemisphere (snow Jun-Sep), JP = northern (snow Dec-Mar).
-function seasonForCountry(code: "AU" | "JP"): "winter" | "green" {
+// AU + NZ = southern hemisphere (snow Jun-Sep), JP = northern (snow Dec-Mar).
+function seasonForCountry(code: "AU" | "JP" | "NZ"): "winter" | "green" {
   const month = new Date().getMonth() + 1;
-  if (code === "AU") return month >= 6 && month <= 9 ? "winter" : "green";
+  if (code === "AU" || code === "NZ") return month >= 6 && month <= 9 ? "winter" : "green";
   return month >= 12 || month <= 3 ? "winter" : "green";
 }
 
@@ -108,10 +116,11 @@ export default function Countries() {
   const regions = data?.regions ?? FALLBACK_REGIONS;
   const liveCount = regions.filter((r) => r.status === "live").length;
 
-  type Country = { code: "AU" | "JP"; name: string; flag: string; regions: Region[] };
+  type Country = { code: "AU" | "JP" | "NZ"; name: string; flag: string; regions: Region[] };
   const COUNTRIES: Country[] = ([
-    { code: "AU" as const, name: "Australia", flag: "\u{1F1E6}\u{1F1FA}", regions: regions.filter((r) => r.countryCode === "AU") },
-    { code: "JP" as const, name: "Japan",     flag: "\u{1F1EF}\u{1F1F5}", regions: regions.filter((r) => r.countryCode === "JP") },
+    { code: "AU" as const, name: "Australia",   flag: "\u{1F1E6}\u{1F1FA}", regions: regions.filter((r) => r.countryCode === "AU") },
+    { code: "JP" as const, name: "Japan",       flag: "\u{1F1EF}\u{1F1F5}", regions: regions.filter((r) => r.countryCode === "JP") },
+    { code: "NZ" as const, name: "New Zealand", flag: "\u{1F1F3}\u{1F1FF}", regions: regions.filter((r) => r.countryCode === "NZ") },
   ] satisfies Country[]).filter((c) => c.regions.length > 0);
 
   return (

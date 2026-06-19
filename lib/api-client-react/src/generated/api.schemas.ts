@@ -60,6 +60,10 @@ export const RegionId = {
   yamanouchi: "yamanouchi",
   "nozawa-onsen": "nozawa-onsen",
   iiyama: "iiyama",
+  queenstown: "queenstown",
+  wanaka: "wanaka",
+  "mt-hutt": "mt-hutt",
+  ruapehu: "ruapehu",
 } as const;
 
 export interface HealthStatus {

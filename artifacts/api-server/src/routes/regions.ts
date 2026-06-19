@@ -11,7 +11,7 @@ interface RegionConfig {
   id: string;
   name: string;
   country: string;
-  countryCode: "AU" | "JP";
+  countryCode: "AU" | "JP" | "NZ";
   region: string;
   status: RegionStatus;
   href: string;
@@ -144,6 +144,79 @@ const REGIONS: RegionConfig[] = [
     model: "jma_seamless",
     timezone: "Asia/Tokyo",
     sourceLabel: "JMA Seamless",
+  },
+  {
+    id: "queenstown",
+    name: "Queenstown",
+    country: "New Zealand",
+    countryCode: "NZ",
+    region: "Otago",
+    status: "live",
+    href: "/queenstown/",
+    baseTowns: ["Queenstown"],
+    mountains: ["Coronet Peak", "The Remarkables"],
+    // Headline reading from Queenstown town (~310m) · the base everyone
+    // arrives into. Per-mountain peak forecasts live on the region page.
+    headlineLabel: "Queenstown",
+    lat: -45.0312,
+    lon: 168.6626,
+    timezone: "Pacific/Auckland",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "wanaka",
+    name: "Wanaka",
+    country: "New Zealand",
+    countryCode: "NZ",
+    region: "Otago",
+    status: "live",
+    href: "/wanaka/",
+    baseTowns: ["Wanaka"],
+    mountains: ["Cardrona", "Treble Cone"],
+    // Headline reading from Wanaka town (~300m) · lakeside base for
+    // Cardrona and Treble Cone.
+    headlineLabel: "Wanaka",
+    lat: -44.7032,
+    lon: 169.1321,
+    timezone: "Pacific/Auckland",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "mt-hutt",
+    name: "Mt Hutt",
+    country: "New Zealand",
+    countryCode: "NZ",
+    region: "Canterbury",
+    status: "live",
+    href: "/mt-hutt/",
+    baseTowns: ["Methven"],
+    mountains: ["Mt Hutt"],
+    // Headline reading from Methven (~320m) · the farm-town base at the
+    // foot of the Mt Hutt access road. Summit forecast lives on the
+    // mountain page.
+    headlineLabel: "Methven",
+    lat: -43.6333,
+    lon: 171.6500,
+    timezone: "Pacific/Auckland",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "ruapehu",
+    name: "Ruapehu",
+    country: "New Zealand",
+    countryCode: "NZ",
+    region: "Central Plateau",
+    status: "live",
+    href: "/ruapehu/",
+    baseTowns: ["Ohakune"],
+    mountains: ["Whakapapa", "Turoa"],
+    // Headline reading from Ohakune (~610m) · the Turoa-side base town.
+    // Per-mountain peak forecasts live on the region page.
+    headlineLabel: "Ohakune",
+    lat: -39.4181,
+    lon: 175.3956,
+    timezone: "Pacific/Auckland",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
   },
 ];
 

@@ -29,6 +29,13 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   yamanouchi: YAMANOUCHI_TRANSPORT,
   "nozawa-onsen": NOZAWA_ONSEN_TRANSPORT,
   iiyama: IIYAMA_TRANSPORT,
+  // NZ · curated transport deferred for the v1 launch. Empty lists keep the
+  // Record exhaustive; getProvidersForRegion falls back to [] so the
+  // Transport page simply shows no curated providers yet.
+  queenstown: [],
+  wanaka: [],
+  "mt-hutt": [],
+  ruapehu: [],
 };
 
 // Loader-time integrity check.

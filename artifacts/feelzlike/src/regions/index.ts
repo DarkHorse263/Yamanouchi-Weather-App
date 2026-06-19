@@ -5,11 +5,17 @@ import { victoriasHighCountryRegion } from "./victorias-high-country";
 import { nozawaOnsenRegion } from "./nozawa-onsen";
 import { iiyamaRegion } from "./iiyama";
 import { tasmaniaRegion } from "./tasmania";
+import { queenstownRegion } from "./queenstown";
+import { wanakaRegion } from "./wanaka";
+import { mtHuttRegion } from "./mt-hutt";
+import { ruapehuRegion } from "./ruapehu";
 
 // Active region registry · AU: Snowy Mountains + Victoria's High Country
 // + Tasmania (Ben Lomond). JP: Yamanouchi (Shiga Kogen + Kita-Shiga),
 // Nozawa Onsen (standalone), Iiyama (Madarao/Tangram + Togari +
-// Kijimadaira cluster).
+// Kijimadaira cluster). NZ: Queenstown (Coronet Peak + The Remarkables),
+// Wanaka (Cardrona + Treble Cone), Mt Hutt (Methven), Ruapehu
+// (Whakapapa + Turoa, Ohakune).
 export const REGIONS: RegionConfig[] = [
   snowyMountainsRegion,
   victoriasHighCountryRegion,
@@ -17,6 +23,10 @@ export const REGIONS: RegionConfig[] = [
   yamanouchiRegion,
   nozawaOnsenRegion,
   iiyamaRegion,
+  queenstownRegion,
+  wanakaRegion,
+  mtHuttRegion,
+  ruapehuRegion,
 ];
 
 export const REGION_BY_ID: Record<string, RegionConfig> = Object.fromEntries(
@@ -31,7 +41,7 @@ export function getRegion(id: string): RegionConfig | undefined {
 // (`/au`, `/jp`) and lets the landing decide which regions belong under
 // which flag without re-deriving from `subtitle` strings. Keep in sync
 // when a new region is added.
-export type CountryCode = "AU" | "JP";
+export type CountryCode = "AU" | "JP" | "NZ";
 export const REGION_COUNTRY: Record<string, CountryCode> = {
   "snowy-mountains": "AU",
   "victorias-high-country": "AU",
@@ -39,10 +49,15 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "yamanouchi": "JP",
   "nozawa-onsen": "JP",
   "iiyama": "JP",
+  "queenstown": "NZ",
+  "wanaka": "NZ",
+  "mt-hutt": "NZ",
+  "ruapehu": "NZ",
 };
 export const COUNTRY_META: Record<CountryCode, { name: string; flag: string }> = {
   AU: { name: "Australia", flag: "🇦🇺" },
   JP: { name: "Japan", flag: "🇯🇵" },
+  NZ: { name: "New Zealand", flag: "🇳🇿" },
 };
 export function regionsForCountry(code: CountryCode): RegionConfig[] {
   return REGIONS.filter((r) => REGION_COUNTRY[r.id] === code);

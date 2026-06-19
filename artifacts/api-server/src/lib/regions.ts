@@ -14,6 +14,10 @@ export const REGION_IDS = [
   "yamanouchi",
   "nozawa-onsen",
   "iiyama",
+  "queenstown",
+  "wanaka",
+  "mt-hutt",
+  "ruapehu",
 ] as const;
 export type RegionId = (typeof REGION_IDS)[number];
 
@@ -100,6 +104,26 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "togari-onsen-village": "iiyama",
   "kijimadaira-village": "iiyama",
   "iiyama-roads": "iiyama",
+
+  // Queenstown, NZ · 2 mountains + 1 gateway town. No -roads entry (roads
+  // deferred for the NZ v1 launch).
+  "coronet-peak": "queenstown",
+  "the-remarkables": "queenstown",
+  "queenstown": "queenstown",
+
+  // Wanaka, NZ · 2 mountains + 1 gateway town.
+  "cardrona": "wanaka",
+  "treble-cone": "wanaka",
+  "wanaka": "wanaka",
+
+  // Mt Hutt, NZ · 1 mountain + 1 gateway town (Methven).
+  "mt-hutt": "mt-hutt",
+  "methven": "mt-hutt",
+
+  // Ruapehu, NZ · 2 mountains + 1 gateway town (Ohakune).
+  "whakapapa": "ruapehu",
+  "turoa": "ruapehu",
+  "ohakune": "ruapehu",
 };
 
 export function regionForLocation(locationId: string): RegionId | undefined {

@@ -46,7 +46,11 @@ export type RegionKey =
   | "tasmania"
   | "yamanouchi"
   | "nozawa-onsen"
-  | "iiyama";
+  | "iiyama"
+  | "queenstown"
+  | "wanaka"
+  | "mt-hutt"
+  | "ruapehu";
 type ViewMode = "interactive" | "windy" | "official";
 
 interface RegionConfig {
@@ -114,6 +118,45 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       imageUrl: null,
       href: "https://www.jma.go.jp/bosai/nowc/#zoom:10/lat:36.873/lon:138.366/colordepth:normal/elements:hrpns",
       attribution: "Japan Meteorological Agency · JMA",
+    },
+  },
+  // NZ · MetService offers no simple hotlinkable radar gif (unlike BOM),
+  // so imageUrl is null and the official view links out to the MetService
+  // rain radar. Forecast data itself is Open-Meteo (see weatherSource).
+  queenstown: {
+    windy: { lat: -44.99, lon: 168.74, zoom: 10 },
+    official: {
+      label: "MetService rain radar",
+      imageUrl: null,
+      href: "https://www.metservice.com/maps-radar/rain-radar",
+      attribution: "MetService · rain radar",
+    },
+  },
+  wanaka: {
+    windy: { lat: -44.73, lon: 168.99, zoom: 10 },
+    official: {
+      label: "MetService rain radar",
+      imageUrl: null,
+      href: "https://www.metservice.com/maps-radar/rain-radar",
+      attribution: "MetService · rain radar",
+    },
+  },
+  "mt-hutt": {
+    windy: { lat: -43.55, lon: 171.59, zoom: 10 },
+    official: {
+      label: "MetService rain radar",
+      imageUrl: null,
+      href: "https://www.metservice.com/maps-radar/rain-radar",
+      attribution: "MetService · rain radar",
+    },
+  },
+  ruapehu: {
+    windy: { lat: -39.32, lon: 175.50, zoom: 10 },
+    official: {
+      label: "MetService rain radar",
+      imageUrl: null,
+      href: "https://www.metservice.com/maps-radar/rain-radar",
+      attribution: "MetService · rain radar",
     },
   },
 };
@@ -195,6 +238,37 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "iiyama", name: "Iiyama City", lat: 36.852, lng: 138.366, accent: "#0ea5e9" },
     ],
   },
+  queenstown: {
+    center: { lat: -44.99, lng: 168.74 },
+    pins: [
+      { id: "coronet-peak", name: "Coronet Peak", lat: -44.9206, lng: 168.7361, accent: "#f97316" },
+      { id: "the-remarkables", name: "The Remarkables", lat: -45.0556, lng: 168.8194, accent: "#f97316" },
+      { id: "queenstown", name: "Queenstown", lat: -45.0312, lng: 168.6626, accent: "#0ea5e9" },
+    ],
+  },
+  wanaka: {
+    center: { lat: -44.73, lng: 168.99 },
+    pins: [
+      { id: "cardrona", name: "Cardrona", lat: -44.8741, lng: 168.9492, accent: "#f97316" },
+      { id: "treble-cone", name: "Treble Cone", lat: -44.6311, lng: 168.8978, accent: "#f97316" },
+      { id: "wanaka", name: "Wanaka", lat: -44.7032, lng: 169.1321, accent: "#0ea5e9" },
+    ],
+  },
+  "mt-hutt": {
+    center: { lat: -43.55, lng: 171.59 },
+    pins: [
+      { id: "mt-hutt", name: "Mt Hutt", lat: -43.4707, lng: 171.5306, accent: "#f97316" },
+      { id: "methven", name: "Methven", lat: -43.6333, lng: 171.6500, accent: "#0ea5e9" },
+    ],
+  },
+  ruapehu: {
+    center: { lat: -39.32, lng: 175.50 },
+    pins: [
+      { id: "whakapapa", name: "Whakapapa", lat: -39.2547, lng: 175.5619, accent: "#f97316" },
+      { id: "turoa", name: "Turoa", lat: -39.3072, lng: 175.5286, accent: "#f97316" },
+      { id: "ohakune", name: "Ohakune", lat: -39.4181, lng: 175.3956, accent: "#0ea5e9" },
+    ],
+  },
 };
 
 // Which country each region sits in. Drives the cross-region grouping on
@@ -202,7 +276,7 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
 // Australian town + resort, and likewise within Japan. Kept local so the
 // map stays self-contained · keep in step with REGION_COUNTRY in
 // src/regions/index.ts.
-type MapCountry = "AU" | "JP";
+type MapCountry = "AU" | "JP" | "NZ";
 const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "snowy-mountains": "AU",
   "victorias-high-country": "AU",
@@ -210,8 +284,12 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   yamanouchi: "JP",
   "nozawa-onsen": "JP",
   iiyama: "JP",
+  queenstown: "NZ",
+  wanaka: "NZ",
+  "mt-hutt": "NZ",
+  ruapehu: "NZ",
 };
-const COUNTRY_LABEL: Record<MapCountry, string> = { AU: "australia", JP: "japan" };
+const COUNTRY_LABEL: Record<MapCountry, string> = { AU: "australia", JP: "japan", NZ: "new zealand" };
 const REGION_LABEL: Record<RegionKey, string> = {
   "snowy-mountains": "snowy mountains",
   "victorias-high-country": "victoria's high country",
@@ -219,6 +297,10 @@ const REGION_LABEL: Record<RegionKey, string> = {
   yamanouchi: "yamanouchi",
   "nozawa-onsen": "nozawa onsen",
   iiyama: "iiyama",
+  queenstown: "queenstown",
+  wanaka: "wanaka",
+  "mt-hutt": "mt hutt",
+  ruapehu: "ruapehu",
 };
 
 interface CountryPin extends PinSpec {

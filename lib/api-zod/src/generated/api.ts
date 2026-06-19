@@ -163,6 +163,10 @@ export const GetPowderAlertsQueryParams = zod.object({
       "yamanouchi",
       "nozawa-onsen",
       "iiyama",
+      "queenstown",
+      "wanaka",
+      "mt-hutt",
+      "ruapehu",
     ])
     .optional()
     .describe(
@@ -213,6 +217,10 @@ export const GetAnnouncementsQueryParams = zod.object({
       "yamanouchi",
       "nozawa-onsen",
       "iiyama",
+      "queenstown",
+      "wanaka",
+      "mt-hutt",
+      "ruapehu",
     ])
     .optional()
     .describe(
@@ -1141,6 +1149,10 @@ export const GetWeatherQueryParams = zod.object({
       "yamanouchi",
       "nozawa-onsen",
       "iiyama",
+      "queenstown",
+      "wanaka",
+      "mt-hutt",
+      "ruapehu",
     ])
     .optional()
     .describe(
@@ -1399,6 +1411,10 @@ export const GetWebcamsQueryParams = zod.object({
       "yamanouchi",
       "nozawa-onsen",
       "iiyama",
+      "queenstown",
+      "wanaka",
+      "mt-hutt",
+      "ruapehu",
     ])
     .optional()
     .describe(
@@ -1492,6 +1508,10 @@ export const GetRoadConditionsQueryParams = zod.object({
       "yamanouchi",
       "nozawa-onsen",
       "iiyama",
+      "queenstown",
+      "wanaka",
+      "mt-hutt",
+      "ruapehu",
     ])
     .optional()
     .describe(
@@ -1640,6 +1660,10 @@ export const GetLiftStatusQueryParams = zod.object({
       "yamanouchi",
       "nozawa-onsen",
       "iiyama",
+      "queenstown",
+      "wanaka",
+      "mt-hutt",
+      "ruapehu",
     ])
     .optional()
     .describe(

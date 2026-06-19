@@ -80,6 +80,8 @@ function Router() {
       <Route path="/au/"><CountryHome code="AU" /></Route>
       <Route path="/jp"><CountryHome code="JP" /></Route>
       <Route path="/jp/"><CountryHome code="JP" /></Route>
+      <Route path="/nz"><CountryHome code="NZ" /></Route>
+      <Route path="/nz/"><CountryHome code="NZ" /></Route>
       <Route path="/:region/*?">
         <RegionLayout />
       </Route>

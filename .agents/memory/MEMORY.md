@@ -14,3 +14,4 @@
 - [monorepo project-reference rebuild](monorepo-project-reference-rebuild.md) — after codegen/schema edits, `tsc` consumers fail "no exported member" until you `tsc -b` the lib decls, even though dev server works.
 - [feelzlike location-weather endpoint](feelzlike-weather-endpoint-sharing.md) — single `/weather/:id` serves AU+JP; region-gate forecast_days (undefined region = AU); consumers slice-cap `daily`, audit for open-ended slices.
 - [feelzlike Awin affiliate](feelzlike-awin-monetization.md) — earns only via Convert-a-Link on Awin-approved advertisers (configured Awin-side); keep the MasterTag gated behind canUseAds; never double-tag one OTA (direct id + Awin).
+- [feelzlike adding a country](feelzlike-add-country.md) — sync set in regions.ts header is incomplete (also transport REGISTRY throws-at-load + Countries.tsx); root `pnpm typecheck` short-circuits on pre-existing anthropic-lib error, so typecheck artifacts directly.
