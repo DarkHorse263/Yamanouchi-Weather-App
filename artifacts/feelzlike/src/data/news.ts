@@ -251,15 +251,35 @@ export const NEWS_ITEMS: NewsItem[] = [
  */
 const isVisibleNews = (n: NewsItem): boolean => n.category !== "deals";
 
+/**
+ * Daily snow reports are evergreen link-outs to each resort's morning report
+ * page, so their date must roll forward to today each day · otherwise they read
+ * as stale ("3 days ago"). We stamp snowReport items with the current local
+ * date at read time. The live Thredbo report keeps its real feed timestamp (it
+ * is already current), and a same-day feed datetime still sorts ahead of this
+ * date-only stamp, so the live report leads the section.
+ */
+function todayIso(): string {
+  const d = new Date();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${d.getFullYear()}-${m}-${day}`;
+}
+
+const withCurrentSnowReportDate = (n: NewsItem): NewsItem =>
+  n.snowReport ? { ...n, publishedAt: todayIso() } : n;
+
 export function getNewsForRegion(regionId: RegionId): NewsItem[] {
   return NEWS_ITEMS
     .filter(isVisibleNews)
     .filter((n) => n.regions === "all" || n.regions.includes(regionId))
+    .map(withCurrentSnowReportDate)
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 }
 
 export function getAllNews(): NewsItem[] {
   return NEWS_ITEMS
     .filter(isVisibleNews)
+    .map(withCurrentSnowReportDate)
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 }

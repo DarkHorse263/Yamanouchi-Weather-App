@@ -88,6 +88,13 @@ live-report signal but is semantically broad — a future generic conditions/lif
 update would be mis-flagged as a snow report. When more live announcement sources
 land, replace the `category === "conditions"` check with an explicit
 `snowReport`/`kind` flag emitted from `announcementsIngest.ts`.
+Curated daily snow reports (Perisher / Falls Creek / Mt Hotham) are evergreen
+link-outs, so `getAllNews()` + `getNewsForRegion()` re-stamp every `snowReport`
+item with TODAY's local date at read time (`withCurrentSnowReportDate`) · they
+must never read as stale ("3 days ago"). **Don't** hardcode their `publishedAt`
+to a fixed date — that's what made them look stale. The live Thredbo report keeps
+its real feed timestamp (a same-day datetime sorts ahead of the date-only stamp,
+so it still leads when freshly updated).
 
 ## Resort daily snow reports (link-out only)
 Perisher, Falls Creek and Mt Hotham are Vail AU resorts on three DIFFERENT site
