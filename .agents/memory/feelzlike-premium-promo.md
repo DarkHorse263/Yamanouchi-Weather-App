@@ -22,3 +22,16 @@ The promo runs 1 June 2026 → end-of-day 1 August 2026 by default. Overridable 
 `usePremium()` is for UI only · it flips a localStorage flag for previewing. Real entitlements are enforced server-side via `requireEntitlement(...)` middleware in `artifacts/api-server/src/middlewares/require-entitlement.ts`. When Stripe lands, the resolver plugged into `setSubscriptionResolver(...)` is the one that gates routes for real. Any premium feature shipped without a server-side `requireEntitlement(...)` guard is functionally free.
 
 **How to apply:** every premium-only API route must call `requireEntitlement('<entitlement>')`. New entitlements go in `artifacts/api-server/src/lib/entitlements.ts` and must be added to the appropriate tier(s) in `TIER_ENTITLEMENTS`.
+
+## Decision: premium is HIDDEN UNTIL TRACTION (June 2026)
+
+Premium is intentionally switched off in the UI while building an audience. Do NOT "fix" any of the below as if it were a bug.
+
+- `PremiumGate` (lib/feelzlike-shell/src/PremiumGate.tsx) is deliberately a PASS-THROUGH · it renders `children` directly with no lock card / promo pill / upgrade CTA, so every gated section (MountainDetail, TownHome, yamanouchi resort, alerts pages) shows as a normal free feature. The full `PremiumGateProps` interface is kept so the many call sites compile unchanged.
+- The "Premium" nav tab is removed from `DEFAULT_MOUNTAIN_NAV` (and its `Sparkles` import), the Alerts lock glyph is suppressed (`locked: false`) and the explicit `pushMountain("/premium")` is removed in `AppShell.tsx`.
+- `TripPlanner` no longer locks · `PlannerLock` + the "free during launch" pill + the `!isPremium` gate were removed, so the planner always renders.
+- The `/premium` (and `/plan`) routes stay MOUNTED in `App.tsx` (orphaned, direct-URL only), NOT deleted.
+
+**Why:** user asked to hide premium until there is traction; chosen approach is fully reversible without touching the dozens of call sites. Note only `TripPlanner` and `Premium.tsx` consume `usePremium()` directly · region pages only go through `PremiumGate`.
+
+**How to restore:** restore the `PremiumGate` gating body from git history; re-add the `/premium` nav item + `Sparkles` import in `defaultNav.ts`; restore `locked: it.path === "/alerts"` and `pushMountain("/premium")` in `AppShell.tsx`; restore TripPlanner's `!isPremium` gate, `PlannerLock`, promo pill and `usePremium` import.

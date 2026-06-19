@@ -25,7 +25,6 @@ import NearYouWeather from "@/pages/NearYouWeather";
 import Privacy from "@/pages/legal/Privacy";
 import Terms from "@/pages/legal/Terms";
 import News from "@/pages/News";
-import Premium from "@/pages/Premium";
 import TripPlanner from "@/pages/TripPlanner";
 import AdminStats from "@/pages/admin/AdminStats";
 import AdminTraffic from "@/pages/admin/AdminTraffic";
@@ -59,10 +58,15 @@ function Router() {
           "see all news" target. */}
       <Route path="/news" component={News} />
       <Route path="/news/" component={News} />
-      {/* Premium hub · plans, current tier, feature overview. */}
-      <Route path="/premium" component={Premium} />
-      {/* Multi-day trip planner · premium-gated, mounted before /:region
-          catch-all so /plan isn't parsed as a region slug. */}
+      {/* Premium hidden until traction · the pricing/plans page is taken out
+          of service (redirect home) rather than deleted, so old bookmarks and
+          shared links land somewhere sensible. Restore
+          `<Route path="/premium" component={Premium} />` (and the Premium
+          import) to bring the hub back. */}
+      <Route path="/premium"><Redirect to="/" /></Route>
+      <Route path="/premium/"><Redirect to="/" /></Route>
+      {/* Multi-day trip planner · now a free feature (premium hidden), mounted
+          before /:region catch-all so /plan isn't parsed as a region slug. */}
       <Route path="/plan" component={TripPlanner} />
       {/* Admin dashboard · auth-gated, mounted before /:region catch-all so
           /admin/* paths aren't parsed as region slugs. */}

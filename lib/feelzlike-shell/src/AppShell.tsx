@@ -169,10 +169,10 @@ export function AppShell({
         icon: it.icon,
         label: t(it.label, it.labelJa),
         active: isActiveMountain(it.path),
-        // Alerts is the only remaining mountain-scope entry and is
-        // paywalled in v2. Render a tiny lock glyph alongside the label
-        // so the gating is obvious in nav even before users click in.
-        locked: it.path === "/alerts",
+        // Premium hidden until traction · Alerts is no longer surfaced as a
+        // paywalled feature, so suppress the lock glyph. Restore
+        // `it.path === "/alerts"` here to bring the lock badge back.
+        locked: false,
       });
     };
     // May 2026 v2: structural reset.
@@ -187,8 +187,10 @@ export function AppShell({
     pushTown("/stay");              // Stay
     pushTown("/eat");               // Eat
     pushTown("/explore");           // Explore
-    pushMountain("/alerts");        // Alerts (locked)
-    pushMountain("/premium");       // Premium hub (year-round)
+    pushMountain("/alerts");        // Alerts
+    // Premium hub hidden until traction · nav entry removed (the /premium
+    // route stays mounted in App.tsx for direct-URL access). Restore
+    // pushMountain("/premium") here to bring the tab back.
     // Future-proofing: append anything we forgot to enumerate above.
     townNav.forEach((it) => pushTown(it.path));
     mountainNav.forEach((it) => pushMountain(it.path));

@@ -7,12 +7,8 @@ import {
   ArrowLeft,
   Snowflake,
   Wind,
-  Lock,
-  Sparkles,
-  Gift,
   Check,
 } from "lucide-react";
-import { usePremium, setPremiumPreview } from "@workspace/feelzlike-shell";
 import { useTownWeather, type TownWeatherDaily } from "@/lib/town-weather";
 import {
   tripPlannerCatalog,
@@ -220,38 +216,7 @@ function MountainPicker({
   );
 }
 
-/** Locked teaser shown to free users once the promo has ended. */
-function PlannerLock() {
-  return (
-    <div className="rounded-3xl border border-border bg-white p-8 text-center">
-      <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-primary/10 text-primary mb-3">
-        <Lock className="w-5 h-5" />
-      </div>
-      <p className="inline-flex items-center gap-1.5 text-xs font-bold text-primary uppercase tracking-wider">
-        <Sparkles className="w-3 h-3" /> premium
-      </p>
-      <h2 className="text-xl font-black text-foreground mt-1.5">multi-day trip planner</h2>
-      <p className="text-sm text-muted-foreground mt-2 max-w-sm mx-auto leading-relaxed">
-        stack the next 7 days of conditions across your saved mountains and let
-        the best day jump out. subscribe to unlock the planner.
-      </p>
-      <button
-        onClick={() => setPremiumPreview(true)}
-        className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-full bg-foreground text-background px-5 py-2.5 text-sm font-semibold hover:opacity-90 transition-opacity"
-      >
-        <Sparkles className="w-3.5 h-3.5" /> preview premium
-      </button>
-      <p className="mt-3 text-xs text-muted-foreground">
-        <Link href="/premium" className="underline underline-offset-2 hover:text-foreground">
-          see all premium features
-        </Link>
-      </p>
-    </div>
-  );
-}
-
 export default function TripPlanner() {
-  const { isPremium, isPromoPeriod, daysLeftInPromo, promoEndsAt } = usePremium();
   const [saved, setSaved] = useState<string[]>([]);
 
   useEffect(() => {
@@ -290,42 +255,29 @@ export default function TripPlanner() {
           </p>
         </div>
 
-        {isPromoPeriod && promoEndsAt && (
-          <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 px-3 py-1 text-[11px] font-bold">
-            <Gift className="w-3 h-3" />
-            free during launch · {daysLeftInPromo} days left
-          </div>
-        )}
+        <section>
+          <h2 className="text-lg font-black text-foreground mb-3">your mountains</h2>
+          <MountainPicker saved={saved} onToggle={onToggle} />
+        </section>
 
-        {!isPremium ? (
-          <PlannerLock />
-        ) : (
-          <>
-            <section>
-              <h2 className="text-lg font-black text-foreground mb-3">your mountains</h2>
-              <MountainPicker saved={saved} onToggle={onToggle} />
-            </section>
-
-            <section className="space-y-3">
-              {savedMountains.length === 0 ? (
-                <div className="rounded-2xl border border-dashed border-border bg-secondary/30 p-8 text-center">
-                  <CalendarRange className="w-6 h-6 text-muted-foreground/50 mx-auto mb-2" />
-                  <p className="text-sm text-muted-foreground">
-                    pick a mountain above to see its next 7 days.
-                  </p>
-                </div>
-              ) : (
-                savedMountains.map((m) => (
-                  <MountainRow
-                    key={mountainKey(m.regionId, m.id)}
-                    mountain={m}
-                    onRemove={() => onToggle(mountainKey(m.regionId, m.id), true)}
-                  />
-                ))
-              )}
-            </section>
-          </>
-        )}
+        <section className="space-y-3">
+          {savedMountains.length === 0 ? (
+            <div className="rounded-2xl border border-dashed border-border bg-secondary/30 p-8 text-center">
+              <CalendarRange className="w-6 h-6 text-muted-foreground/50 mx-auto mb-2" />
+              <p className="text-sm text-muted-foreground">
+                pick a mountain above to see its next 7 days.
+              </p>
+            </div>
+          ) : (
+            savedMountains.map((m) => (
+              <MountainRow
+                key={mountainKey(m.regionId, m.id)}
+                mountain={m}
+                onRemove={() => onToggle(mountainKey(m.regionId, m.id), true)}
+              />
+            ))
+          )}
+        </section>
 
         <p className="text-[11px] text-muted-foreground/70 text-center pt-2">
           © 2026 navigate work digital · feelzlike
