@@ -78,6 +78,16 @@ filtering only on `/news` left deals leaking onto region strips. **How to apply:
 don't delete the deal items from `data/news.ts` or "fix" missing deals by re-adding
 a Deals filter without product sign-off — remove the `isVisibleNews` predicate to
 restore them everywhere at once.
+`/news` LEADS with daily resort snow reports (where available) in their own "daily
+snow reports" section, then "latest news". Reports are identified by
+`NewsItem.snowReport`: curated link-out cards set it explicitly (Perisher / Falls
+Creek / Mt Hotham), and `announcementsToNewsItems` derives it from
+`ann.category === "conditions"` (Thredbo's LivePass report ingests as "conditions").
+**Caveat (do before adding live sources):** "conditions" is the ONLY current
+live-report signal but is semantically broad — a future generic conditions/lifts
+update would be mis-flagged as a snow report. When more live announcement sources
+land, replace the `category === "conditions"` check with an explicit
+`snowReport`/`kind` flag emitted from `announcementsIngest.ts`.
 
 ## Resort daily snow reports (link-out only)
 Perisher, Falls Creek and Mt Hotham are Vail AU resorts on three DIFFERENT site

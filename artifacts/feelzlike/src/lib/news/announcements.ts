@@ -81,5 +81,8 @@ export function announcementsToNewsItems(anns: Announcement[]): NewsItem[] {
     regions: [...regions],
     publishedAt: ann.publishedAt,
     sponsored: false,
+    // Live "conditions" announcements are daily resort snow reports (e.g.
+    // Thredbo's LivePass feed) · flag them so /news can lead with them.
+    snowReport: ann.category === "conditions",
   }));
 }

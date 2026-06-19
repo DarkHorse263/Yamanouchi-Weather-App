@@ -50,6 +50,8 @@ export interface NewsItem {
   imageUrl?: string;
   /** Set true for any commercial / affiliate link · forces sponsored pill + rel */
   sponsored?: boolean;
+  /** Daily resort snow report · these lead the /news feed (where available) */
+  snowReport?: boolean;
 }
 
 /**
@@ -70,6 +72,7 @@ export const NEWS_ITEMS: NewsItem[] = [
     category: "resort",
     regions: ["snowy-mountains"],
     publishedAt: "2026-06-16",
+    snowReport: true,
   },
   {
     id: "falls-creek-snow-report",
@@ -80,6 +83,7 @@ export const NEWS_ITEMS: NewsItem[] = [
     category: "resort",
     regions: ["victorias-high-country"],
     publishedAt: "2026-06-16",
+    snowReport: true,
   },
   {
     id: "hotham-snow-report",
@@ -90,6 +94,7 @@ export const NEWS_ITEMS: NewsItem[] = [
     category: "resort",
     regions: ["victorias-high-country"],
     publishedAt: "2026-06-16",
+    snowReport: true,
   },
   {
     id: "thredbo-2026-season-pass",
