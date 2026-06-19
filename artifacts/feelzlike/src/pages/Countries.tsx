@@ -120,7 +120,7 @@ export default function Countries() {
       style={{ fontFamily: "'DIN Pro', system-ui, sans-serif", ...pretty }}
     >
       <PageMeta
-        title="feelzlike \u00b7 pick a country"
+        title="feelzlike · pick a country"
         description="pick a country to see real conditions for resort towns across australia and japan."
         path="/countries"
         jsonLd={[

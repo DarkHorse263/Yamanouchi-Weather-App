@@ -53,8 +53,8 @@ export default function Welcome() {
       style={{ fontFamily: "'DIN Pro', system-ui, sans-serif", ...pretty }}
     >
       <PageMeta
-        title="feelzlike \u00b7 real conditions for mountain travel"
-        description="In town and wondering what it's like in the mountains? feelzlike shows real conditions for mountain travel \u00b7 snow, wind, roads, live cams \u00b7 plus places to stay, eat and relax. Regions across Australia and Japan."
+        title="feelzlike · real conditions for mountain travel"
+        description="In town and wondering what it's like in the mountains? feelzlike shows real conditions for mountain travel · snow, wind, roads, live cams · plus places to stay, eat and relax. Regions across Australia and Japan."
         path="/"
         jsonLd={[websiteSchema(), organizationSchema()]}
       />
