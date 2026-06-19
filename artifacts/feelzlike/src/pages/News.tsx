@@ -18,7 +18,7 @@ import { useAnnouncements, announcementsToNewsItems } from "@/lib/news/announcem
 export default function News() {
   const annQuery = useAnnouncements();
 
-  const { reports, rest } = useMemo(() => {
+  const { reports, rest, hasSponsored } = useMemo(() => {
     // Blend the automated announcements feed with the curated article links.
     // getAllNews() already excludes the deals category; here we also drop
     // content-less announcement cards so every tile is a real article.
@@ -31,6 +31,10 @@ export default function News() {
     return {
       reports: all.filter((item) => item.snowReport).sort(byNewest),
       rest: all.filter((item) => !item.snowReport).sort(byNewest),
+      // Only show the affiliate disclosure when something is actually
+      // sponsored · feelzlike has no commercial relationships yet, so the
+      // note would otherwise imply paid placement that doesn't exist.
+      hasSponsored: all.some((item) => item.sponsored),
     };
   }, [annQuery.data]);
 
@@ -109,9 +113,11 @@ export default function News() {
         </>
       )}
 
-      <p className="mt-8 pt-5 border-t border-border text-xs text-muted-foreground/70 max-w-2xl">
-        Items marked sponsored may be affiliate or commercial links · feelzlike may earn a commission at no extra cost to you. Editorial picks are not paid for.
-      </p>
+      {hasSponsored && (
+        <p className="mt-8 pt-5 border-t border-border text-xs text-muted-foreground/70 max-w-2xl">
+          Items marked sponsored may be affiliate or commercial links · feelzlike may earn a commission at no extra cost to you. Editorial picks are not paid for.
+        </p>
+      )}
     </div>
   );
 }

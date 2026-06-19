@@ -63,6 +63,17 @@ and the page looked stale/blank. The mapper COLLAPSES the AU region fan-out by
 same story 3x; automated items are category "resort" + `sponsored:false` (only
 curated items carry affiliate links/pills).
 
+## No sponsored items yet + links must resolve (product decisions)
+feelzlike has NO commercial/affiliate relationships, so NO curated item sets
+`sponsored: true` and the `/news` affiliate disclosure is gated behind
+`hasSponsored` (shown only if some rendered item is sponsored). **Why:** a static
+disclosure or a "Sponsored" pill with no real sponsor wrongly implies paid
+placement. **How to apply:** keep the `NewsItem.sponsored` field + NewsCard
+`rel="sponsored"` rendering as dormant infra — only set the flag when a real paid
+deal exists; don't re-add a blanket disclosure. Every curated `url` in
+`data/news.ts` MUST resolve (curl-verify, expect 200) — no dead or placeholder
+links; if a link 404s, remove the card rather than guessing a replacement URL.
+
 ## /news presentation + deals moratorium (product decisions)
 The global `/news` page is intentionally a flat, newest-first grid with NO
 region/category filter controls (the list is short enough to scan). NewsCards are

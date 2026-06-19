@@ -56,8 +56,10 @@ export interface NewsItem {
 
 /**
  * Placeholder seed · swap real curated items in as they're sourced.
- * Mix of regions, categories and one sponsored example so the UI's
- * sponsored treatment is visible from the start.
+ * Nothing here is sponsored · the `sponsored` field stays on the type for
+ * future paid / affiliate items, but no current item sets it (feelzlike has
+ * no commercial relationships yet). Every link is checked to resolve · don't
+ * add dead or placeholder URLs.
  */
 export const NEWS_ITEMS: NewsItem[] = [
   // Daily resort snow reports · link-out cards to each resort's official
@@ -108,16 +110,6 @@ export const NEWS_ITEMS: NewsItem[] = [
     snowReport: true,
   },
   {
-    id: "thredbo-2026-season-pass",
-    title: "Thredbo 2026 season pass · early bird closes soon",
-    blurb: "Pre-season pricing on adult, family and Freedom Pass tiers · resort confirms June 7 lift opening target.",
-    url: "https://www.thredbo.com.au/lift-tickets/season-passes/",
-    source: "Thredbo",
-    category: "resort",
-    regions: ["snowy-mountains"],
-    publishedAt: "2026-05-08",
-  },
-  {
     id: "perisher-epic-2026",
     title: "Perisher confirmed on Epic Pass for 2026 winter",
     blurb: "Unlimited days at Perisher plus Vail Resorts mountains in North America and Japan · Epic Australia Pass on sale now.",
@@ -126,7 +118,6 @@ export const NEWS_ITEMS: NewsItem[] = [
     category: "passes",
     regions: ["snowy-mountains"],
     publishedAt: "2026-05-05",
-    sponsored: true,
   },
   {
     id: "snowy-mountains-hwy-update",
@@ -147,7 +138,6 @@ export const NEWS_ITEMS: NewsItem[] = [
     category: "passes",
     regions: ["victorias-high-country"],
     publishedAt: "2026-05-01",
-    sponsored: true,
   },
   {
     id: "great-alpine-rd-omeo",
@@ -168,17 +158,6 @@ export const NEWS_ITEMS: NewsItem[] = [
     category: "deals",
     regions: ["victorias-high-country"],
     publishedAt: "2026-04-25",
-    sponsored: true,
-  },
-  {
-    id: "shiga-kogen-season-2026",
-    title: "Shiga Kogen 2025-26 season wrap · 2026-27 dates announced",
-    blurb: "Japan's largest ski area confirms its 2026-27 opening calendar across the 18 connected resorts.",
-    url: "https://www.shigakogen.gr.jp/english/",
-    source: "Shiga Kogen",
-    category: "resort",
-    regions: ["yamanouchi"],
-    publishedAt: "2026-04-20",
   },
   {
     id: "snow-monkey-park-winter",
@@ -209,7 +188,6 @@ export const NEWS_ITEMS: NewsItem[] = [
     category: "deals",
     regions: "all",
     publishedAt: "2026-04-08",
-    sponsored: true,
   },
   {
     id: "avalanche-au-handbook",
@@ -230,7 +208,6 @@ export const NEWS_ITEMS: NewsItem[] = [
     category: "transport",
     regions: ["snowy-mountains", "victorias-high-country"],
     publishedAt: "2026-04-01",
-    sponsored: true,
   },
   {
     id: "japan-rail-pass-snow",
@@ -241,16 +218,6 @@ export const NEWS_ITEMS: NewsItem[] = [
     category: "travel",
     regions: ["yamanouchi"],
     publishedAt: "2026-03-28",
-  },
-  {
-    id: "feelzlike-launch-note",
-    title: "feelzlike · what's new this week",
-    blurb: "Daily resort pick, simplified 6-day forecast and Thredbo summer mode · plus Omeo added in VIC.",
-    url: "https://feelzlike.com/",
-    source: "feelzlike",
-    category: "travel",
-    regions: "all",
-    publishedAt: "2026-05-13",
   },
 ];
 
