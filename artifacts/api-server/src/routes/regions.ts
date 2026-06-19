@@ -642,12 +642,47 @@ async function fetchLocalCurrent(lat: number, lon: number): Promise<LocalCurrent
   return fetchLocalCurrentFromOwm(lat, lon);
 }
 
-// Friendly locality label for arbitrary coords via BigDataCloud's keyless
-// reverse-geocoder. Best-effort and non-blocking: any failure returns null and
-// the client falls back to a neutral label. Builds "Locality, Subdivision"
-// (e.g. "Jindabyne, New South Wales"), or the country name if finer detail is
-// missing.
-async function fetchPlaceName(lat: number, lon: number): Promise<string | null> {
+// Friendly locality label for arbitrary coords. Builds "Locality, Subdivision"
+// (e.g. "Jindabyne, New South Wales"), best-effort: any failure returns null
+// and the client falls back to a neutral label.
+//
+// Primary source is OpenWeatherMap's keyed reverse-geocoder. It is reliable
+// from a server (tied to our API key, not a per-IP free tier) and gives
+// town-level granularity. BigDataCloud's keyless "reverse-geocode-client"
+// endpoint is a browser-intended geocoder: called from a single server IP it
+// gets rate-limited and returns nothing in production, so it must stay a
+// last-ditch fallback only - never the primary.
+async function fetchPlaceNameFromOwm(
+  lat: number,
+  lon: number,
+): Promise<string | null> {
+  const apiKey = process.env.OWM_API_KEY;
+  if (!apiKey) return null;
+  try {
+    const res = await fetch(
+      `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${apiKey}`,
+      { signal: AbortSignal.timeout(6000) },
+    );
+    if (!res.ok) return null;
+    const arr: unknown = await res.json();
+    if (!Array.isArray(arr) || arr.length === 0) return null;
+    const d = arr[0] as Record<string, unknown>;
+    const str = (v: unknown): string => (typeof v === "string" ? v.trim() : "");
+    const locality = str(d.name);
+    const region = str(d.state);
+    const parts = [locality, region].filter(Boolean);
+    if (parts.length > 0) return parts.join(", ");
+    return locality || null;
+  } catch (err) {
+    console.warn("[local-weather] OWM reverse-geocode failed:", err);
+    return null;
+  }
+}
+
+async function fetchPlaceNameFromBigDataCloud(
+  lat: number,
+  lon: number,
+): Promise<string | null> {
   try {
     const res = await fetch(
       `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`,
@@ -663,9 +698,16 @@ async function fetchPlaceName(lat: number, lon: number): Promise<string | null> 
     if (parts.length > 0) return parts.join(", ");
     return country || null;
   } catch (err) {
-    console.warn("[local-weather] reverse-geocode failed:", err);
+    console.warn("[local-weather] BigDataCloud reverse-geocode failed:", err);
     return null;
   }
+}
+
+async function fetchPlaceName(lat: number, lon: number): Promise<string | null> {
+  return (
+    (await fetchPlaceNameFromOwm(lat, lon)) ??
+    (await fetchPlaceNameFromBigDataCloud(lat, lon))
+  );
 }
 
 router.get("/local-weather", async (req, res) => {

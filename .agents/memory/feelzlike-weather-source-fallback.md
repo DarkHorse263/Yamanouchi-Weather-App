@@ -72,3 +72,23 @@ Town pages survive Open-Meteo throttling via the warm 6h serve-stale cache keyed
 by rounded lat/lng; a cold visitor's unique coords have NO warm entry, so the
 expensive request 503s with nothing to fall back on while the cheap request and
 the radar still work fine.
+
+## reverse-geocoding (place name) must be a KEYED server-side API
+
+**Rule:** the visitor's place name ("Jindabyne, New South Wales" on the home
+"near you" card, from `/local-weather` `place.name`) must come from a keyed,
+server-appropriate geocoder. Primary is OpenWeatherMap `/geo/1.0/reverse`
+(keyed by `OWM_API_KEY`, town-level granularity). A keyless "client" geocoder
+may only ever be a last-ditch fallback.
+
+**Why:** BigDataCloud's keyless `reverse-geocode-client` endpoint is
+browser-intended (free/unlimited only because it's rate-limited per END-USER
+IP). Called server-side, every request shares the one deployment egress IP, so
+it gets throttled and returns null in PRODUCTION while still working in dev
+(sparse traffic). Symptom: the home card shows the generic "your current
+location" eyebrow with no place name live, but the name appears fine in
+preview. Confirm by curling the prod endpoint directly, not just dev.
+
+**How to apply:** any new "turn coords into a human label" path has the same
+trap. Prefer the existing `OWM_API_KEY` path; keep the result wrapped in the
+24h `placeNameCache` so quota cost stays ~one call per ~1km cell per day.

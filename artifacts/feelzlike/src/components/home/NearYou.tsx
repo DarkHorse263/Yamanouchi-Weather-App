@@ -377,7 +377,7 @@ export function NearYou() {
             your current location
           </div>
           {phase === "ready" && placeName ? (
-            <p className="mt-1 text-[13px] font-medium text-slate-700">
+            <p className="mt-1 text-[15px] font-semibold leading-tight text-slate-900">
               {placeName.toLowerCase()}
             </p>
           ) : null}
