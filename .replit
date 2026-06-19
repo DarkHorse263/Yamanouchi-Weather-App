@@ -36,4 +36,5 @@ expertMode = true
 VITE_VAPID_PUBLIC_KEY = "BCoXjQ2TUG8JM_ehyoZl5WLZLUgdQeaqzUVpohrgK0xoKPbFibCQhze5y3tHgV5rQTPOi8t961qEdM6g842h_zY"
 ADMIN_EMAILS = "james@navigatework.com.au"
 VITE_PLAUSIBLE_DOMAIN = "feelzlike.com"
+VITE_AWIN_PUBLISHER_ID = "2813742"
   

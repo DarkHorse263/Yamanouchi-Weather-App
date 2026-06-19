@@ -5,8 +5,9 @@ import Welcome from "@/pages/Welcome";
 import Countries from "@/pages/Countries";
 import NotFound from "@/pages/not-found";
 import { RegionLayout } from "@/layouts/RegionLayout";
-import { ConsentProvider, useConsent } from "@/lib/consent";
+import { ConsentProvider, useConsent, canUseAds } from "@/lib/consent";
 import { ConsentBanner } from "@/components/ConsentBanner";
+import { loadAwinMasterTag, removeAwinMasterTag } from "@/lib/awin";
 import { InstallPrompt } from "@/components/InstallPrompt";
 import { OfflineBanner } from "@/components/OfflineBanner";
 import { PullToRefresh } from "@/components/PullToRefresh";
@@ -112,6 +113,25 @@ function AnalyticsBridge() {
   return null;
 }
 
+/**
+ * Loads the Awin affiliate MasterTag once the visitor grants `ads` consent,
+ * and tears it down if they later revoke it. Mounted inside ConsentProvider so
+ * it can read the choice. No-op until VITE_AWIN_PUBLISHER_ID is configured.
+ */
+function AwinTag() {
+  const consent = useConsent();
+
+  useEffect(() => {
+    if (canUseAds(consent.choices)) {
+      loadAwinMasterTag();
+    } else {
+      removeAwinMasterTag();
+    }
+  }, [consent.choices]);
+
+  return null;
+}
+
 function App() {
   return (
     <AppErrorBoundary>
@@ -120,6 +140,7 @@ function App() {
           <ConsentProvider>
             <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
               <AnalyticsBridge />
+              <AwinTag />
               <Router />
             </WouterRouter>
             <ConsentBanner />
