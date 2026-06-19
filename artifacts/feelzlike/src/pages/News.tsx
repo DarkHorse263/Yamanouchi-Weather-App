@@ -1,53 +1,37 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { Link } from "wouter";
 import { Newspaper } from "lucide-react";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { breadcrumbSchema } from "@/lib/seo/jsonLd";
-import { getAllNews, NEWS_CATEGORIES, type NewsCategory } from "@/data/news";
+import { getAllNews } from "@/data/news";
 import { NewsCard } from "@/components/news/NewsCard";
 import { useAnnouncements, announcementsToNewsItems } from "@/lib/news/announcements";
 
-type RegionFilter = "all" | "snowy-mountains" | "victorias-high-country" | "yamanouchi";
-
-const REGION_FILTERS: { id: RegionFilter; label: string }[] = [
-  { id: "all", label: "All regions" },
-  { id: "snowy-mountains", label: "Snowy Mountains" },
-  { id: "victorias-high-country", label: "Victoria's High Country" },
-  { id: "yamanouchi", label: "Yamanouchi" },
-];
-
 /**
- * Global /news page. Filterable by region and category, sorted newest
- * first. v1 is a flat grid · pagination only matters once we're north
- * of ~30 items. Until then we'd rather render everything and let users
- * scan.
+ * Global /news page. A flat, newest-first grid of article links · no
+ * region/category filters (the list is short enough to scan). Items with no
+ * body content are dropped so every card is a real article. "Deals" are
+ * hidden until we have advertisers — that moratorium lives in getAllNews() /
+ * getNewsForRegion() so it applies to every news surface, not just /news.
  */
 export default function News() {
-  const [region, setRegion] = useState<RegionFilter>("all");
-  const [category, setCategory] = useState<NewsCategory | "all">("all");
-
   const annQuery = useAnnouncements();
 
   const items = useMemo(() => {
-    // Blend the automated announcements feed with the curated affiliate items so
-    // /news is never a dead end · adding more sources fills this page too.
+    // Blend the automated announcements feed with the curated article links,
+    // newest first. getAllNews() already excludes the deals category; here we
+    // also drop content-less announcement cards so every tile is a real article.
     const automated = announcementsToNewsItems(annQuery.data?.announcements ?? []);
     return [...automated, ...getAllNews()]
-      .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
-      .filter((item) => {
-        if (region !== "all") {
-          if (item.regions !== "all" && !item.regions.includes(region)) return false;
-        }
-        if (category !== "all" && item.category !== category) return false;
-        return true;
-      });
-  }, [region, category, annQuery.data]);
+      .filter((item) => item.blurb.trim().length > 0)
+      .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+  }, [annQuery.data]);
 
   return (
     <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
       <PageMeta
         title="News Articles · feelzlike"
-        description="Resort news, transport updates, season passes, gear and travel deals for the mountains feelzlike covers · Snowy Mountains, Victoria's High Country and Yamanouchi."
+        description="Resort news, transport updates, season passes, gear and travel guides for the mountains feelzlike covers · Snowy Mountains, Victoria's High Country and Yamanouchi."
         path="/news"
         jsonLd={[
           breadcrumbSchema([
@@ -78,24 +62,9 @@ export default function News() {
         </p>
       </header>
 
-      <div className="mt-5 space-y-3">
-        <FilterRow
-          label="Region"
-          options={REGION_FILTERS.map((r) => ({ id: r.id, label: r.label }))}
-          active={region}
-          onChange={(v) => setRegion(v as RegionFilter)}
-        />
-        <FilterRow
-          label="Category"
-          options={[{ id: "all", label: "All categories" }, ...NEWS_CATEGORIES]}
-          active={category}
-          onChange={(v) => setCategory(v as NewsCategory | "all")}
-        />
-      </div>
-
       {items.length === 0 ? (
         <p className="mt-8 text-sm text-muted-foreground">
-          No items match these filters · try widening the region or category.
+          No articles just yet · check back soon.
         </p>
       ) : (
         <section className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -108,43 +77,6 @@ export default function News() {
       <p className="mt-8 pt-5 border-t border-border text-xs text-muted-foreground/70 max-w-2xl">
         Items marked sponsored may be affiliate or commercial links · feelzlike may earn a commission at no extra cost to you. Editorial picks are not paid for.
       </p>
-    </div>
-  );
-}
-
-function FilterRow({
-  label,
-  options,
-  active,
-  onChange,
-}: {
-  label: string;
-  options: { id: string; label: string }[];
-  active: string;
-  onChange: (id: string) => void;
-}) {
-  return (
-    <div className="flex items-center gap-2 flex-wrap">
-      <span className="text-[11px] uppercase tracking-widest font-semibold text-muted-foreground/70 mr-1">
-        {label}
-      </span>
-      {options.map((opt) => {
-        const isActive = active === opt.id;
-        return (
-          <button
-            key={opt.id}
-            type="button"
-            onClick={() => onChange(opt.id)}
-            className={
-              isActive
-                ? "px-3 py-1.5 rounded-full text-xs font-semibold bg-primary text-primary-foreground"
-                : "px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-border text-foreground hover:border-primary/40 hover:text-primary transition-colors"
-            }
-          >
-            {opt.label}
-          </button>
-        );
-      })}
     </div>
   );
 }

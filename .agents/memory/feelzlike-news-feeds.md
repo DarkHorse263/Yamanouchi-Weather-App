@@ -63,6 +63,22 @@ and the page looked stale/blank. The mapper COLLAPSES the AU region fan-out by
 same story 3x; automated items are category "resort" + `sponsored:false` (only
 curated items carry affiliate links/pills).
 
+## /news presentation + deals moratorium (product decisions)
+The global `/news` page is intentionally a flat, newest-first grid with NO
+region/category filter controls (the list is short enough to scan). NewsCards are
+TEXT-ONLY — the 16:9 thumbnail/placeholder header was removed; the sponsored pill
+moved inline into the meta row so affiliate disclosure stays visible. **Why:** the
+text-only card also aligns with the aggregate-only legal posture (no source images).
+Content-less cards are dropped on `/news` via `blurb.trim().length > 0` (announcements
+with `body: null` map to empty blurb → filtered).
+Deals are HIDDEN app-wide (not deleted) until advertisers exist — the moratorium
+lives in `getAllNews()` + `getNewsForRegion()` (shared `isVisibleNews` predicate,
+`category !== "deals"`) so it covers `/news` AND the per-region NewsStrip. **Why:**
+filtering only on `/news` left deals leaking onto region strips. **How to apply:**
+don't delete the deal items from `data/news.ts` or "fix" missing deals by re-adding
+a Deals filter without product sign-off — remove the `isVisibleNews` predicate to
+restore them everywhere at once.
+
 ## Resort daily snow reports (link-out only)
 Perisher, Falls Creek and Mt Hotham are Vail AU resorts on three DIFFERENT site
 platforms (Perisher=Joomla, Falls Creek=WordPress, Hotham=DNN — note the

@@ -238,12 +238,23 @@ export const NEWS_ITEMS: NewsItem[] = [
   },
 ];
 
+/**
+ * Deals are hidden across every news surface (/news and the per-region
+ * NewsStrip) until we have advertisers to fill the category. Remove this
+ * predicate — and re-add the Deals category filter on /news — to bring them
+ * back.
+ */
+const isVisibleNews = (n: NewsItem): boolean => n.category !== "deals";
+
 export function getNewsForRegion(regionId: RegionId): NewsItem[] {
   return NEWS_ITEMS
+    .filter(isVisibleNews)
     .filter((n) => n.regions === "all" || n.regions.includes(regionId))
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 }
 
 export function getAllNews(): NewsItem[] {
-  return [...NEWS_ITEMS].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+  return NEWS_ITEMS
+    .filter(isVisibleNews)
+    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 }
