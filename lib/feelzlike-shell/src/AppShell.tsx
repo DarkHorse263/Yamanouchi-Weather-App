@@ -106,7 +106,7 @@ export function AppShell({
   // hrefs to /:region/<path> and bounce them through TownLayout's
   // unknown-town redirect. The `~/` prefix is wouter's documented
   // escape that pins navigation to the app root.
-  const GLOBAL_MOUNTAIN_PATHS = new Set(["/premium"]);
+  const GLOBAL_MOUNTAIN_PATHS = new Set(["/premium", "/news"]);
   const isGlobalMountainPath = (p: string) => GLOBAL_MOUNTAIN_PATHS.has(p);
 
   const isActiveTown = (subpath: string) =>
@@ -169,9 +169,9 @@ export function AppShell({
         icon: it.icon,
         label: t(it.label, it.labelJa),
         active: isActiveMountain(it.path),
-        // Premium hidden until traction · Alerts is no longer surfaced as a
-        // paywalled feature, so suppress the lock glyph. Restore
-        // `it.path === "/alerts"` here to bring the lock badge back.
+        // No mountain-scope nav entry is paywalled anymore (Premium is hidden
+        // until traction and the old Alerts tab is now a free News link), so
+        // never show the lock glyph.
         locked: false,
       });
     };
@@ -179,7 +179,8 @@ export function AppShell({
     // - /mountains gone (accessed via "Weather in mountains" panel on Today)
     // - /cams folded into /roads ("Roads & cams")
     // - /radar folded into /weather ("Weather forecast")
-    // - Alerts remains but is rendered with a lock badge (paywalled UI)
+    // - the old winter-only Alerts tab is now a free "News" link that targets
+    //   the global /news page (article links across all regions)
     pushTown("/");                  // Today
     pushTown("/weather");           // Weather forecast
     pushTown("/roads");             // Roads & cams
@@ -187,7 +188,7 @@ export function AppShell({
     pushTown("/stay");              // Stay
     pushTown("/eat");               // Eat
     pushTown("/explore");           // Explore
-    pushMountain("/alerts");        // Alerts
+    pushMountain("/news");          // News (global /news page)
     // Premium hub hidden until traction · nav entry removed (the /premium
     // route stays mounted in App.tsx for direct-URL access). Restore
     // pushMountain("/premium") here to bring the tab back.

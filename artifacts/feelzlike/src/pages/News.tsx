@@ -46,7 +46,7 @@ export default function News() {
   return (
     <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
       <PageMeta
-        title="News & updates · feelzlike"
+        title="News Articles · feelzlike"
         description="Resort news, transport updates, season passes, gear and travel deals for the mountains feelzlike covers · Snowy Mountains, Victoria's High Country and Yamanouchi."
         path="/news"
         jsonLd={[
@@ -71,10 +71,10 @@ export default function News() {
           feelzlike
         </p>
         <h1 className="font-display font-semibold text-3xl md:text-5xl tracking-tight mt-1 text-foreground">
-          News & updates
+          News Articles
         </h1>
         <p className="mt-3 text-sm md:text-base text-muted-foreground max-w-2xl">
-          Resort news, road & transport updates, season passes, gear reviews and travel deals · curated for the mountains feelzlike covers.
+          Links to the best mountain, equipment and travel articles · curated for the mountains feelzlike covers.
         </p>
       </header>
 

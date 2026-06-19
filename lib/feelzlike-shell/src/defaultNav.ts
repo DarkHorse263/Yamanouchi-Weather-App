@@ -6,7 +6,7 @@ import {
   BedDouble,
   UtensilsCrossed,
   Compass,
-  AlertTriangle,
+  Newspaper,
 } from "lucide-react";
 import type { NavItem } from "./types";
 
@@ -22,17 +22,21 @@ export const DEFAULT_TOWN_NAV: NavItem[] = [
 ];
 
 /**
- * Sidebar items for the "Mountains" section. Paths are RELATIVE to /:region.
+ * Sidebar items for the "Mountains" section. Paths are RELATIVE to /:region,
+ * EXCEPT globally-mounted routes flagged in AppShell's GLOBAL_MOUNTAIN_PATHS
+ * (e.g. /news), which target App.tsx top-level pages via wouter's `~/` escape.
  *
  * May 2026 restructure: dropped /mountains and /radar (mountains accessed
- * inline from the Today page; radar embedded in /weather). Alerts is the
- * only remaining mountain-scope nav entry and is gated behind a paywall.
+ * inline from the Today page; radar embedded in /weather).
  */
 export const DEFAULT_MOUNTAIN_NAV: NavItem[] = [
-  // Powder alerts only make sense in snow season — sidebar/bottom-nav hides
-  // the row entirely when the active region is in green season (the
-  // shell's `filterBySeason` does the work).
-  { path: "/alerts", icon: AlertTriangle, label: "Alerts", labelJa: "警報", season: "winter" },
+  // News · links to the best mountain, equipment and travel articles. Points
+  // at the global /news page (curated feed + automated announcements). Shown
+  // year-round (no season gate) and treated as a global path in AppShell so the
+  // region router base doesn't rewrite it to /:region/news. Replaced the old
+  // winter-only "Alerts" tab; the /:region/alerts route stays mounted in
+  // RegionLayout for direct-URL access only.
+  { path: "/news", icon: Newspaper, label: "News", labelJa: "ニュース" },
   // Premium hub hidden until we have traction · the /premium route stays
   // mounted in App.tsx (direct-URL only) but is no longer surfaced in nav.
   // Restore the { path: "/premium", icon: Sparkles, ... } item here (and the
