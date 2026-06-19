@@ -97,6 +97,17 @@ export const NEWS_ITEMS: NewsItem[] = [
     snowReport: true,
   },
   {
+    id: "mt-buller-snow-report",
+    title: "Mt Buller daily snow report",
+    blurb: "Official morning report from the resort · base and surface conditions, overnight snow and today's open lifts and runs.",
+    url: "https://www.mtbuller.com.au/winter/snow-weather/snow-report",
+    source: "Mt Buller",
+    category: "resort",
+    regions: ["victorias-high-country"],
+    publishedAt: "2026-06-16",
+    snowReport: true,
+  },
+  {
     id: "thredbo-2026-season-pass",
     title: "Thredbo 2026 season pass · early bird closes soon",
     blurb: "Pre-season pricing on adult, family and Freedom Pass tiers · resort confirms June 7 lift opening target.",
