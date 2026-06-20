@@ -44,6 +44,8 @@ import { getLiftsForMountain } from "@/data/lifts";
 import { cn } from "@/lib/utils";
 import { BarChart2 } from "lucide-react";
 import { useState } from "react";
+import { PageMeta } from "@/lib/seo/PageMeta";
+import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
 
 /**
  * Region-agnostic mountain weather page.
@@ -111,9 +113,34 @@ export function MountainDetail() {
   const hourly = data?.hourly ?? [];
   const location = data?.location;
   const Icon = current ? pickIcon(current.weatherCode, current.isDay) : Cloud;
+  const metaName = elevName ?? location?.name ?? locationId;
 
   return (
     <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
+      <PageMeta
+        title={`${metaName} - snow report, weather & lifts`}
+        description={`Live mountain weather for ${metaName} in ${region.name}: on-mountain temperature, snow depth, wind and elevation forecast.`}
+        path={`/${region.id}/mountain/${locationId}`}
+        jsonLd={[
+          placeSchema({
+            name: metaName,
+            url: `https://feelzlike.com/${region.id}/mountain/${locationId}`,
+            description: location?.description,
+            latLng:
+              elevLat != null && elevLng != null
+                ? { lat: elevLat, lng: elevLng }
+                : undefined,
+          }),
+          breadcrumbSchema([
+            { name: "feelzlike", url: "https://feelzlike.com/" },
+            { name: region.name, url: `https://feelzlike.com/${region.id}` },
+            ...(baseTown
+              ? [{ name: baseTown.name, url: `https://feelzlike.com/${region.id}/${baseTown.id}` }]
+              : []),
+            { name: metaName, url: `https://feelzlike.com/${region.id}/mountain/${locationId}` },
+          ]),
+        ]}
+      />
       <Link
         href={backHref}
         className="inline-flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-[0.2em] text-sky-700/80 hover:text-sky-700 transition-colors"

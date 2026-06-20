@@ -51,3 +51,27 @@ renders from, not a defunct data layer. `getStaysByTown`/`getEatsByTown` (and
 **How to apply:** only gate a town nav entry when the page genuinely produces
 nothing without data (Roads feeds, Transport providers, Explore tourismLinks).
 Don't gate pages that work from town name + coords.
+
+## Resort/mountain detail pages are 3 swappable components, not 1
+
+`/:region/mountain/:id` (and the legacy `/resort/:id` alias) render via
+`REGION_ROUTERS[region].MountainDetail ?? GenericMountainDetail`. So a detail
+page is one of THREE components: the generic fallback
+(`src/pages/region/MountainDetail.tsx`) plus per-region overrides
+(`src/regions/yamanouchi/pages/resort.tsx`,
+`src/regions/snowy-mountains/pages/LocationDetail.tsx`).
+
+**Rule:** any cross-cutting page-level concern (SEO `<PageMeta>`/JSON-LD,
+analytics, headers) must be applied to ALL THREE, not just the shared one, or
+the overridden regions silently miss it.
+
+**Why:** editing only the generic component leaves yamanouchi + snowy-mountains
+detail pages without the change, which is easy to miss because the route looks
+like a single shared page.
+
+**How to apply:** canonical for both `/mountain/:id` and `/resort/:id` is the
+`/mountain/:id` form (resort is a legacy alias). The generic page derives a
+synchronous title from `region.mountains[].name`; the two overrides only know
+the resort name after the weather API resolves (snowy resorts aren't in
+`region.mountains`), so their `<PageMeta>` currently mounts on the success
+render only — acceptable since crawlers render settled DOM.

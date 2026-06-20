@@ -32,6 +32,8 @@ import {
 import { motion } from "framer-motion";
 import { useLanguage, useRegion } from "@workspace/feelzlike-shell";
 import { useState } from "react";
+import { PageMeta } from "@/lib/seo/PageMeta";
+import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
 import { HourlyForecast } from "@/components/HourlyForecast";
 import { PowderCalendar } from "@/components/PowderCalendar";
 import { MountainWebcams } from "@/components/MountainWebcams";
@@ -252,6 +254,30 @@ export default function ResortDetail() {
 
   return (
     <div className="bg-background">
+      <PageMeta
+        title={`${location.name} - snow report, weather & lifts`}
+        description={`Live conditions at ${location.name} in ${region.name}: feelzlike temperature, snow depth, wind, a 6-day elevation forecast and lift-hold outlook.`}
+        path={`/${region.id}/mountain/${id}`}
+        jsonLd={[
+          placeSchema({
+            name: location.name,
+            url: `https://feelzlike.com/${region.id}/mountain/${id}`,
+            description: location.description,
+            latLng:
+              mountain?.lat != null && mountain?.lng != null
+                ? { lat: mountain.lat, lng: mountain.lng }
+                : undefined,
+          }),
+          breadcrumbSchema([
+            { name: "feelzlike", url: "https://feelzlike.com/" },
+            { name: region.name, url: `https://feelzlike.com/${region.id}` },
+            ...(baseTown
+              ? [{ name: baseTown.name, url: `https://feelzlike.com/${region.id}/${baseTown.id}` }]
+              : []),
+            { name: location.name, url: `https://feelzlike.com/${region.id}/mountain/${id}` },
+          ]),
+        ]}
+      />
       {baseTown && (
         <div className="max-w-7xl mx-auto px-5 md:px-10 pt-5 md:pt-7">
           <Link

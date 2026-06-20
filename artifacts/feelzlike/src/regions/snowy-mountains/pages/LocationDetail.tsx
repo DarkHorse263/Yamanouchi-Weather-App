@@ -3,6 +3,8 @@ import { useRegion } from "@workspace/feelzlike-shell";
 import { useGetLocationWeather, useGetLocationWebcams, useGetLocationLiftStatus } from "@workspace/api-client-react";
 import { MountainSnapshot } from "@workspace/feelzlike-dashboard";
 import { ElevationBands } from "@/components/weather/ElevationBands";
+import { PageMeta } from "@/lib/seo/PageMeta";
+import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
 import { LoadingState } from "../components/ui/loading-state";
 import { ErrorState } from "../components/ui/error-state";
 import { ForecastChart } from "../components/weather/ForecastChart";
@@ -148,6 +150,11 @@ export default function LocationDetail() {
   if (weatherError || !weatherData) return <><ErrorState error={weatherError} onRetry={() => weatherRefetch()} /></>;
 
   const { location, current, daily, hourly } = weatherData;
+  const mountainCfg = region.mountains?.find((m) => m.id === locationId);
+  const seoBaseTown =
+    region.baseTowns?.find((bt) => bt.nearbyMountainIds?.includes(locationId)) ??
+    region.baseTowns?.[0] ??
+    null;
   // lastUpdated is the ISO UTC timestamp from when the server fetched/observed the reading.
   // BOM's bomObservationTime is YYYYMMDDHHMMSS in local AU time and would need DST-aware parsing
   // (AEST/AEDT swaps), so we deliberately use lastUpdated for the "X min ago" display.
@@ -181,6 +188,30 @@ export default function LocationDetail() {
 
   return (
     <>
+      <PageMeta
+        title={`${location.name} - snow report, weather & lifts`}
+        description={`Live snow and weather for ${location.name} in ${region.name}: BOM observations, feelzlike temperature, snow depth, wind and webcams.`}
+        path={`/${region.id}/mountain/${locationId}`}
+        jsonLd={[
+          placeSchema({
+            name: location.name,
+            url: `https://feelzlike.com/${region.id}/mountain/${locationId}`,
+            description: location.description,
+            latLng:
+              mountainCfg?.lat != null && mountainCfg?.lng != null
+                ? { lat: mountainCfg.lat, lng: mountainCfg.lng }
+                : undefined,
+          }),
+          breadcrumbSchema([
+            { name: "feelzlike", url: "https://feelzlike.com/" },
+            { name: region.name, url: `https://feelzlike.com/${region.id}` },
+            ...(seoBaseTown
+              ? [{ name: seoBaseTown.name, url: `https://feelzlike.com/${region.id}/${seoBaseTown.id}` }]
+              : []),
+            { name: location.name, url: `https://feelzlike.com/${region.id}/mountain/${locationId}` },
+          ]),
+        ]}
+      />
       {/* ─── Aurora fintech hero ────────────────── */}
       <section className="relative overflow-hidden isolate">
         {/* Aurora backdrop */}
