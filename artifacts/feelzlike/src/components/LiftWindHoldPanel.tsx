@@ -5,9 +5,11 @@ import {
   predictMountainLifts,
   summariseMountainWindHold,
   type WindHoldStatus,
+  type WindHoldPrediction,
   type HourlyWindSample,
 } from "@/lib/windHoldPrediction";
 import { getLiftsForMountain, type LiftSeed } from "@/data/lifts";
+import { computeLiftOperationStatus, type LiftOperationStatus as OperationStatus } from "@/lib/skiSeason";
 
 interface LiftWindHoldPanelProps {
   mountainId: string;
@@ -17,6 +19,19 @@ interface LiftWindHoldPanelProps {
   hourly: HourlyWindSample[];
   sectionNumber?: string;
   t?: (en: string, ja?: string) => string;
+  /**
+   * Whether the resort's ski season is open (deterministic by country, from
+   * `isLiftSeasonOpen`). When false the panel never claims lifts are open - it
+   * reframes the wind read as a conditional "for when the resort is running"
+   * outlook. Required so the panel cannot show "lifts likely open" off-season.
+   */
+  seasonOpen: boolean;
+  /** Latest snow depth in cm if known. null/undefined = unknown (NOT zero). */
+  snowDepthCm?: number | null;
+  /** Real lift count currently open, when an authoritative feed exists (AU). */
+  actualLiftsOpen?: number | null;
+  /** Real total lift count, when an authoritative feed exists (AU). */
+  actualTotalLifts?: number | null;
 }
 
 const STATUS_STYLES: Record<WindHoldStatus, { dot: string; badge: string; icon: typeof CheckCircle2; label: string; labelJa: string }> = {
@@ -43,6 +58,44 @@ const STATUS_STYLES: Record<WindHoldStatus, { dot: string; badge: string; icon: 
   },
 };
 
+/**
+ * Wind-framed labels for the NON-operating states. Same colour semantics as
+ * STATUS_STYLES (green = wind fine, amber/red = windy) but the words describe
+ * wind only - never "open" - so we don't imply a closed lift is running.
+ */
+const WIND_LABELS: Record<WindHoldStatus, { en: string; ja: string }> = {
+  likely_open: { en: "Wind OK", ja: "風は問題なし" },
+  possible_hold: { en: "Possible wind hold", ja: "風で停止の可能性" },
+  likely_held: { en: "Wind hold likely", ja: "風で停止見込み" },
+};
+
+const NON_OPERATING_COPY: Record<Exclude<OperationStatus, "operating">, {
+  chip: { en: string; ja: string };
+  banner: { en: string; ja: string };
+}> = {
+  off_season: {
+    chip: { en: "Out of season", ja: "シーズン外" },
+    banner: {
+      en: "Lifts aren't running out of season. The wind outlook below is for when the resort is open.",
+      ja: "シーズン外のためリフトは運行していません。下記の風の予測は営業期間中の参考です。",
+    },
+  },
+  no_lifts_open: {
+    chip: { en: "No lifts reported open", ja: "運行中のリフトなし" },
+    banner: {
+      en: "No lifts are reported open right now. The wind outlook below is for when they're running.",
+      ja: "現在運行中のリフトの報告はありません。下記の風の予測は運行時の参考です。",
+    },
+  },
+  no_snow: {
+    chip: { en: "No snow reported", ja: "積雪の報告なし" },
+    banner: {
+      en: "Not enough snow has been reported to run lifts. The wind outlook below is for when conditions allow.",
+      ja: "リフト運行に十分な積雪の報告がありません。下記の風の予測は条件が整った際の参考です。",
+    },
+  },
+};
+
 const TYPE_LABEL: Record<LiftSeed["type"], { en: string; ja: string }> = {
   gondola: { en: "Gondola", ja: "ゴンドラ" },
   detachable: { en: "Detachable", ja: "高速リフト" },
@@ -51,12 +104,35 @@ const TYPE_LABEL: Record<LiftSeed["type"], { en: string; ja: string }> = {
   rope_tow: { en: "Rope tow", ja: "ロープトウ" },
 };
 
+/**
+ * Conditional wind detail used when the resort is NOT operating: pure wind
+ * facts (peak gusts vs hold threshold), with no "open"/"held" verdict word so
+ * the line stays honest about a lift that isn't running.
+ */
+function windDetail(pred: WindHoldPrediction, t: (en: string, ja?: string) => string): string {
+  if (!pred.worstHour) return t("No wind forecast available", "風の予測データなし");
+  const g = pred.worstHour.effectiveGustKmh;
+  const thr = pred.effectiveThresholdKmh;
+  const base = t(
+    `Peak ${g}km/h gusts at top · hold threshold ${thr}km/h`,
+    `最大瞬間風速 ${g}km/h（山頂）· 停止しきい値 ${thr}km/h`,
+  );
+  if (pred.hoursAtRisk > 0) {
+    return base + t(` · ${pred.hoursAtRisk}h above threshold`, ` · しきい値超過 ${pred.hoursAtRisk}時間`);
+  }
+  return base;
+}
+
 export function LiftWindHoldPanel({
   mountainId,
   resortElevationM,
   hourly,
   sectionNumber = "",
   t: tProp,
+  seasonOpen,
+  snowDepthCm,
+  actualLiftsOpen,
+  actualTotalLifts,
 }: LiftWindHoldPanelProps) {
   const t = tProp ?? ((en: string) => en);
   const headingId = useId();
@@ -78,21 +154,37 @@ export function LiftWindHoldPanel({
   );
   const summary = useMemo(() => summariseMountainWindHold(predictions), [predictions]);
 
+  // Operational gate (priority: off-season > live feed > known-low snow >
+  // operating). Logic lives in computeLiftOperationStatus so it can be unit
+  // tested independently of React. See skiSeason.ts for the full priority doc.
+  const operationStatus: OperationStatus = useMemo(
+    () => computeLiftOperationStatus({ seasonOpen, snowDepthCm, actualLiftsOpen, actualTotalLifts }),
+    [seasonOpen, snowDepthCm, actualLiftsOpen, actualTotalLifts],
+  );
+
+  const operating = operationStatus === "operating";
+
   if (lifts.length === 0) return null;
 
-  const overallTone =
-    summary.openFraction >= 0.8
+  const overallTone = operating
+    ? summary.openFraction >= 0.8
       ? "text-emerald-700 bg-emerald-500/10 border-emerald-500/30"
       : summary.openFraction >= 0.5
         ? "text-amber-700 bg-amber-500/10 border-amber-500/30"
-        : "text-rose-700 bg-rose-500/10 border-rose-500/30";
+        : "text-rose-700 bg-rose-500/10 border-rose-500/30"
+    : "text-slate-600 bg-slate-500/10 border-slate-500/30";
+
+  const nonOperatingCopy = operating ? null : NON_OPERATING_COPY[operationStatus];
 
   return (
     <section className="mt-8" aria-labelledby={headingId}>
       <div className="flex items-end justify-between gap-3 mb-4 flex-wrap">
         <div>
           <p className="byline text-muted-foreground/70">
-            {sectionNumber ? `${sectionNumber} · ` : ""}{t("Wind-hold outlook · next 24h", "ウィンドホールド予測 · 24時間")}
+            {sectionNumber ? `${sectionNumber} · ` : ""}
+            {operating
+              ? t("Wind-hold outlook · next 24h", "ウィンドホールド予測 · 24時間")
+              : t("If lifts were running · wind outlook", "運行時の風予測 · 参考")}
           </p>
           <h2
             id={headingId}
@@ -105,12 +197,25 @@ export function LiftWindHoldPanel({
         <span
           className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-bold uppercase tracking-wider ${overallTone}`}
         >
-          {summary.likelyOpen}/{summary.totalLifts} {t("likely open", "運行見込み")}
+          {operating
+            ? `${summary.likelyOpen}/${summary.totalLifts} ${t("likely open", "運行見込み")}`
+            : t(nonOperatingCopy!.chip.en, nonOperatingCopy!.chip.ja)}
         </span>
       </div>
 
-      {/* Headline call */}
-      {summary.worstLift && summary.worstLift.status !== "likely_open" && (
+      {/* Honest operational banner - shown when lifts are NOT running. Replaces
+          the "watch the windiest lift" alert so we never imply live operation. */}
+      {!operating && nonOperatingCopy && (
+        <div className="rounded-2xl border border-slate-500/30 bg-slate-500/10 px-4 py-3 mb-3">
+          <p className="text-sm font-medium text-slate-700 flex items-start gap-2">
+            <Info className="w-4 h-4 mt-0.5 flex-shrink-0" />
+            <span>{t(nonOperatingCopy.banner.en, nonOperatingCopy.banner.ja)}</span>
+          </p>
+        </div>
+      )}
+
+      {/* Headline call - only when lifts are genuinely operating. */}
+      {operating && summary.worstLift && summary.worstLift.status !== "likely_open" && (
         <div className={`rounded-2xl border px-4 py-3 mb-3 ${STATUS_STYLES[summary.worstLift.status].badge}`}>
           <p className="text-sm font-semibold flex items-start gap-2">
             <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0" />
@@ -130,6 +235,9 @@ export function LiftWindHoldPanel({
           const pred = predictions[idx];
           const style = STATUS_STYLES[pred.status];
           const Icon = style.icon;
+          const labelText = operating
+            ? { en: style.label, ja: style.labelJa }
+            : WIND_LABELS[pred.status];
           const isExpanded = expandedId === lift.id;
           return (
             <div key={lift.id} className={idx > 0 ? "border-t border-border" : ""}>
@@ -157,7 +265,7 @@ export function LiftWindHoldPanel({
                     className={`hidden sm:inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${style.badge}`}
                   >
                     <Icon className="w-3 h-3" />
-                    {t(style.label, style.labelJa)}
+                    {t(labelText.en, labelText.ja)}
                   </span>
                   <ChevronDown
                     className={`w-4 h-4 text-muted-foreground transition-transform ${isExpanded ? "rotate-180" : ""}`}
@@ -179,9 +287,11 @@ export function LiftWindHoldPanel({
                     className={`sm:hidden inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider mb-3 ${style.badge}`}
                   >
                     <Icon className="w-3 h-3" />
-                    {t(style.label, style.labelJa)}
+                    {t(labelText.en, labelText.ja)}
                   </span>
-                  <p className="text-sm text-foreground">{pred.reason}</p>
+                  <p className="text-sm text-foreground">
+                    {operating ? pred.reason : windDetail(pred, t)}
+                  </p>
                   <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-3 text-[11px] tabular-nums">
                     <div>
                       <p className="text-muted-foreground/70 uppercase tracking-wider">{t("Confidence", "信頼度")}</p>

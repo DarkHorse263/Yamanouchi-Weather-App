@@ -73,6 +73,8 @@ import { cn } from "../lib/utils";
 import { HourlyForecast } from "@/components/HourlyForecast";
 import { PowderCalendar } from "@/components/PowderCalendar";
 import { LiftWindHoldPanel } from "@/components/LiftWindHoldPanel";
+import { isLiftSeasonOpen } from "@/lib/skiSeason";
+import { REGION_COUNTRY } from "@/regions";
 import { getLiftsForMountain } from "@/data/lifts";
 import { POWDER_THRESHOLDS_AU } from "@/types/weather";
 import { PremiumGate, useOptionalSeason } from "@workspace/feelzlike-shell";
@@ -681,6 +683,10 @@ export default function LocationDetail() {
               resortElevationM={location.elevation}
               hourly={hourly as any}
               sectionNumber=""
+              seasonOpen={isLiftSeasonOpen(REGION_COUNTRY[region.id])}
+              snowDepthCm={current.snowDepth}
+              actualLiftsOpen={liftData?.liftsOpen}
+              actualTotalLifts={liftData?.totalLifts}
             />
           </PremiumGate>
         )}

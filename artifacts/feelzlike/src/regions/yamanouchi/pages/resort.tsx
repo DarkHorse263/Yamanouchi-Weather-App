@@ -36,6 +36,8 @@ import { HourlyForecast } from "@/components/HourlyForecast";
 import { PowderCalendar } from "@/components/PowderCalendar";
 import { MountainWebcams } from "@/components/MountainWebcams";
 import { LiftWindHoldPanel } from "@/components/LiftWindHoldPanel";
+import { isLiftSeasonOpen } from "@/lib/skiSeason";
+import { REGION_COUNTRY } from "@/regions";
 import { getLiftsForMountain } from "@/data/lifts";
 import { ForecastChart } from "@/components/weather/ForecastChart";
 import { EnsembleForecast } from "@/components/weather/EnsembleForecast";
@@ -398,6 +400,8 @@ export default function ResortDetail() {
               hourly={hourly as any}
               sectionNumber=""
               t={t}
+              seasonOpen={isLiftSeasonOpen(REGION_COUNTRY[region.id])}
+              snowDepthCm={current.snowDepth}
             />
           </PremiumGate>
         )}

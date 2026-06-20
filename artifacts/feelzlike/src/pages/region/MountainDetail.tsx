@@ -34,6 +34,8 @@ import { HourlyForecast } from "@/components/HourlyForecast";
 import { POWDER_THRESHOLDS_AU } from "@/types/weather";
 import { PowderCalendar } from "@/components/PowderCalendar";
 import { LiftWindHoldPanel } from "@/components/LiftWindHoldPanel";
+import { isLiftSeasonOpen } from "@/lib/skiSeason";
+import { REGION_COUNTRY } from "@/regions";
 import { MountainWebcams } from "@/components/MountainWebcams";
 import { ForecastChart } from "@/components/weather/ForecastChart";
 import { EnsembleForecast } from "@/components/weather/EnsembleForecast";
@@ -461,6 +463,8 @@ export function MountainDetail() {
                   hourly={hourly as any}
                   sectionNumber=""
                   t={t}
+                  seasonOpen={isLiftSeasonOpen(REGION_COUNTRY[region.id])}
+                  snowDepthCm={current.snowDepth}
                 />
               </PremiumGate>
             </div>
