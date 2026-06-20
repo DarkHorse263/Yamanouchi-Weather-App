@@ -68,6 +68,11 @@ export const wanakaRegion: RegionConfig = {
     { category: "Resorts", label: "Treble Cone", url: "https://www.treblecone.com/" },
     { category: "Transport", label: "Waka Kotahi NZTA · journeys & road conditions", url: "https://www.journeys.nzta.govt.nz/" },
   ],
+  roadsSource: {
+    label: "Waka Kotahi NZTA · journeys",
+    url: "https://www.journeys.nzta.govt.nz/regions/otago",
+    dataAvailable: false,
+  },
   weatherSource: {
     label: "Open-Meteo",
   },

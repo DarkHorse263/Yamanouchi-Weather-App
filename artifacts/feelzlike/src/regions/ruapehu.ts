@@ -72,6 +72,11 @@ export const ruapehuRegion: RegionConfig = {
     { category: "National park", label: "Tongariro National Park · DOC", url: "https://www.doc.govt.nz/parks-and-recreation/places-to-go/central-north-island/places/tongariro-national-park/" },
     { category: "Transport", label: "Waka Kotahi NZTA · journeys & road conditions", url: "https://www.journeys.nzta.govt.nz/" },
   ],
+  roadsSource: {
+    label: "Waka Kotahi NZTA · journeys",
+    url: "https://www.journeys.nzta.govt.nz/regions/manawatu-whanganui",
+    dataAvailable: false,
+  },
   weatherSource: {
     label: "Open-Meteo",
   },

@@ -21,6 +21,10 @@ import { TASMANIA_TRANSPORT } from "./tasmania";
 import { YAMANOUCHI_TRANSPORT } from "./yamanouchi";
 import { NOZAWA_ONSEN_TRANSPORT } from "./nozawa-onsen";
 import { IIYAMA_TRANSPORT } from "./iiyama";
+import { QUEENSTOWN_TRANSPORT } from "./queenstown";
+import { WANAKA_TRANSPORT } from "./wanaka";
+import { MT_HUTT_TRANSPORT } from "./mt-hutt";
+import { RUAPEHU_TRANSPORT } from "./ruapehu";
 
 const REGISTRY: Record<RegionId, TransportProviderList> = {
   "snowy-mountains": SNOWY_MOUNTAINS_TRANSPORT,
@@ -29,13 +33,13 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   yamanouchi: YAMANOUCHI_TRANSPORT,
   "nozawa-onsen": NOZAWA_ONSEN_TRANSPORT,
   iiyama: IIYAMA_TRANSPORT,
-  // NZ · curated transport deferred for the v1 launch. Empty lists keep the
-  // Record exhaustive; getProvidersForRegion falls back to [] so the
-  // Transport page simply shows no curated providers yet.
-  queenstown: [],
-  wanaka: [],
-  "mt-hutt": [],
-  ruapehu: [],
+  // NZ · verified ski-season operators only (resort ski buses, RealNZ +
+  // local mountain shuttles, InterCity). Unverified phone/website/schedule
+  // fields are null per the no-guess rule.
+  queenstown: QUEENSTOWN_TRANSPORT,
+  wanaka: WANAKA_TRANSPORT,
+  "mt-hutt": MT_HUTT_TRANSPORT,
+  ruapehu: RUAPEHU_TRANSPORT,
 };
 
 // Loader-time integrity check.

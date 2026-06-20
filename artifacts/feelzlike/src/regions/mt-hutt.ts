@@ -54,6 +54,11 @@ export const mtHuttRegion: RegionConfig = {
     { category: "Resorts", label: "Mt Hutt (NZSki)", url: "https://www.nzski.com/mt-hutt" },
     { category: "Transport", label: "Waka Kotahi NZTA · journeys & road conditions", url: "https://www.journeys.nzta.govt.nz/" },
   ],
+  roadsSource: {
+    label: "Waka Kotahi NZTA · journeys",
+    url: "https://www.journeys.nzta.govt.nz/regions/canterbury",
+    dataAvailable: false,
+  },
   weatherSource: {
     label: "Open-Meteo",
   },

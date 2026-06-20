@@ -70,6 +70,11 @@ export const queenstownRegion: RegionConfig = {
     { category: "Resorts", label: "The Remarkables (NZSki)", url: "https://www.theremarkables.co.nz/" },
     { category: "Transport", label: "Waka Kotahi NZTA · journeys & road conditions", url: "https://www.journeys.nzta.govt.nz/" },
   ],
+  roadsSource: {
+    label: "Waka Kotahi NZTA · journeys",
+    url: "https://www.journeys.nzta.govt.nz/regions/otago",
+    dataAvailable: false,
+  },
   weatherSource: {
     label: "Open-Meteo",
   },

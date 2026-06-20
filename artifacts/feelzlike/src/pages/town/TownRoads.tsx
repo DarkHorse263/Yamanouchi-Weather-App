@@ -176,15 +176,30 @@ export function TownRoads() {
     );
   }, [query.data, town, region]);
 
+  // Only claim the chain info "updates live" when at least one status is an
+  // actual live scrape. Today every region's chain data is seasonal-rule or
+  // pending, so this is false and the empty-state copy says so honestly.
+  const hasLiveChainData = useMemo(
+    () => chainStatuses.some((c) => c.dataSource === "live"),
+    [chainStatuses],
+  );
+
   return (
     <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
       <PageHeader
         byline={`${region.name} · ${town ? t(town.name, town.nameJa) : t("Town", "町")}`}
         title={t("Road conditions & cams", "道路状況・ライブカメラ")}
-        description={t(
-          `Live route conditions from ${town?.name ?? "town"} to the mountain, plus roadside cams.`,
-          `${town ? t(town.name, town.nameJa) : "町"}から山までのルートの最新状況と路傍カメラ。`,
-        )}
+        description={
+          dataAvailable
+            ? t(
+                `Live route conditions from ${town?.name ?? "town"} to the mountain, plus roadside cams.`,
+                `${town ? t(town.name, town.nameJa) : "町"}から山までのルートの最新状況と路傍カメラ。`,
+              )
+            : t(
+                `Seasonal chain rules for the roads from ${town?.name ?? "town"} to the mountain, plus the official road-camera map.`,
+                `${town ? t(town.name, town.nameJa) : "町"}から山までの道路の季節ごとのチェーン規制と、公式の道路カメラマップ。`,
+              )
+        }
         stamp={
           dataAvailable ? (
             <UpdateStamp
@@ -248,7 +263,9 @@ export function TownRoads() {
                 {chainStatuses.length > 0 && (
                   <>
                     <br />
-                    上のチェーン規制情報はリアルタイムで反映されています。
+                    {hasLiveChainData
+                      ? "上のチェーン規制情報はリアルタイムで反映されています。"
+                      : "上のチェーン規制情報は各道路管理者が公表する季節ごとのルールに基づくものです。"}
                   </>
                 )}
               </>
@@ -258,7 +275,9 @@ export function TownRoads() {
                 {chainStatuses.length > 0 && (
                   <>
                     <br />
-                    the chain-fitting status above does update live.
+                    {hasLiveChainData
+                      ? "the chain-fitting status above does update live."
+                      : "the chain-fitting rules above reflect each road authority's published seasonal requirements."}
                   </>
                 )}
               </>

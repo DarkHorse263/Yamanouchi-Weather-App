@@ -105,25 +105,28 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "kijimadaira-village": "iiyama",
   "iiyama-roads": "iiyama",
 
-  // Queenstown, NZ · 2 mountains + 1 gateway town. No -roads entry (roads
-  // deferred for the NZ v1 launch).
+  // Queenstown, NZ · 2 mountains + 1 gateway town + roads cam tile.
   "coronet-peak": "queenstown",
   "the-remarkables": "queenstown",
   "queenstown": "queenstown",
+  "queenstown-roads": "queenstown",
 
-  // Wanaka, NZ · 2 mountains + 1 gateway town.
+  // Wanaka, NZ · 2 mountains + 1 gateway town + roads cam tile.
   "cardrona": "wanaka",
   "treble-cone": "wanaka",
   "wanaka": "wanaka",
+  "wanaka-roads": "wanaka",
 
-  // Mt Hutt, NZ · 1 mountain + 1 gateway town (Methven).
+  // Mt Hutt, NZ · 1 mountain + 1 gateway town (Methven) + roads cam tile.
   "mt-hutt": "mt-hutt",
   "methven": "mt-hutt",
+  "mt-hutt-roads": "mt-hutt",
 
-  // Ruapehu, NZ · 2 mountains + 1 gateway town (Ohakune).
+  // Ruapehu, NZ · 2 mountains + 1 gateway town (Ohakune) + roads cam tile.
   "whakapapa": "ruapehu",
   "turoa": "ruapehu",
   "ohakune": "ruapehu",
+  "ruapehu-roads": "ruapehu",
 };
 
 export function regionForLocation(locationId: string): RegionId | undefined {

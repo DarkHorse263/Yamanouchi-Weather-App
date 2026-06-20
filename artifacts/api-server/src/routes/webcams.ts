@@ -213,6 +213,37 @@ const WEBCAM_DATA: WebcamConfig[] = [
     webcams: [],
   },
 
+  // ─── Roadside cams: New Zealand ───────────────────────────────────────
+  // Waka Kotahi NZTA's "journeys" site is the official traffic-camera map,
+  // but it's an interactive regional map that doesn't expose stable, deep-
+  // linkable per-camera image URLs we can verify. Per the JP pattern we
+  // surface one honest tile per region that opens the official map where the
+  // user picks the camera on their route. We never fabricate camera images.
+  {
+    locationId: "queenstown-roads",
+    locationName: "Roads to the Queenstown ski fields",
+    webcamPageUrl: "https://www.journeys.nzta.govt.nz/regions/otago",
+    webcams: [],
+  },
+  {
+    locationId: "wanaka-roads",
+    locationName: "Roads to the Wanaka ski fields",
+    webcamPageUrl: "https://www.journeys.nzta.govt.nz/regions/otago",
+    webcams: [],
+  },
+  {
+    locationId: "mt-hutt-roads",
+    locationName: "Roads to Mt Hutt",
+    webcamPageUrl: "https://www.journeys.nzta.govt.nz/regions/canterbury",
+    webcams: [],
+  },
+  {
+    locationId: "ruapehu-roads",
+    locationName: "Roads to the Ruapehu ski fields",
+    webcamPageUrl: "https://www.journeys.nzta.govt.nz/regions/manawatu-whanganui",
+    webcams: [],
+  },
+
   // ─── Resort live-cam pages: Nozawa Onsen ──────────────────────────────
   // Each resort publishes a live-cam landing page (JPG-refresh + occasional
   // YouTube embeds). Linking to the official page rather than the raw

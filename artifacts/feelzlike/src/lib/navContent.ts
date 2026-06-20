@@ -28,6 +28,8 @@ import { getProvidersForRegion } from "@/data/transport";
  *   · snowy-mountains       · Live Traffic NSW road conditions + cams
  *   · victorias-high-country· VicEmergency alerts (fire/road) section
  *   · yamanouchi            · curated road webcams
+ *   · queenstown/wanaka/mt-hutt/ruapehu (NZ) · seasonal chain rules +
+ *     NZTA official road-camera map tile (no live per-road feed wired)
  * The remaining regions have no wired feed yet, so the entry stays hidden.
  * Add a region here the moment its roads feed or cams go live.
  */
@@ -35,6 +37,10 @@ const REGIONS_WITH_ROADS_CONTENT: ReadonlySet<string> = new Set([
   "snowy-mountains",
   "victorias-high-country",
   "yamanouchi",
+  "queenstown",
+  "wanaka",
+  "mt-hutt",
+  "ruapehu",
 ]);
 
 /**

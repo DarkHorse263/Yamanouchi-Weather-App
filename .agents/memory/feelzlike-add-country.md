@@ -50,3 +50,33 @@ sync set; a full monorepo typecheck is the only reliable way to surface them
 - weatherSource label is `Open-Meteo` (do NOT imply MetService integration). The
   radar "official" link-outs to MetService rain radar are a separate UI element
   (parallel to JP→JMA), not a data-source claim.
+
+## Roads & transport for a no-live-feed country (NZ pattern)
+When a country has no free public per-road feed, replicate the yamanouchi
+("dataAvailable:false") pattern rather than wiring a live scrape:
+- Chain statuses: add region branches in `roads.ts buildChainStatuses` with
+  `dataSource:"seasonal-rule"`, `status:"open"`, and an in-season=`must-carry`
+  helper (NZ: `isNzSnowSeason`, Jun10-Oct10). Each official road authority is the
+  `sourceLabel`/`sourceUrl`. Keep the season helper SEPARATE per hemisphere so
+  rule text never implies another country's authority.
+- Cams: ONE honest tile per region in `webcams.ts` (`{region}-roads`,
+  `webcams:[]`, `webcamPageUrl` = the official interactive map e.g. NZTA
+  journeys/regions/<region>). Never fabricate per-camera JPG URLs/IDs when the
+  source map has no stable deep-links.
+- Wire `{region}-roads` into `LOCATION_TO_REGION`, add the region to
+  `navContent.ts REGIONS_WITH_ROADS_CONTENT`, and add `roadsSource{...,
+  dataAvailable:false}` to each region config.
+- Transport: verified operators only, `phone`/`website`/`schedule_url` = null when
+  unverified (never guess). Provider `id`s must be globally unique (prefix by
+  country, e.g. `nz-`) and `regions[]` must include the registry key or the
+  loader-time guard throws. `winter_only` hides ski shuttles in the green-season
+  toggle; year-round coaches/airport transfers omit seasonality.
+
+**Honesty gate (applies to ALL regions, not just the new one):** `TownRoads`
+must not claim road data is "live" unless it actually is. Both the PageHeader
+description AND the empty-state copy gate on `dataAvailable` / a
+`hasLiveChainData = chainStatuses.some(dataSource==="live")` check. Before this
+was added, JP regions falsely advertised "updates live" on seasonal/pending data.
+
+**Route paths:** the api-server mounts all routers at `/api` directly, so the
+endpoints are `/api/road-conditions` and `/api/webcams` (NOT `/api/roads/...`).

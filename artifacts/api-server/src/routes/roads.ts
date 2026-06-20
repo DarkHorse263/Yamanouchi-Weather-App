@@ -194,6 +194,18 @@ function isJpSnowSeason(now: Date): boolean {
   return m === 11 || m <= 3; // Dec–Apr
 }
 
+function isNzSnowSeason(now: Date): boolean {
+  // NZ ski-field road chain rules apply through the southern-hemisphere
+  // winter · the major fields run roughly 10 Jun to 10 Oct. Same window as
+  // the AU helper but kept separate so the rule text never implies the NSW
+  // or Victorian alpine authorities apply in NZ.
+  const m = now.getMonth();
+  if (m === 5) return now.getDate() >= 10;
+  if (m === 6 || m === 7 || m === 8) return true;
+  if (m === 9) return now.getDate() <= 10;
+  return false;
+}
+
 function buildChainStatuses(regionId: string | undefined): Array<Record<string, unknown>> {
   const now = new Date();
   const issuedAt = now.toISOString();
@@ -427,6 +439,153 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
         sourceLabel: "Nagano Prefecture road bureau · winter rules (live feed pending)",
         sourceUrl: "https://www.pref.nagano.lg.jp/douro/",
         dataSource: "pending",
+      },
+    ];
+  }
+
+  if (regionId === "queenstown") {
+    const inSeason = isNzSnowSeason(now);
+    // NZ rule: carry chains in ski season, fit when snow is settling, a
+    // "chains required" sign is shown, or directed. QLDC (Queenstown Lakes)
+    // can fine vehicles without chains in snow/ice under its bylaw.
+    const chains2wd: ChainReq = inSeason ? "must-carry" : "not-required";
+    const chainsAwd: ChainReq = inSeason ? "must-carry" : "not-required";
+    return [
+      {
+        id: "coronet-peak-access-road",
+        regionId: "queenstown",
+        mountainId: "coronet-peak",
+        mountainName: "Coronet Peak",
+        approach: "Coronet Peak access road from Queenstown (via Gorge Rd / Arthurs Point)",
+        status: "open",
+        chains2wd, chainsAwd,
+        note: inSeason
+          ? "Ski season: carry chains. Fit when snow is settling, a 'chains required' sign is shown, or directed. QLDC can fine vehicles travelling without chains in snow or ice."
+          : "Outside ski season · no chain requirement.",
+        issuedAt,
+        sourceLabel: "QLDC · winter road reports",
+        sourceUrl: "https://www.qldc.govt.nz/services/transport-and-parking/winter-road-reports",
+        dataSource: "seasonal-rule",
+      },
+      {
+        id: "the-remarkables-access-road",
+        regionId: "queenstown",
+        mountainId: "the-remarkables",
+        mountainName: "The Remarkables",
+        approach: "The Remarkables access road from SH6 / Frankton",
+        status: "open",
+        chains2wd, chainsAwd,
+        note: inSeason
+          ? "Ski season: carry chains. The access road is steep and unsealed; fit chains when snow is settling or directed. The pre-booked ski bus avoids driving it."
+          : "Outside ski season · no chain requirement.",
+        issuedAt,
+        sourceLabel: "QLDC · winter road reports",
+        sourceUrl: "https://www.qldc.govt.nz/services/transport-and-parking/winter-road-reports",
+        dataSource: "seasonal-rule",
+      },
+    ];
+  }
+
+  if (regionId === "wanaka") {
+    const inSeason = isNzSnowSeason(now);
+    const chains2wd: ChainReq = inSeason ? "must-carry" : "not-required";
+    const chainsAwd: ChainReq = inSeason ? "must-carry" : "not-required";
+    return [
+      {
+        id: "cardrona-access-road",
+        regionId: "wanaka",
+        mountainId: "cardrona",
+        mountainName: "Cardrona",
+        approach: "Cardrona Valley Road + Cardrona access road from Wanaka",
+        status: "open",
+        chains2wd, chainsAwd,
+        note: inSeason
+          ? "Ski season: carry chains. The Crown Range and Cardrona Valley Road are exposed alpine roads; fit chains when snow is settling or directed."
+          : "Outside ski season · no chain requirement.",
+        issuedAt,
+        sourceLabel: "QLDC · winter road reports",
+        sourceUrl: "https://www.qldc.govt.nz/services/transport-and-parking/winter-road-reports",
+        dataSource: "seasonal-rule",
+      },
+      {
+        id: "treble-cone-access-road",
+        regionId: "wanaka",
+        mountainId: "treble-cone",
+        mountainName: "Treble Cone",
+        approach: "Wanaka-Mt Aspiring Road + Treble Cone access road",
+        status: "open",
+        chains2wd, chainsAwd,
+        note: inSeason
+          ? "Ski season: carry chains. The Treble Cone access road is steep and unsealed; 4WD or fitted chains are often needed when snow is on the road."
+          : "Outside ski season · no chain requirement.",
+        issuedAt,
+        sourceLabel: "QLDC · winter road reports",
+        sourceUrl: "https://www.qldc.govt.nz/services/transport-and-parking/winter-road-reports",
+        dataSource: "seasonal-rule",
+      },
+    ];
+  }
+
+  if (regionId === "mt-hutt") {
+    const inSeason = isNzSnowSeason(now);
+    const chains2wd: ChainReq = inSeason ? "must-carry" : "not-required";
+    const chainsAwd: ChainReq = inSeason ? "must-carry" : "not-required";
+    return [
+      {
+        id: "mt-hutt-access-road",
+        regionId: "mt-hutt",
+        mountainId: "mt-hutt",
+        mountainName: "Mt Hutt",
+        approach: "Mt Hutt skifield road from Methven",
+        status: "open",
+        chains2wd, chainsAwd,
+        note: inSeason
+          ? "Ski season: carry chains. The 13 km access road is graded and restricted daily by the ski area; 2WD chains or 4WD when icy. Check the Mt Hutt road report before driving up."
+          : "Outside ski season · no chain requirement.",
+        issuedAt,
+        sourceLabel: "Mt Hutt · getting here",
+        sourceUrl: "https://www.mthutt.co.nz/getting-here/",
+        dataSource: "seasonal-rule",
+      },
+    ];
+  }
+
+  if (regionId === "ruapehu") {
+    const inSeason = isNzSnowSeason(now);
+    const chains2wd: ChainReq = inSeason ? "must-carry" : "not-required";
+    const chainsAwd: ChainReq = inSeason ? "must-carry" : "not-required";
+    return [
+      {
+        id: "whakapapa-bruce-road",
+        regionId: "ruapehu",
+        mountainId: "whakapapa",
+        mountainName: "Whakapapa",
+        approach: "Bruce Road to Whakapapa from SH48 / National Park",
+        status: "open",
+        chains2wd, chainsAwd,
+        note: inSeason
+          ? "Ski season: carry chains. Bruce Road is monitored daily; restrictions range from 2WD chains to 4WD-only to closed in storms, most common Jun-Aug."
+          : "Outside ski season · no chain requirement.",
+        issuedAt,
+        sourceLabel: "Whakapapa · daily mountain report",
+        sourceUrl: "https://www.whakapapa.com/report",
+        dataSource: "seasonal-rule",
+      },
+      {
+        id: "turoa-ohakune-mountain-road",
+        regionId: "ruapehu",
+        mountainId: "turoa",
+        mountainName: "Turoa",
+        approach: "Ohakune Mountain Road to Turoa from Ohakune",
+        status: "open",
+        chains2wd, chainsAwd,
+        note: inSeason
+          ? "Ski season: carry chains. The 17 km Ohakune Mountain Road is monitored daily by Pure Turoa; 2WD chains, 4WD-only, or closed in severe weather."
+          : "Outside ski season · no chain requirement.",
+        issuedAt,
+        sourceLabel: "Pure Turoa · getting here",
+        sourceUrl: "https://www.pureturoa.nz/discover/getting-here-and-around",
+        dataSource: "seasonal-rule",
       },
     ];
   }
