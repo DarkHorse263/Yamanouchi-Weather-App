@@ -612,23 +612,56 @@ export default function LocationDetail() {
                   On the snow
                 </h2>
               </div>
-              <div className={cn(
-                "px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border",
-                liftData.seasonStatus === "open" ? "bg-emerald-500/15 text-emerald-300 border-emerald-500/30" :
-                "bg-amber-500/15 text-amber-300 border-amber-500/30"
-              )}>
-                {liftData.seasonStatus.replace("-", " ")}
-              </div>
+              {(() => {
+                // Honest header chip · it must reflect whether lifts are
+                // ACTUALLY running right now, NOT just whether the season window
+                // is open. An in-season resort with 0 lifts spinning (early
+                // morning, off-hours, weather hold, thin early-season cover)
+                // must never show a green "open" badge - users read that as
+                // "lifts are open" when they aren't.
+                const anyLiftOpen = liftData.liftsOpen > 0;
+                const anyOnHold = (liftData.lifts ?? []).some(
+                  (l: any) => l.status === "wind-hold" || l.status === "on-hold",
+                );
+                let tone: string;
+                let label: string;
+                if (anyLiftOpen) {
+                  tone = "bg-emerald-500/15 text-emerald-300 border-emerald-500/30";
+                  label = "open";
+                } else if (anyOnHold) {
+                  tone = "bg-amber-500/15 text-amber-300 border-amber-500/30";
+                  label = "on hold";
+                } else if (liftData.seasonStatus === "open") {
+                  tone = "bg-white/5 text-muted-foreground border-white/10";
+                  label = "lifts closed";
+                } else {
+                  tone = "bg-amber-500/15 text-amber-300 border-amber-500/30";
+                  label = liftData.seasonStatus.replace("-", " ");
+                }
+                return (
+                  <div className={cn(
+                    "px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border",
+                    tone,
+                  )}>
+                    {label}
+                  </div>
+                );
+              })()}
             </div>
 
-            {(liftData.seasonStatus === "pre-season" || liftData.seasonStatus === "closed") && liftData.liftsOpen === 0 && (
+            {liftData.liftsOpen === 0 &&
+              (liftData.seasonStatus === "pre-season" ||
+                liftData.seasonStatus === "closed" ||
+                liftData.seasonStatus === "open") && (
               <div className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-700 px-2.5 py-1 text-[11px] font-semibold">
                 <span className="relative flex h-1.5 w-1.5">
                   <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-sky-500" />
                 </span>
                 {liftData.seasonStatus === "pre-season"
                   ? "Pre-season · NSW lifts typically spin up early June"
-                  : "Off-season · NSW lifts close early October"}
+                  : liftData.seasonStatus === "closed"
+                    ? "Off-season · NSW lifts close early October"
+                    : "No lifts reported open right now"}
               </div>
             )}
 

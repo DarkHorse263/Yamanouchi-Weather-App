@@ -37,3 +37,28 @@ model verbatim with no season/snow awareness.
   `CountryCode`, so callers pass `REGION_COUNTRY[id]` directly.
 - Operation-priority logic lives in the pure module (not inside the React
   useMemo) so it stays unit-testable; see skiSeason.test.ts op-status matrix.
+
+# Second, separate panel · the live "On the snow" status chip
+
+There is a DIFFERENT lift panel from "Will the lifts spin?": the live lift-feed
+card in `regions/snowy-mountains/pages/LocationDetail.tsx` (header "Lift status ·
+On the snow"). Its top-right header chip must reflect whether lifts are ACTUALLY
+running, NOT the ski-season window.
+
+**Rule:** derive the chip from the live feed, not `seasonStatus`:
+1. `liftData.liftsOpen > 0` -> green "open".
+2. else any per-lift status wind-hold/on-hold -> amber "on hold".
+3. else `seasonStatus === "open"` -> neutral "lifts closed" (in-season but
+   nothing spinning: pre-opening hours, off-hours, weather hold, thin cover).
+4. else -> amber `seasonStatus` label (pre-season / closed).
+Keep the explanatory sky banner in sync: it also fires for
+`seasonStatus === "open" && liftsOpen === 0` with "No lifts reported open right
+now".
+
+**Why:** the chip was bound to `seasonStatus` (the AU season WINDOW, "open"
+Jun10-Oct10), so an in-season resort at ~5am with 0/10 lifts open showed a green
+"OPEN" pill while every lift row read "Closed". "Season open" != "lifts open".
+
+**How to apply:** `seasonStatus` lives ONLY in this file - no other region uses
+it (yamanouchi's "Lift status" is just an external link, not a live chip), so the
+fix is confined to snowy-mountains LocationDetail.

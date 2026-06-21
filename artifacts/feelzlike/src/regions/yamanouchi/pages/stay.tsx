@@ -9,7 +9,6 @@ import { motion } from "framer-motion";
 import { bookingSearchUrl, bookingRegionUrl } from "../lib/booking";
 import { StayPlatformBar } from "@/components/StayPlatformBar";
 import { useNearbyPlaces } from "@/lib/places";
-import { PageMeta } from "@/lib/seo/PageMeta";
 import { itemListSchema, lodgingSchema } from "@/lib/seo/jsonLd";
 
 const YAMANOUCHI_CENTER = { lat: 36.7437, lng: 138.4214 };
