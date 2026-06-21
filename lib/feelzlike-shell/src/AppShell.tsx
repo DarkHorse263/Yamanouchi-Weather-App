@@ -106,7 +106,7 @@ export function AppShell({
   // hrefs to /:region/<path> and bounce them through TownLayout's
   // unknown-town redirect. The `~/` prefix is wouter's documented
   // escape that pins navigation to the app root.
-  const GLOBAL_MOUNTAIN_PATHS = new Set(["/premium", "/news"]);
+  const GLOBAL_MOUNTAIN_PATHS = new Set(["/premium", "/news", "/plan"]);
   const isGlobalMountainPath = (p: string) => GLOBAL_MOUNTAIN_PATHS.has(p);
 
   const isActiveTown = (subpath: string) =>
@@ -189,6 +189,7 @@ export function AppShell({
     pushTown("/eat");               // Eat
     pushTown("/explore");           // Explore
     pushMountain("/news");          // News (global /news page)
+    pushMountain("/plan");          // Trip planner (global /plan page)
     // Premium hub hidden until traction · nav entry removed (the /premium
     // route stays mounted in App.tsx for direct-URL access). Restore
     // pushMountain("/premium") here to bring the tab back.

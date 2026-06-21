@@ -175,6 +175,17 @@ export default function Welcome() {
           <p className="mx-auto mt-5 max-w-sm text-[12px] leading-relaxed text-slate-500" style={balance}>
             tap to pick a country
           </p>
+
+          <p className="mt-4 text-[12px] text-slate-400" style={balance}>
+            planning a trip?{" "}
+            <Link
+              href="/plan"
+              onClick={() => track("welcome_plan_link_click", { category: "navigation" })}
+              className="text-sky-600 underline underline-offset-2 hover:text-sky-700"
+            >
+              open the trip planner
+            </Link>
+          </p>
         </section>
 
         {/* NEAR YOU ─ location-first: local conditions + nearest region ─ */}

@@ -7,6 +7,7 @@ import {
   UtensilsCrossed,
   Compass,
   Newspaper,
+  CalendarDays,
 } from "lucide-react";
 import type { NavItem } from "./types";
 
@@ -37,6 +38,9 @@ export const DEFAULT_MOUNTAIN_NAV: NavItem[] = [
   // winter-only "Alerts" tab; the /:region/alerts route stays mounted in
   // RegionLayout for direct-URL access only.
   { path: "/news", icon: Newspaper, label: "News", labelJa: "ニュース" },
+  // Trip planner · free multi-day planner; global path so AppShell doesn't
+  // rewrite it to /:region/plan.
+  { path: "/plan", icon: CalendarDays, label: "Plan a trip", labelJa: "旅行計画" },
   // Premium hub hidden until we have traction · the /premium route stays
   // mounted in App.tsx (direct-URL only) but is no longer surfaced in nav.
   // Restore the { path: "/premium", icon: Sparkles, ... } item here (and the
