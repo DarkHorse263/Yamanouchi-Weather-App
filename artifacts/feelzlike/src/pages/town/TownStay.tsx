@@ -1,6 +1,7 @@
 import { Bed, ExternalLink, MapPin } from "lucide-react";
 
 import { useRegion, useLanguage, useBaseTown, LiveBadge, PageHeader } from "@workspace/feelzlike-shell";
+import { PageMeta } from "@/lib/seo/PageMeta";
 
 import { EmptyStateCard } from "@/components/EmptyStateCard";
 import {
@@ -91,6 +92,14 @@ export function TownStay() {
 
   return (
     <div className="max-w-6xl mx-auto">
+      <PageMeta
+        title={t(`${town.name} - where to stay`, `${town.name}の宿泊`)}
+        description={t(
+          `Search hotels, lodges and apartments in ${town.name}, ${region.name} across the major booking platforms.`,
+          `${region.name}・${townDisplayName}のホテル・ロッジ・アパートを主要予約サイトで比較。`,
+        )}
+        path={`/${region.id}/${town.id}/stay`}
+      />
       <div className="px-4 md:px-10 pt-4 md:pt-8">
         <PageHeader
           byline={`${region.name} · ${townDisplayName}`}

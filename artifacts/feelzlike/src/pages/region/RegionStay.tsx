@@ -1,6 +1,7 @@
 import { Bed, BedDouble, MapPin, Star } from "lucide-react";
 import { useState } from "react";
 import { useRegion, useLanguage, LiveBadge, PageHeader } from "@workspace/feelzlike-shell";
+import { PageMeta } from "@/lib/seo/PageMeta";
 import { useNearbyPlaces } from "@/lib/places";
 import { StayPlatformBar } from "@/components/StayPlatformBar";
 import { EmptyStateCard } from "@/components/EmptyStateCard";
@@ -62,6 +63,14 @@ export function RegionStay() {
 
   return (
     <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
+      <PageMeta
+        title={t(`${region.name} - where to stay`, `${region.name}の宿泊`)}
+        description={t(
+          `Hotels, lodges and apartments across ${region.name}. Compare prices across the major booking sites.`,
+          `${region.name}のホテル・ロッジ・アパートメント。主要予約サイトで価格を比較。`,
+        )}
+        path={`/${region.id}/stay`}
+      />
       <PageHeader
         byline={region.name}
         title={t("Stay", "宿泊")}

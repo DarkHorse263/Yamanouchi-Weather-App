@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import type { ChainStatus } from "@workspace/api-client-react";
 import { useRegion, useLanguage, useBaseTown, useOptionalSeason, LiveBadge, UpdateStamp, PageHeader } from "@workspace/feelzlike-shell";
+import { PageMeta } from "@/lib/seo/PageMeta";
 import { EmptyStateCard } from "@/components/EmptyStateCard";
 import { REGION_COUNTRY } from "@/regions";
 
@@ -186,6 +187,16 @@ export function TownRoads() {
 
   return (
     <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
+      {town && (
+        <PageMeta
+          title={t(`${town.name} road conditions & cams`, `${town.name}の道路状況・カメラ`)}
+          description={t(
+            `Live road conditions, chain requirements and roadside webcams from ${town.name} to the mountain in ${region.name}.`,
+            `${region.name}・${t(town.name, town.nameJa)}から山までの道路状況・チェーン規制・路傍カメラ。`,
+          )}
+          path={`/${region.id}/${town.id}/roads`}
+        />
+      )}
       <PageHeader
         byline={`${region.name} · ${town ? t(town.name, town.nameJa) : t("Town", "町")}`}
         title={t("Road conditions & cams", "道路状況・ライブカメラ")}

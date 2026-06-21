@@ -19,7 +19,12 @@ import { LegalShell, Section } from "./LegalShell";
  */
 export default function Privacy() {
   return (
-    <LegalShell title="Privacy Policy" lastUpdated="13 May 2026">
+    <LegalShell
+      title="Privacy Policy"
+      description="feelzlike privacy policy. Explains what data we collect, why, where it goes, and the rights you have over it."
+      path="/legal/privacy"
+      lastUpdated="13 May 2026"
+    >
       <p>
         feelzlike respects your privacy. This policy explains what we
         collect, why, where it goes, and the rights you have over it. It

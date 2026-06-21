@@ -1,5 +1,6 @@
 import { useGetPowderAlerts } from "@workspace/api-client-react";
 import { useLanguage, PremiumGate, useOptionalSeason } from "@workspace/feelzlike-shell";
+import { PageMeta } from "@/lib/seo/PageMeta";
 import { Card, Badge, LoadingScreen, ErrorScreen } from "../components/ui-elements";
 import { BellRing, CloudLightning, Info, Sun } from "lucide-react";
 import { motion } from "framer-motion";
@@ -66,6 +67,14 @@ export default function Alerts() {
 
   return (
     <div className="p-4 md:p-8 max-w-4xl mx-auto space-y-6">
+      <PageMeta
+        title={t("Yamanouchi powder alerts", "山ノ内パウダーアラート")}
+        description={t(
+          "Live powder alerts and snow forecasts for Yamanouchi and Shiga Kogen. Subscribe to get notified when significant snowfall is forecast.",
+          "山ノ内・志賀高原のパウダーアラートと降雪予報。まとまった降雪の予報時に通知を受け取れます。",
+        )}
+        path="/yamanouchi/alerts"
+      />
       <div>
         <h1 className="text-3xl md:text-4xl font-black text-foreground flex items-center gap-3">
           <BellRing className="w-8 h-8 text-primary" />

@@ -1,6 +1,7 @@
 import { Utensils, ExternalLink, Coffee, Beer, ShoppingBasket, Pizza } from "lucide-react";
 
 import { useRegion, useLanguage, useBaseTown, LiveBadge, PageHeader } from "@workspace/feelzlike-shell";
+import { PageMeta } from "@/lib/seo/PageMeta";
 
 import { EmptyStateCard } from "@/components/EmptyStateCard";
 
@@ -82,6 +83,11 @@ export function TownEat() {
 
   return (
     <div className="max-w-6xl mx-auto">
+      <PageMeta
+        title={t(`${town.name} - where to eat`, `${town.name}の食事`)}
+        description={t(subtitleEn, subtitleJa)}
+        path={`/${region.id}/${town.id}/eat`}
+      />
       <div className="px-4 md:px-10 pt-4 md:pt-8">
         <PageHeader
           byline={`${region.name} · ${townDisplayName}`}

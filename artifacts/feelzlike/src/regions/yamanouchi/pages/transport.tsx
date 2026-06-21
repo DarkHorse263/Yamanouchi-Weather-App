@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLanguage, useBaseTown, useSeason } from "@workspace/feelzlike-shell";
+import { PageMeta } from "@/lib/seo/PageMeta";
 import {
   RideshareUnavailableNotice,
   townHasRideshare,
@@ -991,6 +992,21 @@ export default function Transport() {
 
   return (
     <div className="flex flex-col h-full overflow-y-auto">
+      <PageMeta
+        title={t(
+          town ? `${t(town.name, town.nameJa)} transport - Yamanouchi` : "Yamanouchi transport",
+          town ? `${t(town.name, town.nameJa)}の交通 - 山ノ内` : "山ノ内の交通",
+        )}
+        description={t(
+          isWinter
+            ? "How to get to Yamanouchi and Shiga Kogen. Shinkansen to Nagano, Nagaden train to Yudanaka, ski buses and local shuttles to the slopes."
+            : "How to get to Yamanouchi. Shinkansen to Nagano, Nagaden train to Yudanaka, and local transport to Shiga Kogen and hiking areas.",
+          isWinter
+            ? "山ノ内・志賀高原へのアクセス。長野まで新幹線、湯田中まで長野電鉄、スキーバス・シャトルでゲレンデへ。"
+            : "山ノ内へのアクセス。長野まで新幹線、湯田中まで長野電鉄、志賀高原や登山エリアへの地域交通。",
+        )}
+        path={town ? `/yamanouchi/${town.id}/transport` : "/yamanouchi/transport"}
+      />
       <div className="px-4 pt-4 pb-0 shrink-0">
         <h1 className="text-2xl font-black text-slate-900">{t("Getting Around", "交通・アクセス")}</h1>
         <p className="text-xs text-slate-500 mt-0.5">

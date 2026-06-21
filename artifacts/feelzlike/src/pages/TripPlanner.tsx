@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "wouter";
+import { PageMeta } from "@/lib/seo/PageMeta";
 import {
   CalendarRange,
   Plus,
@@ -233,6 +234,11 @@ export default function TripPlanner() {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta
+        title="Trip planner"
+        description="Plan your mountain trip. Compare snow forecasts across resorts and find the best days to ski or snowboard."
+        path="/plan"
+      />
       <div className="max-w-3xl mx-auto px-4 md:px-8 py-6 md:py-10 space-y-6">
         <Link
           href="/"

@@ -21,7 +21,12 @@ import { LegalShell, Section } from "./LegalShell";
  */
 export default function Terms() {
   return (
-    <LegalShell title="Terms of Service" lastUpdated="25 May 2026">
+    <LegalShell
+      title="Terms of Service"
+      description="feelzlike terms of service. Governs your use of the feelzlike weather and conditions app for mountain and ski resort information."
+      path="/legal/terms"
+      lastUpdated="25 May 2026"
+    >
       <p>
         These terms govern your use of feelzlike (the &ldquo;Service&rdquo;),
         operated by <strong>Navigate Work Digital Pty Ltd</strong>

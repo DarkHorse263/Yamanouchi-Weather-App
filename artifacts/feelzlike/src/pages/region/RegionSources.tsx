@@ -1,6 +1,7 @@
 import { Database, ExternalLink } from "lucide-react";
 
 import { useLanguage, useRegion, LiveBadge, PageHeader } from "@workspace/feelzlike-shell";
+import { PageMeta } from "@/lib/seo/PageMeta";
 
 /**
  * RegionSources - single source of truth for "where the data comes from".
@@ -129,6 +130,14 @@ export function RegionSources() {
 
   return (
     <div className="max-w-6xl mx-auto">
+      <PageMeta
+        title={t(`${region.name} - data sources`, `${region.name}のデータ出典`)}
+        description={t(
+          `Official sources powering real-time conditions for ${region.name}: weather bureaus, resort feeds, road agencies and forecast ensembles.`,
+          `${region.name}のリアルタイム情報を支える公式データ出典：気象機関・スキー場・道路管理・予報モデル。`,
+        )}
+        path={`/${region.id}/sources`}
+      />
       <div className="px-4 md:px-10 pt-4 md:pt-8">
         <PageHeader
           byline={region.name}

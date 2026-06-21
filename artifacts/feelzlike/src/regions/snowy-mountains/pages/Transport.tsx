@@ -21,6 +21,7 @@ import {
   LiveBadge,
   PageHeader,
 } from "@workspace/feelzlike-shell";
+import { PageMeta } from "@/lib/seo/PageMeta";
 
 import { SNOWY_MOUNTAINS_TRANSPORT } from "@/data/transport/snowy-mountains";
 import type { TransportProvider } from "@/types/transport";
@@ -72,6 +73,21 @@ export function SnowyTransport() {
 
   return (
     <div className="max-w-6xl mx-auto">
+      <PageMeta
+        title={town ? t(`${town.name} transport - Snowy Mountains`, `${town.name}の交通 - スノーマウンテンズ`) : "Snowy Mountains transport"}
+        description={
+          isGreen
+            ? t(
+                "Buses, charters and shared transport into the Snowy Mountains. Cooma Coaches handles year-round services; ski shuttles return in winter.",
+                "スノーマウンテンズへのバス・チャーター・送迎。年間を通じてはCooma Coachesが中心、冬季はスキーシャトルも運行。",
+              )
+            : t(
+                "Buses, ski shuttles and shared transport into the Snowy Mountains. Book Cooma Coaches for the Canberra to Jindabyne route.",
+                "スノーマウンテンズへのバス・スキーシャトル・送迎。キャンベラ~ジンダバイン便はCooma Coachesをご利用ください。",
+              )
+        }
+        path={town ? `/snowy-mountains/${town.id}/transport` : "/snowy-mountains/transport"}
+      />
       <div className="px-4 md:px-10 pt-4 md:pt-8">
         <PageHeader
           byline={`${region.name}${town ? ` · ${t(town.name, town.nameJa)}` : ""}`}

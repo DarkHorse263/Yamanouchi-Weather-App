@@ -17,6 +17,7 @@ import {
   LiveBadge,
   PageHeader,
 } from "@workspace/feelzlike-shell";
+import { PageMeta } from "@/lib/seo/PageMeta";
 import type { RegionId } from "@workspace/api-client-react";
 import {
   getProvidersForRegion,
@@ -76,6 +77,16 @@ export function TownTransport() {
 
   return (
     <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
+      {town && (
+        <PageMeta
+          title={t(`${town.name} transport`, `${town.name}の交通`)}
+          description={t(
+            `Buses, shuttles, trains and shared transport serving ${town.name} in ${region.name}.`,
+            `${region.name}・${t(town.name, town.nameJa)}を発着するバス・送迎・電車。`,
+          )}
+          path={`/${region.id}/${town.id}/transport`}
+        />
+      )}
       <PageHeader
         byline={`${region.name} · ${town ? t(town.name, town.nameJa) : t("Town", "町")}`}
         title={t("Transport", "交通")}

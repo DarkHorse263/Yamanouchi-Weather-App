@@ -1,6 +1,7 @@
 import { Compass, ExternalLink } from "lucide-react";
 
 import { useRegion, useLanguage, useBaseTown, LiveBadge, PageHeader } from "@workspace/feelzlike-shell";
+import { PageMeta } from "@/lib/seo/PageMeta";
 
 import { EmptyStateCard } from "@/components/EmptyStateCard";
 
@@ -34,6 +35,23 @@ export function TownExplore() {
 
   return (
     <div className="max-w-6xl mx-auto">
+      {town && (
+        <PageMeta
+          title={t(`${town.name} - explore`, `${town.name}の観光`)}
+          description={
+            region.id === "yamanouchi"
+              ? t(
+                  `Official tourism, attraction, resort and onsen links for ${region.name}.`,
+                  `${region.name}の公式観光・観光地・スキー場・温泉リンク集。`,
+                )
+              : t(
+                  `Official tourism, national park and resort links for ${region.name}.`,
+                  `${region.name}の公式観光・国立公園・スキー場リンク集。`,
+                )
+          }
+          path={`/${region.id}/${town.id}/explore`}
+        />
+      )}
       <div className="px-4 md:px-10 pt-4 md:pt-8">
         <PageHeader
           byline={`${region.name} · ${townDisplayName}`}

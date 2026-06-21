@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { useRegion, useLanguage } from "@workspace/feelzlike-shell";
 import type { MountainLink } from "@workspace/feelzlike-shell";
+import { PageMeta } from "@/lib/seo/PageMeta";
 
 /**
  * Region mountains list.
@@ -58,6 +59,14 @@ export function MountainsList() {
 
   return (
     <div className="relative">
+      <PageMeta
+        title={t(`${region.name} mountains & ski resorts`, `${region.name}の山・スキー場一覧`)}
+        description={t(
+          `All mountains and ski resorts in ${region.name}. Live conditions, lift status and snow forecasts for each resort.`,
+          `${region.name}の全山・スキー場一覧。各スキー場のライブ状況・リフト運行・降雪予報。`,
+        )}
+        path={`/${region.id}/mountains`}
+      />
       {/* Soft blue backdrop - palette pass replaces the purple/teal aurora. */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[420px] overflow-hidden">
         <div

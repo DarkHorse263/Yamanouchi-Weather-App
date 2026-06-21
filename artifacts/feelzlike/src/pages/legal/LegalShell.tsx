@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { ArrowLeft } from "lucide-react";
 import wordmark from "@assets/feelzlike_trimmed/feelzlike_WordMarque_colour_160426_1777334678269_trim.png";
 import type { ReactNode } from "react";
+import { PageMeta } from "@/lib/seo/PageMeta";
 
 /**
  * Shared chrome for the standalone /legal/* pages (privacy, terms).
@@ -11,15 +12,22 @@ import type { ReactNode } from "react";
  */
 export function LegalShell({
   title,
+  description,
+  path,
   lastUpdated,
   children,
 }: {
   title: string;
+  description?: string;
+  path?: string;
   lastUpdated: string;
   children: ReactNode;
 }) {
   return (
     <div className="min-h-screen bg-white text-slate-900">
+      {description && path && (
+        <PageMeta title={title} description={description} path={path} />
+      )}
       <header className="border-b border-slate-200">
         <div className="max-w-3xl mx-auto px-5 py-4 flex items-center justify-between gap-4">
           <Link

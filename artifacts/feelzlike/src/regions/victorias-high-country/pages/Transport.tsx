@@ -20,6 +20,7 @@ import {
   LiveBadge,
   PageHeader,
 } from "@workspace/feelzlike-shell";
+import { PageMeta } from "@/lib/seo/PageMeta";
 
 import { VICTORIAS_HIGH_COUNTRY_TRANSPORT } from "@/data/transport/victorias-high-country";
 import type { TransportProvider } from "@/types/transport";
@@ -167,6 +168,21 @@ export function VictoriasHighCountryTransport() {
 
   return (
     <div className="max-w-6xl mx-auto">
+      <PageMeta
+        title={town ? t(`${town.name} transport - Victoria's High Country`, `${town.name}の交通 - ビクトリア・ハイカントリー`) : "Victoria's High Country transport"}
+        description={
+          isGreen
+            ? t(
+                "Trains, regional coaches and local taxis serving Victoria's High Country. V/Line runs year-round; the alpine ski-coach network returns in winter.",
+                "ビクトリア・ハイカントリーの電車・地方バス・タクシー。V/Lineは通年運行。冬季限定のスキーバス網は冬に再開します。",
+              )
+            : t(
+                "Trains, alpine coaches, shuttles and taxis serving Victoria's High Country resorts. V/Line is the regional spine; local operators connect to the slopes.",
+                "ビクトリア・ハイカントリーのスキーリゾートへの電車・スキーバス・送迎・タクシー。V/Lineが地域の幹線、地元事業者がスキー場へ接続。",
+              )
+        }
+        path={town ? `/victorias-high-country/${town.id}/transport` : "/victorias-high-country/transport"}
+      />
       <div className="px-4 md:px-10 pt-4 md:pt-8">
         <PageHeader
           byline={`${region.name}${town ? ` · ${t(town.name, town.nameJa)}` : ""}`}

@@ -2,6 +2,7 @@ import { useLanguage, useBaseTown, useRegion, LiveBadge, UpdateStamp, useOptiona
 import { RadarMap, type RadarRegionKey } from "@/regions/snowy-mountains/components/RadarMap";
 import { Radar as RadarIcon, ExternalLink } from "lucide-react";
 import { useTownWeather } from "@/lib/town-weather";
+import { PageMeta } from "@/lib/seo/PageMeta";
 import {
   StaleNotice,
   WeatherHero,
@@ -34,6 +35,18 @@ export function TownWeather() {
 
   return (
     <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
+      <PageMeta
+        title={t(`${town.name} weather forecast`, `${town.name}の天気予報`)}
+        description={t(
+          pageSeason === "winter"
+            ? `Current conditions, hourly and 7-day snow forecast for ${town.name} in ${region.name}. Live radar included.`
+            : `Current conditions, hourly and 7-day forecast for ${town.name} in ${region.name}. Live radar included.`,
+          pageSeason === "winter"
+            ? `${region.name}・${town.name}の現在・時間別・7日間降雪予報。ライブレーダー付き。`
+            : `${region.name}・${town.name}の現在・時間別・7日間天気予報。ライブレーダー付き。`,
+        )}
+        path={`/${region.id}/${town.id}/weather`}
+      />
       <PageHeader
         byline={`${region.name} · ${t(town.name, town.nameJa)}`}
         title={t(`${town.name} weather forecast`, `${town.name}の天気予報`)}

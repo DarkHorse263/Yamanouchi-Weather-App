@@ -1,6 +1,7 @@
 import { useGetAccommodation } from "@workspace/api-client-react";
 import { useLanguage } from "@workspace/feelzlike-shell";
 import { useSeason } from "@workspace/feelzlike-shell";
+import { PageMeta } from "@/lib/seo/PageMeta";
 import { LoadingScreen, ErrorScreen } from "../components/ui-elements";
 import { useState } from "react";
 import { MapPin, Phone, Bath, CableCar, Mountain, Search, Star, ExternalLink, BedDouble, Hotel, Home, Building2, type LucideIcon } from "lucide-react";
@@ -68,6 +69,20 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
 
   return (
     <div className="p-4 md:p-8 max-w-4xl mx-auto space-y-4 pb-24">
+      {!embedded && (
+        <PageMeta
+          title={t("Yamanouchi - where to stay", "山ノ内の宿泊")}
+          description={t(
+            isWinter
+              ? "Hotels, ryokan and guesthouses in Yamanouchi and Shiga Kogen. Ski-in lodges, hot spring ryokan and town stays all in one place."
+              : "Hotels, ryokan and guesthouses in Yamanouchi. Mountain resorts, hot spring ryokan and town stays for summer hiking.",
+            isWinter
+              ? "山ノ内・志賀高原のホテル・旅館・ゲストハウス。スキーインロッジ・温泉旅館・町の宿をまとめて比較。"
+              : "山ノ内のホテル・旅館・ゲストハウス。夏のハイキングに便利な山岳リゾート・温泉旅館・町の宿。",
+          )}
+          path="/yamanouchi/stay"
+        />
+      )}
       {!embedded && (
         <>
           <div>

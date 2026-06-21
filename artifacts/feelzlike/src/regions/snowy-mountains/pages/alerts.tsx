@@ -2,6 +2,7 @@ import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
 import { RegionAnnouncements } from "@/components/RegionAnnouncements";
 import { BellRing, Info, Sun } from "lucide-react";
 import { PremiumGate, useOptionalSeason } from "@workspace/feelzlike-shell";
+import { PageMeta } from "@/lib/seo/PageMeta";
 
 /**
  * Snowy Mountains alerts page. Powder alerts (the GET /alerts data) are
@@ -25,6 +26,11 @@ export default function Alerts() {
 
   return (
     <div className="p-4 md:p-8 max-w-3xl mx-auto space-y-6">
+      <PageMeta
+        title="Snowy Mountains powder alerts"
+        description="Subscribe to powder and weather alerts for the Snowy Mountains. Get notified by email when significant snow is forecast."
+        path="/snowy-mountains/alerts"
+      />
       <div>
         <h1 className="text-3xl md:text-4xl font-black text-foreground flex items-center gap-3">
           <BellRing className="w-8 h-8 text-primary" />
