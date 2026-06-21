@@ -1,0 +1,39 @@
+# feelzlike
+
+> feelzlike shows live weather, road conditions, lift status, and travel info for resort towns across Australia, New Zealand, and Japan. It is towns-first: the experience centres on the base towns people actually stay in (Jindabyne, Bright, Yudanaka, etc.) rather than the ski resorts on the mountain above.
+
+## Public landing pages
+
+- [Home](https://feelzlike.com/): intro, region picker, and near-you shortcut
+- [Browse by country](https://feelzlike.com/countries): choose Australia, Japan, or New Zealand
+- [Australia](https://feelzlike.com/au): all Australian resort regions
+- [Japan](https://feelzlike.com/jp): all Japanese resort regions
+- [New Zealand](https://feelzlike.com/nz): all New Zealand resort regions
+- [Near you](https://feelzlike.com/near-you): weather and radar for your current location
+- [News](https://feelzlike.com/news): resort-town news and weather updates
+- [Trip planner](https://feelzlike.com/plan): multi-day trip planning across regions
+
+## Resort regions
+
+- [Snowy Mountains (NSW, AU)](https://feelzlike.com/snowy-mountains): Jindabyne, Berridale, Cooma · Perisher, Thredbo, Selwyn, Charlotte's Pass
+- [Victoria's High Country (VIC, AU)](https://feelzlike.com/victorias-high-country): Mansfield, Bright, Mount Beauty, Harrietville, Dinner Plain, Marysville, Warburton, Omeo
+- [Yamanouchi (Nagano, JP)](https://feelzlike.com/yamanouchi): Yudanaka, Shibu Onsen, Yomase · Shiga Kogen
+
+## Region features
+
+Each region exposes: weather (mountains), alerts, stay, eat, and explore sub-sections reachable at /:region/mountains, /:region/alerts, /:region/stay, /:region/eat, and /:region/explore.
+
+## Town pages
+
+Each base town exposes: weather forecast, stay, eat, roads (with road cams), transport, and explore, reachable at /:region/:town/:section.
+
+Example: https://feelzlike.com/snowy-mountains/jindabyne/weather
+
+## Legal
+
+- [Privacy policy](https://feelzlike.com/legal/privacy)
+- [Terms of service](https://feelzlike.com/legal/terms)
+
+## Sitemap
+
+https://feelzlike.com/sitemap.xml

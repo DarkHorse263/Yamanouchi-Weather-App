@@ -1,14 +1,18 @@
 #!/usr/bin/env node
 /**
- * Generates artifacts/feelzlike/public/sitemap.xml from a static list of
- * routes derived from the region/town/feature matrix.
+ * Generates artifacts/feelzlike/public/sitemap.xml from the actual public
+ * route map defined in App.tsx and the region/town registry.
  *
  * Why a separate script (not vite-plugin-sitemap)?
- *  - Routes are dynamic-but-finite (2 regions × 3 towns × ~7 features).
- *    A 30-line script is simpler than configuring a plugin to introspect
- *    wouter routes.
- *  - Run via `pnpm sitemap` or it's wired into the build script in
- *    package.json. Idempotent — safe to re-run.
+ *  - Routes are dynamic-but-finite. A script is simpler than configuring
+ *    a plugin to introspect wouter routes.
+ *  - Run via `pnpm sitemap` or wired into the build script in package.json.
+ *    Idempotent — safe to re-run.
+ *
+ * Retired routes NOT included (would create soft-404s):
+ *  - /:region/today   (replaced by region home)
+ *  - /:region/:town/places (removed from the nav)
+ *  - /:region/:town/cams   (folded into /roads; /cams client-redirects)
  *
  * Update SITE_URL and PUBLISHED_AT for production deploys.
  */
@@ -20,37 +24,89 @@ import { fileURLToPath } from "node:url";
 const SITE_URL = process.env.PUBLIC_ORIGIN || "https://feelzlike.com";
 const NOW = new Date().toISOString().slice(0, 10);
 
+// ── Region / town registry ────────────────────────────────────────────────
+// Keep in sync with src/regions/ and the KNOWN_REGIONS block in api-server/src/app.ts.
+
 const REGIONS = [
-  { slug: "snowy-mountains", towns: ["jindabyne", "berridale", "cooma"] },
-  { slug: "yamanouchi", towns: ["yudanaka", "shibu_onsen", "yomase"] },
+  {
+    slug: "snowy-mountains",
+    name: "Snowy Mountains",
+    towns: ["jindabyne", "berridale", "cooma"],
+  },
+  {
+    slug: "yamanouchi",
+    name: "Yamanouchi",
+    // Note: shibu-onsen uses a hyphen (the correct town ID), not an underscore.
+    towns: ["yudanaka", "shibu-onsen", "yomase"],
+  },
+  {
+    slug: "victorias-high-country",
+    name: "Victoria's High Country",
+    towns: ["mansfield", "bright", "mount-beauty", "harrietville", "dinner-plain", "marysville", "warburton", "omeo"],
+  },
 ];
 
-const REGION_FEATURES = ["", "today", "mountains", "alerts", "stay", "eat", "explore"];
-const TOWN_FEATURES = ["", "weather", "stay", "eat", "cams", "roads", "transport", "places"];
+// Valid region sub-sections that are indexable pages (not redirects/retired).
+const REGION_FEATURES = ["mountains", "alerts", "stay", "eat", "explore"];
 
-const urls = new Set();
-urls.add("/");
+// Valid town sub-sections that are indexable pages (not redirects/retired).
+// Omits: cams (redirects to /roads), places (retired).
+const TOWN_FEATURES = ["weather", "stay", "eat", "roads", "transport", "explore"];
+
+// ── Top-level static pages ────────────────────────────────────────────────
+
+/** @param {string} path @param {string} changefreq @param {string} priority */
+function url(path, changefreq, priority) {
+  return { path, changefreq, priority };
+}
+
+const staticUrls = [
+  url("/",                "daily",   "1.0"),
+  url("/countries",       "daily",   "0.9"),
+  url("/au",              "daily",   "0.9"),
+  url("/jp",              "daily",   "0.9"),
+  url("/nz",              "daily",   "0.9"),
+  url("/news",            "daily",   "0.9"),
+  url("/plan",            "weekly",  "0.8"),
+  url("/near-you",        "weekly",  "0.6"),
+  url("/legal/privacy",   "monthly", "0.4"),
+  url("/legal/terms",     "monthly", "0.4"),
+];
+
+// ── Dynamic region + town URLs ────────────────────────────────────────────
+
+const dynamicUrls = [];
 
 for (const r of REGIONS) {
+  // Region home page
+  dynamicUrls.push(url(`/${r.slug}`, "daily", "0.8"));
+
+  // Region sub-sections
   for (const f of REGION_FEATURES) {
-    urls.add(f ? `/${r.slug}/${f}` : `/${r.slug}`);
+    dynamicUrls.push(url(`/${r.slug}/${f}`, "weekly", "0.7"));
   }
+
+  // Town pages
   for (const t of r.towns) {
+    // Town home
+    dynamicUrls.push(url(`/${r.slug}/${t}`, "daily", "0.7"));
+    // Town sub-sections
     for (const f of TOWN_FEATURES) {
-      urls.add(f ? `/${r.slug}/${t}/${f}` : `/${r.slug}/${t}`);
+      dynamicUrls.push(url(`/${r.slug}/${t}/${f}`, "weekly", "0.6"));
     }
   }
 }
 
+// ── Assemble and write ────────────────────────────────────────────────────
+
+const allUrls = [...staticUrls, ...dynamicUrls];
+
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${[...urls]
-  .sort()
+${allUrls
   .map(
-    (u) =>
-      `  <url><loc>${SITE_URL}${u}</loc><lastmod>${NOW}</lastmod><changefreq>${
-        u === "/" ? "daily" : "weekly"
-      }</changefreq><priority>${u === "/" ? "1.0" : "0.7"}</priority></url>`,
+    ({ path, changefreq, priority }) =>
+      `  <url><loc>${SITE_URL}${path}</loc><lastmod>${NOW}</lastmod><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>`,
   )
   .join("\n")}
 </urlset>
@@ -61,4 +117,4 @@ const __dirname = dirname(__filename);
 const outPath = join(__dirname, "..", "public", "sitemap.xml");
 mkdirSync(dirname(outPath), { recursive: true });
 writeFileSync(outPath, xml, "utf8");
-console.log(`[sitemap] wrote ${urls.size} URLs → ${outPath}`);
+console.log(`[sitemap] wrote ${allUrls.length} URLs → ${outPath}`);
