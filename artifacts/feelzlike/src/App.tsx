@@ -13,7 +13,7 @@ import { OfflineBanner } from "@/components/OfflineBanner";
 import { PullToRefresh } from "@/components/PullToRefresh";
 import { AppErrorBoundary } from "@/components/AppErrorBoundary";
 import { identifyAnonUser, track } from "@/lib/analytics";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation } from "wouter";
 import AlertsVerify from "@/pages/alerts/Verify";
 import AlertsManage from "@/pages/alerts/Manage";
@@ -120,6 +120,56 @@ function AnalyticsBridge() {
 }
 
 /**
+ * Scrolls back to the top of the page whenever the user navigates FORWARD to a
+ * new route (e.g. tapping "Transport" in the bottom nav). Without this, wouter
+ * keeps the previous scroll offset, so tapping a nav item from halfway down the
+ * Today page would land you halfway down the next page.
+ *
+ * Back / forward navigations (popstate · including the in-app Back bar's
+ * `history.back()`) are intentionally left alone so the browser can restore the
+ * scroll position the user was at before.
+ */
+function ScrollToTop() {
+  const [location] = useLocation();
+  const wasPopRef = useRef(false);
+  const prevPathRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    const onPop = () => {
+      wasPopRef.current = true;
+    };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
+
+  useEffect(() => {
+    const path = location.split(/[?#]/)[0] || "/";
+    // Consume the popstate flag for this navigation so a stale value can't
+    // leak into a later forward nav.
+    const wasPop = wasPopRef.current;
+    wasPopRef.current = false;
+
+    // Skip the very first run (initial load / reload / deep link) so the
+    // browser's own scroll restoration isn't clobbered.
+    if (prevPathRef.current === null) {
+      prevPathRef.current = path;
+      return;
+    }
+    // Only a real path change should reset scroll · ignore query/hash-only
+    // changes (e.g. tokenised alert links, filter params).
+    if (prevPathRef.current === path) return;
+    prevPathRef.current = path;
+
+    // Back/forward navigation · let the browser restore the prior position.
+    if (wasPop) return;
+
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [location]);
+
+  return null;
+}
+
+/**
  * Loads the Awin affiliate MasterTag once the visitor grants `ads` consent,
  * and tears it down if they later revoke it. Mounted inside ConsentProvider so
  * it can read the choice. No-op until VITE_AWIN_PUBLISHER_ID is configured.
@@ -146,6 +196,7 @@ function App() {
           <ConsentProvider>
             <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
               <AnalyticsBridge />
+              <ScrollToTop />
               <AwinTag />
               <Router />
             </WouterRouter>

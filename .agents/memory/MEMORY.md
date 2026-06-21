@@ -14,5 +14,6 @@
 - [monorepo project-reference rebuild](monorepo-project-reference-rebuild.md) — after codegen/schema edits, `tsc` consumers fail "no exported member" until you `tsc -b` the lib decls, even though dev server works.
 - [feelzlike location-weather endpoint](feelzlike-weather-endpoint-sharing.md) — single `/weather/:id` serves AU+JP; region-gate forecast_days (undefined region = AU); consumers slice-cap `daily`, audit for open-ended slices.
 - [feelzlike Awin affiliate](feelzlike-awin-monetization.md) — earns only via Convert-a-Link on Awin-approved advertisers (configured Awin-side); keep the MasterTag gated behind canUseAds; never double-tag one OTA (direct id + Awin).
+- [feelzlike touch gestures](feelzlike-pull-to-refresh-gestures.md) — PullToRefresh's top-of-page touchmove preventDefault stalls horizontal scrollers unless excluded; ScrollToTop must skip popstate.
 - [feelzlike lift-panel honesty](feelzlike-lift-honesty.md) — wind-hold panel must gate on season+snow+live-feed before saying lifts open; pure computeLiftOperationStatus in skiSeason.ts; snowDepth null=unknown (never closes).
 - [feelzlike adding a country](feelzlike-add-country.md) — sync set in regions.ts header is incomplete (also transport REGISTRY throws-at-load + Countries.tsx); root `pnpm typecheck` short-circuits on pre-existing anthropic-lib error, so typecheck artifacts directly.

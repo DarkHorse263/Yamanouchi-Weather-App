@@ -116,11 +116,33 @@ export function PullToRefresh() {
       return false;
     };
 
+    // Walk up from the touch target. If any ancestor is a horizontally
+    // scrollable container with overflowing content (the mobile bottom nav,
+    // hourly-forecast strips, stay/eat carousels), the user is trying to swipe
+    // THAT sideways · don't arm pull-to-refresh. Otherwise our `touchmove`
+    // preventDefault below would cancel the native horizontal scroll and the
+    // strip would feel stuck (e.g. the bottom nav "stopping" at Stay).
+    const hasHorizontalScrollAncestor = (node: EventTarget | null): boolean => {
+      let el = node as HTMLElement | null;
+      while (el && el !== document.body && el !== document.documentElement) {
+        if (el.scrollWidth > el.clientWidth) {
+          const style = window.getComputedStyle(el);
+          const ox = style.overflowX;
+          if (ox === "auto" || ox === "scroll") {
+            return true;
+          }
+        }
+        el = el.parentElement;
+      }
+      return false;
+    };
+
     const onTouchStart = (e: TouchEvent) => {
       if (refreshingRef.current) return;
       if (window.scrollY > 0) return;
       if (isInsideEditable(e.target)) return;
       if (hasScrolledAncestor(e.target)) return;
+      if (hasHorizontalScrollAncestor(e.target)) return;
       const t = e.touches[0];
       if (!t) return;
       startYRef.current = t.clientY;
