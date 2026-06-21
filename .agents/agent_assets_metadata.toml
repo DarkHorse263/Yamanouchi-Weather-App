@@ -204,3 +204,9 @@ id = "y2IhkMj3mNOFC70y_uavk"
 uri = "file://attached_assets/town_aerials/yudanaka_valley_c_shiburiver.jpg"
 type = "image"
 title = "Yudanaka C · snowy river & mountains around Shibu Onsen · 640x427"
+
+[[outputs]]
+id = "uYkmQB-jHEV7wxodX2JXs"
+uri = "file://artifacts/feelzlike/public/branding/feelzlike-88x31.png"
+type = "image"
+title = "feelzlike logo - 88x31 PNG (for Awin profile)"
