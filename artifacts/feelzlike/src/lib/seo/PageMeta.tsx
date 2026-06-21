@@ -30,12 +30,17 @@ export interface PageMetaProps {
 const SITE_NAME = "feelzlike";
 const DEFAULT_OG_IMAGE = "/opengraph.jpg";
 
+const CANONICAL_ORIGIN = "https://feelzlike.com";
+
 function publicOrigin(): string {
-  const fromEnv = (import.meta as { env?: { VITE_PUBLIC_ORIGIN?: string } })
-    .env?.VITE_PUBLIC_ORIGIN;
-  if (fromEnv) return fromEnv.replace(/\/$/, "");
+  const env = (import.meta as { env?: { VITE_PUBLIC_ORIGIN?: string; PROD?: boolean } })
+    .env;
+  if (env?.VITE_PUBLIC_ORIGIN) return env.VITE_PUBLIC_ORIGIN.replace(/\/$/, "");
+  // In production always declare the single canonical host so visitors arriving
+  // via www.feelzlike.com still emit feelzlike.com canonicals (no duplicate index).
+  if (env?.PROD) return CANONICAL_ORIGIN;
   if (typeof window !== "undefined") return window.location.origin;
-  return "https://feelzlike.com";
+  return CANONICAL_ORIGIN;
 }
 
 export function PageMeta({
