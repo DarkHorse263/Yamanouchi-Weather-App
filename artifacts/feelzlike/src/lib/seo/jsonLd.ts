@@ -76,9 +76,31 @@ export function placeSchema(args: {
   };
 }
 
-export function lodgingSchema(args: {
+export function itemListSchema(args: {
   name: string;
   url: string;
+  description?: string;
+  items: Array<{ name: string; url?: string }>;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: args.name,
+    url: args.url,
+    ...(args.description ? { description: args.description } : {}),
+    numberOfItems: args.items.length,
+    itemListElement: args.items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      ...(item.url ? { url: item.url } : {}),
+    })),
+  };
+}
+
+export function lodgingSchema(args: {
+  name: string;
+  url?: string;
   description?: string;
   image?: string;
   latLng?: PlaceLatLng;
@@ -90,7 +112,7 @@ export function lodgingSchema(args: {
     "@context": "https://schema.org",
     "@type": "LodgingBusiness",
     name: args.name,
-    url: args.url,
+    ...(args.url ? { url: args.url } : {}),
     ...(args.description ? { description: args.description } : {}),
     ...(args.image ? { image: args.image } : {}),
     ...(args.latLng

@@ -9,6 +9,8 @@ import { motion } from "framer-motion";
 import { bookingSearchUrl, bookingRegionUrl } from "../lib/booking";
 import { StayPlatformBar } from "@/components/StayPlatformBar";
 import { useNearbyPlaces } from "@/lib/places";
+import { PageMeta } from "@/lib/seo/PageMeta";
+import { itemListSchema, lodgingSchema } from "@/lib/seo/jsonLd";
 
 const YAMANOUCHI_CENTER = { lat: 36.7437, lng: 138.4214 };
 
@@ -50,6 +52,14 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
 
   const { data: all, isLoading, error } = useGetAccommodation({} as any);
 
+  const nearbyQuery = useNearbyPlaces({
+    lat: YAMANOUCHI_CENTER.lat,
+    lng: YAMANOUCHI_CENTER.lng,
+    radius: 8000,
+    kind: "stay",
+    max: 24,
+  });
+
   if (isLoading) return <LoadingScreen />;
   if (error) return <ErrorScreen message={(error as any)?.message || "Network error"} />;
 
@@ -59,6 +69,47 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
 
   const mountain = filtered.filter(p => ON_MOUNTAIN.includes(p.region));
   const town = filtered.filter(p => !ON_MOUNTAIN.includes(p.region));
+
+  const allCurated = all ?? [];
+  const livePlaces = nearbyQuery.data ?? [];
+
+  const curatedLodgingNodes = allCurated.map((p) =>
+    lodgingSchema({
+      name: p.name,
+      ...(p.websiteUrl ? { url: p.websiteUrl } : {}),
+      ...(p.lat != null && p.lng != null ? { latLng: { lat: p.lat, lng: p.lng } } : {}),
+      ...(p.address ? { addressLocality: p.address } : {}),
+      addressCountry: "JP",
+      ...(p.priceRange ? { priceRange: p.priceRange } : {}),
+    }),
+  );
+
+  const liveLodgingNodes = livePlaces.map((p) =>
+    lodgingSchema({
+      name: p.name,
+      ...(p.photoUrl ? { image: p.photoUrl } : {}),
+      ...(p.lat != null && p.lng != null ? { latLng: { lat: p.lat, lng: p.lng } } : {}),
+      ...(p.address ? { addressLocality: p.address.split(",")[0] } : {}),
+      addressCountry: "JP",
+    }),
+  );
+
+  const allLodgingNodes = [...curatedLodgingNodes, ...liveLodgingNodes];
+  const allListItems = [
+    ...allCurated.map((p) => ({ name: p.name, ...(p.websiteUrl ? { url: p.websiteUrl } : {}) })),
+    ...livePlaces.map((p) => ({ name: p.name })),
+  ];
+
+  const stayPageUrl = "https://feelzlike.com/yamanouchi/stay";
+
+  const listNode = allListItems.length > 0
+    ? itemListSchema({
+        name: "Where to Stay in Yamanouchi",
+        url: stayPageUrl,
+        description: "Accommodation in Yamanouchi, Nagano · hotels, ryokan and guesthouses across Shiga Kogen, Ryuoo, Yudanaka and Shibu Onsen.",
+        items: allListItems,
+      })
+    : null;
 
   const typeFilters: { value: FilterType; label: string; labelJa: string }[] = [
     { value: "all", label: "All", labelJa: "すべて" },
@@ -85,6 +136,12 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
       )}
       {!embedded && (
         <>
+          <PageMeta
+            title="Where to Stay in Yamanouchi"
+            description="Accommodation in Yamanouchi, Nagano · hotels, ryokan and guesthouses across Shiga Kogen, Ryuoo, Yudanaka and Shibu Onsen. Compare prices across 8 booking sites."
+            path="/yamanouchi/stay"
+            jsonLd={listNode ? [listNode, ...allLodgingNodes] : undefined}
+          />
           <div>
             <h1 className="text-3xl md:text-4xl font-black text-foreground">{t("Where to Stay", "宿泊施設")}</h1>
             <p className="text-muted-foreground mt-1 text-sm">{t("Accommodation in Yamanouchi · Compare 8 booking sites", "山ノ内町の宿泊施設 · 8つの予約サイトで比較")}</p>
@@ -190,20 +247,22 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
       )}
 
       {/* Google Places - live discovery across all of Yamanouchi */}
-      <GooglePlacesStaySection t={t} />
+      <GooglePlacesStaySection t={t} data={nearbyQuery.data} isLoading={nearbyQuery.isLoading} error={nearbyQuery.error} />
     </div>
   );
 }
 
-function GooglePlacesStaySection({ t }: { t: (en: string, ja: string | null) => string }) {
-  const { data, isLoading, error } = useNearbyPlaces({
-    lat: YAMANOUCHI_CENTER.lat,
-    lng: YAMANOUCHI_CENTER.lng,
-    radius: 8000,
-    kind: "stay",
-    max: 24,
-  });
-
+function GooglePlacesStaySection({
+  t,
+  data,
+  isLoading,
+  error,
+}: {
+  t: (en: string, ja: string | null) => string;
+  data: ReturnType<typeof useNearbyPlaces>["data"];
+  isLoading: boolean;
+  error: Error | null | undefined;
+}) {
   const places = data ?? [];
 
   return (

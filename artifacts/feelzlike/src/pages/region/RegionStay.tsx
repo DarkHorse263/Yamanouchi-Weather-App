@@ -1,10 +1,11 @@
 import { Bed, BedDouble, MapPin, Star } from "lucide-react";
 import { useState } from "react";
 import { useRegion, useLanguage, LiveBadge, PageHeader } from "@workspace/feelzlike-shell";
-import { PageMeta } from "@/lib/seo/PageMeta";
 import { useNearbyPlaces } from "@/lib/places";
 import { StayPlatformBar } from "@/components/StayPlatformBar";
 import { EmptyStateCard } from "@/components/EmptyStateCard";
+import { PageMeta } from "@/lib/seo/PageMeta";
+import { itemListSchema, lodgingSchema } from "@/lib/seo/jsonLd";
 
 type StayFilter = {
   value: string;
@@ -61,6 +62,27 @@ export function RegionStay() {
     ? allPlaces.filter((p) => active.match!.test(p.name))
     : allPlaces;
 
+  const stayPageUrl = `https://feelzlike.com/${region.id}/stay`;
+
+  const lodgingNodes = allPlaces.map((p) =>
+    lodgingSchema({
+      name: p.name,
+      ...(p.photoUrl ? { image: p.photoUrl } : {}),
+      ...(p.lat != null && p.lng != null ? { latLng: { lat: p.lat, lng: p.lng } } : {}),
+      ...(p.address ? { addressLocality: p.address.split(",")[0] } : {}),
+      addressCountry: country || undefined,
+    }),
+  );
+
+  const listNode = allPlaces.length > 0
+    ? itemListSchema({
+        name: `Stays in ${region.name}`,
+        url: stayPageUrl,
+        description: `Hotels, lodges and apartments across ${region.name}.`,
+        items: allPlaces.map((p) => ({ name: p.name })),
+      })
+    : null;
+
   return (
     <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
       <PageMeta
@@ -70,6 +92,7 @@ export function RegionStay() {
           `${region.name}のホテル・ロッジ・アパートメント。主要予約サイトで価格を比較。`,
         )}
         path={`/${region.id}/stay`}
+        jsonLd={listNode ? [listNode, ...lodgingNodes] : undefined}
       />
       <PageHeader
         byline={region.name}
