@@ -716,15 +716,19 @@ async function fetchLocalCurrent(lat: number, lon: number): Promise<LocalCurrent
 }
 
 // Friendly locality label for arbitrary coords. Builds "Locality, Subdivision"
-// (e.g. "Jindabyne, New South Wales"), best-effort: any failure returns null
+// (e.g. "Woolloomooloo, New South Wales"), best-effort: any failure returns null
 // and the client falls back to a neutral label.
 //
-// Primary source is OpenWeatherMap's keyed reverse-geocoder. It is reliable
-// from a server (tied to our API key, not a per-IP free tier) and gives
-// town-level granularity. BigDataCloud's keyless "reverse-geocode-client"
-// endpoint is a browser-intended geocoder: called from a single server IP it
-// gets rate-limited and returns nothing in production, so it must stay a
-// last-ditch fallback only - never the primary.
+// Two sources, combined for granularity + reliability (see fetchPlaceName):
+//   - OpenWeatherMap's keyed reverse-geocoder is reliable from a server (tied to
+//     our API key, not a per-IP free tier) but only resolves to town/city level
+//     ("Sydney"), never the suburb.
+//   - BigDataCloud's keyless "reverse-geocode-client" resolves the actual suburb
+//     ("Woolloomooloo") via its `locality` field. It is a browser-intended
+//     geocoder that can get rate-limited when hammered from a single server IP,
+//     so we never depend on it alone - but place labels are cached per ~1.1km
+//     cell for 24h (placeNameCache), so real call volume stays tiny and well
+//     within limits.
 async function fetchPlaceNameFromOwm(
   lat: number,
   lon: number,
@@ -764,12 +768,17 @@ async function fetchPlaceNameFromBigDataCloud(
     if (!res.ok) return null;
     const d: any = await res.json();
     const str = (v: unknown): string => (typeof v === "string" ? v.trim() : "");
-    const locality = str(d.city) || str(d.locality);
+    // Prefer the suburb (`locality`, e.g. "Woolloomooloo") over the broader
+    // `city` ("Sydney") - the finer label is the whole point of this source. In
+    // rural areas `locality` is the town (e.g. "Jindabyne") while `city` is the
+    // wider LGA ("Snowy Monaro"), so suburb-first is the better label there too.
+    // Fall through to null (not the country) so the chain can prefer OWM's town
+    // label over a useless "Australia".
+    const locality = str(d.locality) || str(d.city);
     const region = str(d.principalSubdivision);
-    const country = str(d.countryName);
     const parts = [locality, region].filter(Boolean);
     if (parts.length > 0) return parts.join(", ");
-    return country || null;
+    return null;
   } catch (err) {
     console.warn("[local-weather] BigDataCloud reverse-geocode failed:", err);
     return null;
@@ -777,10 +786,15 @@ async function fetchPlaceNameFromBigDataCloud(
 }
 
 async function fetchPlaceName(lat: number, lon: number): Promise<string | null> {
-  return (
-    (await fetchPlaceNameFromOwm(lat, lon)) ??
-    (await fetchPlaceNameFromBigDataCloud(lat, lon))
-  );
+  // Resolve both in parallel and prefer the suburb. OWM is the dependable floor
+  // (always returns a town/city label), so a rate-limited or empty BigDataCloud
+  // degrades cleanly to "Sydney" rather than no label - never a regression -
+  // while a healthy BigDataCloud upgrades the label to the actual suburb.
+  const [suburb, cityLevel] = await Promise.all([
+    fetchPlaceNameFromBigDataCloud(lat, lon),
+    fetchPlaceNameFromOwm(lat, lon),
+  ]);
+  return suburb ?? cityLevel;
 }
 
 router.get("/local-weather", async (req, res) => {

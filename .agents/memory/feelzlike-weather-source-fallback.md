@@ -73,22 +73,43 @@ by rounded lat/lng; a cold visitor's unique coords have NO warm entry, so the
 expensive request 503s with nothing to fall back on while the cheap request and
 the radar still work fine.
 
-## reverse-geocoding (place name) must be a KEYED server-side API
+## reverse-geocoding (place name): prefer the suburb, keep a keyed city floor
 
-**Rule:** the visitor's place name ("Jindabyne, New South Wales" on the home
-"near you" card, from `/local-weather` `place.name`) must come from a keyed,
-server-appropriate geocoder. Primary is OpenWeatherMap `/geo/1.0/reverse`
-(keyed by `OWM_API_KEY`, town-level granularity). A keyless "client" geocoder
-may only ever be a last-ditch fallback.
+**Rule:** the visitor's place name (`/local-weather` `place.name`, shown on the
+home "near you" card and the /near-you page) is resolved by `fetchPlaceName`,
+which queries TWO geocoders IN PARALLEL and returns `suburb ?? cityLevel`:
+- BigDataCloud keyless `reverse-geocode-client` for the SUBURB (`locality`, e.g.
+  "Woolloomooloo"; in rural areas `locality` is the town "Jindabyne" while `city`
+  is the wider LGA "Snowy Monaro", so prefer `locality` over `city`).
+- OpenWeatherMap `/geo/1.0/reverse` (keyed by `OWM_API_KEY`) for the reliable
+  town/city floor ("Sydney").
 
-**Why:** BigDataCloud's keyless `reverse-geocode-client` endpoint is
-browser-intended (free/unlimited only because it's rate-limited per END-USER
-IP). Called server-side, every request shares the one deployment egress IP, so
-it gets throttled and returns null in PRODUCTION while still working in dev
-(sparse traffic). Symptom: the home card shows the generic "your current
-location" eyebrow with no place name live, but the name appears fine in
-preview. Confirm by curling the prod endpoint directly, not just dev.
+**Why:** OWM alone only ever resolves to town/city, so every suburb reads as its
+city ("Sydney"). James, in Woolloomooloo, asked why it couldn't drill finer - the
+WEATHER was always point-accurate (fetched for the exact GPS coords); only this
+LABEL was coarse. BigDataCloud DOES return the suburb, but its keyless endpoint is
+browser-intended and can be throttled when called from the single deployment
+egress IP (it once returned null in PROD while working in dev). The OLD design made
+OWM the SOLE primary to avoid a BLANK name in prod. The fix keeps that safety by
+resolving OWM IN PARALLEL as a floor: if BigDataCloud returns null, `suburb ??
+cityLevel` degrades to the city label - never blank, never wrong - so the
+suburb-preference can NOT regress the page.
 
-**How to apply:** any new "turn coords into a human label" path has the same
-trap. Prefer the existing `OWM_API_KEY` path; keep the result wrapped in the
-24h `placeNameCache` so quota cost stays ~one call per ~1km cell per day.
+**How to apply:**
+- Do NOT revert to "OWM primary, BDC last-ditch": that re-coarsens every suburb to
+  its city. Keep BDC preferred WITH the parallel OWM floor.
+- Google Geocoding API is NOT enabled on `GOOGLE_PLACES_API_KEY` (returns
+  REQUEST_DENIED). It's the most reliable suburb source IF the user enables the
+  "Geocoding API" in their Google Cloud project - reach for it only if prod shows
+  city labels (i.e. BDC is being throttled in prod).
+- Avoid OSM Nominatim as a primary: it returns the suburb but its public instance
+  forbids production-scale use and can block the IP.
+- Results stay wrapped in the 24h `placeNameCache` (~one call per ~1.1km cell per
+  day), which keeps BDC volume tiny AND bounds OWM quota. CAVEAT: the cache stores
+  whatever `fetchPlaceName` returned, so if BDC blips exactly on the cold-cache
+  resolution the city-only label is cached for up to 24h (in-memory, cleared on
+  every deploy/restart) before BDC is retried - accepted, label-only.
+- Verify suburb labels by curling `/api/local-weather` directly: the mTLS proxy
+  blocks plain curl on `$REPLIT_DEV_DOMAIN` (HTTP 000), so hit the api-server on
+  its local PORT (read from `/proc/<pid>/environ`). Confirm in PROD after deploy
+  too, since BDC throttling is IP/volume-dependent.
