@@ -3,6 +3,7 @@ import { GetWeatherResponse, GetLocationWeatherResponse, GetLocationWeatherParam
 import { getEnsembleForecast } from "../lib/ensemble-forecast.js";
 import { locationMatchesRegion, parseRegionParam, RegionParamError } from "../lib/regions.js";
 import { fetchOpenWeatherMapAsOpenMeteo } from "../lib/openweathermap.js";
+import { reconcileBomCondition } from "../lib/bom-obs.js";
 
 const router: IRouter = Router();
 
@@ -18,6 +19,8 @@ interface LocationConfig {
   bomWmoId: number;
   bomSecondaryWmoId?: number;
   bomSecondaryStation?: string;
+  /** BOM observation product id for the station's state: NSW=IDN60801 (default), VIC=IDV60801, TAS=IDT60801. */
+  bomProduct?: string;
   /** Open-Meteo timezone, defaults to "Australia/Sydney". JP locations use "Asia/Tokyo", NZ uses "Pacific/Auckland". */
   timezone?: string;
   /** ISO region code; AU=Australia, JP=Japan, NZ=New Zealand. Used for ensemble model selection + forecast horizon. */
@@ -98,10 +101,10 @@ const LOCATIONS: LocationConfig[] = [
   // truthful primary source (elevation-corrected) - same conservative
   // pattern as Selwyn / Charlotte's Pass. Add BOM stations later when
   // the IDs are verified end-to-end.
-  { id: "mt-buller",       name: "Mt Buller",       latitude: -37.1456, longitude: 146.4391, elevation: 1805, description: "VIC's biggest day-tripper resort - full alpine village with chairlift downhill, terrain park and ski school. ~3 hrs from Melbourne.",          bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
+  { id: "mt-buller",       name: "Mt Buller",       latitude: -37.1456, longitude: 146.4391, elevation: 1805, description: "VIC's biggest day-tripper resort - full alpine village with chairlift downhill, terrain park and ski school. ~3 hrs from Melbourne.",          bomStation: "Mount Buller AWS", bomStationId: "", bomWmoId: 94894, bomProduct: "IDV60801", timezone: "Australia/Melbourne", region: "AU" },
   { id: "mt-stirling",     name: "Mt Stirling",     latitude: -37.1167, longitude: 146.4500, elevation: 1747, description: "Cross-country and backcountry sister of Buller - shared Mansfield gateway. Tickets at Telephone Box Junction. No chairlifts.",                bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
-  { id: "falls-creek",     name: "Falls Creek",     latitude: -36.8628, longitude: 147.2778, elevation: 1842, description: "Largest alpine ski area in VIC by skiable terrain - self-contained ski-in / ski-out village above Mount Beauty.",                              bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
-  { id: "mt-hotham",       name: "Mt Hotham",       latitude: -36.9779, longitude: 147.1361, elevation: 1862, description: "Highest VIC resort - the steep one. Hotham Airport for direct fly-in. Dinner Plain alpine village 10 min away.",                              bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
+  { id: "falls-creek",     name: "Falls Creek",     latitude: -36.8628, longitude: 147.2778, elevation: 1842, description: "Largest alpine ski area in VIC by skiable terrain - self-contained ski-in / ski-out village above Mount Beauty.",                              bomStation: "Falls Creek AWS", bomStationId: "", bomWmoId: 94903, bomProduct: "IDV60801", timezone: "Australia/Melbourne", region: "AU" },
+  { id: "mt-hotham",       name: "Mt Hotham",       latitude: -36.9779, longitude: 147.1361, elevation: 1862, description: "Highest VIC resort - the steep one. Hotham Airport for direct fly-in. Dinner Plain alpine village 10 min away.",                              bomStation: "Mount Hotham AWS", bomStationId: "", bomWmoId: 94906, bomProduct: "IDV60801", timezone: "Australia/Melbourne", region: "AU" },
   { id: "lake-mountain",   name: "Lake Mountain",   latitude: -37.5181, longitude: 145.8983, elevation: 1480, description: "Nordic and snow play only - no chairlift downhill. The closest snow to Melbourne (~2 hrs via Marysville).",                                    bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
   { id: "mt-donna-buang", name: "Mt Donna Buang",   latitude: -37.6961, longitude: 145.6989, elevation: 1250, description: "Free public snow play summit run by Parks Victoria / Yarra Ranges - no resort, no lifts, just toboggans on the day.",                          bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
   { id: "mansfield",       name: "Mansfield",       latitude: -37.0539, longitude: 146.0894, elevation: 320,  description: "Cattle country gateway town - 50 min drive to Mt Buller and Mt Stirling.",                                                                     bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
@@ -266,11 +269,11 @@ function windDirToDegrees(dir: string | null): number {
   return dirs[dir.toUpperCase()] ?? 0;
 }
 
-async function fetchBomObservations(wmoId: number): Promise<BomObservation[] | null> {
+async function fetchBomObservations(wmoId: number, product = "IDN60801"): Promise<BomObservation[] | null> {
   if (!wmoId) return null;
   try {
     const response = await fetch(
-      `http://www.bom.gov.au/fwo/IDN60801/IDN60801.${wmoId}.json`,
+      `http://www.bom.gov.au/fwo/${product}/${product}.${wmoId}.json`,
       { headers: { "User-Agent": "Mozilla/5.0 (compatible; SnowyMtsWeatherApp/1.0)" } }
     );
     if (!response.ok) return null;
@@ -314,9 +317,9 @@ function safeParseFloat(val: string | null | undefined): number | undefined {
 async function fetchLocationWeather(location: LocationConfig) {
   const [openMeteoResult, bomObs, bomSecondaryObs] = await Promise.all([
     fetchOpenMeteo(location).catch(() => null),
-    fetchBomObservations(location.bomWmoId),
+    fetchBomObservations(location.bomWmoId, location.bomProduct),
     location.bomSecondaryWmoId
-      ? fetchBomObservations(location.bomSecondaryWmoId)
+      ? fetchBomObservations(location.bomSecondaryWmoId, location.bomProduct)
       : Promise.resolve(null)
   ]);
 
@@ -392,6 +395,30 @@ async function fetchLocationWeather(location: LocationConfig) {
     snowfallNext48h: sumHourlySnowfall(om, 48),
     snowfallNext72h: sumHourlySnowfall(om, 72),
   };
+
+  // AU live-observation reconciliation. Alpine AWS report real temp/humidity and a
+  // rain gauge, but not cloud/present-weather/visibility - so the global model can
+  // headline "Clear sky" while a station sits at 100% humidity in falling snow. When
+  // BOM data is present and the model's current code is "dry", derive a truthful
+  // condition from the BOM signals (DRY->WET/cloud only; never turns wet readings dry).
+  const freshBomRows = freshPrimary ? bomObs : freshSecondary ? bomSecondaryObs : null;
+  if (hasBomData && freshBomRows) {
+    try {
+      const reco = reconcileBomCondition({
+        rows: freshBomRows,
+        modelWeatherCode: current.weatherCode,
+      });
+      if (reco) {
+        current.weatherCode = reco.weatherCode;
+        current.weatherDescription = getWeatherDescription(reco.weatherCode);
+        if (reco.precipitationMm != null) {
+          current.precipitation = Math.max(current.precipitation ?? 0, reco.precipitationMm);
+        }
+      }
+    } catch {
+      // fail-soft: a reconciliation hiccup must never break base weather.
+    }
+  }
 
   const daily = om?.daily?.time?.map((date: string, i: number) => ({
     date,

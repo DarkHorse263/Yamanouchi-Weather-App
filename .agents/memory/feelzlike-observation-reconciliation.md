@@ -57,5 +57,20 @@ the latest obs map ~5min with in-flight dedupe + serve-last-known.
   already had; accepted.
 - RainViewer/radar tile PIXEL-SAMPLING was tried as an obs source and REJECTED:
   results were contradictory across zoom levels (unreliable). Use station obs.
-- AU/BOM has its own observation network (not wired yet) — that's the natural
-  follow-up for AU accuracy parity; AMeDAS is JP-only.
+
+**AU/BOM reconciliation (parallel layer to JP, resort `/weather/:id` only):** same
+dry->wet-only philosophy, but the inference is different because AU alpine AWS report
+air_temp/rel_hum/rain_trace but leave cloud/present-weather/visibility as "-", so you
+CANNOT read a "snowing" flag off them. Infer it instead: a RISING rain_trace gauge
+(cumulative mm since 9am, resets at 9am -> guard the delta and normalise it to mm/h
+over its true window) -> snow(<=1C)/rain; else a model that says clear (code 0/1)
+with RH>=97 -> Overcast (in-cloud sanity, never invents precip). The pure decision
+lives in `api-server/src/lib/bom-obs.ts` (`reconcileBomCondition`, unit-tested, no
+asset imports) and is wired ONLY into the resort current-conditions assembly behind
+the existing freshness-gated BOM path, fail-soft. BOM fetch is per-state via
+`bomProduct` on LocationConfig (NSW IDN60801 default, VIC IDV60801, TAS IDT60801).
+- VERIFIED on-mountain AWS now BOM-primary (temp/rh/rain from station, not model):
+  Mt Hotham 94906, Falls Creek 94903, Mt Buller 94894 (all IDV60801). NSW resorts
+  (thredbo/perisher) were already BOM-backed and now also get the condition override.
+- STILL Open-Meteo (no verified co-located AWS): TAS Ben Lomond, and all
+  `/town-weather` lat-lng towns -> the natural follow-ups for fuller AU parity.
