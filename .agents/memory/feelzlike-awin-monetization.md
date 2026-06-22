@@ -1,6 +1,6 @@
 ---
-name: feelzlike Awin affiliate monetization
-description: How feelzlike earns via the Awin network — which system powers the LIVE booking links, the MasterTag, consent gating, and the double-tag pitfall.
+name: feelzlike affiliate monetization (Awin + CJ)
+description: How feelzlike earns — Awin (auto-convert) powers the LIVE booking + Europcar links; CJ (per-advertiser deep links) is wired but inert until approvals. Consent gating + double-tag pitfall.
 ---
 
 # feelzlike Awin affiliate monetization
@@ -27,3 +27,13 @@ feelzlike monetizes via the **Awin** affiliate network using the **auto-convert*
 
 **Why:** chosen at initial Awin setup (auto-convert over manual deep links) because the app links out to many places — one script + dashboard config beats wrapping every link by hand.
 **How to apply:** to answer monetization questions, check `places.ts`/`TownStay.tsx` + `viewEnvVars` for the publisher id, then remember the real blocker is Awin-side advertiser approvals. Keep any new ad/affiliate script behind `canUseAds`.
+
+## CJ (Commission Junction) — the SECOND network (`lib/cj.ts`)
+- **CJ has NO auto-convert/MasterTag.** Every CJ link must be built by hand: `https://{cjDomain}/click-{PID}-{AID}?url={ENCODED_DEST}&sid=...`. `cjDomain` defaults to anrdoezrs.net (all CJ domains interchangeable).
+- Needs TWO ids: **PID** (one publisher/website id, env `VITE_CJ_PUBLISHER_ID`, public config like the Awin id) + a **per-advertiser AID** (8-digit). The AID **only exists after you're approved** for that advertiser AND the advertiser "allows URL redirects". Wrapping a non-approved advertiser does NOT track and may error → only ever wrap advertisers in `CJ_ADVERTISER_AIDS`.
+- `CJ_ADVERTISER_AIDS` is a hand-maintained **code map** (StayPlatformId → {aid, domain?}), deliberately EMPTY until approvals land. Adding a merchant = one line once the owner hands over that advertiser's AID. `cjLinkFor` returns null unless PID set + valid 8-digit AID → Stay page falls back to the plain `platformDeepLink` (zero regression). AID validated `^\d{8}$` so typos fail loud (dev warn) not silent.
+- **Per merchant, exactly ONE network.** A CJ-wrapped link points at anrdoezrs.net (not the OTA domain), so the Awin MasterTag won't also convert it. If a merchant ever gets BOTH a CJ AID here and Awin Convert-a-Link, that's a conflict — pick one.
+- CJ links gated behind `canUseAds` in `TownStay` (no ads consent → plain link), same compliance rule as Awin.
+
+## Car hire
+- Europcar is on **Awin** (not CJ): universal "Hire a car" card in `TownTransport.tsx` is a plain `europcar.com` link the MasterTag auto-converts. `/transport` was made **always-visible** (`navContent.ts`) so the card shows for every town (no-provider towns show card + softened empty state). Awin Convert-a-Link only rewrites the exact approved Europcar domain — if approval is a country site (europcar.com.au), repoint `EUROPCAR_URL`.

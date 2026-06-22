@@ -10,6 +10,8 @@ import {
   type CountryCode,
   type StayPlatformId,
 } from "@/lib/places";
+import { cjLinkFor } from "@/lib/cj";
+import { useConsent, canUseAds } from "@/lib/consent";
 
 /**
  * Region-specific local accommodation providers, shown above the global
@@ -68,6 +70,7 @@ export function TownStay() {
   const { region } = useRegion();
   const { t } = useLanguage();
   const { town } = useBaseTown();
+  const { choices } = useConsent();
 
   if (!town) {
     return (
@@ -89,6 +92,10 @@ export function TownStay() {
   const query = `${town.name}, ${region.name}`;
   const platforms = platformsForCountry(country);
   const localProviders = LOCAL_STAY_PROVIDERS[region.id] ?? [];
+  // CJ tracking is only applied to advertisers we're approved for (see lib/cj),
+  // and only once the visitor has granted `ads` consent. Otherwise we serve the
+  // plain OTA search link unchanged - it still works, it just doesn't earn.
+  const adsOk = canUseAds(choices);
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -166,21 +173,26 @@ export function TownStay() {
           </div>
 
           <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
-            {platforms.map((p) => (
-              <li key={p.id}>
-                <a
-                  href={platformDeepLink(p.id, { query, lat: town.lat, lng: town.lng })}
-                  target="_blank"
-                  rel="noopener noreferrer sponsored"
-                  data-platform={p.id satisfies StayPlatformId}
-                  className="group flex items-center justify-between gap-3 rounded-xl px-4 py-3 text-sm font-bold transition-all hover:shadow-md hover:-translate-y-0.5"
-                  style={{ backgroundColor: p.brandColor, color: p.brandText }}
-                >
-                  <span className="truncate">{p.label}</span>
-                  <ExternalLink className="w-4 h-4 opacity-80 group-hover:opacity-100" aria-hidden />
-                </a>
-              </li>
-            ))}
+            {platforms.map((p) => {
+              const plainUrl = platformDeepLink(p.id, { query, lat: town.lat, lng: town.lng });
+              const href =
+                (adsOk && cjLinkFor(p.id, plainUrl, { sid: `${region.id}_${town.id}` })) || plainUrl;
+              return (
+                <li key={p.id}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    data-platform={p.id satisfies StayPlatformId}
+                    className="group flex items-center justify-between gap-3 rounded-xl px-4 py-3 text-sm font-bold transition-all hover:shadow-md hover:-translate-y-0.5"
+                    style={{ backgroundColor: p.brandColor, color: p.brandText }}
+                  >
+                    <span className="truncate">{p.label}</span>
+                    <ExternalLink className="w-4 h-4 opacity-80 group-hover:opacity-100" aria-hidden />
+                  </a>
+                </li>
+              );
+            })}
           </ul>
 
           <p className="mt-4 text-[11px] text-muted-foreground/70 leading-relaxed">

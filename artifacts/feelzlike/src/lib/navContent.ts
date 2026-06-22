@@ -18,8 +18,6 @@
  * every town and never sit behind the paywall.
  */
 import type { RegionConfig } from "@workspace/feelzlike-shell";
-import type { RegionId } from "@workspace/api-client-react";
-import { getProvidersForRegion } from "@/data/transport";
 
 /**
  * Regions whose Roads & cams page actually renders content today. Roads is
@@ -62,7 +60,9 @@ export function townNavHasContent(
     case "/explore":
       return (region.tourismLinks?.length ?? 0) > 0;
     case "/transport":
-      return getProvidersForRegion(region.id as RegionId).length > 0;
+      // Always available: every town's Transport page now offers at least the
+      // universal car-hire option (Europcar) alongside any scheduled providers.
+      return true;
     case "/roads":
       return REGIONS_WITH_ROADS_CONTENT.has(region.id);
     default:
