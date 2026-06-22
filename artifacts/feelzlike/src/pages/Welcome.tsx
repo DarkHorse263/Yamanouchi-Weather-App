@@ -5,6 +5,7 @@ import { markLandingVisited, readLastTown, type LastTown } from "@/lib/favourite
 import logoFullColour from "/branding/logo-full-colour.png?url";
 import { NearYou } from "@/components/home/NearYou";
 import { Favourites } from "@/components/home/Favourites";
+import { DesktopHome } from "@/components/home/DesktopHome";
 // MountainNews ("from the mountains" / news strip) is temporarily hidden ·
 // parked until we work out what to do with it and how we'll manage it.
 // import { MountainNews } from "@/components/home/MountainNews";
@@ -54,7 +55,7 @@ export default function Welcome() {
     >
       <PageMeta
         title="feelzlike · real conditions for mountain travel"
-        description="In town and wondering what it's like in the mountains? feelzlike shows real conditions for mountain travel · snow, wind, roads, live cams · plus places to stay, eat and relax. Regions across Australia and Japan."
+        description="In town and wondering what it's like in the mountains? feelzlike shows real conditions for mountain travel · snow, wind, roads, live cams · plus places to stay, eat and relax. Regions across Australia, Japan and New Zealand."
         path="/"
         jsonLd={[websiteSchema(), organizationSchema()]}
       />
@@ -198,6 +199,10 @@ export default function Welcome() {
             section is parked until we work out what to do with it and how we'll
             manage it. Re-enable by restoring the import above + <MountainNews />. */}
         {/* <MountainNews /> */}
+
+        {/* DESKTOP-ONLY ─ richer "about the app" content (hidden below lg so the
+            phone/installed-PWA home stays lean). */}
+        <DesktopHome />
 
         <HomeFooter />
       </div>

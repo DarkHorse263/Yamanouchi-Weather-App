@@ -93,13 +93,14 @@ which tries three sources in order of suburb-accuracy then reliability and retur
    FLOOR; always answers, so the label degrades to the city rather than vanishing.
 
 **Why:** OWM alone only resolves to town/city, so every suburb read as its city
-("Sydney"). James, in Woolloomooloo, asked for finer labels - the WEATHER was
+("Sydney"). The owner, testing from an inner-city suburb (Woolloomooloo), asked
+for finer labels - the WEATHER was
 always point-accurate (fetched for the exact GPS coords); only this LABEL was
 coarse. BigDataCloud returns the suburb but its keyless endpoint can be throttled
 from the single deployment egress IP, so it can't be the sole primary. Google
 Geocoding is the reliable server-appropriate suburb source; it just needed the
-"Geocoding API" ENABLED on the key's Google Cloud project (James enabled it; the
-key has no application restrictions). Before that it returned REQUEST_DENIED "This
+"Geocoding API" ENABLED on the key's Google Cloud project (the owner enabled it;
+the key has no application restrictions). Before that it returned REQUEST_DENIED "This
 API is not activated on your API project". The fallback chain means a Google
 quota/key problem can NEVER blank the label - never blank, never wrong, never a
 regression.

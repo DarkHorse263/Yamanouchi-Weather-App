@@ -130,7 +130,7 @@ export default function Countries() {
     >
       <PageMeta
         title="feelzlike · pick a country"
-        description="pick a country to see real conditions for resort towns across australia and japan."
+        description="pick a country to see real conditions for resort towns across australia, japan and new zealand."
         path="/countries"
         jsonLd={[
           breadcrumbSchema([
