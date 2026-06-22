@@ -73,43 +73,52 @@ by rounded lat/lng; a cold visitor's unique coords have NO warm entry, so the
 expensive request 503s with nothing to fall back on while the cheap request and
 the radar still work fine.
 
-## reverse-geocoding (place name): prefer the suburb, keep a keyed city floor
+## reverse-geocoding (place name): Google primary, free sources as fallback
 
 **Rule:** the visitor's place name (`/local-weather` `place.name`, shown on the
 home "near you" card and the /near-you page) is resolved by `fetchPlaceName`,
-which queries TWO geocoders IN PARALLEL and returns `suburb ?? cityLevel`:
-- BigDataCloud keyless `reverse-geocode-client` for the SUBURB (`locality`, e.g.
-  "Woolloomooloo"; in rural areas `locality` is the town "Jindabyne" while `city`
-  is the wider LGA "Snowy Monaro", so prefer `locality` over `city`).
-- OpenWeatherMap `/geo/1.0/reverse` (keyed by `OWM_API_KEY`) for the reliable
-  town/city floor ("Sydney").
+which tries three sources in order of suburb-accuracy then reliability and returns
+`google ?? bdc ?? owmCity`:
+1. Google Geocoding API (keyed by `GOOGLE_PLACES_API_KEY`) - PRIMARY. Reverse
+   geocode, then take the `locality` component + `administrative_area_level_1` as
+   the region. LOCALITY-FIRST is critical and is correct in BOTH markets: AU
+   suburb = locality ("Woolloomooloo", "Surry Hills"; the Sydney CBD correctly
+   reads "Sydney"); JP town/village = locality ("Hakuba", "Niseko", "Yamanouchi").
+   Do NOT rank `sublocality` above `locality` - JP `sublocality` is a hyper-local
+   district ("Hokujo"/"Fujimi"/"Sano") nobody recognises and stops matching the
+   app's region names. JP (Hakuba/Niseko/Yamanouchi) is the canary if you re-rank.
+2. BigDataCloud keyless `reverse-geocode-client` - free suburb fallback, called
+   ONLY when Google returns null.
+3. OpenWeatherMap `/geo/1.0/reverse` (keyed by `OWM_API_KEY`) - the town/city
+   FLOOR; always answers, so the label degrades to the city rather than vanishing.
 
-**Why:** OWM alone only ever resolves to town/city, so every suburb reads as its
-city ("Sydney"). James, in Woolloomooloo, asked why it couldn't drill finer - the
-WEATHER was always point-accurate (fetched for the exact GPS coords); only this
-LABEL was coarse. BigDataCloud DOES return the suburb, but its keyless endpoint is
-browser-intended and can be throttled when called from the single deployment
-egress IP (it once returned null in PROD while working in dev). The OLD design made
-OWM the SOLE primary to avoid a BLANK name in prod. The fix keeps that safety by
-resolving OWM IN PARALLEL as a floor: if BigDataCloud returns null, `suburb ??
-cityLevel` degrades to the city label - never blank, never wrong - so the
-suburb-preference can NOT regress the page.
+**Why:** OWM alone only resolves to town/city, so every suburb read as its city
+("Sydney"). James, in Woolloomooloo, asked for finer labels - the WEATHER was
+always point-accurate (fetched for the exact GPS coords); only this LABEL was
+coarse. BigDataCloud returns the suburb but its keyless endpoint can be throttled
+from the single deployment egress IP, so it can't be the sole primary. Google
+Geocoding is the reliable server-appropriate suburb source; it just needed the
+"Geocoding API" ENABLED on the key's Google Cloud project (James enabled it; the
+key has no application restrictions). Before that it returned REQUEST_DENIED "This
+API is not activated on your API project". The fallback chain means a Google
+quota/key problem can NEVER blank the label - never blank, never wrong, never a
+regression.
 
 **How to apply:**
-- Do NOT revert to "OWM primary, BDC last-ditch": that re-coarsens every suburb to
-  its city. Keep BDC preferred WITH the parallel OWM floor.
-- Google Geocoding API is NOT enabled on `GOOGLE_PLACES_API_KEY` (returns
-  REQUEST_DENIED). It's the most reliable suburb source IF the user enables the
-  "Geocoding API" in their Google Cloud project - reach for it only if prod shows
-  city labels (i.e. BDC is being throttled in prod).
+- Keep Google PRIMARY with locality-first parsing; keep BDC + OWM as the fallback
+  so a Google outage degrades gracefully. Do NOT drop the fallback.
 - Avoid OSM Nominatim as a primary: it returns the suburb but its public instance
   forbids production-scale use and can block the IP.
 - Results stay wrapped in the 24h `placeNameCache` (~one call per ~1.1km cell per
-  day), which keeps BDC volume tiny AND bounds OWM quota. CAVEAT: the cache stores
-  whatever `fetchPlaceName` returned, so if BDC blips exactly on the cold-cache
-  resolution the city-only label is cached for up to 24h (in-memory, cleared on
-  every deploy/restart) before BDC is retried - accepted, label-only.
-- Verify suburb labels by curling `/api/local-weather` directly: the mTLS proxy
-  blocks plain curl on `$REPLIT_DEV_DOMAIN` (HTTP 000), so hit the api-server on
-  its local PORT (read from `/proc/<pid>/environ`). Confirm in PROD after deploy
-  too, since BDC throttling is IP/volume-dependent.
+  day), which keeps the BILLABLE Google volume - and cost - tiny. CAVEAT: the
+  cache stores whatever `fetchPlaceName` returned, so if Google AND BDC both fail
+  and only the OWM city floor answered, that coarse label is cached up to 24h
+  (in-memory, cleared on every deploy/restart) before a retry.
+- LATENCY edge (accepted): `fetchPlaceName` awaits Google (6s timeout) THEN, only
+  on failure, the BDC+OWM fallback (6s) - up to ~12s worst case on a Google hang.
+  It's best-effort, runs in parallel with the weather fetch, and is gated by the
+  24h cache, so it bites at most once per cell per day. Bound it tighter only if
+  prod latency shows it mattering.
+- Verify by curling `/api/local-weather` on the api-server's local PORT (the mTLS
+  proxy blocks plain curl on `$REPLIT_DEV_DOMAIN` -> HTTP 000; read PORT from
+  `/proc/<pid>/environ`). Confirm in PROD after deploy too.

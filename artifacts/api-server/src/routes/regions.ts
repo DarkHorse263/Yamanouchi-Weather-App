@@ -719,16 +719,20 @@ async function fetchLocalCurrent(lat: number, lon: number): Promise<LocalCurrent
 // (e.g. "Woolloomooloo, New South Wales"), best-effort: any failure returns null
 // and the client falls back to a neutral label.
 //
-// Two sources, combined for granularity + reliability (see fetchPlaceName):
-//   - OpenWeatherMap's keyed reverse-geocoder is reliable from a server (tied to
-//     our API key, not a per-IP free tier) but only resolves to town/city level
-//     ("Sydney"), never the suburb.
-//   - BigDataCloud's keyless "reverse-geocode-client" resolves the actual suburb
-//     ("Woolloomooloo") via its `locality` field. It is a browser-intended
+// Three sources, tried in order of suburb-accuracy then reliability
+// (see fetchPlaceName):
+//   - Google Geocoding API (keyed by GOOGLE_PLACES_API_KEY) is the primary: a
+//     server-appropriate, reliable source that resolves the actual suburb
+//     ("Woolloomooloo") from its locality/sublocality components. Billable, but
+//     labels are cached per ~1.1km cell for 24h (placeNameCache) so real call
+//     volume - and cost - stays tiny.
+//   - BigDataCloud's keyless "reverse-geocode-client" is a free suburb-level
+//     backup, used only when Google is unavailable. It is a browser-intended
 //     geocoder that can get rate-limited when hammered from a single server IP,
-//     so we never depend on it alone - but place labels are cached per ~1.1km
-//     cell for 24h (placeNameCache), so real call volume stays tiny and well
-//     within limits.
+//     so we never depend on it alone.
+//   - OpenWeatherMap's keyed reverse-geocoder is the dependable floor: it only
+//     resolves to town/city ("Sydney"), never the suburb, but it always answers,
+//     so the label degrades to the city rather than vanishing.
 async function fetchPlaceNameFromOwm(
   lat: number,
   lon: number,
@@ -785,16 +789,75 @@ async function fetchPlaceNameFromBigDataCloud(
   }
 }
 
+async function fetchPlaceNameFromGoogle(
+  lat: number,
+  lon: number,
+): Promise<string | null> {
+  const apiKey = process.env.GOOGLE_PLACES_API_KEY;
+  if (!apiKey) return null;
+  try {
+    const res = await fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&language=en&key=${apiKey}`,
+      { signal: AbortSignal.timeout(6000) },
+    );
+    if (!res.ok) return null;
+    const data: any = await res.json();
+    if (data?.status !== "OK" || !Array.isArray(data.results)) return null;
+    const str = (v: unknown): string => (typeof v === "string" ? v.trim() : "");
+    // Pick the best populated-place label across all results. `locality` is the
+    // right unit in BOTH markets: in Australia the suburb is the locality
+    // ("Woolloomooloo", "Surry Hills"; the CBD correctly reads "Sydney"), and in
+    // Japan the locality is the recognisable town/village ("Hakuba", "Niseko",
+    // "Yamanouchi"). Google's JP `sublocality` is a hyper-local district ("Hokujo",
+    // "Fujimi") that nobody recognises, so locality MUST rank above sublocality.
+    // The finer types are only fallbacks for the rare point with no locality.
+    const SUBURB_TYPES = [
+      "locality",
+      "postal_town",
+      "sublocality_level_1",
+      "sublocality",
+      "neighborhood",
+    ];
+    let suburb = "";
+    let suburbRank = SUBURB_TYPES.length;
+    let region = "";
+    for (const result of data.results) {
+      for (const comp of result?.address_components ?? []) {
+        const types: string[] = Array.isArray(comp?.types) ? comp.types : [];
+        if (!region && types.includes("administrative_area_level_1")) {
+          region = str(comp.long_name);
+        }
+        for (let i = 0; i < suburbRank; i++) {
+          if (types.includes(SUBURB_TYPES[i])) {
+            suburb = str(comp.long_name);
+            suburbRank = i;
+            break;
+          }
+        }
+      }
+    }
+    if (!suburb) return null;
+    const parts = [suburb, region].filter(Boolean);
+    return parts.length > 0 ? parts.join(", ") : null;
+  } catch (err) {
+    console.warn("[local-weather] Google reverse-geocode failed:", err);
+    return null;
+  }
+}
+
 async function fetchPlaceName(lat: number, lon: number): Promise<string | null> {
-  // Resolve both in parallel and prefer the suburb. OWM is the dependable floor
-  // (always returns a town/city label), so a rate-limited or empty BigDataCloud
-  // degrades cleanly to "Sydney" rather than no label - never a regression -
-  // while a healthy BigDataCloud upgrades the label to the actual suburb.
-  const [suburb, cityLevel] = await Promise.all([
+  // Google is the reliable suburb-level primary, so try it first and return its
+  // label when it answers (the common path - one keyed call, then cached 24h).
+  const google = await fetchPlaceNameFromGoogle(lat, lon);
+  if (google) return google;
+  // Google unavailable (quota/error): fall back to the free suburb source and
+  // the dependable town/city floor, resolved in parallel. `bdc ?? cityLevel`
+  // still degrades cleanly to "Sydney" rather than no label - never a regression.
+  const [bdc, cityLevel] = await Promise.all([
     fetchPlaceNameFromBigDataCloud(lat, lon),
     fetchPlaceNameFromOwm(lat, lon),
   ]);
-  return suburb ?? cityLevel;
+  return bdc ?? cityLevel;
 }
 
 router.get("/local-weather", async (req, res) => {
