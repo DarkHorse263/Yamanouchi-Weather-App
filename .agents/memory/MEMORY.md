@@ -17,3 +17,4 @@
 - [feelzlike touch gestures](feelzlike-pull-to-refresh-gestures.md) — PullToRefresh's top-of-page touchmove preventDefault stalls horizontal scrollers unless excluded; ScrollToTop must skip popstate.
 - [feelzlike lift-panel honesty](feelzlike-lift-honesty.md) — lift panels gate on actual operation not the season window; live "On the snow" chip = liftsOpen not seasonStatus; wind-hold panel via computeLiftOperationStatus; snowDepth null=unknown.
 - [feelzlike adding a country](feelzlike-add-country.md) — sync set in regions.ts header is incomplete (also transport REGISTRY throws-at-load + Countries.tsx); root `pnpm typecheck` short-circuits on pre-existing anthropic-lib error, so typecheck artifacts directly.
+- [feelzlike deploy topology + Sentry noise](feelzlike-deploy-sentry-noise.md) — publishes via .replit application-router (no artifact.toml); Sentry 401 in build logs is NON-fatal decoy, build exits 0; look at promote/health-check (GET / = 200) instead.
