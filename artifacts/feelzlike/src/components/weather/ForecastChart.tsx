@@ -27,7 +27,7 @@ export function ForecastChart({ data, metric }: ForecastChartProps) {
   return (
     <div className="w-full h-[300px]">
       <ResponsiveContainer width="100%" height="100%">
-        <AreaChart data={chartData} margin={{ top: 20, right: 0, left: -20, bottom: 0 }}>
+        <AreaChart data={chartData} margin={{ top: 20, right: 0, left: 0, bottom: 0 }}>
           <defs>
             <linearGradient id={`gradient-${metric}`} x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor={currentConfig.color} stopOpacity={0.3}/>
@@ -47,7 +47,7 @@ export function ForecastChart({ data, metric }: ForecastChartProps) {
             axisLine={false}
             tickLine={false}
             tick={{ fontSize: 12 }}
-            dx={-10}
+            width={metric === "windSpeed" ? 56 : 44}
             tickFormatter={(value) => `${value}${currentConfig.unit}`}
           />
           <Tooltip
