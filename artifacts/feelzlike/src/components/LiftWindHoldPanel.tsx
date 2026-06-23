@@ -32,6 +32,14 @@ interface LiftWindHoldPanelProps {
   actualLiftsOpen?: number | null;
   /** Real total lift count, when an authoritative feed exists (AU). */
   actualTotalLifts?: number | null;
+  /**
+   * Whether this resort has a VERIFIED live lift-status source. Defaults to
+   * true (JP resorts, and AU resorts once opted in). When false the panel never
+   * asserts a specific operational reason it can't verify (open / closed /
+   * no-snow) - it reframes as a conditional "for when lifts are running" wind
+   * outlook and points users to the resort's own report.
+   */
+  liveStatusKnown?: boolean;
 }
 
 const STATUS_STYLES: Record<WindHoldStatus, { dot: string; badge: string; icon: typeof CheckCircle2; label: string; labelJa: string }> = {
@@ -96,6 +104,18 @@ const NON_OPERATING_COPY: Record<Exclude<OperationStatus, "operating">, {
   },
 };
 
+/**
+ * Copy for the honest "no verified live status" case (AU resorts without a live
+ * feed). We don't assert a reason - we point users to the resort's own report.
+ */
+const UNKNOWN_LIVE_COPY = {
+  chip: { en: "No live status", ja: "ライブ情報なし" },
+  banner: {
+    en: "We don't have live lift status for this resort yet. The wind outlook below is for when lifts are running - check the resort's report for today's operations.",
+    ja: "この施設のライブなリフト運行情報はまだありません。下記の風の予測は運行時の参考です。当日の運行状況は各施設の公式情報をご確認ください。",
+  },
+};
+
 const TYPE_LABEL: Record<LiftSeed["type"], { en: string; ja: string }> = {
   gondola: { en: "Gondola", ja: "ゴンドラ" },
   detachable: { en: "Detachable", ja: "高速リフト" },
@@ -133,6 +153,7 @@ export function LiftWindHoldPanel({
   snowDepthCm,
   actualLiftsOpen,
   actualTotalLifts,
+  liveStatusKnown = true,
 }: LiftWindHoldPanelProps) {
   const t = tProp ?? ((en: string) => en);
   const headingId = useId();
@@ -162,7 +183,9 @@ export function LiftWindHoldPanel({
     [seasonOpen, snowDepthCm, actualLiftsOpen, actualTotalLifts],
   );
 
-  const operating = operationStatus === "operating";
+  // A verified live source is required to claim live operation. Without one we
+  // keep the conditional "for when lifts are running" framing even in season.
+  const operating = operationStatus === "operating" && liveStatusKnown;
 
   if (lifts.length === 0) return null;
 
@@ -174,7 +197,11 @@ export function LiftWindHoldPanel({
         : "text-rose-700 bg-rose-500/10 border-rose-500/30"
     : "text-slate-600 bg-slate-500/10 border-slate-500/30";
 
-  const nonOperatingCopy = operating ? null : NON_OPERATING_COPY[operationStatus];
+  const nonOperatingCopy = operating
+    ? null
+    : operationStatus === "operating"
+      ? UNKNOWN_LIVE_COPY
+      : NON_OPERATING_COPY[operationStatus];
 
   return (
     <section className="mt-8" aria-labelledby={headingId}>

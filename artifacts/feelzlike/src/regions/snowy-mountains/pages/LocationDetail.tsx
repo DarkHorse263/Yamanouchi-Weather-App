@@ -20,6 +20,7 @@ import {
   BarChart2,
   Camera,
   Cable,
+  ExternalLink,
   CheckCircle2,
   XCircle,
   AlertCircle,
@@ -98,6 +99,14 @@ const AU_LIFT_HOURS: Record<string, { hours: string; note?: string }> = {
   selwyn: { hours: "First lifts 9:00am · last lifts 4:00pm" },
 };
 
+// Phase 1 of honest lift status (June 2026): feelzlike has NO live feed into any
+// AU resort's lift system yet, so we must NOT assert per-lift open/closed - the
+// hardcoded api data marked every lift "closed", which showed lifts as shut even
+// while they were spinning. Until a resort is wired to a verified live source we
+// show its lifts as reference only and link out to the resort's own official lift
+// report. Phase 2 adds resorts to this set (with real data) one at a time.
+const LIVE_LIFT_STATUS_RESORTS = new Set<string>();
+
 function getStatusColor(status: string) {
   switch (status) {
     case "open": return "bg-emerald-500/15 text-emerald-300 border-emerald-500/30";
@@ -130,6 +139,8 @@ export default function LocationDetail() {
   const { data: webcamData } = useGetLocationWebcams(locationId, { query: { enabled: !!locationId } as never });
   const isResort = locationId === "thredbo" || locationId === "perisher" || locationId === "charlottes-pass" || locationId === "selwyn";
   const { data: liftData } = useGetLocationLiftStatus(locationId as any, { query: { enabled: isResort } as never });
+  // Only paint live open/closed when a resort is wired to a verified live feed.
+  const hasLiveLiftStatus = LIVE_LIFT_STATUS_RESORTS.has(locationId);
   // Snowy region opts in to season-aware UI · in summer the snow/lift
   // panels make no sense, so we hide them and surface alternative content
   // (Thredbo is the only resort that operates year-round, so it gets a
@@ -613,6 +624,10 @@ export default function LocationDetail() {
                 </h2>
               </div>
               {(() => {
+                // Phase 1 · with no verified live feed we render no status chip
+                // at all (any open/closed pill would be a claim we can't stand
+                // behind). Live mode keeps the real chip below.
+                if (!hasLiveLiftStatus) return null;
                 // Honest header chip · it must reflect whether lifts are
                 // ACTUALLY running right now, NOT just whether the season window
                 // is open. An in-season resort with 0 lifts spinning (early
@@ -649,55 +664,98 @@ export default function LocationDetail() {
               })()}
             </div>
 
-            {liftData.liftsOpen === 0 &&
-              (liftData.seasonStatus === "pre-season" ||
-                liftData.seasonStatus === "closed" ||
-                liftData.seasonStatus === "open") && (
-              <div className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-700 px-2.5 py-1 text-[11px] font-semibold">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-sky-500" />
-                </span>
-                {liftData.seasonStatus === "pre-season"
-                  ? "Pre-season · NSW lifts typically spin up early June"
-                  : liftData.seasonStatus === "closed"
-                    ? "Off-season · NSW lifts close early October"
-                    : "No lifts reported open right now"}
-              </div>
-            )}
+            {hasLiveLiftStatus ? (
+              <>
+                {liftData.liftsOpen === 0 &&
+                  (liftData.seasonStatus === "pre-season" ||
+                    liftData.seasonStatus === "closed" ||
+                    liftData.seasonStatus === "open") && (
+                  <div className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-700 px-2.5 py-1 text-[11px] font-semibold">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-sky-500" />
+                    </span>
+                    {liftData.seasonStatus === "pre-season"
+                      ? "Pre-season · NSW lifts typically spin up early June"
+                      : liftData.seasonStatus === "closed"
+                        ? "Off-season · NSW lifts close early October"
+                        : "No lifts reported open right now"}
+                  </div>
+                )}
 
-            <div className="flex gap-6 mb-4 pb-4 border-b border-white/5">
-              <div>
-                <p className="byline text-muted-foreground/70 mb-1">Lifts open</p>
-                <p className="font-display text-3xl text-foreground" data-numeric>
-                  <span className={liftData.liftsOpen > 0 ? "text-primary" : ""}>{liftData.liftsOpen}</span>
-                  <span className="text-muted-foreground/40 text-xl">/{liftData.totalLifts}</span>
-                </p>
-              </div>
-              {liftData.runsOpen !== undefined && liftData.totalRuns !== undefined && (
-                <div>
-                  <p className="byline text-muted-foreground/70 mb-1">Runs open</p>
-                  <p className="font-display text-3xl text-foreground" data-numeric>
-                    <span className={liftData.runsOpen > 0 ? "text-primary" : ""}>{liftData.runsOpen}</span>
-                    <span className="text-muted-foreground/40 text-xl">/{liftData.totalRuns}</span>
-                  </p>
-                </div>
-              )}
-            </div>
-
-            <div className="space-y-1 flex-1 overflow-y-auto max-h-[280px] pr-1 hide-scrollbar">
-              {liftData.lifts.map((lift: any) => (
-                <div key={lift.id} className="flex justify-between items-center px-2 py-2 rounded-lg hover:bg-white/5 transition-colors">
+                <div className="flex gap-6 mb-4 pb-4 border-b border-white/5">
                   <div>
-                    <p className="text-sm text-foreground">{lift.name}</p>
-                    <p className="byline text-muted-foreground/60">{lift.type.replace("-", " ")}</p>
+                    <p className="byline text-muted-foreground/70 mb-1">Lifts open</p>
+                    <p className="font-display text-3xl text-foreground" data-numeric>
+                      <span className={liftData.liftsOpen > 0 ? "text-primary" : ""}>{liftData.liftsOpen}</span>
+                      <span className="text-muted-foreground/40 text-xl">/{liftData.totalLifts}</span>
+                    </p>
                   </div>
-                  <div className={cn("px-2 py-0.5 rounded-full text-[10px] font-semibold border flex items-center gap-1", getStatusColor(lift.status))}>
-                    {getStatusIcon(lift.status)}
-                    <span className="capitalize">{lift.status.replace("-", " ")}</span>
-                  </div>
+                  {liftData.runsOpen !== undefined && liftData.totalRuns !== undefined && (
+                    <div>
+                      <p className="byline text-muted-foreground/70 mb-1">Runs open</p>
+                      <p className="font-display text-3xl text-foreground" data-numeric>
+                        <span className={liftData.runsOpen > 0 ? "text-primary" : ""}>{liftData.runsOpen}</span>
+                        <span className="text-muted-foreground/40 text-xl">/{liftData.totalRuns}</span>
+                      </p>
+                    </div>
+                  )}
                 </div>
-              ))}
-            </div>
+
+                <div className="space-y-1 flex-1 overflow-y-auto max-h-[280px] pr-1 hide-scrollbar">
+                  {liftData.lifts.map((lift: any) => (
+                    <div key={lift.id} className="flex justify-between items-center px-2 py-2 rounded-lg hover:bg-white/5 transition-colors">
+                      <div>
+                        <p className="text-sm text-foreground">{lift.name}</p>
+                        <p className="byline text-muted-foreground/60">{lift.type.replace("-", " ")}</p>
+                      </div>
+                      <div className={cn("px-2 py-0.5 rounded-full text-[10px] font-semibold border flex items-center gap-1", getStatusColor(lift.status))}>
+                        {getStatusIcon(lift.status)}
+                        <span className="capitalize">{lift.status.replace("-", " ")}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <>
+                {/* Honest mode · no live feed for this resort yet. We don't claim
+                    open/closed; we point to the resort's own official lift report
+                    and list the mountain's lifts as reference only. */}
+                <a
+                  href={liftData.liftStatusUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group mb-4 flex items-start gap-3 rounded-2xl bg-sky-500/10 border border-sky-500/30 px-3.5 py-3 transition-colors hover:bg-sky-500/15"
+                >
+                  <Cable className="w-4 h-4 text-sky-500 mt-0.5 shrink-0" />
+                  <div className="min-w-0">
+                    <p className="text-sm text-foreground">live status straight from {liftData.locationName}</p>
+                    <p className="text-xs text-muted-foreground/80 mt-1 leading-relaxed">
+                      we don't run a live lift feed for this resort yet, so today's open lifts and runs are best checked on the official report · it updates through the day.
+                    </p>
+                    <span className="mt-2 inline-flex items-center gap-1 text-[11px] font-semibold text-sky-600 group-hover:text-sky-500">
+                      open {liftData.locationName} lift report
+                      <ExternalLink className="w-3 h-3" />
+                    </span>
+                  </div>
+                </a>
+
+                <p className="byline text-muted-foreground/70 mb-1">Lifts · {liftData.totalLifts} total</p>
+                <div className="space-y-1 flex-1 overflow-y-auto max-h-[280px] pr-1 hide-scrollbar">
+                  {liftData.lifts.map((lift: any) => (
+                    <div key={lift.id} className="flex justify-between items-center px-2 py-2 rounded-lg hover:bg-white/5 transition-colors">
+                      <div>
+                        <p className="text-sm text-foreground">{lift.name}</p>
+                        <p className="byline text-muted-foreground/60">{lift.type.replace("-", " ")}</p>
+                      </div>
+                      {lift.verticalRise != null && (
+                        <div className="text-[11px] text-muted-foreground/50 shrink-0">{lift.verticalRise} m vert</div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
           </motion.div>
         )}
 
@@ -721,7 +779,7 @@ export default function LocationDetail() {
               freezingLevel={current.freezingLevel ?? undefined}
               gust={current.windGust ?? undefined}
               windSpeed={current.windSpeed}
-              liftsOpen={liftData?.liftsOpen}
+              liftsOpen={hasLiveLiftStatus ? liftData?.liftsOpen : undefined}
               totalLifts={liftData?.totalLifts}
               snowfallNext24h={current.snowfallNext24h ?? undefined}
               snowfallNext48h={current.snowfallNext48h ?? undefined}
@@ -748,8 +806,9 @@ export default function LocationDetail() {
               hourly={hourly as any}
               sectionNumber=""
               seasonOpen={isLiftSeasonOpen(REGION_COUNTRY[region.id])}
-              snowDepthCm={current.snowDepth}
-              actualLiftsOpen={liftData?.liftsOpen}
+              snowDepthCm={hasLiveLiftStatus ? current.snowDepth : undefined}
+              liveStatusKnown={hasLiveLiftStatus}
+              actualLiftsOpen={hasLiveLiftStatus ? liftData?.liftsOpen : undefined}
               actualTotalLifts={liftData?.totalLifts}
             />
           </PremiumGate>

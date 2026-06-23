@@ -5,6 +5,29 @@ description: Why/how the "Will the lifts spin?" wind panel must gate on season +
 
 # feelzlike lift-panel honesty gate
 
+> CORRECTION (supersedes the "authoritative live lift feed (AU)" wording below):
+> there is currently NO live AU lift open/closed feed. `api-server/src/routes/lifts.ts`
+> HARDCODES every AU lift status:"closed" (so liftsOpen is always 0; totalLifts is
+> just a count). Never treat that endpoint's liftsOpen as real open/closed truth.
+> The operation-gate code below is real; AU just has no verified source to feed it.
+>
+> Phase 1 honesty (shipped): a per-resort "verified live status" flag gates ALL
+> open/closed UI.
+> - Frontend kill-switch: `LIVE_LIFT_STATUS_RESORTS` Set (empty today) +
+>   `hasLiveLiftStatus` in snowy-mountains LocationDetail.tsx. Opt a resort in
+>   (Phase 2) only once a REAL per-resort live source exists; a server-driven flag
+>   would be sturdier long term.
+> - When NOT live: the "On the snow" card shows the resort's own official report
+>   link (`liftData.liftStatusUrl`) + a reference list of lift names/types ONLY -
+>   no open/closed badges, no "0/N" counter, no status chip. Pass `undefined`
+>   (NOT 0) into MountainSnapshot.liftsOpen and the wind panel's actualLiftsOpen.
+> - The wind panel needs its OWN `liveStatusKnown` prop (default true = JP /
+>   opted-in unchanged). REQUIRED on top of suppressing the lift count, because the
+>   server defaults `snowDepth` to 0 when unknown - without the flag, snowDepth=0
+>   trips a false "Not enough snow to run lifts" banner. `liveStatusKnown={false}`
+>   forces the neutral "if lifts were running" framing + "No live status" chip +
+>   UNKNOWN_LIVE_COPY banner regardless of the model season/snow read.
+
 The "Will the lifts spin?" panel (LiftWindHoldPanel) computes a pure WIND-hold
 prediction per lift. That wind model says nothing about whether lifts are
 actually running, so the panel must NOT present wind output as "X/N likely open"
