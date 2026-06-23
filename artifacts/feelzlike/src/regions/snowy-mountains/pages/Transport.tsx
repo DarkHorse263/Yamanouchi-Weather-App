@@ -30,6 +30,7 @@ import {
   townHasRideshare,
 } from "@/components/RideshareUnavailableNotice";
 import { KosciuszkoParkFeeCard } from "@/regions/snowy-mountains/components/KosciuszkoParkFeeCard";
+import { CarHireCard } from "@/components/CarHireCard";
 import coomaCoachesLogo from "@assets/CC_-_Colour_JM_Red_1778132452167.png";
 
 const SNOWY_MTNS_BUS_URL = "https://coomacoaches.com.au/snowy-mountains-bus-service/";
@@ -288,6 +289,11 @@ export function SnowyTransport() {
           tip inside the card flows directly off the rail option above. */}
       <section className="px-4 md:px-10 pt-4 md:pt-6">
         <KosciuszkoParkFeeCard variant="transport" t={t} />
+      </section>
+
+      {/* Universal car-hire option (Europcar, region-aware) */}
+      <section className="px-4 md:px-10 pt-4 md:pt-6">
+        <CarHireCard regionId={region.id} t={t} />
       </section>
 
       {/* Other operators */}

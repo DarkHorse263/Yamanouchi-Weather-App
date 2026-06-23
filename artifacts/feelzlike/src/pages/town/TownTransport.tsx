@@ -8,7 +8,6 @@ import {
   Train,
   Car,
   Footprints,
-  ExternalLink,
 } from "lucide-react";
 import {
   useRegion,
@@ -20,6 +19,7 @@ import {
 } from "@workspace/feelzlike-shell";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import type { RegionId } from "@workspace/api-client-react";
+import { CarHireCard } from "@/components/CarHireCard";
 import {
   getProvidersForRegion,
   type TransportProvider,
@@ -106,7 +106,7 @@ export function TownTransport() {
         />
       )}
 
-      <CarHireCard t={t} />
+      <CarHireCard regionId={region.id} t={t} className="mb-5" />
 
       {providers.length === 0 ? (
         <EmptyStateCard
@@ -125,54 +125,6 @@ export function TownTransport() {
         </div>
       )}
     </div>
-  );
-}
-
-const EUROPCAR_URL = "https://www.europcar.com/";
-
-/**
- * Universal car-hire callout (Europcar). Shown on every town's Transport page.
- * It's a plain outbound link: when the visitor has granted `ads` consent the
- * Awin MasterTag (lib/awin) auto-converts the europcar.com link into a tracked,
- * commission-earning one - no per-link work here. Without consent/approval it
- * is just a normal link to Europcar, so it never breaks.
- *
- * NOTE: Awin Convert-a-Link only rewrites the exact Europcar domain you're
- * approved for. If your approval is for a country site (e.g. europcar.com.au),
- * point EUROPCAR_URL there so clicks track.
- */
-function CarHireCard({ t }: { t: (en: string, ja?: string) => string }) {
-  return (
-    <a
-      href={EUROPCAR_URL}
-      target="_blank"
-      rel="noopener noreferrer sponsored"
-      className="group mb-5 flex items-start gap-3 rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50 via-white to-blue-50/40 p-5 shadow-sm transition-colors hover:border-blue-300"
-    >
-      <div className="shrink-0 w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center">
-        <Car className="w-5 h-5" />
-      </div>
-      <div className="min-w-0 flex-1">
-        <p className="text-[11px] font-bold tracking-wider text-blue-700/80 uppercase">
-          {t("Car hire", "レンタカー")}
-        </p>
-        <div className="flex items-center gap-1.5 mt-0.5">
-          <h3 className="font-display font-semibold text-foreground text-base">
-            {t("Hire a car with Europcar", "Europcarでレンタカー")}
-          </h3>
-          <ExternalLink
-            className="w-3.5 h-3.5 text-blue-600 opacity-70 group-hover:opacity-100"
-            aria-hidden
-          />
-        </div>
-        <p className="text-xs text-muted-foreground mt-1 leading-snug">
-          {t(
-            "Compare rates and book a rental car for your trip · airport or in-town pick-up. Feelzlike may earn a commission · it never costs you extra.",
-            "旅行用レンタカーの料金を比較して予約 · 空港または市内で受け取り。Feelzlikeに手数料が発生する場合がありますが、追加料金はありません。",
-          )}
-        </p>
-      </div>
-    </a>
   );
 }
 

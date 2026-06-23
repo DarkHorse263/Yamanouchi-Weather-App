@@ -29,6 +29,7 @@ import {
   RideshareUnavailableNotice,
   townHasRideshare,
 } from "@/components/RideshareUnavailableNotice";
+import { CarHireCard } from "@/components/CarHireCard";
 
 /**
  * Victoria's High Country custom Transport page.
@@ -407,6 +408,11 @@ export function VictoriasHighCountryTransport() {
           </div>
         </section>
       )}
+
+      {/* Universal car-hire option (Europcar, region-aware) */}
+      <section className="px-4 md:px-10 pt-4 md:pt-6">
+        <CarHireCard regionId={region.id} t={t} />
+      </section>
 
       {/* Other coach / shuttle operators (town-filtered) */}
       {buses.length > 0 && (
