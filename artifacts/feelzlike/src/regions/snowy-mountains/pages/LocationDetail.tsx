@@ -52,9 +52,9 @@ function WeatherIcon({ code, isDay = true, className = "w-5 h-5" }: { code: numb
   if (code === 45 || code === 48) return <CloudFog className={className} />;
   if (code >= 51 && code <= 57) return <CloudDrizzle className={className} />;
   if (code >= 61 && code <= 67) return <CloudRain className={className} />;
-  if (code >= 71 && code <= 77) return <CloudSnow className={className} />;
+  if (code >= 71 && code <= 77) return <Snowflake className={className} />;
   if (code >= 80 && code <= 82) return <CloudRain className={className} />;
-  if (code >= 85 && code <= 86) return <CloudSnow className={className} />;
+  if (code >= 85 && code <= 86) return <Snowflake className={className} />;
   if (code >= 95) return <CloudLightning className={className} />;
   return <Cloud className={className} />;
 }

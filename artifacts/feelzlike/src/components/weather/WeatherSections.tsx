@@ -3,6 +3,7 @@ import {
   Cloud,
   CloudRain,
   CloudSnow,
+  Snowflake,
   Sun,
   Wind,
   Droplets,
@@ -432,9 +433,9 @@ export function pickIcon(code: number | null, isDay: boolean): ComponentType<{ c
   if (code === 0 || code === 1) return isDay ? Sun : Cloud;
   if (code === 2 || code === 3 || code === 45 || code === 48) return Cloud;
   if (code >= 51 && code <= 67) return CloudRain;
-  if (code >= 71 && code <= 77) return CloudSnow;
+  if (code >= 71 && code <= 77) return Snowflake;
   if (code >= 80 && code <= 82) return CloudRain;
-  if (code >= 85 && code <= 86) return CloudSnow;
+  if (code >= 85 && code <= 86) return Snowflake;
   if (code >= 95) return CloudRain;
   return Cloud;
 }

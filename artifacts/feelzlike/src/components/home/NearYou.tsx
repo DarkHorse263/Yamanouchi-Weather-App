@@ -8,7 +8,7 @@ import {
   CloudFog,
   CloudLightning,
   CloudRain,
-  CloudSnow,
+  Snowflake,
   Cloudy,
   Globe2,
   LocateFixed,
@@ -131,9 +131,19 @@ function weatherIcon(code: number | null, isDay: boolean): LucideIcon {
   if (code === 45 || code === 48) return CloudFog;
   if (code >= 51 && code <= 57) return CloudDrizzle;
   if ((code >= 61 && code <= 67) || (code >= 80 && code <= 82)) return CloudRain;
-  if ((code >= 71 && code <= 77) || code === 85 || code === 86) return CloudSnow;
+  if ((code >= 71 && code <= 77) || code === 85 || code === 86) return Snowflake;
   if (code >= 95) return CloudLightning;
   return Cloud;
+}
+
+// Tints the current-conditions glyph so rain (blue) and snow (cool sky) read
+// apart at a glance · everything else keeps the calm sky tone.
+function weatherIconColor(code: number | null): string {
+  if (code == null) return "text-sky-500";
+  if (code >= 51 && code <= 57) return "text-blue-400";
+  if ((code >= 61 && code <= 67) || (code >= 80 && code <= 82)) return "text-blue-600";
+  if ((code >= 71 && code <= 77) || code === 85 || code === 86) return "text-sky-400";
+  return "text-sky-500";
 }
 
 const PANEL =
@@ -401,7 +411,7 @@ export function NearYou() {
               }
               className="group mt-3 flex items-center gap-4"
             >
-              <Icon className="h-12 w-12 shrink-0 text-sky-500" strokeWidth={1.5} />
+              <Icon className={`h-12 w-12 shrink-0 ${local ? weatherIconColor(local.weatherCode) : "text-sky-500"}`} strokeWidth={1.5} />
               <div className="min-w-0">
                 <div className="flex items-baseline gap-2">
                   <span className="text-3xl font-bold leading-none tabular-nums text-slate-900">
@@ -447,6 +457,12 @@ export function NearYou() {
                   ? "we couldn't get your location just now"
                   : "see live conditions right where you are"}
               </p>
+              {phase === "unavailable" ? (
+                <p className="mt-1 text-[12px] leading-snug text-slate-500">
+                  on a computer this usually means location services are turned
+                  off in your system settings
+                </p>
+              ) : null}
               <button
                 type="button"
                 onClick={() => requestLocation(true)}

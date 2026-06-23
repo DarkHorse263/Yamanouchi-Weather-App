@@ -135,8 +135,14 @@ function ScrollToTop() {
   const prevPathRef = useRef<string | null>(null);
 
   useEffect(() => {
-    const onPop = () => {
-      wasPopRef.current = true;
+    const onPop = (e: Event) => {
+      // Only genuine browser back/forward (a real PopStateEvent) should suppress
+      // the scroll reset. Our URL-state / filter helpers dispatch a *synthetic*
+      // `new Event("popstate")` for query-only updates · because wouter's
+      // useLocation tracks the pathname only, those never run the effect below,
+      // so the flag would never be consumed and would leak into the next real
+      // forward navigation, wrongly skipping scroll-to-top.
+      if (e instanceof PopStateEvent) wasPopRef.current = true;
     };
     window.addEventListener("popstate", onPop);
     return () => window.removeEventListener("popstate", onPop);
