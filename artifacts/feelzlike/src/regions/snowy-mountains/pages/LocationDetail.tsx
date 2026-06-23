@@ -10,6 +10,7 @@ import { ErrorState } from "../components/ui/error-state";
 import { ForecastChart } from "../components/weather/ForecastChart";
 import { EnsembleForecast } from "../components/weather/EnsembleForecast";
 import { SafetyStrip } from "../components/weather/SafetyStrip";
+import { SnowmakingPanel } from "../components/weather/SnowmakingPanel";
 import { formatTemp } from "../lib/utils";
 import { motion } from "framer-motion";
 import {
@@ -417,6 +418,22 @@ export default function LocationDetail() {
           utcOffsetSeconds={(weatherData as any).utcOffsetSeconds ?? 0}
           thresholds={POWDER_THRESHOLDS_AU}
         />
+
+        {/* SNOWMAKING · honest man-made-snow reality: all-weather snow
+            factories + a live wet-bulb window for conventional guns. Free
+            (not premium-gated) because man-made snow is core context for AU
+            resorts. Placed here, right after current conditions + the hourly
+            strip, because it is a "right now / next 24h" operational read.
+            Winter-only via showLiftAndDials; renders null where we have no
+            curated capability data (see lib/snowmaking). */}
+        {showLiftAndDials && (
+          <SnowmakingPanel
+            locationId={locationId}
+            tempC={current.temperature}
+            humidity={current.humidity}
+            hourly={hourly}
+          />
+        )}
 
         {/* WEATHER OUTLOOK - free 5-day mountain strip. Anything past day 5
             is gated below in the Extended Outlook teaser. */}
