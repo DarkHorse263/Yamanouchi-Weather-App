@@ -12,7 +12,10 @@
  * rather than an empty <div id="root"></div> shell.
  *
  * React's createRoot() replaces #root contents on mount — no hydration
- * conflict, no client-visible flash (shell + assets load in parallel).
+ * conflict. The snapshot is wrapped in #seo-prerender, which index.html hides
+ * via inline CSS, so its unstyled markup never flashes in the top-left before
+ * the styled app paints. Crawlers still read it from the raw HTML, and no-JS
+ * visitors get it back through the <noscript> rule in index.html.
  *
  * ── Single source of truth ─────────────────────────────────────────────────
  * The REGIONS constant and REGION_FEATURES / TOWN_FEATURES arrays below
@@ -129,9 +132,14 @@ function injectHead(template, title, description, canonical) {
 }
 
 /** Inject body content into #root so it is present in the initial HTTP
- *  response before React mounts. createRoot() replaces this on hydration. */
+ *  response before React mounts. Wrapped in #seo-prerender (hidden via inline
+ *  CSS in index.html) so the unstyled snapshot never flashes before the app
+ *  paints. createRoot() replaces the whole #root subtree on mount. */
 function injectBody(html, bodyContent) {
-  return html.replace('<div id="root"></div>', `<div id="root">${bodyContent}</div>`);
+  return html.replace(
+    '<div id="root"></div>',
+    `<div id="root"><div id="seo-prerender">${bodyContent}</div></div>`,
+  );
 }
 
 function regionTownList(region) {

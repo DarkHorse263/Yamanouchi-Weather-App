@@ -157,7 +157,7 @@ const RESORT_LIFTS: ResortLiftData[] = [
     snowCondition: "Check thredbo.com.au for latest snow report",
     seasonStatus: getSeasonStatus(),
     operatingHours: "Lifts operate 8:30 AM - 5:00 PM during ski season",
-    liftStatusUrl: "https://www.thredbo.com.au/the-mountain/lift-status/"
+    liftStatusUrl: "https://www.thredbo.com.au/the-mountain/#lifts-trails"
   },
   {
     locationId: "perisher",
@@ -290,7 +290,7 @@ const RESORT_LIFTS: ResortLiftData[] = [
     snowCondition: "Check perisher.com.au for latest snow report",
     seasonStatus: getSeasonStatus(),
     operatingHours: "Lifts operate 8:30 AM - 5:00 PM during ski season. Skitube 7:30 AM - 6:00 PM.",
-    liftStatusUrl: "https://www.perisher.com.au/the-mountain/lift-status"
+    liftStatusUrl: "https://www.perisher.com.au/reports-cams/reports/snow-report"
   },
   {
     locationId: "charlottes-pass",

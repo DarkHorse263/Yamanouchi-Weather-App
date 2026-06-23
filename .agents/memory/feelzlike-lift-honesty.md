@@ -85,3 +85,26 @@ Jun10-Oct10), so an in-season resort at ~5am with 0/10 lifts open showed a green
 **How to apply:** `seasonStatus` lives ONLY in this file - no other region uses
 it (yamanouchi's "Lift status" is just an external link, not a live chip), so the
 fix is confined to snowy-mountains LocationDetail.
+
+# Resort liftStatusUrl values rot · and Thredbo DOES publish a real feed
+
+The per-resort `liftStatusUrl` strings in `api-server/src/routes/lifts.ts` point
+at the resorts' own report pages and they break over time: resorts restructure
+their sites and the old deep paths start 301/302-redirecting. Two confirmed
+breakages (owner-reported): Thredbo `/the-mountain/lift-status/` redirected to a
+RAW XML feed, and Perisher `/the-mountain/lift-status` 302'd to /file-not-found.
+
+**Rule:** liftStatusUrl must resolve to a human-readable report page (curl with a
+browser UA + follow redirects, confirm 200 text/html and that the resort's OWN
+nav still links it). Prefer a stable anchor on a top-level page over a deep path.
+Re-verify periodically. Current good targets: Thredbo
+`/the-mountain/#lifts-trails`, Perisher `/reports-cams/reports/snow-report`.
+Charlotte Pass returns 000 from this datacenter (IP-blocked, unverifiable) so
+leave it unless owner-reported; Selwyn homepage is 200.
+
+**Correction to "NO live AU feed" above:** there is no live feed WIRED IN, but
+Thredbo's old broken URL was redirecting to a genuine structured per-lift XML
+feed at `https://www.thredbo.com.au/feeds/lift-status-report/` (per-lift
+open=true/false, status, openingTime). That is a real Phase-2 data source for an
+authoritative AU live lift status - the gap is plumbing, not availability. Do not
+wire it up unless asked.

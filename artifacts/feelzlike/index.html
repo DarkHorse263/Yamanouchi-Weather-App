@@ -26,6 +26,12 @@
     <link rel="manifest" href="/manifest.webmanifest" />
     <!-- NavigateWork analytics -->
     <script src="https://portal.navigatework.com.au/track.js" data-key="nw_a9df1661e19187082b274168" async></script>
+    <!-- The build-time SEO snapshot (scripts/prerender.mjs) is injected into
+         #seo-prerender. Hide it from sighted users so its unstyled markup never
+         flashes in the top-left before React mounts. Crawlers still read it from
+         the raw HTML; no-JS visitors get it back via the <noscript> rule. -->
+    <style>#seo-prerender{display:none}</style>
+    <noscript><style>#seo-prerender{display:block}</style></noscript>
   </head>
   <body>
     <div id="root"></div>
