@@ -142,7 +142,8 @@ export type StayPlatformId =
   | "hotels"
   | "expedia"
   | "rakuten"
-  | "jalan";
+  | "jalan"
+  | "trivago";
 
 export interface StayPlatform {
   id: StayPlatformId;
@@ -161,23 +162,45 @@ export const STAY_PLATFORMS: Record<StayPlatformId, StayPlatform> = {
   expedia: { id: "expedia", label: "Expedia",         short: "Expedia",  brandColor: "#FFC72C", brandText: "#1f1f1f" },
   rakuten: { id: "rakuten", label: "Rakuten Travel",  short: "Rakuten",  brandColor: "#BF0000", brandText: "#ffffff" },
   jalan:   { id: "jalan",   label: "Jalan",           short: "Jalan",    brandColor: "#FF6E00", brandText: "#ffffff" },
+  trivago: { id: "trivago", label: "trivago",         short: "trivago",  brandColor: "#007CC3", brandText: "#ffffff" },
 };
 
-/** Region tag - accepts country/region codes. "JP" adds Rakuten + Jalan; everything else is western only. */
+/** Region tag - accepts country/region codes. "JP" adds Rakuten + Jalan + trivago; everything else is western only. */
 export type CountryCode = string;
 
 /** Returns the ordered list of platforms to surface for a given country/region tag. */
 export function platformsForCountry(country: CountryCode): StayPlatform[] {
   const base: StayPlatformId[] = ["booking", "airbnb", "agoda", "trip", "hotels", "expedia"];
   const isJapan = country === "JP" || country === "JPN" || country === "Japan";
-  const ids = isJapan ? [...base, "rakuten" as StayPlatformId, "jalan" as StayPlatformId] : base;
+  const ids = isJapan
+    ? [...base, "rakuten" as StayPlatformId, "jalan" as StayPlatformId, "trivago" as StayPlatformId]
+    : base;
   return ids.map((id) => STAY_PLATFORMS[id]);
 }
 
-/** Build a deep-link search URL for any supported platform. */
+// trivago is a metasearch (price-comparison) site, not an OTA with a free-text
+// search deep link - its result pages are keyed by an internal area id
+// ("locid"), so we can't build a trivago link from the query string the way we
+// do for the OTAs. Instead we map each region to its verified trivago area page.
+// We use the trivago.jp domain so Awin's Convert-a-Link (lib/awin.ts) rewrites
+// the outbound link under our approved trivago Japan programme - that is how the
+// click earns; there is no URL affiliate parameter. A region with no entry here
+// resolves to "" in platformDeepLink, and callers skip the button (no dead link).
+//
+//   yamanouchi = Yamanouchi-machi (Nagano), trivago locid 200-70117. Covers
+//   Yudanaka, Shibu Onsen and the Yomase/Shiga Kogen onsen-ski towns. Verified
+//   June 2026 to resolve to the real stays (Yorozuya, Koishiya, Shiga Kogen
+//   Prince Hotel, ...). Add a region's verified locid here before its stay pages
+//   can show a trivago button.
+const TRIVAGO_DESTINATIONS: Record<string, string> = {
+  yamanouchi: "https://www.trivago.jp/en-US/odr/hotels-yamanouchi-japan?search=200-70117",
+};
+
+/** Build a deep-link search URL for any supported platform. Region-keyed
+ *  platforms (trivago) need `opts.region`; pass the current region id. */
 export function platformDeepLink(
   platform: StayPlatformId,
-  opts: { query: string; lat?: number; lng?: number; affiliateId?: string },
+  opts: { query: string; lat?: number; lng?: number; region?: string; affiliateId?: string },
 ): string {
   const q = encodeURIComponent(opts.query);
   switch (platform) {
@@ -202,5 +225,10 @@ export function platformDeepLink(
       return `https://travel.rakuten.com/hotelinfo/search/?f_keyword=${q}`;
     case "jalan":
       return `https://www.jalan.net/uw/uwp2011/uww2011init.do?keyword=${q}`;
+    case "trivago":
+      // No free-text deep link: resolve the region to its verified trivago area
+      // page, or "" when we have none (callers skip the button). Earns via Awin
+      // Convert-a-Link, so no affiliate parameter is appended here.
+      return TRIVAGO_DESTINATIONS[opts.region ?? ""] ?? "";
   }
 }

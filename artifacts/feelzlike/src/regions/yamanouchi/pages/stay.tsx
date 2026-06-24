@@ -137,18 +137,19 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
         <>
           <PageMeta
             title="Where to Stay in Yamanouchi"
-            description="Accommodation in Yamanouchi, Nagano · hotels, ryokan and guesthouses across Shiga Kogen, Ryuoo, Yudanaka and Shibu Onsen. Compare prices across 8 booking sites."
+            description="Accommodation in Yamanouchi, Nagano · hotels, ryokan and guesthouses across Shiga Kogen, Ryuoo, Yudanaka and Shibu Onsen. Compare prices across 9 booking sites."
             path="/yamanouchi/stay"
             jsonLd={listNode ? [listNode, ...allLodgingNodes] : undefined}
           />
           <div>
             <h1 className="text-3xl md:text-4xl font-black text-foreground">{t("Where to Stay", "宿泊施設")}</h1>
-            <p className="text-muted-foreground mt-1 text-sm">{t("Accommodation in Yamanouchi · Compare 8 booking sites", "山ノ内町の宿泊施設 · 8つの予約サイトで比較")}</p>
+            <p className="text-muted-foreground mt-1 text-sm">{t("Accommodation in Yamanouchi · Compare 9 booking sites", "山ノ内町の宿泊施設 · 9つの予約サイトで比較")}</p>
           </div>
 
           <StayPlatformBar
             variant="banner"
             country="JP"
+            region="yamanouchi"
             query="Yamanouchi, Nagano, Japan"
             lat={YAMANOUCHI_CENTER.lat}
             lng={YAMANOUCHI_CENTER.lng}
@@ -273,7 +274,7 @@ function GooglePlacesStaySection({
             {t("More stays nearby", "周辺の宿泊施設")}
           </h2>
           <p className="text-xs text-muted-foreground">
-            {t("Live results from Google · compare across 8 booking sites", "Googleからのライブ結果 · 8つの予約サイトで比較")}
+            {t("Live results from Google · compare across 9 booking sites", "Googleからのライブ結果 · 9つの予約サイトで比較")}
           </p>
         </div>
         <span className="text-[10px] text-muted-foreground/70 uppercase tracking-wider">
@@ -328,6 +329,7 @@ function GooglePlacesStaySection({
                   <StayPlatformBar
                     variant="card"
                     country="JP"
+                    region="yamanouchi"
                     query={`${p.name} Yamanouchi`}
                     lat={p.lat ?? YAMANOUCHI_CENTER.lat}
                     lng={p.lng ?? YAMANOUCHI_CENTER.lng}

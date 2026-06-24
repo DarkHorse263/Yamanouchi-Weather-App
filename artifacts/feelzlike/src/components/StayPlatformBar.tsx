@@ -11,6 +11,8 @@ interface Props {
   lat?: number;
   lng?: number;
   country: CountryCode;
+  /** Region id, used to resolve region-keyed deep links (e.g. trivago). */
+  region?: string;
   variant?: "banner" | "row" | "card";
   only?: StayPlatformId[];
   affiliateId?: string;
@@ -22,13 +24,20 @@ export function StayPlatformBar({
   lat,
   lng,
   country,
+  region,
   variant = "row",
   only,
   affiliateId,
   className = "",
 }: Props) {
   const all = platformsForCountry(country);
-  const platforms = only ? all.filter((p) => only.includes(p.id)) : all;
+  const selected = only ? all.filter((p) => only.includes(p.id)) : all;
+  // Resolve each platform's deep link once, dropping any that resolve to an
+  // empty URL (e.g. trivago for a region with no verified area page) so we never
+  // render a dead button.
+  const links = selected
+    .map((p) => ({ p, href: platformDeepLink(p.id, { query, lat, lng, region, affiliateId }) }))
+    .filter((x) => x.href.length > 0);
 
   if (variant === "banner") {
     return (
@@ -40,13 +49,13 @@ export function StayPlatformBar({
               {query}
             </p>
           </div>
-          <span className="text-[11px] text-muted-foreground/70">{platforms.length} sites</span>
+          <span className="text-[11px] text-muted-foreground/70">{links.length} sites</span>
         </div>
         <div className="flex flex-wrap gap-2">
-          {platforms.map((p) => (
+          {links.map(({ p, href }) => (
             <a
               key={p.id}
-              href={platformDeepLink(p.id, { query, lat, lng, affiliateId })}
+              href={href}
               target="_blank"
               rel="noopener noreferrer sponsored"
               className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold transition-transform hover:scale-[1.03] hover:shadow-sm"
@@ -64,10 +73,10 @@ export function StayPlatformBar({
   if (variant === "card") {
     return (
       <div className={`flex flex-wrap items-center gap-1 ${className}`}>
-        {platforms.map((p) => (
+        {links.map(({ p, href }) => (
           <a
             key={p.id}
-            href={platformDeepLink(p.id, { query, lat, lng, affiliateId })}
+            href={href}
             target="_blank"
             rel="noopener noreferrer sponsored"
             title={p.label}
@@ -84,10 +93,10 @@ export function StayPlatformBar({
   // row (default)
   return (
     <div className={`flex flex-wrap gap-1.5 ${className}`}>
-      {platforms.map((p) => (
+      {links.map(({ p, href }) => (
         <a
           key={p.id}
-          href={platformDeepLink(p.id, { query, lat, lng, affiliateId })}
+          href={href}
           target="_blank"
           rel="noopener noreferrer sponsored"
           className="inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-[11px] font-bold transition-opacity hover:opacity-85"

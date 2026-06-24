@@ -96,6 +96,23 @@ export function TownStay() {
   // and only once the visitor has granted `ads` consent. Otherwise we serve the
   // plain OTA search link unchanged - it still works, it just doesn't earn.
   const adsOk = canUseAds(choices);
+  // Resolve each platform's link once, dropping any that resolve to an empty URL
+  // (e.g. trivago for a region with no verified area page) so we never render a
+  // dead button. trivago earns via Awin Convert-a-Link (a plain trivago.jp
+  // link), so cjLinkFor returns null for it and we serve the plain link.
+  const stayLinks = platforms
+    .map((p) => {
+      const plainUrl = platformDeepLink(p.id, {
+        query,
+        lat: town.lat,
+        lng: town.lng,
+        region: region.id,
+      });
+      const href =
+        (adsOk && cjLinkFor(p.id, plainUrl, { sid: `${region.id}_${town.id}` })) || plainUrl;
+      return { platform: p, href, plainUrl };
+    })
+    .filter((x) => x.plainUrl.length > 0);
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -168,31 +185,26 @@ export function TownStay() {
               </p>
             </div>
             <span className="text-[11px] text-muted-foreground/70">
-              {platforms.length} {t("sites", "サイト")}
+              {stayLinks.length} {t("sites", "サイト")}
             </span>
           </div>
 
           <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
-            {platforms.map((p) => {
-              const plainUrl = platformDeepLink(p.id, { query, lat: town.lat, lng: town.lng });
-              const href =
-                (adsOk && cjLinkFor(p.id, plainUrl, { sid: `${region.id}_${town.id}` })) || plainUrl;
-              return (
-                <li key={p.id}>
-                  <a
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer sponsored"
-                    data-platform={p.id satisfies StayPlatformId}
-                    className="group flex items-center justify-between gap-3 rounded-xl px-4 py-3 text-sm font-bold transition-all hover:shadow-md hover:-translate-y-0.5"
-                    style={{ backgroundColor: p.brandColor, color: p.brandText }}
-                  >
-                    <span className="truncate">{p.label}</span>
-                    <ExternalLink className="w-4 h-4 opacity-80 group-hover:opacity-100" aria-hidden />
-                  </a>
-                </li>
-              );
-            })}
+            {stayLinks.map(({ platform: p, href }) => (
+              <li key={p.id}>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  data-platform={p.id satisfies StayPlatformId}
+                  className="group flex items-center justify-between gap-3 rounded-xl px-4 py-3 text-sm font-bold transition-all hover:shadow-md hover:-translate-y-0.5"
+                  style={{ backgroundColor: p.brandColor, color: p.brandText }}
+                >
+                  <span className="truncate">{p.label}</span>
+                  <ExternalLink className="w-4 h-4 opacity-80 group-hover:opacity-100" aria-hidden />
+                </a>
+              </li>
+            ))}
           </ul>
 
           <p className="mt-4 text-[11px] text-muted-foreground/70 leading-relaxed">

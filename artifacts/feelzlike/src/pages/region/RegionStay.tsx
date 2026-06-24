@@ -109,6 +109,7 @@ export function RegionStay() {
         <StayPlatformBar
           variant="banner"
           country={country}
+          region={region.id}
           query={region.name}
           lat={center?.lat}
           lng={center?.lng}
@@ -185,6 +186,7 @@ export function RegionStay() {
                   <StayPlatformBar
                     variant="card"
                     country={country}
+                    region={region.id}
                     query={`${p.name} ${region.name}`}
                     lat={p.lat ?? center?.lat}
                     lng={p.lng ?? center?.lng}
