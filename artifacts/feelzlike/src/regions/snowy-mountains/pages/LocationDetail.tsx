@@ -61,6 +61,20 @@ function WeatherIcon({ code, isDay = true, className = "w-5 h-5" }: { code: numb
   return <Cloud className={className} />;
 }
 
+// Open-Meteo's DAILY weather_code is the single most-severe condition of the
+// day, so a brief thunderstorm (>=95) or rain (61-67, 80-82) cell outranks
+// snow even on a day that is mostly snow (e.g. a sub-zero 22cm day with one
+// thundersnow cell reads as a plain thunderstorm). On a ski page the snow is
+// the headline, so when a meaningful amount of snow is forecast we reclassify
+// the display code to snow.
+function displayDayCode(code: number | null | undefined, snowfallSumCm: number | null | undefined): number | null | undefined {
+  const snow = Number(snowfallSumCm) || 0;
+  if (code == null) return code;
+  const isWetOrStormy = (code >= 61 && code <= 67) || (code >= 80 && code <= 82) || code >= 95;
+  if (snow >= 1 && isWetOrStormy) return 75; // heavy snow fall
+  return code;
+}
+
 function formatAgo(iso: string | undefined | null, now: number): string {
   if (!iso) return "-";
   const t = new Date(iso).getTime();
@@ -467,6 +481,7 @@ export default function LocationDetail() {
                 {days.map((day: any, i: number) => {
                   const snow = Number(day.snowfallSum) || 0;
                   const rain = Number(day.precipitationSum) || 0;
+                  const dispCode = displayDayCode(day.weatherCode, snow);
                   const snowH = Math.round((snow / maxSnow) * 100);
                   const rainH = Math.round((rain / maxRain) * 100);
                   return (
@@ -479,10 +494,10 @@ export default function LocationDetail() {
                       </p>
 
                       <div className="my-1.5 text-primary/90">
-                        <WeatherIcon code={day.weatherCode} className="w-9 h-9 md:w-11 md:h-11" />
+                        <WeatherIcon code={dispCode} className="w-9 h-9 md:w-11 md:h-11" />
                       </div>
                       <p className="text-xs text-muted-foreground capitalize line-clamp-1 leading-snug min-h-[1.1em]">
-                        {(day.weatherDescription || "").toLowerCase()}
+                        {dispCode !== day.weatherCode ? "snow" : (day.weatherDescription || "").toLowerCase()}
                       </p>
 
                       <div className="flex items-baseline justify-center gap-2 font-display mt-1" data-numeric>
@@ -577,7 +592,7 @@ export default function LocationDetail() {
                       {format(parseISO(day.date), "EEE d MMM")}
                     </p>
                     <div className="my-2 text-primary/90 inline-block">
-                      <WeatherIcon code={day.weatherCode} className="w-7 h-7" />
+                      <WeatherIcon code={displayDayCode(day.weatherCode, snow)} className="w-7 h-7" />
                     </div>
                     <div className="flex items-baseline justify-center gap-1.5 font-display" data-numeric>
                       <span className="text-foreground text-lg">{Math.round(day.maxTemp)}°</span>
