@@ -581,6 +581,9 @@ export default function LocationDetail() {
                   <CalendarDays className="text-primary w-5 h-5" />
                   Extended (14-day)
                 </h2>
+                <p className="text-xs text-muted-foreground mt-2 max-w-md leading-relaxed">
+                  early outlook · the further ahead, the less certain. treat snow amounts beyond a week as a guide, not a promise.
+                </p>
               </div>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
