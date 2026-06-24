@@ -5,6 +5,8 @@ import {
   type CountryCode,
   type StayPlatformId,
 } from "@/lib/places";
+import { cjLinkFor } from "@/lib/cj";
+import { useConsent, canUseAds } from "@/lib/consent";
 
 interface Props {
   query: string;
@@ -30,14 +32,23 @@ export function StayPlatformBar({
   affiliateId,
   className = "",
 }: Props) {
+  const { choices } = useConsent();
   const all = platformsForCountry(country);
   const selected = only ? all.filter((p) => only.includes(p.id)) : all;
-  // Resolve each platform's deep link once, dropping any that resolve to an
-  // empty URL (e.g. trivago for a region with no verified area page) so we never
-  // render a dead button.
+  // CJ tracking is only applied to advertisers we're approved for (see lib/cj)
+  // and only once the visitor has granted `ads` consent; otherwise we serve the
+  // plain OTA link unchanged (it still works, it just doesn't earn).
+  const adsOk = canUseAds(choices);
+  // Resolve each platform's link once, dropping any whose underlying destination
+  // is empty (e.g. trivago for a region with no verified area page) so we never
+  // render a dead button. Filter on the plain URL, not the CJ-wrapped href.
   const links = selected
-    .map((p) => ({ p, href: platformDeepLink(p.id, { query, lat, lng, region, affiliateId }) }))
-    .filter((x) => x.href.length > 0);
+    .map((p) => {
+      const plainUrl = platformDeepLink(p.id, { query, lat, lng, region, affiliateId });
+      const href = (adsOk && cjLinkFor(p.id, plainUrl, { sid: region })) || plainUrl;
+      return { p, href, plainUrl };
+    })
+    .filter((x) => x.plainUrl.length > 0);
 
   if (variant === "banner") {
     return (

@@ -182,10 +182,11 @@ export function platformsForCountry(country: CountryCode): StayPlatform[] {
 // search deep link - its result pages are keyed by an internal area id
 // ("locid"), so we can't build a trivago link from the query string the way we
 // do for the OTAs. Instead we map each region to its verified trivago area page.
-// We use the trivago.jp domain so Awin's Convert-a-Link (lib/awin.ts) rewrites
-// the outbound link under our approved trivago Japan programme - that is how the
-// click earns; there is no URL affiliate parameter. A region with no entry here
-// resolves to "" in platformDeepLink, and callers skip the button (no dead link).
+// This plain trivago.jp URL is the *destination*; trivago earns via CJ - the
+// stay pages wrap it in cjLinkFor("trivago", ...) (lib/cj.ts), which redirects
+// to this page through CJ's "Evergreen" deep link under our approved trivago JP
+// programme. A region with no entry here resolves to "" in platformDeepLink, and
+// callers skip the button (no dead link).
 //
 //   yamanouchi = Yamanouchi-machi (Nagano), trivago locid 200-70117. Covers
 //   Yudanaka, Shibu Onsen and the Yomase/Shiga Kogen onsen-ski towns. Verified
@@ -227,8 +228,8 @@ export function platformDeepLink(
       return `https://www.jalan.net/uw/uwp2011/uww2011init.do?keyword=${q}`;
     case "trivago":
       // No free-text deep link: resolve the region to its verified trivago area
-      // page, or "" when we have none (callers skip the button). Earns via Awin
-      // Convert-a-Link, so no affiliate parameter is appended here.
+      // page, or "" when we have none (callers skip the button). This is the
+      // plain destination; CJ tracking is added by the caller via cjLinkFor.
       return TRIVAGO_DESTINATIONS[opts.region ?? ""] ?? "";
   }
 }

@@ -103,6 +103,11 @@ export interface CjAdvertiser {
  * link (it still works for travellers; it just doesn't earn yet).
  */
 export const CJ_ADVERTISER_AIDS: Partial<Record<StayPlatformId, CjAdvertiser>> = {
+  // trivago JP - CJ advertiser 7819798. This AID is the "Evergreen Link for
+  // trivago JP" creative (the deep-link / URL-redirect-enabled one), so the
+  // button can land on a region-specific trivago page (see TRIVAGO_DESTINATIONS)
+  // rather than trivago's generic Japan page.
+  trivago: { aid: "17247167" },
   // booking: { aid: "00000000" },  // Booking.com - add when approved on CJ
   // agoda:   { aid: "00000000" },  // Agoda
   // expedia: { aid: "00000000" },  // Expedia

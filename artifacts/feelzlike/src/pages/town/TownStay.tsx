@@ -98,8 +98,8 @@ export function TownStay() {
   const adsOk = canUseAds(choices);
   // Resolve each platform's link once, dropping any that resolve to an empty URL
   // (e.g. trivago for a region with no verified area page) so we never render a
-  // dead button. trivago earns via Awin Convert-a-Link (a plain trivago.jp
-  // link), so cjLinkFor returns null for it and we serve the plain link.
+  // dead button. trivago (JP) earns via CJ using the Evergreen deep link, which
+  // redirects to the region-specific trivago page (see TRIVAGO_DESTINATIONS).
   const stayLinks = platforms
     .map((p) => {
       const plainUrl = platformDeepLink(p.id, {
