@@ -7,7 +7,7 @@
 - [feelzlike premium promo](feelzlike-premium-promo.md) — promo start+end (local-time parse); server `requireEntitlement` = real paywall; premium currently HIDDEN-until-traction (gate=pass-through, nav tab gone, /premium orphaned).
 - [feelzlike tsx test isolation](feelzlike-tsx-test-isolation.md) — pure logic needing `tsx --test` must NOT transitively import `@/regions` (PNG assets crash import); split pure file from catalog file.
 - [feelzlike town slug convention](feelzlike-town-slug-convention.md) — kebab ids (urls) vs snake slugs (dataset keys); convert via urlState helpers, never `as TownSlug` cast (silent empty lookups).
-- [feelzlike region readiness model](feelzlike-region-routing.md) — nav is town-scoped + data-gated; region-level subpage routes are direct-URL-only and must redirect to region home, never show a stub.
+- [feelzlike region readiness model](feelzlike-region-routing.md) — nav town-scoped + data-gated; region-level routes are direct-URL-only (redirect home, never stub); link town→region routes with the `~` escape or they silently hit the Not-found stub.
 - [feelzlike geolocation funnel](feelzlike-geolocation-funnel.md) — NearYou never auto-prompts; denied = re-enable guidance + reload, never silent retry.
 - [feelzlike security posture](feelzlike-security-posture.md) — SAST "secret" HIGHs are the public Supabase anon key + analytics key (false positives); app.ts is well-hardened; dep highs are dev/transitive only.
 - [shell output token aliasing](shell-output-aliasing.md) — bash/rg/cat output in this env silently aliases some identifiers (NAV→ln, RegionStub→n); use the `read` tool for trustworthy content.

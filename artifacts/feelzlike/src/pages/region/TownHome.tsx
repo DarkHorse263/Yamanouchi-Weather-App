@@ -10,7 +10,6 @@ import {
   Compass,
   CloudSun,
   AlertTriangle,
-  Lock,
   ChevronDown,
   Layers,
 } from "lucide-react";
@@ -472,8 +471,10 @@ export function TownHome() {
           );
         })}
 
-        {/* ALERTS - paywalled. Render the same row look but with a lock so
-            users can see the offer without leaving the page.
+        {/* ALERTS - a working link to the (currently free) alerts page. The
+            PremiumGate wrapper is kept so that if premium is switched back on it
+            renders the locked teaser card instead; while premium is off it
+            passes this link straight through, so no lock icon is shown.
             Hidden in green season - powder alerts are snow-only. */}
         {!isGreen && (
           <PremiumGate
@@ -484,14 +485,15 @@ export function TownHome() {
             blurbJa="条件達成時にプッシュ通知。降雪量・風速・凍結高度などを設定。"
             ctaHref={`~/${region.id}/alerts`}
           >
-            <div className="flex items-center gap-4 rounded-2xl border border-border bg-white p-5">
+            <Link
+              href={`~/${region.id}/alerts`}
+              className="group flex items-center gap-4 rounded-2xl border border-border bg-white p-5 transition-all hover:border-primary/40 hover:shadow-md"
+            >
               <div className="shrink-0 w-11 h-11 rounded-xl bg-primary/8 text-primary inline-flex items-center justify-center">
                 <AlertTriangle className="w-5 h-5" />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="byline text-primary uppercase inline-flex items-center gap-1">
-                  {t("Alerts", "アラート")} <Lock className="w-3 h-3" />
-                </p>
+                <p className="byline text-primary uppercase">{t("Alerts", "アラート")}</p>
                 <p className="text-sm text-muted-foreground mt-0.5 leading-snug">
                   {t(
                     "Powder, wind & freezing-level alerts straight to your phone.",
@@ -499,7 +501,8 @@ export function TownHome() {
                   )}
                 </p>
               </div>
-            </div>
+              <ArrowUpRight className="w-4 h-4 text-muted-foreground/50 group-hover:text-primary transition-colors shrink-0" />
+            </Link>
           </PremiumGate>
         )}
       </section>

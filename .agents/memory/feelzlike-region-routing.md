@@ -75,3 +75,28 @@ synchronous title from `region.mountains[].name`; the two overrides only know
 the resort name after the weather API resolves (snowy resorts aren't in
 `region.mountains`), so their `<PageMeta>` currently mounts on the success
 render only — acceptable since crawlers render settled DOM.
+
+## Linking from a town-router page to a region-level route needs the `~` escape
+
+Components under TownLayout (TownHome and all `/:region/:town/*` pages) render
+inside a NESTED wouter router with `base={`/${townId}`}`, itself inside
+RegionLayout's `base={`/${region.id}`}`. A plain `<Link href="/alerts">` from
+such a page resolves TOWN-relative to `/:region/:town/alerts`, which has no
+route in TownLayout and silently falls to the `TownSubpageStub` "Not found"
+catch-all — it does NOT error, so typecheck + render both look fine while the
+click goes nowhere useful.
+
+**Rule:** to link from a town-scoped page to a region-level route (`/alerts`,
+`/mountain/:id`, `/stay`, etc.), use the wouter root escape
+`href={`~/${region.id}/<path>`}`. Town subpages that genuinely exist in
+TownLayout (`/weather`, `/stay`, `/eat`, `/explore`, `/roads`, `/transport`)
+are the ONLY ones safe to link town-relative.
+
+**Why:** this is exactly the bug behind the dead town-home "Alerts" card — a
+relative `/alerts` looked correct and rendered, but landed on the Not-found
+stub. The working reference in the same file is the mountain-row link
+`~/${region.id}/mountain/:id`.
+
+**How to apply:** rendering a card/link in a screenshot only proves it exists,
+NOT that it navigates. For any cross-router link, verify with an actual click
+(e2e) and assert the resulting URL is region-level, not `/:region/:town/...`.
