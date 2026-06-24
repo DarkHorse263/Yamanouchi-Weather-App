@@ -496,7 +496,7 @@ export default function LocationDetail() {
                           <div
                             className="w-3 rounded-t-sm bg-sky-400/80"
                             style={{ height: `${snow > 0 ? Math.max(8, snowH) : 0}%` }}
-                            title={`${snow.toFixed(1)} mm snow`}
+                            title={`${snow.toFixed(1)} cm snow`}
                           />
                           <Snowflake className="w-3 h-3 text-sky-400/80 mt-1" />
                         </div>
@@ -510,7 +510,7 @@ export default function LocationDetail() {
                         </div>
                       </div>
                       <div className="flex items-center gap-1.5 text-xs tabular-nums text-foreground/80 mt-1">
-                        <span className="font-medium text-sky-700">{snow > 0 ? `${snow.toFixed(snow >= 10 ? 0 : 1)}mm` : "-"}</span>
+                        <span className="font-medium text-sky-700">{snow > 0 ? `${snow.toFixed(snow >= 10 ? 0 : 1)}cm` : "-"}</span>
                         <span className="text-muted-foreground/50">/</span>
                         <span className="font-medium text-blue-700">{rain > 0 ? `${rain.toFixed(rain >= 10 ? 0 : 1)}mm` : "-"}</span>
                       </div>
@@ -569,20 +569,29 @@ export default function LocationDetail() {
               </div>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {daily.slice(5, 14).map((day: any) => (
-                <div key={day.date} className="rounded-2xl bg-background/40 border border-white/5 p-4 text-center">
-                  <p className="font-display text-base text-foreground">
-                    {format(parseISO(day.date), "EEE d MMM")}
-                  </p>
-                  <div className="my-2 text-primary/90 inline-block">
-                    <WeatherIcon code={day.weatherCode} className="w-7 h-7" />
+              {daily.slice(5, 14).map((day: any) => {
+                const snow = Number(day.snowfallSum) || 0;
+                return (
+                  <div key={day.date} className="rounded-2xl bg-background/40 border border-white/5 p-4 text-center">
+                    <p className="font-display text-base text-foreground">
+                      {format(parseISO(day.date), "EEE d MMM")}
+                    </p>
+                    <div className="my-2 text-primary/90 inline-block">
+                      <WeatherIcon code={day.weatherCode} className="w-7 h-7" />
+                    </div>
+                    <div className="flex items-baseline justify-center gap-1.5 font-display" data-numeric>
+                      <span className="text-foreground text-lg">{Math.round(day.maxTemp)}°</span>
+                      <span className="text-muted-foreground/60 text-xs">{Math.round(day.minTemp)}°</span>
+                    </div>
+                    <div className="flex items-center justify-center gap-1 text-xs tabular-nums mt-1.5">
+                      <Snowflake className="w-3 h-3 text-sky-400/80" />
+                      <span className="font-medium text-sky-700">
+                        {snow > 0 ? `${snow.toFixed(snow >= 10 ? 0 : 1)}cm` : "-"}
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex items-baseline justify-center gap-1.5 font-display" data-numeric>
-                    <span className="text-foreground text-lg">{Math.round(day.maxTemp)}°</span>
-                    <span className="text-muted-foreground/60 text-xs">{Math.round(day.minTemp)}°</span>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </motion.div>
         </PremiumGate>
