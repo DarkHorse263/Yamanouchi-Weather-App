@@ -68,20 +68,37 @@ export async function authMiddleware(
     return;
   }
 
-  const session = await getSession(sid);
-  if (!session?.user?.id) {
-    await clearSession(res, sid);
-    next();
-    return;
-  }
+  try {
+    const session = await getSession(sid);
+    if (!session?.user?.id) {
+      await clearSession(res, sid);
+      next();
+      return;
+    }
 
-  const refreshed = await refreshIfExpired(sid, session);
-  if (!refreshed) {
-    await clearSession(res, sid);
-    next();
-    return;
-  }
+    const refreshed = await refreshIfExpired(sid, session);
+    if (!refreshed) {
+      await clearSession(res, sid);
+      next();
+      return;
+    }
 
-  req.user = refreshed.user;
-  next();
+    req.user = refreshed.user;
+    next();
+  } catch (err) {
+    // The session store is DB-backed (getSession/clearSession/refresh all hit
+    // Postgres). If the database is briefly unavailable — most commonly the
+    // cold-start / just-restarted window of the autoscale deployment, before
+    // the connection pool is ready — those calls throw. Without this guard the
+    // error escapes to the global error handler and turns EVERY /api request
+    // from a logged-in user into an HTTP 500 (INTERNAL_ERROR), including public
+    // endpoints like /alerts/subscribe that don't need a session at all.
+    // Fail soft: treat the request as anonymous and let it through. The user
+    // simply appears logged-out for this one request; the next request, once
+    // the DB is warm, re-establishes the session.
+    console.error("[authMiddleware] session lookup failed, continuing as anonymous:", err);
+    if (!res.headersSent) {
+      next();
+    }
+  }
 }
