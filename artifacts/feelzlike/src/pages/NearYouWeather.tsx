@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "wouter";
+import { Link, useSearch } from "wouter";
 import {
   ArrowLeft,
   ArrowRight,
@@ -24,6 +24,8 @@ import {
 import { HomeFooter } from "@/components/home/HomeFooter";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { track } from "@/lib/analytics";
+import { PlaceSearch } from "@/components/home/PlaceSearch";
+import { precipSummary } from "@/lib/precip";
 
 // This page renders OUTSIDE the RegionLayout (no LanguageProvider), so it is
 // English-only · matching the landing page. The shared weather sections take a
@@ -92,6 +94,8 @@ interface LocalCurrent {
   isDay: boolean;
   todayMaxC: number | null;
   todayMinC: number | null;
+  precipMm: number | null;
+  snowfallCm: number | null;
   observedAt: string;
   source: string;
 }
@@ -118,10 +122,10 @@ function localToHeroCurrent(c: LocalCurrent): TownWeatherCurrent {
     feelsLike: c.feelsLikeC,
     humidity: null,
     isDay: c.isDay,
-    precipitation: null,
+    precipitation: c.precipMm,
     rain: null,
     showers: null,
-    snowfall: null,
+    snowfall: c.snowfallCm,
     weatherCode: c.weatherCode,
     weatherDescription: c.description,
     cloudCover: null,
@@ -157,6 +161,52 @@ export default function NearYouWeather() {
     phaseRef.current = phase;
   }, [phase]);
 
+  // A searched place arrives as ?lat=&lng=&name= (set by PlaceSearch). When the
+  // coordinates are valid we treat them as the location directly - no GPS, no
+  // permission prompt - so this same page can render any town or city the
+  // visitor looked up. Reactive to the query string so re-searching here updates
+  // in place.
+  const search = useSearch();
+  const searchPlace = useMemo(() => {
+    const p = new URLSearchParams(search);
+    const latRaw = p.get("lat");
+    const lngRaw = p.get("lng");
+    // URLSearchParams.get() returns null when a param is absent, and both
+    // Number(null) and Number("") are 0 · so without these guards a bare
+    // /near-you visit would parse as {lat:0,lng:0} (a valid coordinate!) and
+    // wrongly skip GPS, showing the Gulf of Guinea. Require real, non-empty
+    // values before trusting them.
+    if (!latRaw || !latRaw.trim() || !lngRaw || !lngRaw.trim()) return null;
+    const lat = Number(latRaw);
+    const lng = Number(lngRaw);
+    const name = p.get("name");
+    if (
+      Number.isFinite(lat) && lat >= -90 && lat <= 90 &&
+      Number.isFinite(lng) && lng >= -180 && lng <= 180
+    ) {
+      return { lat, lng, name: name && name.trim() ? name.trim() : null };
+    }
+    return null;
+  }, [search]);
+  const hasSearchPlace = searchPlace != null;
+
+  // Apply a searched place as the active coordinates · skips geolocation. When
+  // the visitor leaves searched mode (params cleared), hand control back to the
+  // GPS flow by resetting coords + phase so the permission effect re-runs fresh
+  // - it would otherwise hold the stale searched coords, since phase stays ready.
+  const wasSearchRef = useRef(false);
+  useEffect(() => {
+    if (searchPlace) {
+      wasSearchRef.current = true;
+      setCoords({ lat: searchPlace.lat, lon: searchPlace.lng });
+      setPhase("ready");
+    } else if (wasSearchRef.current) {
+      wasSearchRef.current = false;
+      setCoords(null);
+      setPhase("checking");
+    }
+  }, [searchPlace]);
+
   const requestLocation = useCallback((userInitiated: boolean) => {
     if (typeof navigator === "undefined" || !("geolocation" in navigator)) {
       setPhase("unsupported");
@@ -187,7 +237,9 @@ export default function NearYouWeather() {
 
   // Open from the *current* permission state · granted resolves silently,
   // prompt waits for a tap, denied shows re-enable guidance. Never auto-prompts.
+  // Skipped entirely when a searched place owns the coordinates.
   useEffect(() => {
+    if (hasSearchPlace) return;
     let cancelled = false;
     if (typeof navigator === "undefined" || !("geolocation" in navigator)) {
       setPhase("unsupported");
@@ -225,7 +277,7 @@ export default function NearYouWeather() {
     return () => {
       cancelled = true;
     };
-  }, [requestLocation]);
+  }, [requestLocation, hasSearchPlace]);
 
   // Full forecast for the visitor's coords · the town-weather endpoint accepts
   // arbitrary lat/lng, so this is the same rich payload the town pages render.
@@ -246,7 +298,7 @@ export default function NearYouWeather() {
     staleTime: 10 * 60 * 1000,
   });
 
-  const placeName = localQuery.data?.place?.name ?? null;
+  const placeName = searchPlace?.name ?? localQuery.data?.place?.name ?? null;
   const nearest = localQuery.data?.nearestRegion ?? null;
   const localCurrent = localQuery.data?.current ?? null;
   const showTap = phase === "prompt" || phase === "unavailable";
@@ -257,7 +309,7 @@ export default function NearYouWeather() {
       style={{ fontFamily: "'DIN Pro', system-ui, sans-serif" }}
     >
       <PageMeta
-        title="your current location"
+        title={placeName ? placeName.toLowerCase() : "your current location"}
         description="live conditions, hourly and 7-day forecast plus radar for wherever you are right now."
         path="/near-you"
         noIndex
@@ -273,11 +325,17 @@ export default function NearYouWeather() {
 
         <div className="mt-4 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-sky-700/80">
           <MapPin className="h-3.5 w-3.5" />
-          your current location
+          {hasSearchPlace ? "conditions for" : "your current location"}
         </div>
         <h1 className="mt-1 font-display text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
           {placeName ? placeName.toLowerCase() : "weather right where you are"}
         </h1>
+
+        {/* SEARCH ANY PLACE · always available, even when GPS is denied, so the
+            visitor can look up conditions for any town or city. */}
+        <div className="relative z-30 mt-4 max-w-md">
+          <PlaceSearch source="near_you_page" placeholder="search another town or city" />
+        </div>
 
         {phase === "checking" || phase === "locating" ? (
           <p className="mt-8 text-muted-foreground">finding your location…</p>
@@ -349,6 +407,14 @@ export default function NearYouWeather() {
                   : null;
 
               if (heroCurrent) {
+                // Precip amount comes from whatever current powers the hero · the
+                // rich town-weather current when present, else the cheap
+                // local-current fallback (mapped in localToHeroCurrent). Keeps the
+                // line consistent with the temperature shown right above it.
+                const precip = precipSummary({
+                  precipMm: heroCurrent.precipitation,
+                  snowfallCm: heroCurrent.snowfall,
+                });
                 return (
                   <>
                     {full?._stale && <StaleNotice meta={full._stale} t={t} />}
@@ -357,6 +423,11 @@ export default function NearYouWeather() {
                       town={placeName ?? "your location"}
                       placeLabel="your location"
                     />
+                    {precip ? (
+                      <p className={`mt-2 text-[13px] font-medium tabular-nums ${precip.tone}`}>
+                        {precip.label}
+                      </p>
+                    ) : null}
                     {full ? (
                       <>
                         <WeatherConditions current={full.current} t={t} />

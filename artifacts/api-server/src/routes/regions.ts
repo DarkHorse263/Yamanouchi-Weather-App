@@ -526,6 +526,11 @@ interface LocalCurrent {
   isDay: boolean;
   todayMaxC: number | null;
   todayMinC: number | null;
+  // How heavy it's coming down right now. precipMm is total precipitation
+  // (mm) over the preceding hour; snowfallCm is fresh snow (cm) over the same
+  // window. Null when the upstream source doesn't report it.
+  precipMm: number | null;
+  snowfallCm: number | null;
   observedAt: string;
   source: string;
 }
@@ -609,7 +614,7 @@ async function fetchLocalCurrentFromOpenMeteo(
     latitude: String(lat),
     longitude: String(lon),
     current:
-      "temperature_2m,apparent_temperature,wind_speed_10m,wind_direction_10m,weather_code,is_day",
+      "temperature_2m,apparent_temperature,wind_speed_10m,wind_direction_10m,weather_code,is_day,precipitation,rain,snowfall",
     daily: "temperature_2m_max,temperature_2m_min",
     forecast_days: "1",
     timezone: "auto",
@@ -650,6 +655,9 @@ async function fetchLocalCurrentFromOpenMeteo(
       isDay: cur.is_day === 1,
       todayMaxC: todayMaxRaw != null ? Math.round(todayMaxRaw) : null,
       todayMinC: todayMinRaw != null ? Math.round(todayMinRaw) : null,
+      // Open-Meteo: current.precipitation is mm, current.snowfall is cm.
+      precipMm: numOrNull(cur.precipitation) != null ? Math.round(Number(cur.precipitation) * 10) / 10 : null,
+      snowfallCm: numOrNull(cur.snowfall) != null ? Math.round(Number(cur.snowfall) * 10) / 10 : null,
       observedAt: toIsoUtc(cur.time),
       source: "Open-Meteo",
     };
@@ -695,6 +703,10 @@ async function fetchLocalCurrentFromOwm(
       isDay: cur.is_day === 1,
       todayMaxC: todayMaxRaw != null ? Math.round(todayMaxRaw) : null,
       todayMinC: todayMinRaw != null ? Math.round(todayMinRaw) : null,
+      // OWM reshaper exposes current.precipitation (mm liquid-equivalent);
+      // it has no separate snow-cm field, so snowfallCm stays null on this path.
+      precipMm: numOrNull(cur.precipitation) != null ? Math.round(Number(cur.precipitation) * 10) / 10 : null,
+      snowfallCm: numOrNull(cur.snowfall) != null ? Math.round(Number(cur.snowfall) * 10) / 10 : null,
       observedAt: new Date().toISOString(),
       source: "OpenWeatherMap",
     };

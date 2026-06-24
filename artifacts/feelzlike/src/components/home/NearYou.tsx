@@ -23,6 +23,8 @@ import { track } from "@/lib/analytics";
 import { readLastTown } from "@/lib/favouriteRegion";
 import { classifyRegionProximity } from "@/lib/regionProximity";
 import { NearYouRegionRow, type SuggestedRegion } from "./NearYouRegionRow";
+import { PlaceSearch } from "./PlaceSearch";
+import { precipSummary } from "@/lib/precip";
 
 // ── server payload (GET /api/local-weather) ────────────────────────
 interface LocalCurrent {
@@ -36,6 +38,8 @@ interface LocalCurrent {
   isDay: boolean;
   todayMaxC: number | null;
   todayMinC: number | null;
+  precipMm: number | null;
+  snowfallCm: number | null;
   observedAt: string;
   source: string;
 }
@@ -358,6 +362,7 @@ export function NearYou() {
 
   const local = localQuery.data?.current ?? null;
   const placeName = localQuery.data?.place?.name ?? null;
+  const precip = precipSummary(local);
   const Icon = local ? weatherIcon(local.weatherCode, local.isDay) : Cloud;
   const skeleton =
     phase === "checking" ||
@@ -374,6 +379,12 @@ export function NearYou() {
 
   return (
     <section className="px-4 pt-4 md:px-6">
+      {/* SEARCH ANY PLACE · sits above the location card and outside the panel's
+          overflow-hidden so the results dropdown isn't clipped. Always visible,
+          so even a denied/unsupported visitor can still look up conditions. */}
+      <div className="relative z-30 mx-4 mb-3 md:mx-6">
+        <PlaceSearch source="home" />
+      </div>
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
@@ -430,6 +441,11 @@ export function NearYou() {
                     </>
                   ) : null}
                 </p>
+                {precip ? (
+                  <p className={`mt-0.5 text-[12px] font-medium tabular-nums ${precip.tone}`}>
+                    {precip.label}
+                  </p>
+                ) : null}
                 {local.source && local.source.startsWith("JMA AMeDAS") ? (
                   <p className="mt-0.5 text-[11px] text-slate-400">
                     observed &middot; {local.source.replace(/^JMA AMeDAS \u00b7 /, "")}

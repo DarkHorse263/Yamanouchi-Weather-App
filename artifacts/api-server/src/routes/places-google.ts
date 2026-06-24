@@ -219,4 +219,93 @@ router.get("/places/photo", async (req, res) => {
   }
 });
 
+/**
+ * Forward place search · powers the "your current location" search bar so a
+ * visitor can look up conditions for any town or city by name (not just GPS).
+ * Uses Google Places (New) places:searchText - one call returns the display
+ * name, address and coordinates. The key stays server-side and we return a
+ * small, stable shape (no Google-internal field names leaked).
+ */
+router.get("/places/search", async (req, res) => {
+  const apiKey = process.env["GOOGLE_PLACES_API_KEY"];
+  if (!apiKey) {
+    res.status(503).json({ error: "PLACES_NOT_CONFIGURED", message: "GOOGLE_PLACES_API_KEY is not set on the server." });
+    return;
+  }
+
+  const q = String(req.query["q"] ?? "").trim().slice(0, 80);
+  if (q.length < 3) {
+    res.status(400).json({ error: "QUERY_TOO_SHORT", message: "q must be at least 3 characters" });
+    return;
+  }
+  const max = Math.min(5, Math.max(1, Number(req.query["max"] ?? 5)));
+
+  const fieldMask = [
+    "places.id",
+    "places.displayName",
+    "places.formattedAddress",
+    "places.location",
+  ].join(",");
+
+  try {
+    const upstream = await fetch("https://places.googleapis.com/v1/places:searchText", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Goog-Api-Key": apiKey,
+        "X-Goog-FieldMask": fieldMask,
+      },
+      body: JSON.stringify({
+        textQuery: q,
+        maxResultCount: max,
+        languageCode: "en",
+      }),
+      signal: AbortSignal.timeout(8000),
+    });
+
+    if (!upstream.ok) {
+      const text = await upstream.text().catch(() => "");
+      res.status(upstream.status >= 400 && upstream.status < 500 ? 502 : 503).json({
+        error: "UPSTREAM_ERROR",
+        status: upstream.status,
+        message: text.slice(0, 400),
+      });
+      return;
+    }
+
+    const data = (await upstream.json()) as {
+      places?: Array<{
+        id: string;
+        displayName?: { text?: string };
+        formattedAddress?: string;
+        location?: { latitude: number; longitude: number };
+      }>;
+    };
+
+    const out = (data.places ?? [])
+      .filter(
+        (p) =>
+          p.location &&
+          Number.isFinite(p.location.latitude) &&
+          Number.isFinite(p.location.longitude),
+      )
+      .map((p) => ({
+        id: p.id,
+        name: p.displayName?.text ?? "",
+        address: p.formattedAddress ?? "",
+        lat: p.location!.latitude,
+        lng: p.location!.longitude,
+      }));
+
+    // Place geometry is stable, so cache for an hour at the edge.
+    res.setHeader("Cache-Control", "public, max-age=3600, s-maxage=3600");
+    res.json({ results: out });
+  } catch (err) {
+    res.status(503).json({
+      error: "FETCH_FAILED",
+      message: err instanceof Error ? err.message : "Unknown error",
+    });
+  }
+});
+
 export default router;
