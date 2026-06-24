@@ -108,10 +108,17 @@ export const CJ_ADVERTISER_AIDS: Partial<Record<StayPlatformId, CjAdvertiser>> =
   // button can land on a region-specific trivago page (see TRIVAGO_DESTINATIONS)
   // rather than trivago's generic Japan page.
   trivago: { aid: "17247167" },
+  // Hotels.com APAC - CJ advertiser 2612819. AID 11327743 is the
+  // "Hotels.com APAC - Deep link" creative (URL-redirect / deep-link enabled).
+  // Curl-verified: the ?url= override is honoured AND tracked (cjevent +
+  // affcid=HCOM-AU.NETWORK.CJ.101761193, carrying our publisher id) for BOTH
+  // www.hotels.com and au.hotels.com - so it earns on our existing
+  // www.hotels.com destinations across AU/JP/NZ. Default anrdoezrs.net domain
+  // tracks fine (no per-advertiser override needed).
+  hotels: { aid: "11327743" },
   // booking: { aid: "00000000" },  // Booking.com - add when approved on CJ
   // agoda:   { aid: "00000000" },  // Agoda
   // expedia: { aid: "00000000" },  // Expedia
-  // hotels:  { aid: "00000000" },  // Hotels.com
   // trip:    { aid: "00000000" },  // Trip.com
 };
 
