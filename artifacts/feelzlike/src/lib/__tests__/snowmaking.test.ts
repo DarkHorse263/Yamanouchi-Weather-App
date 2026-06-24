@@ -14,6 +14,7 @@ import {
   snowmakingViability,
   bestSnowmakingWindow,
   getSnowmakingCapability,
+  SNOWMAKING_CAPABILITY,
   type SnowmakingHour,
 } from "../snowmaking";
 
@@ -117,4 +118,49 @@ test("getSnowmakingCapability returns curated data for AU resorts", () => {
   assert.ok(perisher);
   assert.equal(perisher!.type, "conventional");
   assert.equal(perisher!.areas.length, 0);
+});
+
+test("getSnowmakingCapability covers AU + NZ resorts and hides the rest", () => {
+  // all-weather snow factories must list at least one unit
+  for (const id of ["thredbo", "mt-buller", "coronet-peak"]) {
+    const cap = getSnowmakingCapability(id);
+    assert.ok(cap, `${id} should have curated data`);
+    assert.equal(cap!.type, "all-weather");
+    assert.ok(cap!.areas.length > 0, `${id} all-weather should list a unit`);
+  }
+  // conventional snowmaking resorts (AU + NZ)
+  for (const id of [
+    "perisher",
+    "selwyn",
+    "charlottes-pass",
+    "falls-creek",
+    "mt-hotham",
+    "lake-mountain",
+    "ben-lomond",
+    "the-remarkables",
+    "cardrona",
+    "treble-cone",
+    "mt-hutt",
+    "whakapapa",
+    "turoa",
+  ]) {
+    const cap = getSnowmakingCapability(id);
+    assert.ok(cap, `${id} should have curated data`);
+    assert.equal(cap!.type, "conventional");
+  }
+  // resorts with no snowmaking, and excluded japan, stay hidden (null)
+  for (const id of ["mt-stirling", "mt-donna-buang", "nozawa-onsen", "ryuoo"]) {
+    assert.equal(getSnowmakingCapability(id), null, `${id} should have no panel`);
+  }
+});
+
+test("curated snowmaking copy stays in brand voice", () => {
+  for (const [id, cap] of Object.entries(SNOWMAKING_CAPABILITY)) {
+    const strings = [cap.headline, cap.summary, cap.source];
+    for (const a of cap.areas) strings.push(a.name, a.system);
+    for (const s of strings) {
+      assert.equal(s, s.toLowerCase(), `${id}: copy must be lowercase -> ${s}`);
+      assert.ok(!/[\u2014\u2013]/.test(s), `${id}: no em/en dashes -> ${s}`);
+    }
+  }
 });

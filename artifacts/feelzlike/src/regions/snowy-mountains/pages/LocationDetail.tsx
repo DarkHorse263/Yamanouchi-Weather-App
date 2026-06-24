@@ -10,7 +10,7 @@ import { ErrorState } from "../components/ui/error-state";
 import { ForecastChart } from "../components/weather/ForecastChart";
 import { EnsembleForecast } from "../components/weather/EnsembleForecast";
 import { SafetyStrip } from "../components/weather/SafetyStrip";
-import { SnowmakingPanel } from "../components/weather/SnowmakingPanel";
+import { SnowmakingPanel } from "@/components/weather/SnowmakingPanel";
 import { formatTemp } from "../lib/utils";
 import { motion } from "framer-motion";
 import {

@@ -150,12 +150,16 @@ export interface SnowmakingCapability {
 }
 
 /**
- * Curated, per-resort snowmaking facts · first slice covers the Snowy
- * Mountains. Keyed by the resort's location id (see LocationDetail).
+ * Curated, per-resort snowmaking facts · covers australia + new zealand
+ * resorts that genuinely make snow. Keyed by the resort's location id (see
+ * LocationDetail / MountainDetail). Resorts with no snowmaking are left out
+ * on purpose, so the panel hides itself. Japan is excluded · those resorts
+ * run on natural powder.
  * Keep copy in brand voice: all lowercase, middot separators, no em/en
  * dashes, no emojis.
  */
 export const SNOWMAKING_CAPABILITY: Record<string, SnowmakingCapability> = {
+  // ─── australia · snowy mountains ──────────────────────────────────────
   thredbo: {
     type: "all-weather",
     headline: "all-weather snowmaking",
@@ -178,6 +182,138 @@ export const SNOWMAKING_CAPABILITY: Record<string, SnowmakingCapability> = {
       "perisher makes snow with conventional guns · they need cold, dry air, so the live window below shows when they can run.",
     areas: [],
     source: "perisher",
+  },
+  selwyn: {
+    type: "conventional",
+    headline: "conventional snowmaking",
+    summary:
+      "selwyn sits low, so snowmaking is its backbone · technoalpin guns cover about 35 of its 45 hectares, often the first nsw resort to call 100% open.",
+    areas: [],
+    source: "selwyn snow resort",
+  },
+  "charlottes-pass": {
+    type: "conventional",
+    headline: "mostly natural snow",
+    summary:
+      "charlotte pass is australia's highest resort, so it leans on natural snow · a few mobile guns top up the high-traffic runs early in the season.",
+    areas: [],
+    source: "charlotte pass",
+  },
+  // ─── australia · victoria ─────────────────────────────────────────────
+  "mt-buller": {
+    type: "all-weather",
+    headline: "all-weather snowmaking",
+    summary:
+      "mt buller runs five technoalpin snow factories, so it can build and hold a base even in warm weather · usually the first resort in australia to open and the last to close.",
+    areas: [
+      {
+        name: "snow factories",
+        system: "5 technoalpin units",
+        maxTempC: 15,
+        outputM3PerDay: 550,
+      },
+    ],
+    source: "mt buller",
+  },
+  "falls-creek": {
+    type: "conventional",
+    headline: "conventional snowmaking",
+    summary:
+      "falls creek runs one of victoria's biggest snowmaking systems · 244 guns fed by rocky valley lake cover the main corridors, often the early-season base.",
+    areas: [],
+    source: "falls creek",
+  },
+  "mt-hotham": {
+    type: "conventional",
+    headline: "conventional snowmaking",
+    summary:
+      "hotham gets deep natural snow up high, so the guns are a top-up · snowmaking focuses on the main runs through hotham central and big d to guarantee an opener.",
+    areas: [],
+    source: "mt hotham",
+  },
+  "lake-mountain": {
+    type: "conventional",
+    headline: "snow play snowmaking",
+    summary:
+      "lake mountain is cross-country and snow play, not downhill · snowmaking keeps the toboggan and beginner lesson areas covered through winter.",
+    areas: [],
+    source: "lake mountain",
+  },
+  // ─── australia · tasmania ─────────────────────────────────────────────
+  "ben-lomond": {
+    type: "conventional",
+    headline: "conventional snowmaking",
+    summary:
+      "ben lomond is tasmania's only chairlift resort · four snowmakers top up the natural snow across the summit and beginner areas, with more guns going in for 2026.",
+    areas: [],
+    source: "ben lomond",
+  },
+  // ─── new zealand · queenstown ─────────────────────────────────────────
+  "coronet-peak": {
+    type: "all-weather",
+    headline: "all-weather snowmaking",
+    summary:
+      "coronet peak runs the southern hemisphere's biggest snowmaking system · 229 guns top to bottom, plus the south island's first all-weather snow factory on the learner slopes.",
+    areas: [
+      {
+        name: "lower learner slopes",
+        system: "technoalpin snow factory",
+        maxTempC: 20,
+        outputM3PerDay: 200,
+      },
+    ],
+    source: "coronet peak · nzski",
+  },
+  "the-remarkables": {
+    type: "conventional",
+    headline: "conventional snowmaking",
+    summary:
+      "the remarkables runs an extensive automated system · about 158 guns cover the beginner area, main trails and terrain parks to back up the natural snow.",
+    areas: [],
+    source: "the remarkables · nzski",
+  },
+  // ─── new zealand · wanaka ─────────────────────────────────────────────
+  cardrona: {
+    type: "conventional",
+    headline: "conventional snowmaking",
+    summary:
+      "cardrona makes snow on nearly the whole mountain · all the main lifts bar one are covered, which guarantees a winter season even in lean snow years.",
+    areas: [],
+    source: "cardrona",
+  },
+  "treble-cone": {
+    type: "conventional",
+    headline: "conventional snowmaking",
+    summary:
+      "treble cone is mostly natural snow · snowmaking covers about 9% of the terrain, focused on the home basin trails to keep the lower mountain open.",
+    areas: [],
+    source: "treble cone",
+  },
+  // ─── new zealand · canterbury ─────────────────────────────────────────
+  "mt-hutt": {
+    type: "conventional",
+    headline: "conventional snowmaking",
+    summary:
+      "mt hutt pairs a long natural season with 61 snow cannons over about 42 hectares · a computerised system holds the main runs and terrain park, often nz's first to open.",
+    areas: [],
+    source: "mt hutt · nzski",
+  },
+  // ─── new zealand · ruapehu ────────────────────────────────────────────
+  whakapapa: {
+    type: "conventional",
+    headline: "conventional snowmaking",
+    summary:
+      "whakapapa makes snow on happy valley and the beginner slopes, so learners stay covered even in low-snow seasons · the rest of the mountain runs on natural snow.",
+    areas: [],
+    source: "whakapapa",
+  },
+  turoa: {
+    type: "conventional",
+    headline: "conventional snowmaking",
+    summary:
+      "turoa makes snow on its lower beginner trails · about 50 guns added in 2015 back up early-season cover, with the upper mountain on natural snow.",
+    areas: [],
+    source: "turoa",
   },
 };
 

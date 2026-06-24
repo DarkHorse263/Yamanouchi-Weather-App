@@ -31,6 +31,7 @@ import {
 } from "@workspace/api-client-react";
 import { ElevationBands } from "@/components/weather/ElevationBands";
 import { HourlyForecast } from "@/components/HourlyForecast";
+import { SnowmakingPanel } from "@/components/weather/SnowmakingPanel";
 import { POWDER_THRESHOLDS_AU } from "@/types/weather";
 import { PowderCalendar } from "@/components/PowderCalendar";
 import { LiftWindHoldPanel } from "@/components/LiftWindHoldPanel";
@@ -338,6 +339,20 @@ export function MountainDetail() {
                 t={t}
                 thresholds={POWDER_THRESHOLDS_AU}
                 sectionNumber=""
+              />
+            </div>
+          )}
+
+          {/* Snowmaking · honest man-made-snow reality for this resort.
+              Self-hides when there is no curated data, and only shows in
+              winter. Same shared panel the Snowy Mountains pages use. */}
+          {!isGreen && current && (
+            <div className="mt-4">
+              <SnowmakingPanel
+                locationId={locationId}
+                tempC={current.temperature}
+                humidity={current.humidity}
+                hourly={hourly as any}
               />
             </div>
           )}

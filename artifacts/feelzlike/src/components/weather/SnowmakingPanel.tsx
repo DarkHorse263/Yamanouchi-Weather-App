@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Snowflake } from "lucide-react";
 import { format, parseISO } from "date-fns";
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 import {
   getSnowmakingCapability,
   wetBulbC,
