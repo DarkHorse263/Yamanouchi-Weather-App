@@ -2,6 +2,7 @@ import { Router, type IRouter } from "express";
 import { LruTtlCache } from "../lib/lru-cache.js";
 import { fetchOpenWeatherMapAsOpenMeteo } from "../lib/openweathermap.js";
 import { reconcileDryToWet } from "../lib/amedas.js";
+import { reconcileNzMetarDryToWet } from "../lib/metar-nz.js";
 
 const router: IRouter = Router();
 
@@ -460,6 +461,25 @@ async function fetchHeadlineUpstream(r: RegionConfig): Promise<HeadlineReading |
       }
     }
 
+    // NZ airport-METAR reconciliation: same idea for New Zealand, where the only
+    // free real-time surface-obs signal is airport METAR. Only fires when a town
+    // is genuinely co-located with an airport (Queenstown -> NZQN, Wanaka -> NZWF).
+    if (r.countryCode === "NZ" && r.lat != null && r.lon != null) {
+      const override = await reconcileNzMetarDryToWet({
+        lat: r.lat,
+        lon: r.lon,
+        modelWeatherCode: headline.weatherCode,
+        tempC: headline.tempC,
+        refElevationM: numOrNull(d.elevation) ?? r.elevation ?? null,
+      });
+      if (override) {
+        headline.weatherCode = override.weatherCode;
+        headline.description = describe(override.weatherCode);
+        headline.source = `METAR \u00b7 ${override.stationName}`;
+        headline.observedAt = override.observedAt;
+      }
+    }
+
     return headline;
   } catch (err) {
     console.warn(`[regions] upstream fetch failed for ${r.id}:`, err);
@@ -596,14 +616,35 @@ async function applyObservedOverride(
     tempC: current.tempC,
     refElevationM,
   });
-  if (!override) return current;
-  return {
-    ...current,
-    weatherCode: override.weatherCode,
-    description: describe(override.weatherCode),
-    source: `JMA AMeDAS \u00b7 ${override.stationName}`,
-    observedAt: override.observedAt,
-  };
+  if (override) {
+    return {
+      ...current,
+      weatherCode: override.weatherCode,
+      description: describe(override.weatherCode),
+      source: `JMA AMeDAS \u00b7 ${override.stationName}`,
+      observedAt: override.observedAt,
+    };
+  }
+
+  // New Zealand: correct a dry headline against a co-located airport METAR.
+  const nzOverride = await reconcileNzMetarDryToWet({
+    lat,
+    lon,
+    modelWeatherCode: current.weatherCode,
+    tempC: current.tempC,
+    refElevationM,
+  });
+  if (nzOverride) {
+    return {
+      ...current,
+      weatherCode: nzOverride.weatherCode,
+      description: describe(nzOverride.weatherCode),
+      source: `METAR \u00b7 ${nzOverride.stationName}`,
+      observedAt: nzOverride.observedAt,
+    };
+  }
+
+  return current;
 }
 
 async function fetchLocalCurrentFromOpenMeteo(

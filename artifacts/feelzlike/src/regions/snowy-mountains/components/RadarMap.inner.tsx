@@ -415,7 +415,8 @@ function RecenterOnChange({ lat, lng, zoom }: { lat: number; lng: number; zoom: 
 // RainViewer tile path:
 //   {host}{path}/{size}/{z}/{x}/{y}/{color}/{smooth}_{snow}.png
 // Color schemes documented at https://www.rainviewer.com/api.html.
-//   color=2 = "Universal Blue" — clean blue/green gradient.
+//   color=6 = "NEXRAD Level-III" — full green→yellow→orange→red intensity
+//            scale (more colours, closer to the BOM / Apple rain maps).
 //   smooth=1 enables bilinear smoothing.
 //   snow=1   tints sub-zero precip in cyan/white so snow vs rain is
 //            visually distinguishable on the same layer.
@@ -431,7 +432,7 @@ const RADAR_TILE_PX =
   typeof window !== "undefined" && window.devicePixelRatio > 1 ? 512 : 256;
 
 function radarTileUrl(host: string, path: string): string {
-  return `${host}${path}/${RADAR_TILE_PX}/{z}/{x}/{y}/2/1_1.png`;
+  return `${host}${path}/${RADAR_TILE_PX}/{z}/{x}/{y}/6/1_1.png`;
 }
 
 // --- click-to-load point readout (Open-Meteo) ---------------------------
@@ -477,7 +478,7 @@ function RadarBlur({ nativeZoom }: { nativeZoom: number }) {
       // A radar cell spans ~2^over screen-px once upscaled · blurring by a
       // little over half a cell merges the steps into a gradient. Capped so
       // deep zoom softens the blocks without fogging the whole field.
-      const px = over === 0 ? 0 : Math.min(9, Math.pow(2, over) * 0.55);
+      const px = over === 0 ? 0 : Math.min(5, Math.pow(2, over) * 0.4);
       el.style.setProperty("--radar-blur", px === 0 ? "0px" : `${px.toFixed(2)}px`);
     };
     apply();
@@ -852,25 +853,26 @@ export default function RadarMapInner({
           <CaptureMap onReady={handleMapReady} />
           <RadarBlur nativeZoom={7} />
 
-          {/* Esri world hillshade · shaded relief gives the dark map its
-              terrain feel (mountains read as ridges, not flat). Sits at
-              the bottom; the dark labels layer rides on top. */}
+          {/* Esri world hillshade · shaded relief gives the map its terrain
+              feel (mountains read as ridges, not flat). Sits at the bottom;
+              the light labelled basemap rides on top. */}
           <TileLayer
             attribution='Hillshade © <a href="https://www.esri.com/">Esri</a>'
             url="https://server.arcgisonline.com/ArcGIS/rest/services/Elevation/World_Hillshade/MapServer/tile/{z}/{y}/{x}"
             maxNativeZoom={16}
           />
 
-          {/* Dark basemap (CARTO dark_all, free, no key, CDN-hosted).
-              Slightly transparent so the hillshade terrain bleeds through
-              while keeping the dark styling + grey labels. Maximum
-              contrast for the blue/cyan precip overlay on top. */}
+          {/* Light basemap (CARTO Voyager, free, no key, CDN-hosted). Light,
+              labelled and geographic (towns, roads, water) so it reads like
+              the BOM / Apple rain maps people compared us to · a clean, simple
+              base the colour radar pops against. Slightly transparent so the
+              hillshade terrain relief still bleeds through underneath. */}
           <TileLayer
             attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors · © <a href="https://carto.com/attributions">CARTO</a>'
-            url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+            url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
             subdomains={["a", "b", "c", "d"]}
             maxNativeZoom={19}
-            opacity={0.86}
+            opacity={0.92}
           />
 
           {/* Precipitation layers.

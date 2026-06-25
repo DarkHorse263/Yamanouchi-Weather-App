@@ -1,6 +1,6 @@
 ---
 name: feelzlike observation reconciliation
-description: Why "current conditions" can say sunny while it rains, and the dry->wet JMA AMeDAS reconciliation that corrects it. Constraints on extending it (elevation picker, JP-only, fail-soft).
+description: Why "current conditions" can say sunny while it rains, and the per-country dry->wet surface-obs reconciliation that corrects it (JP=AMeDAS, AU=BOM AWS, NZ=airport METAR). Constraints on extending it (elevation picker, country-gated, fail-soft, 4 wiring points).
 ---
 
 # feelzlike current-conditions accuracy (model lag vs surface obs)
@@ -74,3 +74,30 @@ the existing freshness-gated BOM path, fail-soft. BOM fetch is per-state via
   (thredbo/perisher) were already BOM-backed and now also get the condition override.
 - STILL Open-Meteo (no verified co-located AWS): TAS Ben Lomond, and all
   `/town-weather` lat-lng towns -> the natural follow-ups for fuller AU parity.
+
+**NZ/airport-METAR reconciliation (parallel layer, same dry->wet philosophy):** NZ
+has NO free real-time surface-obs API (NIWA/MetService paid; CliFlo ~24h delayed).
+The only free key-less "is it raining now" signal is airport METAR from NOAA
+`aviationweather.gov/api/data/metar?ids=...&format=json`. NZ airports are AUTO and
+reliably populate the `wxString` present-weather group (RA/SN/DZ/SHRA...) when precip
+falls, so TRUST `wxString` — do NOT scrape raw METAR (false-positive risk; raw is
+absent==no precip anyway). Pure decision lives in `api-server/src/lib/metar-nz.ts`
+(`reconcileNzMetarDryToWet` + unit-tested pure fns `parsePresentWeather`,
+`presentWeatherToWmo`, `deriveRelHumidity`, `decideNzOverride`; NO `@/regions` import
+so `tsx --test` works). Curated ICAO allow-list (NZQN/NZWF/... ); coords+elev read
+from each LIVE record (no stale hand-coords). Gates: dist<=30km AND elev delta<=250m
++ 0.05/m tie-break — so a VALLEY airport (NZQN ~356m = Queenstown town) corrects the
+town but an alpine resort 1300m above gets NO override (honest: airport METAR is
+valley-accurate, resort-approximate). Tier-2 in-cloud sanity is STRICTER than BOM:
+requires RH>=97 AND BKN/OVC cloud (METAR temp/dewp are integer-rounded) -> bumps a
+clear model to Overcast, never invents precip. Source label = `METAR · {ICAO name}`.
+Verified live: NZCH actively "RA" -> override code 63; NZQN dry -> null; wet model ->
+null; Coronet Peak 1649m -> null via elev gate.
+
+**Cross-cutting wiring rule (applies to EVERY country's reconciler):** an obs override
+must be wired into the SAME FOUR points or surfaces disagree: (1) `regions.ts`
+fetchHeadline (region cards), (2) `regions.ts` applyObservedOverride (/near-you
+LocalCurrent), (3) `town-weather.ts` current block (lat-lng towns), (4) `weather.ts`
+after the model assembly (resort `/weather/:id`). Each country gates by bbox
+(`isInJapan`/`isInNewZealand`) or `region`/`countryCode` so they never cross-fire.
+Routes mount under `/api` (curl `localhost:$PORT/api/...`).

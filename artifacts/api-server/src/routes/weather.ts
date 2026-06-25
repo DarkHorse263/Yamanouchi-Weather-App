@@ -4,6 +4,7 @@ import { getEnsembleForecast } from "../lib/ensemble-forecast.js";
 import { locationMatchesRegion, parseRegionParam, RegionParamError } from "../lib/regions.js";
 import { fetchOpenWeatherMapAsOpenMeteo } from "../lib/openweathermap.js";
 import { reconcileBomCondition } from "../lib/bom-obs.js";
+import { reconcileNzMetarDryToWet } from "../lib/metar-nz.js";
 
 const router: IRouter = Router();
 
@@ -414,6 +415,31 @@ async function fetchLocationWeather(location: LocationConfig) {
         if (reco.precipitationMm != null) {
           current.precipitation = Math.max(current.precipitation ?? 0, reco.precipitationMm);
         }
+      }
+    } catch {
+      // fail-soft: a reconciliation hiccup must never break base weather.
+    }
+  }
+
+  // NZ live-observation reconciliation. New Zealand has no AWS feed, so we use
+  // airport METAR (NOAA Aviation Weather Center). Only fires for NZ locations that
+  // are genuinely co-located with an airport (valley towns like Queenstown/Wanaka);
+  // high alpine resorts fail the distance/elevation gate and keep the model reading.
+  if (location.region === "NZ") {
+    try {
+      const override = await reconcileNzMetarDryToWet({
+        lat: location.latitude,
+        lon: location.longitude,
+        modelWeatherCode: current.weatherCode,
+        tempC: current.temperature,
+        refElevationM: location.elevation ?? null,
+      });
+      if (override) {
+        current.weatherCode = override.weatherCode;
+        current.weatherDescription = getWeatherDescription(override.weatherCode);
+        const obsMm = Math.round(override.rateMmh * 10) / 10;
+        if (obsMm > 0) current.precipitation = Math.max(current.precipitation ?? 0, obsMm);
+        current.dataSource = `METAR \u00b7 ${override.stationName}`;
       }
     } catch {
       // fail-soft: a reconciliation hiccup must never break base weather.

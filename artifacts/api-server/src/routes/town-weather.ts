@@ -1,5 +1,6 @@
 import { Router, type IRouter } from "express";
 import { reconcileDryToWet, isInJapan } from "../lib/amedas.js";
+import { reconcileNzMetarDryToWet, isInNewZealand } from "../lib/metar-nz.js";
 
 const router: IRouter = Router();
 
@@ -207,6 +208,31 @@ router.get("/town-weather", async (req, res) => {
           payload.current.precipitation = obsMm;
         }
         if (override.weatherCode < 70 && !(payload.current.rain && payload.current.rain > 0)) {
+          payload.current.rain = obsMm;
+        }
+      }
+    }
+
+    // NZ airport-METAR reconciliation: correct a dry "current" block when a
+    // co-located NZ airport (e.g. Queenstown -> NZQN) is reporting active precip,
+    // so the icon, description and rainfall agree with what's really falling.
+    if (isInNewZealand(lat, lng)) {
+      const override = await reconcileNzMetarDryToWet({
+        lat,
+        lon: lng,
+        modelWeatherCode: payload.current.weatherCode,
+        tempC: payload.current.temperature,
+        refElevationM: numOrNull((d as { elevation?: number }).elevation),
+      });
+      if (override) {
+        const obsMm = Math.round(override.rateMmh * 10) / 10;
+        payload.current.weatherCode = override.weatherCode;
+        payload.current.weatherDescription = describe(override.weatherCode);
+        (payload.current as Record<string, unknown>).observationSource = `METAR \u00b7 ${override.stationName}`;
+        if (obsMm > 0 && !(payload.current.precipitation && payload.current.precipitation > 0)) {
+          payload.current.precipitation = obsMm;
+        }
+        if (obsMm > 0 && override.weatherCode < 70 && !(payload.current.rain && payload.current.rain > 0)) {
           payload.current.rain = obsMm;
         }
       }
