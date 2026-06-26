@@ -10,6 +10,14 @@ description: How feelzlike publishes (application router, config in .replit) and
 - Autoscale startup probe hits **`GET /`** (api-server returns the SPA index → 200). `/healthz` and `/readyz` exist but are mounted under `/api`, so they 404 at root — they are NOT the probe path.
 - The build hook filters `@workspace/yamanouchi`, which is not a package (regions live inside feelzlike). It prints `No projects matched the filters` and **exits 0** — a harmless stale no-op. feelzlike + api-server are built by the deploy/artifact system, not that hook.
 
+# "works in dev, INTERNAL_ERROR on live" = STALE DEPLOY, not a code/DB bug
+
+When a live form/endpoint returns `HTTP 500 : INTERNAL_ERROR` but the same request succeeds against the dev api-server (`POST localhost:8080/api/...` → 200), the live code is OLDER than current source. The fix is an owner **re-publish**, not a code change.
+
+**Why:** `INTERNAL_ERROR` is emitted ONLY by app.ts's global error handler — i.e. an error escaped a route. Every hardened route returns its OWN code instead (e.g. `/alerts/subscribe` catches and returns `SUBSCRIBE_FAILED`). So seeing `INTERNAL_ERROR` from a route that has its own try/catch in source = the deployed build predates that hardening. (The generated api-client surfaces the body's `error` field as `mutation.error.message` → "HTTP 500 : INTERNAL_ERROR".)
+
+**How to apply:** Don't assume a missing prod table/column first. (1) Reproduce against dev — if dev returns 200, the source is fine. (2) Sanity-check prod is reachable: `curl https://feelzlike.com/api/healthz` and `/readyz` (200 = API up; the early-timestamp healthcheck-500 spam in deploy logs is cold-start/redeploy noise, not the live instance). (3) Confirm prod schema read-only via the database skill (`environment:"production"`, e.g. information_schema for the table) — it has historically been CORRECT, so a green schema points back to stale code. (4) Reproduce directly against prod with a `curl POST` (use an `@example.com` address; it creates an inert unverified row you cannot delete via the read-only prod path). If prod now returns 200, the owner already re-published and it is fixed — verify, don't re-fix.
+
 # Sentry 401 in build logs is a decoy
 
 A failed feelzlike publish whose build log shows `[sentry-vite-plugin] ... Invalid token (http status: 401)` is **almost certainly NOT failing because of Sentry.**
