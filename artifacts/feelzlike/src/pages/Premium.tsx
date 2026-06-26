@@ -11,7 +11,8 @@ import {
   Gift,
   ArrowLeft,
 } from "lucide-react";
-import { usePremium, setPremiumPreview } from "@workspace/feelzlike-shell";
+import { usePremium } from "@workspace/feelzlike-shell";
+import { PremiumSubscribe } from "@/components/PremiumSubscribe";
 
 interface Feature {
   Icon: React.ComponentType<{ className?: string }>;
@@ -74,7 +75,6 @@ export default function Premium() {
     isPremium,
     isPromoPeriod,
     isPromoUpcoming,
-    daysLeftInPromo,
     promoStartsAt,
     promoEndsAt,
   } = usePremium();
@@ -137,7 +137,7 @@ export default function Premium() {
               </p>
               <p className="text-lg font-black text-foreground mt-0.5">
                 {isPromoPeriod
-                  ? "premium · launch promo"
+                  ? "premium · free for subscribers"
                   : isPremium
                   ? "premium"
                   : "free"}
@@ -145,40 +145,37 @@ export default function Premium() {
               {isPromoPeriod && promoEndsAt && (
                 <p className="text-sm text-emerald-800/90 mt-1 inline-flex items-center gap-1.5">
                   <Gift className="w-3.5 h-3.5" />
-                  free until {formatDate(promoEndsAt)} · {daysLeftInPromo} days left
+                  free until {formatDate(promoEndsAt)} · no card needed
                 </p>
               )}
               {isPromoUpcoming && promoStartsAt && (
                 <p className="text-sm text-sky-800/90 mt-1 inline-flex items-center gap-1.5">
                   <Gift className="w-3.5 h-3.5" />
-                  launch promo opens {formatDate(promoStartsAt)} · free for everyone for 2 months.
+                  launch promo opens {formatDate(promoStartsAt)} · free for subscribers until {promoEndsAt && formatDate(promoEndsAt)}.
                 </p>
               )}
               {!isPremium && !isPromoUpcoming && (
                 <p className="text-sm text-muted-foreground mt-1">
-                  the launch promo has wrapped. subscribe below to keep the
-                  premium surfaces.
+                  the launch promo has wrapped. subscribe to hear when monthly &
+                  yearly plans open.
                 </p>
               )}
             </div>
           </div>
 
-          {!isPremium && (
-            <button
-              onClick={() => setPremiumPreview(true)}
-              className="mt-4 w-full md:w-auto inline-flex items-center justify-center gap-1.5 rounded-full bg-foreground text-background px-5 py-2.5 text-sm font-semibold hover:opacity-90 transition-opacity"
-            >
-              <Sparkles className="w-3.5 h-3.5" /> preview premium
-            </button>
-          )}
-          {isPremium && !isPromoPeriod && (
-            <button
-              onClick={() => setPremiumPreview(false)}
-              className="mt-4 text-xs text-muted-foreground hover:text-foreground underline underline-offset-2"
-            >
-              exit preview
-            </button>
-          )}
+          <div className="mt-4 pt-4 border-t border-border/60">
+            <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">
+              subscribe
+            </p>
+            <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
+              {isPromoPeriod && promoEndsAt
+                ? `join free and get every premium feature until ${formatDate(
+                    promoEndsAt,
+                  )}. we'll email you before paid plans start. no card needed.`
+                : "join the list and we'll let you know when plans open. no card needed."}
+            </p>
+            <PremiumSubscribe source="premium" />
+          </div>
         </div>
 
         {/* Free tier */}
@@ -199,8 +196,13 @@ export default function Premium() {
 
         {/* Premium features */}
         <section>
-          <h2 className="text-lg font-black text-foreground mb-3 inline-flex items-center gap-2">
+          <h2 className="text-lg font-black text-foreground mb-3 inline-flex items-center gap-2 flex-wrap">
             <Sparkles className="w-4 h-4 text-primary" /> premium
+            {isPromoPeriod && promoEndsAt && (
+              <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                free until {formatDate(promoEndsAt)}
+              </span>
+            )}
           </h2>
           <div className="grid sm:grid-cols-2 gap-3">
             {PREMIUM_FEATURES.map((f) => {
@@ -256,7 +258,7 @@ export default function Premium() {
         {/* Pricing */}
         <section className="rounded-2xl border border-border bg-white p-5">
           <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-            pricing · after the promo
+            pricing · after 31 december 2026
           </p>
           <div className="grid sm:grid-cols-2 gap-3 mt-3">
             <div className="rounded-xl border border-border bg-secondary/30 p-4">
@@ -283,7 +285,7 @@ export default function Premium() {
           </div>
           {isPromoPeriod && (
             <p className="text-xs text-muted-foreground mt-3 leading-relaxed">
-              you're inside the launch promo · nothing to pay until {promoEndsAt && formatDate(promoEndsAt)}. checkout opens before the promo wraps.
+              free for subscribers until {promoEndsAt && formatDate(promoEndsAt)} · no card needed. monthly & yearly plans open after that, and we'll email subscribers first.
             </p>
           )}
         </section>

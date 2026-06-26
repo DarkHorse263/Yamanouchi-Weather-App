@@ -8,6 +8,7 @@ import {
   Compass,
   Newspaper,
   CalendarDays,
+  Sparkles,
 } from "lucide-react";
 import type { NavItem } from "./types";
 
@@ -41,10 +42,11 @@ export const DEFAULT_MOUNTAIN_NAV: NavItem[] = [
   // Trip planner · free multi-day planner; global path so AppShell doesn't
   // rewrite it to /:region/plan.
   { path: "/plan", icon: CalendarDays, label: "Plan a trip", labelJa: "旅行計画" },
-  // Premium hub hidden until we have traction · the /premium route stays
-  // mounted in App.tsx (direct-URL only) but is no longer surfaced in nav.
-  // Restore the { path: "/premium", icon: Sparkles, ... } item here (and the
-  // Sparkles import above) to bring the premium tab back.
+  // Premium hub · lists what's premium and, during the launch promo, that it
+  // is free for subscribers until 31 december 2026 (monthly & yearly plans
+  // open after). Global path (root-escaped in AppShell) so the region router
+  // base doesn't rewrite it to /:region/premium.
+  { path: "/premium", icon: Sparkles, label: "Premium", labelJa: "プレミアム" },
 ];
 
 /**

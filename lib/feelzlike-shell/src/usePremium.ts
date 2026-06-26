@@ -30,11 +30,12 @@ import { useEffect, useState } from "react";
  */
 const STORAGE_KEY = "feelzlike.premium.preview";
 
-// Launch promo: free premium for everyone from 1 June 2026 → end of 1 August
-// 2026 (AU local time). Override via VITE_PREMIUM_PROMO_STARTS_AT /
+// Launch promo: every premium feature is free for subscribers from 1 June
+// 2026 → end of 31 December 2026 (AU local time). Monthly & yearly plans open
+// after this date. Override via VITE_PREMIUM_PROMO_STARTS_AT /
 // VITE_PREMIUM_PROMO_ENDS_AT, or set either to an empty string to disable.
 const DEFAULT_PROMO_STARTS_AT = "2026-06-01";
-const DEFAULT_PROMO_ENDS_AT = "2026-08-01";
+const DEFAULT_PROMO_ENDS_AT = "2026-12-31";
 
 function readPreview(): boolean {
   if (typeof window === "undefined") return false;

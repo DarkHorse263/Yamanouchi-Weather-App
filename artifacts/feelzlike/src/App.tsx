@@ -1,4 +1,4 @@
-import { Switch, Route, Redirect, Router as WouterRouter } from "wouter";
+import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Welcome from "@/pages/Welcome";
@@ -26,6 +26,7 @@ import Privacy from "@/pages/legal/Privacy";
 import Terms from "@/pages/legal/Terms";
 import News from "@/pages/News";
 import TripPlanner from "@/pages/TripPlanner";
+import Premium from "@/pages/Premium";
 import AdminStats from "@/pages/admin/AdminStats";
 import AdminTraffic from "@/pages/admin/AdminTraffic";
 import AdminNewsletter from "@/pages/admin/AdminNewsletter";
@@ -58,13 +59,12 @@ function Router() {
           "see all news" target. */}
       <Route path="/news" component={News} />
       <Route path="/news/" component={News} />
-      {/* Premium hidden until traction · the pricing/plans page is taken out
-          of service (redirect home) rather than deleted, so old bookmarks and
-          shared links land somewhere sensible. Restore
-          `<Route path="/premium" component={Premium} />` (and the Premium
-          import) to bring the hub back. */}
-      <Route path="/premium"><Redirect to="/" /></Route>
-      <Route path="/premium/"><Redirect to="/" /></Route>
+      {/* Premium hub · what's premium and (during the launch promo) that it's
+          free for subscribers until 31 december 2026, with monthly & yearly
+          pricing shown for after. Mounted before /:region so /premium isn't
+          parsed as a region slug. */}
+      <Route path="/premium" component={Premium} />
+      <Route path="/premium/" component={Premium} />
       {/* Multi-day trip planner · now a free feature (premium hidden), mounted
           before /:region catch-all so /plan isn't parsed as a region slug. */}
       <Route path="/plan" component={TripPlanner} />

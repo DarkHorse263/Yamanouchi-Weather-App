@@ -190,9 +190,7 @@ export function AppShell({
     pushTown("/explore");           // Explore
     pushMountain("/news");          // News (global /news page)
     pushMountain("/plan");          // Trip planner (global /plan page)
-    // Premium hub hidden until traction · nav entry removed (the /premium
-    // route stays mounted in App.tsx for direct-URL access). Restore
-    // pushMountain("/premium") here to bring the tab back.
+    pushMountain("/premium");       // Premium hub (global /premium page)
     // Future-proofing: append anything we forgot to enumerate above.
     townNav.forEach((it) => pushTown(it.path));
     mountainNav.forEach((it) => pushMountain(it.path));
