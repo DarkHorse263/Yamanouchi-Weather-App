@@ -1,46 +1,41 @@
 ---
-name: feelzlike BOM radar animation / rate-limit
-description: why the official BOM radar stays a static still (no animated loop), and how BOM IP-blocks the environment under request volume
+name: feelzlike BOM radar animation
+description: that the official BOM radar is animated, the cadence insight that makes it possible, and the BOM rate-limit constraint any radar work must respect
 ---
 
-The official BOM radar in feelzlike is the single composite `.gif` per product
-(e.g. `IDR714.gif`), shown via the api-server `/api/bom-radar?type=loop` proxy.
-It is a STILL snapshot. Requests to make it "animated" recur — here is why we do
-NOT build a frame-stitched / layer-composited animated loop.
+The official BOM radar (the main / leftmost AU "Official" tab) IS animated, not a
+static gif. It is a self-hosted composite: BOM's own static basemap layers
+stacked under the recent radar frame PNGs, cross-faded by opacity. This corrects
+an earlier wrong note that claimed BOM only kept 1 frame so animation was
+impossible.
 
-**Two hard blockers (verified Jun 2026):**
+**The cadence insight (why animation is feasible):** BOM retains a full ~5-6
+frame loop, but publishes frames on a **10-minute :X4 cadence** (minutes ending
+:04/:14/:24/:34/:44/:54 UTC), NOT every 6 minutes. The old "only 1 frame"
+conclusion was a discovery bug — probing at 6-min wall-clock marks mostly missed
+the real frame minutes, and the heavy probing also tripped BOM's rate-limit.
+Discovery probes the UNION of both cadences and HEAD-filters to whatever exists.
 
-1. **BOM's per-frame archive now retains ~1 scan.** Probing
-   `/radar/IDR<id>.T.<YYYYMMDDHHMM>.png` at 6-min wall-clock marks across a 2-3h
-   window via GET (and HEAD — both behave the same) returns only the single
-   latest frame. So even a "perfect" compositor would loop 1 frame = still. The
-   api-server `/api/bom-radar/frames` discovery endpoint exists and is correct,
-   but returns `[]`/1 frame in practice. The frontend does NOT call it (grep
-   confirms) — leave it dormant.
+**The hard constraint — BOM rate-limits the whole Replit egress.** Under request
+volume BOM starts 403ing EVERYTHING (gif, basemap layers, frames) for a while,
+even from the code_execution sandbox, then recovers. This is THE thing every
+radar change must respect. The defenses that keep the animation safe in
+production, and must not be removed:
+- server-side caching of both frame discovery AND the proxied images (frame +
+  layer PNGs are immutable once published, so cache them hard; the loop gif is
+  short-TTL), plus in-flight de-duping and serve-stale-on-failure;
+- an allowlist of catalogued radar product ids on the frames endpoint, so a
+  caller can't fan out arbitrary ids and trigger a HEAD-probe storm. The
+  allowlist mirrors the client BOM radar catalogue; keep them in sync. Drift is
+  graceful — a missing product just degrades that radar to the still/link-out.
 
-2. **BOM IP-rate-limits the whole Replit environment under volume.** Base
-   layers/frames return 200 when traffic is light, but after enough requests in
-   a short span (e.g. the frames endpoint HEAD-checking 20-40 URLs per call, or
-   bulk probing) BOM starts returning **403 to EVERYTHING** — the `.gif`, the
-   transparency layers, individual frames — and even direct fetches from the
-   code_execution sandbox 403 (not just the api-server). It recovers after
-   backing off. A per-view layer compositor (background+topography+locations+
-   range + N frames = many requests every render) would trigger this constantly
-   in production.
+**Honesty-first degradation ladder:** animated composite → single still gif →
+"open source" link-out. The client must fall through this when frames are too
+few, discovery fails, or every frame image fails to load — never leave an
+empty-but-official-looking basemap. A dev 403 storm is usually self-inflicted
+probing; stop hitting BOM and it clears.
 
-**Why:** honesty-first + keep the official source dependable. A 1-frame "loop"
-that also gets us IP-banned is strictly worse than a clean live still.
-
-**How to apply:**
-- Keep the official AU radar as the single `.gif` (one request, server-cached
-  ~60s). It MAY auto-refresh gently (preload-and-swap every few minutes = 1 req)
-  — that is fine and won't trigger blocks.
-- Do NOT stitch `.T.` frames or composite `radar_transparencies/*.png` layers
-  per view. The frames/transparency proxy endpoints are a latent footgun; never
-  wire the frontend to them.
-- The Official tab MUST degrade to the link-out ("open source") on a 403/onError
-  — it already does, and that is the correct honest behavior while blocked.
-- The genuinely ANIMATED radar in the app is the Interactive tab (RainViewer,
-  play/scrubber) — point users there for movement; BOM stays the trusted still.
-- A dev 403 storm is usually self-inflicted (probing); stop hitting BOM and it
-  clears. Production has separate egress and is normally unaffected.
+**Where the radar lives:** folded into `/:town/weather` and `/near-you`, NOT the
+`/mountain/:id` page (custom region router, no radar). The Official tab is the
+default only for AU/covered points; JP/NZ lead with the Interactive (RainViewer)
+tab since their official source is link-out only.

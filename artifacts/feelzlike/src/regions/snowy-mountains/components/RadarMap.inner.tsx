@@ -1299,28 +1299,267 @@ function ModePill({
 // BOM blocks cross-site hotlinking of its radar imagery: a browser <img>
 // pointed straight at www.bom.gov.au gets a 403 (the Referer isn't
 // bom.gov.au). The api-server's /api/bom-radar proxy refetches it
-// server-side with browser headers (verified 200 image/gif), so route BOM
-// loop gifs through it. Any non-BOM official source (none today) passes
-// through untouched; a proxy/BOM failure still trips the <img> onError and
-// degrades to the same "open source" link-out.
-const BOM_RADAR_GIF = /^https?:\/\/(?:www\.)?bom\.gov\.au\/radar\/(IDR\d+\.gif)$/;
-function officialImageSrc(imageUrl: string): string {
+// server-side with browser headers (verified 200), so route every BOM asset
+// through it. Any non-BOM official source (none today) passes through
+// untouched; a proxy/BOM failure still trips the <img> onError and degrades
+// to the same "open source" link-out.
+const BOM_RADAR_GIF = /^https?:\/\/(?:www\.)?bom\.gov\.au\/radar\/(IDR\d+)\.gif$/;
+
+function bomRadarId(imageUrl: string | null): string | null {
+  if (!imageUrl) return null;
   const m = imageUrl.match(BOM_RADAR_GIF);
-  return m ? `/api/bom-radar?type=loop&file=${m[1]}` : imageUrl;
+  return m ? m[1] : null;
 }
 
+function officialImageSrc(imageUrl: string): string {
+  const m = imageUrl.match(BOM_RADAR_GIF);
+  return m ? `/api/bom-radar?type=loop&file=${m[1]}.gif` : imageUrl;
+}
+
+function bomLayerSrc(radarId: string, layer: string): string {
+  return `/api/bom-radar?type=transparency&file=${radarId}.${layer}.png`;
+}
+
+interface BomFrame {
+  ts: string;
+  file: string;
+  url: string;
+}
+
+// Convert a BOM frame timestamp (YYYYMMDDHHMM, UTC) into a short local time.
+function frameLocalTime(ts: string): string {
+  if (ts.length !== 12) return "";
+  const d = new Date(
+    Date.UTC(
+      Number(ts.slice(0, 4)),
+      Number(ts.slice(4, 6)) - 1,
+      Number(ts.slice(6, 8)),
+      Number(ts.slice(8, 10)),
+      Number(ts.slice(10, 12)),
+    ),
+  );
+  if (Number.isNaN(d.getTime())) return "";
+  return d.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" });
+}
+
+// The "Official" tab. For an embeddable BOM radar we render a self-hosted
+// ANIMATED composite — BOM's own background/topography/locations/range layers
+// with the recent radar frames cycled on top. If frame discovery is
+// unavailable we fall back to the single still gif, and if that also fails we
+// link out · the same honest ladder we use for JP/NZ (no embeddable image).
 function OfficialView({ official }: { official: OfficialRadarSource }) {
+  const radarId = bomRadarId(official.imageUrl);
+  if (radarId) {
+    return <BomAnimatedOfficialView official={official} radarId={radarId} />;
+  }
+  return <OfficialStillView official={official} />;
+}
+
+function BomAnimatedOfficialView({
+  official,
+  radarId,
+}: {
+  official: OfficialRadarSource;
+  radarId: string;
+}) {
+  const [frames, setFrames] = useState<BomFrame[]>([]);
+  const [unavailable, setUnavailable] = useState(false);
+  const [active, setActive] = useState(0);
+  // Respect reduced-motion: discover the frames either way, but start paused so
+  // the radar doesn't auto-loop for users who've asked the OS to limit motion.
+  const [playing, setPlaying] = useState(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return true;
+    return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  });
+  // Frame discovery only HEAD-confirms the files exist · the actual GETs can
+  // still 403 (BOM rate-limiting our egress). If EVERY frame fails to load we
+  // have no real radar data, so degrade to the still/link-out rather than
+  // showing an honest-looking-but-empty basemap.
+  const [failedFrames, setFailedFrames] = useState<Set<string>>(new Set());
+  useEffect(() => {
+    setFailedFrames(new Set());
+  }, [frames]);
+
+  // Discover the recent frames (server-side: cached, de-duped, cadence-aware)
+  // and keep the list fresh while the tab stays open.
+  useEffect(() => {
+    let cancelled = false;
+    async function load() {
+      try {
+        const res = await fetch(`/api/bom-radar/frames?radar=${radarId}&count=6`);
+        if (!res.ok) throw new Error(`frames ${res.status}`);
+        const data = (await res.json()) as { frames?: BomFrame[] };
+        const next = data.frames ?? [];
+        if (cancelled) return;
+        if (next.length < 2) {
+          setUnavailable(true);
+          return;
+        }
+        setFrames(next);
+        setActive(next.length - 1);
+        setUnavailable(false);
+      } catch {
+        if (!cancelled) setUnavailable(true);
+      }
+    }
+    load();
+    const id = window.setInterval(load, 5 * 60 * 1000);
+    return () => {
+      cancelled = true;
+      window.clearInterval(id);
+    };
+  }, [radarId]);
+
+  // Advance the loop · ~550ms per frame with a longer hold on the newest.
+  useEffect(() => {
+    if (!playing || frames.length < 2) return;
+    const isNewest = active === frames.length - 1;
+    const id = window.setTimeout(
+      () => setActive((i) => (i + 1) % frames.length),
+      isNewest ? 1400 : 550,
+    );
+    return () => window.clearTimeout(id);
+  }, [playing, active, frames.length]);
+
+  // While discovering (or if discovery is unavailable, or every frame GET has
+  // failed to load) show the single still so the tab is never blank · the still
+  // keeps its own onError link-out ladder.
+  const allFramesFailed = frames.length > 0 && failedFrames.size >= frames.length;
+  if (unavailable || frames.length < 2 || allFramesFailed) {
+    return <OfficialStillView official={official} />;
+  }
+
+  const layerClass =
+    "absolute inset-0 m-auto max-h-full max-w-full object-contain pointer-events-none select-none";
+  const pixelated = { imageRendering: "pixelated" as const };
+  const activeTs = frames[active]?.ts ?? "";
+
+  return (
+    <div className="absolute inset-0 flex flex-col bg-slate-100">
+      <div className="relative flex-1 overflow-hidden p-3">
+        <img
+          src={bomLayerSrc(radarId, "background")}
+          alt=""
+          className={layerClass}
+          style={pixelated}
+          onError={(e) => {
+            e.currentTarget.style.visibility = "hidden";
+          }}
+        />
+        <img
+          src={bomLayerSrc(radarId, "topography")}
+          alt=""
+          className={layerClass}
+          style={pixelated}
+          onError={(e) => {
+            e.currentTarget.style.visibility = "hidden";
+          }}
+        />
+        {frames.map((f, i) => (
+          <img
+            key={f.ts}
+            src={f.url}
+            alt=""
+            className={cn(layerClass, "transition-opacity duration-200 ease-linear")}
+            style={{ ...pixelated, opacity: i === active ? 1 : 0 }}
+            onError={(e) => {
+              e.currentTarget.style.visibility = "hidden";
+              setFailedFrames((prev) => {
+                if (prev.has(f.ts)) return prev;
+                const next = new Set(prev);
+                next.add(f.ts);
+                return next;
+              });
+            }}
+          />
+        ))}
+        <img
+          src={bomLayerSrc(radarId, "locations")}
+          alt=""
+          className={layerClass}
+          style={pixelated}
+          onError={(e) => {
+            e.currentTarget.style.visibility = "hidden";
+          }}
+        />
+        <img
+          src={bomLayerSrc(radarId, "range")}
+          alt={official.label}
+          className={layerClass}
+          style={pixelated}
+          onError={(e) => {
+            e.currentTarget.style.visibility = "hidden";
+          }}
+        />
+
+        <div className="absolute left-3 top-3 z-[1000] flex items-center gap-2 rounded-full bg-white/95 backdrop-blur-md border border-slate-200 shadow px-2.5 py-1.5">
+          <button
+            type="button"
+            onClick={() => setPlaying((p) => !p)}
+            className="grid place-items-center w-6 h-6 rounded-full bg-slate-900 text-white hover:bg-slate-800"
+            aria-label={playing ? "pause radar loop" : "play radar loop"}
+          >
+            {playing ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+          </button>
+          <span className="text-[11px] font-semibold text-slate-700 tabular-nums">
+            {frameLocalTime(activeTs)}
+          </span>
+        </div>
+
+        <div className="absolute right-3 top-3 z-[1000] flex items-center gap-1 rounded-full bg-white/90 backdrop-blur-md border border-slate-200 shadow px-2 py-1.5">
+          {frames.map((f, i) => (
+            <button
+              key={f.ts}
+              type="button"
+              onClick={() => {
+                setPlaying(false);
+                setActive(i);
+              }}
+              aria-label={`show ${frameLocalTime(f.ts)}`}
+              // Larger transparent hit area (·my-2/px-0.5) for touch · the
+              // visible bar stays small via the inner span.
+              className="group flex items-center -my-2 py-2 px-0.5"
+            >
+              <span
+                className={cn(
+                  "block h-1.5 rounded-full transition-all",
+                  i === active
+                    ? "w-4 bg-sky-600"
+                    : "w-1.5 bg-slate-300 group-hover:bg-slate-400",
+                )}
+              />
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="absolute left-3 right-3 bottom-3 z-[1000] rounded-xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-lg px-3 py-2 flex items-center justify-between gap-3">
+        <div className="text-[11px] text-slate-600 font-medium truncate">
+          Source · {official.attribution}
+        </div>
+        <a
+          href={official.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[11px] font-semibold text-sky-700 hover:text-sky-900 whitespace-nowrap"
+        >
+          Open source →
+        </a>
+      </div>
+    </div>
+  );
+}
+
+function OfficialStillView({ official }: { official: OfficialRadarSource }) {
   // Track upstream image failure (BOM/JMA blocks our request, gif 404,
   // network blip, etc.) so we can degrade gracefully to the same
   // "open source" link-out we show for non-embeddable regions, instead
   // of leaving the user with a broken image icon.
   const [imgFailed, setImgFailed] = useState(false);
-  // BOM publishes the official radar as a single composite still · its
-  // per-frame archive keeps only the latest scan, so there is no embeddable
-  // loop to animate. We can't make it move, but we CAN keep it live: every
-  // few minutes we PRELOAD a cache-busted copy and only swap it in once it
-  // has loaded, so the picture stays current without ever flashing a blank
-  // gap. (The animated radar is the Interactive tab beside this one.)
+  // BOM also serves a single composite still gif · we keep it live by
+  // preloading a cache-busted copy every few minutes and only swapping it in
+  // once it has loaded, so the picture stays current without flashing a gap.
+  // This is the fallback when the animated frame loop isn't available.
   const baseSrc = official.imageUrl ? officialImageSrc(official.imageUrl) : null;
   const [src, setSrc] = useState<string | null>(baseSrc);
   useEffect(() => {
