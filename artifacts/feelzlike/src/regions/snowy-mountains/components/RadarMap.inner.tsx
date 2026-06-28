@@ -30,6 +30,9 @@ import {
   X,
   Maximize2,
   Crosshair,
+  ZoomIn,
+  ZoomOut,
+  RotateCcw,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -1342,6 +1345,226 @@ function frameLocalTime(ts: string): string {
   return d.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" });
 }
 
+// Lets the user pan + zoom the otherwise-static Official radar imagery so it
+// behaves like the Interactive (Leaflet) tab people compared us to. The
+// BOM/JMA composites are fixed-resolution rasters · zooming magnifies the
+// pixels (imageRendering: pixelated keeps the cells crisp-edged) rather than
+// fetching finer data, but it lets people move around and inspect a corner of
+// the loop. Wheel, pinch, double-tap and the on-screen buttons all drive one
+// shared transform. The controls live in the gesture layer, NOT the scaled
+// layer, so they stay put while the radar moves underneath.
+function PanZoomStage({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [t, setT] = useState({ s: 1, x: 0, y: 0 });
+  // Live mirror of the transform so the (effect-bound, non-passive) wheel
+  // handler and the pointer-move pan branch read the current scale without
+  // re-subscribing on every change.
+  const tRef = useRef(t);
+  tRef.current = t;
+  const pointers = useRef<Map<number, { x: number; y: number }>>(new Map());
+  const lastPinch = useRef<{ dist: number; cx: number; cy: number } | null>(null);
+  const lastPan = useRef<{ x: number; y: number } | null>(null);
+
+  const MIN = 1;
+  const MAX = 6;
+
+  // Keep scale in range and stop the image being dragged off-screen · at base
+  // scale (1) there is nothing to pan, so translation is pinned to 0.
+  const clamp = useCallback((next: { s: number; x: number; y: number }) => {
+    const el = ref.current;
+    const s = Math.min(MAX, Math.max(MIN, next.s));
+    if (!el || s <= 1) return { s, x: 0, y: 0 };
+    const maxX = ((s - 1) * el.clientWidth) / 2;
+    const maxY = ((s - 1) * el.clientHeight) / 2;
+    return {
+      s,
+      x: Math.max(-maxX, Math.min(maxX, next.x)),
+      y: Math.max(-maxY, Math.min(maxY, next.y)),
+    };
+  }, []);
+
+  // Zoom by `factor`, keeping the point (mx,my) · measured from the stage
+  // centre in CSS px · pinned under the cursor / pinch midpoint. The inner
+  // layer uses transform `translate(x,y) scale(s)` with a centre origin, so a
+  // point's screen offset from centre is `point*s + (x,y)`; solving to keep the
+  // anchor fixed gives the new translate below.
+  const zoomAbout = useCallback(
+    (factor: number, mx: number, my: number) => {
+      setT((p) => {
+        const ns = Math.min(MAX, Math.max(MIN, p.s * factor));
+        const ratio = ns / p.s;
+        return clamp({ s: ns, x: mx - (mx - p.x) * ratio, y: my - (my - p.y) * ratio });
+      });
+    },
+    [clamp],
+  );
+
+  const offsetFromCentre = (clientX: number, clientY: number) => {
+    const el = ref.current;
+    if (!el) return { x: 0, y: 0 };
+    const r = el.getBoundingClientRect();
+    return { x: clientX - r.left - r.width / 2, y: clientY - r.top - r.height / 2 };
+  };
+
+  // Wheel must be a native, non-passive listener so preventDefault works ·
+  // React's synthetic onWheel can be passive depending on the build.
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      const m = offsetFromCentre(e.clientX, e.clientY);
+      zoomAbout(Math.exp(-e.deltaY * 0.0015), m.x, m.y);
+    };
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
+  }, [zoomAbout]);
+
+  const capture = (id: number) => {
+    try {
+      ref.current?.setPointerCapture(id);
+    } catch {
+      /* setPointerCapture can throw if the pointer already ended · ignore */
+    }
+  };
+
+  const onPointerDown = (e: React.PointerEvent) => {
+    pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pointers.current.size === 1) {
+      lastPan.current = { x: e.clientX, y: e.clientY };
+      // Only capture (and thus block native scroll) once zoomed · at base
+      // scale a one-finger drag should still scroll the page past the radar.
+      if (tRef.current.s > 1) capture(e.pointerId);
+    } else if (pointers.current.size === 2) {
+      const [a, b] = [...pointers.current.values()];
+      lastPinch.current = {
+        dist: Math.hypot(a.x - b.x, a.y - b.y),
+        cx: (a.x + b.x) / 2,
+        cy: (a.y + b.y) / 2,
+      };
+      lastPan.current = null;
+      capture(e.pointerId);
+    }
+  };
+
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (!pointers.current.has(e.pointerId)) return;
+    pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pointers.current.size >= 2) {
+      const [a, b] = [...pointers.current.values()];
+      const dist = Math.hypot(a.x - b.x, a.y - b.y);
+      const cx = (a.x + b.x) / 2;
+      const cy = (a.y + b.y) / 2;
+      const prev = lastPinch.current;
+      if (prev && prev.dist > 0) {
+        const m = offsetFromCentre(cx, cy);
+        zoomAbout(dist / prev.dist, m.x, m.y);
+        const mdx = cx - prev.cx;
+        const mdy = cy - prev.cy;
+        if (mdx || mdy) setT((p) => clamp({ ...p, x: p.x + mdx, y: p.y + mdy }));
+      }
+      lastPinch.current = { dist, cx, cy };
+    } else if (lastPan.current && tRef.current.s > 1) {
+      const dx = e.clientX - lastPan.current.x;
+      const dy = e.clientY - lastPan.current.y;
+      lastPan.current = { x: e.clientX, y: e.clientY };
+      setT((p) => clamp({ ...p, x: p.x + dx, y: p.y + dy }));
+    }
+  };
+
+  const onPointerEnd = (e: React.PointerEvent) => {
+    pointers.current.delete(e.pointerId);
+    if (pointers.current.size < 2) lastPinch.current = null;
+    if (pointers.current.size === 1) {
+      const [p] = [...pointers.current.values()];
+      lastPan.current = { x: p.x, y: p.y };
+    } else if (pointers.current.size === 0) {
+      lastPan.current = null;
+    }
+  };
+
+  const reset = () => setT({ s: 1, x: 0, y: 0 });
+  const zoomed = t.s > 1.01;
+  // Stop control taps from also starting a pan on the stage underneath.
+  const stop = (e: React.PointerEvent) => e.stopPropagation();
+
+  return (
+    <div
+      ref={ref}
+      data-radar-gesture
+      className={cn(
+        "absolute inset-0 overflow-hidden select-none",
+        zoomed ? "cursor-grab" : "cursor-default",
+      )}
+      // pan-y at rest lets a one-finger drag scroll the page past the tall
+      // radar; once zoomed we own every direction so the user can pan freely.
+      style={{ touchAction: zoomed ? "none" : "pan-y" }}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerEnd}
+      onPointerCancel={onPointerEnd}
+      onDoubleClick={(e) => {
+        if (zoomed) {
+          reset();
+          return;
+        }
+        const m = offsetFromCentre(e.clientX, e.clientY);
+        zoomAbout(2.5, m.x, m.y);
+      }}
+    >
+      <div
+        className="absolute inset-0"
+        style={{
+          transform: `translate3d(${t.x}px, ${t.y}px, 0) scale(${t.s})`,
+          transformOrigin: "center center",
+          willChange: "transform",
+        }}
+      >
+        {children}
+      </div>
+
+      <div
+        className="absolute bottom-16 right-3 z-[1000] flex flex-col gap-1 rounded-xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-lg p-1"
+        // Keep taps on the controls from bubbling to the stage · a quick
+        // double-tap on +/- must not also fire the stage's double-click
+        // zoom/reset underneath.
+        onClick={(e) => e.stopPropagation()}
+        onDoubleClick={(e) => e.stopPropagation()}
+      >
+        <button
+          type="button"
+          aria-label="zoom in"
+          onPointerDown={stop}
+          onClick={() => zoomAbout(1.6, 0, 0)}
+          className="grid place-items-center w-7 h-7 rounded-lg text-slate-700 hover:bg-slate-100"
+        >
+          <ZoomIn className="w-4 h-4" />
+        </button>
+        <button
+          type="button"
+          aria-label="zoom out"
+          onPointerDown={stop}
+          onClick={() => zoomAbout(1 / 1.6, 0, 0)}
+          className="grid place-items-center w-7 h-7 rounded-lg text-slate-700 hover:bg-slate-100"
+        >
+          <ZoomOut className="w-4 h-4" />
+        </button>
+        {zoomed && (
+          <button
+            type="button"
+            aria-label="reset zoom"
+            onPointerDown={stop}
+            onClick={reset}
+            className="grid place-items-center w-7 h-7 rounded-lg text-slate-700 hover:bg-slate-100"
+          >
+            <RotateCcw className="w-4 h-4" />
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
 // The "Official" tab. For an embeddable BOM radar we render a self-hosted
 // ANIMATED composite — BOM's own background/topography/locations/range layers
 // with the recent radar frames cycled on top. If frame discovery is
@@ -1437,6 +1660,7 @@ function BomAnimatedOfficialView({
   return (
     <div className="absolute inset-0 flex flex-col bg-slate-100">
       <div className="relative flex-1 overflow-hidden p-3">
+        <PanZoomStage>
         <img
           src={bomLayerSrc(radarId, "background")}
           alt=""
@@ -1491,6 +1715,7 @@ function BomAnimatedOfficialView({
             e.currentTarget.style.visibility = "hidden";
           }}
         />
+        </PanZoomStage>
 
         <div className="absolute left-3 top-3 z-[1000] flex items-center gap-2 rounded-full bg-white/95 backdrop-blur-md border border-slate-200 shadow px-2.5 py-1.5">
           <button
@@ -1583,16 +1808,19 @@ function OfficialStillView({ official }: { official: OfficialRadarSource }) {
   }, [baseSrc]);
   return (
     <div className="absolute inset-0 flex flex-col bg-slate-100">
-      <div className="flex-1 grid place-items-center overflow-hidden p-4">
+      <div className="relative flex-1 overflow-hidden p-4">
         {src && !imgFailed ? (
-          <img
-            src={src}
-            alt={official.label}
-            className="max-h-full max-w-full object-contain"
-            style={{ imageRendering: "pixelated" }}
-            onError={() => setImgFailed(true)}
-          />
+          <PanZoomStage>
+            <img
+              src={src}
+              alt={official.label}
+              className="absolute inset-0 m-auto max-h-full max-w-full object-contain pointer-events-none select-none"
+              style={{ imageRendering: "pixelated" }}
+              onError={() => setImgFailed(true)}
+            />
+          </PanZoomStage>
         ) : (
+          <div className="absolute inset-0 grid place-items-center p-4">
           <div className="text-center max-w-sm px-4">
             <p className="text-sm text-slate-700 font-semibold mb-2">
               {official.label}
@@ -1609,6 +1837,7 @@ function OfficialStillView({ official }: { official: OfficialRadarSource }) {
             >
               Open {official.label}
             </a>
+          </div>
           </div>
         )}
       </div>

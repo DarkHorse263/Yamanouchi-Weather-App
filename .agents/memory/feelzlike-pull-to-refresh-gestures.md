@@ -26,6 +26,34 @@ preventDefault is in play.
 a CSS overflow bug. First instinct (add overflow-x) was already present; the real
 cause was a different component hijacking the touch.
 
+# Official BOM radar is an img stack · gestures come from a wrapper, not the layers
+
+The "Official" BOM tab is a stack of plain `<img>` layers (background +
+range + cycled radar frames, or one still gif) rendered `pointer-events-none`
+on purpose · the images themselves never pan/zoom. To make that view
+movable, the layers are wrapped in a `PanZoomStage` that owns ALL gestures
+(wheel/pinch/double-tap/one-finger-pan + on-screen +/-/reset) via a single
+CSS `translate3d + scale` transform, clamped to scale 1..6 with translation
+pinned to 0 at base scale (prevents the "lost image" failure).
+
+**Rules that must not regress:**
+- Keep the playback control + frame dots OUTSIDE the transformed child, and
+  keep the zoom buttons inside the stage but outside the scaled layer, so they
+  stay fixed while the radar moves.
+- `touch-action: pan-y` at rest (so a one-finger drag still scrolls the page
+  past the tall radar) flips to `none` only once zoomed; pointer-capture is
+  taken only when zoomed/pinching for the same reason.
+- The stage is tagged `[data-radar-gesture]` and PullToRefresh's `onTouchStart`
+  bails inside it · otherwise a downward drag on the radar both pans AND arms
+  pull-to-refresh.
+- The zoom-control container stops `click`/`dblclick` propagation so a quick
+  double-tap on +/- doesn't also fire the stage's double-tap zoom/reset.
+
+**Why:** user reported the BOM radar rendered but "can't move around or zoom"
+· the static img stack was working as designed (no interaction). The interactive
+Leaflet tab already panned; the fix was making the raster Official view
+interactive without breaking page scroll or the image fallback ladder.
+
 # Navigation scroll-to-top must not fight the Back bar
 
 `ScrollToTop` resets `window.scrollTo(0,0)` on wouter location change so forward

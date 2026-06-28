@@ -137,12 +137,27 @@ export function PullToRefresh() {
       return false;
     };
 
+    // Custom-gesture surfaces (the Official radar pan/zoom stage) mark
+    // themselves with [data-radar-gesture]. They drive their own pan/zoom via
+    // Pointer Events + touch-action, so pull-to-refresh must not also arm on
+    // them · otherwise a downward drag would both move the radar and trigger a
+    // refresh.
+    const isInsideGestureSurface = (node: EventTarget | null): boolean => {
+      let el = node as HTMLElement | null;
+      while (el) {
+        if (el.dataset && el.dataset.radarGesture !== undefined) return true;
+        el = el.parentElement;
+      }
+      return false;
+    };
+
     const onTouchStart = (e: TouchEvent) => {
       if (refreshingRef.current) return;
       if (window.scrollY > 0) return;
       if (isInsideEditable(e.target)) return;
       if (hasScrolledAncestor(e.target)) return;
       if (hasHorizontalScrollAncestor(e.target)) return;
+      if (isInsideGestureSurface(e.target)) return;
       const t = e.touches[0];
       if (!t) return;
       startYRef.current = t.clientY;
