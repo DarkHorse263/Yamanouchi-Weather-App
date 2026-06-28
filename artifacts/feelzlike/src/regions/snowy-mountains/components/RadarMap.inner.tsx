@@ -57,7 +57,11 @@ interface RegionConfig {
   windy: { lat: number; lon: number; zoom: number };
   official: {
     label: string;
-    /** Direct image URL we hotlink (e.g. BOM radar gif). null = link-out only. */
+    /**
+     * Official source image (e.g. a BOM radar loop gif). BOM blocks direct
+     * cross-site hotlinking, so OfficialView routes these through the
+     * /api/bom-radar proxy. null = link-out only (JP/NZ).
+     */
     imageUrl: string | null;
     /** Page URL for "open source" link. */
     href: string;
@@ -72,25 +76,29 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       label: "BOM Captain's Flat",
       imageUrl: "https://www.bom.gov.au/radar/IDR403.gif",
       href: "https://www.bom.gov.au/products/IDR403.loop.shtml",
-      attribution: "Bureau of Meteorology · IDR403 · 256 km",
+      attribution: "Bureau of Meteorology · IDR403 · 128 km",
     },
   },
   "victorias-high-country": {
     windy: { lat: -36.86, lon: 147.27, zoom: 9 },
     official: {
       label: "BOM Yarrawonga",
-      imageUrl: "https://www.bom.gov.au/radar/IDR49.gif",
-      href: "https://www.bom.gov.au/products/IDR49.loop.shtml",
-      attribution: "Bureau of Meteorology · IDR49 · 256 km",
+      imageUrl: "https://www.bom.gov.au/radar/IDR493.gif",
+      href: "https://www.bom.gov.au/products/IDR493.loop.shtml",
+      attribution: "Bureau of Meteorology · IDR493 · 128 km",
     },
   },
   tasmania: {
     windy: { lat: -41.54, lon: 147.67, zoom: 9 },
     official: {
+      // Mt Koonya (Hobart) is the only BOM radar serving Tasmania. Ben
+      // Lomond (the region's default town, in the NE) sits beyond the 128 km
+      // loop, so use the 256 km product (IDR762) to keep the ski field on
+      // the radar · the trade-off is slightly coarser detail near Hobart.
       label: "BOM Mt Koonya (Hobart)",
-      imageUrl: "https://www.bom.gov.au/radar/IDR761.gif",
-      href: "https://www.bom.gov.au/products/IDR761.loop.shtml",
-      attribution: "Bureau of Meteorology · IDR761 · 256 km",
+      imageUrl: "https://www.bom.gov.au/radar/IDR762.gif",
+      href: "https://www.bom.gov.au/products/IDR762.loop.shtml",
+      attribution: "Bureau of Meteorology · IDR762 · 256 km",
     },
   },
   yamanouchi: {
@@ -570,12 +578,28 @@ export default function RadarMapInner({
   const regionCfg = REGION_CONFIG[region];
   const regionDefaults = REGION_DEFAULTS[region];
   const effectiveCenter = center ?? regionDefaults.center;
-  // Always lead with the Interactive view (the Ski Radar experience).
-  // It's the most resilient of the three: the dark basemap + RainViewer
-  // radar each render independently and fail gracefully on their own.
-  // The Windy "Expert" tab and Official tab each depend on a single
-  // third-party source · users can still flip to them manually.
-  const [view, setView] = useState<ViewMode>("interactive");
+  // Australian regions lead with the Official BOM radar (the locally
+  // trusted, sharper source) whenever one is configured; every other
+  // region leads with the Interactive view (the Ski Radar experience),
+  // which is the most resilient · its dark basemap + RainViewer radar each
+  // render independently and fail gracefully. Either way users can flip
+  // tabs, and the Official view itself link-outs if BOM ever blocks us.
+  const defaultView: ViewMode = regionCfg.official.imageUrl
+    ? "official"
+    : "interactive";
+  const [view, setView] = useState<ViewMode>(defaultView);
+  // Re-apply the per-region default tab if the region changes while this
+  // component stays mounted (client-side nav can reuse the same town-weather
+  // instance). Without this an AU region could inherit "interactive" from a
+  // prior JP/NZ page, or JP/NZ could inherit "official" (the link-out) from
+  // an AU page. Adjusting state during render is React's recommended pattern
+  // for this and avoids a wrong-tab flash; manual tab picks still persist
+  // within a region because prevRegion only changes on a real region switch.
+  const [prevRegion, setPrevRegion] = useState(region);
+  if (region !== prevRegion) {
+    setPrevRegion(region);
+    setView(defaultView);
+  }
   // Active Windy overlay · drives the Windy iframe's `overlay=` param.
   const [windyOverlay, setWindyOverlay] = useState<"snow" | "wind" | "temp" | "rain">(
     season === "winter" ? "snow" : "rain",
@@ -1239,6 +1263,19 @@ function ModePill({
   );
 }
 
+// BOM blocks cross-site hotlinking of its radar imagery: a browser <img>
+// pointed straight at www.bom.gov.au gets a 403 (the Referer isn't
+// bom.gov.au). The api-server's /api/bom-radar proxy refetches it
+// server-side with browser headers (verified 200 image/gif), so route BOM
+// loop gifs through it. Any non-BOM official source (none today) passes
+// through untouched; a proxy/BOM failure still trips the <img> onError and
+// degrades to the same "open source" link-out.
+const BOM_RADAR_GIF = /^https?:\/\/(?:www\.)?bom\.gov\.au\/radar\/(IDR\d+\.gif)$/;
+function officialImageSrc(imageUrl: string): string {
+  const m = imageUrl.match(BOM_RADAR_GIF);
+  return m ? `/api/bom-radar?type=loop&file=${m[1]}` : imageUrl;
+}
+
 function OfficialView({ official }: { official: RegionConfig["official"] }) {
   // Track upstream image failure (BOM/JMA blocks our request, gif 404,
   // network blip, etc.) so we can degrade gracefully to the same
@@ -1250,7 +1287,7 @@ function OfficialView({ official }: { official: RegionConfig["official"] }) {
       <div className="flex-1 grid place-items-center overflow-hidden p-4">
         {official.imageUrl && !imgFailed ? (
           <img
-            src={official.imageUrl}
+            src={officialImageSrc(official.imageUrl)}
             alt={official.label}
             className="max-h-full max-w-full object-contain"
             style={{ imageRendering: "pixelated" }}
