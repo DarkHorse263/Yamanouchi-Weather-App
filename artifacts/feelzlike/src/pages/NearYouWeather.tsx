@@ -51,9 +51,9 @@ function asRadarRegion(id: string | null | undefined): RadarRegionKey {
     : "snowy-mountains";
 }
 
-// Snow-season guess from hemisphere + month · drives only the radar's precip
-// toggle label (snow vs rain), so an approximate call is fine. S hemisphere
-// winter is Jun-Sep, N hemisphere winter is Nov-Mar.
+// Snow-season guess from hemisphere + month · feeds the radar map's precip
+// styling, so an approximate call is fine. S hemisphere winter is Jun-Sep,
+// N hemisphere winter is Nov-Mar.
 function seasonFor(lat: number): "winter" | "green" {
   const m = new Date().getMonth(); // 0 = Jan
   if (lat < 0) return m >= 5 && m <= 8 ? "winter" : "green";
@@ -564,8 +564,10 @@ function RadarSection({
   region: RadarRegionKey;
 }) {
   const season = seasonFor(lat);
-  const headline = season === "winter" ? "live snow radar" : "live rain radar";
-  const byline = season === "winter" ? "snow radar" : "rain radar";
+  // Neutral label · "live radar" reads honestly everywhere, including spots
+  // where it never snows. Season still drives the map's precip styling below.
+  const headline = "live radar";
+  const byline = "radar";
   // Official source is this exact coordinate's nearest covering BOM radar (or
   // null when none reaches it · outside every radar's sweep, or overseas), not
   // the nearest curated ski region's radar. Windy centres on the user. `region`

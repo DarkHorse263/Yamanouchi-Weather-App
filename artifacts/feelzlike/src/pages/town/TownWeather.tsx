@@ -51,12 +51,8 @@ export function TownWeather() {
         byline={`${region.name} · ${t(town.name, town.nameJa)}`}
         title={t(`${town.name} weather forecast`, `${town.name}の天気予報`)}
         description={t(
-          pageSeason === "winter"
-            ? "Current, hourly and 7-day outlook for town. Live snow radar below."
-            : "Current, hourly and 7-day outlook for town. Live rain radar below.",
-          pageSeason === "winter"
-            ? "町の現在・時間別・7日間予報。下に降雪レーダー。"
-            : "町の現在・時間別・7日間予報。下に降雨レーダー。",
+          "Current, hourly and 7-day outlook for town. Live radar below.",
+          "町の現在・時間別・7日間予報。下にライブレーダー。",
         )}
         stamp={
           <UpdateStamp
@@ -107,12 +103,10 @@ function Radar({ t }: { t: (en: string, ja: string) => string }) {
   const { region } = useRegion();
   const seasonCtx = useOptionalSeason();
   const season = seasonCtx?.season ?? "winter";
-  const headline = season === "winter"
-    ? t("Live snow radar", "ライブ降雪レーダー")
-    : t("Live rain radar", "ライブ降雨レーダー");
-  const byline = season === "winter"
-    ? t("Snow radar", "降雪レーダー")
-    : t("Rain radar", "降雨レーダー");
+  // Neutral label · "live radar" reads honestly everywhere, including
+  // green-season regions where it never snows. Season still drives the map.
+  const headline = t("Live radar", "ライブレーダー");
+  const byline = t("Radar", "レーダー");
   return (
     <section className="mt-4 rounded-2xl border border-border bg-white overflow-hidden">
       <div className="flex items-center justify-between gap-3 px-5 pt-4 pb-3 flex-wrap">

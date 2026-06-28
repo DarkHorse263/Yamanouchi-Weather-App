@@ -119,8 +119,8 @@ function buildSections(isJP: boolean): readonly Tile[] {
       icon: CloudSun,
       label: "Weather forecast",
       labelJa: "天気予報",
-      blurb: "Full in-town forecast with snow radar - current, hourly, 7-day",
-      blurbJa: "町の総合天気予報・雨雲レーダー - 現在・時間別・7日間",
+      blurb: "Full in-town forecast with live radar - current, hourly, 7-day",
+      blurbJa: "町の総合天気予報・ライブレーダー - 現在・時間別・7日間",
     },
     {
       path: "/roads",
