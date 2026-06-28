@@ -120,9 +120,17 @@ async function headExists(url: string): Promise<boolean> {
 
 router.get("/bom-radar/frames", async (req: Request, res: Response) => {
   const radarId = (req.query.radar as string) || "IDR403";
-  // `count` is the *target* number of real frames to return; `window` is
-  // how many candidate 6-min slots we probe to find them. IDR403 has
-  // gaps so we probe a 2-hour window to reliably surface 4-6 frames.
+  // WARNING (verified Jun 2026): BOM's /radar/IDR<id>.T.<ts>.png archive now
+  // retains only ~1 recent frame, and BOM IP-rate-limits (403s) the WHOLE
+  // environment under request volume - and this endpoint HEAD-checks up to
+  // `window` URLs per call, a classic block trigger. In practice it returns
+  // []/1 frame, so it is a footgun. It is intentionally NOT wired to the
+  // frontend: the Official radar renders the single cached .gif instead. Do
+  // not build an animated BOM loop on this endpoint. See
+  // .agents/memory/feelzlike-bom-radar-animation.md for the full rationale.
+  //
+  // `count` is the *target* number of real frames to return; `window` is how
+  // many candidate 6-min slots we probe to find them.
   const count = Math.min(12, Math.max(1, parseInt(req.query.count as string) || 6));
   const probeWindow = Math.min(40, Math.max(count, parseInt(req.query.window as string) || 20));
 

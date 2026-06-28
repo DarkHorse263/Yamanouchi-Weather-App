@@ -607,6 +607,12 @@ export default function RadarMapInner({
   const defaultView: ViewMode = effectiveOfficial?.imageUrl
     ? "official"
     : "interactive";
+  // When an embeddable BOM image exists (any covered AU point, or an AU
+  // region) lead the tab row with Official so the locally trusted radar
+  // reads as the MAIN one · not a third option after Interactive/Expert.
+  // JP/NZ have no embeddable image (Official is link-out only), so they keep
+  // Interactive first and Official last.
+  const officialIsPrimary = !!effectiveOfficial?.imageUrl;
   const [view, setView] = useState<ViewMode>(defaultView);
   // Re-apply the default tab whenever the official SOURCE changes · a real
   // region switch, or the /near-you user searching a new place / GPS update ·
@@ -823,9 +829,12 @@ export default function RadarMapInner({
           (default · dark map, weather layers, click-to-read points), Windy
           (rich multi-layer), and the official regional source. */}
       <div className="absolute top-3 left-3 z-[1000] flex gap-1 rounded-xl bg-slate-900/90 backdrop-blur-md border border-white/10 shadow-lg p-1">
+        {showOfficialTab && officialIsPrimary && (
+          <TabPill active={view === "official"} onClick={() => setView("official")} icon={Radio} label="Official" />
+        )}
         <TabPill active={view === "interactive"} onClick={() => setView("interactive")} icon={MapIcon} label="Interactive" />
         <TabPill active={view === "windy"} onClick={() => setView("windy")} icon={Globe2} label="Expert" />
-        {showOfficialTab && (
+        {showOfficialTab && !officialIsPrimary && (
           <TabPill active={view === "official"} onClick={() => setView("official")} icon={Radio} label="Official" />
         )}
       </div>
@@ -1306,12 +1315,39 @@ function OfficialView({ official }: { official: OfficialRadarSource }) {
   // "open source" link-out we show for non-embeddable regions, instead
   // of leaving the user with a broken image icon.
   const [imgFailed, setImgFailed] = useState(false);
+  // BOM publishes the official radar as a single composite still · its
+  // per-frame archive keeps only the latest scan, so there is no embeddable
+  // loop to animate. We can't make it move, but we CAN keep it live: every
+  // few minutes we PRELOAD a cache-busted copy and only swap it in once it
+  // has loaded, so the picture stays current without ever flashing a blank
+  // gap. (The animated radar is the Interactive tab beside this one.)
+  const baseSrc = official.imageUrl ? officialImageSrc(official.imageUrl) : null;
+  const [src, setSrc] = useState<string | null>(baseSrc);
+  useEffect(() => {
+    setSrc(baseSrc);
+    setImgFailed(false);
+    if (!baseSrc) return;
+    const id = window.setInterval(() => {
+      const next = `${baseSrc}${baseSrc.includes("?") ? "&" : "?"}r=${Date.now()}`;
+      const img = new Image();
+      // Clearing imgFailed on a successful preload doubles as gentle
+      // auto-recovery: if the initial load hit a transient BOM 403/blip and
+      // showed the link-out, the next 4-min refresh that loads cleanly brings
+      // the official image back · no extra requests beyond the refresh itself.
+      img.onload = () => {
+        setSrc(next);
+        setImgFailed(false);
+      };
+      img.src = next;
+    }, 4 * 60 * 1000);
+    return () => window.clearInterval(id);
+  }, [baseSrc]);
   return (
     <div className="absolute inset-0 flex flex-col bg-slate-100">
       <div className="flex-1 grid place-items-center overflow-hidden p-4">
-        {official.imageUrl && !imgFailed ? (
+        {src && !imgFailed ? (
           <img
-            src={officialImageSrc(official.imageUrl)}
+            src={src}
             alt={official.label}
             className="max-h-full max-w-full object-contain"
             style={{ imageRendering: "pixelated" }}
