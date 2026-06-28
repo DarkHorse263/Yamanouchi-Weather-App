@@ -11,14 +11,24 @@ import { BellRing, Mail, Snowflake, Loader2, CheckCircle2, Check } from "lucide-
  * defaults to "useful but not noisy" (15cm / 48hr), unsubscribe in one click.
  */
 
-// Region list mirrors the active region registry in src/regions/index.ts.
-// Add a region here when it goes live so subscribers can opt into it.
-// Tickbox UI lets users select multiple — easy to extend as more regions
-// come online.
+// Region list mirrors the active region registry (src/regions/index.ts) and the
+// server's REGION_IDS (api-server/src/lib/regions.ts). The alert evaluator
+// monitors every one of these via REGION_ANCHORS, so keep all three in sync
+// when a region goes live. Tickbox UI lets users select multiple.
 const REGIONS: Array<{ id: string; nameEn: string; nameJa: string; country: string }> = [
+  // Australia
   { id: "snowy-mountains", nameEn: "Snowy Mountains", nameJa: "スノーウィーマウンテンズ", country: "AU · NSW" },
   { id: "victorias-high-country", nameEn: "Victoria's High Country", nameJa: "ビクトリア高原地方", country: "AU · VIC" },
+  { id: "tasmania", nameEn: "Tasmania", nameJa: "タスマニア", country: "AU · TAS" },
+  // Japan
   { id: "yamanouchi", nameEn: "Yamanouchi", nameJa: "山ノ内町", country: "JP · Nagano" },
+  { id: "nozawa-onsen", nameEn: "Nozawa Onsen", nameJa: "野沢温泉村", country: "JP · Nagano" },
+  { id: "iiyama", nameEn: "Iiyama", nameJa: "飯山市", country: "JP · Nagano" },
+  // New Zealand
+  { id: "queenstown", nameEn: "Queenstown", nameJa: "クイーンズタウン", country: "NZ · Otago" },
+  { id: "wanaka", nameEn: "Wanaka", nameJa: "ワナカ", country: "NZ · Otago" },
+  { id: "mt-hutt", nameEn: "Mt Hutt", nameJa: "マウントハット", country: "NZ · Canterbury" },
+  { id: "ruapehu", nameEn: "Ruapehu", nameJa: "ルアペフ", country: "NZ · North Island" },
 ];
 
 const HORIZONS: Array<{ value: 24 | 48 | 72; label: string; labelJa: string }> = [

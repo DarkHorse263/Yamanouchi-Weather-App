@@ -16,6 +16,13 @@ Also required, not in that comment:
   is missing. New regions with no curated transport still need a `[]` entry.
 - `artifacts/feelzlike/src/pages/Countries.tsx` — both `FALLBACK_REGIONS` and
   `PRIMARY_TOWN`.
+- `artifacts/feelzlike/src/components/AlertSubscribeForm.tsx` — its own hardcoded
+  `REGIONS` array (id/nameEn/nameJa/country) drives the powder-alert opt-in
+  tickboxes. It is NOT typed against RegionId, so a missing region silently just
+  vanishes from the form (no compile error) even though the backend evaluator
+  (REGION_ANCHORS) and subscribe validation (REGION_IDS) already accept it. This
+  is how the form drifted to only 3 of 10 live regions. JA names use the formal
+  municipal suffix for JP towns (山ノ内町/野沢温泉村/飯山市); katakana for AU/NZ.
 - `RadarMap.inner.tsx` keeps its OWN local `RegionKey` union + REGION_CONFIG /
   REGION_DEFAULTS / REGION_COUNTRY / COUNTRY_LABEL / REGION_LABEL (self-contained
   by design — duplicated on purpose).
