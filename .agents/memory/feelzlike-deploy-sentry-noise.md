@@ -5,10 +5,17 @@ description: How feelzlike publishes (application router, config in .replit) and
 
 # feelzlike deployment topology
 
-- This repl publishes via the **`.replit` `[deployment]`** block (router = `application`, target `autoscale`), NOT per-artifact `artifact.toml` — those files do not exist here. Don't go hunting for `.replit-artifact/artifact.toml`.
-- Run command: `NODE_ENV=production PORT=80 node artifacts/api-server/dist/index.cjs`. The single api-server process serves the feelzlike static SPA at `/` AND the API under `/api`.
-- Autoscale startup probe hits **`GET /`** (api-server returns the SPA index → 200). `/healthz` and `/readyz` exist but are mounted under `/api`, so they 404 at root — they are NOT the probe path.
-- The build hook filters `@workspace/yamanouchi`, which is not a package (regions live inside feelzlike). It prints `No projects matched the filters` and **exits 0** — a harmless stale no-op. feelzlike + api-server are built by the deploy/artifact system, not that hook.
+- This repl deploys in **ARTIFACT mode** (pnpm workspace, target `autoscale`): each artifact's `.replit-artifact/artifact.toml` `[services.*.production]` controls the REAL build/run. Those files DO exist and ARE committed (publish detection reads the committed git tree). The `.replit` `[deployment].run` is **ignored**; `.replit` `[deployment].build` is only a repo-root **pre-build hook**. (Earlier note saying "no artifact.toml here" was WRONG.)
+- feelzlike artifact (`kind=web`): `serve = "static"`, `publicDir = artifacts/feelzlike/dist/public`, build = `pnpm --filter @workspace/feelzlike run build`, env `BASE_PATH=/`. The SPA ships as prebuilt static files (dist is gitignored but rebuilt at deploy by THIS build). api-server artifact (`kind=api`): build = `pnpm --filter @workspace/api-server run build`, run = `node artifacts/api-server/dist/index.cjs` (PORT 8080), startup probe **`path=/api/healthz`** (NOT `GET /`). The application router stitches them: static SPA at `/`, API at `/api`.
+- The `.replit` pre-build hook is `BASE_PATH=/yamanouchi/ ... pnpm --filter @workspace/yamanouchi run build && pnpm --filter @workspace/api-server run build`. The yamanouchi filter matches NO package (renamed to `@workspace/feelzlike`) → prints `No projects matched the filters` and **exits 0** — harmless stale no-op; the api-server half is redundant with its artifact.toml build. Don't "fix" this to chase a publish failure (same-day successes prove it isn't the cause), and do NOT graft `BASE_PATH=/yamanouchi/` onto a real feelzlike build — the SPA is served at root, asset paths must be `/…`.
+
+# A ~3s, ZERO-log deploy build failure = transient platform glitch, NOT your code
+
+A failed deploy build whose `timeUpdated - timeCreated ≈ 3s` AND whose `getDeploymentBuild(id).logs.length === 0` died at the deployer's setup/validation stage before any build command ran. This is platform-side (cloud_run hiccup), not a code or config problem.
+
+**Why:** Successful builds here take 3–4 min and emit logs; health-check/promote failures also emit logs. Zero log lines + ~3s means no build command executed at all. Proven once: the failed build sat between three same-day SUCCESS builds on the same commit, both artifact builds passed locally, deploy config was committed + unchanged, and the live site stayed healthy.
+
+**How to apply:** `listDeploymentBuilds()` → find the failed id, compare its duration to neighboring successes. `getDeploymentBuild(id)` → check `logs.length` (0) and `suspendedReason` (absent = not billing/quota). Confirm `getDeploymentInfo().hasSuccessfulBuild` and curl the live `/` + `/api/healthz` for 200 (the last good build keeps serving, so merged code is usually already live). Then just have the owner re-publish — do NOT edit code/config for a zero-log 3s failure. (A `suspended` status or non-empty logs means it is NOT this; debug normally.)
 
 # "works in dev, INTERNAL_ERROR on live" = STALE DEPLOY, not a code/DB bug
 
