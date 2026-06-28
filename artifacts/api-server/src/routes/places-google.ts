@@ -226,6 +226,23 @@ router.get("/places/photo", async (req, res) => {
  * name, address and coordinates. The key stays server-side and we return a
  * small, stable shape (no Google-internal field names leaked).
  */
+// Bounding boxes for the three countries feelzlike serves (AU incl. Tasmania,
+// JP, NZ). Google Text Search has no clean multi-country restriction
+// (regionCode is single; includedRegionCodes is autocomplete-only), so we drop
+// any result outside all three boxes. This strips same-named places on other
+// continents and keeps AU/JP/NZ towns surfacing cleanly.
+const SERVED_BBOXES: Array<[number, number, number, number]> = [
+  [-44.0, -9.0, 112.0, 154.5], // Australia
+  [24.0, 46.5, 122.0, 146.5], // Japan
+  [-47.5, -33.5, 166.0, 179.5], // New Zealand
+];
+function inServedRegion(lat: number, lng: number): boolean {
+  return SERVED_BBOXES.some(
+    ([minLat, maxLat, minLng, maxLng]) =>
+      lat >= minLat && lat <= maxLat && lng >= minLng && lng <= maxLng,
+  );
+}
+
 router.get("/places/search", async (req, res) => {
   const apiKey = process.env["GOOGLE_PLACES_API_KEY"];
   if (!apiKey) {
@@ -257,7 +274,11 @@ router.get("/places/search", async (req, res) => {
       },
       body: JSON.stringify({
         textQuery: q,
-        maxResultCount: max,
+        // Over-fetch, then filter to AU/JP/NZ and slice below. An ambiguous
+        // name (e.g. "Bright", "Marysville") can have all of its top few hits
+        // abroad, so ask for the upstream max (20) or filtering could leave
+        // zero served-region results.
+        maxResultCount: 20,
         languageCode: "en",
       }),
       signal: AbortSignal.timeout(8000),
@@ -295,7 +316,9 @@ router.get("/places/search", async (req, res) => {
         address: p.formattedAddress ?? "",
         lat: p.location!.latitude,
         lng: p.location!.longitude,
-      }));
+      }))
+      .filter((p) => inServedRegion(p.lat, p.lng))
+      .slice(0, max);
 
     // Place geometry is stable, so cache for an hour at the edge.
     res.setHeader("Cache-Control", "public, max-age=3600, s-maxage=3600");

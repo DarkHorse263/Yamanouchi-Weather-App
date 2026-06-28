@@ -278,7 +278,7 @@ export function TownHome() {
   const lastUpdated = (() => {
     const candidates = [
       (weatherQ.data as any)?.lastUpdated,
-      (townWeatherQ.data as any)?.current?.observedAt,
+      (townWeatherQ.data as any)?.current?.time,
     ].filter((v): v is string => typeof v === "string" && v.length > 0);
     if (candidates.length === 0) return null;
     return candidates.reduce((newest, ts) => {

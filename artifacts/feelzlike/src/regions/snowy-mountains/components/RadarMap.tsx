@@ -1,5 +1,6 @@
-import { lazy, Suspense } from "react";
-import { Loader2 } from "lucide-react";
+import { Component, lazy, Suspense, type ErrorInfo, type ReactNode } from "react";
+import { captureException } from "@sentry/react";
+import { Loader2, RefreshCw } from "lucide-react";
 
 const RadarMapInner = lazy(() => import("./RadarMap.inner"));
 
@@ -28,9 +29,62 @@ export interface RadarMapProps {
 
 export function RadarMap(props: RadarMapProps) {
   return (
-    <Suspense fallback={<MapFallback />}>
-      <RadarMapInner {...props} />
-    </Suspense>
+    <RadarErrorBoundary>
+      <Suspense fallback={<MapFallback />}>
+        <RadarMapInner {...props} />
+      </Suspense>
+    </RadarErrorBoundary>
+  );
+}
+
+/**
+ * Contains radar failures to the radar box. The map is code-split
+ * (`lazy(() => import("./RadarMap.inner"))`); a failed chunk load (a stale
+ * build after a deploy, a flaky network) or a render error inside the map
+ * would otherwise bubble to the top-level boundary and blank the whole
+ * weather page. Here it degrades to a compact "reload to try again" panel
+ * while every other forecast section above stays visible. A hard reload is
+ * used because a cached rejected dynamic import won't re-fetch on a soft
+ * remount.
+ */
+class RadarErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
+  state = { hasError: false };
+  static getDerivedStateFromError(): { hasError: boolean } {
+    return { hasError: true };
+  }
+  componentDidCatch(error: Error, info: ErrorInfo): void {
+    console.error("[radar] failed to load", error, info);
+    // Still report to Sentry · the radar is the prime suspect for the
+    // "something broke up the mountain" full-page crash, so we want these
+    // now-contained failures visible to confirm the root cause.
+    captureException(error, {
+      tags: { area: "radar" },
+      extra: { componentStack: info.componentStack },
+    });
+  }
+  render(): ReactNode {
+    if (this.state.hasError) return <RadarErrorFallback />;
+    return this.props.children;
+  }
+}
+
+function RadarErrorFallback() {
+  return (
+    <div className="relative w-full h-[520px] md:h-[640px] bg-slate-900/80 grid place-items-center px-6 text-center">
+      <div className="max-w-xs">
+        <p className="text-sm font-semibold text-white">radar unavailable</p>
+        <p className="mt-1 text-xs text-white/60">
+          the live radar could not load · the rest of the forecast above is up to date.
+        </p>
+        <button
+          type="button"
+          onClick={() => window.location.reload()}
+          className="mt-4 inline-flex items-center gap-2 rounded-lg bg-sky-500 hover:bg-sky-400 px-4 py-2 text-sm font-semibold text-white transition-colors"
+        >
+          <RefreshCw className="h-4 w-4" /> reload to try again
+        </button>
+      </div>
+    </div>
   );
 }
 

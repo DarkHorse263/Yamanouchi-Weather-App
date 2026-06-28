@@ -99,6 +99,16 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
 
   const reopen = useCallback(() => setStateChoices(null), []);
 
+  // The footer "manage cookies" link dispatches this event. Re-open the banner
+  // so the user can change their choice. The saved localStorage value is left
+  // intact until they make a new decision, so dismissing keeps prior consent.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const handler = () => reopen();
+    window.addEventListener("feelzlike:open-consent", handler);
+    return () => window.removeEventListener("feelzlike:open-consent", handler);
+  }, [reopen]);
+
   const api = useMemo<ConsentApi>(
     () => ({
       choices,

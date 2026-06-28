@@ -41,3 +41,11 @@ Sentry uses THREE separate secrets (all currently set as global secrets):
 - `SENTRY_AUTH_TOKEN` — **build-time only**: sourcemap upload + release creation. This is the one that goes stale/401.
 
 **Why it matters:** runtime error capture is driven entirely by the two DSNs and keeps working even when the auth token is invalid. So "Sentry is broken in the build log" does NOT mean error monitoring is down — capture is live; only symbolication (readable stack traces) + clean build logs depend on a valid `SENTRY_AUTH_TOKEN`. The token's org/project are pinned in `vite.config.ts` (org `navigate-work-digital`, project `javascript-react`) — a refreshed token must belong to that org. Org-level auth tokens are pre-scoped for sourcemap upload.
+
+# Web-page (HTML) security headers can't be set from app code in prod
+
+Under the application router the platform edge serves ALL static HTML (index.html, prerendered snapshots, SPA fallback) and proxies only `/api/*` to Express. So `app.ts` helmet headers appear on `/api/*` responses but NOT on any HTML document (curl-verified: HTML carries only platform HSTS; `/api` carries nosniff + referrer-policy + a 2nd HSTS). `[[deployment.responseHeaders]]` applies to STATIC deployments, not this autoscale/application-router topology.
+
+**Why:** Express never serves the HTML in prod, so it cannot add headers to it. The only browser-honored HTML-level mitigation is `<meta name="referrer" content="strict-origin-when-cross-origin">` in `index.html` (added). `X-Content-Type-Options`, `Permissions-Policy`, and `X-Frame-Options` have **no meta equivalent** — they must be real HTTP headers from whatever serves the HTML.
+
+**How to apply:** don't try to "fix" HTML security headers by editing helmet/app.ts — it has zero effect on prod HTML. Adding the rest requires routing HTML through the app/server (a risky topology change on this live novice-owned site) or a supported edge header mechanism. CSP + frameguard are intentionally OFF (embed-widget use case; inline Vite bundles need a nonce) — do NOT add a meta CSP blindly or it can break the app.

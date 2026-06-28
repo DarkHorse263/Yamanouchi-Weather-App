@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 import { Loader2, MapPin, Search, X } from "lucide-react";
 import { track } from "@/lib/analytics";
+import { REGIONS } from "@/regions";
 
 // ── server payload (GET /api/places/search) ────────────────────────
 interface PlaceResult {
@@ -18,6 +19,62 @@ interface PlaceSearchResponse {
 
 const MIN_CHARS = 3;
 const DEBOUNCE_MS = 350;
+
+// Flattened curated towns across every region. Lets a picked search result go
+// straight to its rich town page when it clearly matches one, instead of the
+// generic /near-you view. Built once at module load.
+const CURATED_TOWNS = REGIONS.flatMap((r) =>
+  (r.baseTowns ?? []).map((t) => ({
+    regionId: r.id,
+    id: t.id,
+    name: t.name,
+    nameJa: t.nameJa,
+    lat: t.lat,
+    lng: t.lng,
+  })),
+);
+
+function normalizeName(s: string): string {
+  return s.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "");
+}
+
+function distanceKm(aLat: number, aLng: number, bLat: number, bLng: number): number {
+  const R = 6371;
+  const dLat = ((bLat - aLat) * Math.PI) / 180;
+  const dLng = ((bLng - aLng) * Math.PI) / 180;
+  const s =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos((aLat * Math.PI) / 180) *
+      Math.cos((bLat * Math.PI) / 180) *
+      Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(s));
+}
+
+/**
+ * Reconcile a picked Places result against the curated town registry. A name
+ * match (en or ja) accepts within 25km; proximity alone accepts only within
+ * 6km, so we never grab a neighbouring town when there is no name signal.
+ * Returns the matched town or null to fall back to /near-you.
+ */
+function matchCuratedTown(r: PlaceResult): { regionId: string; id: string } | null {
+  const nName = normalizeName(r.name);
+  const named = CURATED_TOWNS.filter(
+    (t) => normalizeName(t.name) === nName || (t.nameJa != null && t.nameJa === r.name),
+  );
+  const pool = named.length > 0 ? named : CURATED_TOWNS;
+  let best: (typeof CURATED_TOWNS)[number] | null = null;
+  let bestKm = Infinity;
+  for (const t of pool) {
+    const km = distanceKm(r.lat, r.lng, t.lat, t.lng);
+    if (km < bestKm) {
+      bestKm = km;
+      best = t;
+    }
+  }
+  if (!best) return null;
+  const limitKm = named.length > 0 ? 25 : 6;
+  return bestKm <= limitKm ? { regionId: best.regionId, id: best.id } : null;
+}
 
 /**
  * Place lookup for the location-first landing. Lets a visitor type any town or
@@ -87,6 +144,15 @@ export function PlaceSearch({
     setTerm("");
     setDebounced("");
     setActiveIndex(-1);
+
+    // If the picked place is one of our curated towns, jump straight to its
+    // rich town page; otherwise fall back to the location-first /near-you view.
+    const town = matchCuratedTown(r);
+    if (town) {
+      navigate(`/${town.regionId}/${town.id}`);
+      return;
+    }
+
     const params = new URLSearchParams({
       lat: String(r.lat),
       lng: String(r.lng),
