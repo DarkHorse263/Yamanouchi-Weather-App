@@ -6,7 +6,7 @@ import { LoadingScreen, ErrorScreen } from "../components/ui-elements";
 import { useState } from "react";
 import { MapPin, Phone, Bath, CableCar, Mountain, Search, Star, ExternalLink, BedDouble, Hotel, Home, Building2, type LucideIcon } from "lucide-react";
 import { motion } from "framer-motion";
-import { bookingSearchUrl, bookingRegionUrl } from "../lib/booking";
+import { useYamanouchiBooking } from "../lib/booking";
 import { StayPlatformBar } from "@/components/StayPlatformBar";
 import { useNearbyPlaces } from "@/lib/places";
 import { itemListSchema, lodgingSchema } from "@/lib/seo/jsonLd";
@@ -47,6 +47,7 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
   const { isWinter } = useSeason();
   const [tab, setTab] = useState<LocationTab>("mountain");
   const [typeFilter, setTypeFilter] = useState<FilterType>("all");
+  const booking = useYamanouchiBooking();
   const MOUNTAIN_AREAS = isWinter ? WINTER_MOUNTAIN_AREAS : GREEN_MOUNTAIN_AREAS;
 
   const { data: all, isLoading, error } = useGetAccommodation({} as any);
@@ -205,7 +206,7 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
                     </h2>
                     <p className="text-xs text-muted-foreground">{t(area.desc, area.descJa)}</p>
                   </div>
-                  <a href={bookingRegionUrl(area.region)} target="_blank" rel="noreferrer"
+                  <a href={booking.regionUrl(area.region)} target="_blank" rel="noopener noreferrer sponsored"
                     className="flex items-center gap-1 text-xs font-bold text-blue-600 hover:underline shrink-0">
                     <Search className="w-3 h-3" /> {t("Search area", "エリア検索")}
                   </a>
@@ -233,7 +234,7 @@ export default function Stay({ embedded = false }: { embedded?: boolean }) {
                     </h2>
                     <p className="text-xs text-muted-foreground">{t(area.desc, area.descJa)}</p>
                   </div>
-                  <a href={bookingRegionUrl(area.region)} target="_blank" rel="noreferrer"
+                  <a href={booking.regionUrl(area.region)} target="_blank" rel="noopener noreferrer sponsored"
                     className="flex items-center gap-1 text-xs font-bold text-blue-600 hover:underline shrink-0">
                     <Search className="w-3 h-3" /> {t("Search area", "エリア検索")}
                   </a>
@@ -345,6 +346,7 @@ function GooglePlacesStaySection({
 }
 
 function PlaceList({ places, t, isWinter = true }: { places: any[]; t: (en: string, ja: string | null) => string; isWinter?: boolean }) {
+  const booking = useYamanouchiBooking();
   return (
     <div className="space-y-2">
       {places.map((place, idx) => (
@@ -355,9 +357,9 @@ function PlaceList({ places, t, isWinter = true }: { places: any[]; t: (en: stri
           transition={{ delay: idx * 0.04 }}
         >
           <a
-            href={bookingSearchUrl(place.name + " Yamanouchi Japan")}
+            href={booking.searchUrl(place.name + " Yamanouchi Japan")}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener noreferrer sponsored"
             className="block bg-white border border-slate-200 rounded-xl p-3.5 hover:border-blue-300 hover:shadow-md transition-all duration-200 group"
           >
             <div className="flex items-start gap-3">

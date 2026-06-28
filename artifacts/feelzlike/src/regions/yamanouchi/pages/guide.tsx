@@ -1,11 +1,12 @@
 import { useLanguage } from "@workspace/feelzlike-shell";
 import { ExternalLink, BedDouble, Search } from "lucide-react";
-import { bookingGeneralUrl } from "../lib/booking";
+import { useYamanouchiBooking } from "../lib/booking";
 
 const GUIDE_URL = "https://www.info-yamanouchi.net/english/";
 
 export default function Guide() {
   const { t } = useLanguage();
+  const booking = useYamanouchiBooking();
 
   return (
     <div className="flex flex-col" style={{ height: "calc(100vh - 64px)" }}>
@@ -15,9 +16,9 @@ export default function Guide() {
         </h1>
         <div className="flex items-center gap-3">
           <a
-            href={bookingGeneralUrl()}
+            href={booking.generalUrl()}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener noreferrer sponsored"
             className="flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:underline"
           >
             <BedDouble className="w-3.5 h-3.5" />

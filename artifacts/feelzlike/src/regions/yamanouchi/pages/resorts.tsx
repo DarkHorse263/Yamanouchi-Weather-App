@@ -6,7 +6,7 @@ import { HourlyTimeline } from "../components/hourly-timeline";
 import { ExternalLink, CalendarDays, BedDouble, TreePine, Activity, PawPrint, Cloud, Mountain, Droplets, CableCar, Sparkles, Leaf, type LucideIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { bookingRegionUrl } from "../lib/booking";
+import { useYamanouchiBooking } from "../lib/booking";
 import { useState } from "react";
 
 // Maps a region label (as returned by the resorts API) to a representative
@@ -59,6 +59,7 @@ function safeTime(raw: string | null | undefined): string {
 export default function Resorts() {
   const { t } = useLanguage();
   const { isWinter } = useSeason();
+  const booking = useYamanouchiBooking();
   const { data: resorts, isLoading, error } = useGetResorts({ query: { refetchInterval: 600000, enabled: isWinter } as never });
 
   if (isWinter && isLoading) return <LoadingScreen />;
@@ -222,9 +223,9 @@ export default function Resorts() {
                               </a>
                             )}
                             <a
-                              href={bookingRegionUrl(resort.region)}
+                              href={booking.regionUrl(resort.region)}
                               target="_blank"
-                              rel="noopener noreferrer"
+                              rel="noopener noreferrer sponsored"
                               className="flex items-center gap-1 text-[10px] font-bold text-blue-600 hover:text-blue-700 transition-colors"
                             >
                               <BedDouble className="w-2.5 h-2.5" />

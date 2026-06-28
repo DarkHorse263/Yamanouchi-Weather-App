@@ -116,7 +116,14 @@ export const CJ_ADVERTISER_AIDS: Partial<Record<StayPlatformId, CjAdvertiser>> =
   // www.hotels.com destinations across AU/JP/NZ. Default anrdoezrs.net domain
   // tracks fine (no per-advertiser override needed).
   hotels: { aid: "11327743" },
-  // booking: { aid: "00000000" },  // Booking.com - add when approved on CJ
+  // Booking.com APAC - CJ advertiser 7854081. AID 17293139 is the "Evergreen
+  // Link for Booking.com APAC" (deep-link / URL-redirect enabled). Curl-verified:
+  // the ?url= override lands on our booking.com/searchresults page AND tracks
+  // (label carries affnetcj-17293139 + site-101761193 + cjevent) on the default
+  // anrdoezrs.net domain. Booking.com credits in-session conversions only (no
+  // cookie tracking) - deep links satisfy that. This is the ONLY Booking.com
+  // network: the Japan/Yamanouchi pages route through here too (no direct aid).
+  booking: { aid: "17293139" },
   // agoda:   { aid: "00000000" },  // Agoda
   // expedia: { aid: "00000000" },  // Expedia
   // trip:    { aid: "00000000" },  // Trip.com

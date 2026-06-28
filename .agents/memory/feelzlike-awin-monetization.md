@@ -1,6 +1,6 @@
 ---
 name: feelzlike affiliate monetization (Awin + CJ)
-description: How feelzlike earns — Awin (auto-convert) powers the LIVE booking + Europcar links; CJ (per-advertiser deep links) is wired but inert until approvals. Consent gating + double-tag pitfall.
+description: How feelzlike earns — Awin (auto-convert) powers Europcar; CJ (per-advertiser deep links) powers the LIVE Booking.com + Hotels.com + trivago links. Consent gating + one-network-per-merchant pitfall.
 ---
 
 # feelzlike Awin affiliate monetization
@@ -31,7 +31,7 @@ feelzlike monetizes via the **Awin** affiliate network using the **auto-convert*
 ## CJ (Commission Junction) — the SECOND network (`lib/cj.ts`)
 - **CJ has NO auto-convert/MasterTag.** Every CJ link must be built by hand: `https://{cjDomain}/click-{PID}-{AID}?url={ENCODED_DEST}&sid=...`. `cjDomain` defaults to anrdoezrs.net (all CJ domains interchangeable).
 - Needs TWO ids: **PID** (one publisher/website id, env `VITE_CJ_PUBLISHER_ID`, public config like the Awin id) + a **per-advertiser AID** (8-digit). The AID **only exists after you're approved** for that advertiser AND the advertiser "allows URL redirects". Wrapping a non-approved advertiser does NOT track and may error → only ever wrap advertisers in `CJ_ADVERTISER_AIDS`.
-- `CJ_ADVERTISER_AIDS` is a hand-maintained **code map** (StayPlatformId → {aid, domain?}), deliberately EMPTY until approvals land. Adding a merchant = one line once the owner hands over that advertiser's AID. `cjLinkFor` returns null unless PID set + valid 8-digit AID → Stay page falls back to the plain `platformDeepLink` (zero regression). AID validated `^\d{8}$` so typos fail loud (dev warn) not silent.
+- `CJ_ADVERTISER_AIDS` is a hand-maintained **code map** (StayPlatformId → {aid, domain?}); it started empty and grows one line per approval (currently **hotels + trivago + booking**). Adding a merchant = one line once the owner hands over that advertiser's AID. `cjLinkFor` returns null unless PID set + valid 8-digit AID → Stay page falls back to the plain `platformDeepLink` (zero regression). AID validated `^\d{8}$` so typos fail loud (dev warn) not silent.
 - **Per merchant, exactly ONE network.** A CJ-wrapped link points at anrdoezrs.net (not the OTA domain), so the Awin MasterTag won't also convert it. If a merchant ever gets BOTH a CJ AID here and Awin Convert-a-Link, that's a conflict — pick one.
 - CJ links gated behind `canUseAds` in `TownStay` (no ads consent → plain link), same compliance rule as Awin.
 
@@ -41,6 +41,14 @@ feelzlike monetizes via the **Awin** affiliate network using the **auto-convert*
 - Default `anrdoezrs.net` domain tracks fine for this AID (curl-confirmed); no per-advertiser `domain` override needed even though CJ generated the snippet on `dpbolvw.net` (all CJ domains interchangeable).
 - **CJ search tip:** Hotels.com's deep-linkable creative is a **Text Link**, NOT classified as Link Type "Evergreen Link" (its name just contains "Deep link"). Filtering CJ by Link Type=Evergreen hides all Hotels.com links and returns only the trivago Evergreen — use **"Deep Linking Only"** + Advertiser=Hotels instead. The AID is the 8-digit number after `click-{PID}-` in the creative's HTML/Click-URL.
 - One-network rule still applies: hotels.com is now CJ, so do NOT also enable Awin Convert-a-Link for hotels.com.
+
+## Booking.com — live on CJ (Evergreen deep link); Yamanouchi migrated OFF its old DIRECT aid
+- Booking.com is a CJ advertiser ("Booking.com **APAC**", CID `7854081`); the owner is approved. `CJ_ADVERTISER_AIDS.booking` AID = **`17293139`**, the **"Evergreen Link for Booking.com APAC"** creative (deep-link / URL-redirect enabled). PID is the shared `101761193`. Default `anrdoezrs.net` domain tracks fine (no per-advertiser `domain` override) even though CJ generated the snippet on `tkqlhce.com` (all CJ domains interchangeable).
+- **Curl-verified (no publish needed):** the `?url=` override is honoured AND tracked — chain → `cj.dotomi.com` → `emjcd.com` → lands on `booking.com/searchresults.html?ss=<our query>` (NOT the homepage) with `label=affnetcj-17293139_…site-101761193_…cjevent-…clkid-<our sid>`. Deep-link + click attribution both work. Booking.com credits **in-session conversions only** (no cookie tracking) — deep links satisfy that.
+- **CID vs AID trap:** the number CJ shows in the "Get Code" header (`7854081`) is the advertiser CID, NOT the AID. The 8-digit AID is the number after `click-{PID}-` in the creative's HTML/Click-URL. (Owner first handed over the CID by mistake.) Booking.com's deep-linkable creative IS classified Link Type **"Evergreen Link"** (unlike Hotels.com which is a Text Link) — filter CJ by "Deep Linking Only" + Advertiser=Booking to find it.
+- **Main flow needed ZERO per-page code:** `StayPlatformBar`/`TownStay` already CJ-wrap every platform via `(adsOk && cjLinkFor(p.id, plainUrl, {sid})) || plainUrl`, so adding the one `booking` AID line auto-activated Booking.com everywhere (AU/JP/NZ).
+- **Yamanouchi was the exception — now migrated.** `regions/yamanouchi/lib/booking.ts` used to hold a DIRECT Booking.com affiliate aid (a 32-char hex = a separate first-party programme) and built `aid=`-tagged URLs directly — that violated one-network-per-merchant. It's now a hook `useYamanouchiBooking()` that builds PLAIN booking.com search URLs then wraps via `cjLinkFor("booking", url, {sid})` gated by `canUseAds`, exactly like the main flow. Consumers `yamanouchi/pages/{stay,resorts,guide}.tsx` call the hook at component top (before early returns; the `PlaceList` child calls it too). The old `bookingSearchUrl/bookingRegionUrl/bookingGeneralUrl` exports + the direct aid are GONE — **do not reintroduce a direct Booking.com aid anywhere.**
+- One-network rule: Booking.com is now CJ-only, so do NOT enable Awin Convert-a-Link for booking.com.
 
 ## trivago — JP metasearch, region-keyed, earns via CJ (Evergreen deep link)
 - trivago is a **live JP-only** stay platform added to **`lib/places.ts`** (the live system), NOT `affiliateLinks.ts`. `platformsForCountry` appends it for JP only (after Rakuten + Jalan), so AU/NZ never show it.
