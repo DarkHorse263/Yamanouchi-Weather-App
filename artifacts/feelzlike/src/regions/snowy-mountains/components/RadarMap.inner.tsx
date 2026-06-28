@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import type { OfficialRadarSource, WindySource } from "@/lib/bom-radar";
 import {
   MapContainer,
   TileLayer,
@@ -38,6 +39,14 @@ interface RadarMapInnerProps {
   markers?: Array<{ id: string; name: string; lat: number; lng: number }>;
   season?: "winter" | "green";
   region?: RegionKey;
+  /**
+   * Optional per-coordinate override for the Official + Expert sources. The
+   * /near-you page hands us an arbitrary AU location's nearest BOM radar
+   * (`official`, or null when none covers the point) and a Windy centre on the
+   * user's own coords. When omitted, the curated per-region config is used and
+   * region pages behave exactly as before.
+   */
+  location?: { official: OfficialRadarSource | null; windy: WindySource };
 }
 
 export type RegionKey =
@@ -574,30 +583,43 @@ export default function RadarMapInner({
   markers,
   season = "winter",
   region = "snowy-mountains",
+  location,
 }: RadarMapInnerProps) {
   const regionCfg = REGION_CONFIG[region];
   const regionDefaults = REGION_DEFAULTS[region];
   const effectiveCenter = center ?? regionDefaults.center;
-  // Australian regions lead with the Official BOM radar (the locally
-  // trusted, sharper source) whenever one is configured; every other
-  // region leads with the Interactive view (the Ski Radar experience),
-  // which is the most resilient · its dark basemap + RainViewer radar each
-  // render independently and fail gracefully. Either way users can flip
-  // tabs, and the Official view itself link-outs if BOM ever blocks us.
-  const defaultView: ViewMode = regionCfg.official.imageUrl
+  // When a `location` override is supplied (the /near-you page hands us an
+  // arbitrary AU coordinate) its nearest-BOM-radar result and Windy centre win
+  // over the curated per-region config. `official` may be null there · that
+  // means "no BOM radar covers this point", so we hide the Official tab and
+  // lead with the global Interactive radar. Region pages pass no `location`,
+  // so effectiveOfficial/effectiveWindy collapse to the region config and
+  // behaviour is unchanged.
+  const effectiveOfficial: OfficialRadarSource | null = location
+    ? location.official
+    : regionCfg.official;
+  const effectiveWindy: WindySource = location ? location.windy : regionCfg.windy;
+  const showOfficialTab = effectiveOfficial != null;
+  // Australian regions (and any covered /near-you point) lead with the Official
+  // BOM radar · the locally trusted, sharper source · whenever an embeddable
+  // image exists; every other case leads with the resilient Interactive view
+  // (dark basemap + RainViewer radar, each rendering independently).
+  const defaultView: ViewMode = effectiveOfficial?.imageUrl
     ? "official"
     : "interactive";
   const [view, setView] = useState<ViewMode>(defaultView);
-  // Re-apply the per-region default tab if the region changes while this
-  // component stays mounted (client-side nav can reuse the same town-weather
-  // instance). Without this an AU region could inherit "interactive" from a
-  // prior JP/NZ page, or JP/NZ could inherit "official" (the link-out) from
-  // an AU page. Adjusting state during render is React's recommended pattern
-  // for this and avoids a wrong-tab flash; manual tab picks still persist
-  // within a region because prevRegion only changes on a real region switch.
-  const [prevRegion, setPrevRegion] = useState(region);
-  if (region !== prevRegion) {
-    setPrevRegion(region);
+  // Re-apply the default tab whenever the official SOURCE changes · a real
+  // region switch, or the /near-you user searching a new place / GPS update ·
+  // not just on region change (client-side nav can reuse the same mounted
+  // instance). Keying on region + the official image/href means manual tab
+  // picks persist while the source is stable, but a new source never inherits
+  // a stale tab (e.g. an uncovered point keeping a prior point's "official",
+  // or an AU page inheriting "interactive" from JP/NZ). Adjusting state during
+  // render is React's recommended pattern here and avoids a wrong-tab flash.
+  const sourceKey = `${region}:${effectiveOfficial?.imageUrl ?? effectiveOfficial?.href ?? "none"}`;
+  const [prevSourceKey, setPrevSourceKey] = useState(sourceKey);
+  if (sourceKey !== prevSourceKey) {
+    setPrevSourceKey(sourceKey);
     setView(defaultView);
   }
   // Active Windy overlay · drives the Windy iframe's `overlay=` param.
@@ -774,11 +796,11 @@ export default function RadarMapInner({
   // Windy embed URL — built per-region.
   const windyUrl = useMemo(() => {
     const params = new URLSearchParams({
-      lat: String(regionCfg.windy.lat),
-      lon: String(regionCfg.windy.lon),
-      detailLat: String(regionCfg.windy.lat),
-      detailLon: String(regionCfg.windy.lon),
-      zoom: String(regionCfg.windy.zoom),
+      lat: String(effectiveWindy.lat),
+      lon: String(effectiveWindy.lon),
+      detailLat: String(effectiveWindy.lat),
+      detailLon: String(effectiveWindy.lon),
+      zoom: String(effectiveWindy.zoom),
       level: "surface",
       overlay: windyOverlay,
       product: "ecmwf",
@@ -793,7 +815,7 @@ export default function RadarMapInner({
       radarRange: "-1",
     });
     return `https://embed.windy.com/embed2.html?${params.toString()}`;
-  }, [windyOverlay, regionCfg.windy]);
+  }, [windyOverlay, effectiveWindy]);
 
   return (
     <div className="relative w-full h-[520px] md:h-[640px] bg-slate-900">
@@ -803,7 +825,9 @@ export default function RadarMapInner({
       <div className="absolute top-3 left-3 z-[1000] flex gap-1 rounded-xl bg-slate-900/90 backdrop-blur-md border border-white/10 shadow-lg p-1">
         <TabPill active={view === "interactive"} onClick={() => setView("interactive")} icon={MapIcon} label="Interactive" />
         <TabPill active={view === "windy"} onClick={() => setView("windy")} icon={Globe2} label="Expert" />
-        <TabPill active={view === "official"} onClick={() => setView("official")} icon={Radio} label="Official" />
+        {showOfficialTab && (
+          <TabPill active={view === "official"} onClick={() => setView("official")} icon={Radio} label="Official" />
+        )}
       </div>
 
       {/* Cross-region framing · jump between the whole country's towns +
@@ -854,12 +878,12 @@ export default function RadarMapInner({
         </>
       )}
 
-      {view === "official" && (
-        // key by the source URL so switching regions remounts the view
-        // and resets its internal `imgFailed` state.
+      {view === "official" && effectiveOfficial && (
+        // key by the source URL so switching regions / locations remounts the
+        // view and resets its internal `imgFailed` state.
         <OfficialView
-          key={regionCfg.official.imageUrl ?? regionCfg.official.href}
-          official={regionCfg.official}
+          key={effectiveOfficial.imageUrl ?? effectiveOfficial.href}
+          official={effectiveOfficial}
         />
       )}
 
@@ -1276,7 +1300,7 @@ function officialImageSrc(imageUrl: string): string {
   return m ? `/api/bom-radar?type=loop&file=${m[1]}` : imageUrl;
 }
 
-function OfficialView({ official }: { official: RegionConfig["official"] }) {
+function OfficialView({ official }: { official: OfficialRadarSource }) {
   // Track upstream image failure (BOM/JMA blocks our request, gif 404,
   // network blip, etc.) so we can degrade gracefully to the same
   // "open source" link-out we show for non-embeddable regions, instead

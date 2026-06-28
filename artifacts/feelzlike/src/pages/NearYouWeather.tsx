@@ -12,6 +12,7 @@ import {
   RotateCw,
 } from "lucide-react";
 import { RadarMap, type RadarRegionKey } from "@/regions/snowy-mountains/components/RadarMap";
+import { nearestBomRadar } from "@/lib/bom-radar";
 import { useTownWeather, type TownWeatherCurrent } from "@/lib/town-weather";
 import {
   StaleNotice,
@@ -565,6 +566,11 @@ function RadarSection({
   const season = seasonFor(lat);
   const headline = season === "winter" ? "live snow radar" : "live rain radar";
   const byline = season === "winter" ? "snow radar" : "rain radar";
+  // Official source is this exact coordinate's nearest covering BOM radar (or
+  // null when none reaches it · outside every radar's sweep, or overseas), not
+  // the nearest curated ski region's radar. Windy centres on the user. `region`
+  // still drives the Interactive view's cross-region framing + country label.
+  const official = nearestBomRadar(lat, lng);
   return (
     <section className="mt-4 rounded-2xl border border-border bg-white overflow-hidden">
       <div className="flex items-center justify-between gap-3 px-5 pt-4 pb-3 flex-wrap">
@@ -589,12 +595,24 @@ function RadarSection({
         center={{ lat, lng }}
         season={season}
         region={region}
+        location={{ official, windy: { lat, lon: lng, zoom: 9 } }}
         markers={[{ id: "you", name: "you", lat, lng }]}
       />
       <p className="text-xs text-muted-foreground/70 px-5 py-3 border-t border-border">
-        precip radar is on by default &middot; forecast frames show the next 30
-        minutes. toggle snowfall, wind, temperature or rain risk, then tap any
-        point to read its values.
+        {official ? (
+          <>
+            the official tab shows the bureau of meteorology radar nearest you
+            &middot; the interactive tab adds snowfall, wind, temperature and
+            rain risk layers you can tap to read.
+          </>
+        ) : (
+          <>
+            no bureau of meteorology radar reaches this spot, so the interactive
+            radar is on by default &middot; forecast frames show the next 30
+            minutes. toggle snowfall, wind, temperature or rain risk, then tap
+            any point to read its values.
+          </>
+        )}
       </p>
     </section>
   );

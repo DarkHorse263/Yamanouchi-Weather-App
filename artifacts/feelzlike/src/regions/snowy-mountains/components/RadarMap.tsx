@@ -4,6 +4,7 @@ import { Loader2 } from "lucide-react";
 const RadarMapInner = lazy(() => import("./RadarMap.inner"));
 
 export type { RegionKey as RadarRegionKey } from "./RadarMap.inner";
+export type { OfficialRadarSource, WindySource } from "@/lib/bom-radar";
 
 export interface RadarMapProps {
   /** Map centre - defaults to Snowy Mountains. */
@@ -14,6 +15,15 @@ export interface RadarMapProps {
   season?: "winter" | "green";
   /** Drives the Windy centre and Official radar source per region. */
   region?: import("./RadarMap.inner").RegionKey;
+  /**
+   * Per-coordinate override for the Official + Expert sources (e.g. /near-you
+   * hands us an arbitrary AU location's nearest BOM radar, or null when none
+   * covers the point). When omitted, the per-region config is used.
+   */
+  location?: {
+    official: import("@/lib/bom-radar").OfficialRadarSource | null;
+    windy: import("@/lib/bom-radar").WindySource;
+  };
 }
 
 export function RadarMap(props: RadarMapProps) {
