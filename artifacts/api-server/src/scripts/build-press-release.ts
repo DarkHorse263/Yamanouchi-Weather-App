@@ -166,19 +166,18 @@ const body = /* html */ `
     <strong>${RELEASE_LOCATION} <em class="middot">·</em> ${RELEASE_DATE}</strong>
   </p>
 
-  <h1>feelzlike launches as the daily decision app for travellers staying in resort towns near snow.</h1>
+  <h1>feelzlike, the daily decision app for travellers staying near snow, now spans ten regions across australia, japan and new zealand.</h1>
 
   <p class="deck">
-    A town-first weather, road and mountain-comparison app for off-mountain visitors
-    in the Snowy Mountains, Victoria's High Country and Yamanouchi launches today,
-    free for the first two months.
+    The town-first weather, road and mountain-comparison app for off-mountain visitors
+    has grown from three launch regions to ten across three countries, and now ships
+    live powder, wind and road alerts, a multi-day trip planner and a premium tier.
   </p>
 
   <p class="lede">
-    <strong>feelzlike</strong>, a new progressive web app purpose-built for travellers
-    based in resort towns rather than on the mountain, launched publicly today across
-    three live regions <em class="middot">·</em> the Snowy Mountains in New South Wales,
-    Victoria's High Country, and Yamanouchi in Nagano, Japan. The app is available now
+    <strong>feelzlike</strong>, the progressive web app purpose-built for travellers
+    based in resort towns rather than on the mountain, now serves <strong>ten live
+    regions</strong> across Australia, Japan and New Zealand. The app is available now
     at <strong>feelzlike.com</strong> and installs directly to mobile home screens with
     no app-store download required.
   </p>
@@ -191,13 +190,23 @@ const body = /* html */ `
     <em class="middot">·</em> all anchored to the town the visitor is actually staying in.
   </p>
 
-  <h2>What the launch covers</h2>
+  <h2>Where feelzlike is now</h2>
   <ul>
-    <li><strong>Three live regions, six base towns.</strong> Jindabyne, Berridale and Cooma in the Snowy Mountains; Bright in Victoria's High Country; Yudanaka, Shibu Onsen and Yomase in Yamanouchi.</li>
-    <li><strong>Thirteen resorts surfaced.</strong> Including Thredbo, Perisher, Charlotte Pass, Selwyn, Mt Hotham, Falls Creek, Mt Buller, and the eighteen interconnected fields of Shiga Kogen.</li>
-    <li><strong>Live data, not stale screenshots.</strong> Continuous integration with the Bureau of Meteorology, NSW LiveTraffic, VicEmergency, the Japan Meteorological Agency and Open-Meteo.</li>
-    <li><strong>Curated stays and eats.</strong> Two hundred and twenty-eight venues across the six base towns, hand-checked, with country-aware filters covering ryokan onsen and tattoo policies in Japan and drying-rooms and ski-storage in Australia.</li>
+    <li><strong>Ten regions across three countries.</strong> Australia: the Snowy Mountains, Victoria's High Country and Tasmania. Japan: Yamanouchi, Nozawa Onsen and Iiyama in Nagano. New Zealand: Queenstown, Wanaka, Mt Hutt and Ruapehu.</li>
+    <li><strong>The towns visitors actually stay in.</strong> From Jindabyne, Bright and Cooma to Yudanaka, Nozawa Onsen, Queenstown, Wanaka, Methven and Ohakune <em class="middot">·</em> more than twenty base towns and the resorts they serve.</li>
+    <li><strong>The mountains people drive to.</strong> Thredbo, Perisher, Selwyn and Charlotte Pass; Mt Buller, Falls Creek and Mt Hotham; the eighteen interconnected fields of Shiga Kogen, plus Nozawa Onsen and Madarao; Coronet Peak, The Remarkables, Cardrona, Treble Cone, Mt Hutt, Whakapapa and Turoa.</li>
+    <li><strong>Live data, not stale screenshots.</strong> Continuous integration with official sources including the Bureau of Meteorology, NSW LiveTraffic, VicEmergency and the Japan Meteorological Agency, plus Open-Meteo and region-aware weather radar.</li>
+    <li><strong>Curated stays and eats.</strong> Hundreds of hand-checked venues across the base towns, with country-aware filters covering ryokan onsen and tattoo policies in Japan and drying-rooms and ski-storage in Australia and New Zealand.</li>
     <li><strong>A daily personalised call.</strong> An optional thirty-second profile tailors the mountain ranking to the visitor's skill level, discipline, priorities and risk tolerance.</li>
+  </ul>
+
+  <h2>What is new since launch</h2>
+  <ul>
+    <li><strong>Powder, wind and road alerts.</strong> Visitors can follow a town and be told when fresh snow, wind holds or road closures are likely <em class="middot">·</em> across all ten regions.</li>
+    <li><strong>A multi-day trip planner.</strong> Stack the next seven days across every mountain a town serves and read the week at a glance.</li>
+    <li><strong>Favourite towns.</strong> Save up to three towns so the app opens straight into the one you are staying in.</li>
+    <li><strong>A fortnightly newsletter.</strong> An opt-in digest of conditions and the season's signal, with double opt-in confirmation.</li>
+    <li><strong>A premium tier.</strong> The alerting and planning tools, free for every visitor through the launch period.</li>
   </ul>
 
   <h2>Why town-first matters</h2>
@@ -206,11 +215,11 @@ const body = /* html */ `
     <em class="middot">·</em> because that is where the off-mountain visitor wakes up.
     The audience the app serves is the family in a Jindabyne lodge with a non-skiing
     partner, the couple in a Yudanaka ryokan with three resorts within forty minutes,
-    the Bright pub patron weighing Hotham against Falls Creek over breakfast.
-    On-mountain lodging in these regions is two to four times the price of in-town
-    accommodation and supply has not recovered to demand since the pandemic
-    <em class="middot">·</em> the off-mountain stay is now the norm, and feelzlike is
-    built for it.
+    the Queenstown apartment weighing Coronet Peak against The Remarkables, the Bright
+    pub patron weighing Hotham against Falls Creek over breakfast. On-mountain lodging
+    in these regions is two to four times the price of in-town accommodation and supply
+    has not recovered to demand since the pandemic <em class="middot">·</em> the
+    off-mountain stay is now the norm, and feelzlike is built for it.
   </p>
 
   <blockquote>
@@ -223,43 +232,44 @@ const body = /* html */ `
 
   <h2>Pricing</h2>
   <div class="pricing">
-    <h3>Launch offer <em class="middot">·</em> all features free for two months</h3>
+    <h3>Launch offer <em class="middot">·</em> every premium feature free until 31 December 2026</h3>
     <div class="pricing-grid">
       <div class="pricing-tile intro">
         <div class="label">Launch period</div>
         <div class="price">Free</div>
-        <div class="meta">First two months <em class="middot">·</em> all features unlocked</div>
+        <div class="meta">Until 31 December 2026 <em class="middot">·</em> no card required</div>
       </div>
       <div class="pricing-tile">
         <div class="label">Monthly</div>
-        <div class="price">$10<span style="font-size:10pt;color:#64748b;font-weight:500;"> /month</span></div>
-        <div class="meta">Cancel anytime</div>
+        <div class="price">$5.99<span style="font-size:10pt;color:#64748b;font-weight:500;"> /month</span></div>
+        <div class="meta">From 1 January 2027 <em class="middot">·</em> cancel anytime</div>
       </div>
       <div class="pricing-tile">
         <div class="label">Annual</div>
         <div class="price">$60<span style="font-size:10pt;color:#64748b;font-weight:500;"> /year</span></div>
-        <div class="meta">Equivalent to $5 per month <em class="middot">·</em> save 50 percent</div>
+        <div class="meta">Equivalent to $5 per month <em class="middot">·</em> save around 16 percent</div>
       </div>
     </div>
   </div>
 
   <p>
-    From <strong>${getPaywallDate(today)}</strong> the full feature set moves behind a
-    subscription. Every visitor who registers in the first two months is grandfathered
-    into the launch experience for the duration of the free period regardless of when
-    the paywall takes effect.
+    Until <strong>31 December 2026</strong> every feelzlike feature, including powder
+    alerts and the trip planner, is free with no credit card required. From
+    <strong>1 January 2027</strong> the alerting and planning tools move to a
+    subscription, while the core town weather, snow radar and side-by-side mountain
+    comparison stay free for everyone.
   </p>
 
   <h2>Availability</h2>
   <p>
     feelzlike is a progressive web app. It works in every modern mobile browser and
     installs to the home screen with one tap on iOS and Android. There is nothing to
-    download from the App Store or Google Play. The app is bilingual in English and
-    Japanese throughout the Yamanouchi region and English-only in the Australian
-    regions at launch.
+    download from the App Store or Google Play. The app is in English throughout, and
+    bilingual in English and Japanese across the Japan regions of Yamanouchi, Nozawa
+    Onsen and Iiyama.
   </p>
 
-  <div class="endmark">— ENDS —</div>
+  <div class="endmark">ENDS</div>
 
   <div class="boilerplate">
     <h3>About feelzlike</h3>
@@ -267,9 +277,9 @@ const body = /* html */ `
       feelzlike is the daily decision app for people staying in resort towns near snow.
       Built on a town-first information architecture, the platform pairs live weather,
       road status and snow data with curated stays, eats and explore content for every
-      base town it covers. feelzlike currently serves three live regions across Australia
-      and Japan and is structured to expand to ten further towns in New Zealand, Hokkaido,
-      Hakuba, the European Alps and North America on the same town-first shape.
+      base town it covers. feelzlike serves ten live regions across Australia, Japan and
+      New Zealand and is structured to expand to Hokkaido, Hakuba, the European Alps and
+      North America on the same town-first shape.
     </p>
   </div>
 
@@ -277,15 +287,9 @@ const body = /* html */ `
     <h3>Media contact</h3>
     <div class="row"><span class="k">Web</span><span class="v">feelzlike.com</span></div>
     <div class="row"><span class="k">Email</span><span class="v">press@feelzlike.com</span></div>
-    <div class="row"><span class="k">Regions</span><span class="v">Snowy Mountains <em class="middot">·</em> Victoria's High Country <em class="middot">·</em> Yamanouchi</span></div>
+    <div class="row"><span class="k">Regions</span><span class="v">Australia <em class="middot">·</em> Japan <em class="middot">·</em> New Zealand</span></div>
   </div>
 `;
-
-function getPaywallDate(launch: Date): string {
-  const d = new Date(launch);
-  d.setMonth(d.getMonth() + 2);
-  return d.toLocaleDateString("en-AU", { day: "numeric", month: "long", year: "numeric" });
-}
 
 function shell(opts: { title: string; body: string; wordmark: string }) {
   return /* html */ `<!doctype html>
@@ -299,7 +303,7 @@ function shell(opts: { title: string; body: string; wordmark: string }) {
     <div class="ident">
       <strong>feelzlike</strong>
       weather for resort towns<br>
-      Jindabyne <em class="middot">·</em> Bright <em class="middot">·</em> Yudanaka<br>
+      Jindabyne <em class="middot">·</em> Yudanaka <em class="middot">·</em> Queenstown<br>
       feelzlike.com
     </div>
   </header>
@@ -339,7 +343,7 @@ async function main() {
   const wordmark = await imgDataUri(WORDMARK);
 
   const html = shell({
-    title: "feelzlike · launch press release",
+    title: "feelzlike · press release",
     body,
     wordmark,
   });

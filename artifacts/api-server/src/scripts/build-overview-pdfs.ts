@@ -109,7 +109,7 @@ function shell(opts: { tag: string; title: string; subtitle: string; body: strin
   ${opts.body}
   <footer>
     <span>feelzlike <em class="middot">·</em> weather for resort towns</span>
-    <span>v1.0 <em class="middot">·</em> May 2026</span>
+    <span>v2.0 <em class="middot">·</em> June 2026</span>
   </footer>
 </body></html>`;
 }
@@ -122,9 +122,9 @@ const userBody = /* html */ `
 
   <h2>Who it's for</h2>
   <p>People staying in a <strong>resort town</strong> <em class="middot">·</em> not on the mountain. The locals'
-  rental, the lodge in Jindabyne, the ryokan in Yudanaka, the pub in Bright. You're <strong>off mountain
-  by choice</strong> <em class="middot">·</em> the town is your basecamp <em class="middot">·</em>
-  the resort is a day trip you choose each morning.</p>
+  rental, the lodge in Jindabyne, the ryokan in Yudanaka, the pub in Bright, the apartment in Queenstown.
+  You're <strong>off mountain by choice</strong> <em class="middot">·</em> the town is your basecamp
+  <em class="middot">·</em> the resort is a day trip you choose each morning.</p>
 
   <p>The existing weather apps assume you've already booked a mountain. We don't. We assume you have
   a town and three or four resorts within driving distance, and the only question that matters is:
@@ -132,7 +132,7 @@ const userBody = /* html */ `
 
   <h2>How a feelzlike morning works</h2>
   <ol>
-    <li><strong>Open the app.</strong> It opens on your favourite town <em class="middot">·</em> Jindabyne, Bright or Yudanaka.</li>
+    <li><strong>Open the app.</strong> It opens on your favourite town <em class="middot">·</em> Jindabyne, Yudanaka, Queenstown or any of ten regions.</li>
     <li><strong>Glance the photo strip.</strong> Live LED-style numbers over a town shot tell you what it feelzlike <em>right now</em>, not four hours ago.</li>
     <li><strong>Check the road panel.</strong> Open <em class="middot">·</em> caution <em class="middot">·</em> chains required <em class="middot">·</em> closed.
       One line per access road, live from the official sources, with a road cam where one exists.</li>
@@ -145,24 +145,33 @@ const userBody = /* html */ `
   <div class="grid2">
     <div class="card"><h4>Live conditions</h4><p>Temperature, wind, gusts, freezing level. Refreshed continuously.</p></div>
     <div class="card"><h4>Road status</h4><p>Open, caution, chains required, closed <em class="middot">·</em> per road, with cams.</p></div>
-    <div class="card"><h4>Mountain comparison</h4><p>Every resort the town serves, side by side. Snow, lifts, cams.</p></div>
-    <div class="card"><h4>7 to 14 day forecast</h4><p>So you can plan the week, not just tomorrow.</p></div>
-    <div class="card"><h4>Snow cams</h4><p>Live feeds where the resort runs them <em class="middot">·</em> a clean link where it doesn't.</p></div>
-    <div class="card"><h4>Stays, eats, explore</h4><p>Booking partners, a Google Places search locked to the area, the local tourism site.</p></div>
+    <div class="card"><h4>Mountain comparison</h4><p>Every resort the town serves, side by side. Snow, lift status and cams where the resort runs them.</p></div>
+    <div class="card"><h4>7-day forecast and trip planner</h4><p>Stack the week across every mountain the town serves.</p></div>
+    <div class="card"><h4>Powder and road alerts</h4><p>Follow a town and hear when snow lands, wind holds, or a road closes.</p></div>
+    <div class="card"><h4>Snow radar and snow cams</h4><p>Region-aware radar, plus live cams where the resort runs them.</p></div>
+    <div class="card"><h4>Snowmaking outlook</h4><p>When the wet-bulb window opens, and which resorts can make snow.</p></div>
+    <div class="card"><h4>Stays, eats, explore</h4><p>Booking partners, a local-area places search, the local tourism site.</p></div>
   </div>
 
-  <h2>Three towns, today</h2>
+  <h2>Ten regions, today</h2>
   <table>
-    <tr><th>Town</th><th>Country</th><th>Mountains the town serves</th></tr>
-    <tr><td><strong>Jindabyne</strong></td><td>NSW, Australia</td><td>Perisher <em class="middot">·</em> Thredbo <em class="middot">·</em> Charlotte Pass <em class="middot">·</em> Selwyn</td></tr>
-    <tr><td><strong>Bright</strong></td><td>VIC, Australia</td><td>Hotham <em class="middot">·</em> Falls Creek <em class="middot">·</em> Mt Buller</td></tr>
-    <tr><td><strong>Yudanaka</strong></td><td>Nagano, Japan</td><td>Shiga Kogen (18 resorts grouped)</td></tr>
+    <tr><th>Region</th><th>Country</th><th>Mountains the town serves</th></tr>
+    <tr><td><strong>Snowy Mountains</strong></td><td>NSW, Australia</td><td>Perisher <em class="middot">·</em> Thredbo <em class="middot">·</em> Charlotte Pass <em class="middot">·</em> Selwyn</td></tr>
+    <tr><td><strong>Victoria's High Country</strong></td><td>VIC, Australia</td><td>Mt Buller <em class="middot">·</em> Falls Creek <em class="middot">·</em> Mt Hotham <em class="middot">·</em> Mt Stirling</td></tr>
+    <tr><td><strong>Tasmania</strong></td><td>TAS, Australia</td><td>Ben Lomond</td></tr>
+    <tr><td><strong>Yamanouchi</strong></td><td>Nagano, Japan</td><td>Shiga Kogen (18 grouped) <em class="middot">·</em> Ryuoo</td></tr>
+    <tr><td><strong>Nozawa Onsen</strong></td><td>Nagano, Japan</td><td>Nozawa Onsen Snow Resort</td></tr>
+    <tr><td><strong>Iiyama</strong></td><td>Nagano, Japan</td><td>Madarao <em class="middot">·</em> Tangram <em class="middot">·</em> Togari Onsen <em class="middot">·</em> Kijimadaira</td></tr>
+    <tr><td><strong>Queenstown</strong></td><td>New Zealand</td><td>Coronet Peak <em class="middot">·</em> The Remarkables</td></tr>
+    <tr><td><strong>Wanaka</strong></td><td>New Zealand</td><td>Cardrona <em class="middot">·</em> Treble Cone</td></tr>
+    <tr><td><strong>Mt Hutt</strong></td><td>New Zealand</td><td>Mt Hutt</td></tr>
+    <tr><td><strong>Ruapehu</strong></td><td>New Zealand</td><td>Whakapapa <em class="middot">·</em> Turoa</td></tr>
   </table>
 
   <h2>Winter and green season</h2>
-  <p>The data set adapts. In winter you see snow, chains, lifts and powder. In green season the same town
-  shell shows trail status, fire danger, river levels and the rides and walks the town is known for.
-  The town stays the centre of the picture all year.</p>
+  <p>The town shell is not winter-only. In winter you see snow, chains, lifts and powder. In green season the
+  same town shows the rides, walks and village activities it is known for <em class="middot">·</em> like
+  Thredbo's summit chairlift walks and mountain bike park. The town stays the centre of the picture all year.</p>
 
   <h2>What feelzlike will not do</h2>
   <ul>
@@ -172,22 +181,31 @@ const userBody = /* html */ `
     <li>It will not bury you in jargon <em class="middot">·</em> the language is local to the region.</li>
   </ul>
 
+  <h2>Live now</h2>
+  <ul>
+    <li><strong>Favourite towns.</strong> Save up to three so the app opens straight into the one you are in.</li>
+    <li><strong>Powder, wind and road alerts.</strong> Follow a town and hear when snow lands, lifts go on wind hold, or a road closes.</li>
+    <li><strong>Trip planner.</strong> The next seven days stacked across every mountain a town serves.</li>
+    <li><strong>Fortnightly newsletter.</strong> Conditions and the season's signal, opt-in with double confirmation.</li>
+  </ul>
+
   <h2>Coming soon</h2>
   <ul>
-    <li><strong>Save a town as your favourite</strong> so the app opens straight into it next time.</li>
-    <li><strong>Push alerts</strong> when a road switches to chains required, or 20cm lands overnight.</li>
-    <li><strong>Premium tier</strong> for modelled snowfall heatmaps and a 14-day powder window.</li>
-    <li><strong>More towns</strong> across NZ, Hokkaido, Hakuba and the European Alps <em class="middot">·</em> same town-first shape.</li>
+    <li><strong>Carpark fill predictions</strong> so you know whether to leave early for the resort gate.</li>
+    <li><strong>Early-bird road bulletins</strong> between 4 and 6am, before you load the car.</li>
+    <li><strong>Offline packs</strong> for the drive up where signal drops out.</li>
+    <li><strong>More towns</strong> across Hokkaido, Hakuba, the European Alps and North America <em class="middot">·</em> same town-first shape.</li>
   </ul>
 `;
 
 const investorBody = /* html */ `
   <div class="pillrow">
     <span class="pill">PWA <em class="middot">·</em> mobile-first</span>
-    <span class="pill">3 live regions</span>
+    <span class="pill">10 live regions</span>
+    <span class="pill">3 countries</span>
     <span class="pill">Town-first IA</span>
     <span class="pill green">Off-mountain market</span>
-    <span class="pill">Sponsorable by RTAs</span>
+    <span class="pill green">Affiliate live <em class="middot">·</em> premium live</span>
   </div>
 
   <h2>One sentence</h2>
@@ -215,31 +233,42 @@ const investorBody = /* html */ `
   <h2>The product, in three layers</h2>
   <div class="grid2">
     <div class="card"><h4>1. Today, in town</h4><p>Live numbers over a hero town shot. Wind, temp, freezing level. Updated continuously.</p></div>
-    <div class="card"><h4>2. Roads from town</h4><p>Per-road status with chain advice and cams. Pulled live from BOM, VicEmergency, JMA, NSW and VIC road authorities.</p></div>
+    <div class="card"><h4>2. Roads from town</h4><p>Per-road status with chain advice and cams. Pulled live from official road authorities including NSW LiveTraffic and VicEmergency.</p></div>
     <div class="card"><h4>3. Mountains from town</h4><p>Every resort the town serves, normalised onto one comparison grid. Agnostic. The user chooses.</p></div>
   </div>
 
   <h2>What we have today (live)</h2>
   <table>
-    <tr><th>Region</th><th>Base town</th><th>Resorts surfaced</th><th>Live integrations</th></tr>
-    <tr><td>Snowy Mountains</td><td>Jindabyne</td><td>Perisher, Thredbo, Charlotte, Selwyn</td><td>BOM, NSW LiveTraffic, road cams</td></tr>
-    <tr><td>Victoria's High Country</td><td>Bright</td><td>Hotham, Falls Creek, Mt Buller</td><td>BOM, VicEmergency, VicTraffic</td></tr>
-    <tr><td>Yamanouchi</td><td>Yudanaka</td><td>Shiga Kogen (18 grouped)</td><td>JMA, RainViewer, OpenWeatherMap</td></tr>
+    <tr><th>Region</th><th>Country</th><th>Base town</th><th>Resorts surfaced</th></tr>
+    <tr><td>Snowy Mountains</td><td>Australia</td><td>Jindabyne</td><td>Perisher, Thredbo, Selwyn, Charlotte Pass</td></tr>
+    <tr><td>Victoria's High Country</td><td>Australia</td><td>Bright</td><td>Mt Buller, Falls Creek, Mt Hotham, Mt Stirling</td></tr>
+    <tr><td>Tasmania</td><td>Australia</td><td>Launceston</td><td>Ben Lomond</td></tr>
+    <tr><td>Yamanouchi</td><td>Japan</td><td>Yudanaka</td><td>Shiga Kogen (18 grouped), Ryuoo</td></tr>
+    <tr><td>Nozawa Onsen</td><td>Japan</td><td>Nozawa Onsen</td><td>Nozawa Onsen Snow Resort</td></tr>
+    <tr><td>Iiyama</td><td>Japan</td><td>Iiyama</td><td>Madarao, Tangram, Togari Onsen, Kijimadaira</td></tr>
+    <tr><td>Queenstown</td><td>New Zealand</td><td>Queenstown</td><td>Coronet Peak, The Remarkables</td></tr>
+    <tr><td>Wanaka</td><td>New Zealand</td><td>Wanaka</td><td>Cardrona, Treble Cone</td></tr>
+    <tr><td>Mt Hutt</td><td>New Zealand</td><td>Methven</td><td>Mt Hutt</td></tr>
+    <tr><td>Ruapehu</td><td>New Zealand</td><td>Ohakune</td><td>Whakapapa, Turoa</td></tr>
   </table>
+  <p>Live weather, road and snow data flow from official sources including the Bureau of
+  Meteorology and Australian road authorities, the Japan Meteorological Agency, and Open-Meteo,
+  with region-aware weather radar across all three countries.</p>
 
   <h2>Why the shape repeats</h2>
   <p>The town-first information architecture is encoded in the platform. A new region is a config file plus
-  a town photo plus a list of mountains the town serves. Adding the next ten towns <em class="middot">·</em>
-  Queenstown, Wanaka, Niseko, Hakuba, Chamonix, Zermatt, Whistler, Banff, Aspen, Park City <em class="middot">·</em>
+  a town photo plus a list of mountains the town serves. We proved it this year by adding New Zealand and
+  two more Nagano regions on the same shell. Adding the next set <em class="middot">·</em>
+  Niseko, Hakuba, Chamonix, Zermatt, Whistler, Banff, Aspen, Park City <em class="middot">·</em>
   is days of data work, not months of engineering. The codebase, the API server, the design system,
   the alerting, the road parsers <em class="middot">·</em> all already shared.</p>
 
   <h2>Revenue model</h2>
   <div class="grid2">
-    <div class="card"><h4>1. Local Tourism Association sponsorship</h4><p>Each town is a discrete sellable surface. RTAs pay to own the basecamp their visitors open every morning.</p></div>
-    <div class="card"><h4>2. Affiliate commission</h4><p>Stays via Booking, Expedia, Airbnb. Eats via Google. Lift tickets via resort partners. We become their top-of-funnel.</p></div>
-    <div class="card"><h4>3. Premium subscription</h4><p>Modelled snowfall heatmaps, 14-day powder window, push alerts, ad-free. The Snow-Forecast playbook, town-shaped.</p></div>
-    <div class="card"><h4>4. Native advertising</h4><p>Hire-shop, transfer, instructor and gear ads inside each town's stays/eats/explore tabs.</p></div>
+    <div class="card"><h4>1. Local tourism sponsorship</h4><p>Each town is a discrete sellable surface. Tourism bodies pay to own the basecamp their visitors open every morning. In discussion.</p></div>
+    <div class="card"><h4>2. Affiliate commission <em class="middot">·</em> live</h4><p>Stays via Booking.com, Hotels.com and trivago; car hire via Europcar. Tracked through CJ and Awin behind ads consent. We are their top-of-funnel.</p></div>
+    <div class="card"><h4>3. Premium subscription <em class="middot">·</em> live</h4><p>Powder, wind and road alerts plus the trip planner. Free through 31 December 2026, then $5.99 per month or $60 per year.</p></div>
+    <div class="card"><h4>4. Native advertising</h4><p>Hire-shop, transfer, instructor and gear placements inside each town's stays, eats and explore tabs. Planned.</p></div>
   </div>
 
   <h2>Why now</h2>
@@ -259,9 +288,70 @@ const investorBody = /* html */ `
   </ul>
 
   <h2>Ask</h2>
-  <p>Funding to (a) sign the first three RTA sponsorships in NSW, VIC and Nagano, (b) extend the same
-  shell across NZ and Hokkaido for the 2026 southern winter, and (c) build the premium subscription tier
-  for launch ahead of the 2026 northern winter.</p>
+  <p>Funding to (a) sign the first tourism-body sponsorships across our ten live regions in Australia, Japan
+  and New Zealand, (b) convert the now-live affiliate and premium revenue with a paid acquisition push into
+  the 2026 northern winter, and (c) extend the same shell into Hokkaido, Hakuba and the European Alps.</p>
+`;
+
+const industryBody = /* html */ `
+  <div class="pillrow">
+    <span class="pill">10 regions <em class="middot">·</em> 3 countries</span>
+    <span class="pill">Off-mountain audience</span>
+    <span class="pill green">Open to partners</span>
+  </div>
+
+  <div class="panel quote">
+    feelzlike is the daily decision app for people staying in resort towns near snow.
+    We help the off-mountain visitor answer one question every morning <em class="middot">·</em>
+    which mountain do I drive to today? <em class="middot">·</em> with live weather, live roads
+    and a fair side-by-side of every resort their town serves.
+  </div>
+
+  <h2>Why we are writing</h2>
+  <p>This is an introduction, not a pitch. feelzlike now covers ten resort-town regions across
+  Australia, Japan and New Zealand, and we would like to know the people who shape the snow season
+  in those places <em class="middot">·</em> tourism bodies, resorts, forecasters, data providers and
+  the media who cover them. If there is a way to work together that serves the traveller, we want to
+  find it.</p>
+
+  <h2>The audience you would reach</h2>
+  <p>Our users are <strong>off-mountain travellers</strong> planning the day from the town they are
+  staying in. They are high-intent: deciding where to drive, where to stay, where to eat, and whether
+  today is the day. They open feelzlike before coffee, every morning of their trip.</p>
+
+  <h2>Where we would love to work together</h2>
+  <div class="grid2">
+    <div class="card"><h4>Tourism bodies</h4><p>Own the basecamp your visitors open every morning, and send qualified day-trippers to your member accommodation and venues.</p></div>
+    <div class="card"><h4>Resorts and lift operators</h4><p>An accurate, fair representation of your conditions, with a clean link straight to your snow report, lift status and tickets.</p></div>
+    <div class="card"><h4>Forecasters and meteorologists</h4><p>We would like to feature your seasonal outlooks and forecasts in-app and in our newsletter, fully credited and linked.</p></div>
+    <div class="card"><h4>Data providers</h4><p>Official, granular feeds <em class="middot">·</em> snow, road, lift, radar <em class="middot">·</em> surfaced honestly, with attribution and a link back to source.</p></div>
+    <div class="card"><h4>Travel media and creators</h4><p>Co-publishing and cross-promotion, and a credited place for your stories in our fortnightly newsletter.</p></div>
+    <div class="card"><h4>Anyone with a better idea</h4><p>If you can make the morning decision clearer for the off-mountain visitor, we want to hear it.</p></div>
+  </div>
+
+  <h2>Our newsletter</h2>
+  <p>feelzlike runs a <strong>fortnightly newsletter</strong> for travellers, opt-in with double
+  confirmation. It carries conditions and the season's signal. We would like to feature partner content
+  in it <em class="middot">·</em> forecasts, resort news, local stories <em class="middot">·</em> always
+  with full credit and a link back to you.</p>
+
+  <h2>How we treat your content and data</h2>
+  <ul>
+    <li><strong>Honesty first.</strong> We never claim data is live when it is stale, and we say so on the tile.</li>
+    <li><strong>Always attributed.</strong> Your forecast, your feed, your story carries your name and a link.</li>
+    <li><strong>Never misrepresented.</strong> We do not crown a winning mountain or rewrite your call.</li>
+    <li><strong>We send traffic back.</strong> feelzlike is top-of-funnel <em class="middot">·</em> the booking, the ticket and the full report happen on your site.</li>
+  </ul>
+
+  <h2>What we are asking</h2>
+  <p>Just a conversation. No commitment, no exclusivity, no cost. If any of the above is interesting,
+  reply and we will find a time. If the timing is wrong, we would still value being on your radar for
+  the season ahead.</p>
+
+  <div class="panel">
+    <strong>Get in touch</strong> <em class="middot">·</em> feelzlike.com
+    <em class="middot">·</em> partners@feelzlike.com
+  </div>
 `;
 
 async function renderPdf(html: string, outPath: string) {
@@ -310,14 +400,26 @@ async function main() {
     wordmark,
   });
 
+  const industryHtml = shell({
+    tag: "Industry & partners",
+    title: "An introduction for the people who shape the snow season.",
+    subtitle:
+      "For tourism bodies, resorts, forecasters, data providers and media who want to reach the off-mountain visitor.",
+    body: industryBody,
+    wordmark,
+  });
+
   const userPath = path.join(OUT, "feelzlike-user-overview.pdf");
   const investorPath = path.join(OUT, "feelzlike-investor-overview.pdf");
+  const industryPath = path.join(OUT, "feelzlike-partner-overview.pdf");
 
   await renderPdf(userHtml, userPath);
   await renderPdf(investorHtml, investorPath);
+  await renderPdf(industryHtml, industryPath);
 
   console.log("wrote:", userPath);
   console.log("wrote:", investorPath);
+  console.log("wrote:", industryPath);
 }
 
 await main();
