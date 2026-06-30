@@ -21,6 +21,10 @@ export interface MountainSnapshotProps {
   heading?: string;
   /** Source label for snowfall outlook (defaults to "Open-Meteo · ECMWF") */
   modelSource?: string;
+  /** Elevation (m) the snow outlook was derived at, for honest labelling. */
+  snowfallOutlookElevationM?: number;
+  /** Provenance of that elevation ("village" | "mid-mountain"). */
+  snowfallOutlookLevel?: string;
 }
 
 type Tone = "neutral" | "ok" | "info" | "caution" | "warn" | "alert";
@@ -121,6 +125,8 @@ export function MountainSnapshot({
   sectionNumber = "",
   heading = "Conditions at a glance",
   modelSource = "Open-Meteo · ECMWF",
+  snowfallOutlookElevationM,
+  snowfallOutlookLevel,
 }: MountainSnapshotProps) {
   const summit = elevation;
   const base = baseElevation ?? Math.max(900, summit - 500);
@@ -273,9 +279,16 @@ export function MountainSnapshot({
           transition={{ delay: 0.4 }}
           className="mt-8 pt-6 border-t border-slate-200/70"
         >
-          <div className="flex items-baseline justify-between mb-4">
+          <div className="flex items-baseline justify-between mb-4 gap-3">
             <p className="byline text-muted-foreground">Snowfall outlook</p>
-            <p className="byline text-muted-foreground/60">{modelSource}</p>
+            <div className="text-right">
+              <p className="byline text-muted-foreground/60">{modelSource}</p>
+              {snowfallOutlookElevationM != null && (
+                <p className="byline text-muted-foreground/50 mt-0.5 tabular-nums">
+                  {snowfallOutlookLevel ?? "village"} · {Math.round(snowfallOutlookElevationM)}m
+                </p>
+              )}
+            </div>
           </div>
           <div className="grid grid-cols-3 gap-4 md:gap-6">
             <SnowBar label="Next 24h" value={snow24} max={snowMax} delay={0} />

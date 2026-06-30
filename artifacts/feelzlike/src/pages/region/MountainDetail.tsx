@@ -41,6 +41,7 @@ import { MountainWebcams } from "@/components/MountainWebcams";
 import { ForecastChart } from "@/components/weather/ForecastChart";
 import { EnsembleForecast } from "@/components/weather/EnsembleForecast";
 import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
+import { midMountainElevation } from "@/lib/elevation";
 import { getLiftsForMountain } from "@/data/lifts";
 import { cn } from "@/lib/utils";
 import { BarChart2 } from "lucide-react";
@@ -73,20 +74,30 @@ export function MountainDetail() {
   const isGreen = seasonCtx?.season === "green";
   const [activeChartMetric, setActiveChartMetric] = useState<"temperature" | "snowfall" | "windSpeed">("temperature");
 
-  const q = useGetLocationWeather(locationId, {
-    query: {
-      enabled: !!locationId,
-      queryKey: getGetLocationWeatherQueryKey(locationId),
-    },
-  });
-
   // Pull mountain coords + summit elevation from the region config so the
-  // elevation-banded forecast panel can request a 3-band Open-Meteo forecast.
+  // elevation-banded forecast panel can request a 3-band Open-Meteo forecast,
+  // and so the HEADLINE snow can be derived on-mountain (mid-mountain) rather
+  // than at the village. Temp/feels-like/current stay at the village.
   const mountainCfg = region.mountains?.find((m) => m.id === locationId);
   const elevLat = mountainCfg?.lat;
   const elevLng = mountainCfg?.lng;
   const elevSummitM = mountainCfg?.elevationM;
   const elevName = mountainCfg?.name;
+  const snowElevationM = elevSummitM != null ? midMountainElevation(elevSummitM) : undefined;
+
+  const q = useGetLocationWeather(
+    locationId,
+    snowElevationM != null ? { snowElevationM } : undefined,
+    {
+      query: {
+        enabled: !!locationId,
+        queryKey: getGetLocationWeatherQueryKey(
+          locationId,
+          snowElevationM != null ? { snowElevationM } : undefined,
+        ),
+      },
+    },
+  );
 
   // Back link goes to the BASE TOWN this mountain hangs off (towns-first IA),
   // not the region home. Find the first base town whose nearbyMountainIds
@@ -478,6 +489,8 @@ export function MountainDetail() {
                   snowfallNext24h={current.snowfallNext24h ?? undefined}
                   snowfallNext48h={current.snowfallNext48h ?? undefined}
                   snowfallNext72h={current.snowfallNext72h ?? undefined}
+                  snowfallOutlookElevationM={current.snowfallOutlookElevationM ?? undefined}
+                  snowfallOutlookLevel={current.snowfallOutlookLevel ?? undefined}
                   modelSource={
                     current.dataSource ?? region.weatherSource?.label ?? "Open-Meteo"
                   }
@@ -562,7 +575,13 @@ export function MountainDetail() {
               blurb="Multi-model consensus · agreement across BOM, ECMWF and other models for the next 7 days."
               blurbJa="BOM・ECMWFなど複数モデルの合意度を可視化（今後7日間）。"
             >
-              <EnsembleForecast locationId={locationId} />
+              {/* Ensemble runs at the SAME elevation the headline snow actually
+                  resolved to (mid-mountain on success, village on fail-soft
+                  fallback), so the page never tells two snow stories at once. */}
+              <EnsembleForecast
+                locationId={locationId}
+                elevationM={current?.snowfallOutlookElevationM ?? undefined}
+              />
             </PremiumGate>
           </div>
 
@@ -643,6 +662,8 @@ type MountainWeather = {
     snowfallNext24h?: number | null;
     snowfallNext48h?: number | null;
     snowfallNext72h?: number | null;
+    snowfallOutlookElevationM?: number | null;
+    snowfallOutlookLevel?: string | null;
     windGust?: number | null;
   };
   daily: Array<{

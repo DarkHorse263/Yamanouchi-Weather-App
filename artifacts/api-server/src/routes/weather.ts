@@ -315,13 +315,28 @@ function safeParseFloat(val: string | null | undefined): number | undefined {
   return Number.isFinite(n) ? n : undefined;
 }
 
-async function fetchLocationWeather(location: LocationConfig) {
-  const [openMeteoResult, bomObs, bomSecondaryObs] = await Promise.all([
+async function fetchLocationWeather(location: LocationConfig, snowElevationM?: number) {
+  // Headline snow can be requested at an on-mountain elevation (the client
+  // passes the mid-mountain height). Snow-vs-rain hinges on elevation vs the
+  // freezing level, so the village figure understates what falls up top. We
+  // only fire the extra snowfall-only fetch when the requested elevation is
+  // meaningfully above the village; everything else (temp, feels-like, current
+  // condition, BOM reconciliation, freezing level) stays at the village - that
+  // is the feelzlike premise of what you feel when you arrive.
+  const wantsMountainSnow =
+    typeof snowElevationM === "number" &&
+    Number.isFinite(snowElevationM) &&
+    snowElevationM - location.elevation >= 50;
+
+  const [openMeteoResult, bomObs, bomSecondaryObs, mountainSnow] = await Promise.all([
     fetchOpenMeteo(location).catch(() => null),
     fetchBomObservations(location.bomWmoId, location.bomProduct),
     location.bomSecondaryWmoId
       ? fetchBomObservations(location.bomSecondaryWmoId, location.bomProduct)
-      : Promise.resolve(null)
+      : Promise.resolve(null),
+    wantsMountainSnow
+      ? fetchSnowfallAtElevation(location, snowElevationM!).catch(() => null)
+      : Promise.resolve(null),
   ]);
 
   // Forecast-source fallback: Open-Meteo is primary, but it periodically
@@ -395,7 +410,23 @@ async function fetchLocationWeather(location: LocationConfig) {
     snowfallNext24h: sumHourlySnowfall(om, 24),
     snowfallNext48h: sumHourlySnowfall(om, 48),
     snowfallNext72h: sumHourlySnowfall(om, 72),
+    // Snow outlook elevation provenance. Defaults to the village / current
+    // elevation; overridden below to the on-mountain figure when the client
+    // requests it and the second fetch succeeds (fail-soft keeps village).
+    snowfallOutlookElevationM: location.elevation,
+    snowfallOutlookLevel: "village",
   };
+
+  // Apply the on-mountain snow outlook when the second fetch succeeded.
+  // Fail-soft: if it returned nothing we keep the village figures AND leave
+  // the label as "village" - we never present village snow as mountain snow.
+  if (wantsMountainSnow && mountainSnow) {
+    current.snowfallNext24h = mountainSnow.snow24;
+    current.snowfallNext48h = mountainSnow.snow48;
+    current.snowfallNext72h = mountainSnow.snow72;
+    current.snowfallOutlookElevationM = Math.round(snowElevationM!);
+    current.snowfallOutlookLevel = "mid-mountain";
+  }
 
   // AU live-observation reconciliation. Alpine AWS report real temp/humidity and a
   // rain gauge, but not cloud/present-weather/visibility - so the global model can
@@ -625,6 +656,44 @@ async function fetchOpenMeteo(location: LocationConfig) {
   }
 }
 
+/**
+ * Snowfall-only Open-Meteo fetch at an arbitrary (on-mountain) elevation. Used
+ * to derive the headline 24/48/72h snow outlook at the height people actually
+ * ski, while the rest of the payload stays at the village. Kept deliberately
+ * narrow (hourly snowfall, next 72h) to limit extra upstream volume.
+ */
+async function fetchSnowfallAtElevation(
+  location: LocationConfig,
+  elevationM: number,
+): Promise<{ snow24?: number; snow48?: number; snow72?: number } | null> {
+  const params = new URLSearchParams({
+    latitude: location.latitude.toString(),
+    longitude: location.longitude.toString(),
+    elevation: Math.round(elevationM).toString(),
+    hourly: "snowfall",
+    timezone: location.timezone ?? "Australia/Sydney",
+    forecast_hours: "72",
+  });
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 8000);
+  try {
+    const response = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
+      signal: controller.signal,
+    });
+    if (!response.ok) {
+      throw new Error(`Open-Meteo snowfall API error: ${response.status}`);
+    }
+    const om = (await response.json()) as any;
+    return {
+      snow24: sumHourlySnowfall(om, 24),
+      snow48: sumHourlySnowfall(om, 48),
+      snow72: sumHourlySnowfall(om, 72),
+    };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 router.get("/weather", async (req, res) => {
   try {
     const region = parseRegionParam(req.query["region"]);
@@ -682,25 +751,43 @@ const WEATHER_STALE_MS = 6 * 60 * 60 * 1000; // 6 hours
 const weatherCache = new Map<string, WeatherCacheEntry>();
 const weatherInflight = new Map<string, Promise<unknown>>();
 
-async function getLocationWeatherCached(location: LocationConfig): Promise<unknown> {
+/**
+ * Optional on-mountain snow-outlook elevation, in metres. Lenient: an absent
+ * or malformed value falls back to the village figure rather than 400-ing, so
+ * the all-resorts dashboard (which never passes it) is unaffected.
+ */
+function parseSnowElevationParam(raw: unknown): number | undefined {
+  if (raw == null) return undefined;
+  const v = Number(Array.isArray(raw) ? raw[0] : raw);
+  if (!Number.isFinite(v) || v < 1 || v > 9000) return undefined;
+  return Math.round(v);
+}
+
+async function getLocationWeatherCached(
+  location: LocationConfig,
+  snowElevationM?: number,
+): Promise<unknown> {
   const now = Date.now();
-  const cached = weatherCache.get(location.id);
+  // Key the cache on the requested snow elevation too · a village request and
+  // an on-mountain request for the same resort are genuinely different payloads.
+  const cacheKey = snowElevationM != null ? `${location.id}@${snowElevationM}` : location.id;
+  const cached = weatherCache.get(cacheKey);
   if (cached && cached.freshUntil > now) return cached.data;
 
-  // Coalesce concurrent refreshes for the same location into one upstream call.
-  let inflight = weatherInflight.get(location.id);
+  // Coalesce concurrent refreshes for the same key into one upstream call.
+  let inflight = weatherInflight.get(cacheKey);
   if (!inflight) {
     inflight = (async () => {
-      const weatherData = await fetchLocationWeather(location);
+      const weatherData = await fetchLocationWeather(location, snowElevationM);
       const result = GetLocationWeatherResponse.parse(weatherData);
-      weatherCache.set(location.id, {
+      weatherCache.set(cacheKey, {
         data: result,
         freshUntil: Date.now() + WEATHER_FRESH_MS,
         staleUntil: Date.now() + WEATHER_STALE_MS,
       });
       return result;
-    })().finally(() => weatherInflight.delete(location.id));
-    weatherInflight.set(location.id, inflight);
+    })().finally(() => weatherInflight.delete(cacheKey));
+    weatherInflight.set(cacheKey, inflight);
   }
 
   try {
@@ -708,7 +795,7 @@ async function getLocationWeatherCached(location: LocationConfig): Promise<unkno
   } catch (err) {
     // On a failed refresh, serve the last good reading if it's still within
     // the stale window rather than failing the request outright.
-    const fallback = weatherCache.get(location.id);
+    const fallback = weatherCache.get(cacheKey);
     if (fallback && fallback.staleUntil > now) return fallback.data;
     throw err;
   }
@@ -730,7 +817,8 @@ router.get("/weather/:locationId", async (req, res) => {
       return;
     }
 
-    const result = await getLocationWeatherCached(location);
+    const snowElevationM = parseSnowElevationParam(req.query["snowElevationM"]);
+    const result = await getLocationWeatherCached(location, snowElevationM);
     res.json(result);
   } catch (error) {
     res.status(500).json({
@@ -753,10 +841,14 @@ router.get("/forecast/:locationId", async (req, res) => {
       res.status(404).json({ error: "LOCATION_NOT_FOUND" });
       return;
     }
+    // Optional on-mountain elevation · keeps the ensemble snow cross-check at
+    // the SAME height as the headline outlook so users don't see two numbers.
+    const elevationM = parseSnowElevationParam(req.query["elevationM"]);
+    const forecastElevation = elevationM ?? location.elevation;
     const ensemble = await getEnsembleForecast({
       latitude: location.latitude,
       longitude: location.longitude,
-      elevation: location.elevation,
+      elevation: forecastElevation,
       // NZ has no dedicated national model in the ensemble · fall back to the
       // global blend ("OTHER"). JP keeps JMA, everything else is AU.
       region: location.region === "JP" ? "JP" : location.region === "NZ" ? "OTHER" : "AU",
@@ -765,6 +857,7 @@ router.get("/forecast/:locationId", async (req, res) => {
     });
     res.json({
       location: { id: location.id, name: location.name, elevation: location.elevation },
+      forecastElevationM: forecastElevation,
       ...ensemble,
     });
   } catch (error) {

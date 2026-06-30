@@ -81,6 +81,7 @@ export * from "./getDiningParams";
 export * from "./getDiningType";
 export * from "./getElevationForecastParams";
 export * from "./getLiftStatusParams";
+export * from "./getLocationWeatherParams";
 export * from "./getPowderAlertsParams";
 export * from "./getRoadConditionsParams";
 export * from "./getVicEmergencyIncidentsParams";

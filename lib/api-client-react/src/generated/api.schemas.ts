@@ -1029,6 +1029,13 @@ export interface CurrentWeather {
   snowfallNext48h?: number;
   /** Cumulative fresh snow over the next 72 hours, in centimetres (Open-Meteo `snowfall`). */
   snowfallNext72h?: number;
+  /** Elevation in metres the snowfallNext24h/48h/72h outlook was derived at. */
+  snowfallOutlookElevationM?: number;
+  /** Provenance of the snow outlook elevation. "village" is the resort's
+current/base elevation (default); "mid-mountain" means the headline
+snow reflects an on-mountain height requested via snowElevationM.
+ */
+  snowfallOutlookLevel?: string;
 }
 
 export interface DailyForecast {
@@ -1956,6 +1963,20 @@ export type GetWeatherParams = {
 
  */
   region?: RegionFilterParameter;
+};
+
+export type GetLocationWeatherParams = {
+  /**
+ * Optional on-mountain elevation (metres) for the headline snow
+outlook. When provided, snowfallNext24h/48h/72h are derived at this
+height (snow falls higher up than the village) and the provenance is
+reported via snowfallOutlookElevationM / snowfallOutlookLevel.
+Temperature, feels-like and current conditions stay at the village.
+
+ * @minimum 1
+ * @maximum 9000
+ */
+  snowElevationM?: number;
 };
 
 export type GetWebcamsParams = {

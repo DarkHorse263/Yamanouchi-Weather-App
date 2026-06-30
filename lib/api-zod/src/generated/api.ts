@@ -1218,6 +1218,18 @@ export const GetWeatherResponse = zod.object({
           .describe(
             "Cumulative fresh snow over the next 72 hours, in centimetres (Open-Meteo `snowfall`).",
           ),
+        snowfallOutlookElevationM: zod
+          .number()
+          .optional()
+          .describe(
+            "Elevation in metres the snowfallNext24h\/48h\/72h outlook was derived at.",
+          ),
+        snowfallOutlookLevel: zod
+          .string()
+          .optional()
+          .describe(
+            'Provenance of the snow outlook elevation. \"village\" is the resort\'s\ncurrent\/base elevation (default); \"mid-mountain\" means the headline\nsnow reflects an on-mountain height requested via snowElevationM.\n',
+          ),
       }),
       daily: zod.array(
         zod.object({
@@ -1270,6 +1282,19 @@ export const getLocationWeatherPathLocationIdRegExp = new RegExp(
 
 export const GetLocationWeatherParams = zod.object({
   locationId: zod.coerce.string().regex(getLocationWeatherPathLocationIdRegExp),
+});
+
+export const getLocationWeatherQuerySnowElevationMMax = 9000;
+
+export const GetLocationWeatherQueryParams = zod.object({
+  snowElevationM: zod.coerce
+    .number()
+    .min(1)
+    .max(getLocationWeatherQuerySnowElevationMMax)
+    .optional()
+    .describe(
+      "Optional on-mountain elevation (metres) for the headline snow\noutlook. When provided, snowfallNext24h\/48h\/72h are derived at this\nheight (snow falls higher up than the village) and the provenance is\nreported via snowfallOutlookElevationM \/ snowfallOutlookLevel.\nTemperature, feels-like and current conditions stay at the village.\n",
+    ),
 });
 
 export const GetLocationWeatherResponse = zod.object({
@@ -1327,6 +1352,18 @@ export const GetLocationWeatherResponse = zod.object({
       .optional()
       .describe(
         "Cumulative fresh snow over the next 72 hours, in centimetres (Open-Meteo `snowfall`).",
+      ),
+    snowfallOutlookElevationM: zod
+      .number()
+      .optional()
+      .describe(
+        "Elevation in metres the snowfallNext24h\/48h\/72h outlook was derived at.",
+      ),
+    snowfallOutlookLevel: zod
+      .string()
+      .optional()
+      .describe(
+        'Provenance of the snow outlook elevation. \"village\" is the resort\'s\ncurrent\/base elevation (default); \"mid-mountain\" means the headline\nsnow reflects an on-mountain height requested via snowElevationM.\n',
       ),
   }),
   daily: zod.array(

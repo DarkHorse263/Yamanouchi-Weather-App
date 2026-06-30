@@ -53,6 +53,7 @@ import type {
   GetDiningParams,
   GetElevationForecastParams,
   GetLiftStatusParams,
+  GetLocationWeatherParams,
   GetPowderAlertsParams,
   GetRoadConditionsParams,
   GetVicEmergencyIncidentsParams,
@@ -3873,22 +3874,44 @@ export function useGetWeather<
  * Returns current weather and 7-day forecast for a specific resort location
  * @summary Get weather for a specific location
  */
-export const getGetLocationWeatherUrl = (locationId: string) => {
-  return `/api/weather/${locationId}`;
+export const getGetLocationWeatherUrl = (
+  locationId: string,
+  params?: GetLocationWeatherParams,
+) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? "null" : value.toString());
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0
+    ? `/api/weather/${locationId}?${stringifiedParams}`
+    : `/api/weather/${locationId}`;
 };
 
 export const getLocationWeather = async (
   locationId: string,
+  params?: GetLocationWeatherParams,
   options?: RequestInit,
 ): Promise<LocationWeather> => {
-  return customFetch<LocationWeather>(getGetLocationWeatherUrl(locationId), {
-    ...options,
-    method: "GET",
-  });
+  return customFetch<LocationWeather>(
+    getGetLocationWeatherUrl(locationId, params),
+    {
+      ...options,
+      method: "GET",
+    },
+  );
 };
 
-export const getGetLocationWeatherQueryKey = (locationId: string) => {
-  return [`/api/weather/${locationId}`] as const;
+export const getGetLocationWeatherQueryKey = (
+  locationId: string,
+  params?: GetLocationWeatherParams,
+) => {
+  return [`/api/weather/${locationId}`, ...(params ? [params] : [])] as const;
 };
 
 export const getGetLocationWeatherQueryOptions = <
@@ -3896,6 +3919,7 @@ export const getGetLocationWeatherQueryOptions = <
   TError = ErrorType<ErrorResponse>,
 >(
   locationId: string,
+  params?: GetLocationWeatherParams,
   options?: {
     query?: UseQueryOptions<
       Awaited<ReturnType<typeof getLocationWeather>>,
@@ -3908,12 +3932,12 @@ export const getGetLocationWeatherQueryOptions = <
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
   const queryKey =
-    queryOptions?.queryKey ?? getGetLocationWeatherQueryKey(locationId);
+    queryOptions?.queryKey ?? getGetLocationWeatherQueryKey(locationId, params);
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof getLocationWeather>>
   > = ({ signal }) =>
-    getLocationWeather(locationId, { signal, ...requestOptions });
+    getLocationWeather(locationId, params, { signal, ...requestOptions });
 
   return {
     queryKey,
@@ -3941,6 +3965,7 @@ export function useGetLocationWeather<
   TError = ErrorType<ErrorResponse>,
 >(
   locationId: string,
+  params?: GetLocationWeatherParams,
   options?: {
     query?: UseQueryOptions<
       Awaited<ReturnType<typeof getLocationWeather>>,
@@ -3950,7 +3975,11 @@ export function useGetLocationWeather<
     request?: SecondParameter<typeof customFetch>;
   },
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
-  const queryOptions = getGetLocationWeatherQueryOptions(locationId, options);
+  const queryOptions = getGetLocationWeatherQueryOptions(
+    locationId,
+    params,
+    options,
+  );
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
     queryKey: QueryKey;

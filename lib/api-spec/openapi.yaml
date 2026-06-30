@@ -1029,6 +1029,19 @@ paths:
               ids resolve. Previously this was a hand-maintained enum that drifted
               behind the LOCATIONS array (e.g. VHC mountains were missing), forcing
               consumers to cast. Mirrors the `/webcams/{locationId}` schema.
+        - name: snowElevationM
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 9000
+          description: |
+            Optional on-mountain elevation (metres) for the headline snow
+            outlook. When provided, snowfallNext24h/48h/72h are derived at this
+            height (snow falls higher up than the village) and the provenance is
+            reported via snowfallOutlookElevationM / snowfallOutlookLevel.
+            Temperature, feels-like and current conditions stay at the village.
       responses:
         "200":
           description: Weather data for the location
@@ -2791,6 +2804,15 @@ components:
         snowfallNext72h:
           type: number
           description: Cumulative fresh snow over the next 72 hours, in centimetres (Open-Meteo `snowfall`).
+        snowfallOutlookElevationM:
+          type: number
+          description: Elevation in metres the snowfallNext24h/48h/72h outlook was derived at.
+        snowfallOutlookLevel:
+          type: string
+          description: |
+            Provenance of the snow outlook elevation. "village" is the resort's
+            current/base elevation (default); "mid-mountain" means the headline
+            snow reflects an on-mountain height requested via snowElevationM.
       required:
         - temperature
         - feelsLike

@@ -44,6 +44,7 @@ import { getLiftsForMountain } from "@/data/lifts";
 import { ForecastChart } from "@/components/weather/ForecastChart";
 import { EnsembleForecast } from "@/components/weather/EnsembleForecast";
 import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
+import { midMountainElevation } from "@/lib/elevation";
 import { cn } from "@/lib/utils";
 import { BarChart2 } from "lucide-react";
 
@@ -137,9 +138,14 @@ export default function ResortDetail() {
   // region config - so any mountain added to yamanouchi.ts works automatically.
   const mountain = (region.mountains ?? []).find((m) => m.id === id);
   const enabled = !!mountain;
-  const { data, isLoading, error } = useGetLocationWeather(id as WeatherId, {
-    query: { enabled, refetchInterval: 600_000 } as never,
-  });
+  // Headline snow derived on-mountain (mid-mountain), not at the village -
+  // temp / feels-like / current conditions stay at the village.
+  const snowElevationM = mountain?.elevationM != null ? midMountainElevation(mountain.elevationM) : undefined;
+  const { data, isLoading, error } = useGetLocationWeather(
+    id as WeatherId,
+    snowElevationM != null ? { snowElevationM } : undefined,
+    { query: { enabled, refetchInterval: 600_000 } as never },
+  );
 
   if (!enabled) {
     return (
@@ -403,6 +409,8 @@ export default function ResortDetail() {
                 snowfallNext24h={current.snowfallNext24h ?? undefined}
                 snowfallNext48h={current.snowfallNext48h ?? undefined}
                 snowfallNext72h={current.snowfallNext72h ?? undefined}
+                snowfallOutlookElevationM={current.snowfallOutlookElevationM ?? undefined}
+                snowfallOutlookLevel={current.snowfallOutlookLevel ?? undefined}
                 modelSource="Open-Meteo · JMA · ECMWF"
               />
             )}
@@ -485,7 +493,13 @@ export default function ResortDetail() {
           blurb="Multi-model consensus · agreement across JMA, ECMWF and other models for the next 7 days."
           blurbJa="JMA・ECMWFなど複数モデルの合意度を可視化（今後7日間）。"
         >
-          <EnsembleForecast locationId={id} />
+          {/* Ensemble runs at the SAME elevation the headline snow actually
+              resolved to (mid-mountain on success, village on fail-soft
+              fallback), so the page never tells two snow stories at once. */}
+          <EnsembleForecast
+            locationId={id}
+            elevationM={current.snowfallOutlookElevationM ?? undefined}
+          />
         </PremiumGate>
 
         {/* PREMIUM · Personalised triggers · push when conditions hit. */}

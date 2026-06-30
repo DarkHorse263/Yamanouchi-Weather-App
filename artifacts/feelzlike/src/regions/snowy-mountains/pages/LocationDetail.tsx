@@ -3,6 +3,7 @@ import { useRegion } from "@workspace/feelzlike-shell";
 import { useGetLocationWeather, useGetLocationWebcams, useGetLocationLiftStatus } from "@workspace/api-client-react";
 import { MountainSnapshot } from "@workspace/feelzlike-dashboard";
 import { ElevationBands } from "@/components/weather/ElevationBands";
+import { midMountainElevation } from "@/lib/elevation";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
 import { LoadingState } from "../components/ui/loading-state";
@@ -150,7 +151,18 @@ export default function LocationDetail() {
   const locationId = params?.id as LocationId;
   const { region } = useRegion();
 
-  const { data: weatherData, isLoading: weatherLoading, error: weatherError, refetch: weatherRefetch } = useGetLocationWeather(locationId, { query: { enabled: !!locationId } as never });
+  // Headline snow is derived ON-MOUNTAIN (mid-mountain), not at the village -
+  // snow falls higher up, so the village figure understates what riders see.
+  // Summit lives in the region config; everything else (temp, feels-like,
+  // current conditions) stays at the village.
+  const summitElevationM = region.mountains?.find((m) => m.id === locationId)?.elevationM;
+  const snowElevationM = summitElevationM != null ? midMountainElevation(summitElevationM) : undefined;
+
+  const { data: weatherData, isLoading: weatherLoading, error: weatherError, refetch: weatherRefetch } = useGetLocationWeather(
+    locationId,
+    snowElevationM != null ? { snowElevationM } : undefined,
+    { query: { enabled: !!locationId } as never },
+  );
   const { data: webcamData } = useGetLocationWebcams(locationId, { query: { enabled: !!locationId } as never });
   const isResort = locationId === "thredbo" || locationId === "perisher" || locationId === "charlottes-pass" || locationId === "selwyn";
   const { data: liftData } = useGetLocationLiftStatus(locationId as any, { query: { enabled: isResort } as never });
@@ -828,6 +840,8 @@ export default function LocationDetail() {
               snowfallNext24h={current.snowfallNext24h ?? undefined}
               snowfallNext48h={current.snowfallNext48h ?? undefined}
               snowfallNext72h={current.snowfallNext72h ?? undefined}
+              snowfallOutlookElevationM={current.snowfallOutlookElevationM ?? undefined}
+              snowfallOutlookLevel={current.snowfallOutlookLevel ?? undefined}
             />
           )}
         </PremiumGate>
@@ -907,7 +921,13 @@ export default function LocationDetail() {
           blurb="Multi-model consensus · agreement across BOM, ECMWF and other models for the next 7 days."
           blurbJa="BOM・ECMWFなど複数モデルの合意度を可視化（今後7日間）。"
         >
-          <EnsembleForecast locationId={locationId} />
+          {/* Ensemble runs at the SAME elevation the headline snow actually
+              resolved to (mid-mountain on success, village on fail-soft
+              fallback), so the page never tells two snow stories at once. */}
+          <EnsembleForecast
+            locationId={locationId}
+            elevationM={current.snowfallOutlookElevationM ?? undefined}
+          />
         </PremiumGate>
 
         {/* PREMIUM - Personalised alerts (UI only for now).
