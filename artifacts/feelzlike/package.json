@@ -17,7 +17,6 @@
     "test:windHold": "tsx --test src/lib/__tests__/windHoldPrediction.test.ts",
     "test:powderFactor": "tsx --test src/lib/__tests__/powderFactor.test.ts",
     "test:tripPlanner": "tsx --test src/lib/__tests__/tripPlanner.test.ts",
-    "test:tripWindow": "tsx --test src/lib/__tests__/tripWindowScore.test.ts",
     "test:regionProximity": "tsx --test src/lib/__tests__/regionProximity.test.ts",
     "test:precip": "tsx --test src/lib/__tests__/precip.test.ts",
     "test:nearYouRegionRow": "tsx --tsconfig tsconfig.test.json --test src/components/home/__tests__/NearYouRegionRow.test.tsx",
@@ -25,7 +24,7 @@
     "test:cj": "tsx --test src/lib/__tests__/cj.test.ts",
     "test:bomRadar": "tsx --test src/lib/__tests__/bom-radar.test.ts",
     "test:snowmaking": "tsx --test src/lib/__tests__/snowmaking.test.ts",
-    "test:all": "tsx --test src/lib/__tests__/mountainScore.test.ts src/lib/__tests__/windHoldPrediction.test.ts src/lib/__tests__/powderFactor.test.ts src/lib/__tests__/tripPlanner.test.ts src/lib/__tests__/tripWindowScore.test.ts src/lib/__tests__/regionProximity.test.ts src/lib/__tests__/precip.test.ts src/lib/__tests__/skiSeason.test.ts src/lib/__tests__/cj.test.ts src/lib/__tests__/snowmaking.test.ts src/lib/__tests__/bom-radar.test.ts && tsx --tsconfig tsconfig.test.json --test src/components/home/__tests__/NearYouRegionRow.test.tsx"
+    "test:all": "tsx --test src/lib/__tests__/mountainScore.test.ts src/lib/__tests__/windHoldPrediction.test.ts src/lib/__tests__/powderFactor.test.ts src/lib/__tests__/tripPlanner.test.ts src/lib/__tests__/regionProximity.test.ts src/lib/__tests__/precip.test.ts src/lib/__tests__/skiSeason.test.ts src/lib/__tests__/cj.test.ts src/lib/__tests__/snowmaking.test.ts src/lib/__tests__/bom-radar.test.ts && tsx --tsconfig tsconfig.test.json --test src/components/home/__tests__/NearYouRegionRow.test.tsx"
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.10.0",

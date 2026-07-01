@@ -2,22 +2,34 @@
  * Trip planner · ensemble-per-mountain data hook.
  *
  * Fans out one `/api/forecast/:id` request per saved mountain and maps each
- * response onto the pure `PlannerForecastDay` contract the window ranker
- * consumes. Each mountain fetches at its own mid-mountain elevation so the
- * snow numbers line up with the elevation-adjusted outlook the detail pages
- * already show.
+ * response onto a small day contract the comparison snapshot renders. Each
+ * mountain fetches at its own mid-mountain elevation so the snow numbers line
+ * up with the elevation-adjusted outlook the detail pages already show.
  *
  * Fail-soft is per mountain: one resort 404-ing or timing out becomes a single
- * `error` gap · it never blanks the whole planner or fakes a forecast.
+ * `error` entry · it never blanks the whole planner or fakes a forecast.
  */
 import { useQueries } from "@tanstack/react-query";
 import { midMountainElevation } from "@/lib/elevation";
 import { mountainKey, type CatalogMountain } from "@/lib/tripPlanner";
-import type {
-  PlannerForecastDay,
-  PlannerForecastEntry,
-  PlannerMountain,
-} from "@/lib/tripWindowScore";
+
+/** One day of the elevation-adjusted ensemble outlook, as the snapshot reads it. */
+export interface PlannerForecastDay {
+  date: string;
+  tempMaxMean: number;
+  tempMinMean: number;
+  precipMean: number;
+  snowMean: number;
+  snowSpread: number;
+  sourcesCount: number;
+  confidence: "high" | "medium" | "low";
+}
+
+/** Per-mountain fetch state · loading / error is honest, ok carries the days. */
+export type PlannerForecastEntry =
+  | { status: "loading" }
+  | { status: "error" }
+  | { status: "ok"; days: PlannerForecastDay[] };
 
 /** The subset of the `/forecast/:id` ensemble payload the planner reads. */
 interface ForecastApiDay {
@@ -50,19 +62,9 @@ function toPlannerDay(d: ForecastApiDay): PlannerForecastDay {
   };
 }
 
-/** Adapt a catalog mountain to the ranker's metadata-only mountain shape. */
-export function catalogToPlannerMountain(m: CatalogMountain): PlannerMountain {
-  return {
-    key: mountainKey(m.regionId, m.id),
-    name: m.name,
-    regionId: m.regionId,
-    regionLabel: m.regionName,
-  };
-}
-
 /**
  * Fetch the ensemble forecast for every saved mountain and return a map keyed
- * by the same composite key the ranker expects · `rankTripWindows(saved, map)`.
+ * by the mountain's composite key · `forecasts[mountainKey(...)]`.
  */
 export function useTripForecasts(
   mountains: CatalogMountain[],
