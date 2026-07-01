@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Radar, CableCar, Newspaper, Heart, Smartphone, ArrowRight } from "lucide-react";
+import { Radar, CableCar, Heart, Smartphone, ArrowRight } from "lucide-react";
 import { COUNTRY_META, regionsForCountry, type CountryCode } from "@/regions";
 import { track } from "@/lib/analytics";
 
@@ -46,13 +46,6 @@ const FEATURES: Array<{
     icon: CableCar,
     title: "lift status",
     body: "which lifts are likely running, read from the season, snow depth and live feeds",
-  },
-  {
-    icon: Newspaper,
-    title: "mountain news",
-    body: "the latest from across the mountains, gathered into one feed",
-    href: "/news",
-    event: "welcome_desktop_news_click",
   },
   {
     icon: Heart,

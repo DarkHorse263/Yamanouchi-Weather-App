@@ -66,7 +66,6 @@ const staticUrls = [
   url("/au",              "daily",   "0.9"),
   url("/jp",              "daily",   "0.9"),
   url("/nz",              "daily",   "0.9"),
-  url("/news",            "daily",   "0.9"),
   url("/plan",            "weekly",  "0.8"),
   url("/near-you",        "weekly",  "0.6"),
   url("/legal/privacy",   "monthly", "0.4"),

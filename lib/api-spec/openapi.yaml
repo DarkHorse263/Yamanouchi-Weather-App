@@ -17,8 +17,6 @@ tags:
     description: Snow outlook and forecasts
   - name: alerts
     description: Powder alerts
-  - name: announcements
-    description: Resort announcements and updates feed
   - name: accommodation
     description: Accommodation listings
   - name: dining
@@ -151,29 +149,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AlertsData"
-        "400":
-          description: Invalid region value
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-
-  /announcements:
-    get:
-      operationId: getAnnouncements
-      tags: [announcements]
-      summary: Get resort announcements
-      description: |
-        Returns published resort announcements (opening dates, snowmaking, lift status, events, conditions) for a region, pinned items first then newest first. Backed by the `resort_announcements` table in Postgres. Regions with no rows return an empty list.
-      parameters:
-        - $ref: "#/components/parameters/RegionFilter"
-      responses:
-        "200":
-          description: Resort announcements
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AnnouncementsData"
         "400":
           description: Invalid region value
           content:
@@ -374,94 +349,6 @@ paths:
                 $ref: "#/components/schemas/ElevationForecastResponse"
         "400":
           description: Invalid query parameters.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-
-  /newsletter/subscribe:
-    post:
-      operationId: subscribeToNewsletter
-      tags: [newsletter]
-      summary: Subscribe to the feelzlike newsletter (general digest)
-      description: Creates (or updates) a newsletter subscription for the given email and sends a verification email. Idempotent — re-submitting with the same email updates preferences. Independent of powder alerts.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/NewsletterSubscribeRequest"
-      responses:
-        "200":
-          description: Subscription accepted
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NewsletterSubscribeResponse"
-        "400":
-          description: Invalid input
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-
-  /newsletter/verify:
-    get:
-      operationId: verifyNewsletterSubscription
-      tags: [newsletter]
-      summary: Confirm a newsletter subscription via the verification email link
-      parameters:
-        - name: token
-          in: query
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Verified
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NewsletterVerifyResponse"
-        "400":
-          description: Invalid or expired token
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-        "404":
-          description: Subscriber not found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-
-  /newsletter/unsubscribe:
-    post:
-      operationId: unsubscribeFromNewsletter
-      tags: [newsletter]
-      summary: One-click newsletter unsubscribe via tokenised link
-      parameters:
-        - name: token
-          in: query
-          required: true
-          schema:
-            type: string
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UnsubscribeBody"
-      responses:
-        "200":
-          description: Unsubscribed
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenericOkResponse"
-        "400":
-          description: Invalid token
           content:
             application/json:
               schema:
@@ -1822,51 +1709,6 @@ components:
         - status
         - description
 
-    AnnouncementsData:
-      type: object
-      properties:
-        announcements:
-          type: array
-          items:
-            $ref: "#/components/schemas/Announcement"
-        updatedAt:
-          type: string
-      required:
-        - announcements
-        - updatedAt
-
-    Announcement:
-      type: object
-      properties:
-        id:
-          type: string
-        region:
-          type: string
-        resort:
-          type: ["string", "null"]
-        category:
-          type: string
-          enum: [opening, snowmaking, lifts, event, conditions, general, news]
-        title:
-          type: string
-        body:
-          type: ["string", "null"]
-        sourceName:
-          type: ["string", "null"]
-        sourceUrl:
-          type: ["string", "null"]
-        pinned:
-          type: boolean
-        publishedAt:
-          type: string
-      required:
-        - id
-        - region
-        - category
-        - title
-        - pinned
-        - publishedAt
-
     SubscribeRequest:
       type: object
       properties:
@@ -2030,62 +1872,6 @@ components:
           type: string
       required:
         - ok
-
-    NewsletterSubscribeRequest:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-        regions:
-          type: array
-          items:
-            type: string
-          description: Regions of interest. Empty array means "all regions".
-        cadence:
-          type: string
-          enum: [weekly, fortnightly, monthly]
-          description: How often the user wants to hear from us. Default fortnightly.
-        source:
-          type: ["string", "null"]
-          description: Optional free-text marker for which CTA the signup came from (e.g. "footer", "landing-cta").
-        consent:
-          type: boolean
-          description: Must be true. Plain-English consent that we'll only send the digest and that unsubscribe is one-click.
-      required:
-        - email
-        - consent
-
-    NewsletterSubscribeResponse:
-      type: object
-      properties:
-        ok:
-          type: boolean
-        status:
-          type: string
-          enum: [verification_sent, already_verified]
-        message:
-          type: string
-        emailDelivered:
-          type: boolean
-        devVerifyUrl:
-          type: ["string", "null"]
-          description: Present only in development when no email provider is configured.
-      required:
-        - ok
-        - status
-        - message
-
-    NewsletterVerifyResponse:
-      type: object
-      properties:
-        ok:
-          type: boolean
-        email:
-          type: string
-      required:
-        - ok
-        - email
 
     Accommodation:
       type: object

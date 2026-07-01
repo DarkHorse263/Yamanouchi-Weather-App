@@ -18,13 +18,9 @@ import sentryTestRouter from "./sentry-test";
 import alertsSubscriptionsRouter from "./alerts-subscriptions";
 import alertsPushRouter from "./alerts-push";
 import alertsInternalRouter from "./alerts-internal";
-import announcementsRouter from "./announcements";
-import announcementsInternalRouter from "./announcements-internal";
-import newsletterRouter from "./newsletter";
 import elevationForecastRouter from "./elevation-forecast";
 import authRouter from "./auth";
 import adminRouter from "./admin";
-import newsClicksRouter from "./news-clicks";
 
 const router: IRouter = Router();
 
@@ -47,12 +43,8 @@ router.use(regionsRouter);
 router.use(alertsSubscriptionsRouter);
 router.use(alertsPushRouter);
 router.use(alertsInternalRouter);
-router.use(announcementsRouter);
-router.use(announcementsInternalRouter);
-router.use(newsletterRouter);
 router.use(elevationForecastRouter);
 router.use(authRouter);
-router.use(newsClicksRouter);
 router.use("/admin", adminRouter);
 
 export default router;

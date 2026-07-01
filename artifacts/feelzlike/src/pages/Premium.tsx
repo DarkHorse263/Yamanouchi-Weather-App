@@ -165,16 +165,16 @@ export default function Premium() {
 
           <div className="mt-4 pt-4 border-t border-border/60">
             <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">
-              subscribe
+              powder alerts · the premium feature you can use today
             </p>
             <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
               {isPromoPeriod && promoEndsAt
-                ? `join free and get every premium feature until ${formatDate(
+                ? `pick your regions and we'll email you when powder's on the way. free for subscribers until ${formatDate(
                     promoEndsAt,
-                  )}. we'll email you before paid plans start. no card needed.`
-                : "join the list and we'll let you know when plans open. no card needed."}
+                  )} · no card needed.`
+                : "pick your regions and we'll email you when powder's on the way."}
             </p>
-            <PremiumSubscribe source="premium" />
+            <PremiumSubscribe />
           </div>
         </div>
 

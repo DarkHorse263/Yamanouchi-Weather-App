@@ -18,18 +18,14 @@ import { useLocation } from "wouter";
 import AlertsVerify from "@/pages/alerts/Verify";
 import AlertsManage from "@/pages/alerts/Manage";
 import AlertsUnsubscribed from "@/pages/alerts/Unsubscribed";
-import NewsletterVerify from "@/pages/newsletter/Verify";
-import NewsletterUnsubscribed from "@/pages/newsletter/Unsubscribed";
 import CountryHome from "@/pages/CountryHome";
 import NearYouWeather from "@/pages/NearYouWeather";
 import Privacy from "@/pages/legal/Privacy";
 import Terms from "@/pages/legal/Terms";
-import News from "@/pages/News";
 import TripPlanner from "@/pages/TripPlanner";
 import Premium from "@/pages/Premium";
 import AdminStats from "@/pages/admin/AdminStats";
 import AdminTraffic from "@/pages/admin/AdminTraffic";
-import AdminNewsletter from "@/pages/admin/AdminNewsletter";
 
 const queryClient = new QueryClient();
 
@@ -48,17 +44,11 @@ function Router() {
       <Route path="/alerts/verify" component={AlertsVerify} />
       <Route path="/alerts/manage" component={AlertsManage} />
       <Route path="/alerts/unsubscribed" component={AlertsUnsubscribed} />
-      <Route path="/newsletter/verify" component={NewsletterVerify} />
-      <Route path="/newsletter/unsubscribed" component={NewsletterUnsubscribed} />
       {/* Legal pages · multi-country aware Privacy + Terms. Reachable
           from every footer; mounted before /:region/* so the slugs
           aren't parsed as regions. */}
       <Route path="/legal/privacy" component={Privacy} />
       <Route path="/legal/terms" component={Terms} />
-      {/* News & updates · curated feed (now populated) + the home strip's
-          "see all news" target. */}
-      <Route path="/news" component={News} />
-      <Route path="/news/" component={News} />
       {/* Premium hub · what's premium and (during the launch promo) that it's
           free for subscribers until 31 december 2026, with monthly & yearly
           pricing shown for after. Mounted before /:region so /premium isn't
@@ -72,7 +62,6 @@ function Router() {
           /admin/* paths aren't parsed as region slugs. */}
       <Route path="/admin" component={AdminStats} />
       <Route path="/admin/traffic" component={AdminTraffic} />
-      <Route path="/admin/newsletter" component={AdminNewsletter} />
       {/* Country index pages - must come before the /:region catch-all so
           /au and /jp resolve to a regions-in-country picker, not the region
           layout (which would 404 on the country code). */}

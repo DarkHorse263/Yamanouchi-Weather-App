@@ -106,7 +106,7 @@ export function AppShell({
   // hrefs to /:region/<path> and bounce them through TownLayout's
   // unknown-town redirect. The `~/` prefix is wouter's documented
   // escape that pins navigation to the app root.
-  const GLOBAL_MOUNTAIN_PATHS = new Set(["/premium", "/news", "/plan"]);
+  const GLOBAL_MOUNTAIN_PATHS = new Set(["/premium", "/plan"]);
   const isGlobalMountainPath = (p: string) => GLOBAL_MOUNTAIN_PATHS.has(p);
 
   const isActiveTown = (subpath: string) =>
@@ -169,9 +169,8 @@ export function AppShell({
         icon: it.icon,
         label: t(it.label, it.labelJa),
         active: isActiveMountain(it.path),
-        // No mountain-scope nav entry is paywalled anymore (Premium is hidden
-        // until traction and the old Alerts tab is now a free News link), so
-        // never show the lock glyph.
+        // No mountain-scope nav entry shows a lock glyph · the Premium hub
+        // itself is open (it explains what's premium).
         locked: false,
       });
     };
@@ -179,8 +178,6 @@ export function AppShell({
     // - /mountains gone (accessed via "Weather in mountains" panel on Today)
     // - /cams folded into /roads ("Roads & cams")
     // - /radar folded into /weather ("Weather forecast")
-    // - the old winter-only Alerts tab is now a free "News" link that targets
-    //   the global /news page (article links across all regions)
     pushTown("/");                  // Today
     pushTown("/weather");           // Weather forecast
     pushTown("/roads");             // Roads & cams
@@ -188,7 +185,6 @@ export function AppShell({
     pushTown("/stay");              // Stay
     pushTown("/eat");               // Eat
     pushTown("/explore");           // Explore
-    pushMountain("/news");          // News (global /news page)
     pushMountain("/plan");          // Trip planner (global /plan page)
     pushMountain("/premium");       // Premium hub (global /premium page)
     // Future-proofing: append anything we forgot to enumerate above.

@@ -8,6 +8,20 @@ import rateLimit from "express-rate-limit";
 import * as Sentry from "@sentry/node";
 import router from "./routes";
 import { authMiddleware } from "./middlewares/authMiddleware.js";
+import { setSubscriptionResolver } from "./middlewares/require-entitlement.js";
+import { isPromoActive } from "./lib/promo.js";
+
+// Entitlement resolver. During the launch promo every premium feature is free
+// for everyone, so we grant a synthetic active "pro" subscription while the
+// window is open. After the promo closes this returns null (free tier), so
+// `requireEntitlement(...)` becomes a real 402 paywall. When billing lands,
+// replace the post-promo branch with the real subscription lookup off `req`.
+setSubscriptionResolver(() => {
+  if (isPromoActive()) {
+    return { tier: "pro", status: "active" };
+  }
+  return null;
+});
 
 const app: Express = express();
 
@@ -170,11 +184,10 @@ if (process.env.NODE_ENV === "production") {
   // Top-level routes handled by the SPA (before the /:region catch-all).
   const KNOWN_TOP_LEVEL = new Set([
     "/", "/countries", "/au", "/jp", "/nz", "/near-you",
-    "/news", "/plan", "/legal/privacy", "/legal/terms",
+    "/plan", "/legal/privacy", "/legal/terms",
     "/premium",
     "/alerts/verify", "/alerts/manage", "/alerts/unsubscribed",
-    "/newsletter/verify", "/newsletter/unsubscribed",
-    "/admin", "/admin/traffic", "/admin/newsletter",
+    "/admin", "/admin/traffic",
   ]);
 
   // Valid sub-paths under /:region/ that are indexable pages.

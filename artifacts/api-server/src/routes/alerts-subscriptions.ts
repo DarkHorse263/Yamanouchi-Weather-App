@@ -7,6 +7,7 @@ import { sendEmail } from "../lib/emailSender.js";
 import { verificationEmail } from "../lib/emailTemplates.js";
 import { getAppPublicUrl } from "../lib/appUrl.js";
 import { REGION_IDS, type RegionId } from "../lib/regions.js";
+import { requireEntitlement } from "../middlewares/require-entitlement.js";
 
 const router: IRouter = Router();
 
@@ -109,7 +110,12 @@ function publicSubscriberShape(row: {
 }
 
 // ─── POST /alerts/subscribe ───────────────────────────────────────────────
-router.post("/alerts/subscribe", async (req, res): Promise<void> => {
+// Powder alerts are a premium feature. `requireEntitlement("alerts.snow")`
+// lets everyone through during the launch promo (the resolver grants a
+// synthetic pro sub while the window is open) and returns 402 afterwards.
+// Verify / manage / unsubscribe stay open so existing subscribers can always
+// confirm, edit, and opt out - the latter is also a legal requirement.
+router.post("/alerts/subscribe", requireEntitlement("alerts.snow"), async (req, res): Promise<void> => {
   const schema = AlertsSubscribeBody.safeParse(req.body);
   if (!schema.success) {
     res.status(400).json({ error: "INVALID_BODY", message: "Request body is malformed." });

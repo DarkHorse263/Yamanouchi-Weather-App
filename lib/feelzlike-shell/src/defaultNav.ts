@@ -6,7 +6,6 @@ import {
   BedDouble,
   UtensilsCrossed,
   Compass,
-  Newspaper,
   CalendarDays,
   Sparkles,
 } from "lucide-react";
@@ -26,20 +25,13 @@ export const DEFAULT_TOWN_NAV: NavItem[] = [
 /**
  * Sidebar items for the "Mountains" section. Paths are RELATIVE to /:region,
  * EXCEPT globally-mounted routes flagged in AppShell's GLOBAL_MOUNTAIN_PATHS
- * (e.g. /news), which target App.tsx top-level pages via wouter's `~/` escape.
+ * (e.g. /plan), which target App.tsx top-level pages via wouter's `~/` escape.
  *
  * May 2026 restructure: dropped /mountains and /radar (mountains accessed
  * inline from the Today page; radar embedded in /weather).
  */
 export const DEFAULT_MOUNTAIN_NAV: NavItem[] = [
-  // News · links to the best mountain, equipment and travel articles. Points
-  // at the global /news page (curated feed + automated announcements). Shown
-  // year-round (no season gate) and treated as a global path in AppShell so the
-  // region router base doesn't rewrite it to /:region/news. Replaced the old
-  // winter-only "Alerts" tab; the /:region/alerts route stays mounted in
-  // RegionLayout for direct-URL access only.
-  { path: "/news", icon: Newspaper, label: "News", labelJa: "ニュース" },
-  // Trip planner · free multi-day planner; global path so AppShell doesn't
+  // Trip planner · finds the best window to go; global path so AppShell doesn't
   // rewrite it to /:region/plan.
   { path: "/plan", icon: CalendarDays, label: "Plan a trip", labelJa: "旅行計画" },
   // Premium hub · lists what's premium and, during the launch promo, that it

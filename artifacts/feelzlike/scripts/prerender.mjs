@@ -257,16 +257,6 @@ add(
 );
 
 add(
-  "/news",
-  "news & updates · resort towns · feelzlike",
-  "Latest news, weather events, and updates from resort towns across Australia, Japan, and New Zealand.",
-  `<main>
-    <h1>news &amp; updates · resort towns</h1>
-    <p>Latest conditions, weather alerts, and updates from resort towns across Australia, Japan, and New Zealand.</p>
-  </main>`,
-);
-
-add(
   "/plan",
   "trip planner · find the best conditions · feelzlike",
   "Plan a multi-day resort town trip by comparing forecasts across regions and towns.",

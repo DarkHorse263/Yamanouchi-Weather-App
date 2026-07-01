@@ -1,7 +1,7 @@
 import { useState, useId, useMemo } from "react";
 import { useSubscribeToAlerts } from "@workspace/api-client-react";
-import { useLanguage } from "@workspace/feelzlike-shell";
-import { BellRing, Mail, Snowflake, Loader2, CheckCircle2, Check } from "lucide-react";
+import { useLanguage, usePremium } from "@workspace/feelzlike-shell";
+import { BellRing, Mail, Snowflake, Loader2, CheckCircle2, Check, Sparkles } from "lucide-react";
 
 /**
  * Powder-alert subscription form. Mounts inside any region's Alerts page.
@@ -15,7 +15,7 @@ import { BellRing, Mail, Snowflake, Loader2, CheckCircle2, Check } from "lucide-
 // server's REGION_IDS (api-server/src/lib/regions.ts). The alert evaluator
 // monitors every one of these via REGION_ANCHORS, so keep all three in sync
 // when a region goes live. Tickbox UI lets users select multiple.
-const REGIONS: Array<{ id: string; nameEn: string; nameJa: string; country: string }> = [
+export const ALERT_REGIONS: Array<{ id: string; nameEn: string; nameJa: string; country: string }> = [
   // Australia
   { id: "snowy-mountains", nameEn: "Snowy Mountains", nameJa: "スノーウィーマウンテンズ", country: "AU · NSW" },
   { id: "victorias-high-country", nameEn: "Victoria's High Country", nameJa: "ビクトリア高原地方", country: "AU · VIC" },
@@ -43,6 +43,7 @@ interface Props {
 
 export function AlertSubscribeForm({ defaultRegion }: Props) {
   const { t } = useLanguage();
+  const { isPromoPeriod, promoEndsAt } = usePremium();
   const formId = useId();
   const browserTz = useMemo(() => {
     try { return Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC"; } catch { return "UTC"; }
@@ -104,18 +105,30 @@ export function AlertSubscribeForm({ defaultRegion }: Props) {
     );
   }
 
-  const errMessage = mutation.error ? extractErrorMessage(mutation.error) : null;
+  const paymentRequired = isPaymentRequired(mutation.error);
+  const errMessage = mutation.error && !paymentRequired ? extractErrorMessage(mutation.error) : null;
   const canSubmit = !!email && regions.length > 0 && consent && !mutation.isPending;
 
   return (
     <form id={formId} onSubmit={handleSubmit} className="rounded-2xl glass border border-border p-6 space-y-4">
-      <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2">
         <BellRing className="w-5 h-5 text-primary" />
         <h3 className="text-lg font-bold text-foreground">{t("Subscribe to powder alerts", "パウダーアラートを購読")}</h3>
+        <span className="inline-flex items-center gap-1 rounded-full bg-primary/15 border border-primary/30 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">
+          <Sparkles className="w-3 h-3" /> {t("premium", "プレミアム")}
+        </span>
       </div>
       <p className="text-sm text-muted-foreground -mt-2">
         {t("We'll only email when forecast snowfall meets your threshold. Unsubscribe in one click.", "予報降雪量がしきい値に達したときのみメールを送信します。ワンクリックで購読解除できます。")}
       </p>
+      {isPromoPeriod && promoEndsAt && (
+        <p className="text-xs text-primary/90 -mt-1 font-medium">
+          {t(
+            `free for subscribers until ${formatDate(promoEndsAt)} · no card needed`,
+            `${formatDate(promoEndsAt)}まで購読者は無料 · カード不要`,
+          )}
+        </p>
+      )}
 
       <label className="block">
         <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
@@ -137,7 +150,7 @@ export function AlertSubscribeForm({ defaultRegion }: Props) {
           {t("Regions · tick the ones you want", "地域 · 必要なものにチェック")}
         </span>
         <div className="mt-1.5 grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {REGIONS.map((r) => {
+          {ALERT_REGIONS.map((r) => {
             const checked = regions.includes(r.id);
             return (
               <button
@@ -234,6 +247,20 @@ export function AlertSubscribeForm({ defaultRegion }: Props) {
         </span>
       </label>
 
+      {paymentRequired && (
+        <div className="text-xs text-foreground bg-primary/10 border border-primary/30 rounded-lg px-3 py-2.5 space-y-1.5">
+          <div className="flex items-center gap-1.5 font-bold text-primary">
+            <Sparkles className="w-3.5 h-3.5" /> {t("Powder alerts are a premium feature", "パウダーアラートはプレミアム機能です")}
+          </div>
+          <p className="text-muted-foreground leading-relaxed">
+            {t("The launch promo has ended. See plans on the premium page.", "ローンチプロモは終了しました。プレミアムページでプランをご覧ください。")}
+          </p>
+          <a href="/premium" className="inline-block text-primary font-bold underline hover:no-underline">
+            {t("Go to premium", "プレミアムへ")}
+          </a>
+        </div>
+      )}
+
       {errMessage && (
         <div className="text-xs text-rose-400 bg-rose-500/10 border border-rose-500/30 rounded-lg px-3 py-2">
           {errMessage}
@@ -249,6 +276,29 @@ export function AlertSubscribeForm({ defaultRegion }: Props) {
         {t("Subscribe", "登録する")}
       </button>
     </form>
+  );
+}
+
+function formatDate(d: Date): string {
+  return d
+    .toLocaleDateString("en-AU", { month: "long", day: "numeric", year: "numeric" })
+    .toLowerCase();
+}
+
+// The subscribe route is gated with `requireEntitlement("alerts.snow")`, which
+// returns 402 PAYMENT_REQUIRED once the launch promo ends. Detect it so we can
+// show an upgrade prompt instead of a raw error message.
+function isPaymentRequired(err: unknown): boolean {
+  if (typeof err !== "object" || err === null) return false;
+  const anyErr = err as {
+    status?: number;
+    response?: { status?: number; data?: { error?: string } };
+    data?: { error?: string };
+  };
+  if (anyErr.response?.status === 402 || anyErr.status === 402) return true;
+  return (
+    anyErr.response?.data?.error === "PAYMENT_REQUIRED" ||
+    anyErr.data?.error === "PAYMENT_REQUIRED"
   );
 }
 

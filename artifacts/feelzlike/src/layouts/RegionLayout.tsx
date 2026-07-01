@@ -12,7 +12,6 @@ import { getRegion } from "@/regions";
 import { MountainsList } from "@/pages/region/MountainsList";
 import { TownLayout } from "@/layouts/TownLayout";
 import { townNavHasContent } from "@/lib/navContent";
-import { RegionAnnouncements } from "@/components/RegionAnnouncements";
 import { RegionStay } from "@/pages/region/RegionStay";
 import { RegionSources } from "@/pages/region/RegionSources";
 import { MountainDetail as GenericMountainDetail } from "@/pages/region/MountainDetail";
@@ -99,17 +98,9 @@ export function RegionLayout() {
           )}
         </Route>
         {/* Custom region alerts pages (snowy-mountains, yamanouchi) ship a
-            subscribe surface; regions without one fall back to the shared
-            in-app resort updates feed (VHC, tasmania) instead of redirecting
-            home, so the winter-only Alerts nav entry always lands on content. */}
+            subscribe surface; regions without one redirect home. */}
         <Route path="/alerts">
-          {routes.Alerts ? (
-            <routes.Alerts />
-          ) : (
-            <div className="p-4 md:p-8 max-w-3xl mx-auto space-y-6">
-              <RegionAnnouncements />
-            </div>
-          )}
+          {routes.Alerts ? <routes.Alerts /> : <Redirect to="/" />}
         </Route>
         <Route path="/stay">
           {routes.Stay ? <routes.Stay /> : <RegionStay />}

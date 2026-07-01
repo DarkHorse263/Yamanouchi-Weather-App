@@ -1,5 +1,4 @@
 import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
-import { RegionAnnouncements } from "@/components/RegionAnnouncements";
 import { BellRing, Info, Sun } from "lucide-react";
 import { PremiumGate, useOptionalSeason } from "@workspace/feelzlike-shell";
 import { PageMeta } from "@/lib/seo/PageMeta";
@@ -40,8 +39,6 @@ export default function Alerts() {
           Get notified when significant snow is forecast.
         </p>
       </div>
-
-      <RegionAnnouncements />
 
       <div className="rounded-2xl bg-secondary/40 border border-dashed border-border p-5 flex items-start gap-3">
         <Info className="w-5 h-5 text-sky-400 mt-0.5 shrink-0" />

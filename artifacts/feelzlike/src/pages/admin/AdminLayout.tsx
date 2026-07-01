@@ -6,13 +6,12 @@ import { useAdminQuery } from "./useAdminFetch";
 interface Props {
   children: ReactNode;
   /** Currently active tab key for highlighting */
-  active: "stats" | "traffic" | "newsletter";
+  active: "stats" | "traffic";
 }
 
 const TABS: Array<{ key: Props["active"]; label: string; href: string }> = [
   { key: "stats", label: "stats", href: "/admin" },
   { key: "traffic", label: "traffic", href: "/admin/traffic" },
-  { key: "newsletter", label: "newsletter", href: "/admin/newsletter" },
 ];
 
 /**
