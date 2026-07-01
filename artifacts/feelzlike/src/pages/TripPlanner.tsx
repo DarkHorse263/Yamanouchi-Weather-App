@@ -92,7 +92,7 @@ function DestinationCard({
           </p>
         </div>
         {entry?.status === "ok" && days.length > 0 && (
-          <span className="shrink-0 inline-flex items-center gap-1.5 text-sm font-bold text-sky-700">
+          <span className="shrink-0 inline-flex items-center gap-1.5 text-sm font-bold text-[#EC008C]">
             <Snowflake className="w-4 h-4" />
             {Math.round(totalSnow)}cm
           </span>
