@@ -1,4 +1,5 @@
 - [feelzlike brand voice](feelzlike-brand-voice.md) — lowercase, middot · required (NOT forbidden), no em/en dashes, no emojis, DIN Pro, sky/blue.
+- [feelzlike snow-accent pink](feelzlike-snow-accent-color.md) — snow amounts+icons render #EC008C via --color-snow-accent; powder medals stay amber; detect via icon-identity locally / accent:"snow" in shared LiveConditions; band labels stay sky.
 - [feelzlike radar stability](feelzlike-radar-stability.md) — never reintroduce a cross-Replit iframe as the primary radar; in-repo RadarMap with independent layers is the durable pattern.
 - [feelzlike BOM radar coverage](feelzlike-bom-radar-coverage.md) — any AU point gets its own nearest covering BOM radar (not the nearest ski region); catalogue = only radars BOM serves a gif for; null coverage = no Official tab, honest copy.
 - [feelzlike BOM radar animation](feelzlike-bom-radar-animation.md) — Official AU tab IS animated (composite of BOM layers+frames); frames are 10-min :X4 NOT 6-min; respect BOM whole-egress rate-limit (cache/dedupe/allowlist/stale); degrade still→link-out.

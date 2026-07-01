@@ -428,8 +428,8 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-2 gap-2">
               {[
-                { icon: Snowflake,            label: t("24h Snow", "24h降雪"), value: `${data.bestResort.snow24h ?? 0} cm`,    color: "text-sky-600" },
-                { icon: Ruler,                label: t("Base", "積雪"),         value: `${data.bestResort.baseDepth ?? 0} cm`,  color: "text-indigo-600" },
+                { icon: Snowflake,            label: t("24h Snow", "24h降雪"), value: `${data.bestResort.snow24h ?? 0} cm`,    color: "text-snow-accent" },
+                { icon: Ruler,                label: t("Base", "積雪"),         value: `${data.bestResort.baseDepth ?? 0} cm`,  color: "text-snow-accent" },
                 { icon: ThermometerSnowflake, label: t("Temp", "気温"),         value: `${data.bestResort.temp ?? '--'}°C`,    color: "text-foreground" },
                 { icon: Wind,                 label: t("Wind", "風速"),         value: `${data.bestResort.wind ?? '--'} km/h`, color: "text-foreground" },
               ].map(({ icon: Icon, label, value, color }) => (
@@ -462,7 +462,7 @@ export default function Home() {
                 <div className="grid grid-cols-3 divide-x divide-border">
                   <div className="pr-4 text-center">
                     <p className="byline text-muted-foreground mb-1">{t("New Snow", "新雪")}</p>
-                    <p className="display-number text-lg text-sky-600" data-numeric>
+                    <p className="display-number text-lg text-snow-accent" data-numeric>
                       {region.topSnow ?? 0}
                       <span className="text-xs font-medium text-muted-foreground ml-0.5">cm</span>
                     </p>

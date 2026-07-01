@@ -54,7 +54,7 @@ function DayCell({ day }: { day: PlannerForecastDay }) {
       </span>
       <span
         className={`mt-1.5 inline-flex items-center gap-0.5 text-[11px] font-bold leading-none ${
-          snow > 0 ? "text-sky-700" : "text-muted-foreground/60"
+          snow > 0 ? "text-snow-accent" : "text-muted-foreground/60"
         }`}
       >
         <Snowflake className="w-2.5 h-2.5" />
@@ -92,7 +92,7 @@ function DestinationCard({
           </p>
         </div>
         {entry?.status === "ok" && days.length > 0 && (
-          <span className="shrink-0 inline-flex items-center gap-1.5 text-sm font-bold text-[#EC008C]">
+          <span className="shrink-0 inline-flex items-center gap-1.5 text-sm font-bold text-snow-accent">
             <Snowflake className="w-4 h-4" />
             {Math.round(totalSnow)}cm
           </span>

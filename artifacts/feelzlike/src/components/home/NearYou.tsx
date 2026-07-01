@@ -146,7 +146,7 @@ function weatherIconColor(code: number | null): string {
   if (code == null) return "text-sky-500";
   if (code >= 51 && code <= 57) return "text-blue-400";
   if ((code >= 61 && code <= 67) || (code >= 80 && code <= 82)) return "text-blue-600";
-  if ((code >= 71 && code <= 77) || code === 85 || code === 86) return "text-sky-400";
+  if ((code >= 71 && code <= 77) || code === 85 || code === 86) return "text-snow-accent";
   return "text-sky-500";
 }
 

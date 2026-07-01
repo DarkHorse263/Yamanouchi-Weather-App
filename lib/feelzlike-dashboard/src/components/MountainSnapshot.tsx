@@ -331,7 +331,7 @@ function SnowBar({ label, value, max, delay }: { label: string; value: number; m
     <div className="space-y-2">
       <div className="flex items-baseline justify-between">
         <p className="byline text-muted-foreground/80">{label}</p>
-        <p className="font-display text-base text-foreground tabular-nums" data-numeric>
+        <p className={cn("font-display text-base tabular-nums", value > 0 ? "text-snow-accent" : "text-foreground")} data-numeric>
           {value > 0 ? `${value.toFixed(value >= 10 ? 0 : 1)}` : "—"}
           <span className="text-muted-foreground/60 text-[10px] ml-1 font-normal">cm</span>
         </p>
@@ -341,7 +341,7 @@ function SnowBar({ label, value, max, delay }: { label: string; value: number; m
           initial={{ width: 0 }}
           animate={{ width: `${value > 0 ? Math.max(4, pct) : 0}%` }}
           transition={{ duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] }}
-          className="h-full bg-slate-700"
+          className={cn("h-full", value > 0 ? "bg-snow-accent" : "bg-slate-700")}
         />
       </div>
     </div>

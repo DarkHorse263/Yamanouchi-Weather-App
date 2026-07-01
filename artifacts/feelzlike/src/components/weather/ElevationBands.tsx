@@ -198,7 +198,7 @@ function BandCell({
       </p>
       <p
         className={`text-[11px] mt-1 inline-flex items-center gap-1 ${
-          hasSnow ? "text-sky-700 font-medium" : "text-muted-foreground/60"
+          hasSnow ? "text-snow-accent font-medium" : "text-muted-foreground/60"
         }`}
       >
         {hasSnow ? <Snowflake className="w-2.5 h-2.5" /> : <CloudSnow className="w-2.5 h-2.5" />}
@@ -325,7 +325,7 @@ function BandRow({
         </span>
         <span
           className={`text-[11px] inline-flex items-center gap-1 tabular-nums w-[58px] justify-end ${
-            hasSnow ? "text-sky-700 font-medium" : "text-muted-foreground/60"
+            hasSnow ? "text-snow-accent font-medium" : "text-muted-foreground/60"
           }`}
         >
           {hasSnow ? <Snowflake className="w-2.5 h-2.5" /> : <CloudSnow className="w-2.5 h-2.5" />}

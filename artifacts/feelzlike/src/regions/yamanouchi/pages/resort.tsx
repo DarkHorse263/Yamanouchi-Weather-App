@@ -207,6 +207,7 @@ export default function ResortDetail() {
       label: t("Snow depth", "積雪"),
       value: current.snowDepth != null ? `${current.snowDepth} cm` : "-",
       icon: Snowflake,
+      accent: "snow",
     },
     ...(current.dewpoint !== undefined
       ? [{ label: t("Dew point", "露点"), value: `${Math.round(current.dewpoint)}°C`, icon: Droplets }]

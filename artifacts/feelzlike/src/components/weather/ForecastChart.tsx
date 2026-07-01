@@ -18,7 +18,7 @@ export function ForecastChart({ data, metric }: ForecastChartProps) {
 
   const config = {
     temperature: { color: "hsl(var(--primary))", unit: "°C", label: "Temperature" },
-    snowfall: { color: "hsl(204, 100%, 75%)", unit: "cm", label: "Snowfall" },
+    snowfall: { color: "#ec008c", unit: "cm", label: "Snowfall" },
     windSpeed: { color: "hsl(217, 32%, 60%)", unit: "km/h", label: "Wind" },
   };
 

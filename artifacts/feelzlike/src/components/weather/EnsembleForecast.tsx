@@ -130,8 +130,8 @@ export function EnsembleForecast({ locationId, elevationM }: Props) {
               <div className="flex items-center gap-2 flex-1 min-w-0 text-xs text-muted-foreground/85">
                 {showSnow && (
                   <span className="inline-flex items-center gap-1">
-                    <Snowflake className="w-3 h-3 text-sky-400" />
-                    <span data-numeric>{day.snowMean.toFixed(0)} cm</span>
+                    <Snowflake className="w-3 h-3 text-snow-accent" />
+                    <span data-numeric className="text-snow-accent font-medium">{day.snowMean.toFixed(0)} cm</span>
                   </span>
                 )}
                 {showRain && (

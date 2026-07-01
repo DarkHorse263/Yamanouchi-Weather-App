@@ -38,6 +38,8 @@
 
   --color-snow: hsl(var(--snow));
   --color-snow-foreground: hsl(var(--snow-foreground));
+  /* Snow accent · the pink used for snowfall amounts + snowflake icons site-wide. */
+  --color-snow-accent: #ec008c;
 
   --font-sans: 'DIN Pro', system-ui, sans-serif;
   --font-display: 'DIN Pro', system-ui, sans-serif;

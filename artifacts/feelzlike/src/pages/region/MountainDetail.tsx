@@ -728,12 +728,13 @@ function BigStat({
   value: string;
   unit: string;
 }) {
+  const isSnow = Icon === Snowflake || Icon === CloudSnow;
   return (
     <div className="rounded-2xl border border-border bg-white p-4">
       <div className="flex items-center gap-1.5 byline text-muted-foreground/70">
-        <Icon className="w-3 h-3" strokeWidth={2} /> {label}
+        <Icon className={cn("w-3 h-3", isSnow && "text-snow-accent")} strokeWidth={2} /> {label}
       </div>
-      <p className="mt-2 font-display font-semibold text-2xl tracking-tight text-foreground">
+      <p className={cn("mt-2 font-display font-semibold text-2xl tracking-tight", isSnow ? "text-snow-accent" : "text-foreground")}>
         {value}
         <span className="text-sm text-muted-foreground/70 ml-1">{unit}</span>
       </p>
@@ -750,12 +751,13 @@ function KV({
   value: string;
   icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
 }) {
+  const isSnow = Icon === Snowflake || Icon === CloudSnow;
   return (
     <div>
       <div className="flex items-center gap-1.5 byline text-muted-foreground/70">
-        <Icon className="w-3 h-3" strokeWidth={2} /> {label}
+        <Icon className={cn("w-3 h-3", isSnow && "text-snow-accent")} strokeWidth={2} /> {label}
       </div>
-      <p className="mt-1 font-display font-medium text-lg text-foreground">{value}</p>
+      <p className={cn("mt-1 font-display font-medium text-lg", isSnow ? "text-snow-accent" : "text-foreground")}>{value}</p>
     </div>
   );
 }
@@ -769,12 +771,13 @@ function DayStat({
   label: string;
   value: string;
 }) {
+  const isSnow = Icon === Snowflake || Icon === CloudSnow;
   return (
     <div className="flex items-center justify-between gap-2 text-[11px]">
       <span className="inline-flex items-center gap-1 text-muted-foreground/70">
-        <Icon className="w-3 h-3" strokeWidth={2} /> {label}
+        <Icon className={cn("w-3 h-3", isSnow && "text-snow-accent")} strokeWidth={2} /> {label}
       </span>
-      <span className="font-medium text-foreground truncate">{value}</span>
+      <span className={cn("font-medium truncate", isSnow ? "text-snow-accent" : "text-foreground")}>{value}</span>
     </div>
   );
 }

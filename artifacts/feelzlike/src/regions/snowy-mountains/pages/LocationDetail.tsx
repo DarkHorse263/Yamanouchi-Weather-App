@@ -410,20 +410,26 @@ export default function LocationDetail() {
               </p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-y-5 gap-x-4">
-              {stats.map((s, i) => (
+              {stats.map((s, i) => {
+                const isSnow = s.icon === Snowflake || s.icon === CloudSnow;
+                return (
                 <div key={i} className="group">
                   <div className="flex items-center gap-1.5 byline text-muted-foreground/80 mb-1.5">
-                    <s.icon className="w-3 h-3 text-muted-foreground/60" />
+                    <s.icon className={cn("w-3 h-3", isSnow ? "text-snow-accent" : "text-muted-foreground/60")} />
                     {s.label}
                   </div>
                   <p
-                    className="font-display text-2xl md:text-3xl text-foreground tracking-tight"
+                    className={cn(
+                      "font-display text-2xl md:text-3xl tracking-tight",
+                      isSnow ? "text-snow-accent" : "text-foreground",
+                    )}
                     data-numeric
                   >
                     {s.value}
                   </p>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </motion.div>
 

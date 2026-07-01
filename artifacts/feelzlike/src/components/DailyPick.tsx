@@ -131,8 +131,8 @@ export function DailyPick({ regionId, resorts, resortHrefPattern = "/:id" }: Pro
           </p>
           <div className="mt-3 flex items-center gap-4 text-xs text-muted-foreground/85">
             <span className="inline-flex items-center gap-1.5">
-              <Snowflake className={cn("w-3.5 h-3.5", pick.snowfallCm24 >= 1 ? "text-sky-400" : "text-muted-foreground/50")} />
-              <span data-numeric>{pick.snowfallCm24.toFixed(1)} cm</span>
+              <Snowflake className={cn("w-3.5 h-3.5", pick.snowfallCm24 >= 1 ? "text-snow-accent" : "text-muted-foreground/50")} />
+              <span data-numeric className={cn(pick.snowfallCm24 >= 1 && "text-snow-accent font-medium")}>{pick.snowfallCm24.toFixed(1)} cm</span>
               <span className="text-muted-foreground/60">next 24h</span>
             </span>
             <span className="inline-flex items-center gap-1.5">

@@ -26,9 +26,9 @@ export function WeatherIcon({ code, className, isDay = true }: WeatherIconProps)
   if (code === 45 || code === 48) return <CloudFog {...props} className={cn("text-gray-400", props.className)} />;
   if (code >= 51 && code <= 57) return <CloudDrizzle {...props} className={cn("text-blue-400", props.className)} />;
   if (code >= 61 && code <= 67) return <CloudRain {...props} className={cn("text-blue-600", props.className)} />;
-  if (code >= 71 && code <= 77) return <Snowflake {...props} className={cn("text-sky-400 fill-sky-100", props.className)} />;
+  if (code >= 71 && code <= 77) return <Snowflake {...props} className={cn("text-snow-accent fill-snow-accent/15", props.className)} />;
   if (code >= 80 && code <= 82) return <CloudRain {...props} className={cn("text-blue-600", props.className)} />;
-  if (code >= 85 && code <= 86) return <Snowflake {...props} className={cn("text-sky-400 fill-sky-100", props.className)} />;
+  if (code >= 85 && code <= 86) return <Snowflake {...props} className={cn("text-snow-accent fill-snow-accent/15", props.className)} />;
   if (code >= 95) return <CloudLightning {...props} className={cn("text-amber-600", props.className)} />;
   
   return <Cloud {...props} />;
