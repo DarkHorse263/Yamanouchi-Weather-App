@@ -13,6 +13,9 @@ import {
   Sparkles,
   X,
   Award,
+  AlertTriangle,
+  CheckCircle2,
+  Info,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -22,6 +25,11 @@ import {
   type PowderThresholds,
   type PowderWindow,
 } from "@/types/weather";
+import {
+  deriveSkiableNowRead,
+  type LiftOperationInput,
+  type SkiableNowRead,
+} from "@/lib/skiSeason";
 
 type Tx = (en: string, ja: string) => string;
 
@@ -41,6 +49,13 @@ interface Props {
   t?: Tx;
   /** Section number prefix (e.g. "04") for the editorial byline. */
   sectionNumber?: string;
+  /**
+   * Optional skiability inputs. When provided, a clearly-labelled "Skiable now"
+   * read is shown beside the "snow incoming" powder windows so a fresh-snow
+   * forecast never implies the mountain is skiable. Pass the SAME expressions
+   * given to LiftWindHoldPanel on the page so the two reads cannot diverge.
+   */
+  skiability?: LiftOperationInput & { liveStatusKnown?: boolean };
 }
 
 function WeatherIcon({
@@ -156,6 +171,7 @@ export function HourlyForecast({
   thresholds,
   t,
   sectionNumber = "",
+  skiability,
 }: Props) {
   const tx: Tx = t ?? ((en) => en);
   const [openIdx, setOpenIdx] = useState<number | null>(null);
@@ -193,6 +209,8 @@ export function HourlyForecast({
     return m;
   }, [windows]);
 
+  const skiRead = skiability ? deriveSkiableNowRead(skiability) : null;
+
   if (future.length === 0) return null;
 
   return (
@@ -213,18 +231,35 @@ export function HourlyForecast({
             {tx("Next 48 hours", "今後48時間")}
           </h2>
         </div>
-        {windows.length > 0 && (
-          <div className="flex flex-wrap gap-2 md:justify-end">
-            {windows.map((win, idx) => (
-              <PowderBadge
-                key={`${win.startIdx}-${win.endIdx}`}
-                window={win}
-                hours={future}
-                t={tx}
-                onClick={() => setOpenIdx(idx)}
-                isExpanded={openIdx === idx}
-              />
-            ))}
+        {(skiRead || windows.length > 0) && (
+          <div className="flex flex-col gap-2.5 md:items-end">
+            {skiRead && (
+              <div className="flex flex-col gap-1 md:items-end">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/70">
+                  {tx("Skiable now", "今の滑走可否")}
+                </p>
+                <SkiableNowChip read={skiRead} t={tx} />
+              </div>
+            )}
+            {windows.length > 0 && (
+              <div className="flex flex-col gap-1 md:items-end">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/70">
+                  {tx("Snow incoming", "降雪予報")}
+                </p>
+                <div className="flex flex-wrap gap-2 md:justify-end">
+                  {windows.map((win, idx) => (
+                    <PowderBadge
+                      key={`${win.startIdx}-${win.endIdx}`}
+                      window={win}
+                      hours={future}
+                      t={tx}
+                      onClick={() => setOpenIdx(idx)}
+                      isExpanded={openIdx === idx}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
       </header>
@@ -275,6 +310,86 @@ export function HourlyForecast({
         </p>
       )}
     </motion.section>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// "Skiable now" chip - the present-tense reality signal paired beside the
+// forward-looking Powder Window ("snow incoming"). Verdict comes from
+// deriveSkiableNowRead (which wraps computeLiftOperationStatus) so it can never
+// contradict the lift-hold panel. Copy mirrors LiftWindHoldPanel's vocabulary.
+// ---------------------------------------------------------------------------
+
+const SKIABLE_NOW_TONES = {
+  slate: "bg-slate-500/10 text-slate-700 border-slate-500/30",
+  rose: "bg-rose-500/10 text-rose-700 border-rose-500/30",
+  emerald: "bg-emerald-500/10 text-emerald-700 border-emerald-500/30",
+  sky: "bg-sky-500/10 text-sky-700 border-sky-500/30",
+} as const;
+
+function skiableNowDisplay(
+  read: SkiableNowRead,
+  t: Tx,
+): { Icon: typeof Info; label: string; tone: string } {
+  switch (read.kind) {
+    case "off_season":
+      return { Icon: Info, label: t("Out of season", "シーズン外"), tone: SKIABLE_NOW_TONES.slate };
+    case "no_base":
+      return {
+        Icon: AlertTriangle,
+        label: t("No skiable base", "滑走可能な積雪なし"),
+        tone: SKIABLE_NOW_TONES.rose,
+      };
+    case "lifts_closed":
+      return {
+        Icon: AlertTriangle,
+        label: t("Lifts closed", "リフト運休"),
+        tone: SKIABLE_NOW_TONES.rose,
+      };
+    case "lifts_open":
+      return {
+        Icon: CheckCircle2,
+        label: t(
+          `${read.liftsOpen}/${read.totalLifts} lifts open`,
+          `リフト運行 ${read.liftsOpen}/${read.totalLifts}`,
+        ),
+        tone: SKIABLE_NOW_TONES.emerald,
+      };
+    case "unverified":
+      return read.baseCm != null
+        ? {
+            Icon: Info,
+            label: t(
+              `Base ~${Math.round(read.baseCm)}cm · check resort`,
+              `積雪 約${Math.round(read.baseCm)}cm · 要確認`,
+            ),
+            tone: SKIABLE_NOW_TONES.sky,
+          }
+        : {
+            Icon: Info,
+            label: t("Base not reported · check resort", "積雪の報告なし · 要確認"),
+            tone: SKIABLE_NOW_TONES.slate,
+          };
+  }
+}
+
+/**
+ * Compact, clearly-labelled "Skiable now" pill. Deliberately present-tense and
+ * distinct from the powder-window badges so incoming snow is never mistaken for
+ * a skiable mountain.
+ */
+function SkiableNowChip({ read, t }: { read: SkiableNowRead; t: Tx }) {
+  const { Icon, label, tone } = skiableNowDisplay(read, t);
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center gap-1.5 rounded-2xl border px-3 py-2 text-xs font-semibold",
+        tone,
+      )}
+    >
+      <Icon className="w-4 h-4 flex-shrink-0" aria-hidden />
+      {label}
+    </span>
   );
 }
 

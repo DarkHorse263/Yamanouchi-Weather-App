@@ -449,6 +449,13 @@ export default function LocationDetail() {
           hourly={hourly}
           utcOffsetSeconds={(weatherData as any).utcOffsetSeconds ?? 0}
           thresholds={POWDER_THRESHOLDS_AU}
+          skiability={{
+            seasonOpen: isLiftSeasonOpen(REGION_COUNTRY[region.id]),
+            snowDepthCm: hasLiveLiftStatus ? current.snowDepth : undefined,
+            liveStatusKnown: hasLiveLiftStatus,
+            actualLiftsOpen: hasLiveLiftStatus ? liftData?.liftsOpen : undefined,
+            actualTotalLifts: liftData?.totalLifts,
+          }}
         />
 
         {/* SNOWMAKING · honest man-made-snow reality: all-weather snow

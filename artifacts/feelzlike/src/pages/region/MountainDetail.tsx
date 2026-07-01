@@ -350,6 +350,10 @@ export function MountainDetail() {
                 t={t}
                 thresholds={POWDER_THRESHOLDS_AU}
                 sectionNumber=""
+                skiability={{
+                  seasonOpen: isLiftSeasonOpen(REGION_COUNTRY[region.id]),
+                  snowDepthCm: current?.snowDepth,
+                }}
               />
             </div>
           )}

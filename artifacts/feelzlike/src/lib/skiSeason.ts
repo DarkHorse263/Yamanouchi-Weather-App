@@ -94,3 +94,61 @@ export function computeLiftOperationStatus({
   if (snowDepthCm != null && snowDepthCm < NO_SNOW_CM) return "no_snow";
   return "operating";
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// "Skiable now" read - the present-tense "is there anything to ski RIGHT NOW"
+// signal, kept deliberately SEPARATE from the forward-looking Powder Window
+// (which detects *incoming* snow). A powder window can show fresh snow while
+// the base is absent and the mountain is unskiable; pairing the two honestly
+// stops a fresh-snow signal from implying skiability.
+//
+// Derived FROM computeLiftOperationStatus (it is called here, never
+// re-implemented) so this read can NEVER contradict the lift-hold panel for
+// the same inputs.
+// ─────────────────────────────────────────────────────────────────────────────
+
+export type SkiableNowRead =
+  | { kind: "off_season" }
+  | { kind: "no_base" }
+  | { kind: "lifts_closed" }
+  | { kind: "lifts_open"; liftsOpen: number; totalLifts: number }
+  | { kind: "unverified"; baseCm: number | null };
+
+/**
+ * Turn raw season/base/lift inputs into an honest "skiable now" read.
+ *
+ * Honesty rules baked in:
+ *   - The ONLY authoritative positive ("lifts_open") comes from a verified live
+ *     lift feed reporting lifts actually open. Model base depth NEVER asserts
+ *     skiability - it is used only to force a negative ("no_base") via the
+ *     NO_SNOW_CM floor in computeLiftOperationStatus.
+ *   - Unknown base (snowDepthCm null/undefined) implies NEITHER skiable nor
+ *     unskiable -> "unverified" with baseCm null ("base not reported").
+ *   - Priority mirrors computeLiftOperationStatus exactly, so this can never
+ *     contradict the wind-hold panel driven by the same gate.
+ */
+export function deriveSkiableNowRead(
+  input: LiftOperationInput & { liveStatusKnown?: boolean },
+): SkiableNowRead {
+  const { snowDepthCm, actualLiftsOpen, actualTotalLifts, liveStatusKnown = true } = input;
+  const status = computeLiftOperationStatus(input);
+  switch (status) {
+    case "off_season":
+      return { kind: "off_season" };
+    case "no_snow":
+      return { kind: "no_base" };
+    case "no_lifts_open":
+      return { kind: "lifts_closed" };
+    case "operating":
+      if (
+        liveStatusKnown &&
+        actualTotalLifts != null &&
+        actualTotalLifts > 0 &&
+        actualLiftsOpen != null &&
+        actualLiftsOpen > 0
+      ) {
+        return { kind: "lifts_open", liftsOpen: actualLiftsOpen, totalLifts: actualTotalLifts };
+      }
+      return { kind: "unverified", baseCm: snowDepthCm ?? null };
+  }
+}

@@ -346,6 +346,10 @@ export default function ResortDetail() {
             utcOffsetSeconds={(data as any).utcOffsetSeconds ?? 0}
             t={t}
             sectionNumber=""
+            skiability={{
+              seasonOpen: isLiftSeasonOpen(REGION_COUNTRY[region.id]),
+              snowDepthCm: current.snowDepth,
+            }}
           />
         )}
 
