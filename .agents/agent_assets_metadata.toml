@@ -47,13 +47,13 @@ title = "Proposed regions for review (NZ + extra Nagano)"
 id = "FKd5RXBPQeLc9M2gWcRjH"
 uri = "file://exports/feelzlike-user-overview.pdf"
 type = "pdf"
-title = "feelzlike · user overview (corrected)"
+title = "Product Overview"
 
 [[outputs]]
 id = "oJn_x5HyfY5_j8YIFGAk_"
 uri = "file://exports/feelzlike-investor-overview.pdf"
 type = "pdf"
-title = "feelzlike · investor overview (corrected)"
+title = "Investor Overview"
 
 [[outputs]]
 id = "8hwBCvSG8xFpc2yu3Ax44"
@@ -71,7 +71,7 @@ title = "feelzlike investor overview (corrected)"
 id = "mpY9qJBrf05ZWG-5v2jRv"
 uri = "file://exports/feelzlike-press-release.pdf"
 type = "pdf"
-title = "feelzlike · launch press release"
+title = "Press Release"
 
 [[outputs]]
 id = "JrLysJPT477o-JmotLAOx"
@@ -210,3 +210,9 @@ id = "uYkmQB-jHEV7wxodX2JXs"
 uri = "file://artifacts/feelzlike/public/branding/feelzlike-88x31.png"
 type = "image"
 title = "feelzlike logo - 88x31 PNG (for Awin profile)"
+
+[[outputs]]
+id = "eQuhpTWQmWxeflJ3zpFTx"
+uri = "file://exports/feelzlike-partner-overview.pdf"
+type = "pdf"
+title = "Partner / Industry Overview (closest to a media pack)"
