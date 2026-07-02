@@ -305,3 +305,27 @@ id = "nvGK3hLfGsJTkOEbNzpUY"
 uri = "file://exports/ad-kit/boards/feelzlike-board-landscape-2400x1200mm.pdf"
 type = "pdf"
 title = "Outdoor board · landscape 2400×1200mm"
+
+[[outputs]]
+id = "c9clsGZEHf0YEVETTAZ9W"
+uri = "file://exports/ad-kit/_explore/feelzlike-explore-dark-landscape.png"
+type = "image"
+title = "Dark · landscape (screens/boards)"
+
+[[outputs]]
+id = "yKE0IRe84geAhmetxUZU0"
+uri = "file://exports/ad-kit/_explore/feelzlike-explore-dark-portrait.png"
+type = "image"
+title = "Dark · portrait (posters/signage)"
+
+[[outputs]]
+id = "IFCmsdX8LsVk4PoKfvpdh"
+uri = "file://exports/ad-kit/_explore/feelzlike-explore-light-landscape.png"
+type = "image"
+title = "Light · landscape (screens/boards)"
+
+[[outputs]]
+id = "zR817cT0L--7CG2ckpayE"
+uri = "file://exports/ad-kit/_explore/feelzlike-explore-light-portrait.png"
+type = "image"
+title = "Light · portrait (posters/signage)"
