@@ -133,7 +133,7 @@ const userBody = /* html */ `
   <h2>How a feelzlike morning works</h2>
   <ol>
     <li><strong>Open the app.</strong> It opens on your favourite town <em class="middot">·</em> Jindabyne, Yudanaka, Queenstown or any of ten regions.</li>
-    <li><strong>Glance the photo strip.</strong> Live LED-style numbers over a town shot tell you what it feelzlike <em>right now</em>, not four hours ago.</li>
+    <li><strong>Read your conditions card.</strong> A big live number tells you what it feelzlike <em>right now</em>, not four hours ago.</li>
     <li><strong>Check the road panel.</strong> Open <em class="middot">·</em> caution <em class="middot">·</em> chains required <em class="middot">·</em> closed.
       One line per access road, live from the official sources, with a road cam where one exists.</li>
     <li><strong>Compare the mountains the town serves.</strong> 24h snow, base depth, wind, lift status, snow cam.
@@ -155,17 +155,17 @@ const userBody = /* html */ `
 
   <h2>Ten regions, today</h2>
   <table>
-    <tr><th>Region</th><th>Country</th><th>Mountains the town serves</th></tr>
-    <tr><td><strong>Snowy Mountains</strong></td><td>NSW, Australia</td><td>Perisher <em class="middot">·</em> Thredbo <em class="middot">·</em> Charlotte Pass <em class="middot">·</em> Selwyn</td></tr>
-    <tr><td><strong>Victoria's High Country</strong></td><td>VIC, Australia</td><td>Mt Buller <em class="middot">·</em> Falls Creek <em class="middot">·</em> Mt Hotham <em class="middot">·</em> Mt Stirling</td></tr>
-    <tr><td><strong>Tasmania</strong></td><td>TAS, Australia</td><td>Ben Lomond</td></tr>
-    <tr><td><strong>Yamanouchi</strong></td><td>Nagano, Japan</td><td>Shiga Kogen (18 grouped) <em class="middot">·</em> Ryuoo</td></tr>
-    <tr><td><strong>Nozawa Onsen</strong></td><td>Nagano, Japan</td><td>Nozawa Onsen Snow Resort</td></tr>
-    <tr><td><strong>Iiyama</strong></td><td>Nagano, Japan</td><td>Madarao <em class="middot">·</em> Tangram <em class="middot">·</em> Togari Onsen <em class="middot">·</em> Kijimadaira</td></tr>
-    <tr><td><strong>Queenstown</strong></td><td>New Zealand</td><td>Coronet Peak <em class="middot">·</em> The Remarkables</td></tr>
-    <tr><td><strong>Wanaka</strong></td><td>New Zealand</td><td>Cardrona <em class="middot">·</em> Treble Cone</td></tr>
-    <tr><td><strong>Mt Hutt</strong></td><td>New Zealand</td><td>Mt Hutt</td></tr>
-    <tr><td><strong>Ruapehu</strong></td><td>New Zealand</td><td>Whakapapa <em class="middot">·</em> Turoa</td></tr>
+    <tr><th>Region</th><th>Country</th><th>Base towns</th><th>Mountains the town serves</th></tr>
+    <tr><td><strong>Snowy Mountains</strong></td><td>NSW, Australia</td><td>Jindabyne <em class="middot">·</em> Berridale <em class="middot">·</em> Cooma</td><td>Perisher <em class="middot">·</em> Thredbo <em class="middot">·</em> Charlotte Pass <em class="middot">·</em> Selwyn</td></tr>
+    <tr><td><strong>Victoria's High Country</strong></td><td>VIC, Australia</td><td>Mansfield <em class="middot">·</em> Bright <em class="middot">·</em> Mount Beauty <em class="middot">·</em> Harrietville <em class="middot">·</em> Dinner Plain <em class="middot">·</em> Marysville <em class="middot">·</em> Warburton <em class="middot">·</em> Omeo</td><td>Mt Buller <em class="middot">·</em> Falls Creek <em class="middot">·</em> Mt Hotham <em class="middot">·</em> Mt Stirling</td></tr>
+    <tr><td><strong>Tasmania</strong></td><td>TAS, Australia</td><td>Launceston <em class="middot">·</em> Hobart <em class="middot">·</em> Ben Lomond Base</td><td>Ben Lomond</td></tr>
+    <tr><td><strong>Yamanouchi</strong></td><td>Nagano, Japan</td><td>Yudanaka <em class="middot">·</em> Shibu Onsen <em class="middot">·</em> Yomase</td><td>Shiga Kogen (18 grouped) <em class="middot">·</em> Ryuoo</td></tr>
+    <tr><td><strong>Nozawa Onsen</strong></td><td>Nagano, Japan</td><td>Nozawa Onsen</td><td>Nozawa Onsen Snow Resort</td></tr>
+    <tr><td><strong>Iiyama</strong></td><td>Nagano, Japan</td><td>Iiyama <em class="middot">·</em> Madarao Kogen <em class="middot">·</em> Togari Onsen <em class="middot">·</em> Kijimadaira</td><td>Madarao <em class="middot">·</em> Tangram <em class="middot">·</em> Togari Onsen <em class="middot">·</em> Kijimadaira</td></tr>
+    <tr><td><strong>Queenstown</strong></td><td>New Zealand</td><td>Queenstown</td><td>Coronet Peak <em class="middot">·</em> The Remarkables</td></tr>
+    <tr><td><strong>Wanaka</strong></td><td>New Zealand</td><td>Wanaka</td><td>Cardrona <em class="middot">·</em> Treble Cone</td></tr>
+    <tr><td><strong>Mt Hutt</strong></td><td>New Zealand</td><td>Methven</td><td>Mt Hutt</td></tr>
+    <tr><td><strong>Ruapehu</strong></td><td>New Zealand</td><td>Ohakune</td><td>Whakapapa <em class="middot">·</em> Turoa</td></tr>
   </table>
 
   <h2>Winter and green season</h2>
@@ -232,20 +232,20 @@ const investorBody = /* html */ `
 
   <h2>The product, in three layers</h2>
   <div class="grid2">
-    <div class="card"><h4>1. Today, in town</h4><p>Live numbers over a hero town shot. Wind, temp, freezing level. Updated continuously.</p></div>
+    <div class="card"><h4>1. Today, in town</h4><p>Live feelzlike, temperature and wind for where you are. Updated continuously.</p></div>
     <div class="card"><h4>2. Roads from town</h4><p>Per-road status with chain advice and cams. Pulled live from official road authorities including NSW LiveTraffic and VicEmergency.</p></div>
     <div class="card"><h4>3. Mountains from town</h4><p>Every resort the town serves, normalised onto one comparison grid. Agnostic. The user chooses.</p></div>
   </div>
 
   <h2>What we have today (live)</h2>
   <table>
-    <tr><th>Region</th><th>Country</th><th>Base town</th><th>Resorts surfaced</th></tr>
-    <tr><td>Snowy Mountains</td><td>Australia</td><td>Jindabyne</td><td>Perisher, Thredbo, Selwyn, Charlotte Pass</td></tr>
-    <tr><td>Victoria's High Country</td><td>Australia</td><td>Bright</td><td>Mt Buller, Falls Creek, Mt Hotham, Mt Stirling</td></tr>
-    <tr><td>Tasmania</td><td>Australia</td><td>Launceston</td><td>Ben Lomond</td></tr>
-    <tr><td>Yamanouchi</td><td>Japan</td><td>Yudanaka</td><td>Shiga Kogen (18 grouped), Ryuoo</td></tr>
+    <tr><th>Region</th><th>Country</th><th>Base towns</th><th>Resorts surfaced</th></tr>
+    <tr><td>Snowy Mountains</td><td>Australia</td><td>Jindabyne, Berridale, Cooma</td><td>Perisher, Thredbo, Selwyn, Charlotte Pass</td></tr>
+    <tr><td>Victoria's High Country</td><td>Australia</td><td>Mansfield, Bright, Mount Beauty, Harrietville, Dinner Plain, Marysville, Warburton, Omeo</td><td>Mt Buller, Falls Creek, Mt Hotham, Mt Stirling</td></tr>
+    <tr><td>Tasmania</td><td>Australia</td><td>Launceston, Hobart, Ben Lomond Base</td><td>Ben Lomond</td></tr>
+    <tr><td>Yamanouchi</td><td>Japan</td><td>Yudanaka, Shibu Onsen, Yomase</td><td>Shiga Kogen (18 grouped), Ryuoo</td></tr>
     <tr><td>Nozawa Onsen</td><td>Japan</td><td>Nozawa Onsen</td><td>Nozawa Onsen Snow Resort</td></tr>
-    <tr><td>Iiyama</td><td>Japan</td><td>Iiyama</td><td>Madarao, Tangram, Togari Onsen, Kijimadaira</td></tr>
+    <tr><td>Iiyama</td><td>Japan</td><td>Iiyama, Madarao Kogen, Togari Onsen, Kijimadaira</td><td>Madarao, Tangram, Togari Onsen, Kijimadaira</td></tr>
     <tr><td>Queenstown</td><td>New Zealand</td><td>Queenstown</td><td>Coronet Peak, The Remarkables</td></tr>
     <tr><td>Wanaka</td><td>New Zealand</td><td>Wanaka</td><td>Cardrona, Treble Cone</td></tr>
     <tr><td>Mt Hutt</td><td>New Zealand</td><td>Methven</td><td>Mt Hutt</td></tr>

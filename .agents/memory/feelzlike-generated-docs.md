@@ -25,6 +25,9 @@ Two tsx scripts under `artifacts/api-server/src/scripts/` render branded PDFs vi
 - Green season is only real as Thredbo summer activities (`ThredboSummer.tsx`: summit chairlift walks, bike park). There is NO live trail status / fire danger / river-level feed -> do not claim them.
 - Roads come from road authorities (NSW LiveTraffic, VicEmergency); BOM and JMA are WEATHER sources, never attribute roads to them.
 - Do NOT claim snowfall heatmaps (not built).
+- Base-town tables in the overviews must list EVERY baseTown per region from `src/regions/*.ts` (26 towns across the 10 regions), not one representative town. Victoria alone has 8; Iiyama 4; Snowy/Tasmania/Yamanouchi 3 each.
+- The home hero (`HeroBackdrop.tsx`) is a gradient PLACEHOLDER (all `photoUrl:null`) and `NearYou.tsx` renders a plain bold number -> never claim "LED-style numbers" or "over a town shot"; only "live number / feelzlike temp + wind" is real.
+- The general email newsletter is NOT a live feature (no subscribe route/UI; only a dormant "newsletter" token-kind in `alertTokens.ts`) -> the "fortnightly newsletter" copy in the user + partner overviews is unbacked and should be reconciled; snow/powder email alerts ARE live (premium-gated).
 
 ## Voice scan before done
 Run `pdftotext -layout <pdf> -` and grep for em/en dashes (`—|–`) plus stale terms. The press-release end marker must be `ENDS` (no flanking em dashes).
