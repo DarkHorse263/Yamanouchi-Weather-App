@@ -1,5 +1,28 @@
 uploads = []
-generated = []
+
+[[generated]]
+id = "O0OXmtcDpMfKqZmWNWUUx"
+uri = "file://attached_assets/ad-kit-hero/alpenglow-landscape.png"
+type = "image"
+title = "alpenglow landscape hero"
+
+[[generated]]
+id = "i-v8Y-JAhOhoYYa9bsieH"
+uri = "file://attached_assets/ad-kit-hero/alpenglow-portrait.png"
+type = "image"
+title = "alpenglow portrait hero"
+
+[[generated]]
+id = "Lffx4K8kDlz2mcVQgmJA2"
+uri = "file://attached_assets/ad-kit-hero/bluebird-landscape.png"
+type = "image"
+title = "bluebird landscape hero"
+
+[[generated]]
+id = "X7LyrKculYKzVW6-IavWY"
+uri = "file://attached_assets/ad-kit-hero/bluebird-portrait.png"
+type = "image"
+title = "bluebird portrait hero"
 
 [[outputs]]
 id = "Dy7O2bK1wO26T_TtA83mD"
