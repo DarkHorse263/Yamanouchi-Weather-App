@@ -216,3 +216,69 @@ id = "eQuhpTWQmWxeflJ3zpFTx"
 uri = "file://exports/feelzlike-partner-overview.pdf"
 type = "pdf"
 title = "Partner / Industry Overview (closest to a media pack)"
+
+[[outputs]]
+id = "X5JXg-P8zk4RG6DlZdZVA"
+uri = "file://exports/ad-kit/screens/feelzlike-screen-1920x1080.png"
+type = "image"
+title = "In-store screen · landscape 1920×1080 (TV/digital)"
+
+[[outputs]]
+id = "1k1CWKCry6ZRBiuPmBxMH"
+uri = "file://exports/ad-kit/screens/feelzlike-screen-1080x1920.png"
+type = "image"
+title = "In-store screen · portrait 1080×1920 (signage totem)"
+
+[[outputs]]
+id = "6slX2liEiCfqyJYyMgEzm"
+uri = "file://exports/ad-kit/posters/feelzlike-poster-a4.pdf"
+type = "pdf"
+title = "Poster · A4 (print-ready: bleed + crop marks)"
+
+[[outputs]]
+id = "z6WYyFwNqKRFPkpTTzfPA"
+uri = "file://exports/ad-kit/posters/feelzlike-poster-a3.pdf"
+type = "pdf"
+title = "Poster · A3 (print-ready: bleed + crop marks)"
+
+[[outputs]]
+id = "ffaXrn2bf5FG2_TYudzRS"
+uri = "file://exports/ad-kit/posters/feelzlike-poster-a2.pdf"
+type = "pdf"
+title = "Poster · A2 (print-ready: bleed + crop marks)"
+
+[[outputs]]
+id = "GGODE9H_MxI3rDP-XS-zc"
+uri = "file://exports/ad-kit/stickers/feelzlike-sticker-round-95mm.pdf"
+type = "pdf"
+title = "Sticker · round Ø95mm (die-cut, print-ready)"
+
+[[outputs]]
+id = "o1gyf8SebFIm6TPQxR5D0"
+uri = "file://exports/ad-kit/stickers/feelzlike-sticker-square-95mm.pdf"
+type = "pdf"
+title = "Sticker · square 95mm (print-ready)"
+
+[[outputs]]
+id = "B1BHuN1M1YcUpNDUjMswB"
+uri = "file://exports/ad-kit/stickers/_preview/feelzlike-sticker-round-95mm-preview.png"
+type = "image"
+title = "Round sticker · design preview"
+
+[[outputs]]
+id = "wsyivZP7yO2Rfkoyj1Q6C"
+uri = "file://exports/ad-kit/stickers/_preview/feelzlike-sticker-square-95mm-preview.png"
+type = "image"
+title = "Square sticker · design preview"
+
+[[outputs]]
+id = "FA888h7ldOLxMq2zMeA9W"
+uri = "file://exports/ad-kit/boards/feelzlike-board-6sheet-portrait-1200x1800mm.pdf"
+type = "pdf"
+title = "Outdoor board · 6-sheet portrait 1200×1800mm"
+
+[[outputs]]
+id = "nvGK3hLfGsJTkOEbNzpUY"
+uri = "file://exports/ad-kit/boards/feelzlike-board-landscape-2400x1200mm.pdf"
+type = "pdf"
+title = "Outdoor board · landscape 2400×1200mm"
