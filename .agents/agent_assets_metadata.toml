@@ -437,3 +437,9 @@ id = "oKbImNrac5rA6UTi97rOa"
 uri = "file://exports/ad-kit/light/boards/feelzlike-board-landscape-2400x1200mm.pdf"
 type = "pdf"
 title = "Light · landscape 2:1 board (print)"
+
+[[outputs]]
+id = "w2poVxCuJDsEkn8CWq0d3"
+uri = "file://exports/ad-kit/feelzlike-ad-kit.zip"
+type = "unspecified"
+title = "feelzlike advertising kit — full download (dark + light)"
