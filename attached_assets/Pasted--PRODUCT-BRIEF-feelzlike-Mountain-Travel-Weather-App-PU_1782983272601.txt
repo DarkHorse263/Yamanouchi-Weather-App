@@ -1,0 +1,51 @@
+# PRODUCT BRIEF: feelzlike (Mountain Travel Weather App)
+# PURPOSE: AI Generation Prompt for Code / Data Research / Copywriting
+
+## 1. PRODUCT OVERVIEW & VALUE PROPOSITION
+- **App Name:** feelzlike
+- **URL:** https://feelzlike.com
+- **Tagline / Philosophy:** Towns first, mountains second.
+- **Core Problem Solved:** Weather in alpine resort towns does not match the actual conditions at the mountain peaks. Drivers and transit riders face unpredictable road closures, chain requirements, high winds, and visibility drops.
+- **Key Features:** Live weather, real-time road conditions, chain/transit alerts, wind/temperature monitoring, lift status, and live webcam streams.
+- **Modes of Transport Covered:** Car and Bus.
+- **Target Regions:** Australia (Snowy Mountains, Victoria's High Country), New Zealand (Queenstown, Wanaka), Japan (Nagano/Yamanouchi, Niigata, Hokkaido).
+
+## 2. BRANDING & VISUAL IDENTITY
+- **Logo Aesthetics:** Minimalist geometric blue mountain silhouette with a bright blue winding river/road slicing through it forming an 'S' shape. 
+- **Typography Style:** Lowercase, clean, sans-serif ("feelzlike").
+- **Primary Color Palette:** Deep matte black background, gradient sky blue to royal blue for the alpine peaks, and electric/cyan blue for the road/river wave.
+
+## 3. ADVERTISING STRATEGY & ASSET REQUIREMENTS
+We are launching a physical and digital ad campaign to capture travelers before they head up the peaks. The assets needed must focus heavily on the contrast between "Town Conditions" vs. "Mountain Realities".
+
+### A. Physical Stickers (Buses, Transit Hubs, Ski Rental Counters)
+- **Format:** Small, high-impact, square or circular vinyl.
+- **Required Elements:** Logo, high-contrast QR code placeholder, transport icons (Car, Bus), and ultra-short hook copy.
+
+### B. Posters (A4 & A3 for Information Centers & Lodges)
+- **Format:** Static vertical display, eye-level reading.
+- **Required Elements:** Logo, dual feature breakdown (1. Live Cams & Wind, 2. Roads & Bus Info), persuasive body copy, QR code.
+
+### C. Outdoor Static Billboards (Highways, Mountain Approach Roads)
+- **Format:** Horizontal large-format. Must be readable by moving vehicles in 3 seconds.
+- **Required Elements:** Massive font size, high-contrast, Logo on left, URL (feelzlike.com) on bottom right. No QR codes.
+
+### D. Digital Screen Loops (Supermarkets, Malls, Convenience Stores)
+- **Format:** 10-second vertical/horizontal video loops.
+- **Required Elements:** Split-screen or frame-by-frame contrast ("Sunny in town" vs. "Whiteout on peak"), live UI data visualization, logo animation outro.
+
+---
+
+## 4. AI INSTRUCTIONS (CHOOSE YOUR TOOL USE-CASE BELOW)
+
+### 👉 IF USING PERPLEXITY (Research & Copywriting Mode):
+"Using the feelzlike product brief above, act as an expert growth marketer in the snowsports industry. Generate:
+1. Three distinct, highly localized copy variations for the Stickers, Posters, and Billboards tailored specifically to travelers in (a) Jindabyne/Perisher, (b) Bright/Hotham, and (c) Queenstown/Remarkables.
+2. Research the top 10 highest-traffic physical retail, supermarket, and convenience store locations in the Snowy Mountains (NSW) and Victoria's High Country (VIC) where digital screen ads should be purchased for maximum alpine tourist reach.
+3. Suggest a budget allocation breakdown across these physical print assets for a new app launch."
+
+### 👉 IF USING REPLIT (App Mockup / Interactive Ad Mode):
+"Using the feelzlike product brief above, act as a frontend developer. Create a beautiful, responsive single-page promotional dashboard using HTML, Tailwind CSS, and JavaScript. 
+1. The landing page must feature a dark mode theme matching the deep matte black and electric blue palette of the feelzlike logo.
+2. Include interactive mockups of the A4 Poster layout, an interactive slider showing the 'Town vs. Peak' weather contrast, and a simulated live webcam feed component.
+3. Ensure it includes clean, accessible CSS components that represent the physical marketing stickers so they can be easily previewed and printed."
