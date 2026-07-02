@@ -329,3 +329,111 @@ id = "zR817cT0L--7CG2ckpayE"
 uri = "file://exports/ad-kit/_explore/feelzlike-explore-light-portrait.png"
 type = "image"
 title = "Light · portrait (posters/signage)"
+
+[[outputs]]
+id = "5vbCv8BA2BDEYeS4RIbny"
+uri = "file://exports/ad-kit/dark/screens/feelzlike-screen-1920x1080.png"
+type = "image"
+title = "Dark · in-store screen 1920×1080"
+
+[[outputs]]
+id = "tSKM21zvR8i7VMFcP5ZiQ"
+uri = "file://exports/ad-kit/dark/screens/feelzlike-screen-1080x1920.png"
+type = "image"
+title = "Dark · in-store screen 1080×1920"
+
+[[outputs]]
+id = "kyV1rHyb-wvshf0ewYTis"
+uri = "file://exports/ad-kit/dark/posters/feelzlike-poster-a4.pdf"
+type = "pdf"
+title = "Dark · poster A4 (print)"
+
+[[outputs]]
+id = "UVUENtuDL35dvjBQMccDz"
+uri = "file://exports/ad-kit/dark/posters/feelzlike-poster-a3.pdf"
+type = "pdf"
+title = "Dark · poster A3 (print)"
+
+[[outputs]]
+id = "nZ3nD1C-ET3XAAov6OBUn"
+uri = "file://exports/ad-kit/dark/posters/feelzlike-poster-a2.pdf"
+type = "pdf"
+title = "Dark · poster A2 (print)"
+
+[[outputs]]
+id = "Ld1ijbGvYlBt8ZnQ9aqX-"
+uri = "file://exports/ad-kit/dark/stickers/feelzlike-sticker-round-95mm.pdf"
+type = "pdf"
+title = "Dark · round sticker Ø95mm (print)"
+
+[[outputs]]
+id = "wRze9XU7nY-yZ6lEUNDgl"
+uri = "file://exports/ad-kit/dark/stickers/feelzlike-sticker-square-95mm.pdf"
+type = "pdf"
+title = "Dark · square sticker 95mm (print)"
+
+[[outputs]]
+id = "Jt2pjYV0-FjBTc7P82McV"
+uri = "file://exports/ad-kit/dark/boards/feelzlike-board-6sheet-portrait-1200x1800mm.pdf"
+type = "pdf"
+title = "Dark · 6-sheet portrait board (print)"
+
+[[outputs]]
+id = "5jBIhDWSUQdyyHr7S6x1b"
+uri = "file://exports/ad-kit/dark/boards/feelzlike-board-landscape-2400x1200mm.pdf"
+type = "pdf"
+title = "Dark · landscape 2:1 board (print)"
+
+[[outputs]]
+id = "1I2c2Evs7Yd7Y0-g2M89-"
+uri = "file://exports/ad-kit/light/screens/feelzlike-screen-1920x1080.png"
+type = "image"
+title = "Light · in-store screen 1920×1080"
+
+[[outputs]]
+id = "zbXanyS2Kg98tgU1eqZqF"
+uri = "file://exports/ad-kit/light/screens/feelzlike-screen-1080x1920.png"
+type = "image"
+title = "Light · in-store screen 1080×1920"
+
+[[outputs]]
+id = "0A8rdk9QyyYGDKgkAsutJ"
+uri = "file://exports/ad-kit/light/posters/feelzlike-poster-a4.pdf"
+type = "pdf"
+title = "Light · poster A4 (print)"
+
+[[outputs]]
+id = "bf7acN9Kk_woevvts_h3a"
+uri = "file://exports/ad-kit/light/posters/feelzlike-poster-a3.pdf"
+type = "pdf"
+title = "Light · poster A3 (print)"
+
+[[outputs]]
+id = "k0cBRjTwGhoJO1qr1Ix8V"
+uri = "file://exports/ad-kit/light/posters/feelzlike-poster-a2.pdf"
+type = "pdf"
+title = "Light · poster A2 (print)"
+
+[[outputs]]
+id = "24gFB5PQF2Obfz-DfUxis"
+uri = "file://exports/ad-kit/light/stickers/feelzlike-sticker-round-95mm.pdf"
+type = "pdf"
+title = "Light · round sticker Ø95mm (print)"
+
+[[outputs]]
+id = "X0ZWi-2JpgGitHX3F1HtL"
+uri = "file://exports/ad-kit/light/stickers/feelzlike-sticker-square-95mm.pdf"
+type = "pdf"
+title = "Light · square sticker 95mm (print)"
+
+[[outputs]]
+id = "ymOUwl30Pgh5oQwBn438l"
+uri = "file://exports/ad-kit/light/boards/feelzlike-board-6sheet-portrait-1200x1800mm.pdf"
+type = "pdf"
+title = "Light · 6-sheet portrait board (print)"
+
+[[outputs]]
+id = "oKbImNrac5rA6UTi97rOa"
+uri = "file://exports/ad-kit/light/boards/feelzlike-board-landscape-2400x1200mm.pdf"
+type = "pdf"
+title = "Light · landscape 2:1 board (print)"

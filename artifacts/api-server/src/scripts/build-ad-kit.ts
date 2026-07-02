@@ -106,9 +106,7 @@ const THEMES: Record<Theme, ThemeStyle> = {
 
 const HEADLINE = "which mountain today?";
 const SUB_LONG =
-  "the daily snow, road and transport check for the resort town you are staying in. compare every mountain your town serves · and how to get there by bus, shuttle or car.";
-const SUB_SHORT = "snow · roads · transport, before you head out.";
-const REGION = "10 resort regions · australia · japan · new zealand";
+  "the daily snow, road and transport check for the resort town you are staying in. compare every mountain your town serves and how to get there.";
 const SCAN = "scan for today's conditions";
 
 function dotify(s: string): string {
@@ -235,7 +233,6 @@ function content(fmt: Fmt, logo: string, qr: string): string {
           ${qrImg}
           <div><div class="scan">${SCAN}</div><div class="url">${URL_LABEL}</div></div>
         </div>
-        <div class="region">${dotify(REGION)}</div>
       </div>
     </div>`;
   }
@@ -248,7 +245,6 @@ function content(fmt: Fmt, logo: string, qr: string): string {
         <hr class="rule">
         <h1>${HEADLINE}</h1>
         <p class="sub">${dotify(SUB_LONG)}</p>
-        <div class="region">${dotify(REGION)}</div>
       </div>
       <div class="right">
         <div class="qrcard">
@@ -343,8 +339,9 @@ async function render(
   fmt: Fmt,
   theme: Theme,
   assets: { fontCss: string; logo: string; qr: string },
+  outRoot: string,
 ): Promise<void> {
-  const outDir = path.join(OUT, fmt.dir);
+  const outDir = path.join(outRoot, fmt.dir);
   await mkdir(outDir, { recursive: true });
   const html = buildHtml(fmt, theme, assets);
   const page = await browser.newPage();
@@ -414,20 +411,24 @@ async function main() {
             { ...f, id: `feelzlike-explore-${theme}-${orient}`, dir: "_explore" },
             theme,
             assets,
+            OUT,
           );
         }
       }
       return;
     }
 
-    const theme = (process.env["AD_THEME"] === "light" ? "light" : "dark") as Theme;
-    const assets = await loadAssets(theme);
+    const only = process.env["AD_THEME"];
+    const themes: Theme[] = only === "dark" ? ["dark"] : only === "light" ? ["light"] : ["dark", "light"];
     const jobs: Fmt[] = [];
     for (const f of FORMATS) {
       jobs.push(f);
       if (f.output === "pdf") jobs.push(previewFmt(f));
     }
-    for (const f of jobs) await render(browser, f, theme, assets);
+    for (const theme of themes) {
+      const assets = await loadAssets(theme);
+      for (const f of jobs) await render(browser, f, theme, assets, path.join(OUT, theme));
+    }
   } finally {
     await browser.close();
   }
