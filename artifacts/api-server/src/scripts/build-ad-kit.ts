@@ -8,12 +8,13 @@ import QRCode from "qrcode";
 /**
  * feelzlike advertising kit generator.
  *
- * Clean, minimal, brand-led layout: logo + copy + QR / URL on a refined brand
- * background. No photography, no illustration - just the essentials.
+ * Clean, minimal, brand-led layout: the full feelzlike logo (mountain emblem +
+ * wordmark) with the copy and a QR / URL, on a refined brand background. No
+ * photography, no clutter - just the essentials.
  *
  * Two themes (pick with AD_THEME=dark|light, default dark):
- *   dark  -> deep navy background, reversed (white) wordmark.
- *   light -> soft ice-white background, colour wordmark.
+ *   dark  -> deep navy background, reversed (white) logo.
+ *   light -> soft ice-white background, colour logo.
  *
  * Print items  -> A4/A3/A2 posters, round + square stickers, outdoor boards.
  *                 Rendered as PDFs with bleed and crop marks for a printer.
@@ -42,15 +43,15 @@ const ROOT = path.resolve(import.meta.dirname, "../../../..");
 const OUT = path.join(ROOT, "exports", "ad-kit");
 const ASSETS = path.join(ROOT, "attached_assets");
 
-const WORDMARK_DARK = path.join(
+// full brand logo (mountain emblem + wordmark)
+const LOGO_DARK = path.join(
   ASSETS,
   "feelzlike_dark",
-  "feelzlike_WordMarque_colour_160426_1777334678269_dark.png",
+  "feelzlike_colour_150426_1777334678271_dark.png",
 );
-const WORDMARK_LIGHT = path.join(
+const LOGO_LIGHT = path.join(
   ASSETS,
-  "feelzlike_transparent",
-  "feelzlike_WordMarque_colour_160426_1777272466909_transparent.png",
+  "feelzlike_colour_150426_1777334678271.png",
 );
 const FONT_REGULAR = path.join(ASSETS, "DINPro_1777358240556.ttf");
 const FONT_BOLD = path.join(ASSETS, "DINPro-Bold_1777358240555.ttf");
@@ -160,7 +161,7 @@ html, body { background: #04122a; }
 .bleed { position: absolute; overflow: hidden; }
 .trim { position: absolute; }
 .content { width: 100%; height: 100%; display: flex; color: var(--ink); }
-.wordmark { display: block; height: auto; }
+.logo { display: block; height: auto; }
 h1 { font-weight: 700; color: var(--ink); letter-spacing: -0.02em; line-height: 0.95; }
 .sub { color: var(--sub); font-weight: 400; line-height: 1.34; }
 .dot { color: var(--dot); font-weight: 700; }
@@ -175,10 +176,10 @@ h1 { font-weight: 700; color: var(--ink); letter-spacing: -0.02em; line-height: 
 .mark { position: absolute; background: #000; }
 
 /* PORTRAIT ---------------------------------------------------------------- */
-.content.portrait { flex-direction: column; justify-content: space-between; padding: calc(var(--u)*9); }
-.portrait .wordmark { width: 46%; }
+.content.portrait { flex-direction: column; justify-content: space-between; align-items: flex-start; padding: calc(var(--u)*9); }
+.portrait .logo { width: 40%; }
 .portrait .hero { display: flex; flex-direction: column; gap: calc(var(--u)*3.4); }
-.portrait h1 { font-size: calc(var(--u)*9.8); max-width: 96%; }
+.portrait h1 { font-size: calc(var(--u)*9.6); max-width: 96%; }
 .portrait .sub { font-size: calc(var(--u)*3.05); max-width: 84%; }
 .portrait .foot { display: flex; flex-direction: column; gap: calc(var(--u)*3.4); }
 .portrait .qrcard { gap: calc(var(--u)*3); padding: calc(var(--u)*3); border-radius: calc(var(--u)*2.4); align-self: flex-start; }
@@ -188,42 +189,42 @@ h1 { font-weight: 700; color: var(--ink); letter-spacing: -0.02em; line-height: 
 .portrait .region { font-size: calc(var(--u)*2.5); }
 
 /* LANDSCAPE (scale unit is height-based) ---------------------------------- */
-.content.landscape { flex-direction: row; align-items: center; justify-content: space-between; padding: calc(var(--u)*9) calc(var(--u)*8); gap: calc(var(--u)*6); }
-.landscape .left { width: 58%; display: flex; flex-direction: column; justify-content: center; gap: calc(var(--u)*3.4); }
-.landscape .wordmark { height: calc(var(--u)*12); width: auto; }
-.landscape h1 { font-size: calc(var(--u)*8.6); }
-.landscape .sub { font-size: calc(var(--u)*2.9); max-width: 96%; }
+.content.landscape { flex-direction: row; align-items: center; justify-content: space-between; padding: calc(var(--u)*8) calc(var(--u)*8); gap: calc(var(--u)*6); }
+.landscape .left { width: 60%; display: flex; flex-direction: column; justify-content: center; gap: calc(var(--u)*3.2); }
+.landscape .logo { height: calc(var(--u)*30); width: auto; }
+.landscape h1 { font-size: calc(var(--u)*8.2); }
+.landscape .sub { font-size: calc(var(--u)*2.85); max-width: 98%; }
 .landscape .region { font-size: calc(var(--u)*2.5); }
-.landscape .right { width: 38%; display: flex; justify-content: flex-end; align-items: center; }
+.landscape .right { width: 36%; display: flex; justify-content: flex-end; align-items: center; }
 .landscape .qrcard { flex-direction: column; gap: calc(var(--u)*2); padding: calc(var(--u)*3); border-radius: calc(var(--u)*2.6); text-align: center; }
-.landscape .qr { width: calc(var(--u)*34); height: calc(var(--u)*34); }
+.landscape .qr { width: calc(var(--u)*32); height: calc(var(--u)*32); }
 .landscape .scan { font-size: calc(var(--u)*1.7); }
 .landscape .url { font-size: calc(var(--u)*3.4); }
 
 /* STICKER (square + round) ------------------------------------------------ */
 .content.sticker, .content.round { flex-direction: column; align-items: center; justify-content: space-between; text-align: center; }
-.content.sticker { padding: calc(var(--u)*10); }
-.content.round { padding: calc(var(--u)*16); }
-.sticker .wordmark, .round .wordmark { width: 60%; }
-.round .wordmark { width: 54%; }
-.sticker h1, .round h1 { font-size: calc(var(--u)*8.4); line-height: 0.94; }
-.round h1 { font-size: calc(var(--u)*7.6); }
+.content.sticker { padding: calc(var(--u)*9); }
+.content.round { padding: calc(var(--u)*15); }
+.sticker .logo { width: 52%; }
+.round .logo { width: 48%; }
+.sticker h1, .round h1 { font-size: calc(var(--u)*6.6); line-height: 0.96; }
+.round h1 { font-size: calc(var(--u)*6); }
 .sticker .qrcard, .round .qrcard { padding: calc(var(--u)*2.4); border-radius: calc(var(--u)*2.4); }
-.sticker .qr { width: calc(var(--u)*36); height: calc(var(--u)*36); }
-.round .qr { width: calc(var(--u)*32); height: calc(var(--u)*32); }
-.sticker .urlline, .round .urlline { font-size: calc(var(--u)*5); }
-.round .urlline { font-size: calc(var(--u)*4.4); }
+.sticker .qr { width: calc(var(--u)*34); height: calc(var(--u)*34); }
+.round .qr { width: calc(var(--u)*30); height: calc(var(--u)*30); }
+.sticker .urlline, .round .urlline { font-size: calc(var(--u)*4.6); }
+.round .urlline { font-size: calc(var(--u)*4.2); }
 `;
 }
 
-function content(fmt: Fmt, wordmark: string, qr: string): string {
-  const wm = `<img class="wordmark" src="${wordmark}" alt="feelzlike">`;
+function content(fmt: Fmt, logo: string, qr: string): string {
+  const lg = `<img class="logo" src="${logo}" alt="feelzlike">`;
   const qrImg = `<img class="qr" src="${qr}" alt="QR code to feelzlike.com">`;
 
   if (fmt.family === "portrait") {
     return /* html */ `
     <div class="content portrait">
-      ${wm}
+      ${lg}
       <div class="hero">
         <hr class="rule">
         <h1>${HEADLINE}</h1>
@@ -243,7 +244,7 @@ function content(fmt: Fmt, wordmark: string, qr: string): string {
     return /* html */ `
     <div class="content landscape">
       <div class="left">
-        ${wm}
+        ${lg}
         <hr class="rule">
         <h1>${HEADLINE}</h1>
         <p class="sub">${dotify(SUB_LONG)}</p>
@@ -262,9 +263,8 @@ function content(fmt: Fmt, wordmark: string, qr: string): string {
   const cls = fmt.family === "round" ? "round" : "sticker";
   return /* html */ `
     <div class="content ${cls}">
-      ${wm}
+      ${lg}
       <h1>${HEADLINE}</h1>
-      <p class="sub" style="font-size:calc(var(--u)*3.2);max-width:90%">${dotify(SUB_SHORT)}</p>
       <div class="qrcard">${qrImg}</div>
       <div class="urlline">${URL_LABEL}</div>
     </div>`;
@@ -289,7 +289,7 @@ function cropMarks(pageW: number, pageH: number, mark: number, bleed: number): s
 function buildHtml(
   fmt: Fmt,
   theme: Theme,
-  assets: { fontCss: string; wordmark: string; qr: string },
+  assets: { fontCss: string; logo: string; qr: string },
 ): string {
   const u = fmt.unit;
   const pageW = fmt.trimW + 2 * fmt.bleed + 2 * fmt.mark;
@@ -316,7 +316,7 @@ html, body { width: ${pageW}${u}; height: ${pageH}${u}; }
 <body>
   <div class="page">
     <div class="bleed"></div>
-    <div class="trim">${dieline}${content(fmt, assets.wordmark, assets.qr)}</div>
+    <div class="trim">${dieline}${content(fmt, assets.logo, assets.qr)}</div>
     ${cropMarks(pageW, pageH, fmt.mark, fmt.bleed)}
   </div>
 </body></html>`;
@@ -342,7 +342,7 @@ async function render(
   browser: import("puppeteer").Browser,
   fmt: Fmt,
   theme: Theme,
-  assets: { fontCss: string; wordmark: string; qr: string },
+  assets: { fontCss: string; logo: string; qr: string },
 ): Promise<void> {
   const outDir = path.join(OUT, fmt.dir);
   await mkdir(outDir, { recursive: true });
@@ -375,10 +375,10 @@ async function render(
 }
 
 async function loadAssets(theme: Theme) {
-  const [fontRegular, fontBold, wordmark] = await Promise.all([
+  const [fontRegular, fontBold, logo] = await Promise.all([
     dataUri(FONT_REGULAR, "font/ttf"),
     dataUri(FONT_BOLD, "font/ttf"),
-    dataUri(theme === "dark" ? WORDMARK_DARK : WORDMARK_LIGHT, "image/png"),
+    dataUri(theme === "dark" ? LOGO_DARK : LOGO_LIGHT, "image/png"),
   ]);
   const fontCss = `
 @font-face { font-family: 'DIN Pro'; font-weight: 400; font-style: normal; src: url(${fontRegular}) format('truetype'); }
@@ -390,7 +390,7 @@ async function loadAssets(theme: Theme) {
     width: 1200,
     color: { dark: "#0b1f33", light: "#ffffff" },
   });
-  return { fontCss, wordmark, qr };
+  return { fontCss, logo, qr };
 }
 
 async function main() {
