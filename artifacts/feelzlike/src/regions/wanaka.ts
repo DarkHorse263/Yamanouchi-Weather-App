@@ -71,7 +71,7 @@ export const wanakaRegion: RegionConfig = {
   roadsSource: {
     label: "Waka Kotahi NZTA · journeys",
     url: "https://www.journeys.nzta.govt.nz/regions/otago",
-    dataAvailable: false,
+    dataAvailable: true,
   },
   weatherSource: {
     label: "Open-Meteo",

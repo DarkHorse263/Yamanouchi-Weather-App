@@ -75,7 +75,7 @@ export const ruapehuRegion: RegionConfig = {
   roadsSource: {
     label: "Waka Kotahi NZTA · journeys",
     url: "https://www.journeys.nzta.govt.nz/regions/manawatu-whanganui",
-    dataAvailable: false,
+    dataAvailable: true,
   },
   weatherSource: {
     label: "Open-Meteo",

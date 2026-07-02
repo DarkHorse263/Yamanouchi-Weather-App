@@ -593,26 +593,230 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
   return [];
 }
 
+// ── NZ live road events · Waka Kotahi (NZTA) ───────────────────────────
+// Waka Kotahi publishes an open, keyless ArcGIS feature service of active
+// state-highway "road events" (closures, hazards, road works, weather).
+// It covers the STATE-HIGHWAY approach corridors that feed each NZ resort
+// region - NOT the final ski-field access road (those are council / ski-area
+// roads with no public live feed), which stay on the seasonal chain rule in
+// buildChainStatuses() above. So NZ road pages show live approach conditions
+// alongside an honestly-labelled seasonal access-road chain rule.
+const NZTA_ROAD_EVENTS_URL =
+  "https://services.arcgis.com/CXBb7LAjgIIdcsPt/arcgis/rest/services/NZTA_Highway_Information/FeatureServer/0/query";
+const NZTA_TTL_MS = 3 * 60_000;
+
+interface NztaEvent {
+  eventId?: number | string | null;
+  eventType?: string | null;
+  eventDescription?: string | null;
+  impact?: string | null;
+  status?: string | null;
+  eventIsland?: string | null;
+  locationArea?: string | null;
+  eventComments?: string | null;
+  eventModified?: number | null;
+}
+
+let nztaCache: { at: number; events: NztaEvent[] } | null = null;
+
+async function fetchNztaActiveEvents(): Promise<NztaEvent[]> {
+  const now = Date.now();
+  if (nztaCache && now - nztaCache.at < NZTA_TTL_MS) return nztaCache.events;
+  const params = new URLSearchParams({
+    f: "json",
+    where: "status='Active'",
+    outFields:
+      "eventId,eventType,eventDescription,impact,status,eventIsland,locationArea,eventComments,eventModified",
+    returnGeometry: "false",
+    resultRecordCount: "2000",
+    orderByFields: "eventModified DESC",
+  });
+  try {
+    const resp = await fetch(`${NZTA_ROAD_EVENTS_URL}?${params.toString()}`, {
+      headers: { Accept: "application/json" },
+    });
+    if (!resp.ok) throw new Error(`NZTA HTTP ${resp.status}`);
+    const data = (await resp.json()) as {
+      features?: Array<{ attributes?: NztaEvent }>;
+      error?: unknown;
+    };
+    if (data.error || !Array.isArray(data.features)) {
+      throw new Error("NZTA unexpected response");
+    }
+    const events = data.features
+      .map((f) => f.attributes)
+      .filter((a): a is NztaEvent => Boolean(a));
+    nztaCache = { at: now, events };
+    return events;
+  } catch (err) {
+    // Load-shedding: serve the last good snapshot when the upstream blips.
+    if (nztaCache) return nztaCache.events;
+    // No snapshot yet: surface the outage (propagates to a 500 and the client's
+    // honest "couldn't load road conditions" state) rather than returning an
+    // empty list, which the UI would otherwise render as a positive "all clear
+    // · good news" - misleading during a feed outage.
+    throw err;
+  }
+}
+
+interface NzCorridor {
+  island: "North Island" | "South Island";
+  keywords: string[];
+  mountainIds: string[];
+  journeysUrl: string;
+}
+
+// State-highway approach corridors per NZ region. Matched conservatively by
+// island + place/route keywords in the NZTA `locationArea` string so a far-off
+// SH6 event isn't mis-attributed to a resort it doesn't actually serve.
+const NZ_CORRIDORS: Record<string, NzCorridor> = {
+  queenstown: {
+    island: "South Island",
+    keywords: [
+      "queenstown", "frankton", "kawarau", "devils staircase", "kingston",
+      "arrowtown", "gibbston", "crown range", "sh 6a", "shotover",
+    ],
+    mountainIds: ["coronet-peak", "the-remarkables"],
+    journeysUrl: "https://www.journeys.nzta.govt.nz/regions/otago",
+  },
+  wanaka: {
+    island: "South Island",
+    keywords: [
+      "wanaka", "hawea", "luggate", "cardrona", "crown range", "lindis",
+      "tarras", "albert town", "makarora", "haast",
+    ],
+    mountainIds: ["cardrona", "treble-cone"],
+    journeysUrl: "https://www.journeys.nzta.govt.nz/regions/otago",
+  },
+  "mt-hutt": {
+    island: "South Island",
+    keywords: [
+      "methven", "rakaia", "mount hutt", "mt hutt", "sh 77", "sh 72",
+      "inland scenic", "darfield", "windwhistle",
+    ],
+    mountainIds: ["mt-hutt"],
+    journeysUrl: "https://www.journeys.nzta.govt.nz/regions/canterbury",
+  },
+  ruapehu: {
+    island: "North Island",
+    keywords: [
+      "desert road", "waiouru", "rangipo", "national park", "ohakune",
+      "sh 47", "sh 48", "sh 49", "raetihi", "tongariro", "turangi",
+    ],
+    mountainIds: ["whakapapa", "turoa"],
+    journeysUrl: "https://www.journeys.nzta.govt.nz/regions/manawatu-whanganui",
+  },
+};
+
+function mapNztaCondition(ev: NztaEvent): "open" | "closed" | "caution" {
+  // NZTA's structured `impact` is the authoritative signal ("Road Closed" vs
+  // "Caution"/"Delays"). Deliberately NOT scraping free-text comments for
+  // "closed" - a "left lane is closed" advisory must not paint the whole road
+  // as CLOSED. Everything short of a full closure is surfaced as caution.
+  const impact = (ev.impact ?? "").toLowerCase();
+  if (impact.includes("closed")) return "closed";
+  return "caution";
+}
+
+function nztaMentionsChains(ev: NztaEvent): boolean {
+  const text = `${ev.eventComments ?? ""} ${ev.eventDescription ?? ""} ${ev.eventType ?? ""}`.toLowerCase();
+  return text.includes("chain");
+}
+
+function buildNzRoads(regionId: string, events: NztaEvent[]): Array<Record<string, unknown>> {
+  const cfg = NZ_CORRIDORS[regionId];
+  if (!cfg) return [];
+  const matched = events.filter((ev) => {
+    if ((ev.eventIsland ?? "") !== cfg.island) return false;
+    const area = (ev.locationArea ?? "").toLowerCase();
+    if (!area) return false;
+    return cfg.keywords.some((k) => area.includes(k));
+  });
+  // Closures first, then most recently modified, so the most consequential
+  // advisory leads the list.
+  matched.sort((a, b) => {
+    const sev = (e: NztaEvent) => (mapNztaCondition(e) === "closed" ? 0 : 1);
+    const bySeverity = sev(a) - sev(b);
+    if (bySeverity !== 0) return bySeverity;
+    return (b.eventModified ?? 0) - (a.eventModified ?? 0);
+  });
+  const seen = new Set<string>();
+  const roads: Array<Record<string, unknown>> = [];
+  for (const ev of matched) {
+    const id = `nzta-${ev.eventId ?? `${ev.locationArea ?? "event"}-${ev.eventModified ?? ""}`}`;
+    if (seen.has(id)) continue;
+    seen.add(id);
+    const area = ev.locationArea ?? "State highway";
+    const shMatch = area.match(/^SH\s?\d+[A-Za-z]?/);
+    const roadName = shMatch
+      ? shMatch[0].toUpperCase().replace(/^SH\s?/, "SH ")
+      : (ev.eventType ?? "State highway");
+    const description =
+      (ev.eventComments ?? ev.eventDescription ?? "").trim() ||
+      [ev.eventType, ev.impact].filter(Boolean).join(" · ");
+    roads.push({
+      id,
+      roadName,
+      segment: area,
+      condition: mapNztaCondition(ev),
+      description,
+      chainsRequired: nztaMentionsChains(ev),
+      lastUpdated: ev.eventModified
+        ? new Date(ev.eventModified).toISOString()
+        : new Date().toISOString(),
+      source: "Waka Kotahi (NZTA) · live",
+      detailUrl: cfg.journeysUrl,
+      affectedResorts: cfg.mountainIds,
+    });
+    if (roads.length >= 15) break;
+  }
+  return roads;
+}
+
 router.get("/road-conditions", async (req, res) => {
   try {
     const region = parseRegionParam(req.query["region"]);
 
-    // Roads dataset is currently Snowy Mountains only. When other regions
-    // ask for road conditions, return an empty roads list rather than 404
-    // so the client can render a "no data yet" state cleanly.
+    // Road conditions come from three honest tiers:
+    //  · AU (Snowy Mountains) - curated roads + live NSW alpine hazards.
+    //  · NZ (Otago / Canterbury / Central Plateau) - live Waka Kotahi (NZTA)
+    //    state-highway "road events" on the approach corridors.
+    //  · Everywhere else - no public live feed wired yet, so roads is empty
+    //    and the client renders an explicit "not available" state.
     const isAU = region === undefined || region === "snowy-mountains";
-    const roads = isAU ? await fetchRoadConditions() : [];
+    const isNZ =
+      region !== undefined &&
+      Object.prototype.hasOwnProperty.call(NZ_CORRIDORS, region);
+
+    let roads: Array<Record<string, unknown>> = [];
+    let generalAdvice: string;
+    let liveTrafficUrl: string;
+
+    if (isAU) {
+      roads = await fetchRoadConditions();
+      generalAdvice =
+        "Always carry chains when travelling to the Snowy Mountains during winter (June-October). Check conditions before departure at livetraffic.com. National Parks entry fees apply for Kosciuszko National Park. Vehicle entry is $29/day or $190/year (2024 rates). During heavy snowfall, roads may close at short notice.";
+      liveTrafficUrl =
+        "https://www.livetraffic.com/maps?lat=-36.45&lng=148.45&zoom=10&layers=cameras";
+    } else if (isNZ) {
+      const events = await fetchNztaActiveEvents();
+      roads = buildNzRoads(region as string, events);
+      generalAdvice =
+        "Live advisories below cover the state-highway approach to the region, from Waka Kotahi (NZTA). The final ski-field access road is a council or ski-area road with no public live feed - use the seasonal chain rule below and check the ski area's own daily road report before heading up. In the NZ ski season (roughly June-October) carry chains and fit them when snow is settling or where directed.";
+      liveTrafficUrl = "https://www.journeys.nzta.govt.nz/highway-conditions";
+    } else {
+      generalAdvice =
+        "Live road condition data is not yet available for this region.";
+      liveTrafficUrl = "";
+    }
+
     const chainFittingBays = isAU ? CHAIN_FITTING_BAYS : [];
     const chainStatuses = buildChainStatuses(region);
 
     const result = GetRoadConditionsResponse.parse({
       roads,
-      generalAdvice: isAU
-        ? "Always carry chains when travelling to the Snowy Mountains during winter (June-October). Check conditions before departure at livetraffic.com. National Parks entry fees apply for Kosciuszko National Park. Vehicle entry is $29/day or $190/year (2024 rates). During heavy snowfall, roads may close at short notice."
-        : "Live road condition data is not yet available for this region.",
-      liveTrafficUrl: isAU
-        ? "https://www.livetraffic.com/maps?lat=-36.45&lng=148.45&zoom=10&layers=cameras"
-        : "",
+      generalAdvice,
+      liveTrafficUrl,
       lastUpdated: new Date().toISOString(),
       chainFittingBays,
       chainStatuses,

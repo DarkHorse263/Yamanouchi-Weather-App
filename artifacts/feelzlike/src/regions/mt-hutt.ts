@@ -57,7 +57,7 @@ export const mtHuttRegion: RegionConfig = {
   roadsSource: {
     label: "Waka Kotahi NZTA · journeys",
     url: "https://www.journeys.nzta.govt.nz/regions/canterbury",
-    dataAvailable: false,
+    dataAvailable: true,
   },
   weatherSource: {
     label: "Open-Meteo",
