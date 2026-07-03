@@ -60,6 +60,18 @@ function url(path, changefreq, priority) {
   return { path, changefreq, priority };
 }
 
+/**
+ * The production edge serves prerendered pages as directories, so every path
+ * except root 301-redirects to its trailing-slash form. Emit the trailing-slash
+ * URL (the real 200 canonical) so sitemap entries are never flagged as
+ * "Page with redirect" and go unindexed.
+ * @param {string} path
+ */
+function canonicalLoc(path) {
+  if (path === "/") return "/";
+  return path.endsWith("/") ? path : `${path}/`;
+}
+
 const staticUrls = [
   url("/",                "daily",   "1.0"),
   url("/countries",       "daily",   "0.9"),
@@ -105,7 +117,7 @@ const xml = `<?xml version="1.0" encoding="UTF-8"?>
 ${allUrls
   .map(
     ({ path, changefreq, priority }) =>
-      `  <url><loc>${SITE_URL}${path}</loc><lastmod>${NOW}</lastmod><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>`,
+      `  <url><loc>${SITE_URL}${canonicalLoc(path)}</loc><lastmod>${NOW}</lastmod><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>`,
   )
   .join("\n")}
 </urlset>

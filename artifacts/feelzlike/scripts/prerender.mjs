@@ -34,6 +34,12 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, "..", "dist", "public");
 const SITE = (process.env.PUBLIC_ORIGIN || "https://feelzlike.com").replace(/\/$/, "");
 
+// The production edge serves prerendered directory pages with a trailing slash
+// (a non-slash path 301-redirects to the slash form). The injected canonical
+// must point at that 200 URL, otherwise the snapshot's own canonical points at a
+// redirect and Google files the page under "Page with redirect". Root stays "/".
+const withTrailingSlash = (p) => (p === "/" ? "/" : p.endsWith("/") ? p : `${p}/`);
+
 // ── Region / town / mountain registry ────────────────────────────────────
 
 const REGIONS = [
@@ -443,7 +449,7 @@ try {
 
 let count = 0;
 for (const route of routes) {
-  const canonical = `${SITE}${route.path}`;
+  const canonical = `${SITE}${withTrailingSlash(route.path)}`;
   let html = injectHead(template, route.title, route.description, canonical);
   html = injectBody(html, route.body);
 

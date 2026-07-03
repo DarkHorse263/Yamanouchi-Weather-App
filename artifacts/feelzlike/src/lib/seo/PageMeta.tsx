@@ -32,6 +32,19 @@ const DEFAULT_OG_IMAGE = "/opengraph.jpg";
 
 const CANONICAL_ORIGIN = "https://feelzlike.com";
 
+/**
+ * The production edge serves every non-root path with a trailing slash (a
+ * non-slash path 301-redirects to the slash form). Canonicals must point at that
+ * 200 URL — and drop any query/hash — so the URL Google indexes is never a
+ * "Page with redirect". Root stays "/".
+ */
+function canonicalPath(path: string): string {
+  const clean = path.split("#")[0].split("?")[0];
+  const withLeading = clean.startsWith("/") ? clean : `/${clean}`;
+  if (withLeading === "/") return "/";
+  return withLeading.endsWith("/") ? withLeading : `${withLeading}/`;
+}
+
 function publicOrigin(): string {
   const env = (import.meta as { env?: { VITE_PUBLIC_ORIGIN?: string; PROD?: boolean } })
     .env;
@@ -53,7 +66,7 @@ export function PageMeta({
   jsonLd,
 }: PageMetaProps) {
   const origin = publicOrigin();
-  const canonical = path ? `${origin}${path.startsWith("/") ? path : `/${path}`}` : undefined;
+  const canonical = path ? `${origin}${canonicalPath(path)}` : undefined;
   const ogImage = (() => {
     const src = image || DEFAULT_OG_IMAGE;
     return src.startsWith("http") ? src : `${origin}${src.startsWith("/") ? src : `/${src}`}`;
