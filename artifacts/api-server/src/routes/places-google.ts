@@ -220,168 +220,46 @@ router.get("/places/photo", async (req, res) => {
 });
 
 /**
- * Forward place search · powers the "your current location" search bar so a
- * visitor can look up conditions for any town or city by name (not just GPS).
- * Uses Google Places (New) places:searchText - one call returns the display
- * name, address and coordinates. The key stays server-side and we return a
- * small, stable shape (no Google-internal field names leaked).
+ * Locality search · powers the "your current location" search bar so a visitor
+ * can look up conditions for any suburb, town or city by name (not just GPS).
+ *
+ * Uses Google Places (New) Autocomplete rather than Text Search. Autocomplete is
+ * the only Places endpoint that accepts BOTH a locality type filter and a
+ * multi-country restriction in a single call, and that is exactly what a
+ * ski-weather search needs: a generic word like "Orange" must resolve to the
+ * TOWN of Orange, NSW - not a page of businesses ("orange college", "optus
+ * orange", "ito orange beach") the way Text Search ranked it. We ask only for
+ * locality-shaped predictions across the three countries feelzlike serves.
+ *
+ * Autocomplete returns a placeId + label but NO coordinates, so the picked
+ * result is resolved to lat/lng on selection via /places/details below (one
+ * cheap lookup per pick, versus Text Search's per-search fan-out). The key stays
+ * server-side and we return a small, stable shape.
  */
-// The three countries feelzlike serves (AU incl. Tasmania, JP, NZ). Google
-// Text Search has no clean multi-country restriction (regionCode is single;
-// includedRegionCodes is autocomplete-only), so each country is queried with
-// its own locationRestriction rectangle and results are kept only when they
-// resolve to that country. `allowNullCountry` rescues the odd mountain / ski
-// field that Google returns without an addressComponents country: the AU and NZ
-// rectangles cover only their own country plus ocean, so a country-less hit
-// inside them is safely theirs · the JP rectangle overlaps South Korea,
-// eastern China and the Russian far east, so it stays strict.
-interface ServedRegion {
-  country: string;
-  box: [number, number, number, number];
-  allowNullCountry: boolean;
-}
-const SERVED_REGIONS: ServedRegion[] = [
-  { country: "AU", box: [-44.0, -9.0, 112.0, 154.5], allowNullCountry: true },
-  { country: "JP", box: [24.0, 46.5, 122.0, 146.5], allowNullCountry: false },
-  { country: "NZ", box: [-47.5, -33.5, 166.0, 179.5], allowNullCountry: true },
+
+// Locality-shaped primary types: suburbs (sublocality), towns / cities
+// (locality, postal_town) and the town-sized administrative unit (level 3).
+// Businesses, POIs and natural features are deliberately excluded so the search
+// only ever offers real suburbs, towns and cities. Autocomplete accepts up to 5
+// primary types; these four cover AU / JP / NZ localities.
+const LOCALITY_TYPES = [
+  "locality",
+  "sublocality",
+  "postal_town",
+  "administrative_area_level_3",
 ];
-const SERVED_BBOXES: Array<[number, number, number, number]> = SERVED_REGIONS.map(
-  (r) => r.box,
-);
-function inServedRegion(lat: number, lng: number): boolean {
-  return SERVED_BBOXES.some(
-    ([minLat, maxLat, minLng, maxLng]) =>
-      lat >= minLat && lat <= maxLat && lng >= minLng && lng <= maxLng,
-  );
-}
+
+// The countries feelzlike serves (AU incl. Tasmania, JP, NZ). Autocomplete's
+// includedRegionCodes takes up to 15 CLDR region codes in ONE call, so - unlike
+// Text Search, whose regionCode is single and whose rectangles leaked
+// neighbouring countries - there is no per-country fan-out and no foreign-hit
+// filtering to do afterwards. Google enforces the country scope for us.
+const SEARCH_REGION_CODES = ["au", "jp", "nz"];
 
 interface SearchResultOut {
   id: string;
   name: string;
   address: string;
-  lat: number;
-  lng: number;
-}
-
-// Internal shape carrying the signals we rank + filter on before trimming down
-// to the public SearchResultOut.
-interface ScoredResult extends SearchResultOut {
-  country: string | null;
-  placeLike: boolean;
-}
-
-// Place types that read as a town / city / region / mountain rather than a
-// business. Results carrying one of these are ranked ahead of shops and other
-// POIs, so typing "orange" surfaces the town of Orange NSW, not "Orange
-// tobacco". Resort + natural-feature types are included so a searched ski field
-// still ranks well.
-const PLACE_LIKE_TYPES = new Set([
-  "locality",
-  "sublocality",
-  "sublocality_level_1",
-  "postal_town",
-  "colloquial_area",
-  "neighborhood",
-  "administrative_area_level_1",
-  "administrative_area_level_2",
-  "administrative_area_level_3",
-  "administrative_area_level_4",
-  "administrative_area_level_5",
-  "political",
-  "natural_feature",
-  "national_park",
-  "ski_resort",
-]);
-
-function countryCodeOf(
-  components?: Array<{ types?: string[]; shortText?: string }>,
-): string | null {
-  if (!components) return null;
-  for (const c of components) {
-    if (c.types?.includes("country")) return c.shortText ?? null;
-  }
-  return null;
-}
-
-// One Text Search restricted to a single served-country rectangle. Restricting
-// the query upstream (rather than searching globally then dropping foreign
-// hits) is what lets an ambiguous name surface its AU/JP/NZ match: a global
-// search for "Orange" is dominated by Orange, France / Orange, California and
-// none of the served-region towns make the top 20, so the post-filter used to
-// leave zero results. `locationRestriction` accepts a single rectangle, so we
-// run one call per country and merge. Each result is tagged with its resolved
-// country code (to drop Korea/China/Russia that fall inside the JP rectangle)
-// and whether it looks like a place vs a business (for ranking). Throws on a
-// hard upstream failure; the caller runs these under Promise.allSettled so one
-// country failing still lets the others answer.
-async function searchTextInBox(
-  apiKey: string,
-  q: string,
-  region: ServedRegion,
-  fieldMask: string,
-): Promise<ScoredResult[]> {
-  const [minLat, maxLat, minLng, maxLng] = region.box;
-  const upstream = await fetch("https://places.googleapis.com/v1/places:searchText", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Goog-Api-Key": apiKey,
-      "X-Goog-FieldMask": fieldMask,
-    },
-    body: JSON.stringify({
-      textQuery: q,
-      maxResultCount: 10,
-      languageCode: "en",
-      // Rectangle is the only shape Text Search accepts for a hard
-      // restriction. low = SW corner, high = NE corner.
-      locationRestriction: {
-        rectangle: {
-          low: { latitude: minLat, longitude: minLng },
-          high: { latitude: maxLat, longitude: maxLng },
-        },
-      },
-    }),
-    signal: AbortSignal.timeout(8000),
-  });
-
-  if (!upstream.ok) {
-    const text = await upstream.text().catch(() => "");
-    throw new Error(`upstream ${upstream.status}: ${text.slice(0, 200)}`);
-  }
-
-  const data = (await upstream.json()) as {
-    places?: Array<{
-      id: string;
-      displayName?: { text?: string };
-      formattedAddress?: string;
-      location?: { latitude: number; longitude: number };
-      types?: string[];
-      addressComponents?: Array<{ types?: string[]; shortText?: string }>;
-    }>;
-  };
-
-  return (data.places ?? [])
-    .filter(
-      (p) =>
-        p.location &&
-        Number.isFinite(p.location.latitude) &&
-        Number.isFinite(p.location.longitude),
-    )
-    .map((p) => {
-      const types = p.types ?? [];
-      return {
-        id: p.id,
-        name: p.displayName?.text ?? "",
-        address: p.formattedAddress ?? "",
-        lat: p.location!.latitude,
-        lng: p.location!.longitude,
-        country: countryCodeOf(p.addressComponents),
-        placeLike: types.some((t) => PLACE_LIKE_TYPES.has(t)),
-      };
-    })
-    .filter((p) =>
-      p.country == null ? region.allowNullCountry : p.country === region.country,
-    );
 }
 
 router.get("/places/search", async (req, res) => {
@@ -398,67 +276,146 @@ router.get("/places/search", async (req, res) => {
   }
   const max = Math.min(5, Math.max(1, Number(req.query["max"] ?? 5)));
 
-  const fieldMask = [
-    "places.id",
-    "places.displayName",
-    "places.formattedAddress",
-    "places.location",
-    // types drives the town-vs-business ranking; addressComponents gives the
-    // authoritative country code that trims foreign hits out of the JP box.
-    // Both stay within the Text Search Pro tier already used by location +
-    // formattedAddress, so they add no billing cost.
-    "places.types",
-    "places.addressComponents",
-  ].join(",");
-
   try {
-    // Fan out one restricted search per served country in parallel, then merge.
-    // allSettled so a single country's timeout/error doesn't sink the whole
-    // search - the remaining countries still return results.
-    const settled = await Promise.allSettled(
-      SERVED_REGIONS.map((region) => searchTextInBox(apiKey, q, region, fieldMask)),
-    );
-    const lists = settled
-      .filter(
-        (s): s is PromiseFulfilledResult<ScoredResult[]> => s.status === "fulfilled",
-      )
-      .map((s) => s.value);
+    const upstream = await fetch("https://places.googleapis.com/v1/places:autocomplete", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Goog-Api-Key": apiKey,
+      },
+      body: JSON.stringify({
+        input: q,
+        includedPrimaryTypes: LOCALITY_TYPES,
+        includedRegionCodes: SEARCH_REGION_CODES,
+        languageCode: "en",
+      }),
+      signal: AbortSignal.timeout(8000),
+    });
 
-    if (lists.length === 0) {
-      // Every country's upstream call failed.
-      res.status(502).json({
+    if (!upstream.ok) {
+      const text = await upstream.text().catch(() => "");
+      res.status(upstream.status >= 400 && upstream.status < 500 ? 502 : 503).json({
         error: "UPSTREAM_ERROR",
-        message: "place search is unavailable right now",
+        status: upstream.status,
+        message: text.slice(0, 400),
       });
       return;
     }
 
-    // Round-robin across the countries (AU first each round, matching the
-    // served-region order) so no single country crowds the others out of the
-    // capped list. Within that traversal, split into place-like (towns, cities,
-    // regions, mountains) and everything else, so a searched town always ranks
-    // above a same-named business · then concatenate place-like first. Dedupe
-    // by place id; the served-region box stays as a defensive net alongside the
-    // country-code filter already applied upstream.
-    const seen = new Set<string>();
-    const placeLike: SearchResultOut[] = [];
-    const other: SearchResultOut[] = [];
-    const longest = Math.max(...lists.map((l) => l.length));
-    for (let i = 0; i < longest; i++) {
-      for (const list of lists) {
-        const item = list[i];
-        if (!item || seen.has(item.id)) continue;
-        if (!inServedRegion(item.lat, item.lng)) continue;
-        seen.add(item.id);
-        const { id, name, address, lat, lng } = item;
-        (item.placeLike ? placeLike : other).push({ id, name, address, lat, lng });
-      }
+    const data = (await upstream.json()) as {
+      suggestions?: Array<{
+        placePrediction?: {
+          placeId?: string;
+          text?: { text?: string };
+          structuredFormat?: {
+            mainText?: { text?: string };
+            secondaryText?: { text?: string };
+          };
+        };
+      }>;
+    };
+
+    // mainText is the locality name ("Orange"), secondaryText the context
+    // ("NSW, Australia"). Fall back to the full text when the structured split is
+    // absent. Skip any prediction without a placeId - we need it to fetch coords.
+    const out: SearchResultOut[] = [];
+    for (const s of data.suggestions ?? []) {
+      const p = s.placePrediction;
+      if (!p?.placeId) continue;
+      const name = p.structuredFormat?.mainText?.text ?? p.text?.text ?? "";
+      if (!name) continue;
+      out.push({
+        id: p.placeId,
+        name,
+        address: p.structuredFormat?.secondaryText?.text ?? "",
+      });
+      if (out.length >= max) break;
     }
-    const out = [...placeLike, ...other].slice(0, max);
+
+    // Predictions for a given term are stable enough to cache at the edge.
+    res.setHeader("Cache-Control", "public, max-age=3600, s-maxage=3600");
+    res.json({ results: out });
+  } catch (err) {
+    res.status(503).json({
+      error: "FETCH_FAILED",
+      message: err instanceof Error ? err.message : "Unknown error",
+    });
+  }
+});
+
+/**
+ * Resolve a picked Autocomplete prediction to coordinates. Autocomplete returns
+ * a placeId only, so the search bar calls this once - on selection - to get the
+ * lat/lng the /near-you view needs. The field mask is held to id + name +
+ * address + location so this stays a cheap Place Details lookup.
+ */
+router.get("/places/details", async (req, res) => {
+  const apiKey = process.env["GOOGLE_PLACES_API_KEY"];
+  if (!apiKey) {
+    res.status(503).json({ error: "PLACES_NOT_CONFIGURED", message: "GOOGLE_PLACES_API_KEY is not set on the server." });
+    return;
+  }
+
+  const placeId = String(req.query["placeId"] ?? "").trim();
+  // Google place ids are opaque URL-safe tokens. Validate the shape before
+  // interpolating into the upstream URL (blocks path traversal / SSRF via a
+  // crafted id).
+  if (!/^[A-Za-z0-9_-]{1,256}$/.test(placeId)) {
+    res.status(400).json({ error: "BAD_PLACE_ID", message: "placeId is missing or malformed" });
+    return;
+  }
+
+  try {
+    const upstream = await fetch(
+      `https://places.googleapis.com/v1/places/${placeId}?languageCode=en`,
+      {
+        headers: {
+          "X-Goog-Api-Key": apiKey,
+          "X-Goog-FieldMask": "id,displayName,formattedAddress,location",
+        },
+        signal: AbortSignal.timeout(8000),
+      },
+    );
+
+    if (!upstream.ok) {
+      const text = await upstream.text().catch(() => "");
+      const code =
+        upstream.status === 404
+          ? 404
+          : upstream.status >= 400 && upstream.status < 500
+            ? 502
+            : 503;
+      res.status(code).json({
+        error: "UPSTREAM_ERROR",
+        status: upstream.status,
+        message: text.slice(0, 400),
+      });
+      return;
+    }
+
+    const p = (await upstream.json()) as {
+      id?: string;
+      displayName?: { text?: string };
+      formattedAddress?: string;
+      location?: { latitude?: number; longitude?: number };
+    };
+
+    const lat = p.location?.latitude;
+    const lng = p.location?.longitude;
+    if (lat == null || lng == null || !Number.isFinite(lat) || !Number.isFinite(lng)) {
+      res.status(502).json({ error: "NO_LOCATION", message: "place has no coordinates" });
+      return;
+    }
 
     // Place geometry is stable, so cache for an hour at the edge.
     res.setHeader("Cache-Control", "public, max-age=3600, s-maxage=3600");
-    res.json({ results: out });
+    res.json({
+      id: p.id ?? placeId,
+      name: p.displayName?.text ?? "",
+      address: p.formattedAddress ?? "",
+      lat,
+      lng,
+    });
   } catch (err) {
     res.status(503).json({
       error: "FETCH_FAILED",

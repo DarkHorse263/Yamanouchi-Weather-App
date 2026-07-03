@@ -5,16 +5,24 @@ import { Loader2, MapPin, Search, X } from "lucide-react";
 import { track } from "@/lib/analytics";
 import { REGIONS } from "@/regions";
 
-// ── server payload (GET /api/places/search) ────────────────────────
+// ── server payloads ────────────────────────────────────────────────
+// GET /api/places/search returns locality predictions (no coordinates -
+// Autocomplete does not carry them). Coordinates are fetched on selection.
 interface PlaceResult {
+  id: string;
+  name: string;
+  address: string;
+}
+interface PlaceSearchResponse {
+  results: PlaceResult[];
+}
+// GET /api/places/details resolves a picked prediction to coordinates.
+interface PlaceDetail {
   id: string;
   name: string;
   address: string;
   lat: number;
   lng: number;
-}
-interface PlaceSearchResponse {
-  results: PlaceResult[];
 }
 
 const MIN_CHARS = 3;
@@ -51,21 +59,25 @@ function distanceKm(aLat: number, aLng: number, bLat: number, bLng: number): num
 }
 
 /**
- * Reconcile a picked Places result against the curated town registry. A name
- * match (en or ja) accepts within 25km; proximity alone accepts only within
- * 6km, so we never grab a neighbouring town when there is no name signal.
- * Returns the matched town or null to fall back to /near-you.
+ * Reconcile a picked place (resolved to a name + coordinates) against the
+ * curated town registry. A name match (en or ja) accepts within 25km; proximity
+ * alone accepts only within 6km, so we never grab a neighbouring town when there
+ * is no name signal. Returns the matched town or null to fall back to /near-you.
  */
-function matchCuratedTown(r: PlaceResult): { regionId: string; id: string } | null {
-  const nName = normalizeName(r.name);
+function matchCuratedTown(
+  name: string,
+  lat: number,
+  lng: number,
+): { regionId: string; id: string } | null {
+  const nName = normalizeName(name);
   const named = CURATED_TOWNS.filter(
-    (t) => normalizeName(t.name) === nName || (t.nameJa != null && t.nameJa === r.name),
+    (t) => normalizeName(t.name) === nName || (t.nameJa != null && t.nameJa === name),
   );
   const pool = named.length > 0 ? named : CURATED_TOWNS;
   let best: (typeof CURATED_TOWNS)[number] | null = null;
   let bestKm = Infinity;
   for (const t of pool) {
-    const km = distanceKm(r.lat, r.lng, t.lat, t.lng);
+    const km = distanceKm(lat, lng, t.lat, t.lng);
     if (km < bestKm) {
       bestKm = km;
       best = t;
@@ -98,7 +110,15 @@ export function PlaceSearch({
   const [debounced, setDebounced] = useState("");
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
+  // Id of the prediction currently being resolved to coordinates (blocks
+  // double-picks and drives the row spinner); selectError shows if that lookup
+  // fails so the pick never silently does nothing.
+  const [resolvingId, setResolvingId] = useState<string | null>(null);
+  const [selectError, setSelectError] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  // Monotonic pick counter · lets an in-flight coord lookup notice the user has
+  // since retyped or picked again, so a stale result never navigates.
+  const pickSeq = useRef(0);
 
   // Debounce the typed term so we don't fire a request on every keystroke.
   useEffect(() => {
@@ -135,30 +155,58 @@ export function PlaceSearch({
     return () => document.removeEventListener("mousedown", onDown);
   }, []);
 
-  function choose(r: PlaceResult) {
+  async function choose(r: PlaceResult) {
+    // Guard against a second pick while the first is still resolving coords.
+    if (resolvingId) return;
     track("place_search_select", {
       category: "navigation",
       data: { source, name: r.name },
     });
-    setOpen(false);
-    setTerm("");
-    setDebounced("");
-    setActiveIndex(-1);
+    const myTurn = ++pickSeq.current;
+    setResolvingId(r.id);
+    setSelectError(false);
 
-    // If the picked place is one of our curated towns, jump straight to its
-    // rich town page; otherwise fall back to the location-first /near-you view.
-    const town = matchCuratedTown(r);
-    if (town) {
-      navigate(`/${town.regionId}/${town.id}`);
-      return;
+    // Autocomplete predictions carry no coordinates, so fetch them now. The
+    // /near-you view and the curated-town match both need lat/lng.
+    try {
+      const res = await fetch(
+        `/api/places/details?placeId=${encodeURIComponent(r.id)}`,
+      );
+      if (!res.ok) throw new Error("details failed");
+      const d = (await res.json()) as PlaceDetail;
+      // The user retyped or picked again while this lookup was in flight - drop
+      // the stale result so we never navigate somewhere they moved on from.
+      if (pickSeq.current !== myTurn) return;
+      if (!Number.isFinite(d.lat) || !Number.isFinite(d.lng)) {
+        throw new Error("no coordinates");
+      }
+
+      setResolvingId(null);
+      setOpen(false);
+      setTerm("");
+      setDebounced("");
+      setActiveIndex(-1);
+
+      const name = d.name || r.name;
+      // If the picked place is one of our curated towns, jump straight to its
+      // rich town page; otherwise fall back to the location-first /near-you view.
+      const town = matchCuratedTown(name, d.lat, d.lng);
+      if (town) {
+        navigate(`/${town.regionId}/${town.id}`);
+        return;
+      }
+
+      const params = new URLSearchParams({
+        lat: String(d.lat),
+        lng: String(d.lng),
+        name,
+      });
+      navigate(`/near-you?${params.toString()}`);
+    } catch {
+      if (pickSeq.current !== myTurn) return;
+      setResolvingId(null);
+      setSelectError(true);
     }
-
-    const params = new URLSearchParams({
-      lat: String(r.lat),
-      lng: String(r.lng),
-      name: r.name,
-    });
-    navigate(`/near-you?${params.toString()}`);
   }
 
   function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -172,7 +220,7 @@ export function PlaceSearch({
     } else if (e.key === "Enter") {
       e.preventDefault();
       const r = results[activeIndex] ?? results[0];
-      if (r) choose(r);
+      if (r) void choose(r);
     } else if (e.key === "Escape") {
       setOpen(false);
     }
@@ -191,6 +239,13 @@ export function PlaceSearch({
             setTerm(e.target.value);
             setOpen(true);
             setActiveIndex(-1);
+            setSelectError(false);
+            // Retyping mid-resolve invalidates the in-flight pick and clears its
+            // spinner so a stale coord lookup can't navigate after the fact.
+            if (resolvingId) {
+              pickSeq.current++;
+              setResolvingId(null);
+            }
           }}
           onFocus={() => setOpen(true)}
           onKeyDown={onKeyDown}
@@ -222,35 +277,50 @@ export function PlaceSearch({
           {query.isFetching && results.length === 0 ? (
             <p className="px-3.5 py-3 text-[12px] text-slate-400">searching…</p>
           ) : results.length > 0 ? (
-            <ul role="listbox">
-              {results.map((r, i) => (
-                <li key={r.id} role="option" aria-selected={i === activeIndex}>
-                  <button
-                    type="button"
-                    onMouseEnter={() => setActiveIndex(i)}
-                    onClick={() => choose(r)}
-                    className={`flex w-full items-start gap-2.5 px-3.5 py-2.5 text-left transition-colors ${
-                      i === activeIndex ? "bg-sky-50" : "hover:bg-sky-50"
-                    }`}
-                  >
-                    <MapPin
-                      className="mt-0.5 h-3.5 w-3.5 shrink-0 text-sky-500"
-                      strokeWidth={2}
-                    />
-                    <span className="min-w-0">
-                      <span className="block truncate text-[13px] font-semibold text-slate-800">
-                        {r.name.toLowerCase()}
-                      </span>
-                      {r.address ? (
-                        <span className="block truncate text-[11px] text-slate-400">
-                          {r.address.toLowerCase()}
+            <>
+              <ul role="listbox">
+                {results.map((r, i) => (
+                  <li key={r.id} role="option" aria-selected={i === activeIndex}>
+                    <button
+                      type="button"
+                      disabled={resolvingId != null}
+                      onMouseEnter={() => setActiveIndex(i)}
+                      onClick={() => void choose(r)}
+                      className={`flex w-full items-start gap-2.5 px-3.5 py-2.5 text-left transition-colors disabled:cursor-default ${
+                        i === activeIndex ? "bg-sky-50" : "hover:bg-sky-50"
+                      }`}
+                    >
+                      {resolvingId === r.id ? (
+                        <Loader2
+                          className="mt-0.5 h-3.5 w-3.5 shrink-0 animate-spin text-sky-500"
+                          strokeWidth={2}
+                        />
+                      ) : (
+                        <MapPin
+                          className="mt-0.5 h-3.5 w-3.5 shrink-0 text-sky-500"
+                          strokeWidth={2}
+                        />
+                      )}
+                      <span className="min-w-0">
+                        <span className="block truncate text-[13px] font-semibold text-slate-800">
+                          {r.name.toLowerCase()}
                         </span>
-                      ) : null}
-                    </span>
-                  </button>
-                </li>
-              ))}
-            </ul>
+                        {r.address ? (
+                          <span className="block truncate text-[11px] text-slate-400">
+                            {r.address.toLowerCase()}
+                          </span>
+                        ) : null}
+                      </span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+              {selectError ? (
+                <p className="border-t border-sky-50 px-3.5 py-2.5 text-[12px] text-slate-400">
+                  couldn't load that place · try again
+                </p>
+              ) : null}
+            </>
           ) : query.isError ? (
             <p className="px-3.5 py-3 text-[12px] text-slate-400">
               search is unavailable right now
