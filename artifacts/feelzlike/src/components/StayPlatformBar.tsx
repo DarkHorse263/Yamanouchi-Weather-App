@@ -7,6 +7,7 @@ import {
 } from "@/lib/places";
 import { cjLinkFor } from "@/lib/cj";
 import { useConsent, canUseAds } from "@/lib/consent";
+import { track } from "@/lib/analytics";
 
 interface Props {
   query: string;
@@ -50,6 +51,14 @@ export function StayPlatformBar({
     })
     .filter((x) => x.plainUrl.length > 0);
 
+  // One booking-intent event per outbound OTA click · consent-gated in the
+  // analytics layer, so it's a no-op until the visitor accepts analytics.
+  const trackBook = (platform: StayPlatformId) =>
+    track("book_accommodation", {
+      category: "affiliate",
+      data: { platform, country, ...(region ? { region } : {}) },
+    });
+
   if (variant === "banner") {
     return (
       <div className={`rounded-2xl border border-border bg-gradient-to-br from-blue-50 via-white to-amber-50/30 p-5 ${className}`}>
@@ -69,6 +78,7 @@ export function StayPlatformBar({
               href={href}
               target="_blank"
               rel="noopener noreferrer sponsored"
+              onClick={() => trackBook(p.id)}
               className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold transition-transform hover:scale-[1.03] hover:shadow-sm"
               style={{ backgroundColor: p.brandColor, color: p.brandText }}
             >
@@ -91,6 +101,7 @@ export function StayPlatformBar({
             target="_blank"
             rel="noopener noreferrer sponsored"
             title={p.label}
+            onClick={() => trackBook(p.id)}
             className="inline-flex items-center justify-center rounded-md px-2 py-1 text-[10px] font-bold transition-opacity hover:opacity-85"
             style={{ backgroundColor: p.brandColor, color: p.brandText }}
           >
@@ -110,6 +121,7 @@ export function StayPlatformBar({
           href={href}
           target="_blank"
           rel="noopener noreferrer sponsored"
+          onClick={() => trackBook(p.id)}
           className="inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-[11px] font-bold transition-opacity hover:opacity-85"
           style={{ backgroundColor: p.brandColor, color: p.brandText }}
         >

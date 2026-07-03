@@ -175,3 +175,38 @@ export function gaPageView(path: string): void {
     page_title: typeof document !== "undefined" ? document.title : undefined,
   });
 }
+
+// GA4 event names must be <=40 chars, start with a letter, and contain only
+// letters, numbers and underscores. Our names are controlled, but we normalise
+// defensively so a stray space or casing never yields a dropped/malformed event.
+function normaliseEventName(name: string): string | null {
+  const cleaned = name
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9_]+/g, "_")
+    .replace(/^_+/, "")
+    .slice(0, 40);
+  return /^[a-z][a-z0-9_]*$/.test(cleaned) ? cleaned : null;
+}
+
+/**
+ * Send a GA4 custom event. `params` become event parameters · keep keys
+ * snake_case, values primitive, and NEVER pass PII or tokened URLs. No-op until
+ * gtag is initialised (i.e. until the visitor has granted `analytics` consent
+ * and loadGa() has run), so callers don't need to check consent themselves.
+ *
+ * `page_view` is intentionally ignored here: route-change page views are sent by
+ * gaPageView (which strips tokened querystrings), so forwarding a `page_view`
+ * from the generic track() layer would double-count.
+ */
+export function gaEvent(
+  name: string,
+  params?: Record<string, string | number | boolean | null | undefined>,
+): void {
+  if (typeof window === "undefined") return;
+  if (!GA_MEASUREMENT_ID || typeof window.gtag !== "function") return;
+  if (name === "page_view") return;
+  const eventName = normaliseEventName(name);
+  if (!eventName) return;
+  window.gtag("event", eventName, params ?? {});
+}

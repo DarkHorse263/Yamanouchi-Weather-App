@@ -2,6 +2,7 @@ import { useState, useId, useMemo } from "react";
 import { useSubscribeToAlerts } from "@workspace/api-client-react";
 import { useLanguage, usePremium } from "@workspace/feelzlike-shell";
 import { BellRing, Mail, Snowflake, Loader2, CheckCircle2, Check, Sparkles } from "lucide-react";
+import { track } from "@/lib/analytics";
 
 /**
  * Powder-alert subscription form. Mounts inside any region's Alerts page.
@@ -81,6 +82,17 @@ export function AlertSubscribeForm({ defaultRegion }: Props) {
       setSubmitted({
         message: result.message,
         devVerifyUrl: (result as { devVerifyUrl?: string | null }).devVerifyUrl ?? null,
+      });
+      // Conversion event · snow/powder alert subscribed. No email or other PII
+      // is sent · only the non-identifying shape of the subscription.
+      track("alert_subscribe", {
+        category: "alert",
+        data: {
+          region_count: regions.length,
+          regions: regions.join(","),
+          threshold_cm: threshold,
+          horizon_hours: horizon,
+        },
       });
     } catch {
       // mutation.error will surface the error below

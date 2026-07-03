@@ -1,5 +1,6 @@
 import { Car, ExternalLink } from "lucide-react";
 import { REGION_COUNTRY, type CountryCode } from "@/regions";
+import { track } from "@/lib/analytics";
 
 // Europcar runs separate per-country sites and Awin's Convert-a-Link only
 // rewrites the EXACT domain the advertiser is approved for. feelzlike's
@@ -46,6 +47,16 @@ export function CarHireCard({
       href={europcarUrlForRegion(regionId)}
       target="_blank"
       rel="noopener noreferrer sponsored"
+      onClick={() =>
+        track("book_car_hire", {
+          category: "affiliate",
+          data: {
+            vendor: "europcar",
+            region: regionId,
+            ...(REGION_COUNTRY[regionId] ? { country: REGION_COUNTRY[regionId] } : {}),
+          },
+        })
+      }
       className={`group flex items-start gap-3 rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50 via-white to-blue-50/40 p-5 shadow-sm transition-colors hover:border-blue-300${className ? ` ${className}` : ""}`}
     >
       <div className="shrink-0 w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center">

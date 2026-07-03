@@ -1,18 +1,16 @@
 /**
- * Lightweight analytics layer over Sentry breadcrumbs.
+ * Lightweight analytics layer.
  *
- * We deliberately don't ship a third-party analytics SDK (Plausible, GA,
- * PostHog) - that would mean another consent decision, another vendor, and
- * another network call on every page. Sentry is already loaded for crash
- * reporting; piggy-backing breadcrumbs on it gives us:
+ * `track()` records a user-meaningful event in two places at once, so call
+ * sites stay vendor-agnostic:
  *
- *   - free temporal context attached to every error report
- *   - no PII leaving the page (we generate an anon profile token in
- *     localStorage; no email, no IP-derived data)
- *   - zero additional bundle weight
- *
- * If/when we later want richer funnels we can pipe `track()` to a real
- * analytics backend - the call sites won't need to change.
+ *   - Sentry breadcrumbs · free temporal context attached to every error
+ *     report, and no PII leaving the page (we generate an anon profile token in
+ *     localStorage; no email, no IP-derived data).
+ *   - Google Analytics 4 (see lib/ga) · consent-gated product analytics. GA is
+ *     only loaded once the visitor grants the `analytics` category, so the
+ *     mirror inside track() is a no-op until then · nothing is sent for people
+ *     who decline, and call sites never need to know GA exists.
  *
  * Consent: this layer respects the `analytics` choice from `lib/consent`.
  * When the user hasn't opted in, breadcrumbs are still added (Sentry
@@ -21,6 +19,8 @@
  */
 
 import * as Sentry from "@sentry/react";
+
+import { gaEvent } from "./ga";
 
 const PROFILE_TOKEN_KEY = "feelzlike:profileToken";
 
@@ -101,6 +101,14 @@ export function track(name: string, options: TrackOptions = {}): void {
     level: options.level || "info",
     data: options.data,
     timestamp: Date.now() / 1000,
+  });
+  // Mirror to GA4. This is a no-op until the visitor has granted analytics
+  // consent (gtag isn't loaded before then), so there's nothing to gate here ·
+  // one track() call feeds both Sentry and GA. page_view is handled separately
+  // by gaPageView, and gaEvent skips it, so it is never double-counted.
+  gaEvent(name, {
+    ...(options.category ? { event_category: options.category } : {}),
+    ...(options.data ?? {}),
   });
 }
 

@@ -34,6 +34,22 @@ token-free too. Manual page_views also strip query+hash.
 `page_location` (pathname-only) already covers it · pathname never holds the
 token · but re-verify `dl` has no `token=` if the URL scheme changes.
 
+## Custom events go through track(), never a parallel GA call path
+`lib/analytics.ts` `track()` is the single vendor-agnostic seam: it writes a
+Sentry breadcrumb AND forwards to `gaEvent()` (lib/ga.ts). So EVERY `track()`
+call (search, favourites, nav, filters, plus the conversion events
+`book_accommodation` / `book_car_hire` / `alert_subscribe`) becomes a GA4 event
+with zero call-site churn. `gaEvent` no-ops until gtag exists (consent gate) and
+returns early on the literal `"page_view"` so it never double-counts with
+`gaPageView`.
+**Why:** adding a second, direct `gtag("event", ...)` path would fragment the
+consent gating and re-introduce the double-count risk. **How to apply:** to add
+a new tracked action, call `track(name, {category, data})` at the site · do NOT
+call `gaEvent`/`window.gtag` directly. Keep `data` non-PII (region/town/country
+ids, counts, thresholds · never email, never a tokened href). GA4 event names
+must be `[a-z][a-z0-9_]*` <=40 chars (normaliseEventName enforces). New params
+only show in GA reports after the owner registers them as custom dimensions.
+
 ## Minor
 `anonymize_ip` is a UA-era param GA4 ignores (GA4 does not log/store IPs by
 default), so it was dropped and the Privacy copy says "does not store IP

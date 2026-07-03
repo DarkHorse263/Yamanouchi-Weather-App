@@ -28,6 +28,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import type { Stay } from "@/types/stayEat";
+import { track } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 import {
   PROVIDERS,
@@ -304,6 +305,12 @@ function BookingButtons({ stay, variant = "card" }: BookingButtonsProps) {
             href={href}
             target="_blank"
             rel="noopener noreferrer sponsored"
+            onClick={() =>
+              track("book_accommodation", {
+                category: "affiliate",
+                data: { provider: id, country: stay.country, region: stay.region },
+              })
+            }
             aria-label={`Book ${stay.name} on ${label}`}
             className={cn(
               "inline-flex items-center gap-1 rounded-md font-bold transition-opacity hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground",
@@ -321,6 +328,12 @@ function BookingButtons({ stay, variant = "card" }: BookingButtonsProps) {
           href={officialHref}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() =>
+            track("book_accommodation", {
+              category: "affiliate",
+              data: { provider: "official", country: stay.country, region: stay.region },
+            })
+          }
           aria-label={`Visit official site for ${stay.name}`}
           className={cn(
             "inline-flex items-center gap-1 rounded-md ring-1 ring-border bg-background text-foreground/80 font-semibold transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground",
