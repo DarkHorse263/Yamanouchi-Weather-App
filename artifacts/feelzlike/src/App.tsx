@@ -5,9 +5,10 @@ import Welcome from "@/pages/Welcome";
 import Countries from "@/pages/Countries";
 import NotFound from "@/pages/not-found";
 import { RegionLayout } from "@/layouts/RegionLayout";
-import { ConsentProvider, useConsent, canUseAds } from "@/lib/consent";
+import { ConsentProvider, useConsent, canUseAds, canUseAnalytics } from "@/lib/consent";
 import { ConsentBanner } from "@/components/ConsentBanner";
 import { loadAwinMasterTag, removeAwinMasterTag } from "@/lib/awin";
+import { loadGa, disableGa, gaPageView } from "@/lib/ga";
 import { InstallPrompt } from "@/components/InstallPrompt";
 import { OfflineBanner } from "@/components/OfflineBanner";
 import { PullToRefresh } from "@/components/PullToRefresh";
@@ -183,6 +184,37 @@ function AwinTag() {
   return null;
 }
 
+/**
+ * Loads Google Analytics (gtag.js) once the visitor grants `analytics` consent,
+ * and disables it (opt-out flag + script removal) if they later revoke it.
+ * While enabled it sends a GA4 page_view on every route change · gtag's own
+ * auto page_view is off (see lib/ga) so this is the single source of pageviews.
+ * SECURITY: strip querystring + hash before sending · alert links carry HMAC
+ * tokens (?token=...) that must never reach GA. Mounted inside WouterRouter so
+ * `useLocation` stays bound to the right base path.
+ */
+function GoogleAnalyticsTag() {
+  const consent = useConsent();
+  const [location] = useLocation();
+  const enabled = canUseAnalytics(consent.choices);
+
+  useEffect(() => {
+    if (enabled) {
+      loadGa();
+    } else {
+      disableGa();
+    }
+  }, [enabled]);
+
+  useEffect(() => {
+    if (!enabled) return;
+    const safePath = location.split(/[?#]/)[0] || "/";
+    gaPageView(safePath);
+  }, [enabled, location]);
+
+  return null;
+}
+
 function App() {
   return (
     <AppErrorBoundary>
@@ -193,6 +225,7 @@ function App() {
               <AnalyticsBridge />
               <ScrollToTop />
               <AwinTag />
+              <GoogleAnalyticsTag />
               <Router />
             </WouterRouter>
             <ConsentBanner />

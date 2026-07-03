@@ -23,7 +23,7 @@ export default function Privacy() {
       title="Privacy Policy"
       description="feelzlike privacy policy. Explains what data we collect, why, where it goes, and the rights you have over it."
       path="/legal/privacy"
-      lastUpdated="13 May 2026"
+      lastUpdated="3 July 2026"
     >
       <p>
         feelzlike respects your privacy. This policy explains what we
@@ -66,7 +66,9 @@ export default function Privacy() {
           <li>
             <strong>Anonymous analytics</strong> (only if you accept
             analytics in the cookie banner) · a random device-scoped
-            token, page paths, and aggregate event counts. No name,
+            token, page paths, and aggregate usage measured with Google
+            Analytics 4, which does not store IP addresses; we also strip
+            query strings from page paths before they are sent. No name,
             email, or precise location.
           </li>
           <li>
@@ -145,6 +147,12 @@ export default function Privacy() {
           <li>
             <strong>Crash &amp; performance monitoring</strong> ·
             Sentry (United States / European Union).
+          </li>
+          <li>
+            <strong>Product analytics</strong> · Google Analytics 4
+            (Google, United States), loaded only after you accept
+            analytics in the cookie banner. It does not store IP
+            addresses, and no name, email or precise location is sent.
           </li>
           <li>
             <strong>Email delivery</strong> · the transactional email
