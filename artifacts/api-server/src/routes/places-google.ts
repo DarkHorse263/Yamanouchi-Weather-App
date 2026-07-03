@@ -332,8 +332,11 @@ router.get("/places/search", async (req, res) => {
       if (out.length >= max) break;
     }
 
-    // Predictions for a given term are stable enough to cache at the edge.
-    res.setHeader("Cache-Control", "public, max-age=3600, s-maxage=3600");
+    // Short cache only. Predictions for a term are fairly stable, but a long TTL
+    // means a search-behaviour change (e.g. the Text Search -> Autocomplete
+    // rewrite) keeps serving the old shape from the browser cache for up to an
+    // hour. Five minutes still absorbs rapid repeats without pinning stale data.
+    res.setHeader("Cache-Control", "public, max-age=300, s-maxage=300");
     res.json({ results: out });
   } catch (err) {
     res.status(503).json({

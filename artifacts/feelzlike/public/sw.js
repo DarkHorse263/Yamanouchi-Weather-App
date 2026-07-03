@@ -25,7 +25,9 @@
 // the new version, forcing installed PWAs to re-fetch /api/regions and
 // the HTML shell instead of serving the previous deploy's cached copy.
 // v7: adds Victoria's High Country to the live region set.
-const CACHE_VERSION = "v7";
+// v8: locality search/details go network-first (bypass the stale cache) after
+// the search rewrite - the old cached shape showed businesses, not towns.
+const CACHE_VERSION = "v8";
 const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
 const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;
@@ -85,13 +87,15 @@ async function cacheFirst(request, cacheName) {
   }
 }
 
-async function networkFirst(request, cacheName, { timeoutMs = 4500 } = {}) {
+async function networkFirst(request, cacheName, { timeoutMs = 4500, cacheMode } = {}) {
   const cache = await caches.open(cacheName);
   try {
     // Race the network against a timeout so flaky mobile connections don't
     // hang the page indefinitely — fall back to cache if we time out.
+    // `cacheMode` ("reload") lets a caller bypass the browser HTTP cache so a
+    // stale max-age response can't win over fresh data.
     const networkResponse = await Promise.race([
-      fetch(request),
+      fetch(request, cacheMode ? { cache: cacheMode } : undefined),
       new Promise((_, reject) =>
         setTimeout(() => reject(new Error("net-timeout")), timeoutMs),
       ),
@@ -166,6 +170,19 @@ self.addEventListener("fetch", (event) => {
   //     subscriber data — keeping copies in Cache Storage would expose them
   //     to any later script with origin access. Always go straight to net.
   if (url.pathname.startsWith("/api/alerts")) return;
+
+  // 2a-bis. Locality search + details → network-first, bypassing the browser
+  //     HTTP cache. Their response shape changes across deploys (the search
+  //     rewrite swapped Text Search for Autocomplete), so a stale-while-
+  //     revalidate copy would keep showing the old businesses/format on first
+  //     paint. `reload` forces past the 1h max-age so fresh localities win.
+  if (
+    url.pathname.startsWith("/api/places/search") ||
+    url.pathname.startsWith("/api/places/details")
+  ) {
+    event.respondWith(networkFirst(request, DATA_CACHE, { cacheMode: "reload" }));
+    return;
+  }
 
   // 2b. Live weather, today's call, roads → network-first (4.5s timeout)
   //     Anything that should reflect "right now" with offline fallback.
