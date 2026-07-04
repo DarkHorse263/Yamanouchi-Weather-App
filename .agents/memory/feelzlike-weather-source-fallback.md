@@ -57,6 +57,16 @@ whole page on the heaviest request.
   `/api/town-weather` (~41 vars × 7 days). Open-Meteo throttles the expensive
   request far harder than the cheap one, so render the hero from local-current
   first and treat the extended forecast as an enhancement.
+- BOTH `/local-weather` AND `/town-weather` now route through the same OWM
+  reshaper fallback (`fetchOpenWeatherMapAsOpenMeteo`, Open-Meteo-shaped
+  current/hourly/daily). In `/town-weather` a `serveOwm()` helper runs BEFORE
+  `serveStale` in both error branches (upstream-not-ok AND fetch-threw), and the
+  shared `buildTownPayload(d,lat,lng)` builds the response from either source so
+  the shapes are identical. OWM-sourced payloads are cached as FRESH (they're
+  genuinely current) and a later OM success overwrites them. Degraded fields on
+  the OWM path (rain/gusts/visibility/uv/dewpoint/per-hour precip-prob, 7-day
+  compresses to ~5) all resolve to null → the client renders "-", never NaN.
+  Response carries `X-Feelzlike-Source: openweathermap`.
 - Distinguish loading from error per query: only show an "unavailable" notice on
   `query.isError`, never merely on `!query.data` (the in-flight gap would flash a
   false error after the hero already rendered).

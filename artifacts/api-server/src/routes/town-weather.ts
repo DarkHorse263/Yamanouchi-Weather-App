@@ -1,6 +1,7 @@
 import { Router, type IRouter } from "express";
 import { reconcileDryToWet, isInJapan } from "../lib/amedas.js";
 import { reconcileNzMetarDryToWet, isInNewZealand } from "../lib/metar-nz.js";
+import { fetchOpenWeatherMapAsOpenMeteo } from "../lib/openweathermap.js";
 
 const router: IRouter = Router();
 
@@ -131,6 +132,30 @@ router.get("/town-weather", async (req, res) => {
     return true;
   };
 
+  // OpenWeatherMap fallback. Open-Meteo throttles the Replit egress IP for
+  // sustained periods, and a cold visitor's unique coords (e.g. a town they
+  // just searched that we've never fetched) have no warm stale entry to serve
+  // from, so the hourly + 7-day forecast would hard-fail with a 502/503. The
+  // shared reshaper returns the SAME Open-Meteo object shape, so buildTownPayload
+  // produces an identical response from it - degraded (no per-hour UV /
+  // precip-probability / gusts) but honest and complete enough for the cards.
+  // Mirrors the fallback /local-weather already uses for current conditions.
+  const serveOwm = async (): Promise<boolean> => {
+    try {
+      const owm = await fetchOpenWeatherMapAsOpenMeteo({ latitude: lat, longitude: lng });
+      if (!owm) return false;
+      const payload = await buildTownPayload(owm, lat, lng);
+      rememberFresh(cacheKey, payload);
+      res.setHeader("Cache-Control", "public, max-age=600, s-maxage=600");
+      res.setHeader("X-Feelzlike-Source", "openweathermap");
+      res.json(payload);
+      return true;
+    } catch (err) {
+      console.warn("[town-weather] OWM fallback failed:", err);
+      return false;
+    }
+  };
+
   try {
     const upstream = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
       signal: AbortSignal.timeout(8000),
@@ -139,109 +164,18 @@ router.get("/town-weather", async (req, res) => {
       },
     });
     if (!upstream.ok) {
+      if (await serveOwm()) return;
       if (serveStale("upstream_not_ok", upstream.status)) return;
       res.status(502).json({ error: "UPSTREAM_FAILED", status: upstream.status });
       return;
     }
-    const d = (await upstream.json()) as {
-      current?: Record<string, number | string>;
-      current_units?: Record<string, string>;
-      hourly?: { time: string[]; [k: string]: unknown };
-      daily?: { time: string[]; [k: string]: unknown };
-      utc_offset_seconds?: number;
-      timezone?: string;
-    };
-
-    const cur = d.current ?? {};
-    const hourly = d.hourly ?? { time: [] };
-    const daily = d.daily ?? { time: [] };
-
-    const payload = {
-      coords: { lat, lng },
-      timezone: d.timezone ?? "UTC",
-      utcOffsetSeconds: d.utc_offset_seconds ?? 0,
-      current: {
-        time: cur["time"] ?? null,
-        temperature: numOrNull(cur["temperature_2m"]),
-        feelsLike: numOrNull(cur["apparent_temperature"]),
-        humidity: numOrNull(cur["relative_humidity_2m"]),
-        isDay: cur["is_day"] === 1 || cur["is_day"] === "1",
-        precipitation: numOrNull(cur["precipitation"]),
-        rain: numOrNull(cur["rain"]),
-        showers: numOrNull(cur["showers"]),
-        snowfall: numOrNull(cur["snowfall"]), // cm in last hour
-        weatherCode: numOrNull(cur["weather_code"]),
-        weatherDescription: describe(numOrNull(cur["weather_code"])),
-        cloudCover: numOrNull(cur["cloud_cover"]),
-        pressure: numOrNull(cur["pressure_msl"]),
-        windSpeed: numOrNull(cur["wind_speed_10m"]),
-        windDirection: numOrNull(cur["wind_direction_10m"]),
-        windDirectionCompass: compass(numOrNull(cur["wind_direction_10m"])),
-        windGust: numOrNull(cur["wind_gusts_10m"]),
-        visibility: numOrNull(cur["visibility"]),
-        uvIndex: numOrNull(cur["uv_index"]),
-        dewpoint: numOrNull(cur["dew_point_2m"]),
-      },
-      hourly: pickHourly(hourly),
-      daily: pickDaily(daily),
-    };
-
-    // JMA AMeDAS reconciliation: when the model's current block says dry but a
-    // nearby Japanese station is actually wet, correct the condition (and the
-    // precipitation number) so the icon, description and rainfall agree with
-    // what's really falling. JP-only; no-op elsewhere / when already wet.
-    if (isInJapan(lat, lng)) {
-      const override = await reconcileDryToWet({
-        lat,
-        lon: lng,
-        modelWeatherCode: payload.current.weatherCode,
-        tempC: payload.current.temperature,
-        refElevationM: numOrNull((d as { elevation?: number }).elevation),
-      });
-      if (override) {
-        const obsMm = Math.round(override.rateMmh * 10) / 10;
-        payload.current.weatherCode = override.weatherCode;
-        payload.current.weatherDescription = describe(override.weatherCode);
-        (payload.current as Record<string, unknown>).observationSource =
-          `JMA AMeDAS \u00b7 ${override.stationName}`;
-        if (!(payload.current.precipitation && payload.current.precipitation > 0)) {
-          payload.current.precipitation = obsMm;
-        }
-        if (override.weatherCode < 70 && !(payload.current.rain && payload.current.rain > 0)) {
-          payload.current.rain = obsMm;
-        }
-      }
-    }
-
-    // NZ airport-METAR reconciliation: correct a dry "current" block when a
-    // co-located NZ airport (e.g. Queenstown -> NZQN) is reporting active precip,
-    // so the icon, description and rainfall agree with what's really falling.
-    if (isInNewZealand(lat, lng)) {
-      const override = await reconcileNzMetarDryToWet({
-        lat,
-        lon: lng,
-        modelWeatherCode: payload.current.weatherCode,
-        tempC: payload.current.temperature,
-        refElevationM: numOrNull((d as { elevation?: number }).elevation),
-      });
-      if (override) {
-        const obsMm = Math.round(override.rateMmh * 10) / 10;
-        payload.current.weatherCode = override.weatherCode;
-        payload.current.weatherDescription = describe(override.weatherCode);
-        (payload.current as Record<string, unknown>).observationSource = `METAR \u00b7 ${override.stationName}`;
-        if (obsMm > 0 && !(payload.current.precipitation && payload.current.precipitation > 0)) {
-          payload.current.precipitation = obsMm;
-        }
-        if (obsMm > 0 && override.weatherCode < 70 && !(payload.current.rain && payload.current.rain > 0)) {
-          payload.current.rain = obsMm;
-        }
-      }
-    }
-
+    const d = (await upstream.json()) as OmShaped;
+    const payload = await buildTownPayload(d, lat, lng);
     rememberFresh(cacheKey, payload);
     res.setHeader("Cache-Control", "public, max-age=600, s-maxage=600");
     res.json(payload);
   } catch (err) {
+    if (await serveOwm()) return;
     if (serveStale("fetch_threw", 0)) return;
     res.status(503).json({
       error: "FETCH_FAILED",
@@ -249,6 +183,109 @@ router.get("/town-weather", async (req, res) => {
     });
   }
 });
+
+type OmShaped = {
+  current?: Record<string, number | string>;
+  hourly?: { time: string[]; [k: string]: unknown };
+  daily?: { time: string[]; [k: string]: unknown };
+  utc_offset_seconds?: number;
+  timezone?: string;
+  elevation?: number;
+};
+
+// Build the town-weather response from an Open-Meteo-shaped object - either the
+// real Open-Meteo payload or the OWM reshaper's output. Runs the JP/NZ dry->wet
+// observation reconciliation on the current block. Kept as one builder so the
+// primary source and the OWM fallback return identical shapes.
+async function buildTownPayload(d: OmShaped, lat: number, lng: number) {
+  const cur = d.current ?? {};
+  const hourly = d.hourly ?? { time: [] };
+  const daily = d.daily ?? { time: [] };
+
+  const payload = {
+    coords: { lat, lng },
+    timezone: d.timezone ?? "UTC",
+    utcOffsetSeconds: d.utc_offset_seconds ?? 0,
+    current: {
+      time: cur["time"] ?? null,
+      temperature: numOrNull(cur["temperature_2m"]),
+      feelsLike: numOrNull(cur["apparent_temperature"]),
+      humidity: numOrNull(cur["relative_humidity_2m"]),
+      isDay: cur["is_day"] === 1 || cur["is_day"] === "1",
+      precipitation: numOrNull(cur["precipitation"]),
+      rain: numOrNull(cur["rain"]),
+      showers: numOrNull(cur["showers"]),
+      snowfall: numOrNull(cur["snowfall"]), // cm in last hour
+      weatherCode: numOrNull(cur["weather_code"]),
+      weatherDescription: describe(numOrNull(cur["weather_code"])),
+      cloudCover: numOrNull(cur["cloud_cover"]),
+      pressure: numOrNull(cur["pressure_msl"]),
+      windSpeed: numOrNull(cur["wind_speed_10m"]),
+      windDirection: numOrNull(cur["wind_direction_10m"]),
+      windDirectionCompass: compass(numOrNull(cur["wind_direction_10m"])),
+      windGust: numOrNull(cur["wind_gusts_10m"]),
+      visibility: numOrNull(cur["visibility"]),
+      uvIndex: numOrNull(cur["uv_index"]),
+      dewpoint: numOrNull(cur["dew_point_2m"]),
+    },
+    hourly: pickHourly(hourly),
+    daily: pickDaily(daily),
+  };
+
+  // JMA AMeDAS reconciliation: when the model's current block says dry but a
+  // nearby Japanese station is actually wet, correct the condition (and the
+  // precipitation number) so the icon, description and rainfall agree with
+  // what's really falling. JP-only; no-op elsewhere / when already wet.
+  if (isInJapan(lat, lng)) {
+    const override = await reconcileDryToWet({
+      lat,
+      lon: lng,
+      modelWeatherCode: payload.current.weatherCode,
+      tempC: payload.current.temperature,
+      refElevationM: numOrNull(d.elevation),
+    });
+    if (override) {
+      const obsMm = Math.round(override.rateMmh * 10) / 10;
+      payload.current.weatherCode = override.weatherCode;
+      payload.current.weatherDescription = describe(override.weatherCode);
+      (payload.current as Record<string, unknown>).observationSource =
+        `JMA AMeDAS \u00b7 ${override.stationName}`;
+      if (!(payload.current.precipitation && payload.current.precipitation > 0)) {
+        payload.current.precipitation = obsMm;
+      }
+      if (override.weatherCode < 70 && !(payload.current.rain && payload.current.rain > 0)) {
+        payload.current.rain = obsMm;
+      }
+    }
+  }
+
+  // NZ airport-METAR reconciliation: correct a dry "current" block when a
+  // co-located NZ airport (e.g. Queenstown -> NZQN) is reporting active precip,
+  // so the icon, description and rainfall agree with what's really falling.
+  if (isInNewZealand(lat, lng)) {
+    const override = await reconcileNzMetarDryToWet({
+      lat,
+      lon: lng,
+      modelWeatherCode: payload.current.weatherCode,
+      tempC: payload.current.temperature,
+      refElevationM: numOrNull(d.elevation),
+    });
+    if (override) {
+      const obsMm = Math.round(override.rateMmh * 10) / 10;
+      payload.current.weatherCode = override.weatherCode;
+      payload.current.weatherDescription = describe(override.weatherCode);
+      (payload.current as Record<string, unknown>).observationSource = `METAR \u00b7 ${override.stationName}`;
+      if (obsMm > 0 && !(payload.current.precipitation && payload.current.precipitation > 0)) {
+        payload.current.precipitation = obsMm;
+      }
+      if (obsMm > 0 && override.weatherCode < 70 && !(payload.current.rain && payload.current.rain > 0)) {
+        payload.current.rain = obsMm;
+      }
+    }
+  }
+
+  return payload;
+}
 
 function numOrNull(v: unknown): number | null {
   return Number.isFinite(v) ? Number(v) : null;
