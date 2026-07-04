@@ -20,7 +20,11 @@
  * Cached for 30 minutes per (lat,lon,elevation) tuple.
  */
 
-const CACHE_TTL_MS = 30 * 60 * 1000;
+const FRESH_MS = 30 * 60 * 1000; // serve straight from cache for 30 min
+const STALE_MS = 6 * 60 * 60 * 1000; // keep the last good outlook usable as a fallback for 6h
+// Fail fast on a slow or throttled upstream instead of hanging the /forecast
+// request · matches the 8s AbortSignal.timeout used across regions/weather.
+const UPSTREAM_TIMEOUT_MS = 8000;
 
 export interface EnsembleDay {
   date: string; // YYYY-MM-DD
@@ -60,14 +64,27 @@ export interface EnsembleForecast {
   days: EnsembleDay[];
   sources: EnsembleSourceMeta[];
   generatedAt: string;
+  /**
+   * Set only when every upstream failed on this refresh and we served the last
+   * good outlook from cache instead. `generatedAt` still reflects when that
+   * cached outlook was actually built, so the client can show an honest "as of"
+   * line. Absent/null on a fresh response.
+   */
+  _stale?: { ageSeconds: number } | null;
 }
 
 interface CacheEntry {
   data: EnsembleForecast;
-  expiresAt: number;
+  freshUntil: number; // serve straight from cache until this time
+  staleUntil: number; // still serveable as a fallback when every upstream fails
+  builtAt: number; // when the cached outlook was actually assembled (for "as of")
 }
 
 const cache = new Map<string, CacheEntry>();
+// Coalesce concurrent cold requests for the same key into one upstream call ·
+// the multi-model request is ~3x heavier, so a burst of misses must not fan out
+// into a burst of Open-Meteo calls (which is what triggers the 429s).
+const inFlight = new Map<string, Promise<EnsembleForecast>>();
 
 export interface EnsembleQuery {
   latitude: number;
@@ -129,7 +146,9 @@ async function fetchOpenMeteoMulti(q: EnsembleQuery): Promise<{
   const perModel: Record<string, OpenMeteoModelDaily> = {};
 
   try {
-    const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`);
+    const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
+      signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
+    });
     if (!res.ok) throw new Error(`Open-Meteo ${res.status}`);
     const json = (await res.json()) as any;
     const daily = json.daily ?? {};
@@ -211,7 +230,10 @@ async function fetchMetNorway(q: EnsembleQuery): Promise<{
   };
 
   try {
-    const res = await fetch(url, { headers: { "User-Agent": ua, Accept: "application/json" } });
+    const res = await fetch(url, {
+      headers: { "User-Agent": ua, Accept: "application/json" },
+      signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
+    });
     if (!res.ok) return { data: null, source: meta };
     const json = (await res.json()) as any;
     const series: any[] = json.properties?.timeseries ?? [];
@@ -281,94 +303,166 @@ function classifyConfidence(
   return "low";
 }
 
-export async function getEnsembleForecast(q: EnsembleQuery): Promise<EnsembleForecast> {
-  const cacheKey = `${q.latitude.toFixed(3)},${q.longitude.toFixed(3)},${q.elevation},${q.region ?? "OTHER"},${q.timezone ?? "auto"},${q.days ?? 7}`;
-  const cached = cache.get(cacheKey);
-  if (cached && cached.expiresAt > Date.now()) return cached.data;
-
+async function buildEnsemble(q: EnsembleQuery): Promise<EnsembleForecast> {
   const [{ perModel, sources: omSources }, { data: metData, source: metSource }] = await Promise.all([
     fetchOpenMeteoMulti(q),
     fetchMetNorway(q),
   ]);
 
-  // Build a unified date list from the first model that returned data.
+  // Prefer Open-Meteo's date grid. When every OM model failed (throttled or
+  // timed out) fall back to MET Norway's own dates so a single working source
+  // still produces a forecast instead of an empty card · the >=12-sample gate
+  // below then drops MET's partial "today" and the empty-day filter removes any
+  // date no source could speak to.
   const firstModelWithTime = Object.values(perModel).find((m) => m.time && m.time.length > 0);
-  const dates = firstModelWithTime?.time ?? [];
+  const maxDays = q.days ?? 7;
+  const dates = firstModelWithTime?.time?.length
+    ? firstModelWithTime.time
+    : metData
+      ? [...metData.byDate.keys()].sort().slice(0, maxDays)
+      : [];
 
-  const days: EnsembleDay[] = dates.map((date, idx) => {
-    const perSource: EnsembleDay["perSource"] = [];
-    const tempMaxes: number[] = [];
-    const tempMins: number[] = [];
-    const precips: number[] = [];
-    const snows: number[] = [];
+  const days: EnsembleDay[] = dates
+    .map((date, idx) => {
+      const perSource: EnsembleDay["perSource"] = [];
+      const tempMaxes: number[] = [];
+      const tempMins: number[] = [];
+      const precips: number[] = [];
+      const snows: number[] = [];
 
-    for (const [modelId, daily] of Object.entries(perModel)) {
-      const tMax = daily.temperature_2m_max?.[idx];
-      const tMin = daily.temperature_2m_min?.[idx];
-      const p = daily.precipitation_sum?.[idx];
-      const s = daily.snowfall_sum?.[idx];
-      const label = MODEL_LABELS[modelId]?.label ?? modelId;
-      const hasAny =
-        (typeof tMax === "number" && tMax !== null) ||
-        (typeof tMin === "number" && tMin !== null);
-      if (!hasAny) continue;
-      if (typeof tMax === "number") tempMaxes.push(tMax);
-      if (typeof tMin === "number") tempMins.push(tMin);
-      if (typeof p === "number") precips.push(p);
-      if (typeof s === "number") snows.push(s);
-      perSource.push({
-        source: label,
-        tempMax: typeof tMax === "number" ? tMax : undefined,
-        tempMin: typeof tMin === "number" ? tMin : undefined,
-        precip: typeof p === "number" ? p : undefined,
-        snow: typeof s === "number" ? s : undefined,
-      });
-    }
-
-    if (metData?.byDate.has(date)) {
-      const m = metData.byDate.get(date)!;
-      // Only include MET if it has at least 12 hourly samples for this local
-      // day. Otherwise the day is partial (typically: "today" started before
-      // we made the request) and the daily max/min would be biased.
-      if (m.sampleCount >= 12) {
-        tempMaxes.push(m.tempMax);
-        tempMins.push(m.tempMin);
-        precips.push(m.precip);
+      for (const [modelId, daily] of Object.entries(perModel)) {
+        const tMax = daily.temperature_2m_max?.[idx];
+        const tMin = daily.temperature_2m_min?.[idx];
+        const p = daily.precipitation_sum?.[idx];
+        const s = daily.snowfall_sum?.[idx];
+        const label = MODEL_LABELS[modelId]?.label ?? modelId;
+        const hasAny =
+          (typeof tMax === "number" && tMax !== null) ||
+          (typeof tMin === "number" && tMin !== null);
+        if (!hasAny) continue;
+        if (typeof tMax === "number") tempMaxes.push(tMax);
+        if (typeof tMin === "number") tempMins.push(tMin);
+        if (typeof p === "number") precips.push(p);
+        if (typeof s === "number") snows.push(s);
         perSource.push({
-          source: "MET Norway",
-          tempMax: m.tempMax,
-          tempMin: m.tempMin,
-          precip: m.precip,
+          source: label,
+          tempMax: typeof tMax === "number" ? tMax : undefined,
+          tempMin: typeof tMin === "number" ? tMin : undefined,
+          precip: typeof p === "number" ? p : undefined,
+          snow: typeof s === "number" ? s : undefined,
         });
       }
-    }
 
-    const tempMaxSpread = spread(tempMaxes);
-    const snowSpread = spread(snows);
-    const precipSpread = spread(precips);
-    const sourcesCount = perSource.length;
+      if (metData?.byDate.has(date)) {
+        const m = metData.byDate.get(date)!;
+        // Only include MET if it has at least 12 hourly samples for this local
+        // day. Otherwise the day is partial (typically: "today" started before
+        // we made the request) and the daily max/min would be biased.
+        if (m.sampleCount >= 12) {
+          tempMaxes.push(m.tempMax);
+          tempMins.push(m.tempMin);
+          precips.push(m.precip);
+          perSource.push({
+            source: "MET Norway",
+            tempMax: m.tempMax,
+            tempMin: m.tempMin,
+            precip: m.precip,
+          });
+        }
+      }
 
-    return {
-      date,
-      tempMaxMean: Math.round(mean(tempMaxes) * 10) / 10,
-      tempMinMean: Math.round(mean(tempMins) * 10) / 10,
-      tempMaxSpread: Math.round(tempMaxSpread * 10) / 10,
-      tempMinSpread: Math.round(spread(tempMins) * 10) / 10,
-      precipMean: Math.round(mean(precips) * 10) / 10,
-      precipSpread: Math.round(spread(precips) * 10) / 10,
-      snowMean: Math.round(mean(snows) * 10) / 10,
-      snowSpread: Math.round(snowSpread * 10) / 10,
-      sourcesCount,
-      confidence: classifyConfidence(tempMaxSpread, snowSpread, precipSpread, sourcesCount),
-      perSource,
-    };
-  });
+      const tempMaxSpread = spread(tempMaxes);
+      const snowSpread = spread(snows);
+      const precipSpread = spread(precips);
+      const sourcesCount = perSource.length;
 
-  const data: EnsembleForecast = {
+      const tempMaxMean = Math.round(mean(tempMaxes) * 10) / 10;
+      const precipMean = Math.round(mean(precips) * 10) / 10;
+      // MET Norway carries no snowfall channel, so a MET-only (single source)
+      // freezing day would otherwise render as rain. When no model supplied a
+      // snow figure and the daytime high is at/below freezing, derive snow from
+      // the liquid precip using the same 0.7 cm-per-mm ratio the OWM fallback
+      // uses · keeps the paths consistent and never calls a snowstorm "rain".
+      let snowMean = Math.round(mean(snows) * 10) / 10;
+      if (snows.length === 0 && precipMean > 0 && tempMaxMean <= 1) {
+        snowMean = Math.round(precipMean * 0.7 * 10) / 10;
+      }
+
+      return {
+        date,
+        tempMaxMean,
+        tempMinMean: Math.round(mean(tempMins) * 10) / 10,
+        tempMaxSpread: Math.round(tempMaxSpread * 10) / 10,
+        tempMinSpread: Math.round(spread(tempMins) * 10) / 10,
+        precipMean,
+        precipSpread: Math.round(precipSpread * 10) / 10,
+        snowMean,
+        snowSpread: Math.round(snowSpread * 10) / 10,
+        sourcesCount,
+        confidence: classifyConfidence(tempMaxSpread, snowSpread, precipSpread, sourcesCount),
+        perSource,
+      };
+    })
+    // Drop any day no source could speak to rather than rendering a meaningless
+    // 0 / 0 / 0 row (e.g. MET's partial "today" excluded by the >=12 gate).
+    .filter((d) => d.sourcesCount > 0);
+
+  return {
     days,
     sources: [...omSources, metSource],
     generatedAt: new Date().toISOString(),
   };
-  cache.set(cacheKey, { data, expiresAt: Date.now() + CACHE_TTL_MS });
-  return data;
+}
+
+export async function getEnsembleForecast(q: EnsembleQuery): Promise<EnsembleForecast> {
+  const cacheKey = `${q.latitude.toFixed(3)},${q.longitude.toFixed(3)},${q.elevation},${q.region ?? "OTHER"},${q.timezone ?? "auto"},${q.days ?? 7}`;
+  const now = Date.now();
+  const cached = cache.get(cacheKey);
+  if (cached && cached.freshUntil > now) return cached.data;
+
+  // Serve the last good outlook (within the stale window) instead of blanking
+  // the card when every upstream fails. Never let an empty refresh overwrite a
+  // still-usable entry · that was the original bug (one failure blanked the
+  // forecast for the full TTL).
+  const serveStale = (): EnsembleForecast | null => {
+    const fallback = cache.get(cacheKey);
+    if (fallback && fallback.staleUntil > Date.now()) {
+      return {
+        ...fallback.data,
+        _stale: { ageSeconds: Math.round((Date.now() - fallback.builtAt) / 1000) },
+      };
+    }
+    return null;
+  };
+
+  // Coalesce concurrent refreshes for the same key into one upstream call.
+  let refresh = inFlight.get(cacheKey);
+  if (!refresh) {
+    refresh = (async () => {
+      const data = await buildEnsemble(q);
+      if (data.days.length > 0) {
+        const builtAt = Date.now();
+        cache.set(cacheKey, {
+          data,
+          freshUntil: builtAt + FRESH_MS,
+          staleUntil: builtAt + STALE_MS,
+          builtAt,
+        });
+        return data;
+      }
+      // Total upstream failure · serve the last good outlook if we still have
+      // one, otherwise hand back the empty result so the client can show an
+      // honest "temporarily unavailable" notice.
+      return serveStale() ?? data;
+    })().finally(() => inFlight.delete(cacheKey));
+    inFlight.set(cacheKey, refresh);
+  }
+
+  try {
+    return await refresh;
+  } catch (err) {
+    const stale = serveStale();
+    if (stale) return stale;
+    throw err;
+  }
 }

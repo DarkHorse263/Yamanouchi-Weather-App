@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { format, parseISO } from "date-fns";
+import { format, parseISO, isToday } from "date-fns";
 import { CalendarDays, Snowflake, CloudRain, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -26,6 +26,12 @@ interface EnsembleResponse {
   days: EnsembleDay[];
   generatedAt: string;
   forecastElevationM?: number;
+  /**
+   * Present when every forecast service failed and the server served the last
+   * good outlook from cache · `generatedAt` still reflects when that outlook
+   * was built, so we can show an honest "as of" line.
+   */
+  _stale?: { ageSeconds: number } | null;
 }
 
 interface Props {
@@ -77,6 +83,26 @@ export function EnsembleForecast({ locationId, elevationM }: Props) {
     );
   }
 
+  if (data.days.length === 0) {
+    // Every forecast service we blend failed and there was no cached outlook to
+    // fall back to · say so honestly rather than rendering an empty header.
+    return (
+      <div className="glass rounded-3xl p-5 md:p-8">
+        <p className="byline text-muted-foreground">Forecast</p>
+        <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
+          <CalendarDays className="text-primary w-5 h-5" />
+          Next 6 days
+        </h2>
+        <div className="rule mt-4 mb-3" />
+        <p className="text-[13px] text-muted-foreground leading-relaxed">
+          the multi-model outlook is temporarily unavailable · the forecast
+          services we blend are being slow right now. current conditions and the
+          radar are still up to date.
+        </p>
+      </div>
+    );
+  }
+
   const days = data.days.slice(0, 6);
   const outlookElevationM = data.forecastElevationM;
   // Only worth surfacing a per-source compare when at least one day has more
@@ -107,8 +133,15 @@ export function EnsembleForecast({ locationId, elevationM }: Props) {
 
       <div className="rule mt-4 mb-2" />
 
+      {data._stale && (
+        <p className="byline text-amber-600/80 mb-2">
+          showing the outlook from {format(parseISO(data.generatedAt), "h:mm a")}
+          {" "}· live models are catching up
+        </p>
+      )}
+
       <div className="divide-y divide-white/5">
-        {days.map((day, i) => {
+        {days.map((day) => {
           const showSnow = day.snowMean >= 1;
           const showRain = !showSnow && day.precipMean >= 1;
           const conf = day.sourcesCount <= 1
@@ -121,7 +154,7 @@ export function EnsembleForecast({ locationId, elevationM }: Props) {
             >
               <div className="w-1/4 min-w-[72px]">
                 <p className="font-medium text-foreground">
-                  {i === 0 ? "Today" : format(parseISO(day.date), "EEE")}
+                  {isToday(parseISO(day.date)) ? "Today" : format(parseISO(day.date), "EEE")}
                 </p>
                 <p className="byline text-muted-foreground/60">
                   {format(parseISO(day.date), "MMM d")}
