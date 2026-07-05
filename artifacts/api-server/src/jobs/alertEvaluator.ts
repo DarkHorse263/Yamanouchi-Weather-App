@@ -51,6 +51,11 @@ const REGION_ANCHORS: Record<RegionId, {
   // Iiyama · anchor on Madarao summit · the highest and most snow-prone
   // point in the cluster, best regional proxy for powder alerts.
   "iiyama": { lat: 36.9056, lon: 138.2858, elevation: 1382, region: "JP", displayName: "Iiyama" },
+  // Hakuba Valley · anchor on Tsugaike Kogen (1704m, the high snowy
+  // northern Otari side) as the best powder proxy for the ten-resort
+  // valley. Happo-One is the highest summit (1831m) but the Otari corner
+  // reliably takes the deepest snow.
+  "hakuba-valley": { lat: 36.7490, lon: 137.8662, elevation: 1704, region: "JP", displayName: "Hakuba Valley" },
   // NZ · no national model in the ensemble, so region "OTHER" (global
   // blend). Anchor each on its highest skiable summit.
   "queenstown": { lat: -45.0556, lon: 168.8194, elevation: 1943, region: "OTHER", displayName: "Queenstown" },

@@ -147,6 +147,25 @@ const REGIONS: RegionConfig[] = [
     sourceLabel: "JMA Seamless",
   },
   {
+    id: "hakuba-valley",
+    name: "Hakuba Valley",
+    country: "Japan",
+    countryCode: "JP",
+    region: "Nagano",
+    status: "live",
+    href: "/hakuba-valley/",
+    baseTowns: ["Hakuba", "Otari", "Omachi"],
+    mountains: ["Happo-One", "Hakuba Goryu", "Hakuba 47", "Hakuba Iwatake", "Tsugaike Kogen", "Hakuba Norikura", "Hakuba Cortina", "Hakuba Sanosaka", "Kashimayari", "Jiigatake"],
+    // Headline reading from Hakuba village (~700m) · the central base and
+    // the valley's main hotel/ryokan hub beneath the Happo lifts.
+    headlineLabel: "Hakuba",
+    lat: 36.6982,
+    lon: 137.8619,
+    model: "jma_seamless",
+    timezone: "Asia/Tokyo",
+    sourceLabel: "JMA Seamless",
+  },
+  {
     id: "queenstown",
     name: "Queenstown",
     country: "New Zealand",

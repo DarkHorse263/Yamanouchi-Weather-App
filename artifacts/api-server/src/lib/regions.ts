@@ -14,6 +14,7 @@ export const REGION_IDS = [
   "yamanouchi",
   "nozawa-onsen",
   "iiyama",
+  "hakuba-valley",
   "queenstown",
   "wanaka",
   "mt-hutt",
@@ -104,6 +105,22 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "togari-onsen-village": "iiyama",
   "kijimadaira-village": "iiyama",
   "iiyama-roads": "iiyama",
+
+  // Hakuba Valley, JP · 10 mountains across 3 base towns (Hakuba, Otari, Omachi).
+  "happo-one": "hakuba-valley",
+  "hakuba-goryu": "hakuba-valley",
+  "hakuba-47": "hakuba-valley",
+  "hakuba-iwatake": "hakuba-valley",
+  "tsugaike-kogen": "hakuba-valley",
+  "hakuba-norikura": "hakuba-valley",
+  "hakuba-cortina": "hakuba-valley",
+  "hakuba-sanosaka": "hakuba-valley",
+  "kashimayari": "hakuba-valley",
+  "jiigatake": "hakuba-valley",
+  "hakuba": "hakuba-valley",
+  "otari": "hakuba-valley",
+  "omachi": "hakuba-valley",
+  "hakuba-valley-roads": "hakuba-valley",
 
   // Queenstown, NZ · 2 mountains + 1 gateway town + roads cam tile.
   "coronet-peak": "queenstown",

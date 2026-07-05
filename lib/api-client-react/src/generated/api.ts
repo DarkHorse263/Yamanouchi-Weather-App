@@ -19,7 +19,6 @@ import type {
 import type {
   Accommodation,
   AlertsData,
-  AnnouncementsData,
   Attraction,
   AuthUserEnvelope,
   BeginBrowserLoginParams,
@@ -48,7 +47,6 @@ import type {
   GenericOkResponse,
   GetAccommodationParams,
   GetAlertPreferencesParams,
-  GetAnnouncementsParams,
   GetAttractionsParams,
   GetDiningParams,
   GetElevationForecastParams,
@@ -69,9 +67,6 @@ import type {
   MapMarker,
   MobileTokenExchangeRequest,
   MobileTokenExchangeSuccess,
-  NewsletterSubscribeRequest,
-  NewsletterSubscribeResponse,
-  NewsletterVerifyResponse,
   RegionOutlook,
   Resort,
   ResortLiftStatus,
@@ -81,14 +76,12 @@ import type {
   SubscribeResponse,
   UnsubscribeBody,
   UnsubscribeFromAlertsParams,
-  UnsubscribeFromNewsletterParams,
   UpdateAccommodationBody,
   UpdateAlertPreferencesParams,
   UpdateAttractionBody,
   UpdateDiningBody,
   UpdatePreferencesBody,
   VerifyAlertSubscriptionParams,
-  VerifyNewsletterSubscriptionParams,
   VerifyResponse,
   VicEmergencyResponse,
   WeatherResponse,
@@ -655,105 +648,6 @@ export function useGetPowderAlerts<
   },
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetPowderAlertsQueryOptions(params, options);
-
-  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
-    queryKey: QueryKey;
-  };
-
-  return { ...query, queryKey: queryOptions.queryKey };
-}
-
-/**
- * Returns published resort announcements (opening dates, snowmaking, lift status, events, conditions) for a region, pinned items first then newest first. Backed by the `resort_announcements` table in Postgres. Regions with no rows return an empty list.
-
- * @summary Get resort announcements
- */
-export const getGetAnnouncementsUrl = (params?: GetAnnouncementsParams) => {
-  const normalizedParams = new URLSearchParams();
-
-  Object.entries(params || {}).forEach(([key, value]) => {
-    if (value !== undefined) {
-      normalizedParams.append(key, value === null ? "null" : value.toString());
-    }
-  });
-
-  const stringifiedParams = normalizedParams.toString();
-
-  return stringifiedParams.length > 0
-    ? `/api/announcements?${stringifiedParams}`
-    : `/api/announcements`;
-};
-
-export const getAnnouncements = async (
-  params?: GetAnnouncementsParams,
-  options?: RequestInit,
-): Promise<AnnouncementsData> => {
-  return customFetch<AnnouncementsData>(getGetAnnouncementsUrl(params), {
-    ...options,
-    method: "GET",
-  });
-};
-
-export const getGetAnnouncementsQueryKey = (
-  params?: GetAnnouncementsParams,
-) => {
-  return [`/api/announcements`, ...(params ? [params] : [])] as const;
-};
-
-export const getGetAnnouncementsQueryOptions = <
-  TData = Awaited<ReturnType<typeof getAnnouncements>>,
-  TError = ErrorType<ErrorResponse>,
->(
-  params?: GetAnnouncementsParams,
-  options?: {
-    query?: UseQueryOptions<
-      Awaited<ReturnType<typeof getAnnouncements>>,
-      TError,
-      TData
-    >;
-    request?: SecondParameter<typeof customFetch>;
-  },
-) => {
-  const { query: queryOptions, request: requestOptions } = options ?? {};
-
-  const queryKey =
-    queryOptions?.queryKey ?? getGetAnnouncementsQueryKey(params);
-
-  const queryFn: QueryFunction<
-    Awaited<ReturnType<typeof getAnnouncements>>
-  > = ({ signal }) => getAnnouncements(params, { signal, ...requestOptions });
-
-  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
-    Awaited<ReturnType<typeof getAnnouncements>>,
-    TError,
-    TData
-  > & { queryKey: QueryKey };
-};
-
-export type GetAnnouncementsQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getAnnouncements>>
->;
-export type GetAnnouncementsQueryError = ErrorType<ErrorResponse>;
-
-/**
- * @summary Get resort announcements
- */
-
-export function useGetAnnouncements<
-  TData = Awaited<ReturnType<typeof getAnnouncements>>,
-  TError = ErrorType<ErrorResponse>,
->(
-  params?: GetAnnouncementsParams,
-  options?: {
-    query?: UseQueryOptions<
-      Awaited<ReturnType<typeof getAnnouncements>>,
-      TError,
-      TData
-    >;
-    request?: SecondParameter<typeof customFetch>;
-  },
-): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
-  const queryOptions = getGetAnnouncementsQueryOptions(params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
     queryKey: QueryKey;
@@ -1375,313 +1269,6 @@ export function useGetElevationForecast<
 
   return { ...query, queryKey: queryOptions.queryKey };
 }
-
-/**
- * Creates (or updates) a newsletter subscription for the given email and sends a verification email. Idempotent — re-submitting with the same email updates preferences. Independent of powder alerts.
- * @summary Subscribe to the feelzlike newsletter (general digest)
- */
-export const getSubscribeToNewsletterUrl = () => {
-  return `/api/newsletter/subscribe`;
-};
-
-export const subscribeToNewsletter = async (
-  newsletterSubscribeRequest: NewsletterSubscribeRequest,
-  options?: RequestInit,
-): Promise<NewsletterSubscribeResponse> => {
-  return customFetch<NewsletterSubscribeResponse>(
-    getSubscribeToNewsletterUrl(),
-    {
-      ...options,
-      method: "POST",
-      headers: { "Content-Type": "application/json", ...options?.headers },
-      body: JSON.stringify(newsletterSubscribeRequest),
-    },
-  );
-};
-
-export const getSubscribeToNewsletterMutationOptions = <
-  TError = ErrorType<ErrorResponse>,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof subscribeToNewsletter>>,
-    TError,
-    { data: BodyType<NewsletterSubscribeRequest> },
-    TContext
-  >;
-  request?: SecondParameter<typeof customFetch>;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof subscribeToNewsletter>>,
-  TError,
-  { data: BodyType<NewsletterSubscribeRequest> },
-  TContext
-> => {
-  const mutationKey = ["subscribeToNewsletter"];
-  const { mutation: mutationOptions, request: requestOptions } = options
-    ? options.mutation &&
-      "mutationKey" in options.mutation &&
-      options.mutation.mutationKey
-      ? options
-      : { ...options, mutation: { ...options.mutation, mutationKey } }
-    : { mutation: { mutationKey }, request: undefined };
-
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof subscribeToNewsletter>>,
-    { data: BodyType<NewsletterSubscribeRequest> }
-  > = (props) => {
-    const { data } = props ?? {};
-
-    return subscribeToNewsletter(data, requestOptions);
-  };
-
-  return { mutationFn, ...mutationOptions };
-};
-
-export type SubscribeToNewsletterMutationResult = NonNullable<
-  Awaited<ReturnType<typeof subscribeToNewsletter>>
->;
-export type SubscribeToNewsletterMutationBody =
-  BodyType<NewsletterSubscribeRequest>;
-export type SubscribeToNewsletterMutationError = ErrorType<ErrorResponse>;
-
-/**
- * @summary Subscribe to the feelzlike newsletter (general digest)
- */
-export const useSubscribeToNewsletter = <
-  TError = ErrorType<ErrorResponse>,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof subscribeToNewsletter>>,
-    TError,
-    { data: BodyType<NewsletterSubscribeRequest> },
-    TContext
-  >;
-  request?: SecondParameter<typeof customFetch>;
-}): UseMutationResult<
-  Awaited<ReturnType<typeof subscribeToNewsletter>>,
-  TError,
-  { data: BodyType<NewsletterSubscribeRequest> },
-  TContext
-> => {
-  return useMutation(getSubscribeToNewsletterMutationOptions(options));
-};
-
-/**
- * @summary Confirm a newsletter subscription via the verification email link
- */
-export const getVerifyNewsletterSubscriptionUrl = (
-  params: VerifyNewsletterSubscriptionParams,
-) => {
-  const normalizedParams = new URLSearchParams();
-
-  Object.entries(params || {}).forEach(([key, value]) => {
-    if (value !== undefined) {
-      normalizedParams.append(key, value === null ? "null" : value.toString());
-    }
-  });
-
-  const stringifiedParams = normalizedParams.toString();
-
-  return stringifiedParams.length > 0
-    ? `/api/newsletter/verify?${stringifiedParams}`
-    : `/api/newsletter/verify`;
-};
-
-export const verifyNewsletterSubscription = async (
-  params: VerifyNewsletterSubscriptionParams,
-  options?: RequestInit,
-): Promise<NewsletterVerifyResponse> => {
-  return customFetch<NewsletterVerifyResponse>(
-    getVerifyNewsletterSubscriptionUrl(params),
-    {
-      ...options,
-      method: "GET",
-    },
-  );
-};
-
-export const getVerifyNewsletterSubscriptionQueryKey = (
-  params?: VerifyNewsletterSubscriptionParams,
-) => {
-  return [`/api/newsletter/verify`, ...(params ? [params] : [])] as const;
-};
-
-export const getVerifyNewsletterSubscriptionQueryOptions = <
-  TData = Awaited<ReturnType<typeof verifyNewsletterSubscription>>,
-  TError = ErrorType<ErrorResponse>,
->(
-  params: VerifyNewsletterSubscriptionParams,
-  options?: {
-    query?: UseQueryOptions<
-      Awaited<ReturnType<typeof verifyNewsletterSubscription>>,
-      TError,
-      TData
-    >;
-    request?: SecondParameter<typeof customFetch>;
-  },
-) => {
-  const { query: queryOptions, request: requestOptions } = options ?? {};
-
-  const queryKey =
-    queryOptions?.queryKey ?? getVerifyNewsletterSubscriptionQueryKey(params);
-
-  const queryFn: QueryFunction<
-    Awaited<ReturnType<typeof verifyNewsletterSubscription>>
-  > = ({ signal }) =>
-    verifyNewsletterSubscription(params, { signal, ...requestOptions });
-
-  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
-    Awaited<ReturnType<typeof verifyNewsletterSubscription>>,
-    TError,
-    TData
-  > & { queryKey: QueryKey };
-};
-
-export type VerifyNewsletterSubscriptionQueryResult = NonNullable<
-  Awaited<ReturnType<typeof verifyNewsletterSubscription>>
->;
-export type VerifyNewsletterSubscriptionQueryError = ErrorType<ErrorResponse>;
-
-/**
- * @summary Confirm a newsletter subscription via the verification email link
- */
-
-export function useVerifyNewsletterSubscription<
-  TData = Awaited<ReturnType<typeof verifyNewsletterSubscription>>,
-  TError = ErrorType<ErrorResponse>,
->(
-  params: VerifyNewsletterSubscriptionParams,
-  options?: {
-    query?: UseQueryOptions<
-      Awaited<ReturnType<typeof verifyNewsletterSubscription>>,
-      TError,
-      TData
-    >;
-    request?: SecondParameter<typeof customFetch>;
-  },
-): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
-  const queryOptions = getVerifyNewsletterSubscriptionQueryOptions(
-    params,
-    options,
-  );
-
-  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
-    queryKey: QueryKey;
-  };
-
-  return { ...query, queryKey: queryOptions.queryKey };
-}
-
-/**
- * @summary One-click newsletter unsubscribe via tokenised link
- */
-export const getUnsubscribeFromNewsletterUrl = (
-  params: UnsubscribeFromNewsletterParams,
-) => {
-  const normalizedParams = new URLSearchParams();
-
-  Object.entries(params || {}).forEach(([key, value]) => {
-    if (value !== undefined) {
-      normalizedParams.append(key, value === null ? "null" : value.toString());
-    }
-  });
-
-  const stringifiedParams = normalizedParams.toString();
-
-  return stringifiedParams.length > 0
-    ? `/api/newsletter/unsubscribe?${stringifiedParams}`
-    : `/api/newsletter/unsubscribe`;
-};
-
-export const unsubscribeFromNewsletter = async (
-  params: UnsubscribeFromNewsletterParams,
-  unsubscribeBody?: UnsubscribeBody,
-  options?: RequestInit,
-): Promise<GenericOkResponse> => {
-  return customFetch<GenericOkResponse>(
-    getUnsubscribeFromNewsletterUrl(params),
-    {
-      ...options,
-      method: "POST",
-      headers: { "Content-Type": "application/json", ...options?.headers },
-      body: JSON.stringify(unsubscribeBody),
-    },
-  );
-};
-
-export const getUnsubscribeFromNewsletterMutationOptions = <
-  TError = ErrorType<ErrorResponse>,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof unsubscribeFromNewsletter>>,
-    TError,
-    {
-      params: UnsubscribeFromNewsletterParams;
-      data: BodyType<UnsubscribeBody>;
-    },
-    TContext
-  >;
-  request?: SecondParameter<typeof customFetch>;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof unsubscribeFromNewsletter>>,
-  TError,
-  { params: UnsubscribeFromNewsletterParams; data: BodyType<UnsubscribeBody> },
-  TContext
-> => {
-  const mutationKey = ["unsubscribeFromNewsletter"];
-  const { mutation: mutationOptions, request: requestOptions } = options
-    ? options.mutation &&
-      "mutationKey" in options.mutation &&
-      options.mutation.mutationKey
-      ? options
-      : { ...options, mutation: { ...options.mutation, mutationKey } }
-    : { mutation: { mutationKey }, request: undefined };
-
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof unsubscribeFromNewsletter>>,
-    { params: UnsubscribeFromNewsletterParams; data: BodyType<UnsubscribeBody> }
-  > = (props) => {
-    const { params, data } = props ?? {};
-
-    return unsubscribeFromNewsletter(params, data, requestOptions);
-  };
-
-  return { mutationFn, ...mutationOptions };
-};
-
-export type UnsubscribeFromNewsletterMutationResult = NonNullable<
-  Awaited<ReturnType<typeof unsubscribeFromNewsletter>>
->;
-export type UnsubscribeFromNewsletterMutationBody = BodyType<UnsubscribeBody>;
-export type UnsubscribeFromNewsletterMutationError = ErrorType<ErrorResponse>;
-
-/**
- * @summary One-click newsletter unsubscribe via tokenised link
- */
-export const useUnsubscribeFromNewsletter = <
-  TError = ErrorType<ErrorResponse>,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof unsubscribeFromNewsletter>>,
-    TError,
-    {
-      params: UnsubscribeFromNewsletterParams;
-      data: BodyType<UnsubscribeBody>;
-    },
-    TContext
-  >;
-  request?: SecondParameter<typeof customFetch>;
-}): UseMutationResult<
-  Awaited<ReturnType<typeof unsubscribeFromNewsletter>>,
-  TError,
-  { params: UnsubscribeFromNewsletterParams; data: BodyType<UnsubscribeBody> },
-  TContext
-> => {
-  return useMutation(getUnsubscribeFromNewsletterMutationOptions(options));
-};
 
 /**
  * Returns hotels, ryokan, and other lodging in Yamanouchi

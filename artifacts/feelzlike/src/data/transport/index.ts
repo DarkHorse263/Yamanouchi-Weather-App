@@ -21,6 +21,7 @@ import { TASMANIA_TRANSPORT } from "./tasmania";
 import { YAMANOUCHI_TRANSPORT } from "./yamanouchi";
 import { NOZAWA_ONSEN_TRANSPORT } from "./nozawa-onsen";
 import { IIYAMA_TRANSPORT } from "./iiyama";
+import { HAKUBA_VALLEY_TRANSPORT } from "./hakuba-valley";
 import { QUEENSTOWN_TRANSPORT } from "./queenstown";
 import { WANAKA_TRANSPORT } from "./wanaka";
 import { MT_HUTT_TRANSPORT } from "./mt-hutt";
@@ -33,6 +34,7 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   yamanouchi: YAMANOUCHI_TRANSPORT,
   "nozawa-onsen": NOZAWA_ONSEN_TRANSPORT,
   iiyama: IIYAMA_TRANSPORT,
+  "hakuba-valley": HAKUBA_VALLEY_TRANSPORT,
   // NZ · verified ski-season operators only (resort ski buses, RealNZ +
   // local mountain shuttles, InterCity). Unverified phone/website/schedule
   // fields are null per the no-guess rule.

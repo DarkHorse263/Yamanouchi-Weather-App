@@ -59,6 +59,7 @@ export type RegionKey =
   | "yamanouchi"
   | "nozawa-onsen"
   | "iiyama"
+  | "hakuba-valley"
   | "queenstown"
   | "wanaka"
   | "mt-hutt"
@@ -137,6 +138,18 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       label: "JMA Nagano",
       imageUrl: null,
       href: "https://www.jma.go.jp/bosai/nowc/#zoom:10/lat:36.873/lon:138.366/colordepth:normal/elements:hrpns",
+      attribution: "Japan Meteorological Agency · JMA",
+    },
+  },
+  // Hakuba Valley spans a long north-south valley (Jiigatake up to
+  // Cortina), so use a slightly wider zoom to keep the whole valley on
+  // the windy embed.
+  "hakuba-valley": {
+    windy: { lat: 36.68, lon: 137.85, zoom: 9 },
+    official: {
+      label: "JMA Nagano",
+      imageUrl: null,
+      href: "https://www.jma.go.jp/bosai/nowc/#zoom:9/lat:36.68/lon:137.85/colordepth:normal/elements:hrpns",
       attribution: "Japan Meteorological Agency · JMA",
     },
   },
@@ -258,6 +271,24 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "iiyama", name: "Iiyama City", lat: 36.852, lng: 138.366, accent: "#0ea5e9" },
     ],
   },
+  "hakuba-valley": {
+    center: { lat: 36.68, lng: 137.85 },
+    pins: [
+      { id: "happo-one", name: "Happo-One", lat: 36.6981, lng: 137.8597, accent: "#f97316" },
+      { id: "hakuba-goryu", name: "Goryu", lat: 36.7076, lng: 137.8312, accent: "#f97316" },
+      { id: "hakuba-47", name: "Hakuba 47", lat: 36.6988, lng: 137.8256, accent: "#f97316" },
+      { id: "hakuba-iwatake", name: "Iwatake", lat: 36.6927, lng: 137.8398, accent: "#f97316" },
+      { id: "tsugaike-kogen", name: "Tsugaike Kogen", lat: 36.7490, lng: 137.8662, accent: "#f97316" },
+      { id: "hakuba-norikura", name: "Norikura", lat: 36.7580, lng: 137.8580, accent: "#f97316" },
+      { id: "hakuba-cortina", name: "Cortina", lat: 36.7756, lng: 137.8875, accent: "#f97316" },
+      { id: "hakuba-sanosaka", name: "Sanosaka", lat: 36.6200, lng: 137.8500, accent: "#f97316" },
+      { id: "kashimayari", name: "Kashimayari", lat: 36.5930, lng: 137.8270, accent: "#f97316" },
+      { id: "jiigatake", name: "Jiigatake", lat: 36.5686, lng: 137.8339, accent: "#f97316" },
+      { id: "hakuba", name: "Hakuba", lat: 36.6982, lng: 137.8619, accent: "#0ea5e9" },
+      { id: "otari", name: "Otari", lat: 36.7550, lng: 137.8640, accent: "#0ea5e9" },
+      { id: "omachi", name: "Omachi", lat: 36.5030, lng: 137.8514, accent: "#0ea5e9" },
+    ],
+  },
   queenstown: {
     center: { lat: -44.99, lng: 168.74 },
     pins: [
@@ -304,6 +335,7 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   yamanouchi: "JP",
   "nozawa-onsen": "JP",
   iiyama: "JP",
+  "hakuba-valley": "JP",
   queenstown: "NZ",
   wanaka: "NZ",
   "mt-hutt": "NZ",
@@ -317,6 +349,7 @@ const REGION_LABEL: Record<RegionKey, string> = {
   yamanouchi: "yamanouchi",
   "nozawa-onsen": "nozawa onsen",
   iiyama: "iiyama",
+  "hakuba-valley": "hakuba valley",
   queenstown: "queenstown",
   wanaka: "wanaka",
   "mt-hutt": "mt hutt",

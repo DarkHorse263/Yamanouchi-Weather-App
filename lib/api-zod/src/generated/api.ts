@@ -163,6 +163,7 @@ export const GetPowderAlertsQueryParams = zod.object({
       "yamanouchi",
       "nozawa-onsen",
       "iiyama",
+      "hakuba-valley",
       "queenstown",
       "wanaka",
       "mt-hutt",
@@ -198,57 +199,6 @@ export const GetPowderAlertsResponse = zod.object({
       status: zod.enum(["active", "incoming", "ended"]),
       description: zod.string(),
       descriptionJa: zod.string().nullish(),
-    }),
-  ),
-  updatedAt: zod.string(),
-});
-
-/**
- * Returns published resort announcements (opening dates, snowmaking, lift status, events, conditions) for a region, pinned items first then newest first. Backed by the `resort_announcements` table in Postgres. Regions with no rows return an empty list.
-
- * @summary Get resort announcements
- */
-export const GetAnnouncementsQueryParams = zod.object({
-  region: zod
-    .enum([
-      "snowy-mountains",
-      "victorias-high-country",
-      "tasmania",
-      "yamanouchi",
-      "nozawa-onsen",
-      "iiyama",
-      "queenstown",
-      "wanaka",
-      "mt-hutt",
-      "ruapehu",
-    ])
-    .optional()
-    .describe(
-      "Optional region filter. Omit to receive data for every region. Must be one of the canonical region ids returned by `\/api\/regions`.",
-    ),
-});
-
-export const GetAnnouncementsResponse = zod.object({
-  announcements: zod.array(
-    zod.object({
-      id: zod.string(),
-      region: zod.string(),
-      resort: zod.string().nullish(),
-      category: zod.enum([
-        "opening",
-        "snowmaking",
-        "lifts",
-        "event",
-        "conditions",
-        "general",
-        "news",
-      ]),
-      title: zod.string(),
-      body: zod.string().nullish(),
-      sourceName: zod.string().nullish(),
-      sourceUrl: zod.string().nullish(),
-      pinned: zod.boolean(),
-      publishedAt: zod.string(),
     }),
   ),
   updatedAt: zod.string(),
@@ -504,79 +454,6 @@ export const GetElevationForecastResponse = zod
   .describe(
     "Envelope wrapping the elevation-banded forecast (forecast may be null when upstream returned no data).",
   );
-
-/**
- * Creates (or updates) a newsletter subscription for the given email and sends a verification email. Idempotent — re-submitting with the same email updates preferences. Independent of powder alerts.
- * @summary Subscribe to the feelzlike newsletter (general digest)
- */
-export const SubscribeToNewsletterBody = zod.object({
-  email: zod.string().email(),
-  regions: zod
-    .array(zod.string())
-    .optional()
-    .describe('Regions of interest. Empty array means \"all regions\".'),
-  cadence: zod
-    .enum(["weekly", "fortnightly", "monthly"])
-    .optional()
-    .describe("How often the user wants to hear from us. Default fortnightly."),
-  source: zod
-    .string()
-    .nullish()
-    .describe(
-      'Optional free-text marker for which CTA the signup came from (e.g. \"footer\", \"landing-cta\").',
-    ),
-  consent: zod
-    .boolean()
-    .describe(
-      "Must be true. Plain-English consent that we'll only send the digest and that unsubscribe is one-click.",
-    ),
-});
-
-export const SubscribeToNewsletterResponse = zod.object({
-  ok: zod.boolean(),
-  status: zod.enum(["verification_sent", "already_verified"]),
-  message: zod.string(),
-  emailDelivered: zod.boolean().optional(),
-  devVerifyUrl: zod
-    .string()
-    .nullish()
-    .describe(
-      "Present only in development when no email provider is configured.",
-    ),
-});
-
-/**
- * @summary Confirm a newsletter subscription via the verification email link
- */
-export const VerifyNewsletterSubscriptionQueryParams = zod.object({
-  token: zod.coerce.string(),
-});
-
-export const VerifyNewsletterSubscriptionResponse = zod.object({
-  ok: zod.boolean(),
-  email: zod.string(),
-});
-
-/**
- * @summary One-click newsletter unsubscribe via tokenised link
- */
-export const UnsubscribeFromNewsletterQueryParams = zod.object({
-  token: zod.coerce.string(),
-});
-
-export const UnsubscribeFromNewsletterBody = zod.object({
-  reason: zod
-    .string()
-    .nullish()
-    .describe(
-      'Optional one of \"too_many\", \"wrong_threshold\", \"not_relevant\", \"other\".',
-    ),
-});
-
-export const UnsubscribeFromNewsletterResponse = zod.object({
-  ok: zod.boolean(),
-  message: zod.string().optional(),
-});
 
 /**
  * Returns hotels, ryokan, and other lodging in Yamanouchi
@@ -1149,6 +1026,7 @@ export const GetWeatherQueryParams = zod.object({
       "yamanouchi",
       "nozawa-onsen",
       "iiyama",
+      "hakuba-valley",
       "queenstown",
       "wanaka",
       "mt-hutt",
@@ -1448,6 +1326,7 @@ export const GetWebcamsQueryParams = zod.object({
       "yamanouchi",
       "nozawa-onsen",
       "iiyama",
+      "hakuba-valley",
       "queenstown",
       "wanaka",
       "mt-hutt",
@@ -1545,6 +1424,7 @@ export const GetRoadConditionsQueryParams = zod.object({
       "yamanouchi",
       "nozawa-onsen",
       "iiyama",
+      "hakuba-valley",
       "queenstown",
       "wanaka",
       "mt-hutt",
@@ -1697,6 +1577,7 @@ export const GetLiftStatusQueryParams = zod.object({
       "yamanouchi",
       "nozawa-onsen",
       "iiyama",
+      "hakuba-valley",
       "queenstown",
       "wanaka",
       "mt-hutt",

@@ -19,6 +19,7 @@ export const RegionId = {
   yamanouchi: "yamanouchi",
   "nozawa-onsen": "nozawa-onsen",
   iiyama: "iiyama",
+  "hakuba-valley": "hakuba-valley",
   queenstown: "queenstown",
   wanaka: "wanaka",
   "mt-hutt": "mt-hutt",
