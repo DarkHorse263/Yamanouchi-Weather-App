@@ -16,6 +16,7 @@ import {
   removeSavedMountain,
   findCatalogMountain,
   mountainKey,
+  plannerCountries,
   MAX_TRIP_MOUNTAINS,
   type CatalogMountain,
 } from "@/lib/tripPlanner";
@@ -24,6 +25,8 @@ import {
   type PlannerForecastDay,
   type PlannerForecastEntry,
 } from "@/lib/tripForecasts";
+import { REGION_COUNTRY, COUNTRY_META, type CountryCode } from "@/regions";
+import { readLastTown, readFavouriteRegion } from "@/lib/favouriteRegion";
 
 // ─── Presentation helpers ──────────────────────────────────────────────────
 
@@ -39,6 +42,79 @@ function fmtDayNum(dateStr: string): string {
 
 /** Days we show in a snapshot · a week is plenty to compare at a glance. */
 const SNAPSHOT_DAYS = 7;
+
+/**
+ * Which country the planner opens on. `/plan` is a global route with no region
+ * context, so we infer the country from (1) an explicit ?country= param, then
+ * (2) the last town the user visited, then (3) their favourite region, and
+ * finally fall back to the first available country. A switcher lets them change
+ * it regardless.
+ */
+function detectInitialCountry(available: CountryCode[]): CountryCode {
+  const fallback = available[0] ?? "AU";
+  const isAvailable = (c: CountryCode | undefined): c is CountryCode =>
+    c !== undefined && available.includes(c);
+
+  try {
+    const param = new URLSearchParams(window.location.search).get("country");
+    if (param) {
+      const upper = param.toUpperCase() as CountryCode;
+      if (isAvailable(upper)) return upper;
+    }
+  } catch {
+    /* ignore · fall through to the persisted signals */
+  }
+
+  const lastTown = readLastTown();
+  if (lastTown) {
+    const c = REGION_COUNTRY[lastTown.regionId];
+    if (isAvailable(c)) return c;
+  }
+
+  const fav = readFavouriteRegion();
+  if (fav) {
+    const c = REGION_COUNTRY[fav];
+    if (isAvailable(c)) return c;
+  }
+
+  return fallback;
+}
+
+// ─── Country switcher ───────────────────────────────────────────────────────
+
+function CountrySwitcher({
+  countries,
+  current,
+  onChange,
+}: {
+  countries: CountryCode[];
+  current: CountryCode;
+  onChange: (c: CountryCode) => void;
+}) {
+  if (countries.length < 2) return null;
+  return (
+    <div className="inline-flex items-center rounded-full border border-border p-0.5 bg-white">
+      {countries.map((c) => {
+        const active = c === current;
+        return (
+          <button
+            key={c}
+            type="button"
+            onClick={() => onChange(c)}
+            aria-pressed={active}
+            className={`px-3.5 py-1.5 rounded-full text-sm font-semibold transition-colors ${
+              active
+                ? "bg-foreground text-background"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            {COUNTRY_META[c].name.toLowerCase()}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
 
 // ─── Snapshot day cell ──────────────────────────────────────────────────────
 
@@ -129,13 +205,15 @@ function DestinationCard({
 // ─── Picker ─────────────────────────────────────────────────────────────────
 
 function MountainPicker({
+  country,
   saved,
   onToggle,
 }: {
+  country: CountryCode;
   saved: string[];
   onToggle: (key: string, isSaved: boolean) => void;
 }) {
-  const catalog = tripPlannerCatalog();
+  const catalog = useMemo(() => tripPlannerCatalog(country), [country]);
   const byRegion = useMemo(() => {
     const groups = new Map<string, { name: string; mountains: CatalogMountain[] }>();
     for (const m of catalog) {
@@ -208,18 +286,39 @@ function TripResults({ mountains }: { mountains: CatalogMountain[] }) {
 }
 
 export default function TripPlanner() {
+  const countries = useMemo(() => plannerCountries(), []);
+  const [country, setCountry] = useState<CountryCode>(() =>
+    detectInitialCountry(countries),
+  );
   const [saved, setSaved] = useState<string[]>([]);
 
+  // Load the selected country's saved set (also runs on first mount).
   useEffect(() => {
-    setSaved(readSavedMountains());
-  }, []);
+    setSaved(readSavedMountains(country));
+  }, [country]);
+
+  // Reflect the country in the URL so the view is shareable and a refresh keeps
+  // it · replaceState (not push) so toggling doesn't spam the back button.
+  useEffect(() => {
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.set("country", country);
+      window.history.replaceState(window.history.state, "", url.toString());
+    } catch {
+      /* ignore · URL sync is a nicety, not load-bearing */
+    }
+  }, [country]);
 
   const onToggle = (key: string, isSaved: boolean) => {
-    setSaved(isSaved ? removeSavedMountain(key) : addSavedMountain(key));
+    setSaved(
+      isSaved
+        ? removeSavedMountain(key, country)
+        : addSavedMountain(key, country),
+    );
   };
 
   const savedMountains = saved
-    .map((k) => findCatalogMountain(k))
+    .map((k) => findCatalogMountain(k, country))
     .filter((m): m is CatalogMountain => m !== undefined);
 
   return (
@@ -249,11 +348,20 @@ export default function TripPlanner() {
             fresh snow and daytime temps side by side · a quick snapshot to help
             you decide where to go.
           </p>
+          {countries.length > 1 && (
+            <div className="mt-4">
+              <CountrySwitcher
+                countries={countries}
+                current={country}
+                onChange={setCountry}
+              />
+            </div>
+          )}
         </div>
 
         <section>
           <h2 className="text-lg font-black text-foreground mb-3">your mountains</h2>
-          <MountainPicker saved={saved} onToggle={onToggle} />
+          <MountainPicker country={country} saved={saved} onToggle={onToggle} />
         </section>
 
         <section>
