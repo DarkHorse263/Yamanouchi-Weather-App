@@ -6,6 +6,7 @@ import { ElevationBands } from "@/components/weather/ElevationBands";
 import { midMountainElevation } from "@/lib/elevation";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
+import { OfficialSiteLink } from "@/components/OfficialSiteLink";
 import { LoadingState } from "../components/ui/loading-state";
 import { ErrorState } from "../components/ui/error-state";
 import { ForecastChart } from "../components/weather/ForecastChart";
@@ -156,6 +157,7 @@ export default function LocationDetail() {
   // Summit lives in the region config; everything else (temp, feels-like,
   // current conditions) stays at the village.
   const summitElevationM = region.mountains?.find((m) => m.id === locationId)?.elevationM;
+  const mountainWebsiteUrl = region.mountains?.find((m) => m.id === locationId)?.websiteUrl;
   const snowElevationM = summitElevationM != null ? midMountainElevation(summitElevationM) : undefined;
 
   const { data: weatherData, isLoading: weatherLoading, error: weatherError, refetch: weatherRefetch } = useGetLocationWeather(
@@ -314,6 +316,12 @@ export default function LocationDetail() {
               <span className="byline text-muted-foreground/80">Source · {current.dataSource ?? "BOM + models"}</span>
             )}
             <span className="byline text-muted-foreground/70">Elev {location.elevation}m</span>
+            {mountainWebsiteUrl && (
+              <OfficialSiteLink
+                url={mountainWebsiteUrl}
+                className="text-[11px] text-muted-foreground/80 hover:text-primary"
+              />
+            )}
             {observedTime && (
               <span className="byline text-muted-foreground/80 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-card border border-border">
                 <Clock className="w-3 h-3" />

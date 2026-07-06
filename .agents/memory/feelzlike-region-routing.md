@@ -62,8 +62,13 @@ page is one of THREE components: the generic fallback
 `src/regions/snowy-mountains/pages/LocationDetail.tsx`).
 
 **Rule:** any cross-cutting page-level concern (SEO `<PageMeta>`/JSON-LD,
-analytics, headers) must be applied to ALL THREE, not just the shared one, or
-the overridden regions silently miss it.
+analytics, headers) AND any per-mountain UI feature (a link, panel, or badge)
+must be applied to ALL THREE, not just the shared one, or the overridden
+regions silently miss it. Example: the resort's own "Official site" link
+(`components/OfficialSiteLink.tsx`, sourced from `region.mountains[].websiteUrl`)
+once lived only in the region grid (`MountainsList`) + yamanouchi's tile, so
+every generic-page region AND the snowy flagship rendered a mountain page with
+no link to the operator site even though the data was present all along.
 
 **Why:** editing only the generic component leaves yamanouchi + snowy-mountains
 detail pages without the change, which is easy to miss because the route looks
@@ -71,10 +76,11 @@ like a single shared page.
 
 **How to apply:** canonical for both `/mountain/:id` and `/resort/:id` is the
 `/mountain/:id` form (resort is a legacy alias). The generic page derives a
-synchronous title from `region.mountains[].name`; the two overrides only know
-the resort name after the weather API resolves (snowy resorts aren't in
-`region.mountains`), so their `<PageMeta>` currently mounts on the success
-render only — acceptable since crawlers render settled DOM.
+synchronous title from `region.mountains[].name`. Snowy resorts ARE in
+`region.mountains` too (with name, elevationM, websiteUrl — both the generic and
+snowy pages look them up there), but the two overrides currently read the resort
+name from the resolved weather payload (`location.name`), so their `<PageMeta>`
+mounts on the success render only — acceptable since crawlers render settled DOM.
 
 ## Linking from a town-router page to a region-level route needs the `~` escape
 

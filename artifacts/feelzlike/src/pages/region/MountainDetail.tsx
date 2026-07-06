@@ -48,6 +48,7 @@ import { BarChart2 } from "lucide-react";
 import { useState } from "react";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
+import { OfficialSiteLink } from "@/components/OfficialSiteLink";
 
 /**
  * Region-agnostic mountain weather page.
@@ -83,6 +84,7 @@ export function MountainDetail() {
   const elevLng = mountainCfg?.lng;
   const elevSummitM = mountainCfg?.elevationM;
   const elevName = mountainCfg?.name;
+  const websiteUrl = mountainCfg?.websiteUrl;
   const snowElevationM = elevSummitM != null ? midMountainElevation(elevSummitM) : undefined;
 
   const q = useGetLocationWeather(
@@ -232,6 +234,11 @@ export function MountainDetail() {
                 )}
               </div>
             </div>
+            {websiteUrl && (
+              <div className="mt-5 pt-4 border-t border-border/60">
+                <OfficialSiteLink url={websiteUrl} />
+              </div>
+            )}
           </section>
 
           {/* ─── FREE ─────────────────────────────────────────────
