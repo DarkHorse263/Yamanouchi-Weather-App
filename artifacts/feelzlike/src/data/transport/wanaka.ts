@@ -12,6 +12,7 @@ export const WANAKA_TRANSPORT: TransportProviderList = [
     id: "nz-realnz-cardrona-treblecone-shuttle",
     name: "Cardrona & Treble Cone Mountain Shuttle",
     type: "shuttle",
+    leg: "to_mountain",
     operator: "RealNZ",
     phone: null,
     website: "https://www.cardrona-treblecone.com/mountains/transport",

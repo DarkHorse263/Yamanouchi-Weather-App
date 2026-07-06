@@ -13,6 +13,7 @@ export const YAMANOUCHI_TRANSPORT: TransportProviderList = [
     name: "Nagano Dentetsu (Nagaden) - Yudanaka Line",
     name_local: "長野電鉄 湯田中線",
     type: "train",
+    leg: "to_town",
     operator: "Nagano Dentetsu Co., Ltd. (長野電鉄株式会社)",
     phone: null,
     website: "https://www.nagaden-net.co.jp",
@@ -28,6 +29,7 @@ export const YAMANOUCHI_TRANSPORT: TransportProviderList = [
     name: "Shiga Kogen Express Bus",
     name_local: "志賀高原急行バス",
     type: "bus",
+    leg: "to_town",
     operator: "Nagaden Bus (長電バス)",
     phone: null,
     website:
@@ -45,6 +47,7 @@ export const YAMANOUCHI_TRANSPORT: TransportProviderList = [
     name: "Shiga Kogen Line (Local Bus)",
     name_local: "志賀高原線（ローカルバス）",
     type: "bus",
+    leg: "to_mountain",
     operator: "Nagaden Bus (長電バス)",
     phone: null,
     website:
@@ -62,6 +65,7 @@ export const YAMANOUCHI_TRANSPORT: TransportProviderList = [
     name: "Snow Monkey Express Bus",
     name_local: "スノーモンキー・エクスプレス",
     type: "bus",
+    leg: "to_town",
     operator: "Snow Monkey Resorts / Nagaden Bus",
     phone: null,
     website:
@@ -77,6 +81,7 @@ export const YAMANOUCHI_TRANSPORT: TransportProviderList = [
     name: "Nagano Snow Shuttle",
     name_local: "長野スノーシャトル",
     type: "shuttle",
+    leg: "to_town",
     operator: "Snow Monkey Resorts (operated by Nagano-area bus partners)",
     phone: null,
     website: "https://www.snowmonkeyresorts.com/transportation/",
@@ -91,6 +96,7 @@ export const YAMANOUCHI_TRANSPORT: TransportProviderList = [
     name: 'Night Bus "Snow Story"',
     name_local: "ナイトバス「スノーストーリー」",
     type: "bus",
+    leg: "to_town",
     operator: "Nagaden Bus / partner operators",
     phone: null,
     website:
@@ -106,6 +112,7 @@ export const YAMANOUCHI_TRANSPORT: TransportProviderList = [
     name: "Hokuriku Shinkansen",
     name_local: "北陸新幹線",
     type: "train",
+    leg: "to_town",
     operator: "JR East / JR West",
     phone: null,
     website: "https://www.jreast.co.jp/e/routemaps/hokurikushinkansen.html",

@@ -186,16 +186,28 @@ export function SnowyTransport() {
                         "毎日運行：キャンベラ → クーマ → ベリデール → ジンダバイン。冬季はペリッシャー・スレッドボーへのシャトル接続あり。",
                       )}
                     </p>
-                    <a
-                      href={SNOWY_MTNS_BUS_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-800"
-                    >
-                      <CalendarCheck className="w-4 h-4" />
-                      {t("Timetable & fares", "時刻表・運賃")}
-                      <ExternalLink className="w-3 h-3 opacity-70" />
-                    </a>
+                    <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2">
+                      <a
+                        href={SNOWY_MTNS_BUS_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-800"
+                      >
+                        <CalendarCheck className="w-4 h-4" />
+                        {t("Timetable & fares", "時刻表・運賃")}
+                        <ExternalLink className="w-3 h-3 opacity-70" />
+                      </a>
+                      <a
+                        href="https://www.snowbusaustralia.com.au/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-800"
+                      >
+                        <Globe className="w-4 h-4" />
+                        {t("Snow Bus Australia", "スノーバス・オーストラリア")}
+                        <ExternalLink className="w-3 h-3 opacity-70" />
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -820,6 +820,17 @@ export default function RadarMapInner({
   );
   const hasOtherRegions = useMemo(() => pins.some((p) => !p.isCurrent), [pins]);
   const country = REGION_COUNTRY[region];
+  // The "official" tab shows a different national agency per country, so
+  // label it honestly · a blanket "BOM" only holds for Australia.
+  const officialAgency = country === "AU" ? "BOM" : country === "JP" ? "JMA" : "MetService";
+  // One-line explainer for whichever tab is active · shown beside the tab
+  // row on wider screens (the icons + labels carry it on mobile).
+  const viewExplainer =
+    view === "windy"
+      ? "windy.com · rich forecast layers"
+      : view === "official"
+        ? `official ${officialAgency} radar`
+        : "our interactive ski radar";
 
   const showAllCountry = useCallback(() => {
     if (!mapInstance || pins.length === 0) return;
@@ -864,15 +875,20 @@ export default function RadarMapInner({
       {/* View switcher (top-left). Three modes: our interactive ski radar
           (default · dark map, weather layers, click-to-read points), Windy
           (rich multi-layer), and the official regional source. */}
-      <div className="absolute top-3 left-3 z-[1000] flex gap-1 rounded-xl bg-slate-900/90 backdrop-blur-md border border-white/10 shadow-lg p-1">
-        {showOfficialTab && officialIsPrimary && (
-          <TabPill active={view === "official"} onClick={() => setView("official")} icon={Radio} label="Official" />
-        )}
-        <TabPill active={view === "interactive"} onClick={() => setView("interactive")} icon={MapIcon} label="Interactive" />
-        <TabPill active={view === "windy"} onClick={() => setView("windy")} icon={Globe2} label="Expert" />
-        {showOfficialTab && !officialIsPrimary && (
-          <TabPill active={view === "official"} onClick={() => setView("official")} icon={Radio} label="Official" />
-        )}
+      <div className="absolute top-3 left-3 z-[1000] flex items-center gap-2 rounded-xl bg-slate-900/90 backdrop-blur-md border border-white/10 shadow-lg p-1 max-w-[calc(100%-1.5rem)]">
+        <div className="flex gap-1">
+          {showOfficialTab && officialIsPrimary && (
+            <TabPill active={view === "official"} onClick={() => setView("official")} icon={Radio} label={officialAgency} />
+          )}
+          <TabPill active={view === "interactive"} onClick={() => setView("interactive")} icon={MapIcon} label="Map" />
+          <TabPill active={view === "windy"} onClick={() => setView("windy")} icon={Globe2} label="Windy" />
+          {showOfficialTab && !officialIsPrimary && (
+            <TabPill active={view === "official"} onClick={() => setView("official")} icon={Radio} label={officialAgency} />
+          )}
+        </div>
+        <span className="hidden md:block pr-1 pl-0.5 text-[11px] leading-tight text-slate-400 whitespace-nowrap">
+          {viewExplainer}
+        </span>
       </div>
 
       {/* Cross-region framing · jump between the whole country's towns +
@@ -913,7 +929,7 @@ export default function RadarMapInner({
             <ModePill active={windyOverlay === "rain"} onClick={() => setWindyOverlay("rain")} icon={CloudRain} label="Radar" />
           </div>
           <iframe
-            title="Expert weather map · snow, wind, temperature and radar"
+            title="windy.com weather map · snow, wind, temperature and radar"
             src={windyUrl}
             className="absolute inset-0 w-full h-full border-0"
             sandbox="allow-scripts allow-same-origin allow-popups"
@@ -1273,7 +1289,7 @@ function LayerToggle({
   );
 }
 
-// Dark-themed view tab (Interactive / Expert / Official) for the floating
+// Dark-themed view tab (Map / Windy / agency) for the floating
 // switcher over the dark basemap.
 function TabPill({
   active,

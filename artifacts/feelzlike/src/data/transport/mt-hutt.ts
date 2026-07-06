@@ -12,6 +12,7 @@ export const MT_HUTT_TRANSPORT: TransportProviderList = [
     id: "nz-methven-travel-ski-bus",
     name: "Methven Ski Bus & Airport Transfers",
     type: "bus",
+    leg: "to_mountain",
     operator: "Methven Travel",
     phone: null,
     website: "https://www.methventravel.co.nz/methven-ski-bus/",
