@@ -15,6 +15,7 @@ export {
   DEFAULT_MOUNTAIN_NAV,
   DEFAULT_REGION_NAV,
 } from "./defaultNav";
+export { SECTION_ACCENTS, sectionAccentFor, mixSection } from "./sectionAccents";
 export { RegionProvider, useRegion } from "./RegionProvider";
 export { SeasonProvider, useSeason, useOptionalSeason } from "./SeasonProvider";
 export { LanguageProvider, useLanguage } from "./LanguageProvider";

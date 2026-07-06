@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { useMemo, useState } from "react";
+import { useMemo, useState, type CSSProperties } from "react";
 import {
   ArrowUpRight,
   Car,
@@ -22,6 +22,9 @@ import {
   PageHeader,
   PremiumGate,
   useOptionalSeason,
+  sectionAccentFor,
+  mixSection,
+  cn,
 } from "@workspace/feelzlike-shell";
 import { useGetWeather } from "@workspace/api-client-react";
 import { useTownWeather } from "@/lib/town-weather";
@@ -451,22 +454,57 @@ export function TownHome() {
           .filter((tile) => !town || townNavHasContent(region, town.id, tile.path))
           .map((tile) => {
           const Icon = tile.icon;
+          // Section-tinting: each tile is owned by its section's colour (soft
+          // bg, hairline border, 3px left accent, tinted icon chip + byline).
+          // `--sa` is set inline so the arrow's group-hover accent stays a
+          // static class literal Tailwind's JIT can see. Unlisted paths fall
+          // back to the brand-blue primary treatment.
+          const accent = sectionAccentFor(tile.path);
+          const tileStyle = accent
+            ? ({
+                "--sa": accent,
+                backgroundColor: mixSection(accent, 6),
+                borderColor: mixSection(accent, 30),
+                borderLeftColor: accent,
+                borderLeftWidth: "3px",
+              } as CSSProperties)
+            : undefined;
           return (
             <Link
               key={tile.path}
               href={tile.path}
-              className="group flex items-center gap-4 rounded-2xl border border-border bg-white p-5 transition-all hover:border-primary/40 hover:shadow-md"
+              style={tileStyle}
+              className={cn(
+                "group flex items-center gap-4 rounded-2xl border p-5 transition-all hover:shadow-md",
+                accent ? "" : "border-border bg-white hover:border-primary/40",
+              )}
             >
-              <div className="shrink-0 w-11 h-11 rounded-xl bg-primary/8 text-primary inline-flex items-center justify-center">
+              <div
+                className={cn(
+                  "shrink-0 w-11 h-11 rounded-xl inline-flex items-center justify-center",
+                  accent ? "" : "bg-primary/8 text-primary",
+                )}
+                style={accent ? { backgroundColor: mixSection(accent, 16), color: accent } : undefined}
+              >
                 <Icon className="w-5 h-5" />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="byline text-primary uppercase">{t(tile.label, tile.labelJa)}</p>
+                <p
+                  className={cn("byline uppercase", accent ? "" : "text-primary")}
+                  style={accent ? { color: accent } : undefined}
+                >
+                  {t(tile.label, tile.labelJa)}
+                </p>
                 <p className="text-sm text-muted-foreground mt-0.5 leading-snug">
                   {t(tile.blurb, tile.blurbJa)}
                 </p>
               </div>
-              <ArrowUpRight className="w-4 h-4 text-muted-foreground/50 group-hover:text-primary transition-colors shrink-0" />
+              <ArrowUpRight
+                className={cn(
+                  "w-4 h-4 text-muted-foreground/50 transition-colors shrink-0",
+                  accent ? "group-hover:text-[var(--sa)]" : "group-hover:text-primary",
+                )}
+              />
             </Link>
           );
         })}

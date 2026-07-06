@@ -9,6 +9,7 @@ import { useLanguage } from "./LanguageProvider";
 import { useBaseTown } from "./BaseTownProvider";
 import { TownPicker } from "./TownPicker";
 import { DEFAULT_TOWN_NAV, DEFAULT_MOUNTAIN_NAV, DEFAULT_REGION_NAV } from "./defaultNav";
+import { sectionAccentFor, mixSection } from "./sectionAccents";
 import type { NavItem } from "./types";
 
 const RESERVED_TOWN_SLUGS = new Set(["mountain", "mountains", "radar", "alerts", "resort", "premium"]);
@@ -136,6 +137,12 @@ export function AppShell({
     active: boolean;
     /** Show a small lock glyph next to the label (paywalled features). */
     locked?: boolean;
+    /**
+     * Section accent hex (the "section tinting" colour system). Resolved from
+     * the item's PATH, not its rewritten href. Undefined for Today ("/") and
+     * any unlisted path · those fall back to the brand-blue primary classes.
+     */
+    accent?: string;
   };
   const buildCombinedNav = (): CombinedNavItem[] => {
     const items: CombinedNavItem[] = [];
@@ -152,6 +159,7 @@ export function AppShell({
         icon: it.icon,
         label: t(it.label, it.labelJa),
         active: isActiveTown(it.path),
+        accent: sectionAccentFor(it.path),
       });
     };
     const pushMountain = (path: string) => {
@@ -172,6 +180,7 @@ export function AppShell({
         // No mountain-scope nav entry shows a lock glyph · the Premium hub
         // itself is open (it explains what's premium).
         locked: false,
+        accent: sectionAccentFor(it.path),
       });
     };
     // May 2026 v2: structural reset.
@@ -272,21 +281,44 @@ export function AppShell({
           {navTown || combinedNav.some((c) => c.key.startsWith("m:")) ? (
             combinedNav.map((item) => {
               const Icon = item.icon;
+              // Section-tinting: an active item with a section accent paints its
+              // colour inline (text + soft bg + indicator). Today / unlisted
+              // paths have no accent and fall back to the brand-blue primary
+              // classes below.
+              const activeAccent = item.active ? item.accent : undefined;
               return (
                 <Link
                   key={item.key}
                   href={item.href}
+                  style={
+                    activeAccent
+                      ? { color: activeAccent, backgroundColor: mixSection(activeAccent, 8) }
+                      : undefined
+                  }
                   className={cn(
                     "group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-150 text-sm font-medium",
                     item.active
-                      ? "text-primary bg-primary/8"
+                      ? activeAccent
+                        ? ""
+                        : "text-primary bg-primary/8"
                       : "text-muted-foreground hover:bg-secondary hover:text-foreground",
                   )}
                 >
                   {item.active && (
-                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full bg-primary" />
+                    <span
+                      className={cn(
+                        "absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full",
+                        activeAccent ? "" : "bg-primary",
+                      )}
+                      style={activeAccent ? { backgroundColor: activeAccent } : undefined}
+                    />
                   )}
-                  <Icon className={cn("w-4 h-4 transition-colors", item.active ? "text-primary" : "")} />
+                  <Icon
+                    className={cn(
+                      "w-4 h-4 transition-colors",
+                      item.active && !activeAccent ? "text-primary" : "",
+                    )}
+                  />
                   <span className="inline-flex items-center gap-1.5">
                     {item.label}
                     {item.locked && <Lock className="w-3 h-3 opacity-60" aria-label="Premium" />}
@@ -383,17 +415,32 @@ export function AppShell({
           {(() => {
             return combinedNav.map((item) => {
               const Icon = item.icon;
+              // Section-tinting: colour the active item + its indicator by
+              // section accent. No opaque bg here (the bar is glass). Today /
+              // unlisted paths fall back to the brand-blue primary class.
+              const activeAccent = item.active ? item.accent : undefined;
               return (
                 <Link
                   key={item.key}
                   href={item.href}
+                  style={activeAccent ? { color: activeAccent } : undefined}
                   className={cn(
                     "relative flex flex-col items-center justify-center shrink-0 h-full gap-1 px-3 min-w-[64px] transition-all",
-                    item.active ? "text-primary" : "text-muted-foreground/80",
+                    item.active
+                      ? activeAccent
+                        ? ""
+                        : "text-primary"
+                      : "text-muted-foreground/80",
                   )}
                 >
                   {item.active && (
-                    <span className="absolute top-1.5 w-8 h-0.5 rounded-full bg-primary" />
+                    <span
+                      className={cn(
+                        "absolute top-1.5 w-8 h-0.5 rounded-full",
+                        activeAccent ? "" : "bg-primary",
+                      )}
+                      style={activeAccent ? { backgroundColor: activeAccent } : undefined}
+                    />
                   )}
                   <Icon className="w-4 h-4" />
                   <span className="text-[9px] font-semibold tracking-wider uppercase leading-none whitespace-nowrap inline-flex items-center gap-1">
