@@ -358,13 +358,14 @@ export default function NearYouWeather() {
           </div>
         ) : phase === "denied" ? (
           <div className="mt-8 rounded-2xl border border-border bg-white p-6 max-w-md">
-            <p className="text-[14px] leading-snug text-slate-600">
-              location is blocked for this site, so we can&rsquo;t show your local
-              weather
+            <p className="text-[14px] font-semibold leading-snug text-slate-700">
+              no problem &middot; search your town in the box above to see its
+              live radar and forecast
             </p>
             <p className="mt-1.5 text-[13px] leading-snug text-slate-500">
-              tap the location icon in your browser&rsquo;s address bar, choose
-              allow, then reload
+              location is blocked for this site. to use your exact position
+              instead, allow location in your browser&rsquo;s address bar (or turn
+              it on in your device settings), then reload
             </p>
             <button
               type="button"

@@ -489,17 +489,19 @@ export function NearYou() {
               </button>
             </div>
           ) : phase === "denied" ? (
-            // Hard-blocked: a retry would re-fail silently, so guide the visitor
-            // through re-enabling and offer a reload (which re-checks permission)
-            // rather than a button that quietly does nothing.
+            // Blocked, but never a dead-end: the place search sits above this
+            // card (always visible), so lead with it · a retry would re-fail
+            // silently, so keep re-enable guidance + a reload as the secondary
+            // path rather than a button that quietly does nothing.
             <div className="mt-3">
-              <p className="text-[13px] leading-snug text-slate-600">
-                location is blocked for this site, so we can't show your local
-                conditions
+              <p className="text-[13px] font-semibold leading-snug text-slate-700">
+                no problem &middot; search your town in the box above for its
+                live conditions
               </p>
               <p className="mt-1.5 text-[12px] leading-snug text-slate-500">
-                tap the location icon in your browser's address bar, choose allow,
-                then reload
+                location is blocked for this site. to use your exact position
+                instead, allow location in your browser's address bar (or in your
+                device settings), then reload
               </p>
               <button
                 type="button"

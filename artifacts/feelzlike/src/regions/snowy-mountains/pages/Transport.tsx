@@ -197,16 +197,6 @@ export function SnowyTransport() {
                         {t("Timetable & fares", "時刻表・運賃")}
                         <ExternalLink className="w-3 h-3 opacity-70" />
                       </a>
-                      <a
-                        href="https://www.snowbusaustralia.com.au/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-800"
-                      >
-                        <Globe className="w-4 h-4" />
-                        {t("Snow Bus Australia", "スノーバス・オーストラリア")}
-                        <ExternalLink className="w-3 h-3 opacity-70" />
-                      </a>
                     </div>
                   </div>
                 </div>

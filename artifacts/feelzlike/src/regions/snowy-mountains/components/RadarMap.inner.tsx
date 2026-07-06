@@ -393,10 +393,41 @@ interface RvManifest {
   radar: { past: RvFrame[]; nowcast: RvFrame[] };
 }
 
+// Re-run a loader when the tab / installed PWA returns to the foreground.
+// Mobile browsers freeze setInterval timers while backgrounded (iOS keeps them
+// throttled even after resume), so a visitor reopening the app after a while
+// would otherwise sit on a stale radar until the next tick fires · this pulls
+// the latest immediately. Throttled so rapid app-switching can't cause churn.
+function useForegroundRefresh(onForeground: () => void, minGapMs = 90_000) {
+  const cbRef = useRef(onForeground);
+  cbRef.current = onForeground;
+  const lastRef = useRef(Date.now());
+  useEffect(() => {
+    function trigger() {
+      if (typeof document !== "undefined" && document.visibilityState !== "visible") {
+        return;
+      }
+      const now = Date.now();
+      if (now - lastRef.current < minGapMs) return;
+      lastRef.current = now;
+      cbRef.current();
+    }
+    document.addEventListener("visibilitychange", trigger);
+    window.addEventListener("focus", trigger);
+    return () => {
+      document.removeEventListener("visibilitychange", trigger);
+      window.removeEventListener("focus", trigger);
+    };
+  }, [minGapMs]);
+}
+
 function useRainviewerManifest() {
   const [manifest, setManifest] = useState<RvManifest | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  // Exposes the effect's current loader so the foreground-refresh hook can pull
+  // a fresh manifest the instant the app is reopened.
+  const loadRef = useRef<() => void>(() => {});
 
   useEffect(() => {
     let cancelled = false;
@@ -415,6 +446,7 @@ function useRainviewerManifest() {
         if (!cancelled) setLoading(false);
       }
     }
+    loadRef.current = load;
     load();
     // RainViewer publishes a new radar frame every ~10 min. Refresh the
     // manifest at the same cadence so we always have the latest nowcast.
@@ -424,6 +456,10 @@ function useRainviewerManifest() {
       window.clearInterval(id);
     };
   }, []);
+
+  // Cross-origin (RainViewer), so the service worker never touches it · the
+  // foreground refetch is the only thing that un-freezes it after a resume.
+  useForegroundRefresh(() => loadRef.current());
 
   return { manifest, loading, error };
 }
@@ -1653,12 +1689,17 @@ function BomAnimatedOfficialView({
   }, [frames]);
 
   // Discover the recent frames (server-side: cached, de-duped, cadence-aware)
-  // and keep the list fresh while the tab stays open.
+  // and keep the list fresh while the tab stays open. `cache:"no-store"` skips
+  // the browser HTTP cache (server sends max-age=60) · the service worker also
+  // routes /api/bom-radar/frames network-first, so the loop can't go stale.
+  const framesLoadRef = useRef<() => void>(() => {});
   useEffect(() => {
     let cancelled = false;
     async function load() {
       try {
-        const res = await fetch(`/api/bom-radar/frames?radar=${radarId}&count=6`);
+        const res = await fetch(`/api/bom-radar/frames?radar=${radarId}&count=6`, {
+          cache: "no-store",
+        });
         if (!res.ok) throw new Error(`frames ${res.status}`);
         const data = (await res.json()) as { frames?: BomFrame[] };
         const next = data.frames ?? [];
@@ -1674,6 +1715,7 @@ function BomAnimatedOfficialView({
         if (!cancelled) setUnavailable(true);
       }
     }
+    framesLoadRef.current = load;
     load();
     const id = window.setInterval(load, 5 * 60 * 1000);
     return () => {
@@ -1681,6 +1723,9 @@ function BomAnimatedOfficialView({
       window.clearInterval(id);
     };
   }, [radarId]);
+  // Reopening the app (especially an installed PWA) jumps straight to BOM's
+  // newest frame instead of waiting up to 5 min for the next interval tick.
+  useForegroundRefresh(() => framesLoadRef.current());
 
   // Advance the loop · ~550ms per frame with a longer hold on the newest.
   useEffect(() => {
@@ -1836,25 +1881,34 @@ function OfficialStillView({ official }: { official: OfficialRadarSource }) {
   // This is the fallback when the animated frame loop isn't available.
   const baseSrc = official.imageUrl ? officialImageSrc(official.imageUrl) : null;
   const [src, setSrc] = useState<string | null>(baseSrc);
+  const preloadRef = useRef<() => void>(() => {});
   useEffect(() => {
     setSrc(baseSrc);
     setImgFailed(false);
-    if (!baseSrc) return;
-    const id = window.setInterval(() => {
+    if (!baseSrc) {
+      preloadRef.current = () => {};
+      return;
+    }
+    const preload = () => {
       const next = `${baseSrc}${baseSrc.includes("?") ? "&" : "?"}r=${Date.now()}`;
       const img = new Image();
       // Clearing imgFailed on a successful preload doubles as gentle
       // auto-recovery: if the initial load hit a transient BOM 403/blip and
-      // showed the link-out, the next 4-min refresh that loads cleanly brings
+      // showed the link-out, a later refresh that loads cleanly brings
       // the official image back · no extra requests beyond the refresh itself.
       img.onload = () => {
         setSrc(next);
         setImgFailed(false);
       };
       img.src = next;
-    }, 4 * 60 * 1000);
+    };
+    preloadRef.current = preload;
+    const id = window.setInterval(preload, 4 * 60 * 1000);
     return () => window.clearInterval(id);
   }, [baseSrc]);
+  // Match the animated + RainViewer views: pull a fresh still the moment the
+  // app is reopened, rather than lagging on a backgrounded interval.
+  useForegroundRefresh(() => preloadRef.current());
   return (
     <div className="absolute inset-0 flex flex-col bg-slate-100">
       <div className="relative flex-1 overflow-hidden p-4">

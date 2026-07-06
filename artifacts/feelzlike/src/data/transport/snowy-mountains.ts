@@ -19,12 +19,6 @@ export const SNOWY_MOUNTAINS_TRANSPORT: TransportProviderList = [
     route_summary:
       "Cooma's local operator - runs the Snowy Mountains Bus Service plus charters, school runs and ski-season shuttles to Perisher and Thredbo.",
     schedule_url: "https://coomacoaches.com.au/snowy-mountains-bus-service/",
-    extra_links: [
-      {
-        label: "Snow Bus Australia",
-        href: "https://www.snowbusaustralia.com.au/",
-      },
-    ],
     featured: true,
     regions: ["snowy-mountains"],
   },

@@ -27,7 +27,10 @@
 // v7: adds Victoria's High Country to the live region set.
 // v8: locality search/details go network-first (bypass the stale cache) after
 // the search rewrite - the old cached shape showed businesses, not towns.
-const CACHE_VERSION = "v8";
+// v9: BOM radar frame discovery (/api/bom-radar/frames) goes network-first
+// (reload) so installed PWAs stop serving the previous session's frame list -
+// the radar looked "frozen" because the catch-all SWR returned a stale loop.
+const CACHE_VERSION = "v9";
 const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
 const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;
@@ -192,6 +195,16 @@ self.addEventListener("fetch", (event) => {
     url.pathname.startsWith("/api/road")
   ) {
     event.respondWith(networkFirst(request, DATA_CACHE));
+    return;
+  }
+
+  // 2c. BOM radar FRAME DISCOVERY → network-first, bypassing the browser HTTP
+  //     cache. The frame list must track BOM's ~10-min publish or an installed
+  //     PWA looks frozen (the catch-all SWR below served the previous session's
+  //     list). Only the /frames JSON needs this · the frame/layer PNGs are
+  //     immutable, unique-URL images and stay on the catch-all (never stale).
+  if (url.pathname === "/api/bom-radar/frames") {
+    event.respondWith(networkFirst(request, DATA_CACHE, { cacheMode: "reload" }));
     return;
   }
 
