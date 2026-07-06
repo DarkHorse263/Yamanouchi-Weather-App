@@ -443,3 +443,9 @@ id = "w2poVxCuJDsEkn8CWq0d3"
 uri = "file://exports/ad-kit/feelzlike-ad-kit.zip"
 type = "unspecified"
 title = "feelzlike advertising kit — full download (dark + light)"
+
+[[outputs]]
+id = "I7xo6KiGDjDQ6EdvpWk_X"
+uri = "file://JAPAN_ROLLOUT.md"
+type = "text"
+title = "feelzlike · Japan rollout one-pager"
