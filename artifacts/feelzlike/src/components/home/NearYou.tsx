@@ -14,7 +14,6 @@ import {
   LocateFixed,
   MapPin,
   Moon,
-  RotateCw,
   Sun,
   type LucideIcon,
 } from "lucide-react";
@@ -489,34 +488,49 @@ export function NearYou() {
               </button>
             </div>
           ) : phase === "denied" ? (
-            // Blocked, but never a dead-end: the place search sits above this
-            // card (always visible), so lead with it · a retry would re-fail
-            // silently, so keep re-enable guidance + a reload as the secondary
-            // path rather than a button that quietly does nothing.
+            // Blocked per the Permissions API - but on iOS / installed PWAs that
+            // read is often stale: it keeps reporting "denied" after the visitor
+            // re-enables location in OS settings, and its onchange never fires
+            // for that change. So the primary action is a gesture-driven "try
+            // again" that calls getCurrentPosition directly - the button tap is
+            // the gesture iOS needs to re-check the real permission and recover;
+            // if it is genuinely still blocked, the error handler returns here.
             <div className="mt-3">
               <p className="text-[13px] font-semibold leading-snug text-slate-700">
                 no problem &middot; search your town in the box above for its
                 live conditions
               </p>
               <p className="mt-1.5 text-[12px] leading-snug text-slate-500">
-                location is blocked for this site. to use your exact position
-                instead, allow location in your browser's address bar (or in your
-                device settings), then reload
+                already turned location back on? tap try again. still blocked?
+                allow location in your device settings, or open feelzlike in
+                safari or chrome if you're in an in-app browser
               </p>
-              <button
-                type="button"
-                onClick={() => {
-                  track("welcome_nearyou_reload", { category: "weather" });
-                  window.location.reload();
-                }}
-                className="mt-2.5 inline-flex items-center gap-1.5 rounded-full border border-sky-200 bg-white px-3.5 py-2 text-[12px] font-semibold text-sky-700 transition-colors hover:border-sky-300 hover:bg-sky-50"
-              >
-                <RotateCw className="h-3.5 w-3.5" />
-                reload
-              </button>
-              <span className="ml-2 text-[12px] text-slate-400">
-                or explore the mountains below
-              </span>
+              <div className="mt-2.5 flex flex-wrap items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    track("welcome_nearyou_retry", { category: "weather" });
+                    requestLocation(true);
+                  }}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-sky-200 bg-white px-3.5 py-2 text-[12px] font-semibold text-sky-700 transition-colors hover:border-sky-300 hover:bg-sky-50"
+                >
+                  <LocateFixed className="h-3.5 w-3.5" />
+                  try again
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    track("welcome_nearyou_reload", { category: "weather" });
+                    window.location.reload();
+                  }}
+                  className="text-[12px] font-semibold text-sky-700 hover:text-sky-900"
+                >
+                  reload
+                </button>
+                <span className="text-[12px] text-slate-400">
+                  or explore the mountains below
+                </span>
+              </div>
             </div>
           ) : (
             // unsupported: no geolocation at all - no point offering a tap

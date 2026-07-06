@@ -363,18 +363,27 @@ export default function NearYouWeather() {
               live radar and forecast
             </p>
             <p className="mt-1.5 text-[13px] leading-snug text-slate-500">
-              location is blocked for this site. to use your exact position
-              instead, allow location in your browser&rsquo;s address bar (or turn
-              it on in your device settings), then reload
+              already turned location back on? tap try again. still blocked? allow
+              location in your device settings, or open feelzlike in safari or
+              chrome if you&rsquo;re in an in-app browser
             </p>
-            <button
-              type="button"
-              onClick={() => window.location.reload()}
-              className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-sky-200 bg-white px-4 py-2 text-[13px] font-semibold text-sky-700 transition-colors hover:border-sky-300 hover:bg-sky-50"
-            >
-              <RotateCw className="h-4 w-4" />
-              reload
-            </button>
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                onClick={() => requestLocation(true)}
+                className="inline-flex items-center gap-1.5 rounded-full border border-sky-200 bg-white px-4 py-2 text-[13px] font-semibold text-sky-700 transition-colors hover:border-sky-300 hover:bg-sky-50"
+              >
+                <LocateFixed className="h-4 w-4" />
+                try again
+              </button>
+              <button
+                type="button"
+                onClick={() => window.location.reload()}
+                className="text-[13px] font-semibold text-sky-700 hover:text-sky-900"
+              >
+                reload
+              </button>
+            </div>
             <Link
               href="/countries"
               className="mt-4 block text-[13px] font-semibold text-sky-700 hover:text-sky-900"
