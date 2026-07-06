@@ -34,7 +34,19 @@ const LOCATIONS: LocationConfig[] = [
     name: "Thredbo",
     latitude: -36.5054,
     longitude: 148.3089,
-    elevation: 1365,
+    // Forecast at mid-mountain (1737m = midMountainElevation(2037m summit)),
+    // NOT the valley-floor village AWS (1365m). Every peer resort's elevation
+    // already sits on-mountain (Perisher 1720m, Charlotte's Pass 1837m, the VHC
+    // resorts 1805-1862m), so pinning Thredbo to its low village station made it
+    // the lone outlier: on a marginal storm the same system fell as rain at
+    // 1365m while snowing at the peers' higher query points, so Thredbo alone
+    // showed no snow. 1737m matches the exact snowElevationM the clients already
+    // request, so daily, headline outlook and ensemble all align at one figure.
+    // Live current conditions still come from BOM Village AWS (bomWmoId 95908
+    // below), so the "feels like" you feel arriving in the village stays honest;
+    // only the model forecast is lifted to the hill, mirroring the existing
+    // mid-mountain snow-outlook design.
+    elevation: 1737,
     description: "Australia's premier alpine resort village, home to the longest ski runs in the country with a vertical drop of 672m.",
     bomStation: "Thredbo Village AWS",
     bomStationId: "071032",
