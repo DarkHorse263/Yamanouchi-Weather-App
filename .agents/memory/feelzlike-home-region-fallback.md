@@ -7,7 +7,7 @@ description: The country/home page region list comes from the API but falls back
 
 The home/country page region list (the "X regions live" cards) has TWO sources:
 - authoritative: the API server's `REGIONS` array (served at `/api/regions`).
-- fallback: a hardcoded `FALLBACK_REGIONS` array in the web app's `Countries.tsx`, used ONLY until the API response loads (or whenever the API is slow/down).
+- fallback: a hardcoded `FALLBACK_REGIONS` array in the web app's shared `components/home/CountryPicker.tsx` (rendered by BOTH the landing `Welcome.tsx` and the `/countries` page), used ONLY until the API response loads (or whenever the API is slow/down).
 
 **The trap:** if the two drift, the home page silently DROPS whatever regions are missing from the fallback (and shows "-" for temps) any time the API is down or slow. This once made it look like Tasmania, Nozawa Onsen and Iiyama had "disappeared" in the dev preview after the api-server workflow had stopped, even though the live site was fine.
 

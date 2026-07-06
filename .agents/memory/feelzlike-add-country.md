@@ -14,8 +14,9 @@ Also required, not in that comment:
 - Frontend transport registry `artifacts/feelzlike/src/data/transport/index.ts`
   — an exhaustive `Record<RegionId, ...>` that THROWS at module load if a key
   is missing. New regions with no curated transport still need a `[]` entry.
-- `artifacts/feelzlike/src/pages/Countries.tsx` — both `FALLBACK_REGIONS` and
-  `PRIMARY_TOWN`.
+- `artifacts/feelzlike/src/components/home/CountryPicker.tsx` — both
+  `FALLBACK_REGIONS` and `PRIMARY_TOWN` (shared by the landing `Welcome.tsx` and
+  the `/countries` page).
 - `artifacts/feelzlike/src/components/AlertSubscribeForm.tsx` — its own hardcoded
   `REGIONS` array (id/nameEn/nameJa/country) drives the powder-alert opt-in
   tickboxes. It is NOT typed against RegionId, so a missing region silently just
@@ -42,7 +43,7 @@ sync set; a full monorepo typecheck is the only reliable way to surface them
   (rebuild decls after codegen), then typecheck artifacts directly with
   `pnpm --filter @workspace/api-server run typecheck` and
   `pnpm --filter @workspace/feelzlike run typecheck`.
-- `FALLBACK_REGIONS` in Countries.tsx is a DELIBERATELY PARTIAL degraded-mode
+- `FALLBACK_REGIONS` in components/home/CountryPicker.tsx is a DELIBERATELY PARTIAL degraded-mode
   safety net (shown only when `/api/regions` fails). It does not list every
   region — do not "fix" it to be exhaustive.
 
