@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 import { track } from "@/lib/analytics";
+import { isStandaloneMode } from "@/lib/registerSW";
 import { readLastTown } from "@/lib/favouriteRegion";
 import { classifyRegionProximity } from "@/lib/regionProximity";
 import { NearYouRegionRow, type SuggestedRegion } from "./NearYouRegionRow";
@@ -367,10 +368,11 @@ export function NearYou() {
     phase === "checking" ||
     phase === "locating" ||
     (phase === "ready" && localQuery.isLoading);
-  // A tap can plausibly succeed for "prompt" (first ask) and "unavailable"
-  // (transient failure). "denied" is intentionally excluded: re-requesting
-  // while hard-blocked re-fails silently, so it gets re-enable guidance instead.
+  // The big primary tap shows for "prompt" (first ask) and "unavailable"
+  // (transient failure). "denied" gets its own inline "try again" in the denied
+  // branch instead, because on iOS the blocked state is often a stale read.
   const showTap = phase === "prompt" || phase === "unavailable";
+  const standalone = isStandaloneMode();
 
   const todayRange: string[] = [];
   if (local?.todayMaxC != null) todayRange.push(`high ${local.todayMaxC}\u00b0`);
@@ -505,6 +507,13 @@ export function NearYou() {
                 allow location in your device settings, or open feelzlike in
                 safari or chrome if you're in an in-app browser
               </p>
+              {standalone ? (
+                <p className="mt-1.5 text-[12px] leading-snug text-slate-500">
+                  still stuck in the home screen app? remove the feelzlike icon
+                  and add it again (use share, then add to home screen) to reset
+                  its location access
+                </p>
+              ) : null}
               <div className="mt-2.5 flex flex-wrap items-center gap-2">
                 <button
                   type="button"

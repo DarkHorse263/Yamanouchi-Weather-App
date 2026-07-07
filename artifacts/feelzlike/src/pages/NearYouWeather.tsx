@@ -25,6 +25,7 @@ import {
 import { HomeFooter } from "@/components/home/HomeFooter";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { track } from "@/lib/analytics";
+import { isStandaloneMode } from "@/lib/registerSW";
 import { PlaceSearch } from "@/components/home/PlaceSearch";
 import { precipSummary } from "@/lib/precip";
 
@@ -303,6 +304,7 @@ export default function NearYouWeather() {
   const nearest = localQuery.data?.nearestRegion ?? null;
   const localCurrent = localQuery.data?.current ?? null;
   const showTap = phase === "prompt" || phase === "unavailable";
+  const standalone = isStandaloneMode();
 
   return (
     <div
@@ -367,6 +369,13 @@ export default function NearYouWeather() {
               location in your device settings, or open feelzlike in safari or
               chrome if you&rsquo;re in an in-app browser
             </p>
+            {standalone ? (
+              <p className="mt-1.5 text-[13px] leading-snug text-slate-500">
+                still stuck in the home screen app? remove the feelzlike icon and
+                add it again (use share, then add to home screen) to reset its
+                location access
+              </p>
+            ) : null}
             <div className="mt-3 flex flex-wrap items-center gap-2">
               <button
                 type="button"
