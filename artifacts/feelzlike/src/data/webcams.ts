@@ -58,43 +58,43 @@ const YAMANOUCHI: Record<string, MountainWebcam[]> = {
   // share the Shiga Kogen Tourism Association's central livecam page -
   // we link each to it so users always get a verified live source.
   "shiga-sun-valley": [
-    { id: "central-sun-valley", mountainId: "shiga-sun-valley", name: "Sun Valley base",            nameJa: "サンバレー ベース",            description: "Entry-level base on the Shiga loop road.",            descriptionJa: "志賀の入口の初心者向けベース",            embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/livecamera/", vantage: "base",   elevation: 1500, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
+    { id: "central-sun-valley", mountainId: "shiga-sun-valley", name: "Sun Valley base",            nameJa: "サンバレー ベース",            description: "Entry-level base on the Shiga loop road.",            descriptionJa: "志賀の入口の初心者向けベース",            embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/live/index.html", vantage: "base",   elevation: 1500, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
   ],
   "shiga-hasuike": [
-    { id: "central-hasuike",    mountainId: "shiga-hasuike",    name: "Hasuike base · Shiga Kogen", nameJa: "蓮池 · 志賀高原センター",        description: "Pondside gateway to the eastern Shiga lift network.", descriptionJa: "蓮池のほとり · 東部リフト網の起点",          embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/livecamera/", vantage: "base",   elevation: 1550, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
+    { id: "central-hasuike",    mountainId: "shiga-hasuike",    name: "Hasuike base · Shiga Kogen", nameJa: "蓮池 · 志賀高原センター",        description: "Pondside gateway to the eastern Shiga lift network.", descriptionJa: "蓮池のほとり · 東部リフト網の起点",          embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/live/index.html", vantage: "base",   elevation: 1550, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
   ],
   "shiga-maruike": [
-    { id: "central-maruike",    mountainId: "shiga-maruike",    name: "Maruike base · Shiga Kogen", nameJa: "丸池 · 志賀高原センター",       description: "Wide intermediate carving on the central Shiga loop.",  descriptionJa: "中央エリアの幅広中級バーン",                embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/livecamera/", vantage: "base",   elevation: 1620, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
+    { id: "central-maruike",    mountainId: "shiga-maruike",    name: "Maruike base · Shiga Kogen", nameJa: "丸池 · 志賀高原センター",       description: "Wide intermediate carving on the central Shiga loop.",  descriptionJa: "中央エリアの幅広中級バーン",                embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/live/index.html", vantage: "base",   elevation: 1620, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
   ],
   "shiga-giant": [
-    { id: "central-giant",      mountainId: "shiga-giant",      name: "Giant slalom course base", nameJa: "ジャイアント大回転コース ベース", description: "Steep central pitches off the loop road.",              descriptionJa: "メインロード沿いの急斜面",                  embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/livecamera/", vantage: "base",   elevation: 1700, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
+    { id: "central-giant",      mountainId: "shiga-giant",      name: "Giant slalom course base", nameJa: "ジャイアント大回転コース ベース", description: "Steep central pitches off the loop road.",              descriptionJa: "メインロード沿いの急斜面",                  embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/live/index.html", vantage: "base",   elevation: 1700, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
   ],
   "shiga-hoppo-bunadaira": [
-    { id: "central-hoppo",      mountainId: "shiga-hoppo-bunadaira", name: "Hoppo Bunadaira mid-mountain", nameJa: "発哺ブナ平 中腹",         description: "Sunny mid-mountain cruisers above the central road.",   descriptionJa: "中腹の日当たり良好なクルーザー",            embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/livecamera/", vantage: "mid",    elevation: 1830, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
+    { id: "central-hoppo",      mountainId: "shiga-hoppo-bunadaira", name: "Hoppo Bunadaira mid-mountain", nameJa: "発哺ブナ平 中腹",         description: "Sunny mid-mountain cruisers above the central road.",   descriptionJa: "中腹の日当たり良好なクルーザー",            embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/live/index.html", vantage: "mid",    elevation: 1830, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
   ],
   "shiga-nishidateyama": [
-    { id: "central-nishidate",  mountainId: "shiga-nishidateyama", name: "Nishidateyama north-face", nameJa: "西館山 北向き斜面",            description: "North-facing carving · holds snow latest in the central area.", descriptionJa: "北向きカービング斜面 · 中央エリア最良の雪持ち", embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/livecamera/", vantage: "mid",    elevation: 1900, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
+    { id: "central-nishidate",  mountainId: "shiga-nishidateyama", name: "Nishidateyama north-face", nameJa: "西館山 北向き斜面",            description: "North-facing carving · holds snow latest in the central area.", descriptionJa: "北向きカービング斜面 · 中央エリア最良の雪持ち", embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/live/index.html", vantage: "mid",    elevation: 1900, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
   ],
   "shiga-higashidateyama": [
-    { id: "central-higashidate", mountainId: "shiga-higashidateyama", name: "Higashidateyama summit", nameJa: "東館山 山頂",                  description: "Central Shiga summit · gondola-served alpine bowls.",  descriptionJa: "中央の山頂 · ゴンドラの高所バーン",          embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/livecamera/", vantage: "summit", elevation: 1994, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
+    { id: "central-higashidate", mountainId: "shiga-higashidateyama", name: "Higashidateyama summit", nameJa: "東館山 山頂",                  description: "Central Shiga summit · gondola-served alpine bowls.",  descriptionJa: "中央の山頂 · ゴンドラの高所バーン",          embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/live/index.html", vantage: "summit", elevation: 1994, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
   ],
   "shiga-terakoya": [
-    { id: "central-terakoya",   mountainId: "shiga-terakoya",   name: "Terakoya · Shiga's highest central", nameJa: "寺子屋 · 中央エリア最高所", description: "Steep mogul faces and powder pockets.",                descriptionJa: "急なコブ斜面とパウダー",                     embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/livecamera/", vantage: "summit", elevation: 2125, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
+    { id: "central-terakoya",   mountainId: "shiga-terakoya",   name: "Terakoya · Shiga's highest central", nameJa: "寺子屋 · 中央エリア最高所", description: "Steep mogul faces and powder pockets.",                descriptionJa: "急なコブ斜面とパウダー",                     embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/live/index.html", vantage: "summit", elevation: 2125, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
   ],
   "shiga-takamagahara": [
-    { id: "central-takamagahara", mountainId: "shiga-takamagahara", name: "Takamagahara plateau", nameJa: "高天ヶ原 プラトー",            description: "Wide intermediate plateau · feeds Terakoya & Ichinose.", descriptionJa: "広い中級プラトー · 寺子屋と一の瀬への接続点", embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/livecamera/", vantage: "mid",    elevation: 2000, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
+    { id: "central-takamagahara", mountainId: "shiga-takamagahara", name: "Takamagahara plateau", nameJa: "高天ヶ原 プラトー",            description: "Wide intermediate plateau · feeds Terakoya & Ichinose.", descriptionJa: "広い中級プラトー · 寺子屋と一の瀬への接続点", embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/live/index.html", vantage: "mid",    elevation: 2000, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
   ],
   "shiga-tannenomori-okojo": [
-    { id: "central-tannenomori", mountainId: "shiga-tannenomori-okojo", name: "Tannenomori Okojo · tree zone", nameJa: "タンネの森オコジョ · 樹林帯", description: "Tree-lined family zone between Takamagahara and Yakebitai.", descriptionJa: "高天ヶ原と焼額の間のツリー系ファミリーゾーン", embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/livecamera/", vantage: "mid",    elevation: 1800, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
+    { id: "central-tannenomori", mountainId: "shiga-tannenomori-okojo", name: "Tannenomori Okojo · tree zone", nameJa: "タンネの森オコジョ · 樹林帯", description: "Tree-lined family zone between Takamagahara and Yakebitai.", descriptionJa: "高天ヶ原と焼額の間のツリー系ファミリーゾーン", embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/live/index.html", vantage: "mid",    elevation: 1800, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
   ],
   "shiga-ichinose-family": [
-    { id: "central-ichinose-family", mountainId: "shiga-ichinose-family", name: "Ichinose Family base", nameJa: "一の瀬ファミリー ベース",  description: "Central Shiga gateway - easiest access to the lift network.", descriptionJa: "志賀中心部 · リフトネット最大の起点",       embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/livecamera/", vantage: "base",   elevation: 1850, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
+    { id: "central-ichinose-family", mountainId: "shiga-ichinose-family", name: "Ichinose Family base", nameJa: "一の瀬ファミリー ベース",  description: "Central Shiga gateway - easiest access to the lift network.", descriptionJa: "志賀中心部 · リフトネット最大の起点",       embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/live/index.html", vantage: "base",   elevation: 1850, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
   ],
   "shiga-ichinose-diamond": [
-    { id: "central-ichinose-diamond", mountainId: "shiga-ichinose-diamond", name: "Ichinose Diamond race course", nameJa: "一の瀬ダイヤモンド レースコース", description: "Steep race-spec pitches · home of the FIS-grade Diamond course.", descriptionJa: "急傾斜のレース仕様 · FIS規格ダイヤモンドコース", embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/livecamera/", vantage: "mid",    elevation: 1900, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
+    { id: "central-ichinose-diamond", mountainId: "shiga-ichinose-diamond", name: "Ichinose Diamond race course", nameJa: "一の瀬ダイヤモンド レースコース", description: "Steep race-spec pitches · home of the FIS-grade Diamond course.", descriptionJa: "急傾斜のレース仕様 · FIS規格ダイヤモンドコース", embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/live/index.html", vantage: "mid",    elevation: 1900, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
   ],
   "shiga-ichinose-yamanokami": [
-    { id: "central-ichinose-yamanokami", mountainId: "shiga-ichinose-yamanokami", name: "Ichinose Yama-no-kami annex", nameJa: "一の瀬山の神 付帯エリア", description: "Quiet Ichinose annex · short laps for warm-ups and lessons.", descriptionJa: "静かな一の瀬の隣接エリア · ウォームアップとレッスン", embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/livecamera/", vantage: "base",   elevation: 1850, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
+    { id: "central-ichinose-yamanokami", mountainId: "shiga-ichinose-yamanokami", name: "Ichinose Yama-no-kami annex", nameJa: "一の瀬山の神 付帯エリア", description: "Quiet Ichinose annex · short laps for warm-ups and lessons.", descriptionJa: "静かな一の瀬の隣接エリア · ウォームアップとレッスン", embedType: "external", pageUrl: "https://www.shigakogen.gr.jp/english/live/index.html", vantage: "base",   elevation: 1850, source: "Shiga Kogen Tourism Association", verifiedAt: VERIFIED },
   ],
 
   // ─── East Shiga - Prince Hotels operates Yakebitaiyama livecams ───
@@ -108,7 +108,7 @@ const YAMANOUCHI: Record<string, MountainWebcam[]> = {
 
   // ─── Highest lift-served zone - operated by Yokoteyama/Shibutoge resort ───
   "shiga-kumanoyu": [
-    { id: "kumanoyu-base",      mountainId: "shiga-kumanoyu",   name: "Kumanoyu base", nameJa: "熊の湯 ベース", description: "North-facing high alpine · long-season natural snow.", descriptionJa: "北向き高所 · 自然雪のロングシーズン", embedType: "external", pageUrl: "https://www.kumanoyu.com/", vantage: "base", elevation: 2000, source: "Kumanoyu Ski Area", verifiedAt: VERIFIED },
+    { id: "kumanoyu-base",      mountainId: "shiga-kumanoyu",   name: "Kumanoyu base", nameJa: "熊の湯 ベース", description: "North-facing high alpine · long-season natural snow.", descriptionJa: "北向き高所 · 自然雪のロングシーズン", embedType: "external", pageUrl: "https://www.kumanoyu.co.jp/", vantage: "base", elevation: 2000, source: "Kumanoyu Ski Area", verifiedAt: VERIFIED },
   ],
   "shiga-yokoteyama": [
     { id: "yokoteyama-summit",  mountainId: "shiga-yokoteyama", name: "Yokoteyama summit · 2,305m", nameJa: "横手山 山頂 · 標高2,305m", description: "Japan's highest lift-served summit · alpine views to the JP Alps.", descriptionJa: "日本最高所の索道山頂 · 日本アルプスを望む", embedType: "external", pageUrl: "https://yokoteyama-shibutoge.com/livecam/", vantage: "summit", elevation: 2305, source: "Yokoteyama / Shibutoge Resort", verifiedAt: VERIFIED },
@@ -149,10 +149,10 @@ const IIYAMA_DORMANT: Record<string, MountainWebcam[]> = {
       description: "Tree-run paradise · linked with Tangram.",
       descriptionJa: "ツリーランの聖地 · タングラムと連結",
       embedType: "external",
-      pageUrl: "https://www.madarao.jp/ski/en/livecamera/",
+      pageUrl: "https://madaraokogen.com/madarao-webcam/",
       vantage: "base",
       elevation: 1000,
-      source: "Madarao Kogen Resort",
+      source: "madaraokogen.com (local guide)",
       verifiedAt: VERIFIED,
     },
     {
@@ -161,10 +161,10 @@ const IIYAMA_DORMANT: Record<string, MountainWebcam[]> = {
       name: "Madarao summit",
       nameJa: "斑尾山頂",
       embedType: "external",
-      pageUrl: "https://www.madarao.jp/ski/en/livecamera/",
+      pageUrl: "https://madaraokogen.com/madarao-webcam/",
       vantage: "summit",
       elevation: 1382,
-      source: "Madarao Kogen Resort",
+      source: "madaraokogen.com (local guide)",
       verifiedAt: VERIFIED,
     },
   ],
@@ -177,10 +177,10 @@ const IIYAMA_DORMANT: Record<string, MountainWebcam[]> = {
       description: "Family-friendly · interconnected with Madarao.",
       descriptionJa: "ファミリー向け · 斑尾と接続",
       embedType: "external",
-      pageUrl: "https://www.tangram.jp/winter/livecamera/",
+      pageUrl: "https://madaraokogen.com/madarao-webcam/",
       vantage: "base",
       elevation: 950,
-      source: "Hotel Tangram Resort",
+      source: "madaraokogen.com (local guide)",
       verifiedAt: VERIFIED,
     },
   ],
@@ -193,10 +193,10 @@ const IIYAMA_DORMANT: Record<string, MountainWebcam[]> = {
       description: "Quieter local mountain · long groomers.",
       descriptionJa: "地元密着の静かな山 · ロングコース",
       embedType: "external",
-      pageUrl: "https://www.togari.jp/livecamera/",
+      pageUrl: "https://steep.jp/en/ski-area/togarionsen/",
       vantage: "base",
       elevation: 600,
-      source: "Togari Onsen Ski Resort",
+      source: "steep.jp (ski media)",
       verifiedAt: VERIFIED,
     },
   ],

@@ -68,7 +68,7 @@ interface ResortProfile {
  */
 const SHIGA_KOGEN_DEFAULTS: ResortProfile = {
   liftStatusUrl: "https://www.shigakogen-ski.or.jp/",
-  webcamUrl: "https://www.shigakogen.gr.jp/english/livecamera/",
+  webcamUrl: "https://www.shigakogen.gr.jp/english/live/index.html",
 };
 
 /**
@@ -112,16 +112,16 @@ const PROFILES: Record<string, ResortProfile> = {
     webcamUrl: "https://www.ryuoo.com/en/winter/livecamera/",
   },
   "xjam-takaifuji": {
-    liftStatusUrl: "https://kitashiga.net/winter/",
-    webcamUrl: "https://kitashiga.net/livecam/",
+    liftStatusUrl: "https://www.kitashiga.co.jp/",
+    webcamUrl: "https://www.kitashiga.co.jp/livecam/",
   },
   "yomase-onsen": {
-    liftStatusUrl: "https://kitashiga.net/winter/",
-    webcamUrl: "https://kitashiga.net/livecam/",
+    liftStatusUrl: "https://www.kitashiga.co.jp/",
+    webcamUrl: "https://www.kitashiga.co.jp/livecam/",
   },
   "kita-shiga-komaruyama": {
-    liftStatusUrl: "https://kitashiga.net/winter/",
-    webcamUrl: "https://kitashiga.net/livecam/",
+    liftStatusUrl: "https://www.kitashiga.co.jp/",
+    webcamUrl: "https://www.kitashiga.co.jp/livecam/",
   },
 };
 
@@ -248,7 +248,7 @@ export default function ResortDetail() {
     {
       label: t("Nagano road conditions", "長野県道路状況"),
       detail: t("Nagano Prefecture live road & chain regulation map", "長野県ライブ道路・チェーン規制マップ"),
-      href: "https://www.pref.nagano.lg.jp/douroka/",
+      href: "https://www.pref.nagano.lg.jp/michikanri/infra/doro/joho/hiroba/index.html",
       icon: Map,
     },
   ];

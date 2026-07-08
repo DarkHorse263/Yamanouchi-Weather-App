@@ -95,7 +95,7 @@ export const VICTORIAS_HIGH_COUNTRY_TRANSPORT: TransportProviderList = [
     leg: "to_town",
     operator: "Hotham Bus",
     phone: null,
-    website: "https://www.hothambus.com",
+    website: "https://www.hothambus.com.au",
     route_summary:
       "Direct Melbourne to Mt Hotham winter coach with pickups along the Hume Freeway and the Great Alpine Road.",
     regions: ["victorias-high-country"],

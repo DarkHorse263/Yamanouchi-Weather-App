@@ -3,7 +3,7 @@
  * console (dev-mode fallback) so the rest of the alert flow is testable
  * without provisioning a real email account.
  *
- * From address comes from `ALERT_FROM_EMAIL` (default: `alerts@feelzlike.app`).
+ * From address comes from `ALERT_FROM_EMAIL` (default: `alerts@feelzlike.com`).
  * NOTE: Resend requires the from-domain to be verified before it'll send to
  * arbitrary addresses; until then their `onboarding@resend.dev` only delivers
  * to the account owner's email.

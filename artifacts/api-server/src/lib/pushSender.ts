@@ -20,7 +20,7 @@ function ensureConfigured(): boolean {
     configured = false;
     return false;
   }
-  const contact = (process.env.ALERT_FROM_EMAIL ?? "alerts@feelzlike.app").replace(/^.*<|>$/g, "");
+  const contact = (process.env.ALERT_FROM_EMAIL ?? "alerts@feelzlike.com").replace(/^.*<|>$/g, "");
   const mailto = contact.startsWith("mailto:") ? contact : `mailto:${contact}`;
   webpush.setVapidDetails(mailto, pub, priv);
   configured = true;

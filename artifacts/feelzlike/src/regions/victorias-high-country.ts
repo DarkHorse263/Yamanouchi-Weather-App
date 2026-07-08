@@ -150,7 +150,7 @@ export const victoriasHighCountryRegion: RegionConfig = {
   },
   roadsSource: {
     label: "VicTraffic (VicRoads)",
-    url: "https://traffic.vicroads.vic.gov.au/",
+    url: "https://traffic.transport.vic.gov.au/",
     dataAvailable: false,
   },
 };

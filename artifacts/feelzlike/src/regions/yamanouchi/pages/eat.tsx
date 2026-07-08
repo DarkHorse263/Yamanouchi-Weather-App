@@ -11,7 +11,7 @@ type FilterType = "all" | "restaurant" | "bar" | "cafe";
 const ON_MOUNTAIN = ["Shiga Kogen", "Ryuoo"];
 
 const MOUNTAIN_AREAS = [
-  { region: "Shiga Kogen", label: "Shiga Kogen", labelJa: "志賀高原", desc: "21 linked ski areas", descJa: "21スキー場連結", url: "https://www.shigakogen.co.jp/english/" },
+  { region: "Shiga Kogen", label: "Shiga Kogen", labelJa: "志賀高原", desc: "21 linked ski areas", descJa: "21スキー場連結", url: "https://www.shigakogen.gr.jp/english/index.html" },
   { region: "Ryuoo", label: "Ryuoo Ski Park", labelJa: "竜王スキーパーク", desc: "Japan's highest gondola", descJa: "日本最高所のゴンドラ", url: "https://www.ryuoo.com/en/" },
 ];
 

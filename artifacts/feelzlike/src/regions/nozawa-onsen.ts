@@ -60,7 +60,7 @@ export const nozawaOnsenRegion: RegionConfig = {
   footer: "v0.3 · feelzlike",
   tourismLinks: [
     { category: "Tourism", categoryJa: "観光", label: "Nozawa Onsen Tourist Association", labelJa: "野沢温泉観光協会", url: "https://nozawakanko.jp/" },
-    { category: "Tourism", categoryJa: "観光", label: "Go Nagano · Nozawa Onsen", labelJa: "Go Nagano 野沢温泉", url: "https://www.go-nagano.net/en/destination/nozawa-onsen" },
+    { category: "Tourism", categoryJa: "観光", label: "Go Nagano · Nozawa Onsen", labelJa: "Go Nagano 野沢温泉", url: "https://www.go-nagano.net/en/trip-idea/id17481" },
     { category: "Resorts", categoryJa: "スキー場", label: "Nozawa Onsen Snow Resort", labelJa: "野沢温泉スキー場", url: "https://www.nozawaski.com/" },
     { category: "Onsen", categoryJa: "温泉", label: "Soto-yu (13 free public bathhouses)", labelJa: "外湯めぐり (共同浴場13軒)", url: "https://nozawakanko.jp/onsen/" },
     // Backcountry safety · JAN Northern Nagano bulletin covers the

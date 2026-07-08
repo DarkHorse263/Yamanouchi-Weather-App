@@ -173,7 +173,7 @@ export const iiyamaRegion: RegionConfig = {
   tourismLinks: [
     { category: "Tourism", categoryJa: "観光", label: "Shin'etsu Shizenkyo (Iiyama region tourism)", labelJa: "信越自然郷", url: "https://shinetsu-shizenkyo.com/" },
     { category: "Tourism", categoryJa: "観光", label: "Iiyama City Tourist Bureau", labelJa: "飯山市観光局", url: "https://www.iiyama-ouendan.net/" },
-    { category: "Tourism", categoryJa: "観光", label: "Go Nagano · North Nagano", labelJa: "Go Nagano 北信", url: "https://www.go-nagano.net/en/area/north-nagano" },
+    { category: "Tourism", categoryJa: "観光", label: "Go Nagano · North Nagano", labelJa: "Go Nagano 北信", url: "https://db.go-nagano.net/en/topics_detail12/id=19931" },
     { category: "Resorts", categoryJa: "スキー場", label: "Madarao Mountain Resort", labelJa: "斑尾高原スキー場", url: "https://www.madarao.jp/" },
     { category: "Resorts", categoryJa: "スキー場", label: "Tangram Ski Circus", labelJa: "タングラムスキーサーカス", url: "https://www.tangram.jp/ski/" },
     { category: "Resorts", categoryJa: "スキー場", label: "Togari Onsen Madarao", labelJa: "戸狩温泉スキー場", url: "https://www.togari.jp/" },

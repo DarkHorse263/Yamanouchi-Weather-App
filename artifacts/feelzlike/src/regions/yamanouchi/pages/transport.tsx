@@ -375,7 +375,7 @@ function SelfDriveBlock({ t, accent }: { t: T; accent: "blue" | "emerald" }) {
         </p>
         <div className="space-y-2">
           {[
-            { name: "Toyota Rent a Car", url: "https://rent.toyota.co.jp/en/" },
+            { name: "Toyota Rent a Car", url: "https://rent.toyota.co.jp/eng/" },
             { name: "Nippon Rent-A-Car", url: "https://www.nipponrentacar.co.jp/english/" },
             { name: "Times Car Rental", url: "https://rental.timescar.com/en/" },
             { name: "Nissan Rent a Car", url: "https://nissan-rentacar.com/english/" },
@@ -655,7 +655,7 @@ function UpToShigaSummerBlock({ t }: { t: T }) {
           </div>
         </div>
         <a
-          href="https://www.nagadenbus.co.jp/local/regular/shiga.php"
+          href="https://shigakogen-ski.or.jp/english/bus/"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 mt-2"
@@ -794,7 +794,7 @@ function CarParkPlaceholderBlock({ t }: { t: T }) {
         </div>
       </div>
       <a
-        href="https://www.shigakogen.gr.jp/english/"
+        href="https://www.shigakogen.gr.jp/english/index.html"
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center justify-between w-full bg-blue-50 rounded-lg px-3 py-2.5"

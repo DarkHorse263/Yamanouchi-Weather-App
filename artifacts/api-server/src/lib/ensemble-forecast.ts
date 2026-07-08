@@ -218,7 +218,7 @@ async function fetchMetNorway(q: EnsembleQuery): Promise<{
   source: EnsembleSourceMeta;
 }> {
   // MET Norway requires a descriptive User-Agent identifying the app + contact.
-  const ua = "feelzlike/1.0 (https://feelzlike.app) mountain-weather";
+  const ua = "feelzlike/1.0 (https://feelzlike.com) mountain-weather";
   const url = `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${q.latitude}&lon=${q.longitude}&altitude=${Math.round(q.elevation)}`;
   const tz = q.timezone ?? "UTC";
 

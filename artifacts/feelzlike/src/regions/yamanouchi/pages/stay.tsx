@@ -19,13 +19,13 @@ type FilterType = "all" | "hotel" | "ryokan" | "guesthouse";
 const ON_MOUNTAIN = ["Shiga Kogen", "Ryuoo", "Yomase"];
 
 const WINTER_MOUNTAIN_AREAS = [
-  { region: "Shiga Kogen", label: "Shiga Kogen", labelJa: "志賀高原", desc: "21 linked ski areas · ~100 hotels", descJa: "21スキー場連結 · 約100軒", url: "https://www.shigakogen.co.jp/english/" },
+  { region: "Shiga Kogen", label: "Shiga Kogen", labelJa: "志賀高原", desc: "21 linked ski areas · ~100 hotels", descJa: "21スキー場連結 · 約100軒", url: "https://www.shigakogen.gr.jp/english/index.html" },
   { region: "Ryuoo", label: "Ryuoo Ski Park", labelJa: "竜王スキーパーク", desc: "Japan's highest gondola", descJa: "日本最高所のゴンドラ", url: "https://www.ryuoo.com/en/" },
   { region: "Yomase", label: "Yomase Onsen Ski Area", labelJa: "夜間瀬温泉スキー場", desc: "Family ski area with onsen village", descJa: "温泉街のファミリースキー場", url: null },
 ];
 
 const GREEN_MOUNTAIN_AREAS = [
-  { region: "Shiga Kogen", label: "Shiga Kogen", labelJa: "志賀高原", desc: "Highland hiking & alpine nature · ~100 hotels", descJa: "高原ハイキングと高山自然 · 約100軒", url: "https://www.shigakogen.co.jp/english/" },
+  { region: "Shiga Kogen", label: "Shiga Kogen", labelJa: "志賀高原", desc: "Highland hiking & alpine nature · ~100 hotels", descJa: "高原ハイキングと高山自然 · 約100軒", url: "https://www.shigakogen.gr.jp/english/index.html" },
   { region: "Ryuoo", label: "Ryuoo Mountain Park", labelJa: "竜王マウンテンパーク", desc: "SORA Terrace & cloud sea views", descJa: "SORAテラスと雲海", url: "https://www.ryuoo.com/en/" },
   { region: "Yomase", label: "Yomase Onsen", labelJa: "夜間瀬温泉", desc: "Quiet onsen village in the mountains", descJa: "山あいの静かな温泉村", url: null },
 ];

@@ -20,7 +20,7 @@ const BASE = "https://www.jma.go.jp/bosai/amedas";
 const TABLE_URL = `${BASE}/const/amedastable.json`;
 const LATEST_TIME_URL = `${BASE}/data/latest_time.txt`;
 const mapUrl = (ts: string) => `${BASE}/data/map/${ts}.json`;
-const UA = "feelzlike/1.0 (mountain-weather-pwa; contact: hello@feelzlike.app)";
+const UA = "feelzlike/1.0 (mountain-weather-pwa; contact: hello@feelzlike.com)";
 
 // Japan bounding box - lets every caller short-circuit before doing any AMeDAS
 // work for non-Japanese coordinates (AMeDAS only covers Japan).

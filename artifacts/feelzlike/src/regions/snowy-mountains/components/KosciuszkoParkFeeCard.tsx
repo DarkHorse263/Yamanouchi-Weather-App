@@ -29,7 +29,7 @@ interface Props {
 }
 
 const NPWS_FEES_URL =
-  "https://www.nationalparks.nsw.gov.au/visit-a-park/parks/kosciuszko-national-park/park-fees";
+  "https://www.nationalparks.nsw.gov.au/passes-and-fees/kosciuszko-national-park";
 const PARKNPAY_URL = "https://www.parknpay.com.au/";
 
 export function KosciuszkoParkFeeCard({ variant, t }: Props) {

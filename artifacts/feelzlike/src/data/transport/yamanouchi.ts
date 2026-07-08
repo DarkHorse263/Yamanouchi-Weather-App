@@ -21,7 +21,7 @@ export const YAMANOUCHI_TRANSPORT: TransportProviderList = [
       "Nagano Station → Yudanaka Station via the Nagaden Yudanaka line. The Limited Express \"Yukemuri\" / \"Snow Monkey\" makes the trip in around 45-50 minutes; local services run more often.",
     route_summary_local:
       "長野駅から湯田中駅まで長野電鉄湯田中線で約45〜50分（特急ゆけむり／スノーモンキー）。普通電車はより頻繁に運行。",
-    schedule_url: "https://www.nagaden-net.co.jp/timetable/",
+    schedule_url: "https://www.snowmonkeyresorts.com/access/nagano-dentetsu-line-timetable/",
     regions: ["yamanouchi"],
   },
   {

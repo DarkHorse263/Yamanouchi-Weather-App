@@ -47,7 +47,7 @@ export const yamanouchiRegion: RegionConfig = {
     { id: "shiga-tannenomori-okojo",   name: "Tannenomori Okojo",         nameJa: "タンネの森オコジョ",    elevationM: 1800, lat: 36.7980, lng: 138.5210, blurb: "Tree-lined family zone between Takamagahara and Yakebitai",       blurbJa: "高天ヶ原と焼額の間のツリー系ファミリーゾーン",       websiteUrl: "https://www.shigakogen-ski.or.jp/", parentId: "shiga-kogen", beginner_friendly: true, kids_lessons: true },
 
     // ─── Ichinose cluster ─────────────────────────────────────────
-    { id: "shiga-ichinose-family",     name: "Ichinose Family",           nameJa: "一の瀬ファミリー",      elevationM: 1850, lat: 36.7972, lng: 138.5138, blurb: "Central Shiga base · easiest gateway to the lift system",          blurbJa: "志賀中心の拠点 · リフト網最大の起点",                websiteUrl: "https://shigakogen.gr.jp/ichinose-family/", parentId: "shiga-kogen", beginner_friendly: true, kids_lessons: true },
+    { id: "shiga-ichinose-family",     name: "Ichinose Family",           nameJa: "一の瀬ファミリー",      elevationM: 1850, lat: 36.7972, lng: 138.5138, blurb: "Central Shiga base · easiest gateway to the lift system",          blurbJa: "志賀中心の拠点 · リフト網最大の起点",                websiteUrl: "https://www.shigakogen-ski.or.jp/lift/ichinosefamily/", parentId: "shiga-kogen", beginner_friendly: true, kids_lessons: true },
     { id: "shiga-ichinose-diamond",    name: "Ichinose Diamond",          nameJa: "一の瀬ダイヤモンド",    elevationM: 1900, lat: 36.7985, lng: 138.5150, blurb: "Steep race-spec pitches · home of the FIS-grade Diamond course",  blurbJa: "急傾斜のレース仕様 · FIS規格ダイヤモンドコース",    websiteUrl: "https://www.shigakogen-ski.or.jp/", parentId: "shiga-kogen", expert_only: true },
     { id: "shiga-ichinose-yamanokami", name: "Ichinose Yama-no-kami",     nameJa: "一の瀬山の神",          elevationM: 1850, lat: 36.7960, lng: 138.5130, blurb: "Quiet Ichinose annex · short laps for warm-ups and lessons",      blurbJa: "静かな一の瀬の隣接エリア · ウォームアップとレッスン", websiteUrl: "https://www.shigakogen-ski.or.jp/", parentId: "shiga-kogen", beginner_friendly: true, kids_lessons: true },
 
@@ -56,7 +56,7 @@ export const yamanouchiRegion: RegionConfig = {
     { id: "shiga-okushiga-kogen",      name: "Okushiga Kogen",            nameJa: "奥志賀高原",            elevationM: 1960, lat: 36.8380, lng: 138.5480, blurb: "Quietest, longest groomers · powder pocket of Shiga",             blurbJa: "志賀最奥 · 静かなロングクルーザーとパウダー",        websiteUrl: "https://www.okushiga.jp/", parentId: "shiga-kogen", backcountry_access: true },
 
     // ─── Kumanoyu / Yokoteyama / Shibutoge - highest lift-served in Japan ───
-    { id: "shiga-kumanoyu",            name: "Kumanoyu",                  nameJa: "熊の湯",                elevationM: 2000, lat: 36.8107, lng: 138.5248, blurb: "North-facing high alpine · long-season natural snow",             blurbJa: "北向き高所 · 自然雪のロングシーズン",               websiteUrl: "https://www.kumanoyu.com/", parentId: "shiga-kogen" },
+    { id: "shiga-kumanoyu",            name: "Kumanoyu",                  nameJa: "熊の湯",                elevationM: 2000, lat: 36.8107, lng: 138.5248, blurb: "North-facing high alpine · long-season natural snow",             blurbJa: "北向き高所 · 自然雪のロングシーズン",               websiteUrl: "https://www.kumanoyu.co.jp/", parentId: "shiga-kogen" },
     { id: "shiga-yokoteyama",          name: "Yokoteyama",                nameJa: "横手山",                elevationM: 2305, lat: 36.7159, lng: 138.5450, blurb: "Japan's highest lift-served summit · alpine views to the JP Alps", blurbJa: "日本最高所の索道山頂 · 日本アルプスを望む",         websiteUrl: "https://yokoteyama-shibutoge.com/", parentId: "shiga-kogen", expert_only: true, backcountry_access: true },
     { id: "shiga-shibutoge",           name: "Shibutoge",                 nameJa: "渋峠",                  elevationM: 2172, lat: 36.7044, lng: 138.5364, blurb: "Highest skiable pass on Honshu · sea-of-clouds backdrop",          blurbJa: "本州最高所の峠 · 雲海の眺望",                       websiteUrl: "https://yokoteyama-shibutoge.com/", parentId: "shiga-kogen", expert_only: true, backcountry_access: true },
 
@@ -130,7 +130,7 @@ export const yamanouchiRegion: RegionConfig = {
   ],
   footer: "v0.3 · feelzlike",
   tourismLinks: [
-    { category: "Tourism", categoryJa: "観光", label: "Go Nagano - Yamanouchi", labelJa: "Go Nagano 山ノ内", url: "https://www.go-nagano.net/en/destination/yamanouchi" },
+    { category: "Tourism", categoryJa: "観光", label: "Go Nagano - Yamanouchi", labelJa: "Go Nagano 山ノ内", url: "https://www.go-nagano.net/en/trip-idea/id16508" },
     { category: "Tourism", categoryJa: "観光", label: "Snow Monkey Resorts - Visitor Guide", labelJa: "スノーモンキーリゾーツ", url: "https://www.snowmonkeyresorts.com/" },
     { category: "Tourism", categoryJa: "観光", label: "Yamanouchi Town Tourism Association", labelJa: "山ノ内町観光連盟", url: "https://www.info-yamanouchi.net/" },
     { category: "Attractions", categoryJa: "観光地", label: "Jigokudani Yaen-koen (Snow Monkey Park)", labelJa: "地獄谷野猿公苑", url: "https://jigokudani-yaenkoen.co.jp/" },

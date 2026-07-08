@@ -20,7 +20,7 @@
 // METAR outage degrades to "no override", it never breaks the weather response.
 
 const ENDPOINT = "https://aviationweather.gov/api/data/metar";
-const UA = "feelzlike/1.0 (mountain-weather-pwa; contact: hello@feelzlike.app)";
+const UA = "feelzlike/1.0 (mountain-weather-pwa; contact: hello@feelzlike.com)";
 
 // Curated airport stations near the NZ towns/regions the app covers. Only stations
 // genuinely co-located with a town can produce an override (see the gates below);
