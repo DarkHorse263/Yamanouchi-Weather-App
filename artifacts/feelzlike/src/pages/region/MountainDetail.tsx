@@ -258,7 +258,7 @@ export function MountainDetail() {
             <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-3">
               <BigStat
                 icon={Snowflake}
-                label={t("Snow depth", "積雪")}
+                label={t("Snow depth · model", "積雪 · 予測値")}
                 value={
                   current.snowDepth !== null && current.snowDepth !== undefined
                     ? `${Math.round(current.snowDepth)}`

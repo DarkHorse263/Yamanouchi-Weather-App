@@ -218,7 +218,7 @@ export default function LocationDetail() {
     { label: "Wind", value: `${current.windSpeed} km/h${current.windDirectionCompass ? ` ${current.windDirectionCompass}` : ""}`, icon: Navigation },
     ...(current.windGust ? [{ label: "Gusts", value: `${current.windGust} km/h`, icon: Wind }] : []),
     { label: "Humidity", value: `${current.humidity}%`, icon: Droplets },
-    { label: "Snow depth", value: current.snowDepth != null ? `${current.snowDepth} cm` : "-", icon: Snowflake },
+    { label: "Snow depth · model", value: current.snowDepth != null ? `${current.snowDepth} cm` : "-", icon: Snowflake },
     ...(snow24h != null ? [{ label: "Snow next 24h", value: `${snow24h.toFixed(1)} cm`, icon: CloudSnow }] : []),
     ...(current.dewpoint !== undefined ? [{ label: "Dew point", value: formatTemp(current.dewpoint), icon: Droplets }] : []),
     ...(current.pressure !== undefined ? [{ label: "Pressure", value: `${current.pressure} hPa`, icon: Gauge }] : []),
@@ -459,7 +459,11 @@ export default function LocationDetail() {
           thresholds={POWDER_THRESHOLDS_AU}
           skiability={{
             seasonOpen: isLiftSeasonOpen(REGION_COUNTRY[region.id]),
-            snowDepthCm: hasLiveLiftStatus ? current.snowDepth : undefined,
+            // Model depth is safe to surface: with snowDepthSource "model" it
+            // can only inform ("Base ~Xcm · check resort"), never force a
+            // false "no skiable base" (models are blind to snowmaking).
+            snowDepthCm: current.snowDepth,
+            snowDepthSource: "model",
             liveStatusKnown: hasLiveLiftStatus,
             actualLiftsOpen: hasLiveLiftStatus ? liftData?.liftsOpen : undefined,
             actualTotalLifts: liftData?.totalLifts,
@@ -885,7 +889,8 @@ export default function LocationDetail() {
               hourly={hourly as any}
               sectionNumber=""
               seasonOpen={isLiftSeasonOpen(REGION_COUNTRY[region.id])}
-              snowDepthCm={hasLiveLiftStatus ? current.snowDepth : undefined}
+              snowDepthCm={current.snowDepth}
+              snowDepthSource="model"
               liveStatusKnown={hasLiveLiftStatus}
               actualLiftsOpen={hasLiveLiftStatus ? liftData?.liftsOpen : undefined}
               actualTotalLifts={liftData?.totalLifts}

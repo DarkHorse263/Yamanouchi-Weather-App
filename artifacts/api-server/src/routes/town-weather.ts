@@ -307,7 +307,8 @@ function pickHourly(h: { time: string[]; [k: string]: unknown }): Array<Record<s
     precipitationProbability: numOrNull(arr("precipitation_probability")[i]),
     precipitation: numOrNull(arr("precipitation")[i]),
     snowfall: numOrNull(arr("snowfall")[i]),
-    snowDepth: numOrNull(arr("snow_depth")[i]),
+    // Open-Meteo snow_depth is metres; serve CM (app-wide canonical unit).
+    snowDepth: (() => { const m = numOrNull(arr("snow_depth")[i]); return m == null ? null : Math.round(m * 100); })(),
     weatherCode: numOrNull(arr("weather_code")[i]),
     windSpeed: numOrNull(arr("wind_speed_10m")[i]),
     uvIndex: numOrNull(arr("uv_index")[i]),

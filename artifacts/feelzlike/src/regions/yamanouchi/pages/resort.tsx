@@ -204,7 +204,7 @@ export default function ResortDetail() {
       : []),
     { label: t("Humidity", "湿度"), value: `${current.humidity}%`, icon: Droplets },
     {
-      label: t("Snow depth", "積雪"),
+      label: t("Snow depth · model", "積雪 · 予測値"),
       value: current.snowDepth != null ? `${current.snowDepth} cm` : "-",
       icon: Snowflake,
       accent: "snow",

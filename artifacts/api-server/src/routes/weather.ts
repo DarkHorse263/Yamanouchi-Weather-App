@@ -421,7 +421,14 @@ async function fetchLocationWeather(location: LocationConfig, snowElevationM?: n
       ? bomCloudToDescription(bomCloud, bomWeather, om?.current?.weather_code)
       : getWeatherDescription(om?.current?.weather_code ?? 0),
     isDay: om?.current?.is_day === 1,
-    snowDepth: om?.current?.snow_depth ?? 0,
+    // Open-Meteo current.snow_depth is in METRES; the app's canonical snow
+    // depth unit is CM (UI labels, NO_SNOW_CM gate, JP snow_depth_cm all cm).
+    // Unknown depth is OMITTED (undefined), never coerced to 0 - a confident
+    // zero falsely reads as "no skiable base" downstream (skiSeason contract:
+    // null/undefined = unknown, never forces closure).
+    snowDepth: typeof om?.current?.snow_depth === "number"
+      ? Math.round(om.current.snow_depth * 100)
+      : undefined,
     precipitation: om?.current?.precipitation ?? 0,
     cloudCover: om?.current?.cloud_cover ?? 0,
     visibility: (() => { const v = safeParseFloat(bomVis); return v !== undefined ? v * 1000 : (om ? 10000 : undefined); })(),

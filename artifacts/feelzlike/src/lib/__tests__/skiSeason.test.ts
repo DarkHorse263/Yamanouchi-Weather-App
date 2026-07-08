@@ -79,14 +79,29 @@ test("op-status: live feed with lifts open wins over a model snow read of 0", ()
   );
 });
 
-test("op-status: no live feed + known near-zero snow -> no_snow", () => {
+test("op-status: no live feed + known near-zero REPORTED snow -> no_snow", () => {
   assert.equal(
-    computeLiftOperationStatus({ seasonOpen: true, snowDepthCm: 0 }),
+    computeLiftOperationStatus({ seasonOpen: true, snowDepthCm: 0, snowDepthSource: "reported" }),
     "no_snow",
   );
   assert.equal(
-    computeLiftOperationStatus({ seasonOpen: true, snowDepthCm: 1.9 }),
+    computeLiftOperationStatus({ seasonOpen: true, snowDepthCm: 1.9, snowDepthSource: "reported" }),
     "no_snow",
+  );
+});
+
+test("op-status: MODEL near-zero snow never forces no_snow (snowmaking-blind)", () => {
+  // Weather models cannot see machine-made base - mid-season AU resorts run
+  // lifts on snowmaking while the model reads ~0. Model depth must never
+  // assert a closure; only a reported figure may. Default source is "model"
+  // so a forgetful caller fails safe.
+  assert.equal(
+    computeLiftOperationStatus({ seasonOpen: true, snowDepthCm: 0, snowDepthSource: "model" }),
+    "operating",
+  );
+  assert.equal(
+    computeLiftOperationStatus({ seasonOpen: true, snowDepthCm: 0 }),
+    "operating",
   );
 });
 
@@ -106,7 +121,7 @@ test("op-status: unknown snow (null/undefined) never forces a closure", () => {
 test("op-status: a total-lift count with unknown open count falls back to snow", () => {
   // totalLifts known but liftsOpen null = not actionable; defer to snow rule.
   assert.equal(
-    computeLiftOperationStatus({ seasonOpen: true, snowDepthCm: 0, actualLiftsOpen: null, actualTotalLifts: 8 }),
+    computeLiftOperationStatus({ seasonOpen: true, snowDepthCm: 0, snowDepthSource: "reported", actualLiftsOpen: null, actualTotalLifts: 8 }),
     "no_snow",
   );
 });
@@ -120,9 +135,29 @@ test("skiable-now: off-season -> off_season", () => {
   );
 });
 
-test("skiable-now: known near-zero base -> no_base (the fresh-snow-no-base case)", () => {
-  assert.deepEqual(deriveSkiableNowRead({ seasonOpen: true, snowDepthCm: 0 }), { kind: "no_base" });
-  assert.deepEqual(deriveSkiableNowRead({ seasonOpen: true, snowDepthCm: 1.9 }), { kind: "no_base" });
+test("skiable-now: known near-zero REPORTED base -> no_base (the fresh-snow-no-base case)", () => {
+  assert.deepEqual(
+    deriveSkiableNowRead({ seasonOpen: true, snowDepthCm: 0, snowDepthSource: "reported" }),
+    { kind: "no_base" },
+  );
+  assert.deepEqual(
+    deriveSkiableNowRead({ seasonOpen: true, snowDepthCm: 1.9, snowDepthSource: "reported" }),
+    { kind: "no_base" },
+  );
+});
+
+test("skiable-now: MODEL near-zero base -> unverified, never no_base", () => {
+  // The July 2026 bug: lifts spinning on snowmaking while the model read ~0
+  // and the UI shouted "no skiable base". Model depth is snowmaking-blind, so
+  // it surfaces as an unverified base reading instead of a false negative.
+  assert.deepEqual(
+    deriveSkiableNowRead({ seasonOpen: true, snowDepthCm: 0 }),
+    { kind: "unverified", baseCm: 0 },
+  );
+  assert.deepEqual(
+    deriveSkiableNowRead({ seasonOpen: true, snowDepthCm: 1, snowDepthSource: "model" }),
+    { kind: "unverified", baseCm: 1 },
+  );
 });
 
 test("skiable-now: base at/above the 2cm floor is unverified, not no_base", () => {

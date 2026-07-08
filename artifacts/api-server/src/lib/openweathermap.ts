@@ -129,7 +129,9 @@ export async function fetchOpenWeatherMapAsOpenMeteo(
     wind_direction_10m: current?.wind?.deg ?? 0,
     weather_code: owmToWmo(curWeatherId),
     is_day: curIcon.endsWith("d") ? 1 : 0,
-    snow_depth: 0,
+    // OWM 2.5 has no snow-depth observation. null = unknown (routes/weather.ts
+    // omits it from the payload); a hardcoded 0 would falsely assert "no snow".
+    snow_depth: null,
     precipitation: (current?.rain?.["1h"] ?? 0) + (current?.snow?.["1h"] ?? 0),
     cloud_cover: current?.clouds?.all ?? 0,
     // freezing_level_height intentionally omitted (not available from OWM 2.5)

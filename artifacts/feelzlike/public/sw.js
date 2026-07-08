@@ -30,7 +30,9 @@
 // v9: BOM radar frame discovery (/api/bom-radar/frames) goes network-first
 // (reload) so installed PWAs stop serving the previous session's frame list -
 // the radar looked "frozen" because the catch-all SWR returned a stale loop.
-const CACHE_VERSION = "v9";
+// v10: /api/weather + /api/town-weather snowDepth changed units (metres -> cm)
+// and unknown depth is now omitted instead of 0 - bust caches holding old shape.
+const CACHE_VERSION = "v10";
 const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
 const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;

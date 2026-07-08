@@ -36,6 +36,14 @@ function getSeasonStatus(): "pre-season" | "open" | "late-season" | "closed" {
   return "closed";
 }
 
+// ⚠️ LANDMINE: this is a STATIC lift catalogue - every lift is hardcoded
+// "closed" even mid-season (getSeasonStatus() returns "open" Jun-Aug while
+// nothing below ever flips). It is safe ONLY because the client display-gates
+// open/closed badges behind LIVE_LIFT_STATUS_RESORTS (currently empty).
+// NEVER add a resort to that set without wiring a real live feed here first:
+// flipping the gate against this catalogue would assert "0 of N lifts open"
+// mid-winter - a false closure worse than showing nothing. A future live feed
+// must fail-soft to "unverified", never fall back to these hardcoded rows.
 const RESORT_LIFTS: ResortLiftData[] = [
   {
     locationId: "thredbo",

@@ -62,6 +62,16 @@ export interface LiftOperationInput {
   seasonOpen: boolean;
   /** Latest snow depth in cm if known. null/undefined = unknown (NOT zero). */
   snowDepthCm?: number | null;
+  /**
+   * Provenance of `snowDepthCm`. Weather-model depth ("model", the default)
+   * can NEVER force the `no_snow` negative - models are blind to snowmaking,
+   * so a ~0 model read mid-season regularly coexists with lifts running on
+   * machine-made base (the July 2026 "no skiable base while lifts spin" bug).
+   * Only an authoritative resort/observation figure ("reported") may assert
+   * that lifts plausibly cannot run. Defaulting to "model" means a forgetful
+   * caller fails SAFE (no false closure).
+   */
+  snowDepthSource?: "model" | "reported";
   /** Real lift count currently open, when an authoritative feed exists (AU). */
   actualLiftsOpen?: number | null;
   /** Real total lift count, when an authoritative feed exists (AU). */
@@ -75,7 +85,9 @@ export interface LiftOperationInput {
  *   2. live feed     - an authoritative lift feed (AU) wins over model snow:
  *                        0 of N open  -> no_lifts_open
  *                        any open      -> operating  (trusted over a ~0 model snow read)
- *   3. no_snow       - no live feed AND a KNOWN near-zero snow depth.
+ *   3. no_snow       - no live feed AND a KNOWN near-zero snow depth that is
+ *                      REPORTED (authoritative). Model depth never triggers
+ *                      this - see `snowDepthSource` on LiftOperationInput.
  *   4. operating     - otherwise.
  *
  * snowDepthCm null/undefined means "unknown" and never forces a closure, so an
@@ -84,6 +96,7 @@ export interface LiftOperationInput {
 export function computeLiftOperationStatus({
   seasonOpen,
   snowDepthCm,
+  snowDepthSource = "model",
   actualLiftsOpen,
   actualTotalLifts,
 }: LiftOperationInput): LiftOperationStatus {
@@ -91,7 +104,9 @@ export function computeLiftOperationStatus({
   if (actualTotalLifts != null && actualTotalLifts > 0 && actualLiftsOpen != null) {
     return actualLiftsOpen === 0 ? "no_lifts_open" : "operating";
   }
-  if (snowDepthCm != null && snowDepthCm < NO_SNOW_CM) return "no_snow";
+  if (snowDepthSource === "reported" && snowDepthCm != null && snowDepthCm < NO_SNOW_CM) {
+    return "no_snow";
+  }
   return "operating";
 }
 
@@ -120,8 +135,9 @@ export type SkiableNowRead =
  * Honesty rules baked in:
  *   - The ONLY authoritative positive ("lifts_open") comes from a verified live
  *     lift feed reporting lifts actually open. Model base depth NEVER asserts
- *     skiability - it is used only to force a negative ("no_base") via the
- *     NO_SNOW_CM floor in computeLiftOperationStatus.
+ *     skiability, and (being blind to snowmaking) never asserts UNskiability
+ *     either - only a "reported" depth may force the negative ("no_base") via
+ *     the NO_SNOW_CM floor in computeLiftOperationStatus.
  *   - Unknown base (snowDepthCm null/undefined) implies NEITHER skiable nor
  *     unskiable -> "unverified" with baseCm null ("base not reported").
  *   - Priority mirrors computeLiftOperationStatus exactly, so this can never

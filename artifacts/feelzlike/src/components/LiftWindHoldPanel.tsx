@@ -28,6 +28,11 @@ interface LiftWindHoldPanelProps {
   seasonOpen: boolean;
   /** Latest snow depth in cm if known. null/undefined = unknown (NOT zero). */
   snowDepthCm?: number | null;
+  /**
+   * Provenance of snowDepthCm - "model" (default) never forces a "no snow"
+   * closure (models are blind to snowmaking); only "reported" may.
+   */
+  snowDepthSource?: "model" | "reported";
   /** Real lift count currently open, when an authoritative feed exists (AU). */
   actualLiftsOpen?: number | null;
   /** Real total lift count, when an authoritative feed exists (AU). */
@@ -151,6 +156,7 @@ export function LiftWindHoldPanel({
   t: tProp,
   seasonOpen,
   snowDepthCm,
+  snowDepthSource,
   actualLiftsOpen,
   actualTotalLifts,
   liveStatusKnown = true,
@@ -179,8 +185,8 @@ export function LiftWindHoldPanel({
   // operating). Logic lives in computeLiftOperationStatus so it can be unit
   // tested independently of React. See skiSeason.ts for the full priority doc.
   const operationStatus: OperationStatus = useMemo(
-    () => computeLiftOperationStatus({ seasonOpen, snowDepthCm, actualLiftsOpen, actualTotalLifts }),
-    [seasonOpen, snowDepthCm, actualLiftsOpen, actualTotalLifts],
+    () => computeLiftOperationStatus({ seasonOpen, snowDepthCm, snowDepthSource, actualLiftsOpen, actualTotalLifts }),
+    [seasonOpen, snowDepthCm, snowDepthSource, actualLiftsOpen, actualTotalLifts],
   );
 
   // A verified live source is required to claim live operation. Without one we

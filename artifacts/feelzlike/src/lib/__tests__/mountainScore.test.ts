@@ -33,7 +33,7 @@ const POWDER_DAY_WEATHER: WeatherSnapshot = {
   temperature: -5,
   feelsLike: -10,
   windSpeed: 15,
-  snowDepth: 1.2,
+  snowDepth: 120, // cm (app-wide canonical unit)
   weatherCode: 75, // heavy snow
   cloudCover: 90,
 };
@@ -42,7 +42,7 @@ const BLUEBIRD_WEATHER: WeatherSnapshot = {
   temperature: -3,
   feelsLike: -8,
   windSpeed: 10,
-  snowDepth: 0.8,
+  snowDepth: 80, // cm
   weatherCode: 0, // clear
   cloudCover: 5,
 };
@@ -51,7 +51,7 @@ const MARGINAL_WIND_WEATHER: WeatherSnapshot = {
   temperature: -1,
   feelsLike: -8,
   windSpeed: 50, // above the 35km/h low-risk threshold
-  snowDepth: 0.5,
+  snowDepth: 50, // cm
   weatherCode: 71,
   cloudCover: 60,
 };

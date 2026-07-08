@@ -5,6 +5,7 @@ export interface WeatherSnapshot {
   feelsLike: number;
   windSpeed: number;
   windGust?: number;
+  /** Snow depth in CM (app-wide canonical unit; the api-server converts Open-Meteo's metres). */
   snowDepth: number;
   weatherCode: number;
   cloudCover?: number;
@@ -65,7 +66,9 @@ export function scoreMountain(
 
   let snow = 0;
   if (season === "winter") {
-    const depthScore = clamp(w.snowDepth * 25, 0, 30);
+    // snowDepth is cm · 120cm of base = full 30 pts (was metres * 25 before
+    // the July 2026 cm canonicalisation; 0.25/cm keeps the same curve).
+    const depthScore = clamp(w.snowDepth * 0.25, 0, 30);
     const fallBonus = isSnowing ? 10 : 0;
     snow = clamp(depthScore + fallBonus, 0, 40);
   }
@@ -104,14 +107,14 @@ export function scoreMountain(
   let tone: ScoreTone = "fair";
 
   if (season === "winter") {
-    if (isSnowing && w.snowDepth > 0.5 && w.windSpeed < 40) {
+    if (isSnowing && w.snowDepth > 50 && w.windSpeed < 40) {
       headline = "POWDER DAY";
       headlineJa = "パウダーデー";
       tone = "powder";
     } else if (
       (w.cloudCover ?? 100) < 30 &&
       w.windSpeed < 25 &&
-      w.snowDepth > 0.3
+      w.snowDepth > 30
     ) {
       headline = "BLUEBIRD";
       headlineJa = "快晴";
