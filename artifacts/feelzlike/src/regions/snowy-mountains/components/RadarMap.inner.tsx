@@ -154,42 +154,46 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
     },
   },
   // NZ · MetService offers no simple hotlinkable radar gif (unlike BOM),
-  // so imageUrl is null and the official view links out to the MetService
-  // rain radar. Forecast data itself is Open-Meteo (see weatherSource).
+  // so imageUrl is null and the official view links out to MetService's
+  // per-region rain radar page (nearest covering radar for each ski
+  // area). MetService restructured in 2026: the old
+  // /maps-radar/rain-radar path now 404s · the live scheme is
+  // /maps-radar/rain/radar/<region>. Forecast data itself is Open-Meteo
+  // (see weatherSource).
   queenstown: {
     windy: { lat: -44.99, lon: 168.74, zoom: 10 },
     official: {
-      label: "MetService rain radar",
+      label: "MetService Invercargill",
       imageUrl: null,
-      href: "https://www.metservice.com/maps-radar/rain-radar",
-      attribution: "MetService · rain radar",
+      href: "https://www.metservice.com/maps-radar/rain/radar/invercargill",
+      attribution: "MetService · Invercargill rain radar",
     },
   },
   wanaka: {
     windy: { lat: -44.73, lon: 168.99, zoom: 10 },
     official: {
-      label: "MetService rain radar",
+      label: "MetService Invercargill",
       imageUrl: null,
-      href: "https://www.metservice.com/maps-radar/rain-radar",
-      attribution: "MetService · rain radar",
+      href: "https://www.metservice.com/maps-radar/rain/radar/invercargill",
+      attribution: "MetService · Invercargill rain radar",
     },
   },
   "mt-hutt": {
     windy: { lat: -43.55, lon: 171.59, zoom: 10 },
     official: {
-      label: "MetService rain radar",
+      label: "MetService Christchurch",
       imageUrl: null,
-      href: "https://www.metservice.com/maps-radar/rain-radar",
-      attribution: "MetService · rain radar",
+      href: "https://www.metservice.com/maps-radar/rain/radar/christchurch",
+      attribution: "MetService · Christchurch rain radar",
     },
   },
   ruapehu: {
     windy: { lat: -39.32, lon: 175.50, zoom: 10 },
     official: {
-      label: "MetService rain radar",
+      label: "MetService New Plymouth",
       imageUrl: null,
-      href: "https://www.metservice.com/maps-radar/rain-radar",
-      attribution: "MetService · rain radar",
+      href: "https://www.metservice.com/maps-radar/rain/radar/new-plymouth",
+      attribution: "MetService · New Plymouth rain radar",
     },
   },
 };
