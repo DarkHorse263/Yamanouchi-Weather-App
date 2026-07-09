@@ -36,6 +36,12 @@ export interface MountainLink {
   imageUrl?: string;
   /** Official mountain/resort website URL */
   websiteUrl?: string;
+  /**
+   * Official resort snow report / conditions page (human page, NOT a feed).
+   * Curl-verified before adding - resort URLs rot when sites restructure.
+   * When absent the UI falls back to the plain official-site link only.
+   */
+  snowReportUrl?: string;
   /** Approximate base/centroid latitude - single source of truth for journey/Today's call. */
   lat?: number;
   /** Approximate base/centroid longitude. */

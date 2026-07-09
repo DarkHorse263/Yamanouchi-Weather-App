@@ -39,17 +39,17 @@ export const victoriasHighCountryRegion: RegionConfig = {
   mountains: [
     // Mt Buller: VIC's biggest day-tripper. Full-service alpine village,
     // chairlift downhill, terrain park, ski school. ~3hrs from Melbourne.
-    { id: "mt-buller",       name: "Mt Buller",       elevationM: 1805, lat: -37.1456, lng: 146.4391, blurb: "VIC · the big one · 3 hrs from Melbourne",         websiteUrl: "https://www.mtbuller.com.au",        beginner_friendly: true, kids_lessons: true, terrain_park: true },
+    { id: "mt-buller",       name: "Mt Buller",       elevationM: 1805, lat: -37.1456, lng: 146.4391, blurb: "VIC · the big one · 3 hrs from Melbourne",         websiteUrl: "https://www.mtbuller.com.au", snowReportUrl: "https://www.mtbuller.com.au/winter/snow-weather/snow-report",        beginner_friendly: true, kids_lessons: true, terrain_park: true },
     // Mt Stirling: nordic sister of Buller, shared Mansfield gateway.
     // Cross-country & backcountry only - no chairlifts. Tickets sold at
     // Telephone Box Junction.
-    { id: "mt-stirling",     name: "Mt Stirling",     elevationM: 1747, lat: -37.1167, lng: 146.4500, blurb: "VIC · cross-country & backcountry sister to Buller", websiteUrl: "https://mtstirling.com.au",          nordic_focus: true, backcountry_access: true },
+    { id: "mt-stirling",     name: "Mt Stirling",     elevationM: 1747, lat: -37.1167, lng: 146.4500, blurb: "VIC · cross-country & backcountry sister to Buller", websiteUrl: "https://mtstirling.com.au", snowReportUrl: "https://www.mtstirling.com.au/snow-report/",          nordic_focus: true, backcountry_access: true },
     // Falls Creek: largest alpine ski area in VIC by skiable terrain.
     // Self-contained ski-in/ski-out village.
-    { id: "falls-creek",     name: "Falls Creek",     elevationM: 1842, lat: -36.8628, lng: 147.2778, blurb: "VIC · largest skiable area · ski-in village",      websiteUrl: "https://www.fallscreek.com.au",     beginner_friendly: true, kids_lessons: true, terrain_park: true },
+    { id: "falls-creek",     name: "Falls Creek",     elevationM: 1842, lat: -36.8628, lng: 147.2778, blurb: "VIC · largest skiable area · ski-in village",      websiteUrl: "https://www.fallscreek.com.au", snowReportUrl: "https://www.fallscreek.com.au/snowreport/",     beginner_friendly: true, kids_lessons: true, terrain_park: true },
     // Mt Hotham: highest VIC resort, the steep one. Hotham Airport for
     // direct fly-in. Dinner Plain is the alpine village 10 min away.
-    { id: "mt-hotham",       name: "Mt Hotham",       elevationM: 1862, lat: -36.9779, lng: 147.1361, blurb: "VIC · the high & steep one · Hotham Airport access", websiteUrl: "https://www.mthotham.com.au",        terrain_park: true, backcountry_access: true, kids_lessons: true },
+    { id: "mt-hotham",       name: "Mt Hotham",       elevationM: 1862, lat: -36.9779, lng: 147.1361, blurb: "VIC · the high & steep one · Hotham Airport access", websiteUrl: "https://www.mthotham.com.au", snowReportUrl: "https://www.mthotham.com.au/mountain/conditions/snow-reports",        terrain_park: true, backcountry_access: true, kids_lessons: true },
     // Lake Mountain: nordic + snow play only, no alpine downhill. The
     // closest snow to Melbourne (~2 hrs via Marysville).
     { id: "lake-mountain",   name: "Lake Mountain",   elevationM: 1480, lat: -37.5181, lng: 145.8983, blurb: "VIC · nordic & snow play · closest snow to Melbourne", websiteUrl: "https://www.lakemountainresort.com.au", snow_play_only: true, nordic_focus: true, kids_lessons: true },

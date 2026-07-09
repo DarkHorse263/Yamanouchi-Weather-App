@@ -32,6 +32,7 @@ export const mtHuttRegion: RegionConfig = {
       lng: 171.5306,
       blurb: "canterbury's high-alpine basin · long season, closest big field to christchurch",
       websiteUrl: "https://www.nzski.com/mt-hutt",
+      snowReportUrl: "https://www.mthutt.co.nz/weather-report",
       beginner_friendly: true,
       kids_lessons: true,
       terrain_park: true,

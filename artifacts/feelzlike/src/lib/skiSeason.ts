@@ -127,7 +127,16 @@ export type SkiableNowRead =
   | { kind: "no_base" }
   | { kind: "lifts_closed" }
   | { kind: "lifts_open"; liftsOpen: number; totalLifts: number }
-  | { kind: "unverified"; baseCm: number | null };
+  | {
+      kind: "unverified";
+      baseCm: number | null;
+      /**
+       * Where baseCm came from: "reported" = the resort's own official feed
+       * (trustworthy enough to caption "resort reported"), "model" = weather
+       * model estimate. Mirrors snowDepthSource on LiftOperationInput.
+       */
+      baseSource: "model" | "reported";
+    };
 
 /**
  * Turn raw season/base/lift inputs into an honest "skiable now" read.
@@ -165,6 +174,10 @@ export function deriveSkiableNowRead(
       ) {
         return { kind: "lifts_open", liftsOpen: actualLiftsOpen, totalLifts: actualTotalLifts };
       }
-      return { kind: "unverified", baseCm: snowDepthCm ?? null };
+      return {
+        kind: "unverified",
+        baseCm: snowDepthCm ?? null,
+        baseSource: input.snowDepthSource ?? "model",
+      };
   }
 }

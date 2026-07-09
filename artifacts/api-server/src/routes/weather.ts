@@ -1,5 +1,6 @@
 import { Router, type IRouter } from "express";
-import { GetWeatherResponse, GetLocationWeatherResponse, GetLocationWeatherParams } from "@workspace/api-zod";
+import { GetWeatherResponse, GetLocationWeatherResponse, GetLocationWeatherParams, GetResortSnowReportParams } from "@workspace/api-zod";
+import { getResortSnowReport } from "../lib/resortSnowReports";
 import { getEnsembleForecast } from "../lib/ensemble-forecast.js";
 import { locationMatchesRegion, parseRegionParam, RegionParamError } from "../lib/regions.js";
 import { fetchOpenWeatherMapAsOpenMeteo } from "../lib/openweathermap.js";
@@ -860,6 +861,32 @@ router.get("/weather/:locationId", async (req, res) => {
       error: "WEATHER_FETCH_ERROR",
       message: error instanceof Error ? error.message : "Failed to fetch weather data"
     });
+  }
+});
+
+/**
+ * Resort-REPORTED snow conditions from the resort's own official feed
+ * (pilot: Thredbo XML - see lib/resortSnowReports.ts).
+ *
+ * ALWAYS answers 200. The shared client fetch throws on any non-2xx and this
+ * endpoint is called for every resort detail page, so a 404 for "no feed
+ * adapter" would error/retry on all non-pilot resorts. Missing data is
+ * `report: null`, never an error status.
+ */
+router.get("/weather/:locationId/snow-report", async (req, res) => {
+  const rawId = String(req.params.locationId ?? "");
+  try {
+    const { locationId } = GetResortSnowReportParams.parse(req.params);
+    // Unknown ids also degrade to null (mirrors the always-200 contract).
+    const location = LOCATIONS.find((l) => l.id === locationId);
+    if (!location) {
+      res.json({ locationId, report: null });
+      return;
+    }
+    const report = await getResortSnowReport(locationId);
+    res.json({ locationId, report });
+  } catch {
+    res.json({ locationId: rawId, report: null });
   }
 });
 

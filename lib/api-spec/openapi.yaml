@@ -948,6 +948,33 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+  /weather/{locationId}/snow-report:
+    get:
+      operationId: getResortSnowReport
+      tags: [weather]
+      summary: Resort-reported snow conditions from the resort's official feed
+      description: |
+        Resort-REPORTED snow depth from the resort's own structured feed
+        (pilot: Thredbo XML). Always returns 200 with `report: null` when the
+        location has no feed adapter, the feed is unreachable, the payload
+        fails strict parsing, or the feed's own updated timestamp is older
+        than 36 hours. Never 404s for missing data - the shared client fetch
+        throws on non-2xx and this endpoint is called for every resort.
+      parameters:
+        - name: locationId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^[a-z0-9-]+$"
+            description: Weather location id. Mirrors /weather/{locationId}.
+      responses:
+        "200":
+          description: Reported snow conditions, or report null when unavailable
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResortSnowReportResponse"
   /bus-services:
     get:
       operationId: getBusServices
@@ -3141,6 +3168,52 @@ components:
         - lastUpdated
         - source
         - sourceUrl
+    ResortSnowReport:
+      type: object
+      description: |
+        Snow conditions as REPORTED by the resort's own official feed.
+        Strictly parsed - base must be present and numeric or the whole
+        report is treated as absent (never defaulted to 0, which would
+        assert "no base" without evidence).
+      properties:
+        baseCm:
+          type: number
+          description: Resort-reported snow base depth in centimetres.
+        seasonSnowfallCm:
+          type: number
+          nullable: true
+          description: Cumulative season snowfall in centimetres, when the feed provides it.
+        lastSnowfallCm:
+          type: number
+          nullable: true
+          description: Most recent snowfall amount in centimetres, when the feed provides it.
+        updatedAt:
+          type: string
+          description: ISO 8601 timestamp the resort last updated the report.
+        sourceName:
+          type: string
+          description: Human name of the reporting resort, e.g. "Thredbo".
+        sourceUrl:
+          type: string
+          description: Human snow-report page to credit/link, NOT the feed URL.
+      required:
+        - baseCm
+        - updatedAt
+        - sourceName
+        - sourceUrl
+    ResortSnowReportResponse:
+      type: object
+      properties:
+        locationId:
+          type: string
+        report:
+          oneOf:
+            - $ref: "#/components/schemas/ResortSnowReport"
+          nullable: true
+          description: Null when no adapter, feed failure, strict-parse failure, or report older than 36h.
+      required:
+        - locationId
+        - report
     ErrorResponse:
       type: object
       properties:

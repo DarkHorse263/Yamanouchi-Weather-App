@@ -1283,6 +1283,64 @@ export const GetLocationWeatherResponse = zod.object({
 });
 
 /**
+ * Resort-REPORTED snow depth from the resort's own structured feed
+(pilot: Thredbo XML). Always returns 200 with `report: null` when the
+location has no feed adapter, the feed is unreachable, the payload
+fails strict parsing, or the feed's own updated timestamp is older
+than 36 hours. Never 404s for missing data - the shared client fetch
+throws on non-2xx and this endpoint is called for every resort.
+
+ * @summary Resort-reported snow conditions from the resort's official feed
+ */
+export const getResortSnowReportPathLocationIdRegExp = new RegExp(
+  "^[a-z0-9-]+$",
+);
+
+export const GetResortSnowReportParams = zod.object({
+  locationId: zod.coerce
+    .string()
+    .regex(getResortSnowReportPathLocationIdRegExp),
+});
+
+export const GetResortSnowReportResponse = zod.object({
+  locationId: zod.string(),
+  report: zod
+    .object({
+      baseCm: zod
+        .number()
+        .describe("Resort-reported snow base depth in centimetres."),
+      seasonSnowfallCm: zod
+        .number()
+        .nullish()
+        .describe(
+          "Cumulative season snowfall in centimetres, when the feed provides it.",
+        ),
+      lastSnowfallCm: zod
+        .number()
+        .nullish()
+        .describe(
+          "Most recent snowfall amount in centimetres, when the feed provides it.",
+        ),
+      updatedAt: zod
+        .string()
+        .describe("ISO 8601 timestamp the resort last updated the report."),
+      sourceName: zod
+        .string()
+        .describe('Human name of the reporting resort, e.g. \"Thredbo\".'),
+      sourceUrl: zod
+        .string()
+        .describe("Human snow-report page to credit\/link, NOT the feed URL."),
+    })
+    .describe(
+      'Snow conditions as REPORTED by the resort\'s own official feed.\nStrictly parsed - base must be present and numeric or the whole\nreport is treated as absent (never defaulted to 0, which would\nassert \"no base\" without evidence).\n',
+    )
+    .nullable()
+    .describe(
+      "Null when no adapter, feed failure, strict-parse failure, or report older than 36h.",
+    ),
+});
+
+/**
  * Returns Cooma Coaches Snowy Mountains bus service routes and timetables
  * @summary Get Cooma Coaches bus service information
  */

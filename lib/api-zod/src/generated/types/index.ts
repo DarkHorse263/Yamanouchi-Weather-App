@@ -111,6 +111,8 @@ export * from "./regionSummary";
 export * from "./resort";
 export * from "./resortLiftStatus";
 export * from "./resortLiftStatusSeasonStatus";
+export * from "./resortSnowReport";
+export * from "./resortSnowReportResponse";
 export * from "./roadCondition";
 export * from "./roadConditionCondition";
 export * from "./roadConditionsResponse";

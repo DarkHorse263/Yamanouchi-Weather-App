@@ -152,11 +152,11 @@ test("skiable-now: MODEL near-zero base -> unverified, never no_base", () => {
   // it surfaces as an unverified base reading instead of a false negative.
   assert.deepEqual(
     deriveSkiableNowRead({ seasonOpen: true, snowDepthCm: 0 }),
-    { kind: "unverified", baseCm: 0 },
+    { kind: "unverified", baseCm: 0, baseSource: "model" },
   );
   assert.deepEqual(
     deriveSkiableNowRead({ seasonOpen: true, snowDepthCm: 1, snowDepthSource: "model" }),
-    { kind: "unverified", baseCm: 1 },
+    { kind: "unverified", baseCm: 1, baseSource: "model" },
   );
 });
 
@@ -165,20 +165,34 @@ test("skiable-now: base at/above the 2cm floor is unverified, not no_base", () =
   // so it surfaces neutrally as an unverified base reading.
   assert.deepEqual(
     deriveSkiableNowRead({ seasonOpen: true, snowDepthCm: 2 }),
-    { kind: "unverified", baseCm: 2 },
+    { kind: "unverified", baseCm: 2, baseSource: "model" },
   );
   assert.deepEqual(
     deriveSkiableNowRead({ seasonOpen: true, snowDepthCm: 45 }),
-    { kind: "unverified", baseCm: 45 },
+    { kind: "unverified", baseCm: 45, baseSource: "model" },
+  );
+});
+
+test("skiable-now: REPORTED base above the floor carries baseSource for the chip caption", () => {
+  // A resort-reported figure is trustworthy enough to caption "resort
+  // reported" - but it still never asserts lifts_open (only a live lift feed
+  // may claim the positive).
+  assert.deepEqual(
+    deriveSkiableNowRead({ seasonOpen: true, snowDepthCm: 35.4, snowDepthSource: "reported" }),
+    { kind: "unverified", baseCm: 35.4, baseSource: "reported" },
   );
 });
 
 test("skiable-now: unknown base -> unverified with null (never implies skiable OR unskiable)", () => {
   assert.deepEqual(
     deriveSkiableNowRead({ seasonOpen: true, snowDepthCm: null }),
-    { kind: "unverified", baseCm: null },
+    { kind: "unverified", baseCm: null, baseSource: "model" },
   );
-  assert.deepEqual(deriveSkiableNowRead({ seasonOpen: true }), { kind: "unverified", baseCm: null });
+  assert.deepEqual(deriveSkiableNowRead({ seasonOpen: true }), {
+    kind: "unverified",
+    baseCm: null,
+    baseSource: "model",
+  });
 });
 
 test("skiable-now: live feed 0 of N open -> lifts_closed", () => {
@@ -200,6 +214,6 @@ test("skiable-now: lifts open but status UNVERIFIED never claims lifts_open", ()
   // the honest base read (here unknown -> null).
   assert.deepEqual(
     deriveSkiableNowRead({ seasonOpen: true, actualLiftsOpen: 3, actualTotalLifts: 8, liveStatusKnown: false }),
-    { kind: "unverified", baseCm: null },
+    { kind: "unverified", baseCm: null, baseSource: "model" },
   );
 });

@@ -36,6 +36,7 @@ export const ruapehuRegion: RegionConfig = {
       lng: 175.5619,
       blurb: "the big one on the northwest face · varied terrain, knoll ridge high point",
       websiteUrl: "https://www.whakapapa.com/",
+      snowReportUrl: "https://www.whakapapa.com/report",
       beginner_friendly: true,
       kids_lessons: true,
       terrain_park: true,

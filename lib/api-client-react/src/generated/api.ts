@@ -70,6 +70,7 @@ import type {
   RegionOutlook,
   Resort,
   ResortLiftStatus,
+  ResortSnowReportResponse,
   RoadConditionsResponse,
   Stay,
   SubscribeRequest,
@@ -3567,6 +3568,105 @@ export function useGetLocationWeather<
     params,
     options,
   );
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * Resort-REPORTED snow depth from the resort's own structured feed
+(pilot: Thredbo XML). Always returns 200 with `report: null` when the
+location has no feed adapter, the feed is unreachable, the payload
+fails strict parsing, or the feed's own updated timestamp is older
+than 36 hours. Never 404s for missing data - the shared client fetch
+throws on non-2xx and this endpoint is called for every resort.
+
+ * @summary Resort-reported snow conditions from the resort's official feed
+ */
+export const getGetResortSnowReportUrl = (locationId: string) => {
+  return `/api/weather/${locationId}/snow-report`;
+};
+
+export const getResortSnowReport = async (
+  locationId: string,
+  options?: RequestInit,
+): Promise<ResortSnowReportResponse> => {
+  return customFetch<ResortSnowReportResponse>(
+    getGetResortSnowReportUrl(locationId),
+    {
+      ...options,
+      method: "GET",
+    },
+  );
+};
+
+export const getGetResortSnowReportQueryKey = (locationId: string) => {
+  return [`/api/weather/${locationId}/snow-report`] as const;
+};
+
+export const getGetResortSnowReportQueryOptions = <
+  TData = Awaited<ReturnType<typeof getResortSnowReport>>,
+  TError = ErrorType<unknown>,
+>(
+  locationId: string,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getResortSnowReport>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getGetResortSnowReportQueryKey(locationId);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof getResortSnowReport>>
+  > = ({ signal }) =>
+    getResortSnowReport(locationId, { signal, ...requestOptions });
+
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!locationId,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<typeof getResortSnowReport>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetResortSnowReportQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getResortSnowReport>>
+>;
+export type GetResortSnowReportQueryError = ErrorType<unknown>;
+
+/**
+ * @summary Resort-reported snow conditions from the resort's official feed
+ */
+
+export function useGetResortSnowReport<
+  TData = Awaited<ReturnType<typeof getResortSnowReport>>,
+  TError = ErrorType<unknown>,
+>(
+  locationId: string,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getResortSnowReport>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetResortSnowReportQueryOptions(locationId, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
     queryKey: QueryKey;

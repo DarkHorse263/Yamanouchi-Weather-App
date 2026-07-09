@@ -1,12 +1,13 @@
 import { useRoute, Link } from "wouter";
 import { useRegion } from "@workspace/feelzlike-shell";
-import { useGetLocationWeather, useGetLocationWebcams, useGetLocationLiftStatus } from "@workspace/api-client-react";
+import { useGetLocationWeather, useGetLocationWebcams, useGetLocationLiftStatus, useGetResortSnowReport } from "@workspace/api-client-react";
 import { MountainSnapshot } from "@workspace/feelzlike-dashboard";
 import { ElevationBands } from "@/components/weather/ElevationBands";
 import { midMountainElevation } from "@/lib/elevation";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
 import { OfficialSiteLink } from "@/components/OfficialSiteLink";
+import { SnowReportLink } from "@/components/SnowReportLink";
 import { LoadingState } from "../components/ui/loading-state";
 import { ErrorState } from "../components/ui/error-state";
 import { ForecastChart } from "../components/weather/ForecastChart";
@@ -168,6 +169,12 @@ export default function LocationDetail() {
   const { data: webcamData } = useGetLocationWebcams(locationId, { query: { enabled: !!locationId } as never });
   const isResort = locationId === "thredbo" || locationId === "perisher" || locationId === "charlottes-pass" || locationId === "selwyn";
   const { data: liftData } = useGetLocationLiftStatus(locationId as any, { query: { enabled: isResort } as never });
+  // Resort-REPORTED snow base (pilot: Thredbo's official XML feed). The
+  // endpoint always answers 200 - `report` is null for resorts without a
+  // feed adapter, on feed failure, or when the resort's figure is >36h old,
+  // and the UI then falls back to the model depth.
+  const { data: snowReportData } = useGetResortSnowReport(locationId, { query: { enabled: !!locationId } as never });
+  const resortReport = snowReportData?.report ?? null;
   // Only paint live open/closed when a resort is wired to a verified live feed.
   const hasLiveLiftStatus = LIVE_LIFT_STATUS_RESORTS.has(locationId);
   // Snowy region opts in to season-aware UI · in summer the snow/lift
@@ -218,7 +225,11 @@ export default function LocationDetail() {
     { label: "Wind", value: `${current.windSpeed} km/h${current.windDirectionCompass ? ` ${current.windDirectionCompass}` : ""}`, icon: Navigation },
     ...(current.windGust ? [{ label: "Gusts", value: `${current.windGust} km/h`, icon: Wind }] : []),
     { label: "Humidity", value: `${current.humidity}%`, icon: Droplets },
-    { label: "Snow depth · model", value: current.snowDepth != null ? `${current.snowDepth} cm` : "-", icon: Snowflake },
+    // A resort-reported base REPLACES the model figure (never shown alongside
+    // it - two competing numbers would just erode trust in both).
+    resortReport
+      ? { label: `Snow depth · resort reported · ${formatAgo(resortReport.updatedAt, now)}`, value: `${Math.round(resortReport.baseCm)} cm`, icon: Snowflake }
+      : { label: "Snow depth · model", value: current.snowDepth != null ? `${current.snowDepth} cm` : "-", icon: Snowflake },
     ...(snow24h != null ? [{ label: "Snow next 24h", value: `${snow24h.toFixed(1)} cm`, icon: CloudSnow }] : []),
     ...(current.dewpoint !== undefined ? [{ label: "Dew point", value: formatTemp(current.dewpoint), icon: Droplets }] : []),
     ...(current.pressure !== undefined ? [{ label: "Pressure", value: `${current.pressure} hPa`, icon: Gauge }] : []),
@@ -439,6 +450,17 @@ export default function LocationDetail() {
                 );
               })}
             </div>
+            {/* Cross-check link to the resort's own published snow report -
+                sits with the snow-depth stat so either figure (model or
+                reported) is always one tap from the primary source. */}
+            {mountainCfg?.snowReportUrl && (
+              <div className="mt-5 pt-4 border-t border-white/10">
+                <SnowReportLink
+                  url={mountainCfg.snowReportUrl}
+                  className="text-muted-foreground/80 hover:text-primary"
+                />
+              </div>
+            )}
           </motion.div>
 
           {/* Scroll cue */}
@@ -459,11 +481,13 @@ export default function LocationDetail() {
           thresholds={POWDER_THRESHOLDS_AU}
           skiability={{
             seasonOpen: isLiftSeasonOpen(REGION_COUNTRY[region.id]),
-            // Model depth is safe to surface: with snowDepthSource "model" it
+            // Resort-reported base takes precedence over the model figure:
+            // it can see snowmaking, so it may honestly assert "no base".
+            // Model depth stays advisory: with snowDepthSource "model" it
             // can only inform ("Base ~Xcm · check resort"), never force a
             // false "no skiable base" (models are blind to snowmaking).
-            snowDepthCm: current.snowDepth,
-            snowDepthSource: "model",
+            snowDepthCm: resortReport ? resortReport.baseCm : current.snowDepth,
+            snowDepthSource: resortReport ? "reported" : "model",
             liveStatusKnown: hasLiveLiftStatus,
             actualLiftsOpen: hasLiveLiftStatus ? liftData?.liftsOpen : undefined,
             actualTotalLifts: liftData?.totalLifts,
@@ -889,8 +913,8 @@ export default function LocationDetail() {
               hourly={hourly as any}
               sectionNumber=""
               seasonOpen={isLiftSeasonOpen(REGION_COUNTRY[region.id])}
-              snowDepthCm={current.snowDepth}
-              snowDepthSource="model"
+              snowDepthCm={resortReport ? resortReport.baseCm : current.snowDepth}
+              snowDepthSource={resortReport ? "reported" : "model"}
               liveStatusKnown={hasLiveLiftStatus}
               actualLiftsOpen={hasLiveLiftStatus ? liftData?.liftsOpen : undefined}
               actualTotalLifts={liftData?.totalLifts}

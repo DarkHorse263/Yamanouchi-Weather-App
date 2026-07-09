@@ -191,6 +191,10 @@ self.addEventListener("fetch", (event) => {
 
   // 2b. Live weather, today's call, roads → network-first (4.5s timeout)
   //     Anything that should reflect "right now" with offline fallback.
+  //     NOTE: the /api/weather prefix deliberately also covers
+  //     /api/weather/:id/snow-report (resort-reported base) - if that endpoint
+  //     ever moves off this prefix it must be added here explicitly or
+  //     installed PWAs will serve stale reports from the catch-all SWR.
   if (
     url.pathname.startsWith("/api/weather") ||
     url.pathname.startsWith("/api/today") ||

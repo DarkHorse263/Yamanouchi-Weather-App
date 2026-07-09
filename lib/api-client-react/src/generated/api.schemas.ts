@@ -1283,6 +1283,34 @@ export interface VicEmergencyResponse {
   sourceUrl: string;
 }
 
+/**
+ * Snow conditions as REPORTED by the resort's own official feed.
+Strictly parsed - base must be present and numeric or the whole
+report is treated as absent (never defaulted to 0, which would
+assert "no base" without evidence).
+
+ */
+export interface ResortSnowReport {
+  /** Resort-reported snow base depth in centimetres. */
+  baseCm: number;
+  /** Cumulative season snowfall in centimetres, when the feed provides it. */
+  seasonSnowfallCm?: number | null;
+  /** Most recent snowfall amount in centimetres, when the feed provides it. */
+  lastSnowfallCm?: number | null;
+  /** ISO 8601 timestamp the resort last updated the report. */
+  updatedAt: string;
+  /** Human name of the reporting resort, e.g. "Thredbo". */
+  sourceName: string;
+  /** Human snow-report page to credit/link, NOT the feed URL. */
+  sourceUrl: string;
+}
+
+export interface ResortSnowReportResponse {
+  locationId: string;
+  /** Null when no adapter, feed failure, strict-parse failure, or report older than 36h. */
+  report: ResortSnowReport | null;
+}
+
 export interface ErrorResponse {
   error: string;
   message: string;

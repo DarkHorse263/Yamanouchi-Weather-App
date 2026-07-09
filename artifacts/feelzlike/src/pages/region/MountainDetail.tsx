@@ -28,6 +28,7 @@ import { MountainSnapshot } from "@workspace/feelzlike-dashboard";
 import {
   getGetLocationWeatherQueryKey,
   useGetLocationWeather,
+  useGetResortSnowReport,
 } from "@workspace/api-client-react";
 import { ElevationBands } from "@/components/weather/ElevationBands";
 import { HourlyForecast } from "@/components/HourlyForecast";
@@ -49,6 +50,7 @@ import { useState } from "react";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
 import { OfficialSiteLink } from "@/components/OfficialSiteLink";
+import { SnowReportLink } from "@/components/SnowReportLink";
 
 /**
  * Region-agnostic mountain weather page.
@@ -85,6 +87,7 @@ export function MountainDetail() {
   const elevSummitM = mountainCfg?.elevationM;
   const elevName = mountainCfg?.name;
   const websiteUrl = mountainCfg?.websiteUrl;
+  const snowReportUrl = mountainCfg?.snowReportUrl;
   const snowElevationM = elevSummitM != null ? midMountainElevation(elevSummitM) : undefined;
 
   const q = useGetLocationWeather(
@@ -100,6 +103,25 @@ export function MountainDetail() {
       },
     },
   );
+
+  // Resort-REPORTED snow base (see api-server lib/resortSnowReports.ts).
+  // Always-200 endpoint - `report` stays null for resorts without a feed
+  // adapter and the page keeps showing the model figure.
+  const { data: snowReportData } = useGetResortSnowReport(locationId, {
+    query: { enabled: !!locationId } as never,
+  });
+  const resortReport = snowReportData?.report ?? null;
+  // "Xh ago" caption for the reported figure - hour granularity is honest
+  // enough for a feed resorts refresh a few times a day.
+  const reportedAgoLabel = (() => {
+    if (!resortReport) return "";
+    const ms = Date.now() - new Date(resortReport.updatedAt).getTime();
+    if (!Number.isFinite(ms) || ms < 0) return "";
+    const hr = Math.round(ms / 3_600_000);
+    if (hr < 1) return t("just now", "たった今");
+    if (hr < 24) return `${hr}h ago`;
+    return `${Math.round(hr / 24)}d ago`;
+  })();
 
   // Back link goes to the BASE TOWN this mountain hangs off (towns-first IA),
   // not the region home. Find the first base town whose nearbyMountainIds
@@ -234,9 +256,10 @@ export function MountainDetail() {
                 )}
               </div>
             </div>
-            {websiteUrl && (
-              <div className="mt-5 pt-4 border-t border-border/60">
-                <OfficialSiteLink url={websiteUrl} />
+            {(websiteUrl || snowReportUrl) && (
+              <div className="mt-5 pt-4 border-t border-border/60 flex flex-wrap items-center gap-x-5 gap-y-2">
+                {websiteUrl && <OfficialSiteLink url={websiteUrl} />}
+                {snowReportUrl && <SnowReportLink url={snowReportUrl} />}
               </div>
             )}
           </section>
@@ -256,13 +279,22 @@ export function MountainDetail() {
               {t("conditions right now", "現在の状況")}
             </p>
             <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {/* A resort-reported base REPLACES the model figure (never
+                  shown alongside it - two competing numbers would erode
+                  trust in both). */}
               <BigStat
                 icon={Snowflake}
-                label={t("Snow depth · model", "積雪 · 予測値")}
+                label={
+                  resortReport
+                    ? `${t("Snow depth · resort reported", "積雪 · リゾート報告")}${reportedAgoLabel ? ` · ${reportedAgoLabel}` : ""}`
+                    : t("Snow depth · model", "積雪 · 予測値")
+                }
                 value={
-                  current.snowDepth !== null && current.snowDepth !== undefined
-                    ? `${Math.round(current.snowDepth)}`
-                    : "-"
+                  resortReport
+                    ? `${Math.round(resortReport.baseCm)}`
+                    : current.snowDepth !== null && current.snowDepth !== undefined
+                      ? `${Math.round(current.snowDepth)}`
+                      : "-"
                 }
                 unit="cm"
               />
@@ -359,7 +391,8 @@ export function MountainDetail() {
                 sectionNumber=""
                 skiability={{
                   seasonOpen: isLiftSeasonOpen(REGION_COUNTRY[region.id]),
-                  snowDepthCm: current?.snowDepth,
+                  snowDepthCm: resortReport ? resortReport.baseCm : current?.snowDepth,
+                  snowDepthSource: resortReport ? "reported" : "model",
                 }}
               />
             </div>
@@ -530,7 +563,8 @@ export function MountainDetail() {
                   sectionNumber=""
                   t={t}
                   seasonOpen={isLiftSeasonOpen(REGION_COUNTRY[region.id])}
-                  snowDepthCm={current.snowDepth}
+                  snowDepthCm={resortReport ? resortReport.baseCm : current.snowDepth}
+                  snowDepthSource={resortReport ? "reported" : "model"}
                 />
               </PremiumGate>
             </div>
