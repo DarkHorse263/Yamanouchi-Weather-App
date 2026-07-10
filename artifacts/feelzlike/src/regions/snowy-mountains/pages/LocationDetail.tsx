@@ -68,13 +68,24 @@ function WeatherIcon({ code, isDay = true, className = "w-5 h-5" }: { code: numb
 // day, so a brief thunderstorm (>=95) or rain (61-67, 80-82) cell outranks
 // snow even on a day that is mostly snow (e.g. a sub-zero 22cm day with one
 // thundersnow cell reads as a plain thunderstorm). On a ski page the snow is
-// the headline, so when a meaningful amount of snow is forecast we reclassify
-// the display code to snow.
-function displayDayCode(code: number | null | undefined, snowfallSumCm: number | null | undefined): number | null | undefined {
+// the headline, so when a meaningful amount of snow is forecast AND the snow's
+// water content beats the liquid rain (snow-led day), we reclassify the
+// display ICON to snow. Rain-led days keep their wet icon — the server's
+// totals-based weatherDescription ("Rain · snow") tells the story.
+function displayDayCode(
+  code: number | null | undefined,
+  snowfallSumCm: number | null | undefined,
+  rainMm: number | null | undefined,
+): number | null | undefined {
   const snow = Number(snowfallSumCm) || 0;
+  const rain = Number(rainMm) || 0;
   if (code == null) return code;
   const isWetOrStormy = (code >= 61 && code <= 67) || (code >= 80 && code <= 82) || code >= 95;
-  if (snow >= 1 && isWetOrStormy) return 75; // heavy snow fall
+  if (snow >= 1 && isWetOrStormy && snow / 0.7 > rain) return 75; // snow-led day
+  // Inverse: a rain-dominant day with trivial snow can still carry a snow
+  // moment-code — show the rain icon to match the server's "Rain" label.
+  const isSnowCode = (code >= 71 && code <= 77) || code === 85 || code === 86;
+  if (snow < 0.5 && rain >= 2 && isSnowCode) return 63; // rain-led day
   return code;
 }
 
@@ -543,7 +554,7 @@ export default function LocationDetail() {
                 {days.map((day: any, i: number) => {
                   const snow = Number(day.snowfallSum) || 0;
                   const rain = dailyRainMm(day) ?? 0;
-                  const dispCode = displayDayCode(day.weatherCode, snow);
+                  const dispCode = displayDayCode(day.weatherCode, snow, rain);
                   const snowH = Math.round((snow / maxSnow) * 100);
                   const rainH = Math.round((rain / maxRain) * 100);
                   return (
@@ -559,7 +570,7 @@ export default function LocationDetail() {
                         <WeatherIcon code={dispCode} className="w-9 h-9 md:w-11 md:h-11" />
                       </div>
                       <p className="text-xs text-muted-foreground capitalize line-clamp-1 leading-snug min-h-[1.1em]">
-                        {dispCode !== day.weatherCode ? "snow" : (day.weatherDescription || "").toLowerCase()}
+                        {(day.weatherDescription || "").toLowerCase()}
                       </p>
 
                       <div className="flex items-baseline justify-center gap-2 font-display mt-1" data-numeric>
@@ -657,7 +668,7 @@ export default function LocationDetail() {
                       {format(parseISO(day.date), "EEE d MMM")}
                     </p>
                     <div className="my-2 text-primary/90 inline-block">
-                      <WeatherIcon code={displayDayCode(day.weatherCode, snow)} className="w-7 h-7" />
+                      <WeatherIcon code={displayDayCode(day.weatherCode, snow, dailyRainMm(day))} className="w-7 h-7" />
                     </div>
                     <div className="flex items-baseline justify-center gap-1.5 font-display" data-numeric>
                       <span className="text-foreground text-lg">{Math.round(day.maxTemp)}°</span>

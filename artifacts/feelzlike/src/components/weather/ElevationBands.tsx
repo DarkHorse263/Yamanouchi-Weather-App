@@ -125,7 +125,7 @@ export function ElevationBands({ lat, lng, summitElevationM, name }: Props) {
                     {fmtDay(d.date, i)}
                   </p>
                   <p className="text-[11px] text-muted-foreground/70 mt-0.5 line-clamp-1">
-                    {d.weatherDescription || "·"}
+                    {(d.weatherDescription || "·").toLowerCase()}
                   </p>
                 </td>
                 <BandCell band={d.bands.upper} />
@@ -244,7 +244,7 @@ function DayCard({
           </p>
           {day.weatherDescription && (
             <p className="text-[11px] text-muted-foreground/70 mt-0.5 truncate">
-              {day.weatherDescription}
+              {day.weatherDescription.toLowerCase()}
             </p>
           )}
         </div>

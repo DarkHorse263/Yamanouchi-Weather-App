@@ -2,6 +2,7 @@ import { Router, type IRouter } from "express";
 import { reconcileDryToWet, isInJapan } from "../lib/amedas.js";
 import { reconcileNzMetarDryToWet, isInNewZealand } from "../lib/metar-nz.js";
 import { fetchOpenWeatherMapAsOpenMeteo } from "../lib/openweathermap.js";
+import { dailyConditionLabel } from "../lib/dailyConditionLabel.js";
 
 const router: IRouter = Router();
 
@@ -321,7 +322,14 @@ function pickDaily(d: { time: string[]; [k: string]: unknown }): Array<Record<st
   return t.map((date, i) => ({
     date,
     weatherCode: numOrNull(arr("weather_code")[i]),
-    weatherDescription: describe(numOrNull(arr("weather_code")[i])),
+    // Label from the day's TOTALS when snow is meaningful — the daily WMO
+    // code is the most-severe moment of the day, not the day's story.
+    weatherDescription: dailyConditionLabel({
+      code: numOrNull(arr("weather_code")[i]),
+      snowfallCm: numOrNull(arr("snowfall_sum")[i]),
+      rainMm: numOrNull(arr("rain_sum")[i]),
+      fallback: describe(numOrNull(arr("weather_code")[i])),
+    }),
     tempMax: numOrNull(arr("temperature_2m_max")[i]),
     tempMin: numOrNull(arr("temperature_2m_min")[i]),
     feelsLikeMax: numOrNull(arr("apparent_temperature_max")[i]),

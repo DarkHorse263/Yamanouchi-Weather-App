@@ -1,4 +1,5 @@
 import { LruTtlCache } from "./lru-cache";
+import { dailyConditionLabel } from "./dailyConditionLabel.js";
 
 const FRESH_MS = 30 * 60_000;
 const STALE_MS = 6 * 60 * 60_000;
@@ -183,16 +184,24 @@ async function fetchUpstream(
 
     if (!upperResp?.daily?.time || upperResp.daily.time.length === 0) return null;
 
-    const dates = upperResp.daily.time;
-    const wxCodes = upperResp.daily.weather_code ?? [];
-    const windAvg = upperResp.daily.wind_speed_10m_max ?? [];
-    const windMax = upperResp.daily.wind_gusts_10m_max ?? [];
-    const rainMm = upperResp.daily.rain_sum ?? [];
+    const upperDaily = upperResp.daily;
+    const dates = upperDaily.time ?? [];
+    const wxCodes = upperDaily.weather_code ?? [];
+    const windAvg = upperDaily.wind_speed_10m_max ?? [];
+    const windMax = upperDaily.wind_gusts_10m_max ?? [];
+    const rainMm = upperDaily.rain_sum ?? [];
     const freezing = dailyFreezingLevelM(upperResp);
 
     const days: ElevationBandDay[] = dates.slice(0, 7).map((date, i) => ({
       date,
-      weatherDescription: weatherCodeToDescription(wxCodes[i] ?? null),
+      // Label from the upper band's daily totals — the daily WMO code is the
+      // most-severe moment of the day, not the day's story.
+      weatherDescription: dailyConditionLabel({
+        code: wxCodes[i] ?? null,
+        snowfallCm: num(upperDaily.snowfall_sum?.[i]),
+        rainMm: num(rainMm[i]),
+        fallback: weatherCodeToDescription(wxCodes[i] ?? null),
+      }),
       freezingLevelM: freezing[i] ?? null,
       windAvgKmh: num(windAvg[i]),
       windMaxKmh: num(windMax[i]),

@@ -35,7 +35,9 @@
 // v11: /api/weather daily gained rainSum (true liquid rain). precipitationSum
 // includes melted snow, so cached old-shape responses showed snow again as
 // "rain" - bust so installed PWAs pick up the new field promptly.
-const CACHE_VERSION = "v11";
+// v12: daily weatherDescription is now totals-based (Heavy snow / Snow · rain
+// etc) instead of the WMO moment-code label - bust cached old labels.
+const CACHE_VERSION = "v12";
 const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
 const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;

@@ -4,6 +4,7 @@ import { getResortSnowReport } from "../lib/resortSnowReports";
 import { getEnsembleForecast } from "../lib/ensemble-forecast.js";
 import { locationMatchesRegion, parseRegionParam, RegionParamError } from "../lib/regions.js";
 import { fetchOpenWeatherMapAsOpenMeteo } from "../lib/openweathermap.js";
+import { dailyConditionLabel } from "../lib/dailyConditionLabel.js";
 import { reconcileBomCondition } from "../lib/bom-obs.js";
 import { reconcileNzMetarDryToWet } from "../lib/metar-nz.js";
 
@@ -518,7 +519,15 @@ async function fetchLocationWeather(location: LocationConfig, snowElevationM?: n
     maxTemp: om.daily.temperature_2m_max[i],
     minTemp: om.daily.temperature_2m_min[i],
     weatherCode: om.daily.weather_code[i],
-    weatherDescription: getWeatherDescription(om.daily.weather_code[i]),
+    // Daily label derives from the day's TOTALS, not the raw WMO code — the
+    // daily code is the most-severe MOMENT of the day, so it calls a 2.7cm
+    // day "Heavy snow fall" and a steady 17cm day plain "Snow".
+    weatherDescription: dailyConditionLabel({
+      code: om.daily.weather_code[i],
+      snowfallCm: om.daily.snowfall_sum[i],
+      rainMm: dailyRainSum(om.daily, i),
+      fallback: getWeatherDescription(om.daily.weather_code[i]),
+    }),
     precipitationSum: om.daily.precipitation_sum[i],
     // True liquid rain (rain + showers). Open-Meteo's precipitation_sum
     // INCLUDES the water equivalent of snowfall, so clients must never label
