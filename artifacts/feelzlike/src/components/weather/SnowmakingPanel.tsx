@@ -55,7 +55,7 @@ export function SnowmakingPanel({ locationId, tempC, humidity, hourly }: Snowmak
         <div>
           <p className="byline text-muted-foreground">snowmaking</p>
           <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2 text-foreground">
-            <Snowflake className="text-primary w-5 h-5" />
+            <Snowflake className="text-snow-accent w-5 h-5" />
             {cap.headline}
           </h2>
         </div>

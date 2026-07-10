@@ -57,9 +57,9 @@ function WeatherIcon({ code, isDay = true, className = "w-5 h-5" }: { code: numb
   if (code === 45 || code === 48) return <CloudFog className={className} />;
   if (code >= 51 && code <= 57) return <CloudDrizzle className={className} />;
   if (code >= 61 && code <= 67) return <CloudRain className={className} />;
-  if (code >= 71 && code <= 77) return <Snowflake className={className} />;
+  if (code >= 71 && code <= 77) return <Snowflake className={cn("text-snow-accent fill-snow-accent/15", className)} />;
   if (code >= 80 && code <= 82) return <CloudRain className={className} />;
-  if (code >= 85 && code <= 86) return <Snowflake className={className} />;
+  if (code >= 85 && code <= 86) return <Snowflake className={cn("text-snow-accent fill-snow-accent/15", className)} />;
   if (code >= 95) return <CloudLightning className={className} />;
   return <Cloud className={className} />;
 }
@@ -570,11 +570,11 @@ export default function LocationDetail() {
                       <div className="w-full flex items-end justify-center gap-1.5 h-10 mt-2" aria-hidden>
                         <div className="flex flex-col items-center justify-end h-full">
                           <div
-                            className="w-3 rounded-t-sm bg-sky-400/80"
+                            className="w-3 rounded-t-sm bg-snow-accent/80"
                             style={{ height: `${snow > 0 ? Math.max(8, snowH) : 0}%` }}
                             title={`${snow.toFixed(1)} cm snow`}
                           />
-                          <Snowflake className="w-3 h-3 text-sky-400/80 mt-1" />
+                          <Snowflake className="w-3 h-3 text-snow-accent/80 mt-1" />
                         </div>
                         <div className="flex flex-col items-center justify-end h-full">
                           <div
@@ -586,7 +586,7 @@ export default function LocationDetail() {
                         </div>
                       </div>
                       <div className="flex items-center gap-1.5 text-xs tabular-nums text-foreground/80 mt-1">
-                        <span className="font-medium text-sky-700">{snow > 0 ? `${snow.toFixed(snow >= 10 ? 0 : 1)}cm` : "-"}</span>
+                        <span className="font-medium text-snow-accent">{snow > 0 ? `${snow.toFixed(snow >= 10 ? 0 : 1)}cm` : "-"}</span>
                         <span className="text-muted-foreground/50">/</span>
                         <span className="font-medium text-blue-700">{rain > 0 ? `${rain.toFixed(rain >= 10 ? 0 : 1)}mm` : "-"}</span>
                       </div>
@@ -613,7 +613,7 @@ export default function LocationDetail() {
           })()}
 
           <div className="mt-3 flex items-center justify-end gap-4 text-xs text-muted-foreground">
-            <span className="inline-flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-sky-400/80" /> Snowfall</span>
+            <span className="inline-flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-snow-accent/80" /> Snowfall</span>
             <span className="inline-flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-blue-500/60" /> Rainfall</span>
           </div>
         </motion.div>
@@ -663,8 +663,8 @@ export default function LocationDetail() {
                       <span className="text-muted-foreground/60 text-xs">{Math.round(day.minTemp)}°</span>
                     </div>
                     <div className="flex items-center justify-center gap-1 text-xs tabular-nums mt-1.5">
-                      <Snowflake className="w-3 h-3 text-sky-400/80" />
-                      <span className="font-medium text-sky-700">
+                      <Snowflake className="w-3 h-3 text-snow-accent/80" />
+                      <span className="font-medium text-snow-accent">
                         {snow > 0 ? `${snow.toFixed(snow >= 10 ? 0 : 1)}cm` : "-"}
                       </span>
                     </div>

@@ -48,7 +48,7 @@ export default function Verify() {
   }
 
   return (
-    <PageShell tone="success" icon={<Snowflake className="w-10 h-10 text-sky-400" />} title="You're in. Powder incoming." subtitle={`We'll email ${data.email} when conditions match your alert.`}>
+    <PageShell tone="success" icon={<Snowflake className="w-10 h-10 text-snow-accent" />} title="You're in. Powder incoming." subtitle={`We'll email ${data.email} when conditions match your alert.`}>
       <div className="mt-4 flex flex-col sm:flex-row gap-3 items-center justify-center">
         <Link href="/" className="rounded-lg bg-primary text-primary-foreground font-bold text-sm px-5 py-2.5">
           Back to FeelZlike

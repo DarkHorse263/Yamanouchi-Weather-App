@@ -85,7 +85,7 @@ export function WeatherHero({
     <section className="mt-6 rounded-2xl border border-border bg-white p-6 md:p-8">
       <div className="flex items-start gap-6 flex-wrap">
         <div className="flex items-center gap-5">
-          <Icon className="w-16 h-16 text-primary" strokeWidth={1.4} />
+          <Icon className={`w-16 h-16 ${Icon === Snowflake ? "text-snow-accent" : "text-primary"}`} strokeWidth={1.4} />
           <div>
             <p className="font-display font-semibold text-6xl md:text-7xl tracking-tight text-foreground leading-none">
               {current.temperature !== null ? Math.round(current.temperature) : "-"}
@@ -247,7 +247,7 @@ export function WeatherHourly({
                 <p className="text-[10px] text-muted-foreground/70 mb-1">
                   {fmtHour(h.time, i)}
                 </p>
-                <Icon className="w-4 h-4 text-primary/80" strokeWidth={1.5} />
+                <Icon className={`w-4 h-4 ${Icon === Snowflake ? "text-snow-accent" : "text-primary/80"}`} strokeWidth={1.5} />
                 <p className="text-xs font-medium text-foreground mt-1">
                   {h.temperature !== null ? Math.round(h.temperature) : "-"}°
                 </p>
@@ -292,7 +292,7 @@ export function WeatherOutlook({
                 {fmtDay(d.date)}
               </p>
               <Icon
-                className="w-8 h-8 text-primary/80 mt-3"
+                className={`w-8 h-8 mt-3 ${Icon === Snowflake ? "text-snow-accent" : "text-primary/80"}`}
                 strokeWidth={1.5}
               />
               <p className="text-[11px] text-muted-foreground mt-2 line-clamp-2 min-h-[2.2em]">
@@ -364,12 +364,13 @@ function DayStat({
   label: string;
   value: string;
 }) {
+  const isSnow = Icon === Snowflake || Icon === CloudSnow;
   return (
     <div className="flex items-center justify-between gap-2 text-[11px]">
       <span className="inline-flex items-center gap-1 text-muted-foreground/70">
-        <Icon className="w-3 h-3" strokeWidth={2} /> {label}
+        <Icon className={`w-3 h-3 ${isSnow ? "text-snow-accent" : ""}`} strokeWidth={2} /> {label}
       </span>
-      <span className="font-medium text-foreground truncate">{value}</span>
+      <span className={`font-medium truncate ${isSnow ? "text-snow-accent" : "text-foreground"}`}>{value}</span>
     </div>
   );
 }
@@ -418,12 +419,13 @@ function KV({
   value: string;
   icon: ComponentType<{ className?: string; strokeWidth?: number }>;
 }) {
+  const isSnow = Icon === Snowflake || Icon === CloudSnow;
   return (
     <div>
       <div className="flex items-center gap-1.5 byline text-muted-foreground/70">
-        <Icon className="w-3 h-3" strokeWidth={2} /> {label}
+        <Icon className={`w-3 h-3 ${isSnow ? "text-snow-accent" : ""}`} strokeWidth={2} /> {label}
       </div>
-      <p className="mt-1 font-display font-medium text-lg text-foreground">{value}</p>
+      <p className={`mt-1 font-display font-medium text-lg ${isSnow ? "text-snow-accent" : "text-foreground"}`}>{value}</p>
     </div>
   );
 }

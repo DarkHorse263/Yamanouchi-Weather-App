@@ -72,9 +72,9 @@ function WeatherIcon({
   if (code === 45 || code === 48) return <CloudFog className={className} aria-hidden />;
   if (code >= 51 && code <= 57) return <CloudDrizzle className={className} aria-hidden />;
   if (code >= 61 && code <= 67) return <CloudRain className={className} aria-hidden />;
-  if (code >= 71 && code <= 77) return <Snowflake className={className} aria-hidden />;
+  if (code >= 71 && code <= 77) return <Snowflake className={cn("text-snow-accent fill-snow-accent/15", className)} aria-hidden />;
   if (code >= 80 && code <= 82) return <CloudRain className={className} aria-hidden />;
-  if (code >= 85 && code <= 86) return <Snowflake className={className} aria-hidden />;
+  if (code >= 85 && code <= 86) return <Snowflake className={cn("text-snow-accent fill-snow-accent/15", className)} aria-hidden />;
   if (code >= 95) return <CloudLightning className={className} aria-hidden />;
   return <Cloud className={className} aria-hidden />;
 }
@@ -448,7 +448,7 @@ function HourCell({
         {temp}°
       </p>
       {snow > 0 ? (
-        <div className={cn("flex items-center gap-1 text-xs font-semibold tabular-nums leading-none", iconTone)}>
+        <div className="flex items-center gap-1 text-xs font-semibold tabular-nums leading-none text-snow-accent">
           <Snowflake className="w-3 h-3" aria-hidden />
           {snow}
         </div>

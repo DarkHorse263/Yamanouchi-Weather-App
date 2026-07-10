@@ -20,3 +20,7 @@ Every snowfall amount, snow depth/total, and snow icon (Snowflake / CloudSnow) a
 **Boundary — labels near snow are NOT snow:** ElevationBands upper/mid/base elevation-band LABELS stay sky-blue (`text-sky-700/600/500`); only the per-band snowfall AMOUNT and its snowflake go pink. Don't pink a label just because it sits in a snow panel — recolor the measurement, not the section chrome.
 
 When adding a new snow figure/icon anywhere, apply `text-snow-accent` (or set `accent:"snow"` if it flows through `ConditionStat`). See also feelzlike-weather-icons.md for which icon represents snow.
+
+**Pitfall — local WeatherIcon copies (July 2026 regression):** several files carry their OWN private `WeatherIcon`/`pickIcon` weatherCode→icon fn (snowy-mountains LocationDetail, HourlyForecast, dashboard MountainOutlook, WeatherSections, generic MountainDetail) in addition to the shared snowy-mountains `weather-icon.tsx`. Converting only the shared one leaves blue snow in every local copy — bake `cn("text-snow-accent fill-snow-accent/15", className)` into the snow branches (codes 71-77, 85-86) of ANY icon fn, at the source, so call sites can't forget. When adding a new daily/hourly forecast renderer, its bars + amounts + legend swatch go snow-accent too (rain stays blue/slate).
+
+**Also pink (decided July 2026):** section-header snowflakes (e.g. SnowmakingPanel heading) — "every snow icon" includes decorative/header snowflakes; hourly powder-graded cells show pink snow icon + amount (medal identity lives in the cell bg + badges, not the snow figure).

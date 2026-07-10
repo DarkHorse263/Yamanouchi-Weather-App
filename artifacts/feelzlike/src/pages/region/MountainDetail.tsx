@@ -226,7 +226,7 @@ export function MountainDetail() {
           <section className="mt-6 rounded-2xl border border-border bg-white p-6 md:p-8">
             <div className="flex items-start gap-6 flex-wrap">
               <div className="flex items-center gap-5">
-                <Icon className="w-16 h-16 text-primary" strokeWidth={1.4} />
+                <Icon className={cn("w-16 h-16", Icon === Snowflake ? "text-snow-accent" : "text-primary")} strokeWidth={1.4} />
                 <div>
                   <p className="font-display font-semibold text-6xl md:text-7xl tracking-tight text-foreground leading-none">
                     {current.temperature !== null ? Math.round(current.temperature) : "-"}
@@ -438,7 +438,7 @@ export function MountainDetail() {
                       <p className="text-sm font-semibold text-foreground leading-tight">
                         {fmtDay(d.date)}
                       </p>
-                      <DIcon className="w-8 h-8 text-primary/80 mt-3" strokeWidth={1.5} />
+                      <DIcon className={cn("w-8 h-8 mt-3", DIcon === Snowflake ? "text-snow-accent" : "text-primary/80")} strokeWidth={1.5} />
                       <p className="text-[11px] text-muted-foreground mt-2 line-clamp-2 min-h-[2.2em]">
                         {d.weatherDescription}
                       </p>

@@ -41,7 +41,7 @@ export default function Unsubscribed() {
           </>
         ) : (
           <>
-            <Snowflake className="w-10 h-10 text-sky-400 mx-auto mb-4" />
+            <Snowflake className="w-10 h-10 text-snow-accent mx-auto mb-4" />
             <h1 className="text-2xl font-black text-foreground mb-2">You're unsubscribed</h1>
             <p className="text-sm text-muted-foreground">
               You won't receive any more powder alerts at that email. Resubscribe anytime from any region's Alerts page.

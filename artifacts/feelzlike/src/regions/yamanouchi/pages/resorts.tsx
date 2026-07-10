@@ -175,11 +175,11 @@ export default function Resorts() {
 
                         <div className="grid grid-cols-4 text-center">
                           <div>
-                            <p className="text-base font-black text-blue-600">{resort.snow24h ?? 0}</p>
+                            <p className="text-base font-black text-snow-accent">{resort.snow24h ?? 0}</p>
                             <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wide">24h cm</p>
                           </div>
                           <div>
-                            <p className="text-base font-black text-slate-800">{resort.baseDepth ?? 0}</p>
+                            <p className="text-base font-black text-snow-accent">{resort.baseDepth ?? 0}</p>
                             <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wide">Base cm</p>
                           </div>
                           <div>
@@ -194,7 +194,7 @@ export default function Resorts() {
 
                         <div className="w-full bg-slate-100 rounded-full h-1">
                           <div
-                            className="h-1 rounded-full bg-blue-400 transition-all duration-500"
+                            className="h-1 rounded-full bg-snow-accent transition-all duration-500"
                             style={{ width: `${basePct}%` }}
                           />
                         </div>
@@ -205,7 +205,7 @@ export default function Resorts() {
                               <CalendarDays className="w-3 h-3" />
                               <span className="text-xs font-bold">{t("Tomorrow", "明日")}</span>
                             </div>
-                            <span className="text-xs font-black text-blue-700">+{resort.snowTomorrow} cm</span>
+                            <span className="text-xs font-black text-snow-accent">+{resort.snowTomorrow} cm</span>
                           </div>
                         )}
 

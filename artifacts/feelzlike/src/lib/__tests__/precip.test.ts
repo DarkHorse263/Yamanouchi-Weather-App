@@ -32,15 +32,15 @@ test("rain only formats as 'rain · X mm last hour' with blue tone", () => {
   assert.deepEqual(s, { label: `rain ${MIDDOT} 3.2 mm last hour`, tone: "text-blue-600" });
 });
 
-test("snow only formats as 'snow · X cm last hour' with sky tone", () => {
+test("snow only formats as 'snow · X cm last hour' with snow-accent tone", () => {
   const s = precipSummary({ precipMm: null, snowfallCm: 5 });
-  assert.deepEqual(s, { label: `snow ${MIDDOT} 5 cm last hour`, tone: "text-sky-600" });
+  assert.deepEqual(s, { label: `snow ${MIDDOT} 5 cm last hour`, tone: "text-snow-accent" });
 });
 
 test("snow takes priority over rain when both are present", () => {
   const s = precipSummary({ precipMm: 1.5, snowfallCm: 2.4 });
   assert.equal(s?.label, `snow ${MIDDOT} 2.4 cm last hour`);
-  assert.equal(s?.tone, "text-sky-600");
+  assert.equal(s?.tone, "text-snow-accent");
 });
 
 test("rain shows when snow is zero but rain is positive", () => {

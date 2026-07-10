@@ -32,9 +32,9 @@ function WeatherIcon({ code, className = "w-5 h-5" }: { code: number | null | un
   if (code === 45 || code === 48) return <CloudFog className={className} />;
   if (code >= 51 && code <= 57) return <CloudDrizzle className={className} />;
   if (code >= 61 && code <= 67) return <CloudRain className={className} />;
-  if (code >= 71 && code <= 77) return <Snowflake className={className} />;
+  if (code >= 71 && code <= 77) return <Snowflake className={cn("text-snow-accent fill-snow-accent/15", className)} />;
   if (code >= 80 && code <= 82) return <CloudRain className={className} />;
-  if (code >= 85 && code <= 86) return <Snowflake className={className} />;
+  if (code >= 85 && code <= 86) return <Snowflake className={cn("text-snow-accent fill-snow-accent/15", className)} />;
   if (code >= 95) return <CloudLightning className={className} />;
   return <Cloud className={className} />;
 }
@@ -124,11 +124,11 @@ export function MountainOutlook({
               <div className="w-full flex items-end justify-center gap-1 h-9 mt-1.5" aria-hidden>
                 <div className="flex flex-col items-center justify-end h-full">
                   <div
-                    className="w-2.5 rounded-t-sm bg-sky-500/70"
+                    className="w-2.5 rounded-t-sm bg-snow-accent/70"
                     style={{ height: `${snow > 0 ? Math.max(8, snowH) : 0}%` }}
-                    title={`${snow.toFixed(1)} mm snow`}
+                    title={`${snow.toFixed(1)} cm snow`}
                   />
-                  <Snowflake className="w-2.5 h-2.5 text-sky-500/70 mt-0.5" />
+                  <Snowflake className="w-2.5 h-2.5 text-snow-accent/70 mt-0.5" />
                 </div>
                 <div className="flex flex-col items-center justify-end h-full">
                   <div
@@ -140,7 +140,7 @@ export function MountainOutlook({
                 </div>
               </div>
               <div className="flex items-center gap-1 text-[10px] tabular-nums text-muted-foreground/80 mt-0.5">
-                <span className="text-sky-700">{snow > 0 ? `${snow.toFixed(snow >= 10 ? 0 : 1)}mm` : "-"}</span>
+                <span className="text-snow-accent">{snow > 0 ? `${snow.toFixed(snow >= 10 ? 0 : 1)}cm` : "-"}</span>
                 <span className="text-muted-foreground/40">/</span>
                 <span className="text-slate-600">{rain > 0 ? `${rain.toFixed(rain >= 10 ? 0 : 1)}mm` : "-"}</span>
               </div>
@@ -172,7 +172,7 @@ export function MountainOutlook({
 
       <div className="mt-3 flex items-center justify-end gap-3 text-[10px] text-muted-foreground/70">
         <span className="inline-flex items-center gap-1">
-          <span className="w-2 h-2 rounded-sm bg-sky-500/70" /> Snowfall
+          <span className="w-2 h-2 rounded-sm bg-snow-accent/70" /> Snowfall
         </span>
         <span className="inline-flex items-center gap-1">
           <span className="w-2 h-2 rounded-sm bg-slate-400/70" /> Rainfall
