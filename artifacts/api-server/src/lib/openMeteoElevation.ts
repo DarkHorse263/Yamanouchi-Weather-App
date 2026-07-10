@@ -97,6 +97,7 @@ interface OmDailyResponse {
   hourly?: {
     time?: string[];
     freezing_level_height?: (number | null)[];
+    precipitation?: (number | null)[];
   };
 }
 
@@ -111,6 +112,15 @@ async function fetchAtElevation(
     latitude: String(lat),
     longitude: String(lng),
     elevation: String(elevationM),
+    // Pin ALL band requests to the SAME model grid cell. The default
+    // cell_selection=land picks the cell whose TERRAIN matches the requested
+    // elevation, so upper/mid/lower ended up sampling three different
+    // physical places with genuinely different precipitation — which showed
+    // impossible stories like mid-mountain getting MORE snow than the summit.
+    // With one pinned cell there is one precip story; only temperature is
+    // downscaled per elevation, and we derive snow-vs-rain per band from the
+    // freezing level (see partitionPrecipByBand).
+    cell_selection: "nearest",
     daily: [
       "temperature_2m_max",
       "temperature_2m_min",
@@ -124,7 +134,7 @@ async function fetchAtElevation(
     forecast_days: "7",
   });
   if (includeHourly) {
-    params.set("hourly", "freezing_level_height");
+    params.set("hourly", "freezing_level_height,precipitation");
   }
 
   const url = `https://api.open-meteo.com/v1/forecast?${params}`;
@@ -157,13 +167,82 @@ function dailyFreezingLevelM(om: OmDailyResponse | null): (number | null)[] {
   });
 }
 
-function buildBand(om: OmDailyResponse | null, idx: number): ElevationBand {
+/**
+ * Snow line sits ~300m below the freezing level — the standard heuristic
+ * (falling snow survives a few hundred metres of above-zero air before
+ * melting out). A band gets snow for an hour when bandElev >= FL - 300m.
+ */
+const SNOW_LINE_OFFSET_M = 300;
+
+/** Open-Meteo derives snowfall at ~0.7cm per 1mm of water (app-wide convention). */
+const CM_SNOW_PER_MM_WATER = 0.7;
+
+export interface BandDayPartition {
+  snowfallCm: number;
+  rainfallMm: number;
+  /** false when any precip hour lacked a usable freezing level — caller
+   * should fall back to the model's own daily sums for that day. */
+  reliable: boolean;
+}
+
+/**
+ * Partition ONE pinned grid cell's hourly precipitation into snow vs rain
+ * for a given band elevation, using the hourly freezing level. Open-Meteo
+ * downscales temperature per requested elevation but does NOT re-partition
+ * precipitation phase, so with a pinned cell every band would otherwise
+ * report identical snowfall (a +3° base day would claim summit-sized snow).
+ * Missing FL hours carry the last known FL forward (fail-soft).
+ */
+export function partitionPrecipByBand(
+  hourlyTimes: string[],
+  precipMm: (number | null | undefined)[],
+  freezingLevelM: (number | null | undefined)[],
+  bandElevationM: number,
+): Map<string, BandDayPartition> {
+  const out = new Map<string, BandDayPartition>();
+  let lastFl: number | null = null;
+  for (let i = 0; i < hourlyTimes.length; i++) {
+    const day = hourlyTimes[i]?.slice(0, 10);
+    if (!day) continue;
+    const flRaw = freezingLevelM[i];
+    if (typeof flRaw === "number" && Number.isFinite(flRaw)) lastFl = flRaw;
+    const fl = lastFl;
+    const pRaw = precipMm[i];
+    const p = typeof pRaw === "number" && Number.isFinite(pRaw) && pRaw > 0 ? pRaw : 0;
+
+    const entry = out.get(day) ?? { snowfallCm: 0, rainfallMm: 0, reliable: true };
+    if (p > 0) {
+      if (fl == null) {
+        entry.reliable = false;
+      } else if (bandElevationM >= fl - SNOW_LINE_OFFSET_M) {
+        entry.snowfallCm += p * CM_SNOW_PER_MM_WATER;
+      } else {
+        entry.rainfallMm += p;
+      }
+    }
+    out.set(day, entry);
+  }
+  for (const e of out.values()) {
+    e.snowfallCm = Math.round(e.snowfallCm * 10) / 10;
+    e.rainfallMm = Math.round(e.rainfallMm * 10) / 10;
+  }
+  return out;
+}
+
+function buildBand(
+  om: OmDailyResponse | null,
+  idx: number,
+  derived: BandDayPartition | undefined,
+): ElevationBand {
   const d = om?.daily;
   return {
     tempMaxC: num(d?.temperature_2m_max?.[idx]),
     tempMinC: num(d?.temperature_2m_min?.[idx]),
-    snowfallCm: num(d?.snowfall_sum?.[idx]),
-    rainfallMm: num(d?.rain_sum?.[idx]),
+    // Phase comes from the freezing-level partition (one coherent precip
+    // story across bands). Fall back to the model's own daily sums only
+    // when the partition had no usable freezing level for that day.
+    snowfallCm: derived?.reliable ? derived.snowfallCm : num(d?.snowfall_sum?.[idx]),
+    rainfallMm: derived?.reliable ? derived.rainfallMm : num(d?.rain_sum?.[idx]),
   };
 }
 
@@ -192,26 +271,43 @@ async function fetchUpstream(
     const rainMm = upperDaily.rain_sum ?? [];
     const freezing = dailyFreezingLevelM(upperResp);
 
-    const days: ElevationBandDay[] = dates.slice(0, 7).map((date, i) => ({
-      date,
-      // Label from the upper band's daily totals — the daily WMO code is the
-      // most-severe moment of the day, not the day's story.
-      weatherDescription: dailyConditionLabel({
-        code: wxCodes[i] ?? null,
-        snowfallCm: num(upperDaily.snowfall_sum?.[i]),
-        rainMm: num(rainMm[i]),
-        fallback: weatherCodeToDescription(wxCodes[i] ?? null),
-      }),
-      freezingLevelM: freezing[i] ?? null,
-      windAvgKmh: num(windAvg[i]),
-      windMaxKmh: num(windMax[i]),
-      precipMm: num(rainMm[i]),
-      bands: {
-        upper: buildBand(upperResp, i),
-        mid: buildBand(midResp, i),
-        lower: buildBand(lowerResp, i),
-      },
-    }));
+    // One pinned cell, one precip story: partition the upper request's
+    // hourly precipitation into snow vs rain per band via the freezing level.
+    const hourlyTimes = upperResp.hourly?.time ?? [];
+    const hourlyPrecip = upperResp.hourly?.precipitation ?? [];
+    const hourlyFl = upperResp.hourly?.freezing_level_height ?? [];
+    const partition = {
+      upper: partitionPrecipByBand(hourlyTimes, hourlyPrecip, hourlyFl, elevations.upper),
+      mid: partitionPrecipByBand(hourlyTimes, hourlyPrecip, hourlyFl, elevations.mid),
+      lower: partitionPrecipByBand(hourlyTimes, hourlyPrecip, hourlyFl, elevations.lower),
+    };
+
+    const days: ElevationBandDay[] = dates.slice(0, 7).map((date, i) => {
+      const upperPart = partition.upper.get(date);
+      const upperSnow = upperPart?.reliable ? upperPart.snowfallCm : num(upperDaily.snowfall_sum?.[i]);
+      const upperRain = upperPart?.reliable ? upperPart.rainfallMm : num(rainMm[i]);
+      return {
+        date,
+        // Label from the upper band's DERIVED daily totals so it matches the
+        // numbers shown — the daily WMO code is the most-severe moment of
+        // the day, not the day's story.
+        weatherDescription: dailyConditionLabel({
+          code: wxCodes[i] ?? null,
+          snowfallCm: upperSnow,
+          rainMm: upperRain,
+          fallback: weatherCodeToDescription(wxCodes[i] ?? null),
+        }),
+        freezingLevelM: freezing[i] ?? null,
+        windAvgKmh: num(windAvg[i]),
+        windMaxKmh: num(windMax[i]),
+        precipMm: upperRain,
+        bands: {
+          upper: buildBand(upperResp, i, upperPart),
+          mid: buildBand(midResp, i, partition.mid.get(date)),
+          lower: buildBand(lowerResp, i, partition.lower.get(date)),
+        },
+      };
+    });
 
     return {
       resortName: name ?? "",

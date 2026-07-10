@@ -37,7 +37,10 @@
 // "rain" - bust so installed PWAs pick up the new field promptly.
 // v12: daily weatherDescription is now totals-based (Heavy snow / Snow · rain
 // etc) instead of the WMO moment-code label - bust cached old labels.
-const CACHE_VERSION = "v12";
+// v13: /api/elevation-forecast bands now come from ONE pinned grid cell with
+// freezing-level phase partitioning (was 3 different cells, which could show
+// more snow mid than upper) - bust cached incoherent band tables.
+const CACHE_VERSION = "v13";
 const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
 const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;
