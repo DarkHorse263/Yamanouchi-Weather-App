@@ -33,6 +33,7 @@ import { motion } from "framer-motion";
 import { useLanguage, useRegion } from "@workspace/feelzlike-shell";
 import { useState } from "react";
 import { PageMeta } from "@/lib/seo/PageMeta";
+import { dailyRainMm } from "@/lib/precip";
 import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
 import { HourlyForecast } from "@/components/HourlyForecast";
 import { PowderCalendar } from "@/components/PowderCalendar";
@@ -221,8 +222,8 @@ export default function ResortDetail() {
     ...(current.freezingLevel !== undefined
       ? [{ label: t("Freezing level", "凍結高度"), value: `${current.freezingLevel} m`, icon: Snowflake }]
       : []),
-    ...(daily?.[0]?.precipitationSum != null
-      ? [{ label: t("Today rain", "本日降水"), value: `${daily[0].precipitationSum.toFixed(1)} mm`, icon: CloudRain }]
+    ...(dailyRainMm(daily?.[0]) != null
+      ? [{ label: t("Today rain", "本日降水"), value: `${dailyRainMm(daily?.[0])!.toFixed(1)} mm`, icon: CloudRain }]
       : []),
   ];
 

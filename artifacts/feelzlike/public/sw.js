@@ -32,7 +32,10 @@
 // the radar looked "frozen" because the catch-all SWR returned a stale loop.
 // v10: /api/weather + /api/town-weather snowDepth changed units (metres -> cm)
 // and unknown depth is now omitted instead of 0 - bust caches holding old shape.
-const CACHE_VERSION = "v10";
+// v11: /api/weather daily gained rainSum (true liquid rain). precipitationSum
+// includes melted snow, so cached old-shape responses showed snow again as
+// "rain" - bust so installed PWAs pick up the new field promptly.
+const CACHE_VERSION = "v11";
 const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
 const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;

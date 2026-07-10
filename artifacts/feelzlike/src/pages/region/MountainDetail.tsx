@@ -45,6 +45,7 @@ import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
 import { midMountainElevation } from "@/lib/elevation";
 import { getLiftsForMountain } from "@/data/lifts";
 import { cn } from "@/lib/utils";
+import { dailyRainMm } from "@/lib/precip";
 import { BarChart2 } from "lucide-react";
 import { useState } from "react";
 import { PageMeta } from "@/lib/seo/PageMeta";
@@ -358,11 +359,10 @@ export function MountainDetail() {
                 />
                 <KV
                   label={t("Rain", "降水量")}
-                  value={
-                    daily[0].precipitationSum !== null && daily[0].precipitationSum !== undefined
-                      ? `${daily[0].precipitationSum.toFixed(1)} mm`
-                      : "0 mm"
-                  }
+                  value={(() => {
+                    const rain = dailyRainMm(daily[0]);
+                    return rain != null ? `${rain.toFixed(1)} mm` : "0 mm";
+                  })()}
                   icon={CloudRain}
                 />
                 <KV
@@ -718,6 +718,7 @@ type MountainWeather = {
     weatherCode?: number | null;
     weatherDescription?: string;
     precipitationSum?: number | null;
+    rainSum?: number | null;
     snowfallSum?: number | null;
     windSpeedMax?: number | null;
     sunrise?: string | null;

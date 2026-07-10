@@ -1117,6 +1117,12 @@ export const GetWeatherResponse = zod.object({
           weatherCode: zod.number(),
           weatherDescription: zod.string(),
           precipitationSum: zod.number(),
+          rainSum: zod
+            .number()
+            .nullish()
+            .describe(
+              'True liquid rain in mm (rain + showers). precipitationSum includes the water equivalent of snowfall, so display this as \"rain\", never precipitationSum.',
+            ),
           snowfallSum: zod.number(),
           windSpeedMax: zod.number(),
           uvIndexMax: zod.number().optional(),
@@ -1252,6 +1258,12 @@ export const GetLocationWeatherResponse = zod.object({
       weatherCode: zod.number(),
       weatherDescription: zod.string(),
       precipitationSum: zod.number(),
+      rainSum: zod
+        .number()
+        .nullish()
+        .describe(
+          'True liquid rain in mm (rain + showers). precipitationSum includes the water equivalent of snowfall, so display this as \"rain\", never precipitationSum.',
+        ),
       snowfallSum: zod.number(),
       windSpeedMax: zod.number(),
       uvIndexMax: zod.number().optional(),

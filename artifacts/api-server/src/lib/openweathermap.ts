@@ -189,6 +189,7 @@ export async function fetchOpenWeatherMapAsOpenMeteo(
   const dMin: number[] = [];
   const dCode: number[] = [];
   const dPrecip: number[] = [];
+  const dRain: number[] = [];
   const dSnow: number[] = [];
   const dWindMax: number[] = [];
   const dUv: number[] = [];
@@ -204,6 +205,9 @@ export async function fetchOpenWeatherMapAsOpenMeteo(
       0,
     );
     const snowSumCm = entries.reduce((s, e) => s + (e.snow?.["3h"] ?? 0) * 0.7, 0);
+    // Liquid rain only (OWM separates rain/snow buckets), so the reshaped
+    // daily.rain_sum matches Open-Meteo's semantics: rain EXCLUDING snow.
+    const rainSum = entries.reduce((s, e) => s + (e.rain?.["3h"] ?? 0), 0);
     // Pick the bucket nearest local midday for the day's representative code.
     const midday = entries.reduce((best, e) => {
       const hour = new Date((e.dt + offsetSec) * 1000).getUTCHours();
@@ -216,6 +220,7 @@ export async function fetchOpenWeatherMapAsOpenMeteo(
     dMin.push(Math.min(...temps));
     dCode.push(owmToWmo(midday.weather?.[0]?.id ?? 800));
     dPrecip.push(Math.round(precipSum * 10) / 10);
+    dRain.push(Math.round(rainSum * 10) / 10);
     dSnow.push(Math.round(snowSumCm * 10) / 10);
     dWindMax.push(Math.max(...winds));
     dUv.push(0);
@@ -242,6 +247,7 @@ export async function fetchOpenWeatherMapAsOpenMeteo(
       temperature_2m_min: dMin,
       weather_code: dCode,
       precipitation_sum: dPrecip,
+      rain_sum: dRain,
       snowfall_sum: dSnow,
       wind_speed_10m_max: dWindMax,
       uv_index_max: dUv,

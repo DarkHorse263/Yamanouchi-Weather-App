@@ -1,11 +1,15 @@
 ---
 name: feelzlike snow units
-description: Snow amounts are cm, rain is mm, Open-Meteo snow DEPTH is METRES; cm is app-canonical; omit unknown depth, never coerce to 0; only "reported" depth may assert no-base.
+description: Snow amounts are cm, rain is mm, Open-Meteo snow DEPTH is METRES; precipitation_sum includes snow water so rain renders from rainSum/dailyRainMm; omit unknown depth, never coerce to 0; only "reported" depth may assert no-base.
 ---
 
 # feelzlike snow units
 
-Open-Meteo daily fields used by the resort forecast: `snowfall_sum` is in **cm**, `precipitation_sum` (rain) is in **mm**. The API passes both through unconverted as `snowfallSum` / `precipitationSum`.
+Open-Meteo daily fields used by the resort forecast: `snowfall_sum` is in **cm**, `precipitation_sum` is in **mm**. The API passes both through unconverted as `snowfallSum` / `precipitationSum`.
+
+## precipitation_sum is NOT rain — never label it "rain"
+
+Open-Meteo's `precipitation_sum` INCLUDES the water equivalent of snowfall. Displaying it as "rain" double-reports snow days ("17cm snow / 31mm rain" at −3° when it never rained — July 2026 user report). The `/weather/:id` daily response now carries `rainSum` (Open-Meteo `rain_sum + showers_sum`; the OWM fallback reshapes its separate liquid-rain buckets into `rain_sum`). Clients render rain via `dailyRainMm()` (app `lib/precip.ts`) or the local copy in the dashboard lib's MountainOutlook — it prefers `rainSum` and falls back to `max(0, precip − snowCm/0.7)` for stale cached responses (Open-Meteo converts at ~0.7cm snow per 1mm water; the OWM fallback builds snow at the same ratio so the derivation is exact there too).
 
 ## Snow DEPTH is metres at the source — cm is app-canonical
 

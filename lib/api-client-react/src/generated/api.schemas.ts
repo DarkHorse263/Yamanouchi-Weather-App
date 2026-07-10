@@ -959,6 +959,8 @@ export interface DailyForecast {
   weatherCode: number;
   weatherDescription: string;
   precipitationSum: number;
+  /** True liquid rain in mm (rain + showers). precipitationSum includes the water equivalent of snowfall, so display this as "rain", never precipitationSum. */
+  rainSum?: number | null;
   snowfallSum: number;
   windSpeedMax: number;
   uvIndexMax?: number;

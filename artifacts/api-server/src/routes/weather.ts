@@ -520,6 +520,10 @@ async function fetchLocationWeather(location: LocationConfig, snowElevationM?: n
     weatherCode: om.daily.weather_code[i],
     weatherDescription: getWeatherDescription(om.daily.weather_code[i]),
     precipitationSum: om.daily.precipitation_sum[i],
+    // True liquid rain (rain + showers). Open-Meteo's precipitation_sum
+    // INCLUDES the water equivalent of snowfall, so clients must never label
+    // it "rain" — on a snow day that double-reports the snow as rain.
+    rainSum: dailyRainSum(om.daily, i),
     snowfallSum: om.daily.snowfall_sum[i],
     windSpeedMax: om.daily.wind_speed_10m_max[i],
     uvIndexMax: om.daily.uv_index_max?.[i] ?? 0,
@@ -652,6 +656,15 @@ function sumHourlySnowfall(om: any, hours: number): number | undefined {
   return Math.round(total * 10) / 10;
 }
 
+// rain_sum + showers_sum for day i, or null when the upstream response has
+// neither (e.g. the OWM fallback shape, which only provides rain_sum).
+function dailyRainSum(daily: any, i: number): number | null {
+  const rain = daily?.rain_sum?.[i];
+  const showers = daily?.showers_sum?.[i];
+  if (rain == null && showers == null) return null;
+  return Math.round(((Number(rain) || 0) + (Number(showers) || 0)) * 10) / 10;
+}
+
 async function fetchOpenMeteo(location: LocationConfig) {
   const params = new URLSearchParams({
     latitude: location.latitude.toString(),
@@ -661,7 +674,7 @@ async function fetchOpenMeteo(location: LocationConfig) {
     elevation: location.elevation.toString(),
     current: "temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m,snow_depth,freezing_level_height",
     hourly: "temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,cloud_cover,wind_speed_10m,snowfall,freezing_level_height",
-    daily: "weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,snowfall_sum,wind_speed_10m_max,uv_index_max",
+    daily: "weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,rain_sum,showers_sum,snowfall_sum,wind_speed_10m_max,uv_index_max",
     timezone: location.timezone ?? "Australia/Sydney",
     // AU ski season (opened Jun 2026) runs the premium "extended" outlook out
     // to 14 days · Open-Meteo's reliable ceiling is ~16, and accuracy past ~10

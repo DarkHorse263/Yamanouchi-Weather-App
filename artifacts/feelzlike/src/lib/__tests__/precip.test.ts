@@ -11,7 +11,7 @@
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { precipSummary } from "../precip";
+import { precipSummary, dailyRainMm } from "../precip";
 
 const MIDDOT = "\u00b7";
 
@@ -57,4 +57,39 @@ test("brand voice · lowercase, middot separator, no em/en dash", () => {
     assert.ok(!label.includes("\u2014"), "label must not contain an em dash");
     assert.ok(!label.includes("\u2013"), "label must not contain an en dash");
   }
+});
+
+// dailyRainMm · daily rain must never double-count snow. Open-Meteo's
+// precipitation_sum includes the water equivalent of snowfall, so the helper
+// prefers the server's true rainSum and only falls back to deriving
+// precip − snowCm/0.7 for stale cached responses that predate the field.
+
+test("dailyRainMm prefers the server rainSum when present", () => {
+  assert.equal(dailyRainMm({ rainSum: 8.3, precipitationSum: 27.1, snowfallSum: 15.89 }), 8.3);
+});
+
+test("dailyRainMm rainSum of 0 is respected (not treated as missing)", () => {
+  assert.equal(dailyRainMm({ rainSum: 0, precipitationSum: 27.1, snowfallSum: 15.89 }), 0);
+});
+
+test("dailyRainMm derives rain from precip minus snow water equivalent when rainSum is missing", () => {
+  // 31mm precip with 17cm snow ≈ 24.3mm of snow water → ~6.7mm real rain
+  assert.equal(dailyRainMm({ precipitationSum: 31, snowfallSum: 17 }), 6.7);
+});
+
+test("dailyRainMm fallback clamps to 0 when snow water equivalent exceeds precip", () => {
+  assert.equal(dailyRainMm({ rainSum: null, precipitationSum: 5, snowfallSum: 10 }), 0);
+});
+
+test("dailyRainMm returns null when precipitationSum is null and rainSum missing", () => {
+  assert.equal(dailyRainMm({ rainSum: null, precipitationSum: null, snowfallSum: 3 }), null);
+});
+
+test("dailyRainMm returns null for a missing day", () => {
+  assert.equal(dailyRainMm(null), null);
+  assert.equal(dailyRainMm(undefined), null);
+});
+
+test("dailyRainMm all-rain day passes precip through unchanged when rainSum missing", () => {
+  assert.equal(dailyRainMm({ precipitationSum: 12.4, snowfallSum: 0 }), 12.4);
 });

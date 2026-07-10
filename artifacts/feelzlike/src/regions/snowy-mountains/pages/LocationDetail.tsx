@@ -91,6 +91,7 @@ function formatAgo(iso: string | undefined | null, now: number): string {
   return `${Math.round(hr / 24)}d ago`;
 }
 import { cn } from "../lib/utils";
+import { dailyRainMm } from "@/lib/precip";
 import { HourlyForecast } from "@/components/HourlyForecast";
 import { PowderCalendar } from "@/components/PowderCalendar";
 import { LiftWindHoldPanel } from "@/components/LiftWindHoldPanel";
@@ -534,14 +535,14 @@ export default function LocationDetail() {
           {(() => {
             const days = daily.slice(0, 5);
             const maxSnow = Math.max(0.1, ...days.map((d: any) => Number(d.snowfallSum) || 0));
-            const maxRain = Math.max(0.1, ...days.map((d: any) => Number(d.precipitationSum) || 0));
+            const maxRain = Math.max(0.1, ...days.map((d: any) => dailyRainMm(d) ?? 0));
             return (
               <div className={cn("grid gap-px rounded-2xl overflow-hidden bg-white/5 border border-white/5",
                 days.length === 6 ? "grid-cols-3 sm:grid-cols-6" : "grid-cols-3 md:grid-cols-7")}
               >
                 {days.map((day: any, i: number) => {
                   const snow = Number(day.snowfallSum) || 0;
-                  const rain = Number(day.precipitationSum) || 0;
+                  const rain = dailyRainMm(day) ?? 0;
                   const dispCode = displayDayCode(day.weatherCode, snow);
                   const snowH = Math.round((snow / maxSnow) * 100);
                   const rainH = Math.round((rain / maxRain) * 100);

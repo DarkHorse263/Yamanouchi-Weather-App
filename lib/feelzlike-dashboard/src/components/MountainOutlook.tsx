@@ -9,6 +9,7 @@ export interface OutlookDay {
   weatherCode?: number | null;
   weatherDescription?: string;
   precipitationSum?: number;
+  rainSum?: number | null;
   snowfallSum?: number;
   windSpeedMax?: number;
   sunrise?: string;
@@ -39,6 +40,19 @@ function WeatherIcon({ code, className = "w-5 h-5" }: { code: number | null | un
   return <Cloud className={className} />;
 }
 
+// Open-Meteo's precipitation_sum INCLUDES the water equivalent of snowfall,
+// so it must never be shown as "rain" directly. Prefer the API's true rainSum
+// (rain + showers); for stale cached responses that predate the field, derive
+// rain by subtracting the snow water equivalent (~0.7 cm snow per 1 mm water).
+function rainMm(day: OutlookDay): number {
+  if (day.rainSum != null && Number.isFinite(Number(day.rainSum))) {
+    return Math.max(0, Number(day.rainSum));
+  }
+  const precip = Number(day.precipitationSum) || 0;
+  const snowCm = Number(day.snowfallSum) || 0;
+  return Math.max(0, Math.round((precip - snowCm / 0.7) * 10) / 10);
+}
+
 function dayLabel(iso: string, idx: number) {
   if (idx === 0) return "Today";
   const d = new Date(iso);
@@ -66,7 +80,7 @@ export function MountainOutlook({
   const days = rawDays.slice(0, maxDays);
   const headingText = heading ?? `${days.length}-day mountain forecast`;
   const maxSnow = Math.max(0.1, ...days.map((d) => Number(d.snowfallSum) || 0));
-  const maxRain = Math.max(0.1, ...days.map((d) => Number(d.precipitationSum) || 0));
+  const maxRain = Math.max(0.1, ...days.map((d) => rainMm(d)));
 
   return (
     <motion.div
@@ -96,7 +110,7 @@ export function MountainOutlook({
       >
         {days.map((day, i) => {
           const snow = Number(day.snowfallSum) || 0;
-          const rain = Number(day.precipitationSum) || 0;
+          const rain = rainMm(day);
           const snowH = Math.round((snow / maxSnow) * 100);
           const rainH = Math.round((rain / maxRain) * 100);
           return (

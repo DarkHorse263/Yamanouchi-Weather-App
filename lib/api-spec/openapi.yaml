@@ -2653,6 +2653,10 @@ components:
           type: string
         precipitationSum:
           type: number
+        rainSum:
+          type: number
+          nullable: true
+          description: True liquid rain in mm (rain + showers). precipitationSum includes the water equivalent of snowfall, so display this as "rain", never precipitationSum.
         snowfallSum:
           type: number
         windSpeedMax:
