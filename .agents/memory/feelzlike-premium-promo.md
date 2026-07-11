@@ -37,3 +37,5 @@ Premium was hidden-until-traction earlier in 2026; that is REVERSED. Owner's mod
 **Why:** owner chose the frictionless path (usable + badge + email invite) over login-gated access, and chose to show prices now.
 
 **When billing lands:** add checkout at the subscribe CTA; only THEN consider restoring a real `PremiumGate` lock for non-entitled users after the promo. The server-side `requireEntitlement(...)` middleware is the real gate, not `usePremium()`.
+
+**Snowfall outlook placement (July 2026):** the 24/48/72h snowfall outlook bars were MOVED out of the premium-gated "Mountain dials" block into the FREE "Next 48 hours" hourly panel (shared SnowfallOutlook component, rendered via HourlyForecast snowfallOutlook prop on all 3 resort page types). Deliberate: if a real lock is restored post-promo, the outlook stays free. Mountain dials = rings only now; its blurb no longer mentions incoming snow.

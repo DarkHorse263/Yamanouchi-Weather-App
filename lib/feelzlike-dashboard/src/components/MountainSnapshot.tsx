@@ -11,20 +11,11 @@ export interface MountainSnapshotProps {
   windSpeed: number;
   liftsOpen?: number;
   totalLifts?: number;
-  snowfallNext24h?: number;
-  snowfallNext48h?: number;
-  snowfallNext72h?: number;
   baseElevation?: number;
   /** Section number prefix in the byline (defaults to "02") */
   sectionNumber?: string;
   /** Heading text (defaults to "Conditions at a glance") */
   heading?: string;
-  /** Source label for snowfall outlook (defaults to "Open-Meteo · ECMWF") */
-  modelSource?: string;
-  /** Elevation (m) the snow outlook was derived at, for honest labelling. */
-  snowfallOutlookElevationM?: number;
-  /** Provenance of that elevation ("village" | "mid-mountain"). */
-  snowfallOutlookLevel?: string;
 }
 
 type Tone = "neutral" | "ok" | "info" | "caution" | "warn" | "alert";
@@ -118,15 +109,9 @@ export function MountainSnapshot({
   windSpeed,
   liftsOpen,
   totalLifts,
-  snowfallNext24h,
-  snowfallNext48h,
-  snowfallNext72h,
   baseElevation,
   sectionNumber = "",
   heading = "Conditions at a glance",
-  modelSource = "Open-Meteo · ECMWF",
-  snowfallOutlookElevationM,
-  snowfallOutlookLevel,
 }: MountainSnapshotProps) {
   const summit = elevation;
   const base = baseElevation ?? Math.max(900, summit - 500);
@@ -140,12 +125,6 @@ export function MountainSnapshot({
 
   const showLifts = liftsOpen != null && totalLifts != null && totalLifts > 0;
   const showWindAlert = (gust ?? windSpeed) >= 50;
-
-  const snow24 = snowfallNext24h ?? 0;
-  const snow48 = snowfallNext48h ?? 0;
-  const snow72 = snowfallNext72h ?? 0;
-  const snowMax = Math.max(20, snow24, snow48, snow72);
-  const hasSnowOutlook = snow24 > 0 || snow48 > 0 || snow72 > 0;
 
   return (
     <motion.div
@@ -271,32 +250,6 @@ export function MountainSnapshot({
           </RingTile>
         )}
       </div>
-
-      {hasSnowOutlook && (
-        <motion.div
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="mt-8 pt-6 border-t border-slate-200/70"
-        >
-          <div className="flex items-baseline justify-between mb-4 gap-3">
-            <p className="byline text-muted-foreground">Snowfall outlook</p>
-            <div className="text-right">
-              <p className="byline text-muted-foreground/60">{modelSource}</p>
-              {snowfallOutlookElevationM != null && (
-                <p className="byline text-muted-foreground/50 mt-0.5 tabular-nums">
-                  {snowfallOutlookLevel ?? "village"} · {Math.round(snowfallOutlookElevationM)}m
-                </p>
-              )}
-            </div>
-          </div>
-          <div className="grid grid-cols-3 gap-4 md:gap-6">
-            <SnowBar label="Next 24h" value={snow24} max={snowMax} delay={0} />
-            <SnowBar label="Next 48h" value={snow48} max={snowMax} delay={0.08} />
-            <SnowBar label="Next 72h" value={snow72} max={snowMax} delay={0.16} />
-          </div>
-        </motion.div>
-      )}
     </motion.div>
   );
 }
@@ -325,25 +278,3 @@ function RingTile({
   );
 }
 
-function SnowBar({ label, value, max, delay }: { label: string; value: number; max: number; delay: number }) {
-  const pct = Math.min(100, (value / max) * 100);
-  return (
-    <div className="space-y-2">
-      <div className="flex items-baseline justify-between">
-        <p className="byline text-muted-foreground/80">{label}</p>
-        <p className={cn("font-display text-base tabular-nums", value > 0 ? "text-snow-accent" : "text-foreground")} data-numeric>
-          {value > 0 ? `${value.toFixed(value >= 10 ? 0 : 1)}` : "—"}
-          <span className="text-muted-foreground/60 text-[10px] ml-1 font-normal">cm</span>
-        </p>
-      </div>
-      <div className="h-1 rounded-full bg-slate-200/70 overflow-hidden">
-        <motion.div
-          initial={{ width: 0 }}
-          animate={{ width: `${value > 0 ? Math.max(4, pct) : 0}%` }}
-          transition={{ duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] }}
-          className={cn("h-full", value > 0 ? "bg-snow-accent" : "bg-slate-700")}
-        />
-      </div>
-    </div>
-  );
-}

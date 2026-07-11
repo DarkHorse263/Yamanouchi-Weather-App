@@ -504,6 +504,13 @@ export default function LocationDetail() {
             actualLiftsOpen: hasLiveLiftStatus ? liftData?.liftsOpen : undefined,
             actualTotalLifts: liftData?.totalLifts,
           }}
+          snowfallOutlook={{
+            next24hCm: current.snowfallNext24h,
+            next48hCm: current.snowfallNext48h,
+            next72hCm: current.snowfallNext72h,
+            elevationM: current.snowfallOutlookElevationM,
+            level: current.snowfallOutlookLevel,
+          }}
         />
 
         {/* SNOWMAKING · honest man-made-snow reality: all-weather snow
@@ -886,8 +893,8 @@ export default function LocationDetail() {
         <PremiumGate
           title="Mountain dials"
           titleJa="マウンテン計器盤"
-          blurb="Freezing level, gusts and incoming snow at a glance."
-          blurbJa="凍結高度・突風・降雪を一目で。"
+          blurb="Freezing level and gusts at a glance."
+          blurbJa="凍結高度・突風を一目で。"
         >
           {location.elevation != null && current.windSpeed != null && (
             <MountainSnapshot
@@ -898,11 +905,6 @@ export default function LocationDetail() {
               windSpeed={current.windSpeed}
               liftsOpen={hasLiveLiftStatus ? liftData?.liftsOpen : undefined}
               totalLifts={liftData?.totalLifts}
-              snowfallNext24h={current.snowfallNext24h ?? undefined}
-              snowfallNext48h={current.snowfallNext48h ?? undefined}
-              snowfallNext72h={current.snowfallNext72h ?? undefined}
-              snowfallOutlookElevationM={current.snowfallOutlookElevationM ?? undefined}
-              snowfallOutlookLevel={current.snowfallOutlookLevel ?? undefined}
             />
           )}
         </PremiumGate>

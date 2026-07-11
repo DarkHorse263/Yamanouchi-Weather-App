@@ -394,6 +394,19 @@ export function MountainDetail() {
                   snowDepthCm: resortReport ? resortReport.baseCm : current?.snowDepth,
                   snowDepthSource: resortReport ? "reported" : "model",
                 }}
+                snowfallOutlook={
+                  current
+                    ? {
+                        next24hCm: current.snowfallNext24h,
+                        next48hCm: current.snowfallNext48h,
+                        next72hCm: current.snowfallNext72h,
+                        elevationM: current.snowfallOutlookElevationM,
+                        level: current.snowfallOutlookLevel,
+                        source:
+                          current.dataSource ?? region.weatherSource?.label ?? "Open-Meteo",
+                      }
+                    : undefined
+                }
               />
             </div>
           )}
@@ -516,8 +529,8 @@ export function MountainDetail() {
             <PremiumGate
               title="Mountain dials"
               titleJa="マウンテン計器盤"
-              blurb="Freezing level, gusts and incoming snow at a glance."
-              blurbJa="凍結高度・突風・降雪を一目で。"
+              blurb="Freezing level and gusts at a glance."
+              blurbJa="凍結高度・突風を一目で。"
             >
               {/* MountainSnapshot needs guaranteed `elevation` and
                   `windSpeed` numbers per its prop contract; guard
@@ -530,14 +543,6 @@ export function MountainDetail() {
                   freezingLevel={current.freezingLevel ?? undefined}
                   gust={current.windGust ?? undefined}
                   windSpeed={current.windSpeed}
-                  snowfallNext24h={current.snowfallNext24h ?? undefined}
-                  snowfallNext48h={current.snowfallNext48h ?? undefined}
-                  snowfallNext72h={current.snowfallNext72h ?? undefined}
-                  snowfallOutlookElevationM={current.snowfallOutlookElevationM ?? undefined}
-                  snowfallOutlookLevel={current.snowfallOutlookLevel ?? undefined}
-                  modelSource={
-                    current.dataSource ?? region.weatherSource?.label ?? "Open-Meteo"
-                  }
                 />
               )}
             </PremiumGate>

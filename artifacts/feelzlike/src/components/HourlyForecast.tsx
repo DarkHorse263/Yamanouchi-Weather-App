@@ -30,6 +30,7 @@ import {
   type LiftOperationInput,
   type SkiableNowRead,
 } from "@/lib/skiSeason";
+import { SnowfallOutlook, type SnowfallOutlookProps } from "@workspace/feelzlike-dashboard";
 
 type Tx = (en: string, ja: string) => string;
 
@@ -56,6 +57,13 @@ interface Props {
    * given to LiftWindHoldPanel on the page so the two reads cannot diverge.
    */
   skiability?: LiftOperationInput & { liveStatusKnown?: boolean };
+  /**
+   * Optional cumulative snowfall totals (next 24h / 48h / 72h). When
+   * provided, the "Snowfall outlook" strip renders at the top of this panel
+   * so the totals sit with the hour-by-hour story instead of being buried
+   * further down the page. Hidden automatically when all totals are zero.
+   */
+  snowfallOutlook?: Omit<SnowfallOutlookProps, "className">;
 }
 
 function WeatherIcon({
@@ -172,6 +180,7 @@ export function HourlyForecast({
   t,
   sectionNumber = "",
   skiability,
+  snowfallOutlook,
 }: Props) {
   const tx: Tx = t ?? ((en) => en);
   const [openIdx, setOpenIdx] = useState<number | null>(null);
@@ -263,6 +272,15 @@ export function HourlyForecast({
           </div>
         )}
       </header>
+
+      {/* Snowfall outlook totals · moved up from Mountain dials (July 2026)
+          so the 24/48/72h totals lead the section. Self-hides when dry. */}
+      {snowfallOutlook && (
+        <SnowfallOutlook
+          {...snowfallOutlook}
+          className="mb-5 pb-5 border-b border-slate-200/70"
+        />
+      )}
 
       {/* Detail card for the currently-open window (if any) */}
       <AnimatePresence>

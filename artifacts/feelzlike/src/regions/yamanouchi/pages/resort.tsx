@@ -351,6 +351,14 @@ export default function ResortDetail() {
               seasonOpen: isLiftSeasonOpen(REGION_COUNTRY[region.id]),
               snowDepthCm: current.snowDepth,
             }}
+            snowfallOutlook={{
+              next24hCm: current.snowfallNext24h,
+              next48hCm: current.snowfallNext48h,
+              next72hCm: current.snowfallNext72h,
+              elevationM: current.snowfallOutlookElevationM,
+              level: current.snowfallOutlookLevel,
+              source: "Open-Meteo · JMA · ECMWF",
+            }}
           />
         )}
 
@@ -401,8 +409,8 @@ export default function ResortDetail() {
         <PremiumGate
           title="Mountain dials"
           titleJa="マウンテン計器盤"
-          blurb="Freezing level, gusts and incoming snow at a glance."
-          blurbJa="凍結高度・突風・降雪を一目で。"
+          blurb="Freezing level and gusts at a glance."
+          blurbJa="凍結高度・突風を一目で。"
         >
           <div className="space-y-4">
             {location.elevation != null && current.windSpeed != null && (
@@ -412,12 +420,6 @@ export default function ResortDetail() {
                 freezingLevel={current.freezingLevel ?? undefined}
                 gust={current.windGust ?? undefined}
                 windSpeed={current.windSpeed}
-                snowfallNext24h={current.snowfallNext24h ?? undefined}
-                snowfallNext48h={current.snowfallNext48h ?? undefined}
-                snowfallNext72h={current.snowfallNext72h ?? undefined}
-                snowfallOutlookElevationM={current.snowfallOutlookElevationM ?? undefined}
-                snowfallOutlookLevel={current.snowfallOutlookLevel ?? undefined}
-                modelSource="Open-Meteo · JMA · ECMWF"
               />
             )}
           </div>
