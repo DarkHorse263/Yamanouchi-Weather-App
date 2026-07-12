@@ -20,6 +20,14 @@ as the Interactive tab) via Leaflet ImageOverlays. Quirks that cost time:
 Coverage gating is UNCHANGED: nearestBomRadar (client catalogue) still decides
 whether the Official tab exists; WillyWeather only swaps the imagery.
 
+**Layout lessons (owner feedback, July 2026):** the source/freshness bar must
+sit BELOW the map as a static footer, never float across the imagery (it hid
+echoes + basemap credits); radar tab labels must always render (icon-only
+pills on mobile hid "BOM" and the owner couldn't tell the source); the map
+needs visible zoom buttons (bottomright) — pinch alone wasn't discoverable.
+Overlay chips live on the top-16 row; the top-3 row belongs to the view
+switcher alone.
+
 **Ladder now:** WillyWeather map → self-hosted BOM animated composite → single
 still gif → link-out. The BOM path below is the FALLBACK — keep all its
 protections intact.

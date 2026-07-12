@@ -10,6 +10,7 @@ import {
   Popup,
   useMap,
   useMapEvents,
+  ZoomControl,
 } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -1356,7 +1357,9 @@ function TabPill({
       aria-pressed={active}
     >
       <Icon className="w-3.5 h-3.5 shrink-0" />
-      <span className="sr-only sm:not-sr-only">{label}</span>
+      {/* Always show the label · icon-only pills on mobile hid "BOM" and
+          users couldn't tell which source they were looking at. */}
+      <span>{label}</span>
     </button>
   );
 }
@@ -1716,6 +1719,17 @@ interface WillyRadarData {
   stale?: boolean;
 }
 
+// Drops the "Leaflet" prefix (and its flag emoji) from the attribution
+// control so the credits line reads as tidy source credits, not clutter ·
+// the Esri/OSM/CARTO credits themselves stay.
+function StripAttributionPrefix() {
+  const map = useMap();
+  useEffect(() => {
+    map.attributionControl?.setPrefix("");
+  }, [map]);
+  return null;
+}
+
 function WillyOfficialView({
   official,
   radarId,
@@ -1829,14 +1843,21 @@ function WillyOfficialView({
       <div className="relative flex-1 overflow-hidden">
         <MapContainer
           bounds={bounds}
-          maxBounds={bounds.pad(0.25)}
+          maxBounds={bounds.pad(0.4)}
           minZoom={6}
           maxZoom={11}
           zoomControl={false}
           scrollWheelZoom
+          touchZoom
+          doubleClickZoom
+          dragging
           attributionControl
           className="absolute inset-0 w-full h-full"
         >
+          {/* Default topleft zoom control would clash with the tab bar ·
+              bottomright is free now the source bar lives below the map. */}
+          <ZoomControl position="bottomright" />
+          <StripAttributionPrefix />
           {/* Same basemap pairing as the Interactive tab so the Official view
               reads as part of the same product · hillshade under a light
               labelled base. */}
@@ -1899,7 +1920,10 @@ function WillyOfficialView({
           </span>
         </div>
 
-        <div className="absolute right-3 top-3 z-[1000] flex items-center gap-1 rounded-full bg-white/90 backdrop-blur-md border border-slate-200 shadow px-2 py-1.5">
+        {/* top-16 mirrors the play chip · with tab labels always visible the
+            switcher can span most of a phone's width, so the top-3 row
+            belongs to it alone. */}
+        <div className="absolute right-3 top-16 z-[1000] flex items-center gap-1 rounded-full bg-white/90 backdrop-blur-md border border-slate-200 shadow px-2 py-1.5">
           {frames.map((f, i) => (
             <button
               key={f.ts}
@@ -1924,10 +1948,12 @@ function WillyOfficialView({
         </div>
       </div>
 
-      <div className="absolute left-3 right-3 bottom-3 z-[1000] rounded-xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-lg px-3 py-2 flex items-center justify-between gap-3">
+      {/* Static footer BELOW the map, not a floating overlay · a bar across
+          the imagery hid the radar echoes and the basemap credits. */}
+      <div className="shrink-0 bg-white border-t border-slate-200 px-3 py-2 flex items-center justify-between gap-3">
         <div className="min-w-0">
           <div className="text-[11px] text-slate-600 font-medium truncate">
-            Source · Bureau of Meteorology radar · {provider.name} · licensed via{" "}
+            BOM radar · {provider.name} · licensed via{" "}
             <a
               href="https://www.willyweather.com.au"
               target="_blank"
