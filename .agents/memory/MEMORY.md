@@ -50,3 +50,4 @@
 - [feelzlike reported snow](feelzlike-reported-snow.md) — snow-report endpoint is ALWAYS-200 {report:null}; strict parse (reported 0 surfaces, never 0-default); 36h serve-time guard; reported REPLACES model stat; only reported may assert no_base.
 - [feelzlike elevation bands](feelzlike-elevation-band-partition.md) — bands must share ONE pinned OM cell (cell_selection=nearest) + FL−300m phase partition; default land-cell = 3 different places (mid>upper snow bug).
 - [feelzlike daily condition labels](feelzlike-daily-condition-labels.md) — daily weatherDescription is totals-derived via shared server helper, never the WMO moment-code; rain-dominant days must say Rain.
+- [feelzlike competitor snow reports](feelzlike-competitor-snow-reports.md) — SnowsBest=MetraWeather once-daily table + journalist layer on resort morning reports; our gaps: reported numbers beyond Thredbo, lifts-open, daily digest, season context.
