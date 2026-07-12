@@ -40,7 +40,10 @@
 // v13: /api/elevation-forecast bands now come from ONE pinned grid cell with
 // freezing-level phase partitioning (was 3 different cells, which could show
 // more snow mid than upper) - bust cached incoherent band tables.
-const CACHE_VERSION = "v13";
+// v14: AU Official radar switched to the licensed WillyWeather feed
+// (/api/willy-radar) - route it network-first (reload) like the BOM frame
+// list so installed PWAs never animate a previous session's frames.
+const CACHE_VERSION = "v14";
 const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
 const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;
@@ -218,6 +221,17 @@ self.addEventListener("fetch", (event) => {
   //     list). Only the /frames JSON needs this · the frame/layer PNGs are
   //     immutable, unique-URL images and stay on the catch-all (never stale).
   if (url.pathname === "/api/bom-radar/frames") {
+    event.respondWith(networkFirst(request, DATA_CACHE, { cacheMode: "reload" }));
+    return;
+  }
+
+  // 2c-bis. WillyWeather radar discovery (licensed AU feed) → network-first,
+  //     bypassing the browser HTTP cache, for the same reason as the BOM
+  //     frame list: the JSON must track the 5-min publish cadence or an
+  //     installed PWA loops stale frames. The overlay PNGs it points at are
+  //     immutable unique-URL images on WillyWeather's CDN · they stay on the
+  //     catch-all and can never go stale.
+  if (url.pathname === "/api/willy-radar") {
     event.respondWith(networkFirst(request, DATA_CACHE, { cacheMode: "reload" }));
     return;
   }

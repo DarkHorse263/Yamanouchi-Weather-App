@@ -130,7 +130,21 @@ const placesLimiter = rateLimit({
   message: { error: "RATE_LIMITED", message: "Too many places lookups, slow down." },
 });
 
+// Same story for WillyWeather radar discovery: every cache-miss is a billed
+// call against the owner's WillyWeather subscription. The route's own 0.5°-cell
+// cache absorbs normal traffic (one lookup per pan/refresh, 120s TTL), so
+// 20/min/IP only bites a client deliberately cycling distinct cells to force
+// misses. Layered ON TOP of `apiLimiter` (both must pass).
+const willyRadarLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  limit: 20,
+  standardHeaders: "draft-7",
+  legacyHeaders: false,
+  message: { error: "RATE_LIMITED", message: "Too many radar lookups, slow down." },
+});
+
 app.use("/api/places", placesLimiter);
+app.use("/api/willy-radar", willyRadarLimiter);
 // authMiddleware loads req.user from the session cookie/bearer token before
 // any route handler runs. Mounted on /api so every API route can inspect
 // `req.isAuthenticated()` / `req.user`. Public routes simply ignore it.

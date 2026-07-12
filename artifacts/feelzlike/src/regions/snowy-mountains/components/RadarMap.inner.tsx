@@ -3,6 +3,7 @@ import type { OfficialRadarSource, WindySource } from "@/lib/bom-radar";
 import {
   MapContainer,
   TileLayer,
+  ImageOverlay,
   Marker,
   Tooltip,
   CircleMarker,
@@ -985,6 +986,7 @@ export default function RadarMapInner({
         <OfficialView
           key={effectiveOfficial.imageUrl ?? effectiveOfficial.href}
           official={effectiveOfficial}
+          center={effectiveCenter}
         />
       )}
 
@@ -1680,17 +1682,285 @@ function PanZoomStage({ children }: { children: React.ReactNode }) {
   );
 }
 
-// The "Official" tab. For an embeddable BOM radar we render a self-hosted
-// ANIMATED composite — BOM's own background/topography/locations/range layers
-// with the recent radar frames cycled on top. If frame discovery is
-// unavailable we fall back to the single still gif, and if that also fails we
-// link out · the same honest ladder we use for JP/NZ (no embeddable image).
-function OfficialView({ official }: { official: OfficialRadarSource }) {
+// The "Official" tab. Australian points lead with the LICENSED WillyWeather
+// radar (a commercial BOM reseller): georeferenced 5-min frames layered on
+// our own labelled basemap. If that's unavailable we degrade down the same
+// honest ladder as before · the self-hosted BOM animated composite, then the
+// single still gif, then the link-out (JP/NZ are link-out only from the
+// start, having no embeddable image).
+function OfficialView({
+  official,
+  center,
+}: {
+  official: OfficialRadarSource;
+  center: { lat: number; lng: number };
+}) {
   const radarId = bomRadarId(official.imageUrl);
   if (radarId) {
-    return <BomAnimatedOfficialView official={official} radarId={radarId} />;
+    return <WillyOfficialView official={official} radarId={radarId} center={center} />;
   }
   return <OfficialStillView official={official} />;
+}
+
+// ─── WillyWeather licensed AU radar ─────────────────────────────────────
+interface WillyRadarData {
+  provider: {
+    name: string;
+    lat: number;
+    lng: number;
+    bounds: { minLat: number; minLng: number; maxLat: number; maxLng: number };
+    interval: number;
+    statusCode: string;
+  };
+  frames: BomFrame[]; // same {ts,url} shape · ts is compact UTC YYYYMMDDHHMM
+  stale?: boolean;
+}
+
+function WillyOfficialView({
+  official,
+  radarId,
+  center,
+}: {
+  official: OfficialRadarSource;
+  radarId: string;
+  center: { lat: number; lng: number };
+}) {
+  const [data, setData] = useState<WillyRadarData | null>(null);
+  // null = first fetch still in flight · true = WillyWeather unusable, fall
+  // back to the BOM composite path (which has its own still/link-out ladder).
+  const [failed, setFailed] = useState<boolean | null>(null);
+  const [active, setActive] = useState(0);
+  const [playing, setPlaying] = useState(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return true;
+    return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  });
+  // Discovery succeeded but the overlay PNGs themselves may fail to load
+  // (CDN blip) · if EVERY frame errors we have no radar data, so fall back.
+  const [failedFrames, setFailedFrames] = useState<Set<string>>(new Set());
+
+  const loadRef = useRef<() => void>(() => {});
+  useEffect(() => {
+    let cancelled = false;
+    async function load() {
+      try {
+        const res = await fetch(
+          `/api/willy-radar?lat=${center.lat.toFixed(3)}&lng=${center.lng.toFixed(3)}`,
+          { cache: "no-store" },
+        );
+        if (!res.ok) throw new Error(`willy ${res.status}`);
+        const next = (await res.json()) as WillyRadarData;
+        if (cancelled) return;
+        if (!next.provider || !Array.isArray(next.frames) || next.frames.length < 2) {
+          setFailed(true);
+          return;
+        }
+        setData(next);
+        setActive(next.frames.length - 1);
+        setFailedFrames(new Set());
+        setFailed(false);
+      } catch {
+        // Only fall back if we have nothing usable on screen · a transient
+        // blip on a background refresh shouldn't discard a working loop
+        // (the freshness readout goes amber on its own past 45 min).
+        if (!cancelled) setFailed((prev) => (prev === false ? false : true));
+      }
+    }
+    loadRef.current = load;
+    load();
+    // New frame roughly every 5 min · refresh a little faster than the BOM
+    // path so the loop tracks the licensed feed's cadence.
+    const id = window.setInterval(load, 4 * 60 * 1000);
+    return () => {
+      cancelled = true;
+      window.clearInterval(id);
+    };
+  }, [center.lat, center.lng]);
+  useForegroundRefresh(() => loadRef.current());
+
+  // Tick for the "x min ago" freshness readout.
+  const [nowMs, setNowMs] = useState(() => Date.now());
+  useEffect(() => {
+    const id = window.setInterval(() => setNowMs(Date.now()), 30_000);
+    return () => window.clearInterval(id);
+  }, []);
+
+  const frames = data?.frames ?? [];
+
+  // Advance the loop · same rhythm as the BOM composite (longer newest hold).
+  useEffect(() => {
+    if (!playing || frames.length < 2) return;
+    const isNewest = active === frames.length - 1;
+    const id = window.setTimeout(
+      () => setActive((i) => (i + 1) % frames.length),
+      isNewest ? 1400 : 550,
+    );
+    return () => window.clearTimeout(id);
+  }, [playing, active, frames.length]);
+
+  const allFramesFailed = frames.length > 0 && failedFrames.size >= frames.length;
+  if (failed || allFramesFailed) {
+    return <BomAnimatedOfficialView official={official} radarId={radarId} />;
+  }
+  if (failed === null || !data) {
+    return (
+      <div className="absolute inset-0 grid place-items-center bg-slate-100">
+        <Loader2 className="w-6 h-6 animate-spin text-slate-400" />
+      </div>
+    );
+  }
+
+  const { provider } = data;
+  const bounds = L.latLngBounds(
+    [provider.bounds.minLat, provider.bounds.minLng],
+    [provider.bounds.maxLat, provider.bounds.maxLng],
+  );
+  const activeTs = frames[active]?.ts ?? "";
+  // Freshness is judged by the NEWEST frame, not whichever frame the loop is
+  // currently showing (older frames in the loop are old by design).
+  const newestTs = frames[frames.length - 1]?.ts ?? "";
+  const newestAge = frameAgeLabel(newestTs, nowMs);
+  const newestDate = parseFrameTs(newestTs);
+  const delayed =
+    newestDate !== null &&
+    nowMs - newestDate.getTime() > FRAME_DELAYED_MIN * 60_000;
+
+  return (
+    <div className="absolute inset-0 flex flex-col bg-slate-100">
+      <div className="relative flex-1 overflow-hidden">
+        <MapContainer
+          bounds={bounds}
+          maxBounds={bounds.pad(0.25)}
+          minZoom={6}
+          maxZoom={11}
+          zoomControl={false}
+          scrollWheelZoom
+          attributionControl
+          className="absolute inset-0 w-full h-full"
+        >
+          {/* Same basemap pairing as the Interactive tab so the Official view
+              reads as part of the same product · hillshade under a light
+              labelled base. */}
+          <TileLayer
+            attribution='Hillshade © <a href="https://www.esri.com/">Esri</a>'
+            url="https://server.arcgisonline.com/ArcGIS/rest/services/Elevation/World_Hillshade/MapServer/tile/{z}/{y}/{x}"
+            maxNativeZoom={16}
+          />
+          <TileLayer
+            attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors · © <a href="https://carto.com/attributions">CARTO</a>'
+            url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+            subdomains={["a", "b", "c", "d"]}
+            maxNativeZoom={19}
+            opacity={0.92}
+          />
+          {/* Every frame stays mounted (they're small single PNGs, not tile
+              pyramids) · animation is an opacity flip so stepping never
+              flashes a blank frame. */}
+          {frames.map((f, i) => (
+            <ImageOverlay
+              key={f.ts}
+              url={f.url}
+              bounds={bounds}
+              opacity={i === active ? 0.8 : 0}
+              zIndex={400}
+              eventHandlers={{
+                error: () => {
+                  setFailedFrames((prev) => {
+                    if (prev.has(f.ts)) return prev;
+                    const next = new Set(prev);
+                    next.add(f.ts);
+                    return next;
+                  });
+                },
+              }}
+            />
+          ))}
+          {/* The town / searched point the user came from. */}
+          <CircleMarker
+            center={[center.lat, center.lng]}
+            radius={6}
+            pathOptions={{ color: "#0284c7", weight: 2, fillColor: "#0ea5e9", fillOpacity: 0.85 }}
+          />
+        </MapContainer>
+
+        {/* top-16 (not top-3) · the parent view-switcher tab bar lives at
+            top-3 left-3, and a top-3 chip here paints straight over its
+            "BOM" pill. */}
+        <div className="absolute left-3 top-16 z-[1000] flex items-center gap-2 rounded-full bg-white/95 backdrop-blur-md border border-slate-200 shadow px-2.5 py-1.5">
+          <button
+            type="button"
+            onClick={() => setPlaying((p) => !p)}
+            className="grid place-items-center w-6 h-6 rounded-full bg-slate-900 text-white hover:bg-slate-800"
+            aria-label={playing ? "pause radar loop" : "play radar loop"}
+          >
+            {playing ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+          </button>
+          <span className="text-[11px] font-semibold text-slate-700 tabular-nums">
+            {frameLocalTime(activeTs)}
+          </span>
+        </div>
+
+        <div className="absolute right-3 top-3 z-[1000] flex items-center gap-1 rounded-full bg-white/90 backdrop-blur-md border border-slate-200 shadow px-2 py-1.5">
+          {frames.map((f, i) => (
+            <button
+              key={f.ts}
+              type="button"
+              onClick={() => {
+                setPlaying(false);
+                setActive(i);
+              }}
+              aria-label={`show ${frameLocalTime(f.ts)}`}
+              className="group flex items-center -my-2 py-2 px-0.5"
+            >
+              <span
+                className={cn(
+                  "block h-1.5 rounded-full transition-all",
+                  i === active
+                    ? "w-4 bg-sky-600"
+                    : "w-1.5 bg-slate-300 group-hover:bg-slate-400",
+                )}
+              />
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="absolute left-3 right-3 bottom-3 z-[1000] rounded-xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-lg px-3 py-2 flex items-center justify-between gap-3">
+        <div className="min-w-0">
+          <div className="text-[11px] text-slate-600 font-medium truncate">
+            Source · Bureau of Meteorology radar · {provider.name} · licensed via{" "}
+            <a
+              href="https://www.willyweather.com.au"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-slate-300 hover:text-slate-800"
+            >
+              WillyWeather
+            </a>
+          </div>
+          {newestAge && (
+            <div
+              className={cn(
+                "text-[11px] font-semibold truncate",
+                delayed ? "text-amber-600" : "text-slate-500",
+              )}
+            >
+              {delayed
+                ? `Radar feed delayed · latest frame ${frameLocalTime(newestTs)} (${newestAge})`
+                : `Updated ${frameLocalTime(newestTs)} local · ${newestAge}`}
+            </div>
+          )}
+        </div>
+        <a
+          href={official.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[11px] font-semibold text-sky-700 hover:text-sky-900 whitespace-nowrap"
+        >
+          Open source →
+        </a>
+      </div>
+    </div>
+  );
 }
 
 function BomAnimatedOfficialView({

@@ -327,6 +327,198 @@ router.get("/bom-radar/frames", async (req: Request, res: Response) => {
   }
 });
 
+// ─── WillyWeather radar (licensed BOM reseller) ─────────────────────────
+// Primary AU radar source. WillyWeather resells BOM radar under a commercial
+// licence as JSON: georeferenced transparent PNG overlays (5-min cadence)
+// with map bounds, so the client can layer them on its own basemap. The API
+// key is billed per request and MUST stay server-side, so this route proxies
+// the discovery call only · the overlay PNGs themselves are public CDN
+// assets the browser loads directly (no key in their URLs).
+//
+// Cost + resilience posture mirrors the BOM proxy: responses are cached per
+// ~0.5° cell (nearby towns share a radar, so they share a cache entry),
+// identical concurrent misses are de-duped, and on an upstream failure a
+// stale copy is served · but only up to a cap, past which we return an error
+// so the client falls back to the BOM path / honesty ladder rather than
+// animating hours-old frames as if they were live.
+interface WillyFrame {
+  /** Compact UTC timestamp YYYYMMDDHHMM · same shape as BOM frame ts so the
+   *  client reuses one parser for both sources. */
+  ts: string;
+  /** Absolute CDN URL of the transparent radar overlay PNG. */
+  url: string;
+}
+interface WillyPayload {
+  provider: {
+    name: string;
+    lat: number;
+    lng: number;
+    bounds: { minLat: number; minLng: number; maxLat: number; maxLng: number };
+    /** Minutes between frames (typically 5). */
+    interval: number;
+    /** WillyWeather radar-site status code, e.g. "active". */
+    statusCode: string;
+  };
+  frames: WillyFrame[];
+}
+interface WillyCacheEntry {
+  payload: WillyPayload;
+  fetchedAt: number;
+}
+const willyCache = new Map<string, WillyCacheEntry>();
+const willyInflight = new Map<string, Promise<WillyPayload | null>>();
+const WILLY_CACHE_MS = 120_000;
+// Past this, a stale cached payload is no longer served as a fallback ·
+// same honesty cap as the BOM frame list.
+const WILLY_STALE_MAX_MS = 90 * 60 * 1000;
+const WILLY_CACHE_MAX = 80;
+// Overlay URLs must come off WillyWeather's own CDN · never reflect an
+// arbitrary upstream string into something the client will <img>-load.
+const WILLY_CDN = /^https:\/\/[a-z0-9-]+(\.[a-z0-9-]+)*\.willyweather\.com\.au\//;
+const WILLY_OVERLAY_NAME = /^[\w.-]+\.png$/;
+
+// ~0.5° cell key · Jindabyne, Thredbo and Perisher all resolve to the same
+// cell, so a region's worth of traffic costs one WillyWeather call per TTL.
+function willyCellKey(lat: number, lng: number): string {
+  return `${Math.round(lat * 2) / 2},${Math.round(lng * 2) / 2}`;
+}
+
+// "2026-07-12 02:14:00" (UTC) -> "202607120214"
+function willyCompactTs(dateTime: unknown): string | null {
+  if (typeof dateTime !== "string") return null;
+  const m = dateTime.match(/^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})/);
+  return m ? `${m[1]}${m[2]}${m[3]}${m[4]}${m[5]}` : null;
+}
+
+function isFiniteNum(v: unknown): v is number {
+  return typeof v === "number" && Number.isFinite(v);
+}
+
+async function fetchWillyRadar(lat: number, lng: number): Promise<WillyPayload | null> {
+  const apiKey = process.env.WILLYWEATHER_API_KEY;
+  if (!apiKey) return null;
+  // offset=-45 → the last ~45 min of frames (~9-10 at the 5-min cadence).
+  const url =
+    `https://api.willyweather.com.au/v2/${apiKey}/maps.json` +
+    `?mapTypes=regional-radar&lat=${lat.toFixed(3)}&lng=${lng.toFixed(3)}` +
+    `&offset=-45&verbose=true`;
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 8_000);
+  try {
+    const r = await fetch(url, { signal: ctrl.signal });
+    if (!r.ok) return null;
+    const data: unknown = await r.json();
+    if (!Array.isArray(data) || data.length === 0) return null;
+    // The API returns providers closest-first · take the first.
+    const p = data[0] as Record<string, unknown>;
+    const overlayPath = typeof p.overlayPath === "string" ? p.overlayPath : "";
+    if (!WILLY_CDN.test(overlayPath)) return null;
+    const b = (p.bounds ?? {}) as Record<string, unknown>;
+    if (
+      !isFiniteNum(p.lat) || !isFiniteNum(p.lng) ||
+      !isFiniteNum(b.minLat) || !isFiniteNum(b.minLng) ||
+      !isFiniteNum(b.maxLat) || !isFiniteNum(b.maxLng)
+    ) {
+      return null;
+    }
+    const status = (p.status ?? {}) as Record<string, unknown>;
+    const overlays = Array.isArray(p.overlays) ? p.overlays : [];
+    const frames: WillyFrame[] = [];
+    for (const o of overlays as Array<Record<string, unknown>>) {
+      const ts = willyCompactTs(o.dateTime);
+      const name = typeof o.name === "string" ? o.name : "";
+      if (ts && WILLY_OVERLAY_NAME.test(name)) {
+        frames.push({ ts, url: `${overlayPath}${name}` });
+      }
+    }
+    return {
+      provider: {
+        name: typeof p.name === "string" ? p.name : "radar",
+        lat: p.lat,
+        lng: p.lng,
+        bounds: {
+          minLat: b.minLat,
+          minLng: b.minLng,
+          maxLat: b.maxLat,
+          maxLng: b.maxLng,
+        },
+        interval: isFiniteNum(p.interval) ? p.interval : 5,
+        statusCode: typeof status.code === "string" ? status.code : "unknown",
+      },
+      frames, // oldest → newest (upstream order)
+    };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+router.get("/willy-radar", async (req: Request, res: Response) => {
+  const lat = Number(req.query.lat);
+  const lng = Number(req.query.lng);
+  // AU bounding box (incl. Norfolk Island) · protects the metered upstream
+  // from being fanned out across the globe.
+  if (
+    !Number.isFinite(lat) || !Number.isFinite(lng) ||
+    lat < -45 || lat > -9 || lng < 110 || lng > 170
+  ) {
+    res.status(400).json({ error: "Invalid coordinates" });
+    return;
+  }
+  if (!process.env.WILLYWEATHER_API_KEY) {
+    res.status(503).json({ error: "WILLY_NOT_CONFIGURED" });
+    return;
+  }
+
+  const cellKey = willyCellKey(lat, lng);
+  const cached = willyCache.get(cellKey);
+  if (cached && Date.now() - cached.fetchedAt < WILLY_CACHE_MS) {
+    res.setHeader("Cache-Control", "public, max-age=60, stale-while-revalidate=120");
+    res.json(cached.payload);
+    return;
+  }
+
+  const sendStale = (): boolean => {
+    if (
+      cached &&
+      cached.payload.frames.length > 0 &&
+      Date.now() - cached.fetchedAt < WILLY_STALE_MAX_MS
+    ) {
+      res.setHeader("Cache-Control", "public, max-age=30");
+      res.json({ ...cached.payload, stale: true });
+      return true;
+    }
+    return false;
+  };
+
+  try {
+    let inflight = willyInflight.get(cellKey);
+    if (!inflight) {
+      inflight = fetchWillyRadar(lat, lng).finally(() => willyInflight.delete(cellKey));
+      willyInflight.set(cellKey, inflight);
+    }
+    const payload = await inflight;
+    if (!payload) {
+      if (!sendStale()) {
+        res.status(502).json({ error: "WillyWeather radar not available" });
+      }
+      return;
+    }
+    willyCache.set(cellKey, { payload, fetchedAt: Date.now() });
+    if (willyCache.size > WILLY_CACHE_MAX) {
+      const oldest = [...willyCache.entries()].sort(
+        (a, b) => a[1].fetchedAt - b[1].fetchedAt,
+      )[0];
+      if (oldest) willyCache.delete(oldest[0]);
+    }
+    res.setHeader("Cache-Control", "public, max-age=60, stale-while-revalidate=120");
+    res.json(payload);
+  } catch {
+    if (!sendStale()) {
+      res.status(502).json({ error: "WillyWeather radar not available" });
+    }
+  }
+});
+
 // ─── RainViewer proxy ───────────────────────────────────────────────────
 // Yamanouchi's map uses RainViewer for radar tiles. Proxying the
 // weather-maps.json metadata call through the backend keeps the third-party

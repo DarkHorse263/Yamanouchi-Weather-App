@@ -1,13 +1,33 @@
 ---
-name: feelzlike BOM radar animation
-description: that the official BOM radar is animated, the cadence insight that makes it possible, and the BOM rate-limit constraint any radar work must respect
+name: feelzlike AU official radar (WillyWeather primary, BOM fallback)
+description: the AU Official tab's source ladder (licensed WillyWeather first, scraped BOM composite as fallback), the WillyWeather API quirks, and the BOM rate-limit constraint any radar work must respect
 ---
 
-The official BOM radar (the main / leftmost AU "Official" tab) IS animated, not a
-static gif. It is a self-hosted composite: BOM's own static basemap layers
-stacked under the recent radar frame PNGs, cross-faded by opacity. This corrects
-an earlier wrong note that claimed BOM only kept 1 frame so animation was
-impossible.
+**PRIMARY SOURCE (July 2026): licensed WillyWeather API.** The AU "Official"
+tab now leads with WillyWeather (commercial BOM reseller; owner holds a paid
+subscription, key in `WILLYWEATHER_API_KEY`). Its maps.json returns
+georeferenced transparent PNG overlays (5-min cadence) + provider bounds, so
+the client layers them on its own labelled basemap (same CARTO/hillshade pair
+as the Interactive tab) via Leaflet ImageOverlays. Quirks that cost time:
+- the `offset` param is MANDATORY when `verbose=true` (400 without it);
+- only the maps.json discovery call needs the key (server-side proxy, billed
+  per request → per-~0.5°-cell cache + inflight dedupe + age-capped
+  serve-stale); the overlay PNGs are PUBLIC unique-URL CDN assets the browser
+  loads directly — never proxy them;
+- frame `dateTime` is UTC "YYYY-MM-DD HH:MM:SS"; the server converts to the
+  same compact YYYYMMDDHHMM shape as BOM frames so the client reuses one
+  timestamp parser/freshness path for both sources.
+Coverage gating is UNCHANGED: nearestBomRadar (client catalogue) still decides
+whether the Official tab exists; WillyWeather only swaps the imagery.
+
+**Ladder now:** WillyWeather map → self-hosted BOM animated composite → single
+still gif → link-out. The BOM path below is the FALLBACK — keep all its
+protections intact.
+
+The BOM fallback (self-hosted composite) is animated, not a static gif: BOM's
+own static basemap layers stacked under the recent radar frame PNGs,
+cross-faded by opacity. This corrects an earlier wrong note that claimed BOM
+only kept 1 frame so animation was impossible.
 
 **The cadence insight (why animation is feasible):** BOM retains a full ~5-6
 frame loop, but publishes frames on a **10-minute :X4 cadence** (minutes ending
