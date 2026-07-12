@@ -136,9 +136,16 @@ router.get("/bom-radar", async (req: Request, res: Response) => {
     return;
   }
 
+  // Frame PNGs and transparency layers are immutable once published, so a
+  // stale copy is always correct. The composite loop gif ROTATES though ·
+  // re-serving one that's hours old during a long BOM outage would show
+  // "last night's radar" as if it were live, so cap how old a stale loop
+  // may be before we'd rather fail (the client degrades to link-out).
+  const STALE_LOOP_MAX_MS = 30 * 60 * 1000;
+
   function sendStaleOr(status: number): boolean {
     // Serve an expired copy on upstream failure rather than breaking the radar.
-    if (cached) {
+    if (cached && (type !== "loop" || Date.now() - cached.fetchedAt < STALE_LOOP_MAX_MS)) {
       res.setHeader("Content-Type", cached.contentType);
       res.setHeader("Cache-Control", "public, max-age=30");
       res.send(cached.buffer);
@@ -197,6 +204,16 @@ const frameCache = new Map<string, FrameCacheEntry>();
 const frameInflight = new Map<string, Promise<Frame[]>>();
 const FRAME_CACHE_MS = 120_000;
 const FRAME_WINDOW_MIN = 75;
+// Cap how old a previously-discovered frame list may be before we stop
+// re-serving it as a stale fallback. Without this, a long BOM 403 outage
+// keeps replaying e.g. last night's loop all morning as if it were live ·
+// past the cap we return an empty list so the client degrades honestly
+// (still → link-out) instead of animating hours-old frames.
+const STALE_FRAMES_MAX_MS = 90 * 60 * 1000;
+
+function isServablyFresh(entry: FrameCacheEntry): boolean {
+  return Date.now() - entry.fetchedAt < STALE_FRAMES_MAX_MS;
+}
 
 function pad(n: number): string {
   return n < 10 ? `0${n}` : String(n);
@@ -285,7 +302,7 @@ router.get("/bom-radar/frames", async (req: Request, res: Response) => {
     const frames = await inflight;
     if (frames.length === 0) {
       // Prefer a previous non-empty list over a transient empty (blip/403).
-      if (cached && cached.frames.length > 0) {
+      if (cached && cached.frames.length > 0 && isServablyFresh(cached)) {
         res.setHeader("Cache-Control", "public, max-age=30");
         res.json({ radarId, frames: slice(cached.frames), stale: true });
         return;
@@ -301,7 +318,7 @@ router.get("/bom-radar/frames", async (req: Request, res: Response) => {
     res.setHeader("Cache-Control", "public, max-age=60, stale-while-revalidate=240");
     res.json({ radarId, frames: slice(frames) });
   } catch (err) {
-    if (cached) {
+    if (cached && isServablyFresh(cached)) {
       res.setHeader("Cache-Control", "public, max-age=30");
       res.json({ radarId, frames: slice(cached.frames), stale: true });
       return;

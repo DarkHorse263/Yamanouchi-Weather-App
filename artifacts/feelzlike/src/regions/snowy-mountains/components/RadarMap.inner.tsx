@@ -1418,9 +1418,9 @@ interface BomFrame {
   url: string;
 }
 
-// Convert a BOM frame timestamp (YYYYMMDDHHMM, UTC) into a short local time.
-function frameLocalTime(ts: string): string {
-  if (ts.length !== 12) return "";
+// Parse a BOM frame timestamp (YYYYMMDDHHMM, UTC) into a Date, or null.
+function parseFrameTs(ts: string): Date | null {
+  if (ts.length !== 12) return null;
   const d = new Date(
     Date.UTC(
       Number(ts.slice(0, 4)),
@@ -1430,9 +1430,35 @@ function frameLocalTime(ts: string): string {
       Number(ts.slice(10, 12)),
     ),
   );
-  if (Number.isNaN(d.getTime())) return "";
+  return Number.isNaN(d.getTime()) ? null : d;
+}
+
+// Convert a BOM frame timestamp (YYYYMMDDHHMM, UTC) into a short local time.
+function frameLocalTime(ts: string): string {
+  const d = parseFrameTs(ts);
+  if (!d) return "";
   return d.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" });
 }
+
+// "Just now" / "9 min ago" / "1 h 20 min ago" · how old the newest frame is.
+// BOM burns a UTC timestamp into its imagery (e.g. "21:44UTC"), which reads
+// like last night to anyone thinking in local time · an explicit local-time
+// age readout is what makes the radar's freshness verifiable at a glance.
+function frameAgeLabel(ts: string, nowMs: number): string {
+  const d = parseFrameTs(ts);
+  if (!d) return "";
+  const mins = Math.max(0, Math.round((nowMs - d.getTime()) / 60_000));
+  if (mins < 2) return "just now";
+  if (mins < 60) return `${mins} min ago`;
+  const h = Math.floor(mins / 60);
+  const m = mins % 60;
+  return m > 0 ? `${h} h ${m} min ago` : `${h} h ago`;
+}
+
+// Newest-frame age (minutes) past which we stop presenting the loop as
+// "live" and flag it as delayed. BOM publishes every 6-10 min · 45 min of
+// silence means the feed (or our path to it) is genuinely behind.
+const FRAME_DELAYED_MIN = 45;
 
 // Lets the user pan + zoom the otherwise-static Official radar imagery so it
 // behaves like the Interactive (Leaflet) tab people compared us to. The
@@ -1731,6 +1757,14 @@ function BomAnimatedOfficialView({
   // newest frame instead of waiting up to 5 min for the next interval tick.
   useForegroundRefresh(() => framesLoadRef.current());
 
+  // Tick every 30s so the "x min ago" freshness readout stays honest while
+  // the tab sits open (the frame list itself refreshes on its own interval).
+  const [nowMs, setNowMs] = useState(() => Date.now());
+  useEffect(() => {
+    const id = window.setInterval(() => setNowMs(Date.now()), 30_000);
+    return () => window.clearInterval(id);
+  }, []);
+
   // Advance the loop · ~550ms per frame with a longer hold on the newest.
   useEffect(() => {
     if (!playing || frames.length < 2) return;
@@ -1754,6 +1788,14 @@ function BomAnimatedOfficialView({
     "absolute inset-0 m-auto max-h-full max-w-full object-contain pointer-events-none select-none";
   const pixelated = { imageRendering: "pixelated" as const };
   const activeTs = frames[active]?.ts ?? "";
+  // Freshness is judged by the NEWEST frame, not whichever frame the loop is
+  // currently showing (older frames in the loop are old by design).
+  const newestTs = frames[frames.length - 1]?.ts ?? "";
+  const newestAge = frameAgeLabel(newestTs, nowMs);
+  const newestDate = parseFrameTs(newestTs);
+  const delayed =
+    newestDate !== null &&
+    nowMs - newestDate.getTime() > FRAME_DELAYED_MIN * 60_000;
 
   return (
     <div className="absolute inset-0 flex flex-col bg-slate-100">
@@ -1857,8 +1899,22 @@ function BomAnimatedOfficialView({
       </div>
 
       <div className="absolute left-3 right-3 bottom-3 z-[1000] rounded-xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-lg px-3 py-2 flex items-center justify-between gap-3">
-        <div className="text-[11px] text-slate-600 font-medium truncate">
-          Source · {official.attribution}
+        <div className="min-w-0">
+          <div className="text-[11px] text-slate-600 font-medium truncate">
+            Source · {official.attribution}
+          </div>
+          {newestAge && (
+            <div
+              className={cn(
+                "text-[11px] font-semibold truncate",
+                delayed ? "text-amber-600" : "text-slate-500",
+              )}
+            >
+              {delayed
+                ? `Bureau feed delayed · latest frame ${frameLocalTime(newestTs)} (${newestAge})`
+                : `Updated ${frameLocalTime(newestTs)} local · ${newestAge}`}
+            </div>
+          )}
         </div>
         <a
           href={official.href}
@@ -1907,6 +1963,12 @@ function OfficialStillView({ official }: { official: OfficialRadarSource }) {
       img.src = next;
     };
     preloadRef.current = preload;
+    // Kick one preload IMMEDIATELY: the plain baseSrc URL is constant, so the
+    // service worker's catch-all stale-while-revalidate can paint a PREVIOUS
+    // SESSION'S gif on first open (an installed PWA reopened in the morning
+    // showed last night's radar). The instant cache-busted fetch swaps in the
+    // current picture within seconds while the cached copy avoids a blank gap.
+    preload();
     const id = window.setInterval(preload, 4 * 60 * 1000);
     return () => window.clearInterval(id);
   }, [baseSrc]);

@@ -39,3 +39,19 @@ probing; stop hitting BOM and it clears.
 `/mountain/:id` page (custom region router, no radar). The Official tab is the
 default only for AU/covered points; JP/NZ lead with the Interactive (RainViewer)
 tab since their official source is link-out only.
+
+**UTC watermark misread + freshness honesty (July 2026):** BOM burns a UTC
+timestamp into its imagery (e.g. "11/07/26 21:44UTC"), which users read as
+local time — a CURRENT morning frame looks like "last night". The fix is an
+explicit freshness readout in the animated view's source bar ("Updated HH:MM
+local · X min ago", judged by the NEWEST frame, ticking every 30s), flipping
+amber "Bureau feed delayed" past 45 min. Don't remove it — it's what makes the
+radar's freshness verifiable against the confusing watermark.
+**Stale-serving must be age-capped:** serve-stale-on-failure protections must
+never replay hours-old radar as live. Server caps: stale frame-list fallback
+≤90 min old, stale composite loop gif ≤30 min (frame/layer PNGs stay uncapped —
+immutable). Past the cap, degrade down the honesty ladder instead.
+**Still-view SW trap:** the constant loop-gif URL sits in the SW catch-all
+stale-while-revalidate, so an installed PWA paints the PREVIOUS session's gif
+on open; OfficialStillView must fire its cache-busted preload IMMEDIATELY on
+mount (not just on the 4-min interval) to swap in the current picture.
