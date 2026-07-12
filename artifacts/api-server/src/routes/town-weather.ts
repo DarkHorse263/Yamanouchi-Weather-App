@@ -1,5 +1,10 @@
 import { Router, type IRouter } from "express";
-import { reconcileDryToWet, isInJapan } from "../lib/amedas.js";
+import {
+  reconcileDryToWet,
+  getObservedSnowDepth,
+  isInJapan,
+  type ObservedSnow,
+} from "../lib/amedas.js";
 import { reconcileNzMetarDryToWet, isInNewZealand } from "../lib/metar-nz.js";
 import { fetchOpenWeatherMapAsOpenMeteo } from "../lib/openweathermap.js";
 import { dailyConditionLabel } from "../lib/dailyConditionLabel.js";
@@ -231,6 +236,11 @@ async function buildTownPayload(d: OmShaped, lat: number, lng: number) {
     },
     hourly: pickHourly(hourly),
     daily: pickDaily(daily),
+    // JP-only, winter-only: real measured snow depth from the nearest AMeDAS
+    // snow sensor. Purely additive context - it never replaces the model
+    // snow-depth seam and its absence never asserts "no snow" (out of season
+    // the JMA map simply has no snow keys, so this stays null).
+    observedSnow: null as ObservedSnow | null,
   };
 
   // JMA AMeDAS reconciliation: when the model's current block says dry but a
@@ -238,13 +248,17 @@ async function buildTownPayload(d: OmShaped, lat: number, lng: number) {
   // precipitation number) so the icon, description and rainfall agree with
   // what's really falling. JP-only; no-op elsewhere / when already wet.
   if (isInJapan(lat, lng)) {
-    const override = await reconcileDryToWet({
-      lat,
-      lon: lng,
-      modelWeatherCode: payload.current.weatherCode,
-      tempC: payload.current.temperature,
-      refElevationM: numOrNull(d.elevation),
-    });
+    const [override, snowObs] = await Promise.all([
+      reconcileDryToWet({
+        lat,
+        lon: lng,
+        modelWeatherCode: payload.current.weatherCode,
+        tempC: payload.current.temperature,
+        refElevationM: numOrNull(d.elevation),
+      }),
+      getObservedSnowDepth(lat, lng, numOrNull(d.elevation)),
+    ]);
+    payload.observedSnow = snowObs;
     if (override) {
       const obsMm = Math.round(override.rateMmh * 10) / 10;
       payload.current.weatherCode = override.weatherCode;

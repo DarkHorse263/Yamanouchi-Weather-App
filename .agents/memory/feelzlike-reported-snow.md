@@ -3,10 +3,10 @@ name: feelzlike resort-reported snow depth
 description: Reported-vs-model snow depth seam, always-200 snow-report endpoint contract, Thredbo XML pilot, strict-parse honesty rules
 ---
 
-# Resort-reported snow depth (Thredbo pilot)
+# Resort-reported snow depth (Thredbo + Falls Creek + Mt Hotham)
 
 ## The seam
-- `GET /api/weather/:locationId/snow-report` — adapter registry in api-server `lib/resortSnowReports.ts`, keyed by LOCATIONS id (pilot: `thredbo`). A reported base REPLACES the model snow-depth stat on detail pages ("snow depth · resort reported · Xh ago") and flows into skiability + LiftWindHoldPanel as `snowDepthCm` + `snowDepthSource:"reported"`.
+- `GET /api/weather/:locationId/snow-report` — adapter registry in api-server `lib/resortSnowReports.ts`, keyed by LOCATIONS id (`thredbo` XML, `falls-creek` JSON, `mt-hotham` HTML scrape). A reported base REPLACES the model snow-depth stat on detail pages ("snow depth · resort reported · Xh ago") and flows into skiability + LiftWindHoldPanel as `snowDepthCm` + `snowDepthSource:"reported"`.
 - Only a REPORTED base may honestly assert `no_base` — the model depth is snowmaking-blind and stays advisory. `deriveSkiableNowRead` carries `baseSource` so the chip caption reads "Base Xcm · resort reported".
 - Phase-1 links: `snowReportUrl` on MountainLink (region configs, AU+NZ; JP has none on purpose) rendered via `SnowReportLink` on both snowy-mountains LocationDetail and generic MountainDetail.
 
@@ -18,4 +18,8 @@ description: Reported-vs-model snow depth seam, always-200 snow-report endpoint 
 - Serve-stale ≤24h applies only to fetch rejections, never to parse failures (honest choice: a malformed 200 replaces the cache with null).
 
 ## How to add a resort
-Add an adapter entry (feedUrl + parse) in resortSnowReports.ts — no route/client changes needed; pages already call the hook everywhere and degrade to model when report is null. Thredbo feed shape: `<snowReport updated units="metric"><mountain><base amount/><season/><snow24Hours/>`.
+Add an adapter entry (feedUrl + parse) in resortSnowReports.ts — no route/client changes needed; pages already call the hook everywhere and degrade to model when report is null. Feed shapes vary per resort:
+- Thredbo XML: `<snowReport updated units="metric"><mountain><base amount/><season/><snow24Hours/>`.
+- Falls Creek JSON: snow-report JSON endpoint; numbers may arrive as strings — coerce strictly, blank string = null never 0.
+- Mt Hotham: NO structured feed — HTML scrape of the conditions page (label-anchored regexes + a parseable page timestamp is mandatory). Scrapes ROT when the site restructures: a parse failure honestly serves null (never stale numbers), so a resort silently losing its pill is the rot signal — re-verify the markup, don't loosen the strict parse.
+- Perisher has no adapter on purpose (no machine-readable source found) — it honestly shows model depth.

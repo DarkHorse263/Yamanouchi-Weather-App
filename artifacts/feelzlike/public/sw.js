@@ -43,7 +43,12 @@
 // v14: AU Official radar switched to the licensed WillyWeather feed
 // (/api/willy-radar) - route it network-first (reload) like the BOM frame
 // list so installed PWAs never animate a previous session's frames.
-const CACHE_VERSION = "v14";
+// v15: /api/town-weather gained the JP observedSnow block (AMeDAS measured
+// depth) AND moved from the catch-all SWR to the live-weather network-first
+// route - it is "right now" data and was being served a session stale. Also
+// adds /api/jma-radar/times (JP Official radar frame discovery) network-first
+// (reload) like the BOM/WillyWeather frame lists.
+const CACHE_VERSION = "v15";
 const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
 const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;
@@ -206,8 +211,11 @@ self.addEventListener("fetch", (event) => {
   //     /api/weather/:id/snow-report (resort-reported base) - if that endpoint
   //     ever moves off this prefix it must be added here explicitly or
   //     installed PWAs will serve stale reports from the catch-all SWR.
+  //     /api/town-weather is listed explicitly: it does NOT share the
+  //     /api/weather prefix and used to fall into the catch-all SWR.
   if (
     url.pathname.startsWith("/api/weather") ||
+    url.pathname.startsWith("/api/town-weather") ||
     url.pathname.startsWith("/api/today") ||
     url.pathname.startsWith("/api/road")
   ) {
@@ -232,6 +240,17 @@ self.addEventListener("fetch", (event) => {
   //     immutable unique-URL images on WillyWeather's CDN · they stay on the
   //     catch-all and can never go stale.
   if (url.pathname === "/api/willy-radar") {
+    event.respondWith(networkFirst(request, DATA_CACHE, { cacheMode: "reload" }));
+    return;
+  }
+
+  // 2c-ter. JMA nowcast frame-time discovery (JP Official radar) → network-
+  //     first, bypassing the browser HTTP cache · same rationale again: the
+  //     times JSON must track JMA's 5-min publish cadence or an installed
+  //     PWA animates a stale loop. The radar tiles it points at are
+  //     immutable unique-URL PNGs on JMA's own CDN · they never hit the SW
+  //     (cross-origin requests are skipped at the top of this router).
+  if (url.pathname === "/api/jma-radar/times") {
     event.respondWith(networkFirst(request, DATA_CACHE, { cacheMode: "reload" }));
     return;
   }

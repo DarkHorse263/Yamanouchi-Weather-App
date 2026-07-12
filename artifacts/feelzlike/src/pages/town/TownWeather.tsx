@@ -10,6 +10,7 @@ import {
   WeatherToday,
   WeatherHourly,
   WeatherOutlook,
+  ObservedSnowCard,
 } from "@/components/weather/WeatherSections";
 
 export function TownWeather() {
@@ -84,6 +85,7 @@ export function TownWeather() {
           <WeatherHero current={q.data.current} town={t(town.name, town.nameJa)} />
           <WeatherConditions current={q.data.current} t={t} />
           <WeatherToday daily={q.data.daily[0]} t={t} />
+          {q.data.observedSnow && <ObservedSnowCard obs={q.data.observedSnow} t={t} />}
           <WeatherHourly hourly={q.data.hourly} t={t} />
           <WeatherOutlook days={q.data.daily.slice(1, 7)} t={t} />
           <Radar t={t} />

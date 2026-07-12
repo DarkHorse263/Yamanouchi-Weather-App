@@ -1689,8 +1689,9 @@ function PanZoomStage({ children }: { children: React.ReactNode }) {
 // radar (a commercial BOM reseller): georeferenced 5-min frames layered on
 // our own labelled basemap. If that's unavailable we degrade down the same
 // honest ladder as before · the self-hosted BOM animated composite, then the
-// single still gif, then the link-out (JP/NZ are link-out only from the
-// start, having no embeddable image).
+// single still gif, then the link-out. Japanese points render the JMA
+// nowcast tiles (link-out on failure); NZ is link-out only, having no
+// embeddable image.
 function OfficialView({
   official,
   center,
@@ -1701,6 +1702,12 @@ function OfficialView({
   const radarId = bomRadarId(official.imageUrl);
   if (radarId) {
     return <WillyOfficialView official={official} radarId={radarId} center={center} />;
+  }
+  // Japanese points render the JMA nowcast as live map tiles · same
+  // layered-on-our-basemap pattern as the AU licensed feed. NZ (MetService)
+  // stays link-out only.
+  if (official.href.includes("jma.go.jp")) {
+    return <JmaOfficialView official={official} center={center} />;
   }
   return <OfficialStillView official={official} />;
 }
@@ -1962,6 +1969,267 @@ function WillyOfficialView({
             >
               WillyWeather
             </a>
+          </div>
+          {newestAge && (
+            <div
+              className={cn(
+                "text-[11px] font-semibold truncate",
+                delayed ? "text-amber-600" : "text-slate-500",
+              )}
+            >
+              {delayed
+                ? `Radar feed delayed · latest frame ${frameLocalTime(newestTs)} (${newestAge})`
+                : `Updated ${frameLocalTime(newestTs)} local · ${newestAge}`}
+            </div>
+          )}
+        </div>
+        <a
+          href={official.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[11px] font-semibold text-sky-700 hover:text-sky-900 whitespace-nowrap"
+        >
+          Open source →
+        </a>
+      </div>
+    </div>
+  );
+}
+
+// ─── JMA official nowcast radar (Japan) ─────────────────────────────────
+// Japan's Official tab renders the JMA high-resolution precipitation
+// nowcast (hrpns) as real map tiles layered on our own labelled basemap ·
+// the same pattern as the AU licensed feed. Frame-time discovery goes
+// through our /api/jma-radar/times proxy (the JMA JSON has no CORS); the
+// tiles themselves load straight off JMA's public CDN. Observed PAST frames
+// only · the server filters out the model nowcast forecasts, so everything
+// animated here is measurement. On any failure the view degrades to the
+// existing official-site link-out card.
+interface JmaTimesData {
+  times: { basetime: string; validtime: string }[];
+  stale?: boolean;
+}
+
+// How many five-minute frames the loop animates (~35 min of history) ·
+// every frame is a live tile pyramid, so more frames = more tile fetches.
+const JMA_FRAME_COUNT = 7;
+// hrpns tiles exist up to zoom 10 · beyond that Leaflet upscales.
+const JMA_MAX_NATIVE_ZOOM = 10;
+
+function jmaTileUrl(t: { basetime: string; validtime: string }): string {
+  return `https://www.jma.go.jp/bosai/jmatile/data/nowc/${t.basetime}/none/${t.validtime}/surf/hrpns/{z}/{x}/{y}.png`;
+}
+
+function JmaOfficialView({
+  official,
+  center,
+}: {
+  official: OfficialRadarSource;
+  center: { lat: number; lng: number };
+}) {
+  const [times, setTimes] = useState<JmaTimesData["times"] | null>(null);
+  // null = first fetch still in flight · true = discovery unusable, fall
+  // back to the official-site link-out card.
+  const [failed, setFailed] = useState<boolean | null>(null);
+  const [active, setActive] = useState(0);
+  const [playing, setPlaying] = useState(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return true;
+    return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  });
+
+  // The background refresh must not yank a PAUSED user off the frame they
+  // picked · only snap to the newest frame while the loop is playing (or on
+  // first load, when there's nothing selected yet). Ref, not state, so the
+  // []-dep load closure always sees the current value.
+  const playingRef = useRef(playing);
+  playingRef.current = playing;
+
+  const loadRef = useRef<() => void>(() => {});
+  useEffect(() => {
+    let cancelled = false;
+    let firstLoad = true;
+    async function load() {
+      try {
+        const res = await fetch("/api/jma-radar/times", { cache: "no-store" });
+        if (!res.ok) throw new Error(`jma ${res.status}`);
+        const next = (await res.json()) as JmaTimesData;
+        if (cancelled) return;
+        if (!Array.isArray(next.times) || next.times.length < 2) {
+          setFailed(true);
+          return;
+        }
+        const frames = next.times.slice(-JMA_FRAME_COUNT);
+        setTimes(frames);
+        if (playingRef.current || firstLoad) {
+          setActive(frames.length - 1);
+        } else {
+          // Paused · keep the user's frame, just clamp into the new range.
+          setActive((i) => Math.min(i, frames.length - 1));
+        }
+        firstLoad = false;
+        setFailed(false);
+      } catch {
+        // Only fall back if nothing usable is on screen · a transient blip
+        // on a background refresh shouldn't discard a working loop.
+        if (!cancelled) setFailed((prev) => (prev === false ? false : true));
+      }
+    }
+    loadRef.current = load;
+    load();
+    // JMA publishes every 5 min · refresh on the same cadence as the AU
+    // licensed feed so the loop tracks the upstream.
+    const id = window.setInterval(load, 4 * 60 * 1000);
+    return () => {
+      cancelled = true;
+      window.clearInterval(id);
+    };
+  }, []);
+  useForegroundRefresh(() => loadRef.current());
+
+  // Tick for the "x min ago" freshness readout.
+  const [nowMs, setNowMs] = useState(() => Date.now());
+  useEffect(() => {
+    const id = window.setInterval(() => setNowMs(Date.now()), 30_000);
+    return () => window.clearInterval(id);
+  }, []);
+
+  const frames = times ?? [];
+
+  // Advance the loop · same rhythm as the AU feeds (longer newest hold).
+  useEffect(() => {
+    if (!playing || frames.length < 2) return;
+    const isNewest = active === frames.length - 1;
+    const id = window.setTimeout(
+      () => setActive((i) => (i + 1) % frames.length),
+      isNewest ? 1400 : 550,
+    );
+    return () => window.clearTimeout(id);
+  }, [playing, active, frames.length]);
+
+  if (failed) {
+    return <OfficialStillView official={official} />;
+  }
+  if (failed === null || !times) {
+    return (
+      <div className="absolute inset-0 grid place-items-center bg-slate-100">
+        <Loader2 className="w-6 h-6 animate-spin text-slate-400" />
+      </div>
+    );
+  }
+
+  // JMA timestamps are UTC YYYYMMDDHHMMSS · the shared frame helpers parse
+  // the compact 12-char YYYYMMDDHHMM form, so slice off the seconds.
+  const activeTs = frames[active]?.validtime.slice(0, 12) ?? "";
+  const newestTs = frames[frames.length - 1]?.validtime.slice(0, 12) ?? "";
+  const newestAge = frameAgeLabel(newestTs, nowMs);
+  const newestDate = parseFrameTs(newestTs);
+  const delayed =
+    newestDate !== null &&
+    nowMs - newestDate.getTime() > FRAME_DELAYED_MIN * 60_000;
+
+  return (
+    <div className="absolute inset-0 flex flex-col bg-slate-100">
+      <div className="relative flex-1 overflow-hidden">
+        <MapContainer
+          center={[center.lat, center.lng]}
+          zoom={9}
+          minZoom={6}
+          maxZoom={11}
+          zoomControl={false}
+          scrollWheelZoom
+          touchZoom
+          doubleClickZoom
+          dragging
+          attributionControl
+          className="absolute inset-0 w-full h-full"
+        >
+          <ZoomControl position="bottomright" />
+          <StripAttributionPrefix />
+          {/* Same basemap pairing as the Interactive tab so the Official view
+              reads as part of the same product · hillshade under a light
+              labelled base. */}
+          <TileLayer
+            attribution='Hillshade © <a href="https://www.esri.com/">Esri</a>'
+            url="https://server.arcgisonline.com/ArcGIS/rest/services/Elevation/World_Hillshade/MapServer/tile/{z}/{y}/{x}"
+            maxNativeZoom={16}
+          />
+          <TileLayer
+            attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors · © <a href="https://carto.com/attributions">CARTO</a>'
+            url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+            subdomains={["a", "b", "c", "d"]}
+            maxNativeZoom={19}
+            opacity={0.92}
+          />
+          {/* Every frame's tile layer stays mounted · animation is an opacity
+              flip so stepping never flashes a blank frame while tiles load. */}
+          {frames.map((f, i) => (
+            <TileLayer
+              key={`${f.basetime}-${f.validtime}`}
+              attribution='Radar © <a href="https://www.jma.go.jp/">Japan Meteorological Agency</a>'
+              url={jmaTileUrl(f)}
+              maxNativeZoom={JMA_MAX_NATIVE_ZOOM}
+              opacity={i === active ? 0.75 : 0}
+              zIndex={400}
+            />
+          ))}
+          {/* The town / searched point the user came from. */}
+          <CircleMarker
+            center={[center.lat, center.lng]}
+            radius={6}
+            pathOptions={{ color: "#0284c7", weight: 2, fillColor: "#0ea5e9", fillOpacity: 0.85 }}
+          />
+        </MapContainer>
+
+        {/* top-16 (not top-3) · the parent view-switcher tab bar lives at
+            top-3 left-3, and a top-3 chip here paints straight over its
+            "JMA" pill. */}
+        <div className="absolute left-3 top-16 z-[1000] flex items-center gap-2 rounded-full bg-white/95 backdrop-blur-md border border-slate-200 shadow px-2.5 py-1.5">
+          <button
+            type="button"
+            onClick={() => setPlaying((p) => !p)}
+            className="grid place-items-center w-6 h-6 rounded-full bg-slate-900 text-white hover:bg-slate-800"
+            aria-label={playing ? "pause radar loop" : "play radar loop"}
+          >
+            {playing ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+          </button>
+          <span className="text-[11px] font-semibold text-slate-700 tabular-nums">
+            {frameLocalTime(activeTs)}
+          </span>
+        </div>
+
+        {/* top-16 mirrors the play chip · the top-3 row belongs to the
+            view-switcher tabs alone. */}
+        <div className="absolute right-3 top-16 z-[1000] flex items-center gap-1 rounded-full bg-white/90 backdrop-blur-md border border-slate-200 shadow px-2 py-1.5">
+          {frames.map((f, i) => (
+            <button
+              key={`${f.basetime}-${f.validtime}`}
+              type="button"
+              onClick={() => {
+                setPlaying(false);
+                setActive(i);
+              }}
+              aria-label={`show ${frameLocalTime(f.validtime.slice(0, 12))}`}
+              className="group flex items-center -my-2 py-2 px-0.5"
+            >
+              <span
+                className={cn(
+                  "block h-1.5 rounded-full transition-all",
+                  i === active
+                    ? "w-4 bg-sky-600"
+                    : "w-1.5 bg-slate-300 group-hover:bg-slate-400",
+                )}
+              />
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Static footer BELOW the map, not a floating overlay · a bar across
+          the imagery hid the radar echoes and the basemap credits. */}
+      <div className="shrink-0 bg-white border-t border-slate-200 px-3 py-2 flex items-center justify-between gap-3">
+        <div className="min-w-0">
+          <div className="text-[11px] text-slate-600 font-medium truncate">
+            JMA nowcast radar · Japan Meteorological Agency
           </div>
           {newestAge && (
             <div

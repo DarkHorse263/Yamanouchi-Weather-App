@@ -519,6 +519,108 @@ router.get("/willy-radar", async (req: Request, res: Response) => {
   }
 });
 
+// ─── JMA high-resolution precipitation nowcast times (Japan) ────────────
+// Japan's Official radar tab renders the JMA hrpns nowcast as map tiles.
+// The frame-time discovery file (targetTimes_N1.json) carries no CORS
+// headers, so the browser cannot read it directly · this route proxies ONLY
+// that tiny JSON. The radar tiles themselves are public JMA CDN PNGs the
+// client loads directly, so tile traffic never touches our server.
+// N1 = the observed past hour at 5-min cadence · we keep past frames only
+// (validtime <= basetime), never the model nowcast forecasts · the honesty
+// bar for a tab labelled "radar" is measurement, not extrapolation.
+interface JmaTime {
+  /** UTC YYYYMMDDHHMMSS · the tile path needs both parts verbatim. */
+  basetime: string;
+  validtime: string;
+}
+interface JmaTimesCacheEntry {
+  times: JmaTime[];
+  fetchedAt: number;
+}
+let jmaTimesCache: JmaTimesCacheEntry | null = null;
+let jmaTimesInflight: Promise<JmaTime[] | null> | null = null;
+const JMA_TIMES_CACHE_MS = 120_000;
+// Honesty cap · past this a stale frame list is worse than an explicit
+// failure (the client then degrades to the official-site link-out).
+const JMA_TIMES_STALE_MAX_MS = 90 * 60 * 1000;
+const JMA_TS = /^\d{14}$/;
+
+async function fetchJmaTimes(): Promise<JmaTime[] | null> {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 8_000);
+  try {
+    const r = await fetch(
+      "https://www.jma.go.jp/bosai/jmatile/data/nowc/targetTimes_N1.json",
+      { signal: ctrl.signal },
+    );
+    if (!r.ok) return null;
+    const data: unknown = await r.json();
+    if (!Array.isArray(data)) return null;
+    const times: JmaTime[] = [];
+    for (const item of data as Array<Record<string, unknown>>) {
+      const basetime = typeof item.basetime === "string" ? item.basetime : "";
+      const validtime = typeof item.validtime === "string" ? item.validtime : "";
+      const elements = Array.isArray(item.elements) ? item.elements : [];
+      if (
+        JMA_TS.test(basetime) &&
+        JMA_TS.test(validtime) &&
+        validtime <= basetime &&
+        elements.includes("hrpns")
+      ) {
+        times.push({ basetime, validtime });
+      }
+    }
+    if (times.length === 0) return null;
+    times.sort((a, b) => a.validtime.localeCompare(b.validtime)); // oldest → newest
+    // The client animates the last ~7 · 12 leaves headroom without bloating
+    // the payload (the upstream file lists ~37 five-minute steps).
+    return times.slice(-12);
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+router.get("/jma-radar/times", async (_req: Request, res: Response) => {
+  if (jmaTimesCache && Date.now() - jmaTimesCache.fetchedAt < JMA_TIMES_CACHE_MS) {
+    res.setHeader("Cache-Control", "public, max-age=60, stale-while-revalidate=120");
+    res.json({ times: jmaTimesCache.times });
+    return;
+  }
+  const sendStale = (): boolean => {
+    if (
+      jmaTimesCache &&
+      jmaTimesCache.times.length > 0 &&
+      Date.now() - jmaTimesCache.fetchedAt < JMA_TIMES_STALE_MAX_MS
+    ) {
+      res.setHeader("Cache-Control", "public, max-age=30");
+      res.json({ times: jmaTimesCache.times, stale: true });
+      return true;
+    }
+    return false;
+  };
+  try {
+    if (!jmaTimesInflight) {
+      jmaTimesInflight = fetchJmaTimes().finally(() => {
+        jmaTimesInflight = null;
+      });
+    }
+    const times = await jmaTimesInflight;
+    if (!times) {
+      if (!sendStale()) {
+        res.status(502).json({ error: "JMA nowcast times not available" });
+      }
+      return;
+    }
+    jmaTimesCache = { times, fetchedAt: Date.now() };
+    res.setHeader("Cache-Control", "public, max-age=60, stale-while-revalidate=120");
+    res.json({ times });
+  } catch {
+    if (!sendStale()) {
+      res.status(502).json({ error: "JMA nowcast times not available" });
+    }
+  }
+});
+
 // ─── RainViewer proxy ───────────────────────────────────────────────────
 // Yamanouchi's map uses RainViewer for radar tiles. Proxying the
 // weather-maps.json metadata call through the backend keeps the third-party

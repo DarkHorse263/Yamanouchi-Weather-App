@@ -22,6 +22,7 @@ import {
   type TownWeatherDaily,
   type TownWeatherHourly,
   type TownWeatherStaleMeta,
+  type TownObservedSnow,
 } from "@/lib/town-weather";
 
 // Presentational weather sections shared by the town forecast page
@@ -210,6 +211,53 @@ export function WeatherToday({
           icon={CloudSnow}
         />
       </div>
+    </section>
+  );
+}
+
+/**
+ * Real measured snow depth from the nearest JMA AMeDAS snow sensor. Renders
+ * only when the API includes an observedSnow block (JP, snow season) - out of
+ * season JMA drops the snow fields entirely and this card simply disappears.
+ * A reported 0cm is a real reading and shows as 0cm.
+ */
+export function ObservedSnowCard({
+  obs,
+  t,
+}: {
+  obs: TownObservedSnow;
+  t: Translate;
+}) {
+  const stationLine = [
+    `JMA AMeDAS · ${obs.stationName}`,
+    obs.stationElevationM !== null ? `${Math.round(obs.stationElevationM)}m` : null,
+    `${obs.distanceKm} km ${t("away", "先")}`,
+  ]
+    .filter(Boolean)
+    .join(" · ");
+  return (
+    <section className="mt-4 rounded-2xl border border-border bg-white p-5">
+      <div className="flex items-center justify-between gap-3 flex-wrap">
+        <p className="byline text-muted-foreground/70">
+          {t("Observed snow · measured", "積雪観測 · 実測値")}
+        </p>
+        <p className="text-[11px] text-muted-foreground/60">
+          {t(`at ${fmtTime(obs.observedAt)}`, `${fmtTime(obs.observedAt)}時点`)}
+        </p>
+      </div>
+      <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <KV
+          label={t("Snow depth", "積雪深")}
+          value={`${Math.round(obs.depthCm)} cm`}
+          icon={Snowflake}
+        />
+        <KV
+          label={t("Last 24h", "24時間降雪")}
+          value={obs.snowfall24hCm !== null ? `${Math.round(obs.snowfall24hCm)} cm` : "-"}
+          icon={CloudSnow}
+        />
+      </div>
+      <p className="text-[11px] text-muted-foreground/60 mt-3">{stationLine}</p>
     </section>
   );
 }

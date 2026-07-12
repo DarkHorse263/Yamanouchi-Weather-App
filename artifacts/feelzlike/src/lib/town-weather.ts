@@ -62,6 +62,21 @@ export interface TownWeatherDaily {
   windGustMax: number | null;
 }
 
+/**
+ * Real measured snow depth from the nearest JMA AMeDAS snow sensor (JP only).
+ * Winter-only: JMA drops the snow fields from its observation feed outside the
+ * snow season, so this is null all summer. Additive context - it never replaces
+ * the model snow-depth figures and null never means "no snow".
+ */
+export interface TownObservedSnow {
+  depthCm: number;
+  snowfall24hCm: number | null;
+  stationName: string;
+  stationElevationM: number | null;
+  distanceKm: number;
+  observedAt: string;
+}
+
 export interface TownWeatherStaleMeta {
   /** Approx age of the cached payload, in seconds. Parsed from `age=Xs`. */
   ageSeconds: number | null;
@@ -78,6 +93,8 @@ export interface TownWeatherResponse {
   current: TownWeatherCurrent;
   hourly: TownWeatherHourly[];
   daily: TownWeatherDaily[];
+  /** JP winter only; see TownObservedSnow. Older cached payloads omit it. */
+  observedSnow?: TownObservedSnow | null;
   /**
    * Populated when the backend served this payload from the stale-on-error
    * cache because the upstream weather API failed. Shape parsed out of the

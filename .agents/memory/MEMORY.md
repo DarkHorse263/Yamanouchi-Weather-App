@@ -50,4 +50,6 @@
 - [feelzlike reported snow](feelzlike-reported-snow.md) — snow-report endpoint is ALWAYS-200 {report:null}; strict parse (reported 0 surfaces, never 0-default); 36h serve-time guard; reported REPLACES model stat; only reported may assert no_base.
 - [feelzlike elevation bands](feelzlike-elevation-band-partition.md) — bands must share ONE pinned OM cell (cell_selection=nearest) + FL−300m phase partition; default land-cell = 3 different places (mid>upper snow bug).
 - [feelzlike daily condition labels](feelzlike-daily-condition-labels.md) — daily weatherDescription is totals-derived via shared server helper, never the WMO moment-code; rain-dominant days must say Rain.
+- [feelzlike JP official JMA radar](feelzlike-jma-radar.md) — JMA hrpns tiles on own basemap; times JSON has no CORS (proxy discovery only); PAST frames only, never nowcast forecasts; fallback = link-out.
+- [feelzlike AMeDAS observed snow](feelzlike-amedas-observed-snow.md) — JMA drops snow keys OUT OF SEASON (missing ≠ 0, must be null); 25km + elevation-penalty station pick; fail-soft into town-weather.
 - [feelzlike competitor snow reports](feelzlike-competitor-snow-reports.md) — AU: SnowsBest=MetraWeather once-daily+journalist; JP: SnowJapan human base observers + resort feeds; gaps: reported numbers, lifts-open, daily digest, JP=AMeDAS depth + JMA radar tab.

@@ -29,7 +29,7 @@ export function isInJapan(lat: number, lon: number): boolean {
   return lat >= JP.latMin && lat <= JP.latMax && lon >= JP.lonMin && lon <= JP.lonMax;
 }
 
-interface Station {
+export interface Station {
   id: string;
   lat: number;
   lon: number;
@@ -38,7 +38,7 @@ interface Station {
 }
 
 // Raw map values are [value, qualityFlag] tuples; we only read value (index 0).
-type RawObs = Record<string, [number, number] | undefined>;
+export type RawObs = Record<string, [number, number] | undefined>;
 interface MapData {
   observedAt: string; // ISO local time string from latest_time.txt
   obs: Record<string, RawObs>;
@@ -251,4 +251,96 @@ export async function reconcileDryToWet(args: {
     observedAt: obs.observedAt,
     rateMmh: obs.rateMmh,
   };
+}
+
+// ── Observed snow depth (winter only) ──────────────────────────────────────────
+//
+// A subset of AMeDAS stations carry snow sensors: `snow` = settled depth in cm,
+// `snow24h` (and 1h/6h/12h) = fresh snowfall totals in cm. These keys exist in
+// the map JSON ONLY while JMA is running its snow network (roughly Nov-May);
+// out of season they vanish entirely, so this returns null all (southern-)
+// summer - which is exactly the honest behaviour we want.
+
+export interface ObservedSnow {
+  depthCm: number;
+  snowfall24hCm: number | null;
+  stationName: string;
+  stationElevationM: number | null;
+  distanceKm: number;
+  observedAt: string;
+}
+
+/**
+ * Pure station selection for snow depth - exported so tests can exercise the
+ * winter-shaped map JSON with synthetic fixtures (live verification is
+ * impossible out of season; archived winter maps are not retained by JMA).
+ *
+ * Rules mirror getObservedPrecip: 25km radius, elevation-penalised distance
+ * score. Only stations reporting a finite, non-negative `snow` depth qualify -
+ * a missing key means "no snow sensor / out of season", never "0cm".
+ */
+export function selectSnowObservation(args: {
+  stations: Station[];
+  obs: Record<string, RawObs>;
+  lat: number;
+  lon: number;
+  refElevationM?: number | null;
+}): Omit<ObservedSnow, "observedAt"> | null {
+  const { stations, obs, lat, lon, refElevationM } = args;
+  let best: { score: number; st: Station; o: RawObs; dist: number } | null = null;
+  for (const st of stations) {
+    const o = obs[st.id];
+    if (!o) continue;
+    const depth = num(o.snow?.[0]);
+    if (depth == null || depth < 0) continue; // no snow sensor / bad reading
+    const dist = haversineKm(lat, lon, st.lat, st.lon);
+    if (dist > RADIUS_KM) continue;
+    let score = dist;
+    if (refElevationM != null && st.alt != null) {
+      score += ELEV_PENALTY_PER_M * Math.abs(st.alt - refElevationM);
+    }
+    if (!best || score < best.score) best = { score, st, o, dist };
+  }
+  if (!best) return null;
+
+  const depth = num(best.o.snow?.[0]);
+  if (depth == null || depth < 0) return null;
+  const s24 = num(best.o.snow24h?.[0]);
+  return {
+    depthCm: depth,
+    snowfall24hCm: s24 != null && s24 >= 0 ? s24 : null,
+    stationName: best.st.name,
+    stationElevationM: best.st.alt,
+    distanceKm: Math.round(best.dist * 10) / 10,
+  };
+}
+
+// Real measured snow depth nearest to a point. Fail-soft: any fetch problem or
+// an out-of-season map (no snow keys anywhere) returns null and the caller
+// simply omits the observed block.
+export async function getObservedSnowDepth(
+  lat: number,
+  lon: number,
+  refElevationM?: number | null,
+): Promise<ObservedSnow | null> {
+  if (!isInJapan(lat, lon)) return null;
+  let table: Station[];
+  let map: MapData | null;
+  try {
+    [table, map] = await Promise.all([loadStationTable(), getLatestMap()]);
+  } catch (err) {
+    console.warn("[amedas] snow lookup failed:", err);
+    return null;
+  }
+  if (!map) return null;
+
+  const picked = selectSnowObservation({
+    stations: table,
+    obs: map.obs,
+    lat,
+    lon,
+    refElevationM,
+  });
+  if (!picked) return null;
+  return { ...picked, observedAt: map.observedAt };
 }
