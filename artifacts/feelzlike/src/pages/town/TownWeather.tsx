@@ -88,7 +88,7 @@ export function TownWeather() {
           {q.data.observedSnow && <ObservedSnowCard obs={q.data.observedSnow} t={t} />}
           <WeatherHourly hourly={q.data.hourly} t={t} />
           <WeatherOutlook days={q.data.daily.slice(1, 7)} t={t} />
-          <Radar t={t} />
+          <Radar t={t} center={{ lat: town.lat, lng: town.lng }} />
           <p className="byline text-muted-foreground/60 mt-8">
             {t(
               `Source: ${region.weatherSource?.label ?? "Open-Meteo"} · updated every 10 min`,
@@ -101,7 +101,19 @@ export function TownWeather() {
   );
 }
 
-function Radar({ t }: { t: (en: string, ja: string) => string }) {
+function Radar({
+  t,
+  center,
+}: {
+  t: (en: string, ja: string) => string;
+  /**
+   * The viewed town's coordinates. Without this, RadarMap falls back to the
+   * REGION_DEFAULTS centre (a whole-region framing point that can sit many
+   * km from any town), and the BOM/JMA views draw their "you are here" dot
+   * at that fallback — e.g. Jindabyne's dot appeared ~18 km west of town.
+   */
+  center: { lat: number; lng: number };
+}) {
   const { region } = useRegion();
   const seasonCtx = useOptionalSeason();
   const season = seasonCtx?.season ?? "winter";
@@ -129,7 +141,7 @@ function Radar({ t }: { t: (en: string, ja: string) => string }) {
           RainViewer <ExternalLink className="w-3 h-3" />
         </a>
       </div>
-      <RadarMap season={season} region={region.id as RadarRegionKey} />
+      <RadarMap center={center} season={season} region={region.id as RadarRegionKey} />
       <p className="text-xs text-muted-foreground/70 px-5 py-3 border-t border-border">
         {t(
           "Precip radar is on by default · forecast frames show the next 30 minutes. Toggle snowfall, wind, temperature or rain risk, then click any point to read its values.",
