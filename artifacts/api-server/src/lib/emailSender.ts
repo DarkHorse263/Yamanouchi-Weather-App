@@ -3,10 +3,14 @@
  * console (dev-mode fallback) so the rest of the alert flow is testable
  * without provisioning a real email account.
  *
- * From address comes from `ALERT_FROM_EMAIL` (default: `alerts@feelzlike.com`).
- * NOTE: Resend requires the from-domain to be verified before it'll send to
- * arbitrary addresses; until then their `onboarding@resend.dev` only delivers
- * to the account owner's email.
+ * From address comes from `ALERT_FROM_EMAIL`. Default falls back to Resend's
+ * `onboarding@resend.dev`, which only delivers to the account owner's email.
+ * NOTE: Resend requires the from-domain to be verified (DNS records added in
+ * the Resend dashboard) before it will send from feelzlike.com to arbitrary
+ * addresses. Once verified, set ALERT_FROM_EMAIL to
+ * `feelzlike alerts <alerts@feelzlike.com>`. Exchange Online keeps handling
+ * inbound mail - Resend's records live on its own subdomain, so the root
+ * MX/SPF for the mailbox are untouched.
  */
 
 interface SendArgs {
@@ -24,7 +28,7 @@ interface SendResult {
   error?: string;
 }
 
-const FROM = process.env.ALERT_FROM_EMAIL ?? "FeelZlike Alerts <onboarding@resend.dev>";
+const FROM = process.env.ALERT_FROM_EMAIL ?? "feelzlike alerts <onboarding@resend.dev>";
 
 export async function sendEmail(args: SendArgs): Promise<SendResult> {
   const apiKey = process.env.RESEND_API_KEY;
