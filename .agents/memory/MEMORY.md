@@ -52,4 +52,5 @@
 - [feelzlike daily condition labels](feelzlike-daily-condition-labels.md) — daily weatherDescription is totals-derived via shared server helper, never the WMO moment-code; rain-dominant days must say Rain.
 - [feelzlike JP official JMA radar](feelzlike-jma-radar.md) — JMA hrpns tiles on own basemap; times JSON has no CORS (proxy discovery only); PAST frames only, never nowcast forecasts; fallback = link-out.
 - [feelzlike AMeDAS observed snow](feelzlike-amedas-observed-snow.md) — JMA drops snow keys OUT OF SEASON (missing ≠ 0, must be null); 25km + elevation-penalty station pick; fail-soft into town-weather.
+- [feelzlike Japan bible xlsx](feelzlike-japan-bible.md) — user's 558-resort master sheet in attached_assets; truth-tested July 2026; largely accurate but has KNOWN wrong rows (list inside) — verify any row before it feeds the app.
 - [feelzlike competitor snow reports](feelzlike-competitor-snow-reports.md) — AU: SnowsBest=MetraWeather once-daily+journalist; JP: SnowJapan human base observers + resort feeds; gaps: reported numbers, lifts-open, daily digest, JP=AMeDAS depth + JMA radar tab.
