@@ -18,17 +18,19 @@
  * visitors get it back through the <noscript> rule in index.html.
  *
  * ── Single source of truth ─────────────────────────────────────────────────
- * The REGIONS constant and REGION_FEATURES / TOWN_FEATURES arrays below
- * are the canonical registry for:
+ * The REGIONS registry lives in ./seo-regions.mjs and is the canonical
+ * registry for:
  *   • which URLs get prerendered (here)
- *   • which URLs go in the sitemap (generate-sitemap.mjs mirrors this)
+ *   • which URLs go in the sitemap (generate-sitemap.mjs imports the same file)
  *   • which paths the server considers valid (app.ts KNOWN_REGIONS mirrors this)
- * Keep all three in sync when adding regions, towns, or route sections.
+ * Keep seo-regions.mjs in sync with src/regions/ and app.ts when adding
+ * regions, towns, or route sections.
  */
 
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { REGIONS, regionFeatures, townFeatures } from "./seo-regions.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, "..", "dist", "public");
@@ -41,73 +43,11 @@ const SITE = (process.env.PUBLIC_ORIGIN || "https://feelzlike.com").replace(/\/$
 const withTrailingSlash = (p) => (p === "/" ? "/" : p.endsWith("/") ? p : `${p}/`);
 
 // ── Region / town / mountain registry ────────────────────────────────────
-
-const REGIONS = [
-  {
-    slug: "snowy-mountains",
-    name: "Snowy Mountains",
-    subtitle: "NSW · Australia",
-    country: "AU",
-    mountains: [
-      { name: "Perisher",          blurb: "NSW · the big one (4 resorts)" },
-      { name: "Thredbo",           blurb: "NSW · the high one" },
-      { name: "Selwyn",            blurb: "NSW · family beginner mountain" },
-      { name: "Charlotte's Pass",  blurb: "NSW · ski-in village · day trip via oversnow from Perisher" },
-    ],
-    towns: [
-      { id: "jindabyne",  name: "Jindabyne",  blurb: "Lakeside base town · 30 min to Thredbo & Perisher" },
-      { id: "berridale",  name: "Berridale",  blurb: "Quiet village stop on the Snowy Mountains Highway" },
-      { id: "cooma",      name: "Cooma",      blurb: "Regional hub · 1 hr to the snowfields" },
-    ],
-  },
-  {
-    slug: "yamanouchi",
-    name: "Yamanouchi",
-    subtitle: "Nagano · Japan",
-    country: "JP",
-    mountains: [
-      { name: "Shiga Kogen",   blurb: "Japan's largest interconnected ski area · 20 resorts linked" },
-      { name: "Ryuoo",         blurb: "Nagano · family resort · accessible from Yudanaka" },
-      { name: "XJAM Takaifuji",blurb: "Kita-Shiga · beginner-friendly" },
-    ],
-    towns: [
-      { id: "yudanaka",    name: "Yudanaka",    blurb: "Onsen station town · gateway to Shiga Kogen" },
-      { id: "shibu-onsen", name: "Shibu Onsen", blurb: "Traditional ryokan district · 600 m from Yudanaka station" },
-      { id: "yomase",      name: "Yomase",      blurb: "Quiet farming village · base for Kita-Shiga resorts" },
-    ],
-  },
-  {
-    slug: "victorias-high-country",
-    name: "Victoria's High Country",
-    subtitle: "VIC · Australia",
-    country: "AU",
-    mountains: [
-      { name: "Mt Buller",       blurb: "VIC · the big one · 3 hrs from Melbourne" },
-      { name: "Falls Creek",     blurb: "VIC · largest skiable area · ski-in village" },
-      { name: "Mt Hotham",       blurb: "VIC · the high & steep one · Hotham Airport access" },
-      { name: "Mt Stirling",     blurb: "VIC · cross-country & backcountry sister to Buller" },
-      { name: "Lake Mountain",   blurb: "VIC · nordic & snow play · closest snow to Melbourne" },
-      { name: "Mt Donna Buang",  blurb: "VIC · free snow play summit · 1.5 hrs from Melbourne" },
-    ],
-    towns: [
-      { id: "mansfield",    name: "Mansfield",    blurb: "Cattle country gateway · 50 min to Buller & Stirling" },
-      { id: "bright",       name: "Bright",       blurb: "Great Alpine Road hub · gateway to Falls Creek & Hotham" },
-      { id: "mount-beauty", name: "Mount Beauty", blurb: "Closest sealed-road town to Falls Creek · 30 min up" },
-      { id: "harrietville", name: "Harrietville", blurb: "Last village before Hotham · chains fit on the way up" },
-      { id: "dinner-plain", name: "Dinner Plain", blurb: "Alpine village · 10 min from Mt Hotham · ski-in feel" },
-      { id: "marysville",   name: "Marysville",   blurb: "Yarra Ranges gateway · 20 min to Lake Mountain" },
-      { id: "warburton",    name: "Warburton",    blurb: "Yarra Valley town · closest base to Mt Donna Buang" },
-      { id: "omeo",         name: "Omeo",         blurb: "Southern Great Alpine Road · gateway to Hotham from Gippsland" },
-    ],
-  },
-];
-
-// Valid region sub-sections (mirrors generate-sitemap.mjs REGION_FEATURES).
-const REGION_FEATURES = ["mountains", "alerts", "stay", "eat", "explore"];
-
-// Valid town sub-sections (mirrors generate-sitemap.mjs TOWN_FEATURES).
-// /cams is intentionally omitted — it gets a server-side 301 to /roads.
-const TOWN_FEATURES = ["weather", "stay", "eat", "roads", "transport", "explore"];
+// REGIONS + per-region feature helpers come from ./seo-regions.mjs (shared
+// with generate-sitemap.mjs). Region-level /eat and /explore redirect home
+// for every region, so they are never prerendered; /alerts only renders for
+// regions with an alerts page; town /roads only for regions with roads
+// content. /cams is intentionally omitted — server-side 301 to /roads.
 
 const BY_COUNTRY = (code) => REGIONS.filter((r) => r.country === code);
 
@@ -154,11 +94,11 @@ function regionTownList(region) {
     .join("\n          ");
 }
 
-function townSectionLinks(regionSlug, townId) {
-  return TOWN_FEATURES
+function townSectionLinks(region, townId) {
+  return townFeatures(region)
     .map((s) => {
       const label = s === "roads" ? "roads & cams" : s;
-      return `<a href="/${regionSlug}/${townId}/${s}">${esc(label)}</a>`;
+      return `<a href="/${region.slug}/${townId}/${s}">${esc(label)}</a>`;
     })
     .join(" · ");
 }
@@ -195,6 +135,11 @@ add(
   </main>`,
 );
 
+const countryLine = (code, label) =>
+  `<li><a href="/${code.toLowerCase()}">${label}</a> · ${BY_COUNTRY(code)
+    .map((r) => esc(r.name))
+    .join(" · ")}</li>`;
+
 add(
   "/countries",
   "browse resort regions by country · feelzlike",
@@ -202,9 +147,9 @@ add(
   `<main>
     <h1>browse resort regions by country</h1>
     <ul>
-      <li><a href="/au">Australia</a> · Snowy Mountains (NSW) · Victoria's High Country (VIC)</li>
-      <li><a href="/jp">Japan</a> · Yamanouchi (Nagano)</li>
-      <li><a href="/nz">New Zealand</a></li>
+      ${countryLine("AU", "Australia")}
+      ${countryLine("JP", "Japan")}
+      ${countryLine("NZ", "New Zealand")}
     </ul>
   </main>`,
 );
@@ -212,7 +157,7 @@ add(
 add(
   "/au",
   "Australia · resort town weather · feelzlike",
-  "Live weather and conditions for resort towns across Australia — Snowy Mountains (NSW) and Victoria's High Country (VIC).",
+  "Live weather and conditions for resort towns across Australia — Snowy Mountains (NSW), Victoria's High Country (VIC), and Tasmania (TAS).",
   `<main>
     <h1>Australia · resort town weather</h1>
     ${BY_COUNTRY("AU").map((r) => `
@@ -228,7 +173,7 @@ add(
 add(
   "/jp",
   "Japan · resort town weather · feelzlike",
-  "Live weather and conditions for resort towns in Japan — Yamanouchi, Nagano, gateway to Shiga Kogen.",
+  "Live weather and conditions for resort towns in Japan — Yamanouchi, Nozawa Onsen, Iiyama, Hakuba Valley (Nagano), and Myoko (Niigata).",
   `<main>
     <h1>Japan · resort town weather</h1>
     ${BY_COUNTRY("JP").map((r) => `
@@ -244,10 +189,16 @@ add(
 add(
   "/nz",
   "New Zealand · resort town weather · feelzlike",
-  "Live weather and conditions for resort towns across New Zealand.",
+  "Live weather and conditions for resort towns across New Zealand — Queenstown, Wanaka (Otago), Mt Hutt (Canterbury), and Ruapehu (Central Plateau).",
   `<main>
     <h1>New Zealand · resort town weather</h1>
-    <p>New Zealand resort regions are coming soon. Check back next season.</p>
+    ${BY_COUNTRY("NZ").map((r) => `
+    <section>
+      <h2><a href="/${r.slug}">${esc(r.name)}</a> · ${esc(r.subtitle)}</h2>
+      <ul>
+        ${regionTownList(r)}
+      </ul>
+    </section>`).join("\n")}
   </main>`,
 );
 
@@ -275,6 +226,16 @@ add(
         ${REGIONS.map((r) => `<li><a href="/${r.slug}">${esc(r.name)}</a> · ${esc(r.subtitle)}</li>`).join("\n        ")}
       </ul>
     </section>
+  </main>`,
+);
+
+add(
+  "/premium",
+  "feelzlike premium · snow alerts for your towns · feelzlike",
+  "feelzlike premium — email snow and powder alerts for your favourite resort towns across Australia, Japan, and New Zealand.",
+  `<main>
+    <h1>feelzlike premium</h1>
+    <p>Email snow and powder alerts for your favourite resort towns across Australia, Japan, and New Zealand.</p>
   </main>`,
 );
 
@@ -320,16 +281,14 @@ for (const region of REGIONS) {
     </main>`,
   );
 
-  // Region sub-section pages
-  for (const feature of REGION_FEATURES) {
+  // Region sub-section pages (per-region set — see seo-regions.mjs)
+  for (const feature of regionFeatures(region)) {
     const featureLabel = feature.charAt(0).toUpperCase() + feature.slice(1);
 
     const descriptions = {
       mountains: `Mountains and ski resorts in the ${region.name} — live snow conditions, lift status, and terrain info.`,
       alerts:    `Current weather alerts and conditions for the ${region.name}.`,
       stay:      `Where to stay in the ${region.name} — accommodation options in all base towns.`,
-      eat:       `Where to eat in the ${region.name} — cafes, restaurants, and dining in resort towns.`,
-      explore:   `Things to do in the ${region.name} beyond the mountain — activities, trails, and local experiences.`,
     };
 
     const bodies = {
@@ -363,23 +322,6 @@ for (const region of REGIONS) {
       </ul>
     </main>`,
 
-      eat: `<main>
-      <h1>${esc(region.name)} · where to eat</h1>
-      <p>Cafes, restaurants, and dining across ${esc(region.name)} resort towns.</p>
-      <h2>Towns</h2>
-      <ul>
-        ${region.towns.map((t) => `<li><a href="/${region.slug}/${t.id}/eat">${esc(t.name)}</a> — ${esc(t.blurb)}</li>`).join("\n        ")}
-      </ul>
-    </main>`,
-
-      explore: `<main>
-      <h1>${esc(region.name)} · explore</h1>
-      <p>Things to do in the ${esc(region.name)} beyond the mountain — trails, activities, and local experiences.</p>
-      <h2>Towns</h2>
-      <ul>
-        ${region.towns.map((t) => `<li><a href="/${region.slug}/${t.id}/explore">${esc(t.name)}</a> — ${esc(t.blurb)}</li>`).join("\n        ")}
-      </ul>
-    </main>`,
     };
 
     add(
@@ -402,7 +344,7 @@ for (const region of REGIONS) {
       <h1>${esc(town.name)} · ${esc(region.name)}</h1>
       <p>${esc(town.blurb)}</p>
       <nav aria-label="Town sections">
-        ${townSectionLinks(region.slug, town.id)}
+        ${townSectionLinks(region, town.id)}
       </nav>
     </main>`,
     );
@@ -417,7 +359,7 @@ for (const region of REGIONS) {
       explore:   { label: "explore",           desc: `Things to do in ${town.name}, ${region.name} — trails, activities, and local experiences.` },
     };
 
-    for (const feature of TOWN_FEATURES) {
+    for (const feature of townFeatures(region)) {
       const meta = townFeatureMeta[feature];
       add(
         `/${region.slug}/${town.id}/${feature}`,
@@ -428,7 +370,7 @@ for (const region of REGIONS) {
       <p>${esc(meta.desc)}</p>
       <p>Part of <a href="/${region.slug}/${town.id}">${esc(town.name)}</a> in the <a href="/${region.slug}">${esc(region.name)}</a>.</p>
       <nav aria-label="Town sections">
-        ${townSectionLinks(region.slug, town.id)}
+        ${townSectionLinks(region, town.id)}
       </nav>
     </main>`,
       );

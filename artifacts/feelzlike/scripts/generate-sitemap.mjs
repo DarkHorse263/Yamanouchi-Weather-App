@@ -20,38 +20,22 @@
 import { writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { REGIONS, regionFeatures, townFeatures } from "./seo-regions.mjs";
 
 const SITE_URL = process.env.PUBLIC_ORIGIN || "https://feelzlike.com";
 const NOW = new Date().toISOString().slice(0, 10);
 
 // ── Region / town registry ────────────────────────────────────────────────
-// Keep in sync with src/regions/ and the KNOWN_REGIONS block in api-server/src/app.ts.
-
-const REGIONS = [
-  {
-    slug: "snowy-mountains",
-    name: "Snowy Mountains",
-    towns: ["jindabyne", "berridale", "cooma"],
-  },
-  {
-    slug: "yamanouchi",
-    name: "Yamanouchi",
-    // Note: shibu-onsen uses a hyphen (the correct town ID), not an underscore.
-    towns: ["yudanaka", "shibu-onsen", "yomase"],
-  },
-  {
-    slug: "victorias-high-country",
-    name: "Victoria's High Country",
-    towns: ["mansfield", "bright", "mount-beauty", "harrietville", "dinner-plain", "marysville", "warburton", "omeo"],
-  },
-];
-
-// Valid region sub-sections that are indexable pages (not redirects/retired).
-const REGION_FEATURES = ["mountains", "alerts", "stay", "eat", "explore"];
-
-// Valid town sub-sections that are indexable pages (not redirects/retired).
-// Omits: cams (redirects to /roads), places (retired).
-const TOWN_FEATURES = ["weather", "stay", "eat", "roads", "transport", "explore"];
+// REGIONS comes from ./seo-regions.mjs (shared with prerender.mjs).
+// Keep that file in sync with src/regions/ and the KNOWN_REGIONS block in
+// api-server/src/app.ts.
+//
+// Per-region feature sets (regionFeatures / townFeatures) mirror the real
+// route gating: region-level /eat + /explore redirect home everywhere and
+// are never emitted; /alerts only renders for regions with an alerts page;
+// town-level /roads only renders for regions with roads content. Emitting
+// redirecting URLs gets them filed under "Page with redirect" in GSC.
+// Omitted on purpose: cams (redirects to /roads), places (retired).
 
 // ── Top-level static pages ────────────────────────────────────────────────
 
@@ -79,6 +63,7 @@ const staticUrls = [
   url("/jp",              "daily",   "0.9"),
   url("/nz",              "daily",   "0.9"),
   url("/plan",            "weekly",  "0.8"),
+  url("/premium",         "weekly",  "0.6"),
   url("/near-you",        "weekly",  "0.6"),
   url("/legal/privacy",   "monthly", "0.4"),
   url("/legal/terms",     "monthly", "0.4"),
@@ -92,18 +77,18 @@ for (const r of REGIONS) {
   // Region home page
   dynamicUrls.push(url(`/${r.slug}`, "daily", "0.8"));
 
-  // Region sub-sections
-  for (const f of REGION_FEATURES) {
+  // Region sub-sections (per-region: alerts only where an alerts page exists)
+  for (const f of regionFeatures(r)) {
     dynamicUrls.push(url(`/${r.slug}/${f}`, "weekly", "0.7"));
   }
 
   // Town pages
   for (const t of r.towns) {
     // Town home
-    dynamicUrls.push(url(`/${r.slug}/${t}`, "daily", "0.7"));
-    // Town sub-sections
-    for (const f of TOWN_FEATURES) {
-      dynamicUrls.push(url(`/${r.slug}/${t}/${f}`, "weekly", "0.6"));
+    dynamicUrls.push(url(`/${r.slug}/${t.id}`, "daily", "0.7"));
+    // Town sub-sections (per-region: roads only where roads content exists)
+    for (const f of townFeatures(r)) {
+      dynamicUrls.push(url(`/${r.slug}/${t.id}/${f}`, "weekly", "0.6"));
     }
   }
 }

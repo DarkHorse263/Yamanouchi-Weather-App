@@ -170,15 +170,13 @@ if (process.env.NODE_ENV === "production") {
   const CANONICAL_ORIGIN = (process.env.PUBLIC_ORIGIN ?? "https://feelzlike.com").replace(/\/$/, "");
 
   // ── Known region / town registry ────────────────────────────────────────
-  // Mirrors the region data in artifacts/feelzlike/src/regions/.
+  // Mirrors the region data in artifacts/feelzlike/src/regions/ (all 12
+  // regions). Keep in sync with feelzlike/scripts/seo-regions.mjs.
   const KNOWN_REGIONS: Record<string, { name: string; towns: Record<string, string> }> = {
+    // Australia
     "snowy-mountains": {
       name: "Snowy Mountains",
       towns: { jindabyne: "Jindabyne", berridale: "Berridale", cooma: "Cooma" },
-    },
-    "yamanouchi": {
-      name: "Yamanouchi",
-      towns: { yudanaka: "Yudanaka", "shibu-onsen": "Shibu Onsen", yomase: "Yomase" },
     },
     "victorias-high-country": {
       name: "Victoria's High Country",
@@ -192,6 +190,58 @@ if (process.env.NODE_ENV === "production") {
         warburton: "Warburton",
         omeo: "Omeo",
       },
+    },
+    "tasmania": {
+      name: "Tasmania",
+      towns: { "ben-lomond-base": "Ben Lomond Base", launceston: "Launceston", hobart: "Hobart" },
+    },
+    // Japan
+    "yamanouchi": {
+      name: "Yamanouchi",
+      towns: { yudanaka: "Yudanaka", "shibu-onsen": "Shibu Onsen", yomase: "Yomase" },
+    },
+    "nozawa-onsen": {
+      name: "Nozawa Onsen",
+      towns: { "nozawa-onsen-village": "Nozawa Onsen" },
+    },
+    "iiyama": {
+      name: "Iiyama",
+      towns: {
+        iiyama: "Iiyama",
+        "madarao-kogen": "Madarao Kogen",
+        "togari-onsen-village": "Togari Onsen",
+        "kijimadaira-village": "Kijimadaira",
+      },
+    },
+    "hakuba-valley": {
+      name: "Hakuba Valley",
+      towns: { hakuba: "Hakuba", otari: "Otari", omachi: "Omachi" },
+    },
+    "myoko": {
+      name: "Myoko",
+      towns: {
+        akakura: "Akakura Onsen",
+        "ikenotaira-onsen": "Ikenotaira Onsen",
+        suginosawa: "Suginosawa",
+        arai: "Arai",
+      },
+    },
+    // New Zealand
+    "queenstown": {
+      name: "Queenstown",
+      towns: { queenstown: "Queenstown" },
+    },
+    "wanaka": {
+      name: "Wanaka",
+      towns: { wanaka: "Wanaka" },
+    },
+    "mt-hutt": {
+      name: "Mt Hutt",
+      towns: { methven: "Methven" },
+    },
+    "ruapehu": {
+      name: "Ruapehu",
+      towns: { ohakune: "Ohakune" },
     },
   };
 
@@ -256,7 +306,7 @@ if (process.env.NODE_ENV === "production") {
   const TOP_LEVEL_META: Record<string, RouteMeta> = {
     "/": {
       title: "feelzlike · weather for resort towns",
-      description: "Live weather, road conditions, and lift status for resort towns across the Snowy Mountains, Victoria's High Country, and Yamanouchi. Towns first, mountains second.",
+      description: "Live weather, road conditions, and lift status for resort towns across Australia, Japan, and New Zealand. Towns first, mountains second.",
     },
     "/countries": {
       title: "browse resort regions by country · feelzlike",
@@ -264,23 +314,23 @@ if (process.env.NODE_ENV === "production") {
     },
     "/au": {
       title: "Australia · resort town weather · feelzlike",
-      description: "Live weather and conditions for resort towns across Australia — Snowy Mountains (NSW) and Victoria's High Country.",
+      description: "Live weather and conditions for resort towns across Australia — Snowy Mountains (NSW), Victoria's High Country (VIC), and Tasmania (TAS).",
     },
     "/jp": {
       title: "Japan · resort town weather · feelzlike",
-      description: "Live weather and conditions for resort towns in Japan — Yamanouchi, Nagano, gateway to Shiga Kogen.",
+      description: "Live weather and conditions for resort towns in Japan — Yamanouchi, Nozawa Onsen, Iiyama, Hakuba Valley (Nagano), and Myoko (Niigata).",
     },
     "/nz": {
       title: "New Zealand · resort town weather · feelzlike",
-      description: "Live weather and conditions for resort towns across New Zealand.",
+      description: "Live weather and conditions for resort towns across New Zealand — Queenstown, Wanaka (Otago), Mt Hutt (Canterbury), and Ruapehu (Central Plateau).",
     },
     "/near-you": {
       title: "weather near you · local resort conditions · feelzlike",
       description: "See live weather and a radar for your current location, plus nearby resort regions.",
     },
-    "/news": {
-      title: "news & updates · resort towns · feelzlike",
-      description: "Latest news, weather events, and updates from resort towns across Australia, Japan, and New Zealand.",
+    "/premium": {
+      title: "feelzlike premium · snow alerts for your towns · feelzlike",
+      description: "feelzlike premium — email snow and powder alerts for your favourite resort towns across Australia, Japan, and New Zealand.",
     },
     "/plan": {
       title: "trip planner · find the best conditions · feelzlike",
