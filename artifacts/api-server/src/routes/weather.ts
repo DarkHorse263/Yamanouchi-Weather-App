@@ -196,6 +196,18 @@ const LOCATIONS: LocationConfig[] = [
   { id: "kashimayari",               name: "Kashimayari",               latitude: 36.5930, longitude: 137.8270, elevation: 1550, description: "Sun Alpina family resort in Omachi · broad beginner terrain beneath Mt Kashimayari.",                     bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
   { id: "jiigatake",                 name: "Jiigatake",                 latitude: 36.5686, longitude: 137.8339, elevation: 1205, description: "Gentle south-end learner hill in Omachi · wide easy slopes for first-timers and families.",                bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
 
+  // ─── Myoko (Niigata, Japan) ──────────────────────────────
+  // Six separate resorts around Mt Myoko (2,454m) plus Lotte Arai on Mt
+  // Okenashi to the north · no shared pass, each its own ski area. One of
+  // Japan's deepest-snow pockets. Coordinates are base-area points
+  // (OpenStreetMap winter_sports nodes); elevation is each top-lift summit.
+  { id: "akakura-onsen",             name: "Akakura Onsen",             latitude: 36.8964, longitude: 138.1674, elevation: 1200, description: "Myoko's liveliest slopes above the historic onsen village · 100% natural snow and nightly night skiing.",   bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "akakura-kanko",             name: "Akakura Kanko",             latitude: 36.8903, longitude: 138.1604, elevation: 1500, description: "Japan's first international mountain resort (1937) · long groomers beneath the Akakura Kanko Hotel.",      bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "ikenotaira",                name: "Ikenotaira Alpen Blick",    latitude: 36.8733, longitude: 138.1584, elevation: 1413, description: "Broad, open slopes on Mt Myoko's flank · relaxed cruising above Ikenotaira village and Imori Pond.",        bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "myoko-suginohara",          name: "Myoko Suginohara",          latitude: 36.8633, longitude: 138.1357, elevation: 1855, description: "Japan's longest run · 8.5 km top to bottom off the area's highest lifts.",                                 bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "seki-onsen",                name: "Seki Onsen",                latitude: 36.9050, longitude: 138.1569, elevation: 1200, description: "Two lifts and some of Japan's heaviest snowfall · small, steep and ungroomed on the north-east side.",      bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "lotte-arai",                name: "Lotte Arai Resort",         latitude: 36.9909, longitude: 138.1816, elevation: 1280, description: "Big-vertical freeride resort on Mt Okenashi · gated powder zones over 951 m of drop.",                     bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+
   // ─── Queenstown (Otago, New Zealand) ─────────────────────
   // Open-Meteo primary + OpenWeatherMap fallback · no national AWS feed
   // wired for NZ, so bom* fields stay blank and there's no obs reconciler.

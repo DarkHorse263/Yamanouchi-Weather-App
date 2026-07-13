@@ -87,6 +87,13 @@ const MOUNTAIN_TINTS: Record<string, { bg: string; hover: string; ring: string }
   // Yamanouchi JP · parent groups (these render as the umbrella row)
   "shiga-kogen":      { bg: "bg-indigo-100/70",  hover: "hover:bg-indigo-200/70",  ring: "ring-indigo-300/50" },
   "kita-shiga":       { bg: "bg-cyan-100/70",    hover: "hover:bg-cyan-200/70",    ring: "ring-cyan-300/50" },
+  // Myoko JP · six sibling resorts
+  "akakura-onsen":    { bg: "bg-sky-100/70",     hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },
+  "akakura-kanko":    { bg: "bg-indigo-100/70",  hover: "hover:bg-indigo-200/70",  ring: "ring-indigo-300/50" },
+  "ikenotaira":       { bg: "bg-cyan-100/70",    hover: "hover:bg-cyan-200/70",    ring: "ring-cyan-300/50" },
+  "myoko-suginohara": { bg: "bg-blue-100/70",    hover: "hover:bg-blue-200/70",    ring: "ring-blue-300/50" },
+  "seki-onsen":       { bg: "bg-teal-100/70",    hover: "hover:bg-teal-200/70",    ring: "ring-teal-300/50" },
+  "lotte-arai":       { bg: "bg-slate-100/70",   hover: "hover:bg-slate-200/70",   ring: "ring-slate-300/50" },
 };
 
 const FALLBACK_TINT = { bg: "bg-sky-50/70", hover: "hover:bg-sky-100/70", ring: "ring-sky-200/50" };

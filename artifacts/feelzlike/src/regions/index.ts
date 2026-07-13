@@ -5,6 +5,7 @@ import { victoriasHighCountryRegion } from "./victorias-high-country";
 import { nozawaOnsenRegion } from "./nozawa-onsen";
 import { iiyamaRegion } from "./iiyama";
 import { hakubaValleyRegion } from "./hakuba-valley";
+import { myokoRegion } from "./myoko";
 import { tasmaniaRegion } from "./tasmania";
 import { queenstownRegion } from "./queenstown";
 import { wanakaRegion } from "./wanaka";
@@ -25,6 +26,7 @@ export const REGIONS: RegionConfig[] = [
   nozawaOnsenRegion,
   iiyamaRegion,
   hakubaValleyRegion,
+  myokoRegion,
   queenstownRegion,
   wanakaRegion,
   mtHuttRegion,
@@ -52,6 +54,7 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "nozawa-onsen": "JP",
   "iiyama": "JP",
   "hakuba-valley": "JP",
+  "myoko": "JP",
   "queenstown": "NZ",
   "wanaka": "NZ",
   "mt-hutt": "NZ",

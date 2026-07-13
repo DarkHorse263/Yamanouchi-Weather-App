@@ -62,6 +62,7 @@ export type RegionKey =
   | "nozawa-onsen"
   | "iiyama"
   | "hakuba-valley"
+  | "myoko"
   | "queenstown"
   | "wanaka"
   | "mt-hutt"
@@ -152,6 +153,17 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       label: "JMA Nagano",
       imageUrl: null,
       href: "https://www.jma.go.jp/bosai/nowc/#zoom:9/lat:36.68/lon:137.85/colordepth:normal/elements:hrpns",
+      attribution: "Japan Meteorological Agency · JMA",
+    },
+  },
+  // Myoko runs from Suginohara in the south up to Lotte Arai near the
+  // coast plain (~0.14° of latitude), so centre between them.
+  "myoko": {
+    windy: { lat: 36.90, lon: 138.17, zoom: 10 },
+    official: {
+      label: "JMA Niigata",
+      imageUrl: null,
+      href: "https://www.jma.go.jp/bosai/nowc/#zoom:10/lat:36.90/lon:138.17/colordepth:normal/elements:hrpns",
       attribution: "Japan Meteorological Agency · JMA",
     },
   },
@@ -295,6 +307,21 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "omachi", name: "Omachi", lat: 36.5030, lng: 137.8514, accent: "#0ea5e9" },
     ],
   },
+  "myoko": {
+    center: { lat: 36.90, lng: 138.17 },
+    pins: [
+      { id: "akakura-onsen", name: "Akakura Onsen", lat: 36.8964, lng: 138.1674, accent: "#f97316" },
+      { id: "akakura-kanko", name: "Akakura Kanko", lat: 36.8903, lng: 138.1604, accent: "#f97316" },
+      { id: "ikenotaira", name: "Ikenotaira", lat: 36.8733, lng: 138.1584, accent: "#f97316" },
+      { id: "myoko-suginohara", name: "Suginohara", lat: 36.8633, lng: 138.1357, accent: "#f97316" },
+      { id: "seki-onsen", name: "Seki Onsen", lat: 36.9050, lng: 138.1569, accent: "#f97316" },
+      { id: "lotte-arai", name: "Lotte Arai", lat: 36.9909, lng: 138.1816, accent: "#f97316" },
+      { id: "akakura", name: "Akakura", lat: 36.8876, lng: 138.1802, accent: "#0ea5e9" },
+      { id: "ikenotaira-onsen", name: "Ikenotaira Onsen", lat: 36.8750, lng: 138.1660, accent: "#0ea5e9" },
+      { id: "suginosawa", name: "Suginosawa", lat: 36.8495, lng: 138.1601, accent: "#0ea5e9" },
+      { id: "arai", name: "Arai", lat: 37.0006, lng: 138.2259, accent: "#0ea5e9" },
+    ],
+  },
   queenstown: {
     center: { lat: -44.99, lng: 168.74 },
     pins: [
@@ -342,6 +369,7 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "nozawa-onsen": "JP",
   iiyama: "JP",
   "hakuba-valley": "JP",
+  myoko: "JP",
   queenstown: "NZ",
   wanaka: "NZ",
   "mt-hutt": "NZ",
@@ -356,6 +384,7 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "nozawa-onsen": "nozawa onsen",
   iiyama: "iiyama",
   "hakuba-valley": "hakuba valley",
+  myoko: "myoko",
   queenstown: "queenstown",
   wanaka: "wanaka",
   "mt-hutt": "mt hutt",

@@ -166,6 +166,26 @@ const REGIONS: RegionConfig[] = [
     sourceLabel: "JMA Seamless",
   },
   {
+    id: "myoko",
+    name: "Myoko",
+    country: "Japan",
+    countryCode: "JP",
+    region: "Niigata",
+    status: "live",
+    href: "/myoko/",
+    baseTowns: ["Akakura Onsen", "Ikenotaira Onsen", "Suginosawa", "Arai"],
+    mountains: ["Akakura Onsen", "Akakura Kanko", "Ikenotaira Alpen Blick", "Myoko Suginohara", "Seki Onsen", "Lotte Arai"],
+    // Headline reading from Akakura Onsen village (~750m) · Myoko's main
+    // hub with the largest strip of ryokan and restaurants, beneath the
+    // Akakura Onsen / Akakura Kanko slopes.
+    headlineLabel: "Akakura Onsen",
+    lat: 36.8876,
+    lon: 138.1802,
+    model: "jma_seamless",
+    timezone: "Asia/Tokyo",
+    sourceLabel: "JMA Seamless",
+  },
+  {
     id: "queenstown",
     name: "Queenstown",
     country: "New Zealand",

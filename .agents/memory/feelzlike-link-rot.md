@@ -10,6 +10,7 @@ description: durable lessons from the jul 2026 full external-link audit (331 url
 **How to apply:** on any future sweep, check flagged domains for content mismatch (spam/parked pages), not just HTTP status. Prefer `.com.au`/`.co.jp` official variants over `.com` for small operators.
 
 ## Churn patterns worth knowing
+- **Second confirmed hijack (jul 2026):** `sekionsen.com` (Seki Onsen, Myoko) 301s to a spam domain (`sip33fg.com`); the real official site is `http://sekionsen.jp/` (HTTP-only, no TLS). Small JP resort `.com` domains are prime squat targets — verify the `.jp` variant first.
 - JP resort sites restructure yearly: livecam pages move (`shigakogen.gr.jp/english/livecamera/` → `/english/live/index.html`), domains migrate (`kitashiga.net` → `kitashiga.co.jp`, `kumanoyu.com` → `kumanoyu.co.jp`, `hakubacortina.jp` → gone, use `hakubavalley.com/en/weather_en/detail_cortina_en/`).
 - go-nagano.net killed its `/en/destination/*` and `/en/area/*` trees; durable pages are `/en/trip-idea/id*` and `db.go-nagano.net/en/topics_detail12/id=*`.
 - Where an official livecam page dies with no replacement, we link a working unofficial page and relabel `source:` honestly (e.g. `madaraokogen.com (local guide)` for madarao+tangram, `steep.jp (ski media)` for togari). Never leave an official-sounding source on an unofficial URL.

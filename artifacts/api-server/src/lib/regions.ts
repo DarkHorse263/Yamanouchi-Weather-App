@@ -15,6 +15,7 @@ export const REGION_IDS = [
   "nozawa-onsen",
   "iiyama",
   "hakuba-valley",
+  "myoko",
   "queenstown",
   "wanaka",
   "mt-hutt",
@@ -121,6 +122,20 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "otari": "hakuba-valley",
   "omachi": "hakuba-valley",
   "hakuba-valley-roads": "hakuba-valley",
+
+  // Myoko, JP · 6 mountains across 4 base towns (Akakura, Ikenotaira
+  // Onsen, Suginosawa, Arai).
+  "akakura-onsen": "myoko",
+  "akakura-kanko": "myoko",
+  "ikenotaira": "myoko",
+  "myoko-suginohara": "myoko",
+  "seki-onsen": "myoko",
+  "lotte-arai": "myoko",
+  "akakura": "myoko",
+  "ikenotaira-onsen": "myoko",
+  "suginosawa": "myoko",
+  "arai": "myoko",
+  "myoko-roads": "myoko",
 
   // Queenstown, NZ · 2 mountains + 1 gateway town + roads cam tile.
   "coronet-peak": "queenstown",

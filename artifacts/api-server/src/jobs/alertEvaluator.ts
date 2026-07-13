@@ -56,6 +56,11 @@ const REGION_ANCHORS: Record<RegionId, {
   // valley. Happo-One is the highest summit (1831m) but the Otari corner
   // reliably takes the deepest snow.
   "hakuba-valley": { lat: 36.7490, lon: 137.8662, elevation: 1704, region: "JP", displayName: "Hakuba Valley" },
+  // Myoko · anchor on Akakura Kanko (1500m) · central on Mt Myoko's east
+  // face between the Akakura pair, Ikenotaira and Seki, a fair powder
+  // proxy for the six-resort area (Suginohara is higher at 1855m but
+  // sits at the far southern edge).
+  "myoko": { lat: 36.8903, lon: 138.1604, elevation: 1500, region: "JP", displayName: "Myoko" },
   // NZ · no national model in the ensemble, so region "OTHER" (global
   // blend). Anchor each on its highest skiable summit.
   "queenstown": { lat: -45.0556, lon: 168.8194, elevation: 1943, region: "OTHER", displayName: "Queenstown" },
