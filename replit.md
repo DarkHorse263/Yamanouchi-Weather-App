@@ -7,7 +7,7 @@
 ## User Preferences
 
 - **Communication style**: The project documentation should be clear and concise.
-- **Phase summaries**: After each completed phase of work, give the user a plain-language summary of what was just done so they can keep up. Do this every time, without being asked.
+- **Phase summaries**: After every change or completed phase of work, give the user a plain-language summary of what was just done. The user works across multiple projects at once, so each summary must stand alone (what changed, where to see it, anything they need to do). Do this every time, without being asked.
 - **Coding style**: The project uses pnpm workspaces with TypeScript, React, Vite, and Tailwind CSS.
 - **Workflow**: Iterative development is preferred, with a focus on delivering functional features for each region.
 - **Interaction**: Prioritize architectural decisions over granular implementation details. Avoid making changes to areas not explicitly specified by the user.
