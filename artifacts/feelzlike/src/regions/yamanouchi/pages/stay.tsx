@@ -419,7 +419,7 @@ function PlaceList({ places, t, isWinter = true }: { places: any[]; t: (en: stri
                 <div className="bg-blue-600 text-white text-[10px] font-black px-3 py-1.5 rounded-lg group-hover:bg-blue-700 transition-colors shadow-sm">
                   {t("Book", "予約")}
                 </div>
-                <span className="text-[8px] text-blue-500 font-bold">Booking.com</span>
+                <span className="text-[8px] text-blue-700 font-bold">Booking.com</span>
               </div>
             </div>
 

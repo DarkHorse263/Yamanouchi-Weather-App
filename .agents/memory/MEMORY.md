@@ -51,6 +51,7 @@
 - [feelzlike elevation bands](feelzlike-elevation-band-partition.md) — bands must share ONE pinned OM cell (cell_selection=nearest) + FL−300m phase partition; default land-cell = 3 different places (mid>upper snow bug).
 - [feelzlike daily condition labels](feelzlike-daily-condition-labels.md) — daily weatherDescription is totals-derived via shared server helper, never the WMO moment-code; rain-dominant days must say Rain.
 - [feelzlike alert emails](feelzlike-alert-emails.md) — branded shell (wordmark img, blue/pink), FROM via ALERT_FROM_EMAIL; don't set feelzlike.com sender until Resend shows domain verified.
+- [feelzlike text contrast](feelzlike-text-contrast.md) — app is light-only; text on cards needs 700+ shades (sky-700/800), `text-*-300` chips are a dark-theme idiom = illegible; light blues stay only on slate-900 panels.
 - [feelzlike JP official JMA radar](feelzlike-jma-radar.md) — JMA hrpns tiles on own basemap; times JSON has no CORS (proxy discovery only); PAST frames only, never nowcast forecasts; fallback = link-out.
 - [feelzlike AMeDAS observed snow](feelzlike-amedas-observed-snow.md) — JMA drops snow keys OUT OF SEASON (missing ≠ 0, must be null); 25km + elevation-penalty station pick; fail-soft into town-weather.
 - [feelzlike Japan bible xlsx](feelzlike-japan-bible.md) — user's 558-resort master sheet in attached_assets; truth-tested July 2026; largely accurate but has KNOWN wrong rows (list inside) — verify any row before it feeds the app.

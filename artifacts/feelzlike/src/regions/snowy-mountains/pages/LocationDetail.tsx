@@ -139,12 +139,12 @@ const LIVE_LIFT_STATUS_RESORTS = new Set<string>();
 
 function getStatusColor(status: string) {
   switch (status) {
-    case "open": return "bg-emerald-500/15 text-emerald-300 border-emerald-500/30";
-    case "closed": return "bg-white/5 text-muted-foreground border-white/10";
-    case "wind-hold": return "bg-amber-500/15 text-amber-300 border-amber-500/30";
-    case "on-hold": return "bg-amber-500/15 text-amber-300 border-amber-500/30";
-    case "scheduled": return "bg-sky-500/15 text-sky-300 border-sky-500/30";
-    default: return "bg-white/5 text-muted-foreground border-white/10";
+    case "open": return "bg-emerald-500/15 text-emerald-700 border-emerald-500/30";
+    case "closed": return "bg-slate-500/10 text-muted-foreground border-slate-500/20";
+    case "wind-hold": return "bg-amber-500/15 text-amber-700 border-amber-500/30";
+    case "on-hold": return "bg-amber-500/15 text-amber-700 border-amber-500/30";
+    case "scheduled": return "bg-sky-500/15 text-sky-800 border-sky-500/30";
+    default: return "bg-slate-500/10 text-muted-foreground border-slate-500/20";
   }
 }
 function getStatusIcon(status: string) {
@@ -765,16 +765,16 @@ export default function LocationDetail() {
                 let tone: string;
                 let label: string;
                 if (anyLiftOpen) {
-                  tone = "bg-emerald-500/15 text-emerald-300 border-emerald-500/30";
+                  tone = "bg-emerald-500/15 text-emerald-700 border-emerald-500/30";
                   label = "open";
                 } else if (anyOnHold) {
-                  tone = "bg-amber-500/15 text-amber-300 border-amber-500/30";
+                  tone = "bg-amber-500/15 text-amber-700 border-amber-500/30";
                   label = "on hold";
                 } else if (liftData.seasonStatus === "open") {
-                  tone = "bg-white/5 text-muted-foreground border-white/10";
+                  tone = "bg-slate-500/10 text-muted-foreground border-slate-500/20";
                   label = "lifts closed";
                 } else {
-                  tone = "bg-amber-500/15 text-amber-300 border-amber-500/30";
+                  tone = "bg-amber-500/15 text-amber-700 border-amber-500/30";
                   label = liftData.seasonStatus.replace("-", " ");
                 }
                 return (
@@ -857,7 +857,7 @@ export default function LocationDetail() {
                     <p className="text-xs text-muted-foreground/80 mt-1 leading-relaxed">
                       we don't run a live lift feed for this resort yet, so today's open lifts and runs are best checked on the official report · it updates through the day.
                     </p>
-                    <span className="mt-2 inline-flex items-center gap-1 text-[11px] font-semibold text-sky-600 group-hover:text-sky-500">
+                    <span className="mt-2 inline-flex items-center gap-1 text-[11px] font-semibold text-sky-700 group-hover:text-sky-600">
                       open {liftData.locationName} lift report
                       <ExternalLink className="w-3 h-3" />
                     </span>

@@ -95,17 +95,17 @@ export function ElevationBands({ lat, lng, summitElevationM, name }: Props) {
               <BandHead
                 label={t("upper", "山頂")}
                 elevationM={upperM}
-                tone="text-sky-700"
+                tone="text-sky-900"
               />
               <BandHead
                 label={t("mid", "中腹")}
                 elevationM={midM}
-                tone="text-sky-600"
+                tone="text-sky-800"
               />
               <BandHead
                 label={t("base", "山麓")}
                 elevationM={lowerM}
-                tone="text-sky-500"
+                tone="text-sky-700"
               />
               <th className="text-right text-[11px] uppercase tracking-wider text-muted-foreground/60 font-medium pb-2 pl-3">
                 <span className="inline-flex items-center gap-1">
@@ -268,19 +268,19 @@ function DayCard({
           label={t("upper", "山頂")}
           elevationM={upperM}
           band={day.bands.upper}
-          tone="text-sky-700"
+          tone="text-sky-900"
         />
         <BandRow
           label={t("mid", "中腹")}
           elevationM={midM}
           band={day.bands.mid}
-          tone="text-sky-600"
+          tone="text-sky-800"
         />
         <BandRow
           label={t("base", "山麓")}
           elevationM={lowerM}
           band={day.bands.lower}
-          tone="text-sky-500"
+          tone="text-sky-700"
         />
       </div>
     </div>

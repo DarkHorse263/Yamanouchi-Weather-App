@@ -12,9 +12,9 @@ import {
 } from "@/lib/snowmaking";
 
 const TONE = {
-  good: { dot: "bg-emerald-400", chip: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30" },
-  marginal: { dot: "bg-amber-400", chip: "bg-amber-500/15 text-amber-300 border-amber-500/30" },
-  warm: { dot: "bg-slate-400", chip: "bg-white/5 text-muted-foreground border-white/10" },
+  good: { dot: "bg-emerald-400", chip: "bg-emerald-500/15 text-emerald-700 border-emerald-500/30" },
+  marginal: { dot: "bg-amber-400", chip: "bg-amber-500/15 text-amber-700 border-amber-500/30" },
+  warm: { dot: "bg-slate-400", chip: "bg-slate-500/10 text-muted-foreground border-slate-500/20" },
 } as const;
 
 interface SnowmakingPanelProps {
@@ -60,7 +60,7 @@ export function SnowmakingPanel({ locationId, tempC, humidity, hourly }: Snowmak
           </h2>
         </div>
         {isAllWeather && (
-          <span className="shrink-0 mt-1 inline-flex items-center rounded-full border border-sky-500/30 bg-sky-500/15 px-2.5 py-1 text-[11px] font-semibold text-sky-300">
+          <span className="shrink-0 mt-1 inline-flex items-center rounded-full border border-sky-500/30 bg-sky-500/15 px-2.5 py-1 text-[11px] font-semibold text-sky-800">
             runs in any weather
           </span>
         )}

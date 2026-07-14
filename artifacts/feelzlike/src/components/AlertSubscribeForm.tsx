@@ -112,7 +112,7 @@ export function AlertSubscribeForm({ defaultRegion }: Props) {
         {submitted.devVerifyUrl && (
           <div className="text-xs bg-black/30 rounded p-3 border border-white/10">
             <div className="text-muted-foreground mb-1 font-bold uppercase tracking-wider">Dev mode - no email sent</div>
-            <a href={submitted.devVerifyUrl} className="text-sky-400 break-all hover:underline">{submitted.devVerifyUrl}</a>
+            <a href={submitted.devVerifyUrl} className="text-sky-700 break-all hover:underline">{submitted.devVerifyUrl}</a>
           </div>
         )}
       </div>

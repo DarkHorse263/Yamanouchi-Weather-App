@@ -205,7 +205,7 @@ export default function Manage() {
           {pushStatus.supported ? (
             pushEnabled ? (
               <button onClick={handleDisablePush} disabled={pushBusy}
-                className="rounded-lg bg-rose-500/15 border border-rose-500/40 text-rose-300 font-bold text-sm px-4 py-2.5 flex items-center gap-2 disabled:opacity-50">
+                className="rounded-lg bg-rose-500/15 border border-rose-500/40 text-rose-700 font-bold text-sm px-4 py-2.5 flex items-center gap-2 disabled:opacity-50">
                 {pushBusy ? <Loader2 className="w-4 h-4 animate-spin" /> : <BellOff className="w-4 h-4" />}
                 Disable on this device
               </button>
@@ -219,7 +219,7 @@ export default function Manage() {
           ) : (
             <p className="text-xs text-muted-foreground bg-black/20 rounded-lg px-3 py-2">{explainStatus(pushStatus)}</p>
           )}
-          {pushMessage && <p className="text-xs text-sky-300 mt-2">{pushMessage}</p>}
+          {pushMessage && <p className="text-xs text-sky-700 mt-2">{pushMessage}</p>}
         </Section>
 
         {update.isError && <Banner kind="error" title="Save failed">Please try again.</Banner>}
@@ -242,7 +242,7 @@ export default function Manage() {
         )}
 
         <details className="pt-5 border-t border-border" open={confirmingUnsub} onToggle={(e) => setConfirmingUnsub((e.target as HTMLDetailsElement).open)}>
-          <summary className="cursor-pointer text-sm text-rose-400 hover:text-rose-300 font-bold flex items-center gap-2">
+          <summary className="cursor-pointer text-sm text-rose-700 hover:text-rose-800 font-bold flex items-center gap-2">
             <Trash2 className="w-4 h-4" /> Unsubscribe from all alerts
           </summary>
           <div className="mt-3 space-y-3">
@@ -263,7 +263,7 @@ export default function Manage() {
             <button
               onClick={handleUnsubscribe}
               disabled={unsub.isPending}
-              className="rounded-lg bg-rose-500/15 border border-rose-500/40 text-rose-300 font-bold text-sm px-4 py-2.5 hover:bg-rose-500/25 disabled:opacity-50"
+              className="rounded-lg bg-rose-500/15 border border-rose-500/40 text-rose-700 font-bold text-sm px-4 py-2.5 hover:bg-rose-500/25 disabled:opacity-50"
             >
               {unsub.isPending ? "Unsubscribing…" : "Confirm unsubscribe"}
             </button>
@@ -297,7 +297,7 @@ function Section({ title, children, trailing }: { title: string; children: React
 }
 
 function Banner({ kind, title, children }: { kind: "error" | "info"; title: string; children: React.ReactNode }) {
-  const accent = kind === "error" ? "border-rose-500/30 bg-rose-500/10 text-rose-300" : "border-sky-500/30 bg-sky-500/10 text-sky-300";
+  const accent = kind === "error" ? "border-rose-500/30 bg-rose-500/10 text-rose-700" : "border-sky-500/30 bg-sky-500/10 text-sky-800";
   return (
     <div className={`rounded-2xl border p-4 ${accent}`}>
       <div className="flex items-start gap-3">

@@ -119,7 +119,7 @@ export function DailyPick({ regionId, resorts, resortHrefPattern = "/:id" }: Pro
     >
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div className="min-w-0">
-          <p className="byline text-sky-300 inline-flex items-center gap-1.5">
+          <p className="byline text-sky-700 inline-flex items-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5" />
             feelzlike's daily pick
           </p>
@@ -144,7 +144,7 @@ export function DailyPick({ regionId, resorts, resortHrefPattern = "/:id" }: Pro
         </div>
         <Link
           href={href}
-          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-sky-500/15 hover:bg-sky-500/25 border border-sky-500/40 text-sky-200 text-xs font-semibold uppercase tracking-widest transition-colors"
+          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-sky-500/15 hover:bg-sky-500/25 border border-sky-500/40 text-sky-800 text-xs font-semibold uppercase tracking-widest transition-colors"
         >
           See {pick.name}
           <ArrowUpRight className="w-3.5 h-3.5" />

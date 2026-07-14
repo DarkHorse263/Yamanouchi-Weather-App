@@ -101,7 +101,7 @@ export default function Welcome() {
             <Link
               href="/plan"
               onClick={() => track("welcome_plan_link_click", { category: "navigation" })}
-              className="text-sky-600 underline underline-offset-2 hover:text-sky-700"
+              className="text-sky-700 underline underline-offset-2 hover:text-sky-800"
             >
               open the trip planner
             </Link>

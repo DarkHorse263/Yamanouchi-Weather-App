@@ -429,7 +429,7 @@ export function NearYou() {
                   <span className="text-3xl font-bold leading-none tabular-nums text-slate-900">
                     {local.feelsLikeC}&deg;
                   </span>
-                  <span className="text-[9px] font-semibold uppercase tracking-[0.12em] text-sky-600">
+                  <span className="text-[9px] font-semibold uppercase tracking-[0.12em] text-sky-800">
                     feelzlike
                   </span>
                 </div>
