@@ -61,6 +61,10 @@ const REGION_ANCHORS: Record<RegionId, {
   // proxy for the six-resort area (Suginohara is higher at 1855m but
   // sits at the far southern edge).
   "myoko": { lat: 36.8903, lon: 138.1604, elevation: 1500, region: "JP", displayName: "Myoko" },
+  // Niseko · anchor on Grand Hirafu's top lift (1200m) · the central and
+  // busiest of the four united resorts on Mt Niseko Annupuri, a fair
+  // powder proxy for the whole interlinked area.
+  "niseko": { lat: 42.8590, lon: 140.6900, elevation: 1200, region: "JP", displayName: "Niseko" },
   // NZ · no national model in the ensemble, so region "OTHER" (global
   // blend). Anchor each on its highest skiable summit.
   "queenstown": { lat: -45.0556, lon: 168.8194, elevation: 1943, region: "OTHER", displayName: "Queenstown" },

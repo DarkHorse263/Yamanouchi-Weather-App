@@ -23,6 +23,7 @@ import { NOZAWA_ONSEN_TRANSPORT } from "./nozawa-onsen";
 import { IIYAMA_TRANSPORT } from "./iiyama";
 import { HAKUBA_VALLEY_TRANSPORT } from "./hakuba-valley";
 import { MYOKO_TRANSPORT } from "./myoko";
+import { NISEKO_TRANSPORT } from "./niseko";
 import { QUEENSTOWN_TRANSPORT } from "./queenstown";
 import { WANAKA_TRANSPORT } from "./wanaka";
 import { MT_HUTT_TRANSPORT } from "./mt-hutt";
@@ -37,6 +38,7 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   iiyama: IIYAMA_TRANSPORT,
   "hakuba-valley": HAKUBA_VALLEY_TRANSPORT,
   myoko: MYOKO_TRANSPORT,
+  niseko: NISEKO_TRANSPORT,
   // NZ · verified ski-season operators only (resort ski buses, RealNZ +
   // local mountain shuttles, InterCity). Unverified phone/website/schedule
   // fields are null per the no-guess rule.

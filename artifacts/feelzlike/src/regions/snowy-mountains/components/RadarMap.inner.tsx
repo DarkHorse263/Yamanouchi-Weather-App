@@ -63,6 +63,7 @@ export type RegionKey =
   | "iiyama"
   | "hakuba-valley"
   | "myoko"
+  | "niseko"
   | "queenstown"
   | "wanaka"
   | "mt-hutt"
@@ -164,6 +165,18 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       label: "JMA Niigata",
       imageUrl: null,
       href: "https://www.jma.go.jp/bosai/nowc/#zoom:10/lat:36.90/lon:138.17/colordepth:normal/elements:hrpns",
+      attribution: "Japan Meteorological Agency · JMA",
+    },
+  },
+  // Niseko · all five bases sit within ~6 km of Mt Niseko Annupuri, with
+  // Kutchan a few km north-east, so a tight zoom-10 centre on the
+  // mountain covers the whole area.
+  "niseko": {
+    windy: { lat: 42.86, lon: 140.69, zoom: 10 },
+    official: {
+      label: "JMA Sapporo",
+      imageUrl: null,
+      href: "https://www.jma.go.jp/bosai/nowc/#zoom:10/lat:42.86/lon:140.69/colordepth:normal/elements:hrpns",
       attribution: "Japan Meteorological Agency · JMA",
     },
   },
@@ -322,6 +335,19 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "arai", name: "Arai", lat: 37.0006, lng: 138.2259, accent: "#0ea5e9" },
     ],
   },
+  "niseko": {
+    center: { lat: 42.86, lng: 140.69 },
+    pins: [
+      { id: "grand-hirafu", name: "Grand Hirafu", lat: 42.8590, lng: 140.6900, accent: "#f97316" },
+      { id: "hanazono", name: "Hanazono", lat: 42.8869, lng: 140.7028, accent: "#f97316" },
+      { id: "niseko-village", name: "Niseko Village", lat: 42.8365, lng: 140.6851, accent: "#f97316" },
+      { id: "annupuri", name: "Annupuri", lat: 42.8390, lng: 140.6570, accent: "#f97316" },
+      { id: "moiwa", name: "Moiwa", lat: 42.8318, lng: 140.6479, accent: "#f97316" },
+      { id: "hirafu", name: "Hirafu", lat: 42.8577, lng: 140.6982, accent: "#0ea5e9" },
+      { id: "kutchan", name: "Kutchan", lat: 42.9010, lng: 140.7545, accent: "#0ea5e9" },
+      { id: "niseko-town", name: "Niseko Town", lat: 42.8046, lng: 140.6595, accent: "#0ea5e9" },
+    ],
+  },
   queenstown: {
     center: { lat: -44.99, lng: 168.74 },
     pins: [
@@ -370,6 +396,7 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   iiyama: "JP",
   "hakuba-valley": "JP",
   myoko: "JP",
+  niseko: "JP",
   queenstown: "NZ",
   wanaka: "NZ",
   "mt-hutt": "NZ",
@@ -385,6 +412,7 @@ const REGION_LABEL: Record<RegionKey, string> = {
   iiyama: "iiyama",
   "hakuba-valley": "hakuba valley",
   myoko: "myoko",
+  niseko: "niseko",
   queenstown: "queenstown",
   wanaka: "wanaka",
   "mt-hutt": "mt hutt",

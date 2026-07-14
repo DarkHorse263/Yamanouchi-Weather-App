@@ -16,6 +16,7 @@ export const REGION_IDS = [
   "iiyama",
   "hakuba-valley",
   "myoko",
+  "niseko",
   "queenstown",
   "wanaka",
   "mt-hutt",
@@ -136,6 +137,18 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "suginosawa": "myoko",
   "arai": "myoko",
   "myoko-roads": "myoko",
+
+  // Niseko, JP · 5 mountains (the four Niseko United resorts + independent
+  // Moiwa) across 3 base towns (Hirafu, Kutchan, Niseko Town).
+  "grand-hirafu": "niseko",
+  "hanazono": "niseko",
+  "niseko-village": "niseko",
+  "annupuri": "niseko",
+  "moiwa": "niseko",
+  "hirafu": "niseko",
+  "kutchan": "niseko",
+  "niseko-town": "niseko",
+  "niseko-roads": "niseko",
 
   // Queenstown, NZ · 2 mountains + 1 gateway town + roads cam tile.
   "coronet-peak": "queenstown",

@@ -47,6 +47,16 @@ sync set; a full monorepo typecheck is the only reliable way to surface them
   safety net (shown only when `/api/regions` fails). It does not list every
   region — do not "fix" it to be exhaustive.
 
+## Adding a region WITHIN an existing country (Niseko precedent)
+- Fastest completeness check: pick the closest precedent region (e.g. myoko for a
+  JP region) and diff `grep -rl <precedent>` vs `grep -rl <new>` in both
+  artifacts' src — the file sets must match (minus precedent-local files like
+  yamanouchi map styling).
+- JP towns need NO weather.ts LOCATIONS entries (town weather is coordinate-based
+  via useTownWeather); only mountains get LOCATIONS rows.
+- Mountain detail routes are REGION-level (`/{region}/mountain/{id}`), not
+  town-scoped — a town-scoped URL silently falls through to the region home.
+
 ## NZ specifics (the third country, added southern-hemisphere)
 - No national obs feed wired (unlike AU BOM / JP JMA AMeDAS): `bom*` fields blank,
   no obs reconciler. Open-Meteo primary + OpenWeatherMap fallback.

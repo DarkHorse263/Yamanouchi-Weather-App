@@ -208,6 +208,17 @@ const LOCATIONS: LocationConfig[] = [
   { id: "seki-onsen",                name: "Seki Onsen",                latitude: 36.9050, longitude: 138.1569, elevation: 1200, description: "Two lifts and some of Japan's heaviest snowfall · small, steep and ungroomed on the north-east side.",      bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
   { id: "lotte-arai",                name: "Lotte Arai Resort",         latitude: 36.9909, longitude: 138.1816, elevation: 1280, description: "Big-vertical freeride resort on Mt Okenashi · gated powder zones over 951 m of drop.",                     bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
 
+  // ─── Niseko (Hokkaido, Japan) ────────────────────────────
+  // First Hokkaido region · four interlinked Niseko United resorts on
+  // Mt Niseko Annupuri (1,308m) plus independent Moiwa next to Annupuri.
+  // Coordinates are base-area points; elevation is each top-lift height
+  // (the on-mountain forecast height, not the village).
+  { id: "grand-hirafu",              name: "Niseko Grand Hirafu",       latitude: 42.8590, longitude: 140.6900, elevation: 1200, description: "Niseko's biggest resort · night skiing above Hirafu village and peak gates to Annupuri's summit.",          bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "hanazono",                  name: "Niseko Hanazono",           latitude: 42.8869, longitude: 140.7028, elevation: 1080, description: "Quieter north-east flank linked to Hirafu · powder bowls, tree runs and terrain parks.",                    bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "niseko-village",            name: "Niseko Village",            latitude: 42.8365, longitude: 140.6851, elevation: 1170, description: "Gondola from the village base into long fall-line runs · quiet trees between Hirafu and Annupuri.",         bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "annupuri",                  name: "Niseko Annupuri",           latitude: 42.8390, longitude: 140.6570, elevation: 1156, description: "Gentlest of the four united resorts · wide mellow groomers and well-known side-country gates.",              bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "moiwa",                     name: "Niseko Moiwa",              latitude: 42.8318, longitude: 140.6479, elevation: 840,  description: "Small independent hill beside Annupuri · quiet lifts and deep snow away from the united crowds.",           bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+
   // ─── Queenstown (Otago, New Zealand) ─────────────────────
   // Open-Meteo primary + OpenWeatherMap fallback · no national AWS feed
   // wired for NZ, so bom* fields stay blank and there's no obs reconciler.

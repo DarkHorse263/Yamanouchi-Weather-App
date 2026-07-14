@@ -186,6 +186,25 @@ const REGIONS: RegionConfig[] = [
     sourceLabel: "JMA Seamless",
   },
   {
+    id: "niseko",
+    name: "Niseko",
+    country: "Japan",
+    countryCode: "JP",
+    region: "Hokkaido",
+    status: "live",
+    href: "/niseko/",
+    baseTowns: ["Hirafu", "Kutchan", "Niseko Town"],
+    mountains: ["Grand Hirafu", "Hanazono", "Niseko Village", "Annupuri", "Moiwa"],
+    // Headline reading from Hirafu village (~260m) · the hub village at
+    // the foot of Grand Hirafu where most international guests stay.
+    headlineLabel: "Hirafu",
+    lat: 42.8577,
+    lon: 140.6982,
+    model: "jma_seamless",
+    timezone: "Asia/Tokyo",
+    sourceLabel: "JMA Seamless",
+  },
+  {
     id: "queenstown",
     name: "Queenstown",
     country: "New Zealand",

@@ -27,6 +27,7 @@ export const ALERT_REGIONS: Array<{ id: string; nameEn: string; nameJa: string; 
   { id: "iiyama", nameEn: "Iiyama", nameJa: "飯山市", country: "JP · Nagano" },
   { id: "hakuba-valley", nameEn: "Hakuba Valley", nameJa: "白馬バレー", country: "JP · Nagano" },
   { id: "myoko", nameEn: "Myoko", nameJa: "妙高", country: "JP · Niigata" },
+  { id: "niseko", nameEn: "Niseko", nameJa: "ニセコ", country: "JP · Hokkaido" },
   // New Zealand
   { id: "queenstown", nameEn: "Queenstown", nameJa: "クイーンズタウン", country: "NZ · Otago" },
   { id: "wanaka", nameEn: "Wanaka", nameJa: "ワナカ", country: "NZ · Otago" },
