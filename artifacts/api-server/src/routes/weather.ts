@@ -219,6 +219,18 @@ const LOCATIONS: LocationConfig[] = [
   { id: "annupuri",                  name: "Niseko Annupuri",           latitude: 42.8390, longitude: 140.6570, elevation: 1156, description: "Gentlest of the four united resorts · wide mellow groomers and well-known side-country gates.",              bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
   { id: "moiwa",                     name: "Niseko Moiwa",              latitude: 42.8318, longitude: 140.6479, elevation: 840,  description: "Small independent hill beside Annupuri · quiet lifts and deep snow away from the united crowds.",           bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
 
+  // ─── Yuzawa (Niigata, Japan) ─────────────────────────────
+  // Snow country classic 70 minutes from Tokyo by shinkansen · GALA,
+  // Yuzawa Kogen and Ishiuchi Maruyama linked at the top (Yuzawa Snow
+  // Link), Kagura and Naeba linked by the Dragondola, Iwappara
+  // independent on Mt Iiji. Elevations are top-lift heights.
+  { id: "gala-yuzawa",               name: "GALA Yuzawa",               latitude: 36.9509, longitude: 138.7995, elevation: 1181, description: "Shinkansen straight into the gondola base · linked at the top to Yuzawa Kogen and Ishiuchi Maruyama.",       bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "yuzawa-kogen",              name: "Yuzawa Kogen",              latitude: 36.9388, longitude: 138.7974, elevation: 1000, description: "Ropeway straight off the onsen street · gentle high bowl above town, linked at the top to GALA.",             bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "iwappara",                  name: "Iwappara",                  latitude: 36.9389, longitude: 138.8444, elevation: 985,  description: "Wide open slopes on Mt Iiji east of the valley · a long-standing learner and family favourite.",             bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "ishiuchi-maruyama",         name: "Ishiuchi Maruyama",         latitude: 36.9761, longitude: 138.7947, elevation: 920,  description: "Historic broad hill above Ishiuchi village · big parks and long runs to the valley floor.",                  bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "kagura",                    name: "Kagura",                    latitude: 36.8948, longitude: 138.7756, elevation: 1845, description: "Highest terrain and longest season in the area · three linked zones rising from the Mitsumata base.",         bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "naeba",                     name: "Naeba",                     latitude: 36.7917, longitude: 138.7846, elevation: 1789, description: "Big classic resort beneath Mt Takenoko · linked to Kagura by the Dragondola gondola.",                       bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+
   // ─── Queenstown (Otago, New Zealand) ─────────────────────
   // Open-Meteo primary + OpenWeatherMap fallback · no national AWS feed
   // wired for NZ, so bom* fields stay blank and there's no obs reconciler.

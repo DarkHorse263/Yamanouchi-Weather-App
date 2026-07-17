@@ -234,6 +234,14 @@ if (process.env.NODE_ENV === "production") {
         "niseko-town": "Niseko Town",
       },
     },
+    "yuzawa": {
+      name: "Yuzawa",
+      towns: {
+        "echigo-yuzawa": "Echigo-Yuzawa",
+        ishiuchi: "Ishiuchi",
+        mitsumata: "Mitsumata",
+      },
+    },
     // New Zealand
     "queenstown": {
       name: "Queenstown",

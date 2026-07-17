@@ -17,6 +17,7 @@ export const REGION_IDS = [
   "hakuba-valley",
   "myoko",
   "niseko",
+  "yuzawa",
   "queenstown",
   "wanaka",
   "mt-hutt",
@@ -149,6 +150,21 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "kutchan": "niseko",
   "niseko-town": "niseko",
   "niseko-roads": "niseko",
+
+  // Yuzawa, JP · 6 mountains (GALA, Yuzawa Kogen and Ishiuchi Maruyama are
+  // linked at the top via the Yuzawa Snow Link · Kagura and Naeba linked by
+  // the Dragondola · Iwappara independent on Mt Iiji) across 3 base towns
+  // (Echigo-Yuzawa, Ishiuchi, Mitsumata).
+  "gala-yuzawa": "yuzawa",
+  "yuzawa-kogen": "yuzawa",
+  "iwappara": "yuzawa",
+  "ishiuchi-maruyama": "yuzawa",
+  "kagura": "yuzawa",
+  "naeba": "yuzawa",
+  "echigo-yuzawa": "yuzawa",
+  "ishiuchi": "yuzawa",
+  "mitsumata": "yuzawa",
+  "yuzawa-roads": "yuzawa",
 
   // Queenstown, NZ · 2 mountains + 1 gateway town + roads cam tile.
   "coronet-peak": "queenstown",

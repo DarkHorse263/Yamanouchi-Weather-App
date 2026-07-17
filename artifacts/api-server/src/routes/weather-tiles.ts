@@ -44,6 +44,8 @@ const JAPAN_CITIES = [
   { key: "myoko", name: "Myoko", nameJa: "妙高", lat: 36.862, lng: 138.252 },
   // Niseko · Hirafu village core, the hub of the four united resorts.
   { key: "niseko", name: "Niseko", nameJa: "ニセコ", lat: 42.858, lng: 140.698 },
+  // Yuzawa · Echigo-Yuzawa town core around the shinkansen station.
+  { key: "yuzawa", name: "Yuzawa", nameJa: "湯沢", lat: 36.935, lng: 138.809 },
 ];
 
 let cachedTemps: { data: any; fetchedAt: number } | null = null;

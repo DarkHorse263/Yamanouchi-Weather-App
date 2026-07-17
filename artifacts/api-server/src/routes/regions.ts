@@ -205,6 +205,26 @@ const REGIONS: RegionConfig[] = [
     sourceLabel: "JMA Seamless",
   },
   {
+    id: "yuzawa",
+    name: "Yuzawa",
+    country: "Japan",
+    countryCode: "JP",
+    region: "Niigata",
+    status: "live",
+    href: "/yuzawa/",
+    baseTowns: ["Echigo-Yuzawa", "Ishiuchi", "Mitsumata"],
+    mountains: ["GALA Yuzawa", "Yuzawa Kogen", "Iwappara", "Ishiuchi Maruyama", "Kagura", "Naeba"],
+    // Headline reading from Echigo-Yuzawa town (~360m) · the onsen town
+    // around the shinkansen station where most visitors stay, beneath the
+    // Yuzawa Kogen ropeway and GALA gondola.
+    headlineLabel: "Echigo-Yuzawa",
+    lat: 36.9354,
+    lon: 138.8090,
+    model: "jma_seamless",
+    timezone: "Asia/Tokyo",
+    sourceLabel: "JMA Seamless",
+  },
+  {
     id: "queenstown",
     name: "Queenstown",
     country: "New Zealand",

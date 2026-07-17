@@ -64,6 +64,7 @@ export type RegionKey =
   | "hakuba-valley"
   | "myoko"
   | "niseko"
+  | "yuzawa"
   | "queenstown"
   | "wanaka"
   | "mt-hutt"
@@ -177,6 +178,18 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       label: "JMA Sapporo",
       imageUrl: null,
       href: "https://www.jma.go.jp/bosai/nowc/#zoom:10/lat:42.86/lon:140.69/colordepth:normal/elements:hrpns",
+      attribution: "Japan Meteorological Agency · JMA",
+    },
+  },
+  // Yuzawa runs from Naeba in the south up to Ishiuchi at the north foot
+  // of the massif (~0.20° of latitude), so centre on the Mitsumata side
+  // between them.
+  "yuzawa": {
+    windy: { lat: 36.89, lon: 138.79, zoom: 10 },
+    official: {
+      label: "JMA Niigata",
+      imageUrl: null,
+      href: "https://www.jma.go.jp/bosai/nowc/#zoom:10/lat:36.89/lon:138.79/colordepth:normal/elements:hrpns",
       attribution: "Japan Meteorological Agency · JMA",
     },
   },
@@ -348,6 +361,23 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "niseko-town", name: "Niseko Town", lat: 42.8046, lng: 140.6595, accent: "#0ea5e9" },
     ],
   },
+  "yuzawa": {
+    center: { lat: 36.89, lng: 138.79 },
+    pins: [
+      { id: "gala-yuzawa", name: "GALA Yuzawa", lat: 36.9509, lng: 138.7995, accent: "#f97316" },
+      { id: "yuzawa-kogen", name: "Yuzawa Kogen", lat: 36.9388, lng: 138.7974, accent: "#f97316" },
+      { id: "ishiuchi-maruyama", name: "Ishiuchi Maruyama", lat: 36.9761, lng: 138.7947, accent: "#f97316" },
+      { id: "iwappara", name: "Iwappara", lat: 36.9389, lng: 138.8444, accent: "#f97316" },
+      { id: "kagura", name: "Kagura", lat: 36.8948, lng: 138.7756, accent: "#f97316" },
+      { id: "naeba", name: "Naeba", lat: 36.7917, lng: 138.7846, accent: "#f97316" },
+      { id: "echigo-yuzawa", name: "Echigo-Yuzawa", lat: 36.9354, lng: 138.8090, accent: "#0ea5e9" },
+      { id: "ishiuchi", name: "Ishiuchi", lat: 36.9894, lng: 138.8043, accent: "#0ea5e9" },
+      // canonical Mitsumata coords match the Kagura ropeway base · nudged
+      // slightly here (display only) so the town pin doesn't stack under
+      // the Kagura mountain pin
+      { id: "mitsumata", name: "Mitsumata", lat: 36.8975, lng: 138.7790, accent: "#0ea5e9" },
+    ],
+  },
   queenstown: {
     center: { lat: -44.99, lng: 168.74 },
     pins: [
@@ -397,6 +427,7 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "hakuba-valley": "JP",
   myoko: "JP",
   niseko: "JP",
+  yuzawa: "JP",
   queenstown: "NZ",
   wanaka: "NZ",
   "mt-hutt": "NZ",
@@ -413,6 +444,7 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "hakuba-valley": "hakuba valley",
   myoko: "myoko",
   niseko: "niseko",
+  yuzawa: "yuzawa",
   queenstown: "queenstown",
   wanaka: "wanaka",
   "mt-hutt": "mt hutt",

@@ -100,6 +100,13 @@ const MOUNTAIN_TINTS: Record<string, { bg: string; hover: string; ring: string }
   "niseko-village":   { bg: "bg-cyan-100/70",    hover: "hover:bg-cyan-200/70",    ring: "ring-cyan-300/50" },
   "annupuri":         { bg: "bg-blue-100/70",    hover: "hover:bg-blue-200/70",    ring: "ring-blue-300/50" },
   "moiwa":            { bg: "bg-slate-100/70",   hover: "hover:bg-slate-200/70",   ring: "ring-slate-300/50" },
+  // Yuzawa JP · Snow Link trio + Iwappara + the two Dragondola resorts
+  "gala-yuzawa":       { bg: "bg-sky-100/70",     hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },
+  "yuzawa-kogen":      { bg: "bg-indigo-100/70",  hover: "hover:bg-indigo-200/70",  ring: "ring-indigo-300/50" },
+  "ishiuchi-maruyama": { bg: "bg-cyan-100/70",    hover: "hover:bg-cyan-200/70",    ring: "ring-cyan-300/50" },
+  "iwappara":          { bg: "bg-emerald-100/70", hover: "hover:bg-emerald-200/70", ring: "ring-emerald-300/50" },
+  "kagura":            { bg: "bg-blue-100/70",    hover: "hover:bg-blue-200/70",    ring: "ring-blue-300/50" },
+  "naeba":             { bg: "bg-violet-100/70",  hover: "hover:bg-violet-200/70",  ring: "ring-violet-300/50" },
 };
 
 const FALLBACK_TINT = { bg: "bg-sky-50/70", hover: "hover:bg-sky-100/70", ring: "ring-sky-200/50" };

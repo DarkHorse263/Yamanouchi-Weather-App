@@ -65,6 +65,10 @@ const REGION_ANCHORS: Record<RegionId, {
   // busiest of the four united resorts on Mt Niseko Annupuri, a fair
   // powder proxy for the whole interlinked area.
   "niseko": { lat: 42.8590, lon: 140.6900, elevation: 1200, region: "JP", displayName: "Niseko" },
+  // Yuzawa · anchor on Kagura's top area (1845m) · the highest and
+  // snowiest terrain in the region with the longest season, so it is the
+  // fairest single point for powder alerts across the six resorts.
+  "yuzawa": { lat: 36.8948, lon: 138.7756, elevation: 1845, region: "JP", displayName: "Yuzawa" },
   // NZ · no national model in the ensemble, so region "OTHER" (global
   // blend). Anchor each on its highest skiable summit.
   "queenstown": { lat: -45.0556, lon: 168.8194, elevation: 1943, region: "OTHER", displayName: "Queenstown" },

@@ -7,6 +7,7 @@ import { iiyamaRegion } from "./iiyama";
 import { hakubaValleyRegion } from "./hakuba-valley";
 import { myokoRegion } from "./myoko";
 import { nisekoRegion } from "./niseko";
+import { yuzawaRegion } from "./yuzawa";
 import { tasmaniaRegion } from "./tasmania";
 import { queenstownRegion } from "./queenstown";
 import { wanakaRegion } from "./wanaka";
@@ -29,6 +30,7 @@ export const REGIONS: RegionConfig[] = [
   hakubaValleyRegion,
   myokoRegion,
   nisekoRegion,
+  yuzawaRegion,
   queenstownRegion,
   wanakaRegion,
   mtHuttRegion,
@@ -58,6 +60,7 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "hakuba-valley": "JP",
   "myoko": "JP",
   "niseko": "JP",
+  "yuzawa": "JP",
   "queenstown": "NZ",
   "wanaka": "NZ",
   "mt-hutt": "NZ",
