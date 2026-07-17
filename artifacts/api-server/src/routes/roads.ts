@@ -31,13 +31,231 @@ const CHAIN_FITTING_BAYS = [
   }
 ];
 
+// ── NSW live alpine hazards · Transport for NSW Live Traffic ───────────
+// TfNSW publishes open, keyless GeoJSON hazard layers - the same system
+// that powers livetraffic.com and the RTMC SMS alerts. The alpine layer
+// carries the seasonal-closure and snow-condition entries for the Snowy
+// Mountains; the incident layer picks up one-offs like crashes and the
+// peak-day carpark alerts ("Carpark at approx. 75% · Kosciuszko Road will
+// be closed to traffic"). Licence: Transport for NSW open data.
+const NSW_HAZARD_LAYERS = [
+  "https://data.livetraffic.com/traffic/hazards/alpine-open.json",
+  "https://data.livetraffic.com/traffic/hazards/incident-open.json",
+];
+const NSW_TTL_MS = 3 * 60_000;
+// Serve-stale cap: past this age a cached snapshot is treated as an outage
+// (null) rather than replaying days-old hazards as if they were current.
+const NSW_STALE_MAX_MS = 90 * 60_000;
+
+interface NswHazard {
+  id: string;
+  mainStreet: string;
+  suburb: string;
+  subCategory: string;
+  advice: string;
+  detailText: string;
+  lastUpdated: string | null;
+  isMajor: boolean;
+}
+
+interface AuRoad {
+  id: string;
+  roadName: string;
+  segment: string;
+  condition: "open" | "closed" | "caution";
+  description: string;
+  chainsRequired: boolean;
+  lastUpdated: string;
+  source: string;
+  detailUrl: string;
+  affectedResorts: string[];
+}
+
+let nswCache: { at: number; hazards: NswHazard[] } | null = null;
+
+function stripLiveTrafficHtml(html: string): string {
+  return html
+    .replace(/<li>/gi, " · ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&#39;|&rsquo;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/&gt;/g, ">")
+    .replace(/&lt;/g, "<")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+async function fetchNswAlpineHazards(): Promise<NswHazard[] | null> {
+  const now = Date.now();
+  if (nswCache && now - nswCache.at < NSW_TTL_MS) return nswCache.hazards;
+  try {
+    const layers = await Promise.all(
+      NSW_HAZARD_LAYERS.map(async (url) => {
+        const resp = await fetch(url, { headers: { Accept: "application/json" } });
+        if (!resp.ok) throw new Error(`livetraffic HTTP ${resp.status}`);
+        return (await resp.json()) as {
+          features?: Array<{
+            id?: number | string;
+            properties?: {
+              headline?: string | null;
+              subCategoryA?: string | null;
+              adviceA?: string | null;
+              adviceB?: string | null;
+              otherAdvice?: string | null;
+              lastUpdated?: number | null;
+              isMajor?: boolean | null;
+              roads?: Array<{
+                mainStreet?: string | null;
+                suburb?: string | null;
+                region?: string | null;
+              }>;
+            };
+          }>;
+        };
+      }),
+    );
+    const hazards: NswHazard[] = [];
+    for (const layer of layers) {
+      for (const f of layer.features ?? []) {
+        const p = f.properties;
+        const road = p?.roads?.[0];
+        if ((road?.region ?? "") !== "Snowy Mountains") continue;
+        // The feed's subCategoryA is sometimes the literal string "null".
+        const subCategoryRaw = (p?.subCategoryA ?? "").trim();
+        const subCategory = subCategoryRaw && subCategoryRaw !== "null" ? subCategoryRaw : "";
+        // Generic advice phrases carry no road-specific signal; dropping
+        // them means boilerplate-only hazards leave the curated copy alone.
+        const advice = [p?.adviceA, p?.adviceB]
+          .map((s) => (s ?? "").trim())
+          .filter(
+            (s) =>
+              s &&
+              !/^(plan your journey|exercise caution|drive to the conditions?|allow extra travel time|check signage)$/i.test(
+                s,
+              ),
+          )
+          .join(" · ");
+        // TfNSW appends the same generic advice boilerplate to every alpine
+        // entry ("Updates about the road condition throughout the Alpine
+        // Season...", "Motorists should: exercise caution..."); trim it so
+        // the road-specific signal (closures, ice, carpark alerts) leads.
+        // If nothing specific remains, the curated card copy stands.
+        const detailText = (
+          stripLiveTrafficHtml(p?.otherAdvice ?? "") || (p?.headline ?? "").trim()
+        )
+          .split(/\s*Motorists should:.*$/i)[0]!
+          .replace(
+            /Updates about the road condition throughout the Alpine Season will be provided as the conditions change\.?/gi,
+            "",
+          )
+          .replace(
+            /Chains must be carried in Kosciuszko National Park in winter \(4WD\/AWDs exempt\)\.?/gi,
+            "",
+          )
+          .replace(
+            /It is recommended that all vehicles carry chains when driving in alpine areas\.?/gi,
+            "",
+          )
+          .replace(
+            /All motorists should be prepared and equipped for sudden changes in road and weather conditions in Alpine areas\.?/gi,
+            "",
+          )
+          .replace(/\s+/g, " ")
+          .replace(/^\s*·\s*/, "")
+          .trim();
+        hazards.push({
+          id: String(f.id ?? `${road?.mainStreet ?? "road"}-${p?.lastUpdated ?? ""}`),
+          mainStreet: (road?.mainStreet ?? "").trim(),
+          suburb: (road?.suburb ?? "").trim(),
+          subCategory,
+          advice,
+          detailText,
+          lastUpdated: p?.lastUpdated ? new Date(p.lastUpdated).toISOString() : null,
+          isMajor: Boolean(p?.isMajor),
+        });
+      }
+    }
+    nswCache = { at: now, hazards };
+    return hazards;
+  } catch (err) {
+    // Load-shedding: serve the last good snapshot when the upstream blips,
+    // but only while it's reasonably fresh - beyond the cap, degrade to the
+    // honest outage path instead of replaying old hazards as current.
+    if (nswCache && now - nswCache.at < NSW_STALE_MAX_MS) return nswCache.hazards;
+    // Cold outage: return null so the caller can flag the outage honestly
+    // instead of silently presenting the curated defaults as live.
+    console.warn("[roads] NSW live hazard feed unavailable:", err);
+    return null;
+  }
+}
+
+const NSW_PLACE_STOPWORDS = new Set([
+  "the", "and", "between", "valley", "national", "park", "road", "highway",
+]);
+
+function nswPlaceTokens(s: string): Set<string> {
+  return new Set(
+    s
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, "")
+      .split(/\s+/)
+      .filter((w) => w.length >= 3 && !NSW_PLACE_STOPWORDS.has(w)),
+  );
+}
+
+function nswAffectedResorts(hazard: NswHazard): string[] {
+  const text = `${hazard.mainStreet} ${hazard.suburb} ${hazard.detailText}`.toLowerCase();
+  const out = new Set<string>();
+  if (/perisher|smiggin|guthega|bullocks flat|link r(?:oa)?d|kosciuszko r(?:oa)?d/.test(text)) out.add("perisher");
+  if (/thredbo|alpine way/.test(text)) out.add("thredbo");
+  if (/charlotte/.test(text)) out.add("charlottes-pass");
+  if (/selwyn|cabramurra|kings cross|kiandra|tooma|snow ridge/.test(text)) out.add("selwyn");
+  return [...out];
+}
+
+function nswCondition(hazard: NswHazard): "open" | "closed" | "caution" {
+  // The structured sub-category is the authoritative closure signal. The
+  // only free-text phrasing honoured is TfNSW's explicit "closed to
+  // traffic" wording (used when the Perisher carpark fills), so a passing
+  // mention of a closed lane never paints a whole road as CLOSED.
+  if (hazard.subCategory.toLowerCase().includes("closed")) return "closed";
+  const text = hazard.detailText.toLowerCase();
+  if (/\bis (?:now )?closed to (?:all |uphill |downhill )?traffic\b/.test(text)) return "closed";
+  return "caution";
+}
+
+function nswIsCarparkAlert(hazard: NswHazard): boolean {
+  const text = `${hazard.subCategory} ${hazard.detailText}`.toLowerCase();
+  return /car\s?park|parking/.test(text) && /capacity|full|closed|nearing|overflow/.test(text);
+}
+
+function nswMentionsChainsFitted(hazard: NswHazard): boolean {
+  // "Chains must be carried" is boilerplate on every winter hazard and is
+  // already covered by the seasonal chain-status cards, so only explicit
+  // fit/required wording raises the per-road chains flag.
+  return /snow chains are required|chains must be fitted|fit (?:snow )?chains/i.test(
+    `${hazard.advice} ${hazard.detailText}`,
+  );
+}
+
+function nswDescription(hazard: NswHazard): string {
+  const parts: string[] = [];
+  if (nswIsCarparkAlert(hazard)) parts.push("carpark alert");
+  if (hazard.subCategory) parts.push(hazard.subCategory);
+  const body = hazard.detailText || hazard.advice;
+  if (body) parts.push(body.length > 500 ? `${body.slice(0, 500)}…` : body);
+  return parts.join(" · ");
+}
+
 async function fetchRoadConditions() {
-  const roads = [
+  const roads: AuRoad[] = [
     {
       id: "kosciuszko-road",
       roadName: "Kosciuszko Road",
       segment: "Jindabyne to Perisher Valley",
-      condition: "open" as const,
+      condition: "open",
       description: "Main access road from Jindabyne to Perisher Valley via Bullocks Flat Skitube terminal. Check conditions before travel during winter.",
       chainsRequired: false,
       lastUpdated: new Date().toISOString(),
@@ -49,7 +267,7 @@ async function fetchRoadConditions() {
       id: "alpine-way",
       roadName: "Alpine Way",
       segment: "Jindabyne to Thredbo",
-      condition: "open" as const,
+      condition: "open",
       description: "Scenic route from Jindabyne to Thredbo Alpine Village via the Alpine Way. Chains may be required during and after snowfall.",
       chainsRequired: false,
       lastUpdated: new Date().toISOString(),
@@ -87,7 +305,7 @@ async function fetchRoadConditions() {
       id: "snowy-mountains-highway",
       roadName: "Snowy Mountains Highway",
       segment: "Cooma to Adaminaby",
-      condition: "open" as const,
+      condition: "open",
       description: "Major highway connecting Cooma to the Snowy Mountains region. Generally well maintained but check conditions during severe weather.",
       chainsRequired: false,
       lastUpdated: new Date().toISOString(),
@@ -99,7 +317,7 @@ async function fetchRoadConditions() {
       id: "monaro-highway",
       roadName: "Monaro Highway",
       segment: "Canberra to Cooma",
-      condition: "open" as const,
+      condition: "open",
       description: "Main highway from Canberra to Cooma. Generally clear but black ice possible in early morning during winter.",
       chainsRequired: false,
       lastUpdated: new Date().toISOString(),
@@ -111,7 +329,7 @@ async function fetchRoadConditions() {
       id: "barry-way",
       roadName: "Barry Way",
       segment: "Jindabyne to Khancoban (via Snowy River)",
-      condition: "caution" as const,
+      condition: "caution",
       description: "Alternative scenic route via the Snowy River. Unsealed sections, not recommended for 2WD vehicles during wet conditions.",
       chainsRequired: false,
       lastUpdated: new Date().toISOString(),
@@ -121,50 +339,91 @@ async function fetchRoadConditions() {
     }
   ];
 
-  try {
-    const response = await fetch("https://api.transport.nsw.gov.au/v1/live/hazards/alpine/open", {
-      headers: {
-        "Accept": "application/json"
+  // Live overlay from the open TfNSW Live Traffic hazard feeds - the same
+  // system behind the RTMC SMS alerts. Matched hazards enrich the curated
+  // corridor cards; unmatched Snowy Mountains hazards (peak-day carpark
+  // alerts filed as incidents, or roads we don't curate like Link Road)
+  // are appended as their own live cards.
+  const hazards = await fetchNswAlpineHazards();
+  if (hazards === null) {
+    for (const road of roads) {
+      road.description +=
+        " Live feed temporarily unavailable · check livetraffic.com before you travel.";
+    }
+    return roads;
+  }
+
+  const severityRank = { open: 0, caution: 1, closed: 2 } as const;
+  const extras: AuRoad[] = [];
+  // Tracks the hazard severity that last set each card's description, so a
+  // later minor hazard on the same street can't overwrite a closure's text.
+  const descSeverity = new Map<AuRoad, number>();
+  for (const hazard of hazards) {
+    const hazardStreet = hazard.mainStreet.toLowerCase();
+    const hazardPlaces = nswPlaceTokens(hazard.suburb);
+    const sameStreetHazards = hazards.filter(
+      (h) => h.mainStreet.toLowerCase() === hazardStreet,
+    ).length;
+    let best: AuRoad | null = null;
+    let bestScore = 0;
+    for (const road of roads) {
+      const roadName = road.roadName.toLowerCase();
+      if (
+        !hazardStreet ||
+        !(roadName.includes(hazardStreet) || hazardStreet.includes(roadName))
+      ) {
+        continue;
       }
-    });
-
-    if (response.ok) {
-      const data = await response.json() as any;
-      if (data && Array.isArray(data.features)) {
-        for (const feature of data.features) {
-          const props = feature.properties;
-          if (!props) continue;
-
-          const roadName = props.mainCategory || props.roads?.[0]?.mainStreet || "Alpine Road";
-          const existingRoad = roads.find(r =>
-            r.roadName.toLowerCase().includes(roadName.toLowerCase()) ||
-            roadName.toLowerCase().includes(r.roadName.toLowerCase())
-          );
-
-          if (existingRoad && props.headline) {
-            existingRoad.description = props.headline;
-            if (props.adviceA) {
-              existingRoad.description += `. ${props.adviceA}`;
-            }
-            existingRoad.lastUpdated = props.lastUpdated || new Date().toISOString();
-
-            if (props.headline.toLowerCase().includes("closed")) {
-              existingRoad.condition = "closed";
-            } else if (props.headline.toLowerCase().includes("chain")) {
-              // The road `condition` enum is open/closed/caution; "chains
-              // required" is surfaced via the dedicated `chainsRequired`
-              // flag below, while the road itself stays drivable = caution.
-              existingRoad.condition = "caution";
-              existingRoad.chainsRequired = true;
-            } else if (props.headline.toLowerCase().includes("caution") || props.headline.toLowerCase().includes("reduce")) {
-              existingRoad.condition = "caution";
-            }
-          }
-        }
+      const segPlaces = nswPlaceTokens(road.segment);
+      let score = 1;
+      for (const tok of hazardPlaces) if (segPlaces.has(tok)) score += 1;
+      // Streets carrying several concurrent hazards (Kosciuszko Road) need
+      // at least one shared place name, so the Perisher-Charlotte Pass
+      // closure never lands on the Jindabyne-Perisher card.
+      if (sameStreetHazards > 1 && score === 1) continue;
+      if (score > bestScore) {
+        bestScore = score;
+        best = road;
       }
     }
-  } catch {
+    const condition = nswCondition(hazard);
+    const description = nswDescription(hazard);
+    const chains = nswMentionsChainsFitted(hazard);
+    if (best) {
+      if (severityRank[condition] > severityRank[best.condition]) {
+        best.condition = condition;
+      }
+      if (description && severityRank[condition] >= (descSeverity.get(best) ?? -1)) {
+        best.description = description;
+        descSeverity.set(best, severityRank[condition]);
+      }
+      if (chains) best.chainsRequired = true;
+      if (hazard.lastUpdated) best.lastUpdated = hazard.lastUpdated;
+    } else {
+      extras.push({
+        id: `tfnsw-${hazard.id}`,
+        roadName: hazard.mainStreet || "Snowy Mountains roads",
+        segment: hazard.suburb || "Snowy Mountains",
+        condition,
+        description:
+          description ||
+          "Active alpine-season entry · updates from Transport for NSW appear here as conditions change.",
+        chainsRequired: chains,
+        lastUpdated: hazard.lastUpdated ?? new Date().toISOString(),
+        source: "Transport for NSW - Live Traffic",
+        detailUrl: "https://www.livetraffic.com/maps?lat=-36.45&lng=148.45&zoom=10",
+        affectedResorts: nswAffectedResorts(hazard),
+      });
+    }
   }
+  // Closures and carpark alerts lead the appended cards.
+  const isCarparkCard = (r: AuRoad) => r.description.startsWith("carpark alert");
+  extras.sort((a, b) => {
+    const bySeverity = severityRank[b.condition] - severityRank[a.condition];
+    if (bySeverity !== 0) return bySeverity;
+    return Number(isCarparkCard(b)) - Number(isCarparkCard(a));
+  });
+  roads.push(...extras.slice(0, 8));
 
   return roads;
 }
@@ -788,14 +1047,14 @@ router.get("/road-conditions", async (req, res) => {
       region !== undefined &&
       Object.prototype.hasOwnProperty.call(NZ_CORRIDORS, region);
 
-    let roads: Array<Record<string, unknown>> = [];
+    let roads: unknown[] = [];
     let generalAdvice: string;
     let liveTrafficUrl: string;
 
     if (isAU) {
       roads = await fetchRoadConditions();
       generalAdvice =
-        "Always carry chains when travelling to the Snowy Mountains during winter (June-October). Check conditions before departure at livetraffic.com. National Parks entry fees apply for Kosciuszko National Park. Vehicle entry is $29/day or $190/year (2024 rates). During heavy snowfall, roads may close at short notice.";
+        "Always carry chains when travelling to the Snowy Mountains during winter (June-October). Check conditions before departure at livetraffic.com. National Parks entry fees apply for Kosciuszko National Park. Vehicle entry is $29/day or $190/year (2024 rates). During heavy snowfall, roads may close at short notice. On peak winter days Transport for NSW closes Kosciuszko Road to uphill traffic when the Perisher carpark fills · those alerts appear here as they're issued.";
       liveTrafficUrl =
         "https://www.livetraffic.com/maps?lat=-36.45&lng=148.45&zoom=10&layers=cameras";
     } else if (isNZ) {
