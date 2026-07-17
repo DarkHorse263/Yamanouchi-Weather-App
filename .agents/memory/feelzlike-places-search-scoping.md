@@ -17,6 +17,20 @@ description: How /api/places/search returns only AU/JP/NZ localities (Autocomple
 
 **How to apply / adding a country:** add its CLDR code to `includedRegionCodes`. Do NOT reintroduce the per-country rectangle fan-out or a global Text Search — Autocomplete already scopes correctly. Do NOT switch search back to `searchText` (reintroduces the business-label bug the user rejected).
 
+# Curated-first client index (towns Google can't return)
+
+Google's locality-type filter EXCLUDES resort areas — "Madarao" (curated town
+Madarao Kogen) returned zero predictions, so relying on Google alone made our
+own towns unfindable ("no places found" for a town we serve). Fix lives in
+`PlaceSearch`: a module-load index of every region baseTown (keys = town name +
+region name + nearby mountain names, en normalized + raw ja) is matched locally
+and rendered FIRST in the dropdown (Mountain icon, "subtitle · live conditions"
+line), above Google rows; Google rows duplicating a curated name are filtered.
+A curated pick navigates straight to `/:region/:town` with NO details call and
+bumps `pickSeq` so an in-flight Google pick can't navigate afterwards. Do NOT
+"fix" findability by loosening the server's locality restriction (reintroduces
+the business-label bug) — the curated index is the intended mechanism.
+
 # Picked-place -> curated town reconciliation (client)
 
 `PlaceSearch.choose()` is async: on pick it fetches `/api/places/details` for coords (row spinner via `resolvingId`, inline "couldn't load that place" error on failure so a pick never silently no-ops), then reconciles against `REGIONS.flatMap(baseTowns)` before navigating. A normalized name match (en or `nameJa`) accepts within 25km; proximity alone accepts only within 6km (tight, so it never grabs a neighbour when there is no name signal). On match it navigates `/:region/:town` (rich town page, correct under the root wouter base); otherwise it keeps the location-first `/near-you?lat&lng&name` fallback. The 6km floor matters where towns are very close (Yudanaka / Shibu Onsen ~1km) — the name match disambiguates them. A monotonic `pickSeq` ref guards against a stale pick: retyping mid-resolve (or picking again) invalidates the in-flight lookup so it can't navigate after the user moved on. `PlaceSearch` is the ONLY caller of `/api/places/search`; the /near-you `?lat&lng&name` contract is unchanged.

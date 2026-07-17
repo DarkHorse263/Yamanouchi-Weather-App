@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useLocation } from "wouter";
-import { Loader2, MapPin, Search, X } from "lucide-react";
+import { Loader2, MapPin, Mountain, Search, X } from "lucide-react";
 import { track } from "@/lib/analytics";
 import { REGIONS } from "@/regions";
 
@@ -28,22 +28,72 @@ interface PlaceDetail {
 const MIN_CHARS = 3;
 const DEBOUNCE_MS = 350;
 
-// Flattened curated towns across every region. Lets a picked search result go
-// straight to its rich town page when it clearly matches one, instead of the
-// generic /near-you view. Built once at module load.
-const CURATED_TOWNS = REGIONS.flatMap((r) =>
-  (r.baseTowns ?? []).map((t) => ({
-    regionId: r.id,
-    id: t.id,
-    name: t.name,
-    nameJa: t.nameJa,
-    lat: t.lat,
-    lng: t.lng,
-  })),
-);
-
 function normalizeName(s: string): string {
   return s.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "");
+}
+
+// Flattened curated towns across every region, with a per-town search index
+// (town name, region name and every nearby mountain name, en + ja). Curated
+// matches are offered FIRST and navigate straight to the rich town page -
+// this also covers names Google Autocomplete can't return at all: its
+// locality-type filter excludes resort areas like Madarao Kogen, so relying
+// on Google alone made our own towns unfindable. Built once at module load.
+interface CuratedTown {
+  regionId: string;
+  id: string;
+  name: string;
+  nameJa?: string;
+  lat: number;
+  lng: number;
+  /** Region context line, e.g. "Nagano · Japan". */
+  subtitle: string;
+  /** Normalized english search keys: region + nearby mountain names. */
+  extraKeys: string[];
+  /** Raw japanese search keys (normalizeName strips non-latin chars). */
+  jaKeys: string[];
+}
+
+const CURATED_TOWNS: CuratedTown[] = REGIONS.flatMap((r) =>
+  (r.baseTowns ?? []).map((t) => {
+    const nearby = (r.mountains ?? []).filter((m) =>
+      t.nearbyMountainIds?.includes(m.id),
+    );
+    return {
+      regionId: r.id,
+      id: t.id,
+      name: t.name,
+      nameJa: t.nameJa,
+      lat: t.lat,
+      lng: t.lng,
+      subtitle: r.subtitle,
+      extraKeys: [r.name, ...nearby.map((m) => m.name)].map(normalizeName),
+      jaKeys: [t.nameJa, ...nearby.map((m) => m.nameJa)].filter(
+        (s): s is string => Boolean(s),
+      ),
+    };
+  }),
+);
+
+/**
+ * Curated towns matching the typed term, best-first: town-name prefix beats
+ * town-name substring beats region/mountain-name matches. Capped at 3 so
+ * Google predictions stay visible beneath them.
+ */
+function curatedMatchesFor(q: string): CuratedTown[] {
+  const raw = q.trim();
+  const nq = normalizeName(raw);
+  const scored: Array<{ t: CuratedTown; score: number }> = [];
+  for (const t of CURATED_TOWNS) {
+    const nName = normalizeName(t.name);
+    let score: number | null = null;
+    if (nq && nName.startsWith(nq)) score = 0;
+    else if (nq && nName.includes(nq)) score = 1;
+    else if (nq && t.extraKeys.some((k) => k.includes(nq))) score = 2;
+    else if (raw && t.jaKeys.some((k) => k.includes(raw))) score = 0;
+    if (score != null) scored.push({ t, score });
+  }
+  scored.sort((a, b) => a.score - b.score || a.t.name.localeCompare(b.t.name));
+  return scored.slice(0, 3).map((s) => s.t);
 }
 
 function distanceKm(aLat: number, aLng: number, bLat: number, bLng: number): number {
@@ -142,7 +192,16 @@ export function PlaceSearch({
     },
   });
 
-  const results = enabled ? query.data?.results ?? [] : [];
+  // Curated towns matched locally - shown first, above Google predictions.
+  const curated = useMemo(
+    () => (enabled ? curatedMatchesFor(debounced) : []),
+    [enabled, debounced],
+  );
+  // Google predictions, minus any that duplicate a curated match by name.
+  const results = (enabled ? query.data?.results ?? [] : []).filter(
+    (r) => !curated.some((t) => normalizeName(t.name) === normalizeName(r.name)),
+  );
+  const rowCount = curated.length + results.length;
 
   // Close the dropdown on an outside click / tap.
   useEffect(() => {
@@ -154,6 +213,23 @@ export function PlaceSearch({
     document.addEventListener("mousedown", onDown);
     return () => document.removeEventListener("mousedown", onDown);
   }, []);
+
+  // A curated pick needs no Google lookup - we already know the town page.
+  function chooseCurated(t: CuratedTown) {
+    if (resolvingId) return;
+    track("place_search_select", {
+      category: "navigation",
+      data: { source, name: t.name, curated: true },
+    });
+    pickSeq.current++;
+    setResolvingId(null);
+    setSelectError(false);
+    setOpen(false);
+    setTerm("");
+    setDebounced("");
+    setActiveIndex(-1);
+    navigate(`/${t.regionId}/${t.id}`);
+  }
 
   async function choose(r: PlaceResult) {
     // Guard against a second pick while the first is still resolving coords.
@@ -210,17 +286,23 @@ export function PlaceSearch({
   }
 
   function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (!open || results.length === 0) return;
+    if (!open || rowCount === 0) return;
     if (e.key === "ArrowDown") {
       e.preventDefault();
-      setActiveIndex((i) => Math.min(i + 1, results.length - 1));
+      setActiveIndex((i) => Math.min(i + 1, rowCount - 1));
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
       setActiveIndex((i) => Math.max(i - 1, 0));
     } else if (e.key === "Enter") {
       e.preventDefault();
-      const r = results[activeIndex] ?? results[0];
-      if (r) void choose(r);
+      const idx = activeIndex >= 0 ? activeIndex : 0;
+      if (idx < curated.length) {
+        const t = curated[idx];
+        if (t) chooseCurated(t);
+      } else {
+        const r = results[idx - curated.length];
+        if (r) void choose(r);
+      }
     } else if (e.key === "Escape") {
       setOpen(false);
     }
@@ -274,20 +356,54 @@ export function PlaceSearch({
 
       {showDropdown ? (
         <div className="absolute left-0 right-0 z-30 mt-1.5 overflow-hidden rounded-xl border border-sky-100 bg-white shadow-[0_8px_30px_rgb(15,23,42,0.12)]">
-          {query.isFetching && results.length === 0 ? (
+          {query.isFetching && rowCount === 0 ? (
             <p className="px-3.5 py-3 text-[12px] text-slate-400">searching…</p>
-          ) : results.length > 0 ? (
+          ) : rowCount > 0 ? (
             <>
               <ul role="listbox">
-                {results.map((r, i) => (
-                  <li key={r.id} role="option" aria-selected={i === activeIndex}>
+                {curated.map((t, i) => (
+                  <li
+                    key={`curated-${t.regionId}-${t.id}`}
+                    role="option"
+                    aria-selected={i === activeIndex}
+                  >
                     <button
                       type="button"
                       disabled={resolvingId != null}
                       onMouseEnter={() => setActiveIndex(i)}
-                      onClick={() => void choose(r)}
+                      onClick={() => chooseCurated(t)}
                       className={`flex w-full items-start gap-2.5 px-3.5 py-2.5 text-left transition-colors disabled:cursor-default ${
                         i === activeIndex ? "bg-sky-50" : "hover:bg-sky-50"
+                      }`}
+                    >
+                      <Mountain
+                        className="mt-0.5 h-3.5 w-3.5 shrink-0 text-sky-500"
+                        strokeWidth={2}
+                      />
+                      <span className="min-w-0">
+                        <span className="block truncate text-[13px] font-semibold text-slate-800">
+                          {t.name.toLowerCase()}
+                        </span>
+                        <span className="block truncate text-[11px] text-slate-400">
+                          {t.subtitle.toLowerCase()} · live conditions
+                        </span>
+                      </span>
+                    </button>
+                  </li>
+                ))}
+                {results.map((r, i) => (
+                  <li
+                    key={r.id}
+                    role="option"
+                    aria-selected={curated.length + i === activeIndex}
+                  >
+                    <button
+                      type="button"
+                      disabled={resolvingId != null}
+                      onMouseEnter={() => setActiveIndex(curated.length + i)}
+                      onClick={() => void choose(r)}
+                      className={`flex w-full items-start gap-2.5 px-3.5 py-2.5 text-left transition-colors disabled:cursor-default ${
+                        curated.length + i === activeIndex ? "bg-sky-50" : "hover:bg-sky-50"
                       }`}
                     >
                       {resolvingId === r.id ? (
