@@ -502,16 +502,22 @@ title = "Preview · dynamic ad banner under the Madarao Kogen header"
 id = "Gq8rUffAA_Z79VRTInAl-"
 uri = "file://exports/town-partner-ad-branded-jindabyne.jpg"
 type = "image"
-title = "Preview · Cooma Coaches branded ad under the Jindabyne header"
+title = "Cooma Coaches branded ad · jindabyne page"
 
 [[outputs]]
 id = "njBZAfU4qjoZo_O0eZVZN"
 uri = "file://exports/town-partner-ad-branded-madarao.jpg"
 type = "image"
-title = "Preview · Snowball Japan branded ad under the Madarao Kogen header"
+title = "Snowball Japan branded ad · madarao kogen page"
 
 [[outputs]]
 id = "9WI-gctkLB-FbZqu5iiCG"
 uri = "file://exports/feelzlike-business-docs.zip"
 type = "unspecified"
 title = "All business PDFs in one download (open on your computer)"
+
+[[outputs]]
+id = "TYMyJnvPJKRXCvH02Q_cN"
+uri = "file://exports/feelzlike-partner-mockups.zip"
+type = "unspecified"
+title = "All partner mockups in one download"
