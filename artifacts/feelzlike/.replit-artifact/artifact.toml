@@ -23,6 +23,1226 @@ publicDir = "artifacts/feelzlike/dist/public"
 serve = "static"
 
 [[services.production.rewrites]]
+from = "/countries/"
+to = "/countries/index.html"
+
+[[services.production.rewrites]]
+from = "/au/"
+to = "/au/index.html"
+
+[[services.production.rewrites]]
+from = "/jp/"
+to = "/jp/index.html"
+
+[[services.production.rewrites]]
+from = "/nz/"
+to = "/nz/index.html"
+
+[[services.production.rewrites]]
+from = "/plan/"
+to = "/plan/index.html"
+
+[[services.production.rewrites]]
+from = "/premium/"
+to = "/premium/index.html"
+
+[[services.production.rewrites]]
+from = "/near-you/"
+to = "/near-you/index.html"
+
+[[services.production.rewrites]]
+from = "/legal/privacy/"
+to = "/legal/privacy/index.html"
+
+[[services.production.rewrites]]
+from = "/legal/terms/"
+to = "/legal/terms/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/"
+to = "/snowy-mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/mountains/"
+to = "/snowy-mountains/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/alerts/"
+to = "/snowy-mountains/alerts/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/stay/"
+to = "/snowy-mountains/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/jindabyne/"
+to = "/snowy-mountains/jindabyne/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/jindabyne/weather/"
+to = "/snowy-mountains/jindabyne/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/jindabyne/stay/"
+to = "/snowy-mountains/jindabyne/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/jindabyne/eat/"
+to = "/snowy-mountains/jindabyne/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/jindabyne/roads/"
+to = "/snowy-mountains/jindabyne/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/jindabyne/transport/"
+to = "/snowy-mountains/jindabyne/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/jindabyne/explore/"
+to = "/snowy-mountains/jindabyne/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/berridale/"
+to = "/snowy-mountains/berridale/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/berridale/weather/"
+to = "/snowy-mountains/berridale/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/berridale/stay/"
+to = "/snowy-mountains/berridale/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/berridale/eat/"
+to = "/snowy-mountains/berridale/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/berridale/roads/"
+to = "/snowy-mountains/berridale/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/berridale/transport/"
+to = "/snowy-mountains/berridale/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/berridale/explore/"
+to = "/snowy-mountains/berridale/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/cooma/"
+to = "/snowy-mountains/cooma/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/cooma/weather/"
+to = "/snowy-mountains/cooma/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/cooma/stay/"
+to = "/snowy-mountains/cooma/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/cooma/eat/"
+to = "/snowy-mountains/cooma/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/cooma/roads/"
+to = "/snowy-mountains/cooma/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/cooma/transport/"
+to = "/snowy-mountains/cooma/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/cooma/explore/"
+to = "/snowy-mountains/cooma/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/"
+to = "/victorias-high-country/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/mountains/"
+to = "/victorias-high-country/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/stay/"
+to = "/victorias-high-country/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/mansfield/"
+to = "/victorias-high-country/mansfield/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/mansfield/weather/"
+to = "/victorias-high-country/mansfield/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/mansfield/stay/"
+to = "/victorias-high-country/mansfield/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/mansfield/eat/"
+to = "/victorias-high-country/mansfield/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/mansfield/roads/"
+to = "/victorias-high-country/mansfield/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/mansfield/transport/"
+to = "/victorias-high-country/mansfield/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/mansfield/explore/"
+to = "/victorias-high-country/mansfield/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/bright/"
+to = "/victorias-high-country/bright/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/bright/weather/"
+to = "/victorias-high-country/bright/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/bright/stay/"
+to = "/victorias-high-country/bright/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/bright/eat/"
+to = "/victorias-high-country/bright/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/bright/roads/"
+to = "/victorias-high-country/bright/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/bright/transport/"
+to = "/victorias-high-country/bright/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/bright/explore/"
+to = "/victorias-high-country/bright/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/mount-beauty/"
+to = "/victorias-high-country/mount-beauty/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/mount-beauty/weather/"
+to = "/victorias-high-country/mount-beauty/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/mount-beauty/stay/"
+to = "/victorias-high-country/mount-beauty/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/mount-beauty/eat/"
+to = "/victorias-high-country/mount-beauty/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/mount-beauty/roads/"
+to = "/victorias-high-country/mount-beauty/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/mount-beauty/transport/"
+to = "/victorias-high-country/mount-beauty/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/mount-beauty/explore/"
+to = "/victorias-high-country/mount-beauty/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/harrietville/"
+to = "/victorias-high-country/harrietville/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/harrietville/weather/"
+to = "/victorias-high-country/harrietville/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/harrietville/stay/"
+to = "/victorias-high-country/harrietville/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/harrietville/eat/"
+to = "/victorias-high-country/harrietville/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/harrietville/roads/"
+to = "/victorias-high-country/harrietville/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/harrietville/transport/"
+to = "/victorias-high-country/harrietville/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/harrietville/explore/"
+to = "/victorias-high-country/harrietville/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/dinner-plain/"
+to = "/victorias-high-country/dinner-plain/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/dinner-plain/weather/"
+to = "/victorias-high-country/dinner-plain/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/dinner-plain/stay/"
+to = "/victorias-high-country/dinner-plain/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/dinner-plain/eat/"
+to = "/victorias-high-country/dinner-plain/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/dinner-plain/roads/"
+to = "/victorias-high-country/dinner-plain/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/dinner-plain/transport/"
+to = "/victorias-high-country/dinner-plain/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/dinner-plain/explore/"
+to = "/victorias-high-country/dinner-plain/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/marysville/"
+to = "/victorias-high-country/marysville/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/marysville/weather/"
+to = "/victorias-high-country/marysville/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/marysville/stay/"
+to = "/victorias-high-country/marysville/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/marysville/eat/"
+to = "/victorias-high-country/marysville/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/marysville/roads/"
+to = "/victorias-high-country/marysville/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/marysville/transport/"
+to = "/victorias-high-country/marysville/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/marysville/explore/"
+to = "/victorias-high-country/marysville/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/warburton/"
+to = "/victorias-high-country/warburton/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/warburton/weather/"
+to = "/victorias-high-country/warburton/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/warburton/stay/"
+to = "/victorias-high-country/warburton/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/warburton/eat/"
+to = "/victorias-high-country/warburton/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/warburton/roads/"
+to = "/victorias-high-country/warburton/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/warburton/transport/"
+to = "/victorias-high-country/warburton/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/warburton/explore/"
+to = "/victorias-high-country/warburton/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/omeo/"
+to = "/victorias-high-country/omeo/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/omeo/weather/"
+to = "/victorias-high-country/omeo/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/omeo/stay/"
+to = "/victorias-high-country/omeo/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/omeo/eat/"
+to = "/victorias-high-country/omeo/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/omeo/roads/"
+to = "/victorias-high-country/omeo/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/omeo/transport/"
+to = "/victorias-high-country/omeo/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/omeo/explore/"
+to = "/victorias-high-country/omeo/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/"
+to = "/tasmania/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/mountains/"
+to = "/tasmania/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/stay/"
+to = "/tasmania/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/ben-lomond-base/"
+to = "/tasmania/ben-lomond-base/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/ben-lomond-base/weather/"
+to = "/tasmania/ben-lomond-base/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/ben-lomond-base/stay/"
+to = "/tasmania/ben-lomond-base/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/ben-lomond-base/eat/"
+to = "/tasmania/ben-lomond-base/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/ben-lomond-base/transport/"
+to = "/tasmania/ben-lomond-base/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/ben-lomond-base/explore/"
+to = "/tasmania/ben-lomond-base/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/launceston/"
+to = "/tasmania/launceston/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/launceston/weather/"
+to = "/tasmania/launceston/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/launceston/stay/"
+to = "/tasmania/launceston/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/launceston/eat/"
+to = "/tasmania/launceston/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/launceston/transport/"
+to = "/tasmania/launceston/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/launceston/explore/"
+to = "/tasmania/launceston/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/hobart/"
+to = "/tasmania/hobart/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/hobart/weather/"
+to = "/tasmania/hobart/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/hobart/stay/"
+to = "/tasmania/hobart/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/hobart/eat/"
+to = "/tasmania/hobart/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/hobart/transport/"
+to = "/tasmania/hobart/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/hobart/explore/"
+to = "/tasmania/hobart/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/"
+to = "/yamanouchi/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/mountains/"
+to = "/yamanouchi/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/alerts/"
+to = "/yamanouchi/alerts/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/stay/"
+to = "/yamanouchi/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/yudanaka/"
+to = "/yamanouchi/yudanaka/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/yudanaka/weather/"
+to = "/yamanouchi/yudanaka/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/yudanaka/stay/"
+to = "/yamanouchi/yudanaka/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/yudanaka/eat/"
+to = "/yamanouchi/yudanaka/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/yudanaka/roads/"
+to = "/yamanouchi/yudanaka/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/yudanaka/transport/"
+to = "/yamanouchi/yudanaka/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/yudanaka/explore/"
+to = "/yamanouchi/yudanaka/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/shibu-onsen/"
+to = "/yamanouchi/shibu-onsen/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/shibu-onsen/weather/"
+to = "/yamanouchi/shibu-onsen/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/shibu-onsen/stay/"
+to = "/yamanouchi/shibu-onsen/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/shibu-onsen/eat/"
+to = "/yamanouchi/shibu-onsen/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/shibu-onsen/roads/"
+to = "/yamanouchi/shibu-onsen/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/shibu-onsen/transport/"
+to = "/yamanouchi/shibu-onsen/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/shibu-onsen/explore/"
+to = "/yamanouchi/shibu-onsen/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/yomase/"
+to = "/yamanouchi/yomase/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/yomase/weather/"
+to = "/yamanouchi/yomase/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/yomase/stay/"
+to = "/yamanouchi/yomase/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/yomase/eat/"
+to = "/yamanouchi/yomase/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/yomase/roads/"
+to = "/yamanouchi/yomase/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/yomase/transport/"
+to = "/yamanouchi/yomase/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/yomase/explore/"
+to = "/yamanouchi/yomase/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/nozawa-onsen/"
+to = "/nozawa-onsen/index.html"
+
+[[services.production.rewrites]]
+from = "/nozawa-onsen/mountains/"
+to = "/nozawa-onsen/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/nozawa-onsen/stay/"
+to = "/nozawa-onsen/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/nozawa-onsen/nozawa-onsen-village/"
+to = "/nozawa-onsen/nozawa-onsen-village/index.html"
+
+[[services.production.rewrites]]
+from = "/nozawa-onsen/nozawa-onsen-village/weather/"
+to = "/nozawa-onsen/nozawa-onsen-village/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/nozawa-onsen/nozawa-onsen-village/stay/"
+to = "/nozawa-onsen/nozawa-onsen-village/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/nozawa-onsen/nozawa-onsen-village/eat/"
+to = "/nozawa-onsen/nozawa-onsen-village/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/nozawa-onsen/nozawa-onsen-village/transport/"
+to = "/nozawa-onsen/nozawa-onsen-village/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/nozawa-onsen/nozawa-onsen-village/explore/"
+to = "/nozawa-onsen/nozawa-onsen-village/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/"
+to = "/iiyama/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/mountains/"
+to = "/iiyama/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/stay/"
+to = "/iiyama/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/iiyama/"
+to = "/iiyama/iiyama/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/iiyama/weather/"
+to = "/iiyama/iiyama/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/iiyama/stay/"
+to = "/iiyama/iiyama/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/iiyama/eat/"
+to = "/iiyama/iiyama/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/iiyama/transport/"
+to = "/iiyama/iiyama/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/iiyama/explore/"
+to = "/iiyama/iiyama/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/madarao-kogen/"
+to = "/iiyama/madarao-kogen/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/madarao-kogen/weather/"
+to = "/iiyama/madarao-kogen/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/madarao-kogen/stay/"
+to = "/iiyama/madarao-kogen/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/madarao-kogen/eat/"
+to = "/iiyama/madarao-kogen/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/madarao-kogen/transport/"
+to = "/iiyama/madarao-kogen/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/madarao-kogen/explore/"
+to = "/iiyama/madarao-kogen/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/togari-onsen-village/"
+to = "/iiyama/togari-onsen-village/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/togari-onsen-village/weather/"
+to = "/iiyama/togari-onsen-village/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/togari-onsen-village/stay/"
+to = "/iiyama/togari-onsen-village/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/togari-onsen-village/eat/"
+to = "/iiyama/togari-onsen-village/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/togari-onsen-village/transport/"
+to = "/iiyama/togari-onsen-village/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/togari-onsen-village/explore/"
+to = "/iiyama/togari-onsen-village/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/kijimadaira-village/"
+to = "/iiyama/kijimadaira-village/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/kijimadaira-village/weather/"
+to = "/iiyama/kijimadaira-village/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/kijimadaira-village/stay/"
+to = "/iiyama/kijimadaira-village/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/kijimadaira-village/eat/"
+to = "/iiyama/kijimadaira-village/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/kijimadaira-village/transport/"
+to = "/iiyama/kijimadaira-village/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/kijimadaira-village/explore/"
+to = "/iiyama/kijimadaira-village/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/"
+to = "/hakuba-valley/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/mountains/"
+to = "/hakuba-valley/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/stay/"
+to = "/hakuba-valley/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/hakuba/"
+to = "/hakuba-valley/hakuba/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/hakuba/weather/"
+to = "/hakuba-valley/hakuba/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/hakuba/stay/"
+to = "/hakuba-valley/hakuba/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/hakuba/eat/"
+to = "/hakuba-valley/hakuba/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/hakuba/transport/"
+to = "/hakuba-valley/hakuba/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/hakuba/explore/"
+to = "/hakuba-valley/hakuba/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/otari/"
+to = "/hakuba-valley/otari/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/otari/weather/"
+to = "/hakuba-valley/otari/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/otari/stay/"
+to = "/hakuba-valley/otari/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/otari/eat/"
+to = "/hakuba-valley/otari/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/otari/transport/"
+to = "/hakuba-valley/otari/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/otari/explore/"
+to = "/hakuba-valley/otari/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/omachi/"
+to = "/hakuba-valley/omachi/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/omachi/weather/"
+to = "/hakuba-valley/omachi/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/omachi/stay/"
+to = "/hakuba-valley/omachi/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/omachi/eat/"
+to = "/hakuba-valley/omachi/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/omachi/transport/"
+to = "/hakuba-valley/omachi/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/omachi/explore/"
+to = "/hakuba-valley/omachi/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/"
+to = "/myoko/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/mountains/"
+to = "/myoko/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/stay/"
+to = "/myoko/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/akakura/"
+to = "/myoko/akakura/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/akakura/weather/"
+to = "/myoko/akakura/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/akakura/stay/"
+to = "/myoko/akakura/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/akakura/eat/"
+to = "/myoko/akakura/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/akakura/transport/"
+to = "/myoko/akakura/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/akakura/explore/"
+to = "/myoko/akakura/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/ikenotaira-onsen/"
+to = "/myoko/ikenotaira-onsen/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/ikenotaira-onsen/weather/"
+to = "/myoko/ikenotaira-onsen/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/ikenotaira-onsen/stay/"
+to = "/myoko/ikenotaira-onsen/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/ikenotaira-onsen/eat/"
+to = "/myoko/ikenotaira-onsen/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/ikenotaira-onsen/transport/"
+to = "/myoko/ikenotaira-onsen/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/ikenotaira-onsen/explore/"
+to = "/myoko/ikenotaira-onsen/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/suginosawa/"
+to = "/myoko/suginosawa/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/suginosawa/weather/"
+to = "/myoko/suginosawa/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/suginosawa/stay/"
+to = "/myoko/suginosawa/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/suginosawa/eat/"
+to = "/myoko/suginosawa/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/suginosawa/transport/"
+to = "/myoko/suginosawa/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/suginosawa/explore/"
+to = "/myoko/suginosawa/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/arai/"
+to = "/myoko/arai/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/arai/weather/"
+to = "/myoko/arai/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/arai/stay/"
+to = "/myoko/arai/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/arai/eat/"
+to = "/myoko/arai/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/arai/transport/"
+to = "/myoko/arai/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/arai/explore/"
+to = "/myoko/arai/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/"
+to = "/niseko/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/mountains/"
+to = "/niseko/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/stay/"
+to = "/niseko/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/hirafu/"
+to = "/niseko/hirafu/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/hirafu/weather/"
+to = "/niseko/hirafu/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/hirafu/stay/"
+to = "/niseko/hirafu/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/hirafu/eat/"
+to = "/niseko/hirafu/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/hirafu/transport/"
+to = "/niseko/hirafu/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/hirafu/explore/"
+to = "/niseko/hirafu/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/kutchan/"
+to = "/niseko/kutchan/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/kutchan/weather/"
+to = "/niseko/kutchan/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/kutchan/stay/"
+to = "/niseko/kutchan/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/kutchan/eat/"
+to = "/niseko/kutchan/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/kutchan/transport/"
+to = "/niseko/kutchan/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/kutchan/explore/"
+to = "/niseko/kutchan/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/niseko-town/"
+to = "/niseko/niseko-town/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/niseko-town/weather/"
+to = "/niseko/niseko-town/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/niseko-town/stay/"
+to = "/niseko/niseko-town/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/niseko-town/eat/"
+to = "/niseko/niseko-town/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/niseko-town/transport/"
+to = "/niseko/niseko-town/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/niseko-town/explore/"
+to = "/niseko/niseko-town/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/"
+to = "/yuzawa/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/mountains/"
+to = "/yuzawa/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/stay/"
+to = "/yuzawa/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/echigo-yuzawa/"
+to = "/yuzawa/echigo-yuzawa/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/echigo-yuzawa/weather/"
+to = "/yuzawa/echigo-yuzawa/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/echigo-yuzawa/stay/"
+to = "/yuzawa/echigo-yuzawa/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/echigo-yuzawa/eat/"
+to = "/yuzawa/echigo-yuzawa/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/echigo-yuzawa/transport/"
+to = "/yuzawa/echigo-yuzawa/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/echigo-yuzawa/explore/"
+to = "/yuzawa/echigo-yuzawa/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/ishiuchi/"
+to = "/yuzawa/ishiuchi/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/ishiuchi/weather/"
+to = "/yuzawa/ishiuchi/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/ishiuchi/stay/"
+to = "/yuzawa/ishiuchi/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/ishiuchi/eat/"
+to = "/yuzawa/ishiuchi/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/ishiuchi/transport/"
+to = "/yuzawa/ishiuchi/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/ishiuchi/explore/"
+to = "/yuzawa/ishiuchi/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/mitsumata/"
+to = "/yuzawa/mitsumata/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/mitsumata/weather/"
+to = "/yuzawa/mitsumata/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/mitsumata/stay/"
+to = "/yuzawa/mitsumata/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/mitsumata/eat/"
+to = "/yuzawa/mitsumata/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/mitsumata/transport/"
+to = "/yuzawa/mitsumata/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/mitsumata/explore/"
+to = "/yuzawa/mitsumata/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/queenstown/"
+to = "/queenstown/index.html"
+
+[[services.production.rewrites]]
+from = "/queenstown/mountains/"
+to = "/queenstown/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/queenstown/stay/"
+to = "/queenstown/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/queenstown/queenstown/"
+to = "/queenstown/queenstown/index.html"
+
+[[services.production.rewrites]]
+from = "/queenstown/queenstown/weather/"
+to = "/queenstown/queenstown/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/queenstown/queenstown/stay/"
+to = "/queenstown/queenstown/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/queenstown/queenstown/eat/"
+to = "/queenstown/queenstown/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/queenstown/queenstown/roads/"
+to = "/queenstown/queenstown/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/queenstown/queenstown/transport/"
+to = "/queenstown/queenstown/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/queenstown/queenstown/explore/"
+to = "/queenstown/queenstown/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/wanaka/"
+to = "/wanaka/index.html"
+
+[[services.production.rewrites]]
+from = "/wanaka/mountains/"
+to = "/wanaka/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/wanaka/stay/"
+to = "/wanaka/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/wanaka/wanaka/"
+to = "/wanaka/wanaka/index.html"
+
+[[services.production.rewrites]]
+from = "/wanaka/wanaka/weather/"
+to = "/wanaka/wanaka/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/wanaka/wanaka/stay/"
+to = "/wanaka/wanaka/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/wanaka/wanaka/eat/"
+to = "/wanaka/wanaka/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/wanaka/wanaka/roads/"
+to = "/wanaka/wanaka/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/wanaka/wanaka/transport/"
+to = "/wanaka/wanaka/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/wanaka/wanaka/explore/"
+to = "/wanaka/wanaka/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-hutt/"
+to = "/mt-hutt/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-hutt/mountains/"
+to = "/mt-hutt/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-hutt/stay/"
+to = "/mt-hutt/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-hutt/methven/"
+to = "/mt-hutt/methven/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-hutt/methven/weather/"
+to = "/mt-hutt/methven/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-hutt/methven/stay/"
+to = "/mt-hutt/methven/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-hutt/methven/eat/"
+to = "/mt-hutt/methven/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-hutt/methven/roads/"
+to = "/mt-hutt/methven/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-hutt/methven/transport/"
+to = "/mt-hutt/methven/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-hutt/methven/explore/"
+to = "/mt-hutt/methven/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/ruapehu/"
+to = "/ruapehu/index.html"
+
+[[services.production.rewrites]]
+from = "/ruapehu/mountains/"
+to = "/ruapehu/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/ruapehu/stay/"
+to = "/ruapehu/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/ruapehu/ohakune/"
+to = "/ruapehu/ohakune/index.html"
+
+[[services.production.rewrites]]
+from = "/ruapehu/ohakune/weather/"
+to = "/ruapehu/ohakune/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/ruapehu/ohakune/stay/"
+to = "/ruapehu/ohakune/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/ruapehu/ohakune/eat/"
+to = "/ruapehu/ohakune/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/ruapehu/ohakune/roads/"
+to = "/ruapehu/ohakune/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/ruapehu/ohakune/transport/"
+to = "/ruapehu/ohakune/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/ruapehu/ohakune/explore/"
+to = "/ruapehu/ohakune/explore/index.html"
+
+[[services.production.rewrites]]
 from = "/*"
 to = "/index.html"
 

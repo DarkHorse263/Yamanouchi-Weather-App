@@ -66,6 +66,10 @@ function injectHead(template, title, description, canonical) {
   const d = esc(description);
   const ogImage = `${SITE}/opengraph.jpg`;
   return template
+    // Idempotency: drop any canonical already present (e.g. re-running
+    // prerender over an already-prerendered dist) so pages never carry two
+    // conflicting canonical tags.
+    .replace(/[ \t]*<link rel="canonical"[^>]*>\n?/g, "")
     .replace(/<title>[^<]*<\/title>/, `<title>${t}</title>`)
     .replace(/(<meta name="description" content=")[^"]*(")/i, `$1${d}$2`)
     .replace(/(<meta property="og:title" content=")[^"]*(")/i, `$1${t}$2`)
