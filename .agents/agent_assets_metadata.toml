@@ -521,3 +521,15 @@ id = "TYMyJnvPJKRXCvH02Q_cN"
 uri = "file://exports/feelzlike-partner-mockups.zip"
 type = "unspecified"
 title = "All partner mockups in one download"
+
+[[outputs]]
+id = "-GnEM3zq3TffWhUgnl2Vf"
+uri = "file://exports/town-partner-ad-branded-iiyama-snowball.jpg"
+type = "image"
+title = "Snowball Japan featured partner · iiyama page"
+
+[[outputs]]
+id = "KEYt-Z6Z7AL-08F9lrtVM"
+uri = "file://exports/town-partner-ad-branded-jindabyne-snoexpress.jpg"
+type = "image"
+title = "Snoexpress featured partner · jindabyne page"
