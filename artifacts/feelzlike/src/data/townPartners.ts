@@ -74,3 +74,33 @@ export type TownPartner = {
 export const TOWN_PARTNERS: Record<string, TownPartner> = {
   // Empty · entries are added one line at a time as listing deals sign.
 };
+
+/**
+ * Tag a partner's outbound URL with standard UTM parameters so the
+ * partner's own analytics shows feelzlike as the traffic source · this
+ * is the owner's proof-of-value when a deal comes up for renewal.
+ *
+ *   utm_source   = feelzlike
+ *   utm_medium   = featured-partner
+ *   utm_campaign = <town id>-<placement>   e.g. "jindabyne-ad"
+ *
+ * Existing query params on the partner URL are preserved; their own
+ * utm_* values (if any) are overwritten so the click is always
+ * attributed to this placement. Returns the URL untouched if it fails
+ * to parse · a broken tracker must never break the link.
+ */
+export function withPartnerUtm(
+  url: string,
+  townId: string,
+  placement: "listing" | "ad",
+): string {
+  try {
+    const u = new URL(url);
+    u.searchParams.set("utm_source", "feelzlike");
+    u.searchParams.set("utm_medium", "featured-partner");
+    u.searchParams.set("utm_campaign", `${townId}-${placement}`);
+    return u.toString();
+  } catch {
+    return url;
+  }
+}

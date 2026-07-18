@@ -1,5 +1,6 @@
 import { Handshake, ExternalLink } from "lucide-react";
-import type { TownPartner } from "@/data/townPartners";
+import { withPartnerUtm, type TownPartner } from "@/data/townPartners";
+import { track } from "@/lib/analytics";
 
 /**
  * Paid, disclosed partner card on the town home page.
@@ -12,17 +13,25 @@ import type { TownPartner } from "@/data/townPartners";
  */
 export function TownPartnerCard({
   partner,
+  townId,
   t,
 }: {
   partner: TownPartner;
+  townId: string;
   t: (en: string, ja?: string) => string;
 }) {
   return (
     <section className="mt-3">
       <a
-        href={partner.url}
+        href={withPartnerUtm(partner.url, townId, "listing")}
         target="_blank"
         rel="noopener noreferrer sponsored"
+        onClick={() =>
+          track("partner_click", {
+            category: "affiliate",
+            data: { partner: partner.name, town: townId, placement: "listing" },
+          })
+        }
         className="group flex items-center gap-4 rounded-2xl border border-blue-200 bg-blue-50/50 p-5 transition-all hover:shadow-md hover:border-blue-300"
       >
         <div className="shrink-0 w-11 h-11 rounded-xl inline-flex items-center justify-center bg-blue-100 text-blue-700">

@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Handshake, ExternalLink } from "lucide-react";
-import type { TownPartner } from "@/data/townPartners";
+import { withPartnerUtm, type TownPartner } from "@/data/townPartners";
+import { track } from "@/lib/analytics";
 
 /**
  * Paid, disclosed partner AD BANNER on the town home page · the louder
@@ -18,9 +19,11 @@ import type { TownPartner } from "@/data/townPartners";
  */
 export function TownPartnerAd({
   partner,
+  townId,
   t,
 }: {
   partner: TownPartner;
+  townId: string;
   t: (en: string, ja?: string) => string;
 }) {
   const lines = useMemo(() => {
@@ -76,9 +79,15 @@ export function TownPartnerAd({
   return (
     <section className="mt-4">
       <a
-        href={partner.url}
+        href={withPartnerUtm(partner.url, townId, "ad")}
         target="_blank"
         rel="noopener noreferrer sponsored"
+        onClick={() =>
+          track("partner_click", {
+            category: "affiliate",
+            data: { partner: partner.name, town: townId, placement: "ad" },
+          })
+        }
         className={`group block rounded-2xl p-5 md:px-6 transition-shadow hover:shadow-lg ${
           brand
             ? "border border-slate-200/60"
