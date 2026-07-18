@@ -7,6 +7,7 @@ import { iiyamaRegion } from "./iiyama";
 import { hakubaValleyRegion } from "./hakuba-valley";
 import { myokoRegion } from "./myoko";
 import { nisekoRegion } from "./niseko";
+import { furanoRegion } from "./furano";
 import { yuzawaRegion } from "./yuzawa";
 import { tasmaniaRegion } from "./tasmania";
 import { queenstownRegion } from "./queenstown";
@@ -17,7 +18,8 @@ import { ruapehuRegion } from "./ruapehu";
 // Active region registry · AU: Snowy Mountains + Victoria's High Country
 // + Tasmania (Ben Lomond). JP: Yamanouchi (Shiga Kogen + Kita-Shiga),
 // Nozawa Onsen (standalone), Iiyama (Madarao/Tangram + Togari +
-// Kijimadaira cluster), Hakuba Valley, Myoko, Niseko (first Hokkaido).
+// Kijimadaira cluster), Hakuba Valley, Myoko, Niseko (first Hokkaido),
+// Furano (second Hokkaido · Furano Ski Resort + Kamui + Tomamu).
 // NZ: Queenstown (Coronet Peak + The Remarkables), Wanaka (Cardrona +
 // Treble Cone), Mt Hutt (Methven), Ruapehu (Whakapapa + Turoa, Ohakune).
 export const REGIONS: RegionConfig[] = [
@@ -30,6 +32,7 @@ export const REGIONS: RegionConfig[] = [
   hakubaValleyRegion,
   myokoRegion,
   nisekoRegion,
+  furanoRegion,
   yuzawaRegion,
   queenstownRegion,
   wanakaRegion,
@@ -60,6 +63,7 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "hakuba-valley": "JP",
   "myoko": "JP",
   "niseko": "JP",
+  "furano": "JP",
   "yuzawa": "JP",
   "queenstown": "NZ",
   "wanaka": "NZ",

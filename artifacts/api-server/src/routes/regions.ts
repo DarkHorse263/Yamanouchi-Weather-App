@@ -205,6 +205,25 @@ const REGIONS: RegionConfig[] = [
     sourceLabel: "JMA Seamless",
   },
   {
+    id: "furano",
+    name: "Furano",
+    country: "Japan",
+    countryCode: "JP",
+    region: "Hokkaido",
+    status: "live",
+    href: "/furano/",
+    baseTowns: ["Furano", "Kitanomine"],
+    mountains: ["Furano Ski Resort", "Kamui Ski Links", "Tomamu"],
+    // Headline reading from Furano town (~175m) · the hub town on the
+    // JR Furano Line below the Kitanomine gondola.
+    headlineLabel: "Furano",
+    lat: 43.3420,
+    lon: 142.3833,
+    model: "jma_seamless",
+    timezone: "Asia/Tokyo",
+    sourceLabel: "JMA Seamless",
+  },
+  {
     id: "yuzawa",
     name: "Yuzawa",
     country: "Japan",

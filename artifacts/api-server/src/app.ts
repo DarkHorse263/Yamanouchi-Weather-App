@@ -234,6 +234,13 @@ if (process.env.NODE_ENV === "production") {
         "niseko-town": "Niseko Town",
       },
     },
+    "furano": {
+      name: "Furano",
+      towns: {
+        furano: "Furano",
+        kitanomine: "Kitanomine",
+      },
+    },
     "yuzawa": {
       name: "Yuzawa",
       towns: {

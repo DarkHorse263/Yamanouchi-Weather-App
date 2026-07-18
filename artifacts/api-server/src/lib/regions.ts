@@ -17,6 +17,7 @@ export const REGION_IDS = [
   "hakuba-valley",
   "myoko",
   "niseko",
+  "furano",
   "yuzawa",
   "queenstown",
   "wanaka",
@@ -150,6 +151,16 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "kutchan": "niseko",
   "niseko-town": "niseko",
   "niseko-roads": "niseko",
+
+  // Furano, JP · anchor resort (Furano Ski Resort) plus two powder-belt
+  // day trips (Kamui north toward Asahikawa, Tomamu south-east) across
+  // 2 base towns (Furano town, Kitanomine village).
+  "furano-ski-resort": "furano",
+  "kamui-ski-links": "furano",
+  "tomamu": "furano",
+  "furano": "furano",
+  "kitanomine": "furano",
+  "furano-roads": "furano",
 
   // Yuzawa, JP · 6 mountains (GALA, Yuzawa Kogen and Ishiuchi Maruyama are
   // linked at the top via the Yuzawa Snow Link · Kagura and Naeba linked by

@@ -219,6 +219,16 @@ const LOCATIONS: LocationConfig[] = [
   { id: "annupuri",                  name: "Niseko Annupuri",           latitude: 42.8390, longitude: 140.6570, elevation: 1156, description: "Gentlest of the four united resorts · wide mellow groomers and well-known side-country gates.",              bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
   { id: "moiwa",                     name: "Niseko Moiwa",              latitude: 42.8318, longitude: 140.6479, elevation: 840,  description: "Small independent hill beside Annupuri · quiet lifts and deep snow away from the united crowds.",           bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
 
+  // ─── Furano (Hokkaido, Japan) ────────────────────────────
+  // Second Hokkaido region · Furano Ski Resort is the anchor above
+  // Furano town, with Kamui Ski Links (an hour north toward Asahikawa)
+  // and Hoshino Resorts Tomamu (50 min south-east) as day-trip
+  // siblings. Coordinates are base-area points; elevation is the top
+  // of each resort's lift-served terrain.
+  { id: "furano-ski-resort",         name: "Furano Ski Resort",         latitude: 43.3350, longitude: 142.3610, elevation: 1074, description: "Prince-run flagship of central Hokkaido · two linked zones with about 950 m of vertical, on the Ikon Pass.",  bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "kamui-ski-links",           name: "Kamui Ski Links",           latitude: 43.7090, longitude: 142.1920, elevation: 751,  description: "Asahikawa's local powder hill · relaxed tree skiing and quiet gondola laps at day-ticket prices.",           bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "tomamu",                    name: "Hoshino Resorts Tomamu",    latitude: 43.0580, longitude: 142.6210, elevation: 1239, description: "Hotel-tower resort under Mt Tomamu · groomed cruisers, kids' programmes and the winter Ice Village.",         bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+
   // ─── Yuzawa (Niigata, Japan) ─────────────────────────────
   // Snow country classic 70 minutes from Tokyo by shinkansen · GALA,
   // Yuzawa Kogen and Ishiuchi Maruyama linked at the top (Yuzawa Snow

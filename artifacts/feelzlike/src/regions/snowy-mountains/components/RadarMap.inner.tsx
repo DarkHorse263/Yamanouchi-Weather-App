@@ -64,6 +64,7 @@ export type RegionKey =
   | "hakuba-valley"
   | "myoko"
   | "niseko"
+  | "furano"
   | "yuzawa"
   | "queenstown"
   | "wanaka"
@@ -178,6 +179,18 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       label: "JMA Sapporo",
       imageUrl: null,
       href: "https://www.jma.go.jp/bosai/nowc/#zoom:10/lat:42.86/lon:140.69/colordepth:normal/elements:hrpns",
+      attribution: "Japan Meteorological Agency · JMA",
+    },
+  },
+  // Furano · the anchor resort sits right above Furano town, but Kamui
+  // (an hour north) and Tomamu (50 min south-east) stretch the region
+  // across ~0.65° of latitude, so use a wider zoom-9 centre on the town.
+  "furano": {
+    windy: { lat: 43.34, lon: 142.40, zoom: 9 },
+    official: {
+      label: "JMA Asahikawa",
+      imageUrl: null,
+      href: "https://www.jma.go.jp/bosai/nowc/#zoom:9/lat:43.34/lon:142.40/colordepth:normal/elements:hrpns",
       attribution: "Japan Meteorological Agency · JMA",
     },
   },
@@ -361,6 +374,16 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "niseko-town", name: "Niseko Town", lat: 42.8046, lng: 140.6595, accent: "#0ea5e9" },
     ],
   },
+  "furano": {
+    center: { lat: 43.34, lng: 142.38 },
+    pins: [
+      { id: "furano-ski-resort", name: "Furano Ski Resort", lat: 43.335, lng: 142.361, accent: "#f97316" },
+      { id: "kamui-ski-links", name: "Kamui Ski Links", lat: 43.709, lng: 142.192, accent: "#f97316" },
+      { id: "tomamu", name: "Tomamu", lat: 43.058, lng: 142.621, accent: "#f97316" },
+      { id: "furano", name: "Furano", lat: 43.3420, lng: 142.3833, accent: "#0ea5e9" },
+      { id: "kitanomine", name: "Kitanomine", lat: 43.3400, lng: 142.3655, accent: "#0ea5e9" },
+    ],
+  },
   "yuzawa": {
     center: { lat: 36.89, lng: 138.79 },
     pins: [
@@ -427,6 +450,7 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "hakuba-valley": "JP",
   myoko: "JP",
   niseko: "JP",
+  furano: "JP",
   yuzawa: "JP",
   queenstown: "NZ",
   wanaka: "NZ",
@@ -444,6 +468,7 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "hakuba-valley": "hakuba valley",
   myoko: "myoko",
   niseko: "niseko",
+  furano: "furano",
   yuzawa: "yuzawa",
   queenstown: "queenstown",
   wanaka: "wanaka",

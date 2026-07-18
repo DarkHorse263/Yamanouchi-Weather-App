@@ -27,6 +27,13 @@ Also required, not in that comment:
 - `RadarMap.inner.tsx` keeps its OWN local `RegionKey` union + REGION_CONFIG /
   REGION_DEFAULTS / REGION_COUNTRY / COUNTRY_LABEL / REGION_LABEL (self-contained
   by design — duplicated on purpose).
+- `artifacts/feelzlike/scripts/seo-regions.mjs` — the SEO registry feeding
+  generate-sitemap.mjs, prerender.mjs and generate-rewrites.mjs. Miss it and the
+  new region gets NO sitemap URLs, prerendered snapshots or edge rewrites at the
+  next publish. It's a `.mjs` under `scripts/`, so a `grep -rl` file-set diff
+  limited to `*.ts/*.tsx` under `src/` will NOT catch it — include `scripts/`
+  and `*.mjs` in the completeness check. After adding the block, re-run
+  `node scripts/generate-sitemap.mjs` and `node scripts/generate-rewrites.mjs`.
 - After editing `openapi.yaml` RegionId enum: run
   `pnpm --filter @workspace/api-spec run codegen`.
 

@@ -204,6 +204,23 @@ export const REGIONS = [
     ],
   },
   {
+    slug: "furano",
+    name: "Furano",
+    subtitle: "Hokkaido · Japan",
+    country: "JP",
+    hasAlerts: false,
+    hasRoads: false,
+    mountains: [
+      { name: "Furano Ski Resort",      blurb: "Prince-run flagship of central Hokkaido · two linked zones (Kitanomine and Furano) with about 950 m of vertical, on the Ikon Pass from 2025-26" },
+      { name: "Kamui Ski Links",        blurb: "Asahikawa's local powder hill about an hour north of Furano · relaxed tree-skiing culture and quiet gondola laps at day-ticket prices" },
+      { name: "Hoshino Resorts Tomamu", blurb: "Hotel-tower resort about 50 min south-east of Furano · groomed cruisers off Mt Tomamu, a big kids' programme and the winter Ice Village" },
+    ],
+    towns: [
+      { id: "furano",     name: "Furano",     blurb: "Central Hokkaido's hub town · trains, winter coaches and a 10 minute run up to the ski resort" },
+      { id: "kitanomine", name: "Kitanomine", blurb: "Ski village below the Kitanomine gondola · lodges and izakaya walking distance to the lifts" },
+    ],
+  },
+  {
     slug: "yuzawa",
     name: "Yuzawa",
     subtitle: "Niigata · Japan",

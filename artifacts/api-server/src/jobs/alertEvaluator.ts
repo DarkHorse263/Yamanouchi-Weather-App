@@ -65,6 +65,10 @@ const REGION_ANCHORS: Record<RegionId, {
   // busiest of the four united resorts on Mt Niseko Annupuri, a fair
   // powder proxy for the whole interlinked area.
   "niseko": { lat: 42.8590, lon: 140.6900, elevation: 1200, region: "JP", displayName: "Niseko" },
+  // Furano · anchor on Furano Ski Resort's top terrain (1074m) · the
+  // region's anchor mountain directly above the base towns, a fairer
+  // proxy for visitors than the outlying Kamui or Tomamu day trips.
+  "furano": { lat: 43.3350, lon: 142.3610, elevation: 1074, region: "JP", displayName: "Furano" },
   // Yuzawa · anchor on Kagura's top area (1845m) · the highest and
   // snowiest terrain in the region with the longest season, so it is the
   // fairest single point for powder alerts across the six resorts.

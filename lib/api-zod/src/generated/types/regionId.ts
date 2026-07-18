@@ -22,6 +22,7 @@ export const RegionId = {
   "hakuba-valley": "hakuba-valley",
   myoko: "myoko",
   niseko: "niseko",
+  furano: "furano",
   yuzawa: "yuzawa",
   queenstown: "queenstown",
   wanaka: "wanaka",
