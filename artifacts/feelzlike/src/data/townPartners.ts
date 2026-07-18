@@ -49,6 +49,26 @@ export type TownPartner = {
   /** Extra rotating lines for the "ad" banner (tagline is always first). */
   messages?: string[];
   messagesJa?: string[];
+  /**
+   * Optional partner branding for the "ad" banner so it reads like the
+   * partner's own ad. Without it the banner uses the house blue style.
+   * Colours are plain CSS values from the partner's brand. Logos should
+   * be owner-hosted assets once a deal signs (hotlinks rot).
+   */
+  brand?: {
+    /** Partner logo (transparent PNG best) · rendered in a white chip. */
+    logo?: string;
+    logoAlt?: string;
+    /** Banner background gradient, left → right. */
+    bgFrom: string;
+    bgTo: string;
+    /** "dark" background = light text · "light" background = dark text. */
+    theme: "dark" | "light";
+    /** CTA pill colours. */
+    ctaBg: string;
+    ctaText: string;
+    ctaBorder?: string;
+  };
 };
 
 export const TOWN_PARTNERS: Record<string, TownPartner> = {

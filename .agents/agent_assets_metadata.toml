@@ -497,3 +497,15 @@ id = "m9rUWsmyvUmxalFhyHp0-"
 uri = "file://exports/town-partner-ad-madarao.jpg"
 type = "image"
 title = "Preview · dynamic ad banner under the Madarao Kogen header"
+
+[[outputs]]
+id = "Gq8rUffAA_Z79VRTInAl-"
+uri = "file://exports/town-partner-ad-branded-jindabyne.jpg"
+type = "image"
+title = "Preview · Cooma Coaches branded ad under the Jindabyne header"
+
+[[outputs]]
+id = "njBZAfU4qjoZo_O0eZVZN"
+uri = "file://exports/town-partner-ad-branded-madarao.jpg"
+type = "image"
+title = "Preview · Snowball Japan branded ad under the Madarao Kogen header"
