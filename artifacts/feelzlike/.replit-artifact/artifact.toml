@@ -999,6 +999,66 @@ from = "/niseko/niseko-town/explore/"
 to = "/niseko/niseko-town/explore/index.html"
 
 [[services.production.rewrites]]
+from = "/furano/"
+to = "/furano/index.html"
+
+[[services.production.rewrites]]
+from = "/furano/mountains/"
+to = "/furano/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/furano/stay/"
+to = "/furano/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/furano/furano/"
+to = "/furano/furano/index.html"
+
+[[services.production.rewrites]]
+from = "/furano/furano/weather/"
+to = "/furano/furano/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/furano/furano/stay/"
+to = "/furano/furano/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/furano/furano/eat/"
+to = "/furano/furano/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/furano/furano/transport/"
+to = "/furano/furano/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/furano/furano/explore/"
+to = "/furano/furano/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/furano/kitanomine/"
+to = "/furano/kitanomine/index.html"
+
+[[services.production.rewrites]]
+from = "/furano/kitanomine/weather/"
+to = "/furano/kitanomine/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/furano/kitanomine/stay/"
+to = "/furano/kitanomine/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/furano/kitanomine/eat/"
+to = "/furano/kitanomine/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/furano/kitanomine/transport/"
+to = "/furano/kitanomine/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/furano/kitanomine/explore/"
+to = "/furano/kitanomine/explore/index.html"
+
+[[services.production.rewrites]]
 from = "/yuzawa/"
 to = "/yuzawa/index.html"
 

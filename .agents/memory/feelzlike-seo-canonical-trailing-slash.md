@@ -61,7 +61,11 @@ as sitemap/prerender. Catch-all stays LAST so unprerendered client routes
 **Drift footgun:** adding a region/town updates sitemap + prerender
 automatically at build, but NOT artifact.toml — rerun generate-rewrites.mjs
 and refresh the rewrites block via verifyAndReplaceArtifactToml, or the new
-pages silently regress to homepage HTML.
+pages silently regress to homepage HTML. This BIT US for Furano (July 2026):
+generate-rewrites.mjs was run but its stdout was never spliced into
+artifact.toml, so all 15 furano sitemap URLs shipped serving homepage
+canonical → GSC "Alternative page with proper canonical tag" emails within a
+day. Running the script does nothing by itself — it only prints.
 
 Related: `feelzlike-prerender-flash.md` (the `#seo-prerender` snapshot mechanism),
 `feelzlike-deploy-sentry-noise.md` (deploy topology; Sentry sourcemap-upload error

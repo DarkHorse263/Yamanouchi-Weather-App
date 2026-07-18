@@ -33,7 +33,13 @@ Also required, not in that comment:
   next publish. It's a `.mjs` under `scripts/`, so a `grep -rl` file-set diff
   limited to `*.ts/*.tsx` under `src/` will NOT catch it — include `scripts/`
   and `*.mjs` in the completeness check. After adding the block, re-run
-  `node scripts/generate-sitemap.mjs` and `node scripts/generate-rewrites.mjs`.
+  `node scripts/generate-sitemap.mjs`, AND — critical — splice the output of
+  `node scripts/generate-rewrites.mjs` into
+  `.replit-artifact/artifact.toml` (the script only PRINTS the block to
+  stdout, it writes nothing; running it is not enough). Missing rewrites =
+  the edge catch-all serves homepage HTML (homepage canonical/title) for every
+  new-region URL in production → GSC "Alternative page with proper canonical
+  tag" on sitemap URLs. Then re-publish.
 - After editing `openapi.yaml` RegionId enum: run
   `pnpm --filter @workspace/api-spec run codegen`.
 
