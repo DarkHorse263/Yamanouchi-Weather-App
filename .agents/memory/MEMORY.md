@@ -57,4 +57,4 @@
 - [feelzlike AMeDAS observed snow](feelzlike-amedas-observed-snow.md) — JMA drops snow keys OUT OF SEASON (missing ≠ 0, must be null); 25km + elevation-penalty station pick; fail-soft into town-weather.
 - [feelzlike Japan bible xlsx](feelzlike-japan-bible.md) — user's 558-resort master sheet in attached_assets; truth-tested July 2026; largely accurate but has KNOWN wrong rows (list inside) — verify any row before it feeds the app.
 - [feelzlike competitor snow reports](feelzlike-competitor-snow-reports.md) — AU: SnowsBest=MetraWeather once-daily+journalist; JP: SnowJapan human base observers + resort feeds; gaps: reported numbers, lifts-open, daily digest, JP=AMeDAS depth + JMA radar tab.
-- [feelzlike partner placements](feelzlike-partner-placements.md) — `partner:true` / townPartners entry = PAID disclosed badge + rel=sponsored; `featured` alone = editorial; never flag without a signed deal.
+- [feelzlike partner placements](feelzlike-partner-placements.md) — `partner:true` / townPartners entry = PAID disclosed badge + rel=sponsored; never flag without a signed deal.

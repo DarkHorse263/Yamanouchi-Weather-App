@@ -485,3 +485,15 @@ id = "6RXR4AVzMy4wod8KiUdeV"
 uri = "file://exports/town-partner-preview-madarao.jpg"
 type = "image"
 title = "Preview · Snowball stay partner on the Madarao Kogen town page"
+
+[[outputs]]
+id = "NVXZ_LKVBB610KyKAh07X"
+uri = "file://exports/town-partner-ad-jindabyne.jpg"
+type = "image"
+title = "Preview · dynamic ad banner under the Jindabyne header"
+
+[[outputs]]
+id = "m9rUWsmyvUmxalFhyHp0-"
+uri = "file://exports/town-partner-ad-madarao.jpg"
+type = "image"
+title = "Preview · dynamic ad banner under the Madarao Kogen header"

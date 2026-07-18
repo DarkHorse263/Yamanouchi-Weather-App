@@ -38,6 +38,17 @@ export type TownPartner = {
   /** Link label, e.g. "Browse stays" / "Book a seat". */
   cta: string;
   ctaJa?: string;
+  /**
+   * How the placement renders on the town home page:
+   *  - "listing" (default) · quiet card between the weather panel and
+   *    the section tiles.
+   *  - "ad" · branded banner directly under the town header that
+   *    rotates through `messages`. Same disclosure rules apply.
+   */
+  display?: "listing" | "ad";
+  /** Extra rotating lines for the "ad" banner (tagline is always first). */
+  messages?: string[];
+  messagesJa?: string[];
 };
 
 export const TOWN_PARTNERS: Record<string, TownPartner> = {

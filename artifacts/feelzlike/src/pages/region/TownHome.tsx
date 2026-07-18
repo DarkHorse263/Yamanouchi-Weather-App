@@ -34,6 +34,7 @@ import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
 import { DailyPick } from "@/components/DailyPick";
 import { FavouriteStar } from "@/components/FavouriteStar";
 import { TownPartnerCard } from "@/components/TownPartnerCard";
+import { TownPartnerAd } from "@/components/TownPartnerAd";
 import { TOWN_PARTNERS } from "@/data/townPartners";
 
 function haversineKm(a: { lat: number; lng: number }, b: { lat: number; lng: number }): number {
@@ -357,6 +358,13 @@ export function TownHome() {
         badge={<LiveBadge tone="onDark" label={t("Live", "ライブ")} />}
       />
 
+      {/* FEATURED PARTNER · AD BANNER variant. Paid, disclosed placement
+          directly under the town header · only renders when this town has
+          an active signed deal with display:"ad" in data/townPartners.ts. */}
+      {TOWN_PARTNERS[town.id]?.display === "ad" && (
+        <TownPartnerAd partner={TOWN_PARTNERS[town.id]} t={t} />
+      )}
+
       {/* SAVE TO FAVOURITES · pins this town to the landing quick-access
           list (up to 3). Sits right under the header so it reads as an
           action on the town you're looking at. */}
@@ -470,11 +478,10 @@ export function TownHome() {
       </section>
       )}
 
-      {/* FEATURED PARTNER · paid, disclosed placement. Only renders when
-          this town has an active signed deal in data/townPartners.ts ·
-          sits below the live weather content (weather is the product,
-          never displaced) and above the section tiles. */}
-      {TOWN_PARTNERS[town.id] && (
+      {/* FEATURED PARTNER · LISTING variant (default). Paid, disclosed
+          placement below the live weather content and above the section
+          tiles. Skipped when the deal uses the ad banner above. */}
+      {TOWN_PARTNERS[town.id] && TOWN_PARTNERS[town.id].display !== "ad" && (
         <TownPartnerCard partner={TOWN_PARTNERS[town.id]} t={t} />
       )}
 
