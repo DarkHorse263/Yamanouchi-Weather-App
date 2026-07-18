@@ -473,3 +473,15 @@ id = "SGExbUVPcboTzrpYxWwGZ"
 uri = "file://exports/featured-partner-preview.jpg"
 type = "image"
 title = "Preview · how a featured partner looks in the app"
+
+[[outputs]]
+id = "3Kd32njipxREwCsWVPQtB"
+uri = "file://exports/town-partner-preview-jindabyne.jpg"
+type = "image"
+title = "Preview · transport partner on the Jindabyne town page"
+
+[[outputs]]
+id = "6RXR4AVzMy4wod8KiUdeV"
+uri = "file://exports/town-partner-preview-madarao.jpg"
+type = "image"
+title = "Preview · Snowball stay partner on the Madarao Kogen town page"

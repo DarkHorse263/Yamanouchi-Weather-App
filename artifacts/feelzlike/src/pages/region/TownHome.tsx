@@ -33,6 +33,8 @@ import { PageMeta } from "@/lib/seo/PageMeta";
 import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
 import { DailyPick } from "@/components/DailyPick";
 import { FavouriteStar } from "@/components/FavouriteStar";
+import { TownPartnerCard } from "@/components/TownPartnerCard";
+import { TOWN_PARTNERS } from "@/data/townPartners";
 
 function haversineKm(a: { lat: number; lng: number }, b: { lat: number; lng: number }): number {
   const R = 6371;
@@ -466,6 +468,14 @@ export function TownHome() {
           )}
         </div>
       </section>
+      )}
+
+      {/* FEATURED PARTNER · paid, disclosed placement. Only renders when
+          this town has an active signed deal in data/townPartners.ts ·
+          sits below the live weather content (weather is the product,
+          never displaced) and above the section tiles. */}
+      {TOWN_PARTNERS[town.id] && (
+        <TownPartnerCard partner={TOWN_PARTNERS[town.id]} t={t} />
       )}
 
       {/* SECTIONS - vertical stack in the order the brief specifies. */}
