@@ -449,3 +449,27 @@ id = "I7xo6KiGDjDQ6EdvpWk_X"
 uri = "file://JAPAN_ROLLOUT.md"
 type = "text"
 title = "feelzlike · Japan rollout one-pager"
+
+[[outputs]]
+id = "LN6cWVExWNYevHJHP7QXH"
+uri = "file://exports/feelzlike-listing-deals-overview.pdf"
+type = "pdf"
+title = "Your playbook · how to respond (private)"
+
+[[outputs]]
+id = "2hNLFUdGfd1JkCLBGR0FI"
+uri = "file://exports/feelzlike-rate-card.pdf"
+type = "pdf"
+title = "Rate card · send to operators"
+
+[[outputs]]
+id = "DZd9uyIT0nJmXlQG2lqcy"
+uri = "file://exports/feelzlike-listing-agreement-template.pdf"
+type = "pdf"
+title = "One-page agreement template"
+
+[[outputs]]
+id = "SGExbUVPcboTzrpYxWwGZ"
+uri = "file://exports/featured-partner-preview.jpg"
+type = "image"
+title = "Preview · how a featured partner looks in the app"

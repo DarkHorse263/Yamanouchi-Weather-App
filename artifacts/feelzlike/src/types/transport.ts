@@ -70,6 +70,15 @@ export interface TransportProvider {
    */
   featured?: boolean;
   /**
+   * When true, this operator holds a PAID featured-listing deal. Renders a
+   * disclosed "Featured partner" label wherever the operator is spotlighted
+   * and switches its outbound links to rel="sponsored". Only ever set while
+   * a signed listing agreement is active - never as an editorial favour, and
+   * never removed from competitors because someone else paid. Editorial
+   * spotlights use `featured` alone.
+   */
+  partner?: boolean;
+  /**
    * Regions this provider serves. The regionGuard rejects any record where
    * this array does not include the active region - the core anti-leak
    * mechanism.

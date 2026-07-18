@@ -11,6 +11,7 @@ import {
   ExternalLink,
   Clock,
   Ticket,
+  Handshake,
 } from "lucide-react";
 
 import {
@@ -122,6 +123,12 @@ export function SnowyTransport() {
                 />
               </div>
               <div className="min-w-0 flex-1">
+                {cooma.partner && (
+                  <p className="text-[11px] font-bold tracking-wider text-blue-700 uppercase inline-flex items-center gap-1 mb-0.5">
+                    <Handshake className="w-3 h-3" />
+                    {t("Featured partner", "提携パートナー")}
+                  </p>
+                )}
                 <h2 className="font-display font-semibold text-2xl text-foreground">
                   {cooma.name}
                 </h2>
@@ -151,7 +158,7 @@ export function SnowyTransport() {
                     <a
                       href={cooma.website}
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel={cooma.partner ? "noopener noreferrer sponsored" : "noopener noreferrer"}
                       className="inline-flex items-center gap-1.5 font-semibold text-foreground hover:text-blue-700"
                     >
                       <Globe className="w-4 h-4 text-blue-700" />
@@ -190,7 +197,7 @@ export function SnowyTransport() {
                       <a
                         href={SNOWY_MTNS_BUS_URL}
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel={cooma?.partner ? "noopener noreferrer sponsored" : "noopener noreferrer"}
                         className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-800"
                       >
                         <CalendarCheck className="w-4 h-4" />
@@ -386,7 +393,7 @@ function ProviderCard({
           <a
             href={provider.website}
             target="_blank"
-            rel="noopener noreferrer"
+            rel={provider.partner ? "noopener noreferrer sponsored" : "noopener noreferrer"}
             className="inline-flex items-center gap-1.5 text-foreground hover:text-primary transition-colors"
           >
             <Globe className="w-4 h-4 text-primary" />
@@ -397,7 +404,7 @@ function ProviderCard({
           <a
             href={provider.schedule_url}
             target="_blank"
-            rel="noopener noreferrer"
+            rel={provider.partner ? "noopener noreferrer sponsored" : "noopener noreferrer"}
             className="inline-flex items-center gap-1.5 text-foreground hover:text-primary transition-colors"
           >
             <CalendarCheck className="w-4 h-4 text-primary" />

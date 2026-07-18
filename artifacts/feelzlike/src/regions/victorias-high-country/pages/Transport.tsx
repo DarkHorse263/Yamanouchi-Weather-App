@@ -10,6 +10,7 @@ import {
   Footprints,
   ExternalLink,
   Info,
+  Handshake,
 } from "lucide-react";
 
 import {
@@ -236,7 +237,7 @@ export function VictoriasHighCountryTransport() {
                     <a
                       href={vline.website}
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel={vline.partner ? "noopener noreferrer sponsored" : "noopener noreferrer"}
                       className="inline-flex items-center gap-1.5 font-semibold text-foreground hover:text-purple-700"
                     >
                       <Globe className="w-4 h-4 text-purple-700" />
@@ -248,7 +249,7 @@ export function VictoriasHighCountryTransport() {
                     <a
                       href={vline.schedule_url}
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel={vline.partner ? "noopener noreferrer sponsored" : "noopener noreferrer"}
                       className="inline-flex items-center gap-1.5 font-semibold text-foreground hover:text-purple-700"
                     >
                       <CalendarCheck className="w-4 h-4 text-purple-700" />
@@ -280,6 +281,12 @@ export function VictoriasHighCountryTransport() {
                       )
                     : t("Local mountain coach", "地元スキーバス")}
                 </p>
+                {hero.partner && (
+                  <p className="text-[11px] font-bold tracking-wider text-blue-700 uppercase inline-flex items-center gap-1 mt-1">
+                    <Handshake className="w-3 h-3" />
+                    {t("Featured partner", "提携パートナー")}
+                  </p>
+                )}
                 <h2 className="font-display font-semibold text-2xl text-foreground mt-0.5">
                   {hero.name}
                 </h2>
@@ -304,7 +311,7 @@ export function VictoriasHighCountryTransport() {
                     <a
                       href={hero.website}
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel={hero.partner ? "noopener noreferrer sponsored" : "noopener noreferrer"}
                       className="inline-flex items-center gap-1.5 font-semibold text-foreground hover:text-blue-700"
                     >
                       <Globe className="w-4 h-4 text-blue-700" />
@@ -316,7 +323,7 @@ export function VictoriasHighCountryTransport() {
                     <a
                       href={hero.schedule_url}
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel={hero.partner ? "noopener noreferrer sponsored" : "noopener noreferrer"}
                       className="inline-flex items-center gap-1.5 font-semibold text-foreground hover:text-blue-700"
                     >
                       <CalendarCheck className="w-4 h-4 text-blue-700" />
@@ -348,6 +355,12 @@ export function VictoriasHighCountryTransport() {
                     "メルボルン発スキーバス · 冬季",
                   )}
                 </p>
+                {multiResortHero.partner && (
+                  <p className="text-[11px] font-bold tracking-wider text-sky-700 uppercase inline-flex items-center gap-1 mt-1">
+                    <Handshake className="w-3 h-3" />
+                    {t("Featured partner", "提携パートナー")}
+                  </p>
+                )}
                 <h2 className="font-display font-semibold text-2xl text-foreground mt-0.5">
                   {multiResortHero.name}
                 </h2>
@@ -369,7 +382,7 @@ export function VictoriasHighCountryTransport() {
                     <a
                       href={multiResortHero.website}
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel={multiResortHero.partner ? "noopener noreferrer sponsored" : "noopener noreferrer"}
                       className="inline-flex items-center gap-1.5 font-semibold text-foreground hover:text-sky-700"
                     >
                       <Globe className="w-4 h-4 text-sky-700" />
@@ -519,7 +532,7 @@ function ProviderCard({
           <a
             href={provider.website}
             target="_blank"
-            rel="noopener noreferrer"
+            rel={provider.partner ? "noopener noreferrer sponsored" : "noopener noreferrer"}
             className="inline-flex items-center gap-1.5 text-foreground hover:text-primary transition-colors"
           >
             <Globe className="w-4 h-4 text-primary" />
@@ -530,7 +543,7 @@ function ProviderCard({
           <a
             href={provider.schedule_url}
             target="_blank"
-            rel="noopener noreferrer"
+            rel={provider.partner ? "noopener noreferrer sponsored" : "noopener noreferrer"}
             className="inline-flex items-center gap-1.5 text-foreground hover:text-primary transition-colors"
           >
             <CalendarCheck className="w-4 h-4 text-primary" />

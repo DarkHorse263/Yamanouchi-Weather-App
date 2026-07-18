@@ -5,9 +5,10 @@ description: How the press-release / overview / partner-intro PDFs are generated
 
 # feelzlike generated marketing docs
 
-Two tsx scripts under `artifacts/api-server/src/scripts/` render branded PDFs via puppeteer into the repo-root `exports/`:
+Three tsx scripts under `artifacts/api-server/src/scripts/` render branded PDFs via puppeteer into the repo-root `exports/`:
 - `build-press-release.ts` -> `feelzlike-press-release.pdf`
-- `build-overview-pdfs.ts` -> `feelzlike-user-overview.pdf`, `feelzlike-investor-overview.pdf`, `feelzlike-partner-overview.pdf` (partner/industry intro is the newest, tag "Industry & partners").
+- `build-overview-pdfs.ts` -> `feelzlike-user-overview.pdf`, `feelzlike-investor-overview.pdf`, `feelzlike-partner-overview.pdf` (partner/industry intro, tag "Industry & partners").
+- `build-partner-docs.ts` -> listing-deals playbook, rate card, agreement template. These are PRIVATE owner docs: exports/ only, NEVER copied to public/downloads (see feelzlike-partner-placements.md).
 
 ## How to run
 - Scripts are NOT wired into package.json. Run each with `pnpm --filter @workspace/api-server exec tsx src/scripts/<file>.ts`.

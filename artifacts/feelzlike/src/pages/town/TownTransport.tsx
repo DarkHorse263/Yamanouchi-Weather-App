@@ -13,6 +13,7 @@ import {
   Route,
   ArrowUpRight,
   Star,
+  Handshake,
 } from "lucide-react";
 import {
   useRegion,
@@ -252,6 +253,10 @@ function typeIcon(type: TransportProvider["type"]) {
 }
 
 function ProviderLinks({ provider, t }: { provider: TransportProvider; t: Translate }) {
+  // Paid partners get rel="sponsored" on outbound links (disclosure).
+  const rel = provider.partner
+    ? "noopener noreferrer sponsored"
+    : "noopener noreferrer";
   return (
     <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
       {provider.phone && (
@@ -267,7 +272,7 @@ function ProviderLinks({ provider, t }: { provider: TransportProvider; t: Transl
         <a
           href={provider.website}
           target="_blank"
-          rel="noopener noreferrer"
+          rel={rel}
           className="inline-flex items-center gap-1.5 text-foreground hover:text-primary transition-colors"
         >
           <Globe className="w-4 h-4 text-primary" />
@@ -278,7 +283,7 @@ function ProviderLinks({ provider, t }: { provider: TransportProvider; t: Transl
         <a
           href={provider.schedule_url}
           target="_blank"
-          rel="noopener noreferrer"
+          rel={rel}
           className="inline-flex items-center gap-1.5 text-foreground hover:text-primary transition-colors"
         >
           <CalendarCheck className="w-4 h-4 text-primary" />
@@ -290,7 +295,7 @@ function ProviderLinks({ provider, t }: { provider: TransportProvider; t: Transl
           key={link.href}
           href={link.href}
           target="_blank"
-          rel="noopener noreferrer"
+          rel={rel}
           className="inline-flex items-center gap-1.5 text-foreground hover:text-primary transition-colors"
         >
           <ArrowUpRight className="w-4 h-4 text-primary" />
@@ -324,8 +329,17 @@ function FeaturedProviderCard({
         </div>
         <div className="min-w-0 flex-1">
           <p className="text-[11px] font-bold tracking-wider text-primary uppercase inline-flex items-center gap-1">
-            <Star className="w-3 h-3" />
-            {t("Featured", "おすすめ")}
+            {provider.partner ? (
+              <>
+                <Handshake className="w-3 h-3" />
+                {t("Featured partner", "提携パートナー")}
+              </>
+            ) : (
+              <>
+                <Star className="w-3 h-3" />
+                {t("Featured", "おすすめ")}
+              </>
+            )}
           </p>
           <h3 className="font-display font-semibold text-xl text-foreground leading-tight mt-0.5">
             {provider.name_local
