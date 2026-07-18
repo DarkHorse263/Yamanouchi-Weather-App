@@ -32,3 +32,7 @@ Three tsx scripts under `artifacts/api-server/src/scripts/` render branded PDFs 
 
 ## Voice scan before done
 Run `pdftotext -layout <pdf> -` and grep for em/en dashes (`—|–`) plus stale terms. The press-release end marker must be `ENDS` (no flanking em dashes).
+
+## Delivery to the owner: ZIP download, never the PDF preview pane
+**Why:** owner repeatedly reported "blank screens" opening generated PDFs (July 2026). The files were verified intact (pdftotext + pdftoppm page render showed full content) · the failure is the workspace/chat PDF preview, not the documents.
+**How to apply:** always hand PDFs over as a zip via present_asset ("download and open on your computer"). For quick in-browser viewing, copy PDFs into `.canvas/assets/` and give `https://<domain>:5904/<file>.pdf` links (native browser PDF viewer, works while the workspace runs).
