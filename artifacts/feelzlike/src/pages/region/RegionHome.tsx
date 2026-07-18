@@ -11,6 +11,9 @@ import { REGION_COUNTRY, COUNTRY_META } from "@/regions";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { breadcrumbSchema } from "@/lib/seo/jsonLd";
 import { DailyPick } from "@/components/DailyPick";
+import { REGION_PARTNERS } from "@/data/townPartners";
+import { TownPartnerAd } from "@/components/TownPartnerAd";
+import { TownPartnerCard } from "@/components/TownPartnerCard";
 
 /**
  * Region landing - the second hop in the Country > Region > Town flow.
@@ -67,6 +70,16 @@ export function RegionHome() {
         title={region.name}
         description={t("Pick a base town to see weather, roads and cams scoped to where you stay.", "拠点の町を選んでください。天気・道路・カメラが滞在エリアに合わせて表示されます。")}
       />
+
+      {/* FEATURED PARTNER · paid, disclosed region-level placement directly
+          under the region header. Only renders when this region has an
+          active signed deal in data/townPartners.ts (REGION_PARTNERS) ·
+          same honesty rules as the town-page surface. */}
+      {REGION_PARTNERS[region.id]?.display === "ad" ? (
+        <TownPartnerAd partner={REGION_PARTNERS[region.id]} placeId={region.id} t={t} />
+      ) : REGION_PARTNERS[region.id] ? (
+        <TownPartnerCard partner={REGION_PARTNERS[region.id]} placeId={region.id} t={t} />
+      ) : null}
 
       {showDailyPick && (
         <div className="mt-6">

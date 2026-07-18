@@ -533,3 +533,15 @@ id = "KEYt-Z6Z7AL-08F9lrtVM"
 uri = "file://exports/town-partner-ad-branded-jindabyne-snoexpress.jpg"
 type = "image"
 title = "Snoexpress featured partner · jindabyne page"
+
+[[outputs]]
+id = "M7kqY8fui_2x-Seh5ZcW0"
+uri = "file://exports/region-partner-ad-iiyama-snowball.jpg"
+type = "image"
+title = "Snowball Japan featured partner · iiyama region page"
+
+[[outputs]]
+id = "k4xkpoyI0EmZVKKiEkJ1g"
+uri = "file://exports/region-partner-ad-snowy-mountains-snoexpress.jpg"
+type = "image"
+title = "Snoexpress featured partner · snowy mountains region page"

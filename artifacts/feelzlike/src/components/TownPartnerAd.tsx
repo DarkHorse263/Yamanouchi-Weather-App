@@ -19,11 +19,12 @@ import { track } from "@/lib/analytics";
  */
 export function TownPartnerAd({
   partner,
-  townId,
+  placeId,
   t,
 }: {
   partner: TownPartner;
-  townId: string;
+  /** Town id or region id · keys the UTM campaign and the click event. */
+  placeId: string;
   t: (en: string, ja?: string) => string;
 }) {
   const lines = useMemo(() => {
@@ -79,13 +80,13 @@ export function TownPartnerAd({
   return (
     <section className="mt-4">
       <a
-        href={withPartnerUtm(partner.url, townId, "ad")}
+        href={withPartnerUtm(partner.url, placeId, "ad")}
         target="_blank"
         rel="noopener noreferrer sponsored"
         onClick={() =>
           track("partner_click", {
             category: "affiliate",
-            data: { partner: partner.name, town: townId, placement: "ad" },
+            data: { partner: partner.name, place: placeId, placement: "ad" },
           })
         }
         className={`group block rounded-2xl p-5 md:px-6 transition-shadow hover:shadow-lg ${

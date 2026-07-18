@@ -76,13 +76,26 @@ export const TOWN_PARTNERS: Record<string, TownPartner> = {
 };
 
 /**
+ * Region-page featured partners · same product sold one level up.
+ * Keyed by region id (e.g. "iiyama", "snowy-mountains") and rendered
+ * directly under the region header on the base-town picker page.
+ * Identical honesty rules: empty until a deal signs, one partner per
+ * region, disclosure label always visible, link rel="sponsored".
+ */
+export const REGION_PARTNERS: Record<string, TownPartner> = {
+  // Empty · entries are added one line at a time as listing deals sign.
+};
+
+/**
  * Tag a partner's outbound URL with standard UTM parameters so the
  * partner's own analytics shows feelzlike as the traffic source · this
  * is the owner's proof-of-value when a deal comes up for renewal.
  *
  *   utm_source   = feelzlike
  *   utm_medium   = featured-partner
- *   utm_campaign = <town id>-<placement>   e.g. "jindabyne-ad"
+ *   utm_campaign = <place id>-<placement>  e.g. "jindabyne-ad" · the
+ *                  place id is the town id or, for region-page deals,
+ *                  the region id.
  *
  * Existing query params on the partner URL are preserved; their own
  * utm_* values (if any) are overwritten so the click is always
@@ -91,14 +104,14 @@ export const TOWN_PARTNERS: Record<string, TownPartner> = {
  */
 export function withPartnerUtm(
   url: string,
-  townId: string,
+  placeId: string,
   placement: "listing" | "ad",
 ): string {
   try {
     const u = new URL(url);
     u.searchParams.set("utm_source", "feelzlike");
     u.searchParams.set("utm_medium", "featured-partner");
-    u.searchParams.set("utm_campaign", `${townId}-${placement}`);
+    u.searchParams.set("utm_campaign", `${placeId}-${placement}`);
     return u.toString();
   } catch {
     return url;

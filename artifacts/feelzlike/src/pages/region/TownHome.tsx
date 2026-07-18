@@ -362,7 +362,7 @@ export function TownHome() {
           directly under the town header · only renders when this town has
           an active signed deal with display:"ad" in data/townPartners.ts. */}
       {TOWN_PARTNERS[town.id]?.display === "ad" && (
-        <TownPartnerAd partner={TOWN_PARTNERS[town.id]} townId={town.id} t={t} />
+        <TownPartnerAd partner={TOWN_PARTNERS[town.id]} placeId={town.id} t={t} />
       )}
 
       {/* SAVE TO FAVOURITES · pins this town to the landing quick-access
@@ -482,7 +482,7 @@ export function TownHome() {
           placement below the live weather content and above the section
           tiles. Skipped when the deal uses the ad banner above. */}
       {TOWN_PARTNERS[town.id] && TOWN_PARTNERS[town.id].display !== "ad" && (
-        <TownPartnerCard partner={TOWN_PARTNERS[town.id]} townId={town.id} t={t} />
+        <TownPartnerCard partner={TOWN_PARTNERS[town.id]} placeId={town.id} t={t} />
       )}
 
       {/* SECTIONS - vertical stack in the order the brief specifies. */}

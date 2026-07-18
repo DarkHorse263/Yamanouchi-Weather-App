@@ -13,23 +13,24 @@ import { track } from "@/lib/analytics";
  */
 export function TownPartnerCard({
   partner,
-  townId,
+  placeId,
   t,
 }: {
   partner: TownPartner;
-  townId: string;
+  /** Town id or region id · keys the UTM campaign and the click event. */
+  placeId: string;
   t: (en: string, ja?: string) => string;
 }) {
   return (
     <section className="mt-3">
       <a
-        href={withPartnerUtm(partner.url, townId, "listing")}
+        href={withPartnerUtm(partner.url, placeId, "listing")}
         target="_blank"
         rel="noopener noreferrer sponsored"
         onClick={() =>
           track("partner_click", {
             category: "affiliate",
-            data: { partner: partner.name, town: townId, placement: "listing" },
+            data: { partner: partner.name, place: placeId, placement: "listing" },
           })
         }
         className="group flex items-center gap-4 rounded-2xl border border-blue-200 bg-blue-50/50 p-5 transition-all hover:shadow-md hover:border-blue-300"
