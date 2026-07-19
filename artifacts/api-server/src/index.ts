@@ -32,4 +32,10 @@ app.listen(port, () => {
   import("./jobs/alertEvaluator.js")
     .then((m) => m.startAlertCron())
     .catch((err) => console.error("[boot] failed to start alert cron:", err));
+  // Daily production smoke test (site up, canonicals intact, dead outbound
+  // links) - emails the owner on failure. RUN_SMOKE_CRON=1 enables the
+  // autoscale-safe DB-claimed scheduler (see smokeTest.ts header).
+  import("./jobs/smokeTest.js")
+    .then((m) => m.startSmokeCron())
+    .catch((err) => console.error("[boot] failed to start smoke cron:", err));
 });

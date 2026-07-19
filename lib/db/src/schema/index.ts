@@ -9,3 +9,4 @@ export * from "./newsletter";
 export * from "./auth";
 export * from "./news-clicks";
 export * from "./newsletter-campaigns";
+export * from "./jobs";
