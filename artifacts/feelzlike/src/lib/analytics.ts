@@ -75,6 +75,7 @@ export type AnalyticsCategory =
   | "affiliate"
   | "alert"
   | "weather"
+  | "install"
   | "ui";
 
 export interface TrackOptions {

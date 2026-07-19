@@ -14,6 +14,7 @@ import { OfflineBanner } from "@/components/OfflineBanner";
 import { PullToRefresh } from "@/components/PullToRefresh";
 import { AppErrorBoundary } from "@/components/AppErrorBoundary";
 import { identifyAnonUser, track } from "@/lib/analytics";
+import { isStandaloneMode } from "@/lib/registerSW";
 import { useEffect, useRef } from "react";
 import { useLocation } from "wouter";
 import AlertsVerify from "@/pages/alerts/Verify";
@@ -83,6 +84,10 @@ function Router() {
   );
 }
 
+// Module-level once-guard so pwa_launch fires at most once per page load,
+// even if AnalyticsBridge remounts (e.g. React StrictMode in dev).
+const pwaLaunchTracked = { tracked: false };
+
 /**
  * Bridges the ConsentProvider into the analytics layer + records page-view
  * breadcrumbs. Mounted inside ConsentProvider so it can read the choice and
@@ -96,6 +101,28 @@ function AnalyticsBridge() {
   useEffect(() => {
     identifyAnonUser({ analyticsConsent: !!consent.choices?.analytics });
   }, [consent.choices?.analytics]);
+
+  // PWA adoption measurement (consent-gated like every other event):
+  //  - pwa_launch: fired once per app load when running from the home screen
+  //    (display-mode standalone). Works on iOS too, which has no install
+  //    event - unique users on this event = the active installed base.
+  //  - pwa_installed: the browser's `appinstalled` event, fired the moment
+  //    the user actually installs (Android / desktop Chrome & Edge only;
+  //    iOS Safari never fires it).
+  useEffect(() => {
+    if (pwaLaunchTracked.tracked) return;
+    pwaLaunchTracked.tracked = true;
+
+    if (isStandaloneMode()) {
+      track("pwa_launch", { category: "install", data: { mode: "standalone" } });
+    }
+
+    const onInstalled = () => {
+      track("pwa_installed", { category: "install" });
+    };
+    window.addEventListener("appinstalled", onInstalled);
+    return () => window.removeEventListener("appinstalled", onInstalled);
+  }, []);
 
   // Page-view breadcrumb on every route change. Cheap & always-on; helps
   // crash reports show what the user was looking at when things broke.

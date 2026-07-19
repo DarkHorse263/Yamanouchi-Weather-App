@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Download, Share, X, Smartphone } from "lucide-react";
 import { isStandaloneMode, isIOSSafari } from "@/lib/registerSW";
+import { track } from "@/lib/analytics";
 
 /**
  * PWA install prompt - shown on every visit until the app is installed.
@@ -53,6 +54,7 @@ export function InstallPrompt() {
     if (isIOSSafari()) {
       setVariant("ios");
       setShow(true);
+      track("install_prompt_shown", { category: "install", data: { platform: "ios" } });
       return;
     }
 
@@ -62,6 +64,7 @@ export function InstallPrompt() {
       setBipEvent(e as BeforeInstallPromptEvent);
       setVariant("android");
       setShow(true);
+      track("install_prompt_shown", { category: "install", data: { platform: "android" } });
     };
     window.addEventListener("beforeinstallprompt", handler);
     return () => window.removeEventListener("beforeinstallprompt", handler);
@@ -77,6 +80,7 @@ export function InstallPrompt() {
     try {
       await bipEvent.prompt();
       const { outcome } = await bipEvent.userChoice;
+      track("install_prompt_result", { category: "install", data: { outcome } });
       if (outcome === "accepted") {
         writeJSON(ACCEPTED_KEY, true);
       }
