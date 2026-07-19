@@ -14,10 +14,7 @@
     "phone": "+61 2 6451 3000",
     "website": "https://www.oakshotels.com/en/oaks-lake-crackenback-resort",
     "price_band": "$$$$",
-    "photos": [
-      "https://www.oakshotels.com/media/hotels/LCR/property/oaks-lake-crackenback-resort-exterior-1920x1080.jpg",
-      "https://www.oakshotels.com/media/hotels/LCR/rooms/oaks-lake-crackenback-resort-chalet-living-1920x1080.jpg"
-    ],
+    "photos": [],
     "source_urls": [
       "https://www.oakshotels.com/en/oaks-lake-crackenback-resort",
       "https://www.booking.com/hotel/au/lake-crackenback-resort-amp-spa.html",
@@ -84,9 +81,7 @@
     "phone": null,
     "website": "https://www.banjopatersoninn.com.au",
     "price_band": "$$",
-    "photos": [
-      "https://www.banjopatersoninn.com.au/wp-content/uploads/2023/05/Banjo-Paterson-Inn-Exterior.jpg"
-    ],
+    "photos": [],
     "source_urls": [
       "https://www.banjopatersoninn.com.au",
       "https://www.booking.com/hotel/au/banjo-paterson.html",
@@ -150,9 +145,7 @@
     "phone": "+61 2 6456 2562",
     "website": "https://www.horizonslakejindabyne.com.au",
     "price_band": "$$$",
-    "photos": [
-      "https://www.horizonslakejindabyne.com.au/wp-content/uploads/2024/03/Horizons-Lake-Jindabyne-Exterior.jpg"
-    ],
+    "photos": [],
     "source_urls": [
       "https://www.horizonslakejindabyne.com.au",
       "https://www.expedia.com/Jindabyne-Hotels-Rydges-Horizons-Snowy-Mountains.h573982.Hotel-Information",
@@ -788,11 +781,10 @@
     "lat": -36.4168,
     "lng": 148.6095,
     "phone": "+61 2 6456 2918",
-    "website": "https://panoramajindabyne.com.au",
+    "website": null,
     "price_band": "$$",
     "photos": [],
     "source_urls": [
-      "https://panoramajindabyne.com.au",
       "https://www.tripadvisor.com/Hotel_Review-g261617-d4378131-Reviews-Horizons_Lake_Jindabyne-Jindabyne_New_South_Wales.html"
     ],
     "room_count": 25,
@@ -818,7 +810,7 @@
       "expedia": "https://www.expedia.com.au/Hotel-Search?destination=Panorama+Jindabyne",
       "jalan": null,
       "rakuten": null,
-      "official": "https://panoramajindabyne.com.au"
+      "official": null
     },
     "drying_room": "yes",
     "ski_storage": "yes",

@@ -283,7 +283,7 @@ const WEBCAM_DATA: WebcamConfig[] = [
   {
     locationId: "kijima-snow-park",
     locationName: "キジマスノーパーク · Kijima Snow Park",
-    webcamPageUrl: "https://www.kijima-sp.jp/",
+    webcamPageUrl: "https://kijimadaira.org/",
     webcams: [],
   },
 ];

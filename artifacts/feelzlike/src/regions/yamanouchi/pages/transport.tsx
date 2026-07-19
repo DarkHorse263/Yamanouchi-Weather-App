@@ -377,7 +377,7 @@ function SelfDriveBlock({ t, accent }: { t: T; accent: "blue" | "emerald" }) {
           {[
             { name: "Toyota Rent a Car", url: "https://rent.toyota.co.jp/eng/" },
             { name: "Nippon Rent-A-Car", url: "https://www.nipponrentacar.co.jp/english/" },
-            { name: "Times Car Rental", url: "https://rental.timescar.com/en/" },
+            { name: "Times Car Rental", url: "https://www.timescar-rental.com/en/" },
             { name: "Nissan Rent a Car", url: "https://nissan-rentacar.com/english/" },
             { name: "Orix Rent-A-Car",   url: "https://car.orix.co.jp/eng/" },
           ].map((c) => (

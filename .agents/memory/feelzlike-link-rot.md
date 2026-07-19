@@ -17,4 +17,8 @@ description: durable lessons from the jul 2026 full external-link audit (331 url
 - `feelzlike.app` does not exist — contact/UA strings must use `feelzlike.com` (was wrong in ~8 api-server files once).
 - Sandbox fetch quirks: ENOTFOUND/EAI_AGAIN/TLS errors and some 403/404s are sandbox DNS or bot-walls, not dead links (snowmonkeyresorts, prince.jp, kijimadaira, victoriashighcountry). Re-verify via webFetch before "fixing".
 - `webcams.ts` has a shared `VERIFIED` date constant surfaced in UI — only bump it when ALL entries are re-checked.
-- Known unfixables (bot-walled but alive): victoriashighcountry.com.au, cortina.co.jp (403 to non-browsers).
+- Known unfixables (bot-walled but alive): victoriashighcountry.com.au, cortina.co.jp (403 to non-browsers). The smoke test already classifies 401/403/429 etc. as "blocked, reachable" — never "fix" these.
+- **Manifest blind spots:** `generate-link-manifest.mjs` scans feelzlike `src/data` + `src/regions` + `src/pages` only. api-server route data also carries user-facing URLs (hardcoded `websiteUrl` in routes/snow.ts, `webcamPageUrl` in routes/webcams.ts) and is NOT scanned — sweep it manually on every audit, it rotted with the exact same dead domains once.
+- Same URL often lives in several shapes for one business: JSON `website` AND `booking_links.official` AND `source_urls` (by_region files AND the legacy feelzlike_data.json mirror). A dead-link fix must sweep all of them or the manifest keeps resurfacing the domain.
+- Kita-Shiga portal `kitashiga.co.jp` is dead (jul 2026): area link → `ryuoo.com/winter/kitashiga/`; per-resort → `x-jam.jp` (X-JAM + Yomase), `komaruyama.jp`.
+- Permanently-closed businesses: null the `website`/`booking_links.official` (schema is nullable) or delete the entry outright if the business is gone (e.g. out-of-bounds-berridale-pizza, closed jan 2026) — never leave a parked/NXDOMAIN link.

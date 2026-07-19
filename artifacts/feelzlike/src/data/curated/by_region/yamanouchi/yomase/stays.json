@@ -17,8 +17,7 @@
     "photos": [],
     "source_urls": [
       "http://www.hotel-meiko.jp/en/index.php",
-      "https://travel.rakuten.com/usa/en-us/hotel_info_item/cnt_japan/sub_nagano_prefecture/cty_yamanouchi_town/10123456880995",
-      "https://matcha-jp.com/en/16781"
+      "https://travel.rakuten.com/usa/en-us/hotel_info_item/cnt_japan/sub_nagano_prefecture/cty_yamanouchi_town/10123456880995"
     ],
     "room_count": 41,
     "amenities": [
@@ -368,11 +367,10 @@
     "lat": 36.7548,
     "lng": 138.4038,
     "phone": "+81-269-33-5522",
-    "website": "https://paddington-house.com",
+    "website": null,
     "price_band": "$$$",
     "photos": [],
     "source_urls": [
-      "https://paddington-house.com",
       "https://www.tocoo.jp/spot/155"
     ],
     "room_count": null,
@@ -390,7 +388,7 @@
     "check_in": "15:00",
     "check_out": "10:00",
     "booking_links": {
-      "official": "https://paddington-house.com",
+      "official": null,
       "booking_com": null,
       "agoda": null,
       "expedia": null,

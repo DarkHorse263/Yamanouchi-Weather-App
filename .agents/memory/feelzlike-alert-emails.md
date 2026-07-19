@@ -9,7 +9,8 @@ description: branded email templates + Resend sender domain state for powder ale
 - No emojis in subjects (snowflake char was removed on purpose — brand voice).
 - wordmark-inline.png is RGB with baked white background, so dark-mode inversion is a non-issue.
 
-## Sender (the real fix is external)
-- FROM is env-driven: `ALERT_FROM_EMAIL`, fallback `feelzlike alerts <onboarding@resend.dev>` (delivers to account owner only).
-- **Why:** Resend refuses to send from feelzlike.com until the domain is verified in the Resend dashboard (DKIM + return-path DNS records on Resend's own subdomain; Exchange Online root MX/SPF untouched, mailboxes unaffected).
-- **How to apply:** once the owner confirms the domain shows "verified" in Resend, set `ALERT_FROM_EMAIL` to `feelzlike alerts <alerts@feelzlike.com>` via the environment-secrets flow (dev + deployment) and have the owner re-publish. Do NOT set it before verification — Resend 403s and alerts silently stop delivering.
+## Sender — VERIFIED + LIVE (19 jul 2026)
+- feelzlike.com is verified in Resend; `ALERT_FROM_EMAIL` is set (shared env) to `feelzlike alerts <alerts@feelzlike.com>`. Production picks it up on next publish.
+- FROM is env-driven with fallback `feelzlike alerts <onboarding@resend.dev>` (delivers to account owner only) — that fallback only matters if the env var is ever deleted.
+- **Why env-checking is awkward:** the RESEND_API_KEY is a send-only restricted key — `GET /domains` returns 401. To check verification without dashboard access, test-send from the domain to Resend's sink `delivered@resend.dev`: 200 = verified, error = not yet.
+- Exchange Online root MX/SPF untouched by Resend's records (they live on Resend's own subdomain); keep Resend "Enable Receiving" OFF or it would fight the Microsoft MX.

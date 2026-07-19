@@ -499,7 +499,6 @@
     "price_band": "$",
     "photos": [],
     "source_urls": [
-      "https://www.accommodationaustralia.com.au/accommodation/tasmania/nsw/cooma/alpine-hotel/31665",
       "https://www.hotelscombined.com/Hotel/The_Alpine_Hotel.htm",
       "https://www.tripadvisor.com/Hotels-g261610-Cooma_New_South_Wales-Hotels.html"
     ],
@@ -553,7 +552,7 @@
     "lat": -36.2379,
     "lng": 149.1163,
     "phone": "+61 2 6452 2132",
-    "website": "https://royalhotelcooma.com",
+    "website": null,
     "price_band": "$",
     "photos": [],
     "source_urls": [
@@ -577,7 +576,7 @@
     "booking_links": {
       "booking_com": null,
       "expedia": null,
-      "official": "https://royalhotelcooma.com"
+      "official": null
     },
     "drying_room": "no",
     "ski_storage": "no",
@@ -608,7 +607,7 @@
     "lat": -36.2348,
     "lng": 149.1238,
     "phone": "+61 2 6404 7530",
-    "website": "https://www.coomahotel.com.au",
+    "website": "https://visitcooma.com.au/coffee-food-wine/cooma-hotel/",
     "price_band": "$",
     "photos": [],
     "source_urls": [

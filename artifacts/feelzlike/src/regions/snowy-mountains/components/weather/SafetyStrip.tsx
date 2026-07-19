@@ -40,7 +40,7 @@ const BASE_LINKS: SafetyLink[] = [
   {
     label: "Mountain Safety Collective",
     detail: "NSW back-country snow safety bulletin & avalanche awareness",
-    href: "https://mountainsafety.com.au/",
+    href: "https://mountainsafetycollective.org/",
     icon: ShieldAlert,
   },
   {

@@ -69,7 +69,7 @@ export const YAMANOUCHI_TRANSPORT: TransportProviderList = [
     operator: "Snow Monkey Resorts / Nagaden Bus",
     phone: null,
     website:
-      "https://www.snowmonkeyresorts.com/access/snow-monkey-express-bus/",
+      "https://www.snowmonkeyresorts.com/access/nagaden-express-bus/",
     route_summary:
       "Direct seasonal bus from Nagano Station to the Snow Monkey Park / Yudanaka area, marketed for international visitors visiting the snow monkeys.",
     route_summary_local:
@@ -84,7 +84,7 @@ export const YAMANOUCHI_TRANSPORT: TransportProviderList = [
     leg: "to_town",
     operator: "Snow Monkey Resorts (operated by Nagano-area bus partners)",
     phone: null,
-    website: "https://www.snowmonkeyresorts.com/transportation/",
+    website: "https://www.snowmonkeyresorts.com/access/",
     route_summary:
       "Pre-booked shared shuttle service serving Nagano-area resorts including Shiga Kogen, Nozawa Onsen and Yamanouchi. Useful when timing the express bus is awkward.",
     route_summary_local:

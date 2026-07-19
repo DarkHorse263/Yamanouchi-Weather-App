@@ -107,7 +107,7 @@ const REGION_SOURCES: Record<string, SourceGroup[]> = {
       items: [
         { label: "Shiga Kogen Ski Resorts", labelJa: "志賀高原スキー場", url: "https://www.shigakogen-ski.or.jp/" },
         { label: "Ryuoo Ski Park", labelJa: "竜王スキーパーク", url: "https://www.ryuoo.com/" },
-        { label: "Kita-Shiga Kogen", labelJa: "北志賀高原", url: "https://www.kitashiga.co.jp/" },
+        { label: "Kita-Shiga Kogen", labelJa: "北志賀高原", url: "https://ryuoo.com/winter/kitashiga/" },
       ],
     },
     {

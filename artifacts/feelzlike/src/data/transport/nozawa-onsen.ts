@@ -80,7 +80,7 @@ export const NOZAWA_ONSEN_TRANSPORT: TransportProviderList = [
     leg: "to_town",
     operator: "Snow Monkey Resorts / Nagano-area bus partners",
     phone: null,
-    website: "https://www.snowmonkeyresorts.com/transportation/",
+    website: "https://www.snowmonkeyresorts.com/access/",
     route_summary:
       "Pre-booked shared shuttle service connecting Nagano Station, Iiyama Station and Nozawa Onsen with other Nagano resorts (Shiga Kogen, Yamanouchi, Madarao). Useful when shinkansen + liner timings don't line up.",
     route_summary_local:

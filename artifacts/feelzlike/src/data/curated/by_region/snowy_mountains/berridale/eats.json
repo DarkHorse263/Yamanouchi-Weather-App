@@ -16,9 +16,7 @@
     "price_band": "$",
     "photos": [],
     "source_urls": [
-      "https://www.tripadvisor.com/Restaurant_Review-g528921-d25353193-Reviews-The_Bean_Barley-Berridale_New_South_Wales.html",
-      "https://restaurantguru.com/The-Bean-and-Barley-Cafe-Berridale",
-      "https://www.atly.com/gluten-free/location/The-Bean-and-Barley---Cafe"
+      "https://www.tripadvisor.com/Restaurant_Review-g528921-d25353193-Reviews-The_Bean_Barley-Berridale_New_South_Wales.html"
     ],
     "cuisine": [
       "Australian",
@@ -148,54 +146,6 @@
       "Baked treats"
     ],
     "apres_ski": "no",
-    "takeaway": "yes",
-    "groceries": "no",
-    "country": "AU"
-  },
-  {
-    "id": "out-of-bounds-berridale-pizza",
-    "name": "Out of Bounds Berridale Pizza",
-    "name_local": null,
-    "type": "restaurant",
-    "town": "berridale",
-    "region": "snowy_mountains",
-    "short_description": "Wood-fired pizza van run by a local legend - fresh pizzas Friday-Saturday from 5pm, heat-to-eat range available daily from noon.",
-    "long_description": "Out of Bounds is a wood-fired pizza van run by Anthony Green, a former skier who became Berridale's 2023 NSW Local Business of the Year. The dough is slow-fermented over days; toppings are locally sourced. The van offers two formats: fresh hot pizzas on Friday and Saturday from 5pm (phone orders from 5pm on 0412 867 751), and a heat-to-eat range of vacuum-sealed, oven-cooked pizzas available daily from noon for reheating at your accommodation - practical for groups staying in self-contained properties. Located at 20 Boundary Street per one source; van-based so may move.",
-    "address": "20 Boundary Street, Berridale NSW 2628",
-    "lat": -36.3812,
-    "lng": 148.8235,
-    "phone": "+61 412 867 751",
-    "website": "https://outofboundsberridale.com.au",
-    "price_band": "$",
-    "photos": [],
-    "source_urls": [
-      "https://outofboundsberridale.com.au",
-      "https://guide.lamontmag.com/out-of-bounds/",
-      "https://www.zestapp.com.au/caterers/out-of-bounds-berridale-pizza/b29c1926-82ab-4ac7-bfd4-b6655ebec511"
-    ],
-    "cuisine": [
-      "Pizza",
-      "Italian"
-    ],
-    "hours": {
-      "monday": "12:00-19:00 (heat-to-eat only)",
-      "tuesday": "12:00-19:00 (heat-to-eat only)",
-      "wednesday": "12:00-19:00 (heat-to-eat only)",
-      "thursday": "12:00-19:00 (heat-to-eat only)",
-      "friday": "12:00-19:00 (heat-to-eat); 17:00-close (fresh)",
-      "saturday": "12:00-19:00 (heat-to-eat); 17:00-close (fresh)",
-      "sunday": "12:00-19:00 (heat-to-eat only)"
-    },
-    "last_order_time": null,
-    "reservation": "not_needed",
-    "reservation_link": null,
-    "payment": "cards_accepted",
-    "english_menu": "yes",
-    "signature_dishes": [
-      "Wood-fired pizza",
-      "Heat-to-eat vacuum-sealed pizza"
-    ],
-    "apres_ski": "yes",
     "takeaway": "yes",
     "groceries": "no",
     "country": "AU"

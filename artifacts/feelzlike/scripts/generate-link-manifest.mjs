@@ -23,7 +23,7 @@ import { join, relative, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const SCAN_DIRS = [join(ROOT, "src/data"), join(ROOT, "src/regions")];
+const SCAN_DIRS = [join(ROOT, "src/data"), join(ROOT, "src/regions"), join(ROOT, "src/pages")];
 const OUT = join(ROOT, "../api-server/src/data/external-links.json");
 
 const EXCLUDE_HOSTS = [

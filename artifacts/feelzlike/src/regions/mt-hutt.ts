@@ -51,7 +51,7 @@ export const mtHuttRegion: RegionConfig = {
   ],
   footer: "v0.3 · feelzlike",
   tourismLinks: [
-    { category: "Tourism", label: "Experience Mid Canterbury", url: "https://experiencemidcanterbury.co.nz/" },
+    { category: "Tourism", label: "Mid Canterbury NZ", url: "https://midcanterbury.co.nz/" },
     { category: "Resorts", label: "Mt Hutt (NZSki)", url: "https://www.nzski.com/mt-hutt" },
     { category: "Transport", label: "Waka Kotahi NZTA · journeys & road conditions", url: "https://www.journeys.nzta.govt.nz/" },
   ],

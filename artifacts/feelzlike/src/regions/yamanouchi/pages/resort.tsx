@@ -112,17 +112,18 @@ const PROFILES: Record<string, ResortProfile> = {
     liftStatusUrl: "https://www.ryuoo.com/en/winter/lift/",
     webcamUrl: "https://www.ryuoo.com/en/winter/livecamera/",
   },
+  // The old shared kitashiga.co.jp portal is gone. X-JAM + Yomase are both
+  // run by Mt.KOSHA (x-jam.jp); Komaruyama has its own site. Only Yomase has
+  // a checkable cam (unofficial directory) - no filler cam links for the rest.
   "xjam-takaifuji": {
-    liftStatusUrl: "https://www.kitashiga.co.jp/",
-    webcamUrl: "https://www.kitashiga.co.jp/livecam/",
+    liftStatusUrl: "https://x-jam.jp/",
   },
   "yomase-onsen": {
-    liftStatusUrl: "https://www.kitashiga.co.jp/",
-    webcamUrl: "https://www.kitashiga.co.jp/livecam/",
+    liftStatusUrl: "https://x-jam.jp/",
+    webcamUrl: "https://livejapan.fujiyamasan.com/nagano-yamanouchi-yomase-forest-plaza/",
   },
   "kita-shiga-komaruyama": {
-    liftStatusUrl: "https://www.kitashiga.co.jp/",
-    webcamUrl: "https://www.kitashiga.co.jp/livecam/",
+    liftStatusUrl: "https://www.komaruyama.jp/",
   },
 };
 

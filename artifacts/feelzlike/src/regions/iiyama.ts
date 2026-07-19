@@ -104,7 +104,7 @@ export const iiyamaRegion: RegionConfig = {
       lng: 138.4108,
       blurb: "Snow play & toboggan park · sledding, snow tubing, kids' first-time terrain",
       blurbJa: "スノープレイ・ソリ専用パーク · そり、スノーチュービング、雪遊び入門",
-      websiteUrl: "https://www.kijima-sp.jp/",
+      websiteUrl: "https://kijimadaira.org/",
       snow_play_only: true,
       kids_lessons: true,
     },
@@ -178,7 +178,7 @@ export const iiyamaRegion: RegionConfig = {
     { category: "Resorts", categoryJa: "スキー場", label: "Tangram Ski Circus", labelJa: "タングラムスキーサーカス", url: "https://www.tangram.jp/ski/" },
     { category: "Resorts", categoryJa: "スキー場", label: "Togari Onsen Madarao", labelJa: "戸狩温泉スキー場", url: "https://www.togari.jp/" },
     { category: "Resorts", categoryJa: "スキー場", label: "Kijimadaira · Romance no Kamisama", labelJa: "スノーリゾート ロマンスの神様", url: "https://kijimadaira.jp/" },
-    { category: "Resorts", categoryJa: "スキー場", label: "Kijima Snow Park", labelJa: "キジマスノーパーク", url: "https://www.kijima-sp.jp/" },
+    { category: "Resorts", categoryJa: "スキー場", label: "Kijima Snow Park", labelJa: "キジマスノーパーク", url: "https://kijimadaira.org/" },
     { category: "Transport", categoryJa: "交通", label: "JR East · Hokuriku Shinkansen (Iiyama)", labelJa: "JR東日本 · 北陸新幹線 (飯山)", url: "https://www.jreast.co.jp/" },
     // Backcountry safety · the Madarao / Togari area sees regular
     // sidecountry use through the trees. JAN Northern Nagano covers

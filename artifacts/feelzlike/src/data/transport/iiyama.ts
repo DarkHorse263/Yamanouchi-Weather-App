@@ -97,7 +97,7 @@ export const IIYAMA_TRANSPORT: TransportProviderList = [
     leg: "to_town",
     operator: "Snow Monkey Resorts / Nagano-area bus partners",
     phone: null,
-    website: "https://www.snowmonkeyresorts.com/transportation/",
+    website: "https://www.snowmonkeyresorts.com/access/",
     route_summary:
       "Pre-booked shared shuttle service connecting Iiyama Station and the Madarao / Togari / Kijimadaira cluster with other Nagano resorts including Nozawa Onsen, Shiga Kogen and Yamanouchi.",
     route_summary_local:

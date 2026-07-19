@@ -372,8 +372,7 @@
     "price_band": "$$",
     "photos": [],
     "source_urls": [
-      "https://www.tripadvisor.com/Restaurants-g261610-Cooma_New_South_Wales.html",
-      "https://www.accommodationaustralia.com.au/accommodation/tasmania/nsw/cooma/alpine-hotel/31665"
+      "https://www.tripadvisor.com/Restaurants-g261610-Cooma_New_South_Wales.html"
     ],
     "cuisine": [
       "pub",
@@ -418,7 +417,7 @@
     "lat": -36.2379,
     "lng": 149.1163,
     "phone": "+61 2 6452 2132",
-    "website": "https://royalhotelcooma.com",
+    "website": null,
     "price_band": "$",
     "photos": [],
     "source_urls": [
@@ -517,7 +516,7 @@
     "lat": -36.2363,
     "lng": 149.1265,
     "phone": "+61 2 6452 2458",
-    "website": "https://coomaindian.com",
+    "website": "https://visitcooma.com.au/coffee-food-wine/cooma-indian-restaurant/",
     "price_band": "$$",
     "photos": [],
     "source_urls": [

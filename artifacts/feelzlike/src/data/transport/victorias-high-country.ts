@@ -109,7 +109,7 @@ export const VICTORIAS_HIGH_COUNTRY_TRANSPORT: TransportProviderList = [
     leg: "to_mountain",
     operator: "Mt Hotham Bus",
     phone: null,
-    website: "https://www.mthothambus.com.au",
+    website: "https://www.hothambus.com.au",
     route_summary:
       "North East Victoria coach charter and private group transfers to Mt Hotham, Falls Creek and the broader High Country.",
     regions: ["victorias-high-country"],

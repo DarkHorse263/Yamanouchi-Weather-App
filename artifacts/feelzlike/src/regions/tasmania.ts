@@ -32,7 +32,7 @@ export const tasmaniaRegion: RegionConfig = {
       lat: -41.5378,
       lng: 147.6736,
       blurb: "tasmania's only commercial chairlift · weather-dependent, short windows reward locals",
-      websiteUrl: "https://www.benlomondsnowsports.com.au/",
+      websiteUrl: "https://benlomondalpineresort.com.au/",
       beginner_friendly: true,
       kids_lessons: true,
       backcountry_access: true,
@@ -77,7 +77,7 @@ export const tasmaniaRegion: RegionConfig = {
   tourismLinks: [
     { category: "Tourism", label: "Discover Tasmania", url: "https://www.discovertasmania.com.au/" },
     { category: "Tourism", label: "Visit Northern Tasmania", url: "https://www.northerntasmania.com.au/" },
-    { category: "Resorts", label: "Ben Lomond Snow Sports", url: "https://www.benlomondsnowsports.com.au/" },
+    { category: "Resorts", label: "Ben Lomond Snow Sports", url: "https://tasmania.ski/" },
     { category: "National Park", label: "Ben Lomond National Park · Parks Tasmania", url: "https://parks.tas.gov.au/explore-our-parks/ben-lomond-national-park" },
     { category: "Transport", label: "Transport Tasmania · live traffic", url: "https://www.transport.tas.gov.au/" },
     { category: "Backcountry safety", label: "Bureau of Meteorology · Tasmania alpine forecast", url: "http://www.bom.gov.au/tas/forecasts/alpine.shtml" },
