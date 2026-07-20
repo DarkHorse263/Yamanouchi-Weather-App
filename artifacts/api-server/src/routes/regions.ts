@@ -224,6 +224,25 @@ const REGIONS: RegionConfig[] = [
     sourceLabel: "JMA Seamless",
   },
   {
+    id: "rusutsu-kiroro",
+    name: "Rusutsu & Kiroro",
+    country: "Japan",
+    countryCode: "JP",
+    region: "Hokkaido",
+    status: "live",
+    href: "/rusutsu-kiroro/",
+    baseTowns: ["Rusutsu", "Kiroro"],
+    mountains: ["Rusutsu Resort", "Kiroro"],
+    // Headline reading from Rusutsu village (~400m) · the farming
+    // village on Route 230 directly across from the resort.
+    headlineLabel: "Rusutsu",
+    lat: 42.7333,
+    lon: 140.8833,
+    model: "jma_seamless",
+    timezone: "Asia/Tokyo",
+    sourceLabel: "JMA Seamless",
+  },
+  {
     id: "yuzawa",
     name: "Yuzawa",
     country: "Japan",

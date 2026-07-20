@@ -46,6 +46,10 @@ const JAPAN_CITIES = [
   { key: "niseko", name: "Niseko", nameJa: "ニセコ", lat: 42.858, lng: 140.698 },
   // Furano · town core around JR Furano Station.
   { key: "furano", name: "Furano", nameJa: "富良野", lat: 43.342, lng: 142.383 },
+  // Rusutsu · village core on Route 230 across from the resort.
+  { key: "rusutsu", name: "Rusutsu", nameJa: "ルスツ", lat: 42.733, lng: 140.883 },
+  // Kiroro · base village at the Mountain Center in Akaigawa.
+  { key: "kiroro", name: "Kiroro", nameJa: "キロロ", lat: 43.076, lng: 140.982 },
   // Yuzawa · Echigo-Yuzawa town core around the shinkansen station.
   { key: "yuzawa", name: "Yuzawa", nameJa: "湯沢", lat: 36.935, lng: 138.809 },
 ];

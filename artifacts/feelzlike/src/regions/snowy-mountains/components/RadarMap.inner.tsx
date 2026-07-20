@@ -65,6 +65,7 @@ export type RegionKey =
   | "myoko"
   | "niseko"
   | "furano"
+  | "rusutsu-kiroro"
   | "yuzawa"
   | "queenstown"
   | "wanaka"
@@ -191,6 +192,17 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       label: "JMA Asahikawa",
       imageUrl: null,
       href: "https://www.jma.go.jp/bosai/nowc/#zoom:9/lat:43.34/lon:142.40/colordepth:normal/elements:hrpns",
+      attribution: "Japan Meteorological Agency · JMA",
+    },
+  },
+  // Rusutsu & Kiroro · the two bases sit ~0.34° of latitude apart on
+  // either side of the Niseko range, so centre between them at zoom 9.
+  "rusutsu-kiroro": {
+    windy: { lat: 42.91, lon: 140.94, zoom: 9 },
+    official: {
+      label: "JMA Sapporo",
+      imageUrl: null,
+      href: "https://www.jma.go.jp/bosai/nowc/#zoom:9/lat:42.91/lon:140.94/colordepth:normal/elements:hrpns",
       attribution: "Japan Meteorological Agency · JMA",
     },
   },
@@ -384,6 +396,15 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "kitanomine", name: "Kitanomine", lat: 43.3400, lng: 142.3655, accent: "#0ea5e9" },
     ],
   },
+  "rusutsu-kiroro": {
+    center: { lat: 42.91, lng: 140.94 },
+    pins: [
+      { id: "rusutsu-resort", name: "Rusutsu Resort", lat: 42.7497, lng: 140.9033, accent: "#f97316" },
+      { id: "kiroro-resort", name: "Kiroro", lat: 43.0758, lng: 140.9822, accent: "#f97316" },
+      { id: "rusutsu", name: "Rusutsu", lat: 42.7333, lng: 140.8833, accent: "#0ea5e9" },
+      { id: "kiroro", name: "Kiroro base", lat: 43.0758, lng: 140.9822, accent: "#0ea5e9" },
+    ],
+  },
   "yuzawa": {
     center: { lat: 36.89, lng: 138.79 },
     pins: [
@@ -451,6 +472,7 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   myoko: "JP",
   niseko: "JP",
   furano: "JP",
+  "rusutsu-kiroro": "JP",
   yuzawa: "JP",
   queenstown: "NZ",
   wanaka: "NZ",
@@ -469,6 +491,7 @@ const REGION_LABEL: Record<RegionKey, string> = {
   myoko: "myoko",
   niseko: "niseko",
   furano: "furano",
+  "rusutsu-kiroro": "rusutsu & kiroro",
   yuzawa: "yuzawa",
   queenstown: "queenstown",
   wanaka: "wanaka",

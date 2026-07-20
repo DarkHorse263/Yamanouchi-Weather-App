@@ -221,6 +221,22 @@ export const REGIONS = [
     ],
   },
   {
+    slug: "rusutsu-kiroro",
+    name: "Rusutsu & Kiroro",
+    subtitle: "Hokkaido · Japan",
+    country: "JP",
+    hasAlerts: false,
+    hasRoads: false,
+    mountains: [
+      { name: "Rusutsu Resort", blurb: "Hokkaido's big all-in-one resort across West Mt, East Mt and Mt Isola · 37 courses and about 42 km of runs, on the Epic Pass" },
+      { name: "Kiroro",         blurb: "Deep-snow resort in the hills between Otaru and Sapporo · about 660 m of vertical in one of Hokkaido's heaviest snowfall pockets" },
+    ],
+    towns: [
+      { id: "rusutsu", name: "Rusutsu", blurb: "Small farming village on Route 230 · the resort hotels and lifts are right across the road" },
+      { id: "kiroro",  name: "Kiroro",  blurb: "Hotel village at the Kiroro base in Akaigawa · ski-in lodging at the Mountain Center, with Otaru about 40 min downhill" },
+    ],
+  },
+  {
     slug: "yuzawa",
     name: "Yuzawa",
     subtitle: "Niigata · Japan",

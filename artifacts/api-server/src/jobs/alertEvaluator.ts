@@ -69,6 +69,10 @@ const REGION_ANCHORS: Record<RegionId, {
   // region's anchor mountain directly above the base towns, a fairer
   // proxy for visitors than the outlying Kamui or Tomamu day trips.
   "furano": { lat: 43.3350, lon: 142.3610, elevation: 1074, region: "JP", displayName: "Furano" },
+  // Rusutsu & Kiroro · anchor on Kiroro's top terrain (1180m) · the
+  // snowiest lift-served point of the pair, in one of Hokkaido's
+  // heaviest snowfall pockets, so the fairest single point for alerts.
+  "rusutsu-kiroro": { lat: 43.0758, lon: 140.9822, elevation: 1180, region: "JP", displayName: "Rusutsu & Kiroro" },
   // Yuzawa · anchor on Kagura's top area (1845m) · the highest and
   // snowiest terrain in the region with the longest season, so it is the
   // fairest single point for powder alerts across the six resorts.

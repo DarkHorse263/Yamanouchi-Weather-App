@@ -107,6 +107,9 @@ const MOUNTAIN_TINTS: Record<string, { bg: string; hover: string; ring: string }
   "furano-ski-resort": { bg: "bg-sky-100/70",    hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },
   "kamui-ski-links":   { bg: "bg-indigo-100/70", hover: "hover:bg-indigo-200/70",  ring: "ring-indigo-300/50" },
   "tomamu":            { bg: "bg-cyan-100/70",   hover: "hover:bg-cyan-200/70",    ring: "ring-cyan-300/50" },
+  // Rusutsu & Kiroro JP · the two independent Hokkaido powder resorts
+  "rusutsu-resort":    { bg: "bg-sky-100/70",    hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },
+  "kiroro-resort":     { bg: "bg-indigo-100/70", hover: "hover:bg-indigo-200/70",  ring: "ring-indigo-300/50" },
   // Yuzawa JP · Snow Link trio + Iwappara + the two Dragondola resorts
   "gala-yuzawa":       { bg: "bg-sky-100/70",     hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },
   "yuzawa-kogen":      { bg: "bg-indigo-100/70",  hover: "hover:bg-indigo-200/70",  ring: "ring-indigo-300/50" },

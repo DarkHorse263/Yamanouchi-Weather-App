@@ -42,6 +42,10 @@ Also required, not in that comment:
   tag" on sitemap URLs. Then re-publish.
 - After editing `openapi.yaml` RegionId enum: run
   `pnpm --filter @workspace/api-spec run codegen`.
+- After the region files land: re-run
+  `node artifacts/feelzlike/scripts/generate-link-manifest.mjs` so the nightly
+  smoke test knows the new region's external links (it writes
+  api-server/src/data/external-links.json).
 
 **Why:** several exhaustive `Record<RegionId>` maps live outside the documented
 sync set; a full monorepo typecheck is the only reliable way to surface them

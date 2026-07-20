@@ -18,6 +18,7 @@ export const REGION_IDS = [
   "myoko",
   "niseko",
   "furano",
+  "rusutsu-kiroro",
   "yuzawa",
   "queenstown",
   "wanaka",
@@ -161,6 +162,15 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "furano": "furano",
   "kitanomine": "furano",
   "furano-roads": "furano",
+
+  // Rusutsu & Kiroro, JP · the two big independent Hokkaido powder
+  // resorts either side of the Niseko range, about 90 min apart by
+  // road, across 2 base areas (Rusutsu village, Kiroro base village).
+  "rusutsu-resort": "rusutsu-kiroro",
+  "kiroro-resort": "rusutsu-kiroro",
+  "rusutsu": "rusutsu-kiroro",
+  "kiroro": "rusutsu-kiroro",
+  "rusutsu-kiroro-roads": "rusutsu-kiroro",
 
   // Yuzawa, JP · 6 mountains (GALA, Yuzawa Kogen and Ishiuchi Maruyama are
   // linked at the top via the Yuzawa Snow Link · Kagura and Naeba linked by

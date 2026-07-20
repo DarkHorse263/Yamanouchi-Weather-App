@@ -25,6 +25,7 @@ import { HAKUBA_VALLEY_TRANSPORT } from "./hakuba-valley";
 import { MYOKO_TRANSPORT } from "./myoko";
 import { NISEKO_TRANSPORT } from "./niseko";
 import { FURANO_TRANSPORT } from "./furano";
+import { RUSUTSU_KIRORO_TRANSPORT } from "./rusutsu-kiroro";
 import { YUZAWA_TRANSPORT } from "./yuzawa";
 import { QUEENSTOWN_TRANSPORT } from "./queenstown";
 import { WANAKA_TRANSPORT } from "./wanaka";
@@ -42,6 +43,7 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   myoko: MYOKO_TRANSPORT,
   niseko: NISEKO_TRANSPORT,
   furano: FURANO_TRANSPORT,
+  "rusutsu-kiroro": RUSUTSU_KIRORO_TRANSPORT,
   yuzawa: YUZAWA_TRANSPORT,
   // NZ · verified ski-season operators only (resort ski buses, RealNZ +
   // local mountain shuttles, InterCity). Unverified phone/website/schedule

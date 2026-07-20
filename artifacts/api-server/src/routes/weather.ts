@@ -229,6 +229,14 @@ const LOCATIONS: LocationConfig[] = [
   { id: "kamui-ski-links",           name: "Kamui Ski Links",           latitude: 43.7090, longitude: 142.1920, elevation: 751,  description: "Asahikawa's local powder hill · relaxed tree skiing and quiet gondola laps at day-ticket prices.",           bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
   { id: "tomamu",                    name: "Hoshino Resorts Tomamu",    latitude: 43.0580, longitude: 142.6210, elevation: 1239, description: "Hotel-tower resort under Mt Tomamu · groomed cruisers, kids' programmes and the winter Ice Village.",         bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
 
+  // ─── Rusutsu & Kiroro (Hokkaido, Japan) ──────────────────
+  // Third Hokkaido region · the two big independent powder resorts
+  // either side of the Niseko range, about 90 min apart by road.
+  // Coordinates are base-area points; elevation is the top of each
+  // resort's lift-served terrain.
+  { id: "rusutsu-resort",            name: "Rusutsu Resort",            latitude: 42.7497, longitude: 140.9033, elevation: 994,  description: "Hokkaido's big all-in-one resort across West Mt, East Mt and Mt Isola · 37 courses, on the Epic Pass.",      bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "kiroro-resort",             name: "Kiroro",                    latitude: 43.0758, longitude: 140.9822, elevation: 1180, description: "Deep-snow resort between Otaru and Sapporo · about 660 m of vertical in a heavy Hokkaido snowfall pocket.",  bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+
   // ─── Yuzawa (Niigata, Japan) ─────────────────────────────
   // Snow country classic 70 minutes from Tokyo by shinkansen · GALA,
   // Yuzawa Kogen and Ishiuchi Maruyama linked at the top (Yuzawa Snow
