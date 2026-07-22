@@ -30,7 +30,9 @@ export default function CountryHome({ code }: CountryHomeProps) {
         ]}
       />
 
-      <header className="relative z-10">
+      {/* z-20: the search dropdown must paint above the region cards in
+          <main> (also z-stacked), which otherwise cover it. */}
+      <header className="relative z-20">
         <div className="max-w-3xl mx-auto px-5 pt-4 pb-4 md:pt-9 md:pb-6 text-center">
           <a
             href="/countries"

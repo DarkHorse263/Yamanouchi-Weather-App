@@ -59,7 +59,8 @@ export default function Countries() {
         </header>
 
         {/* SEARCH ─────────────────────────────────────── */}
-        <section className="px-4 pt-1 md:px-6">
+        {/* z-20 keeps the dropdown above the country cards below. */}
+        <section className="relative z-20 px-4 pt-1 md:px-6">
           <div className="mx-auto w-full max-w-md">
             <PlaceSearch
               source="countries"

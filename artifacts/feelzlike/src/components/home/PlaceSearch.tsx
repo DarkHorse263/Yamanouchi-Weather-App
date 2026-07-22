@@ -518,7 +518,8 @@ export function PlaceSearch({
             </p>
           ) : (
             <p className="px-3.5 py-3 text-[12px] text-slate-400">
-              no places found
+              no places found · search works on names of towns · resorts ·
+              regions, like niseko or jindabyne
             </p>
           )}
         </div>

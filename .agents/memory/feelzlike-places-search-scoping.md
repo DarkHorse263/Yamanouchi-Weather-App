@@ -43,6 +43,11 @@ semantics for the 6km proximity rule. React keys need `kind` in them
 (region+town can share regionId+id). PlaceSearch mounts ONLY on top-level
 router pages (Welcome/NearYou, /countries, country homes) — inside
 RegionLayout the nested wouter base breaks plain hrefs (needs `~` escape).
+Every mount's section/header needs a HIGHER z than the sibling card grid
+below (z-20 vs main z-10) — the dropdown's z-30 only wins inside its own
+stacking context, so equal-z later siblings paint over it ("box hidden
+behind Yamanouchi"). The no-results copy teaches scope ("search works on
+names of towns · resorts · regions") — search is places-only, not features.
 
 # Picked-place -> curated town reconciliation (client)
 
