@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useLocation } from "wouter";
-import { Loader2, MapPin, Mountain, Search, X } from "lucide-react";
+import { Loader2, Map, MapPin, Mountain, Search, X } from "lucide-react";
 import { track } from "@/lib/analytics";
 import { REGIONS } from "@/regions";
 
@@ -32,58 +32,110 @@ function normalizeName(s: string): string {
   return s.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "");
 }
 
-// Flattened curated towns across every region, with a per-town search index
-// (town name, region name and every nearby mountain name, en + ja). Curated
-// matches are offered FIRST and navigate straight to the rich town page -
+// Flattened curated index across every region: towns, mountains and the
+// regions themselves, each with its own search keys (en + ja). Curated
+// matches are offered FIRST and navigate straight to the right page -
 // this also covers names Google Autocomplete can't return at all: its
 // locality-type filter excludes resort areas like Madarao Kogen, so relying
 // on Google alone made our own towns unfindable. Built once at module load.
-interface CuratedTown {
+interface CuratedEntry {
+  kind: "town" | "mountain" | "region";
   regionId: string;
   id: string;
   name: string;
-  nameJa?: string;
-  lat: number;
-  lng: number;
-  /** Region context line, e.g. "Nagano · Japan". */
+  /** In-app path the pick navigates to. */
+  href: string;
+  /** Context line rendered beneath the name (already lowercase-friendly). */
   subtitle: string;
-  /** Normalized english search keys: region + nearby mountain names. */
+  /** Town centroid - only towns carry coordinates (used by matchCuratedTown). */
+  lat?: number;
+  lng?: number;
+  /** Normalized english search keys beyond the name itself. */
   extraKeys: string[];
   /** Raw japanese search keys (normalizeName strips non-latin chars). */
   jaKeys: string[];
 }
 
-const CURATED_TOWNS: CuratedTown[] = REGIONS.flatMap((r) =>
-  (r.baseTowns ?? []).map((t) => {
+const CURATED_ENTRIES: CuratedEntry[] = REGIONS.flatMap((r) => {
+  const entries: CuratedEntry[] = [];
+  const townNames = new Set(
+    (r.baseTowns ?? []).map((t) => normalizeName(t.name)),
+  );
+
+  for (const t of r.baseTowns ?? []) {
     const nearby = (r.mountains ?? []).filter((m) =>
       t.nearbyMountainIds?.includes(m.id),
     );
-    return {
+    entries.push({
+      kind: "town",
       regionId: r.id,
       id: t.id,
       name: t.name,
-      nameJa: t.nameJa,
+      href: `/${r.id}/${t.id}`,
+      subtitle: `${r.subtitle} · live conditions`,
       lat: t.lat,
       lng: t.lng,
-      subtitle: r.subtitle,
       extraKeys: [r.name, ...nearby.map((m) => m.name)].map(normalizeName),
       jaKeys: [t.nameJa, ...nearby.map((m) => m.nameJa)].filter(
         (s): s is string => Boolean(s),
       ),
-    };
-  }),
-);
+    });
+  }
+
+  for (const m of r.mountains ?? []) {
+    // A mountain sharing its name with a base town (e.g. Nozawa Onsen) would
+    // render a confusing duplicate row - the town page already leads there.
+    if (townNames.has(normalizeName(m.name))) continue;
+    entries.push({
+      kind: "mountain",
+      regionId: r.id,
+      id: m.id,
+      name: m.name,
+      href: `/${r.id}/mountain/${m.id}`,
+      subtitle: `${r.subtitle} · mountain forecast`,
+      extraKeys: [r.name].map(normalizeName),
+      jaKeys: m.nameJa ? [m.nameJa] : [],
+    });
+  }
+
+  // A single-town region sharing its town's name (e.g. Zao Onsen) would
+  // render a confusing duplicate row - the town page is the useful stop.
+  const singleTownDuplicate =
+    (r.baseTowns ?? []).length === 1 && townNames.has(normalizeName(r.name));
+  if (singleTownDuplicate) return entries;
+
+  entries.push({
+    kind: "region",
+    regionId: r.id,
+    id: r.id,
+    name: r.name,
+    href: `/${r.id}/`,
+    subtitle: `${r.subtitle} · pick a town`,
+    extraKeys: [],
+    jaKeys: [],
+  });
+
+  return entries;
+});
+
+// Rows tie-break town > mountain > region so the richest page wins the top slot.
+const KIND_RANK: Record<CuratedEntry["kind"], number> = {
+  town: 0,
+  mountain: 1,
+  region: 2,
+};
 
 /**
- * Curated towns matching the typed term, best-first: town-name prefix beats
- * town-name substring beats region/mountain-name matches. Capped at 3 so
- * Google predictions stay visible beneath them.
+ * Curated entries matching the typed term, best-first: name prefix beats
+ * name substring beats region/mountain key matches; towns outrank mountains
+ * outrank regions on ties. Capped at 4 so Google predictions stay visible
+ * beneath them.
  */
-function curatedMatchesFor(q: string): CuratedTown[] {
+function curatedMatchesFor(q: string): CuratedEntry[] {
   const raw = q.trim();
   const nq = normalizeName(raw);
-  const scored: Array<{ t: CuratedTown; score: number }> = [];
-  for (const t of CURATED_TOWNS) {
+  const scored: Array<{ t: CuratedEntry; score: number }> = [];
+  for (const t of CURATED_ENTRIES) {
     const nName = normalizeName(t.name);
     let score: number | null = null;
     if (nq && nName.startsWith(nq)) score = 0;
@@ -92,8 +144,13 @@ function curatedMatchesFor(q: string): CuratedTown[] {
     else if (raw && t.jaKeys.some((k) => k.includes(raw))) score = 0;
     if (score != null) scored.push({ t, score });
   }
-  scored.sort((a, b) => a.score - b.score || a.t.name.localeCompare(b.t.name));
-  return scored.slice(0, 3).map((s) => s.t);
+  scored.sort(
+    (a, b) =>
+      a.score - b.score ||
+      KIND_RANK[a.t.kind] - KIND_RANK[b.t.kind] ||
+      a.t.name.localeCompare(b.t.name),
+  );
+  return scored.slice(0, 4).map((s) => s.t);
 }
 
 function distanceKm(aLat: number, aLng: number, bLat: number, bLng: number): number {
@@ -119,12 +176,18 @@ function matchCuratedTown(
   lat: number,
   lng: number,
 ): { regionId: string; id: string } | null {
-  const nName = normalizeName(name);
-  const named = CURATED_TOWNS.filter(
-    (t) => normalizeName(t.name) === nName || (t.nameJa != null && t.nameJa === name),
+  const towns = CURATED_ENTRIES.filter(
+    (t): t is CuratedEntry & { lat: number; lng: number } =>
+      t.kind === "town" && t.lat != null && t.lng != null,
   );
-  const pool = named.length > 0 ? named : CURATED_TOWNS;
-  let best: (typeof CURATED_TOWNS)[number] | null = null;
+  const nName = normalizeName(name);
+  const named = towns.filter(
+    (t) =>
+      normalizeName(t.name) === nName ||
+      t.jaKeys.some((k) => k === name),
+  );
+  const pool = named.length > 0 ? named : towns;
+  let best: (typeof towns)[number] | null = null;
   let bestKm = Infinity;
   for (const t of pool) {
     const km = distanceKm(lat, lng, t.lat, t.lng);
@@ -214,12 +277,12 @@ export function PlaceSearch({
     return () => document.removeEventListener("mousedown", onDown);
   }, []);
 
-  // A curated pick needs no Google lookup - we already know the town page.
-  function chooseCurated(t: CuratedTown) {
+  // A curated pick needs no Google lookup - we already know the target page.
+  function chooseCurated(t: CuratedEntry) {
     if (resolvingId) return;
     track("place_search_select", {
       category: "navigation",
-      data: { source, name: t.name, curated: true },
+      data: { source, name: t.name, curated: true, kind: t.kind },
     });
     pickSeq.current++;
     setResolvingId(null);
@@ -228,7 +291,7 @@ export function PlaceSearch({
     setTerm("");
     setDebounced("");
     setActiveIndex(-1);
-    navigate(`/${t.regionId}/${t.id}`);
+    navigate(t.href);
   }
 
   async function choose(r: PlaceResult) {
@@ -363,7 +426,7 @@ export function PlaceSearch({
               <ul role="listbox">
                 {curated.map((t, i) => (
                   <li
-                    key={`curated-${t.regionId}-${t.id}`}
+                    key={`curated-${t.kind}-${t.regionId}-${t.id}`}
                     role="option"
                     aria-selected={i === activeIndex}
                   >
@@ -376,16 +439,28 @@ export function PlaceSearch({
                         i === activeIndex ? "bg-sky-50" : "hover:bg-sky-50"
                       }`}
                     >
-                      <Mountain
-                        className="mt-0.5 h-3.5 w-3.5 shrink-0 text-sky-500"
-                        strokeWidth={2}
-                      />
+                      {t.kind === "town" ? (
+                        <MapPin
+                          className="mt-0.5 h-3.5 w-3.5 shrink-0 text-sky-500"
+                          strokeWidth={2}
+                        />
+                      ) : t.kind === "mountain" ? (
+                        <Mountain
+                          className="mt-0.5 h-3.5 w-3.5 shrink-0 text-sky-500"
+                          strokeWidth={2}
+                        />
+                      ) : (
+                        <Map
+                          className="mt-0.5 h-3.5 w-3.5 shrink-0 text-sky-500"
+                          strokeWidth={2}
+                        />
+                      )}
                       <span className="min-w-0">
                         <span className="block truncate text-[13px] font-semibold text-slate-800">
                           {t.name.toLowerCase()}
                         </span>
                         <span className="block truncate text-[11px] text-slate-400">
-                          {t.subtitle.toLowerCase()} · live conditions
+                          {t.subtitle.toLowerCase()}
                         </span>
                       </span>
                     </button>

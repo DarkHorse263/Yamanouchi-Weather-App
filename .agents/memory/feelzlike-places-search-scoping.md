@@ -22,14 +22,27 @@ description: How /api/places/search returns only AU/JP/NZ localities (Autocomple
 Google's locality-type filter EXCLUDES resort areas — "Madarao" (curated town
 Madarao Kogen) returned zero predictions, so relying on Google alone made our
 own towns unfindable ("no places found" for a town we serve). Fix lives in
-`PlaceSearch`: a module-load index of every region baseTown (keys = town name +
-region name + nearby mountain names, en normalized + raw ja) is matched locally
-and rendered FIRST in the dropdown (Mountain icon, "subtitle · live conditions"
-line), above Google rows; Google rows duplicating a curated name are filtered.
-A curated pick navigates straight to `/:region/:town` with NO details call and
-bumps `pickSeq` so an in-flight Google pick can't navigate afterwards. Do NOT
-"fix" findability by loosening the server's locality restriction (reintroduces
-the business-label bug) — the curated index is the intended mechanism.
+`PlaceSearch`: a module-load index matched locally and rendered FIRST in the
+dropdown, above Google rows; Google rows duplicating a curated name are
+filtered. A curated pick navigates straight to its href with NO details call
+and bumps `pickSeq` so an in-flight Google pick can't navigate afterwards. Do
+NOT "fix" findability by loosening the server's locality restriction
+(reintroduces the business-label bug) — the curated index is the intended
+mechanism.
+
+**Unified kinds (July 2026):** the curated index covers three kinds, each with
+its own href + subtitle suffix + icon: town (`/:region/:town`, "· live
+conditions", MapPin), mountain (`/:region/mountain/:id`, "· mountain
+forecast", Mountain), region (`/:region/`, "· pick a town", Map). Dedupe
+rules: a mountain sharing its base town's name is skipped (Nozawa Onsen), and
+a SINGLE-town region sharing its town's name is skipped (Zao Onsen) — the town
+row is the useful stop. Scoring prefix < substring < extraKeys, kind tie-break
+town > mountain > region. `matchCuratedTown` (geolocation/Google reconcile)
+must keep filtering `kind === "town"` — mountains/regions lack usable lat/lng
+semantics for the 6km proximity rule. React keys need `kind` in them
+(region+town can share regionId+id). PlaceSearch mounts ONLY on top-level
+router pages (Welcome/NearYou, /countries, country homes) — inside
+RegionLayout the nested wouter base breaks plain hrefs (needs `~` escape).
 
 # Picked-place -> curated town reconciliation (client)
 

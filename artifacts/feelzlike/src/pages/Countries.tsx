@@ -4,6 +4,7 @@ import { type CSSProperties } from "react";
 import logoFullColour from "/branding/logo-full-colour.png?url";
 import { CountryPicker } from "@/components/home/CountryPicker";
 import { HomeFooter } from "@/components/home/HomeFooter";
+import { PlaceSearch } from "@/components/home/PlaceSearch";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { breadcrumbSchema } from "@/lib/seo/jsonLd";
 
@@ -56,6 +57,16 @@ export default function Countries() {
             pick a country
           </p>
         </header>
+
+        {/* SEARCH ─────────────────────────────────────── */}
+        <section className="px-4 pt-1 md:px-6">
+          <div className="mx-auto w-full max-w-md">
+            <PlaceSearch
+              source="countries"
+              placeholder="search a town · resort · region"
+            />
+          </div>
+        </section>
 
         {/* COUNTRY CARDS ──────────────────────────────── */}
         <section className="px-4 pt-4 pb-6 md:px-6">

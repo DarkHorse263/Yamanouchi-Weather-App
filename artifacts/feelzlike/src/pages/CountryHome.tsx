@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, MapPin } from "lucide-react";
 import { COUNTRY_META, regionsForCountry, type CountryCode } from "@/regions";
+import { PlaceSearch } from "@/components/home/PlaceSearch";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { breadcrumbSchema } from "@/lib/seo/jsonLd";
 
@@ -60,6 +61,17 @@ export default function CountryHome({ code }: CountryHomeProps) {
             <p className="mt-1.5 md:mt-3 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.2em] text-sky-700/80">
               Choose a region
             </p>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.08 }}
+            className="mx-auto mt-4 w-full max-w-md text-left"
+          >
+            <PlaceSearch
+              source={`country_${code.toLowerCase()}`}
+              placeholder="search a town · resort · region"
+            />
           </motion.div>
         </div>
       </header>
