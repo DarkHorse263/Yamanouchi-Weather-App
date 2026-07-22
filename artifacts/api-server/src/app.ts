@@ -256,6 +256,20 @@ if (process.env.NODE_ENV === "production") {
         mitsumata: "Mitsumata",
       },
     },
+    "zao-onsen": {
+      name: "Zao Onsen",
+      towns: {
+        "zao-onsen": "Zao Onsen",
+      },
+    },
+    "hakkoda-aomori-spring": {
+      name: "Hakkoda & Aomori Spring",
+      towns: {
+        aomori: "Aomori",
+        "sukayu-onsen": "Sukayu Onsen",
+        ajigasawa: "Ajigasawa",
+      },
+    },
     // New Zealand
     "queenstown": {
       name: "Queenstown",

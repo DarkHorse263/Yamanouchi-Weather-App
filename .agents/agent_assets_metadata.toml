@@ -545,3 +545,9 @@ id = "k4xkpoyI0EmZVKKiEkJ1g"
 uri = "file://exports/region-partner-ad-snowy-mountains-snoexpress.jpg"
 type = "image"
 title = "Snoexpress featured partner · snowy mountains region page"
+
+[[outputs]]
+id = "2xoeB72DRUN5saK82iArs"
+uri = "file://exports/feelzlike-facebook-campaign-pack.pdf"
+type = "pdf"
+title = "facebook campaign pack · winter 2026 launch"

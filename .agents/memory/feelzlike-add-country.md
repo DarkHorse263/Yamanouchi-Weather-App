@@ -71,6 +71,10 @@ sync set; a full monorepo typecheck is the only reliable way to surface them
   yamanouchi map styling).
 - JP towns need NO weather.ts LOCATIONS entries (town weather is coordinate-based
   via useTownWeather); only mountains get LOCATIONS rows.
+- `weather-tiles.ts JAPAN_CITIES` has a big-cities section at the TOP (Sapporo,
+  Aomori, Nagano...) before the ski-town rows. Check it before adding a town
+  tile — a duplicate key (e.g. aomori) ships twice in /api/japan-temps and
+  renders stacked markers + duplicate React keys on the yamanouchi map.
 - Mountain detail routes are REGION-level (`/{region}/mountain/{id}`), not
   town-scoped — a town-scoped URL silently falls through to the region home.
 

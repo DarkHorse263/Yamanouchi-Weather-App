@@ -263,6 +263,47 @@ const REGIONS: RegionConfig[] = [
     sourceLabel: "JMA Seamless",
   },
   {
+    id: "zao-onsen",
+    name: "Zao Onsen",
+    country: "Japan",
+    countryCode: "JP",
+    region: "Yamagata",
+    status: "live",
+    href: "/zao-onsen/",
+    baseTowns: ["Zao Onsen"],
+    mountains: ["Zao Onsen Ski Resort"],
+    // Headline reading from Zao Onsen village (~880m) · the hot-spring
+    // village where visitors stay, with the ropeways rising straight
+    // off the village streets.
+    headlineLabel: "Zao Onsen",
+    lat: 38.1674,
+    lon: 140.3937,
+    model: "jma_seamless",
+    timezone: "Asia/Tokyo",
+    sourceLabel: "JMA Seamless",
+  },
+  {
+    id: "hakkoda-aomori-spring",
+    name: "Hakkoda & Aomori Spring",
+    country: "Japan",
+    countryCode: "JP",
+    region: "Aomori",
+    status: "live",
+    href: "/hakkoda-aomori-spring/",
+    baseTowns: ["Aomori", "Sukayu Onsen", "Ajigasawa"],
+    mountains: ["Hakkoda", "Aomori Spring"],
+    // Headline reading from Sukayu Onsen (~900m) · the classic mountain
+    // base for Hakkoda skiing and the winter bus terminus. Aomori city
+    // sits at sea level on the bay and would misrepresent conditions on
+    // the hills, so the higher base is the honest headline.
+    headlineLabel: "Sukayu Onsen",
+    lat: 40.6506,
+    lon: 140.8505,
+    model: "jma_seamless",
+    timezone: "Asia/Tokyo",
+    sourceLabel: "JMA Seamless",
+  },
+  {
     id: "queenstown",
     name: "Queenstown",
     country: "New Zealand",

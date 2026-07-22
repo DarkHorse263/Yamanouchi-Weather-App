@@ -52,6 +52,13 @@ const JAPAN_CITIES = [
   { key: "kiroro", name: "Kiroro", nameJa: "キロロ", lat: 43.076, lng: 140.982 },
   // Yuzawa · Echigo-Yuzawa town core around the shinkansen station.
   { key: "yuzawa", name: "Yuzawa", nameJa: "湯沢", lat: 36.935, lng: 138.809 },
+  // Zao Onsen · village core around the bus terminal (~880m).
+  { key: "zao-onsen", name: "Zao Onsen", nameJa: "蔵王温泉", lat: 38.167, lng: 140.394 },
+  // Aomori city is already in the big-cities list above.
+  // Sukayu Onsen · the bath house at ~900m in the Hakkoda mountains.
+  { key: "sukayu-onsen", name: "Sukayu Onsen", nameJa: "酸ヶ湯温泉", lat: 40.651, lng: 140.851 },
+  // Ajigasawa · town core around the Gono line station on the coast.
+  { key: "ajigasawa", name: "Ajigasawa", nameJa: "鰺ヶ沢", lat: 40.776, lng: 140.221 },
 ];
 
 let cachedTemps: { data: any; fetchedAt: number } | null = null;

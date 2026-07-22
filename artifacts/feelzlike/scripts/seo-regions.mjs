@@ -257,6 +257,37 @@ export const REGIONS = [
       { id: "mitsumata",     name: "Mitsumata",     blurb: "Old post-road hamlet on Route 17 · Kagura's Mitsumata ropeway base, with Naeba a short drive on" },
     ],
   },
+  {
+    slug: "zao-onsen",
+    name: "Zao Onsen",
+    subtitle: "Yamagata · Japan",
+    country: "JP",
+    hasAlerts: false,
+    hasRoads: false,
+    mountains: [
+      { name: "Zao Onsen Ski Resort", blurb: "Yamagata's big classic across a broad juhyo-covered mountainside · about 880 m of vertical to Jizo Sancho at 1,661 m, famous for its snow monsters, on the Ikon Pass" },
+    ],
+    towns: [
+      { id: "zao-onsen", name: "Zao Onsen", blurb: "Hot-spring village at about 880 m with 1,900 years of history · sulfur baths steps from the lifts, ropeways rising straight off the village streets" },
+    ],
+  },
+  {
+    slug: "hakkoda-aomori-spring",
+    name: "Hakkoda & Aomori Spring",
+    subtitle: "Aomori · Japan",
+    country: "JP",
+    hasAlerts: false,
+    hasRoads: false,
+    mountains: [
+      { name: "Hakkoda",       blurb: "Ropeway-served big-mountain riding on Mt Tamoyachi · long ungroomed descents through juhyo snow monsters, more backcountry than resort" },
+      { name: "Aomori Spring", blurb: "Quiet powder resort on Mt Iwaki's northwest slopes above Ajigasawa · a gondola and about 545 m of vertical, on its own lift tickets" },
+    ],
+    towns: [
+      { id: "aomori",       name: "Aomori",       blurb: "Prefecture capital on Mutsu Bay · the shinkansen gateway at Shin-Aomori, with the winter Hakkoda-go bus climbing to the ropeway in about an hour" },
+      { id: "sukayu-onsen", name: "Sukayu Onsen", blurb: "Historic sulfur bath house at about 900 m in the Hakkoda mountains · the winter bus terminus, in one of Japan's snowiest inhabited places" },
+      { id: "ajigasawa",    name: "Ajigasawa",    blurb: "Fishing town on the Sea of Japan coast · the Gono line stops here, with Aomori Spring about 20 minutes up the hill toward Mt Iwaki" },
+    ],
+  },
 
   // ── New Zealand ─────────────────────────────────────────────────────────
   {

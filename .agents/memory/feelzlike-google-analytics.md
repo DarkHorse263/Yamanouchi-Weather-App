@@ -27,12 +27,26 @@ Alert links carry an HMAC `?token=...`. `send_page_view:false` only suppresses
 the automatic page_view; gtag still sends automatic hits (session_start,
 first_visit, user_engagement) and each carries `dl` = `document.location.href`
 unless overridden. Per-event `page_location` on manual page_views does not cover
-those. Fix: pin a stripped `page_location` (`origin + pathname`, never the raw
-href) in the initial `gtag("config", ...)` call so every automatic hit is
-token-free too. Manual page_views also strip query+hash.
+those. Fix: override `page_location` in the initial `gtag("config", ...)` call
+AND on every manual page_view so every hit is token-free.
 **How to apply:** whenever a new tokened route exists, the config-level
-`page_location` (pathname-only) already covers it · pathname never holds the
-token · but re-verify `dl` has no `token=` if the URL scheme changes.
+`page_location` override already covers it · but re-verify `dl` has no
+`token=` if the URL scheme changes.
+
+## Gotcha 3 · stripping ALL query params blinds ad attribution
+The original fix pinned `page_location` to bare origin+pathname · that also
+strips `utm_*` and ad click ids, so every paid Facebook/Google visit reports as
+"direct" in GA4 (attribution derives from `page_location` on session_start /
+the landing page_view). Fix: `page_location` = origin+pathname + a CLOSED
+whitelist of campaign params (`utm_source/medium/campaign/term/content/id`,
+`gclid`, `wbraid`, `gbraid`, `fbclid`, `msclkid`, `ttclid`), rebuilt from
+scratch with URLSearchParams so nothing off-list (tokens, emails) can pass.
+**Why:** token safety and ad attribution pull opposite ways · the whitelist is
+the only shape that gives both; never revert to "strip everything" NOR widen to
+"pass everything but token". **How to apply:** new ad-network click ids get
+ADDED to the whitelist explicitly; the campaign UTM convention lives in the
+campaign pack script (source=facebook, medium=paid vs social for unpaid posts,
+content=per-tile slug).
 
 ## Custom events go through track(), never a parallel GA call path
 `lib/analytics.ts` `track()` is the single vendor-agnostic seam: it writes a

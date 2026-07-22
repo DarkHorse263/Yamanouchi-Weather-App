@@ -24,6 +24,10 @@
 //   Page views are sent with the querystring + hash stripped, because alert
 //   links carry HMAC tokens (?token=...) that must never reach GA (this mirrors
 //   the Sentry breadcrumb rule in lib/analytics + App.tsx). IPs are anonymised.
+//   EXCEPTION · a fixed whitelist of ad-campaign params (utm_*, click ids) IS
+//   forwarded in page_location, because GA4 derives traffic attribution from
+//   it · without them every Facebook/Google ad visit reports as "direct".
+//   The whitelist is closed: anything not on it (tokens, emails) stays stripped.
 // ─────────────────────────────────────────────────────────────────────────────
 
 declare global {
@@ -85,6 +89,46 @@ export function gaConfigured(): boolean {
 // DOM id for the injected <script> so we never inject it twice.
 const SCRIPT_ID = "ga-gtag";
 
+// Closed whitelist of querystring params that may reach GA. These are the
+// standard campaign-attribution params (Google's utm_* set) plus the ad-network
+// click ids GA4 uses to join sessions to ad platforms. NOTHING else passes ·
+// in particular the alert-link ?token=... HMAC and any future param are
+// stripped by default.
+const CAMPAIGN_PARAMS = new Set([
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_term",
+  "utm_content",
+  "utm_id",
+  "gclid",
+  "wbraid",
+  "gbraid",
+  "fbclid",
+  "msclkid",
+  "ttclid",
+]);
+
+/**
+ * origin + pathname plus ONLY whitelisted campaign params. This is what we
+ * report to GA4 as page_location: attribution params survive (so ad traffic
+ * is credited to the right campaign), tokened/unknown params never leave the
+ * browser.
+ */
+function campaignSafeLocation(): string {
+  const base = window.location.origin + window.location.pathname;
+  try {
+    const kept = new URLSearchParams();
+    for (const [key, value] of new URLSearchParams(window.location.search)) {
+      if (CAMPAIGN_PARAMS.has(key.toLowerCase())) kept.append(key, value);
+    }
+    const qs = kept.toString();
+    return qs ? `${base}?${qs}` : base;
+  } catch {
+    return base;
+  }
+}
+
 // GA's documented per-property opt-out flag. Setting window[`ga-disable-<ID>`]
 // to true makes gtag.js drop every hit, even if the script is already loaded ·
 // this is how we honour a consent revoke within the same page lifetime.
@@ -128,14 +172,14 @@ export function loadGa(): boolean {
   window.gtag("js", new Date());
   // send_page_view:false · SPA route changes drive page_view manually (see
   // gaPageView) so we can strip tokened querystrings and avoid double-counting
-  // the landing page. page_location is pinned to origin + pathname · never the
-  // raw href · so the AUTOMATIC hits gtag still sends (session_start,
-  // first_visit, user_engagement) can never carry an alert link's ?token=...
-  // HMAC. GA4 does not log or store IP addresses, so no UA-era anonymize_ip
-  // flag is needed.
+  // the landing page. page_location is pinned to origin + pathname + the
+  // campaign-param whitelist · never the raw href · so the AUTOMATIC hits gtag
+  // still sends (session_start, first_visit, user_engagement) carry ad
+  // attribution but can never carry an alert link's ?token=... HMAC. GA4 does
+  // not log or store IP addresses, so no UA-era anonymize_ip flag is needed.
   window.gtag("config", id, {
     send_page_view: false,
-    page_location: window.location.origin + window.location.pathname,
+    page_location: campaignSafeLocation(),
   });
 
   const script = document.createElement("script");
@@ -161,17 +205,17 @@ export function disableGa(): void {
 
 /**
  * Send a single GA4 page_view for `path` (an app-relative path with the query
- * string + hash already stripped by the caller). We override page_location with
- * origin + pathname only · never the raw href · so tokened alert URLs
- * (?token=...) never reach GA. No-op until gtag is initialised.
+ * string + hash already stripped by the caller). page_location is
+ * origin + pathname + whitelisted campaign params only · never the raw href ·
+ * so tokened alert URLs (?token=...) never reach GA while ad attribution
+ * (utm_*, click ids) survives. No-op until gtag is initialised.
  */
 export function gaPageView(path: string): void {
   if (typeof window === "undefined") return;
   if (!GA_MEASUREMENT_ID || typeof window.gtag !== "function") return;
-  const cleanLocation = window.location.origin + window.location.pathname;
   window.gtag("event", "page_view", {
     page_path: path,
-    page_location: cleanLocation,
+    page_location: campaignSafeLocation(),
     page_title: typeof document !== "undefined" ? document.title : undefined,
   });
 }

@@ -67,6 +67,8 @@ export type RegionKey =
   | "furano"
   | "rusutsu-kiroro"
   | "yuzawa"
+  | "zao-onsen"
+  | "hakkoda-aomori-spring"
   | "queenstown"
   | "wanaka"
   | "mt-hutt"
@@ -215,6 +217,28 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       label: "JMA Niigata",
       imageUrl: null,
       href: "https://www.jma.go.jp/bosai/nowc/#zoom:10/lat:36.89/lon:138.79/colordepth:normal/elements:hrpns",
+      attribution: "Japan Meteorological Agency · JMA",
+    },
+  },
+  // Zao Onsen · single resort rising straight above the village, so a
+  // tight zoom-10 centre between the village and Jizo Sancho.
+  "zao-onsen": {
+    windy: { lat: 38.16, lon: 140.41, zoom: 10 },
+    official: {
+      label: "JMA Yamagata",
+      imageUrl: null,
+      href: "https://www.jma.go.jp/bosai/nowc/#zoom:10/lat:38.16/lon:140.41/colordepth:normal/elements:hrpns",
+      attribution: "Japan Meteorological Agency · JMA",
+    },
+  },
+  // Hakkoda & Aomori Spring · the two bases sit ~0.56° of longitude
+  // apart either side of Aomori city, so centre between them at zoom 9.
+  "hakkoda-aomori-spring": {
+    windy: { lat: 40.69, lon: 140.56, zoom: 9 },
+    official: {
+      label: "JMA Aomori",
+      imageUrl: null,
+      href: "https://www.jma.go.jp/bosai/nowc/#zoom:9/lat:40.69/lon:140.56/colordepth:normal/elements:hrpns",
       attribution: "Japan Meteorological Agency · JMA",
     },
   },
@@ -422,6 +446,25 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "mitsumata", name: "Mitsumata", lat: 36.8975, lng: 138.7790, accent: "#0ea5e9" },
     ],
   },
+  "zao-onsen": {
+    center: { lat: 38.164, lng: 140.40 },
+    pins: [
+      // resort pin uses the mid-mountain ski-area point (display only)
+      // so it doesn't stack under the village pin at the ropeway base
+      { id: "zao-onsen-resort", name: "Zao Onsen Ski Resort", lat: 38.1613, lng: 140.4077, accent: "#f97316" },
+      { id: "zao-onsen", name: "Zao Onsen", lat: 38.1674, lng: 140.3937, accent: "#0ea5e9" },
+    ],
+  },
+  "hakkoda-aomori-spring": {
+    center: { lat: 40.69, lng: 140.56 },
+    pins: [
+      { id: "hakkoda", name: "Hakkoda", lat: 40.6784, lng: 140.8453, accent: "#f97316" },
+      { id: "aomori-spring", name: "Aomori Spring", lat: 40.6952, lng: 140.2833, accent: "#f97316" },
+      { id: "aomori", name: "Aomori", lat: 40.8289, lng: 140.7336, accent: "#0ea5e9" },
+      { id: "sukayu-onsen", name: "Sukayu Onsen", lat: 40.6506, lng: 140.8505, accent: "#0ea5e9" },
+      { id: "ajigasawa", name: "Ajigasawa", lat: 40.7755, lng: 140.2209, accent: "#0ea5e9" },
+    ],
+  },
   queenstown: {
     center: { lat: -44.99, lng: 168.74 },
     pins: [
@@ -474,6 +517,8 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   furano: "JP",
   "rusutsu-kiroro": "JP",
   yuzawa: "JP",
+  "zao-onsen": "JP",
+  "hakkoda-aomori-spring": "JP",
   queenstown: "NZ",
   wanaka: "NZ",
   "mt-hutt": "NZ",
@@ -493,6 +538,8 @@ const REGION_LABEL: Record<RegionKey, string> = {
   furano: "furano",
   "rusutsu-kiroro": "rusutsu & kiroro",
   yuzawa: "yuzawa",
+  "zao-onsen": "zao onsen",
+  "hakkoda-aomori-spring": "hakkoda & aomori spring",
   queenstown: "queenstown",
   wanaka: "wanaka",
   "mt-hutt": "mt hutt",

@@ -31,6 +31,8 @@ export const ALERT_REGIONS: Array<{ id: string; nameEn: string; nameJa: string; 
   { id: "furano", nameEn: "Furano", nameJa: "富良野", country: "JP · Hokkaido" },
   { id: "rusutsu-kiroro", nameEn: "Rusutsu & Kiroro", nameJa: "ルスツ・キロロ", country: "JP · Hokkaido" },
   { id: "yuzawa", nameEn: "Yuzawa", nameJa: "湯沢", country: "JP · Niigata" },
+  { id: "zao-onsen", nameEn: "Zao Onsen", nameJa: "蔵王温泉", country: "JP · Yamagata" },
+  { id: "hakkoda-aomori-spring", nameEn: "Hakkoda & Aomori Spring", nameJa: "八甲田・青森スプリング", country: "JP · Aomori" },
   // New Zealand
   { id: "queenstown", nameEn: "Queenstown", nameJa: "クイーンズタウン", country: "NZ · Otago" },
   { id: "wanaka", nameEn: "Wanaka", nameJa: "ワナカ", country: "NZ · Otago" },

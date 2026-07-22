@@ -10,6 +10,8 @@ import { nisekoRegion } from "./niseko";
 import { furanoRegion } from "./furano";
 import { rusutsuKiroroRegion } from "./rusutsu-kiroro";
 import { yuzawaRegion } from "./yuzawa";
+import { zaoOnsenRegion } from "./zao-onsen";
+import { hakkodaAomoriSpringRegion } from "./hakkoda-aomori-spring";
 import { tasmaniaRegion } from "./tasmania";
 import { queenstownRegion } from "./queenstown";
 import { wanakaRegion } from "./wanaka";
@@ -22,7 +24,9 @@ import { ruapehuRegion } from "./ruapehu";
 // Kijimadaira cluster), Hakuba Valley, Myoko, Niseko (first Hokkaido),
 // Furano (second Hokkaido · Furano Ski Resort + Kamui + Tomamu),
 // Rusutsu & Kiroro (third Hokkaido · the two big independent powder
-// resorts either side of the Niseko range).
+// resorts either side of the Niseko range), Zao Onsen (first Tohoku ·
+// Yamagata's juhyo classic), Hakkoda & Aomori Spring (second Tohoku ·
+// Aomori's big-mountain ropeway + the quiet Mt Iwaki powder resort).
 // NZ: Queenstown (Coronet Peak + The Remarkables), Wanaka (Cardrona +
 // Treble Cone), Mt Hutt (Methven), Ruapehu (Whakapapa + Turoa, Ohakune).
 export const REGIONS: RegionConfig[] = [
@@ -38,6 +42,8 @@ export const REGIONS: RegionConfig[] = [
   furanoRegion,
   rusutsuKiroroRegion,
   yuzawaRegion,
+  zaoOnsenRegion,
+  hakkodaAomoriSpringRegion,
   queenstownRegion,
   wanakaRegion,
   mtHuttRegion,
@@ -70,6 +76,8 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "furano": "JP",
   "rusutsu-kiroro": "JP",
   "yuzawa": "JP",
+  "zao-onsen": "JP",
+  "hakkoda-aomori-spring": "JP",
   "queenstown": "NZ",
   "wanaka": "NZ",
   "mt-hutt": "NZ",

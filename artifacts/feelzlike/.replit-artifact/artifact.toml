@@ -1203,6 +1203,126 @@ from = "/yuzawa/mitsumata/explore/"
 to = "/yuzawa/mitsumata/explore/index.html"
 
 [[services.production.rewrites]]
+from = "/zao-onsen/"
+to = "/zao-onsen/index.html"
+
+[[services.production.rewrites]]
+from = "/zao-onsen/mountains/"
+to = "/zao-onsen/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/zao-onsen/stay/"
+to = "/zao-onsen/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/zao-onsen/zao-onsen/"
+to = "/zao-onsen/zao-onsen/index.html"
+
+[[services.production.rewrites]]
+from = "/zao-onsen/zao-onsen/weather/"
+to = "/zao-onsen/zao-onsen/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/zao-onsen/zao-onsen/stay/"
+to = "/zao-onsen/zao-onsen/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/zao-onsen/zao-onsen/eat/"
+to = "/zao-onsen/zao-onsen/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/zao-onsen/zao-onsen/transport/"
+to = "/zao-onsen/zao-onsen/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/zao-onsen/zao-onsen/explore/"
+to = "/zao-onsen/zao-onsen/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/"
+to = "/hakkoda-aomori-spring/index.html"
+
+[[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/mountains/"
+to = "/hakkoda-aomori-spring/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/stay/"
+to = "/hakkoda-aomori-spring/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/aomori/"
+to = "/hakkoda-aomori-spring/aomori/index.html"
+
+[[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/aomori/weather/"
+to = "/hakkoda-aomori-spring/aomori/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/aomori/stay/"
+to = "/hakkoda-aomori-spring/aomori/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/aomori/eat/"
+to = "/hakkoda-aomori-spring/aomori/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/aomori/transport/"
+to = "/hakkoda-aomori-spring/aomori/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/aomori/explore/"
+to = "/hakkoda-aomori-spring/aomori/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/sukayu-onsen/"
+to = "/hakkoda-aomori-spring/sukayu-onsen/index.html"
+
+[[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/sukayu-onsen/weather/"
+to = "/hakkoda-aomori-spring/sukayu-onsen/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/sukayu-onsen/stay/"
+to = "/hakkoda-aomori-spring/sukayu-onsen/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/sukayu-onsen/eat/"
+to = "/hakkoda-aomori-spring/sukayu-onsen/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/sukayu-onsen/transport/"
+to = "/hakkoda-aomori-spring/sukayu-onsen/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/sukayu-onsen/explore/"
+to = "/hakkoda-aomori-spring/sukayu-onsen/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/ajigasawa/"
+to = "/hakkoda-aomori-spring/ajigasawa/index.html"
+
+[[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/ajigasawa/weather/"
+to = "/hakkoda-aomori-spring/ajigasawa/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/ajigasawa/stay/"
+to = "/hakkoda-aomori-spring/ajigasawa/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/ajigasawa/eat/"
+to = "/hakkoda-aomori-spring/ajigasawa/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/ajigasawa/transport/"
+to = "/hakkoda-aomori-spring/ajigasawa/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/ajigasawa/explore/"
+to = "/hakkoda-aomori-spring/ajigasawa/explore/index.html"
+
+[[services.production.rewrites]]
 from = "/queenstown/"
 to = "/queenstown/index.html"
 

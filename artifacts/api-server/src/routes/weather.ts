@@ -249,6 +249,18 @@ const LOCATIONS: LocationConfig[] = [
   { id: "kagura",                    name: "Kagura",                    latitude: 36.8948, longitude: 138.7756, elevation: 1845, description: "Highest terrain and longest season in the area · three linked zones rising from the Mitsumata base.",         bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
   { id: "naeba",                     name: "Naeba",                     latitude: 36.7917, longitude: 138.7846, elevation: 1789, description: "Big classic resort beneath Mt Takenoko · linked to Kagura by the Dragondola gondola.",                       bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
 
+  // ─── Zao Onsen (Yamagata, Japan) ─────────────────────────
+  // Yamagata's juhyo classic · one broad resort from the onsen village
+  // (~880m) up to Jizo Sancho at 1,661m. Coordinates are the base-area
+  // point; elevation is the top of the lift-served terrain.
+  { id: "zao-onsen-resort",          name: "Zao Onsen Ski Resort",      latitude: 38.1616, longitude: 140.3952, elevation: 1661, description: "Yamagata's big juhyo classic · about 880 m of vertical from the onsen village to Jizo Sancho, on the Ikon Pass.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+
+  // ─── Hakkoda & Aomori Spring (Aomori, Japan) ─────────────
+  // Two very different mountains either side of Aomori city ·
+  // coordinates are base-area points, elevations are lift-served tops.
+  { id: "hakkoda",                   name: "Hakkoda",                   latitude: 40.6784, longitude: 140.8453, elevation: 1324, description: "Ropeway big-mountain terrain on Mt Tamoyachi · juhyo snow monsters and long ungroomed descents.",            bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "aomori-spring",             name: "Aomori Spring",             latitude: 40.6952, longitude: 140.2833, elevation: 921,  description: "Quiet powder resort on Mt Iwaki's northwest slopes above Ajigasawa · a gondola and about 545 m of vertical.",  bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+
   // ─── Queenstown (Otago, New Zealand) ─────────────────────
   // Open-Meteo primary + OpenWeatherMap fallback · no national AWS feed
   // wired for NZ, so bom* fields stay blank and there's no obs reconciler.

@@ -20,6 +20,8 @@ export const REGION_IDS = [
   "furano",
   "rusutsu-kiroro",
   "yuzawa",
+  "zao-onsen",
+  "hakkoda-aomori-spring",
   "queenstown",
   "wanaka",
   "mt-hutt",
@@ -186,6 +188,25 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "ishiuchi": "yuzawa",
   "mitsumata": "yuzawa",
   "yuzawa-roads": "yuzawa",
+
+  // Zao Onsen, JP · 1 mountain (Yamagata's juhyo classic, village to
+  // Jizo Sancho at 1,661m) + 1 base town (the 1,900-year-old onsen
+  // village at ~880m with the ropeways rising straight off it).
+  "zao-onsen-resort": "zao-onsen",
+  "zao-onsen": "zao-onsen",
+  "zao-onsen-roads": "zao-onsen",
+
+  // Hakkoda & Aomori Spring, JP · 2 very different mountains either
+  // side of Aomori city (Hakkoda's ropeway big-mountain terrain ·
+  // Aomori Spring's quiet gondola resort on Mt Iwaki, about 90 min
+  // apart by road) across 3 base towns (Aomori city, Sukayu Onsen,
+  // Ajigasawa).
+  "hakkoda": "hakkoda-aomori-spring",
+  "aomori-spring": "hakkoda-aomori-spring",
+  "aomori": "hakkoda-aomori-spring",
+  "sukayu-onsen": "hakkoda-aomori-spring",
+  "ajigasawa": "hakkoda-aomori-spring",
+  "hakkoda-aomori-spring-roads": "hakkoda-aomori-spring",
 
   // Queenstown, NZ · 2 mountains + 1 gateway town + roads cam tile.
   "coronet-peak": "queenstown",

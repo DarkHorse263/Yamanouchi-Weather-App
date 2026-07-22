@@ -77,6 +77,13 @@ const REGION_ANCHORS: Record<RegionId, {
   // snowiest terrain in the region with the longest season, so it is the
   // fairest single point for powder alerts across the six resorts.
   "yuzawa": { lat: 36.8948, lon: 138.7756, elevation: 1845, region: "JP", displayName: "Yuzawa" },
+  // Zao Onsen · anchor on the Jizo Sancho top station (1,661m) · the
+  // highest lift-served point, in the juhyo zone where the snow falls.
+  "zao-onsen": { lat: 38.1547, lon: 140.4311, elevation: 1661, region: "JP", displayName: "Zao Onsen" },
+  // Hakkoda & Aomori Spring · anchor on Tamoyachidake (1,324m), the
+  // Hakkoda ropeway summit · the snowiest lift-served point of the
+  // pair, so the fairest single point for powder alerts.
+  "hakkoda-aomori-spring": { lat: 40.6723, lon: 140.8641, elevation: 1324, region: "JP", displayName: "Hakkoda & Aomori Spring" },
   // NZ · no national model in the ensemble, so region "OTHER" (global
   // blend). Anchor each on its highest skiable summit.
   "queenstown": { lat: -45.0556, lon: 168.8194, elevation: 1943, region: "OTHER", displayName: "Queenstown" },
