@@ -242,6 +242,9 @@ export default function LocationDetail() {
     resortReport
       ? { label: `Snow depth · resort reported · ${formatAgo(resortReport.updatedAt, now)}`, value: `${Math.round(resortReport.baseCm)} cm`, icon: Snowflake }
       : { label: "Snow depth · model", value: current.snowDepth != null ? `${current.snowDepth} cm` : "-", icon: Snowflake },
+    // Model-estimated overnight snow: same "· model" honesty label as snow
+    // depth. Omitted (not 0) when the source has no past hours.
+    ...(current.snowfallPast24h != null ? [{ label: "Snow last 24h · model", value: `${current.snowfallPast24h.toFixed(1)} cm`, icon: CloudSnow }] : []),
     ...(snow24h != null ? [{ label: "Snow next 24h", value: `${snow24h.toFixed(1)} cm`, icon: CloudSnow }] : []),
     ...(current.dewpoint !== undefined ? [{ label: "Dew point", value: formatTemp(current.dewpoint), icon: Droplets }] : []),
     ...(current.pressure !== undefined ? [{ label: "Pressure", value: `${current.pressure} hPa`, icon: Gauge }] : []),

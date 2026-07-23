@@ -1092,6 +1092,12 @@ export const GetWeatherResponse = zod.object({
           .describe(
             "Height of the 0°C isotherm above mean sea level, in metres (Open-Meteo).",
           ),
+        snowfallPast24h: zod
+          .number()
+          .optional()
+          .describe(
+            "Cumulative fresh snow over the previous 24 full hours, in\ncentimetres (Open-Meteo `snowfall`, model-estimated). Derived at\nthe same elevation as the snowfallNext24h outlook. Omitted when\nthe upstream source has no past hours (e.g. the OpenWeatherMap\nfallback) - unknown is never reported as 0.\n",
+          ),
         snowfallNext24h: zod
           .number()
           .optional()
@@ -1232,6 +1238,12 @@ export const GetLocationWeatherResponse = zod.object({
       .optional()
       .describe(
         "Height of the 0°C isotherm above mean sea level, in metres (Open-Meteo).",
+      ),
+    snowfallPast24h: zod
+      .number()
+      .optional()
+      .describe(
+        "Cumulative fresh snow over the previous 24 full hours, in\ncentimetres (Open-Meteo `snowfall`, model-estimated). Derived at\nthe same elevation as the snowfallNext24h outlook. Omitted when\nthe upstream source has no past hours (e.g. the OpenWeatherMap\nfallback) - unknown is never reported as 0.\n",
       ),
     snowfallNext24h: zod
       .number()

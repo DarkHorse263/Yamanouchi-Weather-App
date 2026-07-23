@@ -272,14 +272,14 @@ export function MountainDetail() {
                 3. Next 24 hours
               The wind/elevation/lift-hold panels moved below the paywall. */}
 
-          {/* Conditions right now · snow depth, incoming snow, wind and
-              freezing level. The four numbers an off-mountain skier is
-              actually deciding on. */}
+          {/* Conditions right now · snow depth, overnight snow, incoming
+              snow, wind and freezing level. The five numbers an off-mountain
+              skier is actually deciding on. */}
           <section className="mt-6 rounded-2xl border border-border bg-white p-5">
             <p className="byline text-muted-foreground/70">
               {t("conditions right now", "現在の状況")}
             </p>
-            <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="mt-3 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
               {/* A resort-reported base REPLACES the model figure (never
                   shown alongside it - two competing numbers would erode
                   trust in both). */}
@@ -296,6 +296,18 @@ export function MountainDetail() {
                     : current.snowDepth !== null && current.snowDepth !== undefined
                       ? `${Math.round(current.snowDepth)}`
                       : "-"
+                }
+                unit="cm"
+              />
+              {/* Model-estimated, so it carries the same "· model" honesty
+                  label as snow depth - it is not a resort measurement. */}
+              <BigStat
+                icon={CloudSnow}
+                label={t("Snow last 24h · model", "過去24時間降雪 · 予測値")}
+                value={
+                  current.snowfallPast24h !== null && current.snowfallPast24h !== undefined
+                    ? current.snowfallPast24h.toFixed(1)
+                    : "-"
                 }
                 unit="cm"
               />
@@ -709,6 +721,7 @@ type MountainWeather = {
     visibility?: number | null;
     dataSource?: string;
     freezingLevel?: number | null;
+    snowfallPast24h?: number | null;
     snowfallNext24h?: number | null;
     snowfallNext48h?: number | null;
     snowfallNext72h?: number | null;

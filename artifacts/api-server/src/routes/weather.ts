@@ -509,6 +509,10 @@ async function fetchLocationWeather(location: LocationConfig, snowElevationM?: n
       const v = om?.current?.freezing_level_height;
       return typeof v === "number" && Number.isFinite(v) ? Math.round(v) : undefined;
     })(),
+    // Model-estimated snow over the previous 24 full hours ("what fell
+    // overnight"). undefined when the source has no past hours (OWM
+    // fallback) - unknown must never render as a confident 0.
+    snowfallPast24h: sumHourlySnowfallPast24h(om),
     snowfallNext24h: sumHourlySnowfall(om, 24),
     snowfallNext48h: sumHourlySnowfall(om, 48),
     snowfallNext72h: sumHourlySnowfall(om, 72),
@@ -523,6 +527,10 @@ async function fetchLocationWeather(location: LocationConfig, snowElevationM?: n
   // Fail-soft: if it returned nothing we keep the village figures AND leave
   // the label as "village" - we never present village snow as mountain snow.
   if (wantsMountainSnow && mountainSnow) {
+    // past24 comes from the SAME elevation-corrected response - mixing a
+    // village past figure with a mid-mountain outlook would tell two
+    // different snow stories side by side.
+    current.snowfallPast24h = mountainSnow.past24;
     current.snowfallNext24h = mountainSnow.snow24;
     current.snowfallNext48h = mountainSnow.snow48;
     current.snowfallNext72h = mountainSnow.snow72;
@@ -606,8 +614,14 @@ async function fetchLocationWeather(location: LocationConfig, snowElevationM?: n
   })) ?? [];
 
   const bomHourlyData = buildBomHourly(bomObs, bomSecondaryObs);
-  // Build the full Open-Meteo hourly array (next 72h forecast).
-  const omHourlyAll: any[] = om?.hourly?.time?.map((time: string, i: number) => ({
+  // Build the Open-Meteo hourly array (next 72h forecast). past_hours=24 (for
+  // the "snow last 24h" stat) adds the previous day of model rows to the OM
+  // response - keep them OUT of this payload: past hours in `hourly` have
+  // always meant real BOM observations, and downstream consumers assume the
+  // OM rows start at the current hour.
+  const omPastCutoffMs = Date.now() - 60 * 60 * 1000;
+  const omOffsetSec = Number(om?.utc_offset_seconds) || 0;
+  const omHourlyAll: any[] = (om?.hourly?.time?.map((time: string, i: number) => ({
     time,
     temperature: om.hourly.temperature_2m[i],
     weatherCode: om.hourly.weather_code[i],
@@ -618,7 +632,11 @@ async function fetchLocationWeather(location: LocationConfig, snowElevationM?: n
     humidity: om.hourly.relative_humidity_2m[i],
     feelsLike: om.hourly.apparent_temperature[i],
     cloudCover: om.hourly.cloud_cover[i]
-  })) ?? [];
+  })) ?? []).filter((h: any) => {
+    const localAsUtcMs = Date.parse(h.time + "Z");
+    if (Number.isNaN(localAsUtcMs)) return false;
+    return localAsUtcMs - omOffsetSec * 1000 >= omPastCutoffMs;
+  });
   // Merge BOM past observations with Open-Meteo future forecast so a single
   // `hourly` array serves both the existing 24h-trend chart (past) and the
   // new "Next 48 hours" strip (future). When BOM is unavailable (JP, dropouts)
@@ -730,6 +748,33 @@ function sumHourlySnowfall(om: any, hours: number): number | undefined {
   return Math.round(total * 10) / 10;
 }
 
+// Sum the PREVIOUS 24 full hour buckets - the window ending where
+// sumHourlySnowfall's "next" window begins (the in-progress hour belongs to
+// the next-24h figure), so the two stats never overlap or double count.
+// Requires the request to have asked for `past_hours=24`; returns undefined
+// when no past buckets exist (OWM fallback) - unknown never renders as 0.
+function sumHourlySnowfallPast24h(om: any): number | undefined {
+  const arr = om?.hourly?.snowfall;
+  const times = om?.hourly?.time;
+  if (!Array.isArray(arr) || !Array.isArray(times)) return undefined;
+  const offsetSec = Number(om?.utc_offset_seconds) || 0;
+  const endMs = Date.now() - 60 * 60 * 1000;
+  const startMs = endMs - 24 * 60 * 60 * 1000;
+  let total = 0;
+  let counted = 0;
+  for (let i = 0; i < arr.length; i++) {
+    const localAsUtcMs = Date.parse(times[i] + "Z");
+    if (Number.isNaN(localAsUtcMs)) continue;
+    const t = localAsUtcMs - offsetSec * 1000;
+    if (t < startMs || t >= endMs) continue;
+    const v = Number(arr[i]);
+    if (Number.isFinite(v)) total += v;
+    counted++;
+  }
+  if (counted === 0) return undefined;
+  return Math.round(total * 10) / 10;
+}
+
 // rain_sum + showers_sum for day i, or null when the upstream response has
 // neither (e.g. the OWM fallback shape, which only provides rain_sum).
 function dailyRainSum(daily: any, i: number): number | null {
@@ -758,7 +803,10 @@ async function fetchOpenMeteo(location: LocationConfig) {
     // resort premium section surfaces the extra days.
     forecast_days: location.region === "JP" ? "7" : "14",
     // 72 hours so we can derive next-24/48/72h cumulative snowfall on the server.
-    forecast_hours: "72"
+    forecast_hours: "72",
+    // Previous day of hourly buckets so we can derive "snow last 24h"
+    // (what fell overnight). Kept OUT of the merged `hourly` payload.
+    past_hours: "24"
   });
 
   // Bound the request: when Open-Meteo's gateway is degraded it can hang for
@@ -788,7 +836,7 @@ async function fetchOpenMeteo(location: LocationConfig) {
 async function fetchSnowfallAtElevation(
   location: LocationConfig,
   elevationM: number,
-): Promise<{ snow24?: number; snow48?: number; snow72?: number } | null> {
+): Promise<{ snow24?: number; snow48?: number; snow72?: number; past24?: number } | null> {
   const params = new URLSearchParams({
     latitude: location.latitude.toString(),
     longitude: location.longitude.toString(),
@@ -796,6 +844,7 @@ async function fetchSnowfallAtElevation(
     hourly: "snowfall",
     timezone: location.timezone ?? "Australia/Sydney",
     forecast_hours: "72",
+    past_hours: "24",
   });
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 8000);
@@ -811,6 +860,7 @@ async function fetchSnowfallAtElevation(
       snow24: sumHourlySnowfall(om, 24),
       snow48: sumHourlySnowfall(om, 48),
       snow72: sumHourlySnowfall(om, 72),
+      past24: sumHourlySnowfallPast24h(om),
     };
   } finally {
     clearTimeout(timer);
