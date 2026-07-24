@@ -3,7 +3,9 @@
 //
 // Adapters: Thredbo (structured XML feed), Falls Creek (ski-patrol JSON the
 // resort site publishes), Mt Hotham (label-anchored parse of the resort's
-// server-rendered snow-report page). This is the "reported" side of the
+// server-rendered snow-report page), plus all seven NZ resorts (NZSki JSON,
+// Cardrona/Treble Cone shared XML, Whakapapa + Turoa server-rendered pages -
+// see the New Zealand section below). This is the "reported" side of the
 // snowDepthSource seam (see feelzlike skiSeason.ts): only a resort-reported
 // figure may assert "no base" - weather-model depth is snowmaking-blind and
 // stays advisory.
@@ -48,8 +50,15 @@ export interface ResortSnowReport {
    * display a base but never assert "no base".
    */
   kind: "resort" | "course";
-  /** Reported snow base depth in centimetres. */
+  /** Reported snow base depth in centimetres. When the resort reports two
+   *  station readings (upper/lower or an unordered range) this is the HIGHER
+   *  of the pair - skiability gating keys off it, so "no base" is asserted
+   *  only when the best station is bare. */
   baseCm: number;
+  /** Lower reading of a two-station / range report, in centimetres. Sorted
+   *  numerically, never labelled upper/lower (some feeds swap min/max).
+   *  Absent for single-figure reports. */
+  baseMinCm?: number;
   /** Cumulative season snowfall in cm, when the feed provides it. */
   seasonSnowfallCm: number | null;
   /** Most recent (24h) snowfall in cm, when the feed provides it. */
@@ -378,6 +387,271 @@ function spencersCreekAdapter(): Adapter {
   };
 }
 
+// ── New Zealand adapters ─────────────────────────────────────────────────────
+// Seven NZ resorts, four source families - all kind "resort", all strict
+// (verified live July 2026):
+//   - NZSki JSON (Mt Hutt / Coronet Peak / The Remarkables): the per-mountain
+//     blob the resorts' own weather-report pages render from. `base` is an
+//     UNORDERED {min,max} pair (min > max in the wild), so it is sorted
+//     numerically and never labelled upper/lower.
+//   - Cardrona + Treble Cone: one official XML feed with two <skiarea>
+//     blocks. <generated> is stamped at REQUEST time (would always look
+//     fresh), so the report <date> anchors the age guard instead.
+//   - Whakapapa: lit-SSR'd report page - label-anchored cell parse plus a
+//     no-year "Last updated" stamp (Hotham-style year inference, NZ offset).
+//   - Turoa: server-rendered Webflow page - value-then-label pairs anchored
+//     on the "Lower/Upper Snow Base" labels; explicit D/M/YYYY stamp.
+
+/** NZST +12; NZDT +13 Oct-Mar - within a day of the real transitions, and a
+ *  ±1h slip is immaterial to a 36h freshness guard. */
+function nzOffsetHours(month: number): number {
+  return month >= 9 || month <= 2 ? 13 : 12;
+}
+
+/** Sorted two-value base fragment: HIGHER value in baseCm (skiability gates
+ *  key off it), lower in baseMinCm only when the pair is distinct. */
+function baseRange(values: number[]): { baseCm: number; baseMinCm?: number } | null {
+  const usable = values.filter((v) => Number.isFinite(v) && v >= 0);
+  if (usable.length === 0) return null;
+  const hi = Math.max(...usable);
+  const lo = Math.min(...usable);
+  return lo < hi ? { baseCm: hi, baseMinCm: lo } : { baseCm: hi };
+}
+
+// NZSki feed shape (one blob per mountain, slug == our locationId):
+//   { "updatedAt": "2026-07-24T04:01:11.858Z",
+//     "snow": { "seasonTotal": 163, "last7Days": 0,
+//               "base": { "min": 140, "max": 81 } }, ... }
+export function parseNzskiJson(raw: string, adapter: Adapter): ResortSnowReport | null {
+  let doc: unknown;
+  try {
+    doc = JSON.parse(raw);
+  } catch {
+    return null;
+  }
+  const root = doc as Record<string, any>;
+  if (!root || typeof root !== "object") return null;
+
+  const updatedAt = String(root.updatedAt ?? "");
+  if (!updatedAt || Number.isNaN(Date.parse(updatedAt))) return null;
+
+  const snow = root.snow;
+  if (!snow || typeof snow !== "object") return null;
+
+  const range = baseRange(
+    [attrNumber(snow.base?.min), attrNumber(snow.base?.max)].filter((v): v is number => v != null),
+  );
+  if (!range) return null;
+
+  return {
+    kind: "resort",
+    ...range,
+    seasonSnowfallCm: attrNumber(snow.seasonTotal),
+    // Feed publishes last7Days only - a 7-day figure is NOT a 24h one and
+    // mapping it across would mislabel. Omitted > mislabelled.
+    lastSnowfallCm: null,
+    updatedAt,
+    sourceName: adapter.sourceName,
+    sourceUrl: adapter.humanUrl,
+  };
+}
+
+function nzskiAdapter(slug: string, sourceName: string, humanUrl: string): Adapter {
+  return {
+    feedUrl: `https://webcams-awb2e0ceg7cccsba.a02.azurefd.net/${slug}-data.json`,
+    humanUrl,
+    sourceName,
+    accept: "application/json",
+    parse: parseNzskiJson,
+  };
+}
+
+/** Strict "NNcm" string -> number; anything else (blank, "n/a", imperial)
+ *  is unknown, never 0. */
+function cmString(value: unknown): number | null {
+  const m = /^(\d{1,3}(?:\.\d+)?)\s*cm$/i.exec(String(value ?? "").trim());
+  return m ? attrNumber(m[1]) : null;
+}
+
+// Cardrona / Treble Cone shared XML feed:
+//   <report><date>2026-07-24</date><generated>...request time...</generated>
+//     <skiareas><skiarea><mountainid>cardrona</mountainid>
+//       <snow><base>40cm</base>
+//         <snowfall><overnight>2</overnight><twentyfourhours>0</twentyfourhours>
+//                   <sevendays>3</sevendays></snowfall></snow> ...
+export function makeCardronaParser(mountainId: "cardrona" | "treblecone") {
+  return function parseCardronaXml(raw: string, adapter: Adapter): ResortSnowReport | null {
+    const parser = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: "@_" });
+    let doc: unknown;
+    try {
+      doc = parser.parse(raw);
+    } catch {
+      return null;
+    }
+    const report = (doc as Record<string, any>)?.report;
+    if (!report) return null;
+
+    // <generated> is request-time and would defeat the freshness guard, so
+    // the report <date> at morning-report time (~07:00 NZ) anchors it. A
+    // slightly-future stamp before 7am is harmless (negative age passes).
+    const date = String(report.date ?? "").trim();
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return null;
+    const month = Number(date.slice(5, 7)) - 1;
+    const updatedAt = `${date}T07:00:00+${String(nzOffsetHours(month)).padStart(2, "0")}:00`;
+    if (Number.isNaN(Date.parse(updatedAt))) return null;
+
+    const areas = report.skiareas?.skiarea;
+    const list: unknown[] = Array.isArray(areas) ? areas : areas ? [areas] : [];
+    const area = list.find(
+      (a) => String((a as Record<string, any>)?.mountainid ?? "").trim() === mountainId,
+    ) as Record<string, any> | undefined;
+    if (!area) return null;
+
+    const baseCm = cmString(area.snow?.base);
+    if (baseCm == null) return null;
+
+    return {
+      kind: "resort",
+      baseCm,
+      seasonSnowfallCm: null,
+      lastSnowfallCm: attrNumber(area.snow?.snowfall?.twentyfourhours),
+      updatedAt,
+      sourceName: adapter.sourceName,
+      sourceUrl: adapter.humanUrl,
+    };
+  };
+}
+
+/** Short or full month name -> 0-indexed month, else null. */
+function monthFromName(name: string): number | null {
+  const key = name.toLowerCase().slice(0, 3);
+  for (const [full, idx] of Object.entries(MONTH_INDEX)) {
+    if (full.slice(0, 3) === key) return idx;
+  }
+  return null;
+}
+
+/** Parse Whakapapa's "Last updated: 6:50am Fri 24th Jul" (no year!) into ISO.
+ *  Year inference mirrors parseHothamTimestamp: current UTC year unless that
+ *  lands >24h in the future, then the year before. lit-SSR comment nodes may
+ *  sit between the label and the value. */
+export function parseWhakapapaTimestamp(html: string, nowMs = Date.now()): string | null {
+  const re =
+    /Last updated:(?:\s|<!--[^>]*-->)*(\d{1,2}):(\d{2})\s*(am|pm)\s+(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)[a-z]*\s+(\d{1,2})(?:st|nd|rd|th)?\s+([A-Za-z]{3,9})/i;
+  const m = re.exec(html);
+  if (!m) return null;
+  let hour = Number(m[1]) % 12;
+  if (m[3].toLowerCase() === "pm") hour += 12;
+  const minute = Number(m[2]);
+  const day = Number(m[4]);
+  const month = monthFromName(m[5]);
+  if (month == null || !(day >= 1 && day <= 31) || !(minute >= 0 && minute <= 59)) return null;
+  const offsetH = nzOffsetHours(month);
+  const nowYear = new Date(nowMs).getUTCFullYear();
+  for (const year of [nowYear, nowYear - 1]) {
+    const t = Date.UTC(year, month, day, hour - offsetH, minute);
+    if (t <= nowMs + 24 * 60 * 60 * 1000) return new Date(t).toISOString();
+  }
+  return null;
+}
+
+/** Label-anchored lit-SSR cell extractor. Markup shape:
+ *    <div class="dataCellTitle_x">Snow Base</div>
+ *    <div class="dataCellContent_x"><!--lit-part-->16<!--/lit-part-->
+ *                                   <!--lit-part-->cm<!--/lit-part--></div>
+ *  Returns ALL matching station values (Whakapapa reports per-station). */
+function extractWhakapapaCells(html: string, title: string): number[] {
+  const re = new RegExp(
+    title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") +
+      String.raw`\s*</div>(?:\s|<!--[^>]*-->|<div[^>]*>)*(\d{1,3}(?:\.\d+)?)(?:\s|<!--[^>]*-->)*cm`,
+    "gi",
+  );
+  const out: number[] = [];
+  for (const m of html.matchAll(re)) {
+    const n = attrNumber(m[1]);
+    if (n != null) out.push(n);
+  }
+  return out;
+}
+
+export function parseWhakapapaHtml(raw: string, adapter: Adapter): ResortSnowReport | null {
+  // Two stations (Top of Knoll T-bar / Top of Gondola) -> sorted range.
+  const range = baseRange(extractWhakapapaCells(raw, "Snow Base"));
+  if (!range) return null;
+  const updatedAt = parseWhakapapaTimestamp(raw);
+  if (!updatedAt) return null;
+  const fresh = extractWhakapapaCells(raw, "24 hr Snowfall");
+  return {
+    kind: "resort",
+    ...range,
+    seasonSnowfallCm: null,
+    lastSnowfallCm: fresh.length ? Math.max(...fresh) : null,
+    updatedAt,
+    sourceName: adapter.sourceName,
+    sourceUrl: adapter.humanUrl,
+  };
+}
+
+/** Turoa Webflow value-then-label pairs:
+ *    <h5 ...>90cm</h5></div><div ...><h5 ...>Lower Snow Base</h5>
+ *  Returns a lowercased label -> value map. */
+function extractTuroaPairs(html: string): Map<string, number> {
+  const re =
+    /<h5[^>]*>\s*(\d{1,3}(?:\.\d+)?)\s*cm\s*<\/h5>\s*<\/div>\s*<div[^>]*>\s*<h5[^>]*>\s*([^<]+?)\s*<\/h5>/gi;
+  const out = new Map<string, number>();
+  for (const m of html.matchAll(re)) {
+    const n = attrNumber(m[1]);
+    if (n != null) out.set(m[2].trim().toLowerCase(), n);
+  }
+  return out;
+}
+
+/** Parse Turoa's explicit "Updated on: ... 24/7/2026 6:03 AM" stamp (NZ is
+ *  D/M/YYYY). Anchored to the label so other dates on the page can't match. */
+export function parseTuroaTimestamp(html: string): string | null {
+  const anchor = html.search(/Updated on:/i);
+  if (anchor < 0) return null;
+  const m = /(\d{1,2})\/(\d{1,2})\/(\d{4})\s+(\d{1,2}):(\d{2})\s*(AM|PM)/i.exec(
+    html.slice(anchor, anchor + 400),
+  );
+  if (!m) return null;
+  const day = Number(m[1]);
+  const month = Number(m[2]) - 1;
+  const year = Number(m[3]);
+  let hour = Number(m[4]) % 12;
+  if (m[6].toUpperCase() === "PM") hour += 12;
+  const minute = Number(m[5]);
+  if (!(day >= 1 && day <= 31) || !(month >= 0 && month <= 11) || !(minute >= 0 && minute <= 59))
+    return null;
+  const t = Date.UTC(year, month, day, hour - nzOffsetHours(month), minute);
+  if (Number.isNaN(t)) return null;
+  return new Date(t).toISOString();
+}
+
+export function parseTuroaHtml(raw: string, adapter: Adapter): ResortSnowReport | null {
+  const pairs = extractTuroaPairs(raw);
+  const range = baseRange(
+    [pairs.get("lower snow base"), pairs.get("upper snow base")].filter(
+      (v): v is number => v != null,
+    ),
+  );
+  if (!range) return null;
+  const updatedAt = parseTuroaTimestamp(raw);
+  if (!updatedAt) return null;
+  return {
+    kind: "resort",
+    ...range,
+    seasonSnowfallCm: null,
+    lastSnowfallCm: pairs.get("last 24hrs") ?? null,
+    updatedAt,
+    sourceName: adapter.sourceName,
+    sourceUrl: adapter.humanUrl,
+  };
+}
+
+const CARDRONA_TC_HUMAN_URL = "https://cardrona-treblecone.com/snow-report";
+const CARDRONA_TC_FEED_URL = "https://cardrona-treblecone.com/api/snowreport/snowReportXml";
+
 /** Adapter registry keyed by weather locationId (LOCATIONS ids). */
 const ADAPTERS: Record<string, Adapter> = {
   thredbo: {
@@ -405,6 +679,46 @@ const ADAPTERS: Record<string, Adapter> = {
   // village is at 1760m right beside it.
   perisher: spencersCreekAdapter(),
   "charlottes-pass": spencersCreekAdapter(),
+  // ── New Zealand ────────────────────────────────────────────────────────────
+  "mt-hutt": nzskiAdapter("mt-hutt", "Mt Hutt", "https://www.mthutt.co.nz/weather-report"),
+  "coronet-peak": nzskiAdapter(
+    "coronet-peak",
+    "Coronet Peak",
+    "https://www.coronetpeak.co.nz/weather-report",
+  ),
+  "the-remarkables": nzskiAdapter(
+    "the-remarkables",
+    "The Remarkables",
+    "https://www.theremarkables.co.nz/weather-report",
+  ),
+  // One shared feed, two entries: 2 fetches / 30min TTL is a trivial
+  // duplicate - deliberately NOT worth feed-level cache sharing.
+  cardrona: {
+    feedUrl: CARDRONA_TC_FEED_URL,
+    humanUrl: CARDRONA_TC_HUMAN_URL,
+    sourceName: "Cardrona",
+    parse: makeCardronaParser("cardrona"),
+  },
+  "treble-cone": {
+    feedUrl: CARDRONA_TC_FEED_URL,
+    humanUrl: CARDRONA_TC_HUMAN_URL,
+    sourceName: "Treble Cone",
+    parse: makeCardronaParser("treblecone"),
+  },
+  whakapapa: {
+    feedUrl: "https://www.whakapapa.com/report",
+    humanUrl: "https://www.whakapapa.com/report",
+    sourceName: "Whakapapa",
+    accept: "text/html",
+    parse: parseWhakapapaHtml,
+  },
+  turoa: {
+    feedUrl: "https://www.pureturoa.nz/snow-report",
+    humanUrl: "https://www.pureturoa.nz/snow-report",
+    sourceName: "Turoa",
+    accept: "text/html",
+    parse: parseTuroaHtml,
+  },
 };
 
 export function hasSnowReportAdapter(locationId: string): boolean {

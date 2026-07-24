@@ -320,7 +320,13 @@ export function MountainDetail() {
                 }
                 value={
                   resortReport
-                    ? `${Math.round(resortReport.baseCm)}`
+                    ? // Two-station / range reports carry the lower reading in
+                      // baseMinCm - render "16-38" so neither station is
+                      // overstated as THE base. baseCm alone = single figure.
+                      resortReport.baseMinCm != null &&
+                        Math.round(resortReport.baseMinCm) !== Math.round(resortReport.baseCm)
+                      ? `${Math.round(resortReport.baseMinCm)}-${Math.round(resortReport.baseCm)}`
+                      : `${Math.round(resortReport.baseCm)}`
                     : modelDepthTrusted && current.snowDepth !== null && current.snowDepth !== undefined
                       ? `${Math.round(current.snowDepth)}`
                       : "-"

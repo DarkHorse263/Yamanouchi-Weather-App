@@ -3207,7 +3207,18 @@ components:
             Optional for backwards compatibility; absent means "resort".
         baseCm:
           type: number
-          description: Reported snow base depth in centimetres.
+          description: >
+            Reported snow base depth in centimetres. When the resort reports
+            two station readings (upper/lower or an unordered range), this is
+            the HIGHER of the pair - skiability gating keys off it so "no
+            base" is only asserted when the best station is bare.
+        baseMinCm:
+          type: number
+          description: >
+            Lower reading of a two-station / range report, in centimetres.
+            Present only when the resort publishes two distinct base figures
+            (sorted numerically - never labelled upper/lower, some feeds swap
+            them). Absent for single-figure reports.
         seasonSnowfallCm:
           type: number
           nullable: true

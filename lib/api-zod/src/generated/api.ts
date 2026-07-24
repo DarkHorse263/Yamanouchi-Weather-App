@@ -1350,7 +1350,17 @@ export const GetResortSnowReportResponse = zod.object({
         .describe(
           'Provenance - \"resort\" = the resort\'s own official report; \"course\" = official off-resort snow-course measurement. Optional for backwards compatibility; absent means \"resort\".\n',
         ),
-      baseCm: zod.number().describe("Reported snow base depth in centimetres."),
+      baseCm: zod
+        .number()
+        .describe(
+          'Reported snow base depth in centimetres. When the resort reports two station readings (upper\/lower or an unordered range), this is the HIGHER of the pair - skiability gating keys off it so \"no base\" is only asserted when the best station is bare.\n',
+        ),
+      baseMinCm: zod
+        .number()
+        .optional()
+        .describe(
+          "Lower reading of a two-station \/ range report, in centimetres. Present only when the resort publishes two distinct base figures (sorted numerically - never labelled upper\/lower, some feeds swap them). Absent for single-figure reports.\n",
+        ),
       seasonSnowfallCm: zod
         .number()
         .nullish()
