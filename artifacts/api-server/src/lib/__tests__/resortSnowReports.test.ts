@@ -6,6 +6,8 @@ import {
   parseHothamTimestamp,
   makeSnowyHydroCourseParser,
   parseNzskiJson,
+  parseRemarkablesHtml,
+  parseRemarkablesTimestamp,
   makeCardronaParser,
   parseWhakapapaHtml,
   parseWhakapapaTimestamp,
@@ -288,7 +290,7 @@ test("snowy hydro: non-JSON body (maintenance page) -> absent", () => {
   assert.equal(shParse("<html>down for maintenance</html>", shAdapter), null);
 });
 
-// ── NZSki JSON (Mt Hutt / Coronet Peak / The Remarkables) ────────────────────
+// ── NZSki JSON (Mt Hutt / Coronet Peak via -winter slug) ─────────────────────
 
 const nzskiAdapterFixture: SnowReportAdapter = {
   feedUrl: "https://example.test/mt-hutt-data.json",
@@ -355,6 +357,119 @@ test("nzski: missing updatedAt -> absent (36h guard needs it)", () => {
 
 test("nzski: non-JSON body -> absent", () => {
   assert.equal(parseNzskiJson("<html>edge error</html>", nzskiAdapterFixture), null);
+});
+
+// ── The Remarkables server-rendered page ─────────────────────────────────────
+
+const remarksAdapter: SnowReportAdapter = {
+  feedUrl: "https://www.theremarkables.co.nz/weather-report/",
+  humanUrl: "https://www.theremarkables.co.nz/weather-report/",
+  sourceName: "The Remarkables",
+  parse: parseRemarkablesHtml,
+};
+
+/** Mirrors the live template exactly (multiline label/value cells, both
+ *  "Last Updated" span variants) - captured July 2026. */
+function remarksHtml(stats: Record<string, string>, updated = "Fri 24 Jul 16:28 PM"): string {
+  const cells = Object.entries(stats)
+    .map(
+      ([label, value]) => `
+        <div class="w_weather-status no-icon">
+            <div class="w_weather-status__info">
+                <p class="w_weather-status__description">
+                    ${label}
+                </p>
+                <p class="w_weather-status__data">
+                    ${value}
+                </p>
+            </div>
+        </div>`,
+    )
+    .join("\n");
+  return `<html><body>
+    <span class="last-updated">Last Updated: ${updated}</span>
+    ${cells}
+    <span class="weather-report__weather__details-update print-hide">Last Updated: ${updated}</span>
+  </body></html>`;
+}
+
+// nowMs fixed inside the season so year inference is deterministic.
+const REMARKS_NOW = Date.parse("2026-07-24T08:00:00Z");
+
+test("remarkables: full report (range base + 24h + season)", () => {
+  const html = remarksHtml({
+    "Mountain Status": "Open",
+    "Last 24 Hours": "3cm",
+    "Snow Base": "15 - 80cm",
+    "Season Snowfall": "80cm",
+  });
+  const r = parseRemarkablesHtml(html, remarksAdapter);
+  assert.ok(r);
+  assert.equal(r!.kind, "resort");
+  assert.equal(r!.baseCm, 80);
+  assert.equal(r!.baseMinCm, 15);
+  assert.equal(r!.lastSnowfallCm, 3);
+  assert.equal(r!.seasonSnowfallCm, 80);
+  assert.equal(r!.sourceName, "The Remarkables");
+  // 16:28 NZST (+12) -> 04:28 UTC same day
+  assert.equal(r!.updatedAt.startsWith("2026-07-24T04:28"), true);
+});
+
+test("remarkables: single-figure base collapses (no baseMinCm)", () => {
+  const r = parseRemarkablesHtml(remarksHtml({ "Snow Base": "40cm" }), remarksAdapter);
+  assert.ok(r);
+  assert.equal(r!.baseCm, 40);
+  assert.equal(r!.baseMinCm, undefined);
+  assert.equal(r!.lastSnowfallCm, null);
+  assert.equal(r!.seasonSnowfallCm, null);
+});
+
+test("remarkables: non-cm / blank base -> absent, never 0", () => {
+  assert.equal(
+    parseRemarkablesHtml(remarksHtml({ "Snow Base": "n/a" }), remarksAdapter),
+    null,
+  );
+  assert.equal(
+    parseRemarkablesHtml(remarksHtml({ "Snow Base": '6"' }), remarksAdapter),
+    null,
+  );
+  assert.equal(
+    parseRemarkablesHtml(remarksHtml({ "Last 24 Hours": "3cm" }), remarksAdapter),
+    null,
+  );
+});
+
+test("remarkables: missing Last Updated stamp -> absent (36h guard needs it)", () => {
+  const html = remarksHtml({ "Snow Base": "40cm" }).replace(/Last Updated:[^<]*/g, "");
+  assert.equal(parseRemarkablesHtml(html, remarksAdapter), null);
+});
+
+test("remarkables timestamp: 24h clock with redundant PM suffix", () => {
+  // 16:28 "PM" is already 24h - must NOT become 28:28 or shift.
+  const iso = parseRemarkablesTimestamp("Last Updated: Fri 24 Jul 16:28 PM", REMARKS_NOW);
+  assert.equal(iso, "2026-07-24T04:28:00.000Z"); // NZST +12
+});
+
+test("remarkables timestamp: genuine 12h clock still honours AM/PM", () => {
+  assert.equal(
+    parseRemarkablesTimestamp("Last Updated: Fri 24 Jul 4:28 PM", REMARKS_NOW),
+    "2026-07-24T04:28:00.000Z",
+  );
+  assert.equal(
+    parseRemarkablesTimestamp("Last Updated: Fri 24 Jul 12:05 AM", REMARKS_NOW),
+    "2026-07-23T12:05:00.000Z", // midnight NZ
+  );
+});
+
+test("remarkables timestamp: no-year inference falls back a year when future", () => {
+  // Dec stamp seen in July -> must resolve to LAST year's December.
+  const iso = parseRemarkablesTimestamp("Last Updated: Mon 14 Dec 9:00 AM", REMARKS_NOW);
+  assert.ok(iso);
+  assert.equal(iso!.startsWith("2025-12-1"), true);
+});
+
+test("remarkables timestamp: garbage -> null", () => {
+  assert.equal(parseRemarkablesTimestamp("Last Updated: soon", REMARKS_NOW), null);
 });
 
 // ── Cardrona / Treble Cone shared XML ────────────────────────────────────────

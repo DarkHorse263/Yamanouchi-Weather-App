@@ -390,10 +390,12 @@ function spencersCreekAdapter(): Adapter {
 // ── New Zealand adapters ─────────────────────────────────────────────────────
 // Seven NZ resorts, four source families - all kind "resort", all strict
 // (verified live July 2026):
-//   - NZSki JSON (Mt Hutt / Coronet Peak / The Remarkables): the per-mountain
-//     blob the resorts' own weather-report pages render from. `base` is an
-//     UNORDERED {min,max} pair (min > max in the wild), so it is sorted
-//     numerically and never labelled upper/lower.
+//   - NZSki JSON (Mt Hutt / Coronet Peak): the per-mountain blob the resorts'
+//     own weather-report pages render from. `base` is an UNORDERED {min,max}
+//     pair (min > max in the wild), so it is sorted numerically and never
+//     labelled upper/lower. Coronet uses the `coronet-peak-winter` slug (see
+//     registry note); The Remarkables' blob rotted with no fresh variant, so
+//     it parses its server-rendered report page instead (see below).
 //   - Cardrona + Treble Cone: one official XML feed with two <skiarea>
 //     blocks. <generated> is stamped at REQUEST time (would always look
 //     fresh), so the report <date> anchors the age guard instead.
@@ -649,6 +651,84 @@ export function parseTuroaHtml(raw: string, adapter: Adapter): ResortSnowReport 
   };
 }
 
+// ── The Remarkables server-rendered report page ─────────────────────────────
+// The per-mountain NZSki blob (`the-remarkables-data.json`) rotted at the
+// start of the 2026 season (stuck weeks stale while the site showed fresh
+// numbers), because the Remarkables site is the OLD server-rendered template:
+// its weather-report page ships the stats in plain HTML, not from the blob.
+// Parse the page itself - labels sit in `w_weather-status__description`,
+// values in `w_weather-status__data`:
+//   <p class="w_weather-status__description">Snow Base</p>
+//   <p class="w_weather-status__data">15 - 80cm</p>
+
+/** Label-anchored stat extractor for the Remarkables template. Returns the
+ *  raw value string (e.g. "3cm", "15 - 80cm") or null. */
+function extractRemarkablesStat(html: string, label: string): string | null {
+  const re = new RegExp(
+    String.raw`w_weather-status__description">\s*` +
+      label.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") +
+      String.raw`\s*</p>\s*<p class="w_weather-status__data">\s*([^<]+?)\s*</p>`,
+    "i",
+  );
+  const m = re.exec(html);
+  return m ? m[1].trim() : null;
+}
+
+/** "15 - 80cm" / "80cm" -> sorted numeric values (cm suffix required -
+ *  strict, imperial or blank is unknown, never 0). */
+function cmRange(value: string | null): number[] {
+  if (!value) return [];
+  const m = /^(\d{1,3}(?:\.\d+)?)\s*(?:-\s*(\d{1,3}(?:\.\d+)?)\s*)?cm$/i.exec(value.trim());
+  if (!m) return [];
+  return [m[1], m[2]]
+    .map((v) => attrNumber(v))
+    .filter((v): v is number => v != null);
+}
+
+/** Parse "Last Updated: Fri 24 Jul 16:28 PM" (no year, 24h clock with a
+ *  redundant AM/PM suffix). Year inference mirrors parseWhakapapaTimestamp;
+ *  the AM/PM tag is only applied when the hour is actually 12-hour. */
+export function parseRemarkablesTimestamp(html: string, nowMs = Date.now()): string | null {
+  const re =
+    /Last Updated:\s*(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)[a-z]*\s+(\d{1,2})\s+([A-Za-z]{3,9})\s+(\d{1,2}):(\d{2})(?:\s*(AM|PM))?/i;
+  const m = re.exec(html);
+  if (!m) return null;
+  const day = Number(m[1]);
+  const month = monthFromName(m[2]);
+  let hour = Number(m[3]);
+  const minute = Number(m[4]);
+  const meridiem = m[5]?.toUpperCase();
+  if (hour <= 12 && meridiem === "PM" && hour !== 12) hour += 12;
+  if (hour === 12 && meridiem === "AM") hour = 0;
+  if (month == null || !(day >= 1 && day <= 31) || hour > 23 || !(minute >= 0 && minute <= 59))
+    return null;
+  const offsetH = nzOffsetHours(month);
+  const nowYear = new Date(nowMs).getUTCFullYear();
+  for (const year of [nowYear, nowYear - 1]) {
+    const t = Date.UTC(year, month, day, hour - offsetH, minute);
+    if (t <= nowMs + 24 * 60 * 60 * 1000) return new Date(t).toISOString();
+  }
+  return null;
+}
+
+export function parseRemarkablesHtml(raw: string, adapter: Adapter): ResortSnowReport | null {
+  const range = baseRange(cmRange(extractRemarkablesStat(raw, "Snow Base")));
+  if (!range) return null;
+  const updatedAt = parseRemarkablesTimestamp(raw);
+  if (!updatedAt) return null;
+  const last24 = cmRange(extractRemarkablesStat(raw, "Last 24 Hours"));
+  const season = cmRange(extractRemarkablesStat(raw, "Season Snowfall"));
+  return {
+    kind: "resort",
+    ...range,
+    seasonSnowfallCm: season.length === 1 ? season[0] : null,
+    lastSnowfallCm: last24.length === 1 ? last24[0] : null,
+    updatedAt,
+    sourceName: adapter.sourceName,
+    sourceUrl: adapter.humanUrl,
+  };
+}
+
 const CARDRONA_TC_HUMAN_URL = "https://cardrona-treblecone.com/snow-report";
 const CARDRONA_TC_FEED_URL = "https://cardrona-treblecone.com/api/snowreport/snowReportXml";
 
@@ -681,16 +761,23 @@ const ADAPTERS: Record<string, Adapter> = {
   "charlottes-pass": spencersCreekAdapter(),
   // ── New Zealand ────────────────────────────────────────────────────────────
   "mt-hutt": nzskiAdapter("mt-hutt", "Mt Hutt", "https://www.mthutt.co.nz/weather-report"),
+  // Coronet's own weather page resolves slug coronet-peak -> coronet-peak-winter
+  // (weather-app.iife.js `_resolveOtherMountainSlug`); the plain blob rotted at
+  // the start of the 2026 season while -winter stays fresh.
   "coronet-peak": nzskiAdapter(
-    "coronet-peak",
+    "coronet-peak-winter",
     "Coronet Peak",
     "https://www.coronetpeak.co.nz/weather-report",
   ),
-  "the-remarkables": nzskiAdapter(
-    "the-remarkables",
-    "The Remarkables",
-    "https://www.theremarkables.co.nz/weather-report",
-  ),
+  // Remarkables' blob rotted the same way but has NO -winter variant - the old
+  // server-rendered template ships the stats in the page HTML instead.
+  "the-remarkables": {
+    feedUrl: "https://www.theremarkables.co.nz/weather-report/",
+    humanUrl: "https://www.theremarkables.co.nz/weather-report/",
+    sourceName: "The Remarkables",
+    accept: "text/html",
+    parse: parseRemarkablesHtml,
+  },
   // One shared feed, two entries: 2 fetches / 30min TTL is a trivial
   // duplicate - deliberately NOT worth feed-level cache sharing.
   cardrona: {

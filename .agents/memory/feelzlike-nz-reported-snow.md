@@ -19,12 +19,21 @@ single-figure baseCm on purpose.
 overstates (max); the higher-value rule keeps skiSeason.ts untouched.
 
 ## Source quirks (verified live July 2026)
-- NZSki (Mt Hutt / Coronet Peak / The Remarkables): per-mountain JSON blob at
-  `webcams-…azurefd.net/{slug}-data.json`, slug == our location id. Feed has
-  last7Days only → lastSnowfallCm must stay null (a 7-day figure is not 24h).
-  Their `updatedAt` stamps go STALE FOR WEEKS while the resort page still
-  renders numbers - the 36h guard then honestly nulls the report. A
-  persistently-null NZSki resort is designed behavior, not a parse bug.
+- NZSki (Mt Hutt / Coronet Peak): per-mountain JSON blob at
+  `webcams-…azurefd.net/{slug}-data.json`. Feed has last7Days only →
+  lastSnowfallCm must stay null (a 7-day figure is not 24h). BLOBS ROT
+  PER-RESORT: a slug's blob can go stale for weeks while the resort site
+  shows fresh data. Before blaming the 36h guard, check for a slug variant -
+  Coronet's own page JS (`_resolveOtherMountainSlug` in weather-app.iife.js)
+  maps `coronet-peak` → `coronet-peak-winter`, and only the -winter blob is
+  fresh (our adapter uses it; registry key stays `coronet-peak`).
+- The Remarkables: its blob rotted with NO fresh variant (-winter/-summer
+  404). Its site is the OLD server-rendered template - stats ship in page
+  HTML (`w_weather-status__description`/`__data` label/value pairs), parsed
+  directly. "Last Updated: Fri 24 Jul 16:28 PM" stamp has NO YEAR and a 24h
+  clock with a redundant AM/PM suffix (16:28 PM = 16:28 - only apply
+  meridiem when hour ≤ 12). Page accepts our identifying UA (only /webcams/
+  is bot-walled).
 - Cardrona + Treble Cone: ONE shared XML feed, two `<skiarea>` blocks.
   `<generated>` is stamped at REQUEST time (would always look fresh) - use
   `<date>` at 07:00 NZ as the freshness anchor. Base is a "40cm" string,
