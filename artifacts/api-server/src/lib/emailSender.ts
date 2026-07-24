@@ -29,6 +29,10 @@ interface SendResult {
 }
 
 const FROM = process.env.ALERT_FROM_EMAIL ?? "feelzlike alerts <onboarding@resend.dev>";
+// alerts@feelzlike.com is a send-only identity, not a real mailbox - replies
+// must land somewhere monitored. info@ is the owner's Exchange mailbox (the
+// enquiries@ alias forwards there too).
+const REPLY_TO = process.env.ALERT_REPLY_TO_EMAIL ?? "info@feelzlike.com";
 
 export async function sendEmail(args: SendArgs): Promise<SendResult> {
   const apiKey = process.env.RESEND_API_KEY;
@@ -53,6 +57,7 @@ export async function sendEmail(args: SendArgs): Promise<SendResult> {
       },
       body: JSON.stringify({
         from: FROM,
+        reply_to: REPLY_TO,
         to: args.to,
         subject: args.subject,
         html: args.html,
