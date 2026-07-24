@@ -67,11 +67,14 @@ export interface LiftOperationInput {
    * can NEVER force the `no_snow` negative - models are blind to snowmaking,
    * so a ~0 model read mid-season regularly coexists with lifts running on
    * machine-made base (the July 2026 "no skiable base while lifts spin" bug).
-   * Only an authoritative resort/observation figure ("reported") may assert
-   * that lifts plausibly cannot run. Defaulting to "model" means a forgetful
-   * caller fails SAFE (no false closure).
+   * "course" = an official off-resort snow-course measurement (e.g. Snowy
+   * Hydro's weekly Spencers Creek reading): measured, so it may inform the
+   * display, but natural-snow-only + off-site + up to a week old, so like
+   * "model" it may never assert no_snow. Only the resort's own figure
+   * ("reported") may assert that lifts plausibly cannot run. Defaulting to
+   * "model" means a forgetful caller fails SAFE (no false closure).
    */
-  snowDepthSource?: "model" | "reported";
+  snowDepthSource?: "model" | "reported" | "course";
   /** Real lift count currently open, when an authoritative feed exists (AU). */
   actualLiftsOpen?: number | null;
   /** Real total lift count, when an authoritative feed exists (AU). */
@@ -132,10 +135,12 @@ export type SkiableNowRead =
       baseCm: number | null;
       /**
        * Where baseCm came from: "reported" = the resort's own official feed
-       * (trustworthy enough to caption "resort reported"), "model" = weather
-       * model estimate. Mirrors snowDepthSource on LiftOperationInput.
+       * (trustworthy enough to caption "resort reported"), "course" = an
+       * official off-resort snow-course measurement (captioned by course
+       * name), "model" = weather model estimate. Mirrors snowDepthSource on
+       * LiftOperationInput.
        */
-      baseSource: "model" | "reported";
+      baseSource: "model" | "reported" | "course";
     };
 
 /**

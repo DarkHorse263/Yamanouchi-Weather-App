@@ -383,10 +383,15 @@ function skiableNowDisplay(
                     `Base ${Math.round(read.baseCm)}cm · resort reported`,
                     `積雪 ${Math.round(read.baseCm)}cm · リゾート報告`,
                   )
-                : t(
-                    `Base ~${Math.round(read.baseCm)}cm · check resort`,
-                    `積雪 約${Math.round(read.baseCm)}cm · 要確認`,
-                  ),
+                : read.baseSource === "course"
+                  ? t(
+                      `Base ${Math.round(read.baseCm)}cm · official snow course`,
+                      `積雪 ${Math.round(read.baseCm)}cm · 公式観測`,
+                    )
+                  : t(
+                      `Base ~${Math.round(read.baseCm)}cm · check resort`,
+                      `積雪 約${Math.round(read.baseCm)}cm · 要確認`,
+                    ),
             tone: SKIABLE_NOW_TONES.sky,
           }
         : {

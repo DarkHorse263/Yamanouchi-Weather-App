@@ -3190,14 +3190,24 @@ components:
     ResortSnowReport:
       type: object
       description: |
-        Snow conditions as REPORTED by the resort's own official feed.
-        Strictly parsed - base must be present and numeric or the whole
-        report is treated as absent (never defaulted to 0, which would
-        assert "no base" without evidence).
+        Snow conditions from an official source, strictly parsed - base must
+        be present and numeric or the whole report is treated as absent
+        (never defaulted to 0, which would assert "no base" without
+        evidence). `kind` distinguishes the resort's own report ("resort")
+        from an official off-resort snow-course measurement ("course",
+        e.g. Snowy Hydro's weekly Spencers Creek reading - natural snow
+        only, so it may display a base but never assert "no base").
       properties:
+        kind:
+          type: string
+          enum: [resort, course]
+          description: >
+            Provenance - "resort" = the resort's own official report;
+            "course" = official off-resort snow-course measurement.
+            Optional for backwards compatibility; absent means "resort".
         baseCm:
           type: number
-          description: Resort-reported snow base depth in centimetres.
+          description: Reported snow base depth in centimetres.
         seasonSnowfallCm:
           type: number
           nullable: true
@@ -3229,7 +3239,10 @@ components:
           oneOf:
             - $ref: "#/components/schemas/ResortSnowReport"
           nullable: true
-          description: Null when no adapter, feed failure, strict-parse failure, or report older than 36h.
+          description: >
+            Null when no adapter, feed failure, strict-parse failure, or
+            report older than the source's freshness window (36h for resort
+            feeds, ~10 days for weekly snow-course readings).
       required:
         - locationId
         - report

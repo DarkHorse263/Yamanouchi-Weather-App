@@ -187,6 +187,30 @@ export default function LocationDetail() {
   // and the UI then falls back to the model depth.
   const { data: snowReportData } = useGetResortSnowReport(locationId, { query: { enabled: !!locationId } as never });
   const resortReport = snowReportData?.report ?? null;
+  // "course" = official off-resort snow-course measurement (Snowy Hydro's
+  // weekly Spencers Creek reading for Perisher / Charlotte Pass). Captioned
+  // by source + reading DATE (weekly cadence - "Xd ago" would read stale),
+  // and it may never assert "no base" (see skiSeason.ts). Absent kind means
+  // "resort" (older cache).
+  const reportSource: "reported" | "course" =
+    resortReport?.kind === "course" ? "course" : "reported";
+  const courseDateLabel = (() => {
+    if (!resortReport || reportSource !== "course") return "";
+    const d = new Date(resortReport.updatedAt);
+    if (Number.isNaN(d.getTime())) return "";
+    // Pin to AEST: the reading is taken on an AU calendar day, and a
+    // viewer-local format would shift it a day for overseas visitors.
+    return d.toLocaleDateString("en-AU", {
+      day: "numeric",
+      month: "short",
+      timeZone: "Australia/Sydney",
+    });
+  })();
+  // In lift season a weather-model snow depth is suppressed rather than
+  // shown (grid-cell natural snow, blind to snowmaking - reads ~0 under
+  // running lifts). Off-season the model figure returns (melt curve).
+  const seasonOpen = isLiftSeasonOpen(REGION_COUNTRY[region.id]);
+  const modelDepthTrusted = !seasonOpen;
   // Only paint live open/closed when a resort is wired to a verified live feed.
   const hasLiveLiftStatus = LIVE_LIFT_STATUS_RESORTS.has(locationId);
   // Snowy region opts in to season-aware UI · in summer the snow/lift
@@ -238,10 +262,15 @@ export default function LocationDetail() {
     ...(current.windGust ? [{ label: "Gusts", value: `${current.windGust} km/h`, icon: Wind }] : []),
     { label: "Humidity", value: `${current.humidity}%`, icon: Droplets },
     // A resort-reported base REPLACES the model figure (never shown alongside
-    // it - two competing numbers would just erode trust in both).
+    // it - two competing numbers would just erode trust in both). In season,
+    // no report means "not reported" - never a confidently wrong model ~0.
     resortReport
-      ? { label: `Snow depth · resort reported · ${formatAgo(resortReport.updatedAt, now)}`, value: `${Math.round(resortReport.baseCm)} cm`, icon: Snowflake }
-      : { label: "Snow depth · model", value: current.snowDepth != null ? `${current.snowDepth} cm` : "-", icon: Snowflake },
+      ? reportSource === "course"
+        ? { label: `Snow depth · ${resortReport.sourceName}${courseDateLabel ? ` · ${courseDateLabel}` : ""}`, value: `${Math.round(resortReport.baseCm)} cm`, icon: Snowflake }
+        : { label: `Snow depth · resort reported · ${formatAgo(resortReport.updatedAt, now)}`, value: `${Math.round(resortReport.baseCm)} cm`, icon: Snowflake }
+      : modelDepthTrusted
+        ? { label: "Snow depth · model", value: current.snowDepth != null ? `${current.snowDepth} cm` : "-", icon: Snowflake }
+        : { label: "Snow depth · not reported", value: "-", icon: Snowflake },
     // Model-estimated overnight snow: same "· model" honesty label as snow
     // depth. Omitted (not 0) when the source has no past hours.
     ...(current.snowfallPast24h != null ? [{ label: "Snow last 24h · model", value: `${current.snowfallPast24h.toFixed(1)} cm`, icon: CloudSnow }] : []),
@@ -495,14 +524,18 @@ export default function LocationDetail() {
           utcOffsetSeconds={(weatherData as any).utcOffsetSeconds ?? 0}
           thresholds={POWDER_THRESHOLDS_AU}
           skiability={{
-            seasonOpen: isLiftSeasonOpen(REGION_COUNTRY[region.id]),
+            seasonOpen,
             // Resort-reported base takes precedence over the model figure:
             // it can see snowmaking, so it may honestly assert "no base".
-            // Model depth stays advisory: with snowDepthSource "model" it
-            // can only inform ("Base ~Xcm · check resort"), never force a
-            // false "no skiable base" (models are blind to snowmaking).
-            snowDepthCm: resortReport ? resortReport.baseCm : current.snowDepth,
-            snowDepthSource: resortReport ? "reported" : "model",
+            // A "course" reading (Snowy Hydro) may display a base but never
+            // asserts "no base". In season, a bare model depth is suppressed
+            // (null = unknown) - never surfaced as a confident wrong ~0.
+            snowDepthCm: resortReport
+              ? resortReport.baseCm
+              : modelDepthTrusted
+                ? current.snowDepth
+                : null,
+            snowDepthSource: resortReport ? reportSource : "model",
             liveStatusKnown: hasLiveLiftStatus,
             actualLiftsOpen: hasLiveLiftStatus ? liftData?.liftsOpen : undefined,
             actualTotalLifts: liftData?.totalLifts,
@@ -929,9 +962,15 @@ export default function LocationDetail() {
               resortElevationM={location.elevation}
               hourly={hourly as any}
               sectionNumber=""
-              seasonOpen={isLiftSeasonOpen(REGION_COUNTRY[region.id])}
-              snowDepthCm={resortReport ? resortReport.baseCm : current.snowDepth}
-              snowDepthSource={resortReport ? "reported" : "model"}
+              seasonOpen={seasonOpen}
+              snowDepthCm={
+                resortReport
+                  ? resortReport.baseCm
+                  : modelDepthTrusted
+                    ? current.snowDepth
+                    : null
+              }
+              snowDepthSource={resortReport ? reportSource : "model"}
               liveStatusKnown={hasLiveLiftStatus}
               actualLiftsOpen={hasLiveLiftStatus ? liftData?.liftsOpen : undefined}
               actualTotalLifts={liftData?.totalLifts}

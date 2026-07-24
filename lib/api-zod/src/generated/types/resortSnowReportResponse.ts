@@ -9,6 +9,7 @@ import type { ResortSnowReport } from "./resortSnowReport";
 
 export interface ResortSnowReportResponse {
   locationId: string;
-  /** Null when no adapter, feed failure, strict-parse failure, or report older than 36h. */
+  /** Null when no adapter, feed failure, strict-parse failure, or report older than the source's freshness window (36h for resort feeds, ~10 days for weekly snow-course readings).
+   */
   report: ResortSnowReport | null;
 }

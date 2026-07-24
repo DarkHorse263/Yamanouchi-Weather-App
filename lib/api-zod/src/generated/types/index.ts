@@ -112,6 +112,7 @@ export * from "./resort";
 export * from "./resortLiftStatus";
 export * from "./resortLiftStatusSeasonStatus";
 export * from "./resortSnowReport";
+export * from "./resortSnowReportKind";
 export * from "./resortSnowReportResponse";
 export * from "./roadCondition";
 export * from "./roadConditionCondition";

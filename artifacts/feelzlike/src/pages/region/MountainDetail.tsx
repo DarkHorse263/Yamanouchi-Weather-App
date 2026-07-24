@@ -112,10 +112,28 @@ export function MountainDetail() {
     query: { enabled: !!locationId } as never,
   });
   const resortReport = snowReportData?.report ?? null;
+  // "course" = official off-resort snow-course measurement (weekly, natural
+  // snow only) - captioned by source + reading DATE, and it may never assert
+  // "no base" (see skiSeason.ts). Absent kind means "resort" (older cache).
+  const reportSource: "reported" | "course" =
+    resortReport?.kind === "course" ? "course" : "reported";
   // "Xh ago" caption for the reported figure - hour granularity is honest
-  // enough for a feed resorts refresh a few times a day.
+  // enough for a feed resorts refresh a few times a day. Weekly course
+  // readings show the reading date instead so nobody mistakes them for a
+  // daily report.
   const reportedAgoLabel = (() => {
     if (!resortReport) return "";
+    if (reportSource === "course") {
+      const d = new Date(resortReport.updatedAt);
+      if (Number.isNaN(d.getTime())) return "";
+      // Pin to AEST: the reading is taken on an AU calendar day, and a
+      // viewer-local format would shift it a day for overseas visitors.
+      return d.toLocaleDateString("en-AU", {
+        day: "numeric",
+        month: "short",
+        timeZone: "Australia/Sydney",
+      });
+    }
     const ms = Date.now() - new Date(resortReport.updatedAt).getTime();
     if (!Number.isFinite(ms) || ms < 0) return "";
     const hr = Math.round(ms / 3_600_000);
@@ -123,6 +141,12 @@ export function MountainDetail() {
     if (hr < 24) return `${hr}h ago`;
     return `${Math.round(hr / 24)}d ago`;
   })();
+  // In lift season, a weather-model snow depth is not good enough to headline
+  // (grid-cell natural snow, blind to snowmaking - reads ~0 under running
+  // lifts). No report in season -> "not reported", never a confident wrong 0.
+  // Off-season the model figure returns (melt curve context, nobody misled).
+  const seasonOpen = isLiftSeasonOpen(REGION_COUNTRY[region.id]);
+  const modelDepthTrusted = !seasonOpen;
 
   // Back link goes to the BASE TOWN this mountain hangs off (towns-first IA),
   // not the region home. Find the first base town whose nearbyMountainIds
@@ -287,13 +311,17 @@ export function MountainDetail() {
                 icon={Snowflake}
                 label={
                   resortReport
-                    ? `${t("Snow depth · resort reported", "積雪 · リゾート報告")}${reportedAgoLabel ? ` · ${reportedAgoLabel}` : ""}`
-                    : t("Snow depth · model", "積雪 · 予測値")
+                    ? reportSource === "course"
+                      ? `${t(`Snow depth · ${resortReport.sourceName}`, "積雪 · 公式観測")}${reportedAgoLabel ? ` · ${reportedAgoLabel}` : ""}`
+                      : `${t("Snow depth · resort reported", "積雪 · リゾート報告")}${reportedAgoLabel ? ` · ${reportedAgoLabel}` : ""}`
+                    : modelDepthTrusted
+                      ? t("Snow depth · model", "積雪 · 予測値")
+                      : t("Snow depth · not reported", "積雪 · 報告なし")
                 }
                 value={
                   resortReport
                     ? `${Math.round(resortReport.baseCm)}`
-                    : current.snowDepth !== null && current.snowDepth !== undefined
+                    : modelDepthTrusted && current.snowDepth !== null && current.snowDepth !== undefined
                       ? `${Math.round(current.snowDepth)}`
                       : "-"
                 }
@@ -402,9 +430,15 @@ export function MountainDetail() {
                 thresholds={POWDER_THRESHOLDS_AU}
                 sectionNumber=""
                 skiability={{
-                  seasonOpen: isLiftSeasonOpen(REGION_COUNTRY[region.id]),
-                  snowDepthCm: resortReport ? resortReport.baseCm : current?.snowDepth,
-                  snowDepthSource: resortReport ? "reported" : "model",
+                  seasonOpen,
+                  // In season a model depth is suppressed (null = unknown),
+                  // never surfaced as a confident wrong ~0.
+                  snowDepthCm: resortReport
+                    ? resortReport.baseCm
+                    : modelDepthTrusted
+                      ? current?.snowDepth
+                      : null,
+                  snowDepthSource: resortReport ? reportSource : "model",
                 }}
                 snowfallOutlook={
                   current
@@ -579,9 +613,15 @@ export function MountainDetail() {
                   hourly={hourly as any}
                   sectionNumber=""
                   t={t}
-                  seasonOpen={isLiftSeasonOpen(REGION_COUNTRY[region.id])}
-                  snowDepthCm={resortReport ? resortReport.baseCm : current.snowDepth}
-                  snowDepthSource={resortReport ? "reported" : "model"}
+                  seasonOpen={seasonOpen}
+                  snowDepthCm={
+                    resortReport
+                      ? resortReport.baseCm
+                      : modelDepthTrusted
+                        ? current.snowDepth
+                        : null
+                  }
+                  snowDepthSource={resortReport ? reportSource : "model"}
                 />
               </PremiumGate>
             </div>

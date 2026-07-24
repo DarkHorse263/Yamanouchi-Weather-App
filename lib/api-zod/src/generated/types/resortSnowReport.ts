@@ -5,16 +5,23 @@
  * Yamanouchi Snow Intelligence Platform API
  * OpenAPI spec version: 0.1.0
  */
+import type { ResortSnowReportKind } from "./resortSnowReportKind";
 
 /**
- * Snow conditions as REPORTED by the resort's own official feed.
-Strictly parsed - base must be present and numeric or the whole
-report is treated as absent (never defaulted to 0, which would
-assert "no base" without evidence).
+ * Snow conditions from an official source, strictly parsed - base must
+be present and numeric or the whole report is treated as absent
+(never defaulted to 0, which would assert "no base" without
+evidence). `kind` distinguishes the resort's own report ("resort")
+from an official off-resort snow-course measurement ("course",
+e.g. Snowy Hydro's weekly Spencers Creek reading - natural snow
+only, so it may display a base but never assert "no base").
 
  */
 export interface ResortSnowReport {
-  /** Resort-reported snow base depth in centimetres. */
+  /** Provenance - "resort" = the resort's own official report; "course" = official off-resort snow-course measurement. Optional for backwards compatibility; absent means "resort".
+   */
+  kind?: ResortSnowReportKind;
+  /** Reported snow base depth in centimetres. */
   baseCm: number;
   /** Cumulative season snowfall in centimetres, when the feed provides it. */
   seasonSnowfallCm?: number | null;

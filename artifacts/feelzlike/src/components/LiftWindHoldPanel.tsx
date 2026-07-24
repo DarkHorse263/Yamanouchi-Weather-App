@@ -29,10 +29,11 @@ interface LiftWindHoldPanelProps {
   /** Latest snow depth in cm if known. null/undefined = unknown (NOT zero). */
   snowDepthCm?: number | null;
   /**
-   * Provenance of snowDepthCm - "model" (default) never forces a "no snow"
-   * closure (models are blind to snowmaking); only "reported" may.
+   * Provenance of snowDepthCm - "model" (default) and "course" (official
+   * off-resort snow course, natural snow only) never force a "no snow"
+   * closure (both are blind to snowmaking); only "reported" may.
    */
-  snowDepthSource?: "model" | "reported";
+  snowDepthSource?: "model" | "reported" | "course";
   /** Real lift count currently open, when an authoritative feed exists (AU). */
   actualLiftsOpen?: number | null;
   /** Real total lift count, when an authoritative feed exists (AU). */

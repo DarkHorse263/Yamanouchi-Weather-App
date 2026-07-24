@@ -105,6 +105,20 @@ test("op-status: MODEL near-zero snow never forces no_snow (snowmaking-blind)", 
   );
 });
 
+test("op-status: COURSE near-zero snow never forces no_snow (off-site + weekly)", () => {
+  // Snowy Hydro's snow-course reading is measured but natural-snow-only,
+  // off-resort and up to a week old - like model depth it may inform the
+  // display but never assert a closure. Only the resort's own figure may.
+  assert.equal(
+    computeLiftOperationStatus({ seasonOpen: true, snowDepthCm: 0, snowDepthSource: "course" }),
+    "operating",
+  );
+  assert.equal(
+    computeLiftOperationStatus({ seasonOpen: true, snowDepthCm: 1.5, snowDepthSource: "course" }),
+    "operating",
+  );
+});
+
 test("op-status: snow at/above the 2cm threshold is operating", () => {
   assert.equal(
     computeLiftOperationStatus({ seasonOpen: true, snowDepthCm: 2 }),
@@ -157,6 +171,19 @@ test("skiable-now: MODEL near-zero base -> unverified, never no_base", () => {
   assert.deepEqual(
     deriveSkiableNowRead({ seasonOpen: true, snowDepthCm: 1, snowDepthSource: "model" }),
     { kind: "unverified", baseCm: 1, baseSource: "model" },
+  );
+});
+
+test("skiable-now: COURSE base -> unverified with baseSource course, never no_base", () => {
+  // A course reading may display a base (chip captions it by source name)
+  // but even a near-zero course figure never asserts "no base".
+  assert.deepEqual(
+    deriveSkiableNowRead({ seasonOpen: true, snowDepthCm: 68, snowDepthSource: "course" }),
+    { kind: "unverified", baseCm: 68, baseSource: "course" },
+  );
+  assert.deepEqual(
+    deriveSkiableNowRead({ seasonOpen: true, snowDepthCm: 0, snowDepthSource: "course" }),
+    { kind: "unverified", baseCm: 0, baseSource: "course" },
   );
 });
 

@@ -8,9 +8,19 @@
 // figure may assert "no base" - weather-model depth is snowmaking-blind and
 // stays advisory.
 //
+// Snowy Hydro official snow-course adapter (kind "course"): weekly measured
+// NATURAL depth at Spencers Creek (1830m, between Perisher and Charlotte
+// Pass - the course Perisher's own report cites). Off-resort + snowmaking-
+// blind + weekly cadence, so it gets its own source kind, a 10-day freshness
+// window (vs 36h for resort feeds), and - like model depth - may NEVER
+// assert "no base" (see skiSeason.ts snowDepthSource contract).
+//
 // Deliberately ABSENT (checked July 2026): Perisher publishes numbers only in
 // free prose (unparseable honestly); Mt Buller renders client-side from an
 // API whose base URL isn't discoverable without JS. Excluded > guessed.
+// Selwyn is deliberately NOT wired to Three Mile Dam (1460m): its natural
+// reading is 0 for long stretches while the resort runs on snowmaking - an
+// official-looking 0 would mislead worse than "not reported".
 //
 // Honesty rules baked in:
 //   - STRICT parse: units="metric" required, <base amount> must be present and
@@ -31,7 +41,14 @@
 import { XMLParser } from "fast-xml-parser";
 
 export interface ResortSnowReport {
-  /** Resort-reported snow base depth in centimetres. */
+  /**
+   * Provenance: "resort" = the resort's own official report; "course" = an
+   * official off-resort snow-course measurement (natural snow only). The
+   * client captions and skiability gates differ - a course reading may
+   * display a base but never assert "no base".
+   */
+  kind: "resort" | "course";
+  /** Reported snow base depth in centimetres. */
   baseCm: number;
   /** Cumulative season snowfall in cm, when the feed provides it. */
   seasonSnowfallCm: number | null;
@@ -46,13 +63,17 @@ export interface ResortSnowReport {
 }
 
 export type SnowReportAdapter = {
-  /** Machine feed endpoint. */
-  feedUrl: string;
+  /** Machine feed endpoint (or a builder when the URL is date-dependent). */
+  feedUrl?: string;
+  buildFeedUrl?: () => string;
   /** Human page shown to users as the source. */
   humanUrl: string;
   sourceName: string;
   /** Accept header for the feed fetch; defaults to XML. */
   accept?: string;
+  /** Serve-time freshness window override (default MAX_REPORT_AGE_MS 36h).
+   *  Weekly snow-course readings use ~10 days. */
+  maxAgeMs?: number;
   parse: (raw: string, adapter: SnowReportAdapter) => ResortSnowReport | null;
 };
 type Adapter = SnowReportAdapter;
@@ -112,6 +133,7 @@ function parseThredboXml(raw: string, adapter: Adapter): ResortSnowReport | null
   if (baseCm == null || baseCm < 0) return null;
 
   return {
+    kind: "resort",
     baseCm,
     seasonSnowfallCm: attrNumber(mountain.season?.["@_amount"]),
     lastSnowfallCm: attrNumber(mountain.snow24Hours?.["@_amount"]),
@@ -156,6 +178,7 @@ export function parseFallsCreekJson(raw: string, adapter: Adapter): ResortSnowRe
   if (baseCm == null || baseCm < 0) return null;
 
   return {
+    kind: "resort",
     baseCm,
     seasonSnowfallCm: attrNumber(patrol.SeasonalSnowfallToDate),
     lastSnowfallCm: attrNumber(patrol.PatrolFreshSnow),
@@ -234,12 +257,124 @@ export function parseHothamHtml(raw: string, adapter: Adapter): ResortSnowReport
   if (!updatedAt) return null;
 
   return {
+    kind: "resort",
     baseCm,
     seasonSnowfallCm: extractHothamStatCm(raw, "Season Total"),
     lastSnowfallCm: extractHothamStatCm(raw, "Last 24hrs"),
     updatedAt,
     sourceName: adapter.sourceName,
     sourceUrl: adapter.humanUrl,
+  };
+}
+
+// ── Snowy Hydro official snow-course adapter ─────────────────────────────────
+// Snowy Hydro publishes weekly measured natural snow depths for three courses
+// (Spencers Creek 1830m, Deep Creek 1620m, Three Mile Dam 1460m) as JSON:
+//   { "2026": { "snowyhydro": { "level": [
+//       { "-date": "2026-07-21",
+//         "snow": { "-name": "Spencers Creek",
+//                   "-dataTimestamp": "2026-07-21T12:00:00",
+//                   "-quality": "G", "#text": "68" } }, ... ] } } }
+// `snow` appears only on reading dates (lake levels fill the other rows) and
+// may be an object or an array. Strictness rules: quality "G" (good) only, a
+// parseable date, and a numeric depth - anything else is skipped, and no
+// usable entry means NO report (never a defaulted 0).
+
+/** Latest ISO timestamp for a course entry: prefer -dataTimestamp (append
+ *  AEST offset when the feed omits a zone), fall back to the row date at
+ *  local noon. Returns null when neither parses. */
+function courseEntryTimestamp(entry: Record<string, unknown>, rowDate: string): string | null {
+  const stamp = String(entry["-dataTimestamp"] ?? "").trim();
+  if (stamp) {
+    const iso = /[zZ]|[+-]\d{2}:?\d{2}$/.test(stamp) ? stamp : `${stamp}+10:00`;
+    if (!Number.isNaN(Date.parse(iso))) return iso;
+  }
+  if (/^\d{4}-\d{2}-\d{2}$/.test(rowDate)) {
+    const iso = `${rowDate}T12:00:00+10:00`;
+    if (!Number.isNaN(Date.parse(iso))) return iso;
+  }
+  return null;
+}
+
+export function makeSnowyHydroCourseParser(courseName: string) {
+  return function parseSnowyHydroJson(raw: string, adapter: Adapter): ResortSnowReport | null {
+    let doc: unknown;
+    try {
+      doc = JSON.parse(raw);
+    } catch {
+      return null;
+    }
+    if (!doc || typeof doc !== "object") return null;
+
+    let best: { atMs: number; report: ResortSnowReport } | null = null;
+    for (const yearBlock of Object.values(doc as Record<string, any>)) {
+      const levels = yearBlock?.snowyhydro?.level;
+      if (!Array.isArray(levels)) continue;
+      for (const row of levels) {
+        const rowDate = String(row?.["-date"] ?? "");
+        const snow = row?.snow;
+        if (!snow) continue;
+        const entries: unknown[] = Array.isArray(snow) ? snow : [snow];
+        for (const e of entries) {
+          if (!e || typeof e !== "object") continue;
+          const entry = e as Record<string, unknown>;
+          if (String(entry["-name"] ?? "").trim() !== courseName) continue;
+          // Quality flag: accept "G" (good) only - never surface a reading
+          // Snowy Hydro itself marks doubtful.
+          if (String(entry["-quality"] ?? "").trim().toUpperCase() !== "G") continue;
+          const baseCm = attrNumber(entry["#text"]);
+          if (baseCm == null || baseCm < 0) continue;
+          const updatedAt = courseEntryTimestamp(entry, rowDate);
+          if (!updatedAt) continue;
+          const atMs = Date.parse(updatedAt);
+          if (best == null || atMs > best.atMs) {
+            best = {
+              atMs,
+              report: {
+                kind: "course",
+                baseCm,
+                seasonSnowfallCm: null,
+                lastSnowfallCm: null,
+                updatedAt,
+                sourceName: adapter.sourceName,
+                sourceUrl: adapter.humanUrl,
+              },
+            };
+          }
+        }
+      }
+    }
+    return best?.report ?? null;
+  };
+}
+
+/** Course readings are weekly - the 36h resort-feed guard would reject every
+ *  reading, so courses get a ~10-day window and the client shows the reading
+ *  DATE (not "Xh ago") so nobody mistakes it for a daily report. */
+const COURSE_MAX_AGE_MS = 10 * 24 * 60 * 60 * 1000;
+
+const SNOWY_HYDRO_HUMAN_URL = "https://www.snowyhydro.com.au/generation/live-data/snow-depths/";
+
+/** Feed URL is year-parameterised; use the current year in AU (season is
+ *  Jun-Oct so no cross-new-year ambiguity) plus the prior year, mirroring
+ *  the site's own chart request. */
+function snowyHydroFeedUrl(): string {
+  const year = Number(
+    new Intl.DateTimeFormat("en-AU", { timeZone: "Australia/Sydney", year: "numeric" }).format(
+      new Date(),
+    ),
+  );
+  return `https://www.snowyhydro.com.au/wp-content/themes/snowyhydro/inc/getData.php?yearA=${year}&yearB=${year - 1}`;
+}
+
+function spencersCreekAdapter(): Adapter {
+  return {
+    buildFeedUrl: snowyHydroFeedUrl,
+    humanUrl: SNOWY_HYDRO_HUMAN_URL,
+    sourceName: "Snowy Hydro · Spencers Creek",
+    accept: "application/json",
+    maxAgeMs: COURSE_MAX_AGE_MS,
+    parse: makeSnowyHydroCourseParser("Spencers Creek"),
   };
 }
 
@@ -265,6 +400,11 @@ const ADAPTERS: Record<string, Adapter> = {
     accept: "text/html",
     parse: parseHothamHtml,
   },
+  // Official weekly Spencers Creek (1830m) course for the two resorts it sits
+  // between. Perisher's own snow report cites this course; Charlotte Pass
+  // village is at 1760m right beside it.
+  perisher: spencersCreekAdapter(),
+  "charlottes-pass": spencersCreekAdapter(),
 };
 
 export function hasSnowReportAdapter(locationId: string): boolean {
@@ -285,7 +425,9 @@ async function fetchAndParse(adapter: Adapter): Promise<ResortSnowReport | null>
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
   try {
-    const res = await fetch(adapter.feedUrl, {
+    const feedUrl = adapter.buildFeedUrl ? adapter.buildFeedUrl() : adapter.feedUrl;
+    if (!feedUrl) throw new Error("adapter has no feed URL");
+    const res = await fetch(feedUrl, {
       signal: controller.signal,
       headers: {
         "User-Agent": USER_AGENT,
@@ -354,10 +496,11 @@ export async function getResortSnowReport(locationId: string): Promise<ResortSno
     }
   }
 
-  // 36h feed-age guard at serve time - the resort's own timestamp governs.
+  // Feed-age guard at serve time - the source's own timestamp governs. 36h
+  // for resort feeds; per-adapter override for weekly course readings.
   if (report) {
     const age = now - Date.parse(report.updatedAt);
-    if (!Number.isFinite(age) || age > MAX_REPORT_AGE_MS) return null;
+    if (!Number.isFinite(age) || age > (adapter.maxAgeMs ?? MAX_REPORT_AGE_MS)) return null;
   }
   return report;
 }

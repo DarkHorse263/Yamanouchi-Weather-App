@@ -1344,9 +1344,13 @@ export const GetResortSnowReportResponse = zod.object({
   locationId: zod.string(),
   report: zod
     .object({
-      baseCm: zod
-        .number()
-        .describe("Resort-reported snow base depth in centimetres."),
+      kind: zod
+        .enum(["resort", "course"])
+        .optional()
+        .describe(
+          'Provenance - \"resort\" = the resort\'s own official report; \"course\" = official off-resort snow-course measurement. Optional for backwards compatibility; absent means \"resort\".\n',
+        ),
+      baseCm: zod.number().describe("Reported snow base depth in centimetres."),
       seasonSnowfallCm: zod
         .number()
         .nullish()
@@ -1370,11 +1374,11 @@ export const GetResortSnowReportResponse = zod.object({
         .describe("Human snow-report page to credit\/link, NOT the feed URL."),
     })
     .describe(
-      'Snow conditions as REPORTED by the resort\'s own official feed.\nStrictly parsed - base must be present and numeric or the whole\nreport is treated as absent (never defaulted to 0, which would\nassert \"no base\" without evidence).\n',
+      'Snow conditions from an official source, strictly parsed - base must\nbe present and numeric or the whole report is treated as absent\n(never defaulted to 0, which would assert \"no base\" without\nevidence). `kind` distinguishes the resort\'s own report (\"resort\")\nfrom an official off-resort snow-course measurement (\"course\",\ne.g. Snowy Hydro\'s weekly Spencers Creek reading - natural snow\nonly, so it may display a base but never assert \"no base\").\n',
     )
     .nullable()
     .describe(
-      "Null when no adapter, feed failure, strict-parse failure, or report older than 36h.",
+      "Null when no adapter, feed failure, strict-parse failure, or report older than the source's freshness window (36h for resort feeds, ~10 days for weekly snow-course readings).\n",
     ),
 });
 

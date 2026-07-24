@@ -4,6 +4,7 @@ import {
   parseFallsCreekJson,
   parseHothamHtml,
   parseHothamTimestamp,
+  makeSnowyHydroCourseParser,
   type SnowReportAdapter,
 } from "../resortSnowReports.js";
 
@@ -161,4 +162,122 @@ test("timestamp: PM and comma-free variants parse", () => {
   const iso = parseHothamTimestamp("<p>Mon 13 July 02:15PM</p>", now);
   // 14:15 AEST = 04:15 UTC same day.
   assert.equal(iso, "2026-07-13T04:15:00.000Z");
+});
+
+// ── Snowy Hydro snow course (Spencers Creek) ─────────────────────────────────
+
+const shParse = makeSnowyHydroCourseParser("Spencers Creek");
+const shAdapter: SnowReportAdapter = {
+  humanUrl: "https://www.snowyhydro.com.au/generation/live-data/snow-depths/",
+  sourceName: "Snowy Hydro · Spencers Creek",
+  parse: shParse,
+};
+
+// Mirrors the real getData.php shape: lake-level rows without `snow`, and
+// reading rows where `snow` is an object or an array of course entries.
+const shGood = JSON.stringify({
+  "2026": {
+    snowyhydro: {
+      level: [
+        { "-date": "2026-07-20", lake: { "-name": "Eucumbene", "#text": "42.1" } },
+        {
+          "-date": "2026-07-14",
+          snow: [
+            { "-name": "Spencers Creek", "-dataTimestamp": "2026-07-14T09:00:00", "-quality": "G", "#text": "55" },
+            { "-name": "Deep Creek", "-dataTimestamp": "2026-07-14T09:00:00", "-quality": "G", "#text": "31" },
+          ],
+        },
+        {
+          "-date": "2026-07-21",
+          snow: { "-name": "Spencers Creek", "-dataTimestamp": "2026-07-21T09:30:00", "-quality": "G", "#text": "68" },
+        },
+      ],
+    },
+  },
+  "2025": {
+    snowyhydro: {
+      level: [
+        {
+          "-date": "2025-07-22",
+          snow: { "-name": "Spencers Creek", "-dataTimestamp": "2025-07-22T09:00:00", "-quality": "G", "#text": "104" },
+        },
+      ],
+    },
+  },
+});
+
+test("snowy hydro: latest good Spencers Creek reading wins across rows and years", () => {
+  const r = shParse(shGood, shAdapter);
+  assert.ok(r);
+  assert.equal(r!.kind, "course");
+  assert.equal(r!.baseCm, 68); // 21 Jul 2026, not the older 55 or last year's 104
+  // Feed omits a zone -> AEST +10:00 appended, never treated as UTC.
+  assert.equal(r!.updatedAt, "2026-07-21T09:30:00+10:00");
+  // A course measures depth only - snowfall fields stay unknown, never 0.
+  assert.equal(r!.seasonSnowfallCm, null);
+  assert.equal(r!.lastSnowfallCm, null);
+  assert.equal(r!.sourceName, "Snowy Hydro · Spencers Creek");
+  assert.equal(r!.sourceUrl, shAdapter.humanUrl);
+});
+
+test("snowy hydro: non-G quality readings are skipped (falls back to older good one)", () => {
+  const doc = JSON.stringify({
+    "2026": {
+      snowyhydro: {
+        level: [
+          { "-date": "2026-07-14", snow: { "-name": "Spencers Creek", "-quality": "G", "#text": "55" } },
+          { "-date": "2026-07-21", snow: { "-name": "Spencers Creek", "-quality": "P", "#text": "12" } },
+        ],
+      },
+    },
+  });
+  const r = shParse(doc, shAdapter);
+  assert.ok(r);
+  assert.equal(r!.baseCm, 55);
+  // No -dataTimestamp -> row date at local noon AEST.
+  assert.equal(r!.updatedAt, "2026-07-14T12:00:00+10:00");
+});
+
+test("snowy hydro: other course names never match (Deep Creek is not Spencers)", () => {
+  const doc = JSON.stringify({
+    "2026": {
+      snowyhydro: {
+        level: [
+          { "-date": "2026-07-21", snow: { "-name": "Deep Creek", "-quality": "G", "#text": "31" } },
+        ],
+      },
+    },
+  });
+  assert.equal(shParse(doc, shAdapter), null);
+});
+
+test("snowy hydro: non-numeric or negative depth is skipped (never a defaulted 0)", () => {
+  const doc = JSON.stringify({
+    "2026": {
+      snowyhydro: {
+        level: [
+          { "-date": "2026-07-21", snow: { "-name": "Spencers Creek", "-quality": "G", "#text": "n/a" } },
+          { "-date": "2026-07-14", snow: { "-name": "Spencers Creek", "-quality": "G", "#text": "-3" } },
+        ],
+      },
+    },
+  });
+  assert.equal(shParse(doc, shAdapter), null);
+});
+
+test("snowy hydro: entry without any parseable date is skipped", () => {
+  const doc = JSON.stringify({
+    "2026": {
+      snowyhydro: {
+        level: [
+          { "-date": "no reading", snow: { "-name": "Spencers Creek", "-quality": "G", "#text": "68" } },
+        ],
+      },
+    },
+  });
+  assert.equal(shParse(doc, shAdapter), null);
+});
+
+test("snowy hydro: non-JSON body (maintenance page) -> absent", () => {
+  assert.equal(shParse("<html>down for maintenance</html>", shAdapter), null);
 });

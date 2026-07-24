@@ -1300,14 +1300,32 @@ export interface VicEmergencyResponse {
 }
 
 /**
- * Snow conditions as REPORTED by the resort's own official feed.
-Strictly parsed - base must be present and numeric or the whole
-report is treated as absent (never defaulted to 0, which would
-assert "no base" without evidence).
+ * Provenance - "resort" = the resort's own official report; "course" = official off-resort snow-course measurement. Optional for backwards compatibility; absent means "resort".
+
+ */
+export type ResortSnowReportKind =
+  (typeof ResortSnowReportKind)[keyof typeof ResortSnowReportKind];
+
+export const ResortSnowReportKind = {
+  resort: "resort",
+  course: "course",
+} as const;
+
+/**
+ * Snow conditions from an official source, strictly parsed - base must
+be present and numeric or the whole report is treated as absent
+(never defaulted to 0, which would assert "no base" without
+evidence). `kind` distinguishes the resort's own report ("resort")
+from an official off-resort snow-course measurement ("course",
+e.g. Snowy Hydro's weekly Spencers Creek reading - natural snow
+only, so it may display a base but never assert "no base").
 
  */
 export interface ResortSnowReport {
-  /** Resort-reported snow base depth in centimetres. */
+  /** Provenance - "resort" = the resort's own official report; "course" = official off-resort snow-course measurement. Optional for backwards compatibility; absent means "resort".
+   */
+  kind?: ResortSnowReportKind;
+  /** Reported snow base depth in centimetres. */
   baseCm: number;
   /** Cumulative season snowfall in centimetres, when the feed provides it. */
   seasonSnowfallCm?: number | null;
@@ -1323,7 +1341,8 @@ export interface ResortSnowReport {
 
 export interface ResortSnowReportResponse {
   locationId: string;
-  /** Null when no adapter, feed failure, strict-parse failure, or report older than 36h. */
+  /** Null when no adapter, feed failure, strict-parse failure, or report older than the source's freshness window (36h for resort feeds, ~10 days for weekly snow-course readings).
+   */
   report: ResortSnowReport | null;
 }
 

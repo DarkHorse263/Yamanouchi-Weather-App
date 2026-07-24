@@ -48,7 +48,7 @@
 // route - it is "right now" data and was being served a session stale. Also
 // adds /api/jma-radar/times (JP Official radar frame discovery) network-first
 // (reload) like the BOM/WillyWeather frame lists.
-const CACHE_VERSION = "v16";
+const CACHE_VERSION = "v17";
 const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
 const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;
