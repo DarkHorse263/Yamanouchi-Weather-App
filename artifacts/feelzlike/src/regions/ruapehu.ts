@@ -48,7 +48,9 @@ export const ruapehuRegion: RegionConfig = {
       lat: -39.3072,
       lng: 175.5286,
       blurb: "southwest face above ohakune · highest lifted terrain in new zealand",
-      websiteUrl: "https://www.turoa.co.nz/",
+      // turoa.co.nz went dead after the Pure Turoa handover - link the live site.
+      websiteUrl: "https://www.pureturoa.nz/",
+      snowReportUrl: "https://www.pureturoa.nz/snow-report",
       beginner_friendly: true,
       terrain_park: true,
       backcountry_access: true,
@@ -69,7 +71,7 @@ export const ruapehuRegion: RegionConfig = {
   tourismLinks: [
     { category: "Tourism", label: "Visit Ruapehu", url: "https://www.visitruapehu.com/" },
     { category: "Resorts", label: "Whakapapa", url: "https://www.whakapapa.com/" },
-    { category: "Resorts", label: "Turoa", url: "https://www.turoa.co.nz/" },
+    { category: "Resorts", label: "Turoa", url: "https://www.pureturoa.nz/" },
     { category: "National park", label: "Tongariro National Park · DOC", url: "https://www.doc.govt.nz/parks-and-recreation/places-to-go/central-north-island/places/tongariro-national-park/" },
     { category: "Transport", label: "Waka Kotahi NZTA · journeys & road conditions", url: "https://www.journeys.nzta.govt.nz/" },
   ],

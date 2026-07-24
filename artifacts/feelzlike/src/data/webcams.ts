@@ -1,8 +1,9 @@
 /**
  * Curated mountain webcam metadata for Japan resorts (Yamanouchi + Iiyama
- * regions). The Snowy Mountains side is already covered by the API-driven
- * grid in `regions/snowy-mountains/pages/LocationDetail.tsx`, sourced from
- * the live BOM/resort scrape.
+ * regions) and all seven New Zealand resorts. The Snowy Mountains side is
+ * already covered by the API-driven grid in
+ * `regions/snowy-mountains/pages/LocationDetail.tsx`, sourced from the live
+ * BOM/resort scrape.
  *
  * EMBED HONESTY: Most Japanese resort webcams are protected by hotlink
  * referrers or CORS, which means a naive `<img src=...>` will be blocked
@@ -237,12 +238,109 @@ const IIYAMA_DORMANT: Record<string, MountainWebcam[]> = {
  */
 const SNOWY_MOUNTAINS: Record<string, MountainWebcam[]> = {};
 
+const NZ_VERIFIED = "2026-07-24";
+
+/**
+ * New Zealand - all seven resorts. None of the NZ operators expose a
+ * hotlink-clean still image (NZSki renders cams client-side on the
+ * weather-report page, Cardrona · Treble Cone and Pure Turoa serve them
+ * behind players), so every entry is an "external" card straight to the
+ * operator's official cam page - honest link-out, no broken embeds.
+ */
+const NEW_ZEALAND: Record<string, MountainWebcam[]> = {
+  "mt-hutt": [
+    {
+      id: "mt-hutt-official",
+      mountainId: "mt-hutt",
+      name: "Mt Hutt snow cams",
+      description: "Live mountain cams on the official weather report page.",
+      embedType: "external",
+      pageUrl: "https://www.mthutt.co.nz/weather-report",
+      source: "Mt Hutt (NZSki)",
+      verifiedAt: NZ_VERIFIED,
+    },
+  ],
+  "coronet-peak": [
+    {
+      id: "coronet-peak-official",
+      mountainId: "coronet-peak",
+      name: "Coronet Peak snow cams",
+      description: "Live mountain cams on the official weather report page.",
+      embedType: "external",
+      pageUrl: "https://www.coronetpeak.co.nz/weather-report",
+      source: "Coronet Peak (NZSki)",
+      verifiedAt: NZ_VERIFIED,
+    },
+  ],
+  "the-remarkables": [
+    {
+      id: "the-remarkables-official",
+      mountainId: "the-remarkables",
+      name: "The Remarkables snow cams",
+      description: "Live mountain cams on the official weather report page.",
+      embedType: "external",
+      pageUrl: "https://www.theremarkables.co.nz/weather-report/",
+      source: "The Remarkables (NZSki)",
+      verifiedAt: NZ_VERIFIED,
+    },
+  ],
+  cardrona: [
+    {
+      id: "cardrona-official",
+      mountainId: "cardrona",
+      name: "Cardrona snow cams",
+      description: "Official snow cams · shared Cardrona · Treble Cone cam page.",
+      embedType: "external",
+      pageUrl: "https://cardrona-treblecone.com/webcams",
+      source: "Cardrona · Treble Cone",
+      verifiedAt: NZ_VERIFIED,
+    },
+  ],
+  "treble-cone": [
+    {
+      id: "treble-cone-official",
+      mountainId: "treble-cone",
+      name: "Treble Cone snow cams",
+      description: "Official snow cams · shared Cardrona · Treble Cone cam page.",
+      embedType: "external",
+      pageUrl: "https://cardrona-treblecone.com/webcams",
+      source: "Cardrona · Treble Cone",
+      verifiedAt: NZ_VERIFIED,
+    },
+  ],
+  whakapapa: [
+    {
+      id: "whakapapa-official",
+      mountainId: "whakapapa",
+      name: "Whakapapa mountain cams",
+      description: "Live cams on the official snow report page.",
+      embedType: "external",
+      pageUrl: "https://www.whakapapa.com/report",
+      source: "Whakapapa · Mt Ruapehu",
+      verifiedAt: NZ_VERIFIED,
+    },
+  ],
+  turoa: [
+    {
+      id: "turoa-official",
+      mountainId: "turoa",
+      name: "Turoa mountain cams",
+      description: "Official webcams above Ohakune on Ruapehu's southwest face.",
+      embedType: "external",
+      pageUrl: "https://www.pureturoa.nz/webcams",
+      source: "Pure Turoa",
+      verifiedAt: NZ_VERIFIED,
+    },
+  ],
+};
+
 // Reference IIYAMA_DORMANT once so TS doesn't drop it as an unused export.
 void IIYAMA_DORMANT;
 
 export const MOUNTAIN_WEBCAMS: Record<string, MountainWebcam[]> = {
   ...YAMANOUCHI,
   ...SNOWY_MOUNTAINS,
+  ...NEW_ZEALAND,
 };
 
 export function getMountainWebcams(mountainId: string): MountainWebcam[] {
