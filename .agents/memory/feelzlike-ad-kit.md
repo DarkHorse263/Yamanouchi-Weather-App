@@ -28,3 +28,14 @@ A standalone export script (`artifacts/api-server/src/scripts/build-ad-kit.ts`) 
 - Brand voice: lowercase, middot ·, NO em/en dashes, no emojis, DIN Pro (embedded base64), sky/blue. `dotify()` wraps ` · ` separators in a sky-blue span; safe even when copy has no middots.
 
 **These are OWNER production assets** for printers/screen operators, NOT public site downloads, so they live in `exports/ad-kit/` only (do NOT copy into feelzlike `public/downloads`).
+
+## Facebook campaign pack (build-campaign-pack.ts)
+
+Sibling script renders `exports/feelzlike-facebook-campaign-pack.pdf` (Meta Ads Manager steps + 12 ready-to-paste ads from the owner's square tiles in attached_assets/1..12_*.png). Exports-only, never in public/downloads.
+
+**v2 owner decision (July 2026) — do not revert without sign-off:**
+- EVERY ad lands on the HOME PAGE (`/` + utm tags), not deep links. v1 deep-linked Snowy Mountains pages and the owner rejected it ("means nothing to Victorians"). utm_content still identifies the winning message.
+- Ad sets are BY COUNTRY (australia · new zealand, same ads in both), not by message theme. NZ is in from day one.
+- Copy must be location-neutral (true for VIC + NZ, not just NSW) and honesty-railed: no "live roads" claim outside nsw/nz, no app-store wording, powder-alerts-free only through 31 dec 2026.
+
+**Why:** simple launch the owner can actually operate; per-country reporting comes free from Meta; deep links fragment a tiny budget.

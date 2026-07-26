@@ -9,10 +9,17 @@
  *   utm_content=<tile slug>
  * (for unpaid page posts swap utm_medium=paid for utm_medium=social).
  *
- * Landing URLs are real prod routes verified against public/sitemap.xml -
- * trailing slashes required. Honesty rails: "free powder alerts" is true
- * through 31 dec 2026 (launch promo); no app-store claims (feelzlike is a
- * PWA - "add to home screen", never "download from the app store").
+ * v2 (owner decision, July 2026): EVERY ad lands on the HOME PAGE - James
+ * wants a simple launch that drives people to feelzlike.com with a range of
+ * messages, not deep links. Copy must stay location-neutral (the v1 pack
+ * deep-linked Snowy Mountains pages, meaningless to Victorians), and the
+ * campaign runs TWO country ad sets from day one: australia · new zealand.
+ * utm_content still distinguishes which message won.
+ *
+ * Honesty rails: "free powder alerts" is true through 31 dec 2026 (launch
+ * promo); no app-store claims (feelzlike is a PWA - "add to home screen",
+ * never "download from the app store"); don't claim live roads everywhere
+ * (live = nsw + nz only).
  *
  * Run: pnpm --filter @workspace/api-server exec tsx src/scripts/build-campaign-pack.ts
  * Output: exports/feelzlike-facebook-campaign-pack.pdf
@@ -56,162 +63,164 @@ interface Ad {
   tile: string;        // attached_assets filename
   slug: string;        // utm_content
   label: string;       // headline text printed on the tile itself
-  adset: string;
+  theme: string;       // message family (readability only - ad sets are by country)
   primary: string;
   headline: string;
   description: string;
   cta: string;
-  pagePath: string;
+  starter: boolean;    // part of the recommended starting six
 }
 
+// v2: every ad lands on the home page. Copy is location-neutral - it must
+// read true for a victorian, a queenstown local and a sydneysider alike.
 const ADS: Ad[] = [
-  // ── ad set 1 · powder alerts (the list builder) ────────────────────────
+  // ── theme · powder alerts (the list builder) ───────────────────────────
   {
     tile: "3_1784703752742.png",
     slug: "powder-alerts",
     label: "does it feelzlike it's snowing?",
-    adset: "1 · powder alerts",
+    theme: "powder alerts",
     primary:
-      "free powder alerts · tell us your mountains and how much snow counts, and we'll email you when a dump is coming. no spam, unsubscribe in one click.",
+      "free powder alerts · pick your mountains and how much snow counts, and we'll email you when a dump is coming. no spam, unsubscribe in one click.",
     headline: "free powder alerts",
     description: "know before you go",
     cta: "Sign up",
-    pagePath: "/snowy-mountains/alerts/",
+    starter: true,
   },
-  // ── ad set 2 · conditions (peak-season utility) ────────────────────────
+  // ── theme · conditions (peak-season utility) ───────────────────────────
   {
     tile: "4_1784703752742.png",
     slug: "feels-like-temp",
     label: "what's the feelzlike temperature?",
-    adset: "2 · conditions",
+    theme: "conditions",
     primary:
       "the thermometer says one thing · the wind says another. see what it actually feelzlike in every snow town and up the mountain, hour by hour.",
     headline: "real feels-like forecasts",
     description: "village and summit · hour by hour",
     cta: "Learn more",
-    pagePath: "/snowy-mountains/jindabyne/weather/",
+    starter: true,
   },
   {
     tile: "5_1784703752742.png",
     slug: "wind-check",
     label: "it feelzlike it's windy?",
-    adset: "2 · conditions",
+    theme: "conditions",
     primary:
       "wind holds wreck ski days. check the gusts up top before you buy a lift pass · hour by hour, village and summit.",
     headline: "check the wind first",
     description: "know before you go",
     cta: "Learn more",
-    pagePath: "/snowy-mountains/jindabyne/weather/",
+    starter: true,
   },
   {
     tile: "6_1784703752743.png",
     slug: "weekend-planner",
     label: "feelzlike it could be a good weekend?",
-    adset: "2 · conditions",
+    theme: "conditions",
     primary:
-      "feelzlike it could be a good weekend? compare every aussie mountain side by side and pick your window.",
+      "feelzlike it could be a good weekend? check the week ahead for your mountains and pick your window.",
     headline: "plan your snow weekend",
     description: "7-day outlook · every mountain",
     cta: "Learn more",
-    pagePath: "/plan/",
+    starter: true,
   },
   {
     tile: "7_1784703752743.png",
     slug: "chains-roads",
     label: "chains?",
-    adset: "2 · conditions",
+    theme: "conditions",
     primary:
-      "chains or no chains? live nsw alpine road conditions straight from the source, before you leave the driveway.",
+      "chains or no chains? check the alpine roads before you leave the driveway · all in one place.",
     headline: "roads before you roll",
-    description: "live nsw alpine road conditions",
+    description: "know before you go",
     cta: "Learn more",
-    pagePath: "/snowy-mountains/jindabyne/roads/",
+    starter: false,
   },
   {
     tile: "8_1784703752743.png",
     slug: "bus-or-car",
     label: "bus or car?",
-    adset: "2 · conditions",
+    theme: "conditions",
     primary:
       "bus, shuttle or drive? every way up the mountain in one place, with drive times from your town.",
     headline: "sort your ride to the snow",
     description: "buses · shuttles · car hire",
     cta: "Learn more",
-    pagePath: "/snowy-mountains/jindabyne/transport/",
+    starter: false,
   },
-  // ── ad set 3 · snow towns (trip content) ───────────────────────────────
+  // ── theme · snow towns (trip content) ──────────────────────────────────
   {
     tile: "9_1784703752743.png",
     slug: "eat",
     label: "hungry?",
-    adset: "3 · snow towns",
+    theme: "snow towns",
     primary:
       "bakeries, pubs and late-night feeds · where to eat in every snow town, sorted.",
     headline: "eat well up there",
     description: "know before you go",
     cta: "Learn more",
-    pagePath: "/snowy-mountains/jindabyne/eat/",
+    starter: false,
   },
   {
     tile: "10_1784703752743.png",
     slug: "stay",
     label: "sleepy?",
-    adset: "3 · snow towns",
+    theme: "snow towns",
     primary:
       "find the right base town · stay picks with real drive times to the lifts.",
     headline: "stay close to the snow",
     description: "every base town compared",
     cta: "Learn more",
-    pagePath: "/snowy-mountains/stay/",
+    starter: false,
   },
   {
     tile: "11_1784703752743.png",
     slug: "explore",
     label: "explore?",
-    adset: "3 · snow towns",
+    theme: "snow towns",
     primary:
       "rest-day sorted · walks, sights and things to do beyond the slopes in every snow town.",
     headline: "explore the snow towns",
     description: "know before you go",
     cta: "Learn more",
-    pagePath: "/snowy-mountains/jindabyne/explore/",
+    starter: false,
   },
-  // ── ad set 4 · brand (optional, cheapest reach) ────────────────────────
+  // ── theme · brand (broadest reach) ─────────────────────────────────────
   {
     tile: "2_1784703752742.png",
     slug: "brand-question",
     label: "what's it feelzlike in the mountains?",
-    adset: "4 · brand (optional)",
+    theme: "brand",
     primary:
       "weather, roads, transport, stay and eat for every snow town in australia, new zealand and japan · all in one place, free.",
     headline: "know before you go",
     description: "real conditions for mountain travel",
     cta: "Learn more",
-    pagePath: "/",
+    starter: true,
   },
   {
     tile: "1_1784703752742.png",
     slug: "brand-sections",
     label: "logo + section words",
-    adset: "4 · brand (optional)",
+    theme: "brand",
     primary:
       "real conditions for mountain travel · open it on your phone and add it to your home screen. works like an app, free.",
     headline: "feelzlike · know before you go",
     description: "weather · roads · transport · stay · eat",
     cta: "Learn more",
-    pagePath: "/",
+    starter: true,
   },
   {
     tile: "12_1784703752743.png",
     slug: "brand-domain",
     label: "feelzlike.com",
-    adset: "4 · brand (optional)",
+    theme: "brand",
     primary:
       "real conditions for mountain travel · australia, new zealand and japan.",
     headline: "feelzlike.com",
     description: "know before you go",
     cta: "Learn more",
-    pagePath: "/",
+    starter: false,
   },
 ];
 
@@ -293,12 +302,12 @@ async function buildHtml(): Promise<string> {
     <div class="adcard">
       <img class="tile" src="${tiles.get(ad.tile) ?? ""}" alt="" />
       <div class="body">
-        <div class="meta">ad set <b>${esc(ad.adset)}</b> · tile: ${esc(ad.label)}</div>
+        <div class="meta">theme <b>${esc(ad.theme)}</b> · tile: ${esc(ad.label)}${ad.starter ? " · <b>starting six</b>" : ""}</div>
         <div class="field"><div class="k">primary text (paste into "primary text")</div><div class="v">${esc(ad.primary)}</div></div>
         <div class="field"><div class="k">headline</div><div class="v">${esc(ad.headline)}</div></div>
         <div class="field"><div class="k">description</div><div class="v">${esc(ad.description)}</div></div>
         <div class="field"><div class="k">button</div><div class="v"><span class="cta-chip">${esc(ad.cta)}</span></div></div>
-        <div class="field"><div class="k">website url (paste exactly, tracking included)</div><div class="v url">${esc(trackedUrl(ad.pagePath, ad.slug))}</div></div>
+        <div class="field"><div class="k">website url (paste exactly, tracking included)</div><div class="v url">${esc(trackedUrl("/", ad.slug))}</div></div>
       </div>
     </div>`).join("\n");
 
@@ -311,27 +320,28 @@ async function buildHtml(): Promise<string> {
 </header>
 
 <h1>facebook campaign pack</h1>
-<p class="deck">everything you need to run the "know before you go" campaign in meta ads manager · 12 ready-made ads, copy included, tracking built in.</p>
+<p class="deck">everything you need to run the "know before you go" campaign in meta ads manager · 12 ready-made ads, all landing on the home page, copy included, tracking built in.</p>
 
 <h2>what this campaign does</h2>
 <ul>
-  <li><b>goal 1 · grow the email list:</b> the powder-alert ad drives free signups (ad set 1). every verified subscriber is yours to email.</li>
-  <li><b>goal 2 · make feelzlike the daily habit:</b> the conditions ads (ad set 2) catch people mid-season when they check weather and roads anyway.</li>
+  <li><b>one simple goal:</b> get skiers and boarders onto feelzlike.com. every ad lands on the home page · visitors pick their own country and mountains from there, so the same ads work for nsw, victoria and new zealand alike.</li>
+  <li><b>a range of messages:</b> 12 ads across four themes (powder alerts · conditions · snow towns · brand). the tracking tag on each link tells you which message pulled people in · double down on the winners.</li>
   <li>australia and new zealand are in peak season right now · this is the moment to spend. a japan-planning follow-up campaign makes sense august to october, when aussies book their japan trips.</li>
 </ul>
 
 <h2>setup · step by step</h2>
 <ol class="steps">
   <li>go to <b>business.facebook.com</b> → all tools → <b>ads manager</b> → create.</li>
-  <li>objective: choose <b>traffic</b> (simplest and right for this goal).</li>
-  <li>create <b>three ad sets</b> using the groupings in this pack: powder alerts · conditions · snow towns. (ad set 4, brand, is optional · run it later at low budget for reach.)</li>
-  <li><b>audience</b> for each: location australia (nsw, vic, act to start) · age 21 to 60 · detailed targeting interests: skiing, snowboarding, ski resort. duplicate the ad set for new zealand when ready.</li>
+  <li>objective: choose <b>traffic</b> → <b>manual traffic campaign</b>. name the campaign <b>winter26-launch</b>.</li>
+  <li>create <b>two ad sets, one per country</b>: name them <b>australia</b> and <b>new zealand</b>. same ads in both · meta reports results per country automatically.</li>
+  <li><b>audience · australia:</b> location australia (nsw, vic, act to start) · age 21 to 60 · detailed targeting interests: skiing, snowboarding, ski resort.</li>
+  <li><b>audience · new zealand:</b> location new zealand (whole country · it's small enough) · same ages and interests.</li>
   <li><b>placements:</b> leave on advantage+ placements. this includes instagram automatically · your facebook page is the ad identity, so you do not need an instagram account for ads.</li>
   <li><b>budget:</b> start at 10 to 15 dollars a day per ad set. run 7 days, then switch off the weakest ads and put the money behind the best two or three.</li>
-  <li>for each ad: upload the matching square tile, then copy the primary text, headline, description, button and <b>the exact website url</b> from the sheet below. the url carries the tracking tags.</li>
+  <li><b>ads:</b> start with the six marked <b>starting six</b> in the sheet below (a spread across the themes) in each ad set · add the rest later if you want more variety. for each ad: upload the matching square tile, then copy the primary text, headline, description, button and <b>the exact website url</b>. the url carries the tracking tags.</li>
 </ol>
 
-<div class="note"><strong>reading results:</strong> meta shows clicks. google analytics shows what people did after · reports → acquisition → traffic acquisition, look for source "facebook", campaign "winter26-launch". the number that matters most: verified powder-alert subscribers.</div>
+<div class="note"><strong>reading results:</strong> meta shows clicks per ad and per country. google analytics shows what people did after · reports → acquisition → traffic acquisition, look for source "facebook", campaign "winter26-launch" · the "content" tag tells you which message won. the number that matters most: verified powder-alert subscribers.</div>
 
 <div class="honesty"><strong>honest copy rails:</strong> "free powder alerts" is true through 31 december 2026 (launch promo) · revisit ad copy before 2027. feelzlike is not in the app stores · never say "download the app", say "add to home screen · works like an app". don't promise live lift status in ads.</div>
 
