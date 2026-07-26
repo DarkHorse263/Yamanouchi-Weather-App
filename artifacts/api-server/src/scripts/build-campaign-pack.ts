@@ -80,11 +80,14 @@ const ADS: Ad[] = [
     slug: "powder-alerts",
     label: "does it feelzlike it's snowing?",
     theme: "powder alerts",
+    // CTA must be "Learn more", NOT "Sign up" - in Ads Manager the Sign Up
+    // button flips the ad into lead-ad territory (error #100: lead_gen_form_id
+    // must be a valid Lead Gen Data id + Lead Generation Terms of Service).
     primary:
       "free powder alerts · pick your mountains and how much snow counts, and we'll email you when a dump is coming. no spam, unsubscribe in one click.",
     headline: "free powder alerts",
     description: "know before you go",
-    cta: "Sign up",
+    cta: "Learn more",
     starter: true,
   },
   // ── theme · conditions (peak-season utility) ───────────────────────────
@@ -339,7 +342,10 @@ async function buildHtml(): Promise<string> {
   <li><b>placements:</b> leave on advantage+ placements. this includes instagram automatically · your facebook page is the ad identity, so you do not need an instagram account for ads.</li>
   <li><b>budget:</b> start at 10 to 15 dollars a day per ad set. run 7 days, then switch off the weakest ads and put the money behind the best two or three.</li>
   <li><b>ads:</b> start with the six marked <b>starting six</b> in the sheet below (a spread across the themes) in each ad set · add the rest later if you want more variety. for each ad: upload the matching square tile, then copy the primary text, headline, description, button and <b>the exact website url</b>. the url carries the tracking tags.</li>
+  <li><b>display link:</b> where ads manager asks for a display link, type <b>feelzlike.com</b> (check the spelling · two e's, feel + z + like).</li>
 </ol>
+
+<div class="note"><strong>button choice:</strong> use <b>learn more</b> on every ad. picking "sign up" makes facebook treat the ad as a lead ad and it will demand a lead form and extra terms of service · you don't need any of that, the website is the destination.</div>
 
 <div class="note"><strong>reading results:</strong> meta shows clicks per ad and per country. google analytics shows what people did after · reports → acquisition → traffic acquisition, look for source "facebook", campaign "winter26-launch" · the "content" tag tells you which message won. the number that matters most: verified powder-alert subscribers.</div>
 

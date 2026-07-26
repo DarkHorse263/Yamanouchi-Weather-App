@@ -37,5 +37,6 @@ Sibling script renders `exports/feelzlike-facebook-campaign-pack.pdf` (Meta Ads 
 - EVERY ad lands on the HOME PAGE (`/` + utm tags), not deep links. v1 deep-linked Snowy Mountains pages and the owner rejected it ("means nothing to Victorians"). utm_content still identifies the winning message.
 - Ad sets are BY COUNTRY (australia · new zealand, same ads in both), not by message theme. NZ is in from day one.
 - Copy must be location-neutral (true for VIC + NZ, not just NSW) and honesty-railed: no "live roads" claim outside nsw/nz, no app-store wording, powder-alerts-free only through 31 dec 2026.
+- CTA is "Learn more" on ALL ads, never "Sign Up": in Ads Manager the Sign Up button flips a website-traffic ad into lead-ad territory (error #100 "lead_gen_form_id must be a valid Lead Gen Data id" + Lead Generation ToS demand). Hit live by the owner July 2026.
 
 **Why:** simple launch the owner can actually operate; per-country reporting comes free from Meta; deep links fragment a tiny budget.
