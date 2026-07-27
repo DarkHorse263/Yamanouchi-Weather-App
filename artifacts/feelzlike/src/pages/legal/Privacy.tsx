@@ -23,7 +23,7 @@ export default function Privacy() {
       title="Privacy Policy"
       description="feelzlike privacy policy. Explains what data we collect, why, where it goes, and the rights you have over it."
       path="/legal/privacy"
-      lastUpdated="3 July 2026"
+      lastUpdated="27 July 2026"
     >
       <p>
         feelzlike respects your privacy. This policy explains what we
@@ -155,6 +155,14 @@ export default function Privacy() {
             addresses, and no name, email or precise location is sent.
           </li>
           <li>
+            <strong>Ad measurement</strong> · Meta Platforms (United
+            States), loaded only after you accept ads in the cookie
+            banner. The Meta Pixel records page views so we can measure
+            ads we run on Facebook and Instagram. It never receives
+            your email address, and alert-link security tokens are
+            never sent to it.
+          </li>
+          <li>
             <strong>Email delivery</strong> · the transactional email
             provider used for alert verification and unsubscribe
             messages.
@@ -183,8 +191,11 @@ export default function Privacy() {
       <Section title="5 · We do not sell your data">
         <p>
           We do not sell, rent or trade personal information. We do not
-          run advertising. We do not share email addresses with third
-          parties for marketing.
+          show third-party display advertising on the Service. If you
+          accept ads in the cookie banner, the Meta Pixel measures
+          whether our own ads on Facebook / Instagram brought you here ·
+          you can decline or withdraw this at any time. We do not share
+          email addresses with third parties for marketing.
         </p>
       </Section>
 
@@ -311,10 +322,12 @@ export default function Privacy() {
         <p>
           We use a small number of strictly necessary cookies / local
           storage entries to run the Service (your cookie choice, your
-          language preference, your selected base town). Analytics and
-          crash-monitoring storage are loaded only after you accept them
-          in the cookie banner. You can change your choice at any time
-          from the &ldquo;Cookie preferences&rdquo; link in the footer.
+          language preference, your selected base town). Analytics
+          storage is loaded only after you accept analytics in the
+          cookie banner; advertising storage (affiliate cookies, the
+          Meta Pixel) only after you accept ads. You can change your
+          choice at any time from the &ldquo;Cookie preferences&rdquo;
+          link in the footer.
         </p>
       </Section>
 

@@ -100,7 +100,7 @@ export function ConsentBanner() {
               />
               <div>
                 <div className="text-sm font-semibold text-slate-800">Advertising</div>
-                <div className="text-xs text-slate-500">Lets advertisers personalise the ads we show.</div>
+                <div className="text-xs text-slate-500">Affiliate booking cookies + measuring the ads we run on Facebook and Instagram.</div>
               </div>
             </label>
           </div>

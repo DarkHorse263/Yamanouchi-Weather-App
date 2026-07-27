@@ -9,6 +9,7 @@ import { ConsentProvider, useConsent, canUseAds, canUseAnalytics } from "@/lib/c
 import { ConsentBanner } from "@/components/ConsentBanner";
 import { loadAwinMasterTag, removeAwinMasterTag } from "@/lib/awin";
 import { loadGa, disableGa, gaPageView } from "@/lib/ga";
+import { loadMetaPixel, disableMetaPixel, metaPixelPageView } from "@/lib/metaPixel";
 import { InstallPrompt } from "@/components/InstallPrompt";
 import { OfflineBanner } from "@/components/OfflineBanner";
 import { PullToRefresh } from "@/components/PullToRefresh";
@@ -242,6 +243,36 @@ function GoogleAnalyticsTag() {
   return null;
 }
 
+/**
+ * Loads the Meta (Facebook) Pixel once the visitor grants `ads` consent - it
+ * is advertising tech (ad measurement + retargeting), so it rides the same
+ * consent category as the Awin MasterTag, NOT `analytics`. While enabled it
+ * sends a PageView on every route change; automatic collection is off (see
+ * lib/metaPixel) so those explicit PageViews are the pixel's only hits, and
+ * they are skipped entirely on tokened URLs (?token=...) because fbevents
+ * reports the raw href and cannot be overridden.
+ */
+function MetaPixelTag() {
+  const consent = useConsent();
+  const [location] = useLocation();
+  const enabled = canUseAds(consent.choices);
+
+  useEffect(() => {
+    if (enabled) {
+      loadMetaPixel();
+    } else {
+      disableMetaPixel();
+    }
+  }, [enabled]);
+
+  useEffect(() => {
+    if (!enabled) return;
+    metaPixelPageView();
+  }, [enabled, location]);
+
+  return null;
+}
+
 function App() {
   return (
     <AppErrorBoundary>
@@ -253,6 +284,7 @@ function App() {
               <ScrollToTop />
               <AwinTag />
               <GoogleAnalyticsTag />
+              <MetaPixelTag />
               <Router />
             </WouterRouter>
             <ConsentBanner />
