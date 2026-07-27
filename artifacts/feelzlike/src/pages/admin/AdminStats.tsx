@@ -1,5 +1,6 @@
 import { AdminLayout, AdminForbidden } from "./AdminLayout";
-import { useAdminQuery, AdminApiError } from "./useAdminFetch";
+import { useAdminQuery } from "./useAdminFetch";
+import { ExternalLink } from "lucide-react";
 
 interface SubsBucket {
   total: number;
@@ -8,19 +9,29 @@ interface SubsBucket {
   unsubscribed: number;
   new7d: number;
 }
+interface DailyPoint {
+  day: string; // YYYY-MM-DD
+  alerts: number;
+  newsletter: number;
+}
 interface StatsPayload {
   alerts: SubsBucket;
+  newsletter?: SubsBucket;
+  newsletterSources?: Array<{ source: string; count: number }>;
+  daily?: DailyPoint[];
 }
 
 interface RecentSignup {
   id: string;
   email: string;
   regions: string[];
+  source?: string | null;
   verifiedAt: string | null;
   createdAt: string;
 }
 interface SignupsPayload {
   alerts: RecentSignup[];
+  newsletter?: RecentSignup[];
 }
 
 function Kpi({ label, value, sub }: { label: string; value: number | string; sub?: string }) {
@@ -48,6 +59,101 @@ function SubsCard({ title, b }: { title: string; b: SubsBucket }) {
   );
 }
 
+/** Lightweight 30-day dual-series bar strip · no chart lib needed. */
+function TrendStrip({ daily }: { daily: DailyPoint[] }) {
+  const max = Math.max(1, ...daily.map((d) => d.alerts + d.newsletter));
+  return (
+    <div className="rounded-lg border bg-white p-5">
+      <div className="flex items-baseline justify-between mb-3">
+        <h3 className="text-sm font-semibold lowercase">signups · last 30 days</h3>
+        <div className="flex items-center gap-3 text-xs text-muted-foreground">
+          <span className="inline-flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-sky-500 inline-block" /> alerts</span>
+          <span className="inline-flex items-center gap-1"><span className="w-2 h-2 rounded-sm bg-indigo-400 inline-block" /> newsletter</span>
+        </div>
+      </div>
+      <div className="flex items-end gap-[3px] h-24" role="img" aria-label="daily signups over the last 30 days">
+        {daily.map((d) => {
+          const total = d.alerts + d.newsletter;
+          const label = `${new Date(d.day + "T00:00:00Z").toLocaleDateString(undefined, { day: "numeric", month: "short" })} · ${d.alerts} alerts · ${d.newsletter} newsletter`;
+          return (
+            <div key={d.day} className="flex-1 flex flex-col justify-end h-full group relative" title={label}>
+              {total === 0 ? (
+                <div className="w-full h-[2px] rounded-sm bg-slate-200" />
+              ) : (
+                <>
+                  <div className="w-full rounded-t-sm bg-indigo-400" style={{ height: `${(d.newsletter / max) * 100}%` }} />
+                  <div className={`w-full bg-sky-500 ${d.newsletter === 0 ? "rounded-t-sm" : ""}`} style={{ height: `${(d.alerts / max) * 100}%` }} />
+                </>
+              )}
+            </div>
+          );
+        })}
+      </div>
+      <div className="flex justify-between text-[10px] text-muted-foreground mt-2">
+        <span>30 days ago</span>
+        <span>today</span>
+      </div>
+    </div>
+  );
+}
+
+function SourcesCard({ sources }: { sources: Array<{ source: string; count: number }> }) {
+  const max = Math.max(1, ...sources.map((s) => s.count));
+  return (
+    <div className="rounded-lg border bg-white p-5">
+      <h3 className="text-sm font-semibold mb-1 lowercase">where newsletter signups came from</h3>
+      <p className="text-xs text-muted-foreground mb-3">which parts of the site convert · "premium" = the premium hub</p>
+      {sources.length === 0 ? (
+        <p className="text-sm text-muted-foreground">none yet.</p>
+      ) : (
+        <ul className="space-y-2 text-sm">
+          {sources.map((s) => (
+            <li key={s.source} className="flex items-center gap-3">
+              <span className="w-24 shrink-0 truncate text-slate-700">{s.source}</span>
+              <span className="flex-1 h-2 rounded bg-slate-100 overflow-hidden">
+                <span className="block h-full rounded bg-sky-500" style={{ width: `${(s.count / max) * 100}%` }} />
+              </span>
+              <span className="tabular-nums text-slate-700 w-8 text-right">{s.count}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+const DASHBOARDS: Array<{ label: string; sub: string; href: string }> = [
+  { label: "google analytics", sub: "visitors · look for facebook / paid", href: "https://analytics.google.com/" },
+  { label: "meta ads manager", sub: "spend · clicks · cost per click", href: "https://adsmanager.facebook.com/adsmanager/manage/campaigns" },
+  { label: "meta events manager", sub: "pixel · clicks that actually landed", href: "https://business.facebook.com/events_manager2/overview" },
+  { label: "search console", sub: "google search · indexing progress", href: "https://search.google.com/search-console" },
+];
+
+function DashboardLinks() {
+  return (
+    <div className="rounded-lg border bg-white p-5">
+      <h3 className="text-sm font-semibold mb-3 lowercase">other scoreboards</h3>
+      <div className="grid sm:grid-cols-2 gap-2">
+        {DASHBOARDS.map((d) => (
+          <a
+            key={d.label}
+            href={d.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-between gap-3 rounded-md border px-3 py-2 hover:bg-slate-50 transition-colors"
+          >
+            <div className="min-w-0">
+              <div className="text-sm font-medium lowercase">{d.label}</div>
+              <div className="text-xs text-muted-foreground truncate">{d.sub}</div>
+            </div>
+            <ExternalLink className="w-3.5 h-3.5 shrink-0 text-slate-400" />
+          </a>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function AdminStats() {
   const stats = useAdminQuery<StatsPayload>("stats", "/stats");
   const signups = useAdminQuery<SignupsPayload>("signups", "/recent-signups");
@@ -64,15 +170,39 @@ export default function AdminStats() {
         <div className="space-y-5">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             <Kpi label="alerts (verified)" value={stats.data.alerts.verified} sub={`+${stats.data.alerts.new7d} last 7d`} />
+            {stats.data.newsletter ? (
+              <Kpi label="newsletter (verified)" value={stats.data.newsletter.verified} sub={`+${stats.data.newsletter.new7d} last 7d`} />
+            ) : null}
+            <Kpi
+              label="all signups · 7d"
+              value={stats.data.alerts.new7d + (stats.data.newsletter?.new7d ?? 0)}
+              sub="alerts + newsletter"
+            />
+            <Kpi
+              label="pending verify"
+              value={stats.data.alerts.pending + (stats.data.newsletter?.pending ?? 0)}
+              sub="clicked subscribe · not yet confirmed email"
+            />
           </div>
+
+          {stats.data.daily && stats.data.daily.length > 0 ? <TrendStrip daily={stats.data.daily} /> : null}
 
           <div className="grid lg:grid-cols-2 gap-4">
             <SubsCard title="powder-alert subscribers" b={stats.data.alerts} />
+            {stats.data.newsletter ? <SubsCard title="newsletter subscribers" b={stats.data.newsletter} /> : null}
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-4">
+            {stats.data.newsletterSources ? <SourcesCard sources={stats.data.newsletterSources} /> : null}
+            <DashboardLinks />
           </div>
 
           {signups.data ? (
             <div className="grid lg:grid-cols-2 gap-4">
               <RecentSignupsTable title="alerts · recent signups" rows={signups.data.alerts} />
+              {signups.data.newsletter ? (
+                <RecentSignupsTable title="newsletter · recent signups" rows={signups.data.newsletter} showSource />
+              ) : null}
             </div>
           ) : null}
         </div>
@@ -81,7 +211,7 @@ export default function AdminStats() {
   );
 }
 
-function RecentSignupsTable({ title, rows }: { title: string; rows: RecentSignup[] }) {
+function RecentSignupsTable({ title, rows, showSource }: { title: string; rows: RecentSignup[]; showSource?: boolean }) {
   return (
     <div className="rounded-lg border bg-white p-5">
       <h3 className="text-sm font-semibold mb-3 lowercase">{title}</h3>
@@ -95,6 +225,7 @@ function RecentSignupsTable({ title, rows }: { title: string; rows: RecentSignup
                 <div className="truncate">{r.email}</div>
                 <div className="text-xs text-muted-foreground truncate">
                   {r.regions.length ? r.regions.join(" · ") : "all regions"}
+                  {showSource && r.source ? ` · via ${r.source}` : ""}
                 </div>
               </div>
               <div className="text-xs text-muted-foreground whitespace-nowrap">

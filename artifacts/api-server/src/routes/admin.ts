@@ -1,6 +1,6 @@
 import { Router, type IRouter, type Request, type Response } from "express";
-import { and, gte, desc, isNotNull, isNull, count } from "drizzle-orm";
-import { db, alertSubscribersTable } from "@workspace/db";
+import { and, gte, desc, isNotNull, isNull, count, sql } from "drizzle-orm";
+import { db, alertSubscribersTable, newsletterSubscribersTable } from "@workspace/db";
 import { requireAdminUser } from "../middlewares/requireAdminUser.js";
 
 /**
@@ -105,6 +105,67 @@ router.get("/stats", async (_req: Request, res: Response) => {
       .from(alertSubscribersTable)
       .where(gte(alertSubscribersTable.createdAt, since7d));
 
+    // Newsletter / premium-interest subscriber buckets
+    const [nlTotalRow] = await db
+      .select({ c: count() })
+      .from(newsletterSubscribersTable);
+    const [nlVerifiedRow] = await db
+      .select({ c: count() })
+      .from(newsletterSubscribersTable)
+      .where(and(isNotNull(newsletterSubscribersTable.verifiedAt), isNull(newsletterSubscribersTable.unsubscribedAt)));
+    const [nlPendingRow] = await db
+      .select({ c: count() })
+      .from(newsletterSubscribersTable)
+      .where(and(isNull(newsletterSubscribersTable.verifiedAt), isNull(newsletterSubscribersTable.unsubscribedAt)));
+    const [nlUnsubRow] = await db
+      .select({ c: count() })
+      .from(newsletterSubscribersTable)
+      .where(isNotNull(newsletterSubscribersTable.unsubscribedAt));
+    const [nlNew7dRow] = await db
+      .select({ c: count() })
+      .from(newsletterSubscribersTable)
+      .where(gte(newsletterSubscribersTable.createdAt, since7d));
+
+    // Where newsletter signups came from ('premium', 'footer', 'landing', …)
+    const sources = await db
+      .select({ source: newsletterSubscribersTable.source, c: count() })
+      .from(newsletterSubscribersTable)
+      .groupBy(newsletterSubscribersTable.source)
+      .orderBy(desc(count()));
+
+    // Daily signups for the trend strip · 30 UTC calendar days (today plus
+    // the 29 before it). The SQL window starts at the UTC midnight of the
+    // oldest day so every grouped row has a matching key in the JS day map.
+    const since30d = new Date();
+    since30d.setUTCHours(0, 0, 0, 0);
+    since30d.setUTCDate(since30d.getUTCDate() - 29);
+    const alertDayExpr = sql<string>`to_char(${alertSubscribersTable.createdAt} AT TIME ZONE 'UTC', 'YYYY-MM-DD')`;
+    const alertDaily = await db
+      .select({ day: alertDayExpr, c: count() })
+      .from(alertSubscribersTable)
+      .where(gte(alertSubscribersTable.createdAt, since30d))
+      .groupBy(alertDayExpr);
+    const nlDayExpr = sql<string>`to_char(${newsletterSubscribersTable.createdAt} AT TIME ZONE 'UTC', 'YYYY-MM-DD')`;
+    const nlDaily = await db
+      .select({ day: nlDayExpr, c: count() })
+      .from(newsletterSubscribersTable)
+      .where(gte(newsletterSubscribersTable.createdAt, since30d))
+      .groupBy(nlDayExpr);
+
+    const byDay = new Map<string, { alerts: number; newsletter: number }>();
+    for (let i = 29; i >= 0; i--) {
+      const d = new Date(Date.now() - i * 24 * 60 * 60 * 1000);
+      byDay.set(d.toISOString().slice(0, 10), { alerts: 0, newsletter: 0 });
+    }
+    for (const r of alertDaily) {
+      const e = byDay.get(r.day);
+      if (e) e.alerts = Number(r.c);
+    }
+    for (const r of nlDaily) {
+      const e = byDay.get(r.day);
+      if (e) e.newsletter = Number(r.c);
+    }
+
     res.json({
       alerts: {
         total: alTotalRow?.c ?? 0,
@@ -113,6 +174,18 @@ router.get("/stats", async (_req: Request, res: Response) => {
         unsubscribed: alUnsubRow?.c ?? 0,
         new7d: alNew7dRow?.c ?? 0,
       },
+      newsletter: {
+        total: nlTotalRow?.c ?? 0,
+        verified: nlVerifiedRow?.c ?? 0,
+        pending: nlPendingRow?.c ?? 0,
+        unsubscribed: nlUnsubRow?.c ?? 0,
+        new7d: nlNew7dRow?.c ?? 0,
+      },
+      newsletterSources: sources.map((s) => ({
+        source: s.source ?? "unknown",
+        count: Number(s.c),
+      })),
+      daily: Array.from(byDay.entries()).map(([day, v]) => ({ day, ...v })),
     });
   } catch (err) {
     console.error("[admin/stats] failed", err);
@@ -134,7 +207,20 @@ router.get("/recent-signups", async (_req: Request, res: Response) => {
       .orderBy(desc(alertSubscribersTable.createdAt))
       .limit(20);
 
-    res.json({ alerts });
+    const newsletter = await db
+      .select({
+        id: newsletterSubscribersTable.id,
+        email: newsletterSubscribersTable.email,
+        regions: newsletterSubscribersTable.regions,
+        source: newsletterSubscribersTable.source,
+        verifiedAt: newsletterSubscribersTable.verifiedAt,
+        createdAt: newsletterSubscribersTable.createdAt,
+      })
+      .from(newsletterSubscribersTable)
+      .orderBy(desc(newsletterSubscribersTable.createdAt))
+      .limit(20);
+
+    res.json({ alerts, newsletter });
   } catch (err) {
     console.error("[admin/recent-signups] failed", err);
     res.status(500).json({ error: "RECENT_SIGNUPS_FAILED" });
