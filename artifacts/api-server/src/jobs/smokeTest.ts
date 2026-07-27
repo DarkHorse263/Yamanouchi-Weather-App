@@ -51,8 +51,13 @@ const PAGE_CONCURRENCY = 8;
 const LINK_CONCURRENCY = 8;
 
 // Reachable-but-gated: the server answered, so the link is not dead. 999 is
-// LinkedIn's bot wall, 530 is a Cloudflare gate variant.
-const BLOCKED_STATUSES = new Set([401, 403, 405, 406, 409, 418, 429, 451, 530, 999]);
+// LinkedIn's bot wall, 530 is a Cloudflare gate variant. 415 is a WAF
+// rejecting our request shape (seen on WordPress hosts). 503 belongs here
+// too: this check runs at 4:45am JST, inside the nightly maintenance window
+// of big Japanese sites (jalan.net 503s every night then comes straight
+// back), and Akamai bot walls also speak 503 - a genuinely dead provider
+// ends up as 404/410 or a dead host, not an eternal 503.
+const BLOCKED_STATUSES = new Set([401, 403, 405, 406, 409, 415, 418, 429, 451, 503, 530, 999]);
 
 const WEATHER_CANARIES = [
   { id: "thredbo", country: "AU" },
@@ -226,7 +231,7 @@ interface LinkEntry {
 
 type LinkVerdict = "ok" | "blocked" | "broken" | "dead";
 
-async function probeLink(url: string): Promise<{ verdict: LinkVerdict; detail: string }> {
+export async function probeLink(url: string): Promise<{ verdict: LinkVerdict; detail: string }> {
   try {
     const res = await fetchRaw(url, LINK_TIMEOUT_MS);
     // Drain a little of the body so keep-alive sockets recycle cleanly.
@@ -237,10 +242,18 @@ async function probeLink(url: string): Promise<{ verdict: LinkVerdict; detail: s
   } catch (err) {
     const msg = errMessage(err);
     // Not dead, just unverifiable from a server: transient resolver failures
-    // (EAI_AGAIN) and missing-intermediate cert chains that browsers repair
-    // via AIA fetching but Node's TLS refuses. Treat as reachable-ish so the
-    // owner's email only lists links genuinely worth his time.
-    if (msg.includes("EAI_AGAIN") || msg.includes("UNABLE_TO_VERIFY_LEAF_SIGNATURE")) {
+    // (EAI_AGAIN), missing-intermediate cert chains that browsers repair
+    // via AIA fetching but Node's TLS refuses, and plain timeouts. Timeouts
+    // are dominated by bot walls that silently drop datacentre traffic
+    // (kfc.com.au and travel.rakuten.com time out for any non-browser client
+    // while loading fine for humans - verified July 2026). A genuinely dead
+    // host shows up as ENOTFOUND/ECONNREFUSED instead. Treat as reachable-ish
+    // so the owner's email only lists links genuinely worth his time.
+    if (
+      msg.includes("EAI_AGAIN") ||
+      msg.includes("UNABLE_TO_VERIFY_LEAF_SIGNATURE") ||
+      /timeout/i.test(msg)
+    ) {
       return { verdict: "blocked", detail: `${msg} (unverifiable from server, likely fine in browsers)` };
     }
     return { verdict: "dead", detail: msg };

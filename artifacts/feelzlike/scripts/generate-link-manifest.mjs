@@ -67,12 +67,37 @@ function cleanUrl(raw) {
   }
 }
 
+/**
+ * Curated stay/eat JSON carries `source_urls` - research provenance for the
+ * entry, never rendered in the UI (verified: no component reads the field).
+ * Checking them alarms the owner about pages no visitor can reach (and
+ * directory sites rot constantly), so strip them before the regex scan.
+ * Non-JSON files and unparseable JSON fall through to a raw text scan.
+ */
+function scannableText(file, text) {
+  if (!file.endsWith(".json")) return text;
+  try {
+    const drop = (node) => {
+      if (Array.isArray(node)) node.forEach(drop);
+      else if (node && typeof node === "object") {
+        delete node.source_urls;
+        Object.values(node).forEach(drop);
+      }
+    };
+    const parsed = JSON.parse(text);
+    drop(parsed);
+    return JSON.stringify(parsed);
+  } catch {
+    return text;
+  }
+}
+
 const byUrl = new Map();
 let scanned = 0;
 for (const dir of SCAN_DIRS) {
   for (const file of walk(dir)) {
     scanned++;
-    const text = readFileSync(file, "utf8");
+    const text = scannableText(file, readFileSync(file, "utf8"));
     for (const m of text.match(URL_RE) ?? []) {
       const url = cleanUrl(m);
       if (!url) continue;

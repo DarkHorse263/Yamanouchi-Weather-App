@@ -1,0 +1,24 @@
+daily site check · problems found
+
+this morning's automated check of feelzlike.com found 15 problems. everything else passed (366 pages, 733 outbound links checked).
+
+unreachable outbound links (8)
+
+https://charlottepass.com.au/wp-content/uploads/2022/06/Charlotte-Pass-Kosciuszko-Chalet-Hotel-1.jpg - The operation was aborted due to timeout (failed twice) · used in src/data/curated/by_region/snowy_mountains/jindabyne/stays.json
+https://rusutsu.com/en/ - fetch failed (UND_ERR_CONNECT_TIMEOUT) (failed twice) · used in src/regions/rusutsu-kiroro.ts
+https://travel.rakuten.com/usa/en-us/hotel_info_item/10123456872545 - The operation was aborted due to timeout (failed twice) · used in src/data/curated/by_region/yamanouchi/shibu_onsen/stays.json
+https://travel.rakuten.com/usa/en-us/hotel_info_item/10123456902114 - The operation was aborted due to timeout (failed twice) · used in src/data/curated/by_region/yamanouchi/shibu_onsen/stays.json
+https://travel.rakuten.com/usa/en-us/hotel_info_item/cnt_japan/sub_nagano_prefecture/cty_yamanouchi_town/10123456873249 - The operation was aborted due to timeout (failed twice) · used in src/data/curated/by_region/yamanouchi/yudanaka/stays.json
+https://travel.rakuten.com/usa/en-us/hotel_info_item/cnt_japan/sub_nagano_prefecture/cty_yamanouchi_town/10123456880995 - The operation was aborted due to timeout (failed twice) · used in src/data/curated/by_region/yamanouchi/yomase/stays.json
+https://www.acttourism.com.au/restaurants/dining/nsw/berridale/berridale-inn/130643 - fetch failed (UND_ERR_CONNECT_TIMEOUT) (failed twice) · used in src/data/curated/by_region/snowy_mountains/berridale/eats.json
+https://www.kfc.com.au - The operation was aborted due to timeout (failed twice) · used in src/data/curated/by_region/snowy_mountains/cooma/eats.json
+dead outbound links (7)
+
+https://www.jalan.net - HTTP 503 (failed twice) · used in src/data/curated/by_region/yamanouchi/yudanaka/stays.json
+https://www.jalan.net/en/japan_hotels_ryokan/Ryokan/Nagano_Ryokan/Shiga_KitaShiga_Yudanakashibu_Ryokan/KitaShiga_Ryuo_Okushiga_Ryokan/hotel_selan/ - HTTP 503 (failed twice) · used in src/data/curated/by_region/yamanouchi/yomase/eats.json
+https://www.jalan.net/en/japan_hotels_ryokan/Ryokan/Nagano_Ryokan/Shiga_KitaShiga_Yudanakashibu_Ryokan/Yudanaka_Shibu_Shiga_Kogen_Ryokan/aburaya_tousen/ - HTTP 503 (failed twice) · used in src/data/curated/by_region/yamanouchi/shibu_onsen/stays.json
+https://www.jalan.net/en/japan_hotels_ryokan/Ryokan/Nagano_Ryokan/Shiga_KitaShiga_Yudanakashibu_Ryokan/Yudanaka_Shibu_Shiga_Kogen_Ryokan/kanaguya/ - HTTP 503 (failed twice) · used in src/data/curated/by_region/yamanouchi/shibu_onsen/stays.json
+https://www.jalan.net/en/japan_hotels_ryokan/Ryokan/Nagano_Ryokan/Shiga_KitaShiga_Yudanakashibu_Ryokan/Yudanaka_Shibu_Shiga_Kogen_Ryokan/shibu_onsen_onyado_suminoyu/ - HTTP 503 (failed twice) · used in src/data/curated/by_region/yamanouchi/shibu_onsen/stays.json
+https://www.jalan.net/en/japan_hotels_ryokan/Ryokan/Nagano_Ryokan/Shiga_KitaShiga_Yudanakashibu_Ryokan/Yudanaka_Shibu_Shiga_Kogen_Ryokan/shunran_no_yado_sakaeya/ - HTTP 503 (failed twice) · used in src/data/curated/by_region/yamanouchi/shibu_onsen/stays.json
+https://www.jalan.net/yad330740/ - HTTP 503 (failed twice) · used in src/data/curated/by_region/yamanouchi/shibu_onsen/stays.json
+dead links usually mean a provider changed their website. fixing them is a data edit, not an outage - but pages not loading or api problems mean visitors are affected right now.
