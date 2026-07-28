@@ -8,7 +8,7 @@ import { RegionLayout } from "@/layouts/RegionLayout";
 import { ConsentProvider, useConsent, canUseAds, canUseAnalytics } from "@/lib/consent";
 import { ConsentBanner } from "@/components/ConsentBanner";
 import { loadAwinMasterTag, removeAwinMasterTag } from "@/lib/awin";
-import { loadGa, disableGa, gaPageView } from "@/lib/ga";
+import { loadGa, gaConsentUpdate, gaPageView } from "@/lib/ga";
 import { loadMetaPixel, disableMetaPixel, metaPixelPageView } from "@/lib/metaPixel";
 import { InstallPrompt } from "@/components/InstallPrompt";
 import { OfflineBanner } from "@/components/OfflineBanner";
@@ -211,32 +211,35 @@ function AwinTag() {
 }
 
 /**
- * Loads Google Analytics (gtag.js) once the visitor grants `analytics` consent,
- * and disables it (opt-out flag + script removal) if they later revoke it.
- * While enabled it sends a GA4 page_view on every route change · gtag's own
- * auto page_view is off (see lib/ga) so this is the single source of pageviews.
- * SECURITY: strip querystring + hash before sending · alert links carry HMAC
- * tokens (?token=...) that must never reach GA. Mounted inside WouterRouter so
- * `useLocation` stays bound to the right base path.
+ * Google Analytics via Consent Mode v2. gtag.js loads for EVERY visitor with
+ * all consent flags defaulted to denied (see lib/ga): decliners and
+ * undecideds send only anonymous cookieless pings (no cookies, no client id,
+ * nothing stored on the device), which GA4 uses to model true visitor totals.
+ * Granting `analytics` upgrades to normal measurement (cookies, new vs
+ * returning); revoking drops straight back to anonymous pings mid-session.
+ * page_views are sent on every route change regardless · they ride the same
+ * consent state. SECURITY: strip querystring + hash before sending · alert
+ * links carry HMAC tokens (?token=...) that must never reach GA. Mounted
+ * inside WouterRouter so `useLocation` stays bound to the right base path.
  */
 function GoogleAnalyticsTag() {
   const consent = useConsent();
   const [location] = useLocation();
-  const enabled = canUseAnalytics(consent.choices);
+  const analyticsGranted = canUseAnalytics(consent.choices);
+  const adsGranted = canUseAds(consent.choices);
 
   useEffect(() => {
-    if (enabled) {
-      loadGa();
-    } else {
-      disableGa();
-    }
-  }, [enabled]);
+    loadGa();
+  }, []);
 
   useEffect(() => {
-    if (!enabled) return;
+    gaConsentUpdate({ analytics: analyticsGranted, ads: adsGranted });
+  }, [analyticsGranted, adsGranted]);
+
+  useEffect(() => {
     const safePath = location.split(/[?#]/)[0] || "/";
     gaPageView(safePath);
-  }, [enabled, location]);
+  }, [location]);
 
   return null;
 }

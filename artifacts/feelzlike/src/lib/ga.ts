@@ -3,8 +3,11 @@
 //
 // WHY THIS EXISTS
 // feelzlike uses GA4 for first-party product analytics (page views, aggregate
-// usage). GA4 is loaded lazily in the browser only after the visitor grants the
-// `analytics` consent category, so it never runs for people who decline.
+// usage) via Consent Mode v2: gtag.js loads for EVERY visitor with all consent
+// flags defaulted to denied. Decliners/undecideds send only anonymous,
+// cookieless pings (no cookies, no client id) that GA4 uses to model true
+// visitor totals; granting `analytics` upgrades to full measurement via
+// gaConsentUpdate().
 //
 // CONFIG
 //   The GA4 Measurement ID (G-XXXXXXXXXX) ships in every visitor's browser, so
@@ -14,11 +17,9 @@
 //   no-op (nothing loads).
 //
 // CONSENT
-//   GA sets analytics cookies, so it must only load once the visitor has granted
-//   the `analytics` consent category (see lib/consent). This module does NOT
-//   check consent itself - callers must gate it:
-//     if (canUseAnalytics(consent.choices)) loadGa();
-//     else disableGa();
+//   Consent Mode v2 (see above). This module does NOT read lib/consent itself ·
+//   callers call loadGa() once, then gaConsentUpdate({analytics, ads}) whenever
+//   the visitor's choices change (grant or revoke, mid-session included).
 //
 // PRIVACY
 //   Page views are sent with the querystring + hash stripped, because alert
@@ -169,6 +170,18 @@ export function loadGa(): boolean {
       window.dataLayer!.push(arguments);
     };
   }
+  // Consent Mode v2 defaults · everything DENIED until the visitor chooses.
+  // This MUST be queued before `js`/`config`. With storage denied, gtag.js
+  // sends only anonymous, cookieless pings (no client id, no device storage) ·
+  // Google uses them to model totals for visitors who decline, so the visitor
+  // count in GA4 stays honest without recognising anyone. An explicit grant
+  // arrives later via gaConsentUpdate().
+  window.gtag("consent", "default", {
+    analytics_storage: "denied",
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+  });
   window.gtag("js", new Date());
   // send_page_view:false · SPA route changes drive page_view manually (see
   // gaPageView) so we can strip tokened querystrings and avoid double-counting
@@ -191,9 +204,27 @@ export function loadGa(): boolean {
 }
 
 /**
- * Best-effort teardown when the visitor revokes `analytics` consent: sets GA's
- * opt-out flag (so any already-loaded gtag.js stops sending hits immediately)
- * and removes the injected <script> so it won't re-run on a fresh load.
+ * Consent Mode v2 update · called whenever the visitor's cookie choices
+ * change (grant OR revoke, including mid-session). `analytics` maps to
+ * analytics_storage; `ads` maps to the three ad flags (Google-side ad
+ * attribution for the whitelisted click ids). Revoking drops gtag back to
+ * anonymous cookieless pings · the same state as never having accepted.
+ */
+export function gaConsentUpdate(opts: { analytics: boolean; ads: boolean }): void {
+  if (typeof window === "undefined") return;
+  if (!GA_MEASUREMENT_ID || typeof window.gtag !== "function") return;
+  window.gtag("consent", "update", {
+    analytics_storage: opts.analytics ? "granted" : "denied",
+    ad_storage: opts.ads ? "granted" : "denied",
+    ad_user_data: opts.ads ? "granted" : "denied",
+    ad_personalization: opts.ads ? "granted" : "denied",
+  });
+}
+
+/**
+ * Hard kill switch (opt-out flag + script removal). No longer used on consent
+ * revoke · consent-mode `update` handles that while keeping anonymous counts ·
+ * but kept for emergencies/tests.
  */
 export function disableGa(): void {
   if (typeof window === "undefined") return;

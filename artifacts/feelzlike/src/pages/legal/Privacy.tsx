@@ -150,8 +150,12 @@ export default function Privacy() {
           </li>
           <li>
             <strong>Product analytics</strong> · Google Analytics 4
-            (Google, United States), loaded only after you accept
-            analytics in the cookie banner. It does not store IP
+            (Google, United States), run in Google&apos;s Consent Mode.
+            If you decline analytics in the cookie banner, only an
+            anonymous, cookieless ping is sent · nothing is stored on
+            your device and you cannot be recognised across visits.
+            Full measurement (cookies, returning-visitor detection)
+            happens only after you accept. It does not store IP
             addresses, and no name, email or precise location is sent.
           </li>
           <li>

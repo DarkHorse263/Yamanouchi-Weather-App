@@ -1,15 +1,20 @@
 ---
 name: feelzlike Google Analytics 4
-description: consent-gated GA4 wiring + the two non-obvious gotchas that make it silently fail or leak alert tokens.
+description: GA4 wiring (Consent Mode v2 since July 2026) + the non-obvious gotchas that make it silently fail or leak alert tokens.
 ---
 
 # feelzlike Google Analytics 4 (GA4)
 
-GA4 is wired the same consent-gated way as Awin: a small loader lib plus a
-component mounted in the router that loads/disables the tag on consent change
-and drives page_view manually. It only loads after the visitor grants the
-`analytics` consent category, and revoke works mid-session. The Measurement ID
-is public config (ships in HTML), not a secret.
+Since July 2026 GA4 runs in **Consent Mode v2** (owner choice, to count
+decliners): gtag.js loads for EVERY visitor with `gtag("consent","default",
+all denied)` queued BEFORE js/config; decliners send anonymous cookieless
+pings (verify with `gcs=G100` on /g/collect); grant/revoke flows through
+`gaConsentUpdate({analytics, ads})` mid-session · never revert to
+load-after-consent or the visitor totals go dishonest again, and never remove
+the consent-default-before-config ordering. page_view is sent on every route
+change regardless of consent. Privacy page copy describes this · keep in sync.
+The Measurement ID is public config (ships in HTML), not a secret. Meta Pixel
+and Awin stay strictly load-after-ads-consent (NOT consent mode).
 
 ## Gotcha 1 · the gtag stub MUST push the real `arguments` object
 gtag.js never replaces `window.gtag`; it only processes `dataLayer` entries and
