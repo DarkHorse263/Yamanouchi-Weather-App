@@ -21,6 +21,7 @@
     "test:precip": "tsx --test src/lib/__tests__/precip.test.ts",
     "test:nearYouRegionRow": "tsx --tsconfig tsconfig.test.json --test src/components/home/__tests__/NearYouRegionRow.test.tsx",
     "test:skiSeason": "tsx --test src/lib/__tests__/skiSeason.test.ts",
+    "test:lifts": "tsx --test src/data/__tests__/lifts.test.ts",
     "test:cj": "tsx --test src/lib/__tests__/cj.test.ts",
     "test:bomRadar": "tsx --test src/lib/__tests__/bom-radar.test.ts",
     "test:snowmaking": "tsx --test src/lib/__tests__/snowmaking.test.ts",
