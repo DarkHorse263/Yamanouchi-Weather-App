@@ -80,11 +80,11 @@ export type TownPartner = {
  * identity lives in the logo chip, not the panel colour).
  */
 const PARTNER_BLUE = {
-  bgFrom: "#8ac6f2",
-  bgTo: "#b9def8",
-  theme: "light",
-  ctaBg: "#0f2a4e",
-  ctaText: "#ffffff",
+  bgFrom: "#1a7ff0",
+  bgTo: "#1467c9",
+  theme: "dark",
+  ctaBg: "#ffffff",
+  ctaText: "#1467c9",
 } as const;
 
 /**
