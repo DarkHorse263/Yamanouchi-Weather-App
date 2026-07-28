@@ -124,13 +124,14 @@ function SourcesCard({ sources }: { sources: Array<{ source: string; count: numb
 }
 
 const DASHBOARDS: Array<{ label: string; sub: string; href: string }> = [
-  { label: "google analytics", sub: "visitors · look for facebook / paid", href: "https://analytics.google.com/" },
-  // Both Meta links open an account picker first · a bare /manage/campaigns
-  // URL lands on whichever ad account Meta last used (the owner has several
-  // businesses), which sent the owner to the wrong account. Once the
-  // feelzlike ad account id is known, deep-link with ?act=<id> instead.
-  { label: "meta ads manager", sub: "spend · clicks · cost per click · pick the feelzlike account", href: "https://adsmanager.facebook.com/adsmanager/manage/accounts" },
-  { label: "meta events manager", sub: "pixel · clicks that actually landed · pick the feelzlike account", href: "https://business.facebook.com/events_manager2/overview" },
+  // Deep-linked to the feelzlike property (p544105028) so it never opens
+  // another business's Analytics account.
+  { label: "google analytics", sub: "visitors · look for facebook / paid", href: "https://analytics.google.com/analytics/web/#/p544105028/reports/intelligenthome" },
+  // Deep-linked with the owner's ad account (act=..., "Navigate Work"
+  // portfolio) and the feelzlike pixel dataset · bare URLs land on whichever
+  // account Meta last used (owner has several businesses, e.g. DarkHorse).
+  { label: "meta ads manager", sub: "spend · clicks · cost per click", href: "https://adsmanager.facebook.com/adsmanager/manage/campaigns?act=783794032394591" },
+  { label: "meta events manager", sub: "pixel · clicks that actually landed", href: "https://business.facebook.com/events_manager2/list/dataset/1385564256750667/overview?act=783794032394591" },
   { label: "search console", sub: "google search · indexing progress", href: "https://search.google.com/search-console" },
 ];
 
