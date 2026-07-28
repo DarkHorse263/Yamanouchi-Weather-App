@@ -125,8 +125,12 @@ function SourcesCard({ sources }: { sources: Array<{ source: string; count: numb
 
 const DASHBOARDS: Array<{ label: string; sub: string; href: string }> = [
   { label: "google analytics", sub: "visitors · look for facebook / paid", href: "https://analytics.google.com/" },
-  { label: "meta ads manager", sub: "spend · clicks · cost per click", href: "https://adsmanager.facebook.com/adsmanager/manage/campaigns" },
-  { label: "meta events manager", sub: "pixel · clicks that actually landed", href: "https://business.facebook.com/events_manager2/overview" },
+  // Both Meta links open an account picker first · a bare /manage/campaigns
+  // URL lands on whichever ad account Meta last used (the owner has several
+  // businesses), which sent the owner to the wrong account. Once the
+  // feelzlike ad account id is known, deep-link with ?act=<id> instead.
+  { label: "meta ads manager", sub: "spend · clicks · cost per click · pick the feelzlike account", href: "https://adsmanager.facebook.com/adsmanager/manage/accounts" },
+  { label: "meta events manager", sub: "pixel · clicks that actually landed · pick the feelzlike account", href: "https://business.facebook.com/events_manager2/overview" },
   { label: "search console", sub: "google search · indexing progress", href: "https://search.google.com/search-console" },
 ];
 
