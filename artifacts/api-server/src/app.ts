@@ -572,6 +572,14 @@ Sentry.setupExpressErrorHandler(app);
 // only include the error message in non-production envs.
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: unknown, _req: Request, res: Response, _next: (e?: unknown) => void) => {
+  // Always log the real error server-side · the JSON envelope below is
+  // deliberately generic, so without this line production 500s are
+  // undiagnosable (the July 2026 admin-delete INTERNAL_ERROR took a
+  // publish cycle to trace for exactly this reason).
+  console.error(
+    `[errorHandler] ${_req.method} ${_req.originalUrl} →`,
+    err instanceof Error ? (err.stack ?? err.message) : err,
+  );
   if (res.headersSent) return;
   const isProd = process.env.NODE_ENV === "production";
   const status = (err && typeof err === "object" && "status" in err && typeof (err as { status?: unknown }).status === "number")
