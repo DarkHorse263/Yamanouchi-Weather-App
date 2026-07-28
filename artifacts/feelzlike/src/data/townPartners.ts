@@ -24,6 +24,7 @@
  *   },
  */
 import snowballLogo from "@assets/SnowballJapan_280726_1785212054795.jpeg";
+import snoexpressLogo from "@assets/Snoexpress_red_1785212504018.png";
 
 export type TownPartner = {
   /** Partner's trading name, shown as the card title. */
@@ -82,7 +83,7 @@ export type TownPartner = {
 const SNOEXPRESS: TownPartner = {
   name: "Snoexpress",
   kicker: "Transport partner",
-  tagline: "your link to the snowfields · weekend snow packages + coach transfers",
+  tagline: "weekend snow packages + coach transfers to the snowies",
   url: "https://snoexpress.com.au",
   cta: "book a seat",
   display: "ad",
@@ -91,6 +92,8 @@ const SNOEXPRESS: TownPartner = {
     "private transfers + trip planning available",
   ],
   brand: {
+    logo: snoexpressLogo,
+    logoAlt: "Snoexpress",
     bgFrom: "#c6262e",
     bgTo: "#8f1a20",
     theme: "dark",
