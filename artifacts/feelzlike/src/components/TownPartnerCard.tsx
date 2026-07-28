@@ -39,9 +39,10 @@ export function TownPartnerCard({
           <Handshake className="w-5 h-5" />
         </div>
         <div className="min-w-0 flex-1">
-          <p className="text-[11px] font-bold tracking-wider text-blue-700 uppercase">
+          {/* Label wears the logo blue · matches TownPartnerAd. */}
+          <p className="text-[11px] font-bold tracking-wider text-[#1d6fb8] uppercase">
             {t("Featured partner", "提携パートナー")}
-            <span className="text-blue-700/50 normal-case tracking-normal font-semibold">
+            <span className="text-[#1d6fb8]/50 normal-case tracking-normal font-semibold">
               {" · "}
               {t(partner.kicker, partner.kickerJa)}
             </span>

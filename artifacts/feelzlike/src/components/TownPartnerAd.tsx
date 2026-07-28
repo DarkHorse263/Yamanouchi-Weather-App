@@ -61,7 +61,11 @@ export function TownPartnerAd({
       }
     : undefined;
 
-  const labelClass = dark ? "text-white/75" : "text-slate-600";
+  // "Featured partner" label wears the logo's light blue so partner
+  // placements stand out on any banner · light blue on dark banners, a
+  // darker shade of the same blue on light ones (pale blue text on a
+  // light bg is illegible · light-only app).
+  const labelClass = dark ? "text-[#8ac6f2]" : "text-[#1d6fb8]";
   const nameClass = dark ? "text-white" : "text-slate-900";
   const lineClass = dark ? "text-white/85" : "text-slate-700";
 
