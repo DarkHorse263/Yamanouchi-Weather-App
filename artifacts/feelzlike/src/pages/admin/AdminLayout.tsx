@@ -2,16 +2,16 @@ import { Link } from "wouter";
 import { useAuth } from "@workspace/replit-auth-web";
 import type { ReactNode } from "react";
 import { useAdminQuery } from "./useAdminFetch";
+import wordmark from "@assets/feelzlike_trimmed/feelzlike_WordMarque_colour_160426_1777334678269_trim.png";
 
 interface Props {
   children: ReactNode;
   /** Currently active tab key for highlighting */
-  active: "stats" | "traffic";
+  active: "stats";
 }
 
 const TABS: Array<{ key: Props["active"]; label: string; href: string }> = [
   { key: "stats", label: "stats", href: "/admin" },
-  { key: "traffic", label: "traffic", href: "/admin/traffic" },
 ];
 
 /**
@@ -96,8 +96,9 @@ export function AdminLayout({ children, active }: Props) {
       <header className="border-b bg-white">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
           <div className="flex items-center gap-6">
-            <Link href="/" className="text-base font-semibold lowercase">
-              feelzlike · admin
+            <Link href="/" className="flex items-center gap-2.5">
+              <img src={wordmark} alt="feelzlike" className="h-7 w-auto" />
+              <span className="text-sm font-semibold lowercase text-slate-500">· admin</span>
             </Link>
             <nav className="flex items-center gap-1 text-sm">
               {TABS.map((t) => (

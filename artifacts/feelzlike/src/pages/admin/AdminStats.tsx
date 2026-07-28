@@ -1,6 +1,7 @@
 import { AdminLayout, AdminForbidden } from "./AdminLayout";
-import { useAdminQuery } from "./useAdminFetch";
-import { ExternalLink } from "lucide-react";
+import { adminFetch, useAdminQuery } from "./useAdminFetch";
+import { ExternalLink, X } from "lucide-react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface SubsBucket {
   total: number;
@@ -199,9 +200,9 @@ export default function AdminStats() {
 
           {signups.data ? (
             <div className="grid lg:grid-cols-2 gap-4">
-              <RecentSignupsTable title="alerts · recent signups" rows={signups.data.alerts} />
+              <RecentSignupsTable title="alerts · recent signups" list="alerts" rows={signups.data.alerts} />
               {signups.data.newsletter ? (
-                <RecentSignupsTable title="newsletter · recent signups" rows={signups.data.newsletter} showSource />
+                <RecentSignupsTable title="newsletter · recent signups" list="newsletter" rows={signups.data.newsletter} showSource />
               ) : null}
             </div>
           ) : null}
@@ -211,7 +212,25 @@ export default function AdminStats() {
   );
 }
 
-function RecentSignupsTable({ title, rows, showSource }: { title: string; rows: RecentSignup[]; showSource?: boolean }) {
+function RecentSignupsTable({
+  title,
+  list,
+  rows,
+  showSource,
+}: {
+  title: string;
+  list: "alerts" | "newsletter";
+  rows: RecentSignup[];
+  showSource?: boolean;
+}) {
+  const queryClient = useQueryClient();
+  const remove = useMutation({
+    mutationFn: (id: string) => adminFetch<{ deleted: string }>(`/signups/${list}/${id}`, { method: "DELETE" }),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ["admin", "signups"] });
+      void queryClient.invalidateQueries({ queryKey: ["admin", "stats"] });
+    },
+  });
   return (
     <div className="rounded-lg border bg-white p-5">
       <h3 className="text-sm font-semibold mb-3 lowercase">{title}</h3>
@@ -228,13 +247,33 @@ function RecentSignupsTable({ title, rows, showSource }: { title: string; rows: 
                   {showSource && r.source ? ` · via ${r.source}` : ""}
                 </div>
               </div>
-              <div className="text-xs text-muted-foreground whitespace-nowrap">
-                {r.verifiedAt ? "✓ verified" : "pending"} · {new Date(r.createdAt).toLocaleDateString()}
+              <div className="flex items-center gap-2 text-xs text-muted-foreground whitespace-nowrap">
+                <span>
+                  {r.verifiedAt ? "✓ verified" : "pending"} · {new Date(r.createdAt).toLocaleDateString()}
+                </span>
+                {!r.verifiedAt ? (
+                  <button
+                    onClick={() => {
+                      if (window.confirm(`remove pending signup ${r.email}?`)) {
+                        remove.mutate(r.id);
+                      }
+                    }}
+                    disabled={remove.isPending}
+                    title="remove this pending signup"
+                    aria-label={`remove pending signup ${r.email}`}
+                    className="rounded p-1 text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors disabled:opacity-50"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                ) : null}
               </div>
             </li>
           ))}
         </ul>
       )}
+      {remove.isError ? (
+        <p className="mt-2 text-xs text-rose-700">couldn't remove · {(remove.error as Error).message}</p>
+      ) : null}
     </div>
   );
 }

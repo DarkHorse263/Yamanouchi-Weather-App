@@ -28,7 +28,6 @@ import Terms from "@/pages/legal/Terms";
 import TripPlanner from "@/pages/TripPlanner";
 import Premium from "@/pages/Premium";
 import AdminStats from "@/pages/admin/AdminStats";
-import AdminTraffic from "@/pages/admin/AdminTraffic";
 
 const queryClient = new QueryClient();
 
@@ -64,7 +63,6 @@ function Router() {
       {/* Admin dashboard · auth-gated, mounted before /:region catch-all so
           /admin/* paths aren't parsed as region slugs. */}
       <Route path="/admin" component={AdminStats} />
-      <Route path="/admin/traffic" component={AdminTraffic} />
       {/* Country index pages - must come before the /:region catch-all so
           /au and /jp resolve to a regions-in-country picker, not the region
           layout (which would 404 on the country code). */}

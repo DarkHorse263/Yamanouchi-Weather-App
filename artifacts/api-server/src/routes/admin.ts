@@ -1,5 +1,5 @@
 import { Router, type IRouter, type Request, type Response } from "express";
-import { and, gte, desc, isNotNull, isNull, count, sql } from "drizzle-orm";
+import { and, eq, gte, desc, isNotNull, isNull, count, sql } from "drizzle-orm";
 import { db, alertSubscribersTable, newsletterSubscribersTable } from "@workspace/db";
 import { requireAdminUser } from "../middlewares/requireAdminUser.js";
 
@@ -224,6 +224,56 @@ router.get("/recent-signups", async (_req: Request, res: Response) => {
   } catch (err) {
     console.error("[admin/recent-signups] failed", err);
     res.status(500).json({ error: "RECENT_SIGNUPS_FAILED" });
+  }
+});
+
+// ── Clear a pending (unverified) signup ───────────────────────────────────
+// DELETE /api/admin/signups/:list/:id · list is 'alerts' or 'newsletter'.
+// Deliberately restricted to rows that never verified: verified subscribers
+// must go through the normal unsubscribe flow so the audit trail is honest.
+router.delete("/signups/:list/:id", async (req: Request, res: Response) => {
+  try {
+    const list = req.params.list;
+    const id = typeof req.params.id === "string" ? req.params.id : "";
+    if (!id) {
+      res.status(400).json({ error: "INVALID_ID" });
+      return;
+    }
+    if (list !== "alerts" && list !== "newsletter") {
+      res.status(400).json({ error: "UNKNOWN_LIST" });
+      return;
+    }
+    // Branch per table · drizzle can't type a union of table objects.
+    const deleted =
+      list === "alerts"
+        ? await db
+            .delete(alertSubscribersTable)
+            .where(
+              and(
+                eq(alertSubscribersTable.id, id),
+                isNull(alertSubscribersTable.verifiedAt),
+                isNull(alertSubscribersTable.unsubscribedAt),
+              ),
+            )
+            .returning({ id: alertSubscribersTable.id })
+        : await db
+            .delete(newsletterSubscribersTable)
+            .where(
+              and(
+                eq(newsletterSubscribersTable.id, id),
+                isNull(newsletterSubscribersTable.verifiedAt),
+                isNull(newsletterSubscribersTable.unsubscribedAt),
+              ),
+            )
+            .returning({ id: newsletterSubscribersTable.id });
+    if (deleted.length === 0) {
+      res.status(404).json({ error: "NOT_FOUND_OR_NOT_PENDING" });
+      return;
+    }
+    res.json({ deleted: deleted[0].id });
+  } catch (err) {
+    console.error("[admin/signups delete] failed", err);
+    res.status(500).json({ error: "DELETE_FAILED" });
   }
 });
 

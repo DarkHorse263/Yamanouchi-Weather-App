@@ -295,7 +295,7 @@ if (process.env.NODE_ENV === "production") {
     "/plan", "/legal/privacy", "/legal/terms",
     "/premium",
     "/alerts/verify", "/alerts/manage", "/alerts/unsubscribed",
-    "/admin", "/admin/traffic",
+    "/admin",
   ]);
 
   // Valid sub-paths under /:region/ that are indexable pages.
