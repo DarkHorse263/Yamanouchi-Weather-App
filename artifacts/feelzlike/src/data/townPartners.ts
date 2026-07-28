@@ -96,12 +96,15 @@ const PARTNER_BLUE = {
 const SNOEXPRESS: TownPartner = {
   name: "Snoexpress",
   kicker: "Transport partner",
-  tagline: "weekend snow packages + coach transfers to the snowies",
+  tagline: "weekend snow packages + coach transfers",
   url: "https://snoexpress.com.au",
   cta: "book a seat",
   display: "ad",
+  // Keep every line ≤ ~55 chars · the ad banner shows them two lines at a
+  // time on phones and clips anything longer mid-sentence.
   messages: [
-    "coaches from Newcastle, Sydney + Canberra to Jindabyne, Perisher + Thredbo",
+    "coaches from Newcastle, Sydney + Canberra",
+    "serving Jindabyne, Perisher + Thredbo",
     "private transfers + trip planning available",
   ],
   brand: {
@@ -124,8 +127,8 @@ const SNOWBALL_JAPAN: TownPartner = {
   ctaJa: "宿を見る",
   display: "ad",
   messages: [
-    "private self-catered lodges in the heart of the Japanese Alps",
-    "minutes from the lifts · near the famous snow monkeys",
+    "private self-catered lodges in the Japanese Alps",
+    "minutes from the lifts · near the snow monkeys",
   ],
   messagesJa: [
     "日本アルプスの中心にあるプライベート貸切ロッジ",

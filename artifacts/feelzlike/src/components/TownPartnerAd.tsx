@@ -69,6 +69,26 @@ export function TownPartnerAd({
   const nameClass = dark ? "text-white" : "text-slate-900";
   const lineClass = dark ? "text-white/85" : "text-slate-700";
 
+  // Rotating tagline/message. On phones the column beside the logo is too
+  // narrow for full sentences, so the mobile copy renders full-width UNDER
+  // the logo row (two lines) while sm+ keeps it inline (one line).
+  const rotator = (extra: string, lineExtra: string) => (
+    <div className={`relative overflow-hidden ${extra}`}>
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.p
+          key={index}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.3 }}
+          className={`absolute inset-x-0 text-sm leading-5 ${lineExtra} ${lineClass}`}
+        >
+          {line ? t(line.en, line.ja) : null}
+        </motion.p>
+      </AnimatePresence>
+    </div>
+  );
+
   const cta = (extra: string) => (
     <span
       className={`${extra} items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition-opacity group-hover:opacity-90 ${
@@ -106,7 +126,7 @@ export function TownPartnerAd({
               <img
                 src={brand.logo}
                 alt={brand.logoAlt ?? t(partner.name, partner.nameJa)}
-                className="h-14 w-auto max-w-[160px] object-contain"
+                className="h-12 sm:h-14 w-auto max-w-[124px] sm:max-w-[160px] object-contain"
                 loading="lazy"
               />
             </span>
@@ -130,23 +150,12 @@ export function TownPartnerAd({
             <p className={`font-display font-semibold mt-0.5 ${nameClass}`}>
               {t(partner.name, partner.nameJa)}
             </p>
-            <div className="relative mt-0.5 h-5 overflow-hidden">
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.p
-                  key={index}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.3 }}
-                  className={`absolute inset-x-0 text-sm leading-5 truncate ${lineClass}`}
-                >
-                  {line ? t(line.en, line.ja) : null}
-                </motion.p>
-              </AnimatePresence>
-            </div>
+            {rotator("hidden sm:block mt-0.5 h-5", "truncate")}
           </div>
           {cta("shrink-0 hidden sm:inline-flex")}
         </div>
+        {/* Mobile copy · full banner width under the logo row. */}
+        {rotator("sm:hidden mt-2.5 h-10", "line-clamp-2")}
         {/* Mobile CTA · the pill above hides below sm to keep the row tight. */}
         {cta("sm:hidden mt-3 inline-flex")}
       </a>

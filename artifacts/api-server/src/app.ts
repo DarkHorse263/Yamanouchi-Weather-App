@@ -65,6 +65,11 @@ const ALLOWED_ORIGIN_PATTERNS: RegExp[] = [
   /\.replit\.app$/,
   /\.replit\.dev$/,
   /\.repl\.co$/,
+  // Production custom domain. Browsers send an Origin header on same-origin
+  // POST/PUT/DELETE (but not GET), so leaving this out breaks every mutation
+  // on the live site (e.g. admin dashboard deletes → INTERNAL_ERROR) while
+  // reads keep working · July 2026 incident.
+  /^https:\/\/(www\.)?feelzlike\.com$/,
 ];
 const explicitAppUrl = (process.env.APP_PUBLIC_URL ?? "").replace(/\/$/, "");
 function isOriginAllowed(origin: string): boolean {
