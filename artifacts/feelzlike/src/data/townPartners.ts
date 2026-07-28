@@ -75,6 +75,19 @@ export type TownPartner = {
 };
 
 /**
+ * Shared featured-partner panel colours · owner wants every partner box
+ * in the logo's light blue so placements stand out consistently (partner
+ * identity lives in the logo chip, not the panel colour).
+ */
+const PARTNER_BLUE = {
+  bgFrom: "#8ac6f2",
+  bgTo: "#b9def8",
+  theme: "light",
+  ctaBg: "#0f2a4e",
+  ctaText: "#ffffff",
+} as const;
+
+/**
  * Snoexpress · coach transfers + snow packages, Snowy Mountains (AU).
  * Owner-approved preferred supplier · red brand treatment (no usable
  * transparent logo yet — their wordmark only exists white-on-red; swap
@@ -94,11 +107,7 @@ const SNOEXPRESS: TownPartner = {
   brand: {
     logo: snoexpressLogo,
     logoAlt: "Snoexpress",
-    bgFrom: "#c6262e",
-    bgTo: "#8f1a20",
-    theme: "dark",
-    ctaBg: "#ffffff",
-    ctaText: "#c6262e",
+    ...PARTNER_BLUE,
   },
 };
 
@@ -125,11 +134,7 @@ const SNOWBALL_JAPAN: TownPartner = {
   brand: {
     logo: snowballLogo,
     logoAlt: "Snowball Japan",
-    bgFrom: "#ffffff",
-    bgTo: "#e2e8f0",
-    theme: "light",
-    ctaBg: "#0f172a",
-    ctaText: "#ffffff",
+    ...PARTNER_BLUE,
   },
 };
 
