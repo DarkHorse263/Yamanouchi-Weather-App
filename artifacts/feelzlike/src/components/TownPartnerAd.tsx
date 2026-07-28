@@ -102,11 +102,11 @@ export function TownPartnerAd({
       >
         <div className="flex items-center gap-4">
           {brand?.logo ? (
-            <span className="shrink-0 inline-flex items-center justify-center rounded-xl bg-white px-2.5 py-2 shadow-sm">
+            <span className="shrink-0 inline-flex items-center justify-center rounded-xl bg-white px-3 py-2.5 shadow-sm">
               <img
                 src={brand.logo}
                 alt={brand.logoAlt ?? t(partner.name, partner.nameJa)}
-                className="h-9 w-auto max-w-[120px] object-contain"
+                className="h-14 w-auto max-w-[160px] object-contain"
                 loading="lazy"
               />
             </span>
