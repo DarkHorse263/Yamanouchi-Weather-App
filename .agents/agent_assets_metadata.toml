@@ -557,3 +557,9 @@ id = "-CUwGynv3vfCsrZvBL9xh"
 uri = "file://exports/powder-alert-email-preview.jpg"
 type = "image"
 title = "powder alert email · what subscribers receive"
+
+[[outputs]]
+id = "rI3xEcS8bc57tJj9xVJWS"
+uri = "file://exports/confirm-email-preview.jpg"
+type = "image"
+title = "signup confirmation email · what new subscribers receive"
