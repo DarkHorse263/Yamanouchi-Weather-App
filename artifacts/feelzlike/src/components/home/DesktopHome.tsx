@@ -18,7 +18,9 @@ import { track } from "@/lib/analytics";
  * country pages).
  */
 
-const COUNTRIES: CountryCode[] = ["AU", "JP", "NZ"];
+// Season-first ordering: southern-hemisphere countries (in season jun-oct)
+// come before Japan (dec-mar).
+const COUNTRIES: CountryCode[] = ["AU", "NZ", "JP"];
 
 const eyebrow = "text-[11px] font-semibold uppercase tracking-[0.18em] text-sky-700/80";
 const h2 =

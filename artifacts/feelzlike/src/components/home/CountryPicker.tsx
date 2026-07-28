@@ -139,9 +139,11 @@ export function CountryPicker() {
 
   type Country = { code: "AU" | "JP" | "NZ"; name: string; flag: string; regions: Region[] };
   const COUNTRIES: Country[] = ([
+    // Season-first ordering: Australia + New Zealand (jun-oct season) before
+    // Japan (dec-mar).
     { code: "AU" as const, name: "Australia",   flag: "\u{1F1E6}\u{1F1FA}", regions: regions.filter((r) => r.countryCode === "AU") },
-    { code: "JP" as const, name: "Japan",       flag: "\u{1F1EF}\u{1F1F5}", regions: regions.filter((r) => r.countryCode === "JP") },
     { code: "NZ" as const, name: "New Zealand", flag: "\u{1F1F3}\u{1F1FF}", regions: regions.filter((r) => r.countryCode === "NZ") },
+    { code: "JP" as const, name: "Japan",       flag: "\u{1F1EF}\u{1F1F5}", regions: regions.filter((r) => r.countryCode === "JP") },
   ] satisfies Country[]).filter((c) => c.regions.length > 0);
 
   return (

@@ -78,7 +78,8 @@ export function tripPlannerCatalog(country: CountryCode): CatalogMountain[] {
  * simply doesn't appear rather than showing an empty picker.
  */
 export function plannerCountries(): CountryCode[] {
-  const order: CountryCode[] = ["AU", "JP", "NZ"];
+  // Season-first ordering: AU + NZ (jun-oct season) before Japan (dec-mar).
+  const order: CountryCode[] = ["AU", "NZ", "JP"];
   return order.filter((c) => tripPlannerCatalog(c).length > 0);
 }
 
