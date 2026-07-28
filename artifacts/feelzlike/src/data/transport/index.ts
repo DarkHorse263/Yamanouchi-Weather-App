@@ -29,6 +29,7 @@ import { RUSUTSU_KIRORO_TRANSPORT } from "./rusutsu-kiroro";
 import { YUZAWA_TRANSPORT } from "./yuzawa";
 import { ZAO_ONSEN_TRANSPORT } from "./zao-onsen";
 import { HAKKODA_AOMORI_SPRING_TRANSPORT } from "./hakkoda-aomori-spring";
+import { APPI_SHIZUKUISHI_TRANSPORT } from "./appi-shizukuishi";
 import { QUEENSTOWN_TRANSPORT } from "./queenstown";
 import { WANAKA_TRANSPORT } from "./wanaka";
 import { MT_HUTT_TRANSPORT } from "./mt-hutt";
@@ -49,6 +50,7 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   yuzawa: YUZAWA_TRANSPORT,
   "zao-onsen": ZAO_ONSEN_TRANSPORT,
   "hakkoda-aomori-spring": HAKKODA_AOMORI_SPRING_TRANSPORT,
+  "appi-shizukuishi": APPI_SHIZUKUISHI_TRANSPORT,
   // NZ · verified ski-season operators only (resort ski buses, RealNZ +
   // local mountain shuttles, InterCity). Unverified phone/website/schedule
   // fields are null per the no-guess rule.

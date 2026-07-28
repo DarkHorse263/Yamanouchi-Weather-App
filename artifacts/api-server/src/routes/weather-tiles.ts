@@ -59,6 +59,12 @@ const JAPAN_CITIES = [
   { key: "sukayu-onsen", name: "Sukayu Onsen", nameJa: "酸ヶ湯温泉", lat: 40.651, lng: 140.851 },
   // Ajigasawa · town core around the Gono line station on the coast.
   { key: "ajigasawa", name: "Ajigasawa", nameJa: "鰺ヶ沢", lat: 40.776, lng: 140.221 },
+  // Appi Kogen · resort village at the gondola base (~620m).
+  { key: "appi-kogen", name: "Appi Kogen", nameJa: "安比高原", lat: 40.003, lng: 140.945 },
+  // Shizukuishi · town core around the Tazawako line station.
+  { key: "shizukuishi", name: "Shizukuishi", nameJa: "雫石", lat: 39.694, lng: 140.984 },
+  // Morioka · city core around Morioka Station.
+  { key: "morioka", name: "Morioka", nameJa: "盛岡", lat: 39.702, lng: 141.137 },
 ];
 
 let cachedTemps: { data: any; fetchedAt: number } | null = null;

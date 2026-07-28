@@ -22,6 +22,7 @@ export const REGION_IDS = [
   "yuzawa",
   "zao-onsen",
   "hakkoda-aomori-spring",
+  "appi-shizukuishi",
   "queenstown",
   "wanaka",
   "mt-hutt",
@@ -207,6 +208,14 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "sukayu-onsen": "hakkoda-aomori-spring",
   "ajigasawa": "hakkoda-aomori-spring",
   "hakkoda-aomori-spring-roads": "hakkoda-aomori-spring",
+
+  // Appi & Shizukuishi, JP · 2 mountains + 3 base towns around Morioka.
+  "appi": "appi-shizukuishi",
+  "shizukuishi-resort": "appi-shizukuishi",
+  "appi-kogen": "appi-shizukuishi",
+  "shizukuishi": "appi-shizukuishi",
+  "morioka": "appi-shizukuishi",
+  "appi-shizukuishi-roads": "appi-shizukuishi",
 
   // Queenstown, NZ · 2 mountains + 1 gateway town + roads cam tile.
   "coronet-peak": "queenstown",

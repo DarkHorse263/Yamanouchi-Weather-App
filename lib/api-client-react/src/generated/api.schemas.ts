@@ -68,6 +68,7 @@ export const RegionId = {
   yuzawa: "yuzawa",
   "zao-onsen": "zao-onsen",
   "hakkoda-aomori-spring": "hakkoda-aomori-spring",
+  "appi-shizukuishi": "appi-shizukuishi",
   queenstown: "queenstown",
   wanaka: "wanaka",
   "mt-hutt": "mt-hutt",

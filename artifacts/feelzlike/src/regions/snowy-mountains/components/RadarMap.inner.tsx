@@ -69,6 +69,7 @@ export type RegionKey =
   | "yuzawa"
   | "zao-onsen"
   | "hakkoda-aomori-spring"
+  | "appi-shizukuishi"
   | "queenstown"
   | "wanaka"
   | "mt-hutt"
@@ -239,6 +240,17 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       label: "JMA Aomori",
       imageUrl: null,
       href: "https://www.jma.go.jp/bosai/nowc/#zoom:9/lat:40.69/lon:140.56/colordepth:normal/elements:hrpns",
+      attribution: "Japan Meteorological Agency · JMA",
+    },
+  },
+  // Appi & Shizukuishi · the two resorts sit either side of Morioka,
+  // ~0.35° of latitude apart, so centre between them at zoom 9.
+  "appi-shizukuishi": {
+    windy: { lat: 39.85, lon: 140.98, zoom: 9 },
+    official: {
+      label: "JMA Iwate",
+      imageUrl: null,
+      href: "https://www.jma.go.jp/bosai/nowc/#zoom:9/lat:39.85/lon:140.98/colordepth:normal/elements:hrpns",
       attribution: "Japan Meteorological Agency · JMA",
     },
   },
@@ -465,6 +477,15 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "ajigasawa", name: "Ajigasawa", lat: 40.7755, lng: 140.2209, accent: "#0ea5e9" },
     ],
   },
+  "appi-shizukuishi": {
+    center: { lat: 39.85, lng: 140.98 },
+    pins: [
+      { id: "appi", name: "Appi Kogen", lat: 40.0028, lng: 140.9452, accent: "#f97316" },
+      { id: "shizukuishi-resort", name: "Shizukuishi", lat: 39.6940, lng: 140.9060, accent: "#f97316" },
+      { id: "shizukuishi", name: "Shizukuishi Town", lat: 39.6941, lng: 140.9844, accent: "#0ea5e9" },
+      { id: "morioka", name: "Morioka", lat: 39.7019, lng: 141.1365, accent: "#0ea5e9" },
+    ],
+  },
   queenstown: {
     center: { lat: -44.99, lng: 168.74 },
     pins: [
@@ -519,6 +540,7 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   yuzawa: "JP",
   "zao-onsen": "JP",
   "hakkoda-aomori-spring": "JP",
+  "appi-shizukuishi": "JP",
   queenstown: "NZ",
   wanaka: "NZ",
   "mt-hutt": "NZ",
@@ -540,6 +562,7 @@ const REGION_LABEL: Record<RegionKey, string> = {
   yuzawa: "yuzawa",
   "zao-onsen": "zao onsen",
   "hakkoda-aomori-spring": "hakkoda & aomori spring",
+  "appi-shizukuishi": "appi & shizukuishi",
   queenstown: "queenstown",
   wanaka: "wanaka",
   "mt-hutt": "mt hutt",

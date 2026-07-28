@@ -157,6 +157,7 @@ import { FURANO } from "./lifts/furano";
 import { RUSUTSU_KIRORO } from "./lifts/rusutsu-kiroro";
 import { ZAO_ONSEN } from "./lifts/zao-onsen";
 import { HAKKODA_AOMORI_SPRING } from "./lifts/hakkoda-aomori-spring";
+import { APPI_SHIZUKUISHI } from "./lifts/appi-shizukuishi";
 
 export const LIFT_SEED: LiftSeed[] = [
   ...SNOWY_MOUNTAINS,
@@ -170,6 +171,7 @@ export const LIFT_SEED: LiftSeed[] = [
   ...RUSUTSU_KIRORO,
   ...ZAO_ONSEN,
   ...HAKKODA_AOMORI_SPRING,
+  ...APPI_SHIZUKUISHI,
 ];
 
 const BY_MOUNTAIN = new Map<string, LiftSeed[]>();

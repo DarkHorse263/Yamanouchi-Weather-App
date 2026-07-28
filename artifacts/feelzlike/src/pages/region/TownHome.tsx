@@ -114,6 +114,8 @@ const MOUNTAIN_TINTS: Record<string, { bg: string; hover: string; ring: string }
   "zao-onsen-resort":  { bg: "bg-sky-100/70",    hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },
   // Hakkoda & Aomori Spring JP · Aomori's ropeway big mountain + Mt Iwaki
   "hakkoda":           { bg: "bg-sky-100/70",    hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },
+  "appi":                { bg: "bg-sky-100/70",    hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },
+  "shizukuishi-resort":  { bg: "bg-indigo-100/70", hover: "hover:bg-indigo-200/70",  ring: "ring-indigo-300/50" },
   "aomori-spring":     { bg: "bg-indigo-100/70", hover: "hover:bg-indigo-200/70",  ring: "ring-indigo-300/50" },
   // Yuzawa JP · Snow Link trio + Iwappara + the two Dragondola resorts
   "gala-yuzawa":       { bg: "bg-sky-100/70",     hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },

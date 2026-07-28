@@ -84,6 +84,9 @@ const REGION_ANCHORS: Record<RegionId, {
   // Hakkoda ropeway summit · the snowiest lift-served point of the
   // pair, so the fairest single point for powder alerts.
   "hakkoda-aomori-spring": { lat: 40.6723, lon: 140.8641, elevation: 1324, region: "JP", displayName: "Hakkoda & Aomori Spring" },
+  // Appi & Shizukuishi · anchor on Mt Maemori (1,305m), the Appi
+  // gondola summit · the snowiest lift-served point of the pair.
+  "appi-shizukuishi": { lat: 40.0028, lon: 140.9452, elevation: 1305, region: "JP", displayName: "Appi & Shizukuishi" },
   // NZ · no national model in the ensemble, so region "OTHER" (global
   // blend). Anchor each on its highest skiable summit.
   "queenstown": { lat: -45.0556, lon: 168.8194, elevation: 1943, region: "OTHER", displayName: "Queenstown" },

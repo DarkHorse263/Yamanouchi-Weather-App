@@ -275,6 +275,14 @@ if (process.env.NODE_ENV === "production") {
         ajigasawa: "Ajigasawa",
       },
     },
+    "appi-shizukuishi": {
+      name: "Appi & Shizukuishi",
+      towns: {
+        "appi-kogen": "Appi Kogen",
+        shizukuishi: "Shizukuishi",
+        morioka: "Morioka",
+      },
+    },
     // New Zealand
     "queenstown": {
       name: "Queenstown",

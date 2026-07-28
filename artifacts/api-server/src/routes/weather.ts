@@ -260,6 +260,8 @@ const LOCATIONS: LocationConfig[] = [
   // coordinates are base-area points, elevations are lift-served tops.
   { id: "hakkoda",                   name: "Hakkoda",                   latitude: 40.6784, longitude: 140.8453, elevation: 1324, description: "Ropeway big-mountain terrain on Mt Tamoyachi · juhyo snow monsters and long ungroomed descents.",            bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
   { id: "aomori-spring",             name: "Aomori Spring",             latitude: 40.6952, longitude: 140.2833, elevation: 921,  description: "Quiet powder resort on Mt Iwaki's northwest slopes above Ajigasawa · a gondola and about 545 m of vertical.",  bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "appi",                      name: "Appi Kogen",                latitude: 40.0028, longitude: 140.9452, elevation: 1305, description: "One of Tohoku's largest resorts · long groomed runs off a 2.8 km gondola to Mt Maemori, on the Ikon Pass from 2025-26.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "shizukuishi-resort",        name: "Shizukuishi",               latitude: 39.6940, longitude: 140.9060, elevation: 1128, description: "Prince-operated hill on Takakura · about 700 m of vertical, host of the 1993 Alpine World Championships.",       bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
 
   // ─── Queenstown (Otago, New Zealand) ─────────────────────
   // Open-Meteo primary + OpenWeatherMap fallback · no national AWS feed

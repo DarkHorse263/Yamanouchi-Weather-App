@@ -304,6 +304,26 @@ const REGIONS: RegionConfig[] = [
     sourceLabel: "JMA Seamless",
   },
   {
+    id: "appi-shizukuishi",
+    name: "Appi & Shizukuishi",
+    country: "Japan",
+    countryCode: "JP",
+    region: "Iwate",
+    status: "live",
+    href: "/appi-shizukuishi/",
+    baseTowns: ["Appi Kogen", "Shizukuishi", "Morioka"],
+    mountains: ["Appi Kogen", "Shizukuishi"],
+    // Headline reading from the Appi resort village (~620m) · where
+    // visitors actually stay at the lifts. Morioka sits at ~140m in the
+    // valley and would misrepresent conditions on the hills.
+    headlineLabel: "Appi Kogen",
+    lat: 40.0028,
+    lon: 140.9452,
+    model: "jma_seamless",
+    timezone: "Asia/Tokyo",
+    sourceLabel: "JMA Seamless",
+  },
+  {
     id: "queenstown",
     name: "Queenstown",
     country: "New Zealand",
