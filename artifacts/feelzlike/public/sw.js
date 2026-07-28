@@ -50,7 +50,9 @@
 // (reload) like the BOM/WillyWeather frame lists.
 // v18: /api/weather/:id/snow-report gained optional baseMinCm (NZ two-station
 // range reports render "16-38") - bust cached single-figure responses.
-const CACHE_VERSION = "v18";
+// v19: /api/admin/* excluded from the SW entirely (session-scoped, private,
+// and delete-then-refetch must never be served a stale cached list).
+const CACHE_VERSION = "v19";
 const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
 const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;
@@ -193,6 +195,12 @@ self.addEventListener("fetch", (event) => {
   //     subscriber data — keeping copies in Cache Storage would expose them
   //     to any later script with origin access. Always go straight to net.
   if (url.pathname.startsWith("/api/alerts")) return;
+
+  // 2a-ter. Admin dashboard endpoints: session-scoped, private, and mutated
+  //     in place (e.g. deleting a pending signup then refetching the list).
+  //     A stale-while-revalidate copy makes deletions look like "nothing
+  //     happened" because the refetch is served from cache. Never cache.
+  if (url.pathname.startsWith("/api/admin")) return;
 
   // 2a-bis. Locality search + details → network-first, bypassing the browser
   //     HTTP cache. Their response shape changes across deploys (the search
