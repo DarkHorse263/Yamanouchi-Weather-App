@@ -38,7 +38,7 @@ ADMIN_EMAILS = "james@navigatework.com.au"
 VITE_PLAUSIBLE_DOMAIN = "feelzlike.com"
 VITE_AWIN_PUBLISHER_ID = "2813742"
 VITE_CJ_PUBLISHER_ID = "101761193"
-ALERT_FROM_EMAIL = "feelzlike alerts <alerts@feelzlike.com>"
+ALERT_FROM_EMAIL = "feelzlike <info@feelzlike.com>"
 
 [userenv.development]
 ALLOW_UNAUTH_CRON = "1"

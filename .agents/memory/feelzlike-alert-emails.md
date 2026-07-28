@@ -10,7 +10,7 @@ description: branded email templates + Resend sender domain state for powder ale
 - wordmark-inline.png is RGB with baked white background, so dark-mode inversion is a non-issue.
 
 ## Sender — VERIFIED + LIVE (19 jul 2026)
-- feelzlike.com is verified in Resend; `ALERT_FROM_EMAIL` is set (shared env) to `feelzlike alerts <alerts@feelzlike.com>`. Production picks it up on next publish.
+- feelzlike.com is verified in Resend; `ALERT_FROM_EMAIL` is set (shared env) to `feelzlike <info@feelzlike.com>` (owner decision 27 jul 2026: info@ is THE address everywhere — sender, reply-to, legal pages, footer, API user-agents; old enquiries@navigatework.com.au and hello@/contact@/alerts@ variants were replaced). Production picks it up on next publish.
 - FROM is env-driven with fallback `feelzlike alerts <onboarding@resend.dev>` (delivers to account owner only) — that fallback only matters if the env var is ever deleted.
 - **Why env-checking is awkward:** the RESEND_API_KEY is a send-only restricted key — `GET /domains` returns 401. To check verification without dashboard access, test-send from the domain to Resend's sink `delivered@resend.dev`: 200 = verified, error = not yet.
 - Exchange Online root MX/SPF untouched by Resend's records (they live on Resend's own subdomain); keep Resend "Enable Receiving" OFF or it would fight the Microsoft MX.

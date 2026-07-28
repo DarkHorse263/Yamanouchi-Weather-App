@@ -539,7 +539,7 @@ async function fetchHeadlineUpstream(r: RegionConfig): Promise<HeadlineReading |
     const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
       signal: AbortSignal.timeout(8000),
       headers: {
-        "User-Agent": "feelzlike/1.0 (mountain-weather-pwa; contact: hello@feelzlike.com)",
+        "User-Agent": "feelzlike/1.0 (mountain-weather-pwa; contact: info@feelzlike.com)",
       },
     });
     if (!res.ok) throw new Error(`Open-Meteo ${res.status}`);
@@ -821,7 +821,7 @@ async function fetchLocalCurrentFromOpenMeteo(
     const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
       signal: AbortSignal.timeout(8000),
       headers: {
-        "User-Agent": "feelzlike/1.0 (mountain-weather-pwa; contact: hello@feelzlike.com)",
+        "User-Agent": "feelzlike/1.0 (mountain-weather-pwa; contact: info@feelzlike.com)",
       },
     });
     if (!res.ok) throw new Error(`Open-Meteo ${res.status}`);

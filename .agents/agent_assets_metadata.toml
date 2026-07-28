@@ -551,3 +551,9 @@ id = "2xoeB72DRUN5saK82iArs"
 uri = "file://exports/feelzlike-facebook-campaign-pack.pdf"
 type = "pdf"
 title = "facebook campaign pack · updated (all buttons = Learn more)"
+
+[[outputs]]
+id = "-CUwGynv3vfCsrZvBL9xh"
+uri = "file://exports/powder-alert-email-preview.jpg"
+type = "image"
+title = "powder alert email · what subscribers receive"

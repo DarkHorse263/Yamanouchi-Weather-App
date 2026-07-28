@@ -43,7 +43,7 @@ const WARNINGS_URL =
 const SOURCE_LABEL = "VicEmergency (Emergency Management Victoria)";
 const SOURCE_PAGE_URL = "https://emergency.vic.gov.au/respond/";
 const USER_AGENT =
-  "feelzlike/0.3 (alpine-conditions; contact@feelzlike.com)";
+  "feelzlike/0.3 (alpine-conditions; info@feelzlike.com)";
 
 // Coarse bounding box covering all 6 VHC mountains and their access roads.
 // Mansfield (NW) ~ -37.05, 146.09 ; Warburton (SW) ~ -37.76, 145.69 ;

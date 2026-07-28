@@ -286,9 +286,9 @@ export default function Terms() {
           Questions about these terms ·{" "}
           <a
             className="text-sky-700 hover:underline"
-            href="mailto:enquiries@navigatework.com.au"
+            href="mailto:info@feelzlike.com"
           >
-            enquiries@navigatework.com.au
+            info@feelzlike.com
           </a>
           .
         </p>

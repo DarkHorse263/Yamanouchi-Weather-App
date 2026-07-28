@@ -71,7 +71,7 @@ export function LegalShell({
             Terms
           </Link>
           <a
-            href="mailto:enquiries@navigatework.com.au"
+            href="mailto:info@feelzlike.com"
             className="hover:text-sky-700"
           >
             Contact

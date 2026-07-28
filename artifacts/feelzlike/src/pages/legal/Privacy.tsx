@@ -44,9 +44,9 @@ export default function Privacy() {
           Contact for privacy enquiries:{" "}
           <a
             className="text-sky-700 hover:underline"
-            href="mailto:enquiries@navigatework.com.au"
+            href="mailto:info@feelzlike.com"
           >
-            enquiries@navigatework.com.au
+            info@feelzlike.com
           </a>
           .
         </p>
@@ -271,9 +271,9 @@ export default function Privacy() {
           To exercise any right, email{" "}
           <a
             className="text-sky-700 hover:underline"
-            href="mailto:enquiries@navigatework.com.au"
+            href="mailto:info@feelzlike.com"
           >
-            enquiries@navigatework.com.au
+            info@feelzlike.com
           </a>
           . We respond within 30 days (Australia / EU / UK) or the
           shorter period required by your local law.
@@ -339,9 +339,9 @@ export default function Privacy() {
           is perfect · if you discover a security issue, please email{" "}
           <a
             className="text-sky-700 hover:underline"
-            href="mailto:enquiries@navigatework.com.au"
+            href="mailto:info@feelzlike.com"
           >
-            enquiries@navigatework.com.au
+            info@feelzlike.com
           </a>{" "}
           and allow us reasonable time to fix it before disclosure.
         </p>
@@ -362,9 +362,9 @@ export default function Privacy() {
           to{" "}
           <a
             className="text-sky-700 hover:underline"
-            href="mailto:enquiries@navigatework.com.au"
+            href="mailto:info@feelzlike.com"
           >
-            enquiries@navigatework.com.au
+            info@feelzlike.com
           </a>
           .
         </p>

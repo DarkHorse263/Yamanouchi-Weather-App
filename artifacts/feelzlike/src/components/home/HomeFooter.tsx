@@ -46,7 +46,7 @@ export function HomeFooter() {
             cookies
           </a>
           {sep}
-          <a className={linkCls} href="mailto:enquiries@navigatework.com.au">contact</a>
+          <a className={linkCls} href="mailto:info@feelzlike.com">contact</a>
           {sep}
           <div className="relative inline-flex items-baseline">
             <button
