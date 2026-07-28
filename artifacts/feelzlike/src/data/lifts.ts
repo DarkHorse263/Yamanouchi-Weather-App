@@ -147,10 +147,29 @@ const IIYAMA: LiftSeed[] = [
   { id: "togari-pair", mountainId: "togari", name: "Togari Pair", nameJa: "戸狩ペア", baseElevation: 600, topElevation: 1050, exposure: "sheltered", windHoldThresholdKmh: 90, type: "fixed_grip_chair", verifiedAt: V },
 ];
 
+// Per-region JP seed files (kept separate so each region can be authored
+// and re-verified independently; same LiftSeed shape).
+import { HAKUBA_VALLEY } from "./lifts/hakuba-valley";
+import { MYOKO } from "./lifts/myoko";
+import { YUZAWA } from "./lifts/yuzawa";
+import { NISEKO } from "./lifts/niseko";
+import { FURANO } from "./lifts/furano";
+import { RUSUTSU_KIRORO } from "./lifts/rusutsu-kiroro";
+import { ZAO_ONSEN } from "./lifts/zao-onsen";
+import { HAKKODA_AOMORI_SPRING } from "./lifts/hakkoda-aomori-spring";
+
 export const LIFT_SEED: LiftSeed[] = [
   ...SNOWY_MOUNTAINS,
   ...YAMANOUCHI,
   ...IIYAMA,
+  ...HAKUBA_VALLEY,
+  ...MYOKO,
+  ...YUZAWA,
+  ...NISEKO,
+  ...FURANO,
+  ...RUSUTSU_KIRORO,
+  ...ZAO_ONSEN,
+  ...HAKKODA_AOMORI_SPRING,
 ];
 
 const BY_MOUNTAIN = new Map<string, LiftSeed[]>();
