@@ -1,0 +1,333 @@
+Received: from ME3P282MB1668.AUSP282.PROD.OUTLOOK.COM (2603:10c6:220:a5::11)
+ by SY5P282MB4686.AUSP282.PROD.OUTLOOK.COM with HTTPS; Thu, 23 Jul 2026
+ 02:13:55 +0000
+Received: from SY6PR01CA0029.ausprd01.prod.outlook.com (2603:10c6:10:eb::16)
+ by ME3P282MB1668.AUSP282.PROD.OUTLOOK.COM (2603:10c6:220:a5::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.10; Thu, 23 Jul
+ 2026 02:13:52 +0000
+Received: from SY1PEPF00005A3C.ausprd01.prod.outlook.com
+ (2603:10c6:10:eb:cafe::a6) by SY6PR01CA0029.outlook.office365.com
+ (2603:10c6:10:eb::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.245.10 via Frontend Transport; Thu,
+ 23 Jul 2026 02:13:52 +0000
+Authentication-Results: spf=pass (sender IP is 194.116.167.245)
+ smtp.mailfrom=awin.com; dkim=pass (signature was verified)
+ header.d=awin.com;dmarc=pass action=none header.from=awin.com;compauth=pass
+ reason=100
+Received-SPF: Pass (protection.outlook.com: domain of awin.com designates
+ 194.116.167.245 as permitted sender) receiver=protection.outlook.com;
+ client-ip=194.116.167.245; helo=mx02.digitalwindow.com; pr=C
+Received: from mx02.digitalwindow.com (194.116.167.245) by
+ SY1PEPF00005A3C.mail.protection.outlook.com (10.167.241.39) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.5
+ via Frontend Transport; Thu, 23 Jul 2026 02:13:50 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=awin.com; s=202202;
+	t=1784772827; bh=fXS2rlch2aBGyrx54w6XeSxyx+HhNH98mjArBNb7XRs=;
+	h=To:From:Subject:Date:From;
+	b=CpuYIEQIeixkcO1KcAPMqhZAE/SM8sknLI5gtdg/htj1rneETbFzQfLPUDGdF8PrI
+	 9NqabLzeSYSP9lVF1Ycy9dLumAZYOTG3WYlHcJCvxQU1WK8Ju1M7EDxV3RBXLqlDAd
+	 /7HP8Mj7hBZyQ6+m4A8n7sVALK9ldkMeRkCrRgYBerQ6nQLnqoo0fAKyJ9fSR2qOQg
+	 GFUyhbH5+zbWWiWd48Sp3wpbexIwCyqsw2fIa4HPsLZ/wUEZjQB/6y8rM1LPQ+cqgh
+	 HO1IeoK8LpGRO9ZM+hmk60hLz8T25t2xUTPTAZ9NFnaE6kDBGmVN3BvrG4vwBRHgwM
+	 m5moBuBe3YYvA==
+Received: from localhost (l-lhr1-docker-108.zanox-live.de [10.150.133.100])
+	by mx02.digitalwindow.com (Postfix) with ESMTP id EF8C7A1009
+	for <feelzlike@navigatework.com.au>; Thu, 23 Jul 2026 02:13:46 +0000 (UTC)
+To: feelzlike@navigatework.com.au
+From: Awin <no-reply@awin.com>
+Subject: Earn up to $105 per booking form private tours
+Date: Thu, 23 Jul 2026 03:13:46 +0100
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+Message-ID: <7b34f6be-3013-401f-a457-8d50d0b5df06@SY1PEPF00005A3C.ausprd01.prod.outlook.com>
+Return-Path: opportunity@awin.com
+X-MS-Exchange-Organization-ExpirationStartTime: 23 Jul 2026 02:13:51.5631
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: dbbc4cc0-fed9-45c8-8990-08dee8600a02
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: febefc03-2be7-43ba-af66-5490103dee38:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SY1PEPF00005A3C:EE_|ME3P282MB1668:EE_|SY5P282MB4686:EE_
+X-MS-Exchange-Organization-AuthSource: SY1PEPF00005A3C.ausprd01.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id: dbbc4cc0-fed9-45c8-8990-08dee8600a02
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Antispam: BCL:2;ARA:13230040|704161211799003|12012899012|69100299015|7149299003|2092899012|3092899012|7049299003|3109299003|1032899013|5062899012|3072899012|56012099006|5063699009|10067099003|19002099009|16102099003|18002099003|8096899003|2066899003;
+X-Forefront-Antispam-Report: CIP:194.116.167.245;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mx02.digitalwindow.com;PTR:mx02.digitalwindow.com;CAT:NONE;SFS:(13230040)(704161211799003)(12012899012)(69100299015)(7149299003)(2092899012)(3092899012)(7049299003)(3109299003)(1032899013)(5062899012)(3072899012)(56012099006)(5063699009)(10067099003)(19002099009)(16102099003)(18002099003)(8096899003)(2066899003);DIR:INB;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jul 2026 02:13:50.6865
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: dbbc4cc0-fed9-45c8-8990-08dee8600a02
+X-MS-Exchange-CrossTenant-Id: febefc03-2be7-43ba-af66-5490103dee38
+X-MS-Exchange-CrossTenant-AuthSource: SY1PEPF00005A3C.ausprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ME3P282MB1668
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:04.4410510
+X-MS-Exchange-Processed-By-BccFoldering: 15.21.0245.008
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(910005)(944490095)(944506478)(944626604)(920097)(930201)(20251009189)(140003);
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?ZHpvNlhtdEM5VlFWc2IrOGVSSnpPUWUrVlVIT2pPMVdsK3Zac2xEWEtYcWdH?=
+ =?utf-8?B?K0x2N2MvVEhLVGZHRXBLaGJoWjM3WmVxWDQySEpSUGJ1dWJZT0ZxbzZyQ0tB?=
+ =?utf-8?B?Z0hXUGQ0aXVtM0tHOGphWE90bWJiOHFiTHZpT2IyMXk2YWVDUEY0dTNqY045?=
+ =?utf-8?B?R01LSnRHOHpRUWdFWkxPNlNqemFyK3FtWkNHUzZ5d2lXL0cxNE5OWUp2dUw2?=
+ =?utf-8?B?WFdaS2djZHpqMzg5UXVEQmlVSlF0WlF1Wkd6MUpKc3RyUDQxYk5SM2hHK2ZQ?=
+ =?utf-8?B?aU1ib1lLdzFNcExEeFlCenJNbWhiMXJJV1FBNE5OWVhpd2hINm1IRGlqRDBi?=
+ =?utf-8?B?M2F4ZkF5MlBlRXdwQnNVdUdDY256UDNxZWptYnRyNVZnZEZhSGNUazNVV2FL?=
+ =?utf-8?B?MmJHdDRPbGpjbjczdmhVdjJGcDRBbElvbnlSdVJiNTBvL1E3K1V0WUIrM2VS?=
+ =?utf-8?B?YXJuczgzWW0yaWcrbGpYeVB0ZUNndjlqMklxamlxcUlIdWNsRGlXN2paMnVy?=
+ =?utf-8?B?Wjg2Z3lFdno0dldmNXR2RlhGLzdVeHoxbU51MXh0VjZqSXMvSEFUdzVUZ2NV?=
+ =?utf-8?B?WEdPV3Y2U1g1RTE5alFvWlp4eVlCNlprSFpaQWV1c29iSkhQdzM2dGF4ei9z?=
+ =?utf-8?B?Ym9WSWNuemFCZS9jclJXQ0x2VVM3R3QvRzY5dXRCVFluVzlSSlZvUTFTMVR2?=
+ =?utf-8?B?K0NIcmZSZllmN0J3R2pjSE9LMnVjWnJyL3orS2tCVWF6TGhJWmVjNWgyZHFT?=
+ =?utf-8?B?OTdUZU8yWjJWU1RudUNUQ0pGUDMyZmlNMUhMamc4UXg3K3ZMUDB0QUZNaXFK?=
+ =?utf-8?B?VUxCU25qSWEvUFdoWWJRTVNENlJqV2lTZDJ1QkorTzErN2lwUW1pMGZuMmRH?=
+ =?utf-8?B?QXdQUjVGWVIrRWhkcndGQkkybFgwb1FzRDJlc1ljZDdNRlFSb25XNDgrZ3dq?=
+ =?utf-8?B?RmYzbzl4Qit1QVJKTkhBWG5GZncrT1RXaW0xdFVHd0U0UWtpZytWeEs5UjQx?=
+ =?utf-8?B?NFRhTFMwdlBSblYvZU1xZlhuZ1RneHlNSzA2TlErZ3JkK2JnOUtMQ01PUVRt?=
+ =?utf-8?B?WlJQL2ZBNDVGYkJrYXZvczZQbEM1eUk4bk0vWS83Y0JpSDdQQWpzT1VkMjVj?=
+ =?utf-8?B?OHg2c3FSRHo1VnBsVFE5SUlIWFh6dGhncDZrNnlLME5FclpBWTNTTzJzMk1y?=
+ =?utf-8?B?elJYSHJxeTduWW1JL1g1K0I0WVRObHBMUGxSL3lUNG5yRHRZY29jLzlyeEVR?=
+ =?utf-8?B?WkFqNmlBNUpFZkFnaWpDYzB5Ris1S1lFV0x1cDh4MnNNWmJieUdaSkkzbmg1?=
+ =?utf-8?B?WkJ2NVBRdWZYUG1KdGhuMXhnTzlhMHkxQ0ZkbnRibXo0eE9OOGsvZ3p4NkpT?=
+ =?utf-8?B?ZXpjbElYTDBQQk9lZXJoSU96ZFJ4cmRZQ3A3ZlZmUyt0NFgxTFk3MklrT2oz?=
+ =?utf-8?B?MUYvZmNUTlhlWWxKVUtwaEsxUGtSVzI5TG11eW04OTJHdS84VlB4U0EwSytN?=
+ =?utf-8?B?djN4dGdDZ0ZSTXNGRjFpcitKdGNFSGs0NHRxZUdNWEhqKzVWWTMySUxGT001?=
+ =?utf-8?B?YzV2T3d2eVAra2dUZTZtSHB0UTZScFlTWU5uaWI2bXF2WGE1bnVNaldCUGUw?=
+ =?utf-8?B?S3lCQjE2UjBFWklKb0NvWlFrYlNHSUxEKy92YjlJVWdXenFZZkgzMEd6a3Qz?=
+ =?utf-8?B?L1hzQmlnamc2cnlqbXUxOElSVFF3UjlKNGVZUzdkam5MMlM3TmVQSnplcmR1?=
+ =?utf-8?B?Wnc2NDVXbVVWS1BtRU5ZTVlXa3JYTEsrOTJHK2h5UzB2Y05sNVh0bEU5Q1lO?=
+ =?utf-8?B?Y24ydVdnbFRlMlRUZnNPZDQ1T295Q2RWZVA1WEdwWjNIT2ZGZEtKamYxaDlE?=
+ =?utf-8?B?OVRaTHlybFk0b29aS1FmSTdRa0FzWmk2WDhEY2RaakwxdDRrV3ZyVzM4RmEr?=
+ =?utf-8?B?WmxKNmZ4WlhkSzh6QVYwRHVMY09ubEpRWTN6VHhQazVXVW9UdDRKaHlDenp2?=
+ =?utf-8?B?Z2tGZ1NHSUNkd0E2V0xhK0lhazhaaWp3dmcxMG44RXIwUzR2c09SZ2YzOFM4?=
+ =?utf-8?B?UVJSK2VBTlB0NThTREkvMzQvb2tnenM3Q0p6YjN2RmR0Q0haOXhJanRONVVG?=
+ =?utf-8?B?Nm9DWVA1QStPWWdveVVrUjBsVlZZbXd2NUlrUUowcGh6R0RTVDJwcEwyZlp4?=
+ =?utf-8?B?dVlCM2VaVGlMbVJkaDJoUzlweFJ0eFVTVnl1SlF2MFFDSjFIU0tweTRQb2NY?=
+ =?utf-8?B?RndRQWFOa0hpWGRnSjZwcmx6T0NRUWk0V21vVE8wQ3hTTHFrUXJPVG1yZWtr?=
+ =?utf-8?B?Wk8xU3ZFcWtCU2V1SU5rMU0vUjhOTnFuMmpObTF0SkN4WUhsOU4xODFxZXJ2?=
+ =?utf-8?B?VkNxS0ZBaDJNSzdmeU05WVhCSW9NS1BTT0pzU2RBQmZIdkRCY2drM2tOMDc5?=
+ =?utf-8?B?dzNPL0R1S1RFaklqWmpVZVlmQTdjbFBPMGhiWDh4YW52UUJkYzVMYVRQS1JH?=
+ =?utf-8?B?QjNwNU9kZldacURiRVRTbTJKcENwd1BRNWwyVW1QaDlZRUtPcmJ4RmZxVExl?=
+ =?utf-8?B?TURhTGwxNUU1OGcxdmhUS1Awc1FTUCt0K0srU1V6M1M4ODFTQmtmN3NoNStp?=
+ =?utf-8?B?cDRWbFYzVGJuZW1xeXJmRjFUcmdlR0lWRXFtdlRiNXYxUE95OUtxMklLNUVJ?=
+ =?utf-8?B?dFdyalhvaW5tdW53ZTJQY0RCYk5TUHNRMndldWYwZFYxR3FabjlTRVpRZVp1?=
+ =?utf-8?B?aDV2Z2krbzF0OXJJVEdXOFg5cE55bldaOXBnbmhROUdkcWJCcWJwVVR0ZUhL?=
+ =?utf-8?B?UUNIN2ovZW42N2ZvMWZYcjRSays5SG9keTNJd3QwSE1sSXNqemtrQXlhclcv?=
+ =?utf-8?B?R3psU09sTzJqOWpLeWw1RE5USlJEVUgwZVd3czBxNzhWdVNVaWhqUFlnQW9V?=
+ =?utf-8?B?K2VTaGNJbFA1NXNKOHpLZHY5RVBGY0ZjVXkrYkx0MC9DbzBrVzBYNGpLVWcz?=
+ =?utf-8?B?Zm1wNUlGQUFjOXJnTFV3eUNzNGJiTTh6ZHNZRU5sZmNPZXhOSE9aV0xYSnRX?=
+ =?utf-8?B?SjdNWVdDNHU2aEpFWldWeXpMNlJ5RS9EYXZqNlkraGFvRmZKc2VYSzk0Uy9x?=
+ =?utf-8?B?bUZPNG1KandSbHB6cm4zNFFFMVVPZnBHVE5qdjQrSVFGOTFHVW5hRXhFWU8v?=
+ =?utf-8?B?TEpRR0JscDB0ZDFwUUtUVGRaZUQzQS95NWs4bkFVV2NtZ3plL09ZdjN2MHVW?=
+ =?utf-8?B?WVVrd2g1SC9QeG1xZ29LcUdmaHpFZzd2MXRQczNmeWVoeHJ4WWtvdTdKRnlz?=
+ =?utf-8?B?MHU2a3ZDNEJGZWQwazU5a1U3SStVQk0zNHMrS2gwWXZKamk0Z2FUc2tMK2ZU?=
+ =?utf-8?Q?EBudkaMe4oVjXYJrKHBCL?=
+MIME-Version: 1.0
+
+<!DOCTYPE html><html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8">=
+=0A=
+    <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=
+=3D1">=0A=
+    <meta http-equiv=3D"X-UA-Compatible" content=3D"IE=3Dedge">=0A=
+    <title>Earn up to $105 per booking form private tours</title>=0A=
+=0A=
+    <style>=0A=
+        body {font-family: Tahoma, Verdana, sans-serif; color:#23282c; back=
+ground-color:#efefef}=0A=
+        a, a:link, a:visited {color:#ff6600;}=0A=
+        p {line-height:18px;}=0A=
+        img {display: block;}=0A=
+        hr {border: 0; height: 0; border-bottom: 1px solid rgba(255, 255, 2=
+55, 0.3); margin-top: 5px; width: 100%}=0A=
+        ul li {color:#23282c; font-family: Tahoma, Verdana, sans-serif; fon=
+t-size:12px; margin-bottom: 10px}=0A=
+        /* Shrink Wrap Layout Pattern CSS */=0A=
+        @media only screen and (max-width: 600px) {=0A=
+            td[class=3D"responsive"] {=0A=
+                width: 100%;=0A=
+            }=0A=
+        }=0A=
+        @media only screen and (max-width: 480px){=0A=
+            td[class=3D"button"] {=0A=
+                max-width:600px !important;=0A=
+                width:100% !important;=0A=
+            }=0A=
+            td[class=3D"button"] a {=0A=
+                display:block !important;=0A=
+                font-size:18px !important;=0A=
+            }=0A=
+        }=0A=
+    </style>=0A=
+    </head>=0A=
+=0A=
+<body style=3D"background-color:#efefef; padding:10px;">=0A=
+<table align=3D"center" cellpadding=3D"0" cellspacing=3D"0">=0A=
+    <tr>=0A=
+        <td width=3D"600" valign=3D"top" class=3D"responsive">=0A=
+            <table cellpadding=3D"0" cellspacing=3D"0">=0A=
+                <tr>=0A=
+                    <td align=3D"left" valign=3D"top"><table id=3D"header" =
+width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=0A=
+                            <tbody>=0A=
+                            <tr>=0A=
+                                <td colspan=3D"2" align=3D"left" valign=3D"=
+top" class=3D"responsive"><img width=3D"100%" height=3D"5" alt=3D"" style=
+=3D"display:block; width:100%; height:5px" src=3D"https://images.awin.com/a=
+win-interface/emails/bar.png"></td>=0A=
+                            </tr>=0A=
+                            <tr>=0A=
+                                <td height=3D"10" colspan=3D"2" valign=3D"t=
+op" bgcolor=3D"#FFFFFF">&nbsp;</td>=0A=
+                            </tr>=0A=
+                            <tr>=0A=
+                                <td width=3D"20" bgcolor=3D"#FFFFFF">&nbsp;=
+</td>=0A=
+                                <td bgcolor=3D"#FFFFFF"><a href=3D"https://=
+ui.awin.com/" style=3D"margin:0;  border:0;"><img src=3D"https://images.awi=
+n.com/awin-interface/emails/AWIN-logo.png" alt=3D"Awin" width=3D"110" heigh=
+t=3D"auto" title=3D"Awin"></a></td>=0A=
+                            </tr>=0A=
+                            <tr>=0A=
+                                <td width=3D"20" bgcolor=3D"#FFFFFF">&nbsp;=
+</td>=0A=
+                                <td width=3D"577" height=3D"40" bgcolor=3D"=
+#FFFFFF">&nbsp;</td>=0A=
+                            </tr>=0A=
+                            </tbody>=0A=
+                        </table>=0A=
+                        <table id=3D"body" width=3D"100%" border=3D"0" alig=
+n=3D"center" cellpadding=3D"0" cellspacing=3D"0" style=3D"width: 100%; back=
+ground-color:#ffffff; border-bottom: 2px solid #e9e9e9">=0A=
+                            <tbody>=0A=
+                            <tr>=0A=
+                                <td width=3D"6%" bgcolor=3D"#FFFFFF">&nbsp;=
+</td>=0A=
+                                <td width=3D"88%" bgcolor=3D"#FFFFFF"><br>=
+=0A=
+Advertiser: GoWithGuide US<br>=0A=
+Advertiser ID: 87121<br>=0A=
+<br>=0A=
+Dear James Mitchell at Navigate Work Digital,<br>=0A=
+<br>=0A=
+Dear feelzlike,<br>=0A=
+<br>=0A=
+I hope you=E2=80=99re doing well! I=E2=80=99m Ruel from GoWithGuide.<br>=0A=
+<br>=0A=
+Just following up on the invitation I sent before. We offer private, custom=
+izable tours in 500+ cities for travelers. We would love to have you join o=
+ur affiliate program! It=E2=80=99s easy to get started, with earnings up to=
+ $105 per booking.<br>=0A=
+<br>=0A=
+Check it out: https://ui.awin.com/merchant-profile-terms/87121<br>=0A=
+<br>=0A=
+Let me know if you have any questions!<br>=0A=
+<br>=0A=
+Kind regards,<br>=0A=
+<br>=0A=
+Ruel<br>=0A=
+affiliates@gowithguide.com<br>=0A=
+<br>=0A=
+GoWithGuide US<br>=0A=
+<br>=0A=
+This message was sent from the Awin interface</td>=0A=
+                                <td width=3D"6%" bgcolor=3D"#FFFFFF">&nbsp;=
+</td>=0A=
+                            </tr>=0A=
+                            <tr>=0A=
+                                <td width=3D"6%" bgcolor=3D"#FFFFFF">&nbsp;=
+</td>=0A=
+                                <td height=3D"50" bgcolor=3D"#FFFFFF">&nbsp=
+;</td>=0A=
+                                <td width=3D"6%" bgcolor=3D"#FFFFFF">&nbsp;=
+</td>=0A=
+                            </tr>=0A=
+                            </tbody>=0A=
+                        </table>=0A=
+                        <table width=3D"100%" border=3D"0" cellspacing=3D"0=
+" cellpadding=3D"0">=0A=
+                            <tbody>=0A=
+                            <tr>=0A=
+                                <td width=3D"6%">&nbsp;</td>=0A=
+                                <td width=3D"88%"><table id=3D"footer" widt=
+h=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=0A=
+                                        <tbody>=0A=
+                                        <tr>=0A=
+                                            <td valign=3D"top" style=3D"hei=
+ght:10px;"></td>=0A=
+                                        </tr>=0A=
+                                        <tr>=0A=
+                                            <td><table width=3D"" border=3D=
+"0" align=3D"center" cellpadding=3D"0" cellspacing=3D"0">=0A=
+                                                    <tr>=0A=
+                                                        <td width=3D"40" al=
+ign=3D"right"><a href=3D"https://www.facebook.com/awin"><img src=3D"https:/=
+/images.awin.com/awin-interface/emails/icon-social-facebook.png" alt=3D"Fac=
+ebook" width=3D"30" height=3D"30" title=3D"Facebook"></a></td>=0A=
+                                                        <td width=3D"40" al=
+ign=3D"right"><a href=3D"https://twitter.com/Awin_Global"><img src=3D"https=
+://images.awin.com/awin-interface/emails/icon-social-twitter.png" alt=3D"Tw=
+itter" width=3D"30" height=3D"30" title=3D"Twitter" border=3D"0"></a></td>=
+=0A=
+                                                        <td width=3D"40" al=
+ign=3D"right"><a href=3D"https://www.awin.com/gb/news-and-events"><img src=
+=3D"https://images.awin.com/awin-interface/emails/icon-social-blog.png" alt=
+=3D"Awin Blog" width=3D"30" height=3D"30" title=3D"Awin Blog"></a></td>=0A=
+                                                    </tr>=0A=
+                                                </table></td>=0A=
+                                        </tr>=0A=
+                                        <tr>=0A=
+                                            <td><table width=3D"100%" borde=
+r=3D"0" cellspacing=3D"0" cellpadding=3D"0">=0A=
+                                                    <tbody>=0A=
+                                                    <tr>=0A=
+                                                        <td style=3D"height=
+:10px"></td>=0A=
+                                                    </tr>=0A=
+                                                    <tr>=0A=
+                                                        <td align=3D"center=
+">=0A=
+                                                            <p style=3D"fon=
+t-family:Tahoma, Verdana, Segoe, sans-serif; text-align:center; font-size:9=
+px; color:#999; margin:0; line-height:14px; ">=0A=
+                                                                AWIN LTD is=
+ registered as a private limited company in England and Wales with number 0=
+4010229.<br>=0A=
+                                                                Registered =
+Address: 2 Thomas More Square, London, E1W 1YN United Kingdom=0A=
+                                                            </p>=0A=
+                                                        </td>=0A=
+                                                    </tr>=0A=
+                                                    <tr>=0A=
+                                                        <td align=3D"center=
+"></td>=0A=
+                                                    </tr>=0A=
+                                                    </tbody>=0A=
+                                                </table></td>=0A=
+                                        </tr>=0A=
+                                        </tbody>=0A=
+                                    </table></td>=0A=
+                                <td width=3D"6%">&nbsp;</td>=0A=
+                            </tr>=0A=
+                            <tr>=0A=
+                                <td width=3D"6%">&nbsp;</td>=0A=
+                                <td width=3D"88%">&nbsp;</td>=0A=
+                                <td width=3D"6%">&nbsp;</td>=0A=
+                            </tr>=0A=
+                            </tbody>=0A=
+                        </table></td>=0A=
+                </tr>=0A=
+            </table>=0A=
+        </td>=0A=
+    </tr>=0A=
+</table>=0A=
+</body>=0A=
+</html>=0A=
+
