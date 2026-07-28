@@ -23,6 +23,8 @@
  *     ctaJa: "宿を見る",
  *   },
  */
+import snowballLogo from "@assets/SnowballJapan_280726_1785212054795.jpeg";
+
 export type TownPartner = {
   /** Partner's trading name, shown as the card title. */
   name: string;
@@ -71,8 +73,70 @@ export type TownPartner = {
   };
 };
 
+/**
+ * Snoexpress · coach transfers + snow packages, Snowy Mountains (AU).
+ * Owner-approved preferred supplier · red brand treatment (no usable
+ * transparent logo yet — their wordmark only exists white-on-red; swap
+ * in `brand.logo` if they supply one).
+ */
+const SNOEXPRESS: TownPartner = {
+  name: "Snoexpress",
+  kicker: "Transport partner",
+  tagline: "your link to the snowfields · weekend snow packages + coach transfers",
+  url: "https://snoexpress.com.au",
+  cta: "book a seat",
+  display: "ad",
+  messages: [
+    "coaches from Newcastle, Sydney + Canberra to Jindabyne, Perisher + Thredbo",
+    "private transfers + trip planning available",
+  ],
+  brand: {
+    bgFrom: "#c6262e",
+    bgTo: "#8f1a20",
+    theme: "dark",
+    ctaBg: "#ffffff",
+    ctaText: "#c6262e",
+  },
+};
+
+/** Snowball Japan · chalets + lodges at Madarao, Tangram and Sano (Nagano). */
+const SNOWBALL_JAPAN: TownPartner = {
+  name: "Snowball Japan",
+  nameJa: "スノーボール日本",
+  kicker: "Stay partner",
+  kickerJa: "宿泊パートナー",
+  tagline: "chalets + lodges at Madarao, Tangram and Sano · book direct",
+  taglineJa: "斑尾・タングラム・佐野のシャレー＆ロッジ · 直接予約",
+  url: "https://www.snowballjapan.com",
+  cta: "browse stays",
+  ctaJa: "宿を見る",
+  display: "ad",
+  messages: [
+    "private self-catered lodges in the heart of the Japanese Alps",
+    "minutes from the lifts · near the famous snow monkeys",
+  ],
+  messagesJa: [
+    "日本アルプスの中心にあるプライベート貸切ロッジ",
+    "リフトまで数分 · 有名な地獄谷野猿公苑の近く",
+  ],
+  brand: {
+    logo: snowballLogo,
+    logoAlt: "Snowball Japan",
+    bgFrom: "#ffffff",
+    bgTo: "#e2e8f0",
+    theme: "light",
+    ctaBg: "#0f172a",
+    ctaText: "#ffffff",
+  },
+};
+
 export const TOWN_PARTNERS: Record<string, TownPartner> = {
-  // Empty · entries are added one line at a time as listing deals sign.
+  // Snoexpress · Snowy Mountains base towns.
+  jindabyne: SNOEXPRESS,
+  berridale: SNOEXPRESS,
+  cooma: SNOEXPRESS,
+  // Snowball Japan · Madarao/Tangram base town.
+  "madarao-kogen": SNOWBALL_JAPAN,
 };
 
 /**
@@ -83,7 +147,9 @@ export const TOWN_PARTNERS: Record<string, TownPartner> = {
  * region, disclosure label always visible, link rel="sponsored".
  */
 export const REGION_PARTNERS: Record<string, TownPartner> = {
-  // Empty · entries are added one line at a time as listing deals sign.
+  "snowy-mountains": SNOEXPRESS,
+  iiyama: SNOWBALL_JAPAN,
+  yamanouchi: SNOWBALL_JAPAN,
 };
 
 /**
