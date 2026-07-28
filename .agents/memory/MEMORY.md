@@ -61,4 +61,5 @@
 - [feelzlike Japan bible xlsx](feelzlike-japan-bible.md) — user's 558-resort master sheet in attached_assets; truth-tested July 2026; largely accurate but has KNOWN wrong rows (list inside) — verify any row before it feeds the app.
 - [feelzlike competitor snow reports](feelzlike-competitor-snow-reports.md) — AU: SnowsBest=MetraWeather once-daily+journalist; JP: SnowJapan human base observers + resort feeds; gaps: reported numbers, lifts-open, daily digest, JP=AMeDAS depth + JMA radar tab.
 - [feelzlike daily smoke test](feelzlike-daily-smoke-test.md) — autoscale = no bare in-process cron; scheduled jobs must claim via job_runs upsert + wake-up catch-up sweep; link manifest is generated, affiliates never machine-visited.
+- [feelzlike publish mid-edit hazard](feelzlike-publish-mid-edit.md) — publish during in-flight edits can bake a half-saved bundle (blank prod page, healthz fine); diagnose w/ puppeteer pageerror, fix = re-publish.
 - [feelzlike partner placements](feelzlike-partner-placements.md) — `partner:true` / townPartners entry = PAID disclosed badge + rel=sponsored; never flag without a signed deal.
