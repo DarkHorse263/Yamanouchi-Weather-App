@@ -50,6 +50,7 @@ import { BarChart2 } from "lucide-react";
 import { useState } from "react";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
+import { AlertPromoBanner } from "@/components/AlertPromoBanner";
 import { OfficialSiteLink } from "@/components/OfficialSiteLink";
 import { SnowReportLink } from "@/components/SnowReportLink";
 
@@ -572,6 +573,8 @@ export function MountainDetail() {
               <PowderCalendar hourly={hourly as any} t={t} sectionNumber="" />
             </div>
           )}
+
+          <AlertPromoBanner />
 
           {/* PremiumGate · Mountain dials · MountainSnapshot rings only.
               The wind-driven lift-hold call was removed because the

@@ -12,6 +12,7 @@ import {
   WeatherOutlook,
   ObservedSnowCard,
 } from "@/components/weather/WeatherSections";
+import { AlertPromoBanner } from "@/components/AlertPromoBanner";
 
 export function TownWeather() {
   const { region } = useRegion();
@@ -88,6 +89,7 @@ export function TownWeather() {
           {q.data.observedSnow && <ObservedSnowCard obs={q.data.observedSnow} t={t} />}
           <WeatherHourly hourly={q.data.hourly} t={t} />
           <WeatherOutlook days={q.data.daily.slice(1, 7)} t={t} />
+          <AlertPromoBanner />
           <Radar t={t} center={{ lat: town.lat, lng: town.lng }} />
           <p className="byline text-muted-foreground/60 mt-8">
             {t(
