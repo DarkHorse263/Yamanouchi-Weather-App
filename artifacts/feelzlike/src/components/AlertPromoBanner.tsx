@@ -12,20 +12,41 @@ import { track } from "@/lib/analytics";
  *
  * Hidden in green season - powder alerts are snow-only (mirrors the alerts
  * tile on TownHome).
+ *
+ * Dismissal is a cooldown, not forever: we store the dismissal timestamp and
+ * the banner becomes eligible again after 14 days - conditions change enough
+ * in two weeks that the reminder reads fresh rather than naggy. Legacy "1"
+ * values (pre-cooldown format) are treated as dismissed-now.
  */
 
-const DISMISSED_KEY = "feelzlike:alertPromoDismissed";
+const DISMISSED_KEY = "feelzlike:alertPromoDismissedAt";
+const LEGACY_DISMISSED_KEY = "feelzlike:alertPromoDismissed";
+const COOLDOWN_MS = 14 * 24 * 60 * 60 * 1000;
 
 function readDismissed(): boolean {
   try {
-    return window.localStorage.getItem(DISMISSED_KEY) === "1";
+    const raw = window.localStorage.getItem(DISMISSED_KEY);
+    if (raw) {
+      const at = Number(raw);
+      // Unparseable value → treat as dismissed-now rather than re-nagging.
+      if (!Number.isFinite(at)) return true;
+      return Date.now() - at < COOLDOWN_MS;
+    }
+    // Migrate the original boolean key: treat as dismissed-now so existing
+    // dismissers get the full cooldown before the banner returns.
+    if (window.localStorage.getItem(LEGACY_DISMISSED_KEY) === "1") {
+      window.localStorage.removeItem(LEGACY_DISMISSED_KEY);
+      window.localStorage.setItem(DISMISSED_KEY, String(Date.now()));
+      return true;
+    }
+    return false;
   } catch {
     return false;
   }
 }
 function writeDismissed(): void {
   try {
-    window.localStorage.setItem(DISMISSED_KEY, "1");
+    window.localStorage.setItem(DISMISSED_KEY, String(Date.now()));
   } catch {
     /* noop - private mode etc. */
   }
