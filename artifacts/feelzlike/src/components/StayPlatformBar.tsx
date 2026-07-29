@@ -45,7 +45,7 @@ export function StayPlatformBar({
   // render a dead button. Filter on the plain URL, not the CJ-wrapped href.
   const links = selected
     .map((p) => {
-      const plainUrl = platformDeepLink(p.id, { query, lat, lng, region, affiliateId });
+      const plainUrl = platformDeepLink(p.id, { query, lat, lng, region, country, affiliateId });
       const href = (adsOk && cjLinkFor(p.id, plainUrl, { sid: region })) || plainUrl;
       return { p, href, plainUrl };
     })

@@ -198,10 +198,11 @@ const TRIVAGO_DESTINATIONS: Record<string, string> = {
 };
 
 /** Build a deep-link search URL for any supported platform. Region-keyed
- *  platforms (trivago) need `opts.region`; pass the current region id. */
+ *  platforms (trivago) need `opts.region`; country-keyed platforms (expedia)
+ *  need `opts.country` - pass the same tag given to platformsForCountry. */
 export function platformDeepLink(
   platform: StayPlatformId,
-  opts: { query: string; lat?: number; lng?: number; region?: string; affiliateId?: string },
+  opts: { query: string; lat?: number; lng?: number; region?: string; country?: string; affiliateId?: string },
 ): string {
   const q = encodeURIComponent(opts.query);
   switch (platform) {
@@ -220,8 +221,21 @@ export function platformDeepLink(
       return `https://www.trip.com/hotels/?searchKeyword=${q}`;
     case "hotels":
       return `https://www.hotels.com/Hotel-Search?destination=${q}`;
-    case "expedia":
-      return `https://www.expedia.com/Hotel-Search?destination=${q}`;
+    case "expedia": {
+      // Expedia earns via the Awin "Expedia AU" programme (approved July
+      // 2026) using the MasterTag's Convert-a-Link, which only rewrites the
+      // EXACT approved domain - expedia.com.au (same rule as Europcar).
+      // AU and NZ therefore link to expedia.com.au (tracked; the AU site
+      // serves NZ stays too). Everything else keeps global expedia.com,
+      // which works for visitors but is untracked - do NOT point other
+      // countries at .com.au just to earn; the domain must fit the visitor.
+      // NOTE: `country` is a region shortTag, and AU regions carry STATE tags
+      // (NSW / VIC / TAS), never "AU" - match those, not just country codes.
+      const au = ["AU", "AUS", "Australia", "NSW", "VIC", "TAS"].includes(opts.country ?? "");
+      const nz = opts.country === "NZ" || opts.country === "NZL" || opts.country === "New Zealand";
+      const host = au || nz ? "www.expedia.com.au" : "www.expedia.com";
+      return `https://${host}/Hotel-Search?destination=${q}`;
+    }
     case "rakuten":
       return `https://travel.rakuten.com/hotelinfo/search/?f_keyword=${q}`;
     case "jalan":

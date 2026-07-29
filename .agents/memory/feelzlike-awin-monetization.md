@@ -59,6 +59,11 @@ feelzlike monetizes via the **Awin** affiliate network using the **auto-convert*
 - **When adding/removing a platform, fix the hardcoded site-count copy.** `regions/yamanouchi/pages/stay.tsx` hardcodes "N booking sites" (EN + JA, ~3 spots); `StayPlatformBar`/`TownStay` counts are dynamic. trivago made it 9 — keep those numbers honest (owner is honesty-sensitive).
 - **Threading region:** every `StayPlatformBar` call site must pass `region` (RegionStay → `region.id`; yamanouchi custom stay page → hardcoded `"yamanouchi"`). TownStay passes `region.id`.
 
+## Expedia — live on Awin ("Expedia AU", aid 121720, approved July 2026)
+- Expedia earns via **Awin Convert-a-Link** (NOT CJ) under the owner's Navigate Work Digital publisher account. Same exact-domain rule as Europcar: only **expedia.com.au** is rewritten, so `platformDeepLink` is now **country-keyed** (`opts.country`) — AU + NZ regions → `www.expedia.com.au` (tracked), everything else (JP) stays global `www.expedia.com` (works, untracked by design).
+- **TRAP:** `country` at the call sites is `region.shortTag`, and AU regions carry STATE tags (**NSW / VIC / TAS**, never "AU") — the domain switch must match those. First pass matched only "AU" and silently left every AU page on the global domain.
+- One-network rule: Expedia is Awin-only; never add a CJ AID for it. Earnings also need Convert-a-Link enabled for expedia.com.au on the Awin dashboard (owner-side).
+
 ## Car hire
 - Europcar is on **Awin** (not CJ): the "Hire a car" card is a plain Europcar link the MasterTag auto-converts. Lives in a shared `components/CarHireCard.tsx` (`europcarUrlForRegion`).
 - **Region-aware on purpose:** Awin's Convert-a-Link only rewrites the EXACT approved country domain. The programme is "Europcar_AU NZ", so AU→europcar.com.au, NZ→europcar.co.nz; JP/other fall back to global europcar.com (works but untracked, won't earn). Do NOT use one global Europcar URL — AU/NZ clicks then don't track.

@@ -107,6 +107,7 @@ export function TownStay() {
         lat: town.lat,
         lng: town.lng,
         region: region.id,
+        country,
       });
       const href =
         (adsOk && cjLinkFor(p.id, plainUrl, { sid: `${region.id}_${town.id}` })) || plainUrl;
