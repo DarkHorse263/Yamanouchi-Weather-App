@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 import { X, BellRing, ArrowUpRight } from "lucide-react";
 import { useLanguage, useRegion, useOptionalSeason } from "@workspace/feelzlike-shell";
@@ -60,7 +60,21 @@ export function AlertPromoBanner() {
 
   // Snow-only feature · hide when the region is in green season.
   const isGreen = region.seasons && seasonCtx?.season === "green";
-  if (dismissed || isGreen) return null;
+  const visible = !dismissed && !isGreen;
+
+  // Impression event · fired once per page view (mount), only when the banner
+  // actually renders. The ref guards against StrictMode double-invocation and
+  // re-renders; a fresh page view remounts the component and fires again,
+  // which is exactly the "shown" denominator the funnel wants.
+  const shownRef = useRef(false);
+  useEffect(() => {
+    if (visible && !shownRef.current) {
+      shownRef.current = true;
+      track("alert_promo_shown", { category: "alert" });
+    }
+  }, [visible]);
+
+  if (!visible) return null;
 
   const dismiss = () => {
     writeDismissed();

@@ -123,6 +123,55 @@ function SourcesCard({ sources }: { sources: Array<{ source: string; count: numb
   );
 }
 
+/**
+ * PromoFunnelCard · the snow-alert prompt funnel (shown → clicked → subscribed).
+ *
+ * The "shown" and "clicked" steps live in GA4 (events alert_promo_shown /
+ * alert_promo_clicked / alert_promo_dismissed, category "alert") because
+ * they're consent-gated client events we never send to our own server.
+ * The "subscribed" step is our own database - shown inline here. The GA link
+ * deep-links the events report on the feelzlike property so the owner can put
+ * the two numbers side by side and judge whether the prompt converts.
+ */
+function PromoFunnelCard({ alerts }: { alerts: SubsBucket }) {
+  const steps = [
+    { label: "shown", sub: "banner appeared · ga event alert_promo_shown", value: "see GA" },
+    { label: "clicked", sub: "tapped set up alerts · ga event alert_promo_clicked", value: "see GA" },
+    { label: "subscribed", sub: "confirmed a powder-alert email", value: String(alerts.verified) },
+  ];
+  return (
+    <div className="rounded-lg border bg-white p-5">
+      <div className="flex items-baseline justify-between gap-3 mb-1">
+        <h3 className="text-sm font-semibold lowercase">snow-alert prompt · funnel</h3>
+        <a
+          href="https://analytics.google.com/analytics/web/#/p544105028/reports/explorer?params=_u..nav%3Dmaui&r=all-events"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 text-xs text-sky-700 hover:underline whitespace-nowrap"
+        >
+          open GA events <ExternalLink className="w-3 h-3" />
+        </a>
+      </div>
+      <p className="text-xs text-muted-foreground mb-3">
+        did people notice the prompt? compare alert_promo_shown → alert_promo_clicked in GA
+        (analytics-consented visitors only) against subscribers below · alert_promo_dismissed = closed it.
+      </p>
+      <div className="flex items-stretch gap-2">
+        {steps.map((s, i) => (
+          <div key={s.label} className="flex-1 flex items-center gap-2 min-w-0">
+            <div className="flex-1 rounded-md border bg-slate-50 px-3 py-2 min-w-0">
+              <div className="text-[11px] uppercase tracking-widest text-muted-foreground">{s.label}</div>
+              <div className="text-lg font-semibold tabular-nums">{s.value}</div>
+              <div className="text-[11px] text-muted-foreground truncate" title={s.sub}>{s.sub}</div>
+            </div>
+            {i < steps.length - 1 ? <span className="shrink-0 text-slate-300">→</span> : null}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 const DASHBOARDS: Array<{ label: string; sub: string; href: string }> = [
   // Deep-linked to the feelzlike property (p544105028) so it never opens
   // another business's Analytics account.
@@ -192,6 +241,8 @@ export default function AdminStats() {
           </div>
 
           {stats.data.daily && stats.data.daily.length > 0 ? <TrendStrip daily={stats.data.daily} /> : null}
+
+          <PromoFunnelCard alerts={stats.data.alerts} />
 
           <div className="grid lg:grid-cols-2 gap-4">
             <SubsCard title="powder-alert subscribers" b={stats.data.alerts} />
