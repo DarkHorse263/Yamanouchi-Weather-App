@@ -23,6 +23,7 @@ import type {
   AuthUserEnvelope,
   BeginBrowserLoginParams,
   BusServiceResponse,
+  CompleteEmailSignInParams,
   CreateAccommodationBody,
   CreateAttractionBody,
   CreateDiningBody,
@@ -68,6 +69,8 @@ import type {
   MobileTokenExchangeRequest,
   MobileTokenExchangeSuccess,
   RegionOutlook,
+  RequestEmailSignInBody,
+  RequestEmailSignInResponse,
   Resort,
   ResortLiftStatus,
   ResortSnowReportResponse,
@@ -4929,6 +4932,193 @@ export function useGetCurrentAuthUser<
   request?: SecondParameter<typeof customFetch>;
 }): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetCurrentAuthUserQueryOptions(options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * Sends a magic sign-in link to the given email. Clicking it creates a free account (or signs into an existing one, including accounts claimed by alert subscribers) and opens a session.
+ * @summary Request a passwordless email sign-in link
+ */
+export const getRequestEmailSignInUrl = () => {
+  return `/api/auth/email/request`;
+};
+
+export const requestEmailSignIn = async (
+  requestEmailSignInBody: RequestEmailSignInBody,
+  options?: RequestInit,
+): Promise<RequestEmailSignInResponse> => {
+  return customFetch<RequestEmailSignInResponse>(getRequestEmailSignInUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(requestEmailSignInBody),
+  });
+};
+
+export const getRequestEmailSignInMutationOptions = <
+  TError = ErrorType<ErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof requestEmailSignIn>>,
+    TError,
+    { data: BodyType<RequestEmailSignInBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof requestEmailSignIn>>,
+  TError,
+  { data: BodyType<RequestEmailSignInBody> },
+  TContext
+> => {
+  const mutationKey = ["requestEmailSignIn"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof requestEmailSignIn>>,
+    { data: BodyType<RequestEmailSignInBody> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return requestEmailSignIn(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type RequestEmailSignInMutationResult = NonNullable<
+  Awaited<ReturnType<typeof requestEmailSignIn>>
+>;
+export type RequestEmailSignInMutationBody = BodyType<RequestEmailSignInBody>;
+export type RequestEmailSignInMutationError = ErrorType<ErrorResponse>;
+
+/**
+ * @summary Request a passwordless email sign-in link
+ */
+export const useRequestEmailSignIn = <
+  TError = ErrorType<ErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof requestEmailSignIn>>,
+    TError,
+    { data: BodyType<RequestEmailSignInBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof requestEmailSignIn>>,
+  TError,
+  { data: BodyType<RequestEmailSignInBody> },
+  TContext
+> => {
+  return useMutation(getRequestEmailSignInMutationOptions(options));
+};
+
+/**
+ * @summary Complete the email sign-in flow (magic-link target)
+ */
+export const getCompleteEmailSignInUrl = (
+  params: CompleteEmailSignInParams,
+) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? "null" : value.toString());
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0
+    ? `/api/auth/email/verify?${stringifiedParams}`
+    : `/api/auth/email/verify`;
+};
+
+export const completeEmailSignIn = async (
+  params: CompleteEmailSignInParams,
+  options?: RequestInit,
+): Promise<unknown> => {
+  return customFetch<unknown>(getCompleteEmailSignInUrl(params), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getCompleteEmailSignInQueryKey = (
+  params?: CompleteEmailSignInParams,
+) => {
+  return [`/api/auth/email/verify`, ...(params ? [params] : [])] as const;
+};
+
+export const getCompleteEmailSignInQueryOptions = <
+  TData = Awaited<ReturnType<typeof completeEmailSignIn>>,
+  TError = ErrorType<void>,
+>(
+  params: CompleteEmailSignInParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof completeEmailSignIn>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getCompleteEmailSignInQueryKey(params);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof completeEmailSignIn>>
+  > = ({ signal }) =>
+    completeEmailSignIn(params, { signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof completeEmailSignIn>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type CompleteEmailSignInQueryResult = NonNullable<
+  Awaited<ReturnType<typeof completeEmailSignIn>>
+>;
+export type CompleteEmailSignInQueryError = ErrorType<void>;
+
+/**
+ * @summary Complete the email sign-in flow (magic-link target)
+ */
+
+export function useCompleteEmailSignIn<
+  TData = Awaited<ReturnType<typeof completeEmailSignIn>>,
+  TError = ErrorType<void>,
+>(
+  params: CompleteEmailSignInParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof completeEmailSignIn>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getCompleteEmailSignInQueryOptions(params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
     queryKey: QueryKey;

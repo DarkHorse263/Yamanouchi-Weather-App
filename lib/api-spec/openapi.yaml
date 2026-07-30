@@ -1246,6 +1246,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthUserEnvelope'
+  /auth/email/request:
+    post:
+      tags: [Auth]
+      operationId: requestEmailSignIn
+      summary: Request a passwordless email sign-in link
+      description: Sends a magic sign-in link to the given email. Clicking it creates a free account (or signs into an existing one, including accounts claimed by alert subscribers) and opens a session.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestEmailSignInBody'
+      responses:
+        '200':
+          description: Sign-in email queued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestEmailSignInResponse'
+        '400':
+          description: Invalid email.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too many requests.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /auth/email/verify:
+    get:
+      tags: [Auth]
+      operationId: completeEmailSignIn
+      summary: Complete the email sign-in flow (magic-link target)
+      parameters:
+        - name: token
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '302':
+          description: Redirect into the app with a session cookie set (or to /premium?signin=… on failure).
   /login:
     get:
       tags: [Auth]
@@ -1415,6 +1460,33 @@ components:
           type: [string, 'null']
         profileImageUrl:
           type: [string, 'null']
+    RequestEmailSignInBody:
+      type: object
+      required: [email]
+      properties:
+        email:
+          type: string
+          maxLength: 254
+        returnTo:
+          type: string
+          maxLength: 512
+          description: Relative path to land on after the link is clicked (must start with `/`).
+    RequestEmailSignInResponse:
+      type: object
+      required: [ok, status, message]
+      properties:
+        ok:
+          type: boolean
+        status:
+          type: string
+          enum: [sent]
+        message:
+          type: string
+        emailDelivered:
+          type: boolean
+        devVerifyUrl:
+          type: string
+          description: Dev-only convenience link when no email provider is configured. Never present in production.
     AuthUserEnvelope:
       type: object
       required: [user]

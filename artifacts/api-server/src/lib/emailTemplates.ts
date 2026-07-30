@@ -92,6 +92,23 @@ export function verificationEmail(verifyUrl: string): { subject: string; html: s
   };
 }
 
+export function signInEmail(signInUrl: string): { subject: string; html: string; text: string } {
+  return {
+    subject: "your feelzlike sign-in link",
+    html: brandedEmail({
+      preheader: "one click to sign in to your free feelzlike account · link expires in 30 minutes.",
+      heading: "sign in to feelzlike",
+      bodyHtml: `<p style="margin:0 0 16px 0;">click the button below to sign in · no password needed.</p>
+        <p style="margin:0 0 16px 0;">this creates your free feelzlike account if you don't have one yet · every premium feature is free for members until 31 december 2026.</p>
+        <p style="font-size:13px;color:#64748b;margin:0;">the link expires in 30 minutes. if you didn't request it, just ignore this email · nothing happens until you click.</p>`,
+      ctaLabel: "sign in",
+      ctaUrl: signInUrl,
+      footerHtml: `if the button doesn't work, paste this URL into your browser:<br><span style="word-break:break-all;color:${BRAND_BLUE};">${signInUrl}</span>`,
+    }),
+    text: `sign in to feelzlike\n\nclick to sign in (link expires in 30 minutes):\n${signInUrl}\n\nif you didn't request this, ignore this email.`,
+  };
+}
+
 export interface AlertEmailMountain {
   name: string;
   region: string;

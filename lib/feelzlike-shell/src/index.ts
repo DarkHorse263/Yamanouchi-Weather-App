@@ -24,6 +24,8 @@ export { AppShell } from "./AppShell";
 export { TownPicker } from "./TownPicker";
 export { LiveBadge } from "./LiveBadge";
 export { PremiumGate } from "./PremiumGate";
+export { PremiumAccessProvider, usePremiumAccess } from "./PremiumAccess";
+export type { PremiumAccessState } from "./PremiumAccess";
 export { UpdateStamp } from "./UpdateStamp";
 export { PageHeader } from "./PageHeader";
 export type { PageHeaderProps } from "./PageHeader";

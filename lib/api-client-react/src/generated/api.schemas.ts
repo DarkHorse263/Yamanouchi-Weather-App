@@ -17,6 +17,32 @@ export interface AuthUser {
   profileImageUrl: string | null;
 }
 
+export interface RequestEmailSignInBody {
+  /** @maxLength 254 */
+  email: string;
+  /**
+   * Relative path to land on after the link is clicked (must start with `/`).
+   * @maxLength 512
+   */
+  returnTo?: string;
+}
+
+export type RequestEmailSignInResponseStatus =
+  (typeof RequestEmailSignInResponseStatus)[keyof typeof RequestEmailSignInResponseStatus];
+
+export const RequestEmailSignInResponseStatus = {
+  sent: "sent",
+} as const;
+
+export interface RequestEmailSignInResponse {
+  ok: boolean;
+  status: RequestEmailSignInResponseStatus;
+  message: string;
+  emailDelivered?: boolean;
+  /** Dev-only convenience link when no email provider is configured. Never present in production. */
+  devVerifyUrl?: string;
+}
+
 export interface AuthUserEnvelope {
   user: AuthUser | null;
 }
@@ -1974,6 +2000,10 @@ export type GetLiftStatusParams = {
 
  */
   region?: RegionFilterParameter;
+};
+
+export type CompleteEmailSignInParams = {
+  token: string;
 };
 
 export type BeginBrowserLoginParams = {

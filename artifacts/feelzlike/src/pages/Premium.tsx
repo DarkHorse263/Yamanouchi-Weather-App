@@ -1,7 +1,9 @@
+import { useMemo } from "react";
 import { Link } from "wouter";
 import {
   Sparkles,
   Lock,
+  UserRound,
   BellRing,
   ParkingCircle,
   Sunrise,
@@ -12,6 +14,7 @@ import {
   ArrowLeft,
 } from "lucide-react";
 import { usePremium } from "@workspace/feelzlike-shell";
+import { useAuthAccount } from "@/components/auth/SignUpProvider";
 import { PremiumSubscribe } from "@/components/PremiumSubscribe";
 
 interface Feature {
@@ -78,6 +81,17 @@ export default function Premium() {
     promoStartsAt,
     promoEndsAt,
   } = usePremium();
+  const { isAuthenticated, isLoading, email, promptSignUp } = useAuthAccount();
+
+  // Failure landings from the magic-link flow redirect here with ?signin=…
+  const signinNotice = useMemo(() => {
+    if (typeof window === "undefined") return null;
+    const v = new URLSearchParams(window.location.search).get("signin");
+    if (v === "expired") return "that sign-in link has expired · request a fresh one below.";
+    if (v === "invalid") return "that sign-in link isn't valid · request a fresh one below.";
+    if (v === "error") return "sign-in hit a snag · try again in a moment.";
+    return null;
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
@@ -101,6 +115,52 @@ export default function Premium() {
             the daily dashboard is free, forever. premium adds the smart pushes
             and predictions that save you the trip you'd otherwise wasted.
           </p>
+        </div>
+
+        {/* Account · the soft member gate. Sign-up is free (magic-link email)
+            and unlocks every premium feature during the launch promo. Also
+            the landing spot for expired/invalid magic links (?signin=…). */}
+        <div className="rounded-2xl border border-border bg-white p-5">
+          {signinNotice && (
+            <p className="text-sm text-rose-600 bg-rose-500/10 border border-rose-500/30 rounded-lg px-3 py-2 mb-3">
+              {signinNotice}
+            </p>
+          )}
+          {isLoading ? null : isAuthenticated ? (
+            <div className="flex items-start gap-3">
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-emerald-100 text-emerald-700">
+                <UserRound className="w-5 h-5" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">your account</p>
+                <p className="text-sm font-bold text-foreground mt-0.5 break-all">{email ?? "signed in"}</p>
+                <a href="/api/logout" className="text-sm text-muted-foreground underline hover:text-foreground mt-1 inline-block">
+                  sign out
+                </a>
+              </div>
+            </div>
+          ) : (
+            <div className="flex items-start gap-3">
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-sky-100 text-sky-700">
+                <UserRound className="w-5 h-5" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">your account</p>
+                <p className="text-sm text-muted-foreground mt-0.5 leading-relaxed">
+                  create a free account to use every premium feature
+                  {isPromoPeriod && promoEndsAt ? ` · free until ${formatDate(promoEndsAt)}, no card needed` : ""}.
+                  already get powder alert emails? use the same email to claim your account.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => promptSignUp({ feature: "premium-page" })}
+                  className="mt-2.5 rounded-lg bg-primary text-primary-foreground font-bold text-sm px-4 py-2.5 hover:bg-primary/90 transition"
+                >
+                  create free account
+                </button>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Current status */}

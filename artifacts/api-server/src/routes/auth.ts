@@ -12,6 +12,7 @@ import {
   clearSession,
   getOidcConfig,
   getSessionId,
+  getSession,
   createSession,
   deleteSession,
   SESSION_COOKIE,
@@ -262,12 +263,21 @@ router.get("/callback", async (req: Request, res: Response) => {
 
 router.get("/logout", async (req: Request, res: Response) => {
   try {
-    const config = await getOidcConfig();
     const origin = getOrigin(req);
 
     const sid = getSessionId(req);
+    // Email (magic-link) sessions have no OIDC counterpart · sending them
+    // through the provider end-session flow would bounce users off to the
+    // Replit logout page for an account that doesn't exist there. Just clear
+    // the local session and return home.
+    const session = sid ? await getSession(sid) : null;
     await clearSession(res, sid);
+    if (session?.provider === "email") {
+      res.redirect(origin);
+      return;
+    }
 
+    const config = await getOidcConfig();
     const endSessionUrl = oidc.buildEndSessionUrl(config, {
       client_id: process.env.REPL_ID!,
       post_logout_redirect_uri: origin,

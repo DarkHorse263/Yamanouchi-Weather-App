@@ -14,6 +14,13 @@ export interface SessionData {
   access_token: string;
   refresh_token?: string;
   expires_at?: number;
+  /**
+   * Which flow created this session. "email" sessions carry no OIDC tokens
+   * (access_token is "" and expires_at is unset, so the refresh path never
+   * runs) and must NOT be sent through the OIDC end-session flow on logout.
+   * Absent = legacy/Replit OIDC session.
+   */
+  provider?: "replit" | "email";
 }
 
 let oidcConfig: client.Configuration | null = null;

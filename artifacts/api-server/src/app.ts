@@ -11,13 +11,15 @@ import { authMiddleware } from "./middlewares/authMiddleware.js";
 import { setSubscriptionResolver } from "./middlewares/require-entitlement.js";
 import { isPromoActive } from "./lib/promo.js";
 
-// Entitlement resolver. During the launch promo every premium feature is free
-// for everyone, so we grant a synthetic active "pro" subscription while the
-// window is open. After the promo closes this returns null (free tier), so
-// `requireEntitlement(...)` becomes a real 402 paywall. When billing lands,
-// replace the post-promo branch with the real subscription lookup off `req`.
-setSubscriptionResolver(() => {
-  if (isPromoActive()) {
+// Entitlement resolver · the soft member gate. During the launch promo every
+// premium feature is free, but only for signed-in members (free email
+// sign-up) · anonymous visitors get 401 AUTH_REQUIRED from
+// `requireEntitlement(...)` so the client can prompt a free sign-up instead
+// of a paywall. After the promo closes this returns null even for members
+// (free tier → real 402 paywall). When billing lands, replace the post-promo
+// branch with the real subscription lookup off `req`.
+setSubscriptionResolver((req) => {
+  if (isPromoActive() && req.isAuthenticated()) {
     return { tier: "pro", status: "active" };
   }
   return null;

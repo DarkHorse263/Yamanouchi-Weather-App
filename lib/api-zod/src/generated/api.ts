@@ -2910,6 +2910,45 @@ export const GetCurrentAuthUserResponse = zod.object({
 });
 
 /**
+ * Sends a magic sign-in link to the given email. Clicking it creates a free account (or signs into an existing one, including accounts claimed by alert subscribers) and opens a session.
+ * @summary Request a passwordless email sign-in link
+ */
+export const requestEmailSignInBodyEmailMax = 254;
+
+export const requestEmailSignInBodyReturnToMax = 512;
+
+export const RequestEmailSignInBody = zod.object({
+  email: zod.string().max(requestEmailSignInBodyEmailMax),
+  returnTo: zod
+    .string()
+    .max(requestEmailSignInBodyReturnToMax)
+    .optional()
+    .describe(
+      "Relative path to land on after the link is clicked (must start with `\/`).",
+    ),
+});
+
+export const RequestEmailSignInResponse = zod.object({
+  ok: zod.boolean(),
+  status: zod.enum(["sent"]),
+  message: zod.string(),
+  emailDelivered: zod.boolean().optional(),
+  devVerifyUrl: zod
+    .string()
+    .optional()
+    .describe(
+      "Dev-only convenience link when no email provider is configured. Never present in production.",
+    ),
+});
+
+/**
+ * @summary Complete the email sign-in flow (magic-link target)
+ */
+export const CompleteEmailSignInQueryParams = zod.object({
+  token: zod.coerce.string(),
+});
+
+/**
  * @summary Start the browser OIDC login flow
  */
 export const BeginBrowserLoginQueryParams = zod.object({

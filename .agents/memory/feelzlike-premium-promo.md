@@ -23,7 +23,18 @@ The promo runs 1 June 2026 → end-of-day 31 December 2026 by default. Overridab
 
 **How to apply:** every premium-only API route must call `requireEntitlement('<entitlement>')`. New entitlements go in `artifacts/api-server/src/lib/entitlements.ts` and must be added to the appropriate tier(s) in `TIER_ENTITLEMENTS`.
 
-## Decision: premium is VISIBLE · free-until-promo, no hard lock (June 2026)
+## Decision: SOFT MEMBER GATE (July 2026) supersedes the pass-through
+
+The pure pass-through below was superseded ahead of the Japan season. `PremiumGate` (lib/feelzlike-shell/src/PremiumGate.tsx) now soft-gates: children stay fully visible, but for SIGNED-OUT visitors any tap inside opens the free sign-up sheet (passwordless email magic link · no password, no card). Signed-in members pass through. No prompt ever fires on page load · only on explicit tap.
+
+- Auth = magic-link flow: POST `/api/auth/email/request` → branded email → GET `/api/auth/email/verify` (HMAC token via ALERT_TOKEN_SECRET, 30 min TTL) → find-or-create `users` row (authProvider "email") + `sid` session (`provider:"email"` in SessionData · logout must NOT run the OIDC end-session for these).
+- Signing in also claims a pending alert subscription (marks `verifiedAt`) · same-inbox proof.
+- Server resolver (app.ts) grants synthetic pro only when `isPromoActive() && req.isAuthenticated()`; `requireEntitlement` returns 401 AUTH_REQUIRED for anonymous (client shows sign-up prompt) vs 402 for signed-in-without-sub.
+- Shell↔app wiring: shell `PremiumAccessProvider`/`usePremiumAccess` (defaults to pass-through when unmounted); feelzlike `SignUpProvider` (components/auth/) wires auth state + the single app-wide `SignUpSheet`.
+
+**Why:** owner plan · turn on member sign-ups before the Japan season with a gentle gate ("free until 31 dec" promo), converting the audience built during the pass-through phase.
+
+## Decision (SUPERSEDED, kept for history): premium is VISIBLE · free-until-promo, no hard lock (June 2026)
 
 Premium was hidden-until-traction earlier in 2026; that is REVERSED. Owner's model: keep every feature usable by everyone, badge premium as "free until 31 december 2026", invite email subscribes (no login), and show planned prices for after. Do NOT re-hide it or add a lock as if the pass-through were a bug.
 

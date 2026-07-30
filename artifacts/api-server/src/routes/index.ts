@@ -21,6 +21,7 @@ import alertsInternalRouter from "./alerts-internal";
 import smokeInternalRouter from "./smoke-internal";
 import elevationForecastRouter from "./elevation-forecast";
 import authRouter from "./auth";
+import authEmailRouter from "./auth-email";
 import adminRouter from "./admin";
 
 const router: IRouter = Router();
@@ -47,6 +48,7 @@ router.use(alertsInternalRouter);
 router.use(smokeInternalRouter);
 router.use(elevationForecastRouter);
 router.use(authRouter);
+router.use(authEmailRouter);
 router.use("/admin", adminRouter);
 
 export default router;

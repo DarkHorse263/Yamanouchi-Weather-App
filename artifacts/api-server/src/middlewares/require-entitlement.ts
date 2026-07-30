@@ -31,6 +31,18 @@ export function requireEntitlement(ent: Entitlement): RequestHandler {
       if (hasEntitlement(sub, ent)) {
         return next();
       }
+      // Soft member gate: an anonymous visitor is asked to sign in (free
+      // account) before we ever talk money. Only signed-in users without the
+      // entitlement get the real 402 paywall.
+      if (!req.isAuthenticated()) {
+        res.status(401).json({
+          error: "AUTH_REQUIRED",
+          message: "Sign in with your free feelzlike account to use this feature.",
+          entitlement: ent,
+          signInUrl: "/premium",
+        });
+        return;
+      }
       res.status(402).json({
         error: "PAYMENT_REQUIRED",
         message: `This feature requires an active subscription with the "${ent}" entitlement.`,

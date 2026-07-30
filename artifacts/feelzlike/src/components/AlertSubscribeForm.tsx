@@ -1,6 +1,6 @@
 import { useState, useId, useMemo } from "react";
 import { useSubscribeToAlerts } from "@workspace/api-client-react";
-import { useLanguage, usePremium } from "@workspace/feelzlike-shell";
+import { useLanguage, usePremium, usePremiumAccess } from "@workspace/feelzlike-shell";
 import { BellRing, Mail, Snowflake, Loader2, CheckCircle2, Check, Sparkles } from "lucide-react";
 import { track } from "@/lib/analytics";
 
@@ -54,6 +54,7 @@ interface Props {
 export function AlertSubscribeForm({ defaultRegion }: Props) {
   const { t } = useLanguage();
   const { isPromoPeriod, promoEndsAt } = usePremium();
+  const { promptSignUp } = usePremiumAccess();
   const formId = useId();
   const browserTz = useMemo(() => {
     try { return Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC"; } catch { return "UTC"; }
@@ -126,8 +127,9 @@ export function AlertSubscribeForm({ defaultRegion }: Props) {
     );
   }
 
-  const paymentRequired = isPaymentRequired(mutation.error);
-  const errMessage = mutation.error && !paymentRequired ? extractErrorMessage(mutation.error) : null;
+  const authRequired = isAuthRequired(mutation.error);
+  const paymentRequired = !authRequired && isPaymentRequired(mutation.error);
+  const errMessage = mutation.error && !paymentRequired && !authRequired ? extractErrorMessage(mutation.error) : null;
   const canSubmit = !!email && regions.length > 0 && consent && !mutation.isPending;
 
   return (
@@ -268,6 +270,24 @@ export function AlertSubscribeForm({ defaultRegion }: Props) {
         </span>
       </label>
 
+      {authRequired && (
+        <div className="text-xs text-foreground bg-primary/10 border border-primary/30 rounded-lg px-3 py-2.5 space-y-1.5">
+          <div className="flex items-center gap-1.5 font-bold text-primary">
+            <Sparkles className="w-3.5 h-3.5" /> {t("powder alerts come with your free account", "パウダーアラートは無料アカウントで利用できます")}
+          </div>
+          <p className="text-muted-foreground leading-relaxed">
+            {t("create a free account with this email and your subscription is saved · free until the promo ends, no card needed.", "このメールで無料アカウントを作成すると購読が保存されます · プロモ期間中は無料、カード不要です。")}
+          </p>
+          <button
+            type="button"
+            onClick={() => promptSignUp({ email, feature: "alerts" })}
+            className="inline-block text-primary font-bold underline hover:no-underline"
+          >
+            {t("create my free account", "無料アカウントを作成")}
+          </button>
+        </div>
+      )}
+
       {paymentRequired && (
         <div className="text-xs text-foreground bg-primary/10 border border-primary/30 rounded-lg px-3 py-2.5 space-y-1.5">
           <div className="flex items-center gap-1.5 font-bold text-primary">
@@ -309,6 +329,22 @@ function formatDate(d: Date): string {
 // The subscribe route is gated with `requireEntitlement("alerts.snow")`, which
 // returns 402 PAYMENT_REQUIRED once the launch promo ends. Detect it so we can
 // show an upgrade prompt instead of a raw error message.
+// Soft member gate: `requireEntitlement` returns 401 AUTH_REQUIRED for
+// anonymous visitors during the promo (a free account unlocks the feature).
+function isAuthRequired(err: unknown): boolean {
+  if (typeof err !== "object" || err === null) return false;
+  const anyErr = err as {
+    status?: number;
+    response?: { status?: number; data?: { error?: string } };
+    data?: { error?: string };
+  };
+  if (anyErr.response?.status === 401 || anyErr.status === 401) return true;
+  return (
+    anyErr.response?.data?.error === "AUTH_REQUIRED" ||
+    anyErr.data?.error === "AUTH_REQUIRED"
+  );
+}
+
 function isPaymentRequired(err: unknown): boolean {
   if (typeof err !== "object" || err === null) return false;
   const anyErr = err as {

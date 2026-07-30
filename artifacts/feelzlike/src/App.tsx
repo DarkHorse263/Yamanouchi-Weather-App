@@ -14,6 +14,7 @@ import { InstallPrompt } from "@/components/InstallPrompt";
 import { OfflineBanner } from "@/components/OfflineBanner";
 import { PullToRefresh } from "@/components/PullToRefresh";
 import { AppErrorBoundary } from "@/components/AppErrorBoundary";
+import { SignUpProvider } from "@/components/auth/SignUpProvider";
 import { identifyAnonUser, track } from "@/lib/analytics";
 import { isStandaloneMode } from "@/lib/registerSW";
 import { useEffect, useRef } from "react";
@@ -286,7 +287,11 @@ function App() {
               <AwinTag />
               <GoogleAnalyticsTag />
               <MetaPixelTag />
-              <Router />
+              {/* Soft member gate · wires account state + the free sign-up
+                  sheet into PremiumGate. Never prompts on page load. */}
+              <SignUpProvider>
+                <Router />
+              </SignUpProvider>
             </WouterRouter>
             <ConsentBanner />
             <InstallPrompt />
