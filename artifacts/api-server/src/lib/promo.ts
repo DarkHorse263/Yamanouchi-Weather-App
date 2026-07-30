@@ -61,3 +61,23 @@ export function isPromoActive(now: Date = new Date()): boolean {
 }
 
 export { PROMO_STARTS_AT, PROMO_ENDS_AT };
+
+/**
+ * Soft-member-gate subscription resolver logic (plugged into
+ * `setSubscriptionResolver` in app.ts). During the launch promo every
+ * signed-in member gets a synthetic "pro" subscription; anonymous visitors
+ * and everyone after the promo closes resolve to null (free tier), which
+ * makes `requireEntitlement(...)` return 401 AUTH_REQUIRED (anonymous) or
+ * 402 PAYMENT_REQUIRED (signed-in without a sub). Extracted as a pure
+ * function so the promo-boundary behaviour is unit-testable with a fixed
+ * `now`.
+ */
+export function resolvePromoSubscription(
+  isAuthenticated: boolean,
+  now: Date = new Date(),
+): { tier: "pro"; status: "active" } | null {
+  if (isPromoActive(now) && isAuthenticated) {
+    return { tier: "pro", status: "active" };
+  }
+  return null;
+}

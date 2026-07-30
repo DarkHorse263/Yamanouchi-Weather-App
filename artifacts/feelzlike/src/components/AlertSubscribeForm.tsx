@@ -3,6 +3,7 @@ import { useSubscribeToAlerts } from "@workspace/api-client-react";
 import { useLanguage, usePremium, usePremiumAccess } from "@workspace/feelzlike-shell";
 import { BellRing, Mail, Snowflake, Loader2, CheckCircle2, Check, Sparkles } from "lucide-react";
 import { track } from "@/lib/analytics";
+import { classifyGateError, extractErrorMessage } from "@/lib/gateErrors";
 
 /**
  * Powder-alert subscription form. Mounts inside any region's Alerts page.
@@ -127,9 +128,10 @@ export function AlertSubscribeForm({ defaultRegion }: Props) {
     );
   }
 
-  const authRequired = isAuthRequired(mutation.error);
-  const paymentRequired = !authRequired && isPaymentRequired(mutation.error);
-  const errMessage = mutation.error && !paymentRequired && !authRequired ? extractErrorMessage(mutation.error) : null;
+  const gateError = classifyGateError(mutation.error);
+  const authRequired = gateError === "auth";
+  const paymentRequired = gateError === "payment";
+  const errMessage = gateError === "other" ? extractErrorMessage(mutation.error) : null;
   const canSubmit = !!email && regions.length > 0 && consent && !mutation.isPending;
 
   return (
@@ -326,46 +328,5 @@ function formatDate(d: Date): string {
     .toLowerCase();
 }
 
-// The subscribe route is gated with `requireEntitlement("alerts.snow")`, which
-// returns 402 PAYMENT_REQUIRED once the launch promo ends. Detect it so we can
-// show an upgrade prompt instead of a raw error message.
-// Soft member gate: `requireEntitlement` returns 401 AUTH_REQUIRED for
-// anonymous visitors during the promo (a free account unlocks the feature).
-function isAuthRequired(err: unknown): boolean {
-  if (typeof err !== "object" || err === null) return false;
-  const anyErr = err as {
-    status?: number;
-    response?: { status?: number; data?: { error?: string } };
-    data?: { error?: string };
-  };
-  if (anyErr.response?.status === 401 || anyErr.status === 401) return true;
-  return (
-    anyErr.response?.data?.error === "AUTH_REQUIRED" ||
-    anyErr.data?.error === "AUTH_REQUIRED"
-  );
-}
-
-function isPaymentRequired(err: unknown): boolean {
-  if (typeof err !== "object" || err === null) return false;
-  const anyErr = err as {
-    status?: number;
-    response?: { status?: number; data?: { error?: string } };
-    data?: { error?: string };
-  };
-  if (anyErr.response?.status === 402 || anyErr.status === 402) return true;
-  return (
-    anyErr.response?.data?.error === "PAYMENT_REQUIRED" ||
-    anyErr.data?.error === "PAYMENT_REQUIRED"
-  );
-}
-
-function extractErrorMessage(err: unknown): string {
-  if (typeof err === "object" && err !== null) {
-    const anyErr = err as { message?: string; data?: { message?: string }; response?: { data?: { message?: string } } };
-    return anyErr.response?.data?.message
-      ?? anyErr.data?.message
-      ?? anyErr.message
-      ?? "Something went wrong. Try again.";
-  }
-  return "Something went wrong. Try again.";
-}
+// Gate-error detection (401 AUTH_REQUIRED vs 402 PAYMENT_REQUIRED) lives in
+// @/lib/gateErrors so this form and PremiumSubscribe can't drift apart.

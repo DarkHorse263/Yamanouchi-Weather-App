@@ -2,6 +2,7 @@ import { useState, useMemo, type FormEvent } from "react";
 import { useSubscribeToAlerts } from "@workspace/api-client-react";
 import { Mail, Check, AlertCircle, Loader2, Sparkles } from "lucide-react";
 import { ALERT_REGIONS } from "@/components/AlertSubscribeForm";
+import { isPaymentRequired } from "@/lib/gateErrors";
 
 /**
  * Powder-alert signup for the /premium hub · powder alerts are the premium
@@ -15,22 +16,6 @@ import { ALERT_REGIONS } from "@/components/AlertSubscribeForm";
  * Brand voice: all lowercase, middot separators, no em/en dashes, no emojis.
  */
 type Status = "idle" | "loading" | "sent" | "already" | "error";
-
-// The subscribe route is gated with `requireEntitlement("alerts.snow")`, which
-// returns 402 PAYMENT_REQUIRED once the launch promo ends.
-function isPaymentRequired(err: unknown): boolean {
-  if (typeof err !== "object" || err === null) return false;
-  const anyErr = err as {
-    status?: number;
-    response?: { status?: number; data?: { error?: string } };
-    data?: { error?: string };
-  };
-  if (anyErr.response?.status === 402 || anyErr.status === 402) return true;
-  return (
-    anyErr.response?.data?.error === "PAYMENT_REQUIRED" ||
-    anyErr.data?.error === "PAYMENT_REQUIRED"
-  );
-}
 
 export function PremiumSubscribe() {
   const [email, setEmail] = useState("");
