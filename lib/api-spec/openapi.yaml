@@ -321,6 +321,34 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
 
+    delete:
+      operationId: deleteAccount
+      tags: [Auth]
+      summary: Permanently delete the signed-in member's account and data
+      description: |
+        Removes the member's users row, every session belonging to them and
+        the powder-alert subscription tied to their email (when one exists).
+        Clears the session cookie · irreversible.
+      responses:
+        "200":
+          description: Account deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericOkResponse"
+        "401":
+          description: Not signed in
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Deletion failed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
   /account/profile:
     put:
       operationId: updateAccountProfile

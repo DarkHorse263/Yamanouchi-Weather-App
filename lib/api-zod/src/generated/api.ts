@@ -386,6 +386,18 @@ export const GetAccountResponse = zod.object({
 });
 
 /**
+ * Removes the member's users row, every session belonging to them and
+the powder-alert subscription tied to their email (when one exists).
+Clears the session cookie · irreversible.
+
+ * @summary Permanently delete the signed-in member's account and data
+ */
+export const DeleteAccountResponse = zod.object({
+  ok: zod.boolean(),
+  message: zod.string().optional(),
+});
+
+/**
  * @summary Update the signed-in member's profile basics
  */
 export const UpdateAccountProfileBody = zod.object({

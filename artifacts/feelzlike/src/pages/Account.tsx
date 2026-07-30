@@ -11,11 +11,13 @@ import {
   Loader2,
   CheckCircle2,
   Sparkles,
+  Trash2,
 } from "lucide-react";
 import {
   useGetAccount,
   useUpdateAccountProfile,
   useUpdateAccountAlerts,
+  useDeleteAccount,
 } from "@workspace/api-client-react";
 import type { AccountResponse } from "@workspace/api-client-react";
 import { useAuthAccount } from "@/components/auth/SignUpProvider";
@@ -38,13 +40,16 @@ const HORIZONS: Array<{ value: 24 | 48 | 72; label: string }> = [
 
 export default function Account() {
   const { isAuthenticated, isLoading: authLoading, promptSignUp } = useAuthAccount();
+  const [deleted, setDeleted] = useState(false);
 
   // Signed-out visitors get the sign-up sheet · once, after auth resolves.
+  // Skipped after a self-serve deletion so the confirmation isn't covered
+  // by the sign-up sheet.
   useEffect(() => {
-    if (!authLoading && !isAuthenticated) {
+    if (!authLoading && !isAuthenticated && !deleted) {
       promptSignUp({ feature: "account-page" });
     }
-  }, [authLoading, isAuthenticated, promptSignUp]);
+  }, [authLoading, isAuthenticated, promptSignUp, deleted]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -65,14 +70,16 @@ export default function Account() {
           </h1>
         </div>
 
-        {authLoading ? (
+        {deleted ? (
+          <DeletedCard />
+        ) : authLoading ? (
           <div className="flex items-center justify-center py-12">
             <Loader2 className="w-6 h-6 animate-spin text-sky-400" />
           </div>
         ) : !isAuthenticated ? (
           <SignedOutCard onSignUp={() => promptSignUp({ feature: "account-page" })} />
         ) : (
-          <SignedInAccount />
+          <SignedInAccount onDeleted={() => setDeleted(true)} />
         )}
       </div>
     </div>
@@ -105,7 +112,33 @@ function SignedOutCard({ onSignUp }: { onSignUp: () => void }) {
   );
 }
 
-function SignedInAccount() {
+function DeletedCard() {
+  return (
+    <div className="rounded-2xl border border-border bg-white p-5">
+      <div className="flex items-start gap-3">
+        <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-emerald-100 text-emerald-700">
+          <CheckCircle2 className="w-5 h-5" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-bold text-foreground">your account is deleted</p>
+          <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
+            your details, sessions and powder-alert subscription are gone and
+            you're signed out. thanks for riding with us · you're welcome back
+            anytime.
+          </p>
+          <Link
+            href="/"
+            className="mt-3 inline-block rounded-lg bg-primary text-primary-foreground font-bold text-sm px-4 py-2.5 hover:bg-primary/90 transition"
+          >
+            back to the snow
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SignedInAccount({ onDeleted }: { onDeleted: () => void }) {
   const { data, isLoading, isError, refetch } = useGetAccount({
     query: { queryKey: ["account"], retry: 1 },
   });
@@ -154,7 +187,92 @@ function SignedInAccount() {
       />
 
       <AlertsCard subscription={data.subscription} onChanged={() => void refetch()} />
+
+      <DangerZoneCard email={data.email} onDeleted={onDeleted} />
     </>
+  );
+}
+
+function DangerZoneCard({ email, onDeleted }: { email: string | null; onDeleted: () => void }) {
+  const [confirming, setConfirming] = useState(false);
+  const [typed, setTyped] = useState("");
+  const del = useDeleteAccount();
+
+  const confirmed = typed.trim().toLowerCase() === "delete";
+
+  const handleDelete = async () => {
+    if (!confirmed || del.isPending) return;
+    try {
+      await del.mutateAsync();
+      onDeleted();
+    } catch {
+      /* surfaced below */
+    }
+  };
+
+  return (
+    <div className="rounded-2xl border border-rose-200 bg-white p-5 space-y-3">
+      <p className="text-xs font-bold text-rose-700 uppercase tracking-wider inline-flex items-center gap-1.5">
+        <Trash2 className="w-3.5 h-3.5" /> danger zone
+      </p>
+      <p className="text-sm text-muted-foreground leading-relaxed">
+        deleting your account removes your details, all sign-in sessions and
+        the powder-alert subscription on {email ?? "your email"} · permanently.
+        there's no undo.
+      </p>
+
+      {!confirming ? (
+        <button
+          type="button"
+          onClick={() => setConfirming(true)}
+          className="rounded-lg border border-rose-300 text-rose-700 font-bold text-sm px-4 py-2.5 hover:bg-rose-50 transition inline-flex items-center gap-2"
+        >
+          <Trash2 className="w-4 h-4" /> delete my account
+        </button>
+      ) : (
+        <div className="space-y-3">
+          <label htmlFor="delete-confirm" className="text-sm font-bold text-foreground block">
+            type <span className="font-black text-rose-700">delete</span> to confirm
+          </label>
+          <input
+            id="delete-confirm"
+            type="text"
+            value={typed}
+            onChange={(e) => setTyped(e.target.value)}
+            autoComplete="off"
+            placeholder="delete"
+            className="w-full rounded-lg border border-border bg-white px-3 py-2.5 text-sm text-foreground"
+          />
+          {del.isError && (
+            <p className="text-sm text-rose-700 bg-rose-500/10 border border-rose-500/30 rounded-lg px-3 py-2">
+              couldn't delete your account · try again in a moment.
+            </p>
+          )}
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={handleDelete}
+              disabled={!confirmed || del.isPending}
+              className="rounded-lg bg-rose-600 text-white font-bold text-sm px-4 py-2.5 hover:bg-rose-700 disabled:opacity-50 transition inline-flex items-center gap-2"
+            >
+              {del.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
+              delete forever
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setConfirming(false);
+                setTyped("");
+              }}
+              disabled={del.isPending}
+              className="rounded-lg border border-border text-muted-foreground font-bold text-sm px-4 py-2.5 hover:text-foreground transition"
+            >
+              keep my account
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 

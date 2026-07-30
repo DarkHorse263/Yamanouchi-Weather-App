@@ -1,8 +1,9 @@
 import { Router, type IRouter, type Request, type Response } from "express";
 import { z } from "zod";
-import { db, usersTable, alertSubscribersTable } from "@workspace/db";
-import { eq } from "drizzle-orm";
+import { db, usersTable, alertSubscribersTable, sessionsTable } from "@workspace/db";
+import { eq, sql } from "drizzle-orm";
 import { REGION_IDS, isRegionId } from "../lib/regions.js";
+import { clearSession, getSessionId } from "../lib/auth.js";
 
 /**
  * Session-authorised account surface for signed-in members (magic-link email
@@ -200,6 +201,41 @@ router.put("/account/alerts", async (req, res): Promise<void> => {
   } catch (err) {
     console.error("[/account/alerts PUT] error:", err);
     res.status(500).json({ error: "ALERTS_UPDATE_FAILED" });
+  }
+});
+
+// ─── DELETE /account ──────────────────────────────────────────────────────
+// Permanent self-serve deletion · removes the users row, every session that
+// belongs to the member (not just the current one) and the alert subscriber
+// row for their email. Clears the session cookie so the client lands
+// signed-out immediately.
+router.delete("/account", async (req, res): Promise<void> => {
+  const user = requireUser(req, res);
+  if (!user) return;
+  try {
+    // Alert subscription tied to the member's email (delete outright · this
+    // is account deletion, not an unsubscribe).
+    if (user.email) {
+      await db
+        .delete(alertSubscribersTable)
+        .where(eq(alertSubscribersTable.email, user.email.trim().toLowerCase()));
+    }
+
+    // Every session belonging to this user id (sess is jsonb: { user: { id } }).
+    await db
+      .delete(sessionsTable)
+      .where(sql`${sessionsTable.sess} -> 'user' ->> 'id' = ${user.id}`);
+
+    // The users row itself (subscriptions FK cascades).
+    await db.delete(usersTable).where(eq(usersTable.id, user.id));
+
+    // Belt-and-braces: clear the cookie + any residual current session row.
+    await clearSession(res, getSessionId(req));
+
+    res.json({ ok: true });
+  } catch (err) {
+    console.error("[/account DELETE] error:", err);
+    res.status(500).json({ error: "ACCOUNT_DELETE_FAILED", message: "Couldn't delete your account · try again." });
   }
 });
 
