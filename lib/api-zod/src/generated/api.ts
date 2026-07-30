@@ -352,6 +352,104 @@ export const UnsubscribeFromAlertsResponse = zod.object({
 });
 
 /**
+ * Returns the member's email, profile basics (home region, units) and
+their powder-alert subscription (null when the email has no
+subscription). Requires an authenticated session cookie.
+
+ * @summary Load the signed-in member's account overview
+ */
+export const GetAccountResponse = zod.object({
+  ok: zod.boolean(),
+  email: zod.string().nullable(),
+  profile: zod.object({
+    homeRegionId: zod
+      .string()
+      .nullable()
+      .describe("Canonical region id (e.g. snowy-mountains) or null."),
+    units: zod.enum(["metric", "imperial"]),
+    displayName: zod.string().nullable(),
+  }),
+  subscription: zod.union([
+    zod.object({
+      email: zod.string(),
+      regions: zod.array(zod.string()),
+      mountains: zod.array(zod.string()),
+      snowfallThresholdCm: zod.number(),
+      horizonHours: zod.number(),
+      delivery: zod.enum(["email", "push", "both"]),
+      timezone: zod.string(),
+      verified: zod.boolean(),
+      unsubscribed: zod.boolean(),
+    }),
+    zod.null(),
+  ]),
+});
+
+/**
+ * @summary Update the signed-in member's profile basics
+ */
+export const UpdateAccountProfileBody = zod.object({
+  homeRegionId: zod
+    .string()
+    .nullish()
+    .describe("Canonical region id or null to clear."),
+  units: zod.enum(["metric", "imperial"]).optional(),
+});
+
+export const UpdateAccountProfileResponse = zod.object({
+  ok: zod.boolean(),
+  profile: zod.object({
+    homeRegionId: zod
+      .string()
+      .nullable()
+      .describe("Canonical region id (e.g. snowy-mountains) or null."),
+    units: zod.enum(["metric", "imperial"]),
+    displayName: zod.string().nullable(),
+  }),
+});
+
+/**
+ * Session-authorised variant of PUT /alerts/manage — edits the alert
+subscription belonging to the signed-in member's email, no manage
+token needed. 404 when the email has no subscription yet.
+
+ * @summary Update the signed-in member's powder-alert subscription
+ */
+
+export const updateAccountAlertsBodySnowfallThresholdCmMin = 5;
+export const updateAccountAlertsBodySnowfallThresholdCmMax = 50;
+
+export const UpdateAccountAlertsBody = zod.object({
+  regions: zod.array(zod.string()).min(1),
+  mountains: zod.array(zod.string()).optional(),
+  snowfallThresholdCm: zod
+    .number()
+    .min(updateAccountAlertsBodySnowfallThresholdCmMin)
+    .max(updateAccountAlertsBodySnowfallThresholdCmMax)
+    .optional(),
+  horizonHours: zod
+    .union([zod.literal(24), zod.literal(48), zod.literal(72)])
+    .optional(),
+  delivery: zod.enum(["email", "push", "both"]).optional(),
+  timezone: zod.string().optional(),
+});
+
+export const UpdateAccountAlertsResponse = zod.object({
+  ok: zod.boolean(),
+  subscriber: zod.object({
+    email: zod.string(),
+    regions: zod.array(zod.string()),
+    mountains: zod.array(zod.string()),
+    snowfallThresholdCm: zod.number(),
+    horizonHours: zod.number(),
+    delivery: zod.enum(["email", "push", "both"]),
+    timezone: zod.string(),
+    verified: zod.boolean(),
+    unsubscribed: zod.boolean(),
+  }),
+});
+
+/**
  * Returns top / mid / bottom band weather and snow for the next 7 days,
 sourced from Open-Meteo. The API server makes three Open-Meteo calls
 (one per elevation band) so the temperature lapse rate is applied per

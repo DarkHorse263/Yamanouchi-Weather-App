@@ -18,6 +18,8 @@ import type {
 
 import type {
   Accommodation,
+  AccountProfileResponse,
+  AccountResponse,
   AlertsData,
   Attraction,
   AuthUserEnvelope,
@@ -81,6 +83,7 @@ import type {
   UnsubscribeBody,
   UnsubscribeFromAlertsParams,
   UpdateAccommodationBody,
+  UpdateAccountProfileBody,
   UpdateAlertPreferencesParams,
   UpdateAttractionBody,
   UpdateDiningBody,
@@ -1163,6 +1166,262 @@ export const useUnsubscribeFromAlerts = <
   TContext
 > => {
   return useMutation(getUnsubscribeFromAlertsMutationOptions(options));
+};
+
+/**
+ * Returns the member's email, profile basics (home region, units) and
+their powder-alert subscription (null when the email has no
+subscription). Requires an authenticated session cookie.
+
+ * @summary Load the signed-in member's account overview
+ */
+export const getGetAccountUrl = () => {
+  return `/api/account`;
+};
+
+export const getAccount = async (
+  options?: RequestInit,
+): Promise<AccountResponse> => {
+  return customFetch<AccountResponse>(getGetAccountUrl(), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getGetAccountQueryKey = () => {
+  return [`/api/account`] as const;
+};
+
+export const getGetAccountQueryOptions = <
+  TData = Awaited<ReturnType<typeof getAccount>>,
+  TError = ErrorType<ErrorResponse>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof getAccount>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetAccountQueryKey();
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getAccount>>> = ({
+    signal,
+  }) => getAccount({ signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getAccount>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetAccountQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getAccount>>
+>;
+export type GetAccountQueryError = ErrorType<ErrorResponse>;
+
+/**
+ * @summary Load the signed-in member's account overview
+ */
+
+export function useGetAccount<
+  TData = Awaited<ReturnType<typeof getAccount>>,
+  TError = ErrorType<ErrorResponse>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof getAccount>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetAccountQueryOptions(options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * @summary Update the signed-in member's profile basics
+ */
+export const getUpdateAccountProfileUrl = () => {
+  return `/api/account/profile`;
+};
+
+export const updateAccountProfile = async (
+  updateAccountProfileBody: UpdateAccountProfileBody,
+  options?: RequestInit,
+): Promise<AccountProfileResponse> => {
+  return customFetch<AccountProfileResponse>(getUpdateAccountProfileUrl(), {
+    ...options,
+    method: "PUT",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(updateAccountProfileBody),
+  });
+};
+
+export const getUpdateAccountProfileMutationOptions = <
+  TError = ErrorType<ErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof updateAccountProfile>>,
+    TError,
+    { data: BodyType<UpdateAccountProfileBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof updateAccountProfile>>,
+  TError,
+  { data: BodyType<UpdateAccountProfileBody> },
+  TContext
+> => {
+  const mutationKey = ["updateAccountProfile"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof updateAccountProfile>>,
+    { data: BodyType<UpdateAccountProfileBody> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return updateAccountProfile(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type UpdateAccountProfileMutationResult = NonNullable<
+  Awaited<ReturnType<typeof updateAccountProfile>>
+>;
+export type UpdateAccountProfileMutationBody =
+  BodyType<UpdateAccountProfileBody>;
+export type UpdateAccountProfileMutationError = ErrorType<ErrorResponse>;
+
+/**
+ * @summary Update the signed-in member's profile basics
+ */
+export const useUpdateAccountProfile = <
+  TError = ErrorType<ErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof updateAccountProfile>>,
+    TError,
+    { data: BodyType<UpdateAccountProfileBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof updateAccountProfile>>,
+  TError,
+  { data: BodyType<UpdateAccountProfileBody> },
+  TContext
+> => {
+  return useMutation(getUpdateAccountProfileMutationOptions(options));
+};
+
+/**
+ * Session-authorised variant of PUT /alerts/manage — edits the alert
+subscription belonging to the signed-in member's email, no manage
+token needed. 404 when the email has no subscription yet.
+
+ * @summary Update the signed-in member's powder-alert subscription
+ */
+export const getUpdateAccountAlertsUrl = () => {
+  return `/api/account/alerts`;
+};
+
+export const updateAccountAlerts = async (
+  updatePreferencesBody: UpdatePreferencesBody,
+  options?: RequestInit,
+): Promise<ManageResponse> => {
+  return customFetch<ManageResponse>(getUpdateAccountAlertsUrl(), {
+    ...options,
+    method: "PUT",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(updatePreferencesBody),
+  });
+};
+
+export const getUpdateAccountAlertsMutationOptions = <
+  TError = ErrorType<ErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof updateAccountAlerts>>,
+    TError,
+    { data: BodyType<UpdatePreferencesBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof updateAccountAlerts>>,
+  TError,
+  { data: BodyType<UpdatePreferencesBody> },
+  TContext
+> => {
+  const mutationKey = ["updateAccountAlerts"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof updateAccountAlerts>>,
+    { data: BodyType<UpdatePreferencesBody> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return updateAccountAlerts(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type UpdateAccountAlertsMutationResult = NonNullable<
+  Awaited<ReturnType<typeof updateAccountAlerts>>
+>;
+export type UpdateAccountAlertsMutationBody = BodyType<UpdatePreferencesBody>;
+export type UpdateAccountAlertsMutationError = ErrorType<ErrorResponse>;
+
+/**
+ * @summary Update the signed-in member's powder-alert subscription
+ */
+export const useUpdateAccountAlerts = <
+  TError = ErrorType<ErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof updateAccountAlerts>>,
+    TError,
+    { data: BodyType<UpdatePreferencesBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof updateAccountAlerts>>,
+  TError,
+  { data: BodyType<UpdatePreferencesBody> },
+  TContext
+> => {
+  return useMutation(getUpdateAccountAlertsMutationOptions(options));
 };
 
 /**

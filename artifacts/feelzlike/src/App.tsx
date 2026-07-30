@@ -28,6 +28,7 @@ import Privacy from "@/pages/legal/Privacy";
 import Terms from "@/pages/legal/Terms";
 import TripPlanner from "@/pages/TripPlanner";
 import Premium from "@/pages/Premium";
+import Account from "@/pages/Account";
 import AdminStats from "@/pages/admin/AdminStats";
 
 const queryClient = new QueryClient();
@@ -58,6 +59,11 @@ function Router() {
           parsed as a region slug. */}
       <Route path="/premium" component={Premium} />
       <Route path="/premium/" component={Premium} />
+      {/* Member account page · signed-in only (signed-out visitors get the
+          free sign-up sheet). Mounted before /:region so /account isn't
+          parsed as a region slug. */}
+      <Route path="/account" component={Account} />
+      <Route path="/account/" component={Account} />
       {/* Multi-day trip planner · now a free feature (premium hidden), mounted
           before /:region catch-all so /plan isn't parsed as a region slug. */}
       <Route path="/plan" component={TripPlanner} />

@@ -107,7 +107,7 @@ export function AppShell({
   // hrefs to /:region/<path> and bounce them through TownLayout's
   // unknown-town redirect. The `~/` prefix is wouter's documented
   // escape that pins navigation to the app root.
-  const GLOBAL_MOUNTAIN_PATHS = new Set(["/premium", "/plan"]);
+  const GLOBAL_MOUNTAIN_PATHS = new Set(["/premium", "/plan", "/account"]);
   const isGlobalMountainPath = (p: string) => GLOBAL_MOUNTAIN_PATHS.has(p);
 
   const isActiveTown = (subpath: string) =>
@@ -196,6 +196,7 @@ export function AppShell({
     pushTown("/explore");           // Explore
     pushMountain("/plan");          // Trip planner (global /plan page)
     pushMountain("/premium");       // Premium hub (global /premium page)
+    pushMountain("/account");       // Member account (global /account page)
     // Future-proofing: append anything we forgot to enumerate above.
     townNav.forEach((it) => pushTown(it.path));
     mountainNav.forEach((it) => pushMountain(it.path));

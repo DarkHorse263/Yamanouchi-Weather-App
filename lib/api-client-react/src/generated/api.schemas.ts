@@ -410,6 +410,55 @@ export interface GenericOkResponse {
   message?: string;
 }
 
+export type AccountProfileUnits =
+  (typeof AccountProfileUnits)[keyof typeof AccountProfileUnits];
+
+export const AccountProfileUnits = {
+  metric: "metric",
+  imperial: "imperial",
+} as const;
+
+export interface AccountProfile {
+  /**
+   * Canonical region id (e.g. snowy-mountains) or null.
+   * @nullable
+   */
+  homeRegionId: string | null;
+  units: AccountProfileUnits;
+  /** @nullable */
+  displayName: string | null;
+}
+
+export interface AccountResponse {
+  ok: boolean;
+  /** @nullable */
+  email: string | null;
+  profile: AccountProfile;
+  subscription: SubscriberPreferences | null;
+}
+
+export interface AccountProfileResponse {
+  ok: boolean;
+  profile: AccountProfile;
+}
+
+export type UpdateAccountProfileBodyUnits =
+  (typeof UpdateAccountProfileBodyUnits)[keyof typeof UpdateAccountProfileBodyUnits];
+
+export const UpdateAccountProfileBodyUnits = {
+  metric: "metric",
+  imperial: "imperial",
+} as const;
+
+export interface UpdateAccountProfileBody {
+  /**
+   * Canonical region id or null to clear.
+   * @nullable
+   */
+  homeRegionId?: string | null;
+  units?: UpdateAccountProfileBodyUnits;
+}
+
 export type AccommodationType =
   (typeof AccommodationType)[keyof typeof AccommodationType];
 

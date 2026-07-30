@@ -134,9 +134,14 @@ export default function Premium() {
               <div className="flex-1 min-w-0">
                 <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">your account</p>
                 <p className="text-sm font-bold text-foreground mt-0.5 break-all">{email ?? "signed in"}</p>
-                <a href="/api/logout" className="text-sm text-muted-foreground underline hover:text-foreground mt-1 inline-block">
-                  sign out
-                </a>
+                <div className="mt-1 flex items-center gap-3">
+                  <Link href="/account" className="text-sm font-bold text-primary underline hover:text-primary/80">
+                    manage your account
+                  </Link>
+                  <a href="/api/logout" className="text-sm text-muted-foreground underline hover:text-foreground">
+                    sign out
+                  </a>
+                </div>
               </div>
             </div>
           ) : (

@@ -8,6 +8,7 @@ import {
   Compass,
   CalendarDays,
   Sparkles,
+  UserRound,
 } from "lucide-react";
 import type { NavItem } from "./types";
 
@@ -39,6 +40,9 @@ export const DEFAULT_MOUNTAIN_NAV: NavItem[] = [
   // open after). Global path (root-escaped in AppShell) so the region router
   // base doesn't rewrite it to /:region/premium.
   { path: "/premium", icon: Sparkles, label: "Premium", labelJa: "プレミアム" },
+  // Member account · alerts + details in one place. Global path (root-escaped
+  // in AppShell) like /premium; signed-out visitors get the sign-up sheet.
+  { path: "/account", icon: UserRound, label: "Account", labelJa: "アカウント" },
 ];
 
 /**

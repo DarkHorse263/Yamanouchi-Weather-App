@@ -21,6 +21,7 @@ import alertsInternalRouter from "./alerts-internal";
 import smokeInternalRouter from "./smoke-internal";
 import elevationForecastRouter from "./elevation-forecast";
 import authRouter from "./auth";
+import accountRouter from "./account";
 import authEmailRouter from "./auth-email";
 import adminRouter from "./admin";
 
@@ -48,6 +49,7 @@ router.use(alertsInternalRouter);
 router.use(smokeInternalRouter);
 router.use(elevationForecastRouter);
 router.use(authRouter);
+router.use(accountRouter);
 router.use(authEmailRouter);
 router.use("/admin", adminRouter);
 

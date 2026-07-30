@@ -48,6 +48,8 @@ export function HomeFooter() {
           {sep}
           <a className={linkCls} href="mailto:info@feelzlike.com">contact</a>
           {sep}
+          <a className={linkCls} href="/account">account</a>
+          {sep}
           <div className="relative inline-flex items-baseline">
             <button
               type="button"

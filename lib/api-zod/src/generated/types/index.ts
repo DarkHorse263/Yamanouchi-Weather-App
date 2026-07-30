@@ -8,6 +8,10 @@
 
 export * from "./accommodation";
 export * from "./accommodationType";
+export * from "./accountProfile";
+export * from "./accountProfileResponse";
+export * from "./accountProfileUnits";
+export * from "./accountResponse";
 export * from "./alertsData";
 export * from "./attraction";
 export * from "./attractionCategory";
@@ -148,6 +152,8 @@ export * from "./townSlug";
 export * from "./unsubscribeBody";
 export * from "./unsubscribeFromAlertsParams";
 export * from "./updateAccommodationBody";
+export * from "./updateAccountProfileBody";
+export * from "./updateAccountProfileBodyUnits";
 export * from "./updateAlertPreferencesParams";
 export * from "./updateAttractionBody";
 export * from "./updateDiningBody";

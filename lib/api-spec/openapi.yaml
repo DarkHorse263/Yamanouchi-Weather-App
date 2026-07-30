@@ -298,6 +298,101 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
 
+  /account:
+    get:
+      operationId: getAccount
+      tags: [Auth]
+      summary: Load the signed-in member's account overview
+      description: |
+        Returns the member's email, profile basics (home region, units) and
+        their powder-alert subscription (null when the email has no
+        subscription). Requires an authenticated session cookie.
+      responses:
+        "200":
+          description: Account overview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountResponse"
+        "401":
+          description: Not signed in
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /account/profile:
+    put:
+      operationId: updateAccountProfile
+      tags: [Auth]
+      summary: Update the signed-in member's profile basics
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateAccountProfileBody"
+      responses:
+        "200":
+          description: Updated profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountProfileResponse"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: Not signed in
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /account/alerts:
+    put:
+      operationId: updateAccountAlerts
+      tags: [Auth]
+      summary: Update the signed-in member's powder-alert subscription
+      description: |
+        Session-authorised variant of PUT /alerts/manage — edits the alert
+        subscription belonging to the signed-in member's email, no manage
+        token needed. 404 when the email has no subscription yet.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePreferencesBody"
+      responses:
+        "200":
+          description: Updated subscription
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ManageResponse"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: Not signed in
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: No subscription for this email
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
   /elevation-forecast:
     get:
       operationId: getElevationForecast
@@ -1980,6 +2075,62 @@ components:
           type: string
       required:
         - ok
+
+    AccountProfile:
+      type: object
+      properties:
+        homeRegionId:
+          type: ["string", "null"]
+          description: Canonical region id (e.g. snowy-mountains) or null.
+        units:
+          type: string
+          enum: [metric, imperial]
+        displayName:
+          type: ["string", "null"]
+      required:
+        - homeRegionId
+        - units
+        - displayName
+
+    AccountResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        email:
+          type: ["string", "null"]
+        profile:
+          $ref: "#/components/schemas/AccountProfile"
+        subscription:
+          oneOf:
+            - $ref: "#/components/schemas/SubscriberPreferences"
+            - type: "null"
+      required:
+        - ok
+        - email
+        - profile
+        - subscription
+
+    AccountProfileResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        profile:
+          $ref: "#/components/schemas/AccountProfile"
+      required:
+        - ok
+        - profile
+
+    UpdateAccountProfileBody:
+      type: object
+      properties:
+        homeRegionId:
+          type: ["string", "null"]
+          description: Canonical region id or null to clear.
+        units:
+          type: string
+          enum: [metric, imperial]
 
     Accommodation:
       type: object
