@@ -55,6 +55,7 @@ export function SignUpSheet({ open, initialEmail, feature, returnTo, onClose }: 
   };
 
   const errMessage = mutation.error ? extractErrorMessage(mutation.error) : null;
+  const suggestion = suggestEmailFix(email);
 
   return (
     <div
@@ -136,6 +137,16 @@ export function SignUpSheet({ open, initialEmail, feature, returnTo, onClose }: 
               />
             </label>
 
+            {suggestion && (
+              <button
+                type="button"
+                onClick={() => setEmail(suggestion)}
+                className="text-xs text-sky-700 hover:underline text-left"
+              >
+                {t(`did you mean ${suggestion}?`, `${suggestion} ですか？`)}
+              </button>
+            )}
+
             {errMessage && (
               <div className="text-xs text-rose-500 bg-rose-500/10 border border-rose-500/30 rounded-lg px-3 py-2">
                 {errMessage}
@@ -165,6 +176,46 @@ export function SignUpSheet({ open, initialEmail, feature, returnTo, onClose }: 
 
 function formatDate(d: Date): string {
   return d.toLocaleDateString("en-AU", { month: "long", day: "numeric", year: "numeric" }).toLowerCase();
+}
+
+// Gentle "did you mean …?" for the most common email-domain typos. Never
+// blocks sending · just offers a one-tap fix under the input.
+const DOMAIN_FIXES: Record<string, string> = {
+  "gamil.com": "gmail.com",
+  "gmial.com": "gmail.com",
+  "gmai.com": "gmail.com",
+  "gmal.com": "gmail.com",
+  "gmaill.com": "gmail.com",
+  "gmail.co": "gmail.com",
+  "gmail.con": "gmail.com",
+  "gmail.cm": "gmail.com",
+  "hotmial.com": "hotmail.com",
+  "hotmal.com": "hotmail.com",
+  "hotmali.com": "hotmail.com",
+  "hotmai.com": "hotmail.com",
+  "hotmail.co": "hotmail.com",
+  "hotmail.con": "hotmail.com",
+  "outlok.com": "outlook.com",
+  "outloook.com": "outlook.com",
+  "outlook.co": "outlook.com",
+  "outlook.con": "outlook.com",
+  "yaho.com": "yahoo.com",
+  "yahooo.com": "yahoo.com",
+  "yahoo.con": "yahoo.com",
+  "icoud.com": "icloud.com",
+  "iclould.com": "icloud.com",
+  "icloud.co": "icloud.com",
+  "icloud.con": "icloud.com",
+  "bigpon.com": "bigpond.com",
+  "bigpond.co": "bigpond.com",
+};
+
+function suggestEmailFix(email: string): string | null {
+  const at = email.lastIndexOf("@");
+  if (at < 1) return null;
+  const domain = email.slice(at + 1).toLowerCase();
+  const fix = DOMAIN_FIXES[domain];
+  return fix ? email.slice(0, at + 1) + fix : null;
 }
 
 function extractErrorMessage(err: unknown): string {

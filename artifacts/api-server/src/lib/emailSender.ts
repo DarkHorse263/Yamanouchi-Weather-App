@@ -26,6 +26,40 @@ interface SendResult {
   provider: "resend" | "console";
   providerId?: string;
   error?: string;
+  /**
+   * True when the provider rejected the message outright (HTTP 4xx, e.g. an
+   * invalid or suppressed recipient) - retrying the same address won't help,
+   * so callers should surface it instead of pretending the email is coming.
+   */
+  permanent?: boolean;
+}
+
+// Repeated-failure visibility: count consecutive failed sends per address so
+// server logs show "this address keeps failing" instead of isolated warnings.
+// In-memory only (resets on restart) - it's a log signal, not a data store.
+const failureCounts = new Map<string, { count: number; last: number }>();
+const FAILURE_MAP_CAP = 500;
+
+function noteSendFailure(to: string, detail: string): void {
+  const key = to.trim().toLowerCase();
+  const count = (failureCounts.get(key)?.count ?? 0) + 1;
+  failureCounts.set(key, { count, last: Date.now() });
+  if (failureCounts.size > FAILURE_MAP_CAP) {
+    let oldestKey: string | null = null;
+    let oldestLast = Infinity;
+    for (const [k, v] of failureCounts) {
+      if (v.last < oldestLast) {
+        oldestLast = v.last;
+        oldestKey = k;
+      }
+    }
+    if (oldestKey) failureCounts.delete(oldestKey);
+  }
+  console.warn(`[emailSender] send to ${key} failed (${count} failure${count === 1 ? "" : "s"} so far): ${detail}`);
+}
+
+function clearSendFailures(to: string): void {
+  failureCounts.delete(to.trim().toLowerCase());
 }
 
 const FROM = process.env.ALERT_FROM_EMAIL ?? "feelzlike alerts <onboarding@resend.dev>";
@@ -68,14 +102,19 @@ export async function sendEmail(args: SendArgs): Promise<SendResult> {
     });
     if (!res.ok) {
       const body = await res.text().catch(() => "");
-      console.warn(`[emailSender] Resend ${res.status}: ${body}`);
-      return { delivered: false, provider: "resend", error: `${res.status}: ${body.slice(0, 200)}` };
+      // 4xx = the provider rejected this message (bad recipient, suppressed
+      // address, validation error) - a retry with the same input won't help.
+      // 5xx / network = transient provider trouble.
+      const permanent = res.status >= 400 && res.status < 500 && res.status !== 429;
+      noteSendFailure(args.to, `Resend ${res.status}: ${body.slice(0, 200)}`);
+      return { delivered: false, provider: "resend", error: `${res.status}: ${body.slice(0, 200)}`, permanent };
     }
     const json = (await res.json().catch(() => ({}))) as { id?: string };
+    clearSendFailures(args.to);
     return { delivered: true, provider: "resend", providerId: json.id };
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : String(err);
-    console.warn(`[emailSender] send failed:`, message);
-    return { delivered: false, provider: "resend", error: message };
+    noteSendFailure(args.to, message);
+    return { delivered: false, provider: "resend", error: message, permanent: false };
   }
 }

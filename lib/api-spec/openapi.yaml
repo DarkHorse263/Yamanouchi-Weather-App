@@ -1372,6 +1372,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+        '502':
+          description: The email provider could not deliver the sign-in link (e.g. rejected recipient).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /auth/email/verify:
     get:
       tags: [Auth]

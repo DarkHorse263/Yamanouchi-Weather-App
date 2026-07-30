@@ -63,6 +63,18 @@ router.post("/auth/email/request", requestLimiter, async (req: Request, res: Res
     const tmpl = signInEmail(signInUrl);
     const send = await sendEmail({ to: email, subject: tmpl.subject, html: tmpl.html, text: tmpl.text, tag: "auth_signin" });
 
+    // A real provider tried and failed · don't pretend the email is coming.
+    // (Console/dev mode still returns "sent" with the dev verify link below.)
+    if (!send.delivered && send.provider === "resend") {
+      res.status(502).json({
+        error: "EMAIL_SEND_FAILED",
+        message: send.permanent
+          ? "we couldn't send to that address · check it's typed correctly and try again."
+          : "we couldn't send the sign-in link just now · try again in a minute.",
+      });
+      return;
+    }
+
     res.json({
       ok: true,
       status: "sent",

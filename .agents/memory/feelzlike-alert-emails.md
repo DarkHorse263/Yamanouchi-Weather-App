@@ -14,4 +14,8 @@ description: branded email templates + Resend sender domain state for powder ale
 - FROM is env-driven with fallback `feelzlike alerts <onboarding@resend.dev>` (delivers to account owner only) — that fallback only matters if the env var is ever deleted.
 - **Why env-checking is awkward:** the RESEND_API_KEY is a send-only restricted key — `GET /domains` returns 401. To check verification without dashboard access, test-send from the domain to Resend's sink `delivered@resend.dev`: 200 = verified, error = not yet.
 - Exchange Online root MX/SPF untouched by Resend's records (they live on Resend's own subdomain); keep Resend "Enable Receiving" OFF or it would fight the Microsoft MX.
+## Send-failure honesty (jul 2026)
+- `sendEmail` returns `permanent` (Resend 4xx except 429 = retry won't help) and logs a per-address consecutive-failure counter; the magic-link request route returns 502 EMAIL_SEND_FAILED instead of a fake "check your email" when a real provider send fails. Console/dev mode still fakes "sent" + devVerifyUrl. Don't reintroduce always-200 on send failure.
+- Sync-only: Resend can accept (200) then bounce async — those still look "sent" without bounce webhooks.
+
 - alerts@feelzlike.com is send-only (no mailbox) — all sends set `reply_to` (env `ALERT_REPLY_TO_EMAIL`, default `info@feelzlike.com`, the owner's real Exchange mailbox; enquiries@ aliases to it). Owner's mailbox/alias setup lives in Webcentral/Microsoft, never in our DNS or code.
