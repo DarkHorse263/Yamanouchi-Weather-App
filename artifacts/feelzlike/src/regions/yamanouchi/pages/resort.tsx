@@ -47,6 +47,7 @@ import { EnsembleForecast } from "@/components/weather/EnsembleForecast";
 import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
 import { midMountainElevation } from "@/lib/elevation";
 import { cn } from "@/lib/utils";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
 import { BarChart2 } from "lucide-react";
 
 type WeatherId = Parameters<typeof useGetLocationWeather>[0];
@@ -134,6 +135,7 @@ export default function ResortDetail() {
   const id = params?.id ?? "";
   const { t } = useLanguage();
   const { region } = useRegion();
+  const u = useUnits();
   const [activeChartMetric, setActiveChartMetric] = useState<"temperature" | "snowfall" | "windSpeed">("temperature");
 
   // Source of truth for "is this a real mountain in this region" is the
@@ -195,7 +197,7 @@ export default function ResortDetail() {
   };
 
   const stats: ConditionStat[] = [
-    { label: t("feelzlike", "体感"), value: `${Math.round(current.feelsLike)}°C`, icon: Thermometer },
+    { label: t("feelzlike", "体感"), value: `${u.temp(current.feelsLike)}${u.tempUnit}`, icon: Thermometer },
     {
       label: t("Wind", "風"),
       value: `${current.windSpeed} km/h${current.windDirectionCompass ? ` ${current.windDirectionCompass}` : ""}`,
@@ -207,12 +209,12 @@ export default function ResortDetail() {
     { label: t("Humidity", "湿度"), value: `${current.humidity}%`, icon: Droplets },
     {
       label: t("Snow depth · model", "積雪 · 予測値"),
-      value: current.snowDepth != null ? `${current.snowDepth} cm` : "-",
+      value: current.snowDepth != null ? u.snow(current.snowDepth) : "-",
       icon: Snowflake,
       accent: "snow",
     },
     ...(current.dewpoint !== undefined
-      ? [{ label: t("Dew point", "露点"), value: `${Math.round(current.dewpoint)}°C`, icon: Droplets }]
+      ? [{ label: t("Dew point", "露点"), value: `${u.temp(current.dewpoint)}${u.tempUnit}`, icon: Droplets }]
       : []),
     ...(current.pressure !== undefined
       ? [{ label: t("Pressure", "気圧"), value: `${Math.round(current.pressure)} hPa`, icon: Gauge }]

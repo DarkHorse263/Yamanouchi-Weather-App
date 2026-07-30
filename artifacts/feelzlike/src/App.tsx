@@ -15,6 +15,7 @@ import { OfflineBanner } from "@/components/OfflineBanner";
 import { PullToRefresh } from "@/components/PullToRefresh";
 import { AppErrorBoundary } from "@/components/AppErrorBoundary";
 import { SignUpProvider } from "@/components/auth/SignUpProvider";
+import { UserPrefsProvider } from "@/components/auth/UserPrefsProvider";
 import { identifyAnonUser, track } from "@/lib/analytics";
 import { isStandaloneMode } from "@/lib/registerSW";
 import { useEffect, useRef } from "react";
@@ -296,7 +297,11 @@ function App() {
               {/* Soft member gate · wires account state + the free sign-up
                   sheet into PremiumGate. Never prompts on page load. */}
               <SignUpProvider>
-                <Router />
+                {/* Member prefs (home region + units) · metric defaults for
+                    anonymous visitors, account-backed for members. */}
+                <UserPrefsProvider>
+                  <Router />
+                </UserPrefsProvider>
               </SignUpProvider>
             </WouterRouter>
             <ConsentBanner />

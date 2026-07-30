@@ -2,6 +2,9 @@ import { motion } from "framer-motion";
 import { useEffect, useState, type CSSProperties } from "react";
 import { Link } from "wouter";
 import { markLandingVisited, readLastTown, type LastTown } from "@/lib/favouriteRegion";
+import { useAuthAccount } from "@/components/auth/SignUpProvider";
+import { useUserPrefs } from "@/components/auth/UserPrefsProvider";
+import { ALERT_REGIONS } from "@/components/AlertSubscribeForm";
 import logoFullColour from "/branding/logo-full-colour.png?url";
 import { NearYou } from "@/components/home/NearYou";
 import { CountryPicker } from "@/components/home/CountryPicker";
@@ -17,6 +20,15 @@ const pretty:  CSSProperties = { textWrap: "pretty"  as CSSProperties["textWrap"
 
 export default function Welcome() {
   const [lastTown, setLastTown] = useState<LastTown | null>(null);
+  const { isAuthenticated } = useAuthAccount();
+  const { homeRegionId } = useUserPrefs();
+
+  // Signed-in members with a saved home region (/account) get a one-tap
+  // shortcut straight to it. Anonymous visitors never see this.
+  const homeRegion =
+    isAuthenticated && homeRegionId
+      ? (ALERT_REGIONS.find((r) => r.id === homeRegionId) ?? null)
+      : null;
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -53,10 +65,33 @@ export default function Welcome() {
             real conditions for mountain travel
           </p>
 
+          {/* Home region shortcut · members who saved a home region on
+              /account land one tap from it. */}
+          {homeRegion && (
+            <motion.div
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="mt-2"
+            >
+              <Link
+                href={`/${homeRegion.id}/`}
+                onClick={() => track("welcome_home_region_click", { category: "navigation" })}
+                className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50/70 px-4 py-2 transition-colors hover:border-sky-300 hover:bg-sky-100"
+              >
+                <span aria-hidden="true" className="text-sky-700">&#9825;</span>
+                <span className="text-sm font-medium text-sky-800">
+                  your home region · {homeRegion.nameEn.toLowerCase()}
+                </span>
+              </Link>
+            </motion.div>
+          )}
+
           {/* Return shortcut · skips the pickers for users who've already
               settled on a base town. Only renders when a valid lastTown exists
-              in localStorage (set on TownLayout mount). */}
-          {lastTown && (
+              in localStorage (set on TownLayout mount). Hidden when it would
+              duplicate the home-region chip above. */}
+          {lastTown && lastTown.regionId !== homeRegion?.id && (
             <motion.div
               initial={{ opacity: 0, y: -4 }}
               animate={{ opacity: 1, y: 0 }}

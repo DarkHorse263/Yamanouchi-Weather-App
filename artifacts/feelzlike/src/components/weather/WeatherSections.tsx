@@ -24,12 +24,15 @@ import {
   type TownWeatherStaleMeta,
   type TownObservedSnow,
 } from "@/lib/town-weather";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
 
 // Presentational weather sections shared by the town forecast page
 // (src/pages/town/TownWeather.tsx) and the visitor "near you" page
 // (src/pages/NearYouWeather.tsx). Every component here is context-free: it
 // takes plain data + a `t(en, ja)` translator prop, so it renders identically
-// whether or not a LanguageProvider / RegionProvider wraps the tree. The
+// whether or not a LanguageProvider / RegionProvider wraps the tree. (useUnits
+// is safe here: it falls back to metric defaults when no UserPrefsProvider
+// wraps the tree, so these stay renderable in isolation.) The
 // page-level radar and headers stay with their pages because those DO depend
 // on region/season context.
 
@@ -82,6 +85,7 @@ export function WeatherHero({
   placeLabel?: string;
 }) {
   const Icon = pickIcon(current.weatherCode, current.isDay);
+  const u = useUnits();
   return (
     <section className="mt-6 rounded-2xl border border-border bg-white p-6 md:p-8">
       <div className="flex items-start gap-6 flex-wrap">
@@ -89,8 +93,8 @@ export function WeatherHero({
           <Icon className={`w-16 h-16 ${Icon === Snowflake ? "text-snow-accent" : "text-primary"}`} strokeWidth={1.4} />
           <div>
             <p className="font-display font-semibold text-6xl md:text-7xl tracking-tight text-foreground leading-none">
-              {current.temperature !== null ? Math.round(current.temperature) : "-"}
-              <span className="text-3xl text-muted-foreground/70 align-top ml-1">°C</span>
+              {u.temp(current.temperature) ?? "-"}
+              <span className="text-3xl text-muted-foreground/70 align-top ml-1">{u.tempUnit}</span>
             </p>
             <p className="text-muted-foreground mt-2">
               {current.weatherDescription}
@@ -98,7 +102,7 @@ export function WeatherHero({
                 <>
                   {" · "}
                   <span className="text-foreground/80">
-                    feelzlike {Math.round(current.feelsLike)}°
+                    feelzlike {u.temp(current.feelsLike)}°
                   </span>
                 </>
               )}
@@ -189,6 +193,7 @@ export function WeatherToday({
   daily: TownWeatherDaily | undefined;
   t: Translate;
 }) {
+  const u = useUnits();
   if (!daily) return null;
   return (
     <section className="mt-4 rounded-2xl border border-border bg-white p-5">
@@ -196,8 +201,8 @@ export function WeatherToday({
         <p className="byline text-muted-foreground/70">{t("Today", "今日")}</p>
       </div>
       <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4">
-        <KV label={t("High", "最高")} value={daily.tempMax !== null ? `${Math.round(daily.tempMax)}°` : "-"} icon={Thermometer} />
-        <KV label={t("Low", "最低")} value={daily.tempMin !== null ? `${Math.round(daily.tempMin)}°` : "-"} icon={Thermometer} />
+        <KV label={t("High", "最高")} value={daily.tempMax !== null ? `${u.temp(daily.tempMax)}°` : "-"} icon={Thermometer} />
+        <KV label={t("Low", "最低")} value={daily.tempMin !== null ? `${u.temp(daily.tempMin)}°` : "-"} icon={Thermometer} />
         <KV label={t("Sunrise", "日の出")} value={fmtTime(daily.sunrise)} icon={Sunrise} />
         <KV label={t("Sunset", "日の入")} value={fmtTime(daily.sunset)} icon={Sunset} />
         <KV
@@ -207,7 +212,7 @@ export function WeatherToday({
         />
         <KV
           label={t("Snow", "降雪")}
-          value={daily.snowfallSum !== null && daily.snowfallSum > 0 ? `${daily.snowfallSum.toFixed(1)} cm` : "0 cm"}
+          value={daily.snowfallSum !== null && daily.snowfallSum > 0 ? u.snow(daily.snowfallSum, 1) : `0 ${u.snowUnit}`}
           icon={CloudSnow}
         />
       </div>
@@ -228,6 +233,7 @@ export function ObservedSnowCard({
   obs: TownObservedSnow;
   t: Translate;
 }) {
+  const u = useUnits();
   const stationLine = [
     `JMA AMeDAS · ${obs.stationName}`,
     obs.stationElevationM !== null ? `${Math.round(obs.stationElevationM)}m` : null,
@@ -248,12 +254,12 @@ export function ObservedSnowCard({
       <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-4">
         <KV
           label={t("Snow depth", "積雪深")}
-          value={`${Math.round(obs.depthCm)} cm`}
+          value={u.snow(obs.depthCm)}
           icon={Snowflake}
         />
         <KV
           label={t("Last 24h", "24時間降雪")}
-          value={obs.snowfall24hCm !== null ? `${Math.round(obs.snowfall24hCm)} cm` : "-"}
+          value={obs.snowfall24hCm !== null ? u.snow(obs.snowfall24hCm) : "-"}
           icon={CloudSnow}
         />
       </div>
@@ -269,6 +275,7 @@ export function WeatherHourly({
   hourly: TownWeatherHourly[];
   t: Translate;
 }) {
+  const u = useUnits();
   if (hourly.length === 0) return null;
   // Find min/max temps for chart scaling
   const temps = hourly.map((h) => h.temperature ?? 0);
@@ -281,7 +288,7 @@ export function WeatherHourly({
       <div className="flex items-center justify-between">
         <p className="byline text-muted-foreground/70">{t("Next 24 hours", "24時間予報")}</p>
         <p className="text-[11px] text-muted-foreground/60">
-          {Math.round(minT)}° to {Math.round(maxT)}°
+          {u.temp(minT)}° to {u.temp(maxT)}°
         </p>
       </div>
       <div className="mt-4 -mx-2 overflow-x-auto">
@@ -297,7 +304,7 @@ export function WeatherHourly({
                 </p>
                 <Icon className={`w-4 h-4 ${Icon === Snowflake ? "text-snow-accent" : "text-primary/80"}`} strokeWidth={1.5} />
                 <p className="text-xs font-medium text-foreground mt-1">
-                  {h.temperature !== null ? Math.round(h.temperature) : "-"}°
+                  {u.temp(h.temperature) ?? "-"}°
                 </p>
                 <div className="h-12 w-full flex items-end mt-1">
                   <div
@@ -324,6 +331,7 @@ export function WeatherOutlook({
   days: TownWeatherDaily[];
   t: Translate;
 }) {
+  const u = useUnits();
   if (days.length === 0) return null;
   return (
     <section className="mt-4 rounded-2xl border border-border bg-white p-5">
@@ -348,10 +356,10 @@ export function WeatherOutlook({
               </p>
               <p className="mt-2 text-sm">
                 <span className="font-semibold text-foreground">
-                  {d.tempMax !== null ? Math.round(d.tempMax) : "-"}°
+                  {u.temp(d.tempMax) ?? "-"}°
                 </span>
                 <span className="text-muted-foreground/70 ml-2">
-                  {d.tempMin !== null ? Math.round(d.tempMin) : "-"}°
+                  {u.temp(d.tempMin) ?? "-"}°
                 </span>
               </p>
 
@@ -389,8 +397,8 @@ export function WeatherOutlook({
                   label={t("Snow", "雪")}
                   value={
                     d.snowfallSum !== null && d.snowfallSum > 0
-                      ? `${d.snowfallSum.toFixed(1)} cm`
-                      : "0 cm"
+                      ? u.snow(d.snowfallSum, 1)
+                      : `0 ${u.snowUnit}`
                   }
                 />
               </div>

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "wouter";
 import {
   ArrowLeft,
@@ -168,6 +169,7 @@ function ProfileCard({
   const [units, setUnits] = useState<"metric" | "imperial">(initialUnits);
   const [savedAt, setSavedAt] = useState<number | null>(null);
   const update = useUpdateAccountProfile();
+  const queryClient = useQueryClient();
 
   const dirty = (homeRegionId || null) !== initialHomeRegionId || units !== initialUnits || savedAt !== null;
 
@@ -175,6 +177,9 @@ function ProfileCard({
     try {
       await update.mutateAsync({ data: { homeRegionId: homeRegionId || null, units } });
       setSavedAt(Date.now());
+      // The app-wide UserPrefsProvider shares the "account" query · refresh it
+      // so units / home region flip everywhere immediately, not on next load.
+      void queryClient.invalidateQueries({ queryKey: ["account"] });
     } catch {
       /* surfaced below */
     }

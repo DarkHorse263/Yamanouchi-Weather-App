@@ -45,6 +45,7 @@ import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
 import { midMountainElevation } from "@/lib/elevation";
 import { getLiftsForMountain } from "@/data/lifts";
 import { cn } from "@/lib/utils";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
 import { dailyRainMm } from "@/lib/precip";
 import { BarChart2 } from "lucide-react";
 import { useState } from "react";
@@ -77,6 +78,7 @@ export function MountainDetail() {
   const { t } = useLanguage();
   const seasonCtx = useOptionalSeason();
   const isGreen = seasonCtx?.season === "green";
+  const u = useUnits();
   const [activeChartMetric, setActiveChartMetric] = useState<"temperature" | "snowfall" | "windSpeed">("temperature");
 
   // Pull mountain coords + summit elevation from the region config so the
@@ -255,8 +257,8 @@ export function MountainDetail() {
                 <Icon className={cn("w-16 h-16", Icon === Snowflake ? "text-snow-accent" : "text-primary")} strokeWidth={1.4} />
                 <div>
                   <p className="font-display font-semibold text-6xl md:text-7xl tracking-tight text-foreground leading-none">
-                    {current.temperature !== null ? Math.round(current.temperature) : "-"}
-                    <span className="text-3xl text-muted-foreground/70 align-top ml-1">°C</span>
+                    {u.temp(current.temperature) ?? "-"}
+                    <span className="text-3xl text-muted-foreground/70 align-top ml-1">{u.tempUnit}</span>
                   </p>
                   <p className="text-muted-foreground mt-2">
                     {current.weatherDescription}
@@ -264,7 +266,7 @@ export function MountainDetail() {
                       <>
                         {" · "}
                         <span className="text-foreground/80">
-                          feelzlike {Math.round(current.feelsLike)}°
+                          feelzlike {u.temp(current.feelsLike)}°
                         </span>
                       </>
                     )}
@@ -326,13 +328,13 @@ export function MountainDetail() {
                       // overstated as THE base. baseCm alone = single figure.
                       resortReport.baseMinCm != null &&
                         Math.round(resortReport.baseMinCm) !== Math.round(resortReport.baseCm)
-                      ? `${Math.round(resortReport.baseMinCm)}-${Math.round(resortReport.baseCm)}`
-                      : `${Math.round(resortReport.baseCm)}`
+                      ? `${u.snowVal(resortReport.baseMinCm)}-${u.snowVal(resortReport.baseCm)}`
+                      : u.snowVal(resortReport.baseCm)
                     : modelDepthTrusted && current.snowDepth !== null && current.snowDepth !== undefined
-                      ? `${Math.round(current.snowDepth)}`
+                      ? u.snowVal(current.snowDepth)
                       : "-"
                 }
-                unit="cm"
+                unit={u.snowUnit}
               />
               {/* Model-estimated, so it carries the same "· model" honesty
                   label as snow depth - it is not a resort measurement. */}
@@ -341,20 +343,20 @@ export function MountainDetail() {
                 label={t("Snow last 24h · model", "過去24時間降雪 · 予測値")}
                 value={
                   current.snowfallPast24h !== null && current.snowfallPast24h !== undefined
-                    ? current.snowfallPast24h.toFixed(1)
+                    ? u.snowVal(current.snowfallPast24h, 1)
                     : "-"
                 }
-                unit="cm"
+                unit={u.snowUnit}
               />
               <BigStat
                 icon={CloudSnow}
                 label={t("Snow next 24h", "24時間降雪")}
                 value={
                   current.snowfallNext24h !== null && current.snowfallNext24h !== undefined
-                    ? current.snowfallNext24h.toFixed(1)
+                    ? u.snowVal(current.snowfallNext24h, 1)
                     : "-"
                 }
-                unit="cm"
+                unit={u.snowUnit}
               />
               <BigStat
                 icon={Wind}
@@ -386,12 +388,12 @@ export function MountainDetail() {
               <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4">
                 <KV
                   label={t("High", "最高")}
-                  value={daily[0].maxTemp !== null && daily[0].maxTemp !== undefined ? `${Math.round(daily[0].maxTemp)}°` : "-"}
+                  value={daily[0].maxTemp !== null && daily[0].maxTemp !== undefined ? `${u.temp(daily[0].maxTemp)}°` : "-"}
                   icon={Thermometer}
                 />
                 <KV
                   label={t("Low", "最低")}
-                  value={daily[0].minTemp !== null && daily[0].minTemp !== undefined ? `${Math.round(daily[0].minTemp)}°` : "-"}
+                  value={daily[0].minTemp !== null && daily[0].minTemp !== undefined ? `${u.temp(daily[0].minTemp)}°` : "-"}
                   icon={Thermometer}
                 />
                 <KV
@@ -416,8 +418,8 @@ export function MountainDetail() {
                   label={t("Snow", "降雪")}
                   value={
                     daily[0].snowfallSum !== null && daily[0].snowfallSum !== undefined && daily[0].snowfallSum > 0
-                      ? `${daily[0].snowfallSum.toFixed(1)} cm`
-                      : "0 cm"
+                      ? u.snow(daily[0].snowfallSum, 1)
+                      : `0 ${u.snowUnit}`
                   }
                   icon={CloudSnow}
                 />

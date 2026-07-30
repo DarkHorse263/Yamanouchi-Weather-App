@@ -110,6 +110,7 @@ import { isLiftSeasonOpen } from "@/lib/skiSeason";
 import { REGION_COUNTRY } from "@/regions";
 import { getLiftsForMountain } from "@/data/lifts";
 import { POWDER_THRESHOLDS_AU } from "@/types/weather";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
 import { PremiumGate, useOptionalSeason } from "@workspace/feelzlike-shell";
 import { ThredboSummer } from "../components/ThredboSummer";
 import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
@@ -164,6 +165,7 @@ export default function LocationDetail() {
   const params = mParams ?? rParams;
   const locationId = params?.id as LocationId;
   const { region } = useRegion();
+  const u = useUnits();
 
   // Headline snow is derived ON-MOUNTAIN (mid-mountain), not at the village -
   // snow falls higher up, so the village figure understates what riders see.
@@ -257,7 +259,7 @@ export default function LocationDetail() {
   })();
 
   const stats = [
-    { label: "feelzlike", value: formatTemp(current.feelsLike), icon: Thermometer },
+    { label: "feelzlike", value: `${u.temp(current.feelsLike)}${u.tempUnit}`, icon: Thermometer },
     { label: "Wind", value: `${current.windSpeed} km/h${current.windDirectionCompass ? ` ${current.windDirectionCompass}` : ""}`, icon: Navigation },
     ...(current.windGust ? [{ label: "Gusts", value: `${current.windGust} km/h`, icon: Wind }] : []),
     { label: "Humidity", value: `${current.humidity}%`, icon: Droplets },
@@ -266,16 +268,16 @@ export default function LocationDetail() {
     // no report means "not reported" - never a confidently wrong model ~0.
     resortReport
       ? reportSource === "course"
-        ? { label: `Snow depth · ${resortReport.sourceName}${courseDateLabel ? ` · ${courseDateLabel}` : ""}`, value: `${Math.round(resortReport.baseCm)} cm`, icon: Snowflake }
-        : { label: `Snow depth · resort reported · ${formatAgo(resortReport.updatedAt, now)}`, value: `${Math.round(resortReport.baseCm)} cm`, icon: Snowflake }
+        ? { label: `Snow depth · ${resortReport.sourceName}${courseDateLabel ? ` · ${courseDateLabel}` : ""}`, value: u.snow(resortReport.baseCm), icon: Snowflake }
+        : { label: `Snow depth · resort reported · ${formatAgo(resortReport.updatedAt, now)}`, value: u.snow(resortReport.baseCm), icon: Snowflake }
       : modelDepthTrusted
-        ? { label: "Snow depth · model", value: current.snowDepth != null ? `${current.snowDepth} cm` : "-", icon: Snowflake }
+        ? { label: "Snow depth · model", value: current.snowDepth != null ? u.snow(current.snowDepth) : "-", icon: Snowflake }
         : { label: "Snow depth · not reported", value: "-", icon: Snowflake },
     // Model-estimated overnight snow: same "· model" honesty label as snow
     // depth. Omitted (not 0) when the source has no past hours.
-    ...(current.snowfallPast24h != null ? [{ label: "Snow last 24h · model", value: `${current.snowfallPast24h.toFixed(1)} cm`, icon: CloudSnow }] : []),
-    ...(snow24h != null ? [{ label: "Snow next 24h", value: `${snow24h.toFixed(1)} cm`, icon: CloudSnow }] : []),
-    ...(current.dewpoint !== undefined ? [{ label: "Dew point", value: formatTemp(current.dewpoint), icon: Droplets }] : []),
+    ...(current.snowfallPast24h != null ? [{ label: "Snow last 24h · model", value: u.snow(current.snowfallPast24h, 1), icon: CloudSnow }] : []),
+    ...(snow24h != null ? [{ label: "Snow next 24h", value: u.snow(snow24h, 1), icon: CloudSnow }] : []),
+    ...(current.dewpoint !== undefined ? [{ label: "Dew point", value: `${u.temp(current.dewpoint)}${u.tempUnit}`, icon: Droplets }] : []),
     ...(current.pressure !== undefined ? [{ label: "Pressure", value: `${current.pressure} hPa`, icon: Gauge }] : []),
     ...(current.rainSince9am !== undefined ? [{ label: "Rain since 9am", value: `${current.rainSince9am} mm`, icon: CloudRain }] : []),
     ...(current.visibility && current.visibility !== 10000 ? [{ label: "Visibility", value: `${(current.visibility / 1000).toFixed(0)} km`, icon: Eye }] : []),
@@ -439,12 +441,12 @@ export default function LocationDetail() {
                         "linear-gradient(135deg, hsl(210,90%,46%) 0%, hsl(265,85%,55%) 60%, hsl(180,90%,45%) 100%)",
                     }}
                   >
-                    {Math.round(current.temperature)}
+                    {u.temp(current.temperature)}
                   </span>
-                  <span className="font-display text-foreground/70 text-3xl md:text-4xl mt-4">°C</span>
+                  <span className="font-display text-foreground/70 text-3xl md:text-4xl mt-4">{u.tempUnit}</span>
                 </div>
                 <p className="byline text-muted-foreground mt-1">
-                  {current.weatherDescription} · feelzlike {Math.round(current.feelsLike)}°
+                  {current.weatherDescription} · feelzlike {u.temp(current.feelsLike)}°
                 </p>
               </div>
             </motion.div>
