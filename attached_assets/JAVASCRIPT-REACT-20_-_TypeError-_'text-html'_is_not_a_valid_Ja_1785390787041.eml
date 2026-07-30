@@ -1,0 +1,695 @@
+Received: from SY7P282MB4867.AUSP282.PROD.OUTLOOK.COM (2603:10c6:10:27b::6) by
+ SY5P282MB4686.AUSP282.PROD.OUTLOOK.COM with HTTPS; Thu, 30 Jul 2026 01:12:35
+ +0000
+Received: from SY5PR01CA0008.ausprd01.prod.outlook.com (2603:10c6:10:1fa::7)
+ by SY7P282MB4867.AUSP282.PROD.OUTLOOK.COM (2603:10c6:10:27b::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.14; Thu, 30 Jul
+ 2026 01:12:32 +0000
+Received: from SY2PEPF00004FF4.ausprd01.prod.outlook.com
+ (2603:10c6:10:1fa:cafe::2a) by SY5PR01CA0008.outlook.office365.com
+ (2603:10c6:10:1fa::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.13 via Frontend Transport; Thu,
+ 30 Jul 2026 01:12:32 +0000
+Authentication-Results: spf=pass (sender IP is 69.169.224.57)
+ smtp.mailfrom=ses-eu.md.getsentry.com; dkim=pass (signature was verified)
+ header.d=md.getsentry.com;dkim=pass (signature was verified)
+ header.d=amazonses.com;dmarc=pass action=none
+ header.from=md.getsentry.com;compauth=pass reason=100
+Received-SPF: Pass (protection.outlook.com: domain of ses-eu.md.getsentry.com
+ designates 69.169.224.57 as permitted sender)
+ receiver=protection.outlook.com; client-ip=69.169.224.57;
+ helo=b224-57.smtp-out.eu-central-1.amazonses.com; pr=C
+Received: from b224-57.smtp-out.eu-central-1.amazonses.com (69.169.224.57) by
+ SY2PEPF00004FF4.mail.protection.outlook.com (10.167.241.6) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.292.8
+ via Frontend Transport; Thu, 30 Jul 2026 01:12:31 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=dgiifvxgcpauw74hjvgousmem4wsca6w; d=md.getsentry.com;
+	t=1785373948;
+	h=Content-Type:MIME-Version:Subject:From:To:Reply-To:Date:List-Id:Message-Id;
+	bh=odl5RBr3JJJHJinSuePwIGbm3aRReMuZMZDVfYdBMM0=;
+	b=jZtb/7axnGiRtthoB0PP1GXAHSPMfAWZXnEbwo7/ZkZJ/2M6jWdDZhj8gJNkMSuI
+	rQ2mcqyTss11CHc8IoH7mMCZlZeJ0ws/SVt0Z+XVLiX89z+BKK3U0XPViROJ/7DOGBI
+	cy5FpLv+4iw410MFAMS2lkRur2cz19uzi7wTsInOn65xicmO4etv9+fE5jlzRBBboV5
+	Vx2xW814tnK4fnvWEdMIBJgUKkc73miqwo7lMs6wwNWg4LEcwiasOPuk0nWjWqQ2/nG
+	GQ4z1yusw4yXn4A58ODcAePewNryXo4hpjMAJC4M3lrNbND8JJowfRzK1o8pbpBQZBi
+	C1m1Ei6Jjw==
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=sokbgaaqhfgd6qjht2wmdajpuuanpimv; d=amazonses.com; t=1785373948;
+	h=Content-Type:MIME-Version:Subject:From:To:Reply-To:Date:List-Id:Message-Id:Feedback-ID;
+	bh=odl5RBr3JJJHJinSuePwIGbm3aRReMuZMZDVfYdBMM0=;
+	b=ggPJBe9kJZLosORJW2tf9p83MSWu6LdR4nVLpxNUsthKtsQNCPwXH+irHAXte/lE
+	2IZnKHqMA/mK2aCYsGshCOyN+C6VOs2/lcxVzMFKq7Kx5W1cE2ZMPTfioujgTMmtb3B
+	tCLAJNDk4RSWFcTF1TvvHW/7u0ZIC1x2I3swDBvM=
+Content-Type: multipart/alternative;
+ boundary="===============5245691918241138363=="
+Subject: JAVASCRIPT-REACT-20 - TypeError: 'text/html' is not a valid
+ JavaScript MIME
+ type.
+From: Sentry <noreply@md.getsentry.com>
+To: james@navigatework.com.au
+Reply-To: 137465807.4511307435278336+63dbeghhwxscdmpyivzksl4d380@md.getsentry.com
+Date: Thu, 30 Jul 2026 01:12:28 +0000
+X-SMTPAPI: {"category":"issue_alert"}
+X-Sentry-Project: javascript-react
+X-Sentry-Logger:
+X-Sentry-Logger-Level: error
+X-Sentry-Reply-To: 137465807.4511307435278336+63dbeghhwxscdmpyivzksl4d380@md.getsentry.com
+List-Id: <javascript-react.navigate-work-digital.getsentry.com>
+Message-ID: <0107019fb0947b28-5875c443-001a-452b-9b78-139ea4d5793b-000000@eu-central-1.amazonses.com>
+Feedback-ID: ::1.eu-central-1.EhjBqsUiece89PThycS+jt7e2y7FuoNiVQcBSPfiyuM=:AmazonSES
+X-SES-Outgoing: 2026.07.30-69.169.224.57
+Return-Path: 0107019fb0947b28-5875c443-001a-452b-9b78-139ea4d5793b-000000@ses-eu.md.getsentry.com
+X-MS-Exchange-Organization-ExpirationStartTime: 30 Jul 2026 01:12:32.1016
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: 9e941f4c-0af3-4bfd-8202-08deedd7a1c5
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: febefc03-2be7-43ba-af66-5490103dee38:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SY2PEPF00004FF4:EE_|SY7P282MB4867:EE_|SY5P282MB4686:EE_
+X-MS-Exchange-Organization-AuthSource: SY2PEPF00004FF4.ausprd01.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id: 9e941f4c-0af3-4bfd-8202-08deedd7a1c5
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Antispam: BCL:4;ARA:13230040|5062899012|4092899012|3072899012|3092899012|2092899012|13102899012|32142699015|13012899012|12012899012|7049299003|3109299003|7149299003|69100299015|1032899013|4022899009|13003099007|6133799003|4113699003|5113699003|5063699009|10067099003|19002099009|8096899003|2066899003|18003699003|57112099003|16102099003;
+X-Forefront-Antispam-Report: CIP:69.169.224.57;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:b224-57.smtp-out.eu-central-1.amazonses.com;PTR:b224-57.smtp-out.eu-central-1.amazonses.com;CAT:NONE;SFS:(13230040)(5062899012)(4092899012)(3072899012)(3092899012)(2092899012)(13102899012)(32142699015)(13012899012)(12012899012)(7049299003)(3109299003)(7149299003)(69100299015)(1032899013)(4022899009)(13003099007)(6133799003)(4113699003)(5113699003)(5063699009)(10067099003)(19002099009)(8096899003)(2066899003)(18003699003)(57112099003)(16102099003);DIR:INB;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jul 2026 01:12:31.1988
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9e941f4c-0af3-4bfd-8202-08deedd7a1c5
+X-MS-Exchange-CrossTenant-Id: febefc03-2be7-43ba-af66-5490103dee38
+X-MS-Exchange-CrossTenant-AuthSource: SY2PEPF00004FF4.ausprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SY7P282MB4867
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:04.3083038
+X-MS-Exchange-Processed-By-BccFoldering: 15.21.0270.009
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(910005)(944490095)(944506478)(944626604)(920097)(930201)(20251009189)(140003);
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?TnBJdHk5eFB5VDFKTlZWUWc3VXl4b0FWa0R5Zk9vT1JodFlLSXNZbVpuaStF?=
+ =?utf-8?B?ODArVTdVMEJmd2Z0NGdUWTRrdTFHMDVVVXIzTE8yc1o5YUsra1NLSXFlMkhE?=
+ =?utf-8?B?WHJXZWphY2pNVjdyNjdvS1oxeWdWRnNtMXBSdEpUWm5NVHM3Rmg3SStHNnpN?=
+ =?utf-8?B?dys5SXFpbTJuV2hBd0Z4ZXN6TmJxb2FWOXZGOURzNkY5MUdZWmF0bHlTeW04?=
+ =?utf-8?B?SDRJVmVadkxVV2RRU08ra05PMWF0SmR6UmZ0N0QzenZBNDFWZDZ5amRxL2dL?=
+ =?utf-8?B?NU9CVCtBOWRndDU2eEtuZU9lRVRhdDVYVkdiR0Qyam5nb0lQdkxCSERaMndH?=
+ =?utf-8?B?SklpMFVXS2hOZ3NITU1XM1ZZVWwxaDdOQ08zT240ZnZBamtGOHk0YTF0a1k4?=
+ =?utf-8?B?S29EblVJVUFNdW83c1pMV1R1dC9wTVB2NTFzVmkvQ3ZqdDlMQ0EyZUNJR1VC?=
+ =?utf-8?B?ZU5hS3lXTncreEM0ZTkwYlRjTjFEK3h4MnRpNWtxSDNhNGJNYVFZOFpIQnZ1?=
+ =?utf-8?B?TEhZOTFvazlKa1k3SjNIb0RZaC8xWUl2OWVTTkVTNkZoVElzSnNibkxZVWJT?=
+ =?utf-8?B?cW9VTnc1TlFsVGh2QytrZ1owYlNQSE84MkJkNWpnYlNOdmx3QWZDQ2ZCUWpj?=
+ =?utf-8?B?S3hseDRKaTNUcXpxa09GcWdHMkRIdy9KcThEVW1zbHZWZUhuQ3pqNUhqWk1q?=
+ =?utf-8?B?aGI2QVZiZGxrOFc3ZjlLT1FYTC9aZWNmbXFwYzUwbUJaR0RORnBMYm9GQWxu?=
+ =?utf-8?B?TVM0V1pJb1lrYlFkVmtYUkNIdmNRY08ySGNMTHdYeUpqd2liUUpJUzREdjJP?=
+ =?utf-8?B?OW5CZnE3VW1LTm16MnJ0L1VKTXpBOE9zNml4QjZLT1ZyM1d5M1VMNkJOc3RR?=
+ =?utf-8?B?WE05N1RCME14U1BITG5wcHl6YmRRa0VqY0loVGU4Wm9NaFJvQ2YzRE1SWjJj?=
+ =?utf-8?B?d3QzVEJxZU1xdzZ1VUJtMWhOS1BuSjMzaCtpN1NWelkxY3hCZDFWRUJDaGpo?=
+ =?utf-8?B?RlAzZ2QxU3g2Y0JuZjJLYW9XUHBtclcwLzhac01RRGZhWnU3VjVDKy9QZWNq?=
+ =?utf-8?B?YjN5V0p6Zlp5TWU3aFoyd3hmNFZETGtiOGVqbm9qRGZyVlBHTkhZK3U5N2J5?=
+ =?utf-8?B?a3ZEaXFrL0dTS2tnaWhiN29BN0dBNFJKc0UyN2daYndId2JGMGY2M3FJT2ti?=
+ =?utf-8?B?Z2laQlRpZEJ6d0ZRMHNReFhFUmozeFdLOTZaSUxzQ0lzSW1BVzRPUnJQYVFx?=
+ =?utf-8?B?bDFyQ2Y4WHNEb0lwdHdxby9FUW43MG9QV09UMk5zTDFtbkxCWjdpSXU5cTFD?=
+ =?utf-8?B?R3p5V0ZRY053WXZOZW1tWThhOUZMUWpHKzZqa0haOXBJWkxxRzhSekQzYTYz?=
+ =?utf-8?B?dXhNdFFySEVaSzAwR0JrQWFzR0FDcDFtTUFzVCtrZFF2REF3bWgrR1kyS0cw?=
+ =?utf-8?B?ZTlvbjFGV0lxbkNMTmdhR01ZZWV4OVBid0NwZXVuOWFKZExHK3dsNFFZR1RY?=
+ =?utf-8?B?QUdZM2plNkc1RHRwRlNKd0hlNTg3WUhWL2o5ZUNWL2M1ZHRLdDRXZ3pNdUJu?=
+ =?utf-8?B?ZHZPcVFEdFkrSThhWGhBVnE0SVV5TjdaMkU3dnBsTUIyd2o5NkJ6RUJmekdq?=
+ =?utf-8?B?UDhHVGsxQnQvSWNjcXVINDlyREtPUDdqdEZIM0pLM2RDbkQ1MlEwaGF3WHRC?=
+ =?utf-8?B?bFZFdjI1YkR4R215S3kxanhscUVHOUpqYVZaUTF6L29IOFcvQTl0Uzk2TDFH?=
+ =?utf-8?B?MUs4R1N3TmxNVG04aEtkTVI1UUNxYjhoVWZPaklRNzVlc002ZWsxUlFlNURt?=
+ =?utf-8?B?T3RKMzA5N2xlOUoydTJ1a2FUWEh6SXEwekRlQVZpV284bis3RDFwdUpIR25S?=
+ =?utf-8?B?SlRNRjFuNWZZQ3k1RlZrQUc2aW94UUhRd3dMZHJGQUVqdlA4aC9jVk5JUFNt?=
+ =?utf-8?B?RGk3R0h6dVMyaFA3U3FvLzN3eGcrZkpxSVZRaGhBWGR0bkdsYUY3RW05cDZk?=
+ =?utf-8?B?K1pVS3BLR0VIRDB5c2NPbnRvTjlrcXBlNnQ5MW1oVm9kN3IxMW95dmY2cm05?=
+ =?utf-8?B?a3pYdk96MzF5L0JFWFNJbjFwaHFNVUNDVkxudE1xMlRyQTlTeGs4dE42T0ZF?=
+ =?utf-8?B?TXArWnZjc29lOUJoSHgwbEhhajRPajVHR3RBcWk3a216NWlmbUJhUHhyQldH?=
+ =?utf-8?B?VktTaVp0YVV5QlQ4RTRhWGRmUTUvRHZ5VGdyYnI1ckgyUVltMUxYVG9TbDFP?=
+ =?utf-8?B?TGRpTmduWmgzTGc3RDUxWWhVQzF4MVl0UUhMQTcvOXZQSnRBSUJFbndMTVdE?=
+ =?utf-8?B?NHl0RUlaQ053MEU5b2c5VTc0WW1lTW1Ed0VNcmQrMVRYbWxlMzhYQWx6ZDJv?=
+ =?utf-8?B?d0xxYmhOem9sRHQ4LzVPc1UrYVF3cWZtWExWamw4clI3cjVJZ1RvUkJqS1FI?=
+ =?utf-8?B?aThpM3lIZjhZSzF5Uis0bGZVZE9DZWpsWFcvZVJvL05zcEJMQ3RMbFB6aXZz?=
+ =?utf-8?B?V3FZekFqVnJiVDYwRWwwYWJSZFdVd2N0ZEFndkkzWGgvVm1zWkd1UXdqSnk1?=
+ =?utf-8?B?TXE4UkZFNHhOUFhVbVd3VTlSR2lSeEhFZk9NR1FOcjVZYWJsR3BLNlRSS2cx?=
+ =?utf-8?B?SndiMUt1T2NLK0c0a3dGYjQ0bGlIL3hnTFhUdXMxcFJ5RUZqZnZkM0ZFRnN5?=
+ =?utf-8?B?dC9sUXBFcDE2eWtaajh0V0F4Z3g5UUI2RVcxQ1dQQUluTFhvRFV3U29wU1Rn?=
+ =?utf-8?B?NEx0VERPcnVqbGRJRlFNYmp5VUFOYVRzRC9XK0JmUDZ4MHVubXUyZWF1V3VF?=
+ =?utf-8?B?WjJ2eEZNUTArZHBuMloweTNIeVRDSEQ5TXdpM21yR1dqbzh2cDhhQ0Y3bFZs?=
+ =?utf-8?B?OWcrVHhCQ2MwYUZrUkVXTjNNY0htcFBFV0VQK3ZyT0lqT0trWmN0aUw2RWJ2?=
+ =?utf-8?B?OWVCRkRPSmd0b3BEczRRR1dnUVBraE1EZnJlRXE0T0sxTWxxazEwdTdEVHBm?=
+ =?utf-8?B?SWh3ZzZreDhya2ZsTFFUVFRDUUoyQ2xHdldyUVlHUmpLRlExU0RTMGR6alNB?=
+ =?utf-8?B?WkQ4WExVQjlhRmM2c2FXRkgySU9JNThNc2luSitiZDhnYnRtQ0JCZjg4cVVP?=
+ =?utf-8?B?b0RUNWZQMHdkZ0NMWHExekdrbW1BNTY0RXYvNFgrQ20zZUxJejJiVllaM1Fm?=
+ =?utf-8?B?TzZUeVlwMHlkd0h3ZklZSVRJVVdSVjE4VGJiejdWb1VOYzFZa2tnSHR3Ynl5?=
+ =?utf-8?B?cG0rYmc9PQ==?=
+MIME-Version: 1.0
+
+--===============5245691918241138363==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Details
+-------
+
+https://navigate-work-digital.sentry.io/issues/137465807/?referrer=alert_email&alert_type=email&alert_timestamp=1785373945548&alert_rule_id=554409&notification_uuid=e447439d-f947-4fb5-a094-d70e11302726&environment=production
+
+
+
+Tags
+----
+
+* analytics_consent = true
+* artifact = feelzlike
+* browser = Mobile Safari 26.5.2
+* browser.name = Mobile Safari
+* device = iPhone
+* device.family = iPhone
+* environment = production
+* handled = yes
+* interface_type = exception
+* level = error
+* mechanism = generic
+* os = iOS 18.7
+* os.name = iOS
+* replayId = 07cc420a8f5848a1b382fcad468d0f30
+* sentry:release = feelzlike@410aaff
+* sentry:user = id:1b29af416bb741f69e91e5ef0d99d202
+* transaction = /near-you
+* url = https://feelzlike.com/near-you
+
+
+Exception
+-----------
+
+React ErrorBoundary TypeError: 'text/html' is not a valid JavaScript MIME type.
+  at Zqe (/assets/index-Cp5SSuEg.js:130:148613)
+  at $q (/assets/index-Cp5SSuEg.js:130:139805)
+  at nt (/assets/index-Cp5SSuEg.js:32:55825)
+  at gC (/assets/index-Cp5SSuEg.js:32:56670)
+  at Fw (/assets/index-Cp5SSuEg.js:32:55127)
+...
+(7 additional frame(s) were not displayed)
+
+TypeError: 'text/html' is not a valid JavaScript MIME type.
+
+
+Request
+-----------
+
+
+
+
+User
+-----------
+
+
+
+
+
+
+Unsubscribe:
+
+--===============5245691918241138363==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html><html style="font-weight: 400"><head style="font-weight: 400">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" style="font-weight: 400">
+
+  
+
+<style type="text/css" style="font-weight: 400">
+  @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+</style>
+
+
+  
+  
+  <style type="text/css" style="font-weight: 400">
+    @media only screen and (max-device-width: 480px) {
+      /* Hide CTA in header on mobile */
+      .header-buttons .integration-link {
+        display: none !important;
+      }
+      .banner {
+        display: none !important;
+      }
+    }
+    @media only screen and (max-device-width: 768px) {
+      .text-desktop-only {
+        display: none !important;
+      }
+    }
+  </style>
+
+
+</head>
+<body class="" style="font-weight: 400; background-image: url(https://s1.sentry-cdn.com/_static/4ca98e6f5ed231caa7afc02d64e8171a/sentry/images/email/sentry-pattern.png); width: 100%; font-size: 16px; font-family: &quot;Lato&quot;, &quot;Helvetica Neue&quot;, helvetica, sans-serif; background-color: #fff; color: #2f2936; -webkit-font-smoothing: antialiased; margin: 0; padding: 0">
+<div class="preheader" style="font-weight: 400; display: none; font-size: 0; max-height: 0; line-height: 0; mso-hide: all; padding: 0">
+  New issue from javascript-react.
+</div>
+<table class="main" style="font-weight: 400; width: 100%; border-collapse: separate; font-size: 16px; font-family: &quot;Lato&quot;, &quot;Helvetica Neue&quot;, helvetica, sans-serif; background-color: #fff; color: #2f2936; -webkit-font-smoothing: antialiased; max-width: 700px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); border-radius: 4px; border: 1px solid #c7d0d4; border-spacing: 0; margin: 15px auto; padding: 0">
+  <tr style="font-weight: 400">
+    <td style="font-weight: 400; text-align: center; margin: 0; padding: 0">
+      <div class="header" style="font-weight: 400; font-size: 14px; border-bottom: 1px solid #dee7eb; padding: 23px 0">
+        <div class="container" style="font-weight: 400; max-width: 600px; text-align: left; margin: 0 auto; padding: 0 20px">
+          
+  <div class="header-with-buttons" style="font-weight: 400; display: inline-block; width: 100%; align-items: center">
+    
+          <h1 style="font-weight: normal; float: left; font-size: 38px; line-height: 42px; color: #000; letter-spacing: -1px; margin: 0; padding: 0">
+            <a href="https://sentry.io" style="font-weight: 500; color: #4674ca; text-decoration: none"><img src="https://s1.sentry-cdn.com/_static/4ca98e6f5ed231caa7afc02d64e8171a/sentry/images/email/sentry_logo_full.png" width="117px" height="32px" alt="Sentry" style="font-weight: 400"></a>
+          </h1>
+          
+    <div class="header-buttons" style="font-weight: 400; display: flex; height: fit-content; float: right">
+      
+        <a href="https://navigate-work-digital.sentry.io/settings/integrations/slack/?referrer=alert_email&amp;notification_uuid=e447439d-f947-4fb5-a094-d70e11302726" class="btn btn-default integration-link" style="font-weight: 600; color: #493e54; text-decoration: none; background-color: #fdfcfd; border: 1px solid #c1b8ca; box-shadow: 0 2px 0 rgba(0, 0, 0, 0.05); line-height: 18px; border-radius: 4px; display: flex; font-size: 16px; align-items: center; float: right; margin: 3px 0; padding: 8px 15px">
+          <img src="https://s1.sentry-cdn.com/_static/4ca98e6f5ed231caa7afc02d64e8171a/sentry/images/email/slack-logo.png" class="logo-small" style="font-weight: 400; width: 16px; height: 16px; margin: auto 8px auto 0">
+          Set up in Slack
+        </a>
+      
+      <a href="https://navigate-work-digital.sentry.io/issues/137465807/?referrer=alert_email&amp;alert_type=email&amp;alert_timestamp=1785373945548&amp;alert_rule_id=554409&amp;notification_uuid=e447439d-f947-4fb5-a094-d70e11302726&amp;environment=production" class="btn view-on-sentry" style="font-weight: 600; color: #fff; text-decoration: none; background-color: #6C5FC7; border: 1px solid #413496; box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08); line-height: 18px; border-radius: 4px; display: inline-block; font-size: 16px; float: right; margin: 3px 0 3px 8px; padding: 8px 15px">View on Sentry</a>
+    </div>
+  </div>
+
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr style="font-weight: 400">
+    <td style="font-weight: 400; text-align: center; margin: 0; padding: 0">
+      
+
+
+<div class="container" style="font-weight: 400; max-width: 600px; text-align: left; margin: 0 auto; padding: 0 20px">
+  <div class="inner" style="font-weight: 400; background-color: #fff; padding: 30px 0 20px">
+    <h2 style="font-weight: 700; font-size: 22px; margin: 0 0 4px">
+        
+        New issue
+        
+    </h2>
+    
+      <div class="event-notification-reason" style="font-weight: 400; color: #80708F; font-size: 14px; margin-bottom: 15px">
+        We notified recently active members in the javascript-react project of this issue
+      </div>
+    
+
+    
+      <table class="event-list" style="font-weight: 400; width: 100%; border-collapse: collapse; text-align: left; margin: 0 0 15px">
+        <tr style="font-weight: 400">
+            <th colspan="2" style="font-weight: bold; text-align: left; min-width: 60px; color: #9CA3AD; text-transform: uppercase; font-size: 12px; border-bottom: 2px solid #E7EBEE; margin: 0 0 5px; padding: 2px 0 10px">Issue</th>
+        </tr>
+        <tr style="font-weight: 400">
+          <td class="event-detail" style="font-weight: 400; text-align: left; border-top: 1px solid #E7EBEE; line-height: 22px; width: 400px; margin: 0; padding: 10px 0">
+            <div class="issue" style="font-weight: 400; line-height: 22px">
+              
+                
+                  <div class="event-type error" style="font-weight: 400">
+                    <h3 style="font-weight: 700; font-size: 18px; line-height: 22px; margin: 0">
+                      
+                        <a href="https://navigate-work-digital.sentry.io/issues/137465807/?referrer=alert_email&amp;alert_type=email&amp;alert_timestamp=1785373945548&amp;alert_rule_id=554409&amp;notification_uuid=e447439d-f947-4fb5-a094-d70e11302726&amp;environment=production" style="font-weight: 600; color: #4674ca; text-decoration: none; font-size: 16px; margin-right: 10px">TypeError</a>
+                        
+                          <span class="event-subtitle" style="font-weight: 400; font-size: 13px; font-style: italic; overflow-wrap: break-word; word-wrap: break-word">/near-you</span>
+                        
+                        <br style="font-weight: 400">
+                        
+                          <small style="font-weight: 400; font-size: 14px; color: #968ba0">'text/html' is not a valid JavaScript MIME type.</small>
+                        
+                      
+                    </h3>
+                  </div>
+                
+              
+            </div>
+          </td>
+        </tr>
+      </table>
+
+      
+        <div class="event" style="font-weight: 400; margin-bottom: 30px">
+          <div class="event-id" style="font-weight: 400; color: #889092; float: right">ID: 1fe51a057e51463293515baac36872c1</div>
+            <div class="event-date" style="font-weight: 400; color: #889092">
+              
+                July 30, 2026, 11:12:03 a.m. AEST
+              
+            </div>
+        </div>
+      
+
+      
+      <div class="interface" style="font-weight: 400; margin-bottom: 30px">
+        <table style="font-weight: 400; width: 100%; border-collapse: separate; border-spacing: 5px; margin: 0 -5px">
+          <colgroup style="font-weight: 400">
+            <col style="font-weight: 400; width: 130px">
+          </colgroup>
+          <tbody style="font-weight: 400">
+            <tr style="font-weight: 400">
+              <th style="font-weight: 500; text-align: left; min-width: 60px; color: #968ba0; padding: 2px 0 0">Project</th>
+              <td style="font-weight: 400; text-align: left; background-color: #f4f5f6; border-radius: 3px; margin: 0 0 5px; padding: 5px 10px"><a href="https://navigate-work-digital.sentry.io/issues/?project=4511307499700304" style="font-weight: 500; color: #4674ca; text-decoration: none">javascript-react</a></td>
+            </tr>
+            
+              <tr style="font-weight: 400">
+                <th style="font-weight: 500; text-align: left; min-width: 60px; color: #968ba0; padding: 2px 0 0">environment</th>
+                <td style="font-weight: 400; text-align: left; background-color: #f4f5f6; border-radius: 3px; margin: 0 0 5px; padding: 5px 10px">production</td>
+              </tr>
+            
+            
+              <tr style="font-weight: 400">
+                <th style="font-weight: 500; text-align: left; min-width: 60px; color: #968ba0; padding: 2px 0 0">Level</th>
+                <td style="font-weight: 400; text-align: left; background-color: #f4f5f6; border-radius: 3px; margin: 0 0 5px; padding: 5px 10px">error</td>
+              </tr>
+            
+          </tbody>
+        </table>
+      </div>
+
+
+      
+
+
+
+      
+
+      
+
+
+      
+    
+    <div class="interface" style="font-weight: 400; margin-bottom: 30px">
+      <h3 class="title" style="font-weight: 700; font-size: 18px; margin: 0 0 15px">Exception</h3>
+      <pre style="font-weight: normal; font-family: Menlo, Monaco, &quot;Courier New&quot;, monospace; font-size: 14px; white-space: pre-wrap; background-color: #F4F5F6; color: #3D4649; border-radius: 4px; overflow-wrap: break-word; word-wrap: break-word; margin: 0 0 15px; padding: 15px">React ErrorBoundary TypeError: 'text/html' is not a valid JavaScript MIME type.
+  at Zqe (/assets/index-Cp5SSuEg.js:130:148613)
+  at $q (/assets/index-Cp5SSuEg.js:130:139805)
+  at nt (/assets/index-Cp5SSuEg.js:32:55825)
+  at gC (/assets/index-Cp5SSuEg.js:32:56670)
+  at Fw (/assets/index-Cp5SSuEg.js:32:55127)
+...
+(7 additional frame(s) were not displayed)
+
+TypeError: 'text/html' is not a valid JavaScript MIME type.</pre>
+    </div>
+    
+    <div class="interface" style="font-weight: 400; margin-bottom: 30px">
+      <h3 class="title" style="font-weight: 700; font-size: 18px; margin: 0 0 15px">Request</h3>
+      
+<table style="font-weight: 400; width: 100%; border-collapse: separate; border-spacing: 5px; margin: 0 -5px">
+    <colgroup style="font-weight: 400">
+      <col style="font-weight: 400; width: 130px">
+    </colgroup>
+    <tbody style="font-weight: 400">
+        
+        <tr style="font-weight: 400">
+            <th style="font-weight: 500; text-align: left; min-width: 60px; color: #968ba0; padding: 2px 0 0">URL</th>
+            <td style="font-weight: 400; text-align: left; background-color: #f4f5f6; border-radius: 3px; margin: 0 0 5px; padding: 5px 10px"><a href="https://feelzlike.com/near-you" style="font-weight: 500; color: #4674ca; text-decoration: none">https://feelzlike.com/near-you</a></td>
+        </tr>
+        
+        
+        
+        
+    </tbody>
+</table>
+
+    </div>
+    
+    <div class="interface" style="font-weight: 400; margin-bottom: 30px">
+      <h3 class="title" style="font-weight: 700; font-size: 18px; margin: 0 0 15px">User</h3>
+      
+
+
+<table class="reset" style="font-weight: 400; width: 100%; border-collapse: collapse; border-spacing: 0; margin: 0 -5px">
+  <tr style="font-weight: 400">
+    <td style="font-weight: 400; text-align: left; background-color: #fff; border-radius: 3px; margin: 0 0 5px; padding: 0">
+      <table style="font-weight: 400; width: 100%; border-collapse: separate; border-spacing: 5px; margin: 0">
+        <colgroup style="font-weight: 400">
+          <col style="font-weight: 400; width: 130px">
+        </colgroup>
+        <tbody style="font-weight: 400">
+          
+            <tr style="font-weight: 400">
+              <th style="font-weight: 500; text-align: left; min-width: 60px; color: #968ba0; padding: 2px 0 0">ID:</th>
+              <td class="code" style="font-weight: 400; text-align: left; background-color: #f4f5f6; border-radius: 3px; margin: 0 0 5px; padding: 5px 10px">1b29af416bb741f69e91e5ef0d99d202</td>
+            </tr>
+            
+          
+          
+          
+          
+        </tbody>
+      </table>
+    </td>
+    
+  </tr>
+</table>
+
+    </div>
+    
+
+
+      
+        <h3 style="font-weight: 700; font-size: 18px; margin: 0 0 20px">Tags</h3>
+
+        <ul class="tag-list" style="font-weight: 400; list-style: none; margin: 0 0 20px; padding: 0">
+        
+          <li style="font-weight: 400; display: inline-block; margin-right: 5px; margin-bottom: 10px; border-radius: 3px; background-color: #F4F5F6; padding: 5px 10px 6px">
+              <strong style="font-weight: 200">analytics_consent</strong>
+              <em style="font-weight: 400">=</em>
+              <span style="font-weight: 400">
+              
+                <a href="https://sentry.io/organizations/navigate-work-digital/issues/?project=4511307499700304&amp;query=analytics_consent%3A%22true%22" style="font-weight: 500; color: #4674ca; text-decoration: none">true</a> 
+              
+              </span>
+          </li>
+        
+          <li style="font-weight: 400; display: inline-block; margin-right: 5px; margin-bottom: 10px; border-radius: 3px; background-color: #F4F5F6; padding: 5px 10px 6px">
+              <strong style="font-weight: 200">artifact</strong>
+              <em style="font-weight: 400">=</em>
+              <span style="font-weight: 400">
+              
+                <a href="https://sentry.io/organizations/navigate-work-digital/issues/?project=4511307499700304&amp;query=artifact%3A%22feelzlike%22" style="font-weight: 500; color: #4674ca; text-decoration: none">feelzlike</a> 
+              
+              </span>
+          </li>
+        
+          <li style="font-weight: 400; display: inline-block; margin-right: 5px; margin-bottom: 10px; border-radius: 3px; background-color: #F4F5F6; padding: 5px 10px 6px">
+              <strong style="font-weight: 200">browser</strong>
+              <em style="font-weight: 400">=</em>
+              <span style="font-weight: 400">
+              
+                <a href="https://sentry.io/organizations/navigate-work-digital/issues/?project=4511307499700304&amp;query=browser%3A%22Mobile%20Safari%2026.5.2%22" style="font-weight: 500; color: #4674ca; text-decoration: none">Mobile Safari 26.5.2</a> 
+              
+              </span>
+          </li>
+        
+          <li style="font-weight: 400; display: inline-block; margin-right: 5px; margin-bottom: 10px; border-radius: 3px; background-color: #F4F5F6; padding: 5px 10px 6px">
+              <strong style="font-weight: 200">browser.name</strong>
+              <em style="font-weight: 400">=</em>
+              <span style="font-weight: 400">
+              
+                <a href="https://sentry.io/organizations/navigate-work-digital/issues/?project=4511307499700304&amp;query=browser.name%3A%22Mobile%20Safari%22" style="font-weight: 500; color: #4674ca; text-decoration: none">Mobile Safari</a> 
+              
+              </span>
+          </li>
+        
+          <li style="font-weight: 400; display: inline-block; margin-right: 5px; margin-bottom: 10px; border-radius: 3px; background-color: #F4F5F6; padding: 5px 10px 6px">
+              <strong style="font-weight: 200">device</strong>
+              <em style="font-weight: 400">=</em>
+              <span style="font-weight: 400">
+              
+                <a href="https://sentry.io/organizations/navigate-work-digital/issues/?project=4511307499700304&amp;query=device%3A%22iPhone%22" style="font-weight: 500; color: #4674ca; text-decoration: none">iPhone</a> 
+              
+              </span>
+          </li>
+        
+          <li style="font-weight: 400; display: inline-block; margin-right: 5px; margin-bottom: 10px; border-radius: 3px; background-color: #F4F5F6; padding: 5px 10px 6px">
+              <strong style="font-weight: 200">device.family</strong>
+              <em style="font-weight: 400">=</em>
+              <span style="font-weight: 400">
+              
+                <a href="https://sentry.io/organizations/navigate-work-digital/issues/?project=4511307499700304&amp;query=device.family%3A%22iPhone%22" style="font-weight: 500; color: #4674ca; text-decoration: none">iPhone</a> 
+              
+              </span>
+          </li>
+        
+          <li style="font-weight: 400; display: inline-block; margin-right: 5px; margin-bottom: 10px; border-radius: 3px; background-color: #F4F5F6; padding: 5px 10px 6px">
+              <strong style="font-weight: 200">environment</strong>
+              <em style="font-weight: 400">=</em>
+              <span style="font-weight: 400">
+              
+                <a href="https://sentry.io/organizations/navigate-work-digital/issues/?project=4511307499700304&amp;query=environment%3A%22production%22" style="font-weight: 500; color: #4674ca; text-decoration: none">production</a> 
+              
+              </span>
+          </li>
+        
+          <li style="font-weight: 400; display: inline-block; margin-right: 5px; margin-bottom: 10px; border-radius: 3px; background-color: #F4F5F6; padding: 5px 10px 6px">
+              <strong style="font-weight: 200">handled</strong>
+              <em style="font-weight: 400">=</em>
+              <span style="font-weight: 400">
+              
+                <a href="https://sentry.io/organizations/navigate-work-digital/issues/?project=4511307499700304&amp;query=handled%3A%22yes%22" style="font-weight: 500; color: #4674ca; text-decoration: none">yes</a> 
+              
+              </span>
+          </li>
+        
+          <li style="font-weight: 400; display: inline-block; margin-right: 5px; margin-bottom: 10px; border-radius: 3px; background-color: #F4F5F6; padding: 5px 10px 6px">
+              <strong style="font-weight: 200">interface_type</strong>
+              <em style="font-weight: 400">=</em>
+              <span style="font-weight: 400">
+              
+                <a href="https://sentry.io/organizations/navigate-work-digital/issues/?project=4511307499700304&amp;query=interface_type%3A%22exception%22" style="font-weight: 500; color: #4674ca; text-decoration: none">exception</a> 
+              
+              </span>
+          </li>
+        
+          <li style="font-weight: 400; display: inline-block; margin-right: 5px; margin-bottom: 10px; border-radius: 3px; background-color: #F4F5F6; padding: 5px 10px 6px">
+              <strong style="font-weight: 200">level</strong>
+              <em style="font-weight: 400">=</em>
+              <span style="font-weight: 400">
+              
+                <a href="https://sentry.io/organizations/navigate-work-digital/issues/?project=4511307499700304&amp;query=level%3A%22error%22" style="font-weight: 500; color: #4674ca; text-decoration: none">error</a> 
+              
+              </span>
+          </li>
+        
+          <li style="font-weight: 400; display: inline-block; margin-right: 5px; margin-bottom: 10px; border-radius: 3px; background-color: #F4F5F6; padding: 5px 10px 6px">
+              <strong style="font-weight: 200">mechanism</strong>
+              <em style="font-weight: 400">=</em>
+              <span style="font-weight: 400">
+              
+                <a href="https://sentry.io/organizations/navigate-work-digital/issues/?project=4511307499700304&amp;query=mechanism%3A%22generic%22" style="font-weight: 500; color: #4674ca; text-decoration: none">generic</a> 
+              
+              </span>
+          </li>
+        
+          <li style="font-weight: 400; display: inline-block; margin-right: 5px; margin-bottom: 10px; border-radius: 3px; background-color: #F4F5F6; padding: 5px 10px 6px">
+              <strong style="font-weight: 200">os</strong>
+              <em style="font-weight: 400">=</em>
+              <span style="font-weight: 400">
+              
+                <a href="https://sentry.io/organizations/navigate-work-digital/issues/?project=4511307499700304&amp;query=os%3A%22iOS%2018.7%22" style="font-weight: 500; color: #4674ca; text-decoration: none">iOS 18.7</a> 
+              
+              </span>
+          </li>
+        
+          <li style="font-weight: 400; display: inline-block; margin-right: 5px; margin-bottom: 10px; border-radius: 3px; background-color: #F4F5F6; padding: 5px 10px 6px">
+              <strong style="font-weight: 200">os.name</strong>
+              <em style="font-weight: 400">=</em>
+              <span style="font-weight: 400">
+              
+                <a href="https://sentry.io/organizations/navigate-work-digital/issues/?project=4511307499700304&amp;query=os.name%3A%22iOS%22" style="font-weight: 500; color: #4674ca; text-decoration: none">iOS</a> 
+              
+              </span>
+          </li>
+        
+          <li style="font-weight: 400; display: inline-block; margin-right: 5px; margin-bottom: 10px; border-radius: 3px; background-color: #F4F5F6; padding: 5px 10px 6px">
+              <strong style="font-weight: 200">replayId</strong>
+              <em style="font-weight: 400">=</em>
+              <span style="font-weight: 400">
+              
+                <a href="https://sentry.io/organizations/navigate-work-digital/issues/?project=4511307499700304&amp;query=replayId%3A%2207cc420a8f5848a1b382fcad468d0f30%22" style="font-weight: 500; color: #4674ca; text-decoration: none">07cc420a8f5848a1b382fcad468d0f30</a> 
+              
+              </span>
+          </li>
+        
+          <li style="font-weight: 400; display: inline-block; margin-right: 5px; margin-bottom: 10px; border-radius: 3px; background-color: #F4F5F6; padding: 5px 10px 6px">
+              <strong style="font-weight: 200">release</strong>
+              <em style="font-weight: 400">=</em>
+              <span style="font-weight: 400">
+              
+                <a href="https://sentry.io/organizations/navigate-work-digital/issues/?project=4511307499700304&amp;query=release%3A%22feelzlike%40410aaff%22" style="font-weight: 500; color: #4674ca; text-decoration: none">feelzlike@410aaff</a> 
+              
+              </span>
+          </li>
+        
+          <li style="font-weight: 400; display: inline-block; margin-right: 5px; margin-bottom: 10px; border-radius: 3px; background-color: #F4F5F6; padding: 5px 10px 6px">
+              <strong style="font-weight: 200">user</strong>
+              <em style="font-weight: 400">=</em>
+              <span style="font-weight: 400">
+              
+                <a href="https://sentry.io/organizations/navigate-work-digital/issues/?project=4511307499700304&amp;query=user%3A%22id%3A1b29af416bb741f69e91e5ef0d99d202%22" style="font-weight: 500; color: #4674ca; text-decoration: none">id:1b29af416bb741f69e91e5ef0d99d202</a> 
+              
+              </span>
+          </li>
+        
+          <li style="font-weight: 400; display: inline-block; margin-right: 5px; margin-bottom: 10px; border-radius: 3px; background-color: #F4F5F6; padding: 5px 10px 6px">
+              <strong style="font-weight: 200">transaction</strong>
+              <em style="font-weight: 400">=</em>
+              <span style="font-weight: 400">
+              
+                <a href="https://sentry.io/organizations/navigate-work-digital/issues/?project=4511307499700304&amp;query=transaction%3A%22/near-you%22" style="font-weight: 500; color: #4674ca; text-decoration: none">/near-you</a> 
+              
+              </span>
+          </li>
+        
+          <li style="font-weight: 400; display: inline-block; margin-right: 5px; margin-bottom: 10px; border-radius: 3px; background-color: #F4F5F6; padding: 5px 10px 6px">
+              <strong style="font-weight: 200">url</strong>
+              <em style="font-weight: 400">=</em>
+              <span style="font-weight: 400">
+              
+                <a href="https://sentry.io/organizations/navigate-work-digital/issues/?project=4511307499700304&amp;query=url%3A%22https%3A//feelzlike.com/near-you%22" style="font-weight: 500; color: #4674ca; text-decoration: none">https://feelzlike.com/near-you</a> <a href="https://feelzlike.com/near-you" class="icon-share" style="font-weight: 500; color: #4674ca; text-decoration: none"></a>
+              
+              </span>
+          </li>
+        
+        </ul>
+      
+    
+
+    <p class="info-box" style="font-weight: 400; background-color: #f8fbff; border: 1px solid #cce3f3; border-radius: 3px; text-align: left; font-size: 16px; line-height: 24px; margin: 0 0 15px; padding: 15px">
+      
+      This email was triggered by
+      
+          <a href="https://sentry.io/organizations/navigate-work-digital/issues/alerts/rules/javascript-react/554409/?referrer=issue_alert-email&amp;notification_uuid=e447439d-f947-4fb5-a094-d70e11302726?referrer=issue_alert-email&amp;notification_uuid=e447439d-f947-4fb5-a094-d70e11302726" style="font-weight: 500; color: #493e54; text-decoration: underline">Send a notification for high priority issues</a>
+      
+  </p>
+
+    
+        <div class="logo-container" style="font-weight: 400; text-align: center; margin-bottom: 15px">
+            <img src="https://s1.sentry-cdn.com/_static/4ca98e6f5ed231caa7afc02d64e8171a/sentry/images/logos/logo-slack.svg" class="logo" alt="Slack" style="font-weight: 400; max-width: 25px; border-radius: 5px; border: 1px solid #CCC; width: 125px; height: 29px; margin: 5px; padding: 8px">
+            <img src="https://s1.sentry-cdn.com/_static/4ca98e6f5ed231caa7afc02d64e8171a/sentry/images/logos/logo-pagerduty.svg" class="logo" alt="PagerDuty" style="font-weight: 400; max-width: 25px; border-radius: 5px; border: 1px solid #CCC; width: 125px; height: 29px; margin: 5px; padding: 8px">
+            <img src="https://s1.sentry-cdn.com/_static/4ca98e6f5ed231caa7afc02d64e8171a/sentry/images/logos/logo-msteams.svg" class="logo" alt="MS Teams" style="font-weight: 400; max-width: 25px; border-radius: 5px; border: 1px solid #CCC; width: 125px; height: 29px; margin: 5px; padding: 8px">
+            <img src="https://s1.sentry-cdn.com/_static/4ca98e6f5ed231caa7afc02d64e8171a/sentry/images/logos/logo-opsgenie.svg" class="logo" alt="OpsGenie" style="font-weight: 400; max-width: 25px; border-radius: 5px; border: 1px solid #CCC; width: 125px; height: 29px; margin: 5px; padding: 8px">
+            <img src="https://s1.sentry-cdn.com/_static/4ca98e6f5ed231caa7afc02d64e8171a/sentry/images/logos/logo-twilio.svg" class="logo" alt="Twilio" style="font-weight: 400; max-width: 25px; border-radius: 5px; border: 1px solid #CCC; width: 125px; height: 29px; margin: 5px; padding: 8px">
+            <img src="https://s1.sentry-cdn.com/_static/4ca98e6f5ed231caa7afc02d64e8171a/sentry/images/logos/logo-victorops.svg" class="logo" alt="VictorOps" style="font-weight: 400; max-width: 25px; border-radius: 5px; border: 1px solid #CCC; width: 125px; height: 29px; margin: 5px; padding: 8px">
+        </div>
+        <p class="align-center" style="font-weight: 400; text-align: center; font-size: 16px; line-height: 24px; margin: 0 0 15px">
+            <a href="https://sentry.io/settings/navigate-work-digital/integrations/?referrer=alert_email" style="font-weight: 500; color: #4674ca; text-decoration: none">Get this alert wherever you work</a>
+        </p>
+    
+
+    
+    <div itemscope="" itemtype="http://schema.org/EmailMessage" style="font-weight: 400">
+      <meta itemprop="description" content="View Issue Details in Sentry" style="font-weight: 400">
+      <div itemprop="action" itemscope="" itemtype="http://schema.org/ViewAction" style="font-weight: 400">
+        <link itemprop="url" href="https://navigate-work-digital.sentry.io/issues/137465807/?referrer=alert_email&amp;alert_type=email&amp;alert_timestamp=1785373945548&amp;alert_rule_id=554409&amp;notification_uuid=e447439d-f947-4fb5-a094-d70e11302726&amp;environment=production" style="font-weight: 400">
+        <meta itemprop="name" content="View in Sentry" style="font-weight: 400">
+      </div>
+      <div itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization" style="font-weight: 400">
+        <meta itemprop="name" content="Sentry.io" style="font-weight: 400">
+        <link itemprop="url" href="https://sentry.io/" style="font-weight: 400">
+      </div>
+    </div>
+  </div>
+</div>
+
+      <div class="container" style="font-weight: 400; max-width: 600px; text-align: left; margin: 0 auto; padding: 0 20px">
+        <div class="footer" style="font-weight: 400; border-top: 1px solid #E7EBEE; padding: 35px 0">
+          
+          <a href="https://sentry.io" style="font-weight: 500; color: #687276; text-decoration: none; float: right">Home</a>
+
+          
+          <a href="https://sentry.io/settings/account/notifications/alerts/?referrer=issue_alert-email&amp;notification_uuid=e447439d-f947-4fb5-a094-d70e11302726" style="font-weight: 500; color: #687276; text-decoration: none">Notification Settings</a>
+          
+
+          
+          
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
+--===============5245691918241138363==--
