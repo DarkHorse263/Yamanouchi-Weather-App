@@ -310,6 +310,8 @@ export default function ResortDetail() {
         sourceLabel={`${t("Source", "出典")} · Open-Meteo + JMA models`}
         observedAt={observedAt}
         scrollCue={t("Live conditions below", "ライブ状況は下へ")}
+        formatTemp={(c) => u.temp(c) ?? c}
+        tempUnitLabel={u.tempUnit}
       />
 
       <div className="max-w-7xl mx-auto px-5 md:px-10 pb-16 space-y-5 md:space-y-6 -mt-2">
@@ -377,7 +379,14 @@ export default function ResortDetail() {
             blurb="Plan further out · 6-day mountain outlook with snow, wind and temperatures."
             blurbJa="6日間の山岳予報 · 降雪・風速・気温の長期見通し。"
           >
-            <MountainOutlook days={daily as any} elevation={location.elevation} />
+            <MountainOutlook
+              days={daily as any}
+              elevation={location.elevation}
+              formatTemp={(c) => u.temp(c) ?? c}
+              tempUnitLabel={u.tempUnit}
+              formatSnowValue={(cm) => u.snowVal(cm, cm >= 10 ? 0 : 1)}
+              snowUnitLabel={u.snowUnit}
+            />
           </PremiumGate>
         )}
 

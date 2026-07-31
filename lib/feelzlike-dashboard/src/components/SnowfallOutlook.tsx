@@ -12,6 +12,13 @@ export interface SnowfallOutlookProps {
   elevationM?: number | null;
   /** Provenance of that elevation ("village" | "mid-mountain"). */
   level?: string | null;
+  /**
+   * Display-edge unit hooks (member units preference). Canonical inputs stay
+   * metric cm; pass a formatter + label to render "in" for imperial members.
+   * Defaults preserve the metric presentation.
+   */
+  formatValue?: (cm: number) => string;
+  unitLabel?: string;
   className?: string;
 }
 
@@ -30,6 +37,8 @@ export function SnowfallOutlook({
   source = "Open-Meteo · ECMWF",
   elevationM,
   level,
+  formatValue,
+  unitLabel = "cm",
   className,
 }: SnowfallOutlookProps) {
   const snow24 = next24hCm ?? 0;
@@ -57,23 +66,40 @@ export function SnowfallOutlook({
         </div>
       </div>
       <div className="grid grid-cols-3 gap-4 md:gap-6">
-        <SnowBar label="Next 24h" value={snow24} max={snowMax} delay={0} />
-        <SnowBar label="Next 48h" value={snow48} max={snowMax} delay={0.08} />
-        <SnowBar label="Next 72h" value={snow72} max={snowMax} delay={0.16} />
+        <SnowBar label="Next 24h" value={snow24} max={snowMax} delay={0} formatValue={formatValue} unitLabel={unitLabel} />
+        <SnowBar label="Next 48h" value={snow48} max={snowMax} delay={0.08} formatValue={formatValue} unitLabel={unitLabel} />
+        <SnowBar label="Next 72h" value={snow72} max={snowMax} delay={0.16} formatValue={formatValue} unitLabel={unitLabel} />
       </div>
     </motion.div>
   );
 }
 
-function SnowBar({ label, value, max, delay }: { label: string; value: number; max: number; delay: number }) {
+function SnowBar({
+  label,
+  value,
+  max,
+  delay,
+  formatValue,
+  unitLabel,
+}: {
+  label: string;
+  value: number;
+  max: number;
+  delay: number;
+  formatValue?: (cm: number) => string;
+  unitLabel: string;
+}) {
   const pct = Math.min(100, (value / max) * 100);
+  const display = formatValue
+    ? formatValue(value)
+    : value.toFixed(value >= 10 ? 0 : 1);
   return (
     <div className="space-y-2">
       <div className="flex items-baseline justify-between">
         <p className="byline text-muted-foreground/80">{label}</p>
         <p className={cn("font-display text-base tabular-nums", value > 0 ? "text-snow-accent" : "text-foreground")} data-numeric>
-          {value > 0 ? `${value.toFixed(value >= 10 ? 0 : 1)}` : "—"}
-          <span className="text-muted-foreground/60 text-[10px] ml-1 font-normal">cm</span>
+          {value > 0 ? display : "—"}
+          <span className="text-muted-foreground/60 text-[10px] ml-1 font-normal">{unitLabel}</span>
         </p>
       </div>
       <div className="h-1 rounded-full bg-slate-200/70 overflow-hidden">

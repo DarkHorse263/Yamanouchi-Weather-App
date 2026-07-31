@@ -1,6 +1,8 @@
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis, CartesianGrid } from "recharts";
 import { format, parseISO } from "date-fns";
 import type { HourlyForecast } from "@workspace/api-client-react";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
+import { cToF, cmToIn } from "@/lib/unitsFormat";
 
 interface ForecastChartProps {
   data: HourlyForecast[];
@@ -8,17 +10,24 @@ interface ForecastChartProps {
 }
 
 export function ForecastChart({ data, metric }: ForecastChartProps) {
-  // Only show next 24 hours
+  const u = useUnits();
+  const imperial = u.units === "imperial";
+  // Only show next 24 hours · converted at the display edge (canonical data stays metric)
   const chartData = data.slice(0, 24).map(item => ({
     time: format(parseISO(item.time), "ha"),
-    temperature: item.temperature,
-    snowfall: item.snowfall || 0,
+    temperature:
+      item.temperature != null && imperial
+        ? Math.round(cToF(item.temperature) * 10) / 10
+        : item.temperature,
+    snowfall: imperial
+      ? Math.round(cmToIn(item.snowfall || 0) * 100) / 100
+      : item.snowfall || 0,
     windSpeed: item.windSpeed,
   }));
 
   const config = {
-    temperature: { color: "hsl(var(--primary))", unit: "°C", label: "Temperature" },
-    snowfall: { color: "#ec008c", unit: "cm", label: "Snowfall" },
+    temperature: { color: "hsl(var(--primary))", unit: u.tempUnit, label: "Temperature" },
+    snowfall: { color: "#ec008c", unit: u.snowUnit, label: "Snowfall" },
     windSpeed: { color: "hsl(217, 32%, 60%)", unit: "km/h", label: "Wind" },
   };
 

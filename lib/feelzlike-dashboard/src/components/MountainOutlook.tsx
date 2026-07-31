@@ -23,6 +23,15 @@ export interface MountainOutlookProps {
   elevation: number;
   sectionNumber?: string;
   heading?: string;
+  /**
+   * Display-edge unit hooks (member units preference). Canonical inputs stay
+   * metric °C/cm; pass converters + a label to render °F/in for imperial
+   * members. Defaults preserve the metric presentation. Rain stays mm.
+   */
+  formatTemp?: (c: number) => number;
+  tempUnitLabel?: string;
+  formatSnowValue?: (cm: number) => string;
+  snowUnitLabel?: string;
 }
 
 function WeatherIcon({ code, className = "w-5 h-5" }: { code: number | null | undefined; className?: string }) {
@@ -76,7 +85,14 @@ export function MountainOutlook({
   elevation,
   sectionNumber = "",
   heading,
+  formatTemp,
+  tempUnitLabel = "°C",
+  formatSnowValue,
+  snowUnitLabel = "cm",
 }: MountainOutlookProps) {
+  const cvTemp = formatTemp ?? ((c: number) => c);
+  const cvSnow =
+    formatSnowValue ?? ((cm: number) => cm.toFixed(cm >= 10 ? 0 : 1));
   const days = rawDays.slice(0, maxDays);
   const headingText = heading ?? `${days.length}-day mountain forecast`;
   const maxSnow = Math.max(0.1, ...days.map((d) => Number(d.snowfallSum) || 0));
@@ -131,8 +147,8 @@ export function MountainOutlook({
               </p>
 
               <div className="flex items-baseline justify-center gap-1.5 font-display mt-1" data-numeric>
-                <span className="text-foreground text-lg md:text-xl">{Math.round(day.maxTemp)}°</span>
-                <span className="text-muted-foreground/60 text-xs">{Math.round(day.minTemp)}°</span>
+                <span className="text-foreground text-lg md:text-xl">{Math.round(cvTemp(day.maxTemp))}{tempUnitLabel}</span>
+                <span className="text-muted-foreground/60 text-xs">{Math.round(cvTemp(day.minTemp))}{tempUnitLabel}</span>
               </div>
 
               <div className="w-full flex items-end justify-center gap-1 h-9 mt-1.5" aria-hidden>
@@ -140,7 +156,7 @@ export function MountainOutlook({
                   <div
                     className="w-2.5 rounded-t-sm bg-snow-accent/70"
                     style={{ height: `${snow > 0 ? Math.max(8, snowH) : 0}%` }}
-                    title={`${snow.toFixed(1)} cm snow`}
+                    title={`${cvSnow(snow)} ${snowUnitLabel} snow`}
                   />
                   <Snowflake className="w-2.5 h-2.5 text-snow-accent/70 mt-0.5" />
                 </div>
@@ -154,7 +170,7 @@ export function MountainOutlook({
                 </div>
               </div>
               <div className="flex items-center gap-1 text-[10px] tabular-nums text-muted-foreground/80 mt-0.5">
-                <span className="text-snow-accent">{snow > 0 ? `${snow.toFixed(snow >= 10 ? 0 : 1)}cm` : "-"}</span>
+                <span className="text-snow-accent">{snow > 0 ? `${cvSnow(snow)}${snowUnitLabel}` : "-"}</span>
                 <span className="text-muted-foreground/40">/</span>
                 <span className="text-slate-600">{rain > 0 ? `${rain.toFixed(rain >= 10 ? 0 : 1)}mm` : "-"}</span>
               </div>

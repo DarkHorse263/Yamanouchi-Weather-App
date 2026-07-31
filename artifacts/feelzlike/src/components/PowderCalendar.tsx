@@ -9,6 +9,9 @@ import {
   type PowderThresholds,
 } from "@/types/weather";
 import { GRADE_STYLES } from "./HourlyForecast";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
+
+type Units = ReturnType<typeof useUnits>;
 
 type Tx = (en: string, ja: string) => string;
 
@@ -43,6 +46,7 @@ export function PowderCalendar({
   sectionNumber = "",
 }: Props) {
   const tx: Tx = t ?? ((en) => en);
+  const u = useUnits();
   const summaries = useMemo(
     () => dailyBestPowderWindows(hourly, days, thresholds),
     [hourly, days, thresholds],
@@ -81,7 +85,7 @@ export function PowderCalendar({
         className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-2"
       >
         {summaries.map((s) => (
-          <DayPill key={s.dateIso} summary={s} t={tx} />
+          <DayPill key={s.dateIso} summary={s} t={tx} u={u} />
         ))}
       </div>
 
@@ -95,7 +99,7 @@ export function PowderCalendar({
   );
 }
 
-function DayPill({ summary, t }: { summary: DailyPowderSummary; t: Tx }) {
+function DayPill({ summary, t, u }: { summary: DailyPowderSummary; t: Tx; u: Units }) {
   const { dateIso, best, daySnow } = summary;
   const date = new Date(dateIso + "T00:00:00Z"); // parse UTC to avoid TZ shift
   const dayOfWeek = date.toLocaleDateString("en-US", {
@@ -107,11 +111,11 @@ function DayPill({ summary, t }: { summary: DailyPowderSummary; t: Tx }) {
   const tone = best ? GRADE_STYLES[best.grade].pill : "bg-white border-border text-muted-foreground";
   const labelText = best
     ? t(
-        `${best.grade.toUpperCase()} window: ${best.totalSnow}cm over ${best.hours}h, ${best.avgWind}km/h wind`,
-        `${best.grade.toUpperCase()}ウィンドウ: ${best.hours}時間で${best.totalSnow}cm、風速${best.avgWind}km/h`,
+        `${best.grade.toUpperCase()} window: ${u.snow(best.totalSnow)} over ${best.hours}h, ${best.avgWind}km/h wind`,
+        `${best.grade.toUpperCase()}ウィンドウ: ${best.hours}時間で${u.snow(best.totalSnow)}、風速${best.avgWind}km/h`,
       )
     : daySnow > 0
-      ? t(`${daySnow}cm forecast - no sustained window`, `${daySnow}cm予報 - 持続的なウィンドウなし`)
+      ? t(`${u.snow(daySnow)} forecast - no sustained window`, `${u.snow(daySnow)}予報 - 持続的なウィンドウなし`)
       : t("No snow forecast", "降雪予報なし");
 
   return (
@@ -130,11 +134,11 @@ function DayPill({ summary, t }: { summary: DailyPowderSummary; t: Tx }) {
       </p>
       {best ? (
         <p className="text-[10px] font-semibold tabular-nums leading-tight text-center mt-1">
-          {best.totalSnow}cm
+          {u.snowVal(best.totalSnow)}{u.snowUnit}
         </p>
       ) : daySnow > 0 ? (
         <p className="text-[10px] tabular-nums leading-tight text-center mt-1 inline-flex items-center gap-0.5 opacity-70">
-          <Snowflake className="w-2.5 h-2.5" aria-hidden /> {daySnow}cm
+          <Snowflake className="w-2.5 h-2.5" aria-hidden /> {u.snowVal(daySnow)}{u.snowUnit}
         </p>
       ) : (
         <p className="text-[10px] opacity-50 mt-1">-</p>

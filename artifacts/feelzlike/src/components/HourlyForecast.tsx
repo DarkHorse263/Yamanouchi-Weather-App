@@ -31,6 +31,10 @@ import {
   type SkiableNowRead,
 } from "@/lib/skiSeason";
 import { SnowfallOutlook, type SnowfallOutlookProps } from "@workspace/feelzlike-dashboard";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
+
+/** Bound display-edge unit formatters from useUnits(). */
+type Units = ReturnType<typeof useUnits>;
 
 type Tx = (en: string, ja: string) => string;
 
@@ -183,6 +187,7 @@ export function HourlyForecast({
   snowfallOutlook,
 }: Props) {
   const tx: Tx = t ?? ((en) => en);
+  const u = useUnits();
   const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   const future = useMemo(() => {
@@ -262,6 +267,7 @@ export function HourlyForecast({
                       window={win}
                       hours={future}
                       t={tx}
+                      u={u}
                       onClick={() => setOpenIdx(idx)}
                       isExpanded={openIdx === idx}
                     />
@@ -278,6 +284,8 @@ export function HourlyForecast({
       {snowfallOutlook && (
         <SnowfallOutlook
           {...snowfallOutlook}
+          formatValue={(cm) => u.snowVal(cm, cm >= 10 ? 0 : 1)}
+          unitLabel={u.snowUnit}
           className="mb-5 pb-5 border-b border-slate-200/70"
         />
       )}
@@ -289,6 +297,7 @@ export function HourlyForecast({
             window={windows[openIdx]}
             hours={future}
             t={tx}
+            u={u}
             onClose={() => setOpenIdx(null)}
             thresholds={thresholds}
           />
@@ -314,6 +323,7 @@ export function HourlyForecast({
               hour={h}
               powderGrade={cellWin?.win.grade ?? null}
               isFirst={i === 0}
+              u={u}
             />
           );
         })}
@@ -426,15 +436,18 @@ function HourCell({
   hour,
   powderGrade,
   isFirst,
+  u,
 }: {
   hour: HourlyForecastT;
   powderGrade: PowderGrade | null;
   isFirst: boolean;
+  u: Units;
 }) {
   const hourLabel = formatHourLabel(hour.time);
-  const snow = Math.round((hour.snowfall ?? 0) * 10) / 10;
+  const snowCm = Math.round((hour.snowfall ?? 0) * 10) / 10;
+  const snow = snowCm > 0 ? u.snowVal(snowCm, 1) : "0";
   const wind = Math.round(hour.windSpeed ?? 0);
-  const temp = Math.round(hour.temperature ?? 0);
+  const temp = u.temp(hour.temperature ?? 0);
   const cellTone = powderGrade ? GRADE_STYLES[powderGrade].cell : "bg-white/60 border-border";
   const iconTone = powderGrade === "gold"
     ? "text-amber-700"
@@ -451,7 +464,7 @@ function HourCell({
         "snap-start shrink-0 w-[58px] md:w-[64px] flex flex-col items-center gap-1 rounded-xl border px-1.5 py-2.5 transition-colors",
         cellTone,
       )}
-      title={`${hourLabel} · ${temp}°C · ${snow > 0 ? `${snow}cm snow · ` : ""}${wind} km/h wind${powderGrade ? ` · ${powderGrade.toUpperCase()} powder window` : ""}`}
+      title={`${hourLabel} · ${temp}${u.tempUnit} · ${snowCm > 0 ? `${snow}${u.snowUnit} snow · ` : ""}${wind} km/h wind${powderGrade ? ` · ${powderGrade.toUpperCase()} powder window` : ""}`}
     >
       <p
         className={cn(
@@ -468,9 +481,10 @@ function HourCell({
         className="font-display text-base text-foreground tabular-nums leading-none"
         data-numeric
       >
-        {temp}°
+        {temp}
+        <span className="text-[10px] text-muted-foreground/80">{u.tempUnit}</span>
       </p>
-      {snow > 0 ? (
+      {snowCm > 0 ? (
         <div className="flex items-center gap-1 text-xs font-semibold tabular-nums leading-none text-snow-accent">
           <Snowflake className="w-3 h-3" aria-hidden />
           {snow}
@@ -495,12 +509,14 @@ function PowderBadge({
   window,
   hours,
   t,
+  u,
   onClick,
   isExpanded,
 }: {
   window: PowderWindow;
   hours: HourlyForecastT[];
   t: Tx;
+  u: Units;
   onClick: () => void;
   isExpanded: boolean;
 }) {
@@ -516,8 +532,8 @@ function PowderBadge({
       onClick={onClick}
       aria-expanded={isExpanded}
       aria-label={t(
-        `${window.grade.toUpperCase()} Powder Window: ${startLabel}-${endLabel}, ${window.totalSnow}cm forecast`,
-        `${style.labelJa}パウダーウィンドウ: ${startLabel}-${endLabel}, ${window.totalSnow}cm 予報`,
+        `${window.grade.toUpperCase()} Powder Window: ${startLabel}-${endLabel}, ${u.snow(window.totalSnow)} forecast`,
+        `${style.labelJa}パウダーウィンドウ: ${startLabel}-${endLabel}, ${u.snow(window.totalSnow)} 予報`,
       )}
       className={cn(
         "relative inline-flex items-center gap-2 rounded-2xl border px-3 py-2 text-left overflow-hidden transition-all hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40",
@@ -537,7 +553,7 @@ function PowderBadge({
         <p className="text-xs font-semibold tabular-nums">
           {startLabel}-{endLabel} ·{" "}
           <span className="font-bold">
-            {window.totalSnow}cm · {window.avgWind}km/h
+            {u.snow(window.totalSnow)} · {window.avgWind}km/h
           </span>
         </p>
       </div>
@@ -568,12 +584,14 @@ function PowderDetail({
   window,
   hours,
   t,
+  u,
   onClose,
   thresholds,
 }: {
   window: PowderWindow;
   hours: HourlyForecastT[];
   t: Tx;
+  u: Units;
   onClose: () => void;
   thresholds?: PowderThresholds;
 }) {
@@ -614,7 +632,7 @@ function PowderDetail({
       <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
         <DetailStat
           label={t("Total snow", "総降雪")}
-          value={`${window.totalSnow}cm`}
+          value={u.snow(window.totalSnow)}
         />
         <DetailStat
           label={t("Duration", "時間")}
@@ -630,14 +648,23 @@ function PowderDetail({
         />
       </div>
       <p className="mt-3 text-xs opacity-80 leading-relaxed">
-        {t(
-          isAU
-            ? "AU thresholds: snowfall ≥0.5cm/hr, wind <25km/h, ≥3 consecutive hours, ≤+2°C."
-            : "Thresholds: snowfall ≥1cm/hr, wind <20km/h, ≥3 consecutive hours, ≤+2°C.",
-          isAU
-            ? "AU基準: 降雪0.5cm/時以上、風速25km/時未満、3時間以上連続、+2℃以下。"
-            : "基準: 降雪1cm/時以上、風速20km/時未満、3時間以上連続、+2℃以下。",
-        )}
+        {u.units === "imperial"
+          ? t(
+              isAU
+                ? "AU thresholds: snowfall ≥0.2in/hr, wind <25km/h, ≥3 consecutive hours, ≤36°F."
+                : "Thresholds: snowfall ≥0.4in/hr, wind <20km/h, ≥3 consecutive hours, ≤36°F.",
+              isAU
+                ? "AU基準: 降雪0.2in/時以上、風速25km/時未満、3時間以上連続、36°F以下。"
+                : "基準: 降雪0.4in/時以上、風速20km/時未満、3時間以上連続、36°F以下。",
+            )
+          : t(
+              isAU
+                ? "AU thresholds: snowfall ≥0.5cm/hr, wind <25km/h, ≥3 consecutive hours, ≤+2°C."
+                : "Thresholds: snowfall ≥1cm/hr, wind <20km/h, ≥3 consecutive hours, ≤+2°C.",
+              isAU
+                ? "AU基準: 降雪0.5cm/時以上、風速25km/時未満、3時間以上連続、+2℃以下。"
+                : "基準: 降雪1cm/時以上、風速20km/時未満、3時間以上連続、+2℃以下。",
+            )}
       </p>
     </motion.div>
   );

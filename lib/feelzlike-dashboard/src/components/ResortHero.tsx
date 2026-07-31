@@ -17,6 +17,13 @@ export interface ResortHeroProps {
   observedAt?: string | null;
   /** Region eyebrow shown below the hero, e.g. "Live conditions below" */
   scrollCue?: string;
+  /**
+   * Display-edge unit hooks (member units preference). Canonical inputs stay
+   * metric °C; pass a converter + label to render °F for imperial members.
+   * Defaults preserve the metric presentation.
+   */
+  formatTemp?: (c: number) => number;
+  tempUnitLabel?: string;
 }
 
 function formatAgo(iso: string | undefined | null, now: number): string {
@@ -43,7 +50,10 @@ export function ResortHero({
   isLive,
   observedAt,
   scrollCue = "Live conditions below",
+  formatTemp,
+  tempUnitLabel = "°C",
 }: ResortHeroProps) {
+  const cv = formatTemp ?? ((c: number) => c);
   const [now, setNow] = useState(() => Date.now());
   useEffect(() => {
     const id = setInterval(() => setNow(Date.now()), 30_000);
@@ -137,15 +147,15 @@ export function ResortHero({
                   className="display-number text-foreground text-[clamp(7rem,18vw,11rem)]"
                   data-numeric
                 >
-                  {Math.round(temperatureC)}
+                  {Math.round(cv(temperatureC))}
                 </span>
-                <span className="font-display text-foreground/70 text-3xl md:text-4xl mt-4">°C</span>
+                <span className="font-display text-foreground/70 text-3xl md:text-4xl mt-4">{tempUnitLabel}</span>
               </div>
               {(weatherDescription || feelsLikeC != null) && (
                 <p className="byline text-muted-foreground mt-1">
                   {weatherDescription ?? ""}
                   {weatherDescription && feelsLikeC != null && " · "}
-                  {feelsLikeC != null && `feelzlike ${Math.round(feelsLikeC)}°`}
+                  {feelsLikeC != null && `feelzlike ${Math.round(cv(feelsLikeC))}${tempUnitLabel}`}
                 </p>
               )}
             </div>

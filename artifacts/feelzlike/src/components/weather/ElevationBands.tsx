@@ -5,6 +5,9 @@ import {
   useGetElevationForecast,
 } from "@workspace/api-client-react";
 import { useLanguage } from "@workspace/feelzlike-shell";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
+
+type Units = ReturnType<typeof useUnits>;
 
 interface Props {
   lat: number | undefined;
@@ -26,6 +29,7 @@ interface Props {
  */
 export function ElevationBands({ lat, lng, summitElevationM, name }: Props) {
   const { t } = useLanguage();
+  const u = useUnits();
   const enabled =
     typeof lat === "number" &&
     typeof lng === "number" &&
@@ -80,6 +84,7 @@ export function ElevationBands({ lat, lng, summitElevationM, name }: Props) {
             midM={midM}
             lowerM={lowerM}
             t={t}
+            u={u}
           />
         ))}
       </div>
@@ -128,9 +133,9 @@ export function ElevationBands({ lat, lng, summitElevationM, name }: Props) {
                     {(d.weatherDescription || "·").toLowerCase()}
                   </p>
                 </td>
-                <BandCell band={d.bands.upper} />
-                <BandCell band={d.bands.mid} />
-                <BandCell band={d.bands.lower} />
+                <BandCell band={d.bands.upper} u={u} />
+                <BandCell band={d.bands.mid} u={u} />
+                <BandCell band={d.bands.lower} u={u} />
                 <td className="py-3 pl-3 border-t border-border/60 text-right">
                   <p className="font-display font-semibold text-foreground text-sm">
                     {d.windMaxKmh != null ? `${Math.round(d.windMaxKmh)}` : "-"}
@@ -178,8 +183,10 @@ function BandHead({
 
 function BandCell({
   band,
+  u,
 }: {
   band: { tempMaxC: number | null; tempMinC: number | null; snowfallCm: number | null };
+  u: Units;
 }) {
   const snow = band.snowfallCm;
   const hasSnow = snow != null && snow > 0;
@@ -188,12 +195,12 @@ function BandCell({
       <p className="font-display font-semibold text-foreground text-sm leading-tight">
         <span className="inline-flex items-center gap-0.5">
           <ArrowUp className="w-2.5 h-2.5 text-muted-foreground/60" />
-          {band.tempMaxC != null ? `${Math.round(band.tempMaxC)}°` : "-"}
+          {band.tempMaxC != null ? `${u.temp(band.tempMaxC)}${u.tempUnit}` : "-"}
         </span>
         <span className="mx-1 text-muted-foreground/40">·</span>
         <span className="inline-flex items-center gap-0.5">
           <ArrowDown className="w-2.5 h-2.5 text-muted-foreground/60" />
-          {band.tempMinC != null ? `${Math.round(band.tempMinC)}°` : "-"}
+          {band.tempMinC != null ? `${u.temp(band.tempMinC)}${u.tempUnit}` : "-"}
         </span>
       </p>
       <p
@@ -202,7 +209,7 @@ function BandCell({
         }`}
       >
         {hasSnow ? <Snowflake className="w-2.5 h-2.5" /> : <CloudSnow className="w-2.5 h-2.5" />}
-        {snow != null ? `${snow.toFixed(1)} cm` : "·"}
+        {snow != null ? u.snow(snow, 1) : "·"}
       </p>
     </td>
   );
@@ -227,6 +234,7 @@ function DayCard({
   midM,
   lowerM,
   t,
+  u,
 }: {
   day: DayPayload;
   idx: number;
@@ -234,6 +242,7 @@ function DayCard({
   midM: number | null;
   lowerM: number | null;
   t: (en: string, ja: string) => string;
+  u: Units;
 }) {
   return (
     <div className="rounded-xl border border-border/60 bg-white p-3">
@@ -269,18 +278,21 @@ function DayCard({
           elevationM={upperM}
           band={day.bands.upper}
           tone="text-sky-900"
+          u={u}
         />
         <BandRow
           label={t("mid", "中腹")}
           elevationM={midM}
           band={day.bands.mid}
           tone="text-sky-800"
+          u={u}
         />
         <BandRow
           label={t("base", "山麓")}
           elevationM={lowerM}
           band={day.bands.lower}
           tone="text-sky-700"
+          u={u}
         />
       </div>
     </div>
@@ -292,11 +304,13 @@ function BandRow({
   elevationM,
   band,
   tone,
+  u,
 }: {
   label: string;
   elevationM: number | null;
   band: { tempMaxC: number | null; tempMinC: number | null; snowfallCm: number | null };
   tone: string;
+  u: Units;
 }) {
   const snow = band.snowfallCm;
   const hasSnow = snow != null && snow > 0;
@@ -315,12 +329,12 @@ function BandRow({
         <span className="font-display font-semibold text-foreground text-sm tabular-nums">
           <span className="inline-flex items-center gap-0.5">
             <ArrowUp className="w-2.5 h-2.5 text-muted-foreground/60" />
-            {band.tempMaxC != null ? `${Math.round(band.tempMaxC)}°` : "-"}
+            {band.tempMaxC != null ? `${u.temp(band.tempMaxC)}${u.tempUnit}` : "-"}
           </span>
           <span className="mx-1 text-muted-foreground/40">·</span>
           <span className="inline-flex items-center gap-0.5">
             <ArrowDown className="w-2.5 h-2.5 text-muted-foreground/60" />
-            {band.tempMinC != null ? `${Math.round(band.tempMinC)}°` : "-"}
+            {band.tempMinC != null ? `${u.temp(band.tempMinC)}${u.tempUnit}` : "-"}
           </span>
         </span>
         <span
@@ -329,7 +343,7 @@ function BandRow({
           }`}
         >
           {hasSnow ? <Snowflake className="w-2.5 h-2.5" /> : <CloudSnow className="w-2.5 h-2.5" />}
-          {snow != null ? `${snow.toFixed(1)} cm` : "·"}
+          {snow != null ? u.snow(snow, 1) : "·"}
         </span>
       </div>
     </div>

@@ -27,6 +27,9 @@ import {
 } from "@/lib/tripForecasts";
 import { REGION_COUNTRY, COUNTRY_META, type CountryCode } from "@/regions";
 import { readLastTown, readFavouriteRegion } from "@/lib/favouriteRegion";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
+
+type Units = ReturnType<typeof useUnits>;
 
 // ─── Presentation helpers ──────────────────────────────────────────────────
 
@@ -118,7 +121,7 @@ function CountrySwitcher({
 
 // ─── Snapshot day cell ──────────────────────────────────────────────────────
 
-function DayCell({ day }: { day: PlannerForecastDay }) {
+function DayCell({ day, u }: { day: PlannerForecastDay; u: Units }) {
   const snow = Math.round(day.snowMean);
   return (
     <div className="rounded-xl bg-secondary/40 border border-border/50 px-1.5 py-2 flex flex-col items-center text-center">
@@ -134,10 +137,10 @@ function DayCell({ day }: { day: PlannerForecastDay }) {
         }`}
       >
         <Snowflake className="w-2.5 h-2.5" />
-        {snow}cm
+        {u.snowVal(snow)}{u.snowUnit}
       </span>
       <span className="text-[11px] text-foreground font-semibold mt-1 leading-none">
-        {Math.round(day.tempMaxMean)}°
+        {u.temp(day.tempMaxMean)}{u.tempUnit}
       </span>
     </div>
   );
@@ -148,9 +151,11 @@ function DayCell({ day }: { day: PlannerForecastDay }) {
 function DestinationCard({
   mountain,
   entry,
+  u,
 }: {
   mountain: CatalogMountain;
   entry: PlannerForecastEntry | undefined;
+  u: Units;
 }) {
   const days =
     entry?.status === "ok" ? entry.days.slice(0, SNAPSHOT_DAYS) : [];
@@ -170,7 +175,7 @@ function DestinationCard({
         {entry?.status === "ok" && days.length > 0 && (
           <span className="shrink-0 inline-flex items-center gap-1.5 text-sm font-bold text-snow-accent">
             <Snowflake className="w-4 h-4" />
-            {Math.round(totalSnow)}cm
+            {u.snowVal(Math.round(totalSnow))}{u.snowUnit}
           </span>
         )}
       </div>
@@ -189,7 +194,7 @@ function DestinationCard({
               style={{ gridTemplateColumns: `repeat(${days.length}, minmax(0, 1fr))` }}
             >
               {days.map((d) => (
-                <DayCell key={d.date} day={d} />
+                <DayCell key={d.date} day={d} u={u} />
               ))}
             </div>
             <p className="text-[11px] text-muted-foreground/70 mt-2">
@@ -272,6 +277,7 @@ function MountainPicker({
 
 function TripResults({ mountains }: { mountains: CatalogMountain[] }) {
   const forecasts = useTripForecasts(mountains);
+  const u = useUnits();
   return (
     <div className="space-y-3">
       {mountains.map((m) => (
@@ -279,6 +285,7 @@ function TripResults({ mountains }: { mountains: CatalogMountain[] }) {
           key={mountainKey(m.regionId, m.id)}
           mountain={m}
           entry={forecasts[mountainKey(m.regionId, m.id)]}
+          u={u}
         />
       ))}
     </div>
