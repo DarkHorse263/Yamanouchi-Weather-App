@@ -1,4 +1,11 @@
-import { createContext, useContext, useMemo, type ReactNode } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
 import { useGetAccount } from "@workspace/api-client-react";
 import { useAuthAccount } from "./SignUpProvider";
 import {
@@ -19,7 +26,9 @@ import {
  * (users.homeRegionId + users.units, edited on /account).
  *
  * - Anonymous visitors: the account query never fires (enabled gate) and
- *   everyone sees the metric defaults — personalisation is strictly additive.
+ *   units follow a lightweight LOCAL preference (localStorage) editable via
+ *   the footer toggle · no account needed. Once signed in, the saved account
+ *   preference always wins over the local toggle.
  * - Query key is shared with the /account page ("account"), so a profile
  *   save there invalidates/refreshes here and the whole app flips at once.
  * - Components may call useUserPrefs()/useUnits() WITHOUT a provider (e.g.
@@ -37,6 +46,37 @@ const UserPrefsContext = createContext<UserPrefs>(DEFAULT_PREFS);
 
 export function useUserPrefs(): UserPrefs {
   return useContext(UserPrefsContext);
+}
+
+/** localStorage key for the anonymous-visitor units preference. */
+const LOCAL_UNITS_KEY = "feelzlike:units";
+
+function readLocalUnits(): UnitsPref {
+  try {
+    return localStorage.getItem(LOCAL_UNITS_KEY) === "imperial" ? "imperial" : "metric";
+  } catch {
+    return "metric"; // private mode / SSR — fail-soft to metric
+  }
+}
+
+interface UnitsControl {
+  /** effective units currently in force (account wins over local) */
+  units: UnitsPref;
+  /** true when the value comes from the signed-in account preference */
+  fromAccount: boolean;
+  /** set the LOCAL (anonymous) preference · no-op display-wise while signed in */
+  setLocalUnits: (u: UnitsPref) => void;
+}
+
+const UnitsControlContext = createContext<UnitsControl>({
+  units: "metric",
+  fromAccount: false,
+  setLocalUnits: () => {},
+});
+
+/** Toggle-facing control: read/set the local units preference. */
+export function useUnitsControl(): UnitsControl {
+  return useContext(UnitsControlContext);
 }
 
 /** Display-edge unit formatters bound to the member's saved preference. */
@@ -78,13 +118,41 @@ export function UserPrefsProvider({ children }: { children: ReactNode }) {
   });
   const profile = isAuthenticated ? (query.data?.profile ?? null) : null;
 
+  // Local (anonymous) preference · persisted so the choice survives reloads.
+  const [localUnits, setLocalUnitsState] = useState<UnitsPref>(readLocalUnits);
+  const setLocalUnits = useCallback((u: UnitsPref) => {
+    setLocalUnitsState(u);
+    try {
+      localStorage.setItem(LOCAL_UNITS_KEY, u);
+    } catch {
+      // private mode — in-memory only for this session
+    }
+  }, []);
+
+  // Account preference wins once signed in; local toggle drives anonymous.
+  const accountUnits: UnitsPref | null = profile
+    ? profile.units === "imperial"
+      ? "imperial"
+      : "metric"
+    : null;
+  const units: UnitsPref = accountUnits ?? localUnits;
+
   const value = useMemo<UserPrefs>(
     () => ({
-      units: profile?.units === "imperial" ? "imperial" : "metric",
+      units,
       homeRegionId: profile?.homeRegionId ?? null,
     }),
-    [profile?.units, profile?.homeRegionId],
+    [units, profile?.homeRegionId],
   );
 
-  return <UserPrefsContext.Provider value={value}>{children}</UserPrefsContext.Provider>;
+  const control = useMemo<UnitsControl>(
+    () => ({ units, fromAccount: accountUnits !== null, setLocalUnits }),
+    [units, accountUnits, setLocalUnits],
+  );
+
+  return (
+    <UnitsControlContext.Provider value={control}>
+      <UserPrefsContext.Provider value={value}>{children}</UserPrefsContext.Provider>
+    </UnitsControlContext.Provider>
+  );
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ChevronDown, Shield } from "lucide-react";
 import { useAuth } from "@workspace/replit-auth-web";
+import { useUnitsControl } from "@/components/auth/UserPrefsProvider";
 
 /**
  * Site-wide footer for the homepage.
@@ -20,6 +21,7 @@ export function HomeFooter() {
   // itself does the real authorization check (server-side allowlist), so this
   // is purely UI hygiene · non-admins simply never see the link.
   const { isAuthenticated } = useAuth();
+  const { units, fromAccount, setLocalUnits } = useUnitsControl();
 
   const linkCls = "text-slate-600 hover:text-sky-700 transition-colors";
   const sep = <span className="text-slate-300" aria-hidden>&middot;</span>;
@@ -83,6 +85,33 @@ export function HomeFooter() {
             <li aria-hidden className="text-slate-300">&middot;</li>
             <li><a className="hover:text-sky-700" href="/yamanouchi/sources">yamanouchi &middot; jp</a></li>
           </ul>
+        )}
+
+        {!fromAccount && (
+          <div className="mt-3 inline-flex items-center gap-1 text-[11.5px]">
+            <span className="text-slate-400 mr-1">units</span>
+            <div
+              role="group"
+              aria-label="units"
+              className="inline-flex overflow-hidden rounded-full border border-slate-200"
+            >
+              {(["metric", "imperial"] as const).map((u) => (
+                <button
+                  key={u}
+                  type="button"
+                  aria-pressed={units === u}
+                  onClick={() => setLocalUnits(u)}
+                  className={`px-2.5 py-1 transition-colors ${
+                    units === u
+                      ? "bg-sky-600 text-white"
+                      : "bg-white text-slate-600 hover:text-sky-700"
+                  }`}
+                >
+                  {u === "metric" ? "°c · km/h" : "°f · mph"}
+                </button>
+              ))}
+            </div>
+          </div>
         )}
 
         <p className="mt-3 text-[11px] text-slate-400">
