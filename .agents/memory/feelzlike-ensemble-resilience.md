@@ -24,3 +24,6 @@ In production the HEAVIER multi-model Open-Meteo request gets throttled (429) / 
 - Client "Today" label is `isToday(parseISO(day.date))`, NOT `index===0` (index 0 mislabels tomorrow as Today in the MET-only path where today was dropped).
 
 **How to apply:** any change here is per-process in-memory cache, so a fix only reaches prod after a re-publish. Change is additive (`_stale` optional, days can be []) → no SW CACHE_VERSION bump needed.
+
+## Snow phase (July 2026)
+Per-model snow is now FL−300m phase-partitioned: the multi-model request also pulls `hourly=precipitation,freezing_level_height` per model and runs each model's own hourly precip through the shared `partitionHourlySnowfallCm` helper at the requested elevation, summed per local day. Raw `snowfall_sum` (phased at each model's grid terrain) is only a per-day fallback when a precip hour lacks a usable freezing level. This keeps the ensemble card telling the same snow story as the headline /weather figures and the elevation bands on marginal freezing-level days. MET Norway stays precip×0.7 when the day is freezing (no snowfall channel).

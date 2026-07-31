@@ -20,6 +20,8 @@
  * Cached for 30 minutes per (lat,lon,elevation) tuple.
  */
 
+import { partitionHourlySnowfallCm } from "./openMeteoElevation.js";
+
 const FRESH_MS = 30 * 60 * 1000; // serve straight from cache for 30 min
 const STALE_MS = 6 * 60 * 60 * 1000; // keep the last good outlook usable as a fallback for 6h
 // Fail fast on a slow or throttled upstream instead of hanging the /forecast
@@ -124,6 +126,15 @@ interface OpenMeteoModelDaily {
   temperature_2m_min?: (number | null)[];
   precipitation_sum?: (number | null)[];
   snowfall_sum?: (number | null)[];
+  /**
+   * Freezing-level phase-partitioned daily snowfall (cm) keyed by YYYY-MM-DD,
+   * derived from the model's own hourly precipitation + freezing level via the
+   * shared FL−300m partition (same physics as the headline /weather figures and
+   * the elevation bands). `null` for a day means the partition was unreliable
+   * (a precip hour had no usable freezing level) — fall back to the model's raw
+   * snowfall_sum for that day.
+   */
+  partitionedSnowCmByDate?: Map<string, number | null>;
 }
 
 async function fetchOpenMeteoMulti(q: EnsembleQuery): Promise<{
@@ -137,6 +148,12 @@ async function fetchOpenMeteoMulti(q: EnsembleQuery): Promise<{
     longitude: String(q.longitude),
     elevation: String(q.elevation),
     daily: "temperature_2m_max,temperature_2m_min,precipitation_sum,snowfall_sum",
+    // Hourly precipitation + freezing level per model so we can phase-partition
+    // each model's precip at the requested elevation (FL−300m snow line) — the
+    // raw snowfall_sum is phased at each model's own grid terrain, which is how
+    // the ensemble card ended up telling a different snow story than the
+    // headline on marginal freezing-level days.
+    hourly: "precipitation,freezing_level_height",
     timezone: q.timezone ?? "auto",
     forecast_days: String(q.days ?? 7),
     models: models.join(","),
@@ -152,6 +169,8 @@ async function fetchOpenMeteoMulti(q: EnsembleQuery): Promise<{
     if (!res.ok) throw new Error(`Open-Meteo ${res.status}`);
     const json = (await res.json()) as any;
     const daily = json.daily ?? {};
+    const hourly = json.hourly ?? {};
+    const hourlyTimes: string[] = hourly.time ?? [];
 
     // When multiple models are requested Open-Meteo suffixes each variable
     // with `_<modelname>`, e.g. `temperature_2m_max_ecmwf_ifs025`. When
@@ -167,6 +186,28 @@ async function fetchOpenMeteoMulti(q: EnsembleQuery): Promise<{
         precipitation_sum: daily[`precipitation_sum${sfx}`],
         snowfall_sum: daily[`snowfall_sum${sfx}`],
       };
+      // Phase-partition this model's own hourly precip at the requested
+      // elevation using its own freezing level (shared FL−300m helper). Days
+      // where the partition is unreliable stay null → raw snowfall fallback.
+      const hourlyPrecip: (number | null | undefined)[] = hourly[`precipitation${sfx}`] ?? [];
+      const hourlyFl: (number | null | undefined)[] = hourly[`freezing_level_height${sfx}`] ?? [];
+      if (hourlyTimes.length > 0 && hourlyPrecip.length > 0 && hourlyFl.length > 0) {
+        const perHour = partitionHourlySnowfallCm(hourlyPrecip, hourlyFl, q.elevation);
+        const byDate = new Map<string, number | null>();
+        for (let i = 0; i < hourlyTimes.length; i++) {
+          const date = hourlyTimes[i]?.slice(0, 10);
+          if (!date) continue;
+          const prev = byDate.has(date) ? byDate.get(date) : 0;
+          const h = perHour[i];
+          // A null hour (precip with no usable freezing level) poisons the
+          // whole day → fall back to that day's raw snowfall_sum.
+          byDate.set(date, prev === null || h === null ? null : (prev ?? 0) + h);
+        }
+        for (const [date, v] of byDate) {
+          if (typeof v === "number") byDate.set(date, Math.round(v * 10) / 10);
+        }
+        modelDaily.partitionedSnowCmByDate = byDate;
+      }
       const hasData = modelDaily.temperature_2m_max?.some((v) => v !== null && v !== undefined);
       perModel[m] = modelDaily;
       sources.push({
@@ -334,7 +375,12 @@ async function buildEnsemble(q: EnsembleQuery): Promise<EnsembleForecast> {
         const tMax = daily.temperature_2m_max?.[idx];
         const tMin = daily.temperature_2m_min?.[idx];
         const p = daily.precipitation_sum?.[idx];
-        const s = daily.snowfall_sum?.[idx];
+        // Prefer the freezing-level partitioned snow (matches the headline and
+        // elevation-band story); fail-soft to the model's raw snowfall_sum when
+        // the partition was unavailable/unreliable for this day.
+        const partitioned = daily.partitionedSnowCmByDate?.get(date);
+        const rawSnow = daily.snowfall_sum?.[idx];
+        const s = typeof partitioned === "number" ? partitioned : rawSnow;
         const label = MODEL_LABELS[modelId]?.label ?? modelId;
         const hasAny =
           (typeof tMax === "number" && tMax !== null) ||
