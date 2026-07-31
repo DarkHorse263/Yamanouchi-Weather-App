@@ -200,11 +200,11 @@ export default function ResortDetail() {
     { label: t("feelzlike", "体感"), value: `${u.temp(current.feelsLike)}${u.tempUnit}`, icon: Thermometer },
     {
       label: t("Wind", "風"),
-      value: `${current.windSpeed} km/h${current.windDirectionCompass ? ` ${current.windDirectionCompass}` : ""}`,
+      value: `${u.wind(current.windSpeed)} ${u.windUnit}${current.windDirectionCompass ? ` ${current.windDirectionCompass}` : ""}`,
       icon: Navigation,
     },
     ...(current.windGust
-      ? [{ label: t("Gusts", "突風"), value: `${current.windGust} km/h`, icon: Wind }]
+      ? [{ label: t("Gusts", "突風"), value: `${u.wind(current.windGust)} ${u.windUnit}`, icon: Wind }]
       : []),
     { label: t("Humidity", "湿度"), value: `${current.humidity}%`, icon: Droplets },
     {
@@ -223,7 +223,7 @@ export default function ResortDetail() {
       ? [{ label: t("Visibility", "視程"), value: `${(current.visibility / 1000).toFixed(0)} km`, icon: Eye }]
       : []),
     ...(current.freezingLevel !== undefined
-      ? [{ label: t("Freezing level", "凍結高度"), value: `${current.freezingLevel} m`, icon: Snowflake }]
+      ? [{ label: t("Freezing level", "凍結高度"), value: `${u.elev(current.freezingLevel)} ${u.elevUnit}`, icon: Snowflake }]
       : []),
     ...(dailyRainMm(daily?.[0]) != null
       ? [{ label: t("Today rain", "本日降水"), value: `${dailyRainMm(daily?.[0])!.toFixed(1)} mm`, icon: CloudRain }]
@@ -312,6 +312,8 @@ export default function ResortDetail() {
         scrollCue={t("Live conditions below", "ライブ状況は下へ")}
         formatTemp={(c) => u.temp(c) ?? c}
         tempUnitLabel={u.tempUnit}
+        formatElevation={(m) => u.elev(m) ?? m}
+        elevationUnitLabel={u.elevUnit}
       />
 
       <div className="max-w-7xl mx-auto px-5 md:px-10 pb-16 space-y-5 md:space-y-6 -mt-2">
@@ -386,6 +388,10 @@ export default function ResortDetail() {
               tempUnitLabel={u.tempUnit}
               formatSnowValue={(cm) => u.snowVal(cm, cm >= 10 ? 0 : 1)}
               snowUnitLabel={u.snowUnit}
+              formatWind={(kmh) => u.wind(kmh) ?? kmh}
+              windUnitLabel={u.windUnit}
+              formatElevation={(m) => u.elev(m) ?? m}
+              elevationUnitLabel={u.elevUnit}
             />
           </PremiumGate>
         )}
@@ -432,6 +438,10 @@ export default function ResortDetail() {
                 freezingLevel={current.freezingLevel ?? undefined}
                 gust={current.windGust ?? undefined}
                 windSpeed={current.windSpeed}
+                formatWind={(kmh) => u.wind(kmh) ?? kmh}
+                windUnitLabel={u.windUnit}
+                formatElevation={(m) => u.elev(m) ?? m}
+                elevationUnitLabel={u.elevUnit}
               />
             )}
           </div>

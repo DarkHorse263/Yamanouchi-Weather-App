@@ -101,16 +101,19 @@ export function ElevationBands({ lat, lng, summitElevationM, name }: Props) {
                 label={t("upper", "山頂")}
                 elevationM={upperM}
                 tone="text-sky-900"
+                u={u}
               />
               <BandHead
                 label={t("mid", "中腹")}
                 elevationM={midM}
                 tone="text-sky-800"
+                u={u}
               />
               <BandHead
                 label={t("base", "山麓")}
                 elevationM={lowerM}
                 tone="text-sky-700"
+                u={u}
               />
               <th className="text-right text-[11px] uppercase tracking-wider text-muted-foreground/60 font-medium pb-2 pl-3">
                 <span className="inline-flex items-center gap-1">
@@ -138,14 +141,14 @@ export function ElevationBands({ lat, lng, summitElevationM, name }: Props) {
                 <BandCell band={d.bands.lower} u={u} />
                 <td className="py-3 pl-3 border-t border-border/60 text-right">
                   <p className="font-display font-semibold text-foreground text-sm">
-                    {d.windMaxKmh != null ? `${Math.round(d.windMaxKmh)}` : "-"}
+                    {d.windMaxKmh != null ? `${u.wind(d.windMaxKmh)}` : "-"}
                     <span className="text-[11px] text-muted-foreground/70 ml-0.5">
-                      km/h
+                      {u.windUnit}
                     </span>
                   </p>
                   {d.freezingLevelM != null && (
                     <p className="text-[11px] text-muted-foreground/70 mt-0.5">
-                      {t("frz", "凍結")} · {Math.round(d.freezingLevelM)}m
+                      {t("frz", "凍結")} · {u.elev(d.freezingLevelM)}{u.elevUnit}
                     </p>
                   )}
                 </td>
@@ -162,10 +165,12 @@ function BandHead({
   label,
   elevationM,
   tone,
+  u,
 }: {
   label: string;
   elevationM: number | null;
   tone: string;
+  u: Units;
 }) {
   return (
     <th className="text-center text-[11px] uppercase tracking-wider text-muted-foreground/60 font-medium pb-2 px-2">
@@ -174,7 +179,7 @@ function BandHead({
       </span>
       {elevationM != null && (
         <span className="block text-[10px] text-muted-foreground/50 normal-case tracking-normal mt-0.5">
-          {elevationM}m
+          {u.elev(elevationM)}{u.elevUnit}
         </span>
       )}
     </th>
@@ -261,13 +266,13 @@ function DayCard({
           <p className="font-display font-semibold text-foreground text-sm">
             <span className="inline-flex items-center gap-1">
               <Wind className="w-3 h-3 text-muted-foreground/70" />
-              {day.windMaxKmh != null ? `${Math.round(day.windMaxKmh)}` : "-"}
-              <span className="text-[11px] text-muted-foreground/70 font-normal">km/h</span>
+              {day.windMaxKmh != null ? `${u.wind(day.windMaxKmh)}` : "-"}
+              <span className="text-[11px] text-muted-foreground/70 font-normal">{u.windUnit}</span>
             </span>
           </p>
           {day.freezingLevelM != null && (
             <p className="text-[11px] text-muted-foreground/70 mt-0.5">
-              {t("frz", "凍結")} · {Math.round(day.freezingLevelM)}m
+              {t("frz", "凍結")} · {u.elev(day.freezingLevelM)}{u.elevUnit}
             </p>
           )}
         </div>
@@ -321,7 +326,7 @@ function BandRow({
         <span className="text-[11px] uppercase tracking-wider font-medium">{label}</span>
         {elevationM != null && (
           <span className="text-[10px] text-muted-foreground/60 normal-case tracking-normal">
-            {elevationM}m
+            {u.elev(elevationM)}{u.elevUnit}
           </span>
         )}
       </div>

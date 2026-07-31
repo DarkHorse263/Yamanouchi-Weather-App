@@ -16,6 +16,15 @@ export interface MountainSnapshotProps {
   sectionNumber?: string;
   /** Heading text (defaults to "Conditions at a glance") */
   heading?: string;
+  /**
+   * Display-edge unit hooks (member units preference). Canonical inputs stay
+   * metric km/h + metres; pass converters + labels to render mph/ft for
+   * imperial members. Defaults preserve the metric presentation.
+   */
+  formatWind?: (kmh: number) => number;
+  windUnitLabel?: string;
+  formatElevation?: (m: number) => number;
+  elevationUnitLabel?: string;
 }
 
 type Tone = "neutral" | "ok" | "info" | "caution" | "warn" | "alert";
@@ -112,7 +121,13 @@ export function MountainSnapshot({
   baseElevation,
   sectionNumber = "",
   heading = "Conditions at a glance",
+  formatWind,
+  windUnitLabel = "km/h",
+  formatElevation,
+  elevationUnitLabel = "m",
 }: MountainSnapshotProps) {
+  const cvWind = formatWind ?? ((kmh: number) => kmh);
+  const cvElev = formatElevation ?? ((m: number) => m);
   const summit = elevation;
   const base = baseElevation ?? Math.max(900, summit - 500);
   const verticalDelta = freezingLevel != null ? freezingLevel - summit : null;
@@ -141,7 +156,7 @@ export function MountainSnapshot({
           </h2>
         </div>
         <p className="byline text-muted-foreground/70 hidden md:block tabular-nums">
-          {resortName} · {elevation}m
+          {resortName} · {Math.round(cvElev(elevation))}{elevationUnitLabel}
         </p>
       </div>
 
@@ -163,8 +178,8 @@ export function MountainSnapshot({
             )}
           </div>
           <p className="font-display text-xl tabular-nums flex-none" data-numeric>
-            {Math.round(gust ?? windSpeed)}
-            <span className="text-[11px] opacity-70 ml-1 font-normal">km/h</span>
+            {Math.round(cvWind(gust ?? windSpeed))}
+            <span className="text-[11px] opacity-70 ml-1 font-normal">{windUnitLabel}</span>
           </p>
         </motion.div>
       )}
@@ -181,22 +196,22 @@ export function MountainSnapshot({
             innerWash={freezeTier.wash}
             glowClassName={freezeTier.glowClass}
             ringClassName={freezeTier.ringClass}
-            ariaLabel={`Freezing level ${freezingLevel ?? "unknown"} metres`}
+            ariaLabel={`Freezing level ${freezingLevel != null ? `${Math.round(cvElev(freezingLevel))} ${elevationUnitLabel === "ft" ? "feet" : "metres"}` : "unknown"}`}
             delay={0.05}
           >
             <Snowflake className="w-3.5 h-3.5 text-muted-foreground/60 mb-1.5" strokeWidth={1.75} />
             <p className="font-display text-3xl md:text-[2.25rem] leading-none text-foreground tabular-nums" data-numeric>
-              {freezingLevel != null ? freezingLevel : "—"}
+              {freezingLevel != null ? Math.round(cvElev(freezingLevel)) : "—"}
             </p>
-            <p className="byline text-muted-foreground/70 mt-1.5">m a.s.l.</p>
+            <p className="byline text-muted-foreground/70 mt-1.5">{elevationUnitLabel} a.s.l.</p>
             {verticalDelta != null && (
               <p className={cn(
                 "text-[11px] mt-1.5 inline-flex items-center gap-0.5 tabular-nums font-medium",
                 verticalDelta < 0 ? "text-sky-700" : "text-rose-700",
               )}>
                 {verticalDelta < 0
-                  ? <><ArrowDown className="w-3 h-3" strokeWidth={2} /> {Math.abs(verticalDelta)} m</>
-                  : <><ArrowUp className="w-3 h-3" strokeWidth={2} /> {verticalDelta} m</>
+                  ? <><ArrowDown className="w-3 h-3" strokeWidth={2} /> {Math.round(cvElev(Math.abs(verticalDelta)))} {elevationUnitLabel}</>
+                  : <><ArrowUp className="w-3 h-3" strokeWidth={2} /> {Math.round(cvElev(verticalDelta))} {elevationUnitLabel}</>
                 }
               </p>
             )}
@@ -211,16 +226,16 @@ export function MountainSnapshot({
             innerWash={windTier.wash}
             glowClassName={windTier.glowClass}
             ringClassName={windTier.ringClass}
-            ariaLabel={`Wind gusts ${gust ?? windSpeed} kilometres per hour`}
+            ariaLabel={`Wind gusts ${Math.round(cvWind(gust ?? windSpeed))} ${windUnitLabel === "mph" ? "miles per hour" : "kilometres per hour"}`}
             delay={0.12}
           >
             <Wind className="w-3.5 h-3.5 text-muted-foreground/60 mb-1.5" strokeWidth={1.75} />
             <p className="font-display text-3xl md:text-[2.25rem] leading-none text-foreground tabular-nums" data-numeric>
-              {Math.round(gust ?? windSpeed)}
+              {Math.round(cvWind(gust ?? windSpeed))}
             </p>
-            <p className="byline text-muted-foreground/70 mt-1.5">km/h gust</p>
+            <p className="byline text-muted-foreground/70 mt-1.5">{windUnitLabel} gust</p>
             <p className="text-[11px] text-muted-foreground/70 mt-1.5 tabular-nums font-medium">
-              avg {Math.round(windSpeed)} km/h
+              avg {Math.round(cvWind(windSpeed))} {windUnitLabel}
             </p>
           </MetricRing>
         </RingTile>

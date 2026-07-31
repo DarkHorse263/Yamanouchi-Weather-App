@@ -7,6 +7,10 @@ import {
   snowValue,
   tempUnitLabel,
   snowUnitLabel,
+  windUnitLabel,
+  elevationUnitLabel,
+  windRounded,
+  elevationRounded,
   type UnitsPref,
 } from "@/lib/unitsFormat";
 
@@ -51,6 +55,12 @@ export function useUnits() {
       /** converted snow value only, no unit · null-safe → "-" */
       snowVal: (cm: number | null | undefined, metricDecimals = 0) =>
         snowValue(cm, units, metricDecimals),
+      windUnit: windUnitLabel(units),
+      elevUnit: elevationUnitLabel(units),
+      /** rounded converted wind speed (km/h canonical) · null-safe */
+      wind: (kmh: number | null | undefined) => windRounded(kmh, units),
+      /** rounded converted elevation/height (m canonical) · null-safe */
+      elev: (m: number | null | undefined) => elevationRounded(m, units),
     }),
     [units],
   );

@@ -279,7 +279,7 @@ export function MountainDetail() {
                 </p>
                 {location?.elevation != null && (
                   <p className="font-display font-medium text-xl text-foreground mt-1">
-                    {location.elevation}m
+                    {u.elev(location.elevation)}{u.elevUnit}
                   </p>
                 )}
               </div>
@@ -363,20 +363,20 @@ export function MountainDetail() {
                 label={t("Wind", "風速")}
                 value={
                   current.windSpeed !== null && current.windSpeed !== undefined
-                    ? `${Math.round(current.windSpeed)}`
+                    ? `${u.wind(current.windSpeed)}`
                     : "-"
                 }
-                unit="km/h"
+                unit={u.windUnit}
               />
               <BigStat
                 icon={Thermometer}
                 label={t("Freezing level", "凍結高度")}
                 value={
                   current.freezingLevel !== null && current.freezingLevel !== undefined
-                    ? `${Math.round(current.freezingLevel)}`
+                    ? `${u.elev(current.freezingLevel)}`
                     : "-"
                 }
-                unit="m"
+                unit={u.elevUnit}
               />
             </div>
           </section>
@@ -524,7 +524,7 @@ export function MountainDetail() {
                           label={t("Wind", "風")}
                           value={
                             d.windSpeedMax !== null && d.windSpeedMax !== undefined
-                              ? `${Math.round(d.windSpeedMax)} km/h`
+                              ? `${u.wind(d.windSpeedMax)} ${u.windUnit}`
                               : "-"
                           }
                         />
@@ -600,6 +600,10 @@ export function MountainDetail() {
                   freezingLevel={current.freezingLevel ?? undefined}
                   gust={current.windGust ?? undefined}
                   windSpeed={current.windSpeed}
+                  formatWind={(kmh) => u.wind(kmh) ?? kmh}
+                  windUnitLabel={u.windUnit}
+                  formatElevation={(m) => u.elev(m) ?? m}
+                  elevationUnitLabel={u.elevUnit}
                 />
               )}
             </PremiumGate>
@@ -733,8 +737,8 @@ export function MountainDetail() {
 
           <p className="byline text-muted-foreground/60 mt-8">
             {t(
-              `Source: ${current.dataSource ?? region.weatherSource?.label ?? "Open-Meteo"} · elevation-corrected for ${location?.elevation ?? "?"}m`,
-              `出典: ${current.dataSource ?? region.weatherSource?.labelJa ?? "Open-Meteo"} · 標高${location?.elevation ?? "?"}mに補正`,
+              `Source: ${current.dataSource ?? region.weatherSource?.label ?? "Open-Meteo"} · elevation-corrected for ${location?.elevation != null ? `${u.elev(location.elevation)}${u.elevUnit}` : "?"}`,
+              `出典: ${current.dataSource ?? region.weatherSource?.labelJa ?? "Open-Meteo"} · 標高${location?.elevation != null ? `${u.elev(location.elevation)}${u.elevUnit}` : "?"}に補正`,
             )}
           </p>
         </>

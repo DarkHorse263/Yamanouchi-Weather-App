@@ -446,7 +446,7 @@ function HourCell({
   const hourLabel = formatHourLabel(hour.time);
   const snowCm = Math.round((hour.snowfall ?? 0) * 10) / 10;
   const snow = snowCm > 0 ? u.snowVal(snowCm, 1) : "0";
-  const wind = Math.round(hour.windSpeed ?? 0);
+  const wind = u.wind(hour.windSpeed ?? 0) ?? 0;
   const temp = u.temp(hour.temperature ?? 0);
   const cellTone = powderGrade ? GRADE_STYLES[powderGrade].cell : "bg-white/60 border-border";
   const iconTone = powderGrade === "gold"
@@ -464,7 +464,7 @@ function HourCell({
         "snap-start shrink-0 w-[58px] md:w-[64px] flex flex-col items-center gap-1 rounded-xl border px-1.5 py-2.5 transition-colors",
         cellTone,
       )}
-      title={`${hourLabel} · ${temp}${u.tempUnit} · ${snowCm > 0 ? `${snow}${u.snowUnit} snow · ` : ""}${wind} km/h wind${powderGrade ? ` · ${powderGrade.toUpperCase()} powder window` : ""}`}
+      title={`${hourLabel} · ${temp}${u.tempUnit} · ${snowCm > 0 ? `${snow}${u.snowUnit} snow · ` : ""}${wind} ${u.windUnit} wind${powderGrade ? ` · ${powderGrade.toUpperCase()} powder window` : ""}`}
     >
       <p
         className={cn(
@@ -553,7 +553,7 @@ function PowderBadge({
         <p className="text-xs font-semibold tabular-nums">
           {startLabel}-{endLabel} ·{" "}
           <span className="font-bold">
-            {u.snow(window.totalSnow)} · {window.avgWind}km/h
+            {u.snow(window.totalSnow)} · {u.wind(window.avgWind)}{u.windUnit}
           </span>
         </p>
       </div>
@@ -640,7 +640,7 @@ function PowderDetail({
         />
         <DetailStat
           label={t("Avg wind", "平均風速")}
-          value={`${window.avgWind}km/h`}
+          value={`${u.wind(window.avgWind)}${u.windUnit}`}
         />
         <DetailStat
           label={t("Quality", "品質")}
@@ -651,11 +651,11 @@ function PowderDetail({
         {u.units === "imperial"
           ? t(
               isAU
-                ? "AU thresholds: snowfall ≥0.2in/hr, wind <25km/h, ≥3 consecutive hours, ≤36°F."
-                : "Thresholds: snowfall ≥0.4in/hr, wind <20km/h, ≥3 consecutive hours, ≤36°F.",
+                ? "AU thresholds: snowfall ≥0.2in/hr, wind <16mph, ≥3 consecutive hours, ≤36°F."
+                : "Thresholds: snowfall ≥0.4in/hr, wind <12mph, ≥3 consecutive hours, ≤36°F.",
               isAU
-                ? "AU基準: 降雪0.2in/時以上、風速25km/時未満、3時間以上連続、36°F以下。"
-                : "基準: 降雪0.4in/時以上、風速20km/時未満、3時間以上連続、36°F以下。",
+                ? "AU基準: 降雪0.2in/時以上、風速16mph未満、3時間以上連続、36°F以下。"
+                : "基準: 降雪0.4in/時以上、風速12mph未満、3時間以上連続、36°F以下。",
             )
           : t(
               isAU

@@ -32,6 +32,10 @@ export interface MountainOutlookProps {
   tempUnitLabel?: string;
   formatSnowValue?: (cm: number) => string;
   snowUnitLabel?: string;
+  formatWind?: (kmh: number) => number;
+  windUnitLabel?: string;
+  formatElevation?: (m: number) => number;
+  elevationUnitLabel?: string;
 }
 
 function WeatherIcon({ code, className = "w-5 h-5" }: { code: number | null | undefined; className?: string }) {
@@ -89,8 +93,14 @@ export function MountainOutlook({
   tempUnitLabel = "°C",
   formatSnowValue,
   snowUnitLabel = "cm",
+  formatWind,
+  windUnitLabel = "km/h",
+  formatElevation,
+  elevationUnitLabel = "m",
 }: MountainOutlookProps) {
   const cvTemp = formatTemp ?? ((c: number) => c);
+  const cvWind = formatWind ?? ((kmh: number) => kmh);
+  const cvElev = formatElevation ?? ((m: number) => m);
   const cvSnow =
     formatSnowValue ?? ((cm: number) => cm.toFixed(cm >= 10 ? 0 : 1));
   const days = rawDays.slice(0, maxDays);
@@ -114,7 +124,7 @@ export function MountainOutlook({
           </h2>
         </div>
         <p className="byline text-muted-foreground/70 hidden md:block tabular-nums">
-          {elevation}m · top elevation
+          {Math.round(cvElev(elevation))}{elevationUnitLabel} · top elevation
         </p>
       </div>
 
@@ -178,8 +188,8 @@ export function MountainOutlook({
               {day.windSpeedMax != null && (
                 <div className="flex items-center gap-1 text-[10px] text-muted-foreground/80 mt-1">
                   <Wind className="w-2.5 h-2.5" />
-                  <span className="tabular-nums">{Math.round(day.windSpeedMax)}</span>
-                  <span>km/h</span>
+                  <span className="tabular-nums">{Math.round(cvWind(day.windSpeedMax))}</span>
+                  <span>{windUnitLabel}</span>
                 </div>
               )}
 

@@ -260,8 +260,8 @@ export default function LocationDetail() {
 
   const stats = [
     { label: "feelzlike", value: `${u.temp(current.feelsLike)}${u.tempUnit}`, icon: Thermometer },
-    { label: "Wind", value: `${current.windSpeed} km/h${current.windDirectionCompass ? ` ${current.windDirectionCompass}` : ""}`, icon: Navigation },
-    ...(current.windGust ? [{ label: "Gusts", value: `${current.windGust} km/h`, icon: Wind }] : []),
+    { label: "Wind", value: `${u.wind(current.windSpeed)} ${u.windUnit}${current.windDirectionCompass ? ` ${current.windDirectionCompass}` : ""}`, icon: Navigation },
+    ...(current.windGust ? [{ label: "Gusts", value: `${u.wind(current.windGust)} ${u.windUnit}`, icon: Wind }] : []),
     { label: "Humidity", value: `${current.humidity}%`, icon: Droplets },
     // A resort-reported base REPLACES the model figure (never shown alongside
     // it - two competing numbers would just erode trust in both). In season,
@@ -372,7 +372,7 @@ export default function LocationDetail() {
             {current.dataSource !== "BOM" && (
               <span className="byline text-muted-foreground/80">Source · {current.dataSource ?? "BOM + models"}</span>
             )}
-            <span className="byline text-muted-foreground/70">Elev {location.elevation}m</span>
+            <span className="byline text-muted-foreground/70">Elev {u.elev(location.elevation)}{u.elevUnit}</span>
             {mountainWebsiteUrl && (
               <OfficialSiteLink
                 url={mountainWebsiteUrl}
@@ -584,7 +584,7 @@ export default function LocationDetail() {
               </h2>
             </div>
             <p className="byline text-muted-foreground/70 hidden md:block tabular-nums">
-              {location.elevation}m · top elevation
+              {u.elev(location.elevation)}{u.elevUnit} · top elevation
             </p>
           </div>
 
@@ -651,8 +651,8 @@ export default function LocationDetail() {
                       {day.windSpeedMax != null && (
                         <div className="flex items-center gap-1 text-xs text-muted-foreground mt-1.5">
                           <Wind className="w-3 h-3" />
-                          <span className="tabular-nums font-medium text-foreground/90">{Math.round(day.windSpeedMax)}</span>
-                          <span>km/h</span>
+                          <span className="tabular-nums font-medium text-foreground/90">{u.wind(day.windSpeedMax)}</span>
+                          <span>{u.windUnit}</span>
                         </div>
                       )}
 
@@ -911,7 +911,7 @@ export default function LocationDetail() {
                         <p className="byline text-muted-foreground/60">{lift.type.replace("-", " ")}</p>
                       </div>
                       {lift.verticalRise != null && (
-                        <div className="text-[11px] text-muted-foreground/50 shrink-0">{lift.verticalRise} m vert</div>
+                        <div className="text-[11px] text-muted-foreground/50 shrink-0">{u.elev(lift.verticalRise)} {u.elevUnit} vert</div>
                       )}
                     </div>
                   ))}
@@ -943,6 +943,10 @@ export default function LocationDetail() {
               windSpeed={current.windSpeed}
               liftsOpen={hasLiveLiftStatus ? liftData?.liftsOpen : undefined}
               totalLifts={liftData?.totalLifts}
+              formatWind={(kmh) => u.wind(kmh) ?? kmh}
+              windUnitLabel={u.windUnit}
+              formatElevation={(m) => u.elev(m) ?? m}
+              elevationUnitLabel={u.elevUnit}
             />
           )}
         </PremiumGate>

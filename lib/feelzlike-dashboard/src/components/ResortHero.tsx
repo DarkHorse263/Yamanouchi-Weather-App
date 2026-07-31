@@ -24,6 +24,8 @@ export interface ResortHeroProps {
    */
   formatTemp?: (c: number) => number;
   tempUnitLabel?: string;
+  formatElevation?: (m: number) => number;
+  elevationUnitLabel?: string;
 }
 
 function formatAgo(iso: string | undefined | null, now: number): string {
@@ -52,8 +54,11 @@ export function ResortHero({
   scrollCue = "Live conditions below",
   formatTemp,
   tempUnitLabel = "°C",
+  formatElevation,
+  elevationUnitLabel = "m",
 }: ResortHeroProps) {
   const cv = formatTemp ?? ((c: number) => c);
+  const cvElev = formatElevation ?? ((m: number) => m);
   const [now, setNow] = useState(() => Date.now());
   useEffect(() => {
     const id = setInterval(() => setNow(Date.now()), 30_000);
@@ -102,7 +107,7 @@ export function ResortHero({
               <span className="byline">{sourceLabel}</span>
             </span>
           )}
-          <span className="byline text-muted-foreground/60 tabular-nums">Elev {elevation}m</span>
+          <span className="byline text-muted-foreground/60 tabular-nums">Elev {Math.round(cvElev(elevation))}{elevationUnitLabel}</span>
           {observedAt && (
             <span className="byline text-muted-foreground/80 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/70 border border-slate-200/80">
               <Clock className="w-3 h-3" strokeWidth={1.75} />

@@ -8,6 +8,12 @@ import {
   formatSnow,
   tempUnitLabel,
   snowUnitLabel,
+  kmhToMph,
+  mToFt,
+  windRounded,
+  elevationRounded,
+  windUnitLabel,
+  elevationUnitLabel,
 } from "../unitsFormat.js";
 
 test("cToF converts correctly", () => {
@@ -48,4 +54,33 @@ test("unit labels", () => {
   assert.equal(tempUnitLabel("imperial"), "°F");
   assert.equal(snowUnitLabel("metric"), "cm");
   assert.equal(snowUnitLabel("imperial"), "in");
+  assert.equal(windUnitLabel("metric"), "km/h");
+  assert.equal(windUnitLabel("imperial"), "mph");
+  assert.equal(elevationUnitLabel("metric"), "m");
+  assert.equal(elevationUnitLabel("imperial"), "ft");
+});
+
+test("kmhToMph converts correctly", () => {
+  assert.ok(Math.abs(kmhToMph(100) - 62.137) < 0.001);
+  assert.equal(kmhToMph(0), 0);
+});
+
+test("mToFt converts correctly", () => {
+  assert.ok(Math.abs(mToFt(1000) - 3280.84) < 0.01);
+  assert.equal(mToFt(0), 0);
+});
+
+test("windRounded · metric passthrough, imperial converts, null-safe", () => {
+  assert.equal(windRounded(25.4, "metric"), 25);
+  assert.equal(windRounded(25, "imperial"), 16);
+  assert.equal(windRounded(100, "imperial"), 62);
+  assert.equal(windRounded(null, "metric"), null);
+  assert.equal(windRounded(undefined, "imperial"), null);
+});
+
+test("elevationRounded · metric passthrough, imperial converts, null-safe", () => {
+  assert.equal(elevationRounded(1737.4, "metric"), 1737);
+  assert.equal(elevationRounded(1737, "imperial"), 5699);
+  assert.equal(elevationRounded(null, "imperial"), null);
+  assert.equal(elevationRounded(undefined, "metric"), null);
 });

@@ -10,6 +10,20 @@ import {
 } from "@/lib/windHoldPrediction";
 import { getLiftsForMountain, type LiftSeed } from "@/data/lifts";
 import { computeLiftOperationStatus, type LiftOperationStatus as OperationStatus } from "@/lib/skiSeason";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
+
+/** Bound display-edge unit formatters from useUnits(). */
+type Units = ReturnType<typeof useUnits>;
+
+/**
+ * Rewrite "NNkm/h" figures embedded in prediction copy (from
+ * windHoldPrediction reason strings) to the member's wind unit. Canonical
+ * strings stay metric; this is display-edge only.
+ */
+function localiseWindCopy(text: string, u: Units): string {
+  if (u.units !== "imperial") return text;
+  return text.replace(/(\d+(?:\.\d+)?)\s*km\/h/g, (_, n) => `${u.wind(Number(n))}${u.windUnit}`);
+}
 
 interface LiftWindHoldPanelProps {
   mountainId: string;
@@ -135,13 +149,13 @@ const TYPE_LABEL: Record<LiftSeed["type"], { en: string; ja: string }> = {
  * facts (peak gusts vs hold threshold), with no "open"/"held" verdict word so
  * the line stays honest about a lift that isn't running.
  */
-function windDetail(pred: WindHoldPrediction, t: (en: string, ja?: string) => string): string {
+function windDetail(pred: WindHoldPrediction, t: (en: string, ja?: string) => string, u: Units): string {
   if (!pred.worstHour) return t("No wind forecast available", "風の予測データなし");
-  const g = pred.worstHour.effectiveGustKmh;
-  const thr = pred.effectiveThresholdKmh;
+  const g = `${u.wind(pred.worstHour.effectiveGustKmh)}${u.windUnit}`;
+  const thr = `${u.wind(pred.effectiveThresholdKmh)}${u.windUnit}`;
   const base = t(
-    `Peak ${g}km/h gusts at top · hold threshold ${thr}km/h`,
-    `最大瞬間風速 ${g}km/h（山頂）· 停止しきい値 ${thr}km/h`,
+    `Peak ${g} gusts at top · hold threshold ${thr}`,
+    `最大瞬間風速 ${g}（山頂）· 停止しきい値 ${thr}`,
   );
   if (pred.hoursAtRisk > 0) {
     return base + t(` · ${pred.hoursAtRisk}h above threshold`, ` · しきい値超過 ${pred.hoursAtRisk}時間`);
@@ -163,6 +177,7 @@ export function LiftWindHoldPanel({
   liveStatusKnown = true,
 }: LiftWindHoldPanelProps) {
   const t = tProp ?? ((en: string) => en);
+  const u = useUnits();
   const headingId = useId();
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
@@ -254,9 +269,12 @@ export function LiftWindHoldPanel({
           <p className="text-sm font-semibold flex items-start gap-2">
             <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0" />
             <span>
-              {t(
-                `Watch ${lifts.find((l) => l.id === summary.worstLift?.liftId)?.name ?? "highest lifts"} - ${summary.worstLift.reason}`,
-                `${lifts.find((l) => l.id === summary.worstLift?.liftId)?.nameJa ?? lifts.find((l) => l.id === summary.worstLift?.liftId)?.name ?? "高所リフト"} 注意 - ${summary.worstLift.reason}`,
+              {localiseWindCopy(
+                t(
+                  `Watch ${lifts.find((l) => l.id === summary.worstLift?.liftId)?.name ?? "highest lifts"} - ${summary.worstLift.reason}`,
+                  `${lifts.find((l) => l.id === summary.worstLift?.liftId)?.nameJa ?? lifts.find((l) => l.id === summary.worstLift?.liftId)?.name ?? "高所リフト"} 注意 - ${summary.worstLift.reason}`,
+                ),
+                u,
               )}
             </span>
           </p>
@@ -290,7 +308,7 @@ export function LiftWindHoldPanel({
                     </p>
                     <p className="text-[11px] text-muted-foreground tabular-nums">
                       {t(TYPE_LABEL[lift.type].en, TYPE_LABEL[lift.type].ja)} ·{" "}
-                      {lift.baseElevation}-{lift.topElevation}m
+                      {u.elev(lift.baseElevation)}-{u.elev(lift.topElevation)}{u.elevUnit}
                     </p>
                   </div>
                 </div>
@@ -324,7 +342,7 @@ export function LiftWindHoldPanel({
                     {t(labelText.en, labelText.ja)}
                   </span>
                   <p className="text-sm text-foreground">
-                    {operating ? pred.reason : windDetail(pred, t)}
+                    {operating ? localiseWindCopy(pred.reason, u) : windDetail(pred, t, u)}
                   </p>
                   <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-3 text-[11px] tabular-nums">
                     <div>
@@ -333,7 +351,7 @@ export function LiftWindHoldPanel({
                     </div>
                     <div>
                       <p className="text-muted-foreground/70 uppercase tracking-wider">{t("Threshold", "しきい値")}</p>
-                      <p className="font-semibold text-foreground mt-0.5">{pred.effectiveThresholdKmh}km/h</p>
+                      <p className="font-semibold text-foreground mt-0.5">{u.wind(pred.effectiveThresholdKmh)}{u.windUnit}</p>
                     </div>
                     <div>
                       <p className="text-muted-foreground/70 uppercase tracking-wider">{t("Hours at risk", "警戒時間")}</p>

@@ -13,6 +13,8 @@ export type UnitsPref = "metric" | "imperial";
 
 export const cToF = (c: number): number => (c * 9) / 5 + 32;
 export const cmToIn = (cm: number): number => cm / 2.54;
+export const kmhToMph = (kmh: number): number => kmh / 1.609344;
+export const mToFt = (m: number): number => m * 3.28084;
 
 export function tempUnitLabel(units: UnitsPref): "°C" | "°F" {
   return units === "imperial" ? "°F" : "°C";
@@ -20,6 +22,26 @@ export function tempUnitLabel(units: UnitsPref): "°C" | "°F" {
 
 export function snowUnitLabel(units: UnitsPref): "cm" | "in" {
   return units === "imperial" ? "in" : "cm";
+}
+
+export function windUnitLabel(units: UnitsPref): "km/h" | "mph" {
+  return units === "imperial" ? "mph" : "km/h";
+}
+
+export function elevationUnitLabel(units: UnitsPref): "m" | "ft" {
+  return units === "imperial" ? "ft" : "m";
+}
+
+/** Converted wind speed, rounded to a whole number. Null-safe → null. */
+export function windRounded(kmh: number | null | undefined, units: UnitsPref): number | null {
+  if (kmh === null || kmh === undefined) return null;
+  return Math.round(units === "imperial" ? kmhToMph(kmh) : kmh);
+}
+
+/** Converted elevation/height, rounded to a whole number. Null-safe → null. */
+export function elevationRounded(m: number | null | undefined, units: UnitsPref): number | null {
+  if (m === null || m === undefined) return null;
+  return Math.round(units === "imperial" ? mToFt(m) : m);
 }
 
 /** Converted temperature, rounded to a whole degree. Null-safe → null. */

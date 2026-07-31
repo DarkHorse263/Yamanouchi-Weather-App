@@ -2,7 +2,7 @@ import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis, CartesianG
 import { format, parseISO } from "date-fns";
 import type { HourlyForecast } from "@workspace/api-client-react";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
-import { cToF, cmToIn } from "@/lib/unitsFormat";
+import { cToF, cmToIn, kmhToMph } from "@/lib/unitsFormat";
 
 interface ForecastChartProps {
   data: HourlyForecast[];
@@ -22,13 +22,16 @@ export function ForecastChart({ data, metric }: ForecastChartProps) {
     snowfall: imperial
       ? Math.round(cmToIn(item.snowfall || 0) * 100) / 100
       : item.snowfall || 0,
-    windSpeed: item.windSpeed,
+    windSpeed:
+      item.windSpeed != null && imperial
+        ? Math.round(kmhToMph(item.windSpeed))
+        : item.windSpeed,
   }));
 
   const config = {
     temperature: { color: "hsl(var(--primary))", unit: u.tempUnit, label: "Temperature" },
     snowfall: { color: "#ec008c", unit: u.snowUnit, label: "Snowfall" },
-    windSpeed: { color: "hsl(217, 32%, 60%)", unit: "km/h", label: "Wind" },
+    windSpeed: { color: "hsl(217, 32%, 60%)", unit: u.windUnit, label: "Wind" },
   };
 
   const currentConfig = config[metric];
