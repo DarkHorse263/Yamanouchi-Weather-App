@@ -438,6 +438,47 @@ const REGIONS: RegionConfig[] = [
     sourceLabel: "JMA Seamless",
   },
   {
+    id: "bandai",
+    name: "Bandai",
+    country: "Japan",
+    countryCode: "JP",
+    region: "Fukushima",
+    status: "live",
+    href: "/bandai/",
+    baseTowns: ["Inawashiro", "Urabandai"],
+    mountains: ["Nekoma Mountain", "Grandeco"],
+    // Headline reading from the Urabandai highland (~850m) · the lake
+    // district behind Mt Bandai with the closest beds to Grandeco and
+    // the Nekoma north side. Inawashiro sits at ~520m on the lake plain
+    // and would misrepresent conditions on the hills.
+    headlineLabel: "Urabandai",
+    lat: 37.660,
+    lon: 140.065,
+    model: "jma_seamless",
+    timezone: "Asia/Tokyo",
+    sourceLabel: "JMA Seamless",
+  },
+  {
+    id: "daisen",
+    name: "Daisen",
+    country: "Japan",
+    countryCode: "JP",
+    region: "Tottori",
+    status: "live",
+    href: "/daisen/",
+    baseTowns: ["Daisenji", "Yonago"],
+    mountains: ["Daisen White Resort"],
+    // Headline reading from the Daisenji temple village (~800m) · right
+    // at the base of the lifts, where visitors stay. Yonago sits at sea
+    // level on the coast and would misrepresent conditions on the hill.
+    headlineLabel: "Daisenji",
+    lat: 35.396,
+    lon: 133.540,
+    model: "jma_seamless",
+    timezone: "Asia/Tokyo",
+    sourceLabel: "JMA Seamless",
+  },
+  {
     id: "queenstown",
     name: "Queenstown",
     country: "New Zealand",

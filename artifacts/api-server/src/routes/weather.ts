@@ -290,6 +290,17 @@ const LOCATIONS: LocationConfig[] = [
   { id: "appi",                      name: "Appi Kogen",                latitude: 40.0028, longitude: 140.9452, elevation: 1305, description: "One of Tohoku's largest resorts · long groomed runs off a 2.8 km gondola to Mt Maemori, on the Ikon Pass from 2025-26.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
   { id: "shizukuishi-resort",        name: "Shizukuishi",               latitude: 39.6940, longitude: 140.9060, elevation: 1128, description: "Prince-operated hill on Takakura · about 700 m of vertical, host of the 1993 Alpine World Championships.",       bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
 
+  // ─── Bandai (Fukushima, Japan) ───────────────────────────
+  // Nekoma Mountain (former Alts Bandai south + Nekoma north, linked by
+  // lift) and Grandeco in Urabandai · coordinates are base-area points,
+  // elevations are lift-served tops.
+  { id: "nekoma-mountain",           name: "Nekoma Mountain",           latitude: 37.5780, longitude: 140.0300, elevation: 1337, description: "The former Alts Bandai and Nekoma linked by lift into one of Japan's largest resorts · 33 courses, on the Ikon Pass.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "grandeco",                  name: "Grandeco",                  latitude: 37.7020, longitude: 140.1350, elevation: 1590, description: "High-base gondola hill in Urabandai at 1,010-1,590 m · dry Aizu powder and one of Tohoku's longest seasons.",          bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+
+  // ─── Daisen (Tottori, Japan) ─────────────────────────────
+  // Western Japan's biggest ski hill on Mt Daisen's sea-facing slopes.
+  { id: "daisen-white-resort",       name: "Daisen White Resort",       latitude: 35.4000, longitude: 133.5280, elevation: 1121, description: "Western Japan's biggest ski hill on Mt Daisen · four linked areas from 655 to 1,121 m with Japan-Sea views.",         bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+
   // ─── Minakami (Gunma, Japan) ─────────────────────────────
   // Tokyo's weekend ski valley · Tenjindaira (Mt.T) ropeway bowl on
   // Tanigawa-dake plus the Kogen and Norn hills. Coordinates are

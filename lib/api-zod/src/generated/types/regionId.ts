@@ -31,6 +31,8 @@ export const RegionId = {
   "zao-onsen": "zao-onsen",
   "hakkoda-aomori-spring": "hakkoda-aomori-spring",
   "appi-shizukuishi": "appi-shizukuishi",
+  bandai: "bandai",
+  daisen: "daisen",
   minakami: "minakami",
   "kusatsu-manza": "kusatsu-manza",
   hachimantai: "hachimantai",

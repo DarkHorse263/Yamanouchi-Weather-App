@@ -31,6 +31,8 @@ import { ASAHIKAWA_TRANSPORT } from "./asahikawa";
 import { RUSUTSU_KIRORO_TRANSPORT } from "./rusutsu-kiroro";
 import { YUZAWA_TRANSPORT } from "./yuzawa";
 import { ZAO_ONSEN_TRANSPORT } from "./zao-onsen";
+import { BANDAI_TRANSPORT } from "./bandai";
+import { DAISEN_TRANSPORT } from "./daisen";
 import { HAKKODA_AOMORI_SPRING_TRANSPORT } from "./hakkoda-aomori-spring";
 import { APPI_SHIZUKUISHI_TRANSPORT } from "./appi-shizukuishi";
 import { MINAKAMI_TRANSPORT } from "./minakami";
@@ -53,6 +55,8 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   niseko: NISEKO_TRANSPORT,
   furano: FURANO_TRANSPORT,
   sapporo: SAPPORO_TRANSPORT,
+  bandai: BANDAI_TRANSPORT,
+  daisen: DAISEN_TRANSPORT,
   "tomamu-sahoro": TOMAMU_SAHORO_TRANSPORT,
   asahikawa: ASAHIKAWA_TRANSPORT,
   "rusutsu-kiroro": RUSUTSU_KIRORO_TRANSPORT,

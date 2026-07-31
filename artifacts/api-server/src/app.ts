@@ -301,6 +301,20 @@ if (process.env.NODE_ENV === "production") {
         morioka: "Morioka",
       },
     },
+    "bandai": {
+      name: "Bandai",
+      towns: {
+        inawashiro: "Inawashiro",
+        urabandai: "Urabandai",
+      },
+    },
+    "daisen": {
+      name: "Daisen",
+      towns: {
+        daisenji: "Daisenji",
+        yonago: "Yonago",
+      },
+    },
     "minakami": {
       name: "Minakami",
       towns: { minakami: "Minakami" },

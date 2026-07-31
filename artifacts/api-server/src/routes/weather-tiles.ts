@@ -72,6 +72,14 @@ const JAPAN_CITIES = [
   { key: "shizukuishi", name: "Shizukuishi", nameJa: "雫石", lat: 39.694, lng: 140.984 },
   // Morioka · city core around Morioka Station.
   { key: "morioka", name: "Morioka", nameJa: "盛岡", lat: 39.702, lng: 141.137 },
+  // Inawashiro · town core around the Ban-etsu West line station (~520m).
+  { key: "inawashiro", name: "Inawashiro", nameJa: "猪苗代", lat: 37.557, lng: 140.104 },
+  // Urabandai · highland lake district behind Mt Bandai (~850m).
+  { key: "urabandai", name: "Urabandai", nameJa: "裏磐梯", lat: 37.660, lng: 140.065 },
+  // Daisenji · temple village at the base of the Daisen lifts (~800m).
+  { key: "daisenji", name: "Daisenji", nameJa: "大山寺", lat: 35.396, lng: 133.540 },
+  // Yonago · city core around JR Yonago Station on the San-in coast.
+  { key: "yonago", name: "Yonago", nameJa: "米子", lat: 35.428, lng: 133.331 },
   // Minakami · onsen town core around JR Minakami Station.
   { key: "minakami", name: "Minakami", nameJa: "みなかみ", lat: 36.780, lng: 138.968 },
   // Kusatsu Onsen · town core around the Yubatake.

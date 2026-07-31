@@ -97,6 +97,13 @@ const REGION_ANCHORS: Record<RegionId, {
   // Appi & Shizukuishi · anchor on Mt Maemori (1,305m), the Appi
   // gondola summit · the snowiest lift-served point of the pair.
   "appi-shizukuishi": { lat: 40.0028, lon: 140.9452, elevation: 1305, region: "JP", displayName: "Appi & Shizukuishi" },
+  // Bandai · anchor on Grandeco's top terrain (1590m) · the highest and
+  // snowiest lift-served point of the pair, so the fairest single point
+  // for alerts.
+  "bandai": { lat: 37.7020, lon: 140.1350, elevation: 1590, region: "JP", displayName: "Bandai" },
+  // Daisen · anchor on the Kokusai top terrain (1121m), the highest
+  // lift-served point on Mt Daisen's sea-facing slopes.
+  "daisen": { lat: 35.4000, lon: 133.5280, elevation: 1121, region: "JP", displayName: "Daisen" },
   // Minakami · anchor on the Tenjin Pair top (~1,500m) above the
   // Tenjindaira bowl on Tanigawa-dake · by far the snowiest lift-served
   // point in the valley.

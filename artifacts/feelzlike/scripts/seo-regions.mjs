@@ -401,6 +401,37 @@ export const REGIONS = [
       { id: "morioka",     name: "Morioka",     blurb: "Prefecture capital and shinkansen hub · Appi about 50 minutes north, Shizukuishi about 20 minutes west" },
     ],
   },
+  {
+    slug: "bandai",
+    name: "Bandai",
+    subtitle: "Fukushima · Japan",
+    country: "JP",
+    hasAlerts: false,
+    hasRoads: false,
+    mountains: [
+      { name: "Nekoma Mountain", blurb: "The former Alts Bandai (south) and Nekoma (north) linked by lift into one of Japan's largest resorts · 33 courses from the sunny Lake Inawashiro side to the powder-holding north bowl, on the Ikon Pass" },
+      { name: "Grandeco",        blurb: "High-base gondola hill in Urabandai at 1,010-1,590 m · dry Aizu powder, wide groomers with Mt Bandai views and one of Tohoku's longest seasons" },
+    ],
+    towns: [
+      { id: "inawashiro", name: "Inawashiro", blurb: "Lakeside rail gateway on the Ban-etsu West line · winter shuttles up to Nekoma Mountain and Grandeco" },
+      { id: "urabandai",  name: "Urabandai",  blurb: "Highland lake district behind Mt Bandai · pensions and resort hotels, closest beds to Grandeco and the Nekoma north side" },
+    ],
+  },
+  {
+    slug: "daisen",
+    name: "Daisen",
+    subtitle: "Tottori · Japan",
+    country: "JP",
+    hasAlerts: false,
+    hasRoads: false,
+    mountains: [
+      { name: "Daisen White Resort", blurb: "Western Japan's biggest ski hill on Mt Daisen · four linked areas from 655 to 1,121 m with Japan-Sea views · a regional day hill under new operators from 2026-27" },
+    ],
+    towns: [
+      { id: "daisenji", name: "Daisenji", blurb: "Temple village at the base of the lifts · inns, onsen baths and the 1,300-year-old Daisenji temple" },
+      { id: "yonago",   name: "Yonago",   blurb: "Coastal city hub on the San-in coast · rail and airport gateway, about 40 minutes from the Daisen slopes" },
+    ],
+  },
 
   // ── New Zealand ─────────────────────────────────────────────────────────
   {

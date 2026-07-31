@@ -121,6 +121,11 @@ const MOUNTAIN_TINTS: Record<string, { bg: string; hover: string; ring: string }
   "rusutsu-resort":    { bg: "bg-sky-100/70",    hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },
   "kiroro-resort":     { bg: "bg-indigo-100/70", hover: "hover:bg-indigo-200/70",  ring: "ring-indigo-300/50" },
   // Zao Onsen JP · Yamagata's juhyo classic above the onsen village
+  // Bandai JP · Nekoma Mountain (linked Alts + Nekoma) + Grandeco
+  "nekoma-mountain":   { bg: "bg-sky-100/70",    hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },
+  "grandeco":          { bg: "bg-indigo-100/70", hover: "hover:bg-indigo-200/70",  ring: "ring-indigo-300/50" },
+  // Daisen JP · western Japan's ski hill on Mt Daisen
+  "daisen-white-resort": { bg: "bg-sky-100/70",  hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },
   "zao-onsen-resort":  { bg: "bg-sky-100/70",    hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },
   // Hakkoda & Aomori Spring JP · Aomori's ropeway big mountain + Mt Iwaki
   "hakkoda":           { bg: "bg-sky-100/70",    hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },

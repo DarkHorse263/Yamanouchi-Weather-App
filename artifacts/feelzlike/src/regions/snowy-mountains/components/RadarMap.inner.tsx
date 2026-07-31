@@ -73,6 +73,8 @@ export type RegionKey =
   | "zao-onsen"
   | "hakkoda-aomori-spring"
   | "appi-shizukuishi"
+  | "bandai"
+  | "daisen"
   | "minakami"
   | "kusatsu-manza"
   | "hachimantai"
@@ -293,6 +295,28 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       label: "JMA Iwate",
       imageUrl: null,
       href: "https://www.jma.go.jp/bosai/nowc/#zoom:9/lat:39.85/lon:140.98/colordepth:normal/elements:hrpns",
+      attribution: "Japan Meteorological Agency · JMA",
+    },
+  },
+  // Bandai · Nekoma Mountain's south base and Grandeco sit ~0.12° of
+  // latitude apart either side of Mt Bandai, so centre between them.
+  "bandai": {
+    windy: { lat: 37.64, lon: 140.08, zoom: 10 },
+    official: {
+      label: "JMA Fukushima",
+      imageUrl: null,
+      href: "https://www.jma.go.jp/bosai/nowc/#zoom:10/lat:37.64/lon:140.08/colordepth:normal/elements:hrpns",
+      attribution: "Japan Meteorological Agency · JMA",
+    },
+  },
+  // Daisen · a single compact hill on Mt Daisen with Yonago on the
+  // coast ~20 km north-west, so centre just off the mountain.
+  "daisen": {
+    windy: { lat: 35.41, lon: 133.48, zoom: 10 },
+    official: {
+      label: "JMA Tottori",
+      imageUrl: null,
+      href: "https://www.jma.go.jp/bosai/nowc/#zoom:10/lat:35.41/lon:133.48/colordepth:normal/elements:hrpns",
       attribution: "Japan Meteorological Agency · JMA",
     },
   },
@@ -595,6 +619,23 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "morioka", name: "Morioka", lat: 39.7019, lng: 141.1365, accent: "#0ea5e9" },
     ],
   },
+  "bandai": {
+    center: { lat: 37.64, lng: 140.08 },
+    pins: [
+      { id: "nekoma-mountain", name: "Nekoma Mountain", lat: 37.578, lng: 140.030, accent: "#f97316" },
+      { id: "grandeco", name: "Grandeco", lat: 37.702, lng: 140.135, accent: "#f97316" },
+      { id: "inawashiro", name: "Inawashiro", lat: 37.5566, lng: 140.1044, accent: "#0ea5e9" },
+      { id: "urabandai", name: "Urabandai", lat: 37.660, lng: 140.065, accent: "#0ea5e9" },
+    ],
+  },
+  "daisen": {
+    center: { lat: 35.41, lng: 133.48 },
+    pins: [
+      { id: "daisen-white-resort", name: "Daisen White Resort", lat: 35.400, lng: 133.528, accent: "#f97316" },
+      { id: "daisenji", name: "Daisenji", lat: 35.396, lng: 133.540, accent: "#0ea5e9" },
+      { id: "yonago", name: "Yonago", lat: 35.4281, lng: 133.3311, accent: "#0ea5e9" },
+    ],
+  },
   "minakami": {
     center: { lat: 36.80, lng: 138.97 },
     pins: [
@@ -681,6 +722,8 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "zao-onsen": "JP",
   "hakkoda-aomori-spring": "JP",
   "appi-shizukuishi": "JP",
+  bandai: "JP",
+  daisen: "JP",
   minakami: "JP",
   "kusatsu-manza": "JP",
   hachimantai: "JP",
@@ -709,6 +752,8 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "zao-onsen": "zao onsen",
   "hakkoda-aomori-spring": "hakkoda & aomori spring",
   "appi-shizukuishi": "appi & shizukuishi",
+  bandai: "bandai",
+  daisen: "daisen",
   minakami: "minakami",
   "kusatsu-manza": "kusatsu & manza",
   hachimantai: "hachimantai",

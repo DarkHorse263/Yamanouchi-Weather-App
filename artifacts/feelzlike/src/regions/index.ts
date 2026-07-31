@@ -14,6 +14,8 @@ import { asahikawaRegion } from "./asahikawa";
 import { rusutsuKiroroRegion } from "./rusutsu-kiroro";
 import { yuzawaRegion } from "./yuzawa";
 import { zaoOnsenRegion } from "./zao-onsen";
+import { bandaiRegion } from "./bandai";
+import { daisenRegion } from "./daisen";
 import { hakkodaAomoriSpringRegion } from "./hakkoda-aomori-spring";
 import { appiShizukuishiRegion } from "./appi-shizukuishi";
 import { minakamiRegion } from "./minakami";
@@ -48,6 +50,8 @@ export const REGIONS: RegionConfig[] = [
   nisekoRegion,
   furanoRegion,
   sapporoRegion,
+  bandaiRegion,
+  daisenRegion,
   tomamuSahoroRegion,
   asahikawaRegion,
   rusutsuKiroroRegion,
@@ -84,6 +88,8 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "yamanouchi": "JP",
   "nozawa-onsen": "JP",
   "iiyama": "JP",
+  "bandai": "JP",
+  "daisen": "JP",
   "hakuba-valley": "JP",
   "myoko": "JP",
   "niseko": "JP",

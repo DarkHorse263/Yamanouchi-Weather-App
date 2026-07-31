@@ -36,6 +36,8 @@ export const ALERT_REGIONS: Array<{ id: string; nameEn: string; nameJa: string; 
   { id: "rusutsu-kiroro", nameEn: "Rusutsu & Kiroro", nameJa: "ルスツ・キロロ", country: "JP · Hokkaido" },
   { id: "yuzawa", nameEn: "Yuzawa", nameJa: "湯沢", country: "JP · Niigata" },
   { id: "zao-onsen", nameEn: "Zao Onsen", nameJa: "蔵王温泉", country: "JP · Yamagata" },
+  { id: "bandai", nameEn: "Bandai", nameJa: "磐梯", country: "JP · Fukushima" },
+  { id: "daisen", nameEn: "Daisen", nameJa: "大山", country: "JP · Tottori" },
   { id: "hakkoda-aomori-spring", nameEn: "Hakkoda & Aomori Spring", nameJa: "八甲田・青森スプリング", country: "JP · Aomori" },
   { id: "appi-shizukuishi", nameEn: "Appi & Shizukuishi", nameJa: "安比高原・雫石", country: "JP · Iwate" },
   { id: "minakami", nameEn: "Minakami", nameJa: "みなかみ", country: "JP · Gunma" },

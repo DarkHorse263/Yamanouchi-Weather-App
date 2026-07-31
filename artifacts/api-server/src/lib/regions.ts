@@ -24,6 +24,8 @@ export const REGION_IDS = [
   "rusutsu-kiroro",
   "yuzawa",
   "zao-onsen",
+  "bandai",
+  "daisen",
   "hakkoda-aomori-spring",
   "appi-shizukuishi",
   "minakami",
@@ -271,6 +273,23 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "hachimantai-shimokura": "hachimantai",
   "hachimantai": "hachimantai",
   "hachimantai-roads": "hachimantai",
+
+  // Bandai, JP · Nekoma Mountain (former Alts Bandai + Nekoma, linked)
+  // and Grandeco in Urabandai, with Inawashiro as the rail gateway.
+  "nekoma-mountain": "bandai",
+  "grandeco": "bandai",
+  "inawashiro": "bandai",
+  "urabandai": "bandai",
+  "bandai": "bandai",
+  "bandai-roads": "bandai",
+
+  // Daisen, JP · western Japan's ski corner on Mt Daisen in Tottori,
+  // with the Daisenji temple village at the base and Yonago as the hub.
+  "daisen-white-resort": "daisen",
+  "daisenji": "daisen",
+  "yonago": "daisen",
+  "daisen": "daisen",
+  "daisen-roads": "daisen",
 
   // Queenstown, NZ · 2 mountains + 1 gateway town + roads cam tile.
   "coronet-peak": "queenstown",
