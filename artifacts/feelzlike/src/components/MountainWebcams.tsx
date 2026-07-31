@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, useId } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Camera, ExternalLink, MapPin, Pause, Play, RefreshCw, X } from "lucide-react";
 import { getMountainWebcams, type MountainWebcam } from "@/data/webcams";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
 
 interface MountainWebcamsProps {
   mountainId: string;
@@ -29,6 +30,7 @@ export function MountainWebcams({
   fallbackPageUrl,
 }: MountainWebcamsProps) {
   const t = tProp ?? ((en: string) => en);
+  const u = useUnits();
   const cams = useMemo(() => getMountainWebcams(mountainId), [mountainId]);
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
   const [autoRotate, setAutoRotate] = useState(false);
@@ -173,7 +175,7 @@ export function MountainWebcams({
                   <MapPin className="w-3 h-3" />
                   {t(cam.vantage, vantageJa(cam.vantage))}
                   {cam.elevation && (
-                    <span className="text-muted-foreground tabular-nums">· {cam.elevation}m</span>
+                    <span className="text-muted-foreground tabular-nums">· {u.elev(cam.elevation)}{u.elevUnit}</span>
                   )}
                 </div>
               )}

@@ -6,6 +6,7 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { CloudSun, Thermometer, Star } from "lucide-react";
 import { useSeason } from "@workspace/feelzlike-shell";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
 
 function MapResizer() {
   const map = useMap();
@@ -159,7 +160,7 @@ function tempColor(temp: number): { text: string; bg: string; border: string } {
   return { text: '#DC2626', bg: '#FEF2F2', border: '#FECACA' };
 }
 
-function createCityTempLabel(city: CityTemp, isJa: boolean) {
+function createCityTempLabel(city: CityTemp, isJa: boolean, windLabel: string) {
   if (city.temp === null) return null;
   const tc = tempColor(city.temp);
   const isFeatured = FEATURED_KEYS.has(city.key);
@@ -187,7 +188,7 @@ function createCityTempLabel(city: CityTemp, isJa: boolean) {
       <span style="font-size:${isFeatured ? '16px' : '13px'};font-weight:900;color:${tc.text};line-height:1;">
         ${city.temp.toFixed(1)}°
       </span>
-      ${isFeatured ? `<span style="font-size:8px;font-weight:600;color:#94a3b8;line-height:1;margin-top:1px;">${city.wind} km/h</span>` : ''}
+      ${isFeatured ? `<span style="font-size:8px;font-weight:600;color:#94a3b8;line-height:1;margin-top:1px;">${windLabel}</span>` : ''}
     </div>
     <div style="
       width:0;height:0;
@@ -258,6 +259,7 @@ function ViewResetter({ activeLayer }: { activeLayer: MapLayer }) {
 
 export default function MapView() {
   const { t, language: lang } = useLanguage();
+  const u = useUnits();
   const { isWinter } = useSeason();
   const [activeLayer, setActiveLayer] = useState<MapLayer>("radar");
   const tabs = isWinter ? WINTER_TABS : GREEN_TABS;
@@ -307,7 +309,7 @@ export default function MapView() {
         )}
         {showTemp && <TempZoomer />}
         {showTemp && cities.map(city => {
-          const icon = createCityTempLabel(city, lang === "ja");
+          const icon = createCityTempLabel(city, lang === "ja", `${u.wind(city.wind)} ${u.windUnit}`);
           if (!icon || city.temp === null) return null;
           const tc = tempColor(city.temp);
           const isFeatured = FEATURED_KEYS.has(city.key);
@@ -333,7 +335,7 @@ export default function MapView() {
                     </div>
                     <div className="bg-slate-50 rounded-lg p-2 text-center">
                       <div className="text-[9px] text-slate-500 font-bold uppercase">{t("Wind", "風")}</div>
-                      <div className="text-base font-black text-slate-700">{city.wind}<span className="text-[10px] ml-0.5">km/h</span></div>
+                      <div className="text-base font-black text-slate-700">{u.wind(city.wind)}<span className="text-[10px] ml-0.5">{u.windUnit}</span></div>
                     </div>
                   </div>
                 </div>

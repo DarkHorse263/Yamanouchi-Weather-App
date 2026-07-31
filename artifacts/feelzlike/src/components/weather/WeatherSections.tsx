@@ -130,6 +130,7 @@ export function WeatherConditions({
   current: TownWeatherCurrent;
   t: Translate;
 }) {
+  const u = useUnits();
   const uv = uvBand(current.uvIndex);
   const wind = windBand(current.windSpeed);
   return (
@@ -137,8 +138,8 @@ export function WeatherConditions({
       <Stat
         icon={Wind}
         label={t("Wind", "風")}
-        value={current.windSpeed !== null ? `${Math.round(current.windSpeed)}` : "-"}
-        unit="km/h"
+        value={current.windSpeed !== null ? `${u.wind(current.windSpeed)}` : "-"}
+        unit={u.windUnit}
         hint={
           current.windDirectionCompass
             ? `${current.windDirectionCompass} · ${wind.label}`
@@ -149,8 +150,8 @@ export function WeatherConditions({
       <Stat
         icon={CompassIcon}
         label={t("Gusts", "突風")}
-        value={current.windGust !== null ? `${Math.round(current.windGust)}` : "-"}
-        unit="km/h"
+        value={current.windGust !== null ? `${u.wind(current.windGust)}` : "-"}
+        unit={u.windUnit}
         hint={t("Max 10-min", "最大10分")}
       />
       <Stat
@@ -236,7 +237,7 @@ export function ObservedSnowCard({
   const u = useUnits();
   const stationLine = [
     `JMA AMeDAS · ${obs.stationName}`,
-    obs.stationElevationM !== null ? `${Math.round(obs.stationElevationM)}m` : null,
+    obs.stationElevationM !== null ? `${u.elev(obs.stationElevationM)}${u.elevUnit}` : null,
     `${obs.distanceKm} km ${t("away", "先")}`,
   ]
     .filter(Boolean)
@@ -369,7 +370,7 @@ export function WeatherOutlook({
                   label={t("Wind", "風")}
                   value={
                     d.windSpeedMax !== null
-                      ? `${Math.round(d.windSpeedMax)} km/h`
+                      ? `${u.wind(d.windSpeedMax)} ${u.windUnit}`
                       : "-"
                   }
                 />

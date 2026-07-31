@@ -1,5 +1,6 @@
 import { AlertTriangle, Cable, CheckCircle2, Wind } from "lucide-react";
 import { useLanguage } from "@workspace/feelzlike-shell";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
 
 interface Props {
   windSpeedKmh: number | null | undefined;
@@ -141,6 +142,7 @@ export function LiftHoldLikely({
   variant = "light",
 }: Props) {
   const { t } = useLanguage();
+  const u = useUnits();
 
   const wind = typeof windSpeedKmh === "number" ? windSpeedKmh : null;
   const gust = typeof gustKmh === "number" ? gustKmh : null;
@@ -189,12 +191,12 @@ export function LiftHoldLikely({
             </span>
           </div>
           <p className="font-display font-semibold text-3xl md:text-4xl tracking-tight leading-none mt-2 tabular-nums">
-            {Math.round(driver)}
-            <span className="text-sm opacity-70 ml-1">km/h</span>
+            {u.wind(driver)}
+            <span className="text-sm opacity-70 ml-1">{u.windUnit}</span>
           </p>
           {gust != null && wind != null && (
             <p className="text-[11px] opacity-70 mt-1 tabular-nums">
-              {t("avg", "平均")} {Math.round(wind)} km/h
+              {t("avg", "平均")} {u.wind(wind)} {u.windUnit}
             </p>
           )}
         </div>

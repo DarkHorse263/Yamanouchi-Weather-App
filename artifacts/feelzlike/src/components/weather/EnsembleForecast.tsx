@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { format, parseISO, isToday } from "date-fns";
 import { CalendarDays, Snowflake, CloudRain, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
 
 interface EnsembleSource {
   source: string;
@@ -58,6 +59,7 @@ const CONFIDENCE: Record<EnsembleDay["confidence"], { label: string; dot: string
  * same on-mountain elevation as the headline snow so the two numbers line up.
  */
 export function EnsembleForecast({ locationId, elevationM }: Props) {
+  const u = useUnits();
   const [data, setData] = useState<EnsembleResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -126,7 +128,7 @@ export function EnsembleForecast({ locationId, elevationM }: Props) {
         </div>
         {outlookElevationM != null && (
           <p className="byline text-muted-foreground/60 text-right tabular-nums mt-1">
-            multi-model · at {Math.round(outlookElevationM)}m
+            multi-model · at {u.elev(outlookElevationM)}{u.elevUnit}
           </p>
         )}
       </div>
@@ -221,7 +223,7 @@ export function EnsembleForecast({ locationId, elevationM }: Props) {
               </div>
             ))}
             <p className="byline text-muted-foreground/50 mt-2 tabular-nums">
-              snow in cm{outlookElevationM != null ? ` · at ${Math.round(outlookElevationM)}m` : ""}
+              snow in cm{outlookElevationM != null ? ` · at ${u.elev(outlookElevationM)}${u.elevUnit}` : ""}
             </p>
           </div>
         </details>

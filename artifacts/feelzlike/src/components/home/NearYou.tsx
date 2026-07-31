@@ -25,6 +25,7 @@ import { classifyRegionProximity } from "@/lib/regionProximity";
 import { NearYouRegionRow, type SuggestedRegion } from "./NearYouRegionRow";
 import { PlaceSearch } from "./PlaceSearch";
 import { precipSummary } from "@/lib/precip";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
 
 // ── server payload (GET /api/local-weather) ────────────────────────
 interface LocalCurrent {
@@ -166,6 +167,7 @@ const PANEL =
  * path into the mountains is always reachable.
  */
 export function NearYou() {
+  const u = useUnits();
   const [coords, setCoords] = useState<{ lat: number; lon: number } | null>(null);
   const [phase, setPhase] = useState<GeoPhase>("checking");
   const [lastNearest, setLastNearest] = useState<NearestRegion | null>(null);
@@ -438,7 +440,7 @@ export function NearYou() {
                   {local.windKph > 0 ? (
                     <>
                       {" "}
-                      &middot; wind {local.windKph} km/h {local.windDirection.toLowerCase()}
+                      &middot; wind {u.wind(local.windKph)} {u.windUnit} {local.windDirection.toLowerCase()}
                     </>
                   ) : null}
                 </p>

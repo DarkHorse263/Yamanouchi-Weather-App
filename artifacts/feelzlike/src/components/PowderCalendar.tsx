@@ -111,8 +111,8 @@ function DayPill({ summary, t, u }: { summary: DailyPowderSummary; t: Tx; u: Uni
   const tone = best ? GRADE_STYLES[best.grade].pill : "bg-white border-border text-muted-foreground";
   const labelText = best
     ? t(
-        `${best.grade.toUpperCase()} window: ${u.snow(best.totalSnow)} over ${best.hours}h, ${best.avgWind}km/h wind`,
-        `${best.grade.toUpperCase()}ウィンドウ: ${best.hours}時間で${u.snow(best.totalSnow)}、風速${best.avgWind}km/h`,
+        `${best.grade.toUpperCase()} window: ${u.snow(best.totalSnow)} over ${best.hours}h, ${u.wind(best.avgWind)}${u.windUnit} wind`,
+        `${best.grade.toUpperCase()}ウィンドウ: ${best.hours}時間で${u.snow(best.totalSnow)}、風速${u.wind(best.avgWind)}${u.windUnit}`,
       )
     : daySnow > 0
       ? t(`${u.snow(daySnow)} forecast - no sustained window`, `${u.snow(daySnow)}予報 - 持続的なウィンドウなし`)

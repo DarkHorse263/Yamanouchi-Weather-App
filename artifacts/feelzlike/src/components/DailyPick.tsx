@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Snowflake, Wind, Sparkles, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
 
 type ResortRef = { id: string; name: string };
 
@@ -30,7 +31,6 @@ interface Scored {
   snowfallCm24: number;
   windKph: number;
   score: number;
-  reason: string;
 }
 
 /**
@@ -41,6 +41,7 @@ interface Scored {
  * the formula simple and transparent so users can second-guess us.
  */
 export function DailyPick({ regionId, resorts, resortHrefPattern = "/:id" }: Props) {
+  const u = useUnits();
   const [pick, setPick] = useState<Scored | null>(null);
   const [error, setError] = useState<string | null>(null);
   // Callers (RegionHome, TownHome) routinely pass `resorts` inline, so the
@@ -73,11 +74,6 @@ export function DailyPick({ regionId, resorts, resortHrefPattern = "/:id" }: Pro
             // Each cm of fresh snow worth 1 pt; each kph of wind costs 1 pt.
             // Fresh snow dominates on big days, wind decides on quiet days.
             const score = Math.max(0, snowfallCm24 - windKph);
-            const reasonBits: string[] = [];
-            if (snowfallCm24 >= 1) reasonBits.push(`${snowfallCm24.toFixed(1)} cm fresh in next 24h`);
-            if (windKph <= 20) reasonBits.push("low wind");
-            else if (windKph >= 40) reasonBits.push(`windy (${Math.round(windKph)} km/h)`);
-            const reason = reasonBits.join(" · ") || "calm conditions";
             const ref = resorts.find((r) => r.id === l.location.id);
             return {
               id: l.location.id,
@@ -85,7 +81,6 @@ export function DailyPick({ regionId, resorts, resortHrefPattern = "/:id" }: Pro
               snowfallCm24,
               windKph,
               score,
-              reason,
             };
           })
           .sort((a, b) => b.score - a.score);
@@ -110,6 +105,14 @@ export function DailyPick({ regionId, resorts, resortHrefPattern = "/:id" }: Pro
 
   const href = resortHrefPattern.replace(":id", pick.id);
 
+  // Reason copy is composed at render time so it follows the member's unit
+  // preference (canonical data stays metric in state).
+  const reasonBits: string[] = [];
+  if (pick.snowfallCm24 >= 1) reasonBits.push(`${u.snow(pick.snowfallCm24, 1)} fresh in next 24h`);
+  if (pick.windKph <= 20) reasonBits.push("low wind");
+  else if (pick.windKph >= 40) reasonBits.push(`windy (${u.wind(pick.windKph)} ${u.windUnit})`);
+  const reason = reasonBits.join(" · ") || "calm conditions";
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 8 }}
@@ -127,17 +130,17 @@ export function DailyPick({ regionId, resorts, resortHrefPattern = "/:id" }: Pro
             {pick.name}
           </h2>
           <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
-            {pick.reason}
+            {reason}
           </p>
           <div className="mt-3 flex items-center gap-4 text-xs text-muted-foreground/85">
             <span className="inline-flex items-center gap-1.5">
               <Snowflake className={cn("w-3.5 h-3.5", pick.snowfallCm24 >= 1 ? "text-snow-accent" : "text-muted-foreground/50")} />
-              <span data-numeric className={cn(pick.snowfallCm24 >= 1 && "text-snow-accent font-medium")}>{pick.snowfallCm24.toFixed(1)} cm</span>
+              <span data-numeric className={cn(pick.snowfallCm24 >= 1 && "text-snow-accent font-medium")}>{u.snow(pick.snowfallCm24, 1)}</span>
               <span className="text-muted-foreground/60">next 24h</span>
             </span>
             <span className="inline-flex items-center gap-1.5">
               <Wind className={cn("w-3.5 h-3.5", pick.windKph <= 25 ? "text-emerald-400" : pick.windKph <= 40 ? "text-amber-400" : "text-rose-400")} />
-              <span data-numeric>{Math.round(pick.windKph)} km/h</span>
+              <span data-numeric>{u.wind(pick.windKph)} {u.windUnit}</span>
               <span className="text-muted-foreground/60">wind</span>
             </span>
           </div>

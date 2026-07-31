@@ -12,6 +12,7 @@ import {
 import { useRegion, useLanguage } from "@workspace/feelzlike-shell";
 import type { MountainLink } from "@workspace/feelzlike-shell";
 import { PageMeta } from "@/lib/seo/PageMeta";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
 
 /**
  * Region mountains list.
@@ -195,6 +196,7 @@ function ParentGroupCard({
   index: number;
   t: (en: string, ja: string) => string;
 }) {
+  const u = useUnits();
   const [open, setOpen] = useState(false);
   const meta = PARENT_GROUP_META[parentId] ?? {
     name: parentId,
@@ -247,8 +249,8 @@ function ParentGroupCard({
           <div>
             <p className="byline text-muted-foreground/70">{t("Highest summit", "最高標高")}</p>
             <p className="display-number text-3xl text-blue-900 tnum mt-0.5">
-              {maxElev > 0 ? maxElev.toLocaleString() : "-"}
-              <span className="text-base text-muted-foreground/70 font-normal ml-1">m</span>
+              {maxElev > 0 ? (u.elev(maxElev) ?? 0).toLocaleString() : "-"}
+              <span className="text-base text-muted-foreground/70 font-normal ml-1">{u.elevUnit}</span>
             </p>
           </div>
           <span className="inline-flex items-center gap-1 text-xs font-semibold text-blue-700">
@@ -291,7 +293,7 @@ function ParentGroupCard({
                     <div className="flex items-center gap-3 shrink-0">
                       {m.elevationM !== undefined && (
                         <span className="text-xs tabular-nums text-muted-foreground">
-                          {m.elevationM.toLocaleString()} m
+                          {(u.elev(m.elevationM) ?? 0).toLocaleString()} {u.elevUnit}
                         </span>
                       )}
                       <ArrowUpRight className="w-4 h-4 text-blue-600" aria-hidden />
@@ -318,6 +320,7 @@ function MountainCard({
   indexLabel: string;
   t: (en: string, ja: string) => string;
 }) {
+  const u = useUnits();
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
@@ -365,8 +368,8 @@ function MountainCard({
                   {t("Summit elevation", "標高")}
                 </p>
                 <p className="display-number text-3xl text-blue-900 tnum mt-0.5">
-                  {m.elevationM.toLocaleString()}
-                  <span className="text-base text-muted-foreground/70 font-normal ml-1">m</span>
+                  {(u.elev(m.elevationM) ?? 0).toLocaleString()}
+                  <span className="text-base text-muted-foreground/70 font-normal ml-1">{u.elevUnit}</span>
                 </p>
               </div>
               <span className="text-[10px] font-bold tracking-wider uppercase px-2 py-1 rounded-md bg-blue-50 text-blue-700 border border-blue-200">

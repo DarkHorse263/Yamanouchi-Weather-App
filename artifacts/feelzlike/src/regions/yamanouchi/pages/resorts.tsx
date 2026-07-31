@@ -5,6 +5,7 @@ import { LoadingScreen, ErrorScreen } from "../components/ui-elements";
 import { HourlyTimeline } from "../components/hourly-timeline";
 import { ExternalLink, CalendarDays, BedDouble, TreePine, Activity, PawPrint, Cloud, Mountain, Droplets, CableCar, Sparkles, Leaf, type LucideIcon } from "lucide-react";
 import { motion } from "framer-motion";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
 import { Link } from "wouter";
 import { useYamanouchiBooking } from "../lib/booking";
 import { useState } from "react";
@@ -58,6 +59,7 @@ function safeTime(raw: string | null | undefined): string {
 
 export default function Resorts() {
   const { t } = useLanguage();
+  const u = useUnits();
   const { isWinter } = useSeason();
   const booking = useYamanouchiBooking();
   const { data: resorts, isLoading, error } = useGetResorts({ query: { refetchInterval: 600000, enabled: isWinter } as never });
@@ -187,8 +189,8 @@ export default function Resorts() {
                             <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wide">Temp °C</p>
                           </div>
                           <div>
-                            <p className="text-base font-black text-slate-500">{resort.wind ?? '-'}</p>
-                            <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wide">Wind km/h</p>
+                            <p className="text-base font-black text-slate-500">{resort.wind != null ? u.wind(resort.wind) : '-'}</p>
+                            <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wide">Wind {u.windUnit}</p>
                           </div>
                         </div>
 

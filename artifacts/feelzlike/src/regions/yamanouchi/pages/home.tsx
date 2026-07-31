@@ -23,6 +23,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import { useEffect, useState } from "react";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
 
 function shortName(name: string): string {
   return name
@@ -271,6 +272,7 @@ function GreenHome({ t }: { t: (en: string, ja: string) => string }) {
 
 export default function Home() {
   const { t } = useLanguage();
+  const u = useUnits();
   const { isWinter } = useSeason();
   const { data, isLoading, error } = useGetDashboard({ query: { refetchInterval: 600000, enabled: isWinter } as never });
   const { data: alertData } = useGetPowderAlerts({ region: "yamanouchi" }, { query: { refetchInterval: 600000, enabled: isWinter } as never });
@@ -374,7 +376,7 @@ export default function Home() {
         <div className="grid grid-cols-4 divide-x divide-border">
           {[
             { label: t("Avg Temp", "平均気温"),  value: data.avgTemp     != null ? `${data.avgTemp}°` : "-",  sub: "°C",   resort: null },
-            { label: t("Avg Wind", "平均風速"),   value: data.avgWind     != null ? `${data.avgWind}`  : "-",  sub: "km/h", resort: null },
+            { label: t("Avg Wind", "平均風速"),   value: data.avgWind     != null ? `${u.wind(data.avgWind)}`  : "-",  sub: u.windUnit, resort: null },
             // `bestResort` is the only resort-context object the dashboard
             // returns, so we tag both snow stats with it (the legacy
             // `topSnowResort` field was removed from the schema).
@@ -431,7 +433,7 @@ export default function Home() {
                 { icon: Snowflake,            label: t("24h Snow", "24h降雪"), value: `${data.bestResort.snow24h ?? 0} cm`,    color: "text-snow-accent" },
                 { icon: Ruler,                label: t("Base", "積雪"),         value: `${data.bestResort.baseDepth ?? 0} cm`,  color: "text-snow-accent" },
                 { icon: ThermometerSnowflake, label: t("Temp", "気温"),         value: `${data.bestResort.temp ?? '--'}°C`,    color: "text-foreground" },
-                { icon: Wind,                 label: t("Wind", "風速"),         value: `${data.bestResort.wind ?? '--'} km/h`, color: "text-foreground" },
+                { icon: Wind,                 label: t("Wind", "風速"),         value: `${data.bestResort.wind != null ? u.wind(data.bestResort.wind) : '--'} ${u.windUnit}`, color: "text-foreground" },
               ].map(({ icon: Icon, label, value, color }) => (
                 <div key={label} className="bg-secondary rounded-xl px-3 py-2.5">
                   <div className={`flex items-center gap-1 ${color} mb-1`}>
