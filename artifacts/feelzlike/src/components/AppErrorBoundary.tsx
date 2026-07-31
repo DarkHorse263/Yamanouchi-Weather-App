@@ -3,6 +3,39 @@ import type { ReactNode } from "react";
 import { AlertTriangle, RefreshCw } from "lucide-react";
 
 /**
+ * Detect "stale deploy" chunk failures: after a republish, a cached page can
+ * request a JS chunk that no longer exists; the server SPA-fallback returns
+ * index.html, and the browser throws a MIME-type / import error. The honest
+ * fix is a one-shot hard reload so the visitor picks up the fresh bundle.
+ */
+const STALE_CHUNK_PATTERNS = [
+  /is not a valid javascript mime type/i,
+  /failed to fetch dynamically imported module/i,
+  /error loading dynamically imported module/i,
+  /importing a module script failed/i,
+  /loading chunk .* failed/i,
+];
+const RELOAD_FLAG = "flz-chunk-reload";
+
+function isStaleChunkError(error: unknown): boolean {
+  const msg = error instanceof Error ? error.message : String(error ?? "");
+  return STALE_CHUNK_PATTERNS.some((p) => p.test(msg));
+}
+
+/** Reload once per session for chunk errors; returns true if reloading. */
+function maybeReloadForStaleChunk(error: unknown): boolean {
+  if (!isStaleChunkError(error)) return false;
+  try {
+    if (sessionStorage.getItem(RELOAD_FLAG)) return false;
+    sessionStorage.setItem(RELOAD_FLAG, "1");
+  } catch {
+    return false; // no storage → can't guard against a reload loop, so don't
+  }
+  window.location.reload();
+  return true;
+}
+
+/**
  * Top-level error boundary. Catches any uncaught render error inside the
  * router, ships it to Sentry, and renders a calm fallback so the user
  * never sees a blank page.
@@ -13,7 +46,15 @@ import { AlertTriangle, RefreshCw } from "lucide-react";
 export function AppErrorBoundary({ children }: { children: ReactNode }) {
   return (
     <SentryErrorBoundary
-      fallback={({ resetError }) => (
+      onError={(error) => {
+        maybeReloadForStaleChunk(error);
+      }}
+      fallback={({ error, resetError }) =>
+        isStaleChunkError(error) ? (
+          <div className="min-h-screen flex items-center justify-center bg-slate-950 text-white px-6">
+            <p className="text-sm text-white/70">getting the latest version…</p>
+          </div>
+        ) : (
         <div className="min-h-screen flex items-center justify-center bg-slate-950 text-white px-6">
           <div className="max-w-md text-center">
             <div className="mx-auto w-12 h-12 rounded-full bg-amber-500/15 border border-amber-400/30 flex items-center justify-center mb-4">
@@ -42,7 +83,8 @@ export function AppErrorBoundary({ children }: { children: ReactNode }) {
             </div>
           </div>
         </div>
-      )}
+        )
+      }
       showDialog={false}
     >
       {children}
