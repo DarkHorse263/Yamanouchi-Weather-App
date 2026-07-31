@@ -52,6 +52,8 @@ import { useState } from "react";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
 import { AlertPromoBanner } from "@/components/AlertPromoBanner";
+import DayNarrative from "@/components/weather/DayNarrative";
+import { snowNext24SoWhat, windSoWhat, freezingLevelSoWhat } from "@/lib/soWhat";
 import { OfficialSiteLink } from "@/components/OfficialSiteLink";
 import { SnowReportLink } from "@/components/SnowReportLink";
 
@@ -75,7 +77,7 @@ export function MountainDetail() {
   const params = mParams ?? rParams;
   const locationId = params?.id ?? "";
   const { region } = useRegion();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const seasonCtx = useOptionalSeason();
   const isGreen = seasonCtx?.season === "green";
   const u = useUnits();
@@ -292,6 +294,17 @@ export function MountainDetail() {
             )}
           </section>
 
+          {/* one-line plain-english day summary · decision before data */}
+          {current && (
+            <DayNarrative
+              hourly={hourly}
+              current={current}
+              utcOffsetSeconds={(data as any)?.utcOffsetSeconds ?? 0}
+              isMountain
+              lang={language}
+            />
+          )}
+
           {/* ─── FREE ─────────────────────────────────────────────
               Order (May 2026 v4 · request from product):
                 1. Conditions right now
@@ -357,6 +370,10 @@ export function MountainDetail() {
                     : "-"
                 }
                 unit={u.snowUnit}
+                hint={(() => {
+                  const s = snowNext24SoWhat(current.snowfallNext24h);
+                  return s ? t(s.en, s.ja) : null;
+                })()}
               />
               <BigStat
                 icon={Wind}
@@ -367,6 +384,10 @@ export function MountainDetail() {
                     : "-"
                 }
                 unit={u.windUnit}
+                hint={(() => {
+                  const s = windSoWhat(current.windSpeed);
+                  return s ? t(s.en, s.ja) : null;
+                })()}
               />
               <BigStat
                 icon={Thermometer}
@@ -377,6 +398,13 @@ export function MountainDetail() {
                     : "-"
                 }
                 unit={u.elevUnit}
+                hint={(() => {
+                  const s = freezingLevelSoWhat(
+                    current.freezingLevel,
+                    location?.elevation,
+                  );
+                  return s ? t(s.en, s.ja) : null;
+                })()}
               />
             </div>
           </section>
@@ -841,11 +869,14 @@ function BigStat({
   label,
   value,
   unit,
+  hint,
 }: {
   icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
   label: string;
   value: string;
   unit: string;
+  /** optional "so what?" consequence line under the number */
+  hint?: string | null;
 }) {
   const isSnow = Icon === Snowflake || Icon === CloudSnow;
   return (
@@ -857,6 +888,7 @@ function BigStat({
         {value}
         <span className="text-sm text-muted-foreground/70 ml-1">{unit}</span>
       </p>
+      {hint && <p className="mt-1 text-xs leading-snug text-sky-700">{hint}</p>}
     </div>
   );
 }

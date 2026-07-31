@@ -13,10 +13,11 @@ import {
   ObservedSnowCard,
 } from "@/components/weather/WeatherSections";
 import { AlertPromoBanner } from "@/components/AlertPromoBanner";
+import DayNarrative from "@/components/weather/DayNarrative";
 
 export function TownWeather() {
   const { region } = useRegion();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { town } = useBaseTown();
   const q = useTownWeather(town?.lat, town?.lng);
   // Confidence pills were removed in favour of the single DailyPick callout
@@ -84,6 +85,12 @@ export function TownWeather() {
         <>
           {q.data._stale && <StaleNotice meta={q.data._stale} t={t} />}
           <WeatherHero current={q.data.current} town={t(town.name, town.nameJa)} />
+          <DayNarrative
+            hourly={q.data.hourly}
+            current={q.data.current}
+            utcOffsetSeconds={q.data.utcOffsetSeconds ?? 0}
+            lang={language}
+          />
           <WeatherConditions current={q.data.current} t={t} />
           <WeatherToday daily={q.data.daily[0]} t={t} />
           {q.data.observedSnow && <ObservedSnowCard obs={q.data.observedSnow} t={t} />}

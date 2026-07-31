@@ -114,6 +114,8 @@ import { useUnits } from "@/components/auth/UserPrefsProvider";
 import { PremiumGate, useOptionalSeason } from "@workspace/feelzlike-shell";
 import { ThredboSummer } from "../components/ThredboSummer";
 import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
+import DayNarrative from "@/components/weather/DayNarrative";
+import { snowNext24SoWhat, windSoWhat } from "@/lib/soWhat";
 
 type LocationId = "thredbo" | "perisher" | "charlottes-pass" | "selwyn" | "jindabyne";
 
@@ -181,6 +183,15 @@ export default function LocationDetail() {
     { query: { enabled: !!locationId } as never },
   );
   const { data: webcamData } = useGetLocationWebcams(locationId, { query: { enabled: !!locationId } as never });
+  // First cam with a direct image powers the hero thumbnail (AU only -
+  // hotlink-protected sources have no imageUrl and honestly show nothing).
+  const heroCam = webcamData?.webcams?.find((w: any) => !!w.imageUrl) ?? null;
+  const [heroCamBroken, setHeroCamBroken] = useState(false);
+  // a failed image must not suppress the thumbnail for the NEXT location /
+  // cam in the same SPA session
+  useEffect(() => {
+    setHeroCamBroken(false);
+  }, [heroCam?.imageUrl]);
   const isResort = locationId === "thredbo" || locationId === "perisher" || locationId === "charlottes-pass" || locationId === "selwyn";
   const { data: liftData } = useGetLocationLiftStatus(locationId as any, { query: { enabled: isResort } as never });
   // Resort-REPORTED snow base (pilot: Thredbo's official XML feed). The
@@ -260,7 +271,7 @@ export default function LocationDetail() {
 
   const stats = [
     { label: "feelzlike", value: `${u.temp(current.feelsLike)}${u.tempUnit}`, icon: Thermometer },
-    { label: "Wind", value: `${u.wind(current.windSpeed)} ${u.windUnit}${current.windDirectionCompass ? ` ${current.windDirectionCompass}` : ""}`, icon: Navigation },
+    { label: "Wind", value: `${u.wind(current.windSpeed)} ${u.windUnit}${current.windDirectionCompass ? ` ${current.windDirectionCompass}` : ""}`, icon: Navigation, hint: windSoWhat(current.windSpeed)?.en ?? null },
     ...(current.windGust ? [{ label: "Gusts", value: `${u.wind(current.windGust)} ${u.windUnit}`, icon: Wind }] : []),
     { label: "Humidity", value: `${current.humidity}%`, icon: Droplets },
     // A resort-reported base REPLACES the model figure (never shown alongside
@@ -276,7 +287,7 @@ export default function LocationDetail() {
     // Model-estimated overnight snow: same "· model" honesty label as snow
     // depth. Omitted (not 0) when the source has no past hours.
     ...(current.snowfallPast24h != null ? [{ label: "Snow last 24h · model", value: u.snow(current.snowfallPast24h, 1), icon: CloudSnow }] : []),
-    ...(snow24h != null ? [{ label: "Snow next 24h", value: u.snow(snow24h, 1), icon: CloudSnow }] : []),
+    ...(snow24h != null ? [{ label: "Snow next 24h", value: u.snow(snow24h, 1), icon: CloudSnow, hint: snowNext24SoWhat(snow24h)?.en ?? null }] : []),
     ...(current.dewpoint !== undefined ? [{ label: "Dew point", value: `${u.temp(current.dewpoint)}${u.tempUnit}`, icon: Droplets }] : []),
     ...(current.pressure !== undefined ? [{ label: "Pressure", value: `${current.pressure} hPa`, icon: Gauge }] : []),
     ...(current.rainSince9am !== undefined ? [{ label: "Rain since 9am", value: `${current.rainSince9am} mm`, icon: CloudRain }] : []),
@@ -452,6 +463,51 @@ export default function LocationDetail() {
             </motion.div>
           </div>
 
+          {/* one-line plain-english day summary · decision before data */}
+          <DayNarrative
+            hourly={hourly}
+            current={current}
+            utcOffsetSeconds={(weatherData as any)?.utcOffsetSeconds ?? 0}
+            isMountain
+          />
+
+          {/* live cam thumbnail · a real look at the mountain right in the
+              hero (Yahoo Weather lesson: show, don't just tell). Only renders
+              where a direct cam image exists (AU); hides itself on load
+              failure - never a broken-image placeholder. */}
+          {heroCam && !heroCamBroken && (
+            <button
+              type="button"
+              onClick={() => {
+                document
+                  .getElementById("webcams-section")
+                  ?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+              className="mt-4 flex items-center gap-3 group text-left"
+              data-testid="button-hero-cam"
+            >
+              <span className="relative block w-36 shrink-0 aspect-video overflow-hidden rounded-xl border border-white/15">
+                <img
+                  src={heroCam.imageUrl!}
+                  alt={`Live cam · ${heroCam.name}`}
+                  loading="lazy"
+                  onError={() => setHeroCamBroken(true)}
+                  className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <span className="absolute top-1.5 left-1.5 inline-flex items-center gap-1 rounded-full bg-black/55 px-1.5 py-0.5 text-[10px] font-semibold text-white">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  </span>
+                  live
+                </span>
+              </span>
+              <span className="byline text-muted-foreground/80 group-hover:text-primary transition-colors">
+                {heroCam.name} · see all cams ↓
+              </span>
+            </button>
+          )}
+
           {/* CONDITIONS RIGHT NOW - May 2026 v3: was the dense 3-tile strip
               (Snow depth / Snow next 24h / Wind+gusts). Replaced with the
               full measurements panel that used to live inside the paid
@@ -492,6 +548,9 @@ export default function LocationDetail() {
                   >
                     {s.value}
                   </p>
+                  {"hint" in s && (s as any).hint && (
+                    <p className="mt-1 text-xs leading-snug text-sky-700">{(s as any).hint}</p>
+                  )}
                 </div>
                 );
               })}
@@ -1068,10 +1127,11 @@ export default function LocationDetail() {
         <div className="grid grid-cols-1 gap-6 md:gap-8">
           {webcamData && webcamData.webcams.length > 0 && (
             <motion.div
+              id="webcams-section"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="glass rounded-3xl p-5 md:p-8"
+              className="glass rounded-3xl p-5 md:p-8 scroll-mt-6"
             >
               <div className="flex items-end justify-between mb-4 gap-4">
                 <div>
