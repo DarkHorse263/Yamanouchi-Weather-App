@@ -37,6 +37,7 @@ import { db, jobRunsTable } from "@workspace/db";
 import { sendEmail } from "../lib/emailSender.js";
 import { brandedEmail } from "../lib/emailTemplates.js";
 import externalLinks from "../data/external-links.json";
+import { bandElevations } from "../lib/openMeteoElevation.js";
 
 const ORIGIN = (process.env.SMOKE_TARGET_ORIGIN ?? process.env.PUBLIC_ORIGIN ?? "https://feelzlike.com").replace(/\/$/, "");
 
@@ -64,6 +65,29 @@ const WEATHER_CANARIES = [
   { id: "furano-ski-resort", country: "JP" },
   { id: "coronet-peak", country: "NZ" },
 ];
+
+// Headline-vs-elevation snow consistency canaries. Guards the Whakapapa
+// July 2026 class of bug: /api/weather's day-0 snowfallSum (freezing-level
+// partitioned at mid-mountain, snowElevationM=midMountainElevation(summit),
+// exactly what the resort pages request) silently disagreeing with the
+// Elevation forecast's mid band for the same day. summitM mirrors each
+// resort's registry elevationM on the client (the value the pages pass to
+// both endpoints); lat/lng mirror the api-server LOCATIONS entries.
+const SNOW_CONSISTENCY_CANARIES = [
+  { id: "thredbo", name: "Thredbo", lat: -36.5054, lng: 148.3089, summitM: 2037 },
+  { id: "whakapapa", name: "Whakapapa", lat: -39.2547, lng: 175.5619, summitM: 2020 },
+  { id: "happo-one", name: "Hakuba Happo-One", lat: 36.6981, lng: 137.8597, summitM: 1831 },
+];
+
+// Both figures derive from Open-Meteo hourly precip + freezing level at the
+// same elevation, but through two separate requests (the elevation forecast
+// pins cell_selection=nearest at the upper band; /api/weather fetches its
+// own hourly series), so small model-run/cell differences are normal. Only
+// alert on a genuine two-stories divergence: more than 5cm apart AND the
+// gap is over 40% of the larger figure (7cm vs 21cm → diff 14 > max(5, 8.4)
+// → fails; 10cm vs 13cm → passes).
+const SNOW_TOLERANCE_MIN_CM = 5;
+const SNOW_TOLERANCE_FRACTION = 0.4;
 
 export interface SmokeFailure {
   check: string;
@@ -220,6 +244,63 @@ async function checkApi(failures: SmokeFailure[]): Promise<number> {
   return passed;
 }
 
+/**
+ * Compare /api/weather day-0 snowfallSum (requested at mid-mountain, the way
+ * the resort pages do) against the elevation forecast's mid band for the
+ * same date. Missing data on either side is fail-soft (checkApi already
+ * flags dead endpoints); only a confident two-stories divergence fails.
+ */
+async function checkSnowConsistency(failures: SmokeFailure[]): Promise<number> {
+  let passed = 0;
+  for (const c of SNOW_CONSISTENCY_CANARIES) {
+    const mid = bandElevations(c.summitM).mid;
+    const weatherUrl = `${ORIGIN}/api/weather/${c.id}?snowElevationM=${mid}`;
+    const elevUrl = `${ORIGIN}/api/elevation-forecast?lat=${c.lat}&lng=${c.lng}&summitElevationM=${c.summitM}&name=${encodeURIComponent(c.name)}`;
+    try {
+      const [wRes, eRes] = await Promise.all([
+        fetchRaw(weatherUrl, PAGE_TIMEOUT_MS),
+        fetchRaw(elevUrl, PAGE_TIMEOUT_MS),
+      ]);
+      if (!wRes.ok || !eRes.ok) {
+        failures.push({
+          check: "snow consistency",
+          url: weatherUrl,
+          detail: `HTTP ${wRes.status} (weather) / ${eRes.status} (elevation-forecast) for ${c.name}`,
+        });
+        continue;
+      }
+      const weather = (await wRes.json()) as { daily?: { date?: string; snowfallSum?: number | null }[] };
+      const elev = (await eRes.json()) as {
+        forecast?: { days?: { date?: string; bands?: { mid?: { snowfallCm?: number | null } } }[] } | null;
+      };
+      const day0 = weather.daily?.[0];
+      const headlineCm = typeof day0?.snowfallSum === "number" ? day0.snowfallSum : null;
+      const elevDay = elev.forecast?.days?.find((d) => d.date === day0?.date);
+      const midCm = typeof elevDay?.bands?.mid?.snowfallCm === "number" ? elevDay.bands.mid.snowfallCm : null;
+      if (headlineCm == null || midCm == null || !day0?.date) {
+        // One side has no confident figure (fallback path, no matching date):
+        // nothing to compare, and checkApi covers outright endpoint failures.
+        passed++;
+        continue;
+      }
+      const diff = Math.abs(headlineCm - midCm);
+      const tolerance = Math.max(SNOW_TOLERANCE_MIN_CM, SNOW_TOLERANCE_FRACTION * Math.max(headlineCm, midCm));
+      if (diff > tolerance) {
+        failures.push({
+          check: "snow consistency",
+          url: weatherUrl,
+          detail: `${c.name} ${day0.date}: headline snow ${headlineCm}cm vs elevation mid band ${midCm}cm (diff ${Math.round(diff * 10) / 10}cm > tolerance ${Math.round(tolerance * 10) / 10}cm) - two snow stories on the same page`,
+        });
+      } else {
+        passed++;
+      }
+    } catch (err) {
+      failures.push({ check: "snow consistency", url: weatherUrl, detail: `${errMessage(err)} (${c.name})` });
+    }
+  }
+  return passed;
+}
+
 // ---------------------------------------------------------------------------
 // external outbound links
 // ---------------------------------------------------------------------------
@@ -329,6 +410,7 @@ function failureEmail(report: SmokeReport): { subject: string; html: string; tex
     page: "pages not loading",
     canonical: "pages serving the wrong content",
     api: "weather api problems",
+    "snow consistency": "headline vs elevation snow disagreement",
     "dead link": "dead outbound links",
     "unreachable link": "unreachable outbound links",
   };
@@ -380,10 +462,12 @@ export async function runSmokeTest(opts: { skipExternal?: boolean; noEmail?: boo
   try {
     console.log(`[smokeTest] starting against ${ORIGIN} (external links: ${opts.skipExternal ? "skipped" : "on"})`);
 
-    const [pagesChecked, apiChecksPassed] = await Promise.all([
+    const [pagesChecked, apiPassed, snowPassed] = await Promise.all([
       checkSitemapPages(failures),
       checkApi(failures),
+      checkSnowConsistency(failures),
     ]);
+    const apiChecksPassed = apiPassed + snowPassed;
 
     let linksChecked = 0;
     let blocked = 0;
@@ -420,7 +504,7 @@ export async function runSmokeTest(opts: { skipExternal?: boolean; noEmail?: boo
 
     console.log(
       `[smokeTest] done in ${Math.round(report.durationMs / 1000)}s · ${report.ok ? "ALL CLEAR" : `${failures.length} FAILURES`} · ` +
-      `${report.pagesChecked} pages, ${report.apiChecksPassed}/5 api checks, ${report.linksChecked} links (${blocked} bot-gated)`,
+      `${report.pagesChecked} pages, ${report.apiChecksPassed}/8 api checks, ${report.linksChecked} links (${blocked} bot-gated)`,
     );
     lastReport = report;
     return report;

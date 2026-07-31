@@ -17,3 +17,6 @@ Prod is an AUTOSCALE deployment: an in-process node-cron alone is untrustworthy 
 - Sitemap canonical check (every loc URL must 200 and self-canonical) is the regression tripwire for the SPA catch-all rewrite swallowing prerendered pages.
 - Prod schema changes ship via Replit's publish-time schema diff — never hand-migrate prod; new table + the env flag that needs it go live in the same publish.
 - First publish after adding the scheduler fires a catch-up run ~90s after boot (yesterday's key unclaimed) — expected, tell the owner.
+
+## Snow-consistency canary (headline vs elevation bands)
+The daily smoke job also compares /api/weather day-0 snowfallSum (fetched with snowElevationM = mid band, mirroring what resort pages request) against /api/elevation-forecast's mid band for the same date, for 3 canary resorts (AU/NZ/JP). Tolerance: fail only when diff > max(5cm, 40% of the larger figure) — the two figures come from separate Open-Meteo requests (different cell pinning), so small drift is normal. Canary summitM values duplicate the client registry elevationM on purpose (smoke hits the LIVE site over HTTP); if a canary resort's registry elevation changes, update SNOW_CONSISTENCY_CANARIES too.

@@ -7,7 +7,7 @@ import { fetchOpenWeatherMapAsOpenMeteo } from "../lib/openweathermap.js";
 import { dailyConditionLabel } from "../lib/dailyConditionLabel.js";
 import { reconcileBomCondition } from "../lib/bom-obs.js";
 import { reconcileNzMetarDryToWet } from "../lib/metar-nz.js";
-import { partitionHourlySnowfallCm, partitionPrecipByBand } from "../lib/openMeteoElevation.js";
+import { partitionHourlySnowfallCm, partitionPrecipByBand, hourCountsByDay } from "../lib/openMeteoElevation.js";
 
 const router: IRouter = Router();
 
@@ -507,13 +507,8 @@ async function fetchLocationWeather(location: LocationConfig, snowElevationM?: n
   // a partially covered trailing day would report an undercounted total as
   // confident. (The first day is fully covered because past_hours=24 spans
   // back beyond local midnight.)
-  const phaseDayHourCounts = new Map<string, number>();
-  if (phaseSnowHourly != null) {
-    for (const t of om.hourly.time as string[]) {
-      const day = typeof t === "string" ? t.slice(0, 10) : "";
-      if (day) phaseDayHourCounts.set(day, (phaseDayHourCounts.get(day) ?? 0) + 1);
-    }
-  }
+  const phaseDayHourCounts =
+    phaseSnowHourly != null ? hourCountsByDay(om.hourly.time as string[]) : new Map<string, number>();
 
   const current = {
     temperature: hasBomData ? bomTemp : (om?.current?.temperature_2m ?? 0),

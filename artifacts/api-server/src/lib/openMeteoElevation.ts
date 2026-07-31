@@ -54,7 +54,7 @@ function num(v: unknown): number | null {
   return v;
 }
 
-function bandElevations(summit: number): { upper: number; mid: number; lower: number } {
+export function bandElevations(summit: number): { upper: number; mid: number; lower: number } {
   // Mountains in our regions span ~1100-2300m summit.
   // Vertical drop varies (~100m at Selwyn to ~700m at Thredbo). Use a
   // proportional split so small hills don't end up with negative base
@@ -263,6 +263,21 @@ export function partitionHourlySnowfallCm(
     }
   }
   return out;
+}
+
+/**
+ * Hours-per-local-day counts for an hourly time axis. Callers use this for
+ * PARTIAL-DAY EXCLUSION: only trust a day partition when the day is fully
+ * covered (>= 24 hourly rows) — a partially covered trailing day would
+ * report an undercounted total as confident.
+ */
+export function hourCountsByDay(hourlyTimes: (string | null | undefined)[]): Map<string, number> {
+  const counts = new Map<string, number>();
+  for (const t of hourlyTimes) {
+    const day = typeof t === "string" ? t.slice(0, 10) : "";
+    if (day) counts.set(day, (counts.get(day) ?? 0) + 1);
+  }
+  return counts;
 }
 
 function buildBand(

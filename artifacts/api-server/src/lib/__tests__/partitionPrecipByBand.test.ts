@@ -71,6 +71,18 @@ test("snow line between bands splits the story", () => {
   assert.equal(mid.rainfallMm, 10);
 });
 
+test("snow-line boundary sits exactly at FL - 300m (>= is snow)", () => {
+  const times = H("2026-07-14", 3);
+  const precip = [2, 2, 2];
+  const fl = [1800, 1800, 1800]; // snow line exactly 1500m
+  const at = partitionPrecipByBand(times, precip, fl, 1500).get("2026-07-14")!;
+  const below = partitionPrecipByBand(times, precip, fl, 1499).get("2026-07-14")!;
+  assert.equal(at.snowfallCm, 4.2); // 6mm x 0.7 — exactly on the line is snow
+  assert.equal(at.rainfallMm, 0);
+  assert.equal(below.snowfallCm, 0);
+  assert.equal(below.rainfallMm, 6);
+});
+
 test("missing FL carries the last known value forward", () => {
   const times = H("2026-07-15", 4);
   const precip = [1, 1, 1, 1];
