@@ -243,6 +243,13 @@ if (process.env.NODE_ENV === "production") {
         kitanomine: "Kitanomine",
       },
     },
+    "sapporo": {
+      name: "Sapporo",
+      towns: {
+        sapporo: "Sapporo",
+        jozankei: "Jozankei",
+      },
+    },
     "rusutsu-kiroro": {
       name: "Rusutsu & Kiroro",
       towns: {

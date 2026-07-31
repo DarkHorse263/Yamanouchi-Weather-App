@@ -221,6 +221,23 @@ export const REGIONS = [
     ],
   },
   {
+    slug: "sapporo",
+    name: "Sapporo",
+    subtitle: "Hokkaido · Japan",
+    country: "JP",
+    hasAlerts: false,
+    hasRoads: false,
+    mountains: [
+      { name: "Sapporo Teine",   blurb: "City powder hill 40 min from downtown Sapporo · two zones (Olympia and Highland) with sea-of-Japan views from Mt Teine and the 1972 Olympic slalom slopes" },
+      { name: "Sapporo Kokusai", blurb: "Deep-snow local favourite above Jozankei onsen · wide gondola-served cruisers and some of the heaviest snowfall totals near the city" },
+      { name: "Sapporo Bankei",  blurb: "In-city night-skiing hill 20 min from Odori · floodlit runs and lessons, handy for a quick evening ski" },
+    ],
+    towns: [
+      { id: "sapporo",  name: "Sapporo",  blurb: "Hokkaido's capital · stay downtown, ski Teine, Kokusai or Bankei as day hills" },
+      { id: "jozankei", name: "Jozankei", blurb: "Hot-spring town in the Toyohira valley · closest beds to Sapporo Kokusai" },
+    ],
+  },
+  {
     slug: "rusutsu-kiroro",
     name: "Rusutsu & Kiroro",
     subtitle: "Hokkaido · Japan",

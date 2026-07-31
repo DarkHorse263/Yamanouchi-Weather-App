@@ -65,6 +65,7 @@ export type RegionKey =
   | "myoko"
   | "niseko"
   | "furano"
+  | "sapporo"
   | "rusutsu-kiroro"
   | "yuzawa"
   | "zao-onsen"
@@ -195,6 +196,18 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       label: "JMA Asahikawa",
       imageUrl: null,
       href: "https://www.jma.go.jp/bosai/nowc/#zoom:9/lat:43.34/lon:142.40/colordepth:normal/elements:hrpns",
+      attribution: "Japan Meteorological Agency · JMA",
+    },
+  },
+  // Sapporo · the three city hills ring the capital across ~0.10° of
+  // latitude (Teine to the north-west, Kokusai above Jozankei to the
+  // south-west, Bankei in the city), so centre between them at zoom 10.
+  "sapporo": {
+    windy: { lat: 43.03, lon: 141.25, zoom: 10 },
+    official: {
+      label: "JMA Sapporo",
+      imageUrl: null,
+      href: "https://www.jma.go.jp/bosai/nowc/#zoom:10/lat:43.03/lon:141.25/colordepth:normal/elements:hrpns",
       attribution: "Japan Meteorological Agency · JMA",
     },
   },
@@ -432,6 +445,16 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "kitanomine", name: "Kitanomine", lat: 43.3400, lng: 142.3655, accent: "#0ea5e9" },
     ],
   },
+  "sapporo": {
+    center: { lat: 43.03, lng: 141.25 },
+    pins: [
+      { id: "sapporo-teine", name: "Sapporo Teine", lat: 43.083, lng: 141.185, accent: "#f97316" },
+      { id: "sapporo-kokusai", name: "Sapporo Kokusai", lat: 42.987, lng: 141.135, accent: "#f97316" },
+      { id: "sapporo-bankei", name: "Sapporo Bankei", lat: 43.033, lng: 141.264, accent: "#f97316" },
+      { id: "sapporo", name: "Sapporo", lat: 43.0621, lng: 141.3544, accent: "#0ea5e9" },
+      { id: "jozankei", name: "Jozankei", lat: 42.971, lng: 141.180, accent: "#0ea5e9" },
+    ],
+  },
   "rusutsu-kiroro": {
     center: { lat: 42.91, lng: 140.94 },
     pins: [
@@ -536,6 +559,7 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   myoko: "JP",
   niseko: "JP",
   furano: "JP",
+  sapporo: "JP",
   "rusutsu-kiroro": "JP",
   yuzawa: "JP",
   "zao-onsen": "JP",
@@ -558,6 +582,7 @@ const REGION_LABEL: Record<RegionKey, string> = {
   myoko: "myoko",
   niseko: "niseko",
   furano: "furano",
+  sapporo: "sapporo",
   "rusutsu-kiroro": "rusutsu & kiroro",
   yuzawa: "yuzawa",
   "zao-onsen": "zao onsen",

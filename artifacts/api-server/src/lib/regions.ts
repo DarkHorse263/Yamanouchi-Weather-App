@@ -18,6 +18,7 @@ export const REGION_IDS = [
   "myoko",
   "niseko",
   "furano",
+  "sapporo",
   "rusutsu-kiroro",
   "yuzawa",
   "zao-onsen",
@@ -165,6 +166,14 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "furano": "furano",
   "kitanomine": "furano",
   "furano-roads": "furano",
+  // Sapporo, JP · the three city day hills (Teine, Kokusai, Bankei)
+  // plus the two base towns (Sapporo city, Jozankei onsen).
+  "sapporo-teine": "sapporo",
+  "sapporo-kokusai": "sapporo",
+  "sapporo-bankei": "sapporo",
+  "sapporo": "sapporo",
+  "jozankei": "sapporo",
+  "sapporo-roads": "sapporo",
 
   // Rusutsu & Kiroro, JP · the two big independent Hokkaido powder
   // resorts either side of the Niseko range, about 90 min apart by

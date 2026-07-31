@@ -30,6 +30,7 @@ export const ALERT_REGIONS: Array<{ id: string; nameEn: string; nameJa: string; 
   { id: "myoko", nameEn: "Myoko", nameJa: "妙高", country: "JP · Niigata" },
   { id: "niseko", nameEn: "Niseko", nameJa: "ニセコ", country: "JP · Hokkaido" },
   { id: "furano", nameEn: "Furano", nameJa: "富良野", country: "JP · Hokkaido" },
+  { id: "sapporo", nameEn: "Sapporo", nameJa: "札幌", country: "JP · Hokkaido" },
   { id: "rusutsu-kiroro", nameEn: "Rusutsu & Kiroro", nameJa: "ルスツ・キロロ", country: "JP · Hokkaido" },
   { id: "yuzawa", nameEn: "Yuzawa", nameJa: "湯沢", country: "JP · Niigata" },
   { id: "zao-onsen", nameEn: "Zao Onsen", nameJa: "蔵王温泉", country: "JP · Yamagata" },

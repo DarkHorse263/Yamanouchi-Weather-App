@@ -230,6 +230,16 @@ const LOCATIONS: LocationConfig[] = [
   { id: "kamui-ski-links",           name: "Kamui Ski Links",           latitude: 43.7090, longitude: 142.1920, elevation: 751,  description: "Asahikawa's local powder hill · relaxed tree skiing and quiet gondola laps at day-ticket prices.",           bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
   { id: "tomamu",                    name: "Hoshino Resorts Tomamu",    latitude: 43.0580, longitude: 142.6210, elevation: 1239, description: "Hotel-tower resort under Mt Tomamu · groomed cruisers, kids' programmes and the winter Ice Village.",         bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
 
+  // ─── Sapporo (Hokkaido, Japan) ───────────────────────────
+  // The three ski hills that ring the capital, all day trips from
+  // downtown · Sapporo Teine (two zones on Mt Teine), Sapporo Kokusai
+  // (deep-snow hill above Jozankei onsen) and Sapporo Bankei (in-city
+  // night hill). Coordinates are base-area points; elevation is an
+  // on-mountain forecast height (mid-mountain-ish), not the summit.
+  { id: "sapporo-teine",             name: "Sapporo Teine",             latitude: 43.0830, longitude: 141.1850, elevation: 820,  description: "City powder hill 40 min from downtown Sapporo · Olympia and Highland zones with sea-of-Japan views from Mt Teine.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "sapporo-kokusai",           name: "Sapporo Kokusai",           latitude: 42.9870, longitude: 141.1350, elevation: 900,  description: "Deep-snow local favourite above Jozankei onsen · wide gondola-served cruisers in one of the city's heaviest snow pockets.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "sapporo-bankei",            name: "Sapporo Bankei",            latitude: 43.0330, longitude: 141.2640, elevation: 360,  description: "In-city night-skiing hill 20 min from Odori · floodlit runs and lessons for a quick evening ski.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+
   // ─── Rusutsu & Kiroro (Hokkaido, Japan) ──────────────────
   // Third Hokkaido region · the two big independent powder resorts
   // either side of the Niseko range, about 90 min apart by road.

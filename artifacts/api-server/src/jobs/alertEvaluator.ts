@@ -69,6 +69,10 @@ const REGION_ANCHORS: Record<RegionId, {
   // region's anchor mountain directly above the base towns, a fairer
   // proxy for visitors than the outlying Kamui or Tomamu day trips.
   "furano": { lat: 43.3350, lon: 142.3610, elevation: 1074, region: "JP", displayName: "Furano" },
+  // Sapporo · anchor on Sapporo Kokusai's top terrain (1100m) · the
+  // snowiest lift-served point of the three city hills, above Jozankei
+  // onsen, so the fairest single point for the region's alerts.
+  "sapporo": { lat: 42.9870, lon: 141.1350, elevation: 1100, region: "JP", displayName: "Sapporo" },
   // Rusutsu & Kiroro · anchor on Kiroro's top terrain (1180m) · the
   // snowiest lift-served point of the pair, in one of Hokkaido's
   // heaviest snowfall pockets, so the fairest single point for alerts.

@@ -224,6 +224,25 @@ const REGIONS: RegionConfig[] = [
     sourceLabel: "JMA Seamless",
   },
   {
+    id: "sapporo",
+    name: "Sapporo",
+    country: "Japan",
+    countryCode: "JP",
+    region: "Hokkaido",
+    status: "live",
+    href: "/sapporo/",
+    baseTowns: ["Sapporo", "Jozankei"],
+    mountains: ["Sapporo Teine", "Sapporo Kokusai", "Sapporo Bankei"],
+    // Headline reading from Sapporo city centre (~26m) · downtown, where
+    // visitors stay and ski the three surrounding hills as day trips.
+    headlineLabel: "Sapporo",
+    lat: 43.0621,
+    lon: 141.3544,
+    model: "jma_seamless",
+    timezone: "Asia/Tokyo",
+    sourceLabel: "JMA Seamless",
+  },
+  {
     id: "rusutsu-kiroro",
     name: "Rusutsu & Kiroro",
     country: "Japan",

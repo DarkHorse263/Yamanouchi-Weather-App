@@ -8,6 +8,7 @@ import { hakubaValleyRegion } from "./hakuba-valley";
 import { myokoRegion } from "./myoko";
 import { nisekoRegion } from "./niseko";
 import { furanoRegion } from "./furano";
+import { sapporoRegion } from "./sapporo";
 import { rusutsuKiroroRegion } from "./rusutsu-kiroro";
 import { yuzawaRegion } from "./yuzawa";
 import { zaoOnsenRegion } from "./zao-onsen";
@@ -41,6 +42,7 @@ export const REGIONS: RegionConfig[] = [
   myokoRegion,
   nisekoRegion,
   furanoRegion,
+  sapporoRegion,
   rusutsuKiroroRegion,
   yuzawaRegion,
   zaoOnsenRegion,
@@ -76,6 +78,7 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "myoko": "JP",
   "niseko": "JP",
   "furano": "JP",
+  "sapporo": "JP",
   "rusutsu-kiroro": "JP",
   "yuzawa": "JP",
   "zao-onsen": "JP",

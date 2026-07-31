@@ -90,6 +90,7 @@ export const RegionId = {
   myoko: "myoko",
   niseko: "niseko",
   furano: "furano",
+  sapporo: "sapporo",
   "rusutsu-kiroro": "rusutsu-kiroro",
   yuzawa: "yuzawa",
   "zao-onsen": "zao-onsen",
