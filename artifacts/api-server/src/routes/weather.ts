@@ -7,6 +7,7 @@ import { fetchOpenWeatherMapAsOpenMeteo } from "../lib/openweathermap.js";
 import { dailyConditionLabel } from "../lib/dailyConditionLabel.js";
 import { reconcileBomCondition } from "../lib/bom-obs.js";
 import { reconcileNzMetarDryToWet } from "../lib/metar-nz.js";
+import { partitionHourlySnowfallCm, partitionPrecipByBand } from "../lib/openMeteoElevation.js";
 
 const router: IRouter = Router();
 
@@ -415,24 +416,20 @@ function safeParseFloat(val: string | null | undefined): number | undefined {
 async function fetchLocationWeather(location: LocationConfig, snowElevationM?: number) {
   // Headline snow can be requested at an on-mountain elevation (the client
   // passes the mid-mountain height). Snow-vs-rain hinges on elevation vs the
-  // freezing level, so the village figure understates what falls up top. We
-  // only fire the extra snowfall-only fetch when the requested elevation is
-  // meaningfully above the village; everything else (temp, feels-like, current
-  // condition, BOM reconciliation, freezing level) stays at the village - that
-  // is the feelzlike premise of what you feel when you arrive.
+  // freezing level. All snow figures below are re-derived from the hourly
+  // freezing level at the snow-outlook elevation (same physics as the
+  // Elevation forecast bands) so the headline and the bands tell ONE snow
+  // story; everything else (temp, feels-like, current condition, BOM
+  // reconciliation, freezing level) stays at the village - that is the
+  // feelzlike premise of what you feel when you arrive.
   const wantsMountainSnow =
-    typeof snowElevationM === "number" &&
-    Number.isFinite(snowElevationM) &&
-    snowElevationM - location.elevation >= 50;
+    typeof snowElevationM === "number" && Number.isFinite(snowElevationM);
 
-  const [openMeteoResult, bomObs, bomSecondaryObs, mountainSnow] = await Promise.all([
+  const [openMeteoResult, bomObs, bomSecondaryObs] = await Promise.all([
     fetchOpenMeteo(location).catch(() => null),
     fetchBomObservations(location.bomWmoId, location.bomProduct),
     location.bomSecondaryWmoId
       ? fetchBomObservations(location.bomSecondaryWmoId, location.bomProduct)
-      : Promise.resolve(null),
-    wantsMountainSnow
-      ? fetchSnowfallAtElevation(location, snowElevationM!).catch(() => null)
       : Promise.resolve(null),
   ]);
 
@@ -477,6 +474,47 @@ async function fetchLocationWeather(location: LocationConfig, snowElevationM?: n
   const hasBomData = bomTemp !== null && bomTemp !== undefined;
   const om = openMeteoData;
 
+  // ── Freezing-level phase partition for all snow figures ────────────────
+  // Open-Meteo's own snowfall decides rain-vs-snow at its grid cell's
+  // terrain, which routinely calls sub-zero mountain precip "rain" (e.g.
+  // Whakapapa: 7cm raw vs 21cm partitioned on the same day the Elevation
+  // forecast showed 21cm). Re-derive snow from hourly precip + freezing
+  // level at the snow-outlook elevation — the exact physics the Elevation
+  // forecast bands use — so every surface tells one story. Fail-soft: hours
+  // or days without a usable freezing level keep the model's own figures
+  // (the OWM fallback shape has no freezing level at all).
+  const snowOutlookElevM = wantsMountainSnow ? snowElevationM! : location.elevation;
+  const phaseSnowHourly: (number | null)[] | null =
+    Array.isArray(om?.hourly?.time) &&
+    Array.isArray(om?.hourly?.precipitation) &&
+    Array.isArray(om?.hourly?.freezing_level_height)
+      ? partitionHourlySnowfallCm(
+          om.hourly.precipitation,
+          om.hourly.freezing_level_height,
+          snowOutlookElevM,
+        )
+      : null;
+  const phaseByDay =
+    phaseSnowHourly != null
+      ? partitionPrecipByBand(
+          om.hourly.time,
+          om.hourly.precipitation,
+          om.hourly.freezing_level_height,
+          snowOutlookElevM,
+        )
+      : null;
+  // Only trust the day partition for days FULLY covered by hourly rows -
+  // a partially covered trailing day would report an undercounted total as
+  // confident. (The first day is fully covered because past_hours=24 spans
+  // back beyond local midnight.)
+  const phaseDayHourCounts = new Map<string, number>();
+  if (phaseSnowHourly != null) {
+    for (const t of om.hourly.time as string[]) {
+      const day = typeof t === "string" ? t.slice(0, 10) : "";
+      if (day) phaseDayHourCounts.set(day, (phaseDayHourCounts.get(day) ?? 0) + 1);
+    }
+  }
+
   const current = {
     temperature: hasBomData ? bomTemp : (om?.current?.temperature_2m ?? 0),
     feelsLike: bomFeelsLike ?? om?.current?.apparent_temperature ?? (hasBomData ? bomTemp : 0),
@@ -514,31 +552,22 @@ async function fetchLocationWeather(location: LocationConfig, snowElevationM?: n
     // Model-estimated snow over the previous 24 full hours ("what fell
     // overnight"). undefined when the source has no past hours (OWM
     // fallback) - unknown must never render as a confident 0.
-    snowfallPast24h: sumHourlySnowfallPast24h(om),
-    snowfallNext24h: sumHourlySnowfall(om, 24),
-    snowfallNext48h: sumHourlySnowfall(om, 48),
-    snowfallNext72h: sumHourlySnowfall(om, 72),
-    // Snow outlook elevation provenance. Defaults to the village / current
-    // elevation; overridden below to the on-mountain figure when the client
-    // requests it and the second fetch succeeds (fail-soft keeps village).
-    snowfallOutlookElevationM: location.elevation,
-    snowfallOutlookLevel: "village",
+    snowfallPast24h: sumHourlySnowfallPast24h(om, phaseSnowHourly),
+    snowfallNext24h: sumHourlySnowfall(om, 24, phaseSnowHourly),
+    snowfallNext48h: sumHourlySnowfall(om, 48, phaseSnowHourly),
+    snowfallNext72h: sumHourlySnowfall(om, 72, phaseSnowHourly),
+    // Snow outlook elevation provenance. The snow figures are partitioned at
+    // the requested on-mountain elevation when the client provides one,
+    // otherwise at the location's own registry elevation.
+    // Provenance stays honest: only claim "mid-mountain" when the phase
+    // partition actually ran (an OWM fallback has no freezing level, so its
+    // figures are the model's own - labelling those mid-mountain would
+    // present village-phase snow as mountain snow).
+    snowfallOutlookElevationM:
+      phaseSnowHourly != null ? Math.round(snowOutlookElevM) : location.elevation,
+    snowfallOutlookLevel:
+      wantsMountainSnow && phaseSnowHourly != null ? "mid-mountain" : "village",
   };
-
-  // Apply the on-mountain snow outlook when the second fetch succeeded.
-  // Fail-soft: if it returned nothing we keep the village figures AND leave
-  // the label as "village" - we never present village snow as mountain snow.
-  if (wantsMountainSnow && mountainSnow) {
-    // past24 comes from the SAME elevation-corrected response - mixing a
-    // village past figure with a mid-mountain outlook would tell two
-    // different snow stories side by side.
-    current.snowfallPast24h = mountainSnow.past24;
-    current.snowfallNext24h = mountainSnow.snow24;
-    current.snowfallNext48h = mountainSnow.snow48;
-    current.snowfallNext72h = mountainSnow.snow72;
-    current.snowfallOutlookElevationM = Math.round(snowElevationM!);
-    current.snowfallOutlookLevel = "mid-mountain";
-  }
 
   // AU live-observation reconciliation. Alpine AWS report real temp/humidity and a
   // rain gauge, but not cloud/present-weather/visibility - so the global model can
@@ -589,7 +618,15 @@ async function fetchLocationWeather(location: LocationConfig, snowElevationM?: n
     }
   }
 
-  const daily = om?.daily?.time?.map((date: string, i: number) => ({
+  const daily = om?.daily?.time?.map((date: string, i: number) => {
+    // Freezing-level partitioned figures for this day; fall back to the
+    // model's own sums when the partition had no usable freezing level
+    // (mirrors the Elevation forecast's buildBand fallback).
+    const phase =
+      (phaseDayHourCounts.get(date) ?? 0) >= 24 ? phaseByDay?.get(date) : undefined;
+    const daySnowCm = phase?.reliable ? phase.snowfallCm : om.daily.snowfall_sum[i];
+    const dayRainMm = phase?.reliable ? phase.rainfallMm : dailyRainSum(om.daily, i);
+    return {
     date,
     maxTemp: om.daily.temperature_2m_max[i],
     minTemp: om.daily.temperature_2m_min[i],
@@ -599,21 +636,23 @@ async function fetchLocationWeather(location: LocationConfig, snowElevationM?: n
     // day "Heavy snow fall" and a steady 17cm day plain "Snow".
     weatherDescription: dailyConditionLabel({
       code: om.daily.weather_code[i],
-      snowfallCm: om.daily.snowfall_sum[i],
-      rainMm: dailyRainSum(om.daily, i),
+      snowfallCm: daySnowCm,
+      rainMm: dayRainMm,
       fallback: getWeatherDescription(om.daily.weather_code[i]),
     }),
     precipitationSum: om.daily.precipitation_sum[i],
-    // True liquid rain (rain + showers). Open-Meteo's precipitation_sum
-    // INCLUDES the water equivalent of snowfall, so clients must never label
-    // it "rain" — on a snow day that double-reports the snow as rain.
-    rainSum: dailyRainSum(om.daily, i),
-    snowfallSum: om.daily.snowfall_sum[i],
+    // True liquid rain (rain + showers, phase-partitioned). Open-Meteo's
+    // precipitation_sum INCLUDES the water equivalent of snowfall, so clients
+    // must never label it "rain" — on a snow day that double-reports the
+    // snow as rain.
+    rainSum: dayRainMm,
+    snowfallSum: daySnowCm,
     windSpeedMax: om.daily.wind_speed_10m_max[i],
     uvIndexMax: om.daily.uv_index_max?.[i] ?? 0,
     sunrise: om.daily.sunrise[i],
     sunset: om.daily.sunset[i]
-  })) ?? [];
+    };
+  }) ?? [];
 
   const bomHourlyData = buildBomHourly(bomObs, bomSecondaryObs);
   // Build the Open-Meteo hourly array (next 72h forecast). past_hours=24 (for
@@ -629,7 +668,11 @@ async function fetchLocationWeather(location: LocationConfig, snowElevationM?: n
     weatherCode: om.hourly.weather_code[i],
     weatherDescription: getWeatherDescription(om.hourly.weather_code[i]),
     precipitation: om.hourly.precipitation[i],
-    snowfall: om.hourly.snowfall?.[i] ?? 0,
+    // Freezing-level partitioned snow (same story as `current` + `daily`);
+    // hours without a usable FL keep the model's own value.
+    snowfall: (typeof phaseSnowHourly?.[i] === "number"
+      ? Math.round((phaseSnowHourly[i] as number) * 10) / 10
+      : om.hourly.snowfall?.[i]) ?? 0,
     windSpeed: om.hourly.wind_speed_10m[i],
     humidity: om.hourly.relative_humidity_2m[i],
     feelsLike: om.hourly.apparent_temperature[i],
@@ -637,7 +680,11 @@ async function fetchLocationWeather(location: LocationConfig, snowElevationM?: n
   })) ?? []).filter((h: any) => {
     const localAsUtcMs = Date.parse(h.time + "Z");
     if (Number.isNaN(localAsUtcMs)) return false;
-    return localAsUtcMs - omOffsetSec * 1000 >= omPastCutoffMs;
+    const utcMs = localAsUtcMs - omOffsetSec * 1000;
+    // Serve the same ~72h forward strip as before forecast_hours grew to
+    // 168 (the extra hours exist only for the 7-day phase partition) -
+    // consumers assume a ~72h hourly window.
+    return utcMs >= omPastCutoffMs && utcMs <= omPastCutoffMs + 73 * 60 * 60 * 1000;
   });
   // Merge BOM past observations with Open-Meteo future forecast so a single
   // `hourly` array serves both the existing 24h-trend chart (past) and the
@@ -725,7 +772,21 @@ function buildBomHourly(
 // server treats those as UTC, which would shift the window by ~10h on a UTC
 // host. We use the response's `utc_offset_seconds` to convert each local
 // timestamp into a true UTC instant before comparing against `Date.now()`.
-function sumHourlySnowfall(om: any, hours: number): number | undefined {
+// Both window sums prefer the freezing-level-partitioned hourly snow when
+// available (phaseSnow entry: number = partitioned cm, null = no usable FL
+// for that hour → fall back to the model's own snowfall value).
+function hourlySnowAt(arr: any[], phaseSnow: (number | null)[] | null, i: number): number {
+  const p = phaseSnow?.[i];
+  if (typeof p === "number") return p;
+  const v = Number(arr[i]);
+  return Number.isFinite(v) ? v : 0;
+}
+
+function sumHourlySnowfall(
+  om: any,
+  hours: number,
+  phaseSnow: (number | null)[] | null = null,
+): number | undefined {
   const arr = om?.hourly?.snowfall;
   const times = om?.hourly?.time;
   if (!Array.isArray(arr) || !Array.isArray(times)) return undefined;
@@ -742,8 +803,7 @@ function sumHourlySnowfall(om: any, hours: number): number | undefined {
     if (Number.isNaN(localAsUtcMs)) continue;
     const t = localAsUtcMs - offsetSec * 1000;
     if (t < cutoffMs) continue;
-    const v = Number(arr[i]);
-    if (Number.isFinite(v)) total += v;
+    total += hourlySnowAt(arr, phaseSnow, i);
     counted++;
   }
   if (counted === 0) return undefined;
@@ -755,7 +815,10 @@ function sumHourlySnowfall(om: any, hours: number): number | undefined {
 // the next-24h figure), so the two stats never overlap or double count.
 // Requires the request to have asked for `past_hours=24`; returns undefined
 // when no past buckets exist (OWM fallback) - unknown never renders as 0.
-function sumHourlySnowfallPast24h(om: any): number | undefined {
+function sumHourlySnowfallPast24h(
+  om: any,
+  phaseSnow: (number | null)[] | null = null,
+): number | undefined {
   const arr = om?.hourly?.snowfall;
   const times = om?.hourly?.time;
   if (!Array.isArray(arr) || !Array.isArray(times)) return undefined;
@@ -769,8 +832,7 @@ function sumHourlySnowfallPast24h(om: any): number | undefined {
     if (Number.isNaN(localAsUtcMs)) continue;
     const t = localAsUtcMs - offsetSec * 1000;
     if (t < startMs || t >= endMs) continue;
-    const v = Number(arr[i]);
-    if (Number.isFinite(v)) total += v;
+    total += hourlySnowAt(arr, phaseSnow, i);
     counted++;
   }
   if (counted === 0) return undefined;
@@ -804,8 +866,13 @@ async function fetchOpenMeteo(location: LocationConfig) {
     // treated as AU. Free strips still slice(0,5)/slice(1,7), so only the AU
     // resort premium section surfaces the extra days.
     forecast_days: location.region === "JP" ? "7" : "14",
-    // 72 hours so we can derive next-24/48/72h cumulative snowfall on the server.
-    forecast_hours: "72",
+    // 168 hours (7 days) so the freezing-level phase partition covers the
+    // full 7-day outlook the clients display (and the Elevation forecast
+    // bands mirror). The served hourly[] payload is still capped to 72h
+    // below - consumers assume a ~72h strip. Days 8-14 (AU premium extended
+    // outlook only) keep the model's own sums; no band panel shows them, so
+    // there is no side-by-side story to contradict.
+    forecast_hours: "168",
     // Previous day of hourly buckets so we can derive "snow last 24h"
     // (what fell overnight). Kept OUT of the merged `hourly` payload.
     past_hours: "24"
@@ -824,46 +891,6 @@ async function fetchOpenMeteo(location: LocationConfig) {
       throw new Error(`Open-Meteo API error: ${response.status}`);
     }
     return await response.json() as any;
-  } finally {
-    clearTimeout(timer);
-  }
-}
-
-/**
- * Snowfall-only Open-Meteo fetch at an arbitrary (on-mountain) elevation. Used
- * to derive the headline 24/48/72h snow outlook at the height people actually
- * ski, while the rest of the payload stays at the village. Kept deliberately
- * narrow (hourly snowfall, next 72h) to limit extra upstream volume.
- */
-async function fetchSnowfallAtElevation(
-  location: LocationConfig,
-  elevationM: number,
-): Promise<{ snow24?: number; snow48?: number; snow72?: number; past24?: number } | null> {
-  const params = new URLSearchParams({
-    latitude: location.latitude.toString(),
-    longitude: location.longitude.toString(),
-    elevation: Math.round(elevationM).toString(),
-    hourly: "snowfall",
-    timezone: location.timezone ?? "Australia/Sydney",
-    forecast_hours: "72",
-    past_hours: "24",
-  });
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 8000);
-  try {
-    const response = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
-      signal: controller.signal,
-    });
-    if (!response.ok) {
-      throw new Error(`Open-Meteo snowfall API error: ${response.status}`);
-    }
-    const om = (await response.json()) as any;
-    return {
-      snow24: sumHourlySnowfall(om, 24),
-      snow48: sumHourlySnowfall(om, 48),
-      snow72: sumHourlySnowfall(om, 72),
-      past24: sumHourlySnowfallPast24h(om),
-    };
   } finally {
     clearTimeout(timer);
   }

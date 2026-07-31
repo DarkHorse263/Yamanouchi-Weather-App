@@ -229,6 +229,42 @@ export function partitionPrecipByBand(
   return out;
 }
 
+/**
+ * Per-hour freezing-level phase partition for headline snow figures
+ * (next-24/48/72h and past-24h windows). Same physics as
+ * `partitionPrecipByBand` — one coherent snow story between the headline
+ * and the elevation bands. Returns one entry per hour:
+ *   - number: partitioned snow cm for that hour (0 when it falls as rain)
+ *   - null:   no usable freezing level for a precip hour — caller should
+ *             fall back to the model's own snowfall value for that hour.
+ * Missing FL hours carry the last known FL forward (fail-soft), mirroring
+ * partitionPrecipByBand.
+ */
+export function partitionHourlySnowfallCm(
+  precipMm: (number | null | undefined)[],
+  freezingLevelM: (number | null | undefined)[],
+  elevationM: number,
+): (number | null)[] {
+  const out: (number | null)[] = [];
+  let lastFl: number | null = null;
+  for (let i = 0; i < precipMm.length; i++) {
+    const flRaw = freezingLevelM[i];
+    if (typeof flRaw === "number" && Number.isFinite(flRaw)) lastFl = flRaw;
+    const pRaw = precipMm[i];
+    const p = typeof pRaw === "number" && Number.isFinite(pRaw) && pRaw > 0 ? pRaw : 0;
+    if (p === 0) {
+      out.push(0);
+    } else if (lastFl == null) {
+      out.push(null);
+    } else if (elevationM >= lastFl - SNOW_LINE_OFFSET_M) {
+      out.push(p * CM_SNOW_PER_MM_WATER);
+    } else {
+      out.push(0);
+    }
+  }
+  return out;
+}
+
 function buildBand(
   om: OmDailyResponse | null,
   idx: number,
