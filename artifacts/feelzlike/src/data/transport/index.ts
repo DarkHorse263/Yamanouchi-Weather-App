@@ -26,6 +26,8 @@ import { MYOKO_TRANSPORT } from "./myoko";
 import { NISEKO_TRANSPORT } from "./niseko";
 import { FURANO_TRANSPORT } from "./furano";
 import { SAPPORO_TRANSPORT } from "./sapporo";
+import { TOMAMU_SAHORO_TRANSPORT } from "./tomamu-sahoro";
+import { ASAHIKAWA_TRANSPORT } from "./asahikawa";
 import { RUSUTSU_KIRORO_TRANSPORT } from "./rusutsu-kiroro";
 import { YUZAWA_TRANSPORT } from "./yuzawa";
 import { ZAO_ONSEN_TRANSPORT } from "./zao-onsen";
@@ -48,6 +50,8 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   niseko: NISEKO_TRANSPORT,
   furano: FURANO_TRANSPORT,
   sapporo: SAPPORO_TRANSPORT,
+  "tomamu-sahoro": TOMAMU_SAHORO_TRANSPORT,
+  asahikawa: ASAHIKAWA_TRANSPORT,
   "rusutsu-kiroro": RUSUTSU_KIRORO_TRANSPORT,
   yuzawa: YUZAWA_TRANSPORT,
   "zao-onsen": ZAO_ONSEN_TRANSPORT,

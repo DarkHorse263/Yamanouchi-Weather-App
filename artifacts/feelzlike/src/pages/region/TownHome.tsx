@@ -111,6 +111,12 @@ const MOUNTAIN_TINTS: Record<string, { bg: string; hover: string; ring: string }
   "sapporo-teine":     { bg: "bg-sky-100/70",    hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },
   "sapporo-kokusai":   { bg: "bg-indigo-100/70", hover: "hover:bg-indigo-200/70",  ring: "ring-indigo-300/50" },
   "sapporo-bankei":    { bg: "bg-cyan-100/70",   hover: "hover:bg-cyan-200/70",    ring: "ring-cyan-300/50" },
+  // Tomamu & Sahoro JP · the two Sekisho Line destination resorts
+  "tomamu-resort":     { bg: "bg-sky-100/70",    hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },
+  "sahoro":            { bg: "bg-indigo-100/70", hover: "hover:bg-indigo-200/70",  ring: "ring-indigo-300/50" },
+  // Asahikawa JP · the city's local hill + the Daisetsuzan ropeway
+  "kamui":             { bg: "bg-sky-100/70",    hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },
+  "asahidake":         { bg: "bg-indigo-100/70", hover: "hover:bg-indigo-200/70",  ring: "ring-indigo-300/50" },
   // Rusutsu & Kiroro JP · the two independent Hokkaido powder resorts
   "rusutsu-resort":    { bg: "bg-sky-100/70",    hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },
   "kiroro-resort":     { bg: "bg-indigo-100/70", hover: "hover:bg-indigo-200/70",  ring: "ring-indigo-300/50" },

@@ -155,6 +155,8 @@ import { YUZAWA } from "./lifts/yuzawa";
 import { NISEKO } from "./lifts/niseko";
 import { FURANO } from "./lifts/furano";
 import { SAPPORO } from "./lifts/sapporo";
+import { TOMAMU_SAHORO } from "./lifts/tomamu-sahoro";
+import { ASAHIKAWA } from "./lifts/asahikawa";
 import { RUSUTSU_KIRORO } from "./lifts/rusutsu-kiroro";
 import { ZAO_ONSEN } from "./lifts/zao-onsen";
 import { HAKKODA_AOMORI_SPRING } from "./lifts/hakkoda-aomori-spring";
@@ -170,6 +172,8 @@ export const LIFT_SEED: LiftSeed[] = [
   ...NISEKO,
   ...FURANO,
   ...SAPPORO,
+  ...TOMAMU_SAHORO,
+  ...ASAHIKAWA,
   ...RUSUTSU_KIRORO,
   ...ZAO_ONSEN,
   ...HAKKODA_AOMORI_SPRING,

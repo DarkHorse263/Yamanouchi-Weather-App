@@ -66,6 +66,8 @@ export type RegionKey =
   | "niseko"
   | "furano"
   | "sapporo"
+  | "tomamu-sahoro"
+  | "asahikawa"
   | "rusutsu-kiroro"
   | "yuzawa"
   | "zao-onsen"
@@ -208,6 +210,30 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       label: "JMA Sapporo",
       imageUrl: null,
       href: "https://www.jma.go.jp/bosai/nowc/#zoom:10/lat:43.03/lon:141.25/colordepth:normal/elements:hrpns",
+      attribution: "Japan Meteorological Agency · JMA",
+    },
+  },
+  // Tomamu & Sahoro · the two resorts sit ~0.13° of latitude and
+  // ~0.18° of longitude apart along the Sekisho Line, so centre
+  // between them at zoom 9.
+  "tomamu-sahoro": {
+    windy: { lat: 43.12, lon: 142.71, zoom: 9 },
+    official: {
+      label: "JMA Asahikawa",
+      imageUrl: null,
+      href: "https://www.jma.go.jp/bosai/nowc/#zoom:9/lat:43.12/lon:142.71/colordepth:normal/elements:hrpns",
+      attribution: "Japan Meteorological Agency · JMA",
+    },
+  },
+  // Asahikawa · Kamui sits ~40 min west of the city and Asahidake
+  // ~50 min east, stretching the region across ~0.6° of longitude, so
+  // use a wider zoom-9 centre between the city and the mountains.
+  "asahikawa": {
+    windy: { lat: 43.71, lon: 142.50, zoom: 9 },
+    official: {
+      label: "JMA Asahikawa",
+      imageUrl: null,
+      href: "https://www.jma.go.jp/bosai/nowc/#zoom:9/lat:43.71/lon:142.50/colordepth:normal/elements:hrpns",
       attribution: "Japan Meteorological Agency · JMA",
     },
   },
@@ -455,6 +481,29 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "jozankei", name: "Jozankei", lat: 42.971, lng: 141.180, accent: "#0ea5e9" },
     ],
   },
+  "tomamu-sahoro": {
+    center: { lat: 43.12, lng: 142.71 },
+    pins: [
+      // resort pin nudged slightly north (display only) so it doesn't
+      // stack under furano's day-trip "tomamu" pin on the JP-wide map
+      { id: "tomamu-resort", name: "Hoshino Resorts Tomamu", lat: 43.062, lng: 142.625, accent: "#f97316" },
+      { id: "sahoro", name: "Sahoro Resort", lat: 43.187, lng: 142.804, accent: "#f97316" },
+      { id: "tomamu-village", name: "Tomamu", lat: 43.0636, lng: 142.6357, accent: "#0ea5e9" },
+      { id: "shimukappu", name: "Shimukappu", lat: 43.0, lng: 142.4167, accent: "#0ea5e9" },
+    ],
+  },
+  "asahikawa": {
+    center: { lat: 43.71, lng: 142.50 },
+    pins: [
+      // Kamui pin nudged slightly north (display only) so it doesn't
+      // stack under furano's day-trip "kamui-ski-links" pin on the
+      // JP-wide map
+      { id: "kamui", name: "Kamui Ski Links", lat: 43.713, lng: 142.196, accent: "#f97316" },
+      { id: "asahidake", name: "Asahidake", lat: 43.654, lng: 142.797, accent: "#f97316" },
+      { id: "asahikawa", name: "Asahikawa", lat: 43.7706, lng: 142.3649, accent: "#0ea5e9" },
+      { id: "higashikawa", name: "Higashikawa", lat: 43.699, lng: 142.510, accent: "#0ea5e9" },
+    ],
+  },
   "rusutsu-kiroro": {
     center: { lat: 42.91, lng: 140.94 },
     pins: [
@@ -560,6 +609,8 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   niseko: "JP",
   furano: "JP",
   sapporo: "JP",
+  "tomamu-sahoro": "JP",
+  asahikawa: "JP",
   "rusutsu-kiroro": "JP",
   yuzawa: "JP",
   "zao-onsen": "JP",
@@ -583,6 +634,8 @@ const REGION_LABEL: Record<RegionKey, string> = {
   niseko: "niseko",
   furano: "furano",
   sapporo: "sapporo",
+  "tomamu-sahoro": "tomamu & sahoro",
+  asahikawa: "asahikawa",
   "rusutsu-kiroro": "rusutsu & kiroro",
   yuzawa: "yuzawa",
   "zao-onsen": "zao onsen",

@@ -238,6 +238,38 @@ export const REGIONS = [
     ],
   },
   {
+    slug: "tomamu-sahoro",
+    name: "Tomamu & Sahoro",
+    subtitle: "Hokkaido · Japan",
+    country: "JP",
+    hasAlerts: false,
+    hasRoads: false,
+    mountains: [
+      { name: "Hoshino Resorts Tomamu", blurb: "Hotel-tower resort off Mt Tomamu on the JR Sekisho Line · groomed cruisers, a big kids' programme, the winter Ice Village and ski-in stays at the towers" },
+      { name: "Sahoro Resort",          blurb: "Quiet Tokachi resort on Mt Sahoro above Shintoku · long fall-line cruisers off a single gondola, home to Club Med Sahoro's all-inclusive village" },
+    ],
+    towns: [
+      { id: "tomamu-village", name: "Tomamu",     blurb: "Resort village at the base of Mt Tomamu · hotel towers, the Ice Village and JR Tomamu Station" },
+      { id: "shimukappu",     name: "Shimukappu", blurb: "Small village 20 min west of Tomamu · quiet local beds and JR Shimukappu Station on the same line" },
+    ],
+  },
+  {
+    slug: "asahikawa",
+    name: "Asahikawa",
+    subtitle: "Hokkaido · Japan",
+    country: "JP",
+    hasAlerts: false,
+    hasRoads: false,
+    mountains: [
+      { name: "Kamui Ski Links", blurb: "Asahikawa's local powder hill 40 min west of the city · relaxed tree-skiing culture and quiet gondola laps at day-ticket prices" },
+      { name: "Asahidake",       blurb: "Ropeway-served powder on Hokkaido's highest peak in the Daisetsuzan range · ungroomed big-mountain terrain above Asahidake Onsen" },
+    ],
+    towns: [
+      { id: "asahikawa",   name: "Asahikawa",   blurb: "Hokkaido's second city · stay downtown, ski Kamui as a day hill and head up to Asahidake for powder days" },
+      { id: "higashikawa", name: "Higashikawa", blurb: "Craft-and-cafe town at the foot of the Daisetsuzan range · the road to Asahidake Onsen and the ropeway starts here" },
+    ],
+  },
+  {
     slug: "rusutsu-kiroro",
     name: "Rusutsu & Kiroro",
     subtitle: "Hokkaido · Japan",

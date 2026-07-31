@@ -24,6 +24,8 @@ export const RegionId = {
   niseko: "niseko",
   furano: "furano",
   sapporo: "sapporo",
+  "tomamu-sahoro": "tomamu-sahoro",
+  asahikawa: "asahikawa",
   "rusutsu-kiroro": "rusutsu-kiroro",
   yuzawa: "yuzawa",
   "zao-onsen": "zao-onsen",

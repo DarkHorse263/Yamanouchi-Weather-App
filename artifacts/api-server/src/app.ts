@@ -250,6 +250,20 @@ if (process.env.NODE_ENV === "production") {
         jozankei: "Jozankei",
       },
     },
+    "tomamu-sahoro": {
+      name: "Tomamu & Sahoro",
+      towns: {
+        "tomamu-village": "Tomamu",
+        shimukappu: "Shimukappu",
+      },
+    },
+    "asahikawa": {
+      name: "Asahikawa",
+      towns: {
+        asahikawa: "Asahikawa",
+        higashikawa: "Higashikawa",
+      },
+    },
     "rusutsu-kiroro": {
       name: "Rusutsu & Kiroro",
       towns: {

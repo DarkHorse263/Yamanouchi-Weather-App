@@ -19,6 +19,8 @@ export const REGION_IDS = [
   "niseko",
   "furano",
   "sapporo",
+  "tomamu-sahoro",
+  "asahikawa",
   "rusutsu-kiroro",
   "yuzawa",
   "zao-onsen",
@@ -174,6 +176,26 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "sapporo": "sapporo",
   "jozankei": "sapporo",
   "sapporo-roads": "sapporo",
+
+  // Tomamu & Sahoro, JP · the two Sekisho Line destination resorts
+  // (Hoshino Resorts Tomamu, Sahoro) plus the two base areas (Tomamu
+  // resort village, Shimukappu). Furano keeps its own day-trip
+  // "tomamu" mountain entry · this region's ids are distinct.
+  "tomamu-resort": "tomamu-sahoro",
+  "sahoro": "tomamu-sahoro",
+  "tomamu-village": "tomamu-sahoro",
+  "shimukappu": "tomamu-sahoro",
+  "tomamu-sahoro-roads": "tomamu-sahoro",
+
+  // Asahikawa, JP · the city's local hill (Kamui Ski Links) and the
+  // Asahidake ropeway plus the two base towns (Asahikawa city,
+  // Higashikawa). Furano keeps its own day-trip "kamui-ski-links"
+  // entry · this region's ids are distinct.
+  "kamui": "asahikawa",
+  "asahidake": "asahikawa",
+  "asahikawa": "asahikawa",
+  "higashikawa": "asahikawa",
+  "asahikawa-roads": "asahikawa",
 
   // Rusutsu & Kiroro, JP · the two big independent Hokkaido powder
   // resorts either side of the Niseko range, about 90 min apart by

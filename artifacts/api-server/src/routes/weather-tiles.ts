@@ -52,6 +52,11 @@ const JAPAN_CITIES = [
   { key: "rusutsu", name: "Rusutsu", nameJa: "ルスツ", lat: 42.733, lng: 140.883 },
   // Kiroro · base village at the Mountain Center in Akaigawa.
   { key: "kiroro", name: "Kiroro", nameJa: "キロロ", lat: 43.076, lng: 140.982 },
+  // Tomamu · resort village around JR Tomamu Station and the towers.
+  // Asahikawa city is already in the big-cities list above.
+  { key: "tomamu", name: "Tomamu", nameJa: "トマム", lat: 43.064, lng: 142.636 },
+  // Higashikawa · town core at the foot of the Daisetsuzan range.
+  { key: "higashikawa", name: "Higashikawa", nameJa: "東川", lat: 43.699, lng: 142.510 },
   // Yuzawa · Echigo-Yuzawa town core around the shinkansen station.
   { key: "yuzawa", name: "Yuzawa", nameJa: "湯沢", lat: 36.935, lng: 138.809 },
   // Zao Onsen · village core around the bus terminal (~880m).

@@ -73,6 +73,12 @@ const REGION_ANCHORS: Record<RegionId, {
   // snowiest lift-served point of the three city hills, above Jozankei
   // onsen, so the fairest single point for the region's alerts.
   "sapporo": { lat: 42.9870, lon: 141.1350, elevation: 1100, region: "JP", displayName: "Sapporo" },
+  // Tomamu & Sahoro · anchor on Mt Tomamu (1,239m top), the snowier
+  // and higher of the pair, so the fairest single point for alerts.
+  "tomamu-sahoro": { lat: 43.0580, lon: 142.6210, elevation: 1239, region: "JP", displayName: "Tomamu & Sahoro" },
+  // Asahikawa · anchor on Asahidake at the Sugatami ropeway top
+  // (~1,600m), the snowiest lift-served point of the pair.
+  "asahikawa": { lat: 43.6540, lon: 142.7970, elevation: 1600, region: "JP", displayName: "Asahikawa" },
   // Rusutsu & Kiroro · anchor on Kiroro's top terrain (1180m) · the
   // snowiest lift-served point of the pair, in one of Hokkaido's
   // heaviest snowfall pockets, so the fairest single point for alerts.

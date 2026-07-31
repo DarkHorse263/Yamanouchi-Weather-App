@@ -240,6 +240,22 @@ const LOCATIONS: LocationConfig[] = [
   { id: "sapporo-kokusai",           name: "Sapporo Kokusai",           latitude: 42.9870, longitude: 141.1350, elevation: 900,  description: "Deep-snow local favourite above Jozankei onsen · wide gondola-served cruisers in one of the city's heaviest snow pockets.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
   { id: "sapporo-bankei",            name: "Sapporo Bankei",            latitude: 43.0330, longitude: 141.2640, elevation: 360,  description: "In-city night-skiing hill 20 min from Odori · floodlit runs and lessons for a quick evening ski.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
 
+  // ─── Tomamu & Sahoro (Hokkaido, Japan) ──────────────────
+  // The two Sekisho Line destination resorts · Hoshino Resorts Tomamu
+  // (Mt Tomamu, 1,239m top) and Sahoro Resort (Mt Sahoro, 1,030m top).
+  // Coordinates are base-area points; elevation is an on-mountain
+  // forecast height (upper-mid mountain), not the summit.
+  { id: "tomamu-resort",             name: "Hoshino Resorts Tomamu",    latitude: 43.0580, longitude: 142.6210, elevation: 1000, description: "Hotel-tower resort off Mt Tomamu on the JR Sekisho Line · groomed cruisers, the winter Ice Village and ski-in stays.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "sahoro",                    name: "Sahoro Resort",             latitude: 43.1870, longitude: 142.8040, elevation: 820,  description: "Quiet Tokachi resort on Mt Sahoro above Shintoku · long fall-line cruisers off a single gondola.",              bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+
+  // ─── Asahikawa (Hokkaido, Japan) ──────────────────
+  // Kamui Ski Links (the city's local powder hill, 751m top) and the
+  // Asahidake Ropeway (Sugatami station ~1,600m on Hokkaido's highest
+  // peak). Coordinates are base-area points; elevation is an
+  // on-mountain forecast height, not the summit.
+  { id: "kamui",                     name: "Kamui Ski Links",           latitude: 43.7090, longitude: 142.1920, elevation: 600,  description: "Asahikawa's local powder hill 40 min west of the city · relaxed tree-skiing and quiet gondola laps.",          bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "asahidake",                 name: "Asahidake",                 latitude: 43.6540, longitude: 142.7970, elevation: 1350, description: "Ropeway-served powder on Hokkaido's highest peak · ungroomed Daisetsuzan terrain above Asahidake Onsen.",        bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+
   // ─── Rusutsu & Kiroro (Hokkaido, Japan) ──────────────────
   // Third Hokkaido region · the two big independent powder resorts
   // either side of the Niseko range, about 90 min apart by road.
