@@ -127,6 +127,16 @@ const MOUNTAIN_TINTS: Record<string, { bg: string; hover: string; ring: string }
   "appi":                { bg: "bg-sky-100/70",    hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },
   "shizukuishi-resort":  { bg: "bg-indigo-100/70", hover: "hover:bg-indigo-200/70",  ring: "ring-indigo-300/50" },
   "aomori-spring":     { bg: "bg-indigo-100/70", hover: "hover:bg-indigo-200/70",  ring: "ring-indigo-300/50" },
+  // Minakami JP · Tenjindaira ropeway bowl + the two valley hills
+  "tenjindaira":       { bg: "bg-sky-100/70",     hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },
+  "minakami-kogen":    { bg: "bg-indigo-100/70",  hover: "hover:bg-indigo-200/70",  ring: "ring-indigo-300/50" },
+  "norn-minakami":     { bg: "bg-cyan-100/70",    hover: "hover:bg-cyan-200/70",    ring: "ring-cyan-300/50" },
+  // Kusatsu & Manza JP · the two onsen-town hills on the volcano
+  "kusatsu-onsen-resort": { bg: "bg-sky-100/70",    hover: "hover:bg-sky-200/70",    ring: "ring-sky-300/50" },
+  "manza-onsen-resort":   { bg: "bg-indigo-100/70", hover: "hover:bg-indigo-200/70", ring: "ring-indigo-300/50" },
+  // Hachimantai JP · the two shared-ticket Hachimantai Resort hills
+  "hachimantai-panorama":  { bg: "bg-sky-100/70",    hover: "hover:bg-sky-200/70",    ring: "ring-sky-300/50" },
+  "hachimantai-shimokura": { bg: "bg-indigo-100/70", hover: "hover:bg-indigo-200/70", ring: "ring-indigo-300/50" },
   // Yuzawa JP · Snow Link trio + Iwappara + the two Dragondola resorts
   "gala-yuzawa":       { bg: "bg-sky-100/70",     hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },
   "yuzawa-kogen":      { bg: "bg-indigo-100/70",  hover: "hover:bg-indigo-200/70",  ring: "ring-indigo-300/50" },

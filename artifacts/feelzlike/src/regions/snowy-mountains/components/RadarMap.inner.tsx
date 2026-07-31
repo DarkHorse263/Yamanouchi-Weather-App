@@ -73,6 +73,9 @@ export type RegionKey =
   | "zao-onsen"
   | "hakkoda-aomori-spring"
   | "appi-shizukuishi"
+  | "minakami"
+  | "kusatsu-manza"
+  | "hachimantai"
   | "queenstown"
   | "wanaka"
   | "mt-hutt"
@@ -290,6 +293,40 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       label: "JMA Iwate",
       imageUrl: null,
       href: "https://www.jma.go.jp/bosai/nowc/#zoom:9/lat:39.85/lon:140.98/colordepth:normal/elements:hrpns",
+      attribution: "Japan Meteorological Agency · JMA",
+    },
+  },
+  // Minakami · the valley runs from Norn in the south up to Minakami
+  // Kogen at the head (~0.14° of latitude), so centre on the onsen town
+  // between them at zoom 10.
+  "minakami": {
+    windy: { lat: 36.80, lon: 138.97, zoom: 10 },
+    official: {
+      label: "JMA Gunma",
+      imageUrl: null,
+      href: "https://www.jma.go.jp/bosai/nowc/#zoom:10/lat:36.80/lon:138.97/colordepth:normal/elements:hrpns",
+      attribution: "Japan Meteorological Agency · JMA",
+    },
+  },
+  // Kusatsu & Manza · the two hills sit ~0.08° of longitude apart on
+  // the flanks of Kusatsu-Shirane, so a tight zoom-11 centre between.
+  "kusatsu-manza": {
+    windy: { lat: 36.63, lon: 138.55, zoom: 11 },
+    official: {
+      label: "JMA Gunma",
+      imageUrl: null,
+      href: "https://www.jma.go.jp/bosai/nowc/#zoom:11/lat:36.63/lon:138.55/colordepth:normal/elements:hrpns",
+      attribution: "Japan Meteorological Agency · JMA",
+    },
+  },
+  // Hachimantai · the two shared-ticket bases sit 2 km apart with the
+  // city gateway down the hill to the east, so zoom 10 centred between.
+  "hachimantai": {
+    windy: { lat: 39.93, lon: 141.05, zoom: 10 },
+    official: {
+      label: "JMA Iwate",
+      imageUrl: null,
+      href: "https://www.jma.go.jp/bosai/nowc/#zoom:10/lat:39.93/lon:141.05/colordepth:normal/elements:hrpns",
       attribution: "Japan Meteorological Agency · JMA",
     },
   },
@@ -558,6 +595,34 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "morioka", name: "Morioka", lat: 39.7019, lng: 141.1365, accent: "#0ea5e9" },
     ],
   },
+  "minakami": {
+    center: { lat: 36.80, lng: 138.97 },
+    pins: [
+      { id: "tenjindaira", name: "Tanigawadake Tenjindaira", lat: 36.833, lng: 138.947, accent: "#f97316" },
+      { id: "minakami-kogen", name: "Minakami Kogen", lat: 36.878, lng: 139.040, accent: "#f97316" },
+      { id: "norn-minakami", name: "Norn Minakami", lat: 36.743, lng: 138.942, accent: "#f97316" },
+      { id: "minakami", name: "Minakami", lat: 36.780, lng: 138.968, accent: "#0ea5e9" },
+    ],
+  },
+  "kusatsu-manza": {
+    center: { lat: 36.63, lng: 138.55 },
+    pins: [
+      { id: "kusatsu-onsen-resort", name: "Kusatsu Onsen Ski Resort", lat: 36.628, lng: 138.588, accent: "#f97316" },
+      { id: "manza-onsen-resort", name: "Manza Onsen Ski Resort", lat: 36.644, lng: 138.507, accent: "#f97316" },
+      { id: "kusatsu-onsen", name: "Kusatsu Onsen", lat: 36.621, lng: 138.596, accent: "#0ea5e9" },
+      // village pin nudged slightly south of the resort point (display
+      // only) so it doesn't stack under the mountain pin
+      { id: "manza-onsen", name: "Manza Onsen", lat: 36.640, lng: 138.503, accent: "#0ea5e9" },
+    ],
+  },
+  "hachimantai": {
+    center: { lat: 39.93, lng: 141.05 },
+    pins: [
+      { id: "hachimantai-panorama", name: "Hachimantai Panorama", lat: 39.946, lng: 141.000, accent: "#f97316" },
+      { id: "hachimantai-shimokura", name: "Hachimantai Shimokura", lat: 39.951, lng: 140.972, accent: "#f97316" },
+      { id: "hachimantai", name: "Hachimantai", lat: 39.900, lng: 141.130, accent: "#0ea5e9" },
+    ],
+  },
   queenstown: {
     center: { lat: -44.99, lng: 168.74 },
     pins: [
@@ -616,6 +681,9 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "zao-onsen": "JP",
   "hakkoda-aomori-spring": "JP",
   "appi-shizukuishi": "JP",
+  minakami: "JP",
+  "kusatsu-manza": "JP",
+  hachimantai: "JP",
   queenstown: "NZ",
   wanaka: "NZ",
   "mt-hutt": "NZ",
@@ -641,6 +709,9 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "zao-onsen": "zao onsen",
   "hakkoda-aomori-spring": "hakkoda & aomori spring",
   "appi-shizukuishi": "appi & shizukuishi",
+  minakami: "minakami",
+  "kusatsu-manza": "kusatsu & manza",
+  hachimantai: "hachimantai",
   queenstown: "queenstown",
   wanaka: "wanaka",
   "mt-hutt": "mt hutt",

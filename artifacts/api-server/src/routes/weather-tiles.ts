@@ -72,6 +72,14 @@ const JAPAN_CITIES = [
   { key: "shizukuishi", name: "Shizukuishi", nameJa: "雫石", lat: 39.694, lng: 140.984 },
   // Morioka · city core around Morioka Station.
   { key: "morioka", name: "Morioka", nameJa: "盛岡", lat: 39.702, lng: 141.137 },
+  // Minakami · onsen town core around JR Minakami Station.
+  { key: "minakami", name: "Minakami", nameJa: "みなかみ", lat: 36.780, lng: 138.968 },
+  // Kusatsu Onsen · town core around the Yubatake.
+  { key: "kusatsu-onsen", name: "Kusatsu Onsen", nameJa: "草津温泉", lat: 36.621, lng: 138.596 },
+  // Manza Onsen · sulphur-spring hotel village at ~1,800m.
+  { key: "manza-onsen", name: "Manza Onsen", nameJa: "万座温泉", lat: 36.642, lng: 138.505 },
+  // Hachimantai · city core around Obuke station on the Hanawa line.
+  { key: "hachimantai", name: "Hachimantai", nameJa: "八幡平", lat: 39.900, lng: 141.130 },
 ];
 
 let cachedTemps: { data: any; fetchedAt: number } | null = null;

@@ -290,6 +290,27 @@ const LOCATIONS: LocationConfig[] = [
   { id: "appi",                      name: "Appi Kogen",                latitude: 40.0028, longitude: 140.9452, elevation: 1305, description: "One of Tohoku's largest resorts · long groomed runs off a 2.8 km gondola to Mt Maemori, on the Ikon Pass from 2025-26.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
   { id: "shizukuishi-resort",        name: "Shizukuishi",               latitude: 39.6940, longitude: 140.9060, elevation: 1128, description: "Prince-operated hill on Takakura · about 700 m of vertical, host of the 1993 Alpine World Championships.",       bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
 
+  // ─── Minakami (Gunma, Japan) ─────────────────────────────
+  // Tokyo's weekend ski valley · Tenjindaira (Mt.T) ropeway bowl on
+  // Tanigawa-dake plus the Kogen and Norn hills. Coordinates are
+  // base-area points; elevation is an on-mountain forecast height
+  // (mid-mountain-ish), not the summit.
+  { id: "tenjindaira",               name: "Tanigawadake Tenjindaira",  latitude: 36.8330, longitude: 138.9470, elevation: 1410, description: "Ropeway snow bowl at 1,319 m on Tanigawa-dake, now Mt.T by Hoshino Resorts · huge snowfalls and famous sidecountry.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "minakami-kogen",            name: "Minakami Kogen",            latitude: 36.8780, longitude: 139.0400, elevation: 1050, description: "Family resort around the ski-in Hotel 200 · gentle wide courses at the quiet top of the valley.",              bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "norn-minakami",             name: "Norn Minakami",             latitude: 36.7430, longitude: 138.9420, elevation: 1020, description: "Day-trip hill 5 min off the Kanetsu expressway · tree-lined courses and Kanto-favourite night skiing.",         bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+
+  // ─── Kusatsu & Manza (Gunma, Japan) ──────────────────────
+  // Two onsen-town hills on the Kusatsu-Shirane volcano · elevations
+  // are on-mountain forecast heights (mid-mountain-ish).
+  { id: "kusatsu-onsen-resort",      name: "Kusatsu Onsen Ski Resort",  latitude: 36.6280, longitude: 138.5880, elevation: 1420, description: "Historic town hill from 1,245 m to 1,600 m · pulse gondola off the base, the Yubatake baths 10 min down the road.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "manza-onsen-resort",        name: "Manza Onsen Ski Resort",    latitude: 36.6440, longitude: 138.5070, elevation: 1820, description: "High, cold Prince resort from 1,646 m to 1,994 m above the sulphur springs · reliably dry snow.",               bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+
+  // ─── Hachimantai (Iwate, Japan) ──────────────────────────
+  // The two shared-ticket Hachimantai Resort hills north of Mt Iwate ·
+  // elevations are on-mountain forecast heights (mid-mountain-ish).
+  { id: "hachimantai-panorama",      name: "Hachimantai Panorama",      latitude: 39.9460, longitude: 141.0000, elevation:  750, description: "Gentle family hill behind the Hachimantai Mountain Hotel · wide north-facing courses with Mt Iwate views.",     bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+  { id: "hachimantai-shimokura",     name: "Hachimantai Shimokura",     latitude: 39.9510, longitude: 140.9720, elevation:  930, description: "Powder hill on Mt Shimokura's east slope · wind-sheltered tree lines and very dry 'ultralight' snow.",           bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Asia/Tokyo", region: "JP" },
+
   // ─── Queenstown (Otago, New Zealand) ─────────────────────
   // Open-Meteo primary + OpenWeatherMap fallback · no national AWS feed
   // wired for NZ, so bom* fields stay blank and there's no obs reconciler.

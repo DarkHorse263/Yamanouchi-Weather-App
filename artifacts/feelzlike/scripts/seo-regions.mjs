@@ -286,6 +286,53 @@ export const REGIONS = [
     ],
   },
   {
+    slug: "minakami",
+    name: "Minakami",
+    subtitle: "Gunma · Japan",
+    country: "JP",
+    hasAlerts: false,
+    hasRoads: false,
+    mountains: [
+      { name: "Tanigawadake Tenjindaira", blurb: "Ropeway-served snow bowl at 1,319 m on Tanigawa-dake, now Mt.T by Hoshino Resorts · huge snowfalls, a long spring season and famous sidecountry" },
+      { name: "Minakami Kogen",           blurb: "Family resort around the ski-in Hotel 200 at 850 m · gentle wide courses, snow activities and kids' areas at the quiet top of the valley" },
+      { name: "Norn Minakami",            blurb: "Day-trip hill 5 min off the Kanetsu expressway · compact tree-lined courses to 1,220 m and some of Kanto's best night skiing" },
+    ],
+    towns: [
+      { id: "minakami", name: "Minakami", blurb: "Onsen town on the Tone river · beds, baths and buses to every hill in the valley" },
+    ],
+  },
+  {
+    slug: "kusatsu-manza",
+    name: "Kusatsu & Manza",
+    subtitle: "Gunma · Japan",
+    country: "JP",
+    hasAlerts: false,
+    hasRoads: false,
+    mountains: [
+      { name: "Kusatsu Onsen", blurb: "Historic town hill from 1,245 m to 1,600 m · pulse gondola off the base and the Yubatake baths 10 min down the road" },
+      { name: "Manza Onsen",   blurb: "High, cold Prince resort from 1,646 m to 1,994 m above the sulphur springs · reliably dry snow and empty weekday groomers" },
+    ],
+    towns: [
+      { id: "kusatsu-onsen", name: "Kusatsu Onsen", blurb: "One of Japan's most famous onsen towns · the Yubatake steaming in the middle, the ski hill 10 min up the road" },
+      { id: "manza-onsen",   name: "Manza Onsen",   blurb: "Sulphur-spring village at 1,800 m · among Japan's highest onsen, with the lifts right off the hotels" },
+    ],
+  },
+  {
+    slug: "hachimantai",
+    name: "Hachimantai",
+    subtitle: "Iwate · Japan",
+    country: "JP",
+    hasAlerts: false,
+    hasRoads: false,
+    mountains: [
+      { name: "Hachimantai Panorama",  blurb: "Gentle family hill behind the Hachimantai Mountain Hotel · wide north-facing courses with Mt Iwate views, one ticket with Shimokura" },
+      { name: "Hachimantai Shimokura", blurb: "Powder hill on the east slope of Mt Shimokura · wind-sheltered tree lines and very dry snow, 2 km from Panorama by free shuttle" },
+    ],
+    towns: [
+      { id: "hachimantai", name: "Hachimantai", blurb: "Spread-out city below the plateau · Obuke station is the rail gateway, the ski hills 25 min up the hill" },
+    ],
+  },
+  {
     slug: "yuzawa",
     name: "Yuzawa",
     subtitle: "Niigata · Japan",

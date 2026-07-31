@@ -301,6 +301,21 @@ if (process.env.NODE_ENV === "production") {
         morioka: "Morioka",
       },
     },
+    "minakami": {
+      name: "Minakami",
+      towns: { minakami: "Minakami" },
+    },
+    "kusatsu-manza": {
+      name: "Kusatsu & Manza",
+      towns: {
+        "kusatsu-onsen": "Kusatsu Onsen",
+        "manza-onsen": "Manza Onsen",
+      },
+    },
+    "hachimantai": {
+      name: "Hachimantai",
+      towns: { hachimantai: "Hachimantai" },
+    },
     // New Zealand
     "queenstown": {
       name: "Queenstown",

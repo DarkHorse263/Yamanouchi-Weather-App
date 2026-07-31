@@ -26,6 +26,9 @@ export const REGION_IDS = [
   "zao-onsen",
   "hakkoda-aomori-spring",
   "appi-shizukuishi",
+  "minakami",
+  "kusatsu-manza",
+  "hachimantai",
   "queenstown",
   "wanaka",
   "mt-hutt",
@@ -247,6 +250,27 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "shizukuishi": "appi-shizukuishi",
   "morioka": "appi-shizukuishi",
   "appi-shizukuishi-roads": "appi-shizukuishi",
+
+  // Minakami, JP · 3 mountains + 1 base town (the onsen town on the Tone).
+  "tenjindaira": "minakami",
+  "minakami-kogen": "minakami",
+  "norn-minakami": "minakami",
+  "minakami": "minakami",
+  "minakami-roads": "minakami",
+
+  // Kusatsu & Manza, JP · 2 mountains + 2 onsen base towns on the
+  // Kusatsu-Shirane volcano (name-clash rule: resorts get -resort ids).
+  "kusatsu-onsen-resort": "kusatsu-manza",
+  "manza-onsen-resort": "kusatsu-manza",
+  "kusatsu-onsen": "kusatsu-manza",
+  "manza-onsen": "kusatsu-manza",
+  "kusatsu-manza-roads": "kusatsu-manza",
+
+  // Hachimantai, JP · 2 shared-ticket hills + 1 base city (Obuke gateway).
+  "hachimantai-panorama": "hachimantai",
+  "hachimantai-shimokura": "hachimantai",
+  "hachimantai": "hachimantai",
+  "hachimantai-roads": "hachimantai",
 
   // Queenstown, NZ · 2 mountains + 1 gateway town + roads cam tile.
   "coronet-peak": "queenstown",

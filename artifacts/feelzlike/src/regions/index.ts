@@ -16,6 +16,9 @@ import { yuzawaRegion } from "./yuzawa";
 import { zaoOnsenRegion } from "./zao-onsen";
 import { hakkodaAomoriSpringRegion } from "./hakkoda-aomori-spring";
 import { appiShizukuishiRegion } from "./appi-shizukuishi";
+import { minakamiRegion } from "./minakami";
+import { kusatsuManzaRegion } from "./kusatsu-manza";
+import { hachimantaiRegion } from "./hachimantai";
 import { tasmaniaRegion } from "./tasmania";
 import { queenstownRegion } from "./queenstown";
 import { wanakaRegion } from "./wanaka";
@@ -52,6 +55,9 @@ export const REGIONS: RegionConfig[] = [
   zaoOnsenRegion,
   hakkodaAomoriSpringRegion,
   appiShizukuishiRegion,
+  minakamiRegion,
+  kusatsuManzaRegion,
+  hachimantaiRegion,
   queenstownRegion,
   wanakaRegion,
   mtHuttRegion,
@@ -90,6 +96,9 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "zao-onsen": "JP",
   "hakkoda-aomori-spring": "JP",
   "appi-shizukuishi": "JP",
+  "minakami": "JP",
+  "kusatsu-manza": "JP",
+  "hachimantai": "JP",
   "queenstown": "NZ",
   "wanaka": "NZ",
   "mt-hutt": "NZ",

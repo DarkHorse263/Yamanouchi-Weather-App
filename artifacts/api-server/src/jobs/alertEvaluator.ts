@@ -97,6 +97,16 @@ const REGION_ANCHORS: Record<RegionId, {
   // Appi & Shizukuishi · anchor on Mt Maemori (1,305m), the Appi
   // gondola summit · the snowiest lift-served point of the pair.
   "appi-shizukuishi": { lat: 40.0028, lon: 140.9452, elevation: 1305, region: "JP", displayName: "Appi & Shizukuishi" },
+  // Minakami · anchor on the Tenjin Pair top (~1,500m) above the
+  // Tenjindaira bowl on Tanigawa-dake · by far the snowiest lift-served
+  // point in the valley.
+  "minakami": { lat: 36.833, lon: 138.947, elevation: 1500, region: "JP", displayName: "Minakami" },
+  // Kusatsu & Manza · anchor on Manza's Prince quad top (1,994m), the
+  // highest and snowiest lift-served point of the pair.
+  "kusatsu-manza": { lat: 36.644, lon: 138.507, elevation: 1994, region: "JP", displayName: "Kusatsu & Manza" },
+  // Hachimantai · anchor on the Shimokura top (Mt Shimokura, ~1,180m),
+  // the powder hill of the shared-ticket pair.
+  "hachimantai": { lat: 39.951, lon: 140.972, elevation: 1180, region: "JP", displayName: "Hachimantai" },
   // NZ · no national model in the ensemble, so region "OTHER" (global
   // blend). Anchor each on its highest skiable summit.
   "queenstown": { lat: -45.0556, lon: 168.8194, elevation: 1943, region: "OTHER", displayName: "Queenstown" },
