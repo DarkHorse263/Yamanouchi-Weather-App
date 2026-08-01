@@ -47,6 +47,9 @@ import { POWDER_HIGHWAY_TRANSPORT } from "./powder-highway";
 import { BANFF_LAKE_LOUISE_TRANSPORT } from "./banff-lake-louise";
 import { CANMORE_TRANSPORT } from "./canmore";
 import { JASPER_TRANSPORT } from "./jasper";
+import { QUEBEC_LAURENTIANS_TRANSPORT } from "./quebec-laurentians";
+import { QUEBEC_CHARLEVOIX_TRANSPORT } from "./quebec-charlevoix";
+import { QUEBEC_EASTERN_TOWNSHIPS_TRANSPORT } from "./quebec-eastern-townships";
 
 const REGISTRY: Record<RegionId, TransportProviderList> = {
   "snowy-mountains": SNOWY_MOUNTAINS_TRANSPORT,
@@ -86,6 +89,9 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   "banff-lake-louise": BANFF_LAKE_LOUISE_TRANSPORT,
   canmore: CANMORE_TRANSPORT,
   jasper: JASPER_TRANSPORT,
+  "quebec-laurentians": QUEBEC_LAURENTIANS_TRANSPORT,
+  "quebec-charlevoix": QUEBEC_CHARLEVOIX_TRANSPORT,
+  "quebec-eastern-townships": QUEBEC_EASTERN_TOWNSHIPS_TRANSPORT,
 };
 
 // Loader-time integrity check.

@@ -2399,6 +2399,182 @@ from = "/jasper/jasper/explore/"
 to = "/jasper/jasper/explore/index.html"
 
 [[services.production.rewrites]]
+from = "/quebec-laurentians/"
+to = "/quebec-laurentians/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-laurentians/mountains/"
+to = "/quebec-laurentians/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-laurentians/stay/"
+to = "/quebec-laurentians/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-laurentians/mont-tremblant/"
+to = "/quebec-laurentians/mont-tremblant/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-laurentians/mont-tremblant/weather/"
+to = "/quebec-laurentians/mont-tremblant/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-laurentians/mont-tremblant/stay/"
+to = "/quebec-laurentians/mont-tremblant/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-laurentians/mont-tremblant/eat/"
+to = "/quebec-laurentians/mont-tremblant/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-laurentians/mont-tremblant/roads/"
+to = "/quebec-laurentians/mont-tremblant/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-laurentians/mont-tremblant/transport/"
+to = "/quebec-laurentians/mont-tremblant/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-laurentians/mont-tremblant/explore/"
+to = "/quebec-laurentians/mont-tremblant/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-charlevoix/"
+to = "/quebec-charlevoix/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-charlevoix/mountains/"
+to = "/quebec-charlevoix/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-charlevoix/stay/"
+to = "/quebec-charlevoix/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-charlevoix/beaupre/"
+to = "/quebec-charlevoix/beaupre/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-charlevoix/beaupre/weather/"
+to = "/quebec-charlevoix/beaupre/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-charlevoix/beaupre/stay/"
+to = "/quebec-charlevoix/beaupre/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-charlevoix/beaupre/eat/"
+to = "/quebec-charlevoix/beaupre/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-charlevoix/beaupre/roads/"
+to = "/quebec-charlevoix/beaupre/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-charlevoix/beaupre/transport/"
+to = "/quebec-charlevoix/beaupre/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-charlevoix/beaupre/explore/"
+to = "/quebec-charlevoix/beaupre/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-charlevoix/petite-riviere-saint-francois/"
+to = "/quebec-charlevoix/petite-riviere-saint-francois/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-charlevoix/petite-riviere-saint-francois/weather/"
+to = "/quebec-charlevoix/petite-riviere-saint-francois/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-charlevoix/petite-riviere-saint-francois/stay/"
+to = "/quebec-charlevoix/petite-riviere-saint-francois/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-charlevoix/petite-riviere-saint-francois/eat/"
+to = "/quebec-charlevoix/petite-riviere-saint-francois/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-charlevoix/petite-riviere-saint-francois/roads/"
+to = "/quebec-charlevoix/petite-riviere-saint-francois/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-charlevoix/petite-riviere-saint-francois/transport/"
+to = "/quebec-charlevoix/petite-riviere-saint-francois/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-charlevoix/petite-riviere-saint-francois/explore/"
+to = "/quebec-charlevoix/petite-riviere-saint-francois/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-eastern-townships/"
+to = "/quebec-eastern-townships/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-eastern-townships/mountains/"
+to = "/quebec-eastern-townships/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-eastern-townships/stay/"
+to = "/quebec-eastern-townships/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-eastern-townships/bromont/"
+to = "/quebec-eastern-townships/bromont/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-eastern-townships/bromont/weather/"
+to = "/quebec-eastern-townships/bromont/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-eastern-townships/bromont/stay/"
+to = "/quebec-eastern-townships/bromont/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-eastern-townships/bromont/eat/"
+to = "/quebec-eastern-townships/bromont/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-eastern-townships/bromont/roads/"
+to = "/quebec-eastern-townships/bromont/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-eastern-townships/bromont/transport/"
+to = "/quebec-eastern-townships/bromont/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-eastern-townships/bromont/explore/"
+to = "/quebec-eastern-townships/bromont/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-eastern-townships/sutton/"
+to = "/quebec-eastern-townships/sutton/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-eastern-townships/sutton/weather/"
+to = "/quebec-eastern-townships/sutton/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-eastern-townships/sutton/stay/"
+to = "/quebec-eastern-townships/sutton/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-eastern-townships/sutton/eat/"
+to = "/quebec-eastern-townships/sutton/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-eastern-townships/sutton/roads/"
+to = "/quebec-eastern-townships/sutton/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-eastern-townships/sutton/transport/"
+to = "/quebec-eastern-townships/sutton/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-eastern-townships/sutton/explore/"
+to = "/quebec-eastern-townships/sutton/explore/index.html"
+
+[[services.production.rewrites]]
 from = "/*"
 to = "/index.html"
 

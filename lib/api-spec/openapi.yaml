@@ -1698,6 +1698,9 @@ components:
         - banff-lake-louise
         - canmore
         - jasper
+        - quebec-laurentians
+        - quebec-charlevoix
+        - quebec-eastern-townships
       description: |
         Canonical region identifier used across the FeelZlike platform.
 

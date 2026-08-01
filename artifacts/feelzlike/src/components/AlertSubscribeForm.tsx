@@ -54,6 +54,9 @@ export const ALERT_REGIONS: Array<{ id: string; nameEn: string; nameJa: string; 
   { id: "banff-lake-louise", nameEn: "Banff & Lake Louise", nameJa: "バンフ・レイクルイーズ", country: "CA · Alberta" },
   { id: "canmore", nameEn: "Canmore", nameJa: "キャンモア", country: "CA · Alberta" },
   { id: "jasper", nameEn: "Jasper", nameJa: "ジャスパー", country: "CA · Alberta" },
+  { id: "quebec-laurentians", nameEn: "Laurentians", nameJa: "ローレンシャン", country: "CA · Québec" },
+  { id: "quebec-charlevoix", nameEn: "Charlevoix", nameJa: "シャルルヴォワ", country: "CA · Québec" },
+  { id: "quebec-eastern-townships", nameEn: "Eastern Townships", nameJa: "イースタンタウンシップス", country: "CA · Québec" },
 ];
 
 const HORIZONS: Array<{ value: 24 | 48 | 72; label: string; labelJa: string }> = [

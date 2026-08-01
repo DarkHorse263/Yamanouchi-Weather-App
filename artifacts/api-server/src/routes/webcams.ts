@@ -280,6 +280,29 @@ const WEBCAM_DATA: WebcamConfig[] = [
     webcams: [],
   },
 
+  // ─── Roadside cams: Canada (Québec) ───────────────────────────────────
+  // Québec 511 runs the province's highway-camera network but the whole
+  // domain is bot-gated, so no deep camera path can be verified from here ·
+  // link the documented root only rather than guess a sub-path.
+  {
+    locationId: "quebec-laurentians-roads",
+    locationName: "Roads to Mont-Tremblant · Autoroute 15 & Route 117",
+    webcamPageUrl: "https://www.quebec511.info/",
+    webcams: [],
+  },
+  {
+    locationId: "quebec-charlevoix-roads",
+    locationName: "Roads through Charlevoix · Route 138",
+    webcamPageUrl: "https://www.quebec511.info/",
+    webcams: [],
+  },
+  {
+    locationId: "quebec-eastern-townships-roads",
+    locationName: "Roads to Bromont & Sutton · Autoroute 10",
+    webcamPageUrl: "https://www.quebec511.info/",
+    webcams: [],
+  },
+
   // ─── Resort live-cam pages: Nozawa Onsen ──────────────────────────────
   // Each resort publishes a live-cam landing page (JPG-refresh + occasional
   // YouTube embeds). Linking to the official page rather than the raw

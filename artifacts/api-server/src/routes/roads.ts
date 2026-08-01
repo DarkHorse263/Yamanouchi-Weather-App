@@ -469,7 +469,8 @@ function isCaSnowSeason(now: Date): boolean {
   // Canadian Rockies / Coast Mountains resort season runs roughly mid-Nov to
   // mid-May (Sunshine and Whistler push into late May). Kept separate from the
   // JP northern-winter helper so the rule text never implies a Japanese
-  // authority applies in BC or Alberta.
+  // authority applies in BC, Alberta or Québec. The Québec hills run a
+  // shorter season (late Nov to mid Apr) that sits inside this window.
   const m = now.getMonth();
   if (m === 10) return now.getDate() >= 15;
   if (m === 11 || m <= 3) return true;
@@ -479,12 +480,13 @@ function isCaSnowSeason(now: Date): boolean {
 
 /**
  * Canada chain entries. Deliberately `chains2wd`/`chainsAwd: "not-required"`
- * year-round: neither BC nor Alberta mandates chains on passenger vehicles the
- * way NSW and the NZ ski-field bylaws do. BC's actual legal requirement is
- * winter tyres (M+S or 3PMSF, >=3.5 mm tread) on designated highways from
- * 1 Oct to 30 Apr; Alberta legislates nothing and only recommends them. Saying
- * "must-carry" here would invent a law, so the requirement stays "not-required"
- * and the real rule lives in the note.
+ * year-round: none of BC, Alberta or Québec mandates chains on passenger
+ * vehicles the way NSW and the NZ ski-field bylaws do. BC's actual legal
+ * requirement is winter tyres (M+S or 3PMSF, >=3.5 mm tread) on designated
+ * highways from 1 Oct to 30 Apr; Québec's is 3PMSF winter tyres from 1 Dec to
+ * 15 Mar on vehicles registered in the province; Alberta legislates nothing
+ * and only recommends them. Saying "must-carry" here would invent a law, so
+ * the requirement stays "not-required" and the real rule lives in the note.
  */
 const CA_BC_SOURCE = {
   sourceLabel: "DriveBC · winter driving",
@@ -495,6 +497,22 @@ const CA_AB_SOURCE = {
   sourceLabel: "511 Alberta · road reports",
   sourceUrl: "https://511.alberta.ca/",
 };
+const CA_QC_SOURCE = {
+  sourceLabel: "Québec 511 · road conditions",
+  sourceUrl: "https://www.quebec511.info/",
+};
+
+const CA_PROVINCE_SOURCE = {
+  BC: CA_BC_SOURCE,
+  AB: CA_AB_SOURCE,
+  QC: CA_QC_SOURCE,
+} as const;
+
+const CA_PROVINCE_RULE = {
+  BC: "Winter tyres (M+S or 3-peak mountain snowflake, 3.5 mm+ tread) are required by law on this route from 1 Oct to 30 Apr. Chains are not mandated for passenger vehicles but are worth carrying.",
+  AB: "Alberta does not legislate winter tyres, but they are strongly recommended on mountain highways and most rental agreements expect them.",
+  QC: "Québec law requires 3-peak mountain snowflake winter tyres from 1 Dec to 15 Mar on passenger vehicles registered in the province. Out-of-province and rental vehicles are exempt, but the same tyres are strongly recommended. Chains are not mandated.",
+} as const;
 
 function caChainEntry(opts: {
   id: string;
@@ -503,14 +521,11 @@ function caChainEntry(opts: {
   mountainName: string;
   approach: string;
   detail: string;
-  province: "BC" | "AB";
+  province: "BC" | "AB" | "QC";
   inSeason: boolean;
   issuedAt: string;
 }): Record<string, unknown> {
-  const rule =
-    opts.province === "BC"
-      ? "Winter tyres (M+S or 3-peak mountain snowflake, 3.5 mm+ tread) are required by law on this route from 1 Oct to 30 Apr. Chains are not mandated for passenger vehicles but are worth carrying."
-      : "Alberta does not legislate winter tyres, but they are strongly recommended on mountain highways and most rental agreements expect them.";
+  const rule = CA_PROVINCE_RULE[opts.province];
   return {
     id: opts.id,
     regionId: opts.regionId,
@@ -522,7 +537,7 @@ function caChainEntry(opts: {
     chainsAwd: "not-required" satisfies ChainReq,
     note: opts.inSeason ? `${rule} ${opts.detail}` : "Outside the ski season · no winter tyre or chain requirement on this route.",
     issuedAt: opts.issuedAt,
-    ...(opts.province === "BC" ? CA_BC_SOURCE : CA_AB_SOURCE),
+    ...CA_PROVINCE_SOURCE[opts.province],
     dataSource: "seasonal-rule",
   };
 }
@@ -916,7 +931,10 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
     regionId === "powder-highway" ||
     regionId === "banff-lake-louise" ||
     regionId === "canmore" ||
-    regionId === "jasper"
+    regionId === "jasper" ||
+    regionId === "quebec-laurentians" ||
+    regionId === "quebec-charlevoix" ||
+    regionId === "quebec-eastern-townships"
   ) {
     const inSeason = isCaSnowSeason(now);
     const ca = (
@@ -925,7 +943,7 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
       mountainName: string,
       approach: string,
       detail: string,
-      province: "BC" | "AB",
+      province: "BC" | "AB" | "QC",
     ) =>
       caChainEntry({ id, regionId, mountainId, mountainName, approach, detail, province, inSeason, issuedAt });
 
@@ -1001,11 +1019,46 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
       ];
     }
 
+    if (regionId === "jasper") {
+      return [
+        ca("marmot-basin-road", "marmot-basin", "Marmot Basin",
+          "Hwy 93A south of Jasper, then Marmot Basin Road",
+          "A 12 km climb to the highest base elevation of any major Canadian ski area · wildlife on the road at dawn and dusk is the usual hazard.",
+          "AB"),
+      ];
+    }
+
+    if (regionId === "quebec-laurentians") {
+      return [
+        ca("tremblant-autoroute-15", "tremblant", "Tremblant",
+          "Autoroute 15 north from Montréal, then Route 117 and Montée Ryan",
+          "Roughly 1 hr 45 min from Montréal on a divided highway the whole way · park at the village or the Le Géant lots and ride the gondola, there is no summit road.",
+          "QC"),
+      ];
+    }
+
+    if (regionId === "quebec-charlevoix") {
+      return [
+        ca("mont-sainte-anne-route-360", "mont-sainte-anne", "Mont-Sainte-Anne",
+          "Autoroute 40 east to Beaupré, then Route 360 and the resort road",
+          "About 30 min from Québec City on the Côte-de-Beaupré · the short climb off Route 360 to the base is the only steep section.",
+          "QC"),
+        ca("le-massif-route-138", "le-massif", "Le Massif de Charlevoix",
+          "Route 138 east from Québec City, then the descent into Petite-Rivière-Saint-François",
+          "Route 138 through Charlevoix is exposed and hilly, and the road down to the riverside base village drops steeply · the summit lot is reached from the highway side.",
+          "QC"),
+      ];
+    }
+
     return [
-      ca("marmot-basin-road", "marmot-basin", "Marmot Basin",
-        "Hwy 93A south of Jasper, then Marmot Basin Road",
-        "A 12 km climb to the highest base elevation of any major Canadian ski area · wildlife on the road at dawn and dusk is the usual hazard.",
-        "AB"),
+      ca("bromont-autoroute-10", "bromont-resort", "Ski Bromont",
+        "Autoroute 10 east from Montréal to exit 78, then Boulevard de Bromont",
+        "About 45 min from Montréal and roughly 5 min from the autoroute to the base lots · the flattest resort approach in Québec.",
+        "QC"),
+      ca("mont-sutton-chemin-maple", "mont-sutton", "Mont Sutton",
+        "Autoroute 10 to exit 68, then Route 139 to Sutton and Chemin Maple",
+        "The last few kilometres up Chemin Maple from the village climb steadily and ice up early in the morning.",
+        "QC"),
     ];
   }
 
@@ -1214,7 +1267,10 @@ router.get("/road-conditions", async (req, res) => {
       region === "powder-highway" ||
       region === "banff-lake-louise" ||
       region === "canmore" ||
-      region === "jasper";
+      region === "jasper" ||
+      region === "quebec-laurentians" ||
+      region === "quebec-charlevoix" ||
+      region === "quebec-eastern-townships";
 
     let roads: unknown[] = [];
     let generalAdvice: string;
@@ -1238,7 +1294,11 @@ router.get("/road-conditions", async (req, res) => {
       generalAdvice =
         region === "whistler" || region === "powder-highway"
           ? "We do not yet pull live road data for British Columbia · check DriveBC (drivebc.ca) for closures, avalanche control and highway cameras before you drive. Winter tyres marked M+S or 3-peak mountain snowflake are required by law on these routes from 1 October to 30 April. For anything off-piste or side-country, read the day's Avalanche Canada bulletin at avalanche.ca."
-          : "We do not yet pull live road data for Alberta · check 511 Alberta (511.alberta.ca) for closures and highway cameras before you drive, and Parks Canada for conditions inside the national parks. Alberta does not legislate winter tyres but they are strongly recommended on every mountain highway here. For anything off-piste or side-country, read the day's Avalanche Canada bulletin at avalanche.ca.";
+          : region === "quebec-laurentians" ||
+              region === "quebec-charlevoix" ||
+              region === "quebec-eastern-townships"
+            ? "We do not yet pull live road data for Québec · check Québec 511 (quebec511.info) for closures and highway cameras before you drive. Québec law requires 3-peak mountain snowflake winter tyres from 1 December to 15 March on vehicles registered in the province; out-of-province and rental vehicles are exempt but should still be shod for winter. For anything off-piste or side-country, read the day's Avalanche Québec bulletin at avalanchequebec.ca."
+            : "We do not yet pull live road data for Alberta · check 511 Alberta (511.alberta.ca) for closures and highway cameras before you drive, and Parks Canada for conditions inside the national parks. Alberta does not legislate winter tyres but they are strongly recommended on every mountain highway here. For anything off-piste or side-country, read the day's Avalanche Canada bulletin at avalanche.ca.";
       liveTrafficUrl = "";
     } else {
       generalAdvice =

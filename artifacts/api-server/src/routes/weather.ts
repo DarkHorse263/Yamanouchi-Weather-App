@@ -380,6 +380,22 @@ const LOCATIONS: LocationConfig[] = [
   // ─── Jasper (Alberta, Canada) ────────────────────────────
   { id: "marmot-basin",              name: "Marmot Basin",              latitude:  52.8000, longitude: -118.0833, elevation: 2612, description: "Highest base elevation of any major Canadian ski area · quiet, cold, dry snow in Jasper National Park.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Edmonton", region: "CA" },
   { id: "jasper",                    name: "Jasper",                    latitude:  52.8737, longitude: -118.0814, elevation: 1062, description: "Rail-town park base on the Athabasca · about 20 min up the road to the Marmot Basin lifts.",             bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Edmonton", region: "CA" },
+
+  // ─── Laurentians (Québec, Canada) ────────────────────────
+  { id: "tremblant",                 name: "Tremblant",                 latitude:  46.2200, longitude:  -74.5530, elevation:  875, description: "Eastern Canada's largest ski area · four faces off Pic White down to the pedestrian village.",         bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Toronto", region: "CA" },
+  { id: "mont-tremblant",            name: "Mont-Tremblant",            latitude:  46.2127, longitude:  -74.5844, elevation:  261, description: "Pedestrian village at the gondola base · about 1 hr 45 min north of Montréal.",                        bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Toronto", region: "CA" },
+
+  // ─── Charlevoix (Québec, Canada) ─────────────────────────
+  { id: "mont-sainte-anne",          name: "Mont-Sainte-Anne",          latitude:  47.0876, longitude:  -70.9324, elevation:  800, description: "Three skiable faces 30 min from Québec City · Canada's biggest lit night-ski vertical.",                bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Toronto", region: "CA" },
+  { id: "le-massif",                 name: "Le Massif de Charlevoix",   latitude:  47.2757, longitude:  -70.6257, elevation:  806, description: "Highest vertical east of the Rockies · 770 m dropping straight toward the St. Lawrence.",              bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Toronto", region: "CA" },
+  { id: "beaupre",                   name: "Beaupré",                   latitude:  47.0443, longitude:  -70.8953, elevation:   24, description: "Côte-de-Beaupré town on the river flats · about 10 min up the road to Mont-Sainte-Anne.",             bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Toronto", region: "CA" },
+  { id: "petite-riviere-saint-francois", name: "Petite-Rivière-Saint-François", latitude: 47.3100, longitude: -70.5660, elevation: 36, description: "Shoreline village beneath Le Massif · the base station sits at the water's edge.",             bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Toronto", region: "CA" },
+
+  // ─── Eastern Townships (Québec, Canada) ──────────────────
+  { id: "bromont-resort",            name: "Ski Bromont",               latitude:  45.2892, longitude:  -72.6378, elevation:  553, description: "Seven sectors across Mont Brome · the largest lit night-ski terrain in North America.",                bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Toronto", region: "CA" },
+  { id: "mont-sutton",               name: "Mont Sutton",               latitude:  45.0850, longitude:  -72.5500, elevation:  840, description: "Québec's glade mountain · an interconnected sous-bois network rather than cut trails.",                bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Toronto", region: "CA" },
+  { id: "bromont",                   name: "Bromont",                   latitude:  45.3168, longitude:  -72.6491, elevation:  126, description: "Townships town off Autoroute 10 · about 5 min from the ski hill, 45 min from Montréal.",              bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Toronto", region: "CA" },
+  { id: "sutton",                    name: "Sutton",                    latitude:  45.1001, longitude:  -72.6158, elevation:  175, description: "Village under the Sutton range near the Vermont line · about 10 min to the lifts.",                   bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Toronto", region: "CA" },
 ];
 
 const WEATHER_DESCRIPTIONS: Record<number, string> = {

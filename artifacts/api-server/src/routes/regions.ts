@@ -653,6 +653,60 @@ const REGIONS: RegionConfig[] = [
     timezone: "America/Edmonton",
     sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
   },
+  {
+    id: "quebec-laurentians",
+    name: "Laurentians",
+    country: "Canada",
+    countryCode: "CA",
+    region: "Québec",
+    status: "live",
+    href: "/quebec-laurentians/",
+    baseTowns: ["Mont-Tremblant"],
+    mountains: ["Tremblant"],
+    // Headline reading from the pedestrian village (~261m) at the gondola
+    // base rather than the 875m Pic White summit above it.
+    headlineLabel: "Mont-Tremblant",
+    lat: 46.2127,
+    lon: -74.5844,
+    timezone: "America/Toronto",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "quebec-charlevoix",
+    name: "Charlevoix",
+    country: "Canada",
+    countryCode: "CA",
+    region: "Québec",
+    status: "live",
+    href: "/quebec-charlevoix/",
+    baseTowns: ["Beaupré", "Petite-Rivière-Saint-François"],
+    mountains: ["Mont-Sainte-Anne", "Le Massif de Charlevoix"],
+    // Headline reading from Beaupré (~24m) on the Côte-de-Beaupré flats ·
+    // the larger of the two base towns and 10 min from Mont-Sainte-Anne.
+    headlineLabel: "Beaupré",
+    lat: 47.0443,
+    lon: -70.8953,
+    timezone: "America/Toronto",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "quebec-eastern-townships",
+    name: "Eastern Townships",
+    country: "Canada",
+    countryCode: "CA",
+    region: "Québec",
+    status: "live",
+    href: "/quebec-eastern-townships/",
+    baseTowns: ["Bromont", "Sutton"],
+    mountains: ["Ski Bromont", "Mont Sutton"],
+    // Headline reading from Bromont (~126m) off Autoroute 10 · the nearer
+    // of the two towns to Montréal and about 5 min from the ski hill.
+    headlineLabel: "Bromont",
+    lat: 45.3168,
+    lon: -72.6491,
+    timezone: "America/Toronto",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
 ];
 
 const WEATHER_DESCRIPTIONS: Record<number, string> = {

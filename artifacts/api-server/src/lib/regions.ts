@@ -40,6 +40,9 @@ export const REGION_IDS = [
   "banff-lake-louise",
   "canmore",
   "jasper",
+  "quebec-laurentians",
+  "quebec-charlevoix",
+  "quebec-eastern-townships",
 ] as const;
 export type RegionId = (typeof REGION_IDS)[number];
 
@@ -359,6 +362,27 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "marmot-basin": "jasper",
   "jasper": "jasper",
   "jasper-roads": "jasper",
+
+  // Laurentians, QC · Tremblant + the pedestrian village at its base.
+  "tremblant": "quebec-laurentians",
+  "mont-tremblant": "quebec-laurentians",
+  "quebec-laurentians-roads": "quebec-laurentians",
+
+  // Charlevoix, QC · Mont-Sainte-Anne and Le Massif on the north shore
+  // of the St. Lawrence, one base town each.
+  "mont-sainte-anne": "quebec-charlevoix",
+  "le-massif": "quebec-charlevoix",
+  "beaupre": "quebec-charlevoix",
+  "petite-riviere-saint-francois": "quebec-charlevoix",
+  "quebec-charlevoix-roads": "quebec-charlevoix",
+
+  // Eastern Townships, QC · Ski Bromont and Mont Sutton (name-clash rule:
+  // the Bromont resort takes the -resort id against the town).
+  "bromont-resort": "quebec-eastern-townships",
+  "mont-sutton": "quebec-eastern-townships",
+  "bromont": "quebec-eastern-townships",
+  "sutton": "quebec-eastern-townships",
+  "quebec-eastern-townships-roads": "quebec-eastern-townships",
 };
 
 export function regionForLocation(locationId: string): RegionId | undefined {

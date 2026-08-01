@@ -211,7 +211,7 @@ add(
 add(
   "/ca",
   "Canada \u00b7 resort town weather \u00b7 feelzlike",
-  "Live weather and conditions for resort towns across Canada \u2014 Whistler and the Powder Highway (BC), Banff & Lake Louise, Canmore, and Jasper (Alberta).",
+  "Live weather and conditions for resort towns across Canada \u2014 Whistler and the Powder Highway (BC), Banff & Lake Louise, Canmore and Jasper (Alberta), and the Laurentians, Charlevoix and the Eastern Townships (Qu\u00e9bec).",
   `<main>
     <h1>Canada \u00b7 resort town weather</h1>
     ${BY_COUNTRY("CA").map((r) => `

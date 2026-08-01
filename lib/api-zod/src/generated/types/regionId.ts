@@ -45,4 +45,7 @@ export const RegionId = {
   "banff-lake-louise": "banff-lake-louise",
   canmore: "canmore",
   jasper: "jasper",
+  "quebec-laurentians": "quebec-laurentians",
+  "quebec-charlevoix": "quebec-charlevoix",
+  "quebec-eastern-townships": "quebec-eastern-townships",
 } as const;

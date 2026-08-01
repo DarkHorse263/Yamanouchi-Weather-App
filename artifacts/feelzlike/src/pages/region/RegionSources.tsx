@@ -84,6 +84,34 @@ const CA_ROADS_AB: SourceGroup = {
   ],
 };
 
+/**
+ * Québec variant of the reference block. Avalanche Canada does not forecast
+ * for Québec · Avalanche Québec covers the Chic-Chocs and the province's
+ * backcountry, so the QC regions swap that item rather than reuse the
+ * national one.
+ */
+const CA_QC_OFFICIAL_REFERENCES: SourceGroup = {
+  title: "Official references",
+  titleJa: "公式参照先",
+  blurb:
+    "Link-outs, not wired feeds · conditions shown on feelzlike come from the forecast ensemble below, so check these before you drive or tour.",
+  blurbJa:
+    "リンクのみで、データ連携はしていません。feelzlikeの数値は下記の予報モデルによるものです。走行・ツアー前に必ず公式情報をご確認ください。",
+  items: [
+    { label: "Environment and Climate Change Canada", detail: "national forecasts & warnings", url: "https://weather.gc.ca/" },
+    { label: "MSC GeoMet / api.weather.gc.ca", detail: "ECCC open data API", url: "https://api.weather.gc.ca/" },
+    { label: "Avalanche Québec", detail: "backcountry bulletins", url: "https://www.avalanchequebec.ca/bulletin-davalanche/" },
+  ],
+};
+
+const CA_ROADS_QC: SourceGroup = {
+  title: "Roads & transport",
+  titleJa: "道路・交通",
+  items: [
+    { label: "Québec 511", detail: "road conditions & cameras", url: "https://www.quebec511.info/" },
+  ],
+};
+
 const REGION_SOURCES: Record<string, SourceGroup[]> = {
   "snowy-mountains": [
     {
@@ -221,6 +249,45 @@ const REGION_SOURCES: Record<string, SourceGroup[]> = {
       items: [
         { label: "Marmot Basin", url: "https://www.skimarmot.com/" },
         { label: "Parks Canada · Jasper National Park", url: "https://www.pc.gc.ca/en/pn-np/ab/jasper" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "quebec-laurentians": [
+    CA_QC_OFFICIAL_REFERENCES,
+    CA_ROADS_QC,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Tremblant", url: "https://www.tremblant.ca/" },
+        { label: "Tremblant · mountain report", url: "https://www.tremblant.ca/mountain-village/mountain-report" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "quebec-charlevoix": [
+    CA_QC_OFFICIAL_REFERENCES,
+    CA_ROADS_QC,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Mont-Sainte-Anne", url: "https://mont-sainte-anne.com/" },
+        { label: "Le Massif de Charlevoix", url: "https://www.lemassif.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "quebec-eastern-townships": [
+    CA_QC_OFFICIAL_REFERENCES,
+    CA_ROADS_QC,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Ski Bromont", url: "https://www.bromontmontagne.com/" },
+        { label: "Mont Sutton", url: "https://montsutton.com/" },
       ],
     },
     FORECAST_ENSEMBLE,

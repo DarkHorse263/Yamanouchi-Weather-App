@@ -595,4 +595,48 @@
   <url><loc>https://feelzlike.com/jasper/jasper/roads/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://feelzlike.com/jasper/jasper/transport/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://feelzlike.com/jasper/jasper/explore/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-laurentians/</loc><lastmod>2026-08-01</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://feelzlike.com/quebec-laurentians/mountains/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/quebec-laurentians/stay/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/quebec-laurentians/mont-tremblant/</loc><lastmod>2026-08-01</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/quebec-laurentians/mont-tremblant/weather/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-laurentians/mont-tremblant/stay/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-laurentians/mont-tremblant/eat/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-laurentians/mont-tremblant/roads/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-laurentians/mont-tremblant/transport/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-laurentians/mont-tremblant/explore/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-charlevoix/</loc><lastmod>2026-08-01</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://feelzlike.com/quebec-charlevoix/mountains/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/quebec-charlevoix/stay/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/quebec-charlevoix/beaupre/</loc><lastmod>2026-08-01</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/quebec-charlevoix/beaupre/weather/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-charlevoix/beaupre/stay/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-charlevoix/beaupre/eat/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-charlevoix/beaupre/roads/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-charlevoix/beaupre/transport/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-charlevoix/beaupre/explore/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-charlevoix/petite-riviere-saint-francois/</loc><lastmod>2026-08-01</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/quebec-charlevoix/petite-riviere-saint-francois/weather/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-charlevoix/petite-riviere-saint-francois/stay/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-charlevoix/petite-riviere-saint-francois/eat/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-charlevoix/petite-riviere-saint-francois/roads/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-charlevoix/petite-riviere-saint-francois/transport/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-charlevoix/petite-riviere-saint-francois/explore/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-eastern-townships/</loc><lastmod>2026-08-01</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://feelzlike.com/quebec-eastern-townships/mountains/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/quebec-eastern-townships/stay/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/quebec-eastern-townships/bromont/</loc><lastmod>2026-08-01</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/quebec-eastern-townships/bromont/weather/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-eastern-townships/bromont/stay/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-eastern-townships/bromont/eat/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-eastern-townships/bromont/roads/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-eastern-townships/bromont/transport/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-eastern-townships/bromont/explore/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-eastern-townships/sutton/</loc><lastmod>2026-08-01</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/quebec-eastern-townships/sutton/weather/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-eastern-townships/sutton/stay/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-eastern-townships/sutton/eat/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-eastern-townships/sutton/roads/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-eastern-townships/sutton/transport/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/quebec-eastern-townships/sutton/explore/</loc><lastmod>2026-08-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
 </urlset>

@@ -337,10 +337,12 @@ const NEW_ZEALAND: Record<string, MountainWebcam[]> = {
 const CA_VERIFIED = "2026-08-01";
 
 /**
- * Canada (BC + Alberta). Same posture as NZ: none of these operators serve a
- * hotlink-clean still image, so every entry is an "external" card straight to
- * the operator's official cam page. Marmot Basin has no public cam page at
- * all (only a snow report), so Jasper has no entry rather than a guessed URL.
+ * Canada (BC, Alberta, Québec). Same posture as NZ: none of these operators
+ * serve a hotlink-clean still image, so every entry is an "external" card
+ * straight to the operator's official cam page. Marmot Basin has no public
+ * cam page at all (only a snow report), so Jasper has no entry rather than a
+ * guessed URL · Mont Sutton is the same, its cams are embedded in the
+ * conditions page with no standalone cam route.
  */
 const CANADA: Record<string, MountainWebcam[]> = {
   "whistler-mountain": [
@@ -496,6 +498,54 @@ const CANADA: Record<string, MountainWebcam[]> = {
       embedType: "external",
       pageUrl: "https://skinakiska.com/conditions/mountain-cam/",
       source: "Nakiska",
+      verifiedAt: CA_VERIFIED,
+    },
+  ],
+  tremblant: [
+    {
+      id: "tremblant-official",
+      mountainId: "tremblant",
+      name: "Tremblant webcams",
+      description: "Official cams from the pedestrian village up to the Pic White summit.",
+      embedType: "external",
+      pageUrl: "https://www.tremblant.ca/mountain-village/webcams",
+      source: "Tremblant",
+      verifiedAt: CA_VERIFIED,
+    },
+  ],
+  "mont-sainte-anne": [
+    {
+      id: "mont-sainte-anne-official",
+      mountainId: "mont-sainte-anne",
+      name: "Mont-Sainte-Anne webcams",
+      description: "Official cams across the south, north and west faces.",
+      embedType: "external",
+      pageUrl: "https://mont-sainte-anne.com/webcams-ski-alpin/",
+      source: "Mont-Sainte-Anne",
+      verifiedAt: CA_VERIFIED,
+    },
+  ],
+  "le-massif": [
+    {
+      id: "le-massif-official",
+      mountainId: "le-massif",
+      name: "Le Massif snow, weather & webcams",
+      description: "Official cams looking down the vertical toward the St. Lawrence.",
+      embedType: "external",
+      pageUrl: "https://www.lemassif.com/en/the-mountain/winter/snow-weather-webcams",
+      source: "Le Massif de Charlevoix",
+      verifiedAt: CA_VERIFIED,
+    },
+  ],
+  "bromont-resort": [
+    {
+      id: "bromont-resort-official",
+      mountainId: "bromont-resort",
+      name: "Ski Bromont webcams",
+      description: "Official cams across the seven sectors of Mont Brome.",
+      embedType: "external",
+      pageUrl: "https://www.bromontmontagne.com/en/webcams/",
+      source: "Ski Bromont",
       verifiedAt: CA_VERIFIED,
     },
   ],

@@ -28,7 +28,9 @@ export type SkiCountry = "AU" | "JP" | "NZ" | "CA";
  *                            separate so copy never implies an AU authority)
  *   JP · Dec – Apr         (month === 11 || month <= 3)
  *   CA · 15 Nov – 15 May   (Coast Mountains / Canadian Rockies; Sunshine and
- *                            Whistler push into late May)
+ *                            Whistler push into late May. Québec runs shorter,
+ *                            roughly late Nov to mid-Apr, so it sits inside
+ *                            the same window)
  *
  * @param country - resort country code (matches `CountryCode` from `@/regions`)
  * @param now - optional override for "current time" (tests pass a fixed Date).

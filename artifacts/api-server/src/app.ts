@@ -376,6 +376,21 @@ if (process.env.NODE_ENV === "production") {
       name: "Jasper",
       towns: { jasper: "Jasper" },
     },
+    "quebec-laurentians": {
+      name: "Laurentians",
+      towns: { "mont-tremblant": "Mont-Tremblant" },
+    },
+    "quebec-charlevoix": {
+      name: "Charlevoix",
+      towns: {
+        beaupre: "Beaupré",
+        "petite-riviere-saint-francois": "Petite-Rivière-Saint-François",
+      },
+    },
+    "quebec-eastern-townships": {
+      name: "Eastern Townships",
+      towns: { bromont: "Bromont", sutton: "Sutton" },
+    },
   };
 
   // Top-level routes handled by the SPA (before the /:region catch-all).

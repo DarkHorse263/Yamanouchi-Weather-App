@@ -86,6 +86,9 @@ const FALLBACK_REGIONS: Region[] = [
   { id: "banff-lake-louise",      name: "Banff & Lake Louise",            country: "Canada",      countryCode: "CA", region: "Alberta",          status: "live", href: "/banff-lake-louise/",    baseTowns: ["Banff", "Lake Louise"],                                      mountains: ["Banff Sunshine Village", "Mt. Norquay", "Lake Louise Ski Resort"], headlineLabel: "Banff",  headline: null },
   { id: "canmore",                name: "Canmore",                        country: "Canada",      countryCode: "CA", region: "Alberta",          status: "live", href: "/canmore/",              baseTowns: ["Canmore"],                                                   mountains: ["Nakiska"],                                                  headlineLabel: "Canmore",      headline: null },
   { id: "jasper",                 name: "Jasper",                         country: "Canada",      countryCode: "CA", region: "Alberta",          status: "live", href: "/jasper/",               baseTowns: ["Jasper"],                                                    mountains: ["Marmot Basin"],                                             headlineLabel: "Jasper",       headline: null },
+  { id: "quebec-laurentians",     name: "Laurentians",                    country: "Canada",      countryCode: "CA", region: "Québec",           status: "live", href: "/quebec-laurentians/",   baseTowns: ["Mont-Tremblant"],                                            mountains: ["Tremblant"],                                                headlineLabel: "Mont-Tremblant", headline: null },
+  { id: "quebec-charlevoix",      name: "Charlevoix",                     country: "Canada",      countryCode: "CA", region: "Québec",           status: "live", href: "/quebec-charlevoix/",    baseTowns: ["Beaupré", "Petite-Rivière-Saint-François"],                   mountains: ["Mont-Sainte-Anne", "Le Massif de Charlevoix"],              headlineLabel: "Beaupré",      headline: null },
+  { id: "quebec-eastern-townships", name: "Eastern Townships",            country: "Canada",      countryCode: "CA", region: "Québec",           status: "live", href: "/quebec-eastern-townships/", baseTowns: ["Bromont", "Sutton"],                                     mountains: ["Ski Bromont", "Mont Sutton"],                               headlineLabel: "Bromont",      headline: null },
 ];
 
 // Map a region to the base town we surface in the country card. This is
@@ -122,6 +125,9 @@ const PRIMARY_TOWN: Record<string, string> = {
   "banff-lake-louise":       "Banff",
   "canmore":                 "Canmore",
   "jasper":                  "Jasper",
+  "quebec-laurentians":      "Mont-Tremblant",
+  "quebec-charlevoix":       "Beaupré",
+  "quebec-eastern-townships": "Bromont",
 };
 
 // AU + NZ = southern hemisphere (snow Jun-Sep); JP + CA = northern (snow Dec-Mar).

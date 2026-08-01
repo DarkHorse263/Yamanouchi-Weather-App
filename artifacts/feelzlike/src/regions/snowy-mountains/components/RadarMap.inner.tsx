@@ -86,7 +86,10 @@ export type RegionKey =
   | "powder-highway"
   | "banff-lake-louise"
   | "canmore"
-  | "jasper";
+  | "jasper"
+  | "quebec-laurentians"
+  | "quebec-charlevoix"
+  | "quebec-eastern-townships";
 type ViewMode = "interactive" | "windy" | "official";
 
 interface RegionConfig {
@@ -452,6 +455,33 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       attribution: "Environment and Climate Change Canada · weather radar",
     },
   },
+  "quebec-laurentians": {
+    windy: { lat: 46.22, lon: -74.57, zoom: 10 },
+    official: {
+      label: "ECCC weather radar",
+      imageUrl: null,
+      href: "https://weather.gc.ca/index_e.html?layers=,radar",
+      attribution: "Environment and Climate Change Canada · weather radar",
+    },
+  },
+  "quebec-charlevoix": {
+    windy: { lat: 47.18, lon: -70.78, zoom: 9 },
+    official: {
+      label: "ECCC weather radar",
+      imageUrl: null,
+      href: "https://weather.gc.ca/index_e.html?layers=,radar",
+      attribution: "Environment and Climate Change Canada · weather radar",
+    },
+  },
+  "quebec-eastern-townships": {
+    windy: { lat: 45.20, lon: -72.60, zoom: 10 },
+    official: {
+      label: "ECCC weather radar",
+      imageUrl: null,
+      href: "https://weather.gc.ca/index_e.html?layers=,radar",
+      attribution: "Environment and Climate Change Canada · weather radar",
+    },
+  },
 };
 
 const DEFAULT_ZOOM = 9;
@@ -803,6 +833,31 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "jasper", name: "Jasper", lat: 52.8737, lng: -118.0814, accent: "#0ea5e9" },
     ],
   },
+  "quebec-laurentians": {
+    center: { lat: 46.22, lng: -74.57 },
+    pins: [
+      { id: "tremblant", name: "Tremblant", lat: 46.2200, lng: -74.5530, accent: "#f97316" },
+      { id: "mont-tremblant", name: "Mont-Tremblant", lat: 46.2127, lng: -74.5844, accent: "#0ea5e9" },
+    ],
+  },
+  "quebec-charlevoix": {
+    center: { lat: 47.18, lng: -70.78 },
+    pins: [
+      { id: "mont-sainte-anne", name: "Mont-Sainte-Anne", lat: 47.0876, lng: -70.9324, accent: "#f97316" },
+      { id: "le-massif", name: "Le Massif de Charlevoix", lat: 47.2757, lng: -70.6257, accent: "#f97316" },
+      { id: "beaupre", name: "Beaupré", lat: 47.0443, lng: -70.8953, accent: "#0ea5e9" },
+      { id: "petite-riviere-saint-francois", name: "Petite-Rivière-Saint-François", lat: 47.3100, lng: -70.5660, accent: "#0ea5e9" },
+    ],
+  },
+  "quebec-eastern-townships": {
+    center: { lat: 45.20, lng: -72.60 },
+    pins: [
+      { id: "bromont-resort", name: "Ski Bromont", lat: 45.2892, lng: -72.6378, accent: "#f97316" },
+      { id: "mont-sutton", name: "Mont Sutton", lat: 45.0850, lng: -72.5500, accent: "#f97316" },
+      { id: "bromont", name: "Bromont", lat: 45.3168, lng: -72.6491, accent: "#0ea5e9" },
+      { id: "sutton", name: "Sutton", lat: 45.1001, lng: -72.6158, accent: "#0ea5e9" },
+    ],
+  },
 };
 
 // Which country each region sits in. Drives the cross-region grouping on
@@ -844,6 +899,9 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "banff-lake-louise": "CA",
   canmore: "CA",
   jasper: "CA",
+  "quebec-laurentians": "CA",
+  "quebec-charlevoix": "CA",
+  "quebec-eastern-townships": "CA",
 };
 const COUNTRY_LABEL: Record<MapCountry, string> = { AU: "australia", JP: "japan", NZ: "new zealand", CA: "canada" };
 const REGION_LABEL: Record<RegionKey, string> = {
@@ -879,6 +937,9 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "banff-lake-louise": "banff & lake louise",
   canmore: "canmore",
   jasper: "jasper",
+  "quebec-laurentians": "laurentians",
+  "quebec-charlevoix": "charlevoix",
+  "quebec-eastern-townships": "eastern townships",
 };
 
 interface CountryPin extends PinSpec {

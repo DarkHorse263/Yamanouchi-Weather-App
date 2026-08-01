@@ -494,7 +494,7 @@ export const REGIONS = [
     ],
   },
 
-  // ── Canada (BC + Alberta) ───────────────────────────────────────────────
+  // ── Canada (BC, Alberta + Québec) ───────────────────────────────────────
   {
     slug: "whistler",
     name: "Whistler",
@@ -579,6 +579,52 @@ export const REGIONS = [
     ],
     towns: [
       { id: "jasper", name: "Jasper", blurb: "Rail-town park base on the Athabasca · ~20 min up the road to Marmot Basin" },
+    ],
+  },
+  {
+    slug: "quebec-laurentians",
+    name: "Laurentians",
+    subtitle: "Québec · Canada",
+    country: "CA",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Tremblant", blurb: "Eastern Canada's biggest ski area · four faces and the 6 km Nansen run to the village" },
+    ],
+    towns: [
+      { id: "mont-tremblant", name: "Mont-Tremblant", blurb: "Pedestrian village at the gondola base · ~1 hr 45 min north of Montréal" },
+    ],
+  },
+  {
+    slug: "quebec-charlevoix",
+    name: "Charlevoix",
+    subtitle: "Québec · Canada",
+    country: "CA",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Mont-Sainte-Anne",        blurb: "Three skiable faces 30 min from Québec City · Canada's biggest lit night-ski vertical" },
+      { name: "Le Massif de Charlevoix", blurb: "Highest vertical east of the Rockies · 770 m dropping toward the St. Lawrence" },
+    ],
+    towns: [
+      { id: "beaupre",                       name: "Beaupré",                       blurb: "Côte-de-Beaupré town on the river flats · ~10 min up to Mont-Sainte-Anne" },
+      { id: "petite-riviere-saint-francois", name: "Petite-Rivière-Saint-François", blurb: "Shoreline village beneath Le Massif · the base station sits at the water's edge" },
+    ],
+  },
+  {
+    slug: "quebec-eastern-townships",
+    name: "Eastern Townships",
+    subtitle: "Québec · Canada",
+    country: "CA",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Ski Bromont", blurb: "Seven sectors across Mont Brome · the largest lit night-ski terrain in North America" },
+      { name: "Mont Sutton", blurb: "Québec's glade mountain · an interconnected sous-bois network rather than cut trails" },
+    ],
+    towns: [
+      { id: "bromont", name: "Bromont", blurb: "Townships town off Autoroute 10 · ~5 min from the ski hill, 45 min from Montréal" },
+      { id: "sutton",  name: "Sutton",  blurb: "Village under the Sutton range near the Vermont line · ~10 min to the lifts" },
     ],
   },
 ];

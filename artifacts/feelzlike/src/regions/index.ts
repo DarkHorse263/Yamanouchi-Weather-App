@@ -31,6 +31,9 @@ import { powderHighwayRegion } from "./powder-highway";
 import { banffLakeLouiseRegion } from "./banff-lake-louise";
 import { canmoreRegion } from "./canmore";
 import { jasperRegion } from "./jasper";
+import { quebecLaurentiansRegion } from "./quebec-laurentians";
+import { quebecCharlevoixRegion } from "./quebec-charlevoix";
+import { quebecEasternTownshipsRegion } from "./quebec-eastern-townships";
 
 // Active region registry · AU: Snowy Mountains + Victoria's High Country
 // + Tasmania (Ben Lomond). JP: Yamanouchi (Shiga Kogen + Kita-Shiga),
@@ -45,7 +48,9 @@ import { jasperRegion } from "./jasper";
 // Treble Cone), Mt Hutt (Methven), Ruapehu (Whakapapa + Turoa, Ohakune).
 // CA (BC + Alberta): Whistler (Whistler Blackcomb), Powder Highway (the
 // seven-resort BC interior loop), Banff & Lake Louise (SkiBig3), Canmore
-// (Nakiska), Jasper (Marmot Basin). Quebec is deliberately deferred.
+// (Nakiska), Jasper (Marmot Basin). CA (Quebec): Laurentians
+// (Tremblant), Charlevoix (Mont-Sainte-Anne + Le Massif), Eastern
+// Townships (Ski Bromont + Mont Sutton).
 export const REGIONS: RegionConfig[] = [
   snowyMountainsRegion,
   victoriasHighCountryRegion,
@@ -79,6 +84,9 @@ export const REGIONS: RegionConfig[] = [
   banffLakeLouiseRegion,
   canmoreRegion,
   jasperRegion,
+  quebecLaurentiansRegion,
+  quebecCharlevoixRegion,
+  quebecEasternTownshipsRegion,
 ];
 
 export const REGION_BY_ID: Record<string, RegionConfig> = Object.fromEntries(
@@ -127,6 +135,9 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "banff-lake-louise": "CA",
   "canmore": "CA",
   "jasper": "CA",
+  "quebec-laurentians": "CA",
+  "quebec-charlevoix": "CA",
+  "quebec-eastern-townships": "CA",
 };
 export const COUNTRY_META: Record<CountryCode, { name: string; flag: string }> = {
   AU: { name: "Australia", flag: "🇦🇺" },
