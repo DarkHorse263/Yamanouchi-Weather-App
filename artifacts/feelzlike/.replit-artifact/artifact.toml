@@ -39,6 +39,10 @@ from = "/nz/"
 to = "/nz/index.html"
 
 [[services.production.rewrites]]
+from = "/ca/"
+to = "/ca/index.html"
+
+[[services.production.rewrites]]
 from = "/plan/"
 to = "/plan/index.html"
 
@@ -1059,6 +1063,186 @@ from = "/furano/kitanomine/explore/"
 to = "/furano/kitanomine/explore/index.html"
 
 [[services.production.rewrites]]
+from = "/sapporo/"
+to = "/sapporo/index.html"
+
+[[services.production.rewrites]]
+from = "/sapporo/mountains/"
+to = "/sapporo/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/sapporo/stay/"
+to = "/sapporo/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/sapporo/sapporo/"
+to = "/sapporo/sapporo/index.html"
+
+[[services.production.rewrites]]
+from = "/sapporo/sapporo/weather/"
+to = "/sapporo/sapporo/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/sapporo/sapporo/stay/"
+to = "/sapporo/sapporo/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/sapporo/sapporo/eat/"
+to = "/sapporo/sapporo/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/sapporo/sapporo/transport/"
+to = "/sapporo/sapporo/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/sapporo/sapporo/explore/"
+to = "/sapporo/sapporo/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/sapporo/jozankei/"
+to = "/sapporo/jozankei/index.html"
+
+[[services.production.rewrites]]
+from = "/sapporo/jozankei/weather/"
+to = "/sapporo/jozankei/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/sapporo/jozankei/stay/"
+to = "/sapporo/jozankei/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/sapporo/jozankei/eat/"
+to = "/sapporo/jozankei/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/sapporo/jozankei/transport/"
+to = "/sapporo/jozankei/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/sapporo/jozankei/explore/"
+to = "/sapporo/jozankei/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/tomamu-sahoro/"
+to = "/tomamu-sahoro/index.html"
+
+[[services.production.rewrites]]
+from = "/tomamu-sahoro/mountains/"
+to = "/tomamu-sahoro/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/tomamu-sahoro/stay/"
+to = "/tomamu-sahoro/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/tomamu-sahoro/tomamu-village/"
+to = "/tomamu-sahoro/tomamu-village/index.html"
+
+[[services.production.rewrites]]
+from = "/tomamu-sahoro/tomamu-village/weather/"
+to = "/tomamu-sahoro/tomamu-village/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/tomamu-sahoro/tomamu-village/stay/"
+to = "/tomamu-sahoro/tomamu-village/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/tomamu-sahoro/tomamu-village/eat/"
+to = "/tomamu-sahoro/tomamu-village/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/tomamu-sahoro/tomamu-village/transport/"
+to = "/tomamu-sahoro/tomamu-village/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/tomamu-sahoro/tomamu-village/explore/"
+to = "/tomamu-sahoro/tomamu-village/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/tomamu-sahoro/shimukappu/"
+to = "/tomamu-sahoro/shimukappu/index.html"
+
+[[services.production.rewrites]]
+from = "/tomamu-sahoro/shimukappu/weather/"
+to = "/tomamu-sahoro/shimukappu/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/tomamu-sahoro/shimukappu/stay/"
+to = "/tomamu-sahoro/shimukappu/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/tomamu-sahoro/shimukappu/eat/"
+to = "/tomamu-sahoro/shimukappu/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/tomamu-sahoro/shimukappu/transport/"
+to = "/tomamu-sahoro/shimukappu/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/tomamu-sahoro/shimukappu/explore/"
+to = "/tomamu-sahoro/shimukappu/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/asahikawa/"
+to = "/asahikawa/index.html"
+
+[[services.production.rewrites]]
+from = "/asahikawa/mountains/"
+to = "/asahikawa/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/asahikawa/stay/"
+to = "/asahikawa/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/asahikawa/asahikawa/"
+to = "/asahikawa/asahikawa/index.html"
+
+[[services.production.rewrites]]
+from = "/asahikawa/asahikawa/weather/"
+to = "/asahikawa/asahikawa/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/asahikawa/asahikawa/stay/"
+to = "/asahikawa/asahikawa/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/asahikawa/asahikawa/eat/"
+to = "/asahikawa/asahikawa/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/asahikawa/asahikawa/transport/"
+to = "/asahikawa/asahikawa/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/asahikawa/asahikawa/explore/"
+to = "/asahikawa/asahikawa/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/asahikawa/higashikawa/"
+to = "/asahikawa/higashikawa/index.html"
+
+[[services.production.rewrites]]
+from = "/asahikawa/higashikawa/weather/"
+to = "/asahikawa/higashikawa/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/asahikawa/higashikawa/stay/"
+to = "/asahikawa/higashikawa/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/asahikawa/higashikawa/eat/"
+to = "/asahikawa/higashikawa/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/asahikawa/higashikawa/transport/"
+to = "/asahikawa/higashikawa/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/asahikawa/higashikawa/explore/"
+to = "/asahikawa/higashikawa/explore/index.html"
+
+[[services.production.rewrites]]
 from = "/rusutsu-kiroro/"
 to = "/rusutsu-kiroro/index.html"
 
@@ -1117,6 +1301,138 @@ to = "/rusutsu-kiroro/kiroro/transport/index.html"
 [[services.production.rewrites]]
 from = "/rusutsu-kiroro/kiroro/explore/"
 to = "/rusutsu-kiroro/kiroro/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/minakami/"
+to = "/minakami/index.html"
+
+[[services.production.rewrites]]
+from = "/minakami/mountains/"
+to = "/minakami/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/minakami/stay/"
+to = "/minakami/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/minakami/minakami/"
+to = "/minakami/minakami/index.html"
+
+[[services.production.rewrites]]
+from = "/minakami/minakami/weather/"
+to = "/minakami/minakami/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/minakami/minakami/stay/"
+to = "/minakami/minakami/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/minakami/minakami/eat/"
+to = "/minakami/minakami/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/minakami/minakami/transport/"
+to = "/minakami/minakami/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/minakami/minakami/explore/"
+to = "/minakami/minakami/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/kusatsu-manza/"
+to = "/kusatsu-manza/index.html"
+
+[[services.production.rewrites]]
+from = "/kusatsu-manza/mountains/"
+to = "/kusatsu-manza/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/kusatsu-manza/stay/"
+to = "/kusatsu-manza/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/kusatsu-manza/kusatsu-onsen/"
+to = "/kusatsu-manza/kusatsu-onsen/index.html"
+
+[[services.production.rewrites]]
+from = "/kusatsu-manza/kusatsu-onsen/weather/"
+to = "/kusatsu-manza/kusatsu-onsen/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/kusatsu-manza/kusatsu-onsen/stay/"
+to = "/kusatsu-manza/kusatsu-onsen/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/kusatsu-manza/kusatsu-onsen/eat/"
+to = "/kusatsu-manza/kusatsu-onsen/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/kusatsu-manza/kusatsu-onsen/transport/"
+to = "/kusatsu-manza/kusatsu-onsen/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/kusatsu-manza/kusatsu-onsen/explore/"
+to = "/kusatsu-manza/kusatsu-onsen/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/kusatsu-manza/manza-onsen/"
+to = "/kusatsu-manza/manza-onsen/index.html"
+
+[[services.production.rewrites]]
+from = "/kusatsu-manza/manza-onsen/weather/"
+to = "/kusatsu-manza/manza-onsen/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/kusatsu-manza/manza-onsen/stay/"
+to = "/kusatsu-manza/manza-onsen/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/kusatsu-manza/manza-onsen/eat/"
+to = "/kusatsu-manza/manza-onsen/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/kusatsu-manza/manza-onsen/transport/"
+to = "/kusatsu-manza/manza-onsen/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/kusatsu-manza/manza-onsen/explore/"
+to = "/kusatsu-manza/manza-onsen/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/hachimantai/"
+to = "/hachimantai/index.html"
+
+[[services.production.rewrites]]
+from = "/hachimantai/mountains/"
+to = "/hachimantai/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/hachimantai/stay/"
+to = "/hachimantai/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/hachimantai/hachimantai/"
+to = "/hachimantai/hachimantai/index.html"
+
+[[services.production.rewrites]]
+from = "/hachimantai/hachimantai/weather/"
+to = "/hachimantai/hachimantai/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/hachimantai/hachimantai/stay/"
+to = "/hachimantai/hachimantai/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/hachimantai/hachimantai/eat/"
+to = "/hachimantai/hachimantai/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/hachimantai/hachimantai/transport/"
+to = "/hachimantai/hachimantai/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/hachimantai/hachimantai/explore/"
+to = "/hachimantai/hachimantai/explore/index.html"
 
 [[services.production.rewrites]]
 from = "/yuzawa/"
@@ -1323,6 +1639,210 @@ from = "/hakkoda-aomori-spring/ajigasawa/explore/"
 to = "/hakkoda-aomori-spring/ajigasawa/explore/index.html"
 
 [[services.production.rewrites]]
+from = "/appi-shizukuishi/"
+to = "/appi-shizukuishi/index.html"
+
+[[services.production.rewrites]]
+from = "/appi-shizukuishi/mountains/"
+to = "/appi-shizukuishi/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/appi-shizukuishi/stay/"
+to = "/appi-shizukuishi/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/appi-shizukuishi/appi-kogen/"
+to = "/appi-shizukuishi/appi-kogen/index.html"
+
+[[services.production.rewrites]]
+from = "/appi-shizukuishi/appi-kogen/weather/"
+to = "/appi-shizukuishi/appi-kogen/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/appi-shizukuishi/appi-kogen/stay/"
+to = "/appi-shizukuishi/appi-kogen/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/appi-shizukuishi/appi-kogen/eat/"
+to = "/appi-shizukuishi/appi-kogen/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/appi-shizukuishi/appi-kogen/transport/"
+to = "/appi-shizukuishi/appi-kogen/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/appi-shizukuishi/appi-kogen/explore/"
+to = "/appi-shizukuishi/appi-kogen/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/appi-shizukuishi/shizukuishi/"
+to = "/appi-shizukuishi/shizukuishi/index.html"
+
+[[services.production.rewrites]]
+from = "/appi-shizukuishi/shizukuishi/weather/"
+to = "/appi-shizukuishi/shizukuishi/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/appi-shizukuishi/shizukuishi/stay/"
+to = "/appi-shizukuishi/shizukuishi/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/appi-shizukuishi/shizukuishi/eat/"
+to = "/appi-shizukuishi/shizukuishi/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/appi-shizukuishi/shizukuishi/transport/"
+to = "/appi-shizukuishi/shizukuishi/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/appi-shizukuishi/shizukuishi/explore/"
+to = "/appi-shizukuishi/shizukuishi/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/appi-shizukuishi/morioka/"
+to = "/appi-shizukuishi/morioka/index.html"
+
+[[services.production.rewrites]]
+from = "/appi-shizukuishi/morioka/weather/"
+to = "/appi-shizukuishi/morioka/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/appi-shizukuishi/morioka/stay/"
+to = "/appi-shizukuishi/morioka/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/appi-shizukuishi/morioka/eat/"
+to = "/appi-shizukuishi/morioka/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/appi-shizukuishi/morioka/transport/"
+to = "/appi-shizukuishi/morioka/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/appi-shizukuishi/morioka/explore/"
+to = "/appi-shizukuishi/morioka/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/"
+to = "/bandai/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/mountains/"
+to = "/bandai/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/stay/"
+to = "/bandai/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/inawashiro/"
+to = "/bandai/inawashiro/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/inawashiro/weather/"
+to = "/bandai/inawashiro/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/inawashiro/stay/"
+to = "/bandai/inawashiro/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/inawashiro/eat/"
+to = "/bandai/inawashiro/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/inawashiro/transport/"
+to = "/bandai/inawashiro/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/inawashiro/explore/"
+to = "/bandai/inawashiro/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/urabandai/"
+to = "/bandai/urabandai/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/urabandai/weather/"
+to = "/bandai/urabandai/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/urabandai/stay/"
+to = "/bandai/urabandai/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/urabandai/eat/"
+to = "/bandai/urabandai/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/urabandai/transport/"
+to = "/bandai/urabandai/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/urabandai/explore/"
+to = "/bandai/urabandai/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/daisen/"
+to = "/daisen/index.html"
+
+[[services.production.rewrites]]
+from = "/daisen/mountains/"
+to = "/daisen/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/daisen/stay/"
+to = "/daisen/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/daisen/daisenji/"
+to = "/daisen/daisenji/index.html"
+
+[[services.production.rewrites]]
+from = "/daisen/daisenji/weather/"
+to = "/daisen/daisenji/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/daisen/daisenji/stay/"
+to = "/daisen/daisenji/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/daisen/daisenji/eat/"
+to = "/daisen/daisenji/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/daisen/daisenji/transport/"
+to = "/daisen/daisenji/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/daisen/daisenji/explore/"
+to = "/daisen/daisenji/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/daisen/yonago/"
+to = "/daisen/yonago/index.html"
+
+[[services.production.rewrites]]
+from = "/daisen/yonago/weather/"
+to = "/daisen/yonago/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/daisen/yonago/stay/"
+to = "/daisen/yonago/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/daisen/yonago/eat/"
+to = "/daisen/yonago/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/daisen/yonago/transport/"
+to = "/daisen/yonago/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/daisen/yonago/explore/"
+to = "/daisen/yonago/explore/index.html"
+
+[[services.production.rewrites]]
 from = "/queenstown/"
 to = "/queenstown/index.html"
 
@@ -1481,6 +2001,402 @@ to = "/ruapehu/ohakune/transport/index.html"
 [[services.production.rewrites]]
 from = "/ruapehu/ohakune/explore/"
 to = "/ruapehu/ohakune/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/whistler/"
+to = "/whistler/index.html"
+
+[[services.production.rewrites]]
+from = "/whistler/mountains/"
+to = "/whistler/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/whistler/stay/"
+to = "/whistler/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/whistler/whistler/"
+to = "/whistler/whistler/index.html"
+
+[[services.production.rewrites]]
+from = "/whistler/whistler/weather/"
+to = "/whistler/whistler/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/whistler/whistler/stay/"
+to = "/whistler/whistler/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/whistler/whistler/eat/"
+to = "/whistler/whistler/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/whistler/whistler/roads/"
+to = "/whistler/whistler/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/whistler/whistler/transport/"
+to = "/whistler/whistler/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/whistler/whistler/explore/"
+to = "/whistler/whistler/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/"
+to = "/powder-highway/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/mountains/"
+to = "/powder-highway/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/stay/"
+to = "/powder-highway/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/revelstoke/"
+to = "/powder-highway/revelstoke/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/revelstoke/weather/"
+to = "/powder-highway/revelstoke/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/revelstoke/stay/"
+to = "/powder-highway/revelstoke/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/revelstoke/eat/"
+to = "/powder-highway/revelstoke/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/revelstoke/roads/"
+to = "/powder-highway/revelstoke/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/revelstoke/transport/"
+to = "/powder-highway/revelstoke/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/revelstoke/explore/"
+to = "/powder-highway/revelstoke/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/golden/"
+to = "/powder-highway/golden/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/golden/weather/"
+to = "/powder-highway/golden/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/golden/stay/"
+to = "/powder-highway/golden/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/golden/eat/"
+to = "/powder-highway/golden/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/golden/roads/"
+to = "/powder-highway/golden/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/golden/transport/"
+to = "/powder-highway/golden/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/golden/explore/"
+to = "/powder-highway/golden/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/fernie/"
+to = "/powder-highway/fernie/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/fernie/weather/"
+to = "/powder-highway/fernie/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/fernie/stay/"
+to = "/powder-highway/fernie/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/fernie/eat/"
+to = "/powder-highway/fernie/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/fernie/roads/"
+to = "/powder-highway/fernie/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/fernie/transport/"
+to = "/powder-highway/fernie/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/fernie/explore/"
+to = "/powder-highway/fernie/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/nelson/"
+to = "/powder-highway/nelson/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/nelson/weather/"
+to = "/powder-highway/nelson/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/nelson/stay/"
+to = "/powder-highway/nelson/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/nelson/eat/"
+to = "/powder-highway/nelson/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/nelson/roads/"
+to = "/powder-highway/nelson/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/nelson/transport/"
+to = "/powder-highway/nelson/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/nelson/explore/"
+to = "/powder-highway/nelson/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/kimberley/"
+to = "/powder-highway/kimberley/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/kimberley/weather/"
+to = "/powder-highway/kimberley/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/kimberley/stay/"
+to = "/powder-highway/kimberley/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/kimberley/eat/"
+to = "/powder-highway/kimberley/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/kimberley/roads/"
+to = "/powder-highway/kimberley/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/kimberley/transport/"
+to = "/powder-highway/kimberley/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/kimberley/explore/"
+to = "/powder-highway/kimberley/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/invermere/"
+to = "/powder-highway/invermere/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/invermere/weather/"
+to = "/powder-highway/invermere/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/invermere/stay/"
+to = "/powder-highway/invermere/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/invermere/eat/"
+to = "/powder-highway/invermere/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/invermere/roads/"
+to = "/powder-highway/invermere/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/invermere/transport/"
+to = "/powder-highway/invermere/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/invermere/explore/"
+to = "/powder-highway/invermere/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/sun-peaks/"
+to = "/powder-highway/sun-peaks/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/sun-peaks/weather/"
+to = "/powder-highway/sun-peaks/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/sun-peaks/stay/"
+to = "/powder-highway/sun-peaks/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/sun-peaks/eat/"
+to = "/powder-highway/sun-peaks/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/sun-peaks/roads/"
+to = "/powder-highway/sun-peaks/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/sun-peaks/transport/"
+to = "/powder-highway/sun-peaks/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/sun-peaks/explore/"
+to = "/powder-highway/sun-peaks/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/banff-lake-louise/"
+to = "/banff-lake-louise/index.html"
+
+[[services.production.rewrites]]
+from = "/banff-lake-louise/mountains/"
+to = "/banff-lake-louise/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/banff-lake-louise/stay/"
+to = "/banff-lake-louise/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/banff-lake-louise/banff/"
+to = "/banff-lake-louise/banff/index.html"
+
+[[services.production.rewrites]]
+from = "/banff-lake-louise/banff/weather/"
+to = "/banff-lake-louise/banff/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/banff-lake-louise/banff/stay/"
+to = "/banff-lake-louise/banff/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/banff-lake-louise/banff/eat/"
+to = "/banff-lake-louise/banff/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/banff-lake-louise/banff/roads/"
+to = "/banff-lake-louise/banff/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/banff-lake-louise/banff/transport/"
+to = "/banff-lake-louise/banff/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/banff-lake-louise/banff/explore/"
+to = "/banff-lake-louise/banff/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/banff-lake-louise/lake-louise/"
+to = "/banff-lake-louise/lake-louise/index.html"
+
+[[services.production.rewrites]]
+from = "/banff-lake-louise/lake-louise/weather/"
+to = "/banff-lake-louise/lake-louise/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/banff-lake-louise/lake-louise/stay/"
+to = "/banff-lake-louise/lake-louise/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/banff-lake-louise/lake-louise/eat/"
+to = "/banff-lake-louise/lake-louise/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/banff-lake-louise/lake-louise/roads/"
+to = "/banff-lake-louise/lake-louise/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/banff-lake-louise/lake-louise/transport/"
+to = "/banff-lake-louise/lake-louise/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/banff-lake-louise/lake-louise/explore/"
+to = "/banff-lake-louise/lake-louise/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/canmore/"
+to = "/canmore/index.html"
+
+[[services.production.rewrites]]
+from = "/canmore/mountains/"
+to = "/canmore/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/canmore/stay/"
+to = "/canmore/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/canmore/canmore/"
+to = "/canmore/canmore/index.html"
+
+[[services.production.rewrites]]
+from = "/canmore/canmore/weather/"
+to = "/canmore/canmore/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/canmore/canmore/stay/"
+to = "/canmore/canmore/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/canmore/canmore/eat/"
+to = "/canmore/canmore/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/canmore/canmore/roads/"
+to = "/canmore/canmore/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/canmore/canmore/transport/"
+to = "/canmore/canmore/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/canmore/canmore/explore/"
+to = "/canmore/canmore/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/jasper/"
+to = "/jasper/index.html"
+
+[[services.production.rewrites]]
+from = "/jasper/mountains/"
+to = "/jasper/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/jasper/stay/"
+to = "/jasper/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/jasper/jasper/"
+to = "/jasper/jasper/index.html"
+
+[[services.production.rewrites]]
+from = "/jasper/jasper/weather/"
+to = "/jasper/jasper/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/jasper/jasper/stay/"
+to = "/jasper/jasper/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/jasper/jasper/eat/"
+to = "/jasper/jasper/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/jasper/jasper/roads/"
+to = "/jasper/jasper/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/jasper/jasper/transport/"
+to = "/jasper/jasper/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/jasper/jasper/explore/"
+to = "/jasper/jasper/explore/index.html"
 
 [[services.production.rewrites]]
 from = "/*"

@@ -493,6 +493,94 @@ export const REGIONS = [
       { id: "ohakune", name: "Ohakune", blurb: "Lively Turoa-side base town · ~17 km up the Ohakune Mountain Road to the lifts" },
     ],
   },
+
+  // ── Canada (BC + Alberta) ───────────────────────────────────────────────
+  {
+    slug: "whistler",
+    name: "Whistler",
+    subtitle: "British Columbia · Canada",
+    country: "CA",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Whistler Mountain",  blurb: "The original 1966 mountain · alpine bowls above a long peak-to-creek descent" },
+      { name: "Blackcomb Mountain", blurb: "The higher twin · glacier terrain, 7th Heaven and the Blackcomb Glacier run" },
+    ],
+    towns: [
+      { id: "whistler", name: "Whistler", blurb: "Ski-in village between the two mountains · ~2 hrs from Vancouver on Hwy 99" },
+    ],
+  },
+  {
+    slug: "powder-highway",
+    name: "Powder Highway",
+    subtitle: "BC Interior · Canada",
+    country: "CA",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Revelstoke Mountain Resort", blurb: "North America's longest lift-served vertical · 1,713 m top to bottom on Mt Mackenzie" },
+      { name: "Kicking Horse",              blurb: "Champagne powder capital · four alpine bowls and 85 inbounds chutes above Golden" },
+      { name: "Fernie Alpine Resort",       blurb: "Five alpine bowls in the Lizard Range · one of the biggest snow tallies in the Rockies" },
+      { name: "Whitewater",                 blurb: "Independent Kootenay hill · minimal grooming, huge natural snowfall, touring gates" },
+      { name: "Kimberley Alpine Resort",    blurb: "Sunny, uncrowded cruisers on North Star Mountain · long lit night runs" },
+      { name: "Panorama",                   blurb: "1,300 m of Purcell vertical · Taynton Bowl steeps above long groomed descents" },
+      { name: "Sun Peaks Resort",           blurb: "Canada's second-largest ski area · Tod, Sundance and Morrisey linked by lift" },
+    ],
+    towns: [
+      { id: "revelstoke", name: "Revelstoke", blurb: "Railway town on the Columbia · ~10 min to the gondola base" },
+      { id: "golden",     name: "Golden",     blurb: "Trans-Canada town in the Columbia Valley · ~20 min up to Kicking Horse" },
+      { id: "fernie",     name: "Fernie",     blurb: "Brick-built Elk Valley town under the Three Sisters · ~5 km to the lifts" },
+      { id: "nelson",     name: "Nelson",     blurb: "Heritage arts town on Kootenay Lake · ~20 min up to Whitewater" },
+      { id: "kimberley",  name: "Kimberley",  blurb: "Bavarian-themed Rockies town · ~5 min from the Kimberley Alpine base" },
+      { id: "invermere",  name: "Invermere",  blurb: "Columbia Valley lake town · ~20 min up Toby Creek Road to Panorama" },
+      { id: "sun-peaks",  name: "Sun Peaks",  blurb: "Ski-through village 45 min above Kamloops · lifts leave from the main street" },
+    ],
+  },
+  {
+    slug: "banff-lake-louise",
+    name: "Banff & Lake Louise",
+    subtitle: "Alberta · Canada",
+    country: "CA",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Banff Sunshine Village",  blurb: "High on the Continental Divide · all-natural snow and a season into late May" },
+      { name: "Mt. Norquay",             blurb: "The steep local hill 10 min above town · night skiing and the North American chair" },
+      { name: "Lake Louise Ski Resort",  blurb: "Four mountain faces above the Bow Valley · big back bowls, Victoria Glacier views" },
+    ],
+    towns: [
+      { id: "banff",       name: "Banff",       blurb: "Park townsite on the Bow River · shuttle base for all three SkiBig3 mountains" },
+      { id: "lake-louise", name: "Lake Louise", blurb: "Small hamlet by the lake · 5 min across the highway from the ski resort base" },
+    ],
+  },
+  {
+    slug: "canmore",
+    name: "Canmore",
+    subtitle: "Alberta · Canada",
+    country: "CA",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Nakiska", blurb: "1988 Olympic downhill venue on Mount Allan · fast, reliably groomed Kananaskis pitches" },
+    ],
+    towns: [
+      { id: "canmore", name: "Canmore", blurb: "Bow Valley town outside the park gates · ~45 min down Hwy 40 to Nakiska" },
+    ],
+  },
+  {
+    slug: "jasper",
+    name: "Jasper",
+    subtitle: "Alberta · Canada",
+    country: "CA",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Marmot Basin", blurb: "Highest base elevation of any major Canadian ski area · quiet, cold, dry snow" },
+    ],
+    towns: [
+      { id: "jasper", name: "Jasper", blurb: "Rail-town park base on the Athabasca · ~20 min up the road to Marmot Basin" },
+    ],
+  },
 ];
 
 /** Region sub-sections that actually render for this region (see gating notes above). */

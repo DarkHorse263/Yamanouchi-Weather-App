@@ -120,14 +120,15 @@ function add(path, title, description, body) {
 add(
   "/",
   "feelzlike · weather for resort towns",
-  "Live weather, road conditions, and lift status for resort towns across Australia, Japan, and New Zealand. Towns first, mountains second.",
+  "Live weather, road conditions, and lift status for resort towns across Australia, Japan, New Zealand, and Canada. Towns first, mountains second.",
   `<main>
     <h1>feelzlike · weather for resort towns</h1>
-    <p>Live weather, road conditions, and lift status for resort towns across Australia, Japan, and New Zealand. Towns first, mountains second.</p>
+    <p>Live weather, road conditions, and lift status for resort towns across Australia, Japan, New Zealand, and Canada. Towns first, mountains second.</p>
     <nav aria-label="Browse by country">
       <a href="/au">Australia</a> ·
       <a href="/jp">Japan</a> ·
       <a href="/nz">New Zealand</a> ·
+      <a href="/ca">Canada</a> ·
       <a href="/near-you">Near you</a>
     </nav>
     <section>
@@ -147,13 +148,14 @@ const countryLine = (code, label) =>
 add(
   "/countries",
   "browse resort regions by country · feelzlike",
-  "Choose a country to explore resort town weather and conditions — Australia, Japan, and New Zealand.",
+  "Choose a country to explore resort town weather and conditions — Australia, Japan, New Zealand, and Canada.",
   `<main>
     <h1>browse resort regions by country</h1>
     <ul>
       ${countryLine("AU", "Australia")}
       ${countryLine("JP", "Japan")}
       ${countryLine("NZ", "New Zealand")}
+      ${countryLine("CA", "Canada")}
     </ul>
   </main>`,
 );
@@ -207,12 +209,28 @@ add(
 );
 
 add(
+  "/ca",
+  "Canada \u00b7 resort town weather \u00b7 feelzlike",
+  "Live weather and conditions for resort towns across Canada \u2014 Whistler and the Powder Highway (BC), Banff & Lake Louise, Canmore, and Jasper (Alberta).",
+  `<main>
+    <h1>Canada \u00b7 resort town weather</h1>
+    ${BY_COUNTRY("CA").map((r) => `
+    <section>
+      <h2><a href="/${r.slug}">${esc(r.name)}</a> \u00b7 ${esc(r.subtitle)}</h2>
+      <ul>
+        ${regionTownList(r)}
+      </ul>
+    </section>`).join("\n")}
+  </main>`,
+);
+
+add(
   "/near-you",
   "weather near you · local resort conditions · feelzlike",
   "See live weather and a radar for your current location, plus nearby resort regions.",
   `<main>
     <h1>weather near you</h1>
-    <p>Live weather for your current location, plus nearby resort regions across Australia, Japan, and New Zealand.</p>
+    <p>Live weather for your current location, plus nearby resort regions across Australia, Japan, New Zealand, and Canada.</p>
     <p>Enable location access to see conditions where you are.</p>
   </main>`,
 );
@@ -236,10 +254,10 @@ add(
 add(
   "/premium",
   "feelzlike premium · snow alerts for your towns · feelzlike",
-  "feelzlike premium — email snow and powder alerts for your favourite resort towns across Australia, Japan, and New Zealand.",
+  "feelzlike premium — email snow and powder alerts for your favourite resort towns across Australia, Japan, New Zealand, and Canada.",
   `<main>
     <h1>feelzlike premium</h1>
-    <p>Email snow and powder alerts for your favourite resort towns across Australia, Japan, and New Zealand.</p>
+    <p>Email snow and powder alerts for your favourite resort towns across Australia, Japan, New Zealand, and Canada.</p>
   </main>`,
 );
 

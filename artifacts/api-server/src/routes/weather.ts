@@ -25,10 +25,10 @@ interface LocationConfig {
   bomSecondaryStation?: string;
   /** BOM observation product id for the station's state: NSW=IDN60801 (default), VIC=IDV60801, TAS=IDT60801. */
   bomProduct?: string;
-  /** Open-Meteo timezone, defaults to "Australia/Sydney". JP locations use "Asia/Tokyo", NZ uses "Pacific/Auckland". */
+  /** Open-Meteo timezone, defaults to "Australia/Sydney". JP locations use "Asia/Tokyo", NZ uses "Pacific/Auckland", CA uses America/Vancouver (BC) or America/Edmonton (AB). */
   timezone?: string;
-  /** ISO region code; AU=Australia, JP=Japan, NZ=New Zealand. Used for ensemble model selection + forecast horizon. */
-  region?: "AU" | "JP" | "NZ";
+  /** ISO region code; AU=Australia, JP=Japan, NZ=New Zealand, CA=Canada. Used for ensemble model selection + forecast horizon. */
+  region?: "AU" | "JP" | "NZ" | "CA";
 }
 
 const LOCATIONS: LocationConfig[] = [
@@ -342,6 +342,44 @@ const LOCATIONS: LocationConfig[] = [
   { id: "whakapapa",                 name: "Whakapapa",                 latitude: -39.2547, longitude: 175.5619, elevation: 2020, description: "The big one on Mt Ruapehu's northwest face · varied terrain up to Knoll Ridge.",                              bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Pacific/Auckland", region: "NZ" },
   { id: "turoa",                     name: "Turoa",                     latitude: -39.3072, longitude: 175.5286, elevation: 2300, description: "Ruapehu's southwest face above Ohakune · highest lifted terrain in New Zealand.",                           bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Pacific/Auckland", region: "NZ" },
   { id: "ohakune",                   name: "Ohakune",                   latitude: -39.4181, longitude: 175.3956, elevation:  610, description: "Lively Turoa-side base town · the Ohakune Mountain Road climbs ~17 km to the lifts.",                        bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "Pacific/Auckland", region: "NZ" },
+
+  // ─── Whistler (British Columbia, Canada) ─────────────────
+  // Same posture as NZ: Open-Meteo primary + OpenWeatherMap fallback, no
+  // national obs feed reconciled, so every bom* field stays blank.
+  { id: "whistler-mountain",         name: "Whistler Mountain",         latitude:  50.0594, longitude: -122.9575, elevation: 2182, description: "Peak-to-creek on the Coast Mountains' western flank · alpine bowls above a long treeline pitch.",           bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Vancouver", region: "CA" },
+  { id: "blackcomb-mountain",        name: "Blackcomb Mountain",        latitude:  50.0900, longitude: -122.8620, elevation: 2284, description: "Whistler's higher twin · glacier terrain, 7th Heaven and the Blackcomb Glacier descent.",                    bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Vancouver", region: "CA" },
+  { id: "whistler",                  name: "Whistler",                  latitude:  50.1163, longitude: -122.9574, elevation:  675, description: "Ski-in village between the two mountains · about 2 hrs from Vancouver on the Sea-to-Sky Highway.",           bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Vancouver", region: "CA" },
+
+  // ─── Powder Highway (BC Interior, Canada) ────────────────
+  { id: "revelstoke-mountain-resort", name: "Revelstoke Mountain Resort", latitude: 50.9581, longitude: -118.1633, elevation: 2225, description: "North America's longest lift-served vertical on Mt Mackenzie · deep interior snow above the Columbia.",      bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Vancouver", region: "CA" },
+  { id: "kicking-horse",             name: "Kicking Horse",             latitude:  51.2977, longitude: -117.0464, elevation: 2450, description: "Champagne-powder chutes and four alpine bowls above Golden · steep, high and dry.",                       bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Vancouver", region: "CA" },
+  { id: "fernie-alpine",             name: "Fernie Alpine Resort",      latitude:  49.4628, longitude: -115.0872, elevation: 2134, description: "Five alpine bowls in the Lizard Range · one of the biggest snowfall totals in the Canadian Rockies.",      bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Vancouver", region: "CA" },
+  { id: "whitewater",                name: "Whitewater",                latitude:  49.3830, longitude: -117.1470, elevation: 2044, description: "Independent Kootenay hill above Nelson · minimal grooming, big natural snowfall, ski-touring gates.",     bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Vancouver", region: "CA" },
+  { id: "kimberley-alpine",          name: "Kimberley Alpine Resort",   latitude:  49.6811, longitude: -116.0053, elevation: 1980, description: "Sunny, uncrowded cruisers on North Star Mountain · one of Canada's longest lit night runs.",             bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Vancouver", region: "CA" },
+  { id: "panorama",                  name: "Panorama",                  latitude:  50.4600, longitude: -116.2400, elevation: 2380, description: "Big Purcell vertical above the Columbia Valley · Taynton Bowl steeps and long groomed descents.",       bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Vancouver", region: "CA" },
+  { id: "sun-peaks-resort",          name: "Sun Peaks Resort",          latitude:  50.8833, longitude: -119.8833, elevation: 2080, description: "Canada's second-largest ski area by terrain · three linked mountains and a ski-through village.",         bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Vancouver", region: "CA" },
+  { id: "revelstoke",                name: "Revelstoke",                latitude:  50.9981, longitude: -118.1957, elevation:  450, description: "Railway town on the Columbia River · the lift base is about 10 min from the heritage downtown.",         bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Vancouver", region: "CA" },
+  { id: "golden",                    name: "Golden",                    latitude:  51.2960, longitude: -116.9631, elevation:  785, description: "Trans-Canada town where the Kicking Horse meets the Columbia · about 20 min below the resort.",           bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Vancouver", region: "CA" },
+  { id: "fernie",                    name: "Fernie",                    latitude:  49.5040, longitude: -115.0631, elevation: 1005, description: "Brick-built Elk Valley town under the Three Sisters · about 5 km from the Fernie Alpine base.",          bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Vancouver", region: "CA" },
+  { id: "nelson",                    name: "Nelson",                    latitude:  49.4928, longitude: -117.2948, elevation:  535, description: "Heritage arts town on Kootenay Lake · about 20 min up the Whitewater access road.",                     bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Vancouver", region: "CA" },
+  { id: "kimberley",                 name: "Kimberley",                 latitude:  49.6697, longitude: -115.9781, elevation: 1113, description: "Bavarian-themed Rockies town · ski-in Marysville side, 5 min from the Kimberley Alpine base.",           bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Vancouver", region: "CA" },
+  { id: "invermere",                 name: "Invermere",                 latitude:  50.5064, longitude: -116.0311, elevation:  810, description: "Columbia Valley lake town · about 20 min up the winding road to Panorama.",                              bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Vancouver", region: "CA" },
+  { id: "sun-peaks",                 name: "Sun Peaks",                 latitude:  50.8836, longitude: -119.8869, elevation: 1255, description: "Purpose-built ski-through village 45 min above Kamloops · lifts start from the main street.",            bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Vancouver", region: "CA" },
+
+  // ─── Banff & Lake Louise (Alberta, Canada) ───────────────
+  { id: "banff-sunshine",            name: "Banff Sunshine Village",    latitude:  51.0781, longitude: -115.7772, elevation: 2730, description: "High on the Continental Divide · all-natural snow and a long season into late May.",                     bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Edmonton", region: "CA" },
+  { id: "mt-norquay",                name: "Mt. Norquay",               latitude:  51.1990, longitude: -115.5980, elevation: 2133, description: "The steep local hill 10 min above the Town of Banff · night skiing and the North American chair.",       bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Edmonton", region: "CA" },
+  { id: "lake-louise-resort",        name: "Lake Louise Ski Resort",    latitude:  51.4419, longitude: -116.1622, elevation: 2637, description: "Four mountain faces above the Bow Valley · big back bowls with Victoria Glacier views.",                 bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Edmonton", region: "CA" },
+  { id: "banff",                     name: "Banff",                     latitude:  51.1784, longitude: -115.5708, elevation: 1383, description: "Park townsite on the Bow River · the SkiBig3 shuttle base for Sunshine, Norquay and Lake Louise.",       bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Edmonton", region: "CA" },
+  { id: "lake-louise",               name: "Lake Louise",               latitude:  51.4254, longitude: -116.1773, elevation: 1540, description: "Small hamlet by the lake · 5 min across the highway from the Lake Louise ski resort base.",              bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Edmonton", region: "CA" },
+
+  // ─── Canmore (Alberta, Canada) ───────────────────────────
+  { id: "nakiska",                   name: "Nakiska",                   latitude:  50.9422, longitude: -115.1519, elevation: 2260, description: "1988 Olympic downhill venue on Mount Allan in Kananaskis · fast, reliably groomed pitches.",           bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Edmonton", region: "CA" },
+  { id: "canmore",                   name: "Canmore",                   latitude:  51.0884, longitude: -115.3479, elevation: 1309, description: "Bow Valley town outside the park gates · about 45 min down Highway 40 to Nakiska.",                    bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Edmonton", region: "CA" },
+
+  // ─── Jasper (Alberta, Canada) ────────────────────────────
+  { id: "marmot-basin",              name: "Marmot Basin",              latitude:  52.8000, longitude: -118.0833, elevation: 2612, description: "Highest base elevation of any major Canadian ski area · quiet, cold, dry snow in Jasper National Park.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Edmonton", region: "CA" },
+  { id: "jasper",                    name: "Jasper",                    latitude:  52.8737, longitude: -118.0814, elevation: 1062, description: "Rail-town park base on the Athabasca · about 20 min up the road to the Marmot Basin lifts.",             bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Edmonton", region: "CA" },
 ];
 
 const WEATHER_DESCRIPTIONS: Record<number, string> = {
@@ -1130,9 +1168,14 @@ router.get("/forecast/:locationId", async (req, res) => {
       latitude: location.latitude,
       longitude: location.longitude,
       elevation: forecastElevation,
-      // NZ has no dedicated national model in the ensemble · fall back to the
-      // global blend ("OTHER"). JP keeps JMA, everything else is AU.
-      region: location.region === "JP" ? "JP" : location.region === "NZ" ? "OTHER" : "AU",
+      // NZ and CA have no dedicated national model in the ensemble · fall back
+      // to the global blend ("OTHER"). JP keeps JMA, everything else is AU.
+      region:
+        location.region === "JP"
+          ? "JP"
+          : location.region === "NZ" || location.region === "CA"
+            ? "OTHER"
+            : "AU",
       timezone: location.timezone ?? "Australia/Sydney",
       days: 7,
     });

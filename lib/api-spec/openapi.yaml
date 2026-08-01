@@ -1693,6 +1693,11 @@ components:
         - wanaka
         - mt-hutt
         - ruapehu
+        - whistler
+        - powder-highway
+        - banff-lake-louise
+        - canmore
+        - jasper
       description: |
         Canonical region identifier used across the FeelZlike platform.
 

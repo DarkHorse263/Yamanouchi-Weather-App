@@ -2,7 +2,8 @@
 // skiSeason.ts - deterministic "could lifts plausibly be running?" season gate.
 //
 // This is the FRONTEND mirror of the road-chain season windows the api-server
-// uses in routes/roads.ts (isAuSnowSeason / isJpSnowSeason / isNzSnowSeason).
+// uses in routes/roads.ts (isAuSnowSeason / isJpSnowSeason / isNzSnowSeason /
+// isCaSnowSeason).
 // Keeping the windows identical means the lift panel and the road-chain panel
 // agree on when a resort is in season.
 //
@@ -17,7 +18,7 @@
 // straight in.
 // ─────────────────────────────────────────────────────────────────────────────
 
-export type SkiCountry = "AU" | "JP" | "NZ";
+export type SkiCountry = "AU" | "JP" | "NZ" | "CA";
 
 /**
  * Whether the country's ski-lift season is open on `now`.
@@ -26,6 +27,8 @@ export type SkiCountry = "AU" | "JP" | "NZ";
  *   NZ · 10 Jun – 10 Oct   (southern-hemisphere winter; same window, kept
  *                            separate so copy never implies an AU authority)
  *   JP · Dec – Apr         (month === 11 || month <= 3)
+ *   CA · 15 Nov – 15 May   (Coast Mountains / Canadian Rockies; Sunshine and
+ *                            Whistler push into late May)
  *
  * @param country - resort country code (matches `CountryCode` from `@/regions`)
  * @param now - optional override for "current time" (tests pass a fixed Date).
@@ -43,6 +46,12 @@ export function isLiftSeasonOpen(country: SkiCountry, now: Date = new Date()): b
       return false;
     case "JP":
       return m === 11 || m <= 3; // Dec – Apr
+    case "CA":
+      // 15 Nov – 15 May inclusive
+      if (m === 10) return d >= 15; // November
+      if (m === 11 || m <= 3) return true; // Dec – Apr
+      if (m === 4) return d <= 15; // May
+      return false;
   }
 }
 

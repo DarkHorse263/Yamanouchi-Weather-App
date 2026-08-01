@@ -33,7 +33,7 @@ interface Region {
   id: string;
   name: string;
   country: string;
-  countryCode: "AU" | "JP" | "NZ";
+  countryCode: "AU" | "JP" | "NZ" | "CA";
   region: string;
   status: RegionStatus;
   href: string;
@@ -81,6 +81,11 @@ const FALLBACK_REGIONS: Region[] = [
   { id: "wanaka",                 name: "Wanaka",                         country: "New Zealand", countryCode: "NZ", region: "Otago",          status: "live", href: "/wanaka/",                baseTowns: ["Wanaka"],                                                    mountains: ["Cardrona", "Treble Cone"],                                  headlineLabel: "Wanaka",       headline: null },
   { id: "mt-hutt",                name: "Mt Hutt",                        country: "New Zealand", countryCode: "NZ", region: "Canterbury",     status: "live", href: "/mt-hutt/",               baseTowns: ["Methven"],                                                   mountains: ["Mt Hutt"],                                                  headlineLabel: "Methven",      headline: null },
   { id: "ruapehu",                name: "Ruapehu",                        country: "New Zealand", countryCode: "NZ", region: "Central Plateau", status: "live", href: "/ruapehu/",               baseTowns: ["Ohakune"],                                                   mountains: ["Whakapapa", "Turoa"],                                       headlineLabel: "Ohakune",      headline: null },
+  { id: "whistler",               name: "Whistler",                       country: "Canada",      countryCode: "CA", region: "British Columbia", status: "live", href: "/whistler/",             baseTowns: ["Whistler"],                                                  mountains: ["Whistler Mountain", "Blackcomb Mountain"],                  headlineLabel: "Whistler",     headline: null },
+  { id: "powder-highway",         name: "Powder Highway",                 country: "Canada",      countryCode: "CA", region: "BC Interior",      status: "live", href: "/powder-highway/",       baseTowns: ["Revelstoke", "Golden", "Fernie", "Nelson", "Kimberley", "Invermere", "Sun Peaks"], mountains: ["Revelstoke Mountain Resort", "Kicking Horse", "Fernie Alpine Resort", "Whitewater", "Kimberley Alpine Resort", "Panorama", "Sun Peaks Resort"], headlineLabel: "Revelstoke", headline: null },
+  { id: "banff-lake-louise",      name: "Banff & Lake Louise",            country: "Canada",      countryCode: "CA", region: "Alberta",          status: "live", href: "/banff-lake-louise/",    baseTowns: ["Banff", "Lake Louise"],                                      mountains: ["Banff Sunshine Village", "Mt. Norquay", "Lake Louise Ski Resort"], headlineLabel: "Banff",  headline: null },
+  { id: "canmore",                name: "Canmore",                        country: "Canada",      countryCode: "CA", region: "Alberta",          status: "live", href: "/canmore/",              baseTowns: ["Canmore"],                                                   mountains: ["Nakiska"],                                                  headlineLabel: "Canmore",      headline: null },
+  { id: "jasper",                 name: "Jasper",                         country: "Canada",      countryCode: "CA", region: "Alberta",          status: "live", href: "/jasper/",               baseTowns: ["Jasper"],                                                    mountains: ["Marmot Basin"],                                             headlineLabel: "Jasper",       headline: null },
 ];
 
 // Map a region to the base town we surface in the country card. This is
@@ -112,10 +117,15 @@ const PRIMARY_TOWN: Record<string, string> = {
   "wanaka":                  "Wanaka",
   "mt-hutt":                 "Methven",
   "ruapehu":                 "Ohakune",
+  "whistler":                "Whistler",
+  "powder-highway":          "Revelstoke",
+  "banff-lake-louise":       "Banff",
+  "canmore":                 "Canmore",
+  "jasper":                  "Jasper",
 };
 
-// AU + NZ = southern hemisphere (snow Jun-Sep), JP = northern (snow Dec-Mar).
-function seasonForCountry(code: "AU" | "JP" | "NZ"): "winter" | "green" {
+// AU + NZ = southern hemisphere (snow Jun-Sep); JP + CA = northern (snow Dec-Mar).
+function seasonForCountry(code: "AU" | "JP" | "NZ" | "CA"): "winter" | "green" {
   const month = new Date().getMonth() + 1;
   if (code === "AU" || code === "NZ") return month >= 6 && month <= 9 ? "winter" : "green";
   return month >= 12 || month <= 3 ? "winter" : "green";
@@ -155,13 +165,14 @@ export function CountryPicker() {
   const regions = data?.regions ?? FALLBACK_REGIONS;
   const liveCount = regions.filter((r) => r.status === "live").length;
 
-  type Country = { code: "AU" | "JP" | "NZ"; name: string; flag: string; regions: Region[] };
+  type Country = { code: "AU" | "JP" | "NZ" | "CA"; name: string; flag: string; regions: Region[] };
   const COUNTRIES: Country[] = ([
     // Season-first ordering: Australia + New Zealand (jun-oct season) before
-    // Japan (dec-mar).
+    // Japan and Canada (dec-mar).
     { code: "AU" as const, name: "Australia",   flag: "\u{1F1E6}\u{1F1FA}", regions: regions.filter((r) => r.countryCode === "AU") },
     { code: "NZ" as const, name: "New Zealand", flag: "\u{1F1F3}\u{1F1FF}", regions: regions.filter((r) => r.countryCode === "NZ") },
     { code: "JP" as const, name: "Japan",       flag: "\u{1F1EF}\u{1F1F5}", regions: regions.filter((r) => r.countryCode === "JP") },
+    { code: "CA" as const, name: "Canada",      flag: "\u{1F1E8}\u{1F1E6}", regions: regions.filter((r) => r.countryCode === "CA") },
   ] satisfies Country[]).filter((c) => c.regions.length > 0);
 
   return (

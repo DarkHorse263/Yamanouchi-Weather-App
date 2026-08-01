@@ -81,7 +81,12 @@ export type RegionKey =
   | "queenstown"
   | "wanaka"
   | "mt-hutt"
-  | "ruapehu";
+  | "ruapehu"
+  | "whistler"
+  | "powder-highway"
+  | "banff-lake-louise"
+  | "canmore"
+  | "jasper";
 type ViewMode = "interactive" | "windy" | "official";
 
 interface RegionConfig {
@@ -397,6 +402,56 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       attribution: "MetService · New Plymouth rain radar",
     },
   },
+  // CA · Environment and Climate Change Canada publishes radar only through
+  // its interactive map layer, not as a hotlinkable loop gif and not as a
+  // stable per-site deep link, so imageUrl is null and every region links
+  // out to the same national viewer with the radar layer enabled (same
+  // link-out posture as JP/NZ). Forecast data itself is Open-Meteo.
+  whistler: {
+    windy: { lat: 50.09, lon: -122.92, zoom: 10 },
+    official: {
+      label: "ECCC weather radar",
+      imageUrl: null,
+      href: "https://weather.gc.ca/index_e.html?layers=,radar",
+      attribution: "Environment and Climate Change Canada · weather radar",
+    },
+  },
+  "powder-highway": {
+    windy: { lat: 50.60, lon: -117.30, zoom: 7 },
+    official: {
+      label: "ECCC weather radar",
+      imageUrl: null,
+      href: "https://weather.gc.ca/index_e.html?layers=,radar",
+      attribution: "Environment and Climate Change Canada · weather radar",
+    },
+  },
+  "banff-lake-louise": {
+    windy: { lat: 51.25, lon: -115.85, zoom: 9 },
+    official: {
+      label: "ECCC weather radar",
+      imageUrl: null,
+      href: "https://weather.gc.ca/index_e.html?layers=,radar",
+      attribution: "Environment and Climate Change Canada · weather radar",
+    },
+  },
+  canmore: {
+    windy: { lat: 51.02, lon: -115.25, zoom: 10 },
+    official: {
+      label: "ECCC weather radar",
+      imageUrl: null,
+      href: "https://weather.gc.ca/index_e.html?layers=,radar",
+      attribution: "Environment and Climate Change Canada · weather radar",
+    },
+  },
+  jasper: {
+    windy: { lat: 52.84, lon: -118.08, zoom: 10 },
+    official: {
+      label: "ECCC weather radar",
+      imageUrl: null,
+      href: "https://weather.gc.ca/index_e.html?layers=,radar",
+      attribution: "Environment and Climate Change Canada · weather radar",
+    },
+  },
 };
 
 const DEFAULT_ZOOM = 9;
@@ -695,6 +750,59 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "ohakune", name: "Ohakune", lat: -39.4181, lng: 175.3956, accent: "#0ea5e9" },
     ],
   },
+  whistler: {
+    center: { lat: 50.09, lng: -122.92 },
+    pins: [
+      { id: "whistler-mountain", name: "Whistler Mountain", lat: 50.0594, lng: -122.9575, accent: "#f97316" },
+      { id: "blackcomb-mountain", name: "Blackcomb Mountain", lat: 50.0900, lng: -122.8620, accent: "#f97316" },
+      { id: "whistler", name: "Whistler", lat: 50.1163, lng: -122.9574, accent: "#0ea5e9" },
+    ],
+  },
+  // The Powder Highway is a ~600 km loop, so the centre sits in the middle
+  // of the Selkirks rather than on any one resort and the zoom is wide.
+  "powder-highway": {
+    center: { lat: 50.60, lng: -117.30 },
+    pins: [
+      { id: "revelstoke-mountain-resort", name: "Revelstoke Mountain Resort", lat: 50.9581, lng: -118.1633, accent: "#f97316" },
+      { id: "kicking-horse", name: "Kicking Horse", lat: 51.2977, lng: -117.0464, accent: "#f97316" },
+      { id: "fernie-alpine", name: "Fernie Alpine Resort", lat: 49.4628, lng: -115.0872, accent: "#f97316" },
+      { id: "whitewater", name: "Whitewater", lat: 49.3830, lng: -117.1470, accent: "#f97316" },
+      { id: "kimberley-alpine", name: "Kimberley Alpine Resort", lat: 49.6811, lng: -116.0053, accent: "#f97316" },
+      { id: "panorama", name: "Panorama", lat: 50.4600, lng: -116.2400, accent: "#f97316" },
+      { id: "sun-peaks-resort", name: "Sun Peaks Resort", lat: 50.8833, lng: -119.8833, accent: "#f97316" },
+      { id: "revelstoke", name: "Revelstoke", lat: 50.9981, lng: -118.1957, accent: "#0ea5e9" },
+      { id: "golden", name: "Golden", lat: 51.2960, lng: -116.9631, accent: "#0ea5e9" },
+      { id: "fernie", name: "Fernie", lat: 49.5040, lng: -115.0631, accent: "#0ea5e9" },
+      { id: "nelson", name: "Nelson", lat: 49.4928, lng: -117.2948, accent: "#0ea5e9" },
+      { id: "kimberley", name: "Kimberley", lat: 49.6697, lng: -115.9781, accent: "#0ea5e9" },
+      { id: "invermere", name: "Invermere", lat: 50.5064, lng: -116.0311, accent: "#0ea5e9" },
+      { id: "sun-peaks", name: "Sun Peaks", lat: 50.8836, lng: -119.8869, accent: "#0ea5e9" },
+    ],
+  },
+  "banff-lake-louise": {
+    center: { lat: 51.25, lng: -115.85 },
+    pins: [
+      { id: "banff-sunshine", name: "Banff Sunshine Village", lat: 51.0781, lng: -115.7772, accent: "#f97316" },
+      { id: "mt-norquay", name: "Mt. Norquay", lat: 51.1990, lng: -115.5980, accent: "#f97316" },
+      { id: "lake-louise-resort", name: "Lake Louise Ski Resort", lat: 51.4419, lng: -116.1622, accent: "#f97316" },
+      { id: "banff", name: "Banff", lat: 51.1784, lng: -115.5708, accent: "#0ea5e9" },
+      { id: "lake-louise", name: "Lake Louise", lat: 51.4254, lng: -116.1773, accent: "#0ea5e9" },
+    ],
+  },
+  canmore: {
+    center: { lat: 51.02, lng: -115.25 },
+    pins: [
+      { id: "nakiska", name: "Nakiska", lat: 50.9422, lng: -115.1519, accent: "#f97316" },
+      { id: "canmore", name: "Canmore", lat: 51.0884, lng: -115.3479, accent: "#0ea5e9" },
+    ],
+  },
+  jasper: {
+    center: { lat: 52.84, lng: -118.08 },
+    pins: [
+      { id: "marmot-basin", name: "Marmot Basin", lat: 52.8000, lng: -118.0833, accent: "#f97316" },
+      { id: "jasper", name: "Jasper", lat: 52.8737, lng: -118.0814, accent: "#0ea5e9" },
+    ],
+  },
 };
 
 // Which country each region sits in. Drives the cross-region grouping on
@@ -702,7 +810,7 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
 // Australian town + resort, and likewise within Japan. Kept local so the
 // map stays self-contained · keep in step with REGION_COUNTRY in
 // src/regions/index.ts.
-type MapCountry = "AU" | "JP" | "NZ";
+type MapCountry = "AU" | "JP" | "NZ" | "CA";
 const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "snowy-mountains": "AU",
   "victorias-high-country": "AU",
@@ -731,8 +839,13 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   wanaka: "NZ",
   "mt-hutt": "NZ",
   ruapehu: "NZ",
+  whistler: "CA",
+  "powder-highway": "CA",
+  "banff-lake-louise": "CA",
+  canmore: "CA",
+  jasper: "CA",
 };
-const COUNTRY_LABEL: Record<MapCountry, string> = { AU: "australia", JP: "japan", NZ: "new zealand" };
+const COUNTRY_LABEL: Record<MapCountry, string> = { AU: "australia", JP: "japan", NZ: "new zealand", CA: "canada" };
 const REGION_LABEL: Record<RegionKey, string> = {
   "snowy-mountains": "snowy mountains",
   "victorias-high-country": "victoria's high country",
@@ -761,6 +874,11 @@ const REGION_LABEL: Record<RegionKey, string> = {
   wanaka: "wanaka",
   "mt-hutt": "mt hutt",
   ruapehu: "ruapehu",
+  whistler: "whistler",
+  "powder-highway": "powder highway",
+  "banff-lake-louise": "banff & lake louise",
+  canmore: "canmore",
+  jasper: "jasper",
 };
 
 interface CountryPin extends PinSpec {

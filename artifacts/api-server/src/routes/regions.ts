@@ -12,7 +12,7 @@ interface RegionConfig {
   id: string;
   name: string;
   country: string;
-  countryCode: "AU" | "JP" | "NZ";
+  countryCode: "AU" | "JP" | "NZ" | "CA";
   region: string;
   status: RegionStatus;
   href: string;
@@ -549,6 +549,108 @@ const REGIONS: RegionConfig[] = [
     lat: -39.4181,
     lon: 175.3956,
     timezone: "Pacific/Auckland",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  // ── Canada · BC + Alberta. Northern hemisphere (Dec-Apr winter). No
+  // national obs feed is reconciled here yet - Environment Canada / MSC
+  // GeoMet is surfaced as an official link-out only, so every reading below
+  // is straight Open-Meteo like the NZ regions.
+  {
+    id: "whistler",
+    name: "Whistler",
+    country: "Canada",
+    countryCode: "CA",
+    region: "British Columbia",
+    status: "live",
+    href: "/whistler/",
+    baseTowns: ["Whistler"],
+    mountains: ["Whistler Mountain", "Blackcomb Mountain"],
+    // Headline reading from Whistler Village (~670m) · the ski-in village
+    // between the two mountains. Peak forecasts live on the mountain pages.
+    headlineLabel: "Whistler",
+    lat: 50.1163,
+    lon: -122.9574,
+    timezone: "America/Vancouver",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "powder-highway",
+    name: "Powder Highway",
+    country: "Canada",
+    countryCode: "CA",
+    region: "BC Interior",
+    status: "live",
+    href: "/powder-highway/",
+    baseTowns: ["Revelstoke", "Golden", "Fernie", "Nelson", "Kimberley", "Invermere", "Sun Peaks"],
+    mountains: [
+      "Revelstoke Mountain Resort",
+      "Kicking Horse",
+      "Fernie Alpine Resort",
+      "Whitewater",
+      "Kimberley Alpine Resort",
+      "Panorama",
+      "Sun Peaks Resort",
+    ],
+    // Revelstoke anchors the loop · the biggest vertical and the town most
+    // people start from. Each of the other six towns has its own page.
+    headlineLabel: "Revelstoke",
+    lat: 50.9981,
+    lon: -118.1957,
+    timezone: "America/Vancouver",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "banff-lake-louise",
+    name: "Banff & Lake Louise",
+    country: "Canada",
+    countryCode: "CA",
+    region: "Alberta",
+    status: "live",
+    href: "/banff-lake-louise/",
+    baseTowns: ["Banff", "Lake Louise"],
+    mountains: ["Banff Sunshine Village", "Mt. Norquay", "Lake Louise Ski Resort"],
+    // Headline reading from the Town of Banff (~1,383m) inside Banff
+    // National Park · the base for all three SkiBig3 mountains.
+    headlineLabel: "Banff",
+    lat: 51.1784,
+    lon: -115.5708,
+    timezone: "America/Edmonton",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "canmore",
+    name: "Canmore",
+    country: "Canada",
+    countryCode: "CA",
+    region: "Alberta",
+    status: "live",
+    href: "/canmore/",
+    baseTowns: ["Canmore"],
+    mountains: ["Nakiska"],
+    // Headline reading from Canmore (~1,309m) · the Bow Valley town just
+    // outside the park gates, about 45 min from Nakiska in Kananaskis.
+    headlineLabel: "Canmore",
+    lat: 51.0884,
+    lon: -115.3479,
+    timezone: "America/Edmonton",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "jasper",
+    name: "Jasper",
+    country: "Canada",
+    countryCode: "CA",
+    region: "Alberta",
+    status: "live",
+    href: "/jasper/",
+    baseTowns: ["Jasper"],
+    mountains: ["Marmot Basin"],
+    // Headline reading from the Town of Jasper (~1,062m) · 20 min from
+    // Marmot Basin, the highest base elevation of any major Canadian field.
+    headlineLabel: "Jasper",
+    lat: 52.8737,
+    lon: -118.0814,
+    timezone: "America/Edmonton",
     sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
   },
 ];

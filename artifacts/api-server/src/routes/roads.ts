@@ -465,6 +465,68 @@ function isNzSnowSeason(now: Date): boolean {
   return false;
 }
 
+function isCaSnowSeason(now: Date): boolean {
+  // Canadian Rockies / Coast Mountains resort season runs roughly mid-Nov to
+  // mid-May (Sunshine and Whistler push into late May). Kept separate from the
+  // JP northern-winter helper so the rule text never implies a Japanese
+  // authority applies in BC or Alberta.
+  const m = now.getMonth();
+  if (m === 10) return now.getDate() >= 15;
+  if (m === 11 || m <= 3) return true;
+  if (m === 4) return now.getDate() <= 15;
+  return false;
+}
+
+/**
+ * Canada chain entries. Deliberately `chains2wd`/`chainsAwd: "not-required"`
+ * year-round: neither BC nor Alberta mandates chains on passenger vehicles the
+ * way NSW and the NZ ski-field bylaws do. BC's actual legal requirement is
+ * winter tyres (M+S or 3PMSF, >=3.5 mm tread) on designated highways from
+ * 1 Oct to 30 Apr; Alberta legislates nothing and only recommends them. Saying
+ * "must-carry" here would invent a law, so the requirement stays "not-required"
+ * and the real rule lives in the note.
+ */
+const CA_BC_SOURCE = {
+  sourceLabel: "DriveBC · winter driving",
+  sourceUrl:
+    "https://www2.gov.bc.ca/gov/content/transportation/driving-and-cycling/traveller-information/seasonal/winter-driving",
+};
+const CA_AB_SOURCE = {
+  sourceLabel: "511 Alberta · road reports",
+  sourceUrl: "https://511.alberta.ca/",
+};
+
+function caChainEntry(opts: {
+  id: string;
+  regionId: string;
+  mountainId: string;
+  mountainName: string;
+  approach: string;
+  detail: string;
+  province: "BC" | "AB";
+  inSeason: boolean;
+  issuedAt: string;
+}): Record<string, unknown> {
+  const rule =
+    opts.province === "BC"
+      ? "Winter tyres (M+S or 3-peak mountain snowflake, 3.5 mm+ tread) are required by law on this route from 1 Oct to 30 Apr. Chains are not mandated for passenger vehicles but are worth carrying."
+      : "Alberta does not legislate winter tyres, but they are strongly recommended on mountain highways and most rental agreements expect them.";
+  return {
+    id: opts.id,
+    regionId: opts.regionId,
+    mountainId: opts.mountainId,
+    mountainName: opts.mountainName,
+    approach: opts.approach,
+    status: "open",
+    chains2wd: "not-required" satisfies ChainReq,
+    chainsAwd: "not-required" satisfies ChainReq,
+    note: opts.inSeason ? `${rule} ${opts.detail}` : "Outside the ski season · no winter tyre or chain requirement on this route.",
+    issuedAt: opts.issuedAt,
+    ...(opts.province === "BC" ? CA_BC_SOURCE : CA_AB_SOURCE),
+    dataSource: "seasonal-rule",
+  };
+}
+
 function buildChainStatuses(regionId: string | undefined): Array<Record<string, unknown>> {
   const now = new Date();
   const issuedAt = now.toISOString();
@@ -849,6 +911,104 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
     ];
   }
 
+  if (
+    regionId === "whistler" ||
+    regionId === "powder-highway" ||
+    regionId === "banff-lake-louise" ||
+    regionId === "canmore" ||
+    regionId === "jasper"
+  ) {
+    const inSeason = isCaSnowSeason(now);
+    const ca = (
+      id: string,
+      mountainId: string,
+      mountainName: string,
+      approach: string,
+      detail: string,
+      province: "BC" | "AB",
+    ) =>
+      caChainEntry({ id, regionId, mountainId, mountainName, approach, detail, province, inSeason, issuedAt });
+
+    if (regionId === "whistler") {
+      return [
+        ca("whistler-mountain-sea-to-sky", "whistler-mountain", "Whistler Mountain",
+          "Sea-to-Sky Highway (Hwy 99) from Vancouver or Pemberton",
+          "Hwy 99 climbs three passes and closes for avalanche control after big storms; both mountains are lift-accessed from the village, so there is no separate access road to drive.",
+          "BC"),
+        ca("blackcomb-mountain-sea-to-sky", "blackcomb-mountain", "Blackcomb Mountain",
+          "Sea-to-Sky Highway (Hwy 99) from Vancouver or Pemberton",
+          "Same approach as Whistler Mountain · park in the village and ride the Blackcomb Gondola or Excalibur up.",
+          "BC"),
+      ];
+    }
+
+    if (regionId === "powder-highway") {
+      return [
+        ca("revelstoke-camozzi-road", "revelstoke-mountain-resort", "Revelstoke Mountain Resort",
+          "Trans-Canada Hwy 1 through Rogers Pass, then Camozzi Road",
+          "Rogers Pass is one of the most avalanche-controlled highways in the world and closes without much notice · check DriveBC before committing to the drive.",
+          "BC"),
+        ca("kicking-horse-dart-road", "kicking-horse", "Kicking Horse",
+          "Trans-Canada Hwy 1 to Golden, then Kicking Horse Trail / Dart Road",
+          "The 13 km resort road climbs steeply out of the Columbia Valley and is often the iciest part of the trip.",
+          "BC"),
+        ca("fernie-ski-hill-road", "fernie-alpine", "Fernie Alpine Resort",
+          "Crowsnest Hwy 3 to Fernie, then Ski Hill Road",
+          "Hwy 3 over the Crowsnest Pass sees heavy snowfall and closes for avalanche control on the BC side.",
+          "BC"),
+        ca("whitewater-access-road", "whitewater", "Whitewater",
+          "Hwy 6 south from Nelson, then the Whitewater access road",
+          "The 12 km access road is unpaved, steep and unploughed overnight · the resort recommends winter tyres and a shovel.",
+          "BC"),
+        ca("kimberley-gerry-sorensen-way", "kimberley-alpine", "Kimberley Alpine Resort",
+          "Hwy 95A to Kimberley, then Gerry Sorensen Way",
+          "Short, well-maintained climb from town · the easiest resort approach on the loop.",
+          "BC"),
+        ca("panorama-toby-creek-road", "panorama", "Panorama",
+          "Hwy 93/95 to Invermere, then Toby Creek Road",
+          "The 18 km Toby Creek Road is winding with steep drop-offs and no shoulder in places.",
+          "BC"),
+        ca("sun-peaks-road", "sun-peaks-resort", "Sun Peaks Resort",
+          "Hwy 5 (Coquihalla) or Hwy 1 to Heffley Creek, then Sun Peaks Road",
+          "Sun Peaks Road climbs 1,000 m in 30 km from the Thompson Valley; the Coquihalla itself closes in storms.",
+          "BC"),
+      ];
+    }
+
+    if (regionId === "banff-lake-louise") {
+      return [
+        ca("banff-sunshine-village-road", "banff-sunshine", "Banff Sunshine Village",
+          "Trans-Canada Hwy 1 west of Banff, then Sunshine Village Road",
+          "Park at the base and ride the gondola · the village itself is not driveable. Hwy 1 through the park is ploughed continuously but closes for avalanche control.",
+          "AB"),
+        ca("mt-norquay-road", "mt-norquay", "Mt. Norquay",
+          "Mt Norquay Road from the Town of Banff",
+          "Six kilometres of tight switchbacks straight up from town · the steepest resort approach in the park and the first to ice up.",
+          "AB"),
+        ca("lake-louise-whitehorn-road", "lake-louise-resort", "Lake Louise Ski Resort",
+          "Trans-Canada Hwy 1 to Lake Louise, then Whitehorn Road",
+          "Short hop across the highway from the hamlet · the 57 km Hwy 1 run from Banff is the exposed part in a storm.",
+          "AB"),
+      ];
+    }
+
+    if (regionId === "canmore") {
+      return [
+        ca("nakiska-highway-40", "nakiska", "Nakiska",
+          "Trans-Canada Hwy 1 to Hwy 40 (Kananaskis Trail) from Canmore",
+          "Hwy 40 south of Kananaskis Village is gated and closed 1 Dec to 15 Jun for wildlife, so all Nakiska traffic comes in from the north · about 45 min from Canmore.",
+          "AB"),
+      ];
+    }
+
+    return [
+      ca("marmot-basin-road", "marmot-basin", "Marmot Basin",
+        "Hwy 93A south of Jasper, then Marmot Basin Road",
+        "A 12 km climb to the highest base elevation of any major Canadian ski area · wildlife on the road at dawn and dusk is the usual hazard.",
+        "AB"),
+    ];
+  }
+
   return [];
 }
 
@@ -1040,12 +1200,21 @@ router.get("/road-conditions", async (req, res) => {
     //  · AU (Snowy Mountains) - curated roads + live NSW alpine hazards.
     //  · NZ (Otago / Canterbury / Central Plateau) - live Waka Kotahi (NZTA)
     //    state-highway "road events" on the approach corridors.
+    //  · CA (BC + Alberta) - no feed wired yet. DriveBC Open511 and 511
+    //    Alberta both publish one, but nothing is integrated in this pass, so
+    //    `roads` stays empty and the advice points at the official maps.
     //  · Everywhere else - no public live feed wired yet, so roads is empty
     //    and the client renders an explicit "not available" state.
     const isAU = region === undefined || region === "snowy-mountains";
     const isNZ =
       region !== undefined &&
       Object.prototype.hasOwnProperty.call(NZ_CORRIDORS, region);
+    const isCA =
+      region === "whistler" ||
+      region === "powder-highway" ||
+      region === "banff-lake-louise" ||
+      region === "canmore" ||
+      region === "jasper";
 
     let roads: unknown[] = [];
     let generalAdvice: string;
@@ -1063,6 +1232,14 @@ router.get("/road-conditions", async (req, res) => {
       generalAdvice =
         "Live advisories below cover the state-highway approach to the region, from Waka Kotahi (NZTA). The final ski-field access road is a council or ski-area road with no public live feed - use the seasonal chain rule below and check the ski area's own daily road report before heading up. In the NZ ski season (roughly June-October) carry chains and fit them when snow is settling or where directed.";
       liveTrafficUrl = "https://www.journeys.nzta.govt.nz/highway-conditions";
+    } else if (isCA) {
+      // No live Canadian road feed is wired yet · say so plainly rather than
+      // shipping an empty list that reads like "all clear".
+      generalAdvice =
+        region === "whistler" || region === "powder-highway"
+          ? "We do not yet pull live road data for British Columbia · check DriveBC (drivebc.ca) for closures, avalanche control and highway cameras before you drive. Winter tyres marked M+S or 3-peak mountain snowflake are required by law on these routes from 1 October to 30 April. For anything off-piste or side-country, read the day's Avalanche Canada bulletin at avalanche.ca."
+          : "We do not yet pull live road data for Alberta · check 511 Alberta (511.alberta.ca) for closures and highway cameras before you drive, and Parks Canada for conditions inside the national parks. Alberta does not legislate winter tyres but they are strongly recommended on every mountain highway here. For anything off-piste or side-country, read the day's Avalanche Canada bulletin at avalanche.ca.";
+      liveTrafficUrl = "";
     } else {
       generalAdvice =
         "Live road condition data is not yet available for this region.";

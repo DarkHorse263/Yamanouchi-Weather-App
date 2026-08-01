@@ -42,6 +42,11 @@ import { QUEENSTOWN_TRANSPORT } from "./queenstown";
 import { WANAKA_TRANSPORT } from "./wanaka";
 import { MT_HUTT_TRANSPORT } from "./mt-hutt";
 import { RUAPEHU_TRANSPORT } from "./ruapehu";
+import { WHISTLER_TRANSPORT } from "./whistler";
+import { POWDER_HIGHWAY_TRANSPORT } from "./powder-highway";
+import { BANFF_LAKE_LOUISE_TRANSPORT } from "./banff-lake-louise";
+import { CANMORE_TRANSPORT } from "./canmore";
+import { JASPER_TRANSPORT } from "./jasper";
 
 const REGISTRY: Record<RegionId, TransportProviderList> = {
   "snowy-mountains": SNOWY_MOUNTAINS_TRANSPORT,
@@ -74,6 +79,13 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   wanaka: WANAKA_TRANSPORT,
   "mt-hutt": MT_HUTT_TRANSPORT,
   ruapehu: RUAPEHU_TRANSPORT,
+  // CA · no operators curated to the AU/JP/NZ verification standard yet, so
+  // these are registered empty rather than filled with guessed timetables.
+  whistler: WHISTLER_TRANSPORT,
+  "powder-highway": POWDER_HIGHWAY_TRANSPORT,
+  "banff-lake-louise": BANFF_LAKE_LOUISE_TRANSPORT,
+  canmore: CANMORE_TRANSPORT,
+  jasper: JASPER_TRANSPORT,
 };
 
 // Loader-time integrity check.

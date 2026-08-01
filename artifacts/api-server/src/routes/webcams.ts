@@ -244,6 +244,42 @@ const WEBCAM_DATA: WebcamConfig[] = [
     webcams: [],
   },
 
+  // ─── Roadside cams: Canada (BC + Alberta) ─────────────────────────────
+  // DriveBC and 511 Alberta both run large public highway-camera networks,
+  // but neither exposes a stable deep link per camera that survives a season.
+  // Same honest tile pattern as JP/NZ: one link per region into the official
+  // camera map, and never a fabricated image.
+  {
+    locationId: "whistler-roads",
+    locationName: "Roads to Whistler · Sea-to-Sky Highway",
+    webcamPageUrl: "https://www.drivebc.ca/cameras",
+    webcams: [],
+  },
+  {
+    locationId: "powder-highway-roads",
+    locationName: "Roads on the Powder Highway",
+    webcamPageUrl: "https://www.drivebc.ca/cameras",
+    webcams: [],
+  },
+  {
+    locationId: "banff-lake-louise-roads",
+    locationName: "Roads to Banff & Lake Louise",
+    webcamPageUrl: "https://511.alberta.ca/cctv",
+    webcams: [],
+  },
+  {
+    locationId: "canmore-roads",
+    locationName: "Roads to Canmore & Kananaskis",
+    webcamPageUrl: "https://511.alberta.ca/cctv",
+    webcams: [],
+  },
+  {
+    locationId: "jasper-roads",
+    locationName: "Roads to Jasper & Marmot Basin",
+    webcamPageUrl: "https://511.alberta.ca/cctv",
+    webcams: [],
+  },
+
   // ─── Resort live-cam pages: Nozawa Onsen ──────────────────────────────
   // Each resort publishes a live-cam landing page (JPG-refresh + occasional
   // YouTube embeds). Linking to the official page rather than the raw

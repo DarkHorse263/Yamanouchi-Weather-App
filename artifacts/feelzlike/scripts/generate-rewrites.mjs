@@ -30,6 +30,7 @@ const paths = [
   "/au",
   "/jp",
   "/nz",
+  "/ca",
   "/plan",
   "/premium",
   "/near-you",

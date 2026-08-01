@@ -107,6 +107,11 @@ export const RegionId = {
   wanaka: "wanaka",
   "mt-hutt": "mt-hutt",
   ruapehu: "ruapehu",
+  whistler: "whistler",
+  "powder-highway": "powder-highway",
+  "banff-lake-louise": "banff-lake-louise",
+  canmore: "canmore",
+  jasper: "jasper",
 } as const;
 
 export interface HealthStatus {

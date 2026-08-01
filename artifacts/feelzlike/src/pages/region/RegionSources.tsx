@@ -45,6 +45,45 @@ const FORECAST_ENSEMBLE: SourceGroup = {
   ],
 };
 
+/**
+ * Canada reference block. Deliberately titled "Official references" rather
+ * than "Live observations": no ECCC / Avalanche Canada / DriveBC / 511
+ * Alberta feed is wired into a feelzlike reading in this pass, so presenting
+ * them alongside the AU/JP live-observation blocks would overclaim. The
+ * forecast ensemble below is the only thing actually powering the numbers.
+ */
+const CA_OFFICIAL_REFERENCES: SourceGroup = {
+  title: "Official references",
+  titleJa: "公式参照先",
+  blurb:
+    "Link-outs, not wired feeds · conditions shown on feelzlike come from the forecast ensemble below, so check these before you drive or tour.",
+  blurbJa:
+    "リンクのみで、データ連携はしていません。feelzlikeの数値は下記の予報モデルによるものです。走行・ツアー前に必ず公式情報をご確認ください。",
+  items: [
+    { label: "Environment and Climate Change Canada", detail: "national forecasts & warnings", url: "https://weather.gc.ca/" },
+    { label: "MSC GeoMet / api.weather.gc.ca", detail: "ECCC open data API", url: "https://api.weather.gc.ca/" },
+    { label: "Avalanche Canada", detail: "daily avalanche forecasts", url: "https://avalanche.ca/forecasts" },
+  ],
+};
+
+const CA_ROADS_BC: SourceGroup = {
+  title: "Roads & transport",
+  titleJa: "道路・交通",
+  items: [
+    { label: "DriveBC", detail: "highway conditions & cameras", url: "https://www.drivebc.ca/" },
+    { label: "DriveBC cameras", detail: "provincial camera map", url: "https://www.drivebc.ca/cameras" },
+  ],
+};
+
+const CA_ROADS_AB: SourceGroup = {
+  title: "Roads & transport",
+  titleJa: "道路・交通",
+  items: [
+    { label: "511 Alberta", detail: "road reports", url: "https://511.alberta.ca/" },
+    { label: "511 Alberta cameras", detail: "provincial camera map", url: "https://511.alberta.ca/cctv" },
+  ],
+};
+
 const REGION_SOURCES: Record<string, SourceGroup[]> = {
   "snowy-mountains": [
     {
@@ -116,6 +155,72 @@ const REGION_SOURCES: Record<string, SourceGroup[]> = {
       items: [
         { label: "OpenWeatherMap weather tiles", url: "https://openweathermap.org" },
         { label: "JMA radar - Nagano", labelJa: "気象庁レーダー（長野）", url: "https://www.jma.go.jp/bosai/nowc/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  whistler: [
+    CA_OFFICIAL_REFERENCES,
+    CA_ROADS_BC,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [{ label: "Whistler Blackcomb", url: "https://www.whistlerblackcomb.com/" }],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "powder-highway": [
+    CA_OFFICIAL_REFERENCES,
+    CA_ROADS_BC,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Revelstoke Mountain Resort", url: "https://www.revelstokemountainresort.com/" },
+        { label: "Kicking Horse", url: "https://kickinghorseresort.com/" },
+        { label: "Fernie Alpine Resort", url: "https://skifernie.com/" },
+        { label: "Whitewater", url: "https://skiwhitewater.com/" },
+        { label: "Kimberley Alpine Resort", url: "https://skikimberley.com/" },
+        { label: "Panorama", url: "https://www.panoramaresort.com/" },
+        { label: "Sun Peaks Resort", url: "https://www.sunpeaksresort.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "banff-lake-louise": [
+    CA_OFFICIAL_REFERENCES,
+    CA_ROADS_AB,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Banff Sunshine Village", url: "https://www.skibanff.com/" },
+        { label: "Mt. Norquay", url: "https://banffnorquay.com/" },
+        { label: "Lake Louise Ski Resort", url: "https://www.skilouise.com/" },
+        { label: "Parks Canada · Banff safety", detail: "park conditions & closures", url: "https://www.pc.gc.ca/en/pn-np/ab/banff/securite-safety" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  canmore: [
+    CA_OFFICIAL_REFERENCES,
+    CA_ROADS_AB,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [{ label: "Nakiska", url: "https://skinakiska.com/" }],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  jasper: [
+    CA_OFFICIAL_REFERENCES,
+    CA_ROADS_AB,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Marmot Basin", url: "https://www.skimarmot.com/" },
+        { label: "Parks Canada · Jasper National Park", url: "https://www.pc.gc.ca/en/pn-np/ab/jasper" },
       ],
     },
     FORECAST_ENSEMBLE,
