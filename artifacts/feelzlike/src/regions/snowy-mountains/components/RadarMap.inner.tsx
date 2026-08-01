@@ -951,17 +951,29 @@ interface CountryPin extends PinSpec {
 // with its home region. Lets the map show neighbouring regions' pins (so
 // you can browse Mt Buller while sitting on a Snowy Mountains page) and
 // frame the whole country via the "show all" control.
+// Some resorts appear in two regions on purpose (furano keeps Tomamu and
+// Kamui as day trips while they also have dedicated areas). On the shared
+// country-wide map the tiny display nudge isn't enough separation, so we
+// suppress the day-trip duplicate and keep only the dedicated-area pin,
+// which links through to the fuller region page.
+const DUPLICATE_COUNTRY_PINS: Partial<Record<RegionKey, string[]>> = {
+  furano: ["tomamu", "kamui-ski-links"],
+};
+
 function countryPinsFor(region: RegionKey): CountryPin[] {
   const country = REGION_COUNTRY[region];
   return (Object.keys(REGION_DEFAULTS) as RegionKey[])
     .filter((key) => REGION_COUNTRY[key] === country)
-    .flatMap((key) =>
-      REGION_DEFAULTS[key].pins.map((p) => ({
-        ...p,
-        region: key,
-        isCurrent: key === region,
-      })),
-    );
+    .flatMap((key) => {
+      const suppressed = DUPLICATE_COUNTRY_PINS[key] ?? [];
+      return REGION_DEFAULTS[key].pins
+        .filter((p) => !suppressed.includes(p.id))
+        .map((p) => ({
+          ...p,
+          region: key,
+          isCurrent: key === region,
+        }));
+    });
 }
 
 // RainViewer is a free public weather-tile API: global precipitation
