@@ -10,7 +10,9 @@ import type { LiftSeed } from "../lifts";
  * September 2024 thefts: only the 330m Prince pair lift (A1/A2
  * courses) operated in 2024-25 and 2025-26; the 721m quad and the
  * other two pairs (732m/501m) are suspended, so they are deliberately
- * NOT seeded here. Re-add them if the 2026-27 map restores them.
+ * NOT seeded here. Prince Hotels' Oct 2025 release said restoration is
+ * expected for 2026-27 ("full reopen in the 2027 season"), so re-add
+ * them once the 2026-27 winter page/trail map confirms it.
  *
  * Re-verified July 2026 against the official 932-onsen.com winter
  * lift list + spec table (7 lifts incl. the kids snow escalator;
