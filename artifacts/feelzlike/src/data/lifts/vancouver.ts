@@ -11,7 +11,7 @@ import type { LiftSeed } from "../lifts";
  * thresholds are conservative best-estimates by lift type and exposure, not
  * published operating limits · surfaced in the UI with `verifiedAt`.
  */
-const V = "2026-08-01";
+const V = "2026-08-02";
 
 export const VANCOUVER: LiftSeed[] = [
   // ─── CYPRESS (biggest North Shore hill · low, wet coastal snow) ───
@@ -28,13 +28,13 @@ export const VANCOUVER: LiftSeed[] = [
 
   // ─── MT SEYMOUR (highest, quietest North Shore hill) ───
   { id: "se-mystery-peak-express", mountainId: "mount-seymour",    name: "Mystery Peak Express", baseElevation: 1010, topElevation: 1265, exposure: "exposed",   windHoldThresholdKmh: 70, type: "detachable",       verifiedAt: V },
-  { id: "se-lodge-chair",         mountainId: "mount-seymour",     name: "Lodge Chair",         baseElevation: 1010, topElevation: 1130, exposure: "sheltered", windHoldThresholdKmh: 85, type: "fixed_grip_chair", verifiedAt: V },
+  { id: "se-lodge-chair",         mountainId: "mount-seymour",     name: "Lodge Chair 2.0",     baseElevation: 1010, topElevation: 1130, exposure: "sheltered", windHoldThresholdKmh: 85, type: "fixed_grip_chair", verifiedAt: V },
   { id: "se-brockton-chair",      mountainId: "mount-seymour",     name: "Brockton Chair",      baseElevation: 1010, topElevation: 1150, exposure: "moderate",  windHoldThresholdKmh: 80, type: "fixed_grip_chair", verifiedAt: V },
 
   // ─── MOUNT WASHINGTON (Vancouver Island · deep maritime snowpack) ───
   { id: "mw-eagle-express",       mountainId: "mount-washington",  name: "Eagle Express",       baseElevation: 1110, topElevation: 1588, exposure: "exposed",   windHoldThresholdKmh: 70, type: "detachable",       verifiedAt: V },
-  { id: "mw-hawk-chair",          mountainId: "mount-washington",  name: "Hawk Chair",          baseElevation: 1250, topElevation: 1560, exposure: "exposed",   windHoldThresholdKmh: 70, type: "fixed_grip_chair", verifiedAt: V },
-  { id: "mw-sunrise-chair",       mountainId: "mount-washington",  name: "Sunrise Quad",        baseElevation: 1110, topElevation: 1520, exposure: "moderate",  windHoldThresholdKmh: 75, type: "detachable",       verifiedAt: V },
+  { id: "mw-hawk-chair",          mountainId: "mount-washington",  name: "Hawk Six Pack Express", baseElevation: 1250, topElevation: 1560, exposure: "exposed", windHoldThresholdKmh: 70, type: "detachable",       verifiedAt: V },
+  { id: "mw-sunrise-chair",       mountainId: "mount-washington",  name: "Sunrise Quad",        baseElevation: 1110, topElevation: 1520, exposure: "moderate",  windHoldThresholdKmh: 75, type: "fixed_grip_chair", verifiedAt: V },
   { id: "mw-boomerang-chair",     mountainId: "mount-washington",  name: "Boomerang",           baseElevation: 1350, topElevation: 1560, exposure: "exposed",   windHoldThresholdKmh: 70, type: "fixed_grip_chair", verifiedAt: V },
   { id: "mw-whiskey-jack",        mountainId: "mount-washington",  name: "Whiskey Jack",        baseElevation: 1110, topElevation: 1320, exposure: "sheltered", windHoldThresholdKmh: 85, type: "fixed_grip_chair", verifiedAt: V },
 ];

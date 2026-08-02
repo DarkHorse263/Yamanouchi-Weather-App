@@ -10,7 +10,7 @@ import type { LiftSeed } from "../lifts";
  * conservative best-estimates by lift type and exposure, not published
  * operating limits · surfaced in the UI with `verifiedAt` for transparency.
  */
-const V = "2026-08-01";
+const V = "2026-08-02";
 
 export const OKANAGAN: LiftSeed[] = [
   // ─── BIG WHITE (dry interior snow · large exposed alpine plateau) ───
@@ -25,6 +25,7 @@ export const OKANAGAN: LiftSeed[] = [
   { id: "bw-black-forest-express", mountainId: "big-white",  name: "Black Forest Express", baseElevation: 1755, topElevation: 1990, exposure: "sheltered",      windHoldThresholdKmh: 85, type: "detachable",       verifiedAt: V },
 
   // ─── SILVERSTAR (gentle front side · exposed Powder Gulch back bowls) ───
+  { id: "ss-schumann-summit-gondola", mountainId: "silverstar", name: "Des Robert Schumann Summit Express", baseElevation: 1609, topElevation: 1902, exposure: "exposed", windHoldThresholdKmh: 80, type: "gondola", verifiedAt: V },
   { id: "ss-comet-express",       mountainId: "silverstar",  name: "Comet Express",        baseElevation: 1609, topElevation: 1915, exposure: "exposed",        windHoldThresholdKmh: 70, type: "detachable",       verifiedAt: V },
   { id: "ss-powder-gulch-express", mountainId: "silverstar", name: "Powder Gulch Express", baseElevation: 1500, topElevation: 1900, exposure: "moderate",       windHoldThresholdKmh: 75, type: "detachable",       verifiedAt: V },
   { id: "ss-silver-woods-express", mountainId: "silverstar", name: "Silver Woods Express", baseElevation: 1550, topElevation: 1900, exposure: "sheltered",      windHoldThresholdKmh: 85, type: "detachable",       verifiedAt: V },
@@ -32,7 +33,7 @@ export const OKANAGAN: LiftSeed[] = [
   { id: "ss-alpine-meadows-chair", mountainId: "silverstar", name: "Alpine Meadows Chair", baseElevation: 1580, topElevation: 1780, exposure: "sheltered",      windHoldThresholdKmh: 85, type: "fixed_grip_chair", verifiedAt: V },
 
   // ─── APEX (steep fall-line cruisers · quiet, dry Okanagan snow) ───
-  { id: "apex-quad-chair",        mountainId: "apex-resort", name: "Quad Chair",           baseElevation: 1575, topElevation: 2178, exposure: "exposed",        windHoldThresholdKmh: 70, type: "detachable",       verifiedAt: V },
+  { id: "apex-quad-chair",        mountainId: "apex-resort", name: "Quickdraw Quad",       baseElevation: 1575, topElevation: 2178, exposure: "exposed",        windHoldThresholdKmh: 70, type: "detachable",       verifiedAt: V },
   { id: "apex-stocks-chair",      mountainId: "apex-resort", name: "Stocks Triple Chair",  baseElevation: 1575, topElevation: 1950, exposure: "moderate",       windHoldThresholdKmh: 75, type: "fixed_grip_chair", verifiedAt: V },
   { id: "apex-t-bar",             mountainId: "apex-resort", name: "T-Bar",                baseElevation: 1575, topElevation: 1720, exposure: "sheltered",      windHoldThresholdKmh: 85, type: "t-bar",            verifiedAt: V },
 ];
