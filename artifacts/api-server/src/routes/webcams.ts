@@ -262,6 +262,18 @@ const WEBCAM_DATA: WebcamConfig[] = [
     webcams: [],
   },
   {
+    locationId: "okanagan-roads",
+    locationName: "Roads to the Okanagan resorts",
+    webcamPageUrl: "https://www.drivebc.ca/cameras",
+    webcams: [],
+  },
+  {
+    locationId: "vancouver-roads",
+    locationName: "Roads to the North Shore & Vancouver Island resorts",
+    webcamPageUrl: "https://www.drivebc.ca/cameras",
+    webcams: [],
+  },
+  {
     locationId: "banff-lake-louise-roads",
     locationName: "Roads to Banff & Lake Louise",
     webcamPageUrl: "https://511.alberta.ca/cctv",

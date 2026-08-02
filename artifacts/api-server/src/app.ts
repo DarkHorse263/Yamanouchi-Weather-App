@@ -364,6 +364,14 @@ if (process.env.NODE_ENV === "production") {
         "sun-peaks": "Sun Peaks",
       },
     },
+    "okanagan": {
+      name: "Okanagan",
+      towns: { kelowna: "Kelowna", vernon: "Vernon", penticton: "Penticton" },
+    },
+    "vancouver": {
+      name: "Vancouver & the Island",
+      towns: { "vancouver-city": "Vancouver", courtenay: "Courtenay" },
+    },
     "banff-lake-louise": {
       name: "Banff & Lake Louise",
       towns: { banff: "Banff", "lake-louise": "Lake Louise" },
@@ -395,7 +403,7 @@ if (process.env.NODE_ENV === "production") {
 
   // Top-level routes handled by the SPA (before the /:region catch-all).
   const KNOWN_TOP_LEVEL = new Set([
-    "/", "/countries", "/au", "/jp", "/nz", "/ca", "/near-you",
+    "/", "/countries", "/au", "/jp", "/nz", "/ca", "/ca/all-ski-areas", "/near-you",
     "/plan", "/legal/privacy", "/legal/terms",
     "/premium",
     "/alerts/verify", "/alerts/manage", "/alerts/unsubscribed",

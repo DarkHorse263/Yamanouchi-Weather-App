@@ -37,6 +37,8 @@ export const REGION_IDS = [
   "ruapehu",
   "whistler",
   "powder-highway",
+  "okanagan",
+  "vancouver",
   "banff-lake-louise",
   "canmore",
   "jasper",
@@ -344,6 +346,25 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "invermere": "powder-highway",
   "sun-peaks": "powder-highway",
   "powder-highway-roads": "powder-highway",
+
+  // Okanagan, BC · 3 destination resorts, each above its own lake town.
+  "big-white": "okanagan",
+  "silverstar": "okanagan",
+  "apex-resort": "okanagan",
+  "kelowna": "okanagan",
+  "vernon": "okanagan",
+  "penticton": "okanagan",
+  "okanagan-roads": "okanagan",
+
+  // Vancouver & the Island, BC · the three North Shore city hills + Mount
+  // Washington on Vancouver Island, across the city and Courtenay.
+  "cypress-mountain": "vancouver",
+  "grouse-mountain": "vancouver",
+  "mount-seymour": "vancouver",
+  "mount-washington": "vancouver",
+  "vancouver-city": "vancouver",
+  "courtenay": "vancouver",
+  "vancouver-roads": "vancouver",
 
   // Banff & Lake Louise, AB · SkiBig3 inside Banff National Park.
   "banff-sunshine": "banff-lake-louise",

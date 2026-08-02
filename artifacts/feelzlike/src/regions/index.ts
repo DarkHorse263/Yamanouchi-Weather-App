@@ -34,6 +34,8 @@ import { jasperRegion } from "./jasper";
 import { quebecLaurentiansRegion } from "./quebec-laurentians";
 import { quebecCharlevoixRegion } from "./quebec-charlevoix";
 import { quebecEasternTownshipsRegion } from "./quebec-eastern-townships";
+import { okanaganRegion } from "./okanagan";
+import { vancouverRegion } from "./vancouver";
 
 // Active region registry · AU: Snowy Mountains + Victoria's High Country
 // + Tasmania (Ben Lomond). JP: Yamanouchi (Shiga Kogen + Kita-Shiga),
@@ -47,7 +49,9 @@ import { quebecEasternTownshipsRegion } from "./quebec-eastern-townships";
 // NZ: Queenstown (Coronet Peak + The Remarkables), Wanaka (Cardrona +
 // Treble Cone), Mt Hutt (Methven), Ruapehu (Whakapapa + Turoa, Ohakune).
 // CA (BC + Alberta): Whistler (Whistler Blackcomb), Powder Highway (the
-// seven-resort BC interior loop), Banff & Lake Louise (SkiBig3), Canmore
+// seven-resort BC interior loop), Okanagan (Big White + SilverStar + Apex),
+// Vancouver & the Island (the three North Shore city hills + Mount
+// Washington on Vancouver Island), Banff & Lake Louise (SkiBig3), Canmore
 // (Nakiska), Jasper (Marmot Basin). CA (Quebec): Laurentians
 // (Tremblant), Charlevoix (Mont-Sainte-Anne + Le Massif), Eastern
 // Townships (Ski Bromont + Mont Sutton).
@@ -81,6 +85,8 @@ export const REGIONS: RegionConfig[] = [
   ruapehuRegion,
   whistlerRegion,
   powderHighwayRegion,
+  okanaganRegion,
+  vancouverRegion,
   banffLakeLouiseRegion,
   canmoreRegion,
   jasperRegion,
@@ -132,6 +138,8 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "ruapehu": "NZ",
   "whistler": "CA",
   "powder-highway": "CA",
+  "okanagan": "CA",
+  "vancouver": "CA",
   "banff-lake-louise": "CA",
   "canmore": "CA",
   "jasper": "CA",

@@ -929,6 +929,8 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
   if (
     regionId === "whistler" ||
     regionId === "powder-highway" ||
+    regionId === "okanagan" ||
+    regionId === "vancouver" ||
     regionId === "banff-lake-louise" ||
     regionId === "canmore" ||
     regionId === "jasper" ||
@@ -989,6 +991,44 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
         ca("sun-peaks-road", "sun-peaks-resort", "Sun Peaks Resort",
           "Hwy 5 (Coquihalla) or Hwy 1 to Heffley Creek, then Sun Peaks Road",
           "Sun Peaks Road climbs 1,000 m in 30 km from the Thompson Valley; the Coquihalla itself closes in storms.",
+          "BC"),
+      ];
+    }
+
+    if (regionId === "okanagan") {
+      return [
+        ca("big-white-road", "big-white", "Big White Ski Resort",
+          "Hwy 33 south-east of Kelowna, then the Big White Road",
+          "The 24 km Big White Road climbs steadily off Hwy 33 and is often snow-packed and fog-bound near the top · the resort recommends winter tyres and chains in the vehicle.",
+          "BC"),
+        ca("silverstar-road", "silverstar", "SilverStar Mountain Resort",
+          "Hwy 97 to Vernon, then Silver Star Road",
+          "The 22 km Silver Star Road is well-maintained but climbs 1,100 m from the valley and gets icy on the upper switchbacks.",
+          "BC"),
+        ca("apex-green-mountain-road", "apex-resort", "Apex Mountain Resort",
+          "Hwy 97 to Penticton, then Green Mountain Road",
+          "Green Mountain Road is a narrow, winding 33 km climb with no services · it is the exposed part of the trip and drifts in over the last few kilometres.",
+          "BC"),
+      ];
+    }
+
+    if (regionId === "vancouver") {
+      return [
+        ca("cypress-bowl-road", "cypress-mountain", "Cypress Mountain",
+          "Hwy 1 (Upper Levels) to exit 8, then Cypress Bowl Road",
+          "The 15 km Cypress Bowl Road is the longest and highest of the three North Shore access roads · it ices up fast and the resort turns back vehicles without winter tyres or chains on the worst days.",
+          "BC"),
+        ca("grouse-mountain-highway", "grouse-mountain", "Grouse Mountain",
+          "Capilano Road / Nancy Greene Way from North Vancouver, then ride the Skyride",
+          "You park at the base and ride the Skyride gondola up · Nancy Greene Way is a short, steep city road that still catches out summer tyres after a cold snap.",
+          "BC"),
+        ca("mount-seymour-road", "mount-seymour", "Mt Seymour",
+          "Mount Seymour Parkway to Mount Seymour Road from North Vancouver",
+          "The 13 km Mount Seymour Road is a steady climb through the park · winter tyres or chains are required past the gate and it is gated shut when full or when conditions turn.",
+          "BC"),
+        ca("mount-washington-road", "mount-washington", "Mount Washington Alpine Resort",
+          "BC Ferries to Vancouver Island (or fly to Comox), Hwy 19 to Courtenay, then Strathcona Parkway",
+          "This is an Island trip, not a Vancouver day trip · the Strathcona Parkway climbs 1,100 m in 19 km from the Comox Valley and gets deep maritime snow that the resort keeps ploughed.",
           "BC"),
       ];
     }
@@ -1265,6 +1305,8 @@ router.get("/road-conditions", async (req, res) => {
     const isCA =
       region === "whistler" ||
       region === "powder-highway" ||
+      region === "okanagan" ||
+      region === "vancouver" ||
       region === "banff-lake-louise" ||
       region === "canmore" ||
       region === "jasper" ||
@@ -1292,7 +1334,10 @@ router.get("/road-conditions", async (req, res) => {
       // No live Canadian road feed is wired yet · say so plainly rather than
       // shipping an empty list that reads like "all clear".
       generalAdvice =
-        region === "whistler" || region === "powder-highway"
+        region === "whistler" ||
+        region === "powder-highway" ||
+        region === "okanagan" ||
+        region === "vancouver"
           ? "We do not yet pull live road data for British Columbia · check DriveBC (drivebc.ca) for closures, avalanche control and highway cameras before you drive. Winter tyres marked M+S or 3-peak mountain snowflake are required by law on these routes from 1 October to 30 April. For anything off-piste or side-country, read the day's Avalanche Canada bulletin at avalanche.ca."
           : region === "quebec-laurentians" ||
               region === "quebec-charlevoix" ||

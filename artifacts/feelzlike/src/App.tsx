@@ -31,6 +31,7 @@ import TripPlanner from "@/pages/TripPlanner";
 import Premium from "@/pages/Premium";
 import Account from "@/pages/Account";
 import AdminStats from "@/pages/admin/AdminStats";
+import CanadaDirectory from "@/pages/CanadaDirectory";
 
 const queryClient = new QueryClient();
 
@@ -82,6 +83,11 @@ function Router() {
       <Route path="/nz/"><CountryHome code="NZ" /></Route>
       <Route path="/ca"><CountryHome code="CA" /></Route>
       <Route path="/ca/"><CountryHome code="CA" /></Route>
+      {/* Directory of every other Canadian ski area (links out to each hill's
+          own site). Static data · mounted before /:region so the multi-segment
+          path isn't parsed as a region slug. */}
+      <Route path="/ca/all-ski-areas" component={CanadaDirectory} />
+      <Route path="/ca/all-ski-areas/" component={CanadaDirectory} />
       <Route path="/:region/*?">
         <RegionLayout />
       </Route>

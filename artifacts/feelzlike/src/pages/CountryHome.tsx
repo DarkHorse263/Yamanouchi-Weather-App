@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, MapPin } from "lucide-react";
+import { ArrowLeft, ArrowRight, MapPin, ListTree } from "lucide-react";
 import { COUNTRY_META, regionsForCountry, type CountryCode } from "@/regions";
 import { PlaceSearch } from "@/components/home/PlaceSearch";
 import { PageMeta } from "@/lib/seo/PageMeta";
@@ -133,6 +133,30 @@ export default function CountryHome({ code }: CountryHomeProps) {
             );
           })}
         </div>
+
+        {/* Canada · low-key link out to the full directory of every other hill. */}
+        {code === "CA" && (
+          <motion.a
+            href="/ca/all-ski-areas"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35, delay: 0.4 }}
+            className="group mx-auto mt-3 md:mt-4 flex max-w-3xl items-center gap-3 rounded-xl border border-slate-200 bg-slate-50/60 px-4 py-3.5 md:px-6 hover:border-sky-400 hover:bg-white hover:shadow-[0_1px_3px_rgba(15,23,42,0.06)] transition-all duration-200"
+          >
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-sky-100 text-sky-700">
+              <ListTree className="h-4.5 w-4.5" />
+            </span>
+            <span className="flex-1">
+              <span className="block font-semibold text-blue-900 group-hover:text-sky-700 transition-colors">
+                every other ski hill in canada · the full list
+              </span>
+              <span className="mt-0.5 block text-[12px] text-slate-600">
+                264 more ski areas across every province · links to each hill's own site
+              </span>
+            </span>
+            <ArrowRight className="h-4 w-4 shrink-0 text-sky-700 group-hover:translate-x-0.5 transition-transform" />
+          </motion.a>
+        )}
       </main>
     </div>
   );

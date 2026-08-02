@@ -166,6 +166,8 @@ import { APPI_SHIZUKUISHI } from "./lifts/appi-shizukuishi";
 import { MINAKAMI } from "./lifts/minakami";
 import { KUSATSU_MANZA } from "./lifts/kusatsu-manza";
 import { HACHIMANTAI } from "./lifts/hachimantai";
+import { OKANAGAN } from "./lifts/okanagan";
+import { VANCOUVER } from "./lifts/vancouver";
 
 export const LIFT_SEED: LiftSeed[] = [
   ...SNOWY_MOUNTAINS,
@@ -188,6 +190,8 @@ export const LIFT_SEED: LiftSeed[] = [
   ...MINAKAMI,
   ...KUSATSU_MANZA,
   ...HACHIMANTAI,
+  ...OKANAGAN,
+  ...VANCOUVER,
 ];
 
 const BY_MOUNTAIN = new Map<string, LiftSeed[]>();

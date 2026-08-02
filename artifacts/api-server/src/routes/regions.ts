@@ -600,6 +600,42 @@ const REGIONS: RegionConfig[] = [
     sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
   },
   {
+    id: "okanagan",
+    name: "Okanagan",
+    country: "Canada",
+    countryCode: "CA",
+    region: "BC Interior",
+    status: "live",
+    href: "/okanagan/",
+    baseTowns: ["Kelowna", "Vernon", "Penticton"],
+    mountains: ["Big White Ski Resort", "SilverStar Mountain Resort", "Apex Mountain Resort"],
+    // Kelowna is the biggest gateway city and the base for Big White · the
+    // other two towns (Vernon, Penticton) have their own pages.
+    headlineLabel: "Kelowna",
+    lat: 49.8880,
+    lon: -119.4960,
+    timezone: "America/Vancouver",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "vancouver",
+    name: "Vancouver & the Island",
+    country: "Canada",
+    countryCode: "CA",
+    region: "British Columbia",
+    status: "live",
+    href: "/vancouver/",
+    baseTowns: ["Vancouver", "Courtenay"],
+    mountains: ["Cypress Mountain", "Grouse Mountain", "Mt Seymour", "Mount Washington Alpine Resort"],
+    // Headline from downtown Vancouver · the three North Shore hills are day
+    // trips from the city, Mount Washington is a separate Island trip.
+    headlineLabel: "Vancouver",
+    lat: 49.2827,
+    lon: -123.1207,
+    timezone: "America/Vancouver",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
     id: "banff-lake-louise",
     name: "Banff & Lake Louise",
     country: "Canada",

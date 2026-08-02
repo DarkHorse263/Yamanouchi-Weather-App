@@ -43,6 +43,10 @@ from = "/ca/"
 to = "/ca/index.html"
 
 [[services.production.rewrites]]
+from = "/ca/all-ski-areas/"
+to = "/ca/all-ski-areas/index.html"
+
+[[services.production.rewrites]]
 from = "/plan/"
 to = "/plan/index.html"
 
@@ -2249,6 +2253,170 @@ to = "/powder-highway/sun-peaks/transport/index.html"
 [[services.production.rewrites]]
 from = "/powder-highway/sun-peaks/explore/"
 to = "/powder-highway/sun-peaks/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/"
+to = "/okanagan/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/mountains/"
+to = "/okanagan/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/stay/"
+to = "/okanagan/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/kelowna/"
+to = "/okanagan/kelowna/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/kelowna/weather/"
+to = "/okanagan/kelowna/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/kelowna/stay/"
+to = "/okanagan/kelowna/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/kelowna/eat/"
+to = "/okanagan/kelowna/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/kelowna/roads/"
+to = "/okanagan/kelowna/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/kelowna/transport/"
+to = "/okanagan/kelowna/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/kelowna/explore/"
+to = "/okanagan/kelowna/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/vernon/"
+to = "/okanagan/vernon/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/vernon/weather/"
+to = "/okanagan/vernon/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/vernon/stay/"
+to = "/okanagan/vernon/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/vernon/eat/"
+to = "/okanagan/vernon/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/vernon/roads/"
+to = "/okanagan/vernon/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/vernon/transport/"
+to = "/okanagan/vernon/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/vernon/explore/"
+to = "/okanagan/vernon/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/penticton/"
+to = "/okanagan/penticton/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/penticton/weather/"
+to = "/okanagan/penticton/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/penticton/stay/"
+to = "/okanagan/penticton/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/penticton/eat/"
+to = "/okanagan/penticton/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/penticton/roads/"
+to = "/okanagan/penticton/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/penticton/transport/"
+to = "/okanagan/penticton/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/penticton/explore/"
+to = "/okanagan/penticton/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/vancouver/"
+to = "/vancouver/index.html"
+
+[[services.production.rewrites]]
+from = "/vancouver/mountains/"
+to = "/vancouver/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/vancouver/stay/"
+to = "/vancouver/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/vancouver/vancouver-city/"
+to = "/vancouver/vancouver-city/index.html"
+
+[[services.production.rewrites]]
+from = "/vancouver/vancouver-city/weather/"
+to = "/vancouver/vancouver-city/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/vancouver/vancouver-city/stay/"
+to = "/vancouver/vancouver-city/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/vancouver/vancouver-city/eat/"
+to = "/vancouver/vancouver-city/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/vancouver/vancouver-city/roads/"
+to = "/vancouver/vancouver-city/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/vancouver/vancouver-city/transport/"
+to = "/vancouver/vancouver-city/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/vancouver/vancouver-city/explore/"
+to = "/vancouver/vancouver-city/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/vancouver/courtenay/"
+to = "/vancouver/courtenay/index.html"
+
+[[services.production.rewrites]]
+from = "/vancouver/courtenay/weather/"
+to = "/vancouver/courtenay/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/vancouver/courtenay/stay/"
+to = "/vancouver/courtenay/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/vancouver/courtenay/eat/"
+to = "/vancouver/courtenay/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/vancouver/courtenay/roads/"
+to = "/vancouver/courtenay/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/vancouver/courtenay/transport/"
+to = "/vancouver/courtenay/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/vancouver/courtenay/explore/"
+to = "/vancouver/courtenay/explore/index.html"
 
 [[services.production.rewrites]]
 from = "/banff-lake-louise/"

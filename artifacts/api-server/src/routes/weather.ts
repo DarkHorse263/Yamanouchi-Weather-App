@@ -366,6 +366,22 @@ const LOCATIONS: LocationConfig[] = [
   { id: "invermere",                 name: "Invermere",                 latitude:  50.5064, longitude: -116.0311, elevation:  810, description: "Columbia Valley lake town · about 20 min up the winding road to Panorama.",                              bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Vancouver", region: "CA" },
   { id: "sun-peaks",                 name: "Sun Peaks",                 latitude:  50.8836, longitude: -119.8869, elevation: 1255, description: "Purpose-built ski-through village 45 min above Kamloops · lifts start from the main street.",            bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Vancouver", region: "CA" },
 
+  // ─── Okanagan (BC Interior, Canada) ──────────────────────
+  // Mountains only · the lake towns (Kelowna/Vernon/Penticton) are
+  // coordinate-based in the client, so they get no LOCATIONS row.
+  { id: "big-white",                 name: "Big White Ski Resort",      latitude:  49.7220, longitude: -118.9330, elevation: 2319, description: "BC's biggest ski-in village · dry interior snow across a large gladed high-alpine plateau above Kelowna.",  bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Vancouver", region: "CA" },
+  { id: "silverstar",                name: "SilverStar Mountain Resort", latitude: 50.3611, longitude: -119.0619, elevation: 1915, description: "Victorian-themed ski-through village above Vernon · gentle front side, steep Powder Gulch back bowls.",     bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Vancouver", region: "CA" },
+  { id: "apex-resort",               name: "Apex Mountain Resort",      latitude:  49.3925, longitude: -119.9036, elevation: 2178, description: "Quiet, steep and uncrowded above Penticton · long fall-line cruisers and some of the Okanagan's driest snow.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Vancouver", region: "CA" },
+
+  // ─── Vancouver & the Island (BC, Canada) ─────────────────
+  // Mountains only · Vancouver city and Courtenay are coordinate-based in
+  // the client, so they get no LOCATIONS row. The three North Shore hills
+  // are low, wet city day hills; Mount Washington is the Island destination.
+  { id: "cypress-mountain",          name: "Cypress Mountain",          latitude:  49.3958, longitude: -123.2039, elevation: 1440, description: "The biggest North Shore hill · 2010 Olympic freestyle venue, a city day mountain with night skiing.",       bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Vancouver", region: "CA" },
+  { id: "grouse-mountain",           name: "Grouse Mountain",           latitude:  49.3803, longitude: -123.0827, elevation: 1250, description: "The peak of Vancouver · a Skyride straight up from the North Shore to lit night runs above the city.",         bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Vancouver", region: "CA" },
+  { id: "mount-seymour",             name: "Mt Seymour",                latitude:  49.3689, longitude: -122.9503, elevation: 1265, description: "The quietest, highest and most family-run North Shore hill · learner terrain and backcountry gates.",         bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Vancouver", region: "CA" },
+  { id: "mount-washington",          name: "Mount Washington Alpine Resort", latitude: 49.7442, longitude: -125.2947, elevation: 1588, description: "Vancouver Island's destination mountain · a huge maritime snowpack above the Comox Valley, reached by ferry or flight.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Vancouver", region: "CA" },
+
   // ─── Banff & Lake Louise (Alberta, Canada) ───────────────
   { id: "banff-sunshine",            name: "Banff Sunshine Village",    latitude:  51.0781, longitude: -115.7772, elevation: 2730, description: "High on the Continental Divide · all-natural snow and a long season into late May.",                     bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Edmonton", region: "CA" },
   { id: "mt-norquay",                name: "Mt. Norquay",               latitude:  51.1990, longitude: -115.5980, elevation: 2133, description: "The steep local hill 10 min above the Town of Banff · night skiing and the North American chair.",       bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Edmonton", region: "CA" },

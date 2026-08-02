@@ -537,6 +537,42 @@ export const REGIONS = [
     ],
   },
   {
+    slug: "okanagan",
+    name: "Okanagan",
+    subtitle: "BC Interior · Canada",
+    country: "CA",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Big White Ski Resort",         blurb: "BC's biggest ski-in village · dry interior snow and a large gladed high-alpine plateau above Kelowna" },
+      { name: "SilverStar Mountain Resort",    blurb: "Victorian-themed ski-through village above Vernon · gentle front side, steep Powder Gulch back bowls" },
+      { name: "Apex Mountain Resort",          blurb: "Quiet, steep and uncrowded above Penticton · long fall-line cruisers and the Okanagan's driest snow" },
+    ],
+    towns: [
+      { id: "kelowna",   name: "Kelowna",   blurb: "Okanagan Lake city · about 56 km and 1 hr up to the Big White village" },
+      { id: "vernon",    name: "Vernon",    blurb: "North Okanagan town · about 22 km up Silver Star Road to the resort" },
+      { id: "penticton", name: "Penticton", blurb: "Town between Okanagan and Skaha lakes · about 33 km up Green Mountain Road to Apex" },
+    ],
+  },
+  {
+    slug: "vancouver",
+    name: "Vancouver & the Island",
+    subtitle: "British Columbia · Canada",
+    country: "CA",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Cypress Mountain",              blurb: "The biggest North Shore hill · 2010 Olympic freestyle venue, city day skiing with night runs" },
+      { name: "Grouse Mountain",               blurb: "The peak of Vancouver · a Skyride straight up to lit night runs above the city" },
+      { name: "Mt Seymour",                    blurb: "The quietest, highest and most family-run North Shore hill · learner terrain and backcountry gates" },
+      { name: "Mount Washington Alpine Resort", blurb: "Vancouver Island's destination mountain · a huge maritime snowpack above the Comox Valley, reached by ferry or flight" },
+    ],
+    towns: [
+      { id: "vancouver-city", name: "Vancouver", blurb: "The three North Shore hills are 30-45 min day trips from downtown · night skiing after work" },
+      { id: "courtenay",      name: "Courtenay", blurb: "Comox Valley town on Vancouver Island · about 40 min up the road to Mount Washington" },
+    ],
+  },
+  {
     slug: "banff-lake-louise",
     name: "Banff & Lake Louise",
     subtitle: "Alberta · Canada",

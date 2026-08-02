@@ -31,6 +31,7 @@ const paths = [
   "/jp",
   "/nz",
   "/ca",
+  "/ca/all-ski-areas",
   "/plan",
   "/premium",
   "/near-you",

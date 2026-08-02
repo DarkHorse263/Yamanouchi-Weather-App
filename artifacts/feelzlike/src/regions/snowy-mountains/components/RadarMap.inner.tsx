@@ -84,6 +84,8 @@ export type RegionKey =
   | "ruapehu"
   | "whistler"
   | "powder-highway"
+  | "okanagan"
+  | "vancouver"
   | "banff-lake-louise"
   | "canmore"
   | "jasper"
@@ -421,6 +423,24 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
   },
   "powder-highway": {
     windy: { lat: 50.60, lon: -117.30, zoom: 7 },
+    official: {
+      label: "ECCC weather radar",
+      imageUrl: null,
+      href: "https://weather.gc.ca/index_e.html?layers=,radar",
+      attribution: "Environment and Climate Change Canada · weather radar",
+    },
+  },
+  okanagan: {
+    windy: { lat: 49.85, lon: -119.45, zoom: 8 },
+    official: {
+      label: "ECCC weather radar",
+      imageUrl: null,
+      href: "https://weather.gc.ca/index_e.html?layers=,radar",
+      attribution: "Environment and Climate Change Canada · weather radar",
+    },
+  },
+  vancouver: {
+    windy: { lat: 49.55, lon: -123.60, zoom: 7 },
     official: {
       label: "ECCC weather radar",
       imageUrl: null,
@@ -809,6 +829,35 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "sun-peaks", name: "Sun Peaks", lat: 50.8836, lng: -119.8869, accent: "#0ea5e9" },
     ],
   },
+  // The three Okanagan resorts sit above three lake towns spread ~120 km
+  // down the valley, so the centre sits mid-valley near Kelowna.
+  okanagan: {
+    center: { lat: 49.85, lng: -119.45 },
+    pins: [
+      { id: "big-white", name: "Big White Ski Resort", lat: 49.7220, lng: -118.9330, accent: "#f97316" },
+      { id: "silverstar", name: "SilverStar Mountain Resort", lat: 50.3611, lng: -119.0619, accent: "#f97316" },
+      { id: "apex-resort", name: "Apex Mountain Resort", lat: 49.3925, lng: -119.9036, accent: "#f97316" },
+      { id: "kelowna", name: "Kelowna", lat: 49.8880, lng: -119.4960, accent: "#0ea5e9" },
+      { id: "vernon", name: "Vernon", lat: 50.2670, lng: -119.2720, accent: "#0ea5e9" },
+      { id: "penticton", name: "Penticton", lat: 49.4991, lng: -119.5937, accent: "#0ea5e9" },
+    ],
+  },
+  // Three North Shore hills clustered above Vancouver plus Mount Washington
+  // out on Vancouver Island · the centre sits over Georgia Strait so both
+  // the mainland cluster and the Island resort frame in one view.
+  vancouver: {
+    center: { lat: 49.55, lng: -123.60 },
+    pins: [
+      { id: "cypress-mountain", name: "Cypress Mountain", lat: 49.3958, lng: -123.2039, accent: "#f97316" },
+      { id: "grouse-mountain", name: "Grouse Mountain", lat: 49.3803, lng: -123.0827, accent: "#f97316" },
+      { id: "mount-seymour", name: "Mt Seymour", lat: 49.3689, lng: -122.9503, accent: "#f97316" },
+      { id: "mount-washington", name: "Mount Washington Alpine Resort", lat: 49.7442, lng: -125.2947, accent: "#f97316" },
+      // city pin nudged slightly south (display only) so downtown Vancouver
+      // doesn't stack under the Grouse Mountain pin directly above it
+      { id: "vancouver-city", name: "Vancouver", lat: 49.2500, lng: -123.1207, accent: "#0ea5e9" },
+      { id: "courtenay", name: "Courtenay", lat: 49.6877, lng: -124.9946, accent: "#0ea5e9" },
+    ],
+  },
   "banff-lake-louise": {
     center: { lat: 51.25, lng: -115.85 },
     pins: [
@@ -896,6 +945,8 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   ruapehu: "NZ",
   whistler: "CA",
   "powder-highway": "CA",
+  okanagan: "CA",
+  vancouver: "CA",
   "banff-lake-louise": "CA",
   canmore: "CA",
   jasper: "CA",
@@ -934,6 +985,8 @@ const REGION_LABEL: Record<RegionKey, string> = {
   ruapehu: "ruapehu",
   whistler: "whistler",
   "powder-highway": "powder highway",
+  okanagan: "okanagan",
+  vancouver: "vancouver & the island",
   "banff-lake-louise": "banff & lake louise",
   canmore: "canmore",
   jasper: "jasper",

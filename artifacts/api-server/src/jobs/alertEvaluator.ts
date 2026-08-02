@@ -124,6 +124,8 @@ const REGION_ANCHORS: Record<RegionId, {
   // "OTHER". Anchor each on its highest lift-served summit.
   "whistler": { lat: 50.0900, lon: -122.8620, elevation: 2284, region: "OTHER", displayName: "Whistler" },
   "powder-highway": { lat: 51.2977, lon: -117.0464, elevation: 2450, region: "OTHER", displayName: "Powder Highway" },
+  "okanagan": { lat: 49.7220, lon: -118.9330, elevation: 2319, region: "OTHER", displayName: "Okanagan" },
+  "vancouver": { lat: 49.7442, lon: -125.2947, elevation: 1588, region: "OTHER", displayName: "Vancouver & the Island" },
   "banff-lake-louise": { lat: 51.0781, lon: -115.7772, elevation: 2730, region: "OTHER", displayName: "Banff & Lake Louise" },
   "canmore": { lat: 50.9422, lon: -115.1519, elevation: 2260, region: "OTHER", displayName: "Canmore" },
   "jasper": { lat: 52.8000, lon: -118.0833, elevation: 2612, region: "OTHER", displayName: "Jasper" },

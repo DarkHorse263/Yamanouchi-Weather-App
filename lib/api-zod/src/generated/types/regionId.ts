@@ -42,6 +42,8 @@ export const RegionId = {
   ruapehu: "ruapehu",
   whistler: "whistler",
   "powder-highway": "powder-highway",
+  okanagan: "okanagan",
+  vancouver: "vancouver",
   "banff-lake-louise": "banff-lake-louise",
   canmore: "canmore",
   jasper: "jasper",

@@ -215,6 +215,36 @@ const REGION_SOURCES: Record<string, SourceGroup[]> = {
     },
     FORECAST_ENSEMBLE,
   ],
+  okanagan: [
+    CA_OFFICIAL_REFERENCES,
+    CA_ROADS_BC,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Big White Ski Resort", url: "https://www.bigwhite.com/" },
+        { label: "SilverStar Mountain Resort", url: "https://www.skisilverstar.com/" },
+        { label: "Apex Mountain Resort", url: "https://apexresort.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  vancouver: [
+    CA_OFFICIAL_REFERENCES,
+    CA_ROADS_BC,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Cypress Mountain", url: "https://www.cypressmountain.com/" },
+        { label: "Grouse Mountain", url: "https://www.grousemountain.com/" },
+        { label: "Mt Seymour", url: "https://mtseymour.ca/" },
+        { label: "Mount Washington Alpine Resort", url: "https://mountwashington.ca/" },
+        { label: "BC Ferries · Vancouver to the Island", detail: "sailings & fares", url: "https://www.bcferries.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
   "banff-lake-louise": [
     CA_OFFICIAL_REFERENCES,
     CA_ROADS_AB,
