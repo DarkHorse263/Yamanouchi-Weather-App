@@ -22,9 +22,9 @@ import { track } from "@/lib/analytics";
 // come before Japan (dec-mar).
 const COUNTRIES: CountryCode[] = ["AU", "NZ", "JP", "CA"];
 
-const eyebrow = "text-[11px] font-bold lowercase tracking-wider text-slate-500";
+const eyebrow = "text-[11px] font-bold lowercase tracking-wider text-white/70";
 const h2 =
-  "mt-2 text-3xl md:text-4xl font-black tracking-tight text-[#0F172A] lowercase";
+  "mt-2 text-3xl md:text-4xl font-black tracking-tight text-white lowercase";
 
 const STEPS: Array<{ n: string; text: string }> = [
   { n: "1", text: "pick a country and a region" },
@@ -65,11 +65,11 @@ export function DesktopHome() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.5 }}
-        className="border-t border-slate-200 px-6 pt-12 pb-10"
+        className="border-t border-white/20 px-6 pt-12 pb-10"
       >
         <p className={eyebrow}>about feelzlike</p>
         <h2 className={h2}>real conditions for mountain travel</h2>
-        <p className="mt-3 max-w-2xl text-[15px] font-bold leading-relaxed text-slate-500 lowercase">
+        <p className="mt-3 max-w-2xl text-[15px] font-bold leading-relaxed text-white/80 lowercase">
           you&rsquo;re in town, wondering what it&rsquo;s actually like up the
           mountain. feelzlike pulls together what&rsquo;s happening right now -
           snow, wind, temperature, roads and live cams - so you can make the
@@ -92,7 +92,7 @@ export function DesktopHome() {
           ))}
         </div>
 
-        <p className="mt-6 max-w-2xl text-[12.5px] font-bold leading-relaxed text-slate-400 lowercase">
+        <p className="mt-6 max-w-2xl text-[12.5px] font-bold leading-relaxed text-white/60 lowercase">
           the numbers come straight from official weather services and live
           observation networks in each country - the bureau of meteorology in
           australia, the japan meteorological agency in japan, and more. every

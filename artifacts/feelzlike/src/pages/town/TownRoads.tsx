@@ -23,7 +23,7 @@ import {
   XCircle,
 } from "lucide-react";
 import type { ChainStatus } from "@workspace/api-client-react";
-import { useRegion, useLanguage, useBaseTown, useOptionalSeason, LiveBadge, UpdateStamp, PageHeader } from "@workspace/feelzlike-shell";
+import { useRegion, useLanguage, useBaseTown, useOptionalSeason, LiveBadge, UpdateStamp, PageHeader, cn } from "@workspace/feelzlike-shell";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { EmptyStateCard } from "@/components/EmptyStateCard";
 import { REGION_COUNTRY } from "@/regions";
@@ -186,8 +186,9 @@ export function TownRoads() {
   );
 
   return (
-    <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
-      {town && (
+    <div className={cn("min-h-[100dvh] pb-8 transition-colors duration-500", seasonCtx?.season === "green" ? "bg-[#059669]" : "bg-[#0055FF]")}>
+      <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
+        {town && (
         <PageMeta
           title={t(`${town.name} road conditions & cams`, `${town.name}の道路状況・カメラ`)}
           description={t(
@@ -251,7 +252,9 @@ export function TownRoads() {
       {/* Chain-fitting requirements only matter in snow season - in JP
           we hide the section entirely when the user toggles to green. */}
       {!hideChainsForSeason && chainStatuses.length > 0 && (
-        <ChainStatusSection statuses={chainStatuses} t={t} />
+        <div className="mb-6">
+          <ChainStatusSection statuses={chainStatuses} t={t} />
+        </div>
       )}
 
       {/* Truth-in-data for JP (and any non-VHC region) when we don't yet
@@ -434,11 +437,11 @@ export function TownRoads() {
         >
           <div className="flex items-end justify-between mb-4 flex-wrap gap-2">
             <div>
-              <h2 className="font-display font-semibold text-2xl text-foreground inline-flex items-center gap-2">
-                <Camera className="w-5 h-5 text-primary" />
+              <h2 className="font-display font-semibold text-2xl text-white inline-flex items-center gap-2">
+                <Camera className="w-5 h-5 text-white/80" />
                 {t("Roadside cams", "道路ライブカメラ")}
               </h2>
-              <p className="text-sm text-muted-foreground mt-1">
+              <p className="text-sm text-white/70 mt-1">
                 {t(
                   "Live looks at the actual road surface - chains, slush, ice.",
                   "実際の路面のライブ映像 - チェーン、シャーベット、凍結。",
@@ -450,7 +453,7 @@ export function TownRoads() {
                 href={roadCamsSourcePageUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs font-semibold text-primary hover:underline inline-flex items-center gap-1"
+                className="text-xs font-semibold text-white/90 hover:text-white hover:underline inline-flex items-center gap-1"
               >
                 {t("All road cams", "全カメラ")} <ExternalLink className="w-3 h-3" />
               </a>
@@ -474,8 +477,8 @@ export function TownRoads() {
           transition={{ delay: 0.1 }}
           className="mt-9"
         >
-          <h2 className="font-display font-semibold text-2xl text-foreground inline-flex items-center gap-2 mb-4">
-            <Camera className="w-5 h-5 text-primary" />
+          <h2 className="font-display font-semibold text-2xl text-white inline-flex items-center gap-2 mb-4">
+            <Camera className="w-5 h-5 text-white/80" />
             {t("Roadside cams", "道路ライブカメラ")}
           </h2>
           <a
@@ -509,19 +512,20 @@ export function TownRoads() {
       )}
 
       {dataAvailable && query.data?.lastUpdated && region.roadsSource && (
-        <p className="text-xs text-muted-foreground/70 mt-5 inline-flex items-center gap-1.5">
+        <p className="text-xs text-white/70 mt-5 inline-flex items-center gap-1.5">
           <MapPin className="w-3 h-3" />
           {t("Source", "情報源")}:{" "}
           <a
             href={region.roadsSource.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-foreground hover:underline"
+            className="hover:text-white hover:underline text-white/90"
           >
             {t(region.roadsSource.label, region.roadsSource.labelJa ?? region.roadsSource.label)}
           </a>
         </p>
       )}
+    </div>
     </div>
   );
 }
@@ -586,11 +590,11 @@ function VhcAlertsSection({
     >
       <div className="flex items-end justify-between mb-3 flex-wrap gap-2">
         <div>
-          <h2 className="font-display font-semibold text-2xl text-foreground inline-flex items-center gap-2">
-            <AlertTriangle className="w-5 h-5 text-primary" />
+          <h2 className="font-display font-semibold text-2xl text-white inline-flex items-center gap-2">
+            <AlertTriangle className="w-5 h-5 text-white/80" />
             {t("Live alerts on alpine roads", "アルパイン道路のライブ警報")}
           </h2>
-          <p className="text-sm text-muted-foreground mt-1">
+          <p className="text-sm text-white/70 mt-1">
             {t(
               `Active VicEmergency incidents and warnings on the access roads to ${townName}.`,
               `${townName}へのアクセス道路に関するVicEmergencyの現在の警報・注意報。`,
@@ -602,7 +606,7 @@ function VhcAlertsSection({
             href={data.sourceUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs font-semibold text-primary hover:underline inline-flex items-center gap-1"
+            className="text-xs font-semibold text-white/90 hover:text-white hover:underline inline-flex items-center gap-1"
           >
             {t("VicEmergency", "VicEmergency")}
             <ExternalLink className="w-3 h-3" />
@@ -772,11 +776,11 @@ function ChainStatusSection({ statuses, t }: { statuses: ChainStatus[]; t: (en: 
       className="mb-6"
     >
       <div className="mb-3">
-        <h2 className="font-display font-semibold text-2xl text-foreground inline-flex items-center gap-2">
-          <Snowflake className="w-5 h-5 text-primary" />
+        <h2 className="font-display font-semibold text-2xl text-white inline-flex items-center gap-2">
+          <Snowflake className="w-5 h-5 text-white/80" />
           {t("Chain-fitting requirement", "チェーン装着要件")}
         </h2>
-        <p className="text-sm text-muted-foreground mt-1">
+        <p className="text-sm text-white/70 mt-1">
           {t(
             "Per approach to each mountain, broken down by drivetrain. Carry diamond-pattern chains in your boot during snow season.",
             "各マウンテンへのアプローチごと、駆動方式別。冬季はダイヤモンドパターンのチェーンを車内に常備してください。",

@@ -98,9 +98,9 @@ export function Favourites() {
 
   return (
     <section className="px-4 pt-4 md:px-6">
-      <div className="overflow-hidden rounded-2xl border border-sky-100 bg-white shadow-[0_4px_24px_rgb(56,128,210,0.06)]">
-        <div className="flex items-center gap-1.5 px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-sky-700/80">
-          <Star className="h-3.5 w-3.5 fill-sky-400 text-sky-400" />
+      <div className="overflow-hidden rounded-2xl border border-white/20 bg-white shadow-xl">
+        <div className="flex items-center gap-1.5 px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+          <Star className="h-3.5 w-3.5 fill-[#0055FF] text-[#0055FF]" />
           your favourites
         </div>
         {favourites.map((fav) => (

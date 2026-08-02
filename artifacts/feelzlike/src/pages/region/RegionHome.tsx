@@ -58,7 +58,7 @@ export function RegionHome() {
       {country ? (
         <a
           href={`/${country.toLowerCase()}/`}
-          className="inline-flex items-center gap-1 text-[12px] font-bold lowercase tracking-wider text-slate-500 hover:text-[#0055FF] transition-colors"
+          className="inline-flex items-center gap-1 text-[12px] font-bold lowercase tracking-wider text-white/70 hover:text-white transition-colors"
         >
           <span aria-hidden>‹</span>
           {countryMeta?.name}
@@ -92,7 +92,7 @@ export function RegionHome() {
       )}
 
       {towns.length === 0 ? (
-        <p className="mt-6 text-[15px] font-bold text-slate-500 lowercase">
+        <p className="mt-6 text-[15px] font-bold text-white/70 lowercase">
           {t("No base towns configured yet.", "拠点の町は未設定です。")}
         </p>
       ) : (

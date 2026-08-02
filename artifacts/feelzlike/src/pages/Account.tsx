@@ -52,20 +52,20 @@ export default function Account() {
   }, [authLoading, isAuthenticated, promptSignUp, deleted]);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#0055FF] pb-8 transition-colors duration-500">
       <div className="max-w-3xl mx-auto px-4 md:px-8 py-6 md:py-10 space-y-6">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
+          className="inline-flex items-center gap-1.5 text-sm text-white/70 hover:text-white transition-colors"
         >
           <ArrowLeft className="w-4 h-4" /> back
         </Link>
 
         <div>
-          <p className="inline-flex items-center gap-1.5 text-xs font-bold text-primary uppercase tracking-wider">
+          <p className="inline-flex items-center gap-1.5 text-xs font-bold text-white/90 uppercase tracking-wider">
             <UserRound className="w-3.5 h-3.5" /> your account
           </p>
-          <h1 className="text-3xl md:text-4xl font-black text-foreground mt-2 leading-tight">
+          <h1 className="text-3xl md:text-4xl font-black text-white mt-2 leading-tight">
             alerts & details · one place
           </h1>
         </div>

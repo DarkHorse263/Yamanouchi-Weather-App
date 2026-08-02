@@ -15,7 +15,7 @@ export default function CountryHome({ code }: CountryHomeProps) {
 
   return (
     <div
-      className="relative isolate min-h-screen text-slate-900 antialiased bg-white"
+      className="relative isolate min-h-[100dvh] text-white antialiased bg-[#0055FF] pb-safe"
       style={{ fontFamily: "'DIN Pro', system-ui, sans-serif" }}
     >
       <PageMeta
@@ -36,7 +36,7 @@ export default function CountryHome({ code }: CountryHomeProps) {
         <div className="max-w-3xl mx-auto px-5 pt-4 pb-4 md:pt-9 md:pb-6 text-center">
           <a
             href="/countries"
-            className="inline-flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-[0.2em] text-sky-700/80 hover:text-sky-700 transition-colors"
+            className="inline-flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-[0.2em] text-white/70 hover:text-white transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             All countries
@@ -55,12 +55,12 @@ export default function CountryHome({ code }: CountryHomeProps) {
               {meta.flag}
             </span>
             <h1
-              className="mt-2.5 md:mt-4 text-2xl md:text-4xl tracking-tight leading-tight text-blue-900"
+              className="mt-2.5 md:mt-4 text-2xl md:text-4xl tracking-tight leading-tight text-white"
               style={{ fontFamily: "'DIN Pro', system-ui, sans-serif", fontWeight: 700 }}
             >
               {meta.name}
             </h1>
-            <p className="mt-1.5 md:mt-3 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.2em] text-sky-700/80">
+            <p className="mt-1.5 md:mt-3 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.2em] text-white/70">
               Choose a region
             </p>
           </motion.div>
@@ -94,36 +94,35 @@ export default function CountryHome({ code }: CountryHomeProps) {
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.35, delay: Math.min(0.05 + i * 0.06, 0.35) }}
-                className="group relative flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white hover:-translate-y-0.5 hover:border-sky-400 hover:shadow-[0_4px_8px_rgba(15,23,42,0.06),0_12px_28px_-12px_rgba(56,128,210,0.25)] shadow-[0_1px_3px_rgba(15,23,42,0.04)] transition-all duration-200"
+                className="group relative flex flex-col overflow-hidden rounded-xl border-0 bg-white hover:-translate-y-0.5 hover:shadow-2xl shadow-xl transition-all duration-200"
               >
-                <div className="h-1 w-full bg-gradient-to-r from-sky-400 via-sky-500 to-blue-700" />
                 <div className="flex-1 px-4 py-4 md:px-6 md:py-5 flex flex-col">
-                  <p className="byline text-sky-700/80 inline-flex items-center gap-1.5">
+                  <p className="byline text-slate-500 inline-flex items-center gap-1.5">
                     <MapPin className="w-3 h-3" />
                     {region.subtitle}
                   </p>
                   <h3
-                    className="mt-2 md:mt-3 text-xl md:text-3xl tracking-tight leading-tight text-blue-900 group-hover:text-sky-700 transition-colors"
+                    className="mt-2 md:mt-3 text-xl md:text-3xl tracking-tight leading-tight text-[#0F172A] group-hover:text-[#0055FF] transition-colors"
                     style={{ fontFamily: "'DIN Pro', system-ui, sans-serif", fontWeight: 700 }}
                   >
                     {region.name}
                   </h3>
                   <div className="mt-3 md:mt-4 grid grid-cols-2 gap-3 text-[12px]">
                     <div>
-                      <p className="byline text-muted-foreground/70">Base towns</p>
+                      <p className="byline text-slate-400">Base towns</p>
                       <p className="mt-1 font-semibold text-slate-700 leading-snug">
                         {towns.map((t) => t.name).join(" · ")}
                       </p>
                     </div>
                     <div>
-                      <p className="byline text-muted-foreground/70">Mountains</p>
+                      <p className="byline text-slate-400">Mountains</p>
                       <p className="mt-1 font-semibold text-slate-700 leading-snug">
                         {mountainLabels.join(" · ")}
                       </p>
                     </div>
                   </div>
                 </div>
-                <div className="border-t border-slate-100 px-5 py-3 flex items-center justify-end gap-1.5 text-[12px] font-semibold text-sky-700 group-hover:text-blue-700 bg-gradient-to-r from-sky-50/50 to-blue-50/50 transition-colors">
+                <div className="border-t border-slate-100 px-5 py-3 flex items-center justify-end gap-1.5 text-[12px] font-semibold text-[#0055FF] group-hover:text-[#0055FF]/80 bg-slate-50 transition-colors">
                   Pick a town
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                 </div>
@@ -139,20 +138,20 @@ export default function CountryHome({ code }: CountryHomeProps) {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35, delay: 0.4 }}
-            className="group mx-auto mt-3 md:mt-4 flex max-w-3xl items-center gap-3 rounded-xl border border-slate-200 bg-slate-50/60 px-4 py-3.5 md:px-6 hover:border-sky-400 hover:bg-white hover:shadow-[0_1px_3px_rgba(15,23,42,0.06)] transition-all duration-200"
+            className="group mx-auto mt-3 md:mt-4 flex max-w-3xl items-center gap-3 rounded-xl border border-white/20 bg-white/10 px-4 py-3.5 md:px-6 hover:border-white/40 hover:bg-white/20 transition-all duration-200"
           >
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-sky-100 text-sky-700">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/20 text-white">
               <ListTree className="h-4.5 w-4.5" />
             </span>
             <span className="flex-1">
-              <span className="block font-semibold text-blue-900 group-hover:text-sky-700 transition-colors">
+              <span className="block font-semibold text-white transition-colors">
                 every other ski hill in canada · the full list
               </span>
-              <span className="mt-0.5 block text-[12px] text-slate-600">
+              <span className="mt-0.5 block text-[12px] text-white/70">
                 264 more ski areas across every province · links to each hill's own site
               </span>
             </span>
-            <ArrowRight className="h-4 w-4 shrink-0 text-sky-700 group-hover:translate-x-0.5 transition-transform" />
+            <ArrowRight className="h-4 w-4 shrink-0 text-white group-hover:translate-x-0.5 transition-transform" />
           </motion.a>
         )}
       </main>

@@ -1,6 +1,6 @@
 import { Utensils, ExternalLink, Coffee, Beer, ShoppingBasket, Pizza } from "lucide-react";
 
-import { useRegion, useLanguage, useBaseTown, LiveBadge, PageHeader } from "@workspace/feelzlike-shell";
+import { useRegion, useLanguage, useBaseTown, LiveBadge, PageHeader, useOptionalSeason, cn } from "@workspace/feelzlike-shell";
 import { PageMeta } from "@/lib/seo/PageMeta";
 
 import { EmptyStateCard } from "@/components/EmptyStateCard";
@@ -54,6 +54,7 @@ export function TownEat() {
   const { region } = useRegion();
   const { t } = useLanguage();
   const { town } = useBaseTown();
+  const seasonCtx = useOptionalSeason();
 
   if (!town) {
     return (
@@ -82,8 +83,9 @@ export function TownEat() {
     : `${townDisplayName}周辺のレストラン・カフェ・パブ・スーパーをGoogleマップで検索 - 営業時間・レビュー・経路もそちらでご確認いただけます。`;
 
   return (
-    <div className="max-w-6xl mx-auto">
-      <PageMeta
+    <div className={cn("min-h-[100dvh] pb-8 transition-colors duration-500", seasonCtx?.season === "green" ? "bg-[#059669]" : "bg-[#0055FF]")}>
+      <div className="max-w-6xl mx-auto">
+        <PageMeta
         title={t(`${town.name} - where to eat`, `${town.name}の食事`)}
         description={t(subtitleEn, subtitleJa)}
         path={`/${region.id}/${town.id}/eat`}
@@ -119,7 +121,7 @@ export function TownEat() {
 
       {/* Category grid */}
       <section className="px-4 md:px-10 pt-4 pb-8">
-        <p className="text-[11px] font-bold tracking-wider text-muted-foreground/70 uppercase mb-3">
+        <p className="text-[11px] font-bold tracking-wider text-white/70 uppercase mb-3">
           {t("Or jump to a category", "カテゴリーで探す")}
         </p>
         <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
@@ -141,6 +143,7 @@ export function TownEat() {
           ))}
         </ul>
       </section>
+    </div>
     </div>
   );
 }

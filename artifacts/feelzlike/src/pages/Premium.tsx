@@ -96,9 +96,9 @@ export default function Premium() {
   }, []);
 
   return (
-    <div className="min-h-[100dvh] bg-background flex flex-col">
+    <div className="min-h-[100dvh] bg-[#0055FF] flex flex-col transition-colors duration-500">
       {/* Bluebird Bold Header */}
-      <div className="bg-[#0055FF] text-white pt-6 pb-12 md:pt-10 md:pb-16 relative overflow-hidden">
+      <div className="text-white pt-6 pb-12 md:pt-10 md:pb-16 relative overflow-hidden">
         {/* Subtle noise/texture overlay if desired, keeping it simple for now */}
         <div className="max-w-3xl mx-auto px-4 md:px-8 relative z-10">
           <Link
@@ -378,8 +378,8 @@ export default function Premium() {
           )}
         </section>
 
-        <footer className="pt-8 pb-4 border-t border-border mt-8 flex flex-col items-center justify-center text-center">
-          <p className="text-xs font-bold text-slate-400">
+        <footer className="pt-8 pb-4 border-t border-white/20 mt-8 flex flex-col items-center justify-center text-center">
+          <p className="text-xs font-bold text-white/60">
             © 2026 navigate work digital · feelzlike
           </p>
         </footer>

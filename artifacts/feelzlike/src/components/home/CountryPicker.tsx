@@ -259,7 +259,7 @@ export function CountryPicker() {
 
       {/* TRUST LINE */}
       <p
-        className="mx-auto mt-6 max-w-md text-center text-[11px] leading-relaxed text-slate-400"
+        className="mx-auto mt-6 max-w-md text-center text-[11px] leading-relaxed text-white/60"
         style={balance}
       >
         {liveCount} {liveCount === 1 ? "region" : "regions"} live &middot;{" "}

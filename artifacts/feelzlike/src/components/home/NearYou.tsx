@@ -152,7 +152,7 @@ function weatherIconColor(code: number | null): string {
 }
 
 const PANEL =
-  "mx-4 overflow-hidden rounded-2xl border border-sky-100 bg-gradient-to-b from-sky-50/80 to-white shadow-[0_8px_30px_rgb(15,23,42,0.06)] md:mx-6";
+  "mx-4 overflow-hidden rounded-2xl border border-white/20 bg-white shadow-xl md:mx-6";
 
 /**
  * Location-first landing block. It leads with the visitor's own current

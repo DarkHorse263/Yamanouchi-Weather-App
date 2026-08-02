@@ -11,7 +11,7 @@ export function CoverageMap() {
 
   return (
     <section className="px-4 pb-12 md:px-6">
-      <div className="mx-auto max-w-5xl overflow-hidden rounded-2xl border border-sky-100 bg-white shadow-[0_8px_30px_rgb(15,23,42,0.06)]">
+      <div className="mx-auto max-w-5xl overflow-hidden rounded-2xl border border-white/20 bg-white shadow-xl">
         <div className="border-b border-sky-50 bg-[#0055FF] px-5 py-4 text-white">
           <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/80">
             <MapIcon className="h-4 w-4" />

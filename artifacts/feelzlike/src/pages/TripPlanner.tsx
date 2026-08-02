@@ -235,7 +235,7 @@ function MountainPicker({
     <div className="space-y-4">
       {byRegion.map((group) => (
         <div key={group.name}>
-          <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">
+          <p className="text-xs font-bold text-white/80 uppercase tracking-wider mb-2">
             {group.name}
           </p>
           <div className="flex flex-wrap gap-2">
@@ -250,10 +250,10 @@ function MountainPicker({
                   disabled={disabled}
                   className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-semibold transition-colors ${
                     isSaved
-                      ? "bg-foreground text-background border-foreground"
+                      ? "bg-white text-[#0055FF] border-white"
                       : disabled
-                      ? "bg-secondary/40 text-muted-foreground/50 border-border cursor-not-allowed"
-                      : "bg-white text-foreground border-border hover:border-foreground"
+                      ? "bg-white/10 text-white/40 border-white/10 cursor-not-allowed"
+                      : "bg-transparent text-white border-white/30 hover:border-white"
                   }`}
                 >
                   {isSaved ? <Check className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
@@ -264,7 +264,7 @@ function MountainPicker({
           </div>
         </div>
       ))}
-      <p className="text-[11px] text-muted-foreground/70">
+      <p className="text-[11px] text-white/70">
         {full
           ? `that's the max of ${MAX_TRIP_MOUNTAINS} · remove one to add another.`
           : `pick up to ${MAX_TRIP_MOUNTAINS} mountains you're choosing between.`}
@@ -331,7 +331,7 @@ export default function TripPlanner() {
     .filter((m): m is CatalogMountain => m !== undefined);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#0055FF] pb-8 transition-colors duration-500">
       <PageMeta
         title="Trip planner"
         description="Compare the snow across the mountains you're choosing between. See the next week of fresh snow and temps side by side, so you can pick where to go."
@@ -340,19 +340,19 @@ export default function TripPlanner() {
       <div className="max-w-3xl mx-auto px-4 md:px-8 py-6 md:py-10 space-y-6">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
+          className="inline-flex items-center gap-1.5 text-sm text-white/70 hover:text-white transition-colors"
         >
           <ArrowLeft className="w-4 h-4" /> back
         </Link>
 
         <div>
-          <p className="inline-flex items-center gap-1.5 text-xs font-bold text-primary uppercase tracking-wider">
+          <p className="inline-flex items-center gap-1.5 text-xs font-bold text-white/90 uppercase tracking-wider">
             <CalendarRange className="w-3.5 h-3.5" /> trip planner
           </p>
-          <h1 className="text-3xl md:text-4xl font-black text-foreground mt-2 leading-tight">
+          <h1 className="text-3xl md:text-4xl font-black text-white mt-2 leading-tight">
             compare your mountains.
           </h1>
-          <p className="text-muted-foreground mt-2 leading-relaxed">
+          <p className="text-white/80 mt-2 leading-relaxed">
             pick the mountains you're choosing between and see the next week of
             fresh snow and daytime temps side by side · a quick snapshot to help
             you decide where to go.
@@ -369,15 +369,15 @@ export default function TripPlanner() {
         </div>
 
         <section>
-          <h2 className="text-lg font-black text-foreground mb-3">your mountains</h2>
+          <h2 className="text-lg font-black text-white mb-3">your mountains</h2>
           <MountainPicker country={country} saved={saved} onToggle={onToggle} />
         </section>
 
         <section className="space-y-4">
           {savedMountains.length === 0 ? (
-            <div className="rounded-2xl border border-dashed border-border bg-secondary/30 p-8 text-center">
-              <MountainSnow className="w-6 h-6 text-muted-foreground/50 mx-auto mb-2" />
-              <p className="text-sm text-muted-foreground">
+            <div className="rounded-2xl border border-dashed border-white/20 bg-white/5 p-8 text-center">
+              <MountainSnow className="w-6 h-6 text-white/50 mx-auto mb-2" />
+              <p className="text-sm text-white/70">
                 pick a mountain above to compare the snow.
               </p>
             </div>
@@ -392,7 +392,7 @@ export default function TripPlanner() {
           />
         </section>
 
-        <p className="text-[11px] text-muted-foreground/70 text-center pt-2">
+        <p className="text-[11px] text-white/60 text-center pt-2">
           © 2026 navigate work digital · feelzlike
         </p>
       </div>

@@ -31,7 +31,6 @@ import { useTownWeather } from "@/lib/town-weather";
 import { townNavHasContent } from "@/lib/navContent";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
-import { DailyPick } from "@/components/DailyPick";
 import { FavouriteStar } from "@/components/FavouriteStar";
 import { TownPartnerCard } from "@/components/TownPartnerCard";
 import { TownPartnerAd } from "@/components/TownPartnerAd";
@@ -433,26 +432,6 @@ export function TownHome() {
           fullHint={t("3 saved \u00b7 remove one first", "3件保存済み \u00b7 1件削除してください")}
         />
       </div>
-
-      {/* DAILY PICK · winter-only callout that surfaces the best resort
-          today by fresh snow + low wind. Scoped to this town's nearby
-          mountains so the recommendation is genuinely reachable from
-          here (Jindabyne sees Snowy resorts, Mount Beauty sees Vic
-          High Country, etc). Mirrors the RegionHome mount so a user
-          who lands on a town directly still sees the same headline
-          pick they would on the region overview. */}
-      {seasonCtx?.season === "winter" && mountainsByDistance.length > 0 && (
-        <div className="mt-6">
-          <DailyPick
-            regionId={region.id}
-            resorts={mountainsByDistance.map((r) => ({
-              id: r.entry.location.id,
-              name: r.entry.location.name,
-            }))}
-            resortHrefPattern={`~/${region.id}/mountain/:id`}
-          />
-        </div>
-      )}
 
       {/* WEATHER IN MOUNTAINS - per-resort drive time + live conditions.
           Each row is a click-through to the resort detail page. Replaces

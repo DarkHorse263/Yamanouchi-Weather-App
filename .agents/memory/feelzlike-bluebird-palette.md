@@ -14,3 +14,5 @@ Owner-approved direction (Aug 2026): "bluebird bold" — deep saturated blue #00
 
 **Why:** the first repaint pass flipped global tokens to white-on-blue and silently blanked every white card; scoped blue is the only safe pattern here.
 **How to apply:** any new page or restyle — paint blue zones explicitly, keep tokens light, check text colour against the actual surface it sits on.
+
+> Aug 2026 update: blue now painted across ENTIRE page canvases (AppShell main container + out-of-shell pages Welcome/Countries/CountryHome/NearYouWeather/Premium/Account/TripPlanner), still EXPLICITLY per surface · global tokens remain light. White cards float on blue; text directly on blue must be white or white/70+. Loading/empty/error states on blue wrappers must NOT use text-muted-foreground. White logo asset = public/branding/logo-white.png (generated from logo-full-colour, use as-is, no invert filters). Mobile bottom nav = Today/Weather/Roads/Plan/Account with a Plan sheet (travelOpen state lives at AppShell top level, not in the render IIFE); mobile tab labels render first word only.

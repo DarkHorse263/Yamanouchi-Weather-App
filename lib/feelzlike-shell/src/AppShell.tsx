@@ -64,6 +64,79 @@ export type CombinedNavItem = {
   group?: "top" | "travel" | "bottom";
 };
 
+function MobileTravelMenu({
+  items,
+  t,
+  open,
+  onClose,
+}: {
+  items: CombinedNavItem[];
+  t: any;
+  open: boolean;
+  onClose: () => void;
+}) {
+  if (!open) return null;
+  return (
+    <>
+      <div className="fixed inset-0 z-40" onClick={onClose} aria-hidden />
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 20 }}
+        className="absolute bottom-[calc(100%+12px)] left-2 right-2 z-50 bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden"
+      >
+        <div className="px-4 py-3 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
+          <p className="text-xs font-bold uppercase tracking-wider text-slate-500">
+            {t("Plan + Travel", "プラン・旅行")}
+          </p>
+          <button onClick={onClose} className="p-1 rounded-full hover:bg-slate-200/50 text-slate-400">
+            <ChevronDown className="w-4 h-4" />
+          </button>
+        </div>
+        <div className="p-2 space-y-1">
+          {items.map((item) => (
+            <Link
+              key={item.key}
+              href={item.href}
+              onClick={onClose}
+              className={cn(
+                "group relative flex items-center gap-3 px-3 py-3 rounded-2xl transition-all duration-150 text-[14px] font-bold lowercase",
+                item.active
+                  ? item.accent
+                    ? ""
+                    : "text-[#0055FF] bg-[#F0F5FF]"
+                  : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+              )}
+              style={
+                item.active && item.accent
+                  ? { color: item.accent, backgroundColor: mixSection(item.accent, 8) }
+                  : undefined
+              }
+            >
+              {item.active && (
+                <span
+                  className={cn(
+                    "absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 rounded-r-full",
+                    item.accent ? "" : "bg-primary"
+                  )}
+                  style={item.accent ? { backgroundColor: item.accent } : undefined}
+                />
+              )}
+              <item.icon
+                className={cn(
+                  "w-5 h-5 transition-colors",
+                  item.active && !item.accent ? "text-primary" : ""
+                )}
+              />
+              <span className="flex-1 text-left">{item.label}</span>
+            </Link>
+          ))}
+        </div>
+      </motion.div>
+    </>
+  );
+}
+
 export function AppShell({
   children,
   isTownNavAvailable,
@@ -79,6 +152,9 @@ export function AppShell({
   const { region } = useRegion();
   const [location] = useLocation();
   const { towns, town: activeTown } = useBaseTown();
+  // Mobile bottom-nav "plan" menu open state. Must live at the component top
+  // level (not inside the render IIFE) so the hook order is safe.
+  const [travelOpen, setTravelOpen] = useState(false);
 
   // Publish the mobile bottom-nav height as a CSS variable so bottom-anchored
   // overlays (consent banner, install prompt) can sit ABOVE the nav instead of
@@ -357,7 +433,8 @@ export function AppShell({
       {/* Main */}
       <main
         className={cn(
-          "flex-1 md:ml-64 w-full min-h-screen md:pt-0 pb-20 md:pb-0",
+          "flex-1 md:ml-64 w-full min-h-[100dvh] md:pt-0 pb-20 md:pb-0 transition-colors duration-500",
+          seasonCtx?.season === "green" ? "bg-[#059669]" : "bg-[#0055FF]",
           (region.seasons || (region.language && region.language.locales.length > 1))
             ? "pt-24"
             : "pt-14",
@@ -383,31 +460,28 @@ export function AppShell({
         </AnimatePresence>
       </main>
 
-      {/* Mobile bottom nav: identical link order to the desktop sidebar
-          (driven by `combinedNav`), horizontally scrollable so every entry
-          is reachable on phones. */}
+      {/* Mobile bottom nav: grouped Plan + Travel menu + top/bottom items */}
       <nav className="md:hidden fixed bottom-0 inset-x-0 z-40 glass-strong pb-safe">
-        <div className="flex items-center px-1 h-16 overflow-x-auto hide-scrollbar">
+        <div className="flex items-center justify-around px-2 h-16 relative">
           {(() => {
-            return combinedNav.map((item) => {
+            const topItems = combinedNav.filter((c) => c.group === "top");
+            const travelItems = combinedNav.filter((c) => c.group === "travel");
+            const bottomItems = combinedNav.filter((c) => c.group === "bottom");
+            
+            // "Account" and "Premium"
+            // Usually we show: Today, Weather, Roads, [Plan], Premium, Account
+            // Let's filter top to just top 3 to be safe, but combinedNav already limits.
+            
+            const renderItem = (item: CombinedNavItem) => {
               const Icon = item.icon;
-              // Section-tinting: colour the active item + its indicator by
-              // section accent. No opaque bg here (the bar is glass). Today /
-              // unlisted paths fall back to white on the blue bar.
-              // The raw section hues are tuned AA-on-white for the desktop
-              // sidebar; on the solid blue glass-strong bar they lose
-              // contrast, so mix them well toward white to keep the section
-              // identity while staying legible (mobile-legibility pass,
-              // Aug 2026).
-              const activeAccent =
-                item.active && item.accent ? mixSection(item.accent, 35) : undefined;
+              const activeAccent = item.active && item.accent ? mixSection(item.accent, 35) : undefined;
               return (
                 <Link
                   key={item.key}
                   href={item.href}
                   style={activeAccent ? { color: activeAccent } : undefined}
                   className={cn(
-                    "relative flex flex-col items-center justify-center shrink-0 h-full gap-1 px-3 min-w-[64px] transition-all",
+                    "relative flex flex-col items-center justify-center shrink-0 h-full gap-1 min-w-[56px] transition-all flex-1",
                     item.active
                       ? activeAccent
                         ? ""
@@ -418,23 +492,61 @@ export function AppShell({
                   {item.active && (
                     <span
                       className={cn(
-                        "absolute top-1.5 w-8 h-0.5 rounded-full",
+                        "absolute top-1 w-8 h-0.5 rounded-full",
                         activeAccent ? "" : "bg-primary",
                       )}
                       style={activeAccent ? { backgroundColor: activeAccent } : undefined}
                     />
                   )}
-                  <Icon className="w-4 h-4" />
+                  <Icon className="w-5 h-5 mb-0.5" />
                   <span className="text-[9px] font-semibold tracking-wider uppercase leading-none whitespace-nowrap inline-flex items-center gap-1">
-                    {item.label}
-                    {item.locked && <Lock className="w-2.5 h-2.5 opacity-60" aria-label="Premium" />}
+                    {/* first word only · full labels like "weather forecast" overflow the narrow tab */}
+                    {item.label.split(" ")[0]}
                   </span>
                 </Link>
               );
-            });
+            };
+
+            const isTravelActive = travelItems.some(it => it.active);
+
+            return (
+              <>
+                <AnimatePresence>
+                  <MobileTravelMenu
+                    items={travelItems}
+                    t={t}
+                    open={travelOpen}
+                    onClose={() => setTravelOpen(false)}
+                  />
+                </AnimatePresence>
+                
+                {topItems.map(renderItem)}
+                
+                {travelItems.length > 0 && (
+                  <button
+                    onClick={() => setTravelOpen(!travelOpen)}
+                    className={cn(
+                      "relative flex flex-col items-center justify-center shrink-0 h-full gap-1 min-w-[56px] transition-all flex-1",
+                      isTravelActive || travelOpen ? "text-white" : "text-white/70 hover:text-white"
+                    )}
+                  >
+                    {isTravelActive && !travelOpen && (
+                      <span className="absolute top-1 w-8 h-0.5 rounded-full bg-white/50" />
+                    )}
+                    <Compass className={cn("w-5 h-5 mb-0.5 transition-transform", travelOpen ? "scale-110" : "")} />
+                    <span className="text-[9px] font-semibold tracking-wider uppercase leading-none whitespace-nowrap inline-flex items-center gap-1">
+                      {t("Plan", "プラン")}
+                    </span>
+                  </button>
+                )}
+
+                {bottomItems.filter(i => i.key.includes("account")).map(renderItem)}
+              </>
+            );
           })()}
         </div>
       </nav>
+
     </div>
   );
 }
