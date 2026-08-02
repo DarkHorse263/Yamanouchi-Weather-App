@@ -379,8 +379,14 @@ export function AppShell({
               const Icon = item.icon;
               // Section-tinting: colour the active item + its indicator by
               // section accent. No opaque bg here (the bar is glass). Today /
-              // unlisted paths fall back to the brand-blue primary class.
-              const activeAccent = item.active ? item.accent : undefined;
+              // unlisted paths fall back to white on the blue bar.
+              // The raw section hues are tuned AA-on-white for the desktop
+              // sidebar; on the solid blue glass-strong bar they lose
+              // contrast, so mix them well toward white to keep the section
+              // identity while staying legible (mobile-legibility pass,
+              // Aug 2026).
+              const activeAccent =
+                item.active && item.accent ? mixSection(item.accent, 35) : undefined;
               return (
                 <Link
                   key={item.key}
