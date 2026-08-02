@@ -1,6 +1,6 @@
 ---
 name: feelzlike adding a country/region
-description: The full set of registries to touch when adding a country or region, plus two non-obvious validation gotchas.
+description: The full set of registries to touch when adding a country or region, validation gotchas, and CA specifics.
 ---
 
 # Adding a country/region to feelzlike
@@ -119,3 +119,7 @@ was added, JP regions falsely advertised "updates live" on seasonal/pending data
 
 **Route paths:** the api-server mounts all routers at `/api` directly, so the
 endpoints are `/api/road-conditions` and `/api/webcams` (NOT `/api/roads/...`).
+
+## CA specifics (fourth country, added Aug 2026 via external code drop)
+- 8 regions: whistler, powder-highway, banff-lake-louise, canmore, jasper, quebec-laurentians, quebec-charlevoix, quebec-eastern-townships. Northern hemisphere like JP (Dec-Mar) but takes the NON-JP forecast branch; ensemble + alert anchors = "OTHER"; roads = link-out/seasonal-rule only (DriveBC/511), webcams map-links only, source label Open-Meteo.
+- Externally-authored code (GitHub push) covered every registry EXCEPT the openapi codegen step: RegionId enum was edited in lib/api-spec/openapi.yaml but `pnpm --filter @workspace/api-spec run codegen` + lib decl rebuild had not run, so the server silently served no CA regions while the frontend typecheck failed on transport/index.ts. Codegen + `tsc --build lib/api-zod lib/api-client-react lib/feelzlike-shell` is the first thing to check after any external code drop touching regions.

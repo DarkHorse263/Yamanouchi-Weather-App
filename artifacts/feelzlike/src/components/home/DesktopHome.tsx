@@ -20,7 +20,7 @@ import { track } from "@/lib/analytics";
 
 // Season-first ordering: southern-hemisphere countries (in season jun-oct)
 // come before Japan (dec-mar).
-const COUNTRIES: CountryCode[] = ["AU", "NZ", "JP"];
+const COUNTRIES: CountryCode[] = ["AU", "NZ", "JP", "CA"];
 
 const eyebrow = "text-[11px] font-semibold uppercase tracking-[0.18em] text-sky-700/80";
 const h2 =
@@ -110,9 +110,9 @@ export function DesktopHome() {
         className="border-t border-slate-100 px-6 pt-12 pb-10"
       >
         <p className={eyebrow}>where we cover</p>
-        <h2 className={h2}>three countries, one app</h2>
+        <h2 className={h2}>four countries, one app</h2>
 
-        <div className="mt-7 grid grid-cols-3 gap-5">
+        <div className="mt-7 grid grid-cols-2 gap-5 xl:grid-cols-4">
           {COUNTRIES.map((code) => {
             const meta = COUNTRY_META[code];
             const regionNames = regionsForCountry(code).map((r) =>
