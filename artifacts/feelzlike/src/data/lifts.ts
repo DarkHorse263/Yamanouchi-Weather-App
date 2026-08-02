@@ -168,6 +168,15 @@ import { KUSATSU_MANZA } from "./lifts/kusatsu-manza";
 import { HACHIMANTAI } from "./lifts/hachimantai";
 import { OKANAGAN } from "./lifts/okanagan";
 import { VANCOUVER } from "./lifts/vancouver";
+import { WHISTLER } from "./lifts/whistler";
+import { POWDER_HIGHWAY } from "./lifts/powder-highway";
+import { BANFF_LAKE_LOUISE } from "./lifts/banff-lake-louise";
+import { CANMORE_JASPER } from "./lifts/canmore-jasper";
+import {
+  QUEBEC_CHARLEVOIX,
+  QUEBEC_EASTERN_TOWNSHIPS,
+  QUEBEC_LAURENTIANS,
+} from "./lifts/quebec";
 
 export const LIFT_SEED: LiftSeed[] = [
   ...SNOWY_MOUNTAINS,
@@ -192,6 +201,13 @@ export const LIFT_SEED: LiftSeed[] = [
   ...HACHIMANTAI,
   ...OKANAGAN,
   ...VANCOUVER,
+  ...WHISTLER,
+  ...POWDER_HIGHWAY,
+  ...BANFF_LAKE_LOUISE,
+  ...CANMORE_JASPER,
+  ...QUEBEC_CHARLEVOIX,
+  ...QUEBEC_EASTERN_TOWNSHIPS,
+  ...QUEBEC_LAURENTIANS,
 ];
 
 const BY_MOUNTAIN = new Map<string, LiftSeed[]>();

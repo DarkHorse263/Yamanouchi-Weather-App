@@ -32,6 +32,15 @@ export const OKANAGAN: LiftSeed[] = [
   { id: "ss-silver-queen-chair",  mountainId: "silverstar",  name: "Silver Queen Chair",   baseElevation: 1609, topElevation: 1840, exposure: "moderate",       windHoldThresholdKmh: 80, type: "fixed_grip_chair", verifiedAt: V },
   { id: "ss-alpine-meadows-chair", mountainId: "silverstar", name: "Alpine Meadows Chair", baseElevation: 1580, topElevation: 1780, exposure: "sheltered",      windHoldThresholdKmh: 85, type: "fixed_grip_chair", verifiedAt: V },
 
+  // ─── SUN PEAKS (second-largest ski area in Canada · Tod, Sundance, Morrisey) ───
+  { id: "sp-sunburst-express",    mountainId: "sun-peaks-resort", name: "Sunburst Express",     baseElevation: 1255, topElevation: 1730, exposure: "moderate",       windHoldThresholdKmh: 75, type: "detachable",       verifiedAt: V },
+  { id: "sp-crystal-chair",       mountainId: "sun-peaks-resort", name: "Crystal Chair",        baseElevation: 1730, topElevation: 2055, exposure: "exposed",        windHoldThresholdKmh: 65, type: "fixed_grip_chair", verifiedAt: V },
+  { id: "sp-burfield-quad",       mountainId: "sun-peaks-resort", name: "Burfield Quad Chair",  baseElevation: 1200, topElevation: 2080, exposure: "exposed",        windHoldThresholdKmh: 70, type: "fixed_grip_chair", verifiedAt: V },
+  { id: "sp-sundance-express",    mountainId: "sun-peaks-resort", name: "Sundance Express",     baseElevation: 1255, topElevation: 1730, exposure: "sheltered",      windHoldThresholdKmh: 80, type: "detachable",       verifiedAt: V },
+  { id: "sp-morrisey-express",    mountainId: "sun-peaks-resort", name: "Morrisey Express",     baseElevation: 1255, topElevation: 1675, exposure: "moderate",       windHoldThresholdKmh: 75, type: "detachable",       verifiedAt: V },
+  { id: "sp-elevation-quad",      mountainId: "sun-peaks-resort", name: "Elevation Quad Chair", baseElevation: 1430, topElevation: 1855, exposure: "moderate",       windHoldThresholdKmh: 75, type: "fixed_grip_chair", verifiedAt: V },
+  { id: "sp-west-bowl-express",   mountainId: "sun-peaks-resort", name: "West Bowl Express",    baseElevation: 1725, topElevation: 2000, exposure: "exposed",        windHoldThresholdKmh: 70, type: "detachable",       verifiedAt: V },
+
   // ─── APEX (steep fall-line cruisers · quiet, dry Okanagan snow) ───
   { id: "apex-quad-chair",        mountainId: "apex-resort", name: "Quickdraw Quad",       baseElevation: 1575, topElevation: 2178, exposure: "exposed",        windHoldThresholdKmh: 70, type: "detachable",       verifiedAt: V },
   { id: "apex-stocks-chair",      mountainId: "apex-resort", name: "Stocks Triple Chair",  baseElevation: 1575, topElevation: 1950, exposure: "moderate",       windHoldThresholdKmh: 75, type: "fixed_grip_chair", verifiedAt: V },
