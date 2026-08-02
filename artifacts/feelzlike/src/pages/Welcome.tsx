@@ -10,6 +10,8 @@ import { NearYou } from "@/components/home/NearYou";
 import { CountryPicker } from "@/components/home/CountryPicker";
 import { Favourites } from "@/components/home/Favourites";
 import { DesktopHome } from "@/components/home/DesktopHome";
+import { HomeRegionCard } from "@/components/home/HomeRegionCard";
+import { CoverageMap } from "@/components/home/CoverageMap";
 import { HomeFooter } from "@/components/home/HomeFooter";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { websiteSchema, organizationSchema } from "@/lib/seo/jsonLd";
@@ -65,28 +67,6 @@ export default function Welcome() {
             real conditions for mountain travel
           </p>
 
-          {/* Home region shortcut · members who saved a home region on
-              /account land one tap from it. */}
-          {homeRegion && (
-            <motion.div
-              initial={{ opacity: 0, y: -4 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="mt-2"
-            >
-              <Link
-                href={`/${homeRegion.id}/`}
-                onClick={() => track("welcome_home_region_click", { category: "navigation" })}
-                className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50/70 px-4 py-2 transition-colors hover:border-sky-300 hover:bg-sky-100"
-              >
-                <span aria-hidden="true" className="text-sky-700">&#9825;</span>
-                <span className="text-sm font-medium text-sky-800">
-                  your home region · {homeRegion.nameEn.toLowerCase()}
-                </span>
-              </Link>
-            </motion.div>
-          )}
-
           {/* Return shortcut · skips the pickers for users who've already
               settled on a base town. Only renders when a valid lastTown exists
               in localStorage (set on TownLayout mount). Hidden when it would
@@ -111,6 +91,9 @@ export default function Welcome() {
             </motion.div>
           )}
         </header>
+
+        {/* HOME REGION ─ front and centre for signed-in members */}
+        <HomeRegionCard />
 
         {/* NEAR YOU ─ location-first: local conditions + nearest region ─ */}
         <NearYou />
@@ -142,6 +125,9 @@ export default function Welcome() {
             </Link>
           </p>
         </section>
+
+        {/* WORLD COVERAGE MAP ─ interactive pin explorer ─ */}
+        <CoverageMap />
 
         {/* FAVOURITES ─ saved towns for one-tap access (hidden if none) ─ */}
         <Favourites />

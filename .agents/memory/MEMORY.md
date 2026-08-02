@@ -69,4 +69,5 @@
 - [feelzlike daily smoke test](feelzlike-daily-smoke-test.md) — autoscale = no bare in-process cron; scheduled jobs must claim via job_runs upsert + wake-up catch-up sweep; link manifest is generated, affiliates never machine-visited.
 - [feelzlike publish mid-edit hazard](feelzlike-publish-mid-edit.md) — publish during in-flight edits can bake a half-saved bundle (blank prod page, healthz fine); diagnose w/ puppeteer pageerror, fix = re-publish.
 - [feelzlike partner placements](feelzlike-partner-placements.md) — `partner:true` / townPartners entry = PAID disclosed badge + rel=sponsored; never flag without a signed deal.
+- [feelzlike coverage map + promo counters](feelzlike-coverage-map.md) — pin routing: towns /:region/:town, mountains /:region/mountain/:id, umbrella pins unclickable; promo window default lives once in lib/promo-constants.
 - [feelzlike Canada ski directory](feelzlike-canada-directory.md) — /ca/all-ski-areas static list of all uncovered CA hills; links from skiresort.info detail pages, EXCLUDED from nightly link check; new static routes need app.ts KNOWN_TOP_LEVEL.

@@ -4,7 +4,7 @@ import { Loader2, RefreshCw } from "lucide-react";
 
 const RadarMapInner = lazy(() => import("./RadarMap.inner"));
 
-export type { RegionKey as RadarRegionKey } from "./RadarMap.inner";
+export type { RegionKey as RadarRegionKey } from "@/regions/region-pins";
 export type { OfficialRadarSource, WindySource } from "@/lib/bom-radar";
 
 export interface RadarMapProps {
@@ -15,7 +15,7 @@ export interface RadarMapProps {
   /** Drives the precip toggle label: "Snow" in winter, "Rain" in green season. */
   season?: "winter" | "green";
   /** Drives the Windy centre and Official radar source per region. */
-  region?: import("./RadarMap.inner").RegionKey;
+  region?: import("@/regions/region-pins").RegionKey;
   /**
    * Per-coordinate override for the Official + Expert sources (e.g. /near-you
    * hands us an arbitrary AU location's nearest BOM radar, or null when none

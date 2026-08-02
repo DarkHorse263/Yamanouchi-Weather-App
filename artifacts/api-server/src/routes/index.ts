@@ -23,6 +23,8 @@ import elevationForecastRouter from "./elevation-forecast";
 import authRouter from "./auth";
 import accountRouter from "./account";
 import authEmailRouter from "./auth-email";
+import promoRouter from "./promo";
+import resendWebhookRouter from "./resend-webhook";
 import adminRouter from "./admin";
 
 const router: IRouter = Router();
@@ -51,6 +53,8 @@ router.use(elevationForecastRouter);
 router.use(authRouter);
 router.use(accountRouter);
 router.use(authEmailRouter);
+router.use(promoRouter);
+router.use(resendWebhookRouter);
 router.use("/admin", adminRouter);
 
 export default router;

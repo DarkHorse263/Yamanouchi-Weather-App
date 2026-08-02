@@ -454,36 +454,19 @@ export function TownHome() {
         </div>
       )}
 
-      {/* TEMP IN TOWN NOW - single full-width snapshot tile.
-          May 2026 v2 brief: Roads moved out of the strip and lives inside
-          "Road conditions & cams" below. The strip is now a single
-          attention-grabbing card answering "what does it feel like here
-          right now?" before users scan the rest of the page. */}
-      <section className="mt-6">
-        <TempInTownNow
-          label={t("Temp in town now", "町の現在気温")}
-          temperature={townWeatherQ.data?.current.temperature ?? null}
-          description={townWeatherQ.data?.current.weatherDescription ?? null}
-          feelsLike={townWeatherQ.data?.current.feelsLike ?? null}
-          isLoading={townWeatherQ.isLoading}
-          townName={t(town.name, town.nameJa)}
-          loadingLabel={t("Loading…", "読込中…")}
-          unavailableLabel={t("Weather unavailable", "天気情報なし")}
-          feelsLabel={t("feelzlike", "体感")}
-        />
-      </section>
-
       {/* WEATHER IN MOUNTAINS - per-resort drive time + live conditions.
           Each row is a click-through to the resort detail page. Replaces
           the old standalone "All mountains" page; users now reach mountains
           straight from this list.
+          
+          Moved above town weather (Task #47) so mountain conditions are the star.
 
           Hidden during the green season: snow-only context (resorts, snow
           forecast) doesn't apply once the lifts close. We swap in a tiny
           off-season banner pointing users at the still-relevant town
           surfaces (stay / eat / explore) below. */}
       {isGreen && mountainsByDistance.length === 0 ? (
-        <section className="mt-3">
+        <section className="mt-6">
           <div className="rounded-2xl border border-emerald-200 bg-emerald-50/50 p-5">
             <p className="byline text-emerald-700/80 mb-1">
               {t("Off-season", "シーズンオフ")}
@@ -529,6 +512,25 @@ export function TownHome() {
         </div>
       </section>
       )}
+
+      {/* TEMP IN TOWN NOW - single full-width snapshot tile.
+          Secondary to the mountains, answers "what does it feel like here
+          right now?". Now includes a direct link to the 7-day forecast. */}
+      <section className="mt-6">
+        <TempInTownNow
+          label={t("Temp in town now", "町の現在気温")}
+          temperature={townWeatherQ.data?.current.temperature ?? null}
+          description={townWeatherQ.data?.current.weatherDescription ?? null}
+          feelsLike={townWeatherQ.data?.current.feelsLike ?? null}
+          isLoading={townWeatherQ.isLoading}
+          townName={t(town.name, town.nameJa)}
+          loadingLabel={t("Loading…", "読込中…")}
+          unavailableLabel={t("Weather unavailable", "天気情報なし")}
+          feelsLabel={t("feelzlike", "体感")}
+          forecastHref={`/${town.id}/weather`}
+          forecastLabel={t("7-day forecast", "7日間天気予報")}
+        />
+      </section>
 
       {/* FEATURED PARTNER · LISTING variant (default). Paid, disclosed
           placement below the live weather content and above the section
@@ -848,6 +850,8 @@ function TempInTownNow({
   loadingLabel,
   unavailableLabel,
   feelsLabel,
+  forecastHref,
+  forecastLabel,
 }: {
   label: string;
   temperature: number | null;
@@ -858,27 +862,40 @@ function TempInTownNow({
   loadingLabel: string;
   unavailableLabel: string;
   feelsLabel: string;
+  forecastHref?: string;
+  forecastLabel?: string;
 }) {
   return (
-    <div className="rounded-[2rem] border-0 bg-white p-6 md:p-8 shadow-[0_12px_40px_-12px_rgba(0,40,150,0.5)]">
-      <p className="text-[14px] font-bold lowercase text-slate-500">{label}</p>
-      <div className="mt-6 flex items-end justify-between gap-4 flex-wrap">
-        <div className="flex items-baseline gap-1">
-          <p className="font-display font-black text-6xl md:text-[80px] tracking-tighter text-[#0F172A] leading-none tabular-nums">
-            {temperature !== null ? Math.round(temperature) : isLoading ? "…" : "-"}°
-          </p>
-        </div>
-        <div className="text-right min-w-0">
-          <p className="font-display font-black text-2xl lowercase text-[#0F172A]">{townName}</p>
-          <p className="text-sm font-bold text-slate-500 mt-1 lowercase line-clamp-1">
-            {isLoading
-              ? loadingLabel
-              : description
-                ? `${description}${feelsLike !== null ? ` · ${feelsLabel} ${Math.round(feelsLike)}°` : ""}`
-                : unavailableLabel}
-          </p>
+    <div className="rounded-[2rem] border-0 bg-white p-6 md:p-8 shadow-[0_12px_40px_-12px_rgba(0,40,150,0.5)] flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div className="flex-1">
+        <p className="text-[14px] font-bold lowercase text-slate-500">{label}</p>
+        <div className="mt-6 flex items-end justify-between gap-4 flex-wrap">
+          <div className="flex items-baseline gap-1">
+            <p className="font-display font-black text-6xl md:text-[80px] tracking-tighter text-[#0F172A] leading-none tabular-nums">
+              {temperature !== null ? Math.round(temperature) : isLoading ? "…" : "-"}°
+            </p>
+          </div>
+          <div className="text-right min-w-0">
+            <p className="font-display font-black text-2xl lowercase text-[#0F172A]">{townName}</p>
+            <p className="text-sm font-bold text-slate-500 mt-1 lowercase line-clamp-1">
+              {isLoading
+                ? loadingLabel
+                : description
+                  ? `${description}${feelsLike !== null ? ` · ${feelsLabel} ${Math.round(feelsLike)}°` : ""}`
+                  : unavailableLabel}
+            </p>
+          </div>
         </div>
       </div>
+      {forecastHref && forecastLabel && (
+        <Link 
+          href={forecastHref} 
+          className="shrink-0 flex items-center justify-center gap-2 bg-[#F0F5FF] text-[#0055FF] hover:bg-[#0055FF] hover:text-white transition-colors rounded-xl px-5 py-4 md:py-5 font-bold lowercase text-sm"
+        >
+          <CloudSun className="w-5 h-5" />
+          {forecastLabel}
+        </Link>
+      )}
     </div>
   );
 }

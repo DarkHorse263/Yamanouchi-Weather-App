@@ -13,6 +13,7 @@ import {
   ObservedSnowCard,
 } from "@/components/weather/WeatherSections";
 import { AlertPromoBanner } from "@/components/AlertPromoBanner";
+import { UnitsToggle } from "@/components/UnitsToggle";
 import DayNarrative from "@/components/weather/DayNarrative";
 
 export function TownWeather() {
@@ -74,6 +75,10 @@ export function TownWeather() {
         }
         badge={<LiveBadge tone="onDark" label={t("Live", "ライブ")} />}
       />
+
+      <div className="mt-4 flex justify-end">
+        <UnitsToggle />
+      </div>
 
       {q.isLoading ? (
         <p className="mt-8 text-muted-foreground">{t("Loading weather…", "天気を読込中…")}</p>

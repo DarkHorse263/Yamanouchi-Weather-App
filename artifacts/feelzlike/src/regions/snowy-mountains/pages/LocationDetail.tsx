@@ -111,6 +111,7 @@ import { REGION_COUNTRY } from "@/regions";
 import { getLiftsForMountain } from "@/data/lifts";
 import { POWDER_THRESHOLDS_AU } from "@/types/weather";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
+import { UnitsToggle } from "@/components/UnitsToggle";
 import { PremiumGate, useOptionalSeason } from "@workspace/feelzlike-shell";
 import { ThredboSummer } from "../components/ThredboSummer";
 import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
@@ -406,6 +407,13 @@ export default function LocationDetail() {
               </span>
             )}
           </motion.div>
+
+          {/* Anonymous units toggle · reaches direct-landing SEO visitors who
+              never see the home footer. Hidden for signed-in members (their
+              account preference wins). */}
+          <div className="mt-4 flex">
+            <UnitsToggle />
+          </div>
 
           {/* Headline + temperature */}
           <div className="mt-5 md:mt-8 grid md:grid-cols-12 gap-6 md:gap-10 items-end">

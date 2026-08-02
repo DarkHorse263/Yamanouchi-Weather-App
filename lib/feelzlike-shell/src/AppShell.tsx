@@ -1,6 +1,7 @@
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, Leaf, Snowflake, ArrowLeft, Lock } from "lucide-react";
+import { ChevronLeft, Leaf, Snowflake, ArrowLeft, Lock, ChevronDown, Compass } from "lucide-react";
 import type { ReactNode } from "react";
 import { cn } from "./cn";
 import { useRegion } from "./RegionProvider";
@@ -51,6 +52,17 @@ function parseScope(location: string, townIds: Set<string>): ParsedScope {
 
   return { scope: "region" };
 }
+
+export type CombinedNavItem = {
+  key: string;
+  href: string;
+  icon: NavItem["icon"];
+  label: string;
+  active: boolean;
+  locked?: boolean;
+  accent?: string;
+  group?: "top" | "travel" | "bottom";
+};
 
 export function AppShell({
   children,
@@ -129,28 +141,12 @@ export function AppShell({
 
   // Single source of truth for the combined town+mountain link order, used by
   // both the desktop sidebar and the mobile bottom nav so they never drift.
-  type CombinedNavItem = {
-    key: string;
-    href: string;
-    icon: NavItem["icon"];
-    label: string;
-    active: boolean;
-    /** Show a small lock glyph next to the label (paywalled features). */
-    locked?: boolean;
-    /**
-     * Section accent hex (the "section tinting" colour system). Resolved from
-     * the item's PATH, not its rewritten href. Undefined for Today ("/") and
-     * any unlisted path · those fall back to the brand-blue primary classes.
-     */
-    accent?: string;
-  };
   const buildCombinedNav = (): CombinedNavItem[] => {
     const items: CombinedNavItem[] = [];
     const seen = new Set<string>();
-    const pushTown = (path: string) => {
+    const pushTown = (path: string, group: "top" | "travel" | "bottom" = "top") => {
       const it = townNav.find((n) => n.path === path);
       if (!it || !navTown || seen.has(`t:${path}`)) return;
-      // Hide entries whose destination has no content for this town yet.
       if (isTownNavAvailable && !isTownNavAvailable(it.path, navTown.id)) return;
       seen.add(`t:${path}`);
       items.push({
@@ -160,14 +156,13 @@ export function AppShell({
         label: t(it.label, it.labelJa),
         active: isActiveTown(it.path),
         accent: sectionAccentFor(it.path),
+        group,
       });
     };
-    const pushMountain = (path: string) => {
+    const pushMountain = (path: string, group: "top" | "travel" | "bottom" = "bottom") => {
       const it = mountainNav.find((n) => n.path === path);
       if (!it || seen.has(`m:${path}`)) return;
       seen.add(`m:${path}`);
-      // Global routes (e.g. /premium) need the `~/` root-escape so they
-      // don't get rewritten to /:region/<path> by the region's router base.
       const href = isGlobalMountainPath(it.path)
         ? `~${it.path}`
         : mountainHref(it.path);
@@ -177,29 +172,27 @@ export function AppShell({
         icon: it.icon,
         label: t(it.label, it.labelJa),
         active: isActiveMountain(it.path),
-        // No mountain-scope nav entry shows a lock glyph · the Premium hub
-        // itself is open (it explains what's premium).
         locked: false,
         accent: sectionAccentFor(it.path),
+        group,
       });
     };
-    // May 2026 v2: structural reset.
-    // - /mountains gone (accessed via "Weather in mountains" panel on Today)
-    // - /cams folded into /roads ("Roads & cams")
-    // - /radar folded into /weather ("Weather forecast")
-    pushTown("/");                  // Today
-    pushTown("/weather");           // Weather forecast
-    pushTown("/roads");             // Roads & cams
-    pushTown("/transport");         // Transport
-    pushTown("/stay");              // Stay
-    pushTown("/eat");               // Eat
-    pushTown("/explore");           // Explore
-    pushMountain("/plan");          // Trip planner (global /plan page)
-    pushMountain("/premium");       // Premium hub (global /premium page)
-    pushMountain("/account");       // Member account (global /account page)
-    // Future-proofing: append anything we forgot to enumerate above.
-    townNav.forEach((it) => pushTown(it.path));
-    mountainNav.forEach((it) => pushMountain(it.path));
+
+    pushTown("/", "top");                  // Today
+    pushTown("/weather", "top");           // Weather forecast
+    pushTown("/roads", "top");             // Roads & cams
+    
+    pushTown("/transport", "travel");      // Transport
+    pushTown("/stay", "travel");           // Stay
+    pushTown("/eat", "travel");            // Eat
+    pushTown("/explore", "travel");        // Explore
+    pushMountain("/plan", "travel");       // Trip planner
+    
+    pushMountain("/premium", "bottom");    // Premium hub
+    pushMountain("/account", "bottom");    // Member account
+    
+    townNav.forEach((it) => pushTown(it.path, "top"));
+    mountainNav.forEach((it) => pushMountain(it.path, "bottom"));
     return items;
   };
   const combinedNav = buildCombinedNav();
@@ -280,53 +273,20 @@ export function AppShell({
             </>
           )}
           {navTown || combinedNav.some((c) => c.key.startsWith("m:")) ? (
-            combinedNav.map((item) => {
-              const Icon = item.icon;
-              // Section-tinting: an active item with a section accent paints its
-              // colour inline (text + soft bg + indicator). Today / unlisted
-              // paths have no accent and fall back to the brand-blue primary
-              // classes below.
-              const activeAccent = item.active ? item.accent : undefined;
-              return (
-                <Link
-                  key={item.key}
-                  href={item.href}
-                  style={
-                    activeAccent
-                      ? { color: activeAccent, backgroundColor: mixSection(activeAccent, 8) }
-                      : undefined
-                  }
-                  className={cn(
-                    "group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-150 text-[14px] font-bold lowercase",
-                    item.active
-                      ? activeAccent
-                        ? ""
-                        : "text-[#0055FF] bg-[#F0F5FF]"
-                      : "text-slate-500 hover:bg-[#F0F5FF] hover:text-[#0055FF]",
-                  )}
-                >
-                  {item.active && (
-                    <span
-                      className={cn(
-                        "absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full",
-                        activeAccent ? "" : "bg-primary",
-                      )}
-                      style={activeAccent ? { backgroundColor: activeAccent } : undefined}
-                    />
-                  )}
-                  <Icon
-                    className={cn(
-                      "w-4 h-4 transition-colors",
-                      item.active && !activeAccent ? "text-primary" : "",
-                    )}
-                  />
-                  <span className="inline-flex items-center gap-1.5">
-                    {item.label}
-                    {item.locked && <Lock className="w-3 h-3 opacity-60" aria-label="Premium" />}
-                  </span>
-                </Link>
-              );
-            })
+            <>
+              {combinedNav.filter((c) => c.group === "top").map((item) => (
+                <SidebarNavItem key={item.key} item={item} />
+              ))}
+              
+              <SidebarTravelGroup 
+                items={combinedNav.filter((c) => c.group === "travel")} 
+                t={t} 
+              />
+              
+              {combinedNav.filter((c) => c.group === "bottom").map((item) => (
+                <SidebarNavItem key={item.key} item={item} />
+              ))}
+            </>
           ) : (
             <p className="px-3 py-2 byline text-slate-500/60">
               {t("Pick a town to see options.", "町を選んでください")}
@@ -455,6 +415,95 @@ export function AppShell({
           })()}
         </div>
       </nav>
+    </div>
+  );
+}
+
+function SidebarNavItem({ item }: { item: CombinedNavItem }) {
+  const Icon = item.icon;
+  const activeAccent = item.active ? item.accent : undefined;
+  return (
+    <Link
+      href={item.href}
+      style={
+        activeAccent
+          ? { color: activeAccent, backgroundColor: mixSection(activeAccent, 8) }
+          : undefined
+      }
+      className={cn(
+        "group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-150 text-[14px] font-bold lowercase",
+        item.active
+          ? activeAccent
+            ? ""
+            : "text-[#0055FF] bg-[#F0F5FF]"
+          : "text-slate-500 hover:bg-[#F0F5FF] hover:text-[#0055FF]",
+      )}
+    >
+      {item.active && (
+        <span
+          className={cn(
+            "absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full",
+            activeAccent ? "" : "bg-primary",
+          )}
+          style={activeAccent ? { backgroundColor: activeAccent } : undefined}
+        />
+      )}
+      <Icon
+        className={cn(
+          "w-4 h-4 transition-colors",
+          item.active && !activeAccent ? "text-primary" : "",
+        )}
+      />
+      <span className="inline-flex items-center gap-1.5">
+        {item.label}
+        {item.locked && <Lock className="w-3 h-3 opacity-60" aria-label="Premium" />}
+      </span>
+    </Link>
+  );
+}
+
+function SidebarTravelGroup({ items, t }: { items: CombinedNavItem[]; t: any }) {
+  const hasActive = items.some((it) => it.active);
+  const [open, setOpen] = useState(hasActive);
+  
+  // Auto-expand if a child route becomes active (e.g. via deep link or mobile nav click)
+  useEffect(() => {
+    if (hasActive) {
+      setOpen(true);
+    }
+  }, [hasActive]);
+  
+  if (items.length === 0) return null;
+  
+  return (
+    <div className="mt-2 mb-2 border-t border-slate-100 pt-2">
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        className="w-full flex items-center justify-between px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 hover:text-slate-600 transition-colors"
+      >
+        <span className="flex items-center gap-1.5">
+          <Compass className="w-3 h-3" />
+          {t("Plan + Travel", "プラン・旅行")}
+        </span>
+        <ChevronDown className={cn("w-3.5 h-3.5 transition-transform", open ? "rotate-180" : "")} />
+      </button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden"
+          >
+            <div className="pt-1 pb-1 space-y-0.5">
+              {items.map((item) => (
+                <SidebarNavItem key={item.key} item={item} />
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

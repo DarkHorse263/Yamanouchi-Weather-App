@@ -10,3 +10,5 @@ export * from "./auth";
 export * from "./news-clicks";
 export * from "./newsletter-campaigns";
 export * from "./jobs";
+export * from "./promo-funnel";
+export * from "./email-delivery-incidents";

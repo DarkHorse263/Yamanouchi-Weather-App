@@ -1,6 +1,6 @@
 import { Router, type IRouter, type Request, type Response } from "express";
 import { and, eq, gte, desc, isNotNull, isNull, count, sql } from "drizzle-orm";
-import { db, alertSubscribersTable, newsletterSubscribersTable } from "@workspace/db";
+import { db, alertSubscribersTable, newsletterSubscribersTable, promoFunnelDailyTable, emailDeliveryIncidentsTable } from "@workspace/db";
 import { requireAdminUser } from "../middlewares/requireAdminUser.js";
 
 /**
@@ -166,7 +166,27 @@ router.get("/stats", async (_req: Request, res: Response) => {
       if (e) e.newsletter = Number(r.c);
     }
 
+    // Promo-funnel counters (first-party shown/clicked/dismissed tallies
+    // recorded by POST /api/promo/event). Totals are all-time; 7d mirrors
+    // the subscriber "new7d" window so the funnel reads consistently.
+    const since7dDay = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+      .toISOString()
+      .slice(0, 10);
+    const promoRows = await db
+      .select({
+        event: promoFunnelDailyTable.event,
+        total: sql<number>`sum(${promoFunnelDailyTable.count})`,
+        last7d: sql<number>`sum(${promoFunnelDailyTable.count}) filter (where ${promoFunnelDailyTable.day} >= ${since7dDay})`,
+      })
+      .from(promoFunnelDailyTable)
+      .groupBy(promoFunnelDailyTable.event);
+    const promoFunnel: Record<string, { total: number; last7d: number }> = {};
+    for (const r of promoRows) {
+      promoFunnel[r.event] = { total: Number(r.total ?? 0), last7d: Number(r.last7d ?? 0) };
+    }
+
     res.json({
+      promoFunnel,
       alerts: {
         total: alTotalRow?.c ?? 0,
         verified: alVerifiedRow?.c ?? 0,
@@ -224,6 +244,31 @@ router.get("/recent-signups", async (_req: Request, res: Response) => {
   } catch (err) {
     console.error("[admin/recent-signups] failed", err);
     res.status(500).json({ error: "RECENT_SIGNUPS_FAILED" });
+  }
+});
+
+// ── Email deliverability incidents ────────────────────────────────────────
+// GET /api/admin/email-incidents · the latest 50 bounces/complaints recorded
+// by POST /api/webhooks/resend. Surfaces async Resend failures (accept-then-
+// bounce) that never show up in the synchronous send path, so the owner can
+// spot a dead sign-in address instead of leaving the visitor waiting.
+router.get("/email-incidents", async (_req: Request, res: Response) => {
+  try {
+    const incidents = await db
+      .select({
+        id: emailDeliveryIncidentsTable.id,
+        email: emailDeliveryIncidentsTable.email,
+        type: emailDeliveryIncidentsTable.type,
+        reason: emailDeliveryIncidentsTable.reason,
+        createdAt: emailDeliveryIncidentsTable.createdAt,
+      })
+      .from(emailDeliveryIncidentsTable)
+      .orderBy(desc(emailDeliveryIncidentsTable.createdAt))
+      .limit(50);
+    res.json({ incidents });
+  } catch (err) {
+    console.error("[admin/email-incidents] failed", err);
+    res.status(500).json({ error: "EMAIL_INCIDENTS_FAILED" });
   }
 });
 

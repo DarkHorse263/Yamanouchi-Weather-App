@@ -32,6 +32,7 @@ import {
 } from "@workspace/api-client-react";
 import { ElevationBands } from "@/components/weather/ElevationBands";
 import { HourlyForecast } from "@/components/HourlyForecast";
+import { PremiumFeaturePrompt } from "@/components/PremiumFeaturePrompt";
 import { SnowmakingPanel } from "@/components/weather/SnowmakingPanel";
 import { POWDER_THRESHOLDS_AU } from "@/types/weather";
 import { PowderCalendar } from "@/components/PowderCalendar";
@@ -46,6 +47,7 @@ import { midMountainElevation } from "@/lib/elevation";
 import { getLiftsForMountain } from "@/data/lifts";
 import { cn } from "@/lib/utils";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
+import { UnitsToggle } from "@/components/UnitsToggle";
 import { dailyRainMm } from "@/lib/precip";
 import { BarChart2 } from "lucide-react";
 import { useState } from "react";
@@ -237,6 +239,10 @@ export function MountainDetail() {
           }
           badge={<LiveBadge tone="onDark" label={t("Live", "ライブ")} />}
         />
+      </div>
+
+      <div className="mt-4 flex justify-end">
+        <UnitsToggle />
       </div>
 
       {q.isLoading ? (
@@ -459,7 +465,7 @@ export function MountainDetail() {
               resort pages so the powder window strip and grading look
               the same across all 3 regions. */}
           {hourly.length > 0 && (
-            <div className="mt-4">
+            <div className="mt-4 space-y-4">
               <HourlyForecast
                 hourly={hourly as any}
                 utcOffsetSeconds={(data as any).utcOffsetSeconds ?? 0}
@@ -490,6 +496,12 @@ export function MountainDetail() {
                       }
                     : undefined
                 }
+              />
+              <PremiumFeaturePrompt
+                id="mountain-powder-alerts"
+                title="get powder alerts by email"
+                blurb="we'll push an alert the moment powder hits the forecast for this mountain."
+                href="/premium"
               />
             </div>
           )}

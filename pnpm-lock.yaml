@@ -109,6 +109,9 @@ importers:
       '@workspace/db':
         specifier: workspace:*
         version: link:../../lib/db
+      '@workspace/promo-constants':
+        specifier: workspace:*
+        version: link:../../lib/promo-constants
       cookie-parser:
         specifier: ^1.4.7
         version: 1.4.7
@@ -188,6 +191,9 @@ importers:
       leaflet:
         specifier: ^1.9.4
         version: 1.9.4
+      react-error-boundary:
+        specifier: ^6.1.2
+        version: 6.1.2(react@19.1.0)
       react-helmet-async:
         specifier: ^3.0.0
         version: 3.0.0(react@19.1.0)
@@ -654,6 +660,9 @@ importers:
 
   lib/feelzlike-shell:
     dependencies:
+      '@workspace/promo-constants':
+        specifier: workspace:*
+        version: link:../promo-constants
       clsx:
         specifier: 'catalog:'
         version: 2.1.1
@@ -685,6 +694,12 @@ importers:
       '@anthropic-ai/sdk':
         specifier: ^0.78.0
         version: 0.78.0(zod@4.3.6)
+
+  lib/promo-constants:
+    devDependencies:
+      typescript:
+        specifier: ^5.6.0
+        version: 5.9.3
 
   lib/replit-auth-web:
     dependencies:
@@ -4347,6 +4362,11 @@ packages:
     resolution: {integrity: sha512-Xs1hdnE+DyKgeHJeJznQmYMIBG3TKIHJJT95Q58nHLSrElKlGQqDTR2HQ9fx5CN/Gk6Vh/kupBTDLU11/nDk/g==}
     peerDependencies:
       react: ^19.1.0
+
+  react-error-boundary@6.1.2:
+    resolution: {integrity: sha512-3DpCr5HVdZ0caUjYE/kIHBEJN0mNP3ZCgf16c48uJ5TbWjorKVp+YG8W3XqlJ7vJAVNw6wNIImyPXmFydwmyng==}
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
 
   react-fast-compare@3.2.2:
     resolution: {integrity: sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==}
@@ -8593,6 +8613,10 @@ snapshots:
     dependencies:
       react: 19.1.0
       scheduler: 0.26.0
+
+  react-error-boundary@6.1.2(react@19.1.0):
+    dependencies:
+      react: 19.1.0
 
   react-fast-compare@3.2.2: {}
 

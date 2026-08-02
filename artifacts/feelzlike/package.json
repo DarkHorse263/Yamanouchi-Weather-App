@@ -102,6 +102,7 @@
   "dependencies": {
     "@sentry/react": "^10.50.0",
     "leaflet": "^1.9.4",
+    "react-error-boundary": "^6.1.2",
     "react-helmet-async": "^3.0.0",
     "react-leaflet": "^5.0.0"
   }

@@ -292,6 +292,8 @@ function TripResults({ mountains }: { mountains: CatalogMountain[] }) {
   );
 }
 
+import { PremiumFeaturePrompt } from "@/components/PremiumFeaturePrompt";
+
 export default function TripPlanner() {
   const countries = useMemo(() => plannerCountries(), []);
   const [country, setCountry] = useState<CountryCode>(() =>
@@ -371,7 +373,7 @@ export default function TripPlanner() {
           <MountainPicker country={country} saved={saved} onToggle={onToggle} />
         </section>
 
-        <section>
+        <section className="space-y-4">
           {savedMountains.length === 0 ? (
             <div className="rounded-2xl border border-dashed border-border bg-secondary/30 p-8 text-center">
               <MountainSnow className="w-6 h-6 text-muted-foreground/50 mx-auto mb-2" />
@@ -382,6 +384,12 @@ export default function TripPlanner() {
           ) : (
             <TripResults mountains={savedMountains} />
           )}
+          <PremiumFeaturePrompt
+            id="planner-powder-alerts"
+            title="get powder alerts by email"
+            blurb="we'll push an alert the moment a big dump hits the forecast for your saved mountains."
+            href="/premium"
+          />
         </section>
 
         <p className="text-[11px] text-muted-foreground/70 text-center pt-2">

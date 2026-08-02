@@ -89,8 +89,20 @@ app.use(cors({
   credentials: true,
 }));
 app.use(cookieParser());
-app.use(express.json({ limit: "100kb" }));
-app.use(express.urlencoded({ extended: true, limit: "100kb" }));
+// The Resend webhook needs the RAW request body to verify its Svix HMAC
+// signature (see routes/resend-webhook.ts, which mounts its own express.raw).
+// Skip the app-wide JSON/urlencoded parsers for that one path so the bytes
+// Resend signed reach the route untouched · every other route still gets
+// parsed bodies as before.
+const RESEND_WEBHOOK_PATH = "/api/webhooks/resend";
+const skipForResendWebhook =
+  (parser: express.RequestHandler): express.RequestHandler =>
+  (req, res, next) => {
+    if (req.path === RESEND_WEBHOOK_PATH) return next();
+    return parser(req, res, next);
+  };
+app.use(skipForResendWebhook(express.json({ limit: "100kb" })));
+app.use(skipForResendWebhook(express.urlencoded({ extended: true, limit: "100kb" })));
 
 // Catch JSON parse errors (and any other body-parser SyntaxError) before they
 // bubble into Express's default HTML error page, which would leak a stack

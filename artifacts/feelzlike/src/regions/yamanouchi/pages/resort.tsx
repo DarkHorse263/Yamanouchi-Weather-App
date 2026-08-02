@@ -48,6 +48,7 @@ import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
 import { midMountainElevation } from "@/lib/elevation";
 import { cn } from "@/lib/utils";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
+import { UnitsToggle } from "@/components/UnitsToggle";
 import { BarChart2 } from "lucide-react";
 
 type WeatherId = Parameters<typeof useGetLocationWeather>[0];
@@ -317,6 +318,11 @@ export default function ResortDetail() {
       />
 
       <div className="max-w-7xl mx-auto px-5 md:px-10 pb-16 space-y-5 md:space-y-6 -mt-2">
+        {/* Anonymous units toggle · reaches direct-landing SEO visitors who
+            never see the home footer. Hidden for signed-in members. */}
+        <div className="flex justify-end -mb-2">
+          <UnitsToggle />
+        </div>
         {/* Operating hours strip · matches AU resort hero. Sits above
             Conditions Right Now so visitors see first / last lifts before
             scrolling. */}

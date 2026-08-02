@@ -15,11 +15,27 @@ interface DailyPoint {
   alerts: number;
   newsletter: number;
 }
+interface PromoBucket {
+  total: number;
+  last7d: number;
+}
 interface StatsPayload {
+  promoFunnel?: Record<string, PromoBucket>;
   alerts: SubsBucket;
   newsletter?: SubsBucket;
   newsletterSources?: Array<{ source: string; count: number }>;
   daily?: DailyPoint[];
+}
+
+interface EmailIncident {
+  id: string;
+  email: string;
+  type: "bounced" | "complained";
+  reason: string | null;
+  createdAt: string;
+}
+interface EmailIncidentsPayload {
+  incidents: EmailIncident[];
 }
 
 interface RecentSignup {
@@ -124,20 +140,77 @@ function SourcesCard({ sources }: { sources: Array<{ source: string; count: numb
 }
 
 /**
+ * EmailIncidentsCard · async Resend delivery failures.
+ *
+ * Resend can accept a send (HTTP 200) then hard-bounce or be marked as spam
+ * minutes later — the synchronous send path never sees that, so a magic-link
+ * visitor with a dead address just waits forever. POST /api/webhooks/resend
+ * records those bounce/complaint events; this shows the latest 50 so the
+ * owner can spot a bad sign-in address. We record only · we never auto-
+ * unsubscribe a matching subscriber.
+ */
+function EmailIncidentsCard({ incidents }: { incidents: EmailIncident[] }) {
+  return (
+    <div className="rounded-lg border bg-white p-5">
+      <h3 className="text-sm font-semibold mb-1 lowercase">email delivery incidents</h3>
+      <p className="text-xs text-muted-foreground mb-3">
+        bounces & spam complaints reported by resend after a send was accepted · latest 50 ·
+        recorded only, subscribers are never auto-removed
+      </p>
+      {incidents.length === 0 ? (
+        <p className="text-sm text-muted-foreground">none · all mail is landing.</p>
+      ) : (
+        <ul className="divide-y text-sm">
+          {incidents.map((i) => (
+            <li key={i.id} className="py-2 flex items-start justify-between gap-4">
+              <div className="min-w-0">
+                <div className="truncate">{i.email}</div>
+                {i.reason ? (
+                  <div className="text-xs text-muted-foreground truncate" title={i.reason}>
+                    {i.reason}
+                  </div>
+                ) : null}
+              </div>
+              <div className="flex items-center gap-2 whitespace-nowrap">
+                <span
+                  className={`rounded px-1.5 py-0.5 text-[11px] font-medium ${
+                    i.type === "complained"
+                      ? "bg-amber-100 text-amber-800"
+                      : "bg-rose-100 text-rose-800"
+                  }`}
+                >
+                  {i.type}
+                </span>
+                <span className="text-xs text-muted-foreground">
+                  {new Date(i.createdAt).toLocaleDateString()}
+                </span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+/**
  * PromoFunnelCard · the snow-alert prompt funnel (shown → clicked → subscribed).
  *
- * The "shown" and "clicked" steps live in GA4 (events alert_promo_shown /
- * alert_promo_clicked / alert_promo_dismissed, category "alert") because
- * they're consent-gated client events we never send to our own server.
- * The "subscribed" step is our own database - shown inline here. The GA link
- * deep-links the events report on the feelzlike property so the owner can put
- * the two numbers side by side and judge whether the prompt converts.
+ * "shown" / "clicked" / "dismissed" are first-party counters recorded by the
+ * banner via POST /api/promo/event (anonymous aggregate tallies, no
+ * identifiers, so they count EVERY visitor - not just analytics-consented
+ * ones like the GA mirror does; expect these to read higher than GA).
+ * "subscribed" is verified powder-alert subscribers from our own database.
  */
-function PromoFunnelCard({ alerts }: { alerts: SubsBucket }) {
+function PromoFunnelCard({ alerts, promo }: { alerts: SubsBucket; promo?: Record<string, PromoBucket> }) {
+  const fmt = (b?: PromoBucket) =>
+    b ? `${b.total}` : "0";
+  const sub7 = (b?: PromoBucket) => `+${b?.last7d ?? 0} last 7d`;
   const steps = [
-    { label: "shown", sub: "banner appeared · ga event alert_promo_shown", value: "see GA" },
-    { label: "clicked", sub: "tapped set up alerts · ga event alert_promo_clicked", value: "see GA" },
+    { label: "shown", sub: `banner appeared · ${sub7(promo?.shown)}`, value: fmt(promo?.shown) },
+    { label: "clicked", sub: `tapped set up alerts · ${sub7(promo?.clicked)}`, value: fmt(promo?.clicked) },
     { label: "subscribed", sub: "confirmed a powder-alert email", value: String(alerts.verified) },
+    { label: "dismissed", sub: `closed the banner · ${sub7(promo?.dismissed)}`, value: fmt(promo?.dismissed) },
   ];
   return (
     <div className="rounded-lg border bg-white p-5">
@@ -153,8 +226,8 @@ function PromoFunnelCard({ alerts }: { alerts: SubsBucket }) {
         </a>
       </div>
       <p className="text-xs text-muted-foreground mb-3">
-        did people notice the prompt? compare alert_promo_shown → alert_promo_clicked in GA
-        (analytics-consented visitors only) against subscribers below · alert_promo_dismissed = closed it.
+        real first-party counts from every visitor (not consent-gated, so they'll read higher
+        than GA) · shown → clicked → subscribed tells you if the prompt converts.
       </p>
       <div className="flex items-stretch gap-2">
         {steps.map((s, i) => (
@@ -164,7 +237,7 @@ function PromoFunnelCard({ alerts }: { alerts: SubsBucket }) {
               <div className="text-lg font-semibold tabular-nums">{s.value}</div>
               <div className="text-[11px] text-muted-foreground truncate" title={s.sub}>{s.sub}</div>
             </div>
-            {i < steps.length - 1 ? <span className="shrink-0 text-slate-300">→</span> : null}
+            {i < 2 ? <span className="shrink-0 text-slate-300">→</span> : null}
           </div>
         ))}
       </div>
@@ -212,6 +285,7 @@ function DashboardLinks() {
 export default function AdminStats() {
   const stats = useAdminQuery<StatsPayload>("stats", "/stats");
   const signups = useAdminQuery<SignupsPayload>("signups", "/recent-signups");
+  const emailIncidents = useAdminQuery<EmailIncidentsPayload>("email-incidents", "/email-incidents");
 
   return (
     <AdminLayout active="stats">
@@ -242,7 +316,7 @@ export default function AdminStats() {
 
           {stats.data.daily && stats.data.daily.length > 0 ? <TrendStrip daily={stats.data.daily} /> : null}
 
-          <PromoFunnelCard alerts={stats.data.alerts} />
+          <PromoFunnelCard alerts={stats.data.alerts} promo={stats.data.promoFunnel} />
 
           <div className="grid lg:grid-cols-2 gap-4">
             <SubsCard title="powder-alert subscribers" b={stats.data.alerts} />
@@ -253,6 +327,10 @@ export default function AdminStats() {
             {stats.data.newsletterSources ? <SourcesCard sources={stats.data.newsletterSources} /> : null}
             <DashboardLinks />
           </div>
+
+          {emailIncidents.data ? (
+            <EmailIncidentsCard incidents={emailIncidents.data.incidents} />
+          ) : null}
 
           {signups.data ? (
             <div className="grid lg:grid-cols-2 gap-4">
