@@ -207,11 +207,11 @@ export function AppShell({
   return (
     <div className="min-h-screen bg-background flex flex-col md:flex-row">
       {/* Desktop sidebar */}
-      <aside className="hidden md:flex flex-col w-64 fixed inset-y-0 left-0 z-50 border-r border-border bg-white overflow-y-auto">
+      <aside className="hidden md:flex flex-col w-64 fixed inset-y-0 left-0 z-50 border-r border-border bg-white text-[#0F172A] overflow-y-auto">
         <div className="px-6 pt-6 pb-5">
           <Link
             href="~/"
-            className="byline inline-flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
+            className="text-[10px] font-bold uppercase tracking-wider inline-flex items-center gap-1 text-slate-500 hover:text-[#0055FF] transition-colors"
           >
             <ChevronLeft className="w-3 h-3" />
             All regions
@@ -219,10 +219,10 @@ export function AppShell({
           <Link href="/" className="block mt-4 mb-1.5">
             <img src={region.brand.wordmarkUrl} alt="feelzlike" className="h-8 w-auto" />
           </Link>
-          <p className="font-display font-semibold text-base leading-tight text-foreground">
+          <p className="font-display font-semibold text-base leading-tight text-card-foreground">
             {region.name}
           </p>
-          <p className="byline mt-1.5 text-muted-foreground/80">{region.subtitle}</p>
+          <p className="byline mt-1.5 text-slate-500/80">{region.subtitle}</p>
 
           {(region.seasons || (region.language && region.language.locales.length > 1)) && (
             <div className="mt-4 flex items-center gap-2">
@@ -297,12 +297,12 @@ export function AppShell({
                       : undefined
                   }
                   className={cn(
-                    "group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-150 text-sm font-medium",
+                    "group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-150 text-[14px] font-bold lowercase",
                     item.active
                       ? activeAccent
                         ? ""
-                        : "text-primary bg-primary/8"
-                      : "text-muted-foreground hover:bg-secondary hover:text-foreground",
+                        : "text-[#0055FF] bg-[#F0F5FF]"
+                      : "text-slate-500 hover:bg-[#F0F5FF] hover:text-[#0055FF]",
                   )}
                 >
                   {item.active && (
@@ -328,35 +328,36 @@ export function AppShell({
               );
             })
           ) : (
-            <p className="px-3 py-2 byline text-muted-foreground/60">
+            <p className="px-3 py-2 byline text-slate-500/60">
               {t("Pick a town to see options.", "町を選んでください")}
             </p>
           )}
         </nav>
 
         <div className="px-6 pb-5 pt-3">
-          <p className="byline text-muted-foreground/60">{region.footer ?? "v0.4 · feelzlike"}</p>
+          <p className="byline text-slate-500/60">{region.footer ?? "v0.4 · feelzlike"}</p>
         </div>
       </aside>
 
       {/* Mobile header */}
-      <header className="md:hidden fixed top-0 inset-x-0 z-40 glass-strong">
+      <header className="md:hidden fixed top-0 inset-x-0 z-40 glass-strong border-b border-white/10">
         <div className="h-14 flex items-center justify-between px-4">
           <Link
             href="~/"
             aria-label="Back to all regions"
-            className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors"
+            className="flex items-center gap-1.5 text-white/80 hover:text-white transition-colors"
           >
             <ChevronLeft className="w-4 h-4" />
-            <span className="byline">{t("Regions", "地域")}</span>
+            <span className="text-[10px] font-bold uppercase tracking-wider">{t("Regions", "地域")}</span>
           </Link>
           <Link href="/" className="flex items-center">
-            <img src={region.brand.wordmarkUrl} alt="feelzlike" className="h-6 w-auto" />
+            {/* If the wordmark is dark, it needs to be white. But we can't easily filter it if it's an img, unless we use css invert or it's already white */}
+            <img src={region.brand.wordmarkUrl} alt="feelzlike" className="h-6 w-auto brightness-0 invert" />
           </Link>
           {towns.length > 0 ? (
             <TownPicker variant="compact" preserveSubpath />
           ) : (
-            <span className="byline text-muted-foreground/80">{region.shortTag}</span>
+            <span className="text-[10px] font-bold uppercase tracking-wider text-white/80">{region.shortTag}</span>
           )}
         </div>
         {(region.seasons || (region.language && region.language.locales.length > 1)) && (
@@ -430,8 +431,8 @@ export function AppShell({
                     item.active
                       ? activeAccent
                         ? ""
-                        : "text-primary"
-                      : "text-muted-foreground/80",
+                        : "text-white"
+                      : "text-white/70 hover:text-white",
                   )}
                 >
                   {item.active && (
@@ -486,14 +487,14 @@ function BackBar({
   };
 
   return (
-    <div className="sticky top-14 md:top-0 z-30 bg-background/85 backdrop-blur-md border-b border-border/40">
+    <div className="sticky top-14 md:top-0 z-30 bg-[#0055FF]/95 backdrop-blur-md border-b border-white/20">
       <div className="max-w-7xl mx-auto px-4 md:px-10 py-2.5 md:py-3">
         <a
           href={fallback}
           onClick={handleBack}
-          className="inline-flex items-center gap-2 text-sm font-semibold text-foreground hover:text-primary transition-colors px-3 py-2 -ml-2 rounded-lg hover:bg-muted/60 active:bg-muted/80"
+          className="inline-flex items-center gap-2 text-sm font-bold lowercase text-white hover:text-white/80 transition-colors px-3 py-2 -ml-2 rounded-xl hover:bg-white/10 active:bg-white/20"
         >
-          <ArrowLeft className="w-4 h-4" strokeWidth={2.25} />
+          <ArrowLeft className="w-5 h-5" strokeWidth={2.5} />
           {t("Back", "戻る")}
         </a>
       </div>
@@ -503,7 +504,7 @@ function BackBar({
 
 function SectionLabel({ children }: { children: ReactNode }) {
   return (
-    <p className="px-3 pt-2 pb-2 byline text-muted-foreground/70">{children}</p>
+    <p className="px-3 pt-2 pb-2 byline text-slate-500/70">{children}</p>
   );
 }
 
@@ -526,7 +527,7 @@ function NavLink({
         "group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-150 text-sm font-medium",
         active
           ? "text-primary bg-primary/8"
-          : "text-muted-foreground hover:bg-secondary hover:text-foreground",
+          : "text-slate-500 hover:bg-secondary hover:text-white",
       )}
     >
       {active && (
@@ -559,7 +560,7 @@ function SeasonPill({
           "inline-flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-semibold tracking-wider uppercase transition-colors",
           season === "winter"
             ? "bg-foreground text-background"
-            : "text-muted-foreground hover:text-foreground",
+            : "text-slate-500 hover:text-white",
         )}
       >
         <Snowflake className="w-3 h-3" />
@@ -575,7 +576,7 @@ function SeasonPill({
           "inline-flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-semibold tracking-wider uppercase transition-colors",
           season === "green"
             ? "bg-foreground text-background"
-            : "text-muted-foreground hover:text-foreground",
+            : "text-slate-500 hover:text-white",
         )}
       >
         <Leaf className="w-3 h-3" />
@@ -606,7 +607,7 @@ function LangPill({
             "px-2 py-1 rounded-full text-[10px] font-semibold tracking-wider uppercase transition-colors",
             current === loc
               ? "bg-foreground text-background"
-              : "text-muted-foreground hover:text-foreground",
+              : "text-slate-500 hover:text-white",
           )}
         >
           {loc === "ja" ? "日本語" : "EN"}

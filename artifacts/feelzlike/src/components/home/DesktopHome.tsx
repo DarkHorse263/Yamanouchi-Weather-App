@@ -22,9 +22,9 @@ import { track } from "@/lib/analytics";
 // come before Japan (dec-mar).
 const COUNTRIES: CountryCode[] = ["AU", "NZ", "JP", "CA"];
 
-const eyebrow = "text-[11px] font-semibold uppercase tracking-[0.18em] text-sky-700/80";
+const eyebrow = "text-[11px] font-bold lowercase tracking-wider text-slate-500";
 const h2 =
-  "mt-2 text-2xl md:text-3xl font-bold tracking-tight text-blue-900";
+  "mt-2 text-3xl md:text-4xl font-black tracking-tight text-[#0F172A] lowercase";
 
 const STEPS: Array<{ n: string; text: string }> = [
   { n: "1", text: "pick a country and a region" },
@@ -65,11 +65,11 @@ export function DesktopHome() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.5 }}
-        className="border-t border-slate-100 px-6 pt-12 pb-10"
+        className="border-t border-slate-200 px-6 pt-12 pb-10"
       >
         <p className={eyebrow}>about feelzlike</p>
         <h2 className={h2}>real conditions for mountain travel</h2>
-        <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-slate-600">
+        <p className="mt-3 max-w-2xl text-[15px] font-bold leading-relaxed text-slate-500 lowercase">
           you&rsquo;re in town, wondering what it&rsquo;s actually like up the
           mountain. feelzlike pulls together what&rsquo;s happening right now -
           snow, wind, temperature, roads and live cams - so you can make the
@@ -80,19 +80,19 @@ export function DesktopHome() {
           {STEPS.map((s) => (
             <div
               key={s.n}
-              className="rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_1px_3px_rgba(15,23,42,0.04)]"
+              className="rounded-[2rem] border-0 bg-white p-6 shadow-[0_12px_40px_-12px_rgba(0,40,150,0.5)]"
             >
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-sky-50 text-sm font-bold text-sky-700 ring-1 ring-sky-200">
+              <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#F0F5FF] text-lg font-black text-[#0055FF]">
                 {s.n}
               </span>
-              <p className="mt-3 text-[14px] leading-relaxed text-slate-700">
+              <p className="mt-5 text-[15px] font-bold leading-relaxed text-slate-500 lowercase">
                 {s.text}
               </p>
             </div>
           ))}
         </div>
 
-        <p className="mt-6 max-w-2xl text-[12.5px] leading-relaxed text-slate-500">
+        <p className="mt-6 max-w-2xl text-[12.5px] font-bold leading-relaxed text-slate-400 lowercase">
           the numbers come straight from official weather services and live
           observation networks in each country - the bureau of meteorology in
           australia, the japan meteorological agency in japan, and more. every
@@ -107,7 +107,7 @@ export function DesktopHome() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.5 }}
-        className="border-t border-slate-100 px-6 pt-12 pb-10"
+        className="border-t border-white/20 px-6 pt-12 pb-10"
       >
         <p className={eyebrow}>where we cover</p>
         <h2 className={h2}>four countries, one app</h2>
@@ -128,13 +128,13 @@ export function DesktopHome() {
                     data: { code },
                   })
                 }
-                className="group flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_1px_3px_rgba(15,23,42,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-sky-400 hover:shadow-[0_12px_28px_-12px_rgba(56,128,210,0.25)]"
+                className="group flex flex-col overflow-hidden rounded-[2rem] border-0 bg-white shadow-[0_12px_40px_-12px_rgba(0,40,150,0.5)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(0,30,120,0.5)]"
               >
-                <div className="h-1 w-full bg-gradient-to-r from-sky-400 via-sky-500 to-blue-700" />
-                <div className="flex flex-1 flex-col px-5 py-5">
+                <div className="h-2 w-full bg-gradient-to-r from-sky-400 via-sky-500 to-blue-700" />
+                <div className="flex flex-1 flex-col px-6 py-6">
                   <span
                     aria-hidden="true"
-                    className="text-3xl leading-none"
+                    className="text-4xl leading-none"
                     style={{
                       fontFamily:
                         '"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif',
@@ -142,15 +142,15 @@ export function DesktopHome() {
                   >
                     {meta.flag}
                   </span>
-                  <h3 className="mt-3 text-xl font-bold tracking-tight text-blue-900 group-hover:text-sky-700">
+                  <h3 className="mt-4 text-2xl font-black lowercase tracking-tight text-[#0F172A] group-hover:text-[#0055FF]">
                     {meta.name.toLowerCase()}
                   </h3>
-                  <p className="mt-1.5 flex-1 text-[13px] leading-relaxed text-slate-600">
+                  <p className="mt-2 flex-1 text-[14px] font-bold leading-relaxed text-slate-500 lowercase">
                     {regionNames.join(" · ")}
                   </p>
-                  <span className="mt-4 inline-flex items-center gap-1.5 text-[12px] font-semibold text-sky-700 group-hover:text-blue-700">
+                  <span className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-black lowercase text-[#0055FF]">
                     explore
-                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </span>
                 </div>
               </a>
@@ -165,7 +165,7 @@ export function DesktopHome() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.5 }}
-        className="border-t border-slate-100 px-6 pt-12 pb-10"
+        className="border-t border-slate-200 px-6 pt-12 pb-10"
       >
         <p className={eyebrow}>what&rsquo;s inside</p>
         <h2 className={h2}>everything for the trip up</h2>
@@ -175,21 +175,21 @@ export function DesktopHome() {
             const Icon = f.icon;
             const inner = (
               <>
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-sky-50 text-sky-700 ring-1 ring-sky-200">
-                  <Icon className="h-5 w-5" />
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#F0F5FF] text-[#0055FF]">
+                  <Icon className="h-6 w-6" />
                 </span>
                 <div className="min-w-0">
-                  <h3 className="text-[15px] font-bold text-blue-900">
+                  <h3 className="text-xl font-black lowercase tracking-tight text-[#0F172A]">
                     {f.title}
                   </h3>
-                  <p className="mt-1 text-[13px] leading-relaxed text-slate-600">
+                  <p className="mt-1.5 text-[14px] font-bold leading-relaxed text-slate-500 lowercase">
                     {f.body}
                   </p>
                 </div>
               </>
             );
             const base =
-              "flex items-start gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_1px_3px_rgba(15,23,42,0.04)]";
+              "flex items-start gap-5 rounded-[2rem] border-0 bg-white p-6 shadow-[0_12px_40px_-12px_rgba(0,40,150,0.5)]";
             return f.href ? (
               <a
                 key={f.title}
@@ -198,7 +198,7 @@ export function DesktopHome() {
                   f.event &&
                   track(f.event, { category: "navigation" })
                 }
-                className={`${base} group transition-all duration-200 hover:-translate-y-0.5 hover:border-sky-400 hover:shadow-[0_12px_28px_-12px_rgba(56,128,210,0.25)]`}
+                className={`${base} group transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(0,30,120,0.5)]`}
               >
                 {inner}
               </a>
@@ -219,18 +219,18 @@ export function DesktopHome() {
         transition={{ duration: 0.5 }}
         className="px-6 pt-6 pb-12"
       >
-        <div className="flex items-center gap-6 rounded-3xl bg-gradient-to-br from-sky-600 to-blue-700 p-8 text-white shadow-[0_24px_60px_-24px_rgba(2,6,23,0.5)]">
-          <span className="hidden shrink-0 items-center justify-center rounded-2xl bg-white/10 p-4 ring-1 ring-white/20 sm:inline-flex">
-            <Smartphone className="h-8 w-8 text-sky-100" />
+        <div className="flex items-center gap-8 rounded-[2.5rem] bg-[#F0F5FF] border-0 p-8 shadow-[0_12px_40px_-12px_rgba(0,40,150,0.5)]">
+          <span className="hidden shrink-0 items-center justify-center rounded-3xl bg-white p-5 shadow-sm sm:inline-flex">
+            <Smartphone className="h-10 w-10 text-[#EC008C]" />
           </span>
           <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-300">
+            <p className="text-[11px] font-bold lowercase tracking-wider text-[#0055FF]">
               take it with you
             </p>
-            <h2 className="mt-1.5 text-2xl font-bold tracking-tight">
+            <h2 className="mt-2 text-3xl font-black lowercase tracking-tight text-[#0F172A]">
               feelzlike is built for your phone
             </h2>
-            <p className="mt-2 max-w-2xl text-[14px] leading-relaxed text-sky-50/90">
+            <p className="mt-3 max-w-2xl text-[15px] font-bold leading-relaxed text-slate-500 lowercase">
               open feelzlike on your phone&rsquo;s browser and tap &lsquo;add to
               home screen&rsquo; - it opens like an app, loads instantly and
               keeps working even when the signal drops on the mountain.

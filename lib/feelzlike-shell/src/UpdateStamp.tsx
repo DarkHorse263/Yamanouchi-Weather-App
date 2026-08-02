@@ -64,16 +64,16 @@ export function UpdateStamp({
   // On a dark gradient, body copy needs full white to clear WCAG AA on the
   // lightest gradient stop (sky-600 / emerald-700). Reserve translucency
   // for non-text glyphs only (separator dot).
-  const baseColor = tone === "onDark" ? "text-white" : "text-muted-foreground/80";
-  const strongColor = tone === "onDark" ? "text-white" : "text-foreground";
-  const dimColor = tone === "onDark" ? "text-white/60" : "text-muted-foreground/40";
-  const noTimestampColor = tone === "onDark" ? "text-white" : "text-muted-foreground/70";
+  const baseColor = tone === "onDark" ? "text-white" : "text-slate-500/80";
+  const strongColor = tone === "onDark" ? "text-white" : "text-[#0F172A]";
+  const dimColor = tone === "onDark" ? "text-white/60" : "text-slate-500/40";
+  const noTimestampColor = tone === "onDark" ? "text-white" : "text-slate-500/70";
 
   const ms = toMs(lastUpdated);
   if (ms === null) {
     return (
       <span
-        className={`inline-flex items-center gap-1.5 text-[11px] ${noTimestampColor} ${className}`}
+        className={`inline-flex items-center gap-1.5 text-[11px] lowercase font-bold ${noTimestampColor} ${className}`}
       >
         <Clock className="w-3 h-3" />
         {t("No timestamp", "更新時刻なし")}
@@ -87,7 +87,7 @@ export function UpdateStamp({
 
   return (
     <span
-      className={`inline-flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] ${baseColor} ${className}`}
+      className={`inline-flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] lowercase font-bold ${baseColor} ${className}`}
     >
       <span className="inline-flex items-center gap-1">
         <Clock className="w-3 h-3" />

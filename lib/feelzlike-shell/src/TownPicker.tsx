@@ -97,7 +97,7 @@ export function TownPicker({
         <span className="byline text-muted-foreground/80 hidden md:inline">
           {t("Staying in", "滞在地")}
         </span>
-        <span className="font-display font-semibold text-foreground tracking-tight">
+        <span className="font-display font-semibold text-[#0F172A] tracking-tight">
           {t(town.name, town.nameJa)}
         </span>
         <ChevronDown
@@ -145,7 +145,7 @@ export function TownPicker({
                   <div
                     className={cn(
                       "font-display font-semibold text-sm leading-tight",
-                      active ? "text-primary" : "text-foreground",
+                      active ? "text-primary" : "text-[#0F172A]",
                     )}
                   >
                     {t(opt.name, opt.nameJa)}
