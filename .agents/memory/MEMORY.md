@@ -70,4 +70,5 @@
 - [feelzlike publish mid-edit hazard](feelzlike-publish-mid-edit.md) — publish during in-flight edits can bake a half-saved bundle (blank prod page, healthz fine); diagnose w/ puppeteer pageerror, fix = re-publish.
 - [feelzlike partner placements](feelzlike-partner-placements.md) — `partner:true` / townPartners entry = PAID disclosed badge + rel=sponsored; never flag without a signed deal.
 - [feelzlike coverage map + promo counters](feelzlike-coverage-map.md) — pin routing: towns /:region/:town, mountains /:region/mountain/:id, umbrella pins unclickable; promo window default lives once in lib/promo-constants.
+- [feelzlike bottom overlays](feelzlike-bottom-overlays.md) — consent/install prompts offset above mobile nav via --mobile-bottom-nav CSS var set by AppShell; install prompt waits for consent + 14-day dismiss cooldown.
 - [feelzlike Canada ski directory](feelzlike-canada-directory.md) — /ca/all-ski-areas static list of all uncovered CA hills; links from skiresort.info detail pages, EXCLUDED from nightly link check; new static routes need app.ts KNOWN_TOP_LEVEL.

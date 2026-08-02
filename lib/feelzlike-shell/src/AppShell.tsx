@@ -80,6 +80,20 @@ export function AppShell({
   const [location] = useLocation();
   const { towns, town: activeTown } = useBaseTown();
 
+  // Publish the mobile bottom-nav height as a CSS variable so bottom-anchored
+  // overlays (consent banner, install prompt) can sit ABOVE the nav instead of
+  // covering it. Pages without AppShell (e.g. home) get the 0px default.
+  useEffect(() => {
+    const root = document.documentElement;
+    root.style.setProperty(
+      "--mobile-bottom-nav",
+      "calc(4rem + env(safe-area-inset-bottom))",
+    );
+    return () => {
+      root.style.removeProperty("--mobile-bottom-nav");
+    };
+  }, []);
+
   // MUST be called unconditionally - a previous `region.seasons ? useSeason() : null`
   // pattern violated the Rules of Hooks and silently broke the season toggle.
   const maybeSeason = useOptionalSeason();
