@@ -229,7 +229,7 @@ export function LiftWindHoldPanel({
     <section className="mt-8" aria-labelledby={headingId}>
       <div className="flex items-end justify-between gap-3 mb-4 flex-wrap">
         <div>
-          <p className="byline text-muted-foreground/70">
+          <p className="byline text-white/70">
             {sectionNumber ? `${sectionNumber} · ` : ""}
             {operating
               ? t("Wind-hold outlook · next 24h", "ウィンドホールド予測 · 24時間")
@@ -237,9 +237,9 @@ export function LiftWindHoldPanel({
           </p>
           <h2
             id={headingId}
-            className="font-display font-semibold text-2xl tracking-tight flex items-center gap-2"
+            className="font-display font-semibold text-2xl tracking-tight flex items-center gap-2 text-white"
           >
-            <Cable className="w-5 h-5 text-primary" />
+            <Cable className="w-5 h-5 text-white/80" />
             {t("Will the lifts spin?", "リフトは動くか")}
           </h2>
         </div>

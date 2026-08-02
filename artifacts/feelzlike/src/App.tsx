@@ -17,6 +17,7 @@ import { AppErrorBoundary } from "@/components/AppErrorBoundary";
 import { SignUpProvider } from "@/components/auth/SignUpProvider";
 import { UserPrefsProvider } from "@/components/auth/UserPrefsProvider";
 import { identifyAnonUser, track } from "@/lib/analytics";
+import { pingPageView, pingPwaEvent } from "@/lib/engagement";
 import { isStandaloneMode } from "@/lib/registerSW";
 import { useEffect, useRef } from "react";
 import { useLocation } from "wouter";
@@ -130,10 +131,12 @@ function AnalyticsBridge() {
 
     if (isStandaloneMode()) {
       track("pwa_launch", { category: "install", data: { mode: "standalone" } });
+      pingPwaEvent("pwa_launch"); // first-party counter · counts every install base launch
     }
 
     const onInstalled = () => {
       track("pwa_installed", { category: "install" });
+      pingPwaEvent("pwa_install");
     };
     window.addEventListener("appinstalled", onInstalled);
     return () => window.removeEventListener("appinstalled", onInstalled);
@@ -146,6 +149,9 @@ function AnalyticsBridge() {
   useEffect(() => {
     const safePath = location.split(/[?#]/)[0] || "/";
     track("page_view", { category: "navigation", data: { path: safePath } });
+    // First-party cookieless tally (coarse section label only) · powers the
+    // admin engagement dashboard with truthful, every-visitor counts.
+    pingPageView(safePath);
   }, [location]);
 
   return null;

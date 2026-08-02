@@ -168,7 +168,7 @@ export function MountainDetail() {
   if (!locationId) {
     return (
       <div className="px-4 md:px-10 py-5 md:py-8 max-w-6xl mx-auto">
-        <p className="text-muted-foreground">
+        <p className="text-white/80">
           {t("Mountain not specified.", "スキー場が指定されていません。")}
         </p>
       </div>
@@ -184,8 +184,9 @@ export function MountainDetail() {
   const metaName = elevName ?? location?.name ?? locationId;
 
   return (
-    <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
-      <PageMeta
+    <div className={`min-h-[100dvh] ${isGreen ? "bg-[#059669]" : "bg-[#0055FF]"} pb-8 transition-colors duration-500`}>
+      <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
+        <PageMeta
         title={`${metaName} - snow report, weather & lifts`}
         description={`Live mountain weather for ${metaName} in ${region.name}: on-mountain temperature, snow depth, wind and elevation forecast.`}
         path={`/${region.id}/mountain/${locationId}`}
@@ -211,7 +212,7 @@ export function MountainDetail() {
       />
       <Link
         href={backHref}
-        className="inline-flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-[0.2em] text-sky-700/80 hover:text-sky-700 transition-colors"
+        className="inline-flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-[0.2em] text-white/70 hover:text-white transition-colors"
       >
         <ArrowLeft className="w-3.5 h-3.5" />
         {backLabel}
@@ -246,11 +247,11 @@ export function MountainDetail() {
       </div>
 
       {q.isLoading ? (
-        <p className="mt-8 text-muted-foreground">
+        <p className="mt-8 text-white/80">
           {t("Loading mountain conditions…", "山の状況を読込中…")}
         </p>
       ) : q.isError || !current ? (
-        <p className="mt-8 text-muted-foreground">
+        <p className="mt-8 text-white/80">
           {t(
             "Mountain conditions unavailable right now.",
             "現在、山の状況を取得できません。",
@@ -783,6 +784,7 @@ export function MountainDetail() {
           </p>
         </>
       )}
+    </div>
     </div>
   );
 }

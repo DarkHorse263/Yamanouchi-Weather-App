@@ -27,6 +27,14 @@ interface StatsPayload {
   daily?: DailyPoint[];
 }
 
+interface EngagementPayload {
+  visitors: { today: number; last7d: number; last30d: number; returning30d: number };
+  pageViews: { last7d: number; last30d: number };
+  topPages: Array<{ page: string; count: number }>;
+  dailyVisitors: Array<{ day: string; visitors: number }>;
+  events: Record<string, { total: number; last7d: number }>;
+}
+
 interface EmailIncident {
   id: string;
   email: string;
@@ -245,6 +253,95 @@ function PromoFunnelCard({ alerts, promo }: { alerts: SubsBucket; promo?: Record
   );
 }
 
+/**
+ * EngagementCard · the partner-conversation numbers: real visitors, page
+ * views, returning share, installed base. All first-party + cookieless
+ * (counted server-side from POST /api/engagement/ping, bots filtered), so
+ * unlike GA these count EVERY visitor. Counting starts from the first
+ * publish that includes the ping - the dev preview has no real traffic.
+ */
+function EngagementCard({ e }: { e: EngagementPayload }) {
+  const max = Math.max(1, ...e.dailyVisitors.map((d) => d.visitors));
+  const maxPage = Math.max(1, ...e.topPages.map((p) => p.count));
+  const returningPct = e.visitors.last30d > 0 ? Math.round((e.visitors.returning30d / e.visitors.last30d) * 100) : 0;
+  const installs = e.events.pwa_install;
+  const launches = e.events.pwa_launch;
+  const empty = e.visitors.last30d === 0 && e.pageViews.last30d === 0;
+  return (
+    <div className="rounded-lg border bg-white p-5">
+      <h3 className="text-sm font-semibold mb-1 lowercase">real engagement · every visitor counted</h3>
+      <p className="text-xs text-muted-foreground mb-4">
+        first-party, cookieless server counts (bots excluded) · not consent-gated, so these are the
+        truthful totals for partner conversations · counting starts from the first publish
+      </p>
+      {empty ? (
+        <p className="text-sm text-muted-foreground rounded-md border border-dashed px-3 py-4">
+          no data yet · these counters only see real traffic on the published site — the dev preview
+          has no real visitors. republish, then numbers appear here within minutes of the first visit.
+        </p>
+      ) : (
+        <div className="space-y-5">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            <Kpi label="visitors today" value={e.visitors.today} />
+            <Kpi label="visitors · 7d" value={e.visitors.last7d} sub={`${e.pageViews.last7d} page views`} />
+            <Kpi label="visitors · 30d" value={e.visitors.last30d} sub={`${e.pageViews.last30d} page views`} />
+            <Kpi label="returning · 30d" value={`${returningPct}%`} sub={`${e.visitors.returning30d} came back on another day`} />
+          </div>
+
+          <div>
+            <div className="flex items-baseline justify-between mb-2">
+              <div className="text-xs font-medium lowercase text-slate-700">daily visitors · last 30 days</div>
+            </div>
+            <div className="flex items-end gap-[3px] h-20" role="img" aria-label="daily unique visitors over the last 30 days">
+              {e.dailyVisitors.map((d) => (
+                <div key={d.day} className="flex-1 flex flex-col justify-end h-full" title={`${new Date(d.day + "T00:00:00Z").toLocaleDateString(undefined, { day: "numeric", month: "short" })} · ${d.visitors} visitors`}>
+                  {d.visitors === 0 ? (
+                    <div className="w-full h-[2px] rounded-sm bg-slate-200" />
+                  ) : (
+                    <div className="w-full rounded-t-sm bg-[#0055FF]" style={{ height: `${(d.visitors / max) * 100}%` }} />
+                  )}
+                </div>
+              ))}
+            </div>
+            <div className="flex justify-between text-[10px] text-muted-foreground mt-1">
+              <span>30 days ago</span>
+              <span>today</span>
+            </div>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-5">
+            <div>
+              <div className="text-xs font-medium lowercase text-slate-700 mb-2">most visited · last 30 days</div>
+              {e.topPages.length === 0 ? (
+                <p className="text-sm text-muted-foreground">none yet.</p>
+              ) : (
+                <ul className="space-y-1.5 text-sm">
+                  {e.topPages.map((p) => (
+                    <li key={p.page} className="flex items-center gap-3">
+                      <span className="w-32 shrink-0 truncate text-slate-700">{p.page}</span>
+                      <span className="flex-1 h-2 rounded bg-slate-100 overflow-hidden">
+                        <span className="block h-full rounded bg-[#0055FF]" style={{ width: `${(p.count / maxPage) * 100}%` }} />
+                      </span>
+                      <span className="tabular-nums text-slate-700 w-10 text-right">{p.count}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <div>
+              <div className="text-xs font-medium lowercase text-slate-700 mb-2">app installs</div>
+              <div className="grid grid-cols-2 gap-3">
+                <Kpi label="installed" value={installs?.total ?? 0} sub={`+${installs?.last7d ?? 0} last 7d · android/desktop only`} />
+                <Kpi label="home-screen opens" value={launches?.total ?? 0} sub={`+${launches?.last7d ?? 0} last 7d · includes iphone`} />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 const DASHBOARDS: Array<{ label: string; sub: string; href: string }> = [
   // Deep-linked to the feelzlike property (p544105028) so it never opens
   // another business's Analytics account.
@@ -286,6 +383,7 @@ export default function AdminStats() {
   const stats = useAdminQuery<StatsPayload>("stats", "/stats");
   const signups = useAdminQuery<SignupsPayload>("signups", "/recent-signups");
   const emailIncidents = useAdminQuery<EmailIncidentsPayload>("email-incidents", "/email-incidents");
+  const engagement = useAdminQuery<EngagementPayload>("engagement", "/engagement");
 
   return (
     <AdminLayout active="stats">
@@ -297,6 +395,8 @@ export default function AdminStats() {
         <div className="text-sm text-rose-700">failed to load stats · {stats.error.message}</div>
       ) : stats.data ? (
         <div className="space-y-5">
+          {engagement.data ? <EngagementCard e={engagement.data} /> : null}
+
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             <Kpi label="alerts (verified)" value={stats.data.alerts.verified} sub={`+${stats.data.alerts.new7d} last 7d`} />
             {stats.data.newsletter ? (

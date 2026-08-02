@@ -35,7 +35,7 @@ export function ThredboSummer() {
           href="https://www.thredbo.com.au/summer/"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-200 text-xs font-semibold uppercase tracking-widest transition-colors"
+          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 text-xs font-semibold uppercase tracking-widest transition-colors"
         >
           Tickets & hours
           <ExternalLink className="w-3.5 h-3.5" />
@@ -46,22 +46,22 @@ export function ThredboSummer() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <SummerCard
-          icon={<Cable className="w-4 h-4 text-sky-400" />}
+          icon={<Cable className="w-4 h-4 text-sky-500" />}
           title="Kosciuszko Express chairlift"
           body="Lifts walkers to 1930 m for the Mt Kosciuszko summit return walk (13 km, 4-5 h). Daily through summer, weather permitting · check the operator for current hours and last-up times."
         />
         <SummerCard
-          icon={<MapPin className="w-4 h-4 text-emerald-400" />}
+          icon={<MapPin className="w-4 h-4 text-emerald-500" />}
           title="Walking tracks"
           body="Mt Kosciuszko summit (13 km return), Dead Horse Gap (10 km one-way, descent into village), Cascade Hut, Merritts Nature Track. Conditions change fast above the treeline · always check forecasts and carry layers."
         />
         <SummerCard
-          icon={<Bike className="w-4 h-4 text-amber-400" />}
+          icon={<Bike className="w-4 h-4 text-amber-500" />}
           title="Mountain bike park"
           body="Largest gravity park in Australia · 30+ km of downhill and flow trails accessed by the Kosciuszko Express. Bike-haul tickets and rentals via Thredbo. Generally Dec-Apr, varies year-on-year."
         />
         <SummerCard
-          icon={<Calendar className="w-4 h-4 text-rose-300" />}
+          icon={<Calendar className="w-4 h-4 text-rose-500" />}
           title="Village & events"
           body="Bobsled, mini-golf, leisure centre and chairlift sightseeing operate through summer. Check the resort calendar for Blues Festival, Trail Running, MTB events and family programs."
         />

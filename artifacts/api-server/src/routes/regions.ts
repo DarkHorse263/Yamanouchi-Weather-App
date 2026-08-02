@@ -1513,4 +1513,9 @@ router.get("/local-weather", async (req, res) => {
   }
 });
 
+
+// Region ids · used by routes/engagement.ts to whitelist page labels so
+// page_view_daily cardinality stays finite (unknown labels collapse to "other").
+export const REGION_IDS: ReadonlySet<string> = new Set(REGIONS.map((r) => r.id));
+
 export default router;

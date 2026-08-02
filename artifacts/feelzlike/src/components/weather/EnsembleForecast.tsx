@@ -142,7 +142,7 @@ export function EnsembleForecast({ locationId, elevationM }: Props) {
         </p>
       )}
 
-      <div className="divide-y divide-white/5">
+      <div className="divide-y divide-slate-100">
         {days.map((day) => {
           const showSnow = day.snowMean >= 1;
           const showRain = !showSnow && day.precipMean >= 1;

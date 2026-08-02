@@ -24,6 +24,7 @@ import authRouter from "./auth";
 import accountRouter from "./account";
 import authEmailRouter from "./auth-email";
 import promoRouter from "./promo";
+import engagementRouter from "./engagement";
 import resendWebhookRouter from "./resend-webhook";
 import adminRouter from "./admin";
 
@@ -54,6 +55,7 @@ router.use(authRouter);
 router.use(accountRouter);
 router.use(authEmailRouter);
 router.use(promoRouter);
+router.use(engagementRouter);
 router.use(resendWebhookRouter);
 router.use("/admin", adminRouter);
 

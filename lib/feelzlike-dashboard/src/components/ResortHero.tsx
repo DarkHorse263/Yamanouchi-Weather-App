@@ -3,6 +3,8 @@ import { ArrowDown, Clock } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export interface ResortHeroProps {
+  /** Hex colour of the page canvas the hero fades into · defaults to bluebird blue. */
+  canvasColor?: string;
   name: string;
   description?: string;
   elevation: number;
@@ -42,6 +44,7 @@ function formatAgo(iso: string | undefined | null, now: number): string {
 }
 
 export function ResortHero({
+  canvasColor = "#0055FF",
   name,
   description,
   elevation,
@@ -84,7 +87,7 @@ export function ResortHero({
           className="absolute inset-0"
           style={{
             backgroundImage:
-              "linear-gradient(to bottom, transparent 70%, hsl(var(--background)) 100%), repeating-linear-gradient(0deg, hsla(220,30%,12%,0.04) 0px, hsla(220,30%,12%,0.04) 1px, transparent 1px, transparent 64px), repeating-linear-gradient(90deg, hsla(220,30%,12%,0.04) 0px, hsla(220,30%,12%,0.04) 1px, transparent 1px, transparent 64px)",
+              `linear-gradient(to bottom, transparent 70%, ${canvasColor} 100%), repeating-linear-gradient(0deg, hsla(0,0%,100%,0.04) 0px, hsla(0,0%,100%,0.04) 1px, transparent 1px, transparent 64px), repeating-linear-gradient(90deg, hsla(0,0%,100%,0.04) 0px, hsla(0,0%,100%,0.04) 1px, transparent 1px, transparent 64px)`,
           }}
         />
       </div>
@@ -97,22 +100,22 @@ export function ResortHero({
           className="flex flex-wrap items-center gap-x-4 gap-y-1.5"
         >
           {sourceLabel && (
-            <span className={`inline-flex items-center gap-1.5 ${isLive ? "text-emerald-700" : ""}`}>
+            <span className="inline-flex items-center gap-1.5 text-white/70">
               {isLive && (
                 <span className="relative flex h-1.5 w-1.5">
                   <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60 animate-ping" />
                   <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
                 </span>
               )}
-              <span className="byline">{sourceLabel}</span>
+              <span className="byline text-white/70">{sourceLabel}</span>
             </span>
           )}
-          <span className="byline text-muted-foreground/60 tabular-nums">Elev {Math.round(cvElev(elevation))}{elevationUnitLabel}</span>
+          <span className="byline text-white/60 tabular-nums">Elev {Math.round(cvElev(elevation))}{elevationUnitLabel}</span>
           {observedAt && (
-            <span className="byline text-muted-foreground/80 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/70 border border-slate-200/80">
+            <span className="byline text-white/80 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/10 border border-white/20">
               <Clock className="w-3 h-3" strokeWidth={1.75} />
               <span>
-                Updated <span className="text-foreground tabular-nums">{formatAgo(observedAt, now)}</span>
+                Updated <span className="text-white tabular-nums">{formatAgo(observedAt, now)}</span>
               </span>
             </span>
           )}
@@ -124,7 +127,7 @@ export function ResortHero({
             <motion.h1
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              className="font-display font-medium text-foreground text-[clamp(3rem,8vw,5.5rem)] leading-[0.92] tracking-tight"
+              className="font-display font-medium text-white text-[clamp(3rem,8vw,5.5rem)] leading-[0.92] tracking-tight"
             >
               {name}
             </motion.h1>
@@ -133,7 +136,7 @@ export function ResortHero({
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.05 }}
-                className="mt-4 text-muted-foreground text-base md:text-lg max-w-xl font-light leading-relaxed"
+                className="mt-4 text-white/80 text-base md:text-lg max-w-xl font-light leading-relaxed"
               >
                 {description}
               </motion.p>
@@ -149,15 +152,15 @@ export function ResortHero({
             <div className="relative">
               <div className="flex items-start gap-3">
                 <span
-                  className="display-number text-foreground text-[clamp(7rem,18vw,11rem)]"
+                  className="display-number text-white text-[clamp(7rem,18vw,11rem)]"
                   data-numeric
                 >
                   {Math.round(cv(temperatureC))}
                 </span>
-                <span className="font-display text-foreground/70 text-3xl md:text-4xl mt-4">{tempUnitLabel}</span>
+                <span className="font-display text-white/70 text-3xl md:text-4xl mt-4">{tempUnitLabel}</span>
               </div>
               {(weatherDescription || feelsLikeC != null) && (
-                <p className="byline text-muted-foreground mt-1">
+                <p className="byline text-white/80 mt-1">
                   {weatherDescription ?? ""}
                   {weatherDescription && feelsLikeC != null && " · "}
                   {feelsLikeC != null && `feelzlike ${Math.round(cv(feelsLikeC))}${tempUnitLabel}`}
@@ -168,8 +171,8 @@ export function ResortHero({
         </div>
 
         {scrollCue && (
-          <div className="mt-10 md:mt-14 flex items-center gap-2 text-muted-foreground/60">
-            <span className="byline">{scrollCue}</span>
+          <div className="mt-10 md:mt-14 flex items-center gap-2 text-white/60">
+            <span className="byline text-white/60">{scrollCue}</span>
             <ArrowDown className="w-3 h-3" />
           </div>
         )}

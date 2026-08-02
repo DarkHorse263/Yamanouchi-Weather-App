@@ -1,6 +1,6 @@
 import { Router, type IRouter, type Request, type Response } from "express";
 import { and, eq, gte, desc, isNotNull, isNull, count, sql } from "drizzle-orm";
-import { db, alertSubscribersTable, newsletterSubscribersTable, promoFunnelDailyTable, emailDeliveryIncidentsTable } from "@workspace/db";
+import { db, alertSubscribersTable, newsletterSubscribersTable, promoFunnelDailyTable, emailDeliveryIncidentsTable, pageViewDailyTable, visitorDailyTable, engagementEventDailyTable } from "@workspace/db";
 import { requireAdminUser } from "../middlewares/requireAdminUser.js";
 
 /**
@@ -210,6 +210,105 @@ router.get("/stats", async (_req: Request, res: Response) => {
   } catch (err) {
     console.error("[admin/stats] failed", err);
     res.status(500).json({ error: "STATS_FAILED" });
+  }
+});
+
+// ── Engagement (visitors · page views · installs) ────────────────────────
+// First-party cookieless counts recorded by POST /api/engagement/ping.
+// These are the truthful totals for partner conversations: every visitor is
+// counted (no consent gate), obvious bots are excluded at record time.
+router.get("/engagement", async (_req: Request, res: Response) => {
+  try {
+    const dayStr = (offsetDays: number) =>
+      new Date(Date.now() - offsetDays * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+    const today = dayStr(0);
+    const since7d = dayStr(6); // inclusive · today + previous 6
+    const since30d = dayStr(29);
+
+    // Unique visitors · rows in visitor_daily are already deduped per day.
+    const [vToday] = await db
+      .select({ c: count() })
+      .from(visitorDailyTable)
+      .where(eq(visitorDailyTable.day, today));
+    const [v7] = await db
+      .select({ c: sql<number>`count(distinct ${visitorDailyTable.hash})` })
+      .from(visitorDailyTable)
+      .where(gte(visitorDailyTable.day, since7d));
+    const [v30] = await db
+      .select({ c: sql<number>`count(distinct ${visitorDailyTable.hash})` })
+      .from(visitorDailyTable)
+      .where(gte(visitorDailyTable.day, since30d));
+
+    // Returning · same (monthly-rotating) hash seen on 2+ distinct days in
+    // the last 30. Approximate across month boundaries, honest enough.
+    const retRes = await db.execute(
+      sql`select count(*)::int as c from (select ${visitorDailyTable.hash} from ${visitorDailyTable} where ${visitorDailyTable.day} >= ${since30d} group by ${visitorDailyTable.hash} having count(distinct ${visitorDailyTable.day}) >= 2) t`,
+    );
+    const ret30 = { c: Number((retRes.rows?.[0] as { c?: number } | undefined)?.c ?? 0) };
+
+    // Page views
+    const [pv7] = await db
+      .select({ c: sql<number>`coalesce(sum(${pageViewDailyTable.count}), 0)` })
+      .from(pageViewDailyTable)
+      .where(gte(pageViewDailyTable.day, since7d));
+    const [pv30] = await db
+      .select({ c: sql<number>`coalesce(sum(${pageViewDailyTable.count}), 0)` })
+      .from(pageViewDailyTable)
+      .where(gte(pageViewDailyTable.day, since30d));
+
+    // Top sections last 30 days
+    const topPages = await db
+      .select({
+        page: pageViewDailyTable.page,
+        c: sql<number>`sum(${pageViewDailyTable.count})`,
+      })
+      .from(pageViewDailyTable)
+      .where(gte(pageViewDailyTable.day, since30d))
+      .groupBy(pageViewDailyTable.page)
+      .orderBy(desc(sql`sum(${pageViewDailyTable.count})`))
+      .limit(12);
+
+    // Daily visitors for the 30-day trend strip
+    const visitorDaily = await db
+      .select({ day: visitorDailyTable.day, c: count() })
+      .from(visitorDailyTable)
+      .where(gte(visitorDailyTable.day, since30d))
+      .groupBy(visitorDailyTable.day);
+    const byDay = new Map<string, number>();
+    for (let i = 29; i >= 0; i--) byDay.set(dayStr(i), 0);
+    for (const r of visitorDaily) {
+      if (byDay.has(r.day)) byDay.set(r.day, Number(r.c));
+    }
+
+    // PWA installs / launches
+    const evRows = await db
+      .select({
+        event: engagementEventDailyTable.event,
+        total: sql<number>`sum(${engagementEventDailyTable.count})`,
+        last7d: sql<number>`sum(${engagementEventDailyTable.count}) filter (where ${engagementEventDailyTable.day} >= ${since7d})`,
+      })
+      .from(engagementEventDailyTable)
+      .groupBy(engagementEventDailyTable.event);
+    const events: Record<string, { total: number; last7d: number }> = {};
+    for (const r of evRows) {
+      events[r.event] = { total: Number(r.total ?? 0), last7d: Number(r.last7d ?? 0) };
+    }
+
+    res.json({
+      visitors: {
+        today: Number(vToday?.c ?? 0),
+        last7d: Number(v7?.c ?? 0),
+        last30d: Number(v30?.c ?? 0),
+        returning30d: Number(ret30?.c ?? 0),
+      },
+      pageViews: { last7d: Number(pv7?.c ?? 0), last30d: Number(pv30?.c ?? 0) },
+      topPages: topPages.map((p) => ({ page: p.page, count: Number(p.c) })),
+      dailyVisitors: Array.from(byDay.entries()).map(([day, visitors]) => ({ day, visitors })),
+      events,
+    });
+  } catch (err) {
+    console.error("[admin/engagement] failed", err);
+    res.status(500).json({ error: "ENGAGEMENT_FAILED" });
   }
 });
 
