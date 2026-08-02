@@ -819,27 +819,29 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "whitewater", name: "Whitewater", lat: 49.3830, lng: -117.1470, accent: "#f97316" },
       { id: "kimberley-alpine", name: "Kimberley Alpine Resort", lat: 49.6811, lng: -116.0053, accent: "#f97316" },
       { id: "panorama", name: "Panorama", lat: 50.4600, lng: -116.2400, accent: "#f97316" },
-      { id: "sun-peaks-resort", name: "Sun Peaks Resort", lat: 50.8833, lng: -119.8833, accent: "#f97316" },
       { id: "revelstoke", name: "Revelstoke", lat: 50.9981, lng: -118.1957, accent: "#0ea5e9" },
       { id: "golden", name: "Golden", lat: 51.2960, lng: -116.9631, accent: "#0ea5e9" },
       { id: "fernie", name: "Fernie", lat: 49.5040, lng: -115.0631, accent: "#0ea5e9" },
       { id: "nelson", name: "Nelson", lat: 49.4928, lng: -117.2948, accent: "#0ea5e9" },
       { id: "kimberley", name: "Kimberley", lat: 49.6697, lng: -115.9781, accent: "#0ea5e9" },
       { id: "invermere", name: "Invermere", lat: 50.5064, lng: -116.0311, accent: "#0ea5e9" },
-      { id: "sun-peaks", name: "Sun Peaks", lat: 50.8836, lng: -119.8869, accent: "#0ea5e9" },
     ],
   },
-  // The three Okanagan resorts sit above three lake towns spread ~120 km
-  // down the valley, so the centre sits mid-valley near Kelowna.
+  // The BC Interior resorts sit above gateway towns spread from Penticton
+  // up to Sun Peaks (~200 km), so the centre sits mid-valley north of
+  // Kelowna to frame the whole run.
   okanagan: {
-    center: { lat: 49.85, lng: -119.45 },
+    center: { lat: 50.10, lng: -119.60 },
     pins: [
       { id: "big-white", name: "Big White Ski Resort", lat: 49.7220, lng: -118.9330, accent: "#f97316" },
       { id: "silverstar", name: "SilverStar Mountain Resort", lat: 50.3611, lng: -119.0619, accent: "#f97316" },
       { id: "apex-resort", name: "Apex Mountain Resort", lat: 49.3925, lng: -119.9036, accent: "#f97316" },
+      { id: "sun-peaks-resort", name: "Sun Peaks Resort", lat: 50.8833, lng: -119.8833, accent: "#f97316" },
       { id: "kelowna", name: "Kelowna", lat: 49.8880, lng: -119.4960, accent: "#0ea5e9" },
       { id: "vernon", name: "Vernon", lat: 50.2670, lng: -119.2720, accent: "#0ea5e9" },
       { id: "penticton", name: "Penticton", lat: 49.4991, lng: -119.5937, accent: "#0ea5e9" },
+      { id: "kamloops", name: "Kamloops", lat: 50.6745, lng: -120.3273, accent: "#0ea5e9" },
+      { id: "sun-peaks", name: "Sun Peaks", lat: 50.8836, lng: -119.8869, accent: "#0ea5e9" },
     ],
   },
   // Three North Shore hills clustered above Vancouver plus Mount Washington

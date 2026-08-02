@@ -524,7 +524,6 @@ export const REGIONS = [
       { name: "Whitewater",                 blurb: "Independent Kootenay hill · minimal grooming, huge natural snowfall, touring gates" },
       { name: "Kimberley Alpine Resort",    blurb: "Sunny, uncrowded cruisers on North Star Mountain · long lit night runs" },
       { name: "Panorama",                   blurb: "1,300 m of Purcell vertical · Taynton Bowl steeps above long groomed descents" },
-      { name: "Sun Peaks Resort",           blurb: "Canada's second-largest ski area · Tod, Sundance and Morrisey linked by lift" },
     ],
     towns: [
       { id: "revelstoke", name: "Revelstoke", blurb: "Railway town on the Columbia · ~10 min to the gondola base" },
@@ -533,7 +532,6 @@ export const REGIONS = [
       { id: "nelson",     name: "Nelson",     blurb: "Heritage arts town on Kootenay Lake · ~20 min up to Whitewater" },
       { id: "kimberley",  name: "Kimberley",  blurb: "Bavarian-themed Rockies town · ~5 min from the Kimberley Alpine base" },
       { id: "invermere",  name: "Invermere",  blurb: "Columbia Valley lake town · ~20 min up Toby Creek Road to Panorama" },
-      { id: "sun-peaks",  name: "Sun Peaks",  blurb: "Ski-through village 45 min above Kamloops · lifts leave from the main street" },
     ],
   },
   {
@@ -547,11 +545,14 @@ export const REGIONS = [
       { name: "Big White Ski Resort",         blurb: "BC's biggest ski-in village · dry interior snow and a large gladed high-alpine plateau above Kelowna" },
       { name: "SilverStar Mountain Resort",    blurb: "Victorian-themed ski-through village above Vernon · gentle front side, steep Powder Gulch back bowls" },
       { name: "Apex Mountain Resort",          blurb: "Quiet, steep and uncrowded above Penticton · long fall-line cruisers and the Okanagan's driest snow" },
+      { name: "Sun Peaks Resort",              blurb: "Canada's second-largest ski area · Tod, Sundance and Morrisey linked by lift" },
     ],
     towns: [
       { id: "kelowna",   name: "Kelowna",   blurb: "Okanagan Lake city · about 56 km and 1 hr up to the Big White village" },
       { id: "vernon",    name: "Vernon",    blurb: "North Okanagan town · about 22 km up Silver Star Road to the resort" },
       { id: "penticton", name: "Penticton", blurb: "Town between Okanagan and Skaha lakes · about 33 km up Green Mountain Road to Apex" },
+      { id: "kamloops",  name: "Kamloops",  blurb: "Thompson Valley city · about 45 min up Sun Peaks Road from Heffley Creek" },
+      { id: "sun-peaks", name: "Sun Peaks", blurb: "Ski-through village 45 min above Kamloops · lifts leave from the main street" },
     ],
   },
   {

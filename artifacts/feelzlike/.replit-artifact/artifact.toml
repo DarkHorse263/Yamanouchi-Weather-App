@@ -2227,34 +2227,6 @@ from = "/powder-highway/invermere/explore/"
 to = "/powder-highway/invermere/explore/index.html"
 
 [[services.production.rewrites]]
-from = "/powder-highway/sun-peaks/"
-to = "/powder-highway/sun-peaks/index.html"
-
-[[services.production.rewrites]]
-from = "/powder-highway/sun-peaks/weather/"
-to = "/powder-highway/sun-peaks/weather/index.html"
-
-[[services.production.rewrites]]
-from = "/powder-highway/sun-peaks/stay/"
-to = "/powder-highway/sun-peaks/stay/index.html"
-
-[[services.production.rewrites]]
-from = "/powder-highway/sun-peaks/eat/"
-to = "/powder-highway/sun-peaks/eat/index.html"
-
-[[services.production.rewrites]]
-from = "/powder-highway/sun-peaks/roads/"
-to = "/powder-highway/sun-peaks/roads/index.html"
-
-[[services.production.rewrites]]
-from = "/powder-highway/sun-peaks/transport/"
-to = "/powder-highway/sun-peaks/transport/index.html"
-
-[[services.production.rewrites]]
-from = "/powder-highway/sun-peaks/explore/"
-to = "/powder-highway/sun-peaks/explore/index.html"
-
-[[services.production.rewrites]]
 from = "/okanagan/"
 to = "/okanagan/index.html"
 
@@ -2349,6 +2321,62 @@ to = "/okanagan/penticton/transport/index.html"
 [[services.production.rewrites]]
 from = "/okanagan/penticton/explore/"
 to = "/okanagan/penticton/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/kamloops/"
+to = "/okanagan/kamloops/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/kamloops/weather/"
+to = "/okanagan/kamloops/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/kamloops/stay/"
+to = "/okanagan/kamloops/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/kamloops/eat/"
+to = "/okanagan/kamloops/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/kamloops/roads/"
+to = "/okanagan/kamloops/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/kamloops/transport/"
+to = "/okanagan/kamloops/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/kamloops/explore/"
+to = "/okanagan/kamloops/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/sun-peaks/"
+to = "/okanagan/sun-peaks/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/sun-peaks/weather/"
+to = "/okanagan/sun-peaks/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/sun-peaks/stay/"
+to = "/okanagan/sun-peaks/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/sun-peaks/eat/"
+to = "/okanagan/sun-peaks/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/sun-peaks/roads/"
+to = "/okanagan/sun-peaks/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/sun-peaks/transport/"
+to = "/okanagan/sun-peaks/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/sun-peaks/explore/"
+to = "/okanagan/sun-peaks/explore/index.html"
 
 [[services.production.rewrites]]
 from = "/vancouver/"

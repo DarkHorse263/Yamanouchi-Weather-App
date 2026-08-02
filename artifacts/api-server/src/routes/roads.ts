@@ -988,10 +988,6 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
           "Hwy 93/95 to Invermere, then Toby Creek Road",
           "The 18 km Toby Creek Road is winding with steep drop-offs and no shoulder in places.",
           "BC"),
-        ca("sun-peaks-road", "sun-peaks-resort", "Sun Peaks Resort",
-          "Hwy 5 (Coquihalla) or Hwy 1 to Heffley Creek, then Sun Peaks Road",
-          "Sun Peaks Road climbs 1,000 m in 30 km from the Thompson Valley; the Coquihalla itself closes in storms.",
-          "BC"),
       ];
     }
 
@@ -1008,6 +1004,10 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
         ca("apex-green-mountain-road", "apex-resort", "Apex Mountain Resort",
           "Hwy 97 to Penticton, then Green Mountain Road",
           "Green Mountain Road is a narrow, winding 33 km climb with no services · it is the exposed part of the trip and drifts in over the last few kilometres.",
+          "BC"),
+        ca("sun-peaks-road", "sun-peaks-resort", "Sun Peaks Resort",
+          "Hwy 5 (Coquihalla) or Hwy 1 to Heffley Creek, then Sun Peaks Road",
+          "Sun Peaks Road climbs 1,000 m in 30 km from the Thompson Valley; the Coquihalla itself closes in storms.",
           "BC"),
       ];
     }

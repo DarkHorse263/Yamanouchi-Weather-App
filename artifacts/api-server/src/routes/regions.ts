@@ -581,7 +581,7 @@ const REGIONS: RegionConfig[] = [
     region: "BC Interior",
     status: "live",
     href: "/powder-highway/",
-    baseTowns: ["Revelstoke", "Golden", "Fernie", "Nelson", "Kimberley", "Invermere", "Sun Peaks"],
+    baseTowns: ["Revelstoke", "Golden", "Fernie", "Nelson", "Kimberley", "Invermere"],
     mountains: [
       "Revelstoke Mountain Resort",
       "Kicking Horse",
@@ -589,7 +589,6 @@ const REGIONS: RegionConfig[] = [
       "Whitewater",
       "Kimberley Alpine Resort",
       "Panorama",
-      "Sun Peaks Resort",
     ],
     // Revelstoke anchors the loop · the biggest vertical and the town most
     // people start from. Each of the other six towns has its own page.
@@ -607,10 +606,10 @@ const REGIONS: RegionConfig[] = [
     region: "BC Interior",
     status: "live",
     href: "/okanagan/",
-    baseTowns: ["Kelowna", "Vernon", "Penticton"],
-    mountains: ["Big White Ski Resort", "SilverStar Mountain Resort", "Apex Mountain Resort"],
+    baseTowns: ["Kelowna", "Vernon", "Penticton", "Kamloops", "Sun Peaks"],
+    mountains: ["Big White Ski Resort", "SilverStar Mountain Resort", "Apex Mountain Resort", "Sun Peaks Resort"],
     // Kelowna is the biggest gateway city and the base for Big White · the
-    // other two towns (Vernon, Penticton) have their own pages.
+    // other towns (Vernon, Penticton, Kamloops, Sun Peaks) have their own pages.
     headlineLabel: "Kelowna",
     lat: 49.8880,
     lon: -119.4960,

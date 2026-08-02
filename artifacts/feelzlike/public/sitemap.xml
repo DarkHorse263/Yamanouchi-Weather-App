@@ -552,13 +552,6 @@
   <url><loc>https://feelzlike.com/powder-highway/invermere/roads/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://feelzlike.com/powder-highway/invermere/transport/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://feelzlike.com/powder-highway/invermere/explore/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://feelzlike.com/powder-highway/sun-peaks/</loc><lastmod>2026-08-02</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-  <url><loc>https://feelzlike.com/powder-highway/sun-peaks/weather/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://feelzlike.com/powder-highway/sun-peaks/stay/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://feelzlike.com/powder-highway/sun-peaks/eat/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://feelzlike.com/powder-highway/sun-peaks/roads/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://feelzlike.com/powder-highway/sun-peaks/transport/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://feelzlike.com/powder-highway/sun-peaks/explore/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://feelzlike.com/okanagan/</loc><lastmod>2026-08-02</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
   <url><loc>https://feelzlike.com/okanagan/mountains/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://feelzlike.com/okanagan/stay/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
@@ -583,6 +576,20 @@
   <url><loc>https://feelzlike.com/okanagan/penticton/roads/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://feelzlike.com/okanagan/penticton/transport/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://feelzlike.com/okanagan/penticton/explore/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/okanagan/kamloops/</loc><lastmod>2026-08-02</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/okanagan/kamloops/weather/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/okanagan/kamloops/stay/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/okanagan/kamloops/eat/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/okanagan/kamloops/roads/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/okanagan/kamloops/transport/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/okanagan/kamloops/explore/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/okanagan/sun-peaks/</loc><lastmod>2026-08-02</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://feelzlike.com/okanagan/sun-peaks/weather/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/okanagan/sun-peaks/stay/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/okanagan/sun-peaks/eat/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/okanagan/sun-peaks/roads/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/okanagan/sun-peaks/transport/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://feelzlike.com/okanagan/sun-peaks/explore/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://feelzlike.com/vancouver/</loc><lastmod>2026-08-02</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
   <url><loc>https://feelzlike.com/vancouver/mountains/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://feelzlike.com/vancouver/stay/</loc><lastmod>2026-08-02</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>

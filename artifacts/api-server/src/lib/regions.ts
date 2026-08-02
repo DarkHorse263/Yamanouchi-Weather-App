@@ -330,30 +330,33 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "whistler": "whistler",
   "whistler-roads": "whistler",
 
-  // Powder Highway, BC · 7 independent resorts, each with its own base town.
+  // Powder Highway, BC · 6 independent resorts, each with its own base town.
   "revelstoke-mountain-resort": "powder-highway",
   "kicking-horse": "powder-highway",
   "fernie-alpine": "powder-highway",
   "whitewater": "powder-highway",
   "kimberley-alpine": "powder-highway",
   "panorama": "powder-highway",
-  "sun-peaks-resort": "powder-highway",
   "revelstoke": "powder-highway",
   "golden": "powder-highway",
   "fernie": "powder-highway",
   "nelson": "powder-highway",
   "kimberley": "powder-highway",
   "invermere": "powder-highway",
-  "sun-peaks": "powder-highway",
   "powder-highway-roads": "powder-highway",
 
-  // Okanagan, BC · 3 destination resorts, each above its own lake town.
+  // Okanagan (BC Interior) · 4 destination resorts, each above its own
+  // gateway town. Sun Peaks moved here from the Powder Highway (Aug 2026) ·
+  // it sits above Kamloops in the Thompson Valley, not on the Kootenay loop.
   "big-white": "okanagan",
   "silverstar": "okanagan",
   "apex-resort": "okanagan",
+  "sun-peaks-resort": "okanagan",
   "kelowna": "okanagan",
   "vernon": "okanagan",
   "penticton": "okanagan",
+  "kamloops": "okanagan",
+  "sun-peaks": "okanagan",
   "okanagan-roads": "okanagan",
 
   // Vancouver & the Island, BC · the three North Shore city hills + Mount

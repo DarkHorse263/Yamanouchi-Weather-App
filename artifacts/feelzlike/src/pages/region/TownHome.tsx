@@ -153,6 +153,7 @@ const MOUNTAIN_TINTS: Record<string, { bg: string; hover: string; ring: string }
   "big-white":         { bg: "bg-sky-100/70",     hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },
   "silverstar":        { bg: "bg-indigo-100/70",  hover: "hover:bg-indigo-200/70",  ring: "ring-indigo-300/50" },
   "apex-resort":       { bg: "bg-cyan-100/70",    hover: "hover:bg-cyan-200/70",    ring: "ring-cyan-300/50" },
+  "sun-peaks-resort":  { bg: "bg-blue-100/70",    hover: "hover:bg-blue-200/70",    ring: "ring-blue-300/50" },
   // Vancouver & the Island CA · three North Shore hills + Mount Washington
   "cypress-mountain":  { bg: "bg-sky-100/70",     hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },
   "grouse-mountain":   { bg: "bg-indigo-100/70",  hover: "hover:bg-indigo-200/70",  ring: "ring-indigo-300/50" },

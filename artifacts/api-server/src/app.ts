@@ -361,12 +361,17 @@ if (process.env.NODE_ENV === "production") {
         nelson: "Nelson",
         kimberley: "Kimberley",
         invermere: "Invermere",
-        "sun-peaks": "Sun Peaks",
       },
     },
     "okanagan": {
       name: "Okanagan",
-      towns: { kelowna: "Kelowna", vernon: "Vernon", penticton: "Penticton" },
+      towns: {
+        kelowna: "Kelowna",
+        vernon: "Vernon",
+        penticton: "Penticton",
+        kamloops: "Kamloops",
+        "sun-peaks": "Sun Peaks",
+      },
     },
     "vancouver": {
       name: "Vancouver & the Island",
