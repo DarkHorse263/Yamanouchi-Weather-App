@@ -67,8 +67,8 @@ export const tomamuSahoroRegion: RegionConfig = {
       id: "tomamu-village",
       name: "Tomamu",
       nameJa: "トマム",
-      lat: 43.0636,
-      lng: 142.6357,
+      lat: 43.0572,
+      lng: 142.6126,
       // Tomamu resort village (~620 m) · JR Tomamu Station and the
       // hotel towers at the resort base. Tight radius so it stays the
       // resort village, not the wider Shimukappu valley.

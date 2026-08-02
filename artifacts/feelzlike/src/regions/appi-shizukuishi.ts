@@ -60,8 +60,8 @@ export const appiShizukuishiRegion: RegionConfig = {
       elevationM: 1128,
       // Shizukuishi Prince Hotel base area on Takakura's east slopes
       // (~430 m) · gondola and ropeway to about 1,128 m.
-      lat: 39.6940,
-      lng: 140.9060,
+      lat: 39.7844,
+      lng: 140.9203,
       blurb: "Prince-operated hill on Takakura that hosted the 1993 Alpine World Championships · about 700 m of vertical, a gondola and ropeway, and one of Japan's few full downhill courses",
       blurbJa: "1993年アルペン世界選手権の舞台となったプリンス系スキー場 · 標高差約700m、ゴンドラとロープウェーで高倉山へ。日本屈指のダウンヒルコース",
       websiteUrl: "https://www.princehotels.com/en/ski/shizukuishi/",

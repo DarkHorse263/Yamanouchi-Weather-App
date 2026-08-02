@@ -18,3 +18,8 @@ description: home-page world map pin data + routing rules; promo funnel counters
 # premium prompts
 
 - `PremiumFeaturePrompt` is localStorage-dismissable and hidden for signed-in users; mounted sparingly (MountainDetail, TripPlanner). Promo window default now lives ONCE in `lib/promo-constants` (consumed by api-server promo.ts + shell usePremium.ts) — never reintroduce duplicate date literals.
+
+## Coordinate registries duplicate per id (verified Aug 2026)
+Every mountain/town id's lat/lng is duplicated across up to 5 places that must agree: `regions/region-pins.ts`, the region file (`regions/<region>.ts` mountains + baseTowns), api-server `routes/weather.ts` LOCATIONS, `jobs/alertEvaluator.ts` anchors, and sometimes `routes/regions.ts`.
+**Why:** Aug 2026 audit found ~29 Japan coords copy-drifted 2-11km wrong (Togari, Madarao, Tangram, Kijimadaira, Sapporo Kokusai, Shizukuishi, Hachimantai, Hakuba Goryu/47/Iwatake, Furano etc.) — wrong pins AND wrong forecast points.
+**How to apply:** when changing any coordinate, grep the literal value repo-wide and fix all copies. Verify against OSM winter_sports features (photon.komoot.io geocoder works; Nominatim rate-limits fast). AU/NZ/CA audited same pass: only Selwyn (~9km) and Tremblant (off-mountain) were wrong, both fixed; other flags were geocoder noise.

@@ -47,7 +47,7 @@ export const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: nu
       { id: "perisher", name: "Perisher", lat: -36.3717, lng: 148.4086, accent: "#f97316" },
       { id: "thredbo", name: "Thredbo", lat: -36.5054, lng: 148.3089, accent: "#f97316" },
       { id: "charlottes-pass", name: "Charlotte's Pass", lat: -36.4314, lng: 148.3297, accent: "#f97316" },
-      { id: "selwyn", name: "Selwyn", lat: -35.8383, lng: 148.5267, accent: "#f97316" },
+      { id: "selwyn", name: "Selwyn", lat: -35.8990, lng: 148.4860, accent: "#f97316" },
       { id: "jindabyne", name: "Jindabyne", lat: -36.4106, lng: 148.6206, accent: "#0ea5e9" },
     ],
   },
@@ -78,8 +78,8 @@ export const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: nu
     center: { lat: 36.74, lng: 138.42 },
     pins: [
       { id: "shiga-kogen", name: "Shiga Kogen", lat: 36.7167, lng: 138.5083, accent: "#f97316" },
-      { id: "ryuoo", name: "Ryuoo", lat: 36.7458, lng: 138.4283, accent: "#f97316" },
-      { id: "kita-shiga", name: "Kita Shiga Kogen", lat: 36.7600, lng: 138.4750, accent: "#f97316" },
+      { id: "ryuoo", name: "Ryuoo", lat: 36.7790, lng: 138.4500, accent: "#f97316" },
+      { id: "kita-shiga", name: "Kita Shiga Kogen", lat: 36.7950, lng: 138.4150, accent: "#f97316" },
       { id: "yudanaka", name: "Yudanaka", lat: 36.7406, lng: 138.4222, accent: "#0ea5e9" },
       { id: "shibu-onsen", name: "Shibu Onsen", lat: 36.7367, lng: 138.4214, accent: "#0ea5e9" },
     ],
@@ -94,27 +94,27 @@ export const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: nu
   iiyama: {
     center: { lat: 36.873, lng: 138.366 },
     pins: [
-      { id: "madarao", name: "Madarao", lat: 36.9056, lng: 138.2858, accent: "#f97316" },
-      { id: "tangram", name: "Tangram", lat: 36.8917, lng: 138.2806, accent: "#f97316" },
-      { id: "togari-onsen", name: "Togari Onsen", lat: 36.8722, lng: 138.4014, accent: "#f97316" },
-      { id: "kijimadaira", name: "Kijimadaira", lat: 36.8639, lng: 138.4006, accent: "#f97316" },
-      { id: "kijima-snow-park", name: "Kijima Snow Park", lat: 36.8556, lng: 138.4108, accent: "#f97316" },
+      { id: "madarao", name: "Madarao", lat: 36.8483, lng: 138.2799, accent: "#f97316" },
+      { id: "tangram", name: "Tangram", lat: 36.8504, lng: 138.2642, accent: "#f97316" },
+      { id: "togari-onsen", name: "Togari Onsen", lat: 36.9400, lng: 138.3748, accent: "#f97316" },
+      { id: "kijimadaira", name: "Kijimadaira", lat: 36.8186, lng: 138.4047, accent: "#f97316" },
+      { id: "kijima-snow-park", name: "Kijima Snow Park", lat: 36.8135, lng: 138.3966, accent: "#f97316" },
       { id: "iiyama", name: "Iiyama City", lat: 36.852, lng: 138.366, accent: "#0ea5e9" },
     ],
   },
   "hakuba-valley": {
     center: { lat: 36.68, lng: 137.85 },
     pins: [
-      { id: "happo-one", name: "Happo-One", lat: 36.6981, lng: 137.8597, accent: "#f97316" },
-      { id: "hakuba-goryu", name: "Goryu", lat: 36.7076, lng: 137.8312, accent: "#f97316" },
-      { id: "hakuba-47", name: "Hakuba 47", lat: 36.6988, lng: 137.8256, accent: "#f97316" },
-      { id: "hakuba-iwatake", name: "Iwatake", lat: 36.6927, lng: 137.8398, accent: "#f97316" },
+      { id: "happo-one", name: "Happo-One", lat: 36.6968, lng: 137.8380, accent: "#f97316" },
+      { id: "hakuba-goryu", name: "Goryu", lat: 36.6645, lng: 137.8325, accent: "#f97316" },
+      { id: "hakuba-47", name: "Hakuba 47", lat: 36.6780, lng: 137.8390, accent: "#f97316" },
+      { id: "hakuba-iwatake", name: "Iwatake", lat: 36.7220, lng: 137.8400, accent: "#f97316" },
       { id: "tsugaike-kogen", name: "Tsugaike Kogen", lat: 36.7490, lng: 137.8662, accent: "#f97316" },
       { id: "hakuba-norikura", name: "Norikura", lat: 36.7580, lng: 137.8580, accent: "#f97316" },
       { id: "hakuba-cortina", name: "Cortina", lat: 36.7756, lng: 137.8875, accent: "#f97316" },
       { id: "hakuba-sanosaka", name: "Sanosaka", lat: 36.6200, lng: 137.8500, accent: "#f97316" },
       { id: "kashimayari", name: "Kashimayari", lat: 36.5930, lng: 137.8270, accent: "#f97316" },
-      { id: "jiigatake", name: "Jiigatake", lat: 36.5686, lng: 137.8339, accent: "#f97316" },
+      { id: "jiigatake", name: "Jiigatake", lat: 36.5604, lng: 137.8013, accent: "#f97316" },
       { id: "hakuba", name: "Hakuba", lat: 36.6982, lng: 137.8619, accent: "#0ea5e9" },
       { id: "otari", name: "Otari", lat: 36.7550, lng: 137.8640, accent: "#0ea5e9" },
       { id: "omachi", name: "Omachi", lat: 36.5030, lng: 137.8514, accent: "#0ea5e9" },
@@ -132,7 +132,7 @@ export const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: nu
       { id: "akakura", name: "Akakura", lat: 36.8876, lng: 138.1802, accent: "#0ea5e9" },
       { id: "ikenotaira-onsen", name: "Ikenotaira Onsen", lat: 36.8750, lng: 138.1660, accent: "#0ea5e9" },
       { id: "suginosawa", name: "Suginosawa", lat: 36.8495, lng: 138.1601, accent: "#0ea5e9" },
-      { id: "arai", name: "Arai", lat: 37.0006, lng: 138.2259, accent: "#0ea5e9" },
+      { id: "arai", name: "Arai", lat: 37.0268, lng: 138.2555, accent: "#0ea5e9" },
     ],
   },
   "niseko": {
@@ -145,13 +145,13 @@ export const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: nu
       { id: "moiwa", name: "Moiwa", lat: 42.8318, lng: 140.6479, accent: "#f97316" },
       { id: "hirafu", name: "Hirafu", lat: 42.8577, lng: 140.6982, accent: "#0ea5e9" },
       { id: "kutchan", name: "Kutchan", lat: 42.9010, lng: 140.7545, accent: "#0ea5e9" },
-      { id: "niseko-town", name: "Niseko Town", lat: 42.8046, lng: 140.6595, accent: "#0ea5e9" },
+      { id: "niseko-town", name: "Niseko Town", lat: 42.8051, lng: 140.6880, accent: "#0ea5e9" },
     ],
   },
   "furano": {
     center: { lat: 43.34, lng: 142.38 },
     pins: [
-      { id: "furano-ski-resort", name: "Furano Ski Resort", lat: 43.335, lng: 142.361, accent: "#f97316" },
+      { id: "furano-ski-resort", name: "Furano Ski Resort", lat: 43.3326, lng: 142.3281, accent: "#f97316" },
       { id: "kamui-ski-links", name: "Kamui Ski Links", lat: 43.709, lng: 142.192, accent: "#f97316" },
       { id: "tomamu", name: "Tomamu", lat: 43.058, lng: 142.621, accent: "#f97316" },
       { id: "furano", name: "Furano", lat: 43.3420, lng: 142.3833, accent: "#0ea5e9" },
@@ -162,7 +162,7 @@ export const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: nu
     center: { lat: 43.03, lng: 141.25 },
     pins: [
       { id: "sapporo-teine", name: "Sapporo Teine", lat: 43.083, lng: 141.185, accent: "#f97316" },
-      { id: "sapporo-kokusai", name: "Sapporo Kokusai", lat: 42.987, lng: 141.135, accent: "#f97316" },
+      { id: "sapporo-kokusai", name: "Sapporo Kokusai", lat: 43.0730, lng: 141.0702, accent: "#f97316" },
       { id: "sapporo-bankei", name: "Sapporo Bankei", lat: 43.033, lng: 141.264, accent: "#f97316" },
       { id: "sapporo", name: "Sapporo", lat: 43.0621, lng: 141.3544, accent: "#0ea5e9" },
       { id: "jozankei", name: "Jozankei", lat: 42.971, lng: 141.180, accent: "#0ea5e9" },
@@ -175,7 +175,7 @@ export const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: nu
       // stack under furano's day-trip "tomamu" pin on the JP-wide map
       { id: "tomamu-resort", name: "Hoshino Resorts Tomamu", lat: 43.062, lng: 142.625, accent: "#f97316" },
       { id: "sahoro", name: "Sahoro Resort", lat: 43.187, lng: 142.804, accent: "#f97316" },
-      { id: "tomamu-village", name: "Tomamu", lat: 43.0636, lng: 142.6357, accent: "#0ea5e9" },
+      { id: "tomamu-village", name: "Tomamu", lat: 43.0572, lng: 142.6126, accent: "#0ea5e9" },
       { id: "shimukappu", name: "Shimukappu", lat: 43.0, lng: 142.4167, accent: "#0ea5e9" },
     ],
   },
@@ -240,7 +240,7 @@ export const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: nu
     center: { lat: 39.85, lng: 140.98 },
     pins: [
       { id: "appi", name: "Appi Kogen", lat: 40.0028, lng: 140.9452, accent: "#f97316" },
-      { id: "shizukuishi-resort", name: "Shizukuishi", lat: 39.6940, lng: 140.9060, accent: "#f97316" },
+      { id: "shizukuishi-resort", name: "Shizukuishi", lat: 39.7844, lng: 140.9203, accent: "#f97316" },
       { id: "shizukuishi", name: "Shizukuishi Town", lat: 39.6941, lng: 140.9844, accent: "#0ea5e9" },
       { id: "morioka", name: "Morioka", lat: 39.7019, lng: 141.1365, accent: "#0ea5e9" },
     ],
@@ -266,7 +266,7 @@ export const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: nu
     center: { lat: 36.80, lng: 138.97 },
     pins: [
       { id: "tenjindaira", name: "Tanigawadake Tenjindaira", lat: 36.833, lng: 138.947, accent: "#f97316" },
-      { id: "minakami-kogen", name: "Minakami Kogen", lat: 36.878, lng: 139.040, accent: "#f97316" },
+      { id: "minakami-kogen", name: "Minakami Kogen", lat: 36.8572, lng: 139.0807, accent: "#f97316" },
       { id: "norn-minakami", name: "Norn Minakami", lat: 36.743, lng: 138.942, accent: "#f97316" },
       { id: "minakami", name: "Minakami", lat: 36.780, lng: 138.968, accent: "#0ea5e9" },
     ],
@@ -285,9 +285,9 @@ export const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: nu
   "hachimantai": {
     center: { lat: 39.93, lng: 141.05 },
     pins: [
-      { id: "hachimantai-panorama", name: "Hachimantai Panorama", lat: 39.946, lng: 141.000, accent: "#f97316" },
-      { id: "hachimantai-shimokura", name: "Hachimantai Shimokura", lat: 39.951, lng: 140.972, accent: "#f97316" },
-      { id: "hachimantai", name: "Hachimantai", lat: 39.900, lng: 141.130, accent: "#0ea5e9" },
+      { id: "hachimantai-panorama", name: "Hachimantai Panorama", lat: 39.8840, lng: 140.9775, accent: "#f97316" },
+      { id: "hachimantai-shimokura", name: "Hachimantai Shimokura", lat: 39.8954, lng: 140.9408, accent: "#f97316" },
+      { id: "hachimantai", name: "Hachimantai", lat: 39.9136, lng: 141.1006, accent: "#0ea5e9" },
     ],
   },
   queenstown: {
@@ -408,7 +408,7 @@ export const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: nu
   "quebec-laurentians": {
     center: { lat: 46.22, lng: -74.57 },
     pins: [
-      { id: "tremblant", name: "Tremblant", lat: 46.2200, lng: -74.5530, accent: "#f97316" },
+      { id: "tremblant", name: "Tremblant", lat: 46.2100, lng: -74.5850, accent: "#f97316" },
       { id: "mont-tremblant", name: "Mont-Tremblant", lat: 46.2127, lng: -74.5844, accent: "#0ea5e9" },
     ],
   },

@@ -29,7 +29,7 @@ export const snowyMountainsRegion: RegionConfig = {
     // Thredbo: highest vertical in AU, advanced skiers' choice, has terrain_park + lift-served backcountry.
     { id: "thredbo",         name: "Thredbo",          elevationM: 2037, lat: -36.5054, lng: 148.3089, blurb: "NSW · the high one",                          websiteUrl: "https://www.thredbo.com.au", snowReportUrl: "https://www.thredbo.com.au/weather/weather-report/",        terrain_park: true, backcountry_access: true, kids_lessons: true, summerOpen: true },
     // Selwyn: explicitly family-beginner, no expert terrain.
-    { id: "selwyn",          name: "Selwyn",           elevationM: 1614, lat: -35.8383, lng: 148.5267, blurb: "NSW · family beginner mountain",             websiteUrl: "https://www.selwynsnow.com.au", snowReportUrl: "https://selwynsnow.com.au/snow-and-weather/",     beginner_friendly: true, kids_lessons: true },
+    { id: "selwyn",          name: "Selwyn",           elevationM: 1614, lat: -35.8990, lng: 148.4860, blurb: "NSW · family beginner mountain",             websiteUrl: "https://www.selwynsnow.com.au", snowReportUrl: "https://selwynsnow.com.au/snow-and-weather/",     beginner_friendly: true, kids_lessons: true },
     // Charlotte's Pass: small ski-in village, mostly intermediate, kids' programs.
     // Day-trippable via the DayTripper package: park at Perisher Valley (or
     // take the Skitube from Bullocks Flat), then oversnow vehicle ~30-45 min

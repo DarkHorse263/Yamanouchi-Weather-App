@@ -143,8 +143,8 @@ export const nisekoRegion: RegionConfig = {
       id: "niseko-town",
       name: "Niseko Town",
       nameJa: "ニセコ町",
-      lat: 42.8046,
-      lng: 140.6595,
+      lat: 42.8051,
+      lng: 140.6880,
       // Niseko Town centre (~180 m) on the south-west side, with Niseko
       // Station on the JR Hakodate Line. The quieter gateway to Niseko
       // Village, Annupuri and Moiwa up the hill road.

@@ -255,8 +255,8 @@ const REGIONS: RegionConfig[] = [
     // Headline reading from Tomamu resort village (~620m) · the hotel
     // towers and JR Tomamu Station at the base of Mt Tomamu.
     headlineLabel: "Tomamu",
-    lat: 43.0636,
-    lon: 142.6357,
+    lat: 43.0572,
+    lon: 142.6126,
     model: "jma_seamless",
     timezone: "Asia/Tokyo",
     sourceLabel: "JMA Seamless",
