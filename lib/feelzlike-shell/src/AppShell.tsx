@@ -516,6 +516,7 @@ function BackBar({
   t: (en: string, ja?: string) => string;
 }) {
   const [, setLocation] = useLocation();
+  const season = useOptionalSeason();
   // Show on mountain-scope pages and town subpages (but not the town home).
   const show =
     parsed.scope === "mountain" ||
@@ -536,7 +537,14 @@ function BackBar({
   };
 
   return (
-    <div className="sticky top-14 md:top-0 z-30 bg-[#0055FF]/95 backdrop-blur-md border-b border-white/20">
+    <div
+      className={cn(
+        "sticky top-14 md:top-0 z-30 backdrop-blur-md border-b border-white/20",
+        // Match the seasonal PageHeader surface so the bar doesn't clash
+        // with emerald green-season pages.
+        season?.season === "green" ? "bg-emerald-700/95" : "bg-[#0055FF]/95",
+      )}
+    >
       <div className="max-w-7xl mx-auto px-4 md:px-10 py-2.5 md:py-3">
         <a
           href={fallback}
