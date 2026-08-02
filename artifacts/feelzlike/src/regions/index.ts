@@ -26,6 +26,14 @@ import { queenstownRegion } from "./queenstown";
 import { wanakaRegion } from "./wanaka";
 import { mtHuttRegion } from "./mt-hutt";
 import { ruapehuRegion } from "./ruapehu";
+import { whistlerRegion } from "./whistler";
+import { powderHighwayRegion } from "./powder-highway";
+import { banffLakeLouiseRegion } from "./banff-lake-louise";
+import { canmoreRegion } from "./canmore";
+import { jasperRegion } from "./jasper";
+import { quebecLaurentiansRegion } from "./quebec-laurentians";
+import { quebecCharlevoixRegion } from "./quebec-charlevoix";
+import { quebecEasternTownshipsRegion } from "./quebec-eastern-townships";
 
 // Active region registry · AU: Snowy Mountains + Victoria's High Country
 // + Tasmania (Ben Lomond). JP: Yamanouchi (Shiga Kogen + Kita-Shiga),
@@ -38,6 +46,11 @@ import { ruapehuRegion } from "./ruapehu";
 // Aomori's big-mountain ropeway + the quiet Mt Iwaki powder resort).
 // NZ: Queenstown (Coronet Peak + The Remarkables), Wanaka (Cardrona +
 // Treble Cone), Mt Hutt (Methven), Ruapehu (Whakapapa + Turoa, Ohakune).
+// CA (BC + Alberta): Whistler (Whistler Blackcomb), Powder Highway (the
+// seven-resort BC interior loop), Banff & Lake Louise (SkiBig3), Canmore
+// (Nakiska), Jasper (Marmot Basin). CA (Quebec): Laurentians
+// (Tremblant), Charlevoix (Mont-Sainte-Anne + Le Massif), Eastern
+// Townships (Ski Bromont + Mont Sutton).
 export const REGIONS: RegionConfig[] = [
   snowyMountainsRegion,
   victoriasHighCountryRegion,
@@ -66,6 +79,14 @@ export const REGIONS: RegionConfig[] = [
   wanakaRegion,
   mtHuttRegion,
   ruapehuRegion,
+  whistlerRegion,
+  powderHighwayRegion,
+  banffLakeLouiseRegion,
+  canmoreRegion,
+  jasperRegion,
+  quebecLaurentiansRegion,
+  quebecCharlevoixRegion,
+  quebecEasternTownshipsRegion,
 ];
 
 export const REGION_BY_ID: Record<string, RegionConfig> = Object.fromEntries(
@@ -80,7 +101,7 @@ export function getRegion(id: string): RegionConfig | undefined {
 // (`/au`, `/jp`) and lets the landing decide which regions belong under
 // which flag without re-deriving from `subtitle` strings. Keep in sync
 // when a new region is added.
-export type CountryCode = "AU" | "JP" | "NZ";
+export type CountryCode = "AU" | "JP" | "NZ" | "CA";
 export const REGION_COUNTRY: Record<string, CountryCode> = {
   "snowy-mountains": "AU",
   "victorias-high-country": "AU",
@@ -109,11 +130,20 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "wanaka": "NZ",
   "mt-hutt": "NZ",
   "ruapehu": "NZ",
+  "whistler": "CA",
+  "powder-highway": "CA",
+  "banff-lake-louise": "CA",
+  "canmore": "CA",
+  "jasper": "CA",
+  "quebec-laurentians": "CA",
+  "quebec-charlevoix": "CA",
+  "quebec-eastern-townships": "CA",
 };
 export const COUNTRY_META: Record<CountryCode, { name: string; flag: string }> = {
   AU: { name: "Australia", flag: "🇦🇺" },
   JP: { name: "Japan", flag: "🇯🇵" },
   NZ: { name: "New Zealand", flag: "🇳🇿" },
+  CA: { name: "Canada", flag: "🇨🇦" },
 };
 export function regionsForCountry(code: CountryCode): RegionConfig[] {
   return REGIONS.filter((r) => REGION_COUNTRY[r.id] === code);

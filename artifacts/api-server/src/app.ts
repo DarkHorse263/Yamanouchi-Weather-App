@@ -347,11 +347,55 @@ if (process.env.NODE_ENV === "production") {
       name: "Ruapehu",
       towns: { ohakune: "Ohakune" },
     },
+    // Canada · BC + Alberta
+    "whistler": {
+      name: "Whistler",
+      towns: { whistler: "Whistler" },
+    },
+    "powder-highway": {
+      name: "Powder Highway",
+      towns: {
+        revelstoke: "Revelstoke",
+        golden: "Golden",
+        fernie: "Fernie",
+        nelson: "Nelson",
+        kimberley: "Kimberley",
+        invermere: "Invermere",
+        "sun-peaks": "Sun Peaks",
+      },
+    },
+    "banff-lake-louise": {
+      name: "Banff & Lake Louise",
+      towns: { banff: "Banff", "lake-louise": "Lake Louise" },
+    },
+    "canmore": {
+      name: "Canmore",
+      towns: { canmore: "Canmore" },
+    },
+    "jasper": {
+      name: "Jasper",
+      towns: { jasper: "Jasper" },
+    },
+    "quebec-laurentians": {
+      name: "Laurentians",
+      towns: { "mont-tremblant": "Mont-Tremblant" },
+    },
+    "quebec-charlevoix": {
+      name: "Charlevoix",
+      towns: {
+        beaupre: "Beaupré",
+        "petite-riviere-saint-francois": "Petite-Rivière-Saint-François",
+      },
+    },
+    "quebec-eastern-townships": {
+      name: "Eastern Townships",
+      towns: { bromont: "Bromont", sutton: "Sutton" },
+    },
   };
 
   // Top-level routes handled by the SPA (before the /:region catch-all).
   const KNOWN_TOP_LEVEL = new Set([
-    "/", "/countries", "/au", "/jp", "/nz", "/near-you",
+    "/", "/countries", "/au", "/jp", "/nz", "/ca", "/near-you",
     "/plan", "/legal/privacy", "/legal/terms",
     "/premium",
     "/alerts/verify", "/alerts/manage", "/alerts/unsubscribed",

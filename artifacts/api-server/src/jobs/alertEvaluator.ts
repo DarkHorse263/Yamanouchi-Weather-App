@@ -120,6 +120,16 @@ const REGION_ANCHORS: Record<RegionId, {
   "wanaka": { lat: -44.6311, lon: 168.8978, elevation: 2088, region: "OTHER", displayName: "Wanaka" },
   "mt-hutt": { lat: -43.4707, lon: 171.5306, elevation: 2075, region: "OTHER", displayName: "Mt Hutt" },
   "ruapehu": { lat: -39.3072, lon: 175.5286, elevation: 2300, region: "OTHER", displayName: "Ruapehu" },
+  // CA · same posture as NZ, no national model in the ensemble so region
+  // "OTHER". Anchor each on its highest lift-served summit.
+  "whistler": { lat: 50.0900, lon: -122.8620, elevation: 2284, region: "OTHER", displayName: "Whistler" },
+  "powder-highway": { lat: 51.2977, lon: -117.0464, elevation: 2450, region: "OTHER", displayName: "Powder Highway" },
+  "banff-lake-louise": { lat: 51.0781, lon: -115.7772, elevation: 2730, region: "OTHER", displayName: "Banff & Lake Louise" },
+  "canmore": { lat: 50.9422, lon: -115.1519, elevation: 2260, region: "OTHER", displayName: "Canmore" },
+  "jasper": { lat: 52.8000, lon: -118.0833, elevation: 2612, region: "OTHER", displayName: "Jasper" },
+  "quebec-laurentians": { lat: 46.2200, lon: -74.5530, elevation: 875, region: "OTHER", displayName: "Laurentians" },
+  "quebec-charlevoix": { lat: 47.2757, lon: -70.6257, elevation: 806, region: "OTHER", displayName: "Charlevoix" },
+  "quebec-eastern-townships": { lat: 45.0850, lon: -72.5500, elevation: 840, region: "OTHER", displayName: "Eastern Townships" },
 };
 
 interface EvaluatorReport {

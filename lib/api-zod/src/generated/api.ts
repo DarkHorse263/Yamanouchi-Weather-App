@@ -184,6 +184,14 @@ export const GetPowderAlertsQueryParams = zod.object({
       "wanaka",
       "mt-hutt",
       "ruapehu",
+      "whistler",
+      "powder-highway",
+      "banff-lake-louise",
+      "canmore",
+      "jasper",
+      "quebec-laurentians",
+      "quebec-charlevoix",
+      "quebec-eastern-townships",
     ])
     .optional()
     .describe(
@@ -1173,6 +1181,14 @@ export const GetWeatherQueryParams = zod.object({
       "wanaka",
       "mt-hutt",
       "ruapehu",
+      "whistler",
+      "powder-highway",
+      "banff-lake-louise",
+      "canmore",
+      "jasper",
+      "quebec-laurentians",
+      "quebec-charlevoix",
+      "quebec-eastern-townships",
     ])
     .optional()
     .describe(
@@ -1585,6 +1601,14 @@ export const GetWebcamsQueryParams = zod.object({
       "wanaka",
       "mt-hutt",
       "ruapehu",
+      "whistler",
+      "powder-highway",
+      "banff-lake-louise",
+      "canmore",
+      "jasper",
+      "quebec-laurentians",
+      "quebec-charlevoix",
+      "quebec-eastern-townships",
     ])
     .optional()
     .describe(
@@ -1699,6 +1723,14 @@ export const GetRoadConditionsQueryParams = zod.object({
       "wanaka",
       "mt-hutt",
       "ruapehu",
+      "whistler",
+      "powder-highway",
+      "banff-lake-louise",
+      "canmore",
+      "jasper",
+      "quebec-laurentians",
+      "quebec-charlevoix",
+      "quebec-eastern-townships",
     ])
     .optional()
     .describe(
@@ -1868,6 +1900,14 @@ export const GetLiftStatusQueryParams = zod.object({
       "wanaka",
       "mt-hutt",
       "ruapehu",
+      "whistler",
+      "powder-highway",
+      "banff-lake-louise",
+      "canmore",
+      "jasper",
+      "quebec-laurentians",
+      "quebec-charlevoix",
+      "quebec-eastern-townships",
     ])
     .optional()
     .describe(

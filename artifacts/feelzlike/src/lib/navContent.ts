@@ -28,6 +28,10 @@ import type { RegionConfig } from "@workspace/feelzlike-shell";
  *   · yamanouchi            · curated road webcams
  *   · queenstown/wanaka/mt-hutt/ruapehu (NZ) · seasonal chain rules +
  *     NZTA official road-camera map tile (no live per-road feed wired)
+ *   · whistler/powder-highway (BC), banff-lake-louise/canmore/jasper (AB)
+ *     and the three quebec-* regions (QC) · seasonal winter-driving rules
+ *     plus a DriveBC / 511 Alberta / Québec 511 official camera-map tile
+ *     (no live per-road feed wired)
  * The remaining regions have no wired feed yet, so the entry stays hidden.
  * Add a region here the moment its roads feed or cams go live.
  */
@@ -39,6 +43,14 @@ const REGIONS_WITH_ROADS_CONTENT: ReadonlySet<string> = new Set([
   "wanaka",
   "mt-hutt",
   "ruapehu",
+  "whistler",
+  "powder-highway",
+  "banff-lake-louise",
+  "canmore",
+  "jasper",
+  "quebec-laurentians",
+  "quebec-charlevoix",
+  "quebec-eastern-townships",
 ]);
 
 /**

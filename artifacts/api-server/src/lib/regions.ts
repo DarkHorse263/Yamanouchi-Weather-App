@@ -35,6 +35,14 @@ export const REGION_IDS = [
   "wanaka",
   "mt-hutt",
   "ruapehu",
+  "whistler",
+  "powder-highway",
+  "banff-lake-louise",
+  "canmore",
+  "jasper",
+  "quebec-laurentians",
+  "quebec-charlevoix",
+  "quebec-eastern-townships",
 ] as const;
 export type RegionId = (typeof REGION_IDS)[number];
 
@@ -313,6 +321,68 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "turoa": "ruapehu",
   "ohakune": "ruapehu",
   "ruapehu-roads": "ruapehu",
+
+  // Whistler, BC · Whistler Blackcomb's two mountains + the village + roads tile.
+  "whistler-mountain": "whistler",
+  "blackcomb-mountain": "whistler",
+  "whistler": "whistler",
+  "whistler-roads": "whistler",
+
+  // Powder Highway, BC · 7 independent resorts, each with its own base town.
+  "revelstoke-mountain-resort": "powder-highway",
+  "kicking-horse": "powder-highway",
+  "fernie-alpine": "powder-highway",
+  "whitewater": "powder-highway",
+  "kimberley-alpine": "powder-highway",
+  "panorama": "powder-highway",
+  "sun-peaks-resort": "powder-highway",
+  "revelstoke": "powder-highway",
+  "golden": "powder-highway",
+  "fernie": "powder-highway",
+  "nelson": "powder-highway",
+  "kimberley": "powder-highway",
+  "invermere": "powder-highway",
+  "sun-peaks": "powder-highway",
+  "powder-highway-roads": "powder-highway",
+
+  // Banff & Lake Louise, AB · SkiBig3 inside Banff National Park.
+  "banff-sunshine": "banff-lake-louise",
+  "mt-norquay": "banff-lake-louise",
+  "lake-louise-resort": "banff-lake-louise",
+  "banff": "banff-lake-louise",
+  "lake-louise": "banff-lake-louise",
+  "banff-lake-louise-roads": "banff-lake-louise",
+
+  // Canmore, AB · 1 mountain (Nakiska, Kananaskis) + the town.
+  "nakiska": "canmore",
+  "canmore": "canmore",
+  "canmore-roads": "canmore",
+
+  // Jasper, AB · 1 mountain (Marmot Basin) + the town.
+  "marmot-basin": "jasper",
+  "jasper": "jasper",
+  "jasper-roads": "jasper",
+
+  // Laurentians, QC · Tremblant + the pedestrian village at its base.
+  "tremblant": "quebec-laurentians",
+  "mont-tremblant": "quebec-laurentians",
+  "quebec-laurentians-roads": "quebec-laurentians",
+
+  // Charlevoix, QC · Mont-Sainte-Anne and Le Massif on the north shore
+  // of the St. Lawrence, one base town each.
+  "mont-sainte-anne": "quebec-charlevoix",
+  "le-massif": "quebec-charlevoix",
+  "beaupre": "quebec-charlevoix",
+  "petite-riviere-saint-francois": "quebec-charlevoix",
+  "quebec-charlevoix-roads": "quebec-charlevoix",
+
+  // Eastern Townships, QC · Ski Bromont and Mont Sutton (name-clash rule:
+  // the Bromont resort takes the -resort id against the town).
+  "bromont-resort": "quebec-eastern-townships",
+  "mont-sutton": "quebec-eastern-townships",
+  "bromont": "quebec-eastern-townships",
+  "sutton": "quebec-eastern-townships",
+  "quebec-eastern-townships-roads": "quebec-eastern-townships",
 };
 
 export function regionForLocation(locationId: string): RegionId | undefined {

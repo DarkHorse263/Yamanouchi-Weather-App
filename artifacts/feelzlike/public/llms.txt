@@ -1,14 +1,15 @@
 # feelzlike
 
-> feelzlike shows live weather, road conditions, lift status, and travel info for resort towns across Australia, New Zealand, and Japan. It is towns-first: the experience centres on the base towns people actually stay in (Jindabyne, Bright, Yudanaka, etc.) rather than the ski resorts on the mountain above.
+> feelzlike shows live weather, road conditions, lift status, and travel info for resort towns across Australia, New Zealand, Japan, and Canada. It is towns-first: the experience centres on the base towns people actually stay in (Jindabyne, Bright, Yudanaka, etc.) rather than the ski resorts on the mountain above.
 
 ## Public landing pages
 
 - [Home](https://feelzlike.com/): intro, region picker, and near-you shortcut
-- [Browse by country](https://feelzlike.com/countries): choose Australia, Japan, or New Zealand
+- [Browse by country](https://feelzlike.com/countries): choose Australia, Japan, New Zealand, or Canada
 - [Australia](https://feelzlike.com/au): all Australian resort regions
 - [Japan](https://feelzlike.com/jp): all Japanese resort regions
 - [New Zealand](https://feelzlike.com/nz): all New Zealand resort regions
+- [Canada](https://feelzlike.com/ca): all Canadian resort regions (BC, Alberta + Québec)
 - [Near you](https://feelzlike.com/near-you): weather and radar for your current location
 - [News](https://feelzlike.com/news): resort-town news and weather updates
 - [Trip planner](https://feelzlike.com/plan): multi-day trip planning across regions

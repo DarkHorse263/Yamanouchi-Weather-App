@@ -334,6 +334,223 @@ const NEW_ZEALAND: Record<string, MountainWebcam[]> = {
   ],
 };
 
+const CA_VERIFIED = "2026-08-01";
+
+/**
+ * Canada (BC, Alberta, Québec). Same posture as NZ: none of these operators
+ * serve a hotlink-clean still image, so every entry is an "external" card
+ * straight to the operator's official cam page. Marmot Basin has no public
+ * cam page at all (only a snow report), so Jasper has no entry rather than a
+ * guessed URL · Mont Sutton is the same, its cams are embedded in the
+ * conditions page with no standalone cam route.
+ */
+const CANADA: Record<string, MountainWebcam[]> = {
+  "whistler-mountain": [
+    {
+      id: "whistler-mountain-official",
+      mountainId: "whistler-mountain",
+      name: "Whistler Blackcomb mountain cams",
+      description: "Official cams across both mountains and the village.",
+      embedType: "external",
+      pageUrl: "https://www.whistlerblackcomb.com/the-mountain/mountain-conditions/mountain-cams.aspx",
+      source: "Whistler Blackcomb",
+      verifiedAt: CA_VERIFIED,
+    },
+  ],
+  "blackcomb-mountain": [
+    {
+      id: "blackcomb-mountain-official",
+      mountainId: "blackcomb-mountain",
+      name: "Whistler Blackcomb mountain cams",
+      description: "Official cams across both mountains and the village.",
+      embedType: "external",
+      pageUrl: "https://www.whistlerblackcomb.com/the-mountain/mountain-conditions/mountain-cams.aspx",
+      source: "Whistler Blackcomb",
+      verifiedAt: CA_VERIFIED,
+    },
+  ],
+  "revelstoke-mountain-resort": [
+    {
+      id: "revelstoke-official",
+      mountainId: "revelstoke-mountain-resort",
+      name: "Revelstoke webcams",
+      description: "Official cams from the village base up to Mt Mackenzie.",
+      embedType: "external",
+      pageUrl: "https://www.revelstokemountainresort.com/mountain/conditions/webcams/",
+      source: "Revelstoke Mountain Resort",
+      verifiedAt: CA_VERIFIED,
+    },
+  ],
+  "kicking-horse": [
+    {
+      id: "kicking-horse-official",
+      mountainId: "kicking-horse",
+      name: "Kicking Horse mountain cam",
+      description: "Official mountain cam above Golden.",
+      embedType: "external",
+      pageUrl: "https://kickinghorseresort.com/conditions/mountain-cam/",
+      source: "Kicking Horse",
+      verifiedAt: CA_VERIFIED,
+    },
+  ],
+  "fernie-alpine": [
+    {
+      id: "fernie-alpine-official",
+      mountainId: "fernie-alpine",
+      name: "Fernie mountain cam",
+      description: "Official cams across the Lizard Range bowls.",
+      embedType: "external",
+      pageUrl: "https://skifernie.com/conditions/mountain-cam/",
+      source: "Fernie Alpine Resort",
+      verifiedAt: CA_VERIFIED,
+    },
+  ],
+  whitewater: [
+    {
+      id: "whitewater-official",
+      mountainId: "whitewater",
+      name: "Whitewater webcams",
+      description: "Official base and mid-mountain cams above Nelson.",
+      embedType: "external",
+      pageUrl: "https://skiwhitewater.com/webcams/",
+      source: "Whitewater",
+      verifiedAt: CA_VERIFIED,
+    },
+  ],
+  "kimberley-alpine": [
+    {
+      id: "kimberley-alpine-official",
+      mountainId: "kimberley-alpine",
+      name: "Kimberley webcams",
+      description: "Official cams on North Star Mountain.",
+      embedType: "external",
+      pageUrl: "https://skikimberley.com/conditions/webcams/",
+      source: "Kimberley Alpine Resort",
+      verifiedAt: CA_VERIFIED,
+    },
+  ],
+  panorama: [
+    {
+      id: "panorama-official",
+      mountainId: "panorama",
+      name: "Panorama webcams",
+      description: "Official cams from the village up to Taynton Bowl.",
+      embedType: "external",
+      pageUrl: "https://www.panoramaresort.com/webcams/",
+      source: "Panorama",
+      verifiedAt: CA_VERIFIED,
+    },
+  ],
+  "sun-peaks-resort": [
+    {
+      id: "sun-peaks-official",
+      mountainId: "sun-peaks-resort",
+      name: "Sun Peaks webcams",
+      description: "Official cams across Tod, Sundance and Morrisey.",
+      embedType: "external",
+      pageUrl: "https://www.sunpeaksresort.com/ski-ride/weather-webcams/webcams",
+      source: "Sun Peaks Resort",
+      verifiedAt: CA_VERIFIED,
+    },
+  ],
+  "banff-sunshine": [
+    {
+      id: "banff-sunshine-official",
+      mountainId: "banff-sunshine",
+      name: "Sunshine Village webcams",
+      description: "Official cams on the Continental Divide.",
+      embedType: "external",
+      pageUrl: "https://www.skibanff.com/webcams",
+      source: "Banff Sunshine Village",
+      verifiedAt: CA_VERIFIED,
+    },
+  ],
+  "mt-norquay": [
+    {
+      id: "mt-norquay-official",
+      mountainId: "mt-norquay",
+      name: "Mt. Norquay webcam",
+      description: "Official cam on the hill above Banff townsite.",
+      embedType: "external",
+      pageUrl: "https://banffnorquay.com/webcam/",
+      source: "Mt. Norquay",
+      verifiedAt: CA_VERIFIED,
+    },
+  ],
+  "lake-louise-resort": [
+    {
+      id: "lake-louise-resort-official",
+      mountainId: "lake-louise-resort",
+      name: "Lake Louise webcams",
+      description: "Official cams across the four mountain faces.",
+      embedType: "external",
+      pageUrl: "https://www.skilouise.com/webcams/",
+      source: "Lake Louise Ski Resort",
+      verifiedAt: CA_VERIFIED,
+    },
+  ],
+  nakiska: [
+    {
+      id: "nakiska-official",
+      mountainId: "nakiska",
+      name: "Nakiska mountain cam",
+      description: "Official cam on Mount Allan in Kananaskis Country.",
+      embedType: "external",
+      pageUrl: "https://skinakiska.com/conditions/mountain-cam/",
+      source: "Nakiska",
+      verifiedAt: CA_VERIFIED,
+    },
+  ],
+  tremblant: [
+    {
+      id: "tremblant-official",
+      mountainId: "tremblant",
+      name: "Tremblant webcams",
+      description: "Official cams from the pedestrian village up to the Pic White summit.",
+      embedType: "external",
+      pageUrl: "https://www.tremblant.ca/mountain-village/webcams",
+      source: "Tremblant",
+      verifiedAt: CA_VERIFIED,
+    },
+  ],
+  "mont-sainte-anne": [
+    {
+      id: "mont-sainte-anne-official",
+      mountainId: "mont-sainte-anne",
+      name: "Mont-Sainte-Anne webcams",
+      description: "Official cams across the south, north and west faces.",
+      embedType: "external",
+      pageUrl: "https://mont-sainte-anne.com/webcams-ski-alpin/",
+      source: "Mont-Sainte-Anne",
+      verifiedAt: CA_VERIFIED,
+    },
+  ],
+  "le-massif": [
+    {
+      id: "le-massif-official",
+      mountainId: "le-massif",
+      name: "Le Massif snow, weather & webcams",
+      description: "Official cams looking down the vertical toward the St. Lawrence.",
+      embedType: "external",
+      pageUrl: "https://www.lemassif.com/en/the-mountain/winter/snow-weather-webcams",
+      source: "Le Massif de Charlevoix",
+      verifiedAt: CA_VERIFIED,
+    },
+  ],
+  "bromont-resort": [
+    {
+      id: "bromont-resort-official",
+      mountainId: "bromont-resort",
+      name: "Ski Bromont webcams",
+      description: "Official cams across the seven sectors of Mont Brome.",
+      embedType: "external",
+      pageUrl: "https://www.bromontmontagne.com/en/webcams/",
+      source: "Ski Bromont",
+      verifiedAt: CA_VERIFIED,
+    },
+  ],
+};
+
 // Reference IIYAMA_DORMANT once so TS doesn't drop it as an unused export.
 void IIYAMA_DORMANT;
 
@@ -341,6 +558,7 @@ export const MOUNTAIN_WEBCAMS: Record<string, MountainWebcam[]> = {
   ...YAMANOUCHI,
   ...SNOWY_MOUNTAINS,
   ...NEW_ZEALAND,
+  ...CANADA,
 };
 
 export function getMountainWebcams(mountainId: string): MountainWebcam[] {
