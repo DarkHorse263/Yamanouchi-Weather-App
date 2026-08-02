@@ -93,7 +93,7 @@ export default function CountryHome({ code }: CountryHomeProps) {
                 href={`/${region.id}/`}
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.35, delay: 0.05 + i * 0.06 }}
+                transition={{ duration: 0.35, delay: Math.min(0.05 + i * 0.06, 0.35) }}
                 className="group relative flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white hover:-translate-y-0.5 hover:border-sky-400 hover:shadow-[0_4px_8px_rgba(15,23,42,0.06),0_12px_28px_-12px_rgba(56,128,210,0.25)] shadow-[0_1px_3px_rgba(15,23,42,0.04)] transition-all duration-200"
               >
                 <div className="h-1 w-full bg-gradient-to-r from-sky-400 via-sky-500 to-blue-700" />
