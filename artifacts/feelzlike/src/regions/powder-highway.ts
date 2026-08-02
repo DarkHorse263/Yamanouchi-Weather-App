@@ -31,7 +31,7 @@ export const powderHighwayRegion: RegionConfig = {
   brand: { wordmarkUrl: wordmark },
   seasons: true,
   hemisphere: "north",
-  summaryMountains: ["Revelstoke", "Kicking Horse", "Fernie", "Whitewater", "Sun Peaks"],
+  summaryMountains: ["Revelstoke", "Kicking Horse", "Fernie", "Whitewater", "Kimberley", "Panorama", "Sun Peaks"],
   resorts: [
     { path: "/mountain/revelstoke-mountain-resort", label: "Revelstoke Mountain Resort" },
     { path: "/mountain/kicking-horse", label: "Kicking Horse" },

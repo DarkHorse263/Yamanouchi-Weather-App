@@ -112,15 +112,13 @@ export default function CountryHome({ code }: CountryHomeProps) {
                     <div>
                       <p className="byline text-muted-foreground/70">Base towns</p>
                       <p className="mt-1 font-semibold text-slate-700 leading-snug">
-                        {towns.slice(0, 4).map((t) => t.name).join(" · ")}
-                        {towns.length > 4 ? ` +${towns.length - 4}` : ""}
+                        {towns.map((t) => t.name).join(" · ")}
                       </p>
                     </div>
                     <div>
                       <p className="byline text-muted-foreground/70">Mountains</p>
                       <p className="mt-1 font-semibold text-slate-700 leading-snug">
-                        {mountainLabels.slice(0, 4).join(" · ")}
-                        {mountainLabels.length > 4 ? ` +${mountainLabels.length - 4}` : ""}
+                        {mountainLabels.join(" · ")}
                       </p>
                     </div>
                   </div>
