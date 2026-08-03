@@ -104,7 +104,7 @@ export function AlertPromoBanner() {
   };
 
   return (
-    <div className="mt-4 rounded-2xl border border-primary/25 bg-primary/[0.04] p-4 sm:p-5">
+    <div className="mt-4 rounded-2xl border border-primary/25 bg-white p-4 sm:p-5">
       <div className="flex items-start gap-3">
         <div className="shrink-0 w-10 h-10 rounded-xl bg-primary/10 text-primary inline-flex items-center justify-center">
           <BellRing className="w-5 h-5" />

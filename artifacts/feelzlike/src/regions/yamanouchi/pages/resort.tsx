@@ -572,12 +572,14 @@ export default function ResortDetail() {
 
         {/* Webcams · positioned after the gated detailed conditions to
             match AU resort pages. */}
-        <MountainWebcams
-          mountainId={id}
-          sectionNumber=""
-          t={t}
-          fallbackPageUrl={profile.webcamUrl}
-        />
+        <div className="glass rounded-3xl p-5 md:p-8 [&_section]:mt-0">
+          <MountainWebcams
+            mountainId={id}
+            sectionNumber=""
+            t={t}
+            fallbackPageUrl={profile.webcamUrl}
+          />
+        </div>
 
         <OfficialLinks profile={profile} resortName={location.name} t={t} />
         <SafetyStrip

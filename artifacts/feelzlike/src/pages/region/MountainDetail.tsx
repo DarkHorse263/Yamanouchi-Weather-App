@@ -1093,7 +1093,7 @@ export function MountainDetail() {
         {/* Webcams (free) · shared component, self-hides when no webcam
             config exists for the mountain. The hero cam thumbnail scrolls
             here. */}
-        <div id="webcams-section" className="scroll-mt-6">
+        <div id="webcams-section" className="scroll-mt-6 glass rounded-3xl p-5 md:p-8 [&_section]:mt-0">
           <MountainWebcams
             mountainId={locationId}
             sectionNumber=""
