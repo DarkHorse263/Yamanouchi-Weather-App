@@ -1,13 +1,22 @@
 import { useRoute, Link } from "wouter";
 import {
+  ArrowDown,
+  BarChart2,
   ArrowLeft,
+  CalendarDays,
+  Clock,
   Cloud,
+  CloudLightning,
   CloudDrizzle,
   CloudFog,
   CloudRain,
   CloudSnow,
   CloudSun,
+  Droplets,
+  Eye,
+  Gauge,
   Mountain as MountainIcon,
+  Navigation,
   Snowflake,
   Sun,
   Sunrise,
@@ -49,8 +58,6 @@ import { cn } from "@/lib/utils";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
 import { UnitsToggle } from "@/components/UnitsToggle";
 import { dailyRainMm } from "@/lib/precip";
-import { BarChart2 } from "lucide-react";
-import { useState } from "react";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
 import { AlertPromoBanner } from "@/components/AlertPromoBanner";
@@ -58,6 +65,10 @@ import DayNarrative from "@/components/weather/DayNarrative";
 import { snowNext24SoWhat, windSoWhat, freezingLevelSoWhat } from "@/lib/soWhat";
 import { OfficialSiteLink } from "@/components/OfficialSiteLink";
 import { SnowReportLink } from "@/components/SnowReportLink";
+import { motion } from "framer-motion";
+import { format, parseISO } from "date-fns";
+import { getMountainWebcams } from "@/data/webcams";
+import { useEffect, useState } from "react";
 
 /**
  * Region-agnostic mountain weather page.
@@ -65,13 +76,15 @@ import { SnowReportLink } from "@/components/SnowReportLink";
  * Used as the RegionLayout fallback for `/mountain/:id` (and `/resort/:id`)
  * when a region hasn't shipped a custom MountainDetail page. Renders the
  * same mountain-weather payload (`/api/weather/:id`) that the TownHome
- * "Weather in mountains" panel pulls from, so tapping a mountain row from
- * any town surfaces a real conditions page instead of the placeholder
- * "Coming together / Shell ready" stub.
+ * "Weather in mountains" panel pulls from.
  *
- * Currently powers Victoria's High Country (6 mountains across 7 base
- * towns). Snowy Mountains and Yamanouchi keep their richer custom
- * MountainDetail pages registered via REGION_ROUTERS.
+ * July 2026: upgraded to the premium "Perisher-style" layout modelled on
+ * regions/snowy-mountains/pages/LocationDetail.tsx - aurora hero with live
+ * pill + hero webcam thumbnail, dense "conditions right now" glass panel,
+ * 5-day mountain strip with snow/rain bars, matched section ordering.
+ * Everything fails soft where a mountain has no cam, no reported snow and
+ * no lift seeds (most non-AU mountains). Snowy Mountains and Yamanouchi
+ * keep their bespoke pages registered via REGION_ROUTERS.
  */
 export function MountainDetail() {
   const [, mParams] = useRoute("/mountain/:id");
@@ -84,6 +97,11 @@ export function MountainDetail() {
   const isGreen = seasonCtx?.season === "green";
   const u = useUnits();
   const [activeChartMetric, setActiveChartMetric] = useState<"temperature" | "snowfall" | "windSpeed">("temperature");
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 30_000);
+    return () => clearInterval(id);
+  }, []);
 
   // Pull mountain coords + summit elevation from the region config so the
   // elevation-banded forecast panel can request a 3-band Open-Meteo forecast,
@@ -111,6 +129,18 @@ export function MountainDetail() {
       },
     },
   );
+
+  // Curated cams for this mountain (client-side catalogue). The first cam
+  // with a direct image powers the hero thumbnail - hotlink-protected
+  // sources have no image embed and honestly show nothing in the hero.
+  const cams = getMountainWebcams(locationId);
+  const heroCam = cams.find((c) => c.embedType === "image" && !!c.embedUrl) ?? null;
+  const [heroCamBroken, setHeroCamBroken] = useState(false);
+  // A failed image must not suppress the thumbnail for the NEXT mountain in
+  // the same SPA session.
+  useEffect(() => {
+    setHeroCamBroken(false);
+  }, [heroCam?.embedUrl]);
 
   // Resort-REPORTED snow base (see api-server lib/resortSnowReports.ts).
   // Always-200 endpoint - `report` stays null for resorts without a feed
@@ -141,12 +171,7 @@ export function MountainDetail() {
         timeZone: "Australia/Sydney",
       });
     }
-    const ms = Date.now() - new Date(resortReport.updatedAt).getTime();
-    if (!Number.isFinite(ms) || ms < 0) return "";
-    const hr = Math.round(ms / 3_600_000);
-    if (hr < 1) return t("just now", "たった今");
-    if (hr < 24) return `${hr}h ago`;
-    return `${Math.round(hr / 24)}d ago`;
+    return formatAgo(resortReport.updatedAt, now);
   })();
   // In lift season, a weather-model snow depth is not good enough to headline
   // (grid-cell natural snow, blind to snowmaking - reads ~0 under running
@@ -154,7 +179,7 @@ export function MountainDetail() {
   // Off-season the model figure returns (melt curve context, nobody misled).
   const seasonOpen = isLiftSeasonOpen(REGION_COUNTRY[region.id]);
   // Powder medals are judged against country-appropriate thresholds - an
-  // "epic" AU day is ordinary in Hokkaido (AU baseline, JP Japow, NZ/CA middle).
+  // AU-calibrated bar would over- or under-award powder days elsewhere.
   const powderThresholds = powderThresholdsForCountry(REGION_COUNTRY[region.id]);
   const modelDepthTrusted = !seasonOpen;
 
@@ -168,12 +193,18 @@ export function MountainDetail() {
   const backHref = baseTown ? `~/${region.id}/${baseTown.id}` : `~/${region.id}`;
   const backLabel = baseTown ? t(baseTown.name, baseTown.nameJa ?? baseTown.name) : t(region.name, region.name);
 
+  // Seasonal page canvas · shared by loading/error states so they never
+  // flash a white body between blue (winter) and green pages.
+  const canvasClass = `min-h-[100dvh] ${isGreen ? "bg-[#059669]" : "bg-[#0055FF]"} pb-8 transition-colors duration-500`;
+
   if (!locationId) {
     return (
-      <div className="px-4 md:px-10 py-5 md:py-8 max-w-6xl mx-auto">
-        <p className="text-white/80">
-          {t("Mountain not specified.", "スキー場が指定されていません。")}
-        </p>
+      <div className={canvasClass}>
+        <div className="px-4 md:px-10 py-5 md:py-8 max-w-7xl mx-auto">
+          <p className="text-white/80">
+            {t("Mountain not specified.", "スキー場が指定されていません。")}
+          </p>
+        </div>
       </div>
     );
   }
@@ -183,13 +214,137 @@ export function MountainDetail() {
   const daily = data?.daily ?? [];
   const hourly = data?.hourly ?? [];
   const location = data?.location;
-  const Icon = current ? pickIcon(current.weatherCode, current.isDay) : Cloud;
   const metaName = elevName ?? location?.name ?? locationId;
+  const observedTime = data?.lastUpdated;
+  const sourceLabel =
+    current?.dataSource ??
+    (region.weatherSource
+      ? t(region.weatherSource.label, region.weatherSource.labelJa ?? region.weatherSource.label)
+      : "Open-Meteo");
+
+  // Snow next 24h: prefer the API-supplied value; otherwise sum the first
+  // 24 hourly snowfall buckets so the tile is never empty when we have
+  // hourly data.
+  const snow24h: number | null = (() => {
+    if (current?.snowfallNext24h != null) return current.snowfallNext24h;
+    if (hourly.length > 0) {
+      return hourly
+        .slice(0, 24)
+        .reduce((sum, h) => sum + (Number((h as any).snowfall) || 0), 0);
+    }
+    return null;
+  })();
+
+  // Dense "conditions right now" stats · same honesty rules as the Snowy
+  // Mountains page: reported base replaces the model figure, model values
+  // carry a "· model" label, unknown metrics are omitted rather than 0'd.
+  const stats = current
+    ? [
+        ...(current.feelsLike != null
+          ? [{ label: t("feelzlike", "体感"), value: `${u.temp(current.feelsLike)}${u.tempUnit}`, icon: Thermometer }]
+          : []),
+        ...(current.windSpeed != null
+          ? [{
+              label: t("Wind", "風速"),
+              value: `${u.wind(current.windSpeed)} ${u.windUnit}${(current as any).windDirectionCompass ? ` ${(current as any).windDirectionCompass}` : ""}`,
+              icon: Navigation,
+              hint: (() => {
+                const s = windSoWhat(current.windSpeed);
+                return s ? t(s.en, s.ja) : null;
+              })(),
+            }]
+          : []),
+        ...(current.windGust != null
+          ? [{ label: t("Gusts", "突風"), value: `${u.wind(current.windGust)} ${u.windUnit}`, icon: Wind }]
+          : []),
+        ...(current.humidity != null
+          ? [{ label: t("Humidity", "湿度"), value: `${current.humidity}%`, icon: Droplets }]
+          : []),
+        // A resort-reported base REPLACES the model figure (never shown
+        // alongside it - two competing numbers would erode trust in both).
+        resortReport
+          ? {
+              label:
+                reportSource === "course"
+                  ? `${t(`Snow depth · ${resortReport.sourceName}`, "積雪 · 公式観測")}${reportedAgoLabel ? ` · ${reportedAgoLabel}` : ""}`
+                  : `${t("Snow depth · resort reported", "積雪 · リゾート報告")}${reportedAgoLabel ? ` · ${reportedAgoLabel}` : ""}`,
+              value:
+                // Two-station / range reports carry the lower reading in
+                // baseMinCm - render "16-38" so neither station is
+                // overstated as THE base. baseCm alone = single figure.
+                resortReport.baseMinCm != null &&
+                Math.round(resortReport.baseMinCm) !== Math.round(resortReport.baseCm)
+                  ? `${u.snowVal(resortReport.baseMinCm)}-${u.snowVal(resortReport.baseCm)} ${u.snowUnit}`
+                  : `${u.snowVal(resortReport.baseCm)} ${u.snowUnit}`,
+              icon: Snowflake,
+            }
+          : modelDepthTrusted
+            ? {
+                label: t("Snow depth · model", "積雪 · 予測値"),
+                value: current.snowDepth != null ? `${u.snowVal(current.snowDepth)} ${u.snowUnit}` : "-",
+                icon: Snowflake,
+              }
+            : { label: t("Snow depth · not reported", "積雪 · 報告なし"), value: "-", icon: Snowflake },
+        // Model-estimated overnight snow: same "· model" honesty label as
+        // snow depth. Omitted (not 0) when the source has no past hours.
+        ...(current.snowfallPast24h != null
+          ? [{ label: t("Snow last 24h · model", "過去24時間降雪 · 予測値"), value: `${u.snowVal(current.snowfallPast24h, 1)} ${u.snowUnit}`, icon: CloudSnow }]
+          : []),
+        ...(snow24h != null
+          ? [{
+              label: t("Snow next 24h", "24時間降雪"),
+              value: `${u.snowVal(snow24h, 1)} ${u.snowUnit}`,
+              icon: CloudSnow,
+              hint: (() => {
+                const s = snowNext24SoWhat(snow24h);
+                return s ? t(s.en, s.ja) : null;
+              })(),
+            }]
+          : []),
+        ...(current.freezingLevel != null
+          ? [{
+              label: t("Freezing level", "凍結高度"),
+              value: `${u.elev(current.freezingLevel)} ${u.elevUnit}`,
+              icon: Thermometer,
+              hint: (() => {
+                const s = freezingLevelSoWhat(current.freezingLevel, location?.elevation);
+                return s ? t(s.en, s.ja) : null;
+              })(),
+            }]
+          : []),
+        ...(current.pressure != null
+          ? [{ label: t("Pressure", "気圧"), value: `${current.pressure} hPa`, icon: Gauge }]
+          : []),
+        ...(current.visibility != null && current.visibility !== 10000
+          ? [{ label: t("Visibility", "視界"), value: `${(current.visibility / 1000).toFixed(0)} km`, icon: Eye }]
+          : []),
+      ]
+    : [];
+
+  if (q.isLoading) {
+    return (
+      <div className={canvasClass}>
+        <div className="px-4 md:px-10 py-10 max-w-7xl mx-auto">
+          <p className="text-white/80">{t("Loading mountain conditions…", "山の状況を読込中…")}</p>
+        </div>
+      </div>
+    );
+  }
+  if (q.isError || !current) {
+    return (
+      <div className={canvasClass}>
+        <div className="px-4 md:px-10 py-10 max-w-7xl mx-auto">
+          <p className="text-white/80">
+            {t("Mountain conditions unavailable right now.", "現在、山の状況を取得できません。")}
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className={`min-h-[100dvh] ${isGreen ? "bg-[#059669]" : "bg-[#0055FF]"} pb-8 transition-colors duration-500`}>
-      <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
-        <PageMeta
+    <div className={canvasClass}>
+      <PageMeta
         title={`${metaName} - snow report, weather & lifts`}
         description={`Live mountain weather for ${metaName} in ${region.name}: on-mountain temperature, snow depth, wind and elevation forecast.`}
         path={`/${region.id}/mountain/${locationId}`}
@@ -213,581 +368,655 @@ export function MountainDetail() {
           ]),
         ]}
       />
-      <Link
-        href={backHref}
-        className="inline-flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-[0.2em] text-white/70 hover:text-white transition-colors"
-      >
-        <ArrowLeft className="w-3.5 h-3.5" />
-        {backLabel}
-      </Link>
 
-      <div className="mt-3">
-        <PageHeader
-          byline={`${region.name} · ${region.subtitle}`}
-          title={location?.name ?? t("Mountain", "スキー場")}
-          description={location?.description}
-          stamp={
-            <UpdateStamp
-              tone="onDark"
-              lastUpdated={data?.lastUpdated ?? null}
-              intervalMin={15}
-              source={
-                region.weatherSource
-                  ? t(
-                      region.weatherSource.label,
-                      region.weatherSource.labelJa ?? region.weatherSource.label,
-                    )
-                  : "Open-Meteo"
-              }
-            />
-          }
-          badge={<LiveBadge tone="onDark" label={t("Live", "ライブ")} />}
-        />
-      </div>
+      {/* ─── Aurora hero (Perisher-style) ────────────────── */}
+      <section className="relative overflow-hidden isolate">
+        {/* Aurora backdrop */}
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <div
+            className="absolute -top-40 left-1/2 -translate-x-1/2 w-[1400px] h-[700px] rounded-full opacity-80"
+            style={{
+              background:
+                "radial-gradient(ellipse at center, hsla(210,90%,55%,0.28), transparent 55%), radial-gradient(ellipse at 28% 60%, hsla(265,85%,60%,0.22), transparent 60%), radial-gradient(ellipse at 75% 35%, hsla(180,90%,55%,0.22), transparent 60%)",
+              filter: "blur(40px)",
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                `linear-gradient(to bottom, transparent 65%, ${isGreen ? "#059669" : "#0055FF"} 100%), repeating-linear-gradient(0deg, hsla(0,0%,100%,0.04) 0px, hsla(0,0%,100%,0.04) 1px, transparent 1px, transparent 64px), repeating-linear-gradient(90deg, hsla(0,0%,100%,0.04) 0px, hsla(0,0%,100%,0.04) 1px, transparent 1px, transparent 64px)`,
+            }}
+          />
+        </div>
 
-      <div className="mt-4 flex justify-end">
-        <UnitsToggle />
-      </div>
+        <div className="relative max-w-7xl mx-auto px-5 md:px-10 pt-8 md:pt-16 pb-6 md:pb-9">
+          {/* Back to base town · towns-first IA. */}
+          <Link
+            href={backHref}
+            className="inline-flex items-center gap-1.5 mb-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-white/70 hover:text-white transition-colors"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            {backLabel}
+          </Link>
 
-      {q.isLoading ? (
-        <p className="mt-8 text-white/80">
-          {t("Loading mountain conditions…", "山の状況を読込中…")}
-        </p>
-      ) : q.isError || !current ? (
-        <p className="mt-8 text-white/80">
-          {t(
-            "Mountain conditions unavailable right now.",
-            "現在、山の状況を取得できません。",
-          )}
-        </p>
-      ) : (
-        <>
-          {/* Hero - on-mountain temp, elevation, conditions blurb. */}
-          <section className="mt-6 rounded-2xl border border-border bg-white p-6 md:p-8">
-            <div className="flex items-start gap-6 flex-wrap">
-              <div className="flex items-center gap-5">
-                <Icon className={cn("w-16 h-16", Icon === Snowflake ? "text-snow-accent" : "text-primary")} strokeWidth={1.4} />
-                <div>
-                  <p className="font-display font-semibold text-6xl md:text-7xl tracking-tight text-foreground leading-none">
+          {/* Source byline + live pill */}
+          <motion.div
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex flex-wrap items-center gap-x-3 gap-y-1.5"
+          >
+            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-white/10 text-white border border-white/20">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 animate-ping" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              </span>
+              {t("Live", "ライブ")}
+            </span>
+            <span className="byline text-white/70">
+              {t("Source", "出典")} · {sourceLabel}
+            </span>
+            {location?.elevation != null && (
+              <span className="byline text-white/70">
+                {t("Elev", "標高")} {u.elev(location.elevation)}{u.elevUnit}
+              </span>
+            )}
+            {websiteUrl && (
+              <OfficialSiteLink
+                url={websiteUrl}
+                className="text-[11px] text-white/70 hover:text-white"
+              />
+            )}
+            {observedTime && (
+              <span className="byline text-white/80 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/10 border border-white/20">
+                <Clock className="w-3 h-3" />
+                <span>
+                  {t("Updated", "更新")}{" "}
+                  <span className="text-white tabular-nums">{formatAgo(observedTime, now)}</span>
+                </span>
+              </span>
+            )}
+          </motion.div>
+
+          {/* Anonymous units toggle · reaches direct-landing SEO visitors who
+              never see the home footer. Hidden for signed-in members. */}
+          <div className="mt-4 flex">
+            <UnitsToggle />
+          </div>
+
+          {/* Headline + temperature */}
+          <div className="mt-5 md:mt-8 grid md:grid-cols-12 gap-6 md:gap-10 items-end">
+            <div className="md:col-span-7">
+              <motion.h1
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="font-display font-semibold text-[clamp(3rem,8vw,5.5rem)] leading-[0.92] tracking-tight"
+                style={{ letterSpacing: "-0.035em" }}
+              >
+                <span className="text-white">{location?.name ?? metaName}</span>
+              </motion.h1>
+              {location?.description && (
+                <motion.p
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.05 }}
+                  className="mt-4 text-white/80 text-base md:text-lg max-w-xl leading-relaxed"
+                >
+                  {location.description}
+                </motion.p>
+              )}
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="md:col-span-5 relative"
+            >
+              <div className="relative">
+                <div className="flex items-start gap-3">
+                  <span
+                    className="display-number text-[clamp(7rem,18vw,11rem)] text-white"
+                    data-numeric
+                  >
                     {u.temp(current.temperature) ?? "-"}
-                    <span className="text-3xl text-muted-foreground/70 align-top ml-1">{u.tempUnit}</span>
-                  </p>
-                  <p className="text-muted-foreground mt-2">
-                    {current.weatherDescription}
-                    {current.feelsLike !== null && current.feelsLike !== undefined && (
-                      <>
-                        {" · "}
-                        <span className="text-foreground/80">
-                          feelzlike {u.temp(current.feelsLike)}°
-                        </span>
-                      </>
+                  </span>
+                  <span className="font-display text-white/70 text-3xl md:text-4xl mt-4">{u.tempUnit}</span>
+                </div>
+                <p className="byline text-white/80 mt-1">
+                  {current.weatherDescription}
+                  {current.feelsLike != null && <> · feelzlike {u.temp(current.feelsLike)}°</>}
+                </p>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* one-line plain-english day summary · decision before data */}
+          <DayNarrative
+            hourly={hourly}
+            current={current}
+            utcOffsetSeconds={(data as any)?.utcOffsetSeconds ?? 0}
+            isMountain
+            lang={language}
+          />
+
+          {/* live cam thumbnail · a real look at the mountain right in the
+              hero. Only renders where a direct cam image exists; hides
+              itself on load failure - never a broken-image placeholder. */}
+          {heroCam && !heroCamBroken && (
+            <button
+              type="button"
+              onClick={() => {
+                document
+                  .getElementById("webcams-section")
+                  ?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+              className="mt-4 flex items-center gap-3 group text-left"
+              data-testid="button-hero-cam"
+            >
+              <span className="relative block w-36 shrink-0 aspect-video overflow-hidden rounded-xl border border-white/15">
+                <img
+                  src={heroCam.embedUrl!}
+                  alt={`Live cam · ${t(heroCam.name, heroCam.nameJa ?? heroCam.name)}`}
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                  onError={() => setHeroCamBroken(true)}
+                  className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <span className="absolute top-1.5 left-1.5 inline-flex items-center gap-1 rounded-full bg-black/55 px-1.5 py-0.5 text-[10px] font-semibold text-white">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  </span>
+                  {t("live", "ライブ")}
+                </span>
+              </span>
+              <span className="byline text-white/70 group-hover:text-white transition-colors">
+                {t(heroCam.name, heroCam.nameJa ?? heroCam.name)} · {t("see all cams", "全カメラを見る")} ↓
+              </span>
+            </button>
+          )}
+
+          {/* CONDITIONS RIGHT NOW · dense glass measurements panel · the
+              first thing an off-mountain skier actually wants to see. */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.18 }}
+            className="mt-6 md:mt-9 glass rounded-3xl p-5 md:p-8"
+          >
+            <div className="flex items-end justify-between mb-4">
+              <div>
+                <p className="byline text-muted-foreground">{t("conditions", "現在の")}</p>
+                <h2 className="font-display font-semibold text-xl md:text-2xl mt-1">
+                  {t("right now", "状況")}
+                </h2>
+              </div>
+              <p className="byline text-muted-foreground/70 hidden md:block">
+                {stats.length} {t("measurements", "項目")}
+              </p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-y-5 gap-x-4">
+              {stats.map((s, i) => {
+                const isSnow = s.icon === Snowflake || s.icon === CloudSnow;
+                return (
+                  <div key={i} className="group">
+                    <div className="flex items-center gap-1.5 byline text-muted-foreground/80 mb-1.5">
+                      <s.icon className={cn("w-3 h-3", isSnow ? "text-snow-accent" : "text-muted-foreground/60")} />
+                      {s.label}
+                    </div>
+                    <p
+                      className={cn(
+                        "font-display text-2xl md:text-3xl tracking-tight",
+                        isSnow ? "text-snow-accent" : "text-foreground",
+                      )}
+                      data-numeric
+                    >
+                      {s.value}
+                    </p>
+                    {"hint" in s && (s as any).hint && (
+                      <p className="mt-1 text-xs leading-snug text-sky-700">{(s as any).hint}</p>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+            {/* Cross-check link to the resort's own published snow report -
+                either figure (model or reported) is always one tap from the
+                primary source. */}
+            {snowReportUrl && (
+              <div className="mt-5 pt-4 border-t border-slate-100">
+                <SnowReportLink
+                  url={snowReportUrl}
+                  className="text-slate-500 hover:text-slate-800"
+                />
+              </div>
+            )}
+          </motion.div>
+
+          {/* Scroll cue */}
+          <div className="mt-6 md:mt-8 flex items-center gap-2 text-white/60">
+            <span className="byline text-white/60">{t("Live conditions below", "詳細は下へ")}</span>
+            <ArrowDown className="w-3 h-3" />
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Body ───────────────────────────── */}
+      <div className="max-w-7xl mx-auto px-5 md:px-10 pb-20 space-y-5 md:space-y-6 -mt-2">
+        {/* HOUR BY HOUR · shared component so the powder window strip and
+            grading look the same across all regions. */}
+        {hourly.length > 0 && (
+          <>
+            <HourlyForecast
+              hourly={hourly as any}
+              utcOffsetSeconds={(data as any).utcOffsetSeconds ?? 0}
+              t={t}
+              thresholds={powderThresholds}
+              sectionNumber=""
+              skiability={{
+                seasonOpen,
+                // In season a model depth is suppressed (null = unknown),
+                // never surfaced as a confident wrong ~0.
+                snowDepthCm: resortReport
+                  ? resortReport.baseCm
+                  : modelDepthTrusted
+                    ? current?.snowDepth
+                    : null,
+                snowDepthSource: resortReport ? reportSource : "model",
+              }}
+              snowfallOutlook={{
+                next24hCm: current.snowfallNext24h,
+                next48hCm: current.snowfallNext48h,
+                next72hCm: current.snowfallNext72h,
+                elevationM: current.snowfallOutlookElevationM,
+                level: current.snowfallOutlookLevel,
+                source: sourceLabel,
+              }}
+            />
+            <PremiumFeaturePrompt
+              id="mountain-powder-alerts"
+              title="get powder alerts by email"
+              blurb="we'll push an alert the moment powder hits the forecast for this mountain."
+              href="/premium"
+            />
+          </>
+        )}
+
+        {/* SNOWMAKING · honest man-made-snow reality for this resort.
+            Self-hides when there is no curated data; winter only. */}
+        {!isGreen && (
+          <SnowmakingPanel
+            locationId={locationId}
+            tempC={current.temperature}
+            humidity={current.humidity}
+            hourly={hourly as any}
+          />
+        )}
+
+        {/* WEATHER OUTLOOK · free 5-day mountain strip with snow/rain bars.
+            Anything past day 5 is gated below in the extended outlook. */}
+        {daily.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25 }}
+            className="glass rounded-3xl p-5 md:p-8"
+          >
+            <div className="flex items-end justify-between mb-4 gap-3">
+              <div>
+                <p className="byline text-muted-foreground">{t("Weather outlook", "週間予報")}</p>
+                <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
+                  <CalendarDays className="text-primary w-5 h-5" />
+                  {t("5-day mountain forecast", "5日間の山岳予報")}
+                </h2>
+              </div>
+              {location?.elevation != null && (
+                <p className="byline text-muted-foreground/70 hidden md:block tabular-nums">
+                  {u.elev(location.elevation)}{u.elevUnit} · {t("top elevation", "山頂標高")}
+                </p>
+              )}
+            </div>
+
+            {(() => {
+              const days = daily.slice(0, 5);
+              const maxSnow = Math.max(0.1, ...days.map((d) => Number(d.snowfallSum) || 0));
+              const maxRain = Math.max(0.1, ...days.map((d) => dailyRainMm(d as any) ?? 0));
+              return (
+                <div className="grid gap-px rounded-2xl overflow-hidden bg-slate-100 border border-slate-100 grid-cols-3 md:grid-cols-5">
+                  {days.map((day, i) => {
+                    const snow = Number(day.snowfallSum) || 0;
+                    const rain = dailyRainMm(day as any) ?? 0;
+                    const dispCode = displayDayCode(day.weatherCode, snow, rain);
+                    const snowH = Math.round((snow / maxSnow) * 100);
+                    const rainH = Math.round((rain / maxRain) * 100);
+                    return (
+                      <div key={day.date} className="bg-background/40 px-3 py-4 md:px-4 md:py-4 flex flex-col items-center text-center gap-2">
+                        <p className="font-display font-medium text-base md:text-lg text-foreground tracking-tight">
+                          {i === 0 ? t("Today", "今日") : format(parseISO(day.date), "EEE")}
+                        </p>
+                        <p className="text-xs font-medium text-muted-foreground tabular-nums -mt-1">
+                          {format(parseISO(day.date), "d MMM")}
+                        </p>
+
+                        <div className="my-1.5 text-primary/90">
+                          <WeatherIcon code={dispCode} className="w-9 h-9 md:w-11 md:h-11" />
+                        </div>
+                        <p className="text-xs text-muted-foreground capitalize line-clamp-1 leading-snug min-h-[1.1em]">
+                          {(day.weatherDescription || "").toLowerCase()}
+                        </p>
+
+                        <div className="flex items-baseline justify-center gap-2 font-display mt-1" data-numeric>
+                          <span className="text-foreground text-2xl md:text-3xl font-medium">
+                            {day.maxTemp != null ? `${u.temp(day.maxTemp)}°` : "-"}
+                          </span>
+                          <span className="text-muted-foreground text-base">
+                            {day.minTemp != null ? `${u.temp(day.minTemp)}°` : "-"}
+                          </span>
+                        </div>
+
+                        {/* snowfall / rainfall bars */}
+                        <div className="w-full flex items-end justify-center gap-1.5 h-10 mt-2" aria-hidden>
+                          <div className="flex flex-col items-center justify-end h-full">
+                            <div
+                              className="w-3 rounded-t-sm bg-snow-accent/80"
+                              style={{ height: `${snow > 0 ? Math.max(8, snowH) : 0}%` }}
+                              title={`${snow.toFixed(1)} cm snow`}
+                            />
+                            <Snowflake className="w-3 h-3 text-snow-accent/80 mt-1" />
+                          </div>
+                          <div className="flex flex-col items-center justify-end h-full">
+                            <div
+                              className="w-3 rounded-t-sm bg-blue-500/60"
+                              style={{ height: `${rain > 0 ? Math.max(8, rainH) : 0}%` }}
+                              title={`${rain.toFixed(1)} mm rain`}
+                            />
+                            <CloudRain className="w-3 h-3 text-blue-500/70 mt-1" />
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-1.5 text-xs tabular-nums text-foreground/80 mt-1">
+                          <span className="font-medium text-snow-accent">
+                            {snow > 0 ? `${u.snowVal(snow, snow >= 10 ? 0 : 1)}${u.snowUnit}` : "-"}
+                          </span>
+                          <span className="text-muted-foreground/50">/</span>
+                          <span className="font-medium text-blue-700">{rain > 0 ? `${rain.toFixed(rain >= 10 ? 0 : 1)}mm` : "-"}</span>
+                        </div>
+
+                        {day.windSpeedMax != null && (
+                          <div className="flex items-center gap-1 text-xs text-muted-foreground mt-1.5">
+                            <Wind className="w-3 h-3" />
+                            <span className="tabular-nums font-medium text-foreground/90">{u.wind(day.windSpeedMax)}</span>
+                            <span>{u.windUnit}</span>
+                          </div>
+                        )}
+
+                        {day.sunrise && day.sunset && (
+                          <div className="flex items-center gap-3 text-xs text-muted-foreground mt-1.5 pt-2 border-t border-border/50 w-full justify-center tabular-nums">
+                            <span className="inline-flex items-center gap-1"><Sunrise className="w-3 h-3" />{fmtTime(day.sunrise)}</span>
+                            <span className="inline-flex items-center gap-1"><Sunset className="w-3 h-3" />{fmtTime(day.sunset)}</span>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })()}
+
+            <div className="mt-3 flex items-center justify-end gap-4 text-xs text-muted-foreground">
+              <span className="inline-flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-snow-accent/80" /> {t("Snowfall", "降雪")}</span>
+              <span className="inline-flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-blue-500/60" /> {t("Rainfall", "降雨")}</span>
+            </div>
+          </motion.div>
+        )}
+
+        {/* PREMIUM · Extended outlook · the 5-day strip above is free; this
+            gates whatever the region's forecast window extends to (14 days
+            for AU, shorter elsewhere). Skipped entirely when the payload has
+            nothing past day 5 - a lock over empty data would be a tease. */}
+        {daily.length > 5 && (
+          <PremiumGate
+            title="Next 6 days"
+            titleJa="今後6日間"
+            blurb="See further out than the free 5-day window · extended outlook for trip planning."
+            blurbJa="無料5日予報を超える長期予報 · 旅行計画に。"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.27 }}
+              className="glass rounded-3xl p-5 md:p-8"
+            >
+              <div className="flex items-end justify-between mb-4 gap-3">
+                <div>
+                  <p className="byline text-muted-foreground">{t("Weather outlook", "週間予報")}</p>
+                  <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
+                    <CalendarDays className="text-primary w-5 h-5" />
+                    {t("Extended", "長期予報")}
+                  </h2>
+                  <p className="text-xs text-muted-foreground mt-2 max-w-md leading-relaxed">
+                    {t(
+                      "early outlook · the further ahead, the less certain. treat snow amounts beyond a week as a guide, not a promise.",
+                      "先の予報ほど不確実です。1週間先の降雪量は目安としてご覧ください。",
                     )}
                   </p>
                 </div>
               </div>
-              <div className="ml-auto text-right">
-                <p className="byline text-muted-foreground/70 inline-flex items-center gap-1">
-                  <MountainIcon className="w-3 h-3" /> {t("On mountain", "山頂付近")}
-                </p>
-                {location?.elevation != null && (
-                  <p className="font-display font-medium text-xl text-foreground mt-1">
-                    {u.elev(location.elevation)}{u.elevUnit}
-                  </p>
-                )}
-              </div>
-            </div>
-            {(websiteUrl || snowReportUrl) && (
-              <div className="mt-5 pt-4 border-t border-border/60 flex flex-wrap items-center gap-x-5 gap-y-2">
-                {websiteUrl && <OfficialSiteLink url={websiteUrl} />}
-                {snowReportUrl && <SnowReportLink url={snowReportUrl} />}
-              </div>
-            )}
-          </section>
-
-          {/* one-line plain-english day summary · decision before data */}
-          {current && (
-            <DayNarrative
-              hourly={hourly}
-              current={current}
-              utcOffsetSeconds={(data as any)?.utcOffsetSeconds ?? 0}
-              isMountain
-              lang={language}
-            />
-          )}
-
-          {/* ─── FREE ─────────────────────────────────────────────
-              Order (May 2026 v4 · request from product):
-                1. Conditions right now
-                2. Today
-                3. Next 24 hours
-              The wind/elevation/lift-hold panels moved below the paywall. */}
-
-          {/* Conditions right now · snow depth, overnight snow, incoming
-              snow, wind and freezing level. The five numbers an off-mountain
-              skier is actually deciding on. */}
-          <section className="mt-6 rounded-2xl border border-border bg-white p-5">
-            <p className="byline text-muted-foreground/70">
-              {t("conditions right now", "現在の状況")}
-            </p>
-            <div className="mt-3 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-              {/* A resort-reported base REPLACES the model figure (never
-                  shown alongside it - two competing numbers would erode
-                  trust in both). */}
-              <BigStat
-                icon={Snowflake}
-                label={
-                  resortReport
-                    ? reportSource === "course"
-                      ? `${t(`Snow depth · ${resortReport.sourceName}`, "積雪 · 公式観測")}${reportedAgoLabel ? ` · ${reportedAgoLabel}` : ""}`
-                      : `${t("Snow depth · resort reported", "積雪 · リゾート報告")}${reportedAgoLabel ? ` · ${reportedAgoLabel}` : ""}`
-                    : modelDepthTrusted
-                      ? t("Snow depth · model", "積雪 · 予測値")
-                      : t("Snow depth · not reported", "積雪 · 報告なし")
-                }
-                value={
-                  resortReport
-                    ? // Two-station / range reports carry the lower reading in
-                      // baseMinCm - render "16-38" so neither station is
-                      // overstated as THE base. baseCm alone = single figure.
-                      resortReport.baseMinCm != null &&
-                        Math.round(resortReport.baseMinCm) !== Math.round(resortReport.baseCm)
-                      ? `${u.snowVal(resortReport.baseMinCm)}-${u.snowVal(resortReport.baseCm)}`
-                      : u.snowVal(resortReport.baseCm)
-                    : modelDepthTrusted && current.snowDepth !== null && current.snowDepth !== undefined
-                      ? u.snowVal(current.snowDepth)
-                      : "-"
-                }
-                unit={u.snowUnit}
-              />
-              {/* Model-estimated, so it carries the same "· model" honesty
-                  label as snow depth - it is not a resort measurement. */}
-              <BigStat
-                icon={CloudSnow}
-                label={t("Snow last 24h · model", "過去24時間降雪 · 予測値")}
-                value={
-                  current.snowfallPast24h !== null && current.snowfallPast24h !== undefined
-                    ? u.snowVal(current.snowfallPast24h, 1)
-                    : "-"
-                }
-                unit={u.snowUnit}
-              />
-              <BigStat
-                icon={CloudSnow}
-                label={t("Snow next 24h", "24時間降雪")}
-                value={
-                  current.snowfallNext24h !== null && current.snowfallNext24h !== undefined
-                    ? u.snowVal(current.snowfallNext24h, 1)
-                    : "-"
-                }
-                unit={u.snowUnit}
-                hint={(() => {
-                  const s = snowNext24SoWhat(current.snowfallNext24h);
-                  return s ? t(s.en, s.ja) : null;
-                })()}
-              />
-              <BigStat
-                icon={Wind}
-                label={t("Wind", "風速")}
-                value={
-                  current.windSpeed !== null && current.windSpeed !== undefined
-                    ? `${u.wind(current.windSpeed)}`
-                    : "-"
-                }
-                unit={u.windUnit}
-                hint={(() => {
-                  const s = windSoWhat(current.windSpeed);
-                  return s ? t(s.en, s.ja) : null;
-                })()}
-              />
-              <BigStat
-                icon={Thermometer}
-                label={t("Freezing level", "凍結高度")}
-                value={
-                  current.freezingLevel !== null && current.freezingLevel !== undefined
-                    ? `${u.elev(current.freezingLevel)}`
-                    : "-"
-                }
-                unit={u.elevUnit}
-                hint={(() => {
-                  const s = freezingLevelSoWhat(
-                    current.freezingLevel,
-                    location?.elevation,
-                  );
-                  return s ? t(s.en, s.ja) : null;
-                })()}
-              />
-            </div>
-          </section>
-
-          {/* Today summary */}
-          {daily[0] && (
-            <section className="mt-4 rounded-2xl border border-border bg-white p-5">
-              <p className="byline text-muted-foreground/70">{t("Today", "今日")}</p>
-              <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4">
-                <KV
-                  label={t("High", "最高")}
-                  value={daily[0].maxTemp !== null && daily[0].maxTemp !== undefined ? `${u.temp(daily[0].maxTemp)}°` : "-"}
-                  icon={Thermometer}
-                />
-                <KV
-                  label={t("Low", "最低")}
-                  value={daily[0].minTemp !== null && daily[0].minTemp !== undefined ? `${u.temp(daily[0].minTemp)}°` : "-"}
-                  icon={Thermometer}
-                />
-                <KV
-                  label={t("Sunrise", "日の出")}
-                  value={fmtTime(daily[0].sunrise)}
-                  icon={Sunrise}
-                />
-                <KV
-                  label={t("Sunset", "日の入")}
-                  value={fmtTime(daily[0].sunset)}
-                  icon={Sunset}
-                />
-                <KV
-                  label={t("Rain", "降水量")}
-                  value={(() => {
-                    const rain = dailyRainMm(daily[0]);
-                    return rain != null ? `${rain.toFixed(1)} mm` : "0 mm";
-                  })()}
-                  icon={CloudRain}
-                />
-                <KV
-                  label={t("Snow", "降雪")}
-                  value={
-                    daily[0].snowfallSum !== null && daily[0].snowfallSum !== undefined && daily[0].snowfallSum > 0
-                      ? u.snow(daily[0].snowfallSum, 1)
-                      : `0 ${u.snowUnit}`
-                  }
-                  icon={CloudSnow}
-                />
-              </div>
-            </section>
-          )}
-
-          {/* Hour by hour · shared component matches Yamanouchi + AU
-              resort pages so the powder window strip and grading look
-              the same across all 3 regions. */}
-          {hourly.length > 0 && (
-            <div className="mt-4 space-y-4">
-              <HourlyForecast
-                hourly={hourly as any}
-                utcOffsetSeconds={(data as any).utcOffsetSeconds ?? 0}
-                t={t}
-                thresholds={powderThresholds}
-                sectionNumber=""
-                skiability={{
-                  seasonOpen,
-                  // In season a model depth is suppressed (null = unknown),
-                  // never surfaced as a confident wrong ~0.
-                  snowDepthCm: resortReport
-                    ? resortReport.baseCm
-                    : modelDepthTrusted
-                      ? current?.snowDepth
-                      : null,
-                  snowDepthSource: resortReport ? reportSource : "model",
-                }}
-                snowfallOutlook={
-                  current
-                    ? {
-                        next24hCm: current.snowfallNext24h,
-                        next48hCm: current.snowfallNext48h,
-                        next72hCm: current.snowfallNext72h,
-                        elevationM: current.snowfallOutlookElevationM,
-                        level: current.snowfallOutlookLevel,
-                        source:
-                          current.dataSource ?? region.weatherSource?.label ?? "Open-Meteo",
-                      }
-                    : undefined
-                }
-              />
-              <PremiumFeaturePrompt
-                id="mountain-powder-alerts"
-                title="get powder alerts by email"
-                blurb="we'll push an alert the moment powder hits the forecast for this mountain."
-                href="/premium"
-              />
-            </div>
-          )}
-
-          {/* Snowmaking · honest man-made-snow reality for this resort.
-              Self-hides when there is no curated data, and only shows in
-              winter. Same shared panel the Snowy Mountains pages use. */}
-          {!isGreen && current && (
-            <div className="mt-4">
-              <SnowmakingPanel
-                locationId={locationId}
-                tempC={current.temperature}
-                humidity={current.humidity}
-                hourly={hourly as any}
-              />
-            </div>
-          )}
-
-          {/* ─── PREMIUM ──────────────────────────────────────────
-              Next 6 days, elevation forecast and lift-hold likely all
-              gated. Free tier sees blurred preview + lock CTA. */}
-
-          {/* PremiumGate · Next 6 days */}
-          {daily.length > 1 && (
-          <div className="mt-4">
-          <PremiumGate
-            title="Next 6 days"
-            titleJa="今後6日間"
-            blurb="Plan further out · 6-day mountain outlook with snow, wind and temperatures."
-            blurbJa="6日間の山岳予報 · 降雪・風速・気温の長期見通し。"
-          >
-            <section className="rounded-2xl border border-border bg-white p-5">
-              <p className="byline text-muted-foreground/70">{t("Next 6 days", "今後6日間")}</p>
-              <div className="mt-3 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-                {daily.slice(1, 7).map((d) => {
-                  const DIcon = pickIcon(d.weatherCode, true);
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {daily.slice(5, 14).map((day) => {
+                  const snow = Number(day.snowfallSum) || 0;
                   return (
-                    <div
-                      key={d.date}
-                      className="rounded-xl border border-border/70 bg-white p-3 flex flex-col items-center text-center"
-                    >
-                      <p className="text-sm font-semibold text-foreground leading-tight">
-                        {fmtDay(d.date)}
+                    <div key={day.date} className="rounded-2xl bg-slate-50 border border-slate-100 p-4 text-center">
+                      <p className="font-display text-base text-foreground">
+                        {format(parseISO(day.date), "EEE d MMM")}
                       </p>
-                      <DIcon className={cn("w-8 h-8 mt-3", DIcon === Snowflake ? "text-snow-accent" : "text-primary/80")} strokeWidth={1.5} />
-                      <p className="text-[11px] text-muted-foreground mt-2 line-clamp-2 min-h-[2.2em]">
-                        {d.weatherDescription}
-                      </p>
-                      <p className="mt-2 text-sm">
-                        <span className="font-semibold text-foreground">
-                          {d.maxTemp !== null && d.maxTemp !== undefined ? Math.round(d.maxTemp) : "-"}°
+                      <div className="my-2 text-primary/90 inline-block">
+                        <WeatherIcon code={displayDayCode(day.weatherCode, snow, dailyRainMm(day as any))} className="w-7 h-7" />
+                      </div>
+                      <div className="flex items-baseline justify-center gap-1.5 font-display" data-numeric>
+                        <span className="text-foreground text-lg">{day.maxTemp != null ? `${u.temp(day.maxTemp)}°` : "-"}</span>
+                        <span className="text-muted-foreground/60 text-xs">{day.minTemp != null ? `${u.temp(day.minTemp)}°` : "-"}</span>
+                      </div>
+                      <div className="flex items-center justify-center gap-1 text-xs tabular-nums mt-1.5">
+                        <Snowflake className="w-3 h-3 text-snow-accent/80" />
+                        <span className="font-medium text-snow-accent">
+                          {snow > 0 ? `${u.snowVal(snow, snow >= 10 ? 0 : 1)}${u.snowUnit}` : "-"}
                         </span>
-                        <span className="text-muted-foreground/70 ml-2">
-                          {d.minTemp !== null && d.minTemp !== undefined ? Math.round(d.minTemp) : "-"}°
-                        </span>
-                      </p>
-                      <div className="mt-3 pt-3 border-t border-border/50 w-full space-y-1.5">
-                        <DayStat
-                          icon={Wind}
-                          label={t("Wind", "風")}
-                          value={
-                            d.windSpeedMax !== null && d.windSpeedMax !== undefined
-                              ? `${u.wind(d.windSpeedMax)} ${u.windUnit}`
-                              : "-"
-                          }
-                        />
-                        <DayStat
-                          icon={CloudSnow}
-                          label={t("Snow", "雪")}
-                          value={
-                            d.snowfallSum !== null && d.snowfallSum !== undefined && d.snowfallSum > 0
-                              ? `${d.snowfallSum.toFixed(1)} cm`
-                              : "0 cm"
-                          }
-                        />
                       </div>
                     </div>
                   );
                 })}
               </div>
-            </section>
+            </motion.div>
           </PremiumGate>
-          </div>
-          )}
+        )}
 
-          {/* PremiumGate · Elevation forecast · upper / mid / base snow + temp.
-              Self-hides when coords or summit elevation are missing. */}
-          {elevLat != null && elevLng != null && elevSummitM != null && (
-            <div className="mt-4">
-              <PremiumGate
-                title="Elevation forecast"
-                titleJa="標高別予報"
-                blurb="See conditions across upper / mid / base elevations · snow and temperature for each band."
-                blurbJa="山頂・中腹・ベースの標高別コンディション · 降雪と気温。"
-              >
-                <ElevationBands
-                  lat={elevLat}
-                  lng={elevLng}
-                  summitElevationM={elevSummitM}
-                  name={elevName}
-                />
-              </PremiumGate>
-            </div>
-          )}
+        {/* PREMIUM · Elevation forecast · upper / mid / base snow + temp.
+            Self-hides when coords or summit elevation are missing. */}
+        {elevLat != null && elevLng != null && elevSummitM != null && (
+          <PremiumGate
+            title="Elevation forecast"
+            titleJa="標高別予報"
+            blurb="See conditions across upper / mid / base elevations · snow and temperature for each band."
+            blurbJa="山頂・中腹・ベースの標高別コンディション · 降雪と気温。"
+          >
+            <ElevationBands
+              lat={elevLat}
+              lng={elevLng}
+              summitElevationM={elevSummitM}
+              name={elevName}
+            />
+          </PremiumGate>
+        )}
 
-          {/* FREE · 7-day powder forecast calendar. Moved here (May 2026 v6)
-              to sit right after Elevation forecast so the powder outlook
-              reads as a continuation of the multi-day weather story. */}
-          {hourly.length > 0 && (
-            <div className="mt-4">
-              <PowderCalendar hourly={hourly as any} t={t} thresholds={powderThresholds} sectionNumber="" />
-            </div>
-          )}
+        {/* FREE · 7-day powder forecast calendar · sits right after
+            Elevation forecast so the powder outlook reads as a continuation
+            of the multi-day weather story. */}
+        {hourly.length > 0 && (
+          <PowderCalendar hourly={hourly as any} t={t} thresholds={powderThresholds} sectionNumber="" />
+        )}
 
-          <AlertPromoBanner />
+        <AlertPromoBanner />
 
-          {/* PremiumGate · Mountain dials · MountainSnapshot rings only.
-              The wind-driven lift-hold call was removed because the
-              per-lift hold panel below delivers it with finer per-lift
-              gust tolerances. Order matches Yamanouchi + Snowy Mountains. */}
-          <div className="mt-4">
-            <PremiumGate
-              title="Mountain dials"
-              titleJa="マウンテン計器盤"
-              blurb="Freezing level and gusts at a glance."
-              blurbJa="凍結高度・突風を一目で。"
-            >
-              {/* MountainSnapshot needs guaranteed `elevation` and
-                  `windSpeed` numbers per its prop contract; guard
-                  rather than coerce so the rings only render with
-                  real data. */}
-              {location?.elevation != null && current.windSpeed != null && (
-                <MountainSnapshot
-                  resortName={location.name ?? ""}
-                  elevation={location.elevation}
-                  freezingLevel={current.freezingLevel ?? undefined}
-                  gust={current.windGust ?? undefined}
-                  windSpeed={current.windSpeed}
-                  formatWind={(kmh) => u.wind(kmh) ?? kmh}
-                  windUnitLabel={u.windUnit}
-                  formatElevation={(m) => u.elev(m) ?? m}
-                  elevationUnitLabel={u.elevUnit}
-                />
-              )}
-            </PremiumGate>
-          </div>
-
-          {/* Per-lift hold · gated at page level (not just inside the
-              PremiumGate) because PremiumGate still renders a lock card
-              for free users even when its child returns null. Vic
-              mountains have no lift seeds today, so we skip the whole
-              section rather than tease a feature that has no data. */}
-          {hourly.length > 0 && location?.elevation != null && getLiftsForMountain(locationId).length > 0 && (
-            <div className="mt-4">
-              <PremiumGate
-                title="Per-lift hold forecast"
-                titleJa="リフト別ホールド予測"
-                blurb="Hour-by-hour hold risk for each named lift on this mountain · uses lift-specific gust tolerances."
-                blurbJa="各リフトの時間別ホールドリスク · リフト固有の耐風基準を使用。"
-              >
-                <LiftWindHoldPanel
-                  mountainId={locationId}
-                  resortElevationM={location.elevation}
-                  hourly={hourly as any}
-                  sectionNumber=""
-                  t={t}
-                  seasonOpen={seasonOpen}
-                  snowDepthCm={
-                    resortReport
-                      ? resortReport.baseCm
-                      : modelDepthTrusted
-                        ? current.snowDepth
-                        : null
-                  }
-                  snowDepthSource={resortReport ? reportSource : "model"}
-                />
-              </PremiumGate>
-            </div>
-          )}
-
-          {/* PremiumGate · 24-hour trend chart · interactive temp/snow/wind. */}
-          {hourly.length > 0 && (
-            <div className="mt-4">
-              <PremiumGate
-                title="24-hour trend"
-                titleJa="24時間推移"
-                blurb="Interactive chart · switch between temperature, snowfall and wind for the next 24 hours."
-                blurbJa="気温・降雪・風速を切り替えて24時間の推移を確認。"
-              >
-                <section className="rounded-2xl border border-border bg-white p-5 md:p-6">
-                  <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-4 gap-3">
-                    <div>
-                      <p className="byline text-muted-foreground/70">{t("24-hour trend", "24時間推移")}</p>
-                      <h2 className="font-display font-semibold text-xl mt-1 flex items-center gap-2">
-                        <BarChart2 className="text-primary w-5 h-5" />
-                        {t("How it's tracking", "推移")}
-                      </h2>
-                    </div>
-                    <div className="flex bg-secondary/40 p-1 rounded-xl border border-border/60">
-                      {(["temperature", "snowfall", "windSpeed"] as const).map((metric) => (
-                        <button
-                          key={metric}
-                          onClick={() => setActiveChartMetric(metric)}
-                          className={cn(
-                            "px-3 md:px-4 py-1.5 rounded-lg text-xs font-semibold capitalize transition-all",
-                            activeChartMetric === metric
-                              ? "bg-foreground text-background shadow-sm"
-                              : "text-muted-foreground hover:text-foreground"
-                          )}
-                        >
-                          {metric.replace("Speed", "")}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                  <ForecastChart data={hourly as any} metric={activeChartMetric} />
-                </section>
-              </PremiumGate>
-            </div>
-          )}
-
-          {/* PremiumGate · Ensemble forecast · multi-model consensus.
-              Self-hides when /api/forecast/{id} returns no data. */}
-          <div className="mt-4">
-            <PremiumGate
-              title="Ensemble forecast"
-              titleJa="アンサンブル予報"
-              blurb="Multi-model consensus · agreement across BOM, ECMWF and other models for the next 7 days."
-              blurbJa="BOM・ECMWFなど複数モデルの合意度を可視化（今後7日間）。"
-            >
-              {/* Ensemble runs at the SAME elevation the headline snow actually
-                  resolved to (mid-mountain on success, village on fail-soft
-                  fallback), so the page never tells two snow stories at once. */}
-              <EnsembleForecast
-                locationId={locationId}
-                elevationM={current?.snowfallOutlookElevationM ?? undefined}
+        {/* PREMIUM · Mountain dials · MountainSnapshot rings only. The
+            wind-driven lift-hold call lives in the per-lift panel below. */}
+        {!isGreen && (
+          <PremiumGate
+            title="Mountain dials"
+            titleJa="マウンテン計器盤"
+            blurb="Freezing level and gusts at a glance."
+            blurbJa="凍結高度・突風を一目で。"
+          >
+            {/* MountainSnapshot needs guaranteed `elevation` and `windSpeed`
+                numbers per its prop contract; guard rather than coerce so
+                the rings only render with real data. */}
+            {location?.elevation != null && current.windSpeed != null && (
+              <MountainSnapshot
+                resortName={location.name ?? ""}
+                elevation={location.elevation}
+                freezingLevel={current.freezingLevel ?? undefined}
+                gust={current.windGust ?? undefined}
+                windSpeed={current.windSpeed}
+                formatWind={(kmh) => u.wind(kmh) ?? kmh}
+                windUnitLabel={u.windUnit}
+                formatElevation={(m) => u.elev(m) ?? m}
+                elevationUnitLabel={u.elevUnit}
               />
-            </PremiumGate>
-          </div>
+            )}
+          </PremiumGate>
+        )}
 
-          {/* PremiumGate · Personalised triggers · push when conditions hit.
-              Hidden in green season - powder alerts are snow-only. */}
-          {!isGreen && (
-            <div className="mt-4">
-              <PremiumGate
-                title="Powder & weather alerts"
-                titleJa="降雪・気象アラート"
-                blurb="Get a push when conditions hit. Set thresholds for snowfall, wind, freezing level."
-                blurbJa="条件達成時にプッシュ通知。降雪・風速・凍結高度を設定。"
-              >
-                <section className="rounded-2xl border border-border bg-white p-5 md:p-6">
-                  <div className="mb-4">
-                    <p className="byline text-muted-foreground/70">{t("Alerts", "アラート")}</p>
-                    <h2 className="font-display font-semibold text-xl mt-1">
-                      {t("Personalised triggers", "パーソナライズされたトリガー")}
-                    </h2>
-                  </div>
-                  <AlertSubscribeForm defaultRegion={region.id as any} />
-                </section>
-              </PremiumGate>
-            </div>
-          )}
-
-          {/* Webcams · same shared component used by Yamanouchi.
-              Self-hides when no webcam config exists for the mountain. */}
-          <div className="mt-4">
-            <MountainWebcams
+        {/* PREMIUM · Per-lift hold · gated at page level (not just inside
+            the PremiumGate) because PremiumGate still renders a lock card
+            for free users even when its child returns null. Mountains with
+            no lift seeds skip the whole section rather than tease a feature
+            that has no data. */}
+        {hourly.length > 0 && location?.elevation != null && getLiftsForMountain(locationId).length > 0 && (
+          <PremiumGate
+            title="Per-lift hold forecast"
+            titleJa="リフト別ホールド予測"
+            blurb="Hour-by-hour hold risk for each named lift on this mountain · uses lift-specific gust tolerances."
+            blurbJa="各リフトの時間別ホールドリスク · リフト固有の耐風基準を使用。"
+          >
+            <LiftWindHoldPanel
               mountainId={locationId}
+              resortElevationM={location.elevation}
+              hourly={hourly as any}
               sectionNumber=""
               t={t}
+              seasonOpen={seasonOpen}
+              snowDepthCm={
+                resortReport
+                  ? resortReport.baseCm
+                  : modelDepthTrusted
+                    ? current.snowDepth
+                    : null
+              }
+              snowDepthSource={resortReport ? reportSource : "model"}
             />
-          </div>
+          </PremiumGate>
+        )}
 
-          <p className="byline text-muted-foreground/60 mt-8">
-            {t(
-              `Source: ${current.dataSource ?? region.weatherSource?.label ?? "Open-Meteo"} · elevation-corrected for ${location?.elevation != null ? `${u.elev(location.elevation)}${u.elevUnit}` : "?"}`,
-              `出典: ${current.dataSource ?? region.weatherSource?.labelJa ?? "Open-Meteo"} · 標高${location?.elevation != null ? `${u.elev(location.elevation)}${u.elevUnit}` : "?"}に補正`,
-            )}
-          </p>
-        </>
-      )}
-    </div>
+        {/* PREMIUM · 24-hour trend chart · interactive temp/snow/wind. */}
+        {hourly.length > 0 && (
+          <PremiumGate
+            title="24-hour trend"
+            titleJa="24時間推移"
+            blurb="Interactive chart · switch between temperature, snowfall and wind for the next 24 hours."
+            blurbJa="気温・降雪・風速を切り替えて24時間の推移を確認。"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="glass rounded-3xl p-5 md:p-8"
+            >
+              <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-5 gap-3">
+                <div>
+                  <p className="byline text-muted-foreground">{t("24-hour trend", "24時間推移")}</p>
+                  <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
+                    <BarChart2 className="text-primary w-5 h-5" />
+                    {t("How it's tracking", "推移")}
+                  </h2>
+                </div>
+                <div className="flex bg-slate-50 p-1 rounded-xl border border-slate-100">
+                  {(["temperature", "snowfall", "windSpeed"] as const).map((metric) => (
+                    <button
+                      key={metric}
+                      onClick={() => setActiveChartMetric(metric)}
+                      className={cn(
+                        "px-3 md:px-4 py-1.5 rounded-lg text-xs font-semibold capitalize transition-all",
+                        activeChartMetric === metric
+                          ? "bg-foreground text-background shadow-sm"
+                          : "text-muted-foreground hover:text-foreground"
+                      )}
+                    >
+                      {metric.replace("Speed", "")}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <ForecastChart data={hourly as any} metric={activeChartMetric} />
+            </motion.div>
+          </PremiumGate>
+        )}
+
+        {/* PREMIUM · Ensemble forecast · multi-model consensus.
+            Self-hides when /api/forecast/{id} returns no data. */}
+        <PremiumGate
+          title="Ensemble forecast"
+          titleJa="アンサンブル予報"
+          blurb="Multi-model consensus · agreement across BOM, ECMWF and other models for the next 7 days."
+          blurbJa="BOM・ECMWFなど複数モデルの合意度を可視化（今後7日間）。"
+        >
+          {/* Ensemble runs at the SAME elevation the headline snow actually
+              resolved to (mid-mountain on success, village on fail-soft
+              fallback), so the page never tells two snow stories at once. */}
+          <EnsembleForecast
+            locationId={locationId}
+            elevationM={current?.snowfallOutlookElevationM ?? undefined}
+          />
+        </PremiumGate>
+
+        {/* PREMIUM · Personalised triggers · push when conditions hit.
+            Hidden in green season - powder alerts are snow-only. */}
+        {!isGreen && (
+          <PremiumGate
+            title="Powder & weather alerts"
+            titleJa="降雪・気象アラート"
+            blurb="Get a push when conditions hit. Set thresholds for snowfall, wind, freezing level."
+            blurbJa="条件達成時にプッシュ通知。降雪・風速・凍結高度を設定。"
+          >
+            <div className="glass rounded-3xl p-5 md:p-8">
+              <div className="mb-4">
+                <p className="byline text-muted-foreground">{t("Alerts", "アラート")}</p>
+                <h2 className="font-display font-semibold text-xl md:text-2xl mt-1">
+                  {t("Personalised triggers", "パーソナライズされたトリガー")}
+                </h2>
+              </div>
+              <AlertSubscribeForm defaultRegion={region.id as any} />
+            </div>
+          </PremiumGate>
+        )}
+
+        {/* Webcams (free) · shared component, self-hides when no webcam
+            config exists for the mountain. The hero cam thumbnail scrolls
+            here. */}
+        <div id="webcams-section" className="scroll-mt-6">
+          <MountainWebcams
+            mountainId={locationId}
+            sectionNumber=""
+            t={t}
+          />
+        </div>
+
+        <p className="byline text-white/60 mt-8">
+          {t(
+            `Source: ${sourceLabel} · elevation-corrected for ${location?.elevation != null ? `${u.elev(location.elevation)}${u.elevUnit}` : "?"}`,
+            `出典: ${sourceLabel} · 標高${location?.elevation != null ? `${u.elev(location.elevation)}${u.elevUnit}` : "?"}に補正`,
+          )}
+        </p>
+      </div>
     </div>
   );
 }
@@ -819,6 +1048,7 @@ type MountainWeather = {
     precipitation?: number | null;
     cloudCover?: number | null;
     visibility?: number | null;
+    pressure?: number | null;
     dataSource?: string;
     freezingLevel?: number | null;
     snowfallPast24h?: number | null;
@@ -851,103 +1081,53 @@ type MountainWeather = {
   lastUpdated?: string;
 };
 
-function pickIcon(
-  code: number | null | undefined,
-  isDay: boolean | undefined,
-): React.ComponentType<{ className?: string; strokeWidth?: number }> {
-  if (code == null) return Cloud;
-  if (code === 0) return isDay === false ? Cloud : Sun;
-  if (code === 1 || code === 2) return isDay === false ? Cloud : CloudSun;
-  if (code === 3) return Cloud;
-  if (code === 45 || code === 48) return CloudFog;
-  if (code >= 51 && code <= 57) return CloudDrizzle;
-  if (code >= 61 && code <= 67) return CloudRain;
-  if (code >= 71 && code <= 77) return Snowflake;
-  if (code >= 80 && code <= 82) return CloudRain;
-  if (code >= 85 && code <= 86) return Snowflake;
-  if (code >= 95) return CloudRain;
-  return Cloud;
+function WeatherIcon({ code, isDay = true, className = "w-5 h-5" }: { code: number | null | undefined; isDay?: boolean; className?: string }) {
+  if (code == null) return <Cloud className={className} />;
+  if (code === 0) return <Sun className={className} />;
+  if (code === 1 || code === 2) return isDay ? <CloudSun className={className} /> : <Cloud className={className} />;
+  if (code === 3) return <Cloud className={className} />;
+  if (code === 45 || code === 48) return <CloudFog className={className} />;
+  if (code >= 51 && code <= 57) return <CloudDrizzle className={className} />;
+  if (code >= 61 && code <= 67) return <CloudRain className={className} />;
+  if (code >= 71 && code <= 77) return <Snowflake className={cn("text-snow-accent fill-snow-accent/15", className)} />;
+  if (code >= 80 && code <= 82) return <CloudRain className={className} />;
+  if (code >= 85 && code <= 86) return <Snowflake className={cn("text-snow-accent fill-snow-accent/15", className)} />;
+  if (code >= 95) return <CloudLightning className={className} />;
+  return <Cloud className={className} />;
 }
-
 function fmtTime(iso: string | null | undefined): string {
   if (!iso) return "-";
   const m = iso.match(/T(\d{2}):(\d{2})/);
   return m ? `${m[1]}:${m[2]}` : "-";
 }
-
-function fmtDay(iso: string): string {
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return iso;
-  return d.toLocaleDateString(undefined, { weekday: "short", day: "numeric", month: "short" });
-}
-
-function BigStat({
-  icon: Icon,
-  label,
-  value,
-  unit,
-  hint,
-}: {
-  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
-  label: string;
-  value: string;
-  unit: string;
-  /** optional "so what?" consequence line under the number */
-  hint?: string | null;
-}) {
-  const isSnow = Icon === Snowflake || Icon === CloudSnow;
-  return (
-    <div className="rounded-2xl border border-border bg-white p-4">
-      <div className="flex items-center gap-1.5 byline text-muted-foreground/70">
-        <Icon className={cn("w-3 h-3", isSnow && "text-snow-accent")} strokeWidth={2} /> {label}
-      </div>
-      <p className={cn("mt-2 font-display font-semibold text-2xl tracking-tight", isSnow ? "text-snow-accent" : "text-foreground")}>
-        {value}
-        <span className="text-sm text-muted-foreground/70 ml-1">{unit}</span>
-      </p>
-      {hint && <p className="mt-1 text-xs leading-snug text-sky-700">{hint}</p>}
-    </div>
-  );
-}
-
-function KV({
-  label,
-  value,
-  icon: Icon,
-}: {
-  label: string;
-  value: string;
-  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
-}) {
-  const isSnow = Icon === Snowflake || Icon === CloudSnow;
-  return (
-    <div>
-      <div className="flex items-center gap-1.5 byline text-muted-foreground/70">
-        <Icon className={cn("w-3 h-3", isSnow && "text-snow-accent")} strokeWidth={2} /> {label}
-      </div>
-      <p className={cn("mt-1 font-display font-medium text-lg", isSnow ? "text-snow-accent" : "text-foreground")}>{value}</p>
-    </div>
-  );
-}
-
-function DayStat({
-  icon: Icon,
-  label,
-  value,
-}: {
-  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
-  label: string;
-  value: string;
-}) {
-  const isSnow = Icon === Snowflake || Icon === CloudSnow;
-  return (
-    <div className="flex items-center justify-between gap-2 text-[11px]">
-      <span className="inline-flex items-center gap-1 text-muted-foreground/70">
-        <Icon className={cn("w-3 h-3", isSnow && "text-snow-accent")} strokeWidth={2} /> {label}
-      </span>
-      <span className={cn("font-medium truncate", isSnow ? "text-snow-accent" : "text-foreground")}>{value}</span>
-    </div>
-  );
-}
-
 export default MountainDetail;
+
+function formatAgo(iso: string | undefined | null, now: number): string {
+  if (!iso) return "-";
+  const t = new Date(iso).getTime();
+  if (Number.isNaN(t)) return "-";
+  const diffSec = Math.max(0, Math.round((now - t) / 1000));
+  if (diffSec < 60) return "just now";
+  const min = Math.round(diffSec / 60);
+  if (min < 60) return `${min} min ago`;
+  const hr = Math.round(min / 60);
+  if (hr < 24) return `${hr}h ago`;
+  return `${Math.round(hr / 24)}d ago`;
+}
+
+function displayDayCode(
+  code: number | null | undefined,
+  snowfallSumCm: number | null | undefined,
+  rainMm: number | null | undefined,
+): number | null | undefined {
+  const snow = Number(snowfallSumCm) || 0;
+  const rain = Number(rainMm) || 0;
+  if (code == null) return code;
+  const isWetOrStormy = (code >= 61 && code <= 67) || (code >= 80 && code <= 82) || code >= 95;
+  if (snow >= 1 && isWetOrStormy && snow / 0.7 > rain) return 75; // snow-led day
+  // Inverse: a rain-dominant day with trivial snow can still carry a snow
+  // moment-code - show the rain icon to match the server's "Rain" label.
+  const isSnowCode = (code >= 71 && code <= 77) || code === 85 || code === 86;
+  if (snow < 0.5 && rain >= 2 && isSnowCode) return 63; // rain-led day
+  return code;
+}

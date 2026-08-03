@@ -73,4 +73,5 @@
 - [feelzlike coverage map + promo counters](feelzlike-coverage-map.md) — pin routing: towns /:region/:town, mountains /:region/mountain/:id, umbrella pins unclickable; promo window default lives once in lib/promo-constants.
 - [feelzlike bottom overlays](feelzlike-bottom-overlays.md) — consent/install prompts offset above mobile nav via --mobile-bottom-nav CSS var set by AppShell; install prompt waits for consent + 14-day dismiss cooldown.
 - [feelzlike Canada ski directory](feelzlike-canada-directory.md) — /ca/all-ski-areas static list of all uncovered CA hills; links from skiresort.info detail pages, EXCLUDED from nightly link check; new static routes need app.ts KNOWN_TOP_LEVEL.
+- [feelzlike mountain page parity](feelzlike-mountain-detail-parity.md) — generic MountainDetail mirrors the Perisher bespoke page; mirror layout changes both ways; hero cam = local catalogue; skip extended gate when daily<=5; ~1280px right-clip is a shell quirk, not a page bug.
 - [feelzlike engagement counting](feelzlike-engagement-counting.md) — cookieless first-party visitor counts; finite page-label whitelist; fail-closed without secret; dev preview = no data by design.
