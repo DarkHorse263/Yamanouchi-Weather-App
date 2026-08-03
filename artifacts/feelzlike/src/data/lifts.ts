@@ -167,6 +167,7 @@ import { MINAKAMI } from "./lifts/minakami";
 import { KUSATSU_MANZA } from "./lifts/kusatsu-manza";
 import { HACHIMANTAI } from "./lifts/hachimantai";
 import { NZ } from "./lifts/nz";
+import { VICTORIAS_HIGH_COUNTRY, TASMANIA } from "./lifts/vic-tas";
 import { OKANAGAN } from "./lifts/okanagan";
 import { VANCOUVER } from "./lifts/vancouver";
 import { WHISTLER } from "./lifts/whistler";
@@ -201,6 +202,8 @@ export const LIFT_SEED: LiftSeed[] = [
   ...KUSATSU_MANZA,
   ...HACHIMANTAI,
   ...NZ,
+  ...VICTORIAS_HIGH_COUNTRY,
+  ...TASMANIA,
   ...OKANAGAN,
   ...VANCOUVER,
   ...WHISTLER,

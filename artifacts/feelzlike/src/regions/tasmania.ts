@@ -3,7 +3,7 @@ import wordmark from "@assets/feelzlike_trimmed/feelzlike_WordMarque_colour_1604
 
 /**
  * Tasmania · boutique alpine region in northeast TAS. Ben Lomond is the
- * only commercial chairlift operation on the island · conditions are
+ * only commercial ski lift operation on the island · conditions are
  * weather-dependent and short windows reward locals. Three base towns:
  *
  *   Ben Lomond Base → on-mountain village (Carr Villa / Creek Inn)
@@ -31,8 +31,9 @@ export const tasmaniaRegion: RegionConfig = {
       elevationM: 1572,
       lat: -41.5378,
       lng: 147.6736,
-      blurb: "tasmania's only commercial chairlift · weather-dependent, short windows reward locals",
+      blurb: "tasmania's only commercial ski lifts · weather-dependent, short windows reward locals",
       websiteUrl: "https://benlomondalpineresort.com.au/",
+      snowReportUrl: "https://benlomondalpineresort.com.au/snow-report/",
       beginner_friendly: true,
       kids_lessons: true,
       backcountry_access: true,
@@ -47,7 +48,7 @@ export const tasmaniaRegion: RegionConfig = {
       // on-mountain village (Carr Villa / Creek Inn) · tight radius around
       // the alpine village core at the foot of the chairlifts.
       radiusM: 1500,
-      blurb: "tasmania's only chairlift operation · on-mountain village at the foot of the lifts",
+      blurb: "tasmania's only ski lift operation · on-mountain village at the foot of the lifts",
       nearbyMountainIds: ["ben-lomond"],
     },
     {
