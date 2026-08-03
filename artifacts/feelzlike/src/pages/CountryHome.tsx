@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, MapPin, ListTree } from "lucide-react";
 import { COUNTRY_META, regionsForCountry, type CountryCode } from "@/regions";
 import { PlaceSearch } from "@/components/home/PlaceSearch";
+import { seasonForCountry } from "@/components/home/CountryPicker";
+import { Leaf } from "lucide-react";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { breadcrumbSchema } from "@/lib/seo/jsonLd";
 
@@ -12,6 +14,8 @@ interface CountryHomeProps {
 export default function CountryHome({ code }: CountryHomeProps) {
   const meta = COUNTRY_META[code];
   const regions = regionsForCountry(code);
+  const isGreenSeason = seasonForCountry(code) === "green";
+  const snowReturnsMonth = code === "AU" || code === "NZ" ? "june" : "december";
 
   return (
     <div
@@ -63,6 +67,15 @@ export default function CountryHome({ code }: CountryHomeProps) {
             <p className="mt-1.5 md:mt-3 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.2em] text-white/70">
               Choose a region
             </p>
+            {isGreenSeason && (
+              <p
+                className="mt-2.5 inline-flex items-center gap-1.5 rounded-full bg-emerald-400/15 px-3.5 py-1.5 text-[11px] font-bold lowercase text-emerald-100 ring-1 ring-emerald-300/40"
+                data-testid="badge-green-season"
+              >
+                <Leaf className="h-3 w-3" aria-hidden />
+                green season · lifts resting for summer · snow returns around {snowReturnsMonth}
+              </p>
+            )}
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 6 }}
