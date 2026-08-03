@@ -36,7 +36,7 @@ export const ASAHIKAWA_TRANSPORT: TransportProviderList = [
     leg: "to_town",
     operator: "Asahikawa Denkikidō (旭川電気軌道)",
     phone: null,
-    website: "https://www.asahikawa-denkikido.jp/",
+    website: "https://www.asahikawa-denkikidou.jp/",
     route_summary:
       "Airport buses from Asahikawa Airport to Asahikawa Station in about 35 minutes, timed to arriving flights. The simplest link from the region's own airport into the city · check the operator's site for the current timetable.",
     route_summary_local:
@@ -51,7 +51,7 @@ export const ASAHIKAWA_TRANSPORT: TransportProviderList = [
     leg: "to_mountain",
     operator: "Asahikawa Denkikidō (旭川電気軌道)",
     phone: null,
-    website: "https://www.asahikawa-denkikido.jp/",
+    website: "https://www.asahikawa-denkikidou.jp/",
     route_summary:
       "Route 66 'Ide-yu' bus from Asahikawa Station to Asahidake Onsen and the ropeway base in about 90 minutes via Higashikawa, a few departures a day. The only public transport to the mountain · check the operator's site for the current timetable before planning a ropeway day.",
     route_summary_local:

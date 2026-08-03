@@ -46,7 +46,7 @@ export const okanaganRegion: RegionConfig = {
       lng: -118.9330,
       blurb: "bc's biggest ski-in village · dry interior snow and a large gladed high-alpine plateau above kelowna",
       websiteUrl: "https://www.bigwhite.com/",
-      snowReportUrl: "https://www.bigwhite.com/mountain-conditions/snow-report",
+      snowReportUrl: "https://www.bigwhite.com/daily-snow-report",
       beginner_friendly: true,
       kids_lessons: true,
       terrain_park: true,

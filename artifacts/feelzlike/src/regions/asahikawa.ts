@@ -93,7 +93,7 @@ export const asahikawaRegion: RegionConfig = {
   ],
   footer: "v0.3 · feelzlike",
   tourismLinks: [
-    { category: "Tourism", categoryJa: "観光", label: "Asahikawa official tourism", labelJa: "旭川観光コンベンション協会", url: "https://www.atca.jp/en/" },
+    { category: "Tourism", categoryJa: "観光", label: "Asahikawa official tourism", labelJa: "旭川観光コンベンション協会", url: "https://www.atca.jp/" },
     { category: "Tourism", categoryJa: "観光", label: "Higashikawa town official site", labelJa: "東川町公式サイト", url: "https://higashikawa-town.jp/" },
     { category: "Tourism", categoryJa: "観光", label: "HOKKAIDO LOVE! · Hokkaido official tourism", labelJa: "北海道公式観光サイト HOKKAIDO LOVE!", url: "https://www.visit-hokkaido.jp/en/" },
     { category: "Resorts", categoryJa: "スキー場", label: "Kamui Ski Links", labelJa: "カムイスキーリンクス", url: "https://www.kamui-skilinks.com/" },

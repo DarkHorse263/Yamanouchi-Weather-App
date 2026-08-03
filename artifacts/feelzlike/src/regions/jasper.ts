@@ -51,7 +51,7 @@ export const jasperRegion: RegionConfig = {
   ],
   footer: "v0.3 · feelzlike",
   tourismLinks: [
-    { category: "Tourism", label: "Tourism Jasper", url: "https://www.tourismjasper.com/" },
+    { category: "Tourism", label: "Tourism Jasper", url: "https://tourismjasper.com/" },
     { category: "Tourism", label: "Travel Alberta", url: "https://www.travelalberta.com/" },
     { category: "Tourism", label: "Parks Canada · Jasper National Park", url: "https://www.pc.gc.ca/en/pn-np/ab/jasper" },
     { category: "Resorts", label: "Marmot Basin", url: "https://www.skimarmot.com/" },
