@@ -813,7 +813,7 @@ export function MountainDetail() {
                   <p className="byline text-muted-foreground">{t("Weather outlook", "週間予報")}</p>
                   <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
                     <CalendarDays className="text-primary w-5 h-5" />
-                    {t("Extended", "長期予報")}
+                    {t("Extended (14-day)", "長期予報（14日間）")}
                   </h2>
                   <p className="text-xs text-muted-foreground mt-2 max-w-md leading-relaxed">
                     {t(

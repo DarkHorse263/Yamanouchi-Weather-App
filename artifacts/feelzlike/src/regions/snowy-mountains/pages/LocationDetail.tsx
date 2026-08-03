@@ -1145,10 +1145,10 @@ export default function LocationDetail() {
             >
               <div className="flex items-end justify-between mb-4 gap-4">
                 <div>
-                  <p className="byline text-muted-foreground">Eyes on the mountain</p>
+                  <p className="byline text-muted-foreground">Live cams</p>
                   <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
                     <Camera className="text-primary w-5 h-5" />
-                    Live webcams
+                    {webcamData.webcams.length} webcams
                   </h2>
                   <p className="text-sm text-muted-foreground mt-1">
                     these cameras are run by the resort · we link you straight to their live feeds
