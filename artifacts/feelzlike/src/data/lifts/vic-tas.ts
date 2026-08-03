@@ -43,15 +43,15 @@ export const VICTORIAS_HIGH_COUNTRY: LiftSeed[] = [
 
   // ─── MT HOTHAM ───
   { id: "mh-heavenly-valley",    mountainId: "mt-hotham",   name: "Heavenly Valley",       baseElevation: 1520, topElevation: 1834, exposure: "exposed",        windHoldThresholdKmh: 65, type: "fixed_grip_chair", verifiedAt: V },
-  { id: "mh-village",            mountainId: "mt-hotham",   name: "The Village",           baseElevation: 1560, topElevation: 1835, exposure: "exposed",        windHoldThresholdKmh: 70, type: "fixed_grip_chair", verifiedAt: V },
-  { id: "mh-summit",             mountainId: "mt-hotham",   name: "The Summit",            baseElevation: 1750, topElevation: 1845, exposure: "highly_exposed", windHoldThresholdKmh: 60, type: "fixed_grip_chair", verifiedAt: V },
+  { id: "mh-village",            mountainId: "mt-hotham",   name: "Village",               baseElevation: 1560, topElevation: 1835, exposure: "exposed",        windHoldThresholdKmh: 70, type: "fixed_grip_chair", verifiedAt: V },
+  { id: "mh-summit",             mountainId: "mt-hotham",   name: "Summit Quad",           baseElevation: 1750, topElevation: 1845, exposure: "highly_exposed", windHoldThresholdKmh: 60, type: "fixed_grip_chair", verifiedAt: V },
   { id: "mh-gotcha",             mountainId: "mt-hotham",   name: "Gotcha",                baseElevation: 1600, topElevation: 1720, exposure: "moderate",       windHoldThresholdKmh: 75, type: "fixed_grip_chair", verifiedAt: V },
   { id: "mh-keoghs",             mountainId: "mt-hotham",   name: "Keogh's",               baseElevation: 1500, topElevation: 1655, exposure: "sheltered",      windHoldThresholdKmh: 80, type: "fixed_grip_chair", verifiedAt: V },
-  { id: "mh-orchard",            mountainId: "mt-hotham",   name: "The Orchard",           baseElevation: 1500, topElevation: 1655, exposure: "sheltered",      windHoldThresholdKmh: 80, type: "fixed_grip_chair", verifiedAt: V },
+  { id: "mh-orchard",            mountainId: "mt-hotham",   name: "Orchard",               baseElevation: 1500, topElevation: 1655, exposure: "sheltered",      windHoldThresholdKmh: 80, type: "fixed_grip_chair", verifiedAt: V },
   { id: "mh-road-runner",        mountainId: "mt-hotham",   name: "Road Runner",           baseElevation: 1450, topElevation: 1600, exposure: "sheltered",      windHoldThresholdKmh: 80, type: "fixed_grip_chair", verifiedAt: V },
   { id: "mh-big-d",              mountainId: "mt-hotham",   name: "Big D",                 baseElevation: 1720, topElevation: 1785, exposure: "exposed",        windHoldThresholdKmh: 70, type: "fixed_grip_chair", verifiedAt: V },
   { id: "mh-blue-ribbon",        mountainId: "mt-hotham",   name: "Blue Ribbon",           baseElevation: 1470, topElevation: 1690, exposure: "moderate",       windHoldThresholdKmh: 75, type: "fixed_grip_chair", verifiedAt: V },
-  { id: "mh-drift-tbar",         mountainId: "mt-hotham",   name: "The Drift T-Bar",       baseElevation: 1740, topElevation: 1830, exposure: "highly_exposed", windHoldThresholdKmh: 70, type: "t-bar",            verifiedAt: V },
+  { id: "mh-drift-tbar",         mountainId: "mt-hotham",   name: "The Drift",             baseElevation: 1740, topElevation: 1830, exposure: "highly_exposed", windHoldThresholdKmh: 70, type: "t-bar",            verifiedAt: V },
 ];
 
 /**
