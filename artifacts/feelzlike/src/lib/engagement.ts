@@ -53,3 +53,26 @@ export function pingPageView(path: string): void {
 export function pingPwaEvent(kind: "pwa_install" | "pwa_launch"): void {
   ping({ kind });
 }
+
+/**
+ * Partner-link counters · "shown" fires when a partner booking button/card
+ * actually renders on screen; "clicked" when the visitor taps it. First-party
+ * and cookieless like page views (counts EVERY visitor, not just consented
+ * ones), so the admin page can show honest shown→clicked numbers for partner
+ * conversations. Sends only a coarse partner label - never the URL or place.
+ */
+const shownOnce = new Set<string>();
+
+export function pingPartnerEvent(
+  kind: "partner_shown" | "partner_clicked",
+  partner: string,
+): void {
+  if (kind === "partner_shown") {
+    // One "shown" per partner per screen - a stay list can render the same
+    // provider button 20 times, which would drown the click-through rate.
+    const key = `${(window.location.pathname || "/").replace(/\/+$/, "") || "/"}|${partner}`;
+    if (shownOnce.has(key)) return;
+    shownOnce.add(key);
+  }
+  ping({ kind, partner });
+}

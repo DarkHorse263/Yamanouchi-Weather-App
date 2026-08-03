@@ -342,6 +342,73 @@ function EngagementCard({ e }: { e: EngagementPayload }) {
   );
 }
 
+/**
+ * PartnerLinksCard · first-party shown→clicked counters for partner booking
+ * links (StayCard providers + Europcar car hire). Event keys arrive as
+ * "partner_shown:<partner>" / "partner_clicked:<partner>" from
+ * /api/engagement/ping - cookieless, so unlike GA these count EVERY visitor.
+ */
+function PartnerLinksCard({ e }: { e: EngagementPayload }) {
+  const partners = new Map<string, { shown: number; shown7d: number; clicked: number; clicked7d: number }>();
+  for (const [key, v] of Object.entries(e.events)) {
+    const m = key.match(/^partner_(shown|clicked):(.+)$/);
+    if (!m) continue;
+    const p = partners.get(m[2]) ?? { shown: 0, shown7d: 0, clicked: 0, clicked7d: 0 };
+    if (m[1] === "shown") { p.shown += v.total; p.shown7d += v.last7d; }
+    else { p.clicked += v.total; p.clicked7d += v.last7d; }
+    partners.set(m[2], p);
+  }
+  const rows = [...partners.entries()].sort((a, b) => b[1].clicked - a[1].clicked || b[1].shown - a[1].shown);
+  const totalShown = rows.reduce((s, [, p]) => s + p.shown, 0);
+  const totalClicked = rows.reduce((s, [, p]) => s + p.clicked, 0);
+  const ctr = (shown: number, clicked: number) => (shown > 0 ? `${((clicked / shown) * 100).toFixed(1)}%` : "–");
+  return (
+    <div className="rounded-lg border bg-white p-5">
+      <h3 className="text-sm font-semibold mb-1 lowercase">partner links · shown → clicked</h3>
+      <p className="text-xs text-muted-foreground mb-4">
+        first-party, cookieless counts of partner booking buttons rendered and tapped · every
+        visitor counted, no GA needed · counting starts from the first publish with this card
+      </p>
+      {rows.length === 0 ? (
+        <p className="text-sm text-muted-foreground rounded-md border border-dashed px-3 py-4">
+          no data yet · these counters only see real traffic on the published site. republish, then
+          numbers appear as visitors open stay and transport pages.
+        </p>
+      ) : (
+        <div className="space-y-4">
+          <div className="grid grid-cols-3 gap-3">
+            <Kpi label="links shown" value={totalShown} />
+            <Kpi label="links clicked" value={totalClicked} />
+            <Kpi label="click-through" value={ctr(totalShown, totalClicked)} />
+          </div>
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="text-[11px] uppercase tracking-widest text-muted-foreground text-left">
+                <th className="pb-1.5 font-medium">partner</th>
+                <th className="pb-1.5 font-medium text-right">shown</th>
+                <th className="pb-1.5 font-medium text-right">clicked</th>
+                <th className="pb-1.5 font-medium text-right">ctr</th>
+                <th className="pb-1.5 font-medium text-right">7d clicks</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map(([name, p]) => (
+                <tr key={name} className="border-t">
+                  <td className="py-1.5 text-slate-700">{name.replace(/_/g, ".")}</td>
+                  <td className="py-1.5 text-right tabular-nums">{p.shown}</td>
+                  <td className="py-1.5 text-right tabular-nums">{p.clicked}</td>
+                  <td className="py-1.5 text-right tabular-nums">{ctr(p.shown, p.clicked)}</td>
+                  <td className="py-1.5 text-right tabular-nums">{p.clicked7d}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
+}
+
 const DASHBOARDS: Array<{ label: string; sub: string; href: string }> = [
   // Deep-linked to the feelzlike property (p544105028) so it never opens
   // another business's Analytics account.
@@ -396,6 +463,7 @@ export default function AdminStats() {
       ) : stats.data ? (
         <div className="space-y-5">
           {engagement.data ? <EngagementCard e={engagement.data} /> : null}
+          {engagement.data ? <PartnerLinksCard e={engagement.data} /> : null}
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             <Kpi label="alerts (verified)" value={stats.data.alerts.verified} sub={`+${stats.data.alerts.new7d} last 7d`} />

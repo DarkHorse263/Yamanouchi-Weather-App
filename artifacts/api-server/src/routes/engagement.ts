@@ -28,7 +28,16 @@ import {
  */
 const router: IRouter = Router();
 
-const KINDS = new Set(["view", "pwa_install", "pwa_launch"]);
+const KINDS = new Set(["view", "pwa_install", "pwa_launch", "partner_shown", "partner_clicked"]);
+
+// FINITE partner-label whitelist for partner_shown / partner_clicked events.
+// Mirrors the affiliate providers rendered by the client (StayCard PROVIDERS
+// + Europcar car hire). Anything else collapses into "other" so
+// engagement_event_daily cardinality can't explode from garbage bodies.
+const PARTNERS = new Set([
+  "booking_com", "agoda", "expedia", "hotels_com", "trip_com", "airbnb",
+  "jalan", "rakuten", "tripadvisor", "official", "europcar",
+]);
 
 // FINITE page-label whitelist · known top-level sections + live region ids.
 // Anything else collapses into "other" so page_view_daily cardinality can't
@@ -88,9 +97,16 @@ router.post("/engagement/ping", async (req: Request, res: Response) => {
           .onConflictDoNothing(),
       ]);
     } else {
+      let event = kind;
+      if (kind === "partner_shown" || kind === "partner_clicked") {
+        const rawPartner =
+          typeof req.body?.partner === "string" ? req.body.partner.toLowerCase() : "";
+        const partner = PARTNERS.has(rawPartner) ? rawPartner : "other";
+        event = `${kind}:${partner}`;
+      }
       await db
         .insert(engagementEventDailyTable)
-        .values({ day, event: kind, count: 1 })
+        .values({ day, event, count: 1 })
         .onConflictDoUpdate({
           target: [engagementEventDailyTable.day, engagementEventDailyTable.event],
           set: { count: sql`${engagementEventDailyTable.count} + 1` },
