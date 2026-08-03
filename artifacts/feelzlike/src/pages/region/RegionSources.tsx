@@ -357,7 +357,7 @@ export function RegionSources() {
           <SourceGroupCard key={group.title} group={group} t={t} />
         ))}
 
-        <p className="text-[11px] text-muted-foreground/70 leading-relaxed max-w-2xl">
+        <p className="text-[11px] text-white/70 leading-relaxed max-w-2xl">
           {t(
             "Feelzlike combines but does not replace any of the above sources. For official warnings always consult the issuing authority. We attribute every data point - if you spot something missing, let us know.",
             "Feelzlikeは上記の出典を統合表示するものであり、置き換えるものではありません。公式の警報・警告は必ず発表元を直接ご確認ください。",

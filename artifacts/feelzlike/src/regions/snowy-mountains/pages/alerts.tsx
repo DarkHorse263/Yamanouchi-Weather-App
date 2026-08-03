@@ -31,19 +31,19 @@ export default function Alerts() {
         path="/snowy-mountains/alerts"
       />
       <div>
-        <h1 className="text-3xl md:text-4xl font-black text-foreground flex items-center gap-3">
-          <BellRing className="w-8 h-8 text-primary" />
+        <h1 className="text-3xl md:text-4xl font-black text-white flex items-center gap-3">
+          <BellRing className="w-8 h-8 text-white" />
           Powder Alerts
         </h1>
-        <p className="text-muted-foreground mt-2">
+        <p className="text-white/70 mt-2">
           Get notified when significant snow is forecast.
         </p>
       </div>
 
-      <div className="rounded-2xl bg-secondary/40 border border-dashed border-border p-5 flex items-start gap-3">
-        <Info className="w-5 h-5 text-sky-400 mt-0.5 shrink-0" />
-        <div className="text-sm text-muted-foreground">
-          <p className="text-foreground font-bold mb-1">Real-time storm tracking is coming soon to the Snowy Mountains.</p>
+      <div className="rounded-2xl bg-white border border-slate-200 p-5 flex items-start gap-3 shadow-[0_12px_40px_-12px_rgba(0,40,150,0.5)]">
+        <Info className="w-5 h-5 text-sky-500 mt-0.5 shrink-0" />
+        <div className="text-sm text-slate-600">
+          <p className="text-slate-900 font-bold mb-1">Real-time storm tracking is coming soon to the Snowy Mountains.</p>
           <p>For now, subscribe below and we'll email you when our forecast models show your threshold being met in your selected window.</p>
         </div>
       </div>
