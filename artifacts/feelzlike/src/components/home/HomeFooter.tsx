@@ -35,6 +35,8 @@ export function HomeFooter() {
         >
           <a className={linkCls} href="/about">about · how to use</a>
           {sep}
+          <a className={linkCls} href="/about#whats-new">what&rsquo;s new</a>
+          {sep}
           <a className={linkCls} href="/legal/privacy">privacy</a>
           {sep}
           <a className={linkCls} href="/legal/terms">terms</a>

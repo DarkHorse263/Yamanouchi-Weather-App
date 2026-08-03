@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import type { CSSProperties } from "react";
+import { useEffect, type CSSProperties } from "react";
 import {
   ArrowLeft,
   Camera,
@@ -9,7 +9,9 @@ import {
   MapPin,
   Search,
   ShieldCheck,
+  Sparkles,
 } from "lucide-react";
+import { WHATS_NEW } from "@/data/whatsNew";
 import logoWhite from "/branding/logo-white.png?url";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { LanguageProvider, useLanguage, type Language } from "@workspace/feelzlike-shell";
@@ -136,6 +138,17 @@ function LangPill() {
 function AboutContent() {
   const { t } = useLanguage();
 
+  // Support deep links like /about#whats-new (footer + home-page note).
+  // Runs after mount so the target section exists; rAF lets layout settle
+  // before we scroll, and any scroll-reset on navigation has already fired.
+  useEffect(() => {
+    const hash = window.location.hash.replace(/^#/, "");
+    if (!hash) return;
+    requestAnimationFrame(() => {
+      document.getElementById(hash)?.scrollIntoView({ block: "start" });
+    });
+  }, []);
+
   return (
     <div
       className="relative isolate min-h-[100dvh] text-white antialiased bg-[#0055FF] pb-safe"
@@ -233,6 +246,38 @@ function AboutContent() {
               )}
             </p>
           </div>
+        </div>
+
+        <h2
+          id="whats-new"
+          className="mt-10 scroll-mt-6 font-display text-2xl font-semibold lowercase"
+        >
+          {t("what\u2019s new", "最新情報")}
+        </h2>
+        <p className={`mt-1 ${eyebrow}`}>
+          {t(
+            "the app updates itself · no downloads, no version numbers · here's what changed lately",
+            "アプリは自動で最新になります · ダウンロードもバージョン番号も不要 · 最近の変更はこちら",
+          )}
+        </p>
+        <div className={`mt-4 ${card}`}>
+          <ul className="space-y-4">
+            {WHATS_NEW.map((entry) => (
+              <li key={entry.id} className="flex items-start gap-4">
+                <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#F0F5FF] text-[#0055FF]">
+                  <Sparkles className="h-4 w-4" />
+                </span>
+                <div>
+                  <p className="text-[11px] font-bold lowercase tracking-wider text-slate-400">
+                    {entry.date}
+                  </p>
+                  <p className="mt-0.5 text-[14px] font-bold lowercase leading-relaxed text-slate-600">
+                    {t(entry.text, entry.textJa)}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className="mt-10 text-center">
