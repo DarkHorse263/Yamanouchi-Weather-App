@@ -433,7 +433,7 @@ export function AppShell({
       {/* Main */}
       <main
         className={cn(
-          "flex-1 md:ml-64 w-full min-h-[100dvh] md:pt-0 pb-20 md:pb-0 transition-colors duration-500",
+          "flex-1 md:ml-64 w-full md:w-[calc(100%-16rem)] min-h-[100dvh] md:pt-0 pb-20 md:pb-0 transition-colors duration-500",
           seasonCtx?.season === "green" ? "bg-[#059669]" : "bg-[#0055FF]",
           (region.seasons || (region.language && region.language.locales.length > 1))
             ? "pt-24"
