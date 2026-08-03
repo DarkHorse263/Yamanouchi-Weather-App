@@ -37,6 +37,7 @@ import { dailyRainMm } from "@/lib/precip";
 import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
 import { HourlyForecast } from "@/components/HourlyForecast";
 import { PowderCalendar } from "@/components/PowderCalendar";
+import { POWDER_THRESHOLDS_JP } from "@/types/weather";
 import { MountainWebcams } from "@/components/MountainWebcams";
 import { LiftWindHoldPanel } from "@/components/LiftWindHoldPanel";
 import { isLiftSeasonOpen } from "@/lib/skiSeason";
@@ -371,6 +372,7 @@ export default function ResortDetail() {
             hourly={hourly}
             utcOffsetSeconds={(data as any).utcOffsetSeconds ?? 0}
             t={t}
+            thresholds={POWDER_THRESHOLDS_JP}
             sectionNumber=""
             skiability={{
               seasonOpen: isLiftSeasonOpen(REGION_COUNTRY[region.id]),
@@ -436,7 +438,7 @@ export default function ResortDetail() {
             to sit right after Elevation forecast so the powder outlook
             reads as a continuation of the multi-day weather story. */}
         {hourly && hourly.length > 0 && (
-          <PowderCalendar hourly={hourly} t={t} sectionNumber="" />
+          <PowderCalendar hourly={hourly} t={t} thresholds={POWDER_THRESHOLDS_JP} sectionNumber="" />
         )}
 
         {/* Mountain dials only · the wind-driven lift-hold call was

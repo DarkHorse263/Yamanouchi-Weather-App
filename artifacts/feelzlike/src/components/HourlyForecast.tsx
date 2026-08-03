@@ -20,6 +20,7 @@ import {
 import { cn } from "@/lib/utils";
 import {
   detectPowderWindows,
+  POWDER_THRESHOLDS_DEFAULT,
   type HourlyForecast as HourlyForecastT,
   type PowderGrade,
   type PowderThresholds,
@@ -600,7 +601,13 @@ function PowderDetail({
   const startLabel = startTime ? formatHourLabel(startTime) : "";
   const endLabel = endTime ? nextHourLabel(endTime) : "";
   const style = GRADE_STYLES[window.grade];
-  const isAU = thresholds?.minSnowfall === 0.5;
+  // Render the explainer from the ACTUAL thresholds in play - country sets
+  // differ (AU 0.5, NZ/CA 0.75, JP 1cm/hr), so no hardcoded two-way text.
+  const eff = { ...POWDER_THRESHOLDS_DEFAULT, ...thresholds };
+  const snowIn = (Math.round((eff.minSnowfall / 2.54) * 10) / 10).toFixed(1);
+  const windMph = Math.round(eff.maxWind * 0.621371);
+  const maxTempF = Math.round(eff.maxTemp * 1.8 + 32);
+  const maxTempC = eff.maxTemp > 0 ? `+${eff.maxTemp}` : `${eff.maxTemp}`;
 
   return (
     <motion.div
@@ -650,20 +657,12 @@ function PowderDetail({
       <p className="mt-3 text-xs opacity-80 leading-relaxed">
         {u.units === "imperial"
           ? t(
-              isAU
-                ? "AU thresholds: snowfall ≥0.2in/hr, wind <16mph, ≥3 consecutive hours, ≤36°F."
-                : "Thresholds: snowfall ≥0.4in/hr, wind <12mph, ≥3 consecutive hours, ≤36°F.",
-              isAU
-                ? "AU基準: 降雪0.2in/時以上、風速16mph未満、3時間以上連続、36°F以下。"
-                : "基準: 降雪0.4in/時以上、風速12mph未満、3時間以上連続、36°F以下。",
+              `Thresholds: snowfall ≥${snowIn}in/hr, wind <${windMph}mph, ≥${eff.minDuration} consecutive hours, ≤${maxTempF}°F.`,
+              `基準: 降雪${snowIn}in/時以上、風速${windMph}mph未満、${eff.minDuration}時間以上連続、${maxTempF}°F以下。`,
             )
           : t(
-              isAU
-                ? "AU thresholds: snowfall ≥0.5cm/hr, wind <25km/h, ≥3 consecutive hours, ≤+2°C."
-                : "Thresholds: snowfall ≥1cm/hr, wind <20km/h, ≥3 consecutive hours, ≤+2°C.",
-              isAU
-                ? "AU基準: 降雪0.5cm/時以上、風速25km/時未満、3時間以上連続、+2℃以下。"
-                : "基準: 降雪1cm/時以上、風速20km/時未満、3時間以上連続、+2℃以下。",
+              `Thresholds: snowfall ≥${eff.minSnowfall}cm/hr, wind <${eff.maxWind}km/h, ≥${eff.minDuration} consecutive hours, ≤${maxTempC}°C.`,
+              `基準: 降雪${eff.minSnowfall}cm/時以上、風速${eff.maxWind}km/時未満、${eff.minDuration}時間以上連続、${maxTempC}℃以下。`,
             )}
       </p>
     </motion.div>

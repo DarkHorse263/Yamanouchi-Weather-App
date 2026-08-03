@@ -34,7 +34,7 @@ import { ElevationBands } from "@/components/weather/ElevationBands";
 import { HourlyForecast } from "@/components/HourlyForecast";
 import { PremiumFeaturePrompt } from "@/components/PremiumFeaturePrompt";
 import { SnowmakingPanel } from "@/components/weather/SnowmakingPanel";
-import { POWDER_THRESHOLDS_AU } from "@/types/weather";
+import { powderThresholdsForCountry } from "@/types/weather";
 import { PowderCalendar } from "@/components/PowderCalendar";
 import { LiftWindHoldPanel } from "@/components/LiftWindHoldPanel";
 import { isLiftSeasonOpen } from "@/lib/skiSeason";
@@ -153,6 +153,9 @@ export function MountainDetail() {
   // lifts). No report in season -> "not reported", never a confident wrong 0.
   // Off-season the model figure returns (melt curve context, nobody misled).
   const seasonOpen = isLiftSeasonOpen(REGION_COUNTRY[region.id]);
+  // Powder medals are judged against country-appropriate thresholds - an
+  // "epic" AU day is ordinary in Hokkaido (AU baseline, JP Japow, NZ/CA middle).
+  const powderThresholds = powderThresholdsForCountry(REGION_COUNTRY[region.id]);
   const modelDepthTrusted = !seasonOpen;
 
   // Back link goes to the BASE TOWN this mountain hangs off (towns-first IA),
@@ -471,7 +474,7 @@ export function MountainDetail() {
                 hourly={hourly as any}
                 utcOffsetSeconds={(data as any).utcOffsetSeconds ?? 0}
                 t={t}
-                thresholds={POWDER_THRESHOLDS_AU}
+                thresholds={powderThresholds}
                 sectionNumber=""
                 skiability={{
                   seasonOpen,
@@ -613,7 +616,7 @@ export function MountainDetail() {
               reads as a continuation of the multi-day weather story. */}
           {hourly.length > 0 && (
             <div className="mt-4">
-              <PowderCalendar hourly={hourly as any} t={t} sectionNumber="" />
+              <PowderCalendar hourly={hourly as any} t={t} thresholds={powderThresholds} sectionNumber="" />
             </div>
           )}
 
