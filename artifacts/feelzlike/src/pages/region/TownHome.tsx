@@ -388,7 +388,18 @@ export function TownHome() {
         ]}
       />
       <PageHeader
-        byline={`${region.name} · ${t("Base town", "拠点の町")}`}
+        byline={
+          <>
+            <Link
+              href={`~/${region.id}`}
+              className="underline decoration-white/40 underline-offset-2 hover:text-white hover:decoration-white"
+            >
+              ← {region.name}
+            </Link>
+            {" · "}
+            {t("Base town", "拠点の町")}
+          </>
+        }
         title={t(town.name, town.nameJa)}
         description={town.blurb ? t(town.blurb, town.blurbJa) : undefined}
         stamp={

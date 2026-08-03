@@ -420,7 +420,7 @@ if (process.env.NODE_ENV === "production") {
 
   // Top-level routes handled by the SPA (before the /:region catch-all).
   const KNOWN_TOP_LEVEL = new Set([
-    "/", "/countries", "/au", "/jp", "/nz", "/ca", "/ca/all-ski-areas", "/near-you",
+    "/", "/countries", "/about", "/au", "/jp", "/nz", "/ca", "/ca/all-ski-areas", "/near-you",
     "/plan", "/legal/privacy", "/legal/terms",
     "/premium",
     "/alerts/verify", "/alerts/manage", "/alerts/unsubscribed",

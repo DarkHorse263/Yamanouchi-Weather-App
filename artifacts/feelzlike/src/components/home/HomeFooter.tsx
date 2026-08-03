@@ -33,6 +33,8 @@ export function HomeFooter() {
           aria-label="footer"
           className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5 leading-relaxed"
         >
+          <a className={linkCls} href="/about">about · how to use</a>
+          {sep}
           <a className={linkCls} href="/legal/privacy">privacy</a>
           {sep}
           <a className={linkCls} href="/legal/terms">terms</a>

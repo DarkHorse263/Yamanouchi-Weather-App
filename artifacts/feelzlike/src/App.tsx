@@ -33,6 +33,7 @@ import Premium from "@/pages/Premium";
 import Account from "@/pages/Account";
 import AdminStats from "@/pages/admin/AdminStats";
 import CanadaDirectory from "@/pages/CanadaDirectory";
+import About from "@/pages/About";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,8 @@ function Router() {
       <Route path="/" component={Welcome} />
       <Route path="/countries" component={Countries} />
       <Route path="/countries/" component={Countries} />
+      <Route path="/about" component={About} />
+      <Route path="/about/" component={About} />
       {/* Visitor's own local weather + radar · mounted before the /:region
           catch-all so /near-you isn't parsed as a region slug. */}
       <Route path="/near-you" component={NearYouWeather} />

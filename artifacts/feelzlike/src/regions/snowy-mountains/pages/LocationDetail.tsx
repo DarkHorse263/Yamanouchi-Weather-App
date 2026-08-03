@@ -1150,6 +1150,9 @@ export default function LocationDetail() {
                     <Camera className="text-primary w-5 h-5" />
                     Live webcams
                   </h2>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    these cameras are run by the resort · we link you straight to their live feeds
+                  </p>
                 </div>
                 {webcamData.webcamPageUrl && (
                   <a

@@ -66,6 +66,13 @@ export default function Welcome() {
           <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/70">
             real conditions for mountain travel
           </p>
+          <Link
+            href="/about"
+            className="rounded-full border border-white/30 px-3.5 py-1 text-[12px] font-bold lowercase text-white/85 transition-colors hover:border-white/60 hover:text-white"
+            data-testid="link-home-about"
+          >
+            about · how to use
+          </Link>
 
           {/* Return shortcut · skips the pickers for users who've already
               settled on a base town. Only renders when a valid lastTown exists

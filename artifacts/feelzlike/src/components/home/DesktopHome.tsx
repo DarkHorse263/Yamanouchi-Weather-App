@@ -67,7 +67,11 @@ export function DesktopHome() {
         transition={{ duration: 0.5 }}
         className="border-t border-white/20 px-6 pt-12 pb-10"
       >
-        <p className={eyebrow}>about feelzlike</p>
+        <p className={eyebrow}>
+          <a href="/about" className="hover:text-white transition-colors">
+            about feelzlike · how to use →
+          </a>
+        </p>
         <h2 className={h2}>real conditions for mountain travel</h2>
         <p className="mt-3 max-w-2xl text-[15px] font-bold leading-relaxed text-white/80 lowercase">
           you&rsquo;re in town, wondering what it&rsquo;s actually like up the
