@@ -166,6 +166,7 @@ import { APPI_SHIZUKUISHI } from "./lifts/appi-shizukuishi";
 import { MINAKAMI } from "./lifts/minakami";
 import { KUSATSU_MANZA } from "./lifts/kusatsu-manza";
 import { HACHIMANTAI } from "./lifts/hachimantai";
+import { NZ } from "./lifts/nz";
 import { OKANAGAN } from "./lifts/okanagan";
 import { VANCOUVER } from "./lifts/vancouver";
 import { WHISTLER } from "./lifts/whistler";
@@ -199,6 +200,7 @@ export const LIFT_SEED: LiftSeed[] = [
   ...MINAKAMI,
   ...KUSATSU_MANZA,
   ...HACHIMANTAI,
+  ...NZ,
   ...OKANAGAN,
   ...VANCOUVER,
   ...WHISTLER,

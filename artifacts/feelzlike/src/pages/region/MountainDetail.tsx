@@ -15,6 +15,8 @@ import {
   Droplets,
   Eye,
   Gauge,
+  Cable,
+  ExternalLink,
   Mountain as MountainIcon,
   Navigation,
   Snowflake,
@@ -182,6 +184,25 @@ export function MountainDetail() {
   // AU-calibrated bar would over- or under-award powder days elsewhere.
   const powderThresholds = powderThresholdsForCountry(REGION_COUNTRY[region.id]);
   const modelDepthTrusted = !seasonOpen;
+
+  // Curated lift seeds for this mountain (name/type/vert only - NO status).
+  // Powers the honest reference-only "On the snow" card below: we have no
+  // live lift feed outside a verified source, so the card never claims
+  // open/closed; it lists the lifts and links to the resort's own report.
+  const liftSeeds = getLiftsForMountain(locationId);
+  // Link ladder mirrors the curated-URL convention: dedicated lift page if
+  // authored, else the (curl-verified) snow report page, else official site.
+  const liftReportUrl = mountainCfg?.liftStatusUrl ?? snowReportUrl ?? websiteUrl;
+  const liftTypeLabel = (type: string) => {
+    switch (type) {
+      case "gondola": return t("gondola", "ゴンドラ");
+      case "detachable": return t("express chair", "高速リフト");
+      case "fixed_grip_chair": return t("chairlift", "リフト");
+      case "t-bar": return t("t-bar", "Tバー");
+      case "rope_tow": return t("rope tow", "ロープトウ");
+      default: return type.replace(/_/g, " ");
+    }
+  };
 
   // Back link goes to the BASE TOWN this mountain hangs off (towns-first IA),
   // not the region home. Find the first base town whose nearbyMountainIds
@@ -857,6 +878,76 @@ export function MountainDetail() {
         )}
 
         <AlertPromoBanner />
+
+        {/* FREE · "On the snow" lift card · honest reference-only mode,
+            mirroring the Snowy Mountains card's no-live-feed branch. We have
+            no live lift feed for these resorts, so: no open/closed badges,
+            no "0/N" counter, no status chip - just the mountain's lift list
+            plus a link-out to the resort's own official report. Mountains
+            without curated lift seeds skip the card entirely (no empty
+            tease). Hidden in the green season alongside the other winter
+            panels. */}
+        {!isGreen && liftSeeds.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.18 }}
+            className="glass rounded-3xl p-5 md:p-8 flex flex-col"
+          >
+            <div className="mb-4">
+              <p className="byline text-muted-foreground">{t("Lift status", "リフト運行状況")}</p>
+              <h2 className="font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2">
+                <Cable className="text-primary w-5 h-5" />
+                {t("On the snow", "ゲレンデ情報")}
+              </h2>
+            </div>
+
+            {liftReportUrl && (
+              <a
+                href={liftReportUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group mb-4 flex items-start gap-3 rounded-2xl bg-sky-500/10 border border-sky-500/30 px-3.5 py-3 transition-colors hover:bg-sky-500/15"
+              >
+                <Cable className="w-4 h-4 text-sky-500 mt-0.5 shrink-0" />
+                <div className="min-w-0">
+                  <p className="text-sm text-foreground">
+                    {t(`live status straight from ${elevName ?? location?.name ?? "the resort"}`, "リフト運行状況は公式サイトで")}
+                  </p>
+                  <p className="text-xs text-muted-foreground/80 mt-1 leading-relaxed">
+                    {t(
+                      "we don't run a live lift feed for this resort yet, so today's open lifts and runs are best checked on the official report · it updates through the day.",
+                      "このリゾートのライブリフト情報はまだ提供していません · 本日の運行状況は公式レポートでご確認ください。",
+                    )}
+                  </p>
+                  <span className="mt-2 inline-flex items-center gap-1 text-[11px] font-semibold text-sky-700 group-hover:text-sky-600">
+                    {t(`open ${elevName ?? location?.name ?? "resort"} lift report`, "公式リフトレポートを開く")}
+                    <ExternalLink className="w-3 h-3" />
+                  </span>
+                </div>
+              </a>
+            )}
+
+            <p className="byline text-muted-foreground/70 mb-1">
+              {t(`Lifts · ${liftSeeds.length} listed`, `リフト · ${liftSeeds.length}基掲載`)}
+            </p>
+            <div className="space-y-1 flex-1 overflow-y-auto max-h-[280px] pr-1 hide-scrollbar">
+              {liftSeeds.map((lift) => (
+                <div key={lift.id} className="flex justify-between items-center px-2 py-2 rounded-lg hover:bg-slate-50 transition-colors">
+                  <div>
+                    <p className="text-sm text-foreground">{language === "ja" && lift.nameJa ? lift.nameJa : lift.name}</p>
+                    <p className="byline text-muted-foreground/60">{liftTypeLabel(lift.type)}</p>
+                  </div>
+                  {lift.topElevation > lift.baseElevation && (
+                    <div className="text-[11px] text-muted-foreground/50 shrink-0">
+                      {u.elev(lift.topElevation - lift.baseElevation)} {u.elevUnit} {t("vert", "標高差")}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
 
         {/* PREMIUM · Mountain dials · MountainSnapshot rings only. The
             wind-driven lift-hold call lives in the per-lift panel below. */}
