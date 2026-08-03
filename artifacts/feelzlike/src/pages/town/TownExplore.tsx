@@ -4,6 +4,7 @@ import { useRegion, useLanguage, useBaseTown, LiveBadge, PageHeader, useOptional
 import { PageMeta } from "@/lib/seo/PageMeta";
 
 import { EmptyStateCard } from "@/components/EmptyStateCard";
+import { GuideToursCard } from "@/components/GuideToursCard";
 
 /**
  * TownExplore - region-tourism links list.
@@ -72,6 +73,10 @@ export function TownExplore() {
           badge={<LiveBadge tone="onDark" label={t("Curated", "厳選")} />}
         />
       </div>
+
+      <section className="px-4 md:px-10 pt-5">
+        <GuideToursCard regionId={region.id} t={t} />
+      </section>
 
       {links.length === 0 ? (
         <section className="px-4 md:px-10 pt-5 pb-8">

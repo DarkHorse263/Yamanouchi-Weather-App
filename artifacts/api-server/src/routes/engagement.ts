@@ -36,7 +36,7 @@ const KINDS = new Set(["view", "pwa_install", "pwa_launch", "partner_shown", "pa
 // engagement_event_daily cardinality can't explode from garbage bodies.
 const PARTNERS = new Set([
   "booking_com", "agoda", "expedia", "hotels_com", "trip_com", "airbnb",
-  "jalan", "rakuten", "tripadvisor", "official", "europcar",
+  "jalan", "rakuten", "tripadvisor", "official", "europcar", "gowithguide",
 ]);
 
 // FINITE page-label whitelist · known top-level sections + live region ids.

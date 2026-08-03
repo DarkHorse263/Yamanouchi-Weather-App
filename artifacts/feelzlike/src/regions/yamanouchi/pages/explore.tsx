@@ -4,6 +4,7 @@ import { Card, Badge, LoadingScreen, ErrorScreen } from "../components/ui-elemen
 import { useState } from "react";
 import { MapPin, Ticket, Clock, ExternalLink, Map, Expand, BedDouble, Utensils, Droplets, Snowflake, PawPrint, Trees, Building, Mountain, type LucideIcon } from "lucide-react";
 import { motion } from "framer-motion";
+import { GuideToursCard } from "@/components/GuideToursCard";
 
 type FilterType = "all" | "onsen" | "culture" | "nature" | "activity";
 
@@ -111,6 +112,8 @@ export default function Explore({ embedded = false }: { embedded?: boolean }) {
           )}
         </div>
       </div>
+
+      <GuideToursCard regionId="yamanouchi" t={t} />
 
       {/* Curated Highlights section */}
       {data && data.length > 0 && (
