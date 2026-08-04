@@ -213,6 +213,114 @@ const WEBCAM_DATA: WebcamConfig[] = [
     webcams: [],
   },
 
+  // ─── Roadside cams: remaining Japan regions ──────────────────────────
+  // Same honest-tile pattern as Yamanouchi: the official prefectural / MLIT
+  // road-camera services are interactive maps or index pages without stable
+  // deep-linkable per-camera image URLs, so we surface one tile per region
+  // that opens the official source. URLs curl-verified live Aug 2026.
+  {
+    locationId: "hakuba-valley-roads",
+    locationName: "白馬村への道路 · Roads to the Hakuba Valley",
+    webcamPageUrl: "https://www.pref.nagano.lg.jp/michikanri/infra/doro/joho/hiroba/index.html",
+    webcams: [],
+  },
+  {
+    locationId: "myoko-roads",
+    locationName: "妙高への道路 · Roads to Myoko",
+    webcamPageUrl: "https://www.live-cam.pref.niigata.jp/",
+    webcams: [],
+  },
+  {
+    locationId: "yuzawa-roads",
+    locationName: "湯沢への道路 · Roads to Yuzawa",
+    webcamPageUrl: "https://www.live-cam.pref.niigata.jp/",
+    webcams: [],
+  },
+  {
+    locationId: "niseko-roads",
+    locationName: "ニセコへの道路 · Roads to Niseko",
+    webcamPageUrl: "https://info-road.hdb.hkd.mlit.go.jp/",
+    webcams: [],
+  },
+  {
+    locationId: "rusutsu-kiroro-roads",
+    locationName: "ルスツ・キロロへの道路 · Roads to Rusutsu & Kiroro",
+    webcamPageUrl: "https://info-road.hdb.hkd.mlit.go.jp/",
+    webcams: [],
+  },
+  {
+    locationId: "furano-roads",
+    locationName: "富良野への道路 · Roads to Furano",
+    webcamPageUrl: "https://info-road.hdb.hkd.mlit.go.jp/",
+    webcams: [],
+  },
+  {
+    locationId: "asahikawa-roads",
+    locationName: "旭川エリアの道路 · Roads around Asahikawa",
+    webcamPageUrl: "https://info-road.hdb.hkd.mlit.go.jp/",
+    webcams: [],
+  },
+  {
+    locationId: "sapporo-roads",
+    locationName: "札幌エリアの道路 · Roads around Sapporo",
+    webcamPageUrl: "https://info-road.hdb.hkd.mlit.go.jp/",
+    webcams: [],
+  },
+  {
+    locationId: "tomamu-sahoro-roads",
+    locationName: "トマム・サホロへの道路 · Roads to Tomamu & Sahoro",
+    webcamPageUrl: "https://info-road.hdb.hkd.mlit.go.jp/",
+    webcams: [],
+  },
+  {
+    locationId: "zao-onsen-roads",
+    locationName: "蔵王温泉への道路 · Roads to Zao Onsen",
+    webcamPageUrl: "https://www.thr.mlit.go.jp/yamagata/camera-road/point.html",
+    webcams: [],
+  },
+  {
+    locationId: "appi-shizukuishi-roads",
+    locationName: "安比・雫石への道路 · Roads to Appi & Shizukuishi",
+    webcamPageUrl: "https://www.douro.com/",
+    webcams: [],
+  },
+  {
+    locationId: "hachimantai-roads",
+    locationName: "八幡平への道路 · Roads to Hachimantai",
+    webcamPageUrl: "https://www.douro.com/",
+    webcams: [],
+  },
+  {
+    locationId: "hakkoda-aomori-spring-roads",
+    locationName: "八甲田・青森スプリングへの道路 · Roads to Hakkoda & Aomori Spring",
+    webcamPageUrl: "https://www.thr.mlit.go.jp/aomori/road/joho/index.html",
+    webcams: [],
+  },
+  {
+    locationId: "bandai-roads",
+    locationName: "磐梯・裏磐梯への道路 · Roads to Bandai & Urabandai",
+    webcamPageUrl: "https://www.pref.fukushima.lg.jp/sec/41351a/livecamera.html",
+    webcams: [],
+  },
+  {
+    locationId: "minakami-roads",
+    locationName: "みなかみへの道路 · Roads to Minakami",
+    webcamPageUrl: "https://www.kendobousai-gunma.jp/photo/camera_index.html",
+    webcams: [],
+  },
+  {
+    locationId: "kusatsu-manza-roads",
+    locationName: "草津・万座への道路 · Roads to Kusatsu & Manza",
+    webcamPageUrl: "https://www.kendobousai-gunma.jp/photo/camera_index.html",
+    webcams: [],
+  },
+  {
+    locationId: "daisen-roads",
+    locationName: "大山への道路 · Roads to Daisen",
+    webcamPageUrl: "https://www.pref.tottori.lg.jp/206858.htm",
+    webcams: [],
+  },
+
   // ─── Roadside cams: New Zealand ───────────────────────────────────────
   // Waka Kotahi NZTA's "journeys" site is the official traffic-camera map,
   // but it's an interactive regional map that doesn't expose stable, deep-

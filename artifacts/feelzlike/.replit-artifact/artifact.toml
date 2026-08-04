@@ -763,6 +763,10 @@ from = "/nozawa-onsen/nozawa-onsen-village/eat/"
 to = "/nozawa-onsen/nozawa-onsen-village/eat/index.html"
 
 [[services.production.rewrites]]
+from = "/nozawa-onsen/nozawa-onsen-village/roads/"
+to = "/nozawa-onsen/nozawa-onsen-village/roads/index.html"
+
+[[services.production.rewrites]]
 from = "/nozawa-onsen/nozawa-onsen-village/transport/"
 to = "/nozawa-onsen/nozawa-onsen-village/transport/index.html"
 
@@ -823,6 +827,10 @@ from = "/iiyama/iiyama/eat/"
 to = "/iiyama/iiyama/eat/index.html"
 
 [[services.production.rewrites]]
+from = "/iiyama/iiyama/roads/"
+to = "/iiyama/iiyama/roads/index.html"
+
+[[services.production.rewrites]]
 from = "/iiyama/iiyama/transport/"
 to = "/iiyama/iiyama/transport/index.html"
 
@@ -845,6 +853,10 @@ to = "/iiyama/madarao-kogen/stay/index.html"
 [[services.production.rewrites]]
 from = "/iiyama/madarao-kogen/eat/"
 to = "/iiyama/madarao-kogen/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/madarao-kogen/roads/"
+to = "/iiyama/madarao-kogen/roads/index.html"
 
 [[services.production.rewrites]]
 from = "/iiyama/madarao-kogen/transport/"
@@ -871,6 +883,10 @@ from = "/iiyama/togari-onsen-village/eat/"
 to = "/iiyama/togari-onsen-village/eat/index.html"
 
 [[services.production.rewrites]]
+from = "/iiyama/togari-onsen-village/roads/"
+to = "/iiyama/togari-onsen-village/roads/index.html"
+
+[[services.production.rewrites]]
 from = "/iiyama/togari-onsen-village/transport/"
 to = "/iiyama/togari-onsen-village/transport/index.html"
 
@@ -893,6 +909,10 @@ to = "/iiyama/kijimadaira-village/stay/index.html"
 [[services.production.rewrites]]
 from = "/iiyama/kijimadaira-village/eat/"
 to = "/iiyama/kijimadaira-village/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/kijimadaira-village/roads/"
+to = "/iiyama/kijimadaira-village/roads/index.html"
 
 [[services.production.rewrites]]
 from = "/iiyama/kijimadaira-village/transport/"
@@ -975,6 +995,10 @@ from = "/hakuba-valley/hakuba/eat/"
 to = "/hakuba-valley/hakuba/eat/index.html"
 
 [[services.production.rewrites]]
+from = "/hakuba-valley/hakuba/roads/"
+to = "/hakuba-valley/hakuba/roads/index.html"
+
+[[services.production.rewrites]]
 from = "/hakuba-valley/hakuba/transport/"
 to = "/hakuba-valley/hakuba/transport/index.html"
 
@@ -999,6 +1023,10 @@ from = "/hakuba-valley/otari/eat/"
 to = "/hakuba-valley/otari/eat/index.html"
 
 [[services.production.rewrites]]
+from = "/hakuba-valley/otari/roads/"
+to = "/hakuba-valley/otari/roads/index.html"
+
+[[services.production.rewrites]]
 from = "/hakuba-valley/otari/transport/"
 to = "/hakuba-valley/otari/transport/index.html"
 
@@ -1021,6 +1049,10 @@ to = "/hakuba-valley/omachi/stay/index.html"
 [[services.production.rewrites]]
 from = "/hakuba-valley/omachi/eat/"
 to = "/hakuba-valley/omachi/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/omachi/roads/"
+to = "/hakuba-valley/omachi/roads/index.html"
 
 [[services.production.rewrites]]
 from = "/hakuba-valley/omachi/transport/"
@@ -1087,6 +1119,10 @@ from = "/myoko/akakura/eat/"
 to = "/myoko/akakura/eat/index.html"
 
 [[services.production.rewrites]]
+from = "/myoko/akakura/roads/"
+to = "/myoko/akakura/roads/index.html"
+
+[[services.production.rewrites]]
 from = "/myoko/akakura/transport/"
 to = "/myoko/akakura/transport/index.html"
 
@@ -1109,6 +1145,10 @@ to = "/myoko/ikenotaira-onsen/stay/index.html"
 [[services.production.rewrites]]
 from = "/myoko/ikenotaira-onsen/eat/"
 to = "/myoko/ikenotaira-onsen/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/ikenotaira-onsen/roads/"
+to = "/myoko/ikenotaira-onsen/roads/index.html"
 
 [[services.production.rewrites]]
 from = "/myoko/ikenotaira-onsen/transport/"
@@ -1135,6 +1175,10 @@ from = "/myoko/suginosawa/eat/"
 to = "/myoko/suginosawa/eat/index.html"
 
 [[services.production.rewrites]]
+from = "/myoko/suginosawa/roads/"
+to = "/myoko/suginosawa/roads/index.html"
+
+[[services.production.rewrites]]
 from = "/myoko/suginosawa/transport/"
 to = "/myoko/suginosawa/transport/index.html"
 
@@ -1157,6 +1201,10 @@ to = "/myoko/arai/stay/index.html"
 [[services.production.rewrites]]
 from = "/myoko/arai/eat/"
 to = "/myoko/arai/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/arai/roads/"
+to = "/myoko/arai/roads/index.html"
 
 [[services.production.rewrites]]
 from = "/myoko/arai/transport/"
@@ -1219,6 +1267,10 @@ from = "/niseko/hirafu/eat/"
 to = "/niseko/hirafu/eat/index.html"
 
 [[services.production.rewrites]]
+from = "/niseko/hirafu/roads/"
+to = "/niseko/hirafu/roads/index.html"
+
+[[services.production.rewrites]]
 from = "/niseko/hirafu/transport/"
 to = "/niseko/hirafu/transport/index.html"
 
@@ -1243,6 +1295,10 @@ from = "/niseko/kutchan/eat/"
 to = "/niseko/kutchan/eat/index.html"
 
 [[services.production.rewrites]]
+from = "/niseko/kutchan/roads/"
+to = "/niseko/kutchan/roads/index.html"
+
+[[services.production.rewrites]]
 from = "/niseko/kutchan/transport/"
 to = "/niseko/kutchan/transport/index.html"
 
@@ -1265,6 +1321,10 @@ to = "/niseko/niseko-town/stay/index.html"
 [[services.production.rewrites]]
 from = "/niseko/niseko-town/eat/"
 to = "/niseko/niseko-town/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/niseko-town/roads/"
+to = "/niseko/niseko-town/roads/index.html"
 
 [[services.production.rewrites]]
 from = "/niseko/niseko-town/transport/"
@@ -1319,6 +1379,10 @@ from = "/furano/furano/eat/"
 to = "/furano/furano/eat/index.html"
 
 [[services.production.rewrites]]
+from = "/furano/furano/roads/"
+to = "/furano/furano/roads/index.html"
+
+[[services.production.rewrites]]
 from = "/furano/furano/transport/"
 to = "/furano/furano/transport/index.html"
 
@@ -1341,6 +1405,10 @@ to = "/furano/kitanomine/stay/index.html"
 [[services.production.rewrites]]
 from = "/furano/kitanomine/eat/"
 to = "/furano/kitanomine/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/furano/kitanomine/roads/"
+to = "/furano/kitanomine/roads/index.html"
 
 [[services.production.rewrites]]
 from = "/furano/kitanomine/transport/"
@@ -1395,6 +1463,10 @@ from = "/sapporo/sapporo/eat/"
 to = "/sapporo/sapporo/eat/index.html"
 
 [[services.production.rewrites]]
+from = "/sapporo/sapporo/roads/"
+to = "/sapporo/sapporo/roads/index.html"
+
+[[services.production.rewrites]]
 from = "/sapporo/sapporo/transport/"
 to = "/sapporo/sapporo/transport/index.html"
 
@@ -1417,6 +1489,10 @@ to = "/sapporo/jozankei/stay/index.html"
 [[services.production.rewrites]]
 from = "/sapporo/jozankei/eat/"
 to = "/sapporo/jozankei/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/sapporo/jozankei/roads/"
+to = "/sapporo/jozankei/roads/index.html"
 
 [[services.production.rewrites]]
 from = "/sapporo/jozankei/transport/"
@@ -1467,6 +1543,10 @@ from = "/tomamu-sahoro/tomamu-village/eat/"
 to = "/tomamu-sahoro/tomamu-village/eat/index.html"
 
 [[services.production.rewrites]]
+from = "/tomamu-sahoro/tomamu-village/roads/"
+to = "/tomamu-sahoro/tomamu-village/roads/index.html"
+
+[[services.production.rewrites]]
 from = "/tomamu-sahoro/tomamu-village/transport/"
 to = "/tomamu-sahoro/tomamu-village/transport/index.html"
 
@@ -1489,6 +1569,10 @@ to = "/tomamu-sahoro/shimukappu/stay/index.html"
 [[services.production.rewrites]]
 from = "/tomamu-sahoro/shimukappu/eat/"
 to = "/tomamu-sahoro/shimukappu/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/tomamu-sahoro/shimukappu/roads/"
+to = "/tomamu-sahoro/shimukappu/roads/index.html"
 
 [[services.production.rewrites]]
 from = "/tomamu-sahoro/shimukappu/transport/"
@@ -1539,6 +1623,10 @@ from = "/asahikawa/asahikawa/eat/"
 to = "/asahikawa/asahikawa/eat/index.html"
 
 [[services.production.rewrites]]
+from = "/asahikawa/asahikawa/roads/"
+to = "/asahikawa/asahikawa/roads/index.html"
+
+[[services.production.rewrites]]
 from = "/asahikawa/asahikawa/transport/"
 to = "/asahikawa/asahikawa/transport/index.html"
 
@@ -1561,6 +1649,10 @@ to = "/asahikawa/higashikawa/stay/index.html"
 [[services.production.rewrites]]
 from = "/asahikawa/higashikawa/eat/"
 to = "/asahikawa/higashikawa/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/asahikawa/higashikawa/roads/"
+to = "/asahikawa/higashikawa/roads/index.html"
 
 [[services.production.rewrites]]
 from = "/asahikawa/higashikawa/transport/"
@@ -1611,6 +1703,10 @@ from = "/rusutsu-kiroro/rusutsu/eat/"
 to = "/rusutsu-kiroro/rusutsu/eat/index.html"
 
 [[services.production.rewrites]]
+from = "/rusutsu-kiroro/rusutsu/roads/"
+to = "/rusutsu-kiroro/rusutsu/roads/index.html"
+
+[[services.production.rewrites]]
 from = "/rusutsu-kiroro/rusutsu/transport/"
 to = "/rusutsu-kiroro/rusutsu/transport/index.html"
 
@@ -1633,6 +1729,10 @@ to = "/rusutsu-kiroro/kiroro/stay/index.html"
 [[services.production.rewrites]]
 from = "/rusutsu-kiroro/kiroro/eat/"
 to = "/rusutsu-kiroro/kiroro/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/rusutsu-kiroro/kiroro/roads/"
+to = "/rusutsu-kiroro/kiroro/roads/index.html"
 
 [[services.production.rewrites]]
 from = "/rusutsu-kiroro/kiroro/transport/"
@@ -1687,6 +1787,10 @@ from = "/minakami/minakami/eat/"
 to = "/minakami/minakami/eat/index.html"
 
 [[services.production.rewrites]]
+from = "/minakami/minakami/roads/"
+to = "/minakami/minakami/roads/index.html"
+
+[[services.production.rewrites]]
 from = "/minakami/minakami/transport/"
 to = "/minakami/minakami/transport/index.html"
 
@@ -1735,6 +1839,10 @@ from = "/kusatsu-manza/kusatsu-onsen/eat/"
 to = "/kusatsu-manza/kusatsu-onsen/eat/index.html"
 
 [[services.production.rewrites]]
+from = "/kusatsu-manza/kusatsu-onsen/roads/"
+to = "/kusatsu-manza/kusatsu-onsen/roads/index.html"
+
+[[services.production.rewrites]]
 from = "/kusatsu-manza/kusatsu-onsen/transport/"
 to = "/kusatsu-manza/kusatsu-onsen/transport/index.html"
 
@@ -1757,6 +1865,10 @@ to = "/kusatsu-manza/manza-onsen/stay/index.html"
 [[services.production.rewrites]]
 from = "/kusatsu-manza/manza-onsen/eat/"
 to = "/kusatsu-manza/manza-onsen/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/kusatsu-manza/manza-onsen/roads/"
+to = "/kusatsu-manza/manza-onsen/roads/index.html"
 
 [[services.production.rewrites]]
 from = "/kusatsu-manza/manza-onsen/transport/"
@@ -1805,6 +1917,10 @@ to = "/hachimantai/hachimantai/stay/index.html"
 [[services.production.rewrites]]
 from = "/hachimantai/hachimantai/eat/"
 to = "/hachimantai/hachimantai/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/hachimantai/hachimantai/roads/"
+to = "/hachimantai/hachimantai/roads/index.html"
 
 [[services.production.rewrites]]
 from = "/hachimantai/hachimantai/transport/"
@@ -1871,6 +1987,10 @@ from = "/yuzawa/echigo-yuzawa/eat/"
 to = "/yuzawa/echigo-yuzawa/eat/index.html"
 
 [[services.production.rewrites]]
+from = "/yuzawa/echigo-yuzawa/roads/"
+to = "/yuzawa/echigo-yuzawa/roads/index.html"
+
+[[services.production.rewrites]]
 from = "/yuzawa/echigo-yuzawa/transport/"
 to = "/yuzawa/echigo-yuzawa/transport/index.html"
 
@@ -1895,6 +2015,10 @@ from = "/yuzawa/ishiuchi/eat/"
 to = "/yuzawa/ishiuchi/eat/index.html"
 
 [[services.production.rewrites]]
+from = "/yuzawa/ishiuchi/roads/"
+to = "/yuzawa/ishiuchi/roads/index.html"
+
+[[services.production.rewrites]]
 from = "/yuzawa/ishiuchi/transport/"
 to = "/yuzawa/ishiuchi/transport/index.html"
 
@@ -1917,6 +2041,10 @@ to = "/yuzawa/mitsumata/stay/index.html"
 [[services.production.rewrites]]
 from = "/yuzawa/mitsumata/eat/"
 to = "/yuzawa/mitsumata/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/mitsumata/roads/"
+to = "/yuzawa/mitsumata/roads/index.html"
 
 [[services.production.rewrites]]
 from = "/yuzawa/mitsumata/transport/"
@@ -1961,6 +2089,10 @@ to = "/zao-onsen/zao-onsen/stay/index.html"
 [[services.production.rewrites]]
 from = "/zao-onsen/zao-onsen/eat/"
 to = "/zao-onsen/zao-onsen/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/zao-onsen/zao-onsen/roads/"
+to = "/zao-onsen/zao-onsen/roads/index.html"
 
 [[services.production.rewrites]]
 from = "/zao-onsen/zao-onsen/transport/"
@@ -2011,6 +2143,10 @@ from = "/hakkoda-aomori-spring/aomori/eat/"
 to = "/hakkoda-aomori-spring/aomori/eat/index.html"
 
 [[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/aomori/roads/"
+to = "/hakkoda-aomori-spring/aomori/roads/index.html"
+
+[[services.production.rewrites]]
 from = "/hakkoda-aomori-spring/aomori/transport/"
 to = "/hakkoda-aomori-spring/aomori/transport/index.html"
 
@@ -2035,6 +2171,10 @@ from = "/hakkoda-aomori-spring/sukayu-onsen/eat/"
 to = "/hakkoda-aomori-spring/sukayu-onsen/eat/index.html"
 
 [[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/sukayu-onsen/roads/"
+to = "/hakkoda-aomori-spring/sukayu-onsen/roads/index.html"
+
+[[services.production.rewrites]]
 from = "/hakkoda-aomori-spring/sukayu-onsen/transport/"
 to = "/hakkoda-aomori-spring/sukayu-onsen/transport/index.html"
 
@@ -2057,6 +2197,10 @@ to = "/hakkoda-aomori-spring/ajigasawa/stay/index.html"
 [[services.production.rewrites]]
 from = "/hakkoda-aomori-spring/ajigasawa/eat/"
 to = "/hakkoda-aomori-spring/ajigasawa/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/ajigasawa/roads/"
+to = "/hakkoda-aomori-spring/ajigasawa/roads/index.html"
 
 [[services.production.rewrites]]
 from = "/hakkoda-aomori-spring/ajigasawa/transport/"
@@ -2107,6 +2251,10 @@ from = "/appi-shizukuishi/appi-kogen/eat/"
 to = "/appi-shizukuishi/appi-kogen/eat/index.html"
 
 [[services.production.rewrites]]
+from = "/appi-shizukuishi/appi-kogen/roads/"
+to = "/appi-shizukuishi/appi-kogen/roads/index.html"
+
+[[services.production.rewrites]]
 from = "/appi-shizukuishi/appi-kogen/transport/"
 to = "/appi-shizukuishi/appi-kogen/transport/index.html"
 
@@ -2131,6 +2279,10 @@ from = "/appi-shizukuishi/shizukuishi/eat/"
 to = "/appi-shizukuishi/shizukuishi/eat/index.html"
 
 [[services.production.rewrites]]
+from = "/appi-shizukuishi/shizukuishi/roads/"
+to = "/appi-shizukuishi/shizukuishi/roads/index.html"
+
+[[services.production.rewrites]]
 from = "/appi-shizukuishi/shizukuishi/transport/"
 to = "/appi-shizukuishi/shizukuishi/transport/index.html"
 
@@ -2153,6 +2305,10 @@ to = "/appi-shizukuishi/morioka/stay/index.html"
 [[services.production.rewrites]]
 from = "/appi-shizukuishi/morioka/eat/"
 to = "/appi-shizukuishi/morioka/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/appi-shizukuishi/morioka/roads/"
+to = "/appi-shizukuishi/morioka/roads/index.html"
 
 [[services.production.rewrites]]
 from = "/appi-shizukuishi/morioka/transport/"
@@ -2203,6 +2359,10 @@ from = "/bandai/inawashiro/eat/"
 to = "/bandai/inawashiro/eat/index.html"
 
 [[services.production.rewrites]]
+from = "/bandai/inawashiro/roads/"
+to = "/bandai/inawashiro/roads/index.html"
+
+[[services.production.rewrites]]
 from = "/bandai/inawashiro/transport/"
 to = "/bandai/inawashiro/transport/index.html"
 
@@ -2225,6 +2385,10 @@ to = "/bandai/urabandai/stay/index.html"
 [[services.production.rewrites]]
 from = "/bandai/urabandai/eat/"
 to = "/bandai/urabandai/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/urabandai/roads/"
+to = "/bandai/urabandai/roads/index.html"
 
 [[services.production.rewrites]]
 from = "/bandai/urabandai/transport/"
@@ -2271,6 +2435,10 @@ from = "/daisen/daisenji/eat/"
 to = "/daisen/daisenji/eat/index.html"
 
 [[services.production.rewrites]]
+from = "/daisen/daisenji/roads/"
+to = "/daisen/daisenji/roads/index.html"
+
+[[services.production.rewrites]]
 from = "/daisen/daisenji/transport/"
 to = "/daisen/daisenji/transport/index.html"
 
@@ -2293,6 +2461,10 @@ to = "/daisen/yonago/stay/index.html"
 [[services.production.rewrites]]
 from = "/daisen/yonago/eat/"
 to = "/daisen/yonago/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/daisen/yonago/roads/"
+to = "/daisen/yonago/roads/index.html"
 
 [[services.production.rewrites]]
 from = "/daisen/yonago/transport/"

@@ -75,7 +75,10 @@ export const tomamuSahoroRegion: RegionConfig = {
       radiusM: 2000,
       blurb: "Resort village at the base of Mt Tomamu · hotel towers, the Ice Village and JR Tomamu Station",
       blurbJa: "トマム山の麓のリゾート村 · ホテルタワー、アイスヴィレッジ、JRトマム駅",
-      nearbyMountainIds: ["tomamu-resort"],
+      // Sahoro included: it's the paired resort in this region, a day-trip
+      // over Karikachi Pass on Route 38 - so its chain-status card (and
+      // conditions) must surface on both towns' pages.
+      nearbyMountainIds: ["tomamu-resort", "sahoro"],
     },
     {
       id: "shimukappu",
@@ -89,7 +92,7 @@ export const tomamuSahoroRegion: RegionConfig = {
       radiusM: 2500,
       blurb: "Small village 20 min west of Tomamu · quiet local beds and JR Shimukappu Station on the same line",
       blurbJa: "トマムから西へ20分の小さな村 · 静かな宿とJR占冠駅",
-      nearbyMountainIds: ["tomamu-resort"],
+      nearbyMountainIds: ["tomamu-resort", "sahoro"],
     },
   ],
   footer: "v0.3 · feelzlike",

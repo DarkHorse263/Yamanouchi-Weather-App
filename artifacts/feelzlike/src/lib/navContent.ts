@@ -39,7 +39,30 @@ import type { RegionConfig } from "@workspace/feelzlike-shell";
 const REGIONS_WITH_ROADS_CONTENT: ReadonlySet<string> = new Set([
   "snowy-mountains",
   "victorias-high-country",
+  // Japan · every region ships seasonal chain rules (per-approach, from
+  // each prefecture's published winter rules) + an official prefectural /
+  // MLIT road-camera tile. No live per-road feed yet (JARTIC has no free
+  // public API) · the page is honest about that.
   "yamanouchi",
+  "nozawa-onsen",
+  "iiyama",
+  "hakuba-valley",
+  "myoko",
+  "yuzawa",
+  "niseko",
+  "rusutsu-kiroro",
+  "furano",
+  "asahikawa",
+  "sapporo",
+  "tomamu-sahoro",
+  "zao-onsen",
+  "appi-shizukuishi",
+  "hachimantai",
+  "hakkoda-aomori-spring",
+  "bandai",
+  "minakami",
+  "kusatsu-manza",
+  "daisen",
   "queenstown",
   "wanaka",
   "mt-hutt",

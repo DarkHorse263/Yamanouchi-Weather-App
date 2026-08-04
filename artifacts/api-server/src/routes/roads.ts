@@ -542,6 +542,394 @@ function caChainEntry(opts: {
   };
 }
 
+// Per-prefecture official road-information sources for the JP table below.
+// Every URL curl-verified live Aug 2026 · prefer prefectural / MLIT services
+// over resort pages so the link outlives any one operator.
+const JP_SRC = {
+  hokkaido: {
+    tyreRule: "Winter tyres are essential across Hokkaido from Nov to Apr; carry chains for 2WD and fit them when snow is settling or where directed.",
+    sourceLabel: "Hokkaido Development Bureau · road information (seasonal rule)",
+    sourceUrl: "https://info-road.hdb.hkd.mlit.go.jp/",
+  },
+  nagano: {
+    tyreRule: "Winter tyres mandatory in Nagano; chains required for 2WD vehicles when snow is on the road.",
+    sourceLabel: "Nagano Prefecture road bureau · winter rules (seasonal rule)",
+    sourceUrl: "https://www.pref.nagano.lg.jp/michikanri/infra/doro/joho/hiroba/index.html",
+  },
+  niigata: {
+    tyreRule: "Winter tyres mandatory in Niigata's snow country; chains required for 2WD vehicles when snow is on the road.",
+    sourceLabel: "Niigata Prefecture · road live cameras (seasonal rule)",
+    sourceUrl: "https://www.live-cam.pref.niigata.jp/",
+  },
+  yamagata: {
+    tyreRule: "Winter tyres mandatory in Yamagata; chains required for 2WD vehicles when snow is on the road.",
+    sourceLabel: "MLIT Yamagata road office · road cameras (seasonal rule)",
+    sourceUrl: "https://www.thr.mlit.go.jp/yamagata/camera-road/point.html",
+  },
+  iwate: {
+    tyreRule: "Winter tyres mandatory in Iwate; chains required for 2WD vehicles when snow is on the road.",
+    sourceLabel: "Iwate road information service (seasonal rule)",
+    sourceUrl: "https://www.douro.com/",
+  },
+  aomori: {
+    tyreRule: "Winter tyres mandatory in Aomori; chains required for 2WD vehicles when snow is on the road.",
+    sourceLabel: "MLIT Aomori road office · road information (seasonal rule)",
+    sourceUrl: "https://www.thr.mlit.go.jp/aomori/road/joho/index.html",
+  },
+  fukushima: {
+    tyreRule: "Winter tyres mandatory in Fukushima's Urabandai highlands; chains required for 2WD vehicles when snow is on the road.",
+    sourceLabel: "Fukushima Prefecture · Inawashiro road cameras (seasonal rule)",
+    sourceUrl: "https://www.pref.fukushima.lg.jp/sec/41351a/livecamera.html",
+  },
+  gunma: {
+    tyreRule: "Winter tyres mandatory in the Gunma mountains; chains required for 2WD vehicles when snow is on the road.",
+    sourceLabel: "Gunma Prefecture · road camera map (seasonal rule)",
+    sourceUrl: "https://www.kendobousai-gunma.jp/photo/camera_index.html",
+  },
+  tottori: {
+    tyreRule: "Winter tyres are essential on the Daisen climb; chains required for 2WD vehicles when snow is on the road.",
+    sourceLabel: "Tottori Prefecture · snow-road navi (seasonal rule)",
+    sourceUrl: "https://www.pref.tottori.lg.jp/206858.htm",
+  },
+} as const;
+
+type JpChainEntry = {
+  id: string;
+  mountainId: string;
+  mountainName: string;
+  approach: string;
+  detail: string;
+};
+
+const JP_CHAIN_RULES: Record<
+  string,
+  { tyreRule: string; sourceLabel: string; sourceUrl: string; entries: JpChainEntry[] }
+> = {
+  "hakuba-valley": {
+    ...JP_SRC.nagano,
+    entries: [
+      {
+        id: "hakuba-route-148-village",
+        mountainId: "happo-one",
+        mountainName: "Hakuba Happo-One",
+        approach: "Route 148 into Hakuba village, then resort roads to Happo, Goryu, 47 and Iwatake",
+        detail: "The valley floor is regularly ploughed but the last climbs to each base area ice over after storms.",
+      },
+      {
+        id: "hakuba-route-148-north",
+        mountainId: "tsugaike-kogen",
+        mountainName: "Tsugaike Kogen + Cortina",
+        approach: "Route 148 north through Otari (Tsugaike, Norikura, Cortina)",
+        detail: "The Otari stretch is one of Nagano's snowiest roads · expect compacted snow for weeks at a time.",
+      },
+      {
+        id: "hakuba-omachi-south",
+        mountainId: "kashimayari",
+        mountainName: "Kashimayari + Jiigatake",
+        approach: "Route 148 south from Omachi (Kashimayari, Jiigatake)",
+        detail: "Gentler than the northern valley but the resort access roads still need chains on 2WD after fresh snow.",
+      },
+    ],
+  },
+  myoko: {
+    ...JP_SRC.niigata,
+    entries: [
+      {
+        id: "myoko-akakura-approach",
+        mountainId: "akakura-onsen",
+        mountainName: "Akakura (Onsen + Kanko)",
+        approach: "Route 18 to Myoko-Kogen, then the climb into Akakura",
+        detail: "Myoko is one of the snowiest inhabited places on earth · the village streets themselves stay white all winter.",
+      },
+      {
+        id: "myoko-suginohara-route-39",
+        mountainId: "myoko-suginohara",
+        mountainName: "Myoko Suginohara",
+        approach: "Route 39 up from Route 18 to the Suginohara base",
+        detail: "A long steady climb that ices early in the evening · Ikenotaira is reached off the same road.",
+      },
+      {
+        id: "myoko-lotte-arai-access",
+        mountainId: "lotte-arai",
+        mountainName: "Lotte Arai Resort",
+        approach: "Arai access road from the Shin-Ide interchange (Route 18 side)",
+        detail: "Short but exposed final climb to the resort · shuttle buses run from Joetsumyoko station if you'd rather not drive it.",
+      },
+    ],
+  },
+  niseko: {
+    ...JP_SRC.hokkaido,
+    entries: [
+      {
+        id: "niseko-hirafu-route-343",
+        mountainId: "grand-hirafu",
+        mountainName: "Grand Hirafu + Hanazono",
+        approach: "Route 5 from Kutchan, then Route 343 into Hirafu",
+        detail: "Heavy traffic polishes the Hirafu-zaka climb to ice on storm days · the village loop is steep and one-way in places.",
+      },
+      {
+        id: "niseko-annupuri-route-66",
+        mountainId: "annupuri",
+        mountainName: "Annupuri + Niseko Village + Moiwa",
+        approach: "Route 66 from Niseko town (Annupuri, Village, Moiwa)",
+        detail: "Route 66 beyond Annupuri toward Panorama Line is gated shut for the winter · the resort stretch stays open and ploughed.",
+      },
+    ],
+  },
+  "rusutsu-kiroro": {
+    ...JP_SRC.hokkaido,
+    entries: [
+      {
+        id: "rusutsu-route-230",
+        mountainId: "rusutsu-resort",
+        mountainName: "Rusutsu Resort",
+        approach: "Route 230 over Nakayama Pass from Sapporo",
+        detail: "Nakayama Pass is a serious winter pass · whiteouts and compacted snow are routine, allow extra time.",
+      },
+      {
+        id: "kiroro-route-393",
+        mountainId: "kiroro-resort",
+        mountainName: "Kiroro",
+        approach: "Route 393 from Yoichi / Akaigawa",
+        detail: "Route 393 is among the snowiest numbered routes in Japan · it closes temporarily during the biggest storms.",
+      },
+    ],
+  },
+  furano: {
+    ...JP_SRC.hokkaido,
+    entries: [
+      {
+        id: "furano-route-38",
+        mountainId: "furano-ski-resort",
+        mountainName: "Furano Ski Resort",
+        approach: "Route 38 / 237 into Furano town, then the Kitanomine and Furano zone access roads",
+        detail: "The town roads are well maintained · black ice on the bridge sections is the main hazard.",
+      },
+      {
+        id: "furano-kamui-route-12",
+        mountainId: "kamui-ski-links",
+        mountainName: "Kamui Ski Links",
+        approach: "Route 12 west of Asahikawa, then the Kamui access road",
+        detail: "A short exposed climb off the highway · icy where it leaves the ploughed main road.",
+      },
+    ],
+  },
+  asahikawa: {
+    ...JP_SRC.hokkaido,
+    entries: [
+      {
+        id: "asahikawa-kamui-route-12",
+        mountainId: "kamui",
+        mountainName: "Kamui Ski Links",
+        approach: "Route 12 west from Asahikawa, then the Kamui access road",
+        detail: "A short exposed climb off the highway · icy where it leaves the ploughed main road.",
+      },
+      {
+        id: "asahidake-road-1160",
+        mountainId: "asahidake",
+        mountainName: "Asahidake",
+        approach: "Prefectural Road 1160 from Higashikawa up to Asahidake Onsen",
+        detail: "A long forest climb to 1,100 m that is snow-covered all winter · the ropeway base is above the ploughing priority line, so 2WD needs chains after any fresh snow.",
+      },
+    ],
+  },
+  sapporo: {
+    ...JP_SRC.hokkaido,
+    entries: [
+      {
+        id: "sapporo-teine-access",
+        mountainId: "sapporo-teine",
+        mountainName: "Sapporo Teine",
+        approach: "Teine access road from Route 5 / the Teine urban exits",
+        detail: "A steep suburban climb that ices hard on clear nights · the Olympia zone hairpins are the tightest section.",
+      },
+      {
+        id: "sapporo-kokusai-route-230",
+        mountainId: "sapporo-kokusai",
+        mountainName: "Sapporo Kokusai",
+        approach: "Route 230 through Jozankei, then the Kokusai access road",
+        detail: "One of the snowiest corridors near the city · the final climb regularly needs chains on 2WD.",
+      },
+    ],
+  },
+  "tomamu-sahoro": {
+    ...JP_SRC.hokkaido,
+    entries: [
+      {
+        id: "tomamu-ic-access",
+        mountainId: "tomamu-resort",
+        mountainName: "Hoshino Resorts Tomamu",
+        approach: "Doto Expressway to Tomamu IC, then the resort access road",
+        detail: "The expressway sections close temporarily in ground blizzards · check before setting out on storm days.",
+      },
+      {
+        id: "sahoro-karikachi-route-38",
+        mountainId: "sahoro",
+        mountainName: "Sahoro Resort",
+        approach: "Route 38 over Karikachi Pass",
+        detail: "Karikachi Pass is notorious for drifting snow and whiteouts · one of Hokkaido's most weather-affected passes.",
+      },
+    ],
+  },
+  "zao-onsen": {
+    ...JP_SRC.yamagata,
+    entries: [
+      {
+        id: "zao-route-21",
+        mountainId: "zao-onsen-resort",
+        mountainName: "Zao Onsen Ski Resort",
+        approach: "Prefectural Road 21 (Zao Line) from Yamagata city up to Zao Onsen",
+        detail: "A steady 800 m climb that is snow-packed for most of the winter. The Zao Echo Line over the range is closed Nov-Apr · Zao Onsen is reached from the Yamagata side only.",
+      },
+    ],
+  },
+  "appi-shizukuishi": {
+    ...JP_SRC.iwate,
+    entries: [
+      {
+        id: "appi-route-282",
+        mountainId: "appi",
+        mountainName: "Appi Kogen",
+        approach: "Route 282 from Morioka / Nishine, then the Appi Kogen access road",
+        detail: "The access road climbs steadily to the resort village · well ploughed but icy on shaded bends.",
+      },
+      {
+        id: "shizukuishi-route-46",
+        mountainId: "shizukuishi-resort",
+        mountainName: "Shizukuishi",
+        approach: "Route 46 from Morioka toward Shizukuishi, then the resort road",
+        detail: "A gentler approach than Appi's · the final resort climb still needs chains on 2WD after fresh snow.",
+      },
+    ],
+  },
+  hachimantai: {
+    ...JP_SRC.iwate,
+    entries: [
+      {
+        id: "hachimantai-panorama-access",
+        mountainId: "hachimantai-panorama",
+        mountainName: "Hachimantai Panorama + Shimokura",
+        approach: "Route 282 from Matsuo, then the resort access roads",
+        detail: "The Hachimantai Aspite Line over the plateau is closed Nov-Apr · both ski areas are reached from the Matsuo side below the gate.",
+      },
+    ],
+  },
+  "hakkoda-aomori-spring": {
+    ...JP_SRC.aomori,
+    entries: [
+      {
+        id: "hakkoda-route-103",
+        mountainId: "hakkoda",
+        mountainName: "Hakkoda",
+        approach: "Route 103 from Aomori city up to Sukayu Onsen and the ropeway",
+        detail: "One of the snowiest public roads in Japan · the snow corridor walls top 8 m by March. Ploughed daily but frequently down to one lane; the section beyond Sukayu toward Towada closes for the winter.",
+      },
+      {
+        id: "aomori-spring-ajigasawa",
+        mountainId: "aomori-spring",
+        mountainName: "Aomori Spring",
+        approach: "Route 101 to Ajigasawa, then the resort road up the Iwaki flank",
+        detail: "A coastal approach with drifting snow in strong westerlies · the final climb ices after storms.",
+      },
+    ],
+  },
+  bandai: {
+    ...JP_SRC.fukushima,
+    entries: [
+      {
+        id: "nekoma-route-459",
+        mountainId: "nekoma-mountain",
+        mountainName: "Nekoma Mountain",
+        approach: "Route 459 from Inawashiro into Urabandai, then the Nekoma access roads",
+        detail: "The Bandai-Azuma Gold Line and Lake Line scenic roads are closed Nov-Apr · Urabandai is reached via Route 459 only. The south (Alts) side is accessed separately from Bandaimachi.",
+      },
+      {
+        id: "grandeco-access",
+        mountainId: "grandeco",
+        mountainName: "Grandeco",
+        approach: "Route 459 to the Grandeco turnoff, then the resort access road",
+        detail: "The last climb to the hotel and gondola base is a designated chain-check section after heavy snow.",
+      },
+    ],
+  },
+  minakami: {
+    ...JP_SRC.gunma,
+    entries: [
+      {
+        id: "tenjindaira-route-291",
+        mountainId: "tenjindaira",
+        mountainName: "Tanigawadake Tenjindaira",
+        approach: "Route 291 from Minakami to the Tanigawadake Ropeway",
+        detail: "Route 291 beyond the ropeway station toward the pass is permanently closed · the drive ends at the ropeway car park, which sits in a heavy-snow pocket.",
+      },
+      {
+        id: "minakami-kogen-access",
+        mountainId: "minakami-kogen",
+        mountainName: "Minakami Kogen",
+        approach: "Resort road off Route 291 above Minakami town",
+        detail: "A steady resort climb · icy on the shaded hairpins, chains needed on 2WD after fresh snow.",
+      },
+    ],
+  },
+  yuzawa: {
+    ...JP_SRC.niigata,
+    entries: [
+      {
+        id: "yuzawa-town-resorts",
+        mountainId: "gala-yuzawa",
+        mountainName: "GALA, Yuzawa Kogen, Ishiuchi, Iwappara",
+        approach: "Route 17 around Yuzawa town",
+        detail: "The town-side resorts sit right off the ploughed highway · most visitors don't need to drive at all, GALA and Yuzawa Kogen are walkable from Echigo-Yuzawa station.",
+      },
+      {
+        id: "kagura-mitsumata-route-17",
+        mountainId: "kagura",
+        mountainName: "Kagura",
+        approach: "Route 17 south to the Mitsumata and Tashiro ropeway bases",
+        detail: "The Mitsumata stretch of Route 17 runs through one of Honshu's heaviest snowfall belts · expect compacted snow for the whole season.",
+      },
+      {
+        id: "naeba-mikuni-route-17",
+        mountainId: "naeba",
+        mountainName: "Naeba",
+        approach: "Route 17 over the Mikuni Pass approach to Naeba",
+        detail: "The climb past Futai toward Naeba is the icy crux · chains checks operate on peak weekends.",
+      },
+    ],
+  },
+  "kusatsu-manza": {
+    ...JP_SRC.gunma,
+    entries: [
+      {
+        id: "kusatsu-route-292-lower",
+        mountainId: "kusatsu-onsen-resort",
+        mountainName: "Kusatsu Onsen Ski Resort",
+        approach: "Route 292 from Naganohara up to Kusatsu Onsen",
+        detail: "The Shiga-Kusatsu route (Route 292) above Kusatsu is closed Nov-Apr · Kusatsu is a dead-end town in winter, approached from the Naganohara side only.",
+      },
+      {
+        id: "manza-highway",
+        mountainId: "manza-onsen-resort",
+        mountainName: "Manza Onsen Ski Resort",
+        approach: "Manza Highway (toll road) from Manza-Kazawaguchi",
+        detail: "The toll road is the only winter access · Route 292 above Manza is gated shut. At 1,800 m the car park is among the highest you can drive to in Japan; chains on 2WD are frequently mandatory.",
+      },
+    ],
+  },
+  daisen: {
+    ...JP_SRC.tottori,
+    entries: [
+      {
+        id: "daisen-temple-road",
+        mountainId: "daisen-white-resort",
+        mountainName: "Daisen White Resort",
+        approach: "Prefectural roads from Yonago / Daisen IC up to the Daisen-ji temple village",
+        detail: "A 700 m climb from the coastal plain into maritime snowfall · the top section ices quickly when squalls roll in off the Sea of Japan.",
+      },
+    ],
+  },
+};
+
 function buildChainStatuses(regionId: string | undefined): Array<Record<string, unknown>> {
   const now = new Date();
   const issuedAt = now.toISOString();
@@ -777,6 +1165,38 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
         dataSource: "pending",
       },
     ];
+  }
+
+  // ── Japan · remaining regions (data-driven) ─────────────────────────
+  // Seasonal chain-fitting rules for every JP region beyond the three
+  // Nagano pioneers above. Same honesty model: these are the published
+  // winter rules of each prefecture's road authority, not a live feed
+  // (`dataSource: "seasonal-rule"`), and the source links point at the
+  // official prefectural / MLIT road-information services verified live
+  // in Aug 2026. Winter closures that change the driving story (Shiga-
+  // Kusatsu Route 292, Bandai-Azuma Gold Line, Hachimantai Aspite Line,
+  // Zao Echo Line) are called out in the notes so nobody plans a route
+  // over a gate that is locked from Nov to Apr.
+  const jpRegion = JP_CHAIN_RULES[regionId ?? ""];
+  if (jpRegion) {
+    const inSeason = isJpSnowSeason(now);
+    return jpRegion.entries.map((e) => ({
+      id: e.id,
+      regionId,
+      mountainId: e.mountainId,
+      mountainName: e.mountainName,
+      approach: e.approach,
+      status: "open",
+      chains2wd: (inSeason ? "must-fit" : "not-required") satisfies ChainReq,
+      chainsAwd: (inSeason ? "must-carry" : "not-required") satisfies ChainReq,
+      note: inSeason
+        ? `${jpRegion.tyreRule} ${e.detail}`
+        : "Outside snow season · no chain requirement.",
+      issuedAt,
+      sourceLabel: jpRegion.sourceLabel,
+      sourceUrl: jpRegion.sourceUrl,
+      dataSource: "seasonal-rule",
+    }));
   }
 
   if (regionId === "queenstown") {
