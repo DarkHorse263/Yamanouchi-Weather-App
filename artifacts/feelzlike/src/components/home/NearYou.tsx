@@ -13,6 +13,7 @@ import {
   Globe2,
   LocateFixed,
   MapPin,
+  Mountain,
   Moon,
   Sun,
   type LucideIcon,
@@ -375,6 +376,11 @@ export function NearYou() {
   // branch instead, because on iOS the blocked state is often a stale read.
   const showTap = phase === "prompt" || phase === "unavailable";
   const standalone = isStandaloneMode();
+  // The mountain hero leads while we have no local conditions to show. It
+  // hides during the brief checking/locating/loading window (skeleton) and
+  // once the visitor's own card is live, when the region reverts to the
+  // compact row below.
+  const heroHidden = skeleton || phase === "ready";
 
   const todayRange: string[] = [];
   if (local?.todayMaxC != null) todayRange.push(`high ${local.todayMaxC}\u00b0`);
@@ -394,6 +400,54 @@ export function NearYou() {
         transition={{ duration: 0.45 }}
         className={PANEL}
       >
+        {/* MOUNTAIN HERO · instant value before any permission ask. When we
+            don't (yet) have the visitor's own conditions, lead with the
+            suggested region's live feelzlike temp so an ad visitor sees
+            something real in the first second instead of a permission button.
+            Once location is granted the local card takes over and the region
+            moves back to its usual compact row below. */}
+        {!heroHidden && suggested ? (
+          <Link
+            href={suggested.href}
+            onClick={() =>
+              track("welcome_nearest_region_click", {
+                category: "navigation",
+                data: { region: suggested.id, kind: proximity, placement: "hero" },
+              })
+            }
+            className="group block border-b border-sky-100 px-5 py-4 transition-colors hover:bg-sky-50/60"
+          >
+            <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-sky-700/80">
+              <Mountain className="h-3.5 w-3.5" />
+              right now in the mountains
+            </div>
+            <div className="mt-2 flex items-center gap-4">
+              <Snowflake className="h-12 w-12 shrink-0 text-sky-500" strokeWidth={1.5} />
+              <div className="min-w-0">
+                <p className="truncate text-[15px] font-semibold leading-tight text-slate-900">
+                  {suggested.name.toLowerCase()}
+                </p>
+                {suggested.feelsLikeC != null ? (
+                  <div className="mt-0.5 flex items-baseline gap-2">
+                    <span className="text-3xl font-bold leading-none tabular-nums text-slate-900">
+                      {u.temp(suggested.feelsLikeC)}{u.tempUnit}
+                    </span>
+                    <span className="text-[9px] font-semibold uppercase tracking-[0.12em] text-sky-800">
+                      feelzlike
+                    </span>
+                  </div>
+                ) : null}
+                <p className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-semibold text-sky-700">
+                  {suggested.distanceKm != null && !isFar
+                    ? "your nearest live region \u00b7 see conditions"
+                    : "see live conditions"}
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                </p>
+              </div>
+            </div>
+          </Link>
+        ) : null}
+
         {/* TOP: local conditions / loading / one-tap prompt ─────────── */}
         <div className="px-5 py-4">
           <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-sky-700/80">
@@ -552,8 +606,9 @@ export function NearYou() {
           )}
         </div>
 
-        {/* REGION SUGGESTION (survives every state) ──────────────────── */}
-        {suggested ? (
+        {/* REGION SUGGESTION · compact row (hidden while the hero above is
+            already showing the same region) ───────────────────────────── */}
+        {suggested && heroHidden ? (
           <NearYouRegionRow
             suggested={suggested}
             onSelect={() =>

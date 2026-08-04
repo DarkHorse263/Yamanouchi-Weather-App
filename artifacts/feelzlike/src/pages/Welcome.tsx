@@ -7,6 +7,7 @@ import { useUserPrefs } from "@/components/auth/UserPrefsProvider";
 import { ALERT_REGIONS } from "@/components/AlertSubscribeForm";
 import logoWhite from "/branding/logo-white.png?url";
 import { NearYou } from "@/components/home/NearYou";
+import { HomeSignUpInvite } from "@/components/home/HomeSignUpInvite";
 import { CountryPicker } from "@/components/home/CountryPicker";
 import { Favourites } from "@/components/home/Favourites";
 import { DesktopHome } from "@/components/home/DesktopHome";
@@ -108,6 +109,9 @@ export default function Welcome() {
 
         {/* NEAR YOU ─ location-first: local conditions + nearest region ─ */}
         <NearYou />
+
+        {/* SIGN-UP INVITE ─ the landing page's one ask · anonymous only ─ */}
+        <HomeSignUpInvite />
 
         {/* CHOOSE A REGION ─ the picker continues below ─── */}
         <section className="px-4 pt-6 pb-6 md:px-6">
