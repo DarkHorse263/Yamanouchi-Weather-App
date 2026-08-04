@@ -563,3 +563,10 @@ id = "rI3xEcS8bc57tJj9xVJWS"
 uri = "file://exports/confirm-email-preview.jpg"
 type = "image"
 title = "signup confirmation email · what new subscribers receive"
+
+[[outputs]]
+id = "7a6UD9Ob64-IyKiWHy6pN"
+uri = "file://exports/feelzlike-facebook-phase2-pack.pdf"
+type = "pdf"
+title = "facebook phase 2 pack"
+description = "Round-one results readout, the 5 phase-2 ads with paste-ready copy and tracked links, and 4 weeks of Facebook Page posts (2 per week)."
