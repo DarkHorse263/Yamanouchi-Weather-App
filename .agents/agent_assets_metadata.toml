@@ -570,3 +570,10 @@ uri = "file://exports/feelzlike-facebook-phase2-pack.pdf"
 type = "pdf"
 title = "facebook phase 2 pack"
 description = "Round-one results readout, the 5 phase-2 ads with paste-ready copy and tracked links, and 4 weeks of Facebook Page posts (2 per week)."
+
+[[outputs]]
+id = "Yqrt85zMwZvl80aTRhCdO"
+uri = "file://exports/feelzlike-fb-page-hero.png"
+type = "image"
+title = "feelzlike · desktop + phone"
+description = "Home page on desktop and phone, side by side, cookie banner cropped out. Ready to post on the Facebook page."
