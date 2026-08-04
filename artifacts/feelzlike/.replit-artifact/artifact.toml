@@ -83,6 +83,22 @@ from = "/snowy-mountains/stay/"
 to = "/snowy-mountains/stay/index.html"
 
 [[services.production.rewrites]]
+from = "/snowy-mountains/mountain/perisher/"
+to = "/snowy-mountains/mountain/perisher/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/mountain/thredbo/"
+to = "/snowy-mountains/mountain/thredbo/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/mountain/selwyn/"
+to = "/snowy-mountains/mountain/selwyn/index.html"
+
+[[services.production.rewrites]]
+from = "/snowy-mountains/mountain/charlottes-pass/"
+to = "/snowy-mountains/mountain/charlottes-pass/index.html"
+
+[[services.production.rewrites]]
 from = "/snowy-mountains/jindabyne/"
 to = "/snowy-mountains/jindabyne/index.html"
 
@@ -175,8 +191,36 @@ from = "/victorias-high-country/mountains/"
 to = "/victorias-high-country/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/victorias-high-country/alerts/"
+to = "/victorias-high-country/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/victorias-high-country/stay/"
 to = "/victorias-high-country/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/mountain/mt-buller/"
+to = "/victorias-high-country/mountain/mt-buller/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/mountain/mt-stirling/"
+to = "/victorias-high-country/mountain/mt-stirling/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/mountain/falls-creek/"
+to = "/victorias-high-country/mountain/falls-creek/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/mountain/mt-hotham/"
+to = "/victorias-high-country/mountain/mt-hotham/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/mountain/lake-mountain/"
+to = "/victorias-high-country/mountain/lake-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/mountain/mt-donna-buang/"
+to = "/victorias-high-country/mountain/mt-donna-buang/index.html"
 
 [[services.production.rewrites]]
 from = "/victorias-high-country/mansfield/"
@@ -411,8 +455,16 @@ from = "/tasmania/mountains/"
 to = "/tasmania/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/tasmania/alerts/"
+to = "/tasmania/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/tasmania/stay/"
 to = "/tasmania/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/mountain/ben-lomond/"
+to = "/tasmania/mountain/ben-lomond/index.html"
 
 [[services.production.rewrites]]
 from = "/tasmania/ben-lomond-base/"
@@ -501,6 +553,94 @@ to = "/yamanouchi/alerts/index.html"
 [[services.production.rewrites]]
 from = "/yamanouchi/stay/"
 to = "/yamanouchi/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/mountain/shiga-sun-valley/"
+to = "/yamanouchi/mountain/shiga-sun-valley/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/mountain/shiga-maruike/"
+to = "/yamanouchi/mountain/shiga-maruike/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/mountain/shiga-hasuike/"
+to = "/yamanouchi/mountain/shiga-hasuike/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/mountain/shiga-giant/"
+to = "/yamanouchi/mountain/shiga-giant/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/mountain/shiga-hoppo-bunadaira/"
+to = "/yamanouchi/mountain/shiga-hoppo-bunadaira/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/mountain/shiga-higashidateyama/"
+to = "/yamanouchi/mountain/shiga-higashidateyama/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/mountain/shiga-nishidateyama/"
+to = "/yamanouchi/mountain/shiga-nishidateyama/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/mountain/shiga-terakoya/"
+to = "/yamanouchi/mountain/shiga-terakoya/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/mountain/shiga-takamagahara/"
+to = "/yamanouchi/mountain/shiga-takamagahara/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/mountain/shiga-tannenomori-okojo/"
+to = "/yamanouchi/mountain/shiga-tannenomori-okojo/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/mountain/shiga-ichinose-family/"
+to = "/yamanouchi/mountain/shiga-ichinose-family/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/mountain/shiga-ichinose-diamond/"
+to = "/yamanouchi/mountain/shiga-ichinose-diamond/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/mountain/shiga-ichinose-yamanokami/"
+to = "/yamanouchi/mountain/shiga-ichinose-yamanokami/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/mountain/shiga-yakebitaiyama/"
+to = "/yamanouchi/mountain/shiga-yakebitaiyama/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/mountain/shiga-okushiga-kogen/"
+to = "/yamanouchi/mountain/shiga-okushiga-kogen/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/mountain/shiga-kumanoyu/"
+to = "/yamanouchi/mountain/shiga-kumanoyu/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/mountain/shiga-yokoteyama/"
+to = "/yamanouchi/mountain/shiga-yokoteyama/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/mountain/shiga-shibutoge/"
+to = "/yamanouchi/mountain/shiga-shibutoge/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/mountain/ryuoo/"
+to = "/yamanouchi/mountain/ryuoo/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/mountain/xjam-takaifuji/"
+to = "/yamanouchi/mountain/xjam-takaifuji/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/mountain/yomase-onsen/"
+to = "/yamanouchi/mountain/yomase-onsen/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/mountain/kita-shiga-komaruyama/"
+to = "/yamanouchi/mountain/kita-shiga-komaruyama/index.html"
 
 [[services.production.rewrites]]
 from = "/yamanouchi/yudanaka/"
@@ -595,8 +735,16 @@ from = "/nozawa-onsen/mountains/"
 to = "/nozawa-onsen/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/nozawa-onsen/alerts/"
+to = "/nozawa-onsen/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/nozawa-onsen/stay/"
 to = "/nozawa-onsen/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/nozawa-onsen/mountain/nozawa-onsen/"
+to = "/nozawa-onsen/mountain/nozawa-onsen/index.html"
 
 [[services.production.rewrites]]
 from = "/nozawa-onsen/nozawa-onsen-village/"
@@ -631,8 +779,32 @@ from = "/iiyama/mountains/"
 to = "/iiyama/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/iiyama/alerts/"
+to = "/iiyama/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/iiyama/stay/"
 to = "/iiyama/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/mountain/madarao/"
+to = "/iiyama/mountain/madarao/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/mountain/tangram/"
+to = "/iiyama/mountain/tangram/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/mountain/togari-onsen/"
+to = "/iiyama/mountain/togari-onsen/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/mountain/kijimadaira/"
+to = "/iiyama/mountain/kijimadaira/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/mountain/kijima-snow-park/"
+to = "/iiyama/mountain/kijima-snow-park/index.html"
 
 [[services.production.rewrites]]
 from = "/iiyama/iiyama/"
@@ -739,8 +911,52 @@ from = "/hakuba-valley/mountains/"
 to = "/hakuba-valley/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/hakuba-valley/alerts/"
+to = "/hakuba-valley/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/hakuba-valley/stay/"
 to = "/hakuba-valley/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/mountain/happo-one/"
+to = "/hakuba-valley/mountain/happo-one/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/mountain/hakuba-goryu/"
+to = "/hakuba-valley/mountain/hakuba-goryu/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/mountain/hakuba-47/"
+to = "/hakuba-valley/mountain/hakuba-47/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/mountain/hakuba-iwatake/"
+to = "/hakuba-valley/mountain/hakuba-iwatake/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/mountain/tsugaike-kogen/"
+to = "/hakuba-valley/mountain/tsugaike-kogen/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/mountain/hakuba-norikura/"
+to = "/hakuba-valley/mountain/hakuba-norikura/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/mountain/hakuba-cortina/"
+to = "/hakuba-valley/mountain/hakuba-cortina/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/mountain/hakuba-sanosaka/"
+to = "/hakuba-valley/mountain/hakuba-sanosaka/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/mountain/kashimayari/"
+to = "/hakuba-valley/mountain/kashimayari/index.html"
+
+[[services.production.rewrites]]
+from = "/hakuba-valley/mountain/jiigatake/"
+to = "/hakuba-valley/mountain/jiigatake/index.html"
 
 [[services.production.rewrites]]
 from = "/hakuba-valley/hakuba/"
@@ -823,8 +1039,36 @@ from = "/myoko/mountains/"
 to = "/myoko/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/myoko/alerts/"
+to = "/myoko/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/myoko/stay/"
 to = "/myoko/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/mountain/akakura-onsen/"
+to = "/myoko/mountain/akakura-onsen/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/mountain/akakura-kanko/"
+to = "/myoko/mountain/akakura-kanko/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/mountain/ikenotaira/"
+to = "/myoko/mountain/ikenotaira/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/mountain/myoko-suginohara/"
+to = "/myoko/mountain/myoko-suginohara/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/mountain/seki-onsen/"
+to = "/myoko/mountain/seki-onsen/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/mountain/lotte-arai/"
+to = "/myoko/mountain/lotte-arai/index.html"
 
 [[services.production.rewrites]]
 from = "/myoko/akakura/"
@@ -931,8 +1175,32 @@ from = "/niseko/mountains/"
 to = "/niseko/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/niseko/alerts/"
+to = "/niseko/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/niseko/stay/"
 to = "/niseko/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/mountain/grand-hirafu/"
+to = "/niseko/mountain/grand-hirafu/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/mountain/hanazono/"
+to = "/niseko/mountain/hanazono/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/mountain/niseko-village/"
+to = "/niseko/mountain/niseko-village/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/mountain/annupuri/"
+to = "/niseko/mountain/annupuri/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/mountain/moiwa/"
+to = "/niseko/mountain/moiwa/index.html"
 
 [[services.production.rewrites]]
 from = "/niseko/hirafu/"
@@ -1015,8 +1283,24 @@ from = "/furano/mountains/"
 to = "/furano/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/furano/alerts/"
+to = "/furano/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/furano/stay/"
 to = "/furano/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/furano/mountain/furano-ski-resort/"
+to = "/furano/mountain/furano-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/furano/mountain/kamui-ski-links/"
+to = "/furano/mountain/kamui-ski-links/index.html"
+
+[[services.production.rewrites]]
+from = "/furano/mountain/tomamu/"
+to = "/furano/mountain/tomamu/index.html"
 
 [[services.production.rewrites]]
 from = "/furano/furano/"
@@ -1075,8 +1359,24 @@ from = "/sapporo/mountains/"
 to = "/sapporo/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/sapporo/alerts/"
+to = "/sapporo/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/sapporo/stay/"
 to = "/sapporo/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/sapporo/mountain/sapporo-teine/"
+to = "/sapporo/mountain/sapporo-teine/index.html"
+
+[[services.production.rewrites]]
+from = "/sapporo/mountain/sapporo-kokusai/"
+to = "/sapporo/mountain/sapporo-kokusai/index.html"
+
+[[services.production.rewrites]]
+from = "/sapporo/mountain/sapporo-bankei/"
+to = "/sapporo/mountain/sapporo-bankei/index.html"
 
 [[services.production.rewrites]]
 from = "/sapporo/sapporo/"
@@ -1135,8 +1435,20 @@ from = "/tomamu-sahoro/mountains/"
 to = "/tomamu-sahoro/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/tomamu-sahoro/alerts/"
+to = "/tomamu-sahoro/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/tomamu-sahoro/stay/"
 to = "/tomamu-sahoro/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/tomamu-sahoro/mountain/tomamu-resort/"
+to = "/tomamu-sahoro/mountain/tomamu-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/tomamu-sahoro/mountain/sahoro/"
+to = "/tomamu-sahoro/mountain/sahoro/index.html"
 
 [[services.production.rewrites]]
 from = "/tomamu-sahoro/tomamu-village/"
@@ -1195,8 +1507,20 @@ from = "/asahikawa/mountains/"
 to = "/asahikawa/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/asahikawa/alerts/"
+to = "/asahikawa/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/asahikawa/stay/"
 to = "/asahikawa/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/asahikawa/mountain/kamui/"
+to = "/asahikawa/mountain/kamui/index.html"
+
+[[services.production.rewrites]]
+from = "/asahikawa/mountain/asahidake/"
+to = "/asahikawa/mountain/asahidake/index.html"
 
 [[services.production.rewrites]]
 from = "/asahikawa/asahikawa/"
@@ -1255,8 +1579,20 @@ from = "/rusutsu-kiroro/mountains/"
 to = "/rusutsu-kiroro/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/rusutsu-kiroro/alerts/"
+to = "/rusutsu-kiroro/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/rusutsu-kiroro/stay/"
 to = "/rusutsu-kiroro/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/rusutsu-kiroro/mountain/rusutsu-resort/"
+to = "/rusutsu-kiroro/mountain/rusutsu-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/rusutsu-kiroro/mountain/kiroro-resort/"
+to = "/rusutsu-kiroro/mountain/kiroro-resort/index.html"
 
 [[services.production.rewrites]]
 from = "/rusutsu-kiroro/rusutsu/"
@@ -1315,8 +1651,24 @@ from = "/minakami/mountains/"
 to = "/minakami/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/minakami/alerts/"
+to = "/minakami/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/minakami/stay/"
 to = "/minakami/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/minakami/mountain/tenjindaira/"
+to = "/minakami/mountain/tenjindaira/index.html"
+
+[[services.production.rewrites]]
+from = "/minakami/mountain/minakami-kogen/"
+to = "/minakami/mountain/minakami-kogen/index.html"
+
+[[services.production.rewrites]]
+from = "/minakami/mountain/norn-minakami/"
+to = "/minakami/mountain/norn-minakami/index.html"
 
 [[services.production.rewrites]]
 from = "/minakami/minakami/"
@@ -1351,8 +1703,20 @@ from = "/kusatsu-manza/mountains/"
 to = "/kusatsu-manza/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/kusatsu-manza/alerts/"
+to = "/kusatsu-manza/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/kusatsu-manza/stay/"
 to = "/kusatsu-manza/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/kusatsu-manza/mountain/kusatsu-onsen-resort/"
+to = "/kusatsu-manza/mountain/kusatsu-onsen-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/kusatsu-manza/mountain/manza-onsen-resort/"
+to = "/kusatsu-manza/mountain/manza-onsen-resort/index.html"
 
 [[services.production.rewrites]]
 from = "/kusatsu-manza/kusatsu-onsen/"
@@ -1411,8 +1775,20 @@ from = "/hachimantai/mountains/"
 to = "/hachimantai/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/hachimantai/alerts/"
+to = "/hachimantai/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/hachimantai/stay/"
 to = "/hachimantai/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/hachimantai/mountain/hachimantai-panorama/"
+to = "/hachimantai/mountain/hachimantai-panorama/index.html"
+
+[[services.production.rewrites]]
+from = "/hachimantai/mountain/hachimantai-shimokura/"
+to = "/hachimantai/mountain/hachimantai-shimokura/index.html"
 
 [[services.production.rewrites]]
 from = "/hachimantai/hachimantai/"
@@ -1447,8 +1823,36 @@ from = "/yuzawa/mountains/"
 to = "/yuzawa/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/yuzawa/alerts/"
+to = "/yuzawa/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/yuzawa/stay/"
 to = "/yuzawa/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/mountain/gala-yuzawa/"
+to = "/yuzawa/mountain/gala-yuzawa/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/mountain/yuzawa-kogen/"
+to = "/yuzawa/mountain/yuzawa-kogen/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/mountain/ishiuchi-maruyama/"
+to = "/yuzawa/mountain/ishiuchi-maruyama/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/mountain/iwappara/"
+to = "/yuzawa/mountain/iwappara/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/mountain/kagura/"
+to = "/yuzawa/mountain/kagura/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/mountain/naeba/"
+to = "/yuzawa/mountain/naeba/index.html"
 
 [[services.production.rewrites]]
 from = "/yuzawa/echigo-yuzawa/"
@@ -1531,8 +1935,16 @@ from = "/zao-onsen/mountains/"
 to = "/zao-onsen/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/zao-onsen/alerts/"
+to = "/zao-onsen/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/zao-onsen/stay/"
 to = "/zao-onsen/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/zao-onsen/mountain/zao-onsen-resort/"
+to = "/zao-onsen/mountain/zao-onsen-resort/index.html"
 
 [[services.production.rewrites]]
 from = "/zao-onsen/zao-onsen/"
@@ -1567,8 +1979,20 @@ from = "/hakkoda-aomori-spring/mountains/"
 to = "/hakkoda-aomori-spring/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/alerts/"
+to = "/hakkoda-aomori-spring/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/hakkoda-aomori-spring/stay/"
 to = "/hakkoda-aomori-spring/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/mountain/hakkoda/"
+to = "/hakkoda-aomori-spring/mountain/hakkoda/index.html"
+
+[[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/mountain/aomori-spring/"
+to = "/hakkoda-aomori-spring/mountain/aomori-spring/index.html"
 
 [[services.production.rewrites]]
 from = "/hakkoda-aomori-spring/aomori/"
@@ -1651,8 +2075,20 @@ from = "/appi-shizukuishi/mountains/"
 to = "/appi-shizukuishi/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/appi-shizukuishi/alerts/"
+to = "/appi-shizukuishi/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/appi-shizukuishi/stay/"
 to = "/appi-shizukuishi/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/appi-shizukuishi/mountain/appi/"
+to = "/appi-shizukuishi/mountain/appi/index.html"
+
+[[services.production.rewrites]]
+from = "/appi-shizukuishi/mountain/shizukuishi-resort/"
+to = "/appi-shizukuishi/mountain/shizukuishi-resort/index.html"
 
 [[services.production.rewrites]]
 from = "/appi-shizukuishi/appi-kogen/"
@@ -1735,8 +2171,20 @@ from = "/bandai/mountains/"
 to = "/bandai/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/bandai/alerts/"
+to = "/bandai/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/bandai/stay/"
 to = "/bandai/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/mountain/nekoma-mountain/"
+to = "/bandai/mountain/nekoma-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/mountain/grandeco/"
+to = "/bandai/mountain/grandeco/index.html"
 
 [[services.production.rewrites]]
 from = "/bandai/inawashiro/"
@@ -1795,8 +2243,16 @@ from = "/daisen/mountains/"
 to = "/daisen/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/daisen/alerts/"
+to = "/daisen/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/daisen/stay/"
 to = "/daisen/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/daisen/mountain/daisen-white-resort/"
+to = "/daisen/mountain/daisen-white-resort/index.html"
 
 [[services.production.rewrites]]
 from = "/daisen/daisenji/"
@@ -1855,8 +2311,20 @@ from = "/queenstown/mountains/"
 to = "/queenstown/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/queenstown/alerts/"
+to = "/queenstown/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/queenstown/stay/"
 to = "/queenstown/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/queenstown/mountain/coronet-peak/"
+to = "/queenstown/mountain/coronet-peak/index.html"
+
+[[services.production.rewrites]]
+from = "/queenstown/mountain/the-remarkables/"
+to = "/queenstown/mountain/the-remarkables/index.html"
 
 [[services.production.rewrites]]
 from = "/queenstown/queenstown/"
@@ -1895,8 +2363,20 @@ from = "/wanaka/mountains/"
 to = "/wanaka/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/wanaka/alerts/"
+to = "/wanaka/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/wanaka/stay/"
 to = "/wanaka/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/wanaka/mountain/cardrona/"
+to = "/wanaka/mountain/cardrona/index.html"
+
+[[services.production.rewrites]]
+from = "/wanaka/mountain/treble-cone/"
+to = "/wanaka/mountain/treble-cone/index.html"
 
 [[services.production.rewrites]]
 from = "/wanaka/wanaka/"
@@ -1935,8 +2415,16 @@ from = "/mt-hutt/mountains/"
 to = "/mt-hutt/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/mt-hutt/alerts/"
+to = "/mt-hutt/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/mt-hutt/stay/"
 to = "/mt-hutt/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-hutt/mountain/mt-hutt/"
+to = "/mt-hutt/mountain/mt-hutt/index.html"
 
 [[services.production.rewrites]]
 from = "/mt-hutt/methven/"
@@ -1975,8 +2463,20 @@ from = "/ruapehu/mountains/"
 to = "/ruapehu/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/ruapehu/alerts/"
+to = "/ruapehu/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/ruapehu/stay/"
 to = "/ruapehu/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/ruapehu/mountain/whakapapa/"
+to = "/ruapehu/mountain/whakapapa/index.html"
+
+[[services.production.rewrites]]
+from = "/ruapehu/mountain/turoa/"
+to = "/ruapehu/mountain/turoa/index.html"
 
 [[services.production.rewrites]]
 from = "/ruapehu/ohakune/"
@@ -2015,8 +2515,20 @@ from = "/whistler/mountains/"
 to = "/whistler/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/whistler/alerts/"
+to = "/whistler/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/whistler/stay/"
 to = "/whistler/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/whistler/mountain/whistler-mountain/"
+to = "/whistler/mountain/whistler-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/whistler/mountain/blackcomb-mountain/"
+to = "/whistler/mountain/blackcomb-mountain/index.html"
 
 [[services.production.rewrites]]
 from = "/whistler/whistler/"
@@ -2055,8 +2567,36 @@ from = "/powder-highway/mountains/"
 to = "/powder-highway/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/powder-highway/alerts/"
+to = "/powder-highway/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/powder-highway/stay/"
 to = "/powder-highway/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/mountain/revelstoke-mountain-resort/"
+to = "/powder-highway/mountain/revelstoke-mountain-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/mountain/kicking-horse/"
+to = "/powder-highway/mountain/kicking-horse/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/mountain/fernie-alpine/"
+to = "/powder-highway/mountain/fernie-alpine/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/mountain/whitewater/"
+to = "/powder-highway/mountain/whitewater/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/mountain/kimberley-alpine/"
+to = "/powder-highway/mountain/kimberley-alpine/index.html"
+
+[[services.production.rewrites]]
+from = "/powder-highway/mountain/panorama/"
+to = "/powder-highway/mountain/panorama/index.html"
 
 [[services.production.rewrites]]
 from = "/powder-highway/revelstoke/"
@@ -2235,8 +2775,28 @@ from = "/okanagan/mountains/"
 to = "/okanagan/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/okanagan/alerts/"
+to = "/okanagan/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/okanagan/stay/"
 to = "/okanagan/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/mountain/big-white/"
+to = "/okanagan/mountain/big-white/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/mountain/silverstar/"
+to = "/okanagan/mountain/silverstar/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/mountain/apex-resort/"
+to = "/okanagan/mountain/apex-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/okanagan/mountain/sun-peaks-resort/"
+to = "/okanagan/mountain/sun-peaks-resort/index.html"
 
 [[services.production.rewrites]]
 from = "/okanagan/kelowna/"
@@ -2387,8 +2947,28 @@ from = "/vancouver/mountains/"
 to = "/vancouver/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/vancouver/alerts/"
+to = "/vancouver/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/vancouver/stay/"
 to = "/vancouver/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/vancouver/mountain/cypress-mountain/"
+to = "/vancouver/mountain/cypress-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/vancouver/mountain/grouse-mountain/"
+to = "/vancouver/mountain/grouse-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/vancouver/mountain/mount-seymour/"
+to = "/vancouver/mountain/mount-seymour/index.html"
+
+[[services.production.rewrites]]
+from = "/vancouver/mountain/mount-washington/"
+to = "/vancouver/mountain/mount-washington/index.html"
 
 [[services.production.rewrites]]
 from = "/vancouver/vancouver-city/"
@@ -2455,8 +3035,24 @@ from = "/banff-lake-louise/mountains/"
 to = "/banff-lake-louise/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/banff-lake-louise/alerts/"
+to = "/banff-lake-louise/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/banff-lake-louise/stay/"
 to = "/banff-lake-louise/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/banff-lake-louise/mountain/banff-sunshine/"
+to = "/banff-lake-louise/mountain/banff-sunshine/index.html"
+
+[[services.production.rewrites]]
+from = "/banff-lake-louise/mountain/mt-norquay/"
+to = "/banff-lake-louise/mountain/mt-norquay/index.html"
+
+[[services.production.rewrites]]
+from = "/banff-lake-louise/mountain/lake-louise-resort/"
+to = "/banff-lake-louise/mountain/lake-louise-resort/index.html"
 
 [[services.production.rewrites]]
 from = "/banff-lake-louise/banff/"
@@ -2523,8 +3119,16 @@ from = "/canmore/mountains/"
 to = "/canmore/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/canmore/alerts/"
+to = "/canmore/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/canmore/stay/"
 to = "/canmore/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/canmore/mountain/nakiska/"
+to = "/canmore/mountain/nakiska/index.html"
 
 [[services.production.rewrites]]
 from = "/canmore/canmore/"
@@ -2563,8 +3167,16 @@ from = "/jasper/mountains/"
 to = "/jasper/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/jasper/alerts/"
+to = "/jasper/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/jasper/stay/"
 to = "/jasper/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/jasper/mountain/marmot-basin/"
+to = "/jasper/mountain/marmot-basin/index.html"
 
 [[services.production.rewrites]]
 from = "/jasper/jasper/"
@@ -2603,8 +3215,16 @@ from = "/quebec-laurentians/mountains/"
 to = "/quebec-laurentians/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/quebec-laurentians/alerts/"
+to = "/quebec-laurentians/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/quebec-laurentians/stay/"
 to = "/quebec-laurentians/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-laurentians/mountain/tremblant/"
+to = "/quebec-laurentians/mountain/tremblant/index.html"
 
 [[services.production.rewrites]]
 from = "/quebec-laurentians/mont-tremblant/"
@@ -2643,8 +3263,20 @@ from = "/quebec-charlevoix/mountains/"
 to = "/quebec-charlevoix/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/quebec-charlevoix/alerts/"
+to = "/quebec-charlevoix/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/quebec-charlevoix/stay/"
 to = "/quebec-charlevoix/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-charlevoix/mountain/mont-sainte-anne/"
+to = "/quebec-charlevoix/mountain/mont-sainte-anne/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-charlevoix/mountain/le-massif/"
+to = "/quebec-charlevoix/mountain/le-massif/index.html"
 
 [[services.production.rewrites]]
 from = "/quebec-charlevoix/beaupre/"
@@ -2711,8 +3343,20 @@ from = "/quebec-eastern-townships/mountains/"
 to = "/quebec-eastern-townships/mountains/index.html"
 
 [[services.production.rewrites]]
+from = "/quebec-eastern-townships/alerts/"
+to = "/quebec-eastern-townships/alerts/index.html"
+
+[[services.production.rewrites]]
 from = "/quebec-eastern-townships/stay/"
 to = "/quebec-eastern-townships/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-eastern-townships/mountain/bromont-resort/"
+to = "/quebec-eastern-townships/mountain/bromont-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/quebec-eastern-townships/mountain/mont-sutton/"
+to = "/quebec-eastern-townships/mountain/mont-sutton/index.html"
 
 [[services.production.rewrites]]
 from = "/quebec-eastern-townships/bromont/"

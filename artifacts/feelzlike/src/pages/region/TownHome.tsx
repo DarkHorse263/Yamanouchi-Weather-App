@@ -517,7 +517,7 @@ export function TownHome() {
           loadingLabel={t("Loading…", "読込中…")}
           unavailableLabel={t("Weather unavailable", "天気情報なし")}
           feelsLabel={t("feelzlike", "体感")}
-          forecastHref={`/${town.id}/weather`}
+          forecastHref="/weather"
           forecastLabel={t("7-day forecast", "7日間天気予報")}
         />
       </section>

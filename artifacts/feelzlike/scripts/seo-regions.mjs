@@ -666,12 +666,67 @@ export const REGIONS = [
   },
 ];
 
-/** Region sub-sections that actually render for this region (see gating notes above). */
+/** Region sub-sections that actually render for this region (see gating notes above).
+ * /alerts renders for EVERY region since Aug 2026: regions without a custom
+ * Alerts page fall back to the generic RegionAlerts (RegionLayout), so the
+ * hasAlerts flag no longer gates the route. */
 export function regionFeatures(region) {
-  return ["mountains", ...(region.hasAlerts ? ["alerts"] : []), "stay"];
+  return ["mountains", "alerts", "stay"];
 }
 
 /** Town sub-sections that actually render for this region's towns. */
 export function townFeatures(region) {
   return ["weather", "stay", "eat", ...(region.hasRoads ? ["roads"] : []), "transport", "explore"];
+}
+
+// ── Mountain page enumeration ─────────────────────────────────────────────
+// /:region/mountain/:id renders a real page for every mountain in the app's
+// region registry (src/regions/<slug>.ts). Rather than hand-mirroring those
+// ids here (they'd rot), extract them from the region source file at build
+// time so new mountains and new regions are picked up automatically.
+
+import { readFileSync } from "node:fs";
+import { dirname as _dirname, join as _join } from "node:path";
+import { fileURLToPath as _fileURLToPath } from "node:url";
+
+const _here = _dirname(_fileURLToPath(import.meta.url));
+
+/**
+ * Returns [{ id, name }] for every mountain defined in
+ * src/regions/<slug>.ts. Throws (build fails loudly) if the file is missing
+ * or fewer ids are found than the mountains listed for that region above —
+ * that means the extraction or the mirror drifted and the sitemap would
+ * silently lose pages.
+ * @param {{ slug: string, mountains: Array<unknown> }} region
+ */
+export function regionMountains(region) {
+  const file = _join(_here, "..", "src", "regions", `${region.slug}.ts`);
+  const src = readFileSync(file, "utf8");
+  const start = src.indexOf("mountains: [");
+  if (start === -1) {
+    if (region.mountains.length === 0) return [];
+    throw new Error(`[seo-regions] no mountains array found in ${file}`);
+  }
+  // Walk to the matching closing bracket of the mountains array.
+  let depth = 0;
+  let end = -1;
+  for (let i = src.indexOf("[", start); i < src.length; i++) {
+    const ch = src[i];
+    if (ch === "[") depth++;
+    else if (ch === "]") {
+      depth--;
+      if (depth === 0) { end = i; break; }
+    }
+  }
+  if (end === -1) throw new Error(`[seo-regions] unbalanced mountains array in ${file}`);
+  const block = src.slice(start, end);
+  const out = [];
+  const re = /\{\s*id:\s*"([^"]+)"\s*,\s*name:\s*"((?:[^"\\]|\\.)*)"/g;
+  for (const m of block.matchAll(re)) out.push({ id: m[1], name: m[2].replace(/\\"/g, '"') });
+  if (out.length < region.mountains.length) {
+    throw new Error(
+      `[seo-regions] extracted ${out.length} mountain ids from ${file} but ${region.mountains.length} mountains are listed for ${region.slug} — extraction drifted, fix before shipping the sitemap`,
+    );
+  }
+  return out;
 }
