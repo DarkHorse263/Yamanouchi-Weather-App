@@ -14,7 +14,6 @@ import { DesktopHome } from "@/components/home/DesktopHome";
 import { HomeRegionCard } from "@/components/home/HomeRegionCard";
 import { CoverageMap } from "@/components/home/CoverageMap";
 import { HomeFooter } from "@/components/home/HomeFooter";
-import { WhatsNewNote } from "@/components/home/WhatsNewNote";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { websiteSchema, organizationSchema } from "@/lib/seo/jsonLd";
 import { track } from "@/lib/analytics";
@@ -102,7 +101,6 @@ export default function Welcome() {
         </header>
 
         {/* WHAT'S NEW ─ one-time dismissible note for returning visitors ─ */}
-        <WhatsNewNote />
 
         {/* HOME REGION ─ front and centre for signed-in members */}
         <HomeRegionCard />
