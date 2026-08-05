@@ -807,6 +807,107 @@ const WEBCAM_DATA: WebcamConfig[] = [
     webcams: [],
   },
 
+  // ─── Resort live-cam pages: California (North Lake Tahoe) ──────
+  {
+    locationId: "palisades-tahoe",
+    locationName: "Palisades Tahoe live cams",
+    webcamPageUrl: "https://www.palisadestahoe.com/mountain-information/mountain-cams",
+    webcams: [],
+  },
+  {
+    locationId: "northstar-california",
+    locationName: "Northstar California live cams",
+    webcamPageUrl: "https://www.northstarcalifornia.com/the-mountain/mountain-conditions/mountain-cams.aspx",
+    webcams: [],
+  },
+  {
+    locationId: "sugar-bowl",
+    // ⚠️ Webcam page status not independently confirmed in research —
+    // verify before relying on this link.
+    locationName: "Sugar Bowl live cams",
+    webcamPageUrl: "https://www.sugarbowl.com/mountain-report",
+    webcams: [],
+  },
+
+  // ─── Resort live-cam pages: California (South Lake Tahoe) ──────
+  {
+    locationId: "heavenly",
+    locationName: "Heavenly live cams",
+    webcamPageUrl: "https://www.skiheavenly.com/the-mountain/mountain-conditions/mountain-cams.aspx",
+    webcams: [],
+  },
+  {
+    locationId: "kirkwood",
+    locationName: "Kirkwood live cams",
+    webcamPageUrl: "https://www.kirkwood.com/the-mountain/mountain-conditions/mountain-cams.aspx",
+    webcams: [],
+  },
+  {
+    locationId: "sierra-at-tahoe",
+    // ⚠️ Officially closed for the 2025/26 season per the resort's own
+    // page — do not treat any cam/conditions data linked here as live.
+    locationName: "Sierra-at-Tahoe (⚠️ closed for 2025/26 season)",
+    webcamPageUrl: "https://sierraattahoe.com/",
+    webcams: [],
+  },
+  {
+    locationId: "homewood-mountain-resort",
+    // ⚠️ Reopened for 2025-26 after a full 2024-25 closure — webcam page
+    // status not independently confirmed in research.
+    locationName: "Homewood Mountain Resort live cams",
+    webcamPageUrl: "https://skihomewood.com/mountain-info/",
+    webcams: [],
+  },
+
+  // ─── Resort live-cam pages: California (Mammoth Lakes) ──────
+  {
+    locationId: "mammoth-mountain",
+    locationName: "Mammoth Mountain live cams",
+    webcamPageUrl: "https://www.mammothmountain.com/on-the-mountain/webcams",
+    webcams: [],
+  },
+  {
+    locationId: "june-mountain",
+    // ⚠️ Webcam page status not independently confirmed in research.
+    locationName: "June Mountain live cams",
+    webcamPageUrl: "https://www.junemountain.com/",
+    webcams: [],
+  },
+
+  // ─── Resort live-cam pages: California (Big Bear) ──────
+  {
+    locationId: "bear-mountain",
+    locationName: "Bear Mountain live cams",
+    webcamPageUrl: "https://www.bigbearmountainresort.com/mountain-conditions/mountain-cams",
+    webcams: [],
+  },
+  {
+    locationId: "snow-summit",
+    locationName: "Snow Summit live cams",
+    webcamPageUrl: "https://www.bigbearmountainresort.com/mountain-conditions/mountain-cams",
+    webcams: [],
+  },
+
+  // ─── Resort live-cam pages: California (Bear Valley) ──────
+  {
+    locationId: "bear-valley-mountain-resort",
+    // ⚠️ 2025-26 opening date uncertain in source reporting — verify
+    // current status before relying on this page.
+    locationName: "Bear Valley Mountain Resort live cams",
+    webcamPageUrl: "https://www.bearvalley.com/mountain-report",
+    webcams: [],
+  },
+
+  // ─── Resort live-cam pages: California (Mt. Shasta) ──────
+  {
+    locationId: "mt-shasta-ski-park",
+    // ⚠️ 2025-26 season closed early (Mar 2, 2026) for lack of snow, and
+    // base/summit elevation is unverified — verify current status.
+    locationName: "Mt. Shasta Ski Park live cams",
+    webcamPageUrl: "https://www.skipark.com/winter/conditions",
+    webcams: [],
+  },
+
   // ─── Roadside cams: Colorado ───────────────────────────────
   // CDOT's cotrip.org runs a large public highway-camera network, but does
   // not expose a stable deep link per camera that survives a season. Same
@@ -900,6 +1001,48 @@ const WEBCAM_DATA: WebcamConfig[] = [
     locationId: "cache-valley-roads",
     locationName: "Roads to Cache Valley · US-89 Logan Canyon",
     webcamPageUrl: "https://www.udottraffic.utah.gov/",
+    webcams: [],
+  },
+
+  // ─── Roadside cams: California ─────────────────────────────────
+  // Caltrans QuickMap (quickmap.dot.ca.gov) runs a public highway-camera
+  // and chain-control network, but does not expose a stable deep link per
+  // camera that survives a season — same honest page-only-link pattern as
+  // CO/UT.
+  {
+    locationId: "north-lake-tahoe-roads",
+    locationName: "Roads to North Lake Tahoe · I-80 Donner Summit",
+    webcamPageUrl: "https://quickmap.dot.ca.gov/",
+    webcams: [],
+  },
+  {
+    locationId: "south-lake-tahoe-roads",
+    locationName: "Roads to South Lake Tahoe · US-50",
+    webcamPageUrl: "https://quickmap.dot.ca.gov/",
+    webcams: [],
+  },
+  {
+    locationId: "mammoth-lakes-roads",
+    locationName: "Roads to Mammoth Lakes · US-395 & SR-203",
+    webcamPageUrl: "https://quickmap.dot.ca.gov/",
+    webcams: [],
+  },
+  {
+    locationId: "big-bear-roads",
+    locationName: "Roads to Big Bear · Highway 18 & 38",
+    webcamPageUrl: "https://quickmap.dot.ca.gov/",
+    webcams: [],
+  },
+  {
+    locationId: "bear-valley-roads",
+    locationName: "Roads to Bear Valley · Highway 4 Ebbetts Pass",
+    webcamPageUrl: "https://quickmap.dot.ca.gov/",
+    webcams: [],
+  },
+  {
+    locationId: "mt-shasta-roads",
+    locationName: "Roads to Mt. Shasta · I-5 & SR-89",
+    webcamPageUrl: "https://quickmap.dot.ca.gov/",
     webcams: [],
   },
 ];

@@ -673,6 +673,68 @@ function coChainEntry(opts: {
   };
 }
 
+/**
+ * California's R1/R2/R3 chain-control system (Caltrans) is a live,
+ * ranger/CHP-declared escalation ladder posted per-highway, not a fixed
+ * calendar rule like Colorado's SB25-069 or a single sign-activated canyon
+ * designation like Utah's Class 3:
+ *   R1 - chains required except 4WD/AWD vehicles with snow tyres on all 4
+ *        wheels (chains must still be carried)
+ *   R2 - chains required except 4WD/AWD vehicles with snow tyres AND
+ *        chains in possession for each drive axle
+ *   R3 - chains required on ALL vehicles, no exceptions (rare, severe
+ *        storms only)
+ * There is no live feed for which R-level is currently posted on I-80
+ * Donner Summit, US-50 near Tahoe, or Highway 4/89 near Bear Valley, so
+ * (mirroring Utah's Cottonwood Class 3 treatment) `chains2wd`/`chainsAwd`
+ * stay at "not-required" defaults and the real R1/R2/R3 ladder is spelled
+ * out in the note, deferring to Caltrans QuickMap for today's status.
+ * Mammoth Lakes, Big Bear and Mt. Shasta have no Caltrans R-level chain
+ * corridor designation identified in research, so they get a lighter,
+ * generic Caltrans winter-driving advisory instead - mirroring Utah's
+ * non-Cottonwood "lighter, generic UDOT advisory" treatment for Park
+ * City/Ogden Valley/Provo/Cache Valley.
+ *
+ * Named `usCaChainEntry` (not `caChainEntry`) to avoid colliding with the
+ * existing Canada chain-entry helper of that name above.
+ */
+const US_CA_SOURCE = {
+  sourceLabel: "Caltrans QuickMap",
+  sourceUrl: "https://quickmap.dot.ca.gov/",
+};
+
+function usCaChainEntry(opts: {
+  id: string;
+  regionId: string;
+  mountainId: string;
+  mountainName: string;
+  approach: string;
+  detail: string;
+  inSeason: boolean;
+  issuedAt: string;
+  rLevelCorridor: boolean;
+}): Record<string, unknown> {
+  const rLevelRule =
+    "Caltrans can post R1/R2/R3 chain control on this route any time in winter storms: R1 requires chains except 4WD/AWD with snow tyres on all 4 wheels (chains must still be carried); R2 requires chains except 4WD/AWD with snow tyres AND chains in possession; R3 requires chains on ALL vehicles, no exceptions. This is storm-activated, not a fixed calendar rule, so check quickmap.dot.ca.gov or the roadside signs for today's status before you drive.";
+  const generalRule =
+    "California has no statewide chain law, but Caltrans strongly recommends snow tyres or carrying chains on mountain approaches in winter, and can post R1/R2/R3 chain control on specific highways when storms warrant.";
+  const rule = opts.rLevelCorridor ? rLevelRule : generalRule;
+  return {
+    id: opts.id,
+    regionId: opts.regionId,
+    mountainId: opts.mountainId,
+    mountainName: opts.mountainName,
+    approach: opts.approach,
+    status: "open",
+    chains2wd: "not-required" satisfies ChainReq,
+    chainsAwd: "not-required" satisfies ChainReq,
+    note: opts.inSeason ? `${rule} ${opts.detail}` : "Outside the ski season · no seasonal chain-control requirement on this route.",
+    issuedAt: opts.issuedAt,
+    ...US_CA_SOURCE,
+    dataSource: "seasonal-rule",
+  };
+}
+
 function buildChainStatuses(regionId: string | undefined): Array<Record<string, unknown>> {
   const now = new Date();
   const issuedAt = now.toISOString();
@@ -1399,6 +1461,106 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
     ];
   }
 
+  if (
+    regionId === "north-lake-tahoe" ||
+    regionId === "south-lake-tahoe" ||
+    regionId === "mammoth-lakes" ||
+    regionId === "big-bear" ||
+    regionId === "bear-valley" ||
+    regionId === "mt-shasta"
+  ) {
+    const inSeason = isUsSnowSeason(now);
+    const usCa = (
+      id: string,
+      mountainId: string,
+      mountainName: string,
+      approach: string,
+      detail: string,
+      rLevelCorridor: boolean,
+    ) => usCaChainEntry({ id, regionId, mountainId, mountainName, approach, detail, inSeason, issuedAt, rLevelCorridor });
+
+    if (regionId === "north-lake-tahoe") {
+      return [
+        usCa("palisades-tahoe-i-80", "palisades-tahoe", "Palisades Tahoe",
+          "I-80 to Truckee/Tahoe City, then CA-89 to Olympic Valley",
+          "I-80 over Donner Summit is a named Caltrans R1/R2/R3 chain-control corridor · check quickmap.dot.ca.gov before you drive up in a storm.",
+          true),
+        usCa("northstar-california-hwy-267", "northstar-california", "Northstar California",
+          "I-80 to Truckee, then CA-267 (Brockway Summit) south to the resort",
+          "CA-267 over Brockway Summit is a shorter, steeper approach than the I-80/CA-89 route into Palisades · same R1/R2/R3 system applies when posted.",
+          true),
+        usCa("sugar-bowl-i-80", "sugar-bowl", "Sugar Bowl",
+          "I-80 to the Soda Springs/Norden exit, right at Donner Summit",
+          "Sugar Bowl sits directly on the Donner Summit corridor, the most storm-exposed stretch of I-80 in the region · same R1/R2/R3 system applies when posted.",
+          true),
+      ];
+    }
+
+    if (regionId === "south-lake-tahoe") {
+      return [
+        usCa("heavenly-us-50", "heavenly", "Heavenly",
+          "US-50 from Sacramento/Placerville, along the South Shore to Stateline",
+          "US-50 through the Sierra is a named Caltrans R1/R2/R3 chain-control corridor · check quickmap.dot.ca.gov before you drive up in a storm.",
+          true),
+        usCa("kirkwood-hwy-88", "kirkwood", "Kirkwood",
+          "US-50 to CA-89, then CA-88 (Carson Pass) to the resort",
+          "CA-88 over Carson Pass is high, remote and can be chain-controlled independently of the US-50 corridor · same R1/R2/R3 system applies when posted.",
+          true),
+        usCa("sierra-at-tahoe-us-50", "sierra-at-tahoe", "Sierra-at-Tahoe",
+          "US-50 from Sacramento/Placerville, below Echo Summit",
+          "⚠️ Sierra-at-Tahoe is officially closed for the 2025/26 season — this entry describes the road only, not resort operating status.",
+          true),
+        usCa("homewood-mountain-resort-hwy-89", "homewood-mountain-resort", "Homewood Mountain Resort",
+          "US-50 to CA-89 (West Shore), or I-80 to CA-89 south from Tahoe City",
+          "CA-89 along the West Shore is lower and less storm-exposed than US-50 over Echo Summit, but can still see R1/R2/R3 control posted.",
+          true),
+      ];
+    }
+
+    if (regionId === "mammoth-lakes") {
+      return [
+        usCa("mammoth-mountain-us-395", "mammoth-mountain", "Mammoth Mountain",
+          "US-395 to CA-203 (Minaret Rd/Lake Mary Rd) into Mammoth Lakes",
+          "No Caltrans R-level chain corridor identified for this approach in research · Caltrans still recommends snow tyres or carrying chains on CA-203 in storms.",
+          false),
+        usCa("june-mountain-hwy-158", "june-mountain", "June Mountain",
+          "US-395 to CA-158 (June Lake Loop) near June Lake",
+          "CA-158 is a shorter, lower-traffic approach than CA-203 into Mammoth · general Caltrans winter-driving advisory applies.",
+          false),
+      ];
+    }
+
+    if (regionId === "big-bear") {
+      return [
+        usCa("bear-mountain-hwy-18", "bear-mountain", "Bear Mountain",
+          "CA-18 (Rim of the World Scenic Byway) from San Bernardino",
+          "No Caltrans R-level chain corridor identified for this approach in research · Caltrans still recommends snow tyres or carrying chains on CA-18 in storms. ⚠️ Big Bear sits outside both the Sierra and Eastern Sierra Avalanche Centers' coverage areas.",
+          false),
+        usCa("snow-summit-hwy-18", "snow-summit", "Snow Summit",
+          "CA-18 (Rim of the World Scenic Byway) from San Bernardino, or CA-38 from Redlands",
+          "Same general approach as Bear Mountain · general Caltrans winter-driving advisory applies.",
+          false),
+      ];
+    }
+
+    if (regionId === "bear-valley") {
+      return [
+        usCa("bear-valley-mountain-resort-hwy-4", "bear-valley-mountain-resort", "Bear Valley Mountain Resort",
+          "CA-4 (Ebbetts Pass Scenic Byway) from Angels Camp/Arnold",
+          "CA-4/89 near Ebbetts Pass is a named Caltrans R1/R2/R3 chain-control corridor · check quickmap.dot.ca.gov before you drive up in a storm.",
+          true),
+      ];
+    }
+
+    // mt-shasta
+    return [
+      usCa("mt-shasta-ski-park-i-5", "mt-shasta-ski-park", "Mt. Shasta Ski Park",
+        "I-5 to the Mount Shasta exit, then CA-89 (Everitt Memorial Highway to the ski park access road)",
+        "No Caltrans R-level chain corridor identified for this approach in research · Caltrans still recommends snow tyres or carrying chains in storms. ⚠️ Mt. Shasta sits outside both the Sierra and Eastern Sierra Avalanche Centers' coverage areas.",
+        false),
+    ];
+  }
+
   return [];
 }
 
@@ -1632,6 +1794,20 @@ router.get("/road-conditions", async (req, res) => {
       region === "ogden-valley" ||
       region === "provo" ||
       region === "cache-valley";
+    //  · US (California) - no feed wired yet. Caltrans publishes
+    //    quickmap.dot.ca.gov, which also carries live R1/R2/R3 chain-control
+    //    postings, but nothing is integrated in this pass, so `roads` stays
+    //    empty and the advice points at QuickMap for roads and the Sierra /
+    //    Eastern Sierra Avalanche Centers for backcountry conditions - with
+    //    an explicit note that Big Bear and Mt. Shasta have no dedicated
+    //    avalanche-forecasting authority.
+    const isUsCa =
+      region === "north-lake-tahoe" ||
+      region === "south-lake-tahoe" ||
+      region === "mammoth-lakes" ||
+      region === "big-bear" ||
+      region === "bear-valley" ||
+      region === "mt-shasta";
 
     let roads: unknown[] = [];
     let generalAdvice: string;
@@ -1681,6 +1857,24 @@ router.get("/road-conditions", async (req, res) => {
           ? "We do not yet pull live road data for Utah · check UDOT's dedicated cottonwoodcanyons.udot.utah.gov page for closures, avalanche control and today's traction requirement before you drive SR-210 (Little Cottonwood, to Alta/Snowbird) or SR-190 (Big Cottonwood, to Brighton/Solitude). UDOT can post a Class 3 traction-device requirement on these canyon roads any time within its 1 October-30 April authority window: when posted, ALL vehicles need an approved traction device, or tyres rated M+S/3-peak mountain snowflake with 5/32\"+ tread — this is sign-activated, not automatically in force for the whole window. A separate gondola/tolling project for Little Cottonwood Canyon remains unbuilt and in litigation as of 2026 and does not change today's driving rules. For backcountry conditions, read the day's forecast from the Utah Avalanche Center's Salt Lake forecast at utahavalanchecenter.org."
           : "We do not yet pull live road data for Utah · check UDOT's udottraffic.utah.gov for closures and highway cameras before you drive. Utah has no statewide chain law, but UDOT strongly recommends winter/traction tyres in snow and can post seasonal traction-device requirements on specific canyon roads when conditions warrant. For backcountry conditions, read the day's forecast from the Utah Avalanche Center at utahavalanchecenter.org.";
       liveTrafficUrl = "https://www.udottraffic.utah.gov/";
+    } else if (isUsCa) {
+      // No live California road feed is wired yet · say so plainly rather
+      // than shipping an empty list that reads like "all clear". State
+      // Caltrans' real, storm-activated R1/R2/R3 chain-control ladder for
+      // the named corridors (I-80 Donner Summit, US-50 near Tahoe, CA-4/89
+      // near Bear Valley) rather than inventing a fixed calendar rule
+      // Caltrans hasn't published; Mammoth Lakes, Big Bear and Mt. Shasta
+      // get a lighter, generic advisory since no R-level corridor was
+      // identified for their approaches in research.
+      const rLevelRegion =
+        region === "north-lake-tahoe" || region === "south-lake-tahoe" || region === "bear-valley";
+      const noAvalancheCoverage = region === "big-bear" || region === "mt-shasta";
+      generalAdvice = rLevelRegion
+        ? "We do not yet pull live road data for California · check Caltrans QuickMap (quickmap.dot.ca.gov) for closures, chain control and highway cameras before you drive, especially over Donner Summit (I-80), Echo Summit (US-50) or Ebbetts Pass (CA-4/89). Caltrans can post R1/R2/R3 chain control on these routes any time in winter storms: R1 requires chains except 4WD/AWD with snow tyres on all 4 wheels (chains must still be carried); R2 requires chains except 4WD/AWD with snow tyres AND chains in possession; R3 requires chains on ALL vehicles, no exceptions — this is storm-activated, not a fixed calendar rule. For backcountry conditions in the Tahoe area, read the day's forecast from the Sierra Avalanche Center at sierraavalanchecenter.org."
+        : noAvalancheCoverage
+          ? "We do not yet pull live road data for California · check Caltrans QuickMap (quickmap.dot.ca.gov) for closures and highway cameras before you drive. California has no statewide chain law, but Caltrans strongly recommends snow tyres or carrying chains on mountain approaches in winter and can post R1/R2/R3 chain control on specific highways when storms warrant. ⚠️ This region has no dedicated backcountry avalanche-forecasting authority — neither the Sierra Avalanche Center nor the Eastern Sierra Avalanche Center covers it, so no avalanche-bulletin link is offered here rather than pointing at one that doesn't apply."
+          : "We do not yet pull live road data for California · check Caltrans QuickMap (quickmap.dot.ca.gov) for closures and highway cameras before you drive. California has no statewide chain law, but Caltrans strongly recommends snow tyres or carrying chains on mountain approaches in winter and can post R1/R2/R3 chain control on specific highways when storms warrant. For backcountry conditions around Mammoth and June Mountain, read the day's forecast from the Eastern Sierra Avalanche Center at esavalanche.org.";
+      liveTrafficUrl = "https://quickmap.dot.ca.gov/";
     } else {
       generalAdvice =
         "Live road condition data is not yet available for this region.";

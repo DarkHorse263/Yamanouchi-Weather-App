@@ -150,6 +150,15 @@ const REGION_ANCHORS: Record<RegionId, {
   "ogden-valley": { lat: 41.2160, lon: -111.8567, elevation: 2917, region: "OTHER", displayName: "Ogden Valley" },
   "provo": { lat: 40.3970, lon: -111.5847, elevation: 2515, region: "OTHER", displayName: "Provo" },
   "cache-valley": { lat: 41.9742, lon: -111.4547, elevation: 2701, region: "OTHER", displayName: "Cache Valley" },
+
+  // California anchors: each on the highest lift-served summit in the
+  // region.
+  "north-lake-tahoe": { lat: 39.1966, lon: -120.2347, elevation: 2758, region: "OTHER", displayName: "North Lake Tahoe" },
+  "south-lake-tahoe": { lat: 38.9353, lon: -119.9400, elevation: 3068, region: "OTHER", displayName: "South Lake Tahoe" },
+  "mammoth-lakes": { lat: 37.6306, lon: -119.0326, elevation: 3369, region: "OTHER", displayName: "Mammoth Lakes" },
+  "big-bear": { lat: 34.2267, lon: -116.8602, elevation: 2685, region: "OTHER", displayName: "Big Bear" },
+  "bear-valley": { lat: 38.4706, lon: -120.0471, elevation: 2591, region: "OTHER", displayName: "Bear Valley" },
+  "mt-shasta": { lat: 41.3208, lon: -122.2036, elevation: 2377, region: "OTHER", displayName: "Mt. Shasta" },
 };
 
 interface EvaluatorReport {

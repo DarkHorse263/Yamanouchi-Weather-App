@@ -48,6 +48,12 @@ import { parkCityRegion } from "./park-city";
 import { ogdenValleyRegion } from "./ogden-valley";
 import { provoRegion } from "./provo";
 import { cacheValleyRegion } from "./cache-valley";
+import { northLakeTahoeRegion } from "./north-lake-tahoe";
+import { southLakeTahoeRegion } from "./south-lake-tahoe";
+import { mammothLakesRegion } from "./mammoth-lakes";
+import { bigBearRegion } from "./big-bear";
+import { bearValleyRegion } from "./bear-valley";
+import { mtShastaRegion } from "./mt-shasta";
 
 // Active region registry · AU: Snowy Mountains + Victoria's High Country
 // + Tasmania (Ben Lomond). JP: Yamanouchi (Shiga Kogen + Kita-Shiga),
@@ -74,7 +80,13 @@ import { cacheValleyRegion } from "./cache-valley";
 // Mountain Resort). US (Utah): Cottonwood Canyons (Alta, Snowbird,
 // Brighton, Solitude), Park City (Park City Mountain, Deer Valley), Ogden
 // Valley (Snowbasin, Powder Mountain, Nordic Valley), Provo (Sundance
-// Mountain Resort), Cache Valley (Beaver Mountain, Cherry Peak).
+// Mountain Resort), Cache Valley (Beaver Mountain, Cherry Peak). US
+// (California): North Lake Tahoe (Palisades Tahoe, Northstar California,
+// Sugar Bowl), South Lake Tahoe (Heavenly, Kirkwood, Sierra-at-Tahoe,
+// Homewood Mountain Resort), Mammoth Lakes (Mammoth Mountain, June
+// Mountain), Big Bear (Bear Mountain, Snow Summit), Bear Valley (Bear
+// Valley Mountain Resort), Mt. Shasta (Mt. Shasta Ski Park). First
+// Pacific-timezone (America/Los_Angeles) US regions on this branch.
 export const REGIONS: RegionConfig[] = [
   snowyMountainsRegion,
   victoriasHighCountryRegion,
@@ -125,6 +137,12 @@ export const REGIONS: RegionConfig[] = [
   ogdenValleyRegion,
   provoRegion,
   cacheValleyRegion,
+  northLakeTahoeRegion,
+  southLakeTahoeRegion,
+  mammothLakesRegion,
+  bigBearRegion,
+  bearValleyRegion,
+  mtShastaRegion,
 ];
 
 export const REGION_BY_ID: Record<string, RegionConfig> = Object.fromEntries(
@@ -190,6 +208,12 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "ogden-valley": "US",
   "provo": "US",
   "cache-valley": "US",
+  "north-lake-tahoe": "US",
+  "south-lake-tahoe": "US",
+  "mammoth-lakes": "US",
+  "big-bear": "US",
+  "bear-valley": "US",
+  "mt-shasta": "US",
 };
 export const COUNTRY_META: Record<CountryCode, { name: string; flag: string }> = {
   AU: { name: "Australia", flag: "🇦🇺" },

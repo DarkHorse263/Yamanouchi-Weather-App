@@ -206,6 +206,12 @@ export const GetPowderAlertsQueryParams = zod.object({
       "ogden-valley",
       "provo",
       "cache-valley",
+      "north-lake-tahoe",
+      "south-lake-tahoe",
+      "mammoth-lakes",
+      "big-bear",
+      "bear-valley",
+      "mt-shasta",
     ])
     .optional()
     .describe(
@@ -1217,6 +1223,12 @@ export const GetWeatherQueryParams = zod.object({
       "ogden-valley",
       "provo",
       "cache-valley",
+      "north-lake-tahoe",
+      "south-lake-tahoe",
+      "mammoth-lakes",
+      "big-bear",
+      "bear-valley",
+      "mt-shasta",
     ])
     .optional()
     .describe(
@@ -1651,6 +1663,12 @@ export const GetWebcamsQueryParams = zod.object({
       "ogden-valley",
       "provo",
       "cache-valley",
+      "north-lake-tahoe",
+      "south-lake-tahoe",
+      "mammoth-lakes",
+      "big-bear",
+      "bear-valley",
+      "mt-shasta",
     ])
     .optional()
     .describe(
@@ -1787,6 +1805,12 @@ export const GetRoadConditionsQueryParams = zod.object({
       "ogden-valley",
       "provo",
       "cache-valley",
+      "north-lake-tahoe",
+      "south-lake-tahoe",
+      "mammoth-lakes",
+      "big-bear",
+      "bear-valley",
+      "mt-shasta",
     ])
     .optional()
     .describe(
@@ -1978,6 +2002,12 @@ export const GetLiftStatusQueryParams = zod.object({
       "ogden-valley",
       "provo",
       "cache-valley",
+      "north-lake-tahoe",
+      "south-lake-tahoe",
+      "mammoth-lakes",
+      "big-bear",
+      "bear-valley",
+      "mt-shasta",
     ])
     .optional()
     .describe(

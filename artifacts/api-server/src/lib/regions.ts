@@ -57,6 +57,12 @@ export const REGION_IDS = [
   "ogden-valley",
   "provo",
   "cache-valley",
+  "north-lake-tahoe",
+  "south-lake-tahoe",
+  "mammoth-lakes",
+  "big-bear",
+  "bear-valley",
+  "mt-shasta",
 ] as const;
 export type RegionId = (typeof REGION_IDS)[number];
 
@@ -514,6 +520,61 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "cherry-peak": "cache-valley",
   "logan": "cache-valley",
   "cache-valley-roads": "cache-valley",
+
+  // North Lake Tahoe, CA · Palisades Tahoe, Northstar California and
+  // Sugar Bowl, with 1 base town (Truckee). No naming collisions - none
+  // of the 3 resort names match the base town, so all mountain ids stay
+  // bare.
+  "palisades-tahoe": "north-lake-tahoe",
+  "northstar-california": "north-lake-tahoe",
+  "sugar-bowl": "north-lake-tahoe",
+  "truckee": "north-lake-tahoe",
+  "north-lake-tahoe-roads": "north-lake-tahoe",
+
+  // South Lake Tahoe, CA · Heavenly, Kirkwood, Sierra-at-Tahoe and
+  // Homewood, with 1 base town (South Lake Tahoe). Name-clash rule: the
+  // region id equals the base town name, so the town id is disambiguated
+  // as south-lake-tahoe-town. Sierra-at-Tahoe is flagged as officially
+  // closed for the 2025-26 season per the resort's own page (see
+  // south-lake-tahoe.ts) - still wired into the registry so the region
+  // page can display the closure honestly rather than 404ing.
+  "heavenly": "south-lake-tahoe",
+  "kirkwood": "south-lake-tahoe",
+  "sierra-at-tahoe": "south-lake-tahoe",
+  "homewood-mountain-resort": "south-lake-tahoe",
+  "south-lake-tahoe-town": "south-lake-tahoe",
+  "south-lake-tahoe-roads": "south-lake-tahoe",
+
+  // Mammoth Lakes, CA · Mammoth Mountain and June Mountain, with 1 base
+  // town (Mammoth Lakes). Name-clash rule: the region id equals the base
+  // town name, so the town id is disambiguated as mammoth-lakes-town.
+  "mammoth-mountain": "mammoth-lakes",
+  "june-mountain": "mammoth-lakes",
+  "mammoth-lakes-town": "mammoth-lakes",
+  "mammoth-lakes-roads": "mammoth-lakes",
+
+  // Big Bear, CA · Bear Mountain and Snow Summit, with 1 base town (Big
+  // Bear Lake). No naming collisions.
+  "bear-mountain": "big-bear",
+  "snow-summit": "big-bear",
+  "big-bear-lake": "big-bear",
+  "big-bear-roads": "big-bear",
+
+  // Bear Valley, CA · 1 mountain (Bear Valley Mountain Resort), with 1
+  // base town. Three-way name-clash avoided by using the nearby gateway
+  // town Arnold as the base town id, rather than a synthetic
+  // bear-valley-town that would still read confusingly next to the
+  // resort's own "Bear Valley Mountain Resort" name.
+  "bear-valley-mountain-resort": "bear-valley",
+  "arnold": "bear-valley",
+  "bear-valley-roads": "bear-valley",
+
+  // Mt. Shasta, CA · 1 mountain (Mt. Shasta Ski Park), with 1 base town
+  // (Mount Shasta). No naming collisions - distinct id spelling
+  // ("mt-shasta" vs "mount-shasta") keeps region and town ids apart.
+  "mt-shasta-ski-park": "mt-shasta",
+  "mount-shasta": "mt-shasta",
+  "mt-shasta-roads": "mt-shasta",
 };
 
 export function regionForLocation(locationId: string): RegionId | undefined {

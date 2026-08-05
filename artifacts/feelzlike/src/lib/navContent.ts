@@ -68,6 +68,12 @@ const REGIONS_WITH_ROADS_CONTENT: ReadonlySet<string> = new Set([
   "ogden-valley",
   "provo",
   "cache-valley",
+  "north-lake-tahoe",
+  "south-lake-tahoe",
+  "mammoth-lakes",
+  "big-bear",
+  "bear-valley",
+  "mt-shasta",
 ]);
 
 /**

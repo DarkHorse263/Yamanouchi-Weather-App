@@ -448,6 +448,30 @@ if (process.env.NODE_ENV === "production") {
       name: "Cache Valley",
       towns: { logan: "Logan" },
     },
+    "north-lake-tahoe": {
+      name: "North Lake Tahoe",
+      towns: { truckee: "Truckee" },
+    },
+    "south-lake-tahoe": {
+      name: "South Lake Tahoe",
+      towns: { "south-lake-tahoe-town": "South Lake Tahoe" },
+    },
+    "mammoth-lakes": {
+      name: "Mammoth Lakes",
+      towns: { "mammoth-lakes-town": "Mammoth Lakes" },
+    },
+    "big-bear": {
+      name: "Big Bear",
+      towns: { "big-bear-lake": "Big Bear Lake" },
+    },
+    "bear-valley": {
+      name: "Bear Valley",
+      towns: { arnold: "Arnold" },
+    },
+    "mt-shasta": {
+      name: "Mt. Shasta",
+      towns: { "mount-shasta": "Mount Shasta" },
+    },
   };
 
   // Top-level routes handled by the SPA (before the /:region catch-all).

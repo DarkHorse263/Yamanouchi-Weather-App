@@ -64,6 +64,12 @@ import { PARK_CITY_TRANSPORT } from "./park-city";
 import { OGDEN_VALLEY_TRANSPORT } from "./ogden-valley";
 import { PROVO_TRANSPORT } from "./provo";
 import { CACHE_VALLEY_TRANSPORT } from "./cache-valley";
+import { NORTH_LAKE_TAHOE_TRANSPORT } from "./north-lake-tahoe";
+import { SOUTH_LAKE_TAHOE_TRANSPORT } from "./south-lake-tahoe";
+import { MAMMOTH_LAKES_TRANSPORT } from "./mammoth-lakes";
+import { BIG_BEAR_TRANSPORT } from "./big-bear";
+import { BEAR_VALLEY_TRANSPORT } from "./bear-valley";
+import { MT_SHASTA_TRANSPORT } from "./mt-shasta";
 
 const REGISTRY: Record<RegionId, TransportProviderList> = {
   "snowy-mountains": SNOWY_MOUNTAINS_TRANSPORT,
@@ -123,6 +129,12 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   "ogden-valley": OGDEN_VALLEY_TRANSPORT,
   "provo": PROVO_TRANSPORT,
   "cache-valley": CACHE_VALLEY_TRANSPORT,
+  "north-lake-tahoe": NORTH_LAKE_TAHOE_TRANSPORT,
+  "south-lake-tahoe": SOUTH_LAKE_TAHOE_TRANSPORT,
+  "mammoth-lakes": MAMMOTH_LAKES_TRANSPORT,
+  "big-bear": BIG_BEAR_TRANSPORT,
+  "bear-valley": BEAR_VALLEY_TRANSPORT,
+  "mt-shasta": MT_SHASTA_TRANSPORT,
 };
 
 // Loader-time integrity check.

@@ -103,6 +103,12 @@ const FALLBACK_REGIONS: Region[] = [
   { id: "ogden-valley",           name: "Ogden Valley",                   country: "United States", countryCode: "US", region: "Utah",            status: "live", href: "/ogden-valley/",          baseTowns: ["Ogden", "Eden"],                                             mountains: ["Snowbasin", "Powder Mountain", "Nordic Valley"],            headlineLabel: "Ogden",        headline: null },
   { id: "provo",                  name: "Provo",                          country: "United States", countryCode: "US", region: "Utah",            status: "live", href: "/provo/",                 baseTowns: ["Provo", "Sundance"],                                         mountains: ["Sundance Mountain Resort"],                                 headlineLabel: "Provo",        headline: null },
   { id: "cache-valley",           name: "Cache Valley",                   country: "United States", countryCode: "US", region: "Utah",            status: "live", href: "/cache-valley/",          baseTowns: ["Logan"],                                                     mountains: ["Beaver Mountain", "Cherry Peak"],                           headlineLabel: "Logan",        headline: null },
+  { id: "north-lake-tahoe",       name: "North Lake Tahoe",               country: "United States", countryCode: "US", region: "California",      status: "live", href: "/north-lake-tahoe/",      baseTowns: ["Truckee"],                                                   mountains: ["Palisades Tahoe", "Northstar California", "Sugar Bowl"],   headlineLabel: "Truckee",      headline: null },
+  { id: "south-lake-tahoe",       name: "South Lake Tahoe",               country: "United States", countryCode: "US", region: "California",      status: "live", href: "/south-lake-tahoe/",      baseTowns: ["South Lake Tahoe"],                                         mountains: ["Heavenly", "Kirkwood", "Sierra-at-Tahoe", "Homewood Mountain Resort"], headlineLabel: "South Lake Tahoe", headline: null },
+  { id: "mammoth-lakes",          name: "Mammoth Lakes",                  country: "United States", countryCode: "US", region: "California",      status: "live", href: "/mammoth-lakes/",         baseTowns: ["Mammoth Lakes"],                                            mountains: ["Mammoth Mountain", "June Mountain"],                       headlineLabel: "Mammoth Lakes", headline: null },
+  { id: "big-bear",               name: "Big Bear",                       country: "United States", countryCode: "US", region: "California",      status: "live", href: "/big-bear/",              baseTowns: ["Big Bear Lake"],                                            mountains: ["Bear Mountain", "Snow Summit"],                            headlineLabel: "Big Bear Lake", headline: null },
+  { id: "bear-valley",            name: "Bear Valley",                    country: "United States", countryCode: "US", region: "California",      status: "live", href: "/bear-valley/",           baseTowns: ["Arnold"],                                                   mountains: ["Bear Valley Mountain Resort"],                             headlineLabel: "Arnold",       headline: null },
+  { id: "mt-shasta",              name: "Mt. Shasta",                     country: "United States", countryCode: "US", region: "California",      status: "live", href: "/mt-shasta/",             baseTowns: ["Mount Shasta"],                                             mountains: ["Mt. Shasta Ski Park"],                                     headlineLabel: "Mount Shasta", headline: null },
 ];
 
 // Map a region to the base town we surface in the country card. This is
@@ -156,6 +162,12 @@ const PRIMARY_TOWN: Record<string, string> = {
   "ogden-valley":             "Ogden",
   "provo":                    "Provo",
   "cache-valley":             "Logan",
+  "north-lake-tahoe":         "Truckee",
+  "south-lake-tahoe":         "South Lake Tahoe",
+  "mammoth-lakes":            "Mammoth Lakes",
+  "big-bear":                 "Big Bear Lake",
+  "bear-valley":              "Arnold",
+  "mt-shasta":                "Mount Shasta",
 };
 
 // AU + NZ = southern hemisphere (snow Jun-Sep); JP + CA + US = northern (snow Dec-Mar).

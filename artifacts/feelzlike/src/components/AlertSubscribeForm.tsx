@@ -74,6 +74,12 @@ export const ALERT_REGIONS: Array<{ id: string; nameEn: string; nameJa: string; 
   { id: "ogden-valley", nameEn: "Ogden Valley", nameJa: "オグデンバレー", country: "US · Utah" },
   { id: "provo", nameEn: "Provo", nameJa: "プロボ", country: "US · Utah" },
   { id: "cache-valley", nameEn: "Cache Valley", nameJa: "キャッシュバレー", country: "US · Utah" },
+  { id: "north-lake-tahoe", nameEn: "North Lake Tahoe", nameJa: "ノーザーンレイキ・タホー", country: "US · California" },
+  { id: "south-lake-tahoe", nameEn: "South Lake Tahoe", nameJa: "サザーンレイキ・タホー", country: "US · California" },
+  { id: "mammoth-lakes", nameEn: "Mammoth Lakes", nameJa: "マモスレイカズ", country: "US · California" },
+  { id: "big-bear", nameEn: "Big Bear", nameJa: "ビグベアー", country: "US · California" },
+  { id: "bear-valley", nameEn: "Bear Valley", nameJa: "ベアバリー", country: "US · California" },
+  { id: "mt-shasta", nameEn: "Mt. Shasta", nameJa: "シャスタ山", country: "US · California" },
 ];
 
 const HORIZONS: Array<{ value: 24 | 48 | 72; label: string; labelJa: string }> = [

@@ -103,7 +103,13 @@ export type RegionKey =
   | "park-city"
   | "ogden-valley"
   | "provo"
-  | "cache-valley";
+  | "cache-valley"
+  | "north-lake-tahoe"
+  | "south-lake-tahoe"
+  | "mammoth-lakes"
+  | "big-bear"
+  | "bear-valley"
+  | "mt-shasta";
 type ViewMode = "interactive" | "windy" | "official";
 
 interface RegionConfig {
@@ -627,6 +633,60 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       attribution: "National Weather Service · weather radar",
     },
   },
+  "north-lake-tahoe": {
+    windy: { lat: 39.33, lon: -120.18, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "south-lake-tahoe": {
+    windy: { lat: 38.94, lon: -119.98, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "mammoth-lakes": {
+    windy: { lat: 37.65, lon: -118.97, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "big-bear": {
+    windy: { lat: 34.24, lon: -116.91, zoom: 11 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "bear-valley": {
+    windy: { lat: 38.25, lon: -120.36, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "mt-shasta": {
+    windy: { lat: 41.31, lon: -122.31, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
 };
 
 const DEFAULT_ZOOM = 9;
@@ -1124,6 +1184,55 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "logan", name: "Logan", lat: 41.7370, lng: -111.8338, accent: "#0ea5e9" },
     ],
   },
+  "north-lake-tahoe": {
+    center: { lat: 39.33, lng: -120.18 },
+    pins: [
+      { id: "palisades-tahoe", name: "Palisades Tahoe", lat: 39.1966, lng: -120.2347, accent: "#f97316" },
+      { id: "northstar-california", name: "Northstar California", lat: 39.2640, lng: -120.1250, accent: "#f97316" },
+      { id: "sugar-bowl", name: "Sugar Bowl", lat: 39.3044, lng: -120.3358, accent: "#f97316" },
+      { id: "truckee", name: "Truckee", lat: 39.3280, lng: -120.1833, accent: "#0ea5e9" },
+    ],
+  },
+  "south-lake-tahoe": {
+    center: { lat: 38.94, lng: -119.98 },
+    pins: [
+      { id: "heavenly", name: "Heavenly", lat: 38.9353, lng: -119.9400, accent: "#f97316" },
+      { id: "kirkwood", name: "Kirkwood", lat: 38.6840, lng: -120.0664, accent: "#f97316" },
+      { id: "sierra-at-tahoe", name: "Sierra-at-Tahoe", lat: 38.8002, lng: -120.0806, accent: "#f97316" },
+      { id: "homewood-mountain-resort", name: "Homewood", lat: 39.0827, lng: -120.1755, accent: "#f97316" },
+      { id: "south-lake-tahoe-town", name: "South Lake Tahoe", lat: 38.9399, lng: -119.9772, accent: "#0ea5e9" },
+    ],
+  },
+  "mammoth-lakes": {
+    center: { lat: 37.65, lng: -118.97 },
+    pins: [
+      { id: "mammoth-mountain", name: "Mammoth Mountain", lat: 37.6306, lng: -119.0326, accent: "#f97316" },
+      { id: "june-mountain", name: "June Mountain", lat: 37.7683, lng: -119.0906, accent: "#f97316" },
+      { id: "mammoth-lakes-town", name: "Mammoth Lakes", lat: 37.6485, lng: -118.9721, accent: "#0ea5e9" },
+    ],
+  },
+  "big-bear": {
+    center: { lat: 34.24, lng: -116.91 },
+    pins: [
+      { id: "bear-mountain", name: "Bear Mountain", lat: 34.2267, lng: -116.8602, accent: "#f97316" },
+      { id: "snow-summit", name: "Snow Summit", lat: 34.2286, lng: -116.8911, accent: "#f97316" },
+      { id: "big-bear-lake", name: "Big Bear Lake", lat: 34.2439, lng: -116.9114, accent: "#0ea5e9" },
+    ],
+  },
+  "bear-valley": {
+    center: { lat: 38.25, lng: -120.36 },
+    pins: [
+      { id: "bear-valley-mountain-resort", name: "Bear Valley Mountain Resort", lat: 38.4706, lng: -120.0471, accent: "#f97316" },
+      { id: "arnold", name: "Arnold", lat: 38.2494, lng: -120.3552, accent: "#0ea5e9" },
+    ],
+  },
+  "mt-shasta": {
+    center: { lat: 41.31, lng: -122.31 },
+    pins: [
+      { id: "mt-shasta-ski-park", name: "Mt. Shasta Ski Park", lat: 41.3208, lng: -122.2036, accent: "#f97316" },
+      { id: "mount-shasta", name: "Mount Shasta", lat: 41.3099, lng: -122.3106, accent: "#0ea5e9" },
+    ],
+  },
 };
 
 // Which country each region sits in. Drives the cross-region grouping on
@@ -1182,6 +1291,12 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "ogden-valley": "US",
   provo: "US",
   "cache-valley": "US",
+  "north-lake-tahoe": "US",
+  "south-lake-tahoe": "US",
+  "mammoth-lakes": "US",
+  "big-bear": "US",
+  "bear-valley": "US",
+  "mt-shasta": "US",
 };
 const COUNTRY_LABEL: Record<MapCountry, string> = { AU: "australia", JP: "japan", NZ: "new zealand", CA: "canada", US: "united states" };
 const REGION_LABEL: Record<RegionKey, string> = {
@@ -1234,6 +1349,12 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "ogden-valley": "ogden valley",
   provo: "provo",
   "cache-valley": "cache valley",
+  "north-lake-tahoe": "north lake tahoe",
+  "south-lake-tahoe": "south lake tahoe",
+  "mammoth-lakes": "mammoth lakes",
+  "big-bear": "big bear",
+  "bear-valley": "bear valley",
+  "mt-shasta": "mt. shasta",
 };
 
 interface CountryPin extends PinSpec {

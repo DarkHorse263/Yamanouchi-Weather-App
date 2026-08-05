@@ -1715,6 +1715,12 @@ components:
         - ogden-valley
         - provo
         - cache-valley
+        - north-lake-tahoe
+        - south-lake-tahoe
+        - mammoth-lakes
+        - big-bear
+        - bear-valley
+        - mt-shasta
       description: |
         Canonical region identifier used across the FeelZlike platform.
 

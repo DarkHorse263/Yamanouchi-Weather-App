@@ -62,4 +62,10 @@ export const RegionId = {
   "ogden-valley": "ogden-valley",
   provo: "provo",
   "cache-valley": "cache-valley",
+  "north-lake-tahoe": "north-lake-tahoe",
+  "south-lake-tahoe": "south-lake-tahoe",
+  "mammoth-lakes": "mammoth-lakes",
+  "big-bear": "big-bear",
+  "bear-valley": "bear-valley",
+  "mt-shasta": "mt-shasta",
 } as const;

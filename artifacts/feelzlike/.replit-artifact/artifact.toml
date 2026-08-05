@@ -3364,6 +3364,246 @@ from = "/cache-valley/logan/explore/"
 to = "/cache-valley/logan/explore/index.html"
 
 [[services.production.rewrites]]
+from = "/north-lake-tahoe/"
+to = "/north-lake-tahoe/index.html"
+
+[[services.production.rewrites]]
+from = "/north-lake-tahoe/mountains/"
+to = "/north-lake-tahoe/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/north-lake-tahoe/stay/"
+to = "/north-lake-tahoe/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/north-lake-tahoe/truckee/"
+to = "/north-lake-tahoe/truckee/index.html"
+
+[[services.production.rewrites]]
+from = "/north-lake-tahoe/truckee/weather/"
+to = "/north-lake-tahoe/truckee/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/north-lake-tahoe/truckee/stay/"
+to = "/north-lake-tahoe/truckee/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/north-lake-tahoe/truckee/eat/"
+to = "/north-lake-tahoe/truckee/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/north-lake-tahoe/truckee/roads/"
+to = "/north-lake-tahoe/truckee/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/north-lake-tahoe/truckee/transport/"
+to = "/north-lake-tahoe/truckee/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/north-lake-tahoe/truckee/explore/"
+to = "/north-lake-tahoe/truckee/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/south-lake-tahoe/"
+to = "/south-lake-tahoe/index.html"
+
+[[services.production.rewrites]]
+from = "/south-lake-tahoe/mountains/"
+to = "/south-lake-tahoe/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/south-lake-tahoe/stay/"
+to = "/south-lake-tahoe/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/south-lake-tahoe/south-lake-tahoe-town/"
+to = "/south-lake-tahoe/south-lake-tahoe-town/index.html"
+
+[[services.production.rewrites]]
+from = "/south-lake-tahoe/south-lake-tahoe-town/weather/"
+to = "/south-lake-tahoe/south-lake-tahoe-town/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/south-lake-tahoe/south-lake-tahoe-town/stay/"
+to = "/south-lake-tahoe/south-lake-tahoe-town/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/south-lake-tahoe/south-lake-tahoe-town/eat/"
+to = "/south-lake-tahoe/south-lake-tahoe-town/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/south-lake-tahoe/south-lake-tahoe-town/roads/"
+to = "/south-lake-tahoe/south-lake-tahoe-town/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/south-lake-tahoe/south-lake-tahoe-town/transport/"
+to = "/south-lake-tahoe/south-lake-tahoe-town/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/south-lake-tahoe/south-lake-tahoe-town/explore/"
+to = "/south-lake-tahoe/south-lake-tahoe-town/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/mammoth-lakes/"
+to = "/mammoth-lakes/index.html"
+
+[[services.production.rewrites]]
+from = "/mammoth-lakes/mountains/"
+to = "/mammoth-lakes/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/mammoth-lakes/stay/"
+to = "/mammoth-lakes/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/mammoth-lakes/mammoth-lakes-town/"
+to = "/mammoth-lakes/mammoth-lakes-town/index.html"
+
+[[services.production.rewrites]]
+from = "/mammoth-lakes/mammoth-lakes-town/weather/"
+to = "/mammoth-lakes/mammoth-lakes-town/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/mammoth-lakes/mammoth-lakes-town/stay/"
+to = "/mammoth-lakes/mammoth-lakes-town/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/mammoth-lakes/mammoth-lakes-town/eat/"
+to = "/mammoth-lakes/mammoth-lakes-town/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/mammoth-lakes/mammoth-lakes-town/roads/"
+to = "/mammoth-lakes/mammoth-lakes-town/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/mammoth-lakes/mammoth-lakes-town/transport/"
+to = "/mammoth-lakes/mammoth-lakes-town/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/mammoth-lakes/mammoth-lakes-town/explore/"
+to = "/mammoth-lakes/mammoth-lakes-town/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/big-bear/"
+to = "/big-bear/index.html"
+
+[[services.production.rewrites]]
+from = "/big-bear/mountains/"
+to = "/big-bear/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/big-bear/stay/"
+to = "/big-bear/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/big-bear/big-bear-lake/"
+to = "/big-bear/big-bear-lake/index.html"
+
+[[services.production.rewrites]]
+from = "/big-bear/big-bear-lake/weather/"
+to = "/big-bear/big-bear-lake/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/big-bear/big-bear-lake/stay/"
+to = "/big-bear/big-bear-lake/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/big-bear/big-bear-lake/eat/"
+to = "/big-bear/big-bear-lake/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/big-bear/big-bear-lake/roads/"
+to = "/big-bear/big-bear-lake/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/big-bear/big-bear-lake/transport/"
+to = "/big-bear/big-bear-lake/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/big-bear/big-bear-lake/explore/"
+to = "/big-bear/big-bear-lake/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/bear-valley/"
+to = "/bear-valley/index.html"
+
+[[services.production.rewrites]]
+from = "/bear-valley/mountains/"
+to = "/bear-valley/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/bear-valley/stay/"
+to = "/bear-valley/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/bear-valley/arnold/"
+to = "/bear-valley/arnold/index.html"
+
+[[services.production.rewrites]]
+from = "/bear-valley/arnold/weather/"
+to = "/bear-valley/arnold/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/bear-valley/arnold/stay/"
+to = "/bear-valley/arnold/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/bear-valley/arnold/eat/"
+to = "/bear-valley/arnold/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/bear-valley/arnold/roads/"
+to = "/bear-valley/arnold/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/bear-valley/arnold/transport/"
+to = "/bear-valley/arnold/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/bear-valley/arnold/explore/"
+to = "/bear-valley/arnold/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-shasta/"
+to = "/mt-shasta/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-shasta/mountains/"
+to = "/mt-shasta/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-shasta/stay/"
+to = "/mt-shasta/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-shasta/mount-shasta/"
+to = "/mt-shasta/mount-shasta/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-shasta/mount-shasta/weather/"
+to = "/mt-shasta/mount-shasta/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-shasta/mount-shasta/stay/"
+to = "/mt-shasta/mount-shasta/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-shasta/mount-shasta/eat/"
+to = "/mt-shasta/mount-shasta/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-shasta/mount-shasta/roads/"
+to = "/mt-shasta/mount-shasta/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-shasta/mount-shasta/transport/"
+to = "/mt-shasta/mount-shasta/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-shasta/mount-shasta/explore/"
+to = "/mt-shasta/mount-shasta/explore/index.html"
+
+[[services.production.rewrites]]
 from = "/*"
 to = "/index.html"
 

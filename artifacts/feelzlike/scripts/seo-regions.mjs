@@ -848,6 +848,97 @@ export const REGIONS = [
       { id: "logan", name: "Logan", blurb: "Cache Valley's main city, home to Utah State University, about 30 minutes from Beaver Mountain" },
     ],
   },
+  {
+    slug: "north-lake-tahoe",
+    name: "North Lake Tahoe",
+    subtitle: "California · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Palisades Tahoe",       blurb: "2960 acres across two connected mountains · host of the 1960 Winter Olympics" },
+      { name: "Northstar California",  blurb: "family-friendly cruisers · Vail-owned, Epic Pass" },
+      { name: "Sugar Bowl",             blurb: "Donner Summit classic · Mountain Collective Pass, not Epic or Ikon" },
+    ],
+    towns: [
+      { id: "truckee", name: "Truckee", blurb: "historic railroad town on I-80, the main gateway to North Lake Tahoe's resorts" },
+    ],
+  },
+  {
+    slug: "south-lake-tahoe",
+    name: "South Lake Tahoe",
+    subtitle: "California · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Heavenly",                  blurb: "straddles the CA/NV state line · 2025-26 closing date not confirmed by resort at time of writing" },
+      { name: "Kirkwood",                  blurb: "high-elevation, snow-reliable · 2025-26 closing date not confirmed by resort at time of writing" },
+      { name: "Sierra-at-Tahoe",           blurb: "\u26a0\ufe0f closed for the entire 2025-26 season per the resort's own page — shown here for completeness, not as an open resort" },
+      { name: "Homewood Mountain Resort",  blurb: "lakefront skiing on the west shore · reopened for 2025-26 after a full 2024-25 closure" },
+    ],
+    towns: [
+      { id: "south-lake-tahoe-town", name: "South Lake Tahoe", blurb: "the main lodging and services base for the south shore of Lake Tahoe" },
+    ],
+  },
+  {
+    slug: "mammoth-lakes",
+    name: "Mammoth Lakes",
+    subtitle: "California · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Mammoth Mountain", blurb: "Eastern Sierra giant · often open into June or July on a good season" },
+      { name: "June Mountain",    blurb: "quieter sister resort · same ownership and pass as Mammoth Mountain" },
+    ],
+    towns: [
+      { id: "mammoth-lakes-town", name: "Mammoth Lakes", blurb: "the Eastern Sierra base town serving Mammoth Mountain and June Mountain" },
+    ],
+  },
+  {
+    slug: "big-bear",
+    name: "Big Bear",
+    subtitle: "California · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Bear Mountain", blurb: "terrain-park focused · 2025-26 closing date reported inconsistently across sources (late Mar 2026)" },
+      { name: "Snow Summit",   blurb: "Big Bear's other mountain, shared lift ticket with Bear Mountain · 2025-26 closing date reported inconsistently across sources" },
+    ],
+    towns: [
+      { id: "big-bear-lake", name: "Big Bear Lake", blurb: "Southern California's closest major ski town, about two hours from Los Angeles" },
+    ],
+  },
+  {
+    slug: "bear-valley",
+    name: "Bear Valley",
+    subtitle: "California · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Bear Valley Mountain Resort", blurb: "Sierra Nevada resort on Highway 4 · 2025-26 opening date uncertain in source reporting" },
+    ],
+    towns: [
+      { id: "arnold", name: "Arnold", blurb: "Highway 4 gateway community closest to Bear Valley Mountain Resort" },
+    ],
+  },
+  {
+    slug: "mt-shasta",
+    name: "Mt. Shasta",
+    subtitle: "California · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Mt. Shasta Ski Park", blurb: "small volcano-slope resort in far Northern California · base/summit elevation unverified, closed early for 2025-26 due to lack of snow" },
+    ],
+    towns: [
+      { id: "mount-shasta", name: "Mount Shasta", blurb: "small town at the base of Mt. Shasta, the gateway to Mt. Shasta Ski Park" },
+    ],
+  },
 ];
 
 /** Region sub-sections that actually render for this region (see gating notes above). */

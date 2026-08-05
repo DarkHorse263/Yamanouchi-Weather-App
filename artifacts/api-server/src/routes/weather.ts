@@ -475,6 +475,46 @@ const LOCATIONS: LocationConfig[] = [
   { id: "beaver-mountain",           name: "Beaver Mountain",           latitude:  41.9742, longitude: -111.4547, elevation: 2701, description: "Family-run since 1939 · one of the oldest continuously-operated ski areas in the US · Indy Pass.",           bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
   { id: "cherry-peak",               name: "Cherry Peak",               latitude:  41.9897, longitude: -111.9250, elevation: 2146, description: "Small Cache Valley hill on the Indy Pass · 2025-26 opening date unconfirmed by the resort.",                     bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
   { id: "logan",                     name: "Logan",                     latitude:  41.7370, longitude: -111.8338, elevation: 1358, description: "Cache Valley's main town, about 30 minutes from Beaver Mountain and Cherry Peak.",                              bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+
+  // North Lake Tahoe, CA · first Pacific-timezone (America/Los_Angeles)
+  // US region on this branch.
+  { id: "palisades-tahoe",           name: "Palisades Tahoe",           latitude:  39.1966, longitude: -120.2347, elevation: 2758, description: "Ikon Pass · gondola-linked Palisades/Alpine Meadows base areas · Olympic terrain (1960 Winter Games).",             bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+  { id: "northstar-california",      name: "Northstar California",      latitude:  39.2640, longitude: -120.1250, elevation: 2624, description: "Epic Pass · Vail Resorts' Tahoe trio with Heavenly and Kirkwood · gondola village base.",                        bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+  { id: "sugar-bowl",                name: "Sugar Bowl",                latitude:  39.3044, longitude: -120.3358, elevation: 2554, description: "Independent · the only Mountain Collective resort in the Tahoe region · Donner Summit tram-served terrain.",         bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+  { id: "truckee",                   name: "Truckee",                   latitude:  39.3280, longitude: -120.1833, elevation: 1808, description: "Historic railroad town on I-80, the main gateway to all three North Lake Tahoe resorts.",                            bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+
+  // South Lake Tahoe, CA · Sierra-at-Tahoe is officially closed for the
+  // 2025-26 season per the resort's own page — see
+  // src/regions/south-lake-tahoe.ts for the full honesty-gate note.
+  { id: "heavenly",                  name: "Heavenly",                  latitude:  38.9353, longitude: -119.9400, elevation: 3068, description: "Epic Pass · straddles the CA/NV state line · 2025-26 closing date not confirmed by the resort.",                     bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+  { id: "kirkwood",                  name: "Kirkwood",                  latitude:  38.6840, longitude: -120.0664, elevation: 2987, description: "Epic Pass · one of the highest resort base elevations in the Tahoe region · 2025-26 closing date not confirmed.",       bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+  { id: "sierra-at-tahoe",           name: "Sierra-at-Tahoe",           latitude:  38.8002, longitude: -120.0806, elevation: 2699, description: "⚠️ Officially closed for the 2025/26 season per the resort's own hours-of-operation page — conditions data should be treated as unavailable.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+  { id: "homewood-mountain-resort",  name: "Homewood Mountain Resort",  latitude:  39.0827, longitude: -120.1755, elevation: 2401, description: "Independent · West Shore lake views · reopened for 2025-26 after a full 2024-25 closure for redevelopment.",           bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+  { id: "south-lake-tahoe-town",     name: "South Lake Tahoe",          latitude:  38.9399, longitude: -119.9772, elevation: 1907, description: "Lakefront city on the California side of the state line, gateway to Heavenly, Kirkwood, Sierra-at-Tahoe and Homewood.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+
+  // Mammoth Lakes, CA
+  { id: "mammoth-mountain",          name: "Mammoth Mountain",          latitude:  37.6306, longitude: -119.0326, elevation: 3369, description: "Ikon Pass · one of the highest, latest-closing resorts in California · ran a 199-day season into June for 2025-26.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+  { id: "june-mountain",             name: "June Mountain",             latitude:  37.7683, longitude: -119.0906, elevation: 3075, description: "Ikon Pass · Mammoth's quieter sister mountain across two peaks, near June Lake.",                                     bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+  { id: "mammoth-lakes-town",        name: "Mammoth Lakes",             latitude:  37.6485, longitude: -118.9721, elevation: 2371, description: "Eastern Sierra resort town on US-395, the base for both Mammoth Mountain and June Mountain.",                         bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+
+  // Big Bear, CA · outside both the Sierra Avalanche Center's and Eastern
+  // Sierra Avalanche Center's coverage areas — no dedicated backcountry
+  // avalanche authority identified for this region.
+  { id: "bear-mountain",             name: "Bear Mountain",             latitude:  34.2267, longitude: -116.8602, elevation: 2685, description: "Ikon Pass · Southern California's terrain-park anchor · 2025-26 closing date reported as Mar 25 or Mar 29 2026, sources disagree.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+  { id: "snow-summit",               name: "Snow Summit",               latitude:  34.2286, longitude: -116.8911, elevation: 2500, description: "Ikon Pass (same operator as Bear Mountain) · 2025-26 closing date reported as Apr 6 or Mar 22 2026, sources disagree.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+  { id: "big-bear-lake",             name: "Big Bear Lake",             latitude:  34.2439, longitude: -116.9114, elevation: 2058, description: "San Bernardino Mountains resort town on Highway 18/38, the base for Bear Mountain and Snow Summit.",                  bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+
+  // Bear Valley, CA · near the southern edge of the Sierra Avalanche
+  // Center's coverage area.
+  { id: "bear-valley-mountain-resort", name: "Bear Valley Mountain Resort", latitude: 38.4706, longitude: -120.0471, elevation: 2591, description: "Indy Pass · own multi-resort \"Cali Pass\" + Powder Alliance reciprocity · 2025-26 opening date uncertain in source reporting.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+  { id: "arnold",                    name: "Arnold",                    latitude:  38.2494, longitude: -120.3552, elevation: 1204, description: "Highway 4 gateway town about 20 minutes below Bear Valley Mountain Resort.",                                          bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+
+  // Mt. Shasta, CA · California's northernmost ski area, in the Cascades
+  // rather than the Sierra Nevada · outside SAC/ESAC coverage · 2025-26
+  // season closed early (Mar 2, 2026) for lack of snow. Elevation omitted
+  // (unconfirmed from an authoritative source — see src/regions/mt-shasta.ts).
+  { id: "mt-shasta-ski-park",        name: "Mt. Shasta Ski Park",       latitude:  41.3208, longitude: -122.2036, elevation: 0, description: "Indy Pass · California's northernmost ski area · 2025-26 season closed early (Mar 2, 2026) due to lack of snow, 5 days short of the resort's 60-day guarantee · base/summit elevation unverified.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+  { id: "mount-shasta",              name: "Mount Shasta",              latitude:  41.3099, longitude: -122.3106, elevation: 1082, description: "I-5 town at the base of Mt. Shasta, about 15 minutes from the ski park via SR-89.",                                    bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
 ];
 
 const WEATHER_DESCRIPTIONS: Record<number, string> = {

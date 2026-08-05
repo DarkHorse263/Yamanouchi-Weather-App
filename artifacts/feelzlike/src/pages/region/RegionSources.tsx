@@ -179,6 +179,67 @@ const UT_ROADS_GENERAL: SourceGroup = {
   ],
 };
 
+/**
+ * United States (California) reference block. Same "Official references"
+ * posture as Colorado/Utah: no live feed is wired into a feelzlike reading
+ * in this pass, these are link-outs only · the forecast ensemble below is
+ * what actually powers the numbers shown. Big Bear and Mt. Shasta have no
+ * dedicated avalanche-forecasting authority (outside both the Sierra and
+ * Eastern Sierra Avalanche Centers' coverage), so they get a references
+ * block without an avalanche-center link rather than one that doesn't apply.
+ */
+const CA_OFFICIAL_REFERENCES_SIERRA: SourceGroup = {
+  title: "Official references",
+  titleJa: "公式参照先",
+  blurb:
+    "Link-outs, not wired feeds · conditions shown on feelzlike come from the forecast ensemble below, so check these before you drive or tour.",
+  blurbJa:
+    "リンクのみで、データ連携はしていません。feelzlikeの数値は下記の予報モデルによるものです。走行・ツアー前に必ず公式情報をご確認ください。",
+  items: [
+    { label: "National Weather Service", detail: "US federal forecasts & warnings", url: "https://www.weather.gov/" },
+    { label: "Sierra Avalanche Center", detail: "daily avalanche forecasts for the Tahoe/Bear Valley backcountry", url: "https://www.sierraavalanchecenter.org/" },
+  ],
+};
+const CA_OFFICIAL_REFERENCES_EASTERN_SIERRA: SourceGroup = {
+  title: "Official references",
+  titleJa: "公式参照先",
+  blurb:
+    "Link-outs, not wired feeds · conditions shown on feelzlike come from the forecast ensemble below, so check these before you drive or tour.",
+  blurbJa:
+    "リンクのみで、データ連携はしていません。feelzlikeの数値は下記の予報モデルによるものです。走行・ツアー前に必ず公式情報をご確認ください。",
+  items: [
+    { label: "National Weather Service", detail: "US federal forecasts & warnings", url: "https://www.weather.gov/" },
+    { label: "Eastern Sierra Avalanche Center", detail: "daily avalanche forecasts for the Mammoth/June Mountain backcountry", url: "https://www.esavalanche.org/" },
+  ],
+};
+const CA_OFFICIAL_REFERENCES_NO_AVALANCHE: SourceGroup = {
+  title: "Official references",
+  titleJa: "公式参照先",
+  blurb:
+    "Link-outs, not wired feeds · conditions shown on feelzlike come from the forecast ensemble below, so check these before you drive or tour. \u26a0\ufe0f No dedicated backcountry avalanche-forecasting authority covers this region \u2014 neither the Sierra Avalanche Center nor the Eastern Sierra Avalanche Center extends this far, so no avalanche-bulletin link is offered here rather than pointing at one that doesn't apply.",
+  blurbJa:
+    "リンクのみで、データ連携はしていません。feelzlikeの数値は下記の予報モデルによるものです。走行・ツアー前に必ず公式情報をご確認ください。この地域を担当する雪崩予報機関はありません。",
+  items: [
+    { label: "National Weather Service", detail: "US federal forecasts & warnings", url: "https://www.weather.gov/" },
+  ],
+};
+
+const CA_ROADS_RLEVEL: SourceGroup = {
+  title: "Roads & transport",
+  titleJa: "道路・交通",
+  items: [
+    { label: "Caltrans QuickMap", detail: "statewide real-time conditions, chain control & camera map", url: "https://quickmap.dot.ca.gov/" },
+    { label: "Caltrans · chain requirements (R1/R2/R3)", url: "https://dot.ca.gov/travel/chain-requirements" },
+  ],
+};
+const CA_ROADS_GENERAL: SourceGroup = {
+  title: "Roads & transport",
+  titleJa: "道路・交通",
+  items: [
+    { label: "Caltrans QuickMap", detail: "statewide real-time conditions & camera map", url: "https://quickmap.dot.ca.gov/" },
+  ],
+};
+
 const REGION_SOURCES: Record<string, SourceGroup[]> = {
   "snowy-mountains": [
     {
@@ -521,6 +582,85 @@ const REGION_SOURCES: Record<string, SourceGroup[]> = {
       items: [
         { label: "Beaver Mountain", url: "https://www.skithebeav.com/" },
         { label: "Cherry Peak", detail: "2025-26 opening date unconfirmed by resort", url: "https://www.skicpr.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "north-lake-tahoe": [
+    CA_OFFICIAL_REFERENCES_SIERRA,
+    CA_ROADS_RLEVEL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Palisades Tahoe", url: "https://www.palisadestahoe.com/" },
+        { label: "Northstar California", url: "https://www.northstarcalifornia.com/" },
+        { label: "Sugar Bowl", detail: "Mountain Collective Pass, not Epic or Ikon", url: "https://www.sugarbowl.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "south-lake-tahoe": [
+    CA_OFFICIAL_REFERENCES_SIERRA,
+    CA_ROADS_RLEVEL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Heavenly", detail: "2025-26 closing date not confirmed by resort", url: "https://www.skiheavenly.com/" },
+        { label: "Kirkwood", detail: "2025-26 closing date not confirmed by resort", url: "https://www.kirkwood.com/" },
+        { label: "Sierra-at-Tahoe", detail: "\u26a0\ufe0f officially closed for the 2025/26 season per the resort's own page", url: "https://sierraattahoe.com/" },
+        { label: "Homewood Mountain Resort", detail: "reopened for 2025-26 after a full 2024-25 closure", url: "https://skihomewood.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "mammoth-lakes": [
+    CA_OFFICIAL_REFERENCES_EASTERN_SIERRA,
+    CA_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Mammoth Mountain", url: "https://www.mammothmountain.com/" },
+        { label: "June Mountain", url: "https://www.junemountain.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "big-bear": [
+    CA_OFFICIAL_REFERENCES_NO_AVALANCHE,
+    CA_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Bear Mountain", detail: "2025-26 closing date reported as either Mar 25 or Mar 29 2026, sources disagree", url: "https://www.bigbearmountainresort.com/" },
+        { label: "Snow Summit", detail: "2025-26 closing date reported as either Apr 6 or Mar 22 2026, sources disagree", url: "https://www.bigbearmountainresort.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "bear-valley": [
+    CA_OFFICIAL_REFERENCES_SIERRA,
+    CA_ROADS_RLEVEL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Bear Valley Mountain Resort", detail: "2025-26 opening date uncertain in source reporting", url: "https://www.bearvalley.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "mt-shasta": [
+    CA_OFFICIAL_REFERENCES_NO_AVALANCHE,
+    CA_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Mt. Shasta Ski Park", detail: "2025-26 season closed early (Mar 2, 2026) for lack of snow; base/summit elevation unverified", url: "https://www.skipark.com/" },
       ],
     },
     FORECAST_ENSEMBLE,
