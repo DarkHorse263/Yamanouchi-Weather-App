@@ -54,9 +54,17 @@ interface RecentSignup {
   verifiedAt: string | null;
   createdAt: string;
 }
+interface MemberRow {
+  id: string;
+  email: string | null;
+  displayName: string | null;
+  homeRegionId: string | null;
+  createdAt: string;
+}
 interface SignupsPayload {
   alerts: RecentSignup[];
   newsletter?: RecentSignup[];
+  members?: MemberRow[];
 }
 
 function Kpi({ label, value, sub }: { label: string; value: number | string; sub?: string }) {
@@ -502,6 +510,7 @@ export default function AdminStats() {
 
           {signups.data ? (
             <div className="grid lg:grid-cols-2 gap-4">
+              {signups.data.members ? <MembersTable rows={signups.data.members} /> : null}
               <RecentSignupsTable title="alerts · recent signups" list="alerts" rows={signups.data.alerts} />
               {signups.data.newsletter ? (
                 <RecentSignupsTable title="newsletter · recent signups" list="newsletter" rows={signups.data.newsletter} showSource />
@@ -511,6 +520,34 @@ export default function AdminStats() {
         </div>
       ) : null}
     </AdminLayout>
+  );
+}
+
+function MembersTable({ rows }: { rows: MemberRow[] }) {
+  return (
+    <div className="rounded-lg border bg-white p-5">
+      <h3 className="text-sm font-semibold mb-3 lowercase">member accounts · recent</h3>
+      {rows.length === 0 ? (
+        <p className="text-sm text-muted-foreground">none yet.</p>
+      ) : (
+        <ul className="divide-y text-sm">
+          {rows.map((r) => (
+            <li key={r.id} className="py-2 flex items-center justify-between gap-4">
+              <div className="min-w-0">
+                <div className="truncate">{r.email ?? "no email"}</div>
+                <div className="text-xs text-muted-foreground truncate">
+                  {r.displayName ?? "—"}
+                  {r.homeRegionId ? ` · ${r.homeRegionId}` : ""}
+                </div>
+              </div>
+              <span className="text-xs text-muted-foreground whitespace-nowrap">
+                joined {new Date(r.createdAt).toLocaleDateString()}
+              </span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }
 

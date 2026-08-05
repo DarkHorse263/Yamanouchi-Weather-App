@@ -1,6 +1,6 @@
 import { Router, type IRouter, type Request, type Response } from "express";
 import { and, eq, gte, desc, isNotNull, isNull, count, sql } from "drizzle-orm";
-import { db, alertSubscribersTable, newsletterSubscribersTable, promoFunnelDailyTable, emailDeliveryIncidentsTable, pageViewDailyTable, visitorDailyTable, engagementEventDailyTable } from "@workspace/db";
+import { db, alertSubscribersTable, newsletterSubscribersTable, promoFunnelDailyTable, emailDeliveryIncidentsTable, pageViewDailyTable, visitorDailyTable, engagementEventDailyTable, usersTable } from "@workspace/db";
 import { requireAdminUser } from "../middlewares/requireAdminUser.js";
 
 /**
@@ -339,7 +339,23 @@ router.get("/recent-signups", async (_req: Request, res: Response) => {
       .orderBy(desc(newsletterSubscribersTable.createdAt))
       .limit(20);
 
-    res.json({ alerts, newsletter });
+    // Member accounts (the magic-link sign-up funnel). Separate from the
+    // alert/newsletter subscriber lists on purpose · "joined feelzlike" and
+    // "subscribed to alert emails" are different events, and the dash used to
+    // show only the latter, which read as signups silently going missing.
+    const members = await db
+      .select({
+        id: usersTable.id,
+        email: usersTable.email,
+        displayName: usersTable.displayName,
+        homeRegionId: usersTable.homeRegionId,
+        createdAt: usersTable.createdAt,
+      })
+      .from(usersTable)
+      .orderBy(desc(usersTable.createdAt))
+      .limit(20);
+
+    res.json({ alerts, newsletter, members });
   } catch (err) {
     console.error("[admin/recent-signups] failed", err);
     res.status(500).json({ error: "RECENT_SIGNUPS_FAILED" });
