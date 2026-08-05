@@ -43,6 +43,11 @@ import { crestedButteRegion } from "./crested-butte";
 import { tellurideRegion } from "./telluride";
 import { durangoRegion } from "./durango";
 import { boulderFrontRangeRegion } from "./boulder-front-range";
+import { cottonwoodCanyonsRegion } from "./cottonwood-canyons";
+import { parkCityRegion } from "./park-city";
+import { ogdenValleyRegion } from "./ogden-valley";
+import { provoRegion } from "./provo";
+import { cacheValleyRegion } from "./cache-valley";
 
 // Active region registry · AU: Snowy Mountains + Victoria's High Country
 // + Tasmania (Ben Lomond). JP: Yamanouchi (Shiga Kogen + Kita-Shiga),
@@ -66,7 +71,10 @@ import { boulderFrontRangeRegion } from "./boulder-front-range";
 // Steamboat (Steamboat Resort), Winter Park (Winter Park Resort),
 // Crested Butte (Crested Butte Mountain Resort), Telluride (Telluride Ski
 // Resort), Durango (Purgatory Resort), Boulder/Front Range (Eldora
-// Mountain Resort).
+// Mountain Resort). US (Utah): Cottonwood Canyons (Alta, Snowbird,
+// Brighton, Solitude), Park City (Park City Mountain, Deer Valley), Ogden
+// Valley (Snowbasin, Powder Mountain, Nordic Valley), Provo (Sundance
+// Mountain Resort), Cache Valley (Beaver Mountain, Cherry Peak).
 export const REGIONS: RegionConfig[] = [
   snowyMountainsRegion,
   victoriasHighCountryRegion,
@@ -112,6 +120,11 @@ export const REGIONS: RegionConfig[] = [
   tellurideRegion,
   durangoRegion,
   boulderFrontRangeRegion,
+  cottonwoodCanyonsRegion,
+  parkCityRegion,
+  ogdenValleyRegion,
+  provoRegion,
+  cacheValleyRegion,
 ];
 
 export const REGION_BY_ID: Record<string, RegionConfig> = Object.fromEntries(
@@ -172,6 +185,11 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "telluride": "US",
   "durango": "US",
   "boulder-front-range": "US",
+  "cottonwood-canyons": "US",
+  "park-city": "US",
+  "ogden-valley": "US",
+  "provo": "US",
+  "cache-valley": "US",
 };
 export const COUNTRY_META: Record<CountryCode, { name: string; flag: string }> = {
   AU: { name: "Australia", flag: "🇦🇺" },

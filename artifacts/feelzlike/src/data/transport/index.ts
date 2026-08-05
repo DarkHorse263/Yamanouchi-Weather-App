@@ -59,6 +59,11 @@ import { CRESTED_BUTTE_TRANSPORT } from "./crested-butte";
 import { TELLURIDE_TRANSPORT } from "./telluride";
 import { DURANGO_TRANSPORT } from "./durango";
 import { BOULDER_FRONT_RANGE_TRANSPORT } from "./boulder-front-range";
+import { COTTONWOOD_CANYONS_TRANSPORT } from "./cottonwood-canyons";
+import { PARK_CITY_TRANSPORT } from "./park-city";
+import { OGDEN_VALLEY_TRANSPORT } from "./ogden-valley";
+import { PROVO_TRANSPORT } from "./provo";
+import { CACHE_VALLEY_TRANSPORT } from "./cache-valley";
 
 const REGISTRY: Record<RegionId, TransportProviderList> = {
   "snowy-mountains": SNOWY_MOUNTAINS_TRANSPORT,
@@ -113,6 +118,11 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   telluride: TELLURIDE_TRANSPORT,
   durango: DURANGO_TRANSPORT,
   "boulder-front-range": BOULDER_FRONT_RANGE_TRANSPORT,
+  "cottonwood-canyons": COTTONWOOD_CANYONS_TRANSPORT,
+  "park-city": PARK_CITY_TRANSPORT,
+  "ogden-valley": OGDEN_VALLEY_TRANSPORT,
+  "provo": PROVO_TRANSPORT,
+  "cache-valley": CACHE_VALLEY_TRANSPORT,
 };
 
 // Loader-time integrity check.

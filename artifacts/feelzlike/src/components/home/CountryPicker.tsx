@@ -98,6 +98,11 @@ const FALLBACK_REGIONS: Region[] = [
   { id: "telluride",              name: "Telluride",                      country: "United States", countryCode: "US", region: "Colorado",        status: "live", href: "/telluride/",             baseTowns: ["Telluride"],                                                 mountains: ["Telluride Ski Resort"],                                      headlineLabel: "Telluride",    headline: null },
   { id: "durango",                name: "Durango",                        country: "United States", countryCode: "US", region: "Colorado",        status: "live", href: "/durango/",               baseTowns: ["Durango"],                                                   mountains: ["Purgatory Resort"],                                          headlineLabel: "Durango",      headline: null },
   { id: "boulder-front-range",    name: "Boulder / Front Range",          country: "United States", countryCode: "US", region: "Colorado",        status: "live", href: "/boulder-front-range/",   baseTowns: ["Nederland"],                                                 mountains: ["Eldora Mountain Resort"],                                    headlineLabel: "Nederland",    headline: null },
+  { id: "cottonwood-canyons",     name: "Cottonwood Canyons",             country: "United States", countryCode: "US", region: "Utah",            status: "live", href: "/cottonwood-canyons/",    baseTowns: ["Salt Lake City", "Sandy"],                                   mountains: ["Alta", "Snowbird", "Brighton", "Solitude"],                 headlineLabel: "Salt Lake City", headline: null },
+  { id: "park-city",              name: "Park City",                      country: "United States", countryCode: "US", region: "Utah",            status: "live", href: "/park-city/",             baseTowns: ["Park City"],                                                 mountains: ["Park City Mountain", "Deer Valley"],                        headlineLabel: "Park City",    headline: null },
+  { id: "ogden-valley",           name: "Ogden Valley",                   country: "United States", countryCode: "US", region: "Utah",            status: "live", href: "/ogden-valley/",          baseTowns: ["Ogden", "Eden"],                                             mountains: ["Snowbasin", "Powder Mountain", "Nordic Valley"],            headlineLabel: "Ogden",        headline: null },
+  { id: "provo",                  name: "Provo",                          country: "United States", countryCode: "US", region: "Utah",            status: "live", href: "/provo/",                 baseTowns: ["Provo", "Sundance"],                                         mountains: ["Sundance Mountain Resort"],                                 headlineLabel: "Provo",        headline: null },
+  { id: "cache-valley",           name: "Cache Valley",                   country: "United States", countryCode: "US", region: "Utah",            status: "live", href: "/cache-valley/",          baseTowns: ["Logan"],                                                     mountains: ["Beaver Mountain", "Cherry Peak"],                           headlineLabel: "Logan",        headline: null },
 ];
 
 // Map a region to the base town we surface in the country card. This is
@@ -146,6 +151,11 @@ const PRIMARY_TOWN: Record<string, string> = {
   "telluride":                "Telluride",
   "durango":                  "Durango",
   "boulder-front-range":      "Nederland",
+  "cottonwood-canyons":       "Salt Lake City",
+  "park-city":                "Park City",
+  "ogden-valley":             "Ogden",
+  "provo":                    "Provo",
+  "cache-valley":             "Logan",
 };
 
 // AU + NZ = southern hemisphere (snow Jun-Sep); JP + CA + US = northern (snow Dec-Mar).

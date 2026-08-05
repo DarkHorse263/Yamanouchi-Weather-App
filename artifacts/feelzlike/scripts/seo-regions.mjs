@@ -768,6 +768,86 @@ export const REGIONS = [
       { id: "nederland", name: "Nederland", blurb: "Small mountain town above Boulder Canyon, about 8 miles from the resort" },
     ],
   },
+  {
+    slug: "cottonwood-canyons",
+    name: "Cottonwood Canyons",
+    subtitle: "Utah · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Alta",                         blurb: "ski-only · no snowboarding allowed · classic Wasatch powder, deliberately old-school" },
+      { name: "Snowbird",                      blurb: "tram-served big-mountain terrain · Little Cottonwood Canyon's other side" },
+      { name: "Brighton",                      blurb: "night skiing pioneer · Big Cottonwood Canyon's laid-back, locals' hill" },
+      { name: "Solitude Mountain Resort",      blurb: "understated, uncrowded Big Cottonwood terrain · Ikon Pass partner" },
+    ],
+    towns: [
+      { id: "salt-lake-city", name: "Salt Lake City", blurb: "State capital and international airport gateway, about 30-40 minutes from the canyon mouths" },
+      { id: "sandy",          name: "Sandy",           blurb: "Suburb closest to the Little Cottonwood Canyon entrance" },
+    ],
+  },
+  {
+    slug: "park-city",
+    name: "Park City",
+    subtitle: "Utah · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Park City Mountain", blurb: "largest single ski area in the US · joined to Canyons Village · Park City's Epic Pass anchor" },
+      { name: "Deer Valley",        blurb: "ski-only · no snowboarding allowed · upscale, famously groomed and limited-ticket terrain" },
+    ],
+    towns: [
+      { id: "park-city-town", name: "Park City", blurb: "Former silver-mining town turned resort hub, about 35 minutes from Salt Lake City" },
+    ],
+  },
+  {
+    slug: "ogden-valley",
+    name: "Ogden Valley",
+    subtitle: "Utah · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Snowbasin",       blurb: "2002 Olympic downhill venue · grand, uncrowded terrain above Ogden Valley" },
+      { name: "Powder Mountain", blurb: "largest skiable acreage in Utah · famously low-key, capped daily tickets" },
+      { name: "Nordic Valley",   blurb: "small night-skiing hill · 2025-26 season dates unconfirmed at time of writing" },
+    ],
+    towns: [
+      { id: "ogden", name: "Ogden", blurb: "Historic railroad city at the mouth of Ogden Canyon, about 30 minutes from the resorts" },
+      { id: "eden",  name: "Eden",  blurb: "Small valley town closest to Powder Mountain and Nordic Valley" },
+    ],
+  },
+  {
+    slug: "provo",
+    name: "Provo",
+    subtitle: "Utah · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Sundance Mountain Resort", blurb: "independent resort founded by Robert Redford · no Ikon or Epic affiliation, Mt. Timpanogos's slopes" },
+    ],
+    towns: [
+      { id: "provo-town",   name: "Provo",    blurb: "Utah Valley's largest city, home to Brigham Young University" },
+      { id: "sundance-town", name: "Sundance", blurb: "Small resort community at the base of the mountain, up Provo Canyon" },
+    ],
+  },
+  {
+    slug: "cache-valley",
+    name: "Cache Valley",
+    subtitle: "Utah · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Beaver Mountain", blurb: "family-owned since 1939 · one of the oldest continuously operating resorts in the US" },
+      { name: "Cherry Peak",     blurb: "small community hill · 2025-26 opening date unconfirmed by resort at time of writing" },
+    ],
+    towns: [
+      { id: "logan", name: "Logan", blurb: "Cache Valley's main city, home to Utah State University, about 30 minutes from Beaver Mountain" },
+    ],
+  },
 ];
 
 /** Region sub-sections that actually render for this region (see gating notes above). */

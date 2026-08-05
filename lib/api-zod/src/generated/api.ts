@@ -201,6 +201,11 @@ export const GetPowderAlertsQueryParams = zod.object({
       "telluride",
       "durango",
       "boulder-front-range",
+      "cottonwood-canyons",
+      "park-city",
+      "ogden-valley",
+      "provo",
+      "cache-valley",
     ])
     .optional()
     .describe(
@@ -1207,6 +1212,11 @@ export const GetWeatherQueryParams = zod.object({
       "telluride",
       "durango",
       "boulder-front-range",
+      "cottonwood-canyons",
+      "park-city",
+      "ogden-valley",
+      "provo",
+      "cache-valley",
     ])
     .optional()
     .describe(
@@ -1636,6 +1646,11 @@ export const GetWebcamsQueryParams = zod.object({
       "telluride",
       "durango",
       "boulder-front-range",
+      "cottonwood-canyons",
+      "park-city",
+      "ogden-valley",
+      "provo",
+      "cache-valley",
     ])
     .optional()
     .describe(
@@ -1767,6 +1782,11 @@ export const GetRoadConditionsQueryParams = zod.object({
       "telluride",
       "durango",
       "boulder-front-range",
+      "cottonwood-canyons",
+      "park-city",
+      "ogden-valley",
+      "provo",
+      "cache-valley",
     ])
     .optional()
     .describe(
@@ -1953,6 +1973,11 @@ export const GetLiftStatusQueryParams = zod.object({
       "telluride",
       "durango",
       "boulder-front-range",
+      "cottonwood-canyons",
+      "park-city",
+      "ogden-valley",
+      "provo",
+      "cache-valley",
     ])
     .optional()
     .describe(

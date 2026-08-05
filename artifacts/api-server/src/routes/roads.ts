@@ -494,6 +494,73 @@ function isUsSnowSeason(now: Date): boolean {
 }
 
 /**
+ * Utah's Class 3 ("UT-3") traction law is narrower than Colorado's SB25-069:
+ * it only applies to specific canyon roads UDOT designates by sign, most
+ * notably SR-210 (Little Cottonwood Canyon, to Alta/Snowbird) and SR-190
+ * (Big Cottonwood Canyon, to Brighton/Solitude), and only requires an
+ * approved traction device or tyres on ALL vehicles - it does not carve
+ * out an AWD/4WD tyre-only exemption the way Colorado's law does. UDOT's
+ * authority window for Class 3 signage is 1 Oct-30 Apr, with the actual
+ * requirement posted/lifted by variable message sign only when conditions
+ * warrant, not automatically in force for the whole window. Minimum
+ * qualifying tyres are 5/32" tread depth and an M+S or 3-peak mountain
+ * snowflake (3PMSF) rating; chains satisfy the rule on any vehicle. This is
+ * a real, sign-activated law (Utah Code / UDOT rule), so it is reported as
+ * potentially "must-carry" only when the Cottonwood Canyons honesty note
+ * says so - but because there is no live feed for whether the sign is
+ * currently posted, the note states the rule and defers to UDOT's own
+ * cottonwoodcanyons.udot.utah.gov page for today's status rather than
+ * asserting `must-carry` outright the way Colorado's law (which runs on a
+ * fixed calendar window) allows. `chains2wd`/`chainsAwd` are therefore kept
+ * at "not-required" defaults with the real, conditional rule spelled out in
+ * the note - a deliberate divergence from the Colorado pattern, flagged
+ * here and in the PR/commit description. All other Utah regions in this
+ * pass (Park City, Ogden Valley, Provo, Cache Valley) have no equivalent
+ * UDOT Class 3 canyon-road designation, so they get a lighter, generic
+ * UDOT advisory instead of a named traction law.
+ */
+const UT_SOURCE = {
+  sourceLabel: "UDOT · udottraffic.utah.gov",
+  sourceUrl: "https://www.udottraffic.utah.gov/",
+};
+const UT_COTTONWOOD_SOURCE = {
+  sourceLabel: "UDOT · Cottonwood Canyons",
+  sourceUrl: "https://cottonwoodcanyons.udot.utah.gov/",
+};
+
+function utChainEntry(opts: {
+  id: string;
+  regionId: string;
+  mountainId: string;
+  mountainName: string;
+  approach: string;
+  detail: string;
+  inSeason: boolean;
+  issuedAt: string;
+  cottonwoodClass3: boolean;
+}): Record<string, unknown> {
+  const cottonwoodRule =
+    "UDOT can post a Class 3 traction-device requirement on this canyon road (SR-210/SR-190) any time within its 1 Oct-30 Apr authority window: when posted, ALL vehicles (not just 2WD) need an approved traction device fitted, or tyres rated M+S/3-peak mountain snowflake with 5/32\"+ tread. This is sign-activated, not a fixed calendar rule, so check cottonwoodcanyons.udot.utah.gov or the roadside signs for today's status before you drive.";
+  const generalRule =
+    "Utah has no statewide chain law, but UDOT strongly recommends winter/traction tyres or carrying chains on mountain approaches in snow, and can post seasonal traction-device requirements on specific canyon roads when conditions warrant.";
+  const rule = opts.cottonwoodClass3 ? cottonwoodRule : generalRule;
+  return {
+    id: opts.id,
+    regionId: opts.regionId,
+    mountainId: opts.mountainId,
+    mountainName: opts.mountainName,
+    approach: opts.approach,
+    status: "open",
+    chains2wd: "not-required" satisfies ChainReq,
+    chainsAwd: "not-required" satisfies ChainReq,
+    note: opts.inSeason ? `${rule} ${opts.detail}` : "Outside the ski season · no seasonal traction requirement on this route.",
+    issuedAt: opts.issuedAt,
+    ...(opts.cottonwoodClass3 ? UT_COTTONWOOD_SOURCE : UT_SOURCE),
+    dataSource: "seasonal-rule",
+  };
+}
+
+/**
  * Canada chain entries. Deliberately `chains2wd`/`chainsAwd: "not-required"`
  * year-round: none of BC, Alberta or Québec mandates chains on passenger
  * vehicles the way NSW and the NZ ski-field bylaws do. BC's actual legal
@@ -1242,6 +1309,96 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
     ];
   }
 
+  if (
+    regionId === "cottonwood-canyons" ||
+    regionId === "park-city" ||
+    regionId === "ogden-valley" ||
+    regionId === "provo" ||
+    regionId === "cache-valley"
+  ) {
+    const inSeason = isUsSnowSeason(now);
+    const ut = (
+      id: string,
+      mountainId: string,
+      mountainName: string,
+      approach: string,
+      detail: string,
+      cottonwoodClass3: boolean,
+    ) => utChainEntry({ id, regionId, mountainId, mountainName, approach, detail, inSeason, issuedAt, cottonwoodClass3 });
+
+    if (regionId === "cottonwood-canyons") {
+      return [
+        ut("alta-sr-210", "alta", "Alta",
+          "SR-210 (Little Cottonwood Canyon) from Sandy",
+          "SR-210 is one of UDOT's two Class 3 traction-law canyons · UDOT is also pursuing a gondola/tolling project for this canyon that remains unbuilt and in litigation as of 2026, so the road itself is unchanged for now.",
+          true),
+        ut("snowbird-sr-210", "snowbird", "Snowbird",
+          "SR-210 (Little Cottonwood Canyon) from Sandy",
+          "Same Class 3 canyon as Alta · UDOT periodically closes SR-210 to uphill traffic for avalanche control after big storms.",
+          true),
+        ut("brighton-resort-sr-190", "brighton-resort", "Brighton",
+          "SR-190 (Big Cottonwood Canyon) from Salt Lake City/Cottonwood Heights",
+          "SR-190 is UDOT's other Class 3 traction-law canyon · narrower and windier than Little Cottonwood, with the same sign-activated rule.",
+          true),
+        ut("solitude-mountain-resort-sr-190", "solitude-mountain-resort", "Solitude",
+          "SR-190 (Big Cottonwood Canyon) from Salt Lake City/Cottonwood Heights",
+          "Same Class 3 canyon as Brighton · check cottonwoodcanyons.udot.utah.gov for today's uphill/downhill restrictions before driving up.",
+          true),
+      ];
+    }
+
+    if (regionId === "park-city") {
+      return [
+        ut("park-city-mountain-us-40", "park-city-mountain", "Park City Mountain",
+          "I-80 to US-40, then Kearns Blvd/Park Ave into Park City",
+          "No UDOT Class 3 canyon designation here · US-40 and Park City's town roads are ploughed but not chain-controlled the way the Cottonwood Canyons are.",
+          false),
+        ut("deer-valley-resort-us-40", "deer-valley-resort", "Deer Valley",
+          "I-80 to US-40, then Marsac Ave/Deer Valley Drive into Park City",
+          "Same general approach as Park City Mountain · no Class 3 traction requirement, just the general UDOT winter-driving advisory.",
+          false),
+      ];
+    }
+
+    if (regionId === "ogden-valley") {
+      return [
+        ut("snowbasin-sr-226", "snowbasin", "Snowbasin",
+          "I-84 to Mountain Green, then SR-226 to the resort",
+          "SR-226 climbs steadily from Mountain Green · no Class 3 designation, but UDOT still recommends winter tyres in storms.",
+          false),
+        ut("powder-mountain-ut-158", "powder-mountain", "Powder Mountain",
+          "I-84/US-89 to Eden, then UT-158 (Powder Mountain Road)",
+          "The final climb up Powder Mountain Road is steep and can ice up before the valley floor does.",
+          false),
+        ut("nordic-valley-nordic-valley-way", "nordic-valley", "Nordic Valley",
+          "I-84/US-89 to Eden, then Nordic Valley Way",
+          "Short, low-elevation access road from Eden · season dates for Nordic Valley are unconfirmed this year, so check the resort directly before you drive up.",
+          false),
+      ];
+    }
+
+    if (regionId === "provo") {
+      return [
+        ut("sundance-mountain-resort-ut-92", "sundance-mountain-resort", "Sundance Mountain Resort",
+          "US-189 (Provo Canyon) to UT-92 (Alpine Loop Scenic Byway)",
+          "The Alpine Loop above Sundance closes seasonally for winter (typically Nov-May) above the resort · Provo Canyon itself stays open with the general UDOT winter advisory.",
+          false),
+      ];
+    }
+
+    // cache-valley
+    return [
+      ut("beaver-mountain-us-89", "beaver-mountain", "Beaver Mountain",
+        "US-89 through Logan Canyon to the resort",
+        "Logan Canyon is a long, high-elevation two-lane canyon route · no Class 3 designation, but winter tyres are strongly advised.",
+        false),
+      ut("cherry-peak-ut-243", "cherry-peak", "Cherry Peak",
+        "US-91 north from Logan, then UT-243 (Blacksmith Fork Rd) or local roads near Richmond",
+        "Shorter, lower-elevation approach than Beaver Mountain · Cherry Peak's 2025-26 opening date is unconfirmed by the resort, so check directly before you drive up.",
+        false),
+    ];
+  }
+
   return [];
 }
 
@@ -1464,6 +1621,17 @@ router.get("/road-conditions", async (req, res) => {
       region === "telluride" ||
       region === "durango" ||
       region === "boulder-front-range";
+    //  · US (Utah) - no feed wired yet. UDOT publishes udottraffic.utah.gov
+    //    and a dedicated cottonwoodcanyons.udot.utah.gov page, but nothing is
+    //    integrated in this pass, so `roads` stays empty and the advice
+    //    points at UDOT for roads and the Utah Avalanche Center for
+    //    backcountry conditions.
+    const isUT =
+      region === "cottonwood-canyons" ||
+      region === "park-city" ||
+      region === "ogden-valley" ||
+      region === "provo" ||
+      region === "cache-valley";
 
     let roads: unknown[] = [];
     let generalAdvice: string;
@@ -1501,6 +1669,18 @@ router.get("/road-conditions", async (req, res) => {
       generalAdvice =
         "We do not yet pull live road data for Colorado · check CDOT's cotrip.org for closures, avalanche control and highway cameras before you drive, especially on the I-70 Mountain Corridor. Colorado's Traction Law is in effect every year from 1 September to 31 May on I-70 between Dotsero and Morrison (and can be activated on any other state highway when conditions warrant): AWD/4WD vehicles need winter-rated tyres (3/16\"+ tread, 3-peak mountain snowflake / M+S / all-weather) or chains/an alternative traction device on at least 2 drive tyres, while 2WD vehicles must carry chains or an ATD regardless of tyre type (SB25-069). In storms CDOT can escalate to the Passenger Vehicle Chain Law, requiring chains/ATD on every vehicle regardless of drivetrain as the last step before a road closure. For anything off-piste or backcountry, read the day's forecast from the Colorado Avalanche Information Center at avalanche.state.co.us.";
       liveTrafficUrl = "https://www.cotrip.org/";
+    } else if (isUT) {
+      // No live Utah road feed is wired yet · say so plainly rather than
+      // shipping an empty list that reads like "all clear". State UDOT's
+      // real, sign-activated Class 3 traction law for the Cottonwood
+      // Canyons rather than inventing a fixed calendar rule UDOT hasn't
+      // published; other Utah regions get a lighter, generic advisory
+      // since they have no equivalent canyon-road designation.
+      generalAdvice =
+        region === "cottonwood-canyons"
+          ? "We do not yet pull live road data for Utah · check UDOT's dedicated cottonwoodcanyons.udot.utah.gov page for closures, avalanche control and today's traction requirement before you drive SR-210 (Little Cottonwood, to Alta/Snowbird) or SR-190 (Big Cottonwood, to Brighton/Solitude). UDOT can post a Class 3 traction-device requirement on these canyon roads any time within its 1 October-30 April authority window: when posted, ALL vehicles need an approved traction device, or tyres rated M+S/3-peak mountain snowflake with 5/32\"+ tread — this is sign-activated, not automatically in force for the whole window. A separate gondola/tolling project for Little Cottonwood Canyon remains unbuilt and in litigation as of 2026 and does not change today's driving rules. For backcountry conditions, read the day's forecast from the Utah Avalanche Center's Salt Lake forecast at utahavalanchecenter.org."
+          : "We do not yet pull live road data for Utah · check UDOT's udottraffic.utah.gov for closures and highway cameras before you drive. Utah has no statewide chain law, but UDOT strongly recommends winter/traction tyres in snow and can post seasonal traction-device requirements on specific canyon roads when conditions warrant. For backcountry conditions, read the day's forecast from the Utah Avalanche Center at utahavalanchecenter.org.";
+      liveTrafficUrl = "https://www.udottraffic.utah.gov/";
     } else {
       generalAdvice =
         "Live road condition data is not yet available for this region.";

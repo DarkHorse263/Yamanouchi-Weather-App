@@ -124,6 +124,11 @@ export const RegionId = {
   telluride: "telluride",
   durango: "durango",
   "boulder-front-range": "boulder-front-range",
+  "cottonwood-canyons": "cottonwood-canyons",
+  "park-city": "park-city",
+  "ogden-valley": "ogden-valley",
+  provo: "provo",
+  "cache-valley": "cache-valley",
 } as const;
 
 export interface HealthStatus {

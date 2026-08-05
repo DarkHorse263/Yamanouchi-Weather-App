@@ -22,6 +22,7 @@ build = [ "pnpm", "--filter", "@workspace/feelzlike", "run", "build" ]
 publicDir = "artifacts/feelzlike/dist/public"
 serve = "static"
 
+
 [[services.production.rewrites]]
 from = "/countries/"
 to = "/countries/index.html"
@@ -3077,6 +3078,290 @@ to = "/boulder-front-range/nederland/transport/index.html"
 [[services.production.rewrites]]
 from = "/boulder-front-range/nederland/explore/"
 to = "/boulder-front-range/nederland/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/"
+to = "/cottonwood-canyons/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/mountains/"
+to = "/cottonwood-canyons/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/stay/"
+to = "/cottonwood-canyons/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/salt-lake-city/"
+to = "/cottonwood-canyons/salt-lake-city/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/salt-lake-city/weather/"
+to = "/cottonwood-canyons/salt-lake-city/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/salt-lake-city/stay/"
+to = "/cottonwood-canyons/salt-lake-city/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/salt-lake-city/eat/"
+to = "/cottonwood-canyons/salt-lake-city/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/salt-lake-city/roads/"
+to = "/cottonwood-canyons/salt-lake-city/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/salt-lake-city/transport/"
+to = "/cottonwood-canyons/salt-lake-city/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/salt-lake-city/explore/"
+to = "/cottonwood-canyons/salt-lake-city/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/sandy/"
+to = "/cottonwood-canyons/sandy/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/sandy/weather/"
+to = "/cottonwood-canyons/sandy/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/sandy/stay/"
+to = "/cottonwood-canyons/sandy/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/sandy/eat/"
+to = "/cottonwood-canyons/sandy/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/sandy/roads/"
+to = "/cottonwood-canyons/sandy/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/sandy/transport/"
+to = "/cottonwood-canyons/sandy/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/sandy/explore/"
+to = "/cottonwood-canyons/sandy/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/park-city/"
+to = "/park-city/index.html"
+
+[[services.production.rewrites]]
+from = "/park-city/mountains/"
+to = "/park-city/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/park-city/stay/"
+to = "/park-city/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/park-city/park-city-town/"
+to = "/park-city/park-city-town/index.html"
+
+[[services.production.rewrites]]
+from = "/park-city/park-city-town/weather/"
+to = "/park-city/park-city-town/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/park-city/park-city-town/stay/"
+to = "/park-city/park-city-town/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/park-city/park-city-town/eat/"
+to = "/park-city/park-city-town/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/park-city/park-city-town/roads/"
+to = "/park-city/park-city-town/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/park-city/park-city-town/transport/"
+to = "/park-city/park-city-town/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/park-city/park-city-town/explore/"
+to = "/park-city/park-city-town/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/"
+to = "/ogden-valley/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/mountains/"
+to = "/ogden-valley/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/stay/"
+to = "/ogden-valley/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/ogden/"
+to = "/ogden-valley/ogden/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/ogden/weather/"
+to = "/ogden-valley/ogden/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/ogden/stay/"
+to = "/ogden-valley/ogden/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/ogden/eat/"
+to = "/ogden-valley/ogden/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/ogden/roads/"
+to = "/ogden-valley/ogden/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/ogden/transport/"
+to = "/ogden-valley/ogden/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/ogden/explore/"
+to = "/ogden-valley/ogden/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/eden/"
+to = "/ogden-valley/eden/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/eden/weather/"
+to = "/ogden-valley/eden/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/eden/stay/"
+to = "/ogden-valley/eden/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/eden/eat/"
+to = "/ogden-valley/eden/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/eden/roads/"
+to = "/ogden-valley/eden/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/eden/transport/"
+to = "/ogden-valley/eden/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/eden/explore/"
+to = "/ogden-valley/eden/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/"
+to = "/provo/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/mountains/"
+to = "/provo/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/stay/"
+to = "/provo/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/provo-town/"
+to = "/provo/provo-town/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/provo-town/weather/"
+to = "/provo/provo-town/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/provo-town/stay/"
+to = "/provo/provo-town/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/provo-town/eat/"
+to = "/provo/provo-town/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/provo-town/roads/"
+to = "/provo/provo-town/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/provo-town/transport/"
+to = "/provo/provo-town/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/provo-town/explore/"
+to = "/provo/provo-town/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/sundance-town/"
+to = "/provo/sundance-town/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/sundance-town/weather/"
+to = "/provo/sundance-town/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/sundance-town/stay/"
+to = "/provo/sundance-town/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/sundance-town/eat/"
+to = "/provo/sundance-town/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/sundance-town/roads/"
+to = "/provo/sundance-town/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/sundance-town/transport/"
+to = "/provo/sundance-town/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/sundance-town/explore/"
+to = "/provo/sundance-town/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/cache-valley/"
+to = "/cache-valley/index.html"
+
+[[services.production.rewrites]]
+from = "/cache-valley/mountains/"
+to = "/cache-valley/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/cache-valley/stay/"
+to = "/cache-valley/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/cache-valley/logan/"
+to = "/cache-valley/logan/index.html"
+
+[[services.production.rewrites]]
+from = "/cache-valley/logan/weather/"
+to = "/cache-valley/logan/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/cache-valley/logan/stay/"
+to = "/cache-valley/logan/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/cache-valley/logan/eat/"
+to = "/cache-valley/logan/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/cache-valley/logan/roads/"
+to = "/cache-valley/logan/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/cache-valley/logan/transport/"
+to = "/cache-valley/logan/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/cache-valley/logan/explore/"
+to = "/cache-valley/logan/explore/index.html"
 
 [[services.production.rewrites]]
 from = "/*"

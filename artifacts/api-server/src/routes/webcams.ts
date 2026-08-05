@@ -710,6 +710,103 @@ const WEBCAM_DATA: WebcamConfig[] = [
     webcams: [],
   },
 
+  // ─── Resort live-cam pages: Utah (Cottonwood Canyons) ──────
+  // Alta, Snowbird and Solitude all have confirmed, currently-live official
+  // webcam pages per the research doc; kept as page-only links (no direct
+  // image hotlinking) matching the Colorado pattern for Eldora/Purgatory.
+  // Brighton's webcam URL was NOT independently confirmed in research —
+  // linked to the resort's main site as an honest fallback rather than a
+  // guessed deep link.
+  {
+    locationId: "alta",
+    locationName: "Alta live cams",
+    webcamPageUrl: "https://www.altacam.com/mountaincams/",
+    webcams: [],
+  },
+  {
+    locationId: "snowbird",
+    locationName: "Snowbird live cams",
+    webcamPageUrl: "https://www.snowbird.com/the-mountain/webcams/view-all-webcams/",
+    webcams: [],
+  },
+  {
+    locationId: "brighton-resort",
+    locationName: "Brighton live cams",
+    // Not independently verified in research — linking to the resort's main
+    // site rather than a guessed webcam deep link. See Ski Utah's directory
+    // (skiutah.com/resorts/webcams) as an alternate source.
+    webcamPageUrl: "https://www.brightonresort.com/",
+    webcams: [],
+  },
+  {
+    locationId: "solitude-mountain-resort",
+    locationName: "Solitude live cams",
+    webcamPageUrl: "https://www.solitudemountain.com/mountain-and-village/webcams",
+    webcams: [],
+  },
+
+  // ─── Resort live-cam pages: Utah (Park City) ──────
+  {
+    locationId: "park-city-mountain",
+    locationName: "Park City Mountain live cams",
+    webcamPageUrl: "https://www.parkcitymountain.com/the-mountain/mountain-conditions/mountain-cams.aspx",
+    webcams: [],
+  },
+  {
+    locationId: "deer-valley-resort",
+    locationName: "Deer Valley live cams",
+    webcamPageUrl: "https://www.deervalley.com/explore-the-mountain/webcams",
+    webcams: [],
+  },
+
+  // ─── Resort live-cam pages: Utah (Ogden Valley) ──────
+  {
+    locationId: "snowbasin",
+    locationName: "Snowbasin live cams",
+    webcamPageUrl: "https://www.snowbasin.com/the-mountain/web-cams/",
+    webcams: [],
+  },
+  {
+    locationId: "powder-mountain",
+    locationName: "Powder Mountain live cams",
+    // Also includes an SR-158 road camera on the same page per research doc.
+    webcamPageUrl: "https://powdermountain.com/conditions",
+    webcams: [],
+  },
+  {
+    locationId: "nordic-valley",
+    locationName: "Nordic Valley live cams",
+    // ⚠️ Season status/dates are unreliable this year — verify directly
+    // before relying on this page for current conditions.
+    webcamPageUrl: "https://www.nordicvalley.ski/nordic-valley-weather-conditions-webcams/",
+    webcams: [],
+  },
+
+  // ─── Resort live-cam pages: Utah (Provo) ──────
+  {
+    locationId: "sundance-mountain-resort",
+    locationName: "Sundance live cams",
+    webcamPageUrl: "https://www.sundanceresort.com/webcams/",
+    webcams: [],
+  },
+
+  // ─── Resort live-cam pages: Utah (Cache Valley) ──────
+  {
+    locationId: "beaver-mountain",
+    locationName: "Beaver Mountain live cams",
+    // Third-party VISION-ENVIRONNEMENT hosted cam, confirmed live in research.
+    webcamPageUrl: "https://s1.vision-environnement.com/livecams/webcam.php?webcam=beaver&lang=en",
+    webcams: [],
+  },
+  {
+    locationId: "cherry-peak",
+    locationName: "Cherry Peak live cams",
+    // ⚠️ 2025-26 opening date unconfirmed by the resort — verify current
+    // status before relying on this page.
+    webcamPageUrl: "https://www.skicpr.com/ski-report",
+    webcams: [],
+  },
+
   // ─── Roadside cams: Colorado ───────────────────────────────
   // CDOT's cotrip.org runs a large public highway-camera network, but does
   // not expose a stable deep link per camera that survives a season. Same
@@ -767,6 +864,42 @@ const WEBCAM_DATA: WebcamConfig[] = [
     locationId: "boulder-front-range-roads",
     locationName: "Roads to Eldora · Boulder Canyon",
     webcamPageUrl: "https://www.cotrip.org/",
+    webcams: [],
+  },
+
+  // ─── Roadside cams: Utah ────────────────────────────────────────
+  // UDOT's udottraffic.utah.gov runs a public highway-camera network, and
+  // Cottonwood Canyons has its own dedicated page; neither exposes a stable
+  // deep link per camera that survives a season, so these are page-only
+  // links to the official traffic map — same honest tile pattern as CO/CA.
+  {
+    locationId: "cottonwood-canyons-roads",
+    locationName: "Roads to Cottonwood Canyons · SR-210 & SR-190",
+    webcamPageUrl: "https://cottonwoodcanyons.udot.utah.gov/",
+    webcams: [],
+  },
+  {
+    locationId: "park-city-roads",
+    locationName: "Roads to Park City · I-80 & US-40",
+    webcamPageUrl: "https://www.udottraffic.utah.gov/",
+    webcams: [],
+  },
+  {
+    locationId: "ogden-valley-roads",
+    locationName: "Roads to Ogden Valley · SR-226 & UT-158",
+    webcamPageUrl: "https://www.udottraffic.utah.gov/",
+    webcams: [],
+  },
+  {
+    locationId: "provo-roads",
+    locationName: "Roads to Provo Canyon · US-189 & UT-92",
+    webcamPageUrl: "https://www.udottraffic.utah.gov/",
+    webcams: [],
+  },
+  {
+    locationId: "cache-valley-roads",
+    locationName: "Roads to Cache Valley · US-89 Logan Canyon",
+    webcamPageUrl: "https://www.udottraffic.utah.gov/",
     webcams: [],
   },
 ];

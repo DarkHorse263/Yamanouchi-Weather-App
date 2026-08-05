@@ -52,6 +52,11 @@ export const REGION_IDS = [
   "telluride",
   "durango",
   "boulder-front-range",
+  "cottonwood-canyons",
+  "park-city",
+  "ogden-valley",
+  "provo",
+  "cache-valley",
 ] as const;
 export type RegionId = (typeof REGION_IDS)[number];
 
@@ -463,6 +468,52 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "eldora-mountain-resort": "boulder-front-range",
   "nederland": "boulder-front-range",
   "boulder-front-range-roads": "boulder-front-range",
+
+  // Cottonwood Canyons, UT · Alta, Snowbird, Brighton and Solitude, with 2
+  // base towns (Salt Lake City, Sandy). No naming collisions - none of the
+  // 4 resort names match either base town, so all mountain ids stay bare.
+  "alta": "cottonwood-canyons",
+  "snowbird": "cottonwood-canyons",
+  "brighton-resort": "cottonwood-canyons",
+  "solitude-mountain-resort": "cottonwood-canyons",
+  "salt-lake-city": "cottonwood-canyons",
+  "sandy": "cottonwood-canyons",
+  "cottonwood-canyons-roads": "cottonwood-canyons",
+
+  // Park City, UT · Park City Mountain and Deer Valley (name-clash rule:
+  // the region id equals the base town name, so the town id is
+  // disambiguated as park-city-town; the lead resort, Park City Mountain,
+  // does not collide with anything and keeps its plain slug).
+  "park-city-mountain": "park-city",
+  "deer-valley-resort": "park-city",
+  "park-city-town": "park-city",
+  "park-city-roads": "park-city",
+
+  // Ogden Valley, UT · Snowbasin, Powder Mountain and Nordic Valley, with
+  // 2 base towns (Ogden, Eden). No naming collisions.
+  "snowbasin": "ogden-valley",
+  "powder-mountain": "ogden-valley",
+  "nordic-valley": "ogden-valley",
+  "ogden": "ogden-valley",
+  "eden": "ogden-valley",
+  "ogden-valley-roads": "ogden-valley",
+
+  // Provo, UT · 1 mountain (Sundance Mountain Resort) with 2 base towns
+  // (Provo, Sundance). Both towns take a `-town` suffix for consistency
+  // with the flat location registry, mirroring the Crested
+  // Butte/Telluride/Durango convention (region id equals a base town
+  // name, here "provo").
+  "sundance-mountain-resort": "provo",
+  "provo-town": "provo",
+  "sundance-town": "provo",
+  "provo-roads": "provo",
+
+  // Cache Valley, UT · Beaver Mountain and Cherry Peak, with 1 base town
+  // (Logan). No naming collisions.
+  "beaver-mountain": "cache-valley",
+  "cherry-peak": "cache-valley",
+  "logan": "cache-valley",
+  "cache-valley-roads": "cache-valley",
 };
 
 export function regionForLocation(locationId: string): RegionId | undefined {

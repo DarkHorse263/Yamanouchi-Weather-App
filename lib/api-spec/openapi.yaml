@@ -1710,6 +1710,11 @@ components:
         - telluride
         - durango
         - boulder-front-range
+        - cottonwood-canyons
+        - park-city
+        - ogden-valley
+        - provo
+        - cache-valley
       description: |
         Canonical region identifier used across the FeelZlike platform.
 

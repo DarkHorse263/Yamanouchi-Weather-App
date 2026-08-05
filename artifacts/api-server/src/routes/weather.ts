@@ -445,6 +445,36 @@ const LOCATIONS: LocationConfig[] = [
   // Boulder / Front Range, CO
   { id: "eldora-mountain-resort",    name: "Eldora Mountain Resort",    latitude:  39.9375, longitude: -105.5828, elevation: 2853, description: "The closest lift-served skiing to Denver and Boulder, about an hour up Boulder Canyon.",                     bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
   { id: "nederland",                 name: "Nederland",                 latitude:  39.9614, longitude: -105.5108, elevation: 2528, description: "Small mountain town above Boulder Canyon, about 8 miles from the resort.",                                   bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+
+  // Cottonwood Canyons, UT
+  { id: "alta",                      name: "Alta",                      latitude:  40.5883, longitude: -111.6383, elevation: 3374, description: "Ski-only (no snowboarding) · full Ikon Pass only · legendary Little Cottonwood Canyon powder.",              bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "snowbird",                  name: "Snowbird",                  latitude:  40.5830, longitude: -111.6556, elevation: 3353, description: "Tram-served big terrain in Little Cottonwood Canyon · usually the last Utah resort to close.",                bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "brighton-resort",           name: "Brighton",                  latitude:  40.5977, longitude: -111.5836, elevation: 3200, description: "Big Cottonwood Canyon local favourite · night skiing and a laid-back, no-frills base.",                      bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "solitude-mountain-resort",  name: "Solitude",                  latitude:  40.6199, longitude: -111.5928, elevation: 3197, description: "Big Cottonwood Canyon · unlimited access for full Ikon Pass holders.",                                     bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "salt-lake-city",            name: "Salt Lake City",            latitude:  40.7608, longitude: -111.8910, elevation: 1288, description: "Utah's capital, about 25-40 minutes from the Cottonwood Canyon mouths.",                                    bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "sandy",                     name: "Sandy",                     latitude:  40.5649, longitude: -111.8389, elevation: 1355, description: "Suburb at the mouth of Little Cottonwood Canyon, the closest base town for Alta and Snowbird.",                  bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+
+  // Park City, UT
+  { id: "park-city-mountain",        name: "Park City Mountain",        latitude:  40.6514, longitude: -111.5080, elevation: 3056, description: "The largest ski resort in the US · Epic Pass, Mountain Village and Canyons Village.",                        bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "deer-valley-resort",        name: "Deer Valley",               latitude:  40.6374, longitude: -111.4783, elevation: 2917, description: "Ski-only (no snowboarding) · full Ikon Pass only · famously good grooming and service.",                    bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "park-city-town",            name: "Park City",                 latitude:  40.6461, longitude: -111.4980, elevation: 2103, description: "Historic mining-town-turned-resort about 35 minutes from Salt Lake City International Airport.",                bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+
+  // Ogden Valley, UT
+  { id: "snowbasin",                 name: "Snowbasin",                 latitude:  41.2160, longitude: -111.8567, elevation: 2917, description: "2002 Winter Olympics downhill venue · Ikon Pass (7 days).",                                              bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "powder-mountain",           name: "Powder Mountain",           latitude:  41.3797, longitude: -111.7811, elevation: 2872, description: "Independent, own season pass · vast, uncrowded terrain and night skiing.",                                 bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "nordic-valley",             name: "Nordic Valley",             latitude:  41.3311, longitude: -111.8497, elevation: 2152, description: "Small night-skiing hill on the Power Pass · 2025-26 season dates unconfirmed/unreliable.",                     bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "ogden",                     name: "Ogden",                     latitude:  41.2230, longitude: -111.9738, elevation: 1362, description: "Historic railroad city at the mouth of Ogden Canyon, about 35 minutes from Salt Lake City.",                    bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "eden",                      name: "Eden",                      latitude:  41.3211, longitude: -111.8636, elevation: 1615, description: "Small valley community closest to Powder Mountain and Nordic Valley.",                                        bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+
+  // Provo, UT
+  { id: "sundance-mountain-resort",  name: "Sundance Mountain Resort",  latitude:  40.3970, longitude: -111.5847, elevation: 2515, description: "Independent (no Ikon or Epic Pass) · Robert Redford's low-key resort in Provo Canyon.",                       bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "provo-town",                name: "Provo",                     latitude:  40.2338, longitude: -111.6585, elevation: 1387, description: "University city at the mouth of Provo Canyon, about 20 minutes from Sundance.",                              bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "sundance-town",             name: "Sundance",                  latitude:  40.3970, longitude: -111.5847, elevation: 1859, description: "Small village right at the resort base, in Provo Canyon along the Alpine Loop.",                              bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+
+  // Cache Valley, UT
+  { id: "beaver-mountain",           name: "Beaver Mountain",           latitude:  41.9742, longitude: -111.4547, elevation: 2701, description: "Family-run since 1939 · one of the oldest continuously-operated ski areas in the US · Indy Pass.",           bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "cherry-peak",               name: "Cherry Peak",               latitude:  41.9897, longitude: -111.9250, elevation: 2146, description: "Small Cache Valley hill on the Indy Pass · 2025-26 opening date unconfirmed by the resort.",                     bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "logan",                     name: "Logan",                     latitude:  41.7370, longitude: -111.8338, elevation: 1358, description: "Cache Valley's main town, about 30 minutes from Beaver Mountain and Cherry Peak.",                              bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
 ];
 
 const WEATHER_DESCRIPTIONS: Record<number, string> = {
@@ -767,7 +797,7 @@ async function fetchLocationWeather(location: LocationConfig, snowElevationM?: n
         current.weatherDescription = getWeatherDescription(override.weatherCode);
         const obsMm = Math.round(override.rateMmh * 10) / 10;
         if (obsMm > 0) current.precipitation = Math.max(current.precipitation ?? 0, obsMm);
-        current.dataSource = `METAR \u00b7 ${override.stationName}`;
+        current.dataSource = `METAR · ${override.stationName}`;
       }
     } catch {
       // fail-soft: a reconciliation hiccup must never break base weather.

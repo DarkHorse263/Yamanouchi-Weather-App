@@ -141,6 +141,44 @@ const US_ROADS_CO: SourceGroup = {
   ],
 };
 
+/**
+ * United States (Utah) reference block. Same "Official references" posture
+ * as Colorado: no Utah Avalanche Center / NWS feed is wired into a
+ * feelzlike reading in this pass, these are link-outs only · the forecast
+ * ensemble below is what actually powers the numbers shown.
+ */
+const UT_OFFICIAL_REFERENCES: SourceGroup = {
+  title: "Official references",
+  titleJa: "公式参照先",
+  blurb:
+    "Link-outs, not wired feeds · conditions shown on feelzlike come from the forecast ensemble below, so check these before you drive or tour.",
+  blurbJa:
+    "リンクのみで、データ連携はしていません。feelzlikeの数値は下記の予報モデルによるものです。走行・ツアー前に必ず公式情報をご確認ください。",
+  items: [
+    { label: "National Weather Service", detail: "US federal forecasts & warnings", url: "https://www.weather.gov/" },
+    { label: "Utah Avalanche Center", detail: "daily avalanche forecasts (Salt Lake, Logan, Skyline zones)", url: "https://utahavalanchecenter.org/" },
+  ],
+};
+
+const UT_ROADS_COTTONWOOD: SourceGroup = {
+  title: "Roads & transport",
+  titleJa: "道路・交通",
+  items: [
+    { label: "UDOT · Cottonwood Canyons", detail: "SR-210/SR-190 closures, uphill restrictions & Class 3 traction status", url: "https://cottonwoodcanyons.udot.utah.gov/" },
+    { label: "UDOT Traffic", detail: "statewide real-time conditions & camera map", url: "https://www.udottraffic.utah.gov/" },
+    { label: "UDOT · snow tire & chain-up requirements", url: "https://connect.udot.utah.gov/public/snow-tire-and-chain-up-requirements/" },
+  ],
+};
+
+const UT_ROADS_GENERAL: SourceGroup = {
+  title: "Roads & transport",
+  titleJa: "道路・交通",
+  items: [
+    { label: "UDOT Traffic", detail: "statewide real-time conditions & camera map", url: "https://www.udottraffic.utah.gov/" },
+    { label: "UDOT · current conditions", url: "https://connect.udot.utah.gov/current-conditions/" },
+  ],
+};
+
 const REGION_SOURCES: Record<string, SourceGroup[]> = {
   "snowy-mountains": [
     {
@@ -419,6 +457,71 @@ const REGION_SOURCES: Record<string, SourceGroup[]> = {
       title: "Resorts & lifts",
       titleJa: "スキー場・リフト",
       items: [{ label: "Eldora Mountain Resort", url: "https://www.eldora.com/" }],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "cottonwood-canyons": [
+    UT_OFFICIAL_REFERENCES,
+    UT_ROADS_COTTONWOOD,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Alta", detail: "ski-only, no snowboarding", url: "https://www.alta.com/" },
+        { label: "Snowbird", url: "https://www.snowbird.com/" },
+        { label: "Brighton Resort", url: "https://www.brightonresort.com/" },
+        { label: "Solitude Mountain Resort", url: "https://www.solitudemountain.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "park-city": [
+    UT_OFFICIAL_REFERENCES,
+    UT_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Park City Mountain", url: "https://www.parkcitymountain.com/" },
+        { label: "Deer Valley", detail: "ski-only, no snowboarding", url: "https://www.deervalley.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "ogden-valley": [
+    UT_OFFICIAL_REFERENCES,
+    UT_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Snowbasin", url: "https://www.snowbasin.com/" },
+        { label: "Powder Mountain", url: "https://powdermountain.com/" },
+        { label: "Nordic Valley", detail: "2025-26 season dates unconfirmed", url: "https://www.nordicvalley.ski/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  provo: [
+    UT_OFFICIAL_REFERENCES,
+    UT_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [{ label: "Sundance Mountain Resort", url: "https://www.sundanceresort.com/" }],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "cache-valley": [
+    UT_OFFICIAL_REFERENCES,
+    UT_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Beaver Mountain", url: "https://www.skithebeav.com/" },
+        { label: "Cherry Peak", detail: "2025-26 opening date unconfirmed by resort", url: "https://www.skicpr.com/" },
+      ],
     },
     FORECAST_ENSEMBLE,
   ],

@@ -142,6 +142,14 @@ const REGION_ANCHORS: Record<RegionId, {
   "telluride": { lat: 37.9375, lon: -107.8123, elevation: 3815, region: "OTHER", displayName: "Telluride" },
   "durango": { lat: 37.6297, lon: -107.8144, elevation: 3299, region: "OTHER", displayName: "Durango" },
   "boulder-front-range": { lat: 39.9375, lon: -105.5828, elevation: 2853, region: "OTHER", displayName: "Boulder / Front Range" },
+  // US (Utah) · same posture as Colorado above, no national model in the
+  // ensemble so region "OTHER". Anchor each on its highest/primary
+  // lift-served summit.
+  "cottonwood-canyons": { lat: 40.5883, lon: -111.6383, elevation: 3374, region: "OTHER", displayName: "Cottonwood Canyons" },
+  "park-city": { lat: 40.6514, lon: -111.5080, elevation: 3056, region: "OTHER", displayName: "Park City" },
+  "ogden-valley": { lat: 41.2160, lon: -111.8567, elevation: 2917, region: "OTHER", displayName: "Ogden Valley" },
+  "provo": { lat: 40.3970, lon: -111.5847, elevation: 2515, region: "OTHER", displayName: "Provo" },
+  "cache-valley": { lat: 41.9742, lon: -111.4547, elevation: 2701, region: "OTHER", displayName: "Cache Valley" },
 };
 
 interface EvaluatorReport {

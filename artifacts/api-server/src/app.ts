@@ -428,6 +428,26 @@ if (process.env.NODE_ENV === "production") {
       name: "Boulder / Front Range",
       towns: { nederland: "Nederland" },
     },
+    "cottonwood-canyons": {
+      name: "Cottonwood Canyons",
+      towns: { "salt-lake-city": "Salt Lake City", sandy: "Sandy" },
+    },
+    "park-city": {
+      name: "Park City",
+      towns: { "park-city-town": "Park City" },
+    },
+    "ogden-valley": {
+      name: "Ogden Valley",
+      towns: { ogden: "Ogden", eden: "Eden" },
+    },
+    "provo": {
+      name: "Provo",
+      towns: { "provo-town": "Provo", "sundance-town": "Sundance" },
+    },
+    "cache-valley": {
+      name: "Cache Valley",
+      towns: { logan: "Logan" },
+    },
   };
 
   // Top-level routes handled by the SPA (before the /:region catch-all).

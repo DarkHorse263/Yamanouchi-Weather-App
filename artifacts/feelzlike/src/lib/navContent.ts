@@ -63,6 +63,11 @@ const REGIONS_WITH_ROADS_CONTENT: ReadonlySet<string> = new Set([
   "telluride",
   "durango",
   "boulder-front-range",
+  "cottonwood-canyons",
+  "park-city",
+  "ogden-valley",
+  "provo",
+  "cache-valley",
 ]);
 
 /**

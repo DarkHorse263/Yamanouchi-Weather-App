@@ -98,7 +98,12 @@ export type RegionKey =
   | "crested-butte"
   | "telluride"
   | "durango"
-  | "boulder-front-range";
+  | "boulder-front-range"
+  | "cottonwood-canyons"
+  | "park-city"
+  | "ogden-valley"
+  | "provo"
+  | "cache-valley";
 type ViewMode = "interactive" | "windy" | "official";
 
 interface RegionConfig {
@@ -577,6 +582,51 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       attribution: "National Weather Service · weather radar",
     },
   },
+  "cottonwood-canyons": {
+    windy: { lat: 40.61, lon: -111.64, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "park-city": {
+    windy: { lat: 40.65, lon: -111.50, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "ogden-valley": {
+    windy: { lat: 41.27, lon: -111.87, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  provo: {
+    windy: { lat: 40.40, lon: -111.58, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "cache-valley": {
+    windy: { lat: 41.74, lon: -111.83, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
 };
 
 const DEFAULT_ZOOM = 9;
@@ -1029,6 +1079,51 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "nederland", name: "Nederland", lat: 39.9614, lng: -105.5108, accent: "#0ea5e9" },
     ],
   },
+  "cottonwood-canyons": {
+    center: { lat: 40.61, lng: -111.64 },
+    pins: [
+      { id: "alta", name: "Alta", lat: 40.5883, lng: -111.6383, accent: "#f97316" },
+      { id: "snowbird", name: "Snowbird", lat: 40.5830, lng: -111.6556, accent: "#f97316" },
+      { id: "brighton-resort", name: "Brighton", lat: 40.5977, lng: -111.5836, accent: "#f97316" },
+      { id: "solitude-mountain-resort", name: "Solitude", lat: 40.6199, lng: -111.5928, accent: "#f97316" },
+      { id: "salt-lake-city", name: "Salt Lake City", lat: 40.7608, lng: -111.8910, accent: "#0ea5e9" },
+      { id: "sandy", name: "Sandy", lat: 40.5649, lng: -111.8389, accent: "#0ea5e9" },
+    ],
+  },
+  "park-city": {
+    center: { lat: 40.65, lng: -111.50 },
+    pins: [
+      { id: "park-city-mountain", name: "Park City Mountain", lat: 40.6514, lng: -111.5080, accent: "#f97316" },
+      { id: "deer-valley-resort", name: "Deer Valley", lat: 40.6374, lng: -111.4783, accent: "#f97316" },
+      { id: "park-city-town", name: "Park City", lat: 40.6461, lng: -111.4980, accent: "#0ea5e9" },
+    ],
+  },
+  "ogden-valley": {
+    center: { lat: 41.27, lng: -111.87 },
+    pins: [
+      { id: "snowbasin", name: "Snowbasin", lat: 41.2160, lng: -111.8567, accent: "#f97316" },
+      { id: "powder-mountain", name: "Powder Mountain", lat: 41.3797, lng: -111.7811, accent: "#f97316" },
+      { id: "nordic-valley", name: "Nordic Valley", lat: 41.3311, lng: -111.8497, accent: "#f97316" },
+      { id: "ogden", name: "Ogden", lat: 41.2230, lng: -111.9738, accent: "#0ea5e9" },
+      { id: "eden", name: "Eden", lat: 41.3211, lng: -111.8636, accent: "#0ea5e9" },
+    ],
+  },
+  provo: {
+    center: { lat: 40.40, lng: -111.58 },
+    pins: [
+      { id: "sundance-mountain-resort", name: "Sundance Mountain Resort", lat: 40.3970, lng: -111.5847, accent: "#f97316" },
+      { id: "provo-town", name: "Provo", lat: 40.2338, lng: -111.6585, accent: "#0ea5e9" },
+      { id: "sundance-town", name: "Sundance", lat: 40.3970, lng: -111.5847, accent: "#0ea5e9" },
+    ],
+  },
+  "cache-valley": {
+    center: { lat: 41.74, lng: -111.83 },
+    pins: [
+      { id: "beaver-mountain", name: "Beaver Mountain", lat: 41.9742, lng: -111.4547, accent: "#f97316" },
+      { id: "cherry-peak", name: "Cherry Peak", lat: 41.9897, lng: -111.9250, accent: "#f97316" },
+      { id: "logan", name: "Logan", lat: 41.7370, lng: -111.8338, accent: "#0ea5e9" },
+    ],
+  },
 };
 
 // Which country each region sits in. Drives the cross-region grouping on
@@ -1082,6 +1177,11 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   telluride: "US",
   durango: "US",
   "boulder-front-range": "US",
+  "cottonwood-canyons": "US",
+  "park-city": "US",
+  "ogden-valley": "US",
+  provo: "US",
+  "cache-valley": "US",
 };
 const COUNTRY_LABEL: Record<MapCountry, string> = { AU: "australia", JP: "japan", NZ: "new zealand", CA: "canada", US: "united states" };
 const REGION_LABEL: Record<RegionKey, string> = {
@@ -1129,6 +1229,11 @@ const REGION_LABEL: Record<RegionKey, string> = {
   telluride: "telluride",
   durango: "durango",
   "boulder-front-range": "boulder / front range",
+  "cottonwood-canyons": "cottonwood canyons",
+  "park-city": "park city",
+  "ogden-valley": "ogden valley",
+  provo: "provo",
+  "cache-valley": "cache valley",
 };
 
 interface CountryPin extends PinSpec {

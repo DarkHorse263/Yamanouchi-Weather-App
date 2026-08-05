@@ -67,6 +67,13 @@ export const ALERT_REGIONS: Array<{ id: string; nameEn: string; nameJa: string; 
   { id: "telluride", nameEn: "Telluride", nameJa: "テルライド", country: "US · Colorado" },
   { id: "durango", nameEn: "Durango", nameJa: "デュランゴ", country: "US · Colorado" },
   { id: "boulder-front-range", nameEn: "Boulder / Front Range", nameJa: "ボルダー・フロントレンジ", country: "US · Colorado" },
+
+  // United States (Utah)
+  { id: "cottonwood-canyons", nameEn: "Cottonwood Canyons", nameJa: "コトンウッド・キャニオンズ", country: "US · Utah" },
+  { id: "park-city", nameEn: "Park City", nameJa: "パークシティ", country: "US · Utah" },
+  { id: "ogden-valley", nameEn: "Ogden Valley", nameJa: "オグデンバレー", country: "US · Utah" },
+  { id: "provo", nameEn: "Provo", nameJa: "プロボ", country: "US · Utah" },
+  { id: "cache-valley", nameEn: "Cache Valley", nameJa: "キャッシュバレー", country: "US · Utah" },
 ];
 
 const HORIZONS: Array<{ value: 24 | 48 | 72; label: string; labelJa: string }> = [
