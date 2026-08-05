@@ -54,7 +54,12 @@
 // and delete-then-refetch must never be served a stale cached list).
 // v20: /api/account (member account page) excluded from the SW entirely
 // (session-scoped, private, mutated in place by the profile/alerts saves).
-const CACHE_VERSION = "v20";
+// v21: /api/auth/* excluded from the SW entirely (stale signed-in state after
+// magic-link sign-in/sign-out on installed PWAs); /api/local-weather and
+// /api/vic-emergency-incidents moved from the catch-all SWR to the live
+// network-first route ("right now" conditions + live road incidents must
+// never be served a session stale).
+const CACHE_VERSION = "v21";
 const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
 const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;
@@ -198,6 +203,12 @@ self.addEventListener("fetch", (event) => {
   //     to any later script with origin access. Always go straight to net.
   if (url.pathname.startsWith("/api/alerts")) return;
 
+  // 2a-quinquies. Auth endpoints: session state (`/api/auth/user`) drives the
+  //     signed-in UI, and the magic-link request/verify flow is side-effectful.
+  //     A stale-while-revalidate copy makes sign-in/sign-out look like it
+  //     didn't happen on installed PWAs. Never cache, always straight to net.
+  if (url.pathname.startsWith("/api/auth")) return;
+
   // 2a-ter. Admin dashboard endpoints: session-scoped, private, and mutated
   //     in place (e.g. deleting a pending signup then refetching the list).
   //     A stale-while-revalidate copy makes deletions look like "nothing
@@ -234,7 +245,9 @@ self.addEventListener("fetch", (event) => {
     url.pathname.startsWith("/api/weather") ||
     url.pathname.startsWith("/api/town-weather") ||
     url.pathname.startsWith("/api/today") ||
-    url.pathname.startsWith("/api/road")
+    url.pathname.startsWith("/api/road") ||
+    url.pathname.startsWith("/api/local-weather") ||
+    url.pathname.startsWith("/api/vic-emergency-incidents")
   ) {
     event.respondWith(networkFirst(request, DATA_CACHE));
     return;

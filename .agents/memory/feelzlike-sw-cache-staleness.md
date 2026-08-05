@@ -17,3 +17,6 @@ description: Why an /api response-shape or behaviour change can keep showing the
 **Why:** three independent cache layers (SW Cache Storage, browser HTTP cache, React Query in-memory) each mask a shape change, and `reload` is the only lever that clears an already-poisoned browser HTTP entry immediately — otherwise its old max-age still applies for up to an hour.
 
 **How to apply:** the new sw.js reaches users only on republish; installed PWAs auto-update on the next navigation. A one-time force-close/reopen accelerates it. Photos (`/api/places/photo`, immutable 24h) and nearby stay on their existing strategies — scope the network-first branch to the endpoint that actually changed.
+
+## Session-state endpoints (Aug 2026 full-site audit)
+`/api/auth/*` is excluded from the SW entirely (like /api/admin and /api/account): a SWR-cached /api/auth/user showed stale signed-in state on installed PWAs after magic-link sign-in/sign-out. Any NEW session-scoped or "right now" endpoint must be added to the never-cache or network-first blocks at creation time — the catch-all SWR is the default trap.

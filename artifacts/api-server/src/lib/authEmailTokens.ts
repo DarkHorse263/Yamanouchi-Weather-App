@@ -17,10 +17,13 @@ const SECRET = (() => {
   const s = process.env.ALERT_TOKEN_SECRET;
   if (s && s.length >= 16) return s;
   const fallback = randomBytes(32).toString("base64url");
-  if (process.env.NODE_ENV === "production") {
-    console.error(
-      "[authEmailTokens] ALERT_TOKEN_SECRET is missing or <16 chars in production · using ephemeral random secret. " +
-        "Sign-in links will NOT survive a restart and will NOT work across multiple instances.",
+  if (process.env.REPLIT_DEPLOYMENT || process.env.NODE_ENV === "production") {
+    // Fail closed: an ephemeral per-process secret means sign-in links die on
+    // every restart and never work across autoscale instances · that is a
+    // silently broken sign-up funnel, not a degraded one. Refuse to boot.
+    throw new Error(
+      "[authEmailTokens] ALERT_TOKEN_SECRET is missing or <16 chars in production. " +
+        "Set it in the deployment secrets · refusing to start with an ephemeral secret.",
     );
   } else {
     console.warn(

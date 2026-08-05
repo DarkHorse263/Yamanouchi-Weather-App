@@ -27,9 +27,25 @@ const router: IRouter = Router();
 
 function getOrigin(req: Request): string {
   const proto = req.headers["x-forwarded-proto"] || "https";
-  const host =
-    req.headers["x-forwarded-host"] || req.headers["host"] || "localhost";
-  return `${proto}://${host}`;
+  const rawHost = String(
+    req.headers["x-forwarded-host"] || req.headers["host"] || "localhost",
+  )
+    .split(",")[0]
+    .trim();
+  // Harden against spoofed/multi-hop forwarded hosts: in a published
+  // deployment only serve auth redirects for hosts we actually own · anything
+  // else collapses to the canonical origin. Dev keeps the header-derived host
+  // so the workspace preview and localhost keep working.
+  if (process.env.REPLIT_DEPLOYMENT) {
+    const allowed =
+      rawHost === "feelzlike.com" ||
+      rawHost === "www.feelzlike.com" ||
+      rawHost.endsWith(".replit.app");
+    if (!allowed) {
+      return (process.env.PUBLIC_ORIGIN ?? "https://feelzlike.com").replace(/\/$/, "");
+    }
+  }
+  return `${proto}://${rawHost}`;
 }
 
 function setSessionCookie(res: Response, sid: string) {
