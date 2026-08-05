@@ -80,4 +80,8 @@ export const RegionId = {
   "bozeman-bridger-bowl": "bozeman-bridger-bowl",
   "whitefish": "whitefish",
   "red-lodge": "red-lodge",
+  "taos": "taos",
+  "angel-fire": "angel-fire",
+  "santa-fe": "santa-fe",
+  "albuquerque-sandia": "albuquerque-sandia",
 } as const;

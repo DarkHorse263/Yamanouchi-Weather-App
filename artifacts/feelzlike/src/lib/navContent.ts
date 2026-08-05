@@ -86,6 +86,10 @@ const REGIONS_WITH_ROADS_CONTENT: ReadonlySet<string> = new Set([
   "bozeman-bridger-bowl",
   "whitefish",
   "red-lodge",
+  "taos",
+  "angel-fire",
+  "santa-fe",
+  "albuquerque-sandia",
 ]);
 
 /**

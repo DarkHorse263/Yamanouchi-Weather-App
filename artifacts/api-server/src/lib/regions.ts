@@ -75,6 +75,10 @@ export const REGION_IDS = [
   "bozeman-bridger-bowl",
   "whitefish",
   "red-lodge",
+  "taos",
+  "angel-fire",
+  "santa-fe",
+  "albuquerque-sandia",
 ] as const;
 export type RegionId = (typeof REGION_IDS)[number];
 
@@ -695,6 +699,30 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "red-lodge-mountain": "red-lodge",
   "red-lodge-town": "red-lodge",
   "red-lodge-roads": "red-lodge",
+
+  // Taos, NM. Town "taos-ski-valley-town" disambiguated from the resort's
+  // own id "taos-ski-valley" since the base town shares the resort's name.
+  "taos-ski-valley": "taos",
+  "taos-ski-valley-town": "taos",
+  "taos-roads": "taos",
+
+  // Angel Fire, NM. Resort's own multi-word name "angel-fire-resort"
+  // disambiguates it from the town "angel-fire".
+  "angel-fire-resort": "angel-fire",
+  "angel-fire": "angel-fire",
+  "angel-fire-roads": "angel-fire",
+
+  // Santa Fe area, NM.
+  "ski-santa-fe": "santa-fe",
+  "santa-fe": "santa-fe",
+  "santa-fe-roads": "santa-fe",
+
+  // Albuquerque area, NM. Sandia Peak Ski Area is a verify-status resort
+  // (delayed/uncertain 2025-26 closing date) - see roads.ts and
+  // RegionSources.tsx for the honesty-gate framing.
+  "sandia-peak": "albuquerque-sandia",
+  "albuquerque": "albuquerque-sandia",
+  "albuquerque-sandia-roads": "albuquerque-sandia",
 };
 
 export function regionForLocation(locationId: string): RegionId | undefined {

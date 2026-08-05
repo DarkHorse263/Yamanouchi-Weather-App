@@ -520,6 +520,22 @@ if (process.env.NODE_ENV === "production") {
       name: "Red Lodge",
       towns: { "red-lodge-town": "Red Lodge" },
     },
+    "taos": {
+      name: "Taos",
+      towns: { "taos-ski-valley-town": "Taos Ski Valley" },
+    },
+    "angel-fire": {
+      name: "Angel Fire",
+      towns: { "angel-fire": "Angel Fire" },
+    },
+    "santa-fe": {
+      name: "Santa Fe",
+      towns: { "santa-fe": "Santa Fe" },
+    },
+    "albuquerque-sandia": {
+      name: "Albuquerque",
+      towns: { "albuquerque": "Albuquerque" },
+    },
   };
 
   // Top-level routes handled by the SPA (before the /:region catch-all).

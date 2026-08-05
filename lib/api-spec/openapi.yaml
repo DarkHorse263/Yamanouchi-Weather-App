@@ -1733,6 +1733,10 @@ components:
         - bozeman-bridger-bowl
         - whitefish
         - red-lodge
+        - taos
+        - angel-fire
+        - santa-fe
+        - albuquerque-sandia
       description: |
         Canonical region identifier used across the FeelZlike platform.
 

@@ -590,6 +590,22 @@ const LOCATIONS: LocationConfig[] = [
   // Red Lodge, MT · town id "red-lodge-town" disambiguated from the resort.
   { id: "red-lodge-mountain",        name: "Red Lodge Mountain",        latitude: 45.1699, longitude: -109.4137, elevation: 2870, description: "Indy Pass member · ⚠️ 2025-26 closing date not confirmed by a dated primary source · no dedicated backcountry avalanche forecast authority covers the Beartooth/Red Lodge area.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
   { id: "red-lodge-town",            name: "Red Lodge",                 latitude: 45.1863, longitude: -109.2468, elevation: 1740, description: "Historic base town for Red Lodge Mountain, gateway to the Beartooth Mountains (summer-only Beartooth Highway).", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+
+  // Taos, NM · town id "taos-ski-valley-town" disambiguated from the resort.
+  { id: "taos-ski-valley",           name: "Taos Ski Valley",           latitude: 36.5960, longitude: -105.4478, elevation: 3804, description: "Ikon Pass (Full, no blackouts) · independent ownership · sole access via NM-150, a narrow, steep, switchback road · ⚠️ closed early for 2025-26 on Mar 29 2026 due to unseasonably warm weather.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "taos-ski-valley-town",      name: "Taos Ski Valley",           latitude: 36.5946, longitude: -105.4497, elevation: 2804, description: "Base village at the literal end of NM-150, directly at the foot of Taos Ski Valley.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+
+  // Angel Fire, NM.
+  { id: "angel-fire-resort",         name: "Angel Fire Resort",         latitude: 36.3929, longitude: -105.2853, elevation: 3254, description: "Powder Alliance member · New Mexico's only night skiing · confirmed season Dec 12 2025 - Mar 22 2026.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "angel-fire",                name: "Angel Fire",                latitude: 36.3762, longitude: -105.2894, elevation: 2555, description: "Moreno Valley town near Wheeler Peak, gateway to Angel Fire Resort.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+
+  // Santa Fe area, NM.
+  { id: "ski-santa-fe",              name: "Ski Santa Fe",              latitude: 35.8000, longitude: -105.8000, elevation: 3681, description: "Independent · one of the highest-base-elevation resorts in the US · ⚠️ closed early for 2025-26 on Mar 22 2026 due to unseasonably warm, dry conditions.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "santa-fe",                  name: "Santa Fe",                  latitude: 35.6870, longitude: -105.9378, elevation: 2194, description: "New Mexico's state capital, roughly 30 minutes' drive from Ski Santa Fe.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+
+  // Albuquerque area, NM · Sandia Peak is a verify-status resort, see roads.ts.
+  { id: "sandia-peak",               name: "Sandia Peak Ski Area",      latitude: 35.2062, longitude: -106.4475, elevation: 2630, description: "Mountain Capital Partners \"Power Pass\" · ⚠️ verify-status resort: exact 2025-26 closing date and total operating days unconfirmed by any dated source found in research.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "albuquerque",               name: "Albuquerque",               latitude: 35.0844, longitude: -106.6504, elevation: 1619, description: "New Mexico's largest city, roughly 30-45 minutes' drive from Sandia Peak Ski Area.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
 ];
 
 const WEATHER_DESCRIPTIONS: Record<number, string> = {

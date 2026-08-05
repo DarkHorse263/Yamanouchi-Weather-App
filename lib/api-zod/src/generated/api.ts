@@ -228,6 +228,14 @@ export const GetPowderAlertsQueryParams = zod.object({
       "whitefish",
 
       "red-lodge",
+
+      "taos",
+
+      "angel-fire",
+
+      "santa-fe",
+
+      "albuquerque-sandia",
     ])
     .optional()
     .describe(
@@ -1261,6 +1269,14 @@ export const GetWeatherQueryParams = zod.object({
       "whitefish",
 
       "red-lodge",
+
+      "taos",
+
+      "angel-fire",
+
+      "santa-fe",
+
+      "albuquerque-sandia",
     ])
     .optional()
     .describe(
@@ -1717,6 +1733,14 @@ export const GetWebcamsQueryParams = zod.object({
       "whitefish",
 
       "red-lodge",
+
+      "taos",
+
+      "angel-fire",
+
+      "santa-fe",
+
+      "albuquerque-sandia",
     ])
     .optional()
     .describe(
@@ -1875,6 +1899,14 @@ export const GetRoadConditionsQueryParams = zod.object({
       "whitefish",
 
       "red-lodge",
+
+      "taos",
+
+      "angel-fire",
+
+      "santa-fe",
+
+      "albuquerque-sandia",
     ])
     .optional()
     .describe(
@@ -2088,6 +2120,14 @@ export const GetLiftStatusQueryParams = zod.object({
       "whitefish",
 
       "red-lodge",
+
+      "taos",
+
+      "angel-fire",
+
+      "santa-fe",
+
+      "albuquerque-sandia",
     ])
     .optional()
     .describe(

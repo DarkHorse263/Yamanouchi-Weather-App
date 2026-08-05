@@ -348,6 +348,46 @@ const MT_ROADS_GENERAL: SourceGroup = {
   ],
 };
 
+/**
+ * New Mexico reference blocks. The Taos Avalanche Center covers only "the
+ * mountains surrounding Taos" — Angel Fire, Santa Fe and Albuquerque/Sandia
+ * Peak have NO dedicated avalanche-forecast authority, same honesty pattern
+ * as Montana's Red Lodge/California's Big Bear gaps.
+ */
+const NM_OFFICIAL_REFERENCES_TAOS: SourceGroup = {
+  title: "Official references",
+  titleJa: "公式参照先",
+  blurb:
+    "Link-outs, not wired feeds · conditions shown on feelzlike come from the forecast ensemble below, so check these before you drive or tour.",
+  blurbJa:
+    "リンクのみで、データ連携はしていません。feelzlikeの数値は下記の予報モデルによるものです。走行・ツアー前に必ず公式情報をご確認ください。",
+  items: [
+    { label: "National Weather Service", detail: "US federal forecasts & warnings", url: "https://www.weather.gov/" },
+    { label: "Taos Avalanche Center", detail: "backcountry avalanche forecasts for the mountains surrounding Taos", url: "https://taosavalanchecenter.org/" },
+  ],
+};
+const NM_OFFICIAL_REFERENCES_NO_AVALANCHE: SourceGroup = {
+  title: "Official references",
+  titleJa: "公式参照先",
+  blurb:
+    "Link-outs, not wired feeds · conditions shown on feelzlike come from the forecast ensemble below, so check these before you drive or tour. \u26a0\ufe0f No dedicated backcountry avalanche-forecasting authority covers this region — the Taos Avalanche Center's coverage does not extend here, so no avalanche-bulletin link is offered here rather than pointing at one that doesn't apply.",
+  blurbJa:
+    "リンクのみで、データ連携はしていません。feelzlikeの数値は下記の予報モデルによるものです。この地域を担当する雪崩予報機関はありません。",
+  items: [
+    { label: "National Weather Service", detail: "US federal forecasts & warnings", url: "https://www.weather.gov/" },
+  ],
+};
+const NM_ROADS_GENERAL: SourceGroup = {
+  title: "Roads & transport",
+  titleJa: "道路・交通",
+  blurb:
+    "New Mexico has no statewide chain law for passenger vehicles — NMSA 1978 § 66-3-847 permits but does not require chains or studded tires.",
+  blurbJa: "ニューメキシコ州には乗用車向けのチェーン規制はありません。",
+  items: [
+    { label: "NMDOT · nmroads.com", detail: "statewide real-time road conditions & camera map (or dial 511)", url: "https://www.nmroads.com/mapIndex.html" },
+  ],
+};
+
 const REGION_SOURCES: Record<string, SourceGroup[]> = {
   "snowy-mountains": [
     {
@@ -921,6 +961,54 @@ const REGION_SOURCES: Record<string, SourceGroup[]> = {
       titleJa: "スキー場・リフト",
       items: [
         { label: "Red Lodge Mountain", detail: "Indy Pass member · ⚠️ 2025-26 closing date not confirmed by a dated primary source · the scenic Beartooth Highway (US-212) toward Yellowstone/Cooke City is closed in winter (mid-October through late May/early June)", url: "https://www.redlodgemountain.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  taos: [
+    NM_OFFICIAL_REFERENCES_TAOS,
+    NM_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Taos Ski Valley", detail: "Ikon Pass (Full, no blackouts) · independent ownership · sole access via NM-150, a narrow, steep, switchback road · ⚠️ closed early for 2025-26 on Mar 29 2026 due to unseasonably warm weather", url: "https://www.skitaos.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "angel-fire": [
+    NM_OFFICIAL_REFERENCES_NO_AVALANCHE,
+    NM_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Angel Fire Resort", detail: "Powder Alliance member · New Mexico's only night skiing · confirmed season Dec 12 2025 - Mar 22 2026 · ⚠️ a secondary source claims Indy Pass affiliation too, unconfirmed on Indy Pass's own directory", url: "https://www.angelfireresort.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "santa-fe": [
+    NM_OFFICIAL_REFERENCES_NO_AVALANCHE,
+    NM_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Ski Santa Fe", detail: "independent · one of the highest-base-elevation resorts in the US (10,350 ft base) · ⚠️ closed early for 2025-26 on Mar 22 2026 due to unseasonably warm, dry conditions", url: "https://www.skisantafe.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "albuquerque-sandia": [
+    NM_OFFICIAL_REFERENCES_NO_AVALANCHE,
+    NM_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Sandia Peak Ski Area", detail: "Mountain Capital Partners \"Power Pass\" · ⚠️ VERIFY-STATUS RESORT: multi-year full closures 2021-23, reopened 2024 under new ownership, exact 2025-26 closing date and total operating days unconfirmed by any dated source · no confirmed live webcam", url: "https://www.sandia.ski/" },
       ],
     },
     FORECAST_ENSEMBLE,

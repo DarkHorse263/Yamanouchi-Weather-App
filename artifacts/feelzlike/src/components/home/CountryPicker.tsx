@@ -121,6 +121,10 @@ const FALLBACK_REGIONS: Region[] = [
   { id: "bozeman-bridger-bowl",   name: "Bozeman",                         country: "United States", countryCode: "US", region: "Montana",         status: "live", href: "/bozeman-bridger-bowl/",   baseTowns: ["Bozeman"],                                                   mountains: ["Bridger Bowl"],                                            headlineLabel: "Bozeman",      headline: null },
   { id: "whitefish",              name: "Whitefish",                       country: "United States", countryCode: "US", region: "Montana",         status: "live", href: "/whitefish/",             baseTowns: ["Whitefish"],                                                 mountains: ["Whitefish Mountain Resort"],                               headlineLabel: "Whitefish",    headline: null },
   { id: "red-lodge",              name: "Red Lodge",                       country: "United States", countryCode: "US", region: "Montana",         status: "live", href: "/red-lodge/",             baseTowns: ["Red Lodge"],                                                 mountains: ["Red Lodge Mountain"],                                      headlineLabel: "Red Lodge",    headline: null },
+  { id: "taos",                   name: "Taos",                            country: "United States", countryCode: "US", region: "New Mexico",      status: "live", href: "/taos/",                  baseTowns: ["Taos Ski Valley"],                                           mountains: ["Taos Ski Valley"],                                         headlineLabel: "Taos",         headline: null },
+  { id: "angel-fire",             name: "Angel Fire",                      country: "United States", countryCode: "US", region: "New Mexico",      status: "live", href: "/angel-fire/",            baseTowns: ["Angel Fire"],                                                mountains: ["Angel Fire Resort"],                                       headlineLabel: "Angel Fire",   headline: null },
+  { id: "santa-fe",               name: "Santa Fe",                        country: "United States", countryCode: "US", region: "New Mexico",      status: "live", href: "/santa-fe/",              baseTowns: ["Santa Fe"],                                                  mountains: ["Ski Santa Fe"],                                            headlineLabel: "Santa Fe",     headline: null },
+  { id: "albuquerque-sandia",     name: "Albuquerque",                     country: "United States", countryCode: "US", region: "New Mexico",      status: "live", href: "/albuquerque-sandia/",     baseTowns: ["Albuquerque"],                                               mountains: ["Sandia Peak Ski Area"],                                    headlineLabel: "Albuquerque",  headline: null },
 ];
 
 // Map a region to the base town we surface in the country card. This is
@@ -192,6 +196,10 @@ const PRIMARY_TOWN: Record<string, string> = {
   "bozeman-bridger-bowl":     "Bozeman",
   "whitefish":                "Whitefish",
   "red-lodge":                "Red Lodge",
+  "taos":                     "Taos Ski Valley",
+  "angel-fire":               "Angel Fire",
+  "santa-fe":                 "Santa Fe",
+  "albuquerque-sandia":       "Albuquerque",
 };
 
 // AU + NZ = southern hemisphere (snow Jun-Sep); JP + CA + US = northern (snow Dec-Mar).

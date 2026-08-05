@@ -121,7 +121,11 @@ export type RegionKey =
   | "big-sky"
   | "bozeman-bridger-bowl"
   | "whitefish"
-  | "red-lodge";
+  | "red-lodge"
+  | "taos"
+  | "angel-fire"
+  | "santa-fe"
+  | "albuquerque-sandia";
 type ViewMode = "interactive" | "windy" | "official";
 
 interface RegionConfig {
@@ -807,6 +811,42 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       attribution: "National Weather Service · weather radar",
     },
   },
+  "taos": {
+    windy: { lat: 36.60, lon: -105.45, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "angel-fire": {
+    windy: { lat: 36.39, lon: -105.29, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "santa-fe": {
+    windy: { lat: 35.80, lon: -105.80, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "albuquerque-sandia": {
+    windy: { lat: 35.21, lon: -106.45, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
 };
 
 const DEFAULT_ZOOM = 9;
@@ -1452,6 +1492,34 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "red-lodge-town", name: "Red Lodge", lat: 45.1863, lng: -109.2468, accent: "#0ea5e9" },
     ],
   },
+  "taos": {
+    center: { lat: 36.595, lng: -105.449 },
+    pins: [
+      { id: "taos-ski-valley", name: "Taos Ski Valley", lat: 36.5960, lng: -105.4478, accent: "#f97316" },
+      { id: "taos-ski-valley-town", name: "Taos Ski Valley", lat: 36.5946, lng: -105.4497, accent: "#0ea5e9" },
+    ],
+  },
+  "angel-fire": {
+    center: { lat: 36.385, lng: -105.287 },
+    pins: [
+      { id: "angel-fire-resort", name: "Angel Fire Resort", lat: 36.3929, lng: -105.2853, accent: "#f97316" },
+      { id: "angel-fire", name: "Angel Fire", lat: 36.3762, lng: -105.2894, accent: "#0ea5e9" },
+    ],
+  },
+  "santa-fe": {
+    center: { lat: 35.744, lng: -105.869 },
+    pins: [
+      { id: "ski-santa-fe", name: "Ski Santa Fe", lat: 35.8000, lng: -105.8000, accent: "#f97316" },
+      { id: "santa-fe", name: "Santa Fe", lat: 35.6870, lng: -105.9378, accent: "#0ea5e9" },
+    ],
+  },
+  "albuquerque-sandia": {
+    center: { lat: 35.145, lng: -106.549 },
+    pins: [
+      { id: "sandia-peak", name: "Sandia Peak Ski Area", lat: 35.2062, lng: -106.4475, accent: "#f97316" },
+      { id: "albuquerque", name: "Albuquerque", lat: 35.0844, lng: -106.6504, accent: "#0ea5e9" },
+    ],
+  },
 };
 
 // Which country each region sits in. Drives the cross-region grouping on
@@ -1528,6 +1596,10 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "bozeman-bridger-bowl": "US",
   "whitefish": "US",
   "red-lodge": "US",
+  "taos": "US",
+  "angel-fire": "US",
+  "santa-fe": "US",
+  "albuquerque-sandia": "US",
 };
 const COUNTRY_LABEL: Record<MapCountry, string> = { AU: "australia", JP: "japan", NZ: "new zealand", CA: "canada", US: "united states" };
 const REGION_LABEL: Record<RegionKey, string> = {
@@ -1598,6 +1670,10 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "bozeman-bridger-bowl": "bozeman",
   "whitefish": "whitefish",
   "red-lodge": "red lodge",
+  "taos": "taos",
+  "angel-fire": "angel fire",
+  "santa-fe": "santa fe",
+  "albuquerque-sandia": "albuquerque",
 };
 
 interface CountryPin extends PinSpec {

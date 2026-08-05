@@ -177,6 +177,13 @@ const REGION_ANCHORS: Record<RegionId, {
   "bozeman-bridger-bowl": { lat: 45.8266, lon: -110.8988, elevation: 2682, region: "OTHER", displayName: "Bozeman" },
   "whitefish": { lat: 48.4890, lon: -114.3670, elevation: 2078, region: "OTHER", displayName: "Whitefish" },
   "red-lodge": { lat: 45.1699, lon: -109.4137, elevation: 2870, region: "OTHER", displayName: "Red Lodge" },
+
+  // New Mexico anchors: each on the highest lift-served summit in the
+  // region. America/Denver, same as Colorado/Utah/Wyoming/Montana.
+  "taos": { lat: 36.5960, lon: -105.4478, elevation: 3804, region: "OTHER", displayName: "Taos" },
+  "angel-fire": { lat: 36.3929, lon: -105.2853, elevation: 3254, region: "OTHER", displayName: "Angel Fire" },
+  "santa-fe": { lat: 35.8000, lon: -105.8000, elevation: 3681, region: "OTHER", displayName: "Santa Fe" },
+  "albuquerque-sandia": { lat: 35.2062, lon: -106.4475, elevation: 2630, region: "OTHER", displayName: "Albuquerque" },
 };
 
 interface EvaluatorReport {

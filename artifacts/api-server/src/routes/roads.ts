@@ -888,6 +888,54 @@ function mtChainEntry(opts: {
   };
 }
 
+/**
+ * New Mexico has NO statewide chain law or mandatory winter-tire
+ * requirement for passenger vehicles - NMSA 1978 Section 66-3-847
+ * PERMITS but does not require tire chains "of reasonable proportions"
+ * or studded snow tires when conditions warrant. There is no chain-
+ * control program and no posted chain orders anywhere in the state
+ * (unlike Colorado's CDOT system), so chain use is entirely at the
+ * driver's discretion. This makes New Mexico's honesty posture the same
+ * narrow, genuinely-no-chain-law pattern as Vermont/Montana rather than
+ * Wyoming's real, dynamically-postable Level 1/Level 2 law. Named
+ * `nmChainEntry` to avoid confusion with the Vermont/Wyoming/Montana
+ * helpers. NM-150, the sole paved access road to Taos Ski Valley, is a
+ * narrow, steep, switchback mountain road and is called out explicitly
+ * wherever it is the relevant approach.
+ */
+const NM_SOURCE = {
+  sourceLabel: "NMDOT · nmroads.com",
+  sourceUrl: "https://www.nmroads.com/mapIndex.html",
+};
+
+function nmChainEntry(opts: {
+  id: string;
+  regionId: string;
+  mountainId: string;
+  mountainName: string;
+  approach: string;
+  detail: string;
+  inSeason: boolean;
+  issuedAt: string;
+}): Record<string, unknown> {
+  return {
+    id: opts.id,
+    regionId: opts.regionId,
+    mountainId: opts.mountainId,
+    mountainName: opts.mountainName,
+    approach: opts.approach,
+    status: "open",
+    chains2wd: "not-required" satisfies ChainReq,
+    chainsAwd: "not-required" satisfies ChainReq,
+    note: opts.inSeason
+      ? `New Mexico has no statewide chain law or mandatory winter-tire requirement for passenger vehicles (NMSA 1978 Section 66-3-847 permits, but does not require, chains or studded tires when conditions warrant; there is no chain-control program or posted chain orders anywhere in the state). Winter/snow tyres are strongly recommended on mountain approaches; studded tires are legal year-round. ${opts.detail}`
+      : "Outside the ski season · New Mexico has no chain-law requirement on this route at any time of year for passenger vehicles.",
+    issuedAt: opts.issuedAt,
+    ...NM_SOURCE,
+    dataSource: "seasonal-rule",
+  };
+}
+
 function buildChainStatuses(regionId: string | undefined): Array<Record<string, unknown>> {
   const now = new Date();
   const issuedAt = now.toISOString();
@@ -1882,6 +1930,53 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
     ];
   }
 
+  if (
+    regionId === "taos" ||
+    regionId === "angel-fire" ||
+    regionId === "santa-fe" ||
+    regionId === "albuquerque-sandia"
+  ) {
+    const inSeason = isUsSnowSeason(now);
+    const nm = (
+      id: string,
+      mountainId: string,
+      mountainName: string,
+      approach: string,
+      detail: string,
+    ) => nmChainEntry({ id, regionId, mountainId, mountainName, approach, detail, inSeason, issuedAt });
+
+    if (regionId === "taos") {
+      return [
+        nm("taos-ski-valley-nm-150", "taos-ski-valley", "Taos Ski Valley",
+          "NM-150 from Taos, the sole paved access road to the resort",
+          "⚠️ NM-150 is a narrow, steep, switchback mountain road with icy driving conditions common in winter — 4WD/AWD and reduced speeds are strongly recommended even though chains are not legally required."),
+      ];
+    }
+
+    if (regionId === "angel-fire") {
+      return [
+        nm("angel-fire-resort-us-64", "angel-fire-resort", "Angel Fire Resort",
+          "US-64 into the Moreno Valley to Angel Fire",
+          "US-64 is state-maintained and regularly plowed; NMDOT also posts seasonal Forest Service road closures in the surrounding Carson National Forest each winter."),
+      ];
+    }
+
+    if (regionId === "santa-fe") {
+      return [
+        nm("ski-santa-fe-nm-475", "ski-santa-fe", "Ski Santa Fe",
+          "NM-475 (Hyde Park Rd) northeast from Santa Fe",
+          "NM-475 climbs to one of the highest-base-elevation resorts in the US and is state-maintained and regularly plowed."),
+      ];
+    }
+
+    // albuquerque-sandia
+    return [
+      nm("sandia-peak-nm-536", "sandia-peak", "Sandia Peak Ski Area",
+        "NM-536 (Sandia Crest Scenic Byway) from Albuquerque",
+        "⚠️ Sandia Peak is a verify-status resort with an unconfirmed 2025-26 closing date — check sandia.ski directly before travelling. A separate forest-health/wildfire-mitigation project at the nearby Sandia Crest recreation area is causing partial trail/road closures from April 2026 through fall 2027; this does not affect the ski area or Tramway."),
+    ];
+  }
+
   return [];
 }
 
@@ -2163,6 +2258,19 @@ router.get("/road-conditions", async (req, res) => {
       region === "bozeman-bridger-bowl" ||
       region === "whitefish" ||
       region === "red-lodge";
+    //  - US (New Mexico) - no feed wired yet. NMDOT publishes nmroads.com.
+    //    New Mexico has NO statewide chain law (NMSA 1978 Section
+    //    66-3-847 permits but does not require chains/studded tires) -
+    //    same narrow posture as Vermont/Montana. The Taos Avalanche
+    //    Center covers only the Taos region; Angel Fire, Santa Fe and
+    //    Albuquerque/Sandia Peak have NO dedicated avalanche-forecast
+    //    coverage - a genuine gap, stated explicitly rather than
+    //    pointing at an authority that doesn't actually cover them.
+    const isUsNm =
+      region === "taos" ||
+      region === "angel-fire" ||
+      region === "santa-fe" ||
+      region === "albuquerque-sandia";
 
     let roads: unknown[] = [];
     let generalAdvice: string;
@@ -2280,6 +2388,23 @@ router.get("/road-conditions", async (req, res) => {
           ? "We do not yet pull live road data for Montana · check MDT's 511mt.net for closures, chain requirements and highway cameras before you drive. Montana has no statewide chain law for passenger vehicles (only a heavy-vehicle rule under MCA 61-9-436 for towing units ≥ 26,001 lbs GVW, which doesn't apply to visitor cars); winter/snow tyres are strongly recommended on mountain approaches, and MDT can post temporary chain requirements at specific named mountain passes during severe storms. For backcountry conditions, read the day's forecast from the Flathead Avalanche Center at flatheadavalanche.org."
           : "We do not yet pull live road data for Montana · check MDT's 511mt.net for closures, chain requirements and highway cameras before you drive, especially on US-212 and around the Beartooth Highway (closed in winter, roughly mid-October through late May/early June). Montana has no statewide chain law for passenger vehicles (only a heavy-vehicle rule under MCA 61-9-436 for towing units ≥ 26,001 lbs GVW, which doesn't apply to visitor cars); winter/snow tyres are strongly recommended on this approach. ⚠️ This region has no dedicated backcountry avalanche-forecasting authority — the Gallatin National Forest Avalanche Center's coverage does not extend to Red Lodge/Beartooth, so no avalanche-bulletin link is offered here rather than pointing at one that doesn't apply.";
       liveTrafficUrl = "https://www.511mt.net/";
+    } else if (isUsNm) {
+      // No live New Mexico road feed is wired yet - say so plainly rather
+      // than shipping an empty list that reads like "all clear". New
+      // Mexico has NO statewide chain law for passenger vehicles - NMSA
+      // 1978 Section 66-3-847 permits but does not require chains or
+      // studded tires - so this is a genuine, permanent absence of a
+      // chain law, same posture as Vermont/Montana. The Taos Avalanche
+      // Center covers only the Taos region (the mountains surrounding
+      // Taos); Angel Fire, Santa Fe and Albuquerque/Sandia Peak have NO
+      // dedicated avalanche-forecasting authority - stated explicitly
+      // rather than pointing at the Taos Avalanche Center, which does
+      // not actually extend there.
+      const taosRegionCoverage = region === "taos";
+      generalAdvice = taosRegionCoverage
+        ? "We do not yet pull live road data for New Mexico \u00b7 check NMDOT's nmroads.com (or dial 511) for closures and highway cameras before you drive, especially on NM-150, the narrow, steep, switchback sole access road to Taos Ski Valley. New Mexico has no statewide chain law for passenger vehicles (NMSA 1978 Section 66-3-847 permits but does not require chains or studded snow tires); winter/snow tyres and 4WD/AWD are strongly recommended on NM-150. For backcountry conditions, read the day's forecast from the Taos Avalanche Center at taosavalanchecenter.org."
+        : "We do not yet pull live road data for New Mexico \u00b7 check NMDOT's nmroads.com (or dial 511) for closures and highway cameras before you drive. New Mexico has no statewide chain law for passenger vehicles (NMSA 1978 Section 66-3-847 permits but does not require chains or studded snow tires); winter/snow tyres are strongly recommended on mountain approaches. \u26a0\ufe0f This region has no dedicated backcountry avalanche-forecasting authority \u2014 the Taos Avalanche Center's coverage does not extend here, so no avalanche-bulletin link is offered rather than pointing at one that doesn't apply.";
+      liveTrafficUrl = "https://www.nmroads.com/mapIndex.html";
     } else {
       generalAdvice =
         "Live road condition data is not yet available for this region.";

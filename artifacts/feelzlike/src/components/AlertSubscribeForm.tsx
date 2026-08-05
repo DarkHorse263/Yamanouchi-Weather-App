@@ -94,6 +94,10 @@ export const ALERT_REGIONS: Array<{ id: string; nameEn: string; nameJa: string; 
   { id: "bozeman-bridger-bowl", nameEn: "Bozeman / Bridger Bowl", nameJa: "ボーズマン／ブリッジャーボウル", country: "US · Montana" },
   { id: "whitefish", nameEn: "Whitefish", nameJa: "ホワイトフィッシュ", country: "US · Montana" },
   { id: "red-lodge", nameEn: "Red Lodge", nameJa: "レッドロッジ", country: "US · Montana" },
+  { id: "taos", nameEn: "Taos", nameJa: "タオス", country: "US · New Mexico" },
+  { id: "angel-fire", nameEn: "Angel Fire", nameJa: "エンジェルファイア", country: "US · New Mexico" },
+  { id: "santa-fe", nameEn: "Santa Fe", nameJa: "サンタフェ", country: "US · New Mexico" },
+  { id: "albuquerque-sandia", nameEn: "Albuquerque", nameJa: "アルバカーキー", country: "US · New Mexico" },
 ];
 
 const HORIZONS: Array<{ value: 24 | 48 | 72; label: string; labelJa: string }> = [

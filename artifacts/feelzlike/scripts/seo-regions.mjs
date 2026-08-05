@@ -1122,6 +1122,62 @@ export const REGIONS = [
       { id: "red-lodge-town", name: "Red Lodge", blurb: "historic base town for Red Lodge Mountain, gateway to the Beartooth Mountains" },
     ],
   },
+  {
+    slug: "taos",
+    name: "Taos",
+    subtitle: "New Mexico · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Taos Ski Valley", blurb: "Ikon Pass (Full, no blackouts) · independent ownership · sole access via NM-150, a narrow, steep, switchback road · ⚠️ closed early for 2025-26 on Mar 29 2026 due to unseasonably warm weather" },
+    ],
+    towns: [
+      { id: "taos-ski-valley-town", name: "Taos Ski Valley", blurb: "base village at the literal end of NM-150, directly at the foot of Taos Ski Valley" },
+    ],
+  },
+  {
+    slug: "angel-fire",
+    name: "Angel Fire",
+    subtitle: "New Mexico · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Angel Fire Resort", blurb: "Powder Alliance member · New Mexico's only night skiing · confirmed season Dec 12 2025 - Mar 22 2026" },
+    ],
+    towns: [
+      { id: "angel-fire", name: "Angel Fire", blurb: "Moreno Valley town near Wheeler Peak, gateway to Angel Fire Resort" },
+    ],
+  },
+  {
+    slug: "santa-fe",
+    name: "Santa Fe",
+    subtitle: "New Mexico · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Ski Santa Fe", blurb: "independent · one of the highest-base-elevation resorts in the US (10,350 ft base) · ⚠️ closed early for 2025-26 on Mar 22 2026 due to unseasonably warm, dry conditions" },
+    ],
+    towns: [
+      { id: "santa-fe", name: "Santa Fe", blurb: "New Mexico's state capital, roughly 30 minutes' drive from Ski Santa Fe" },
+    ],
+  },
+  {
+    slug: "albuquerque-sandia",
+    name: "Albuquerque",
+    subtitle: "New Mexico · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Sandia Peak Ski Area", blurb: "Mountain Capital Partners \"Power Pass\" · ⚠️ verify-status resort: exact 2025-26 closing date and total operating days unconfirmed by any dated source · no confirmed live webcam" },
+    ],
+    towns: [
+      { id: "albuquerque", name: "Albuquerque", blurb: "New Mexico's largest city, roughly 30-45 minutes' drive from Sandia Peak Ski Area" },
+    ],
+  },
 ];
 
 /** Region sub-sections that actually render for this region (see gating notes above). */

@@ -82,6 +82,10 @@ import { BIG_SKY_TRANSPORT } from "./big-sky";
 import { BOZEMAN_BRIDGER_BOWL_TRANSPORT } from "./bozeman-bridger-bowl";
 import { WHITEFISH_TRANSPORT } from "./whitefish";
 import { RED_LODGE_TRANSPORT } from "./red-lodge";
+import { TAOS_TRANSPORT } from "./taos";
+import { ANGEL_FIRE_TRANSPORT } from "./angel-fire";
+import { SANTA_FE_TRANSPORT } from "./santa-fe";
+import { ALBUQUERQUE_SANDIA_TRANSPORT } from "./albuquerque-sandia";
 
 const REGISTRY: Record<RegionId, TransportProviderList> = {
   "snowy-mountains": SNOWY_MOUNTAINS_TRANSPORT,
@@ -169,6 +173,14 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   "bozeman-bridger-bowl": BOZEMAN_BRIDGER_BOWL_TRANSPORT,
   "whitefish": WHITEFISH_TRANSPORT,
   "red-lodge": RED_LODGE_TRANSPORT,
+
+  // US (New Mexico) · no operators curated to the AU/JP/NZ verification
+  // standard yet, so these are registered empty rather than filled with
+  // guessed timetables.
+  "taos": TAOS_TRANSPORT,
+  "angel-fire": ANGEL_FIRE_TRANSPORT,
+  "santa-fe": SANTA_FE_TRANSPORT,
+  "albuquerque-sandia": ALBUQUERQUE_SANDIA_TRANSPORT,
 };
 
 // Loader-time integrity check.

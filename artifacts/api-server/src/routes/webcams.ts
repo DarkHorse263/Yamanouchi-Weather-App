@@ -1300,6 +1300,77 @@ const WEBCAM_DATA: WebcamConfig[] = [
     webcamPageUrl: "https://www.511mt.net/",
     webcams: [],
   },
+
+  // ─── Resort live-cam pages: New Mexico (Taos) ──────
+  {
+    locationId: "taos-ski-valley",
+    // Confirmed live per research (Arroyo Seco/NM-150 Cam, Base Cam,
+    // Kachina Basin Cam, Highline Cam) · one feed (Kachina Peak Cam) showed
+    // "image unavailable" at research time — page-only link, no fabricated
+    // per-camera deep links.
+    locationName: "Taos Ski Valley live cams",
+    webcamPageUrl: "https://www.skitaos.com/mountain",
+    webcams: [],
+  },
+
+  // ─── Resort live-cam pages: New Mexico (Angel Fire) ──────
+  {
+    locationId: "angel-fire-resort",
+    // Confirmed live per research (Base Area, Chile Unload, Putting Green,
+    // Summit cams) — page-only link, no fabricated per-camera deep links.
+    locationName: "Angel Fire Resort live cams",
+    webcamPageUrl: "https://www.angelfireresort.com/weather/",
+    webcams: [],
+  },
+
+  // ─── Resort live-cam pages: New Mexico (Santa Fe) ──────
+  {
+    locationId: "ski-santa-fe",
+    // Confirmed live per research ("Images refresh every minute") —
+    // page-only link, no fabricated per-camera deep links.
+    locationName: "Ski Santa Fe live cams",
+    webcamPageUrl: "https://www.skisantafe.com/conditions/webcams",
+    webcams: [],
+  },
+
+  // ─── Resort live-cam pages: New Mexico (Albuquerque / Sandia Peak) ──────
+  {
+    locationId: "sandia-peak",
+    // ⚠️ No confirmed live webcam URL found in research — page-only link
+    // to the resort's own snow-report page, no fabricated feed.
+    locationName: "Sandia Peak Ski Area live cams",
+    webcamPageUrl: "https://www.sandia.ski/snow-report",
+    webcams: [],
+  },
+
+  // ─── Roadside cams: New Mexico ────────────────────────────────
+  // NMDOT's nmroads.com runs public highway traffic cameras, but does not
+  // expose a stable deep link per camera that survives a season — same
+  // honest page-only-link pattern as CO/UT/CA/VT/WY/MT.
+  {
+    locationId: "taos-roads",
+    locationName: "Roads to Taos Ski Valley · NM-150",
+    webcamPageUrl: "https://www.nmroads.com/mapIndex.html",
+    webcams: [],
+  },
+  {
+    locationId: "angel-fire-roads",
+    locationName: "Roads to Angel Fire · US-64",
+    webcamPageUrl: "https://www.nmroads.com/mapIndex.html",
+    webcams: [],
+  },
+  {
+    locationId: "santa-fe-roads",
+    locationName: "Roads to Ski Santa Fe · NM-475 (Hyde Park Rd)",
+    webcamPageUrl: "https://www.nmroads.com/mapIndex.html",
+    webcams: [],
+  },
+  {
+    locationId: "albuquerque-sandia-roads",
+    locationName: "Roads to Sandia Peak · NM-536 (Sandia Crest Scenic Byway)",
+    webcamPageUrl: "https://www.nmroads.com/mapIndex.html",
+    webcams: [],
+  },
 ];
 
 router.get("/webcams", (req, res) => {
