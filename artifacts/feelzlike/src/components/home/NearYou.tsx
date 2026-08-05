@@ -525,11 +525,17 @@ export function NearYou() {
             </p>
           ) : showTap ? (
             <div className="mt-3">
-              <p className="text-[13px] leading-snug text-slate-600">
-                {phase === "unavailable"
-                  ? "we couldn't get your location just now"
-                  : "see live conditions right where you are"}
-              </p>
+              {/* When the mountain hero above already sells the live value,
+                  the blurb is redundant noise · keep just the one-tap button. */}
+              {phase === "unavailable" ? (
+                <p className="text-[13px] leading-snug text-slate-600">
+                  we couldn't get your location just now
+                </p>
+              ) : heroHidden ? (
+                <p className="text-[13px] leading-snug text-slate-600">
+                  see live conditions right where you are
+                </p>
+              ) : null}
               {phase === "unavailable" ? (
                 <p className="mt-1 text-[12px] leading-snug text-slate-500">
                   on a computer this usually means location services are turned
