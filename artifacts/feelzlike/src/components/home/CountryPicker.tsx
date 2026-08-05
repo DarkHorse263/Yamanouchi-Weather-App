@@ -117,6 +117,10 @@ const FALLBACK_REGIONS: Region[] = [
   { id: "jay-peak-nek",           name: "Jay Peak/Northeast Kingdom",      country: "United States", countryCode: "US", region: "Vermont",         status: "live", href: "/jay-peak-nek/",          baseTowns: ["Jay", "East Burke"],                                        mountains: ["Jay Peak", "Burke Mountain"],                              headlineLabel: "Jay",          headline: null },
   { id: "jackson-hole",           name: "Jackson Hole",                    country: "United States", countryCode: "US", region: "Wyoming",         status: "live", href: "/jackson-hole/",          baseTowns: ["Jackson", "Teton Village"],                                 mountains: ["Jackson Hole Mountain Resort", "Snow King Mountain"],       headlineLabel: "Jackson",      headline: null },
   { id: "grand-targhee",          name: "Grand Targhee",                   country: "United States", countryCode: "US", region: "Wyoming",         status: "live", href: "/grand-targhee/",         baseTowns: ["Alta"],                                                      mountains: ["Grand Targhee Resort"],                                    headlineLabel: "Alta",         headline: null },
+  { id: "big-sky",                name: "Big Sky",                         country: "United States", countryCode: "US", region: "Montana",         status: "live", href: "/big-sky/",               baseTowns: ["Big Sky"],                                                   mountains: ["Big Sky Resort"],                                          headlineLabel: "Big Sky",      headline: null },
+  { id: "bozeman-bridger-bowl",   name: "Bozeman",                         country: "United States", countryCode: "US", region: "Montana",         status: "live", href: "/bozeman-bridger-bowl/",   baseTowns: ["Bozeman"],                                                   mountains: ["Bridger Bowl"],                                            headlineLabel: "Bozeman",      headline: null },
+  { id: "whitefish",              name: "Whitefish",                       country: "United States", countryCode: "US", region: "Montana",         status: "live", href: "/whitefish/",             baseTowns: ["Whitefish"],                                                 mountains: ["Whitefish Mountain Resort"],                               headlineLabel: "Whitefish",    headline: null },
+  { id: "red-lodge",              name: "Red Lodge",                       country: "United States", countryCode: "US", region: "Montana",         status: "live", href: "/red-lodge/",             baseTowns: ["Red Lodge"],                                                 mountains: ["Red Lodge Mountain"],                                      headlineLabel: "Red Lodge",    headline: null },
 ];
 
 // Map a region to the base town we surface in the country card. This is
@@ -184,6 +188,10 @@ const PRIMARY_TOWN: Record<string, string> = {
   "jay-peak-nek":             "Jay",
   "jackson-hole":             "Jackson",
   "grand-targhee":            "Alta",
+  "big-sky":                  "Big Sky",
+  "bozeman-bridger-bowl":     "Bozeman",
+  "whitefish":                "Whitefish",
+  "red-lodge":                "Red Lodge",
 };
 
 // AU + NZ = southern hemisphere (snow Jun-Sep); JP + CA + US = northern (snow Dec-Mar).

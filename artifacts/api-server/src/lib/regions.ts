@@ -71,6 +71,10 @@ export const REGION_IDS = [
   "jay-peak-nek",
   "jackson-hole",
   "grand-targhee",
+  "big-sky",
+  "bozeman-bridger-bowl",
+  "whitefish",
+  "red-lodge",
 ] as const;
 export type RegionId = (typeof REGION_IDS)[number];
 
@@ -669,6 +673,28 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "grand-targhee-resort": "grand-targhee",
   "alta-wy": "grand-targhee",
   "grand-targhee-roads": "grand-targhee",
+
+  // Big Sky, MT.
+  "big-sky-resort": "big-sky",
+  "big-sky-town": "big-sky",
+  "big-sky-roads": "big-sky",
+
+  // Bozeman / Bridger Bowl, MT.
+  "bridger-bowl": "bozeman-bridger-bowl",
+  "bozeman": "bozeman-bridger-bowl",
+  "bozeman-bridger-bowl-roads": "bozeman-bridger-bowl",
+
+  // Whitefish, MT. Town "whitefish-town" disambiguated from the resort's
+  // own id since both would otherwise be bare "whitefish".
+  "whitefish-mountain-resort": "whitefish",
+  "whitefish-town": "whitefish",
+  "whitefish-roads": "whitefish",
+
+  // Red Lodge, MT. Town "red-lodge-town" disambiguated from the resort's
+  // own id since both would otherwise be bare "red-lodge".
+  "red-lodge-mountain": "red-lodge",
+  "red-lodge-town": "red-lodge",
+  "red-lodge-roads": "red-lodge",
 };
 
 export function regionForLocation(locationId: string): RegionId | undefined {

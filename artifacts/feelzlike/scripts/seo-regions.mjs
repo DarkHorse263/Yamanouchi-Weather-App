@@ -1066,6 +1066,62 @@ export const REGIONS = [
       { id: "alta-wy", name: "Alta", blurb: "small Wyoming town at the base of Grand Targhee Resort" },
     ],
   },
+  {
+    slug: "big-sky",
+    name: "Big Sky",
+    subtitle: "Montana · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Big Sky Resort", blurb: "Ikon Pass (Full, no blackouts) · \"The Biggest Skiing in America\" · ~5,850 skiable acres, 4,350 ft vertical · official 2025-26 closing day Apr 26 2026 per resort" },
+    ],
+    towns: [
+      { id: "big-sky-town", name: "Big Sky", blurb: "base town for Big Sky Resort, midway between Bozeman and Yellowstone's West Entrance" },
+    ],
+  },
+  {
+    slug: "bozeman-bridger-bowl",
+    name: "Bozeman",
+    subtitle: "Montana · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Bridger Bowl", blurb: "independent nonprofit · ⚠️ closed early for the 2025-26 season on Mar 22 2026 due to low snowfall, expected back to its normal schedule for 2026-27" },
+    ],
+    towns: [
+      { id: "bozeman", name: "Bozeman", blurb: "university town and gateway to Bridger Bowl" },
+    ],
+  },
+  {
+    slug: "whitefish",
+    name: "Whitefish",
+    subtitle: "Montana · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Whitefish Mountain Resort", blurb: "independent · known locally as \"Big Mountain\" · official 2025-26 closing day Apr 5 2026 per resort" },
+    ],
+    towns: [
+      { id: "whitefish-town", name: "Whitefish", blurb: "lakeside base town for Whitefish Mountain Resort, near Glacier National Park" },
+    ],
+  },
+  {
+    slug: "red-lodge",
+    name: "Red Lodge",
+    subtitle: "Montana · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Red Lodge Mountain", blurb: "Indy Pass member · ⚠️ 2025-26 closing date not confirmed by a dated primary source · no dedicated avalanche-forecast coverage for this area" },
+    ],
+    towns: [
+      { id: "red-lodge-town", name: "Red Lodge", blurb: "historic base town for Red Lodge Mountain, gateway to the Beartooth Mountains" },
+    ],
+  },
 ];
 
 /** Region sub-sections that actually render for this region (see gating notes above). */

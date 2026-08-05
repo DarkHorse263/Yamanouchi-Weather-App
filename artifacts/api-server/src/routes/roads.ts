@@ -840,6 +840,54 @@ function wyChainEntry(opts: {
   };
 }
 
+/**
+ * Montana has NO statewide passenger-vehicle chain law - the only
+ * chain/traction requirement in research is a narrow heavy-vehicle rule
+ * (MCA 61-9-436: towing units ≥ 26,001 lbs GVW must carry chains/traction
+ * devices Oct 1-Apr 30 when required; 4WD vehicles are exempt even from
+ * that), plus MDT's ability to post temporary chain requirements at ~2
+ * dozen named mountain passes/hills (e.g. Homestake Pass, Bozeman Hill,
+ * MacDonald Pass, Lookout Pass, Marias Pass, Lost Trail Pass) during
+ * severe weather - none of which apply to ordinary visitor passenger
+ * vehicles. This makes Montana's honesty posture the same narrow pattern
+ * as Vermont's `vtChainEntry()` (genuinely no chain law for the vehicles
+ * this app serves) rather than Wyoming's real, dynamically-postable
+ * Level 1/Level 2 law that applies to ALL vehicles. Named `mtChainEntry`
+ * to avoid any confusion with the Vermont/Wyoming helpers.
+ */
+const MT_SOURCE = {
+  sourceLabel: "MDT · 511mt.net",
+  sourceUrl: "https://www.511mt.net/",
+};
+
+function mtChainEntry(opts: {
+  id: string;
+  regionId: string;
+  mountainId: string;
+  mountainName: string;
+  approach: string;
+  detail: string;
+  inSeason: boolean;
+  issuedAt: string;
+}): Record<string, unknown> {
+  return {
+    id: opts.id,
+    regionId: opts.regionId,
+    mountainId: opts.mountainId,
+    mountainName: opts.mountainName,
+    approach: opts.approach,
+    status: "open",
+    chains2wd: "not-required" satisfies ChainReq,
+    chainsAwd: "not-required" satisfies ChainReq,
+    note: opts.inSeason
+      ? `Montana has no statewide chain law for passenger vehicles (only a heavy-vehicle rule under MCA 61-9-436 for towing units ≥ 26,001 lbs GVW, which doesn't apply here; 4WD vehicles are exempt even from that). MDT can post temporary chain requirements at specific named mountain passes during severe weather - winter/snow tyres are strongly recommended on mountain approaches. ${opts.detail}`
+      : "Outside the ski season · Montana has no chain-law requirement on this route at any time of year for passenger vehicles.",
+    issuedAt: opts.issuedAt,
+    ...MT_SOURCE,
+    dataSource: "seasonal-rule",
+  };
+}
+
 function buildChainStatuses(regionId: string | undefined): Array<Record<string, unknown>> {
   const now = new Date();
   const issuedAt = now.toISOString();
@@ -1787,6 +1835,53 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
     ];
   }
 
+  if (
+    regionId === "big-sky" ||
+    regionId === "bozeman-bridger-bowl" ||
+    regionId === "whitefish" ||
+    regionId === "red-lodge"
+  ) {
+    const inSeason = isUsSnowSeason(now);
+    const mt = (
+      id: string,
+      mountainId: string,
+      mountainName: string,
+      approach: string,
+      detail: string,
+    ) => mtChainEntry({ id, regionId, mountainId, mountainName, approach, detail, inSeason, issuedAt });
+
+    if (regionId === "big-sky") {
+      return [
+        mt("big-sky-resort-us-191", "big-sky-resort", "Big Sky Resort",
+          "US-191 south from Bozeman, then Lone Mountain Trail/Big Sky Spur Rd to Mountain Village",
+          "US-191 through the Gallatin Canyon is state-maintained and regularly plowed."),
+      ];
+    }
+
+    if (regionId === "bozeman-bridger-bowl") {
+      return [
+        mt("bridger-bowl-canyon-rd", "bridger-bowl", "Bridger Bowl",
+          "Bridger Canyon Rd (MT-86) north from Bozeman",
+          "MT-86 is state-maintained and regularly plowed; MDT can post a temporary heavy-vehicle chain requirement at Bozeman Hill during severe storms, which does not apply to passenger vehicles."),
+      ];
+    }
+
+    if (regionId === "whitefish") {
+      return [
+        mt("whitefish-mountain-resort-big-mtn-rd", "whitefish-mountain-resort", "Whitefish Mountain Resort",
+          "Big Mountain Rd north from downtown Whitefish",
+          "Big Mountain Rd is city/county-maintained and regularly plowed."),
+      ];
+    }
+
+    // red-lodge
+    return [
+      mt("red-lodge-mountain-ski-run-rd", "red-lodge-mountain", "Red Lodge Mountain",
+        "US-212 from Billings, then Ski Run Rd from the town of Red Lodge",
+        "⚠️ The scenic Beartooth Highway (US-212) toward Yellowstone/Cooke City is closed in winter (mid-October through late May/early June) — winter access is via US-212 from Billings and Ski Run Rd only."),
+    ];
+  }
+
   return [];
 }
 
@@ -2055,6 +2150,19 @@ router.get("/road-conditions", async (req, res) => {
     //    downgraded to a generic "no chain law" advisory. Bridger-Teton
     //    Avalanche Center covers both WY regions under its "Tetons" zone.
     const isUsWy = region === "jackson-hole" || region === "grand-targhee";
+    //  - US (Montana) - no feed wired yet. MDT publishes 511mt.net.
+    //    Montana has NO statewide passenger-vehicle chain law (only a
+    //    narrow heavy-vehicle carve-out under MCA 61-9-436) - same narrow
+    //    posture as Vermont. GNFAC covers Big Sky/Bozeman-Bridger Bowl,
+    //    Flathead Avalanche Center covers Whitefish; Red Lodge/Beartooth
+    //    has NO dedicated avalanche-forecast coverage - a genuine gap,
+    //    stated explicitly rather than pointing at an authority that
+    //    doesn't actually cover it.
+    const isUsMt =
+      region === "big-sky" ||
+      region === "bozeman-bridger-bowl" ||
+      region === "whitefish" ||
+      region === "red-lodge";
 
     let roads: unknown[] = [];
     let generalAdvice: string;
@@ -2150,6 +2258,28 @@ router.get("/road-conditions", async (req, res) => {
       generalAdvice =
         "We do not yet pull live road data for Wyoming · check WYDOT's wyoroad.info for closures, chain-law status and highway cameras before you drive, especially over Teton Pass (WY-22). Wyoming has no fixed-calendar statewide chain law, but WYDOT can post a dynamic Level 1 (chains, snow tires, or 4WD/AWD engaged) or Level 2 (chains, or 4WD/AWD with M+S/all-weather tires) chain requirement on any state highway when conditions warrant, applying to ALL vehicles when active — this is sign-activated, not automatically in force for a set window, per Wyoming Statute Section 31-5-956. For backcountry conditions, read the day's forecast from the Bridger-Teton Avalanche Center's Tetons zone at bridgertetonavalanchecenter.org.";
       liveTrafficUrl = "https://wyoroad.info/";
+    } else if (isUsMt) {
+      // No live Montana road feed is wired yet · say so plainly rather than
+      // shipping an empty list that reads like "all clear". Montana has NO
+      // statewide chain law for passenger vehicles — only a narrow
+      // heavy-vehicle rule under MCA 61-9-436 (towing units ≥ 26,001 lbs
+      // GVW, Oct 1–Apr 30) that does not apply to visitor vehicles — so
+      // this is a genuine, permanent absence of a chain law, same posture
+      // as Vermont, not a "not-required, but check for a posted rule" case
+      // like Utah/California/Wyoming. Avalanche-authority coverage is
+      // split: GNFAC covers Big Sky and Bozeman-Bridger Bowl, Flathead
+      // Avalanche Center covers Whitefish, and Red Lodge/Beartooth has NO
+      // dedicated avalanche-forecasting authority — stated explicitly
+      // rather than pointing at GNFAC or Flathead, neither of which
+      // actually extends there.
+      const gnfacRegion = region === "big-sky" || region === "bozeman-bridger-bowl";
+      const flatheadRegion = region === "whitefish";
+      generalAdvice = gnfacRegion
+        ? "We do not yet pull live road data for Montana · check MDT's 511mt.net for closures, chain requirements and highway cameras before you drive. Montana has no statewide chain law for passenger vehicles (only a heavy-vehicle rule under MCA 61-9-436 for towing units ≥ 26,001 lbs GVW, which doesn't apply to visitor cars); winter/snow tyres are strongly recommended on mountain approaches, and MDT can post temporary chain requirements at specific named mountain passes during severe storms. For backcountry conditions, read the day's forecast from the Gallatin National Forest Avalanche Center at mtavalanche.com."
+        : flatheadRegion
+          ? "We do not yet pull live road data for Montana · check MDT's 511mt.net for closures, chain requirements and highway cameras before you drive. Montana has no statewide chain law for passenger vehicles (only a heavy-vehicle rule under MCA 61-9-436 for towing units ≥ 26,001 lbs GVW, which doesn't apply to visitor cars); winter/snow tyres are strongly recommended on mountain approaches, and MDT can post temporary chain requirements at specific named mountain passes during severe storms. For backcountry conditions, read the day's forecast from the Flathead Avalanche Center at flatheadavalanche.org."
+          : "We do not yet pull live road data for Montana · check MDT's 511mt.net for closures, chain requirements and highway cameras before you drive, especially on US-212 and around the Beartooth Highway (closed in winter, roughly mid-October through late May/early June). Montana has no statewide chain law for passenger vehicles (only a heavy-vehicle rule under MCA 61-9-436 for towing units ≥ 26,001 lbs GVW, which doesn't apply to visitor cars); winter/snow tyres are strongly recommended on this approach. ⚠️ This region has no dedicated backcountry avalanche-forecasting authority — the Gallatin National Forest Avalanche Center's coverage does not extend to Red Lodge/Beartooth, so no avalanche-bulletin link is offered here rather than pointing at one that doesn't apply.";
+      liveTrafficUrl = "https://www.511mt.net/";
     } else {
       generalAdvice =
         "Live road condition data is not yet available for this region.";

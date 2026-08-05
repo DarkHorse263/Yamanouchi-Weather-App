@@ -1235,6 +1235,71 @@ const WEBCAM_DATA: WebcamConfig[] = [
     webcamPageUrl: "https://wyoroad.info/",
     webcams: [],
   },
+
+  // ─── Resort live-cam pages: Montana (Big Sky) ──────
+  {
+    locationId: "big-sky-resort",
+    locationName: "Big Sky Resort live cams",
+    webcamPageUrl: "https://www.bigskyresort.com/current-conditions/webcams",
+    webcams: [],
+  },
+
+  // ─── Resort live-cam pages: Montana (Bozeman / Bridger Bowl) ──────
+  {
+    locationId: "bridger-bowl",
+    // ⚠️ Closed early for the 2025-26 season on Mar 22 2026 (low snow) —
+    // page-only link kept live, no fabricated feed for the off-season.
+    locationName: "Bridger Bowl live cams",
+    webcamPageUrl: "https://bridgerbowl.com/weather/webcams",
+    webcams: [],
+  },
+
+  // ─── Resort live-cam pages: Montana (Whitefish) ──────
+  {
+    locationId: "whitefish-mountain-resort",
+    // ⚠️ No confirmed dedicated webcam URL found in research — page-only
+    // link to the resort's own Mountain Stats page, no fabricated feed.
+    locationName: "Whitefish Mountain Resort live cams",
+    webcamPageUrl: "https://skiwhitefish.com/mountain-stats/",
+    webcams: [],
+  },
+
+  // ─── Resort live-cam pages: Montana (Red Lodge) ──────
+  {
+    locationId: "red-lodge-mountain",
+    locationName: "Red Lodge Mountain live cams",
+    webcamPageUrl: "https://www.redlodgemountain.com/webcam/",
+    webcams: [],
+  },
+
+  // ─── Roadside cams: Montana ────────────────────────────────────
+  // MDT's 511mt.net / RWIS network runs public highway cameras, but does
+  // not expose a stable deep link per camera that survives a season —
+  // same honest page-only-link pattern as CO/UT/CA/VT/WY.
+  {
+    locationId: "big-sky-roads",
+    locationName: "Roads to Big Sky · US-191",
+    webcamPageUrl: "https://www.511mt.net/",
+    webcams: [],
+  },
+  {
+    locationId: "bozeman-bridger-bowl-roads",
+    locationName: "Roads to Bridger Bowl · Bridger Canyon Rd (MT-86)",
+    webcamPageUrl: "https://www.511mt.net/",
+    webcams: [],
+  },
+  {
+    locationId: "whitefish-roads",
+    locationName: "Roads to Whitefish Mountain Resort · Big Mountain Rd",
+    webcamPageUrl: "https://www.511mt.net/",
+    webcams: [],
+  },
+  {
+    locationId: "red-lodge-roads",
+    locationName: "Roads to Red Lodge Mountain · US-212 & Ski Run Rd",
+    webcamPageUrl: "https://www.511mt.net/",
+    webcams: [],
+  },
 ];
 
 router.get("/webcams", (req, res) => {

@@ -90,6 +90,10 @@ export const ALERT_REGIONS: Array<{ id: string; nameEn: string; nameJa: string; 
   { id: "jay-peak-nek", nameEn: "Jay Peak/Northeast Kingdom", nameJa: "ジェイピーク", country: "US · Vermont" },
   { id: "jackson-hole", nameEn: "Jackson Hole", nameJa: "ジャクソンホール", country: "US · Wyoming" },
   { id: "grand-targhee", nameEn: "Grand Targhee", nameJa: "グランドターガビー", country: "US · Wyoming" },
+  { id: "big-sky", nameEn: "Big Sky", nameJa: "ビッグスカイ", country: "US · Montana" },
+  { id: "bozeman-bridger-bowl", nameEn: "Bozeman / Bridger Bowl", nameJa: "ボーズマン／ブリッジャーボウル", country: "US · Montana" },
+  { id: "whitefish", nameEn: "Whitefish", nameJa: "ホワイトフィッシュ", country: "US · Montana" },
+  { id: "red-lodge", nameEn: "Red Lodge", nameJa: "レッドロッジ", country: "US · Montana" },
 ];
 
 const HORIZONS: Array<{ value: 24 | 48 | 72; label: string; labelJa: string }> = [

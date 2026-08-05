@@ -117,7 +117,11 @@ export type RegionKey =
   | "okemo"
   | "jay-peak-nek"
   | "jackson-hole"
-  | "grand-targhee";
+  | "grand-targhee"
+  | "big-sky"
+  | "bozeman-bridger-bowl"
+  | "whitefish"
+  | "red-lodge";
 type ViewMode = "interactive" | "windy" | "official";
 
 interface RegionConfig {
@@ -767,6 +771,42 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       attribution: "National Weather Service · weather radar",
     },
   },
+  "big-sky": {
+    windy: { lat: 45.29, lon: -111.40, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "bozeman-bridger-bowl": {
+    windy: { lat: 45.83, lon: -110.90, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "whitefish": {
+    windy: { lat: 48.49, lon: -114.37, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "red-lodge": {
+    windy: { lat: 45.17, lon: -109.41, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
 };
 
 const DEFAULT_ZOOM = 9;
@@ -1384,6 +1424,34 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "alta-wy", name: "Alta", lat: 43.7897, lng: -110.9310, accent: "#0ea5e9" },
     ],
   },
+  "big-sky": {
+    center: { lat: 45.29, lng: -111.39 },
+    pins: [
+      { id: "big-sky-resort", name: "Big Sky Resort", lat: 45.2871, lng: -111.4010, accent: "#f97316" },
+      { id: "big-sky-town", name: "Big Sky", lat: 45.2849, lng: -111.3806, accent: "#0ea5e9" },
+    ],
+  },
+  "bozeman-bridger-bowl": {
+    center: { lat: 45.75, lng: -110.97 },
+    pins: [
+      { id: "bridger-bowl", name: "Bridger Bowl", lat: 45.8266, lng: -110.8988, accent: "#f97316" },
+      { id: "bozeman", name: "Bozeman", lat: 45.6770, lng: -111.0429, accent: "#0ea5e9" },
+    ],
+  },
+  "whitefish": {
+    center: { lat: 48.45, lng: -114.35 },
+    pins: [
+      { id: "whitefish-mountain-resort", name: "Whitefish Mountain Resort", lat: 48.4890, lng: -114.3670, accent: "#f97316" },
+      { id: "whitefish-town", name: "Whitefish", lat: 48.4111, lng: -114.3376, accent: "#0ea5e9" },
+    ],
+  },
+  "red-lodge": {
+    center: { lat: 45.18, lng: -109.33 },
+    pins: [
+      { id: "red-lodge-mountain", name: "Red Lodge Mountain", lat: 45.1699, lng: -109.4137, accent: "#f97316" },
+      { id: "red-lodge-town", name: "Red Lodge", lat: 45.1863, lng: -109.2468, accent: "#0ea5e9" },
+    ],
+  },
 };
 
 // Which country each region sits in. Drives the cross-region grouping on
@@ -1456,6 +1524,10 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "jay-peak-nek": "US",
   "jackson-hole": "US",
   "grand-targhee": "US",
+  "big-sky": "US",
+  "bozeman-bridger-bowl": "US",
+  "whitefish": "US",
+  "red-lodge": "US",
 };
 const COUNTRY_LABEL: Record<MapCountry, string> = { AU: "australia", JP: "japan", NZ: "new zealand", CA: "canada", US: "united states" };
 const REGION_LABEL: Record<RegionKey, string> = {
@@ -1522,6 +1594,10 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "jay-peak-nek": "jay peak & northeast kingdom",
   "jackson-hole": "jackson hole",
   "grand-targhee": "grand targhee",
+  "big-sky": "big sky",
+  "bozeman-bridger-bowl": "bozeman",
+  "whitefish": "whitefish",
+  "red-lodge": "red lodge",
 };
 
 interface CountryPin extends PinSpec {

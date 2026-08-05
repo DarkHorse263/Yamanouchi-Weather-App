@@ -173,6 +173,10 @@ const REGION_ANCHORS: Record<RegionId, {
   // region. America/Denver, same as Colorado/Utah.
   "jackson-hole": { lat: 43.5875, lon: -110.8279, elevation: 3185, region: "OTHER", displayName: "Jackson Hole" },
   "grand-targhee": { lat: 43.7904, lon: -110.9576, elevation: 3006, region: "OTHER", displayName: "Grand Targhee" },
+  "big-sky": { lat: 45.2871, lon: -111.4010, elevation: 3403, region: "OTHER", displayName: "Big Sky" },
+  "bozeman-bridger-bowl": { lat: 45.8266, lon: -110.8988, elevation: 2682, region: "OTHER", displayName: "Bozeman" },
+  "whitefish": { lat: 48.4890, lon: -114.3670, elevation: 2078, region: "OTHER", displayName: "Whitefish" },
+  "red-lodge": { lat: 45.1699, lon: -109.4137, elevation: 2870, region: "OTHER", displayName: "Red Lodge" },
 };
 
 interface EvaluatorReport {

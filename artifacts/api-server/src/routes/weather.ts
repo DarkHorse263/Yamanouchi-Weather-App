@@ -574,6 +574,22 @@ const LOCATIONS: LocationConfig[] = [
   // Grand Targhee, WY · town id "alta-wy" disambiguated from Utah's Alta.
   { id: "grand-targhee-resort",      name: "Grand Targhee Resort",      latitude: 43.7904, longitude: -110.9576, elevation: 3006, description: "Mountain Collective Pass (not Ikon/Epic) · deepest average annual snowfall on the west side of the Tetons · Fred's Mountain summit 9,862 ft, 2,270 ft vertical · a contested 694-acre USFS expansion is approved but not built, objections run through July 2026 and don't affect the 2025-26 season.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
   { id: "alta-wy",                   name: "Alta",                      latitude: 43.7897, longitude: -110.9310, elevation: 2393, description: "Small Teton Valley town on the Idaho-Wyoming border, the closest base town to Grand Targhee Resort.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+
+  // Big Sky, MT · first Montana region, America/Denver.
+  { id: "big-sky-resort",            name: "Big Sky Resort",            latitude: 45.2871, longitude: -111.4010, elevation: 3403, description: "Ikon Pass (Full, no blackouts) · \"The Biggest Skiing in America\" · ~5,850 skiable acres, 4,350 ft vertical · official 2025-26 closing day Apr 26 2026 per resort.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "big-sky-town",              name: "Big Sky",                   latitude: 45.2849, longitude: -111.3806, elevation: 2286, description: "Base town for Big Sky Resort, midway between Bozeman and Yellowstone National Park's West Entrance.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+
+  // Bozeman / Bridger Bowl, MT.
+  { id: "bridger-bowl",              name: "Bridger Bowl",              latitude: 45.8266, longitude: -110.8988, elevation: 2682, description: "Independent nonprofit ski area · ⚠️ closed early for the 2025-26 season on Mar 22 2026 due to low snowfall (138\" season total), expected back to its normal schedule for 2026-27.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "bozeman",                   name: "Bozeman",                   latitude: 45.6770, longitude: -111.0429, elevation: 1466, description: "University town and gateway to Bridger Bowl, about 16 miles north.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+
+  // Whitefish, MT · town id "whitefish-town" disambiguated from the resort.
+  { id: "whitefish-mountain-resort", name: "Whitefish Mountain Resort", latitude: 48.4890, longitude: -114.3670, elevation: 2078, description: "Independent · known locally as \"Big Mountain\" · the largest US ski area not on Epic/Ikon/Indy Pass · official 2025-26 closing day Apr 5 2026 per resort.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "whitefish-town",            name: "Whitefish",                 latitude: 48.4111, longitude: -114.3376, elevation: 917,  description: "Lakeside base town for Whitefish Mountain Resort, near Glacier National Park.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+
+  // Red Lodge, MT · town id "red-lodge-town" disambiguated from the resort.
+  { id: "red-lodge-mountain",        name: "Red Lodge Mountain",        latitude: 45.1699, longitude: -109.4137, elevation: 2870, description: "Indy Pass member · ⚠️ 2025-26 closing date not confirmed by a dated primary source · no dedicated backcountry avalanche forecast authority covers the Beartooth/Red Lodge area.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "red-lodge-town",            name: "Red Lodge",                 latitude: 45.1863, longitude: -109.2468, elevation: 1740, description: "Historic base town for Red Lodge Mountain, gateway to the Beartooth Mountains (summer-only Beartooth Highway).", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
 ];
 
 const WEATHER_DESCRIPTIONS: Record<number, string> = {

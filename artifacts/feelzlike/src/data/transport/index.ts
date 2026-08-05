@@ -78,6 +78,10 @@ import { OKEMO_TRANSPORT } from "./okemo";
 import { JAY_PEAK_NEK_TRANSPORT } from "./jay-peak-nek";
 import { JACKSON_HOLE_TRANSPORT } from "./jackson-hole";
 import { GRAND_TARGHEE_TRANSPORT } from "./grand-targhee";
+import { BIG_SKY_TRANSPORT } from "./big-sky";
+import { BOZEMAN_BRIDGER_BOWL_TRANSPORT } from "./bozeman-bridger-bowl";
+import { WHITEFISH_TRANSPORT } from "./whitefish";
+import { RED_LODGE_TRANSPORT } from "./red-lodge";
 
 const REGISTRY: Record<RegionId, TransportProviderList> = {
   "snowy-mountains": SNOWY_MOUNTAINS_TRANSPORT,
@@ -157,6 +161,14 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   // guessed timetables.
   "jackson-hole": JACKSON_HOLE_TRANSPORT,
   "grand-targhee": GRAND_TARGHEE_TRANSPORT,
+
+  // US (Montana) · no operators curated to the AU/JP/NZ verification
+  // standard yet, so these are registered empty rather than filled with
+  // guessed timetables.
+  "big-sky": BIG_SKY_TRANSPORT,
+  "bozeman-bridger-bowl": BOZEMAN_BRIDGER_BOWL_TRANSPORT,
+  "whitefish": WHITEFISH_TRANSPORT,
+  "red-lodge": RED_LODGE_TRANSPORT,
 };
 
 // Loader-time integrity check.

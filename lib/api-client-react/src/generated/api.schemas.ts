@@ -143,6 +143,10 @@ export const RegionId = {
   "jay-peak-nek": "jay-peak-nek",
   "jackson-hole": "jackson-hole",
   "grand-targhee": "grand-targhee",
+  "big-sky": "big-sky",
+  "bozeman-bridger-bowl": "bozeman-bridger-bowl",
+  "whitefish": "whitefish",
+  "red-lodge": "red-lodge",
 } as const;
 
 export interface HealthStatus {

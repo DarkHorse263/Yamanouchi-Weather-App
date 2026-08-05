@@ -504,6 +504,22 @@ if (process.env.NODE_ENV === "production") {
       name: "Grand Targhee",
       towns: { "alta-wy": "Alta" },
     },
+    "big-sky": {
+      name: "Big Sky",
+      towns: { "big-sky-town": "Big Sky" },
+    },
+    "bozeman-bridger-bowl": {
+      name: "Bozeman",
+      towns: { bozeman: "Bozeman" },
+    },
+    "whitefish": {
+      name: "Whitefish",
+      towns: { "whitefish-town": "Whitefish" },
+    },
+    "red-lodge": {
+      name: "Red Lodge",
+      towns: { "red-lodge-town": "Red Lodge" },
+    },
   };
 
   // Top-level routes handled by the SPA (before the /:region catch-all).

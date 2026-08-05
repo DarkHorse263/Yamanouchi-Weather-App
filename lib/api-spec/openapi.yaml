@@ -1729,6 +1729,10 @@ components:
         - jay-peak-nek
         - jackson-hole
         - grand-targhee
+        - big-sky
+        - bozeman-bridger-bowl
+        - whitefish
+        - red-lodge
       description: |
         Canonical region identifier used across the FeelZlike platform.
 

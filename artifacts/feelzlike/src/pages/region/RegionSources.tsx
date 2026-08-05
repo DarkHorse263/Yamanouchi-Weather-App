@@ -296,6 +296,58 @@ const WY_ROADS_GENERAL: SourceGroup = {
   ],
 };
 
+/**
+ * Montana reference blocks. Coverage is split three ways: GNFAC covers Big
+ * Sky and Bozeman-Bridger Bowl, the Flathead Avalanche Center covers
+ * Whitefish, and Red Lodge/Beartooth has NO dedicated avalanche-forecast
+ * authority — same honesty pattern as California's Big Bear/Mt. Shasta gap.
+ */
+const MT_OFFICIAL_REFERENCES_GNFAC: SourceGroup = {
+  title: "Official references",
+  titleJa: "公式参照先",
+  blurb:
+    "Link-outs, not wired feeds · conditions shown on feelzlike come from the forecast ensemble below, so check these before you drive or tour.",
+  blurbJa:
+    "リンクのみで、データ連携はしていません。feelzlikeの数値は下記の予報モデルによるものです。走行・ツアー前に必ず公式情報をご確認ください。",
+  items: [
+    { label: "National Weather Service", detail: "US federal forecasts & warnings", url: "https://www.weather.gov/" },
+    { label: "Gallatin National Forest Avalanche Center", detail: "daily avalanche forecasts for the Big Sky/Bridger Bowl backcountry", url: "https://www.mtavalanche.com/" },
+  ],
+};
+const MT_OFFICIAL_REFERENCES_FLATHEAD: SourceGroup = {
+  title: "Official references",
+  titleJa: "公式参照先",
+  blurb:
+    "Link-outs, not wired feeds · conditions shown on feelzlike come from the forecast ensemble below, so check these before you drive or tour.",
+  blurbJa:
+    "リンクのみで、データ連携はしていません。feelzlikeの数値は下記の予報モデルによるものです。走行・ツアー前に必ず公式情報をご確認ください。",
+  items: [
+    { label: "National Weather Service", detail: "US federal forecasts & warnings", url: "https://www.weather.gov/" },
+    { label: "Flathead Avalanche Center", detail: "daily avalanche forecasts for the Whitefish/Glacier backcountry", url: "https://www.flatheadavalanche.org/" },
+  ],
+};
+const MT_OFFICIAL_REFERENCES_NO_AVALANCHE: SourceGroup = {
+  title: "Official references",
+  titleJa: "公式参照先",
+  blurb:
+    "Link-outs, not wired feeds · conditions shown on feelzlike come from the forecast ensemble below, so check these before you drive or tour. \u26a0\ufe0f No dedicated backcountry avalanche-forecasting authority covers this region — the Gallatin National Forest Avalanche Center's coverage does not extend to Red Lodge/Beartooth, so no avalanche-bulletin link is offered here rather than pointing at one that doesn't apply.",
+  blurbJa:
+    "リンクのみで、データ連携はしていません。feelzlikeの数値は下記の予報モデルによるものです。この地域を担当する雪崩予報機関はありません。",
+  items: [
+    { label: "National Weather Service", detail: "US federal forecasts & warnings", url: "https://www.weather.gov/" },
+  ],
+};
+const MT_ROADS_GENERAL: SourceGroup = {
+  title: "Roads & transport",
+  titleJa: "道路・交通",
+  blurb:
+    "Montana has no statewide chain law for passenger vehicles — only a heavy-vehicle rule under MCA 61-9-436 (towing units ≥ 26,001 lbs GVW), which doesn't apply here.",
+  blurbJa: "モンタナ州には乗用車向けのチェーン規制はありません。",
+  items: [
+    { label: "MDT · 511mt.net", detail: "statewide real-time road conditions & camera map", url: "https://www.511mt.net/" },
+  ],
+};
+
 const REGION_SOURCES: Record<string, SourceGroup[]> = {
   "snowy-mountains": [
     {
@@ -821,6 +873,54 @@ const REGION_SOURCES: Record<string, SourceGroup[]> = {
       titleJa: "スキー場・リフト",
       items: [
         { label: "Grand Targhee Resort", detail: "Mountain Collective Pass (not Ikon/Epic) · deepest average annual snowfall on the west side of the Tetons · contested 694-acre USFS expansion approved but not yet built (objections through July 2026, doesn't affect 2025-26 season)", url: "https://grandtarghee.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "big-sky": [
+    MT_OFFICIAL_REFERENCES_GNFAC,
+    MT_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Big Sky Resort", detail: "Ikon Pass (Full, no blackouts) · \"The Biggest Skiing in America\" · ~5,850 skiable acres, 4,350 ft vertical · official 2025-26 closing day Apr 26 2026 per resort", url: "https://www.bigskyresort.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "bozeman-bridger-bowl": [
+    MT_OFFICIAL_REFERENCES_GNFAC,
+    MT_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Bridger Bowl", detail: "independent nonprofit · ⚠️ closed early for the 2025-26 season on Mar 22 2026 due to low snowfall (138\" season total), expected back to its normal schedule for 2026-27 · all guests need a new photo ID card for 2025-26 · Schlasman's/the Ridge requires an avalanche transceiver", url: "https://bridgerbowl.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  whitefish: [
+    MT_OFFICIAL_REFERENCES_FLATHEAD,
+    MT_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Whitefish Mountain Resort", detail: "independent · known locally as \"Big Mountain\" · the largest US ski area not on Epic/Ikon/Indy Pass · official 2025-26 closing day Apr 5 2026 per resort · ⚠️ no confirmed dedicated webcam URL", url: "https://skiwhitefish.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "red-lodge": [
+    MT_OFFICIAL_REFERENCES_NO_AVALANCHE,
+    MT_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Red Lodge Mountain", detail: "Indy Pass member · ⚠️ 2025-26 closing date not confirmed by a dated primary source · the scenic Beartooth Highway (US-212) toward Yellowstone/Cooke City is closed in winter (mid-October through late May/early June)", url: "https://www.redlodgemountain.com/" },
       ],
     },
     FORECAST_ENSEMBLE,

@@ -62,6 +62,10 @@ import { okemoRegion } from "./okemo";
 import { jayPeakNekRegion } from "./jay-peak-nek";
 import { jacksonHoleRegion } from "./jackson-hole";
 import { grandTargheeRegion } from "./grand-targhee";
+import { bigSkyRegion } from "./big-sky";
+import { bozemanBridgerBowlRegion } from "./bozeman-bridger-bowl";
+import { whitefishRegion } from "./whitefish";
+import { redLodgeRegion } from "./red-lodge";
 
 // Active region registry · AU: Snowy Mountains + Victoria's High Country
 // + Tasmania (Ben Lomond). JP: Yamanouchi (Shiga Kogen + Kita-Shiga),
@@ -165,6 +169,10 @@ export const REGIONS: RegionConfig[] = [
   jayPeakNekRegion,
   jacksonHoleRegion,
   grandTargheeRegion,
+  bigSkyRegion,
+  bozemanBridgerBowlRegion,
+  whitefishRegion,
+  redLodgeRegion,
 ];
 
 export const REGION_BY_ID: Record<string, RegionConfig> = Object.fromEntries(
@@ -244,6 +252,10 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "jay-peak-nek": "US",
   "jackson-hole": "US",
   "grand-targhee": "US",
+  "big-sky": "US",
+  "bozeman-bridger-bowl": "US",
+  "whitefish": "US",
+  "red-lodge": "US",
 };
 export const COUNTRY_META: Record<CountryCode, { name: string; flag: string }> = {
   AU: { name: "Australia", flag: "🇦🇺" },

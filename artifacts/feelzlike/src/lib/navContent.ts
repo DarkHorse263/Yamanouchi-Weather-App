@@ -82,6 +82,10 @@ const REGIONS_WITH_ROADS_CONTENT: ReadonlySet<string> = new Set([
   "jay-peak-nek",
   "jackson-hole",
   "grand-targhee",
+  "big-sky",
+  "bozeman-bridger-bowl",
+  "whitefish",
+  "red-lodge",
 ]);
 
 /**
