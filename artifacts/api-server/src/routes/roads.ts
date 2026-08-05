@@ -478,6 +478,21 @@ function isCaSnowSeason(now: Date): boolean {
   return false;
 }
 
+function isUsSnowSeason(now: Date): boolean {
+  // Colorado's earliest-opening resorts (Keystone, Arapahoe Basin) can open
+  // in the last week of October and its latest-closing (Copper Mountain,
+  // Arapahoe Basin) run into the first week of May, wider than the
+  // Canadian-resort window below. Widened to 15 Oct-10 May so the season
+  // rule doesn't understate an honestly-open resort at either edge; this is
+  // a judgment call flagged in the PR description since it diverges from a
+  // literal copy of the CA window.
+  const m = now.getMonth();
+  if (m === 9) return now.getDate() >= 15;
+  if (m === 10 || m === 11 || m <= 3) return true;
+  if (m === 4) return now.getDate() <= 10;
+  return false;
+}
+
 /**
  * Canada chain entries. Deliberately `chains2wd`/`chainsAwd: "not-required"`
  * year-round: none of BC, Alberta or Québec mandates chains on passenger
@@ -538,6 +553,55 @@ function caChainEntry(opts: {
     note: opts.inSeason ? `${rule} ${opts.detail}` : "Outside the ski season · no winter tyre or chain requirement on this route.",
     issuedAt: opts.issuedAt,
     ...CA_PROVINCE_SOURCE[opts.province],
+    dataSource: "seasonal-rule",
+  };
+}
+
+/**
+ * Colorado chain entry source. Unlike the Canada helper above, Colorado's
+ * chain rule is stated assertively (`chains2wd: "must-carry"`) rather than
+ * "not-required", because it reflects a real, current, sourced state law -
+ * Colorado's Traction Law (active every year 1 Sept-31 May on the I-70
+ * Mountain Corridor between Dotsero and Morrison, extendable to any state
+ * highway when conditions warrant) plus the 2WD "must carry" clause added
+ * by SB25-069, which requires 2WD vehicles to carry chains or an
+ * alternative traction device regardless of tyre type. AWD/4WD vehicles
+ * comply either with qualifying winter tyres (3/16" tread, 3-peak
+ * mountain snowflake / M+S / all-weather) or by carrying chains/ATD, so
+ * `chainsAwd` is also reported as "must-carry" (the schema has no
+ * conditional/tyre-or-chains state) with the tyre-only opt-out spelled out
+ * in the note text so the AWD/4WD nuance isn't lost. This is a deliberate
+ * divergence from the Canada pattern, flagged in the PR description.
+ */
+const CO_SOURCE = {
+  sourceLabel: "CDOT · cotrip.org",
+  sourceUrl: "https://www.cotrip.org/",
+};
+
+function coChainEntry(opts: {
+  id: string;
+  regionId: string;
+  mountainId: string;
+  mountainName: string;
+  approach: string;
+  detail: string;
+  inSeason: boolean;
+  issuedAt: string;
+}): Record<string, unknown> {
+  const rule =
+    "Colorado's Traction Law is in effect 1 Sept-31 May on this corridor. 2WD vehicles must carry tyre chains or an approved alternative traction device (SB25-069), regardless of tyre type. AWD/4WD vehicles comply with qualifying winter tyres (3/16\"+ tread, 3-peak mountain snowflake / M+S / all-weather) or by carrying chains/ATD. In storms CDOT can escalate to the more restrictive Passenger Vehicle Chain Law, requiring chains/ATD on every vehicle regardless of drivetrain as the final step before a road closure.";
+  return {
+    id: opts.id,
+    regionId: opts.regionId,
+    mountainId: opts.mountainId,
+    mountainName: opts.mountainName,
+    approach: opts.approach,
+    status: "open",
+    chains2wd: (opts.inSeason ? "must-carry" : "not-required") satisfies ChainReq,
+    chainsAwd: (opts.inSeason ? "must-carry" : "not-required") satisfies ChainReq,
+    note: opts.inSeason ? `${rule} ${opts.detail}` : "Outside the ski season · no Traction Law requirement on this route.",
+    issuedAt: opts.issuedAt,
+    ...CO_SOURCE,
     dataSource: "seasonal-rule",
   };
 }
@@ -1062,6 +1126,122 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
     ];
   }
 
+  if (
+    regionId === "summit-county" ||
+    regionId === "vail-valley" ||
+    regionId === "aspen-snowmass" ||
+    regionId === "steamboat" ||
+    regionId === "winter-park" ||
+    regionId === "crested-butte" ||
+    regionId === "telluride" ||
+    regionId === "durango" ||
+    regionId === "boulder-front-range"
+  ) {
+    const inSeason = isUsSnowSeason(now);
+    const co = (
+      id: string,
+      mountainId: string,
+      mountainName: string,
+      approach: string,
+      detail: string,
+    ) => coChainEntry({ id, regionId, mountainId, mountainName, approach, detail, inSeason, issuedAt });
+
+    if (regionId === "summit-county") {
+      return [
+        co("breckenridge-resort-hwy-9", "breckenridge-resort", "Breckenridge",
+          "I-70 to Frisco, then Colorado 9 south to Breckenridge",
+          "CO-9 climbs gently from Frisco along the Blue River · the Traction Law corridor covers I-70 itself, not CO-9, but chains/ATD should still be carried in storms."),
+        co("keystone-resort-us-6", "keystone-resort", "Keystone",
+          "I-70 to Silverthorne, then US-6 east to Keystone",
+          "US-6 follows the Snake River through Dillon and Keystone · a flatter approach than most Summit County resorts."),
+        co("copper-mountain-resort-i70", "copper-mountain-resort", "Copper Mountain",
+          "I-70 westbound, exit 195 (Copper Mountain)",
+          "Direct I-70 exit at the resort base · squarely inside the Traction Law's Dotsero-Morrison corridor."),
+        co("arapahoe-basin-us-6", "arapahoe-basin", "Arapahoe Basin",
+          "I-70 to Silverthorne, then US-6 east past Keystone toward Loveland Pass",
+          "The final stretch of US-6 climbs toward Loveland Pass and is one of the highest, most exposed resort approaches in the state."),
+        co("loveland-us-6", "loveland", "Loveland",
+          "I-70 to exit 216, then US-6 east toward Loveland Pass",
+          "Sits right at the base of Loveland Pass on the Continental Divide · usually the first CDOT corridor to see Traction Law enforcement each season."),
+      ];
+    }
+
+    if (regionId === "vail-valley") {
+      return [
+        co("vail-mountain-i70", "vail-mountain", "Vail Mountain",
+          "I-70 westbound, exits 176 (Vail) or 173 (West Vail)",
+          "Sits directly on the I-70 Mountain Corridor, the primary Traction Law and Passenger Vehicle Chain Law enforcement zone in the state."),
+        co("beaver-creek-i70", "beaver-creek", "Beaver Creek",
+          "I-70 westbound, exit 167 (Avon), then the gated Beaver Creek access road",
+          "The final climb up the gated resort access road from Avon is steep and often the first section to be restricted to 4WD/chains in a storm."),
+      ];
+    }
+
+    if (regionId === "aspen-snowmass") {
+      return [
+        co("snowmass-hwy-82", "snowmass", "Snowmass",
+          "Colorado 82 west from Glenwood Springs, then Brush Creek Road to Snowmass Village",
+          "CO-82 through Glenwood Canyon and over the Roaring Fork Valley sees frequent avalanche control and rockfall closures in winter."),
+        co("aspen-mountain-hwy-82", "aspen-mountain", "Aspen Mountain",
+          "Colorado 82 into downtown Aspen",
+          "The lift base sits right in town · the exposed stretch is the CO-82 approach up the valley, not the final few blocks."),
+        co("aspen-highlands-hwy-82", "aspen-highlands", "Aspen Highlands",
+          "Colorado 82 to Aspen, then Maroon Creek Road",
+          "Maroon Creek Road climbs out of the valley floor and can ice up quickly after the CO-82 approach."),
+        co("buttermilk-hwy-82", "buttermilk", "Buttermilk",
+          "Colorado 82 to Aspen, then West Buttermilk Road",
+          "The gentlest of the four approaches, just west of downtown Aspen off CO-82."),
+      ];
+    }
+
+    if (regionId === "steamboat") {
+      return [
+        co("steamboat-resort-us-40", "steamboat-resort", "Steamboat Resort",
+          "US-40 through Steamboat Springs, then Mount Werner Road/Circle to the base",
+          "US-40 over Rabbit Ears Pass is one of CDOT's most storm-affected corridors in the Yampa Valley approach."),
+      ];
+    }
+
+    if (regionId === "winter-park") {
+      return [
+        co("winter-park-resort-us-40", "winter-park-resort", "Winter Park Resort",
+          "US-40 west from Denver over Berthoud Pass",
+          "Berthoud Pass is unguarded by avalanche sheds and closes for control work more often than the I-70 tunnel alternative."),
+      ];
+    }
+
+    if (regionId === "crested-butte") {
+      return [
+        co("crested-butte-mountain-resort-hwy-135", "crested-butte-mountain-resort", "Crested Butte Mountain Resort",
+          "Colorado 135 north from Gunnison to Crested Butte, then Gothic Road to the base",
+          "CO-135 is a two-lane mountain highway with no interstate alternative · the remoteness is part of what keeps this resort quiet."),
+      ];
+    }
+
+    if (regionId === "telluride") {
+      return [
+        co("telluride-ski-resort-hwy-145", "telluride-ski-resort", "Telluride Ski Resort",
+          "Colorado 145 into Telluride, then the free gondola or Mountain Village Boulevard",
+          "CO-145 through Lizard Head Pass is high, narrow and among the more weather-exposed approaches in the San Juans."),
+      ];
+    }
+
+    if (regionId === "durango") {
+      return [
+        co("purgatory-resort-us-550", "purgatory-resort", "Purgatory Resort",
+          "US-550 north from Durango (the San Juan Skyway)",
+          "US-550 is one of the routes named in Colorado's commercial \"Must Carry\" chain law (SB24-100), reflecting how frequently it sees winter chain enforcement."),
+      ];
+    }
+
+    // boulder-front-range
+    return [
+      co("eldora-mountain-resort-hwy-119", "eldora-mountain-resort", "Eldora Mountain Resort",
+        "Colorado 119 (Boulder Canyon Drive) from Boulder to Nederland, then Eldora Road",
+        "Boulder Canyon is a narrow two-lane canyon road that ices up quickly in shade · Eldora Road climbs the final stretch from Nederland."),
+    ];
+  }
+
   return [];
 }
 
@@ -1271,6 +1451,19 @@ router.get("/road-conditions", async (req, res) => {
       region === "quebec-laurentians" ||
       region === "quebec-charlevoix" ||
       region === "quebec-eastern-townships";
+    //  · US (Colorado) - no feed wired yet. CDOT publishes cotrip.org, but
+    //    nothing is integrated in this pass, so `roads` stays empty and the
+    //    advice points at cotrip.org for roads and CAIC for avalanche.
+    const isUS =
+      region === "summit-county" ||
+      region === "vail-valley" ||
+      region === "aspen-snowmass" ||
+      region === "steamboat" ||
+      region === "winter-park" ||
+      region === "crested-butte" ||
+      region === "telluride" ||
+      region === "durango" ||
+      region === "boulder-front-range";
 
     let roads: unknown[] = [];
     let generalAdvice: string;
@@ -1300,6 +1493,14 @@ router.get("/road-conditions", async (req, res) => {
             ? "We do not yet pull live road data for Québec · check Québec 511 (quebec511.info) for closures and highway cameras before you drive. Québec law requires 3-peak mountain snowflake winter tyres from 1 December to 15 March on vehicles registered in the province; out-of-province and rental vehicles are exempt but should still be shod for winter. For anything off-piste or side-country, read the day's Avalanche Québec bulletin at avalanchequebec.ca."
             : "We do not yet pull live road data for Alberta · check 511 Alberta (511.alberta.ca) for closures and highway cameras before you drive, and Parks Canada for conditions inside the national parks. Alberta does not legislate winter tyres but they are strongly recommended on every mountain highway here. For anything off-piste or side-country, read the day's Avalanche Canada bulletin at avalanche.ca.";
       liveTrafficUrl = "";
+    } else if (isUS) {
+      // No live Colorado road feed is wired yet · say so plainly rather than
+      // shipping an empty list that reads like "all clear". State the real
+      // Traction Law and Passenger Vehicle Chain Law from the research doc
+      // rather than inventing details CDOT hasn't published.
+      generalAdvice =
+        "We do not yet pull live road data for Colorado · check CDOT's cotrip.org for closures, avalanche control and highway cameras before you drive, especially on the I-70 Mountain Corridor. Colorado's Traction Law is in effect every year from 1 September to 31 May on I-70 between Dotsero and Morrison (and can be activated on any other state highway when conditions warrant): AWD/4WD vehicles need winter-rated tyres (3/16\"+ tread, 3-peak mountain snowflake / M+S / all-weather) or chains/an alternative traction device on at least 2 drive tyres, while 2WD vehicles must carry chains or an ATD regardless of tyre type (SB25-069). In storms CDOT can escalate to the Passenger Vehicle Chain Law, requiring chains/ATD on every vehicle regardless of drivetrain as the last step before a road closure. For anything off-piste or backcountry, read the day's forecast from the Colorado Avalanche Information Center at avalanche.state.co.us.";
+      liveTrafficUrl = "https://www.cotrip.org/";
     } else {
       generalAdvice =
         "Live road condition data is not yet available for this region.";

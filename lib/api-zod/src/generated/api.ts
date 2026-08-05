@@ -192,6 +192,15 @@ export const GetPowderAlertsQueryParams = zod.object({
       "quebec-laurentians",
       "quebec-charlevoix",
       "quebec-eastern-townships",
+      "summit-county",
+      "vail-valley",
+      "aspen-snowmass",
+      "steamboat",
+      "winter-park",
+      "crested-butte",
+      "telluride",
+      "durango",
+      "boulder-front-range",
     ])
     .optional()
     .describe(
@@ -1189,6 +1198,15 @@ export const GetWeatherQueryParams = zod.object({
       "quebec-laurentians",
       "quebec-charlevoix",
       "quebec-eastern-townships",
+      "summit-county",
+      "vail-valley",
+      "aspen-snowmass",
+      "steamboat",
+      "winter-park",
+      "crested-butte",
+      "telluride",
+      "durango",
+      "boulder-front-range",
     ])
     .optional()
     .describe(
@@ -1609,6 +1627,15 @@ export const GetWebcamsQueryParams = zod.object({
       "quebec-laurentians",
       "quebec-charlevoix",
       "quebec-eastern-townships",
+      "summit-county",
+      "vail-valley",
+      "aspen-snowmass",
+      "steamboat",
+      "winter-park",
+      "crested-butte",
+      "telluride",
+      "durango",
+      "boulder-front-range",
     ])
     .optional()
     .describe(
@@ -1731,6 +1758,15 @@ export const GetRoadConditionsQueryParams = zod.object({
       "quebec-laurentians",
       "quebec-charlevoix",
       "quebec-eastern-townships",
+      "summit-county",
+      "vail-valley",
+      "aspen-snowmass",
+      "steamboat",
+      "winter-park",
+      "crested-butte",
+      "telluride",
+      "durango",
+      "boulder-front-range",
     ])
     .optional()
     .describe(
@@ -1908,6 +1944,15 @@ export const GetLiftStatusQueryParams = zod.object({
       "quebec-laurentians",
       "quebec-charlevoix",
       "quebec-eastern-townships",
+      "summit-county",
+      "vail-valley",
+      "aspen-snowmass",
+      "steamboat",
+      "winter-park",
+      "crested-butte",
+      "telluride",
+      "durango",
+      "boulder-front-range",
     ])
     .optional()
     .describe(

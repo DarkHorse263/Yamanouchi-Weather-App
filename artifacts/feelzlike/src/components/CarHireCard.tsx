@@ -13,6 +13,7 @@ const EUROPCAR_URL_BY_COUNTRY: Record<CountryCode, string> = {
   NZ: "https://www.europcar.co.nz/",
   JP: "https://www.europcar.com/",
   CA: "https://www.europcar.com/",
+  US: "https://www.europcar.com/",
 };
 const EUROPCAR_URL_FALLBACK = "https://www.europcar.com/";
 

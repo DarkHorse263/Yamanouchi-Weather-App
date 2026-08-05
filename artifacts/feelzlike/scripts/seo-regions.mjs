@@ -627,6 +627,147 @@ export const REGIONS = [
       { id: "sutton",  name: "Sutton",  blurb: "Village under the Sutton range near the Vermont line · ~10 min to the lifts" },
     ],
   },
+
+  // ── United States (Colorado) ───────────────────────────────────────────
+  {
+    slug: "summit-county",
+    name: "Summit County",
+    subtitle: "Colorado · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Breckenridge",     blurb: "historic Victorian mining town's mountain · high alpine terrain above 12,000 ft" },
+      { name: "Keystone",         blurb: "three linked mountains · Colorado's most reliable night skiing" },
+      { name: "Copper Mountain",  blurb: "naturally divided terrain by ability · roughly midway between Breckenridge and Vail" },
+      { name: "Arapahoe Basin",   blurb: "high-alpine independent area · often the state's longest season" },
+      { name: "Loveland",         blurb: "no on-mountain lodging, first-tracks locals' favourite on the Continental Divide" },
+    ],
+    towns: [
+      { id: "breckenridge",   name: "Breckenridge",     blurb: "Historic Victorian mining town at the base of the mountain" },
+      { id: "keystone",       name: "Keystone / Dillon", blurb: "Purpose-built resort village and the neighbouring reservoir town of Dillon" },
+      { id: "copper-mountain", name: "Copper Mountain",  blurb: "Ski-in village at the base, roughly midway between Breckenridge and Vail" },
+      { id: "georgetown",     name: "Georgetown",        blurb: "Historic mining town off I-70 · closest base for Arapahoe Basin and Loveland" },
+    ],
+  },
+  {
+    slug: "vail-valley",
+    name: "Vail Valley",
+    subtitle: "Colorado · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Vail Mountain",  blurb: "the largest single ski mountain in Colorado · legendary Back Bowls" },
+      { name: "Beaver Creek",   blurb: "gated, upscale resort village · impeccably groomed cruisers" },
+    ],
+    towns: [
+      { id: "vail", name: "Vail", blurb: "Bavarian-styled village at the base of Vail Mountain" },
+      { id: "avon", name: "Avon", blurb: "Valley town at the base of Beaver Creek, a few minutes up the gated access road" },
+    ],
+  },
+  {
+    slug: "aspen-snowmass",
+    name: "Aspen Snowmass",
+    subtitle: "Colorado · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Snowmass",         blurb: "the biggest of the four mountains · full Ikon Pass unlimited access" },
+      { name: "Aspen Mountain",   blurb: "steep, expert-leaning terrain rising straight out of downtown Aspen · no green runs" },
+      { name: "Aspen Highlands",  blurb: "locals' favourite with Highland Bowl's hike-to extreme terrain" },
+      { name: "Buttermilk",       blurb: "gentle, family-friendly terrain · home of the Winter X Games superpipe" },
+    ],
+    towns: [
+      { id: "aspen",            name: "Aspen",            blurb: "Historic mining-town-turned-resort · base for Aspen Mountain, Highlands and Buttermilk" },
+      { id: "snowmass-village", name: "Snowmass Village", blurb: "Purpose-built ski-in village about 12 miles from downtown Aspen" },
+    ],
+  },
+  {
+    slug: "steamboat",
+    name: "Steamboat",
+    subtitle: "Colorado · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Steamboat Resort", blurb: "home of Champagne Powder® · six interconnected peaks in the Yampa Valley" },
+    ],
+    towns: [
+      { id: "steamboat-springs", name: "Steamboat Springs", blurb: "Ranching-town-turned-resort on the Yampa River · a few minutes' shuttle to the base" },
+    ],
+  },
+  {
+    slug: "winter-park",
+    name: "Winter Park",
+    subtitle: "Colorado · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Winter Park Resort", blurb: "Denver's closest big mountain over Berthoud Pass · Mary Jane side is bump-and-glade heavy" },
+    ],
+    towns: [
+      { id: "winter-park", name: "Winter Park", blurb: "Base town at the foot of the resort, about 67 miles from Denver via US-40" },
+    ],
+  },
+  {
+    slug: "crested-butte",
+    name: "Crested Butte",
+    subtitle: "Colorado · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Crested Butte Mountain Resort", blurb: "steep, remote and uncrowded · some of the most extreme lift-served terrain in the US" },
+    ],
+    towns: [
+      { id: "crested-butte-town", name: "Crested Butte", blurb: "Historic Victorian mining town about 3 miles from Mt. Crested Butte's resort base" },
+    ],
+  },
+  {
+    slug: "telluride",
+    name: "Telluride",
+    subtitle: "Colorado · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Telluride Ski Resort", blurb: "box-canyon setting in the San Juan Mountains · Epic Pass partner resort (up to 7 days)" },
+    ],
+    towns: [
+      { id: "telluride-town", name: "Telluride", blurb: "Historic mining town in a box canyon, connected to Mountain Village by free gondola" },
+    ],
+  },
+  {
+    slug: "durango",
+    name: "Durango",
+    subtitle: "Colorado · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Purgatory Resort", blurb: "independent, family-friendly San Juan Mountains resort about 25 miles north of Durango" },
+    ],
+    towns: [
+      { id: "durango-town", name: "Durango", blurb: "Historic railroad town on the Animas River, about 25 miles south of Purgatory" },
+    ],
+  },
+  {
+    slug: "boulder-front-range",
+    name: "Boulder / Front Range",
+    subtitle: "Colorado · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Eldora Mountain Resort", blurb: "the closest lift-served skiing to Denver and Boulder, about an hour up Boulder Canyon" },
+    ],
+    towns: [
+      { id: "nederland", name: "Nederland", blurb: "Small mountain town above Boulder Canyon, about 8 miles from the resort" },
+    ],
+  },
 ];
 
 /** Region sub-sections that actually render for this region (see gating notes above). */

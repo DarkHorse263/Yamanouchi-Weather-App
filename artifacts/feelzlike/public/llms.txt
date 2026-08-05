@@ -1,15 +1,16 @@
 # feelzlike
 
-> feelzlike shows live weather, road conditions, lift status, and travel info for resort towns across Australia, New Zealand, Japan, and Canada. It is towns-first: the experience centres on the base towns people actually stay in (Jindabyne, Bright, Yudanaka, etc.) rather than the ski resorts on the mountain above.
+> feelzlike shows live weather, road conditions, lift status, and travel info for resort towns across Australia, New Zealand, Japan, Canada, and the United States. It is towns-first: the experience centres on the base towns people actually stay in (Jindabyne, Bright, Yudanaka, etc.) rather than the ski resorts on the mountain above.
 
 ## Public landing pages
 
 - [Home](https://feelzlike.com/): intro, region picker, and near-you shortcut
-- [Browse by country](https://feelzlike.com/countries): choose Australia, Japan, New Zealand, or Canada
+- [Browse by country](https://feelzlike.com/countries): choose Australia, Japan, New Zealand, Canada, or the United States
 - [Australia](https://feelzlike.com/au): all Australian resort regions
 - [Japan](https://feelzlike.com/jp): all Japanese resort regions
 - [New Zealand](https://feelzlike.com/nz): all New Zealand resort regions
 - [Canada](https://feelzlike.com/ca): all Canadian resort regions (BC, Alberta + Québec)
+- [United States](https://feelzlike.com/us): all US resort regions (Colorado)
 - [Near you](https://feelzlike.com/near-you): weather and radar for your current location
 - [News](https://feelzlike.com/news): resort-town news and weather updates
 - [Trip planner](https://feelzlike.com/plan): multi-day trip planning across regions
@@ -19,6 +20,7 @@
 - [Snowy Mountains (NSW, AU)](https://feelzlike.com/snowy-mountains): Jindabyne, Berridale, Cooma · Perisher, Thredbo, Selwyn, Charlotte's Pass
 - [Victoria's High Country (VIC, AU)](https://feelzlike.com/victorias-high-country): Mansfield, Bright, Mount Beauty, Harrietville, Dinner Plain, Marysville, Warburton, Omeo
 - [Yamanouchi (Nagano, JP)](https://feelzlike.com/yamanouchi): Yudanaka, Shibu Onsen, Yomase · Shiga Kogen
+- [Summit County (CO, US)](https://feelzlike.com/summit-county): Breckenridge, Keystone, Copper Mountain, Georgetown · Breckenridge, Keystone, Copper Mountain, Arapahoe Basin, Loveland
 
 ## Region features
 

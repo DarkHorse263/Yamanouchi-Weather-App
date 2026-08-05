@@ -115,6 +115,15 @@ export const RegionId = {
   "quebec-laurentians": "quebec-laurentians",
   "quebec-charlevoix": "quebec-charlevoix",
   "quebec-eastern-townships": "quebec-eastern-townships",
+  "summit-county": "summit-county",
+  "vail-valley": "vail-valley",
+  "aspen-snowmass": "aspen-snowmass",
+  steamboat: "steamboat",
+  "winter-park": "winter-park",
+  "crested-butte": "crested-butte",
+  telluride: "telluride",
+  durango: "durango",
+  "boulder-front-range": "boulder-front-range",
 } as const;
 
 export interface HealthStatus {

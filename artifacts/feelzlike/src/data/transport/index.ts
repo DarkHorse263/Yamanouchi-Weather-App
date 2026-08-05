@@ -50,6 +50,15 @@ import { JASPER_TRANSPORT } from "./jasper";
 import { QUEBEC_LAURENTIANS_TRANSPORT } from "./quebec-laurentians";
 import { QUEBEC_CHARLEVOIX_TRANSPORT } from "./quebec-charlevoix";
 import { QUEBEC_EASTERN_TOWNSHIPS_TRANSPORT } from "./quebec-eastern-townships";
+import { SUMMIT_COUNTY_TRANSPORT } from "./summit-county";
+import { VAIL_VALLEY_TRANSPORT } from "./vail-valley";
+import { ASPEN_SNOWMASS_TRANSPORT } from "./aspen-snowmass";
+import { STEAMBOAT_TRANSPORT } from "./steamboat";
+import { WINTER_PARK_TRANSPORT } from "./winter-park";
+import { CRESTED_BUTTE_TRANSPORT } from "./crested-butte";
+import { TELLURIDE_TRANSPORT } from "./telluride";
+import { DURANGO_TRANSPORT } from "./durango";
+import { BOULDER_FRONT_RANGE_TRANSPORT } from "./boulder-front-range";
 
 const REGISTRY: Record<RegionId, TransportProviderList> = {
   "snowy-mountains": SNOWY_MOUNTAINS_TRANSPORT,
@@ -92,6 +101,18 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   "quebec-laurentians": QUEBEC_LAURENTIANS_TRANSPORT,
   "quebec-charlevoix": QUEBEC_CHARLEVOIX_TRANSPORT,
   "quebec-eastern-townships": QUEBEC_EASTERN_TOWNSHIPS_TRANSPORT,
+  // US (Colorado) · no operators curated to the AU/JP/NZ verification
+  // standard yet, so these are registered empty rather than filled with
+  // guessed timetables.
+  "summit-county": SUMMIT_COUNTY_TRANSPORT,
+  "vail-valley": VAIL_VALLEY_TRANSPORT,
+  "aspen-snowmass": ASPEN_SNOWMASS_TRANSPORT,
+  steamboat: STEAMBOAT_TRANSPORT,
+  "winter-park": WINTER_PARK_TRANSPORT,
+  "crested-butte": CRESTED_BUTTE_TRANSPORT,
+  telluride: TELLURIDE_TRANSPORT,
+  durango: DURANGO_TRANSPORT,
+  "boulder-front-range": BOULDER_FRONT_RANGE_TRANSPORT,
 };
 
 // Loader-time integrity check.

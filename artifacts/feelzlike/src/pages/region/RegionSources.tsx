@@ -112,6 +112,35 @@ const CA_ROADS_QC: SourceGroup = {
   ],
 };
 
+/**
+ * United States (Colorado) reference block. Same "Official references"
+ * posture as Canada: no CAIC / NWS feed is wired into a feelzlike reading in
+ * this pass, these are link-outs only · the forecast ensemble below is what
+ * actually powers the numbers shown.
+ */
+const US_OFFICIAL_REFERENCES: SourceGroup = {
+  title: "Official references",
+  titleJa: "公式参照先",
+  blurb:
+    "Link-outs, not wired feeds · conditions shown on feelzlike come from the forecast ensemble below, so check these before you drive or tour.",
+  blurbJa:
+    "リンクのみで、データ連携はしていません。feelzlikeの数値は下記の予報モデルによるものです。走行・ツアー前に必ず公式情報をご確認ください。",
+  items: [
+    { label: "National Weather Service", detail: "US federal forecasts & warnings", url: "https://www.weather.gov/" },
+    { label: "Colorado Avalanche Information Center (CAIC)", detail: "daily avalanche forecasts", url: "https://avalanche.state.co.us/" },
+  ],
+};
+
+const US_ROADS_CO: SourceGroup = {
+  title: "Roads & transport",
+  titleJa: "道路・交通",
+  items: [
+    { label: "CDOT · Colorado Department of Transportation", detail: "road conditions & Traction/Chain Law", url: "https://www.codot.gov/" },
+    { label: "COtrip.org", detail: "real-time conditions & camera map", url: "https://www.cotrip.org/" },
+    { label: "CDOT · I-70 Mountain Corridor", url: "https://www.codot.gov/travel/i70mountain" },
+  ],
+};
+
 const REGION_SOURCES: Record<string, SourceGroup[]> = {
   "snowy-mountains": [
     {
@@ -289,6 +318,107 @@ const REGION_SOURCES: Record<string, SourceGroup[]> = {
         { label: "Ski Bromont", url: "https://www.bromontmontagne.com/" },
         { label: "Mont Sutton", url: "https://montsutton.com/" },
       ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "summit-county": [
+    US_OFFICIAL_REFERENCES,
+    US_ROADS_CO,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Breckenridge", url: "https://www.breckenridge.com/" },
+        { label: "Keystone", url: "https://www.keystoneresort.com/" },
+        { label: "Copper Mountain", url: "https://www.coppercolorado.com/" },
+        { label: "Arapahoe Basin", url: "https://www.arapahoebasin.com/" },
+        { label: "Loveland Ski Area", url: "https://www.skiloveland.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "vail-valley": [
+    US_OFFICIAL_REFERENCES,
+    US_ROADS_CO,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Vail Mountain", url: "https://www.vail.com/" },
+        { label: "Beaver Creek", url: "https://www.beavercreek.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "aspen-snowmass": [
+    US_OFFICIAL_REFERENCES,
+    US_ROADS_CO,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Aspen Snowmass · four mountains", url: "https://www.aspensnowmass.com/four-mountains" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  steamboat: [
+    US_OFFICIAL_REFERENCES,
+    US_ROADS_CO,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [{ label: "Steamboat Resort", url: "https://www.steamboat.com/" }],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "winter-park": [
+    US_OFFICIAL_REFERENCES,
+    US_ROADS_CO,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [{ label: "Winter Park Resort", url: "https://www.winterparkresort.com/" }],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "crested-butte": [
+    US_OFFICIAL_REFERENCES,
+    US_ROADS_CO,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [{ label: "Crested Butte Mountain Resort", url: "https://www.skicb.com/" }],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  telluride: [
+    US_OFFICIAL_REFERENCES,
+    US_ROADS_CO,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [{ label: "Telluride Ski Resort", url: "https://www.tellurideskiresort.com/" }],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  durango: [
+    US_OFFICIAL_REFERENCES,
+    US_ROADS_CO,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [{ label: "Purgatory Resort", url: "https://www.purgatory.ski/" }],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "boulder-front-range": [
+    US_OFFICIAL_REFERENCES,
+    US_ROADS_CO,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [{ label: "Eldora Mountain Resort", url: "https://www.eldora.com/" }],
     },
     FORECAST_ENSEMBLE,
   ],

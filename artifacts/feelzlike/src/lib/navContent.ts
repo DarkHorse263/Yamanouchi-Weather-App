@@ -32,6 +32,9 @@ import type { RegionConfig } from "@workspace/feelzlike-shell";
  *     and the three quebec-* regions (QC) · seasonal winter-driving rules
  *     plus a DriveBC / 511 Alberta / Québec 511 official camera-map tile
  *     (no live per-road feed wired)
+ *   · the nine Colorado (US) regions · CAIC avalanche + CDOT Traction Law /
+ *     Passenger Vehicle Chain Law rules plus a cotrip.org official
+ *     camera-map tile (no live per-road feed wired)
  * The remaining regions have no wired feed yet, so the entry stays hidden.
  * Add a region here the moment its roads feed or cams go live.
  */
@@ -51,6 +54,15 @@ const REGIONS_WITH_ROADS_CONTENT: ReadonlySet<string> = new Set([
   "quebec-laurentians",
   "quebec-charlevoix",
   "quebec-eastern-townships",
+  "summit-county",
+  "vail-valley",
+  "aspen-snowmass",
+  "steamboat",
+  "winter-park",
+  "crested-butte",
+  "telluride",
+  "durango",
+  "boulder-front-range",
 ]);
 
 /**

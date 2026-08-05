@@ -1701,6 +1701,15 @@ components:
         - quebec-laurentians
         - quebec-charlevoix
         - quebec-eastern-townships
+        - summit-county
+        - vail-valley
+        - aspen-snowmass
+        - steamboat
+        - winter-park
+        - crested-butte
+        - telluride
+        - durango
+        - boulder-front-range
       description: |
         Canonical region identifier used across the FeelZlike platform.
 

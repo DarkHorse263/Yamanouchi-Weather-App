@@ -130,6 +130,18 @@ const REGION_ANCHORS: Record<RegionId, {
   "quebec-laurentians": { lat: 46.2200, lon: -74.5530, elevation: 875, region: "OTHER", displayName: "Laurentians" },
   "quebec-charlevoix": { lat: 47.2757, lon: -70.6257, elevation: 806, region: "OTHER", displayName: "Charlevoix" },
   "quebec-eastern-townships": { lat: 45.0850, lon: -72.5500, elevation: 840, region: "OTHER", displayName: "Eastern Townships" },
+  // US (Colorado) · same posture as NZ/CA, no national model in the
+  // ensemble so region "OTHER". Anchor each on its highest/primary
+  // lift-served summit.
+  "summit-county": { lat: 39.6425, lon: -105.8719, elevation: 3286, region: "OTHER", displayName: "Summit County" },
+  "vail-valley": { lat: 39.6061, lon: -106.3550, elevation: 3527, region: "OTHER", displayName: "Vail Valley" },
+  "aspen-snowmass": { lat: 39.2110, lon: -106.9500, elevation: 3813, region: "OTHER", displayName: "Aspen Snowmass" },
+  "steamboat": { lat: 40.4572, lon: -106.8045, elevation: 3221, region: "OTHER", displayName: "Steamboat" },
+  "winter-park": { lat: 39.8868, lon: -105.7625, elevation: 3676, region: "OTHER", displayName: "Winter Park" },
+  "crested-butte": { lat: 38.8992, lon: -106.9650, elevation: 3620, region: "OTHER", displayName: "Crested Butte" },
+  "telluride": { lat: 37.9375, lon: -107.8123, elevation: 3815, region: "OTHER", displayName: "Telluride" },
+  "durango": { lat: 37.6297, lon: -107.8144, elevation: 3299, region: "OTHER", displayName: "Durango" },
+  "boulder-front-range": { lat: 39.9375, lon: -105.5828, elevation: 2853, region: "OTHER", displayName: "Boulder / Front Range" },
 };
 
 interface EvaluatorReport {

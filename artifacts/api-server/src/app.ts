@@ -391,11 +391,48 @@ if (process.env.NODE_ENV === "production") {
       name: "Eastern Townships",
       towns: { bromont: "Bromont", sutton: "Sutton" },
     },
+    // USA · Colorado
+    "summit-county": {
+      name: "Summit County",
+      towns: { breckenridge: "Breckenridge", keystone: "Keystone", "copper-mountain": "Copper Mountain", georgetown: "Georgetown" },
+    },
+    "vail-valley": {
+      name: "Vail Valley",
+      towns: { vail: "Vail", avon: "Avon" },
+    },
+    "aspen-snowmass": {
+      name: "Aspen Snowmass",
+      towns: { aspen: "Aspen", "snowmass-village": "Snowmass Village" },
+    },
+    "steamboat": {
+      name: "Steamboat",
+      towns: { "steamboat-springs": "Steamboat Springs" },
+    },
+    "winter-park": {
+      name: "Winter Park",
+      towns: { "winter-park": "Winter Park" },
+    },
+    "crested-butte": {
+      name: "Crested Butte",
+      towns: { "crested-butte-town": "Crested Butte" },
+    },
+    "telluride": {
+      name: "Telluride",
+      towns: { "telluride-town": "Telluride" },
+    },
+    "durango": {
+      name: "Durango",
+      towns: { "durango-town": "Durango" },
+    },
+    "boulder-front-range": {
+      name: "Boulder / Front Range",
+      towns: { nederland: "Nederland" },
+    },
   };
 
   // Top-level routes handled by the SPA (before the /:region catch-all).
   const KNOWN_TOP_LEVEL = new Set([
-    "/", "/countries", "/au", "/jp", "/nz", "/ca", "/near-you",
+    "/", "/countries", "/au", "/jp", "/nz", "/ca", "/us", "/near-you",
     "/plan", "/legal/privacy", "/legal/terms",
     "/premium",
     "/alerts/verify", "/alerts/manage", "/alerts/unsubscribed",

@@ -34,6 +34,15 @@ import { jasperRegion } from "./jasper";
 import { quebecLaurentiansRegion } from "./quebec-laurentians";
 import { quebecCharlevoixRegion } from "./quebec-charlevoix";
 import { quebecEasternTownshipsRegion } from "./quebec-eastern-townships";
+import { summitCountyRegion } from "./summit-county";
+import { vailValleyRegion } from "./vail-valley";
+import { aspenSnowmassRegion } from "./aspen-snowmass";
+import { steamboatRegion } from "./steamboat";
+import { winterParkRegion } from "./winter-park";
+import { crestedButteRegion } from "./crested-butte";
+import { tellurideRegion } from "./telluride";
+import { durangoRegion } from "./durango";
+import { boulderFrontRangeRegion } from "./boulder-front-range";
 
 // Active region registry · AU: Snowy Mountains + Victoria's High Country
 // + Tasmania (Ben Lomond). JP: Yamanouchi (Shiga Kogen + Kita-Shiga),
@@ -51,6 +60,13 @@ import { quebecEasternTownshipsRegion } from "./quebec-eastern-townships";
 // (Nakiska), Jasper (Marmot Basin). CA (Quebec): Laurentians
 // (Tremblant), Charlevoix (Mont-Sainte-Anne + Le Massif), Eastern
 // Townships (Ski Bromont + Mont Sutton).
+// US (Colorado): Summit County (Breckenridge, Keystone, Copper Mountain,
+// Arapahoe Basin, Loveland), Vail Valley (Vail Mountain, Beaver Creek),
+// Aspen Snowmass (Snowmass, Aspen Mountain, Aspen Highlands, Buttermilk),
+// Steamboat (Steamboat Resort), Winter Park (Winter Park Resort),
+// Crested Butte (Crested Butte Mountain Resort), Telluride (Telluride Ski
+// Resort), Durango (Purgatory Resort), Boulder/Front Range (Eldora
+// Mountain Resort).
 export const REGIONS: RegionConfig[] = [
   snowyMountainsRegion,
   victoriasHighCountryRegion,
@@ -87,6 +103,15 @@ export const REGIONS: RegionConfig[] = [
   quebecLaurentiansRegion,
   quebecCharlevoixRegion,
   quebecEasternTownshipsRegion,
+  summitCountyRegion,
+  vailValleyRegion,
+  aspenSnowmassRegion,
+  steamboatRegion,
+  winterParkRegion,
+  crestedButteRegion,
+  tellurideRegion,
+  durangoRegion,
+  boulderFrontRangeRegion,
 ];
 
 export const REGION_BY_ID: Record<string, RegionConfig> = Object.fromEntries(
@@ -101,7 +126,7 @@ export function getRegion(id: string): RegionConfig | undefined {
 // (`/au`, `/jp`) and lets the landing decide which regions belong under
 // which flag without re-deriving from `subtitle` strings. Keep in sync
 // when a new region is added.
-export type CountryCode = "AU" | "JP" | "NZ" | "CA";
+export type CountryCode = "AU" | "JP" | "NZ" | "CA" | "US";
 export const REGION_COUNTRY: Record<string, CountryCode> = {
   "snowy-mountains": "AU",
   "victorias-high-country": "AU",
@@ -138,12 +163,22 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "quebec-laurentians": "CA",
   "quebec-charlevoix": "CA",
   "quebec-eastern-townships": "CA",
+  "summit-county": "US",
+  "vail-valley": "US",
+  "aspen-snowmass": "US",
+  "steamboat": "US",
+  "winter-park": "US",
+  "crested-butte": "US",
+  "telluride": "US",
+  "durango": "US",
+  "boulder-front-range": "US",
 };
 export const COUNTRY_META: Record<CountryCode, { name: string; flag: string }> = {
   AU: { name: "Australia", flag: "🇦🇺" },
   JP: { name: "Japan", flag: "🇯🇵" },
   NZ: { name: "New Zealand", flag: "🇳🇿" },
   CA: { name: "Canada", flag: "🇨🇦" },
+  US: { name: "United States", flag: "🇺🇸" },
 };
 export function regionsForCountry(code: CountryCode): RegionConfig[] {
   return REGIONS.filter((r) => REGION_COUNTRY[r.id] === code);

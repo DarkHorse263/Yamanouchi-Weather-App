@@ -57,6 +57,16 @@ export const ALERT_REGIONS: Array<{ id: string; nameEn: string; nameJa: string; 
   { id: "quebec-laurentians", nameEn: "Laurentians", nameJa: "ローレンシャン", country: "CA · Québec" },
   { id: "quebec-charlevoix", nameEn: "Charlevoix", nameJa: "シャルルヴォワ", country: "CA · Québec" },
   { id: "quebec-eastern-townships", nameEn: "Eastern Townships", nameJa: "イースタンタウンシップス", country: "CA · Québec" },
+  // United States (Colorado)
+  { id: "summit-county", nameEn: "Summit County", nameJa: "サミットカウンティー", country: "US · Colorado" },
+  { id: "vail-valley", nameEn: "Vail Valley", nameJa: "ヴェイル・バレー", country: "US · Colorado" },
+  { id: "aspen-snowmass", nameEn: "Aspen Snowmass", nameJa: "アスペン・スノーマス", country: "US · Colorado" },
+  { id: "steamboat", nameEn: "Steamboat", nameJa: "スチームボート", country: "US · Colorado" },
+  { id: "winter-park", nameEn: "Winter Park", nameJa: "ウィンターパーク", country: "US · Colorado" },
+  { id: "crested-butte", nameEn: "Crested Butte", nameJa: "クレステッド・ビュート", country: "US · Colorado" },
+  { id: "telluride", nameEn: "Telluride", nameJa: "テルライド", country: "US · Colorado" },
+  { id: "durango", nameEn: "Durango", nameJa: "デュランゴ", country: "US · Colorado" },
+  { id: "boulder-front-range", nameEn: "Boulder / Front Range", nameJa: "ボルダー・フロントレンジ", country: "US · Colorado" },
 ];
 
 const HORIZONS: Array<{ value: 24 | 48 | 72; label: string; labelJa: string }> = [

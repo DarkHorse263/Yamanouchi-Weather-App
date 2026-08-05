@@ -18,7 +18,7 @@
 // straight in.
 // ─────────────────────────────────────────────────────────────────────────────
 
-export type SkiCountry = "AU" | "JP" | "NZ" | "CA";
+export type SkiCountry = "AU" | "JP" | "NZ" | "CA" | "US";
 
 /**
  * Whether the country's ski-lift season is open on `now`.
@@ -31,6 +31,12 @@ export type SkiCountry = "AU" | "JP" | "NZ" | "CA";
  *                            Whistler push into late May. Québec runs shorter,
  *                            roughly late Nov to mid-Apr, so it sits inside
  *                            the same window)
+ *   US · 15 Oct – 10 May   (Colorado high-alpine resorts; A-Basin/Loveland/
+ *                            Keystone often open mid-to-late Oct and
+ *                            Arapahoe Basin has pushed into June some years,
+ *                            so this window is broadened vs. CA's on purpose
+ *                            - kept in sync with `isUsSnowSeason` in the
+ *                            api-server's routes/roads.ts)
  *
  * @param country - resort country code (matches `CountryCode` from `@/regions`)
  * @param now - optional override for "current time" (tests pass a fixed Date).
@@ -53,6 +59,12 @@ export function isLiftSeasonOpen(country: SkiCountry, now: Date = new Date()): b
       if (m === 10) return d >= 15; // November
       if (m === 11 || m <= 3) return true; // Dec – Apr
       if (m === 4) return d <= 15; // May
+      return false;
+    case "US":
+      // 15 Oct – 10 May inclusive
+      if (m === 9) return d >= 15; // October
+      if (m === 10 || m === 11 || m <= 3) return true; // Nov – Apr
+      if (m === 4) return d <= 10; // May
       return false;
   }
 }

@@ -89,7 +89,16 @@ export type RegionKey =
   | "jasper"
   | "quebec-laurentians"
   | "quebec-charlevoix"
-  | "quebec-eastern-townships";
+  | "quebec-eastern-townships"
+  | "summit-county"
+  | "vail-valley"
+  | "aspen-snowmass"
+  | "steamboat"
+  | "winter-park"
+  | "crested-butte"
+  | "telluride"
+  | "durango"
+  | "boulder-front-range";
 type ViewMode = "interactive" | "windy" | "official";
 
 interface RegionConfig {
@@ -482,6 +491,92 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       attribution: "Environment and Climate Change Canada · weather radar",
     },
   },
+  // US (Colorado) · NWS publishes radar only through its interactive
+  // map layer, not as a hotlinkable loop gif and not as a stable
+  // per-site deep link, so imageUrl is null and every region links out
+  // to the national radar viewer (same link-out posture as JP/NZ/CA).
+  // Forecast data itself is Open-Meteo.
+  "summit-county": {
+    windy: { lat: 39.62, lon: -105.95, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "vail-valley": {
+    windy: { lat: 39.62, lon: -106.45, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "aspen-snowmass": {
+    windy: { lat: 39.20, lon: -106.88, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  steamboat: {
+    windy: { lat: 40.46, lon: -106.80, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "winter-park": {
+    windy: { lat: 39.89, lon: -105.76, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "crested-butte": {
+    windy: { lat: 38.90, lon: -106.97, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  telluride: {
+    windy: { lat: 37.94, lon: -107.81, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  durango: {
+    windy: { lat: 37.63, lon: -107.81, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "boulder-front-range": {
+    windy: { lat: 39.94, lon: -105.58, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
 };
 
 const DEFAULT_ZOOM = 9;
@@ -858,6 +953,82 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "sutton", name: "Sutton", lat: 45.1001, lng: -72.6158, accent: "#0ea5e9" },
     ],
   },
+  "summit-county": {
+    center: { lat: 39.62, lng: -105.95 },
+    pins: [
+      { id: "breckenridge-resort", name: "Breckenridge", lat: 39.4817, lng: -106.0384, accent: "#f97316" },
+      { id: "keystone-resort", name: "Keystone", lat: 39.6084, lng: -105.9439, accent: "#f97316" },
+      { id: "copper-mountain-resort", name: "Copper Mountain", lat: 39.5022, lng: -106.1512, accent: "#f97316" },
+      { id: "arapahoe-basin", name: "Arapahoe Basin", lat: 39.6425, lng: -105.8719, accent: "#f97316" },
+      { id: "loveland", name: "Loveland", lat: 39.6803, lng: -105.8974, accent: "#f97316" },
+      { id: "breckenridge", name: "Breckenridge", lat: 39.4817, lng: -106.0384, accent: "#0ea5e9" },
+      { id: "keystone", name: "Keystone / Dillon", lat: 39.5769, lng: -105.9469, accent: "#0ea5e9" },
+      { id: "copper-mountain", name: "Copper Mountain", lat: 39.5022, lng: -106.1512, accent: "#0ea5e9" },
+      { id: "georgetown", name: "Georgetown", lat: 39.7047, lng: -105.6997, accent: "#0ea5e9" },
+    ],
+  },
+  "vail-valley": {
+    center: { lat: 39.62, lng: -106.45 },
+    pins: [
+      { id: "vail-mountain", name: "Vail Mountain", lat: 39.6061, lng: -106.3550, accent: "#f97316" },
+      { id: "beaver-creek", name: "Beaver Creek", lat: 39.6042, lng: -106.5165, accent: "#f97316" },
+      { id: "vail", name: "Vail", lat: 39.6403, lng: -106.3742, accent: "#0ea5e9" },
+      { id: "avon", name: "Avon", lat: 39.6317, lng: -106.5219, accent: "#0ea5e9" },
+    ],
+  },
+  "aspen-snowmass": {
+    center: { lat: 39.20, lng: -106.88 },
+    pins: [
+      { id: "snowmass", name: "Snowmass", lat: 39.2110, lng: -106.9500, accent: "#f97316" },
+      { id: "aspen-mountain", name: "Aspen Mountain", lat: 39.1836, lng: -106.8231, accent: "#f97316" },
+      { id: "aspen-highlands", name: "Aspen Highlands", lat: 39.1811, lng: -106.8697, accent: "#f97316" },
+      { id: "buttermilk", name: "Buttermilk", lat: 39.1997, lng: -106.8683, accent: "#f97316" },
+      { id: "aspen", name: "Aspen", lat: 39.1911, lng: -106.8175, accent: "#0ea5e9" },
+      { id: "snowmass-village", name: "Snowmass Village", lat: 39.2103, lng: -106.9378, accent: "#0ea5e9" },
+    ],
+  },
+  steamboat: {
+    center: { lat: 40.46, lng: -106.80 },
+    pins: [
+      { id: "steamboat-resort", name: "Steamboat Resort", lat: 40.4572, lng: -106.8045, accent: "#f97316" },
+      { id: "steamboat-springs", name: "Steamboat Springs", lat: 40.4850, lng: -106.8317, accent: "#0ea5e9" },
+    ],
+  },
+  "winter-park": {
+    center: { lat: 39.89, lng: -105.76 },
+    pins: [
+      { id: "winter-park-resort", name: "Winter Park Resort", lat: 39.8868, lng: -105.7625, accent: "#f97316" },
+      { id: "winter-park", name: "Winter Park", lat: 39.8867, lng: -105.7631, accent: "#0ea5e9" },
+    ],
+  },
+  "crested-butte": {
+    center: { lat: 38.90, lng: -106.97 },
+    pins: [
+      { id: "crested-butte-mountain-resort", name: "Crested Butte Mountain Resort", lat: 38.8992, lng: -106.9650, accent: "#f97316" },
+      { id: "crested-butte-town", name: "Crested Butte", lat: 38.8697, lng: -106.9878, accent: "#0ea5e9" },
+    ],
+  },
+  telluride: {
+    center: { lat: 37.94, lng: -107.81 },
+    pins: [
+      { id: "telluride-ski-resort", name: "Telluride Ski Resort", lat: 37.9375, lng: -107.8123, accent: "#f97316" },
+      { id: "telluride-town", name: "Telluride", lat: 37.9375, lng: -107.8123, accent: "#0ea5e9" },
+    ],
+  },
+  durango: {
+    center: { lat: 37.63, lng: -107.81 },
+    pins: [
+      { id: "purgatory-resort", name: "Purgatory Resort", lat: 37.6297, lng: -107.8144, accent: "#f97316" },
+      { id: "durango-town", name: "Durango", lat: 37.2753, lng: -107.8801, accent: "#0ea5e9" },
+    ],
+  },
+  "boulder-front-range": {
+    center: { lat: 39.94, lng: -105.58 },
+    pins: [
+      { id: "eldora-mountain-resort", name: "Eldora Mountain Resort", lat: 39.9375, lng: -105.5828, accent: "#f97316" },
+      { id: "nederland", name: "Nederland", lat: 39.9614, lng: -105.5108, accent: "#0ea5e9" },
+    ],
+  },
 };
 
 // Which country each region sits in. Drives the cross-region grouping on
@@ -865,7 +1036,7 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
 // Australian town + resort, and likewise within Japan. Kept local so the
 // map stays self-contained · keep in step with REGION_COUNTRY in
 // src/regions/index.ts.
-type MapCountry = "AU" | "JP" | "NZ" | "CA";
+type MapCountry = "AU" | "JP" | "NZ" | "CA" | "US";
 const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "snowy-mountains": "AU",
   "victorias-high-country": "AU",
@@ -902,8 +1073,17 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "quebec-laurentians": "CA",
   "quebec-charlevoix": "CA",
   "quebec-eastern-townships": "CA",
+  "summit-county": "US",
+  "vail-valley": "US",
+  "aspen-snowmass": "US",
+  steamboat: "US",
+  "winter-park": "US",
+  "crested-butte": "US",
+  telluride: "US",
+  durango: "US",
+  "boulder-front-range": "US",
 };
-const COUNTRY_LABEL: Record<MapCountry, string> = { AU: "australia", JP: "japan", NZ: "new zealand", CA: "canada" };
+const COUNTRY_LABEL: Record<MapCountry, string> = { AU: "australia", JP: "japan", NZ: "new zealand", CA: "canada", US: "united states" };
 const REGION_LABEL: Record<RegionKey, string> = {
   "snowy-mountains": "snowy mountains",
   "victorias-high-country": "victoria's high country",
@@ -940,6 +1120,15 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "quebec-laurentians": "laurentians",
   "quebec-charlevoix": "charlevoix",
   "quebec-eastern-townships": "eastern townships",
+  "summit-county": "summit county",
+  "vail-valley": "vail valley",
+  "aspen-snowmass": "aspen snowmass",
+  steamboat: "steamboat",
+  "winter-park": "winter park",
+  "crested-butte": "crested butte",
+  telluride: "telluride",
+  durango: "durango",
+  "boulder-front-range": "boulder / front range",
 };
 
 interface CountryPin extends PinSpec {

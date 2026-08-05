@@ -82,6 +82,8 @@ function Router() {
       <Route path="/nz/"><CountryHome code="NZ" /></Route>
       <Route path="/ca"><CountryHome code="CA" /></Route>
       <Route path="/ca/"><CountryHome code="CA" /></Route>
+      <Route path="/us"><CountryHome code="US" /></Route>
+      <Route path="/us/"><CountryHome code="US" /></Route>
       <Route path="/:region/*?">
         <RegionLayout />
       </Route>

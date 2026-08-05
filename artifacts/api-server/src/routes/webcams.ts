@@ -345,6 +345,430 @@ const WEBCAM_DATA: WebcamConfig[] = [
     webcamPageUrl: "https://kijimadaira.org/",
     webcams: [],
   },
+
+  // ─── Resort live-cam pages: Colorado (Summit County) ─────────────────
+  // Breckenridge's webcams are embedded in an interactive mountain-map
+  // widget rather than a standalone gallery page, so we link the mountain
+  // conditions hub instead of fabricating per-camera entries.
+  {
+    locationId: "breckenridge-resort",
+    locationName: "Breckenridge live cams",
+    webcamPageUrl: "https://www.breckenridge.com/the-mountain/mountain-conditions/mountain-cams.aspx",
+    webcams: [],
+  },
+  {
+    locationId: "keystone-resort",
+    locationName: "Keystone live cams",
+    webcamPageUrl: "https://www.keystoneresort.com/the-mountain/mountain-conditions/mountain-cams.aspx",
+    webcams: [],
+  },
+  // Copper Mountain's snow-report URL could not be independently
+  // re-verified in research for this pass (flagged gap) · linking the
+  // broader mountain-conditions hub as the safer, honest fallback.
+  {
+    locationId: "copper-mountain-resort",
+    locationName: "Copper Mountain live cams",
+    webcamPageUrl: "https://www.coppercolorado.com/the-mountain",
+    webcams: [],
+  },
+  {
+    locationId: "arapahoe-basin",
+    locationName: "Arapahoe Basin live cams",
+    webcamPageUrl: "https://www.arapahoebasin.com/the-mountain/mountain-report",
+    webcams: [],
+  },
+  // Loveland's official webcam URL was not independently confirmed in
+  // research for this pass (only a third-party aggregator was verified) ·
+  // linking the official site only, no fabricated camera entries.
+  {
+    locationId: "loveland",
+    locationName: "Loveland Ski Area",
+    webcamPageUrl: "https://www.skiloveland.com/",
+    webcams: [],
+  },
+
+  // ─── Resort live-cam pages: Colorado (Vail Valley) ─────────────────
+  // No single canonical vail.com webcam gallery URL could be independently
+  // confirmed in research for this pass (flagged gap) · link the official
+  // snow/weather report page rather than guess a webcam path.
+  {
+    locationId: "vail-mountain",
+    locationName: "Vail Mountain conditions",
+    webcamPageUrl: "https://www.vail.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx",
+    webcams: [],
+  },
+  // Beaver Creek's webcams are confirmed live and named in official
+  // material: Top of Centennial Lift, Red Buffalo Park, Talons Restaurant,
+  // and a snow-stake cam.
+  {
+    locationId: "beaver-creek",
+    locationName: "Beaver Creek live cams",
+    webcamPageUrl: "https://www.beavercreek.com/the-mountain/mountain-conditions/mountain-cams.aspx",
+    webcams: [
+      {
+        id: "beaver-creek-centennial",
+        name: "Top of Centennial Lift",
+        description: "View from the top of the Centennial Express lift.",
+        imageUrl: "https://www.beavercreek.com/the-mountain/mountain-conditions/mountain-cams.aspx",
+        pageUrl: "https://www.beavercreek.com/the-mountain/mountain-conditions/mountain-cams.aspx",
+        elevation: 3109,
+        type: "mountain",
+      },
+      {
+        id: "beaver-creek-red-buffalo",
+        name: "Red Buffalo Park",
+        description: "Alpine view from Red Buffalo Park, near the top of the resort.",
+        imageUrl: "https://www.beavercreek.com/the-mountain/mountain-conditions/mountain-cams.aspx",
+        pageUrl: "https://www.beavercreek.com/the-mountain/mountain-conditions/mountain-cams.aspx",
+        elevation: 3487,
+        type: "mountain",
+      },
+      {
+        id: "beaver-creek-talons",
+        name: "Talons Restaurant",
+        description: "Mid-mountain view from outside Talons Restaurant.",
+        imageUrl: "https://www.beavercreek.com/the-mountain/mountain-conditions/mountain-cams.aspx",
+        pageUrl: "https://www.beavercreek.com/the-mountain/mountain-conditions/mountain-cams.aspx",
+        elevation: 2652,
+        type: "mountain",
+      },
+      {
+        id: "beaver-creek-snow-stake",
+        name: "Snow Stake Cam",
+        description: "Official snow-stake camera for measuring new snowfall.",
+        imageUrl: "https://www.beavercreek.com/the-mountain/mountain-conditions/mountain-cams.aspx",
+        pageUrl: "https://www.beavercreek.com/the-mountain/mountain-conditions/mountain-cams.aspx",
+        elevation: 3200,
+        type: "mountain",
+      },
+    ],
+  },
+
+  // ─── Resort live-cam pages: Colorado (Aspen Snowmass) ──────────────
+  // All four mountains share one confirmed-live webcam gallery (Roundshot
+  // panoramic cams per mountain + base lift cams); we link the shared page
+  // per mountain rather than guess individual per-camera deep links.
+  {
+    locationId: "snowmass",
+    locationName: "Snowmass live cams",
+    webcamPageUrl: "https://www.aspensnowmass.com/four-mountains/mountain-cams",
+    webcams: [],
+  },
+  {
+    locationId: "aspen-mountain",
+    locationName: "Aspen Mountain live cams",
+    webcamPageUrl: "https://www.aspensnowmass.com/four-mountains/mountain-cams",
+    webcams: [],
+  },
+  {
+    locationId: "aspen-highlands",
+    locationName: "Aspen Highlands live cams",
+    webcamPageUrl: "https://www.aspensnowmass.com/four-mountains/mountain-cams",
+    webcams: [],
+  },
+  {
+    locationId: "buttermilk",
+    locationName: "Buttermilk live cams",
+    webcamPageUrl: "https://www.aspensnowmass.com/four-mountains/mountain-cams",
+    webcams: [],
+  },
+
+  // ─── Resort live-cam pages: Colorado (Steamboat) ─────────────────
+  // Confirmed live at steamboat.com/the-mountain/live-cams: Steamboat
+  // Square, Gondola, Thunderhead, Christie Peak Express & Wild Blue
+  // Gondola, Four Points, Champagne Powder Snow Cam.
+  {
+    locationId: "steamboat-resort",
+    locationName: "Steamboat live cams",
+    webcamPageUrl: "https://www.steamboat.com/the-mountain/live-cams",
+    webcams: [
+      {
+        id: "steamboat-square",
+        name: "Steamboat Square Cam",
+        description: "Base village view of Steamboat Square.",
+        imageUrl: "https://www.steamboat.com/the-mountain/live-cams",
+        pageUrl: "https://www.steamboat.com/the-mountain/live-cams",
+        type: "village",
+      },
+      {
+        id: "steamboat-gondola",
+        name: "Gondola Cam",
+        description: "View of the Steamboat Gondola base.",
+        imageUrl: "https://www.steamboat.com/the-mountain/live-cams",
+        pageUrl: "https://www.steamboat.com/the-mountain/live-cams",
+        type: "mountain",
+      },
+      {
+        id: "steamboat-thunderhead",
+        name: "Thunderhead Cam",
+        description: "Mid-mountain view from Thunderhead.",
+        imageUrl: "https://www.steamboat.com/the-mountain/live-cams",
+        pageUrl: "https://www.steamboat.com/the-mountain/live-cams",
+        elevation: 2767,
+        type: "mountain",
+      },
+      {
+        id: "steamboat-christie-peak-wild-blue",
+        name: "Christie Peak Express & Wild Blue Gondola Cam",
+        description: "View across the Christie Peak Express and Wild Blue Gondola lift lines.",
+        imageUrl: "https://www.steamboat.com/the-mountain/live-cams",
+        pageUrl: "https://www.steamboat.com/the-mountain/live-cams",
+        type: "mountain",
+      },
+      {
+        id: "steamboat-four-points",
+        name: "Four Points Cam",
+        description: "Alpine view from Four Points Lodge.",
+        imageUrl: "https://www.steamboat.com/the-mountain/live-cams",
+        pageUrl: "https://www.steamboat.com/the-mountain/live-cams",
+        elevation: 2962,
+        type: "mountain",
+      },
+      {
+        id: "steamboat-champagne-powder-snow",
+        name: "Champagne Powder Snow Cam",
+        description: "Official snow-stake camera near the summit.",
+        imageUrl: "https://www.steamboat.com/the-mountain/live-cams",
+        pageUrl: "https://www.steamboat.com/the-mountain/live-cams",
+        elevation: 3164,
+        type: "mountain",
+      },
+    ],
+  },
+
+  // ─── Resort live-cam pages: Colorado (Winter Park) ──────────────
+  // Confirmed live at winterparkresort.com/the-mountain/mountain-cams:
+  // Base Cam, Lunch Rock Cam, Snoasis Cam, Town of Winter Park Cam, Snow
+  // Stake Cam, Tubing Hill Cam.
+  {
+    locationId: "winter-park-resort",
+    locationName: "Winter Park live cams",
+    webcamPageUrl: "https://www.winterparkresort.com/the-mountain/mountain-cams",
+    webcams: [
+      {
+        id: "winter-park-base",
+        name: "Base Cam",
+        description: "View of the resort base area.",
+        imageUrl: "https://www.winterparkresort.com/the-mountain/mountain-cams",
+        pageUrl: "https://www.winterparkresort.com/the-mountain/mountain-cams",
+        type: "village",
+      },
+      {
+        id: "winter-park-lunch-rock",
+        name: "Lunch Rock Cam",
+        description: "Mid-mountain view from Lunch Rock.",
+        imageUrl: "https://www.winterparkresort.com/the-mountain/mountain-cams",
+        pageUrl: "https://www.winterparkresort.com/the-mountain/mountain-cams",
+        type: "mountain",
+      },
+      {
+        id: "winter-park-snoasis",
+        name: "Snoasis Cam",
+        description: "View from the Snoasis mid-mountain restaurant.",
+        imageUrl: "https://www.winterparkresort.com/the-mountain/mountain-cams",
+        pageUrl: "https://www.winterparkresort.com/the-mountain/mountain-cams",
+        type: "mountain",
+      },
+      {
+        id: "winter-park-town",
+        name: "Town of Winter Park Cam",
+        description: "View of the town of Winter Park.",
+        imageUrl: "https://www.winterparkresort.com/the-mountain/mountain-cams",
+        pageUrl: "https://www.winterparkresort.com/the-mountain/mountain-cams",
+        type: "village",
+      },
+      {
+        id: "winter-park-snow-stake",
+        name: "Snow Stake Cam",
+        description: "Official snow-stake camera for measuring new snowfall.",
+        imageUrl: "https://www.winterparkresort.com/the-mountain/mountain-cams",
+        pageUrl: "https://www.winterparkresort.com/the-mountain/mountain-cams",
+        type: "mountain",
+      },
+      {
+        id: "winter-park-tubing-hill",
+        name: "Tubing Hill Cam",
+        description: "View of the resort's tubing hill.",
+        imageUrl: "https://www.winterparkresort.com/the-mountain/mountain-cams",
+        pageUrl: "https://www.winterparkresort.com/the-mountain/mountain-cams",
+        type: "mountain",
+      },
+    ],
+  },
+
+  // ─── Resort live-cam pages: Colorado (Crested Butte) ────────────
+  // Confirmed live at skicb.com/.../mountain-cams.aspx: Base Cam/Butte 66
+  // Roadhouse, Umbrella Bar at Ten Peaks, Paradise Warming House Cam.
+  {
+    locationId: "crested-butte-mountain-resort",
+    locationName: "Crested Butte live cams",
+    webcamPageUrl: "https://www.skicb.com/the-mountain/mountain-conditions/mountain-cams.aspx",
+    webcams: [
+      {
+        id: "crested-butte-base-butte66",
+        name: "Base Cam · Butte 66 Roadhouse",
+        description: "Base-area view from the Butte 66 Roadhouse.",
+        imageUrl: "https://www.skicb.com/the-mountain/mountain-conditions/mountain-cams.aspx",
+        pageUrl: "https://www.skicb.com/the-mountain/mountain-conditions/mountain-cams.aspx",
+        type: "village",
+      },
+      {
+        id: "crested-butte-umbrella-bar",
+        name: "Umbrella Bar at Ten Peaks",
+        description: "Mid-mountain view from the Umbrella Bar at Ten Peaks.",
+        imageUrl: "https://www.skicb.com/the-mountain/mountain-conditions/mountain-cams.aspx",
+        pageUrl: "https://www.skicb.com/the-mountain/mountain-conditions/mountain-cams.aspx",
+        type: "mountain",
+      },
+      {
+        id: "crested-butte-paradise-warming-house",
+        name: "Paradise Warming House Cam",
+        description: "Alpine view from the Paradise Warming House.",
+        imageUrl: "https://www.skicb.com/the-mountain/mountain-conditions/mountain-cams.aspx",
+        pageUrl: "https://www.skicb.com/the-mountain/mountain-conditions/mountain-cams.aspx",
+        type: "mountain",
+      },
+    ],
+  },
+
+  // ─── Resort live-cam pages: Colorado (Telluride) ───────────────
+  // Confirmed live at tellurideskiresort.com/webcams/: Revelation Bowl Cam
+  // (360°), Village Cam, See Forever Cam.
+  {
+    locationId: "telluride-ski-resort",
+    locationName: "Telluride live cams",
+    webcamPageUrl: "https://www.tellurideskiresort.com/webcams/",
+    webcams: [
+      {
+        id: "telluride-revelation-bowl",
+        name: "Revelation Bowl Cam (360°)",
+        description: "360-degree alpine view from Revelation Bowl.",
+        imageUrl: "https://www.tellurideskiresort.com/webcams/",
+        pageUrl: "https://www.tellurideskiresort.com/webcams/",
+        type: "mountain",
+      },
+      {
+        id: "telluride-village",
+        name: "Village Cam",
+        description: "View of Mountain Village.",
+        imageUrl: "https://www.tellurideskiresort.com/webcams/",
+        pageUrl: "https://www.tellurideskiresort.com/webcams/",
+        type: "village",
+      },
+      {
+        id: "telluride-see-forever",
+        name: "See Forever Cam",
+        description: "Summit-area view from the See Forever run.",
+        imageUrl: "https://www.tellurideskiresort.com/webcams/",
+        pageUrl: "https://www.tellurideskiresort.com/webcams/",
+        type: "mountain",
+      },
+    ],
+  },
+
+  // ─── Resort live-cam pages: Colorado (Durango) ───────────────
+  // Confirmed working at purgatory.ski/.../weather-conditions-webcams/:
+  // Purgatory Express Base Live Stream, Purgatory Express Summit,
+  // Purgatory Village Plaza.
+  {
+    locationId: "purgatory-resort",
+    locationName: "Purgatory live cams",
+    webcamPageUrl: "https://www.purgatory.ski/mountain/weather-conditions-webcams/",
+    webcams: [
+      {
+        id: "purgatory-express-base",
+        name: "Purgatory Express Base Live Stream",
+        description: "Live stream from the base of the Purgatory Express lift.",
+        imageUrl: "https://www.purgatory.ski/mountain/weather-conditions-webcams/",
+        pageUrl: "https://www.purgatory.ski/mountain/weather-conditions-webcams/",
+        type: "mountain",
+      },
+      {
+        id: "purgatory-express-summit",
+        name: "Purgatory Express Summit",
+        description: "View from the top of the Purgatory Express lift.",
+        imageUrl: "https://www.purgatory.ski/mountain/weather-conditions-webcams/",
+        pageUrl: "https://www.purgatory.ski/mountain/weather-conditions-webcams/",
+        type: "mountain",
+      },
+      {
+        id: "purgatory-village-plaza",
+        name: "Purgatory Village Plaza",
+        description: "Base-village plaza view.",
+        imageUrl: "https://www.purgatory.ski/mountain/weather-conditions-webcams/",
+        pageUrl: "https://www.purgatory.ski/mountain/weather-conditions-webcams/",
+        type: "village",
+      },
+    ],
+  },
+
+  // ─── Resort live-cam pages: Colorado (Boulder / Front Range) ──────
+  {
+    locationId: "eldora-mountain-resort",
+    locationName: "Eldora live cams",
+    webcamPageUrl: "https://www.eldora.com/the-mountain/webcams/lower-mountain-live-cam/",
+    webcams: [],
+  },
+
+  // ─── Roadside cams: Colorado ───────────────────────────────
+  // CDOT's cotrip.org runs a large public highway-camera network, but does
+  // not expose a stable deep link per camera that survives a season. Same
+  // honest tile pattern as CA/JP/NZ: one link per region into the official
+  // camera map, and never a fabricated image.
+  {
+    locationId: "summit-county-roads",
+    locationName: "Roads to Summit County · I-70 corridor",
+    webcamPageUrl: "https://www.cotrip.org/",
+    webcams: [],
+  },
+  {
+    locationId: "vail-valley-roads",
+    locationName: "Roads to Vail Valley · I-70 corridor",
+    webcamPageUrl: "https://www.cotrip.org/",
+    webcams: [],
+  },
+  {
+    locationId: "aspen-snowmass-roads",
+    locationName: "Roads to Aspen Snowmass · Colorado 82",
+    webcamPageUrl: "https://www.cotrip.org/",
+    webcams: [],
+  },
+  {
+    locationId: "steamboat-roads",
+    locationName: "Roads to Steamboat · US-40",
+    webcamPageUrl: "https://www.cotrip.org/",
+    webcams: [],
+  },
+  {
+    locationId: "winter-park-roads",
+    locationName: "Roads to Winter Park · US-40 & Berthoud Pass",
+    webcamPageUrl: "https://www.cotrip.org/",
+    webcams: [],
+  },
+  {
+    locationId: "crested-butte-roads",
+    locationName: "Roads to Crested Butte · Colorado 135",
+    webcamPageUrl: "https://www.cotrip.org/",
+    webcams: [],
+  },
+  {
+    locationId: "telluride-roads",
+    locationName: "Roads to Telluride · Colorado 145",
+    webcamPageUrl: "https://www.cotrip.org/",
+    webcams: [],
+  },
+  {
+    locationId: "durango-roads",
+    locationName: "Roads to Durango & Purgatory · US-550",
+    webcamPageUrl: "https://www.cotrip.org/",
+    webcams: [],
+  },
+  {
+    locationId: "boulder-front-range-roads",
+    locationName: "Roads to Eldora · Boulder Canyon",
+    webcamPageUrl: "https://www.cotrip.org/",
+    webcams: [],
+  },
 ];
 
 router.get("/webcams", (req, res) => {

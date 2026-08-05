@@ -43,6 +43,15 @@ export const REGION_IDS = [
   "quebec-laurentians",
   "quebec-charlevoix",
   "quebec-eastern-townships",
+  "summit-county",
+  "vail-valley",
+  "aspen-snowmass",
+  "steamboat",
+  "winter-park",
+  "crested-butte",
+  "telluride",
+  "durango",
+  "boulder-front-range",
 ] as const;
 export type RegionId = (typeof REGION_IDS)[number];
 
@@ -383,6 +392,77 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "bromont": "quebec-eastern-townships",
   "sutton": "quebec-eastern-townships",
   "quebec-eastern-townships-roads": "quebec-eastern-townships",
+
+  // Summit County, CO · Breckenridge, Keystone, Copper Mountain,
+  // Arapahoe Basin and Loveland, with 4 base towns (name-clash rule: the
+  // Breckenridge/Keystone/Copper Mountain resorts take the -resort id
+  // against their identically-named towns).
+  "breckenridge-resort": "summit-county",
+  "keystone-resort": "summit-county",
+  "copper-mountain-resort": "summit-county",
+  "arapahoe-basin": "summit-county",
+  "loveland": "summit-county",
+  "breckenridge": "summit-county",
+  "keystone": "summit-county",
+  "copper-mountain": "summit-county",
+  "georgetown": "summit-county",
+  "summit-county-roads": "summit-county",
+
+  // Vail Valley, CO · Vail Mountain and Beaver Creek (name-clash rule:
+  // the Vail resort takes the -mountain id against the town of Vail).
+  "vail-mountain": "vail-valley",
+  "beaver-creek": "vail-valley",
+  "vail": "vail-valley",
+  "avon": "vail-valley",
+  "vail-valley-roads": "vail-valley",
+
+  // Aspen Snowmass, CO · Snowmass, Aspen Mountain, Aspen Highlands and
+  // Buttermilk, with 2 base towns (Aspen, Snowmass Village).
+  "snowmass": "aspen-snowmass",
+  "aspen-mountain": "aspen-snowmass",
+  "aspen-highlands": "aspen-snowmass",
+  "buttermilk": "aspen-snowmass",
+  "aspen": "aspen-snowmass",
+  "snowmass-village": "aspen-snowmass",
+  "aspen-snowmass-roads": "aspen-snowmass",
+
+  // Steamboat, CO · 1 mountain (Steamboat Resort) + the town.
+  "steamboat-resort": "steamboat",
+  "steamboat-springs": "steamboat",
+  "steamboat-roads": "steamboat",
+
+  // Winter Park, CO · 1 mountain (Winter Park Resort) + the town
+  // (name-clash rule: the resort takes the -resort id against the town).
+  "winter-park-resort": "winter-park",
+  "winter-park": "winter-park",
+  "winter-park-roads": "winter-park",
+
+  // Crested Butte, CO · 1 mountain (Crested Butte Mountain Resort) + the
+  // town (region id equals the town name, so the town id is
+  // disambiguated as crested-butte-town).
+  "crested-butte-mountain-resort": "crested-butte",
+  "crested-butte-town": "crested-butte",
+  "crested-butte-roads": "crested-butte",
+
+  // Telluride, CO · 1 mountain (Telluride Ski Resort) + the town (region
+  // id equals the town name, so the town id is disambiguated as
+  // telluride-town).
+  "telluride-ski-resort": "telluride",
+  "telluride-town": "telluride",
+  "telluride-roads": "telluride",
+
+  // Durango, CO · 1 mountain (Purgatory Resort) + the town (region id
+  // equals the town name, so the town id is disambiguated as
+  // durango-town).
+  "purgatory-resort": "durango",
+  "durango-town": "durango",
+  "durango-roads": "durango",
+
+  // Boulder / Front Range, CO · 1 mountain (Eldora Mountain Resort) +
+  // the town of Nederland.
+  "eldora-mountain-resort": "boulder-front-range",
+  "nederland": "boulder-front-range",
+  "boulder-front-range-roads": "boulder-front-range",
 };
 
 export function regionForLocation(locationId: string): RegionId | undefined {

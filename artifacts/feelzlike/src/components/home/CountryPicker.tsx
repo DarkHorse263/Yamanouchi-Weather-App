@@ -33,7 +33,7 @@ interface Region {
   id: string;
   name: string;
   country: string;
-  countryCode: "AU" | "JP" | "NZ" | "CA";
+  countryCode: "AU" | "JP" | "NZ" | "CA" | "US";
   region: string;
   status: RegionStatus;
   href: string;
@@ -89,6 +89,15 @@ const FALLBACK_REGIONS: Region[] = [
   { id: "quebec-laurentians",     name: "Laurentians",                    country: "Canada",      countryCode: "CA", region: "Québec",           status: "live", href: "/quebec-laurentians/",   baseTowns: ["Mont-Tremblant"],                                            mountains: ["Tremblant"],                                                headlineLabel: "Mont-Tremblant", headline: null },
   { id: "quebec-charlevoix",      name: "Charlevoix",                     country: "Canada",      countryCode: "CA", region: "Québec",           status: "live", href: "/quebec-charlevoix/",    baseTowns: ["Beaupré", "Petite-Rivière-Saint-François"],                   mountains: ["Mont-Sainte-Anne", "Le Massif de Charlevoix"],              headlineLabel: "Beaupré",      headline: null },
   { id: "quebec-eastern-townships", name: "Eastern Townships",            country: "Canada",      countryCode: "CA", region: "Québec",           status: "live", href: "/quebec-eastern-townships/", baseTowns: ["Bromont", "Sutton"],                                     mountains: ["Ski Bromont", "Mont Sutton"],                               headlineLabel: "Bromont",      headline: null },
+  { id: "summit-county",          name: "Summit County",                  country: "United States", countryCode: "US", region: "Colorado",        status: "live", href: "/summit-county/",         baseTowns: ["Breckenridge", "Keystone", "Copper Mountain", "Georgetown"], mountains: ["Breckenridge", "Keystone", "Copper Mountain", "Arapahoe Basin", "Loveland"], headlineLabel: "Breckenridge", headline: null },
+  { id: "vail-valley",            name: "Vail Valley",                    country: "United States", countryCode: "US", region: "Colorado",        status: "live", href: "/vail-valley/",           baseTowns: ["Vail", "Avon"],                                              mountains: ["Vail Mountain", "Beaver Creek"],                            headlineLabel: "Vail",         headline: null },
+  { id: "aspen-snowmass",         name: "Aspen Snowmass",                 country: "United States", countryCode: "US", region: "Colorado",        status: "live", href: "/aspen-snowmass/",        baseTowns: ["Aspen", "Snowmass Village"],                                 mountains: ["Snowmass", "Aspen Mountain", "Aspen Highlands", "Buttermilk"], headlineLabel: "Aspen",       headline: null },
+  { id: "steamboat",              name: "Steamboat",                      country: "United States", countryCode: "US", region: "Colorado",        status: "live", href: "/steamboat/",             baseTowns: ["Steamboat Springs"],                                         mountains: ["Steamboat Resort"],                                          headlineLabel: "Steamboat Springs", headline: null },
+  { id: "winter-park",            name: "Winter Park",                    country: "United States", countryCode: "US", region: "Colorado",        status: "live", href: "/winter-park/",           baseTowns: ["Winter Park"],                                               mountains: ["Winter Park Resort"],                                        headlineLabel: "Winter Park",  headline: null },
+  { id: "crested-butte",          name: "Crested Butte",                  country: "United States", countryCode: "US", region: "Colorado",        status: "live", href: "/crested-butte/",         baseTowns: ["Crested Butte"],                                             mountains: ["Crested Butte Mountain Resort"],                             headlineLabel: "Crested Butte", headline: null },
+  { id: "telluride",              name: "Telluride",                      country: "United States", countryCode: "US", region: "Colorado",        status: "live", href: "/telluride/",             baseTowns: ["Telluride"],                                                 mountains: ["Telluride Ski Resort"],                                      headlineLabel: "Telluride",    headline: null },
+  { id: "durango",                name: "Durango",                        country: "United States", countryCode: "US", region: "Colorado",        status: "live", href: "/durango/",               baseTowns: ["Durango"],                                                   mountains: ["Purgatory Resort"],                                          headlineLabel: "Durango",      headline: null },
+  { id: "boulder-front-range",    name: "Boulder / Front Range",          country: "United States", countryCode: "US", region: "Colorado",        status: "live", href: "/boulder-front-range/",   baseTowns: ["Nederland"],                                                 mountains: ["Eldora Mountain Resort"],                                    headlineLabel: "Nederland",    headline: null },
 ];
 
 // Map a region to the base town we surface in the country card. This is
@@ -128,10 +137,19 @@ const PRIMARY_TOWN: Record<string, string> = {
   "quebec-laurentians":      "Mont-Tremblant",
   "quebec-charlevoix":       "Beaupré",
   "quebec-eastern-townships": "Bromont",
+  "summit-county":            "Breckenridge",
+  "vail-valley":              "Vail",
+  "aspen-snowmass":           "Aspen",
+  "steamboat":                "Steamboat Springs",
+  "winter-park":              "Winter Park",
+  "crested-butte":            "Crested Butte",
+  "telluride":                "Telluride",
+  "durango":                  "Durango",
+  "boulder-front-range":      "Nederland",
 };
 
-// AU + NZ = southern hemisphere (snow Jun-Sep); JP + CA = northern (snow Dec-Mar).
-function seasonForCountry(code: "AU" | "JP" | "NZ" | "CA"): "winter" | "green" {
+// AU + NZ = southern hemisphere (snow Jun-Sep); JP + CA + US = northern (snow Dec-Mar).
+function seasonForCountry(code: "AU" | "JP" | "NZ" | "CA" | "US"): "winter" | "green" {
   const month = new Date().getMonth() + 1;
   if (code === "AU" || code === "NZ") return month >= 6 && month <= 9 ? "winter" : "green";
   return month >= 12 || month <= 3 ? "winter" : "green";
@@ -171,14 +189,15 @@ export function CountryPicker() {
   const regions = data?.regions ?? FALLBACK_REGIONS;
   const liveCount = regions.filter((r) => r.status === "live").length;
 
-  type Country = { code: "AU" | "JP" | "NZ" | "CA"; name: string; flag: string; regions: Region[] };
+  type Country = { code: "AU" | "JP" | "NZ" | "CA" | "US"; name: string; flag: string; regions: Region[] };
   const COUNTRIES: Country[] = ([
     // Season-first ordering: Australia + New Zealand (jun-oct season) before
-    // Japan and Canada (dec-mar).
+    // Japan, Canada and the United States (dec-mar).
     { code: "AU" as const, name: "Australia",   flag: "\u{1F1E6}\u{1F1FA}", regions: regions.filter((r) => r.countryCode === "AU") },
     { code: "NZ" as const, name: "New Zealand", flag: "\u{1F1F3}\u{1F1FF}", regions: regions.filter((r) => r.countryCode === "NZ") },
     { code: "JP" as const, name: "Japan",       flag: "\u{1F1EF}\u{1F1F5}", regions: regions.filter((r) => r.countryCode === "JP") },
     { code: "CA" as const, name: "Canada",      flag: "\u{1F1E8}\u{1F1E6}", regions: regions.filter((r) => r.countryCode === "CA") },
+    { code: "US" as const, name: "United States", flag: "\u{1F1FA}\u{1F1F8}", regions: regions.filter((r) => r.countryCode === "US") },
   ] satisfies Country[]).filter((c) => c.regions.length > 0);
 
   return (

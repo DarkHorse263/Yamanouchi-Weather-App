@@ -25,10 +25,10 @@ interface LocationConfig {
   bomSecondaryStation?: string;
   /** BOM observation product id for the station's state: NSW=IDN60801 (default), VIC=IDV60801, TAS=IDT60801. */
   bomProduct?: string;
-  /** Open-Meteo timezone, defaults to "Australia/Sydney". JP locations use "Asia/Tokyo", NZ uses "Pacific/Auckland", CA uses America/Vancouver (BC) or America/Edmonton (AB). */
+  /** Open-Meteo timezone, defaults to "Australia/Sydney". JP locations use "Asia/Tokyo", NZ uses "Pacific/Auckland", CA uses America/Vancouver (BC) or America/Edmonton (AB), US uses America/Denver (CO). */
   timezone?: string;
-  /** ISO region code; AU=Australia, JP=Japan, NZ=New Zealand, CA=Canada. Used for ensemble model selection + forecast horizon. */
-  region?: "AU" | "JP" | "NZ" | "CA";
+  /** ISO region code; AU=Australia, JP=Japan, NZ=New Zealand, CA=Canada, US=United States. Used for ensemble model selection + forecast horizon. */
+  region?: "AU" | "JP" | "NZ" | "CA" | "US";
 }
 
 const LOCATIONS: LocationConfig[] = [
@@ -396,6 +396,55 @@ const LOCATIONS: LocationConfig[] = [
   { id: "mont-sutton",               name: "Mont Sutton",               latitude:  45.0850, longitude:  -72.5500, elevation:  840, description: "Québec's glade mountain · an interconnected sous-bois network rather than cut trails.",                bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Toronto", region: "CA" },
   { id: "bromont",                   name: "Bromont",                   latitude:  45.3168, longitude:  -72.6491, elevation:  126, description: "Townships town off Autoroute 10 · about 5 min from the ski hill, 45 min from Montréal.",              bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Toronto", region: "CA" },
   { id: "sutton",                    name: "Sutton",                    latitude:  45.1001, longitude:  -72.6158, elevation:  175, description: "Village under the Sutton range near the Vermont line · about 10 min to the lifts.",                   bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Toronto", region: "CA" },
+
+  // Summit County, CO
+  { id: "breckenridge-resort",       name: "Breckenridge",              latitude:  39.4817, longitude: -106.0384, elevation: 3914, description: "Four interconnected peaks above a Victorian mining town · high alpine bowls on Peaks 6 and 7.",           bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "keystone-resort",           name: "Keystone",                  latitude:  39.6084, longitude: -105.9436, elevation: 3444, description: "Three-mountain layout with Colorado's biggest night-skiing operation.",                                bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "copper-mountain-resort",    name: "Copper Mountain",           latitude:  39.5017, longitude: -106.1512, elevation: 3450, description: "Naturally divided terrain · beginner, intermediate and expert zones split by ridgelines.",                bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "arapahoe-basin",            name: "Arapahoe Basin",            latitude:  39.6425, longitude: -105.8719, elevation: 3978, description: "One of North America's highest lift-served peaks · steep East Wall terrain and a famously long season.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "loveland",                  name: "Loveland",                  latitude:  39.6803, longitude: -105.8975, elevation: 3868, description: "Straddles the Continental Divide at Loveland Pass · usually Colorado's first and last resort open.",       bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "breckenridge",              name: "Breckenridge",              latitude:  39.4817, longitude: -106.0384, elevation: 2926, description: "Victorian-era mining town on Main Street · walkable base for Breckenridge's four peaks.",                  bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "keystone",                  name: "Keystone",                  latitude:  39.5797, longitude: -105.9425, elevation: 2835, description: "Purpose-built village at the base of the resort's River Run gondola.",                                     bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "copper-mountain",           name: "Copper Mountain",           latitude:  39.5022, longitude: -106.1497, elevation: 2926, description: "Ski-in village at the resort base, off I-70's Copper Mountain exit.",                                     bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "georgetown",                name: "Georgetown",                latitude:  39.7108, longitude: -105.6997, elevation: 2622, description: "Historic silver-mining town on I-70 · the gateway to Loveland Pass and Loveland ski area.",                  bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+
+  // Vail Valley, CO
+  { id: "vail-mountain",             name: "Vail Mountain",             latitude:  39.6061, longitude: -106.3550, elevation: 3527, description: "The largest single ski mountain in Colorado · legendary Back Bowls.",                                     bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "beaver-creek",              name: "Beaver Creek",              latitude:  39.6042, longitude: -106.5165, elevation: 3488, description: "Gated, upscale resort village · impeccably groomed cruisers.",                                             bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "vail",                      name: "Vail",                      latitude:  39.6403, longitude: -106.3742, elevation: 2500, description: "Bavarian-styled village at the base of Vail Mountain.",                                                     bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "avon",                      name: "Avon",                      latitude:  39.6317, longitude: -106.5219, elevation: 2286, description: "Valley town at the base of Beaver Creek, a few minutes up the gated access road.",                          bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+
+  // Aspen Snowmass, CO
+  { id: "snowmass",                  name: "Snowmass",                  latitude:  39.2110, longitude: -106.9500, elevation: 3813, description: "The biggest of the four mountains · full Ikon Pass unlimited access.",                                       bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "aspen-mountain",            name: "Aspen Mountain",            latitude:  39.1836, longitude: -106.8231, elevation: 3418, description: "Steep, expert-leaning terrain rising straight out of downtown Aspen · no green runs.",                       bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "aspen-highlands",           name: "Aspen Highlands",           latitude:  39.1811, longitude: -106.8697, elevation: 3559, description: "Locals' favourite with Highland Bowl's hike-to extreme terrain.",                                          bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "buttermilk",                name: "Buttermilk",                latitude:  39.1997, longitude: -106.8683, elevation: 3018, description: "Gentle, family-friendly terrain · home of the Winter X Games superpipe.",                                   bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "aspen",                     name: "Aspen",                     latitude:  39.1911, longitude: -106.8175, elevation: 2423, description: "Historic mining-town-turned-resort · base for Aspen Mountain, Highlands and Buttermilk.",                     bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "snowmass-village",          name: "Snowmass Village",          latitude:  39.2103, longitude: -106.9378, elevation: 2473, description: "Purpose-built ski-in village about 12 miles from downtown Aspen.",                                          bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+
+  // Steamboat, CO
+  { id: "steamboat-resort",          name: "Steamboat Resort",          latitude:  40.4572, longitude: -106.8045, elevation: 3221, description: "Home of Champagne Powder® · six interconnected peaks in the Yampa Valley.",                                 bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "steamboat-springs",         name: "Steamboat Springs",         latitude:  40.4850, longitude: -106.8317, elevation: 2076, description: "Ranching-town-turned-resort on the Yampa River · a few minutes' shuttle to the base.",                       bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+
+  // Winter Park, CO
+  { id: "winter-park-resort",        name: "Winter Park Resort",        latitude:  39.8868, longitude: -105.7625, elevation: 3676, description: "Denver's closest big mountain over Berthoud Pass · Mary Jane side is bump-and-glade heavy.",                 bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "winter-park",               name: "Winter Park",               latitude:  39.8867, longitude: -105.7631, elevation: 2743, description: "Base town at the foot of the resort, about 67 miles from Denver via US-40.",                                bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+
+  // Crested Butte, CO
+  { id: "crested-butte-mountain-resort", name: "Crested Butte Mountain Resort", latitude: 38.8992, longitude: -106.9650, elevation: 3620, description: "Steep, remote and uncrowded · some of the most extreme lift-served terrain in the US.",                    bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "crested-butte-town",        name: "Crested Butte",             latitude:  38.8697, longitude: -106.9878, elevation: 2774, description: "Historic Victorian mining town about 3 miles from Mt. Crested Butte's resort base.",                       bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+
+  // Telluride, CO
+  { id: "telluride-ski-resort",      name: "Telluride Ski Resort",      latitude:  37.9375, longitude: -107.8123, elevation: 3815, description: "Box-canyon setting in the San Juan Mountains · Epic Pass partner resort (up to 7 days).",                     bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "telluride-town",            name: "Telluride",                 latitude:  37.9375, longitude: -107.8123, elevation: 2660, description: "Historic mining town in a box canyon, connected to Mountain Village by free gondola.",                        bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+
+  // Durango, CO
+  { id: "purgatory-resort",          name: "Purgatory Resort",          latitude:  37.6297, longitude: -107.8144, elevation: 3299, description: "Independent, family-friendly San Juan Mountains resort about 25 miles north of Durango.",                    bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "durango-town",              name: "Durango",                   latitude:  37.2753, longitude: -107.8801, elevation: 1988, description: "Historic railroad town on the Animas River, about 25 miles south of Purgatory.",                            bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+
+  // Boulder / Front Range, CO
+  { id: "eldora-mountain-resort",    name: "Eldora Mountain Resort",    latitude:  39.9375, longitude: -105.5828, elevation: 2853, description: "The closest lift-served skiing to Denver and Boulder, about an hour up Boulder Canyon.",                     bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
+  { id: "nederland",                 name: "Nederland",                 latitude:  39.9614, longitude: -105.5108, elevation: 2528, description: "Small mountain town above Boulder Canyon, about 8 miles from the resort.",                                   bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Denver", region: "US" },
 ];
 
 const WEATHER_DESCRIPTIONS: Record<number, string> = {
@@ -1184,12 +1233,13 @@ router.get("/forecast/:locationId", async (req, res) => {
       latitude: location.latitude,
       longitude: location.longitude,
       elevation: forecastElevation,
-      // NZ and CA have no dedicated national model in the ensemble · fall back
-      // to the global blend ("OTHER"). JP keeps JMA, everything else is AU.
+      // NZ, CA and US have no dedicated national model in the ensemble ·
+      // fall back to the global blend ("OTHER"). JP keeps JMA, everything
+      // else is AU.
       region:
         location.region === "JP"
           ? "JP"
-          : location.region === "NZ" || location.region === "CA"
+          : location.region === "NZ" || location.region === "CA" || location.region === "US"
             ? "OTHER"
             : "AU",
       timezone: location.timezone ?? "Australia/Sydney",
