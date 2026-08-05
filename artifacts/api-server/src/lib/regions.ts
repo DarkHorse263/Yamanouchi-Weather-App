@@ -69,6 +69,8 @@ export const REGION_IDS = [
   "southern-vermont",
   "okemo",
   "jay-peak-nek",
+  "jackson-hole",
+  "grand-targhee",
 ] as const;
 export type RegionId = (typeof REGION_IDS)[number];
 
@@ -653,6 +655,20 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "jay": "jay-peak-nek",
   "east-burke": "jay-peak-nek",
   "jay-peak-nek-roads": "jay-peak-nek",
+
+  // Jackson Hole, WY. Resort id kept as its multi-word official name
+  // (no `-resort` suffix needed, no collision with the town "jackson").
+  "jackson-hole-mtn-resort": "jackson-hole",
+  "snow-king-mountain": "jackson-hole",
+  "jackson": "jackson-hole",
+  "teton-village": "jackson-hole",
+  "jackson-hole-roads": "jackson-hole",
+
+  // Grand Targhee, WY. Town "alta-wy" is disambiguated from Utah's Alta
+  // (cottonwood-canyons.ts) with a `-wy` suffix.
+  "grand-targhee-resort": "grand-targhee",
+  "alta-wy": "grand-targhee",
+  "grand-targhee-roads": "grand-targhee",
 };
 
 export function regionForLocation(locationId: string): RegionId | undefined {

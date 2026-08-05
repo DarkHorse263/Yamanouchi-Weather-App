@@ -76,6 +76,8 @@ import { MAD_RIVER_VALLEY_TRANSPORT } from "./mad-river-valley";
 import { SOUTHERN_VERMONT_TRANSPORT } from "./southern-vermont";
 import { OKEMO_TRANSPORT } from "./okemo";
 import { JAY_PEAK_NEK_TRANSPORT } from "./jay-peak-nek";
+import { JACKSON_HOLE_TRANSPORT } from "./jackson-hole";
+import { GRAND_TARGHEE_TRANSPORT } from "./grand-targhee";
 
 const REGISTRY: Record<RegionId, TransportProviderList> = {
   "snowy-mountains": SNOWY_MOUNTAINS_TRANSPORT,
@@ -150,6 +152,11 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   "southern-vermont": SOUTHERN_VERMONT_TRANSPORT,
   okemo: OKEMO_TRANSPORT,
   "jay-peak-nek": JAY_PEAK_NEK_TRANSPORT,
+  // US (Wyoming) · no operators curated to the AU/JP/NZ verification
+  // standard yet, so these are registered empty rather than filled with
+  // guessed timetables.
+  "jackson-hole": JACKSON_HOLE_TRANSPORT,
+  "grand-targhee": GRAND_TARGHEE_TRANSPORT,
 };
 
 // Loader-time integrity check.

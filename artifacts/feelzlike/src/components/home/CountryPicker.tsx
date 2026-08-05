@@ -115,6 +115,8 @@ const FALLBACK_REGIONS: Region[] = [
   { id: "southern-vermont",       name: "Southern Vermont",                country: "United States", countryCode: "US", region: "Vermont",         status: "live", href: "/southern-vermont/",      baseTowns: ["Stratton", "West Dover", "Peru", "Manchester"],            mountains: ["Stratton", "Mount Snow", "Bromley Mountain", "Magic Mountain"], headlineLabel: "Manchester",   headline: null },
   { id: "okemo",                  name: "Okemo",                           country: "United States", countryCode: "US", region: "Vermont",         status: "live", href: "/okemo/",                 baseTowns: ["Ludlow"],                                                   mountains: ["Okemo Mountain Resort"],                                   headlineLabel: "Ludlow",       headline: null },
   { id: "jay-peak-nek",           name: "Jay Peak/Northeast Kingdom",      country: "United States", countryCode: "US", region: "Vermont",         status: "live", href: "/jay-peak-nek/",          baseTowns: ["Jay", "East Burke"],                                        mountains: ["Jay Peak", "Burke Mountain"],                              headlineLabel: "Jay",          headline: null },
+  { id: "jackson-hole",           name: "Jackson Hole",                    country: "United States", countryCode: "US", region: "Wyoming",         status: "live", href: "/jackson-hole/",          baseTowns: ["Jackson", "Teton Village"],                                 mountains: ["Jackson Hole Mountain Resort", "Snow King Mountain"],       headlineLabel: "Jackson",      headline: null },
+  { id: "grand-targhee",          name: "Grand Targhee",                   country: "United States", countryCode: "US", region: "Wyoming",         status: "live", href: "/grand-targhee/",         baseTowns: ["Alta"],                                                      mountains: ["Grand Targhee Resort"],                                    headlineLabel: "Alta",         headline: null },
 ];
 
 // Map a region to the base town we surface in the country card. This is
@@ -180,6 +182,8 @@ const PRIMARY_TOWN: Record<string, string> = {
   "southern-vermont":         "Manchester",
   "okemo":                    "Ludlow",
   "jay-peak-nek":             "Jay",
+  "jackson-hole":             "Jackson",
+  "grand-targhee":            "Alta",
 };
 
 // AU + NZ = southern hemisphere (snow Jun-Sep); JP + CA + US = northern (snow Dec-Mar).

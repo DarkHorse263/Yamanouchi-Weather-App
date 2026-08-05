@@ -115,7 +115,9 @@ export type RegionKey =
   | "mad-river-valley"
   | "southern-vermont"
   | "okemo"
-  | "jay-peak-nek";
+  | "jay-peak-nek"
+  | "jackson-hole"
+  | "grand-targhee";
 type ViewMode = "interactive" | "windy" | "official";
 
 interface RegionConfig {
@@ -747,6 +749,24 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       attribution: "National Weather Service · weather radar",
     },
   },
+  "jackson-hole": {
+    windy: { lat: 43.59, lon: -110.85, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "grand-targhee": {
+    windy: { lat: 43.79, lon: -110.96, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
 };
 
 const DEFAULT_ZOOM = 9;
@@ -1348,6 +1368,22 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "east-burke", name: "East Burke", lat: 44.6112, lng: -71.9227, accent: "#0ea5e9" },
     ],
   },
+  "jackson-hole": {
+    center: { lat: 43.62, lng: -110.85 },
+    pins: [
+      { id: "jackson-hole-mtn-resort", name: "Jackson Hole Mountain Resort", lat: 43.5875, lng: -110.8279, accent: "#f97316" },
+      { id: "snow-king-mountain", name: "Snow King Mountain", lat: 43.4783, lng: -110.7581, accent: "#f97316" },
+      { id: "jackson", name: "Jackson", lat: 43.4799, lng: -110.7624, accent: "#0ea5e9" },
+      { id: "teton-village", name: "Teton Village", lat: 43.5881, lng: -110.8273, accent: "#0ea5e9" },
+    ],
+  },
+  "grand-targhee": {
+    center: { lat: 43.79, lng: -110.95 },
+    pins: [
+      { id: "grand-targhee-resort", name: "Grand Targhee Resort", lat: 43.7904, lng: -110.9576, accent: "#f97316" },
+      { id: "alta-wy", name: "Alta", lat: 43.7897, lng: -110.9310, accent: "#0ea5e9" },
+    ],
+  },
 };
 
 // Which country each region sits in. Drives the cross-region grouping on
@@ -1418,6 +1454,8 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "southern-vermont": "US",
   "okemo": "US",
   "jay-peak-nek": "US",
+  "jackson-hole": "US",
+  "grand-targhee": "US",
 };
 const COUNTRY_LABEL: Record<MapCountry, string> = { AU: "australia", JP: "japan", NZ: "new zealand", CA: "canada", US: "united states" };
 const REGION_LABEL: Record<RegionKey, string> = {
@@ -1482,6 +1520,8 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "southern-vermont": "southern vermont",
   "okemo": "okemo",
   "jay-peak-nek": "jay peak & northeast kingdom",
+  "jackson-hole": "jackson hole",
+  "grand-targhee": "grand targhee",
 };
 
 interface CountryPin extends PinSpec {

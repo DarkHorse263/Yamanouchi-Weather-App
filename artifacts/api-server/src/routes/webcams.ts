@@ -1193,6 +1193,48 @@ const WEBCAM_DATA: WebcamConfig[] = [
     webcamPageUrl: "https://511vt.com/",
     webcams: [],
   },
+
+  // ─── Resort live-cam pages: Wyoming (Jackson Hole) ──────
+  {
+    locationId: "jackson-hole-mtn-resort",
+    // ⚠️ No confirmed dedicated webcam URL found in research — page-only
+    // link to the resort's own conditions page, no fabricated feed.
+    locationName: "Jackson Hole Mountain Resort live cams",
+    webcamPageUrl: "https://www.jacksonhole.com/mountain-report",
+    webcams: [],
+  },
+  {
+    locationId: "snow-king-mountain",
+    locationName: "Snow King Mountain live cams",
+    webcamPageUrl: "https://snowkingmountain.com/mountain/webcams/",
+    webcams: [],
+  },
+
+  // ─── Resort live-cam pages: Wyoming (Grand Targhee) ──────
+  {
+    locationId: "grand-targhee-resort",
+    locationName: "Grand Targhee Resort live cams",
+    webcamPageUrl: "https://grandtarghee.com/mountain-report/",
+    webcams: [],
+  },
+
+  // ─── Roadside cams: Wyoming ─────────────────────────────────────
+  // WYDOT's wyoroad.info runs a public highway-camera network (including
+  // Teton Pass, WY-22), but does not expose a stable deep link per camera
+  // that survives a season — same honest page-only-link pattern as
+  // CO/UT/CA/VT.
+  {
+    locationId: "jackson-hole-roads",
+    locationName: "Roads to Jackson Hole · US-26/89/191 & Teton Pass (WY-22)",
+    webcamPageUrl: "https://wyoroad.info/",
+    webcams: [],
+  },
+  {
+    locationId: "grand-targhee-roads",
+    locationName: "Roads to Grand Targhee · Teton Pass (WY-22) & ID-33",
+    webcamPageUrl: "https://wyoroad.info/",
+    webcams: [],
+  },
 ];
 
 router.get("/webcams", (req, res) => {

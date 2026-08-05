@@ -1036,6 +1036,36 @@ export const REGIONS = [
       { id: "east-burke", name: "East Burke", blurb: "base village for Burke Mountain, Northeast Kingdom" },
     ],
   },
+  {
+    slug: "jackson-hole",
+    name: "Jackson Hole",
+    subtitle: "Wyoming · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Jackson Hole Mountain Resort", blurb: "Ikon Pass (Full only) · legendary steep terrain, 4,139 ft vertical · reservation required for Ikon/Mountain Collective 2025-26" },
+      { name: "Snow King Mountain", blurb: "Indy Pass + Powder Alliance · in-town, night skiing · official 2025-26 closing Mar 22 2026 per resort" },
+    ],
+    towns: [
+      { id: "jackson", name: "Jackson", blurb: "Jackson Hole's town hub, close to Snow King Mountain" },
+      { id: "teton-village", name: "Teton Village", blurb: "base village for Jackson Hole Mountain Resort" },
+    ],
+  },
+  {
+    slug: "grand-targhee",
+    name: "Grand Targhee",
+    subtitle: "Wyoming · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Grand Targhee Resort", blurb: "Mountain Collective Pass (not Ikon/Epic) · deepest average annual snowfall on the west side of the Tetons" },
+    ],
+    towns: [
+      { id: "alta-wy", name: "Alta", blurb: "small Wyoming town at the base of Grand Targhee Resort" },
+    ],
+  },
 ];
 
 /** Region sub-sections that actually render for this region (see gating notes above). */

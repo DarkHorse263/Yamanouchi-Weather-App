@@ -1727,6 +1727,8 @@ components:
         - southern-vermont
         - okemo
         - jay-peak-nek
+        - jackson-hole
+        - grand-targhee
       description: |
         Canonical region identifier used across the FeelZlike platform.
 

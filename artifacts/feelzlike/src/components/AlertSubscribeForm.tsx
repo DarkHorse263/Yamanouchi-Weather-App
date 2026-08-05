@@ -88,6 +88,8 @@ export const ALERT_REGIONS: Array<{ id: string; nameEn: string; nameJa: string; 
   { id: "southern-vermont", nameEn: "Southern Vermont", nameJa: "サザンバーモント", country: "US · Vermont" },
   { id: "okemo", nameEn: "Okemo", nameJa: "オキーモ", country: "US · Vermont" },
   { id: "jay-peak-nek", nameEn: "Jay Peak/Northeast Kingdom", nameJa: "ジェイピーク", country: "US · Vermont" },
+  { id: "jackson-hole", nameEn: "Jackson Hole", nameJa: "ジャクソンホール", country: "US · Wyoming" },
+  { id: "grand-targhee", nameEn: "Grand Targhee", nameJa: "グランドターガビー", country: "US · Wyoming" },
 ];
 
 const HORIZONS: Array<{ value: 24 | 48 | 72; label: string; labelJa: string }> = [

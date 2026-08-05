@@ -218,6 +218,8 @@ export const GetPowderAlertsQueryParams = zod.object({
       "southern-vermont",
       "okemo",
       "jay-peak-nek",
+      "jackson-hole",
+      "grand-targhee",
     ])
     .optional()
     .describe(
@@ -1241,6 +1243,8 @@ export const GetWeatherQueryParams = zod.object({
       "southern-vermont",
       "okemo",
       "jay-peak-nek",
+      "jackson-hole",
+      "grand-targhee",
     ])
     .optional()
     .describe(
@@ -1687,6 +1691,8 @@ export const GetWebcamsQueryParams = zod.object({
       "southern-vermont",
       "okemo",
       "jay-peak-nek",
+      "jackson-hole",
+      "grand-targhee",
     ])
     .optional()
     .describe(
@@ -1835,6 +1841,8 @@ export const GetRoadConditionsQueryParams = zod.object({
       "southern-vermont",
       "okemo",
       "jay-peak-nek",
+      "jackson-hole",
+      "grand-targhee",
     ])
     .optional()
     .describe(
@@ -2038,6 +2046,8 @@ export const GetLiftStatusQueryParams = zod.object({
       "southern-vermont",
       "okemo",
       "jay-peak-nek",
+      "jackson-hole",
+      "grand-targhee",
     ])
     .optional()
     .describe(

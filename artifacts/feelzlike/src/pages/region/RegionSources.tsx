@@ -267,6 +267,35 @@ const VT_ROADS_GENERAL: SourceGroup = {
   ],
 };
 
+/**
+ * Wyoming reference block. Bridger-Teton Avalanche Center covers both WY
+ * regions (Jackson Hole, Grand Targhee) under its "Tetons" zone, so unlike
+ * Vermont/California's no-coverage gaps, an avalanche-bulletin link IS
+ * offered here.
+ */
+const WY_OFFICIAL_REFERENCES: SourceGroup = {
+  title: "Official references",
+  titleJa: "公式参照先",
+  blurb:
+    "Link-outs, not wired feeds · conditions shown on feelzlike come from the forecast ensemble below, so check these before you drive or tour. Bridger-Teton Avalanche Center's \"Tetons\" zone covers both Jackson Hole and Grand Targhee.",
+  blurbJa:
+    "リンクのみで、データ連携はしていません。feelzlikeの数値は下記の予報モデルによるものです。走行・ツアー前に必ず公式情報をご確認ください。",
+  items: [
+    { label: "Bridger-Teton Avalanche Center", detail: "Tetons zone forecast (covers Jackson Hole & Grand Targhee)", url: "https://bridgertetonavalanchecenter.org/" },
+    { label: "National Weather Service", detail: "US federal forecasts & warnings", url: "https://www.weather.gov/" },
+  ],
+};
+const WY_ROADS_GENERAL: SourceGroup = {
+  title: "Roads & transport",
+  titleJa: "道路・交通",
+  blurb:
+    "Wyoming has a real, dynamic Level 1/Level 2 chain law (WY Statute § 31-5-956), posted by WYDOT variable message sign rather than a fixed calendar — most frequently activated on Teton Pass (WY-22), the main road to Grand Targhee.",
+  blurbJa: "ワイオミング州には動的なチェーン規制があります（テトンパス WY-22で頻繁に発動）。",
+  items: [
+    { label: "WYDOT · wyoroad.info", detail: "statewide real-time road conditions, chain-law status & camera map", url: "https://wyoroad.info/" },
+  ],
+};
+
 const REGION_SOURCES: Record<string, SourceGroup[]> = {
   "snowy-mountains": [
     {
@@ -767,6 +796,31 @@ const REGION_SOURCES: Record<string, SourceGroup[]> = {
       items: [
         { label: "Jay Peak", detail: "independent · highest average annual snowfall in the East, close to the Canadian border", url: "https://jaypeakresort.com/" },
         { label: "Burke Mountain", detail: "independent · 2025-26 closing date not confirmed by resort · joint pass with Smugglers' Notch planned from 2026-27, not yet in effect", url: "https://www.skiburke.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "jackson-hole": [
+    WY_OFFICIAL_REFERENCES,
+    WY_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Jackson Hole Mountain Resort", detail: "Ikon Pass (Full only) · legendary steep terrain, 4,139 ft vertical · reservation required for Ikon/Mountain Collective 2025-26 · ⚠️ no confirmed dedicated webcam URL", url: "https://www.jacksonhole.com/" },
+        { label: "Snow King Mountain", detail: "Indy Pass + Powder Alliance · in-town, night skiing · official 2025-26 closing Mar 22 2026 per resort", url: "https://snowkingmountain.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "grand-targhee": [
+    WY_OFFICIAL_REFERENCES,
+    WY_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Grand Targhee Resort", detail: "Mountain Collective Pass (not Ikon/Epic) · deepest average annual snowfall on the west side of the Tetons · contested 694-acre USFS expansion approved but not yet built (objections through July 2026, doesn't affect 2025-26 season)", url: "https://grandtarghee.com/" },
       ],
     },
     FORECAST_ENSEMBLE,

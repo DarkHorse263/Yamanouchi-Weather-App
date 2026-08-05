@@ -496,6 +496,14 @@ if (process.env.NODE_ENV === "production") {
       name: "Jay Peak/Northeast Kingdom",
       towns: { jay: "Jay", "east-burke": "East Burke" },
     },
+    "jackson-hole": {
+      name: "Jackson Hole",
+      towns: { jackson: "Jackson", "teton-village": "Teton Village" },
+    },
+    "grand-targhee": {
+      name: "Grand Targhee",
+      towns: { "alta-wy": "Alta" },
+    },
   };
 
   // Top-level routes handled by the SPA (before the /:region catch-all).

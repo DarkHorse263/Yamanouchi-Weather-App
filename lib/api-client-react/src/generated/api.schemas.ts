@@ -141,6 +141,8 @@ export const RegionId = {
   "southern-vermont": "southern-vermont",
   "okemo": "okemo",
   "jay-peak-nek": "jay-peak-nek",
+  "jackson-hole": "jackson-hole",
+  "grand-targhee": "grand-targhee",
 } as const;
 
 export interface HealthStatus {

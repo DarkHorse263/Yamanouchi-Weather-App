@@ -168,6 +168,11 @@ const REGION_ANCHORS: Record<RegionId, {
   "southern-vermont": { lat: 43.1131, lon: -72.9081, elevation: 1181, region: "OTHER", displayName: "Southern Vermont" },
   "okemo": { lat: 43.4009, lon: -72.7168, elevation: 1019, region: "OTHER", displayName: "Okemo" },
   "jay-peak-nek": { lat: 44.9241, lon: -72.5215, elevation: 1209, region: "OTHER", displayName: "Jay Peak/Northeast Kingdom" },
+
+  // Wyoming anchors: each on the highest lift-served summit in the
+  // region. America/Denver, same as Colorado/Utah.
+  "jackson-hole": { lat: 43.5875, lon: -110.8279, elevation: 3185, region: "OTHER", displayName: "Jackson Hole" },
+  "grand-targhee": { lat: 43.7904, lon: -110.9576, elevation: 3006, region: "OTHER", displayName: "Grand Targhee" },
 };
 
 interface EvaluatorReport {

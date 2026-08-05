@@ -784,6 +784,62 @@ function vtChainEntry(opts: {
   };
 }
 
+/**
+ * Wyoming HAS a real, currently postable dynamic chain law - WY Statute
+ * Section 31-5-956 - unlike Vermont/Montana's genuinely chain-law-free
+ * posture. WYDOT posts two escalating levels via variable message sign,
+ * NOT a fixed calendar rule:
+ *   Level 1 - chains, OR snow tires, OR 4WD/AWD engaged
+ *   Level 2 - chains, OR 4WD/AWD with M+S/all-weather-rated tires
+ * Teton Pass (WY-22), the main road between Jackson/Teton Village and the
+ * Teton Valley/Grand Targhee side of the range, is explicitly named by
+ * WYDOT as a frequent activation corridor in winter storms. Because this
+ * is sign/condition-activated rather than a fixed calendar law (unlike
+ * Colorado's `coChainEntry`, which asserts "must-carry" for a real
+ * in-season statute), `chains2wd`/`chainsAwd` stay at "not-required"
+ * defaults and the real Level 1/Level 2 rule text lives in the note -
+ * modeled closest on Utah's sign-activated `utChainEntry()` Cottonwood
+ * Class 3 pattern. Applies to ALL vehicle types (not a heavy-vehicle-only
+ * carve-out like Montana's MCA 61-9-436), which is the key difference from
+ * the Montana/Vermont narrow pattern.
+ */
+const WY_SOURCE = {
+  sourceLabel: "WYDOT · wyoroad.info",
+  sourceUrl: "https://wyoroad.info/",
+};
+
+function wyChainEntry(opts: {
+  id: string;
+  regionId: string;
+  mountainId: string;
+  mountainName: string;
+  approach: string;
+  detail: string;
+  inSeason: boolean;
+  issuedAt: string;
+  tetonPassCorridor: boolean;
+}): Record<string, unknown> {
+  const tetonPassRule =
+    "WYDOT can post a dynamic Level 1 (chains, OR snow tires, OR 4WD/AWD engaged) or Level 2 (chains, OR 4WD/AWD with M+S/all-weather-rated tires) chain requirement on Teton Pass (WY-22) under Wyoming Statute Section 31-5-956, applying to ALL vehicles regardless of drivetrain when posted. This is sign-activated, not a fixed calendar rule, so check wyoroad.info or the roadside variable message signs for today's status before you drive.";
+  const generalRule =
+    "Wyoming has no fixed-calendar statewide chain law, but WYDOT can post a dynamic Level 1/Level 2 chain requirement (Wyoming Statute Section 31-5-956) on any state highway when conditions warrant, applying to ALL vehicles when active.";
+  const rule = opts.tetonPassCorridor ? tetonPassRule : generalRule;
+  return {
+    id: opts.id,
+    regionId: opts.regionId,
+    mountainId: opts.mountainId,
+    mountainName: opts.mountainName,
+    approach: opts.approach,
+    status: "open",
+    chains2wd: "not-required" satisfies ChainReq,
+    chainsAwd: "not-required" satisfies ChainReq,
+    note: opts.inSeason ? `${rule} ${opts.detail}` : "Outside the ski season · no seasonal chain-law activation expected on this route.",
+    issuedAt: opts.issuedAt,
+    ...WY_SOURCE,
+    dataSource: "seasonal-rule",
+  };
+}
+
 function buildChainStatuses(regionId: string | undefined): Array<Record<string, unknown>> {
   const now = new Date();
   const issuedAt = now.toISOString();
@@ -1697,6 +1753,40 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
     ];
   }
 
+
+  if (regionId === "jackson-hole" || regionId === "grand-targhee") {
+    const inSeason = isUsSnowSeason(now);
+    const wy = (
+      id: string,
+      mountainId: string,
+      mountainName: string,
+      approach: string,
+      detail: string,
+      tetonPassCorridor: boolean,
+    ) => wyChainEntry({ id, regionId, mountainId, mountainName, approach, detail, inSeason, issuedAt, tetonPassCorridor });
+
+    if (regionId === "jackson-hole") {
+      return [
+        wy("jackson-hole-mtn-resort-hwy-390", "jackson-hole-mtn-resort", "Jackson Hole Mountain Resort",
+          "WY-390 (Teton Village Rd) north from Jackson to Teton Village",
+          "WY-390 is state-maintained and regularly plowed; not the Teton Pass corridor itself, so a Level 1/2 posting is less frequent here than on WY-22.",
+          false),
+        wy("snow-king-mountain-in-town", "snow-king-mountain", "Snow King Mountain",
+          "In-town in Jackson, a short drive or walk from the town square",
+          "In-town streets are plowed by the Town of Jackson; a Level 1/2 posting is very unlikely on this short in-town approach.",
+          false),
+      ];
+    }
+
+    // grand-targhee
+    return [
+      wy("grand-targhee-resort-teton-pass", "grand-targhee-resort", "Grand Targhee Resort",
+        "From Jackson: WY-22 over Teton Pass to Idaho, then ID-33 and Ski Hill Rd through Alta, WY to the resort",
+        "⚠️ Teton Pass (WY-22) is WYDOT's most frequently named activation corridor for the dynamic Level 1/Level 2 chain law — check wyoroad.info before crossing, especially in storms.",
+        true),
+    ];
+  }
+
   return [];
 }
 
@@ -1958,6 +2048,13 @@ router.get("/road-conditions", async (req, res) => {
       region === "southern-vermont" ||
       region === "okemo" ||
       region === "jay-peak-nek";
+    //  · US (Wyoming) - no feed wired yet. WYDOT publishes wyoroad.info, but
+    //    nothing is integrated in this pass. Wyoming DOES have a real,
+    //    dynamic Level 1/Level 2 chain law (WY Statute Section 31-5-956),
+    //    unlike Vermont/Montana - stated explicitly below rather than
+    //    downgraded to a generic "no chain law" advisory. Bridger-Teton
+    //    Avalanche Center covers both WY regions under its "Tetons" zone.
+    const isUsWy = region === "jackson-hole" || region === "grand-targhee";
 
     let roads: unknown[] = [];
     let generalAdvice: string;
@@ -2042,6 +2139,17 @@ router.get("/road-conditions", async (req, res) => {
       generalAdvice =
         "We do not yet pull live road data for Vermont · check VTrans' 511vt.com for closures, plow-truck tracking (plowtrucks.vtrans.vermont.gov) and highway cameras before you drive. Vermont has no statewide chain law for passenger vehicles (only a heavy-vehicle rule on VT-9 between Wilmington and Bennington that doesn't apply to visitor cars); winter/snow tyres are strongly recommended on mountain approaches, and studded tires are legal year-round. ⚠️ No Vermont ski region has a dedicated backcountry avalanche-forecasting authority - the state's terrain does not carry significant avalanche danger, so no avalanche-bulletin link is offered here rather than pointing at an out-of-state center (e.g. Mount Washington Avalanche Center, which covers New Hampshire) that doesn't actually cover Vermont.";
       liveTrafficUrl = "https://511vt.com/";
+    } else if (isUsWy) {
+      // No live Wyoming road feed is wired yet · say so plainly rather than
+      // shipping an empty list that reads like "all clear". Wyoming HAS a
+      // real, dynamic Level 1/Level 2 chain law (WY Statute Section
+      // 31-5-956), posted by variable message sign rather than a fixed
+      // calendar - most frequently activated on Teton Pass (WY-22), the
+      // main road to Grand Targhee. State that explicitly rather than
+      // downgrading Wyoming to Vermont/Montana's "no chain law" posture.
+      generalAdvice =
+        "We do not yet pull live road data for Wyoming · check WYDOT's wyoroad.info for closures, chain-law status and highway cameras before you drive, especially over Teton Pass (WY-22). Wyoming has no fixed-calendar statewide chain law, but WYDOT can post a dynamic Level 1 (chains, snow tires, or 4WD/AWD engaged) or Level 2 (chains, or 4WD/AWD with M+S/all-weather tires) chain requirement on any state highway when conditions warrant, applying to ALL vehicles when active — this is sign-activated, not automatically in force for a set window, per Wyoming Statute Section 31-5-956. For backcountry conditions, read the day's forecast from the Bridger-Teton Avalanche Center's Tetons zone at bridgertetonavalanchecenter.org.";
+      liveTrafficUrl = "https://wyoroad.info/";
     } else {
       generalAdvice =
         "Live road condition data is not yet available for this region.";
