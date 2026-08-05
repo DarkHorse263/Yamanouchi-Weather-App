@@ -80,6 +80,14 @@ export const ALERT_REGIONS: Array<{ id: string; nameEn: string; nameJa: string; 
   { id: "big-bear", nameEn: "Big Bear", nameJa: "ビグベアー", country: "US · California" },
   { id: "bear-valley", nameEn: "Bear Valley", nameJa: "ベアバリー", country: "US · California" },
   { id: "mt-shasta", nameEn: "Mt. Shasta", nameJa: "シャスタ山", country: "US · California" },
+
+  // United States (Vermont)
+  { id: "killington-pico", nameEn: "Killington/Pico", nameJa: "キリントン・ピコ", country: "US · Vermont" },
+  { id: "stowe-smugglers-notch", nameEn: "Stowe/Smugglers' Notch", nameJa: "ストウ・スマグラーズノッチ", country: "US · Vermont" },
+  { id: "mad-river-valley", nameEn: "Mad River Valley", nameJa: "マッドリバーバレー", country: "US · Vermont" },
+  { id: "southern-vermont", nameEn: "Southern Vermont", nameJa: "サザンバーモント", country: "US · Vermont" },
+  { id: "okemo", nameEn: "Okemo", nameJa: "オキーモ", country: "US · Vermont" },
+  { id: "jay-peak-nek", nameEn: "Jay Peak/Northeast Kingdom", nameJa: "ジェイピーク", country: "US · Vermont" },
 ];
 
 const HORIZONS: Array<{ value: 24 | 48 | 72; label: string; labelJa: string }> = [

@@ -735,6 +735,55 @@ function usCaChainEntry(opts: {
   };
 }
 
+
+/**
+ * Vermont has NO statewide chain law for passenger vehicles — the only
+ * chain/traction requirement in research is a heavy-vehicle rule (over
+ * 26,000 lbs GVWR) on VT-9 between Wilmington and Bennington, which does
+ * not apply to the ordinary visitor vehicles this app serves. Studded
+ * tires are legal year-round in Vermont (unlike many states that restrict
+ * them to a winter window), which is noted for context, not as a
+ * "requirement." This makes Vermont's honesty posture closest to Canada's
+ * `caChainEntry()` (genuinely no chain law) rather than Utah's
+ * conditional Class 3 Traction Law or California's storm-activated
+ * R1/R2/R3 ladder — both of those reflect a real, live, sign-activated
+ * rule; Vermont has neither. Named `vtChainEntry` (not reusing
+ * `caChainEntry`, which is already taken by Canada) to avoid any
+ * confusion with the Canada helper.
+ */
+const VT_SOURCE = {
+  sourceLabel: "VTrans · 511vt.com",
+  sourceUrl: "https://511vt.com/",
+};
+
+function vtChainEntry(opts: {
+  id: string;
+  regionId: string;
+  mountainId: string;
+  mountainName: string;
+  approach: string;
+  detail: string;
+  inSeason: boolean;
+  issuedAt: string;
+}): Record<string, unknown> {
+  return {
+    id: opts.id,
+    regionId: opts.regionId,
+    mountainId: opts.mountainId,
+    mountainName: opts.mountainName,
+    approach: opts.approach,
+    status: "open",
+    chains2wd: "not-required" satisfies ChainReq,
+    chainsAwd: "not-required" satisfies ChainReq,
+    note: opts.inSeason
+      ? `Vermont has no statewide chain law for passenger vehicles (only a heavy-vehicle rule on VT-9 between Wilmington and Bennington, which doesn't apply here). Winter/snow tyres are strongly recommended on mountain approaches; studded tires are legal year-round. ${opts.detail}`
+      : "Outside the ski season · Vermont has no chain-law requirement on this route at any time of year for passenger vehicles.",
+    issuedAt: opts.issuedAt,
+    ...VT_SOURCE,
+    dataSource: "seasonal-rule",
+  };
+}
+
 function buildChainStatuses(regionId: string | undefined): Array<Record<string, unknown>> {
   const now = new Date();
   const issuedAt = now.toISOString();
@@ -1561,6 +1610,93 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
     ];
   }
 
+
+  if (
+    regionId === "killington-pico" ||
+    regionId === "stowe-smugglers-notch" ||
+    regionId === "mad-river-valley" ||
+    regionId === "southern-vermont" ||
+    regionId === "okemo" ||
+    regionId === "jay-peak-nek"
+  ) {
+    const inSeason = isUsSnowSeason(now);
+    const vt = (
+      id: string,
+      mountainId: string,
+      mountainName: string,
+      approach: string,
+      detail: string,
+    ) => vtChainEntry({ id, regionId, mountainId, mountainName, approach, detail, inSeason, issuedAt });
+
+    if (regionId === "killington-pico") {
+      return [
+        vt("killington-resort-us-4", "killington-resort", "Killington",
+          "US-4 east from Rutland, then VT-100/Killington Rd to the base",
+          "US-4 and Killington Rd are state-maintained and regularly plowed."),
+        vt("pico-mountain-us-4", "pico-mountain", "Pico Mountain",
+          "US-4 east from Rutland, just west of the Killington Rd junction",
+          "Shares the US-4 approach with Killington, slightly closer to Rutland."),
+      ];
+    }
+
+    if (regionId === "stowe-smugglers-notch") {
+      return [
+        vt("stowe-mountain-resort-vt-108", "stowe-mountain-resort", "Stowe Mountain Resort",
+          "I-89 to VT-100, then VT-108 (Mountain Rd) to the base",
+          "VT-108 (Mountain Rd) is state-maintained and regularly plowed."),
+        vt("smugglers-notch-vt-108", "smugglers-notch", "Smugglers' Notch",
+          "VT-108 north from Stowe through Smugglers' Notch, or VT-15/VT-108 from Jeffersonville",
+          "⚠️ The Stowe-side approach through the Notch itself (the high, narrow pass) is gated and closed every winter regardless of chain rules — Smugglers' Notch is accessed from the Jeffersonville side via VT-108 north in winter, not through the Notch."),
+      ];
+    }
+
+    if (regionId === "mad-river-valley") {
+      return [
+        vt("sugarbush-vt-100", "sugarbush", "Sugarbush",
+          "VT-100 to Warren, then Sugarbush Access Rd",
+          "VT-100 and the resort access road are state/town-maintained and regularly plowed."),
+        vt("mad-river-glen-vt-17", "mad-river-glen", "Mad River Glen",
+          "VT-100 to Waitsfield, then VT-17 (App Gap Rd) west to the base",
+          "VT-17 climbs steeply toward Appalachian Gap; the gap itself is typically closed in winter beyond the ski area, but the resort access section is maintained."),
+      ];
+    }
+
+    if (regionId === "southern-vermont") {
+      return [
+        vt("stratton-mountain-resort-vt-30", "stratton-mountain-resort", "Stratton",
+          "VT-30 to Bondville, then Stratton Mountain Access Rd",
+          "VT-30 and the resort access road are state/town-maintained and regularly plowed."),
+        vt("mount-snow-vt-100", "mount-snow", "Mount Snow",
+          "VT-100 north from Wilmington to West Dover",
+          "VT-100 is state-maintained and regularly plowed."),
+        vt("bromley-mountain-vt-11", "bromley-mountain", "Bromley Mountain",
+          "VT-11 between Manchester and Peru",
+          "VT-11 is state-maintained and regularly plowed."),
+        vt("magic-mountain-vt-11", "magic-mountain", "Magic Mountain",
+          "VT-11 to Londonderry, then VT-100 south to the resort access road",
+          "⚠️ Magic Mountain did not open for the 2025-26 season — this entry describes the road only, not resort operating status."),
+      ];
+    }
+
+    if (regionId === "okemo") {
+      return [
+        vt("okemo-mountain-resort-vt-103", "okemo-mountain-resort", "Okemo Mountain Resort",
+          "VT-103 to Ludlow, then VT-100/Okemo Ridge Rd to the base",
+          "VT-103 and the resort access road are state/town-maintained and regularly plowed."),
+      ];
+    }
+
+    // jay-peak-nek
+    return [
+      vt("jay-peak-vt-242", "jay-peak", "Jay Peak",
+        "VT-105 or VT-242 to the base, near the Canadian border",
+        "VT-242 climbs over Jay Peak's shoulder and can see the heaviest snowfall totals in the state; it remains state-maintained and plowed."),
+      vt("burke-mountain-vt-114", "burke-mountain", "Burke Mountain",
+        "VT-114 to East Burke, then Mountain Rd to the base",
+        "VT-114 and the resort access road are state/town-maintained and regularly plowed."),
+    ];
+  }
+
   return [];
 }
 
@@ -1808,6 +1944,20 @@ router.get("/road-conditions", async (req, res) => {
       region === "big-bear" ||
       region === "bear-valley" ||
       region === "mt-shasta";
+    //  · US (Vermont) - no feed wired yet. VTrans publishes 511vt.com, but
+    //    nothing is integrated in this pass, so `roads` stays empty and the
+    //    advice points at 511vt.com for roads. Vermont has NO statewide
+    //    chain law for passenger vehicles (unlike CO/UT/CA) and NO dedicated
+    //    avalanche-forecasting authority anywhere in the state - both
+    //    stated explicitly below rather than silently omitted or borrowed
+    //    from a neighbouring state's authority.
+    const isUsVt =
+      region === "killington-pico" ||
+      region === "stowe-smugglers-notch" ||
+      region === "mad-river-valley" ||
+      region === "southern-vermont" ||
+      region === "okemo" ||
+      region === "jay-peak-nek";
 
     let roads: unknown[] = [];
     let generalAdvice: string;
@@ -1875,6 +2025,23 @@ router.get("/road-conditions", async (req, res) => {
           ? "We do not yet pull live road data for California · check Caltrans QuickMap (quickmap.dot.ca.gov) for closures and highway cameras before you drive. California has no statewide chain law, but Caltrans strongly recommends snow tyres or carrying chains on mountain approaches in winter and can post R1/R2/R3 chain control on specific highways when storms warrant. ⚠️ This region has no dedicated backcountry avalanche-forecasting authority — neither the Sierra Avalanche Center nor the Eastern Sierra Avalanche Center covers it, so no avalanche-bulletin link is offered here rather than pointing at one that doesn't apply."
           : "We do not yet pull live road data for California · check Caltrans QuickMap (quickmap.dot.ca.gov) for closures and highway cameras before you drive. California has no statewide chain law, but Caltrans strongly recommends snow tyres or carrying chains on mountain approaches in winter and can post R1/R2/R3 chain control on specific highways when storms warrant. For backcountry conditions around Mammoth and June Mountain, read the day's forecast from the Eastern Sierra Avalanche Center at esavalanche.org.";
       liveTrafficUrl = "https://quickmap.dot.ca.gov/";
+    } else if (isUsVt) {
+      // No live Vermont road feed is wired yet · say so plainly rather than
+      // shipping an empty list that reads like "all clear". Vermont has NO
+      // statewide chain law for passenger vehicles - only a heavy-vehicle
+      // rule on VT-9 between Wilmington and Bennington, which does not
+      // apply to visitor vehicles - so this is NOT a "not-required, but
+      // check for a posted rule" case like Utah/California; it's a
+      // genuine, permanent absence of a chain law, closer to the Canada
+      // provinces. No Vermont region has a dedicated backcountry
+      // avalanche-forecasting authority (the terrain does not carry
+      // significant avalanche danger, and the Mount Washington Avalanche
+      // Center's forecasts are for New Hampshire's Presidential Range, not
+      // Vermont) - stated explicitly rather than pointing at an
+      // out-of-state authority that doesn't actually cover these regions.
+      generalAdvice =
+        "We do not yet pull live road data for Vermont · check VTrans' 511vt.com for closures, plow-truck tracking (plowtrucks.vtrans.vermont.gov) and highway cameras before you drive. Vermont has no statewide chain law for passenger vehicles (only a heavy-vehicle rule on VT-9 between Wilmington and Bennington that doesn't apply to visitor cars); winter/snow tyres are strongly recommended on mountain approaches, and studded tires are legal year-round. ⚠️ No Vermont ski region has a dedicated backcountry avalanche-forecasting authority - the state's terrain does not carry significant avalanche danger, so no avalanche-bulletin link is offered here rather than pointing at an out-of-state center (e.g. Mount Washington Avalanche Center, which covers New Hampshire) that doesn't actually cover Vermont.";
+      liveTrafficUrl = "https://511vt.com/";
     } else {
       generalAdvice =
         "Live road condition data is not yet available for this region.";

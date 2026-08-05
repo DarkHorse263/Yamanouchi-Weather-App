@@ -63,6 +63,12 @@ export const REGION_IDS = [
   "big-bear",
   "bear-valley",
   "mt-shasta",
+  "killington-pico",
+  "stowe-smugglers-notch",
+  "mad-river-valley",
+  "southern-vermont",
+  "okemo",
+  "jay-peak-nek",
 ] as const;
 export type RegionId = (typeof REGION_IDS)[number];
 
@@ -575,6 +581,78 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "mt-shasta-ski-park": "mt-shasta",
   "mount-shasta": "mt-shasta",
   "mt-shasta-roads": "mt-shasta",
+
+  // Killington/Pico, VT · Killington and Pico Mountain, with 1 base town
+  // (Killington). Name-clash rule: the resort "Killington" equals the
+  // base town name, so the resort id is disambiguated as
+  // killington-resort (mirrors the Breckenridge/Winter Park convention -
+  // resort takes the -resort suffix, town stays bare). First
+  // America/New_York region in the USA module.
+  "killington-resort": "killington-pico",
+  "pico-mountain": "killington-pico",
+  "killington": "killington-pico",
+  "killington-pico-roads": "killington-pico",
+
+  // Stowe/Smugglers' Notch, VT · Stowe Mountain Resort and Smugglers'
+  // Notch, with 2 base towns (Stowe, Jeffersonville). No naming
+  // collisions. Smugglers' Notch is independent for 2025-26 pending a
+  // Feb 2026 acquisition and a 2026-27 joint pass with Burke Mountain
+  // (see stowe-smugglers-notch.ts) - reflected as current-season-only.
+  "stowe-mountain-resort": "stowe-smugglers-notch",
+  "smugglers-notch": "stowe-smugglers-notch",
+  "stowe": "stowe-smugglers-notch",
+  "jeffersonville": "stowe-smugglers-notch",
+  "stowe-smugglers-notch-roads": "stowe-smugglers-notch",
+
+  // Mad River Valley, VT · Sugarbush and Mad River Glen, with 2 base
+  // towns (Warren, Waitsfield). No naming collisions. Mad River Glen is
+  // ski-only for 2025-26 (no snowboarding) - same treatment as Alta/Deer
+  // Valley in the Utah pass - still wired into the registry normally.
+  "sugarbush": "mad-river-valley",
+  "mad-river-glen": "mad-river-valley",
+  "warren": "mad-river-valley",
+  "waitsfield": "mad-river-valley",
+  "mad-river-valley-roads": "mad-river-valley",
+
+  // Southern Vermont, VT · Stratton, Mount Snow, Bromley Mountain and
+  // Magic Mountain, with 4 base towns (Stratton, West Dover, Peru,
+  // Manchester). Name-clash rule: the resort "Stratton" equals the base
+  // town name, so the resort id is disambiguated as
+  // stratton-mountain-resort. Peru and Manchester use a defensive -vt
+  // suffix (peru-vt, manchester-vt) even though no current collision
+  // exists, per the region file's naming note. Magic Mountain did NOT
+  // open for the 2025-26 season (lowest snowfall in 20+ years) - flagged
+  // across the stack per the Sierra-at-Tahoe honesty pattern from the CA
+  // pass - still wired into the registry so the region page can display
+  // the closure honestly rather than 404ing.
+  "stratton-mountain-resort": "southern-vermont",
+  "mount-snow": "southern-vermont",
+  "bromley-mountain": "southern-vermont",
+  "magic-mountain": "southern-vermont",
+  "stratton": "southern-vermont",
+  "west-dover": "southern-vermont",
+  "peru-vt": "southern-vermont",
+  "manchester-vt": "southern-vermont",
+  "southern-vermont-roads": "southern-vermont",
+
+  // Okemo, VT · 1 mountain (Okemo Mountain Resort), with 1 base town
+  // (Ludlow). No naming collisions - the resort's full name "Okemo
+  // Mountain Resort" already reads distinctly from the bare region id
+  // "okemo".
+  "okemo-mountain-resort": "okemo",
+  "ludlow": "okemo",
+  "okemo-roads": "okemo",
+
+  // Jay Peak/Northeast Kingdom, VT · Jay Peak and Burke Mountain, with 2
+  // base towns (Jay, East Burke). No naming collisions. Burke Mountain
+  // shares the same Bear Den Partners acquisition context as Smugglers'
+  // Notch (Feb 2026, joint pass starting 2026-27, not yet in effect) -
+  // both resorts reflected as independent for the current season.
+  "jay-peak": "jay-peak-nek",
+  "burke-mountain": "jay-peak-nek",
+  "jay": "jay-peak-nek",
+  "east-burke": "jay-peak-nek",
+  "jay-peak-nek-roads": "jay-peak-nek",
 };
 
 export function regionForLocation(locationId: string): RegionId | undefined {

@@ -212,6 +212,12 @@ export const GetPowderAlertsQueryParams = zod.object({
       "big-bear",
       "bear-valley",
       "mt-shasta",
+      "killington-pico",
+      "stowe-smugglers-notch",
+      "mad-river-valley",
+      "southern-vermont",
+      "okemo",
+      "jay-peak-nek",
     ])
     .optional()
     .describe(
@@ -1229,6 +1235,12 @@ export const GetWeatherQueryParams = zod.object({
       "big-bear",
       "bear-valley",
       "mt-shasta",
+      "killington-pico",
+      "stowe-smugglers-notch",
+      "mad-river-valley",
+      "southern-vermont",
+      "okemo",
+      "jay-peak-nek",
     ])
     .optional()
     .describe(
@@ -1669,6 +1681,12 @@ export const GetWebcamsQueryParams = zod.object({
       "big-bear",
       "bear-valley",
       "mt-shasta",
+      "killington-pico",
+      "stowe-smugglers-notch",
+      "mad-river-valley",
+      "southern-vermont",
+      "okemo",
+      "jay-peak-nek",
     ])
     .optional()
     .describe(
@@ -1811,6 +1829,12 @@ export const GetRoadConditionsQueryParams = zod.object({
       "big-bear",
       "bear-valley",
       "mt-shasta",
+      "killington-pico",
+      "stowe-smugglers-notch",
+      "mad-river-valley",
+      "southern-vermont",
+      "okemo",
+      "jay-peak-nek",
     ])
     .optional()
     .describe(
@@ -2008,6 +2032,12 @@ export const GetLiftStatusQueryParams = zod.object({
       "big-bear",
       "bear-valley",
       "mt-shasta",
+      "killington-pico",
+      "stowe-smugglers-notch",
+      "mad-river-valley",
+      "southern-vermont",
+      "okemo",
+      "jay-peak-nek",
     ])
     .optional()
     .describe(

@@ -74,6 +74,12 @@ const REGIONS_WITH_ROADS_CONTENT: ReadonlySet<string> = new Set([
   "big-bear",
   "bear-valley",
   "mt-shasta",
+  "killington-pico",
+  "stowe-smugglers-notch",
+  "mad-river-valley",
+  "southern-vermont",
+  "okemo",
+  "jay-peak-nek",
 ]);
 
 /**

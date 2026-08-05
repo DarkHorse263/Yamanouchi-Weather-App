@@ -939,6 +939,103 @@ export const REGIONS = [
       { id: "mount-shasta", name: "Mount Shasta", blurb: "small town at the base of Mt. Shasta, the gateway to Mt. Shasta Ski Park" },
     ],
   },
+  {
+    slug: "killington-pico",
+    name: "Killington/Pico",
+    subtitle: "Vermont · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Killington", blurb: "Beast of the East · Ikon Pass · typically the earliest and latest resort to operate in the Northeast" },
+      { name: "Pico Mountain", blurb: "smaller, quieter neighbor to Killington · 2025-26 closing date not confirmed by resort" },
+    ],
+    towns: [
+      { id: "killington", name: "Killington", blurb: "base town for Killington and Pico Mountain, central Vermont" },
+    ],
+  },
+  {
+    slug: "stowe-smugglers-notch",
+    name: "Stowe/Smugglers' Notch",
+    subtitle: "Vermont · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Stowe Mountain Resort", blurb: "Epic Pass · on Vermont's tallest peak, Mt. Mansfield · base elevation reported 1,340–2,035 ft depending on source, treat as approximate" },
+      { name: "Smugglers' Notch", blurb: "⚠️ independently owned through the 2025-26 season · acquisition by new ownership announced for Feb 2026 with a joint pass alongside Burke planned from 2026-27, not yet in effect · 2025-26 closing date not confirmed by resort" },
+    ],
+    towns: [
+      { id: "stowe", name: "Stowe", blurb: "classic New England resort town, base for Stowe Mountain Resort" },
+      { id: "jeffersonville", name: "Jeffersonville", blurb: "base town for Smugglers' Notch, north side of Mt. Mansfield" },
+    ],
+  },
+  {
+    slug: "mad-river-valley",
+    name: "Mad River Valley",
+    subtitle: "Vermont · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Sugarbush", blurb: "Ikon Pass · twin-peak resort (Lincoln Peak & Mt. Ellen) · 2025-26 closing date not confirmed by resort" },
+      { name: "Mad River Glen", blurb: "⚠️ ski-only (no snowboarding) · independent, co-operatively owned by its skiers · a trial snowboard-access lift was floated for Feb 29 2026, with a possible permanent policy change starting 2026-27, not yet in effect this season" },
+    ],
+    towns: [
+      { id: "warren", name: "Warren", blurb: "village closest to Sugarbush's Lincoln Peak base" },
+      { id: "waitsfield", name: "Waitsfield", blurb: "Mad River Valley's commercial hub, close to both Sugarbush and Mad River Glen" },
+    ],
+  },
+  {
+    slug: "southern-vermont",
+    name: "Southern Vermont",
+    subtitle: "Vermont · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Stratton", blurb: "Ikon Pass · gondola-served summit, one of southern Vermont's largest resorts · confirmed 2025-26 season (opened Nov 26 2025, closed Apr 12 2026)" },
+      { name: "Mount Snow", blurb: "Epic Pass · Vail's Northeast group with Stowe and Okemo · 2025-26 closing date not confirmed by resort" },
+      { name: "Bromley Mountain", blurb: "Indy Pass (first season on Indy for 2025-26) · Vermont's highest base elevation · south-facing sun exposure · 2025-26 closing date not confirmed by resort" },
+      { name: "Magic Mountain", blurb: "⚠️ did not open for the 2025-26 season — lowest snowfall in 20+ years produced the resort's first non-opening in over 20 years under Miller family ownership" },
+    ],
+    towns: [
+      { id: "stratton", name: "Stratton", blurb: "base village for Stratton mountain" },
+      { id: "west-dover", name: "West Dover", blurb: "base town for Mount Snow" },
+      { id: "peru-vt", name: "Peru", blurb: "small village near Bromley Mountain and Manchester" },
+      { id: "manchester-vt", name: "Manchester", blurb: "southern Vermont's commercial hub, close to Bromley and Magic Mountain" },
+    ],
+  },
+  {
+    slug: "okemo",
+    name: "Okemo",
+    subtitle: "Vermont · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Okemo Mountain Resort", blurb: "Epic Pass · Vail's Northeast group with Stowe and Mount Snow · known for wide groomers and strong beginner terrain" },
+    ],
+    towns: [
+      { id: "ludlow", name: "Ludlow", blurb: "base town for Okemo Mountain Resort" },
+    ],
+  },
+  {
+    slug: "jay-peak-nek",
+    name: "Jay Peak/Northeast Kingdom",
+    subtitle: "Vermont · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Jay Peak", blurb: "independent · highest average annual snowfall in the East, close to the Canadian border" },
+      { name: "Burke Mountain", blurb: "independent · 2025-26 closing date not confirmed by resort · joint pass with Smugglers' Notch planned from 2026-27, not yet in effect" },
+    ],
+    towns: [
+      { id: "jay", name: "Jay", blurb: "small village closest to Jay Peak" },
+      { id: "east-burke", name: "East Burke", blurb: "base village for Burke Mountain, Northeast Kingdom" },
+    ],
+  },
 ];
 
 /** Region sub-sections that actually render for this region (see gating notes above). */

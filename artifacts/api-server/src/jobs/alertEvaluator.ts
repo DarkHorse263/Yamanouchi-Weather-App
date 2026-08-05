@@ -159,6 +159,15 @@ const REGION_ANCHORS: Record<RegionId, {
   "big-bear": { lat: 34.2267, lon: -116.8602, elevation: 2685, region: "OTHER", displayName: "Big Bear" },
   "bear-valley": { lat: 38.4706, lon: -120.0471, elevation: 2591, region: "OTHER", displayName: "Bear Valley" },
   "mt-shasta": { lat: 41.3208, lon: -122.2036, elevation: 2377, region: "OTHER", displayName: "Mt. Shasta" },
+
+  // Vermont anchors: each on the highest lift-served summit in the
+  // region. First America/New_York anchors in the USA module.
+  "killington-pico": { lat: 43.6045, lon: -72.8201, elevation: 1293, region: "OTHER", displayName: "Killington/Pico" },
+  "stowe-smugglers-notch": { lat: 44.5303, lon: -72.7883, elevation: 1340, region: "OTHER", displayName: "Stowe/Smugglers' Notch" },
+  "mad-river-valley": { lat: 44.1358, lon: -72.9204, elevation: 1244, region: "OTHER", displayName: "Mad River Valley" },
+  "southern-vermont": { lat: 43.1131, lon: -72.9081, elevation: 1181, region: "OTHER", displayName: "Southern Vermont" },
+  "okemo": { lat: 43.4009, lon: -72.7168, elevation: 1019, region: "OTHER", displayName: "Okemo" },
+  "jay-peak-nek": { lat: 44.9241, lon: -72.5215, elevation: 1209, region: "OTHER", displayName: "Jay Peak/Northeast Kingdom" },
 };
 
 interface EvaluatorReport {

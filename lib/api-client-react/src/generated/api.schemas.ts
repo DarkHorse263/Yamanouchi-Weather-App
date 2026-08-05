@@ -135,6 +135,12 @@ export const RegionId = {
   "big-bear": "big-bear",
   "bear-valley": "bear-valley",
   "mt-shasta": "mt-shasta",
+  "killington-pico": "killington-pico",
+  "stowe-smugglers-notch": "stowe-smugglers-notch",
+  "mad-river-valley": "mad-river-valley",
+  "southern-vermont": "southern-vermont",
+  "okemo": "okemo",
+  "jay-peak-nek": "jay-peak-nek",
 } as const;
 
 export interface HealthStatus {

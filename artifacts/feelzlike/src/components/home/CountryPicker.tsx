@@ -109,6 +109,12 @@ const FALLBACK_REGIONS: Region[] = [
   { id: "big-bear",               name: "Big Bear",                       country: "United States", countryCode: "US", region: "California",      status: "live", href: "/big-bear/",              baseTowns: ["Big Bear Lake"],                                            mountains: ["Bear Mountain", "Snow Summit"],                            headlineLabel: "Big Bear Lake", headline: null },
   { id: "bear-valley",            name: "Bear Valley",                    country: "United States", countryCode: "US", region: "California",      status: "live", href: "/bear-valley/",           baseTowns: ["Arnold"],                                                   mountains: ["Bear Valley Mountain Resort"],                             headlineLabel: "Arnold",       headline: null },
   { id: "mt-shasta",              name: "Mt. Shasta",                     country: "United States", countryCode: "US", region: "California",      status: "live", href: "/mt-shasta/",             baseTowns: ["Mount Shasta"],                                             mountains: ["Mt. Shasta Ski Park"],                                     headlineLabel: "Mount Shasta", headline: null },
+  { id: "killington-pico",        name: "Killington/Pico",                 country: "United States", countryCode: "US", region: "Vermont",         status: "live", href: "/killington-pico/",       baseTowns: ["Killington"],                                               mountains: ["Killington", "Pico Mountain"],                             headlineLabel: "Killington",   headline: null },
+  { id: "stowe-smugglers-notch",  name: "Stowe/Smugglers' Notch",          country: "United States", countryCode: "US", region: "Vermont",         status: "live", href: "/stowe-smugglers-notch/", baseTowns: ["Stowe", "Jeffersonville"],                                  mountains: ["Stowe Mountain Resort", "Smugglers' Notch"],               headlineLabel: "Stowe",        headline: null },
+  { id: "mad-river-valley",       name: "Mad River Valley",                country: "United States", countryCode: "US", region: "Vermont",         status: "live", href: "/mad-river-valley/",      baseTowns: ["Warren", "Waitsfield"],                                     mountains: ["Sugarbush", "Mad River Glen"],                             headlineLabel: "Waitsfield",   headline: null },
+  { id: "southern-vermont",       name: "Southern Vermont",                country: "United States", countryCode: "US", region: "Vermont",         status: "live", href: "/southern-vermont/",      baseTowns: ["Stratton", "West Dover", "Peru", "Manchester"],            mountains: ["Stratton", "Mount Snow", "Bromley Mountain", "Magic Mountain"], headlineLabel: "Manchester",   headline: null },
+  { id: "okemo",                  name: "Okemo",                           country: "United States", countryCode: "US", region: "Vermont",         status: "live", href: "/okemo/",                 baseTowns: ["Ludlow"],                                                   mountains: ["Okemo Mountain Resort"],                                   headlineLabel: "Ludlow",       headline: null },
+  { id: "jay-peak-nek",           name: "Jay Peak/Northeast Kingdom",      country: "United States", countryCode: "US", region: "Vermont",         status: "live", href: "/jay-peak-nek/",          baseTowns: ["Jay", "East Burke"],                                        mountains: ["Jay Peak", "Burke Mountain"],                              headlineLabel: "Jay",          headline: null },
 ];
 
 // Map a region to the base town we surface in the country card. This is
@@ -168,6 +174,12 @@ const PRIMARY_TOWN: Record<string, string> = {
   "big-bear":                 "Big Bear Lake",
   "bear-valley":              "Arnold",
   "mt-shasta":                "Mount Shasta",
+  "killington-pico":          "Killington",
+  "stowe-smugglers-notch":    "Stowe",
+  "mad-river-valley":         "Waitsfield",
+  "southern-vermont":         "Manchester",
+  "okemo":                    "Ludlow",
+  "jay-peak-nek":             "Jay",
 };
 
 // AU + NZ = southern hemisphere (snow Jun-Sep); JP + CA + US = northern (snow Dec-Mar).

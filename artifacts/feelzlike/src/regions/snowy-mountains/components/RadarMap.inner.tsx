@@ -109,7 +109,13 @@ export type RegionKey =
   | "mammoth-lakes"
   | "big-bear"
   | "bear-valley"
-  | "mt-shasta";
+  | "mt-shasta"
+  | "killington-pico"
+  | "stowe-smugglers-notch"
+  | "mad-river-valley"
+  | "southern-vermont"
+  | "okemo"
+  | "jay-peak-nek";
 type ViewMode = "interactive" | "windy" | "official";
 
 interface RegionConfig {
@@ -687,6 +693,60 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       attribution: "National Weather Service · weather radar",
     },
   },
+  "killington-pico": {
+    windy: { lat: 43.60, lon: -72.82, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "stowe-smugglers-notch": {
+    windy: { lat: 44.56, lon: -72.75, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "mad-river-valley": {
+    windy: { lat: 44.17, lon: -72.92, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "southern-vermont": {
+    windy: { lat: 43.15, lon: -72.90, zoom: 9 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "okemo": {
+    windy: { lat: 43.40, lon: -72.72, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "jay-peak-nek": {
+    windy: { lat: 44.76, lon: -72.22, zoom: 9 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
 };
 
 const DEFAULT_ZOOM = 9;
@@ -1233,6 +1293,61 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "mount-shasta", name: "Mount Shasta", lat: 41.3099, lng: -122.3106, accent: "#0ea5e9" },
     ],
   },
+  "killington-pico": {
+    center: { lat: 43.60, lng: -72.82 },
+    pins: [
+      { id: "killington-resort", name: "Killington", lat: 43.6045, lng: -72.8201, accent: "#f97316" },
+      { id: "pico-mountain", name: "Pico Mountain", lat: 43.6659, lng: -72.8323, accent: "#f97316" },
+      { id: "killington", name: "Killington", lat: 43.6042, lng: -72.8092, accent: "#0ea5e9" },
+    ],
+  },
+  "stowe-smugglers-notch": {
+    center: { lat: 44.56, lng: -72.75 },
+    pins: [
+      { id: "stowe-mountain-resort", name: "Stowe Mountain Resort", lat: 44.5303, lng: -72.7883, accent: "#f97316" },
+      { id: "smugglers-notch", name: "Smugglers' Notch", lat: 44.5991, lng: -72.7864, accent: "#f97316" },
+      { id: "stowe", name: "Stowe", lat: 44.4654, lng: -72.6874, accent: "#0ea5e9" },
+      { id: "jeffersonville", name: "Jeffersonville", lat: 44.6511, lng: -72.8298, accent: "#0ea5e9" },
+    ],
+  },
+  "mad-river-valley": {
+    center: { lat: 44.17, lng: -72.92 },
+    pins: [
+      { id: "sugarbush", name: "Sugarbush", lat: 44.1358, lng: -72.9204, accent: "#f97316" },
+      { id: "mad-river-glen", name: "Mad River Glen", lat: 44.2001, lng: -72.9192, accent: "#f97316" },
+      { id: "warren", name: "Warren", lat: 44.1195, lng: -72.8626, accent: "#0ea5e9" },
+      { id: "waitsfield", name: "Waitsfield", lat: 44.1975, lng: -72.8090, accent: "#0ea5e9" },
+    ],
+  },
+  "southern-vermont": {
+    center: { lat: 43.15, lng: -72.90 },
+    pins: [
+      { id: "stratton-mountain-resort", name: "Stratton", lat: 43.1131, lng: -72.9081, accent: "#f97316" },
+      { id: "mount-snow", name: "Mount Snow", lat: 42.9601, lng: -72.9201, accent: "#f97316" },
+      { id: "bromley-mountain", name: "Bromley Mountain", lat: 43.2226, lng: -72.9376, accent: "#f97316" },
+      { id: "magic-mountain", name: "Magic Mountain", lat: 43.1706, lng: -72.7534, accent: "#f97316" },
+      { id: "stratton", name: "Stratton", lat: 43.1334, lng: -72.9298, accent: "#0ea5e9" },
+      { id: "west-dover", name: "West Dover", lat: 42.9709, lng: -72.8265, accent: "#0ea5e9" },
+      { id: "peru-vt", name: "Peru", lat: 43.2333, lng: -72.8990, accent: "#0ea5e9" },
+      { id: "manchester-vt", name: "Manchester", lat: 43.1642, lng: -73.0729, accent: "#0ea5e9" },
+    ],
+  },
+  "okemo": {
+    center: { lat: 43.40, lng: -72.72 },
+    pins: [
+      { id: "okemo-mountain-resort", name: "Okemo Mountain Resort", lat: 43.4009, lng: -72.7168, accent: "#f97316" },
+      { id: "ludlow", name: "Ludlow", lat: 43.3959, lng: -72.7096, accent: "#0ea5e9" },
+    ],
+  },
+  "jay-peak-nek": {
+    center: { lat: 44.76, lng: -72.22 },
+    pins: [
+      { id: "jay-peak", name: "Jay Peak", lat: 44.9241, lng: -72.5215, accent: "#f97316" },
+      { id: "burke-mountain", name: "Burke Mountain", lat: 44.5876, lng: -71.9106, accent: "#f97316" },
+      { id: "jay", name: "Jay", lat: 44.9417, lng: -72.5083, accent: "#0ea5e9" },
+      { id: "east-burke", name: "East Burke", lat: 44.6112, lng: -71.9227, accent: "#0ea5e9" },
+    ],
+  },
 };
 
 // Which country each region sits in. Drives the cross-region grouping on
@@ -1297,6 +1412,12 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "big-bear": "US",
   "bear-valley": "US",
   "mt-shasta": "US",
+  "killington-pico": "US",
+  "stowe-smugglers-notch": "US",
+  "mad-river-valley": "US",
+  "southern-vermont": "US",
+  "okemo": "US",
+  "jay-peak-nek": "US",
 };
 const COUNTRY_LABEL: Record<MapCountry, string> = { AU: "australia", JP: "japan", NZ: "new zealand", CA: "canada", US: "united states" };
 const REGION_LABEL: Record<RegionKey, string> = {
@@ -1355,6 +1476,12 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "big-bear": "big bear",
   "bear-valley": "bear valley",
   "mt-shasta": "mt. shasta",
+  "killington-pico": "killington & pico",
+  "stowe-smugglers-notch": "stowe & smugglers' notch",
+  "mad-river-valley": "mad river valley",
+  "southern-vermont": "southern vermont",
+  "okemo": "okemo",
+  "jay-peak-nek": "jay peak & northeast kingdom",
 };
 
 interface CountryPin extends PinSpec {

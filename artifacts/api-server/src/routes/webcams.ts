@@ -907,6 +907,112 @@ const WEBCAM_DATA: WebcamConfig[] = [
     webcamPageUrl: "https://www.skipark.com/winter/conditions",
     webcams: [],
   },
+  // ─── Resort live-cam pages: Vermont (Killington/Pico) ──────
+  {
+    locationId: "killington-resort",
+    locationName: "Killington live cams",
+    webcamPageUrl: "https://www.killington.com/mountain/conditions-weather",
+    webcams: [],
+  },
+  {
+    locationId: "pico-mountain",
+    // 2025-26 closing date not confirmed by the resort — verify current
+    // status before relying on this page.
+    locationName: "Pico Mountain live cams",
+    webcamPageUrl: "https://www.picomountain.com/",
+    webcams: [],
+  },
+
+  // ─── Resort live-cam pages: Vermont (Stowe/Smugglers' Notch) ──────
+  {
+    locationId: "stowe-mountain-resort",
+    locationName: "Stowe Mountain Resort live cams",
+    webcamPageUrl: "https://www.stowe.com/the-mountain/mountain-report.aspx",
+    webcams: [],
+  },
+  {
+    locationId: "smugglers-notch",
+    // ⚠️ Independent for 2025-26 pending a Feb 2026 acquisition and a
+    // 2026-27 joint pass with Burke Mountain — not yet in effect. No
+    // confirmed live webcam page found in research; falls back to the
+    // main site link rather than guessing a page URL.
+    locationName: "Smugglers' Notch (independent for 2025-26) — webcam status unconfirmed",
+    webcamPageUrl: "https://www.smuggs.com/",
+    webcams: [],
+  },
+
+  // ─── Resort live-cam pages: Vermont (Mad River Valley) ──────
+  {
+    locationId: "sugarbush",
+    // 2025-26 closing date not confirmed by the resort — verify current
+    // status before relying on this page.
+    locationName: "Sugarbush live cams",
+    webcamPageUrl: "https://www.sugarbush.com/mountain/conditions",
+    webcams: [],
+  },
+  {
+    locationId: "mad-river-glen",
+    // ⚠️ Ski-only for 2025-26 — no snowboarding.
+    locationName: "Mad River Glen (⚠️ ski-only, no snowboarding) live cams",
+    webcamPageUrl: "https://www.madriverglen.com/",
+    webcams: [],
+  },
+
+  // ─── Resort live-cam pages: Vermont (Southern Vermont) ──────
+  {
+    locationId: "stratton-mountain-resort",
+    locationName: "Stratton live cams",
+    webcamPageUrl: "https://www.stratton.com/the-mountain/mountain-report",
+    webcams: [],
+  },
+  {
+    locationId: "mount-snow",
+    // 2025-26 closing date not confirmed by the resort — verify current
+    // status before relying on this page.
+    locationName: "Mount Snow live cams",
+    webcamPageUrl: "https://www.mountsnow.com/",
+    webcams: [],
+  },
+  {
+    locationId: "bromley-mountain",
+    // 2025-26 closing date not confirmed by the resort — verify current
+    // status before relying on this page.
+    locationName: "Bromley Mountain live cams",
+    webcamPageUrl: "https://www.bromley.com/",
+    webcams: [],
+  },
+  {
+    locationId: "magic-mountain",
+    // ⚠️ Did NOT open for the 2025-26 season — same treatment as
+    // Sierra-at-Tahoe in the California pass.
+    locationName: "Magic Mountain (⚠️ closed for 2025/26 season)",
+    webcamPageUrl: "https://www.magicmtn.com/",
+    webcams: [],
+  },
+
+  // ─── Resort live-cam pages: Vermont (Okemo) ──────
+  {
+    locationId: "okemo-mountain-resort",
+    locationName: "Okemo Mountain Resort live cams",
+    webcamPageUrl: "https://www.okemo.com/the-mountain/mountain-report.aspx",
+    webcams: [],
+  },
+
+  // ─── Resort live-cam pages: Vermont (Jay Peak/Northeast Kingdom) ──────
+  {
+    locationId: "jay-peak",
+    locationName: "Jay Peak live cams",
+    webcamPageUrl: "https://jaypeakresort.com/mountain/conditions",
+    webcams: [],
+  },
+  {
+    locationId: "burke-mountain",
+    // ⚠️ Newly linked to Smugglers' Notch via shared Bear Den Partners
+    // ownership (Feb 2026); 2025-26 closing date not confirmed.
+    locationName: "Burke Mountain live cams",
+    webcamPageUrl: "https://www.skiburke.com/",
+    webcams: [],
+  },
 
   // ─── Roadside cams: Colorado ───────────────────────────────
   // CDOT's cotrip.org runs a large public highway-camera network, but does
@@ -1043,6 +1149,48 @@ const WEBCAM_DATA: WebcamConfig[] = [
     locationId: "mt-shasta-roads",
     locationName: "Roads to Mt. Shasta · I-5 & SR-89",
     webcamPageUrl: "https://quickmap.dot.ca.gov/",
+    webcams: [],
+  },
+
+  // ─── Roadside cams: Vermont ─────────────────────────────────────
+  // VTrans' 511vt.com (and the shared newengland511.org platform) runs a
+  // public highway-camera network, but does not expose a stable deep link
+  // per camera that survives a season — same honest page-only-link
+  // pattern as CO/UT/CA.
+  {
+    locationId: "killington-pico-roads",
+    locationName: "Roads to Killington/Pico · US-4",
+    webcamPageUrl: "https://511vt.com/",
+    webcams: [],
+  },
+  {
+    locationId: "stowe-smugglers-notch-roads",
+    locationName: "Roads to Stowe/Smugglers' Notch · VT-108",
+    webcamPageUrl: "https://511vt.com/",
+    webcams: [],
+  },
+  {
+    locationId: "mad-river-valley-roads",
+    locationName: "Roads to Mad River Valley · VT-100 & VT-17",
+    webcamPageUrl: "https://511vt.com/",
+    webcams: [],
+  },
+  {
+    locationId: "southern-vermont-roads",
+    locationName: "Roads to Southern Vermont · VT-30, VT-100 & VT-11",
+    webcamPageUrl: "https://511vt.com/",
+    webcams: [],
+  },
+  {
+    locationId: "okemo-roads",
+    locationName: "Roads to Okemo · VT-103",
+    webcamPageUrl: "https://511vt.com/",
+    webcams: [],
+  },
+  {
+    locationId: "jay-peak-nek-roads",
+    locationName: "Roads to Jay Peak/Northeast Kingdom · VT-105, VT-242 & VT-114",
+    webcamPageUrl: "https://511vt.com/",
     webcams: [],
   },
 ];

@@ -240,6 +240,33 @@ const CA_ROADS_GENERAL: SourceGroup = {
   ],
 };
 
+/**
+ * Vermont reference block. Vermont has no dedicated backcountry
+ * avalanche-forecasting authority (no significant avalanche terrain in the
+ * Green Mountains) — applied to ALL six VT regions, same honesty pattern as
+ * CA_OFFICIAL_REFERENCES_NO_AVALANCHE, since none of them have coverage.
+ */
+const VT_OFFICIAL_REFERENCES: SourceGroup = {
+  title: "Official references",
+  titleJa: "公式参照先",
+  blurb:
+    "Link-outs, not wired feeds · conditions shown on feelzlike come from the forecast ensemble below, so check these before you drive or tour. ⚠️ Vermont has no significant avalanche terrain and no dedicated backcountry avalanche-forecasting authority — no avalanche-bulletin link is offered here rather than pointing at one that doesn't apply.",
+  blurbJa:
+    "リンクのみで、データ連携はしていません。feelzlikeの数値は下記の予報モデルによるものです。走行・ツアー前に必ず公式情報をご確認ください。バーモント州には雪崩予報機関はありません。",
+  items: [
+    { label: "National Weather Service", detail: "US federal forecasts & warnings", url: "https://www.weather.gov/" },
+  ],
+};
+const VT_ROADS_GENERAL: SourceGroup = {
+  title: "Roads & transport",
+  titleJa: "道路・交通",
+  blurb: "Vermont has no winter chain law — unlike CO/UT/CA, VTrans does not operate a chain-control tier system.",
+  blurbJa: "バーモント州にはチェーン法規はありません。",
+  items: [
+    { label: "VTrans · 511vt.com", detail: "statewide real-time road conditions & camera map", url: "https://511vt.com/" },
+  ],
+};
+
 const REGION_SOURCES: Record<string, SourceGroup[]> = {
   "snowy-mountains": [
     {
@@ -661,6 +688,85 @@ const REGION_SOURCES: Record<string, SourceGroup[]> = {
       titleJa: "スキー場・リフト",
       items: [
         { label: "Mt. Shasta Ski Park", detail: "2025-26 season closed early (Mar 2, 2026) for lack of snow; base/summit elevation unverified", url: "https://www.skipark.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "killington-pico": [
+    VT_OFFICIAL_REFERENCES,
+    VT_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Killington", detail: "Beast of the East · Ikon Pass · typically the earliest and latest resort to operate in the Northeast", url: "https://www.killington.com/" },
+        { label: "Pico Mountain", detail: "2025-26 closing date not confirmed by resort", url: "https://www.picomountain.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "stowe-smugglers-notch": [
+    VT_OFFICIAL_REFERENCES,
+    VT_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Stowe Mountain Resort", detail: "Epic Pass · Vermont's tallest peak, Mt. Mansfield · base elevation reported 1,340–2,035 ft depending on source, treat as approximate", url: "https://www.stowe.com/" },
+        { label: "Smugglers' Notch", detail: "⚠️ independently owned through the 2025-26 season · acquisition by new ownership announced for Feb 2026 with a joint pass alongside Burke planned from 2026-27, not yet in effect · 2025-26 closing date not confirmed by resort", url: "https://www.smuggs.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "mad-river-valley": [
+    VT_OFFICIAL_REFERENCES,
+    VT_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Sugarbush", detail: "Ikon Pass · twin-peak resort (Lincoln Peak & Mt. Ellen) · 2025-26 closing date not confirmed by resort", url: "https://www.sugarbush.com/" },
+        { label: "Mad River Glen (⚠️ ski-only, no snowboarding)", detail: "independent, co-operatively owned by its skiers · a trial snowboard-access lift was floated for Feb 29 2026, with a possible permanent policy change starting 2026-27, not yet in effect this season", url: "https://www.madriverglen.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "southern-vermont": [
+    VT_OFFICIAL_REFERENCES,
+    VT_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Stratton", detail: "Ikon Pass · confirmed 2025-26 season (opened Nov 26 2025, closed Apr 12 2026)", url: "https://www.stratton.com/" },
+        { label: "Mount Snow", detail: "Epic Pass · Vail's Northeast group with Stowe and Okemo · 2025-26 closing date not confirmed by resort", url: "https://www.mountsnow.com/" },
+        { label: "Bromley Mountain", detail: "Indy Pass (first season on Indy for 2025-26) · 2025-26 closing date not confirmed by resort", url: "https://www.bromley.com/" },
+        { label: "Magic Mountain (⚠️ did not open for 2025-26 season)", detail: "lowest snowfall in 20+ years produced the resort's first non-opening in over 20 years · elevation shown reflects confirmed data, not current-season conditions", url: "https://www.magicmtn.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "okemo": [
+    VT_OFFICIAL_REFERENCES,
+    VT_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Okemo Mountain Resort", detail: "Epic Pass · Vail's Northeast group with Stowe and Mount Snow", url: "https://www.okemo.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "jay-peak-nek": [
+    VT_OFFICIAL_REFERENCES,
+    VT_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Jay Peak", detail: "independent · highest average annual snowfall in the East, close to the Canadian border", url: "https://jaypeakresort.com/" },
+        { label: "Burke Mountain", detail: "independent · 2025-26 closing date not confirmed by resort · joint pass with Smugglers' Notch planned from 2026-27, not yet in effect", url: "https://www.skiburke.com/" },
       ],
     },
     FORECAST_ENSEMBLE,

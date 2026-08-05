@@ -54,6 +54,12 @@ import { mammothLakesRegion } from "./mammoth-lakes";
 import { bigBearRegion } from "./big-bear";
 import { bearValleyRegion } from "./bear-valley";
 import { mtShastaRegion } from "./mt-shasta";
+import { killingtonPicoRegion } from "./killington-pico";
+import { stoweSmugglersNotchRegion } from "./stowe-smugglers-notch";
+import { madRiverValleyRegion } from "./mad-river-valley";
+import { southernVermontRegion } from "./southern-vermont";
+import { okemoRegion } from "./okemo";
+import { jayPeakNekRegion } from "./jay-peak-nek";
 
 // Active region registry · AU: Snowy Mountains + Victoria's High Country
 // + Tasmania (Ben Lomond). JP: Yamanouchi (Shiga Kogen + Kita-Shiga),
@@ -86,7 +92,13 @@ import { mtShastaRegion } from "./mt-shasta";
 // Homewood Mountain Resort), Mammoth Lakes (Mammoth Mountain, June
 // Mountain), Big Bear (Bear Mountain, Snow Summit), Bear Valley (Bear
 // Valley Mountain Resort), Mt. Shasta (Mt. Shasta Ski Park). First
-// Pacific-timezone (America/Los_Angeles) US regions on this branch.
+// Pacific-timezone (America/Los_Angeles) US regions on this branch. US
+// (Vermont): Killington/Pico (Killington, Pico Mountain), Stowe/
+// Smugglers' Notch (Stowe Mountain Resort, Smugglers' Notch), Mad River
+// Valley (Sugarbush, Mad River Glen), Southern Vermont (Stratton, Mount
+// Snow, Bromley Mountain, Magic Mountain), Okemo (Okemo Mountain
+// Resort), Jay Peak/Northeast Kingdom (Jay Peak, Burke Mountain). First
+// Eastern-timezone (America/New_York) US regions on this branch.
 export const REGIONS: RegionConfig[] = [
   snowyMountainsRegion,
   victoriasHighCountryRegion,
@@ -143,6 +155,12 @@ export const REGIONS: RegionConfig[] = [
   bigBearRegion,
   bearValleyRegion,
   mtShastaRegion,
+  killingtonPicoRegion,
+  stoweSmugglersNotchRegion,
+  madRiverValleyRegion,
+  southernVermontRegion,
+  okemoRegion,
+  jayPeakNekRegion,
 ];
 
 export const REGION_BY_ID: Record<string, RegionConfig> = Object.fromEntries(
@@ -214,6 +232,12 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "big-bear": "US",
   "bear-valley": "US",
   "mt-shasta": "US",
+  "killington-pico": "US",
+  "stowe-smugglers-notch": "US",
+  "mad-river-valley": "US",
+  "southern-vermont": "US",
+  "okemo": "US",
+  "jay-peak-nek": "US",
 };
 export const COUNTRY_META: Record<CountryCode, { name: string; flag: string }> = {
   AU: { name: "Australia", flag: "🇦🇺" },

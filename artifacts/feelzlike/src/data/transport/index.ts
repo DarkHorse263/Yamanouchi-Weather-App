@@ -70,6 +70,12 @@ import { MAMMOTH_LAKES_TRANSPORT } from "./mammoth-lakes";
 import { BIG_BEAR_TRANSPORT } from "./big-bear";
 import { BEAR_VALLEY_TRANSPORT } from "./bear-valley";
 import { MT_SHASTA_TRANSPORT } from "./mt-shasta";
+import { KILLINGTON_PICO_TRANSPORT } from "./killington-pico";
+import { STOWE_SMUGGLERS_NOTCH_TRANSPORT } from "./stowe-smugglers-notch";
+import { MAD_RIVER_VALLEY_TRANSPORT } from "./mad-river-valley";
+import { SOUTHERN_VERMONT_TRANSPORT } from "./southern-vermont";
+import { OKEMO_TRANSPORT } from "./okemo";
+import { JAY_PEAK_NEK_TRANSPORT } from "./jay-peak-nek";
 
 const REGISTRY: Record<RegionId, TransportProviderList> = {
   "snowy-mountains": SNOWY_MOUNTAINS_TRANSPORT,
@@ -135,6 +141,15 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   "big-bear": BIG_BEAR_TRANSPORT,
   "bear-valley": BEAR_VALLEY_TRANSPORT,
   "mt-shasta": MT_SHASTA_TRANSPORT,
+  // US (Vermont) · no operators curated to the AU/JP/NZ verification
+  // standard yet, so these are registered empty rather than filled with
+  // guessed timetables.
+  "killington-pico": KILLINGTON_PICO_TRANSPORT,
+  "stowe-smugglers-notch": STOWE_SMUGGLERS_NOTCH_TRANSPORT,
+  "mad-river-valley": MAD_RIVER_VALLEY_TRANSPORT,
+  "southern-vermont": SOUTHERN_VERMONT_TRANSPORT,
+  okemo: OKEMO_TRANSPORT,
+  "jay-peak-nek": JAY_PEAK_NEK_TRANSPORT,
 };
 
 // Loader-time integrity check.

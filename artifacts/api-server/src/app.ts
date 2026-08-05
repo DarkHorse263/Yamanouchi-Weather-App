@@ -472,6 +472,30 @@ if (process.env.NODE_ENV === "production") {
       name: "Mt. Shasta",
       towns: { "mount-shasta": "Mount Shasta" },
     },
+    "killington-pico": {
+      name: "Killington/Pico",
+      towns: { killington: "Killington" },
+    },
+    "stowe-smugglers-notch": {
+      name: "Stowe/Smugglers' Notch",
+      towns: { stowe: "Stowe", jeffersonville: "Jeffersonville" },
+    },
+    "mad-river-valley": {
+      name: "Mad River Valley",
+      towns: { warren: "Warren", waitsfield: "Waitsfield" },
+    },
+    "southern-vermont": {
+      name: "Southern Vermont",
+      towns: { stratton: "Stratton", "west-dover": "West Dover", "peru-vt": "Peru", "manchester-vt": "Manchester" },
+    },
+    "okemo": {
+      name: "Okemo",
+      towns: { ludlow: "Ludlow" },
+    },
+    "jay-peak-nek": {
+      name: "Jay Peak/Northeast Kingdom",
+      towns: { jay: "Jay", "east-burke": "East Burke" },
+    },
   };
 
   // Top-level routes handled by the SPA (before the /:region catch-all).

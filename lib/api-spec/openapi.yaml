@@ -1721,6 +1721,12 @@ components:
         - big-bear
         - bear-valley
         - mt-shasta
+        - killington-pico
+        - stowe-smugglers-notch
+        - mad-river-valley
+        - southern-vermont
+        - okemo
+        - jay-peak-nek
       description: |
         Canonical region identifier used across the FeelZlike platform.
 
