@@ -1394,6 +1394,9 @@ const WEBCAM_DATA: WebcamConfig[] = [
   {locationId:"wachusett-mountain",locationName:"Wachusett Mountain cameras",webcamPageUrl:"https://www.wachusett.com/the-mountain/your-visit/snow-report/",webcams:[]}, // cameras referenced through report; distinct URL unconfirmed
   {locationId:"berkshires-roads",locationName:"Berkshires roads · Mass511",webcamPageUrl:"https://mass511.com/",webcams:[]},
   {locationId:"central-massachusetts-roads",locationName:"Central Massachusetts roads · Mass511",webcamPageUrl:"https://mass511.com/",webcams:[]},
+  // Minnesota · Lutsen official webcam page confirmed; page-only link avoids fabricated feed URLs.
+  {locationId:"lutsen-mountains",locationName:"Lutsen Mountains live cam",webcamPageUrl:"https://www.lutsen.com/mountain-info/our-webcam",webcams:[]},
+  {locationId:"lutsen-north-shore-roads",locationName:"North Shore roads · 511 Minnesota",webcamPageUrl:"https://511mn.org/",webcams:[]},
 
   // ─── Resort live-cam pages: Oregon (Mt. Hood) ──────
   {

@@ -542,6 +542,7 @@ if (process.env.NODE_ENV === "production") {
     "laurel-highlands": { name: "Laurel Highlands", towns: { "seven-springs-town": "Seven Springs" } },
     "berkshires": { name:"Berkshires", towns:{hancock:"Hancock","great-barrington":"Great Barrington"} },
     "central-massachusetts": { name:"Central Massachusetts", towns:{"princeton-ma":"Princeton"} },
+    "lutsen-north-shore": { name:"Lutsen / North Shore", towns:{lutsen:"Lutsen"} },
     "mt-hood": {
       name: "Mt. Hood",
       towns: { "government-camp": "Government Camp" },

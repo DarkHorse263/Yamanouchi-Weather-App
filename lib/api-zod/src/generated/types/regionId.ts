@@ -90,6 +90,7 @@ export const RegionId = {
   "laurel-highlands": "laurel-highlands",
   "berkshires": "berkshires",
   "central-massachusetts": "central-massachusetts",
+  "lutsen-north-shore": "lutsen-north-shore",
   "mt-hood": "mt-hood",
   "bend": "bend",
   "crystal-mountain": "crystal-mountain",

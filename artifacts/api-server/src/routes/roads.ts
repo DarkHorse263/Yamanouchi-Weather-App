@@ -919,6 +919,9 @@ function paChainEntry(opts: { id:string; regionId:string; mountainId:string; mou
 /** Massachusetts has no general passenger chain or winter-tire mandate; studs are Nov 1-Apr 30 only. */
 function maChainEntry(opts:{id:string;regionId:string;mountainId:string;mountainName:string;approach:string;detail:string;inSeason:boolean;issuedAt:string}) {return {id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"No passenger chain mandate":"Outside ski season",detail:`Massachusetts has no general passenger chain or winter-tire mandate; studded tires are permitted Nov 1-Apr 30 only. ${opts.detail}`,issuedAt:opts.issuedAt};}
 
+/** Minnesota has no passenger chain or winter-tire mandate; residents may not use studded tires. */
+function mnChainEntry(opts:{id:string;regionId:string;mountainId:string;mountainName:string;approach:string;detail:string;inSeason:boolean;issuedAt:string}){return{id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"No passenger chain mandate":"Outside ski season",detail:`Minnesota has no passenger chain or winter-tire mandate; resident studded tires are banned year-round. ${opts.detail}`,issuedAt:opts.issuedAt};}
+
 function nmChainEntry(opts: {
   id: string;
   regionId: string;
@@ -2144,6 +2147,8 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
 
   if(regionId==="berkshires"||regionId==="central-massachusetts"){const inSeason=isUsSnowSeason(now);const ma=(id:string,mountainId:string,mountainName:string,approach:string,detail:string)=>maChainEntry({id,regionId,mountainId,mountainName,approach,detail,inSeason,issuedAt});if(regionId==="berkshires")return[ma("jiminy-ma-43","jiminy-peak","Jiminy Peak","US-20/MA-43 to Hancock","Check Mass511 before winter travel."),ma("butternut-ma-23","ski-butternut","Ski Butternut","MA-23 near Great Barrington","Check Mass511 before winter travel."),ma("berkshire-east-ma-2","berkshire-east","Berkshire East","MA-2/Mohawk Trail to Charlemont","Check Mass511 before winter travel.")];return[ma("wachusett-ma-31","wachusett-mountain","Wachusett Mountain","MA-31/West Mountain Rd to Princeton","Check Mass511 before winter travel.")];}
 
+  if(regionId==="lutsen-north-shore"){const inSeason=isUsSnowSeason(now);return[mnChainEntry({id:"lutsen-us-61",regionId,mountainId:"lutsen-mountains",mountainName:"Lutsen Mountains",approach:"US/MN Highway 61 along Lake Superior’s North Shore",detail:"⚠️ Highway 61 can close suddenly in localized Lake Superior lake-effect snow and whiteouts; check 511MN before travelling.",inSeason,issuedAt})];}
+
   if (
     regionId === "taos" ||
     regionId === "angel-fire" ||
@@ -2658,6 +2663,7 @@ router.get("/road-conditions", async (req, res) => {
     const isUsMi = region === "harbor-springs" || region === "keweenaw-peninsula";
     const isUsPa = region === "poconos" || region === "laurel-highlands";
     const isUsMa = region === "berkshires" || region === "central-massachusetts";
+    const isUsMn = region === "lutsen-north-shore";
     const isUsNm =
       region === "taos" ||
       region === "angel-fire" ||
@@ -2841,6 +2847,9 @@ router.get("/road-conditions", async (req, res) => {
     } else if (isUsMa) {
       generalAdvice = "We do not yet pull live road data for Massachusetts · check MassDOT's Mass511 (mass511.com) for closures, cameras and winter travel alerts. Massachusetts has no general passenger-vehicle chain or winter-tire mandate; studded tires are allowed only Nov 1-Apr 30. No avalanche authority is needed here: these low-relief groomed ski areas have no meaningful avalanche hazard.";
       liveTrafficUrl = "https://mass511.com/";
+    } else if (isUsMn) {
+      generalAdvice = "We do not yet pull live road data for Minnesota · check MnDOT's 511 Minnesota (511mn.org) for North Shore road conditions, cameras and closures. ⚠️ Highway 61 can see sudden Lake Superior lake-effect snow whiteouts and full closures. Minnesota has no passenger chain or winter-tire mandate; resident studded tires are banned year-round. No avalanche authority is needed here: North Shore ski terrain has no meaningful avalanche hazard.";
+      liveTrafficUrl = "https://511mn.org/";
     } else if (isUsNm) {
       // No live New Mexico road feed is wired yet - say so plainly rather
       // than shipping an empty list that reads like "all clear". New

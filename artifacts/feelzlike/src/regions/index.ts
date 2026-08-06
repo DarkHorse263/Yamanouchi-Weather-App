@@ -76,6 +76,7 @@ import { poconosRegion } from "./poconos";
 import { laurelHighlandsRegion } from "./laurel-highlands";
 import { berkshiresRegion } from "./berkshires";
 import { centralMassachusettsRegion } from "./central-massachusetts";
+import { lutsenNorthShoreRegion } from "./lutsen-north-shore";
 import { mtHoodRegion } from "./mt-hood";
 import { bendRegion } from "./bend";
 import { crystalMountainRegion } from "./crystal-mountain";
@@ -215,6 +216,7 @@ export const REGIONS: RegionConfig[] = [
   laurelHighlandsRegion,
   berkshiresRegion,
   centralMassachusettsRegion,
+  lutsenNorthShoreRegion,
   mtHoodRegion,
   bendRegion,
   crystalMountainRegion,
@@ -330,6 +332,7 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "laurel-highlands": "US",
   "berkshires": "US",
   "central-massachusetts": "US",
+  "lutsen-north-shore": "US",
   "mt-hood": "US",
   "bend": "US",
   "crystal-mountain": "US",

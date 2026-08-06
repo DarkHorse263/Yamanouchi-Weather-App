@@ -1351,6 +1351,8 @@ export const REGIONS = [
   {slug:"berkshires",name:"Berkshires",subtitle:"Massachusetts · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Jiminy Peak",blurb:"independent · Ikon Bonus Mountain"},{name:"Ski Butternut",blurb:"independent · Ikon Bonus Mountain"},{name:"Berkshire East",blurb:"Indy Pass · Bear Den Partners 2026 acquisition · longer regional drive · no confirmed live webcam"}],towns:[{id:"hancock",name:"Hancock",blurb:"Jiminy Peak base town"},{id:"great-barrington",name:"Great Barrington",blurb:"Southern Berkshires base town"}]},
   {slug:"central-massachusetts",name:"Central Massachusetts",subtitle:"Massachusetts · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Wachusett Mountain",blurb:"independent · “Boston's Mountain” day-trip and night-skiing identity"}],towns:[{id:"princeton-ma",name:"Princeton",blurb:"Wachusett base town"}]},
 
+  {slug:"lutsen-north-shore",name:"Lutsen / North Shore",subtitle:"Minnesota · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Lutsen Mountains",blurb:"Indy Pass 2025-26 · ⚠️ confirmed Ikon move 2026-27 · Minnesota's largest/highest vertical, not Midwest highest"}],towns:[{id:"lutsen",name:"Lutsen",blurb:"North Shore base town; Highway 61 lake-effect closure risk"}]},
+
 ];
 
 /** Region sub-sections that actually render for this region (see gating notes above). */

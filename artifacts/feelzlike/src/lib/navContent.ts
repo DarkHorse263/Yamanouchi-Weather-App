@@ -96,6 +96,7 @@ const REGIONS_WITH_ROADS_CONTENT: ReadonlySet<string> = new Set([
   "laurel-highlands",
   "berkshires",
   "central-massachusetts",
+  "lutsen-north-shore",
   "mt-hood",
   "bend",
   "crystal-mountain",

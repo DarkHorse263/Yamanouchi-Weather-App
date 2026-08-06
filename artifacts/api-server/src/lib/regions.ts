@@ -107,6 +107,7 @@ export const REGION_IDS = [
   "laurel-highlands",
   "berkshires",
   "central-massachusetts",
+  "lutsen-north-shore",
 ] as const;
 export type RegionId = (typeof REGION_IDS)[number];
 
@@ -780,6 +781,9 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "wachusett-mountain": "central-massachusetts",
   "princeton-ma": "central-massachusetts",
   "central-massachusetts-roads": "central-massachusetts",
+  "lutsen-mountains": "lutsen-north-shore",
+  "lutsen": "lutsen-north-shore",
+  "lutsen-north-shore-roads": "lutsen-north-shore",
 
   // Mt. Hood, OR. Three resorts sharing one base town (Government Camp).
   "mt-hood-meadows": "mt-hood",
