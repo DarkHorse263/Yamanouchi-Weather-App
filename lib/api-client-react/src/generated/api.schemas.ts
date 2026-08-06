@@ -151,6 +151,8 @@ export const RegionId = {
   "angel-fire": "angel-fire",
   "santa-fe": "santa-fe",
   "albuquerque-sandia": "albuquerque-sandia",
+  "harbor-springs": "harbor-springs",
+  "keweenaw-peninsula": "keweenaw-peninsula",
   "mt-hood": "mt-hood",
   "bend": "bend",
   "crystal-mountain": "crystal-mountain",

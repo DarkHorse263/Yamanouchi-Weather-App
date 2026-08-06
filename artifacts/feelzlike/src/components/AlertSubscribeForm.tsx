@@ -98,6 +98,8 @@ export const ALERT_REGIONS: Array<{ id: string; nameEn: string; nameJa: string; 
   { id: "angel-fire", nameEn: "Angel Fire", nameJa: "エンジェルファイア", country: "US · New Mexico" },
   { id: "santa-fe", nameEn: "Santa Fe", nameJa: "サンタフェ", country: "US · New Mexico" },
   { id: "albuquerque-sandia", nameEn: "Albuquerque", nameJa: "アルバカーキー", country: "US · New Mexico" },
+  { id: "harbor-springs", nameEn: "Harbor Springs", nameJa: "ハーバースプリングス", country: "US · Michigan" },
+  { id: "keweenaw-peninsula", nameEn: "Keweenaw Peninsula", nameJa: "キーウィノー半島", country: "US · Michigan" },
   { id: "mt-hood", nameEn: "Mt. Hood", nameJa: "マウントフッド", country: "US · Oregon" },
   { id: "bend", nameEn: "Bend", nameJa: "ベンド", country: "US · Oregon" },
   { id: "crystal-mountain", nameEn: "Crystal Mountain", nameJa: "クリスタルマウンテン", country: "US · Washington" },

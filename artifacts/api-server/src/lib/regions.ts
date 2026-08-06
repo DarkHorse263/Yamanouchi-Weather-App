@@ -101,6 +101,8 @@ export const REGION_IDS = [
   "hunter",
   "windham",
   "highmount",
+  "harbor-springs",
+  "keweenaw-peninsula",
 ] as const;
 export type RegionId = (typeof REGION_IDS)[number];
 
@@ -745,6 +747,16 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "sandia-peak": "albuquerque-sandia",
   "albuquerque": "albuquerque-sandia",
   "albuquerque-sandia-roads": "albuquerque-sandia",
+
+  // Michigan · official Eastern time includes Keweenaw/Mt. Bohemia.
+  "boyne-mountain": "harbor-springs",
+  "boyne-highlands": "harbor-springs",
+  "nubs-nob": "harbor-springs",
+  "harbor-springs-town": "harbor-springs",
+  "harbor-springs-roads": "harbor-springs",
+  "mt-bohemia": "keweenaw-peninsula",
+  "mohawk": "keweenaw-peninsula",
+  "keweenaw-peninsula-roads": "keweenaw-peninsula",
 
   // Mt. Hood, OR. Three resorts sharing one base town (Government Camp).
   "mt-hood-meadows": "mt-hood",

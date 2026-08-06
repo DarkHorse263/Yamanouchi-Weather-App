@@ -70,6 +70,8 @@ import { taosRegion } from "./taos";
 import { angelFireRegion } from "./angel-fire";
 import { santaFeRegion } from "./santa-fe";
 import { albuquerqueSandiaRegion } from "./albuquerque-sandia";
+import { harborSpringsRegion } from "./harbor-springs";
+import { keweenawPeninsulaRegion } from "./keweenaw-peninsula";
 import { mtHoodRegion } from "./mt-hood";
 import { bendRegion } from "./bend";
 import { crystalMountainRegion } from "./crystal-mountain";
@@ -203,6 +205,8 @@ export const REGIONS: RegionConfig[] = [
   angelFireRegion,
   santaFeRegion,
   albuquerqueSandiaRegion,
+  harborSpringsRegion,
+  keweenawPeninsulaRegion,
   mtHoodRegion,
   bendRegion,
   crystalMountainRegion,
@@ -312,6 +316,8 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "angel-fire": "US",
   "santa-fe": "US",
   "albuquerque-sandia": "US",
+  "harbor-springs": "US",
+  "keweenaw-peninsula": "US",
   "mt-hood": "US",
   "bend": "US",
   "crystal-mountain": "US",

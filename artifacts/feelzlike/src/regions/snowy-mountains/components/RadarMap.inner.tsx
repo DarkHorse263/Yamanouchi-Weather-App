@@ -147,7 +147,9 @@ export type RegionKey =
   | "north-creek"
   | "hunter"
   | "windham"
-  | "highmount";
+  | "highmount"
+  | "harbor-springs"
+  | "keweenaw-peninsula";
 type ViewMode = "interactive" | "windy" | "official";
 
 interface RegionConfig {
@@ -869,6 +871,8 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       attribution: "National Weather Service · weather radar",
     },
   },
+  "harbor-springs": { windy: { lat: 45.42, lon: -84.95, zoom: 10 }, official: { label: "NWS weather radar", imageUrl: null, href: "https://radar.weather.gov/", attribution: "National Weather Service · weather radar" } },
+  "keweenaw-peninsula": { windy: { lat: 47.39, lon: -88.20, zoom: 9 }, official: { label: "NWS weather radar", imageUrl: null, href: "https://radar.weather.gov/", attribution: "National Weather Service · weather radar" } },
   "mt-hood": {
     windy: { lat: 45.32, lon: -121.72, zoom: 10 },
     official: {
@@ -1644,6 +1648,8 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "albuquerque", name: "Albuquerque", lat: 35.0844, lng: -106.6504, accent: "#0ea5e9" },
     ],
   },
+  "harbor-springs": { center: { lat: 45.39, lng: -84.95 }, pins: [{ id: "boyne-mountain", name: "Boyne Mountain", lat: 45.1639, lng: -84.9308, accent: "#f97316" }, { id: "boyne-highlands", name: "The Highlands", lat: 45.4717, lng: -84.9233, accent: "#f97316" }, { id: "nubs-nob", name: "Nub's Nob", lat: 45.4623, lng: -84.9420, accent: "#f97316" }, { id: "harbor-springs-town", name: "Harbor Springs", lat: 45.4317, lng: -84.9889, accent: "#0ea5e9" }] },
+  "keweenaw-peninsula": { center: { lat: 47.38, lng: -88.24 }, pins: [{ id: "mt-bohemia", name: "Mt. Bohemia", lat: 47.4080, lng: -88.1010, accent: "#f97316" }, { id: "mohawk", name: "Mohawk", lat: 47.3308, lng: -88.3743, accent: "#0ea5e9" }] },
   "mt-hood": {
     center: { lat: 45.320, lng: -121.720 },
     pins: [
@@ -1810,6 +1816,8 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "angel-fire": "US",
   "santa-fe": "US",
   "albuquerque-sandia": "US",
+  "harbor-springs": "US",
+  "keweenaw-peninsula": "US",
   "mt-hood": "US",
   "bend": "US",
   "crystal-mountain": "US",
@@ -1906,6 +1914,8 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "angel-fire": "angel fire",
   "santa-fe": "santa fe",
   "albuquerque-sandia": "albuquerque",
+  "harbor-springs": "harbor springs",
+  "keweenaw-peninsula": "keweenaw peninsula",
   "mt-hood": "mt. hood",
   "bend": "bend",
   "crystal-mountain": "crystal mountain",

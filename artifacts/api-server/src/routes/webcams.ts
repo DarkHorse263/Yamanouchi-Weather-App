@@ -1372,6 +1372,14 @@ const WEBCAM_DATA: WebcamConfig[] = [
     webcams: [],
   },
 
+  // ─── Michigan resort and road pages · no fabricated deep camera feeds ───
+  { locationId: "boyne-mountain", locationName: "Boyne Mountain live cams", webcamPageUrl: "https://www.boynemountain.com/mountain-report", webcams: [] },
+  { locationId: "boyne-highlands", locationName: "The Highlands live cams", webcamPageUrl: "https://www.highlandsharborsprings.com/mountain-report", webcams: [] }, // separate official live-cam URL unconfirmed
+  { locationId: "nubs-nob", locationName: "Nub's Nob webcams", webcamPageUrl: "https://www.nubsnob.com/cam/", webcams: [] }, // page confirmed; live status unverified
+  { locationId: "mt-bohemia", locationName: "Mt. Bohemia webcams", webcamPageUrl: "https://www.mtbohemia.com/current-conditions/", webcams: [] }, // no confirmed official webcam
+  { locationId: "harbor-springs-roads", locationName: "Roads to Harbor Springs resorts · Mi Drive", webcamPageUrl: "https://www.michigan.gov/drive", webcams: [] },
+  { locationId: "keweenaw-peninsula-roads", locationName: "Roads to Mt. Bohemia · Mi Drive", webcamPageUrl: "https://www.michigan.gov/drive", webcams: [] },
+
   // ─── Resort live-cam pages: Oregon (Mt. Hood) ──────
   {
     locationId: "mt-hood-meadows",

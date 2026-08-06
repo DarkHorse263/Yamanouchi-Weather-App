@@ -185,6 +185,10 @@ const REGION_ANCHORS: Record<RegionId, {
   "santa-fe": { lat: 35.8000, lon: -105.8000, elevation: 3681, region: "OTHER", displayName: "Santa Fe" },
   "albuquerque-sandia": { lat: 35.2062, lon: -106.4475, elevation: 2630, region: "OTHER", displayName: "Albuquerque" },
 
+  // Michigan anchors · America/Detroit statewide for these selected areas, including Keweenaw.
+  "harbor-springs": { lat: 45.4717, lon: -84.9233, elevation: 404, region: "OTHER", displayName: "Harbor Springs" },
+  "keweenaw-peninsula": { lat: 47.4080, lon: -88.1010, elevation: 457, region: "OTHER", displayName: "Keweenaw Peninsula" },
+
   // Oregon anchors: each on the highest lift-served summit in the region.
   // America/Los_Angeles, same as Washington and California.
   "mt-hood": { lat: 45.33111, lon: -121.71000, elevation: 2603, region: "OTHER", displayName: "Mt. Hood" },

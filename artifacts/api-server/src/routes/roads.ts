@@ -908,6 +908,11 @@ const NM_SOURCE = {
   sourceUrl: "https://www.nmroads.com/mapIndex.html",
 };
 
+/** Michigan has no passenger-vehicle chain law; seasonal studded-tire windows are the only material nuance. */
+function miChainEntry(opts: { id: string; regionId: string; mountainId: string; mountainName: string; approach: string; detail: string; inSeason: boolean; issuedAt: string }) {
+  return { id: opts.id, regionId: opts.regionId, mountainId: opts.mountainId, mountainName: opts.mountainName, approach: opts.approach, status: "not-required", label: opts.inSeason ? "No passenger chain law" : "Outside ski season", detail: `${opts.inSeason ? "Michigan has no passenger-vehicle chain or winter-tire mandate; chains are permitted when conditions require them. Studded tyres have date-based legal windows." : "Michigan has no passenger chain-law requirement."} ${opts.detail}`, issuedAt: opts.issuedAt };
+}
+
 function nmChainEntry(opts: {
   id: string;
   regionId: string;
@@ -2118,6 +2123,17 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
     ];
   }
 
+  if (regionId === "harbor-springs" || regionId === "keweenaw-peninsula") {
+    const inSeason = isUsSnowSeason(now);
+    const mi = (id: string, mountainId: string, mountainName: string, approach: string, detail: string) => miChainEntry({ id, regionId, mountainId, mountainName, approach, detail, inSeason, issuedAt });
+    if (regionId === "harbor-springs") return [
+      mi("boyne-mountain-mi-75", "boyne-mountain", "Boyne Mountain", "I-75/US-131 through northern Lower Michigan to Boyne Falls", "Check Mi Drive for plow tracking and local lake-effect conditions."),
+      mi("boyne-highlands-mi-119", "boyne-highlands", "The Highlands", "US-31/MI-119 to Harbor Springs, then Pleasantview Rd", "Check Mi Drive before travel in localized lake-effect snow."),
+      mi("nubs-nob-mi-119", "nubs-nob", "Nub's Nob", "US-31/MI-119 to Harbor Springs, then local access roads", "Check Mi Drive before travel in localized lake-effect snow."),
+    ];
+    return [mi("mt-bohemia-lac-la-belle-rd", "mt-bohemia", "Mt. Bohemia", "US-41 through the Keweenaw, then Lac La Belle Rd", "⚠️ Upper Peninsula roads can see intense, localized Lake Superior lake-effect snow and rapid whiteouts; check Mi Drive cameras and plow tracking before travel.")];
+  }
+
   if (
     regionId === "taos" ||
     regionId === "angel-fire" ||
@@ -2628,6 +2644,8 @@ router.get("/road-conditions", async (req, res) => {
     //    Albuquerque/Sandia Peak have NO dedicated avalanche-forecast
     //    coverage - a genuine gap, stated explicitly rather than
     //    pointing at an authority that doesn't actually cover them.
+    // US (Michigan) · Mi Drive has the official state road map. No passenger chain law; no avalanche authority because this is genuinely non-avalanche terrain.
+    const isUsMi = region === "harbor-springs" || region === "keweenaw-peninsula";
     const isUsNm =
       region === "taos" ||
       region === "angel-fire" ||
@@ -2800,6 +2818,11 @@ router.get("/road-conditions", async (req, res) => {
           ? "We do not yet pull live road data for Montana · check MDT's 511mt.net for closures, chain requirements and highway cameras before you drive. Montana has no statewide chain law for passenger vehicles (only a heavy-vehicle rule under MCA 61-9-436 for towing units ≥ 26,001 lbs GVW, which doesn't apply to visitor cars); winter/snow tyres are strongly recommended on mountain approaches, and MDT can post temporary chain requirements at specific named mountain passes during severe storms. For backcountry conditions, read the day's forecast from the Flathead Avalanche Center at flatheadavalanche.org."
           : "We do not yet pull live road data for Montana · check MDT's 511mt.net for closures, chain requirements and highway cameras before you drive, especially on US-212 and around the Beartooth Highway (closed in winter, roughly mid-October through late May/early June). Montana has no statewide chain law for passenger vehicles (only a heavy-vehicle rule under MCA 61-9-436 for towing units ≥ 26,001 lbs GVW, which doesn't apply to visitor cars); winter/snow tyres are strongly recommended on this approach. ⚠️ This region has no dedicated backcountry avalanche-forecasting authority — the Gallatin National Forest Avalanche Center's coverage does not extend to Red Lodge/Beartooth, so no avalanche-bulletin link is offered here rather than pointing at one that doesn't apply.";
       liveTrafficUrl = "https://www.511mt.net/";
+    } else if (isUsMi) {
+      generalAdvice = region === "keweenaw-peninsula"
+        ? "We do not yet pull live road data for Michigan · check MDOT's Mi Drive (michigan.gov/drive) for closures, cameras and plow tracking before driving to Mt. Bohemia. ⚠️ Keweenaw/Upper Peninsula roads are exposed to intense localized Lake Superior lake-effect snow and sudden whiteouts. Michigan has no passenger-vehicle chain or winter-tire mandate; seasonal studded-tire date restrictions apply. No avalanche authority is needed here: this low-relief ski terrain has no meaningful avalanche risk."
+        : "We do not yet pull live road data for Michigan · check MDOT's Mi Drive (michigan.gov/drive) for closures, cameras and plow tracking before driving. Michigan has no passenger-vehicle chain or winter-tire mandate; seasonal studded-tire date restrictions apply. No avalanche authority is needed here: this low-relief ski terrain has no meaningful avalanche risk.";
+      liveTrafficUrl = "https://www.michigan.gov/drive";
     } else if (isUsNm) {
       // No live New Mexico road feed is wired yet - say so plainly rather
       // than shipping an empty list that reads like "all clear". New

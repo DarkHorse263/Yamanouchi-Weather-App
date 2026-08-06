@@ -536,6 +536,8 @@ if (process.env.NODE_ENV === "production") {
       name: "Albuquerque",
       towns: { "albuquerque": "Albuquerque" },
     },
+    "harbor-springs": { name: "Harbor Springs", towns: { "harbor-springs-town": "Harbor Springs" } },
+    "keweenaw-peninsula": { name: "Keweenaw Peninsula", towns: { mohawk: "Mohawk" } },
     "mt-hood": {
       name: "Mt. Hood",
       towns: { "government-camp": "Government Camp" },

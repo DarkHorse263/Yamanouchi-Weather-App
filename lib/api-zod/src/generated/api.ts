@@ -236,6 +236,8 @@ export const GetPowderAlertsQueryParams = zod.object({
       "santa-fe",
 
       "albuquerque-sandia",
+      "harbor-springs",
+      "keweenaw-peninsula",
       "mt-hood",
       "bend",
       "crystal-mountain",
@@ -1299,6 +1301,8 @@ export const GetWeatherQueryParams = zod.object({
       "santa-fe",
 
       "albuquerque-sandia",
+      "harbor-springs",
+      "keweenaw-peninsula",
       "mt-hood",
       "bend",
       "crystal-mountain",
@@ -1785,6 +1789,8 @@ export const GetWebcamsQueryParams = zod.object({
       "santa-fe",
 
       "albuquerque-sandia",
+      "harbor-springs",
+      "keweenaw-peninsula",
       "mt-hood",
       "bend",
       "crystal-mountain",
@@ -1973,6 +1979,8 @@ export const GetRoadConditionsQueryParams = zod.object({
       "santa-fe",
 
       "albuquerque-sandia",
+      "harbor-springs",
+      "keweenaw-peninsula",
       "mt-hood",
       "bend",
       "crystal-mountain",
@@ -2216,6 +2224,8 @@ export const GetLiftStatusQueryParams = zod.object({
       "santa-fe",
 
       "albuquerque-sandia",
+      "harbor-springs",
+      "keweenaw-peninsula",
       "mt-hood",
       "bend",
       "crystal-mountain",
