@@ -388,6 +388,48 @@ const NM_ROADS_GENERAL: SourceGroup = {
   ],
 };
 
+/**
+ * Oregon reference blocks. Mt. Hood is covered by the Northwest Avalanche
+ * Center (NWAC) — the same authority used for Washington. Bend/Mt. Bachelor
+ * sits outside NWAC's coverage area and is instead covered by the smaller,
+ * volunteer-run Central Oregon Avalanche Center (COAC) — flagged explicitly
+ * as a different/lesser-resourced authority, not a coverage gap.
+ */
+const OR_OFFICIAL_REFERENCES_MT_HOOD: SourceGroup = {
+  title: "Official references",
+  titleJa: "公式参照先",
+  blurb:
+    "Link-outs, not wired feeds · conditions shown on feelzlike come from the forecast ensemble below, so check these before you drive or tour.",
+  blurbJa:
+    "リンクのみで、データ連携はしていません。feelzlikeの数値は下記の予報モデルによるものです。走行・ツアー前に必ず公式情報をご確認ください。",
+  items: [
+    { label: "National Weather Service", detail: "US federal forecasts & warnings", url: "https://www.weather.gov/" },
+    { label: "Northwest Avalanche Center (NWAC)", detail: "backcountry avalanche forecasts for the Mt. Hood zone", url: "https://nwac.us/" },
+  ],
+};
+const OR_OFFICIAL_REFERENCES_BEND: SourceGroup = {
+  title: "Official references",
+  titleJa: "公式参照先",
+  blurb:
+    "Link-outs, not wired feeds · conditions shown on feelzlike come from the forecast ensemble below, so check these before you drive or tour. ⚠️ This region falls outside NWAC's coverage area — backcountry avalanche forecasting here is provided by the smaller, volunteer-run Central Oregon Avalanche Center (COAC), a different and less-resourced authority than NWAC.",
+  blurbJa:
+    "リンクのみで、データ連携はしていません。feelzlikeの数値は下記の予報モデルによるものです。この地域はNWACの対象外です。",
+  items: [
+    { label: "National Weather Service", detail: "US federal forecasts & warnings", url: "https://www.weather.gov/" },
+    { label: "Central Oregon Avalanche Center (COAC)", detail: "volunteer-run backcountry avalanche forecasts for the Bend/Mt. Bachelor area", url: "https://coavalanche.org/" },
+  ],
+};
+const OR_ROADS_GENERAL: SourceGroup = {
+  title: "Roads & transport",
+  titleJa: "道路・交通",
+  blurb:
+    "Oregon has a broad, mandatory traction-device law — ORS 815.045/815.140/815.142/815.145 and OAR 734-017 require chains or traction tires on ODOT-designated routes during posted conditions, in the same 'must-carry' spirit as Colorado's law.",
+  blurbJa: "オレゴン州では指定区間・気象条件下でチェーンまたはトラクションタイヤの携行が義務付けられています。",
+  items: [
+    { label: "ODOT TripCheck · tripcheck.com", detail: "statewide real-time road conditions, cameras & traction advisories (or dial 511)", url: "https://www.tripcheck.com/" },
+  ],
+};
+
 const REGION_SOURCES: Record<string, SourceGroup[]> = {
   "snowy-mountains": [
     {
@@ -1009,6 +1051,32 @@ const REGION_SOURCES: Record<string, SourceGroup[]> = {
       titleJa: "スキー場・リフト",
       items: [
         { label: "Sandia Peak Ski Area", detail: "Mountain Capital Partners \"Power Pass\" · ⚠️ VERIFY-STATUS RESORT: multi-year full closures 2021-23, reopened 2024 under new ownership, exact 2025-26 closing date and total operating days unconfirmed by any dated source · no confirmed live webcam", url: "https://www.sandia.ski/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "mt-hood": [
+    OR_OFFICIAL_REFERENCES_MT_HOOD,
+    OR_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Mt. Hood Meadows", detail: "Indy Pass (2 days, select blackouts) + Indy+ Pass (2 days, no blackouts) · not on Epic or Ikon · no confirmed live webcam found", url: "https://www.skihood.com/" },
+        { label: "Timberline Lodge", detail: "Mt. Hood Fusion Pass (bundled with Skibowl) · famous for near-year-round skiing via the Palmer Snowfield · ⚠️ vertical-drop figure disputed across sources (resort's own 4,540 ft claim vs. ~3,590-3,690 ft per independent aggregators) · no confirmed live webcam found", url: "https://www.timberlinelodge.com/" },
+        { label: "Mt. Hood Skibowl", detail: "Mt. Hood Fusion Pass + Powder Alliance in its own right · America's largest lit night-skiing operation · confirmed live webcams", url: "https://www.skibowl.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  bend: [
+    OR_OFFICIAL_REFERENCES_BEND,
+    OR_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Mt. Bachelor", detail: "Ikon Pass destination · 360°-skiable volcanic cone, one of the largest lift-served ski areas in the US by skiable acreage · confirmed live webcams (8+ feeds)", url: "https://www.mtbachelor.com/" },
       ],
     },
     FORECAST_ENSEMBLE,

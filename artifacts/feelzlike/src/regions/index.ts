@@ -70,6 +70,8 @@ import { taosRegion } from "./taos";
 import { angelFireRegion } from "./angel-fire";
 import { santaFeRegion } from "./santa-fe";
 import { albuquerqueSandiaRegion } from "./albuquerque-sandia";
+import { mtHoodRegion } from "./mt-hood";
+import { bendRegion } from "./bend";
 
 // Active region registry · AU: Snowy Mountains + Victoria's High Country
 // + Tasmania (Ben Lomond). JP: Yamanouchi (Shiga Kogen + Kita-Shiga),
@@ -181,6 +183,8 @@ export const REGIONS: RegionConfig[] = [
   angelFireRegion,
   santaFeRegion,
   albuquerqueSandiaRegion,
+  mtHoodRegion,
+  bendRegion,
 ];
 
 export const REGION_BY_ID: Record<string, RegionConfig> = Object.fromEntries(
@@ -268,6 +272,8 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "angel-fire": "US",
   "santa-fe": "US",
   "albuquerque-sandia": "US",
+  "mt-hood": "US",
+  "bend": "US",
 };
 export const COUNTRY_META: Record<CountryCode, { name: string; flag: string }> = {
   AU: { name: "Australia", flag: "🇦🇺" },

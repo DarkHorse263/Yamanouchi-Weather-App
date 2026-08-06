@@ -90,6 +90,8 @@ const REGIONS_WITH_ROADS_CONTENT: ReadonlySet<string> = new Set([
   "angel-fire",
   "santa-fe",
   "albuquerque-sandia",
+  "mt-hood",
+  "bend",
 ]);
 
 /**

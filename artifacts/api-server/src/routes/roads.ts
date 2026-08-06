@@ -936,6 +936,55 @@ function nmChainEntry(opts: {
   };
 }
 
+/**
+ * Oregon has a BROAD, MANDATORY, STATEWIDE traction/chain law under ORS
+ * 815.045/815.140/815.142/815.145 plus OAR 734-017 - unlike Vermont/
+ * Montana/New Mexico's genuinely-no-chain-law posture, and unlike
+ * Wyoming/California's storm-or-sign-activated systems. When ODOT posts
+ * a "chains required" zone (most commonly on US-26 over Mt. Hood in
+ * winter storms), traction tires or chains are mandatory for ALL
+ * vehicles - not just trucks, and not just 2WD as in Colorado's SB25-069
+ * carve-out. Vehicles without adequate traction tires must carry and be
+ * prepared to fit chains; the requirement can escalate to "chains
+ * required on all vehicles regardless of tyre type" in severe
+ * conditions. Modeled closest on Colorado's `coChainEntry` (the other
+ * state with a real, statutory, broad chain requirement) rather than the
+ * narrow heavy-vehicle-only pattern. Named `orChainEntry` to avoid any
+ * collision with existing helpers.
+ */
+const OR_SOURCE = {
+  sourceLabel: "ODOT TripCheck · tripcheck.com",
+  sourceUrl: "https://www.tripcheck.com/",
+};
+
+function orChainEntry(opts: {
+  id: string;
+  regionId: string;
+  mountainId: string;
+  mountainName: string;
+  approach: string;
+  detail: string;
+  inSeason: boolean;
+  issuedAt: string;
+}): Record<string, unknown> {
+  const rule =
+    "Oregon has a statewide mandatory traction/chain law (ORS 815.045/815.140/815.142/815.145 + OAR 734-017): when ODOT posts a \"chains required\" zone, ALL vehicles - not just trucks - must have traction tires (studded, or mud-and-snow-rated with 3/16\"+ tread) fitted, or carry chains and be prepared to fit them. Requirements can escalate to chains mandatory on every vehicle regardless of tyre type in severe storms. Check tripcheck.com or roadside signs for today's status before you drive.";
+  return {
+    id: opts.id,
+    regionId: opts.regionId,
+    mountainId: opts.mountainId,
+    mountainName: opts.mountainName,
+    approach: opts.approach,
+    status: "open",
+    chains2wd: (opts.inSeason ? "must-carry" : "not-required") satisfies ChainReq,
+    chainsAwd: (opts.inSeason ? "must-carry" : "not-required") satisfies ChainReq,
+    note: opts.inSeason ? `${rule} ${opts.detail}` : "Outside the ski season · Oregon's traction/chain law is only posted in active winter storm conditions.",
+    issuedAt: opts.issuedAt,
+    ...OR_SOURCE,
+    dataSource: "seasonal-rule",
+  };
+}
+
 function buildChainStatuses(regionId: string | undefined): Array<Record<string, unknown>> {
   const now = new Date();
   const issuedAt = now.toISOString();
@@ -1977,6 +2026,38 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
     ];
   }
 
+  if (regionId === "mt-hood" || regionId === "bend") {
+    const inSeason = isUsSnowSeason(now);
+    const or = (
+      id: string,
+      mountainId: string,
+      mountainName: string,
+      approach: string,
+      detail: string,
+    ) => orChainEntry({ id, regionId, mountainId, mountainName, approach, detail, inSeason, issuedAt });
+
+    if (regionId === "mt-hood") {
+      return [
+        or("mt-hood-meadows-or-35", "mt-hood-meadows", "Mt. Hood Meadows",
+          "OR-35 from Hood River / US-26 junction",
+          "This is the primary winter storm-response corridor for the Mt. Hood area."),
+        or("timberline-lodge-us-26", "timberline-lodge", "Timberline Lodge",
+          "US-26 (Mt. Hood Hwy) via Government Camp, then the Timberline access road",
+          "US-26 over Mt. Hood is ODOT's most frequently chain-zoned corridor in the Cascades."),
+        or("mt-hood-skibowl-us-26", "mt-hood-skibowl", "Mt. Hood Skibowl",
+          "US-26 (Mt. Hood Hwy) directly at Government Camp",
+          "Skibowl sits right on US-26, so chain-up zones posted for the corridor apply directly at the resort entrance."),
+      ];
+    }
+
+    // bend
+    return [
+      or("mt-bachelor-cascade-lakes-hwy", "mt-bachelor", "Mt. Bachelor",
+        "Cascade Lakes Highway (OR-372) from Bend",
+        "This route is lower-traffic than the Mt. Hood corridors but still subject to the same statewide traction/chain law when ODOT posts a zone."),
+    ];
+  }
+
   return [];
 }
 
@@ -2271,6 +2352,16 @@ router.get("/road-conditions", async (req, res) => {
       region === "angel-fire" ||
       region === "santa-fe" ||
       region === "albuquerque-sandia";
+    //  - US (Oregon) - no feed wired yet. ODOT publishes tripcheck.com.
+    //    Oregon has a BROAD, MANDATORY, STATEWIDE traction/chain law (ORS
+    //    815.045/815.140/815.142/815.145 + OAR 734-017) applying to ALL
+    //    vehicles, not just trucks or 2WD - the opposite honesty posture
+    //    from Vermont/Montana/New Mexico's genuinely-no-chain-law states.
+    //    Avalanche coverage is split: NWAC covers Mt. Hood, while Bend/Mt.
+    //    Bachelor is covered by the smaller, volunteer-run Central Oregon
+    //    Avalanche Center (COAC) - a "different/lesser-resourced
+    //    authority" flag, not a coverage gap.
+    const isUsOr = region === "mt-hood" || region === "bend";
 
     let roads: unknown[] = [];
     let generalAdvice: string;
@@ -2405,6 +2496,22 @@ router.get("/road-conditions", async (req, res) => {
         ? "We do not yet pull live road data for New Mexico \u00b7 check NMDOT's nmroads.com (or dial 511) for closures and highway cameras before you drive, especially on NM-150, the narrow, steep, switchback sole access road to Taos Ski Valley. New Mexico has no statewide chain law for passenger vehicles (NMSA 1978 Section 66-3-847 permits but does not require chains or studded snow tires); winter/snow tyres and 4WD/AWD are strongly recommended on NM-150. For backcountry conditions, read the day's forecast from the Taos Avalanche Center at taosavalanchecenter.org."
         : "We do not yet pull live road data for New Mexico \u00b7 check NMDOT's nmroads.com (or dial 511) for closures and highway cameras before you drive. New Mexico has no statewide chain law for passenger vehicles (NMSA 1978 Section 66-3-847 permits but does not require chains or studded snow tires); winter/snow tyres are strongly recommended on mountain approaches. \u26a0\ufe0f This region has no dedicated backcountry avalanche-forecasting authority \u2014 the Taos Avalanche Center's coverage does not extend here, so no avalanche-bulletin link is offered rather than pointing at one that doesn't apply.";
       liveTrafficUrl = "https://www.nmroads.com/mapIndex.html";
+    } else if (isUsOr) {
+      // No live Oregon road feed is wired yet - say so plainly rather than
+      // shipping an empty list that reads like "all clear". Oregon has a
+      // BROAD, MANDATORY, STATEWIDE traction/chain law (ORS 815.045/
+      // 815.140/815.142/815.145 + OAR 734-017) applying to ALL vehicles
+      // when ODOT posts a chain-up zone - the opposite posture from
+      // Vermont/Montana/New Mexico's genuinely-no-chain-law states, and
+      // broader than Colorado's 2WD-only "must-carry" clause. Bend/Mt.
+      // Bachelor is covered by the smaller, volunteer-run Central Oregon
+      // Avalanche Center (COAC) rather than NWAC - flagged as a
+      // different/lesser-resourced authority, not a coverage gap.
+      const coacRegion = region === "bend";
+      generalAdvice = coacRegion
+        ? "We do not yet pull live road data for Oregon \u00b7 check ODOT's TripCheck (tripcheck.com) for closures, chain-up zones and highway cameras before you drive, especially on Cascade Lakes Highway (OR-372). Oregon has a statewide mandatory traction/chain law (ORS 815.045/815.140/815.142/815.145 + OAR 734-017): when ODOT posts a \"chains required\" zone, ALL vehicles - not just trucks - must have traction tires fitted or carry chains, with escalation to chains-on-every-vehicle possible in severe storms. \u26a0\ufe0f Avalanche forecasting here comes from the smaller, volunteer-run Central Oregon Avalanche Center (COAC) at coavalanche.org, not the better-resourced NWAC that covers Mt. Hood."
+        : "We do not yet pull live road data for Oregon \u00b7 check ODOT's TripCheck (tripcheck.com) for closures, chain-up zones and highway cameras before you drive, especially on US-26 over Mt. Hood. Oregon has a statewide mandatory traction/chain law (ORS 815.045/815.140/815.142/815.145 + OAR 734-017): when ODOT posts a \"chains required\" zone, ALL vehicles - not just trucks - must have traction tires fitted or carry chains, with escalation to chains-on-every-vehicle possible in severe storms. For backcountry conditions, read the day's forecast from the Northwest Avalanche Center at nwac.us.";
+      liveTrafficUrl = "https://www.tripcheck.com/";
     } else {
       generalAdvice =
         "Live road condition data is not yet available for this region.";

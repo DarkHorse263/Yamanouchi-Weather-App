@@ -86,6 +86,8 @@ import { TAOS_TRANSPORT } from "./taos";
 import { ANGEL_FIRE_TRANSPORT } from "./angel-fire";
 import { SANTA_FE_TRANSPORT } from "./santa-fe";
 import { ALBUQUERQUE_SANDIA_TRANSPORT } from "./albuquerque-sandia";
+import { MT_HOOD_TRANSPORT } from "./mt-hood";
+import { BEND_TRANSPORT } from "./bend";
 
 const REGISTRY: Record<RegionId, TransportProviderList> = {
   "snowy-mountains": SNOWY_MOUNTAINS_TRANSPORT,
@@ -181,6 +183,12 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   "angel-fire": ANGEL_FIRE_TRANSPORT,
   "santa-fe": SANTA_FE_TRANSPORT,
   "albuquerque-sandia": ALBUQUERQUE_SANDIA_TRANSPORT,
+
+  // US (Oregon) · no operators curated to the AU/JP/NZ verification
+  // standard yet, so these are registered empty rather than filled with
+  // guessed timetables.
+  "mt-hood": MT_HOOD_TRANSPORT,
+  "bend": BEND_TRANSPORT,
 };
 
 // Loader-time integrity check.

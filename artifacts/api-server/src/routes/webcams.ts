@@ -1371,6 +1371,61 @@ const WEBCAM_DATA: WebcamConfig[] = [
     webcamPageUrl: "https://www.nmroads.com/mapIndex.html",
     webcams: [],
   },
+
+  // ─── Resort live-cam pages: Oregon (Mt. Hood) ──────
+  {
+    locationId: "mt-hood-meadows",
+    // ⚠️ No confirmed live webcam URL found in research (JS-rendered
+    // page, could not independently verify a stable feed) — page-only
+    // link to the resort's own site, no fabricated feed.
+    locationName: "Mt. Hood Meadows live cams",
+    webcamPageUrl: "https://www.skihood.com/",
+    webcams: [],
+  },
+  {
+    locationId: "timberline-lodge",
+    // ⚠️ No confirmed dedicated webcam URL found in research — page-only
+    // link to the resort's own conditions page, no fabricated feed.
+    locationName: "Timberline Lodge live cams",
+    webcamPageUrl: "https://www.timberlinelodge.com/Conditions",
+    webcams: [],
+  },
+  {
+    locationId: "mt-hood-skibowl",
+    // Confirmed live per research (West Base, Upper Bowl, East Base) —
+    // page-only link, no fabricated per-camera deep links.
+    locationName: "Mt. Hood Skibowl live cams",
+    webcamPageUrl: "https://skibowl.com/winter-condition-and-lift-status/",
+    webcams: [],
+  },
+
+  // ─── Resort live-cam pages: Oregon (Bend / Mt. Bachelor) ──────
+  {
+    locationId: "mt-bachelor",
+    // Confirmed official webcam hub with 8+ live feeds per research —
+    // page-only link, no fabricated per-camera deep links.
+    locationName: "Mt. Bachelor live cams",
+    webcamPageUrl: "https://www.mtbachelor.com/mountain-report",
+    webcams: [],
+  },
+
+  // ─── Roadside cams: Oregon ───────────────────────────────────────
+  // ODOT's TripCheck runs public highway traffic cameras but does not
+  // expose a stable deep link per camera that survives a season — same
+  // honest page-only-link pattern as every prior state.
+  {
+    locationId: "mt-hood-roads",
+    locationName: "Roads to Mt. Hood · US-26 / OR-35",
+    webcamPageUrl: "https://www.tripcheck.com/",
+    webcams: [],
+  },
+  {
+    locationId: "bend-roads",
+    locationName: "Roads to Mt. Bachelor · Cascade Lakes Hwy / OR-372",
+    webcamPageUrl: "https://www.tripcheck.com/",
+    webcams: [],
+  },
+
 ];
 
 router.get("/webcams", (req, res) => {

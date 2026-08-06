@@ -536,6 +536,14 @@ if (process.env.NODE_ENV === "production") {
       name: "Albuquerque",
       towns: { "albuquerque": "Albuquerque" },
     },
+    "mt-hood": {
+      name: "Mt. Hood",
+      towns: { "government-camp": "Government Camp" },
+    },
+    "bend": {
+      name: "Bend",
+      towns: { "bend": "Bend" },
+    },
   };
 
   // Top-level routes handled by the SPA (before the /:region catch-all).

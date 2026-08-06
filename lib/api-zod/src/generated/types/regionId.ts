@@ -84,4 +84,6 @@ export const RegionId = {
   "angel-fire": "angel-fire",
   "santa-fe": "santa-fe",
   "albuquerque-sandia": "albuquerque-sandia",
+  "mt-hood": "mt-hood",
+  "bend": "bend",
 } as const;

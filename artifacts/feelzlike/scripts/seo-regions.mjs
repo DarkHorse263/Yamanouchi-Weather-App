@@ -1178,6 +1178,36 @@ export const REGIONS = [
       { id: "albuquerque", name: "Albuquerque", blurb: "New Mexico's largest city, roughly 30-45 minutes' drive from Sandia Peak Ski Area" },
     ],
   },
+  {
+    slug: "mt-hood",
+    name: "Mt. Hood",
+    subtitle: "Oregon · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Mt. Hood Meadows", blurb: "Indy Pass (2 days, select blackouts) + Indy+ Pass (2 days, no blackouts) · not on Epic or Ikon" },
+      { name: "Timberline Lodge", blurb: "Mt. Hood Fusion Pass (bundled with Skibowl) · famous for near-year-round skiing via the Palmer Snowfield · ⚠️ vertical-drop figure disputed across sources (resort's own 4,540 ft claim vs. ~3,590-3,690 ft per independent aggregators)" },
+      { name: "Mt. Hood Skibowl", blurb: "Mt. Hood Fusion Pass + Powder Alliance in its own right · America's largest lit night-skiing operation" },
+    ],
+    towns: [
+      { id: "government-camp", name: "Government Camp", blurb: "small mountain village on US-26, gateway to Timberline Lodge and Mt. Hood Skibowl; Mt. Hood Meadows is a short drive further up OR-35" },
+    ],
+  },
+  {
+    slug: "bend",
+    name: "Bend",
+    subtitle: "Oregon · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Mt. Bachelor", blurb: "Ikon Pass destination · 360°-skiable volcanic cone, one of the largest lift-served ski areas in the US by skiable acreage · ⚠️ avalanche forecasting here is from the smaller, volunteer-run Central Oregon Avalanche Center (COAC), not NWAC" },
+    ],
+    towns: [
+      { id: "bend", name: "Bend", blurb: "Central Oregon's largest city, roughly 30 minutes' drive from Mt. Bachelor via Cascade Lakes Highway/OR-372" },
+    ],
+  },
 ];
 
 /** Region sub-sections that actually render for this region (see gating notes above). */

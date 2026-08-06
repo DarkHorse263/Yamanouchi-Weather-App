@@ -125,7 +125,10 @@ export type RegionKey =
   | "taos"
   | "angel-fire"
   | "santa-fe"
-  | "albuquerque-sandia";
+  | "albuquerque-sandia"
+  | "mt-hood"
+  | "bend"
+  | "donnelly-mccall";
 type ViewMode = "interactive" | "windy" | "official";
 
 interface RegionConfig {
@@ -847,6 +850,24 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       attribution: "National Weather Service · weather radar",
     },
   },
+  "mt-hood": {
+    windy: { lat: 45.32, lon: -121.72, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "bend": {
+    windy: { lat: 44.00, lon: -121.50, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
 };
 
 const DEFAULT_ZOOM = 9;
@@ -1520,6 +1541,22 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "albuquerque", name: "Albuquerque", lat: 35.0844, lng: -106.6504, accent: "#0ea5e9" },
     ],
   },
+  "mt-hood": {
+    center: { lat: 45.320, lng: -121.720 },
+    pins: [
+      { id: "mt-hood-meadows", name: "Mt. Hood Meadows", lat: 45.32889, lng: -121.66250, accent: "#f97316" },
+      { id: "timberline-lodge", name: "Timberline Lodge", lat: 45.33111, lng: -121.71000, accent: "#f97316" },
+      { id: "mt-hood-skibowl", name: "Mt. Hood Skibowl", lat: 45.30189, lng: -121.77321, accent: "#f97316" },
+      { id: "government-camp", name: "Government Camp", lat: 45.30222, lng: -121.75250, accent: "#0ea5e9" },
+    ],
+  },
+  "bend": {
+    center: { lat: 44.019, lng: -121.503 },
+    pins: [
+      { id: "mt-bachelor", name: "Mt. Bachelor", lat: 43.9794, lng: -121.6885, accent: "#f97316" },
+      { id: "bend", name: "Bend", lat: 44.05806, lng: -121.31528, accent: "#0ea5e9" },
+    ],
+  },
 };
 
 // Which country each region sits in. Drives the cross-region grouping on
@@ -1600,6 +1637,8 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "angel-fire": "US",
   "santa-fe": "US",
   "albuquerque-sandia": "US",
+  "mt-hood": "US",
+  "bend": "US",
 };
 const COUNTRY_LABEL: Record<MapCountry, string> = { AU: "australia", JP: "japan", NZ: "new zealand", CA: "canada", US: "united states" };
 const REGION_LABEL: Record<RegionKey, string> = {
@@ -1674,6 +1713,8 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "angel-fire": "angel fire",
   "santa-fe": "santa fe",
   "albuquerque-sandia": "albuquerque",
+  "mt-hood": "mt. hood",
+  "bend": "bend",
 };
 
 interface CountryPin extends PinSpec {

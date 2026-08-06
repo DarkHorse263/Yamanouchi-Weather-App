@@ -184,6 +184,11 @@ const REGION_ANCHORS: Record<RegionId, {
   "angel-fire": { lat: 36.3929, lon: -105.2853, elevation: 3254, region: "OTHER", displayName: "Angel Fire" },
   "santa-fe": { lat: 35.8000, lon: -105.8000, elevation: 3681, region: "OTHER", displayName: "Santa Fe" },
   "albuquerque-sandia": { lat: 35.2062, lon: -106.4475, elevation: 2630, region: "OTHER", displayName: "Albuquerque" },
+
+  // Oregon anchors: each on the highest lift-served summit in the region.
+  // America/Los_Angeles, same as Washington and California.
+  "mt-hood": { lat: 45.33111, lon: -121.71000, elevation: 2603, region: "OTHER", displayName: "Mt. Hood" },
+  "bend": { lat: 43.9794, lon: -121.6885, elevation: 2763, region: "OTHER", displayName: "Bend" },
 };
 
 interface EvaluatorReport {

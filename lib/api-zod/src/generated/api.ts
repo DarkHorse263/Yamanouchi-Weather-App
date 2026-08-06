@@ -236,6 +236,8 @@ export const GetPowderAlertsQueryParams = zod.object({
       "santa-fe",
 
       "albuquerque-sandia",
+      "mt-hood",
+      "bend",
     ])
     .optional()
     .describe(
@@ -1277,6 +1279,8 @@ export const GetWeatherQueryParams = zod.object({
       "santa-fe",
 
       "albuquerque-sandia",
+      "mt-hood",
+      "bend",
     ])
     .optional()
     .describe(
@@ -1741,6 +1745,8 @@ export const GetWebcamsQueryParams = zod.object({
       "santa-fe",
 
       "albuquerque-sandia",
+      "mt-hood",
+      "bend",
     ])
     .optional()
     .describe(
@@ -1907,6 +1913,8 @@ export const GetRoadConditionsQueryParams = zod.object({
       "santa-fe",
 
       "albuquerque-sandia",
+      "mt-hood",
+      "bend",
     ])
     .optional()
     .describe(
@@ -2128,6 +2136,8 @@ export const GetLiftStatusQueryParams = zod.object({
       "santa-fe",
 
       "albuquerque-sandia",
+      "mt-hood",
+      "bend",
     ])
     .optional()
     .describe(

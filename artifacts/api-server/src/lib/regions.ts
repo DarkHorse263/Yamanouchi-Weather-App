@@ -79,6 +79,8 @@ export const REGION_IDS = [
   "angel-fire",
   "santa-fe",
   "albuquerque-sandia",
+  "mt-hood",
+  "bend",
 ] as const;
 export type RegionId = (typeof REGION_IDS)[number];
 
@@ -723,6 +725,18 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "sandia-peak": "albuquerque-sandia",
   "albuquerque": "albuquerque-sandia",
   "albuquerque-sandia-roads": "albuquerque-sandia",
+
+  // Mt. Hood, OR. Three resorts sharing one base town (Government Camp).
+  "mt-hood-meadows": "mt-hood",
+  "timberline-lodge": "mt-hood",
+  "mt-hood-skibowl": "mt-hood",
+  "government-camp": "mt-hood",
+  "mt-hood-roads": "mt-hood",
+
+  // Bend, OR.
+  "mt-bachelor": "bend",
+  "bend": "bend",
+  "bend-roads": "bend",
 };
 
 export function regionForLocation(locationId: string): RegionId | undefined {

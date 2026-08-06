@@ -1737,6 +1737,8 @@ components:
         - angel-fire
         - santa-fe
         - albuquerque-sandia
+        - mt-hood
+        - bend
       description: |
         Canonical region identifier used across the FeelZlike platform.
 

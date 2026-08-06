@@ -125,6 +125,8 @@ const FALLBACK_REGIONS: Region[] = [
   { id: "angel-fire",             name: "Angel Fire",                      country: "United States", countryCode: "US", region: "New Mexico",      status: "live", href: "/angel-fire/",            baseTowns: ["Angel Fire"],                                                mountains: ["Angel Fire Resort"],                                       headlineLabel: "Angel Fire",   headline: null },
   { id: "santa-fe",               name: "Santa Fe",                        country: "United States", countryCode: "US", region: "New Mexico",      status: "live", href: "/santa-fe/",              baseTowns: ["Santa Fe"],                                                  mountains: ["Ski Santa Fe"],                                            headlineLabel: "Santa Fe",     headline: null },
   { id: "albuquerque-sandia",     name: "Albuquerque",                     country: "United States", countryCode: "US", region: "New Mexico",      status: "live", href: "/albuquerque-sandia/",     baseTowns: ["Albuquerque"],                                               mountains: ["Sandia Peak Ski Area"],                                    headlineLabel: "Albuquerque",  headline: null },
+  { id: "mt-hood",                name: "Mt. Hood",                        country: "United States", countryCode: "US", region: "Oregon",          status: "live", href: "/mt-hood/",               baseTowns: ["Government Camp"],                                           mountains: ["Mt. Hood Meadows", "Timberline Lodge", "Mt. Hood Skibowl"], headlineLabel: "Mt. Hood",     headline: null },
+  { id: "bend",                   name: "Bend",                            country: "United States", countryCode: "US", region: "Oregon",          status: "live", href: "/bend/",                  baseTowns: ["Bend"],                                                      mountains: ["Mt. Bachelor"],                                            headlineLabel: "Bend",         headline: null },
 ];
 
 // Map a region to the base town we surface in the country card. This is
@@ -200,6 +202,8 @@ const PRIMARY_TOWN: Record<string, string> = {
   "angel-fire":               "Angel Fire",
   "santa-fe":                 "Santa Fe",
   "albuquerque-sandia":       "Albuquerque",
+  "mt-hood":                  "Government Camp",
+  "bend":                     "Bend",
 };
 
 // AU + NZ = southern hemisphere (snow Jun-Sep); JP + CA + US = northern (snow Dec-Mar).
