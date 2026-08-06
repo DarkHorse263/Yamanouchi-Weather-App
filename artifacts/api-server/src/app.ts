@@ -581,6 +581,9 @@ if (process.env.NODE_ENV === "production") {
     "franconia-notch": { name: "Franconia Notch", towns: { franconia: "Franconia", "bretton-woods-town": "Bretton Woods" } },
     "waterville-valley": { name: "Waterville Valley", towns: { "waterville-valley-town": "Waterville Valley" } },
     "lakes-region": { name: "Lakes Region", towns: { gilford: "Gilford" } },
+    "carrabassett-valley": { name: "Carrabassett Valley", towns: { "carrabassett-valley-town": "Carrabassett Valley" } },
+    "newry-bethel": { name: "Newry / Bethel", towns: { newry: "Newry" } },
+    "rangeley": { name: "Rangeley", towns: { rangeley: "Rangeley" } },
   };
 
   // Top-level routes handled by the SPA (before the /:region catch-all).

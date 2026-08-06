@@ -98,4 +98,7 @@ export const RegionId = {
   "franconia-notch": "franconia-notch",
   "waterville-valley": "waterville-valley",
   "lakes-region": "lakes-region",
+  "carrabassett-valley": "carrabassett-valley",
+  "newry-bethel": "newry-bethel",
+  "rangeley": "rangeley",
 } as const;

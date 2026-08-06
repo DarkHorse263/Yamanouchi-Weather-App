@@ -112,6 +112,9 @@ export const ALERT_REGIONS: Array<{ id: string; nameEn: string; nameJa: string; 
   { id: "franconia-notch", nameEn: "Franconia Notch", nameJa: "フランコニアノッチ", country: "US · New Hampshire" },
   { id: "waterville-valley", nameEn: "Waterville Valley", nameJa: "ウォータービルバレー", country: "US · New Hampshire" },
   { id: "lakes-region", nameEn: "Lakes Region", nameJa: "レイクスリージョン", country: "US · New Hampshire" },
+  { id: "carrabassett-valley", nameEn: "Carrabassett Valley", nameJa: "キャラバセットバレー", country: "US · Maine" },
+  { id: "newry-bethel", nameEn: "Newry / Bethel", nameJa: "ニューリー／ベセル", country: "US · Maine" },
+  { id: "rangeley", nameEn: "Rangeley", nameJa: "レンジリー", country: "US · Maine" },
 ];
 
 const HORIZONS: Array<{ value: 24 | 48 | 72; label: string; labelJa: string }> = [

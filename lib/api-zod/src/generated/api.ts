@@ -250,6 +250,9 @@ export const GetPowderAlertsQueryParams = zod.object({
       "franconia-notch",
       "waterville-valley",
       "lakes-region",
+      "carrabassett-valley",
+      "newry-bethel",
+      "rangeley",
     ])
     .optional()
     .describe(
@@ -1305,6 +1308,9 @@ export const GetWeatherQueryParams = zod.object({
       "franconia-notch",
       "waterville-valley",
       "lakes-region",
+      "carrabassett-valley",
+      "newry-bethel",
+      "rangeley",
     ])
     .optional()
     .describe(
@@ -1783,6 +1789,9 @@ export const GetWebcamsQueryParams = zod.object({
       "franconia-notch",
       "waterville-valley",
       "lakes-region",
+      "carrabassett-valley",
+      "newry-bethel",
+      "rangeley",
     ])
     .optional()
     .describe(
@@ -1963,6 +1972,9 @@ export const GetRoadConditionsQueryParams = zod.object({
       "franconia-notch",
       "waterville-valley",
       "lakes-region",
+      "carrabassett-valley",
+      "newry-bethel",
+      "rangeley",
     ])
     .optional()
     .describe(
@@ -2198,6 +2210,9 @@ export const GetLiftStatusQueryParams = zod.object({
       "franconia-notch",
       "waterville-valley",
       "lakes-region",
+      "carrabassett-valley",
+      "newry-bethel",
+      "rangeley",
     ])
     .optional()
     .describe(

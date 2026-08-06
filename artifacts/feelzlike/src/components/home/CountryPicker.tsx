@@ -139,6 +139,9 @@ const FALLBACK_REGIONS: Region[] = [
   { id: "franconia-notch",       name: "Franconia Notch",                country: "United States", countryCode: "US", region: "New Hampshire",   status: "live", href: "/franconia-notch/",       baseTowns: ["Franconia", "Bretton Woods"], mountains: ["Cannon Mountain", "Bretton Woods", "Loon Mountain"], headlineLabel: "Franconia", headline: null },
   { id: "waterville-valley",     name: "Waterville Valley",              country: "United States", countryCode: "US", region: "New Hampshire",   status: "live", href: "/waterville-valley/",     baseTowns: ["Waterville Valley"], mountains: ["Waterville Valley Resort"], headlineLabel: "Waterville Valley", headline: null },
   { id: "lakes-region",          name: "Lakes Region",                   country: "United States", countryCode: "US", region: "New Hampshire",   status: "live", href: "/lakes-region/",          baseTowns: ["Gilford"], mountains: ["Gunstock Mountain Resort"], headlineLabel: "Gilford", headline: null },
+  { id: "carrabassett-valley", name: "Carrabassett Valley", country: "United States", countryCode: "US", region: "Maine", status: "live", href: "/carrabassett-valley/", baseTowns: ["Carrabassett Valley"], mountains: ["Sugarloaf"], headlineLabel: "Carrabassett Valley", headline: null },
+  { id: "newry-bethel", name: "Newry / Bethel", country: "United States", countryCode: "US", region: "Maine", status: "live", href: "/newry-bethel/", baseTowns: ["Newry"], mountains: ["Sunday River"], headlineLabel: "Newry / Bethel", headline: null },
+  { id: "rangeley", name: "Rangeley", country: "United States", countryCode: "US", region: "Maine", status: "live", href: "/rangeley/", baseTowns: ["Rangeley"], mountains: ["Saddleback Mountain"], headlineLabel: "Rangeley", headline: null },
 ];
 
 // Map a region to the base town we surface in the country card. This is
@@ -228,6 +231,9 @@ const PRIMARY_TOWN: Record<string, string> = {
   "franconia-notch":           "Franconia",
   "waterville-valley":         "Waterville Valley",
   "lakes-region":              "Gilford",
+  "carrabassett-valley":       "Carrabassett Valley",
+  "newry-bethel":              "Newry",
+  "rangeley":                  "Rangeley",
 };
 
 // AU + NZ = southern hemisphere (snow Jun-Sep); JP + CA + US = northern (snow Dec-Mar).

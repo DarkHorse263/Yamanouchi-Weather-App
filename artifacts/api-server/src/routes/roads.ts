@@ -1110,6 +1110,13 @@ function nhChainEntry(opts: { id: string; regionId: string; mountainId: string; 
     note: opts.inSeason ? `New Hampshire has no broad mandatory chain law for passenger vehicles. N.H. Admin. Code § Saf-C 1312.17 is a narrow vehicle inspection/equipment provision: multipurpose passenger vehicles need snow tires Nov 15-Apr 15 unless equipped with all-season radial tires; it is not a general roadside chain-up rule. Winter/snow tyres and AWD/4WD are strongly recommended. ${opts.detail}` : "Outside the ski season · New Hampshire has no general passenger-vehicle chain-law requirement; the narrow Saf-C 1312.17 equipment provision remains distinct from an on-road chain law.", issuedAt: opts.issuedAt, ...NH_SOURCE, dataSource: "seasonal-rule" };
 }
 
+
+/** Maine has no mandatory chain law: 29-A M.R.S. §2381 permits chains in slippery conditions; it does not require them. */
+const ME_SOURCE = { sourceLabel: "MaineDOT · 511 Maine", sourceUrl: "https://511maine.gov/" };
+function meChainEntry(opts: { id: string; regionId: string; mountainId: string; mountainName: string; approach: string; detail: string; inSeason: boolean; issuedAt: string }): Record<string, unknown> {
+  return { id: opts.id, regionId: opts.regionId, mountainId: opts.mountainId, mountainName: opts.mountainName, approach: opts.approach, status: "open", chains2wd: "not-required" satisfies ChainReq, chainsAwd: "not-required" satisfies ChainReq, note: opts.inSeason ? `Maine has no mandatory passenger or commercial chain law. Under 29-A M.R.S. §2381, chains are permitted in snow, ice or slippery conditions, not required; winter tyres and AWD/4WD are strongly recommended. ${opts.detail}` : "Outside the ski season · Maine chains remain permitted when conditions warrant, not legally required.", issuedAt: opts.issuedAt, ...ME_SOURCE, dataSource: "seasonal-rule" };
+}
+
 function buildChainStatuses(regionId: string | undefined): Array<Record<string, unknown>> {
   const now = new Date();
   const issuedAt = now.toISOString();
@@ -2253,6 +2260,15 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
     return [nh("gunstock-nh11a", "gunstock-mountain-resort", "Gunstock Mountain Resort", "NH-11A / NH-11 from Gilford", "Lake Winnipesaukee approaches are lower but can still be slick in winter storms.")];
   }
 
+
+  if (regionId === "carrabassett-valley" || regionId === "newry-bethel" || regionId === "rangeley") {
+    const inSeason = isUsSnowSeason(now);
+    const me = (id: string, mountainId: string, mountainName: string, approach: string, detail: string) => meChainEntry({ id, regionId, mountainId, mountainName, approach, detail, inSeason, issuedAt });
+    if (regionId === "carrabassett-valley") return [me("sugarloaf-me27", "sugarloaf", "Sugarloaf", "ME-16 / ME-27 through Carrabassett Valley", "ME-27 is the primary valley approach; verify storm conditions with MaineDOT.")];
+    if (regionId === "newry-bethel") return [me("sunday-river-me2-26", "sunday-river", "Sunday River", "ME-2 / ME-26 from Bethel and Newry", "The western Maine approach can be slick during storms.")];
+    return [me("saddleback-me4-16", "saddleback-mountain", "Saddleback Mountain", "ME-4 / ME-16 from Rangeley", "Rangeley approaches are remote and can close or degrade in winter weather.")];
+  }
+
   if (
     regionId === "sun-valley" ||
     regionId === "sandpoint" ||
@@ -2646,6 +2662,8 @@ router.get("/road-conditions", async (req, res) => {
     // the Presidential Range near Wildcat/Pinkham Notch; unlike Vermont this
     // is genuine forecast coverage, but it is backcountry-only.
     const isUsNh = region === "white-mountains" || region === "franconia-notch" || region === "waterville-valley" || region === "lakes-region";
+    // Maine has no avalanche authority at all, and 511 Maine is the state road authority.
+    const isUsMe = region === "carrabassett-valley" || region === "newry-bethel" || region === "rangeley";
 
     let roads: unknown[] = [];
     let generalAdvice: string;
@@ -2813,6 +2831,9 @@ router.get("/road-conditions", async (req, res) => {
         ? "We do not yet pull live road data for New Hampshire · check NHDOT's real-time travel page or regional New England 511 (newengland511.org) for closures and cameras before you drive. New Hampshire has no broad mandatory chain law for passenger vehicles. N.H. Admin. Code § Saf-C 1312.17 is a narrow snow-tire vehicle-inspection/equipment provision (Nov 15-Apr 15 unless all-season radials), not a general roadside chain-up rule; winter tyres and AWD/4WD are strongly recommended. For Tuckerman/Huntington Ravines and Presidential Range backcountry near Wildcat/Pinkham Notch, read the real daily Mount Washington Avalanche Center forecast at mountwashingtonavalanchecenter.org; it does not describe ordinary in-bounds resort terrain."
         : "We do not yet pull live road data for New Hampshire · check NHDOT's real-time travel page or regional New England 511 (newengland511.org) for closures and cameras before you drive. New Hampshire has no broad mandatory chain law for passenger vehicles. N.H. Admin. Code § Saf-C 1312.17 is a narrow snow-tire vehicle-inspection/equipment provision (Nov 15-Apr 15 unless all-season radials), not a general roadside chain-up rule; winter tyres and AWD/4WD are strongly recommended. Mount Washington Avalanche Center's daily forecasts cover the Presidential Range/Tuckerman backcountry near Wildcat, not the in-bounds terrain in this region."
       liveTrafficUrl = "https://newengland511.org/Home/Index";
+    } else if (isUsMe) {
+      generalAdvice = "We do not yet pull live Maine road data · check MaineDOT / 511 Maine (511maine.gov) for closures, cameras and storm conditions before travelling. Maine has no mandatory chain law: 29-A M.R.S. §2381 permits chains when roads are snow-covered or slippery, but never requires them; winter tyres and AWD/4WD are strongly recommended. Maine has no dedicated avalanche forecast or observation authority, so no avalanche bulletin is linked for these lift-served resort areas.";
+      liveTrafficUrl = "https://511maine.gov/";
     } else if (isUsId) {
       // No live Idaho road feed is wired yet - say so plainly rather than
       // shipping an empty list that reads like "all clear". Idaho has a

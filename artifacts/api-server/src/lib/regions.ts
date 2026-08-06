@@ -93,6 +93,9 @@ export const REGION_IDS = [
   "franconia-notch",
   "waterville-valley",
   "lakes-region",
+  "carrabassett-valley",
+  "newry-bethel",
+  "rangeley",
 ] as const;
 export type RegionId = (typeof REGION_IDS)[number];
 
@@ -818,6 +821,15 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "gunstock-mountain-resort": "lakes-region",
   "gilford": "lakes-region",
   "lakes-region-roads": "lakes-region",
+  "sugarloaf": "carrabassett-valley",
+  "carrabassett-valley-town": "carrabassett-valley",
+  "carrabassett-valley-roads": "carrabassett-valley",
+  "sunday-river": "newry-bethel",
+  "newry": "newry-bethel",
+  "newry-bethel-roads": "newry-bethel",
+  "saddleback-mountain": "rangeley",
+  "rangeley": "rangeley",
+  "rangeley-roads": "rangeley",
 };
 
 export function regionForLocation(locationId: string): RegionId | undefined {

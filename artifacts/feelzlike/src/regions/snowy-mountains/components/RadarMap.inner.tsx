@@ -139,7 +139,10 @@ export type RegionKey =
   | "white-mountains"
   | "franconia-notch"
   | "waterville-valley"
-  | "lakes-region";
+  | "lakes-region"
+  | "carrabassett-valley"
+  | "newry-bethel"
+  | "rangeley";
 type ViewMode = "interactive" | "windy" | "official";
 
 interface RegionConfig {
@@ -955,6 +958,9 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
   "franconia-notch": { windy: { lat: 44.16, lon: -71.59, zoom: 10 }, official: { label: "NWS weather radar", imageUrl: null, href: "https://radar.weather.gov/", attribution: "National Weather Service · weather radar" } },
   "waterville-valley": { windy: { lat: 43.95, lon: -71.51, zoom: 10 }, official: { label: "NWS weather radar", imageUrl: null, href: "https://radar.weather.gov/", attribution: "National Weather Service · weather radar" } },
   "lakes-region": { windy: { lat: 43.54, lon: -71.39, zoom: 10 }, official: { label: "NWS weather radar", imageUrl: null, href: "https://radar.weather.gov/", attribution: "National Weather Service · weather radar" } },
+  "carrabassett-valley": { windy: { lat: 45.03, lon: -70.31, zoom: 10 }, official: { label: "NWS weather radar", imageUrl: null, href: "https://radar.weather.gov/", attribution: "National Weather Service · weather radar" } },
+  "newry-bethel": { windy: { lat: 44.47, lon: -70.86, zoom: 10 }, official: { label: "NWS weather radar", imageUrl: null, href: "https://radar.weather.gov/", attribution: "National Weather Service · weather radar" } },
+  "rangeley": { windy: { lat: 44.94, lon: -70.51, zoom: 10 }, official: { label: "NWS weather radar", imageUrl: null, href: "https://radar.weather.gov/", attribution: "National Weather Service · weather radar" } },
 };
 
 const DEFAULT_ZOOM = 9;
@@ -1706,6 +1712,9 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
   "franconia-notch": { center: { lat: 44.15, lng: -71.59 }, pins: [{ id: "cannon-mountain", name: "Cannon Mountain", lat: 44.1569, lng: -71.6980, accent: "#f97316" }, { id: "bretton-woods", name: "Bretton Woods", lat: 44.2600, lng: -71.4410, accent: "#f97316" }, { id: "loon-mountain", name: "Loon Mountain", lat: 44.0360, lng: -71.6220, accent: "#f97316" }, { id: "franconia", name: "Franconia", lat: 44.2270, lng: -71.7470, accent: "#0ea5e9" }, { id: "bretton-woods-town", name: "Bretton Woods", lat: 44.2580, lng: -71.4410, accent: "#0ea5e9" }] },
   "waterville-valley": { center: { lat: 43.95, lng: -71.51 }, pins: [{ id: "waterville-valley-resort", name: "Waterville Valley Resort", lat: 43.9500, lng: -71.5140, accent: "#f97316" }, { id: "waterville-valley-town", name: "Waterville Valley", lat: 43.9500, lng: -71.4990, accent: "#0ea5e9" }] },
   "lakes-region": { center: { lat: 43.54, lng: -71.39 }, pins: [{ id: "gunstock-mountain-resort", name: "Gunstock Mountain Resort", lat: 43.5270, lng: -71.3690, accent: "#f97316" }, { id: "gilford", name: "Gilford", lat: 43.5480, lng: -71.4060, accent: "#0ea5e9" }] },
+  "carrabassett-valley": { center: { lat: 45.03, lng: -70.31 }, pins: [{ id: "sugarloaf", name: "Sugarloaf", lat: 45.031, lng: -70.314, accent: "#f97316" }, { id: "carrabassett-valley-town", name: "Carrabassett Valley", lat: 45.085, lng: -70.265, accent: "#0ea5e9" }] },
+  "newry-bethel": { center: { lat: 44.48, lng: -70.83 }, pins: [{ id: "sunday-river", name: "Sunday River", lat: 44.473, lng: -70.856, accent: "#f97316" }, { id: "newry", name: "Newry", lat: 44.499, lng: -70.800, accent: "#0ea5e9" }] },
+  "rangeley": { center: { lat: 44.95, lng: -70.56 }, pins: [{ id: "saddleback-mountain", name: "Saddleback Mountain", lat: 44.936, lng: -70.510, accent: "#f97316" }, { id: "rangeley", name: "Rangeley", lat: 44.966, lng: -70.644, accent: "#0ea5e9" }] },
 };
 
 // Which country each region sits in. Drives the cross-region grouping on
@@ -1800,6 +1809,9 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "franconia-notch": "US",
   "waterville-valley": "US",
   "lakes-region": "US",
+  "carrabassett-valley": "US",
+  "newry-bethel": "US",
+  "rangeley": "US",
 };
 const COUNTRY_LABEL: Record<MapCountry, string> = { AU: "australia", JP: "japan", NZ: "new zealand", CA: "canada", US: "united states" };
 const REGION_LABEL: Record<RegionKey, string> = {
@@ -1888,6 +1900,9 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "franconia-notch": "franconia notch",
   "waterville-valley": "waterville valley",
   "lakes-region": "lakes region",
+  "carrabassett-valley": "carrabassett valley",
+  "newry-bethel": "newry / bethel",
+  "rangeley": "rangeley",
 };
 
 interface CountryPin extends PinSpec {

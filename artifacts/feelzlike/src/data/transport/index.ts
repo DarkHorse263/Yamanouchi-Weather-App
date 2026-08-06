@@ -100,6 +100,9 @@ import { WHITE_MOUNTAINS_TRANSPORT } from "./white-mountains";
 import { FRANCONIA_NOTCH_TRANSPORT } from "./franconia-notch";
 import { WATERVILLE_VALLEY_TRANSPORT } from "./waterville-valley";
 import { LAKES_REGION_TRANSPORT } from "./lakes-region";
+import { CARRABASSETT_VALLEY_TRANSPORT } from "./carrabassett-valley";
+import { NEWRY_BETHEL_TRANSPORT } from "./newry-bethel";
+import { RANGELEY_TRANSPORT } from "./rangeley";
 
 const REGISTRY: Record<RegionId, TransportProviderList> = {
   "snowy-mountains": SNOWY_MOUNTAINS_TRANSPORT,
@@ -213,6 +216,9 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   "franconia-notch": FRANCONIA_NOTCH_TRANSPORT,
   "waterville-valley": WATERVILLE_VALLEY_TRANSPORT,
   "lakes-region": LAKES_REGION_TRANSPORT,
+  "carrabassett-valley": CARRABASSETT_VALLEY_TRANSPORT,
+  "newry-bethel": NEWRY_BETHEL_TRANSPORT,
+  "rangeley": RANGELEY_TRANSPORT,
 };
 
 // Loader-time integrity check.

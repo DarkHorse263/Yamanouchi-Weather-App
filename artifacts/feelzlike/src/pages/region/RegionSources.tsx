@@ -540,8 +540,20 @@ const NH_ROADS_GENERAL: SourceGroup = {
   items: [{ label: "NHDOT · New England 511", detail: "state authority and regional real-time road conditions / camera map", url: "https://newengland511.org/Home/Index" }, { label: "NHDOT real-time travel information", detail: "state travel-information hub", url: "https://www.dot.nh.gov/doing-business-nhdot/general-public/real-time-travel-info" }],
 };
 
+
+/** Maine has no dedicated avalanche forecast or observation authority; do not imply MWAC covers it. */
+const ME_OFFICIAL_REFERENCES_NO_AVALANCHE: SourceGroup = {
+  title: "Official references", titleJa: "公式参照先", blurb: "Link-outs, not wired feeds · conditions shown on feelzlike come from the forecast ensemble below. Maine has no dedicated avalanche forecasting or observation authority, including no Maine extension of Mount Washington Avalanche Center coverage; its covered resort terrain is lift-served.", blurbJa: "リンクのみで、データ連携はしていません。メイン州には専用の雪崩情報機関がありません。", items: [{ label: "National Weather Service", detail: "US federal forecasts & warnings", url: "https://www.weather.gov/" }],
+};
+const ME_ROADS_GENERAL: SourceGroup = {
+  title: "Roads & transport", titleJa: "道路・交通", blurb: "MaineDOT and 511 Maine are the state road authority. Chains are permitted in slippery conditions under 29-A M.R.S. §2381, not mandatory; Maine has no general chain-up rule.", blurbJa: "メイン州には一般的なチェーン義務はありません。", items: [{ label: "MaineDOT · 511 Maine", detail: "state authority and real-time road conditions / camera map", url: "https://511maine.gov/" }, { label: "MaineDOT", detail: "state transport authority", url: "https://www.maine.gov/dot/" }],
+};
+
 const REGION_SOURCES: Record<string, SourceGroup[]> = {
 
+  "carrabassett-valley": [ME_OFFICIAL_REFERENCES_NO_AVALANCHE, ME_ROADS_GENERAL, { title: "Resorts & lifts", titleJa: "スキー場・リフト", items: [{ label: "Sugarloaf", detail: "Boyne Resorts-owned · Ikon Full 7 unrestricted / Base 5 days with blackouts · Boyne New England Pass · ⚠️ webcam sub-URL unconfirmed; use mountain report", url: "https://www.sugarloaf.com/mountain-report" }] }, FORECAST_ENSEMBLE],
+  "newry-bethel": [ME_OFFICIAL_REFERENCES_NO_AVALANCHE, ME_ROADS_GENERAL, { title: "Resorts & lifts", titleJa: "スキー場・リフト", items: [{ label: "Sunday River", detail: "Boyne Resorts-owned · Ikon Full 7 unrestricted / Base 5 days with blackouts · Boyne New England Pass · ⚠️ webcam sub-URL unconfirmed; use mountain report", url: "https://www.sundayriver.com/mountain-report" }] }, FORECAST_ENSEMBLE],
+  "rangeley": [ME_OFFICIAL_REFERENCES_NO_AVALANCHE, ME_ROADS_GENERAL, { title: "Resorts & lifts", titleJa: "スキー場・リフト", items: [{ label: "Saddleback Mountain", detail: "Arctaris-owned · Indy Pass, no blackouts · reopened 2020 after five-year closure · SKI Magazine readers' #1 East resort 2025 · ⚠️ exact 2025-26 close and live stream URLs unconfirmed", url: "https://www.saddlebackmaine.com/mountain-report/" }] }, FORECAST_ENSEMBLE],
   "white-mountains": [NH_OFFICIAL_REFERENCES, NH_ROADS_GENERAL, { title: "Resorts & lifts", titleJa: "スキー場・リフト", items: [
     { label: "Cranmore Mountain", detail: "Ikon Bonus Mountain (Full Pass only) · White Mountain Superpass · confirmed Observatory-hosted live Meister Cam", url: "https://cranmore.com/" },
     { label: "Wildcat Mountain", detail: "Epic Pass · Vail Resorts-owned · ⚠️ no distinct live official webcam URL confirmed", url: "https://www.skiwildcat.com/" },

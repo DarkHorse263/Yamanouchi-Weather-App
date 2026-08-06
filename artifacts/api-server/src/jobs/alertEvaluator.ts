@@ -210,6 +210,10 @@ const REGION_ANCHORS: Record<RegionId, {
   "franconia-notch": { lat: 44.1569, lon: -71.6980, elevation: 1244, region: "OTHER", displayName: "Franconia Notch" },
   "waterville-valley": { lat: 43.9500, lon: -71.5140, elevation: 1170, region: "OTHER", displayName: "Waterville Valley" },
   "lakes-region": { lat: 43.5270, lon: -71.3690, elevation: 684, region: "OTHER", displayName: "Lakes Region" },
+  // Maine anchors · all America/New_York. Maine has no dedicated avalanche forecast or observation authority.
+  "carrabassett-valley": { lat: 45.031, lon: -70.314, elevation: 1291, region: "OTHER", displayName: "Carrabassett Valley" },
+  "newry-bethel": { lat: 44.473, lon: -70.856, elevation: 957, region: "OTHER", displayName: "Newry / Bethel" },
+  "rangeley": { lat: 44.936, lon: -70.510, elevation: 1256, region: "OTHER", displayName: "Rangeley" },
 };
 
 interface EvaluatorReport {

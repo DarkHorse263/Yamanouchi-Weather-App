@@ -1584,6 +1584,14 @@ const WEBCAM_DATA: WebcamConfig[] = [
   { locationId: "franconia-notch-roads", locationName: "Roads to Franconia Notch · I-93 / US-3", webcamPageUrl: "https://newengland511.org/Home/Index", webcams: [] },
   { locationId: "waterville-valley-roads", locationName: "Roads to Waterville Valley · NH-49", webcamPageUrl: "https://newengland511.org/Home/Index", webcams: [] },
   { locationId: "lakes-region-roads", locationName: "Roads to Gunstock · NH-11A / NH-11", webcamPageUrl: "https://newengland511.org/Home/Index", webcams: [] },
+  // ─── Resort camera/reference pages: Maine ───
+  { locationId: "sugarloaf", locationName: "Sugarloaf mountain report", webcamPageUrl: "https://www.sugarloaf.com/mountain-report", webcams: [] }, // ⚠️ /mountain-report/webcams returned 404; official embeds likely live on report page
+  { locationId: "sunday-river", locationName: "Sunday River mountain report", webcamPageUrl: "https://www.sundayriver.com/mountain-report", webcams: [] }, // ⚠️ dedicated webcam sub-URL returned 404; do not invent one
+  { locationId: "saddleback-mountain", locationName: "Saddleback Mountain webcams", webcamPageUrl: "https://www.saddlebackmaine.com/webcams/", webcams: [] }, // official page confirmed; actual embed stream URLs/status unconfirmed
+  // ─── Roadside cams: MaineDOT / 511 Maine ───
+  { locationId: "carrabassett-valley-roads", locationName: "Roads to Sugarloaf · ME-16 / ME-27", webcamPageUrl: "https://511maine.gov/", webcams: [] },
+  { locationId: "newry-bethel-roads", locationName: "Roads to Sunday River · ME-26 / ME-2", webcamPageUrl: "https://511maine.gov/", webcams: [] },
+  { locationId: "rangeley-roads", locationName: "Roads to Saddleback · ME-4 / ME-16", webcamPageUrl: "https://511maine.gov/", webcams: [] },
 ];
 
 router.get("/webcams", (req, res) => {

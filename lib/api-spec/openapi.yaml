@@ -1751,6 +1751,9 @@ components:
         - franconia-notch
         - waterville-valley
         - lakes-region
+        - carrabassett-valley
+        - newry-bethel
+        - rangeley
       description: |
         Canonical region identifier used across the FeelZlike platform.
 

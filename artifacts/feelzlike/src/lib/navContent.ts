@@ -104,6 +104,9 @@ const REGIONS_WITH_ROADS_CONTENT: ReadonlySet<string> = new Set([
   "franconia-notch",
   "waterville-valley",
   "lakes-region",
+  "carrabassett-valley",
+  "newry-bethel",
+  "rangeley",
 ]);
 
 /**
