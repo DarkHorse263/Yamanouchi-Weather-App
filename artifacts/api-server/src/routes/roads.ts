@@ -922,6 +922,9 @@ function maChainEntry(opts:{id:string;regionId:string;mountainId:string;mountain
 /** Minnesota has no passenger chain or winter-tire mandate; residents may not use studded tires. */
 function mnChainEntry(opts:{id:string;regionId:string;mountainId:string;mountainName:string;approach:string;detail:string;inSeason:boolean;issuedAt:string}){return{id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"No passenger chain mandate":"Outside ski season",detail:`Minnesota has no passenger chain or winter-tire mandate; resident studded tires are banned year-round. ${opts.detail}`,issuedAt:opts.issuedAt};}
 
+/** Wisconsin has no passenger chain/winter-tire mandate; studs are restricted for ordinary passenger vehicles. */
+function wiChainEntry(opts:{id:string;regionId:string;mountainId:string;mountainName:string;approach:string;detail:string;inSeason:boolean;issuedAt:string}){return{id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"No passenger chain mandate":"Outside ski season",detail:`Wisconsin has no passenger chain or winter-tire mandate. Chains are permitted when needed; studded tires are restricted for most passenger vehicles. ${opts.detail}`,issuedAt:opts.issuedAt};}
+
 function nmChainEntry(opts: {
   id: string;
   regionId: string;
@@ -2149,6 +2152,8 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
 
   if(regionId==="lutsen-north-shore"){const inSeason=isUsSnowSeason(now);return[mnChainEntry({id:"lutsen-us-61",regionId,mountainId:"lutsen-mountains",mountainName:"Lutsen Mountains",approach:"US/MN Highway 61 along Lake Superior’s North Shore",detail:"⚠️ Highway 61 can close suddenly in localized Lake Superior lake-effect snow and whiteouts; check 511MN before travelling.",inSeason,issuedAt})];}
 
+  if(regionId==="wausau"||regionId==="wisconsin-dells"){const inSeason=isUsSnowSeason(now);const wi=(id:string,mountainId:string,mountainName:string,approach:string,detail:string)=>wiChainEntry({id,regionId,mountainId,mountainName,approach,detail,inSeason,issuedAt});return regionId==="wausau"?[wi("granite-peak-wi-29","granite-peak","Granite Peak","WI-29/US-51 to Rib Mountain State Park","Check 511 Wisconsin before winter travel.")]:[wi("cascade-mountain-wi-33","cascade-mountain","Cascade Mountain","I-90/94 and WI-33 near Portage","Check 511 Wisconsin before winter travel.")];}
+
   if (
     regionId === "taos" ||
     regionId === "angel-fire" ||
@@ -2664,6 +2669,7 @@ router.get("/road-conditions", async (req, res) => {
     const isUsPa = region === "poconos" || region === "laurel-highlands";
     const isUsMa = region === "berkshires" || region === "central-massachusetts";
     const isUsMn = region === "lutsen-north-shore";
+    const isUsWi = region === "wausau" || region === "wisconsin-dells";
     const isUsNm =
       region === "taos" ||
       region === "angel-fire" ||
@@ -2850,6 +2856,9 @@ router.get("/road-conditions", async (req, res) => {
     } else if (isUsMn) {
       generalAdvice = "We do not yet pull live road data for Minnesota · check MnDOT's 511 Minnesota (511mn.org) for North Shore road conditions, cameras and closures. ⚠️ Highway 61 can see sudden Lake Superior lake-effect snow whiteouts and full closures. Minnesota has no passenger chain or winter-tire mandate; resident studded tires are banned year-round. No avalanche authority is needed here: North Shore ski terrain has no meaningful avalanche hazard.";
       liveTrafficUrl = "https://511mn.org/";
+    } else if (isUsWi) {
+      generalAdvice = "We do not yet pull live road data for Wisconsin · check WisDOT's 511 Wisconsin (511wi.gov) for closures, cameras and winter road conditions. Wisconsin has no passenger chain or winter-tire mandate; chains are permitted when conditions require them and studded tires are restricted for most passenger vehicles. No avalanche authority is needed here: Wisconsin ski terrain has no meaningful avalanche hazard.";
+      liveTrafficUrl = "https://511wi.gov/";
     } else if (isUsNm) {
       // No live New Mexico road feed is wired yet - say so plainly rather
       // than shipping an empty list that reads like "all clear". New

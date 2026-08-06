@@ -543,6 +543,8 @@ if (process.env.NODE_ENV === "production") {
     "berkshires": { name:"Berkshires", towns:{hancock:"Hancock","great-barrington":"Great Barrington"} },
     "central-massachusetts": { name:"Central Massachusetts", towns:{"princeton-ma":"Princeton"} },
     "lutsen-north-shore": { name:"Lutsen / North Shore", towns:{lutsen:"Lutsen"} },
+    "wausau": { name:"Wausau", towns:{"wausau-town":"Wausau"} },
+    "wisconsin-dells": { name:"Wisconsin Dells", towns:{portage:"Portage"} },
     "mt-hood": {
       name: "Mt. Hood",
       towns: { "government-camp": "Government Camp" },

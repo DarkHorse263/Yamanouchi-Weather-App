@@ -154,7 +154,9 @@ export type RegionKey =
   | "laurel-highlands"
   | "berkshires"
   | "central-massachusetts"
-  | "lutsen-north-shore";
+  | "lutsen-north-shore"
+  | "wausau"
+  | "wisconsin-dells";
 type ViewMode = "interactive" | "windy" | "official";
 
 interface RegionConfig {
@@ -883,6 +885,8 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
   "berkshires":{windy:{lat:42.45,lon:-73.15,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
   "central-massachusetts":{windy:{lat:42.48,lon:-71.88,zoom:10},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
   "lutsen-north-shore":{windy:{lat:47.65,lon:-90.70,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
+  "wausau":{windy:{lat:44.94,lon:-89.66,zoom:10},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
+  "wisconsin-dells":{windy:{lat:43.54,lon:-89.43,zoom:10},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
   "mt-hood": {
     windy: { lat: 45.32, lon: -121.72, zoom: 10 },
     official: {
@@ -1665,6 +1669,8 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
   "berkshires":{center:{lat:42.45,lng:-73.15},pins:[{id:"jiminy-peak",name:"Jiminy Peak",lat:42.554,lng:-73.292,accent:"#f97316"},{id:"ski-butternut",name:"Ski Butternut",lat:42.196,lng:-73.319,accent:"#f97316"},{id:"berkshire-east",name:"Berkshire East",lat:42.684,lng:-72.875,accent:"#f97316"},{id:"hancock",name:"Hancock",lat:42.547,lng:-73.323,accent:"#0ea5e9"},{id:"great-barrington",name:"Great Barrington",lat:42.196,lng:-73.363,accent:"#0ea5e9"}]},
   "central-massachusetts":{center:{lat:42.48,lng:-71.88},pins:[{id:"wachusett-mountain",name:"Wachusett Mountain",lat:42.488,lng:-71.887,accent:"#f97316"},{id:"princeton-ma",name:"Princeton",lat:42.473,lng:-71.877,accent:"#0ea5e9"}]},
   "lutsen-north-shore":{center:{lat:47.65,lng:-90.70},pins:[{id:"lutsen-mountains",name:"Lutsen Mountains",lat:47.663,lng:-90.714,accent:"#f97316"},{id:"lutsen",name:"Lutsen",lat:47.643,lng:-90.714,accent:"#0ea5e9"}]},
+  "wausau":{center:{lat:44.94,lng:-89.66},pins:[{id:"granite-peak",name:"Granite Peak",lat:44.931,lng:-89.688,accent:"#f97316"},{id:"wausau-town",name:"Wausau",lat:44.959,lng:-89.630,accent:"#0ea5e9"}]},
+  "wisconsin-dells":{center:{lat:43.54,lng:-89.43},pins:[{id:"cascade-mountain",name:"Cascade Mountain",lat:43.531,lng:-89.395,accent:"#f97316"},{id:"portage",name:"Portage",lat:43.539,lng:-89.462,accent:"#0ea5e9"}]},
   "mt-hood": {
     center: { lat: 45.320, lng: -121.720 },
     pins: [
@@ -1838,6 +1844,8 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "berkshires": "US",
   "central-massachusetts": "US",
   "lutsen-north-shore": "US",
+  "wausau": "US",
+  "wisconsin-dells": "US",
   "mt-hood": "US",
   "bend": "US",
   "crystal-mountain": "US",
@@ -1941,6 +1949,8 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "berkshires": "berkshires",
   "central-massachusetts": "central massachusetts",
   "lutsen-north-shore": "lutsen & north shore",
+  "wausau": "wausau",
+  "wisconsin-dells": "wisconsin dells",
   "mt-hood": "mt. hood",
   "bend": "bend",
   "crystal-mountain": "crystal mountain",

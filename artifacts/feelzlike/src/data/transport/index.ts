@@ -93,6 +93,8 @@ import { LAUREL_HIGHLANDS_TRANSPORT } from "./laurel-highlands";
 import { BERKSHIRES_TRANSPORT } from "./berkshires";
 import { CENTRAL_MASSACHUSETTS_TRANSPORT } from "./central-massachusetts";
 import { LUTSEN_NORTH_SHORE_TRANSPORT } from "./lutsen-north-shore";
+import { WAUSAU_TRANSPORT } from "./wausau";
+import { WISCONSIN_DELLS_TRANSPORT } from "./wisconsin-dells";
 import { MT_HOOD_TRANSPORT } from "./mt-hood";
 import { BEND_TRANSPORT } from "./bend";
 import { CRYSTAL_MOUNTAIN_TRANSPORT } from "./crystal-mountain";
@@ -217,6 +219,8 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   "berkshires": BERKSHIRES_TRANSPORT,
   "central-massachusetts": CENTRAL_MASSACHUSETTS_TRANSPORT,
   "lutsen-north-shore": LUTSEN_NORTH_SHORE_TRANSPORT,
+  wausau: WAUSAU_TRANSPORT,
+  "wisconsin-dells": WISCONSIN_DELLS_TRANSPORT,
 
   // US (Oregon) · no operators curated to the AU/JP/NZ verification
   // standard yet, so these are registered empty rather than filled with

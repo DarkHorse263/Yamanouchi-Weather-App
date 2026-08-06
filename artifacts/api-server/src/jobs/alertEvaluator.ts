@@ -193,6 +193,8 @@ const REGION_ANCHORS: Record<RegionId, {
   "berkshires": { lat:42.554, lon:-73.292, elevation:725, region:"OTHER", displayName:"Berkshires" },
   "central-massachusetts": { lat:42.488, lon:-71.887, elevation:612, region:"OTHER", displayName:"Central Massachusetts" },
   "lutsen-north-shore": { lat:47.663, lon:-90.714, elevation:514, region:"OTHER", displayName:"Lutsen / North Shore" },
+  "wausau": { lat:44.931, lon:-89.688, elevation:594, region:"OTHER", displayName:"Wausau" },
+  "wisconsin-dells": { lat:43.531, lon:-89.395, elevation:378, region:"OTHER", displayName:"Wisconsin Dells" },
 
   // Oregon anchors: each on the highest lift-served summit in the region.
   // America/Los_Angeles, same as Washington and California.

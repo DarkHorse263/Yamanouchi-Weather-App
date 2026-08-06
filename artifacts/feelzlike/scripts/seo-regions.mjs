@@ -1353,6 +1353,9 @@ export const REGIONS = [
 
   {slug:"lutsen-north-shore",name:"Lutsen / North Shore",subtitle:"Minnesota · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Lutsen Mountains",blurb:"Indy Pass 2025-26 · ⚠️ confirmed Ikon move 2026-27 · Minnesota's largest/highest vertical, not Midwest highest"}],towns:[{id:"lutsen",name:"Lutsen",blurb:"North Shore base town; Highway 61 lake-effect closure risk"}]},
 
+  {slug:"wausau",name:"Wausau",subtitle:"Wisconsin · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Granite Peak Ski Area",blurb:"Midwest Family Ski Resorts, not Nash/Skyline · Indy 2025-26 · ⚠️ Ikon 2026-27"}],towns:[{id:"wausau-town",name:"Wausau",blurb:"Rib Mountain base city"}]},
+  {slug:"wisconsin-dells",name:"Wisconsin Dells",subtitle:"Wisconsin · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Cascade Mountain",blurb:"independent Walz family · no multi-resort pass (not Indy) · ⚠️ Flash webcam likely broken"}],towns:[{id:"portage",name:"Portage",blurb:"Dells-area base town"}]},
+
 ];
 
 /** Region sub-sections that actually render for this region (see gating notes above). */

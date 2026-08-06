@@ -158,6 +158,8 @@ export const RegionId = {
   "berkshires": "berkshires",
   "central-massachusetts": "central-massachusetts",
   "lutsen-north-shore": "lutsen-north-shore",
+  "wausau": "wausau",
+  "wisconsin-dells": "wisconsin-dells",
   "mt-hood": "mt-hood",
   "bend": "bend",
   "crystal-mountain": "crystal-mountain",

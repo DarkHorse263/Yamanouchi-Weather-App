@@ -1397,6 +1397,11 @@ const WEBCAM_DATA: WebcamConfig[] = [
   // Minnesota · Lutsen official webcam page confirmed; page-only link avoids fabricated feed URLs.
   {locationId:"lutsen-mountains",locationName:"Lutsen Mountains live cam",webcamPageUrl:"https://www.lutsen.com/mountain-info/our-webcam",webcams:[]},
   {locationId:"lutsen-north-shore-roads",locationName:"North Shore roads · 511 Minnesota",webcamPageUrl:"https://511mn.org/",webcams:[]},
+  // Wisconsin · page-only links; Cascade's Flash embed is likely non-functional.
+  {locationId:"granite-peak",locationName:"Granite Peak live cams",webcamPageUrl:"https://www.skigranitepeak.com/mountain-info/live-web-cams",webcams:[]}, // official page exists; live status not directly re-verified
+  {locationId:"cascade-mountain",locationName:"Cascade Mountain snow cams",webcamPageUrl:"https://www.cascademountain.com/snow-cams/",webcams:[]}, // Adobe Flash embed likely broken
+  {locationId:"wausau-roads",locationName:"Wausau roads · 511 Wisconsin",webcamPageUrl:"https://511wi.gov/",webcams:[]},
+  {locationId:"wisconsin-dells-roads",locationName:"Wisconsin Dells roads · 511 Wisconsin",webcamPageUrl:"https://511wi.gov/",webcams:[]},
 
   // ─── Resort live-cam pages: Oregon (Mt. Hood) ──────
   {
