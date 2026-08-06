@@ -1379,6 +1379,14 @@ const WEBCAM_DATA: WebcamConfig[] = [
   { locationId: "mt-bohemia", locationName: "Mt. Bohemia webcams", webcamPageUrl: "https://www.mtbohemia.com/current-conditions/", webcams: [] }, // no confirmed official webcam
   { locationId: "harbor-springs-roads", locationName: "Roads to Harbor Springs resorts · Mi Drive", webcamPageUrl: "https://www.michigan.gov/drive", webcams: [] },
   { locationId: "keweenaw-peninsula-roads", locationName: "Roads to Mt. Bohemia · Mi Drive", webcamPageUrl: "https://www.michigan.gov/drive", webcams: [] },
+  // Pennsylvania · page-only links; no unverified camera feed is fabricated.
+  { locationId:"camelback-mountain",locationName:"Camelback live cameras",webcamPageUrl:"https://www.camelbackresort.com/resort-information/live-cameras",webcams:[] },
+  { locationId:"blue-mountain-pa",locationName:"Blue Mountain PA cameras",webcamPageUrl:"https://www.skibluemt.com/mountain-cams/",webcams:[] },
+  { locationId:"shawnee-mountain",locationName:"Shawnee Mountain cameras",webcamPageUrl:"https://shawneemt.com/hours-of-operation-trail-map/",webcams:[] }, // no official live webcam confirmed
+  { locationId:"seven-springs-mountain",locationName:"Seven Springs cameras",webcamPageUrl:"https://www.7springs.com/the-mountain/mountain-conditions/mountain-cams.aspx",webcams:[] },
+  { locationId:"blue-knob",locationName:"Blue Knob camera",webcamPageUrl:"https://blueknob.com/trail-map-conditions/",webcams:[] }, // link destination unresolved/conflicting
+  { locationId:"poconos-roads",locationName:"Poconos roads · 511PA",webcamPageUrl:"https://www.511pa.com/",webcams:[] },
+  { locationId:"laurel-highlands-roads",locationName:"Laurel Highlands roads · 511PA",webcamPageUrl:"https://www.511pa.com/",webcams:[] },
 
   // ─── Resort live-cam pages: Oregon (Mt. Hood) ──────
   {

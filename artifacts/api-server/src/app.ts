@@ -538,6 +538,8 @@ if (process.env.NODE_ENV === "production") {
     },
     "harbor-springs": { name: "Harbor Springs", towns: { "harbor-springs-town": "Harbor Springs" } },
     "keweenaw-peninsula": { name: "Keweenaw Peninsula", towns: { mohawk: "Mohawk" } },
+    "poconos": { name: "Poconos", towns: { tannersville: "Tannersville", "pocono-manor": "Pocono Manor" } },
+    "laurel-highlands": { name: "Laurel Highlands", towns: { "seven-springs-town": "Seven Springs" } },
     "mt-hood": {
       name: "Mt. Hood",
       towns: { "government-camp": "Government Camp" },

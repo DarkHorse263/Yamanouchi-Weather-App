@@ -153,6 +153,8 @@ export const RegionId = {
   "albuquerque-sandia": "albuquerque-sandia",
   "harbor-springs": "harbor-springs",
   "keweenaw-peninsula": "keweenaw-peninsula",
+  "poconos": "poconos",
+  "laurel-highlands": "laurel-highlands",
   "mt-hood": "mt-hood",
   "bend": "bend",
   "crystal-mountain": "crystal-mountain",

@@ -72,6 +72,8 @@ import { santaFeRegion } from "./santa-fe";
 import { albuquerqueSandiaRegion } from "./albuquerque-sandia";
 import { harborSpringsRegion } from "./harbor-springs";
 import { keweenawPeninsulaRegion } from "./keweenaw-peninsula";
+import { poconosRegion } from "./poconos";
+import { laurelHighlandsRegion } from "./laurel-highlands";
 import { mtHoodRegion } from "./mt-hood";
 import { bendRegion } from "./bend";
 import { crystalMountainRegion } from "./crystal-mountain";
@@ -207,6 +209,8 @@ export const REGIONS: RegionConfig[] = [
   albuquerqueSandiaRegion,
   harborSpringsRegion,
   keweenawPeninsulaRegion,
+  poconosRegion,
+  laurelHighlandsRegion,
   mtHoodRegion,
   bendRegion,
   crystalMountainRegion,
@@ -318,6 +322,8 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "albuquerque-sandia": "US",
   "harbor-springs": "US",
   "keweenaw-peninsula": "US",
+  "poconos": "US",
+  "laurel-highlands": "US",
   "mt-hood": "US",
   "bend": "US",
   "crystal-mountain": "US",

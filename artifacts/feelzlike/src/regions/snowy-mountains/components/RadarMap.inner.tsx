@@ -149,7 +149,9 @@ export type RegionKey =
   | "windham"
   | "highmount"
   | "harbor-springs"
-  | "keweenaw-peninsula";
+  | "keweenaw-peninsula"
+  | "poconos"
+  | "laurel-highlands";
 type ViewMode = "interactive" | "windy" | "official";
 
 interface RegionConfig {
@@ -873,6 +875,8 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
   },
   "harbor-springs": { windy: { lat: 45.42, lon: -84.95, zoom: 10 }, official: { label: "NWS weather radar", imageUrl: null, href: "https://radar.weather.gov/", attribution: "National Weather Service · weather radar" } },
   "keweenaw-peninsula": { windy: { lat: 47.39, lon: -88.20, zoom: 9 }, official: { label: "NWS weather radar", imageUrl: null, href: "https://radar.weather.gov/", attribution: "National Weather Service · weather radar" } },
+  "poconos": { windy:{lat:41.04,lon:-75.30,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"} },
+  "laurel-highlands": { windy:{lat:40.20,lon:-79.05,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"} },
   "mt-hood": {
     windy: { lat: 45.32, lon: -121.72, zoom: 10 },
     official: {
@@ -1650,6 +1654,8 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
   },
   "harbor-springs": { center: { lat: 45.39, lng: -84.95 }, pins: [{ id: "boyne-mountain", name: "Boyne Mountain", lat: 45.1639, lng: -84.9308, accent: "#f97316" }, { id: "boyne-highlands", name: "The Highlands", lat: 45.4717, lng: -84.9233, accent: "#f97316" }, { id: "nubs-nob", name: "Nub's Nob", lat: 45.4623, lng: -84.9420, accent: "#f97316" }, { id: "harbor-springs-town", name: "Harbor Springs", lat: 45.4317, lng: -84.9889, accent: "#0ea5e9" }] },
   "keweenaw-peninsula": { center: { lat: 47.38, lng: -88.24 }, pins: [{ id: "mt-bohemia", name: "Mt. Bohemia", lat: 47.4080, lng: -88.1010, accent: "#f97316" }, { id: "mohawk", name: "Mohawk", lat: 47.3308, lng: -88.3743, accent: "#0ea5e9" }] },
+  "poconos": {center:{lat:41.04,lng:-75.30},pins:[{id:"camelback-mountain",name:"Camelback",lat:41.052,lng:-75.352,accent:"#f97316"},{id:"blue-mountain-pa",name:"Blue Mountain PA",lat:40.810,lng:-75.521,accent:"#f97316"},{id:"shawnee-mountain",name:"Shawnee",lat:41.003,lng:-75.116,accent:"#f97316"},{id:"tannersville",name:"Tannersville",lat:41.040,lng:-75.305,accent:"#0ea5e9"},{id:"pocono-manor",name:"Pocono Manor",lat:41.101,lng:-75.347,accent:"#0ea5e9"}]},
+  "laurel-highlands": {center:{lat:40.20,lng:-79.05},pins:[{id:"seven-springs-mountain",name:"Seven Springs",lat:40.022,lng:-79.297,accent:"#f97316"},{id:"blue-knob",name:"Blue Knob",lat:40.685,lng:-78.535,accent:"#f97316"},{id:"seven-springs-town",name:"Seven Springs",lat:40.041,lng:-79.467,accent:"#0ea5e9"}]},
   "mt-hood": {
     center: { lat: 45.320, lng: -121.720 },
     pins: [
@@ -1818,6 +1824,8 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "albuquerque-sandia": "US",
   "harbor-springs": "US",
   "keweenaw-peninsula": "US",
+  "poconos": "US",
+  "laurel-highlands": "US",
   "mt-hood": "US",
   "bend": "US",
   "crystal-mountain": "US",
@@ -1916,6 +1924,8 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "albuquerque-sandia": "albuquerque",
   "harbor-springs": "harbor springs",
   "keweenaw-peninsula": "keweenaw peninsula",
+  "poconos": "poconos",
+  "laurel-highlands": "laurel highlands",
   "mt-hood": "mt. hood",
   "bend": "bend",
   "crystal-mountain": "crystal mountain",

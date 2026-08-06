@@ -103,6 +103,8 @@ export const REGION_IDS = [
   "highmount",
   "harbor-springs",
   "keweenaw-peninsula",
+  "poconos",
+  "laurel-highlands",
 ] as const;
 export type RegionId = (typeof REGION_IDS)[number];
 
@@ -757,6 +759,16 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "mt-bohemia": "keweenaw-peninsula",
   "mohawk": "keweenaw-peninsula",
   "keweenaw-peninsula-roads": "keweenaw-peninsula",
+  "camelback-mountain": "poconos",
+  "blue-mountain-pa": "poconos",
+  "shawnee-mountain": "poconos",
+  "tannersville": "poconos",
+  "pocono-manor": "poconos",
+  "poconos-roads": "poconos",
+  "seven-springs-mountain": "laurel-highlands",
+  "blue-knob": "laurel-highlands",
+  "seven-springs-town": "laurel-highlands",
+  "laurel-highlands-roads": "laurel-highlands",
 
   // Mt. Hood, OR. Three resorts sharing one base town (Government Camp).
   "mt-hood-meadows": "mt-hood",

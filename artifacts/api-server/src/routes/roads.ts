@@ -913,6 +913,9 @@ function miChainEntry(opts: { id: string; regionId: string; mountainId: string; 
   return { id: opts.id, regionId: opts.regionId, mountainId: opts.mountainId, mountainName: opts.mountainName, approach: opts.approach, status: "not-required", label: opts.inSeason ? "No passenger chain law" : "Outside ski season", detail: `${opts.inSeason ? "Michigan has no passenger-vehicle chain or winter-tire mandate; chains are permitted when conditions require them. Studded tyres have date-based legal windows." : "Michigan has no passenger chain-law requirement."} ${opts.detail}`, issuedAt: opts.issuedAt };
 }
 
+/** Pennsylvania has no general passenger chain law; its named chain-up zones and tier system are commercial-vehicle-only. */
+function paChainEntry(opts: { id:string; regionId:string; mountainId:string; mountainName:string; approach:string; detail:string; inSeason:boolean; issuedAt:string }) { return {id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"No passenger chain mandate":"Outside ski season",detail:`Pennsylvania has no general passenger chain or winter-tire mandate. Commercial winter-event restrictions and three named truck chain-up zones do not create a passenger-car mandate. ${opts.detail}`,issuedAt:opts.issuedAt}; }
+
 function nmChainEntry(opts: {
   id: string;
   regionId: string;
@@ -2134,6 +2137,8 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
     return [mi("mt-bohemia-lac-la-belle-rd", "mt-bohemia", "Mt. Bohemia", "US-41 through the Keweenaw, then Lac La Belle Rd", "⚠️ Upper Peninsula roads can see intense, localized Lake Superior lake-effect snow and rapid whiteouts; check Mi Drive cameras and plow tracking before travel.")];
   }
 
+  if (regionId === "poconos" || regionId === "laurel-highlands") { const inSeason=isUsSnowSeason(now); const pa=(id:string,mountainId:string,mountainName:string,approach:string,detail:string)=>paChainEntry({id,regionId,mountainId,mountainName,approach,detail,inSeason,issuedAt}); if(regionId==="poconos") return [pa("camelback-pa-715","camelback-mountain","Camelback","I-80 to Tannersville, then PA-715","Check 511PA for winter condition overlays."),pa("blue-mountain-pa-248","blue-mountain-pa","Blue Mountain PA","PA-248/Blue Mountain Dr near Palmerton","Check 511PA for winter condition overlays."),pa("shawnee-pa-402","shawnee-mountain","Shawnee Mountain","US-209/PA-402 near Shawnee-on-Delaware","Check 511PA for winter condition overlays.")]; return [pa("seven-springs-pa-281","seven-springs-mountain","Seven Springs","PA-281/County roads to Seven Springs","Check 511PA; commercial-only Summit Mountain US-40 chain-up zone is in the wider Laurel Highlands."),pa("blue-knob-pa-869","blue-knob","Blue Knob","PA-869 toward Claysburg/Blue Knob","Check 511PA for winter condition overlays.")]; }
+
   if (
     regionId === "taos" ||
     regionId === "angel-fire" ||
@@ -2646,6 +2651,7 @@ router.get("/road-conditions", async (req, res) => {
     //    pointing at an authority that doesn't actually cover them.
     // US (Michigan) · Mi Drive has the official state road map. No passenger chain law; no avalanche authority because this is genuinely non-avalanche terrain.
     const isUsMi = region === "harbor-springs" || region === "keweenaw-peninsula";
+    const isUsPa = region === "poconos" || region === "laurel-highlands";
     const isUsNm =
       region === "taos" ||
       region === "angel-fire" ||
@@ -2823,6 +2829,9 @@ router.get("/road-conditions", async (req, res) => {
         ? "We do not yet pull live road data for Michigan · check MDOT's Mi Drive (michigan.gov/drive) for closures, cameras and plow tracking before driving to Mt. Bohemia. ⚠️ Keweenaw/Upper Peninsula roads are exposed to intense localized Lake Superior lake-effect snow and sudden whiteouts. Michigan has no passenger-vehicle chain or winter-tire mandate; seasonal studded-tire date restrictions apply. No avalanche authority is needed here: this low-relief ski terrain has no meaningful avalanche risk."
         : "We do not yet pull live road data for Michigan · check MDOT's Mi Drive (michigan.gov/drive) for closures, cameras and plow tracking before driving. Michigan has no passenger-vehicle chain or winter-tire mandate; seasonal studded-tire date restrictions apply. No avalanche authority is needed here: this low-relief ski terrain has no meaningful avalanche risk.";
       liveTrafficUrl = "https://www.michigan.gov/drive";
+    } else if (isUsPa) {
+      generalAdvice = "We do not yet pull live road data for Pennsylvania · check PennDOT's 511PA (511pa.com) for closures, cameras and winter road conditions. Pennsylvania has no general passenger-vehicle chain or winter-tire mandate. Its storm-activated vehicle restrictions and three named chain-up zones are commercial-vehicle measures; the Summit Mountain US-40 zone is in the broader Laurel Highlands. No avalanche authority is needed here: these low-relief groomed ski areas have no meaningful avalanche hazard.";
+      liveTrafficUrl = "https://www.511pa.com/";
     } else if (isUsNm) {
       // No live New Mexico road feed is wired yet - say so plainly rather
       // than shipping an empty list that reads like "all clear". New

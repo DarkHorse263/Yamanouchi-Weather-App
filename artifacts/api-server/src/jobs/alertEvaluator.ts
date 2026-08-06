@@ -188,6 +188,8 @@ const REGION_ANCHORS: Record<RegionId, {
   // Michigan anchors · America/Detroit statewide for these selected areas, including Keweenaw.
   "harbor-springs": { lat: 45.4717, lon: -84.9233, elevation: 404, region: "OTHER", displayName: "Harbor Springs" },
   "keweenaw-peninsula": { lat: 47.4080, lon: -88.1010, elevation: 457, region: "OTHER", displayName: "Keweenaw Peninsula" },
+  "poconos": { lat: 41.052, lon: -75.352, elevation: 634, region: "OTHER", displayName: "Poconos" },
+  "laurel-highlands": { lat: 40.022, lon: -79.297, elevation: 913, region: "OTHER", displayName: "Laurel Highlands" },
 
   // Oregon anchors: each on the highest lift-served summit in the region.
   // America/Los_Angeles, same as Washington and California.

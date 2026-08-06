@@ -92,6 +92,8 @@ const REGIONS_WITH_ROADS_CONTENT: ReadonlySet<string> = new Set([
   "albuquerque-sandia",
   "harbor-springs",
   "keweenaw-peninsula",
+  "poconos",
+  "laurel-highlands",
   "mt-hood",
   "bend",
   "crystal-mountain",

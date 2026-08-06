@@ -88,6 +88,8 @@ import { SANTA_FE_TRANSPORT } from "./santa-fe";
 import { ALBUQUERQUE_SANDIA_TRANSPORT } from "./albuquerque-sandia";
 import { HARBOR_SPRINGS_TRANSPORT } from "./harbor-springs";
 import { KEWEENAW_PENINSULA_TRANSPORT } from "./keweenaw-peninsula";
+import { POCONOS_TRANSPORT } from "./poconos";
+import { LAUREL_HIGHLANDS_TRANSPORT } from "./laurel-highlands";
 import { MT_HOOD_TRANSPORT } from "./mt-hood";
 import { BEND_TRANSPORT } from "./bend";
 import { CRYSTAL_MOUNTAIN_TRANSPORT } from "./crystal-mountain";
@@ -207,6 +209,8 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   "albuquerque-sandia": ALBUQUERQUE_SANDIA_TRANSPORT,
   "harbor-springs": HARBOR_SPRINGS_TRANSPORT,
   "keweenaw-peninsula": KEWEENAW_PENINSULA_TRANSPORT,
+  "poconos": POCONOS_TRANSPORT,
+  "laurel-highlands": LAUREL_HIGHLANDS_TRANSPORT,
 
   // US (Oregon) · no operators curated to the AU/JP/NZ verification
   // standard yet, so these are registered empty rather than filled with
