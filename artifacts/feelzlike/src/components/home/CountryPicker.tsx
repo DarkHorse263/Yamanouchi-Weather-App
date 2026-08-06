@@ -131,6 +131,10 @@ const FALLBACK_REGIONS: Region[] = [
   { id: "snoqualmie-pass",        name: "Snoqualmie Pass",                 country: "United States", countryCode: "US", region: "Washington",      status: "live", href: "/snoqualmie-pass/",        baseTowns: ["Snoqualmie Pass"],                                           mountains: ["The Summit at Snoqualmie"],                               headlineLabel: "Snoqualmie Pass", headline: null },
   { id: "stevens-pass",           name: "Stevens Pass",                    country: "United States", countryCode: "US", region: "Washington",      status: "live", href: "/stevens-pass/",           baseTowns: ["Skykomish"],                                                 mountains: ["Stevens Pass Ski Area"],                                   headlineLabel: "Stevens Pass", headline: null },
   { id: "mt-baker",               name: "Mt. Baker",                       country: "United States", countryCode: "US", region: "Washington",      status: "live", href: "/mt-baker/",               baseTowns: ["Glacier"],                                                   mountains: ["Mt. Baker Ski Area"],                                      headlineLabel: "Mt. Baker",    headline: null },
+  { id: "sun-valley",             name: "Sun Valley",                      country: "United States", countryCode: "US", region: "Idaho",          status: "live", href: "/sun-valley/",             baseTowns: ["Ketchum"],                                                   mountains: ["Bald Mountain", "Dollar Mountain"],                       headlineLabel: "Sun Valley",   headline: null },
+  { id: "sandpoint",              name: "Sandpoint",                       country: "United States", countryCode: "US", region: "Idaho",          status: "live", href: "/sandpoint/",              baseTowns: ["Sandpoint"],                                                 mountains: ["Schweitzer Mountain Resort"],                             headlineLabel: "Sandpoint",    headline: null },
+  { id: "boise",                  name: "Boise",                           country: "United States", countryCode: "US", region: "Idaho",          status: "live", href: "/boise/",                 baseTowns: ["Boise"],                                                     mountains: ["Bogus Basin"],                                             headlineLabel: "Boise",        headline: null },
+  { id: "donnelly-mccall",        name: "Donnelly / McCall",               country: "United States", countryCode: "US", region: "Idaho",          status: "live", href: "/donnelly-mccall/",        baseTowns: ["Donnelly"],                                                  mountains: ["Tamarack Resort", "Brundage Mountain"],                   headlineLabel: "Donnelly / McCall", headline: null },
 ];
 
 // Map a region to the base town we surface in the country card. This is
@@ -212,6 +216,10 @@ const PRIMARY_TOWN: Record<string, string> = {
   "snoqualmie-pass":          "Snoqualmie Pass",
   "stevens-pass":             "Skykomish",
   "mt-baker":                 "Glacier",
+  "sun-valley":               "Ketchum",
+  "sandpoint":                "Sandpoint",
+  "boise":                    "Boise",
+  "donnelly-mccall":          "Donnelly",
 };
 
 // AU + NZ = southern hemisphere (snow Jun-Sep); JP + CA + US = northern (snow Dec-Mar).

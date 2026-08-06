@@ -92,6 +92,10 @@ import { CRYSTAL_MOUNTAIN_TRANSPORT } from "./crystal-mountain";
 import { SNOQUALMIE_PASS_TRANSPORT } from "./snoqualmie-pass";
 import { STEVENS_PASS_TRANSPORT } from "./stevens-pass";
 import { MT_BAKER_TRANSPORT } from "./mt-baker";
+import { SUN_VALLEY_TRANSPORT } from "./sun-valley";
+import { SANDPOINT_TRANSPORT } from "./sandpoint";
+import { BOISE_TRANSPORT } from "./boise";
+import { DONNELLY_MCCALL_TRANSPORT } from "./donnelly-mccall";
 
 const REGISTRY: Record<RegionId, TransportProviderList> = {
   "snowy-mountains": SNOWY_MOUNTAINS_TRANSPORT,
@@ -197,6 +201,10 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   "snoqualmie-pass": SNOQUALMIE_PASS_TRANSPORT,
   "stevens-pass": STEVENS_PASS_TRANSPORT,
   "mt-baker": MT_BAKER_TRANSPORT,
+  "sun-valley": SUN_VALLEY_TRANSPORT,
+  "sandpoint": SANDPOINT_TRANSPORT,
+  "boise": BOISE_TRANSPORT,
+  "donnelly-mccall": DONNELLY_MCCALL_TRANSPORT,
 };
 
 // Loader-time integrity check.

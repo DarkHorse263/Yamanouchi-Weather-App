@@ -196,6 +196,14 @@ const REGION_ANCHORS: Record<RegionId, {
   "snoqualmie-pass": { lat: 47.44306, lon: -121.42944, elevation: 1652, region: "OTHER", displayName: "Snoqualmie Pass" }, // anchored on Alpental, the highest/steepest of the four sub-areas (summit 5,420 ft)
   "stevens-pass": { lat: 47.74472, lon: -121.08889, elevation: 1235, region: "OTHER", displayName: "Stevens Pass" },
   "mt-baker": { lat: 48.861944, lon: -121.653889, elevation: 1515, region: "OTHER", displayName: "Mt. Baker" },
+
+  // Idaho anchors: each on the highest lift-served summit in the
+  // region. Sun Valley/Boise/Donnelly-McCall use America/Boise;
+  // Sandpoint uses America/Los_Angeles (Idaho Panhandle is Pacific).
+  "sun-valley": { lat: 43.65500, lon: -114.40917, elevation: 2789, region: "OTHER", displayName: "Sun Valley" }, // anchored on Bald Mountain, the larger of the two Sun Valley peaks
+  "sandpoint": { lat: 48.36700, lon: -116.62300, elevation: 1951, region: "OTHER", displayName: "Sandpoint" },
+  "boise": { lat: 43.76468, lon: -116.10329, elevation: 2394, region: "OTHER", displayName: "Boise" },
+  "donnelly-mccall": { lat: 44.671, lon: -116.123, elevation: 1490, region: "OTHER", displayName: "Donnelly / McCall" }, // anchored on Tamarack Resort's base; Brundage's summit (7,610 ft) is technically higher than Tamarack's (7,700 ft base already close) but Tamarack is used as the primary anchor for this region per its larger vertical drop
 };
 
 interface EvaluatorReport {

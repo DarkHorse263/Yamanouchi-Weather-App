@@ -90,4 +90,8 @@ export const RegionId = {
   "snoqualmie-pass": "snoqualmie-pass",
   "stevens-pass": "stevens-pass",
   "mt-baker": "mt-baker",
+  "sun-valley": "sun-valley",
+  "sandpoint": "sandpoint",
+  "boise": "boise",
+  "donnelly-mccall": "donnelly-mccall",
 } as const;

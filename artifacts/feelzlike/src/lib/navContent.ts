@@ -96,6 +96,10 @@ const REGIONS_WITH_ROADS_CONTENT: ReadonlySet<string> = new Set([
   "snoqualmie-pass",
   "stevens-pass",
   "mt-baker",
+  "sun-valley",
+  "sandpoint",
+  "boise",
+  "donnelly-mccall",
 ]);
 
 /**

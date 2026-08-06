@@ -85,6 +85,10 @@ export const REGION_IDS = [
   "snoqualmie-pass",
   "stevens-pass",
   "mt-baker",
+  "sun-valley",
+  "sandpoint",
+  "boise",
+  "donnelly-mccall",
 ] as const;
 export type RegionId = (typeof REGION_IDS)[number];
 
@@ -763,6 +767,28 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "mt-baker": "mt-baker",
   "glacier": "mt-baker",
   "mt-baker-roads": "mt-baker",
+
+  // Sun Valley, ID. Two resorts sharing one base town (Ketchum).
+  "bald-mountain": "sun-valley",
+  "dollar-mountain": "sun-valley",
+  "ketchum": "sun-valley",
+  "sun-valley-roads": "sun-valley",
+
+  // Sandpoint, ID. Idaho Panhandle — Pacific timezone.
+  "schweitzer-mountain-resort": "sandpoint",
+  "sandpoint": "sandpoint",
+  "sandpoint-roads": "sandpoint",
+
+  // Boise, ID.
+  "bogus-basin": "boise",
+  "boise": "boise",
+  "boise-roads": "boise",
+
+  // Donnelly / McCall, ID. Two resorts sharing one base town (Donnelly).
+  "tamarack-resort": "donnelly-mccall",
+  "brundage-mountain": "donnelly-mccall",
+  "donnelly": "donnelly-mccall",
+  "donnelly-mccall-roads": "donnelly-mccall",
 };
 
 export function regionForLocation(locationId: string): RegionId | undefined {

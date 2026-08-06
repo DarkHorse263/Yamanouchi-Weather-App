@@ -242,6 +242,10 @@ export const GetPowderAlertsQueryParams = zod.object({
       "snoqualmie-pass",
       "stevens-pass",
       "mt-baker",
+      "sun-valley",
+      "sandpoint",
+      "boise",
+      "donnelly-mccall",
     ])
     .optional()
     .describe(
@@ -1289,6 +1293,10 @@ export const GetWeatherQueryParams = zod.object({
       "snoqualmie-pass",
       "stevens-pass",
       "mt-baker",
+      "sun-valley",
+      "sandpoint",
+      "boise",
+      "donnelly-mccall",
     ])
     .optional()
     .describe(
@@ -1759,6 +1767,10 @@ export const GetWebcamsQueryParams = zod.object({
       "snoqualmie-pass",
       "stevens-pass",
       "mt-baker",
+      "sun-valley",
+      "sandpoint",
+      "boise",
+      "donnelly-mccall",
     ])
     .optional()
     .describe(
@@ -1931,6 +1943,10 @@ export const GetRoadConditionsQueryParams = zod.object({
       "snoqualmie-pass",
       "stevens-pass",
       "mt-baker",
+      "sun-valley",
+      "sandpoint",
+      "boise",
+      "donnelly-mccall",
     ])
     .optional()
     .describe(
@@ -2158,6 +2174,10 @@ export const GetLiftStatusQueryParams = zod.object({
       "snoqualmie-pass",
       "stevens-pass",
       "mt-baker",
+      "sun-valley",
+      "sandpoint",
+      "boise",
+      "donnelly-mccall",
     ])
     .optional()
     .describe(

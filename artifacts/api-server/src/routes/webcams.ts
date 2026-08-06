@@ -1492,6 +1492,83 @@ const WEBCAM_DATA: WebcamConfig[] = [
     webcams: [],
   },
 
+  // ─── Resort live-cam pages: Idaho ──────
+  {
+    locationId: "bald-mountain",
+    // Confirmed live per research — shared Sun Valley conditions/webcam
+    // page covering both Bald Mountain and Dollar Mountain.
+    locationName: "Sun Valley (Bald Mountain) live cams",
+    webcamPageUrl: "https://www.sunvalley.com/mountain/conditions-weather",
+    webcams: [],
+  },
+  {
+    locationId: "dollar-mountain",
+    // Confirmed live per research — shared Sun Valley conditions/webcam
+    // page covering both Bald Mountain and Dollar Mountain.
+    locationName: "Sun Valley (Dollar Mountain) live cams",
+    webcamPageUrl: "https://www.sunvalley.com/mountain/conditions-weather",
+    webcams: [],
+  },
+  {
+    locationId: "schweitzer-mountain-resort",
+    // Confirmed live PanoCam per research — page-only link, no fabricated
+    // per-camera deep link.
+    locationName: "Schweitzer Mountain Resort live cams",
+    webcamPageUrl: "https://www.schweitzer.com/mountain-report/",
+    webcams: [],
+  },
+  {
+    locationId: "bogus-basin",
+    // Confirmed live combined conditions/webcam page per research.
+    locationName: "Bogus Basin live cams",
+    webcamPageUrl: "https://bogusbasin.org/mountain-report/",
+    webcams: [],
+  },
+  {
+    locationId: "tamarack-resort",
+    // Confirmed conditions page exists per research — page-only link, no
+    // fabricated per-camera deep link.
+    locationName: "Tamarack Resort live cams",
+    webcamPageUrl: "https://www.tamarackidaho.com/mountain-report/",
+    webcams: [],
+  },
+  {
+    locationId: "brundage-mountain",
+    // Confirmed live named cams per research — page-only link, no
+    // fabricated per-camera deep link.
+    locationName: "Brundage Mountain live cams",
+    webcamPageUrl: "https://www.brundage.com/mountain-report/",
+    webcams: [],
+  },
+
+  // ─── Roadside cams: Idaho ───────────────────────────
+  // Idaho 511 runs public highway cameras but does not expose a stable
+  // deep link per camera that survives a season — same honest
+  // page-only-link pattern as every prior state.
+  {
+    locationId: "sun-valley-roads",
+    locationName: "Roads to Sun Valley · ID-75",
+    webcamPageUrl: "https://511.idaho.gov/",
+    webcams: [],
+  },
+  {
+    locationId: "sandpoint-roads",
+    locationName: "Roads to Schweitzer · Schweitzer Mountain Rd / US-95",
+    webcamPageUrl: "https://511.idaho.gov/",
+    webcams: [],
+  },
+  {
+    locationId: "boise-roads",
+    locationName: "Roads to Bogus Basin · Bogus Basin Rd",
+    webcamPageUrl: "https://511.idaho.gov/",
+    webcams: [],
+  },
+  {
+    locationId: "donnelly-mccall-roads",
+    locationName: "Roads to Tamarack / Brundage · ID-55",
+    webcamPageUrl: "https://511.idaho.gov/",
+    webcams: [],
+  },
 ];
 
 router.get("/webcams", (req, res) => {

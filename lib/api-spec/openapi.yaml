@@ -1743,6 +1743,10 @@ components:
         - snoqualmie-pass
         - stevens-pass
         - mt-baker
+        - sun-valley
+        - sandpoint
+        - boise
+        - donnelly-mccall
       description: |
         Canonical region identifier used across the FeelZlike platform.
 

@@ -76,6 +76,10 @@ import { crystalMountainRegion } from "./crystal-mountain";
 import { snoqualmiePassRegion } from "./snoqualmie-pass";
 import { stevensPassRegion } from "./stevens-pass";
 import { mtBakerRegion } from "./mt-baker";
+import { sunValleyRegion } from "./sun-valley";
+import { sandpointRegion } from "./sandpoint";
+import { boiseRegion } from "./boise";
+import { donnellyMccallRegion } from "./donnelly-mccall";
 
 // Active region registry · AU: Snowy Mountains + Victoria's High Country
 // + Tasmania (Ben Lomond). JP: Yamanouchi (Shiga Kogen + Kita-Shiga),
@@ -193,6 +197,10 @@ export const REGIONS: RegionConfig[] = [
   snoqualmiePassRegion,
   stevensPassRegion,
   mtBakerRegion,
+  sunValleyRegion,
+  sandpointRegion,
+  boiseRegion,
+  donnellyMccallRegion,
 ];
 
 export const REGION_BY_ID: Record<string, RegionConfig> = Object.fromEntries(
@@ -286,6 +294,10 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "snoqualmie-pass": "US",
   "stevens-pass": "US",
   "mt-baker": "US",
+  "sun-valley": "US",
+  "sandpoint": "US",
+  "boise": "US",
+  "donnelly-mccall": "US",
 };
 export const COUNTRY_META: Record<CountryCode, { name: string; flag: string }> = {
   AU: { name: "Australia", flag: "🇦🇺" },

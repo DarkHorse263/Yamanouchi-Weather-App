@@ -104,6 +104,10 @@ export const ALERT_REGIONS: Array<{ id: string; nameEn: string; nameJa: string; 
   { id: "snoqualmie-pass", nameEn: "Snoqualmie Pass", nameJa: "スノーカルミーパス", country: "US · Washington" },
   { id: "stevens-pass", nameEn: "Stevens Pass", nameJa: "スティーブンスパス", country: "US · Washington" },
   { id: "mt-baker", nameEn: "Mt. Baker", nameJa: "マウントベーカー", country: "US · Washington" },
+  { id: "sun-valley", nameEn: "Sun Valley", nameJa: "サンバレー", country: "US · Idaho" },
+  { id: "sandpoint", nameEn: "Sandpoint", nameJa: "サンドポイント", country: "US · Idaho" },
+  { id: "boise", nameEn: "Boise", nameJa: "ボイシ", country: "US · Idaho" },
+  { id: "donnelly-mccall", nameEn: "Donnelly / McCall", nameJa: "ドネリー／マッコール", country: "US · Idaho" },
 ];
 
 const HORIZONS: Array<{ value: 24 | 48 | 72; label: string; labelJa: string }> = [

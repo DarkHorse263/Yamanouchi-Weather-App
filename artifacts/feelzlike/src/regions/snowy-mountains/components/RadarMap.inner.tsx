@@ -132,6 +132,9 @@ export type RegionKey =
   | "snoqualmie-pass"
   | "stevens-pass"
   | "mt-baker"
+  | "sun-valley"
+  | "sandpoint"
+  | "boise"
   | "donnelly-mccall";
 type ViewMode = "interactive" | "windy" | "official";
 
@@ -908,6 +911,42 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       attribution: "National Weather Service · weather radar",
     },
   },
+  "sun-valley": {
+    windy: { lat: 43.66, lon: -114.41, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "sandpoint": {
+    windy: { lat: 48.32, lon: -116.59, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "boise": {
+    windy: { lat: 43.70, lon: -116.15, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "donnelly-mccall": {
+    windy: { lat: 44.80, lon: -116.10, zoom: 9 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
 };
 
 const DEFAULT_ZOOM = 9;
@@ -1625,6 +1664,36 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "glacier", name: "Glacier", lat: 48.88833, lng: -121.93389, accent: "#0ea5e9" },
     ],
   },
+  "sun-valley": {
+    center: { lat: 43.669, lng: -114.387 },
+    pins: [
+      { id: "bald-mountain", name: "Bald Mountain", lat: 43.65500, lng: -114.40917, accent: "#f97316" },
+      { id: "dollar-mountain", name: "Dollar Mountain", lat: 43.68306, lng: -114.34694, accent: "#f97316" },
+      { id: "ketchum", name: "Ketchum", lat: 43.68074, lng: -114.36366, accent: "#0ea5e9" },
+    ],
+  },
+  "sandpoint": {
+    center: { lat: 48.325, lng: -116.592 },
+    pins: [
+      { id: "schweitzer-mountain-resort", name: "Schweitzer Mountain Resort", lat: 48.36700, lng: -116.62300, accent: "#f97316" },
+      { id: "sandpoint", name: "Sandpoint", lat: 48.28222, lng: -116.56139, accent: "#0ea5e9" },
+    ],
+  },
+  "boise": {
+    center: { lat: 43.690, lng: -116.153 },
+    pins: [
+      { id: "bogus-basin", name: "Bogus Basin", lat: 43.76468, lng: -116.10329, accent: "#f97316" },
+      { id: "boise", name: "Boise", lat: 43.61583, lng: -116.20167, accent: "#0ea5e9" },
+    ],
+  },
+  "donnelly-mccall": {
+    center: { lat: 44.802, lng: -116.117 },
+    pins: [
+      { id: "tamarack-resort", name: "Tamarack Resort", lat: 44.671, lng: -116.123, accent: "#f97316" },
+      { id: "brundage-mountain", name: "Brundage Mountain", lat: 45.00500, lng: -116.15500, accent: "#f97316" },
+      { id: "donnelly", name: "Donnelly", lat: 44.73028, lng: -116.07444, accent: "#0ea5e9" },
+    ],
+  },
 };
 
 // Which country each region sits in. Drives the cross-region grouping on
@@ -1711,6 +1780,10 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "snoqualmie-pass": "US",
   "stevens-pass": "US",
   "mt-baker": "US",
+  "sun-valley": "US",
+  "sandpoint": "US",
+  "boise": "US",
+  "donnelly-mccall": "US",
 };
 const COUNTRY_LABEL: Record<MapCountry, string> = { AU: "australia", JP: "japan", NZ: "new zealand", CA: "canada", US: "united states" };
 const REGION_LABEL: Record<RegionKey, string> = {
@@ -1791,6 +1864,10 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "snoqualmie-pass": "snoqualmie pass",
   "stevens-pass": "stevens pass",
   "mt-baker": "mt. baker",
+  "sun-valley": "sun valley",
+  "sandpoint": "sandpoint",
+  "boise": "boise",
+  "donnelly-mccall": "donnelly / mccall",
 };
 
 interface CountryPin extends PinSpec {

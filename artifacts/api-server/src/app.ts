@@ -560,6 +560,22 @@ if (process.env.NODE_ENV === "production") {
       name: "Mt. Baker",
       towns: { "glacier": "Glacier" },
     },
+    "sun-valley": {
+      name: "Sun Valley",
+      towns: { "ketchum": "Ketchum" },
+    },
+    "sandpoint": {
+      name: "Sandpoint",
+      towns: { "sandpoint": "Sandpoint" },
+    },
+    "boise": {
+      name: "Boise",
+      towns: { "boise": "Boise" },
+    },
+    "donnelly-mccall": {
+      name: "Donnelly / McCall",
+      towns: { "donnelly": "Donnelly" },
+    },
   };
 
   // Top-level routes handled by the SPA (before the /:region catch-all).

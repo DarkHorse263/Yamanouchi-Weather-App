@@ -1045,6 +1045,56 @@ function waChainEntry(opts: {
   };
 }
 
+/**
+ * Idaho has a NARROW, COMMERCIAL-VEHICLE-ONLY chain law under Idaho Code
+ * Section 49-948 - much closer to Montana/Vermont's narrow heavy-vehicle
+ * pattern than to Oregon's broad statutory law or Washington's
+ * escalating-tier system. The requirement applies only to commercial
+ * vehicles over 26,000 lbs GVWR (or vehicles carrying 16+ passengers),
+ * and only on three named northern mountain passes: Lookout Pass and
+ * Fourth of July Pass on I-90, and Lolo Pass on US-12 - none of which
+ * sit on the direct access roads to any of the four Idaho regions
+ * covered in this pass (Sun Valley, Sandpoint/Schweitzer, Boise/Bogus
+ * Basin, Donnelly-McCall/Tamarack+Brundage), though Schweitzer's I-90
+ * approach from the east could pass near Lookout Pass on some routings -
+ * worth a footnote, not a change to the "not-required" default for
+ * ordinary passenger vehicles. Idaho also permits studded tires Oct 1 -
+ * Apr 30 (noted for context, not as a requirement). Named `idChainEntry`
+ * to avoid any collision with existing helpers.
+ */
+const ID_SOURCE = {
+  sourceLabel: "Idaho 511 · 511.idaho.gov",
+  sourceUrl: "https://511.idaho.gov/",
+};
+
+function idChainEntry(opts: {
+  id: string;
+  regionId: string;
+  mountainId: string;
+  mountainName: string;
+  approach: string;
+  detail: string;
+  inSeason: boolean;
+  issuedAt: string;
+}): Record<string, unknown> {
+  return {
+    id: opts.id,
+    regionId: opts.regionId,
+    mountainId: opts.mountainId,
+    mountainName: opts.mountainName,
+    approach: opts.approach,
+    status: "open",
+    chains2wd: "not-required" satisfies ChainReq,
+    chainsAwd: "not-required" satisfies ChainReq,
+    note: opts.inSeason
+      ? `Idaho's chain law (Idaho Code Section 49-948) applies only to commercial vehicles over 26,000 lbs GVWR (or 16+ passenger vehicles), and only on three named northern passes (Lookout Pass and Fourth of July Pass on I-90, Lolo Pass on US-12) - none of which sit on this route. Ordinary passenger vehicles have no chain requirement here. Winter/snow tyres are strongly recommended; studded tires are legal Oct 1 - Apr 30. ${opts.detail}`
+      : "Outside the ski season · Idaho's narrow commercial-vehicle chain law does not apply to this route at any time of year for passenger vehicles.",
+    issuedAt: opts.issuedAt,
+    ...ID_SOURCE,
+    dataSource: "seasonal-rule",
+  };
+}
+
 function buildChainStatuses(regionId: string | undefined): Array<Record<string, unknown>> {
   const now = new Date();
   const issuedAt = now.toISOString();
@@ -2170,6 +2220,59 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
     ];
   }
 
+  if (
+    regionId === "sun-valley" ||
+    regionId === "sandpoint" ||
+    regionId === "boise" ||
+    regionId === "donnelly-mccall"
+  ) {
+    const inSeason = isUsSnowSeason(now);
+    const id_ = (
+      idStr: string,
+      mountainId: string,
+      mountainName: string,
+      approach: string,
+      detail: string,
+    ) => idChainEntry({ id: idStr, regionId, mountainId, mountainName, approach, detail, inSeason, issuedAt });
+
+    if (regionId === "sun-valley") {
+      return [
+        id_("sun-valley-bald-mountain-hwy-75", "bald-mountain", "Bald Mountain (Sun Valley Resort)",
+          "ID-75 (Sun Valley Rd) from Ketchum",
+          "ID-75 is state-maintained and regularly plowed; no named chain-control pass sits on this approach."),
+        id_("sun-valley-dollar-mountain-hwy-75", "dollar-mountain", "Dollar Mountain (Sun Valley Resort)",
+          "ID-75 (Sun Valley Rd) from Ketchum",
+          "ID-75 is state-maintained and regularly plowed; no named chain-control pass sits on this approach."),
+      ];
+    }
+
+    if (regionId === "sandpoint") {
+      return [
+        id_("schweitzer-mountain-rd", "schweitzer-mountain-resort", "Schweitzer Mountain Resort",
+          "Schweitzer Mountain Rd from Sandpoint (off US-95)",
+          "⚠️ Travelling to Sandpoint via I-90 from the east could route drivers near Lookout Pass, one of Idaho's three named commercial-vehicle chain-control passes - this does not affect ordinary passenger vehicles taking the direct US-95 approach from Sandpoint itself."),
+      ];
+    }
+
+    if (regionId === "boise") {
+      return [
+        id_("bogus-basin-rd", "bogus-basin", "Bogus Basin",
+          "Bogus Basin Rd from Boise",
+          "⚠️ Bogus Basin closed early for the 2025-26 season on Mar 22 2026 due to unseasonably warm temperatures and a lack of new snow - check bogusbasin.org directly before travelling."),
+      ];
+    }
+
+    // donnelly-mccall
+    return [
+      id_("tamarack-resort-hwy-55", "tamarack-resort", "Tamarack Resort",
+        "ID-55 then Tamarack Resort access road from Donnelly",
+        "⚠️ Tamarack Resort's ownership/financial status carries a genuine, unresolved conflict in sources (2025 Idaho Business Review reporting of stable, debt-free MMG ownership vs. a March 2025 SAM report of a fresh Chapter 11 filing tied to a long-standing Credit Suisse debt) - this does not appear to have affected on-the-ground 2025-26 operations, but is flagged rather than asserted either way."),
+      id_("brundage-mountain-hwy-55", "brundage-mountain", "Brundage Mountain Resort",
+        "ID-55 then Goose Lake Rd from McCall",
+        "ID-55 and Goose Lake Rd are state/county-maintained and regularly plowed; no named chain-control pass sits on this approach."),
+    ];
+  }
+
   return [];
 }
 
@@ -2486,6 +2589,23 @@ router.get("/road-conditions", async (req, res) => {
       region === "snoqualmie-pass" ||
       region === "stevens-pass" ||
       region === "mt-baker";
+    //  - US (Idaho) - no feed wired yet. Idaho Transportation Department
+    //    publishes 511.idaho.gov. Idaho has a NARROW, COMMERCIAL-VEHICLE-
+    //    ONLY chain law (Idaho Code Section 49-948) on three named
+    //    northern passes (Lookout Pass/Fourth of July Pass on I-90, Lolo
+    //    Pass on US-12) that do not sit on any of these four regions'
+    //    direct access roads - same narrow posture as Vermont/Montana/New
+    //    Mexico for ordinary passenger vehicles. Avalanche coverage is
+    //    split three ways: Sawtooth Avalanche Center (Sun Valley), Idaho
+    //    Panhandle Avalanche Center (Sandpoint/Schweitzer), Payette
+    //    Avalanche Center (Donnelly-McCall) - and Boise/Bogus Basin has NO
+    //    avalanche zone actually centered on it (nearest SAC zones are
+    //    56+ miles away) - a genuine coverage gap, stated explicitly.
+    const isUsId =
+      region === "sun-valley" ||
+      region === "sandpoint" ||
+      region === "boise" ||
+      region === "donnelly-mccall";
 
     let roads: unknown[] = [];
     let generalAdvice: string;
@@ -2647,6 +2767,30 @@ router.get("/road-conditions", async (req, res) => {
       generalAdvice =
         "We do not yet pull live road data for Washington \u00b7 check WSDOT's real-time mountain pass page (wsdot.com/travel/real-time/mountainpasses) or dial 511 for closures, chain requirements and highway cameras before you drive, especially over Snoqualmie Pass (I-90) and Stevens Pass (US-2), WSDOT's two primary avalanche-control corridors. WSDOT can post an escalating traction-tire/chain requirement (RCW 47.36.250) on any state highway when conditions warrant, up to chains on ALL vehicles including 4WD/AWD in the most severe cases - this is storm-activated, not a fixed calendar rule. For backcountry conditions, read the day's forecast from the Northwest Avalanche Center at nwac.us.";
       liveTrafficUrl = "https://wsdot.com/travel/real-time/mountainpasses";
+    } else if (isUsId) {
+      // No live Idaho road feed is wired yet - say so plainly rather than
+      // shipping an empty list that reads like "all clear". Idaho has a
+      // NARROW, commercial-vehicle-only chain law (Idaho Code Section
+      // 49-948) on three named northern passes that do not sit on any of
+      // these four regions' direct access roads - a genuine, permanent
+      // absence of a chain-law requirement for ordinary passenger vehicles
+      // here, same posture as Vermont/Montana/New Mexico. Avalanche
+      // coverage is split three ways (Sawtooth/Sun Valley, Idaho
+      // Panhandle/Sandpoint, Payette/Donnelly-McCall); Boise/Bogus Basin
+      // has NO avalanche zone actually centered on it - stated explicitly
+      // as a coverage gap rather than pointing at Sawtooth's nominal
+      // regional authority, whose nearest real zones are 56+ miles away.
+      const sacRegion = region === "sun-valley";
+      const ipacRegion = region === "sandpoint";
+      const pacRegion = region === "donnelly-mccall";
+      generalAdvice = sacRegion
+        ? "We do not yet pull live road data for Idaho \u00b7 check Idaho 511 (511.idaho.gov) for closures and highway cameras before you drive. Idaho's chain law (Idaho Code Section 49-948) applies only to commercial vehicles on three named northern passes, none of which sit on this route - ordinary passenger vehicles have no chain requirement here. Winter/snow tyres are strongly recommended; studded tires are legal Oct 1-Apr 30. For backcountry conditions, read the day's forecast from the Sawtooth Avalanche Center at sawtoothavalanche.com."
+        : ipacRegion
+          ? "We do not yet pull live road data for Idaho \u00b7 check Idaho 511 (511.idaho.gov) for closures and highway cameras before you drive. Idaho's chain law (Idaho Code Section 49-948) applies only to commercial vehicles on three named northern passes; ordinary passenger vehicles taking the direct US-95 approach from Sandpoint have no chain requirement. Winter/snow tyres are strongly recommended; studded tires are legal Oct 1-Apr 30. For backcountry conditions, read the day's forecast from the Idaho Panhandle Avalanche Center at idahopanhandleavalanche.org."
+          : pacRegion
+            ? "We do not yet pull live road data for Idaho \u00b7 check Idaho 511 (511.idaho.gov) for closures and highway cameras before you drive. Idaho's chain law (Idaho Code Section 49-948) applies only to commercial vehicles on three named northern passes, none of which sit on this route - ordinary passenger vehicles have no chain requirement here. Winter/snow tyres are strongly recommended; studded tires are legal Oct 1-Apr 30. For backcountry conditions, read the day's forecast from the Payette Avalanche Center covering the McCall/Donnelly area."
+            : "We do not yet pull live road data for Idaho \u00b7 check Idaho 511 (511.idaho.gov) for closures and highway cameras before you drive. Idaho's chain law (Idaho Code Section 49-948) applies only to commercial vehicles on three named northern passes, none of which sit on this route - ordinary passenger vehicles have no chain requirement here. Winter/snow tyres are strongly recommended; studded tires are legal Oct 1-Apr 30. \u26a0\ufe0f This region has no avalanche-forecast zone actually centered on it - the nearest Sawtooth Avalanche Center zones (Sawtooth & Western Smoky Mtns, Banner Summit) are 56+ miles away, so no close-by avalanche-bulletin link is offered here rather than pointing at one that doesn't really cover the Boise Front.";
+      liveTrafficUrl = "https://511.idaho.gov/";
     } else {
       generalAdvice =
         "Live road condition data is not yet available for this region.";

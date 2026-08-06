@@ -458,6 +458,71 @@ const WA_ROADS_GENERAL: SourceGroup = {
   ],
 };
 
+/**
+ * Idaho: avalanche-forecast coverage is genuinely fragmented across three
+ * separate, non-overlapping centers, plus one confirmed gap (Boise/Bogus
+ * Basin) — modeled as four distinct SourceGroups rather than one shared
+ * block, mirroring the honesty-gate pattern used for Oregon's Bend/COAC
+ * split above.
+ */
+const ID_OFFICIAL_REFERENCES_SUN_VALLEY: SourceGroup = {
+  title: "Official references",
+  titleJa: "公式参照先",
+  blurb:
+    "Link-outs, not wired feeds · conditions shown on feelzlike come from the forecast ensemble below, so check these before you drive or tour.",
+  blurbJa:
+    "リンクのみで、データ連携はしていません。feelzlikeの数値は下記の予報モデルによるものです。走行・ツアー前に必ず公式情報をご確認ください。",
+  items: [
+    { label: "National Weather Service", detail: "US federal forecasts & warnings", url: "https://www.weather.gov/" },
+    { label: "Sawtooth Avalanche Center", detail: "backcountry avalanche forecasts for the Sun Valley / Ketchum zone", url: "https://www.sawtoothavalanche.com/" },
+  ],
+};
+const ID_OFFICIAL_REFERENCES_SANDPOINT: SourceGroup = {
+  title: "Official references",
+  titleJa: "公式参照先",
+  blurb:
+    "Link-outs, not wired feeds · conditions shown on feelzlike come from the forecast ensemble below, so check these before you drive or tour.",
+  blurbJa:
+    "リンクのみで、データ連携はしていません。feelzlikeの数値は下記の予報モデルによるものです。走行・ツアー前に必ず公式情報をご確認ください。 ⚠️ この地域はアイダホ州の他の地域とは異なり、山帯時間ではなく太平洋時間を使用します。",
+  items: [
+    { label: "National Weather Service", detail: "US federal forecasts & warnings", url: "https://www.weather.gov/" },
+    { label: "Idaho Panhandle Avalanche Center", detail: "backcountry avalanche forecasts for the Schweitzer / Sandpoint zone", url: "https://idahopanhandleavalanche.org/" },
+  ],
+};
+const ID_OFFICIAL_REFERENCES_BOISE: SourceGroup = {
+  title: "Official references",
+  titleJa: "公式参照先",
+  blurb:
+    "Link-outs, not wired feeds · conditions shown on feelzlike come from the forecast ensemble below, so check these before you drive or tour. ⚠️ No dedicated backcountry avalanche-forecast center covers the Boise/Bogus Basin zone — the nearest Sawtooth Avalanche Center (SAC) zones are roughly 56-61 miles away and do not extend coverage here. This is a genuine data gap, not an omission.",
+  blurbJa:
+    "リンクのみで、データ連携はしていません。この地域を専門にカバーする雪崩予報センターはありません。",
+  items: [
+    { label: "National Weather Service", detail: "US federal forecasts & warnings", url: "https://www.weather.gov/" },
+  ],
+};
+const ID_OFFICIAL_REFERENCES_DONNELLY_MCCALL: SourceGroup = {
+  title: "Official references",
+  titleJa: "公式参照先",
+  blurb:
+    "Link-outs, not wired feeds · conditions shown on feelzlike come from the forecast ensemble below, so check these before you drive or tour.",
+  blurbJa:
+    "リンクのみで、データ連携はしていません。feelzlikeの数値は下記の予報モデルによるものです。走行・ツアー前に必ず公式情報をご確認ください。",
+  items: [
+    { label: "National Weather Service", detail: "US federal forecasts & warnings", url: "https://www.weather.gov/" },
+    { label: "Payette Avalanche Center", detail: "backcountry avalanche forecasts for the Brundage / Tamarack / McCall zone", url: "https://payetteavalanche.org/" },
+  ],
+};
+const ID_ROADS_GENERAL: SourceGroup = {
+  title: "Roads & transport",
+  titleJa: "道路・交通",
+  blurb:
+    "Idaho's traction-device law is narrower than Oregon's or Colorado's — Idaho Code § 49-948 mandates chains only for commercial vehicles on designated routes during posted conditions, not for passenger vehicles generally.",
+  blurbJa: "アイダホ州のチェーン規制は商用車のみ対象です（アイダホ州法第49-948条）。",
+  items: [
+    { label: "Idaho 511 · 511.idaho.gov", detail: "statewide real-time road conditions, cameras & commercial-vehicle chain requirements", url: "https://511.idaho.gov/" },
+  ],
+};
+
 const REGION_SOURCES: Record<string, SourceGroup[]> = {
   "snowy-mountains": [
     {
@@ -1153,6 +1218,56 @@ const REGION_SOURCES: Record<string, SourceGroup[]> = {
       titleJa: "スキー場・リフト",
       items: [
         { label: "Mt. Baker Ski Area", detail: "Independent · no major-pass affiliation · holds the world record for most snowfall in a season (1,140 in., 1998-99, verified by NOAA) · ⚠️ NO confirmed live webcam found", url: "https://www.mtbaker.us/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "sun-valley": [
+    ID_OFFICIAL_REFERENCES_SUN_VALLEY,
+    ID_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Bald Mountain", detail: "Ikon Pass (Full tier, no blackouts) + Mountain Collective · the largest ski area in Idaho by vertical drop (3,400 ft) · confirmed live webcams", url: "https://www.sunvalley.com/" },
+        { label: "Dollar Mountain", detail: "Ikon Pass (Full tier, no blackouts) + Mountain Collective, shared with Bald Mountain · beginner-oriented · ⚠️ season-closing date not separately confirmed", url: "https://www.sunvalley.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "sandpoint": [
+    ID_OFFICIAL_REFERENCES_SANDPOINT,
+    ID_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Schweitzer Mountain Resort", detail: "Ikon Pass (destination tier) · independent · the 2nd largest ski area in Idaho by vertical drop (2,440 ft) · confirmed live PanoCam · confirmed 2025-26 season despite a \"historically low snow\" season", url: "https://www.schweitzer.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "boise": [
+    ID_OFFICIAL_REFERENCES_BOISE,
+    ID_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Bogus Basin", detail: "Nonprofit 501(c)(3), largest nonprofit ski area in the US · Powder Alliance/Freedom Pass · ⚠️ CLOSED EARLY for 2025-26 on Mar 22, 2026 due to unseasonably warm weather · confirmed live conditions/webcam page", url: "https://bogusbasin.org/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "donnelly-mccall": [
+    ID_OFFICIAL_REFERENCES_DONNELLY_MCCALL,
+    ID_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Tamarack Resort", detail: "Indy Pass (capped redemptions); joining Ikon as a Bonus Mountain from 2026-27 · ⚠️ ownership/financial status is a genuinely unresolved conflict in sources — not asserted as fact either way", url: "https://www.tamarackidaho.com/" },
+        { label: "Brundage Mountain", detail: "Indy Pass member · independent · 70 trails, 6 lifts, no night skiing · confirmed live named webcams", url: "https://www.brundage.com/" },
       ],
     },
     FORECAST_ENSEMBLE,

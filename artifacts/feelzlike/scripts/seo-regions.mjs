@@ -1264,6 +1264,64 @@ export const REGIONS = [
       { id: "glacier", name: "Glacier", blurb: "small town on SR-542 (Mt. Baker Highway), the sole access route to Mt. Baker Ski Area" },
     ],
   },
+  {
+    slug: "sun-valley",
+    name: "Sun Valley",
+    subtitle: "Idaho · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Bald Mountain", blurb: "Ikon Pass (Full tier, no blackouts) + Mountain Collective · the largest ski area in Idaho by vertical drop (3,400 ft) · confirmed 2025-26 season Dec 3, 2025 - Apr 12, 2026" },
+      { name: "Dollar Mountain", blurb: "Ikon Pass (Full tier, no blackouts) + Mountain Collective, shared with Bald Mountain · beginner-oriented · ⚠️ season-closing date not separately confirmed" },
+    ],
+    towns: [
+      { id: "ketchum", name: "Ketchum", blurb: "base town for the Sun Valley resort complex, adjacent to both Bald Mountain and Dollar Mountain via ID-75" },
+    ],
+  },
+  {
+    slug: "sandpoint",
+    name: "Sandpoint",
+    subtitle: "Idaho · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Schweitzer Mountain Resort", blurb: "Ikon Pass (destination tier) · independent · the 2nd largest ski area in Idaho by vertical drop (2,440 ft) · confirmed 2025-26 season Dec 3, 2025 - Apr 5, 2026, despite a \"historically low snow\" season · ⚠️ Idaho Panhandle region runs on Pacific time, not Mountain time like the rest of Idaho" },
+    ],
+    towns: [
+      { id: "sandpoint", name: "Sandpoint", blurb: "town on Lake Pend Oreille, roughly 30 minutes' drive from Schweitzer Mountain Resort" },
+    ],
+  },
+  {
+    slug: "boise",
+    name: "Boise",
+    subtitle: "Idaho · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Bogus Basin", blurb: "Nonprofit 501(c)(3), largest nonprofit ski area in the US · Powder Alliance/Freedom Pass · ⚠️ CLOSED EARLY for 2025-26 on Mar 22, 2026 due to unseasonably warm weather · ⚠️ no dedicated avalanche-forecast center covers this region" },
+    ],
+    towns: [
+      { id: "boise", name: "Boise", blurb: "Idaho's state capital, roughly 45 minutes' drive from Bogus Basin via Bogus Basin Road" },
+    ],
+  },
+  {
+    slug: "donnelly-mccall",
+    name: "Donnelly / McCall",
+    subtitle: "Idaho · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Tamarack Resort", blurb: "Indy Pass (capped redemptions); joining Ikon as a Bonus Mountain from 2026-27 · confirmed 2025-26 season opened Dec 22, 2025 · ⚠️ ownership/financial status is a genuinely unresolved conflict in sources — not asserted as fact either way" },
+      { name: "Brundage Mountain", blurb: "Indy Pass member · independent · 70 trails, 6 lifts, no night skiing" },
+    ],
+    towns: [
+      { id: "donnelly", name: "Donnelly", blurb: "Valley County town on ID-55, roughly midway between Tamarack Resort and Brundage Mountain near McCall" },
+    ],
+  },
 ];
 
 /** Region sub-sections that actually render for this region (see gating notes above). */
