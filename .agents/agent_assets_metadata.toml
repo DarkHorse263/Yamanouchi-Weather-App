@@ -577,3 +577,59 @@ uri = "file://exports/feelzlike-fb-page-hero.png"
 type = "image"
 title = "feelzlike · desktop + phone"
 description = "Home page on desktop and phone, side by side, cookie banner cropped out. Ready to post on the Facebook page."
+
+[[outputs]]
+id = "eNRso22-RHGMcKAunqoqg"
+uri = "file://exports/social-ads/feelzlike-ad-overall-story-1080x1920.png"
+type = "image"
+title = "overall · story"
+description = "meet the snow app · 9:16 story/reel image"
+
+[[outputs]]
+id = "JVcwZl8s9Rdoff-zCohxQ"
+uri = "file://exports/social-ads/feelzlike-ad-japan-story-1080x1920.png"
+type = "image"
+title = "japan · story (final)"
+description = "updated radar claim · 9:16 story/reel image"
+
+[[outputs]]
+id = "wIxLBo4mj_fADoEkIYmQ7"
+uri = "file://exports/social-ads/feelzlike-ad-australia-story-1080x1920.png"
+type = "image"
+title = "australia · story"
+description = "is it dumping right now? · 9:16 story/reel image"
+
+[[outputs]]
+id = "He8hUmTlSA-Li5mhSW-ub"
+uri = "file://exports/social-ads/feelzlike-ad-nz-story-1080x1920.png"
+type = "image"
+title = "nz · story"
+description = "nz snow checked live · 9:16 story/reel image"
+
+[[outputs]]
+id = "S_6tw81H1r224n3Jummpv"
+uri = "file://exports/social-ads/feelzlike-ad-overall-square-1080x1080.png"
+type = "image"
+title = "overall · square"
+description = "1:1 feed version"
+
+[[outputs]]
+id = "_6i9kcwF2evykckwkF2NC"
+uri = "file://exports/social-ads/feelzlike-ad-japan-square-1080x1080.png"
+type = "image"
+title = "japan · square (final)"
+description = "updated radar claim · 1:1 feed version"
+
+[[outputs]]
+id = "JMZChZLFEipLc8PWcAtAe"
+uri = "file://exports/social-ads/feelzlike-ad-australia-square-1080x1080.png"
+type = "image"
+title = "australia · square"
+description = "1:1 feed version"
+
+[[outputs]]
+id = "hxuVMePmiLYdCMQIhDXPb"
+uri = "file://exports/social-ads/feelzlike-ad-nz-square-1080x1080.png"
+type = "image"
+title = "nz · square"
+description = "1:1 feed version"
