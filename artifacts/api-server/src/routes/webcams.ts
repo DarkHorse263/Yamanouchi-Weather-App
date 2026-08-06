@@ -1592,6 +1592,18 @@ const WEBCAM_DATA: WebcamConfig[] = [
   { locationId: "carrabassett-valley-roads", locationName: "Roads to Sugarloaf · ME-16 / ME-27", webcamPageUrl: "https://511maine.gov/", webcams: [] },
   { locationId: "newry-bethel-roads", locationName: "Roads to Sunday River · ME-26 / ME-2", webcamPageUrl: "https://511maine.gov/", webcams: [] },
   { locationId: "rangeley-roads", locationName: "Roads to Saddleback · ME-4 / ME-16", webcamPageUrl: "https://511maine.gov/", webcams: [] },
+  // ─── Resort camera/reference pages: New York ───
+  { locationId: "whiteface-mountain", locationName: "Whiteface Mountain conditions", webcamPageUrl: "https://whiteface.com/mountain/conditions/", webcams: [] }, // ⚠️ no dedicated verifiable live webcam URL confirmed
+  { locationId: "gore-mountain", locationName: "Gore Mountain Base Area Webcam", webcamPageUrl: "https://goremountain.com/the-mountain/webcam/", webcams: [] },
+  { locationId: "hunter-mountain", locationName: "Hunter Mountain live cams", webcamPageUrl: "https://www.huntermtn.com/the-mountain/mountain-conditions/mountain-cams.aspx", webcams: [] },
+  { locationId: "windham-mountain", locationName: "Windham Mountain Club camera", webcamPageUrl: "https://www.windhammountainclub.com/mountain-cam/", webcams: [] }, // official URL exists; live status not independently confirmed and third-party reports show offline/unavailable
+  { locationId: "belleayre-mountain", locationName: "Belleayre Mountain webcams", webcamPageUrl: "https://www.belleayre.com/mountain/web-cams/", webcams: [] },
+  // ─── Roadside cams: NYSDOT / 511NY ───
+  { locationId: "lake-placid-roads", locationName: "Roads to Whiteface · NY-86", webcamPageUrl: "https://511ny.org/", webcams: [] },
+  { locationId: "north-creek-roads", locationName: "Roads to Gore · NY-28 / NY-28N", webcamPageUrl: "https://511ny.org/", webcams: [] },
+  { locationId: "hunter-roads", locationName: "Roads to Hunter · NY-23A / NY-296", webcamPageUrl: "https://511ny.org/", webcams: [] },
+  { locationId: "windham-roads", locationName: "Roads to Windham · NY-23", webcamPageUrl: "https://511ny.org/", webcams: [] },
+  { locationId: "highmount-roads", locationName: "Roads to Belleayre · NY-28", webcamPageUrl: "https://511ny.org/", webcams: [] },
 ];
 
 router.get("/webcams", (req, res) => {

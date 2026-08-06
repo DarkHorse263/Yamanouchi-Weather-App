@@ -253,6 +253,11 @@ export const GetPowderAlertsQueryParams = zod.object({
       "carrabassett-valley",
       "newry-bethel",
       "rangeley",
+      "lake-placid",
+      "north-creek",
+      "hunter",
+      "windham",
+      "highmount",
     ])
     .optional()
     .describe(
@@ -1311,6 +1316,11 @@ export const GetWeatherQueryParams = zod.object({
       "carrabassett-valley",
       "newry-bethel",
       "rangeley",
+      "lake-placid",
+      "north-creek",
+      "hunter",
+      "windham",
+      "highmount",
     ])
     .optional()
     .describe(
@@ -1792,6 +1802,11 @@ export const GetWebcamsQueryParams = zod.object({
       "carrabassett-valley",
       "newry-bethel",
       "rangeley",
+      "lake-placid",
+      "north-creek",
+      "hunter",
+      "windham",
+      "highmount",
     ])
     .optional()
     .describe(
@@ -1975,6 +1990,11 @@ export const GetRoadConditionsQueryParams = zod.object({
       "carrabassett-valley",
       "newry-bethel",
       "rangeley",
+      "lake-placid",
+      "north-creek",
+      "hunter",
+      "windham",
+      "highmount",
     ])
     .optional()
     .describe(
@@ -2213,6 +2233,11 @@ export const GetLiftStatusQueryParams = zod.object({
       "carrabassett-valley",
       "newry-bethel",
       "rangeley",
+      "lake-placid",
+      "north-creek",
+      "hunter",
+      "windham",
+      "highmount",
     ])
     .optional()
     .describe(

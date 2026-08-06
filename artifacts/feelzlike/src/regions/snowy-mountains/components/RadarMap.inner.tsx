@@ -142,7 +142,12 @@ export type RegionKey =
   | "lakes-region"
   | "carrabassett-valley"
   | "newry-bethel"
-  | "rangeley";
+  | "rangeley"
+  | "lake-placid"
+  | "north-creek"
+  | "hunter"
+  | "windham"
+  | "highmount";
 type ViewMode = "interactive" | "windy" | "official";
 
 interface RegionConfig {
@@ -961,6 +966,11 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
   "carrabassett-valley": { windy: { lat: 45.03, lon: -70.31, zoom: 10 }, official: { label: "NWS weather radar", imageUrl: null, href: "https://radar.weather.gov/", attribution: "National Weather Service · weather radar" } },
   "newry-bethel": { windy: { lat: 44.47, lon: -70.86, zoom: 10 }, official: { label: "NWS weather radar", imageUrl: null, href: "https://radar.weather.gov/", attribution: "National Weather Service · weather radar" } },
   "rangeley": { windy: { lat: 44.94, lon: -70.51, zoom: 10 }, official: { label: "NWS weather radar", imageUrl: null, href: "https://radar.weather.gov/", attribution: "National Weather Service · weather radar" } },
+  "lake-placid": { windy: { lat: 44.36, lon: -73.90, zoom: 10 }, official: { label: "NWS weather radar", imageUrl: null, href: "https://radar.weather.gov/", attribution: "National Weather Service · weather radar" } },
+  "north-creek": { windy: { lat: 43.67, lon: -74.02, zoom: 10 }, official: { label: "NWS weather radar", imageUrl: null, href: "https://radar.weather.gov/", attribution: "National Weather Service · weather radar" } },
+  "hunter": { windy: { lat: 42.20, lon: -74.23, zoom: 10 }, official: { label: "NWS weather radar", imageUrl: null, href: "https://radar.weather.gov/", attribution: "National Weather Service · weather radar" } },
+  "windham": { windy: { lat: 42.29, lon: -74.26, zoom: 10 }, official: { label: "NWS weather radar", imageUrl: null, href: "https://radar.weather.gov/", attribution: "National Weather Service · weather radar" } },
+  "highmount": { windy: { lat: 42.14, lon: -74.51, zoom: 10 }, official: { label: "NWS weather radar", imageUrl: null, href: "https://radar.weather.gov/", attribution: "National Weather Service · weather radar" } },
 };
 
 const DEFAULT_ZOOM = 9;
@@ -1715,6 +1725,11 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
   "carrabassett-valley": { center: { lat: 45.03, lng: -70.31 }, pins: [{ id: "sugarloaf", name: "Sugarloaf", lat: 45.031, lng: -70.314, accent: "#f97316" }, { id: "carrabassett-valley-town", name: "Carrabassett Valley", lat: 45.085, lng: -70.265, accent: "#0ea5e9" }] },
   "newry-bethel": { center: { lat: 44.48, lng: -70.83 }, pins: [{ id: "sunday-river", name: "Sunday River", lat: 44.473, lng: -70.856, accent: "#f97316" }, { id: "newry", name: "Newry", lat: 44.499, lng: -70.800, accent: "#0ea5e9" }] },
   "rangeley": { center: { lat: 44.95, lng: -70.56 }, pins: [{ id: "saddleback-mountain", name: "Saddleback Mountain", lat: 44.936, lng: -70.510, accent: "#f97316" }, { id: "rangeley", name: "Rangeley", lat: 44.966, lng: -70.644, accent: "#0ea5e9" }] },
+  "lake-placid": { center: { lat: 44.33, lng: -73.91 }, pins: [{ id: "whiteface-mountain", name: "Whiteface Mountain", lat: 44.365, lng: -73.902, accent: "#f97316" }, { id: "lake-placid", name: "Lake Placid", lat: 44.279, lng: -73.979, accent: "#0ea5e9" }, { id: "wilmington", name: "Wilmington", lat: 44.387, lng: -73.817, accent: "#0ea5e9" }] },
+  "north-creek": { center: { lat: 43.68, lng: -74.00 }, pins: [{ id: "gore-mountain", name: "Gore Mountain", lat: 43.673, lng: -74.016, accent: "#f97316" }, { id: "north-creek", name: "North Creek", lat: 43.697, lng: -73.985, accent: "#0ea5e9" }] },
+  "hunter": { center: { lat: 42.21, lng: -74.22 }, pins: [{ id: "hunter-mountain", name: "Hunter Mountain", lat: 42.204, lng: -74.225, accent: "#f97316" }, { id: "hunter", name: "Hunter", lat: 42.214, lng: -74.213, accent: "#0ea5e9" }] },
+  "windham": { center: { lat: 42.30, lng: -74.25 }, pins: [{ id: "windham-mountain", name: "Windham Mountain Club", lat: 42.289, lng: -74.257, accent: "#f97316" }, { id: "windham", name: "Windham", lat: 42.309, lng: -74.251, accent: "#0ea5e9" }] },
+  "highmount": { center: { lat: 42.14, lng: -74.51 }, pins: [{ id: "belleayre-mountain", name: "Belleayre Mountain", lat: 42.139, lng: -74.505, accent: "#f97316" }, { id: "highmount", name: "Highmount", lat: 42.147, lng: -74.514, accent: "#0ea5e9" }] },
 };
 
 // Which country each region sits in. Drives the cross-region grouping on
@@ -1812,6 +1827,11 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "carrabassett-valley": "US",
   "newry-bethel": "US",
   "rangeley": "US",
+  "lake-placid": "US",
+  "north-creek": "US",
+  "hunter": "US",
+  "windham": "US",
+  "highmount": "US",
 };
 const COUNTRY_LABEL: Record<MapCountry, string> = { AU: "australia", JP: "japan", NZ: "new zealand", CA: "canada", US: "united states" };
 const REGION_LABEL: Record<RegionKey, string> = {
@@ -1903,6 +1923,11 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "carrabassett-valley": "carrabassett valley",
   "newry-bethel": "newry / bethel",
   "rangeley": "rangeley",
+  "lake-placid": "lake placid",
+  "north-creek": "north creek",
+  "hunter": "hunter",
+  "windham": "windham",
+  "highmount": "highmount",
 };
 
 interface CountryPin extends PinSpec {

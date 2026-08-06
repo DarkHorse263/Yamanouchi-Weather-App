@@ -214,6 +214,12 @@ const REGION_ANCHORS: Record<RegionId, {
   "carrabassett-valley": { lat: 45.031, lon: -70.314, elevation: 1291, region: "OTHER", displayName: "Carrabassett Valley" },
   "newry-bethel": { lat: 44.473, lon: -70.856, elevation: 957, region: "OTHER", displayName: "Newry / Bethel" },
   "rangeley": { lat: 44.936, lon: -70.510, elevation: 1256, region: "OTHER", displayName: "Rangeley" },
+  // New York anchors · all America/New_York. No dedicated daily avalanche authority; DEC advisories are irregular Adirondack backcountry notices only.
+  "lake-placid": { lat: 44.365, lon: -73.902, elevation: 1483, region: "OTHER", displayName: "Lake Placid" },
+  "north-creek": { lat: 43.673, lon: -74.016, elevation: 1097, region: "OTHER", displayName: "North Creek" },
+  "hunter": { lat: 42.204, lon: -74.225, elevation: 975, region: "OTHER", displayName: "Hunter" },
+  "windham": { lat: 42.289, lon: -74.257, elevation: 945, region: "OTHER", displayName: "Windham" },
+  "highmount": { lat: 42.139, lon: -74.505, elevation: 1045, region: "OTHER", displayName: "Highmount" },
 };
 
 interface EvaluatorReport {

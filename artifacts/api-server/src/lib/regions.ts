@@ -96,6 +96,11 @@ export const REGION_IDS = [
   "carrabassett-valley",
   "newry-bethel",
   "rangeley",
+  "lake-placid",
+  "north-creek",
+  "hunter",
+  "windham",
+  "highmount",
 ] as const;
 export type RegionId = (typeof REGION_IDS)[number];
 
@@ -830,6 +835,22 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "saddleback-mountain": "rangeley",
   "rangeley": "rangeley",
   "rangeley-roads": "rangeley",
+  "whiteface-mountain": "lake-placid",
+  "lake-placid": "lake-placid",
+  "wilmington": "lake-placid",
+  "lake-placid-roads": "lake-placid",
+  "gore-mountain": "north-creek",
+  "north-creek": "north-creek",
+  "north-creek-roads": "north-creek",
+  "hunter-mountain": "hunter",
+  "hunter": "hunter",
+  "hunter-roads": "hunter",
+  "windham-mountain": "windham",
+  "windham": "windham",
+  "windham-roads": "windham",
+  "belleayre-mountain": "highmount",
+  "highmount": "highmount",
+  "highmount-roads": "highmount",
 };
 
 export function regionForLocation(locationId: string): RegionId | undefined {

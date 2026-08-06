@@ -103,6 +103,11 @@ import { LAKES_REGION_TRANSPORT } from "./lakes-region";
 import { CARRABASSETT_VALLEY_TRANSPORT } from "./carrabassett-valley";
 import { NEWRY_BETHEL_TRANSPORT } from "./newry-bethel";
 import { RANGELEY_TRANSPORT } from "./rangeley";
+import { LAKE_PLACID_TRANSPORT } from "./lake-placid";
+import { NORTH_CREEK_TRANSPORT } from "./north-creek";
+import { HUNTER_TRANSPORT } from "./hunter";
+import { WINDHAM_TRANSPORT } from "./windham";
+import { HIGHMOUNT_TRANSPORT } from "./highmount";
 
 const REGISTRY: Record<RegionId, TransportProviderList> = {
   "snowy-mountains": SNOWY_MOUNTAINS_TRANSPORT,
@@ -219,6 +224,11 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   "carrabassett-valley": CARRABASSETT_VALLEY_TRANSPORT,
   "newry-bethel": NEWRY_BETHEL_TRANSPORT,
   "rangeley": RANGELEY_TRANSPORT,
+  "lake-placid": LAKE_PLACID_TRANSPORT,
+  "north-creek": NORTH_CREEK_TRANSPORT,
+  "hunter": HUNTER_TRANSPORT,
+  "windham": WINDHAM_TRANSPORT,
+  "highmount": HIGHMOUNT_TRANSPORT,
 };
 
 // Loader-time integrity check.

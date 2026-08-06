@@ -142,6 +142,11 @@ const FALLBACK_REGIONS: Region[] = [
   { id: "carrabassett-valley", name: "Carrabassett Valley", country: "United States", countryCode: "US", region: "Maine", status: "live", href: "/carrabassett-valley/", baseTowns: ["Carrabassett Valley"], mountains: ["Sugarloaf"], headlineLabel: "Carrabassett Valley", headline: null },
   { id: "newry-bethel", name: "Newry / Bethel", country: "United States", countryCode: "US", region: "Maine", status: "live", href: "/newry-bethel/", baseTowns: ["Newry"], mountains: ["Sunday River"], headlineLabel: "Newry / Bethel", headline: null },
   { id: "rangeley", name: "Rangeley", country: "United States", countryCode: "US", region: "Maine", status: "live", href: "/rangeley/", baseTowns: ["Rangeley"], mountains: ["Saddleback Mountain"], headlineLabel: "Rangeley", headline: null },
+  { id: "lake-placid", name: "Lake Placid", country: "United States", countryCode: "US", region: "New York", status: "live", href: "/lake-placid/", baseTowns: ["Lake Placid", "Wilmington"], mountains: ["Whiteface Mountain"], headlineLabel: "Lake Placid", headline: null },
+  { id: "north-creek", name: "North Creek", country: "United States", countryCode: "US", region: "New York", status: "live", href: "/north-creek/", baseTowns: ["North Creek"], mountains: ["Gore Mountain"], headlineLabel: "North Creek", headline: null },
+  { id: "hunter", name: "Hunter", country: "United States", countryCode: "US", region: "New York", status: "live", href: "/hunter/", baseTowns: ["Hunter"], mountains: ["Hunter Mountain"], headlineLabel: "Hunter", headline: null },
+  { id: "windham", name: "Windham", country: "United States", countryCode: "US", region: "New York", status: "live", href: "/windham/", baseTowns: ["Windham"], mountains: ["Windham Mountain Club"], headlineLabel: "Windham", headline: null },
+  { id: "highmount", name: "Highmount", country: "United States", countryCode: "US", region: "New York", status: "live", href: "/highmount/", baseTowns: ["Highmount"], mountains: ["Belleayre Mountain"], headlineLabel: "Highmount", headline: null },
 ];
 
 // Map a region to the base town we surface in the country card. This is
@@ -234,6 +239,11 @@ const PRIMARY_TOWN: Record<string, string> = {
   "carrabassett-valley":       "Carrabassett Valley",
   "newry-bethel":              "Newry",
   "rangeley":                  "Rangeley",
+  "lake-placid":               "Lake Placid",
+  "north-creek":               "North Creek",
+  "hunter":                    "Hunter",
+  "windham":                   "Windham",
+  "highmount":                 "Highmount",
 };
 
 // AU + NZ = southern hemisphere (snow Jun-Sep); JP + CA + US = northern (snow Dec-Mar).

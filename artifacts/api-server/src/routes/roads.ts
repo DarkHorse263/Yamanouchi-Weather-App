@@ -1117,6 +1117,13 @@ function meChainEntry(opts: { id: string; regionId: string; mountainId: string; 
   return { id: opts.id, regionId: opts.regionId, mountainId: opts.mountainId, mountainName: opts.mountainName, approach: opts.approach, status: "open", chains2wd: "not-required" satisfies ChainReq, chainsAwd: "not-required" satisfies ChainReq, note: opts.inSeason ? `Maine has no mandatory passenger or commercial chain law. Under 29-A M.R.S. §2381, chains are permitted in snow, ice or slippery conditions, not required; winter tyres and AWD/4WD are strongly recommended. ${opts.detail}` : "Outside the ski season · Maine chains remain permitted when conditions warrant, not legally required.", issuedAt: opts.issuedAt, ...ME_SOURCE, dataSource: "seasonal-rule" };
 }
 
+
+/** New York has no general chain or winter-tyre mandate. V&T §145-c applies only to a specifically declared snow-emergency route. */
+const NY_SOURCE = { sourceLabel: "NYSDOT · 511NY", sourceUrl: "https://511ny.org/" };
+function nyChainEntry(opts: { id: string; regionId: string; mountainId: string; mountainName: string; approach: string; detail: string; inSeason: boolean; issuedAt: string }): Record<string, unknown> {
+ return { id: opts.id, regionId: opts.regionId, mountainId: opts.mountainId, mountainName: opts.mountainName, approach: opts.approach, status: "open", chains2wd: "not-required" satisfies ChainReq, chainsAwd: "not-required" satisfies ChainReq, note: opts.inSeason ? `New York has no blanket passenger-vehicle chain law. V&T §145-c can require snow tires or chains only on a specifically declared snow-emergency route; no dedicated resort corridor was identified. Winter tyres and AWD/4WD are strongly recommended. ${opts.detail}` : "Outside the ski season · New York has no general passenger-vehicle chain law; the narrow declared snow-emergency-route rule is not a standing resort-road requirement.", issuedAt: opts.issuedAt, ...NY_SOURCE, dataSource: "seasonal-rule" };
+}
+
 function buildChainStatuses(regionId: string | undefined): Array<Record<string, unknown>> {
   const now = new Date();
   const issuedAt = now.toISOString();
@@ -2269,6 +2276,16 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
     return [me("saddleback-me4-16", "saddleback-mountain", "Saddleback Mountain", "ME-4 / ME-16 from Rangeley", "Rangeley approaches are remote and can close or degrade in winter weather.")];
   }
 
+
+  if (regionId === "lake-placid" || regionId === "north-creek" || regionId === "hunter" || regionId === "windham" || regionId === "highmount") {
+    const inSeason = isUsSnowSeason(now); const ny = (id: string, mountainId: string, mountainName: string, approach: string, detail: string) => nyChainEntry({ id, regionId, mountainId, mountainName, approach, detail, inSeason, issuedAt });
+    if (regionId === "lake-placid") return [ny("whiteface-ny86", "whiteface-mountain", "Whiteface Mountain", "NY-86 through Wilmington", "Adirondack approaches can deteriorate rapidly in storms; check 511NY.")];
+    if (regionId === "north-creek") return [ny("gore-ny28", "gore-mountain", "Gore Mountain", "NY-28 / NY-28N via North Creek", "Check 511NY for Adirondack winter closures and cameras.")];
+    if (regionId === "hunter") return [ny("hunter-ny23a", "hunter-mountain", "Hunter Mountain", "NY-23A / NY-296 through Hunter", "Catskills mountain approaches may be icy or congested during storms.")];
+    if (regionId === "windham") return [ny("windham-ny23", "windham-mountain", "Windham Mountain Club", "NY-23 through Windham", "Check 511NY and verify resort public access before travelling.")];
+    return [ny("belleayre-ny28", "belleayre-mountain", "Belleayre Mountain", "NY-28 via Highmount", "NY-28 is the principal Catskills approach.")];
+  }
+
   if (
     regionId === "sun-valley" ||
     regionId === "sandpoint" ||
@@ -2664,6 +2681,8 @@ router.get("/road-conditions", async (req, res) => {
     const isUsNh = region === "white-mountains" || region === "franconia-notch" || region === "waterville-valley" || region === "lakes-region";
     // Maine has no avalanche authority at all, and 511 Maine is the state road authority.
     const isUsMe = region === "carrabassett-valley" || region === "newry-bethel" || region === "rangeley";
+    // New York has no dedicated avalanche center; DEC notices are irregular High Peaks backcountry advisories only.
+    const isUsNy = region === "lake-placid" || region === "north-creek" || region === "hunter" || region === "windham" || region === "highmount";
 
     let roads: unknown[] = [];
     let generalAdvice: string;
@@ -2834,6 +2853,9 @@ router.get("/road-conditions", async (req, res) => {
     } else if (isUsMe) {
       generalAdvice = "We do not yet pull live Maine road data · check MaineDOT / 511 Maine (511maine.gov) for closures, cameras and storm conditions before travelling. Maine has no mandatory chain law: 29-A M.R.S. §2381 permits chains when roads are snow-covered or slippery, but never requires them; winter tyres and AWD/4WD are strongly recommended. Maine has no dedicated avalanche forecast or observation authority, so no avalanche bulletin is linked for these lift-served resort areas.";
       liveTrafficUrl = "https://511maine.gov/";
+    } else if (isUsNy) {
+      generalAdvice = "We do not yet pull live New York road data · check NYSDOT / 511NY (511ny.org) for closures, cameras and storm conditions before travelling. New York has no general chain or winter-tire mandate; V&T §145-c can apply only on a specifically declared snow-emergency route, not as a standing ski-road rule. Winter tyres and AWD/4WD are strongly recommended. No dedicated daily avalanche authority covers New York resort terrain; DEC issues only irregular Adirondack High Peaks backcountry advisories, not an in-bounds resort bulletin.";
+      liveTrafficUrl = "https://511ny.org/";
     } else if (isUsId) {
       // No live Idaho road feed is wired yet - say so plainly rather than
       // shipping an empty list that reads like "all clear". Idaho has a

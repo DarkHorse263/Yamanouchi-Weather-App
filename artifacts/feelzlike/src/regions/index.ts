@@ -87,6 +87,11 @@ import { lakesRegionRegion } from "./lakes-region";
 import { carrabassettValleyRegion } from "./carrabassett-valley";
 import { newryBethelRegion } from "./newry-bethel";
 import { rangeleyRegion } from "./rangeley";
+import { lakePlacidRegion } from "./lake-placid";
+import { northCreekRegion } from "./north-creek";
+import { hunterRegion } from "./hunter";
+import { windhamRegion } from "./windham";
+import { highmountRegion } from "./highmount";
 
 // Active region registry · AU: Snowy Mountains + Victoria's High Country
 // + Tasmania (Ben Lomond). JP: Yamanouchi (Shiga Kogen + Kita-Shiga),
@@ -215,6 +220,11 @@ export const REGIONS: RegionConfig[] = [
   carrabassettValleyRegion,
   newryBethelRegion,
   rangeleyRegion,
+  lakePlacidRegion,
+  northCreekRegion,
+  hunterRegion,
+  windhamRegion,
+  highmountRegion,
 ];
 
 export const REGION_BY_ID: Record<string, RegionConfig> = Object.fromEntries(
@@ -319,6 +329,11 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "carrabassett-valley": "US",
   "newry-bethel": "US",
   "rangeley": "US",
+  "lake-placid": "US",
+  "north-creek": "US",
+  "hunter": "US",
+  "windham": "US",
+  "highmount": "US",
 };
 export const COUNTRY_META: Record<CountryCode, { name: string; flag: string }> = {
   AU: { name: "Australia", flag: "🇦🇺" },

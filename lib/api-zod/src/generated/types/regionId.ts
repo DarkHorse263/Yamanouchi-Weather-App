@@ -101,4 +101,9 @@ export const RegionId = {
   "carrabassett-valley": "carrabassett-valley",
   "newry-bethel": "newry-bethel",
   "rangeley": "rangeley",
+  "lake-placid": "lake-placid",
+  "north-creek": "north-creek",
+  "hunter": "hunter",
+  "windham": "windham",
+  "highmount": "highmount",
 } as const;

@@ -1754,6 +1754,11 @@ components:
         - carrabassett-valley
         - newry-bethel
         - rangeley
+        - lake-placid
+        - north-creek
+        - hunter
+        - windham
+        - highmount
       description: |
         Canonical region identifier used across the FeelZlike platform.
 

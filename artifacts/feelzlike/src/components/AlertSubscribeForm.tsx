@@ -115,6 +115,11 @@ export const ALERT_REGIONS: Array<{ id: string; nameEn: string; nameJa: string; 
   { id: "carrabassett-valley", nameEn: "Carrabassett Valley", nameJa: "キャラバセットバレー", country: "US · Maine" },
   { id: "newry-bethel", nameEn: "Newry / Bethel", nameJa: "ニューリー／ベセル", country: "US · Maine" },
   { id: "rangeley", nameEn: "Rangeley", nameJa: "レンジリー", country: "US · Maine" },
+  { id: "lake-placid", nameEn: "Lake Placid", nameJa: "レークプラシッド", country: "US · New York" },
+  { id: "north-creek", nameEn: "North Creek", nameJa: "ノースクリーク", country: "US · New York" },
+  { id: "hunter", nameEn: "Hunter", nameJa: "ハンター", country: "US · New York" },
+  { id: "windham", nameEn: "Windham", nameJa: "ウィンダム", country: "US · New York" },
+  { id: "highmount", nameEn: "Highmount", nameJa: "ハイマウント", country: "US · New York" },
 ];
 
 const HORIZONS: Array<{ value: 24 | 48 | 72; label: string; labelJa: string }> = [

@@ -584,6 +584,11 @@ if (process.env.NODE_ENV === "production") {
     "carrabassett-valley": { name: "Carrabassett Valley", towns: { "carrabassett-valley-town": "Carrabassett Valley" } },
     "newry-bethel": { name: "Newry / Bethel", towns: { newry: "Newry" } },
     "rangeley": { name: "Rangeley", towns: { rangeley: "Rangeley" } },
+    "lake-placid": { name: "Lake Placid", towns: { "lake-placid": "Lake Placid", wilmington: "Wilmington" } },
+    "north-creek": { name: "North Creek", towns: { "north-creek": "North Creek" } },
+    "hunter": { name: "Hunter", towns: { hunter: "Hunter" } },
+    "windham": { name: "Windham", towns: { windham: "Windham" } },
+    "highmount": { name: "Highmount", towns: { highmount: "Highmount" } },
   };
 
   // Top-level routes handled by the SPA (before the /:region catch-all).

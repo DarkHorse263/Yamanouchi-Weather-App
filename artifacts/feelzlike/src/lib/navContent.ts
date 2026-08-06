@@ -107,6 +107,11 @@ const REGIONS_WITH_ROADS_CONTENT: ReadonlySet<string> = new Set([
   "carrabassett-valley",
   "newry-bethel",
   "rangeley",
+  "lake-placid",
+  "north-creek",
+  "hunter",
+  "windham",
+  "highmount",
 ]);
 
 /**
