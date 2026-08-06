@@ -74,6 +74,8 @@ import { harborSpringsRegion } from "./harbor-springs";
 import { keweenawPeninsulaRegion } from "./keweenaw-peninsula";
 import { poconosRegion } from "./poconos";
 import { laurelHighlandsRegion } from "./laurel-highlands";
+import { berkshiresRegion } from "./berkshires";
+import { centralMassachusettsRegion } from "./central-massachusetts";
 import { mtHoodRegion } from "./mt-hood";
 import { bendRegion } from "./bend";
 import { crystalMountainRegion } from "./crystal-mountain";
@@ -211,6 +213,8 @@ export const REGIONS: RegionConfig[] = [
   keweenawPeninsulaRegion,
   poconosRegion,
   laurelHighlandsRegion,
+  berkshiresRegion,
+  centralMassachusettsRegion,
   mtHoodRegion,
   bendRegion,
   crystalMountainRegion,
@@ -324,6 +328,8 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "keweenaw-peninsula": "US",
   "poconos": "US",
   "laurel-highlands": "US",
+  "berkshires": "US",
+  "central-massachusetts": "US",
   "mt-hood": "US",
   "bend": "US",
   "crystal-mountain": "US",

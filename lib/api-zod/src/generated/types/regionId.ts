@@ -88,6 +88,8 @@ export const RegionId = {
   "keweenaw-peninsula": "keweenaw-peninsula",
   "poconos": "poconos",
   "laurel-highlands": "laurel-highlands",
+  "berkshires": "berkshires",
+  "central-massachusetts": "central-massachusetts",
   "mt-hood": "mt-hood",
   "bend": "bend",
   "crystal-mountain": "crystal-mountain",

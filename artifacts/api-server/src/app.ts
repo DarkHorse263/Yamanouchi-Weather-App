@@ -540,6 +540,8 @@ if (process.env.NODE_ENV === "production") {
     "keweenaw-peninsula": { name: "Keweenaw Peninsula", towns: { mohawk: "Mohawk" } },
     "poconos": { name: "Poconos", towns: { tannersville: "Tannersville", "pocono-manor": "Pocono Manor" } },
     "laurel-highlands": { name: "Laurel Highlands", towns: { "seven-springs-town": "Seven Springs" } },
+    "berkshires": { name:"Berkshires", towns:{hancock:"Hancock","great-barrington":"Great Barrington"} },
+    "central-massachusetts": { name:"Central Massachusetts", towns:{"princeton-ma":"Princeton"} },
     "mt-hood": {
       name: "Mt. Hood",
       towns: { "government-camp": "Government Camp" },

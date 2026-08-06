@@ -105,6 +105,8 @@ export const REGION_IDS = [
   "keweenaw-peninsula",
   "poconos",
   "laurel-highlands",
+  "berkshires",
+  "central-massachusetts",
 ] as const;
 export type RegionId = (typeof REGION_IDS)[number];
 
@@ -769,6 +771,15 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "blue-knob": "laurel-highlands",
   "seven-springs-town": "laurel-highlands",
   "laurel-highlands-roads": "laurel-highlands",
+  "jiminy-peak": "berkshires",
+  "ski-butternut": "berkshires",
+  "berkshire-east": "berkshires",
+  "hancock": "berkshires",
+  "great-barrington": "berkshires",
+  "berkshires-roads": "berkshires",
+  "wachusett-mountain": "central-massachusetts",
+  "princeton-ma": "central-massachusetts",
+  "central-massachusetts-roads": "central-massachusetts",
 
   // Mt. Hood, OR. Three resorts sharing one base town (Government Camp).
   "mt-hood-meadows": "mt-hood",

@@ -102,6 +102,8 @@ export const ALERT_REGIONS: Array<{ id: string; nameEn: string; nameJa: string; 
   { id: "keweenaw-peninsula", nameEn: "Keweenaw Peninsula", nameJa: "キーウィノー半島", country: "US · Michigan" },
   { id:"poconos",nameEn:"Poconos",nameJa:"ポコノス",country:"US · Pennsylvania" },
   { id:"laurel-highlands",nameEn:"Laurel Highlands",nameJa:"ローレルハイランズ",country:"US · Pennsylvania" },
+  {id:"berkshires",nameEn:"Berkshires",nameJa:"バークシャーズ",country:"US · Massachusetts"},
+  {id:"central-massachusetts",nameEn:"Central Massachusetts",nameJa:"中央マサチューセッツ",country:"US · Massachusetts"},
   { id: "mt-hood", nameEn: "Mt. Hood", nameJa: "マウントフッド", country: "US · Oregon" },
   { id: "bend", nameEn: "Bend", nameJa: "ベンド", country: "US · Oregon" },
   { id: "crystal-mountain", nameEn: "Crystal Mountain", nameJa: "クリスタルマウンテン", country: "US · Washington" },

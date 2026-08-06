@@ -916,6 +916,9 @@ function miChainEntry(opts: { id: string; regionId: string; mountainId: string; 
 /** Pennsylvania has no general passenger chain law; its named chain-up zones and tier system are commercial-vehicle-only. */
 function paChainEntry(opts: { id:string; regionId:string; mountainId:string; mountainName:string; approach:string; detail:string; inSeason:boolean; issuedAt:string }) { return {id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"No passenger chain mandate":"Outside ski season",detail:`Pennsylvania has no general passenger chain or winter-tire mandate. Commercial winter-event restrictions and three named truck chain-up zones do not create a passenger-car mandate. ${opts.detail}`,issuedAt:opts.issuedAt}; }
 
+/** Massachusetts has no general passenger chain or winter-tire mandate; studs are Nov 1-Apr 30 only. */
+function maChainEntry(opts:{id:string;regionId:string;mountainId:string;mountainName:string;approach:string;detail:string;inSeason:boolean;issuedAt:string}) {return {id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"No passenger chain mandate":"Outside ski season",detail:`Massachusetts has no general passenger chain or winter-tire mandate; studded tires are permitted Nov 1-Apr 30 only. ${opts.detail}`,issuedAt:opts.issuedAt};}
+
 function nmChainEntry(opts: {
   id: string;
   regionId: string;
@@ -2139,6 +2142,8 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
 
   if (regionId === "poconos" || regionId === "laurel-highlands") { const inSeason=isUsSnowSeason(now); const pa=(id:string,mountainId:string,mountainName:string,approach:string,detail:string)=>paChainEntry({id,regionId,mountainId,mountainName,approach,detail,inSeason,issuedAt}); if(regionId==="poconos") return [pa("camelback-pa-715","camelback-mountain","Camelback","I-80 to Tannersville, then PA-715","Check 511PA for winter condition overlays."),pa("blue-mountain-pa-248","blue-mountain-pa","Blue Mountain PA","PA-248/Blue Mountain Dr near Palmerton","Check 511PA for winter condition overlays."),pa("shawnee-pa-402","shawnee-mountain","Shawnee Mountain","US-209/PA-402 near Shawnee-on-Delaware","Check 511PA for winter condition overlays.")]; return [pa("seven-springs-pa-281","seven-springs-mountain","Seven Springs","PA-281/County roads to Seven Springs","Check 511PA; commercial-only Summit Mountain US-40 chain-up zone is in the wider Laurel Highlands."),pa("blue-knob-pa-869","blue-knob","Blue Knob","PA-869 toward Claysburg/Blue Knob","Check 511PA for winter condition overlays.")]; }
 
+  if(regionId==="berkshires"||regionId==="central-massachusetts"){const inSeason=isUsSnowSeason(now);const ma=(id:string,mountainId:string,mountainName:string,approach:string,detail:string)=>maChainEntry({id,regionId,mountainId,mountainName,approach,detail,inSeason,issuedAt});if(regionId==="berkshires")return[ma("jiminy-ma-43","jiminy-peak","Jiminy Peak","US-20/MA-43 to Hancock","Check Mass511 before winter travel."),ma("butternut-ma-23","ski-butternut","Ski Butternut","MA-23 near Great Barrington","Check Mass511 before winter travel."),ma("berkshire-east-ma-2","berkshire-east","Berkshire East","MA-2/Mohawk Trail to Charlemont","Check Mass511 before winter travel.")];return[ma("wachusett-ma-31","wachusett-mountain","Wachusett Mountain","MA-31/West Mountain Rd to Princeton","Check Mass511 before winter travel.")];}
+
   if (
     regionId === "taos" ||
     regionId === "angel-fire" ||
@@ -2652,6 +2657,7 @@ router.get("/road-conditions", async (req, res) => {
     // US (Michigan) · Mi Drive has the official state road map. No passenger chain law; no avalanche authority because this is genuinely non-avalanche terrain.
     const isUsMi = region === "harbor-springs" || region === "keweenaw-peninsula";
     const isUsPa = region === "poconos" || region === "laurel-highlands";
+    const isUsMa = region === "berkshires" || region === "central-massachusetts";
     const isUsNm =
       region === "taos" ||
       region === "angel-fire" ||
@@ -2832,6 +2838,9 @@ router.get("/road-conditions", async (req, res) => {
     } else if (isUsPa) {
       generalAdvice = "We do not yet pull live road data for Pennsylvania · check PennDOT's 511PA (511pa.com) for closures, cameras and winter road conditions. Pennsylvania has no general passenger-vehicle chain or winter-tire mandate. Its storm-activated vehicle restrictions and three named chain-up zones are commercial-vehicle measures; the Summit Mountain US-40 zone is in the broader Laurel Highlands. No avalanche authority is needed here: these low-relief groomed ski areas have no meaningful avalanche hazard.";
       liveTrafficUrl = "https://www.511pa.com/";
+    } else if (isUsMa) {
+      generalAdvice = "We do not yet pull live road data for Massachusetts · check MassDOT's Mass511 (mass511.com) for closures, cameras and winter travel alerts. Massachusetts has no general passenger-vehicle chain or winter-tire mandate; studded tires are allowed only Nov 1-Apr 30. No avalanche authority is needed here: these low-relief groomed ski areas have no meaningful avalanche hazard.";
+      liveTrafficUrl = "https://mass511.com/";
     } else if (isUsNm) {
       // No live New Mexico road feed is wired yet - say so plainly rather
       // than shipping an empty list that reads like "all clear". New

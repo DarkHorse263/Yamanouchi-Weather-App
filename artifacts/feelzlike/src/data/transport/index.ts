@@ -90,6 +90,8 @@ import { HARBOR_SPRINGS_TRANSPORT } from "./harbor-springs";
 import { KEWEENAW_PENINSULA_TRANSPORT } from "./keweenaw-peninsula";
 import { POCONOS_TRANSPORT } from "./poconos";
 import { LAUREL_HIGHLANDS_TRANSPORT } from "./laurel-highlands";
+import { BERKSHIRES_TRANSPORT } from "./berkshires";
+import { CENTRAL_MASSACHUSETTS_TRANSPORT } from "./central-massachusetts";
 import { MT_HOOD_TRANSPORT } from "./mt-hood";
 import { BEND_TRANSPORT } from "./bend";
 import { CRYSTAL_MOUNTAIN_TRANSPORT } from "./crystal-mountain";
@@ -211,6 +213,8 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   "keweenaw-peninsula": KEWEENAW_PENINSULA_TRANSPORT,
   "poconos": POCONOS_TRANSPORT,
   "laurel-highlands": LAUREL_HIGHLANDS_TRANSPORT,
+  "berkshires": BERKSHIRES_TRANSPORT,
+  "central-massachusetts": CENTRAL_MASSACHUSETTS_TRANSPORT,
 
   // US (Oregon) · no operators curated to the AU/JP/NZ verification
   // standard yet, so these are registered empty rather than filled with

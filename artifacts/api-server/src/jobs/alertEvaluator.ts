@@ -190,6 +190,8 @@ const REGION_ANCHORS: Record<RegionId, {
   "keweenaw-peninsula": { lat: 47.4080, lon: -88.1010, elevation: 457, region: "OTHER", displayName: "Keweenaw Peninsula" },
   "poconos": { lat: 41.052, lon: -75.352, elevation: 634, region: "OTHER", displayName: "Poconos" },
   "laurel-highlands": { lat: 40.022, lon: -79.297, elevation: 913, region: "OTHER", displayName: "Laurel Highlands" },
+  "berkshires": { lat:42.554, lon:-73.292, elevation:725, region:"OTHER", displayName:"Berkshires" },
+  "central-massachusetts": { lat:42.488, lon:-71.887, elevation:612, region:"OTHER", displayName:"Central Massachusetts" },
 
   // Oregon anchors: each on the highest lift-served summit in the region.
   // America/Los_Angeles, same as Washington and California.

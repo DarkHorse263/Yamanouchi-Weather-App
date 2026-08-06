@@ -1387,6 +1387,13 @@ const WEBCAM_DATA: WebcamConfig[] = [
   { locationId:"blue-knob",locationName:"Blue Knob camera",webcamPageUrl:"https://blueknob.com/trail-map-conditions/",webcams:[] }, // link destination unresolved/conflicting
   { locationId:"poconos-roads",locationName:"Poconos roads · 511PA",webcamPageUrl:"https://www.511pa.com/",webcams:[] },
   { locationId:"laurel-highlands-roads",locationName:"Laurel Highlands roads · 511PA",webcamPageUrl:"https://www.511pa.com/",webcams:[] },
+  // Massachusetts · page-only sources, no invented feeds.
+  {locationId:"jiminy-peak",locationName:"Jiminy Peak webcams",webcamPageUrl:"https://www.jiminypeak.com/webcams/",webcams:[]},
+  {locationId:"ski-butternut",locationName:"Ski Butternut livestream",webcamPageUrl:"https://skibutternut.com/livestream",webcams:[]},
+  {locationId:"berkshire-east",locationName:"Berkshire East webcams",webcamPageUrl:"https://berkshireeast.com/winter/mountain-conditions",webcams:[]}, // no confirmed official live webcam
+  {locationId:"wachusett-mountain",locationName:"Wachusett Mountain cameras",webcamPageUrl:"https://www.wachusett.com/the-mountain/your-visit/snow-report/",webcams:[]}, // cameras referenced through report; distinct URL unconfirmed
+  {locationId:"berkshires-roads",locationName:"Berkshires roads · Mass511",webcamPageUrl:"https://mass511.com/",webcams:[]},
+  {locationId:"central-massachusetts-roads",locationName:"Central Massachusetts roads · Mass511",webcamPageUrl:"https://mass511.com/",webcams:[]},
 
   // ─── Resort live-cam pages: Oregon (Mt. Hood) ──────
   {
