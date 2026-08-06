@@ -1208,6 +1208,62 @@ export const REGIONS = [
       { id: "bend", name: "Bend", blurb: "Central Oregon's largest city, roughly 30 minutes' drive from Mt. Bachelor via Cascade Lakes Highway/OR-372" },
     ],
   },
+  {
+    slug: "crystal-mountain",
+    name: "Crystal Mountain",
+    subtitle: "Washington · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Crystal Mountain Resort", blurb: "Ikon Pass (Full tier, no blackouts) · independent (Alterra-owned) · the largest ski area in Washington by vertical drop (3,100 ft) · ⚠️ SR-410 flood damage delayed the 2025-26 opening to approx. Dec 20-24, 2025; no confirmed season-closing date found" },
+    ],
+    towns: [
+      { id: "enumclaw", name: "Enumclaw", blurb: "gateway town on SR-410, the primary access route to Crystal Mountain Resort" },
+    ],
+  },
+  {
+    slug: "snoqualmie-pass",
+    name: "Snoqualmie Pass",
+    subtitle: "Washington · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "The Summit at Snoqualmie", blurb: "Ikon Pass (Full tier, no blackouts) · independent (Boyne Resorts-owned) · four base areas under one ticket (Summit West/Central/East + Alpental) · ⚠️ 2025-26 season opened Dec 23, 2025 with only Summit West running; other sub-areas' dates unconfirmed" },
+    ],
+    towns: [
+      { id: "snoqualmie-pass-town", name: "Snoqualmie Pass", blurb: "small community directly on I-90 at the pass summit, adjacent to all four Summit at Snoqualmie base areas" },
+    ],
+  },
+  {
+    slug: "stevens-pass",
+    name: "Stevens Pass",
+    subtitle: "Washington · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Stevens Pass Ski Area", blurb: "Vail Resorts' Epic Local Pass (no blackouts) · sole highway access via US-2 · ⚠️ Dec 2025 US-2 flood closure delayed the 2025-26 opening to Dec 29, 2025; elevation figures are inconsistent across sources" },
+    ],
+    towns: [
+      { id: "skykomish", name: "Skykomish", blurb: "small town on US-2, roughly 20 minutes' drive from Stevens Pass Ski Area" },
+    ],
+  },
+  {
+    slug: "mt-baker",
+    name: "Mt. Baker",
+    subtitle: "Washington · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Mt. Baker Ski Area", blurb: "Independent · no major-pass affiliation · holds the world record for most snowfall in a season (1,140 in., 1998-99, verified by NOAA) · confirmed 2025-26 season Dec 21, 2025 - Apr 19, 2026 · ⚠️ no confirmed live webcam" },
+    ],
+    towns: [
+      { id: "glacier", name: "Glacier", blurb: "small town on SR-542 (Mt. Baker Highway), the sole access route to Mt. Baker Ski Area" },
+    ],
+  },
 ];
 
 /** Region sub-sections that actually render for this region (see gating notes above). */

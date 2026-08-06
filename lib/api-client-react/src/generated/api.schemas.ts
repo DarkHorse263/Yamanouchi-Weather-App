@@ -153,6 +153,10 @@ export const RegionId = {
   "albuquerque-sandia": "albuquerque-sandia",
   "mt-hood": "mt-hood",
   "bend": "bend",
+  "crystal-mountain": "crystal-mountain",
+  "snoqualmie-pass": "snoqualmie-pass",
+  "stevens-pass": "stevens-pass",
+  "mt-baker": "mt-baker",
 } as const;
 
 export interface HealthStatus {

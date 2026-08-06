@@ -88,6 +88,10 @@ import { SANTA_FE_TRANSPORT } from "./santa-fe";
 import { ALBUQUERQUE_SANDIA_TRANSPORT } from "./albuquerque-sandia";
 import { MT_HOOD_TRANSPORT } from "./mt-hood";
 import { BEND_TRANSPORT } from "./bend";
+import { CRYSTAL_MOUNTAIN_TRANSPORT } from "./crystal-mountain";
+import { SNOQUALMIE_PASS_TRANSPORT } from "./snoqualmie-pass";
+import { STEVENS_PASS_TRANSPORT } from "./stevens-pass";
+import { MT_BAKER_TRANSPORT } from "./mt-baker";
 
 const REGISTRY: Record<RegionId, TransportProviderList> = {
   "snowy-mountains": SNOWY_MOUNTAINS_TRANSPORT,
@@ -189,6 +193,10 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   // guessed timetables.
   "mt-hood": MT_HOOD_TRANSPORT,
   "bend": BEND_TRANSPORT,
+  "crystal-mountain": CRYSTAL_MOUNTAIN_TRANSPORT,
+  "snoqualmie-pass": SNOQUALMIE_PASS_TRANSPORT,
+  "stevens-pass": STEVENS_PASS_TRANSPORT,
+  "mt-baker": MT_BAKER_TRANSPORT,
 };
 
 // Loader-time integrity check.

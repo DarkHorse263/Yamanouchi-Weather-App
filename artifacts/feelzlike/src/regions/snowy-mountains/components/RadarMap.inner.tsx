@@ -128,6 +128,10 @@ export type RegionKey =
   | "albuquerque-sandia"
   | "mt-hood"
   | "bend"
+  | "crystal-mountain"
+  | "snoqualmie-pass"
+  | "stevens-pass"
+  | "mt-baker"
   | "donnelly-mccall";
 type ViewMode = "interactive" | "windy" | "official";
 
@@ -868,6 +872,42 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       attribution: "National Weather Service · weather radar",
     },
   },
+  "crystal-mountain": {
+    windy: { lat: 46.93, lon: -121.47, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "snoqualmie-pass": {
+    windy: { lat: 47.42, lon: -121.42, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "stevens-pass": {
+    windy: { lat: 47.74, lon: -121.09, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
+  "mt-baker": {
+    windy: { lat: 48.86, lon: -121.65, zoom: 10 },
+    official: {
+      label: "NWS weather radar",
+      imageUrl: null,
+      href: "https://radar.weather.gov/",
+      attribution: "National Weather Service · weather radar",
+    },
+  },
 };
 
 const DEFAULT_ZOOM = 9;
@@ -1557,6 +1597,34 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "bend", name: "Bend", lat: 44.05806, lng: -121.31528, accent: "#0ea5e9" },
     ],
   },
+  "crystal-mountain": {
+    center: { lat: 47.064, lng: -121.735 },
+    pins: [
+      { id: "crystal-mountain", name: "Crystal Mountain Resort", lat: 46.9280, lng: -121.4749, accent: "#f97316" },
+      { id: "enumclaw", name: "Enumclaw", lat: 47.20111, lng: -121.99694, accent: "#0ea5e9" },
+    ],
+  },
+  "snoqualmie-pass": {
+    center: { lat: 47.408, lng: -121.413 },
+    pins: [
+      { id: "snoqualmie-pass", name: "The Summit at Snoqualmie", lat: 47.42400, lng: -121.41600, accent: "#f97316" },
+      { id: "snoqualmie-pass-town", name: "Snoqualmie Pass", lat: 47.39222, lng: -121.40000, accent: "#0ea5e9" },
+    ],
+  },
+  "stevens-pass": {
+    center: { lat: 47.727, lng: -121.222 },
+    pins: [
+      { id: "stevens-pass", name: "Stevens Pass Ski Area", lat: 47.74472, lng: -121.08889, accent: "#f97316" },
+      { id: "skykomish", name: "Skykomish", lat: 47.71028, lng: -121.35833, accent: "#0ea5e9" },
+    ],
+  },
+  "mt-baker": {
+    center: { lat: 48.875, lng: -121.794 },
+    pins: [
+      { id: "mt-baker", name: "Mt. Baker Ski Area", lat: 48.861944, lng: -121.653889, accent: "#f97316" },
+      { id: "glacier", name: "Glacier", lat: 48.88833, lng: -121.93389, accent: "#0ea5e9" },
+    ],
+  },
 };
 
 // Which country each region sits in. Drives the cross-region grouping on
@@ -1639,6 +1707,10 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "albuquerque-sandia": "US",
   "mt-hood": "US",
   "bend": "US",
+  "crystal-mountain": "US",
+  "snoqualmie-pass": "US",
+  "stevens-pass": "US",
+  "mt-baker": "US",
 };
 const COUNTRY_LABEL: Record<MapCountry, string> = { AU: "australia", JP: "japan", NZ: "new zealand", CA: "canada", US: "united states" };
 const REGION_LABEL: Record<RegionKey, string> = {
@@ -1715,6 +1787,10 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "albuquerque-sandia": "albuquerque",
   "mt-hood": "mt. hood",
   "bend": "bend",
+  "crystal-mountain": "crystal mountain",
+  "snoqualmie-pass": "snoqualmie pass",
+  "stevens-pass": "stevens pass",
+  "mt-baker": "mt. baker",
 };
 
 interface CountryPin extends PinSpec {

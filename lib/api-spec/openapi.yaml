@@ -1739,6 +1739,10 @@ components:
         - albuquerque-sandia
         - mt-hood
         - bend
+        - crystal-mountain
+        - snoqualmie-pass
+        - stevens-pass
+        - mt-baker
       description: |
         Canonical region identifier used across the FeelZlike platform.
 

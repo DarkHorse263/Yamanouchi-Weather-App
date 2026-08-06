@@ -985,6 +985,66 @@ function orChainEntry(opts: {
   };
 }
 
+/**
+ * Washington has a REAL, storm-activated, escalating-tier traction
+ * requirement system under RCW 47.36.250 + WAC 204-24-040/050 - more
+ * escalation levels than either Wyoming's Level 1/Level 2 or
+ * California's R1/R2/R3 ladder. WSDOT (or its delegate) posts one of
+ * several levels on specific highway segments during unsafe conditions:
+ *   1. Traction-tire advisory (recommended, not required)
+ *   2. Traction tires required for passenger vehicles; chains required
+ *      for vehicles over 10,000 lbs GVWR
+ *   3. Chains required for vehicles over 10,000 lbs GVWR, except
+ *      all-wheel-drive
+ *   4. Chains required on ALL vehicles, including 4WD/AWD - the most
+ *      severe level, used rarely
+ * This is sign/511-activated, not a fixed calendar rule (unlike
+ * Colorado/Oregon's broad statutory laws), so - mirroring Wyoming's and
+ * California's treatment - `chains2wd`/`chainsAwd` stay at
+ * "not-required" defaults and the real escalating-tier rule lives in the
+ * note. I-90 (Snoqualmie Pass) and US-2 (Stevens Pass) are WSDOT's two
+ * primary avalanche-control corridors and the routes most likely to see
+ * escalation; SR-410 (Crystal Mountain) and SR-542 (Mt. Baker) are also
+ * named WSDOT chain-control routes. Named `waChainEntry` to avoid any
+ * collision with existing helpers.
+ */
+const WA_SOURCE = {
+  sourceLabel: "WSDOT · wsdot.com/travel/real-time/mountainpasses",
+  sourceUrl: "https://wsdot.com/travel/real-time/mountainpasses",
+};
+
+function waChainEntry(opts: {
+  id: string;
+  regionId: string;
+  mountainId: string;
+  mountainName: string;
+  approach: string;
+  detail: string;
+  inSeason: boolean;
+  issuedAt: string;
+  avalancheControlCorridor: boolean;
+}): Record<string, unknown> {
+  const escalationRule =
+    "WSDOT can post one of several escalating traction levels on this route under RCW 47.36.250 + WAC 204-24-040/050: (1) traction-tire advisory, (2) traction tires required for passenger vehicles with chains required over 10,000 lbs GVWR, (3) chains required over 10,000 lbs GVWR except AWD, or (4) chains required on ALL vehicles including 4WD/AWD as the most severe level. This is storm/sign-activated, not a fixed calendar rule, so check wsdot.com's real-time mountain pass page or dial 511 for today's status before you drive.";
+  const generalRule =
+    "Washington has no fixed-calendar statewide chain law, but WSDOT can post an escalating traction-tire/chain requirement (RCW 47.36.250) on any state highway when conditions warrant, up to chains on all vehicles including 4WD/AWD in the most severe cases.";
+  const rule = opts.avalancheControlCorridor ? escalationRule : generalRule;
+  return {
+    id: opts.id,
+    regionId: opts.regionId,
+    mountainId: opts.mountainId,
+    mountainName: opts.mountainName,
+    approach: opts.approach,
+    status: "open",
+    chains2wd: "not-required" satisfies ChainReq,
+    chainsAwd: "not-required" satisfies ChainReq,
+    note: opts.inSeason ? `${rule} ${opts.detail}` : "Outside the ski season · no seasonal traction/chain activation expected on this route.",
+    issuedAt: opts.issuedAt,
+    ...WA_SOURCE,
+    dataSource: "seasonal-rule",
+  };
+}
+
 function buildChainStatuses(regionId: string | undefined): Array<Record<string, unknown>> {
   const now = new Date();
   const issuedAt = now.toISOString();
@@ -2058,6 +2118,58 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
     ];
   }
 
+  if (
+    regionId === "crystal-mountain" ||
+    regionId === "snoqualmie-pass" ||
+    regionId === "stevens-pass" ||
+    regionId === "mt-baker"
+  ) {
+    const inSeason = isUsSnowSeason(now);
+    const wa = (
+      id: string,
+      mountainId: string,
+      mountainName: string,
+      approach: string,
+      detail: string,
+      avalancheControlCorridor: boolean,
+    ) => waChainEntry({ id, regionId, mountainId, mountainName, approach, detail, inSeason, issuedAt, avalancheControlCorridor });
+
+    if (regionId === "crystal-mountain") {
+      return [
+        wa("crystal-mountain-sr-410", "crystal-mountain-resort", "Crystal Mountain Resort",
+          "SR-410 (Chinook Pass Hwy) from Enumclaw",
+          "⚠️ SR-410 suffered major flood damage in late 2025 that delayed Crystal Mountain's 2025-26 opening; this is a WSDOT-designated chain-control route in normal winters.",
+          true),
+      ];
+    }
+
+    if (regionId === "snoqualmie-pass") {
+      return [
+        wa("summit-at-snoqualmie-i-90", "the-summit-at-snoqualmie", "The Summit at Snoqualmie",
+          "I-90 at Snoqualmie Pass",
+          "I-90 at Snoqualmie Pass is one of WSDOT's two primary avalanche-control corridors, averaging 450+ inches of snow per winter and requiring active avalanche-control operations to stay open.",
+          true),
+      ];
+    }
+
+    if (regionId === "stevens-pass") {
+      return [
+        wa("stevens-pass-us-2", "stevens-pass-ski-area", "Stevens Pass Ski Area",
+          "US-2 at Stevens Pass from Skykomish",
+          "⚠️ US-2 suffered flood/storm damage that forced extended closures in late December 2025, delaying Stevens Pass's opening; the \"Old Faithful\" avalanche zone near the ski area is one of WSDOT's most active avalanche-control sites.",
+          true),
+      ];
+    }
+
+    // mt-baker
+    return [
+      wa("mt-baker-sr-542", "mt-baker-ski-area", "Mt. Baker Ski Area",
+        "SR-542 (Mt. Baker Highway) from Glacier",
+        "SR-542 is a designated WSDOT chain-control route (mileposts 22.91-57.26), the sole paved access road to Mt. Baker Ski Area.",
+        true),
+    ];
+  }
+
   return [];
 }
 
@@ -2362,6 +2474,18 @@ router.get("/road-conditions", async (req, res) => {
     //    Avalanche Center (COAC) - a "different/lesser-resourced
     //    authority" flag, not a coverage gap.
     const isUsOr = region === "mt-hood" || region === "bend";
+    //  - US (Washington) - no feed wired yet. WSDOT publishes
+    //    wsdot.com/travel/real-time/mountainpasses. Washington has a REAL,
+    //    storm-activated, escalating-tier traction requirement (RCW
+    //    47.36.250 + WAC 204-24-040/050) with MORE escalation levels than
+    //    Wyoming's Level 1/2 or California's R1/R2/R3 - up to chains on
+    //    ALL vehicles including 4WD/AWD at the most severe level. NWAC
+    //    covers all four Washington regions.
+    const isUsWa =
+      region === "crystal-mountain" ||
+      region === "snoqualmie-pass" ||
+      region === "stevens-pass" ||
+      region === "mt-baker";
 
     let roads: unknown[] = [];
     let generalAdvice: string;
@@ -2512,6 +2636,17 @@ router.get("/road-conditions", async (req, res) => {
         ? "We do not yet pull live road data for Oregon \u00b7 check ODOT's TripCheck (tripcheck.com) for closures, chain-up zones and highway cameras before you drive, especially on Cascade Lakes Highway (OR-372). Oregon has a statewide mandatory traction/chain law (ORS 815.045/815.140/815.142/815.145 + OAR 734-017): when ODOT posts a \"chains required\" zone, ALL vehicles - not just trucks - must have traction tires fitted or carry chains, with escalation to chains-on-every-vehicle possible in severe storms. \u26a0\ufe0f Avalanche forecasting here comes from the smaller, volunteer-run Central Oregon Avalanche Center (COAC) at coavalanche.org, not the better-resourced NWAC that covers Mt. Hood."
         : "We do not yet pull live road data for Oregon \u00b7 check ODOT's TripCheck (tripcheck.com) for closures, chain-up zones and highway cameras before you drive, especially on US-26 over Mt. Hood. Oregon has a statewide mandatory traction/chain law (ORS 815.045/815.140/815.142/815.145 + OAR 734-017): when ODOT posts a \"chains required\" zone, ALL vehicles - not just trucks - must have traction tires fitted or carry chains, with escalation to chains-on-every-vehicle possible in severe storms. For backcountry conditions, read the day's forecast from the Northwest Avalanche Center at nwac.us.";
       liveTrafficUrl = "https://www.tripcheck.com/";
+    } else if (isUsWa) {
+      // No live Washington road feed is wired yet - say so plainly rather
+      // than shipping an empty list that reads like "all clear". Washington
+      // has a REAL, storm-activated, escalating-tier traction requirement
+      // (RCW 47.36.250 + WAC 204-24-040/050), most active on I-90
+      // (Snoqualmie Pass) and US-2 (Stevens Pass), WSDOT's two primary
+      // avalanche-control corridors. NWAC covers all four Washington
+      // regions in this pass.
+      generalAdvice =
+        "We do not yet pull live road data for Washington \u00b7 check WSDOT's real-time mountain pass page (wsdot.com/travel/real-time/mountainpasses) or dial 511 for closures, chain requirements and highway cameras before you drive, especially over Snoqualmie Pass (I-90) and Stevens Pass (US-2), WSDOT's two primary avalanche-control corridors. WSDOT can post an escalating traction-tire/chain requirement (RCW 47.36.250) on any state highway when conditions warrant, up to chains on ALL vehicles including 4WD/AWD in the most severe cases - this is storm-activated, not a fixed calendar rule. For backcountry conditions, read the day's forecast from the Northwest Avalanche Center at nwac.us.";
+      liveTrafficUrl = "https://wsdot.com/travel/real-time/mountainpasses";
     } else {
       generalAdvice =
         "Live road condition data is not yet available for this region.";

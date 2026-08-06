@@ -100,6 +100,10 @@ export const ALERT_REGIONS: Array<{ id: string; nameEn: string; nameJa: string; 
   { id: "albuquerque-sandia", nameEn: "Albuquerque", nameJa: "アルバカーキー", country: "US · New Mexico" },
   { id: "mt-hood", nameEn: "Mt. Hood", nameJa: "マウントフッド", country: "US · Oregon" },
   { id: "bend", nameEn: "Bend", nameJa: "ベンド", country: "US · Oregon" },
+  { id: "crystal-mountain", nameEn: "Crystal Mountain", nameJa: "クリスタルマウンテン", country: "US · Washington" },
+  { id: "snoqualmie-pass", nameEn: "Snoqualmie Pass", nameJa: "スノーカルミーパス", country: "US · Washington" },
+  { id: "stevens-pass", nameEn: "Stevens Pass", nameJa: "スティーブンスパス", country: "US · Washington" },
+  { id: "mt-baker", nameEn: "Mt. Baker", nameJa: "マウントベーカー", country: "US · Washington" },
 ];
 
 const HORIZONS: Array<{ value: 24 | 48 | 72; label: string; labelJa: string }> = [

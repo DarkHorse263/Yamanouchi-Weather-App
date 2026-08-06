@@ -544,6 +544,22 @@ if (process.env.NODE_ENV === "production") {
       name: "Bend",
       towns: { "bend": "Bend" },
     },
+    "crystal-mountain": {
+      name: "Crystal Mountain",
+      towns: { "enumclaw": "Enumclaw" },
+    },
+    "snoqualmie-pass": {
+      name: "Snoqualmie Pass",
+      towns: { "snoqualmie-pass-town": "Snoqualmie Pass" },
+    },
+    "stevens-pass": {
+      name: "Stevens Pass",
+      towns: { "skykomish": "Skykomish" },
+    },
+    "mt-baker": {
+      name: "Mt. Baker",
+      towns: { "glacier": "Glacier" },
+    },
   };
 
   // Top-level routes handled by the SPA (before the /:region catch-all).

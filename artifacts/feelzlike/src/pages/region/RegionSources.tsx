@@ -430,6 +430,34 @@ const OR_ROADS_GENERAL: SourceGroup = {
   ],
 };
 
+/**
+ * Washington: all four WA regions fall within NWAC's (Northwest Avalanche
+ * Center) coverage area, unlike Oregon's Bend/COAC gap above — one shared
+ * official-references group is used for all four.
+ */
+const WA_OFFICIAL_REFERENCES: SourceGroup = {
+  title: "Official references",
+  titleJa: "公式参照先",
+  blurb:
+    "Link-outs, not wired feeds · conditions shown on feelzlike come from the forecast ensemble below, so check these before you drive or tour.",
+  blurbJa:
+    "リンクのみで、データ連携はしていません。feelzlikeの数値は下記の予報モデルによるものです。走行・ツアー前に必ず公式情報をご確認ください。",
+  items: [
+    { label: "National Weather Service", detail: "US federal forecasts & warnings", url: "https://www.weather.gov/" },
+    { label: "Northwest Avalanche Center (NWAC)", detail: "backcountry avalanche forecasts covering all of the WA Cascades, including Crystal Mountain, Snoqualmie Pass, Stevens Pass and Mt. Baker", url: "https://nwac.us/" },
+  ],
+};
+const WA_ROADS_GENERAL: SourceGroup = {
+  title: "Roads & transport",
+  titleJa: "道路・交通",
+  blurb:
+    "Washington's chain law is storm-activated rather than always-on — RCW 47.36.250 lets WSDOT require chains on designated mountain-pass routes only when posted, rather than for the whole season.",
+  blurbJa: "ワシントン州では、峰を越える主要道路で気象状況に応じてチェーン規制が発令されます（RCW 47.36.250）。",
+  items: [
+    { label: "WSDOT Mountain Pass Reports", detail: "real-time pass conditions, cameras & storm-activated chain-up requirements", url: "https://wsdot.com/travel/real-time/mountainpasses" },
+  ],
+};
+
 const REGION_SOURCES: Record<string, SourceGroup[]> = {
   "snowy-mountains": [
     {
@@ -1077,6 +1105,54 @@ const REGION_SOURCES: Record<string, SourceGroup[]> = {
       titleJa: "スキー場・リフト",
       items: [
         { label: "Mt. Bachelor", detail: "Ikon Pass destination · 360°-skiable volcanic cone, one of the largest lift-served ski areas in the US by skiable acreage · confirmed live webcams (8+ feeds)", url: "https://www.mtbachelor.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "crystal-mountain": [
+    WA_OFFICIAL_REFERENCES,
+    WA_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Crystal Mountain Resort", detail: "Ikon Pass (Full tier, no blackouts) · independent (Alterra-owned) · the largest ski area in Washington by vertical drop (3,100 ft) · ⚠️ SR-410 flood damage delayed the 2025-26 opening; no confirmed season-closing date found · webcam page not independently re-verified live", url: "https://www.crystalmountainresort.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "snoqualmie-pass": [
+    WA_OFFICIAL_REFERENCES,
+    WA_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "The Summit at Snoqualmie", detail: "Ikon Pass (Full tier, no blackouts) · independent (Boyne Resorts-owned) · four base areas under one ticket (Summit West/Central/East + Alpental) · ⚠️ 2025-26 season opened with only Summit West running; other sub-areas' dates unconfirmed · webcam page not independently re-verified live", url: "https://summitatsnoqualmie.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "stevens-pass": [
+    WA_OFFICIAL_REFERENCES,
+    WA_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Stevens Pass Ski Area", detail: "Vail Resorts' Epic Local Pass (no blackouts) · sole highway access via US-2 · ⚠️ Dec 2025 US-2 flood closure delayed the 2025-26 opening · webcam page not independently re-verified live", url: "https://www.stevenspass.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  "mt-baker": [
+    WA_OFFICIAL_REFERENCES,
+    WA_ROADS_GENERAL,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Mt. Baker Ski Area", detail: "Independent · no major-pass affiliation · holds the world record for most snowfall in a season (1,140 in., 1998-99, verified by NOAA) · ⚠️ NO confirmed live webcam found", url: "https://www.mtbaker.us/" },
       ],
     },
     FORECAST_ENSEMBLE,

@@ -127,6 +127,10 @@ const FALLBACK_REGIONS: Region[] = [
   { id: "albuquerque-sandia",     name: "Albuquerque",                     country: "United States", countryCode: "US", region: "New Mexico",      status: "live", href: "/albuquerque-sandia/",     baseTowns: ["Albuquerque"],                                               mountains: ["Sandia Peak Ski Area"],                                    headlineLabel: "Albuquerque",  headline: null },
   { id: "mt-hood",                name: "Mt. Hood",                        country: "United States", countryCode: "US", region: "Oregon",          status: "live", href: "/mt-hood/",               baseTowns: ["Government Camp"],                                           mountains: ["Mt. Hood Meadows", "Timberline Lodge", "Mt. Hood Skibowl"], headlineLabel: "Mt. Hood",     headline: null },
   { id: "bend",                   name: "Bend",                            country: "United States", countryCode: "US", region: "Oregon",          status: "live", href: "/bend/",                  baseTowns: ["Bend"],                                                      mountains: ["Mt. Bachelor"],                                            headlineLabel: "Bend",         headline: null },
+  { id: "crystal-mountain",       name: "Crystal Mountain",                country: "United States", countryCode: "US", region: "Washington",      status: "live", href: "/crystal-mountain/",       baseTowns: ["Enumclaw"],                                                  mountains: ["Crystal Mountain Resort"],                                headlineLabel: "Crystal Mountain", headline: null },
+  { id: "snoqualmie-pass",        name: "Snoqualmie Pass",                 country: "United States", countryCode: "US", region: "Washington",      status: "live", href: "/snoqualmie-pass/",        baseTowns: ["Snoqualmie Pass"],                                           mountains: ["The Summit at Snoqualmie"],                               headlineLabel: "Snoqualmie Pass", headline: null },
+  { id: "stevens-pass",           name: "Stevens Pass",                    country: "United States", countryCode: "US", region: "Washington",      status: "live", href: "/stevens-pass/",           baseTowns: ["Skykomish"],                                                 mountains: ["Stevens Pass Ski Area"],                                   headlineLabel: "Stevens Pass", headline: null },
+  { id: "mt-baker",               name: "Mt. Baker",                       country: "United States", countryCode: "US", region: "Washington",      status: "live", href: "/mt-baker/",               baseTowns: ["Glacier"],                                                   mountains: ["Mt. Baker Ski Area"],                                      headlineLabel: "Mt. Baker",    headline: null },
 ];
 
 // Map a region to the base town we surface in the country card. This is
@@ -204,6 +208,10 @@ const PRIMARY_TOWN: Record<string, string> = {
   "albuquerque-sandia":       "Albuquerque",
   "mt-hood":                  "Government Camp",
   "bend":                     "Bend",
+  "crystal-mountain":         "Enumclaw",
+  "snoqualmie-pass":          "Snoqualmie Pass",
+  "stevens-pass":             "Skykomish",
+  "mt-baker":                 "Glacier",
 };
 
 // AU + NZ = southern hemisphere (snow Jun-Sep); JP + CA + US = northern (snow Dec-Mar).

@@ -238,6 +238,10 @@ export const GetPowderAlertsQueryParams = zod.object({
       "albuquerque-sandia",
       "mt-hood",
       "bend",
+      "crystal-mountain",
+      "snoqualmie-pass",
+      "stevens-pass",
+      "mt-baker",
     ])
     .optional()
     .describe(
@@ -1281,6 +1285,10 @@ export const GetWeatherQueryParams = zod.object({
       "albuquerque-sandia",
       "mt-hood",
       "bend",
+      "crystal-mountain",
+      "snoqualmie-pass",
+      "stevens-pass",
+      "mt-baker",
     ])
     .optional()
     .describe(
@@ -1747,6 +1755,10 @@ export const GetWebcamsQueryParams = zod.object({
       "albuquerque-sandia",
       "mt-hood",
       "bend",
+      "crystal-mountain",
+      "snoqualmie-pass",
+      "stevens-pass",
+      "mt-baker",
     ])
     .optional()
     .describe(
@@ -1915,6 +1927,10 @@ export const GetRoadConditionsQueryParams = zod.object({
       "albuquerque-sandia",
       "mt-hood",
       "bend",
+      "crystal-mountain",
+      "snoqualmie-pass",
+      "stevens-pass",
+      "mt-baker",
     ])
     .optional()
     .describe(
@@ -2138,6 +2154,10 @@ export const GetLiftStatusQueryParams = zod.object({
       "albuquerque-sandia",
       "mt-hood",
       "bend",
+      "crystal-mountain",
+      "snoqualmie-pass",
+      "stevens-pass",
+      "mt-baker",
     ])
     .optional()
     .describe(

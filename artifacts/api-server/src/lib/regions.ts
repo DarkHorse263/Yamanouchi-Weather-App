@@ -81,6 +81,10 @@ export const REGION_IDS = [
   "albuquerque-sandia",
   "mt-hood",
   "bend",
+  "crystal-mountain",
+  "snoqualmie-pass",
+  "stevens-pass",
+  "mt-baker",
 ] as const;
 export type RegionId = (typeof REGION_IDS)[number];
 
@@ -737,6 +741,28 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "mt-bachelor": "bend",
   "bend": "bend",
   "bend-roads": "bend",
+
+  // Crystal Mountain, WA.
+  "crystal-mountain": "crystal-mountain",
+  "enumclaw": "crystal-mountain",
+  "crystal-mountain-roads": "crystal-mountain",
+
+  // Snoqualmie Pass, WA. Base town shares the mountain's human name, so
+  // the town id uses a "-town" suffix to avoid colliding with the
+  // mountain id (both would otherwise be "snoqualmie-pass").
+  "snoqualmie-pass": "snoqualmie-pass",
+  "snoqualmie-pass-town": "snoqualmie-pass",
+  "snoqualmie-pass-roads": "snoqualmie-pass",
+
+  // Stevens Pass, WA.
+  "stevens-pass": "stevens-pass",
+  "skykomish": "stevens-pass",
+  "stevens-pass-roads": "stevens-pass",
+
+  // Mt. Baker, WA.
+  "mt-baker": "mt-baker",
+  "glacier": "mt-baker",
+  "mt-baker-roads": "mt-baker",
 };
 
 export function regionForLocation(locationId: string): RegionId | undefined {

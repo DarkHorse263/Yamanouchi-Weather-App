@@ -189,6 +189,13 @@ const REGION_ANCHORS: Record<RegionId, {
   // America/Los_Angeles, same as Washington and California.
   "mt-hood": { lat: 45.33111, lon: -121.71000, elevation: 2603, region: "OTHER", displayName: "Mt. Hood" },
   "bend": { lat: 43.9794, lon: -121.6885, elevation: 2763, region: "OTHER", displayName: "Bend" },
+
+  // Washington anchors: each on the highest lift-served summit in the
+  // region. America/Los_Angeles.
+  "crystal-mountain": { lat: 46.9280, lon: -121.4749, elevation: 2138, region: "OTHER", displayName: "Crystal Mountain" },
+  "snoqualmie-pass": { lat: 47.44306, lon: -121.42944, elevation: 1652, region: "OTHER", displayName: "Snoqualmie Pass" }, // anchored on Alpental, the highest/steepest of the four sub-areas (summit 5,420 ft)
+  "stevens-pass": { lat: 47.74472, lon: -121.08889, elevation: 1235, region: "OTHER", displayName: "Stevens Pass" },
+  "mt-baker": { lat: 48.861944, lon: -121.653889, elevation: 1515, region: "OTHER", displayName: "Mt. Baker" },
 };
 
 interface EvaluatorReport {

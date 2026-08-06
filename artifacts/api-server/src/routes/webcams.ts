@@ -1426,6 +1426,72 @@ const WEBCAM_DATA: WebcamConfig[] = [
     webcams: [],
   },
 
+  // ─── Resort live-cam pages: Washington ──────
+  {
+    locationId: "crystal-mountain",
+    // ⚠️ Resort publishes a webcam page but no individual feed URL was
+    // independently confirmed live by direct fetch in research —
+    // page-only link, no fabricated feed.
+    locationName: "Crystal Mountain live cams",
+    webcamPageUrl: "https://www.crystalmountainresort.com/mountain-report",
+    webcams: [],
+  },
+  {
+    locationId: "snoqualmie-pass",
+    // ⚠️ Webcam feeds are listed on-site but were not independently
+    // re-verified as live in research — page-only link, no fabricated feed.
+    locationName: "The Summit at Snoqualmie live cams",
+    webcamPageUrl: "https://summitatsnoqualmie.com/mountain-report/",
+    webcams: [],
+  },
+  {
+    locationId: "stevens-pass",
+    // ⚠️ Webcam feeds are listed on-site but were not independently
+    // re-verified as live in research — page-only link, no fabricated feed.
+    locationName: "Stevens Pass live cams",
+    webcamPageUrl: "https://www.stevenspass.com/the-mountain/mountain-conditions.aspx",
+    webcams: [],
+  },
+  {
+    locationId: "mt-baker",
+    // ⚠️ NO confirmed webcam found in research at all (unlike the other
+    // three WA resorts, which at least have an unverified page) — mirrors
+    // Whitefish's no-webcam pattern from the Montana pass. Page-only link
+    // to the resort's own site, no fabricated feed.
+    locationName: "Mt. Baker live cams",
+    webcamPageUrl: "https://www.mtbaker.us/",
+    webcams: [],
+  },
+
+  // ─── Roadside cams: Washington ───────────────────────────
+  // WSDOT runs public highway/mountain-pass cameras but does not expose a
+  // stable deep link per camera that survives a season — same honest
+  // page-only-link pattern as every prior state.
+  {
+    locationId: "crystal-mountain-roads",
+    locationName: "Roads to Crystal Mountain · SR-410",
+    webcamPageUrl: "https://wsdot.com/travel/real-time/mountainpasses",
+    webcams: [],
+  },
+  {
+    locationId: "snoqualmie-pass-roads",
+    locationName: "Roads to Snoqualmie Pass · I-90",
+    webcamPageUrl: "https://wsdot.com/travel/real-time/mountainpasses",
+    webcams: [],
+  },
+  {
+    locationId: "stevens-pass-roads",
+    locationName: "Roads to Stevens Pass · US-2",
+    webcamPageUrl: "https://wsdot.com/travel/real-time/mountainpasses",
+    webcams: [],
+  },
+  {
+    locationId: "mt-baker-roads",
+    locationName: "Roads to Mt. Baker · SR-542",
+    webcamPageUrl: "https://wsdot.com/travel/real-time/mountainpasses",
+    webcams: [],
+  },
+
 ];
 
 router.get("/webcams", (req, res) => {

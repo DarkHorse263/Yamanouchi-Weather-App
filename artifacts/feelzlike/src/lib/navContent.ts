@@ -92,6 +92,10 @@ const REGIONS_WITH_ROADS_CONTENT: ReadonlySet<string> = new Set([
   "albuquerque-sandia",
   "mt-hood",
   "bend",
+  "crystal-mountain",
+  "snoqualmie-pass",
+  "stevens-pass",
+  "mt-baker",
 ]);
 
 /**

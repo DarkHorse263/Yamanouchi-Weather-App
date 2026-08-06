@@ -616,6 +616,22 @@ const LOCATIONS: LocationConfig[] = [
   // Bend, OR.
   { id: "mt-bachelor",               name: "Mt. Bachelor",              latitude: 43.9794, longitude: -121.6885, elevation: 2763, description: "Ikon Pass destination · 360°-skiable volcanic cone, one of the largest lift-served ski areas in the US by skiable acreage · ⚠️ avalanche forecasting here is from the smaller, volunteer-run Central Oregon Avalanche Center (COAC), not NWAC.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
   { id: "bend",                      name: "Bend",                      latitude: 44.05806, longitude: -121.31528, elevation: 1104, description: "Central Oregon's largest city, roughly 30 minutes' drive from Mt. Bachelor via Cascade Lakes Highway/OR-372.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+
+  // Crystal Mountain, WA.
+  { id: "crystal-mountain",          name: "Crystal Mountain Resort",   latitude: 46.9280, longitude: -121.4749, elevation: 2138, description: "Ikon Pass (Full tier, no blackouts) · independent (Alterra-owned) · the largest ski area in Washington by vertical drop (3,100 ft) · ⚠️ SR-410 flood damage delayed the 2025-26 opening to approx. Dec 20-24, 2025; no confirmed season-closing date found.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+  { id: "enumclaw",                  name: "Enumclaw",                  latitude: 47.20111, longitude: -121.99694, elevation: 339,  description: "Gateway town on SR-410, the primary access route to Crystal Mountain Resort.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+
+  // Snoqualmie Pass, WA · one resort with four connected sub-areas (Summit West/Central/East + Alpental).
+  { id: "snoqualmie-pass",           name: "The Summit at Snoqualmie",  latitude: 47.42400, longitude: -121.41600, elevation: 1178, description: "Ikon Pass (Full tier, no blackouts) · independent (Boyne Resorts-owned) · four base areas under one ticket (Summit West/Central/East + Alpental) · ⚠️ 2025-26 season opened Dec 23, 2025 with only Summit West running; other sub-areas' dates unconfirmed.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+  { id: "snoqualmie-pass-town",      name: "Snoqualmie Pass",           latitude: 47.39222, longitude: -121.40000, elevation: 917,  description: "Small community directly on I-90 at the pass summit, adjacent to all four Summit at Snoqualmie base areas.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+
+  // Stevens Pass, WA.
+  { id: "stevens-pass",              name: "Stevens Pass Ski Area",     latitude: 47.74472, longitude: -121.08889, elevation: 1235, description: "Vail Resorts' Epic Local Pass (no blackouts) · sole highway access via US-2 · ⚠️ Dec 2025 US-2 flood closure delayed the 2025-26 opening to Dec 29, 2025; elevation figures are inconsistent across sources.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+  { id: "skykomish",                 name: "Skykomish",                 latitude: 47.71028, longitude: -121.35833, elevation: 299,  description: "Small town on US-2, roughly 20 minutes' drive from Stevens Pass Ski Area.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+
+  // Mt. Baker, WA.
+  { id: "mt-baker",                  name: "Mt. Baker Ski Area",        latitude: 48.861944, longitude: -121.653889, elevation: 1515, description: "Independent · no major-pass affiliation · holds the world record for most snowfall in a season (1,140 in., 1998-99, verified by NOAA) · confirmed 2025-26 season Dec 21, 2025 - Apr 19, 2026 · ⚠️ NO confirmed live webcam found.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
+  { id: "glacier",                   name: "Glacier",                   latitude: 48.88833, longitude: -121.93389, elevation: 285,  description: "Small town on SR-542 (Mt. Baker Highway), the sole access route to Mt. Baker Ski Area.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/Los_Angeles", region: "US" },
 ];
 
 const WEATHER_DESCRIPTIONS: Record<number, string> = {
