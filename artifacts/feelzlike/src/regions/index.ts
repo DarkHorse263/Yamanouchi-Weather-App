@@ -80,6 +80,10 @@ import { sunValleyRegion } from "./sun-valley";
 import { sandpointRegion } from "./sandpoint";
 import { boiseRegion } from "./boise";
 import { donnellyMccallRegion } from "./donnelly-mccall";
+import { whiteMountainsRegion } from "./white-mountains";
+import { franconiaNotchRegion } from "./franconia-notch";
+import { watervilleValleyRegion } from "./waterville-valley";
+import { lakesRegionRegion } from "./lakes-region";
 
 // Active region registry · AU: Snowy Mountains + Victoria's High Country
 // + Tasmania (Ben Lomond). JP: Yamanouchi (Shiga Kogen + Kita-Shiga),
@@ -201,6 +205,10 @@ export const REGIONS: RegionConfig[] = [
   sandpointRegion,
   boiseRegion,
   donnellyMccallRegion,
+  whiteMountainsRegion,
+  franconiaNotchRegion,
+  watervilleValleyRegion,
+  lakesRegionRegion,
 ];
 
 export const REGION_BY_ID: Record<string, RegionConfig> = Object.fromEntries(
@@ -298,6 +306,10 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "sandpoint": "US",
   "boise": "US",
   "donnelly-mccall": "US",
+  "white-mountains": "US",
+  "franconia-notch": "US",
+  "waterville-valley": "US",
+  "lakes-region": "US",
 };
 export const COUNTRY_META: Record<CountryCode, { name: string; flag: string }> = {
   AU: { name: "Australia", flag: "🇦🇺" },

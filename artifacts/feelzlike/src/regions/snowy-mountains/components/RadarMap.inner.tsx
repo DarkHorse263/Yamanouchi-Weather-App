@@ -135,7 +135,11 @@ export type RegionKey =
   | "sun-valley"
   | "sandpoint"
   | "boise"
-  | "donnelly-mccall";
+  | "donnelly-mccall"
+  | "white-mountains"
+  | "franconia-notch"
+  | "waterville-valley"
+  | "lakes-region";
 type ViewMode = "interactive" | "windy" | "official";
 
 interface RegionConfig {
@@ -947,6 +951,10 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       attribution: "National Weather Service · weather radar",
     },
   },
+  "white-mountains": { windy: { lat: 44.14, lon: -71.20, zoom: 10 }, official: { label: "NWS weather radar", imageUrl: null, href: "https://radar.weather.gov/", attribution: "National Weather Service · weather radar" } },
+  "franconia-notch": { windy: { lat: 44.16, lon: -71.59, zoom: 10 }, official: { label: "NWS weather radar", imageUrl: null, href: "https://radar.weather.gov/", attribution: "National Weather Service · weather radar" } },
+  "waterville-valley": { windy: { lat: 43.95, lon: -71.51, zoom: 10 }, official: { label: "NWS weather radar", imageUrl: null, href: "https://radar.weather.gov/", attribution: "National Weather Service · weather radar" } },
+  "lakes-region": { windy: { lat: 43.54, lon: -71.39, zoom: 10 }, official: { label: "NWS weather radar", imageUrl: null, href: "https://radar.weather.gov/", attribution: "National Weather Service · weather radar" } },
 };
 
 const DEFAULT_ZOOM = 9;
@@ -1694,6 +1702,10 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
       { id: "donnelly", name: "Donnelly", lat: 44.73028, lng: -116.07444, accent: "#0ea5e9" },
     ],
   },
+  "white-mountains": { center: { lat: 44.14, lng: -71.20 }, pins: [{ id: "cranmore-mountain", name: "Cranmore Mountain", lat: 44.0550, lng: -71.1090, accent: "#f97316" }, { id: "wildcat-mountain", name: "Wildcat Mountain", lat: 44.2590, lng: -71.2370, accent: "#f97316" }, { id: "attitash-mountain-resort", name: "Attitash Mountain Resort", lat: 44.0820, lng: -71.2290, accent: "#f97316" }, { id: "north-conway", name: "North Conway", lat: 44.0537, lng: -71.1289, accent: "#0ea5e9" }] },
+  "franconia-notch": { center: { lat: 44.15, lng: -71.59 }, pins: [{ id: "cannon-mountain", name: "Cannon Mountain", lat: 44.1569, lng: -71.6980, accent: "#f97316" }, { id: "bretton-woods", name: "Bretton Woods", lat: 44.2600, lng: -71.4410, accent: "#f97316" }, { id: "loon-mountain", name: "Loon Mountain", lat: 44.0360, lng: -71.6220, accent: "#f97316" }, { id: "franconia", name: "Franconia", lat: 44.2270, lng: -71.7470, accent: "#0ea5e9" }, { id: "bretton-woods-town", name: "Bretton Woods", lat: 44.2580, lng: -71.4410, accent: "#0ea5e9" }] },
+  "waterville-valley": { center: { lat: 43.95, lng: -71.51 }, pins: [{ id: "waterville-valley-resort", name: "Waterville Valley Resort", lat: 43.9500, lng: -71.5140, accent: "#f97316" }, { id: "waterville-valley-town", name: "Waterville Valley", lat: 43.9500, lng: -71.4990, accent: "#0ea5e9" }] },
+  "lakes-region": { center: { lat: 43.54, lng: -71.39 }, pins: [{ id: "gunstock-mountain-resort", name: "Gunstock Mountain Resort", lat: 43.5270, lng: -71.3690, accent: "#f97316" }, { id: "gilford", name: "Gilford", lat: 43.5480, lng: -71.4060, accent: "#0ea5e9" }] },
 };
 
 // Which country each region sits in. Drives the cross-region grouping on
@@ -1784,6 +1796,10 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "sandpoint": "US",
   "boise": "US",
   "donnelly-mccall": "US",
+  "white-mountains": "US",
+  "franconia-notch": "US",
+  "waterville-valley": "US",
+  "lakes-region": "US",
 };
 const COUNTRY_LABEL: Record<MapCountry, string> = { AU: "australia", JP: "japan", NZ: "new zealand", CA: "canada", US: "united states" };
 const REGION_LABEL: Record<RegionKey, string> = {
@@ -1868,6 +1884,10 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "sandpoint": "sandpoint",
   "boise": "boise",
   "donnelly-mccall": "donnelly / mccall",
+  "white-mountains": "white mountains",
+  "franconia-notch": "franconia notch",
+  "waterville-valley": "waterville valley",
+  "lakes-region": "lakes region",
 };
 
 interface CountryPin extends PinSpec {

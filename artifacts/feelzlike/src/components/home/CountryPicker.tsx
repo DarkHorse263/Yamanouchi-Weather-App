@@ -135,6 +135,10 @@ const FALLBACK_REGIONS: Region[] = [
   { id: "sandpoint",              name: "Sandpoint",                       country: "United States", countryCode: "US", region: "Idaho",          status: "live", href: "/sandpoint/",              baseTowns: ["Sandpoint"],                                                 mountains: ["Schweitzer Mountain Resort"],                             headlineLabel: "Sandpoint",    headline: null },
   { id: "boise",                  name: "Boise",                           country: "United States", countryCode: "US", region: "Idaho",          status: "live", href: "/boise/",                 baseTowns: ["Boise"],                                                     mountains: ["Bogus Basin"],                                             headlineLabel: "Boise",        headline: null },
   { id: "donnelly-mccall",        name: "Donnelly / McCall",               country: "United States", countryCode: "US", region: "Idaho",          status: "live", href: "/donnelly-mccall/",        baseTowns: ["Donnelly"],                                                  mountains: ["Tamarack Resort", "Brundage Mountain"],                   headlineLabel: "Donnelly / McCall", headline: null },
+  { id: "white-mountains",       name: "White Mountains",                country: "United States", countryCode: "US", region: "New Hampshire",   status: "live", href: "/white-mountains/",       baseTowns: ["North Conway"], mountains: ["Cranmore Mountain", "Wildcat Mountain", "Attitash Mountain Resort"], headlineLabel: "North Conway", headline: null },
+  { id: "franconia-notch",       name: "Franconia Notch",                country: "United States", countryCode: "US", region: "New Hampshire",   status: "live", href: "/franconia-notch/",       baseTowns: ["Franconia", "Bretton Woods"], mountains: ["Cannon Mountain", "Bretton Woods", "Loon Mountain"], headlineLabel: "Franconia", headline: null },
+  { id: "waterville-valley",     name: "Waterville Valley",              country: "United States", countryCode: "US", region: "New Hampshire",   status: "live", href: "/waterville-valley/",     baseTowns: ["Waterville Valley"], mountains: ["Waterville Valley Resort"], headlineLabel: "Waterville Valley", headline: null },
+  { id: "lakes-region",          name: "Lakes Region",                   country: "United States", countryCode: "US", region: "New Hampshire",   status: "live", href: "/lakes-region/",          baseTowns: ["Gilford"], mountains: ["Gunstock Mountain Resort"], headlineLabel: "Gilford", headline: null },
 ];
 
 // Map a region to the base town we surface in the country card. This is
@@ -220,6 +224,10 @@ const PRIMARY_TOWN: Record<string, string> = {
   "sandpoint":                "Sandpoint",
   "boise":                    "Boise",
   "donnelly-mccall":          "Donnelly",
+  "white-mountains":           "North Conway",
+  "franconia-notch":           "Franconia",
+  "waterville-valley":         "Waterville Valley",
+  "lakes-region":              "Gilford",
 };
 
 // AU + NZ = southern hemisphere (snow Jun-Sep); JP + CA + US = northern (snow Dec-Mar).

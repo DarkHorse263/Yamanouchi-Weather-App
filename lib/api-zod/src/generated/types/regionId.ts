@@ -94,4 +94,8 @@ export const RegionId = {
   "sandpoint": "sandpoint",
   "boise": "boise",
   "donnelly-mccall": "donnelly-mccall",
+  "white-mountains": "white-mountains",
+  "franconia-notch": "franconia-notch",
+  "waterville-valley": "waterville-valley",
+  "lakes-region": "lakes-region",
 } as const;

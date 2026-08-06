@@ -204,6 +204,12 @@ const REGION_ANCHORS: Record<RegionId, {
   "sandpoint": { lat: 48.36700, lon: -116.62300, elevation: 1951, region: "OTHER", displayName: "Sandpoint" },
   "boise": { lat: 43.76468, lon: -116.10329, elevation: 2394, region: "OTHER", displayName: "Boise" },
   "donnelly-mccall": { lat: 44.671, lon: -116.123, elevation: 1490, region: "OTHER", displayName: "Donnelly / McCall" }, // anchored on Tamarack Resort's base; Brundage's summit (7,610 ft) is technically higher than Tamarack's (7,700 ft base already close) but Tamarack is used as the primary anchor for this region per its larger vertical drop
+
+  // New Hampshire anchors · all America/New_York. MWAC forecasts the nearby Presidential Range / Tuckerman backcountry, not ordinary in-bounds terrain.
+  "white-mountains": { lat: 44.2590, lon: -71.2370, elevation: 1238, region: "OTHER", displayName: "White Mountains" },
+  "franconia-notch": { lat: 44.1569, lon: -71.6980, elevation: 1244, region: "OTHER", displayName: "Franconia Notch" },
+  "waterville-valley": { lat: 43.9500, lon: -71.5140, elevation: 1170, region: "OTHER", displayName: "Waterville Valley" },
+  "lakes-region": { lat: 43.5270, lon: -71.3690, elevation: 684, region: "OTHER", displayName: "Lakes Region" },
 };
 
 interface EvaluatorReport {

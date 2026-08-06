@@ -1322,6 +1322,18 @@ export const REGIONS = [
       { id: "donnelly", name: "Donnelly", blurb: "Valley County town on ID-55, roughly midway between Tamarack Resort and Brundage Mountain near McCall" },
     ],
   },
+  {
+    slug: "white-mountains", name: "White Mountains", subtitle: "New Hampshire · USA", country: "US", hasAlerts: false, hasRoads: true,
+    mountains: [{ name: "Cranmore Mountain", blurb: "Ikon Bonus Mountain (Full Pass only) · White Mountain Superpass" }, { name: "Wildcat Mountain", blurb: "Epic Pass · Vail Resorts-owned · near MWAC's Presidential Range backcountry forecast area · ⚠️ no confirmed live official webcam" }, { name: "Attitash Mountain Resort", blurb: "Epic Pass · Vail Resorts-owned · ⚠️ no distinct first-party snow-report or live webcam URL confirmed" }],
+    towns: [{ id: "north-conway", name: "North Conway", blurb: "Mount Washington Valley base town for Cranmore, Attitash and Wildcat" }],
+  },
+  {
+    slug: "franconia-notch", name: "Franconia Notch", subtitle: "New Hampshire · USA", country: "US", hasAlerts: false, hasRoads: true,
+    mountains: [{ name: "Cannon Mountain", blurb: "Indy Pass · United States' only state-owned ski area · White Mountain Superpass" }, { name: "Bretton Woods", blurb: "independent Omni-owned resort · anchors the White Mountain Superpass" }, { name: "Loon Mountain", blurb: "Boyne Resorts-owned · Ikon Pass (7 days Full / 5 days Base, Base blackouts)" }],
+    towns: [{ id: "franconia", name: "Franconia", blurb: "Franconia Notch gateway town for Cannon Mountain" }, { id: "bretton-woods-town", name: "Bretton Woods", blurb: "on-mountain base village for Bretton Woods" }],
+  },
+  { slug: "waterville-valley", name: "Waterville Valley", subtitle: "New Hampshire · USA", country: "US", hasAlerts: false, hasRoads: true, mountains: [{ name: "Waterville Valley Resort", blurb: "Indy Pass (no blackouts on Indy Base) · White Mountain Superpass · ⚠️ 2025-26 closing date not confirmed" }], towns: [{ id: "waterville-valley-town", name: "Waterville Valley", blurb: "mountain base village reached from I-93 via NH-49" }] },
+  { slug: "lakes-region", name: "Lakes Region", subtitle: "New Hampshire · USA", country: "US", hasAlerts: false, hasRoads: true, mountains: [{ name: "Gunstock Mountain Resort", blurb: "Belknap County-owned · no major-pass affiliation · historical 2022 governance turmoil, operations have continued normally since" }], towns: [{ id: "gilford", name: "Gilford", blurb: "Lake Winnipesaukee-side base town for Gunstock" }] },
 ];
 
 /** Region sub-sections that actually render for this region (see gating notes above). */

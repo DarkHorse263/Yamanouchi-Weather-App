@@ -1747,6 +1747,10 @@ components:
         - sandpoint
         - boise
         - donnelly-mccall
+        - white-mountains
+        - franconia-notch
+        - waterville-valley
+        - lakes-region
       description: |
         Canonical region identifier used across the FeelZlike platform.
 

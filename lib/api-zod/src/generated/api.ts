@@ -246,6 +246,10 @@ export const GetPowderAlertsQueryParams = zod.object({
       "sandpoint",
       "boise",
       "donnelly-mccall",
+      "white-mountains",
+      "franconia-notch",
+      "waterville-valley",
+      "lakes-region",
     ])
     .optional()
     .describe(
@@ -1297,6 +1301,10 @@ export const GetWeatherQueryParams = zod.object({
       "sandpoint",
       "boise",
       "donnelly-mccall",
+      "white-mountains",
+      "franconia-notch",
+      "waterville-valley",
+      "lakes-region",
     ])
     .optional()
     .describe(
@@ -1771,6 +1779,10 @@ export const GetWebcamsQueryParams = zod.object({
       "sandpoint",
       "boise",
       "donnelly-mccall",
+      "white-mountains",
+      "franconia-notch",
+      "waterville-valley",
+      "lakes-region",
     ])
     .optional()
     .describe(
@@ -1947,6 +1959,10 @@ export const GetRoadConditionsQueryParams = zod.object({
       "sandpoint",
       "boise",
       "donnelly-mccall",
+      "white-mountains",
+      "franconia-notch",
+      "waterville-valley",
+      "lakes-region",
     ])
     .optional()
     .describe(
@@ -2178,6 +2194,10 @@ export const GetLiftStatusQueryParams = zod.object({
       "sandpoint",
       "boise",
       "donnelly-mccall",
+      "white-mountains",
+      "franconia-notch",
+      "waterville-valley",
+      "lakes-region",
     ])
     .optional()
     .describe(

@@ -96,6 +96,10 @@ import { SUN_VALLEY_TRANSPORT } from "./sun-valley";
 import { SANDPOINT_TRANSPORT } from "./sandpoint";
 import { BOISE_TRANSPORT } from "./boise";
 import { DONNELLY_MCCALL_TRANSPORT } from "./donnelly-mccall";
+import { WHITE_MOUNTAINS_TRANSPORT } from "./white-mountains";
+import { FRANCONIA_NOTCH_TRANSPORT } from "./franconia-notch";
+import { WATERVILLE_VALLEY_TRANSPORT } from "./waterville-valley";
+import { LAKES_REGION_TRANSPORT } from "./lakes-region";
 
 const REGISTRY: Record<RegionId, TransportProviderList> = {
   "snowy-mountains": SNOWY_MOUNTAINS_TRANSPORT,
@@ -205,6 +209,10 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   "sandpoint": SANDPOINT_TRANSPORT,
   "boise": BOISE_TRANSPORT,
   "donnelly-mccall": DONNELLY_MCCALL_TRANSPORT,
+  "white-mountains": WHITE_MOUNTAINS_TRANSPORT,
+  "franconia-notch": FRANCONIA_NOTCH_TRANSPORT,
+  "waterville-valley": WATERVILLE_VALLEY_TRANSPORT,
+  "lakes-region": LAKES_REGION_TRANSPORT,
 };
 
 // Loader-time integrity check.

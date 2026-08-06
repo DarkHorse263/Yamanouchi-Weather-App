@@ -523,7 +523,37 @@ const ID_ROADS_GENERAL: SourceGroup = {
   ],
 };
 
+
+/** New Hampshire: MWAC is a real daily Presidential Range/Tuckerman forecast
+ * authority near Wildcat/Pinkham Notch. It is relevant to backcountry travel,
+ * not ordinary in-bounds skiing at the listed resorts. */
+const NH_OFFICIAL_REFERENCES: SourceGroup = {
+  title: "Official references", titleJa: "公式参照先",
+  blurb: "Link-outs, not wired feeds · conditions shown on feelzlike come from the forecast ensemble below. Mount Washington Avalanche Center issues real daily forecasts for Tuckerman/Huntington Ravines and the Presidential Range near Wildcat/Pinkham Notch; these are backcountry forecasts, not in-bounds resort conditions.",
+  blurbJa: "リンクのみで、データ連携はしていません。マウント・ワシントン雪崩センターは近隣のバックカントリー向け日次予報を発行します。",
+  items: [{ label: "National Weather Service", detail: "US federal forecasts & warnings", url: "https://www.weather.gov/" }, { label: "Mount Washington Avalanche Center", detail: "daily Presidential Range / Tuckerman and Huntington Ravines backcountry forecast", url: "https://www.mountwashingtonavalanchecenter.org/" }],
+};
+const NH_ROADS_GENERAL: SourceGroup = {
+  title: "Roads & transport", titleJa: "道路・交通",
+  blurb: "NHDOT directs travellers to regional New England 511 rather than a standalone NH 511 site. New Hampshire has no broad passenger-vehicle chain law; Saf-C 1312.17 is a narrow Nov 15-Apr 15 snow-tire equipment/inspection provision, not a general chain-up rule.",
+  blurbJa: "ニューハンプシャー州には一般的な乗用車用チェーン規制はありません。",
+  items: [{ label: "NHDOT · New England 511", detail: "state authority and regional real-time road conditions / camera map", url: "https://newengland511.org/Home/Index" }, { label: "NHDOT real-time travel information", detail: "state travel-information hub", url: "https://www.dot.nh.gov/doing-business-nhdot/general-public/real-time-travel-info" }],
+};
+
 const REGION_SOURCES: Record<string, SourceGroup[]> = {
+
+  "white-mountains": [NH_OFFICIAL_REFERENCES, NH_ROADS_GENERAL, { title: "Resorts & lifts", titleJa: "スキー場・リフト", items: [
+    { label: "Cranmore Mountain", detail: "Ikon Bonus Mountain (Full Pass only) · White Mountain Superpass · confirmed Observatory-hosted live Meister Cam", url: "https://cranmore.com/" },
+    { label: "Wildcat Mountain", detail: "Epic Pass · Vail Resorts-owned · ⚠️ no distinct live official webcam URL confirmed", url: "https://www.skiwildcat.com/" },
+    { label: "Attitash Mountain Resort", detail: "Epic Pass · Vail Resorts-owned · ⚠️ no distinct first-party snow-report or live webcam URL confirmed", url: "https://www.attitash.com/" },
+  ] }, FORECAST_ENSEMBLE],
+  "franconia-notch": [NH_OFFICIAL_REFERENCES, NH_ROADS_GENERAL, { title: "Resorts & lifts", titleJa: "スキー場・リフト", items: [
+    { label: "Cannon Mountain", detail: "Indy Pass · United States' only state-owned ski area · White Mountain Superpass", url: "https://www.cannonmt.com/" },
+    { label: "Bretton Woods", detail: "independent Omni-owned resort · anchors the White Mountain Superpass", url: "https://www.brettonwoods.com/" },
+    { label: "Loon Mountain", detail: "Boyne Resorts-owned · Ikon Pass (7 days Full / 5 days Base, Base blackouts)", url: "https://www.loonmtn.com/" },
+  ] }, FORECAST_ENSEMBLE],
+  "waterville-valley": [NH_OFFICIAL_REFERENCES, NH_ROADS_GENERAL, { title: "Resorts & lifts", titleJa: "スキー場・リフト", items: [{ label: "Waterville Valley Resort", detail: "Indy Pass (no blackouts on Indy Base) · White Mountain Superpass · ⚠️ 2025-26 closing date / standalone snow-report URL not confirmed", url: "https://www.waterville.com/" }] }, FORECAST_ENSEMBLE],
+  "lakes-region": [NH_OFFICIAL_REFERENCES, NH_ROADS_GENERAL, { title: "Resorts & lifts", titleJa: "スキー場・リフト", items: [{ label: "Gunstock Mountain Resort", detail: "Belknap County-owned, no Epic/Ikon/Indy affiliation · historical 2022 county-governance turmoil, operations have continued normally since", url: "https://www.gunstock.com/" }] }, FORECAST_ENSEMBLE],
   "snowy-mountains": [
     {
       title: "Live observations",

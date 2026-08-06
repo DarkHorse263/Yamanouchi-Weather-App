@@ -576,6 +576,11 @@ if (process.env.NODE_ENV === "production") {
       name: "Donnelly / McCall",
       towns: { "donnelly": "Donnelly" },
     },
+
+    "white-mountains": { name: "White Mountains", towns: { "north-conway": "North Conway" } },
+    "franconia-notch": { name: "Franconia Notch", towns: { franconia: "Franconia", "bretton-woods-town": "Bretton Woods" } },
+    "waterville-valley": { name: "Waterville Valley", towns: { "waterville-valley-town": "Waterville Valley" } },
+    "lakes-region": { name: "Lakes Region", towns: { gilford: "Gilford" } },
   };
 
   // Top-level routes handled by the SPA (before the /:region catch-all).

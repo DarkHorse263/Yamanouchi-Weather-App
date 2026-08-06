@@ -89,6 +89,10 @@ export const REGION_IDS = [
   "sandpoint",
   "boise",
   "donnelly-mccall",
+  "white-mountains",
+  "franconia-notch",
+  "waterville-valley",
+  "lakes-region",
 ] as const;
 export type RegionId = (typeof REGION_IDS)[number];
 
@@ -789,6 +793,31 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "brundage-mountain": "donnelly-mccall",
   "donnelly": "donnelly-mccall",
   "donnelly-mccall-roads": "donnelly-mccall",
+
+  // New Hampshire · White Mountains / North Conway.
+  "cranmore-mountain": "white-mountains",
+  "wildcat-mountain": "white-mountains",
+  "attitash-mountain-resort": "white-mountains",
+  "north-conway": "white-mountains",
+  "white-mountains-roads": "white-mountains",
+
+  // New Hampshire · Franconia Notch.
+  "cannon-mountain": "franconia-notch",
+  "bretton-woods": "franconia-notch",
+  "loon-mountain": "franconia-notch",
+  "franconia": "franconia-notch",
+  "bretton-woods-town": "franconia-notch",
+  "franconia-notch-roads": "franconia-notch",
+
+  // New Hampshire · Waterville Valley. Town uses a suffix to avoid the region-id collision.
+  "waterville-valley-resort": "waterville-valley",
+  "waterville-valley-town": "waterville-valley",
+  "waterville-valley-roads": "waterville-valley",
+
+  // New Hampshire · Lakes Region.
+  "gunstock-mountain-resort": "lakes-region",
+  "gilford": "lakes-region",
+  "lakes-region-roads": "lakes-region",
 };
 
 export function regionForLocation(locationId: string): RegionId | undefined {

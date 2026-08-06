@@ -1569,6 +1569,21 @@ const WEBCAM_DATA: WebcamConfig[] = [
     webcamPageUrl: "https://511.idaho.gov/",
     webcams: [],
   },
+
+  // ─── Resort live-cam pages: New Hampshire ───
+  { locationId: "cranmore-mountain", locationName: "Cranmore Mountain live cams", webcamPageUrl: "https://mountwashington.org/weather-cams/cranmore-mountain-mesiter-cam/", webcams: [] }, // confirmed Observatory-hosted Meister Cam, not a Cranmore first-party page
+  { locationId: "wildcat-mountain", locationName: "Wildcat Mountain conditions", webcamPageUrl: "https://www.skiwildcat.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx", webcams: [] }, // ⚠️ no clearly live distinct official webcam URL confirmed
+  { locationId: "attitash-mountain-resort", locationName: "Attitash Mountain Resort conditions", webcamPageUrl: "https://www.attitash.com/the-mountain/about-the-mountain/mountain-info.aspx", webcams: [] }, // ⚠️ no clearly live official webcam URL confirmed
+  { locationId: "cannon-mountain", locationName: "Cannon Mountain live cams", webcamPageUrl: "https://www.cannonmt.com/webcam", webcams: [] },
+  { locationId: "bretton-woods", locationName: "Bretton Woods live cam", webcamPageUrl: "https://www.brettonwoods.com/live-cam-forecast/", webcams: [] },
+  { locationId: "loon-mountain", locationName: "Loon Mountain live cams", webcamPageUrl: "https://www.skiresort.info/ski-resort/loon-mountain/webcams/", webcams: [] },
+  { locationId: "waterville-valley-resort", locationName: "Waterville Valley live cams", webcamPageUrl: "https://www.waterville.com/cams", webcams: [] },
+  { locationId: "gunstock-mountain-resort", locationName: "Gunstock Mountain Resort live cams", webcamPageUrl: "https://www.gunstock.com/discover/webcams/", webcams: [] },
+  // ─── Roadside cams: New Hampshire · NHDOT uses regional New England 511, not a standalone NH 511 site. ───
+  { locationId: "white-mountains-roads", locationName: "Roads to North Conway · NH-16 / Route 302", webcamPageUrl: "https://newengland511.org/Home/Index", webcams: [] },
+  { locationId: "franconia-notch-roads", locationName: "Roads to Franconia Notch · I-93 / US-3", webcamPageUrl: "https://newengland511.org/Home/Index", webcams: [] },
+  { locationId: "waterville-valley-roads", locationName: "Roads to Waterville Valley · NH-49", webcamPageUrl: "https://newengland511.org/Home/Index", webcams: [] },
+  { locationId: "lakes-region-roads", locationName: "Roads to Gunstock · NH-11A / NH-11", webcamPageUrl: "https://newengland511.org/Home/Index", webcams: [] },
 ];
 
 router.get("/webcams", (req, res) => {

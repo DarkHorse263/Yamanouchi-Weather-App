@@ -1095,6 +1095,21 @@ function idChainEntry(opts: {
   };
 }
 
+
+/**
+ * New Hampshire has no broad mandatory chain law for ordinary passenger
+ * vehicles. The real Saf-C 1312.17 provision is a narrow vehicle
+ * inspection/equipment rule: multipurpose passenger vehicles need snow tires
+ * Nov 15-Apr 15 unless equipped with all-season radial tires. It is not an
+ * on-road chain-up programme and is presented that way. NHDOT directs users
+ * to regional newengland511.org rather than a standalone NH 511 site.
+ */
+const NH_SOURCE = { sourceLabel: "NHDOT · New England 511", sourceUrl: "https://newengland511.org/Home/Index" };
+function nhChainEntry(opts: { id: string; regionId: string; mountainId: string; mountainName: string; approach: string; detail: string; inSeason: boolean; issuedAt: string }): Record<string, unknown> {
+  return { id: opts.id, regionId: opts.regionId, mountainId: opts.mountainId, mountainName: opts.mountainName, approach: opts.approach, status: "open", chains2wd: "not-required" satisfies ChainReq, chainsAwd: "not-required" satisfies ChainReq,
+    note: opts.inSeason ? `New Hampshire has no broad mandatory chain law for passenger vehicles. N.H. Admin. Code § Saf-C 1312.17 is a narrow vehicle inspection/equipment provision: multipurpose passenger vehicles need snow tires Nov 15-Apr 15 unless equipped with all-season radial tires; it is not a general roadside chain-up rule. Winter/snow tyres and AWD/4WD are strongly recommended. ${opts.detail}` : "Outside the ski season · New Hampshire has no general passenger-vehicle chain-law requirement; the narrow Saf-C 1312.17 equipment provision remains distinct from an on-road chain law.", issuedAt: opts.issuedAt, ...NH_SOURCE, dataSource: "seasonal-rule" };
+}
+
 function buildChainStatuses(regionId: string | undefined): Array<Record<string, unknown>> {
   const now = new Date();
   const issuedAt = now.toISOString();
@@ -2220,6 +2235,24 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
     ];
   }
 
+
+  if (regionId === "white-mountains" || regionId === "franconia-notch" || regionId === "waterville-valley" || regionId === "lakes-region") {
+    const inSeason = isUsSnowSeason(now);
+    const nh = (id: string, mountainId: string, mountainName: string, approach: string, detail: string) => nhChainEntry({ id, regionId, mountainId, mountainName, approach, detail, inSeason, issuedAt });
+    if (regionId === "white-mountains") return [
+      nh("cranmore-nh-16", "cranmore-mountain", "Cranmore Mountain", "NH-16 / Route 302 from North Conway", "North Conway approaches are lower-elevation but can ice quickly in storms."),
+      nh("wildcat-nh-16", "wildcat-mountain", "Wildcat Mountain", "NH-16 through Pinkham Notch", "Pinkham Notch is adjacent to the MWAC forecast area; check NHDOT/New England 511 for storm closures, not an avalanche bulletin for in-bounds skiing."),
+      nh("attitash-route-302", "attitash-mountain-resort", "Attitash Mountain Resort", "Route 302 from North Conway", "Route 302 through the Mount Washington Valley is the main resort approach."),
+    ];
+    if (regionId === "franconia-notch") return [
+      nh("cannon-i93-us3", "cannon-mountain", "Cannon Mountain", "I-93 / US-3 through Franconia Notch", "Franconia Notch Parkway is the primary approach; check New England 511 before travelling."),
+      nh("bretton-woods-us302", "bretton-woods", "Bretton Woods", "US-302 from Crawford Notch / Bretton Woods", "The approach crosses exposed White Mountains terrain."),
+      nh("loon-i93-kanc", "loon-mountain", "Loon Mountain", "I-93 to Lincoln, then local Loon access roads", "I-93 is the primary corridor from the south."),
+    ];
+    if (regionId === "waterville-valley") return [nh("waterville-nh49", "waterville-valley-resort", "Waterville Valley Resort", "I-93 to NH-49", "NH-49 is the sole valley approach from I-93.")];
+    return [nh("gunstock-nh11a", "gunstock-mountain-resort", "Gunstock Mountain Resort", "NH-11A / NH-11 from Gilford", "Lake Winnipesaukee approaches are lower but can still be slick in winter storms.")];
+  }
+
   if (
     regionId === "sun-valley" ||
     regionId === "sandpoint" ||
@@ -2607,6 +2640,13 @@ router.get("/road-conditions", async (req, res) => {
       region === "boise" ||
       region === "donnelly-mccall";
 
+    // New Hampshire · no live feed wired. NHDOT directs users to the regional
+    // New England 511 site (there is no separate NH-branded 511 website).
+    // MWAC issues real daily forecasts for Tuckerman/Huntington Ravines and
+    // the Presidential Range near Wildcat/Pinkham Notch; unlike Vermont this
+    // is genuine forecast coverage, but it is backcountry-only.
+    const isUsNh = region === "white-mountains" || region === "franconia-notch" || region === "waterville-valley" || region === "lakes-region";
+
     let roads: unknown[] = [];
     let generalAdvice: string;
     let liveTrafficUrl: string;
@@ -2767,6 +2807,12 @@ router.get("/road-conditions", async (req, res) => {
       generalAdvice =
         "We do not yet pull live road data for Washington \u00b7 check WSDOT's real-time mountain pass page (wsdot.com/travel/real-time/mountainpasses) or dial 511 for closures, chain requirements and highway cameras before you drive, especially over Snoqualmie Pass (I-90) and Stevens Pass (US-2), WSDOT's two primary avalanche-control corridors. WSDOT can post an escalating traction-tire/chain requirement (RCW 47.36.250) on any state highway when conditions warrant, up to chains on ALL vehicles including 4WD/AWD in the most severe cases - this is storm-activated, not a fixed calendar rule. For backcountry conditions, read the day's forecast from the Northwest Avalanche Center at nwac.us.";
       liveTrafficUrl = "https://wsdot.com/travel/real-time/mountainpasses";
+
+    } else if (isUsNh) {
+      generalAdvice = region === "white-mountains"
+        ? "We do not yet pull live road data for New Hampshire · check NHDOT's real-time travel page or regional New England 511 (newengland511.org) for closures and cameras before you drive. New Hampshire has no broad mandatory chain law for passenger vehicles. N.H. Admin. Code § Saf-C 1312.17 is a narrow snow-tire vehicle-inspection/equipment provision (Nov 15-Apr 15 unless all-season radials), not a general roadside chain-up rule; winter tyres and AWD/4WD are strongly recommended. For Tuckerman/Huntington Ravines and Presidential Range backcountry near Wildcat/Pinkham Notch, read the real daily Mount Washington Avalanche Center forecast at mountwashingtonavalanchecenter.org; it does not describe ordinary in-bounds resort terrain."
+        : "We do not yet pull live road data for New Hampshire · check NHDOT's real-time travel page or regional New England 511 (newengland511.org) for closures and cameras before you drive. New Hampshire has no broad mandatory chain law for passenger vehicles. N.H. Admin. Code § Saf-C 1312.17 is a narrow snow-tire vehicle-inspection/equipment provision (Nov 15-Apr 15 unless all-season radials), not a general roadside chain-up rule; winter tyres and AWD/4WD are strongly recommended. Mount Washington Avalanche Center's daily forecasts cover the Presidential Range/Tuckerman backcountry near Wildcat, not the in-bounds terrain in this region."
+      liveTrafficUrl = "https://newengland511.org/Home/Index";
     } else if (isUsId) {
       // No live Idaho road feed is wired yet - say so plainly rather than
       // shipping an empty list that reads like "all clear". Idaho has a

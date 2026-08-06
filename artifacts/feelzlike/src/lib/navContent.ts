@@ -100,6 +100,10 @@ const REGIONS_WITH_ROADS_CONTENT: ReadonlySet<string> = new Set([
   "sandpoint",
   "boise",
   "donnelly-mccall",
+  "white-mountains",
+  "franconia-notch",
+  "waterville-valley",
+  "lakes-region",
 ]);
 
 /**
