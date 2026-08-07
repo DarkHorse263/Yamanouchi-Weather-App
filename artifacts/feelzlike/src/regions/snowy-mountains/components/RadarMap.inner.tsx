@@ -166,7 +166,9 @@ export type RegionKey =
   | "lake-tahoe-nevada"
   | "flagstaff"
   | "white-mountains-az"
-  | "black-hills";
+  | "black-hills"
+  | "girdwood"
+  | "juneau";
 type ViewMode = "interactive" | "windy" | "official";
 
 interface RegionConfig {
@@ -907,6 +909,8 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
   "flagstaff":{windy:{lat:35.33,lon:-111.709,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
   "white-mountains-az":{windy:{lat:33.973,lon:-109.563,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
   "black-hills":{windy:{lat:44.339,lon:-103.85,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
+  "girdwood":{windy:{lat:60.97,lon:-149.09,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
+  "juneau":{windy:{lat:58.276,lon:-134.528,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
   "mt-hood": {
     windy: { lat: 45.32, lon: -121.72, zoom: 10 },
     official: {
@@ -1701,6 +1705,8 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
   "flagstaff":{center:{lat:35.33,lng:-111.709},pins:[{id:"arizona-snowbowl",name:"Arizona Snowbowl",lat:35.33,lng:-111.709,accent:"#f97316"},{id:"flagstaff-town",name:"Flagstaff",lat:35.198,lng:-111.651,accent:"#0ea5e9"}]},
   "white-mountains-az":{center:{lat:33.973,lng:-109.563},pins:[{id:"sunrise-park-resort",name:"Sunrise Park Resort",lat:33.973,lng:-109.563,accent:"#f97316"},{id:"greer-az",name:"Greer",lat:34.01,lng:-109.458,accent:"#0ea5e9"}]},
   "black-hills":{center:{lat:44.339,lng:-103.85},pins:[{id:"terry-peak",name:"Terry Peak",lat:44.339,lng:-103.85,accent:"#f97316"},{id:"lead-deadwood",name:"Lead / Deadwood",lat:44.352,lng:-103.765,accent:"#0ea5e9"}]},
+  "girdwood":{center:{lat:60.97,lng:-149.09},pins:[{id:"alyeska-resort",name:"Alyeska Resort",lat:60.97,lng:-149.09,accent:"#f97316"},{id:"girdwood-town",name:"Girdwood",lat:60.942,lng:-149.166,accent:"#0ea5e9"}]},
+  "juneau":{center:{lat:58.276,lng:-134.528},pins:[{id:"eaglecrest-ski-area",name:"Eaglecrest Ski Area",lat:58.276,lng:-134.528,accent:"#f97316"},{id:"juneau-town",name:"Juneau",lat:58.302,lng:-134.42,accent:"#0ea5e9"}]},
   "mt-hood": {
     center: { lat: 45.320, lng: -121.720 },
     pins: [
@@ -1886,6 +1892,8 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "flagstaff": "US",
   "white-mountains-az": "US",
   "black-hills": "US",
+  "girdwood": "US",
+  "juneau": "US",
   "mt-hood": "US",
   "bend": "US",
   "crystal-mountain": "US",
@@ -2001,6 +2009,8 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "flagstaff": "flagstaff",
   "white-mountains-az": "white mountains",
   "black-hills": "black hills",
+  "girdwood": "girdwood",
+  "juneau": "juneau",
   "mt-hood": "mt. hood",
   "bend": "bend",
   "crystal-mountain": "crystal mountain",

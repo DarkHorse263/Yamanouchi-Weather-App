@@ -925,6 +925,9 @@ function mnChainEntry(opts:{id:string;regionId:string;mountainId:string;mountain
 /** Wisconsin has no passenger chain/winter-tire mandate; studs are restricted for ordinary passenger vehicles. */
 function wiChainEntry(opts:{id:string;regionId:string;mountainId:string;mountainName:string;approach:string;detail:string;inSeason:boolean;issuedAt:string}){return{id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"No passenger chain mandate":"Outside ski season",detail:`Wisconsin has no passenger chain or winter-tire mandate. Chains are permitted when needed; studded tires are restricted for most passenger vehicles. ${opts.detail}`,issuedAt:opts.issuedAt};}
 
+/** Alaska winter-access rule. */
+function akChainEntry(opts:{id:string;regionId:string;mountainId:string;mountainName:string;approach:string;detail:string;inSeason:boolean;issuedAt:string}){return{id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"Check storm restrictions":"Outside ski season",detail:`Alaska has no blanket passenger chain mandate; DOT&PF can post chain requirements during severe conditions. ${opts.detail}`,issuedAt:opts.issuedAt};}
+
 /** South Dakota winter-access rule. */
 function sdChainEntry(opts:{id:string;regionId:string;mountainId:string;mountainName:string;approach:string;detail:string;inSeason:boolean;issuedAt:string}){return{id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"Check storm restrictions":"Outside ski season",detail:`South Dakota can activate traction restrictions on signed state highways during inclement weather; check SD511 before travel. ${opts.detail}`,issuedAt:opts.issuedAt};}
 
@@ -2184,6 +2187,8 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
 
   if(regionId==="black-hills"){const inSeason=isUsSnowSeason(now);const entry=(id:string,mountainId:string,mountainName:string,approach:string,detail:string)=>sdChainEntry({id,regionId,mountainId,mountainName,approach,detail,inSeason,issuedAt});return regionId==="black-hills"?[entry("terry-peak-access","terry-peak","Terry Peak","Black Hills routes to Lead","⚠️ Black Hills are Mountain Time; check SD511 before winter travel.")]:[];}
 
+  if(regionId==="girdwood"||regionId==="juneau"){const inSeason=isUsSnowSeason(now);const entry=(id:string,mountainId:string,mountainName:string,approach:string,detail:string)=>akChainEntry({id,regionId,mountainId,mountainName,approach,detail,inSeason,issuedAt});return regionId==="girdwood"?[entry("alyeska-resort-access","alyeska-resort","Alyeska Resort","Local access after arrival in Alaska","⚠️ Alyeska users should check Seward Highway avalanche closures; Eaglecrest/Juneau has no contiguous-highway access.")]:regionId==="juneau"?[entry("eaglecrest-ski-area-access","eaglecrest-ski-area","Eaglecrest Ski Area","Local access after arrival in Alaska","⚠️ Alyeska users should check Seward Highway avalanche closures; Eaglecrest/Juneau has no contiguous-highway access.")]:[];}
+
   if (
     regionId === "taos" ||
     regionId === "angel-fire" ||
@@ -2700,6 +2705,7 @@ router.get("/road-conditions", async (req, res) => {
     const isUsMa = region === "berkshires" || region === "central-massachusetts";
     const isUsMn = region === "lutsen-north-shore";
     const isUsWi = region === "wausau" || region === "wisconsin-dells";
+    const isUsAk = region === "girdwood" || region === "juneau";
     const isUsSd = region === "black-hills";
     const isUsAz = region === "flagstaff" || region === "white-mountains-az";
     const isUsNv = region === "lake-tahoe-nevada";
@@ -2913,6 +2919,9 @@ router.get("/road-conditions", async (req, res) => {
     } else if (isUsSd) {
       generalAdvice = "We do not yet pull live road data for South Dakota · check SDDOT's SD511 (sd511.org; it supersedes SafeTravelUSA) for closures and winter restrictions. South Dakota can activate traction restrictions on signed highways in storms, especially in the Black Hills. No avalanche authority is needed here: Black Hills ski terrain has no meaningful avalanche hazard.";
       liveTrafficUrl = "https://sd511.org/";
+    } else if (isUsAk) {
+      generalAdvice = "We do not yet pull live road data for Alaska · check Alaska DOT&PF's Alaska 511 (511.alaska.gov) for closures and winter conditions. The Seward Highway has a documented avalanche-closure history and is Alyeska’s key Anchorage access route; consult CNFAIC for Turnagain Pass/Girdwood avalanche forecasts. Eaglecrest/Juneau has no road connection to the contiguous highway system, so ferry or air access is required rather than a driving route.";
+      liveTrafficUrl = "https://511.alaska.gov/";
     } else if (isUsNm) {
       // No live New Mexico road feed is wired yet - say so plainly rather
       // than shipping an empty list that reads like "all clear". New

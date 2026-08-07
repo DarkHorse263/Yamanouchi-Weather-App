@@ -1432,6 +1432,11 @@ const WEBCAM_DATA: WebcamConfig[] = [
   // South Dakota · page-only official links; no unverified live-feed URLs are asserted.
   {locationId:"terry-peak",locationName:"Terry Peak cams / conditions",webcamPageUrl:"https://terrypeak.com/the-mountain/",webcams:[]},
   {locationId:"black-hills-roads",locationName:"Black Hills roads · SDDOT · SD511",webcamPageUrl:"https://sd511.org/",webcams:[]},
+  // Alaska · page-only official links; no unverified live-feed URLs are asserted.
+  {locationId:"alyeska-resort",locationName:"Alyeska Resort cams / conditions",webcamPageUrl:"https://www.alyeskaresort.com/",webcams:[]},
+  {locationId:"girdwood-roads",locationName:"Girdwood roads · Alaska DOT&PF · Alaska 511",webcamPageUrl:"https://511.alaska.gov/",webcams:[]},
+  {locationId:"eaglecrest-ski-area",locationName:"Eaglecrest Ski Area cams / conditions",webcamPageUrl:"https://skieaglecrest.com/conditions/",webcams:[]},
+  {locationId:"juneau-roads",locationName:"Juneau roads · Alaska DOT&PF · Alaska 511",webcamPageUrl:"https://511.alaska.gov/",webcams:[]},
   // ─── Resort live-cam pages: Oregon (Mt. Hood) ──────
   {
     locationId: "mt-hood-meadows",

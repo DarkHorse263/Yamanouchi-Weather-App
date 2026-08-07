@@ -170,6 +170,8 @@ export const RegionId = {
   "flagstaff": "flagstaff",
   "white-mountains-az": "white-mountains-az",
   "black-hills": "black-hills",
+  "girdwood": "girdwood",
+  "juneau": "juneau",
   "mt-hood": "mt-hood",
   "bend": "bend",
   "crystal-mountain": "crystal-mountain",

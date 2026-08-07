@@ -89,6 +89,8 @@ import { lakeTahoeNevadaRegion } from "./lake-tahoe-nevada";
 import { flagstaffRegion } from "./flagstaff";
 import { whiteMountainsAzRegion } from "./white-mountains-az";
 import { blackHillsRegion } from "./black-hills";
+import { girdwoodRegion } from "./girdwood";
+import { juneauRegion } from "./juneau";
 import { mtHoodRegion } from "./mt-hood";
 import { bendRegion } from "./bend";
 import { crystalMountainRegion } from "./crystal-mountain";
@@ -241,6 +243,8 @@ export const REGIONS: RegionConfig[] = [
   flagstaffRegion,
   whiteMountainsAzRegion,
   blackHillsRegion,
+  girdwoodRegion,
+  juneauRegion,
   mtHoodRegion,
   bendRegion,
   crystalMountainRegion,
@@ -369,6 +373,8 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "flagstaff": "US",
   "white-mountains-az": "US",
   "black-hills": "US",
+  "girdwood": "US",
+  "juneau": "US",
   "mt-hood": "US",
   "bend": "US",
   "crystal-mountain": "US",

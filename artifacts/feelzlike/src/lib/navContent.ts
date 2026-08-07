@@ -109,6 +109,8 @@ const REGIONS_WITH_ROADS_CONTENT: ReadonlySet<string> = new Set([
   "flagstaff",
   "white-mountains-az",
   "black-hills",
+  "girdwood",
+  "juneau",
   "mt-hood",
   "bend",
   "crystal-mountain",
