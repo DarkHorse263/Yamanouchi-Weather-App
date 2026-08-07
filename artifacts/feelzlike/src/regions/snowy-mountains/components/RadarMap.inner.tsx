@@ -163,7 +163,9 @@ export type RegionKey =
   | "maggie-valley"
   | "blue-ridge"
   | "shenandoah-valley"
-  | "lake-tahoe-nevada";
+  | "lake-tahoe-nevada"
+  | "flagstaff"
+  | "white-mountains-az";
 type ViewMode = "interactive" | "windy" | "official";
 
 interface RegionConfig {
@@ -901,6 +903,8 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
   "blue-ridge":{windy:{lat:37.913,lon:-78.945,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
   "shenandoah-valley":{windy:{lat:38.407,lon:-78.738,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
   "lake-tahoe-nevada":{windy:{lat:39.315,lon:-119.886,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
+  "flagstaff":{windy:{lat:35.33,lon:-111.709,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
+  "white-mountains-az":{windy:{lat:33.973,lon:-109.563,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
   "mt-hood": {
     windy: { lat: 45.32, lon: -121.72, zoom: 10 },
     official: {
@@ -1692,6 +1696,8 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
   "blue-ridge":{center:{lat:37.913,lng:-78.945},pins:[{id:"wintergreen-resort",name:"Wintergreen Resort",lat:37.913,lng:-78.945,accent:"#f97316"},{id:"wintergreen-town",name:"Wintergreen",lat:37.913,lng:-78.945,accent:"#0ea5e9"}]},
   "shenandoah-valley":{center:{lat:38.407,lng:-78.738},pins:[{id:"massanutten-resort",name:"Massanutten Resort",lat:38.407,lng:-78.738,accent:"#f97316"},{id:"mcgaheysville",name:"McGaheysville",lat:38.372,lng:-78.73,accent:"#0ea5e9"}]},
   "lake-tahoe-nevada":{center:{lat:39.254,lng:-119.93},pins:[{id:"mt-rose-ski-tahoe",name:"Mt. Rose Ski Tahoe",lat:39.315,lng:-119.886,accent:"#f97316"},{id:"diamond-peak",name:"Diamond Peak",lat:39.254,lng:-119.93,accent:"#f97316"},{id:"incline-village",name:"Incline Village",lat:39.251,lng:-119.952,accent:"#0ea5e9"}]},
+  "flagstaff":{center:{lat:35.33,lng:-111.709},pins:[{id:"arizona-snowbowl",name:"Arizona Snowbowl",lat:35.33,lng:-111.709,accent:"#f97316"},{id:"flagstaff-town",name:"Flagstaff",lat:35.198,lng:-111.651,accent:"#0ea5e9"}]},
+  "white-mountains-az":{center:{lat:33.973,lng:-109.563},pins:[{id:"sunrise-park-resort",name:"Sunrise Park Resort",lat:33.973,lng:-109.563,accent:"#f97316"},{id:"greer-az",name:"Greer",lat:34.01,lng:-109.458,accent:"#0ea5e9"}]},
   "mt-hood": {
     center: { lat: 45.320, lng: -121.720 },
     pins: [
@@ -1874,6 +1880,8 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "blue-ridge": "US",
   "shenandoah-valley": "US",
   "lake-tahoe-nevada": "US",
+  "flagstaff": "US",
+  "white-mountains-az": "US",
   "mt-hood": "US",
   "bend": "US",
   "crystal-mountain": "US",
@@ -1986,6 +1994,8 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "blue-ridge": "blue ridge",
   "shenandoah-valley": "shenandoah valley",
   "lake-tahoe-nevada": "lake tahoe nevada",
+  "flagstaff": "flagstaff",
+  "white-mountains-az": "white mountains",
   "mt-hood": "mt. hood",
   "bend": "bend",
   "crystal-mountain": "crystal mountain",

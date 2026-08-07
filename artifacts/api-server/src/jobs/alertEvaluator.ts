@@ -195,6 +195,8 @@ const REGION_ANCHORS: Record<RegionId, {
   "lutsen-north-shore": { lat:47.663, lon:-90.714, elevation:514, region:"OTHER", displayName:"Lutsen / North Shore" },
   "wausau": { lat:44.931, lon:-89.688, elevation:594, region:"OTHER", displayName:"Wausau" },
   "wisconsin-dells": { lat:43.531, lon:-89.395, elevation:378, region:"OTHER", displayName:"Wisconsin Dells" },
+  "white-mountains-az": { lat:33.973, lon:-109.563, elevation:3330, region:"OTHER", displayName:"White Mountains" },
+  "flagstaff": { lat:35.33, lon:-111.709, elevation:3511, region:"OTHER", displayName:"Flagstaff" },
   "lake-tahoe-nevada": { lat:39.315, lon:-119.886, elevation:2956, region:"OTHER", displayName:"Lake Tahoe Nevada" },
   "shenandoah-valley": { lat:38.407, lon:-78.738, elevation:870, region:"OTHER", displayName:"Shenandoah Valley" },
   "blue-ridge": { lat:37.913, lon:-78.945, elevation:1071, region:"OTHER", displayName:"Blue Ridge" },

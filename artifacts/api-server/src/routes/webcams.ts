@@ -1424,6 +1424,11 @@ const WEBCAM_DATA: WebcamConfig[] = [
   {locationId:"mt-rose-ski-tahoe",locationName:"Mt. Rose Ski Tahoe cams / conditions",webcamPageUrl:"https://skirose.com/snow-report/",webcams:[]},
   {locationId:"diamond-peak",locationName:"Diamond Peak cams / conditions",webcamPageUrl:"https://www.diamondpeak.com/the-mountain/mountain-report/",webcams:[]},
   {locationId:"lake-tahoe-nevada-roads",locationName:"Lake Tahoe Nevada roads · NDOT · Nevada 511",webcamPageUrl:"https://www.nvroads.com/roadconditions",webcams:[]},
+  // Arizona · page-only official links; no unverified live-feed URLs are asserted.
+  {locationId:"arizona-snowbowl",locationName:"Arizona Snowbowl cams / conditions",webcamPageUrl:"https://www.snowbowl.ski/the-mountain/weather-conditions-webcams/",webcams:[]},
+  {locationId:"flagstaff-roads",locationName:"Flagstaff roads · ADOT · AZ511",webcamPageUrl:"https://az511.gov/",webcams:[]},
+  {locationId:"sunrise-park-resort",locationName:"Sunrise Park Resort cams / conditions",webcamPageUrl:"https://www.sunrise.ski/winter/snow-report/",webcams:[]},
+  {locationId:"white-mountains-az-roads",locationName:"White Mountains roads · ADOT · AZ511",webcamPageUrl:"https://az511.gov/",webcams:[]},
   // ─── Resort live-cam pages: Oregon (Mt. Hood) ──────
   {
     locationId: "mt-hood-meadows",

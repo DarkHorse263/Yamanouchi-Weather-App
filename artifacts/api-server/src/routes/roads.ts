@@ -925,6 +925,9 @@ function mnChainEntry(opts:{id:string;regionId:string;mountainId:string;mountain
 /** Wisconsin has no passenger chain/winter-tire mandate; studs are restricted for ordinary passenger vehicles. */
 function wiChainEntry(opts:{id:string;regionId:string;mountainId:string;mountainName:string;approach:string;detail:string;inSeason:boolean;issuedAt:string}){return{id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"No passenger chain mandate":"Outside ski season",detail:`Wisconsin has no passenger chain or winter-tire mandate. Chains are permitted when needed; studded tires are restricted for most passenger vehicles. ${opts.detail}`,issuedAt:opts.issuedAt};}
 
+/** Arizona winter-access rule. */
+function azChainEntry(opts:{id:string;regionId:string;mountainId:string;mountainName:string;approach:string;detail:string;inSeason:boolean;issuedAt:string}){return{id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"Check storm restrictions":"Outside ski season",detail:`Arizona has no fixed chain season; ADOT can post Chains or 4WD Required restrictions during storms. ${opts.detail}`,issuedAt:opts.issuedAt};}
+
 /** Nevada winter-access rule. */
 function nvChainEntry(opts:{id:string;regionId:string;mountainId:string;mountainName:string;approach:string;detail:string;inSeason:boolean;issuedAt:string}){return{id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"Check storm restrictions":"Outside ski season",detail:`Nevada has no fixed chain season; NDOT can require traction devices on signed highways during Sierra storms. ${opts.detail}`,issuedAt:opts.issuedAt};}
 
@@ -2174,6 +2177,8 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
 
   if(regionId==="lake-tahoe-nevada"){const inSeason=isUsSnowSeason(now);const entry=(id:string,mountainId:string,mountainName:string,approach:string,detail:string)=>nvChainEntry({id,regionId,mountainId,mountainName,approach,detail,inSeason,issuedAt});return regionId==="lake-tahoe-nevada"?[entry("mt-rose-ski-tahoe-access","mt-rose-ski-tahoe","Mt. Rose Ski Tahoe","Sierra approaches / local Tahoe roads","⚠️ Check posted Sierra-pass traction controls and Sierra Avalanche Center before travel."),entry("diamond-peak-access","diamond-peak","Diamond Peak","Sierra approaches / local Tahoe roads","⚠️ Check posted Sierra-pass traction controls and Sierra Avalanche Center before travel.")]:[];}
 
+  if(regionId==="flagstaff"||regionId==="white-mountains-az"){const inSeason=isUsSnowSeason(now);const entry=(id:string,mountainId:string,mountainName:string,approach:string,detail:string)=>azChainEntry({id,regionId,mountainId,mountainName,approach,detail,inSeason,issuedAt});return regionId==="flagstaff"?[entry("arizona-snowbowl-access","arizona-snowbowl","Arizona Snowbowl","High-country state routes","⚠️ Follow ADOT storm restrictions; Snowbowl Upper Bowl risk has no formal daily state forecast.")]:regionId==="white-mountains-az"?[entry("sunrise-park-resort-access","sunrise-park-resort","Sunrise Park Resort","High-country state routes","⚠️ Follow ADOT storm restrictions; Snowbowl Upper Bowl risk has no formal daily state forecast.")]:[];}
+
   if (
     regionId === "taos" ||
     regionId === "angel-fire" ||
@@ -2690,6 +2695,7 @@ router.get("/road-conditions", async (req, res) => {
     const isUsMa = region === "berkshires" || region === "central-massachusetts";
     const isUsMn = region === "lutsen-north-shore";
     const isUsWi = region === "wausau" || region === "wisconsin-dells";
+    const isUsAz = region === "flagstaff" || region === "white-mountains-az";
     const isUsNv = region === "lake-tahoe-nevada";
     const isUsVa = region === "blue-ridge" || region === "shenandoah-valley";
     const isUsNc = region === "high-country" || region === "maggie-valley";
@@ -2895,6 +2901,9 @@ router.get("/road-conditions", async (req, res) => {
     } else if (isUsNv) {
       generalAdvice = "We do not yet pull live road data for Nevada · check NDOT's Nevada 511 (nvroads.com) for closures, cameras and Sierra-pass chain controls. There is no fixed chain season, but NDOT can require traction devices on signed highways during storms. Sierra Avalanche Center covers the Nevada side of Tahoe, including Diamond Peak; consult its forecast for avalanche terrain.";
       liveTrafficUrl = "https://www.nvroads.com/roadconditions";
+    } else if (isUsAz) {
+      generalAdvice = "We do not yet pull live road data for Arizona · check ADOT's AZ511 (az511.gov) for closures and storm-triggered Chains or 4WD Required restrictions. Arizona has no formal avalanche center, but Snowbowl’s Upper Bowl has real informal avalanche-terrain risk; follow local patrol and closure guidance.";
+      liveTrafficUrl = "https://az511.gov/";
     } else if (isUsNm) {
       // No live New Mexico road feed is wired yet - say so plainly rather
       // than shipping an empty list that reads like "all clear". New

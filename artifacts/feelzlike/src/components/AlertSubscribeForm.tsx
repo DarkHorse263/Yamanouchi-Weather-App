@@ -114,6 +114,8 @@ export const ALERT_REGIONS: Array<{ id: string; nameEn: string; nameJa: string; 
   {id:"blue-ridge",nameEn:"Blue Ridge",nameJa:"ブルーリッジ",country:"US · Virginia"},
   {id:"shenandoah-valley",nameEn:"Shenandoah Valley",nameJa:"シェナンドー・バレー",country:"US · Virginia"},
   {id:"lake-tahoe-nevada",nameEn:"Lake Tahoe Nevada",nameJa:"レイク・タホ（ネバダ）",country:"US · Nevada"},
+  {id:"flagstaff",nameEn:"Flagstaff",nameJa:"フラッグスタッフ",country:"US · Arizona"},
+  {id:"white-mountains-az",nameEn:"White Mountains",nameJa:"ホワイトマウンテンズ",country:"US · Arizona"},
   { id: "mt-hood", nameEn: "Mt. Hood", nameJa: "マウントフッド", country: "US · Oregon" },
   { id: "bend", nameEn: "Bend", nameJa: "ベンド", country: "US · Oregon" },
   { id: "crystal-mountain", nameEn: "Crystal Mountain", nameJa: "クリスタルマウンテン", country: "US · Washington" },
