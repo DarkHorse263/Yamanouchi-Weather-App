@@ -333,7 +333,7 @@ export default function ResortDetail() {
         {/* Anonymous units toggle · reaches direct-landing SEO visitors who
             never see the home footer. Hidden for signed-in members. */}
         <div className="flex justify-end -mb-2">
-          <UnitsToggle />
+          <UnitsToggle tone="onBlue" />
         </div>
         {/* Operating hours strip · matches AU resort hero. Sits above
             Conditions Right Now so visitors see first / last lifts before

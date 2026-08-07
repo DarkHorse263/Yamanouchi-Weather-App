@@ -461,7 +461,7 @@ export function MountainDetail() {
           {/* Anonymous units toggle · reaches direct-landing SEO visitors who
               never see the home footer. Hidden for signed-in members. */}
           <div className="mt-4 flex">
-            <UnitsToggle />
+            <UnitsToggle tone="onBlue" />
           </div>
 
           {/* Headline + temperature */}

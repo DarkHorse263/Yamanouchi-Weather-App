@@ -15,11 +15,19 @@ import { useLanguage } from "@workspace/feelzlike-shell";
  * - Metric stays canonical app-wide (see feelzlike-units-preference.md); this
  *   only switches the display-edge preference, never the underlying data.
  *
- * Palette (bluebird bold): this sits on the LIGHT canvas / white cards, so it
- * uses ink/slate + a sky-blue active state - never white-on-blue, which is
- * reserved for confirmed blue structural surfaces.
+ * Palette (bluebird bold): the default tone sits on the LIGHT canvas / white
+ * cards, so it uses ink/slate + a sky-blue active state. Pages that render
+ * the toggle DIRECTLY on the blue hero surface (mountain/resort detail) must
+ * pass tone="onBlue" - grey slate text on #0055FF is illegible (see
+ * feelzlike-text-contrast.md).
  */
-export function UnitsToggle({ className = "" }: { className?: string }) {
+export function UnitsToggle({
+  className = "",
+  tone = "light",
+}: {
+  className?: string;
+  tone?: "light" | "onBlue";
+}) {
   const { units, fromAccount, setLocalUnits } = useUnitsControl();
   const { t } = useLanguage();
 
@@ -27,13 +35,15 @@ export function UnitsToggle({ className = "" }: { className?: string }) {
   // toggle so it can never disagree with their saved choice.
   if (fromAccount) return null;
 
+  const onBlue = tone === "onBlue";
+
   return (
     <div className={`inline-flex items-center gap-1 text-[11.5px] ${className}`}>
-      <span className="text-slate-400 mr-1">{t("units", "単位")}</span>
+      <span className={`${onBlue ? "text-white/80" : "text-slate-400"} mr-1`}>{t("units", "単位")}</span>
       <div
         role="group"
         aria-label={t("units", "単位")}
-        className="inline-flex overflow-hidden rounded-full border border-slate-200"
+        className={`inline-flex overflow-hidden rounded-full border ${onBlue ? "border-white/30" : "border-slate-200"}`}
       >
         {(["metric", "imperial"] as const).map((u) => (
           <button
@@ -43,8 +53,12 @@ export function UnitsToggle({ className = "" }: { className?: string }) {
             onClick={() => setLocalUnits(u)}
             className={`px-2.5 py-1 transition-colors ${
               units === u
-                ? "bg-sky-600 text-white"
-                : "bg-white text-slate-600 hover:text-sky-700"
+                ? onBlue
+                  ? "bg-white text-sky-700 font-semibold"
+                  : "bg-sky-600 text-white"
+                : onBlue
+                  ? "bg-white/10 text-white/90 hover:bg-white/20"
+                  : "bg-white text-slate-600 hover:text-sky-700"
             }`}
           >
             {u === "metric" ? "°c · km/h" : "°f · mph"}

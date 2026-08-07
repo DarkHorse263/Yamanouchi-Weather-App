@@ -425,7 +425,7 @@ export default function LocationDetail() {
               never see the home footer. Hidden for signed-in members (their
               account preference wins). */}
           <div className="mt-4 flex">
-            <UnitsToggle />
+            <UnitsToggle tone="onBlue" />
           </div>
 
           {/* Headline + temperature */}
