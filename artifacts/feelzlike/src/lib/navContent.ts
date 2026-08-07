@@ -103,6 +103,8 @@ const REGIONS_WITH_ROADS_CONTENT: ReadonlySet<string> = new Set([
   "canaan-valley",
   "high-country",
   "maggie-valley",
+  "blue-ridge",
+  "shenandoah-valley",
   "mt-hood",
   "bend",
   "crystal-mountain",

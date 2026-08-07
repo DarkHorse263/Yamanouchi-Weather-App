@@ -1415,6 +1415,11 @@ const WEBCAM_DATA: WebcamConfig[] = [
   {locationId:"high-country-roads",locationName:"High Country roads · NCDOT · DriveNC",webcamPageUrl:"https://www.drivenc.gov/",webcams:[]},
   {locationId:"cataloochee-ski-area",locationName:"Cataloochee Ski Area cams / conditions",webcamPageUrl:"https://cataloochee.com/the-mountain/cataloochee-ski-area-statistics-and-facts/",webcams:[]},
   {locationId:"maggie-valley-roads",locationName:"Maggie Valley roads · NCDOT · DriveNC",webcamPageUrl:"https://www.drivenc.gov/",webcams:[]},
+  // Virginia · page-only official links; no unverified live-feed URLs are asserted.
+  {locationId:"wintergreen-resort",locationName:"Wintergreen Resort cams / conditions",webcamPageUrl:"https://www.wintergreenresort.com/mountain-report-cams/",webcams:[]},
+  {locationId:"blue-ridge-roads",locationName:"Blue Ridge roads · VDOT · 511 Virginia",webcamPageUrl:"https://511.vdot.virginia.gov/",webcams:[]},
+  {locationId:"massanutten-resort",locationName:"Massanutten Resort cams / conditions",webcamPageUrl:"https://www.massresort.com/play/snow-sports/snow-conditions/",webcams:[]},
+  {locationId:"shenandoah-valley-roads",locationName:"Shenandoah Valley roads · VDOT · 511 Virginia",webcamPageUrl:"https://511.vdot.virginia.gov/",webcams:[]},
   // ─── Resort live-cam pages: Oregon (Mt. Hood) ──────
   {
     locationId: "mt-hood-meadows",

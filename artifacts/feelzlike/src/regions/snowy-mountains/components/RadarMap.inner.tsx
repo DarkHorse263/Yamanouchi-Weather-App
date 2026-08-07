@@ -160,7 +160,9 @@ export type RegionKey =
   | "snowshoe"
   | "canaan-valley"
   | "high-country"
-  | "maggie-valley";
+  | "maggie-valley"
+  | "blue-ridge"
+  | "shenandoah-valley";
 type ViewMode = "interactive" | "windy" | "official";
 
 interface RegionConfig {
@@ -895,6 +897,8 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
   "canaan-valley":{windy:{lat:39.045,lon:-79.46,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
   "high-country":{windy:{lat:36.13,lon:-81.871,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
   "maggie-valley":{windy:{lat:35.562,lon:-83.094,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
+  "blue-ridge":{windy:{lat:37.913,lon:-78.945,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
+  "shenandoah-valley":{windy:{lat:38.407,lon:-78.738,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
   "mt-hood": {
     windy: { lat: 45.32, lon: -121.72, zoom: 10 },
     official: {
@@ -1683,6 +1687,8 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
   "canaan-valley":{center:{lat:39.041,lng:-79.438},pins:[{id:"canaan-valley-resort",name:"Canaan Valley Resort",lat:39.045,lng:-79.46,accent:"#f97316"},{id:"timberline-mountain",name:"Timberline Mountain",lat:39.041,lng:-79.438,accent:"#f97316"},{id:"canaan-valley-town",name:"Davis / Canaan Valley",lat:39.105,lng:-79.468,accent:"#0ea5e9"}]},
   "high-country":{center:{lat:36.183,lng:-81.874},pins:[{id:"sugar-mountain",name:"Sugar Mountain",lat:36.13,lng:-81.871,accent:"#f97316"},{id:"beech-mountain",name:"Beech Mountain Resort",lat:36.183,lng:-81.874,accent:"#f97316"},{id:"banner-elk-beech-mountain",name:"Banner Elk / Beech Mountain",lat:36.166,lng:-81.872,accent:"#0ea5e9"}]},
   "maggie-valley":{center:{lat:35.562,lng:-83.094},pins:[{id:"cataloochee-ski-area",name:"Cataloochee Ski Area",lat:35.562,lng:-83.094,accent:"#f97316"},{id:"maggie-valley-town",name:"Maggie Valley",lat:35.519,lng:-83.084,accent:"#0ea5e9"}]},
+  "blue-ridge":{center:{lat:37.913,lng:-78.945},pins:[{id:"wintergreen-resort",name:"Wintergreen Resort",lat:37.913,lng:-78.945,accent:"#f97316"},{id:"wintergreen-town",name:"Wintergreen",lat:37.913,lng:-78.945,accent:"#0ea5e9"}]},
+  "shenandoah-valley":{center:{lat:38.407,lng:-78.738},pins:[{id:"massanutten-resort",name:"Massanutten Resort",lat:38.407,lng:-78.738,accent:"#f97316"},{id:"mcgaheysville",name:"McGaheysville",lat:38.372,lng:-78.73,accent:"#0ea5e9"}]},
   "mt-hood": {
     center: { lat: 45.320, lng: -121.720 },
     pins: [
@@ -1862,6 +1868,8 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "canaan-valley": "US",
   "high-country": "US",
   "maggie-valley": "US",
+  "blue-ridge": "US",
+  "shenandoah-valley": "US",
   "mt-hood": "US",
   "bend": "US",
   "crystal-mountain": "US",
@@ -1971,6 +1979,8 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "canaan-valley": "canaan valley",
   "high-country": "high country",
   "maggie-valley": "maggie valley",
+  "blue-ridge": "blue ridge",
+  "shenandoah-valley": "shenandoah valley",
   "mt-hood": "mt. hood",
   "bend": "bend",
   "crystal-mountain": "crystal mountain",

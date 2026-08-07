@@ -164,6 +164,8 @@ export const RegionId = {
   "canaan-valley": "canaan-valley",
   "high-country": "high-country",
   "maggie-valley": "maggie-valley",
+  "blue-ridge": "blue-ridge",
+  "shenandoah-valley": "shenandoah-valley",
   "mt-hood": "mt-hood",
   "bend": "bend",
   "crystal-mountain": "crystal-mountain",

@@ -545,6 +545,8 @@ if (process.env.NODE_ENV === "production") {
     "lutsen-north-shore": { name:"Lutsen / North Shore", towns:{lutsen:"Lutsen"} },
     "wausau": { name:"Wausau", towns:{"wausau-town":"Wausau"} },
     "wisconsin-dells": { name:"Wisconsin Dells", towns:{portage:"Portage"} },
+    "shenandoah-valley": { name:"Shenandoah Valley", towns:{"mcgaheysville":"McGaheysville"} },
+    "blue-ridge": { name:"Blue Ridge", towns:{"wintergreen-town":"Wintergreen"} },
     "maggie-valley": { name:"Maggie Valley", towns:{"maggie-valley-town":"Maggie Valley"} },
     "high-country": { name:"High Country", towns:{"banner-elk-beech-mountain":"Banner Elk / Beech Mountain"} },
     "canaan-valley": { name:"Canaan Valley", towns:{"canaan-valley-town":"Davis / Canaan Valley"} },
