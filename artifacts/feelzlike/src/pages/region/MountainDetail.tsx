@@ -52,7 +52,6 @@ import { isLiftSeasonOpen } from "@/lib/skiSeason";
 import { REGION_COUNTRY } from "@/regions";
 import { MountainWebcams } from "@/components/MountainWebcams";
 import { ForecastChart } from "@/components/weather/ForecastChart";
-import { EnsembleForecast } from "@/components/weather/EnsembleForecast";
 import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
 import { midMountainElevation } from "@/lib/elevation";
 import { getLiftsForMountain } from "@/data/lifts";
@@ -1051,23 +1050,6 @@ export function MountainDetail() {
             </motion.div>
           </PremiumGate>
         )}
-
-        {/* PREMIUM · Ensemble forecast · multi-model consensus.
-            Self-hides when /api/forecast/{id} returns no data. */}
-        <PremiumGate
-          title="Ensemble forecast"
-          titleJa="アンサンブル予報"
-          blurb="Multi-model consensus · agreement across BOM, ECMWF and other models for the next 7 days."
-          blurbJa="BOM・ECMWFなど複数モデルの合意度を可視化（今後7日間）。"
-        >
-          {/* Ensemble runs at the SAME elevation the headline snow actually
-              resolved to (mid-mountain on success, village on fail-soft
-              fallback), so the page never tells two snow stories at once. */}
-          <EnsembleForecast
-            locationId={locationId}
-            elevationM={current?.snowfallOutlookElevationM ?? undefined}
-          />
-        </PremiumGate>
 
         {/* PREMIUM · Personalised triggers · push when conditions hit.
             Hidden in green season - powder alerts are snow-only. */}

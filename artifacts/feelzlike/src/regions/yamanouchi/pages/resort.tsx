@@ -44,7 +44,6 @@ import { isLiftSeasonOpen } from "@/lib/skiSeason";
 import { REGION_COUNTRY } from "@/regions";
 import { getLiftsForMountain } from "@/data/lifts";
 import { ForecastChart } from "@/components/weather/ForecastChart";
-import { EnsembleForecast } from "@/components/weather/EnsembleForecast";
 import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
 import { midMountainElevation } from "@/lib/elevation";
 import { cn } from "@/lib/utils";
@@ -535,23 +534,6 @@ export default function ResortDetail() {
             </motion.div>
           </PremiumGate>
         )}
-
-        {/* PREMIUM · Ensemble forecast · multi-model consensus. Self-
-            hides when /api/forecast/{id} doesn't return data. */}
-        <PremiumGate
-          title="Ensemble forecast"
-          titleJa="アンサンブル予報"
-          blurb="Multi-model consensus · agreement across JMA, ECMWF and other models for the next 7 days."
-          blurbJa="JMA・ECMWFなど複数モデルの合意度を可視化（今後7日間）。"
-        >
-          {/* Ensemble runs at the SAME elevation the headline snow actually
-              resolved to (mid-mountain on success, village on fail-soft
-              fallback), so the page never tells two snow stories at once. */}
-          <EnsembleForecast
-            locationId={id}
-            elevationM={current.snowfallOutlookElevationM ?? undefined}
-          />
-        </PremiumGate>
 
         {/* PREMIUM · Personalised triggers · push when conditions hit. */}
         <PremiumGate

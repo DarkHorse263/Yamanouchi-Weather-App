@@ -26,10 +26,9 @@
     6. Premium · Mountain dials (MountainSnapshot rings)
     7. Premium · **Per-lift hold forecast** — `<LiftWindHoldPanel>`. **MUST be page-level gated** by `getLiftsForMountain(<mountainId>).length > 0` so free users never see a lock card for a mountain with no lift seeds. PremiumGate alone is not enough — it still renders the lock chrome even when its child returns null.
     8. Premium · **24h trend chart** — `<ForecastChart>` from `@/components/weather/ForecastChart` (shared).
-    9. Premium · **Ensemble forecast** — `<EnsembleForecast>` from `@/components/weather/EnsembleForecast` (shared).
     10. Premium · Alerts (paywall card linking to `~/<region>/alerts`)
     11. **Webcams** (free, last) — `<MountainWebcams>` from `@/components/MountainWebcams`.
-  - **Shared vs region-local**: `ElevationBands`, `ForecastChart`, `EnsembleForecast`, `HourlyForecast`, `PowderCalendar`, `LiftWindHoldPanel`, `MountainWebcams` ALL live under `artifacts/feelzlike/src/components/` and are imported from `@/components/...`. Do NOT fork these into region folders — region-local copies (and re-export shims) are an anti-pattern that already cost us a sync drift bug.
+  - **Shared vs region-local**: `ElevationBands`, `ForecastChart`, `HourlyForecast`, `PowderCalendar`, `LiftWindHoldPanel`, `MountainWebcams` ALL live under `artifacts/feelzlike/src/components/` and are imported from `@/components/...`. Do NOT fork these into region folders — region-local copies (and re-export shims) are an anti-pattern that already cost us a sync drift bug.
   - **PowderFactorBadge is fully removed.** Do not reintroduce it.
   - **No em/en dashes anywhere.** Only middot ·. Lowercase brand. (Project-wide rule, repeated here for the gate copy/blurbs that frequently get authored fresh.)
 

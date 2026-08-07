@@ -68,7 +68,7 @@ export function DailyPick({ regionId, resorts, resortHrefPattern = "/:id" }: Pro
           .filter((l) => allowed.has(l.location.id))
           .map((l) => {
             // API surfaces snowfallNext24h in centimetres (matches the
-            // `cm` units used in EnsembleForecast and MountainSnapshot).
+            // `cm` units used in MountainSnapshot).
             const snowfallCm24 = Math.max(0, Number(l.current.snowfallNext24h ?? 0));
             const windKph = Math.max(0, Number(l.current.windSpeed ?? 0));
             // Each cm of fresh snow worth 1 pt; each kph of wind costs 1 pt.

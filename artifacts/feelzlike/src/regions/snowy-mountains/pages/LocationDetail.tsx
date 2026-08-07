@@ -11,7 +11,6 @@ import { SnowReportLink } from "@/components/SnowReportLink";
 import { LoadingState } from "../components/ui/loading-state";
 import { ErrorState } from "../components/ui/error-state";
 import { ForecastChart } from "../components/weather/ForecastChart";
-import { EnsembleForecast } from "../components/weather/EnsembleForecast";
 import { SafetyStrip } from "../components/weather/SafetyStrip";
 import { SnowmakingPanel } from "@/components/weather/SnowmakingPanel";
 import { formatTemp } from "../lib/utils";
@@ -1093,22 +1092,6 @@ export default function LocationDetail() {
             </div>
             <ForecastChart data={hourly} metric={activeChartMetric} />
           </motion.div>
-        </PremiumGate>
-
-        {/* PREMIUM · Ensemble forecast · multi-model consensus. */}
-        <PremiumGate
-          title="Ensemble forecast"
-          titleJa="アンサンブル予報"
-          blurb="Multi-model consensus · agreement across BOM, ECMWF and other models for the next 7 days."
-          blurbJa="BOM・ECMWFなど複数モデルの合意度を可視化（今後7日間）。"
-        >
-          {/* Ensemble runs at the SAME elevation the headline snow actually
-              resolved to (mid-mountain on success, village on fail-soft
-              fallback), so the page never tells two snow stories at once. */}
-          <EnsembleForecast
-            locationId={locationId}
-            elevationM={current.snowfallOutlookElevationM ?? undefined}
-          />
         </PremiumGate>
 
         {/* PREMIUM - Personalised alerts (UI only for now).
