@@ -158,7 +158,9 @@ export type RegionKey =
   | "wausau"
   | "wisconsin-dells"
   | "snowshoe"
-  | "canaan-valley";
+  | "canaan-valley"
+  | "high-country"
+  | "maggie-valley";
 type ViewMode = "interactive" | "windy" | "official";
 
 interface RegionConfig {
@@ -891,6 +893,8 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
   "wisconsin-dells":{windy:{lat:43.54,lon:-89.43,zoom:10},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
   "snowshoe":{windy:{lat:38.41,lon:-79.995,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
   "canaan-valley":{windy:{lat:39.045,lon:-79.46,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
+  "high-country":{windy:{lat:36.13,lon:-81.871,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
+  "maggie-valley":{windy:{lat:35.562,lon:-83.094,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
   "mt-hood": {
     windy: { lat: 45.32, lon: -121.72, zoom: 10 },
     official: {
@@ -1677,6 +1681,8 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
   "wisconsin-dells":{center:{lat:43.54,lng:-89.43},pins:[{id:"cascade-mountain",name:"Cascade Mountain",lat:43.531,lng:-89.395,accent:"#f97316"},{id:"portage",name:"Portage",lat:43.539,lng:-89.462,accent:"#0ea5e9"}]},
   "snowshoe":{center:{lat:38.41,lng:-79.995},pins:[{id:"snowshoe-mountain",name:"Snowshoe Mountain",lat:38.41,lng:-79.995,accent:"#f97316"},{id:"snowshoe-town",name:"Snowshoe",lat:38.41,lng:-79.995,accent:"#0ea5e9"}]},
   "canaan-valley":{center:{lat:39.041,lng:-79.438},pins:[{id:"canaan-valley-resort",name:"Canaan Valley Resort",lat:39.045,lng:-79.46,accent:"#f97316"},{id:"timberline-mountain",name:"Timberline Mountain",lat:39.041,lng:-79.438,accent:"#f97316"},{id:"canaan-valley-town",name:"Davis / Canaan Valley",lat:39.105,lng:-79.468,accent:"#0ea5e9"}]},
+  "high-country":{center:{lat:36.183,lng:-81.874},pins:[{id:"sugar-mountain",name:"Sugar Mountain",lat:36.13,lng:-81.871,accent:"#f97316"},{id:"beech-mountain",name:"Beech Mountain Resort",lat:36.183,lng:-81.874,accent:"#f97316"},{id:"banner-elk-beech-mountain",name:"Banner Elk / Beech Mountain",lat:36.166,lng:-81.872,accent:"#0ea5e9"}]},
+  "maggie-valley":{center:{lat:35.562,lng:-83.094},pins:[{id:"cataloochee-ski-area",name:"Cataloochee Ski Area",lat:35.562,lng:-83.094,accent:"#f97316"},{id:"maggie-valley-town",name:"Maggie Valley",lat:35.519,lng:-83.084,accent:"#0ea5e9"}]},
   "mt-hood": {
     center: { lat: 45.320, lng: -121.720 },
     pins: [
@@ -1854,6 +1860,8 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "wisconsin-dells": "US",
   "snowshoe": "US",
   "canaan-valley": "US",
+  "high-country": "US",
+  "maggie-valley": "US",
   "mt-hood": "US",
   "bend": "US",
   "crystal-mountain": "US",
@@ -1961,6 +1969,8 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "wisconsin-dells": "wisconsin dells",
   "snowshoe": "snowshoe",
   "canaan-valley": "canaan valley",
+  "high-country": "high country",
+  "maggie-valley": "maggie valley",
   "mt-hood": "mt. hood",
   "bend": "bend",
   "crystal-mountain": "crystal mountain",

@@ -81,6 +81,8 @@ import { wausauRegion } from "./wausau";
 import { wisconsinDellsRegion } from "./wisconsin-dells";
 import { snowshoeRegion } from "./snowshoe";
 import { canaanValleyRegion } from "./canaan-valley";
+import { highCountryRegion } from "./high-country";
+import { maggieValleyRegion } from "./maggie-valley";
 import { mtHoodRegion } from "./mt-hood";
 import { bendRegion } from "./bend";
 import { crystalMountainRegion } from "./crystal-mountain";
@@ -225,6 +227,8 @@ export const REGIONS: RegionConfig[] = [
   wisconsinDellsRegion,
   snowshoeRegion,
   canaanValleyRegion,
+  highCountryRegion,
+  maggieValleyRegion,
   mtHoodRegion,
   bendRegion,
   crystalMountainRegion,
@@ -345,6 +349,8 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "wisconsin-dells": "US",
   "snowshoe": "US",
   "canaan-valley": "US",
+  "high-country": "US",
+  "maggie-valley": "US",
   "mt-hood": "US",
   "bend": "US",
   "crystal-mountain": "US",

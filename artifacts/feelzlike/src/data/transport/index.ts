@@ -97,6 +97,8 @@ import { WAUSAU_TRANSPORT } from "./wausau";
 import { WISCONSIN_DELLS_TRANSPORT } from "./wisconsin-dells";
 import { SNOWSHOE_TRANSPORT } from "./snowshoe";
 import { CANAAN_VALLEY_TRANSPORT } from "./canaan-valley";
+import { HIGH_COUNTRY_TRANSPORT } from "./high-country";
+import { MAGGIE_VALLEY_TRANSPORT } from "./maggie-valley";
 import { MT_HOOD_TRANSPORT } from "./mt-hood";
 import { BEND_TRANSPORT } from "./bend";
 import { CRYSTAL_MOUNTAIN_TRANSPORT } from "./crystal-mountain";
@@ -226,6 +228,8 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
 
   "snowshoe": SNOWSHOE_TRANSPORT,
   "canaan-valley": CANAAN_VALLEY_TRANSPORT,
+  "high-country": HIGH_COUNTRY_TRANSPORT,
+  "maggie-valley": MAGGIE_VALLEY_TRANSPORT,
   // US (Oregon) · no operators curated to the AU/JP/NZ verification
   // standard yet, so these are registered empty rather than filled with
   // guessed timetables.

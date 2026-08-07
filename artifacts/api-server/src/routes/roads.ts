@@ -925,6 +925,9 @@ function mnChainEntry(opts:{id:string;regionId:string;mountainId:string;mountain
 /** Wisconsin has no passenger chain/winter-tire mandate; studs are restricted for ordinary passenger vehicles. */
 function wiChainEntry(opts:{id:string;regionId:string;mountainId:string;mountainName:string;approach:string;detail:string;inSeason:boolean;issuedAt:string}){return{id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"No passenger chain mandate":"Outside ski season",detail:`Wisconsin has no passenger chain or winter-tire mandate. Chains are permitted when needed; studded tires are restricted for most passenger vehicles. ${opts.detail}`,issuedAt:opts.issuedAt};}
 
+/** North Carolina winter-access rule. */
+function ncChainEntry(opts:{id:string;regionId:string;mountainId:string;mountainName:string;approach:string;detail:string;inSeason:boolean;issuedAt:string}){return{id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"Check storm restrictions":"Outside ski season",detail:`North Carolina has no standing passenger chain or winter-tire mandate; resort-adjacent mountain villages may activate local restrictions. ${opts.detail}`,issuedAt:opts.issuedAt};}
+
 /** West Virginia winter-access rule. */
 function wvChainEntry(opts:{id:string;regionId:string;mountainId:string;mountainName:string;approach:string;detail:string;inSeason:boolean;issuedAt:string}){return{id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"Check storm restrictions":"Outside ski season",detail:`West Virginia has no standing passenger chain or winter-tire mandate; chains are permitted for safety and any restriction is conditions-triggered and posted. ${opts.detail}`,issuedAt:opts.issuedAt};}
 
@@ -2159,6 +2162,8 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
 
   if(regionId==="snowshoe"||regionId==="canaan-valley"){const inSeason=isUsSnowSeason(now);const entry=(id:string,mountainId:string,mountainName:string,approach:string,detail:string)=>wvChainEntry({id,regionId,mountainId,mountainName,approach,detail,inSeason,issuedAt});return regionId==="snowshoe"?[entry("snowshoe-mountain-access","snowshoe-mountain","Snowshoe Mountain","West Virginia mountain approaches","Check WV 511 before winter travel.")]:regionId==="canaan-valley"?[entry("canaan-valley-resort-access","canaan-valley-resort","Canaan Valley Resort","West Virginia mountain approaches","Check WV 511 before winter travel."),entry("timberline-mountain-access","timberline-mountain","Timberline Mountain","West Virginia mountain approaches","Check WV 511 before winter travel.")]:[];}
 
+  if(regionId==="high-country"||regionId==="maggie-valley"){const inSeason=isUsSnowSeason(now);const entry=(id:string,mountainId:string,mountainName:string,approach:string,detail:string)=>ncChainEntry({id,regionId,mountainId,mountainName,approach,detail,inSeason,issuedAt});return regionId==="high-country"?[entry("sugar-mountain-access","sugar-mountain","Sugar Mountain","Western North Carolina mountain approaches","Check DriveNC; local village restrictions may apply near mountain resorts."),entry("beech-mountain-access","beech-mountain","Beech Mountain Resort","Western North Carolina mountain approaches","Check DriveNC; local village restrictions may apply near mountain resorts.")]:regionId==="maggie-valley"?[entry("cataloochee-ski-area-access","cataloochee-ski-area","Cataloochee Ski Area","Western North Carolina mountain approaches","Check DriveNC; local village restrictions may apply near mountain resorts.")]:[];}
+
   if (
     regionId === "taos" ||
     regionId === "angel-fire" ||
@@ -2675,6 +2680,7 @@ router.get("/road-conditions", async (req, res) => {
     const isUsMa = region === "berkshires" || region === "central-massachusetts";
     const isUsMn = region === "lutsen-north-shore";
     const isUsWi = region === "wausau" || region === "wisconsin-dells";
+    const isUsNc = region === "high-country" || region === "maggie-valley";
     const isUsWv = region === "snowshoe" || region === "canaan-valley";
     const isUsNm =
       region === "taos" ||
@@ -2868,6 +2874,9 @@ router.get("/road-conditions", async (req, res) => {
     } else if (isUsWv) {
       generalAdvice = "We do not yet pull live road data for West Virginia · check WVDOT's WV 511 (wv511.org) for closures, cameras and winter conditions. There is no standing statewide passenger chain mandate; any restriction is conditions-triggered and posted. No avalanche authority is needed here: the state’s groomed Appalachian ski terrain has no meaningful avalanche hazard.";
       liveTrafficUrl = "https://wv511.org/";
+    } else if (isUsNc) {
+      generalAdvice = "We do not yet pull live road data for North Carolina · check NCDOT's DriveNC (drivenc.gov) for closures, cameras and winter conditions. North Carolina has no standing statewide passenger chain mandate, though resort-adjacent mountain villages may impose local activated restrictions. No avalanche authority is needed here: the state’s groomed Southern Appalachian ski terrain has no meaningful avalanche hazard.";
+      liveTrafficUrl = "https://www.drivenc.gov/";
     } else if (isUsNm) {
       // No live New Mexico road feed is wired yet - say so plainly rather
       // than shipping an empty list that reads like "all clear". New

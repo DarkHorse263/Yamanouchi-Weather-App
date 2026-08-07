@@ -109,6 +109,8 @@ export const ALERT_REGIONS: Array<{ id: string; nameEn: string; nameJa: string; 
   {id:"wisconsin-dells",nameEn:"Wisconsin Dells",nameJa:"ウィスコンシンデルズ",country:"US · Wisconsin"},
   {id:"snowshoe",nameEn:"Snowshoe",nameJa:"スノーシュー",country:"US · West Virginia"},
   {id:"canaan-valley",nameEn:"Canaan Valley",nameJa:"カナーンバレー",country:"US · West Virginia"},
+  {id:"high-country",nameEn:"High Country",nameJa:"ハイカントリー",country:"US · North Carolina"},
+  {id:"maggie-valley",nameEn:"Maggie Valley",nameJa:"マギーバレー",country:"US · North Carolina"},
   { id: "mt-hood", nameEn: "Mt. Hood", nameJa: "マウントフッド", country: "US · Oregon" },
   { id: "bend", nameEn: "Bend", nameJa: "ベンド", country: "US · Oregon" },
   { id: "crystal-mountain", nameEn: "Crystal Mountain", nameJa: "クリスタルマウンテン", country: "US · Washington" },

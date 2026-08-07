@@ -95,6 +95,8 @@ export const RegionId = {
   "wisconsin-dells": "wisconsin-dells",
   "snowshoe": "snowshoe",
   "canaan-valley": "canaan-valley",
+  "high-country": "high-country",
+  "maggie-valley": "maggie-valley",
   "mt-hood": "mt-hood",
   "bend": "bend",
   "crystal-mountain": "crystal-mountain",

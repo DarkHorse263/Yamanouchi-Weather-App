@@ -1409,6 +1409,12 @@ const WEBCAM_DATA: WebcamConfig[] = [
   {locationId:"canaan-valley-resort",locationName:"Canaan Valley Resort cams / conditions",webcamPageUrl:"https://www.canaanresort.com/",webcams:[]},
   {locationId:"timberline-mountain",locationName:"Timberline Mountain cams / conditions",webcamPageUrl:"https://timberlinemountain.com/snow-report/",webcams:[]},
   {locationId:"canaan-valley-roads",locationName:"Canaan Valley roads · WVDOT · WV 511",webcamPageUrl:"https://wv511.org/",webcams:[]},
+  // North Carolina · page-only official links; no unverified live-feed URLs are asserted.
+  {locationId:"sugar-mountain",locationName:"Sugar Mountain cams / conditions",webcamPageUrl:"https://skisugar.com/sugar-mountain-stats/",webcams:[]},
+  {locationId:"beech-mountain",locationName:"Beech Mountain Resort cams / conditions",webcamPageUrl:"https://www.beechmountainresort.com/hours-of-operation-winter/",webcams:[]},
+  {locationId:"high-country-roads",locationName:"High Country roads · NCDOT · DriveNC",webcamPageUrl:"https://www.drivenc.gov/",webcams:[]},
+  {locationId:"cataloochee-ski-area",locationName:"Cataloochee Ski Area cams / conditions",webcamPageUrl:"https://cataloochee.com/the-mountain/cataloochee-ski-area-statistics-and-facts/",webcams:[]},
+  {locationId:"maggie-valley-roads",locationName:"Maggie Valley roads · NCDOT · DriveNC",webcamPageUrl:"https://www.drivenc.gov/",webcams:[]},
   // ─── Resort live-cam pages: Oregon (Mt. Hood) ──────
   {
     locationId: "mt-hood-meadows",
