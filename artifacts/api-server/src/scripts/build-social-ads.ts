@@ -55,6 +55,8 @@ interface Version {
   kicker: string;
   /** big headline (the boxed line) */
   headline: string;
+  /** small audience line under the headline */
+  audience: string;
   /** live page to screenshot inside the phone */
   screenshotPath: string;
   /** force this region's season pill to winter before the shot (JP pages sit in green season all summer) */
@@ -80,6 +82,7 @@ const VERSIONS: Version[] = [
     id: "overall",
     kicker: "meet",
     headline: "the snow app",
+    audience: "for resort town stays · and everyone heading to the snow",
     screenshotPath: "/",
     callouts: [
       { icon: IC.snow, text: "live snow and feels-like temps on every mountain" },
@@ -92,6 +95,7 @@ const VERSIONS: Version[] = [
     id: "japan",
     kicker: "planning japan?",
     headline: "20 ski regions",
+    audience: "plan your stay · town by town · mountain by mountain",
     screenshotPath: "/hakuba-valley/hakuba/",
     forceWinterRegionId: "hakuba-valley",
     callouts: [
@@ -105,6 +109,7 @@ const VERSIONS: Version[] = [
     id: "australia",
     kicker: "is it dumping",
     headline: "right now?",
+    audience: "staying in town or heading up · plan around the weather",
     screenshotPath: "/snowy-mountains/jindabyne/",
     callouts: [
       { icon: IC.gauge, text: "live snow · feels-like temps at the lifts" },
@@ -117,6 +122,7 @@ const VERSIONS: Version[] = [
     id: "nz",
     kicker: "nz snow",
     headline: "checked live",
+    audience: "staying in queenstown or wanaka · plan your days on the hill",
     screenshotPath: "/queenstown/queenstown/",
     callouts: [
       { icon: IC.road, text: "live highway conditions to the hill" },
@@ -208,6 +214,8 @@ html,body { width:${fmt.w}px; height:${fmt.h}px; }
   font-size:${story ? 96 : 68}px; font-weight:700; letter-spacing:-0.02em; line-height:1;
   border-radius:10px; transform:rotate(-1.2deg);
 }
+.audience { margin-top:${story ? 30 : 16}px; font-size:${story ? 34 : 26}px; font-weight:400; letter-spacing:0; color:rgba(255,255,255,0.85); text-align:center; }
+.audience .dot { color:#7dd3fc; }
 .stage { flex:1; width:100%; display:flex; align-items:center; justify-content:center; gap:${story ? 48 : 40}px; margin-top:${story ? 40 : 26}px; min-height:0; }
 .phone {
   height:${story ? 980 : 560}px; aspect-ratio:390/800; flex:none;
@@ -236,6 +244,7 @@ html,body { width:${fmt.w}px; height:${fmt.h}px; }
   <img class="logo" src="${assets.logo}" alt="feelzlike">
   <div class="kicker">${v.kicker}</div>
   <div class="headline">${v.headline}</div>
+  <div class="audience">${v.audience.split(" · ").join(' <span class="dot">·</span> ')}</div>
   <div class="stage">
     <div class="phone"><img src="${assets.shot}" alt=""></div>
     <div class="cos">${v.callouts.map(calloutHtml).join("")}</div>
