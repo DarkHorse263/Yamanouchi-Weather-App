@@ -1403,6 +1403,12 @@ const WEBCAM_DATA: WebcamConfig[] = [
   {locationId:"wausau-roads",locationName:"Wausau roads · 511 Wisconsin",webcamPageUrl:"https://511wi.gov/",webcams:[]},
   {locationId:"wisconsin-dells-roads",locationName:"Wisconsin Dells roads · 511 Wisconsin",webcamPageUrl:"https://511wi.gov/",webcams:[]},
 
+  // West Virginia · page-only official links; no unverified live-feed URLs are asserted.
+  {locationId:"snowshoe-mountain",locationName:"Snowshoe Mountain cams / conditions",webcamPageUrl:"https://www.snowshoemtn.com/",webcams:[]},
+  {locationId:"snowshoe-roads",locationName:"Snowshoe roads · WVDOT · WV 511",webcamPageUrl:"https://wv511.org/",webcams:[]},
+  {locationId:"canaan-valley-resort",locationName:"Canaan Valley Resort cams / conditions",webcamPageUrl:"https://www.canaanresort.com/",webcams:[]},
+  {locationId:"timberline-mountain",locationName:"Timberline Mountain cams / conditions",webcamPageUrl:"https://timberlinemountain.com/snow-report/",webcams:[]},
+  {locationId:"canaan-valley-roads",locationName:"Canaan Valley roads · WVDOT · WV 511",webcamPageUrl:"https://wv511.org/",webcams:[]},
   // ─── Resort live-cam pages: Oregon (Mt. Hood) ──────
   {
     locationId: "mt-hood-meadows",

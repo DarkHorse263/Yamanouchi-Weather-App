@@ -107,6 +107,8 @@ export const ALERT_REGIONS: Array<{ id: string; nameEn: string; nameJa: string; 
   {id:"lutsen-north-shore",nameEn:"Lutsen / North Shore",nameJa:"ルーツェン／ノースショア",country:"US · Minnesota"},
   {id:"wausau",nameEn:"Wausau",nameJa:"ウォーソー",country:"US · Wisconsin"},
   {id:"wisconsin-dells",nameEn:"Wisconsin Dells",nameJa:"ウィスコンシンデルズ",country:"US · Wisconsin"},
+  {id:"snowshoe",nameEn:"Snowshoe",nameJa:"スノーシュー",country:"US · West Virginia"},
+  {id:"canaan-valley",nameEn:"Canaan Valley",nameJa:"カナーンバレー",country:"US · West Virginia"},
   { id: "mt-hood", nameEn: "Mt. Hood", nameJa: "マウントフッド", country: "US · Oregon" },
   { id: "bend", nameEn: "Bend", nameJa: "ベンド", country: "US · Oregon" },
   { id: "crystal-mountain", nameEn: "Crystal Mountain", nameJa: "クリスタルマウンテン", country: "US · Washington" },

@@ -79,6 +79,8 @@ import { centralMassachusettsRegion } from "./central-massachusetts";
 import { lutsenNorthShoreRegion } from "./lutsen-north-shore";
 import { wausauRegion } from "./wausau";
 import { wisconsinDellsRegion } from "./wisconsin-dells";
+import { snowshoeRegion } from "./snowshoe";
+import { canaanValleyRegion } from "./canaan-valley";
 import { mtHoodRegion } from "./mt-hood";
 import { bendRegion } from "./bend";
 import { crystalMountainRegion } from "./crystal-mountain";
@@ -221,6 +223,8 @@ export const REGIONS: RegionConfig[] = [
   lutsenNorthShoreRegion,
   wausauRegion,
   wisconsinDellsRegion,
+  snowshoeRegion,
+  canaanValleyRegion,
   mtHoodRegion,
   bendRegion,
   crystalMountainRegion,
@@ -339,6 +343,8 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "lutsen-north-shore": "US",
   "wausau": "US",
   "wisconsin-dells": "US",
+  "snowshoe": "US",
+  "canaan-valley": "US",
   "mt-hood": "US",
   "bend": "US",
   "crystal-mountain": "US",

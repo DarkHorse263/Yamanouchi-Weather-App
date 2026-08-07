@@ -156,7 +156,9 @@ export type RegionKey =
   | "central-massachusetts"
   | "lutsen-north-shore"
   | "wausau"
-  | "wisconsin-dells";
+  | "wisconsin-dells"
+  | "snowshoe"
+  | "canaan-valley";
 type ViewMode = "interactive" | "windy" | "official";
 
 interface RegionConfig {
@@ -887,6 +889,8 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
   "lutsen-north-shore":{windy:{lat:47.65,lon:-90.70,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
   "wausau":{windy:{lat:44.94,lon:-89.66,zoom:10},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
   "wisconsin-dells":{windy:{lat:43.54,lon:-89.43,zoom:10},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
+  "snowshoe":{windy:{lat:38.41,lon:-79.995,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
+  "canaan-valley":{windy:{lat:39.045,lon:-79.46,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
   "mt-hood": {
     windy: { lat: 45.32, lon: -121.72, zoom: 10 },
     official: {
@@ -1671,6 +1675,8 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
   "lutsen-north-shore":{center:{lat:47.65,lng:-90.70},pins:[{id:"lutsen-mountains",name:"Lutsen Mountains",lat:47.663,lng:-90.714,accent:"#f97316"},{id:"lutsen",name:"Lutsen",lat:47.643,lng:-90.714,accent:"#0ea5e9"}]},
   "wausau":{center:{lat:44.94,lng:-89.66},pins:[{id:"granite-peak",name:"Granite Peak",lat:44.931,lng:-89.688,accent:"#f97316"},{id:"wausau-town",name:"Wausau",lat:44.959,lng:-89.630,accent:"#0ea5e9"}]},
   "wisconsin-dells":{center:{lat:43.54,lng:-89.43},pins:[{id:"cascade-mountain",name:"Cascade Mountain",lat:43.531,lng:-89.395,accent:"#f97316"},{id:"portage",name:"Portage",lat:43.539,lng:-89.462,accent:"#0ea5e9"}]},
+  "snowshoe":{center:{lat:38.41,lng:-79.995},pins:[{id:"snowshoe-mountain",name:"Snowshoe Mountain",lat:38.41,lng:-79.995,accent:"#f97316"},{id:"snowshoe-town",name:"Snowshoe",lat:38.41,lng:-79.995,accent:"#0ea5e9"}]},
+  "canaan-valley":{center:{lat:39.041,lng:-79.438},pins:[{id:"canaan-valley-resort",name:"Canaan Valley Resort",lat:39.045,lng:-79.46,accent:"#f97316"},{id:"timberline-mountain",name:"Timberline Mountain",lat:39.041,lng:-79.438,accent:"#f97316"},{id:"canaan-valley-town",name:"Davis / Canaan Valley",lat:39.105,lng:-79.468,accent:"#0ea5e9"}]},
   "mt-hood": {
     center: { lat: 45.320, lng: -121.720 },
     pins: [
@@ -1846,6 +1852,8 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "lutsen-north-shore": "US",
   "wausau": "US",
   "wisconsin-dells": "US",
+  "snowshoe": "US",
+  "canaan-valley": "US",
   "mt-hood": "US",
   "bend": "US",
   "crystal-mountain": "US",
@@ -1951,6 +1959,8 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "lutsen-north-shore": "lutsen & north shore",
   "wausau": "wausau",
   "wisconsin-dells": "wisconsin dells",
+  "snowshoe": "snowshoe",
+  "canaan-valley": "canaan valley",
   "mt-hood": "mt. hood",
   "bend": "bend",
   "crystal-mountain": "crystal mountain",

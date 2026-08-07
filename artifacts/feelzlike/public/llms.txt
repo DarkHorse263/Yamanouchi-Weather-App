@@ -10,7 +10,7 @@
 - [Japan](https://feelzlike.com/jp): all Japanese resort regions
 - [New Zealand](https://feelzlike.com/nz): all New Zealand resort regions
 - [Canada](https://feelzlike.com/ca): all Canadian resort regions (BC, Alberta + Québec)
-- [United States](https://feelzlike.com/us): all US resort regions (Colorado, Utah, California, Vermont, Wyoming, Montana, New Mexico, Michigan, Pennsylvania, Massachusetts, Minnesota, Wisconsin, Oregon, Washington, Idaho, New Hampshire, Maine, New York)
+- [United States](https://feelzlike.com/us): all US resort regions (Colorado, Utah, California, Vermont, Wyoming, Montana, New Mexico, Michigan, Pennsylvania, Massachusetts, Minnesota, Wisconsin, Oregon, Washington, Idaho, New Hampshire, Maine, New York, West Virginia)
 - [Near you](https://feelzlike.com/near-you): weather and radar for your current location
 - [News](https://feelzlike.com/news): resort-town news and weather updates
 - [Trip planner](https://feelzlike.com/plan): multi-day trip planning across regions

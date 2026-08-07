@@ -925,6 +925,9 @@ function mnChainEntry(opts:{id:string;regionId:string;mountainId:string;mountain
 /** Wisconsin has no passenger chain/winter-tire mandate; studs are restricted for ordinary passenger vehicles. */
 function wiChainEntry(opts:{id:string;regionId:string;mountainId:string;mountainName:string;approach:string;detail:string;inSeason:boolean;issuedAt:string}){return{id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"No passenger chain mandate":"Outside ski season",detail:`Wisconsin has no passenger chain or winter-tire mandate. Chains are permitted when needed; studded tires are restricted for most passenger vehicles. ${opts.detail}`,issuedAt:opts.issuedAt};}
 
+/** West Virginia winter-access rule. */
+function wvChainEntry(opts:{id:string;regionId:string;mountainId:string;mountainName:string;approach:string;detail:string;inSeason:boolean;issuedAt:string}){return{id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"Check storm restrictions":"Outside ski season",detail:`West Virginia has no standing passenger chain or winter-tire mandate; chains are permitted for safety and any restriction is conditions-triggered and posted. ${opts.detail}`,issuedAt:opts.issuedAt};}
+
 function nmChainEntry(opts: {
   id: string;
   regionId: string;
@@ -2154,6 +2157,8 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
 
   if(regionId==="wausau"||regionId==="wisconsin-dells"){const inSeason=isUsSnowSeason(now);const wi=(id:string,mountainId:string,mountainName:string,approach:string,detail:string)=>wiChainEntry({id,regionId,mountainId,mountainName,approach,detail,inSeason,issuedAt});return regionId==="wausau"?[wi("granite-peak-wi-29","granite-peak","Granite Peak","WI-29/US-51 to Rib Mountain State Park","Check 511 Wisconsin before winter travel.")]:[wi("cascade-mountain-wi-33","cascade-mountain","Cascade Mountain","I-90/94 and WI-33 near Portage","Check 511 Wisconsin before winter travel.")];}
 
+  if(regionId==="snowshoe"||regionId==="canaan-valley"){const inSeason=isUsSnowSeason(now);const entry=(id:string,mountainId:string,mountainName:string,approach:string,detail:string)=>wvChainEntry({id,regionId,mountainId,mountainName,approach,detail,inSeason,issuedAt});return regionId==="snowshoe"?[entry("snowshoe-mountain-access","snowshoe-mountain","Snowshoe Mountain","West Virginia mountain approaches","Check WV 511 before winter travel.")]:regionId==="canaan-valley"?[entry("canaan-valley-resort-access","canaan-valley-resort","Canaan Valley Resort","West Virginia mountain approaches","Check WV 511 before winter travel."),entry("timberline-mountain-access","timberline-mountain","Timberline Mountain","West Virginia mountain approaches","Check WV 511 before winter travel.")]:[];}
+
   if (
     regionId === "taos" ||
     regionId === "angel-fire" ||
@@ -2670,6 +2675,7 @@ router.get("/road-conditions", async (req, res) => {
     const isUsMa = region === "berkshires" || region === "central-massachusetts";
     const isUsMn = region === "lutsen-north-shore";
     const isUsWi = region === "wausau" || region === "wisconsin-dells";
+    const isUsWv = region === "snowshoe" || region === "canaan-valley";
     const isUsNm =
       region === "taos" ||
       region === "angel-fire" ||
@@ -2859,6 +2865,9 @@ router.get("/road-conditions", async (req, res) => {
     } else if (isUsWi) {
       generalAdvice = "We do not yet pull live road data for Wisconsin · check WisDOT's 511 Wisconsin (511wi.gov) for closures, cameras and winter road conditions. Wisconsin has no passenger chain or winter-tire mandate; chains are permitted when conditions require them and studded tires are restricted for most passenger vehicles. No avalanche authority is needed here: Wisconsin ski terrain has no meaningful avalanche hazard.";
       liveTrafficUrl = "https://511wi.gov/";
+    } else if (isUsWv) {
+      generalAdvice = "We do not yet pull live road data for West Virginia · check WVDOT's WV 511 (wv511.org) for closures, cameras and winter conditions. There is no standing statewide passenger chain mandate; any restriction is conditions-triggered and posted. No avalanche authority is needed here: the state’s groomed Appalachian ski terrain has no meaningful avalanche hazard.";
+      liveTrafficUrl = "https://wv511.org/";
     } else if (isUsNm) {
       // No live New Mexico road feed is wired yet - say so plainly rather
       // than shipping an empty list that reads like "all clear". New

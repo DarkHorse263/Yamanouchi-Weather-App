@@ -110,6 +110,8 @@ export const REGION_IDS = [
   "lutsen-north-shore",
   "wausau",
   "wisconsin-dells",
+  "canaan-valley",
+  "snowshoe",
 ] as const;
 export type RegionId = (typeof REGION_IDS)[number];
 
@@ -792,6 +794,13 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "cascade-mountain": "wisconsin-dells",
   "portage": "wisconsin-dells",
   "wisconsin-dells-roads": "wisconsin-dells",
+  "canaan-valley-roads": "canaan-valley",
+  "canaan-valley-town": "canaan-valley",
+  "timberline-mountain": "canaan-valley",
+  "canaan-valley-resort": "canaan-valley",
+  "snowshoe-roads": "snowshoe",
+  "snowshoe-town": "snowshoe",
+  "snowshoe-mountain": "snowshoe",
 
   // Mt. Hood, OR. Three resorts sharing one base town (Government Camp).
   "mt-hood-meadows": "mt-hood",

@@ -99,6 +99,8 @@ const REGIONS_WITH_ROADS_CONTENT: ReadonlySet<string> = new Set([
   "lutsen-north-shore",
   "wausau",
   "wisconsin-dells",
+  "snowshoe",
+  "canaan-valley",
   "mt-hood",
   "bend",
   "crystal-mountain",

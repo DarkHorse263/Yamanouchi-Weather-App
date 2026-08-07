@@ -195,6 +195,8 @@ const REGION_ANCHORS: Record<RegionId, {
   "lutsen-north-shore": { lat:47.663, lon:-90.714, elevation:514, region:"OTHER", displayName:"Lutsen / North Shore" },
   "wausau": { lat:44.931, lon:-89.688, elevation:594, region:"OTHER", displayName:"Wausau" },
   "wisconsin-dells": { lat:43.531, lon:-89.395, elevation:378, region:"OTHER", displayName:"Wisconsin Dells" },
+  "canaan-valley": { lat:39.045, lon:-79.46, elevation:1304, region:"OTHER", displayName:"Canaan Valley" },
+  "snowshoe": { lat:38.41, lon:-79.995, elevation:1478, region:"OTHER", displayName:"Snowshoe" },
 
   // Oregon anchors: each on the highest lift-served summit in the region.
   // America/Los_Angeles, same as Washington and California.

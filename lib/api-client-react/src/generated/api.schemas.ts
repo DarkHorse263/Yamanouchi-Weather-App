@@ -160,6 +160,8 @@ export const RegionId = {
   "lutsen-north-shore": "lutsen-north-shore",
   "wausau": "wausau",
   "wisconsin-dells": "wisconsin-dells",
+  "snowshoe": "snowshoe",
+  "canaan-valley": "canaan-valley",
   "mt-hood": "mt-hood",
   "bend": "bend",
   "crystal-mountain": "crystal-mountain",

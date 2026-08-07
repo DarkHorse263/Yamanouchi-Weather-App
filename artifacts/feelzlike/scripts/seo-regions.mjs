@@ -1355,6 +1355,8 @@ export const REGIONS = [
 
   {slug:"wausau",name:"Wausau",subtitle:"Wisconsin · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Granite Peak Ski Area",blurb:"Midwest Family Ski Resorts, not Nash/Skyline · Indy 2025-26 · ⚠️ Ikon 2026-27"}],towns:[{id:"wausau-town",name:"Wausau",blurb:"Rib Mountain base city"}]},
   {slug:"wisconsin-dells",name:"Wisconsin Dells",subtitle:"Wisconsin · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Cascade Mountain",blurb:"independent Walz family · no multi-resort pass (not Indy) · ⚠️ Flash webcam likely broken"}],towns:[{id:"portage",name:"Portage",blurb:"Dells-area base town"}]},
+  {slug:"snowshoe",name:"Snowshoe",subtitle:"West Virginia · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Snowshoe Mountain",blurb:"Ikon Pass / Alterra · Mid-Atlantic’s largest vertical (~1,500 ft) · snowmaking is central to operations · ⚠️ distinct first-party conditions URL not independently confirmed."}],towns:[{id:"snowshoe-town",name:"Snowshoe",blurb:"Remote Cheat Mountain base community for Snowshoe Mountain."}]},
+  {slug:"canaan-valley",name:"Canaan Valley",subtitle:"West Virginia · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Canaan Valley Resort",blurb:"West Virginia State Park system / state-owned resort · ⚠️ exact 2025–26 dates and current pass affiliation require direct confirmation."},{name:"Timberline Mountain",blurb:"Independent (not Indy, Epic or Ikon) · correctly grouped in Canaan Valley, not Snowshoe · core snowmaking operations."}],towns:[{id:"canaan-valley-town",name:"Davis / Canaan Valley",blurb:"Davis/Canaan Valley base area; Canaan Valley Resort and Timberline are only ~2–3 miles apart."}]},
 
 ];
 
