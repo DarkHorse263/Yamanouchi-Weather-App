@@ -925,6 +925,9 @@ function mnChainEntry(opts:{id:string;regionId:string;mountainId:string;mountain
 /** Wisconsin has no passenger chain/winter-tire mandate; studs are restricted for ordinary passenger vehicles. */
 function wiChainEntry(opts:{id:string;regionId:string;mountainId:string;mountainName:string;approach:string;detail:string;inSeason:boolean;issuedAt:string}){return{id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"No passenger chain mandate":"Outside ski season",detail:`Wisconsin has no passenger chain or winter-tire mandate. Chains are permitted when needed; studded tires are restricted for most passenger vehicles. ${opts.detail}`,issuedAt:opts.issuedAt};}
 
+/** South Dakota winter-access rule. */
+function sdChainEntry(opts:{id:string;regionId:string;mountainId:string;mountainName:string;approach:string;detail:string;inSeason:boolean;issuedAt:string}){return{id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"Check storm restrictions":"Outside ski season",detail:`South Dakota can activate traction restrictions on signed state highways during inclement weather; check SD511 before travel. ${opts.detail}`,issuedAt:opts.issuedAt};}
+
 /** Arizona winter-access rule. */
 function azChainEntry(opts:{id:string;regionId:string;mountainId:string;mountainName:string;approach:string;detail:string;inSeason:boolean;issuedAt:string}){return{id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"Check storm restrictions":"Outside ski season",detail:`Arizona has no fixed chain season; ADOT can post Chains or 4WD Required restrictions during storms. ${opts.detail}`,issuedAt:opts.issuedAt};}
 
@@ -2179,6 +2182,8 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
 
   if(regionId==="flagstaff"||regionId==="white-mountains-az"){const inSeason=isUsSnowSeason(now);const entry=(id:string,mountainId:string,mountainName:string,approach:string,detail:string)=>azChainEntry({id,regionId,mountainId,mountainName,approach,detail,inSeason,issuedAt});return regionId==="flagstaff"?[entry("arizona-snowbowl-access","arizona-snowbowl","Arizona Snowbowl","High-country state routes","⚠️ Follow ADOT storm restrictions; Snowbowl Upper Bowl risk has no formal daily state forecast.")]:regionId==="white-mountains-az"?[entry("sunrise-park-resort-access","sunrise-park-resort","Sunrise Park Resort","High-country state routes","⚠️ Follow ADOT storm restrictions; Snowbowl Upper Bowl risk has no formal daily state forecast.")]:[];}
 
+  if(regionId==="black-hills"){const inSeason=isUsSnowSeason(now);const entry=(id:string,mountainId:string,mountainName:string,approach:string,detail:string)=>sdChainEntry({id,regionId,mountainId,mountainName,approach,detail,inSeason,issuedAt});return regionId==="black-hills"?[entry("terry-peak-access","terry-peak","Terry Peak","Black Hills routes to Lead","⚠️ Black Hills are Mountain Time; check SD511 before winter travel.")]:[];}
+
   if (
     regionId === "taos" ||
     regionId === "angel-fire" ||
@@ -2695,6 +2700,7 @@ router.get("/road-conditions", async (req, res) => {
     const isUsMa = region === "berkshires" || region === "central-massachusetts";
     const isUsMn = region === "lutsen-north-shore";
     const isUsWi = region === "wausau" || region === "wisconsin-dells";
+    const isUsSd = region === "black-hills";
     const isUsAz = region === "flagstaff" || region === "white-mountains-az";
     const isUsNv = region === "lake-tahoe-nevada";
     const isUsVa = region === "blue-ridge" || region === "shenandoah-valley";
@@ -2904,6 +2910,9 @@ router.get("/road-conditions", async (req, res) => {
     } else if (isUsAz) {
       generalAdvice = "We do not yet pull live road data for Arizona · check ADOT's AZ511 (az511.gov) for closures and storm-triggered Chains or 4WD Required restrictions. Arizona has no formal avalanche center, but Snowbowl’s Upper Bowl has real informal avalanche-terrain risk; follow local patrol and closure guidance.";
       liveTrafficUrl = "https://az511.gov/";
+    } else if (isUsSd) {
+      generalAdvice = "We do not yet pull live road data for South Dakota · check SDDOT's SD511 (sd511.org; it supersedes SafeTravelUSA) for closures and winter restrictions. South Dakota can activate traction restrictions on signed highways in storms, especially in the Black Hills. No avalanche authority is needed here: Black Hills ski terrain has no meaningful avalanche hazard.";
+      liveTrafficUrl = "https://sd511.org/";
     } else if (isUsNm) {
       // No live New Mexico road feed is wired yet - say so plainly rather
       // than shipping an empty list that reads like "all clear". New

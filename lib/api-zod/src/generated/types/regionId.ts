@@ -102,6 +102,7 @@ export const RegionId = {
   "lake-tahoe-nevada": "lake-tahoe-nevada",
   "flagstaff": "flagstaff",
   "white-mountains-az": "white-mountains-az",
+  "black-hills": "black-hills",
   "mt-hood": "mt-hood",
   "bend": "bend",
   "crystal-mountain": "crystal-mountain",

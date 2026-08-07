@@ -545,6 +545,7 @@ if (process.env.NODE_ENV === "production") {
     "lutsen-north-shore": { name:"Lutsen / North Shore", towns:{lutsen:"Lutsen"} },
     "wausau": { name:"Wausau", towns:{"wausau-town":"Wausau"} },
     "wisconsin-dells": { name:"Wisconsin Dells", towns:{portage:"Portage"} },
+    "black-hills": { name:"Black Hills", towns:{"lead-deadwood":"Lead / Deadwood"} },
     "white-mountains-az": { name:"White Mountains", towns:{"greer-az":"Greer"} },
     "flagstaff": { name:"Flagstaff", towns:{"flagstaff-town":"Flagstaff"} },
     "lake-tahoe-nevada": { name:"Lake Tahoe Nevada", towns:{"incline-village":"Incline Village"} },

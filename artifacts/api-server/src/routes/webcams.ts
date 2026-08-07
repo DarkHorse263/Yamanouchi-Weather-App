@@ -1429,6 +1429,9 @@ const WEBCAM_DATA: WebcamConfig[] = [
   {locationId:"flagstaff-roads",locationName:"Flagstaff roads · ADOT · AZ511",webcamPageUrl:"https://az511.gov/",webcams:[]},
   {locationId:"sunrise-park-resort",locationName:"Sunrise Park Resort cams / conditions",webcamPageUrl:"https://www.sunrise.ski/winter/snow-report/",webcams:[]},
   {locationId:"white-mountains-az-roads",locationName:"White Mountains roads · ADOT · AZ511",webcamPageUrl:"https://az511.gov/",webcams:[]},
+  // South Dakota · page-only official links; no unverified live-feed URLs are asserted.
+  {locationId:"terry-peak",locationName:"Terry Peak cams / conditions",webcamPageUrl:"https://terrypeak.com/the-mountain/",webcams:[]},
+  {locationId:"black-hills-roads",locationName:"Black Hills roads · SDDOT · SD511",webcamPageUrl:"https://sd511.org/",webcams:[]},
   // ─── Resort live-cam pages: Oregon (Mt. Hood) ──────
   {
     locationId: "mt-hood-meadows",
