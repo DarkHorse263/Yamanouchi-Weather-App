@@ -162,7 +162,8 @@ export type RegionKey =
   | "high-country"
   | "maggie-valley"
   | "blue-ridge"
-  | "shenandoah-valley";
+  | "shenandoah-valley"
+  | "lake-tahoe-nevada";
 type ViewMode = "interactive" | "windy" | "official";
 
 interface RegionConfig {
@@ -899,6 +900,7 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
   "maggie-valley":{windy:{lat:35.562,lon:-83.094,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
   "blue-ridge":{windy:{lat:37.913,lon:-78.945,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
   "shenandoah-valley":{windy:{lat:38.407,lon:-78.738,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
+  "lake-tahoe-nevada":{windy:{lat:39.315,lon:-119.886,zoom:9},official:{label:"NWS weather radar",imageUrl:null,href:"https://radar.weather.gov/",attribution:"National Weather Service · weather radar"}},
   "mt-hood": {
     windy: { lat: 45.32, lon: -121.72, zoom: 10 },
     official: {
@@ -1689,6 +1691,7 @@ const REGION_DEFAULTS: Record<RegionKey, { center: { lat: number; lng: number };
   "maggie-valley":{center:{lat:35.562,lng:-83.094},pins:[{id:"cataloochee-ski-area",name:"Cataloochee Ski Area",lat:35.562,lng:-83.094,accent:"#f97316"},{id:"maggie-valley-town",name:"Maggie Valley",lat:35.519,lng:-83.084,accent:"#0ea5e9"}]},
   "blue-ridge":{center:{lat:37.913,lng:-78.945},pins:[{id:"wintergreen-resort",name:"Wintergreen Resort",lat:37.913,lng:-78.945,accent:"#f97316"},{id:"wintergreen-town",name:"Wintergreen",lat:37.913,lng:-78.945,accent:"#0ea5e9"}]},
   "shenandoah-valley":{center:{lat:38.407,lng:-78.738},pins:[{id:"massanutten-resort",name:"Massanutten Resort",lat:38.407,lng:-78.738,accent:"#f97316"},{id:"mcgaheysville",name:"McGaheysville",lat:38.372,lng:-78.73,accent:"#0ea5e9"}]},
+  "lake-tahoe-nevada":{center:{lat:39.254,lng:-119.93},pins:[{id:"mt-rose-ski-tahoe",name:"Mt. Rose Ski Tahoe",lat:39.315,lng:-119.886,accent:"#f97316"},{id:"diamond-peak",name:"Diamond Peak",lat:39.254,lng:-119.93,accent:"#f97316"},{id:"incline-village",name:"Incline Village",lat:39.251,lng:-119.952,accent:"#0ea5e9"}]},
   "mt-hood": {
     center: { lat: 45.320, lng: -121.720 },
     pins: [
@@ -1870,6 +1873,7 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "maggie-valley": "US",
   "blue-ridge": "US",
   "shenandoah-valley": "US",
+  "lake-tahoe-nevada": "US",
   "mt-hood": "US",
   "bend": "US",
   "crystal-mountain": "US",
@@ -1981,6 +1985,7 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "maggie-valley": "maggie valley",
   "blue-ridge": "blue ridge",
   "shenandoah-valley": "shenandoah valley",
+  "lake-tahoe-nevada": "lake tahoe nevada",
   "mt-hood": "mt. hood",
   "bend": "bend",
   "crystal-mountain": "crystal mountain",

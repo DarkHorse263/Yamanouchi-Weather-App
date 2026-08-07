@@ -101,6 +101,7 @@ import { HIGH_COUNTRY_TRANSPORT } from "./high-country";
 import { MAGGIE_VALLEY_TRANSPORT } from "./maggie-valley";
 import { BLUE_RIDGE_TRANSPORT } from "./blue-ridge";
 import { SHENANDOAH_VALLEY_TRANSPORT } from "./shenandoah-valley";
+import { LAKE_TAHOE_NEVADA_TRANSPORT } from "./lake-tahoe-nevada";
 import { MT_HOOD_TRANSPORT } from "./mt-hood";
 import { BEND_TRANSPORT } from "./bend";
 import { CRYSTAL_MOUNTAIN_TRANSPORT } from "./crystal-mountain";
@@ -234,6 +235,7 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   "maggie-valley": MAGGIE_VALLEY_TRANSPORT,
   "blue-ridge": BLUE_RIDGE_TRANSPORT,
   "shenandoah-valley": SHENANDOAH_VALLEY_TRANSPORT,
+  "lake-tahoe-nevada": LAKE_TAHOE_NEVADA_TRANSPORT,
   // US (Oregon) · no operators curated to the AU/JP/NZ verification
   // standard yet, so these are registered empty rather than filled with
   // guessed timetables.

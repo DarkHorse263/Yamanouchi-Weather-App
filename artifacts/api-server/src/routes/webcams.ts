@@ -1420,6 +1420,10 @@ const WEBCAM_DATA: WebcamConfig[] = [
   {locationId:"blue-ridge-roads",locationName:"Blue Ridge roads · VDOT · 511 Virginia",webcamPageUrl:"https://511.vdot.virginia.gov/",webcams:[]},
   {locationId:"massanutten-resort",locationName:"Massanutten Resort cams / conditions",webcamPageUrl:"https://www.massresort.com/play/snow-sports/snow-conditions/",webcams:[]},
   {locationId:"shenandoah-valley-roads",locationName:"Shenandoah Valley roads · VDOT · 511 Virginia",webcamPageUrl:"https://511.vdot.virginia.gov/",webcams:[]},
+  // Nevada · page-only official links; no unverified live-feed URLs are asserted.
+  {locationId:"mt-rose-ski-tahoe",locationName:"Mt. Rose Ski Tahoe cams / conditions",webcamPageUrl:"https://skirose.com/snow-report/",webcams:[]},
+  {locationId:"diamond-peak",locationName:"Diamond Peak cams / conditions",webcamPageUrl:"https://www.diamondpeak.com/the-mountain/mountain-report/",webcams:[]},
+  {locationId:"lake-tahoe-nevada-roads",locationName:"Lake Tahoe Nevada roads · NDOT · Nevada 511",webcamPageUrl:"https://www.nvroads.com/roadconditions",webcams:[]},
   // ─── Resort live-cam pages: Oregon (Mt. Hood) ──────
   {
     locationId: "mt-hood-meadows",

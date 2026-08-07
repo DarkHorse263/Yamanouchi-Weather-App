@@ -85,6 +85,7 @@ import { highCountryRegion } from "./high-country";
 import { maggieValleyRegion } from "./maggie-valley";
 import { blueRidgeRegion } from "./blue-ridge";
 import { shenandoahValleyRegion } from "./shenandoah-valley";
+import { lakeTahoeNevadaRegion } from "./lake-tahoe-nevada";
 import { mtHoodRegion } from "./mt-hood";
 import { bendRegion } from "./bend";
 import { crystalMountainRegion } from "./crystal-mountain";
@@ -233,6 +234,7 @@ export const REGIONS: RegionConfig[] = [
   maggieValleyRegion,
   blueRidgeRegion,
   shenandoahValleyRegion,
+  lakeTahoeNevadaRegion,
   mtHoodRegion,
   bendRegion,
   crystalMountainRegion,
@@ -357,6 +359,7 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "maggie-valley": "US",
   "blue-ridge": "US",
   "shenandoah-valley": "US",
+  "lake-tahoe-nevada": "US",
   "mt-hood": "US",
   "bend": "US",
   "crystal-mountain": "US",

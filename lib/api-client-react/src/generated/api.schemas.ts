@@ -166,6 +166,7 @@ export const RegionId = {
   "maggie-valley": "maggie-valley",
   "blue-ridge": "blue-ridge",
   "shenandoah-valley": "shenandoah-valley",
+  "lake-tahoe-nevada": "lake-tahoe-nevada",
   "mt-hood": "mt-hood",
   "bend": "bend",
   "crystal-mountain": "crystal-mountain",

@@ -925,6 +925,9 @@ function mnChainEntry(opts:{id:string;regionId:string;mountainId:string;mountain
 /** Wisconsin has no passenger chain/winter-tire mandate; studs are restricted for ordinary passenger vehicles. */
 function wiChainEntry(opts:{id:string;regionId:string;mountainId:string;mountainName:string;approach:string;detail:string;inSeason:boolean;issuedAt:string}){return{id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"No passenger chain mandate":"Outside ski season",detail:`Wisconsin has no passenger chain or winter-tire mandate. Chains are permitted when needed; studded tires are restricted for most passenger vehicles. ${opts.detail}`,issuedAt:opts.issuedAt};}
 
+/** Nevada winter-access rule. */
+function nvChainEntry(opts:{id:string;regionId:string;mountainId:string;mountainName:string;approach:string;detail:string;inSeason:boolean;issuedAt:string}){return{id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"Check storm restrictions":"Outside ski season",detail:`Nevada has no fixed chain season; NDOT can require traction devices on signed highways during Sierra storms. ${opts.detail}`,issuedAt:opts.issuedAt};}
+
 /** Virginia winter-access rule. */
 function vaChainEntry(opts:{id:string;regionId:string;mountainId:string;mountainName:string;approach:string;detail:string;inSeason:boolean;issuedAt:string}){return{id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"Check storm restrictions":"Outside ski season",detail:`Virginia has no standing passenger chain or winter-tire mandate; localities may impose snow-route restrictions. ${opts.detail}`,issuedAt:opts.issuedAt};}
 
@@ -2169,6 +2172,8 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
 
   if(regionId==="blue-ridge"||regionId==="shenandoah-valley"){const inSeason=isUsSnowSeason(now);const entry=(id:string,mountainId:string,mountainName:string,approach:string,detail:string)=>vaChainEntry({id,regionId,mountainId,mountainName,approach,detail,inSeason,issuedAt});return regionId==="blue-ridge"?[entry("wintergreen-resort-access","wintergreen-resort","Wintergreen Resort","Virginia mountain approaches","Check VDOT 511 before winter travel.")]:regionId==="shenandoah-valley"?[entry("massanutten-resort-access","massanutten-resort","Massanutten Resort","Virginia mountain approaches","Check VDOT 511 before winter travel.")]:[];}
 
+  if(regionId==="lake-tahoe-nevada"){const inSeason=isUsSnowSeason(now);const entry=(id:string,mountainId:string,mountainName:string,approach:string,detail:string)=>nvChainEntry({id,regionId,mountainId,mountainName,approach,detail,inSeason,issuedAt});return regionId==="lake-tahoe-nevada"?[entry("mt-rose-ski-tahoe-access","mt-rose-ski-tahoe","Mt. Rose Ski Tahoe","Sierra approaches / local Tahoe roads","⚠️ Check posted Sierra-pass traction controls and Sierra Avalanche Center before travel."),entry("diamond-peak-access","diamond-peak","Diamond Peak","Sierra approaches / local Tahoe roads","⚠️ Check posted Sierra-pass traction controls and Sierra Avalanche Center before travel.")]:[];}
+
   if (
     regionId === "taos" ||
     regionId === "angel-fire" ||
@@ -2685,6 +2690,7 @@ router.get("/road-conditions", async (req, res) => {
     const isUsMa = region === "berkshires" || region === "central-massachusetts";
     const isUsMn = region === "lutsen-north-shore";
     const isUsWi = region === "wausau" || region === "wisconsin-dells";
+    const isUsNv = region === "lake-tahoe-nevada";
     const isUsVa = region === "blue-ridge" || region === "shenandoah-valley";
     const isUsNc = region === "high-country" || region === "maggie-valley";
     const isUsWv = region === "snowshoe" || region === "canaan-valley";
@@ -2886,6 +2892,9 @@ router.get("/road-conditions", async (req, res) => {
     } else if (isUsVa) {
       generalAdvice = "We do not yet pull live road data for Virginia · check VDOT's 511 Virginia (511.vdot.virginia.gov) for closures, cameras and winter conditions. Virginia has no standing statewide passenger chain mandate; localities may impose snow-route restrictions. No avalanche authority is needed here: the state’s groomed terrain has no meaningful avalanche hazard.";
       liveTrafficUrl = "https://511.vdot.virginia.gov/";
+    } else if (isUsNv) {
+      generalAdvice = "We do not yet pull live road data for Nevada · check NDOT's Nevada 511 (nvroads.com) for closures, cameras and Sierra-pass chain controls. There is no fixed chain season, but NDOT can require traction devices on signed highways during storms. Sierra Avalanche Center covers the Nevada side of Tahoe, including Diamond Peak; consult its forecast for avalanche terrain.";
+      liveTrafficUrl = "https://www.nvroads.com/roadconditions";
     } else if (isUsNm) {
       // No live New Mexico road feed is wired yet - say so plainly rather
       // than shipping an empty list that reads like "all clear". New
