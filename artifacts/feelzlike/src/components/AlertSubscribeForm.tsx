@@ -120,6 +120,7 @@ export const ALERT_REGIONS: Array<{ id: string; nameEn: string; nameJa: string; 
   {id:"girdwood",nameEn:"Girdwood",nameJa:"ガードウッド",country:"US · Alaska"},
   {id:"juneau",nameEn:"Juneau",nameJa:"ジュノー",country:"US · Alaska"},
   {id:"litchfield-hills",nameEn:"Litchfield Hills",nameJa:"リッチフィールドヒルズ",country:"US · Connecticut"},
+  {id:"vernon",nameEn:"Vernon",nameJa:"バーノン",country:"US · New Jersey"},
   { id: "mt-hood", nameEn: "Mt. Hood", nameJa: "マウントフッド", country: "US · Oregon" },
   { id: "bend", nameEn: "Bend", nameJa: "ベンド", country: "US · Oregon" },
   { id: "crystal-mountain", nameEn: "Crystal Mountain", nameJa: "クリスタルマウンテン", country: "US · Washington" },

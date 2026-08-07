@@ -1440,6 +1440,9 @@ const WEBCAM_DATA: WebcamConfig[] = [
   // Connecticut · page-only official links; no unverified live-feed URLs are asserted.
   {locationId:"mohawk-mountain",locationName:"Mohawk Mountain cams / conditions",webcamPageUrl:"https://www.mohawkmtn.com/snow-report/",webcams:[]},
   {locationId:"litchfield-hills-roads",locationName:"Litchfield Hills roads · ConnDOT · CT Roads",webcamPageUrl:"https://ctroads.org/",webcams:[]},
+  // New Jersey · page-only official links; no unverified live-feed URLs are asserted.
+  {locationId:"mountain-creek-resort",locationName:"Mountain Creek Resort cams / conditions",webcamPageUrl:"https://mountaincreek.com/",webcams:[]},
+  {locationId:"vernon-roads",locationName:"Vernon roads · NJDOT · 511NJ",webcamPageUrl:"https://511nj.org/",webcams:[]},
   // ─── Resort live-cam pages: Oregon (Mt. Hood) ──────
   {
     locationId: "mt-hood-meadows",

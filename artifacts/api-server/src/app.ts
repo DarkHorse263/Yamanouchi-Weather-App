@@ -545,6 +545,7 @@ if (process.env.NODE_ENV === "production") {
     "lutsen-north-shore": { name:"Lutsen / North Shore", towns:{lutsen:"Lutsen"} },
     "wausau": { name:"Wausau", towns:{"wausau-town":"Wausau"} },
     "wisconsin-dells": { name:"Wisconsin Dells", towns:{portage:"Portage"} },
+    "vernon": { name:"Vernon", towns:{"vernon-nj":"Vernon"} },
     "litchfield-hills": { name:"Litchfield Hills", towns:{"cornwall-ct":"Cornwall"} },
     "juneau": { name:"Juneau", towns:{"juneau-town":"Juneau"} },
     "girdwood": { name:"Girdwood", towns:{"girdwood-town":"Girdwood"} },

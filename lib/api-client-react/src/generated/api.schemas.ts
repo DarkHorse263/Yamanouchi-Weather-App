@@ -173,6 +173,7 @@ export const RegionId = {
   "girdwood": "girdwood",
   "juneau": "juneau",
   "litchfield-hills": "litchfield-hills",
+  "vernon": "vernon",
   "mt-hood": "mt-hood",
   "bend": "bend",
   "crystal-mountain": "crystal-mountain",

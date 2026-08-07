@@ -112,6 +112,7 @@ const REGIONS_WITH_ROADS_CONTENT: ReadonlySet<string> = new Set([
   "girdwood",
   "juneau",
   "litchfield-hills",
+  "vernon",
   "mt-hood",
   "bend",
   "crystal-mountain",

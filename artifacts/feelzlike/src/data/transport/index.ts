@@ -108,6 +108,7 @@ import { BLACK_HILLS_TRANSPORT } from "./black-hills";
 import { GIRDWOOD_TRANSPORT } from "./girdwood";
 import { JUNEAU_TRANSPORT } from "./juneau";
 import { LITCHFIELD_HILLS_TRANSPORT } from "./litchfield-hills";
+import { VERNON_TRANSPORT } from "./vernon";
 import { MT_HOOD_TRANSPORT } from "./mt-hood";
 import { BEND_TRANSPORT } from "./bend";
 import { CRYSTAL_MOUNTAIN_TRANSPORT } from "./crystal-mountain";
@@ -248,6 +249,7 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   "girdwood": GIRDWOOD_TRANSPORT,
   "juneau": JUNEAU_TRANSPORT,
   "litchfield-hills": LITCHFIELD_HILLS_TRANSPORT,
+  "vernon": VERNON_TRANSPORT,
   // US (Oregon) · no operators curated to the AU/JP/NZ verification
   // standard yet, so these are registered empty rather than filled with
   // guessed timetables.

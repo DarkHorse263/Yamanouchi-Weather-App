@@ -925,6 +925,9 @@ function mnChainEntry(opts:{id:string;regionId:string;mountainId:string;mountain
 /** Wisconsin has no passenger chain/winter-tire mandate; studs are restricted for ordinary passenger vehicles. */
 function wiChainEntry(opts:{id:string;regionId:string;mountainId:string;mountainName:string;approach:string;detail:string;inSeason:boolean;issuedAt:string}){return{id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"No passenger chain mandate":"Outside ski season",detail:`Wisconsin has no passenger chain or winter-tire mandate. Chains are permitted when needed; studded tires are restricted for most passenger vehicles. ${opts.detail}`,issuedAt:opts.issuedAt};}
 
+/** New Jersey winter-access rule. */
+function njChainEntry(opts:{id:string;regionId:string;mountainId:string;mountainName:string;approach:string;detail:string;inSeason:boolean;issuedAt:string}){return{id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"Check storm restrictions":"Outside ski season",detail:`New Jersey has no standing passenger chain or winter-tire mandate; chains may be used while roads are actually slippery. ${opts.detail}`,issuedAt:opts.issuedAt};}
+
 /** Connecticut winter-access rule. */
 function ctChainEntry(opts:{id:string;regionId:string;mountainId:string;mountainName:string;approach:string;detail:string;inSeason:boolean;issuedAt:string}){return{id:opts.id,regionId:opts.regionId,mountainId:opts.mountainId,mountainName:opts.mountainName,approach:opts.approach,status:"not-required" as const,label:opts.inSeason?"Check storm restrictions":"Outside ski season",detail:`Connecticut has no standing passenger chain or winter-tire mandate; chains and studded tires are simply legal November 15–April 30. ${opts.detail}`,issuedAt:opts.issuedAt};}
 
@@ -2194,6 +2197,8 @@ function buildChainStatuses(regionId: string | undefined): Array<Record<string, 
 
   if(regionId==="litchfield-hills"){const inSeason=isUsSnowSeason(now);const entry=(id:string,mountainId:string,mountainName:string,approach:string,detail:string)=>ctChainEntry({id,regionId,mountainId,mountainName,approach,detail,inSeason,issuedAt});return regionId==="litchfield-hills"?[entry("mohawk-mountain-access","mohawk-mountain","Mohawk Mountain","Connecticut local access roads","Check CT Roads before winter travel.")]:[];}
 
+  if(regionId==="vernon"){const inSeason=isUsSnowSeason(now);const entry=(id:string,mountainId:string,mountainName:string,approach:string,detail:string)=>njChainEntry({id,regionId,mountainId,mountainName,approach,detail,inSeason,issuedAt});return regionId==="vernon"?[entry("mountain-creek-resort-access","mountain-creek-resort","Mountain Creek Resort","NJ Route 94 / local access roads","Check 511NJ before winter travel.")]:[];}
+
   if (
     regionId === "taos" ||
     regionId === "angel-fire" ||
@@ -2710,6 +2715,7 @@ router.get("/road-conditions", async (req, res) => {
     const isUsMa = region === "berkshires" || region === "central-massachusetts";
     const isUsMn = region === "lutsen-north-shore";
     const isUsWi = region === "wausau" || region === "wisconsin-dells";
+    const isUsNj = region === "vernon";
     const isUsCt = region === "litchfield-hills";
     const isUsAk = region === "girdwood" || region === "juneau";
     const isUsSd = region === "black-hills";
@@ -2931,6 +2937,9 @@ router.get("/road-conditions", async (req, res) => {
     } else if (isUsCt) {
       generalAdvice = "We do not yet pull live road data for Connecticut · check ConnDOT's CT Roads (ctroads.org) for closures, cameras and winter conditions. Connecticut has no standing passenger chain or winter-tire mandate; ctroads.org—not CT511.com—is the current consumer-facing road tool. No avalanche authority is needed here: the state’s low-elevation ski terrain has no meaningful avalanche hazard.";
       liveTrafficUrl = "https://ctroads.org/";
+    } else if (isUsNj) {
+      generalAdvice = "We do not yet pull live road data for New Jersey · check NJDOT's 511NJ (511nj.org) for closures, cameras and winter conditions. New Jersey has no standing passenger chain or winter-tire mandate; chains may be used when roads are actually slippery. No avalanche authority is needed here: the state’s low-elevation ski terrain has no meaningful avalanche hazard.";
+      liveTrafficUrl = "https://511nj.org/";
     } else if (isUsNm) {
       // No live New Mexico road feed is wired yet - say so plainly rather
       // than shipping an empty list that reads like "all clear". New
