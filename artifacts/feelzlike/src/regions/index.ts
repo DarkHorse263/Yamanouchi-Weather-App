@@ -91,6 +91,7 @@ import { whiteMountainsAzRegion } from "./white-mountains-az";
 import { blackHillsRegion } from "./black-hills";
 import { girdwoodRegion } from "./girdwood";
 import { juneauRegion } from "./juneau";
+import { litchfieldHillsRegion } from "./litchfield-hills";
 import { mtHoodRegion } from "./mt-hood";
 import { bendRegion } from "./bend";
 import { crystalMountainRegion } from "./crystal-mountain";
@@ -245,6 +246,7 @@ export const REGIONS: RegionConfig[] = [
   blackHillsRegion,
   girdwoodRegion,
   juneauRegion,
+  litchfieldHillsRegion,
   mtHoodRegion,
   bendRegion,
   crystalMountainRegion,
@@ -375,6 +377,7 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "black-hills": "US",
   "girdwood": "US",
   "juneau": "US",
+  "litchfield-hills": "US",
   "mt-hood": "US",
   "bend": "US",
   "crystal-mountain": "US",

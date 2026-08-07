@@ -1437,6 +1437,9 @@ const WEBCAM_DATA: WebcamConfig[] = [
   {locationId:"girdwood-roads",locationName:"Girdwood roads · Alaska DOT&PF · Alaska 511",webcamPageUrl:"https://511.alaska.gov/",webcams:[]},
   {locationId:"eaglecrest-ski-area",locationName:"Eaglecrest Ski Area cams / conditions",webcamPageUrl:"https://skieaglecrest.com/conditions/",webcams:[]},
   {locationId:"juneau-roads",locationName:"Juneau roads · Alaska DOT&PF · Alaska 511",webcamPageUrl:"https://511.alaska.gov/",webcams:[]},
+  // Connecticut · page-only official links; no unverified live-feed URLs are asserted.
+  {locationId:"mohawk-mountain",locationName:"Mohawk Mountain cams / conditions",webcamPageUrl:"https://www.mohawkmtn.com/snow-report/",webcams:[]},
+  {locationId:"litchfield-hills-roads",locationName:"Litchfield Hills roads · ConnDOT · CT Roads",webcamPageUrl:"https://ctroads.org/",webcams:[]},
   // ─── Resort live-cam pages: Oregon (Mt. Hood) ──────
   {
     locationId: "mt-hood-meadows",

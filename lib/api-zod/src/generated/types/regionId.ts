@@ -105,6 +105,7 @@ export const RegionId = {
   "black-hills": "black-hills",
   "girdwood": "girdwood",
   "juneau": "juneau",
+  "litchfield-hills": "litchfield-hills",
   "mt-hood": "mt-hood",
   "bend": "bend",
   "crystal-mountain": "crystal-mountain",
