@@ -590,7 +590,7 @@ id = "JVcwZl8s9Rdoff-zCohxQ"
 uri = "file://exports/social-ads/feelzlike-ad-japan-story-1080x1920.png"
 type = "image"
 title = "feelzlike ad · japan · story"
-description = "updated with the audience line under the headline"
+description = "screenshot now shows the feature the callouts describe"
 
 [[outputs]]
 id = "wIxLBo4mj_fADoEkIYmQ7"
@@ -604,7 +604,7 @@ id = "He8hUmTlSA-Li5mhSW-ub"
 uri = "file://exports/social-ads/feelzlike-ad-nz-story-1080x1920.png"
 type = "image"
 title = "feelzlike ad · nz · story"
-description = "updated with the audience line under the headline"
+description = "screenshot now shows the feature the callouts describe"
 
 [[outputs]]
 id = "S_6tw81H1r224n3Jummpv"
@@ -618,7 +618,7 @@ id = "_6i9kcwF2evykckwkF2NC"
 uri = "file://exports/social-ads/feelzlike-ad-japan-square-1080x1080.png"
 type = "image"
 title = "feelzlike ad · japan · square"
-description = "updated with the audience line under the headline"
+description = "screenshot now shows the feature the callouts describe"
 
 [[outputs]]
 id = "JMZChZLFEipLc8PWcAtAe"
@@ -632,4 +632,4 @@ id = "hxuVMePmiLYdCMQIhDXPb"
 uri = "file://exports/social-ads/feelzlike-ad-nz-square-1080x1080.png"
 type = "image"
 title = "feelzlike ad · nz · square"
-description = "updated with the audience line under the headline"
+description = "screenshot now shows the feature the callouts describe"

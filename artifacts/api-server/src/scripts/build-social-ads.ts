@@ -61,6 +61,10 @@ interface Version {
   screenshotPath: string;
   /** force this region's season pill to winter before the shot (JP pages sit in green season all summer) */
   forceWinterRegionId?: string;
+  /** scroll the phone shot so the element containing this text sits at the top of the viewport */
+  scrollToText?: string;
+  /** click the button/tab with this exact text before the shot (e.g. the JMA radar tab) */
+  clickText?: string;
   callouts: Callout[];
   cta: string;
 }
@@ -96,11 +100,13 @@ const VERSIONS: Version[] = [
     kicker: "planning japan?",
     headline: "20 ski regions",
     audience: "plan your stay · town by town · mountain by mountain",
-    screenshotPath: "/hakuba-valley/hakuba/",
+    screenshotPath: "/hakuba-valley/hakuba/weather/",
     forceWinterRegionId: "hakuba-valley",
+    scrollToText: "Live radar",
+    clickText: "JMA",
     callouts: [
-      { icon: IC.snow, text: "observed snow depths · not just forecasts" },
       { icon: IC.radar, text: "official jma radar built in" },
+      { icon: IC.snow, text: "observed snow depths · not just forecasts" },
       { icon: IC.train, text: "trains · buses · stay and eat guides" },
     ],
     cta: "free until 31 december · feelzlike.com",
@@ -123,10 +129,11 @@ const VERSIONS: Version[] = [
     kicker: "nz snow",
     headline: "checked live",
     audience: "staying in queenstown or wanaka · plan your days on the hill",
-    screenshotPath: "/queenstown/queenstown/",
+    screenshotPath: "/queenstown/mountain/coronet-peak/",
+    scrollToText: "conditions",
     callouts: [
-      { icon: IC.road, text: "live highway conditions to the hill" },
       { icon: IC.snow, text: "reported snow bases · not just models" },
+      { icon: IC.road, text: "live highway conditions to the hill" },
       { icon: IC.mail, text: "powder alerts · emailed free" },
     ],
     cta: "free until 31 december · feelzlike.com",
@@ -139,6 +146,8 @@ async function capturePhoneShot(
   browser: import("puppeteer").Browser,
   urlPath: string,
   forceWinterRegionId?: string,
+  scrollToText?: string,
+  clickText?: string,
 ): Promise<string> {
   const page = await browser.newPage();
   try {
@@ -156,15 +165,35 @@ async function capturePhoneShot(
     await page.goto(`${SITE}${urlPath}`, { waitUntil: "networkidle2", timeout: 60000 });
     await new Promise((r) => setTimeout(r, 2500)); // let live data + images settle
     // hide any remaining fixed bottom overlays (install prompt etc.)
-    await page.evaluate(() => {
+    await page.evaluate((targetText) => {
       document.querySelectorAll<HTMLElement>("body *").forEach((el) => {
         const s = getComputedStyle(el);
         if (s.position === "fixed" && el.getBoundingClientRect().top > window.innerHeight * 0.55) {
           el.style.display = "none";
         }
       });
-      window.scrollTo(0, 0);
-    });
+      if (targetText) {
+        const all = Array.from(document.querySelectorAll<HTMLElement>("h1,h2,h3,h4,section,div"));
+        const target = all.find(
+          (el) => el.childElementCount < 12 && (el.textContent ?? "").trim().toLowerCase().startsWith(targetText.toLowerCase()),
+        );
+        if (!target) throw new Error(`scroll target not found: ${targetText}`);
+        window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 12 });
+      } else {
+        window.scrollTo(0, 0);
+      }
+    }, scrollToText ?? "");
+    await new Promise((r) => setTimeout(r, 1200)); // let radar tiles / lazy content settle after scroll
+    if (clickText) {
+      await page.evaluate((label) => {
+        const btn = Array.from(document.querySelectorAll<HTMLElement>("button,[role=tab],a")).find(
+          (el) => (el.textContent ?? "").trim().toLowerCase() === label.toLowerCase(),
+        );
+        if (!btn) throw new Error(`click target not found: ${label}`);
+        btn.click();
+      }, clickText);
+      await new Promise((r) => setTimeout(r, 3000)); // let the tab's tiles load
+    }
     const buf = await page.screenshot({ type: "png" });
     return `data:image/png;base64,${Buffer.from(buf).toString("base64")}`;
   } finally {
@@ -276,7 +305,7 @@ async function main() {
     const versions = only ? VERSIONS.filter((v) => v.id === only) : VERSIONS;
     for (const v of versions) {
       console.log(`capturing live screenshot for ${v.id} (${v.screenshotPath}) ...`);
-      const shot = await capturePhoneShot(browser, v.screenshotPath, v.forceWinterRegionId);
+      const shot = await capturePhoneShot(browser, v.screenshotPath, v.forceWinterRegionId, v.scrollToText, v.clickText);
       for (const fmt of FORMATS) {
         const page = await browser.newPage();
         try {
