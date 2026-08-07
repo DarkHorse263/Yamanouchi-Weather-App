@@ -16,6 +16,8 @@ export interface MountainSnapshotProps {
   sectionNumber?: string;
   /** Heading text (defaults to "Conditions at a glance") */
   heading?: string;
+  /** Copy locale for labels + tier sentences (defaults to english) */
+  locale?: "en" | "ja";
   /**
    * Display-edge unit hooks (member units preference). Canonical inputs stay
    * metric km/h + metres; pass converters + labels to render mph/ft for
@@ -87,19 +89,68 @@ function tier(palette: keyof typeof GRAD, tone: Tone, label: string, detail?: st
   };
 }
 
-function classifyGust(gust: number | undefined, windSpeed: number): Tier {
+/**
+ * Plain-language copy, en + ja. The freezing tier sentences deliberately say
+ * "likely / tends to" - the dial shows the model 0°C altitude, and the real
+ * rain-snow boundary sits somewhat below it depending on the day, so absolute
+ * claims ("IS rain") would overstate what the input supports.
+ */
+const COPY = {
+  en: {
+    freezeLabel: "Rain or snow line",
+    freezeUnit: "snow above",
+    belowTop: "below the top",
+    aboveTop: "above the top",
+    windLabel: "Wind on the hill",
+    gustsUnit: "gusts",
+    steady: "steady",
+    liftsLabel: "Lifts open",
+    onSnow: "on the snow",
+    windHold: ["Wind-hold likely", "Strong enough to close chairs and gondolas"],
+    chairsHold: ["Chairs may hold", "Exposed chairlifts could pause in gusts"],
+    breezy: ["Breezy up top", "Exposed lifts may run slower"],
+    fineForLifts: ["Fine for lifts", "Not windy enough to trouble the lifts"],
+    awaiting: ["Awaiting model", "No reading right now"],
+    snowToBase: ["Snow to the base", "Cold enough that falls should be snow all the way down"],
+    midMountain: ["Snow up high · rain likely lower down", "Below about this height, falls tend to be rain"],
+    tooWarm: ["Likely too warm for snow", "Falls will mostly land as rain, even up top"],
+  },
+  ja: {
+    freezeLabel: "雨雪境界のめやす",
+    freezeUnit: "これより上は雪",
+    belowTop: "山頂より下",
+    aboveTop: "山頂より上",
+    windLabel: "山の風",
+    gustsUnit: "突風",
+    steady: "平均",
+    liftsLabel: "運行中リフト",
+    onSnow: "運行中",
+    windHold: ["運休の可能性大", "チェアやゴンドラが止まるほどの強風"],
+    chairsHold: ["リフト一時停止の恐れ", "風にさらされるリフトは突風で止まることも"],
+    breezy: ["山頂は風が強め", "露出したリフトは減速運転の可能性"],
+    fineForLifts: ["リフト運行に支障なし", "リフトに影響するほどの風ではありません"],
+    awaiting: ["データ待ち", "現在読み取れません"],
+    snowToBase: ["麓まで雪", "麓まで雪で降る寒さです"],
+    midMountain: ["上部は雪 · 下部は雨の見込み", "この高さより下ではおおむね雨になります"],
+    tooWarm: ["雪には暖かすぎる見込み", "山頂付近でもほぼ雨で降ります"],
+  },
+} as const;
+
+type Copy = (typeof COPY)[keyof typeof COPY];
+
+function classifyGust(gust: number | undefined, windSpeed: number, c: Copy): Tier {
   const g = gust ?? windSpeed;
-  if (g >= 90) return tier("rose", "alert", "Wind-hold likely", "Gondolas and chairs likely closed");
-  if (g >= 70) return tier("orange", "warn", "Chairs may hold", "Exposed chairlifts at risk");
-  if (g >= 50) return tier("amber", "caution", "Slow operations possible", "Exposed lifts may slow");
-  return tier("emerald", "ok", "All clear", "Within operating limits");
+  if (g >= 90) return tier("rose", "alert", c.windHold[0], c.windHold[1]);
+  if (g >= 70) return tier("orange", "warn", c.chairsHold[0], c.chairsHold[1]);
+  if (g >= 50) return tier("amber", "caution", c.breezy[0], c.breezy[1]);
+  return tier("emerald", "ok", c.fineForLifts[0], c.fineForLifts[1]);
 }
 
-function classifyFreezing(freezingLevel: number | undefined, summit: number, base: number): Tier {
-  if (freezingLevel == null) return tier("slate", "neutral", "Awaiting model");
-  if (freezingLevel <= base) return tier("sky", "info", "Snow to base");
-  if (freezingLevel <= summit) return tier("amber", "caution", "Mid-mountain rain line");
-  return tier("rose", "alert", "Above summit · rain risk");
+function classifyFreezing(freezingLevel: number | undefined, summit: number, base: number, c: Copy): Tier {
+  if (freezingLevel == null) return tier("slate", "neutral", c.awaiting[0], c.awaiting[1]);
+  if (freezingLevel <= base) return tier("sky", "info", c.snowToBase[0], c.snowToBase[1]);
+  if (freezingLevel <= summit) return tier("amber", "caution", c.midMountain[0], c.midMountain[1]);
+  return tier("rose", "alert", c.tooWarm[0], c.tooWarm[1]);
 }
 
 function classifyLifts(open: number, total: number): Tier {
@@ -121,6 +172,7 @@ export function MountainSnapshot({
   baseElevation,
   sectionNumber = "",
   heading = "Conditions at a glance",
+  locale = "en",
   formatWind,
   windUnitLabel = "km/h",
   formatElevation,
@@ -132,8 +184,9 @@ export function MountainSnapshot({
   const base = baseElevation ?? Math.max(900, summit - 500);
   const verticalDelta = freezingLevel != null ? freezingLevel - summit : null;
 
-  const windTier = classifyGust(gust, windSpeed);
-  const freezeTier = classifyFreezing(freezingLevel, summit, base);
+  const copy = COPY[locale];
+  const windTier = classifyGust(gust, windSpeed, copy);
+  const freezeTier = classifyFreezing(freezingLevel, summit, base, copy);
   const liftTier = liftsOpen != null && totalLifts != null
     ? classifyLifts(liftsOpen, totalLifts)
     : null;
@@ -188,7 +241,7 @@ export function MountainSnapshot({
         "grid gap-8 md:gap-6 justify-items-center",
         showLifts ? "grid-cols-1 sm:grid-cols-3" : "grid-cols-1 sm:grid-cols-2",
       )}>
-        <RingTile label="Freezing level" tone={freezeTier.tone} sublabel={freezeTier.label}>
+        <RingTile label={copy.freezeLabel} tone={freezeTier.tone} sublabel={freezeTier.label} detail={freezeTier.detail}>
           <MetricRing
             value={freezingLevel ?? 0}
             max={3000}
@@ -203,22 +256,22 @@ export function MountainSnapshot({
             <p className="font-display text-3xl md:text-[2.25rem] leading-none text-foreground tabular-nums" data-numeric>
               {freezingLevel != null ? Math.round(cvElev(freezingLevel)) : "—"}
             </p>
-            <p className="byline text-muted-foreground/70 mt-1.5">{elevationUnitLabel} a.s.l.</p>
+            <p className="byline text-muted-foreground/70 mt-1.5">{elevationUnitLabel} · {copy.freezeUnit}</p>
             {verticalDelta != null && (
               <p className={cn(
                 "text-[11px] mt-1.5 inline-flex items-center gap-0.5 tabular-nums font-medium",
                 verticalDelta < 0 ? "text-sky-700" : "text-rose-700",
               )}>
                 {verticalDelta < 0
-                  ? <><ArrowDown className="w-3 h-3" strokeWidth={2} /> {Math.round(cvElev(Math.abs(verticalDelta)))} {elevationUnitLabel}</>
-                  : <><ArrowUp className="w-3 h-3" strokeWidth={2} /> {Math.round(cvElev(verticalDelta))} {elevationUnitLabel}</>
+                  ? <><ArrowDown className="w-3 h-3" strokeWidth={2} /> {Math.round(cvElev(Math.abs(verticalDelta)))} {elevationUnitLabel} {copy.belowTop}</>
+                  : <><ArrowUp className="w-3 h-3" strokeWidth={2} /> {Math.round(cvElev(verticalDelta))} {elevationUnitLabel} {copy.aboveTop}</>
                 }
               </p>
             )}
           </MetricRing>
         </RingTile>
 
-        <RingTile label="Wind & gusts" tone={windTier.tone} sublabel={windTier.label}>
+        <RingTile label={copy.windLabel} tone={windTier.tone} sublabel={windTier.label} detail={windTier.detail}>
           <MetricRing
             value={Math.min(120, gust ?? windSpeed)}
             max={120}
@@ -233,15 +286,15 @@ export function MountainSnapshot({
             <p className="font-display text-3xl md:text-[2.25rem] leading-none text-foreground tabular-nums" data-numeric>
               {Math.round(cvWind(gust ?? windSpeed))}
             </p>
-            <p className="byline text-muted-foreground/70 mt-1.5">{windUnitLabel} gust</p>
+            <p className="byline text-muted-foreground/70 mt-1.5">{windUnitLabel} {copy.gustsUnit}</p>
             <p className="text-[11px] text-muted-foreground/70 mt-1.5 tabular-nums font-medium">
-              avg {Math.round(cvWind(windSpeed))} {windUnitLabel}
+              {copy.steady} {Math.round(cvWind(windSpeed))} {windUnitLabel}
             </p>
           </MetricRing>
         </RingTile>
 
         {showLifts && liftTier && (
-          <RingTile label="Lifts open" tone={liftTier.tone} sublabel={liftTier.label}>
+          <RingTile label={copy.liftsLabel} tone={liftTier.tone} sublabel={liftTier.label}>
             <MetricRing
               value={liftsOpen!}
               max={totalLifts!}
@@ -257,7 +310,7 @@ export function MountainSnapshot({
                 {liftsOpen}
                 <span className="text-muted-foreground/40 text-xl font-normal">/{totalLifts}</span>
               </p>
-              <p className="byline text-muted-foreground/70 mt-1.5">on the snow</p>
+              <p className="byline text-muted-foreground/70 mt-1.5">{copy.onSnow}</p>
               <p className="text-[11px] text-muted-foreground/70 mt-1.5 tabular-nums font-medium">
                 {Math.round((liftsOpen! / totalLifts!) * 100)}%
               </p>
@@ -273,11 +326,13 @@ function RingTile({
   label,
   sublabel,
   tone,
+  detail,
   children,
 }: {
   label: string;
   sublabel: string;
   tone: Tone;
+  detail?: string;
   children: React.ReactNode;
 }) {
   const t = TONE[tone];
@@ -289,6 +344,9 @@ function RingTile({
         <span className={cn("w-1.5 h-1.5 rounded-full", t.dot)} />
         <span className={t.text}>{sublabel}</span>
       </span>
+      {detail && (
+        <p className="mt-1 text-[11px] leading-snug text-muted-foreground/80">{detail}</p>
+      )}
     </div>
   );
 }

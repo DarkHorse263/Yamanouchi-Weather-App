@@ -135,7 +135,7 @@ export default function ResortDetail() {
   const [, rParams] = useRoute("/resort/:id");
   const params = mParams ?? rParams;
   const id = params?.id ?? "";
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { region } = useRegion();
   const u = useUnits();
   const [activeChartMetric, setActiveChartMetric] = useState<"temperature" | "snowfall" | "windSpeed">("temperature");
@@ -455,6 +455,7 @@ export default function ResortDetail() {
               <MountainSnapshot
                 resortName={location.name}
                 elevation={location.elevation}
+                locale={language === "ja" ? "ja" : "en"}
                 freezingLevel={current.freezingLevel ?? undefined}
                 gust={current.windGust ?? undefined}
                 windSpeed={current.windSpeed}

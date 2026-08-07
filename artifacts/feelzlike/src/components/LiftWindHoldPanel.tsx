@@ -217,7 +217,7 @@ export function LiftWindHoldPanel({
       : summary.openFraction >= 0.5
         ? "text-amber-700 bg-amber-500/10 border-amber-500/30"
         : "text-rose-700 bg-rose-500/10 border-rose-500/30"
-    : "text-slate-600 bg-slate-500/10 border-slate-500/30";
+    : "text-white/90 bg-white/10 border-white/30";
 
   const nonOperatingCopy = operating
     ? null
@@ -255,8 +255,8 @@ export function LiftWindHoldPanel({
       {/* Honest operational banner - shown when lifts are NOT running. Replaces
           the "watch the windiest lift" alert so we never imply live operation. */}
       {!operating && nonOperatingCopy && (
-        <div className="rounded-2xl border border-slate-500/30 bg-slate-500/10 px-4 py-3 mb-3">
-          <p className="text-sm font-medium text-slate-700 flex items-start gap-2">
+        <div className="rounded-2xl border border-white/25 bg-white/10 px-4 py-3 mb-3">
+          <p className="text-sm font-medium text-white flex items-start gap-2">
             <Info className="w-4 h-4 mt-0.5 flex-shrink-0" />
             <span>{t(nonOperatingCopy.banner.en, nonOperatingCopy.banner.ja)}</span>
           </p>
@@ -372,7 +372,7 @@ export function LiftWindHoldPanel({
       </div>
 
       {/* Disclaimer */}
-      <p className="text-[11px] text-muted-foreground/70 mt-3 flex items-start gap-1.5">
+      <p className="text-[11px] text-white/75 mt-3 flex items-start gap-1.5">
         <Info className="w-3 h-3 mt-0.5 flex-shrink-0" />
         <span>
           {t(
