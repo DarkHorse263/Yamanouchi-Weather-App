@@ -22,6 +22,7 @@ build = [ "pnpm", "--filter", "@workspace/feelzlike", "run", "build" ]
 publicDir = "artifacts/feelzlike/dist/public"
 serve = "static"
 
+
 [[services.production.rewrites]]
 from = "/countries/"
 to = "/countries/index.html"
@@ -41,6 +42,10 @@ to = "/nz/index.html"
 [[services.production.rewrites]]
 from = "/ca/"
 to = "/ca/index.html"
+
+[[services.production.rewrites]]
+from = "/us/"
+to = "/us/index.html"
 
 [[services.production.rewrites]]
 from = "/plan/"
@@ -2573,6 +2578,1438 @@ to = "/quebec-eastern-townships/sutton/transport/index.html"
 [[services.production.rewrites]]
 from = "/quebec-eastern-townships/sutton/explore/"
 to = "/quebec-eastern-townships/sutton/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/"
+to = "/summit-county/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/mountains/"
+to = "/summit-county/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/stay/"
+to = "/summit-county/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/breckenridge/"
+to = "/summit-county/breckenridge/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/breckenridge/weather/"
+to = "/summit-county/breckenridge/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/breckenridge/stay/"
+to = "/summit-county/breckenridge/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/breckenridge/eat/"
+to = "/summit-county/breckenridge/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/breckenridge/roads/"
+to = "/summit-county/breckenridge/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/breckenridge/transport/"
+to = "/summit-county/breckenridge/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/breckenridge/explore/"
+to = "/summit-county/breckenridge/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/keystone/"
+to = "/summit-county/keystone/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/keystone/weather/"
+to = "/summit-county/keystone/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/keystone/stay/"
+to = "/summit-county/keystone/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/keystone/eat/"
+to = "/summit-county/keystone/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/keystone/roads/"
+to = "/summit-county/keystone/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/keystone/transport/"
+to = "/summit-county/keystone/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/keystone/explore/"
+to = "/summit-county/keystone/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/copper-mountain/"
+to = "/summit-county/copper-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/copper-mountain/weather/"
+to = "/summit-county/copper-mountain/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/copper-mountain/stay/"
+to = "/summit-county/copper-mountain/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/copper-mountain/eat/"
+to = "/summit-county/copper-mountain/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/copper-mountain/roads/"
+to = "/summit-county/copper-mountain/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/copper-mountain/transport/"
+to = "/summit-county/copper-mountain/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/copper-mountain/explore/"
+to = "/summit-county/copper-mountain/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/georgetown/"
+to = "/summit-county/georgetown/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/georgetown/weather/"
+to = "/summit-county/georgetown/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/georgetown/stay/"
+to = "/summit-county/georgetown/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/georgetown/eat/"
+to = "/summit-county/georgetown/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/georgetown/roads/"
+to = "/summit-county/georgetown/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/georgetown/transport/"
+to = "/summit-county/georgetown/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/summit-county/georgetown/explore/"
+to = "/summit-county/georgetown/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/vail-valley/"
+to = "/vail-valley/index.html"
+
+[[services.production.rewrites]]
+from = "/vail-valley/mountains/"
+to = "/vail-valley/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/vail-valley/stay/"
+to = "/vail-valley/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/vail-valley/vail/"
+to = "/vail-valley/vail/index.html"
+
+[[services.production.rewrites]]
+from = "/vail-valley/vail/weather/"
+to = "/vail-valley/vail/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/vail-valley/vail/stay/"
+to = "/vail-valley/vail/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/vail-valley/vail/eat/"
+to = "/vail-valley/vail/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/vail-valley/vail/roads/"
+to = "/vail-valley/vail/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/vail-valley/vail/transport/"
+to = "/vail-valley/vail/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/vail-valley/vail/explore/"
+to = "/vail-valley/vail/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/vail-valley/avon/"
+to = "/vail-valley/avon/index.html"
+
+[[services.production.rewrites]]
+from = "/vail-valley/avon/weather/"
+to = "/vail-valley/avon/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/vail-valley/avon/stay/"
+to = "/vail-valley/avon/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/vail-valley/avon/eat/"
+to = "/vail-valley/avon/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/vail-valley/avon/roads/"
+to = "/vail-valley/avon/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/vail-valley/avon/transport/"
+to = "/vail-valley/avon/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/vail-valley/avon/explore/"
+to = "/vail-valley/avon/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/aspen-snowmass/"
+to = "/aspen-snowmass/index.html"
+
+[[services.production.rewrites]]
+from = "/aspen-snowmass/mountains/"
+to = "/aspen-snowmass/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/aspen-snowmass/stay/"
+to = "/aspen-snowmass/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/aspen-snowmass/aspen/"
+to = "/aspen-snowmass/aspen/index.html"
+
+[[services.production.rewrites]]
+from = "/aspen-snowmass/aspen/weather/"
+to = "/aspen-snowmass/aspen/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/aspen-snowmass/aspen/stay/"
+to = "/aspen-snowmass/aspen/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/aspen-snowmass/aspen/eat/"
+to = "/aspen-snowmass/aspen/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/aspen-snowmass/aspen/roads/"
+to = "/aspen-snowmass/aspen/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/aspen-snowmass/aspen/transport/"
+to = "/aspen-snowmass/aspen/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/aspen-snowmass/aspen/explore/"
+to = "/aspen-snowmass/aspen/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/aspen-snowmass/snowmass-village/"
+to = "/aspen-snowmass/snowmass-village/index.html"
+
+[[services.production.rewrites]]
+from = "/aspen-snowmass/snowmass-village/weather/"
+to = "/aspen-snowmass/snowmass-village/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/aspen-snowmass/snowmass-village/stay/"
+to = "/aspen-snowmass/snowmass-village/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/aspen-snowmass/snowmass-village/eat/"
+to = "/aspen-snowmass/snowmass-village/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/aspen-snowmass/snowmass-village/roads/"
+to = "/aspen-snowmass/snowmass-village/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/aspen-snowmass/snowmass-village/transport/"
+to = "/aspen-snowmass/snowmass-village/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/aspen-snowmass/snowmass-village/explore/"
+to = "/aspen-snowmass/snowmass-village/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/steamboat/"
+to = "/steamboat/index.html"
+
+[[services.production.rewrites]]
+from = "/steamboat/mountains/"
+to = "/steamboat/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/steamboat/stay/"
+to = "/steamboat/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/steamboat/steamboat-springs/"
+to = "/steamboat/steamboat-springs/index.html"
+
+[[services.production.rewrites]]
+from = "/steamboat/steamboat-springs/weather/"
+to = "/steamboat/steamboat-springs/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/steamboat/steamboat-springs/stay/"
+to = "/steamboat/steamboat-springs/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/steamboat/steamboat-springs/eat/"
+to = "/steamboat/steamboat-springs/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/steamboat/steamboat-springs/roads/"
+to = "/steamboat/steamboat-springs/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/steamboat/steamboat-springs/transport/"
+to = "/steamboat/steamboat-springs/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/steamboat/steamboat-springs/explore/"
+to = "/steamboat/steamboat-springs/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/winter-park/"
+to = "/winter-park/index.html"
+
+[[services.production.rewrites]]
+from = "/winter-park/mountains/"
+to = "/winter-park/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/winter-park/stay/"
+to = "/winter-park/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/winter-park/winter-park/"
+to = "/winter-park/winter-park/index.html"
+
+[[services.production.rewrites]]
+from = "/winter-park/winter-park/weather/"
+to = "/winter-park/winter-park/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/winter-park/winter-park/stay/"
+to = "/winter-park/winter-park/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/winter-park/winter-park/eat/"
+to = "/winter-park/winter-park/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/winter-park/winter-park/roads/"
+to = "/winter-park/winter-park/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/winter-park/winter-park/transport/"
+to = "/winter-park/winter-park/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/winter-park/winter-park/explore/"
+to = "/winter-park/winter-park/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/crested-butte/"
+to = "/crested-butte/index.html"
+
+[[services.production.rewrites]]
+from = "/crested-butte/mountains/"
+to = "/crested-butte/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/crested-butte/stay/"
+to = "/crested-butte/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/crested-butte/crested-butte-town/"
+to = "/crested-butte/crested-butte-town/index.html"
+
+[[services.production.rewrites]]
+from = "/crested-butte/crested-butte-town/weather/"
+to = "/crested-butte/crested-butte-town/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/crested-butte/crested-butte-town/stay/"
+to = "/crested-butte/crested-butte-town/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/crested-butte/crested-butte-town/eat/"
+to = "/crested-butte/crested-butte-town/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/crested-butte/crested-butte-town/roads/"
+to = "/crested-butte/crested-butte-town/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/crested-butte/crested-butte-town/transport/"
+to = "/crested-butte/crested-butte-town/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/crested-butte/crested-butte-town/explore/"
+to = "/crested-butte/crested-butte-town/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/telluride/"
+to = "/telluride/index.html"
+
+[[services.production.rewrites]]
+from = "/telluride/mountains/"
+to = "/telluride/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/telluride/stay/"
+to = "/telluride/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/telluride/telluride-town/"
+to = "/telluride/telluride-town/index.html"
+
+[[services.production.rewrites]]
+from = "/telluride/telluride-town/weather/"
+to = "/telluride/telluride-town/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/telluride/telluride-town/stay/"
+to = "/telluride/telluride-town/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/telluride/telluride-town/eat/"
+to = "/telluride/telluride-town/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/telluride/telluride-town/roads/"
+to = "/telluride/telluride-town/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/telluride/telluride-town/transport/"
+to = "/telluride/telluride-town/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/telluride/telluride-town/explore/"
+to = "/telluride/telluride-town/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/durango/"
+to = "/durango/index.html"
+
+[[services.production.rewrites]]
+from = "/durango/mountains/"
+to = "/durango/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/durango/stay/"
+to = "/durango/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/durango/durango-town/"
+to = "/durango/durango-town/index.html"
+
+[[services.production.rewrites]]
+from = "/durango/durango-town/weather/"
+to = "/durango/durango-town/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/durango/durango-town/stay/"
+to = "/durango/durango-town/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/durango/durango-town/eat/"
+to = "/durango/durango-town/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/durango/durango-town/roads/"
+to = "/durango/durango-town/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/durango/durango-town/transport/"
+to = "/durango/durango-town/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/durango/durango-town/explore/"
+to = "/durango/durango-town/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/boulder-front-range/"
+to = "/boulder-front-range/index.html"
+
+[[services.production.rewrites]]
+from = "/boulder-front-range/mountains/"
+to = "/boulder-front-range/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/boulder-front-range/stay/"
+to = "/boulder-front-range/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/boulder-front-range/nederland/"
+to = "/boulder-front-range/nederland/index.html"
+
+[[services.production.rewrites]]
+from = "/boulder-front-range/nederland/weather/"
+to = "/boulder-front-range/nederland/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/boulder-front-range/nederland/stay/"
+to = "/boulder-front-range/nederland/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/boulder-front-range/nederland/eat/"
+to = "/boulder-front-range/nederland/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/boulder-front-range/nederland/roads/"
+to = "/boulder-front-range/nederland/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/boulder-front-range/nederland/transport/"
+to = "/boulder-front-range/nederland/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/boulder-front-range/nederland/explore/"
+to = "/boulder-front-range/nederland/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/"
+to = "/cottonwood-canyons/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/mountains/"
+to = "/cottonwood-canyons/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/stay/"
+to = "/cottonwood-canyons/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/salt-lake-city/"
+to = "/cottonwood-canyons/salt-lake-city/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/salt-lake-city/weather/"
+to = "/cottonwood-canyons/salt-lake-city/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/salt-lake-city/stay/"
+to = "/cottonwood-canyons/salt-lake-city/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/salt-lake-city/eat/"
+to = "/cottonwood-canyons/salt-lake-city/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/salt-lake-city/roads/"
+to = "/cottonwood-canyons/salt-lake-city/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/salt-lake-city/transport/"
+to = "/cottonwood-canyons/salt-lake-city/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/salt-lake-city/explore/"
+to = "/cottonwood-canyons/salt-lake-city/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/sandy/"
+to = "/cottonwood-canyons/sandy/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/sandy/weather/"
+to = "/cottonwood-canyons/sandy/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/sandy/stay/"
+to = "/cottonwood-canyons/sandy/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/sandy/eat/"
+to = "/cottonwood-canyons/sandy/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/sandy/roads/"
+to = "/cottonwood-canyons/sandy/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/sandy/transport/"
+to = "/cottonwood-canyons/sandy/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/cottonwood-canyons/sandy/explore/"
+to = "/cottonwood-canyons/sandy/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/park-city/"
+to = "/park-city/index.html"
+
+[[services.production.rewrites]]
+from = "/park-city/mountains/"
+to = "/park-city/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/park-city/stay/"
+to = "/park-city/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/park-city/park-city-town/"
+to = "/park-city/park-city-town/index.html"
+
+[[services.production.rewrites]]
+from = "/park-city/park-city-town/weather/"
+to = "/park-city/park-city-town/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/park-city/park-city-town/stay/"
+to = "/park-city/park-city-town/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/park-city/park-city-town/eat/"
+to = "/park-city/park-city-town/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/park-city/park-city-town/roads/"
+to = "/park-city/park-city-town/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/park-city/park-city-town/transport/"
+to = "/park-city/park-city-town/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/park-city/park-city-town/explore/"
+to = "/park-city/park-city-town/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/"
+to = "/ogden-valley/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/mountains/"
+to = "/ogden-valley/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/stay/"
+to = "/ogden-valley/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/ogden/"
+to = "/ogden-valley/ogden/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/ogden/weather/"
+to = "/ogden-valley/ogden/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/ogden/stay/"
+to = "/ogden-valley/ogden/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/ogden/eat/"
+to = "/ogden-valley/ogden/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/ogden/roads/"
+to = "/ogden-valley/ogden/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/ogden/transport/"
+to = "/ogden-valley/ogden/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/ogden/explore/"
+to = "/ogden-valley/ogden/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/eden/"
+to = "/ogden-valley/eden/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/eden/weather/"
+to = "/ogden-valley/eden/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/eden/stay/"
+to = "/ogden-valley/eden/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/eden/eat/"
+to = "/ogden-valley/eden/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/eden/roads/"
+to = "/ogden-valley/eden/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/eden/transport/"
+to = "/ogden-valley/eden/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/ogden-valley/eden/explore/"
+to = "/ogden-valley/eden/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/"
+to = "/provo/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/mountains/"
+to = "/provo/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/stay/"
+to = "/provo/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/provo-town/"
+to = "/provo/provo-town/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/provo-town/weather/"
+to = "/provo/provo-town/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/provo-town/stay/"
+to = "/provo/provo-town/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/provo-town/eat/"
+to = "/provo/provo-town/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/provo-town/roads/"
+to = "/provo/provo-town/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/provo-town/transport/"
+to = "/provo/provo-town/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/provo-town/explore/"
+to = "/provo/provo-town/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/sundance-town/"
+to = "/provo/sundance-town/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/sundance-town/weather/"
+to = "/provo/sundance-town/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/sundance-town/stay/"
+to = "/provo/sundance-town/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/sundance-town/eat/"
+to = "/provo/sundance-town/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/sundance-town/roads/"
+to = "/provo/sundance-town/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/sundance-town/transport/"
+to = "/provo/sundance-town/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/provo/sundance-town/explore/"
+to = "/provo/sundance-town/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/cache-valley/"
+to = "/cache-valley/index.html"
+
+[[services.production.rewrites]]
+from = "/cache-valley/mountains/"
+to = "/cache-valley/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/cache-valley/stay/"
+to = "/cache-valley/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/cache-valley/logan/"
+to = "/cache-valley/logan/index.html"
+
+[[services.production.rewrites]]
+from = "/cache-valley/logan/weather/"
+to = "/cache-valley/logan/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/cache-valley/logan/stay/"
+to = "/cache-valley/logan/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/cache-valley/logan/eat/"
+to = "/cache-valley/logan/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/cache-valley/logan/roads/"
+to = "/cache-valley/logan/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/cache-valley/logan/transport/"
+to = "/cache-valley/logan/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/cache-valley/logan/explore/"
+to = "/cache-valley/logan/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/north-lake-tahoe/"
+to = "/north-lake-tahoe/index.html"
+
+[[services.production.rewrites]]
+from = "/north-lake-tahoe/mountains/"
+to = "/north-lake-tahoe/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/north-lake-tahoe/stay/"
+to = "/north-lake-tahoe/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/north-lake-tahoe/truckee/"
+to = "/north-lake-tahoe/truckee/index.html"
+
+[[services.production.rewrites]]
+from = "/north-lake-tahoe/truckee/weather/"
+to = "/north-lake-tahoe/truckee/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/north-lake-tahoe/truckee/stay/"
+to = "/north-lake-tahoe/truckee/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/north-lake-tahoe/truckee/eat/"
+to = "/north-lake-tahoe/truckee/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/north-lake-tahoe/truckee/roads/"
+to = "/north-lake-tahoe/truckee/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/north-lake-tahoe/truckee/transport/"
+to = "/north-lake-tahoe/truckee/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/north-lake-tahoe/truckee/explore/"
+to = "/north-lake-tahoe/truckee/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/south-lake-tahoe/"
+to = "/south-lake-tahoe/index.html"
+
+[[services.production.rewrites]]
+from = "/south-lake-tahoe/mountains/"
+to = "/south-lake-tahoe/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/south-lake-tahoe/stay/"
+to = "/south-lake-tahoe/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/south-lake-tahoe/south-lake-tahoe-town/"
+to = "/south-lake-tahoe/south-lake-tahoe-town/index.html"
+
+[[services.production.rewrites]]
+from = "/south-lake-tahoe/south-lake-tahoe-town/weather/"
+to = "/south-lake-tahoe/south-lake-tahoe-town/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/south-lake-tahoe/south-lake-tahoe-town/stay/"
+to = "/south-lake-tahoe/south-lake-tahoe-town/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/south-lake-tahoe/south-lake-tahoe-town/eat/"
+to = "/south-lake-tahoe/south-lake-tahoe-town/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/south-lake-tahoe/south-lake-tahoe-town/roads/"
+to = "/south-lake-tahoe/south-lake-tahoe-town/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/south-lake-tahoe/south-lake-tahoe-town/transport/"
+to = "/south-lake-tahoe/south-lake-tahoe-town/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/south-lake-tahoe/south-lake-tahoe-town/explore/"
+to = "/south-lake-tahoe/south-lake-tahoe-town/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/mammoth-lakes/"
+to = "/mammoth-lakes/index.html"
+
+[[services.production.rewrites]]
+from = "/mammoth-lakes/mountains/"
+to = "/mammoth-lakes/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/mammoth-lakes/stay/"
+to = "/mammoth-lakes/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/mammoth-lakes/mammoth-lakes-town/"
+to = "/mammoth-lakes/mammoth-lakes-town/index.html"
+
+[[services.production.rewrites]]
+from = "/mammoth-lakes/mammoth-lakes-town/weather/"
+to = "/mammoth-lakes/mammoth-lakes-town/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/mammoth-lakes/mammoth-lakes-town/stay/"
+to = "/mammoth-lakes/mammoth-lakes-town/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/mammoth-lakes/mammoth-lakes-town/eat/"
+to = "/mammoth-lakes/mammoth-lakes-town/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/mammoth-lakes/mammoth-lakes-town/roads/"
+to = "/mammoth-lakes/mammoth-lakes-town/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/mammoth-lakes/mammoth-lakes-town/transport/"
+to = "/mammoth-lakes/mammoth-lakes-town/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/mammoth-lakes/mammoth-lakes-town/explore/"
+to = "/mammoth-lakes/mammoth-lakes-town/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/big-bear/"
+to = "/big-bear/index.html"
+
+[[services.production.rewrites]]
+from = "/big-bear/mountains/"
+to = "/big-bear/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/big-bear/stay/"
+to = "/big-bear/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/big-bear/big-bear-lake/"
+to = "/big-bear/big-bear-lake/index.html"
+
+[[services.production.rewrites]]
+from = "/big-bear/big-bear-lake/weather/"
+to = "/big-bear/big-bear-lake/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/big-bear/big-bear-lake/stay/"
+to = "/big-bear/big-bear-lake/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/big-bear/big-bear-lake/eat/"
+to = "/big-bear/big-bear-lake/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/big-bear/big-bear-lake/roads/"
+to = "/big-bear/big-bear-lake/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/big-bear/big-bear-lake/transport/"
+to = "/big-bear/big-bear-lake/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/big-bear/big-bear-lake/explore/"
+to = "/big-bear/big-bear-lake/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/bear-valley/"
+to = "/bear-valley/index.html"
+
+[[services.production.rewrites]]
+from = "/bear-valley/mountains/"
+to = "/bear-valley/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/bear-valley/stay/"
+to = "/bear-valley/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/bear-valley/arnold/"
+to = "/bear-valley/arnold/index.html"
+
+[[services.production.rewrites]]
+from = "/bear-valley/arnold/weather/"
+to = "/bear-valley/arnold/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/bear-valley/arnold/stay/"
+to = "/bear-valley/arnold/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/bear-valley/arnold/eat/"
+to = "/bear-valley/arnold/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/bear-valley/arnold/roads/"
+to = "/bear-valley/arnold/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/bear-valley/arnold/transport/"
+to = "/bear-valley/arnold/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/bear-valley/arnold/explore/"
+to = "/bear-valley/arnold/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-shasta/"
+to = "/mt-shasta/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-shasta/mountains/"
+to = "/mt-shasta/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-shasta/stay/"
+to = "/mt-shasta/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-shasta/mount-shasta/"
+to = "/mt-shasta/mount-shasta/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-shasta/mount-shasta/weather/"
+to = "/mt-shasta/mount-shasta/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-shasta/mount-shasta/stay/"
+to = "/mt-shasta/mount-shasta/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-shasta/mount-shasta/eat/"
+to = "/mt-shasta/mount-shasta/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-shasta/mount-shasta/roads/"
+to = "/mt-shasta/mount-shasta/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-shasta/mount-shasta/transport/"
+to = "/mt-shasta/mount-shasta/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/mt-shasta/mount-shasta/explore/"
+to = "/mt-shasta/mount-shasta/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/killington-pico/"
+to = "/killington-pico/index.html"
+
+[[services.production.rewrites]]
+from = "/killington-pico/mountains/"
+to = "/killington-pico/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/killington-pico/stay/"
+to = "/killington-pico/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/killington-pico/killington/"
+to = "/killington-pico/killington/index.html"
+
+[[services.production.rewrites]]
+from = "/killington-pico/killington/weather/"
+to = "/killington-pico/killington/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/killington-pico/killington/stay/"
+to = "/killington-pico/killington/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/killington-pico/killington/eat/"
+to = "/killington-pico/killington/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/killington-pico/killington/roads/"
+to = "/killington-pico/killington/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/killington-pico/killington/transport/"
+to = "/killington-pico/killington/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/killington-pico/killington/explore/"
+to = "/killington-pico/killington/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/stowe-smugglers-notch/"
+to = "/stowe-smugglers-notch/index.html"
+
+[[services.production.rewrites]]
+from = "/stowe-smugglers-notch/mountains/"
+to = "/stowe-smugglers-notch/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/stowe-smugglers-notch/stay/"
+to = "/stowe-smugglers-notch/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/stowe-smugglers-notch/stowe/"
+to = "/stowe-smugglers-notch/stowe/index.html"
+
+[[services.production.rewrites]]
+from = "/stowe-smugglers-notch/stowe/weather/"
+to = "/stowe-smugglers-notch/stowe/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/stowe-smugglers-notch/stowe/stay/"
+to = "/stowe-smugglers-notch/stowe/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/stowe-smugglers-notch/stowe/eat/"
+to = "/stowe-smugglers-notch/stowe/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/stowe-smugglers-notch/stowe/roads/"
+to = "/stowe-smugglers-notch/stowe/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/stowe-smugglers-notch/stowe/transport/"
+to = "/stowe-smugglers-notch/stowe/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/stowe-smugglers-notch/stowe/explore/"
+to = "/stowe-smugglers-notch/stowe/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/stowe-smugglers-notch/jeffersonville/"
+to = "/stowe-smugglers-notch/jeffersonville/index.html"
+
+[[services.production.rewrites]]
+from = "/stowe-smugglers-notch/jeffersonville/weather/"
+to = "/stowe-smugglers-notch/jeffersonville/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/stowe-smugglers-notch/jeffersonville/stay/"
+to = "/stowe-smugglers-notch/jeffersonville/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/stowe-smugglers-notch/jeffersonville/eat/"
+to = "/stowe-smugglers-notch/jeffersonville/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/stowe-smugglers-notch/jeffersonville/roads/"
+to = "/stowe-smugglers-notch/jeffersonville/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/stowe-smugglers-notch/jeffersonville/transport/"
+to = "/stowe-smugglers-notch/jeffersonville/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/stowe-smugglers-notch/jeffersonville/explore/"
+to = "/stowe-smugglers-notch/jeffersonville/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/mad-river-valley/"
+to = "/mad-river-valley/index.html"
+
+[[services.production.rewrites]]
+from = "/mad-river-valley/mountains/"
+to = "/mad-river-valley/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/mad-river-valley/stay/"
+to = "/mad-river-valley/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/mad-river-valley/warren/"
+to = "/mad-river-valley/warren/index.html"
+
+[[services.production.rewrites]]
+from = "/mad-river-valley/warren/weather/"
+to = "/mad-river-valley/warren/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/mad-river-valley/warren/stay/"
+to = "/mad-river-valley/warren/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/mad-river-valley/warren/eat/"
+to = "/mad-river-valley/warren/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/mad-river-valley/warren/roads/"
+to = "/mad-river-valley/warren/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/mad-river-valley/warren/transport/"
+to = "/mad-river-valley/warren/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/mad-river-valley/warren/explore/"
+to = "/mad-river-valley/warren/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/mad-river-valley/waitsfield/"
+to = "/mad-river-valley/waitsfield/index.html"
+
+[[services.production.rewrites]]
+from = "/mad-river-valley/waitsfield/weather/"
+to = "/mad-river-valley/waitsfield/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/mad-river-valley/waitsfield/stay/"
+to = "/mad-river-valley/waitsfield/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/mad-river-valley/waitsfield/eat/"
+to = "/mad-river-valley/waitsfield/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/mad-river-valley/waitsfield/roads/"
+to = "/mad-river-valley/waitsfield/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/mad-river-valley/waitsfield/transport/"
+to = "/mad-river-valley/waitsfield/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/mad-river-valley/waitsfield/explore/"
+to = "/mad-river-valley/waitsfield/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/"
+to = "/southern-vermont/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/mountains/"
+to = "/southern-vermont/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/stay/"
+to = "/southern-vermont/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/stratton/"
+to = "/southern-vermont/stratton/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/stratton/weather/"
+to = "/southern-vermont/stratton/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/stratton/stay/"
+to = "/southern-vermont/stratton/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/stratton/eat/"
+to = "/southern-vermont/stratton/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/stratton/roads/"
+to = "/southern-vermont/stratton/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/stratton/transport/"
+to = "/southern-vermont/stratton/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/stratton/explore/"
+to = "/southern-vermont/stratton/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/west-dover/"
+to = "/southern-vermont/west-dover/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/west-dover/weather/"
+to = "/southern-vermont/west-dover/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/west-dover/stay/"
+to = "/southern-vermont/west-dover/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/west-dover/eat/"
+to = "/southern-vermont/west-dover/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/west-dover/roads/"
+to = "/southern-vermont/west-dover/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/west-dover/transport/"
+to = "/southern-vermont/west-dover/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/west-dover/explore/"
+to = "/southern-vermont/west-dover/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/peru-vt/"
+to = "/southern-vermont/peru-vt/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/peru-vt/weather/"
+to = "/southern-vermont/peru-vt/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/peru-vt/stay/"
+to = "/southern-vermont/peru-vt/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/peru-vt/eat/"
+to = "/southern-vermont/peru-vt/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/peru-vt/roads/"
+to = "/southern-vermont/peru-vt/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/peru-vt/transport/"
+to = "/southern-vermont/peru-vt/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/peru-vt/explore/"
+to = "/southern-vermont/peru-vt/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/manchester-vt/"
+to = "/southern-vermont/manchester-vt/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/manchester-vt/weather/"
+to = "/southern-vermont/manchester-vt/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/manchester-vt/stay/"
+to = "/southern-vermont/manchester-vt/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/manchester-vt/eat/"
+to = "/southern-vermont/manchester-vt/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/manchester-vt/roads/"
+to = "/southern-vermont/manchester-vt/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/manchester-vt/transport/"
+to = "/southern-vermont/manchester-vt/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/southern-vermont/manchester-vt/explore/"
+to = "/southern-vermont/manchester-vt/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/okemo/"
+to = "/okemo/index.html"
+
+[[services.production.rewrites]]
+from = "/okemo/mountains/"
+to = "/okemo/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/okemo/stay/"
+to = "/okemo/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/okemo/ludlow/"
+to = "/okemo/ludlow/index.html"
+
+[[services.production.rewrites]]
+from = "/okemo/ludlow/weather/"
+to = "/okemo/ludlow/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/okemo/ludlow/stay/"
+to = "/okemo/ludlow/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/okemo/ludlow/eat/"
+to = "/okemo/ludlow/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/okemo/ludlow/roads/"
+to = "/okemo/ludlow/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/okemo/ludlow/transport/"
+to = "/okemo/ludlow/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/okemo/ludlow/explore/"
+to = "/okemo/ludlow/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/jay-peak-nek/"
+to = "/jay-peak-nek/index.html"
+
+[[services.production.rewrites]]
+from = "/jay-peak-nek/mountains/"
+to = "/jay-peak-nek/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/jay-peak-nek/stay/"
+to = "/jay-peak-nek/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/jay-peak-nek/jay/"
+to = "/jay-peak-nek/jay/index.html"
+
+[[services.production.rewrites]]
+from = "/jay-peak-nek/jay/weather/"
+to = "/jay-peak-nek/jay/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/jay-peak-nek/jay/stay/"
+to = "/jay-peak-nek/jay/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/jay-peak-nek/jay/eat/"
+to = "/jay-peak-nek/jay/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/jay-peak-nek/jay/roads/"
+to = "/jay-peak-nek/jay/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/jay-peak-nek/jay/transport/"
+to = "/jay-peak-nek/jay/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/jay-peak-nek/jay/explore/"
+to = "/jay-peak-nek/jay/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/jay-peak-nek/east-burke/"
+to = "/jay-peak-nek/east-burke/index.html"
+
+[[services.production.rewrites]]
+from = "/jay-peak-nek/east-burke/weather/"
+to = "/jay-peak-nek/east-burke/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/jay-peak-nek/east-burke/stay/"
+to = "/jay-peak-nek/east-burke/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/jay-peak-nek/east-burke/eat/"
+to = "/jay-peak-nek/east-burke/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/jay-peak-nek/east-burke/roads/"
+to = "/jay-peak-nek/east-burke/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/jay-peak-nek/east-burke/transport/"
+to = "/jay-peak-nek/east-burke/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/jay-peak-nek/east-burke/explore/"
+to = "/jay-peak-nek/east-burke/explore/index.html"
 
 [[services.production.rewrites]]
 from = "/*"

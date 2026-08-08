@@ -120,15 +120,16 @@ function add(path, title, description, body) {
 add(
   "/",
   "feelzlike · weather for resort towns",
-  "Live weather, road conditions, and lift status for resort towns across Australia, Japan, New Zealand, and Canada. Towns first, mountains second.",
+  "Live weather, road conditions, and lift status for resort towns across Australia, Japan, New Zealand, Canada, and the United States. Towns first, mountains second.",
   `<main>
     <h1>feelzlike · weather for resort towns</h1>
-    <p>Live weather, road conditions, and lift status for resort towns across Australia, Japan, New Zealand, and Canada. Towns first, mountains second.</p>
+    <p>Live weather, road conditions, and lift status for resort towns across Australia, Japan, New Zealand, Canada, and the United States. Towns first, mountains second.</p>
     <nav aria-label="Browse by country">
       <a href="/au">Australia</a> ·
       <a href="/jp">Japan</a> ·
       <a href="/nz">New Zealand</a> ·
       <a href="/ca">Canada</a> ·
+      <a href="/us">United States</a> ·
       <a href="/near-you">Near you</a>
     </nav>
     <section>
@@ -148,7 +149,7 @@ const countryLine = (code, label) =>
 add(
   "/countries",
   "browse resort regions by country · feelzlike",
-  "Choose a country to explore resort town weather and conditions — Australia, Japan, New Zealand, and Canada.",
+  "Choose a country to explore resort town weather and conditions — Australia, Japan, New Zealand, Canada, and the United States.",
   `<main>
     <h1>browse resort regions by country</h1>
     <ul>
@@ -156,6 +157,7 @@ add(
       ${countryLine("JP", "Japan")}
       ${countryLine("NZ", "New Zealand")}
       ${countryLine("CA", "Canada")}
+      ${countryLine("US", "United States")}
     </ul>
   </main>`,
 );
@@ -225,12 +227,28 @@ add(
 );
 
 add(
+  "/us",
+  "United States \u00b7 resort town weather \u00b7 feelzlike",
+  "Live weather and conditions for resort towns across Colorado \u2014 Summit County, Vail Valley, Aspen Snowmass, Steamboat, Winter Park, Crested Butte, Telluride, Durango, and Boulder / Front Range.",
+  `<main>
+    <h1>United States \u00b7 resort town weather</h1>
+    ${BY_COUNTRY("US").map((r) => `
+    <section>
+      <h2><a href="/${r.slug}">${esc(r.name)}</a> \u00b7 ${esc(r.subtitle)}</h2>
+      <ul>
+        ${regionTownList(r)}
+      </ul>
+    </section>`).join("\n")}
+  </main>`,
+);
+
+add(
   "/near-you",
   "weather near you · local resort conditions · feelzlike",
   "See live weather and a radar for your current location, plus nearby resort regions.",
   `<main>
     <h1>weather near you</h1>
-    <p>Live weather for your current location, plus nearby resort regions across Australia, Japan, New Zealand, and Canada.</p>
+    <p>Live weather for your current location, plus nearby resort regions across Australia, Japan, New Zealand, Canada, and the United States.</p>
     <p>Enable location access to see conditions where you are.</p>
   </main>`,
 );

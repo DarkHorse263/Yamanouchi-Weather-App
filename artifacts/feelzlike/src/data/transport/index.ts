@@ -50,6 +50,87 @@ import { JASPER_TRANSPORT } from "./jasper";
 import { QUEBEC_LAURENTIANS_TRANSPORT } from "./quebec-laurentians";
 import { QUEBEC_CHARLEVOIX_TRANSPORT } from "./quebec-charlevoix";
 import { QUEBEC_EASTERN_TOWNSHIPS_TRANSPORT } from "./quebec-eastern-townships";
+import { SUMMIT_COUNTY_TRANSPORT } from "./summit-county";
+import { VAIL_VALLEY_TRANSPORT } from "./vail-valley";
+import { ASPEN_SNOWMASS_TRANSPORT } from "./aspen-snowmass";
+import { STEAMBOAT_TRANSPORT } from "./steamboat";
+import { WINTER_PARK_TRANSPORT } from "./winter-park";
+import { CRESTED_BUTTE_TRANSPORT } from "./crested-butte";
+import { TELLURIDE_TRANSPORT } from "./telluride";
+import { DURANGO_TRANSPORT } from "./durango";
+import { BOULDER_FRONT_RANGE_TRANSPORT } from "./boulder-front-range";
+import { COTTONWOOD_CANYONS_TRANSPORT } from "./cottonwood-canyons";
+import { PARK_CITY_TRANSPORT } from "./park-city";
+import { OGDEN_VALLEY_TRANSPORT } from "./ogden-valley";
+import { PROVO_TRANSPORT } from "./provo";
+import { CACHE_VALLEY_TRANSPORT } from "./cache-valley";
+import { NORTH_LAKE_TAHOE_TRANSPORT } from "./north-lake-tahoe";
+import { SOUTH_LAKE_TAHOE_TRANSPORT } from "./south-lake-tahoe";
+import { MAMMOTH_LAKES_TRANSPORT } from "./mammoth-lakes";
+import { BIG_BEAR_TRANSPORT } from "./big-bear";
+import { BEAR_VALLEY_TRANSPORT } from "./bear-valley";
+import { MT_SHASTA_TRANSPORT } from "./mt-shasta";
+import { KILLINGTON_PICO_TRANSPORT } from "./killington-pico";
+import { STOWE_SMUGGLERS_NOTCH_TRANSPORT } from "./stowe-smugglers-notch";
+import { MAD_RIVER_VALLEY_TRANSPORT } from "./mad-river-valley";
+import { SOUTHERN_VERMONT_TRANSPORT } from "./southern-vermont";
+import { OKEMO_TRANSPORT } from "./okemo";
+import { JAY_PEAK_NEK_TRANSPORT } from "./jay-peak-nek";
+import { JACKSON_HOLE_TRANSPORT } from "./jackson-hole";
+import { GRAND_TARGHEE_TRANSPORT } from "./grand-targhee";
+import { BIG_SKY_TRANSPORT } from "./big-sky";
+import { BOZEMAN_BRIDGER_BOWL_TRANSPORT } from "./bozeman-bridger-bowl";
+import { WHITEFISH_TRANSPORT } from "./whitefish";
+import { RED_LODGE_TRANSPORT } from "./red-lodge";
+import { TAOS_TRANSPORT } from "./taos";
+import { ANGEL_FIRE_TRANSPORT } from "./angel-fire";
+import { SANTA_FE_TRANSPORT } from "./santa-fe";
+import { ALBUQUERQUE_SANDIA_TRANSPORT } from "./albuquerque-sandia";
+import { HARBOR_SPRINGS_TRANSPORT } from "./harbor-springs";
+import { KEWEENAW_PENINSULA_TRANSPORT } from "./keweenaw-peninsula";
+import { POCONOS_TRANSPORT } from "./poconos";
+import { LAUREL_HIGHLANDS_TRANSPORT } from "./laurel-highlands";
+import { BERKSHIRES_TRANSPORT } from "./berkshires";
+import { CENTRAL_MASSACHUSETTS_TRANSPORT } from "./central-massachusetts";
+import { LUTSEN_NORTH_SHORE_TRANSPORT } from "./lutsen-north-shore";
+import { WAUSAU_TRANSPORT } from "./wausau";
+import { WISCONSIN_DELLS_TRANSPORT } from "./wisconsin-dells";
+import { SNOWSHOE_TRANSPORT } from "./snowshoe";
+import { CANAAN_VALLEY_TRANSPORT } from "./canaan-valley";
+import { HIGH_COUNTRY_TRANSPORT } from "./high-country";
+import { MAGGIE_VALLEY_TRANSPORT } from "./maggie-valley";
+import { BLUE_RIDGE_TRANSPORT } from "./blue-ridge";
+import { SHENANDOAH_VALLEY_TRANSPORT } from "./shenandoah-valley";
+import { LAKE_TAHOE_NEVADA_TRANSPORT } from "./lake-tahoe-nevada";
+import { FLAGSTAFF_TRANSPORT } from "./flagstaff";
+import { WHITE_MOUNTAINS_AZ_TRANSPORT } from "./white-mountains-az";
+import { BLACK_HILLS_TRANSPORT } from "./black-hills";
+import { GIRDWOOD_TRANSPORT } from "./girdwood";
+import { JUNEAU_TRANSPORT } from "./juneau";
+import { LITCHFIELD_HILLS_TRANSPORT } from "./litchfield-hills";
+import { VERNON_TRANSPORT } from "./vernon";
+import { MT_HOOD_TRANSPORT } from "./mt-hood";
+import { BEND_TRANSPORT } from "./bend";
+import { CRYSTAL_MOUNTAIN_TRANSPORT } from "./crystal-mountain";
+import { SNOQUALMIE_PASS_TRANSPORT } from "./snoqualmie-pass";
+import { STEVENS_PASS_TRANSPORT } from "./stevens-pass";
+import { MT_BAKER_TRANSPORT } from "./mt-baker";
+import { SUN_VALLEY_TRANSPORT } from "./sun-valley";
+import { SANDPOINT_TRANSPORT } from "./sandpoint";
+import { BOISE_TRANSPORT } from "./boise";
+import { DONNELLY_MCCALL_TRANSPORT } from "./donnelly-mccall";
+import { WHITE_MOUNTAINS_TRANSPORT } from "./white-mountains";
+import { FRANCONIA_NOTCH_TRANSPORT } from "./franconia-notch";
+import { WATERVILLE_VALLEY_TRANSPORT } from "./waterville-valley";
+import { LAKES_REGION_TRANSPORT } from "./lakes-region";
+import { CARRABASSETT_VALLEY_TRANSPORT } from "./carrabassett-valley";
+import { NEWRY_BETHEL_TRANSPORT } from "./newry-bethel";
+import { RANGELEY_TRANSPORT } from "./rangeley";
+import { LAKE_PLACID_TRANSPORT } from "./lake-placid";
+import { NORTH_CREEK_TRANSPORT } from "./north-creek";
+import { HUNTER_TRANSPORT } from "./hunter";
+import { WINDHAM_TRANSPORT } from "./windham";
+import { HIGHMOUNT_TRANSPORT } from "./highmount";
 
 const REGISTRY: Record<RegionId, TransportProviderList> = {
   "snowy-mountains": SNOWY_MOUNTAINS_TRANSPORT,
@@ -92,6 +173,108 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   "quebec-laurentians": QUEBEC_LAURENTIANS_TRANSPORT,
   "quebec-charlevoix": QUEBEC_CHARLEVOIX_TRANSPORT,
   "quebec-eastern-townships": QUEBEC_EASTERN_TOWNSHIPS_TRANSPORT,
+  // US (Colorado) · no operators curated to the AU/JP/NZ verification
+  // standard yet, so these are registered empty rather than filled with
+  // guessed timetables.
+  "summit-county": SUMMIT_COUNTY_TRANSPORT,
+  "vail-valley": VAIL_VALLEY_TRANSPORT,
+  "aspen-snowmass": ASPEN_SNOWMASS_TRANSPORT,
+  steamboat: STEAMBOAT_TRANSPORT,
+  "winter-park": WINTER_PARK_TRANSPORT,
+  "crested-butte": CRESTED_BUTTE_TRANSPORT,
+  telluride: TELLURIDE_TRANSPORT,
+  durango: DURANGO_TRANSPORT,
+  "boulder-front-range": BOULDER_FRONT_RANGE_TRANSPORT,
+  "cottonwood-canyons": COTTONWOOD_CANYONS_TRANSPORT,
+  "park-city": PARK_CITY_TRANSPORT,
+  "ogden-valley": OGDEN_VALLEY_TRANSPORT,
+  "provo": PROVO_TRANSPORT,
+  "cache-valley": CACHE_VALLEY_TRANSPORT,
+  "north-lake-tahoe": NORTH_LAKE_TAHOE_TRANSPORT,
+  "south-lake-tahoe": SOUTH_LAKE_TAHOE_TRANSPORT,
+  "mammoth-lakes": MAMMOTH_LAKES_TRANSPORT,
+  "big-bear": BIG_BEAR_TRANSPORT,
+  "bear-valley": BEAR_VALLEY_TRANSPORT,
+  "mt-shasta": MT_SHASTA_TRANSPORT,
+  // US (Vermont) · no operators curated to the AU/JP/NZ verification
+  // standard yet, so these are registered empty rather than filled with
+  // guessed timetables.
+  "killington-pico": KILLINGTON_PICO_TRANSPORT,
+  "stowe-smugglers-notch": STOWE_SMUGGLERS_NOTCH_TRANSPORT,
+  "mad-river-valley": MAD_RIVER_VALLEY_TRANSPORT,
+  "southern-vermont": SOUTHERN_VERMONT_TRANSPORT,
+  okemo: OKEMO_TRANSPORT,
+  "jay-peak-nek": JAY_PEAK_NEK_TRANSPORT,
+  // US (Wyoming) · no operators curated to the AU/JP/NZ verification
+  // standard yet, so these are registered empty rather than filled with
+  // guessed timetables.
+  "jackson-hole": JACKSON_HOLE_TRANSPORT,
+  "grand-targhee": GRAND_TARGHEE_TRANSPORT,
+
+  // US (Montana) · no operators curated to the AU/JP/NZ verification
+  // standard yet, so these are registered empty rather than filled with
+  // guessed timetables.
+  "big-sky": BIG_SKY_TRANSPORT,
+  "bozeman-bridger-bowl": BOZEMAN_BRIDGER_BOWL_TRANSPORT,
+  "whitefish": WHITEFISH_TRANSPORT,
+  "red-lodge": RED_LODGE_TRANSPORT,
+
+  // US (New Mexico) · no operators curated to the AU/JP/NZ verification
+  // standard yet, so these are registered empty rather than filled with
+  // guessed timetables.
+  "taos": TAOS_TRANSPORT,
+  "angel-fire": ANGEL_FIRE_TRANSPORT,
+  "santa-fe": SANTA_FE_TRANSPORT,
+  "albuquerque-sandia": ALBUQUERQUE_SANDIA_TRANSPORT,
+  "harbor-springs": HARBOR_SPRINGS_TRANSPORT,
+  "keweenaw-peninsula": KEWEENAW_PENINSULA_TRANSPORT,
+  "poconos": POCONOS_TRANSPORT,
+  "laurel-highlands": LAUREL_HIGHLANDS_TRANSPORT,
+  "berkshires": BERKSHIRES_TRANSPORT,
+  "central-massachusetts": CENTRAL_MASSACHUSETTS_TRANSPORT,
+  "lutsen-north-shore": LUTSEN_NORTH_SHORE_TRANSPORT,
+  wausau: WAUSAU_TRANSPORT,
+  "wisconsin-dells": WISCONSIN_DELLS_TRANSPORT,
+
+  "snowshoe": SNOWSHOE_TRANSPORT,
+  "canaan-valley": CANAAN_VALLEY_TRANSPORT,
+  "high-country": HIGH_COUNTRY_TRANSPORT,
+  "maggie-valley": MAGGIE_VALLEY_TRANSPORT,
+  "blue-ridge": BLUE_RIDGE_TRANSPORT,
+  "shenandoah-valley": SHENANDOAH_VALLEY_TRANSPORT,
+  "lake-tahoe-nevada": LAKE_TAHOE_NEVADA_TRANSPORT,
+  "flagstaff": FLAGSTAFF_TRANSPORT,
+  "white-mountains-az": WHITE_MOUNTAINS_AZ_TRANSPORT,
+  "black-hills": BLACK_HILLS_TRANSPORT,
+  "girdwood": GIRDWOOD_TRANSPORT,
+  "juneau": JUNEAU_TRANSPORT,
+  "litchfield-hills": LITCHFIELD_HILLS_TRANSPORT,
+  "vernon": VERNON_TRANSPORT,
+  // US (Oregon) · no operators curated to the AU/JP/NZ verification
+  // standard yet, so these are registered empty rather than filled with
+  // guessed timetables.
+  "mt-hood": MT_HOOD_TRANSPORT,
+  "bend": BEND_TRANSPORT,
+  "crystal-mountain": CRYSTAL_MOUNTAIN_TRANSPORT,
+  "snoqualmie-pass": SNOQUALMIE_PASS_TRANSPORT,
+  "stevens-pass": STEVENS_PASS_TRANSPORT,
+  "mt-baker": MT_BAKER_TRANSPORT,
+  "sun-valley": SUN_VALLEY_TRANSPORT,
+  "sandpoint": SANDPOINT_TRANSPORT,
+  "boise": BOISE_TRANSPORT,
+  "donnelly-mccall": DONNELLY_MCCALL_TRANSPORT,
+  "white-mountains": WHITE_MOUNTAINS_TRANSPORT,
+  "franconia-notch": FRANCONIA_NOTCH_TRANSPORT,
+  "waterville-valley": WATERVILLE_VALLEY_TRANSPORT,
+  "lakes-region": LAKES_REGION_TRANSPORT,
+  "carrabassett-valley": CARRABASSETT_VALLEY_TRANSPORT,
+  "newry-bethel": NEWRY_BETHEL_TRANSPORT,
+  "rangeley": RANGELEY_TRANSPORT,
+  "lake-placid": LAKE_PLACID_TRANSPORT,
+  "north-creek": NORTH_CREEK_TRANSPORT,
+  "hunter": HUNTER_TRANSPORT,
+  "windham": WINDHAM_TRANSPORT,
+  "highmount": HIGHMOUNT_TRANSPORT,
 };
 
 // Loader-time integrity check.

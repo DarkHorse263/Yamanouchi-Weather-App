@@ -627,6 +627,749 @@ export const REGIONS = [
       { id: "sutton",  name: "Sutton",  blurb: "Village under the Sutton range near the Vermont line · ~10 min to the lifts" },
     ],
   },
+
+  // ── United States (Colorado) ───────────────────────────────────────────
+  {
+    slug: "summit-county",
+    name: "Summit County",
+    subtitle: "Colorado · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Breckenridge",     blurb: "historic Victorian mining town's mountain · high alpine terrain above 12,000 ft" },
+      { name: "Keystone",         blurb: "three linked mountains · Colorado's most reliable night skiing" },
+      { name: "Copper Mountain",  blurb: "naturally divided terrain by ability · roughly midway between Breckenridge and Vail" },
+      { name: "Arapahoe Basin",   blurb: "high-alpine independent area · often the state's longest season" },
+      { name: "Loveland",         blurb: "no on-mountain lodging, first-tracks locals' favourite on the Continental Divide" },
+    ],
+    towns: [
+      { id: "breckenridge",   name: "Breckenridge",     blurb: "Historic Victorian mining town at the base of the mountain" },
+      { id: "keystone",       name: "Keystone / Dillon", blurb: "Purpose-built resort village and the neighbouring reservoir town of Dillon" },
+      { id: "copper-mountain", name: "Copper Mountain",  blurb: "Ski-in village at the base, roughly midway between Breckenridge and Vail" },
+      { id: "georgetown",     name: "Georgetown",        blurb: "Historic mining town off I-70 · closest base for Arapahoe Basin and Loveland" },
+    ],
+  },
+  {
+    slug: "vail-valley",
+    name: "Vail Valley",
+    subtitle: "Colorado · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Vail Mountain",  blurb: "the largest single ski mountain in Colorado · legendary Back Bowls" },
+      { name: "Beaver Creek",   blurb: "gated, upscale resort village · impeccably groomed cruisers" },
+    ],
+    towns: [
+      { id: "vail", name: "Vail", blurb: "Bavarian-styled village at the base of Vail Mountain" },
+      { id: "avon", name: "Avon", blurb: "Valley town at the base of Beaver Creek, a few minutes up the gated access road" },
+    ],
+  },
+  {
+    slug: "aspen-snowmass",
+    name: "Aspen Snowmass",
+    subtitle: "Colorado · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Snowmass",         blurb: "the biggest of the four mountains · full Ikon Pass unlimited access" },
+      { name: "Aspen Mountain",   blurb: "steep, expert-leaning terrain rising straight out of downtown Aspen · no green runs" },
+      { name: "Aspen Highlands",  blurb: "locals' favourite with Highland Bowl's hike-to extreme terrain" },
+      { name: "Buttermilk",       blurb: "gentle, family-friendly terrain · home of the Winter X Games superpipe" },
+    ],
+    towns: [
+      { id: "aspen",            name: "Aspen",            blurb: "Historic mining-town-turned-resort · base for Aspen Mountain, Highlands and Buttermilk" },
+      { id: "snowmass-village", name: "Snowmass Village", blurb: "Purpose-built ski-in village about 12 miles from downtown Aspen" },
+    ],
+  },
+  {
+    slug: "steamboat",
+    name: "Steamboat",
+    subtitle: "Colorado · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Steamboat Resort", blurb: "home of Champagne Powder® · six interconnected peaks in the Yampa Valley" },
+    ],
+    towns: [
+      { id: "steamboat-springs", name: "Steamboat Springs", blurb: "Ranching-town-turned-resort on the Yampa River · a few minutes' shuttle to the base" },
+    ],
+  },
+  {
+    slug: "winter-park",
+    name: "Winter Park",
+    subtitle: "Colorado · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Winter Park Resort", blurb: "Denver's closest big mountain over Berthoud Pass · Mary Jane side is bump-and-glade heavy" },
+    ],
+    towns: [
+      { id: "winter-park", name: "Winter Park", blurb: "Base town at the foot of the resort, about 67 miles from Denver via US-40" },
+    ],
+  },
+  {
+    slug: "crested-butte",
+    name: "Crested Butte",
+    subtitle: "Colorado · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Crested Butte Mountain Resort", blurb: "steep, remote and uncrowded · some of the most extreme lift-served terrain in the US" },
+    ],
+    towns: [
+      { id: "crested-butte-town", name: "Crested Butte", blurb: "Historic Victorian mining town about 3 miles from Mt. Crested Butte's resort base" },
+    ],
+  },
+  {
+    slug: "telluride",
+    name: "Telluride",
+    subtitle: "Colorado · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Telluride Ski Resort", blurb: "box-canyon setting in the San Juan Mountains · Epic Pass partner resort (up to 7 days)" },
+    ],
+    towns: [
+      { id: "telluride-town", name: "Telluride", blurb: "Historic mining town in a box canyon, connected to Mountain Village by free gondola" },
+    ],
+  },
+  {
+    slug: "durango",
+    name: "Durango",
+    subtitle: "Colorado · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Purgatory Resort", blurb: "independent, family-friendly San Juan Mountains resort about 25 miles north of Durango" },
+    ],
+    towns: [
+      { id: "durango-town", name: "Durango", blurb: "Historic railroad town on the Animas River, about 25 miles south of Purgatory" },
+    ],
+  },
+  {
+    slug: "boulder-front-range",
+    name: "Boulder / Front Range",
+    subtitle: "Colorado · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Eldora Mountain Resort", blurb: "the closest lift-served skiing to Denver and Boulder, about an hour up Boulder Canyon" },
+    ],
+    towns: [
+      { id: "nederland", name: "Nederland", blurb: "Small mountain town above Boulder Canyon, about 8 miles from the resort" },
+    ],
+  },
+  {
+    slug: "cottonwood-canyons",
+    name: "Cottonwood Canyons",
+    subtitle: "Utah · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Alta",                         blurb: "ski-only · no snowboarding allowed · classic Wasatch powder, deliberately old-school" },
+      { name: "Snowbird",                      blurb: "tram-served big-mountain terrain · Little Cottonwood Canyon's other side" },
+      { name: "Brighton",                      blurb: "night skiing pioneer · Big Cottonwood Canyon's laid-back, locals' hill" },
+      { name: "Solitude Mountain Resort",      blurb: "understated, uncrowded Big Cottonwood terrain · Ikon Pass partner" },
+    ],
+    towns: [
+      { id: "salt-lake-city", name: "Salt Lake City", blurb: "State capital and international airport gateway, about 30-40 minutes from the canyon mouths" },
+      { id: "sandy",          name: "Sandy",           blurb: "Suburb closest to the Little Cottonwood Canyon entrance" },
+    ],
+  },
+  {
+    slug: "park-city",
+    name: "Park City",
+    subtitle: "Utah · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Park City Mountain", blurb: "largest single ski area in the US · joined to Canyons Village · Park City's Epic Pass anchor" },
+      { name: "Deer Valley",        blurb: "ski-only · no snowboarding allowed · upscale, famously groomed and limited-ticket terrain" },
+    ],
+    towns: [
+      { id: "park-city-town", name: "Park City", blurb: "Former silver-mining town turned resort hub, about 35 minutes from Salt Lake City" },
+    ],
+  },
+  {
+    slug: "ogden-valley",
+    name: "Ogden Valley",
+    subtitle: "Utah · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Snowbasin",       blurb: "2002 Olympic downhill venue · grand, uncrowded terrain above Ogden Valley" },
+      { name: "Powder Mountain", blurb: "largest skiable acreage in Utah · famously low-key, capped daily tickets" },
+      { name: "Nordic Valley",   blurb: "small night-skiing hill · 2025-26 season dates unconfirmed at time of writing" },
+    ],
+    towns: [
+      { id: "ogden", name: "Ogden", blurb: "Historic railroad city at the mouth of Ogden Canyon, about 30 minutes from the resorts" },
+      { id: "eden",  name: "Eden",  blurb: "Small valley town closest to Powder Mountain and Nordic Valley" },
+    ],
+  },
+  {
+    slug: "provo",
+    name: "Provo",
+    subtitle: "Utah · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Sundance Mountain Resort", blurb: "independent resort founded by Robert Redford · no Ikon or Epic affiliation, Mt. Timpanogos's slopes" },
+    ],
+    towns: [
+      { id: "provo-town",   name: "Provo",    blurb: "Utah Valley's largest city, home to Brigham Young University" },
+      { id: "sundance-town", name: "Sundance", blurb: "Small resort community at the base of the mountain, up Provo Canyon" },
+    ],
+  },
+  {
+    slug: "cache-valley",
+    name: "Cache Valley",
+    subtitle: "Utah · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Beaver Mountain", blurb: "family-owned since 1939 · one of the oldest continuously operating resorts in the US" },
+      { name: "Cherry Peak",     blurb: "small community hill · 2025-26 opening date unconfirmed by resort at time of writing" },
+    ],
+    towns: [
+      { id: "logan", name: "Logan", blurb: "Cache Valley's main city, home to Utah State University, about 30 minutes from Beaver Mountain" },
+    ],
+  },
+  {
+    slug: "north-lake-tahoe",
+    name: "North Lake Tahoe",
+    subtitle: "California · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Palisades Tahoe",       blurb: "2960 acres across two connected mountains · host of the 1960 Winter Olympics" },
+      { name: "Northstar California",  blurb: "family-friendly cruisers · Vail-owned, Epic Pass" },
+      { name: "Sugar Bowl",             blurb: "Donner Summit classic · Mountain Collective Pass, not Epic or Ikon" },
+    ],
+    towns: [
+      { id: "truckee", name: "Truckee", blurb: "historic railroad town on I-80, the main gateway to North Lake Tahoe's resorts" },
+    ],
+  },
+  {
+    slug: "south-lake-tahoe",
+    name: "South Lake Tahoe",
+    subtitle: "California · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Heavenly",                  blurb: "straddles the CA/NV state line · 2025-26 closing date not confirmed by resort at time of writing" },
+      { name: "Kirkwood",                  blurb: "high-elevation, snow-reliable · 2025-26 closing date not confirmed by resort at time of writing" },
+      { name: "Sierra-at-Tahoe",           blurb: "\u26a0\ufe0f closed for the entire 2025-26 season per the resort's own page — shown here for completeness, not as an open resort" },
+      { name: "Homewood Mountain Resort",  blurb: "lakefront skiing on the west shore · reopened for 2025-26 after a full 2024-25 closure" },
+    ],
+    towns: [
+      { id: "south-lake-tahoe-town", name: "South Lake Tahoe", blurb: "the main lodging and services base for the south shore of Lake Tahoe" },
+    ],
+  },
+  {
+    slug: "mammoth-lakes",
+    name: "Mammoth Lakes",
+    subtitle: "California · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Mammoth Mountain", blurb: "Eastern Sierra giant · often open into June or July on a good season" },
+      { name: "June Mountain",    blurb: "quieter sister resort · same ownership and pass as Mammoth Mountain" },
+    ],
+    towns: [
+      { id: "mammoth-lakes-town", name: "Mammoth Lakes", blurb: "the Eastern Sierra base town serving Mammoth Mountain and June Mountain" },
+    ],
+  },
+  {
+    slug: "big-bear",
+    name: "Big Bear",
+    subtitle: "California · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Bear Mountain", blurb: "terrain-park focused · 2025-26 closing date reported inconsistently across sources (late Mar 2026)" },
+      { name: "Snow Summit",   blurb: "Big Bear's other mountain, shared lift ticket with Bear Mountain · 2025-26 closing date reported inconsistently across sources" },
+    ],
+    towns: [
+      { id: "big-bear-lake", name: "Big Bear Lake", blurb: "Southern California's closest major ski town, about two hours from Los Angeles" },
+    ],
+  },
+  {
+    slug: "bear-valley",
+    name: "Bear Valley",
+    subtitle: "California · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Bear Valley Mountain Resort", blurb: "Sierra Nevada resort on Highway 4 · 2025-26 opening date uncertain in source reporting" },
+    ],
+    towns: [
+      { id: "arnold", name: "Arnold", blurb: "Highway 4 gateway community closest to Bear Valley Mountain Resort" },
+    ],
+  },
+  {
+    slug: "mt-shasta",
+    name: "Mt. Shasta",
+    subtitle: "California · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Mt. Shasta Ski Park", blurb: "small volcano-slope resort in far Northern California · base/summit elevation unverified, closed early for 2025-26 due to lack of snow" },
+    ],
+    towns: [
+      { id: "mount-shasta", name: "Mount Shasta", blurb: "small town at the base of Mt. Shasta, the gateway to Mt. Shasta Ski Park" },
+    ],
+  },
+  {
+    slug: "killington-pico",
+    name: "Killington/Pico",
+    subtitle: "Vermont · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Killington", blurb: "Beast of the East · Ikon Pass · typically the earliest and latest resort to operate in the Northeast" },
+      { name: "Pico Mountain", blurb: "smaller, quieter neighbor to Killington · 2025-26 closing date not confirmed by resort" },
+    ],
+    towns: [
+      { id: "killington", name: "Killington", blurb: "base town for Killington and Pico Mountain, central Vermont" },
+    ],
+  },
+  {
+    slug: "stowe-smugglers-notch",
+    name: "Stowe/Smugglers' Notch",
+    subtitle: "Vermont · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Stowe Mountain Resort", blurb: "Epic Pass · on Vermont's tallest peak, Mt. Mansfield · base elevation reported 1,340–2,035 ft depending on source, treat as approximate" },
+      { name: "Smugglers' Notch", blurb: "⚠️ independently owned through the 2025-26 season · acquisition by new ownership announced for Feb 2026 with a joint pass alongside Burke planned from 2026-27, not yet in effect · 2025-26 closing date not confirmed by resort" },
+    ],
+    towns: [
+      { id: "stowe", name: "Stowe", blurb: "classic New England resort town, base for Stowe Mountain Resort" },
+      { id: "jeffersonville", name: "Jeffersonville", blurb: "base town for Smugglers' Notch, north side of Mt. Mansfield" },
+    ],
+  },
+  {
+    slug: "mad-river-valley",
+    name: "Mad River Valley",
+    subtitle: "Vermont · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Sugarbush", blurb: "Ikon Pass · twin-peak resort (Lincoln Peak & Mt. Ellen) · 2025-26 closing date not confirmed by resort" },
+      { name: "Mad River Glen", blurb: "⚠️ ski-only (no snowboarding) · independent, co-operatively owned by its skiers · a trial snowboard-access lift was floated for Feb 29 2026, with a possible permanent policy change starting 2026-27, not yet in effect this season" },
+    ],
+    towns: [
+      { id: "warren", name: "Warren", blurb: "village closest to Sugarbush's Lincoln Peak base" },
+      { id: "waitsfield", name: "Waitsfield", blurb: "Mad River Valley's commercial hub, close to both Sugarbush and Mad River Glen" },
+    ],
+  },
+  {
+    slug: "southern-vermont",
+    name: "Southern Vermont",
+    subtitle: "Vermont · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Stratton", blurb: "Ikon Pass · gondola-served summit, one of southern Vermont's largest resorts · confirmed 2025-26 season (opened Nov 26 2025, closed Apr 12 2026)" },
+      { name: "Mount Snow", blurb: "Epic Pass · Vail's Northeast group with Stowe and Okemo · 2025-26 closing date not confirmed by resort" },
+      { name: "Bromley Mountain", blurb: "Indy Pass (first season on Indy for 2025-26) · Vermont's highest base elevation · south-facing sun exposure · 2025-26 closing date not confirmed by resort" },
+      { name: "Magic Mountain", blurb: "⚠️ did not open for the 2025-26 season — lowest snowfall in 20+ years produced the resort's first non-opening in over 20 years under Miller family ownership" },
+    ],
+    towns: [
+      { id: "stratton", name: "Stratton", blurb: "base village for Stratton mountain" },
+      { id: "west-dover", name: "West Dover", blurb: "base town for Mount Snow" },
+      { id: "peru-vt", name: "Peru", blurb: "small village near Bromley Mountain and Manchester" },
+      { id: "manchester-vt", name: "Manchester", blurb: "southern Vermont's commercial hub, close to Bromley and Magic Mountain" },
+    ],
+  },
+  {
+    slug: "okemo",
+    name: "Okemo",
+    subtitle: "Vermont · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Okemo Mountain Resort", blurb: "Epic Pass · Vail's Northeast group with Stowe and Mount Snow · known for wide groomers and strong beginner terrain" },
+    ],
+    towns: [
+      { id: "ludlow", name: "Ludlow", blurb: "base town for Okemo Mountain Resort" },
+    ],
+  },
+  {
+    slug: "jay-peak-nek",
+    name: "Jay Peak/Northeast Kingdom",
+    subtitle: "Vermont · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Jay Peak", blurb: "independent · highest average annual snowfall in the East, close to the Canadian border" },
+      { name: "Burke Mountain", blurb: "independent · 2025-26 closing date not confirmed by resort · joint pass with Smugglers' Notch planned from 2026-27, not yet in effect" },
+    ],
+    towns: [
+      { id: "jay", name: "Jay", blurb: "small village closest to Jay Peak" },
+      { id: "east-burke", name: "East Burke", blurb: "base village for Burke Mountain, Northeast Kingdom" },
+    ],
+  },
+  {
+    slug: "jackson-hole",
+    name: "Jackson Hole",
+    subtitle: "Wyoming · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Jackson Hole Mountain Resort", blurb: "Ikon Pass (Full only) · legendary steep terrain, 4,139 ft vertical · reservation required for Ikon/Mountain Collective 2025-26" },
+      { name: "Snow King Mountain", blurb: "Indy Pass + Powder Alliance · in-town, night skiing · official 2025-26 closing Mar 22 2026 per resort" },
+    ],
+    towns: [
+      { id: "jackson", name: "Jackson", blurb: "Jackson Hole's town hub, close to Snow King Mountain" },
+      { id: "teton-village", name: "Teton Village", blurb: "base village for Jackson Hole Mountain Resort" },
+    ],
+  },
+  {
+    slug: "grand-targhee",
+    name: "Grand Targhee",
+    subtitle: "Wyoming · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Grand Targhee Resort", blurb: "Mountain Collective Pass (not Ikon/Epic) · deepest average annual snowfall on the west side of the Tetons" },
+    ],
+    towns: [
+      { id: "alta-wy", name: "Alta", blurb: "small Wyoming town at the base of Grand Targhee Resort" },
+    ],
+  },
+  {
+    slug: "big-sky",
+    name: "Big Sky",
+    subtitle: "Montana · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Big Sky Resort", blurb: "Ikon Pass (Full, no blackouts) · \"The Biggest Skiing in America\" · ~5,850 skiable acres, 4,350 ft vertical · official 2025-26 closing day Apr 26 2026 per resort" },
+    ],
+    towns: [
+      { id: "big-sky-town", name: "Big Sky", blurb: "base town for Big Sky Resort, midway between Bozeman and Yellowstone's West Entrance" },
+    ],
+  },
+  {
+    slug: "bozeman-bridger-bowl",
+    name: "Bozeman",
+    subtitle: "Montana · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Bridger Bowl", blurb: "independent nonprofit · ⚠️ closed early for the 2025-26 season on Mar 22 2026 due to low snowfall, expected back to its normal schedule for 2026-27" },
+    ],
+    towns: [
+      { id: "bozeman", name: "Bozeman", blurb: "university town and gateway to Bridger Bowl" },
+    ],
+  },
+  {
+    slug: "whitefish",
+    name: "Whitefish",
+    subtitle: "Montana · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Whitefish Mountain Resort", blurb: "independent · known locally as \"Big Mountain\" · official 2025-26 closing day Apr 5 2026 per resort" },
+    ],
+    towns: [
+      { id: "whitefish-town", name: "Whitefish", blurb: "lakeside base town for Whitefish Mountain Resort, near Glacier National Park" },
+    ],
+  },
+  {
+    slug: "red-lodge",
+    name: "Red Lodge",
+    subtitle: "Montana · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Red Lodge Mountain", blurb: "Indy Pass member · ⚠️ 2025-26 closing date not confirmed by a dated primary source · no dedicated avalanche-forecast coverage for this area" },
+    ],
+    towns: [
+      { id: "red-lodge-town", name: "Red Lodge", blurb: "historic base town for Red Lodge Mountain, gateway to the Beartooth Mountains" },
+    ],
+  },
+  {
+    slug: "taos",
+    name: "Taos",
+    subtitle: "New Mexico · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Taos Ski Valley", blurb: "Ikon Pass (Full, no blackouts) · independent ownership · sole access via NM-150, a narrow, steep, switchback road · ⚠️ closed early for 2025-26 on Mar 29 2026 due to unseasonably warm weather" },
+    ],
+    towns: [
+      { id: "taos-ski-valley-town", name: "Taos Ski Valley", blurb: "base village at the literal end of NM-150, directly at the foot of Taos Ski Valley" },
+    ],
+  },
+  {
+    slug: "angel-fire",
+    name: "Angel Fire",
+    subtitle: "New Mexico · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Angel Fire Resort", blurb: "Powder Alliance member · New Mexico's only night skiing · confirmed season Dec 12 2025 - Mar 22 2026" },
+    ],
+    towns: [
+      { id: "angel-fire", name: "Angel Fire", blurb: "Moreno Valley town near Wheeler Peak, gateway to Angel Fire Resort" },
+    ],
+  },
+  {
+    slug: "santa-fe",
+    name: "Santa Fe",
+    subtitle: "New Mexico · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Ski Santa Fe", blurb: "independent · one of the highest-base-elevation resorts in the US (10,350 ft base) · ⚠️ closed early for 2025-26 on Mar 22 2026 due to unseasonably warm, dry conditions" },
+    ],
+    towns: [
+      { id: "santa-fe", name: "Santa Fe", blurb: "New Mexico's state capital, roughly 30 minutes' drive from Ski Santa Fe" },
+    ],
+  },
+  {
+    slug: "albuquerque-sandia",
+    name: "Albuquerque",
+    subtitle: "New Mexico · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Sandia Peak Ski Area", blurb: "Mountain Capital Partners \"Power Pass\" · ⚠️ verify-status resort: exact 2025-26 closing date and total operating days unconfirmed by any dated source · no confirmed live webcam" },
+    ],
+    towns: [
+      { id: "albuquerque", name: "Albuquerque", blurb: "New Mexico's largest city, roughly 30-45 minutes' drive from Sandia Peak Ski Area" },
+    ],
+  },
+  {
+    slug: "mt-hood",
+    name: "Mt. Hood",
+    subtitle: "Oregon · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Mt. Hood Meadows", blurb: "Indy Pass (2 days, select blackouts) + Indy+ Pass (2 days, no blackouts) · not on Epic or Ikon" },
+      { name: "Timberline Lodge", blurb: "Mt. Hood Fusion Pass (bundled with Skibowl) · famous for near-year-round skiing via the Palmer Snowfield · ⚠️ vertical-drop figure disputed across sources (resort's own 4,540 ft claim vs. ~3,590-3,690 ft per independent aggregators)" },
+      { name: "Mt. Hood Skibowl", blurb: "Mt. Hood Fusion Pass + Powder Alliance in its own right · America's largest lit night-skiing operation" },
+    ],
+    towns: [
+      { id: "government-camp", name: "Government Camp", blurb: "small mountain village on US-26, gateway to Timberline Lodge and Mt. Hood Skibowl; Mt. Hood Meadows is a short drive further up OR-35" },
+    ],
+  },
+  {
+    slug: "bend",
+    name: "Bend",
+    subtitle: "Oregon · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Mt. Bachelor", blurb: "Ikon Pass destination · 360°-skiable volcanic cone, one of the largest lift-served ski areas in the US by skiable acreage · ⚠️ avalanche forecasting here is from the smaller, volunteer-run Central Oregon Avalanche Center (COAC), not NWAC" },
+    ],
+    towns: [
+      { id: "bend", name: "Bend", blurb: "Central Oregon's largest city, roughly 30 minutes' drive from Mt. Bachelor via Cascade Lakes Highway/OR-372" },
+    ],
+  },
+  {
+    slug: "crystal-mountain",
+    name: "Crystal Mountain",
+    subtitle: "Washington · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Crystal Mountain Resort", blurb: "Ikon Pass (Full tier, no blackouts) · independent (Alterra-owned) · the largest ski area in Washington by vertical drop (3,100 ft) · ⚠️ SR-410 flood damage delayed the 2025-26 opening to approx. Dec 20-24, 2025; no confirmed season-closing date found" },
+    ],
+    towns: [
+      { id: "enumclaw", name: "Enumclaw", blurb: "gateway town on SR-410, the primary access route to Crystal Mountain Resort" },
+    ],
+  },
+  {
+    slug: "snoqualmie-pass",
+    name: "Snoqualmie Pass",
+    subtitle: "Washington · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "The Summit at Snoqualmie", blurb: "Ikon Pass (Full tier, no blackouts) · independent (Boyne Resorts-owned) · four base areas under one ticket (Summit West/Central/East + Alpental) · ⚠️ 2025-26 season opened Dec 23, 2025 with only Summit West running; other sub-areas' dates unconfirmed" },
+    ],
+    towns: [
+      { id: "snoqualmie-pass-town", name: "Snoqualmie Pass", blurb: "small community directly on I-90 at the pass summit, adjacent to all four Summit at Snoqualmie base areas" },
+    ],
+  },
+  {
+    slug: "stevens-pass",
+    name: "Stevens Pass",
+    subtitle: "Washington · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Stevens Pass Ski Area", blurb: "Vail Resorts' Epic Local Pass (no blackouts) · sole highway access via US-2 · ⚠️ Dec 2025 US-2 flood closure delayed the 2025-26 opening to Dec 29, 2025; elevation figures are inconsistent across sources" },
+    ],
+    towns: [
+      { id: "skykomish", name: "Skykomish", blurb: "small town on US-2, roughly 20 minutes' drive from Stevens Pass Ski Area" },
+    ],
+  },
+  {
+    slug: "mt-baker",
+    name: "Mt. Baker",
+    subtitle: "Washington · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Mt. Baker Ski Area", blurb: "Independent · no major-pass affiliation · holds the world record for most snowfall in a season (1,140 in., 1998-99, verified by NOAA) · confirmed 2025-26 season Dec 21, 2025 - Apr 19, 2026 · ⚠️ no confirmed live webcam" },
+    ],
+    towns: [
+      { id: "glacier", name: "Glacier", blurb: "small town on SR-542 (Mt. Baker Highway), the sole access route to Mt. Baker Ski Area" },
+    ],
+  },
+  {
+    slug: "sun-valley",
+    name: "Sun Valley",
+    subtitle: "Idaho · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Bald Mountain", blurb: "Ikon Pass (Full tier, no blackouts) + Mountain Collective · the largest ski area in Idaho by vertical drop (3,400 ft) · confirmed 2025-26 season Dec 3, 2025 - Apr 12, 2026" },
+      { name: "Dollar Mountain", blurb: "Ikon Pass (Full tier, no blackouts) + Mountain Collective, shared with Bald Mountain · beginner-oriented · ⚠️ season-closing date not separately confirmed" },
+    ],
+    towns: [
+      { id: "ketchum", name: "Ketchum", blurb: "base town for the Sun Valley resort complex, adjacent to both Bald Mountain and Dollar Mountain via ID-75" },
+    ],
+  },
+  {
+    slug: "sandpoint",
+    name: "Sandpoint",
+    subtitle: "Idaho · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Schweitzer Mountain Resort", blurb: "Ikon Pass (destination tier) · independent · the 2nd largest ski area in Idaho by vertical drop (2,440 ft) · confirmed 2025-26 season Dec 3, 2025 - Apr 5, 2026, despite a \"historically low snow\" season · ⚠️ Idaho Panhandle region runs on Pacific time, not Mountain time like the rest of Idaho" },
+    ],
+    towns: [
+      { id: "sandpoint", name: "Sandpoint", blurb: "town on Lake Pend Oreille, roughly 30 minutes' drive from Schweitzer Mountain Resort" },
+    ],
+  },
+  {
+    slug: "boise",
+    name: "Boise",
+    subtitle: "Idaho · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Bogus Basin", blurb: "Nonprofit 501(c)(3), largest nonprofit ski area in the US · Powder Alliance/Freedom Pass · ⚠️ CLOSED EARLY for 2025-26 on Mar 22, 2026 due to unseasonably warm weather · ⚠️ no dedicated avalanche-forecast center covers this region" },
+    ],
+    towns: [
+      { id: "boise", name: "Boise", blurb: "Idaho's state capital, roughly 45 minutes' drive from Bogus Basin via Bogus Basin Road" },
+    ],
+  },
+  {
+    slug: "donnelly-mccall",
+    name: "Donnelly / McCall",
+    subtitle: "Idaho · USA",
+    country: "US",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Tamarack Resort", blurb: "Indy Pass (capped redemptions); joining Ikon as a Bonus Mountain from 2026-27 · confirmed 2025-26 season opened Dec 22, 2025 · ⚠️ ownership/financial status is a genuinely unresolved conflict in sources — not asserted as fact either way" },
+      { name: "Brundage Mountain", blurb: "Indy Pass member · independent · 70 trails, 6 lifts, no night skiing" },
+    ],
+    towns: [
+      { id: "donnelly", name: "Donnelly", blurb: "Valley County town on ID-55, roughly midway between Tamarack Resort and Brundage Mountain near McCall" },
+    ],
+  },
+  {
+    slug: "white-mountains", name: "White Mountains", subtitle: "New Hampshire · USA", country: "US", hasAlerts: false, hasRoads: true,
+    mountains: [{ name: "Cranmore Mountain", blurb: "Ikon Bonus Mountain (Full Pass only) · White Mountain Superpass" }, { name: "Wildcat Mountain", blurb: "Epic Pass · Vail Resorts-owned · near MWAC's Presidential Range backcountry forecast area · ⚠️ no confirmed live official webcam" }, { name: "Attitash Mountain Resort", blurb: "Epic Pass · Vail Resorts-owned · ⚠️ no distinct first-party snow-report or live webcam URL confirmed" }],
+    towns: [{ id: "north-conway", name: "North Conway", blurb: "Mount Washington Valley base town for Cranmore, Attitash and Wildcat" }],
+  },
+  {
+    slug: "franconia-notch", name: "Franconia Notch", subtitle: "New Hampshire · USA", country: "US", hasAlerts: false, hasRoads: true,
+    mountains: [{ name: "Cannon Mountain", blurb: "Indy Pass · United States' only state-owned ski area · White Mountain Superpass" }, { name: "Bretton Woods", blurb: "independent Omni-owned resort · anchors the White Mountain Superpass" }, { name: "Loon Mountain", blurb: "Boyne Resorts-owned · Ikon Pass (7 days Full / 5 days Base, Base blackouts)" }],
+    towns: [{ id: "franconia", name: "Franconia", blurb: "Franconia Notch gateway town for Cannon Mountain" }, { id: "bretton-woods-town", name: "Bretton Woods", blurb: "on-mountain base village for Bretton Woods" }],
+  },
+  { slug: "waterville-valley", name: "Waterville Valley", subtitle: "New Hampshire · USA", country: "US", hasAlerts: false, hasRoads: true, mountains: [{ name: "Waterville Valley Resort", blurb: "Indy Pass (no blackouts on Indy Base) · White Mountain Superpass · ⚠️ 2025-26 closing date not confirmed" }], towns: [{ id: "waterville-valley-town", name: "Waterville Valley", blurb: "mountain base village reached from I-93 via NH-49" }] },
+  { slug: "lakes-region", name: "Lakes Region", subtitle: "New Hampshire · USA", country: "US", hasAlerts: false, hasRoads: true, mountains: [{ name: "Gunstock Mountain Resort", blurb: "Belknap County-owned · no major-pass affiliation · historical 2022 governance turmoil, operations have continued normally since" }], towns: [{ id: "gilford", name: "Gilford", blurb: "Lake Winnipesaukee-side base town for Gunstock" }] },
+  { slug: "carrabassett-valley", name: "Carrabassett Valley", subtitle: "Maine · USA", country: "US", hasAlerts: false, hasRoads: true, mountains: [{ name: "Sugarloaf", blurb: "Boyne Resorts-owned · Ikon Full 7 unrestricted / Base 5 days with blackouts · Boyne New England Pass · ⚠️ webcam sub-URL unconfirmed" }], towns: [{ id: "carrabassett-valley-town", name: "Carrabassett Valley", blurb: "Sugarloaf base town" }] },
+  { slug: "newry-bethel", name: "Newry / Bethel", subtitle: "Maine · USA", country: "US", hasAlerts: false, hasRoads: true, mountains: [{ name: "Sunday River", blurb: "Boyne Resorts-owned · Ikon Full 7 unrestricted / Base 5 days with blackouts · Boyne New England Pass · ⚠️ webcam sub-URL unconfirmed" }], towns: [{ id: "newry", name: "Newry", blurb: "Sunday River eight-peak base town" }] },
+  { slug: "rangeley", name: "Rangeley", subtitle: "Maine · USA", country: "US", hasAlerts: false, hasRoads: true, mountains: [{ name: "Saddleback Mountain", blurb: "Indy Pass, no blackouts · reopened 2020 under Arctaris after five-year closure · SKI Magazine readers' #1 East 2025 · ⚠️ exact close unconfirmed" }], towns: [{ id: "rangeley", name: "Rangeley", blurb: "Rangeley Lakes gateway to Saddleback" }] },
+  { slug: "lake-placid", name: "Lake Placid", subtitle: "Adirondacks · New York · USA", country: "US", hasAlerts: false, hasRoads: true, mountains: [{ name: "Whiteface Mountain", blurb: "ORDA / shared SKI3 pass · new Mountain Collective 2025-26 · total vs lift-served vertical caveat · ⚠️ close/cam unconfirmed" }], towns: [{ id: "lake-placid", name: "Lake Placid", blurb: "Olympic Whiteface base town" }, { id: "wilmington", name: "Wilmington", blurb: "Whiteface's immediate base town" }] },
+  { slug: "north-creek", name: "North Creek", subtitle: "Adirondacks · New York · USA", country: "US", hasAlerts: false, hasRoads: true, mountains: [{ name: "Gore Mountain", blurb: "ORDA / shared SKI3 pass · official Base Area Webcam" }], towns: [{ id: "north-creek", name: "North Creek", blurb: "Gore Mountain base town" }] },
+  { slug: "hunter", name: "Hunter", subtitle: "Catskills · New York · USA", country: "US", hasAlerts: false, hasRoads: true, mountains: [{ name: "Hunter Mountain", blurb: "Vail Resorts · Epic Pass · ⚠️ projected close unconfirmed" }], towns: [{ id: "hunter", name: "Hunter", blurb: "Hunter Mountain base town" }] },
+  { slug: "windham", name: "Windham", subtitle: "Catskills · New York · USA", country: "US", hasAlerts: false, hasRoads: true, mountains: [{ name: "Windham Mountain Club", blurb: "private semi-private club · left Ikon 2025-26 (first ever) · reported $175k-$200k memberships · access / official 1,600 ft vertical (~1,400-1,450 ft community dispute) need verification" }], towns: [{ id: "windham", name: "Windham", blurb: "verify public mountain access before travel" }] },
+  { slug: "highmount", name: "Highmount", subtitle: "Catskills · New York · USA", country: "US", hasAlerts: false, hasRoads: true, mountains: [{ name: "Belleayre Mountain", blurb: "ORDA / shared SKI3 pass · official webcam · ⚠️ projected close unconfirmed" }], towns: [{ id: "highmount", name: "Highmount", blurb: "Belleayre Mountain base settlement" }] },
+  { slug: "harbor-springs", name: "Harbor Springs", subtitle: "Michigan · USA", country: "US", hasAlerts: false, hasRoads: true, mountains: [{ name: "Boyne Mountain", blurb: "Boyne-owned · Ikon Pass / Boyne Passport" }, { name: "The Highlands", blurb: "Boyne-owned · Ikon Pass · separate official live webcam URL unconfirmed" }, { name: "Nub's Nob", blurb: "independent · Indy Pass partner with unusual blackout dates" }], towns: [{ id: "harbor-springs-town", name: "Harbor Springs", blurb: "Little Traverse Bay base town for the northern Michigan resorts" }] },
+  { slug: "keweenaw-peninsula", name: "Keweenaw Peninsula", subtitle: "Michigan · USA", country: "US", hasAlerts: false, hasRoads: true, mountains: [{ name: "Mt. Bohemia", blurb: "independent · expert-focused · genuine zero grooming and zero snowmaking · no confirmed official live webcam" }], towns: [{ id: "mohawk", name: "Mohawk", blurb: "Keweenaw Peninsula base town for Mt. Bohemia; officially Eastern Time" }] },
+
+  {slug:"poconos",name:"Poconos",subtitle:"Pennsylvania · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Camelback Mountain Resort",blurb:"⚠️ Vail/Epic ownership confirmed, but Ikon + Peak to Peak Pocono claims require direct re-verification"},{name:"Blue Mountain Resort",blurb:"Ikon partner · Pennsylvania's vertical-drop leader"},{name:"Shawnee Mountain Ski Area",blurb:"independent · Indy Pass · no confirmed live webcam"}],towns:[{id:"tannersville",name:"Tannersville",blurb:"Poconos base town"},{id:"pocono-manor",name:"Pocono Manor",blurb:"Poconos lodging base"}]},
+  {slug:"laurel-highlands",name:"Laurel Highlands",subtitle:"Pennsylvania · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Seven Springs Mountain Resort",blurb:"Vail/Epic · Pennsylvania's largest by acreage"},{name:"Blue Knob All Seasons Resort",blurb:"independent · Indy Pass · Pennsylvania's highest-elevation ski mountain"}],towns:[{id:"seven-springs-town",name:"Seven Springs",blurb:"Laurel Highlands base area"}]},
+
+  {slug:"berkshires",name:"Berkshires",subtitle:"Massachusetts · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Jiminy Peak",blurb:"independent · Ikon Bonus Mountain"},{name:"Ski Butternut",blurb:"independent · Ikon Bonus Mountain"},{name:"Berkshire East",blurb:"Indy Pass · Bear Den Partners 2026 acquisition · longer regional drive · no confirmed live webcam"}],towns:[{id:"hancock",name:"Hancock",blurb:"Jiminy Peak base town"},{id:"great-barrington",name:"Great Barrington",blurb:"Southern Berkshires base town"}]},
+  {slug:"central-massachusetts",name:"Central Massachusetts",subtitle:"Massachusetts · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Wachusett Mountain",blurb:"independent · “Boston's Mountain” day-trip and night-skiing identity"}],towns:[{id:"princeton-ma",name:"Princeton",blurb:"Wachusett base town"}]},
+
+  {slug:"lutsen-north-shore",name:"Lutsen / North Shore",subtitle:"Minnesota · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Lutsen Mountains",blurb:"Indy Pass 2025-26 · ⚠️ confirmed Ikon move 2026-27 · Minnesota's largest/highest vertical, not Midwest highest"}],towns:[{id:"lutsen",name:"Lutsen",blurb:"North Shore base town; Highway 61 lake-effect closure risk"}]},
+
+  {slug:"wausau",name:"Wausau",subtitle:"Wisconsin · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Granite Peak Ski Area",blurb:"Midwest Family Ski Resorts, not Nash/Skyline · Indy 2025-26 · ⚠️ Ikon 2026-27"}],towns:[{id:"wausau-town",name:"Wausau",blurb:"Rib Mountain base city"}]},
+  {slug:"wisconsin-dells",name:"Wisconsin Dells",subtitle:"Wisconsin · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Cascade Mountain",blurb:"independent Walz family · no multi-resort pass (not Indy) · ⚠️ Flash webcam likely broken"}],towns:[{id:"portage",name:"Portage",blurb:"Dells-area base town"}]},
+  {slug:"snowshoe",name:"Snowshoe",subtitle:"West Virginia · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Snowshoe Mountain",blurb:"Ikon Pass / Alterra · Mid-Atlantic’s largest vertical (~1,500 ft) · snowmaking is central to operations · ⚠️ distinct first-party conditions URL not independently confirmed."}],towns:[{id:"snowshoe-town",name:"Snowshoe",blurb:"Remote Cheat Mountain base community for Snowshoe Mountain."}]},
+  {slug:"canaan-valley",name:"Canaan Valley",subtitle:"West Virginia · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Canaan Valley Resort",blurb:"West Virginia State Park system / state-owned resort · ⚠️ exact 2025–26 dates and current pass affiliation require direct confirmation."},{name:"Timberline Mountain",blurb:"Independent (not Indy, Epic or Ikon) · correctly grouped in Canaan Valley, not Snowshoe · core snowmaking operations."}],towns:[{id:"canaan-valley-town",name:"Davis / Canaan Valley",blurb:"Davis/Canaan Valley base area; Canaan Valley Resort and Timberline are only ~2–3 miles apart."}]},
+  {slug:"high-country",name:"High Country",subtitle:"North Carolina · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Sugar Mountain",blurb:"Independent (not Indy, Epic or Ikon) · heavy snowmaking reliance · ⚠️ dedicated live conditions URL not independently confirmed."},{name:"Beech Mountain Resort",blurb:"Independent · use beechmountainresort.com (ski operations), not beechmtn.com tourism site · heavy snowmaking reliance · ⚠️ webcam live status needs in-season confirmation."}],towns:[{id:"banner-elk-beech-mountain",name:"Banner Elk / Beech Mountain",blurb:"High Country base towns serving Sugar Mountain and Beech Mountain."}]},
+  {slug:"maggie-valley",name:"Maggie Valley",subtitle:"North Carolina · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Cataloochee Ski Area",blurb:"Indy Pass · independently owned · “First in Skiing in the South” · heavy snowmaking reliance."}],towns:[{id:"maggie-valley-town",name:"Maggie Valley",blurb:"Maggie Valley base town for Cataloochee Ski Area."}]},
+  {slug:"blue-ridge",name:"Blue Ridge",subtitle:"Virginia · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Wintergreen Resort",blurb:"Indy Pass (recent addition) · ownership history: James C. Justice II → EPR Properties → Pacific Group Resorts · heavy snowmaking reliance."}],towns:[{id:"wintergreen-town",name:"Wintergreen",blurb:"Blue Ridge base community for Wintergreen Resort."}]},
+  {slug:"shenandoah-valley",name:"Shenandoah Valley",subtitle:"Virginia · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Massanutten Resort",blurb:"Indy Pass · four-season resort · heavy snowmaking reliance · ⚠️ exact 2025–26 closing day and dedicated first-party webcam URL unconfirmed."}],towns:[{id:"mcgaheysville",name:"McGaheysville",blurb:"Shenandoah Valley base town for Massanutten Resort."}]},
+  {slug:"lake-tahoe-nevada",name:"Lake Tahoe Nevada",subtitle:"Nevada · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Mt. Rose Ski Tahoe",blurb:"Independent · Tahoe’s highest base elevation (8,260 ft) · ⚠️ 2025–26 close-date sources conflict; official snow-report figure preferred."},{name:"Diamond Peak",blurb:"Independent; operated by Incline Village General Improvement District · Sierra Avalanche Center has a dedicated Diamond Peak page · actual 2025–26 close was March 29 after warm weather."}],towns:[{id:"incline-village",name:"Incline Village",blurb:"Nevada-side Lake Tahoe base town; this region is distinct from existing California-side Tahoe coverage."}]},
+  {slug:"flagstaff",name:"Flagstaff",subtitle:"Arizona · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Arizona Snowbowl",blurb:"Independent proprietary Power Pass · high-elevation, snowmaking-reliant operation · ⚠️ Upper Bowl has genuine informal avalanche-terrain risk despite no formal state forecast center."}],towns:[{id:"flagstaff-town",name:"Flagstaff",blurb:"Flagstaff base city for Arizona Snowbowl. America/Phoenix remains MST (UTC−7) year-round; Arizona does not observe DST."}]},
+  {slug:"white-mountains-az",name:"White Mountains",subtitle:"Arizona · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Sunrise Park Resort",blurb:"White Mountain Apache Tribe-owned · Indy Pass · ⚠️ summit reports conflict (~10,924 vs 11,000 ft) and require direct resort confirmation; no confirmed webcam URL."}],towns:[{id:"greer-az",name:"Greer",blurb:"Greer base town for Sunrise Park. America/Phoenix remains MST (UTC−7) year-round; Arizona does not observe DST."}]},
+  {slug:"black-hills",name:"Black Hills",subtitle:"South Dakota · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Terry Peak",blurb:"Indy Pass · summit 7,100 ft / ~1,100-ft vertical · ⚠️ standalone conditions and confirmed live webcam URLs remain unresolved"}],towns:[{id:"lead-deadwood",name:"Lead / Deadwood",blurb:"Black Hills base towns are in Mountain Time (America/Denver), not Central Time."}]},
+  {slug:"girdwood",name:"Girdwood",subtitle:"Alaska · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Alyeska Resort",blurb:"Ikon Pass since 2023 · Pomeroy Lodging-owned · defining aerial tram · ⚠️ elevation/vertical figures vary depending on whether tram-served terrain is included."}],towns:[{id:"girdwood-town",name:"Girdwood",blurb:"Girdwood base community for Alyeska, reached from Anchorage via the Seward Highway; monitor avalanche-related closures."}]},
+  {slug:"juneau",name:"Juneau",subtitle:"Alaska · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Eaglecrest Ski Area",blurb:"City and Borough of Juneau-owned · ⚠️ material operational risk: roughly $1M/year city subsidy, gondola cancelled May 2026, staff reductions and future beyond 2026–27 uncertain · no confirmed webcam feed."}],towns:[{id:"juneau-town",name:"Juneau",blurb:"Juneau has no road connection to Alaska’s contiguous highway system; Eaglecrest access is by local road after arrival by ferry or plane."}]},
+  {slug:"litchfield-hills",name:"Litchfield Hills",subtitle:"Connecticut · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Mohawk Mountain",blurb:"Indy Pass · 100% snowmaking · historically credited as the birthplace of modern snowmaking · ⚠️ 2025–26 closing date is not primary-source confirmed."}],towns:[{id:"cornwall-ct",name:"Cornwall",blurb:"Litchfield Hills base town for Mohawk Mountain."}]},
+  {slug:"vernon",name:"Vernon",subtitle:"New Jersey · USA",country:"US",hasAlerts:false,hasRoads:true,mountains:[{name:"Mountain Creek Resort",blurb:"Independent Snow Partners ownership (acquired from Koffman family in 2018; formerly Snow Operating) · not Vail-owned and not Epic/Ikon/Indy · 100% snowmaking · limited confirmed webcam coverage."}],towns:[{id:"vernon-nj",name:"Vernon",blurb:"Vernon base town for Mountain Creek Resort."}]},
+
 ];
 
 /** Region sub-sections that actually render for this region (see gating notes above). */

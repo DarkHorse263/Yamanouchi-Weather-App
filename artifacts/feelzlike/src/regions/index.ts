@@ -34,6 +34,87 @@ import { jasperRegion } from "./jasper";
 import { quebecLaurentiansRegion } from "./quebec-laurentians";
 import { quebecCharlevoixRegion } from "./quebec-charlevoix";
 import { quebecEasternTownshipsRegion } from "./quebec-eastern-townships";
+import { summitCountyRegion } from "./summit-county";
+import { vailValleyRegion } from "./vail-valley";
+import { aspenSnowmassRegion } from "./aspen-snowmass";
+import { steamboatRegion } from "./steamboat";
+import { winterParkRegion } from "./winter-park";
+import { crestedButteRegion } from "./crested-butte";
+import { tellurideRegion } from "./telluride";
+import { durangoRegion } from "./durango";
+import { boulderFrontRangeRegion } from "./boulder-front-range";
+import { cottonwoodCanyonsRegion } from "./cottonwood-canyons";
+import { parkCityRegion } from "./park-city";
+import { ogdenValleyRegion } from "./ogden-valley";
+import { provoRegion } from "./provo";
+import { cacheValleyRegion } from "./cache-valley";
+import { northLakeTahoeRegion } from "./north-lake-tahoe";
+import { southLakeTahoeRegion } from "./south-lake-tahoe";
+import { mammothLakesRegion } from "./mammoth-lakes";
+import { bigBearRegion } from "./big-bear";
+import { bearValleyRegion } from "./bear-valley";
+import { mtShastaRegion } from "./mt-shasta";
+import { killingtonPicoRegion } from "./killington-pico";
+import { stoweSmugglersNotchRegion } from "./stowe-smugglers-notch";
+import { madRiverValleyRegion } from "./mad-river-valley";
+import { southernVermontRegion } from "./southern-vermont";
+import { okemoRegion } from "./okemo";
+import { jayPeakNekRegion } from "./jay-peak-nek";
+import { jacksonHoleRegion } from "./jackson-hole";
+import { grandTargheeRegion } from "./grand-targhee";
+import { bigSkyRegion } from "./big-sky";
+import { bozemanBridgerBowlRegion } from "./bozeman-bridger-bowl";
+import { whitefishRegion } from "./whitefish";
+import { redLodgeRegion } from "./red-lodge";
+import { taosRegion } from "./taos";
+import { angelFireRegion } from "./angel-fire";
+import { santaFeRegion } from "./santa-fe";
+import { albuquerqueSandiaRegion } from "./albuquerque-sandia";
+import { harborSpringsRegion } from "./harbor-springs";
+import { keweenawPeninsulaRegion } from "./keweenaw-peninsula";
+import { poconosRegion } from "./poconos";
+import { laurelHighlandsRegion } from "./laurel-highlands";
+import { berkshiresRegion } from "./berkshires";
+import { centralMassachusettsRegion } from "./central-massachusetts";
+import { lutsenNorthShoreRegion } from "./lutsen-north-shore";
+import { wausauRegion } from "./wausau";
+import { wisconsinDellsRegion } from "./wisconsin-dells";
+import { snowshoeRegion } from "./snowshoe";
+import { canaanValleyRegion } from "./canaan-valley";
+import { highCountryRegion } from "./high-country";
+import { maggieValleyRegion } from "./maggie-valley";
+import { blueRidgeRegion } from "./blue-ridge";
+import { shenandoahValleyRegion } from "./shenandoah-valley";
+import { lakeTahoeNevadaRegion } from "./lake-tahoe-nevada";
+import { flagstaffRegion } from "./flagstaff";
+import { whiteMountainsAzRegion } from "./white-mountains-az";
+import { blackHillsRegion } from "./black-hills";
+import { girdwoodRegion } from "./girdwood";
+import { juneauRegion } from "./juneau";
+import { litchfieldHillsRegion } from "./litchfield-hills";
+import { vernonRegion } from "./vernon";
+import { mtHoodRegion } from "./mt-hood";
+import { bendRegion } from "./bend";
+import { crystalMountainRegion } from "./crystal-mountain";
+import { snoqualmiePassRegion } from "./snoqualmie-pass";
+import { stevensPassRegion } from "./stevens-pass";
+import { mtBakerRegion } from "./mt-baker";
+import { sunValleyRegion } from "./sun-valley";
+import { sandpointRegion } from "./sandpoint";
+import { boiseRegion } from "./boise";
+import { donnellyMccallRegion } from "./donnelly-mccall";
+import { whiteMountainsRegion } from "./white-mountains";
+import { franconiaNotchRegion } from "./franconia-notch";
+import { watervilleValleyRegion } from "./waterville-valley";
+import { lakesRegionRegion } from "./lakes-region";
+import { carrabassettValleyRegion } from "./carrabassett-valley";
+import { newryBethelRegion } from "./newry-bethel";
+import { rangeleyRegion } from "./rangeley";
+import { lakePlacidRegion } from "./lake-placid";
+import { northCreekRegion } from "./north-creek";
+import { hunterRegion } from "./hunter";
+import { windhamRegion } from "./windham";
+import { highmountRegion } from "./highmount";
 
 // Active region registry · AU: Snowy Mountains + Victoria's High Country
 // + Tasmania (Ben Lomond). JP: Yamanouchi (Shiga Kogen + Kita-Shiga),
@@ -51,6 +132,28 @@ import { quebecEasternTownshipsRegion } from "./quebec-eastern-townships";
 // (Nakiska), Jasper (Marmot Basin). CA (Quebec): Laurentians
 // (Tremblant), Charlevoix (Mont-Sainte-Anne + Le Massif), Eastern
 // Townships (Ski Bromont + Mont Sutton).
+// US (Colorado): Summit County (Breckenridge, Keystone, Copper Mountain,
+// Arapahoe Basin, Loveland), Vail Valley (Vail Mountain, Beaver Creek),
+// Aspen Snowmass (Snowmass, Aspen Mountain, Aspen Highlands, Buttermilk),
+// Steamboat (Steamboat Resort), Winter Park (Winter Park Resort),
+// Crested Butte (Crested Butte Mountain Resort), Telluride (Telluride Ski
+// Resort), Durango (Purgatory Resort), Boulder/Front Range (Eldora
+// Mountain Resort). US (Utah): Cottonwood Canyons (Alta, Snowbird,
+// Brighton, Solitude), Park City (Park City Mountain, Deer Valley), Ogden
+// Valley (Snowbasin, Powder Mountain, Nordic Valley), Provo (Sundance
+// Mountain Resort), Cache Valley (Beaver Mountain, Cherry Peak). US
+// (California): North Lake Tahoe (Palisades Tahoe, Northstar California,
+// Sugar Bowl), South Lake Tahoe (Heavenly, Kirkwood, Sierra-at-Tahoe,
+// Homewood Mountain Resort), Mammoth Lakes (Mammoth Mountain, June
+// Mountain), Big Bear (Bear Mountain, Snow Summit), Bear Valley (Bear
+// Valley Mountain Resort), Mt. Shasta (Mt. Shasta Ski Park). First
+// Pacific-timezone (America/Los_Angeles) US regions on this branch. US
+// (Vermont): Killington/Pico (Killington, Pico Mountain), Stowe/
+// Smugglers' Notch (Stowe Mountain Resort, Smugglers' Notch), Mad River
+// Valley (Sugarbush, Mad River Glen), Southern Vermont (Stratton, Mount
+// Snow, Bromley Mountain, Magic Mountain), Okemo (Okemo Mountain
+// Resort), Jay Peak/Northeast Kingdom (Jay Peak, Burke Mountain). First
+// Eastern-timezone (America/New_York) US regions on this branch.
 export const REGIONS: RegionConfig[] = [
   snowyMountainsRegion,
   victoriasHighCountryRegion,
@@ -87,6 +190,87 @@ export const REGIONS: RegionConfig[] = [
   quebecLaurentiansRegion,
   quebecCharlevoixRegion,
   quebecEasternTownshipsRegion,
+  summitCountyRegion,
+  vailValleyRegion,
+  aspenSnowmassRegion,
+  steamboatRegion,
+  winterParkRegion,
+  crestedButteRegion,
+  tellurideRegion,
+  durangoRegion,
+  boulderFrontRangeRegion,
+  cottonwoodCanyonsRegion,
+  parkCityRegion,
+  ogdenValleyRegion,
+  provoRegion,
+  cacheValleyRegion,
+  northLakeTahoeRegion,
+  southLakeTahoeRegion,
+  mammothLakesRegion,
+  bigBearRegion,
+  bearValleyRegion,
+  mtShastaRegion,
+  killingtonPicoRegion,
+  stoweSmugglersNotchRegion,
+  madRiverValleyRegion,
+  southernVermontRegion,
+  okemoRegion,
+  jayPeakNekRegion,
+  jacksonHoleRegion,
+  grandTargheeRegion,
+  bigSkyRegion,
+  bozemanBridgerBowlRegion,
+  whitefishRegion,
+  redLodgeRegion,
+  taosRegion,
+  angelFireRegion,
+  santaFeRegion,
+  albuquerqueSandiaRegion,
+  harborSpringsRegion,
+  keweenawPeninsulaRegion,
+  poconosRegion,
+  laurelHighlandsRegion,
+  berkshiresRegion,
+  centralMassachusettsRegion,
+  lutsenNorthShoreRegion,
+  wausauRegion,
+  wisconsinDellsRegion,
+  snowshoeRegion,
+  canaanValleyRegion,
+  highCountryRegion,
+  maggieValleyRegion,
+  blueRidgeRegion,
+  shenandoahValleyRegion,
+  lakeTahoeNevadaRegion,
+  flagstaffRegion,
+  whiteMountainsAzRegion,
+  blackHillsRegion,
+  girdwoodRegion,
+  juneauRegion,
+  litchfieldHillsRegion,
+  vernonRegion,
+  mtHoodRegion,
+  bendRegion,
+  crystalMountainRegion,
+  snoqualmiePassRegion,
+  stevensPassRegion,
+  mtBakerRegion,
+  sunValleyRegion,
+  sandpointRegion,
+  boiseRegion,
+  donnellyMccallRegion,
+  whiteMountainsRegion,
+  franconiaNotchRegion,
+  watervilleValleyRegion,
+  lakesRegionRegion,
+  carrabassettValleyRegion,
+  newryBethelRegion,
+  rangeleyRegion,
+  lakePlacidRegion,
+  northCreekRegion,
+  hunterRegion,
+  windhamRegion,
+  highmountRegion,
 ];
 
 export const REGION_BY_ID: Record<string, RegionConfig> = Object.fromEntries(
@@ -101,7 +285,7 @@ export function getRegion(id: string): RegionConfig | undefined {
 // (`/au`, `/jp`) and lets the landing decide which regions belong under
 // which flag without re-deriving from `subtitle` strings. Keep in sync
 // when a new region is added.
-export type CountryCode = "AU" | "JP" | "NZ" | "CA";
+export type CountryCode = "AU" | "JP" | "NZ" | "CA" | "US";
 export const REGION_COUNTRY: Record<string, CountryCode> = {
   "snowy-mountains": "AU",
   "victorias-high-country": "AU",
@@ -138,12 +322,94 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "quebec-laurentians": "CA",
   "quebec-charlevoix": "CA",
   "quebec-eastern-townships": "CA",
+  "summit-county": "US",
+  "vail-valley": "US",
+  "aspen-snowmass": "US",
+  "steamboat": "US",
+  "winter-park": "US",
+  "crested-butte": "US",
+  "telluride": "US",
+  "durango": "US",
+  "boulder-front-range": "US",
+  "cottonwood-canyons": "US",
+  "park-city": "US",
+  "ogden-valley": "US",
+  "provo": "US",
+  "cache-valley": "US",
+  "north-lake-tahoe": "US",
+  "south-lake-tahoe": "US",
+  "mammoth-lakes": "US",
+  "big-bear": "US",
+  "bear-valley": "US",
+  "mt-shasta": "US",
+  "killington-pico": "US",
+  "stowe-smugglers-notch": "US",
+  "mad-river-valley": "US",
+  "southern-vermont": "US",
+  "okemo": "US",
+  "jay-peak-nek": "US",
+  "jackson-hole": "US",
+  "grand-targhee": "US",
+  "big-sky": "US",
+  "bozeman-bridger-bowl": "US",
+  "whitefish": "US",
+  "red-lodge": "US",
+  "taos": "US",
+  "angel-fire": "US",
+  "santa-fe": "US",
+  "albuquerque-sandia": "US",
+  "harbor-springs": "US",
+  "keweenaw-peninsula": "US",
+  "poconos": "US",
+  "laurel-highlands": "US",
+  "berkshires": "US",
+  "central-massachusetts": "US",
+  "lutsen-north-shore": "US",
+  "wausau": "US",
+  "wisconsin-dells": "US",
+  "snowshoe": "US",
+  "canaan-valley": "US",
+  "high-country": "US",
+  "maggie-valley": "US",
+  "blue-ridge": "US",
+  "shenandoah-valley": "US",
+  "lake-tahoe-nevada": "US",
+  "flagstaff": "US",
+  "white-mountains-az": "US",
+  "black-hills": "US",
+  "girdwood": "US",
+  "juneau": "US",
+  "litchfield-hills": "US",
+  "vernon": "US",
+  "mt-hood": "US",
+  "bend": "US",
+  "crystal-mountain": "US",
+  "snoqualmie-pass": "US",
+  "stevens-pass": "US",
+  "mt-baker": "US",
+  "sun-valley": "US",
+  "sandpoint": "US",
+  "boise": "US",
+  "donnelly-mccall": "US",
+  "white-mountains": "US",
+  "franconia-notch": "US",
+  "waterville-valley": "US",
+  "lakes-region": "US",
+  "carrabassett-valley": "US",
+  "newry-bethel": "US",
+  "rangeley": "US",
+  "lake-placid": "US",
+  "north-creek": "US",
+  "hunter": "US",
+  "windham": "US",
+  "highmount": "US",
 };
 export const COUNTRY_META: Record<CountryCode, { name: string; flag: string }> = {
   AU: { name: "Australia", flag: "🇦🇺" },
   JP: { name: "Japan", flag: "🇯🇵" },
   NZ: { name: "New Zealand", flag: "🇳🇿" },
   CA: { name: "Canada", flag: "🇨🇦" },
+  US: { name: "United States", flag: "🇺🇸" },
 };
 export function regionsForCountry(code: CountryCode): RegionConfig[] {
   return REGIONS.filter((r) => REGION_COUNTRY[r.id] === code);

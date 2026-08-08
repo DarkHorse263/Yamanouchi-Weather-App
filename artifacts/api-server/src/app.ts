@@ -391,11 +391,232 @@ if (process.env.NODE_ENV === "production") {
       name: "Eastern Townships",
       towns: { bromont: "Bromont", sutton: "Sutton" },
     },
+    // USA · Colorado
+    "summit-county": {
+      name: "Summit County",
+      towns: { breckenridge: "Breckenridge", keystone: "Keystone", "copper-mountain": "Copper Mountain", georgetown: "Georgetown" },
+    },
+    "vail-valley": {
+      name: "Vail Valley",
+      towns: { vail: "Vail", avon: "Avon" },
+    },
+    "aspen-snowmass": {
+      name: "Aspen Snowmass",
+      towns: { aspen: "Aspen", "snowmass-village": "Snowmass Village" },
+    },
+    "steamboat": {
+      name: "Steamboat",
+      towns: { "steamboat-springs": "Steamboat Springs" },
+    },
+    "winter-park": {
+      name: "Winter Park",
+      towns: { "winter-park": "Winter Park" },
+    },
+    "crested-butte": {
+      name: "Crested Butte",
+      towns: { "crested-butte-town": "Crested Butte" },
+    },
+    "telluride": {
+      name: "Telluride",
+      towns: { "telluride-town": "Telluride" },
+    },
+    "durango": {
+      name: "Durango",
+      towns: { "durango-town": "Durango" },
+    },
+    "boulder-front-range": {
+      name: "Boulder / Front Range",
+      towns: { nederland: "Nederland" },
+    },
+    "cottonwood-canyons": {
+      name: "Cottonwood Canyons",
+      towns: { "salt-lake-city": "Salt Lake City", sandy: "Sandy" },
+    },
+    "park-city": {
+      name: "Park City",
+      towns: { "park-city-town": "Park City" },
+    },
+    "ogden-valley": {
+      name: "Ogden Valley",
+      towns: { ogden: "Ogden", eden: "Eden" },
+    },
+    "provo": {
+      name: "Provo",
+      towns: { "provo-town": "Provo", "sundance-town": "Sundance" },
+    },
+    "cache-valley": {
+      name: "Cache Valley",
+      towns: { logan: "Logan" },
+    },
+    "north-lake-tahoe": {
+      name: "North Lake Tahoe",
+      towns: { truckee: "Truckee" },
+    },
+    "south-lake-tahoe": {
+      name: "South Lake Tahoe",
+      towns: { "south-lake-tahoe-town": "South Lake Tahoe" },
+    },
+    "mammoth-lakes": {
+      name: "Mammoth Lakes",
+      towns: { "mammoth-lakes-town": "Mammoth Lakes" },
+    },
+    "big-bear": {
+      name: "Big Bear",
+      towns: { "big-bear-lake": "Big Bear Lake" },
+    },
+    "bear-valley": {
+      name: "Bear Valley",
+      towns: { arnold: "Arnold" },
+    },
+    "mt-shasta": {
+      name: "Mt. Shasta",
+      towns: { "mount-shasta": "Mount Shasta" },
+    },
+    "killington-pico": {
+      name: "Killington/Pico",
+      towns: { killington: "Killington" },
+    },
+    "stowe-smugglers-notch": {
+      name: "Stowe/Smugglers' Notch",
+      towns: { stowe: "Stowe", jeffersonville: "Jeffersonville" },
+    },
+    "mad-river-valley": {
+      name: "Mad River Valley",
+      towns: { warren: "Warren", waitsfield: "Waitsfield" },
+    },
+    "southern-vermont": {
+      name: "Southern Vermont",
+      towns: { stratton: "Stratton", "west-dover": "West Dover", "peru-vt": "Peru", "manchester-vt": "Manchester" },
+    },
+    "okemo": {
+      name: "Okemo",
+      towns: { ludlow: "Ludlow" },
+    },
+    "jay-peak-nek": {
+      name: "Jay Peak/Northeast Kingdom",
+      towns: { jay: "Jay", "east-burke": "East Burke" },
+    },
+    "jackson-hole": {
+      name: "Jackson Hole",
+      towns: { jackson: "Jackson", "teton-village": "Teton Village" },
+    },
+    "grand-targhee": {
+      name: "Grand Targhee",
+      towns: { "alta-wy": "Alta" },
+    },
+    "big-sky": {
+      name: "Big Sky",
+      towns: { "big-sky-town": "Big Sky" },
+    },
+    "bozeman-bridger-bowl": {
+      name: "Bozeman",
+      towns: { bozeman: "Bozeman" },
+    },
+    "whitefish": {
+      name: "Whitefish",
+      towns: { "whitefish-town": "Whitefish" },
+    },
+    "red-lodge": {
+      name: "Red Lodge",
+      towns: { "red-lodge-town": "Red Lodge" },
+    },
+    "taos": {
+      name: "Taos",
+      towns: { "taos-ski-valley-town": "Taos Ski Valley" },
+    },
+    "angel-fire": {
+      name: "Angel Fire",
+      towns: { "angel-fire": "Angel Fire" },
+    },
+    "santa-fe": {
+      name: "Santa Fe",
+      towns: { "santa-fe": "Santa Fe" },
+    },
+    "albuquerque-sandia": {
+      name: "Albuquerque",
+      towns: { "albuquerque": "Albuquerque" },
+    },
+    "harbor-springs": { name: "Harbor Springs", towns: { "harbor-springs-town": "Harbor Springs" } },
+    "keweenaw-peninsula": { name: "Keweenaw Peninsula", towns: { mohawk: "Mohawk" } },
+    "poconos": { name: "Poconos", towns: { tannersville: "Tannersville", "pocono-manor": "Pocono Manor" } },
+    "laurel-highlands": { name: "Laurel Highlands", towns: { "seven-springs-town": "Seven Springs" } },
+    "berkshires": { name:"Berkshires", towns:{hancock:"Hancock","great-barrington":"Great Barrington"} },
+    "central-massachusetts": { name:"Central Massachusetts", towns:{"princeton-ma":"Princeton"} },
+    "lutsen-north-shore": { name:"Lutsen / North Shore", towns:{lutsen:"Lutsen"} },
+    "wausau": { name:"Wausau", towns:{"wausau-town":"Wausau"} },
+    "wisconsin-dells": { name:"Wisconsin Dells", towns:{portage:"Portage"} },
+    "vernon": { name:"Vernon", towns:{"vernon-nj":"Vernon"} },
+    "litchfield-hills": { name:"Litchfield Hills", towns:{"cornwall-ct":"Cornwall"} },
+    "juneau": { name:"Juneau", towns:{"juneau-town":"Juneau"} },
+    "girdwood": { name:"Girdwood", towns:{"girdwood-town":"Girdwood"} },
+    "black-hills": { name:"Black Hills", towns:{"lead-deadwood":"Lead / Deadwood"} },
+    "white-mountains-az": { name:"White Mountains", towns:{"greer-az":"Greer"} },
+    "flagstaff": { name:"Flagstaff", towns:{"flagstaff-town":"Flagstaff"} },
+    "lake-tahoe-nevada": { name:"Lake Tahoe Nevada", towns:{"incline-village":"Incline Village"} },
+    "shenandoah-valley": { name:"Shenandoah Valley", towns:{"mcgaheysville":"McGaheysville"} },
+    "blue-ridge": { name:"Blue Ridge", towns:{"wintergreen-town":"Wintergreen"} },
+    "maggie-valley": { name:"Maggie Valley", towns:{"maggie-valley-town":"Maggie Valley"} },
+    "high-country": { name:"High Country", towns:{"banner-elk-beech-mountain":"Banner Elk / Beech Mountain"} },
+    "canaan-valley": { name:"Canaan Valley", towns:{"canaan-valley-town":"Davis / Canaan Valley"} },
+    "snowshoe": { name:"Snowshoe", towns:{"snowshoe-town":"Snowshoe"} },
+    "mt-hood": {
+      name: "Mt. Hood",
+      towns: { "government-camp": "Government Camp" },
+    },
+    "bend": {
+      name: "Bend",
+      towns: { "bend": "Bend" },
+    },
+    "crystal-mountain": {
+      name: "Crystal Mountain",
+      towns: { "enumclaw": "Enumclaw" },
+    },
+    "snoqualmie-pass": {
+      name: "Snoqualmie Pass",
+      towns: { "snoqualmie-pass-town": "Snoqualmie Pass" },
+    },
+    "stevens-pass": {
+      name: "Stevens Pass",
+      towns: { "skykomish": "Skykomish" },
+    },
+    "mt-baker": {
+      name: "Mt. Baker",
+      towns: { "glacier": "Glacier" },
+    },
+    "sun-valley": {
+      name: "Sun Valley",
+      towns: { "ketchum": "Ketchum" },
+    },
+    "sandpoint": {
+      name: "Sandpoint",
+      towns: { "sandpoint": "Sandpoint" },
+    },
+    "boise": {
+      name: "Boise",
+      towns: { "boise": "Boise" },
+    },
+    "donnelly-mccall": {
+      name: "Donnelly / McCall",
+      towns: { "donnelly": "Donnelly" },
+    },
+
+    "white-mountains": { name: "White Mountains", towns: { "north-conway": "North Conway" } },
+    "franconia-notch": { name: "Franconia Notch", towns: { franconia: "Franconia", "bretton-woods-town": "Bretton Woods" } },
+    "waterville-valley": { name: "Waterville Valley", towns: { "waterville-valley-town": "Waterville Valley" } },
+    "lakes-region": { name: "Lakes Region", towns: { gilford: "Gilford" } },
+    "carrabassett-valley": { name: "Carrabassett Valley", towns: { "carrabassett-valley-town": "Carrabassett Valley" } },
+    "newry-bethel": { name: "Newry / Bethel", towns: { newry: "Newry" } },
+    "rangeley": { name: "Rangeley", towns: { rangeley: "Rangeley" } },
+    "lake-placid": { name: "Lake Placid", towns: { "lake-placid": "Lake Placid", wilmington: "Wilmington" } },
+    "north-creek": { name: "North Creek", towns: { "north-creek": "North Creek" } },
+    "hunter": { name: "Hunter", towns: { hunter: "Hunter" } },
+    "windham": { name: "Windham", towns: { windham: "Windham" } },
+    "highmount": { name: "Highmount", towns: { highmount: "Highmount" } },
   };
 
   // Top-level routes handled by the SPA (before the /:region catch-all).
   const KNOWN_TOP_LEVEL = new Set([
-    "/", "/countries", "/au", "/jp", "/nz", "/ca", "/near-you",
+    "/", "/countries", "/au", "/jp", "/nz", "/ca", "/us", "/near-you",
     "/plan", "/legal/privacy", "/legal/terms",
     "/premium",
     "/alerts/verify", "/alerts/manage", "/alerts/unsubscribed",

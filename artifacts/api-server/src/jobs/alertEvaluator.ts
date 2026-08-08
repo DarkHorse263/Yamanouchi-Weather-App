@@ -130,6 +130,121 @@ const REGION_ANCHORS: Record<RegionId, {
   "quebec-laurentians": { lat: 46.2200, lon: -74.5530, elevation: 875, region: "OTHER", displayName: "Laurentians" },
   "quebec-charlevoix": { lat: 47.2757, lon: -70.6257, elevation: 806, region: "OTHER", displayName: "Charlevoix" },
   "quebec-eastern-townships": { lat: 45.0850, lon: -72.5500, elevation: 840, region: "OTHER", displayName: "Eastern Townships" },
+  // US (Colorado) · same posture as NZ/CA, no national model in the
+  // ensemble so region "OTHER". Anchor each on its highest/primary
+  // lift-served summit.
+  "summit-county": { lat: 39.6425, lon: -105.8719, elevation: 3286, region: "OTHER", displayName: "Summit County" },
+  "vail-valley": { lat: 39.6061, lon: -106.3550, elevation: 3527, region: "OTHER", displayName: "Vail Valley" },
+  "aspen-snowmass": { lat: 39.2110, lon: -106.9500, elevation: 3813, region: "OTHER", displayName: "Aspen Snowmass" },
+  "steamboat": { lat: 40.4572, lon: -106.8045, elevation: 3221, region: "OTHER", displayName: "Steamboat" },
+  "winter-park": { lat: 39.8868, lon: -105.7625, elevation: 3676, region: "OTHER", displayName: "Winter Park" },
+  "crested-butte": { lat: 38.8992, lon: -106.9650, elevation: 3620, region: "OTHER", displayName: "Crested Butte" },
+  "telluride": { lat: 37.9375, lon: -107.8123, elevation: 3815, region: "OTHER", displayName: "Telluride" },
+  "durango": { lat: 37.6297, lon: -107.8144, elevation: 3299, region: "OTHER", displayName: "Durango" },
+  "boulder-front-range": { lat: 39.9375, lon: -105.5828, elevation: 2853, region: "OTHER", displayName: "Boulder / Front Range" },
+  // US (Utah) · same posture as Colorado above, no national model in the
+  // ensemble so region "OTHER". Anchor each on its highest/primary
+  // lift-served summit.
+  "cottonwood-canyons": { lat: 40.5883, lon: -111.6383, elevation: 3374, region: "OTHER", displayName: "Cottonwood Canyons" },
+  "park-city": { lat: 40.6514, lon: -111.5080, elevation: 3056, region: "OTHER", displayName: "Park City" },
+  "ogden-valley": { lat: 41.2160, lon: -111.8567, elevation: 2917, region: "OTHER", displayName: "Ogden Valley" },
+  "provo": { lat: 40.3970, lon: -111.5847, elevation: 2515, region: "OTHER", displayName: "Provo" },
+  "cache-valley": { lat: 41.9742, lon: -111.4547, elevation: 2701, region: "OTHER", displayName: "Cache Valley" },
+
+  // California anchors: each on the highest lift-served summit in the
+  // region.
+  "north-lake-tahoe": { lat: 39.1966, lon: -120.2347, elevation: 2758, region: "OTHER", displayName: "North Lake Tahoe" },
+  "south-lake-tahoe": { lat: 38.9353, lon: -119.9400, elevation: 3068, region: "OTHER", displayName: "South Lake Tahoe" },
+  "mammoth-lakes": { lat: 37.6306, lon: -119.0326, elevation: 3369, region: "OTHER", displayName: "Mammoth Lakes" },
+  "big-bear": { lat: 34.2267, lon: -116.8602, elevation: 2685, region: "OTHER", displayName: "Big Bear" },
+  "bear-valley": { lat: 38.4706, lon: -120.0471, elevation: 2591, region: "OTHER", displayName: "Bear Valley" },
+  "mt-shasta": { lat: 41.3208, lon: -122.2036, elevation: 2377, region: "OTHER", displayName: "Mt. Shasta" },
+
+  // Vermont anchors: each on the highest lift-served summit in the
+  // region. First America/New_York anchors in the USA module.
+  "killington-pico": { lat: 43.6045, lon: -72.8201, elevation: 1293, region: "OTHER", displayName: "Killington/Pico" },
+  "stowe-smugglers-notch": { lat: 44.5303, lon: -72.7883, elevation: 1340, region: "OTHER", displayName: "Stowe/Smugglers' Notch" },
+  "mad-river-valley": { lat: 44.1358, lon: -72.9204, elevation: 1244, region: "OTHER", displayName: "Mad River Valley" },
+  "southern-vermont": { lat: 43.1131, lon: -72.9081, elevation: 1181, region: "OTHER", displayName: "Southern Vermont" },
+  "okemo": { lat: 43.4009, lon: -72.7168, elevation: 1019, region: "OTHER", displayName: "Okemo" },
+  "jay-peak-nek": { lat: 44.9241, lon: -72.5215, elevation: 1209, region: "OTHER", displayName: "Jay Peak/Northeast Kingdom" },
+
+  // Wyoming anchors: each on the highest lift-served summit in the
+  // region. America/Denver, same as Colorado/Utah.
+  "jackson-hole": { lat: 43.5875, lon: -110.8279, elevation: 3185, region: "OTHER", displayName: "Jackson Hole" },
+  "grand-targhee": { lat: 43.7904, lon: -110.9576, elevation: 3006, region: "OTHER", displayName: "Grand Targhee" },
+  "big-sky": { lat: 45.2871, lon: -111.4010, elevation: 3403, region: "OTHER", displayName: "Big Sky" },
+  "bozeman-bridger-bowl": { lat: 45.8266, lon: -110.8988, elevation: 2682, region: "OTHER", displayName: "Bozeman" },
+  "whitefish": { lat: 48.4890, lon: -114.3670, elevation: 2078, region: "OTHER", displayName: "Whitefish" },
+  "red-lodge": { lat: 45.1699, lon: -109.4137, elevation: 2870, region: "OTHER", displayName: "Red Lodge" },
+
+  // New Mexico anchors: each on the highest lift-served summit in the
+  // region. America/Denver, same as Colorado/Utah/Wyoming/Montana.
+  "taos": { lat: 36.5960, lon: -105.4478, elevation: 3804, region: "OTHER", displayName: "Taos" },
+  "angel-fire": { lat: 36.3929, lon: -105.2853, elevation: 3254, region: "OTHER", displayName: "Angel Fire" },
+  "santa-fe": { lat: 35.8000, lon: -105.8000, elevation: 3681, region: "OTHER", displayName: "Santa Fe" },
+  "albuquerque-sandia": { lat: 35.2062, lon: -106.4475, elevation: 2630, region: "OTHER", displayName: "Albuquerque" },
+
+  // Michigan anchors · America/Detroit statewide for these selected areas, including Keweenaw.
+  "harbor-springs": { lat: 45.4717, lon: -84.9233, elevation: 404, region: "OTHER", displayName: "Harbor Springs" },
+  "keweenaw-peninsula": { lat: 47.4080, lon: -88.1010, elevation: 457, region: "OTHER", displayName: "Keweenaw Peninsula" },
+  "poconos": { lat: 41.052, lon: -75.352, elevation: 634, region: "OTHER", displayName: "Poconos" },
+  "laurel-highlands": { lat: 40.022, lon: -79.297, elevation: 913, region: "OTHER", displayName: "Laurel Highlands" },
+  "berkshires": { lat:42.554, lon:-73.292, elevation:725, region:"OTHER", displayName:"Berkshires" },
+  "central-massachusetts": { lat:42.488, lon:-71.887, elevation:612, region:"OTHER", displayName:"Central Massachusetts" },
+  "lutsen-north-shore": { lat:47.663, lon:-90.714, elevation:514, region:"OTHER", displayName:"Lutsen / North Shore" },
+  "wausau": { lat:44.931, lon:-89.688, elevation:594, region:"OTHER", displayName:"Wausau" },
+  "wisconsin-dells": { lat:43.531, lon:-89.395, elevation:378, region:"OTHER", displayName:"Wisconsin Dells" },
+  "vernon": { lat:41.19, lon:-74.503, elevation:451, region:"OTHER", displayName:"Vernon" },
+  "litchfield-hills": { lat:41.835, lon:-73.286, elevation:488, region:"OTHER", displayName:"Litchfield Hills" },
+  "juneau": { lat:58.276, lon:-134.528, elevation:820, region:"OTHER", displayName:"Juneau" },
+  "girdwood": { lat:60.97, lon:-149.09, elevation:1201, region:"OTHER", displayName:"Girdwood" },
+  "black-hills": { lat:44.339, lon:-103.85, elevation:2164, region:"OTHER", displayName:"Black Hills" },
+  "white-mountains-az": { lat:33.973, lon:-109.563, elevation:3330, region:"OTHER", displayName:"White Mountains" },
+  "flagstaff": { lat:35.33, lon:-111.709, elevation:3511, region:"OTHER", displayName:"Flagstaff" },
+  "lake-tahoe-nevada": { lat:39.315, lon:-119.886, elevation:2956, region:"OTHER", displayName:"Lake Tahoe Nevada" },
+  "shenandoah-valley": { lat:38.407, lon:-78.738, elevation:870, region:"OTHER", displayName:"Shenandoah Valley" },
+  "blue-ridge": { lat:37.913, lon:-78.945, elevation:1071, region:"OTHER", displayName:"Blue Ridge" },
+  "maggie-valley": { lat:35.562, lon:-83.094, elevation:1646, region:"OTHER", displayName:"Maggie Valley" },
+  "high-country": { lat:36.13, lon:-81.871, elevation:1615, region:"OTHER", displayName:"High Country" },
+  "canaan-valley": { lat:39.045, lon:-79.46, elevation:1304, region:"OTHER", displayName:"Canaan Valley" },
+  "snowshoe": { lat:38.41, lon:-79.995, elevation:1478, region:"OTHER", displayName:"Snowshoe" },
+
+  // Oregon anchors: each on the highest lift-served summit in the region.
+  // America/Los_Angeles, same as Washington and California.
+  "mt-hood": { lat: 45.33111, lon: -121.71000, elevation: 2603, region: "OTHER", displayName: "Mt. Hood" },
+  "bend": { lat: 43.9794, lon: -121.6885, elevation: 2763, region: "OTHER", displayName: "Bend" },
+
+  // Washington anchors: each on the highest lift-served summit in the
+  // region. America/Los_Angeles.
+  "crystal-mountain": { lat: 46.9280, lon: -121.4749, elevation: 2138, region: "OTHER", displayName: "Crystal Mountain" },
+  "snoqualmie-pass": { lat: 47.44306, lon: -121.42944, elevation: 1652, region: "OTHER", displayName: "Snoqualmie Pass" }, // anchored on Alpental, the highest/steepest of the four sub-areas (summit 5,420 ft)
+  "stevens-pass": { lat: 47.74472, lon: -121.08889, elevation: 1235, region: "OTHER", displayName: "Stevens Pass" },
+  "mt-baker": { lat: 48.861944, lon: -121.653889, elevation: 1515, region: "OTHER", displayName: "Mt. Baker" },
+
+  // Idaho anchors: each on the highest lift-served summit in the
+  // region. Sun Valley/Boise/Donnelly-McCall use America/Boise;
+  // Sandpoint uses America/Los_Angeles (Idaho Panhandle is Pacific).
+  "sun-valley": { lat: 43.65500, lon: -114.40917, elevation: 2789, region: "OTHER", displayName: "Sun Valley" }, // anchored on Bald Mountain, the larger of the two Sun Valley peaks
+  "sandpoint": { lat: 48.36700, lon: -116.62300, elevation: 1951, region: "OTHER", displayName: "Sandpoint" },
+  "boise": { lat: 43.76468, lon: -116.10329, elevation: 2394, region: "OTHER", displayName: "Boise" },
+  "donnelly-mccall": { lat: 44.671, lon: -116.123, elevation: 1490, region: "OTHER", displayName: "Donnelly / McCall" }, // anchored on Tamarack Resort's base; Brundage's summit (7,610 ft) is technically higher than Tamarack's (7,700 ft base already close) but Tamarack is used as the primary anchor for this region per its larger vertical drop
+
+  // New Hampshire anchors · all America/New_York. MWAC forecasts the nearby Presidential Range / Tuckerman backcountry, not ordinary in-bounds terrain.
+  "white-mountains": { lat: 44.2590, lon: -71.2370, elevation: 1238, region: "OTHER", displayName: "White Mountains" },
+  "franconia-notch": { lat: 44.1569, lon: -71.6980, elevation: 1244, region: "OTHER", displayName: "Franconia Notch" },
+  "waterville-valley": { lat: 43.9500, lon: -71.5140, elevation: 1170, region: "OTHER", displayName: "Waterville Valley" },
+  "lakes-region": { lat: 43.5270, lon: -71.3690, elevation: 684, region: "OTHER", displayName: "Lakes Region" },
+  // Maine anchors · all America/New_York. Maine has no dedicated avalanche forecast or observation authority.
+  "carrabassett-valley": { lat: 45.031, lon: -70.314, elevation: 1291, region: "OTHER", displayName: "Carrabassett Valley" },
+  "newry-bethel": { lat: 44.473, lon: -70.856, elevation: 957, region: "OTHER", displayName: "Newry / Bethel" },
+  "rangeley": { lat: 44.936, lon: -70.510, elevation: 1256, region: "OTHER", displayName: "Rangeley" },
+  // New York anchors · all America/New_York. No dedicated daily avalanche authority; DEC advisories are irregular Adirondack backcountry notices only.
+  "lake-placid": { lat: 44.365, lon: -73.902, elevation: 1483, region: "OTHER", displayName: "Lake Placid" },
+  "north-creek": { lat: 43.673, lon: -74.016, elevation: 1097, region: "OTHER", displayName: "North Creek" },
+  "hunter": { lat: 42.204, lon: -74.225, elevation: 975, region: "OTHER", displayName: "Hunter" },
+  "windham": { lat: 42.289, lon: -74.257, elevation: 945, region: "OTHER", displayName: "Windham" },
+  "highmount": { lat: 42.139, lon: -74.505, elevation: 1045, region: "OTHER", displayName: "Highmount" },
 };
 
 interface EvaluatorReport {
