@@ -373,7 +373,7 @@ export default function Premium() {
           </div>
           {isPromoPeriod && (
             <p className="text-sm text-slate-500 mt-4 leading-relaxed font-medium">
-              monthly & yearly plans open after the launch promo wraps. we'll email subscribers first — no card needed until then.
+              monthly & yearly plans open after the launch promo wraps. we'll email subscribers first - no card needed until then.
             </p>
           )}
         </section>

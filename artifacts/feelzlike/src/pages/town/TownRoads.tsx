@@ -718,7 +718,7 @@ function VhcAlertsSection({
       )}
 
       {data && (
-        <p className="text-[11px] text-muted-foreground/70 mt-3">
+        <p className="text-[11px] text-white/70 mt-3">
           {t("Source", "情報源")}: {data.source}
         </p>
       )}

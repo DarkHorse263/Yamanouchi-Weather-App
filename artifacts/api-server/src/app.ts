@@ -483,19 +483,19 @@ if (process.env.NODE_ENV === "production") {
     },
     "/countries": {
       title: "browse resort regions by country · feelzlike",
-      description: "Choose a country to explore resort town weather and conditions — Australia, Japan, and New Zealand.",
+      description: "Choose a country to explore resort town weather and conditions · Australia, Japan, and New Zealand.",
     },
     "/au": {
       title: "Australia · resort town weather · feelzlike",
-      description: "Live weather and conditions for resort towns across Australia — Snowy Mountains (NSW), Victoria's High Country (VIC), and Tasmania (TAS).",
+      description: "Live weather and conditions for resort towns across Australia · Snowy Mountains (NSW), Victoria's High Country (VIC), and Tasmania (TAS).",
     },
     "/jp": {
       title: "Japan · resort town weather · feelzlike",
-      description: "Live weather and conditions for resort towns in Japan — Yamanouchi, Nozawa Onsen, Iiyama, Hakuba Valley (Nagano), and Myoko (Niigata).",
+      description: "Live weather and conditions for resort towns in Japan · Yamanouchi, Nozawa Onsen, Iiyama, Hakuba Valley (Nagano), and Myoko (Niigata).",
     },
     "/nz": {
       title: "New Zealand · resort town weather · feelzlike",
-      description: "Live weather and conditions for resort towns across New Zealand — Queenstown, Wanaka (Otago), Mt Hutt (Canterbury), and Ruapehu (Central Plateau).",
+      description: "Live weather and conditions for resort towns across New Zealand · Queenstown, Wanaka (Otago), Mt Hutt (Canterbury), and Ruapehu (Central Plateau).",
     },
     "/near-you": {
       title: "weather near you · local resort conditions · feelzlike",
@@ -503,7 +503,7 @@ if (process.env.NODE_ENV === "production") {
     },
     "/premium": {
       title: "feelzlike premium · snow alerts for your towns · feelzlike",
-      description: "feelzlike premium — email snow and powder alerts for your favourite resort towns across Australia, Japan, and New Zealand.",
+      description: "feelzlike premium · email snow and powder alerts for your favourite resort towns across Australia, Japan, and New Zealand.",
     },
     "/plan": {
       title: "trip planner · find the best conditions · feelzlike",

@@ -284,7 +284,7 @@ function EngagementCard({ e }: { e: EngagementPayload }) {
       </p>
       {empty ? (
         <p className="text-sm text-muted-foreground rounded-md border border-dashed px-3 py-4">
-          no data yet · these counters only see real traffic on the published site — the dev preview
+          no data yet · these counters only see real traffic on the published site - the dev preview
           has no real visitors. republish, then numbers appear here within minutes of the first visit.
         </p>
       ) : (
@@ -369,7 +369,7 @@ function PartnerLinksCard({ e }: { e: EngagementPayload }) {
   const rows = [...partners.entries()].sort((a, b) => b[1].clicked - a[1].clicked || b[1].shown - a[1].shown);
   const totalShown = rows.reduce((s, [, p]) => s + p.shown, 0);
   const totalClicked = rows.reduce((s, [, p]) => s + p.clicked, 0);
-  const ctr = (shown: number, clicked: number) => (shown > 0 ? `${((clicked / shown) * 100).toFixed(1)}%` : "–");
+  const ctr = (shown: number, clicked: number) => (shown > 0 ? `${((clicked / shown) * 100).toFixed(1)}%` : "-");
   return (
     <div className="rounded-lg border bg-white p-5">
       <h3 className="text-sm font-semibold mb-1 lowercase">partner links · shown → clicked</h3>
@@ -536,7 +536,7 @@ function MembersTable({ rows }: { rows: MemberRow[] }) {
               <div className="min-w-0">
                 <div className="truncate">{r.email ?? "no email"}</div>
                 <div className="text-xs text-muted-foreground truncate">
-                  {r.displayName ?? "—"}
+                  {r.displayName ?? "-"}
                   {r.homeRegionId ? ` · ${r.homeRegionId}` : ""}
                 </div>
               </div>

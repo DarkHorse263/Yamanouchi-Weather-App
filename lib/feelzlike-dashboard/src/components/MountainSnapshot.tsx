@@ -254,7 +254,7 @@ export function MountainSnapshot({
           >
             <Snowflake className="w-3.5 h-3.5 text-muted-foreground/60 mb-1.5" strokeWidth={1.75} />
             <p className="font-display text-3xl md:text-[2.25rem] leading-none text-foreground tabular-nums" data-numeric>
-              {freezingLevel != null ? Math.round(cvElev(freezingLevel)) : "—"}
+              {freezingLevel != null ? Math.round(cvElev(freezingLevel)) : "-"}
             </p>
             <p className="byline text-muted-foreground/70 mt-1.5">{elevationUnitLabel} · {copy.freezeUnit}</p>
             {verticalDelta != null && (

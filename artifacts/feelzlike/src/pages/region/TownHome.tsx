@@ -340,7 +340,7 @@ export function TownHome() {
   if (!town) {
     return (
       <div className="px-4 md:px-10 py-5 md:py-8 max-w-6xl mx-auto">
-        <p className="text-muted-foreground">{t("Loading town…", "読み込み中…")}</p>
+        <p className="text-white/80">{t("Loading town…", "読み込み中…")}</p>
       </div>
     );
   }
