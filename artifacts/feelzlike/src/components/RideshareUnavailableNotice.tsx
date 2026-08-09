@@ -56,12 +56,20 @@ export function RideshareUnavailableNotice({
 }
 
 /**
- * Town ids where Uber / DiDi / Ola are usefully available. Empty for now -
- * none of our current AU or JP base towns have meaningful rideshare
- * coverage. Add a town id here once the situation changes (e.g. if Albury
- * or a larger regional centre is ever onboarded as a base town).
+ * Town ids where rideshare apps are usefully available. None of our AU or
+ * JP base towns qualify, but the flagship US resort towns do - Uber and
+ * Lyft genuinely operate in the Colorado, Utah, Tahoe and Stowe markets,
+ * so showing the "no rideshare" banner there would be factually wrong.
  */
-export const RIDESHARE_AVAILABLE_TOWNS: ReadonlySet<string> = new Set<string>();
+export const RIDESHARE_AVAILABLE_TOWNS: ReadonlySet<string> = new Set<string>([
+  "breckenridge",
+  "vail",
+  "aspen",
+  "park-city-town",
+  "truckee",
+  "south-lake-tahoe-town",
+  "stowe",
+]);
 
 export function townHasRideshare(townId: string | undefined): boolean {
   if (!townId) return false;
