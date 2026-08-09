@@ -11,6 +11,13 @@ consuming package's `tsc --noEmit` fails with `TS2305: Module '@workspace/X' has
 no exported member 'Y'` — but the running dev server (tsx / vite) resolves the
 symbol fine.
 
+Related variant: when `lib/api-spec/openapi.yaml` gains new enum values (e.g. new
+region ids), the orval-generated client (`lib/api-client-react/src/generated`) can
+be STALE — consumers then fail with "X does not exist in type Record<RegionId,...>".
+Fix: `pnpm run codegen` in `lib/api-spec`, then `tsc -b` in `lib/api-client-react`.
+Also: the dev api-server workflow keeps serving pre-merge code after a task merge —
+restart it before trusting 404s from new endpoints/ids.
+
 # Cause
 
 Packages here are TypeScript **project references** (`composite: true`,
