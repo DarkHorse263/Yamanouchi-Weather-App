@@ -13,8 +13,7 @@
  * the VITE_ prefixed client vars, which are build-time only). Set either to an
  * explicit empty string to disable that boundary.
  */
-const DEFAULT_PROMO_STARTS_AT = "2026-06-01";
-const DEFAULT_PROMO_ENDS_AT = "2026-12-31";
+import { DEFAULT_PROMO_STARTS_AT, DEFAULT_PROMO_ENDS_AT } from "@workspace/promo-constants";
 
 /**
  * Parse a promo boundary date.

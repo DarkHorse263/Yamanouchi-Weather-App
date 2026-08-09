@@ -4,6 +4,7 @@ import { Card, Badge, LoadingScreen, ErrorScreen } from "../components/ui-elemen
 import { useState } from "react";
 import { MapPin, Ticket, Clock, ExternalLink, Map, Expand, BedDouble, Utensils, Droplets, Snowflake, PawPrint, Trees, Building, Mountain, type LucideIcon } from "lucide-react";
 import { motion } from "framer-motion";
+import { GuideToursCard } from "@/components/GuideToursCard";
 
 type FilterType = "all" | "onsen" | "culture" | "nature" | "activity";
 
@@ -31,8 +32,8 @@ export default function Explore({ embedded = false }: { embedded?: boolean }) {
     <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-6">
       {!embedded && (
         <div>
-          <h1 className="text-3xl md:text-4xl font-black text-foreground">{t("Explore Yamanouchi", "山ノ内を探索")}</h1>
-          <p className="text-muted-foreground mt-1">{t("Every hotel, restaurant, onsen and attraction - all in one place", "ホテル・レストラン・温泉・観光スポットをまとめて検索")}</p>
+          <h1 className="text-3xl md:text-4xl font-black text-white">{t("Explore Yamanouchi", "山ノ内を探索")}</h1>
+          <p className="text-white/70 mt-1">{t("Every hotel, restaurant, onsen and attraction - all in one place", "ホテル・レストラン・温泉・観光スポットをまとめて検索")}</p>
         </div>
       )}
 
@@ -112,11 +113,13 @@ export default function Explore({ embedded = false }: { embedded?: boolean }) {
         </div>
       </div>
 
+      <GuideToursCard regionId="yamanouchi" t={t} />
+
       {/* Curated Highlights section */}
       {data && data.length > 0 && (
         <div>
-          <h2 className="text-xl font-black text-foreground mb-1">{t("Curated Highlights", "おすすめスポット")}</h2>
-          <p className="text-sm text-muted-foreground mb-4">{t("Hand-picked attractions from our local team", "地元チームが厳選した観光スポット")}</p>
+          <h2 className="text-xl font-black text-white mb-1">{t("Curated Highlights", "おすすめスポット")}</h2>
+          <p className="text-sm text-white/70 mb-4">{t("Hand-picked attractions from our local team", "地元チームが厳選した観光スポット")}</p>
 
           <div className="flex overflow-x-auto hide-scrollbar gap-2 mb-4">
             {filters.map(f => (

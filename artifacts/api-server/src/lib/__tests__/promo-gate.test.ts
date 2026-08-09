@@ -19,10 +19,19 @@ import { fileURLToPath } from "node:url";
 
 const TEST_DIR = path.dirname(fileURLToPath(import.meta.url));
 import type { Request, Response } from "express";
+import { getAuth } from "@clerk/express";
 
 import { isPromoActive, resolvePromoSubscription, PROMO_ENDS_AT, PROMO_STARTS_AT } from "../promo";
 import { requireEntitlement, setSubscriptionResolver } from "../../middlewares/require-entitlement";
 import { TIER_ENTITLEMENTS, type Entitlement } from "../entitlements";
+
+/**
+ * Brand symbol Clerk uses to verify req.auth was installed by its own
+ * middleware. Matches `Symbol.for("@clerk/express.auth")` in Clerk's source.
+ * We brand the mock auth function so getAuth(req) doesn't throw
+ * "Clerk's clerkMiddleware() is required".
+ */
+const CLERK_AUTH_BRAND = Symbol.for("@clerk/express.auth");
 
 // Fixed clocks around the default promo window (1 Jun 2026 → EOD 31 Dec 2026,
 // local time).
@@ -116,15 +125,41 @@ function makeRes(): { res: Response; captured: CapturedResponse } {
   return { res, captured };
 }
 
-function makeReq(isAuthenticated: boolean): Request {
-  return { isAuthenticated: () => isAuthenticated } as unknown as Request;
+function makeReq(isSignedIn: boolean): Request {
+  // req.auth must be a branded callable that returns the Clerk auth object.
+  // - typeof req.auth === "function" AND req.auth[CLERK_AUTH_BRAND] === true
+  //   are both required by requestHasAuthObject() inside getAuth().
+  // - The function is called as req.auth(options) and the return value is
+  //   passed through getAuthObjectForAcceptedToken (passthrough when no
+  //   acceptsToken constraint is set).
+  const userId = isSignedIn ? "user_test_123" : null;
+  const sessionClaims = isSignedIn ? { userId } : null;
+  // tokenType: "session_token" is REQUIRED — getAuthObjectForAcceptedToken
+  // (inside getAuth) checks this against the default acceptsToken constraint
+  // (TokenType.SessionToken = "session_token") and returns signedOutAuthObject()
+  // (userId: null) when it's absent, even though our mock returns a userId.
+  const authFn = Object.assign(
+    (_opts?: unknown) => ({
+      userId,
+      sessionClaims,
+      sessionId: isSignedIn ? "sess_test_123" : null,
+      tokenType: "session_token" as const,
+      has: () => false,
+      debug: () => ({}),
+    }),
+    { [CLERK_AUTH_BRAND]: true },
+  );
+  return { auth: authFn } as unknown as Request;
 }
 
-async function runGate(ent: Entitlement, isAuthenticated: boolean, now: Date) {
-  setSubscriptionResolver((req) => resolvePromoSubscription(req.isAuthenticated(), now));
+async function runGate(ent: Entitlement, isSignedIn: boolean, now: Date) {
+  setSubscriptionResolver((req) => {
+    const auth = getAuth(req);
+    return resolvePromoSubscription(!!auth.userId, now);
+  });
   const { res, captured } = makeRes();
   let nextCalled = false;
-  await requireEntitlement(ent)(makeReq(isAuthenticated), res, () => {
+  await requireEntitlement(ent)(makeReq(isSignedIn), res, () => {
     nextCalled = true;
   });
   return { nextCalled, captured };
@@ -196,5 +231,5 @@ describe("requireEntitlement + promo resolver · after the promo ends", () => {
 // Leave the module-level resolver in a sane default for any test file that
 // runs after this one in the same process.
 afterEach(() => {
-  setSubscriptionResolver((req) => resolvePromoSubscription((req as Request).isAuthenticated()));
+  setSubscriptionResolver(() => null);
 });

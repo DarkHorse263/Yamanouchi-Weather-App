@@ -76,18 +76,18 @@ export default function Alerts() {
         path="/yamanouchi/alerts"
       />
       <div>
-        <h1 className="text-3xl md:text-4xl font-black text-foreground flex items-center gap-3">
-          <BellRing className="w-8 h-8 text-primary" />
+        <h1 className="text-3xl md:text-4xl font-black text-white flex items-center gap-3">
+          <BellRing className="w-8 h-8 text-white" />
           {t("Powder Alerts", "パウダーアラート")}
         </h1>
-        <p className="text-muted-foreground mt-2">{t("Get notified when significant snow is forecast.", "まとまった降雪が予報されたら通知します。")}</p>
+        <p className="text-white/70 mt-2">{t("Get notified when significant snow is forecast.", "まとまった降雪が予報されたら通知します。")}</p>
       </div>
 
       <div className="space-y-5">
-        <h2 className="text-2xl font-bold text-foreground">{t("Active Alerts", "現在のアラート")}</h2>
+        <h2 className="text-2xl font-bold text-white">{t("Active Alerts", "現在のアラート")}</h2>
         
         {data.alerts.length === 0 ? (
-          <Card className="bg-secondary/50 border-dashed text-center py-9">
+          <Card className="bg-white text-center py-9">
             <Info className="w-12 h-12 text-muted-foreground mx-auto mb-3 opacity-50" />
             <h3 className="text-lg font-bold text-foreground">{t("No active alerts", "現在アラートはありません")}</h3>
             <p className="text-muted-foreground">{t("Conditions are stable.", "コンディションは安定しています。")}</p>
@@ -131,7 +131,7 @@ export default function Alerts() {
         )}
       </div>
 
-      <div className="pt-6 border-t border-border">
+      <div className="pt-6 border-t border-white/20">
         <PremiumGate
           title="Powder & weather alerts"
           titleJa="降雪・気象アラート"
@@ -142,9 +142,9 @@ export default function Alerts() {
         </PremiumGate>
       </div>
 
-      <div className="space-y-5 pt-6 border-t border-border">
-        <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
-          <CloudLightning className="w-6 h-6 text-indigo-500" />
+      <div className="space-y-5 pt-6 border-t border-white/20">
+        <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+          <CloudLightning className="w-6 h-6 text-white/80" />
           {t("Storm Tracker", "ストームトラッカー")}
         </h2>
         

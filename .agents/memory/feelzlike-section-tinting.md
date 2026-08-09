@@ -20,6 +20,10 @@ there and nowhere else.
   back to the existing `text-primary`/`bg-primary/8` classes. The Alerts home
   tile is also deliberately left on primary.
 - Accents apply **only when a nav item is active**; inactive items stay muted.
+- **Mobile bottom nav lightens the accent** — the raw hues are AA-on-white for
+  the desktop sidebar; on the solid-blue glass-strong bar they sink into the
+  blue, so `AppShell`'s bottom nav renders `mixSection(accent, 35)` (pale tint)
+  instead of the raw hex. Don't "fix" it back to the raw accent.
 
 **Why:** snow-pink and primary-blue are load-bearing brand signals; a section
 accent bleeding into either would make the app read as arbitrary rainbow.

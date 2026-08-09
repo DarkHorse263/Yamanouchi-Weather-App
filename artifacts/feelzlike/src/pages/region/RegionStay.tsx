@@ -135,8 +135,13 @@ export function RegionStay() {
       {query.isError && (
         <div className="rounded-2xl border border-border bg-white p-6">
           <p className="text-sm text-foreground">
-            {t("Couldn't load nearby stays.", "周辺の宿泊施設を読み込めませんでした。")}{" "}
-            <span className="text-muted-foreground">{(query.error as Error)?.message}</span>
+            {t("Nearby stays are unavailable right now.", "周辺の宿泊施設は現在表示できません。")}{" "}
+            <span className="text-muted-foreground">
+              {t(
+                "The booking-site shortcuts above will still get you straight to availability.",
+                "上の予約サイトのショートカットから空室状況を直接確認できます。",
+              )}
+            </span>
           </p>
         </div>
       )}

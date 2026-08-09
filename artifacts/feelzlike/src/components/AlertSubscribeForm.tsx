@@ -51,6 +51,8 @@ export const ALERT_REGIONS: Array<{ id: string; nameEn: string; nameJa: string; 
   // Canada
   { id: "whistler", nameEn: "Whistler", nameJa: "ウィスラー", country: "CA · British Columbia" },
   { id: "powder-highway", nameEn: "Powder Highway", nameJa: "パウダーハイウェイ", country: "CA · BC Interior" },
+  { id: "okanagan", nameEn: "Okanagan", nameJa: "オカナガン", country: "CA · BC Interior" },
+  { id: "vancouver", nameEn: "Vancouver & the Island", nameJa: "バンクーバー・アイランド", country: "CA · British Columbia" },
   { id: "banff-lake-louise", nameEn: "Banff & Lake Louise", nameJa: "バンフ・レイクルイーズ", country: "CA · Alberta" },
   { id: "canmore", nameEn: "Canmore", nameJa: "キャンモア", country: "CA · Alberta" },
   { id: "jasper", nameEn: "Jasper", nameJa: "ジャスパー", country: "CA · Alberta" },

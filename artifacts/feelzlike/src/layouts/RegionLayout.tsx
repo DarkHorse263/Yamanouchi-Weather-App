@@ -13,6 +13,7 @@ import { MountainsList } from "@/pages/region/MountainsList";
 import { TownLayout } from "@/layouts/TownLayout";
 import { townNavHasContent } from "@/lib/navContent";
 import { RegionStay } from "@/pages/region/RegionStay";
+import { RegionAlerts } from "@/pages/region/RegionAlerts";
 import { RegionSources } from "@/pages/region/RegionSources";
 import { MountainDetail as GenericMountainDetail } from "@/pages/region/MountainDetail";
 import { snowyMountainsRouter } from "@/regions/snowy-mountains/router";
@@ -98,9 +99,10 @@ export function RegionLayout() {
           )}
         </Route>
         {/* Custom region alerts pages (snowy-mountains, yamanouchi) ship a
-            subscribe surface; regions without one redirect home. */}
+            richer subscribe surface; every other region gets the generic
+            alerts page (the subscription form is region-agnostic). */}
         <Route path="/alerts">
-          {routes.Alerts ? <routes.Alerts /> : <Redirect to="/" />}
+          {routes.Alerts ? <routes.Alerts /> : <RegionAlerts />}
         </Route>
         <Route path="/stay">
           {routes.Stay ? <routes.Stay /> : <RegionStay />}

@@ -44,6 +44,8 @@ import { MT_HUTT_TRANSPORT } from "./mt-hutt";
 import { RUAPEHU_TRANSPORT } from "./ruapehu";
 import { WHISTLER_TRANSPORT } from "./whistler";
 import { POWDER_HIGHWAY_TRANSPORT } from "./powder-highway";
+import { OKANAGAN_TRANSPORT } from "./okanagan";
+import { VANCOUVER_TRANSPORT } from "./vancouver";
 import { BANFF_LAKE_LOUISE_TRANSPORT } from "./banff-lake-louise";
 import { CANMORE_TRANSPORT } from "./canmore";
 import { JASPER_TRANSPORT } from "./jasper";
@@ -167,6 +169,8 @@ const REGISTRY: Record<RegionId, TransportProviderList> = {
   // these are registered empty rather than filled with guessed timetables.
   whistler: WHISTLER_TRANSPORT,
   "powder-highway": POWDER_HIGHWAY_TRANSPORT,
+  okanagan: OKANAGAN_TRANSPORT,
+  vancouver: VANCOUVER_TRANSPORT,
   "banff-lake-louise": BANFF_LAKE_LOUISE_TRANSPORT,
   canmore: CANMORE_TRANSPORT,
   jasper: JASPER_TRANSPORT,

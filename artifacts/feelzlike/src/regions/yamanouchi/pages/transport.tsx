@@ -105,7 +105,7 @@ function SectionHeader({
       <div className={`w-6 h-6 rounded-full ${color} flex items-center justify-center shrink-0`}>
         <span className="text-[10px] font-black text-white">{num}</span>
       </div>
-      <h2 className="text-sm font-black text-slate-800 uppercase tracking-wide">{title}</h2>
+      <h2 className="text-sm font-black text-white uppercase tracking-wide">{title}</h2>
     </div>
   );
 }
@@ -1008,8 +1008,8 @@ export default function Transport() {
         path={town ? `/yamanouchi/${town.id}/transport` : "/yamanouchi/transport"}
       />
       <div className="px-4 pt-4 pb-0 shrink-0">
-        <h1 className="text-2xl font-black text-slate-900">{t("Getting Around", "交通・アクセス")}</h1>
-        <p className="text-xs text-slate-500 mt-0.5">
+        <h1 className="text-2xl font-black text-white">{t("Getting Around", "交通・アクセス")}</h1>
+        <p className="text-xs text-white/70 mt-0.5">
           {isWinter
             ? t("Winter · Yamanouchi · Yudanaka · Shibu · Shiga Kogen", "ウィンター・山ノ内・湯田中・渋・志賀高原")
             : t("Green season · Yamanouchi · Yudanaka · Shibu · Shiga Kogen", "グリーンシーズン・山ノ内・湯田中・渋・志賀高原")}
@@ -1049,7 +1049,7 @@ export default function Transport() {
           </section>
         ))}
 
-        <p className="text-[10px] text-slate-400 text-center pb-2">
+        <p className="text-[10px] text-white/60 text-center pb-2">
           {t("Timetables and prices shown for reference. Schedules may differ by season - always verify with the operator before travel.", "時刻表・料金は参考情報です。シーズンにより変更の場合があります。ご利用前に必ず運行会社にご確認ください。")}
         </p>
       </div>

@@ -9,7 +9,7 @@ import {
   type ConditionStat,
   type SafetyLink,
 } from "@workspace/feelzlike-dashboard";
-import { PremiumGate } from "@workspace/feelzlike-shell";
+import { PremiumGate, useOptionalSeason } from "@workspace/feelzlike-shell";
 import { ElevationBands } from "@/components/weather/ElevationBands";
 import {
   Thermometer,
@@ -37,17 +37,18 @@ import { dailyRainMm } from "@/lib/precip";
 import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
 import { HourlyForecast } from "@/components/HourlyForecast";
 import { PowderCalendar } from "@/components/PowderCalendar";
+import { POWDER_THRESHOLDS_JP } from "@/types/weather";
 import { MountainWebcams } from "@/components/MountainWebcams";
 import { LiftWindHoldPanel } from "@/components/LiftWindHoldPanel";
 import { isLiftSeasonOpen } from "@/lib/skiSeason";
 import { REGION_COUNTRY } from "@/regions";
 import { getLiftsForMountain } from "@/data/lifts";
 import { ForecastChart } from "@/components/weather/ForecastChart";
-import { EnsembleForecast } from "@/components/weather/EnsembleForecast";
 import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
 import { midMountainElevation } from "@/lib/elevation";
 import { cn } from "@/lib/utils";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
+import { UnitsToggle } from "@/components/UnitsToggle";
 import { BarChart2 } from "lucide-react";
 
 type WeatherId = Parameters<typeof useGetLocationWeather>[0];
@@ -133,10 +134,11 @@ export default function ResortDetail() {
   const [, rParams] = useRoute("/resort/:id");
   const params = mParams ?? rParams;
   const id = params?.id ?? "";
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { region } = useRegion();
   const u = useUnits();
   const [activeChartMetric, setActiveChartMetric] = useState<"temperature" | "snowfall" | "windSpeed">("temperature");
+  const isGreen = useOptionalSeason()?.season === "green";
 
   // Source of truth for "is this a real mountain in this region" is the
   // region config - so any mountain added to yamanouchi.ts works automatically.
@@ -151,38 +153,48 @@ export default function ResortDetail() {
     { query: { enabled, refetchInterval: 600_000 } as never },
   );
 
+  // Seasonal page canvas · shared by the fallback states below and the main
+  // return so no state ever renders on the default white body.
+  const canvasClass = `${isGreen ? "bg-[#059669]" : "bg-[#0055FF]"} min-h-[100dvh] pb-8 transition-colors duration-500`;
+
   if (!enabled) {
     return (
+      <div className={canvasClass}>
       <div className="max-w-3xl mx-auto p-8">
-        <h1 className="font-display font-semibold text-2xl text-foreground">
+        <h1 className="font-display font-semibold text-2xl text-white">
           {t("Resort not found", "スキー場が見つかりません")}
         </h1>
-        <p className="text-muted-foreground mt-2">
+        <p className="text-white/80 mt-2">
           {t(
             "We don't have a profile for this mountain yet.",
             "このスキー場のプロフィールはまだありません。",
           )}
         </p>
       </div>
+      </div>
     );
   }
 
   if (isLoading || !data) {
     return (
+      <div className={canvasClass}>
       <div className="max-w-3xl mx-auto p-8">
-        <p className="byline text-muted-foreground">
+        <p className="byline text-white/80">
           {t("Reading live conditions…", "ライブ状況を取得中…")}
         </p>
+      </div>
       </div>
     );
   }
 
   if (error) {
     return (
+      <div className={canvasClass}>
       <div className="max-w-3xl mx-auto p-8">
-        <p className="text-destructive font-semibold">
+        <p className="text-white font-semibold">
           {t("Could not load weather data.", "天気データを取得できませんでした。")}
         </p>
+      </div>
       </div>
     );
   }
@@ -264,7 +276,7 @@ export default function ResortDetail() {
     null;
 
   return (
-    <div className="bg-background">
+    <div className={canvasClass}>
       <PageMeta
         title={`${location.name} - snow report, weather & lifts`}
         description={`Live conditions at ${location.name} in ${region.name}: feelzlike temperature, snow depth, wind, a 6-day elevation forecast and lift-hold outlook.`}
@@ -293,7 +305,7 @@ export default function ResortDetail() {
         <div className="max-w-7xl mx-auto px-5 md:px-10 pt-5 md:pt-7">
           <Link
             href={`~/${region.id}/${baseTown.id}`}
-            className="inline-flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-[0.2em] text-sky-700/80 hover:text-sky-700 transition-colors"
+            className="inline-flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-[0.2em] text-white/70 hover:text-white transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             {t(baseTown.name, baseTown.nameJa ?? baseTown.name)}
@@ -301,6 +313,7 @@ export default function ResortDetail() {
         </div>
       )}
       <ResortHero
+        canvasColor={isGreen ? "#059669" : "#0055FF"}
         name={location.name}
         description={location.description}
         elevation={location.elevation}
@@ -317,6 +330,11 @@ export default function ResortDetail() {
       />
 
       <div className="max-w-7xl mx-auto px-5 md:px-10 pb-16 space-y-5 md:space-y-6 -mt-2">
+        {/* Anonymous units toggle · reaches direct-landing SEO visitors who
+            never see the home footer. Hidden for signed-in members. */}
+        <div className="flex justify-end -mb-2">
+          <UnitsToggle tone="onBlue" />
+        </div>
         {/* Operating hours strip · matches AU resort hero. Sits above
             Conditions Right Now so visitors see first / last lifts before
             scrolling. */}
@@ -353,6 +371,7 @@ export default function ResortDetail() {
             hourly={hourly}
             utcOffsetSeconds={(data as any).utcOffsetSeconds ?? 0}
             t={t}
+            thresholds={POWDER_THRESHOLDS_JP}
             sectionNumber=""
             skiability={{
               seasonOpen: isLiftSeasonOpen(REGION_COUNTRY[region.id]),
@@ -418,7 +437,7 @@ export default function ResortDetail() {
             to sit right after Elevation forecast so the powder outlook
             reads as a continuation of the multi-day weather story. */}
         {hourly && hourly.length > 0 && (
-          <PowderCalendar hourly={hourly} t={t} sectionNumber="" />
+          <PowderCalendar hourly={hourly} t={t} thresholds={POWDER_THRESHOLDS_JP} sectionNumber="" />
         )}
 
         {/* Mountain dials only · the wind-driven lift-hold call was
@@ -435,6 +454,7 @@ export default function ResortDetail() {
               <MountainSnapshot
                 resortName={location.name}
                 elevation={location.elevation}
+                locale={language === "ja" ? "ja" : "en"}
                 freezingLevel={current.freezingLevel ?? undefined}
                 gust={current.windGust ?? undefined}
                 windSpeed={current.windSpeed}
@@ -515,23 +535,6 @@ export default function ResortDetail() {
           </PremiumGate>
         )}
 
-        {/* PREMIUM · Ensemble forecast · multi-model consensus. Self-
-            hides when /api/forecast/{id} doesn't return data. */}
-        <PremiumGate
-          title="Ensemble forecast"
-          titleJa="アンサンブル予報"
-          blurb="Multi-model consensus · agreement across JMA, ECMWF and other models for the next 7 days."
-          blurbJa="JMA・ECMWFなど複数モデルの合意度を可視化（今後7日間）。"
-        >
-          {/* Ensemble runs at the SAME elevation the headline snow actually
-              resolved to (mid-mountain on success, village on fail-soft
-              fallback), so the page never tells two snow stories at once. */}
-          <EnsembleForecast
-            locationId={id}
-            elevationM={current.snowfallOutlookElevationM ?? undefined}
-          />
-        </PremiumGate>
-
         {/* PREMIUM · Personalised triggers · push when conditions hit. */}
         <PremiumGate
           title="Powder & weather alerts"
@@ -552,12 +555,14 @@ export default function ResortDetail() {
 
         {/* Webcams · positioned after the gated detailed conditions to
             match AU resort pages. */}
-        <MountainWebcams
-          mountainId={id}
-          sectionNumber=""
-          t={t}
-          fallbackPageUrl={profile.webcamUrl}
-        />
+        <div className="glass rounded-3xl p-5 md:p-8 [&_section]:mt-0">
+          <MountainWebcams
+            mountainId={id}
+            sectionNumber=""
+            t={t}
+            fallbackPageUrl={profile.webcamUrl}
+          />
+        </div>
 
         <OfficialLinks profile={profile} resortName={location.name} t={t} />
         <SafetyStrip

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Copy,
   ExternalLink,
@@ -29,6 +29,7 @@ import {
 } from "@/components/ui/sheet";
 import type { Stay } from "@/types/stayEat";
 import { track } from "@/lib/analytics";
+import { pingPartnerEvent } from "@/lib/engagement";
 import { cn } from "@/lib/utils";
 import {
   PROVIDERS,
@@ -284,6 +285,14 @@ function BookingButtons({ stay, variant = "card" }: BookingButtonsProps) {
     return typeof url === "string" && url.length > 0;
   });
   const officialHref = links.official;
+  const shownKey = provided.join(",") + (officialHref ? ",official" : "");
+  useEffect(() => {
+    // One first-party "shown" per provider per screen (deduped in
+    // pingPartnerEvent) so the admin shown→clicked funnel stays honest.
+    for (const id of provided) pingPartnerEvent("partner_shown", id);
+    if (officialHref) pingPartnerEvent("partner_shown", "official");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shownKey]);
   if (provided.length === 0 && !officialHref) return null;
 
   const sizeCls =
@@ -305,12 +314,13 @@ function BookingButtons({ stay, variant = "card" }: BookingButtonsProps) {
             href={href}
             target="_blank"
             rel="noopener noreferrer sponsored"
-            onClick={() =>
+            onClick={() => {
+              pingPartnerEvent("partner_clicked", id);
               track("book_accommodation", {
                 category: "affiliate",
                 data: { provider: id, country: stay.country, region: stay.region },
-              })
-            }
+              });
+            }}
             aria-label={`Book ${stay.name} on ${label}`}
             className={cn(
               "inline-flex items-center gap-1 rounded-md font-bold transition-opacity hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground",
@@ -328,12 +338,13 @@ function BookingButtons({ stay, variant = "card" }: BookingButtonsProps) {
           href={officialHref}
           target="_blank"
           rel="noopener noreferrer"
-          onClick={() =>
+          onClick={() => {
+            pingPartnerEvent("partner_clicked", "official");
             track("book_accommodation", {
               category: "affiliate",
               data: { provider: "official", country: stay.country, region: stay.region },
-            })
-          }
+            });
+          }}
           aria-label={`Visit official site for ${stay.name}`}
           className={cn(
             "inline-flex items-center gap-1 rounded-md ring-1 ring-border bg-background text-foreground/80 font-semibold transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground",

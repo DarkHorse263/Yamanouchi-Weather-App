@@ -41,20 +41,20 @@ export function KosciuszkoParkFeeCard({ variant, t }: Props) {
     ? "glass rounded-3xl p-5 md:p-8"
     : "rounded-2xl border border-amber-200 bg-gradient-to-br from-amber-50 via-white to-amber-50/40 p-6 md:p-8 shadow-sm";
   const eyebrow = isMountain
-    ? "byline text-muted-foreground"
+    ? "byline text-slate-500"
     : "text-[11px] font-bold tracking-wider text-amber-700 uppercase";
   const headline = isMountain
-    ? "font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2"
+    ? "font-display font-semibold text-xl md:text-2xl mt-1 flex items-center gap-2 text-slate-900"
     : "font-display font-semibold text-2xl text-foreground mt-0.5";
-  const body = isMountain ? "text-foreground/90" : "text-foreground/90";
+  const body = isMountain ? "text-slate-700" : "text-foreground/90";
   const linkBase = isMountain
-    ? "inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+    ? "inline-flex items-center gap-1.5 text-sm font-semibold text-[#0055FF] hover:underline"
     : "inline-flex items-center gap-1.5 text-sm font-semibold text-amber-900 hover:text-amber-950";
   const tipBox = isMountain
-    ? "mt-4 rounded-2xl border border-sky-500/30 bg-sky-500/10 p-4 flex items-start gap-3"
+    ? "mt-4 rounded-xl border border-sky-200 bg-sky-50 p-4 flex items-start gap-3"
     : "mt-4 rounded-xl border border-sky-200 bg-sky-50 p-4 flex items-start gap-3";
-  const tipText = isMountain ? "text-sky-100" : "text-sky-900";
-  const tipIcon = isMountain ? "text-sky-300" : "text-sky-700";
+  const tipText = isMountain ? "text-sky-900" : "text-sky-900";
+  const tipIcon = isMountain ? "text-sky-700" : "text-sky-700";
 
   return (
     <section className={shell}>

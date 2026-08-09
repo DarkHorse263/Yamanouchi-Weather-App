@@ -36,7 +36,7 @@ if (dsn) {
     // Distribute trace headers to our own API so backend Sentry events link to
     // the originating browser transaction. Loose regex covers the dev proxy URL
     // and the future production domain.
-    tracePropagationTargets: ["localhost", /^\/api\//, /\.replit\.dev$/, /feelzlike\.app$/],
+    tracePropagationTargets: ["localhost", /^\/api\//, /\.replit\.dev$/, /feelzlike\.com$/],
     initialScope: { tags: { artifact: "feelzlike" } },
   });
 }

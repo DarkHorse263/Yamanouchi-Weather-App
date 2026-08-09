@@ -1,9 +1,10 @@
 import { Compass, ExternalLink } from "lucide-react";
 
-import { useRegion, useLanguage, useBaseTown, LiveBadge, PageHeader } from "@workspace/feelzlike-shell";
+import { useRegion, useLanguage, useBaseTown, LiveBadge, PageHeader, useOptionalSeason, cn } from "@workspace/feelzlike-shell";
 import { PageMeta } from "@/lib/seo/PageMeta";
 
 import { EmptyStateCard } from "@/components/EmptyStateCard";
+import { GuideToursCard } from "@/components/GuideToursCard";
 
 /**
  * TownExplore - region-tourism links list.
@@ -20,6 +21,7 @@ export function TownExplore() {
   const { region } = useRegion();
   const { t } = useLanguage();
   const { town } = useBaseTown();
+  const seasonCtx = useOptionalSeason();
 
   const links = region.tourismLinks ?? [];
 
@@ -34,8 +36,9 @@ export function TownExplore() {
   const townDisplayName = town ? t(town.name, town.nameJa) : t("Region", "地域");
 
   return (
-    <div className="max-w-6xl mx-auto">
-      {town && (
+    <div className={cn("min-h-[100dvh] pb-8 transition-colors duration-500", seasonCtx?.season === "green" ? "bg-[#059669]" : "bg-[#0055FF]")}>
+      <div className="max-w-6xl mx-auto">
+        {town && (
         <PageMeta
           title={t(`${town.name} - explore`, `${town.name}の観光`)}
           description={
@@ -71,6 +74,10 @@ export function TownExplore() {
         />
       </div>
 
+      <section className="px-4 md:px-10 pt-5">
+        <GuideToursCard regionId={region.id} t={t} />
+      </section>
+
       {links.length === 0 ? (
         <section className="px-4 md:px-10 pt-5 pb-8">
           <EmptyStateCard
@@ -86,7 +93,7 @@ export function TownExplore() {
         <section className="px-4 md:px-10 pt-4 pb-8 space-y-6">
           {Array.from(grouped.entries()).map(([category, items]) => (
             <div key={category}>
-              <p className="text-[11px] font-bold tracking-wider text-muted-foreground/70 uppercase mb-3">
+              <p className="text-[11px] font-bold tracking-wider text-white/70 uppercase mb-3">
                 {category}
               </p>
               <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
@@ -120,6 +127,7 @@ export function TownExplore() {
           ))}
         </section>
       )}
+    </div>
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import { getAuth } from "@clerk/express";
 import type { Request, Response, NextFunction, RequestHandler } from "express";
 import {
   hasEntitlement,
@@ -34,7 +35,11 @@ export function requireEntitlement(ent: Entitlement): RequestHandler {
       // Soft member gate: an anonymous visitor is asked to sign in (free
       // account) before we ever talk money. Only signed-in users without the
       // entitlement get the real 402 paywall.
-      if (!req.isAuthenticated()) {
+      // SECURITY: use only auth.userId (Clerk's immutable principal) — never
+      // session claims, which are user-editable custom data.
+      const auth = getAuth(req);
+      const isSignedIn = !!auth.userId;
+      if (!isSignedIn) {
         res.status(401).json({
           error: "AUTH_REQUIRED",
           message: "Sign in with your free feelzlike account to use this feature.",

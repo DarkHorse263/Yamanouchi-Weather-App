@@ -1,0 +1,213 @@
+import { useMemo, useState, useEffect } from "react";
+import { MapContainer, TileLayer, Marker, Tooltip, ZoomControl, useMap } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import { useLocation } from "wouter";
+import { track } from "@/lib/analytics";
+import { REGION_BY_ID, REGION_COUNTRY, type CountryCode } from "@/regions";
+import { REGION_DEFAULTS } from "@/regions/region-pins";
+
+import { resolvePinRoute } from "./resolvePinRoute";
+
+// The pins: towns (sky #0ea5e9), mountains (orange #f97316).
+// Clicking deep-links to town/mountain page.
+//
+// The map is Pacific-centred: western-hemisphere longitudes are shifted by
+// +360 so Canada sits to the RIGHT of Japan/Australia instead of wrapping
+// the world (which used to open on an empty Africa view on mobile and show
+// a second, pinless copy of each continent on desktop). maxBounds keeps
+// panning inside the single populated copy of the world.
+
+const PIN_ICONS: Record<string, L.DivIcon> = {};
+
+function getPinIcon(label: string, accent: string, isClickable: boolean): L.DivIcon {
+  const key = `${label}-${accent}-${isClickable}`;
+  if (PIN_ICONS[key]) return PIN_ICONS[key];
+
+  const cursorStyle = isClickable ? "cursor:pointer;" : "";
+
+  const icon = L.divIcon({
+    className: "feelzlike-coverage-pin",
+    html: `
+      <div style="display:flex;flex-direction:column;align-items:center;pointer-events:auto;${cursorStyle}">
+        <div style="width:12px;height:12px;border-radius:9999px;background:${accent};box-shadow:0 0 0 2px rgba(255,255,255,1),0 1px 4px rgba(0,0,0,0.3);"></div>
+        <div style="margin-top:3px;padding:2px 6px;border-radius:9999px;background:rgba(255,255,255,0.95);color:#0F172A;font:600 10px/1.1 'DIN Pro','Inter',system-ui,sans-serif;white-space:nowrap;letter-spacing:0.01em;box-shadow:0 1px 4px rgba(0,0,0,0.15);">${label}</div>
+      </div>
+    `,
+    iconSize: [80, 32],
+    iconAnchor: [40, 6],
+  });
+  PIN_ICONS[key] = icon;
+  return icon;
+}
+
+/** Shift western-hemisphere longitudes east so everything sits on one Pacific-centred canvas. */
+function pacificLng(lng: number): number {
+  return lng < 0 ? lng + 360 : lng;
+}
+
+interface CoveragePin {
+  id: string;
+  name: string;
+  lat: number;
+  lng: number;
+  accent: string;
+  regionId: string;
+  country: CountryCode;
+}
+
+function boundsOf(pins: Array<{ lat: number; lng: number }>): L.LatLngBounds {
+  return L.latLngBounds(pins.map((p) => [p.lat, p.lng]));
+}
+
+function FlyTo({ pins, focus }: { pins: CoveragePin[]; focus: CountryCode | "ALL" }) {
+  const map = useMap();
+  useEffect(() => {
+    const subset = focus === "ALL" ? pins : pins.filter((p) => p.country === focus);
+    if (subset.length === 0) return;
+    map.flyToBounds(boundsOf(subset), { padding: [30, 30], duration: 0.8, maxZoom: 7 });
+  }, [map, pins, focus]);
+  return null;
+}
+
+const COUNTRY_CHIPS: Array<{ code: CountryCode | "ALL"; label: string }> = [
+  { code: "ALL", label: "world" },
+  { code: "AU", label: "australia" },
+  { code: "NZ", label: "new zealand" },
+  { code: "JP", label: "japan" },
+  { code: "CA", label: "canada" },
+];
+
+export default function CoverageMapInner() {
+  const [, setLocation] = useLocation();
+  const [focus, setFocus] = useState<CountryCode | "ALL">("ALL");
+
+  const allPins = useMemo(() => {
+    // Collect all pins from REGION_DEFAULTS
+    const pins: CoveragePin[] = [];
+
+    // Some regions share identical pins (like Tomamu between Furano and Tomamu regions)
+    // We only want to plot unique locations
+    const seen = new Set<string>();
+
+    for (const [regionId, defaults] of Object.entries(REGION_DEFAULTS)) {
+      // we need to make sure the region is actually in REGIONS (some might be inactive or testing)
+      if (!REGION_BY_ID[regionId]) continue;
+      const country = REGION_COUNTRY[regionId];
+      if (!country) {
+        // Guard against silent pin loss: a region present in REGION_DEFAULTS
+        // but missing from REGION_COUNTRY would otherwise vanish from the map.
+        if (import.meta.env.DEV) {
+          console.warn(`[CoverageMap] region "${regionId}" missing from REGION_COUNTRY - pins dropped`);
+        }
+        continue;
+      }
+
+      for (const p of defaults.pins) {
+        // approximate uniqueness by name/coords to avoid double pins
+        const key = `${p.lat.toFixed(3)}_${p.lng.toFixed(3)}`;
+        if (!seen.has(key)) {
+          seen.add(key);
+          pins.push({ ...p, lng: pacificLng(p.lng), regionId, country });
+        }
+      }
+    }
+    return pins;
+  }, []);
+
+  const handleFocus = (code: CountryCode | "ALL") => {
+    setFocus(code);
+    track("coverage_map_country_focus", { category: "navigation", data: { country: code } });
+  };
+
+  return (
+    <div className="relative h-[400px] w-full bg-slate-100/50 md:h-[480px]">
+      <MapContainer
+        center={[0, 210]}
+        zoom={2}
+        minZoom={2}
+        maxZoom={12}
+        zoomControl={false}
+        scrollWheelZoom={false}
+        worldCopyJump={false}
+        maxBounds={[[-58, 90], [78, 330]]}
+        maxBoundsViscosity={1.0}
+        className="h-full w-full outline-none"
+        style={{ background: "#e0e7ff" }} // sky-100 base for a clean, light look fitting bluebird palette
+      >
+        <TileLayer
+          url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+          maxZoom={12}
+        />
+        {allPins.map((p) => {
+          const regionConfig = REGION_BY_ID[p.regionId];
+          const route = resolvePinRoute(regionConfig, p.id);
+          const isClickable = route !== null;
+
+          return (
+            <Marker
+              key={p.id + p.regionId}
+              position={[p.lat, p.lng]}
+              icon={getPinIcon(p.name, p.accent, isClickable)}
+              eventHandlers={
+                isClickable
+                  ? {
+                      click: () => {
+                        track("coverage_map_pin_click", {
+                          category: "navigation",
+                          data: { town: p.id, region: p.regionId },
+                        });
+                        setLocation(route);
+                      },
+                    }
+                  : undefined
+              }
+            >
+              <Tooltip direction="top" offset={[0, -10]} opacity={1} className="font-semibold">
+                {p.name.toLowerCase()} &middot; {regionConfig?.name.toLowerCase()}
+              </Tooltip>
+            </Marker>
+          );
+        })}
+        <ZoomControl position="bottomright" />
+        <FlyTo pins={allPins} focus={focus} />
+      </MapContainer>
+
+      {/* Country quick-jump chips */}
+      <div
+        className="absolute left-3 top-3 z-[1001] flex flex-wrap gap-1.5"
+        role="group"
+        aria-label="jump to a country"
+      >
+        {COUNTRY_CHIPS.map((c) => (
+          <button
+            key={c.code}
+            type="button"
+            onClick={() => handleFocus(c.code)}
+            data-testid={`button-map-focus-${c.code.toLowerCase()}`}
+            className={`rounded-full px-3 py-1 text-[11px] font-bold lowercase shadow-sm transition-colors ${
+              focus === c.code
+                ? "bg-[#0055FF] text-white"
+                : "bg-white/95 text-slate-700 hover:bg-white"
+            }`}
+          >
+            {c.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Legend */}
+      <div className="absolute bottom-3 left-3 z-[1001] flex items-center gap-3 rounded-full bg-white/95 px-3 py-1.5 shadow-sm">
+        <span className="inline-flex items-center gap-1.5 text-[11px] font-bold lowercase text-slate-700">
+          <span className="h-2.5 w-2.5 rounded-full bg-[#f97316] ring-2 ring-white" aria-hidden />
+          mountains &amp; resorts
+        </span>
+        <span className="inline-flex items-center gap-1.5 text-[11px] font-bold lowercase text-slate-700">
+          <span className="h-2.5 w-2.5 rounded-full bg-[#0ea5e9] ring-2 ring-white" aria-hidden />
+          base towns
+        </span>
+      </div>
+    </div>
+  );
+}

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import { type CSSProperties } from "react";
-import logoFullColour from "/branding/logo-full-colour.png?url";
+import logoWhite from "/branding/logo-white.png?url";
 import { CountryPicker } from "@/components/home/CountryPicker";
 import { HomeFooter } from "@/components/home/HomeFooter";
 import { PlaceSearch } from "@/components/home/PlaceSearch";
@@ -15,12 +15,12 @@ const pretty:  CSSProperties = { textWrap: "pretty"  as CSSProperties["textWrap"
 export default function Countries() {
   return (
     <div
-      className="relative isolate min-h-screen text-slate-900 antialiased bg-white"
+      className="relative isolate min-h-[100dvh] text-white antialiased bg-[#0055FF] pb-safe"
       style={{ fontFamily: "'DIN Pro', system-ui, sans-serif", ...pretty }}
     >
       <PageMeta
         title="feelzlike · pick a country"
-        description="pick a country to see real conditions for resort towns across australia, japan and new zealand."
+        description="pick a country to see real conditions for resort towns across australia, japan, new zealand and canada."
         path="/countries"
         jsonLd={[
           breadcrumbSchema([
@@ -35,7 +35,7 @@ export default function Countries() {
         <header className="flex flex-col items-center gap-3 px-6 pt-5 pb-4 text-center md:pt-8 md:pb-5">
           <a
             href="/"
-            className="inline-flex items-center gap-1.5 self-start text-[12px] font-semibold uppercase tracking-[0.2em] text-sky-700/80 hover:text-sky-700 transition-colors"
+            className="inline-flex items-center gap-1.5 self-start text-[12px] font-semibold uppercase tracking-[0.2em] text-white/70 hover:text-white transition-colors"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             home
@@ -44,16 +44,16 @@ export default function Countries() {
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            src={logoFullColour}
+            src={logoWhite}
             alt="feelzlike"
             loading="eager"
             className="mt-2 h-16 w-auto select-none md:h-20"
             draggable={false}
           />
-          <h1 className="mt-2 text-xl font-medium leading-snug text-slate-900 md:text-2xl" style={balance}>
+          <h1 className="mt-2 text-xl font-medium leading-snug text-white md:text-2xl" style={balance}>
             i wonder what it feelzlike&nbsp;in&hellip;
           </h1>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-sky-700/80">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/70">
             pick a country
           </p>
         </header>

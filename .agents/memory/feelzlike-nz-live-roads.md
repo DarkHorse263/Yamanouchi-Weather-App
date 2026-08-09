@@ -46,3 +46,7 @@ road is live" would be dishonest — they're different roads with different data
   If you ever need to distinguish "feed unreachable" from "zero events" WITHOUT a
   hard 500 (e.g. to keep seasonal chainStatuses visible during an outage), that
   WOULD need a response-shape field + codegen + lib rebuild.
+
+## Japan roads rollout (Aug 2026)
+All 20 JP regions now render /roads: seasonal chain rules live in the data-driven JP_CHAIN_RULES table in api-server routes/roads.ts (yamanouchi/nozawa/iiyama keep bespoke blocks checked BEFORE it) + one honest official-camera-map tile per region in webcams.ts. Sources are prefectural/MLIT services, curl-verified — never resort pages (link rot). Notable winter gate closures (R292 Shiga-Kusatsu, Gold Line, Aspite Line, Zao Echo Line) are stated in the notes.
+**Gotcha:** chain cards are client-filtered by town nearbyMountainIds (+parentId rollup) — a chain entry whose mountainId no town references is silently invisible (Sahoro bug). When adding a chain entry, confirm at least one town lists its mountainId.

@@ -43,7 +43,7 @@ export function LiveBadge({
         />
       </span>
       <span
-        className={cn("byline", isDark ? "text-white" : "text-foreground")}
+        className={cn("text-[11px] font-bold lowercase tracking-wider", isDark ? "text-white" : "text-[#0F172A]")}
       >
         {label}
       </span>

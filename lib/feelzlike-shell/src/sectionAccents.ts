@@ -16,14 +16,14 @@
  * path not listed here (unknown/custom region nav entries fall back to it).
  */
 export const SECTION_ACCENTS: Record<string, string> = {
-  "/weather": "#1276D8", // sky blue · forecast + radar
-  "/roads": "#0E8C7A", // teal · roads & cams
-  "/transport": "#4F5BD5", // indigo · getting there
-  "/stay": "#D98A17", // amber · where to stay
-  "/eat": "#E5533D", // coral · where to eat
-  "/explore": "#2FA36B", // green · explore
-  "/plan": "#7A5AF0", // violet · trip planner
-  "/premium": "#A6781E", // deep gold · premium hub
+  "/weather": "#0284C7", // deeper sky (amber-AA safe on white)
+  "/roads": "#059669", // deeper emerald
+  "/transport": "#6200EA", // solid indigo
+  "/stay": "#D97706", // deeper amber (AA-passing on white)
+  "/eat": "#EA580C", // deeper orange
+  "/explore": "#16A34A", // deeper green (AA-passing on white)
+  "/plan": "#D500F9", // vivid violet
+  "/premium": "#CA8A04", // deeper gold (AA-passing on white)
 };
 
 /** Look up a section's accent hex by its region-relative nav path. */

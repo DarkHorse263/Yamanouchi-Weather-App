@@ -22,7 +22,7 @@ export function TownPartnerCard({
   t: (en: string, ja?: string) => string;
 }) {
   return (
-    <section className="mt-3">
+    <section className="mt-4">
       <a
         href={withPartnerUtm(partner.url, placeId, "listing")}
         target="_blank"
@@ -33,30 +33,30 @@ export function TownPartnerCard({
             data: { partner: partner.name, place: placeId, placement: "listing" },
           })
         }
-        className="group flex items-center gap-4 rounded-2xl border border-blue-200 bg-blue-50/50 p-5 transition-all hover:shadow-md hover:border-blue-300"
+        className="group flex items-center gap-5 rounded-[2rem] border-0 bg-white p-6 shadow-[0_12px_40px_-12px_rgba(0,40,150,0.5)] transition-all hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(0,30,120,0.5)]"
       >
-        <div className="shrink-0 w-11 h-11 rounded-xl inline-flex items-center justify-center bg-blue-100 text-blue-700">
-          <Handshake className="w-5 h-5" />
+        <div className="shrink-0 w-14 h-14 rounded-2xl inline-flex items-center justify-center bg-[#F0F5FF] text-[#0055FF] group-hover:bg-[#0055FF] group-hover:text-white transition-colors duration-300">
+          <Handshake className="w-6 h-6" />
         </div>
         <div className="min-w-0 flex-1">
           {/* Label wears the logo blue · matches TownPartnerAd. */}
-          <p className="text-[11px] font-bold tracking-wider text-[#1d6fb8] uppercase">
+          <p className="text-[12px] font-bold lowercase tracking-wider text-[#0055FF]">
             {t("Featured partner", "提携パートナー")}
-            <span className="text-[#1d6fb8]/50 normal-case tracking-normal font-semibold">
+            <span className="text-[#0055FF]/50 normal-case tracking-normal font-semibold">
               {" · "}
               {t(partner.kicker, partner.kickerJa)}
             </span>
           </p>
-          <p className="font-display font-semibold text-foreground mt-0.5">
+          <p className="font-display font-black text-xl tracking-tight text-[#0F172A] mt-1 lowercase">
             {t(partner.name, partner.nameJa)}
           </p>
-          <p className="text-sm text-muted-foreground mt-0.5 leading-snug">
+          <p className="text-[14px] font-bold text-slate-500 mt-1 leading-snug lowercase">
             {t(partner.tagline, partner.taglineJa)}
           </p>
         </div>
-        <span className="shrink-0 inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700">
+        <span className="shrink-0 inline-flex items-center gap-1.5 text-[14px] font-black lowercase text-[#0055FF]">
           {t(partner.cta, partner.ctaJa)}
-          <ExternalLink className="w-3.5 h-3.5 opacity-70" />
+          <ExternalLink className="w-4 h-4 opacity-70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
         </span>
       </a>
     </section>

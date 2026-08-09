@@ -20,7 +20,7 @@
 import { writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { REGIONS, regionFeatures, townFeatures } from "./seo-regions.mjs";
+import { REGIONS, regionFeatures, townFeatures, regionMountains } from "./seo-regions.mjs";
 
 const SITE_URL = process.env.PUBLIC_ORIGIN || "https://feelzlike.com";
 const NOW = new Date().toISOString().slice(0, 10);
@@ -63,6 +63,7 @@ const staticUrls = [
   url("/jp",              "daily",   "0.9"),
   url("/nz",              "daily",   "0.9"),
   url("/ca",              "daily",   "0.9"),
+  url("/ca/all-ski-areas","weekly",  "0.6"),
   url("/us",              "daily",   "0.9"),
   url("/plan",            "weekly",  "0.8"),
   url("/premium",         "weekly",  "0.6"),
@@ -82,6 +83,13 @@ for (const r of REGIONS) {
   // Region sub-sections (per-region: alerts only where an alerts page exists)
   for (const f of regionFeatures(r)) {
     dynamicUrls.push(url(`/${r.slug}/${f}`, "weekly", "0.7"));
+  }
+
+  // Mountain / resort detail pages (/:region/mountain/:id) — enumerated from
+  // the app's real region registry so new mountains are picked up
+  // automatically (see regionMountains in seo-regions.mjs).
+  for (const m of regionMountains(r)) {
+    dynamicUrls.push(url(`/${r.slug}/mountain/${m.id}`, "daily", "0.7"));
   }
 
   // Town pages

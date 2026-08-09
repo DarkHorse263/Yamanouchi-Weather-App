@@ -1,17 +1,21 @@
+import { getAuth, clerkClient } from "@clerk/express";
 import type { Request, Response, NextFunction } from "express";
 
 /**
- * Admin gate · runs AFTER authMiddleware. Requires:
- *   1. an authenticated session (req.user from Replit Auth), AND
- *   2. that the user's email is in the comma-separated `ADMIN_EMAILS` env var.
+ * Admin gate · runs after clerkMiddleware.
  *
- * `ADMIN_EMAILS` is the source of truth for who can access /admin and the
- * /api/admin/* surface. Comparison is lowercased and trimmed; an empty or
- * unset env var locks the entire admin surface (fail-closed).
+ * SECURITY: email is loaded from the Clerk API (server-side, immutable) — NOT
+ * from session claims, which are user-editable custom data. This ensures that
+ * an attacker cannot forge admin access by setting a custom `email` claim.
  *
- * Returns 401 (not logged in) vs 403 (logged in but not on the allowlist)
- * so the frontend can decide whether to redirect to /api/login or show
- * a "not authorised" message.
+ * Requires:
+ *   1. a valid Clerk session (`getAuth(req).userId` is set), AND
+ *   2. that the user's Clerk primary email is in the `ADMIN_EMAILS` env var.
+ *
+ * `ADMIN_EMAILS` is the source of truth. Comparison is lowercased + trimmed.
+ * An empty or unset env var locks the entire admin surface (fail-closed).
+ *
+ * Returns 401 (not logged in) or 403 (logged in but not on the allowlist).
  */
 function getAdminEmails(): Set<string> {
   const raw = process.env.ADMIN_EMAILS ?? "";
@@ -23,18 +27,36 @@ function getAdminEmails(): Set<string> {
   );
 }
 
-export function requireAdminUser(req: Request, res: Response, next: NextFunction): void {
-  if (!req.isAuthenticated()) {
+export async function requireAdminUser(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> {
+  const auth = getAuth(req);
+  const clerkUserId = auth.userId; // Clerk's immutable, server-verified ID
+
+  if (!clerkUserId) {
     res.status(401).json({ error: "UNAUTHORIZED" });
     return;
   }
 
-  const email = (req.user.email ?? "").toLowerCase().trim();
-  const allow = getAdminEmails();
-  if (!email || !allow.has(email)) {
-    res.status(403).json({ error: "FORBIDDEN" });
-    return;
-  }
+  try {
+    // Load the user from the Clerk API so the email is server-authoritative
+    // and cannot be forged by a session-claim manipulation.
+    const clerkUser = await clerkClient.users.getUser(clerkUserId);
+    const email = (
+      clerkUser.emailAddresses.find((e) => e.id === clerkUser.primaryEmailAddressId)?.emailAddress ?? ""
+    ).toLowerCase().trim();
 
-  next();
+    const allow = getAdminEmails();
+    if (!email || !allow.has(email)) {
+      res.status(403).json({ error: "FORBIDDEN" });
+      return;
+    }
+
+    next();
+  } catch (err) {
+    console.error("[requireAdminUser] Clerk API error:", err);
+    res.status(500).json({ error: "ADMIN_CHECK_FAILED" });
+  }
 }

@@ -293,7 +293,7 @@ const PRIMARY_TOWN: Record<string, string> = {
 };
 
 // AU + NZ = southern hemisphere (snow Jun-Sep); JP + CA + US = northern (snow Dec-Mar).
-function seasonForCountry(code: "AU" | "JP" | "NZ" | "CA" | "US"): "winter" | "green" {
+export function seasonForCountry(code: "AU" | "JP" | "NZ" | "CA" | "US"): "winter" | "green" {
   const month = new Date().getMonth() + 1;
   if (code === "AU" || code === "NZ") return month >= 6 && month <= 9 ? "winter" : "green";
   return month >= 12 || month <= 3 ? "winter" : "green";

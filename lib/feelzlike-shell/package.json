@@ -12,6 +12,7 @@
     "wouter": "^3.3.5"
   },
   "dependencies": {
+    "@workspace/promo-constants": "workspace:*",
     "clsx": "catalog:",
     "framer-motion": "catalog:",
     "lucide-react": "catalog:",

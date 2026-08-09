@@ -5,6 +5,8 @@ description: why the multi-model /forecast card must survive Open-Meteo failure 
 
 # Ensemble ("Next 6 days" / extended outlook) resilience
 
+**Detail-page card REMOVED Aug 2026** — owner found the "next 6 days · multi-model" card confusing/duplicative next to the 5 & 14 day forecasts and asked for its removal. Don't reintroduce it without owner sign-off. The server multi-model forecast endpoint is still consumed by the Trip Planner, so the resilience notes below still apply.
+
 The `/api/forecast/:id` multi-model card (`getEnsembleForecast` in `ensemble-forecast.ts`) blends Open-Meteo (ECMWF+GFS+ICON, one multi-model request) with MET Norway. It renders on town/mountain detail pages via `EnsembleForecast.tsx`.
 
 ## The failure mode that bit us

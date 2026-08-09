@@ -335,6 +335,8 @@ const NEW_ZEALAND: Record<string, MountainWebcam[]> = {
 };
 
 const CA_VERIFIED = "2026-08-01";
+// New CA regions (Okanagan + Vancouver & the Island) verified in this pass.
+const OKANAGAN_VERIFIED = "2026-08-01";
 
 /**
  * Canada (BC, Alberta, Québec). Same posture as NZ: none of these operators
@@ -547,6 +549,90 @@ const CANADA: Record<string, MountainWebcam[]> = {
       pageUrl: "https://www.bromontmontagne.com/en/webcams/",
       source: "Ski Bromont",
       verifiedAt: CA_VERIFIED,
+    },
+  ],
+  "big-white": [
+    {
+      id: "big-white-official",
+      mountainId: "big-white",
+      name: "Big White webcams",
+      description: "Official cams across the village and the alpine.",
+      embedType: "external",
+      pageUrl: "https://www.bigwhite.com/mountain-conditions/webcams",
+      source: "Big White Ski Resort",
+      verifiedAt: OKANAGAN_VERIFIED,
+    },
+  ],
+  silverstar: [
+    {
+      id: "silverstar-official",
+      mountainId: "silverstar",
+      name: "SilverStar webcams",
+      description: "Official village and pow cams.",
+      embedType: "external",
+      pageUrl: "https://www.skisilverstar.com/the-mountain/webcams/",
+      source: "SilverStar Mountain Resort",
+      verifiedAt: OKANAGAN_VERIFIED,
+    },
+  ],
+  "apex-resort": [
+    {
+      id: "apex-resort-official",
+      mountainId: "apex-resort",
+      name: "Apex Mountain webcams",
+      description: "Official live cams on the resort weather page.",
+      embedType: "external",
+      pageUrl: "https://apexresort.com/weather/",
+      source: "Apex Mountain Resort",
+      verifiedAt: OKANAGAN_VERIFIED,
+    },
+  ],
+  "cypress-mountain": [
+    {
+      id: "cypress-mountain-official",
+      mountainId: "cypress-mountain",
+      name: "Cypress Mountain webcams",
+      description: "Official cams on the downhill mountain report.",
+      embedType: "external",
+      pageUrl: "https://www.cypressmountain.com/mountain-report",
+      source: "Cypress Mountain",
+      verifiedAt: OKANAGAN_VERIFIED,
+    },
+  ],
+  "grouse-mountain": [
+    {
+      id: "grouse-mountain-official",
+      mountainId: "grouse-mountain",
+      name: "Grouse Mountain webcams",
+      description: "Official cams above the North Shore.",
+      embedType: "external",
+      pageUrl: "https://www.grousemountain.com/web-cams",
+      source: "Grouse Mountain",
+      verifiedAt: OKANAGAN_VERIFIED,
+    },
+  ],
+  "mount-seymour": [
+    {
+      id: "mount-seymour-official",
+      mountainId: "mount-seymour",
+      name: "Mt Seymour webcams",
+      description: "Official cams on today's conditions page.",
+      embedType: "external",
+      pageUrl: "https://mtseymour.ca/the-mountain/todays-conditions-hours",
+      source: "Mt Seymour",
+      verifiedAt: OKANAGAN_VERIFIED,
+    },
+  ],
+  "mount-washington": [
+    {
+      id: "mount-washington-official",
+      mountainId: "mount-washington",
+      name: "Mount Washington webcams",
+      description: "Official Vancouver Island alpine cams.",
+      embedType: "external",
+      pageUrl: "https://mountwashington.ca/the-mountain/conditions-terrain/webcams.html",
+      source: "Mount Washington Alpine Resort",
+      verifiedAt: OKANAGAN_VERIFIED,
     },
   ],
 };

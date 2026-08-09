@@ -4,7 +4,7 @@ import wordmark from "@assets/feelzlike_trimmed/feelzlike_WordMarque_colour_1604
 /**
  * Powder Highway · the BC interior loop through the Selkirk, Purcell and
  * Monashee ranges. Unlike the other Canadian regions this is a road trip,
- * not a single valley: seven independent resorts, each with its own base
+ * not a single valley: six independent resorts, each with its own base
  * town, strung along Hwys 1 / 3 / 95 / 5.
  *
  *   Revelstoke → Revelstoke Mountain Resort · longest lift-served vertical
@@ -13,10 +13,9 @@ import wordmark from "@assets/feelzlike_trimmed/feelzlike_WordMarque_colour_1604
  *   Nelson     → Whitewater                 · independent, barely groomed
  *   Kimberley  → Kimberley Alpine Resort    · sunny, quiet cruisers
  *   Invermere  → Panorama                   · big Purcell vertical
- *   Sun Peaks  → Sun Peaks Resort           · three linked mountains
  *
- * Naming: the town id `sun-peaks` and the resort share a name, so the
- * mountain takes the `-resort` suffix per the region convention.
+ * Sun Peaks moved to the `okanagan` (BC Interior) region · it sits above
+ * Kamloops in the Thompson Valley, not on the Kootenay loop.
  *
  * Northern-hemisphere season (Dec to mid-Apr at most of these). Weather is
  * Open-Meteo with the existing OpenWeatherMap fallback · no Environment
@@ -31,7 +30,7 @@ export const powderHighwayRegion: RegionConfig = {
   brand: { wordmarkUrl: wordmark },
   seasons: true,
   hemisphere: "north",
-  summaryMountains: ["Revelstoke", "Kicking Horse", "Fernie", "Whitewater", "Sun Peaks"],
+  summaryMountains: ["Revelstoke", "Kicking Horse", "Fernie", "Whitewater", "Kimberley", "Panorama"],
   resorts: [
     { path: "/mountain/revelstoke-mountain-resort", label: "Revelstoke Mountain Resort" },
     { path: "/mountain/kicking-horse", label: "Kicking Horse" },
@@ -39,7 +38,6 @@ export const powderHighwayRegion: RegionConfig = {
     { path: "/mountain/whitewater", label: "Whitewater" },
     { path: "/mountain/kimberley-alpine", label: "Kimberley Alpine Resort" },
     { path: "/mountain/panorama", label: "Panorama" },
-    { path: "/mountain/sun-peaks-resort", label: "Sun Peaks Resort" },
   ],
   mountains: [
     {
@@ -118,21 +116,6 @@ export const powderHighwayRegion: RegionConfig = {
       terrain_park: true,
       backcountry_access: true,
     },
-    {
-      id: "sun-peaks-resort",
-      name: "Sun Peaks Resort",
-      elevationM: 2080,
-      lat: 50.8833,
-      lng: -119.8833,
-      blurb: "canada's second-largest ski area · tod, sundance and morrisey linked by lift",
-      websiteUrl: "https://www.sunpeaksresort.com/",
-      snowReportUrl: "https://www.sunpeaksresort.com/ski-ride/the-mountain/lifts-trail-status",
-      beginner_friendly: true,
-      kids_lessons: true,
-      terrain_park: true,
-      nordic_focus: true,
-      summerOpen: true,
-    },
   ],
   baseTowns: [
     {
@@ -189,15 +172,6 @@ export const powderHighwayRegion: RegionConfig = {
       blurb: "columbia valley lake town · ~20 min up toby creek road to panorama",
       nearbyMountainIds: ["panorama"],
     },
-    {
-      id: "sun-peaks",
-      name: "Sun Peaks",
-      lat: 50.8836,
-      lng: -119.8869,
-      radiusM: 5000,
-      blurb: "ski-through village 45 min above kamloops · lifts leave from the main street",
-      nearbyMountainIds: ["sun-peaks-resort"],
-    },
   ],
   footer: "v0.3 · feelzlike",
   tourismLinks: [
@@ -213,7 +187,6 @@ export const powderHighwayRegion: RegionConfig = {
     { category: "Resorts", label: "Whitewater", url: "https://skiwhitewater.com/" },
     { category: "Resorts", label: "Kimberley Alpine Resort", url: "https://skikimberley.com/" },
     { category: "Resorts", label: "Panorama", url: "https://www.panoramaresort.com/" },
-    { category: "Resorts", label: "Sun Peaks Resort", url: "https://www.sunpeaksresort.com/" },
     { category: "Transport", label: "DriveBC · highway conditions & cameras", url: "https://www.drivebc.ca/" },
     { category: "Safety", label: "Avalanche Canada · daily forecasts", url: "https://avalanche.ca/forecasts" },
     { category: "Weather", label: "Environment Canada · BC forecasts", url: "https://weather.gc.ca/" },

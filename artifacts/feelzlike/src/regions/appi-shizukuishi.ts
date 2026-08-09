@@ -49,7 +49,7 @@ export const appiShizukuishiRegion: RegionConfig = {
       lng: 140.9452,
       blurb: "One of Tohoku's largest resorts · long corduroy runs off a 2.8 km gondola to Mt Maemori, dry inland powder and tree runs, on the Ikon Pass from 2025-26",
       blurbJa: "東北最大級のスキーリゾート · 全長2.8kmのゴンドラで前森山へ、ロングコースと軽い内陸パウダー。2025-26からイコンパス対応",
-      websiteUrl: "https://www.appi-japan.com/",
+      websiteUrl: "https://www.appi.co.jp/en/",
       beginner_friendly: true,
       kids_lessons: true,
     },
@@ -60,8 +60,8 @@ export const appiShizukuishiRegion: RegionConfig = {
       elevationM: 1128,
       // Shizukuishi Prince Hotel base area on Takakura's east slopes
       // (~430 m) · gondola and ropeway to about 1,128 m.
-      lat: 39.6940,
-      lng: 140.9060,
+      lat: 39.7844,
+      lng: 140.9203,
       blurb: "Prince-operated hill on Takakura that hosted the 1993 Alpine World Championships · about 700 m of vertical, a gondola and ropeway, and one of Japan's few full downhill courses",
       blurbJa: "1993年アルペン世界選手権の舞台となったプリンス系スキー場 · 標高差約700m、ゴンドラとロープウェーで高倉山へ。日本屈指のダウンヒルコース",
       websiteUrl: "https://www.princehotels.com/en/ski/shizukuishi/",
@@ -113,7 +113,7 @@ export const appiShizukuishiRegion: RegionConfig = {
   footer: "v0.3 · feelzlike",
   tourismLinks: [
     { category: "Tourism", categoryJa: "観光", label: "VISIT IWATE · Iwate official tourism", labelJa: "岩手県公式観光サイト VISIT IWATE", url: "https://visitiwate.com/" },
-    { category: "Resorts", categoryJa: "スキー場", label: "APPI Resort", labelJa: "安比高原スキー場", url: "https://www.appi-japan.com/" },
+    { category: "Resorts", categoryJa: "スキー場", label: "APPI Resort", labelJa: "安比高原スキー場", url: "https://www.appi.co.jp/en/" },
     { category: "Resorts", categoryJa: "スキー場", label: "Shizukuishi · Prince Snow Resorts", labelJa: "雫石スキー場（プリンススノーリゾート）", url: "https://www.princehotels.com/en/ski/shizukuishi/" },
     { category: "Transport", categoryJa: "交通", label: "JR East · Tohoku Shinkansen to Morioka", labelJa: "JR東日本 · 東北新幹線（盛岡）", url: "https://www.jreast.co.jp/en/multi/" },
     { category: "Transport", categoryJa: "交通", label: "Iwate Kenpoku Bus · Morioka to Appi", labelJa: "岩手県北バス · 盛岡〜安比高原", url: "https://www.iwate-kenpokubus.co.jp/" },

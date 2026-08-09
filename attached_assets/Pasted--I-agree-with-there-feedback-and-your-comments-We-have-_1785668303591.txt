@@ -1,0 +1,21 @@
+
+I agree with there feedback and your comments. We have made the waether of the town you're staying in quite prominant. Whislt it's important and I don't want to lose it, the focus should ne on what it's like in the mountains. I like the idea of grouping all the other information together under a Single heading. I really want to monetise the app and I feel that the premium details are hidden and not well explained as to waht's there. I'm also struggling to understand or see how many people are actually using the app or engaged with it. This is important if I want to sell partnership panels. A visual thing for me is I think it lacks colour. I've never been a fan of pastels, I love strong primary colours and derisions of... Another thing I've thought about is a world map that plots all the resorts/mountains around towns as we develop them. This way users can visually see where a town is compared to a mountain.
+
+Let me know your feedback and any proposed solutions
+
+9 hours ago
+
+4 actions
+Here's my take on each, plus what I've done about them:
+
+1 + 2 · mountain-first, travel grouped — completely agree, and they go together. The town weather stays (it's genuinely useful — that's where you wake up and load the car), but the hero of every page should be the mountain: snow, wind, freezing level, the week ahead. Grouping Transport/Stay/Eat/Explore/Plan a trip under one heading makes weather the obvious main act. Logged as one task since they're the same redesign.
+
+3 · premium is hidden — you're right, and it's the cheapest monetisation win available. Right now people only discover premium when they bump into a gate. It needs a proper page that sells it — what alerts look like, what members get, "free until 31 december 2026" — plus gentle prompts where the features are relevant ("get powder alerts for days like this"). Logged. One tie-in: there's an existing task about the free-until badge and the paywall disagreeing — worth doing alongside.
+
+4 · who's actually using it — this matters most for partnership panels, and there's already a task queued for part of it (#17: real shown/clicked numbers on your admin page). I'd suggest widening that to a proper owner dashboard: visitors, top regions, installs, alert subscribers, return visits — the numbers a partner would ask for. One honest caveat: analytics only counts people who accept cookies, so we'd pair it with cookieless server-side counts to get truthful totals. Say the word and I'll expand #17 rather than duplicate it.
+
+5 · colour — this is a real direction change, and the wrong way to do it is me repainting the whole app on a guess. The right way is side-by-side mockups: your current look next to two or three bolder directions built on strong primaries (the snow pink and deep blues can anchor it), so you pick with your eyes, not from a description. Happy to do that whenever — it's a fun one.
+
+6 · world map — love it. It's both useful (see instantly that Jindabyne sits below Perisher and Thredbo) and great marketing ("27 regions and growing"). We already have all the pin data from the radar maps, so it's very buildable — logged.
+
+So: three new tasks in your list (#47 mountain-first + grouping, #48 premium visibility, #49 world map), #17 can grow into the engagement dashboard, and the colour exploration I'd start with mockups. Which would you like to tackle first?

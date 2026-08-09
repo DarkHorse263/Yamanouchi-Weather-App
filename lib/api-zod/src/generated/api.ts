@@ -186,6 +186,8 @@ export const GetPowderAlertsQueryParams = zod.object({
       "ruapehu",
       "whistler",
       "powder-highway",
+      "okanagan",
+      "vancouver",
       "banff-lake-louise",
       "canmore",
       "jasper",
@@ -220,21 +222,13 @@ export const GetPowderAlertsQueryParams = zod.object({
       "jay-peak-nek",
       "jackson-hole",
       "grand-targhee",
-
       "big-sky",
-
       "bozeman-bridger-bowl",
-
       "whitefish",
-
       "red-lodge",
-
       "taos",
-
       "angel-fire",
-
       "santa-fe",
-
       "albuquerque-sandia",
       "harbor-springs",
       "keweenaw-peninsula",
@@ -1272,6 +1266,8 @@ export const GetWeatherQueryParams = zod.object({
       "ruapehu",
       "whistler",
       "powder-highway",
+      "okanagan",
+      "vancouver",
       "banff-lake-louise",
       "canmore",
       "jasper",
@@ -1306,21 +1302,13 @@ export const GetWeatherQueryParams = zod.object({
       "jay-peak-nek",
       "jackson-hole",
       "grand-targhee",
-
       "big-sky",
-
       "bozeman-bridger-bowl",
-
       "whitefish",
-
       "red-lodge",
-
       "taos",
-
       "angel-fire",
-
       "santa-fe",
-
       "albuquerque-sandia",
       "harbor-springs",
       "keweenaw-peninsula",
@@ -1781,6 +1769,8 @@ export const GetWebcamsQueryParams = zod.object({
       "ruapehu",
       "whistler",
       "powder-highway",
+      "okanagan",
+      "vancouver",
       "banff-lake-louise",
       "canmore",
       "jasper",
@@ -1815,21 +1805,13 @@ export const GetWebcamsQueryParams = zod.object({
       "jay-peak-nek",
       "jackson-hole",
       "grand-targhee",
-
       "big-sky",
-
       "bozeman-bridger-bowl",
-
       "whitefish",
-
       "red-lodge",
-
       "taos",
-
       "angel-fire",
-
       "santa-fe",
-
       "albuquerque-sandia",
       "harbor-springs",
       "keweenaw-peninsula",
@@ -1992,6 +1974,8 @@ export const GetRoadConditionsQueryParams = zod.object({
       "ruapehu",
       "whistler",
       "powder-highway",
+      "okanagan",
+      "vancouver",
       "banff-lake-louise",
       "canmore",
       "jasper",
@@ -2026,21 +2010,13 @@ export const GetRoadConditionsQueryParams = zod.object({
       "jay-peak-nek",
       "jackson-hole",
       "grand-targhee",
-
       "big-sky",
-
       "bozeman-bridger-bowl",
-
       "whitefish",
-
       "red-lodge",
-
       "taos",
-
       "angel-fire",
-
       "santa-fe",
-
       "albuquerque-sandia",
       "harbor-springs",
       "keweenaw-peninsula",
@@ -2258,6 +2234,8 @@ export const GetLiftStatusQueryParams = zod.object({
       "ruapehu",
       "whistler",
       "powder-highway",
+      "okanagan",
+      "vancouver",
       "banff-lake-louise",
       "canmore",
       "jasper",
@@ -2292,21 +2270,13 @@ export const GetLiftStatusQueryParams = zod.object({
       "jay-peak-nek",
       "jackson-hole",
       "grand-targhee",
-
       "big-sky",
-
       "bozeman-bridger-bowl",
-
       "whitefish",
-
       "red-lodge",
-
       "taos",
-
       "angel-fire",
-
       "santa-fe",
-
       "albuquerque-sandia",
       "harbor-springs",
       "keweenaw-peninsula",
@@ -3522,124 +3492,8 @@ export const GetTownEatResponse = zod.union([
 ]);
 
 /**
- * @summary Get the currently authenticated user
- */
-export const GetCurrentAuthUserHeader = zod.object({
-  Authorization: zod
-    .string()
-    .optional()
-    .describe("Opaque session token · `Bearer <sid>`."),
-});
-
-export const GetCurrentAuthUserResponse = zod.object({
-  user: zod.union([
-    zod.object({
-      id: zod.string(),
-      email: zod.string().email().nullable(),
-      firstName: zod.string().nullable(),
-      lastName: zod.string().nullable(),
-      profileImageUrl: zod.string().nullable(),
-    }),
-    zod.null(),
-  ]),
-});
-
-/**
- * Sends a magic sign-in link to the given email. Clicking it creates a free account (or signs into an existing one, including accounts claimed by alert subscribers) and opens a session.
- * @summary Request a passwordless email sign-in link
- */
-export const requestEmailSignInBodyEmailMax = 254;
-
-export const requestEmailSignInBodyReturnToMax = 512;
-
-export const RequestEmailSignInBody = zod.object({
-  email: zod.string().max(requestEmailSignInBodyEmailMax),
-  returnTo: zod
-    .string()
-    .max(requestEmailSignInBodyReturnToMax)
-    .optional()
-    .describe(
-      "Relative path to land on after the link is clicked (must start with `\/`).",
-    ),
-});
-
-export const RequestEmailSignInResponse = zod.object({
-  ok: zod.boolean(),
-  status: zod.enum(["sent"]),
-  message: zod.string(),
-  emailDelivered: zod.boolean().optional(),
-  devVerifyUrl: zod
-    .string()
-    .optional()
-    .describe(
-      "Dev-only convenience link when no email provider is configured. Never present in production.",
-    ),
-});
-
-/**
- * @summary Complete the email sign-in flow (magic-link target)
+ * @summary Verify the magic-link token, claim alert subscription, redirect to sign-in
  */
 export const CompleteEmailSignInQueryParams = zod.object({
   token: zod.coerce.string(),
-});
-
-/**
- * @summary Start the browser OIDC login flow
- */
-export const BeginBrowserLoginQueryParams = zod.object({
-  returnTo: zod.coerce
-    .string()
-    .optional()
-    .describe(
-      "Relative path to redirect to after login (must start with `\/`). Defaults to `\/`.",
-    ),
-});
-
-/**
- * @summary Complete the browser OIDC login flow
- */
-export const HandleBrowserLoginCallbackQueryParams = zod.object({
-  code: zod.coerce.string().optional(),
-  state: zod.coerce.string().optional(),
-  iss: zod.coerce.string().url().optional(),
-});
-
-/**
- * @summary Clear the session and begin OIDC logout
- */
-export const LogoutBrowserSessionHeader = zod.object({
-  Authorization: zod
-    .string()
-    .optional()
-    .describe("Opaque session token · `Bearer <sid>`."),
-});
-
-/**
- * @summary Exchange a mobile OIDC code for a session token
- */
-
-export const ExchangeMobileAuthorizationCodeBody = zod.object({
-  code: zod.string().min(1),
-  code_verifier: zod.string().min(1),
-  redirect_uri: zod.string().url().min(1),
-  state: zod.string().min(1),
-  nonce: zod.string().min(1).optional(),
-});
-
-export const ExchangeMobileAuthorizationCodeResponse = zod.object({
-  token: zod.string(),
-});
-
-/**
- * @summary Delete a mobile session token
- */
-export const LogoutMobileSessionHeader = zod.object({
-  Authorization: zod
-    .string()
-    .optional()
-    .describe("Opaque session token · `Bearer <sid>`."),
-});
-
-export const LogoutMobileSessionResponse = zod.object({
-  success: zod.boolean(),
 });

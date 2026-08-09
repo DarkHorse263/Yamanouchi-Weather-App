@@ -26,6 +26,13 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SCAN_DIRS = [join(ROOT, "src/data"), join(ROOT, "src/regions"), join(ROOT, "src/pages")];
 const OUT = join(ROOT, "../api-server/src/data/external-links.json");
 
+// Files whose external links must NOT enter the nightly smoke test. The Canada
+// "every ski hill" directory carries ~225 links to small-town operators; a
+// nightly bot visiting all of them would hammer tiny sites for no benefit (and
+// they rot too fast to alert on usefully). The page links them out directly at
+// runtime instead. Match on basename so the path separator never matters.
+const SKIP_FILES = new Set(["canadaDirectory.ts"]);
+
 const EXCLUDE_HOSTS = [
   // affiliate / tracking - never machine-visit
   "awin1.com", "tidd.ly", "anrdoezrs.net", "dpbolvw.net", "jdoqocy.com",
@@ -48,6 +55,7 @@ function* walk(dir) {
     const p = join(dir, name);
     const st = statSync(p);
     if (st.isDirectory()) yield* walk(p);
+    else if (SKIP_FILES.has(name)) continue;
     else if (/\.(ts|tsx|json)$/.test(name)) yield p;
   }
 }

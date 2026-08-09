@@ -42,6 +42,12 @@ export interface MountainLink {
    * When absent the UI falls back to the plain official-site link only.
    */
   snowReportUrl?: string;
+  /**
+   * Official resort lift status / lift report page (human page, NOT a feed).
+   * Curl-verified before adding - resort URLs rot when sites restructure.
+   * When absent the lift card falls back to snowReportUrl, then websiteUrl.
+   */
+  liftStatusUrl?: string;
   /** Approximate base/centroid latitude - single source of truth for journey/Today's call. */
   lat?: number;
   /** Approximate base/centroid longitude. */

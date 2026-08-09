@@ -244,7 +244,7 @@ export const SNOWMAKING_CAPABILITY: Record<string, SnowmakingCapability> = {
     type: "conventional",
     headline: "conventional snowmaking",
     summary:
-      "ben lomond is tasmania's only chairlift resort · four snowmakers top up the natural snow across the summit and beginner areas, with more guns going in for 2026.",
+      "ben lomond is tasmania's only lift-served ski resort · four snowmakers top up the natural snow across the summit and beginner areas, with more guns going in for 2026.",
     areas: [],
     source: "ben lomond",
   },
