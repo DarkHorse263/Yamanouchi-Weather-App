@@ -38,6 +38,18 @@
 
 - **ADDING A NEW REGION — CHECKLIST**: (1) Create `src/regions/<region-id>.ts` mirroring `snowy-mountains.ts` / `yamanouchi.ts` (mountains array with id/name/elevationM/lat/lng/blurb/websiteUrl, baseTowns array, parentId for umbrella groups); (2) register in `src/regions/index.ts` `REGIONS` and assign country in `REGION_COUNTRY`; (3) add region to `RegionLayout.tsx` `REGION_ROUTERS` ONLY if it needs custom pages — otherwise generic `pages/region/*` handles it; (4) add server-side: `artifacts/api-server/src/lib/regions.ts` `REGION_IDS` + `LOCATION_TO_REGION`, weather entries in `routes/weather.ts`, regions descriptor in `routes/regions.ts`; (5) update `lib/api-spec/openapi.yaml` `RegionId` enum and regen `pnpm --filter @workspace/api-zod run codegen && pnpm --filter @workspace/api-client-react run codegen` then `tsc -b lib/api-client-react --force`; (6) seed `data/lifts.ts` and `data/webcams.ts` for each mountain (or skip — page-level gates self-hide); (7) add per-resort tints to `MOUNTAIN_TINTS` in `pages/region/TownHome.tsx`; (8) add headline to `landing.tsx` `FALLBACK_REGIONS` + `routes/regions.ts` `headlineLabel`. The mountain detail page renders for free via the generic `pages/region/MountainDetail.tsx` because routing is data-driven (`region.mountains.find()`, not a hardcoded id whitelist).
 
+## Authentication
+
+feelzlike uses **Clerk** (Replit-managed) for all authentication. Replit Auth / OIDC was removed in August 2026.
+
+- Secrets: `CLERK_SECRET_KEY`, `CLERK_PUBLISHABLE_KEY`, `VITE_CLERK_PUBLISHABLE_KEY`
+- The Clerk proxy is mounted at `/api/__clerk/*` in the API server (`clerkProxyMiddleware`)
+- `clerkMiddleware` (from `@clerk/express`) runs on every API route; use `getAuth(req)` to read auth state
+- User bridge column: `users.externalAuthId` (migrated Replit users have their old OIDC sub here; new Clerk users have their Clerk userId)
+- JIT provisioning: `requireAuth` middleware does the bridge lookup + insert on first sign-in
+- Frontend: `ClerkProvider` in `App.tsx` with `publishableKeyFromHost` + wouter router integration
+- Sign-in/sign-up routes: `/sign-in/*?` and `/sign-up/*?` (Clerk hosted UI via `@clerk/react`)
+
 ## System Architecture
 
 The project is a pnpm workspace monorepo using Node.js 24 and TypeScript 5.9.

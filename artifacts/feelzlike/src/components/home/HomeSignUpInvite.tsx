@@ -15,8 +15,7 @@ function formatDate(d: Date): string {
  * HomeSignUpInvite · the landing page's one sign-up ask. Anonymous visitors
  * see a single card pitching free snow alerts (the concrete, immediate value
  * of an account) with the launch-promo offer when it's running. Tapping opens
- * the app-wide SignUpSheet (magic-link email flow) · no navigation, no form
- * page. Signed-in members never see it.
+ * Clerk's sign-up/sign-in flow. Signed-in members never see it.
  *
  * Deliberately not dismissible and not repeated anywhere else on the landing
  * page: one honest ask, in one place, below the live-conditions block so the

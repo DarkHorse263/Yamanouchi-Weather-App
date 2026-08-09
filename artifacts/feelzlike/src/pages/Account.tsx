@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "wouter";
+import { useClerk } from "@clerk/react";
 import {
   ArrowLeft,
   UserRound,
@@ -22,6 +23,19 @@ import {
 import type { AccountResponse } from "@workspace/api-client-react";
 import { useAuthAccount } from "@/components/auth/SignUpProvider";
 import { ALERT_REGIONS } from "@/components/AlertSubscribeForm";
+
+function SignOutButton() {
+  const { signOut } = useClerk();
+  return (
+    <button
+      type="button"
+      onClick={() => signOut({ redirectUrl: "/" })}
+      className="text-sm text-muted-foreground underline hover:text-foreground"
+    >
+      sign out
+    </button>
+  );
+}
 
 /**
  * /account · the signed-in member's home base. Shows their email, lets them
@@ -96,8 +110,7 @@ function SignedOutCard({ onSignUp }: { onSignUp: () => void }) {
         <div className="flex-1 min-w-0">
           <p className="text-sm font-bold text-foreground">this page is for members</p>
           <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
-            create a free account (magic-link email · no password) to manage your
-            powder alerts, home region and units here.
+            sign in to manage your powder alerts, home region and units here.
           </p>
           <button
             type="button"
@@ -170,9 +183,7 @@ function SignedInAccount({ onDeleted }: { onDeleted: () => void }) {
             <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">signed in as</p>
             <p className="text-sm font-bold text-foreground mt-0.5 break-all">{data.email ?? "member"}</p>
             <div className="mt-1 flex items-center gap-3">
-              <a href="/api/logout" className="text-sm text-muted-foreground underline hover:text-foreground">
-                sign out
-              </a>
+              <SignOutButton />
               <Link href="/premium" className="text-sm text-muted-foreground underline hover:text-foreground inline-flex items-center gap-1">
                 <Sparkles className="w-3.5 h-3.5" /> premium hub
               </Link>
@@ -197,6 +208,7 @@ function DangerZoneCard({ email, onDeleted }: { email: string | null; onDeleted:
   const [confirming, setConfirming] = useState(false);
   const [typed, setTyped] = useState("");
   const del = useDeleteAccount();
+  const { signOut } = useClerk();
 
   const confirmed = typed.trim().toLowerCase() === "delete";
 
@@ -204,6 +216,18 @@ function DangerZoneCard({ email, onDeleted }: { email: string | null; onDeleted:
     if (!confirmed || del.isPending) return;
     try {
       await del.mutateAsync();
+      // Sign out via Clerk immediately after the server deletes the user so the
+      // client session/cookie is cleared before the confirmation card renders.
+      // The server also calls clerkClient.users.deleteUser, which invalidates all
+      // sessions server-side, but clearing client state immediately prevents any
+      // window where the UI shows a signed-in state for a deleted account.
+      try {
+        await signOut();
+      } catch {
+        // Non-fatal: the Clerk user is already deleted; sign-out may fail
+        // because the session is already invalid. The UI will reflect the
+        // signed-out state on the next Clerk state refresh regardless.
+      }
       onDeleted();
     } catch {
       /* surfaced below */

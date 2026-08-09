@@ -1,5 +1,5 @@
-import { Switch, Route, Router as WouterRouter } from "wouter";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
+import { QueryClient, QueryClientProvider, useQueryClient } from "@tanstack/react-query";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Welcome from "@/pages/Welcome";
 import Countries from "@/pages/Countries";
@@ -20,7 +20,6 @@ import { identifyAnonUser, track } from "@/lib/analytics";
 import { pingPageView, pingPwaEvent } from "@/lib/engagement";
 import { isStandaloneMode } from "@/lib/registerSW";
 import { useEffect, useRef } from "react";
-import { useLocation } from "wouter";
 import AlertsVerify from "@/pages/alerts/Verify";
 import AlertsManage from "@/pages/alerts/Manage";
 import AlertsUnsubscribed from "@/pages/alerts/Unsubscribed";
@@ -34,8 +33,183 @@ import Account from "@/pages/Account";
 import AdminStats from "@/pages/admin/AdminStats";
 import CanadaDirectory from "@/pages/CanadaDirectory";
 import About from "@/pages/About";
+import SignInPage from "@/pages/SignIn";
+import SignUpPage from "@/pages/SignUp";
+import {
+  ClerkProvider,
+  useClerk,
+} from "@clerk/react";
+import { publishableKeyFromHost } from "@clerk/react/internal";
 
 const queryClient = new QueryClient();
+
+// REQUIRED — copy verbatim. Resolves the key from window.location.hostname so
+// the same build serves multiple Clerk custom domains.
+const clerkPubKey = publishableKeyFromHost(
+  window.location.hostname,
+  import.meta.env.VITE_CLERK_PUBLISHABLE_KEY,
+);
+
+// REQUIRED — copy verbatim. Empty in dev (Clerk hits dev FAPI directly),
+// auto-set in prod. Do NOT gate on import.meta.env.PROD / NODE_ENV.
+const clerkProxyUrl = import.meta.env.VITE_CLERK_PROXY_URL;
+
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+// Clerk passes full paths to routerPush/routerReplace, but wouter's
+// setLocation prepends the base — strip it to avoid doubling.
+function stripBase(path: string): string {
+  return basePath && path.startsWith(basePath)
+    ? path.slice(basePath.length) || "/"
+    : path;
+}
+
+// Module-level once-guard so pwa_launch fires at most once per page load.
+const pwaLaunchTracked = { tracked: false };
+
+/**
+ * Invalidates the QueryClient cache when the signed-in user changes so stale
+ * user-scoped data isn't shown after sign-out or user switch.
+ */
+function ClerkQueryClientCacheInvalidator() {
+  const { addListener } = useClerk();
+  const queryClient = useQueryClient();
+  const prevUserIdRef = useRef<string | null | undefined>(undefined);
+
+  useEffect(() => {
+    const unsubscribe = addListener(({ user }) => {
+      const userId = user?.id ?? null;
+      if (
+        prevUserIdRef.current !== undefined &&
+        prevUserIdRef.current !== userId
+      ) {
+        queryClient.clear();
+      }
+      prevUserIdRef.current = userId;
+    });
+    return unsubscribe;
+  }, [addListener, queryClient]);
+
+  return null;
+}
+
+/**
+ * Bridges the ConsentProvider into the analytics layer + records page-view
+ * breadcrumbs.
+ */
+function AnalyticsBridge() {
+  const consent = useConsent();
+  const [location] = useLocation();
+
+  useEffect(() => {
+    identifyAnonUser({ analyticsConsent: !!consent.choices?.analytics });
+  }, [consent.choices?.analytics]);
+
+  useEffect(() => {
+    if (pwaLaunchTracked.tracked) return;
+    pwaLaunchTracked.tracked = true;
+
+    if (isStandaloneMode()) {
+      track("pwa_launch", { category: "install", data: { mode: "standalone" } });
+      pingPwaEvent("pwa_launch");
+    }
+
+    const onInstalled = () => {
+      track("pwa_installed", { category: "install" });
+      pingPwaEvent("pwa_install");
+    };
+    window.addEventListener("appinstalled", onInstalled);
+    return () => window.removeEventListener("appinstalled", onInstalled);
+  }, []);
+
+  useEffect(() => {
+    const safePath = location.split(/[?#]/)[0] || "/";
+    track("page_view", { category: "navigation", data: { path: safePath } });
+    pingPageView(safePath);
+  }, [location]);
+
+  return null;
+}
+
+/**
+ * Scrolls to the top on forward navigation; leaves popstate (back/forward)
+ * untouched so the browser can restore scroll position.
+ */
+function ScrollToTop() {
+  const [location] = useLocation();
+  const wasPopRef = useRef(false);
+  const prevPathRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    const onPop = (e: Event) => {
+      if (e instanceof PopStateEvent) wasPopRef.current = true;
+    };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
+
+  useEffect(() => {
+    const path = location.split(/[?#]/)[0] || "/";
+    const wasPop = wasPopRef.current;
+    wasPopRef.current = false;
+
+    if (prevPathRef.current === null) {
+      prevPathRef.current = path;
+      return;
+    }
+    if (prevPathRef.current === path) return;
+    prevPathRef.current = path;
+
+    if (wasPop) return;
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [location]);
+
+  return null;
+}
+
+function AwinTag() {
+  const consent = useConsent();
+  useEffect(() => {
+    if (canUseAds(consent.choices)) {
+      loadAwinMasterTag();
+    } else {
+      removeAwinMasterTag();
+    }
+  }, [consent.choices]);
+  return null;
+}
+
+function GoogleAnalyticsTag() {
+  const consent = useConsent();
+  const [location] = useLocation();
+  const analyticsGranted = canUseAnalytics(consent.choices);
+  const adsGranted = canUseAds(consent.choices);
+
+  useEffect(() => { loadGa(); }, []);
+  useEffect(() => { gaConsentUpdate({ analytics: analyticsGranted, ads: adsGranted }); }, [analyticsGranted, adsGranted]);
+  useEffect(() => {
+    const safePath = location.split(/[?#]/)[0] || "/";
+    gaPageView(safePath);
+  }, [location]);
+
+  return null;
+}
+
+function MetaPixelTag() {
+  const consent = useConsent();
+  const [location] = useLocation();
+  const enabled = canUseAds(consent.choices);
+
+  useEffect(() => {
+    if (enabled) { loadMetaPixel(); } else { disableMetaPixel(); }
+  }, [enabled]);
+  useEffect(() => {
+    if (!enabled) return;
+    metaPixelPageView();
+  }, [enabled, location]);
+
+  return null;
+}
 
 function Router() {
   return (
@@ -45,40 +219,23 @@ function Router() {
       <Route path="/countries/" component={Countries} />
       <Route path="/about" component={About} />
       <Route path="/about/" component={About} />
-      {/* Visitor's own local weather + radar · mounted before the /:region
-          catch-all so /near-you isn't parsed as a region slug. */}
+      {/* Sign-in / sign-up — REQUIRED paths with /*? optional wildcard so
+          Clerk's OAuth sub-paths (/sign-in/sso-callback etc.) also match. */}
+      <Route path="/sign-in/*?" component={SignInPage} />
+      <Route path="/sign-up/*?" component={SignUpPage} />
       <Route path="/near-you" component={NearYouWeather} />
       <Route path="/near-you/" component={NearYouWeather} />
-      {/* Top-level alert pages - must come BEFORE the /:region catch-all so
-          tokenised email links don't get parsed as a region. */}
       <Route path="/alerts/verify" component={AlertsVerify} />
       <Route path="/alerts/manage" component={AlertsManage} />
       <Route path="/alerts/unsubscribed" component={AlertsUnsubscribed} />
-      {/* Legal pages · multi-country aware Privacy + Terms. Reachable
-          from every footer; mounted before /:region/* so the slugs
-          aren't parsed as regions. */}
       <Route path="/legal/privacy" component={Privacy} />
       <Route path="/legal/terms" component={Terms} />
-      {/* Premium hub · what's premium and (during the launch promo) that it's
-          free for subscribers until 31 december 2026, with monthly & yearly
-          pricing shown for after. Mounted before /:region so /premium isn't
-          parsed as a region slug. */}
       <Route path="/premium" component={Premium} />
       <Route path="/premium/" component={Premium} />
-      {/* Member account page · signed-in only (signed-out visitors get the
-          free sign-up sheet). Mounted before /:region so /account isn't
-          parsed as a region slug. */}
       <Route path="/account" component={Account} />
       <Route path="/account/" component={Account} />
-      {/* Multi-day trip planner · now a free feature (premium hidden), mounted
-          before /:region catch-all so /plan isn't parsed as a region slug. */}
       <Route path="/plan" component={TripPlanner} />
-      {/* Admin dashboard · auth-gated, mounted before /:region catch-all so
-          /admin/* paths aren't parsed as region slugs. */}
       <Route path="/admin" component={AdminStats} />
-      {/* Country index pages - must come before the /:region catch-all so
-          /au and /jp resolve to a regions-in-country picker, not the region
-          layout (which would 404 on the country code). */}
       <Route path="/au"><CountryHome code="AU" /></Route>
       <Route path="/au/"><CountryHome code="AU" /></Route>
       <Route path="/jp"><CountryHome code="JP" /></Route>
@@ -87,9 +244,6 @@ function Router() {
       <Route path="/nz/"><CountryHome code="NZ" /></Route>
       <Route path="/ca"><CountryHome code="CA" /></Route>
       <Route path="/ca/"><CountryHome code="CA" /></Route>
-      {/* Directory of every other Canadian ski area (links out to each hill's
-          own site). Static data · mounted before /:region so the multi-segment
-          path isn't parsed as a region slug. */}
       <Route path="/ca/all-ski-areas" component={CanadaDirectory} />
       <Route path="/ca/all-ski-areas/" component={CanadaDirectory} />
       <Route path="/:region/*?">
@@ -103,224 +257,99 @@ function Router() {
   );
 }
 
-// Module-level once-guard so pwa_launch fires at most once per page load,
-// even if AnalyticsBridge remounts (e.g. React StrictMode in dev).
-const pwaLaunchTracked = { tracked: false };
+function ClerkProviderWithRoutes() {
+  const [, setLocation] = useLocation();
 
-/**
- * Bridges the ConsentProvider into the analytics layer + records page-view
- * breadcrumbs. Mounted inside ConsentProvider so it can read the choice and
- * inside WouterRouter so `useLocation` stays bound to the right base path.
- */
-function AnalyticsBridge() {
-  const consent = useConsent();
-  const [location] = useLocation();
+  const clerkAppearance = {
+    cssLayerName: "clerk",
+    variables: {
+      colorPrimary: "#0055FF",
+      colorForeground: "#0f172a",
+      colorMutedForeground: "#64748b",
+      colorDanger: "#dc2626",
+      colorBackground: "#ffffff",
+      colorInput: "#f8fafc",
+      colorInputForeground: "#0f172a",
+      colorNeutral: "#e2e8f0",
+      fontFamily: "'DIN Pro', system-ui, sans-serif",
+      borderRadius: "0.75rem",
+    },
+    options: {
+      logoPlacement: "inside" as const,
+      logoLinkUrl: basePath || "/",
+      logoImageUrl: `${window.location.origin}${basePath}/logo.svg`,
+    },
+    elements: {
+      rootBox: "w-full flex justify-center",
+      cardBox: "bg-white rounded-2xl w-[440px] max-w-full overflow-hidden shadow-xl border border-slate-100",
+      card: "!shadow-none !border-0 !bg-transparent !rounded-none",
+      footer: "!shadow-none !border-0 !bg-transparent !rounded-none",
+      headerTitle: "text-slate-900 font-bold",
+      headerSubtitle: "text-slate-500",
+      socialButtonsBlockButtonText: "text-slate-700",
+      formFieldLabel: "text-slate-700 font-medium",
+      footerActionLink: "text-[#0055FF] font-semibold",
+      footerActionText: "text-slate-500",
+      dividerText: "text-slate-400",
+      identityPreviewEditButton: "text-[#0055FF]",
+      formFieldSuccessText: "text-emerald-600",
+      alertText: "text-slate-700",
+      logoBox: "flex justify-center",
+      logoImage: "h-8 w-auto",
+      socialButtonsBlockButton: "border border-slate-200 bg-white hover:bg-slate-50 text-slate-700",
+      formButtonPrimary: "bg-[#0055FF] hover:bg-[#0044cc] text-white font-semibold",
+      formFieldInput: "border border-slate-200 bg-slate-50 text-slate-900 placeholder:text-slate-400 focus:ring-[#0055FF]/30",
+      footerAction: "bg-slate-50 border-t border-slate-100",
+      dividerLine: "bg-slate-200",
+      alert: "border border-rose-200 bg-rose-50",
+      otpCodeFieldInput: "border border-slate-200 bg-white text-slate-900",
+      formFieldRow: "",
+      main: "",
+    },
+  };
 
-  // Identify (anon profile token) on mount and whenever consent flips.
-  useEffect(() => {
-    identifyAnonUser({ analyticsConsent: !!consent.choices?.analytics });
-  }, [consent.choices?.analytics]);
-
-  // PWA adoption measurement (consent-gated like every other event):
-  //  - pwa_launch: fired once per app load when running from the home screen
-  //    (display-mode standalone). Works on iOS too, which has no install
-  //    event - unique users on this event = the active installed base.
-  //  - pwa_installed: the browser's `appinstalled` event, fired the moment
-  //    the user actually installs (Android / desktop Chrome & Edge only;
-  //    iOS Safari never fires it).
-  useEffect(() => {
-    if (pwaLaunchTracked.tracked) return;
-    pwaLaunchTracked.tracked = true;
-
-    if (isStandaloneMode()) {
-      track("pwa_launch", { category: "install", data: { mode: "standalone" } });
-      pingPwaEvent("pwa_launch"); // first-party counter · counts every install base launch
-    }
-
-    const onInstalled = () => {
-      track("pwa_installed", { category: "install" });
-      pingPwaEvent("pwa_install");
-    };
-    window.addEventListener("appinstalled", onInstalled);
-    return () => window.removeEventListener("appinstalled", onInstalled);
-  }, []);
-
-  // Page-view breadcrumb on every route change. Cheap & always-on; helps
-  // crash reports show what the user was looking at when things broke.
-  // SECURITY: strip querystring + hash before logging - alert links carry
-  // HMAC tokens (?token=...) that must never reach Sentry breadcrumbs.
-  useEffect(() => {
-    const safePath = location.split(/[?#]/)[0] || "/";
-    track("page_view", { category: "navigation", data: { path: safePath } });
-    // First-party cookieless tally (coarse section label only) · powers the
-    // admin engagement dashboard with truthful, every-visitor counts.
-    pingPageView(safePath);
-  }, [location]);
-
-  return null;
-}
-
-/**
- * Scrolls back to the top of the page whenever the user navigates FORWARD to a
- * new route (e.g. tapping "Transport" in the bottom nav). Without this, wouter
- * keeps the previous scroll offset, so tapping a nav item from halfway down the
- * Today page would land you halfway down the next page.
- *
- * Back / forward navigations (popstate · including the in-app Back bar's
- * `history.back()`) are intentionally left alone so the browser can restore the
- * scroll position the user was at before.
- */
-function ScrollToTop() {
-  const [location] = useLocation();
-  const wasPopRef = useRef(false);
-  const prevPathRef = useRef<string | null>(null);
-
-  useEffect(() => {
-    const onPop = (e: Event) => {
-      // Only genuine browser back/forward (a real PopStateEvent) should suppress
-      // the scroll reset. Our URL-state / filter helpers dispatch a *synthetic*
-      // `new Event("popstate")` for query-only updates · because wouter's
-      // useLocation tracks the pathname only, those never run the effect below,
-      // so the flag would never be consumed and would leak into the next real
-      // forward navigation, wrongly skipping scroll-to-top.
-      if (e instanceof PopStateEvent) wasPopRef.current = true;
-    };
-    window.addEventListener("popstate", onPop);
-    return () => window.removeEventListener("popstate", onPop);
-  }, []);
-
-  useEffect(() => {
-    const path = location.split(/[?#]/)[0] || "/";
-    // Consume the popstate flag for this navigation so a stale value can't
-    // leak into a later forward nav.
-    const wasPop = wasPopRef.current;
-    wasPopRef.current = false;
-
-    // Skip the very first run (initial load / reload / deep link) so the
-    // browser's own scroll restoration isn't clobbered.
-    if (prevPathRef.current === null) {
-      prevPathRef.current = path;
-      return;
-    }
-    // Only a real path change should reset scroll · ignore query/hash-only
-    // changes (e.g. tokenised alert links, filter params).
-    if (prevPathRef.current === path) return;
-    prevPathRef.current = path;
-
-    // Back/forward navigation · let the browser restore the prior position.
-    if (wasPop) return;
-
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-  }, [location]);
-
-  return null;
-}
-
-/**
- * Loads the Awin affiliate MasterTag once the visitor grants `ads` consent,
- * and tears it down if they later revoke it. Mounted inside ConsentProvider so
- * it can read the choice. No-op until VITE_AWIN_PUBLISHER_ID is configured.
- */
-function AwinTag() {
-  const consent = useConsent();
-
-  useEffect(() => {
-    if (canUseAds(consent.choices)) {
-      loadAwinMasterTag();
-    } else {
-      removeAwinMasterTag();
-    }
-  }, [consent.choices]);
-
-  return null;
-}
-
-/**
- * Google Analytics via Consent Mode v2. gtag.js loads for EVERY visitor with
- * all consent flags defaulted to denied (see lib/ga): decliners and
- * undecideds send only anonymous cookieless pings (no cookies, no client id,
- * nothing stored on the device), which GA4 uses to model true visitor totals.
- * Granting `analytics` upgrades to normal measurement (cookies, new vs
- * returning); revoking drops straight back to anonymous pings mid-session.
- * page_views are sent on every route change regardless · they ride the same
- * consent state. SECURITY: strip querystring + hash before sending · alert
- * links carry HMAC tokens (?token=...) that must never reach GA. Mounted
- * inside WouterRouter so `useLocation` stays bound to the right base path.
- */
-function GoogleAnalyticsTag() {
-  const consent = useConsent();
-  const [location] = useLocation();
-  const analyticsGranted = canUseAnalytics(consent.choices);
-  const adsGranted = canUseAds(consent.choices);
-
-  useEffect(() => {
-    loadGa();
-  }, []);
-
-  useEffect(() => {
-    gaConsentUpdate({ analytics: analyticsGranted, ads: adsGranted });
-  }, [analyticsGranted, adsGranted]);
-
-  useEffect(() => {
-    const safePath = location.split(/[?#]/)[0] || "/";
-    gaPageView(safePath);
-  }, [location]);
-
-  return null;
-}
-
-/**
- * Loads the Meta (Facebook) Pixel once the visitor grants `ads` consent - it
- * is advertising tech (ad measurement + retargeting), so it rides the same
- * consent category as the Awin MasterTag, NOT `analytics`. While enabled it
- * sends a PageView on every route change; automatic collection is off (see
- * lib/metaPixel) so those explicit PageViews are the pixel's only hits, and
- * they are skipped entirely on tokened URLs (?token=...) because fbevents
- * reports the raw href and cannot be overridden.
- */
-function MetaPixelTag() {
-  const consent = useConsent();
-  const [location] = useLocation();
-  const enabled = canUseAds(consent.choices);
-
-  useEffect(() => {
-    if (enabled) {
-      loadMetaPixel();
-    } else {
-      disableMetaPixel();
-    }
-  }, [enabled]);
-
-  useEffect(() => {
-    if (!enabled) return;
-    metaPixelPageView();
-  }, [enabled, location]);
-
-  return null;
-}
-
-function App() {
   return (
-    <AppErrorBoundary>
+    <ClerkProvider
+      publishableKey={clerkPubKey}
+      proxyUrl={clerkProxyUrl}
+      appearance={clerkAppearance}
+      signInUrl={`${basePath}/sign-in`}
+      signUpUrl={`${basePath}/sign-up`}
+      localization={{
+        signIn: {
+          start: {
+            title: "welcome back",
+            subtitle: "sign in to your feelzlike account",
+          },
+        },
+        signUp: {
+          start: {
+            title: "create your account",
+            subtitle: "free · no card needed",
+          },
+        },
+      }}
+      routerPush={(to) => setLocation(stripBase(to))}
+      routerReplace={(to) => setLocation(stripBase(to), { replace: true })}
+    >
       <QueryClientProvider client={queryClient}>
+        <ClerkQueryClientCacheInvalidator />
         <TooltipProvider>
           <ConsentProvider>
-            <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-              <AnalyticsBridge />
-              <ScrollToTop />
-              <AwinTag />
-              <GoogleAnalyticsTag />
-              <MetaPixelTag />
-              {/* Soft member gate · wires account state + the free sign-up
-                  sheet into PremiumGate. Never prompts on page load. */}
-              <SignUpProvider>
-                {/* Member prefs (home region + units) · metric defaults for
-                    anonymous visitors, account-backed for members. */}
-                <UserPrefsProvider>
-                  <Router />
-                </UserPrefsProvider>
-              </SignUpProvider>
-            </WouterRouter>
+            <AnalyticsBridge />
+            <ScrollToTop />
+            <AwinTag />
+            <GoogleAnalyticsTag />
+            <MetaPixelTag />
+            {/* Soft member gate · wires account state + the free sign-up
+                sheet into PremiumGate. Never prompts on page load. */}
+            <SignUpProvider>
+              {/* Member prefs (home region + units) · metric defaults for
+                  anonymous visitors, account-backed for members. */}
+              <UserPrefsProvider>
+                <Router />
+              </UserPrefsProvider>
+            </SignUpProvider>
             <ConsentBanner />
             <InstallPrompt />
             <OfflineBanner />
@@ -328,6 +357,16 @@ function App() {
           </ConsentProvider>
         </TooltipProvider>
       </QueryClientProvider>
+    </ClerkProvider>
+  );
+}
+
+function App() {
+  return (
+    <AppErrorBoundary>
+      <WouterRouter base={basePath}>
+        <ClerkProviderWithRoutes />
+      </WouterRouter>
     </AppErrorBoundary>
   );
 }

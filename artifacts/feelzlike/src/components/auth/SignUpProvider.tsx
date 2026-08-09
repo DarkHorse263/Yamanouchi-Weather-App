@@ -1,16 +1,15 @@
-import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useMemo, type ReactNode } from "react";
 import { useLocation } from "wouter";
-import { useGetCurrentAuthUser } from "@workspace/api-client-react";
+import { useUser, useClerk } from "@clerk/react";
 import { PremiumAccessProvider } from "@workspace/feelzlike-shell";
 import { track } from "@/lib/analytics";
-import { SignUpSheet } from "./SignUpSheet";
 
 /**
  * Host-side wiring for the soft member gate:
- *  - resolves the current account session (GET /api/auth/user),
+ *  - resolves the current account session via Clerk's useUser() hook,
  *  - feeds `{ isAuthenticated, isLoading, promptSignUp }` into the shell's
  *    PremiumAccessProvider so PremiumGate can soft-lock on tap, and
- *  - owns the single app-wide SignUpSheet modal.
+ *  - routes sign-up prompts to Clerk's sign-in page.
  *
  * Gentle by design: nothing here ever opens the prompt on its own · only an
  * explicit tap on a premium surface (or a sign-up button) does.
@@ -33,36 +32,37 @@ export function useAuthAccount(): AuthAccountState {
 }
 
 export function SignUpProvider({ children }: { children: ReactNode }) {
-  const [location] = useLocation();
-  const query = useGetCurrentAuthUser({
-    query: { queryKey: ["auth", "user"], staleTime: 60_000, retry: 1 },
-  });
-  const user = query.data?.user ?? null;
+  const [, setLocation] = useLocation();
+  const { user, isLoaded } = useUser();
+  const { signOut } = useClerk();
 
-  const [sheet, setSheet] = useState<{ open: boolean; email?: string; feature?: string }>({ open: false });
+  const email = user?.primaryEmailAddress?.emailAddress ?? null;
 
   const promptSignUp = useCallback(
     (opts?: { email?: string; feature?: string }) => {
-      setSheet({ open: true, email: opts?.email, feature: opts?.feature });
       // Non-identifying event · which premium surface triggered the prompt.
       track("signup_prompt_open", { category: "auth", data: { feature: opts?.feature ?? "unknown" } });
+      // Route to Clerk sign-in/sign-up for authentication.
+      setLocation("/sign-in");
     },
-    [],
+    [setLocation],
   );
 
+  // Clerk manages sessions; refresh is a no-op here (useUser re-renders when
+  // Clerk's auth state changes). Kept for API compatibility with consumers.
   const refresh = useCallback(() => {
-    void query.refetch();
-  }, [query]);
+    // no-op: Clerk's useUser() re-renders reactively
+  }, []);
 
   const state = useMemo<AuthAccountState>(
     () => ({
       isAuthenticated: !!user,
-      isLoading: query.isLoading,
-      email: user?.email ?? null,
+      isLoading: !isLoaded,
+      email,
       promptSignUp,
       refresh,
     }),
-    [user, query.isLoading, promptSignUp, refresh],
+    [user, isLoaded, email, promptSignUp, refresh],
   );
 
   return (
@@ -71,14 +71,10 @@ export function SignUpProvider({ children }: { children: ReactNode }) {
         value={{ isAuthenticated: state.isAuthenticated, isLoading: state.isLoading, promptSignUp }}
       >
         {children}
-        <SignUpSheet
-          open={sheet.open}
-          initialEmail={sheet.email}
-          feature={sheet.feature}
-          returnTo={location || "/"}
-          onClose={() => setSheet((s) => ({ ...s, open: false }))}
-        />
       </PremiumAccessProvider>
     </AuthAccountContext.Provider>
   );
 }
+
+// Export signOut helper for components that need it (e.g. Account, Premium pages).
+export { useClerk };

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ChevronDown, Shield } from "lucide-react";
-import { useAuth } from "@workspace/replit-auth-web";
+import { useAuth } from "@clerk/react";
 import { useUnitsControl } from "@/components/auth/UserPrefsProvider";
 
 /**
@@ -20,7 +20,7 @@ export function HomeFooter() {
   // Soft-render the admin link only for signed-in users. The /admin page
   // itself does the real authorization check (server-side allowlist), so this
   // is purely UI hygiene · non-admins simply never see the link.
-  const { isAuthenticated } = useAuth();
+  const { isSignedIn } = useAuth();
   const { units, fromAccount, setLocalUnits } = useUnitsControl();
 
   const linkCls = "text-white/80 hover:text-white transition-colors";
@@ -70,7 +70,7 @@ export function HomeFooter() {
               />
             </button>
           </div>
-          {isAuthenticated && (
+          {isSignedIn && (
             <>
               {sep}
               <a className={`${linkCls} inline-flex items-center gap-1`} href="/admin">

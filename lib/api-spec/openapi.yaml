@@ -34,7 +34,7 @@ tags:
   - name: Auth
     description: Browser and mobile authentication endpoints.
   - name: admin
-    description: Admin-only endpoints (gated by Replit Auth + email allowlist).
+    description: Admin-only endpoints (gated by Clerk auth + email allowlist).
 paths:
   /healthz:
     get:
@@ -1354,63 +1354,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
 
-  /auth/user:
-    get:
-      tags: [Auth]
-      operationId: getCurrentAuthUser
-      summary: Get the currently authenticated user
-      parameters:
-        - $ref: '#/components/parameters/AuthorizationSessionHeader'
-        - $ref: '#/components/parameters/SessionCookie'
-      responses:
-        '200':
-          description: Auth status resolved successfully.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AuthUserEnvelope'
-  /auth/email/request:
-    post:
-      tags: [Auth]
-      operationId: requestEmailSignIn
-      summary: Request a passwordless email sign-in link
-      description: Sends a magic sign-in link to the given email. Clicking it creates a free account (or signs into an existing one, including accounts claimed by alert subscribers) and opens a session.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RequestEmailSignInBody'
-      responses:
-        '200':
-          description: Sign-in email queued.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RequestEmailSignInResponse'
-        '400':
-          description: Invalid email.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '429':
-          description: Too many requests.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '502':
-          description: The email provider could not deliver the sign-in link (e.g. rejected recipient).
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
   /auth/email/verify:
     get:
       tags: [Auth]
       operationId: completeEmailSignIn
-      summary: Complete the email sign-in flow (magic-link target)
+      summary: Verify the magic-link token, claim alert subscription, redirect to sign-in
       parameters:
         - name: token
           in: query
@@ -1419,108 +1367,7 @@ paths:
             type: string
       responses:
         '302':
-          description: Redirect into the app with a session cookie set (or to /premium?signin=… on failure).
-  /login:
-    get:
-      tags: [Auth]
-      operationId: beginBrowserLogin
-      summary: Start the browser OIDC login flow
-      parameters:
-        - name: returnTo
-          in: query
-          required: false
-          description: Relative path to redirect to after login (must start with `/`). Defaults to `/`.
-          schema:
-            type: string
-      responses:
-        '302':
-          description: Redirect to the OIDC authorization endpoint.
-  /callback:
-    get:
-      tags: [Auth]
-      operationId: handleBrowserLoginCallback
-      summary: Complete the browser OIDC login flow
-      parameters:
-        - name: code
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: state
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: iss
-          in: query
-          required: false
-          schema:
-            type: string
-            format: uri
-      responses:
-        '302':
-          description: Redirect to the `returnTo` path on success.
-  /logout:
-    get:
-      tags: [Auth]
-      operationId: logoutBrowserSession
-      summary: Clear the session and begin OIDC logout
-      parameters:
-        - $ref: '#/components/parameters/AuthorizationSessionHeader'
-        - $ref: '#/components/parameters/SessionCookie'
-      responses:
-        '302':
-          description: Redirect to the OIDC provider logout URL.
-  /mobile-auth/token-exchange:
-    post:
-      tags: [Auth]
-      operationId: exchangeMobileAuthorizationCode
-      summary: Exchange a mobile OIDC code for a session token
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MobileTokenExchangeRequest'
-      responses:
-        '200':
-          description: Session created successfully.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MobileTokenExchangeSuccess'
-        '400':
-          description: Missing or invalid required fields.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorEnvelope'
-        '401':
-          description: Token did not contain usable claims.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorEnvelope'
-        '500':
-          description: Token exchange failed.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorEnvelope'
-  /mobile-auth/logout:
-    post:
-      tags: [Auth]
-      operationId: logoutMobileSession
-      summary: Delete a mobile session token
-      parameters:
-        - $ref: '#/components/parameters/AuthorizationSessionHeader'
-      responses:
-        '200':
-          description: Logout processed.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LogoutSuccess'
+          description: Redirect to /sign-in after claiming any pending alert subscription.
 
 components:
   parameters:

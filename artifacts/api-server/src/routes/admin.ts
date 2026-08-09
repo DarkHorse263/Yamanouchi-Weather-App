@@ -1,6 +1,7 @@
 import { Router, type IRouter, type Request, type Response } from "express";
 import { and, eq, gte, desc, isNotNull, isNull, count, sql } from "drizzle-orm";
 import { db, alertSubscribersTable, newsletterSubscribersTable, promoFunnelDailyTable, emailDeliveryIncidentsTable, pageViewDailyTable, visitorDailyTable, engagementEventDailyTable, usersTable } from "@workspace/db";
+import { getAuth, clerkClient } from "@clerk/express";
 import { requireAdminUser } from "../middlewares/requireAdminUser.js";
 
 /**
@@ -73,9 +74,21 @@ router.use(requireAdminUser);
 // Cheap GET so the admin SPA can detect "is the current user actually on the
 // allowlist?" without doing a full /stats fetch. Returns the same 401 / 403
 // surface as every other admin route, so the frontend gate is uniform.
-router.get("/me", (req: Request, res: Response) => {
-  const user = req.user!; // requireAdminUser already vouched
-  res.json({ user });
+// /me: load the signed-in user's identity from the Clerk API so the email
+// is server-authoritative (not from user-editable session claims).
+router.get("/me", async (req: Request, res: Response) => {
+  const auth = getAuth(req);
+  const clerkUserId = auth.userId;
+  try {
+    const clerkUser = await clerkClient.users.getUser(clerkUserId!);
+    const email = clerkUser.emailAddresses.find(
+      (e) => e.id === clerkUser.primaryEmailAddressId,
+    )?.emailAddress;
+    res.json({ user: { id: clerkUserId, email } });
+  } catch (err) {
+    console.error("[/admin/me] Clerk API error:", err);
+    res.status(500).json({ error: "ADMIN_ME_FAILED" });
+  }
 });
 
 // ── Stats tab ─────────────────────────────────────────────────────────────

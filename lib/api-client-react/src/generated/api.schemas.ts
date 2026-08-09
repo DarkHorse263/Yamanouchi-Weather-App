@@ -2072,16 +2072,3 @@ export type GetLiftStatusParams = {
 export type CompleteEmailSignInParams = {
   token: string;
 };
-
-export type BeginBrowserLoginParams = {
-  /**
-   * Relative path to redirect to after login (must start with `/`). Defaults to `/`.
-   */
-  returnTo?: string;
-};
-
-export type HandleBrowserLoginCallbackParams = {
-  code?: string;
-  state?: string;
-  iss?: string;
-};

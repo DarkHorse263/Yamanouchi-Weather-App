@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { Link } from "wouter";
+import { useClerk } from "@clerk/react";
 import {
   Sparkles,
   Lock,
@@ -18,6 +19,19 @@ import {
 import { usePremium } from "@workspace/feelzlike-shell";
 import { useAuthAccount } from "@/components/auth/SignUpProvider";
 import { PremiumSubscribe } from "@/components/PremiumSubscribe";
+
+function SignOutButton({ className }: { className?: string }) {
+  const { signOut } = useClerk();
+  return (
+    <button
+      type="button"
+      onClick={() => signOut({ redirectUrl: "/" })}
+      className={className}
+    >
+      sign out
+    </button>
+  );
+}
 
 interface Feature {
   Icon: React.ComponentType<{ className?: string }>;
@@ -144,9 +158,7 @@ export default function Premium() {
                   <Link href="/account" className="text-sm font-bold text-[#0055FF] underline hover:text-[#0055FF]/80">
                     manage your account
                   </Link>
-                  <a href="/api/logout" className="text-sm text-slate-500 underline hover:text-slate-900 transition-colors">
-                    sign out
-                  </a>
+                  <SignOutButton className="text-sm text-slate-500 underline hover:text-slate-900 transition-colors" />
                 </div>
               </div>
             </div>

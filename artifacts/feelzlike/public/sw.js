@@ -59,7 +59,13 @@
 // /api/vic-emergency-incidents moved from the catch-all SWR to the live
 // network-first route ("right now" conditions + live road incidents must
 // never be served a session stale).
-const CACHE_VERSION = "v21";
+// v22: /api/__clerk/* (Clerk FAPI proxy) explicitly bypassed — Clerk's
+// session management calls must always reach the network directly. A cached
+// Clerk auth/session response would give stale sign-in state on installed
+// PWAs after sign-out, just as the old /api/auth/user bypass did. The
+// existing /api/auth/* rule already covered this path, but we make it
+// explicit here so the intent survives future SW refactors.
+const CACHE_VERSION = "v22";
 const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
 const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;
@@ -203,10 +209,11 @@ self.addEventListener("fetch", (event) => {
   //     to any later script with origin access. Always go straight to net.
   if (url.pathname.startsWith("/api/alerts")) return;
 
-  // 2a-quinquies. Auth endpoints: session state (`/api/auth/user`) drives the
-  //     signed-in UI, and the magic-link request/verify flow is side-effectful.
-  //     A stale-while-revalidate copy makes sign-in/sign-out look like it
-  //     didn't happen on installed PWAs. Never cache, always straight to net.
+  // 2a-quinquies. Auth endpoints: Clerk's FAPI proxy (/api/__clerk/*) and the
+  //     magic-link request/verify flow (/api/auth/*) are side-effectful and
+  //     session-state-mutating. A cached response would make sign-in/sign-out
+  //     look like it didn't happen on installed PWAs. Always straight to net.
+  if (url.pathname.startsWith("/api/__clerk")) return;
   if (url.pathname.startsWith("/api/auth")) return;
 
   // 2a-ter. Admin dashboard endpoints: session-scoped, private, and mutated
