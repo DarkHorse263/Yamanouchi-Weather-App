@@ -14,6 +14,10 @@ name = "web"
 paths = [ "/" ]
 localPort = 23968
 
+[services.env]
+PORT = "23968"
+BASE_PATH = "/"
+
 [services.development]
 run = "pnpm --filter @workspace/feelzlike run dev"
 
@@ -8205,5 +8209,3 @@ to = "/vernon/vernon-nj/explore/index.html"
 [[services.production.rewrites]]
 from = "/*"
 to = "/index.html"
-PORT = "23968"
-BASE_PATH = "/"
