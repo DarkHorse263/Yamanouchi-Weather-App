@@ -135,10 +135,10 @@ function GreenHome({ t }: { t: (en: string, ja: string) => string }) {
         animate={{ opacity: 1, y: 0 }}
         className="text-center pt-2"
       >
-        <h2 className="text-sm md:text-base font-light text-muted-foreground tracking-tight inline-flex items-center gap-x-1.5 flex-wrap justify-center">
+        <h2 className="text-sm md:text-base font-light text-white/80 tracking-tight inline-flex items-center gap-x-1.5 flex-wrap justify-center">
           <span>{t("I wonder what it", "今")}</span>
-          <span className="font-display font-medium italic text-foreground">
-            feelz<span className="text-primary not-italic font-semibold">like</span>
+          <span className="font-display font-medium italic text-white">
+            feelz<span className="text-white not-italic font-semibold">like</span>
           </span>
           <span>{t("in Yamanouchi right now…", "の山ノ内町は…")}</span>
         </h2>
@@ -202,8 +202,8 @@ function GreenHome({ t }: { t: (en: string, ja: string) => string }) {
       {/* GREEN HIGHLIGHTS */}
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }}>
         <div className="flex items-center gap-2 mb-3">
-          <TreePine className="w-3.5 h-3.5 text-primary" />
-          <h2 className="byline text-muted-foreground">{t("Things to Do", "おすすめアクティビティ")}</h2>
+          <TreePine className="w-3.5 h-3.5 text-emerald-200" />
+          <h2 className="byline text-white/70">{t("Things to Do", "おすすめアクティビティ")}</h2>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           {GREEN_HIGHLIGHTS.map((item, idx) => {
@@ -258,7 +258,7 @@ function GreenHome({ t }: { t: (en: string, ja: string) => string }) {
 
       {/* DISCLAIMER */}
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
-        className="rounded-xl border border-border bg-secondary px-4 py-3">
+        className="rounded-xl border border-border bg-white px-4 py-3">
         <p className="text-[10px] leading-relaxed text-muted-foreground">
           {t(
             "Weather data from the Japan Meteorological Agency. Activity information is for reference - confirm opening dates and conditions directly with operators.",
@@ -319,10 +319,10 @@ export default function Home() {
         animate={{ opacity: 1, y: 0 }}
         className="text-center pt-2"
       >
-        <h2 className="text-sm md:text-base font-light text-muted-foreground tracking-tight inline-flex items-center gap-x-1.5 flex-wrap justify-center">
+        <h2 className="text-sm md:text-base font-light text-white/80 tracking-tight inline-flex items-center gap-x-1.5 flex-wrap justify-center">
           <span>{t("I wonder what it", "今")}</span>
-          <span className="font-display font-medium italic text-foreground">
-            feelz<span className="text-primary not-italic font-semibold">like</span>
+          <span className="font-display font-medium italic text-white">
+            feelz<span className="text-white not-italic font-semibold">like</span>
           </span>
           <span>{t("in Yamanouchi right now…", "の山ノ内町は…")}</span>
         </h2>
@@ -410,8 +410,8 @@ export default function Home() {
         {/* Best Resort */}
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.16 }} className="lg:col-span-2">
           <div className="flex items-center gap-2 mb-3">
-            <Trophy className="w-3.5 h-3.5 text-amber-500" />
-            <h2 className="byline text-muted-foreground">{t("Best Snow Right Now", "ベストスノー")}</h2>
+            <Trophy className="w-3.5 h-3.5 text-amber-300" />
+            <h2 className="byline text-white/70">{t("Best Snow Right Now", "ベストスノー")}</h2>
           </div>
           <div className="rounded-2xl border border-border bg-card p-5 shadow-[0_1px_3px_rgba(15,23,42,0.04),0_8px_24px_-12px_rgba(15,23,42,0.08)]">
             <div className="flex items-start justify-between mb-4">
@@ -450,7 +450,7 @@ export default function Home() {
         {/* Regional overview */}
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="lg:col-span-3">
           <div className="flex items-center gap-2 mb-3">
-            <h2 className="byline text-muted-foreground">{t("Regional Overview", "エリア概要")}</h2>
+            <h2 className="byline text-white/70">{t("Regional Overview", "エリア概要")}</h2>
           </div>
           <div className="space-y-3">
             {data.regions.map((region) => (
@@ -514,7 +514,7 @@ export default function Home() {
 
       {/* DISCLAIMER */}
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
-        className="rounded-xl border border-border bg-secondary px-4 py-3">
+        className="rounded-xl border border-border bg-white px-4 py-3">
         <p className="text-[10px] leading-relaxed text-muted-foreground">
           {t(
             "Snow depth & conditions from resort reporting networks. Temperature, wind & forecasts from the Japan Meteorological Agency. Updated hourly 5 AM-6 PM JST. For informational use only - verify directly with resorts before skiing.",

@@ -133,7 +133,7 @@ export function HeroBackdrop() {
         />
       </svg>
       {/* Bottom fade: hero → page bg seamlessly */}
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-[#f6f8fb]" />
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-[#0055FF]" />
       {/* Photo credit (only shown when we have a real photo) */}
       {variant.photoUrl && (
         <span className="absolute bottom-3 right-4 text-[10px] uppercase tracking-[0.2em] text-white/60">

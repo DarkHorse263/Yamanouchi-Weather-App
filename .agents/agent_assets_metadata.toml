@@ -563,3 +563,73 @@ id = "rI3xEcS8bc57tJj9xVJWS"
 uri = "file://exports/confirm-email-preview.jpg"
 type = "image"
 title = "signup confirmation email · what new subscribers receive"
+
+[[outputs]]
+id = "7a6UD9Ob64-IyKiWHy6pN"
+uri = "file://exports/feelzlike-facebook-phase2-pack.pdf"
+type = "pdf"
+title = "facebook phase 2 pack"
+description = "Round-one results readout, the 5 phase-2 ads with paste-ready copy and tracked links, and 4 weeks of Facebook Page posts (2 per week)."
+
+[[outputs]]
+id = "Yqrt85zMwZvl80aTRhCdO"
+uri = "file://exports/feelzlike-fb-page-hero.png"
+type = "image"
+title = "feelzlike · desktop + phone"
+description = "Home page on desktop and phone, side by side, cookie banner cropped out. Ready to post on the Facebook page."
+
+[[outputs]]
+id = "eNRso22-RHGMcKAunqoqg"
+uri = "file://exports/social-ads/feelzlike-ad-overall-story-1080x1920.png"
+type = "image"
+title = "feelzlike ad · overall · story"
+description = "updated with the audience line under the headline"
+
+[[outputs]]
+id = "JVcwZl8s9Rdoff-zCohxQ"
+uri = "file://exports/social-ads/feelzlike-ad-japan-story-1080x1920.png"
+type = "image"
+title = "feelzlike ad · japan · story"
+description = "screenshot now shows the feature the callouts describe"
+
+[[outputs]]
+id = "wIxLBo4mj_fADoEkIYmQ7"
+uri = "file://exports/social-ads/feelzlike-ad-australia-story-1080x1920.png"
+type = "image"
+title = "feelzlike ad · australia · story"
+description = "updated with the audience line under the headline"
+
+[[outputs]]
+id = "He8hUmTlSA-Li5mhSW-ub"
+uri = "file://exports/social-ads/feelzlike-ad-nz-story-1080x1920.png"
+type = "image"
+title = "feelzlike ad · nz · story"
+description = "screenshot now shows the feature the callouts describe"
+
+[[outputs]]
+id = "S_6tw81H1r224n3Jummpv"
+uri = "file://exports/social-ads/feelzlike-ad-overall-square-1080x1080.png"
+type = "image"
+title = "feelzlike ad · overall · square"
+description = "updated with the audience line under the headline"
+
+[[outputs]]
+id = "_6i9kcwF2evykckwkF2NC"
+uri = "file://exports/social-ads/feelzlike-ad-japan-square-1080x1080.png"
+type = "image"
+title = "feelzlike ad · japan · square"
+description = "screenshot now shows the feature the callouts describe"
+
+[[outputs]]
+id = "JMZChZLFEipLc8PWcAtAe"
+uri = "file://exports/social-ads/feelzlike-ad-australia-square-1080x1080.png"
+type = "image"
+title = "feelzlike ad · australia · square"
+description = "updated with the audience line under the headline"
+
+[[outputs]]
+id = "hxuVMePmiLYdCMQIhDXPb"
+uri = "file://exports/social-ads/feelzlike-ad-nz-square-1080x1080.png"
+type = "image"
+title = "feelzlike ad · nz · square"
+description = "screenshot now shows the feature the callouts describe"

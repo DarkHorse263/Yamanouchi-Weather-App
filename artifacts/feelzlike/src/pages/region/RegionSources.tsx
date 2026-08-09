@@ -714,7 +714,37 @@ const REGION_SOURCES: Record<string, SourceGroup[]> = {
         { label: "Whitewater", url: "https://skiwhitewater.com/" },
         { label: "Kimberley Alpine Resort", url: "https://skikimberley.com/" },
         { label: "Panorama", url: "https://www.panoramaresort.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  okanagan: [
+    CA_OFFICIAL_REFERENCES,
+    CA_ROADS_BC,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Big White Ski Resort", url: "https://www.bigwhite.com/" },
+        { label: "SilverStar Mountain Resort", url: "https://www.skisilverstar.com/" },
+        { label: "Apex Mountain Resort", url: "https://apexresort.com/" },
         { label: "Sun Peaks Resort", url: "https://www.sunpeaksresort.com/" },
+      ],
+    },
+    FORECAST_ENSEMBLE,
+  ],
+  vancouver: [
+    CA_OFFICIAL_REFERENCES,
+    CA_ROADS_BC,
+    {
+      title: "Resorts & lifts",
+      titleJa: "スキー場・リフト",
+      items: [
+        { label: "Cypress Mountain", url: "https://www.cypressmountain.com/" },
+        { label: "Grouse Mountain", url: "https://www.grousemountain.com/" },
+        { label: "Mt Seymour", url: "https://mtseymour.ca/" },
+        { label: "Mount Washington Alpine Resort", url: "https://mountwashington.ca/" },
+        { label: "BC Ferries · Vancouver to the Island", detail: "sailings & fares", url: "https://www.bcferries.com/" },
       ],
     },
     FORECAST_ENSEMBLE,
@@ -1423,7 +1453,7 @@ export function RegionSources() {
           <SourceGroupCard key={group.title} group={group} t={t} />
         ))}
 
-        <p className="text-[11px] text-muted-foreground/70 leading-relaxed max-w-2xl">
+        <p className="text-[11px] text-white/70 leading-relaxed max-w-2xl">
           {t(
             "Feelzlike combines but does not replace any of the above sources. For official warnings always consult the issuing authority. We attribute every data point - if you spot something missing, let us know.",
             "Feelzlikeは上記の出典を統合表示するものであり、置き換えるものではありません。公式の警報・警告は必ず発表元を直接ご確認ください。",

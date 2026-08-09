@@ -19,11 +19,16 @@ export default function DayNarrative({
   );
   if (!narrative) return null;
   return (
-    <p
-      className="mt-4 rounded-xl border border-sky-100 bg-sky-50 px-4 py-3 text-[15px] leading-snug text-sky-900"
+    <div
+      className="mt-4 rounded-xl border border-sky-100 bg-sky-50 px-4 py-3"
       data-testid="text-day-narrative"
     >
-      {lang === "ja" ? narrative.ja : narrative.en}
-    </p>
+      <p className="text-[11px] font-bold uppercase tracking-wider text-sky-700">
+        {lang === "ja" ? "今日の予報" : "today's forecast"}
+      </p>
+      <p className="mt-0.5 text-[15px] leading-snug text-sky-900">
+        {lang === "ja" ? narrative.ja : narrative.en}
+      </p>
+    </div>
   );
 }

@@ -107,7 +107,7 @@ export const REGIONS = [
     subtitle: "Nagano · Japan",
     country: "JP",
     hasAlerts: false,
-    hasRoads: false,
+    hasRoads: true,
     mountains: [
       { name: "Nozawa Onsen Snow Resort", blurb: "Mt Kenashi summit · long groomers, tree runs and the Nagasaka Olympic course" },
     ],
@@ -121,7 +121,7 @@ export const REGIONS = [
     subtitle: "Nagano · Japan",
     country: "JP",
     hasAlerts: false,
-    hasRoads: false,
+    hasRoads: true,
     mountains: [
       { name: "Madarao Mountain Resort",             blurb: "Tree-run-famous Madarao · shared 2-mountain pass with Tangram across the ridge" },
       { name: "Tangram Ski Circus",                  blurb: "Niigata-side base of the Madarao massif · family-oriented, lift-linked to Madarao" },
@@ -142,7 +142,7 @@ export const REGIONS = [
     subtitle: "Nagano · Japan",
     country: "JP",
     hasAlerts: false,
-    hasRoads: false,
+    hasRoads: true,
     mountains: [
       { name: "Hakuba Happo-One",             blurb: "Hakuba's biggest and steepest · 1998 Olympic downhill runs and long Northern Alps views" },
       { name: "Hakuba Goryu (Escal Plaza)",   blurb: "Gentle Toomi base to steep Alps Daira up top · one ticket shared with neighbouring Hakuba 47" },
@@ -167,7 +167,7 @@ export const REGIONS = [
     subtitle: "Niigata · Japan",
     country: "JP",
     hasAlerts: false,
-    hasRoads: false,
+    hasRoads: true,
     mountains: [
       { name: "Akakura Onsen",           blurb: "Myoko's liveliest slopes above the historic onsen village · 100% natural snow and the area's only nightly night skiing" },
       { name: "Akakura Kanko (Akakan)",  blurb: "Japan's first international mountain resort (1937) · long groomers off the Sky Cable beneath the landmark Akakura Kanko Hotel" },
@@ -189,7 +189,7 @@ export const REGIONS = [
     subtitle: "Hokkaido · Japan",
     country: "JP",
     hasAlerts: false,
-    hasRoads: false,
+    hasRoads: true,
     mountains: [
       { name: "Niseko Grand Hirafu", blurb: "Niseko's biggest resort · night skiing above Hirafu village and peak gates to the Annupuri summit, on the Niseko United pass (Ikon)" },
       { name: "Niseko Hanazono",     blurb: "Quieter north-east flank linked to Hirafu · powder bowls, tree runs and terrain parks, on the Niseko United pass (Ikon)" },
@@ -209,7 +209,7 @@ export const REGIONS = [
     subtitle: "Hokkaido · Japan",
     country: "JP",
     hasAlerts: false,
-    hasRoads: false,
+    hasRoads: true,
     mountains: [
       { name: "Furano Ski Resort",      blurb: "Prince-run flagship of central Hokkaido · two linked zones (Kitanomine and Furano) with about 950 m of vertical, on the Ikon Pass from 2025-26" },
       { name: "Kamui Ski Links",        blurb: "Asahikawa's local powder hill about an hour north of Furano · relaxed tree-skiing culture and quiet gondola laps at day-ticket prices" },
@@ -226,7 +226,7 @@ export const REGIONS = [
     subtitle: "Hokkaido · Japan",
     country: "JP",
     hasAlerts: false,
-    hasRoads: false,
+    hasRoads: true,
     mountains: [
       { name: "Sapporo Teine",   blurb: "City powder hill 40 min from downtown Sapporo · two zones (Olympia and Highland) with sea-of-Japan views from Mt Teine and the 1972 Olympic slalom slopes" },
       { name: "Sapporo Kokusai", blurb: "Deep-snow local favourite above Jozankei onsen · wide gondola-served cruisers and some of the heaviest snowfall totals near the city" },
@@ -243,7 +243,7 @@ export const REGIONS = [
     subtitle: "Hokkaido · Japan",
     country: "JP",
     hasAlerts: false,
-    hasRoads: false,
+    hasRoads: true,
     mountains: [
       { name: "Hoshino Resorts Tomamu", blurb: "Hotel-tower resort off Mt Tomamu on the JR Sekisho Line · groomed cruisers, a big kids' programme, the winter Ice Village and ski-in stays at the towers" },
       { name: "Sahoro Resort",          blurb: "Quiet Tokachi resort on Mt Sahoro above Shintoku · long fall-line cruisers off a single gondola, home to Club Med Sahoro's all-inclusive village" },
@@ -259,7 +259,7 @@ export const REGIONS = [
     subtitle: "Hokkaido · Japan",
     country: "JP",
     hasAlerts: false,
-    hasRoads: false,
+    hasRoads: true,
     mountains: [
       { name: "Kamui Ski Links", blurb: "Asahikawa's local powder hill 40 min west of the city · relaxed tree-skiing culture and quiet gondola laps at day-ticket prices" },
       { name: "Asahidake",       blurb: "Ropeway-served powder on Hokkaido's highest peak in the Daisetsuzan range · ungroomed big-mountain terrain above Asahidake Onsen" },
@@ -275,7 +275,7 @@ export const REGIONS = [
     subtitle: "Hokkaido · Japan",
     country: "JP",
     hasAlerts: false,
-    hasRoads: false,
+    hasRoads: true,
     mountains: [
       { name: "Rusutsu Resort", blurb: "Hokkaido's big all-in-one resort across West Mt, East Mt and Mt Isola · 37 courses and about 42 km of runs, on the Epic Pass" },
       { name: "Kiroro",         blurb: "Deep-snow resort in the hills between Otaru and Sapporo · about 660 m of vertical in one of Hokkaido's heaviest snowfall pockets" },
@@ -291,7 +291,7 @@ export const REGIONS = [
     subtitle: "Gunma · Japan",
     country: "JP",
     hasAlerts: false,
-    hasRoads: false,
+    hasRoads: true,
     mountains: [
       { name: "Tanigawadake Tenjindaira", blurb: "Ropeway-served snow bowl at 1,319 m on Tanigawa-dake, now Mt.T by Hoshino Resorts · huge snowfalls, a long spring season and famous sidecountry" },
       { name: "Minakami Kogen",           blurb: "Family resort around the ski-in Hotel 200 at 850 m · gentle wide courses, snow activities and kids' areas at the quiet top of the valley" },
@@ -307,7 +307,7 @@ export const REGIONS = [
     subtitle: "Gunma · Japan",
     country: "JP",
     hasAlerts: false,
-    hasRoads: false,
+    hasRoads: true,
     mountains: [
       { name: "Kusatsu Onsen", blurb: "Historic town hill from 1,245 m to 1,600 m · pulse gondola off the base and the Yubatake baths 10 min down the road" },
       { name: "Manza Onsen",   blurb: "High, cold Prince resort from 1,646 m to 1,994 m above the sulphur springs · reliably dry snow and empty weekday groomers" },
@@ -323,7 +323,7 @@ export const REGIONS = [
     subtitle: "Iwate · Japan",
     country: "JP",
     hasAlerts: false,
-    hasRoads: false,
+    hasRoads: true,
     mountains: [
       { name: "Hachimantai Panorama",  blurb: "Gentle family hill behind the Hachimantai Mountain Hotel · wide north-facing courses with Mt Iwate views, one ticket with Shimokura" },
       { name: "Hachimantai Shimokura", blurb: "Powder hill on the east slope of Mt Shimokura · wind-sheltered tree lines and very dry snow, 2 km from Panorama by free shuttle" },
@@ -338,7 +338,7 @@ export const REGIONS = [
     subtitle: "Niigata · Japan",
     country: "JP",
     hasAlerts: false,
-    hasRoads: false,
+    hasRoads: true,
     mountains: [
       { name: "GALA Yuzawa",       blurb: "Shinkansen straight into the gondola base · linked at the top to Yuzawa Kogen and Ishiuchi Maruyama on the Snow Link ticket" },
       { name: "Yuzawa Kogen",      blurb: "Ropeway straight off the onsen street · gentle high bowl above town, linked at the top to GALA on the Snow Link ticket" },
@@ -359,7 +359,7 @@ export const REGIONS = [
     subtitle: "Yamagata · Japan",
     country: "JP",
     hasAlerts: false,
-    hasRoads: false,
+    hasRoads: true,
     mountains: [
       { name: "Zao Onsen Ski Resort", blurb: "Yamagata's big classic across a broad juhyo-covered mountainside · about 880 m of vertical to Jizo Sancho at 1,661 m, famous for its snow monsters, on the Ikon Pass" },
     ],
@@ -373,7 +373,7 @@ export const REGIONS = [
     subtitle: "Aomori · Japan",
     country: "JP",
     hasAlerts: false,
-    hasRoads: false,
+    hasRoads: true,
     mountains: [
       { name: "Hakkoda",       blurb: "Ropeway-served big-mountain riding on Mt Tamoyachi · long ungroomed descents through juhyo snow monsters, more backcountry than resort" },
       { name: "Aomori Spring", blurb: "Quiet powder resort on Mt Iwaki's northwest slopes above Ajigasawa · a gondola and about 545 m of vertical, on its own lift tickets" },
@@ -390,7 +390,7 @@ export const REGIONS = [
     subtitle: "Iwate · Japan",
     country: "JP",
     hasAlerts: false,
-    hasRoads: false,
+    hasRoads: true,
     mountains: [
       { name: "Appi Kogen",  blurb: "One of Tohoku's largest resorts · long groomed runs off a 2.8 km gondola to Mt Maemori, dry inland powder, on the Ikon Pass from 2025-26" },
       { name: "Shizukuishi", blurb: "Prince-operated hill on Takakura that hosted the 1993 Alpine World Championships · about 700 m of vertical, a gondola and ropeway" },
@@ -407,7 +407,7 @@ export const REGIONS = [
     subtitle: "Fukushima · Japan",
     country: "JP",
     hasAlerts: false,
-    hasRoads: false,
+    hasRoads: true,
     mountains: [
       { name: "Nekoma Mountain", blurb: "The former Alts Bandai (south) and Nekoma (north) linked by lift into one of Japan's largest resorts · 33 courses from the sunny Lake Inawashiro side to the powder-holding north bowl, on the Ikon Pass" },
       { name: "Grandeco",        blurb: "High-base gondola hill in Urabandai at 1,010-1,590 m · dry Aizu powder, wide groomers with Mt Bandai views and one of Tohoku's longest seasons" },
@@ -423,7 +423,7 @@ export const REGIONS = [
     subtitle: "Tottori · Japan",
     country: "JP",
     hasAlerts: false,
-    hasRoads: false,
+    hasRoads: true,
     mountains: [
       { name: "Daisen White Resort", blurb: "Western Japan's biggest ski hill on Mt Daisen · four linked areas from 655 to 1,121 m with Japan-Sea views · a regional day hill under new operators from 2026-27" },
     ],
@@ -524,7 +524,6 @@ export const REGIONS = [
       { name: "Whitewater",                 blurb: "Independent Kootenay hill · minimal grooming, huge natural snowfall, touring gates" },
       { name: "Kimberley Alpine Resort",    blurb: "Sunny, uncrowded cruisers on North Star Mountain · long lit night runs" },
       { name: "Panorama",                   blurb: "1,300 m of Purcell vertical · Taynton Bowl steeps above long groomed descents" },
-      { name: "Sun Peaks Resort",           blurb: "Canada's second-largest ski area · Tod, Sundance and Morrisey linked by lift" },
     ],
     towns: [
       { id: "revelstoke", name: "Revelstoke", blurb: "Railway town on the Columbia · ~10 min to the gondola base" },
@@ -533,7 +532,45 @@ export const REGIONS = [
       { id: "nelson",     name: "Nelson",     blurb: "Heritage arts town on Kootenay Lake · ~20 min up to Whitewater" },
       { id: "kimberley",  name: "Kimberley",  blurb: "Bavarian-themed Rockies town · ~5 min from the Kimberley Alpine base" },
       { id: "invermere",  name: "Invermere",  blurb: "Columbia Valley lake town · ~20 min up Toby Creek Road to Panorama" },
-      { id: "sun-peaks",  name: "Sun Peaks",  blurb: "Ski-through village 45 min above Kamloops · lifts leave from the main street" },
+    ],
+  },
+  {
+    slug: "okanagan",
+    name: "Okanagan",
+    subtitle: "BC Interior · Canada",
+    country: "CA",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Big White Ski Resort",         blurb: "BC's biggest ski-in village · dry interior snow and a large gladed high-alpine plateau above Kelowna" },
+      { name: "SilverStar Mountain Resort",    blurb: "Victorian-themed ski-through village above Vernon · gentle front side, steep Powder Gulch back bowls" },
+      { name: "Apex Mountain Resort",          blurb: "Quiet, steep and uncrowded above Penticton · long fall-line cruisers and the Okanagan's driest snow" },
+      { name: "Sun Peaks Resort",              blurb: "Canada's second-largest ski area · Tod, Sundance and Morrisey linked by lift" },
+    ],
+    towns: [
+      { id: "kelowna",   name: "Kelowna",   blurb: "Okanagan Lake city · about 56 km and 1 hr up to the Big White village" },
+      { id: "vernon",    name: "Vernon",    blurb: "North Okanagan town · about 22 km up Silver Star Road to the resort" },
+      { id: "penticton", name: "Penticton", blurb: "Town between Okanagan and Skaha lakes · about 33 km up Green Mountain Road to Apex" },
+      { id: "kamloops",  name: "Kamloops",  blurb: "Thompson Valley city · about 45 min up Sun Peaks Road from Heffley Creek" },
+      { id: "sun-peaks", name: "Sun Peaks", blurb: "Ski-through village 45 min above Kamloops · lifts leave from the main street" },
+    ],
+  },
+  {
+    slug: "vancouver",
+    name: "Vancouver & the Island",
+    subtitle: "British Columbia · Canada",
+    country: "CA",
+    hasAlerts: false,
+    hasRoads: true,
+    mountains: [
+      { name: "Cypress Mountain",              blurb: "The biggest North Shore hill · 2010 Olympic freestyle venue, city day skiing with night runs" },
+      { name: "Grouse Mountain",               blurb: "The peak of Vancouver · a Skyride straight up to lit night runs above the city" },
+      { name: "Mt Seymour",                    blurb: "The quietest, highest and most family-run North Shore hill · learner terrain and backcountry gates" },
+      { name: "Mount Washington Alpine Resort", blurb: "Vancouver Island's destination mountain · a huge maritime snowpack above the Comox Valley, reached by ferry or flight" },
+    ],
+    towns: [
+      { id: "vancouver-city", name: "Vancouver", blurb: "The three North Shore hills are 30-45 min day trips from downtown · night skiing after work" },
+      { id: "courtenay",      name: "Courtenay", blurb: "Comox Valley town on Vancouver Island · about 40 min up the road to Mount Washington" },
     ],
   },
   {
@@ -1372,12 +1409,68 @@ export const REGIONS = [
 
 ];
 
-/** Region sub-sections that actually render for this region (see gating notes above). */
+/** Region sub-sections that actually render for this region (see gating notes above).
+ * /alerts renders for EVERY region since Aug 2026: regions without a custom
+ * Alerts page fall back to the generic RegionAlerts (RegionLayout), so the
+ * hasAlerts flag no longer gates the route. */
 export function regionFeatures(region) {
-  return ["mountains", ...(region.hasAlerts ? ["alerts"] : []), "stay"];
+  return ["mountains", "alerts", "stay"];
 }
 
 /** Town sub-sections that actually render for this region's towns. */
 export function townFeatures(region) {
   return ["weather", "stay", "eat", ...(region.hasRoads ? ["roads"] : []), "transport", "explore"];
+}
+
+// ── Mountain page enumeration ─────────────────────────────────────────────
+// /:region/mountain/:id renders a real page for every mountain in the app's
+// region registry (src/regions/<slug>.ts). Rather than hand-mirroring those
+// ids here (they'd rot), extract them from the region source file at build
+// time so new mountains and new regions are picked up automatically.
+
+import { readFileSync } from "node:fs";
+import { dirname as _dirname, join as _join } from "node:path";
+import { fileURLToPath as _fileURLToPath } from "node:url";
+
+const _here = _dirname(_fileURLToPath(import.meta.url));
+
+/**
+ * Returns [{ id, name }] for every mountain defined in
+ * src/regions/<slug>.ts. Throws (build fails loudly) if the file is missing
+ * or fewer ids are found than the mountains listed for that region above —
+ * that means the extraction or the mirror drifted and the sitemap would
+ * silently lose pages.
+ * @param {{ slug: string, mountains: Array<unknown> }} region
+ */
+export function regionMountains(region) {
+  const file = _join(_here, "..", "src", "regions", `${region.slug}.ts`);
+  const src = readFileSync(file, "utf8");
+  const mountainsMatch = /mountains\s*:\s*\[/.exec(src);
+  const start = mountainsMatch?.index ?? -1;
+  if (start === -1) {
+    if (region.mountains.length === 0) return [];
+    throw new Error(`[seo-regions] no mountains array found in ${file}`);
+  }
+  // Walk to the matching closing bracket of the mountains array.
+  let depth = 0;
+  let end = -1;
+  for (let i = src.indexOf("[", start); i < src.length; i++) {
+    const ch = src[i];
+    if (ch === "[") depth++;
+    else if (ch === "]") {
+      depth--;
+      if (depth === 0) { end = i; break; }
+    }
+  }
+  if (end === -1) throw new Error(`[seo-regions] unbalanced mountains array in ${file}`);
+  const block = src.slice(start, end);
+  const out = [];
+  const re = /\{\s*id:\s*"([^"]+)"\s*,\s*name:\s*"((?:[^"\\]|\\.)*)"/g;
+  for (const m of block.matchAll(re)) out.push({ id: m[1], name: m[2].replace(/\\"/g, '"') });
+  if (out.length < region.mountains.length) {
+    throw new Error(
+      `[seo-regions] extracted ${out.length} mountain ids from ${file} but ${region.mountains.length} mountains are listed for ${region.slug} — extraction drifted, fix before shipping the sitemap`,
+    );
+  }
+  return out;
 }

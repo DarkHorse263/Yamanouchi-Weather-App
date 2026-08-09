@@ -3,25 +3,37 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Download, Share, X, Smartphone } from "lucide-react";
 import { isStandaloneMode, isIOSSafari } from "@/lib/registerSW";
 import { track } from "@/lib/analytics";
+import { useConsent } from "@/lib/consent";
 
 /**
- * PWA install prompt - shown on every visit until the app is installed.
+ * PWA install prompt.
  *
  * Behaviour:
  *  - Android/Desktop Chrome: waits for `beforeinstallprompt`, then offers
  *    a one-tap Install button.
  *  - iOS Safari (no `beforeinstallprompt` support): shows the Share-icon
- *    instructions every visit.
+ *    instructions.
  *  - Hidden once installed (`display-mode: standalone` or iOS standalone).
  *  - Hidden once the user has accepted the install on this device.
- *  - "Not now" only closes the prompt for the current page - it reappears
- *    on the next fresh page load until the app is actually installed.
- *    (Earlier behaviour gated on 3+ visits and a 30-day dismissal cooldown;
- *    those have been removed so the prompt is impossible to miss while we
- *    drive install adoption.)
+ *  - Waits until the cookie consent banner has been decided, so the two
+ *    bottom prompts never stack on a phone's first visit.
+ *  - "Not now" / the X persist a dismissal for DISMISS_COOLDOWN_DAYS so the
+ *    prompt doesn't nag every visit (it comes back after the cooldown until
+ *    the app is installed).
+ *  - On phones it sits ABOVE the fixed bottom nav (h-16 + safe-area inset)
+ *    so navigation is never hidden behind it.
  */
 
 const ACCEPTED_KEY = "feelzlike:installAccepted";
+const DISMISSED_AT_KEY = "feelzlike:installDismissedAt";
+const DISMISS_COOLDOWN_DAYS = 14;
+
+function isDismissalActive(): boolean {
+  const dismissedAt = readJSON<number | null>(DISMISSED_AT_KEY, null);
+  if (typeof dismissedAt !== "number") return false;
+  const ageMs = Date.now() - dismissedAt;
+  return ageMs >= 0 && ageMs < DISMISS_COOLDOWN_DAYS * 24 * 60 * 60 * 1000;
+}
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -44,12 +56,18 @@ export function InstallPrompt() {
   const [show, setShow] = useState(false);
   const [variant, setVariant] = useState<"android" | "ios">("android");
   const [bipEvent, setBipEvent] = useState<BeforeInstallPromptEvent | null>(null);
+  const { hasDecided } = useConsent();
 
   useEffect(() => {
+    // Wait until the consent banner is out of the way so the two
+    // bottom-anchored prompts never stack on a first visit.
+    if (!hasDecided) return;
     // Already installed → never show
     if (isStandaloneMode()) return;
     // Previously accepted → never show again on this device
     if (readJSON<boolean>(ACCEPTED_KEY, false)) return;
+    // Recently dismissed → stay quiet for the cooldown window
+    if (isDismissalActive()) return;
 
     if (isIOSSafari()) {
       setVariant("ios");
@@ -68,12 +86,15 @@ export function InstallPrompt() {
     };
     window.addEventListener("beforeinstallprompt", handler);
     return () => window.removeEventListener("beforeinstallprompt", handler);
-  }, []);
+  }, [hasDecided]);
 
-  // "Not now" just closes for the current page render. We deliberately do
-  // not persist a dismissal - the prompt should reappear next visit until
-  // the user actually installs.
-  const dismiss = () => setShow(false);
+  // Dismissing persists for DISMISS_COOLDOWN_DAYS so the prompt doesn't
+  // reappear on every visit and hide the bottom navigation.
+  const dismiss = () => {
+    writeJSON(DISMISSED_AT_KEY, Date.now());
+    track("install_prompt_dismissed", { category: "install", data: { platform: variant } });
+    setShow(false);
+  };
 
   const install = async () => {
     if (!bipEvent) return;
@@ -102,7 +123,7 @@ export function InstallPrompt() {
           transition={{ duration: 0.25 }}
           role="dialog"
           aria-label="Add FeelZlike to your home screen"
-          className="fixed inset-x-3 bottom-3 sm:inset-auto sm:right-4 sm:bottom-4 sm:max-w-sm z-[60]"
+          className="fixed inset-x-3 bottom-[calc(var(--mobile-bottom-nav,0px)+0.75rem)] md:inset-x-auto md:right-4 md:bottom-4 md:max-w-sm z-[60]"
         >
           <div className="rounded-2xl bg-slate-900 text-white shadow-[0_24px_60px_-20px_rgba(2,6,23,0.6)] border border-white/10 p-4 sm:p-5">
             <div className="flex items-start gap-3">

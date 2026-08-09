@@ -307,7 +307,7 @@ export function SnowyTransport() {
 
       {/* Other operators */}
       <section className="px-4 md:px-10 pt-4">
-        <p className="text-[11px] font-bold tracking-wider text-muted-foreground/70 uppercase mb-3">
+        <p className="text-[11px] font-bold tracking-wider text-white/70 uppercase mb-3">
           {t("Other operators", "その他の事業者")}
         </p>
         <div className="grid gap-4 sm:grid-cols-2">

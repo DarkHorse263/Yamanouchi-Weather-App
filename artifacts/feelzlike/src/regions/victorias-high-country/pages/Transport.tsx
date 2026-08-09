@@ -430,7 +430,7 @@ export function VictoriasHighCountryTransport() {
       {/* Other coach / shuttle operators (town-filtered) */}
       {buses.length > 0 && (
         <section className="px-4 md:px-10 pt-4 md:pt-6">
-          <p className="text-[11px] font-bold tracking-wider text-muted-foreground/70 uppercase mb-3">
+          <p className="text-[11px] font-bold tracking-wider text-white/70 uppercase mb-3">
             {t("Other coach & shuttle operators", "その他のバス・送迎事業者")}
           </p>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -444,7 +444,7 @@ export function VictoriasHighCountryTransport() {
       {/* Taxis & last mile (town-filtered) */}
       {taxis.length > 0 && (
         <section className="px-4 md:px-10 pt-4 md:pt-6">
-          <p className="text-[11px] font-bold tracking-wider text-muted-foreground/70 uppercase mb-3">
+          <p className="text-[11px] font-bold tracking-wider text-white/70 uppercase mb-3">
             {t("Taxis & last mile", "タクシー・ラストマイル")}
           </p>
           <div className="grid gap-4 sm:grid-cols-2">

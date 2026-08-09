@@ -20,9 +20,11 @@ import alertsPushRouter from "./alerts-push";
 import alertsInternalRouter from "./alerts-internal";
 import smokeInternalRouter from "./smoke-internal";
 import elevationForecastRouter from "./elevation-forecast";
-import authRouter from "./auth";
 import accountRouter from "./account";
 import authEmailRouter from "./auth-email";
+import promoRouter from "./promo";
+import engagementRouter from "./engagement";
+import resendWebhookRouter from "./resend-webhook";
 import adminRouter from "./admin";
 
 const router: IRouter = Router();
@@ -48,9 +50,11 @@ router.use(alertsPushRouter);
 router.use(alertsInternalRouter);
 router.use(smokeInternalRouter);
 router.use(elevationForecastRouter);
-router.use(authRouter);
 router.use(accountRouter);
 router.use(authEmailRouter);
+router.use(promoRouter);
+router.use(engagementRouter);
+router.use(resendWebhookRouter);
 router.use("/admin", adminRouter);
 
 export default router;

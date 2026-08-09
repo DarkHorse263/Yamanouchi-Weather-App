@@ -305,7 +305,14 @@ export async function customFetch<T = unknown>(
   // background is harmless - the result is stored in the cache and silently
   // discarded if the observer is gone.
   const { signal: _signal, ...fetchInit } = init;
-  const response = await fetch(input, { ...fetchInit, method, headers });
+
+  // credentials: "include" is required so Clerk's session cookie is sent on
+  // cross-origin requests (preview iframe / *.replit.dev dev domain / custom
+  // domain). Browser fetch defaults to "same-origin", which drops the cookie
+  // whenever the SPA origin differs from the /api origin — a near-universal
+  // condition on Replit. Placing "include" before ...fetchInit means a caller
+  // can still override with "same-origin" or "omit" when needed.
+  const response = await fetch(input, { credentials: "include", ...fetchInit, method, headers });
 
   if (!response.ok) {
     const errorData = await parseErrorBody(response, method);

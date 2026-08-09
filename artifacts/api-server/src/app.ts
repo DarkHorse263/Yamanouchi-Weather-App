@@ -3,11 +3,17 @@ import cors from "cors";
 import helmet from "helmet";
 import path from "path";
 import { readFileSync } from "fs";
-import cookieParser from "cookie-parser";
 import rateLimit from "express-rate-limit";
 import * as Sentry from "@sentry/node";
+import { clerkMiddleware } from "@clerk/express";
+import { publishableKeyFromHost } from "@clerk/shared/keys";
+import { getAuth } from "@clerk/express";
 import router from "./routes";
-import { authMiddleware } from "./middlewares/authMiddleware.js";
+import {
+  CLERK_PROXY_PATH,
+  clerkProxyMiddleware,
+  getClerkProxyHost,
+} from "./middlewares/clerkProxyMiddleware.js";
 import { setSubscriptionResolver } from "./middlewares/require-entitlement.js";
 import { resolvePromoSubscription } from "./lib/promo.js";
 
@@ -18,7 +24,13 @@ import { resolvePromoSubscription } from "./lib/promo.js";
 // of a paywall. After the promo closes this returns null even for members
 // (free tier → real 402 paywall). When billing lands, replace the post-promo
 // branch with the real subscription lookup off `req`.
-setSubscriptionResolver((req) => resolvePromoSubscription(req.isAuthenticated()));
+// SECURITY: use only auth.userId (Clerk's immutable, server-verified principal).
+// Session claims are user-editable custom data and MUST NOT be used for
+// authorization or entitlement decisions.
+setSubscriptionResolver((req) => {
+  const auth = getAuth(req);
+  return resolvePromoSubscription(!!auth.userId);
+});
 
 const app: Express = express();
 
@@ -30,6 +42,10 @@ const app: Express = express();
 //  - in production the same server serves the SPA, so a strict
 //    X-Frame-Options would also block any future embed-the-widget use case.
 // All other helmet defaults (HSTS, nosniff, Referrer-Policy, etc.) stay on.
+// Clerk proxy: must come before body parsers so it can stream raw bytes.
+// Handles /api/__clerk/* requests by proxying to Clerk's FAPI in production.
+app.use(CLERK_PROXY_PATH, clerkProxyMiddleware());
+
 app.use(helmet({
   contentSecurityPolicy: false,
   crossOriginEmbedderPolicy: false,
@@ -80,17 +96,40 @@ app.use(cors({
     if (isOriginAllowed(origin)) return cb(null, true);
     return cb(new Error(`CORS: origin not allowed (${origin})`));
   },
-  // Credentials enabled so the session cookie issued by Replit Auth is sent
-  // on cross-origin requests from the SPA (preview iframe / *.replit.dev).
+  // Credentials enabled so Clerk's session cookie is sent on cross-origin
+  // requests from the SPA (preview iframe / *.replit.dev).
   // CSRF risk is bounded by:
   //   - the strict origin allowlist above (no `*` reflection),
   //   - SameSite=Lax on the session cookie (no top-level POST CSRF), and
   //   - all auth-mutating endpoints requiring a session+admin allowlist.
   credentials: true,
 }));
-app.use(cookieParser());
-app.use(express.json({ limit: "100kb" }));
-app.use(express.urlencoded({ extended: true, limit: "100kb" }));
+// The Resend webhook needs the RAW request body to verify its Svix HMAC
+// signature (see routes/resend-webhook.ts, which mounts its own express.raw).
+// Skip the app-wide JSON/urlencoded parsers for that one path so the bytes
+// Resend signed reach the route untouched · every other route still gets
+// parsed bodies as before.
+const RESEND_WEBHOOK_PATH = "/api/webhooks/resend";
+const skipForResendWebhook =
+  (parser: express.RequestHandler): express.RequestHandler =>
+  (req, res, next) => {
+    if (req.path === RESEND_WEBHOOK_PATH) return next();
+    return parser(req, res, next);
+  };
+app.use(skipForResendWebhook(express.json({ limit: "100kb" })));
+app.use(skipForResendWebhook(express.urlencoded({ extended: true, limit: "100kb" })));
+
+// Clerk middleware: validates the session token and exposes auth state via
+// getAuth(req). Resolves the publishable key from the request host so the
+// same server can serve multiple Clerk custom domains.
+app.use(
+  clerkMiddleware((req) => ({
+    publishableKey: publishableKeyFromHost(
+      getClerkProxyHost(req) ?? "",
+      process.env.CLERK_PUBLISHABLE_KEY,
+    ),
+  })),
+);
 
 // Catch JSON parse errors (and any other body-parser SyntaxError) before they
 // bubble into Express's default HTML error page, which would leak a stack
@@ -147,10 +186,10 @@ const willyRadarLimiter = rateLimit({
 
 app.use("/api/places", placesLimiter);
 app.use("/api/willy-radar", willyRadarLimiter);
-// authMiddleware loads req.user from the session cookie/bearer token before
-// any route handler runs. Mounted on /api so every API route can inspect
-// `req.isAuthenticated()` / `req.user`. Public routes simply ignore it.
-app.use("/api", apiLimiter, authMiddleware, router);
+// clerkMiddleware (mounted above) validates the session token and exposes
+// auth state via getAuth(req) to every route handler. Public routes simply
+// ignore it.
+app.use("/api", apiLimiter, router);
 
 // ── SPA static serving (production) ───────────────────────────────────────
 //
@@ -361,8 +400,21 @@ if (process.env.NODE_ENV === "production") {
         nelson: "Nelson",
         kimberley: "Kimberley",
         invermere: "Invermere",
+      },
+    },
+    "okanagan": {
+      name: "Okanagan",
+      towns: {
+        kelowna: "Kelowna",
+        vernon: "Vernon",
+        penticton: "Penticton",
+        kamloops: "Kamloops",
         "sun-peaks": "Sun Peaks",
       },
+    },
+    "vancouver": {
+      name: "Vancouver & the Island",
+      towns: { "vancouver-city": "Vancouver", courtenay: "Courtenay" },
     },
     "banff-lake-louise": {
       name: "Banff & Lake Louise",
@@ -616,11 +668,18 @@ if (process.env.NODE_ENV === "production") {
 
   // Top-level routes handled by the SPA (before the /:region catch-all).
   const KNOWN_TOP_LEVEL = new Set([
-    "/", "/countries", "/au", "/jp", "/nz", "/ca", "/us", "/near-you",
+    "/", "/countries", "/about", "/au", "/jp", "/nz", "/ca", "/ca/all-ski-areas", "/us", "/near-you",
     "/plan", "/legal/privacy", "/legal/terms",
     "/premium",
     "/alerts/verify", "/alerts/manage", "/alerts/unsubscribed",
+    "/account",
     "/admin",
+    // Clerk authentication routes. The Clerk-hosted UI mounts at /sign-in and
+    // /sign-up, and uses subpaths for OAuth callbacks and multi-step flows
+    // (e.g. /sign-in/sso-callback, /sign-in/factor-one). These MUST serve the
+    // SPA index.html so the Clerk React component handles them correctly. They
+    // are noIndex so crawlers don't index the auth shell pages.
+    "/sign-in", "/sign-up",
   ]);
 
   // Valid sub-paths under /:region/ that are indexable pages.
@@ -639,6 +698,11 @@ if (process.env.NODE_ENV === "production") {
   function isValidPublicPath(urlPath: string): boolean {
     const p = urlPath.replace(/\/+$/, "") || "/";
     if (KNOWN_TOP_LEVEL.has(p)) return true;
+
+    // Clerk uses sub-paths under /sign-in and /sign-up for OAuth callbacks and
+    // multi-step flows (e.g. /sign-in/sso-callback, /sign-in/factor-one).
+    // All of these must serve the SPA so the Clerk React component handles them.
+    if (p.startsWith("/sign-in/") || p.startsWith("/sign-up/")) return true;
 
     const parts = p.split("/").filter(Boolean);
     if (parts.length === 0) return true;
@@ -679,19 +743,19 @@ if (process.env.NODE_ENV === "production") {
     },
     "/countries": {
       title: "browse resort regions by country · feelzlike",
-      description: "Choose a country to explore resort town weather and conditions — Australia, Japan, and New Zealand.",
+      description: "Choose a country to explore resort town weather and conditions · Australia, Japan, and New Zealand.",
     },
     "/au": {
       title: "Australia · resort town weather · feelzlike",
-      description: "Live weather and conditions for resort towns across Australia — Snowy Mountains (NSW), Victoria's High Country (VIC), and Tasmania (TAS).",
+      description: "Live weather and conditions for resort towns across Australia · Snowy Mountains (NSW), Victoria's High Country (VIC), and Tasmania (TAS).",
     },
     "/jp": {
       title: "Japan · resort town weather · feelzlike",
-      description: "Live weather and conditions for resort towns in Japan — Yamanouchi, Nozawa Onsen, Iiyama, Hakuba Valley (Nagano), and Myoko (Niigata).",
+      description: "Live weather and conditions for resort towns in Japan · Yamanouchi, Nozawa Onsen, Iiyama, Hakuba Valley (Nagano), and Myoko (Niigata).",
     },
     "/nz": {
       title: "New Zealand · resort town weather · feelzlike",
-      description: "Live weather and conditions for resort towns across New Zealand — Queenstown, Wanaka (Otago), Mt Hutt (Canterbury), and Ruapehu (Central Plateau).",
+      description: "Live weather and conditions for resort towns across New Zealand · Queenstown, Wanaka (Otago), Mt Hutt (Canterbury), and Ruapehu (Central Plateau).",
     },
     "/near-you": {
       title: "weather near you · local resort conditions · feelzlike",
@@ -699,7 +763,7 @@ if (process.env.NODE_ENV === "production") {
     },
     "/premium": {
       title: "feelzlike premium · snow alerts for your towns · feelzlike",
-      description: "feelzlike premium — email snow and powder alerts for your favourite resort towns across Australia, Japan, and New Zealand.",
+      description: "feelzlike premium · email snow and powder alerts for your favourite resort towns across Australia, Japan, and New Zealand.",
     },
     "/plan": {
       title: "trip planner · find the best conditions · feelzlike",
@@ -714,6 +778,21 @@ if (process.env.NODE_ENV === "production") {
       title: "terms of service · feelzlike",
       description: "Terms and conditions for using feelzlike.",
       noIndex: false,
+    },
+    "/sign-in": {
+      title: "sign in · feelzlike",
+      description: "Sign in to your feelzlike account.",
+      noIndex: true,
+    },
+    "/sign-up": {
+      title: "create account · feelzlike",
+      description: "Create a free feelzlike account.",
+      noIndex: true,
+    },
+    "/account": {
+      title: "your account · feelzlike",
+      description: "Manage your feelzlike account, alerts, and profile.",
+      noIndex: true,
     },
   };
 

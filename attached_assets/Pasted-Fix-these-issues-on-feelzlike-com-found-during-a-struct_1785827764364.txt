@@ -1,0 +1,19 @@
+Fix these issues on feelzlike.com (found during a structural QA pass):
+
+1. Sitemap generator missing all /mountain/{slug} pages (P0)
+sitemap.xml currently has 688 URLs but zero /mountain/{slug} pages — despite these being real, live, linked pages (e.g. /jasper/mountain/marmot-basin, /whistler/mountain/blackcomb-mountain). Find the sitemap generation logic and make sure it includes every mountain/resort page across all regions, not just region and town pages. This needs to be fixed at the generator level so any future country/resort additions get picked up automatically.
+
+2. Leaking third-party API error on /stay pages (P0)
+Visiting /whistler/stay (and likely other regions' /stay pages) shows a raw backend error to users: Couldn't load nearby stays. Places fetch failed (502): {"error":"UPSTREAM_ERROR","status":403,"message":"...PERMISSION_DENIED..."}. This is a misconfigured or expired Places API key. Please: (a) check/renew the Places API key and its permissions, and (b) regardless of the key issue, add a graceful fallback UI so a failed API call never surfaces a raw error message to end users — show something like "nearby stays unavailable right now" instead.
+
+3. Broken 7-day-forecast link generates a tripled URL slug (P1)
+The "7-day forecast" quick-link on town pages generates a malformed URL with the town slug repeated three times, e.g. /jasper/jasper/jasper/weather and /niseko/hirafu/hirafu/weather (should be /jasper/jasper/weather). It doesn't 404 — it silently falls back to the parent region page — but the link itself needs fixing so it points to the correct URL. Check the component/helper that builds this link, likely a slug being concatenated twice.
+
+4. /roads page inconsistently rolled out (P1)
+/roads exists and is linked for all Canada + New Zealand regions and 2-3 Australia regions, but is missing across 19 of the 20 Japan regions (only Yamanouchi has it) — visiting a Japan region's /roads URL directly silently redirects back to the town page with no sidebar link at all. Decide whether /roads should be rolled out to all Japan regions too, or if it's intentionally being held back — if it should roll out, add the data/route/nav-link for the remaining 19 Japan regions.
+
+5. /alerts inconsistently linked in navigation (P1)
+The /alerts route/page works identically for any of the 37 regions, but is only linked in the sidebar nav for 2 regions (Snowy Mountains, Yamanouchi). Every other region's /alerts page is reachable only by direct URL. Add the nav link for all 37 regions so this isn't a half-rolled-out pilot feature.
+
+6. Two overlapping mountain taxonomies — needs a decision, not just a fix (informational)
+The trip planner (/plan) exposes a much longer tail of micro-ski-areas per region (e.g. 20+ under Yamanouchi alone) that never get their own full /mountain/{slug} page — only ~1-5 "flagship" mountains per region get that treatment. This looks like a partially migrated data model. No fix needed right now, just flagging so it's a conscious decision going forward rather than an accident, especially since we're about to add USA resorts and will need to decide how many mountains per region get full pages vs. just appearing in the trip planner list.

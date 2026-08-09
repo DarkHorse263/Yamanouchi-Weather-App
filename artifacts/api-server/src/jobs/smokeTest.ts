@@ -76,7 +76,7 @@ const WEATHER_CANARIES = [
 const SNOW_CONSISTENCY_CANARIES = [
   { id: "thredbo", name: "Thredbo", lat: -36.5054, lng: 148.3089, summitM: 2037 },
   { id: "whakapapa", name: "Whakapapa", lat: -39.2547, lng: 175.5619, summitM: 2020 },
-  { id: "happo-one", name: "Hakuba Happo-One", lat: 36.6981, lng: 137.8597, summitM: 1831 },
+  { id: "happo-one", name: "Hakuba Happo-One", lat: 36.6968, lng: 137.8380, summitM: 1831 },
 ];
 
 // Both figures derive from Open-Meteo hourly precip + freezing level at the

@@ -68,25 +68,10 @@ export function MountainsList() {
         )}
         path={`/${region.id}/mountains`}
       />
-      {/* Soft blue backdrop - palette pass replaces the purple/teal aurora. */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[420px] overflow-hidden">
-        <div
-          className="absolute -top-40 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] rounded-full opacity-60"
-          style={{
-            background:
-              "radial-gradient(ellipse at center, hsla(210,90%,55%,0.20), transparent 60%)",
-            filter: "blur(40px)",
-          }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "linear-gradient(to bottom, transparent 60%, hsl(var(--background)) 100%)",
-          }}
-        />
-      </div>
-
+      {/* Bluebird repaint (Aug 2026): the page sits directly on the seasonal
+          canvas (blue in winter, emerald in green season), so the old light
+          radial backdrop + fade-to-background band are gone and all header
+          text is white. White cards keep dark ink inside. */}
       <div className="relative px-4 md:px-10 py-5 md:py-8 max-w-6xl mx-auto">
         <motion.header
           initial={{ opacity: 0, y: 8 }}
@@ -94,10 +79,10 @@ export function MountainsList() {
           transition={{ duration: 0.35 }}
         >
           <div className="flex items-center gap-3">
-            <span className="byline text-foreground/80">
+            <span className="byline text-white/70">
               {region.name} · {region.subtitle}
             </span>
-            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-emerald-500/10 text-emerald-700 border border-emerald-500/20">
+            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-white/15 text-white border border-white/25">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 animate-ping" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
@@ -107,34 +92,34 @@ export function MountainsList() {
           </div>
 
           <h1
-            className="font-display font-semibold text-5xl md:text-6xl tracking-tight text-blue-900 mt-3"
+            className="font-display font-semibold text-5xl md:text-6xl tracking-tight text-white mt-3"
             style={{ letterSpacing: "-0.035em" }}
           >
             {t("Mountains", "スキー場")}
           </h1>
 
           <div className="flex items-end justify-between gap-6 mt-4 max-w-3xl">
-            <p className="text-muted-foreground max-w-xl">
+            <p className="text-white/70 max-w-xl">
               {t(
                 "Real-time conditions, lift status and live cams for every mountain in the region.",
                 "地域内すべてのスキー場のリアルタイム状況・リフト稼働・ライブカメラ。",
               )}
             </p>
             <div className="text-right shrink-0">
-              <p className="display-number text-4xl md:text-5xl text-blue-900 tnum">
+              <p className="display-number text-4xl md:text-5xl text-white tnum">
                 {String(totalCount).padStart(2, "0")}
               </p>
-              <p className="byline text-muted-foreground/70 mt-1">
+              <p className="byline text-white/60 mt-1">
                 {t("Mountains tracked", "対象スキー場")}
               </p>
             </div>
           </div>
 
-          <div className="rule mt-6 mb-8" />
+          <div className="mt-6 mb-8 h-px bg-white/20" />
         </motion.header>
 
         {totalCount === 0 ? (
-          <p className="text-muted-foreground">
+          <p className="text-white/70">
             {t("No mountains configured for this region yet.", "スキー場は未設定です。")}
           </p>
         ) : (

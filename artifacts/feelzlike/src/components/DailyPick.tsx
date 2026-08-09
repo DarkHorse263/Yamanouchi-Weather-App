@@ -68,7 +68,7 @@ export function DailyPick({ regionId, resorts, resortHrefPattern = "/:id" }: Pro
           .filter((l) => allowed.has(l.location.id))
           .map((l) => {
             // API surfaces snowfallNext24h in centimetres (matches the
-            // `cm` units used in EnsembleForecast and MountainSnapshot).
+            // `cm` units used in MountainSnapshot).
             const snowfallCm24 = Math.max(0, Number(l.current.snowfallNext24h ?? 0));
             const windKph = Math.max(0, Number(l.current.windSpeed ?? 0));
             // Each cm of fresh snow worth 1 pt; each kph of wind costs 1 pt.
@@ -118,39 +118,39 @@ export function DailyPick({ regionId, resorts, resortHrefPattern = "/:id" }: Pro
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="glass rounded-3xl p-5 md:p-6 border border-sky-500/20"
+      className="rounded-[2rem] border-0 bg-white p-6 md:p-8 shadow-[0_12px_40px_-12px_rgba(0,40,150,0.5)]"
     >
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div className="min-w-0">
-          <p className="byline text-sky-700 inline-flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5" />
-            feelzlike's daily pick
+          <p className="text-[12px] font-bold lowercase tracking-wider text-[#0055FF] inline-flex items-center gap-1.5">
+            <Sparkles className="w-4 h-4 text-[#0055FF]" />
+            daily pick
           </p>
-          <h2 className="font-display font-semibold text-2xl md:text-3xl mt-1.5 text-foreground">
+          <h2 className="font-display font-black text-3xl md:text-4xl mt-2 text-[#0F172A] lowercase">
             {pick.name}
           </h2>
-          <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
+          <p className="text-[15px] font-bold text-slate-500 mt-2 leading-relaxed lowercase">
             {reason}
           </p>
-          <div className="mt-3 flex items-center gap-4 text-xs text-muted-foreground/85">
+          <div className="mt-4 flex items-center gap-4 text-[13px] font-bold text-slate-500 lowercase">
             <span className="inline-flex items-center gap-1.5">
-              <Snowflake className={cn("w-3.5 h-3.5", pick.snowfallCm24 >= 1 ? "text-snow-accent" : "text-muted-foreground/50")} />
-              <span data-numeric className={cn(pick.snowfallCm24 >= 1 && "text-snow-accent font-medium")}>{u.snow(pick.snowfallCm24, 1)}</span>
-              <span className="text-muted-foreground/60">next 24h</span>
+              <Snowflake className={cn("w-4 h-4", pick.snowfallCm24 >= 1 ? "text-[#EC008C]" : "text-slate-400")} />
+              <span data-numeric className={cn(pick.snowfallCm24 >= 1 && "text-[#EC008C] font-black")}>{u.snow(pick.snowfallCm24, 1)}</span>
+              <span className="text-slate-400">next 24h</span>
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <Wind className={cn("w-3.5 h-3.5", pick.windKph <= 25 ? "text-emerald-400" : pick.windKph <= 40 ? "text-amber-400" : "text-rose-400")} />
-              <span data-numeric>{u.wind(pick.windKph)} {u.windUnit}</span>
-              <span className="text-muted-foreground/60">wind</span>
+              <Wind className={cn("w-4 h-4", pick.windKph <= 25 ? "text-emerald-500" : pick.windKph <= 40 ? "text-amber-500" : "text-rose-500")} />
+              <span data-numeric className="font-black text-slate-700">{u.wind(pick.windKph)} {u.windUnit}</span>
+              <span className="text-slate-400">wind</span>
             </span>
           </div>
         </div>
         <Link
           href={href}
-          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-sky-500/15 hover:bg-sky-500/25 border border-sky-500/40 text-sky-800 text-xs font-semibold uppercase tracking-widest transition-colors"
+          className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#F0F5FF] text-[#0055FF] text-[13px] font-black lowercase tracking-tight transition-colors hover:bg-[#0055FF] hover:text-white shadow-sm"
         >
           See {pick.name}
-          <ArrowUpRight className="w-3.5 h-3.5" />
+          <ArrowUpRight className="w-4 h-4" />
         </Link>
       </div>
     </motion.div>

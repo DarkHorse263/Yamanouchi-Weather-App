@@ -15,11 +15,35 @@ interface DailyPoint {
   alerts: number;
   newsletter: number;
 }
+interface PromoBucket {
+  total: number;
+  last7d: number;
+}
 interface StatsPayload {
+  promoFunnel?: Record<string, PromoBucket>;
   alerts: SubsBucket;
   newsletter?: SubsBucket;
   newsletterSources?: Array<{ source: string; count: number }>;
   daily?: DailyPoint[];
+}
+
+interface EngagementPayload {
+  visitors: { today: number; last7d: number; last30d: number; returning30d: number };
+  pageViews: { last7d: number; last30d: number };
+  topPages: Array<{ page: string; count: number }>;
+  dailyVisitors: Array<{ day: string; visitors: number }>;
+  events: Record<string, { total: number; last7d: number }>;
+}
+
+interface EmailIncident {
+  id: string;
+  email: string;
+  type: "bounced" | "complained";
+  reason: string | null;
+  createdAt: string;
+}
+interface EmailIncidentsPayload {
+  incidents: EmailIncident[];
 }
 
 interface RecentSignup {
@@ -30,9 +54,17 @@ interface RecentSignup {
   verifiedAt: string | null;
   createdAt: string;
 }
+interface MemberRow {
+  id: string;
+  email: string | null;
+  displayName: string | null;
+  homeRegionId: string | null;
+  createdAt: string;
+}
 interface SignupsPayload {
   alerts: RecentSignup[];
   newsletter?: RecentSignup[];
+  members?: MemberRow[];
 }
 
 function Kpi({ label, value, sub }: { label: string; value: number | string; sub?: string }) {
@@ -124,20 +156,77 @@ function SourcesCard({ sources }: { sources: Array<{ source: string; count: numb
 }
 
 /**
+ * EmailIncidentsCard · async Resend delivery failures.
+ *
+ * Resend can accept a send (HTTP 200) then hard-bounce or be marked as spam
+ * minutes later — the synchronous send path never sees that, so a magic-link
+ * visitor with a dead address just waits forever. POST /api/webhooks/resend
+ * records those bounce/complaint events; this shows the latest 50 so the
+ * owner can spot a bad sign-in address. We record only · we never auto-
+ * unsubscribe a matching subscriber.
+ */
+function EmailIncidentsCard({ incidents }: { incidents: EmailIncident[] }) {
+  return (
+    <div className="rounded-lg border bg-white p-5">
+      <h3 className="text-sm font-semibold mb-1 lowercase">email delivery incidents</h3>
+      <p className="text-xs text-muted-foreground mb-3">
+        bounces & spam complaints reported by resend after a send was accepted · latest 50 ·
+        recorded only, subscribers are never auto-removed
+      </p>
+      {incidents.length === 0 ? (
+        <p className="text-sm text-muted-foreground">none · all mail is landing.</p>
+      ) : (
+        <ul className="divide-y text-sm">
+          {incidents.map((i) => (
+            <li key={i.id} className="py-2 flex items-start justify-between gap-4">
+              <div className="min-w-0">
+                <div className="truncate">{i.email}</div>
+                {i.reason ? (
+                  <div className="text-xs text-muted-foreground truncate" title={i.reason}>
+                    {i.reason}
+                  </div>
+                ) : null}
+              </div>
+              <div className="flex items-center gap-2 whitespace-nowrap">
+                <span
+                  className={`rounded px-1.5 py-0.5 text-[11px] font-medium ${
+                    i.type === "complained"
+                      ? "bg-amber-100 text-amber-800"
+                      : "bg-rose-100 text-rose-800"
+                  }`}
+                >
+                  {i.type}
+                </span>
+                <span className="text-xs text-muted-foreground">
+                  {new Date(i.createdAt).toLocaleDateString()}
+                </span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+/**
  * PromoFunnelCard · the snow-alert prompt funnel (shown → clicked → subscribed).
  *
- * The "shown" and "clicked" steps live in GA4 (events alert_promo_shown /
- * alert_promo_clicked / alert_promo_dismissed, category "alert") because
- * they're consent-gated client events we never send to our own server.
- * The "subscribed" step is our own database - shown inline here. The GA link
- * deep-links the events report on the feelzlike property so the owner can put
- * the two numbers side by side and judge whether the prompt converts.
+ * "shown" / "clicked" / "dismissed" are first-party counters recorded by the
+ * banner via POST /api/promo/event (anonymous aggregate tallies, no
+ * identifiers, so they count EVERY visitor - not just analytics-consented
+ * ones like the GA mirror does; expect these to read higher than GA).
+ * "subscribed" is verified powder-alert subscribers from our own database.
  */
-function PromoFunnelCard({ alerts }: { alerts: SubsBucket }) {
+function PromoFunnelCard({ alerts, promo }: { alerts: SubsBucket; promo?: Record<string, PromoBucket> }) {
+  const fmt = (b?: PromoBucket) =>
+    b ? `${b.total}` : "0";
+  const sub7 = (b?: PromoBucket) => `+${b?.last7d ?? 0} last 7d`;
   const steps = [
-    { label: "shown", sub: "banner appeared · ga event alert_promo_shown", value: "see GA" },
-    { label: "clicked", sub: "tapped set up alerts · ga event alert_promo_clicked", value: "see GA" },
+    { label: "shown", sub: `banner appeared · ${sub7(promo?.shown)}`, value: fmt(promo?.shown) },
+    { label: "clicked", sub: `tapped set up alerts · ${sub7(promo?.clicked)}`, value: fmt(promo?.clicked) },
     { label: "subscribed", sub: "confirmed a powder-alert email", value: String(alerts.verified) },
+    { label: "dismissed", sub: `closed the banner · ${sub7(promo?.dismissed)}`, value: fmt(promo?.dismissed) },
   ];
   return (
     <div className="rounded-lg border bg-white p-5">
@@ -153,8 +242,8 @@ function PromoFunnelCard({ alerts }: { alerts: SubsBucket }) {
         </a>
       </div>
       <p className="text-xs text-muted-foreground mb-3">
-        did people notice the prompt? compare alert_promo_shown → alert_promo_clicked in GA
-        (analytics-consented visitors only) against subscribers below · alert_promo_dismissed = closed it.
+        real first-party counts from every visitor (not consent-gated, so they'll read higher
+        than GA) · shown → clicked → subscribed tells you if the prompt converts.
       </p>
       <div className="flex items-stretch gap-2">
         {steps.map((s, i) => (
@@ -164,10 +253,166 @@ function PromoFunnelCard({ alerts }: { alerts: SubsBucket }) {
               <div className="text-lg font-semibold tabular-nums">{s.value}</div>
               <div className="text-[11px] text-muted-foreground truncate" title={s.sub}>{s.sub}</div>
             </div>
-            {i < steps.length - 1 ? <span className="shrink-0 text-slate-300">→</span> : null}
+            {i < 2 ? <span className="shrink-0 text-slate-300">→</span> : null}
           </div>
         ))}
       </div>
+    </div>
+  );
+}
+
+/**
+ * EngagementCard · the partner-conversation numbers: real visitors, page
+ * views, returning share, installed base. All first-party + cookieless
+ * (counted server-side from POST /api/engagement/ping, bots filtered), so
+ * unlike GA these count EVERY visitor. Counting starts from the first
+ * publish that includes the ping - the dev preview has no real traffic.
+ */
+function EngagementCard({ e }: { e: EngagementPayload }) {
+  const max = Math.max(1, ...e.dailyVisitors.map((d) => d.visitors));
+  const maxPage = Math.max(1, ...e.topPages.map((p) => p.count));
+  const returningPct = e.visitors.last30d > 0 ? Math.round((e.visitors.returning30d / e.visitors.last30d) * 100) : 0;
+  const installs = e.events.pwa_install;
+  const launches = e.events.pwa_launch;
+  const empty = e.visitors.last30d === 0 && e.pageViews.last30d === 0;
+  return (
+    <div className="rounded-lg border bg-white p-5">
+      <h3 className="text-sm font-semibold mb-1 lowercase">real engagement · every visitor counted</h3>
+      <p className="text-xs text-muted-foreground mb-4">
+        first-party, cookieless server counts (bots excluded) · not consent-gated, so these are the
+        truthful totals for partner conversations · counting starts from the first publish
+      </p>
+      {empty ? (
+        <p className="text-sm text-muted-foreground rounded-md border border-dashed px-3 py-4">
+          no data yet · these counters only see real traffic on the published site - the dev preview
+          has no real visitors. republish, then numbers appear here within minutes of the first visit.
+        </p>
+      ) : (
+        <div className="space-y-5">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            <Kpi label="visitors today" value={e.visitors.today} />
+            <Kpi label="visitors · 7d" value={e.visitors.last7d} sub={`${e.pageViews.last7d} page views`} />
+            <Kpi label="visitors · 30d" value={e.visitors.last30d} sub={`${e.pageViews.last30d} page views`} />
+            <Kpi label="returning · 30d" value={`${returningPct}%`} sub={`${e.visitors.returning30d} came back on another day`} />
+          </div>
+
+          <div>
+            <div className="flex items-baseline justify-between mb-2">
+              <div className="text-xs font-medium lowercase text-slate-700">daily visitors · last 30 days</div>
+            </div>
+            <div className="flex items-end gap-[3px] h-20" role="img" aria-label="daily unique visitors over the last 30 days">
+              {e.dailyVisitors.map((d) => (
+                <div key={d.day} className="flex-1 flex flex-col justify-end h-full" title={`${new Date(d.day + "T00:00:00Z").toLocaleDateString(undefined, { day: "numeric", month: "short" })} · ${d.visitors} visitors`}>
+                  {d.visitors === 0 ? (
+                    <div className="w-full h-[2px] rounded-sm bg-slate-200" />
+                  ) : (
+                    <div className="w-full rounded-t-sm bg-[#0055FF]" style={{ height: `${(d.visitors / max) * 100}%` }} />
+                  )}
+                </div>
+              ))}
+            </div>
+            <div className="flex justify-between text-[10px] text-muted-foreground mt-1">
+              <span>30 days ago</span>
+              <span>today</span>
+            </div>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-5">
+            <div>
+              <div className="text-xs font-medium lowercase text-slate-700 mb-2">most visited · last 30 days</div>
+              {e.topPages.length === 0 ? (
+                <p className="text-sm text-muted-foreground">none yet.</p>
+              ) : (
+                <ul className="space-y-1.5 text-sm">
+                  {e.topPages.map((p) => (
+                    <li key={p.page} className="flex items-center gap-3">
+                      <span className="w-32 shrink-0 truncate text-slate-700">{p.page}</span>
+                      <span className="flex-1 h-2 rounded bg-slate-100 overflow-hidden">
+                        <span className="block h-full rounded bg-[#0055FF]" style={{ width: `${(p.count / maxPage) * 100}%` }} />
+                      </span>
+                      <span className="tabular-nums text-slate-700 w-10 text-right">{p.count}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <div>
+              <div className="text-xs font-medium lowercase text-slate-700 mb-2">app installs</div>
+              <div className="grid grid-cols-2 gap-3">
+                <Kpi label="installed" value={installs?.total ?? 0} sub={`+${installs?.last7d ?? 0} last 7d · android/desktop only`} />
+                <Kpi label="home-screen opens" value={launches?.total ?? 0} sub={`+${launches?.last7d ?? 0} last 7d · includes iphone`} />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/**
+ * PartnerLinksCard · first-party shown→clicked counters for partner booking
+ * links (StayCard providers + Europcar car hire). Event keys arrive as
+ * "partner_shown:<partner>" / "partner_clicked:<partner>" from
+ * /api/engagement/ping - cookieless, so unlike GA these count EVERY visitor.
+ */
+function PartnerLinksCard({ e }: { e: EngagementPayload }) {
+  const partners = new Map<string, { shown: number; shown7d: number; clicked: number; clicked7d: number }>();
+  for (const [key, v] of Object.entries(e.events)) {
+    const m = key.match(/^partner_(shown|clicked):(.+)$/);
+    if (!m) continue;
+    const p = partners.get(m[2]) ?? { shown: 0, shown7d: 0, clicked: 0, clicked7d: 0 };
+    if (m[1] === "shown") { p.shown += v.total; p.shown7d += v.last7d; }
+    else { p.clicked += v.total; p.clicked7d += v.last7d; }
+    partners.set(m[2], p);
+  }
+  const rows = [...partners.entries()].sort((a, b) => b[1].clicked - a[1].clicked || b[1].shown - a[1].shown);
+  const totalShown = rows.reduce((s, [, p]) => s + p.shown, 0);
+  const totalClicked = rows.reduce((s, [, p]) => s + p.clicked, 0);
+  const ctr = (shown: number, clicked: number) => (shown > 0 ? `${((clicked / shown) * 100).toFixed(1)}%` : "-");
+  return (
+    <div className="rounded-lg border bg-white p-5">
+      <h3 className="text-sm font-semibold mb-1 lowercase">partner links · shown → clicked</h3>
+      <p className="text-xs text-muted-foreground mb-4">
+        first-party, cookieless counts of partner booking buttons rendered and tapped · every
+        visitor counted, no GA needed · counting starts from the first publish with this card
+      </p>
+      {rows.length === 0 ? (
+        <p className="text-sm text-muted-foreground rounded-md border border-dashed px-3 py-4">
+          no data yet · these counters only see real traffic on the published site. republish, then
+          numbers appear as visitors open stay and transport pages.
+        </p>
+      ) : (
+        <div className="space-y-4">
+          <div className="grid grid-cols-3 gap-3">
+            <Kpi label="links shown" value={totalShown} />
+            <Kpi label="links clicked" value={totalClicked} />
+            <Kpi label="click-through" value={ctr(totalShown, totalClicked)} />
+          </div>
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="text-[11px] uppercase tracking-widest text-muted-foreground text-left">
+                <th className="pb-1.5 font-medium">partner</th>
+                <th className="pb-1.5 font-medium text-right">shown</th>
+                <th className="pb-1.5 font-medium text-right">clicked</th>
+                <th className="pb-1.5 font-medium text-right">ctr</th>
+                <th className="pb-1.5 font-medium text-right">7d clicks</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map(([name, p]) => (
+                <tr key={name} className="border-t">
+                  <td className="py-1.5 text-slate-700">{name.replace(/_/g, ".")}</td>
+                  <td className="py-1.5 text-right tabular-nums">{p.shown}</td>
+                  <td className="py-1.5 text-right tabular-nums">{p.clicked}</td>
+                  <td className="py-1.5 text-right tabular-nums">{ctr(p.shown, p.clicked)}</td>
+                  <td className="py-1.5 text-right tabular-nums">{p.clicked7d}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }
@@ -212,6 +457,8 @@ function DashboardLinks() {
 export default function AdminStats() {
   const stats = useAdminQuery<StatsPayload>("stats", "/stats");
   const signups = useAdminQuery<SignupsPayload>("signups", "/recent-signups");
+  const emailIncidents = useAdminQuery<EmailIncidentsPayload>("email-incidents", "/email-incidents");
+  const engagement = useAdminQuery<EngagementPayload>("engagement", "/engagement");
 
   return (
     <AdminLayout active="stats">
@@ -223,6 +470,9 @@ export default function AdminStats() {
         <div className="text-sm text-rose-700">failed to load stats · {stats.error.message}</div>
       ) : stats.data ? (
         <div className="space-y-5">
+          {engagement.data ? <EngagementCard e={engagement.data} /> : null}
+          {engagement.data ? <PartnerLinksCard e={engagement.data} /> : null}
+
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             <Kpi label="alerts (verified)" value={stats.data.alerts.verified} sub={`+${stats.data.alerts.new7d} last 7d`} />
             {stats.data.newsletter ? (
@@ -242,7 +492,7 @@ export default function AdminStats() {
 
           {stats.data.daily && stats.data.daily.length > 0 ? <TrendStrip daily={stats.data.daily} /> : null}
 
-          <PromoFunnelCard alerts={stats.data.alerts} />
+          <PromoFunnelCard alerts={stats.data.alerts} promo={stats.data.promoFunnel} />
 
           <div className="grid lg:grid-cols-2 gap-4">
             <SubsCard title="powder-alert subscribers" b={stats.data.alerts} />
@@ -254,8 +504,13 @@ export default function AdminStats() {
             <DashboardLinks />
           </div>
 
+          {emailIncidents.data ? (
+            <EmailIncidentsCard incidents={emailIncidents.data.incidents} />
+          ) : null}
+
           {signups.data ? (
             <div className="grid lg:grid-cols-2 gap-4">
+              {signups.data.members ? <MembersTable rows={signups.data.members} /> : null}
               <RecentSignupsTable title="alerts · recent signups" list="alerts" rows={signups.data.alerts} />
               {signups.data.newsletter ? (
                 <RecentSignupsTable title="newsletter · recent signups" list="newsletter" rows={signups.data.newsletter} showSource />
@@ -265,6 +520,34 @@ export default function AdminStats() {
         </div>
       ) : null}
     </AdminLayout>
+  );
+}
+
+function MembersTable({ rows }: { rows: MemberRow[] }) {
+  return (
+    <div className="rounded-lg border bg-white p-5">
+      <h3 className="text-sm font-semibold mb-3 lowercase">member accounts · recent</h3>
+      {rows.length === 0 ? (
+        <p className="text-sm text-muted-foreground">none yet.</p>
+      ) : (
+        <ul className="divide-y text-sm">
+          {rows.map((r) => (
+            <li key={r.id} className="py-2 flex items-center justify-between gap-4">
+              <div className="min-w-0">
+                <div className="truncate">{r.email ?? "no email"}</div>
+                <div className="text-xs text-muted-foreground truncate">
+                  {r.displayName ?? "-"}
+                  {r.homeRegionId ? ` · ${r.homeRegionId}` : ""}
+                </div>
+              </div>
+              <span className="text-xs text-muted-foreground whitespace-nowrap">
+                joined {new Date(r.createdAt).toLocaleDateString()}
+              </span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }
 

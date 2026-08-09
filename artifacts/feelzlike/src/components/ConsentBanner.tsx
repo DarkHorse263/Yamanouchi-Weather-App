@@ -24,7 +24,11 @@ export function ConsentBanner() {
       role="dialog"
       aria-live="polite"
       aria-label="Cookie and tracking consent"
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/95 px-3 py-2.5 shadow-[0_-8px_24px_-12px_rgba(15,23,42,0.15)] backdrop-blur-sm sm:px-6 sm:py-4"
+      // On phones the banner sits ABOVE the fixed bottom nav so navigation
+      // stays reachable while consent is pending. AppShell publishes the nav
+      // height as --mobile-bottom-nav; pages without the nav (e.g. home) and
+      // md+ viewports fall back to the plain bottom edge.
+      className="fixed inset-x-0 bottom-[var(--mobile-bottom-nav,0px)] md:bottom-0 z-50 border-t border-slate-200 bg-white/95 px-3 py-2.5 shadow-[0_-8px_24px_-12px_rgba(15,23,42,0.15)] backdrop-blur-sm sm:px-6 sm:py-4"
     >
       <div className="mx-auto flex max-w-5xl flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
         <div className="text-slate-700">

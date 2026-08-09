@@ -30,7 +30,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { REGIONS, regionFeatures, townFeatures } from "./seo-regions.mjs";
+import { REGIONS, regionFeatures, townFeatures, regionMountains } from "./seo-regions.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, "..", "dist", "public");
@@ -227,6 +227,17 @@ add(
 );
 
 add(
+  "/ca/all-ski-areas",
+  "Canada · all ski areas · feelzlike",
+  "Directory of Canadian ski areas — every hill across BC, Alberta, Québec and beyond, with links to detail pages.",
+  `<main>
+    <h1>Canada · all ski areas</h1>
+    <p>A directory of Canadian ski areas beyond the regions feelzlike covers in depth, with links out to detail pages for each hill.</p>
+    <p>For live conditions, see the covered regions on the <a href="/ca">Canada page</a>.</p>
+  </main>`,
+);
+
+add(
   "/us",
   "United States \u00b7 resort town weather \u00b7 feelzlike",
   "Live weather and conditions for resort towns across Colorado \u2014 Summit County, Vail Valley, Aspen Snowmass, Steamboat, Winter Park, Crested Butte, Telluride, Durango, and Boulder / Front Range.",
@@ -369,6 +380,23 @@ for (const region of REGIONS) {
       `${region.name} · ${featureLabel.toLowerCase()} · feelzlike`,
       descriptions[feature] || `${featureLabel} for the ${region.name}.`,
       bodies[feature] || `<main><h1>${esc(region.name)} · ${esc(featureLabel.toLowerCase())}</h1></main>`,
+    );
+  }
+
+  // ── Mountain / resort detail pages ─────────────────────────────────────
+  // Enumerated from the app's real region registry (regionMountains) so new
+  // mountains get a prerendered snapshot automatically. Route set must stay
+  // identical to generate-sitemap.mjs / generate-rewrites.mjs.
+  for (const m of regionMountains(region)) {
+    add(
+      `/${region.slug}/mountain/${m.id}`,
+      `${m.name} · snow conditions & forecast · ${region.name} · feelzlike`,
+      `Live snow conditions, weather forecast, and lift info for ${m.name} in the ${region.name}.`,
+      `<main>
+      <h1>${esc(m.name)} · ${esc(region.name)}</h1>
+      <p>Live snow conditions, weather by elevation, and the extended forecast for ${esc(m.name)}.</p>
+      <p>Part of the <a href="/${region.slug}">${esc(region.name)}</a>.</p>
+    </main>`,
     );
   }
 

@@ -108,6 +108,12 @@ export function MountainWebcams({
           >
             {t(`${cams.length} webcams`, `ライブカメラ ${cams.length}基`)}
           </h2>
+          <p className="text-sm text-muted-foreground mt-1">
+            {t(
+              "these cameras are run by the resort · we link you straight to their live feeds",
+              "各カメラはスキー場が運営 · 公式ライブ映像に直接リンクしています",
+            )}
+          </p>
         </div>
         {cams.length > 1 && (
           <button

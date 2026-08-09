@@ -255,8 +255,8 @@ const REGIONS: RegionConfig[] = [
     // Headline reading from Tomamu resort village (~620m) · the hotel
     // towers and JR Tomamu Station at the base of Mt Tomamu.
     headlineLabel: "Tomamu",
-    lat: 43.0636,
-    lon: 142.6357,
+    lat: 43.0572,
+    lon: 142.6126,
     model: "jma_seamless",
     timezone: "Asia/Tokyo",
     sourceLabel: "JMA Seamless",
@@ -581,7 +581,7 @@ const REGIONS: RegionConfig[] = [
     region: "BC Interior",
     status: "live",
     href: "/powder-highway/",
-    baseTowns: ["Revelstoke", "Golden", "Fernie", "Nelson", "Kimberley", "Invermere", "Sun Peaks"],
+    baseTowns: ["Revelstoke", "Golden", "Fernie", "Nelson", "Kimberley", "Invermere"],
     mountains: [
       "Revelstoke Mountain Resort",
       "Kicking Horse",
@@ -589,13 +589,48 @@ const REGIONS: RegionConfig[] = [
       "Whitewater",
       "Kimberley Alpine Resort",
       "Panorama",
-      "Sun Peaks Resort",
     ],
     // Revelstoke anchors the loop · the biggest vertical and the town most
     // people start from. Each of the other six towns has its own page.
     headlineLabel: "Revelstoke",
     lat: 50.9981,
     lon: -118.1957,
+    timezone: "America/Vancouver",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "okanagan",
+    name: "Okanagan",
+    country: "Canada",
+    countryCode: "CA",
+    region: "BC Interior",
+    status: "live",
+    href: "/okanagan/",
+    baseTowns: ["Kelowna", "Vernon", "Penticton", "Kamloops", "Sun Peaks"],
+    mountains: ["Big White Ski Resort", "SilverStar Mountain Resort", "Apex Mountain Resort", "Sun Peaks Resort"],
+    // Kelowna is the biggest gateway city and the base for Big White · the
+    // other towns (Vernon, Penticton, Kamloops, Sun Peaks) have their own pages.
+    headlineLabel: "Kelowna",
+    lat: 49.8880,
+    lon: -119.4960,
+    timezone: "America/Vancouver",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "vancouver",
+    name: "Vancouver & the Island",
+    country: "Canada",
+    countryCode: "CA",
+    region: "British Columbia",
+    status: "live",
+    href: "/vancouver/",
+    baseTowns: ["Vancouver", "Courtenay"],
+    mountains: ["Cypress Mountain", "Grouse Mountain", "Mt Seymour", "Mount Washington Alpine Resort"],
+    // Headline from downtown Vancouver · the three North Shore hills are day
+    // trips from the city, Mount Washington is a separate Island trip.
+    headlineLabel: "Vancouver",
+    lat: 49.2827,
+    lon: -123.1207,
     timezone: "America/Vancouver",
     sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
   },
@@ -1807,5 +1842,10 @@ router.get("/local-weather", async (req, res) => {
     res.status(500).json({ error: "LOCAL_WEATHER_ERROR" });
   }
 });
+
+
+// Region ids · used by routes/engagement.ts to whitelist page labels so
+// page_view_daily cardinality stays finite (unknown labels collapse to "other").
+export const REGION_IDS: ReadonlySet<string> = new Set(REGIONS.map((r) => r.id));
 
 export default router;

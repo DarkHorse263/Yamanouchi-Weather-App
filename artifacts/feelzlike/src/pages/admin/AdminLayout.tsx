@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { useAuth } from "@workspace/replit-auth-web";
+import { useUser, useClerk } from "@clerk/react";
 import type { ReactNode } from "react";
 import { useAdminQuery } from "./useAdminFetch";
 import wordmark from "@assets/feelzlike_trimmed/feelzlike_WordMarque_colour_160426_1777334678269_trim.png";
@@ -16,7 +16,7 @@ const TABS: Array<{ key: Props["active"]; label: string; href: string }> = [
 
 /**
  * Shared chrome for every /admin page. Two-state auth gate:
- *   - not logged in → CTA to /api/login (preserves return-to)
+ *   - not logged in → CTA to /sign-in
  *   - logged in but not on the email allowlist → "not authorised"
  *   - admin → renders the tab nav and the page content
  *
@@ -25,9 +25,12 @@ const TABS: Array<{ key: Props["active"]; label: string; href: string }> = [
  * 403s we render the not-authorised view. We don't trust the client.
  */
 export function AdminLayout({ children, active }: Props) {
-  const { user, isAuthenticated, isLoading, login, logout } = useAuth();
-  // Server-side admin gate for EVERY tab (including Traffic, which doesn't
-  // call any other /api/admin/* endpoint of its own). Returns 401 if logged
+  const { user, isLoaded } = useUser();
+  const { signOut } = useClerk();
+  const isAuthenticated = !!user;
+  const isLoading = !isLoaded;
+
+  // Server-side admin gate for EVERY tab. Returns 401 if logged
   // out, 403 if logged in but not on ADMIN_EMAILS, 200 if admin.
   const me = useAdminQuery<{ user: { id: string; email: string } }>("me", "/me");
 
@@ -45,14 +48,14 @@ export function AdminLayout({ children, active }: Props) {
         <div className="max-w-sm text-center space-y-4">
           <h1 className="text-2xl font-semibold lowercase">admin</h1>
           <p className="text-sm text-muted-foreground">
-            sign in with your replit account to continue.
+            sign in to continue.
           </p>
-          <button
-            onClick={() => login()}
+          <Link
+            href="/sign-in"
             className="inline-flex items-center justify-center rounded-md bg-sky-600 hover:bg-sky-700 text-white text-sm font-medium px-4 py-2"
           >
-            sign in with replit
-          </button>
+            sign in
+          </Link>
         </div>
       </div>
     );
@@ -68,9 +71,7 @@ export function AdminLayout({ children, active }: Props) {
     );
   }
 
-  // Fail-closed for any other error · we never render admin tabs without a
-  // confirmed `/me` 200. Tabs like Traffic don't have a server fetch of their
-  // own, so a 5xx on the gate must NOT silently let the embed render.
+  // Fail-closed for any other error.
   if (me.error || !me.data) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center px-6">
@@ -117,9 +118,9 @@ export function AdminLayout({ children, active }: Props) {
             </nav>
           </div>
           <div className="flex items-center gap-3 text-xs text-muted-foreground">
-            <span className="hidden sm:inline">{user?.email}</span>
+            <span className="hidden sm:inline">{user?.primaryEmailAddress?.emailAddress}</span>
             <button
-              onClick={() => logout()}
+              onClick={() => signOut({ redirectUrl: "/" })}
               className="text-slate-500 hover:text-slate-900 underline-offset-2 hover:underline"
             >
               sign out
@@ -137,17 +138,18 @@ export function AdminLayout({ children, active }: Props) {
  * if the API returns 403, instead of an error toast or blank screen.
  */
 export function AdminForbidden() {
-  const { logout, user } = useAuth();
+  const { user } = useUser();
+  const { signOut } = useClerk();
   return (
     <div className="rounded-lg border border-amber-200 bg-amber-50 p-6 text-amber-900">
       <h2 className="font-semibold mb-1">not authorised</h2>
       <p className="text-sm">
-        signed in as <strong>{user?.email ?? "unknown"}</strong>, but this email
+        signed in as <strong>{user?.primaryEmailAddress?.emailAddress ?? "unknown"}</strong>, but this email
         isn't on the admin allowlist. ask the owner to add you, or sign in with
         a different account.
       </p>
       <button
-        onClick={() => logout()}
+        onClick={() => signOut({ redirectUrl: "/" })}
         className="mt-3 text-sm underline underline-offset-2"
       >
         sign out

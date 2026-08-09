@@ -1,32 +1,35 @@
 import { Router, type IRouter, type Request, type Response } from "express";
 import { z } from "zod";
-import { db, usersTable, alertSubscribersTable, sessionsTable } from "@workspace/db";
-import { eq, sql } from "drizzle-orm";
+import { db, usersTable, alertSubscribersTable } from "@workspace/db";
+import { eq } from "drizzle-orm";
+import { getAuth, clerkClient } from "@clerk/express";
 import { REGION_IDS, isRegionId } from "../lib/regions.js";
-import { clearSession, getSessionId } from "../lib/auth.js";
+import { requireAuth } from "../middlewares/requireAuth.js";
 
 /**
- * Session-authorised account surface for signed-in members (magic-link email
- * or Replit OIDC · either way authMiddleware sets req.user). Backs /account:
+ * Clerk-authorised account surface for signed-in members. Backs /account:
  *
  *   GET /account            · email + profile basics + alert subscription
  *   PUT /account/profile    · home region + units on the users row
  *   PUT /account/alerts     · edit the alert subscription tied to the
  *                             member's email (no manage token needed · the
- *                             session IS the proof of email ownership)
+ *                             Clerk session IS the proof of email ownership)
  *
  * Returns 401 AUTH_REQUIRED when anonymous so the SPA can open the sign-up
  * sheet instead of showing an error.
+ *
+ * All routes go through `requireAuth` which runs JIT provisioning and sets
+ * `req.dbUser` for the duration of the request.
  */
 
 const router: IRouter = Router();
 
 function requireUser(req: Request, res: Response): { id: string; email: string | null } | null {
-  if (!req.isAuthenticated()) {
+  if (!req.dbUser) {
     res.status(401).json({ error: "AUTH_REQUIRED", message: "Sign in to manage your account." });
     return null;
   }
-  return { id: req.user.id, email: req.user.email ?? null };
+  return { id: req.dbUser.id, email: req.dbUser.email ?? null };
 }
 
 function publicSubscriberShape(row: typeof alertSubscribersTable.$inferSelect) {
@@ -54,7 +57,7 @@ async function loadSubscriberByEmail(email: string | null) {
 }
 
 // ─── GET /account ─────────────────────────────────────────────────────────
-router.get("/account", async (req, res): Promise<void> => {
+router.get("/account", requireAuth, async (req, res): Promise<void> => {
   const user = requireUser(req, res);
   if (!user) return;
   try {
@@ -89,7 +92,7 @@ const ProfileBody = z
   })
   .passthrough();
 
-router.put("/account/profile", async (req, res): Promise<void> => {
+router.put("/account/profile", requireAuth, async (req, res): Promise<void> => {
   const user = requireUser(req, res);
   if (!user) return;
   const parsed = ProfileBody.safeParse(req.body);
@@ -132,8 +135,6 @@ router.put("/account/profile", async (req, res): Promise<void> => {
 });
 
 // ─── PUT /account/alerts ──────────────────────────────────────────────────
-// Same body + coercion rules as PUT /alerts/manage, but authorised by the
-// session email instead of an HMAC manage token.
 const AlertsBody = z
   .object({
     regions: z.array(z.string()).optional(),
@@ -145,7 +146,7 @@ const AlertsBody = z
   })
   .passthrough();
 
-router.put("/account/alerts", async (req, res): Promise<void> => {
+router.put("/account/alerts", requireAuth, async (req, res): Promise<void> => {
   const user = requireUser(req, res);
   if (!user) return;
   const parsed = AlertsBody.safeParse(req.body);
@@ -205,37 +206,63 @@ router.put("/account/alerts", async (req, res): Promise<void> => {
 });
 
 // ─── DELETE /account ──────────────────────────────────────────────────────
-// Permanent self-serve deletion · removes the users row, every session that
-// belongs to the member (not just the current one) and the alert subscriber
-// row for their email. Clears the session cookie so the client lands
-// signed-out immediately.
-router.delete("/account", async (req, res): Promise<void> => {
+// Permanent self-serve deletion.
+//
+// ORDERING — security-critical:
+//   1. Delete the Clerk identity FIRST. This revokes all sessions server-side
+//      and prevents the Clerk user from ever re-provisioning a new local row
+//      via requireAuth's JIT insert. If this step fails, abort — do NOT
+//      delete local data while a live Clerk identity remains.
+//   2. Delete local subscriber row (best-effort; orphaned subscribers are
+//      harmless and get no alert emails since no Clerk identity can auth).
+//   3. Delete the users row.
+//
+// This order means a DB failure after step 1 leaves orphaned local data for
+// a deleted Clerk identity, which is far safer than a live Clerk identity
+// pointing at a deleted local record (which requireAuth would JIT-reprovision).
+router.delete("/account", requireAuth, async (req, res): Promise<void> => {
   const user = requireUser(req, res);
   if (!user) return;
+
+  const auth = getAuth(req);
+  const clerkUserId = auth.userId; // Clerk's immutable principal
+
+  if (!clerkUserId) {
+    res.status(401).json({ error: "AUTH_REQUIRED" });
+    return;
+  }
+
   try {
-    // Alert subscription tied to the member's email (delete outright · this
-    // is account deletion, not an unsubscribe).
+    // ── Step 1: delete the Clerk identity (MUST succeed before local data) ──
+    try {
+      await clerkClient.users.deleteUser(clerkUserId);
+    } catch (clerkErr) {
+      // Fail the entire request so local data is NOT deleted while the
+      // Clerk identity is still live. The client can retry.
+      console.error("[/account DELETE] Clerk user deletion failed:", clerkErr);
+      res.status(500).json({
+        error: "ACCOUNT_DELETE_FAILED",
+        message: "Couldn't complete the account deletion · please try again.",
+      });
+      return;
+    }
+
+    // ── Steps 2 & 3: delete local data ────────────────────────────────────
+    // Best-effort at this point; Clerk identity is already gone.
     if (user.email) {
       await db
         .delete(alertSubscribersTable)
         .where(eq(alertSubscribersTable.email, user.email.trim().toLowerCase()));
     }
-
-    // Every session belonging to this user id (sess is jsonb: { user: { id } }).
-    await db
-      .delete(sessionsTable)
-      .where(sql`${sessionsTable.sess} -> 'user' ->> 'id' = ${user.id}`);
-
-    // The users row itself (subscriptions FK cascades).
     await db.delete(usersTable).where(eq(usersTable.id, user.id));
-
-    // Belt-and-braces: clear the cookie + any residual current session row.
-    await clearSession(res, getSessionId(req));
 
     res.json({ ok: true });
   } catch (err) {
-    console.error("[/account DELETE] error:", err);
-    res.status(500).json({ error: "ACCOUNT_DELETE_FAILED", message: "Couldn't delete your account · try again." });
+    console.error("[/account DELETE] error after Clerk deletion:", err);
+    res.status(500).json({
+      error: "ACCOUNT_DELETE_PARTIAL",
+      message: "Your identity was deleted but some local data may remain · contact support if needed.",
+    });
   }
 });
 

@@ -1,6 +1,7 @@
 import { Router, type IRouter, type Request, type Response } from "express";
 import { and, eq, gte, desc, isNotNull, isNull, count, sql } from "drizzle-orm";
-import { db, alertSubscribersTable, newsletterSubscribersTable } from "@workspace/db";
+import { db, alertSubscribersTable, newsletterSubscribersTable, promoFunnelDailyTable, emailDeliveryIncidentsTable, pageViewDailyTable, visitorDailyTable, engagementEventDailyTable, usersTable } from "@workspace/db";
+import { getAuth, clerkClient } from "@clerk/express";
 import { requireAdminUser } from "../middlewares/requireAdminUser.js";
 
 /**
@@ -73,9 +74,21 @@ router.use(requireAdminUser);
 // Cheap GET so the admin SPA can detect "is the current user actually on the
 // allowlist?" without doing a full /stats fetch. Returns the same 401 / 403
 // surface as every other admin route, so the frontend gate is uniform.
-router.get("/me", (req: Request, res: Response) => {
-  const user = req.user!; // requireAdminUser already vouched
-  res.json({ user });
+// /me: load the signed-in user's identity from the Clerk API so the email
+// is server-authoritative (not from user-editable session claims).
+router.get("/me", async (req: Request, res: Response) => {
+  const auth = getAuth(req);
+  const clerkUserId = auth.userId;
+  try {
+    const clerkUser = await clerkClient.users.getUser(clerkUserId!);
+    const email = clerkUser.emailAddresses.find(
+      (e) => e.id === clerkUser.primaryEmailAddressId,
+    )?.emailAddress;
+    res.json({ user: { id: clerkUserId, email } });
+  } catch (err) {
+    console.error("[/admin/me] Clerk API error:", err);
+    res.status(500).json({ error: "ADMIN_ME_FAILED" });
+  }
 });
 
 // ── Stats tab ─────────────────────────────────────────────────────────────
@@ -166,7 +179,27 @@ router.get("/stats", async (_req: Request, res: Response) => {
       if (e) e.newsletter = Number(r.c);
     }
 
+    // Promo-funnel counters (first-party shown/clicked/dismissed tallies
+    // recorded by POST /api/promo/event). Totals are all-time; 7d mirrors
+    // the subscriber "new7d" window so the funnel reads consistently.
+    const since7dDay = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+      .toISOString()
+      .slice(0, 10);
+    const promoRows = await db
+      .select({
+        event: promoFunnelDailyTable.event,
+        total: sql<number>`sum(${promoFunnelDailyTable.count})`,
+        last7d: sql<number>`sum(${promoFunnelDailyTable.count}) filter (where ${promoFunnelDailyTable.day} >= ${since7dDay})`,
+      })
+      .from(promoFunnelDailyTable)
+      .groupBy(promoFunnelDailyTable.event);
+    const promoFunnel: Record<string, { total: number; last7d: number }> = {};
+    for (const r of promoRows) {
+      promoFunnel[r.event] = { total: Number(r.total ?? 0), last7d: Number(r.last7d ?? 0) };
+    }
+
     res.json({
+      promoFunnel,
       alerts: {
         total: alTotalRow?.c ?? 0,
         verified: alVerifiedRow?.c ?? 0,
@@ -190,6 +223,105 @@ router.get("/stats", async (_req: Request, res: Response) => {
   } catch (err) {
     console.error("[admin/stats] failed", err);
     res.status(500).json({ error: "STATS_FAILED" });
+  }
+});
+
+// ── Engagement (visitors · page views · installs) ────────────────────────
+// First-party cookieless counts recorded by POST /api/engagement/ping.
+// These are the truthful totals for partner conversations: every visitor is
+// counted (no consent gate), obvious bots are excluded at record time.
+router.get("/engagement", async (_req: Request, res: Response) => {
+  try {
+    const dayStr = (offsetDays: number) =>
+      new Date(Date.now() - offsetDays * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+    const today = dayStr(0);
+    const since7d = dayStr(6); // inclusive · today + previous 6
+    const since30d = dayStr(29);
+
+    // Unique visitors · rows in visitor_daily are already deduped per day.
+    const [vToday] = await db
+      .select({ c: count() })
+      .from(visitorDailyTable)
+      .where(eq(visitorDailyTable.day, today));
+    const [v7] = await db
+      .select({ c: sql<number>`count(distinct ${visitorDailyTable.hash})` })
+      .from(visitorDailyTable)
+      .where(gte(visitorDailyTable.day, since7d));
+    const [v30] = await db
+      .select({ c: sql<number>`count(distinct ${visitorDailyTable.hash})` })
+      .from(visitorDailyTable)
+      .where(gte(visitorDailyTable.day, since30d));
+
+    // Returning · same (monthly-rotating) hash seen on 2+ distinct days in
+    // the last 30. Approximate across month boundaries, honest enough.
+    const retRes = await db.execute(
+      sql`select count(*)::int as c from (select ${visitorDailyTable.hash} from ${visitorDailyTable} where ${visitorDailyTable.day} >= ${since30d} group by ${visitorDailyTable.hash} having count(distinct ${visitorDailyTable.day}) >= 2) t`,
+    );
+    const ret30 = { c: Number((retRes.rows?.[0] as { c?: number } | undefined)?.c ?? 0) };
+
+    // Page views
+    const [pv7] = await db
+      .select({ c: sql<number>`coalesce(sum(${pageViewDailyTable.count}), 0)` })
+      .from(pageViewDailyTable)
+      .where(gte(pageViewDailyTable.day, since7d));
+    const [pv30] = await db
+      .select({ c: sql<number>`coalesce(sum(${pageViewDailyTable.count}), 0)` })
+      .from(pageViewDailyTable)
+      .where(gte(pageViewDailyTable.day, since30d));
+
+    // Top sections last 30 days
+    const topPages = await db
+      .select({
+        page: pageViewDailyTable.page,
+        c: sql<number>`sum(${pageViewDailyTable.count})`,
+      })
+      .from(pageViewDailyTable)
+      .where(gte(pageViewDailyTable.day, since30d))
+      .groupBy(pageViewDailyTable.page)
+      .orderBy(desc(sql`sum(${pageViewDailyTable.count})`))
+      .limit(12);
+
+    // Daily visitors for the 30-day trend strip
+    const visitorDaily = await db
+      .select({ day: visitorDailyTable.day, c: count() })
+      .from(visitorDailyTable)
+      .where(gte(visitorDailyTable.day, since30d))
+      .groupBy(visitorDailyTable.day);
+    const byDay = new Map<string, number>();
+    for (let i = 29; i >= 0; i--) byDay.set(dayStr(i), 0);
+    for (const r of visitorDaily) {
+      if (byDay.has(r.day)) byDay.set(r.day, Number(r.c));
+    }
+
+    // PWA installs / launches
+    const evRows = await db
+      .select({
+        event: engagementEventDailyTable.event,
+        total: sql<number>`sum(${engagementEventDailyTable.count})`,
+        last7d: sql<number>`sum(${engagementEventDailyTable.count}) filter (where ${engagementEventDailyTable.day} >= ${since7d})`,
+      })
+      .from(engagementEventDailyTable)
+      .groupBy(engagementEventDailyTable.event);
+    const events: Record<string, { total: number; last7d: number }> = {};
+    for (const r of evRows) {
+      events[r.event] = { total: Number(r.total ?? 0), last7d: Number(r.last7d ?? 0) };
+    }
+
+    res.json({
+      visitors: {
+        today: Number(vToday?.c ?? 0),
+        last7d: Number(v7?.c ?? 0),
+        last30d: Number(v30?.c ?? 0),
+        returning30d: Number(ret30?.c ?? 0),
+      },
+      pageViews: { last7d: Number(pv7?.c ?? 0), last30d: Number(pv30?.c ?? 0) },
+      topPages: topPages.map((p) => ({ page: p.page, count: Number(p.c) })),
+      dailyVisitors: Array.from(byDay.entries()).map(([day, visitors]) => ({ day, visitors })),
+      events,
+    });
+  } catch (err) {
+    console.error("[admin/engagement] failed", err);
+    res.status(500).json({ error: "ENGAGEMENT_FAILED" });
   }
 });
 
@@ -220,10 +352,51 @@ router.get("/recent-signups", async (_req: Request, res: Response) => {
       .orderBy(desc(newsletterSubscribersTable.createdAt))
       .limit(20);
 
-    res.json({ alerts, newsletter });
+    // Member accounts (the magic-link sign-up funnel). Separate from the
+    // alert/newsletter subscriber lists on purpose · "joined feelzlike" and
+    // "subscribed to alert emails" are different events, and the dash used to
+    // show only the latter, which read as signups silently going missing.
+    const members = await db
+      .select({
+        id: usersTable.id,
+        email: usersTable.email,
+        displayName: usersTable.displayName,
+        homeRegionId: usersTable.homeRegionId,
+        createdAt: usersTable.createdAt,
+      })
+      .from(usersTable)
+      .orderBy(desc(usersTable.createdAt))
+      .limit(20);
+
+    res.json({ alerts, newsletter, members });
   } catch (err) {
     console.error("[admin/recent-signups] failed", err);
     res.status(500).json({ error: "RECENT_SIGNUPS_FAILED" });
+  }
+});
+
+// ── Email deliverability incidents ────────────────────────────────────────
+// GET /api/admin/email-incidents · the latest 50 bounces/complaints recorded
+// by POST /api/webhooks/resend. Surfaces async Resend failures (accept-then-
+// bounce) that never show up in the synchronous send path, so the owner can
+// spot a dead sign-in address instead of leaving the visitor waiting.
+router.get("/email-incidents", async (_req: Request, res: Response) => {
+  try {
+    const incidents = await db
+      .select({
+        id: emailDeliveryIncidentsTable.id,
+        email: emailDeliveryIncidentsTable.email,
+        type: emailDeliveryIncidentsTable.type,
+        reason: emailDeliveryIncidentsTable.reason,
+        createdAt: emailDeliveryIncidentsTable.createdAt,
+      })
+      .from(emailDeliveryIncidentsTable)
+      .orderBy(desc(emailDeliveryIncidentsTable.createdAt))
+      .limit(50);
+    res.json({ incidents });
+  } catch (err) {
+    console.error("[admin/email-incidents] failed", err);
+    res.status(500).json({ error: "EMAIL_INCIDENTS_FAILED" });
   }
 });
 

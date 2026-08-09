@@ -22,6 +22,7 @@ import {
   useOptionalSeason,
   LiveBadge,
   PageHeader,
+  cn,
 } from "@workspace/feelzlike-shell";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import type { RegionId } from "@workspace/api-client-react";
@@ -141,8 +142,9 @@ export function TownTransport() {
   const toTownSection = LEG_SECTIONS[2];
 
   return (
-    <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
-      {town && (
+    <div className={cn("min-h-[100dvh] pb-8 transition-colors duration-500", seasonCtx?.season === "green" ? "bg-[#059669]" : "bg-[#0055FF]")}>
+      <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
+        {town && (
         <PageMeta
           title={t(`${town.name} transport`, `${town.name}の交通`)}
           description={t(
@@ -215,6 +217,7 @@ export function TownTransport() {
         </div>
       )}
     </div>
+    </div>
   );
 }
 
@@ -222,14 +225,14 @@ function SectionHeader({ section, t }: { section: LegSection; t: Translate }) {
   const Icon = section.icon;
   return (
     <div className="flex items-center gap-3 mb-3">
-      <div className="shrink-0 w-9 h-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+      <div className="shrink-0 w-9 h-9 rounded-xl bg-white/10 text-white flex items-center justify-center">
         <Icon className="w-5 h-5" />
       </div>
       <div className="min-w-0">
-        <h2 className="font-display font-semibold text-lg text-foreground leading-tight">
+        <h2 className="font-display font-semibold text-lg text-white leading-tight">
           {t(section.title_en, section.title_ja)}
         </h2>
-        <p className="byline text-muted-foreground/70">
+        <p className="byline text-white/70">
           {t(section.blurb_en, section.blurb_ja)}
         </p>
       </div>

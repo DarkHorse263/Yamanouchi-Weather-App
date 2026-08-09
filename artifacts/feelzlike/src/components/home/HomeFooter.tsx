@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ChevronDown, Shield } from "lucide-react";
-import { useAuth } from "@workspace/replit-auth-web";
+import { useAuth } from "@clerk/react";
 import { useUnitsControl } from "@/components/auth/UserPrefsProvider";
 
 /**
@@ -20,19 +20,23 @@ export function HomeFooter() {
   // Soft-render the admin link only for signed-in users. The /admin page
   // itself does the real authorization check (server-side allowlist), so this
   // is purely UI hygiene · non-admins simply never see the link.
-  const { isAuthenticated } = useAuth();
+  const { isSignedIn } = useAuth();
   const { units, fromAccount, setLocalUnits } = useUnitsControl();
 
-  const linkCls = "text-slate-600 hover:text-sky-700 transition-colors";
-  const sep = <span className="text-slate-300" aria-hidden>&middot;</span>;
+  const linkCls = "text-white/80 hover:text-white transition-colors";
+  const sep = <span className="text-white/30" aria-hidden>&middot;</span>;
 
   return (
-    <footer className="relative z-10 border-t border-slate-200 bg-white">
+    <footer className="relative z-10 border-t border-white/20 bg-[#0055FF]">
       <div className="mx-auto max-w-3xl px-5 py-5 md:py-6 text-center text-[12px] md:text-[13px]">
         <nav
           aria-label="footer"
           className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5 leading-relaxed"
         >
+          <a className={linkCls} href="/about">about · how to use</a>
+          {sep}
+          <a className={linkCls} href="/about#whats-new">what&rsquo;s new</a>
+          {sep}
           <a className={linkCls} href="/legal/privacy">privacy</a>
           {sep}
           <a className={linkCls} href="/legal/terms">terms</a>
@@ -66,7 +70,7 @@ export function HomeFooter() {
               />
             </button>
           </div>
-          {isAuthenticated && (
+          {isSignedIn && (
             <>
               {sep}
               <a className={`${linkCls} inline-flex items-center gap-1`} href="/admin">
@@ -78,22 +82,22 @@ export function HomeFooter() {
         </nav>
 
         {sourcesOpen && (
-          <ul className="mx-auto mt-3 inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1 rounded-lg bg-slate-50 px-4 py-2 text-[11.5px] text-slate-600">
-            <li><a className="hover:text-sky-700" href="/snowy-mountains/sources">snowy mountains &middot; au</a></li>
-            <li aria-hidden className="text-slate-300">&middot;</li>
-            <li><a className="hover:text-sky-700" href="/victorias-high-country/sources">victoria&rsquo;s high country &middot; au</a></li>
-            <li aria-hidden className="text-slate-300">&middot;</li>
-            <li><a className="hover:text-sky-700" href="/yamanouchi/sources">yamanouchi &middot; jp</a></li>
+          <ul className="mx-auto mt-3 inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1 rounded-lg bg-white/10 px-4 py-2 text-[11.5px] text-white/80 border border-white/20">
+            <li><a className="hover:text-white" href="/snowy-mountains/sources">snowy mountains &middot; au</a></li>
+            <li aria-hidden className="text-white/30">&middot;</li>
+            <li><a className="hover:text-white" href="/victorias-high-country/sources">victoria&rsquo;s high country &middot; au</a></li>
+            <li aria-hidden className="text-white/30">&middot;</li>
+            <li><a className="hover:text-white" href="/yamanouchi/sources">yamanouchi &middot; jp</a></li>
           </ul>
         )}
 
         {!fromAccount && (
           <div className="mt-3 inline-flex items-center gap-1 text-[11.5px]">
-            <span className="text-slate-400 mr-1">units</span>
+            <span className="text-white/60 mr-1">units</span>
             <div
               role="group"
               aria-label="units"
-              className="inline-flex overflow-hidden rounded-full border border-slate-200"
+              className="inline-flex overflow-hidden rounded-full border border-white/30 bg-white/10"
             >
               {(["metric", "imperial"] as const).map((u) => (
                 <button
@@ -103,8 +107,8 @@ export function HomeFooter() {
                   onClick={() => setLocalUnits(u)}
                   className={`px-2.5 py-1 transition-colors ${
                     units === u
-                      ? "bg-sky-600 text-white"
-                      : "bg-white text-slate-600 hover:text-sky-700"
+                      ? "bg-white text-[#0055FF] font-semibold"
+                      : "text-white/70 hover:text-white hover:bg-white/20"
                   }`}
                 >
                   {u === "metric" ? "°c · km/h" : "°f · mph"}
@@ -114,14 +118,14 @@ export function HomeFooter() {
           </div>
         )}
 
-        <p className="mt-3 text-[11px] text-slate-400">
+        <p className="mt-3 text-[11px] text-white/50">
           &copy; 2026 Navigate Work Digital
         </p>
-        <p className="mt-1.5 text-[11px] text-slate-400 max-w-xl mx-auto leading-relaxed">
+        <p className="mt-1.5 text-[11px] text-white/50 max-w-xl mx-auto leading-relaxed">
           some links to accommodation and travel partners are affiliate links
           &middot; we may earn a commission if you book through them &middot;
           this never changes the price you pay.{" "}
-          <a className="hover:text-sky-700 underline underline-offset-2" href="/legal/terms#affiliate-links">
+          <a className="hover:text-white underline underline-offset-2" href="/legal/terms#affiliate-links">
             more
           </a>
         </p>

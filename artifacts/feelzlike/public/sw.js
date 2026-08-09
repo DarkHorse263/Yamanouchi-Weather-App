@@ -54,7 +54,18 @@
 // and delete-then-refetch must never be served a stale cached list).
 // v20: /api/account (member account page) excluded from the SW entirely
 // (session-scoped, private, mutated in place by the profile/alerts saves).
-const CACHE_VERSION = "v20";
+// v21: /api/auth/* excluded from the SW entirely (stale signed-in state after
+// magic-link sign-in/sign-out on installed PWAs); /api/local-weather and
+// /api/vic-emergency-incidents moved from the catch-all SWR to the live
+// network-first route ("right now" conditions + live road incidents must
+// never be served a session stale).
+// v22: /api/__clerk/* (Clerk FAPI proxy) explicitly bypassed — Clerk's
+// session management calls must always reach the network directly. A cached
+// Clerk auth/session response would give stale sign-in state on installed
+// PWAs after sign-out, just as the old /api/auth/user bypass did. The
+// existing /api/auth/* rule already covered this path, but we make it
+// explicit here so the intent survives future SW refactors.
+const CACHE_VERSION = "v22";
 const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
 const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;
@@ -198,6 +209,13 @@ self.addEventListener("fetch", (event) => {
   //     to any later script with origin access. Always go straight to net.
   if (url.pathname.startsWith("/api/alerts")) return;
 
+  // 2a-quinquies. Auth endpoints: Clerk's FAPI proxy (/api/__clerk/*) and the
+  //     magic-link request/verify flow (/api/auth/*) are side-effectful and
+  //     session-state-mutating. A cached response would make sign-in/sign-out
+  //     look like it didn't happen on installed PWAs. Always straight to net.
+  if (url.pathname.startsWith("/api/__clerk")) return;
+  if (url.pathname.startsWith("/api/auth")) return;
+
   // 2a-ter. Admin dashboard endpoints: session-scoped, private, and mutated
   //     in place (e.g. deleting a pending signup then refetching the list).
   //     A stale-while-revalidate copy makes deletions look like "nothing
@@ -234,7 +252,9 @@ self.addEventListener("fetch", (event) => {
     url.pathname.startsWith("/api/weather") ||
     url.pathname.startsWith("/api/town-weather") ||
     url.pathname.startsWith("/api/today") ||
-    url.pathname.startsWith("/api/road")
+    url.pathname.startsWith("/api/road") ||
+    url.pathname.startsWith("/api/local-weather") ||
+    url.pathname.startsWith("/api/vic-emergency-incidents")
   ) {
     event.respondWith(networkFirst(request, DATA_CACHE));
     return;

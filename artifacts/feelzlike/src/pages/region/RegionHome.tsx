@@ -58,7 +58,7 @@ export function RegionHome() {
       {country ? (
         <a
           href={`/${country.toLowerCase()}/`}
-          className="inline-flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-[0.2em] text-muted-foreground hover:text-primary transition-colors"
+          className="inline-flex items-center gap-1 text-[12px] font-bold lowercase tracking-wider text-white/70 hover:text-white transition-colors"
         >
           <span aria-hidden>‹</span>
           {countryMeta?.name}
@@ -92,11 +92,11 @@ export function RegionHome() {
       )}
 
       {towns.length === 0 ? (
-        <p className="mt-6 text-sm text-muted-foreground">
+        <p className="mt-6 text-[15px] font-bold text-white/70 lowercase">
           {t("No base towns configured yet.", "拠点の町は未設定です。")}
         </p>
       ) : (
-        <section className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+        <section className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
           {towns.map((town, i) => {
             const nearby = (town.nearbyMountainIds ?? [])
               .map((id) => mountainsById.get(id)?.name)
@@ -110,29 +110,29 @@ export function RegionHome() {
               >
                 <Link
                   href={`/${town.id}`}
-                  className="group flex items-start gap-4 rounded-2xl border border-border bg-white p-5 transition-all hover:border-primary/40 hover:shadow-md h-full"
+                  className="group flex items-start gap-5 rounded-[2rem] border-0 bg-white p-6 transition-all hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(0,30,120,0.5)] shadow-[0_12px_40px_-12px_rgba(0,40,150,0.5)] h-full"
                 >
-                  <div className="shrink-0 w-11 h-11 rounded-xl bg-primary/8 text-primary inline-flex items-center justify-center">
-                    <MapPin className="w-5 h-5" />
+                  <div className="shrink-0 w-14 h-14 rounded-2xl bg-[#F0F5FF] text-[#0055FF] inline-flex items-center justify-center transition-colors group-hover:bg-[#0055FF] group-hover:text-white">
+                    <MapPin className="w-6 h-6" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="font-display font-semibold text-lg tracking-tight text-foreground group-hover:text-primary transition-colors">
+                    <p className="text-xl font-black lowercase tracking-tight text-[#0F172A]">
                       {t(town.name, town.nameJa ?? town.name)}
                     </p>
                     {town.blurb ? (
-                      <p className="text-sm text-muted-foreground mt-1 leading-snug">
+                      <p className="text-[14px] font-bold text-slate-500 mt-1 leading-snug lowercase">
                         {t(town.blurb, town.blurbJa ?? town.blurb)}
                       </p>
                     ) : null}
                     {nearby.length > 0 ? (
-                      <p className="mt-2 text-[12px] text-muted-foreground/80 inline-flex items-center gap-1.5">
-                        <Mountain className="w-3 h-3" />
+                      <p className="mt-3 text-[13px] font-bold text-slate-400 lowercase inline-flex items-center gap-1.5">
+                        <Mountain className="w-4 h-4" />
                         {nearby.slice(0, 4).join(" · ")}
                         {nearby.length > 4 ? ` +${nearby.length - 4}` : ""}
                       </p>
                     ) : null}
                   </div>
-                  <ArrowUpRight className="w-4 h-4 text-muted-foreground/50 group-hover:text-primary transition-colors shrink-0 mt-1" />
+                  <ArrowUpRight className="w-6 h-6 text-[#0055FF] transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 shrink-0 mt-1" />
                 </Link>
               </motion.div>
             );

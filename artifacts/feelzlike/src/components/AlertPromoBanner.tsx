@@ -5,6 +5,25 @@ import { useLanguage, useRegion, useOptionalSeason } from "@workspace/feelzlike-
 import { track } from "@/lib/analytics";
 
 /**
+ * First-party funnel ping · anonymous aggregate counter for the admin Stats
+ * tab (no cookie, no profile token, no identifier of any kind is sent, so
+ * this is not consent-gated the way the GA mirror inside track() is).
+ * Fire-and-forget: failures are irrelevant to the visitor.
+ */
+function pingPromoCounter(event: "shown" | "clicked" | "dismissed"): void {
+  try {
+    void fetch(`${import.meta.env.BASE_URL}api/promo/event`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ event }),
+      keepalive: true, // survives the navigation on "clicked"
+    }).catch(() => {});
+  } catch {
+    /* noop */
+  }
+}
+
+/**
  * AlertPromoBanner · a small dismissible inline card inviting the visitor to
  * subscribe to free snow-alert emails. Shown on forecast/weather pages only
  * (never the landing page), once per visitor: dismissing it persists in
@@ -71,6 +90,7 @@ export function AlertPromoBanner() {
     if (visible && !shownRef.current) {
       shownRef.current = true;
       track("alert_promo_shown", { category: "alert" });
+      pingPromoCounter("shown");
     }
   }, [visible]);
 
@@ -80,10 +100,11 @@ export function AlertPromoBanner() {
     writeDismissed();
     setDismissed(true);
     track("alert_promo_dismissed", { category: "alert" });
+    pingPromoCounter("dismissed");
   };
 
   return (
-    <div className="mt-4 rounded-2xl border border-primary/25 bg-primary/[0.04] p-4 sm:p-5">
+    <div className="mt-4 rounded-2xl border border-primary/25 bg-white p-4 sm:p-5">
       <div className="flex items-start gap-3">
         <div className="shrink-0 w-10 h-10 rounded-xl bg-primary/10 text-primary inline-flex items-center justify-center">
           <BellRing className="w-5 h-5" />
@@ -98,7 +119,10 @@ export function AlertPromoBanner() {
           </p>
           <Link
             href={`~/${region.id}/alerts`}
-            onClick={() => track("alert_promo_clicked", { category: "alert" })}
+            onClick={() => {
+              track("alert_promo_clicked", { category: "alert" });
+              pingPromoCounter("clicked");
+            }}
             className="mt-2 inline-flex items-center gap-1 text-[13px] font-semibold text-primary hover:underline"
           >
             {t("set up alerts", "アラートを設定")}

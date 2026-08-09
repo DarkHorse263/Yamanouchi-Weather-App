@@ -35,6 +35,43 @@ export const POWDER_THRESHOLDS_AU: Required<PowderThresholds> = {
   maxTemp: 2,
 };
 
+/** Japan ("Japow") thresholds - identical to the playbook default. */
+export const POWDER_THRESHOLDS_JP: Required<PowderThresholds> = {
+  ...POWDER_THRESHOLDS_DEFAULT,
+};
+
+/**
+ * NZ + Canada: middle ground between AU (maritime, marginal) and Japan
+ * (consistent deep snowfall). 0.75cm/hr with a slightly relaxed wind cap.
+ */
+export const POWDER_THRESHOLDS_NZ_CA: Required<PowderThresholds> = {
+  minSnowfall: 0.75,
+  maxWind: 22,
+  minDuration: 3,
+  maxTemp: 2,
+};
+
+/**
+ * Pick the powder threshold set for a country code (matches CountryCode in
+ * @/regions - kept as a plain string union here so this module stays safe
+ * to import from `tsx --test` without dragging in PNG assets).
+ * Unknown/undefined country falls back to AU, mirroring the server's
+ * "undefined region = AU" convention.
+ */
+export function powderThresholdsForCountry(
+  country: "AU" | "JP" | "NZ" | "CA" | undefined,
+): Required<PowderThresholds> {
+  switch (country) {
+    case "JP":
+      return POWDER_THRESHOLDS_JP;
+    case "NZ":
+    case "CA":
+      return POWDER_THRESHOLDS_NZ_CA;
+    default:
+      return POWDER_THRESHOLDS_AU;
+  }
+}
+
 export type PowderGrade = "gold" | "silver" | "bronze";
 
 export interface PowderWindow {

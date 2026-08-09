@@ -70,3 +70,10 @@ day. Running the script does nothing by itself — it only prints.
 Related: `feelzlike-prerender-flash.md` (the `#seo-prerender` snapshot mechanism),
 `feelzlike-deploy-sentry-noise.md` (deploy topology; Sentry sourcemap-upload error
 during build is harmless noise).
+
+## Route-set triple sync (Aug 2026)
+The three generators (generate-sitemap.mjs / prerender.mjs / generate-rewrites.mjs) MUST emit identical route inventories — a rewrite whose prerendered index.html was never written 404s in prod (this is exactly what broke /ca/all-ski-areas/ for weeks). When adding any static or dynamic route, add it to prerender too, then regenerate the rewrites block into artifact.toml via verifyAndReplaceArtifactToml.
+
+Mountain detail pages (/:region/mountain/:id) are now in all three, enumerated at build time by regionMountains() in seo-regions.mjs — it regex-extracts {id,name} from src/regions/<slug>.ts and THROWS if it finds fewer ids than the mirrored mountains list, so extraction drift fails the build instead of silently dropping pages.
+
+/alerts renders for every region since Aug 2026 (generic RegionAlerts fallback in RegionLayout); regionFeatures() no longer gates on hasAlerts.

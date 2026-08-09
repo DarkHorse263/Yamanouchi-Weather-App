@@ -64,7 +64,12 @@ feelzlike monetizes via the **Awin** affiliate network using the **auto-convert*
 - **TRAP:** `country` at the call sites is `region.shortTag`, and AU regions carry STATE tags (**NSW / VIC / TAS**, never "AU") — the domain switch must match those. First pass matched only "AU" and silently left every AU page on the global domain.
 - One-network rule: Expedia is Awin-only; never add a CJ AID for it. Earnings also need Convert-a-Link enabled for expedia.com.au on the Awin dashboard (owner-side).
 
-## Car hire
+## GoWithGuide — private-guide marketplace, live on Awin (joined Aug 2026)
+- Card `components/GuideToursCard.tsx` on town Explore pages: generic `pages/town/TownExplore.tsx` + yamanouchi's custom `regions/yamanouchi/pages/explore.tsx` (same multiple-surfaces trap as transport). Country-keyed URLs (gowithguide.com/{japan,australia,new-zealand,canada}, curl-verified Aug 2026) so Convert-a-Link can rewrite; earns via the same MasterTag plugin toggle. First-party pings partner label "gowithguide" (whitelisted server-side).
+
+## Awin dashboard — where Convert-a-Link actually lives (Aug 2026 UI)
+- There is NO "Convert-a-Link" item under Toolbox. It's a **plugin toggle on Toolbox → Publisher MasterTag** ("Awin Convert-a-Link" row). Toggle = save (no save button); Awin says allow **up to 24h** to take effect; it applies to ALL joined advertisers at once (no per-advertiser switch).
+- Owner turned it ON 3 Aug 2026 — it had been OFF, so earlier Europcar/Expedia clicks likely never tracked. If historical "no commissions" questions come up, this is the explanation.
 - Europcar is on **Awin** (not CJ): the "Hire a car" card is a plain Europcar link the MasterTag auto-converts. Lives in a shared `components/CarHireCard.tsx` (`europcarUrlForRegion`).
 - **Region-aware on purpose:** Awin's Convert-a-Link only rewrites the EXACT approved country domain. The programme is "Europcar_AU NZ", so AU→europcar.com.au, NZ→europcar.co.nz; JP/other fall back to global europcar.com (works but untracked, won't earn). Do NOT use one global Europcar URL — AU/NZ clicks then don't track.
 - **TRAP — "every town's transport" is FOUR surfaces, not one:** the generic `pages/town/TownTransport.tsx` covers most regions, but snowy-mountains, victorias-high-country and yamanouchi have their OWN custom transport pages (`regions/<id>/pages/Transport.tsx`). Any "shown on every transport page" feature MUST be added to the generic page AND those customs, or it silently misses the biggest AU regions. (This trap once made me tell the owner the card was everywhere when it was missing on Snowy + Victoria.)

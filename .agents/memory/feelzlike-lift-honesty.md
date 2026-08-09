@@ -86,6 +86,21 @@ Jun10-Oct10), so an in-season resort at ~5am with 0/10 lifts open showed a green
 it (yamanouchi's "Lift status" is just an external link, not a live chip), so the
 fix is confined to snowy-mountains LocationDetail.
 
+# Generic MountainDetail "On the snow" card (Aug 2026)
+
+The generic mountain page now renders the same honest reference-only lift
+card as the Snowy no-live-feed branch, but CLIENT-SIDE: it keys off the
+local lift seeds (`src/data/lifts.ts` / `getLiftsForMountain`), never the
+api-server /lift-status endpoint (which stays Snowy-only and 404s cleanly
+elsewhere). No status chips/counters ever - seeds carry no status. Link
+ladder: `MountainLink.liftStatusUrl` (new optional field in shell types) →
+`snowReportUrl` → `websiteUrl`; no seeds = no card (no empty tease). NZ
+seeds (Coronet, Remarkables, Cardrona, TC, Mt Hutt, Whakapapa, Turoa) were
+added Aug 2026 from public trail maps - re-verify pre-season. VIC High
+Country + Tasmania still have NO seeds, so their pages hide the card.
+NOTE when testing: brand CSS lowercases/uppercases text, so puppeteer
+innerText checks must be case-insensitive.
+
 # Resort liftStatusUrl values rot · and Thredbo DOES publish a real feed
 
 The per-resort `liftStatusUrl` strings in `api-server/src/routes/lifts.ts` point

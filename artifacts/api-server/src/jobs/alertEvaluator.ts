@@ -50,7 +50,7 @@ const REGION_ANCHORS: Record<RegionId, {
   "nozawa-onsen": { lat: 36.9290, lon: 138.4500, elevation: 1650, region: "JP", displayName: "Nozawa Onsen" },
   // Iiyama · anchor on Madarao summit · the highest and most snow-prone
   // point in the cluster, best regional proxy for powder alerts.
-  "iiyama": { lat: 36.9056, lon: 138.2858, elevation: 1382, region: "JP", displayName: "Iiyama" },
+  "iiyama": { lat: 36.8483, lon: 138.2799, elevation: 1382, region: "JP", displayName: "Iiyama" },
   // Hakuba Valley · anchor on Tsugaike Kogen (1704m, the high snowy
   // northern Otari side) as the best powder proxy for the ten-resort
   // valley. Happo-One is the highest summit (1831m) but the Otari corner
@@ -68,11 +68,11 @@ const REGION_ANCHORS: Record<RegionId, {
   // Furano · anchor on Furano Ski Resort's top terrain (1074m) · the
   // region's anchor mountain directly above the base towns, a fairer
   // proxy for visitors than the outlying Kamui or Tomamu day trips.
-  "furano": { lat: 43.3350, lon: 142.3610, elevation: 1074, region: "JP", displayName: "Furano" },
+  "furano": { lat: 43.3326, lon: 142.3281, elevation: 1074, region: "JP", displayName: "Furano" },
   // Sapporo · anchor on Sapporo Kokusai's top terrain (1100m) · the
   // snowiest lift-served point of the three city hills, above Jozankei
   // onsen, so the fairest single point for the region's alerts.
-  "sapporo": { lat: 42.9870, lon: 141.1350, elevation: 1100, region: "JP", displayName: "Sapporo" },
+  "sapporo": { lat: 43.0730, lon: 141.0702, elevation: 1100, region: "JP", displayName: "Sapporo" },
   // Tomamu & Sahoro · anchor on Mt Tomamu (1,239m top), the snowier
   // and higher of the pair, so the fairest single point for alerts.
   "tomamu-sahoro": { lat: 43.0580, lon: 142.6210, elevation: 1239, region: "JP", displayName: "Tomamu & Sahoro" },
@@ -113,7 +113,7 @@ const REGION_ANCHORS: Record<RegionId, {
   "kusatsu-manza": { lat: 36.644, lon: 138.507, elevation: 1994, region: "JP", displayName: "Kusatsu & Manza" },
   // Hachimantai · anchor on the Shimokura top (Mt Shimokura, ~1,180m),
   // the powder hill of the shared-ticket pair.
-  "hachimantai": { lat: 39.951, lon: 140.972, elevation: 1180, region: "JP", displayName: "Hachimantai" },
+  "hachimantai": { lat: 39.8954, lon: 140.9408, elevation: 1180, region: "JP", displayName: "Hachimantai" },
   // NZ · no national model in the ensemble, so region "OTHER" (global
   // blend). Anchor each on its highest skiable summit.
   "queenstown": { lat: -45.0556, lon: 168.8194, elevation: 1943, region: "OTHER", displayName: "Queenstown" },
@@ -124,10 +124,12 @@ const REGION_ANCHORS: Record<RegionId, {
   // "OTHER". Anchor each on its highest lift-served summit.
   "whistler": { lat: 50.0900, lon: -122.8620, elevation: 2284, region: "OTHER", displayName: "Whistler" },
   "powder-highway": { lat: 51.2977, lon: -117.0464, elevation: 2450, region: "OTHER", displayName: "Powder Highway" },
+  "okanagan": { lat: 49.7220, lon: -118.9330, elevation: 2319, region: "OTHER", displayName: "Okanagan" },
+  "vancouver": { lat: 49.7442, lon: -125.2947, elevation: 1588, region: "OTHER", displayName: "Vancouver & the Island" },
   "banff-lake-louise": { lat: 51.0781, lon: -115.7772, elevation: 2730, region: "OTHER", displayName: "Banff & Lake Louise" },
   "canmore": { lat: 50.9422, lon: -115.1519, elevation: 2260, region: "OTHER", displayName: "Canmore" },
   "jasper": { lat: 52.8000, lon: -118.0833, elevation: 2612, region: "OTHER", displayName: "Jasper" },
-  "quebec-laurentians": { lat: 46.2200, lon: -74.5530, elevation: 875, region: "OTHER", displayName: "Laurentians" },
+  "quebec-laurentians": { lat: 46.2100, lon: -74.5850, elevation: 875, region: "OTHER", displayName: "Laurentians" },
   "quebec-charlevoix": { lat: 47.2757, lon: -70.6257, elevation: 806, region: "OTHER", displayName: "Charlevoix" },
   "quebec-eastern-townships": { lat: 45.0850, lon: -72.5500, elevation: 840, region: "OTHER", displayName: "Eastern Townships" },
   // US (Colorado) · same posture as NZ/CA, no national model in the

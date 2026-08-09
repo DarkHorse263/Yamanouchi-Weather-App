@@ -308,7 +308,7 @@ export default function NearYouWeather() {
 
   return (
     <div
-      className="min-h-screen bg-background text-foreground"
+      className="relative isolate min-h-[100dvh] text-white antialiased bg-[#0055FF] pb-safe transition-colors duration-500"
       style={{ fontFamily: "'DIN Pro', system-ui, sans-serif" }}
     >
       <PageMeta
@@ -320,17 +320,17 @@ export default function NearYouWeather() {
       <main className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-sky-700 transition-colors hover:text-sky-900"
+          className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-white/70 transition-colors hover:text-white"
         >
           <ArrowLeft className="h-4 w-4" />
           back
         </Link>
 
-        <div className="mt-4 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-sky-700/80">
+        <div className="mt-4 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/70">
           <MapPin className="h-3.5 w-3.5" />
           {hasSearchPlace ? "conditions for" : "your current location"}
         </div>
-        <h1 className="mt-1 font-display text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
+        <h1 className="mt-1 font-display text-2xl md:text-3xl font-semibold tracking-tight text-white">
           {placeName ? placeName.toLowerCase() : "weather right where you are"}
         </h1>
 
@@ -341,7 +341,7 @@ export default function NearYouWeather() {
         </div>
 
         {phase === "checking" || phase === "locating" ? (
-          <p className="mt-8 text-muted-foreground">finding your location…</p>
+          <p className="mt-8 text-white/70">finding your location…</p>
         ) : showTap ? (
           <div className="mt-8 rounded-2xl border border-border bg-white p-6 max-w-md">
             <p className="text-[14px] leading-snug text-slate-600">
@@ -466,7 +466,7 @@ export default function NearYouWeather() {
                       // Current conditions already render from the cheap
                       // local-weather payload while the heavier hourly/7-day
                       // forecast is still in flight · no false error during the gap.
-                      <p className="mt-4 text-[13px] text-muted-foreground">
+                      <p className="mt-4 text-[13px] text-white/80">
                         loading the hourly and 7-day forecast…
                       </p>
                     )}
@@ -476,7 +476,7 @@ export default function NearYouWeather() {
 
               if (weather.isLoading || localQuery.isLoading) {
                 return (
-                  <p className="mt-8 text-muted-foreground">
+                  <p className="mt-8 text-white/80">
                     loading current conditions…
                   </p>
                 );

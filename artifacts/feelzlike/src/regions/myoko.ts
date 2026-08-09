@@ -169,8 +169,8 @@ export const myokoRegion: RegionConfig = {
       id: "arai",
       name: "Arai",
       nameJa: "新井",
-      lat: 37.0006,
-      lng: 138.2259,
+      lat: 37.0268,
+      lng: 138.2555,
       // Arai district of Myoko City on the valley floor (~90 m) · the
       // lowland service town nearest Lotte Arai, with Arai Station on the
       // Myoko Haneuma Line and the Arai Smart IC off the Joshin-etsu

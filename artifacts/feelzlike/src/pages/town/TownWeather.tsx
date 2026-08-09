@@ -1,4 +1,4 @@
-import { useLanguage, useBaseTown, useRegion, LiveBadge, UpdateStamp, useOptionalSeason, PageHeader } from "@workspace/feelzlike-shell";
+import { useLanguage, useBaseTown, useRegion, LiveBadge, UpdateStamp, useOptionalSeason, PageHeader, cn } from "@workspace/feelzlike-shell";
 import { RadarMap, type RadarRegionKey } from "@/regions/snowy-mountains/components/RadarMap";
 import { Radar as RadarIcon, ExternalLink } from "lucide-react";
 import { useTownWeather } from "@/lib/town-weather";
@@ -13,6 +13,7 @@ import {
   ObservedSnowCard,
 } from "@/components/weather/WeatherSections";
 import { AlertPromoBanner } from "@/components/AlertPromoBanner";
+import { UnitsToggle } from "@/components/UnitsToggle";
 import DayNarrative from "@/components/weather/DayNarrative";
 
 export function TownWeather() {
@@ -31,81 +32,91 @@ export function TownWeather() {
   if (!town) {
     return (
       <div className="px-4 md:px-10 py-5 md:py-8 max-w-6xl mx-auto">
-        <p className="text-muted-foreground">{t("Loading town…", "読み込み中…")}</p>
+        <p className="text-white/80">{t("Loading town…", "読み込み中…")}</p>
       </div>
     );
   }
 
   return (
-    <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
-      <PageMeta
-        title={t(`${town.name} weather forecast`, `${town.name}の天気予報`)}
-        description={t(
-          pageSeason === "winter"
-            ? `Current conditions, hourly and 7-day snow forecast for ${town.name} in ${region.name}. Live radar included.`
-            : `Current conditions, hourly and 7-day forecast for ${town.name} in ${region.name}. Live radar included.`,
-          pageSeason === "winter"
-            ? `${region.name}・${town.name}の現在・時間別・7日間降雪予報。ライブレーダー付き。`
-            : `${region.name}・${town.name}の現在・時間別・7日間天気予報。ライブレーダー付き。`,
-        )}
-        path={`/${region.id}/${town.id}/weather`}
-      />
-      <PageHeader
-        byline={`${region.name} · ${t(town.name, town.nameJa)}`}
-        title={t(`${town.name} weather forecast`, `${town.name}の天気予報`)}
-        description={t(
-          "Current, hourly and 7-day outlook for town. Live radar below.",
-          "町の現在・時間別・7日間予報。下にライブレーダー。",
-        )}
-        stamp={
-          <UpdateStamp
-            tone="onDark"
-            lastUpdated={q.data?.current?.time ?? null}
-            intervalMin={10}
-            source={
-              region.weatherSource
-                ? t(
-                    region.weatherSource.label,
-                    region.weatherSource.labelJa ?? region.weatherSource.label,
-                  )
-                : "Open-Meteo"
-            }
-          />
-        }
-        badge={<LiveBadge tone="onDark" label={t("Live", "ライブ")} />}
-      />
+    <div className={cn("min-h-[100dvh] pb-8 transition-colors duration-500", pageSeason === "green" ? "bg-[#059669]" : "bg-[#0055FF]")}>
+      <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
+        <PageMeta
+          title={t(`${town.name} weather forecast`, `${town.name}の天気予報`)}
+          description={t(
+            pageSeason === "winter"
+              ? `Current conditions, hourly and 7-day snow forecast for ${town.name} in ${region.name}. Live radar included.`
+              : `Current conditions, hourly and 7-day forecast for ${town.name} in ${region.name}. Live radar included.`,
+            pageSeason === "winter"
+              ? `${region.name}・${town.name}の現在・時間別・7日間降雪予報。ライブレーダー付き。`
+              : `${region.name}・${town.name}の現在・時間別・7日間天気予報。ライブレーダー付き。`,
+          )}
+          path={`/${region.id}/${town.id}/weather`}
+        />
+        <PageHeader
+          byline={`${region.name} · ${t(town.name, town.nameJa)}`}
+          title={t(`${town.name} weather forecast`, `${town.name}の天気予報`)}
+          description={t(
+            "Current, hourly and 7-day outlook for town. Live radar below.",
+            "町の現在・時間別・7日間予報。下にライブレーダー。",
+          )}
+          stamp={
+            <UpdateStamp
+              tone="onDark"
+              lastUpdated={q.data?.current?.time ?? null}
+              intervalMin={10}
+              source={
+                region.weatherSource
+                  ? t(
+                      region.weatherSource.label,
+                      region.weatherSource.labelJa ?? region.weatherSource.label,
+                    )
+                  : "Open-Meteo"
+              }
+            />
+          }
+          badge={<LiveBadge tone="onDark" label={t("Live", "ライブ")} />}
+        />
 
-      {q.isLoading ? (
-        <p className="mt-8 text-muted-foreground">{t("Loading weather…", "天気を読込中…")}</p>
-      ) : q.isError || !q.data ? (
-        <p className="mt-8 text-muted-foreground">
-          {t("Weather data unavailable right now.", "現在、天気データを取得できません。")}
-        </p>
-      ) : (
-        <>
-          {q.data._stale && <StaleNotice meta={q.data._stale} t={t} />}
-          <WeatherHero current={q.data.current} town={t(town.name, town.nameJa)} />
-          <DayNarrative
-            hourly={q.data.hourly}
-            current={q.data.current}
-            utcOffsetSeconds={q.data.utcOffsetSeconds ?? 0}
-            lang={language}
-          />
-          <WeatherConditions current={q.data.current} t={t} />
-          <WeatherToday daily={q.data.daily[0]} t={t} />
-          {q.data.observedSnow && <ObservedSnowCard obs={q.data.observedSnow} t={t} />}
-          <WeatherHourly hourly={q.data.hourly} t={t} />
-          <WeatherOutlook days={q.data.daily.slice(1, 7)} t={t} />
-          <AlertPromoBanner />
-          <Radar t={t} center={{ lat: town.lat, lng: town.lng }} />
-          <p className="byline text-muted-foreground/60 mt-8">
-            {t(
-              `Source: ${region.weatherSource?.label ?? "Open-Meteo"} · updated every 10 min`,
-              `出典: ${region.weatherSource?.labelJa ?? region.weatherSource?.label ?? "Open-Meteo"} · 10分毎に更新`,
-            )}
+        <div className="mt-4 flex justify-end">
+          <div className="bg-white/95 backdrop-blur-md rounded-full shadow-sm">
+            <UnitsToggle />
+          </div>
+        </div>
+
+        {q.isLoading ? (
+          <p className="mt-8 text-white/80 font-medium">{t("Loading weather…", "天気を読込中…")}</p>
+        ) : q.isError || !q.data ? (
+          <p className="mt-8 text-white/80 font-medium">
+            {t("Weather data unavailable right now.", "現在、天気データを取得できません。")}
           </p>
-        </>
-      )}
+        ) : (
+          <>
+            {q.data._stale && <StaleNotice meta={q.data._stale} t={t} />}
+            <WeatherHero current={q.data.current} town={t(town.name, town.nameJa)} />
+            <DayNarrative
+              hourly={q.data.hourly}
+              current={q.data.current}
+              utcOffsetSeconds={q.data.utcOffsetSeconds ?? 0}
+              lang={language}
+            />
+            <WeatherConditions current={q.data.current} t={t} />
+            <WeatherToday daily={q.data.daily[0]} t={t} />
+            {q.data.observedSnow && <ObservedSnowCard obs={q.data.observedSnow} t={t} />}
+            <WeatherHourly hourly={q.data.hourly} t={t} />
+            <WeatherOutlook days={q.data.daily.slice(1, 7)} t={t} />
+            <div className="mt-6">
+              <AlertPromoBanner />
+            </div>
+            <Radar t={t} center={{ lat: town.lat, lng: town.lng }} />
+            <p className="byline text-white/60 mt-8">
+              {t(
+                `Source: ${region.weatherSource?.label ?? "Open-Meteo"} · updated every 10 min`,
+                `出典: ${region.weatherSource?.labelJa ?? region.weatherSource?.label ?? "Open-Meteo"} · 10分毎に更新`,
+              )}
+            </p>
+          </>
+        )}
+      </div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { Bed, ExternalLink, MapPin } from "lucide-react";
 
-import { useRegion, useLanguage, useBaseTown, LiveBadge, PageHeader } from "@workspace/feelzlike-shell";
+import { useRegion, useLanguage, useBaseTown, LiveBadge, PageHeader, useOptionalSeason, cn } from "@workspace/feelzlike-shell";
 import { PageMeta } from "@/lib/seo/PageMeta";
 
 import { EmptyStateCard } from "@/components/EmptyStateCard";
@@ -71,6 +71,7 @@ export function TownStay() {
   const { t } = useLanguage();
   const { town } = useBaseTown();
   const { choices } = useConsent();
+  const seasonCtx = useOptionalSeason();
 
   if (!town) {
     return (
@@ -116,8 +117,9 @@ export function TownStay() {
     .filter((x) => x.plainUrl.length > 0);
 
   return (
-    <div className="max-w-6xl mx-auto">
-      <PageMeta
+    <div className={cn("min-h-[100dvh] pb-8 transition-colors duration-500", seasonCtx?.season === "green" ? "bg-[#059669]" : "bg-[#0055FF]")}>
+      <div className="max-w-6xl mx-auto">
+        <PageMeta
         title={t(`${town.name} - where to stay`, `${town.name}の宿泊`)}
         description={t(
           `Search hotels, lodges and apartments in ${town.name}, ${region.name} across the major booking platforms.`,
@@ -216,6 +218,7 @@ export function TownStay() {
           </p>
         </div>
       </section>
+    </div>
     </div>
   );
 }

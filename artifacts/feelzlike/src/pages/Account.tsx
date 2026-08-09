@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "wouter";
+import { useClerk } from "@clerk/react";
 import {
   ArrowLeft,
   UserRound,
@@ -22,6 +23,19 @@ import {
 import type { AccountResponse } from "@workspace/api-client-react";
 import { useAuthAccount } from "@/components/auth/SignUpProvider";
 import { ALERT_REGIONS } from "@/components/AlertSubscribeForm";
+
+function SignOutButton() {
+  const { signOut } = useClerk();
+  return (
+    <button
+      type="button"
+      onClick={() => signOut({ redirectUrl: "/" })}
+      className="text-sm text-muted-foreground underline hover:text-foreground"
+    >
+      sign out
+    </button>
+  );
+}
 
 /**
  * /account · the signed-in member's home base. Shows their email, lets them
@@ -52,20 +66,20 @@ export default function Account() {
   }, [authLoading, isAuthenticated, promptSignUp, deleted]);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#0055FF] pb-8 transition-colors duration-500">
       <div className="max-w-3xl mx-auto px-4 md:px-8 py-6 md:py-10 space-y-6">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
+          className="inline-flex items-center gap-1.5 text-sm text-white/70 hover:text-white transition-colors"
         >
           <ArrowLeft className="w-4 h-4" /> back
         </Link>
 
         <div>
-          <p className="inline-flex items-center gap-1.5 text-xs font-bold text-primary uppercase tracking-wider">
+          <p className="inline-flex items-center gap-1.5 text-xs font-bold text-white/90 uppercase tracking-wider">
             <UserRound className="w-3.5 h-3.5" /> your account
           </p>
-          <h1 className="text-3xl md:text-4xl font-black text-foreground mt-2 leading-tight">
+          <h1 className="text-3xl md:text-4xl font-black text-white mt-2 leading-tight">
             alerts & details · one place
           </h1>
         </div>
@@ -96,8 +110,7 @@ function SignedOutCard({ onSignUp }: { onSignUp: () => void }) {
         <div className="flex-1 min-w-0">
           <p className="text-sm font-bold text-foreground">this page is for members</p>
           <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
-            create a free account (magic-link email · no password) to manage your
-            powder alerts, home region and units here.
+            sign in to manage your powder alerts, home region and units here.
           </p>
           <button
             type="button"
@@ -170,9 +183,7 @@ function SignedInAccount({ onDeleted }: { onDeleted: () => void }) {
             <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">signed in as</p>
             <p className="text-sm font-bold text-foreground mt-0.5 break-all">{data.email ?? "member"}</p>
             <div className="mt-1 flex items-center gap-3">
-              <a href="/api/logout" className="text-sm text-muted-foreground underline hover:text-foreground">
-                sign out
-              </a>
+              <SignOutButton />
               <Link href="/premium" className="text-sm text-muted-foreground underline hover:text-foreground inline-flex items-center gap-1">
                 <Sparkles className="w-3.5 h-3.5" /> premium hub
               </Link>
@@ -197,6 +208,7 @@ function DangerZoneCard({ email, onDeleted }: { email: string | null; onDeleted:
   const [confirming, setConfirming] = useState(false);
   const [typed, setTyped] = useState("");
   const del = useDeleteAccount();
+  const { signOut } = useClerk();
 
   const confirmed = typed.trim().toLowerCase() === "delete";
 
@@ -204,6 +216,18 @@ function DangerZoneCard({ email, onDeleted }: { email: string | null; onDeleted:
     if (!confirmed || del.isPending) return;
     try {
       await del.mutateAsync();
+      // Sign out via Clerk immediately after the server deletes the user so the
+      // client session/cookie is cleared before the confirmation card renders.
+      // The server also calls clerkClient.users.deleteUser, which invalidates all
+      // sessions server-side, but clearing client state immediately prevents any
+      // window where the UI shows a signed-in state for a deleted account.
+      try {
+        await signOut();
+      } catch {
+        // Non-fatal: the Clerk user is already deleted; sign-out may fail
+        // because the session is already invalid. The UI will reflect the
+        // signed-out state on the next Clerk state refresh regardless.
+      }
       onDeleted();
     } catch {
       /* surfaced below */

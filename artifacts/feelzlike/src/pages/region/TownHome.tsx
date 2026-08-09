@@ -31,7 +31,6 @@ import { useTownWeather } from "@/lib/town-weather";
 import { townNavHasContent } from "@/lib/navContent";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
-import { DailyPick } from "@/components/DailyPick";
 import { FavouriteStar } from "@/components/FavouriteStar";
 import { TownPartnerCard } from "@/components/TownPartnerCard";
 import { TownPartnerAd } from "@/components/TownPartnerAd";
@@ -149,6 +148,16 @@ const MOUNTAIN_TINTS: Record<string, { bg: string; hover: string; ring: string }
   "iwappara":          { bg: "bg-emerald-100/70", hover: "hover:bg-emerald-200/70", ring: "ring-emerald-300/50" },
   "kagura":            { bg: "bg-blue-100/70",    hover: "hover:bg-blue-200/70",    ring: "ring-blue-300/50" },
   "naeba":             { bg: "bg-violet-100/70",  hover: "hover:bg-violet-200/70",  ring: "ring-violet-300/50" },
+  // Okanagan CA · Big White, SilverStar, Apex
+  "big-white":         { bg: "bg-sky-100/70",     hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },
+  "silverstar":        { bg: "bg-indigo-100/70",  hover: "hover:bg-indigo-200/70",  ring: "ring-indigo-300/50" },
+  "apex-resort":       { bg: "bg-cyan-100/70",    hover: "hover:bg-cyan-200/70",    ring: "ring-cyan-300/50" },
+  "sun-peaks-resort":  { bg: "bg-blue-100/70",    hover: "hover:bg-blue-200/70",    ring: "ring-blue-300/50" },
+  // Vancouver & the Island CA · three North Shore hills + Mount Washington
+  "cypress-mountain":  { bg: "bg-sky-100/70",     hover: "hover:bg-sky-200/70",     ring: "ring-sky-300/50" },
+  "grouse-mountain":   { bg: "bg-indigo-100/70",  hover: "hover:bg-indigo-200/70",  ring: "ring-indigo-300/50" },
+  "mount-seymour":     { bg: "bg-cyan-100/70",    hover: "hover:bg-cyan-200/70",    ring: "ring-cyan-300/50" },
+  "mount-washington":  { bg: "bg-blue-100/70",    hover: "hover:bg-blue-200/70",    ring: "ring-blue-300/50" },
 };
 
 const FALLBACK_TINT = { bg: "bg-sky-50/70", hover: "hover:bg-sky-100/70", ring: "ring-sky-200/50" };
@@ -331,7 +340,7 @@ export function TownHome() {
   if (!town) {
     return (
       <div className="px-4 md:px-10 py-5 md:py-8 max-w-6xl mx-auto">
-        <p className="text-muted-foreground">{t("Loading town…", "読み込み中…")}</p>
+        <p className="text-white/80">{t("Loading town…", "読み込み中…")}</p>
       </div>
     );
   }
@@ -355,11 +364,14 @@ export function TownHome() {
     });
   })();
 
+  const isGreenSeasonCanvas = seasonCtx?.season === "green";
+
   return (
-    <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
-      <PageMeta
-        title={`${town.name} - weather, stays, roads & cams`}
-        description={`${town.name} in ${region.name}: in-town weather, road conditions to the mountain, webcams, transport, plus curated stays and eats.`}
+    <div className={cn("min-h-[100dvh] pb-8 transition-colors duration-500", isGreenSeasonCanvas ? "bg-[#059669]" : "bg-[#0055FF]")}>
+      <div className="px-4 md:px-10 py-4 md:py-8 max-w-6xl mx-auto">
+        <PageMeta
+          title={`${town.name} - weather, stays, roads & cams`}
+          description={`${town.name} in ${region.name}: in-town weather, road conditions to the mountain, webcams, transport, plus curated stays and eats.`}
         path={`/${region.id}/${town.id}`}
         jsonLd={[
           placeSchema({
@@ -376,7 +388,18 @@ export function TownHome() {
         ]}
       />
       <PageHeader
-        byline={`${region.name} · ${t("Base town", "拠点の町")}`}
+        byline={
+          <>
+            <Link
+              href={`~/${region.id}`}
+              className="underline decoration-white/40 underline-offset-2 hover:text-white hover:decoration-white"
+            >
+              ← {region.name}
+            </Link>
+            {" · "}
+            {t("Base town", "拠点の町")}
+          </>
+        }
         title={t(town.name, town.nameJa)}
         description={town.blurb ? t(town.blurb, town.blurbJa) : undefined}
         stamp={
@@ -421,56 +444,19 @@ export function TownHome() {
         />
       </div>
 
-      {/* DAILY PICK · winter-only callout that surfaces the best resort
-          today by fresh snow + low wind. Scoped to this town's nearby
-          mountains so the recommendation is genuinely reachable from
-          here (Jindabyne sees Snowy resorts, Mount Beauty sees Vic
-          High Country, etc). Mirrors the RegionHome mount so a user
-          who lands on a town directly still sees the same headline
-          pick they would on the region overview. */}
-      {seasonCtx?.season === "winter" && mountainsByDistance.length > 0 && (
-        <div className="mt-6">
-          <DailyPick
-            regionId={region.id}
-            resorts={mountainsByDistance.map((r) => ({
-              id: r.entry.location.id,
-              name: r.entry.location.name,
-            }))}
-            resortHrefPattern={`~/${region.id}/mountain/:id`}
-          />
-        </div>
-      )}
-
-      {/* TEMP IN TOWN NOW - single full-width snapshot tile.
-          May 2026 v2 brief: Roads moved out of the strip and lives inside
-          "Road conditions & cams" below. The strip is now a single
-          attention-grabbing card answering "what does it feel like here
-          right now?" before users scan the rest of the page. */}
-      <section className="mt-6">
-        <TempInTownNow
-          label={t("Temp in town now", "町の現在気温")}
-          temperature={townWeatherQ.data?.current.temperature ?? null}
-          description={townWeatherQ.data?.current.weatherDescription ?? null}
-          feelsLike={townWeatherQ.data?.current.feelsLike ?? null}
-          isLoading={townWeatherQ.isLoading}
-          townName={t(town.name, town.nameJa)}
-          loadingLabel={t("Loading…", "読込中…")}
-          unavailableLabel={t("Weather unavailable", "天気情報なし")}
-          feelsLabel={t("feelzlike", "体感")}
-        />
-      </section>
-
       {/* WEATHER IN MOUNTAINS - per-resort drive time + live conditions.
           Each row is a click-through to the resort detail page. Replaces
           the old standalone "All mountains" page; users now reach mountains
           straight from this list.
+          
+          Moved above town weather (Task #47) so mountain conditions are the star.
 
           Hidden during the green season: snow-only context (resorts, snow
           forecast) doesn't apply once the lifts close. We swap in a tiny
           off-season banner pointing users at the still-relevant town
           surfaces (stay / eat / explore) below. */}
       {isGreen && mountainsByDistance.length === 0 ? (
-        <section className="mt-3">
+        <section className="mt-6">
           <div className="rounded-2xl border border-emerald-200 bg-emerald-50/50 p-5">
             <p className="byline text-emerald-700/80 mb-1">
               {t("Off-season", "シーズンオフ")}
@@ -484,20 +470,20 @@ export function TownHome() {
           </div>
         </section>
       ) : (
-      <section className="mt-3">
-        <div className="rounded-2xl border border-border bg-white p-5">
-          <div className="flex items-center justify-between mb-3">
-            <p className="byline text-muted-foreground/70">
+      <section className="mt-6">
+        <div className="rounded-[2rem] border-0 bg-white p-6 shadow-[0_12px_40px_-12px_rgba(0,40,150,0.5)]">
+          <div className="flex items-center justify-between mb-4">
+            <p className="text-[14px] font-bold lowercase text-[#0055FF]">
               {isGreen
                 ? t("Open in green season", "グリーンシーズン営業中")
                 : t("Weather in mountains", "山の天気")}
             </p>
-            <p className="text-[11px] text-muted-foreground/60">
+            <p className="text-[12px] font-bold text-slate-500 lowercase">
               {t("Tap a resort for full conditions", "リゾート名をタップで詳細")}
             </p>
           </div>
           {isGreen && (
-            <p className="text-xs text-emerald-700/80 mb-3 leading-snug">
+            <p className="text-[13px] font-bold text-emerald-700/80 mb-4 leading-snug lowercase">
               {t(
                 "Other resorts pause for green season. Switch the season pill back to winter once snow returns.",
                 "他のスキー場はグリーンシーズン休業。雪が戻ったらシーズン切替を冬に戻してください。",
@@ -505,9 +491,9 @@ export function TownHome() {
             </p>
           )}
           {weatherQ.isLoading && mountainsByDistance.length === 0 ? (
-            <p className="text-sm text-muted-foreground py-4">{t("Loading…", "読込中…")}</p>
+            <p className="text-sm font-bold text-slate-500 py-4 lowercase">{t("Loading…", "読込中…")}</p>
           ) : mountainsByDistance.length === 0 ? (
-            <p className="text-sm text-muted-foreground py-4">
+            <p className="text-sm font-bold text-slate-500 py-4 lowercase">
               {t("Mountain conditions unavailable", "山の状況は取得不可")}
             </p>
           ) : (
@@ -517,6 +503,25 @@ export function TownHome() {
       </section>
       )}
 
+      {/* TEMP IN TOWN NOW - single full-width snapshot tile.
+          Secondary to the mountains, answers "what does it feel like here
+          right now?". Now includes a direct link to the 7-day forecast. */}
+      <section className="mt-6">
+        <TempInTownNow
+          label={t("Temp in town now", "町の現在気温")}
+          temperature={townWeatherQ.data?.current.temperature ?? null}
+          description={townWeatherQ.data?.current.weatherDescription ?? null}
+          feelsLike={townWeatherQ.data?.current.feelsLike ?? null}
+          isLoading={townWeatherQ.isLoading}
+          townName={t(town.name, town.nameJa)}
+          loadingLabel={t("Loading…", "読込中…")}
+          unavailableLabel={t("Weather unavailable", "天気情報なし")}
+          feelsLabel={t("feelzlike", "体感")}
+          forecastHref="/weather"
+          forecastLabel={t("7-day forecast", "7日間天気予報")}
+        />
+      </section>
+
       {/* FEATURED PARTNER · LISTING variant (default). Paid, disclosed
           placement below the live weather content and above the section
           tiles. Skipped when the deal uses the ad banner above. */}
@@ -525,24 +530,16 @@ export function TownHome() {
       )}
 
       {/* SECTIONS - vertical stack in the order the brief specifies. */}
-      <section className="mt-5 space-y-3">
+      <section className="mt-6 space-y-4">
         {buildSections(region.shortTag?.toUpperCase() === "JP")
           .filter((tile) => !town || townNavHasContent(region, town.id, tile.path))
           .map((tile) => {
           const Icon = tile.icon;
-          // Section-tinting: each tile is owned by its section's colour (soft
-          // bg, hairline border, 3px left accent, tinted icon chip + byline).
-          // `--sa` is set inline so the arrow's group-hover accent stays a
-          // static class literal Tailwind's JIT can see. Unlisted paths fall
-          // back to the brand-blue primary treatment.
           const accent = sectionAccentFor(tile.path);
           const tileStyle = accent
             ? ({
                 "--sa": accent,
-                backgroundColor: mixSection(accent, 6),
-                borderColor: mixSection(accent, 30),
-                borderLeftColor: accent,
-                borderLeftWidth: "3px",
+                "--sa-bg": mixSection(accent, 12),
               } as CSSProperties)
             : undefined;
           return (
@@ -551,34 +548,31 @@ export function TownHome() {
               href={tile.path}
               style={tileStyle}
               className={cn(
-                "group flex items-center gap-4 rounded-2xl border p-5 transition-all hover:shadow-md",
-                accent ? "" : "border-border bg-white hover:border-primary/40",
+                "group flex items-center gap-5 rounded-[2rem] border-0 bg-white p-6 shadow-[0_12px_40px_-12px_rgba(0,40,150,0.5)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(0,30,120,0.5)]",
               )}
             >
               <div
                 className={cn(
-                  "shrink-0 w-11 h-11 rounded-xl inline-flex items-center justify-center",
-                  accent ? "" : "bg-primary/8 text-primary",
+                  "shrink-0 w-14 h-14 rounded-2xl inline-flex items-center justify-center transition-colors duration-300",
+                  accent ? "bg-[var(--sa-bg)] text-[var(--sa)] group-hover:bg-[var(--sa)] group-hover:text-white" : "bg-[#F0F5FF] text-[#0055FF] group-hover:bg-[#0055FF] group-hover:text-white",
                 )}
-                style={accent ? { backgroundColor: mixSection(accent, 16), color: accent } : undefined}
               >
-                <Icon className="w-5 h-5" />
+                <Icon className="w-6 h-6" />
               </div>
               <div className="min-w-0 flex-1">
                 <p
-                  className={cn("byline uppercase", accent ? "" : "text-primary")}
-                  style={accent ? { color: accent } : undefined}
+                  className={cn("text-xl font-black lowercase tracking-tight", accent ? "text-[var(--sa)]" : "text-[#0F172A]")}
                 >
                   {t(tile.label, tile.labelJa)}
                 </p>
-                <p className="text-sm text-muted-foreground mt-0.5 leading-snug">
+                <p className="text-[14px] font-bold text-slate-500 mt-1.5 leading-snug lowercase">
                   {t(tile.blurb, tile.blurbJa)}
                 </p>
               </div>
               <ArrowUpRight
                 className={cn(
-                  "w-4 h-4 text-muted-foreground/50 transition-colors shrink-0",
-                  accent ? "group-hover:text-[var(--sa)]" : "group-hover:text-primary",
+                  "w-6 h-6 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 shrink-0",
+                  accent ? "text-[var(--sa)]" : "text-[#0055FF]",
                 )}
               />
             </Link>
@@ -601,25 +595,28 @@ export function TownHome() {
           >
             <Link
               href={`~/${region.id}/alerts`}
-              className="group flex items-center gap-4 rounded-2xl border border-border bg-white p-5 transition-all hover:border-primary/40 hover:shadow-md"
+              className="group flex items-center gap-5 rounded-[2rem] border-0 bg-white p-6 shadow-[0_12px_40px_-12px_rgba(0,40,150,0.5)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(0,30,120,0.5)]"
             >
-              <div className="shrink-0 w-11 h-11 rounded-xl bg-primary/8 text-primary inline-flex items-center justify-center">
-                <AlertTriangle className="w-5 h-5" />
+              <div className="shrink-0 w-14 h-14 rounded-2xl bg-[#F0F5FF] text-[#0055FF] inline-flex items-center justify-center transition-colors group-hover:bg-[#0055FF] group-hover:text-white">
+                <AlertTriangle className="w-6 h-6" />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="byline text-primary uppercase">{t("Alerts", "アラート")}</p>
-                <p className="text-sm text-muted-foreground mt-0.5 leading-snug">
+                <p className="text-xl font-black lowercase tracking-tight text-[#0F172A]">
+                  {t("Alerts", "アラート")}
+                </p>
+                <p className="text-[14px] font-bold text-slate-500 mt-1.5 leading-snug lowercase">
                   {t(
                     "Powder, wind & freezing-level alerts straight to your phone.",
                     "降雪・風速・凍結高度アラートをスマホに直接配信。",
                   )}
                 </p>
               </div>
-              <ArrowUpRight className="w-4 h-4 text-muted-foreground/50 group-hover:text-primary transition-colors shrink-0" />
+              <ArrowUpRight className="w-6 h-6 text-[#0055FF] transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 shrink-0" />
             </Link>
           </PremiumGate>
         )}
       </section>
+      </div>
     </div>
   );
 }
@@ -672,13 +669,13 @@ function MountainsList({
         <button
           type="button"
           onClick={() => setExpanded((v) => !v)}
-          className="mt-3 inline-flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-[0.18em] text-sky-700/80 hover:text-sky-700 transition-colors"
+          className="mt-4 inline-flex items-center gap-1.5 text-[12px] font-bold lowercase text-[#0055FF] hover:text-[#0055FF]/80 transition-colors"
         >
           {expanded
             ? t("show fewer", "閉じる")
             : t(`see all (+${hiddenCount})`, `すべて表示 (+${hiddenCount})`)}
           <ChevronDown
-            className={`w-3.5 h-3.5 transition-transform ${expanded ? "rotate-180" : ""}`}
+            className={`w-4 h-4 transition-transform ${expanded ? "rotate-180" : ""}`}
           />
         </button>
       )}
@@ -711,15 +708,15 @@ function MountainResortRow({
       href={`~/${regionId}/mountain/${entry.location.id}`}
       className={
         tint
-          ? `group flex items-center justify-between gap-3 px-3 py-3 rounded-xl ring-1 ${tint.bg} ${tint.hover} ${tint.ring} transition-colors`
-          : `group flex items-center justify-between gap-3 py-2.5 px-2 rounded-lg hover:bg-secondary/40 transition-colors ${indent ? "pl-5" : ""}`
+          ? `group flex items-center justify-between gap-4 px-5 py-4 rounded-[1.5rem] bg-[#F0F5FF] hover:bg-[#0055FF] transition-all duration-300 shadow-[0_4px_12px_-6px_rgba(0,40,150,0.15)] hover:shadow-[0_12px_24px_-8px_rgba(0,30,120,0.3)] hover:-translate-y-0.5`
+          : `group flex items-center justify-between gap-4 py-3 px-3 rounded-2xl hover:bg-[#F0F5FF] transition-colors duration-300 ${indent ? "pl-6 border-l-2 border-[#0055FF]/20 ml-2" : ""}`
       }
     >
       <div className="min-w-0 flex-1">
-        <p className={`font-display font-semibold tracking-tight text-foreground truncate group-hover:text-primary transition-colors ${indent ? "text-sm" : "text-base"}`}>
+        <p className={`font-display font-black tracking-tight truncate transition-colors duration-300 ${tint ? "text-[#0F172A] group-hover:text-white" : "text-[#0F172A] group-hover:text-[#0055FF]"} ${indent ? "text-lg lowercase" : "text-xl lowercase"}`}>
           {entry.location.name}
         </p>
-        <p className="text-[12px] text-muted-foreground/80 mt-0.5">
+        <p className={`text-[13px] font-bold mt-1 lowercase transition-colors duration-300 ${tint ? "text-slate-500 group-hover:text-white/80" : "text-slate-500"}`}>
           {t(
             `${Math.round(km)} km · ~${min} min`,
             `約${Math.round(km)}km・約${min}分`,
@@ -727,14 +724,13 @@ function MountainResortRow({
           {desc ? ` · ${desc.toLowerCase()}` : ""}
         </p>
       </div>
-      <div className="flex items-center gap-3 shrink-0">
+      <div className="flex items-center gap-4 shrink-0">
         {temp !== undefined && temp !== null ? (
-          <p className={`font-display font-semibold text-foreground tabular-nums ${indent ? "text-xl" : "text-2xl"}`}>
-            {Math.round(temp)}
-            <span className="text-sm text-muted-foreground/70">°</span>
+          <p className={`font-display font-black tabular-nums transition-colors duration-300 ${tint ? "text-[#0F172A] group-hover:text-white" : "text-[#0F172A]"} ${indent ? "text-2xl" : "text-3xl"}`}>
+            {Math.round(temp)}°
           </p>
         ) : null}
-        <ArrowUpRight className="w-4 h-4 text-muted-foreground/50 group-hover:text-primary transition-colors" />
+        <ArrowUpRight className={`w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 ${tint ? "text-[#0055FF] group-hover:text-white" : "text-slate-400 group-hover:text-[#0055FF]"}`} />
       </div>
     </Link>
   );
@@ -778,21 +774,21 @@ function MountainParentGroupRow({
   const tint = tintFor(parentId);
 
   return (
-    <div className={`rounded-xl ring-1 ${tint.bg} ${tint.ring} overflow-hidden`}>
+    <div className={`rounded-[1.5rem] bg-[#F0F5FF] overflow-hidden shadow-[0_4px_12px_-6px_rgba(0,40,150,0.15)]`}>
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className={`group flex w-full items-center justify-between gap-3 px-3 py-3 ${tint.hover} transition-colors text-left`}
+        className={`group flex w-full items-center justify-between gap-4 px-5 py-4 hover:bg-[#0055FF] transition-all duration-300 text-left`}
       >
         <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2">
-            <Layers className="w-3.5 h-3.5 text-primary/70 shrink-0" aria-hidden />
-            <p className="font-display font-semibold text-base tracking-tight text-foreground truncate group-hover:text-primary transition-colors">
+          <div className="flex items-center gap-2.5">
+            <Layers className="w-5 h-5 text-[#0055FF] group-hover:text-white shrink-0 transition-colors" aria-hidden />
+            <p className="font-display font-black text-xl tracking-tight lowercase text-[#0F172A] truncate group-hover:text-white transition-colors duration-300">
               {t(meta.name, meta.nameJa)}
             </p>
           </div>
-          <p className="text-[12px] text-muted-foreground/80 mt-0.5">
+          <p className="text-[13px] font-bold text-slate-500 mt-1 lowercase group-hover:text-white/80 transition-colors duration-300">
             {t(
               `${Math.round(minKm)} km · ~${minMin} min · ${rows.length} resorts`,
               `約${Math.round(minKm)}km・約${minMin}分・${rows.length}スキー場`,
@@ -800,12 +796,12 @@ function MountainParentGroupRow({
             {tempBadge ? ` · ${tempBadge}` : ""}
           </p>
         </div>
-        <div className="flex items-center gap-2 shrink-0">
-          <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold tracking-wider uppercase bg-primary/8 text-primary border border-primary/20">
+        <div className="flex items-center gap-3 shrink-0">
+          <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-black lowercase bg-[#0055FF] text-white group-hover:bg-white group-hover:text-[#0055FF] transition-colors duration-300">
             {rows.length} {t("resorts", "スキー場")}
           </span>
           <ChevronDown
-            className={`w-4 h-4 text-muted-foreground/60 transition-transform ${open ? "rotate-180" : ""}`}
+            className={`w-5 h-5 text-[#0055FF] group-hover:text-white transition-transform duration-300 ${open ? "rotate-180" : ""}`}
             aria-hidden
           />
         </div>
@@ -820,7 +816,7 @@ function MountainParentGroupRow({
             transition={{ duration: 0.22 }}
             className="overflow-hidden"
           >
-            <ul className="border-t border-white/60 bg-white/40 px-2 py-1 divide-y divide-border/40">
+            <ul className="border-t border-white px-2 py-2 divide-y divide-white/40 bg-[#F0F5FF]/50">
               {rows.map((r) => (
                 <li key={r.entry.location.id}>
                   <MountainResortRow row={r} regionId={regionId} t={t} indent />
@@ -844,6 +840,8 @@ function TempInTownNow({
   loadingLabel,
   unavailableLabel,
   feelsLabel,
+  forecastHref,
+  forecastLabel,
 }: {
   label: string;
   temperature: number | null;
@@ -854,28 +852,40 @@ function TempInTownNow({
   loadingLabel: string;
   unavailableLabel: string;
   feelsLabel: string;
+  forecastHref?: string;
+  forecastLabel?: string;
 }) {
   return (
-    <div className="rounded-2xl border border-border bg-white p-6 md:p-7">
-      <p className="byline text-muted-foreground/70">{label}</p>
-      <div className="mt-2 flex items-end justify-between gap-4 flex-wrap">
-        <div className="flex items-baseline gap-2">
-          <p className="font-display font-semibold text-6xl md:text-7xl tracking-tight text-foreground leading-none tabular-nums">
-            {temperature !== null ? Math.round(temperature) : isLoading ? "…" : "-"}
-          </p>
-          <span className="text-2xl md:text-3xl text-muted-foreground/70">°</span>
-        </div>
-        <div className="text-right min-w-0">
-          <p className="font-display font-medium text-lg text-foreground">{townName}</p>
-          <p className="text-sm text-muted-foreground mt-0.5 line-clamp-1">
-            {isLoading
-              ? loadingLabel
-              : description
-                ? `${description}${feelsLike !== null ? ` · ${feelsLabel} ${Math.round(feelsLike)}°` : ""}`
-                : unavailableLabel}
-          </p>
+    <div className="rounded-[2rem] border-0 bg-white p-6 md:p-8 shadow-[0_12px_40px_-12px_rgba(0,40,150,0.5)] flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div className="flex-1">
+        <p className="text-[14px] font-bold lowercase text-slate-500">{label}</p>
+        <div className="mt-6 flex items-end justify-between gap-4 flex-wrap">
+          <div className="flex items-baseline gap-1">
+            <p className="font-display font-black text-6xl md:text-[80px] tracking-tighter text-[#0F172A] leading-none tabular-nums">
+              {temperature !== null ? Math.round(temperature) : isLoading ? "…" : "-"}°
+            </p>
+          </div>
+          <div className="text-right min-w-0">
+            <p className="font-display font-black text-2xl lowercase text-[#0F172A]">{townName}</p>
+            <p className="text-sm font-bold text-slate-500 mt-1 lowercase line-clamp-1">
+              {isLoading
+                ? loadingLabel
+                : description
+                  ? `${description}${feelsLike !== null ? ` · ${feelsLabel} ${Math.round(feelsLike)}°` : ""}`
+                  : unavailableLabel}
+            </p>
+          </div>
         </div>
       </div>
+      {forecastHref && forecastLabel && (
+        <Link 
+          href={forecastHref} 
+          className="shrink-0 flex items-center justify-center gap-2 bg-[#F0F5FF] text-[#0055FF] hover:bg-[#0055FF] hover:text-white transition-colors rounded-xl px-5 py-4 md:py-5 font-bold lowercase text-sm"
+        >
+          <CloudSun className="w-5 h-5" />
+          {forecastLabel}
+        </Link>
+      )}
     </div>
   );
 }

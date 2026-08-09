@@ -71,11 +71,11 @@ export function SnowmakingPanel({ locationId, tempC, humidity, hourly }: Snowmak
       {cap.areas.length > 0 && (
         <div className="space-y-2 mb-5">
           {cap.areas.map((a) => (
-            <div key={a.name} className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
-              <p className="text-sm font-semibold text-foreground">
+            <div key={a.name} className="rounded-xl border border-slate-100 bg-slate-50 px-4 py-3">
+              <p className="text-sm font-semibold text-slate-900">
                 {a.name} · {a.system}
               </p>
-              <p className="byline text-muted-foreground/70 mt-1 tabular-nums">
+              <p className="byline text-slate-500 mt-1 tabular-nums">
                 makes snow up to {a.maxTempC}°
                 {a.outputM3PerDay != null ? ` · ${a.outputM3PerDay} m³ per day` : ""}
               </p>
@@ -84,8 +84,8 @@ export function SnowmakingPanel({ locationId, tempC, humidity, hourly }: Snowmak
         </div>
       )}
 
-      <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
-        <p className="byline text-muted-foreground/70 mb-2">{gunsLabel}</p>
+      <div className="rounded-xl border border-slate-100 bg-slate-50 px-4 py-3">
+        <p className="byline text-slate-500 mb-2">{gunsLabel}</p>
         {nowViability ? (
           <div className="flex items-center justify-between gap-3">
             <span
@@ -119,7 +119,7 @@ export function SnowmakingPanel({ locationId, tempC, humidity, hourly }: Snowmak
         </p>
 
         {win && (
-          <p className="text-[12px] text-muted-foreground/80 mt-3 pt-3 border-t border-white/10 tabular-nums">
+          <p className="text-[12px] text-slate-500 mt-3 pt-3 border-t border-slate-200 tabular-nums">
             {win.viableHours > 0
               ? `best window · ${formatHour(win.atISO)} · wet-bulb ${win.wetBulbC}° · ${win.viableHours} of next 24h cold enough`
               : "too warm to make snow in the next 24 hours"}

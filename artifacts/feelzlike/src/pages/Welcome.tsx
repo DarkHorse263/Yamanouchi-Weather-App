@@ -5,11 +5,14 @@ import { markLandingVisited, readLastTown, type LastTown } from "@/lib/favourite
 import { useAuthAccount } from "@/components/auth/SignUpProvider";
 import { useUserPrefs } from "@/components/auth/UserPrefsProvider";
 import { ALERT_REGIONS } from "@/components/AlertSubscribeForm";
-import logoFullColour from "/branding/logo-full-colour.png?url";
+import logoWhite from "/branding/logo-white.png?url";
 import { NearYou } from "@/components/home/NearYou";
+import { HomeSignUpInvite } from "@/components/home/HomeSignUpInvite";
 import { CountryPicker } from "@/components/home/CountryPicker";
 import { Favourites } from "@/components/home/Favourites";
 import { DesktopHome } from "@/components/home/DesktopHome";
+import { HomeRegionCard } from "@/components/home/HomeRegionCard";
+import { CoverageMap } from "@/components/home/CoverageMap";
 import { HomeFooter } from "@/components/home/HomeFooter";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { websiteSchema, organizationSchema } from "@/lib/seo/jsonLd";
@@ -38,7 +41,7 @@ export default function Welcome() {
 
   return (
     <div
-      className="relative isolate min-h-screen text-slate-900 antialiased bg-white"
+      className="relative isolate min-h-[100dvh] text-white antialiased bg-[#0055FF] pb-safe"
       style={{ fontFamily: "'DIN Pro', system-ui, sans-serif", ...pretty }}
     >
       <PageMeta
@@ -55,37 +58,22 @@ export default function Welcome() {
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            src={logoFullColour}
+            src={logoWhite}
             alt="feelzlike"
             loading="eager"
             className="h-20 w-auto select-none md:h-24"
             draggable={false}
           />
-          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/70">
             real conditions for mountain travel
           </p>
-
-          {/* Home region shortcut · members who saved a home region on
-              /account land one tap from it. */}
-          {homeRegion && (
-            <motion.div
-              initial={{ opacity: 0, y: -4 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="mt-2"
-            >
-              <Link
-                href={`/${homeRegion.id}/`}
-                onClick={() => track("welcome_home_region_click", { category: "navigation" })}
-                className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50/70 px-4 py-2 transition-colors hover:border-sky-300 hover:bg-sky-100"
-              >
-                <span aria-hidden="true" className="text-sky-700">&#9825;</span>
-                <span className="text-sm font-medium text-sky-800">
-                  your home region · {homeRegion.nameEn.toLowerCase()}
-                </span>
-              </Link>
-            </motion.div>
-          )}
+          <Link
+            href="/about"
+            className="rounded-full border border-white/30 px-3.5 py-1 text-[12px] font-bold lowercase text-white/85 transition-colors hover:border-white/60 hover:text-white"
+            data-testid="link-home-about"
+          >
+            about · how to use
+          </Link>
 
           {/* Return shortcut · skips the pickers for users who've already
               settled on a base town. Only renders when a valid lastTown exists
@@ -101,10 +89,10 @@ export default function Welcome() {
               <Link
                 href={`/${lastTown.regionId}/${lastTown.townId}`}
                 onClick={() => track("welcome_last_town_click", { category: "navigation" })}
-                className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50/70 px-4 py-2 transition-colors hover:border-sky-300 hover:bg-sky-100"
+                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 transition-colors hover:border-white/30 hover:bg-white/20"
               >
-                <span aria-hidden="true" className="text-sky-700">&larr;</span>
-                <span className="text-sm font-medium text-sky-800">
+                <span aria-hidden="true" className="text-white/70">&larr;</span>
+                <span className="text-sm font-medium text-white">
                   back to {lastTown.townName.toLowerCase()}
                 </span>
               </Link>
@@ -112,36 +100,47 @@ export default function Welcome() {
           )}
         </header>
 
+        {/* WHAT'S NEW ─ one-time dismissible note for returning visitors ─ */}
+
+        {/* HOME REGION ─ front and centre for signed-in members */}
+        <HomeRegionCard />
+
         {/* NEAR YOU ─ location-first: local conditions + nearest region ─ */}
         <NearYou />
+
+        {/* SIGN-UP INVITE ─ the landing page's one ask · anonymous only ─ */}
+        <HomeSignUpInvite />
 
         {/* CHOOSE A REGION ─ the picker continues below ─── */}
         <section className="px-4 pt-6 pb-6 md:px-6">
           <div className="mb-4 text-center">
             <h2
-              className="text-xl font-medium leading-snug text-slate-900 md:text-2xl"
+              className="text-xl font-medium leading-snug text-white md:text-2xl"
               style={balance}
             >
               i wonder what it feelzlike&nbsp;in&hellip;
             </h2>
-            <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-sky-700/80">
+            <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/70">
               choose a region
             </p>
           </div>
 
           <CountryPicker />
 
-          <p className="mt-6 text-center text-[12px] text-slate-400" style={balance}>
+          <p className="mt-6 text-center text-[12px] text-white/60" style={balance}>
             planning a trip?{" "}
             <Link
               href="/plan"
               onClick={() => track("welcome_plan_link_click", { category: "navigation" })}
-              className="text-sky-700 underline underline-offset-2 hover:text-sky-800"
+              className="text-white font-semibold underline underline-offset-2 hover:text-white/80"
             >
               open the trip planner
             </Link>
           </p>
         </section>
+
+        {/* WORLD COVERAGE MAP ─ interactive pin explorer ─ */}
+        <CoverageMap />
 
         {/* FAVOURITES ─ saved towns for one-tap access (hidden if none) ─ */}
         <Favourites />
