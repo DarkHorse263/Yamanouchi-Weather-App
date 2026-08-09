@@ -41,7 +41,7 @@ export const POWDER_THRESHOLDS_JP: Required<PowderThresholds> = {
 };
 
 /**
- * NZ + Canada: middle ground between AU (maritime, marginal) and Japan
+ * NZ, Canada + USA: middle ground between AU (maritime, marginal) and Japan
  * (consistent deep snowfall). 0.75cm/hr with a slightly relaxed wind cap.
  */
 export const POWDER_THRESHOLDS_NZ_CA: Required<PowderThresholds> = {
@@ -59,13 +59,14 @@ export const POWDER_THRESHOLDS_NZ_CA: Required<PowderThresholds> = {
  * "undefined region = AU" convention.
  */
 export function powderThresholdsForCountry(
-  country: "AU" | "JP" | "NZ" | "CA" | undefined,
+  country: "AU" | "JP" | "NZ" | "CA" | "US" | undefined,
 ): Required<PowderThresholds> {
   switch (country) {
     case "JP":
       return POWDER_THRESHOLDS_JP;
     case "NZ":
     case "CA":
+    case "US":
       return POWDER_THRESHOLDS_NZ_CA;
     default:
       return POWDER_THRESHOLDS_AU;

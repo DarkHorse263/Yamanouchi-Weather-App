@@ -26,9 +26,16 @@
 import { test, describe, beforeEach } from "node:test";
 import assert from "node:assert/strict";
 import type { User } from "@workspace/db";
+import type { BridgeDeps, ResolveResult } from "../../middlewares/requireAuth.js";
 
 // ── Import the REAL exported bridge function ──────────────────────────────────
-import { resolveDbUser, type BridgeDeps, type ResolveResult } from "../../middlewares/requireAuth.js";
+// `requireAuth` also wires production DB dependencies at module scope. These
+// bridge tests inject their own in-memory dependencies and never connect, but
+// @workspace/db still requires a connection string while the module loads.
+// Supply a harmless local URL before the dynamic import so `pnpm test` stays
+// self-contained without changing the production configuration requirement.
+process.env.DATABASE_URL ??= "postgresql://localhost:5432/feelzlike_test";
+const { resolveDbUser } = await import("../../middlewares/requireAuth.js");
 
 // ── In-memory user store ──────────────────────────────────────────────────────
 
