@@ -792,22 +792,22 @@ description = "Text-to-speech audio: One hundred and eighteen mountain regions. 
 id = "bOM0gFMxQYveQomFQTVRv"
 uri = "file://exports/video-ads/feelzlike-anthem-au.mp4"
 type = "video"
-title = "feelzlike anthem ad · australian voice (Jess)"
-description = "original AU voice · original music bed · 41s"
+title = "feelzlike anthem ad · australian voice"
+description = "VO level fixed · closing line on end screen"
 
 [[outputs]]
 id = "v9oiZTX4lLRwU242MF2il"
 uri = "file://exports/video-ads/feelzlike-anthem-us.mp4"
 type = "video"
 title = "feelzlike anthem ad · american voice"
-description = "US voice · original music bed · 41s"
+description = "closing line now lands on end screen"
 
 [[outputs]]
 id = "OskuCzKteJUAS5SDUz4FV"
 uri = "file://exports/video-ads/feelzlike-anthem-jp.mp4"
 type = "video"
 title = "feelzlike anthem ad · japanese voice (日本語)"
-description = "full Japanese voiceover · original music bed · 41s"
+description = "VO level fixed · closing line on end screen"
 
 [[outputs]]
 id = "Dhpc1T1vbppayrmbvNmf9"
