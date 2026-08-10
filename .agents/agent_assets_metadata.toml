@@ -687,15 +687,15 @@ description = "Text-to-speech audio: snow, roads and transport... checked in sec
 id = "o9DsWphjvxLFsxgI2bpNN"
 uri = "file://exports/video-ads/feelzlike-ad-30s.mp4"
 type = "video"
-title = "feelzlike 30s video ad (generic cut)"
-description = "mountain-town messaging · home page screens · pushes feelzlike.com"
+title = "feelzlike 30s ad (v3)"
+description = "morning in town → app on real phone screen → drive up to the snow → feelzlike.com"
 
 [[outputs]]
 id = "L_sUfUACXax28oRXcbHyY"
 uri = "file://exports/video-ads/feelzlike-ad-15s.mp4"
 type = "video"
-title = "feelzlike 15s video ad (generic cut)"
-description = "short cut · home page screen · pushes feelzlike.com"
+title = "feelzlike 15s ad (v3)"
+description = "short cut · same story · feelzlike.com"
 
 [[outputs]]
 id = "4Sa5IDj_IipSnAMAyzJ6Y"
@@ -724,3 +724,17 @@ uri = "file://attached_assets/generated_audio/vo-30-3_2.mp3"
 type = "audio"
 title = "vo-30-3.mp3"
 description = "Text-to-speech audio: go to feelzlike dot com. real conditions for mountain travel. free until the thirty-first of december. feelzlike dot com."
+
+[[outputs]]
+id = "204yu8bOd1TKMcPsKvhrT"
+uri = "file://attached_assets/generated_audio/vo-15-close.mp3"
+type = "audio"
+title = "vo-15-close"
+description = "Text-to-speech audio: feelzlike dot com. real conditions for mountain travel."
+
+[[outputs]]
+id = "MeFnLVWqE26aXtNu4WKic"
+uri = "file://attached_assets/generated_audio/vo-30-close.mp3"
+type = "audio"
+title = "vo-30-close"
+description = "Text-to-speech audio: go to feelzlike dot com. real conditions for mountain travel. feelzlike dot com."
