@@ -1,0 +1,322 @@
+Received: from MEYP282MB3532.AUSP282.PROD.OUTLOOK.COM (2603:10c6:220:17c::8)
+ by SY5P282MB4686.AUSP282.PROD.OUTLOOK.COM with HTTPS; Tue, 4 Aug 2026
+ 07:51:06 +0000
+Received: from MEVPR01CA0074.ausprd01.prod.outlook.com (2603:10c6:220:201::6)
+ by MEYP282MB3532.AUSP282.PROD.OUTLOOK.COM (2603:10c6:220:17c::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.18; Tue, 4 Aug
+ 2026 07:51:04 +0000
+Received: from ML1PEPF00011309.ausprd01.prod.outlook.com
+ (2603:10c6:220:201:cafe::1c) by MEVPR01CA0074.outlook.office365.com
+ (2603:10c6:220:201::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.18 via Frontend Transport; Tue, 4
+ Aug 2026 07:51:04 +0000
+Authentication-Results: spf=pass (sender IP is 194.116.167.245)
+ smtp.mailfrom=awin.com; dkim=pass (signature was verified)
+ header.d=awin.com;dmarc=pass action=none header.from=awin.com;compauth=pass
+ reason=100
+Received-SPF: Pass (protection.outlook.com: domain of awin.com designates
+ 194.116.167.245 as permitted sender) receiver=protection.outlook.com;
+ client-ip=194.116.167.245; helo=mx02.digitalwindow.com; pr=C
+Received: from mx02.digitalwindow.com (194.116.167.245) by
+ ML1PEPF00011309.mail.protection.outlook.com (10.167.241.86) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.292.8
+ via Frontend Transport; Tue, 4 Aug 2026 07:51:03 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=awin.com; s=202202;
+	t=1785829860; bh=Qp+EH8hl6m0Fv7uUGGGxLowJx3QglubcXXaiSt510cc=;
+	h=To:From:Subject:Date:From;
+	b=k6RcpTGNMUxToRgEpCZ+t4+7rZJkW+uckj1ZgF9sqVI2s9OESMqeTA3fvv9OuvGCG
+	 0FrpSQhZDJe1v0uPqOmRpACqC0WLfGhIckktjUzTYPHpJaeWmw/xr0dC9EDp6o+dxn
+	 jayYEBSXzbHK2OwQREAilTf9HnYB4cZoJcYodzWR/s2LTgA0hYe0eA3K6zQ8ZocesO
+	 StecbqTghL4hZmrIgTSW6k/7FNoQBJY9DvVFHGW6qCKnLbRFKkuVQnhY+E0s8hvchy
+	 Z26o2GJ0Qzi/QzLlpFW/du73WIgeoFYJJmaFqyssTGV40wGH5k533CsCuxIrtLIu6j
+	 uI4wJcHaqV2RA==
+Received: from localhost (l-lhr1-docker-107.zanox-live.de [10.150.132.138])
+	by mx02.digitalwindow.com (Postfix) with ESMTP id E9183A154F
+	for <feelzlike@navigatework.com.au>; Tue,  4 Aug 2026 07:51:00 +0000 (UTC)
+To: feelzlike@navigatework.com.au
+From: Awin <no-reply@awin.com>
+Subject: Welcome to Trivago AU's affiliate program, James Mitchell
+Date: Tue, 04 Aug 2026 08:51:00 +0100
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+Message-ID: <f866008e-4586-495b-be6e-1a6f04bc99f9@ML1PEPF00011309.ausprd01.prod.outlook.com>
+Return-Path: opportunity@awin.com
+X-MS-Exchange-Organization-ExpirationStartTime: 04 Aug 2026 07:51:04.2500
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: c3040430-3677-4cad-8d21-08def1fd2296
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: febefc03-2be7-43ba-af66-5490103dee38:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: ML1PEPF00011309:EE_|MEYP282MB3532:EE_|SY5P282MB4686:EE_
+X-MS-Exchange-Organization-AuthSource: ML1PEPF00011309.ausprd01.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id: c3040430-3677-4cad-8d21-08def1fd2296
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Antispam: BCL:2;ARA:13230040|12012899012|1032899013|69100299015|7149299003|5062899012|3072899012|2092899012|7049299003|3092899012|3109299003|18002099003|16102099003|8096899003|19002099009|2066899003|56012099006|5063699009|10067099003;
+X-Forefront-Antispam-Report: CIP:194.116.167.245;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mx02.digitalwindow.com;PTR:mx02.digitalwindow.com;CAT:NONE;SFS:(13230040)(12012899012)(1032899013)(69100299015)(7149299003)(5062899012)(3072899012)(2092899012)(7049299003)(3092899012)(3109299003)(18002099003)(16102099003)(8096899003)(19002099009)(2066899003)(56012099006)(5063699009)(10067099003);DIR:INB;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Aug 2026 07:51:03.6888
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c3040430-3677-4cad-8d21-08def1fd2296
+X-MS-Exchange-CrossTenant-Id: febefc03-2be7-43ba-af66-5490103dee38
+X-MS-Exchange-CrossTenant-AuthSource: ML1PEPF00011309.ausprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MEYP282MB3532
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:03.2549067
+X-MS-Exchange-Processed-By-BccFoldering: 15.21.0270.016
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(910005)(944490095)(944506478)(944626604)(920097)(930201)(20251009189)(140003);
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?dnBkK2RmNFJUejg0bkplVkRWRlFhUVlmRUEvQzFWYldoa21RUkZiNUhJdURJ?=
+ =?utf-8?B?OVdYRXF4N3l0Q0ExZEhGNzRwcjJlMCtibUhGNm5BQkNHa1pneTZWQ0NxbWgr?=
+ =?utf-8?B?UEJuV0dGeE9SNTBIQVQ4Rmo2RUliMU1qc1ZmTkV5Zjh1UWh5UGV5bm01cjdC?=
+ =?utf-8?B?RXBJTzk3dEV3RGhJY2JYK0xGL1o4SDhnUWl5d05xcERLVkdUQkp2czZtQ2t0?=
+ =?utf-8?B?My9rcnZ1bVpZbkRUTHNYc0hwNytML0VETWFmeE5Fd2NWZDBrZUpaZVFKRVlj?=
+ =?utf-8?B?SVpyR0J3ek9wMmdUUXZXenhRdndUUW9uMTc4Z20rVWx6WnY1UWpXYlFxRDJ6?=
+ =?utf-8?B?UVVDVjF3S09GV002eE05V3pUSE5zaE9PbjBNYmltWnJ0dTlFMklsZVZSK0I0?=
+ =?utf-8?B?QnhDc3FwL3E3dXBsN1V0c0xRZnRXTEtQOWwzeEpUNFJTWnduWnZWTWRzUUIw?=
+ =?utf-8?B?N05mdXF4Qm9yNkcvWW5mc1JHVm4xakp0c2p3aEdUWllTaXQ1Z1VxZWhSY0Zn?=
+ =?utf-8?B?UmxHYlBJalVLRUMxbU42OGpMbWdsemxBdUpXTUM5RUMvNkpoaEk3cG9ZMTJ4?=
+ =?utf-8?B?MzAyaWpPbU5zaW1xRmx0N1pDZTVBdklnS3pLSXdZWmF4MWFkUDdMR3ZrdW1m?=
+ =?utf-8?B?ZGVIdWY0bEN2aEdLczAxaTdDOHpGM1hWb000ZFlZd3JTbmFiQ1FxZDFPVTRC?=
+ =?utf-8?B?cHhvTllnTTRBOHkzazB3a0NxM3pGR0VsZHpPRHZ6bGRub0hvWVcrd3dUWFUz?=
+ =?utf-8?B?L3MxaHNRVmxsQ2wzb3RkbzJNblFOb2ErbVNtbGdVR3lRNkFseEVBSlFMbDNP?=
+ =?utf-8?B?YzVSMkVUQmMxbUNPKzYrNkRYdUU2enJvUmpHblVhS0VXZERoMW43SnVydC94?=
+ =?utf-8?B?cmYxYXdNOFo5YitNdHdqdGtDcmxtOStWeFZjREI3RVdYbTFmVWJDVVM3Nkgx?=
+ =?utf-8?B?NzZEL2FrbHZIdlMyVkNWTnEyUjZOMVM5UkF3YklOVm44U2M5SlNhQmFwUk5N?=
+ =?utf-8?B?aE1tUVhUTTAxRUVZWWhwQ2VPR3hvWllWbUpqc2Juang5QUdQSW5WazVicFV1?=
+ =?utf-8?B?dDlBRXA0S1NxRTgvOWdNU0VyQlVzeExkbmxVcEdQdDVaSlYwYUFmbWxHS0wr?=
+ =?utf-8?B?a0tlbHZKaTBsTFUyZWFGR2JJK2lLa09TNVNQTVMxQUxEUjFMSVNsMmgzOWVy?=
+ =?utf-8?B?aXF1L0Vrc3BHUnNORHAvNEY2SDQxbFE2SFJrdTBFeHNsNzNnQzZXVmMrdVFW?=
+ =?utf-8?B?bnFmTFgxQXZJV0tRb3FIbldOWUwxRzc1N0E3WW00WmFmamI4enc2VmVMMFNz?=
+ =?utf-8?B?TlRCQTJMeFJyVm1xdmRuNTVBdVN4Z2JGQWFhUERTL0gvaXNzcjBYL3VNbHVN?=
+ =?utf-8?B?cllKVHFHQlFwYTBjUGxuNlAwMDY1WnZtNG5LbFdRc2dkMWtoWm13VjFHb2Ns?=
+ =?utf-8?B?T2RmY0NkWUttYUluMytDbEc1S2xESXk1dTdFVnd2RUZYUGhYYTkzTDc1ZXBF?=
+ =?utf-8?B?ZEdmdjdPMzlPRThvNzNxOVRPbUZ4K2ZlUlpvNUFONWZ5OVdRVGxUK1d0TzQ3?=
+ =?utf-8?B?UGozL0wyNWJBRFRXcEIwR1Ivelo0TXJFOUNEYUpyTDNjeXF3TVF5UDRURmlH?=
+ =?utf-8?B?MkFKa052cXhNOWg1OGxBcE5YbXpaUFEvZjVjYzdKc0xxSFVHVU4yeDVxdHQ0?=
+ =?utf-8?B?TE1ncGJJRlp5ZEYwb3oveGN6SDU0eWdaNXFadE4xRkVPVktkZ2JDZHJOc05R?=
+ =?utf-8?B?S204K0FFZllyR2RZNDdNViszQzdaY1Eydkpxd0dWN080YjhmSThpU1ZxbnI4?=
+ =?utf-8?B?akNaYkhCeEh5bHBNTEtLdmpDdTZtS1NFaVBZNmRTWmdxMnRWWWp5Tm1BQVZk?=
+ =?utf-8?B?MW5oNWQ0REowT3BQbE9zUDdXc2JuWGowbG5lL0d2bnBrSk83ejExa2E5S29S?=
+ =?utf-8?B?VGMzamVkZGsyYi9VcnlHSkhTSDdydzU5ZUVZMXlWZzJyZTF0NHVBR1hFbC9p?=
+ =?utf-8?B?S1JQZGtQMy9zcE80K2o0alNYR1RpNGFyMXhtWVgwSnFZdjJCM3BuM3hwamIv?=
+ =?utf-8?B?di9XT3dJOGdMd1RXak9SYWZ1QW9TS2dDMStuT01kdWt5YTNJOWx1TE56OEI1?=
+ =?utf-8?B?a2J3QlZ3TTczcEJTNFBlTWVyTWJnOUFDRHpoYnN5dUdhdlJEUmhsZDFSZ1Vv?=
+ =?utf-8?B?dDFFUlhLRGNMWEhoN2ZGc09uc3pkOWw3RE1EZG1Ub3pFelVpZ3NVSUVsN1BH?=
+ =?utf-8?B?SEUxclBUMkxxNjdaK3NqdVRNR1JHdStVTUtSRnlpaFhOOWs5VWVqek1xaGFx?=
+ =?utf-8?B?NFY2Q1p3QXI5QXhnZGxxK1MwWTBOS2JQSzFkdk1LM1IySGhtdmhiRFlNMlB4?=
+ =?utf-8?B?Mk5uei9Jcm5pNUFNSVVRSlRHeUlJclpGVkkxRWJaakloK3hRam5WTElQVEZo?=
+ =?utf-8?B?SWcxMXRNZ0M1SUQ5b1IxZUtpQ2dHWm91UjlNdTk5RzRCYlV3cDR4S0E1Mkk5?=
+ =?utf-8?B?WVZYY1lkbUhpUkxnSUZIY1pRUDF5dm56YW5uNUVaNGJ0ekJUdHNWeGhERXZO?=
+ =?utf-8?B?U1R6K2c2a3pTb29aMWtGNURlU2hkaXZibEVyRGlOUHl1VU5KQVdoNUtOOEQ2?=
+ =?utf-8?B?WU4zb1FzV0ZNZGhlQk5TNkxIU1ZxZnNINFRzOEhNam1YVVhjYzNBVTVzOVM4?=
+ =?utf-8?B?UFdjY05JSFZBN0xQaFlHYThHM0plZ3lQcndDd0VkZXJaU1JtWkdSek9VSWp0?=
+ =?utf-8?B?eVJid1pJLysxK2xUYmFadTVNNFgzazRDTDh3Z1hkNm9reHRaU0VGajF6aFFS?=
+ =?utf-8?B?QjZMUlJDeFpQVlVBMkIvNGNDeVM4WkFkSERPMForN0JTV2Q3WkRCWmxMOGRq?=
+ =?utf-8?B?N21qbTJndStrNHJZVHNHeTBQVVl0bDRGTXBUQkJwNExIeEV5S05VY283am44?=
+ =?utf-8?B?MDcrTFcwMFlNV2xMMkNZNHlmdXVVVWdWSDFpOXMzNXRUNXRwVSs3REhQRFp6?=
+ =?utf-8?B?RUI1bHplZ2VzeU9hS3lPYkpzV1hLMlM0bFpyaUE1MzlGU0lUU3VaQkk0Y3Nr?=
+ =?utf-8?B?WVlCbDJOYjRVcWtMOVJ4SzRuMHF6TmVPdHJwOFQzVDRJZXA3M3ZhMzJwY09G?=
+ =?utf-8?B?aEh0OHhGK0hOWkVTbnVvcVJSUWdDdFFYQ3ZSbFFrRzN6eFlRUTlNNFQyZ1ZV?=
+ =?utf-8?B?YVNDN0sxTUZ6NEM2M3RYUHIvQThQb0libjdBTmVYcHRQQmx3cXpVbEF4enNW?=
+ =?utf-8?B?Y1BtVGlGOW9GQUkvOE4xMEJad0sxUmtha1lhTG1hMHJWalVGYWJjRElvemdW?=
+ =?utf-8?B?R0dkZDhhNjhiazhWMkFxdk1hTXFsT1FBbW1kb2tCODhHNTJEMGNkUmtGOGVC?=
+ =?utf-8?B?K3VMQVBiVmhMVDhoa1FaaElPTDBSYUlEUnc4alR4TTRoV2F3S0hmNXpITjBX?=
+ =?utf-8?B?MUxCdytQUXJoWTNTTjhUUmNBOHZjLytmc1ErTnY4L2U4d0ZzQkx5d1NkMHRs?=
+ =?utf-8?B?WGljZXk5WFZuaWJ2K2tTUTlVOTZGUWZLclpjUm5OVDFGVzZzUXl4YkYycHdR?=
+ =?utf-8?Q?mkDKT7TbPFlSlE?=
+MIME-Version: 1.0
+
+<!DOCTYPE html><html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8">=
+=0A=
+    <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=
+=3D1">=0A=
+    <meta http-equiv=3D"X-UA-Compatible" content=3D"IE=3Dedge">=0A=
+    <title>Welcome to Trivago AU's affiliate program, James Mitchell</title=
+>=0A=
+=0A=
+    <style>=0A=
+        body {font-family: Tahoma, Verdana, sans-serif; color:#23282c; back=
+ground-color:#efefef}=0A=
+        a, a:link, a:visited {color:#ff6600;}=0A=
+        p {line-height:18px;}=0A=
+        img {display: block;}=0A=
+        hr {border: 0; height: 0; border-bottom: 1px solid rgba(255, 255, 2=
+55, 0.3); margin-top: 5px; width: 100%}=0A=
+        ul li {color:#23282c; font-family: Tahoma, Verdana, sans-serif; fon=
+t-size:12px; margin-bottom: 10px}=0A=
+        /* Shrink Wrap Layout Pattern CSS */=0A=
+        @media only screen and (max-width: 600px) {=0A=
+            td[class=3D"responsive"] {=0A=
+                width: 100%;=0A=
+            }=0A=
+        }=0A=
+        @media only screen and (max-width: 480px){=0A=
+            td[class=3D"button"] {=0A=
+                max-width:600px !important;=0A=
+                width:100% !important;=0A=
+            }=0A=
+            td[class=3D"button"] a {=0A=
+                display:block !important;=0A=
+                font-size:18px !important;=0A=
+            }=0A=
+        }=0A=
+    </style>=0A=
+    </head>=0A=
+=0A=
+<body style=3D"background-color:#efefef; padding:10px;">=0A=
+<table align=3D"center" cellpadding=3D"0" cellspacing=3D"0">=0A=
+    <tr>=0A=
+        <td width=3D"600" valign=3D"top" class=3D"responsive">=0A=
+            <table cellpadding=3D"0" cellspacing=3D"0">=0A=
+                <tr>=0A=
+                    <td align=3D"left" valign=3D"top"><table id=3D"header" =
+width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=0A=
+                            <tbody>=0A=
+                            <tr>=0A=
+                                <td colspan=3D"2" align=3D"left" valign=3D"=
+top" class=3D"responsive"><img width=3D"100%" height=3D"5" alt=3D"" style=
+=3D"display:block; width:100%; height:5px" src=3D"https://images.awin.com/a=
+win-interface/emails/bar.png"></td>=0A=
+                            </tr>=0A=
+                            <tr>=0A=
+                                <td height=3D"10" colspan=3D"2" valign=3D"t=
+op" bgcolor=3D"#FFFFFF">&nbsp;</td>=0A=
+                            </tr>=0A=
+                            <tr>=0A=
+                                <td width=3D"20" bgcolor=3D"#FFFFFF">&nbsp;=
+</td>=0A=
+                                <td bgcolor=3D"#FFFFFF"><a href=3D"https://=
+ui.awin.com/" style=3D"margin:0;  border:0;"><img src=3D"https://images.awi=
+n.com/awin-interface/emails/AWIN-logo.png" alt=3D"Awin" width=3D"110" heigh=
+t=3D"auto" title=3D"Awin"></a></td>=0A=
+                            </tr>=0A=
+                            <tr>=0A=
+                                <td width=3D"20" bgcolor=3D"#FFFFFF">&nbsp;=
+</td>=0A=
+                                <td width=3D"577" height=3D"40" bgcolor=3D"=
+#FFFFFF">&nbsp;</td>=0A=
+                            </tr>=0A=
+                            </tbody>=0A=
+                        </table>=0A=
+                        <table id=3D"body" width=3D"100%" border=3D"0" alig=
+n=3D"center" cellpadding=3D"0" cellspacing=3D"0" style=3D"width: 100%; back=
+ground-color:#ffffff; border-bottom: 2px solid #e9e9e9">=0A=
+                            <tbody>=0A=
+                            <tr>=0A=
+                                <td width=3D"6%" bgcolor=3D"#FFFFFF">&nbsp;=
+</td>=0A=
+                                <td width=3D"88%" bgcolor=3D"#FFFFFF">Hello=
+ James Mitchell,<br>=0A=
+<br>=0A=
+Welcome to Trivago AU's affiliate program. <br>=0A=
+<br>=0A=
+Please take a look at our Program Terms before starting to promote trivago.=
+<br>=0A=
+<br>=0A=
+Thank you,<br>=0A=
+<br>=0A=
+Kind regards,<br>=0A=
+<br>=0A=
+trivago affiliate team.</td>=0A=
+                                <td width=3D"6%" bgcolor=3D"#FFFFFF">&nbsp;=
+</td>=0A=
+                            </tr>=0A=
+                            <tr>=0A=
+                                <td width=3D"6%" bgcolor=3D"#FFFFFF">&nbsp;=
+</td>=0A=
+                                <td height=3D"50" bgcolor=3D"#FFFFFF">&nbsp=
+;</td>=0A=
+                                <td width=3D"6%" bgcolor=3D"#FFFFFF">&nbsp;=
+</td>=0A=
+                            </tr>=0A=
+                            </tbody>=0A=
+                        </table>=0A=
+                        <table width=3D"100%" border=3D"0" cellspacing=3D"0=
+" cellpadding=3D"0">=0A=
+                            <tbody>=0A=
+                            <tr>=0A=
+                                <td width=3D"6%">&nbsp;</td>=0A=
+                                <td width=3D"88%"><table id=3D"footer" widt=
+h=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=0A=
+                                        <tbody>=0A=
+                                        <tr>=0A=
+                                            <td valign=3D"top" style=3D"hei=
+ght:10px;"></td>=0A=
+                                        </tr>=0A=
+                                        <tr>=0A=
+                                            <td><table width=3D"" border=3D=
+"0" align=3D"center" cellpadding=3D"0" cellspacing=3D"0">=0A=
+                                                    <tr>=0A=
+                                                        <td width=3D"40" al=
+ign=3D"right"><a href=3D"https://www.facebook.com/awin"><img src=3D"https:/=
+/images.awin.com/awin-interface/emails/icon-social-facebook.png" alt=3D"Fac=
+ebook" width=3D"30" height=3D"30" title=3D"Facebook"></a></td>=0A=
+                                                        <td width=3D"40" al=
+ign=3D"right"><a href=3D"https://twitter.com/Awin_Global"><img src=3D"https=
+://images.awin.com/awin-interface/emails/icon-social-twitter.png" alt=3D"Tw=
+itter" width=3D"30" height=3D"30" title=3D"Twitter" border=3D"0"></a></td>=
+=0A=
+                                                        <td width=3D"40" al=
+ign=3D"right"><a href=3D"https://www.awin.com/gb/news-and-events"><img src=
+=3D"https://images.awin.com/awin-interface/emails/icon-social-blog.png" alt=
+=3D"Awin Blog" width=3D"30" height=3D"30" title=3D"Awin Blog"></a></td>=0A=
+                                                    </tr>=0A=
+                                                </table></td>=0A=
+                                        </tr>=0A=
+                                        <tr>=0A=
+                                            <td><table width=3D"100%" borde=
+r=3D"0" cellspacing=3D"0" cellpadding=3D"0">=0A=
+                                                    <tbody>=0A=
+                                                    <tr>=0A=
+                                                        <td style=3D"height=
+:10px"></td>=0A=
+                                                    </tr>=0A=
+                                                    <tr>=0A=
+                                                        <td align=3D"center=
+">=0A=
+                                                            <p style=3D"fon=
+t-family:Tahoma, Verdana, Segoe, sans-serif; text-align:center; font-size:9=
+px; color:#999; margin:0; line-height:14px; ">=0A=
+                                                                AWIN LTD is=
+ registered as a private limited company in England and Wales with number 0=
+4010229.<br>=0A=
+                                                                Registered =
+Address: 2 Thomas More Square, London, E1W 1YN United Kingdom=0A=
+                                                            </p>=0A=
+                                                        </td>=0A=
+                                                    </tr>=0A=
+                                                    <tr>=0A=
+                                                        <td align=3D"center=
+"></td>=0A=
+                                                    </tr>=0A=
+                                                    </tbody>=0A=
+                                                </table></td>=0A=
+                                        </tr>=0A=
+                                        </tbody>=0A=
+                                    </table></td>=0A=
+                                <td width=3D"6%">&nbsp;</td>=0A=
+                            </tr>=0A=
+                            <tr>=0A=
+                                <td width=3D"6%">&nbsp;</td>=0A=
+                                <td width=3D"88%">&nbsp;</td>=0A=
+                                <td width=3D"6%">&nbsp;</td>=0A=
+                            </tr>=0A=
+                            </tbody>=0A=
+                        </table></td>=0A=
+                </tr>=0A=
+            </table>=0A=
+        </td>=0A=
+    </tr>=0A=
+</table>=0A=
+</body>=0A=
+</html>=0A=
+
