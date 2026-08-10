@@ -573,12 +573,11 @@
     "lat": -36.381,
     "lng": 148.824,
     "phone": null,
-    "website": "http://dwcreations.com.au/accommodation/",
+    "website": null,
     "price_band": "$$",
     "photos": [],
     "source_urls": [
-      "https://www.airbnb.com/berridale-australia/stays",
-      "http://dwcreations.com.au/accommodation/"
+      "https://www.airbnb.com/berridale-australia/stays"
     ],
     "room_count": 3,
     "amenities": [

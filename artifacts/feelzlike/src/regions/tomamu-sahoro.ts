@@ -57,7 +57,7 @@ export const tomamuSahoroRegion: RegionConfig = {
       lng: 142.804,
       blurb: "Quiet Tokachi resort on Mt Sahoro above Shintoku · long fall-line cruisers off a single gondola, home to Club Med Sahoro's all-inclusive village",
       blurbJa: "新得町の佐幌岳に広がる静かな十勝のスキー場 · ゴンドラ1本で回す素直なロングコース、クラブメッド北海道サホロが隣接",
-      websiteUrl: "https://sahoro.co.jp/",
+      websiteUrl: "https://sahoro-resort.com/",
       beginner_friendly: true,
       kids_lessons: true,
     },
@@ -100,7 +100,7 @@ export const tomamuSahoroRegion: RegionConfig = {
     { category: "Tourism", categoryJa: "観光", label: "Shimukappu Village official site", labelJa: "占冠村公式サイト", url: "https://www.vill.shimukappu.lg.jp/" },
     { category: "Tourism", categoryJa: "観光", label: "HOKKAIDO LOVE! · Hokkaido official tourism", labelJa: "北海道公式観光サイト HOKKAIDO LOVE!", url: "https://www.visit-hokkaido.jp/en/" },
     { category: "Resorts", categoryJa: "スキー場", label: "Hoshino Resorts Tomamu", labelJa: "星野リゾート トマム", url: "https://www.snowtomamu.jp/winter/en/" },
-    { category: "Resorts", categoryJa: "スキー場", label: "Sahoro Resort", labelJa: "サホロリゾートスキー場", url: "https://sahoro.co.jp/" },
+    { category: "Resorts", categoryJa: "スキー場", label: "Sahoro Resort", labelJa: "サホロリゾートスキー場", url: "https://sahoro-resort.com/" },
     { category: "Transport", categoryJa: "交通", label: "JR Hokkaido · trains", labelJa: "JR北海道 · 鉄道", url: "https://www.jrhokkaido.co.jp/global/" },
     { category: "Transport", categoryJa: "交通", label: "Hokkaido Resort Liner · New Chitose Airport coaches", labelJa: "北海道リゾートライナー · 新千歳空港からの直行バス", url: "https://www.access-n.jp/" },
     // Backcountry safety · the Tokachi ranges see sidecountry use; JAN's
