@@ -792,22 +792,22 @@ description = "Text-to-speech audio: One hundred and eighteen mountain regions. 
 id = "bOM0gFMxQYveQomFQTVRv"
 uri = "file://exports/video-ads/feelzlike-anthem-au.mp4"
 type = "video"
-title = "feelzlike anthem ad · australian voice"
-description = "VO level fixed · closing line on end screen"
+title = "feelzlike anthem · australian voice · 33s"
+description = "AU + NZ screens · covers Australia, NZ, Japan, Canada, USA"
 
 [[outputs]]
 id = "v9oiZTX4lLRwU242MF2il"
 uri = "file://exports/video-ads/feelzlike-anthem-us.mp4"
 type = "video"
-title = "feelzlike anthem ad · american voice"
-description = "closing line now lands on end screen"
+title = "feelzlike anthem · american voice · 29s"
+description = "USA + Canada screens · covers USA, Canada, Australia, NZ, Japan"
 
 [[outputs]]
 id = "OskuCzKteJUAS5SDUz4FV"
 uri = "file://exports/video-ads/feelzlike-anthem-jp.mp4"
 type = "video"
-title = "feelzlike anthem ad · japanese voice (日本語)"
-description = "VO level fixed · closing line on end screen"
+title = "feelzlike anthem · japanese voice · 41s"
+description = "Japan screens · 日本、オーストラリア、NZ、カナダ、アメリカ"
 
 [[outputs]]
 id = "Dhpc1T1vbppayrmbvNmf9"
@@ -822,3 +822,24 @@ uri = "file://attached_assets/generated_audio/vo-anthem-jp-ja.mp3"
 type = "audio"
 title = "anthem vo japanese"
 description = "Text-to-speech audio: 山岳エリア118地域、7つの公式データソース、15分ごとに更新されるリアルタイムのコンディション。feelzlikeは、日本、カナダ、アメリカ、オーストラリア、ニュージーランドの主要リゾートをすべてカバーしています。体感温度、積雪の観測データ、道路状況のチェックから、旅の計画まで。すべてがひとつのウェブアプリに。大雪が近づけば、無料のスノーアラートがメ…"
+
+[[outputs]]
+id = "gCj7E7u49rg7_Al9Z6OV1"
+uri = "file://attached_assets/generated_audio/vo-anthem2-au.mp3"
+type = "audio"
+title = "anthem au v2"
+description = "Text-to-speech audio: 118 mountain regions. 7 official sources. Real-time conditions, refreshed every 15 minutes. feelzlike covers every major resort across Australia, New Zealand, Japan, Canada, and…"
+
+[[outputs]]
+id = "-iW1vc4AeWMmvI3mkc34r"
+uri = "file://attached_assets/generated_audio/vo-anthem2-jp.mp3"
+type = "audio"
+title = "anthem jp v2"
+description = "Text-to-speech audio: 118の山岳エリア。7つの公式情報源。リアルタイムのコンディションを15分ごとに更新。feelzlikeは、日本、オーストラリア、ニュージーランド、カナダ、アメリカの主要スキー場をすべてカバー。実際の気温、報告された積雪、道路状況をチェックして、旅の計画まで。すべてがひとつのウェブアプリに。大雪が近づいた瞬間、無料のスノーアラートがメールで届きます。f…"
+
+[[outputs]]
+id = "wbeJzpcUOxoXRvrFxJP5n"
+uri = "file://attached_assets/generated_audio/vo-anthem2-us.mp3"
+type = "audio"
+title = "anthem us v2"
+description = "Text-to-speech audio: 118 mountain regions. 7 official sources. Real-time conditions, refreshed every 15 minutes. feelzlike covers every major resort across the USA, Canada, Australia, New Zealand, a…"
