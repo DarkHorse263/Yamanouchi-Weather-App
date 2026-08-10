@@ -59,6 +59,11 @@ feelzlike monetizes via the **Awin** affiliate network using the **auto-convert*
 - **When adding/removing a platform, fix the hardcoded site-count copy.** `regions/yamanouchi/pages/stay.tsx` hardcodes "N booking sites" (EN + JA, ~3 spots); `StayPlatformBar`/`TownStay` counts are dynamic. trivago made it 9 — keep those numbers honest (owner is honesty-sensitive).
 - **Threading region:** every `StayPlatformBar` call site must pass `region` (RegionStay → `region.id`; yamanouchi custom stay page → hardcoded `"yamanouchi"`). TownStay passes `region.id`.
 
+## New Awin approvals (Aug 2026 emails) — NOT yet wired, decisions pending
+- Owner is approved on Awin for **trivago AU, trivago NZ, trivago Canada** (welcome emails 4-6 Aug 2026) and **Hotels.com AU (Awin aid 121724**, 7 Aug 2026).
+- **Hotels.com AU on Awin is REDUNDANT:** Hotels.com already earns via CJ APAC (curl-verified, tracks on global www.hotels.com incl AU). One-network rule → keep CJ, leave the Awin approval unused. CJ-wrapped links point at anrdoezrs.net so the MasterTag can't double-convert; no code change needed or made.
+- **trivago AU/NZ/CA:** trivago buttons currently exist ONLY for JP (CJ, region-keyed locids). To earn on the new Awin programmes we'd add trivago buttons for AU/NZ/CA towns as PLAIN links on the country domains (trivago.com.au / .co.nz / .ca — Convert-a-Link rewrites exact approved domains) and NOT CJ-wrap them (CJ trivago stays JP-only). Each region needs a verified trivago area page (metasearch, no free-text deep link) — real curation work; awaiting owner go-ahead.
+
 ## Expedia — live on Awin ("Expedia AU", aid 121720, approved July 2026)
 - Expedia earns via **Awin Convert-a-Link** (NOT CJ) under the owner's Navigate Work Digital publisher account. Same exact-domain rule as Europcar: only **expedia.com.au** is rewritten, so `platformDeepLink` is now **country-keyed** (`opts.country`) — AU + NZ regions → `www.expedia.com.au` (tracked), everything else (JP) stays global `www.expedia.com` (works, untracked by design).
 - **TRAP:** `country` at the call sites is `region.shortTag`, and AU regions carry STATE tags (**NSW / VIC / TAS**, never "AU") — the domain switch must match those. First pass matched only "AU" and silently left every AU page on the global domain.
