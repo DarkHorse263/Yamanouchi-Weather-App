@@ -792,19 +792,33 @@ description = "Text-to-speech audio: One hundred and eighteen mountain regions. 
 id = "bOM0gFMxQYveQomFQTVRv"
 uri = "file://exports/video-ads/feelzlike-anthem-au.mp4"
 type = "video"
-title = "feelzlike anthem ad · australian voice"
-description = "female AU voiceover · dream trance bed · 41s"
+title = "feelzlike anthem ad · australian voice (Jess)"
+description = "original AU voice · original music bed · 41s"
 
 [[outputs]]
 id = "v9oiZTX4lLRwU242MF2il"
 uri = "file://exports/video-ads/feelzlike-anthem-us.mp4"
 type = "video"
 title = "feelzlike anthem ad · american voice"
-description = "female US voiceover · dream trance bed · 41s"
+description = "US voice · original music bed · 41s"
 
 [[outputs]]
 id = "OskuCzKteJUAS5SDUz4FV"
 uri = "file://exports/video-ads/feelzlike-anthem-jp.mp4"
 type = "video"
-title = "feelzlike anthem ad · japanese voice"
-description = "female JP-accent voiceover · dream trance bed · 41s"
+title = "feelzlike anthem ad · japanese voice (日本語)"
+description = "full Japanese voiceover · original music bed · 41s"
+
+[[outputs]]
+id = "Dhpc1T1vbppayrmbvNmf9"
+uri = "file://attached_assets/generated_audio/vo-anthem-au-jess.mp3"
+type = "audio"
+title = "anthem vo jess au"
+description = "Text-to-speech audio: One hundred and eighteen mountain regions. Seven official sources. Real-time conditions refreshed every fifteen minutes. Feelzlike covers every major resort across Japan, Canada…"
+
+[[outputs]]
+id = "OlqL4hJqPSkMH49ByjUpx"
+uri = "file://attached_assets/generated_audio/vo-anthem-jp-ja.mp3"
+type = "audio"
+title = "anthem vo japanese"
+description = "Text-to-speech audio: 山岳エリア118地域、7つの公式データソース、15分ごとに更新されるリアルタイムのコンディション。feelzlikeは、日本、カナダ、アメリカ、オーストラリア、ニュージーランドの主要リゾートをすべてカバーしています。体感温度、積雪の観測データ、道路状況のチェックから、旅の計画まで。すべてがひとつのウェブアプリに。大雪が近づけば、無料のスノーアラートがメ…"
