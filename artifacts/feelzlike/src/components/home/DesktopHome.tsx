@@ -20,7 +20,11 @@ import { track } from "@/lib/analytics";
 
 // Season-first ordering: southern-hemisphere countries (in season jun-oct)
 // come before Japan (dec-mar).
-const COUNTRIES: CountryCode[] = ["AU", "NZ", "JP", "CA"];
+const COUNTRIES: CountryCode[] = ["AU", "NZ", "JP", "CA", "US"];
+
+// A card can only fit so many region names before it swamps the grid (the
+// united states alone has 80+). Show the first few, then a count.
+const MAX_REGION_NAMES = 10;
 
 const eyebrow = "text-[11px] font-bold lowercase tracking-wider text-white/70";
 const h2 =
@@ -114,14 +118,18 @@ export function DesktopHome() {
         className="border-t border-white/20 px-6 pt-12 pb-10"
       >
         <p className={eyebrow}>where we cover</p>
-        <h2 className={h2}>four countries, one app</h2>
+        <h2 className={h2}>five countries, one app</h2>
 
         <div className="mt-7 grid grid-cols-2 gap-5 xl:grid-cols-4">
           {COUNTRIES.map((code) => {
             const meta = COUNTRY_META[code];
-            const regionNames = regionsForCountry(code).map((r) =>
+            const allNames = regionsForCountry(code).map((r) =>
               r.name.toLowerCase(),
             );
+            const shown = allNames.slice(0, MAX_REGION_NAMES);
+            const more = allNames.length - shown.length;
+            const regionNames =
+              more > 0 ? [...shown, `+ ${more} more`] : shown;
             return (
               <a
                 key={code}

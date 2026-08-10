@@ -76,6 +76,7 @@ const COUNTRY_CHIPS: Array<{ code: CountryCode | "ALL"; label: string }> = [
   { code: "NZ", label: "new zealand" },
   { code: "JP", label: "japan" },
   { code: "CA", label: "canada" },
+  { code: "US", label: "united states" },
 ];
 
 export default function CoverageMapInner() {
