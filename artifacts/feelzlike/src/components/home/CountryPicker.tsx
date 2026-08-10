@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { useEffect, useState, type CSSProperties } from "react";
 import { useQuery } from "@tanstack/react-query";
 
@@ -310,6 +310,7 @@ const balance: CSSProperties = { textWrap: "balance" as CSSProperties["textWrap"
  * query cache the landing already warms, so it never costs an extra request.
  */
 export function CountryPicker() {
+  const [openCountry, setOpenCountry] = useState<Country["code"] | null>(null);
   const [now, setNow] = useState(() => Date.now());
   void now;
 
@@ -354,64 +355,88 @@ export function CountryPicker() {
           const pillText = isWinter ? "text-sky-700" : "text-emerald-700";
           const dot = isWinter ? "bg-sky-500" : "bg-emerald-500";
           const seasonLabel = isWinter ? "snow season" : "green season";
-          const liveInCountry = country.regions.filter((r) => r.status === "live").length;
+          const isOpen = openCountry === country.code;
 
           return (
-            <motion.a
+            <motion.div
               key={country.code}
-              href={`/${country.code.toLowerCase()}/`}
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.1 + idx * 0.08 }}
-              className={`group block rounded-2xl bg-white p-5 shadow-[0_8px_30px_rgb(15,23,42,0.08)] ring-2 ${ring} transition-transform hover:-translate-y-0.5`}
+              className={`rounded-2xl bg-white shadow-[0_8px_30px_rgb(15,23,42,0.08)] ring-2 ${ring}`}
             >
-              <header className="flex items-center gap-3">
-                <span aria-hidden className="text-3xl leading-none">{country.flag}</span>
-                <div className="min-w-0">
-                  <h3 className="text-lg font-bold leading-tight tracking-tight text-sky-900">
-                    {country.name}
-                  </h3>
-                  <p className={`mt-0.5 inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider ${pillText}`}>
-                    <span className="relative inline-flex h-1.5 w-1.5">
-                      <span className={`absolute inline-flex h-full w-full animate-ping rounded-full ${dot} opacity-60`} />
-                      <span className={`relative inline-flex h-1.5 w-1.5 rounded-full ${dot}`} />
+              <h3 className="m-0">
+                <button
+                  type="button"
+                  aria-expanded={isOpen}
+                  onClick={() => setOpenCountry(isOpen ? null : country.code)}
+                  className="flex w-full items-center gap-3 rounded-2xl p-4 text-left"
+                >
+                  <span aria-hidden className="text-3xl leading-none">{country.flag}</span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-lg font-bold leading-tight tracking-tight text-sky-900">
+                      {country.name}
                     </span>
-                    {seasonLabel} &middot; {liveInCountry} {liveInCountry === 1 ? "region live" : "regions live"}
-                  </p>
+                    <span className={`mt-0.5 inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider ${pillText}`}>
+                      <span className="relative inline-flex h-1.5 w-1.5">
+                        <span className={`absolute inline-flex h-full w-full animate-ping rounded-full ${dot} opacity-60`} />
+                        <span className={`relative inline-flex h-1.5 w-1.5 rounded-full ${dot}`} />
+                      </span>
+                      {seasonLabel} &middot; {country.regions.length} {country.regions.length === 1 ? "region" : "regions"}
+                    </span>
+                  </span>
+                  <ChevronDown
+                    aria-hidden
+                    className={`h-5 w-5 shrink-0 text-sky-700 transition-transform ${isOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
+              </h3>
+
+              {isOpen && (
+                <div className="border-t border-slate-100 px-4 pb-4">
+                  <ul className="mt-3 space-y-1 text-sm leading-relaxed">
+                    {country.regions.map((r) => {
+                      const town = PRIMARY_TOWN[r.id] ?? r.headlineLabel ?? r.baseTowns[0];
+                      const temp = r.headline?.tempC;
+                      // Drop the trailing town if it duplicates the region
+                      // name (e.g. "Nozawa Onsen · Nozawa Onsen").
+                      const showTown = town && town.toLowerCase() !== r.name.toLowerCase();
+                      return (
+                        <li key={r.id}>
+                          <a
+                            href={r.href}
+                            className="flex items-baseline justify-between gap-3 rounded-lg px-2 py-1.5 -mx-2 hover:bg-sky-50"
+                          >
+                            <span className="min-w-0 truncate text-slate-700">
+                              <span className="font-semibold text-slate-900">{r.name}</span>
+                              {showTown && (
+                                <>
+                                  <span className="text-slate-400"> &middot; </span>
+                                  {town}
+                                </>
+                              )}
+                            </span>
+                            {typeof temp === "number" && (
+                              <span className="shrink-0 text-base font-bold tabular-nums text-sky-900">
+                                {Math.round(temp)}&deg;C
+                              </span>
+                            )}
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+
+                  <a
+                    href={`/${country.code.toLowerCase()}/`}
+                    className="mt-3 inline-flex items-center text-xs font-semibold tracking-wide text-sky-700 hover:text-sky-900"
+                  >
+                    explore {country.name.toLowerCase()}
+                    <ArrowRight className="ml-1 h-3.5 w-3.5" />
+                  </a>
                 </div>
-              </header>
-
-              <ul className="mt-4 space-y-2.5 text-sm leading-relaxed">
-                {country.regions.map((r) => {
-                  const town = PRIMARY_TOWN[r.id] ?? r.headlineLabel ?? r.baseTowns[0];
-                  const temp = r.headline?.tempC;
-                  // Drop the trailing town if it duplicates the region
-                  // name (e.g. "Nozawa Onsen · Nozawa Onsen").
-                  const showTown = town && town.toLowerCase() !== r.name.toLowerCase();
-                  return (
-                    <li key={r.id} className="flex items-baseline justify-between gap-3">
-                      <span className="min-w-0 truncate text-slate-700">
-                        <span className="font-semibold text-slate-900">{r.name}</span>
-                        {showTown && (
-                          <>
-                            <span className="text-slate-400"> &middot; </span>
-                            {town}
-                          </>
-                        )}
-                      </span>
-                      <span className="shrink-0 text-base font-bold tabular-nums text-sky-900">
-                        {typeof temp === "number" ? `${Math.round(temp)}\u00B0C` : "\u2013"}
-                      </span>
-                    </li>
-                  );
-                })}
-              </ul>
-
-              <span className="mt-4 inline-flex items-center text-xs font-semibold tracking-wide text-sky-700 group-hover:text-sky-900">
-                explore {country.name.toLowerCase()}
-                <ArrowRight className="ml-1 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-              </span>
-            </motion.a>
+              )}
+            </motion.div>
           );
         })}
       </div>
