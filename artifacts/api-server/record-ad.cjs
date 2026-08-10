@@ -38,6 +38,11 @@ const SEGS = [
     let y0 = y0raw, y1 = y1raw;
     if (y0raw === "ALERT") {
       const y = await page.evaluate(() => {
+        // hide promo wording the ad must not carry
+        for (const el of document.querySelectorAll("span,div,p")) {
+          const t = (el.textContent || "").toLowerCase();
+          if (el.children.length === 0 && /until 31 dec|31 december/.test(t)) el.style.visibility = "hidden";
+        }
         const h = [...document.querySelectorAll("h3")].find(el => /powder alerts/i.test(el.textContent || ""));
         if (!h) return null;
         return Math.max(0, h.getBoundingClientRect().top + window.scrollY - 120);

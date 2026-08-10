@@ -759,3 +759,52 @@ uri = "file://exports/video-ads/feelzlike-anthem-40s.mp4"
 type = "video"
 title = "feelzlike anthem ad (40s)"
 description = "app-only screens · announcer VO · anthem music bed · feelzlike.com"
+
+[[outputs]]
+id = "7Oq7txuFvZULqogtatFaP"
+uri = "file://attached_assets/generated_audio/ad-dreamtrance-bed.mp3"
+type = "audio"
+title = "dream trance bed"
+description = "Generated music: Mid-90s dream trance instrumental in the style of classic Italian dream house: iconic emotive solo piano melody over a steady four-on-the-floor trance beat, warm analog pads, gentle …"
+
+[[outputs]]
+id = "07crfhCoCncnHtWXuU0rF"
+uri = "file://attached_assets/generated_audio/vo-anthem-au.mp3"
+type = "audio"
+title = "anthem vo au"
+description = "Text-to-speech audio: One hundred and eighteen mountain regions. Seven official sources. Real-time conditions refreshed every fifteen minutes. Feelzlike covers every major resort across Japan, Canada…"
+
+[[outputs]]
+id = "0B3rFMeSf56jtDJFfFzBS"
+uri = "file://attached_assets/generated_audio/vo-anthem-us.mp3"
+type = "audio"
+title = "anthem vo us"
+description = "Text-to-speech audio: One hundred and eighteen mountain regions. Seven official sources. Real-time conditions refreshed every fifteen minutes. Feelzlike covers every major resort across Japan, Canada…"
+
+[[outputs]]
+id = "YxLz_QMUa_wWDnP18XvaZ"
+uri = "file://attached_assets/generated_audio/vo-anthem-jp.mp3"
+type = "audio"
+title = "anthem vo jp"
+description = "Text-to-speech audio: One hundred and eighteen mountain regions. Seven official sources. Real-time conditions refreshed every fifteen minutes. Feelzlike covers every major resort across Japan, Canada…"
+
+[[outputs]]
+id = "bOM0gFMxQYveQomFQTVRv"
+uri = "file://exports/video-ads/feelzlike-anthem-au.mp4"
+type = "video"
+title = "feelzlike anthem ad · australian voice"
+description = "female AU voiceover · dream trance bed · 41s"
+
+[[outputs]]
+id = "v9oiZTX4lLRwU242MF2il"
+uri = "file://exports/video-ads/feelzlike-anthem-us.mp4"
+type = "video"
+title = "feelzlike anthem ad · american voice"
+description = "female US voiceover · dream trance bed · 41s"
+
+[[outputs]]
+id = "OskuCzKteJUAS5SDUz4FV"
+uri = "file://exports/video-ads/feelzlike-anthem-jp.mp4"
+type = "video"
+title = "feelzlike anthem ad · japanese voice"
+description = "female JP-accent voiceover · dream trance bed · 41s"
