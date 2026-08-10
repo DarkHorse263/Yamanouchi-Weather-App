@@ -652,6 +652,18 @@ const USA_VERIFIED = "2026-08-09";
  *   - Burke Mountain + Magic Mountain: no official standalone cam page.
  *   - Brighton: cams are embedded in the conditions page (no cam route).
  *   - Jay Peak: cams live on the official "A Look Around" page.
+ *   - Mt. Baker: publishes no webcams at all (snow report is text/photo only).
+ *   - Beaver Mountain + Cherry Peak (Cache Valley): no verifiable cam page
+ *     (Beaver's site sits behind a bot challenge and no cam route surfaced).
+ *   - Jiminy Peak: site 403s to bots and no official cam path could be
+ *     confirmed - no guessed URL.
+ *   - Ski Butternut: no cam page, only a text condition report.
+ *
+ * Bot-blocked but confirmed-official URLs (ORDA's Whiteface/Gore/Belleayre,
+ * Shawnee, Gunstock, Massanutten, Skibowl, Mt Bohemia, Alyeska) return
+ * 403/202/307 to non-browser agents; the paths below are the operators' own
+ * published cam pages (taken from their nav/sitemaps/search listings), and
+ * render fine in a real browser.
  */
 const USA: Record<string, MountainWebcam[]> = {
   // ─── Colorado ────────────────────────────────────────────
@@ -771,6 +783,281 @@ const USA: Record<string, MountainWebcam[]> = {
   ],
   "jay-peak": [
     { id: "jay-peak-official", mountainId: "jay-peak", name: "Jay Peak live cams", description: "Official cams on Jay's \"A Look Around\" page.", embedType: "external", pageUrl: "https://jaypeakresort.com/resort/photo-day", source: "Jay Peak Resort", verifiedAt: USA_VERIFIED },
+  ],
+
+  // ─── Pacific Northwest + Alaska ──────────────────────────
+  // Mt. Baker: intentional gap - no official webcams anywhere on mtbaker.us.
+  "crystal-mountain": [
+    { id: "crystal-mountain-official", mountainId: "crystal-mountain", name: "Crystal Mountain cams", description: "Official cams from the base area to the summit.", embedType: "external", pageUrl: "https://www.crystalmountainresort.com/mountain-information/mountain-cams", source: "Crystal Mountain", verifiedAt: USA_VERIFIED },
+  ],
+  "stevens-pass": [
+    { id: "stevens-pass-official", mountainId: "stevens-pass", name: "Stevens Pass mountain cams", description: "Official cams across the pass-top base area.", embedType: "external", pageUrl: "https://www.stevenspass.com/the-mountain/mountain-conditions/mountain-cams.aspx", source: "Stevens Pass", verifiedAt: USA_VERIFIED },
+  ],
+  "snoqualmie-pass": [
+    { id: "snoqualmie-pass-official", mountainId: "snoqualmie-pass", name: "Summit at Snoqualmie webcams", description: "Official cams across Summit West, Central, East and Alpental.", embedType: "external", pageUrl: "https://www.summitatsnoqualmie.com/webcams", source: "The Summit at Snoqualmie", verifiedAt: USA_VERIFIED },
+  ],
+  "mt-hood-meadows": [
+    { id: "mt-hood-meadows-official", mountainId: "mt-hood-meadows", name: "Mt. Hood Meadows mountain cams", description: "Official cams on the mountain report.", embedType: "external", pageUrl: "https://www.skihood.com/mountain-report/mountain-cams", source: "Mt. Hood Meadows", verifiedAt: USA_VERIFIED },
+  ],
+  "timberline-lodge": [
+    { id: "timberline-lodge-official", mountainId: "timberline-lodge", name: "Timberline conditions & cams", description: "Official cams embedded in the live conditions page.", embedType: "external", pageUrl: "https://www.timberlinelodge.com/conditions", source: "Timberline Lodge", verifiedAt: USA_VERIFIED },
+  ],
+  "mt-hood-skibowl": [
+    { id: "mt-hood-skibowl-official", mountainId: "mt-hood-skibowl", name: "Skibowl webcams", description: "Official cams over America's largest night-ski area.", embedType: "external", pageUrl: "https://www.skibowl.com/webcams", source: "Mt. Hood Skibowl", verifiedAt: USA_VERIFIED },
+  ],
+  "mt-bachelor": [
+    { id: "mt-bachelor-official", mountainId: "mt-bachelor", name: "Mt. Bachelor webcams", description: "Official cams around the 360° volcanic cone.", embedType: "external", pageUrl: "https://www.mtbachelor.com/the-mountain/webcams/", source: "Mt. Bachelor", verifiedAt: USA_VERIFIED },
+  ],
+  "mt-shasta-ski-park": [
+    { id: "mt-shasta-ski-park-official", mountainId: "mt-shasta-ski-park", name: "Mt. Shasta mountain cams", description: "Official winter mountain cams.", embedType: "external", pageUrl: "https://www.skipark.com/winter/mountain-cams", source: "Mt. Shasta Ski Park", verifiedAt: USA_VERIFIED },
+  ],
+  "alyeska-resort": [
+    { id: "alyeska-resort-official", mountainId: "alyeska-resort", name: "Alyeska live cams", description: "Official cams from the hotel to the upper tram.", embedType: "external", pageUrl: "https://www.alyeskaresort.com/live-cams/", source: "Alyeska Resort", verifiedAt: USA_VERIFIED },
+  ],
+  "eaglecrest-ski-area": [
+    { id: "eaglecrest-official", mountainId: "eaglecrest-ski-area", name: "Eaglecrest conditions & cams", description: "Official cams on the conditions page.", embedType: "external", pageUrl: "https://skieaglecrest.com/conditions/", source: "Eaglecrest Ski Area", verifiedAt: USA_VERIFIED },
+  ],
+
+  // ─── Northern Rockies (MT · WY · ID) ─────────────────────
+  "big-sky-resort": [
+    { id: "big-sky-official", mountainId: "big-sky-resort", name: "Big Sky webcams", description: "Official cams from the base up to Lone Peak.", embedType: "external", pageUrl: "https://www.bigskyresort.com/current-conditions/webcams", source: "Big Sky Resort", verifiedAt: USA_VERIFIED },
+  ],
+  "bridger-bowl": [
+    { id: "bridger-bowl-official", mountainId: "bridger-bowl", name: "Bridger Bowl webcams", description: "Official cams up the Ridge above Bozeman.", embedType: "external", pageUrl: "https://bridgerbowl.com/weather/webcams", source: "Bridger Bowl", verifiedAt: USA_VERIFIED },
+  ],
+  "jackson-hole-mtn-resort": [
+    { id: "jackson-hole-official", mountainId: "jackson-hole-mtn-resort", name: "Jackson Hole live mountain cams", description: "Official cams from Teton Village to Rendezvous Bowl.", embedType: "external", pageUrl: "https://www.jacksonhole.com/live-mountain-cams", source: "Jackson Hole Mountain Resort", verifiedAt: USA_VERIFIED },
+  ],
+  "snow-king-mountain": [
+    { id: "snow-king-official", mountainId: "snow-king-mountain", name: "Snow King webcams", description: "Official cams on the Town Hill above Jackson.", embedType: "external", pageUrl: "https://snowkingmountain.com/mountain/webcams/", source: "Snow King Mountain", verifiedAt: USA_VERIFIED },
+  ],
+  "grand-targhee-resort": [
+    { id: "grand-targhee-official", mountainId: "grand-targhee-resort", name: "Grand Targhee webcams", description: "Official cams on the west side of the Tetons.", embedType: "external", pageUrl: "https://www.grandtarghee.com/the-mountain/cams-conditions/webcams", source: "Grand Targhee Resort", verifiedAt: USA_VERIFIED },
+  ],
+  "bald-mountain": [
+    { id: "bald-mountain-official", mountainId: "bald-mountain", name: "Sun Valley web cams", description: "Official cams across Bald and Dollar mountains.", embedType: "external", pageUrl: "https://www.sunvalley.com/the-mountain/web-cams/", source: "Sun Valley Resort", verifiedAt: USA_VERIFIED },
+  ],
+  "dollar-mountain": [
+    { id: "dollar-mountain-official", mountainId: "dollar-mountain", name: "Sun Valley web cams", description: "Official cams across Bald and Dollar mountains.", embedType: "external", pageUrl: "https://www.sunvalley.com/the-mountain/web-cams/", source: "Sun Valley Resort", verifiedAt: USA_VERIFIED },
+  ],
+  "whitefish-mountain-resort": [
+    { id: "whitefish-official", mountainId: "whitefish-mountain-resort", name: "Whitefish webcams", description: "Official cams from the village to the summit house.", embedType: "external", pageUrl: "https://skiwhitefish.com/webcams/", source: "Whitefish Mountain Resort", verifiedAt: USA_VERIFIED },
+  ],
+  "red-lodge-mountain": [
+    { id: "red-lodge-official", mountainId: "red-lodge-mountain", name: "Red Lodge Mountain webcam", description: "Official cam above the Beartooth foothills.", embedType: "external", pageUrl: "https://www.redlodgemountain.com/webcam/", source: "Red Lodge Mountain", verifiedAt: USA_VERIFIED },
+  ],
+  "schweitzer-mountain-resort": [
+    { id: "schweitzer-official", mountainId: "schweitzer-mountain-resort", name: "Schweitzer webcam", description: "Official cams above Lake Pend Oreille.", embedType: "external", pageUrl: "https://www.schweitzer.com/mountain-info/webcam", source: "Schweitzer", verifiedAt: USA_VERIFIED },
+  ],
+  "bogus-basin": [
+    { id: "bogus-basin-official", mountainId: "bogus-basin", name: "Bogus Basin conditions & webcams", description: "Official cams on the nonprofit's conditions page.", embedType: "external", pageUrl: "https://bogusbasin.org/your-mountain/conditions-webcams/", source: "Bogus Basin", verifiedAt: USA_VERIFIED },
+  ],
+  "tamarack-resort": [
+    { id: "tamarack-official", mountainId: "tamarack-resort", name: "Tamarack webcams", description: "Official cams from the village to the summit.", embedType: "external", pageUrl: "https://tamarackidaho.com/about/webcams", source: "Tamarack Resort", verifiedAt: USA_VERIFIED },
+  ],
+  "brundage-mountain": [
+    { id: "brundage-official", mountainId: "brundage-mountain", name: "Brundage live cams", description: "Official cams above McCall.", embedType: "external", pageUrl: "https://brundage.com/live-cams/", source: "Brundage Mountain", verifiedAt: USA_VERIFIED },
+  ],
+
+  // ─── Colorado (rest) · New Mexico · Arizona · South Dakota ─
+  "eldora-mountain-resort": [
+    { id: "eldora-official", mountainId: "eldora-mountain-resort", name: "Eldora webcams", description: "Official cams on the Front Range's closest hill to Boulder.", embedType: "external", pageUrl: "https://www.eldora.com/the-mountain/current-conditions/webcams/", source: "Eldora Mountain Resort", verifiedAt: USA_VERIFIED },
+  ],
+  "telluride-ski-resort": [
+    { id: "telluride-official", mountainId: "telluride-ski-resort", name: "Telluride webcams", description: "Official cams from town to the high San Juan ridgelines.", embedType: "external", pageUrl: "https://tellurideskiresort.com/webcams/", source: "Telluride Ski Resort", verifiedAt: USA_VERIFIED },
+  ],
+  "purgatory-resort": [
+    { id: "purgatory-official", mountainId: "purgatory-resort", name: "Purgatory webcams", description: "Official cams above Durango.", embedType: "external", pageUrl: "https://www.purgatory.ski/mountain/weather-conditions-webcams/webcams/", source: "Purgatory Resort", verifiedAt: USA_VERIFIED },
+  ],
+  "taos-ski-valley": [
+    { id: "taos-official", mountainId: "taos-ski-valley", name: "Taos weather & webcams", description: "Official cams live on the weather page (the old /webcams route redirects there).", embedType: "external", pageUrl: "https://www.skitaos.com/weather", source: "Taos Ski Valley", verifiedAt: USA_VERIFIED },
+  ],
+  "ski-santa-fe": [
+    { id: "ski-santa-fe-official", mountainId: "ski-santa-fe", name: "Ski Santa Fe webcams", description: "Official cams in the Sangre de Cristos.", embedType: "external", pageUrl: "https://www.skisantafe.com/conditions/webcams", source: "Ski Santa Fe", verifiedAt: USA_VERIFIED },
+  ],
+  "angel-fire-resort": [
+    { id: "angel-fire-official", mountainId: "angel-fire-resort", name: "Angel Fire weather & webcams", description: "Official cams live on the weather page (the old /webcams route redirects there).", embedType: "external", pageUrl: "https://www.angelfireresort.com/weather/", source: "Angel Fire Resort", verifiedAt: USA_VERIFIED },
+  ],
+  "sandia-peak": [
+    { id: "sandia-peak-official", mountainId: "sandia-peak", name: "Sandia Peak weather & webcam", description: "Official tramway-top cam on the weather & conditions page.", embedType: "external", pageUrl: "https://sandiapeak.com/weather-conditions/", source: "Sandia Peak Tramway", verifiedAt: USA_VERIFIED },
+  ],
+  "arizona-snowbowl": [
+    { id: "arizona-snowbowl-official", mountainId: "arizona-snowbowl", name: "Arizona Snowbowl webcams", description: "Official cams on the San Francisco Peaks.", embedType: "external", pageUrl: "https://www.snowbowl.ski/the-mountain/weather-conditions-webcams/webcams/", source: "Arizona Snowbowl", verifiedAt: USA_VERIFIED },
+  ],
+  "sunrise-park-resort": [
+    { id: "sunrise-park-official", mountainId: "sunrise-park-resort", name: "Sunrise Park trails & camera", description: "Official cam on the winter trails page.", embedType: "external", pageUrl: "https://sunrise.ski/winter/trails-and-camera/", source: "Sunrise Park Resort", verifiedAt: USA_VERIFIED },
+  ],
+  "terry-peak": [
+    { id: "terry-peak-official", mountainId: "terry-peak", name: "Terry Peak live web cams", description: "Official cams in the Black Hills.", embedType: "external", pageUrl: "https://terrypeak.com/the-mountain/live-web-cams/", source: "Terry Peak Ski Area", verifiedAt: USA_VERIFIED },
+  ],
+
+  // ─── California (outside Tahoe) + Nevada Tahoe ───────────
+  "mammoth-mountain": [
+    { id: "mammoth-official", mountainId: "mammoth-mountain", name: "Mammoth live cams", description: "Official cams from Main Lodge to the summit.", embedType: "external", pageUrl: "https://www.mammothmountain.com/on-the-mountain/mammoth-webcam", source: "Mammoth Mountain", verifiedAt: USA_VERIFIED },
+  ],
+  "june-mountain": [
+    { id: "june-mountain-official", mountainId: "june-mountain", name: "June Mountain live cams", description: "Official cams above the June Lake loop.", embedType: "external", pageUrl: "https://www.junemountain.com/mountain-information/live-cams", source: "June Mountain", verifiedAt: USA_VERIFIED },
+  ],
+  "bear-mountain": [
+    { id: "bear-mountain-official", mountainId: "bear-mountain", name: "Bear Mountain webcams", description: "Official Big Bear Mountain Resort cams for Bear Mountain.", embedType: "external", pageUrl: "https://www.bigbearmountainresort.com/webcams/bear-mountain", source: "Big Bear Mountain Resort", verifiedAt: USA_VERIFIED },
+  ],
+  "snow-summit": [
+    { id: "snow-summit-official", mountainId: "snow-summit", name: "Snow Summit webcams", description: "Official Big Bear Mountain Resort cams for Snow Summit.", embedType: "external", pageUrl: "https://www.bigbearmountainresort.com/webcams/snow-summit", source: "Big Bear Mountain Resort", verifiedAt: USA_VERIFIED },
+  ],
+  "bear-valley-mountain-resort": [
+    { id: "bear-valley-official", mountainId: "bear-valley-mountain-resort", name: "Bear Valley webcam", description: "Official cam on Highway 4's Sierra resort.", embedType: "external", pageUrl: "https://www.bearvalley.com/webcam", source: "Bear Valley", verifiedAt: USA_VERIFIED },
+  ],
+  "mt-rose-ski-tahoe": [
+    { id: "mt-rose-official", mountainId: "mt-rose-ski-tahoe", name: "Mt Rose web cams", description: "Official cams at Tahoe's highest base.", embedType: "external", pageUrl: "https://skirose.com/the-mountain-web-cams/", source: "Mt Rose Ski Tahoe", verifiedAt: USA_VERIFIED },
+  ],
+  "diamond-peak": [
+    { id: "diamond-peak-official", mountainId: "diamond-peak", name: "Diamond Peak web cams", description: "Official cams with Lake Tahoe views above Incline Village.", embedType: "external", pageUrl: "https://www.diamondpeak.com/the-mountain/web-cams/", source: "Diamond Peak", verifiedAt: USA_VERIFIED },
+  ],
+
+  // ─── Utah (rest) ─────────────────────────────────────────
+  // Beaver Mountain + Cherry Peak: intentional gaps (see header).
+  snowbasin: [
+    { id: "snowbasin-official", mountainId: "snowbasin", name: "Snowbasin web cams", description: "Official cams from Earl's Lodge to the ridge.", embedType: "external", pageUrl: "https://www.snowbasin.com/the-mountain/web-cams/", source: "Snowbasin Resort", verifiedAt: USA_VERIFIED },
+  ],
+  "powder-mountain": [
+    { id: "powder-mountain-official", mountainId: "powder-mountain", name: "Powder Mountain conditions & webcams", description: "Official cams embedded in the conditions page.", embedType: "external", pageUrl: "https://powdermountain.com/conditions", source: "Powder Mountain", verifiedAt: USA_VERIFIED },
+  ],
+  "nordic-valley": [
+    { id: "nordic-valley-official", mountainId: "nordic-valley", name: "Nordic Valley weather & webcams", description: "Official cams on the conditions page.", embedType: "external", pageUrl: "https://www.nordicvalley.ski/nordic-valley-weather-conditions-webcams/", source: "Nordic Valley", verifiedAt: USA_VERIFIED },
+  ],
+  "sundance-mountain-resort": [
+    { id: "sundance-official", mountainId: "sundance-mountain-resort", name: "Sundance webcams", description: "Official cams beneath Mount Timpanogos.", embedType: "external", pageUrl: "https://www.sundanceresort.com/webcams", source: "Sundance Mountain Resort", verifiedAt: USA_VERIFIED },
+  ],
+
+  // ─── Maine · New Hampshire ───────────────────────────────
+  "sunday-river": [
+    { id: "sunday-river-official", mountainId: "sunday-river", name: "Sunday River mountain report & cams", description: "Official webcams live on the mountain report.", embedType: "external", pageUrl: "https://www.sundayriver.com/mountain-report", source: "Sunday River", verifiedAt: USA_VERIFIED },
+  ],
+  sugarloaf: [
+    { id: "sugarloaf-official", mountainId: "sugarloaf", name: "Sugarloaf mountain report & cams", description: "Official webcams live on the mountain report.", embedType: "external", pageUrl: "https://www.sugarloaf.com/mountain-report", source: "Sugarloaf", verifiedAt: USA_VERIFIED },
+  ],
+  "saddleback-mountain": [
+    { id: "saddleback-official", mountainId: "saddleback-mountain", name: "Saddleback webcams", description: "Official cams above Rangeley.", embedType: "external", pageUrl: "https://www.saddlebackmaine.com/webcams/", source: "Saddleback Mountain", verifiedAt: USA_VERIFIED },
+  ],
+  "loon-mountain": [
+    { id: "loon-official", mountainId: "loon-mountain", name: "Loon mountain report & cams", description: "Official webcams live on the mountain report.", embedType: "external", pageUrl: "https://www.loonmtn.com/mountain-report", source: "Loon Mountain", verifiedAt: USA_VERIFIED },
+  ],
+  "cannon-mountain": [
+    { id: "cannon-official", mountainId: "cannon-mountain", name: "Cannon Mountain webcam", description: "Official cam in Franconia Notch State Park.", embedType: "external", pageUrl: "https://www.cannonmt.com/webcam", source: "Cannon Mountain", verifiedAt: USA_VERIFIED },
+  ],
+  "bretton-woods": [
+    { id: "bretton-woods-official", mountainId: "bretton-woods", name: "Bretton Woods live cam & forecast", description: "Official cam facing Mount Washington.", embedType: "external", pageUrl: "https://www.brettonwoods.com/live-cam-forecast/", source: "Bretton Woods", verifiedAt: USA_VERIFIED },
+  ],
+  "waterville-valley-resort": [
+    { id: "waterville-official", mountainId: "waterville-valley-resort", name: "Waterville Valley cams", description: "Official base and summit cams.", embedType: "external", pageUrl: "https://www.waterville.com/cams", source: "Waterville Valley Resort", verifiedAt: USA_VERIFIED },
+  ],
+  "gunstock-mountain-resort": [
+    { id: "gunstock-official", mountainId: "gunstock-mountain-resort", name: "Gunstock web cams", description: "Official cams above Lake Winnipesaukee.", embedType: "external", pageUrl: "https://www.gunstock.com/discover/webcams/", source: "Gunstock Mountain Resort", verifiedAt: USA_VERIFIED },
+  ],
+  "cranmore-mountain": [
+    { id: "cranmore-official", mountainId: "cranmore-mountain", name: "Cranmore cams", description: "Official cams above North Conway.", embedType: "external", pageUrl: "https://cranmore.com/cams", source: "Cranmore Mountain Resort", verifiedAt: USA_VERIFIED },
+  ],
+  "wildcat-mountain": [
+    { id: "wildcat-official", mountainId: "wildcat-mountain", name: "Wildcat mountain cams", description: "Official cams facing Mount Washington across Pinkham Notch.", embedType: "external", pageUrl: "https://www.skiwildcat.com/the-mountain/mountain-conditions/mountain-cams.aspx", source: "Wildcat Mountain", verifiedAt: USA_VERIFIED },
+  ],
+  "attitash-mountain-resort": [
+    { id: "attitash-official", mountainId: "attitash-mountain-resort", name: "Attitash mountain cams", description: "Official cams across Attitash and Bear Peak.", embedType: "external", pageUrl: "https://www.attitash.com/the-mountain/mountain-conditions/mountain-cams.aspx", source: "Attitash Mountain Resort", verifiedAt: USA_VERIFIED },
+  ],
+
+  // ─── Massachusetts · Connecticut ─────────────────────────
+  // Jiminy Peak + Ski Butternut: intentional gaps (see header).
+  "berkshire-east": [
+    { id: "berkshire-east-official", mountainId: "berkshire-east", name: "Berkshire East conditions & webcams", description: "Official cams on the winter conditions page.", embedType: "external", pageUrl: "https://berkshireeast.com/winter/mountain-conditions", source: "Berkshire East", verifiedAt: USA_VERIFIED },
+  ],
+  "wachusett-mountain": [
+    { id: "wachusett-official", mountainId: "wachusett-mountain", name: "Wachusett webcams", description: "Official cams an hour from Boston.", embedType: "external", pageUrl: "https://www.wachusett.com/the-mountain/media-center/webcams/", source: "Wachusett Mountain", verifiedAt: USA_VERIFIED },
+  ],
+  "mohawk-mountain": [
+    { id: "mohawk-official", mountainId: "mohawk-mountain", name: "Mohawk Mountain webcam", description: "Official cams at the birthplace of snowmaking.", embedType: "external", pageUrl: "https://www.mohawkmtn.com/the-mountain/webcam/", source: "Mohawk Mountain", verifiedAt: USA_VERIFIED },
+  ],
+
+  // ─── New York · New Jersey ───────────────────────────────
+  "whiteface-mountain": [
+    { id: "whiteface-official", mountainId: "whiteface-mountain", name: "Whiteface webcams", description: "Official ORDA cams on the Olympic mountain.", embedType: "external", pageUrl: "https://whiteface.com/mountain/webcams/", source: "Whiteface Mountain (ORDA)", verifiedAt: USA_VERIFIED },
+  ],
+  "gore-mountain": [
+    { id: "gore-official", mountainId: "gore-mountain", name: "Gore Mountain webcams", description: "Official ORDA cams across the four-peak network.", embedType: "external", pageUrl: "https://goremountain.com/mountain/webcams/", source: "Gore Mountain (ORDA)", verifiedAt: USA_VERIFIED },
+  ],
+  "belleayre-mountain": [
+    { id: "belleayre-official", mountainId: "belleayre-mountain", name: "Belleayre webcams", description: "Official ORDA cams in the Catskill Forest Preserve.", embedType: "external", pageUrl: "https://belleayre.com/mountain/webcams/", source: "Belleayre Mountain (ORDA)", verifiedAt: USA_VERIFIED },
+  ],
+  "hunter-mountain": [
+    { id: "hunter-official", mountainId: "hunter-mountain", name: "Hunter mountain cams", description: "Official cams across Hunter's faces.", embedType: "external", pageUrl: "https://www.huntermtn.com/the-mountain/mountain-conditions/mountain-cams.aspx", source: "Hunter Mountain", verifiedAt: USA_VERIFIED },
+  ],
+  "windham-mountain": [
+    { id: "windham-official", mountainId: "windham-mountain", name: "Windham mountain cam", description: "Official cam at Windham Mountain Club.", embedType: "external", pageUrl: "https://www.windhammountainclub.com/mountain-cam/", source: "Windham Mountain Club", verifiedAt: USA_VERIFIED },
+  ],
+  "mountain-creek-resort": [
+    { id: "mountain-creek-official", mountainId: "mountain-creek-resort", name: "Mountain Creek live cam", description: "Official cam on the mountain report.", embedType: "external", pageUrl: "https://mountaincreek.com/skiing-riding/mountain-report/live-cam/", source: "Mountain Creek", verifiedAt: USA_VERIFIED },
+  ],
+
+  // ─── Pennsylvania · West Virginia · Virginia · North Carolina ─
+  "camelback-mountain": [
+    { id: "camelback-official", mountainId: "camelback-mountain", name: "Camelback live cameras", description: "Official cams on the Poconos' biggest hill.", embedType: "external", pageUrl: "https://www.camelbackresort.com/resort-information/live-cameras", source: "Camelback Resort", verifiedAt: USA_VERIFIED },
+  ],
+  "blue-mountain-pa": [
+    { id: "blue-mountain-pa-official", mountainId: "blue-mountain-pa", name: "Blue Mountain cams", description: "Official cams on Pennsylvania's biggest vertical.", embedType: "external", pageUrl: "https://www.skibluemt.com/mountain-cams/", source: "Blue Mountain Resort", verifiedAt: USA_VERIFIED },
+  ],
+  "shawnee-mountain": [
+    { id: "shawnee-official", mountainId: "shawnee-mountain", name: "Shawnee mountain cameras", description: "Official live mountain cameras.", embedType: "external", pageUrl: "https://shawneemt.com/mountain-cams/", source: "Shawnee Mountain", verifiedAt: USA_VERIFIED },
+  ],
+  "seven-springs-mountain": [
+    { id: "seven-springs-official", mountainId: "seven-springs-mountain", name: "Seven Springs mountain cams", description: "Official cams across the Laurel Highlands resort.", embedType: "external", pageUrl: "https://www.7springs.com/the-mountain/mountain-conditions/mountain-cams.aspx", source: "Seven Springs", verifiedAt: USA_VERIFIED },
+  ],
+  "blue-knob": [
+    { id: "blue-knob-official", mountainId: "blue-knob", name: "Blue Knob live cam", description: "Official cam hosted on IPCamLive, linked from blueknob.com.", embedType: "external", pageUrl: "https://www.ipcamlive.com/blueknob", source: "Blue Knob (via IPCamLive)", verifiedAt: USA_VERIFIED },
+  ],
+  "snowshoe-mountain": [
+    { id: "snowshoe-official", mountainId: "snowshoe-mountain", name: "Snowshoe webcams", description: "Official cams across the inverted village and basin.", embedType: "external", pageUrl: "https://www.snowshoemtn.com/the-mountain/webcams", source: "Snowshoe Mountain", verifiedAt: USA_VERIFIED },
+  ],
+  "canaan-valley-resort": [
+    { id: "canaan-valley-official", mountainId: "canaan-valley-resort", name: "Canaan Valley resort webcam", description: "Official cam at the state park resort.", embedType: "external", pageUrl: "https://www.canaanresort.com/resort-webcam", source: "Canaan Valley Resort", verifiedAt: USA_VERIFIED },
+  ],
+  "timberline-mountain": [
+    { id: "timberline-mountain-official", mountainId: "timberline-mountain", name: "Timberline snow cams", description: "Official cams above Canaan Valley.", embedType: "external", pageUrl: "https://timberlinemountain.com/snow-cams/", source: "Timberline Mountain", verifiedAt: USA_VERIFIED },
+  ],
+  "wintergreen-resort": [
+    { id: "wintergreen-official", mountainId: "wintergreen-resort", name: "Wintergreen mountain report & cams", description: "Official cams on the mountain report page.", embedType: "external", pageUrl: "https://www.wintergreenresort.com/mountain-report-cams/", source: "Wintergreen Resort", verifiedAt: USA_VERIFIED },
+  ],
+  "massanutten-resort": [
+    { id: "massanutten-official", mountainId: "massanutten-resort", name: "Massanutten webcams", description: "Official cams in the Shenandoah Valley.", embedType: "external", pageUrl: "https://www.massresort.com/explore/webcams/", source: "Massanutten Resort", verifiedAt: USA_VERIFIED },
+  ],
+  "sugar-mountain": [
+    { id: "sugar-mountain-official", mountainId: "sugar-mountain", name: "Sugar Mountain cams", description: "Official cams on the Southeast's biggest slope network.", embedType: "external", pageUrl: "https://skisugar.com/cams/", source: "Sugar Mountain Resort", verifiedAt: USA_VERIFIED },
+  ],
+  "beech-mountain": [
+    { id: "beech-mountain-official", mountainId: "beech-mountain", name: "Beech Mountain webcams", description: "Official cams at eastern America's highest town.", embedType: "external", pageUrl: "https://www.beechmountainresort.com/mountain/webcams/", source: "Beech Mountain Resort", verifiedAt: USA_VERIFIED },
+  ],
+  "cataloochee-ski-area": [
+    { id: "cataloochee-official", mountainId: "cataloochee-ski-area", name: "Cataloochee webcams", description: "Official cams above Maggie Valley.", embedType: "external", pageUrl: "https://cataloochee.com/the-mountain/webcams/", source: "Cataloochee Ski Area", verifiedAt: USA_VERIFIED },
+  ],
+
+  // ─── Midwest ─────────────────────────────────────────────
+  "boyne-mountain": [
+    { id: "boyne-mountain-official", mountainId: "boyne-mountain", name: "Boyne Mountain report & webcams", description: "Official webcams live on the mountain report.", embedType: "external", pageUrl: "https://www.boynemountain.com/mountain-report", source: "Boyne Mountain", verifiedAt: USA_VERIFIED },
+  ],
+  "boyne-highlands": [
+    { id: "boyne-highlands-official", mountainId: "boyne-highlands", name: "The Highlands report & webcams", description: "Official webcams live on the mountain report.", embedType: "external", pageUrl: "https://www.highlandsharborsprings.com/mountain-report", source: "The Highlands at Harbor Springs", verifiedAt: USA_VERIFIED },
+  ],
+  "nubs-nob": [
+    { id: "nubs-nob-official", mountainId: "nubs-nob", name: "Nubs Nob cam", description: "Official cam over the slopes.", embedType: "external", pageUrl: "https://www.nubsnob.com/cam/", source: "Nubs Nob", verifiedAt: USA_VERIFIED },
+  ],
+  "mt-bohemia": [
+    { id: "mt-bohemia-official", mountainId: "mt-bohemia", name: "Mount Bohemia TV", description: "Official live channel with mountain views.", embedType: "external", pageUrl: "https://www.mtbohemia.com/mount-bohemia-tv/", source: "Mount Bohemia", verifiedAt: USA_VERIFIED },
+  ],
+  "lutsen-mountains": [
+    { id: "lutsen-official", mountainId: "lutsen-mountains", name: "Lutsen Mountains webcam", description: "Official cam above Lake Superior.", embedType: "external", pageUrl: "https://www.lutsen.com/mountain-info/our-webcam", source: "Lutsen Mountains", verifiedAt: USA_VERIFIED },
+  ],
+  "granite-peak": [
+    { id: "granite-peak-official", mountainId: "granite-peak", name: "Granite Peak live web cams", description: "Official cams on Rib Mountain.", embedType: "external", pageUrl: "https://www.skigranitepeak.com/mountain-info/live-web-cams", source: "Granite Peak", verifiedAt: USA_VERIFIED },
+  ],
+  "cascade-mountain": [
+    { id: "cascade-mountain-official", mountainId: "cascade-mountain", name: "Cascade snow cams", description: "Official cams near Wisconsin Dells.", embedType: "external", pageUrl: "https://www.cascademountain.com/snow-cams/", source: "Cascade Mountain", verifiedAt: USA_VERIFIED },
   ],
 };
 
