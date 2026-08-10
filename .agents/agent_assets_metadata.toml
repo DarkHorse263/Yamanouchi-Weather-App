@@ -738,3 +738,24 @@ uri = "file://attached_assets/generated_audio/vo-30-close.mp3"
 type = "audio"
 title = "vo-30-close"
 description = "Text-to-speech audio: go to feelzlike dot com. real conditions for mountain travel. feelzlike dot com."
+
+[[outputs]]
+id = "OI2-xWNqkenq09pA9tOuG"
+uri = "file://attached_assets/generated_audio/vo-anthem-full.mp3"
+type = "audio"
+title = "anthem vo full"
+description = "Text-to-speech audio: One hundred and eighteen mountain regions. Official sources. Updates every ten minutes. And you're still checking a basic weather app before a ski trip? That app doesn't know wh…"
+
+[[outputs]]
+id = "k--D8OheDjXHxQmV2oH52"
+uri = "file://attached_assets/generated_audio/ad-anthem-bed.mp3"
+type = "audio"
+title = "anthem ad bed"
+description = "Generated music: Cinematic anthem trailer music bed for a tech ad: building orchestral-electronic hybrid, driving percussion, rising strings and pulsing synth bass, epic and confident but not aggress…"
+
+[[outputs]]
+id = "PCLzwsqNnSsPkA8QUfbGL"
+uri = "file://exports/video-ads/feelzlike-anthem-40s.mp4"
+type = "video"
+title = "feelzlike anthem ad (40s)"
+description = "app-only screens · announcer VO · anthem music bed · feelzlike.com"
