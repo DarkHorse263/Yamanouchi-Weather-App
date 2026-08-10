@@ -89,6 +89,15 @@ export interface CjAdvertiser {
   aid: string;
   /** Optional CJ redirect domain override (defaults to CJ_DEFAULT_DOMAIN). */
   domain?: string;
+  /**
+   * Optional destination-host allowlist. When set, cjLinkFor only wraps
+   * destinations whose host is in this list; anything else stays a plain link.
+   * Needed when the SAME merchant is on CJ for one country programme and Awin
+   * for others (one network per merchant *per domain*): e.g. trivago JP is on
+   * CJ (trivago.jp), while trivago AU/NZ/CA earn via Awin Convert-a-Link,
+   * which requires the plain country-domain link to pass through unwrapped.
+   */
+  destinationHosts?: string[];
 }
 
 /**
@@ -107,7 +116,9 @@ export const CJ_ADVERTISER_AIDS: Partial<Record<StayPlatformId, CjAdvertiser>> =
   // trivago JP" creative (the deep-link / URL-redirect-enabled one), so the
   // button can land on a region-specific trivago page (see TRIVAGO_DESTINATIONS)
   // rather than trivago's generic Japan page.
-  trivago: { aid: "17247167" },
+  // JP-ONLY: trivago AU/NZ/CA earn via Awin (approved Aug 2026) on plain
+  // trivago.com.au / .co.nz / .ca links - the allowlist keeps CJ off those.
+  trivago: { aid: "17247167", destinationHosts: ["www.trivago.jp"] },
   // Hotels.com APAC - CJ advertiser 2612819. AID 11327743 is the
   // "Hotels.com APAC - Deep link" creative (URL-redirect / deep-link enabled).
   // Curl-verified: the ?url= override is honoured AND tracked (cjevent +
@@ -175,6 +186,17 @@ export function cjLinkFor(
   if (!pid) return null;
   const advertiser = CJ_ADVERTISER_AIDS[platform];
   if (!advertiser) return null;
+  // Respect the destination-host allowlist: a merchant can be on CJ for one
+  // country domain and on Awin for others (see CjAdvertiser.destinationHosts).
+  if (advertiser.destinationHosts) {
+    let host = "";
+    try {
+      host = new URL(destinationUrl).hostname;
+    } catch {
+      return null; // unparseable destination - fail safe to the plain link
+    }
+    if (!advertiser.destinationHosts.includes(host)) return null;
+  }
   const aid = advertiser.aid.trim();
   if (!isValidCjAid(aid)) {
     if (isDev()) {
