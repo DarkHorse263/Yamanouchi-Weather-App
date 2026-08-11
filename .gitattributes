@@ -3,3 +3,4 @@ yam.tar.gz filter=lfs diff=lfs merge=lfs -text
 yam.part.aa filter=lfs diff=lfs merge=lfs -text
 yam.part.ab filter=lfs diff=lfs merge=lfs -text
 feelzlike.tar.gz filter=lfs diff=lfs merge=lfs -text
+exports/video-ads/feelzlike-anthem-all-formats.zip filter=lfs diff=lfs merge=lfs -text

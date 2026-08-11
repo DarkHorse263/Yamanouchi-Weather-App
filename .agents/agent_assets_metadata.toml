@@ -806,8 +806,8 @@ description = "opener now shows flags + world coverage map"
 id = "OskuCzKteJUAS5SDUz4FV"
 uri = "file://exports/video-ads/feelzlike-anthem-jp.mp4"
 type = "video"
-title = "feelzlike anthem · 日本語 · 44s"
-description = "Madarao + Snowball card leads · flags + map in opener"
+title = "japan cut · updated with japanese screens"
+description = "grand hirafu and happo-one heroes now fully in japanese"
 
 [[outputs]]
 id = "Dhpc1T1vbppayrmbvNmf9"
@@ -892,3 +892,24 @@ uri = "file://attached_assets/generated_audio/vo-anthem4-jpen.mp3"
 type = "audio"
 title = "japan english anthem vo aussie voice"
 description = "Text-to-speech audio: One hundred and eighteen mountain regions. Seven official sources. Real-time conditions, refreshed every fifteen minutes. feelzlike covers every major resort across Japan, Austr…"
+
+[[outputs]]
+id = "7iCJnkLIXy-gurs0BSYIW"
+uri = "file://exports/video-ads/feelzlike-anthem-au-landscape.mp4"
+type = "video"
+title = "landscape 16:9 sample · australia"
+description = "phone frame on blurred brand background, 1920x1080"
+
+[[outputs]]
+id = "eoCnjNUvDbsKYCk1wXgzx"
+uri = "file://exports/video-ads/feelzlike-anthem-au-square.mp4"
+type = "video"
+title = "square 1000x1000 sample · australia"
+description = "for facebook feed placements"
+
+[[outputs]]
+id = "tLEgPLw4-YbtkgqVxa26L"
+uri = "file://exports/video-ads/feelzlike-anthem-all-formats.zip"
+type = "unspecified"
+title = "all 24 video files · every cut, every format"
+description = "au / us / japan / japan-english · vertical + landscape + square · with-sound and silent versions"
