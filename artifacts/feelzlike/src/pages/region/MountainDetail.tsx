@@ -473,16 +473,24 @@ export function MountainDetail() {
                 className="font-display font-semibold text-[clamp(3rem,8vw,5.5rem)] leading-[0.92] tracking-tight"
                 style={{ letterSpacing: "-0.035em" }}
               >
-                <span className="text-white">{location?.name ?? metaName}</span>
+                <span className="text-white">
+                  {t(location?.name ?? metaName, mountainCfg?.nameJa ?? location?.name ?? metaName)}
+                </span>
               </motion.h1>
-              {location?.description && (
+              {(mountainCfg?.blurb || location?.description) && (
                 <motion.p
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.05 }}
                   className="mt-4 text-white/80 text-base md:text-lg max-w-xl leading-relaxed"
                 >
-                  {location.description}
+                  {/* Curated blurb from the region config carries the ja
+                      variant; the server catalogue description is EN-only,
+                      so it is only a fallback (and never shown in ja mode
+                      when a curated blurb exists). */}
+                  {mountainCfg?.blurb
+                    ? t(mountainCfg.blurb, mountainCfg.blurbJa)
+                    : location?.description}
                 </motion.p>
               )}
             </div>
@@ -656,8 +664,11 @@ export function MountainDetail() {
             />
             <PremiumFeaturePrompt
               id="mountain-powder-alerts"
-              title="get powder alerts by email"
-              blurb="we'll push an alert the moment powder hits the forecast for this mountain."
+              title={t("get powder alerts by email", "降雪アラートをメールで受け取る")}
+              blurb={t(
+                "we'll push an alert the moment powder hits the forecast for this mountain.",
+                "この山の予報にパウダーが現れた瞬間にアラートをお送りします。",
+              )}
               href="/premium"
             />
           </>
