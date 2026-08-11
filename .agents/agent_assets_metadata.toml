@@ -913,3 +913,31 @@ uri = "file://exports/video-ads/feelzlike-anthem-all-formats.zip"
 type = "unspecified"
 title = "all formats package (zip · 106 MB)"
 description = "24 files · au / us / japan / japan-english · vertical + landscape + square · sound and silent"
+
+[[outputs]]
+id = "ahKX_btBYHDI0oeFLL0CC"
+uri = "file://exports/video-ads/fb-pack-australia.zip"
+type = "unspecified"
+title = "australia pack (26 MB)"
+description = "vertical + landscape + square · sound and silent"
+
+[[outputs]]
+id = "J9J-b9q2ULPmu0zFGA7DF"
+uri = "file://exports/video-ads/fb-pack-usa.zip"
+type = "unspecified"
+title = "usa pack (23 MB)"
+description = "vertical + landscape + square · sound and silent"
+
+[[outputs]]
+id = "OjhdTCpBvTI9nicXy5xhi"
+uri = "file://exports/video-ads/fb-pack-japan.zip"
+type = "unspecified"
+title = "japan pack (33 MB)"
+description = "japanese screens + voiceover · all formats"
+
+[[outputs]]
+id = "86qoQfrcE6neXDjgxMzEd"
+uri = "file://exports/video-ads/fb-pack-japan-english.zip"
+type = "unspecified"
+title = "japan english pack (25 MB)"
+description = "japan screens, english voiceover · all formats"
