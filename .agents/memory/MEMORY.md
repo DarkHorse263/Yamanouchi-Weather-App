@@ -80,3 +80,4 @@
 - [feelzlike artifact.toml env placement](feelzlike-artifact-toml-env.md) — PORT/BASE_PATH belong in [services.env] after localPort; appended at file end they're eaten by the last rewrite table and vite dies at startup.
 - [feelzlike US transport](feelzlike-us-transport.md) — town "content parity" = curated transport data (stay/eat are generic OTA/Maps); 7 flagship US regions done, rest empty; US towns usually need the rideshare allowlist.
 - [feelzlike engagement counting](feelzlike-engagement-counting.md) — cookieless first-party visitor counts; finite page-label whitelist; fail-closed without secret; dev preview = no data by design.
+- [feelzlike Japanese SEO](feelzlike-ja-seo.md) — JP snapshots get ja-first bilingual descriptions extracted from region TS at build time; re-running prerender without a fresh vite build bakes stale bodies.

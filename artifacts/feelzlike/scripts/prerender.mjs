@@ -30,7 +30,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { REGIONS, regionFeatures, townFeatures, regionMountains } from "./seo-regions.mjs";
+import { REGIONS, regionFeatures, townFeatures, regionMountains, regionJapanese } from "./seo-regions.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, "..", "dist", "public");
@@ -115,6 +115,25 @@ function add(path, title, description, body) {
   routes.push({ path, title, description, body });
 }
 
+// ── Japanese SEO copy (Japan routes only) ────────────────────────────────
+// Japan pages carry a Japanese-first bilingual meta description plus a
+// lang="ja" paragraph in the snapshot body, so Google Japan shows Japanese
+// snippets while English-language queries can still surface English copy.
+// Non-JP routes never pass a ja description, so their output is unchanged.
+
+/** Japanese-first bilingual description; falls back to EN when no ja copy. */
+const biDesc = (ja, en) => (ja ? `${ja} | ${en}` : en);
+
+/** Snapshot body with an extra Japanese paragraph when ja copy exists. */
+function withJaBody(body, ja) {
+  if (!ja) return body;
+  return body.replace(/<\/main>\s*$/, `  <p lang="ja">${esc(ja)}</p>\n    </main>`);
+}
+
+function addJa(path, title, enDescription, jaDescription, body) {
+  add(path, title, biDesc(jaDescription, enDescription), withJaBody(body, jaDescription));
+}
+
 // ── Top-level static pages ────────────────────────────────────────────────
 
 add(
@@ -178,10 +197,11 @@ add(
   </main>`,
 );
 
-add(
+addJa(
   "/jp",
   "Japan · resort town weather · feelzlike",
   "Live weather and conditions for resort towns in Japan — Yamanouchi, Nozawa Onsen, Iiyama, Hakuba Valley (Nagano), and Myoko (Niigata).",
+  "日本のスキーリゾートの町のライブ天気・積雪・道路状況 · 志賀高原、野沢温泉、白馬、妙高、ニセコほか。",
   `<main>
     <h1>Japan · resort town weather</h1>
     ${BY_COUNTRY("JP").map((r) => `
@@ -313,11 +333,16 @@ add(
 // ── Region pages + all region sub-section pages ───────────────────────────
 
 for (const region of REGIONS) {
+  // Japanese copy from the app's region registry (null for non-JP regions).
+  const ja = regionJapanese(region);
+  const regionNameJa = region.nameJa || region.name;
+
   // Region home
-  add(
+  addJa(
     `/${region.slug}`,
     `${region.name} · resort town weather & conditions · feelzlike`,
     `Live weather, mountain conditions, road status, and visitor info for ${region.name} resort towns.`,
+    ja ? `${regionNameJa}のスキー場と麓の町のライブ天気・積雪・道路状況・観光情報。` : null,
     `<main>
       <h1>${esc(region.name)} · ${esc(region.subtitle)}</h1>
       <p>Live weather, conditions, and visitor information for ${esc(region.name)} resort towns.</p>
@@ -341,6 +366,12 @@ for (const region of REGIONS) {
       alerts:    `Current weather alerts and conditions for the ${region.name}.`,
       stay:      `Where to stay in the ${region.name} — accommodation options in all base towns.`,
     };
+
+    const jaDescriptions = ja ? {
+      mountains: `${regionNameJa}のスキー場一覧 · 積雪、リフト、天気をライブでチェック。`,
+      alerts:    `${regionNameJa}の気象警報と現在のコンディション。`,
+      stay:      `${regionNameJa}の宿泊情報 · 各拠点の町のホテル・旅館・ロッジ。`,
+    } : {};
 
     const bodies = {
       mountains: `<main>
@@ -375,10 +406,11 @@ for (const region of REGIONS) {
 
     };
 
-    add(
+    addJa(
       `/${region.slug}/${feature}`,
       `${region.name} · ${featureLabel.toLowerCase()} · feelzlike`,
       descriptions[feature] || `${featureLabel} for the ${region.name}.`,
+      jaDescriptions[feature] || null,
       bodies[feature] || `<main><h1>${esc(region.name)} · ${esc(featureLabel.toLowerCase())}</h1></main>`,
     );
   }
@@ -388,10 +420,15 @@ for (const region of REGIONS) {
   // mountains get a prerendered snapshot automatically. Route set must stay
   // identical to generate-sitemap.mjs / generate-rewrites.mjs.
   for (const m of regionMountains(region)) {
-    add(
+    const jm = ja?.mountains[m.id] || {};
+    const jaMountainDesc = ja
+      ? `${jm.nameJa || m.name}（${regionNameJa}）の積雪・天気予報・リフト情報をライブでチェック。${jm.blurbJa ? `${jm.blurbJa}。` : ""}`
+      : null;
+    addJa(
       `/${region.slug}/mountain/${m.id}`,
       `${m.name} · snow conditions & forecast · ${region.name} · feelzlike`,
       `Live snow conditions, weather forecast, and lift info for ${m.name} in the ${region.name}.`,
+      jaMountainDesc,
       `<main>
       <h1>${esc(m.name)} · ${esc(region.name)}</h1>
       <p>Live snow conditions, weather by elevation, and the extended forecast for ${esc(m.name)}.</p>
@@ -403,11 +440,17 @@ for (const region of REGIONS) {
   // ── Town home pages + all town sub-section pages ──────────────────────
 
   for (const town of region.towns) {
+    const jt = ja?.towns[town.id] || {};
+    const townNameJa = jt.nameJa || town.name;
+
     // Town home
-    add(
+    addJa(
       `/${region.slug}/${town.id}`,
       `${town.name} · ${region.name} conditions · feelzlike`,
       `Live weather, road conditions, and visitor info for ${town.name} in the ${region.name}.`,
+      ja
+        ? `${townNameJa}（${regionNameJa}）のライブ天気・道路状況・観光情報。${jt.blurbJa ? `${jt.blurbJa}。` : ""}`
+        : null,
       `<main>
       <h1>${esc(town.name)} · ${esc(region.name)}</h1>
       <p>${esc(town.blurb)}</p>
@@ -427,12 +470,22 @@ for (const region of REGIONS) {
       explore:   { label: "explore",           desc: `Things to do in ${town.name}, ${region.name} — trails, activities, and local experiences.` },
     };
 
+    const jaTownFeatureDesc = ja ? {
+      weather:   `${townNameJa}（${regionNameJa}）の天気予報と雨雲レーダー。`,
+      stay:      `${townNameJa}（${regionNameJa}）の宿泊 · ホテル・旅館・ロッジ。`,
+      eat:       `${townNameJa}（${regionNameJa}）のカフェ・レストラン。`,
+      roads:     `${townNameJa}（${regionNameJa}）周辺のライブ道路状況とライブカメラ。`,
+      transport: `${townNameJa}（${regionNameJa}）へのアクセス・交通手段。`,
+      explore:   `${townNameJa}（${regionNameJa}）の楽しみ方 · アクティビティと観光。`,
+    } : {};
+
     for (const feature of townFeatures(region)) {
       const meta = townFeatureMeta[feature];
-      add(
+      addJa(
         `/${region.slug}/${town.id}/${feature}`,
         `${town.name} · ${meta.label} · ${region.name} · feelzlike`,
         meta.desc,
+        jaTownFeatureDesc[feature] || null,
         `<main>
       <h1>${esc(town.name)} · ${esc(meta.label)}</h1>
       <p>${esc(meta.desc)}</p>

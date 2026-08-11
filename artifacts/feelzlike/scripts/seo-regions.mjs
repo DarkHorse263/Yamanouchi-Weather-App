@@ -86,6 +86,7 @@ export const REGIONS = [
   {
     slug: "yamanouchi",
     name: "Yamanouchi",
+    nameJa: "山ノ内",
     subtitle: "Nagano · Japan",
     country: "JP",
     hasAlerts: true,
@@ -104,6 +105,7 @@ export const REGIONS = [
   {
     slug: "nozawa-onsen",
     name: "Nozawa Onsen",
+    nameJa: "野沢温泉",
     subtitle: "Nagano · Japan",
     country: "JP",
     hasAlerts: false,
@@ -118,6 +120,7 @@ export const REGIONS = [
   {
     slug: "iiyama",
     name: "Iiyama",
+    nameJa: "飯山",
     subtitle: "Nagano · Japan",
     country: "JP",
     hasAlerts: false,
@@ -139,6 +142,7 @@ export const REGIONS = [
   {
     slug: "hakuba-valley",
     name: "Hakuba Valley",
+    nameJa: "白馬バレー",
     subtitle: "Nagano · Japan",
     country: "JP",
     hasAlerts: false,
@@ -164,6 +168,7 @@ export const REGIONS = [
   {
     slug: "myoko",
     name: "Myoko",
+    nameJa: "妙高",
     subtitle: "Niigata · Japan",
     country: "JP",
     hasAlerts: false,
@@ -186,6 +191,7 @@ export const REGIONS = [
   {
     slug: "niseko",
     name: "Niseko",
+    nameJa: "ニセコ",
     subtitle: "Hokkaido · Japan",
     country: "JP",
     hasAlerts: false,
@@ -206,6 +212,7 @@ export const REGIONS = [
   {
     slug: "furano",
     name: "Furano",
+    nameJa: "富良野",
     subtitle: "Hokkaido · Japan",
     country: "JP",
     hasAlerts: false,
@@ -223,6 +230,7 @@ export const REGIONS = [
   {
     slug: "sapporo",
     name: "Sapporo",
+    nameJa: "札幌",
     subtitle: "Hokkaido · Japan",
     country: "JP",
     hasAlerts: false,
@@ -240,6 +248,7 @@ export const REGIONS = [
   {
     slug: "tomamu-sahoro",
     name: "Tomamu & Sahoro",
+    nameJa: "トマム・佐幌",
     subtitle: "Hokkaido · Japan",
     country: "JP",
     hasAlerts: false,
@@ -256,6 +265,7 @@ export const REGIONS = [
   {
     slug: "asahikawa",
     name: "Asahikawa",
+    nameJa: "旭川",
     subtitle: "Hokkaido · Japan",
     country: "JP",
     hasAlerts: false,
@@ -272,6 +282,7 @@ export const REGIONS = [
   {
     slug: "rusutsu-kiroro",
     name: "Rusutsu & Kiroro",
+    nameJa: "ルスツ・キロロ",
     subtitle: "Hokkaido · Japan",
     country: "JP",
     hasAlerts: false,
@@ -288,6 +299,7 @@ export const REGIONS = [
   {
     slug: "minakami",
     name: "Minakami",
+    nameJa: "みなかみ",
     subtitle: "Gunma · Japan",
     country: "JP",
     hasAlerts: false,
@@ -304,6 +316,7 @@ export const REGIONS = [
   {
     slug: "kusatsu-manza",
     name: "Kusatsu & Manza",
+    nameJa: "草津・万座",
     subtitle: "Gunma · Japan",
     country: "JP",
     hasAlerts: false,
@@ -320,6 +333,7 @@ export const REGIONS = [
   {
     slug: "hachimantai",
     name: "Hachimantai",
+    nameJa: "八幡平",
     subtitle: "Iwate · Japan",
     country: "JP",
     hasAlerts: false,
@@ -335,6 +349,7 @@ export const REGIONS = [
   {
     slug: "yuzawa",
     name: "Yuzawa",
+    nameJa: "湯沢",
     subtitle: "Niigata · Japan",
     country: "JP",
     hasAlerts: false,
@@ -356,6 +371,7 @@ export const REGIONS = [
   {
     slug: "zao-onsen",
     name: "Zao Onsen",
+    nameJa: "蔵王温泉",
     subtitle: "Yamagata · Japan",
     country: "JP",
     hasAlerts: false,
@@ -370,6 +386,7 @@ export const REGIONS = [
   {
     slug: "hakkoda-aomori-spring",
     name: "Hakkoda & Aomori Spring",
+    nameJa: "八甲田・青森スプリング",
     subtitle: "Aomori · Japan",
     country: "JP",
     hasAlerts: false,
@@ -387,6 +404,7 @@ export const REGIONS = [
   {
     slug: "appi-shizukuishi",
     name: "Appi & Shizukuishi",
+    nameJa: "安比・雫石",
     subtitle: "Iwate · Japan",
     country: "JP",
     hasAlerts: false,
@@ -404,6 +422,7 @@ export const REGIONS = [
   {
     slug: "bandai",
     name: "Bandai",
+    nameJa: "磐梯",
     subtitle: "Fukushima · Japan",
     country: "JP",
     hasAlerts: false,
@@ -420,6 +439,7 @@ export const REGIONS = [
   {
     slug: "daisen",
     name: "Daisen",
+    nameJa: "大山",
     subtitle: "Tottori · Japan",
     country: "JP",
     hasAlerts: false,
@@ -1473,4 +1493,51 @@ export function regionMountains(region) {
     );
   }
   return out;
+}
+
+// ── Japanese SEO copy extraction ─────────────────────────────────────────
+// Japan pages get Japanese meta descriptions in the prerendered snapshots so
+// Google Japan shows Japanese snippets. The app's region registry
+// (src/regions/<slug>.ts) already carries nameJa/blurbJa for JP mountains and
+// towns — extract them here rather than duplicating the copy. Missing fields
+// simply return undefined; prerender.mjs falls back to templated Japanese.
+
+/** Extract nameJa/blurbJa from the object literal containing `id: "<id>"`. */
+function extractJaById(src, id) {
+  const m = new RegExp(`id:\\s*"${id.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`).exec(src);
+  if (!m) return {};
+  const start = src.lastIndexOf("{", m.index);
+  if (start === -1) return {};
+  let depth = 0;
+  let end = -1;
+  for (let i = start; i < src.length; i++) {
+    const ch = src[i];
+    if (ch === "{") depth++;
+    else if (ch === "}") {
+      depth--;
+      if (depth === 0) { end = i; break; }
+    }
+  }
+  if (end === -1) return {};
+  const block = src.slice(start, end);
+  return {
+    nameJa: /nameJa:\s*"([^"]+)"/.exec(block)?.[1],
+    blurbJa: /blurbJa:\s*"([^"]+)"/.exec(block)?.[1],
+  };
+}
+
+/**
+ * Returns { mountains: { [id]: {nameJa?, blurbJa?} }, towns: { [id]: ... } }
+ * for a JP region, or null for every other country (English SEO output for
+ * non-JP countries must stay unchanged).
+ */
+export function regionJapanese(region) {
+  if (region.country !== "JP") return null;
+  const file = _join(_here, "..", "src", "regions", `${region.slug}.ts`);
+  const src = readFileSync(file, "utf8");
+  const mountains = {};
+  for (const m of regionMountains(region)) mountains[m.id] = extractJaById(src, m.id);
+  const towns = {};
+  for (const t of region.towns) towns[t.id] = extractJaById(src, t.id);
+  return { mountains, towns };
 }
