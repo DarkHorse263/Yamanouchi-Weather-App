@@ -911,33 +911,33 @@ description = "for facebook feed placements"
 id = "tLEgPLw4-YbtkgqVxa26L"
 uri = "file://exports/video-ads/feelzlike-anthem-all-formats.zip"
 type = "unspecified"
-title = "all formats package (zip · 106 MB)"
-description = "24 files · au / us / japan / japan-english · vertical + landscape + square · sound and silent"
+title = "all formats · one zip"
+description = "Every cut in every format in a single 102MB zip — use the four smaller packs if this one is slow"
 
 [[outputs]]
 id = "ahKX_btBYHDI0oeFLL0CC"
 uri = "file://exports/video-ads/fb-pack-australia.zip"
 type = "unspecified"
-title = "australia pack (26 MB)"
-description = "vertical + landscape + square · sound and silent"
+title = "fb pack · australia"
+description = "Australian cut · vertical, landscape, square + silent versions (25MB)"
 
 [[outputs]]
 id = "J9J-b9q2ULPmu0zFGA7DF"
 uri = "file://exports/video-ads/fb-pack-usa.zip"
 type = "unspecified"
-title = "usa pack (23 MB)"
-description = "vertical + landscape + square · sound and silent"
+title = "fb pack · usa"
+description = "US cut · vertical, landscape, square + silent versions (22MB)"
 
 [[outputs]]
 id = "OjhdTCpBvTI9nicXy5xhi"
 uri = "file://exports/video-ads/fb-pack-japan.zip"
 type = "unspecified"
-title = "japan pack (33 MB)"
-description = "japanese screens + voiceover · all formats"
+title = "fb pack · japan"
+description = "Japanese cut · vertical, landscape, square + silent versions (32MB)"
 
 [[outputs]]
 id = "86qoQfrcE6neXDjgxMzEd"
 uri = "file://exports/video-ads/fb-pack-japan-english.zip"
 type = "unspecified"
-title = "japan english pack (25 MB)"
-description = "japan screens, english voiceover · all formats"
+title = "fb pack · japan (english)"
+description = "English-language Japan cut · all formats (24MB)"
