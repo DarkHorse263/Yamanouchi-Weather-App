@@ -30,10 +30,10 @@ export interface ResortHeroProps {
   elevationUnitLabel?: string;
 }
 
-function formatAgo(iso: string | undefined | null, now: number): string {
-  if (!iso) return "-";
+function formatAgo(iso: string | undefined | null, now: number): string | null {
+  if (!iso) return null;
   const t = new Date(iso).getTime();
-  if (Number.isNaN(t)) return "-";
+  if (Number.isNaN(t)) return null;
   const diffSec = Math.max(0, Math.round((now - t) / 1000));
   if (diffSec < 60) return "just now";
   const min = Math.round(diffSec / 60);
@@ -111,7 +111,7 @@ export function ResortHero({
             </span>
           )}
           <span className="byline text-white/60 tabular-nums">Elev {Math.round(cvElev(elevation))}{elevationUnitLabel}</span>
-          {observedAt && (
+          {observedAt && formatAgo(observedAt, now) != null && (
             <span className="byline text-white/80 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/10 border border-white/20">
               <Clock className="w-3 h-3" strokeWidth={1.75} />
               <span>

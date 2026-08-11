@@ -33,7 +33,7 @@ const paths = [
   "/ca",
   "/ca/all-ski-areas",
   "/us",
-  "/plan",
+  "/compare",
   "/premium",
   "/near-you",
   "/legal/privacy",

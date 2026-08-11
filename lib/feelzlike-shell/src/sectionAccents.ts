@@ -22,7 +22,7 @@ export const SECTION_ACCENTS: Record<string, string> = {
   "/stay": "#D97706", // deeper amber (AA-passing on white)
   "/eat": "#EA580C", // deeper orange
   "/explore": "#16A34A", // deeper green (AA-passing on white)
-  "/plan": "#D500F9", // vivid violet
+  "/compare": "#D500F9", // vivid violet
   "/premium": "#CA8A04", // deeper gold (AA-passing on white)
 };
 

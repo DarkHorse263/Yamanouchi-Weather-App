@@ -669,7 +669,7 @@ if (process.env.NODE_ENV === "production") {
   // Top-level routes handled by the SPA (before the /:region catch-all).
   const KNOWN_TOP_LEVEL = new Set([
     "/", "/countries", "/about", "/au", "/jp", "/nz", "/ca", "/ca/all-ski-areas", "/us", "/near-you",
-    "/plan", "/legal/privacy", "/legal/terms",
+    "/compare", "/legal/privacy", "/legal/terms",
     "/premium",
     "/alerts/verify", "/alerts/manage", "/alerts/unsubscribed",
     "/account",
@@ -765,9 +765,9 @@ if (process.env.NODE_ENV === "production") {
       title: "feelzlike premium · snow alerts for your towns · feelzlike",
       description: "feelzlike premium · email snow and powder alerts for your favourite resort towns across Australia, Japan, and New Zealand.",
     },
-    "/plan": {
-      title: "trip planner · find the best conditions · feelzlike",
-      description: "Plan a multi-day resort town trip by comparing forecasts across regions and towns.",
+    "/compare": {
+      title: "compare mountains · snow side by side · feelzlike",
+      description: "Compare the next week of fresh snow and temps across the mountains you're choosing between.",
     },
     "/legal/privacy": {
       title: "privacy policy · feelzlike",
@@ -926,6 +926,14 @@ if (process.env.NODE_ENV === "production") {
     const camsMatch = urlPath.match(/^(\/[^/]+\/[^/]+)\/cams\/?$/);
     if (camsMatch) {
       res.redirect(301, `${camsMatch[1]}/roads`);
+      return;
+    }
+
+    // Server-side 301 redirect: /plan was renamed to /compare in Aug 2026
+    // (the page is a snow comparison tool, not a trip planner). Server-side
+    // so crawlers and old links land on the canonical URL.
+    if (/^\/plan\/?$/.test(urlPath)) {
+      res.redirect(301, "/compare/");
       return;
     }
 

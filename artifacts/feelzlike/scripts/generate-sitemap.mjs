@@ -65,7 +65,7 @@ const staticUrls = [
   url("/ca",              "daily",   "0.9"),
   url("/ca/all-ski-areas","weekly",  "0.6"),
   url("/us",              "daily",   "0.9"),
-  url("/plan",            "weekly",  "0.8"),
+  url("/compare",         "weekly",  "0.8"),
   url("/premium",         "weekly",  "0.6"),
   url("/near-you",        "weekly",  "0.6"),
   url("/legal/privacy",   "monthly", "0.4"),

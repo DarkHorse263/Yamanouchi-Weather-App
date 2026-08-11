@@ -79,9 +79,9 @@ const HOW_TO: HowToStep[] = [
     icon: Search,
     title: "pick a country, then a region",
     titleJa: "国を選んで、エリアを選ぶ",
-    text: "browse australia, new zealand, japan or canada, then choose a region like the snowy mountains or hakuba valley. every region lists its base towns and mountains.",
+    text: "browse australia, new zealand, japan, canada or the united states, then choose a region like the snowy mountains or hakuba valley. every region lists its base towns and mountains.",
     textJa:
-      "オーストラリア・ニュージーランド・日本・カナダから選び、白馬エリアやスノーウィーマウンテンズなどのエリアを選択します。各エリアにはベースタウンとスキー場の一覧があります。",
+      "オーストラリア・ニュージーランド・日本・カナダ・アメリカから選び、白馬エリアやスノーウィーマウンテンズなどのエリアを選択します。各エリアにはベースタウンとスキー場の一覧があります。",
   },
   {
     icon: CloudSnow,
@@ -103,9 +103,9 @@ const HOW_TO: HowToStep[] = [
     icon: Map,
     title: "plan the rest of the trip",
     titleJa: "旅の残りも計画する",
-    text: "each base town has stay, eat, transport and explore pages, and the trip planner compares snow across mountains when you're deciding where to go.",
+    text: "each base town has stay, eat, transport and explore pages, and compare mountains puts the snow outlook for your shortlist side by side when you're deciding where to go.",
     textJa:
-      "各ベースタウンには宿・食事・交通・観光のページがあります。行き先に迷ったら、トリッププランナーで山ごとの雪を比べられます。",
+      "各ベースタウンには宿・食事・交通・観光のページがあります。行き先に迷ったら、「山を比べる」で山ごとの雪を比べられます。",
   },
 ];
 

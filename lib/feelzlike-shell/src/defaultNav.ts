@@ -32,9 +32,9 @@ export const DEFAULT_TOWN_NAV: NavItem[] = [
  * inline from the Today page; radar embedded in /weather).
  */
 export const DEFAULT_MOUNTAIN_NAV: NavItem[] = [
-  // Trip planner · finds the best window to go; global path so AppShell doesn't
-  // rewrite it to /:region/plan.
-  { path: "/plan", icon: CalendarDays, label: "Plan a trip", labelJa: "旅行計画" },
+  // Compare mountains · side-by-side snow comparison; global path so AppShell
+  // doesn't rewrite it to /:region/compare.
+  { path: "/compare", icon: CalendarDays, label: "Compare mountains", labelJa: "山を比べる" },
   // Premium hub · lists what's premium and, during the launch promo, that it
   // is free for subscribers until 31 december 2026 (monthly & yearly plans
   // open after). Global path (root-escaped in AppShell) so the region router

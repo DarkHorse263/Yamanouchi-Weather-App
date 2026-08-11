@@ -64,12 +64,16 @@ export function HomeRegionCard() {
           >
             <div className="min-w-0">
               <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-bold leading-none tabular-nums text-[#0055FF]">
-                  {stats?.feelsLikeC != null ? u.temp(stats.feelsLikeC) : "--"}&deg;
-                </span>
-                <span className="text-[9px] font-semibold uppercase tracking-[0.12em] text-slate-500">
-                  feelzlike
-                </span>
+                {stats?.feelsLikeC != null && (
+                  <>
+                    <span className="text-3xl font-bold leading-none tabular-nums text-[#0055FF]">
+                      {u.temp(stats.feelsLikeC)}&deg;
+                    </span>
+                    <span className="text-[9px] font-semibold uppercase tracking-[0.12em] text-slate-500">
+                      feelzlike
+                    </span>
+                  </>
+                )}
               </div>
               <p className="mt-1.5 inline-flex items-center gap-1 text-[12px] font-semibold text-[#0055FF]">
                 see full forecast &amp; radar

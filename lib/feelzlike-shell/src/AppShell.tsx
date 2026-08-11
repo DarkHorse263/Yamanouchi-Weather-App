@@ -209,7 +209,7 @@ export function AppShell({
   // hrefs to /:region/<path> and bounce them through TownLayout's
   // unknown-town redirect. The `~/` prefix is wouter's documented
   // escape that pins navigation to the app root.
-  const GLOBAL_MOUNTAIN_PATHS = new Set(["/premium", "/plan", "/account"]);
+  const GLOBAL_MOUNTAIN_PATHS = new Set(["/premium", "/compare", "/account"]);
   const isGlobalMountainPath = (p: string) => GLOBAL_MOUNTAIN_PATHS.has(p);
 
   const isActiveTown = (subpath: string) =>
@@ -276,7 +276,7 @@ export function AppShell({
     pushTown("/stay", "travel");           // Stay
     pushTown("/eat", "travel");            // Eat
     pushTown("/explore", "travel");        // Explore
-    pushMountain("/plan", "travel");       // Trip planner
+    pushMountain("/compare", "travel");    // Compare mountains
     
     pushMountain("/premium", "bottom");    // Premium hub
     pushMountain("/account", "bottom");    // Member account
@@ -749,7 +749,7 @@ function SeasonPill({
           "inline-flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-semibold tracking-wider uppercase transition-colors",
           season === "winter"
             ? "bg-foreground text-background"
-            : "text-slate-500 hover:text-white",
+            : "text-slate-500 hover:text-slate-800",
         )}
       >
         <Snowflake className="w-3 h-3" />
@@ -765,7 +765,7 @@ function SeasonPill({
           "inline-flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-semibold tracking-wider uppercase transition-colors",
           season === "green"
             ? "bg-foreground text-background"
-            : "text-slate-500 hover:text-white",
+            : "text-slate-500 hover:text-slate-800",
         )}
       >
         <Leaf className="w-3 h-3" />
@@ -796,7 +796,7 @@ function LangPill({
             "px-2 py-1 rounded-full text-[10px] font-semibold tracking-wider uppercase transition-colors",
             current === loc
               ? "bg-foreground text-background"
-              : "text-slate-500 hover:text-white",
+              : "text-slate-500 hover:text-slate-800",
           )}
         >
           {loc === "ja" ? "日本語" : "EN"}

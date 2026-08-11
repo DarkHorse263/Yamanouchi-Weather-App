@@ -98,7 +98,7 @@ function SnowBar({
       <div className="flex items-baseline justify-between">
         <p className="byline text-muted-foreground/80">{label}</p>
         <p className={cn("font-display text-base tabular-nums", value > 0 ? "text-snow-accent" : "text-foreground")} data-numeric>
-          {value > 0 ? display : "-"}
+          {value > 0 ? display : "0"}
           <span className="text-muted-foreground/60 text-[10px] ml-1 font-normal">{unitLabel}</span>
         </p>
       </div>

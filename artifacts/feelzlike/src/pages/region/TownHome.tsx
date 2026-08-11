@@ -417,7 +417,12 @@ export function TownHome() {
             }
           />
         }
-        badge={<LiveBadge tone="onDark" label={t("Live", "ライブ")} />}
+        badge={
+          // Only claim "live" when we actually have a timestamped reading.
+          lastUpdated
+            ? <LiveBadge tone="onDark" label={t("Live", "ライブ")} />
+            : undefined
+        }
       />
 
       {/* FEATURED PARTNER · AD BANNER variant. Paid, disclosed placement

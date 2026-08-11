@@ -219,12 +219,15 @@ export default function ResortDetail() {
       ? [{ label: t("Gusts", "突風"), value: `${u.wind(current.windGust)} ${u.windUnit}`, icon: Wind }]
       : []),
     { label: t("Humidity", "湿度"), value: `${current.humidity}%`, icon: Droplets },
-    {
-      label: t("Snow depth · model", "積雪 · 予測値"),
-      value: current.snowDepth != null ? u.snow(current.snowDepth) : "-",
-      icon: Snowflake,
-      accent: "snow",
-    },
+    // Hide the stat entirely when there's no reading — never a bare "-".
+    ...(current.snowDepth != null
+      ? [{
+          label: t("Snow depth · model", "積雪 · 予測値"),
+          value: u.snow(current.snowDepth),
+          icon: Snowflake,
+          accent: "snow" as const,
+        }]
+      : []),
     ...(current.dewpoint !== undefined
       ? [{ label: t("Dew point", "露点"), value: `${u.temp(current.dewpoint)}${u.tempUnit}`, icon: Droplets }]
       : []),
@@ -569,8 +572,8 @@ export default function ResortDetail() {
           links={safetyLinks}
           subhead={t("Always check official sources before heading out.", "出発前に必ず公式情報をご確認ください。")}
           disclaimer={t(
-            "Conditions update every 10 minutes. Mountain weather changes fast - when in doubt, contact the resort directly.",
-            "状況は10分ごとに更新されます。山の天気は急変します。判断に迷う場合はスキー場へ直接お問い合わせください。",
+            "Weather updates every 10 minutes. Snow depth and cams update when resorts publish new data. Mountain weather changes fast - when in doubt, contact the resort directly.",
+            "天気は10分ごとに更新されます。積雪とライブカメラはリゾートの公開時に更新されます。山の天気は急変します。判断に迷う場合はスキー場へ直接お問い合わせください。",
           )}
         />
       </div>

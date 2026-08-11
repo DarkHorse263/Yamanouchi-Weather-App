@@ -55,8 +55,8 @@ from = "/us/"
 to = "/us/index.html"
 
 [[services.production.rewrites]]
-from = "/plan/"
-to = "/plan/index.html"
+from = "/compare/"
+to = "/compare/index.html"
 
 [[services.production.rewrites]]
 from = "/premium/"

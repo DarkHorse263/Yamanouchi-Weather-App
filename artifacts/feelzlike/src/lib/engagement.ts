@@ -25,7 +25,7 @@ function ping(body: Record<string, string>): void {
  * Collapse a route path into a coarse section label:
  *   "/"                      → "home"
  *   "/snowy-mountains/..."   → "snowy-mountains" (region pages)
- *   "/plan", "/premium", ... → their own label
+ *   "/compare", "/premium", ... → their own label
  *   "/admin..."              → not counted (owner traffic isn't engagement)
  */
 export function pageLabelFor(path: string): string | null {

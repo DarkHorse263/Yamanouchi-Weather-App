@@ -128,13 +128,13 @@ export default function Welcome() {
           <CountryPicker />
 
           <p className="mt-6 text-center text-[12px] text-white/60" style={balance}>
-            planning a trip?{" "}
+            deciding where to go?{" "}
             <Link
-              href="/plan"
+              href="/compare"
               onClick={() => track("welcome_plan_link_click", { category: "navigation" })}
               className="text-white font-semibold underline underline-offset-2 hover:text-white/80"
             >
-              open the trip planner
+              compare mountains
             </Link>
           </p>
         </section>

@@ -76,10 +76,14 @@ export function UpdateStamp({
         className={`inline-flex items-center gap-1.5 text-[11px] lowercase font-bold ${noTimestampColor} ${className}`}
       >
         <Clock className="w-3 h-3" />
-        {t("No timestamp", "更新時刻なし")}
+        {t("Last update unknown", "最終更新は不明")}
       </span>
     );
   }
+
+  // Data older than 24h gets a subtle amber dot so stale readings are
+  // visually distinguishable from fresh ones at a glance.
+  const isStale = now - ms > 24 * 60 * 60_000;
 
   const intervalMs = intervalMin * 60_000;
   const nextAt = ms + intervalMs;
@@ -90,6 +94,13 @@ export function UpdateStamp({
       className={`inline-flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] lowercase font-bold ${baseColor} ${className}`}
     >
       <span className="inline-flex items-center gap-1">
+        {isStale && (
+          <span
+            className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0"
+            title={t("More than 24 hours old", "24時間以上前のデータ")}
+            aria-label={t("More than 24 hours old", "24時間以上前のデータ")}
+          />
+        )}
         <Clock className="w-3 h-3" />
         {t("Updated", "更新")}{" "}
         <span className={`${strongColor} tabular-nums`}>

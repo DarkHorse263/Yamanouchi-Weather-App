@@ -1,4 +1,4 @@
-import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
+import { Switch, Route, Redirect, Router as WouterRouter, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider, useQueryClient } from "@tanstack/react-query";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Welcome from "@/pages/Welcome";
@@ -234,7 +234,11 @@ function Router() {
       <Route path="/premium/" component={Premium} />
       <Route path="/account" component={Account} />
       <Route path="/account/" component={Account} />
-      <Route path="/plan" component={TripPlanner} />
+      <Route path="/compare" component={TripPlanner} />
+      <Route path="/compare/" component={TripPlanner} />
+      {/* /plan was renamed to /compare (Aug 2026); server also 301s for crawlers */}
+      <Route path="/plan"><Redirect to="/compare" replace /></Route>
+      <Route path="/plan/"><Redirect to="/compare" replace /></Route>
       <Route path="/admin" component={AdminStats} />
       <Route path="/au"><CountryHome code="AU" /></Route>
       <Route path="/au/"><CountryHome code="AU" /></Route>

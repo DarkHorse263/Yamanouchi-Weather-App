@@ -298,12 +298,12 @@ add(
 );
 
 add(
-  "/plan",
-  "trip planner · find the best conditions · feelzlike",
-  "Plan a multi-day resort town trip by comparing forecasts across regions and towns.",
+  "/compare",
+  "compare mountains · snow side by side · feelzlike",
+  "Compare the next week of fresh snow and temps across the mountains you're choosing between.",
   `<main>
-    <h1>trip planner</h1>
-    <p>Compare multi-day forecasts across resort towns to find the best conditions for your trip.</p>
+    <h1>compare mountains</h1>
+    <p>Compare the coming week of snow and temps across resort mountains, side by side.</p>
     <section>
       <h2>Regions to compare</h2>
       <ul>

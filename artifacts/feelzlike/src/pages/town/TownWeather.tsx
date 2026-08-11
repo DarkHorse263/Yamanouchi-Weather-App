@@ -74,7 +74,12 @@ export function TownWeather() {
               }
             />
           }
-          badge={<LiveBadge tone="onDark" label={t("Live", "ライブ")} />}
+          badge={
+            // Only claim "live" when we actually have a timestamped reading.
+            q.data?.current?.time
+              ? <LiveBadge tone="onDark" label={t("Live", "ライブ")} />
+              : undefined
+          }
         />
 
         <div className="mt-4 flex justify-end">
@@ -110,8 +115,8 @@ export function TownWeather() {
             <Radar t={t} center={{ lat: town.lat, lng: town.lng }} />
             <p className="byline text-white/60 mt-8">
               {t(
-                `Source: ${region.weatherSource?.label ?? "Open-Meteo"} · updated every 10 min`,
-                `出典: ${region.weatherSource?.labelJa ?? region.weatherSource?.label ?? "Open-Meteo"} · 10分毎に更新`,
+                `Source: ${region.weatherSource?.label ?? "Open-Meteo"} · weather updates every 10 min · snow depth and cams update when resorts publish new data`,
+                `出典: ${region.weatherSource?.labelJa ?? region.weatherSource?.label ?? "Open-Meteo"} · 天気は10分毎に更新 · 積雪とライブカメラはリゾートの公開時に更新`,
               )}
             </p>
           </>

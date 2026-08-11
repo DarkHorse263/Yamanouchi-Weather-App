@@ -51,8 +51,8 @@ export default function Terms() {
           feelzlike is an information service. It aggregates publicly
           available weather forecasts, road status, traffic camera
           feeds, transport operator information and venue data for
-          mountain regions in Australia, Japan and other countries we
-          add over time.
+          mountain regions in Australia, New Zealand, Japan, Canada,
+          the United States and other countries we add over time.
         </p>
         <p>
           The Service is provided for general planning purposes. It is

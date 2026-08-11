@@ -450,7 +450,8 @@ export function CountryPicker() {
       >
         {liveCount} {liveCount === 1 ? "region" : "regions"} live &middot;{" "}
         <span className="tabular-nums">{data?.sourceCount ?? 7}</span> official sources &middot;{" "}
-        <span className="tabular-nums">{data?.refreshIntervalMin ?? 15}</span>&nbsp;min refresh
+        weather every <span className="tabular-nums">{data?.refreshIntervalMin ?? 15}</span>&nbsp;min &middot;{" "}
+        snow depth + cams when resorts publish
       </p>
     </>
   );

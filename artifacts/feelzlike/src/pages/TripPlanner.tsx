@@ -333,9 +333,9 @@ export default function TripPlanner() {
   return (
     <div className="min-h-screen bg-[#0055FF] pb-8 transition-colors duration-500">
       <PageMeta
-        title="Trip planner"
+        title="Compare mountains"
         description="Compare the snow across the mountains you're choosing between. See the next week of fresh snow and temps side by side, so you can pick where to go."
-        path="/plan"
+        path="/compare"
       />
       <div className="max-w-3xl mx-auto px-4 md:px-8 py-6 md:py-10 space-y-6">
         <Link
@@ -347,7 +347,7 @@ export default function TripPlanner() {
 
         <div>
           <p className="inline-flex items-center gap-1.5 text-xs font-bold text-white/90 uppercase tracking-wider">
-            <CalendarRange className="w-3.5 h-3.5" /> trip planner
+            <CalendarRange className="w-3.5 h-3.5" /> compare mountains
           </p>
           <h1 className="text-3xl md:text-4xl font-black text-white mt-2 leading-tight">
             compare your mountains.

@@ -79,7 +79,7 @@ export function tripPlannerCatalog(country: CountryCode): CatalogMountain[] {
  */
 export function plannerCountries(): CountryCode[] {
   // Season-first ordering: AU + NZ (jun-oct season) before Japan (dec-mar).
-  const order: CountryCode[] = ["AU", "NZ", "JP", "CA"];
+  const order: CountryCode[] = ["AU", "NZ", "JP", "CA", "US"];
   return order.filter((c) => tripPlannerCatalog(c).length > 0);
 }
 

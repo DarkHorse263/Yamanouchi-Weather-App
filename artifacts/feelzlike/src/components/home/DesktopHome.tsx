@@ -119,6 +119,10 @@ export function DesktopHome() {
       >
         <p className={eyebrow}>where we cover</p>
         <h2 className={h2}>five countries, one app</h2>
+        <p className="mt-2 text-sm font-bold text-white/70 lowercase">
+          {COUNTRIES.reduce((n, c) => n + regionsForCountry(c).length, 0)} regions
+          and growing · every reading names its source
+        </p>
 
         <div className="mt-7 grid grid-cols-2 gap-5 xl:grid-cols-4">
           {COUNTRIES.map((code) => {

@@ -253,10 +253,17 @@ export function MountainSnapshot({
             delay={0.05}
           >
             <Snowflake className="w-3.5 h-3.5 text-muted-foreground/60 mb-1.5" strokeWidth={1.75} />
-            <p className="font-display text-3xl md:text-[2.25rem] leading-none text-foreground tabular-nums" data-numeric>
-              {freezingLevel != null ? Math.round(cvElev(freezingLevel)) : "-"}
-            </p>
-            <p className="byline text-muted-foreground/70 mt-1.5">{elevationUnitLabel} · {copy.freezeUnit}</p>
+            {freezingLevel != null ? (
+              <>
+                <p className="font-display text-3xl md:text-[2.25rem] leading-none text-foreground tabular-nums" data-numeric>
+                  {Math.round(cvElev(freezingLevel))}
+                </p>
+                <p className="byline text-muted-foreground/70 mt-1.5">{elevationUnitLabel} · {copy.freezeUnit}</p>
+              </>
+            ) : (
+              // No bare "-": say plainly that the reading is missing.
+              <p className="text-[11px] font-medium text-muted-foreground/70 lowercase">no data</p>
+            )}
             {verticalDelta != null && (
               <p className={cn(
                 "text-[11px] mt-1.5 inline-flex items-center gap-0.5 tabular-nums font-medium",
@@ -279,17 +286,24 @@ export function MountainSnapshot({
             innerWash={windTier.wash}
             glowClassName={windTier.glowClass}
             ringClassName={windTier.ringClass}
-            ariaLabel={`Wind gusts ${Math.round(cvWind(gust ?? windSpeed))} ${windUnitLabel === "mph" ? "miles per hour" : "kilometres per hour"}`}
+            ariaLabel={`${gust != null ? "Wind gusts" : "Wind"} ${Math.round(cvWind(gust ?? windSpeed))} ${windUnitLabel === "mph" ? "miles per hour" : "kilometres per hour"}`}
             delay={0.12}
           >
             <Wind className="w-3.5 h-3.5 text-muted-foreground/60 mb-1.5" strokeWidth={1.75} />
             <p className="font-display text-3xl md:text-[2.25rem] leading-none text-foreground tabular-nums" data-numeric>
               {Math.round(cvWind(gust ?? windSpeed))}
             </p>
-            <p className="byline text-muted-foreground/70 mt-1.5">{windUnitLabel} {copy.gustsUnit}</p>
-            <p className="text-[11px] text-muted-foreground/70 mt-1.5 tabular-nums font-medium">
-              {copy.steady} {Math.round(cvWind(windSpeed))} {windUnitLabel}
+            {/* Only label the number as "gusts" when we truly have a gust
+                reading — otherwise it is the steady wind speed and saying
+                gusts would overstate it. */}
+            <p className="byline text-muted-foreground/70 mt-1.5">
+              {windUnitLabel}{gust != null ? ` ${copy.gustsUnit}` : ""}
             </p>
+            {gust != null && (
+              <p className="text-[11px] text-muted-foreground/70 mt-1.5 tabular-nums font-medium">
+                {copy.steady} {Math.round(cvWind(windSpeed))} {windUnitLabel}
+              </p>
+            )}
           </MetricRing>
         </RingTile>
 

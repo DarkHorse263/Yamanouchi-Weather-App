@@ -70,10 +70,10 @@ const PREMIUM_FEATURES: Feature[] = [
   },
   {
     Icon: CalendarRange,
-    title: "multi-day trip planner",
+    title: "compare mountains",
     blurb: "stack the next 7 days of conditions across your saved mountains.",
     status: "live",
-    href: "/plan",
+    href: "/compare",
   },
   {
     Icon: WifiOff,
