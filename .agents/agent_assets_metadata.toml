@@ -793,21 +793,21 @@ id = "bOM0gFMxQYveQomFQTVRv"
 uri = "file://exports/video-ads/feelzlike-anthem-au.mp4"
 type = "video"
 title = "feelzlike anthem · australian voice · 34s"
-description = "AU + NZ screens · with more to come"
+description = "opener now shows flags + world coverage map"
 
 [[outputs]]
 id = "v9oiZTX4lLRwU242MF2il"
 uri = "file://exports/video-ads/feelzlike-anthem-us.mp4"
 type = "video"
 title = "feelzlike anthem · american voice · 33s"
-description = "fresh clean take · USA + Canada screens"
+description = "opener now shows flags + world coverage map"
 
 [[outputs]]
 id = "OskuCzKteJUAS5SDUz4FV"
 uri = "file://exports/video-ads/feelzlike-anthem-jp.mp4"
 type = "video"
 title = "feelzlike anthem · 日本語 · 44s"
-description = "now featuring Madarao + Snowball Japan partner card"
+description = "Madarao + Snowball card leads · flags + map in opener"
 
 [[outputs]]
 id = "Dhpc1T1vbppayrmbvNmf9"
@@ -877,7 +877,7 @@ id = "TtHl0DZIwBb-5fpMIaTMx"
 uri = "file://exports/video-ads/feelzlike-anthem-jp-english.mp4"
 type = "video"
 title = "feelzlike anthem · japan · australian voice · 35s"
-description = "now featuring Madarao + Snowball Japan partner card"
+description = "Madarao leads · flags + map in opener"
 
 [[outputs]]
 id = "_B8SPCO9O2KYDigrDEPMC"
