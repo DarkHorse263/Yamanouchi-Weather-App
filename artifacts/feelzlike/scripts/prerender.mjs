@@ -130,6 +130,19 @@ function withJaBody(body, ja) {
   return body.replace(/<\/main>\s*$/, `  <p lang="ja">${esc(ja)}</p>\n    </main>`);
 }
 
+/** "English Name（日本語名）" for JP titles; plain EN when no distinct ja name.
+ *  Long official ja names (e.g. "ニセコマウンテンリゾート グラン・ヒラフ") are
+ *  shortened to their final space-separated segment to keep titles within
+ *  reasonable SERP length ("グラン・ヒラフ"). */
+function withJaName(en, jaName) {
+  if (!jaName || jaName === en) return en;
+  let ja = jaName;
+  if (ja.length > 10 && /[\s\u3000]/.test(ja)) {
+    ja = ja.split(/[\s\u3000]+/).filter(Boolean).pop();
+  }
+  return `${en}（${ja}）`;
+}
+
 function addJa(path, title, enDescription, jaDescription, body) {
   add(path, title, biDesc(jaDescription, enDescription), withJaBody(body, jaDescription));
 }
@@ -199,7 +212,7 @@ add(
 
 addJa(
   "/jp",
-  "Japan · resort town weather · feelzlike",
+  "Japan（日本） · resort town weather · feelzlike",
   "Live weather and conditions for resort towns in Japan — Yamanouchi, Nozawa Onsen, Iiyama, Hakuba Valley (Nagano), and Myoko (Niigata).",
   "日本のスキーリゾートの町のライブ天気・積雪・道路状況 · 志賀高原、野沢温泉、白馬、妙高、ニセコほか。",
   `<main>
@@ -340,7 +353,7 @@ for (const region of REGIONS) {
   // Region home
   addJa(
     `/${region.slug}`,
-    `${region.name} · resort town weather & conditions · feelzlike`,
+    `${withJaName(region.name, region.nameJa)} · resort town weather & conditions · feelzlike`,
     `Live weather, mountain conditions, road status, and visitor info for ${region.name} resort towns.`,
     ja ? `${regionNameJa}のスキー場と麓の町のライブ天気・積雪・道路状況・観光情報。` : null,
     `<main>
@@ -408,7 +421,7 @@ for (const region of REGIONS) {
 
     addJa(
       `/${region.slug}/${feature}`,
-      `${region.name} · ${featureLabel.toLowerCase()} · feelzlike`,
+      `${withJaName(region.name, region.nameJa)} · ${featureLabel.toLowerCase()} · feelzlike`,
       descriptions[feature] || `${featureLabel} for the ${region.name}.`,
       jaDescriptions[feature] || null,
       bodies[feature] || `<main><h1>${esc(region.name)} · ${esc(featureLabel.toLowerCase())}</h1></main>`,
@@ -426,7 +439,7 @@ for (const region of REGIONS) {
       : null;
     addJa(
       `/${region.slug}/mountain/${m.id}`,
-      `${m.name} · snow conditions & forecast · ${region.name} · feelzlike`,
+      `${withJaName(m.name, jm.nameJa)} · snow conditions & forecast · ${region.name} · feelzlike`,
       `Live snow conditions, weather forecast, and lift info for ${m.name} in the ${region.name}.`,
       jaMountainDesc,
       `<main>
@@ -446,7 +459,7 @@ for (const region of REGIONS) {
     // Town home
     addJa(
       `/${region.slug}/${town.id}`,
-      `${town.name} · ${region.name} conditions · feelzlike`,
+      `${withJaName(town.name, jt.nameJa)} · ${region.name} conditions · feelzlike`,
       `Live weather, road conditions, and visitor info for ${town.name} in the ${region.name}.`,
       ja
         ? `${townNameJa}（${regionNameJa}）のライブ天気・道路状況・観光情報。${jt.blurbJa ? `${jt.blurbJa}。` : ""}`
@@ -483,7 +496,7 @@ for (const region of REGIONS) {
       const meta = townFeatureMeta[feature];
       addJa(
         `/${region.slug}/${town.id}/${feature}`,
-        `${town.name} · ${meta.label} · ${region.name} · feelzlike`,
+        `${withJaName(town.name, jt.nameJa)} · ${meta.label} · ${region.name} · feelzlike`,
         meta.desc,
         jaTownFeatureDesc[feature] || null,
         `<main>
