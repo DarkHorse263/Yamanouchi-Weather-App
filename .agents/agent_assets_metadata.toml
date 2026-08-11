@@ -807,7 +807,7 @@ id = "OskuCzKteJUAS5SDUz4FV"
 uri = "file://exports/video-ads/feelzlike-anthem-jp.mp4"
 type = "video"
 title = "feelzlike anthem · 日本語 · 44s"
-description = "Japan screens now properly in Japanese"
+description = "now featuring Madarao + Snowball Japan partner card"
 
 [[outputs]]
 id = "Dhpc1T1vbppayrmbvNmf9"
@@ -877,7 +877,7 @@ id = "TtHl0DZIwBb-5fpMIaTMx"
 uri = "file://exports/video-ads/feelzlike-anthem-jp-english.mp4"
 type = "video"
 title = "feelzlike anthem · japan · australian voice · 35s"
-description = "Japan screens in English · Aussie voice"
+description = "now featuring Madarao + Snowball Japan partner card"
 
 [[outputs]]
 id = "_B8SPCO9O2KYDigrDEPMC"
