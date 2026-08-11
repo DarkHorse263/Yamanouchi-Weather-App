@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { Download, Share, X, Smartphone } from "lucide-react";
 import { isStandaloneMode, isIOSSafari } from "@/lib/registerSW";
 import { track } from "@/lib/analytics";
 import { useConsent } from "@/lib/consent";
+import { getRegion } from "@/regions";
 
 /**
  * PWA install prompt.
@@ -35,6 +37,25 @@ function isDismissalActive(): boolean {
   return ageMs >= 0 && ageMs < DISMISS_COOLDOWN_DAYS * 24 * 60 * 60 * 1000;
 }
 
+/**
+ * Detect whether the visitor is currently on a Japan region with 日本語
+ * selected. The prompt mounts OUTSIDE the region-scoped LanguageProvider,
+ * so we read the same localStorage key the provider persists to
+ * (`feelzlike:<regionId>:lang`), keyed off the region in the current URL.
+ * English everywhere else.
+ */
+function useJapaneseUi(): boolean {
+  const [location] = useLocation();
+  const seg = location.split("/").filter(Boolean)[0] ?? "";
+  const region = getRegion(seg);
+  if (!region?.language?.locales.includes("ja")) return false;
+  try {
+    return window.localStorage.getItem(`feelzlike:${region.id}:lang`) === "ja";
+  } catch {
+    return false;
+  }
+}
+
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
   userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
@@ -57,6 +78,7 @@ export function InstallPrompt() {
   const [variant, setVariant] = useState<"android" | "ios">("android");
   const [bipEvent, setBipEvent] = useState<BeforeInstallPromptEvent | null>(null);
   const { hasDecided } = useConsent();
+  const ja = useJapaneseUi();
 
   useEffect(() => {
     // Wait until the consent banner is out of the way so the two
@@ -122,7 +144,7 @@ export function InstallPrompt() {
           exit={{ opacity: 0, y: 20 }}
           transition={{ duration: 0.25 }}
           role="dialog"
-          aria-label="Add FeelZlike to your home screen"
+          aria-label={ja ? "FeelZlikeをホーム画面に追加" : "Add FeelZlike to your home screen"}
           className="fixed inset-x-3 bottom-[calc(var(--mobile-bottom-nav,0px)+0.75rem)] md:inset-x-auto md:right-4 md:bottom-4 md:max-w-sm z-[60]"
         >
           <div className="rounded-2xl bg-slate-900 text-white shadow-[0_24px_60px_-20px_rgba(2,6,23,0.6)] border border-white/10 p-4 sm:p-5">
@@ -132,19 +154,30 @@ export function InstallPrompt() {
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-amber-300">
-                  Add to home screen
+                  {ja ? "ホーム画面に追加" : "Add to home screen"}
                 </p>
                 <p className="mt-1 text-sm font-semibold text-white leading-snug">
-                  Never miss a powder day.
+                  {ja ? "パウダーの日を逃さない。" : "Never miss a powder day."}
                 </p>
                 {variant === "ios" ? (
                   <p className="mt-1.5 text-[12px] text-white/70 leading-relaxed">
-                    Tap <Share className="w-3.5 h-3.5 inline-block mx-0.5 -mt-0.5 text-sky-300" />
-                    Share, then <span className="font-semibold text-white">Add to Home Screen</span>.
+                    {ja ? (
+                      <>
+                        共有 <Share className="w-3.5 h-3.5 inline-block mx-0.5 -mt-0.5 text-sky-300" />
+                        をタップして、<span className="font-semibold text-white">「ホーム画面に追加」</span>を選択してください。
+                      </>
+                    ) : (
+                      <>
+                        Tap <Share className="w-3.5 h-3.5 inline-block mx-0.5 -mt-0.5 text-sky-300" />
+                        Share, then <span className="font-semibold text-white">Add to Home Screen</span>.
+                      </>
+                    )}
                   </p>
                 ) : (
                   <p className="mt-1.5 text-[12px] text-white/70 leading-relaxed">
-                    Install FeelZlike for instant access and powder alerts on your lock screen.
+                    {ja
+                      ? "FeelZlikeをインストールすると、すぐにアクセスでき、ロック画面でパウダーアラートを受け取れます。"
+                      : "Install FeelZlike for instant access and powder alerts on your lock screen."}
                   </p>
                 )}
                 <div className="mt-3 flex items-center gap-2">
@@ -155,7 +188,7 @@ export function InstallPrompt() {
                       className="inline-flex items-center gap-1.5 rounded-lg bg-sky-500 hover:bg-sky-400 active:bg-sky-600 px-3 py-1.5 text-[12px] font-semibold transition-colors"
                     >
                       <Download className="w-3.5 h-3.5" />
-                      Install
+                      {ja ? "インストール" : "Install"}
                     </button>
                   )}
                   <button
@@ -163,14 +196,14 @@ export function InstallPrompt() {
                     onClick={dismiss}
                     className="text-[12px] text-white/60 hover:text-white/90 px-2 py-1.5 transition-colors"
                   >
-                    Not now
+                    {ja ? "あとで" : "Not now"}
                   </button>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={dismiss}
-                aria-label="Dismiss install prompt"
+                aria-label={ja ? "インストール案内を閉じる" : "Dismiss install prompt"}
                 className="shrink-0 text-white/40 hover:text-white/80 transition-colors"
               >
                 <X className="w-4 h-4" />
