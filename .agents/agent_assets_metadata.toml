@@ -799,15 +799,15 @@ description = "AU + NZ screens · with more to come"
 id = "v9oiZTX4lLRwU242MF2il"
 uri = "file://exports/video-ads/feelzlike-anthem-us.mp4"
 type = "video"
-title = "feelzlike anthem · american voice · 31s"
-description = "USA + Canada screens · with more to come"
+title = "feelzlike anthem · american voice · 33s"
+description = "fresh clean take · USA + Canada screens"
 
 [[outputs]]
 id = "OskuCzKteJUAS5SDUz4FV"
 uri = "file://exports/video-ads/feelzlike-anthem-jp.mp4"
 type = "video"
-title = "feelzlike anthem · japanese voice · 日本語画面 · 44s"
-description = "Japan screens in Japanese · さらに拡大中"
+title = "feelzlike anthem · 日本語 · 44s"
+description = "Japan screens now properly in Japanese"
 
 [[outputs]]
 id = "Dhpc1T1vbppayrmbvNmf9"
@@ -876,5 +876,19 @@ description = "Text-to-speech audio: 118の山岳エリア。7つの公式情報
 id = "TtHl0DZIwBb-5fpMIaTMx"
 uri = "file://exports/video-ads/feelzlike-anthem-jp-english.mp4"
 type = "video"
-title = "feelzlike anthem · japan in english · 44s"
-description = "Japan screens in English · with more to come"
+title = "feelzlike anthem · japan · australian voice · 35s"
+description = "Japan screens in English · Aussie voice"
+
+[[outputs]]
+id = "_B8SPCO9O2KYDigrDEPMC"
+uri = "file://attached_assets/generated_audio/vo-anthem4-us.mp3"
+type = "audio"
+title = "us anthem vo v4"
+description = "Text-to-speech audio: One hundred and eighteen mountain regions. Seven official sources. Real-time conditions, refreshed every fifteen minutes. feelzlike covers every major resort across the USA, Can…"
+
+[[outputs]]
+id = "bO-BAA1-G3z9bx6xEw6iF"
+uri = "file://attached_assets/generated_audio/vo-anthem4-jpen.mp3"
+type = "audio"
+title = "japan english anthem vo aussie voice"
+description = "Text-to-speech audio: One hundred and eighteen mountain regions. Seven official sources. Real-time conditions, refreshed every fifteen minutes. feelzlike covers every major resort across Japan, Austr…"
