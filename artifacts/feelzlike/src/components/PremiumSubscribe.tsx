@@ -1,7 +1,7 @@
 import { useState, useMemo, type FormEvent } from "react";
 import { useSubscribeToAlerts } from "@workspace/api-client-react";
 import { Mail, Check, AlertCircle, Loader2, Sparkles } from "lucide-react";
-import { ALERT_REGIONS } from "@/components/AlertSubscribeForm";
+import { RegionCountryPicker } from "@/components/RegionCountryPicker";
 import { isPaymentRequired } from "@/lib/gateErrors";
 
 /**
@@ -108,44 +108,7 @@ export function PremiumSubscribe() {
         <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-1.5">
           regions · tick the ones you want
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
-          {ALERT_REGIONS.map((r) => {
-            const checked = regions.includes(r.id);
-            return (
-              <button
-                type="button"
-                key={r.id}
-                onClick={() => toggleRegion(r.id)}
-                role="checkbox"
-                aria-checked={checked}
-                className={`flex items-center gap-2.5 text-left rounded-xl px-3 py-2 border transition-colors ${
-                  checked
-                    ? "bg-primary/10 border-primary/40 text-foreground"
-                    : "bg-white border-border text-muted-foreground hover:text-foreground hover:border-foreground/30"
-                }`}
-              >
-                <span
-                  className={`flex-none inline-flex items-center justify-center w-4 h-4 rounded-md border ${
-                    checked
-                      ? "bg-primary border-primary text-primary-foreground"
-                      : "bg-white border-border"
-                  }`}
-                  aria-hidden="true"
-                >
-                  {checked && <Check className="w-3 h-3" strokeWidth={3} />}
-                </span>
-                <span className="min-w-0 flex-1">
-                  <span className="block text-[13px] font-semibold leading-tight">
-                    {r.nameEn}
-                  </span>
-                  <span className="block text-[10px] uppercase tracking-wider opacity-70">
-                    {r.country}
-                  </span>
-                </span>
-              </button>
-            );
-          })}
-        </div>
+        <RegionCountryPicker selected={regions} onToggle={toggleRegion} variant="light" />
       </div>
 
       <label className="flex items-start gap-2 text-xs text-muted-foreground leading-snug cursor-pointer">

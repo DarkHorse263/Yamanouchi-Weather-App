@@ -1,6 +1,6 @@
 import { useId, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Cable, ChevronDown, AlertTriangle, CheckCircle2, AlertCircle, Info } from "lucide-react";
+import { Cable, ChevronDown, AlertTriangle, CheckCircle2, AlertCircle, Info, ExternalLink } from "lucide-react";
 import {
   predictMountainLifts,
   summariseMountainWindHold,
@@ -54,12 +54,22 @@ interface LiftWindHoldPanelProps {
   actualTotalLifts?: number | null;
   /**
    * Whether this resort has a VERIFIED live lift-status source. Defaults to
-   * true (JP resorts, and AU resorts once opted in). When false the panel never
+   * FALSE (safe-by-default, Aug 2026): only callers with a real opted-in feed
+   * may pass true. When false the panel never
    * asserts a specific operational reason it can't verify (open / closed /
    * no-snow) - it reframes as a conditional "for when lifts are running" wind
    * outlook and points users to the resort's own report.
    */
   liveStatusKnown?: boolean;
+  /**
+   * The resort's own official lift/snow report URL. When set and we have no
+   * live feed, the honest banner links out to it - this panel is then the
+   * single lift surface on the page (the old reference-only "On the snow"
+   * card was merged in here, Aug 2026).
+   */
+  liftReportUrl?: string | null;
+  /** Resort display name for the report link label. */
+  resortName?: string | null;
 }
 
 const STATUS_STYLES: Record<WindHoldStatus, { dot: string; badge: string; icon: typeof CheckCircle2; label: string; labelJa: string }> = {
@@ -174,7 +184,9 @@ export function LiftWindHoldPanel({
   snowDepthSource,
   actualLiftsOpen,
   actualTotalLifts,
-  liveStatusKnown = true,
+  liveStatusKnown = false,
+  liftReportUrl,
+  resortName,
 }: LiftWindHoldPanelProps) {
   const t = tProp ?? ((en: string) => en);
   const u = useUnits();
@@ -260,6 +272,20 @@ export function LiftWindHoldPanel({
             <Info className="w-4 h-4 mt-0.5 flex-shrink-0" />
             <span>{t(nonOperatingCopy.banner.en, nonOperatingCopy.banner.ja)}</span>
           </p>
+          {liftReportUrl && (
+            <a
+              href={liftReportUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 ml-6 inline-flex items-center gap-1 text-xs font-semibold text-white underline underline-offset-2 hover:no-underline"
+            >
+              {t(
+                `open ${resortName ?? "the resort"}'s official lift report`,
+                "公式リフトレポートを開く",
+              )}
+              <ExternalLink className="w-3 h-3" aria-hidden="true" />
+            </a>
+          )}
         </div>
       )}
 

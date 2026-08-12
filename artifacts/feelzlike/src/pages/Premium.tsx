@@ -16,7 +16,7 @@ import {
   Mail,
   Zap,
 } from "lucide-react";
-import { usePremium } from "@workspace/feelzlike-shell";
+import { usePremium, PremiumGate } from "@workspace/feelzlike-shell";
 import { useAuthAccount } from "@/components/auth/SignUpProvider";
 import { PremiumSubscribe } from "@/components/PremiumSubscribe";
 
@@ -258,7 +258,17 @@ export default function Premium() {
                 : "pick your regions and we'll email you when powder's on the way."}
             </p>
             <div className="max-w-md">
-              <PremiumSubscribe />
+              {/* Same soft gate as every other premium surface (Aug 2026):
+                  signed-out visitors see the form but any tap prompts the
+                  free sign-up instead of submitting directly. */}
+              <PremiumGate
+                title="Powder alerts"
+                titleJa="パウダーアラート"
+                blurb="Email alerts when forecast snowfall meets your threshold."
+                blurbJa="予測降雪がしきい値に達したらメールでお知らせ。"
+              >
+                <PremiumSubscribe />
+              </PremiumGate>
             </div>
           </div>
         </div>

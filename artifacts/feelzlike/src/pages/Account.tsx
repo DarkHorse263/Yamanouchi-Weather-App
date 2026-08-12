@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { useClerk } from "@clerk/react";
@@ -23,6 +23,7 @@ import {
 import type { AccountResponse } from "@workspace/api-client-react";
 import { useAuthAccount } from "@/components/auth/SignUpProvider";
 import { ALERT_REGIONS } from "@/components/AlertSubscribeForm";
+import { RegionCountryPicker } from "@/components/RegionCountryPicker";
 
 function SignOutButton() {
   const { signOut } = useClerk();
@@ -411,15 +412,6 @@ function AlertsCard({ subscription, onChanged }: { subscription: Subscription; o
   const [horizon, setHorizon] = useState<24 | 48 | 72>((sub?.horizonHours as 24 | 48 | 72) ?? 48);
   const [savedAt, setSavedAt] = useState<number | null>(null);
 
-  const grouped = useMemo(() => {
-    const g: Record<string, typeof ALERT_REGIONS> = {};
-    for (const r of ALERT_REGIONS) {
-      const key = r.country.split("·")[0]!.trim();
-      (g[key] ??= []).push(r);
-    }
-    return g;
-  }, []);
-
   if (!sub) {
     return (
       <div className="rounded-2xl border border-border bg-white p-5">
@@ -488,35 +480,7 @@ function AlertsCard({ subscription, onChanged }: { subscription: Subscription; o
 
       <div>
         <p className="text-sm font-bold text-foreground mb-2">regions</p>
-        <div className="space-y-3">
-          {Object.entries(grouped).map(([country, rs]) => (
-            <div key={country}>
-              <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider mb-1.5">
-                {country.toLowerCase()}
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {rs.map((r) => {
-                  const checked = regions.includes(r.id);
-                  return (
-                    <button
-                      key={r.id}
-                      type="button"
-                      onClick={() => toggleRegion(r.id)}
-                      aria-pressed={checked}
-                      className={`text-left rounded-lg px-3 py-2 text-sm font-bold border transition ${
-                        checked
-                          ? "bg-primary/15 border-primary/40 text-foreground"
-                          : "bg-secondary/40 border-border text-muted-foreground hover:text-foreground"
-                      }`}
-                    >
-                      {r.nameEn.toLowerCase()}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
-        </div>
+        <RegionCountryPicker selected={regions} onToggle={toggleRegion} variant="light" />
       </div>
 
       <div>

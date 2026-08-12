@@ -941,3 +941,10 @@ uri = "file://exports/video-ads/fb-pack-japan-english.zip"
 type = "unspecified"
 title = "fb pack · japan (english)"
 description = "English-language Japan cut · all formats (24MB)"
+
+[[outputs]]
+id = "LiPyuanZWwVfDQamsuYT4"
+uri = "file://exports/video-ads/fb-pack-silent-copy.zip"
+type = "unspecified"
+title = "silent copy-point pack · all markets"
+description = "12 new silent cuts (AU, USA, Japan, Japan-English × landscape, square, vertical) with the app to one side and copy points fading in (33MB)"

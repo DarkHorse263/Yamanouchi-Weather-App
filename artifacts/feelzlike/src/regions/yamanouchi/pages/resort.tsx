@@ -436,11 +436,18 @@ export default function ResortDetail() {
           </PremiumGate>
         )}
 
-        {/* FREE · 7-day powder forecast calendar. Moved here (May 2026 v6)
-            to sit right after Elevation forecast so the powder outlook
-            reads as a continuation of the multi-day weather story. */}
+        {/* PREMIUM · 7-day powder forecast calendar. Sits right after
+            Elevation forecast so the powder outlook reads as a continuation
+            of the multi-day weather story. Gated Aug 2026 (owner request). */}
         {hourly && hourly.length > 0 && (
-          <PowderCalendar hourly={hourly} t={t} thresholds={POWDER_THRESHOLDS_JP} sectionNumber="" />
+          <PremiumGate
+            title="Powder forecast"
+            titleJa="パウダー予報"
+            blurb="Best powder window each day · next 5 days."
+            blurbJa="毎日のベストパウダーウィンドウ · 5日先まで。"
+          >
+            <PowderCalendar hourly={hourly} t={t} thresholds={POWDER_THRESHOLDS_JP} sectionNumber="" />
+          </PremiumGate>
         )}
 
         {/* Mountain dials only · the wind-driven lift-hold call was
@@ -489,6 +496,8 @@ export default function ResortDetail() {
               t={t}
               seasonOpen={isLiftSeasonOpen(REGION_COUNTRY[region.id])}
               snowDepthCm={current.snowDepth}
+              liftReportUrl={profile?.liftStatusUrl ?? null}
+              resortName={location.name}
             />
           </PremiumGate>
         )}

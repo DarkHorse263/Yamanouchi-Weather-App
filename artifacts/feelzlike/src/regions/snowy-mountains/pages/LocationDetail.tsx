@@ -820,13 +820,19 @@ export default function LocationDetail() {
           </PremiumGate>
         )}
 
-        {/* FREE · 7-day powder forecast calendar. Moved to sit right after
-            Elevation forecast (May 2026 v6) so the powder outlook reads as
-            a continuation of the multi-day weather story rather than
-            interrupting the hour-by-hour strip. AU thresholds keep grading
-            honest for the lower-snow Snowy range. */}
+        {/* PREMIUM · 7-day powder forecast calendar. Sits right after
+            Elevation forecast so the powder outlook reads as a continuation
+            of the multi-day weather story. AU thresholds keep grading honest
+            for the lower-snow Snowy range. Gated Aug 2026 (owner request). */}
         {hourly && hourly.length > 0 && (
-          <PowderCalendar hourly={hourly} thresholds={POWDER_THRESHOLDS_AU} sectionNumber="" />
+          <PremiumGate
+            title="Powder forecast"
+            titleJa="パウダー予報"
+            blurb="Best powder window each day · next 5 days."
+            blurbJa="毎日のベストパウダーウィンドウ · 5日先まで。"
+          >
+            <PowderCalendar hourly={hourly} thresholds={POWDER_THRESHOLDS_AU} sectionNumber="" />
+          </PremiumGate>
         )}
 
         {showThredboSummer && <ThredboSummer />}
@@ -838,7 +844,11 @@ export default function LocationDetail() {
             Hidden in summer · snow/lift data is meaningless when resorts
             are closed, and Thredbo's summer activities live in
             <ThredboSummer /> above. */}
-        {showLiftAndDials && isResort && liftData && (
+        {/* Only rendered with a VERIFIED live feed. The no-feed honest mode
+            (reference lift list + report link) was merged into the per-lift
+            wind panel below (Aug 2026) so no-feed resorts show ONE lift
+            surface, not two. */}
+        {showLiftAndDials && isResort && liftData && hasLiveLiftStatus && (
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -946,46 +956,7 @@ export default function LocationDetail() {
                   ))}
                 </div>
               </>
-            ) : (
-              <>
-                {/* Honest mode · no live feed for this resort yet. We don't claim
-                    open/closed; we point to the resort's own official lift report
-                    and list the mountain's lifts as reference only. */}
-                <a
-                  href={liftData.liftStatusUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group mb-4 flex items-start gap-3 rounded-2xl bg-sky-500/10 border border-sky-500/30 px-3.5 py-3 transition-colors hover:bg-sky-500/15"
-                >
-                  <Cable className="w-4 h-4 text-sky-500 mt-0.5 shrink-0" />
-                  <div className="min-w-0">
-                    <p className="text-sm text-foreground">live status straight from {liftData.locationName}</p>
-                    <p className="text-xs text-muted-foreground/80 mt-1 leading-relaxed">
-                      we don't run a live lift feed for this resort yet, so today's open lifts and runs are best checked on the official report · it updates through the day.
-                    </p>
-                    <span className="mt-2 inline-flex items-center gap-1 text-[11px] font-semibold text-sky-700 group-hover:text-sky-600">
-                      open {liftData.locationName} lift report
-                      <ExternalLink className="w-3 h-3" />
-                    </span>
-                  </div>
-                </a>
-
-                <p className="byline text-muted-foreground/70 mb-1">Lifts · {liftData.totalLifts} total</p>
-                <div className="space-y-1 flex-1 overflow-y-auto max-h-[280px] pr-1 hide-scrollbar">
-                  {liftData.lifts.map((lift: any) => (
-                    <div key={lift.id} className="flex justify-between items-center px-2 py-2 rounded-lg hover:bg-slate-50 transition-colors">
-                      <div>
-                        <p className="text-sm text-foreground">{lift.name}</p>
-                        <p className="byline text-muted-foreground/60">{lift.type.replace("-", " ")}</p>
-                      </div>
-                      {lift.verticalRise != null && (
-                        <div className="text-[11px] text-muted-foreground/50 shrink-0">{u.elev(lift.verticalRise)} {u.elevUnit} vert</div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </>
-            )}
+            ) : null}
           </motion.div>
         )}
 
@@ -1024,6 +995,29 @@ export default function LocationDetail() {
             for each named lift on this mountain, using lift-specific
             gust tolerances. Page-level gated by getLiftsForMountain so
             free users don't see a lock for empty data (matches VIC). */}
+        {/* FREE · one-tap official lift report for no-feed resorts · kept
+            OUTSIDE the premium gate so free visitors keep the report link
+            now that the old free "On the snow" honest card is gone. */}
+        {showLiftAndDials && isResort && liftData && !hasLiveLiftStatus && liftData.liftStatusUrl && (
+          <a
+            href={liftData.liftStatusUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-start gap-3 rounded-2xl bg-sky-500/10 border border-sky-500/30 px-3.5 py-3 transition-colors hover:bg-sky-500/15"
+          >
+            <Cable className="w-4 h-4 text-sky-500 mt-0.5 shrink-0" />
+            <div className="min-w-0">
+              <p className="text-sm text-foreground">
+                we don't run a live lift feed for this resort yet · today's open lifts and runs are best checked on the official report.
+              </p>
+              <span className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-semibold text-sky-700 group-hover:text-sky-600">
+                open {liftData.locationName} lift report
+                <ExternalLink className="w-3 h-3" aria-hidden="true" />
+              </span>
+            </div>
+          </a>
+        )}
+
         {hourly && hourly.length > 0 && getLiftsForMountain(locationId).length > 0 && (
           <PremiumGate
             title="Per-lift hold forecast"
@@ -1048,6 +1042,8 @@ export default function LocationDetail() {
               liveStatusKnown={hasLiveLiftStatus}
               actualLiftsOpen={hasLiveLiftStatus ? liftData?.liftsOpen : undefined}
               actualTotalLifts={liftData?.totalLifts}
+              liftReportUrl={!hasLiveLiftStatus ? liftData?.liftStatusUrl : undefined}
+              resortName={liftData?.locationName ?? location.name}
             />
           </PremiumGate>
         )}

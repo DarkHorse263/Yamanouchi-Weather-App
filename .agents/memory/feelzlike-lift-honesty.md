@@ -123,3 +123,5 @@ feed at `https://www.thredbo.com.au/feeds/lift-status-report/` (per-lift
 open=true/false, status, openingTime). That is a real Phase-2 data source for an
 authoritative AU live lift status - the gap is plumbing, not availability. Do not
 wire it up unless asked.
+
+**Aug 2026 merge:** the free reference-only "On the snow" lift card was merged into LiftWindHoldPanel (single lift surface per page). Panel's `liveStatusKnown` now defaults FALSE (safe-by-default); only callers with a real opted-in feed pass true. The official-report link renders in the panel's honest banner (`liftReportUrl`/`resortName` props) AND as a slim FREE link outside the PremiumGate on MountainDetail + Snowy LocationDetail — don't drop that free link, the panel itself is premium-gated. Snowy's "On the snow" card now renders only when `hasLiveLiftStatus` is true.
