@@ -49,4 +49,6 @@ Premium was hidden-until-traction earlier in 2026; that is REVERSED. Owner's mod
 
 **When billing lands:** add checkout at the subscribe CTA; only THEN consider restoring a real `PremiumGate` lock for non-entitled users after the promo. The server-side `requireEntitlement(...)` middleware is the real gate, not `usePremium()`.
 
+**Blur for signed-out (Aug 2026, owner request):** PremiumGate renders gated children blurred (blur + aria-hidden + inert, layout keeps its shape) with a full-area invisible overlay button that opens the free sign-up prompt — inert children can't receive events, so the overlay carries the tap. `inert` must be passed as a boolean prop (empty string is treated as false and warns). Signed-in accounts still pass through un-blurred during the promo.
+
 **Snowfall outlook placement (July 2026):** the 24/48/72h snowfall outlook bars were MOVED out of the premium-gated "Mountain dials" block into the FREE "Next 48 hours" hourly panel (shared SnowfallOutlook component, rendered via HourlyForecast snowfallOutlook prop on all 3 resort page types). Deliberate: if a real lock is restored post-promo, the outlook stays free. Mountain dials = rings only now; its blurb no longer mentions incoming snow.

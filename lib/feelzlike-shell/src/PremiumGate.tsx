@@ -20,10 +20,11 @@ interface PremiumGateProps {
 
 /**
  * SOFT MEMBER GATE (Japan-season sign-ups, Nov/Dec 2026 run-up):
- * Premium sections stay fully VISIBLE for everyone · no blur, no hard wall ·
- * but for signed-out visitors any tap inside the section opens the free
- * sign-up prompt instead of interacting. Signed-in members (free accounts ·
- * every premium feature is free until the promo ends) pass straight through.
+ * For signed-out visitors the premium section renders BLURRED (Aug 2026
+ * owner request · content stays in the layout but is unreadable) and any
+ * tap inside opens the free sign-up prompt instead of interacting.
+ * Signed-in members (free accounts · every premium feature is free until
+ * the promo ends) pass straight through un-blurred.
  *
  * The gate never prompts on its own · only on an explicit tap · so a visitor
  * who just reads the page is never interrupted.
@@ -49,20 +50,26 @@ export function PremiumGate({ title, children }: PremiumGateProps) {
 
   return (
     <div className="relative">
+      {/* Blurred for signed-out visitors · unreadable but the layout keeps
+          its shape so the page doesn't jump. aria-hidden + inert keep the
+          blurred controls away from screen readers and the tab order (the
+          spread keeps `inert` compatible with React 18's prop types). */}
       <div
-        onClickCapture={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          prompt();
-        }}
-        onSubmitCapture={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          prompt();
-        }}
+        className="blur-[6px] select-none opacity-90"
+        aria-hidden="true"
+        {...({ inert: true } as Record<string, boolean>)}
       >
         {children}
       </div>
+      {/* Full-area invisible button · a tap anywhere on the blurred section
+          opens the free sign-up prompt (inert children can't receive events,
+          so this overlay carries the interaction instead). */}
+      <button
+        type="button"
+        onClick={prompt}
+        aria-label={`${title} · free with account · sign up`}
+        className="absolute inset-0 z-[5] cursor-pointer bg-transparent"
+      />
       <button
         type="button"
         onClick={prompt}
