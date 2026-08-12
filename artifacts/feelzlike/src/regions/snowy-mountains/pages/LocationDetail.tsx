@@ -132,13 +132,15 @@ const AU_LIFT_HOURS: Record<string, { hours: string; note?: string }> = {
   selwyn: { hours: "First lifts 9:00am · last lifts 4:00pm" },
 };
 
-// Phase 1 of honest lift status (June 2026): feelzlike has NO live feed into any
-// AU resort's lift system yet, so we must NOT assert per-lift open/closed - the
-// hardcoded api data marked every lift "closed", which showed lifts as shut even
-// while they were spinning. Until a resort is wired to a verified live source we
-// show its lifts as reference only and link out to the resort's own official lift
-// report. Phase 2 adds resorts to this set (with real data) one at a time.
-const LIVE_LIFT_STATUS_RESORTS = new Set<string>();
+// Honest lift status: only resorts wired to a VERIFIED live source may render
+// open/closed claims. Phase 2 (Aug 2026): Thredbo is live via its official
+// per-lift XML feed (api-server lib/thredboLiftStatus.ts). Membership here is
+// necessary but NOT sufficient - the server must ALSO answer
+// liveStatusVerified:true for this response (feed fetched fresh); when the
+// feed is down/stale the flag is false and the page falls back to the honest
+// reference-only mode. Other resorts stay reference-only with a link to their
+// own official report until each gets a real feed.
+const LIVE_LIFT_STATUS_RESORTS = new Set<string>(["thredbo"]);
 
 function getStatusColor(status: string) {
   switch (status) {
@@ -224,8 +226,10 @@ export default function LocationDetail() {
   // running lifts). Off-season the model figure returns (melt curve).
   const seasonOpen = isLiftSeasonOpen(REGION_COUNTRY[region.id]);
   const modelDepthTrusted = !seasonOpen;
-  // Only paint live open/closed when a resort is wired to a verified live feed.
-  const hasLiveLiftStatus = LIVE_LIFT_STATUS_RESORTS.has(locationId);
+  // Only paint live open/closed when a resort is wired to a verified live
+  // feed AND this response actually carries fresh live rows (server flag).
+  const hasLiveLiftStatus =
+    LIVE_LIFT_STATUS_RESORTS.has(locationId) && liftData?.liveStatusVerified === true;
   // Snowy region opts in to season-aware UI · in summer the snow/lift
   // panels make no sense, so we hide them and surface alternative content
   // (Thredbo is the only resort that operates year-round, so it gets a

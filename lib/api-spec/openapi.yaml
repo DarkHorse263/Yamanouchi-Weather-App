@@ -3309,6 +3309,13 @@ components:
           type: string
         liftStatusUrl:
           type: string
+        liveStatusVerified:
+          type: boolean
+          description: >
+            True ONLY when the lift rows come from the resort's own live
+            feed fetched fresh (e.g. Thredbo's official per-lift XML).
+            False/absent means the rows are a static reference catalogue -
+            clients must NOT render open/closed claims from them.
         lastUpdated:
           type: string
       required:

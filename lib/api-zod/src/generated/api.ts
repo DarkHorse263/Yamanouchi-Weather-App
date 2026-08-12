@@ -2371,6 +2371,12 @@ export const GetLiftStatusResponse = zod.object({
       seasonStatus: zod.enum(["pre-season", "open", "late-season", "closed"]),
       operatingHours: zod.string().optional(),
       liftStatusUrl: zod.string().optional(),
+      liveStatusVerified: zod
+        .boolean()
+        .optional()
+        .describe(
+          "True ONLY when the lift rows come from the resort's own live feed fetched fresh (e.g. Thredbo's official per-lift XML). False\/absent means the rows are a static reference catalogue - clients must NOT render open\/closed claims from them.\n",
+        ),
       lastUpdated: zod.string(),
     }),
   ),
@@ -2418,6 +2424,12 @@ export const GetLocationLiftStatusResponse = zod.object({
   seasonStatus: zod.enum(["pre-season", "open", "late-season", "closed"]),
   operatingHours: zod.string().optional(),
   liftStatusUrl: zod.string().optional(),
+  liveStatusVerified: zod
+    .boolean()
+    .optional()
+    .describe(
+      "True ONLY when the lift rows come from the resort's own live feed fetched fresh (e.g. Thredbo's official per-lift XML). False\/absent means the rows are a static reference catalogue - clients must NOT render open\/closed claims from them.\n",
+    ),
   lastUpdated: zod.string(),
 });
 

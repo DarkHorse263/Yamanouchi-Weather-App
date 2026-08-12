@@ -1438,6 +1438,9 @@ export interface ResortLiftStatus {
   seasonStatus: ResortLiftStatusSeasonStatus;
   operatingHours?: string;
   liftStatusUrl?: string;
+  /** True ONLY when the lift rows come from the resort's own live feed fetched fresh (e.g. Thredbo's official per-lift XML). False/absent means the rows are a static reference catalogue - clients must NOT render open/closed claims from them.
+   */
+  liveStatusVerified?: boolean;
   lastUpdated: string;
 }
 

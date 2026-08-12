@@ -1,6 +1,7 @@
 import { Router, type IRouter } from "express";
 import { GetLiftStatusResponse, GetLocationLiftStatusResponse, GetLocationLiftStatusParams } from "@workspace/api-zod";
 import { locationMatchesRegion, parseRegionParam, RegionParamError } from "../lib/regions.js";
+import { getThredboLiveLiftStatus } from "../lib/thredboLiftStatus.js";
 
 const router: IRouter = Router();
 
@@ -24,6 +25,9 @@ interface ResortLiftData {
   seasonStatus: "pre-season" | "open" | "late-season" | "closed";
   operatingHours?: string;
   liftStatusUrl: string;
+  /** True ONLY when `lifts` came from the resort's own live feed, fetched
+   *  fresh. Clients gate all open/closed UI on this flag. */
+  liveStatusVerified?: boolean;
 }
 
 function getSeasonStatus(): "pre-season" | "open" | "late-season" | "closed" {
@@ -39,11 +43,14 @@ function getSeasonStatus(): "pre-season" | "open" | "late-season" | "closed" {
 // ⚠️ LANDMINE: this is a STATIC lift catalogue - every lift is hardcoded
 // "closed" even mid-season (getSeasonStatus() returns "open" Jun-Aug while
 // nothing below ever flips). It is safe ONLY because the client display-gates
-// open/closed badges behind LIVE_LIFT_STATUS_RESORTS (currently empty).
-// NEVER add a resort to that set without wiring a real live feed here first:
-// flipping the gate against this catalogue would assert "0 of N lifts open"
-// mid-winter - a false closure worse than showing nothing. A future live feed
-// must fail-soft to "unverified", never fall back to these hardcoded rows.
+// open/closed badges behind LIVE_LIFT_STATUS_RESORTS + the response's
+// liveStatusVerified flag. Thredbo (Aug 2026) is the first resort with a real
+// live feed: getResortDataWithLive() REPLACES its rows from the official XML
+// feed and flips liveStatusVerified true. NEVER add another resort to the
+// client set without wiring a real live feed here first: flipping the gate
+// against this catalogue would assert "0 of N lifts open" mid-winter - a
+// false closure worse than showing nothing. A live feed must fail-soft to
+// "unverified" (flag false), never fall back to these hardcoded rows as live.
 const RESORT_LIFTS: ResortLiftData[] = [
   {
     locationId: "thredbo",
@@ -426,6 +433,7 @@ function getResortData(): ResortLiftData[] {
   return RESORT_LIFTS.map(resort => ({
     ...resort,
     seasonStatus,
+    liveStatusVerified: false,
     lifts: resort.lifts.map(lift => ({
       ...lift,
       status: seasonStatus === "open" ? lift.status : "closed" as const
@@ -433,10 +441,36 @@ function getResortData(): ResortLiftData[] {
   }));
 }
 
-router.get("/lift-status", (req, res) => {
+/**
+ * Overlay Thredbo's OFFICIAL live per-lift feed onto the static catalogue.
+ * Live rows fully REPLACE the hardcoded reference rows (names/count come from
+ * the resort, not our seed list) and flip `liveStatusVerified` true. Feed
+ * down / stale / unparseable -> catalogue rows unchanged with the flag false,
+ * so clients fall back to the honest "no live status" mode - live claims are
+ * never faked and never stale.
+ */
+async function getResortDataWithLive(): Promise<ResortLiftData[]> {
+  const resorts = getResortData();
+  const live = await getThredboLiveLiftStatus();
+  if (!live) return resorts;
+  return resorts.map((resort) => {
+    if (resort.locationId !== "thredbo") return resort;
+    return {
+      ...resort,
+      lifts: live.lifts,
+      // The live feed carries no runs data - drop the hardcoded 0/50 rather
+      // than pair real lift counts with fabricated run counts.
+      runsOpen: undefined,
+      totalRuns: undefined,
+      liveStatusVerified: true,
+    };
+  });
+}
+
+router.get("/lift-status", async (req, res) => {
   try {
     const region = parseRegionParam(req.query["region"]);
-    const allResorts = getResortData();
+    const allResorts = await getResortDataWithLive();
     const resorts = region
       ? allResorts.filter((r) => locationMatchesRegion(r.locationId, region))
       : allResorts;
@@ -470,14 +504,14 @@ router.get("/lift-status", (req, res) => {
   }
 });
 
-router.get("/lift-status/:locationId", (req, res) => {
+router.get("/lift-status/:locationId", async (req, res) => {
   // Don't run the strict OpenAPI enum-validator on the path param itself.
   // It throws a ZodError for any non-Snowy resort id (mt-buller, ryuoo, …),
   // which bubbles out of the handler as a 500 with an HTML stack trace
   // (info disclosure). We always want a clean JSON 404 for unknown ids
   // until lift coverage is expanded to other regions.
   const locationId = String(req.params.locationId ?? "");
-  const resorts = getResortData();
+  const resorts = await getResortDataWithLive();
   const resort = resorts.find(r => r.locationId === locationId);
 
   if (!resort) {

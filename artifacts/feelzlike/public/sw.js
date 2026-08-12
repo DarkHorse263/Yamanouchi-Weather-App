@@ -65,7 +65,11 @@
 // PWAs after sign-out, just as the old /api/auth/user bypass did. The
 // existing /api/auth/* rule already covered this path, but we make it
 // explicit here so the intent survives future SW refactors.
-const CACHE_VERSION = "v22";
+// v23: /api/lift-status moved from the catch-all SWR to the live network-first
+// route AND the response gained liveStatusVerified (Thredbo's official live
+// per-lift feed). Real open/closed lift claims must never be served a session
+// stale from an installed PWA.
+const CACHE_VERSION = "v23";
 const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
 const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;
@@ -254,7 +258,8 @@ self.addEventListener("fetch", (event) => {
     url.pathname.startsWith("/api/today") ||
     url.pathname.startsWith("/api/road") ||
     url.pathname.startsWith("/api/local-weather") ||
-    url.pathname.startsWith("/api/vic-emergency-incidents")
+    url.pathname.startsWith("/api/vic-emergency-incidents") ||
+    url.pathname.startsWith("/api/lift-status")
   ) {
     event.respondWith(networkFirst(request, DATA_CACHE));
     return;
