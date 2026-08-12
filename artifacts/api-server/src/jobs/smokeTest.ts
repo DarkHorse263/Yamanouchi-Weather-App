@@ -302,6 +302,60 @@ async function checkSnowConsistency(failures: SmokeFailure[]): Promise<number> {
 }
 
 // ---------------------------------------------------------------------------
+// Thredbo live lift feed canary
+// ---------------------------------------------------------------------------
+
+// The Thredbo live lift feed fails SOFT by design (feed down/stale -> the
+// page honestly drops to "no live status"), which makes an outage invisible:
+// nothing errors, the flagship live feature is just quietly off. In-season,
+// /api/lift-status/thredbo answering liveStatusVerified:false means the feed
+// has been unfetchable or its `updated` stamp is >24h old - by the time the
+// daily run sees false, the outage is already sustained (the server keeps a
+// 30-min serve-stale window, so a momentary blip still reads true).
+// Out of season the resort legitimately stops updating the feed, so the
+// check only runs during the AU season months (June-September, AEST).
+
+/** AU season gate for the Thredbo live-feed canary (Jun-Sep, Sydney time). */
+export function isThredboFeedSeason(now: Date = new Date()): boolean {
+  const month = Number(
+    new Intl.DateTimeFormat("en-AU", { timeZone: "Australia/Sydney", month: "numeric" }).format(now),
+  );
+  return month >= 6 && month <= 9;
+}
+
+async function checkThredboLiveFeed(failures: SmokeFailure[]): Promise<number> {
+  if (!isThredboFeedSeason()) return 1; // out of season: nothing to assert
+  const url = `${ORIGIN}/api/lift-status/thredbo`;
+
+  const probe = async (): Promise<{ ok: boolean; detail: string }> => {
+    const res = await fetchRaw(url, PAGE_TIMEOUT_MS);
+    if (!res.ok) return { ok: false, detail: `HTTP ${res.status}` };
+    const json = (await res.json().catch(() => ({}))) as { liveStatusVerified?: boolean; totalLifts?: number };
+    if (json.liveStatusVerified === true) return { ok: true, detail: "live" };
+    return {
+      ok: false,
+      detail: `liveStatusVerified=${String(json.liveStatusVerified)} in-season - Thredbo feed down/stale, page is silently in no-live mode`,
+    };
+  };
+
+  try {
+    let result = await probe();
+    if (!result.ok) {
+      // One gentle retry filters a transient edge/network blip; a real feed
+      // outage answers false both times (server-side result is cached 5 min).
+      await new Promise((r) => setTimeout(r, 3000));
+      result = await probe();
+    }
+    if (result.ok) return 1;
+    failures.push({ check: "live lift feed", url, detail: result.detail });
+    return 0;
+  } catch (err) {
+    failures.push({ check: "live lift feed", url, detail: errMessage(err) });
+    return 0;
+  }
+}
+
+// ---------------------------------------------------------------------------
 // external outbound links
 // ---------------------------------------------------------------------------
 
@@ -411,6 +465,7 @@ function failureEmail(report: SmokeReport): { subject: string; html: string; tex
     canonical: "pages serving the wrong content",
     api: "weather api problems",
     "snow consistency": "headline vs elevation snow disagreement",
+    "live lift feed": "live lift feed silently off",
     "dead link": "dead outbound links",
     "unreachable link": "unreachable outbound links",
   };
@@ -462,12 +517,13 @@ export async function runSmokeTest(opts: { skipExternal?: boolean; noEmail?: boo
   try {
     console.log(`[smokeTest] starting against ${ORIGIN} (external links: ${opts.skipExternal ? "skipped" : "on"})`);
 
-    const [pagesChecked, apiPassed, snowPassed] = await Promise.all([
+    const [pagesChecked, apiPassed, snowPassed, liftFeedPassed] = await Promise.all([
       checkSitemapPages(failures),
       checkApi(failures),
       checkSnowConsistency(failures),
+      checkThredboLiveFeed(failures),
     ]);
-    const apiChecksPassed = apiPassed + snowPassed;
+    const apiChecksPassed = apiPassed + snowPassed + liftFeedPassed;
 
     let linksChecked = 0;
     let blocked = 0;
@@ -504,7 +560,7 @@ export async function runSmokeTest(opts: { skipExternal?: boolean; noEmail?: boo
 
     console.log(
       `[smokeTest] done in ${Math.round(report.durationMs / 1000)}s · ${report.ok ? "ALL CLEAR" : `${failures.length} FAILURES`} · ` +
-      `${report.pagesChecked} pages, ${report.apiChecksPassed}/8 api checks, ${report.linksChecked} links (${blocked} bot-gated)`,
+      `${report.pagesChecked} pages, ${report.apiChecksPassed}/9 api checks, ${report.linksChecked} links (${blocked} bot-gated)`,
     );
     lastReport = report;
     return report;
