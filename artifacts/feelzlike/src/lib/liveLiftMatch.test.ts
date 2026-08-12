@@ -13,6 +13,10 @@ const SEEDS = [
   { id: "antons-tbar", name: "Antons T-Bar" },
   { id: "easy-does-it", name: "Easy Does It" },
   { id: "friday-flat", name: "Friday Flat" },
+  { id: "gunbarrel-chair", name: "Gunbarrel Express" },
+  { id: "basin-tbar", name: "Basin T-Bar" },
+  { id: "sponars-tbar", name: "Sponars T-Bar" },
+  { id: "easy-rider-tbar", name: "Easy Rider T-Bar" },
 ];
 
 // Real feed names captured from Thredbo's live XML (Aug 2026).
@@ -56,15 +60,15 @@ test("every Thredbo seed matches its real feed row", () => {
   assert.equal(liveBySeedId["antons-tbar"]?.status, "open");
   assert.equal(liveBySeedId["easy-does-it"]?.name, "Easy Does It Chairlift");
   assert.equal(liveBySeedId["friday-flat"]?.name, "Friday Flat Chairlift");
+  assert.equal(liveBySeedId["gunbarrel-chair"]?.name, "Gunbarrel Chairlift");
+  assert.equal(liveBySeedId["basin-tbar"]?.name, "Basin T-Bar");
+  assert.equal(liveBySeedId["sponars-tbar"]?.name, "Sponars T-Bar");
+  assert.equal(liveBySeedId["easy-rider-tbar"]?.name, "Easy Rider T-Bar");
   assert.equal(Object.keys(liveBySeedId).length, SEEDS.length);
-  // The rest of the resort's lineup surfaces explicitly, not silently dropped.
+  // Appendix is now carpets + the scenic Merritts duplicate only.
   const names = unmatchedLive.map((r) => r.name).sort();
   assert.deepEqual(names, [
-    "Basin T-Bar",
-    "Easy Rider T-Bar",
-    "Gunbarrel Chairlift",
     "Merritts Gondola (Scenic)",
-    "Sponars T-Bar",
     "Syd's Snow Runner",
     "The Burrow Snow Runner",
     "Wombats Snow Runner",

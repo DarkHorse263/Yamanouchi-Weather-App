@@ -47,6 +47,9 @@ export interface LiftSeed {
 }
 
 const V = "2026-05-05";
+// Thredbo lineup completion (Gunbarrel, Basin, Sponars, Easy Rider) - added
+// so every real chair/T-bar on the live feed gets a wind read, not just a dot.
+const V2 = "2026-08-12";
 
 /**
  * SNOWY MOUNTAINS (AU) - Thredbo, Perisher, Charlotte Pass, Selwyn.
@@ -62,6 +65,12 @@ const SNOWY_MOUNTAINS: LiftSeed[] = [
   { id: "antons-tbar", mountainId: "thredbo", name: "Antons T-Bar", baseElevation: 1670, topElevation: 1855, exposure: "exposed", windHoldThresholdKmh: 85, type: "t-bar", verifiedAt: V },
   { id: "easy-does-it", mountainId: "thredbo", name: "Easy Does It", baseElevation: 1670, topElevation: 1700, exposure: "sheltered", windHoldThresholdKmh: 80, type: "fixed_grip_chair", verifiedAt: V },
   { id: "friday-flat", mountainId: "thredbo", name: "Friday Flat", baseElevation: 1365, topElevation: 1450, exposure: "sheltered", windHoldThresholdKmh: 75, type: "fixed_grip_chair", verifiedAt: V },
+  // Remaining real chairs/T-bars from the live feed (carpets + the scenic
+  // Merritts duplicate stay appendix-only in LiftWindHoldPanel).
+  { id: "gunbarrel-chair", mountainId: "thredbo", name: "Gunbarrel Express", baseElevation: 1365, topElevation: 1770, exposure: "moderate", windHoldThresholdKmh: 75, type: "detachable", verifiedAt: V2 },
+  { id: "basin-tbar", mountainId: "thredbo", name: "Basin T-Bar", baseElevation: 1700, topElevation: 1860, exposure: "moderate", windHoldThresholdKmh: 85, type: "t-bar", verifiedAt: V2 },
+  { id: "sponars-tbar", mountainId: "thredbo", name: "Sponars T-Bar", baseElevation: 1830, topElevation: 1975, exposure: "exposed", windHoldThresholdKmh: 85, type: "t-bar", verifiedAt: V2 },
+  { id: "easy-rider-tbar", mountainId: "thredbo", name: "Easy Rider T-Bar", baseElevation: 1365, topElevation: 1420, exposure: "sheltered", windHoldThresholdKmh: 85, type: "t-bar", verifiedAt: V2 },
 
   // PERISHER
   { id: "front-valley-quad", mountainId: "perisher", name: "Front Valley Quad", baseElevation: 1720, topElevation: 1840, exposure: "exposed", windHoldThresholdKmh: 70, type: "detachable", verifiedAt: V },
