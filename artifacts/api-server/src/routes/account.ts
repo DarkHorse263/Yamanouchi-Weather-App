@@ -5,6 +5,8 @@ import { eq } from "drizzle-orm";
 import { getAuth, clerkClient } from "@clerk/express";
 import { REGION_IDS, isRegionId } from "../lib/regions.js";
 import { requireAuth } from "../middlewares/requireAuth.js";
+import { sendEmail } from "../lib/emailSender.js";
+import { accountDeletedEmail } from "../lib/emailTemplates.js";
 
 /**
  * Clerk-authorised account surface for signed-in members. Backs /account:
@@ -255,6 +257,23 @@ router.delete("/account", requireAuth, async (req, res): Promise<void> => {
         .where(eq(alertSubscribersTable.email, user.email.trim().toLowerCase()));
     }
     await db.delete(usersTable).where(eq(usersTable.id, user.id));
+
+    // ── Step 4: deletion receipt (fire-and-forget) ────────────────────────
+    // A durable "your account and data were deleted" record for the former
+    // member. Deliberately AFTER the deletes and never awaited into the
+    // response path · a send failure must not fail (or slow) the deletion.
+    if (user.email) {
+      const receipt = accountDeletedEmail();
+      void sendEmail({
+        to: user.email,
+        subject: receipt.subject,
+        html: receipt.html,
+        text: receipt.text,
+        tag: "account-deleted",
+      }).catch((mailErr: unknown) => {
+        console.error("[/account DELETE] deletion receipt send failed (non-fatal):", mailErr);
+      });
+    }
 
     res.json({ ok: true });
   } catch (err) {

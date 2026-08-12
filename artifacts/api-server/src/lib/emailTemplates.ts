@@ -109,6 +109,27 @@ export function signInEmail(signInUrl: string): { subject: string; html: string;
   };
 }
 
+/**
+ * Deletion receipt · sent AFTER a successful self-serve account deletion so
+ * the (former) member has a durable record that their account and data are
+ * gone. Fire-and-forget from the DELETE /account handler · a send failure
+ * never fails the deletion.
+ */
+export function accountDeletedEmail(): { subject: string; html: string; text: string } {
+  return {
+    subject: "your feelzlike account was deleted",
+    html: brandedEmail({
+      preheader: "your account and data were deleted · this is your record.",
+      heading: "account deleted",
+      bodyHtml: `<p style="margin:0 0 16px 0;">this confirms your feelzlike account was deleted, along with your profile and any powder-alert subscription tied to this address.</p>
+        <p style="margin:0 0 16px 0;">you won't receive any more emails from us · this receipt is the last one.</p>
+        <p style="font-size:13px;color:#64748b;margin:0;">didn't do this? reply to this email or contact info@feelzlike.com straight away.</p>`,
+      footerHtml: `feelzlike.com is still free to browse anytime · if you come back, signing in with the same email simply creates a fresh account.`,
+    }),
+    text: `your feelzlike account was deleted\n\nthis confirms your account, profile and any powder-alert subscription tied to this address were deleted. you won't receive any more emails from us.\n\ndidn't do this? contact info@feelzlike.com straight away.`,
+  };
+}
+
 export interface AlertEmailMountain {
   name: string;
   region: string;

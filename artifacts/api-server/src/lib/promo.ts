@@ -49,6 +49,46 @@ const PROMO_STARTS_AT = readBoundary("PREMIUM_PROMO_STARTS_AT", DEFAULT_PROMO_ST
 const PROMO_ENDS_AT = readBoundary("PREMIUM_PROMO_ENDS_AT", DEFAULT_PROMO_ENDS_AT, "end");
 
 /**
+ * Startup divergence guard: the client badge reads the BUILD-TIME
+ * VITE_PREMIUM_PROMO_* vars while the paywall reads the runtime
+ * PREMIUM_PROMO_* vars above. Both default to the shared
+ * `@workspace/promo-constants` values, so they only diverge when someone
+ * overrides one side and not the other — in which case the "free until ..."
+ * badge and the real paywall flip on DIFFERENT days. The client build runs in
+ * the same environment as this server, so compare the raw env pairs here and
+ * warn loudly at startup. Warning only (never throw): a mismatch must not
+ * take the API down.
+ */
+function warnIfPromoWindowsDiverge(): void {
+  const pairs: Array<[string, string]> = [
+    ["PREMIUM_PROMO_STARTS_AT", "VITE_PREMIUM_PROMO_STARTS_AT"],
+    ["PREMIUM_PROMO_ENDS_AT", "VITE_PREMIUM_PROMO_ENDS_AT"],
+  ];
+  // Both readers are tri-state: unset -> shared default, explicit empty
+  // string -> boundary DISABLED, anything else -> that value. Compare the
+  // EFFECTIVE state, so "unset vs empty" (default vs disabled · a real
+  // divergence) warns too.
+  const effective = (raw: string | undefined, defaultVal: string): string =>
+    raw === undefined ? defaultVal : raw.trim() === "" ? "<disabled>" : raw.trim();
+  const defaults: Record<string, string> = {
+    PREMIUM_PROMO_STARTS_AT: DEFAULT_PROMO_STARTS_AT,
+    PREMIUM_PROMO_ENDS_AT: DEFAULT_PROMO_ENDS_AT,
+  };
+  for (const [serverKey, clientKey] of pairs) {
+    const server = effective(process.env[serverKey], defaults[serverKey]!);
+    const client = effective(process.env[clientKey], defaults[serverKey]!);
+    if (server !== client) {
+      console.warn(
+        `[promo] WINDOW MISMATCH: ${serverKey}=${JSON.stringify(server)} but ` +
+          `${clientKey}=${JSON.stringify(client)} · the "free until ..." badge and the ` +
+          `server paywall will flip on different days. Set BOTH (or NEITHER) to the same value.`,
+      );
+    }
+  }
+}
+warnIfPromoWindowsDiverge();
+
+/**
  * Whether the launch promo is active at `now`. Returns false when the end
  * boundary is disabled (empty string), before the start boundary, or after the
  * end boundary.
