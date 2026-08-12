@@ -9,6 +9,7 @@ import {
   type HourlyWindSample,
 } from "@/lib/windHoldPrediction";
 import { getLiftsForMountain, type LiftSeed } from "@/data/lifts";
+import { matchLiveLiftsToSeeds, type LiveLiftRow } from "@/lib/liveLiftMatch";
 import { computeLiftOperationStatus, type LiftOperationStatus as OperationStatus } from "@/lib/skiSeason";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
 
@@ -70,7 +71,37 @@ interface LiftWindHoldPanelProps {
   liftReportUrl?: string | null;
   /** Resort display name for the report link label. */
   resortName?: string | null;
+  /**
+   * The resort's OFFICIAL live per-lift rows (only passed when
+   * liveStatusKnown is true, i.e. the response's liveStatusVerified flag was
+   * set). When present, each seed row shows the resort's real open/held
+   * status next to the wind read, seeds missing from today's report are
+   * labelled explicitly, and feed lifts we don't wind-model are listed
+   * separately - never silently dropped. Feed down = prop absent = the
+   * existing honest behaviour, unchanged.
+   */
+  liveLifts?: LiveLiftRow[] | null;
 }
+
+/** Chip styling for the resort's OFFICIAL live status vocabulary. */
+const LIVE_STATUS_STYLES: Record<
+  LiveLiftRow["status"],
+  { badge: string; en: string; ja: string }
+> = {
+  open: { badge: "bg-emerald-500/10 text-emerald-700 border-emerald-500/30", en: "Open now", ja: "運行中" },
+  closed: { badge: "bg-slate-500/10 text-slate-600 border-slate-400/40", en: "Closed", ja: "運休" },
+  "wind-hold": { badge: "bg-rose-500/10 text-rose-700 border-rose-500/30", en: "Wind hold", ja: "強風停止中" },
+  "on-hold": { badge: "bg-amber-500/10 text-amber-700 border-amber-500/30", en: "On hold", ja: "一時停止中" },
+  scheduled: { badge: "bg-sky-500/10 text-sky-700 border-sky-500/30", en: "Standby", ja: "待機中" },
+};
+
+/** Explicit "this seed isn't in today's official report" chip - shown instead
+ *  of a live status so a name mismatch never reads as a silent guess. */
+const NOT_IN_REPORT = {
+  badge: "bg-slate-500/10 text-slate-500 border-slate-300/60 border-dashed",
+  en: "Not in today's report",
+  ja: "本日の公式報告になし",
+};
 
 const STATUS_STYLES: Record<WindHoldStatus, { dot: string; badge: string; icon: typeof CheckCircle2; label: string; labelJa: string }> = {
   likely_open: {
@@ -187,6 +218,7 @@ export function LiftWindHoldPanel({
   liveStatusKnown = false,
   liftReportUrl,
   resortName,
+  liveLifts,
 }: LiftWindHoldPanelProps) {
   const t = tProp ?? ((en: string) => en);
   const u = useUnits();
@@ -220,6 +252,13 @@ export function LiftWindHoldPanel({
   // A verified live source is required to claim live operation. Without one we
   // keep the conditional "for when lifts are running" framing even in season.
   const operating = operationStatus === "operating" && liveStatusKnown;
+
+  // Live per-lift overlay: only when we have a verified feed AND rows. The
+  // matcher handles seed-vs-feed name drift explicitly (see liveLiftMatch.ts).
+  const liveMatch = useMemo(
+    () => (liveStatusKnown && liveLifts && liveLifts.length > 0 ? matchLiveLiftsToSeeds(lifts, liveLifts) : null),
+    [liveStatusKnown, liveLifts, lifts],
+  );
 
   if (lifts.length === 0) return null;
 
@@ -317,6 +356,14 @@ export function LiftWindHoldPanel({
             ? { en: style.label, ja: style.labelJa }
             : WIND_LABELS[pred.status];
           const isExpanded = expandedId === lift.id;
+          // Live chip: the resort's real status when matched, or an explicit
+          // "not in today's report" - never a silent blank on a name miss.
+          const liveRow = liveMatch ? liveMatch.liveBySeedId[lift.id] : undefined;
+          const liveChip = liveMatch
+            ? liveRow
+              ? { badge: LIVE_STATUS_STYLES[liveRow.status].badge, en: LIVE_STATUS_STYLES[liveRow.status].en, ja: LIVE_STATUS_STYLES[liveRow.status].ja }
+              : NOT_IN_REPORT
+            : null;
           return (
             <div key={lift.id} className={idx > 0 ? "border-t border-border" : ""}>
               <button
@@ -339,6 +386,13 @@ export function LiftWindHoldPanel({
                   </div>
                 </div>
                 <div className="flex items-center gap-2 flex-shrink-0">
+                  {liveChip && (
+                    <span
+                      className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${liveChip.badge}`}
+                    >
+                      {t(liveChip.en, liveChip.ja)}
+                    </span>
+                  )}
                   <span
                     className={`hidden sm:inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${style.badge}`}
                   >
@@ -396,6 +450,42 @@ export function LiftWindHoldPanel({
           );
         })}
       </div>
+
+      {/* The resort's OTHER live lifts - feed rows we don't wind-model yet
+          (beginner carpets, extra T-bars…). Listed explicitly so the panel
+          reflects the resort's full official lineup, never a silent subset. */}
+      {liveMatch && liveMatch.unmatchedLive.length > 0 && (
+        <div className="rounded-2xl border border-white/25 bg-white/10 px-4 py-3 mt-3">
+          <p className="text-[11px] font-bold uppercase tracking-wider text-white/75 mb-2">
+            {t(
+              `also on ${resortName ?? "the resort"}'s live report · no wind model yet`,
+              "公式ライブ報告のその他リフト · 風予測なし",
+            )}
+          </p>
+          <ul className="flex flex-wrap gap-x-4 gap-y-1.5">
+            {liveMatch.unmatchedLive.map((row) => (
+              <li key={row.id} className="inline-flex items-center gap-1.5 text-xs text-white">
+                <span
+                  className={`w-1.5 h-1.5 rounded-full ${
+                    row.status === "open"
+                      ? "bg-emerald-400"
+                      : row.status === "wind-hold" || row.status === "on-hold"
+                        ? "bg-amber-400"
+                        : row.status === "scheduled"
+                          ? "bg-sky-300"
+                          : "bg-white/40"
+                  }`}
+                  aria-hidden
+                />
+                <span className="truncate max-w-[14rem]">{row.name}</span>
+                <span className="text-white/70">
+                  · {t(LIVE_STATUS_STYLES[row.status].en, LIVE_STATUS_STYLES[row.status].ja).toLowerCase()}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {/* Disclaimer */}
       <p className="text-[11px] text-white/75 mt-3 flex items-start gap-1.5">

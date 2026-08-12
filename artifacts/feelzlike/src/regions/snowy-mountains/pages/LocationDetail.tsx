@@ -1048,6 +1048,10 @@ export default function LocationDetail() {
               actualTotalLifts={liftData?.totalLifts}
               liftReportUrl={!hasLiveLiftStatus ? liftData?.liftStatusUrl : undefined}
               resortName={liftData?.locationName ?? location.name}
+              // Official per-lift rows (Thredbo XML feed) - only when this
+              // response is verified-live; feed down = undefined = the
+              // existing honest wind-only rows, unchanged.
+              liveLifts={hasLiveLiftStatus ? (liftData?.lifts as any) : undefined}
             />
           </PremiumGate>
         )}
