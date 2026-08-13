@@ -67,10 +67,13 @@ const SNOWY_MOUNTAINS: LiftSeed[] = [
   { id: "friday-flat", mountainId: "thredbo", name: "Friday Flat", baseElevation: 1365, topElevation: 1450, exposure: "sheltered", windHoldThresholdKmh: 75, type: "fixed_grip_chair", verifiedAt: V },
   // Remaining real chairs/T-bars from the live feed (carpets + the scenic
   // Merritts duplicate stay appendix-only in LiftWindHoldPanel).
-  { id: "gunbarrel-chair", mountainId: "thredbo", name: "Gunbarrel Express", baseElevation: 1365, topElevation: 1770, exposure: "moderate", windHoldThresholdKmh: 75, type: "detachable", verifiedAt: V2 },
-  { id: "basin-tbar", mountainId: "thredbo", name: "Basin T-Bar", baseElevation: 1700, topElevation: 1860, exposure: "moderate", windHoldThresholdKmh: 85, type: "t-bar", verifiedAt: V2 },
-  { id: "sponars-tbar", mountainId: "thredbo", name: "Sponars T-Bar", baseElevation: 1830, topElevation: 1975, exposure: "exposed", windHoldThresholdKmh: 85, type: "t-bar", verifiedAt: V2 },
-  { id: "easy-rider-tbar", mountainId: "thredbo", name: "Easy Rider T-Bar", baseElevation: 1365, topElevation: 1420, exposure: "sheltered", windHoldThresholdKmh: 85, type: "t-bar", verifiedAt: V2 },
+  // Elevations re-verified 2026-08-12 against the official trail map /
+  // published lift stats (skiresort.info lift database). Note: Easy Rider
+  // T-Bar (2022) is the Merritts beginner-zone lift, NOT at Friday Flat.
+  { id: "gunbarrel-chair", mountainId: "thredbo", name: "Gunbarrel Express", baseElevation: 1370, topElevation: 1796, exposure: "moderate", windHoldThresholdKmh: 75, type: "detachable", verifiedAt: V2 },
+  { id: "basin-tbar", mountainId: "thredbo", name: "Basin T-Bar", baseElevation: 1833, topElevation: 1964, exposure: "moderate", windHoldThresholdKmh: 85, type: "t-bar", verifiedAt: V2 },
+  { id: "sponars-tbar", mountainId: "thredbo", name: "Sponars T-Bar", baseElevation: 1720, topElevation: 1980, exposure: "exposed", windHoldThresholdKmh: 85, type: "t-bar", verifiedAt: V2 },
+  { id: "easy-rider-tbar", mountainId: "thredbo", name: "Easy Rider T-Bar", baseElevation: 1630, topElevation: 1706, exposure: "sheltered", windHoldThresholdKmh: 85, type: "t-bar", verifiedAt: V2 },
 
   // PERISHER
   { id: "front-valley-quad", mountainId: "perisher", name: "Front Valley Quad", baseElevation: 1720, topElevation: 1840, exposure: "exposed", windHoldThresholdKmh: 70, type: "detachable", verifiedAt: V },
