@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { X, BellRing, ArrowUpRight } from "lucide-react";
 import { useLanguage, useRegion, useOptionalSeason } from "@workspace/feelzlike-shell";
 import { track } from "@/lib/analytics";
+import { shouldCountImpression, IMPRESSION_MIN_RATIO } from "@/lib/promoImpression";
 
 /**
  * First-party funnel ping · anonymous aggregate counter for the admin Stats
@@ -81,17 +82,44 @@ export function AlertPromoBanner() {
   const isGreen = region.seasons && seasonCtx?.season === "green";
   const visible = !dismissed && !isGreen;
 
-  // Impression event · fired once per page view (mount), only when the banner
-  // actually renders. The ref guards against StrictMode double-invocation and
-  // re-renders; a fresh page view remounts the component and fires again,
-  // which is exactly the "shown" denominator the funnel wants.
+  // Impression event · fired once per page view, but only when the banner
+  // actually scrolls INTO VIEW (>=half visible). It used to fire on mount,
+  // which over-counted badly: the banner sits below the fold on both weather
+  // and mountain pages, so "shown" counted page loads, not people who saw it
+  // (47 shown / 0 clicked / 0 dismissed in prod was mount-counting, not a
+  // broken counter). The ref guards StrictMode double-invocation; a fresh
+  // page view remounts and can fire again — that's the funnel denominator.
   const shownRef = useRef(false);
+  const rootRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
-    if (visible && !shownRef.current) {
+    if (!visible || shownRef.current) return;
+    const el = rootRef.current;
+    const fire = () => {
+      if (shownRef.current) return;
       shownRef.current = true;
       track("alert_promo_shown", { category: "alert" });
       pingPromoCounter("shown");
+    };
+    // Ancient browsers without IntersectionObserver: keep the old mount count
+    // rather than silently counting nothing.
+    if (!el || typeof IntersectionObserver === "undefined") {
+      fire();
+      return;
     }
+    const io = new IntersectionObserver(
+      (entries) => {
+        // threshold alone isn't enough: observers also deliver an initial
+        // entry (and boundary-cross entries) below the threshold, so
+        // shouldCountImpression re-checks the ratio itself.
+        if (shouldCountImpression(entries)) {
+          fire();
+          io.disconnect();
+        }
+      },
+      { threshold: IMPRESSION_MIN_RATIO },
+    );
+    io.observe(el);
+    return () => io.disconnect();
   }, [visible]);
 
   if (!visible) return null;
@@ -104,7 +132,7 @@ export function AlertPromoBanner() {
   };
 
   return (
-    <div className="mt-4 rounded-2xl border border-primary/25 bg-white p-4 sm:p-5">
+    <div ref={rootRef} className="mt-4 rounded-2xl border border-primary/25 bg-white p-4 sm:p-5">
       <div className="flex items-start gap-3">
         <div className="shrink-0 w-10 h-10 rounded-xl bg-primary/10 text-primary inline-flex items-center justify-center">
           <BellRing className="w-5 h-5" />

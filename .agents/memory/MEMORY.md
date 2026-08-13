@@ -79,6 +79,7 @@
 - [feelzlike mountain page parity](feelzlike-mountain-detail-parity.md) — generic MountainDetail mirrors the Perisher bespoke page; mirror layout changes both ways; hero cam = local catalogue; skip extended gate when daily<=5; ~1280px right-clip FIXED (main needs md:w-[calc(100%-16rem)], not bare w-full).
 - [feelzlike artifact.toml env placement](feelzlike-artifact-toml-env.md) — PORT/BASE_PATH belong in [services.env] after localPort; appended at file end they're eaten by the last rewrite table and vite dies at startup.
 - [feelzlike US transport](feelzlike-us-transport.md) — town "content parity" = curated transport data (stay/eat are generic OTA/Maps); 7 flagship US regions done, rest empty; US towns usually need the rideshare allowlist.
+- [feelzlike promo funnel counting](feelzlike-promo-funnel-counting.md) — banner "shown" must be viewport-gated (IntersectionObserver), not on-mount; zero dismissals = suspect impression over-count, not broken clicks.
 - [feelzlike engagement counting](feelzlike-engagement-counting.md) — cookieless first-party visitor counts; finite page-label whitelist; fail-closed without secret; dev preview = no data by design.
 - [feelzlike Japanese SEO](feelzlike-ja-seo.md) — JP snapshots get ja-first bilingual descriptions extracted from region TS at build time; re-running prerender without a fresh vite build bakes stale bodies.
 - [feelzlike route rename](feelzlike-route-rename.md) — renaming a top-level route touches ~12 registries; generate-rewrites emits stdout only, artifact.toml must be updated to match.
