@@ -62,7 +62,7 @@ import { dailyRainMm } from "@/lib/precip";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
 import { AlertPromoBanner } from "@/components/AlertPromoBanner";
-import DayNarrative from "@/components/weather/DayNarrative";
+import MountainConditionsSummary from "@/components/weather/MountainConditionsSummary";
 import { snowNext24SoWhat, windSoWhat, freezingLevelSoWhat } from "@/lib/soWhat";
 import { OfficialSiteLink } from "@/components/OfficialSiteLink";
 import { SnowReportLink } from "@/components/SnowReportLink";
@@ -505,13 +505,22 @@ export function MountainDetail() {
             </motion.div>
           </div>
 
-          {/* one-line plain-english day summary · decision before data */}
-          <DayNarrative
+          {/* "up there today" · plain-english conditions paragraph (embeds
+              the day narrative + snow outlook + wind read + base) · every
+              clause fails soft, never blocks the page */}
+          <MountainConditionsSummary
             hourly={hourly}
             current={current}
             utcOffsetSeconds={(data as any)?.utcOffsetSeconds ?? 0}
             isMountain
             lang={language}
+            snowNext24Cm={snow24h}
+            snowfallOutlookElevationM={current.snowfallOutlookElevationM}
+            snowfallOutlookLevel={current.snowfallOutlookLevel}
+            reportedBaseCm={resortReport?.baseCm}
+            reportedBaseMinCm={resortReport?.baseMinCm}
+            reportedBaseSource={resortReport ? reportSource : undefined}
+            trustedModelBaseCm={modelDepthTrusted ? current.snowDepth : undefined}
           />
 
           {/* live cam thumbnail · a real look at the mountain right in the

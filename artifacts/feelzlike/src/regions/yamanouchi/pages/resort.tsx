@@ -48,6 +48,7 @@ import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
 import { midMountainElevation } from "@/lib/elevation";
 import { cn } from "@/lib/utils";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
+import MountainConditionsSummary from "@/components/weather/MountainConditionsSummary";
 import { UnitsToggle } from "@/components/UnitsToggle";
 import { BarChart2 } from "lucide-react";
 
@@ -368,6 +369,21 @@ export default function ResortDetail() {
             per-lift hold sit behind the paywall further down. Webcams,
             official links and the safety strip sit at the bottom · same
             position as AU. */}
+        {/* "up there today" · plain-english conditions paragraph · ja gets
+            the same treatment as elsewhere; every clause fails soft */}
+        <MountainConditionsSummary
+          hourly={hourly ?? []}
+          current={current}
+          utcOffsetSeconds={(data as any).utcOffsetSeconds ?? 0}
+          isMountain
+          lang={language === "ja" ? "ja" : "en"}
+          snowNext24Cm={current.snowfallNext24h}
+          snowfallOutlookElevationM={current.snowfallOutlookElevationM}
+          snowfallOutlookLevel={current.snowfallOutlookLevel}
+          trustedModelBaseCm={
+            !isLiftSeasonOpen(REGION_COUNTRY[region.id]) ? current.snowDepth : undefined
+          }
+        />
         <LiveConditions stats={stats} />
         {hourly && hourly.length > 0 && (
           <HourlyForecast

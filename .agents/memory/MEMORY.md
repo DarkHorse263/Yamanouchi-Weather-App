@@ -62,6 +62,7 @@
 - [feelzlike reported snow](feelzlike-reported-snow.md) — ALWAYS-200 {report:null}; kind resort|course (course=Snowy Hydro weekly, never no_base); in-season model depth SUPPRESSED ("not reported"); only reported asserts no_base.
 - [feelzlike NZ reported snow](feelzlike-nz-reported-snow.md) — two-value bases: baseCm=HIGHER (gates unchanged) + optional baseMinCm; NZSki stamps go stale for weeks (null = designed); Cardrona <generated> is request-time, use <date>.
 - [feelzlike elevation bands](feelzlike-elevation-band-partition.md) — bands must share ONE pinned OM cell (cell_selection=nearest) + FL−300m phase partition; default land-cell = 3 different places (mid>upper snow bug).
+- [feelzlike mountain summary](feelzlike-mountain-summary.md) — "up there today" paragraph REPLACED DayNarrative on mountain pages (towns keep it); prose obeys the same elevation/lift/base honesty gates.
 - [feelzlike daily condition labels](feelzlike-daily-condition-labels.md) — daily weatherDescription is totals-derived via shared server helper, never the WMO moment-code; rain-dominant days must say Rain.
 - [feelzlike alert emails](feelzlike-alert-emails.md) — branded shell (wordmark img, blue/pink), FROM via ALERT_FROM_EMAIL; don't set feelzlike.com sender until Resend shows domain verified.
 - [feelzlike text contrast](feelzlike-text-contrast.md) — app is light-only; text on cards needs 700+ shades (sky-700/800), `text-*-300` chips are a dark-theme idiom = illegible; light blues stay only on slate-900 panels.
