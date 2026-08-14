@@ -107,7 +107,7 @@ export function TownWeather() {
             <WeatherConditions current={q.data.current} t={t} />
             <WeatherToday daily={q.data.daily[0]} t={t} />
             {q.data.observedSnow && <ObservedSnowCard obs={q.data.observedSnow} t={t} />}
-            <WeatherHourly hourly={q.data.hourly} t={t} />
+            <WeatherHourly hourly={q.data.hourly} t={t} nowCode={q.data.current.weatherCode} nowIsDay={q.data.current.isDay} />
             <WeatherOutlook days={q.data.daily.slice(1, 7)} t={t} />
             <div className="mt-6">
               <AlertPromoBanner />

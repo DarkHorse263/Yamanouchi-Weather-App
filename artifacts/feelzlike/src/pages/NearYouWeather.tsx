@@ -452,7 +452,7 @@ export default function NearYouWeather() {
                       <>
                         <WeatherConditions current={full.current} t={t} />
                         <WeatherToday daily={full.daily[0]} t={t} />
-                        <WeatherHourly hourly={full.hourly} t={t} />
+                        <WeatherHourly hourly={full.hourly} t={t} nowCode={heroCurrent.weatherCode} nowIsDay={heroCurrent.isDay} />
                         <WeatherOutlook days={full.daily.slice(1, 7)} t={t} />
                       </>
                     ) : weather.isError ? (

@@ -272,9 +272,16 @@ export function ObservedSnowCard({
 export function WeatherHourly({
   hourly,
   t,
+  nowCode,
+  nowIsDay,
 }: {
   hourly: TownWeatherHourly[];
   t: Translate;
+  /** Current-conditions weather code · when set, the "Now" cell uses it so the
+      strip can't contradict the hero (model hour-0 often lags the live current). */
+  nowCode?: number | null;
+  /** Current isDay flag · keeps the "Now" icon's day/night variant in step with the hero. */
+  nowIsDay?: boolean;
 }) {
   const u = useUnits();
   if (hourly.length === 0) return null;
@@ -295,7 +302,9 @@ export function WeatherHourly({
       <div className="mt-4 -mx-2 overflow-x-auto">
         <div className="flex gap-1 min-w-full px-2">
           {hourly.map((h, i) => {
-            const Icon = pickIcon(h.weatherCode, true);
+            const isNow = i === 0;
+            const cellCode = isNow && nowCode != null ? nowCode : h.weatherCode;
+            const Icon = pickIcon(cellCode, isNow && nowIsDay !== undefined ? nowIsDay : true);
             const tNorm = h.temperature !== null ? (h.temperature - minT) / range : 0;
             const pop = h.precipitationProbability ?? 0;
             return (

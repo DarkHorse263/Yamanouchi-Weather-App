@@ -101,3 +101,6 @@ LocalCurrent), (3) `town-weather.ts` current block (lat-lng towns), (4) `weather
 after the model assembly (resort `/weather/:id`). Each country gates by bbox
 (`isInJapan`/`isInNewZealand`) or `region`/`countryCode` so they never cross-fire.
 Routes mount under `/api` (curl `localhost:$PORT/api/...`).
+
+## Hourly "Now" cell mirrors the hero (Aug 2026)
+WeatherHourly (shared by TownWeather + NearYouWeather) takes `nowCode`/`nowIsDay` and uses them for the index-0 "Now" icon only. **Why:** Open-Meteo's `current` block and `hourly[0]` weather_code routinely disagree (current said "Mainly clear" while hour-0 showed drizzle — user-reported), and current may also be observation-reconciled (JP/NZ) while hourly never is. **How to apply:** any new consumer of WeatherHourly must pass the same current.weatherCode its hero uses; temps/pop in the Now cell intentionally stay forecast values.
