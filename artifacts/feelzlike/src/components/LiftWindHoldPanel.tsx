@@ -394,7 +394,7 @@ export function LiftWindHoldPanel({
                     </span>
                   )}
                   <span
-                    className={`hidden sm:inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${style.badge}`}
+                    className={`${liveChip ? "hidden sm:inline-flex" : "inline-flex"} items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${style.badge}`}
                   >
                     <Icon className="w-3 h-3" />
                     {t(labelText.en, labelText.ja)}

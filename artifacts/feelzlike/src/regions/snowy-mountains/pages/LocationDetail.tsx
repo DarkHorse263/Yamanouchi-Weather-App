@@ -24,9 +24,6 @@ import {
   Camera,
   Cable,
   ExternalLink,
-  CheckCircle2,
-  XCircle,
-  AlertCircle,
   Clock,
   Gauge,
   Thermometer,
@@ -141,27 +138,6 @@ const AU_LIFT_HOURS: Record<string, { hours: string; note?: string }> = {
 // reference-only mode. Other resorts stay reference-only with a link to their
 // own official report until each gets a real feed.
 const LIVE_LIFT_STATUS_RESORTS = new Set<string>(["thredbo"]);
-
-function getStatusColor(status: string) {
-  switch (status) {
-    case "open": return "bg-emerald-500/15 text-emerald-700 border-emerald-500/30";
-    case "closed": return "bg-slate-500/10 text-muted-foreground border-slate-500/20";
-    case "wind-hold": return "bg-amber-500/15 text-amber-700 border-amber-500/30";
-    case "on-hold": return "bg-amber-500/15 text-amber-700 border-amber-500/30";
-    case "scheduled": return "bg-sky-500/15 text-sky-800 border-sky-500/30";
-    default: return "bg-slate-500/10 text-muted-foreground border-slate-500/20";
-  }
-}
-function getStatusIcon(status: string) {
-  switch (status) {
-    case "open": return <CheckCircle2 className="w-3 h-3" />;
-    case "closed": return <XCircle className="w-3 h-3" />;
-    case "wind-hold": return <Wind className="w-3 h-3" />;
-    case "on-hold": return <AlertCircle className="w-3 h-3" />;
-    case "scheduled": return <Clock className="w-3 h-3" />;
-    default: return null;
-  }
-}
 
 export default function LocationDetail() {
   const [, mParams] = useRoute("/mountain/:id");
@@ -957,20 +933,21 @@ export default function LocationDetail() {
                   )}
                 </div>
 
-                <div className="space-y-1 flex-1 overflow-y-auto max-h-[280px] pr-1 hide-scrollbar">
-                  {liftData.lifts.map((lift: any) => (
-                    <div key={lift.id} className="flex justify-between items-center px-2 py-2 rounded-lg hover:bg-slate-50 transition-colors">
-                      <div>
-                        <p className="text-sm text-foreground">{lift.name}</p>
-                        <p className="byline text-muted-foreground/60">{lift.type.replace("-", " ")}</p>
-                      </div>
-                      <div className={cn("px-2 py-0.5 rounded-full text-[10px] font-semibold border flex items-center gap-1", getStatusColor(lift.status))}>
-                        {getStatusIcon(lift.status)}
-                        <span className="capitalize">{lift.status.replace("-", " ")}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                {/* Per-lift rows intentionally NOT repeated here · the
+                    per-lift wind panel below is the single per-lift surface
+                    (it merges these live statuses as chips). This card keeps
+                    the free headline counts + the official report link. */}
+                {liftData.liftStatusUrl && (
+                  <a
+                    href={liftData.liftStatusUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-1.5 text-[13px] font-semibold text-sky-700 hover:text-sky-600"
+                  >
+                    open {liftData.locationName ?? location.name}&apos;s official lift report
+                    <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+                  </a>
+                )}
               </>
             ) : null}
           </motion.div>
@@ -1058,7 +1035,7 @@ export default function LocationDetail() {
               liveStatusKnown={hasLiveLiftStatus}
               actualLiftsOpen={hasLiveLiftStatus ? liftData?.liftsOpen : undefined}
               actualTotalLifts={liftData?.totalLifts}
-              liftReportUrl={!hasLiveLiftStatus ? liftData?.liftStatusUrl : undefined}
+              liftReportUrl={liftData?.liftStatusUrl}
               resortName={liftData?.locationName ?? location.name}
               // Official per-lift rows (Thredbo XML feed) - only when this
               // response is verified-live; feed down = undefined = the
