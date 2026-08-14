@@ -18,3 +18,16 @@ export function midMountainElevation(summitM: number): number {
   const lower = Math.max(50, summit - lowerDrop);
   return Math.max(lower + 50, summit - midDrop);
 }
+
+/**
+ * Base-area (lower band) elevation for a resort, in metres. Mirrors the
+ * `lower` band in the api-server's `bandElevations()` exactly — the stand-in
+ * for "the village" when a resort's base elevation isn't separately known:
+ *   lower = max(50, summit - min(600, round(summit * 0.3)))
+ */
+export function baseBandElevation(summitM: number): number {
+  if (!Number.isFinite(summitM) || summitM <= 0) return Math.round(summitM);
+  const summit = Math.round(summitM);
+  const lowerDrop = Math.min(600, Math.round(summit * 0.3));
+  return Math.max(50, summit - lowerDrop);
+}

@@ -43,6 +43,9 @@ export default function MountainConditionsSummary({
       input.reportedBaseMinCm,
       input.reportedBaseSource,
       input.trustedModelBaseCm,
+      input.freezingLevelM,
+      input.villageElevationM,
+      input.midElevationM,
       u,
     ],
   );

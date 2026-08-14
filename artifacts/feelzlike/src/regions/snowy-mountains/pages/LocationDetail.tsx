@@ -3,7 +3,7 @@ import { useRegion } from "@workspace/feelzlike-shell";
 import { useGetLocationWeather, useGetLocationWebcams, useGetLocationLiftStatus, useGetResortSnowReport } from "@workspace/api-client-react";
 import { MountainSnapshot } from "@workspace/feelzlike-dashboard";
 import { ElevationBands } from "@/components/weather/ElevationBands";
-import { midMountainElevation } from "@/lib/elevation";
+import { baseBandElevation, midMountainElevation } from "@/lib/elevation";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
 import { OfficialSiteLink } from "@/components/OfficialSiteLink";
@@ -491,6 +491,9 @@ export default function LocationDetail() {
             reportedBaseMinCm={resortReport?.baseMinCm}
             reportedBaseSource={resortReport ? reportSource : undefined}
             trustedModelBaseCm={modelDepthTrusted ? current.snowDepth : undefined}
+            freezingLevelM={current.freezingLevel}
+            villageElevationM={summitElevationM != null ? baseBandElevation(summitElevationM) : undefined}
+            midElevationM={snowElevationM}
           />
 
           {/* live cam thumbnail · a real look at the mountain right in the

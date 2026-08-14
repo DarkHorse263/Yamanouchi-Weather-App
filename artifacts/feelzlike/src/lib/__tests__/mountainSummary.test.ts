@@ -104,6 +104,62 @@ test("trusted model base speaks with a hedge", () => {
   assert.match(s.en, /base ~42 cm · model estimate/);
 });
 
+test("rain-snow split clause when freezing level sits between village and mid", () => {
+  // FL 1900 → snow line 1600 · village 1300 reads rain, mid 1750 reads snow
+  const s = buildMountainSummary({
+    ...base,
+    snowNext24Cm: 8,
+    freezingLevelM: 1900,
+    villageElevationM: 1300,
+    midElevationM: 1750,
+  });
+  assert.ok(s);
+  assert.match(s.en, /rain low down, snow above ~1600 m/);
+  assert.ok(s.ja.includes("標高1600mより上は雪、下は雨"));
+});
+
+test("no split clause when all-snow, all-rain, or no snow incoming", () => {
+  const allSnow = buildMountainSummary({
+    ...base,
+    snowNext24Cm: 8,
+    freezingLevelM: 1200, // snow line 900 · below the village
+    villageElevationM: 1300,
+    midElevationM: 1750,
+  });
+  assert.ok(allSnow && !allSnow.en.includes("rain low down"));
+  const allRain = buildMountainSummary({
+    ...base,
+    snowNext24Cm: 8,
+    freezingLevelM: 2400, // snow line 2100 · above mid
+    villageElevationM: 1300,
+    midElevationM: 1750,
+  });
+  assert.ok(allRain && !allRain.en.includes("rain low down"));
+  const dry = buildMountainSummary({
+    ...base,
+    snowNext24Cm: 0,
+    freezingLevelM: 1900,
+    villageElevationM: 1300,
+    midElevationM: 1750,
+  });
+  assert.ok(dry && !dry.en.includes("rain low down"));
+});
+
+test("split clause fails soft when freezing level or elevations missing", () => {
+  const noFl = buildMountainSummary({ ...base, snowNext24Cm: 8, villageElevationM: 1300, midElevationM: 1750 });
+  assert.ok(noFl && !noFl.en.includes("rain low down"));
+  const noElev = buildMountainSummary({ ...base, snowNext24Cm: 8, freezingLevelM: 1900 });
+  assert.ok(noElev && !noElev.en.includes("rain low down"));
+  const inverted = buildMountainSummary({
+    ...base,
+    snowNext24Cm: 8,
+    freezingLevelM: 1900,
+    villageElevationM: 1750,
+    midElevationM: 1300,
+  });
+  assert.ok(inverted && !inverted.en.includes("rain low down"));
+});
+
 test("ja strings populated alongside en", () => {
   const s = buildMountainSummary({ ...base, snowNext24Cm: 8, reportedBaseCm: 95, reportedBaseSource: "reported" });
   assert.ok(s);

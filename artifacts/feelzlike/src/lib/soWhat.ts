@@ -41,14 +41,64 @@ export function freezingLevelSoWhat(
   freezingLevelM: number | null | undefined,
   forecastElevationM: number | null | undefined,
 ): SoWhat | null {
-  if (freezingLevelM == null || !Number.isFinite(freezingLevelM)) return null;
-  if (forecastElevationM == null || !Number.isFinite(forecastElevationM)) return null;
-  const snowLineM = freezingLevelM - 300;
-  if (snowLineM <= forecastElevationM - 100) {
+  const phase = precipPhaseAt(freezingLevelM, forecastElevationM);
+  if (phase === "snow") {
     return { en: "any precip falls as snow here", ja: "この高度では降水は雪" };
   }
-  if (snowLineM <= forecastElevationM + 100) {
+  if (phase === "mixed") {
     return { en: "right on the rain-snow line", ja: "雨雪の境目の高度" };
   }
-  return { en: "precip would fall as rain here", ja: "この高度では降水は雨" };
+  if (phase === "rain") {
+    return { en: "precip would fall as rain here", ja: "この高度では降水は雨" };
+  }
+  return null;
+}
+
+/** snow line sits ~300m below the freezing level · same offset the server's
+ * FL−300 phase partition uses (see openMeteoElevation.ts) — keep in sync. */
+export const SNOW_LINE_OFFSET_M = 300;
+
+export type PrecipPhase = "snow" | "mixed" | "rain";
+
+/** classify what precip does at ONE elevation given the freezing level ·
+ * the raw read behind freezingLevelSoWhat (±100m buffer = "mixed") */
+export function precipPhaseAt(
+  freezingLevelM: number | null | undefined,
+  elevationM: number | null | undefined,
+): PrecipPhase | null {
+  if (freezingLevelM == null || !Number.isFinite(freezingLevelM)) return null;
+  if (elevationM == null || !Number.isFinite(elevationM)) return null;
+  const snowLineM = freezingLevelM - SNOW_LINE_OFFSET_M;
+  if (snowLineM <= elevationM - 100) return "snow";
+  if (snowLineM <= elevationM + 100) return "mixed";
+  return "rain";
+}
+
+/**
+ * rain-snow split across the hill · returns the snow line (m) ONLY when the
+ * freezing level truly sits between the two heights: the lower elevation
+ * reads rain (or right on the line) while the upper elevation reads snow.
+ * null in every other case — all-snow, all-rain, missing data, or a
+ * degenerate elevation pair — so callers fail soft.
+ */
+export function rainSnowSplitM(
+  freezingLevelM: number | null | undefined,
+  lowerElevationM: number | null | undefined,
+  upperElevationM: number | null | undefined,
+): number | null {
+  if (
+    lowerElevationM == null ||
+    upperElevationM == null ||
+    !Number.isFinite(lowerElevationM) ||
+    !Number.isFinite(upperElevationM) ||
+    lowerElevationM >= upperElevationM
+  ) {
+    return null;
+  }
+  const low = precipPhaseAt(freezingLevelM, lowerElevationM);
+  const high = precipPhaseAt(freezingLevelM, upperElevationM);
+  if ((low === "rain" || low === "mixed") && high === "snow") {
+    return Math.round((freezingLevelM as number) - SNOW_LINE_OFFSET_M);
+  }
+  return null;
 }

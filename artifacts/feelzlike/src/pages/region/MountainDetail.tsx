@@ -53,7 +53,7 @@ import { REGION_COUNTRY } from "@/regions";
 import { MountainWebcams } from "@/components/MountainWebcams";
 import { ForecastChart } from "@/components/weather/ForecastChart";
 import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
-import { midMountainElevation } from "@/lib/elevation";
+import { baseBandElevation, midMountainElevation } from "@/lib/elevation";
 import { getLiftsForMountain } from "@/data/lifts";
 import { cn } from "@/lib/utils";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
@@ -521,6 +521,9 @@ export function MountainDetail() {
             reportedBaseMinCm={resortReport?.baseMinCm}
             reportedBaseSource={resortReport ? reportSource : undefined}
             trustedModelBaseCm={modelDepthTrusted ? current.snowDepth : undefined}
+            freezingLevelM={current.freezingLevel}
+            villageElevationM={elevSummitM != null ? baseBandElevation(elevSummitM) : undefined}
+            midElevationM={elevSummitM != null ? midMountainElevation(elevSummitM) : undefined}
           />
 
           {/* live cam thumbnail · a real look at the mountain right in the

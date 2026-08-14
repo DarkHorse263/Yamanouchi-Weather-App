@@ -14,7 +14,7 @@
  * PURE module: must not import @/regions (tsx --test isolation rule).
  */
 import { buildDayNarrative, type DayNarrativeInput } from "./dayNarrative";
-import { snowNext24SoWhat, windSoWhat } from "./soWhat";
+import { rainSnowSplitM, snowNext24SoWhat, windSoWhat } from "./soWhat";
 
 /** display-edge formatters · supplied by useUnits at the component layer */
 export interface SummaryFormat {
@@ -42,6 +42,12 @@ export interface MountainSummaryInput extends DayNarrativeInput {
   /** model snow depth (cm) · pass ONLY when trusted (off-season) — in
    * season the model reads ~0 under running lifts and must stay silent */
   trustedModelBaseCm?: number | null;
+  /** current freezing level (m) · feeds the rain-snow split clause */
+  freezingLevelM?: number | null;
+  /** village / base-area elevation (m) · lower band stand-in is fine */
+  villageElevationM?: number | null;
+  /** mid-mountain elevation (m) · mirrors server bandElevations().mid */
+  midElevationM?: number | null;
   fmt: SummaryFormat;
 }
 
@@ -89,6 +95,22 @@ export function buildMountainSummary(input: MountainSummaryInput): MountainSumma
         en.push(so.en);
         ja.push(so.ja);
       }
+    }
+  }
+
+  // 2.5 · rain-snow split · only when snow is actually incoming AND the
+  // freezing level sits between the village and mid-mountain — the one
+  // call skiers care most about ("snow up top, rain at the village").
+  // fails soft: missing freezing level or elevations just drops the clause.
+  if (snow24 != null && Number.isFinite(snow24) && snow24 >= 0.5) {
+    const splitM = rainSnowSplitM(
+      input.freezingLevelM,
+      input.villageElevationM,
+      input.midElevationM,
+    );
+    if (splitM != null) {
+      en.push(`rain low down, snow above ~${fmt.elev(splitM)} ${fmt.elevUnit}`);
+      ja.push(`標高${fmt.elev(splitM)}${fmt.elevUnit}より上は雪、下は雨`);
     }
   }
 
