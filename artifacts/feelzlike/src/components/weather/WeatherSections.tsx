@@ -356,7 +356,13 @@ export function WeatherOutlook({
       <p className="byline text-muted-foreground/70">{t("Next 6 days", "今後6日間")}</p>
       <div className="mt-3 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
         {days.map((d) => {
-          const Icon = pickIcon(d.weatherCode, true);
+          const Icon = pickIcon(
+            d.weatherCode,
+            true,
+            d.precipitationProbabilityMax,
+            d.rainSum,
+            MARGINAL_DAILY_PRECIP_THRESHOLD,
+          );
           return (
             <div
               key={d.date}
@@ -516,17 +522,22 @@ function KV({
  *   51 Light drizzle · 53 Moderate drizzle · 61 Slight rain · 80 Slight showers
  *
  * Thresholds (confirmed with owner, Aug 2026):
- *   precipProbability < 25 % AND precipMm < 0.3 mm
+ *   precipProbability < 25 % AND precipMm < 0.3 mm  (hourly)
+ *                             AND precipMm < 0.5 mm  (daily total — use MARGINAL_DAILY_PRECIP_THRESHOLD)
  */
 const MARGINAL_DRIZZLE_CODES = new Set([51, 53, 61, 80]);
 const MARGINAL_POP_THRESHOLD = 25; // %
-const MARGINAL_PRECIP_THRESHOLD = 0.3; // mm
+const MARGINAL_PRECIP_THRESHOLD = 0.3; // mm (per-hour)
+const MARGINAL_DAILY_PRECIP_THRESHOLD = 0.5; // mm (daily total — a full day with <0.5 mm is effectively dry)
 
 export function pickIcon(
   code: number | null,
   isDay: boolean,
   precipProbability?: number | null,
   precipMm?: number | null,
+  /** Override the precipitation amount threshold. Pass MARGINAL_DAILY_PRECIP_THRESHOLD
+   *  when suppressing daily outlook cards (daily totals are naturally larger than per-hour). */
+  precipThresholdMm: number = MARGINAL_PRECIP_THRESHOLD,
 ): ComponentType<{ className?: string; strokeWidth?: number }> {
   if (code === null) return Cloud;
   if (code === 0 || code === 1) return isDay ? Sun : Cloud;
@@ -536,7 +547,7 @@ export function pickIcon(
     if (
       MARGINAL_DRIZZLE_CODES.has(code) &&
       precipProbability != null && precipProbability < MARGINAL_POP_THRESHOLD &&
-      precipMm != null && precipMm < MARGINAL_PRECIP_THRESHOLD
+      precipMm != null && precipMm < precipThresholdMm
     ) {
       return Cloud;
     }
@@ -548,7 +559,7 @@ export function pickIcon(
     if (
       code === 80 &&
       precipProbability != null && precipProbability < MARGINAL_POP_THRESHOLD &&
-      precipMm != null && precipMm < MARGINAL_PRECIP_THRESHOLD
+      precipMm != null && precipMm < precipThresholdMm
     ) {
       return Cloud;
     }
