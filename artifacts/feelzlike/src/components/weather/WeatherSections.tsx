@@ -304,7 +304,15 @@ export function WeatherHourly({
           {hourly.map((h, i) => {
             const isNow = i === 0;
             const cellCode = isNow && nowCode != null ? nowCode : h.weatherCode;
-            const Icon = pickIcon(cellCode, isNow && nowIsDay !== undefined ? nowIsDay : true);
+            // Pass precip signals for marginal-drizzle suppression on forecast
+            // hours only — the "Now" cell is authoritative current conditions and
+            // must never be filtered (pass undefined so pickIcon skips the check).
+            const Icon = pickIcon(
+              cellCode,
+              isNow && nowIsDay !== undefined ? nowIsDay : true,
+              isNow ? undefined : h.precipitationProbability,
+              isNow ? undefined : h.precipitation,
+            );
             const tNorm = h.temperature !== null ? (h.temperature - minT) / range : 0;
             const pop = h.precipitationProbability ?? 0;
             return (
@@ -496,13 +504,56 @@ function KV({
   );
 }
 
-export function pickIcon(code: number | null, isDay: boolean): ComponentType<{ className?: string; strokeWidth?: number }> {
+/**
+ * Marginal-drizzle check: when a "slight/light" rain or drizzle code appears
+ * alongside a very low precipitation probability AND a trace-level precipitation
+ * amount, the model is hedging rather than forecasting real rain. Show a plain
+ * Cloud so the strip doesn't read as "it will rain" when the sky is effectively
+ * dry. Snow codes are never suppressed. The "Now" cell (current conditions)
+ * should always pass undefined so current observations are never filtered.
+ *
+ * Codes considered marginal-suppressible (slight/light variants only):
+ *   51 Light drizzle · 53 Moderate drizzle · 61 Slight rain · 80 Slight showers
+ *
+ * Thresholds (confirmed with owner, Aug 2026):
+ *   precipProbability < 25 % AND precipMm < 0.3 mm
+ */
+const MARGINAL_DRIZZLE_CODES = new Set([51, 53, 61, 80]);
+const MARGINAL_POP_THRESHOLD = 25; // %
+const MARGINAL_PRECIP_THRESHOLD = 0.3; // mm
+
+export function pickIcon(
+  code: number | null,
+  isDay: boolean,
+  precipProbability?: number | null,
+  precipMm?: number | null,
+): ComponentType<{ className?: string; strokeWidth?: number }> {
   if (code === null) return Cloud;
   if (code === 0 || code === 1) return isDay ? Sun : Cloud;
   if (code === 2 || code === 3 || code === 45 || code === 48) return Cloud;
-  if (code >= 51 && code <= 67) return CloudRain;
+  if (code >= 51 && code <= 67) {
+    // Suppress marginal codes when both precip signals are below threshold
+    if (
+      MARGINAL_DRIZZLE_CODES.has(code) &&
+      precipProbability != null && precipProbability < MARGINAL_POP_THRESHOLD &&
+      precipMm != null && precipMm < MARGINAL_PRECIP_THRESHOLD
+    ) {
+      return Cloud;
+    }
+    return CloudRain;
+  }
   if (code >= 71 && code <= 77) return Snowflake;
-  if (code >= 80 && code <= 82) return CloudRain;
+  if (code >= 80 && code <= 82) {
+    // Slight showers (80) can be marginal too — check here for the rain-shower branch
+    if (
+      code === 80 &&
+      precipProbability != null && precipProbability < MARGINAL_POP_THRESHOLD &&
+      precipMm != null && precipMm < MARGINAL_PRECIP_THRESHOLD
+    ) {
+      return Cloud;
+    }
+    return CloudRain;
+  }
   if (code >= 85 && code <= 86) return Snowflake;
   if (code >= 95) return CloudRain;
   return Cloud;
