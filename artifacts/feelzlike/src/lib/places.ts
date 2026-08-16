@@ -175,9 +175,20 @@ export type CountryCode = string;
 const AU_TAGS = ["AU", "AUS", "Australia", "NSW", "VIC", "TAS"];
 const NZ_TAGS = ["NZ", "NZL", "New Zealand"];
 const CANADA_TAGS = ["AB", "BC", "QC"];
+// US region shortTags are STATE codes (like AU's NSW/VIC/TAS). This is every
+// state code currently used by a region file - keep it in sync when a region
+// in a NEW state is added, or that state's stay pages silently miss the
+// trivago button even after its TRIVAGO_DESTINATIONS entry exists.
+const US_TAGS = [
+  "US", "USA",
+  "AK", "AZ", "CA", "CO", "CT", "ID", "MA", "ME", "MI", "MN", "MT", "NC",
+  "NH", "NJ", "NM", "NV", "NY", "OR", "PA", "SD", "UT", "VA", "VT", "WA",
+  "WI", "WV", "WY",
+];
 function isAu(country?: string): boolean { return AU_TAGS.includes(country ?? ""); }
 function isNz(country?: string): boolean { return NZ_TAGS.includes(country ?? ""); }
 function isCanada(country?: string): boolean { return CANADA_TAGS.includes(country ?? ""); }
+function isUs(country?: string): boolean { return US_TAGS.includes(country ?? ""); }
 
 /** Returns the ordered list of platforms to surface for a given country/region tag. */
 export function platformsForCountry(country: CountryCode): StayPlatform[] {
@@ -187,10 +198,11 @@ export function platformsForCountry(country: CountryCode): StayPlatform[] {
     return [...base, "rakuten" as StayPlatformId, "jalan" as StayPlatformId, "trivago" as StayPlatformId]
       .map((id) => STAY_PLATFORMS[id]);
   }
-  // AU / NZ / Canada also get trivago (Awin programmes approved Aug 2026).
-  // The button only renders for regions with a verified TRIVAGO_DESTINATIONS
-  // entry - callers drop platforms whose deep link resolves to "".
-  if (isAu(country) || isNz(country) || isCanada(country)) {
+  // AU / NZ / Canada / USA also get trivago (Awin programmes approved Aug 2026;
+  // Trivago USA approved 12 Aug 2026). The button only renders for regions with
+  // a verified TRIVAGO_DESTINATIONS entry - callers drop platforms whose deep
+  // link resolves to "".
+  if (isAu(country) || isNz(country) || isCanada(country) || isUs(country)) {
     return [...base, "trivago" as StayPlatformId].map((id) => STAY_PLATFORMS[id]);
   }
   return base.map((id) => STAY_PLATFORMS[id]);
@@ -207,11 +219,15 @@ export function platformsForCountry(country: CountryCode): StayPlatform[] {
 //   - JP (trivago.jp): earns via CJ - the stay pages wrap the plain URL in
 //     cjLinkFor("trivago", ...) (lib/cj.ts, Evergreen deep link, trivago JP
 //     programme). cj.ts only wraps trivago.jp destinations.
-//   - AU / NZ / Canada: earn via the Awin trivago AU / NZ / Canada programmes
-//     (approved 4-6 Aug 2026) through Convert-a-Link, which auto-rewrites
-//     PLAIN links on the EXACT approved country domain. So these entries MUST
-//     stay plain trivago.com.au / trivago.co.nz / trivago.ca URLs - do NOT
+//   - AU / NZ / Canada / USA: earn via the Awin trivago AU / NZ / Canada / USA
+//     programmes (AU/NZ/CA approved 4-6 Aug 2026, USA approved 12 Aug 2026)
+//     through Convert-a-Link, which auto-rewrites PLAIN links on the EXACT
+//     approved country domain. So these entries MUST stay plain
+//     trivago.com.au / trivago.co.nz / trivago.ca / trivago.com URLs - do NOT
 //     CJ-wrap them and do NOT move them to another domain.
+//     (trivago moved its programme from CJ to Awin in Aug 2026 - the Awin
+//     welcome emails warn that links left on old-network tracking earn
+//     nothing, which is why only lib/cj.ts's trivago.jp allowlist stays CJ.)
 //
 //   yamanouchi = Yamanouchi-machi (Nagano), trivago locid 200-70117. Covers
 //   Yudanaka, Shibu Onsen and the Yomase/Shiga Kogen onsen-ski towns. Verified
@@ -246,6 +262,16 @@ const TRIVAGO_DESTINATIONS: Record<string, string> = {
   "quebec-laurentians": "https://www.trivago.ca/en-CA/odr/hotels-mont-tremblant-canada?search=200-53804",
   "quebec-eastern-townships": "https://www.trivago.ca/en-CA/odr/hotels-bromont-canada?search=200-52766",
   "quebec-charlevoix": "https://www.trivago.ca/en-CA/odr/hotels-sainte-anne-de-beaupr%C3%A9-canada?search=200-63493",
+  // USA (Awin · trivago.com) - the 7 flagship US regions, keyed to each
+  // region's main accommodation hub town. Every URL curl-verified 16 Aug 2026
+  // to stay on its destination page (invalid locids redirect to the homepage).
+  "summit-county": "https://www.trivago.com/en-US/odr/hotels-breckenridge-colorado?search=200-14282",
+  "vail-valley": "https://www.trivago.com/en-US/odr/hotels-vail-colorado?search=200-14304",
+  "aspen-snowmass": "https://www.trivago.com/en-US/odr/hotels-aspen-colorado?search=200-14277",
+  "park-city": "https://www.trivago.com/en-US/odr/hotels-park-city-utah?search=200-14954",
+  "north-lake-tahoe": "https://www.trivago.com/en-US/odr/hotels-truckee-california?search=200-41089",
+  "south-lake-tahoe": "https://www.trivago.com/en-US/odr/hotels-south-lake-tahoe-california?search=200-14275",
+  "stowe-smugglers-notch": "https://www.trivago.com/en-US/odr/hotels-stowe-vermont?search=200-14971",
 };
 
 /** Build a deep-link search URL for any supported platform. Region-keyed
@@ -293,8 +319,8 @@ export function platformDeepLink(
       // No free-text deep link: resolve the region to its verified trivago area
       // page, or "" when we have none (callers skip the button). This is the
       // plain destination. JP entries get CJ tracking added by the caller via
-      // cjLinkFor (which only wraps trivago.jp); AU/NZ/CA entries MUST go out
-      // as-is - Awin Convert-a-Link rewrites the plain country-domain link.
+      // cjLinkFor (which only wraps trivago.jp); AU/NZ/CA/US entries MUST go
+      // out as-is - Awin Convert-a-Link rewrites the plain country-domain link.
       return TRIVAGO_DESTINATIONS[opts.region ?? ""] ?? "";
   }
 }
