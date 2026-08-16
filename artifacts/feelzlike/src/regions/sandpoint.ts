@@ -58,7 +58,7 @@ export const sandpointRegion: RegionConfig = {
       lng: -116.62300,
       blurb: "Ikon Pass (destination tier) · independent ownership · base 3,957 ft / summit 6,400 ft / vertical 2,440 ft — the 2nd largest ski area in Idaho by vertical drop · confirmed 2025-26 season Dec 3, 2025 (delayed from an earlier planned Nov 28/21 window) - Apr 5, 2026, despite a \\\"historically low snow\\\" season per research.",
       websiteUrl: "https://www.schweitzer.com/",
-      snowReportUrl: "https://www.schweitzer.com/mountain-report/",
+      snowReportUrl: "https://www.schweitzer.com/mountain-info/mountain-report",
       expert_only: true,
       backcountry_access: true,
       terrain_park: true,

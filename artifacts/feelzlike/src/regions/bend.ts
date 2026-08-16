@@ -48,7 +48,7 @@ export const bendRegion: RegionConfig = {
       lng: -121.6885,
       blurb: "Ikon Pass destination (full destination access; exact tier/blackout details specific to Mt. Bachelor were not itemized in sources reviewed) · base ~6,300 ft (5,700 ft per an alternate source) / summit 9,065 ft · 360°-skiable volcanic cone, one of the largest lift-served ski areas in the US by skiable acreage · confirmed official webcam hub with 8+ live feeds · ⚠️ avalanche forecasting here comes from the smaller, volunteer-run Central Oregon Avalanche Center (COAC), not the better-resourced NWAC that covers Mt. Hood.",
       websiteUrl: "https://www.mtbachelor.com/",
-      snowReportUrl: "https://www.mtbachelor.com/mountain-report",
+      snowReportUrl: "https://www.mtbachelor.com/the-mountain/mountain-report/",
       expert_only: true,
       backcountry_access: true,
       terrain_park: true,

@@ -73,7 +73,7 @@ export const summitCountyRegion: RegionConfig = {
       lng: -106.1512,
       blurb: "naturally divided terrain, easiest on the east side, steepest west · Ikon Pass",
       websiteUrl: "https://www.coppercolorado.com/",
-      snowReportUrl: "https://www.coppercolorado.com/the-mountain",
+      snowReportUrl: "https://www.coppercolorado.com/the-mountain/conditions-weather/snow-report/",
       beginner_friendly: true,
       kids_lessons: true,
       terrain_park: true,

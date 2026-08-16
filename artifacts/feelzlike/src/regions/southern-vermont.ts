@@ -165,11 +165,11 @@ export const southernVermontRegion: RegionConfig = {
     { category: "Resorts", label: "Mount Snow", url: "https://www.mountsnow.com/" },
     { category: "Resorts", label: "Bromley Mountain", url: "https://www.bromley.com/" },
     { category: "Resorts", label: "Magic Mountain (⚠️ did not open for 2025-26 season)", url: "https://www.magicmtn.com/" },
-    { category: "Transport", label: "VTrans · 511vt.com road conditions", url: "https://511vt.com/" },
+    { category: "Transport", label: "VTrans · New England 511 road conditions", url: "https://www.newengland511.org/region/Vermont" },
   ],
   roadsSource: {
-    label: "VTrans · 511vt.com",
-    url: "https://511vt.com/",
+    label: "VTrans · New England 511",
+    url: "https://www.newengland511.org/region/Vermont",
     dataAvailable: false,
   },
   weatherSource: {

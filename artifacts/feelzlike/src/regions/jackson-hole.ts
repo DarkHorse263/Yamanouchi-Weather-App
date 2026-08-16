@@ -61,7 +61,7 @@ export const jacksonHoleRegion: RegionConfig = {
       lng: -110.8279,
       blurb: "Ikon Pass (Full only, excluded from Base) · legendary steep terrain off the Aerial Tram, 4,139 ft vertical · reservation system required for Ikon/Mountain Collective 2025-26 · ⚠️ no confirmed dedicated webcam URL found in research, treat as unverified.",
       websiteUrl: "https://www.jacksonhole.com/",
-      snowReportUrl: "https://www.jacksonhole.com/snow-report",
+      snowReportUrl: "https://www.jacksonhole.com/mountain-report",
       expert_only: true,
       terrain_park: true,
       beginner_friendly: true,

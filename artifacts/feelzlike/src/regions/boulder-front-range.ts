@@ -33,7 +33,7 @@ export const boulderFrontRangeRegion: RegionConfig = {
       lng: -105.5828,
       blurb: "the closest lift-served skiing to Denver and Boulder, about an hour up Boulder Canyon",
       websiteUrl: "https://www.eldora.com/",
-      snowReportUrl: "https://www.eldora.com/the-mountain/webcams/lower-mountain-live-cam/",
+      snowReportUrl: "https://www.eldora.com/the-mountain/current-conditions/webcams/",
       beginner_friendly: true,
       kids_lessons: true,
       terrain_park: true,
@@ -55,7 +55,7 @@ export const boulderFrontRangeRegion: RegionConfig = {
   tourismLinks: [
     { category: "Tourism", label: "Visit Boulder", url: "https://www.bouldercoloradousa.com/" },
     { category: "Resorts", label: "Eldora Mountain Resort", url: "https://www.eldora.com/" },
-    { category: "Resorts", label: "Eldora · webcams", url: "https://www.eldora.com/the-mountain/webcams/lower-mountain-live-cam/" },
+    { category: "Resorts", label: "Eldora · webcams", url: "https://www.eldora.com/the-mountain/current-conditions/webcams/" },
     { category: "Transport", label: "CDOT · cotrip.org road conditions & cameras", url: "https://www.cotrip.org/" },
     { category: "Safety", label: "Colorado Avalanche Information Center", url: "https://avalanche.state.co.us/forecasts" },
   ],

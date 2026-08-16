@@ -263,7 +263,7 @@ const VT_ROADS_GENERAL: SourceGroup = {
   blurb: "Vermont has no winter chain law — unlike CO/UT/CA, VTrans does not operate a chain-control tier system.",
   blurbJa: "バーモント州にはチェーン法規はありません。",
   items: [
-    { label: "VTrans · 511vt.com", detail: "statewide real-time road conditions & camera map", url: "https://511vt.com/" },
+    { label: "VTrans · New England 511", detail: "statewide real-time road conditions & camera map", url: "https://www.newengland511.org/region/Vermont" },
   ],
 };
 
@@ -546,7 +546,7 @@ const ME_OFFICIAL_REFERENCES_NO_AVALANCHE: SourceGroup = {
   title: "Official references", titleJa: "公式参照先", blurb: "Link-outs, not wired feeds · conditions shown on feelzlike come from the forecast ensemble below. Maine has no dedicated avalanche forecasting or observation authority, including no Maine extension of Mount Washington Avalanche Center coverage; its covered resort terrain is lift-served.", blurbJa: "リンクのみで、データ連携はしていません。メイン州には専用の雪崩情報機関がありません。", items: [{ label: "National Weather Service", detail: "US federal forecasts & warnings", url: "https://www.weather.gov/" }],
 };
 const ME_ROADS_GENERAL: SourceGroup = {
-  title: "Roads & transport", titleJa: "道路・交通", blurb: "MaineDOT and 511 Maine are the state road authority. Chains are permitted in slippery conditions under 29-A M.R.S. §2381, not mandatory; Maine has no general chain-up rule.", blurbJa: "メイン州には一般的なチェーン義務はありません。", items: [{ label: "MaineDOT · 511 Maine", detail: "state authority and real-time road conditions / camera map", url: "https://511maine.gov/" }, { label: "MaineDOT", detail: "state transport authority", url: "https://www.maine.gov/dot/" }],
+  title: "Roads & transport", titleJa: "道路・交通", blurb: "MaineDOT and 511 Maine are the state road authority. Chains are permitted in slippery conditions under 29-A M.R.S. §2381, not mandatory; Maine has no general chain-up rule.", blurbJa: "メイン州には一般的なチェーン義務はありません。", items: [{ label: "MaineDOT · 511 Maine", detail: "state authority and real-time road conditions / camera map", url: "https://www.newengland511.org/region/Maine" }, { label: "MaineDOT", detail: "state transport authority", url: "https://www.maine.gov/dot/" }],
 };
 
 

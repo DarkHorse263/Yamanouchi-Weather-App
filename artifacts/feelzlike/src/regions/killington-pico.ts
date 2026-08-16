@@ -31,7 +31,7 @@ import wordmark from "@assets/feelzlike_trimmed/feelzlike_WordMarque_colour_1604
  * honesty-gate treatment shared by all 6 Vermont regions.
  *
  * Weather is Open-Meteo with the existing OpenWeatherMap fallback. VTrans
- * publishes 511vt.com but nothing is integrated yet, hence
+ * publishes New England 511 but nothing is integrated yet, hence
  * `roadsSource.dataAvailable: false`.
  */
 export const killingtonPicoRegion: RegionConfig = {
@@ -91,11 +91,11 @@ export const killingtonPicoRegion: RegionConfig = {
     { category: "Tourism", label: "Killington Chamber of Commerce", url: "https://www.killingtonchamber.com/" },
     { category: "Resorts", label: "Killington", url: "https://www.killington.com/" },
     { category: "Resorts", label: "Pico Mountain", url: "https://www.picomountain.com/" },
-    { category: "Transport", label: "VTrans · 511vt.com road conditions", url: "https://511vt.com/" },
+    { category: "Transport", label: "VTrans · New England 511 road conditions", url: "https://www.newengland511.org/region/Vermont" },
   ],
   roadsSource: {
-    label: "VTrans · 511vt.com",
-    url: "https://511vt.com/",
+    label: "VTrans · New England 511",
+    url: "https://www.newengland511.org/region/Vermont",
     dataAvailable: false,
   },
   weatherSource: {

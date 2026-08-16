@@ -60,7 +60,7 @@ export const jayPeakNekRegion: RegionConfig = {
       lng: -72.5215,
       blurb: "Indy Pass · Vermont's northernmost major resort, known for the region's highest average natural snowfall · very late/approximate 2025-26 closing (among the last 6 New England areas still open per an Apr 20 2026 report) · opened Nov 22-23 2025, full operations from Nov 29",
       websiteUrl: "https://jaypeakresort.com/",
-      snowReportUrl: "https://jaypeakresort.com/mountain/conditions",
+      snowReportUrl: "https://jaypeakresort.com/todayatjay",
       expert_only: true,
       backcountry_access: true,
       terrain_park: true,
@@ -108,11 +108,11 @@ export const jayPeakNekRegion: RegionConfig = {
     { category: "Tourism", label: "Vermont's Northeast Kingdom", url: "https://www.nekchamber.com/" },
     { category: "Resorts", label: "Jay Peak", url: "https://jaypeakresort.com/" },
     { category: "Resorts", label: "Burke Mountain", url: "https://www.skiburke.com/" },
-    { category: "Transport", label: "VTrans · 511vt.com road conditions", url: "https://511vt.com/" },
+    { category: "Transport", label: "VTrans · New England 511 road conditions", url: "https://www.newengland511.org/region/Vermont" },
   ],
   roadsSource: {
-    label: "VTrans · 511vt.com",
-    url: "https://511vt.com/",
+    label: "VTrans · New England 511",
+    url: "https://www.newengland511.org/region/Vermont",
     dataAvailable: false,
   },
   weatherSource: {

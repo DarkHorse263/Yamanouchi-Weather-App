@@ -48,7 +48,7 @@ export const grandTargheeRegion: RegionConfig = {
       lng: -110.9576,
       blurb: "Mountain Collective Pass (not Ikon/Epic) · renowned for the deepest average annual snowfall on the west side of the Tetons · Fred's Mountain summit 9,862 ft, hike-to Mary's Nipple 9,920 ft, 2,270 ft vertical · a contested 694-acre USFS expansion has been approved but is not yet built; objections run through July 2026 and do not affect the 2025-26 season.",
       websiteUrl: "https://grandtarghee.com/",
-      snowReportUrl: "https://grandtarghee.com/mountain-report/",
+      snowReportUrl: "https://www.grandtarghee.com/the-mountain/cams-conditions/mountain-report",
       terrain_park: true,
       beginner_friendly: true,
       kids_lessons: true,

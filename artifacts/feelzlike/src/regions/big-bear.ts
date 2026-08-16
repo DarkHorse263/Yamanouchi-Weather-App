@@ -88,7 +88,7 @@ export const bigBearRegion: RegionConfig = {
   ],
   footer: "v0.3 · feelzlike",
   tourismLinks: [
-    { category: "Tourism", label: "Visit Big Bear Lake", url: "https://www.bigbearlakeresortassociation.com/" },
+    { category: "Tourism", label: "Visit Big Bear Lake", url: "https://www.bigbear.com/" },
     { category: "Resorts", label: "Bear Mountain", url: "https://www.bigbearmountainresort.com/" },
     { category: "Resorts", label: "Snow Summit", url: "https://www.bigbearmountainresort.com/" },
     { category: "Transport", label: "Caltrans QuickMap · Highway 18/38 conditions", url: "https://quickmap.dot.ca.gov/" },

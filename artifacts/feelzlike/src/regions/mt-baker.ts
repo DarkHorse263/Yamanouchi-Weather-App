@@ -54,7 +54,7 @@ export const mtBakerRegion: RegionConfig = {
       lng: -121.653889,
       blurb: "Independent · no major-pass affiliation (not on Epic, Ikon or Indy) · two base areas (~3,500 ft and ~4,300 ft) / summit ~5,000-5,089 ft / vertical ~1,500-1,589 ft · holds the world record for most snowfall recorded in a single season (1,140 in., 1998-99), verified by NOAA · confirmed 2025-26 season Dec 21, 2025 - Apr 19, 2026 · ⚠️ NO confirmed live webcam found in research — do not treat any third-party mirror as official.",
       websiteUrl: "https://www.mtbaker.us/",
-      snowReportUrl: "https://www.mtbaker.us/conditions/",
+      snowReportUrl: "https://www.mtbaker.us/snow-report/",
       expert_only: true,
       backcountry_access: true,
       beginner_friendly: true,

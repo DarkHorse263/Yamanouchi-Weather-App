@@ -59,7 +59,7 @@ export const boiseRegion: RegionConfig = {
       lng: -116.10329,
       blurb: "Nonprofit 501(c)(3) — the largest nonprofit ski area in the US · Powder Alliance / Freedom Pass, not on Epic, Ikon or Indy · base 5,790 ft / summit 7,852 ft / vertical 1,800 ft · opened Nov 29, 2025, full-mountain operation not until Feb 20, 2026 · ⚠️ CLOSED EARLY for the 2025-26 season on Mar 22, 2026 due to unseasonably warm weather. ⚠️ No dedicated avalanche-forecast center covers the Boise Front — the nearest Sawtooth Avalanche Center zones are 56-61 miles away.",
       websiteUrl: "https://bogusbasin.org/",
-      snowReportUrl: "https://bogusbasin.org/mountain-report/",
+      snowReportUrl: "https://bogusbasin.org/your-mountain/conditions-webcams/",
       expert_only: true,
       backcountry_access: true,
       terrain_park: true,

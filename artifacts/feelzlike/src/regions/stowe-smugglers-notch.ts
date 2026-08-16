@@ -111,11 +111,11 @@ export const stoweSmugglersNotchRegion: RegionConfig = {
     { category: "Tourism", label: "Go Stowe", url: "https://www.gostowe.com/" },
     { category: "Resorts", label: "Stowe Mountain Resort", url: "https://www.stowe.com/" },
     { category: "Resorts", label: "Smugglers' Notch (independent for 2025-26)", url: "https://www.smuggs.com/" },
-    { category: "Transport", label: "VTrans · 511vt.com road conditions", url: "https://511vt.com/" },
+    { category: "Transport", label: "VTrans · New England 511 road conditions", url: "https://www.newengland511.org/region/Vermont" },
   ],
   roadsSource: {
-    label: "VTrans · 511vt.com",
-    url: "https://511vt.com/",
+    label: "VTrans · New England 511",
+    url: "https://www.newengland511.org/region/Vermont",
     dataAvailable: false,
   },
   weatherSource: {

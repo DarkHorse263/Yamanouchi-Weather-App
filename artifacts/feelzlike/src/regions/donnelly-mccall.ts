@@ -87,7 +87,7 @@ export const donnellyMccallRegion: RegionConfig = {
       lng: -116.15500,
       blurb: "Indy Pass member · independent · base 5,880 ft / summit 7,610 ft / vertical 1,921 ft · 70 trails, 6 lifts, no night skiing.",
       websiteUrl: "https://www.brundage.com/",
-      snowReportUrl: "https://www.brundage.com/mountain-report/",
+      snowReportUrl: "https://www.brundage.com/on-the-mountain/snow-report/",
       expert_only: true,
       backcountry_access: true,
       terrain_park: true,

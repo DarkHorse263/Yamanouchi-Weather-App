@@ -63,11 +63,11 @@ export const okemoRegion: RegionConfig = {
   tourismLinks: [
     { category: "Tourism", label: "Ludlow Area Chamber", url: "https://www.ludlow.org/" },
     { category: "Resorts", label: "Okemo Mountain Resort", url: "https://www.okemo.com/" },
-    { category: "Transport", label: "VTrans · 511vt.com road conditions", url: "https://511vt.com/" },
+    { category: "Transport", label: "VTrans · New England 511 road conditions", url: "https://www.newengland511.org/region/Vermont" },
   ],
   roadsSource: {
-    label: "VTrans · 511vt.com",
-    url: "https://511vt.com/",
+    label: "VTrans · New England 511",
+    url: "https://www.newengland511.org/region/Vermont",
     dataAvailable: false,
   },
   weatherSource: {

@@ -96,11 +96,11 @@ export const madRiverValleyRegion: RegionConfig = {
     { category: "Tourism", label: "Mad River Valley Chamber", url: "https://www.madrivervalley.com/" },
     { category: "Resorts", label: "Sugarbush", url: "https://www.sugarbush.com/" },
     { category: "Resorts", label: "Mad River Glen (⚠️ ski-only, no snowboarding)", url: "https://www.madriverglen.com/" },
-    { category: "Transport", label: "VTrans · 511vt.com road conditions", url: "https://511vt.com/" },
+    { category: "Transport", label: "VTrans · New England 511 road conditions", url: "https://www.newengland511.org/region/Vermont" },
   ],
   roadsSource: {
-    label: "VTrans · 511vt.com",
-    url: "https://511vt.com/",
+    label: "VTrans · New England 511",
+    url: "https://www.newengland511.org/region/Vermont",
     dataAvailable: false,
   },
   weatherSource: {

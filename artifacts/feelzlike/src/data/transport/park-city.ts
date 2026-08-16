@@ -14,10 +14,10 @@ export const PARK_CITY_TRANSPORT: TransportProviderList = [
     leg: "to_mountain",
     operator: "Park City Municipal",
     phone: null,
-    website: "https://www.parkcity.gov/departments/transit-bus",
+    website: "https://www.parkcity.gov/services/transit/index.php",
     route_summary:
       "Park City's free bus network - routes link Old Town, the Park City Mountain base areas and Deer Valley. No ticket needed, boards on Main Street.",
-    schedule_url: "https://www.parkcity.gov/departments/transit-bus",
+    schedule_url: "https://www.parkcity.gov/services/transit/index.php",
     featured: true,
     regions: ["park-city"],
   },
