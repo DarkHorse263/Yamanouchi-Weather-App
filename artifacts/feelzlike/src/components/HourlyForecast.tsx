@@ -396,7 +396,7 @@ function skiableNowDisplay(
                   )
                 : read.baseSource === "course"
                   ? t(
-                      `Base ${Math.round(read.baseCm)}cm · official snow course`,
+                      `Base ${Math.round(read.baseCm)}cm · independently measured`,
                       `積雪 ${Math.round(read.baseCm)}cm · 公式観測`,
                     )
                   : t(

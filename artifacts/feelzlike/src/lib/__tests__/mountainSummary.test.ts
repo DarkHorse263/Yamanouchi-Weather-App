@@ -82,14 +82,14 @@ test("reported base beats model, range renders both readings", () => {
   assert.ok(!s.en.includes("model estimate"));
 });
 
-test("course reading captioned as official snow course", () => {
+test("course reading captioned as independently measured", () => {
   const s = buildMountainSummary({
     ...base,
     reportedBaseCm: 95,
     reportedBaseSource: "course",
   });
   assert.ok(s);
-  assert.match(s.en, /base 95 cm · official snow course/);
+  assert.match(s.en, /base 95 cm · independently measured/);
 });
 
 test("no report + untrusted model = base clause omitted entirely", () => {

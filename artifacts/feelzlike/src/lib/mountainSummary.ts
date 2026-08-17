@@ -137,7 +137,11 @@ export function buildMountainSummary(input: MountainSummaryInput): MountainSumma
         ? `${fmt.snow(min)}-${fmt.snow(input.reportedBaseCm)}`
         : `${fmt.snow(input.reportedBaseCm)}`;
     if (input.reportedBaseSource === "course") {
-      en.push(`base ${range} ${fmt.snowUnit} · official snow course`);
+      // "course" = an official off-resort snow-course reading (Snowy Hydro).
+      // Plain-language caption: "snow course" is jargon nobody outside the
+      // industry knows; what matters to a reader is that the figure is an
+      // independent measurement, not the resort's own claim.
+      en.push(`base ${range} ${fmt.snowUnit} · independently measured`);
       ja.push(`積雪${range}${fmt.snowUnit}・公式観測`);
     } else {
       en.push(`base ${range} ${fmt.snowUnit} · resort reported`);
