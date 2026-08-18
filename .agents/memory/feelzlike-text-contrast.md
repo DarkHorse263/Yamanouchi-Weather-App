@@ -4,6 +4,14 @@ description: readability rules for blue/accent text on the light theme after a c
 ---
 
 ## Rule
+Two-sided rule since the Aug 2026 bluebird repaint:
+1. INSIDE white `.glass` cards → dark text (700+ shades, as below).
+2. DIRECTLY ON the blue page canvas (`bg-[#0055FF]` wrapper, aurora hero) → white idiom ONLY: `text-white`, `text-white/70-90` bylines, `bg-white/10 border-white/25` panels, `text-sky-100/200` accents. `text-foreground`, `text-muted-foreground`, `text-sky-700`, and the default `h2` colour are all near-black on blue (~3:1) = the owner's "black type" complaint (Aug 2026, Perisher lift-report panel). LiftWindHoldPanel's header is the reference pattern.
+
+**Blur caveat:** PremiumGate's signed-out `blur-[6px]` smears any text into murky smudges — owner screenshots of blurred sections can LOOK like black type even when computed colour is white; verify with computed styles (puppeteer via api-server's dep + nix chromium) before repainting.
+
+**Audit trick:** a puppeteer contrast sweep (walk text nodes, climb to first opaque bg, flag dark text without a light backdrop) catches these reliably; ~3:1 dark-navy-on-#0055FF slips past a naive `<3` cutoff.
+
 The app is LIGHT-themed everywhere (no `.dark` is ever applied; `.glass` cards are white). Any Tailwind `*-300/400/500` TEXT on a card/page background is a contrast bug. Text on light surfaces must use the 700+ shades: sky-700 for standard accents/links, sky-800 for tiny (≤11px) uppercase labels, emerald-700/amber-700/rose-700 for status chips.
 
 **Why:** July 2026 client feedback (Jindabyne user, mobile) that "light blue type is hard to read". Audit found sky-300/200 text on white glass cards at 1.4–2.8:1 contrast. The `text-*-300` chip pattern (`bg-*-500/15 text-*-300 border-*-500/30`) was a dark-theme idiom copied around; on light glass it is illegible.

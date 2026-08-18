@@ -996,14 +996,16 @@ export default function LocationDetail() {
             href={liftData.liftStatusUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-start gap-3 rounded-2xl bg-sky-500/10 border border-sky-500/30 px-3.5 py-3 transition-colors hover:bg-sky-500/15"
+            className="group flex items-start gap-3 rounded-2xl bg-white/10 border border-white/25 px-3.5 py-3 transition-colors hover:bg-white/15"
           >
-            <Cable className="w-4 h-4 text-sky-500 mt-0.5 shrink-0" />
+            {/* Sits directly on the blue page canvas · white-on-blue idiom
+                only (text-foreground/text-sky-700 here = illegible black type). */}
+            <Cable className="w-4 h-4 text-sky-200 mt-0.5 shrink-0" />
             <div className="min-w-0">
-              <p className="text-sm text-foreground">
+              <p className="text-sm text-white">
                 we don't run a live lift feed for this resort yet · today's open lifts and runs are best checked on the official report.
               </p>
-              <span className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-semibold text-sky-700 group-hover:text-sky-600">
+              <span className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-semibold text-white/90 underline underline-offset-2 group-hover:text-white">
                 open {liftData.locationName} lift report
                 <ExternalLink className="w-3 h-3" aria-hidden="true" />
               </span>
