@@ -61,11 +61,11 @@ export function TownPartnerAd({
       }
     : undefined;
 
-  // "Featured partner" label wears the logo's light blue so partner
-  // placements stand out on any banner · light blue on dark banners, a
-  // darker shade of the same blue on light ones (pale blue text on a
-  // light bg is illegible · light-only app).
-  const labelClass = dark ? "text-[#8ac6f2]" : "text-[#1d6fb8]";
+  // "Featured partner" label · translucent white on dark banners (works on
+  // the shared red panel as well as any dark partner-brand colour), a
+  // darker blue on light ones (pale text on a light bg is illegible ·
+  // light-only app).
+  const labelClass = dark ? "text-white/80" : "text-[#1d6fb8]";
   const nameClass = dark ? "text-white" : "text-slate-900";
   const lineClass = dark ? "text-white/85" : "text-slate-700";
 
@@ -92,7 +92,7 @@ export function TownPartnerAd({
   const cta = (extra: string) => (
     <span
       className={`${extra} items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition-opacity group-hover:opacity-90 ${
-        brand ? "" : "bg-[#0055FF] text-white"
+        brand ? "" : "bg-white text-red-700"
       }`}
       style={ctaStyle}
     >
@@ -116,7 +116,7 @@ export function TownPartnerAd({
         className={`group block rounded-2xl p-5 md:px-6 transition-shadow hover:shadow-lg ${
           brand
             ? "border border-slate-200/60"
-            : "bg-gradient-to-r from-slate-900 to-slate-800"
+            : "bg-gradient-to-r from-red-700 to-red-600"
         }`}
         style={bannerStyle}
       >
