@@ -33,28 +33,33 @@ export function TownPartnerCard({
             data: { partner: partner.name, place: placeId, placement: "listing" },
           })
         }
-        className="group flex items-center gap-5 rounded-[2rem] border-0 bg-white p-6 shadow-[0_12px_40px_-12px_rgba(0,40,150,0.5)] transition-all hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(0,30,120,0.5)]"
+        // Deep-navy partner panel (owner request, Aug 2026): the old white
+        // card read like just another content card · the dark treatment
+        // matches TownPartnerAd so every partner surface stands apart from
+        // both the blue page bg and the white cards. Light-blue label on a
+        // slate-900 panel is the sanctioned dark-panel idiom.
+        className="group flex items-center gap-5 rounded-[2rem] border-0 bg-gradient-to-r from-slate-900 to-slate-800 p-6 shadow-[0_12px_40px_-12px_rgba(2,6,23,0.6)] transition-all hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(2,6,23,0.6)]"
       >
-        <div className="shrink-0 w-14 h-14 rounded-2xl inline-flex items-center justify-center bg-[#F0F5FF] text-[#0055FF] group-hover:bg-[#0055FF] group-hover:text-white transition-colors duration-300">
+        <div className="shrink-0 w-14 h-14 rounded-2xl inline-flex items-center justify-center bg-white/10 text-[#8ac6f2] group-hover:bg-[#0055FF] group-hover:text-white transition-colors duration-300">
           <Handshake className="w-6 h-6" />
         </div>
         <div className="min-w-0 flex-1">
-          {/* Label wears the logo blue · matches TownPartnerAd. */}
-          <p className="text-[12px] font-bold lowercase tracking-wider text-[#0055FF]">
+          {/* Label wears the light blue · matches TownPartnerAd's dark theme. */}
+          <p className="text-[12px] font-bold lowercase tracking-wider text-[#8ac6f2]">
             {t("Featured partner", "提携パートナー")}
-            <span className="text-[#0055FF]/50 normal-case tracking-normal font-semibold">
+            <span className="text-[#8ac6f2]/60 normal-case tracking-normal font-semibold">
               {" · "}
               {t(partner.kicker, partner.kickerJa)}
             </span>
           </p>
-          <p className="font-display font-black text-xl tracking-tight text-[#0F172A] mt-1 lowercase">
+          <p className="font-display font-black text-xl tracking-tight text-white mt-1 lowercase">
             {t(partner.name, partner.nameJa)}
           </p>
-          <p className="text-[14px] font-bold text-slate-500 mt-1 leading-snug lowercase">
+          <p className="text-[14px] font-bold text-slate-300 mt-1 leading-snug lowercase">
             {t(partner.tagline, partner.taglineJa)}
           </p>
         </div>
-        <span className="shrink-0 inline-flex items-center gap-1.5 text-[14px] font-black lowercase text-[#0055FF]">
+        <span className="shrink-0 inline-flex items-center gap-1.5 rounded-full bg-[#0055FF] px-4 py-2 text-[14px] font-black lowercase text-white">
           {t(partner.cta, partner.ctaJa)}
           <ExternalLink className="w-4 h-4 opacity-70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
         </span>

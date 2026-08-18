@@ -75,16 +75,19 @@ export type TownPartner = {
 };
 
 /**
- * Shared featured-partner panel colours · owner wants every partner box
- * in the logo's light blue so placements stand out consistently (partner
- * identity lives in the logo chip, not the panel colour).
+ * Shared featured-partner panel colours · owner request (Aug 2026): the
+ * previous light-blue panel blended into the app's bluebird background,
+ * so every partner box now wears the brand's DEEP NAVY dark-panel
+ * treatment (no pastels) to stand apart from both the blue page bg and
+ * the white content cards. Partner identity lives in the logo chip, not
+ * the panel colour; the CTA pill wears the bluebird blue.
  */
-const PARTNER_BLUE = {
-  bgFrom: "#1a7ff0",
-  bgTo: "#1467c9",
+const PARTNER_NAVY = {
+  bgFrom: "#0F172A",
+  bgTo: "#1E293B",
   theme: "dark",
-  ctaBg: "#ffffff",
-  ctaText: "#1467c9",
+  ctaBg: "#0055FF",
+  ctaText: "#ffffff",
 } as const;
 
 /**
@@ -110,7 +113,7 @@ const SNOEXPRESS: TownPartner = {
   brand: {
     logo: snoexpressLogo,
     logoAlt: "Snoexpress",
-    ...PARTNER_BLUE,
+    ...PARTNER_NAVY,
   },
 };
 
@@ -137,7 +140,7 @@ const SNOWBALL_JAPAN: TownPartner = {
   brand: {
     logo: snowballLogo,
     logoAlt: "Snowball Japan",
-    ...PARTNER_BLUE,
+    ...PARTNER_NAVY,
   },
 };
 

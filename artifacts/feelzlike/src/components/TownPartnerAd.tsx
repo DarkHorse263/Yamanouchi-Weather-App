@@ -92,7 +92,7 @@ export function TownPartnerAd({
   const cta = (extra: string) => (
     <span
       className={`${extra} items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition-opacity group-hover:opacity-90 ${
-        brand ? "" : "bg-white text-blue-800"
+        brand ? "" : "bg-[#0055FF] text-white"
       }`}
       style={ctaStyle}
     >
@@ -116,7 +116,7 @@ export function TownPartnerAd({
         className={`group block rounded-2xl p-5 md:px-6 transition-shadow hover:shadow-lg ${
           brand
             ? "border border-slate-200/60"
-            : "bg-gradient-to-r from-blue-800 via-blue-700 to-sky-600"
+            : "bg-gradient-to-r from-slate-900 to-slate-800"
         }`}
         style={bannerStyle}
       >
