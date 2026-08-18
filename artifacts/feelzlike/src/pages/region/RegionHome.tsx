@@ -25,10 +25,14 @@ export function RegionHome() {
   const { region } = useRegion();
   const { t } = useLanguage();
   const seasonCtx = useOptionalSeason();
-  // Daily Pick is winter-only · in summer the "best resort to ride today"
-  // doesn't make sense (most are closed). Limit to regions that ship a
-  // mountains list with stable ids so the API has something to score.
-  const showDailyPick = seasonCtx?.season === "winter" && (region.mountains ?? []).length > 0;
+  // Daily Pick HIDDEN globally (owner request, Aug 2026): visitors mistook
+  // the single "pick of the day" callout for the region's ONLY weather and
+  // missed the per-town/mountain pages below. Component + API kept intact;
+  // flip DAILY_PICK_ENABLED to bring it back (winter-only, regions with a
+  // mountains list — the original gates still apply).
+  const DAILY_PICK_ENABLED = false;
+  const showDailyPick =
+    DAILY_PICK_ENABLED && seasonCtx?.season === "winter" && (region.mountains ?? []).length > 0;
 
   const towns = region.baseTowns ?? [];
   const mountainsById = new Map((region.mountains ?? []).map((m) => [m.id, m]));
