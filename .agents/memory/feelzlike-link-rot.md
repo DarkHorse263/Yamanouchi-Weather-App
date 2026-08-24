@@ -27,3 +27,6 @@ description: durable lessons from the jul 2026 full external-link audit (331 url
 
 ## Summer 2026 US restructure wave (Aug 2026)
 ~12 US resort sites restructured at once, 404ing "mountain-report"-style paths — expect these to rot in batches each off-season; the nightly daily-check email is the trigger. Fix method: webSearch the new official page (never substitute an aggregator), curl -L verify 200 AND that it doesn't redirect to the homepage. Also durable: Maine + Vermont 511 sites are GONE, consolidated into newengland511.org/region/<State> (labels say "New England 511"); the official Visit Big Bear tourism site is www.bigbear.com.
+
+## Expired operator domains
+- **Daisen White Resort (Aug 2026):** the prior operator's domain now returns a permanent removal response while the next operator's public site is not confirmed. Remove the outdated “official” link rather than linking to an old operator or guessing a successor; restore it only after the new operator publishes a verified site.

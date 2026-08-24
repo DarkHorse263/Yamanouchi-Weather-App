@@ -1137,8 +1137,8 @@ function usCaChainEntry(opts: {
  * confusion with the Canada helper.
  */
 const VT_SOURCE = {
-  sourceLabel: "VTrans · 511vt.com",
-  sourceUrl: "https://511vt.com/",
+  sourceLabel: "VTrans · New England 511",
+  sourceUrl: "https://newengland511.org/",
 };
 
 function vtChainEntry(opts: {
@@ -1541,7 +1541,7 @@ function nhChainEntry(opts: { id: string; regionId: string; mountainId: string; 
 
 
 /** Maine has no mandatory chain law: 29-A M.R.S. §2381 permits chains in slippery conditions; it does not require them. */
-const ME_SOURCE = { sourceLabel: "MaineDOT · 511 Maine", sourceUrl: "https://511maine.gov/" };
+const ME_SOURCE = { sourceLabel: "MaineDOT · New England 511", sourceUrl: "https://newengland511.org/" };
 function meChainEntry(opts: { id: string; regionId: string; mountainId: string; mountainName: string; approach: string; detail: string; inSeason: boolean; issuedAt: string }): Record<string, unknown> {
   return { id: opts.id, regionId: opts.regionId, mountainId: opts.mountainId, mountainName: opts.mountainName, approach: opts.approach, status: "open", chains2wd: "not-required" satisfies ChainReq, chainsAwd: "not-required" satisfies ChainReq, note: opts.inSeason ? `Maine has no mandatory passenger or commercial chain law. Under 29-A M.R.S. §2381, chains are permitted in snow, ice or slippery conditions, not required; winter tyres and AWD/4WD are strongly recommended. ${opts.detail}` : "Outside the ski season · Maine chains remain permitted when conditions warrant, not legally required.", issuedAt: opts.issuedAt, ...ME_SOURCE, dataSource: "seasonal-rule" };
 }
@@ -3130,9 +3130,9 @@ router.get("/road-conditions", async (req, res) => {
       region === "big-bear" ||
       region === "bear-valley" ||
       region === "mt-shasta";
-    //  · US (Vermont) - no feed wired yet. VTrans publishes 511vt.com, but
+    //  · US (Vermont) - no feed wired yet. VTrans publishes New England 511, but
     //    nothing is integrated in this pass, so `roads` stays empty and the
-    //    advice points at 511vt.com for roads. Vermont has NO statewide
+    //    advice points at New England 511 for roads. Vermont has NO statewide
     //    chain law for passenger vehicles (unlike CO/UT/CA) and NO dedicated
     //    avalanche-forecasting authority anywhere in the state - both
     //    stated explicitly below rather than silently omitted or borrowed
@@ -3324,8 +3324,8 @@ router.get("/road-conditions", async (req, res) => {
       // Vermont) - stated explicitly rather than pointing at an
       // out-of-state authority that doesn't actually cover these regions.
       generalAdvice =
-        "We do not yet pull live road data for Vermont · check VTrans' 511vt.com for closures, plow-truck tracking (plowtrucks.vtrans.vermont.gov) and highway cameras before you drive. Vermont has no statewide chain law for passenger vehicles (only a heavy-vehicle rule on VT-9 between Wilmington and Bennington that doesn't apply to visitor cars); winter/snow tyres are strongly recommended on mountain approaches, and studded tires are legal year-round. ⚠️ No Vermont ski region has a dedicated backcountry avalanche-forecasting authority - the state's terrain does not carry significant avalanche danger, so no avalanche-bulletin link is offered here rather than pointing at an out-of-state center (e.g. Mount Washington Avalanche Center, which covers New Hampshire) that doesn't actually cover Vermont.";
-      liveTrafficUrl = "https://511vt.com/";
+        "We do not yet pull live road data for Vermont · check VTrans' New England 511 for closures, plow-truck tracking (plowtrucks.vtrans.vermont.gov) and highway cameras before you drive. Vermont has no statewide chain law for passenger vehicles (only a heavy-vehicle rule on VT-9 between Wilmington and Bennington that doesn't apply to visitor cars); winter/snow tyres are strongly recommended on mountain approaches, and studded tires are legal year-round. ⚠️ No Vermont ski region has a dedicated backcountry avalanche-forecasting authority - the state's terrain does not carry significant avalanche danger, so no avalanche-bulletin link is offered here rather than pointing at an out-of-state center (e.g. Mount Washington Avalanche Center, which covers New Hampshire) that doesn't actually cover Vermont.";
+      liveTrafficUrl = "https://newengland511.org/";
     } else if (isUsWy) {
       // No live Wyoming road feed is wired yet · say so plainly rather than
       // shipping an empty list that reads like "all clear". Wyoming HAS a
@@ -3454,8 +3454,8 @@ router.get("/road-conditions", async (req, res) => {
         : "We do not yet pull live road data for New Hampshire · check NHDOT's real-time travel page or regional New England 511 (newengland511.org) for closures and cameras before you drive. New Hampshire has no broad mandatory chain law for passenger vehicles. N.H. Admin. Code § Saf-C 1312.17 is a narrow snow-tire vehicle-inspection/equipment provision (Nov 15-Apr 15 unless all-season radials), not a general roadside chain-up rule; winter tyres and AWD/4WD are strongly recommended. Mount Washington Avalanche Center's daily forecasts cover the Presidential Range/Tuckerman backcountry near Wildcat, not the in-bounds terrain in this region."
       liveTrafficUrl = "https://newengland511.org/Home/Index";
     } else if (isUsMe) {
-      generalAdvice = "We do not yet pull live Maine road data · check MaineDOT / 511 Maine (511maine.gov) for closures, cameras and storm conditions before travelling. Maine has no mandatory chain law: 29-A M.R.S. §2381 permits chains when roads are snow-covered or slippery, but never requires them; winter tyres and AWD/4WD are strongly recommended. Maine has no dedicated avalanche forecast or observation authority, so no avalanche bulletin is linked for these lift-served resort areas.";
-      liveTrafficUrl = "https://511maine.gov/";
+      generalAdvice = "We do not yet pull live Maine road data · check MaineDOT / New England 511 for closures, cameras and storm conditions before travelling. Maine has no mandatory chain law: 29-A M.R.S. §2381 permits chains when roads are snow-covered or slippery, but never requires them; winter tyres and AWD/4WD are strongly recommended. Maine has no dedicated avalanche forecast or observation authority, so no avalanche bulletin is linked for these lift-served resort areas.";
+      liveTrafficUrl = "https://newengland511.org/";
     } else if (isUsNy) {
       generalAdvice = "We do not yet pull live New York road data · check NYSDOT / 511NY (511ny.org) for closures, cameras and storm conditions before travelling. New York has no general chain or winter-tire mandate; V&T §145-c can apply only on a specifically declared snow-emergency route, not as a standing ski-road rule. Winter tyres and AWD/4WD are strongly recommended. No dedicated daily avalanche authority covers New York resort terrain; DEC issues only irregular Adirondack High Peaks backcountry advisories, not an in-bounds resort bulletin.";
       liveTrafficUrl = "https://511ny.org/";

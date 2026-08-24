@@ -1025,7 +1025,7 @@ const USA: Record<string, MountainWebcam[]> = {
     { id: "wintergreen-official", mountainId: "wintergreen-resort", name: "Wintergreen mountain report & cams", description: "Official cams on the mountain report page.", embedType: "external", pageUrl: "https://www.wintergreenresort.com/mountain-report-cams/", source: "Wintergreen Resort", verifiedAt: USA_VERIFIED },
   ],
   "massanutten-resort": [
-    { id: "massanutten-official", mountainId: "massanutten-resort", name: "Massanutten webcams", description: "Official cams in the Shenandoah Valley.", embedType: "external", pageUrl: "https://www.massresort.com/explore/webcams/", source: "Massanutten Resort", verifiedAt: USA_VERIFIED },
+    { id: "massanutten-official", mountainId: "massanutten-resort", name: "Massanutten conditions", description: "Official mountain conditions in the Shenandoah Valley.", embedType: "external", pageUrl: "https://www.massresort.com/play/conditions/", source: "Massanutten Resort", verifiedAt: USA_VERIFIED },
   ],
   "sugar-mountain": [
     { id: "sugar-mountain-official", mountainId: "sugar-mountain", name: "Sugar Mountain cams", description: "Official cams on the Southeast's biggest slope network.", embedType: "external", pageUrl: "https://skisugar.com/cams/", source: "Sugar Mountain Resort", verifiedAt: USA_VERIFIED },

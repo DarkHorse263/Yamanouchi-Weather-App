@@ -42,7 +42,6 @@ export const daisenRegion: RegionConfig = {
       lng: 133.528,
       blurb: "Western Japan's biggest ski hill on Mt Daisen · four linked areas (Kokusai, Uenohara, Nakanohara, Goenzan) from 655 to 1,121 m with Japan-Sea views · a regional day hill rather than a destination resort, and under new operators from 2026-27, so check the official site for opening plans",
       blurbJa: "大山の山腹に広がる西日本最大級のスキー場 · 国際・上の原・中の原・豪円山の4エリア（標高655〜1,121m）から日本海を一望 · 大規模リゾートではなく地域の日帰りゲレンデで、2026-27シーズンから運営体制が変わるため営業予定は公式サイトで確認を",
-      websiteUrl: "https://www.daisen-resort.jp/",
       beginner_friendly: true,
       kids_lessons: true,
     },
@@ -81,7 +80,6 @@ export const daisenRegion: RegionConfig = {
   tourismLinks: [
     { category: "Tourism", categoryJa: "観光", label: "Daisen town tourism", labelJa: "大山町観光局", url: "https://tourismdaisen.com/" },
     { category: "Tourism", categoryJa: "観光", label: "Tottori official tourism", labelJa: "鳥取県公式観光サイト", url: "https://www.tottori-tour.jp/en/" },
-    { category: "Resorts", categoryJa: "スキー場", label: "Daisen White Resort", labelJa: "だいせんホワイトリゾート", url: "https://www.daisen-resort.jp/" },
     { category: "Transport", categoryJa: "交通", label: "JR West · trains", labelJa: "JR西日本 · 鉄道", url: "https://www.westjr.co.jp/global/en/" },
     { category: "Transport", categoryJa: "交通", label: "Nihon Kotsu · buses", labelJa: "日本交通 · バス", url: "https://www.nihonkotsu.co.jp/" },
   ],

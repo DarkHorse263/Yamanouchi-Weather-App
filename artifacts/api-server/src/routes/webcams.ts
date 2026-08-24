@@ -487,8 +487,8 @@ const WEBCAM_DATA: WebcamConfig[] = [
   // broader mountain-conditions hub as the safer, honest fallback.
   {
     locationId: "copper-mountain-resort",
-    locationName: "Copper Mountain live cams",
-    webcamPageUrl: "https://www.coppercolorado.com/the-mountain",
+    locationName: "Copper Mountain conditions",
+    webcamPageUrl: "https://www.coppercolorado.com/the-mountain/conditions-weather/snow-report/",
     webcams: [],
   },
   {
@@ -826,7 +826,7 @@ const WEBCAM_DATA: WebcamConfig[] = [
   {
     locationId: "eldora-mountain-resort",
     locationName: "Eldora live cams",
-    webcamPageUrl: "https://www.eldora.com/the-mountain/webcams/lower-mountain-live-cam/",
+    webcamPageUrl: "https://www.eldora.com/the-mountain/current-conditions/webcams/",
     webcams: [],
   },
 
@@ -1030,8 +1030,8 @@ const WEBCAM_DATA: WebcamConfig[] = [
   // ─── Resort live-cam pages: Vermont (Killington/Pico) ──────
   {
     locationId: "killington-resort",
-    locationName: "Killington live cams",
-    webcamPageUrl: "https://www.killington.com/mountain/conditions-weather",
+    locationName: "Killington mountain report",
+    webcamPageUrl: "https://www.killington.com/mountain-report",
     webcams: [],
   },
   {
@@ -1121,8 +1121,8 @@ const WEBCAM_DATA: WebcamConfig[] = [
   // ─── Resort live-cam pages: Vermont (Jay Peak/Northeast Kingdom) ──────
   {
     locationId: "jay-peak",
-    locationName: "Jay Peak live cams",
-    webcamPageUrl: "https://jaypeakresort.com/mountain/conditions",
+    locationName: "Jay Peak conditions",
+    webcamPageUrl: "https://jaypeakresort.com/todayatjay",
     webcams: [],
   },
   {
@@ -1273,44 +1273,44 @@ const WEBCAM_DATA: WebcamConfig[] = [
   },
 
   // ─── Roadside cams: Vermont ─────────────────────────────────────
-  // VTrans' 511vt.com (and the shared newengland511.org platform) runs a
+  // VTrans' New England 511 platform runs a
   // public highway-camera network, but does not expose a stable deep link
   // per camera that survives a season — same honest page-only-link
   // pattern as CO/UT/CA.
   {
     locationId: "killington-pico-roads",
     locationName: "Roads to Killington/Pico · US-4",
-    webcamPageUrl: "https://511vt.com/",
+    webcamPageUrl: "https://newengland511.org/",
     webcams: [],
   },
   {
     locationId: "stowe-smugglers-notch-roads",
     locationName: "Roads to Stowe/Smugglers' Notch · VT-108",
-    webcamPageUrl: "https://511vt.com/",
+    webcamPageUrl: "https://newengland511.org/",
     webcams: [],
   },
   {
     locationId: "mad-river-valley-roads",
     locationName: "Roads to Mad River Valley · VT-100 & VT-17",
-    webcamPageUrl: "https://511vt.com/",
+    webcamPageUrl: "https://newengland511.org/",
     webcams: [],
   },
   {
     locationId: "southern-vermont-roads",
     locationName: "Roads to Southern Vermont · VT-30, VT-100 & VT-11",
-    webcamPageUrl: "https://511vt.com/",
+    webcamPageUrl: "https://newengland511.org/",
     webcams: [],
   },
   {
     locationId: "okemo-roads",
     locationName: "Roads to Okemo · VT-103",
-    webcamPageUrl: "https://511vt.com/",
+    webcamPageUrl: "https://newengland511.org/",
     webcams: [],
   },
   {
     locationId: "jay-peak-nek-roads",
     locationName: "Roads to Jay Peak/Northeast Kingdom · VT-105, VT-242 & VT-114",
-    webcamPageUrl: "https://511vt.com/",
+    webcamPageUrl: "https://newengland511.org/",
     webcams: [],
   },
 
@@ -1596,7 +1596,7 @@ const WEBCAM_DATA: WebcamConfig[] = [
     // Confirmed official webcam hub with 8+ live feeds per research —
     // page-only link, no fabricated per-camera deep links.
     locationName: "Mt. Bachelor live cams",
-    webcamPageUrl: "https://www.mtbachelor.com/mountain-report",
+    webcamPageUrl: "https://www.mtbachelor.com/the-mountain/mountain-report/",
     webcams: [],
   },
 
@@ -1689,7 +1689,7 @@ const WEBCAM_DATA: WebcamConfig[] = [
     // Confirmed live per research — shared Sun Valley conditions/webcam
     // page covering both Bald Mountain and Dollar Mountain.
     locationName: "Sun Valley (Bald Mountain) live cams",
-    webcamPageUrl: "https://www.sunvalley.com/mountain/conditions-weather",
+    webcamPageUrl: "https://www.sunvalley.com/the-mountain/mountain-report/",
     webcams: [],
   },
   {
@@ -1697,22 +1697,22 @@ const WEBCAM_DATA: WebcamConfig[] = [
     // Confirmed live per research — shared Sun Valley conditions/webcam
     // page covering both Bald Mountain and Dollar Mountain.
     locationName: "Sun Valley (Dollar Mountain) live cams",
-    webcamPageUrl: "https://www.sunvalley.com/mountain/conditions-weather",
+    webcamPageUrl: "https://www.sunvalley.com/the-mountain/mountain-report/",
     webcams: [],
   },
   {
     locationId: "schweitzer-mountain-resort",
-    // Confirmed live PanoCam per research — page-only link, no fabricated
-    // per-camera deep link.
-    locationName: "Schweitzer Mountain Resort live cams",
-    webcamPageUrl: "https://www.schweitzer.com/mountain-report/",
+    // The former PanoCam hub moved; retain the official resort home rather
+    // than claiming a camera page that no longer exists.
+    locationName: "Schweitzer Mountain Resort",
+    webcamPageUrl: "https://www.schweitzer.com/",
     webcams: [],
   },
   {
     locationId: "bogus-basin",
     // Confirmed live combined conditions/webcam page per research.
     locationName: "Bogus Basin live cams",
-    webcamPageUrl: "https://bogusbasin.org/mountain-report/",
+    webcamPageUrl: "https://bogusbasin.org/your-mountain/conditions-webcams/",
     webcams: [],
   },
   {
@@ -1720,7 +1720,7 @@ const WEBCAM_DATA: WebcamConfig[] = [
     // Confirmed conditions page exists per research — page-only link, no
     // fabricated per-camera deep link.
     locationName: "Tamarack Resort live cams",
-    webcamPageUrl: "https://www.tamarackidaho.com/mountain-report/",
+    webcamPageUrl: "https://tamarackidaho.com/the-mountain/snow-report",
     webcams: [],
   },
   {
@@ -1779,10 +1779,10 @@ const WEBCAM_DATA: WebcamConfig[] = [
   { locationId: "sugarloaf", locationName: "Sugarloaf mountain report", webcamPageUrl: "https://www.sugarloaf.com/mountain-report", webcams: [] }, // ⚠️ /mountain-report/webcams returned 404; official embeds likely live on report page
   { locationId: "sunday-river", locationName: "Sunday River mountain report", webcamPageUrl: "https://www.sundayriver.com/mountain-report", webcams: [] }, // ⚠️ dedicated webcam sub-URL returned 404; do not invent one
   { locationId: "saddleback-mountain", locationName: "Saddleback Mountain webcams", webcamPageUrl: "https://www.saddlebackmaine.com/webcams/", webcams: [] }, // official page confirmed; actual embed stream URLs/status unconfirmed
-  // ─── Roadside cams: MaineDOT / 511 Maine ───
-  { locationId: "carrabassett-valley-roads", locationName: "Roads to Sugarloaf · ME-16 / ME-27", webcamPageUrl: "https://511maine.gov/", webcams: [] },
-  { locationId: "newry-bethel-roads", locationName: "Roads to Sunday River · ME-26 / ME-2", webcamPageUrl: "https://511maine.gov/", webcams: [] },
-  { locationId: "rangeley-roads", locationName: "Roads to Saddleback · ME-4 / ME-16", webcamPageUrl: "https://511maine.gov/", webcams: [] },
+  // ─── Roadside cams: MaineDOT / New England 511 ───
+  { locationId: "carrabassett-valley-roads", locationName: "Roads to Sugarloaf · ME-16 / ME-27", webcamPageUrl: "https://newengland511.org/", webcams: [] },
+  { locationId: "newry-bethel-roads", locationName: "Roads to Sunday River · ME-26 / ME-2", webcamPageUrl: "https://newengland511.org/", webcams: [] },
+  { locationId: "rangeley-roads", locationName: "Roads to Saddleback · ME-4 / ME-16", webcamPageUrl: "https://newengland511.org/", webcams: [] },
   // ─── Resort camera/reference pages: New York ───
   { locationId: "whiteface-mountain", locationName: "Whiteface Mountain conditions", webcamPageUrl: "https://whiteface.com/mountain/conditions/", webcams: [] }, // ⚠️ no dedicated verifiable live webcam URL confirmed
   { locationId: "gore-mountain", locationName: "Gore Mountain Base Area Webcam", webcamPageUrl: "https://goremountain.com/the-mountain/webcam/", webcams: [] },

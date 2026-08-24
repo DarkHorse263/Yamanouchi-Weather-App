@@ -72,7 +72,7 @@ export const donnellyMccallRegion: RegionConfig = {
       lng: -116.123,
       blurb: "Indy Pass (capped redemptions for 2025-26); joining Ikon as a \\\"Bonus Mountain\\\" starting 2026-27, NOT the current season · base 4,888 ft / summit 7,700 ft / vertical 2,800 ft · confirmed 2025-26 season opened Dec 22, 2025 per the resort's own release · ⚠️ OWNERSHIP/FINANCIAL STATUS UNRESOLVED: a Nov 2025 Idaho Business Review piece describes \\\"debt-free\\\" MMG ownership, while a Mar 2025 report describes a fresh Chapter 11 filing tied to the same ~$262M Credit Suisse debt — both are shown here as competing, unreconciled claims rather than one being asserted as fact.",
       websiteUrl: "https://www.tamarackidaho.com/",
-      snowReportUrl: "https://www.tamarackidaho.com/mountain-report/",
+      snowReportUrl: "https://tamarackidaho.com/the-mountain/snow-report",
       expert_only: true,
       backcountry_access: true,
       terrain_park: true,

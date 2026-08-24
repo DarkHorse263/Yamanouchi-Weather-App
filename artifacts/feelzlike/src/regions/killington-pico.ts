@@ -56,7 +56,7 @@ export const killingtonPicoRegion: RegionConfig = {
       lng: -72.8201,
       blurb: "Epic Pass + Beast 365 · \"The Beast of the East,\" Vermont's largest ski area with 6 interconnected peaks · confirmed 183-day 2025-26 season (opened Nov 12 2025, closed May 25 2026)",
       websiteUrl: "https://www.killington.com/",
-      snowReportUrl: "https://www.killington.com/mountain/conditions-weather",
+      snowReportUrl: "https://www.killington.com/mountain-report",
       expert_only: false,
       backcountry_access: false,
       terrain_park: true,
