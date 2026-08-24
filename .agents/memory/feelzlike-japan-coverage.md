@@ -5,6 +5,14 @@ description: What "complete" means for the published JP areas — lift seeds liv
 
 # Japan area completeness (decided July 2026)
 
+## National completeness gate (decided 24 August 2026)
+
+**Rule:** Do not advertise Japan until every currently operating Japanese ski area has a verified catalogue record. Closed, defunct and suspended areas stay excluded from public coverage.
+
+**Why:** The prefecture audit identified at least roughly 276 gaps beyond the current destination coverage, but it also contains unnamed long-tail totals, duplicate/conflicting entries and ambiguous operating statuses. Bulk-importing the PDF as truth would create false coverage.
+
+**How to apply:** Reconcile the audit against the existing 558-resort workbook and current official/operator or municipal sources. Maintain `draft | verified | published` status, aliases, prefecture, coordinates, defensible forecast elevation, official URL, operating status, source and verification date. Advertising waits until the named national list and automated completeness checks pass; richer lifts/webcams/transport can remain evidence-gated.
+
 - All 11 published JP regions now have curated lift wind-hold seed data. Seeds are split into per-region files `src/data/lifts/<region>.ts` (hakuba-valley, myoko, yuzawa, niseko, furano, rusutsu-kiroro, zao-onsen, hakkoda-aomori-spring) imported and merged in `src/data/lifts.ts`; Yamanouchi + Iiyama arrays remain inline there. Generic MountainDetail auto-renders the panel when `getLiftsForMountain` returns data — no per-region UI wiring needed.
 - Invariant test: `pnpm --filter @workspace/feelzlike test:lifts` (unique ids, enums, elevations, thresholds). It cannot check mountainId membership against region configs (would import `@/regions` PNGs) — verify that in review when adding seeds.
 - **Curated eat/stay is GONE everywhere (owner reversed the Yamanouchi exception, late July 2026).** Yamanouchi's Stay route override was removed from `src/regions/yamanouchi/router.tsx` so ALL towns use generic RegionStay/Eat (affiliate platform links + Google Maps launch pad). Curated `regions/yamanouchi/pages/stay.tsx`/`eat.tsx` remain in the folder but are unrouted; do not re-wire them. **Why:** owner wants one consistent format across areas.
