@@ -1,6 +1,6 @@
 # FeelZlike - Stay + Eat Data Package v0.4
 
-**228 curated entries across 6 base towns, ready to import into your app.**
+**227 curated entries across 6 base towns, ready to import into your app.**
 
 ---
 
@@ -29,12 +29,12 @@ feelzlike_package/
 | Town | Region | Stays | Eats |
 |---|---|---:|---:|
 | Jindabyne | Snowy Mountains, NSW | 25 | 30 |
-| Berridale | Snowy Mountains, NSW | 12 | 13 |
+| Berridale | Snowy Mountains, NSW | 12 | 12 |
 | Cooma | Snowy Mountains, NSW | 18 | 26 |
 | Yudanaka | Yamanouchi, Nagano | 21 | 25 |
 | Shibu Onsen | Yamanouchi, Nagano | 22 | 16 |
 | Yomase | Yamanouchi, Nagano | 9 | 11 |
-| **Total** | | **107** | **121** |
+| **Total** | | **107** | **120** |
 
 ## Region-specific filters baked into the data
 

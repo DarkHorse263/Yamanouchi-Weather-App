@@ -40,9 +40,9 @@ for (const r of Object.keys(TOWNS_BY_REGION)) console.log(`  ${r} towns:`, (TOWN
 console.log("");
 for (const t of Object.keys(stays)) console.log(`  ${t.padEnd(12)} ${String(stays[t].length).padStart(3)} stays / ${String(eats[t].length).padStart(3)} eats`);
 console.log("\nTotal stays:", allStays.length, "(expected 107)");
-console.log("Total eats:", allEats.length, "(expected 121)");
+console.log("Total eats:", allEats.length, "(expected 120)");
 console.log("Stays missing booking_links object:", missingObject, "(must be 0)");
 console.log("Stays with booking_links keys but all values null:", allNullValues, "(curation gap, non-fatal)");
-const ok = allStays.length === 107 && allEats.length === 121 && missingObject === 0;
+const ok = allStays.length === 107 && allEats.length === 120 && missingObject === 0;
 console.log(ok ? "\n✓ SMOKE PASSED" : "\n✗ SMOKE FAILED");
 process.exit(ok ? 0 : 1);
