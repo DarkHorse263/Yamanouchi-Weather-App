@@ -1,0 +1,26 @@
+{
+  "name": "@workspace/japan-ski-catalogue",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    },
+    "./schema": {
+      "types": "./schema.d.ts",
+      "default": "./schema.js"
+    },
+    "./generated/japan-catalogue.json": "./generated/japan-catalogue.json"
+  },
+  "scripts": {
+    "generate": "node ./scripts/generate.mjs",
+    "generate:check": "node ./scripts/generate.mjs --check",
+    "validate": "node ./scripts/generate.mjs --check && node ./scripts/validate.mjs",
+    "report": "node ./scripts/generate.mjs --check && node ./scripts/validate.mjs --write-report"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.2"
+  }
+}
