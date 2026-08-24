@@ -1,0 +1,232 @@
+Received: from ME0P282MB4462.AUSP282.PROD.OUTLOOK.COM (2603:10c6:220:220::9)
+ by SY5P282MB4686.AUSP282.PROD.OUTLOOK.COM with HTTPS; Thu, 20 Aug 2026
+ 16:03:35 +0000
+Received: from SY5PR01CA0111.ausprd01.prod.outlook.com (2603:10c6:10:246::12)
+ by ME0P282MB4462.AUSP282.PROD.OUTLOOK.COM (2603:10c6:220:220::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.10; Thu, 20 Aug
+ 2026 16:03:31 +0000
+Received: from SY2PEPF00004FF2.ausprd01.prod.outlook.com
+ (2603:10c6:10:246:cafe::a) by SY5PR01CA0111.outlook.office365.com
+ (2603:10c6:10:246::12) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.339.10 via Frontend Transport; Thu,
+ 20 Aug 2026 16:03:31 +0000
+Authentication-Results: spf=pass (sender IP is 54.240.6.6)
+ smtp.mailfrom=bounce.awin.com; dkim=pass (signature was verified)
+ header.d=awin.com;dkim=pass (signature was verified)
+ header.d=amazonses.com;dmarc=pass action=none
+ header.from=awin.com;compauth=pass reason=100
+Received-SPF: Pass (protection.outlook.com: domain of bounce.awin.com
+ designates 54.240.6.6 as permitted sender) receiver=protection.outlook.com;
+ client-ip=54.240.6.6; helo=a6-6.smtp-out.eu-west-1.amazonses.com; pr=C
+Received: from a6-6.smtp-out.eu-west-1.amazonses.com (54.240.6.6) by
+ SY2PEPF00004FF2.mail.protection.outlook.com (10.167.241.4) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.360.3
+ via Frontend Transport; Thu, 20 Aug 2026 16:03:29 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=kgyaktrsn5lhlcyxjdopprzgt7pwvtbh; d=awin.com; t=1787241806;
+	h=Date:From:Reply-To:To:Message-ID:Subject:MIME-Version:Content-Type;
+	bh=BU1JXlPV+bjRU0xavltQD6Ifx41ckebID40xMCpby4w=;
+	b=AtJvTskzmP17+gKXox8uWEQ17NJ+eLoWfAD4yJae5yUkcU8z7Wl+4fgjmQbaxGm3
+	RWz2wlSM1DynUsTTCW39eWVJzhtRi+Uqk+Ak+sYnkzLx2Q3Wh1zeeK1v493IP0yOur5
+	FC0yoUP014fiIXmpaiCaWe3cIeya0ixx8FqIoOTs=
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=shh3fegwg5fppqsuzphvschd53n6ihuv; d=amazonses.com; t=1787241806;
+	h=Date:From:Reply-To:To:Message-ID:Subject:MIME-Version:Content-Type:Feedback-ID;
+	bh=BU1JXlPV+bjRU0xavltQD6Ifx41ckebID40xMCpby4w=;
+	b=A31Buc4x6DlHsVb/azWwf5+7FfoqPlKvgMb+5x6x620dsn5u40cJzkD4ioswOFDX
+	UjMWMoMGP8FI4+K/XEgj6LO87fMTvzL2nKD+IT0AQlmVYaIwvrneBvOic/Ft5TJFZYJ
+	wlBAOysOodNmRs19PcQNMKD5RtJAvjSN5tZWeY9I=
+Date: Thu, 20 Aug 2026 16:03:26 +0000
+From: Awin <no-reply@awin.com>
+Reply-To: affiliate@trivago.com
+To: feelzlike@navigatework.com.au
+Message-ID: <010201a01fe9b92f-9b495709-0829-4112-ae00-6971e2d4e808-000000@eu-west-1.amazonses.com>
+Subject: Trivago USA (66034): Welcome to trivago's affiliate programme
+Content-Type: multipart/mixed; 
+	boundary="----=_Part_1185_1050867502.1787241806113"
+Communication-Message-ID: 11a9df80-641e-32b3-abdc-9b67054864f3
+Communication-ID: 1f19c3b4-b5fa-6a00-b9a5-cb6b3a39b068
+Feedback-ID: ::1.eu-west-1.ZUwK3JUMeY4ii4cT1kFyP3qrXyop6tAELe1NSwFOKKY=:AmazonSES
+X-SES-Outgoing: 2026.08.20-54.240.6.6
+Return-Path: 010201a01fe9b92f-9b495709-0829-4112-ae00-6971e2d4e808-000000@bounce.awin.com
+X-MS-Exchange-Organization-ExpirationStartTime: 20 Aug 2026 16:03:30.6617
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: 26de6c6e-b41f-45ff-2d16-08defed4943b
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: febefc03-2be7-43ba-af66-5490103dee38:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SY2PEPF00004FF2:EE_|ME0P282MB4462:EE_|SY5P282MB4686:EE_
+X-MS-Exchange-Organization-AuthSource: SY2PEPF00004FF2.ausprd01.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id: 26de6c6e-b41f-45ff-2d16-08defed4943b
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Antispam: BCL:3;ARA:13230040|4022899009|3109299003|7049299003|7149299003|69100299015|32142699015|12012899012|2092899012|3092899012|5062899012|3072899012|4113699003|57112099003|16102099003|5063699009|18003699003|8096899003|4076899003|19002099009|6133799003|10067099003;
+X-Forefront-Antispam-Report: CIP:54.240.6.6;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:a6-6.smtp-out.eu-west-1.amazonses.com;PTR:a6-6.smtp-out.eu-west-1.amazonses.com;CAT:NONE;SFS:(13230040)(4022899009)(3109299003)(7049299003)(7149299003)(69100299015)(32142699015)(12012899012)(2092899012)(3092899012)(5062899012)(3072899012)(4113699003)(57112099003)(16102099003)(5063699009)(18003699003)(8096899003)(4076899003)(19002099009)(6133799003)(10067099003);DIR:INB;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Aug 2026 16:03:29.4275
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 26de6c6e-b41f-45ff-2d16-08defed4943b
+X-MS-Exchange-CrossTenant-Id: febefc03-2be7-43ba-af66-5490103dee38
+X-MS-Exchange-CrossTenant-AuthSource: SY2PEPF00004FF2.ausprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ME0P282MB4462
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:05.6033568
+X-MS-Exchange-Processed-By-BccFoldering: 15.21.0339.004
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(910005)(944490095)(944506478)(944626604)(920097)(930201)(20251009189)(140003);
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?SXlnUEtjeU54NC95U1BnTzRKYkRwR1UrTm5URjN5VWVEem9lbmplOGdIdDlF?=
+ =?utf-8?B?T1hEWGwzWnNPNXQ1MXpQRFg4cFJjS0tqcW50ZG43SE90S0szVkk5L0JrdUdW?=
+ =?utf-8?B?SWRvUGsySzZ6OTB4bmRDWUg4MHJkOGdUdVh0NXRYQWdkYUtBcUJQQWlmcjJ0?=
+ =?utf-8?B?d2d3YmY5c3NpMHl0YWQyOGl5MllCUTV2blVxNjU5WVRSWUJXOFNhdHBsdGZk?=
+ =?utf-8?B?RnNqeXZTY0dMKzFMYm9IWHhwK2p1UnZGZFBHYkY5cW04RTgxbFNZNzkwTlhF?=
+ =?utf-8?B?N0hGemx6b1VlaFN4eTJmanhoRWF0T3VqeEZwQlNxWVJBVm1VMmQ4VGJ3Ykdy?=
+ =?utf-8?B?SHFqTG5KOTJ0V1JXeXFOaUxJc2gwSEpLcWUzSndRUFdjMktJbjcwYlM5a1dN?=
+ =?utf-8?B?SzFKSjhxWFFzMHRmUzg0aVl0N2NxTjYxZ0NkNy9yN1VyS0RiYWlIaG56akUy?=
+ =?utf-8?B?UHk0bFBkUnlpaWoyOUJTY0JJYWlTamU0ZE8zcHRyRHhzM0ZaVUg2Y2dPaHVR?=
+ =?utf-8?B?MHFPYVN4enByME9NK0RuZ0djcUFHZjNTUmxMMjhEUGgzU096OXlVcTY4MmNy?=
+ =?utf-8?B?RTJrOHR5OXh6Ykh0YjdYdzI1a281S3liZzI3dTI1dHYrSkJrQThRZzNaRmFo?=
+ =?utf-8?B?Y1dHTTFOT2FBZFo0VldxWXliM0lLOG5qaU9GeEszK09OM0hmRUpIZmxtVXhl?=
+ =?utf-8?B?ZS9BVU9tamNsREt3aXVKYjluaUZSUEk0UEZ1bTUrMGttZm5DcGhMa2lLM1Z6?=
+ =?utf-8?B?eVNidnhSdDcrQUpDNVpEbkhETjlBOUVNRUxLVnVOcmhFZlYvelp6T0ttU2NS?=
+ =?utf-8?B?MDhNSXYvaWZUblpPOC9sQ2JacXUxWUp4L3VHY1VXaWZ6ZWE3MEZNanF5YXFI?=
+ =?utf-8?B?eXh5K1EzWlNPSzZOVUx5MWJPYzJXZEUzdXM1UTlNc280MnNRSkVHNEpYSlhT?=
+ =?utf-8?B?ZXlSTlRyMFpaUTdqaEw0cE55YmVjRG85Z1lLY3MvaGhWNjJTWFFPVmFKMTMv?=
+ =?utf-8?B?M0NPNXIyZ2piQjhPMlQ3bmxrUzlkTnFZVnpqdlJ4UFduOVk5VlFuMXZqZit3?=
+ =?utf-8?B?aUJVcDhTKzIxMkt6bXBIZTZWY1ptZ3N5YTR5UHpRQmRCTHVDZmN1Vjh2amx2?=
+ =?utf-8?B?aUowL09rQzVnK21yWlM4QWRxb2V1cHpVaW0rVk5zNGozTmFHbmxuYTlEdG4x?=
+ =?utf-8?B?dUhvVGlNY0YzbFlDNndmZ1IrT1dkbDFyOTQzYm50R3ZZRXhnWXJWYXRHajhY?=
+ =?utf-8?B?a2xTYjQ4bkJ3Vm9STWc3bVU5SDNLS0ZTQVNoS2hhK05tYlVaamZjR0lnRDNS?=
+ =?utf-8?B?SlNuaU1kNlhFWGFkMU9lRlR2SDU2cUhGenU2cHlyWlFWTTB5Z1p0NVFyalV1?=
+ =?utf-8?B?L2NuN2RWdDh6R0gyMXY0VTh5RVRyUWNSdDNwUjhNdXdXSEN4bHVGQWJiaER4?=
+ =?utf-8?B?NlAvb1pqTWY2eTcreW9hZmJxOFVHRHFMWHBDNG8zT0laUGNJeGlWMm8vT1hn?=
+ =?utf-8?B?eXk4OVZpUWp4NFNybHJqZHp2TWF1ZHBVaFNwcGx3ekp0UFR2L2d2Yjlnc21x?=
+ =?utf-8?B?eUNuYXBVOVQ4WlkxV21tUW9Ob052QWExRVhrMThpQjF6L21LTVduQlArT3pu?=
+ =?utf-8?B?VkxkWkNodTZZck5FSDdja2VVNSt1dUxQWjJidGU3Q2pEMXR6c0hEa055NG4z?=
+ =?utf-8?B?K3FuajNQZDdvQnV6WFpiWW9nSldhOVRTMU1IZzlmVzlwWnQ3R3JGUWhheU4z?=
+ =?utf-8?B?RFlqTDN6TENGbENtYjk2aTVrcTNiend3UHB5L29LQVhMdjZ1NWNFZ2tFWUly?=
+ =?utf-8?B?Z1BxcjdSVnpLVjlQOEM4TkhyM1A1MElxeVJiS2ZCOStHZnhaa3FQR201cDFn?=
+ =?utf-8?B?alM0Wlo2OERPR2YxeE1mK2U2TGl6dUlQTEhFN1YrS09TSXpTZkJkODRHT2tq?=
+ =?utf-8?B?UitYUThRNTJwbGZDOS9qaVZ2b0d6eGg5TGtmMUEzNVl1SzNwTVNiZmhLT2NR?=
+ =?utf-8?B?TGJsYjZ1RmRrUE14ajhGdEdSQm1aQmRvL3dacXV6cTRnYjM4bkJRemJodUhM?=
+ =?utf-8?B?NkRaWEF3ZDJ3MXpKMjBvd2NsR0ZpOFNsQXRiUFpjYUdDSVpSL3R5eExLVW5a?=
+ =?utf-8?B?a245WmNablg0Z00yMHphSFBLOE5CczFuamJoemlhR1E5Zkk0YjY4cEFHOGFW?=
+ =?utf-8?B?VlRJVWtlZGlROUp0ZVJrTDdBWDlRY2ZERXVMcmtPMUNmcy8vNDE4VzUvOXJJ?=
+ =?utf-8?B?WnRnM0pVaXZsZ0JXRmdSL3dIUDRLL08veFhhMGNwSjVERjN2Z210THYyYzls?=
+ =?utf-8?B?SlhtdVllTk9vVW1pZ2hLZC9WZW91Mlo4bkEzOFlhSDN0eTdodE0vZHlhWmQ5?=
+ =?utf-8?B?enBMOWorQnNwa3ZhMGtIN1FvQkRob1VZS2xodTYwcFhDZDVGRUM4S2JnRXRy?=
+ =?utf-8?B?RllzaGYwbzJSVzNlUjhwMWlqeUNFOGJMdmZMVTVoVVNGK05QTXRmUHlBY1A2?=
+ =?utf-8?B?TFJuMXhCakczSTlLdGpRckNhekQxVU5tNFp2dnVqRjlSZmdiU3gyOHpxYW1h?=
+ =?utf-8?B?Um9xOXpGTzRRaXFEK05tSHovZmxMRDhpckVEb0JUNStjby84T1pLb1l5T1lK?=
+ =?utf-8?B?aU5wNkhGcFhNOE5qSFJKWVpSWW8waVFTck16bUdzNTZBMHhHSmY1ejkzZmNo?=
+ =?utf-8?B?MjczRm51c20zR1Rxd3RVRHlHejJkU0h0NFlscDBhMnF2RnRCVmN3Z2twUnMv?=
+ =?utf-8?B?S0ppcndEc2hUbHM3cVh2bEZyL2RVcVZzNVZvbzVjMEE3UFVYbWE4b20xMzJD?=
+ =?utf-8?B?Vm9KenNyL25IWDZ2dUdJNkZrWTBVYnN4Vy9RSDR5bFAyV0pKZFFNVUJ5N2Ju?=
+ =?utf-8?B?WnRHTGxud2NiUGRQa3hEUmdrRldIcW5NWGlPUGc3UHpCY1E1OHVxaURKWDVa?=
+ =?utf-8?B?MDI4TG5oNURZNzhpMHJVY1RjMXlValVNVDlLM3NCNHlMS1FvemVNdytha2NG?=
+ =?utf-8?B?RlQzNDdWYlZ1ei9VRU03cnRVaHIzcEpaZnMxZ1RXeVhhMGc1RXZNcUdhOWt3?=
+ =?utf-8?B?NGlGOVZLL2d6N1NMNWp0WDI0ekE2YnN5SG5VN2NYNnh1YTBSSTRzcWVCa2RP?=
+ =?utf-8?B?Ly9sQXMvUkx0Wk9CTHBKTm1sYlVoZ1VqMTA0U1hZWCtZYnkxQStVaW1ic3kx?=
+ =?utf-8?Q?lrhV3e8=3D?=
+MIME-Version: 1.0
+
+------=_Part_1185_1050867502.1787241806113
+Content-Type: multipart/related; 
+	boundary="----=_Part_1186_1471364137.1787241806113"
+
+------=_Part_1186_1471364137.1787241806113
+Content-Type: text/html;charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.=
+w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'><html xmlns=3D"http://www.w3.=
+org/1999/xhtml"><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8"><m=
+eta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D1, m=
+aximum-scale=3D1"><meta http-equiv=3D"X-UA-Compatible" content=3D"IE=3Dedge=
+"><meta name=3D"x-apple-disable-message-reformatting"><title></title><style=
+ type=3D"text/css">body { background-color:#fff; display:block !important; =
+margin:0; padding:0; } img { border:0 none; height:auto; line-height:100%; =
+outline:none; text-decoration:none; } a img { border:0 none; } h1, h2, h3 {=
+ margin: 0; } p { margin: 0; } pre { margin: 5px 0; white-space: pre-wrap; =
+word-wrap: break-word; } div.section { margin-top: 1.3em; } table, td { bor=
+der-collapse:collapse; } #container { background-color:#fff; height:100% !i=
+mportant; margin:0; padding:0; width:100% !important; } </style></head><bod=
+y><center style=3D"font-family:Arial,sans-serif; font-size:12px;"><table bg=
+color=3D"#FFFFFF" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D=
+"100%" id=3D"container"><tr><td height=3D"10" style=3D"font-size:10px; line=
+-height:10px;">&nbsp;</td></tr><tr><td align=3D"center" valign=3D"top"><tab=
+le border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"780" id=3D"fra=
+me"><tr><td align=3D"center" valign=3D"top"><table border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" width=3D"100%" id=3D"header"><tr><td valign=3D"top=
+"><p style=3D"text-align: center;"><img src=3D"https://ui.awin.com/images/u=
+pload/merchant/profile/66034.png"></p></td></tr></table><table border=3D"0"=
+ cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" id=3D"body"><tr><td val=
+ign=3D"top"><div class=3D"section"><p>Dear Publisher,</p><p>&nbsp;</p><p>We=
+ are very excited to get in touch and have you on the new Trivago affiliate=
+ programme on Awin.</p><p>&nbsp;</p><p>Please ensure all links are switched=
+ to Awin tracking links as soon as possible, otherwise revenue will be lost=
+.</p><p>&nbsp;</p><p>Once onboarded, please use the following tracking link=
+. Please ensure you replace 2813742 with your publisher ID when using the d=
+eep link.</p><p><br></p><p><a href=3D"https://9tjs2nq2.r.eu-west-1.awstrack=
+.me/L0/https:%2F%2Fwww.awin1.com%2Fcread.php%3Fawinmid=3D66034%26awinaffid=
+=3D2813742%26ued=3Dhttps%253A%252F%252Fwww.trivago.com%252F/1/010201a01fe9b=
+92f-9b495709-0829-4112-ae00-6971e2d4e808-000000/Qb0xqU6TvH73-w4K-XlXBvMxdjQ=
+=3D473" rel=3D"nofollow">https://www.awin1.com/cread.php?awinmid=3D66034&am=
+p;awinaffid=3D<strong>2813742</strong>&amp;ued=3Dhttps%3A%2F%2Fwww.trivago.=
+com%2F</a></p><p><br></p><p>As we are a price comparison site and do not of=
+fer coupons, we kindly ask you not to use fake coupons or deceptive ads suc=
+h as &quot;-20% OFF&quot;. The ads should be neutral without discount numbe=
+rs.</p><p>&nbsp;</p><p>We really appreciate you taking the time to migrate =
+your links and know this can be a difficult process for publishers. If you =
+have any questions relating to the program please contact:</p><p>M=C3=A9lod=
+ie Alric: affiliate@trivago.com</p><p>Basma Gamhi: Basma.Gamhi@awin.com</p>=
+<p>&nbsp;</p><p>We look forward to welcoming you to the new programme.</p><=
+p>&nbsp;</p><p>Trivago Affiliate Team</p></div></td></tr></table><centre><t=
+able border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"780" id=3D"a=
+win-footer"><tr><td align=3D"center" valign=3D"top"><table border=3D"0" cel=
+lpadding=3D"20" cellspacing=3D"0" width=3D"100%"><tr><td height=3D"20" styl=
+e=3D"font-size:20px; line-height:20px;">&nbsp;</td></tr><tr><td align=3D"ce=
+nter" valign=3D"top" style=3D"font-family:Arial,sans-serif; font-size:11px;=
+"><img alt=3D"Awin logo" src=3D"https://images.awin.com/awin-interface/AWIN=
+-logo.png" height=3D"32" width=3D"72"><p align=3D"center" style=3D"margin-t=
+op:1.3em; text-align: center !important;">This email is sent by Awin on beh=
+alf of the advertiser programme, Trivago USA, which you are participating i=
+n.</p><p align=3D"justify" style=3D"margin-top:1.3em; text-align: justify !=
+important; text-align-last: center !important;">If you have a tax residence=
+ in the EU, this email is sent by Awin AG, Landsberger Allee 104 BC, 10249 =
+Berlin, incorporated in Germany with company number HRB 75459. If you have =
+a non-EU tax residence, including the UK, this email is sent by Awin Ltd, 5=
+th Floor, 2 Thomas More Square, London E1W 1YN, incorporated in England and=
+ Wales with company number 4010229, and/or if you are a Brazilian-registere=
+d publisher and you work on programmes in Brazilian Real, this email is sen=
+t by AWIN VEICULA=C3=87=C3=83O DE PUBLICIDADE NA INTERNET LTDA., Av. Paulis=
+ta, 37, conj. 131, Bela Vista CEP 01311-000, S=C3=A3o Paulo, incorporated i=
+n Brazil with CNPJ number 14.182.871/0001-88.</p><p align=3D"center" style=
+=3D"margin-top:1.3em; text-align: center !important;">You can <a href=3D"ht=
+tps://9tjs2nq2.r.eu-west-1.awstrack.me/L0/https:%2F%2Fui.awin.com%2Fcommuni=
+cation-centre-preferences%2Funsubscribe%2Fed0b9ad2-9197-4df1-84ac-456824260=
+9a0%2Femail%2F66034%2Fcategory%2FPERFORMANCE_UPDATE/1/010201a01fe9b92f-9b49=
+5709-0829-4112-ae00-6971e2d4e808-000000/nFFcrqxkM8ay-usLVGNE30-vGMI=3D473">=
+unsubscribe</a> at any point to stop receiving Performance Updates from Tri=
+vago USA. To unsubscribe from other advertisers or communication categories=
+, please update your <a href=3D"https://9tjs2nq2.r.eu-west-1.awstrack.me/L0=
+/https:%2F%2Fui.awin.com%2Fcommunication-centre%2Fen%2Fawin%2Fpublisher%2F2=
+813742%2Fpreferences%3FadvertiserIds=3D66034/1/010201a01fe9b92f-9b495709-08=
+29-4112-ae00-6971e2d4e808-000000/MbZT7d0y8mzJYtqb3QU9_qFurjk=3D473">communi=
+cation preferences</a>.</p></td></tr></table></td></tr></table></centre></t=
+d></tr></table></td></tr><tr><td height=3D"10" style=3D"font-size:10px; lin=
+e-height:10px;">&nbsp;</td></tr></table></center><img alt=3D"" src=3D"https=
+://9tjs2nq2.r.eu-west-1.awstrack.me/I0/010201a01fe9b92f-9b495709-0829-4112-=
+ae00-6971e2d4e808-000000/jx7jR8L6UAWhCpJ2gydC_iPqsmQ=3D473" style=3D"displa=
+y: none; width: 1px; height: 1px;">
+</body></html>=
+
+------=_Part_1186_1471364137.1787241806113--
+
+------=_Part_1185_1050867502.1787241806113--

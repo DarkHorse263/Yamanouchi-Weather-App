@@ -1,0 +1,672 @@
+Received: from ME4P282MB1078.AUSP282.PROD.OUTLOOK.COM (2603:10c6:220:9f::12)
+ by SY5P282MB4686.AUSP282.PROD.OUTLOOK.COM with HTTPS; Sat, 22 Aug 2026
+ 14:11:05 +0000
+Received: from MEWPR01CA0315.ausprd01.prod.outlook.com (2603:10c6:220:1d8::19)
+ by ME4P282MB1078.AUSP282.PROD.OUTLOOK.COM (2603:10c6:220:9f::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.11; Sat, 22 Aug
+ 2026 14:11:03 +0000
+Received: from ML1PEPF0000F179.ausprd01.prod.outlook.com
+ (2603:10c6:220:1d8:cafe::27) by MEWPR01CA0315.outlook.office365.com
+ (2603:10c6:220:1d8::19) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.339.11 via Frontend Transport; Sat,
+ 22 Aug 2026 14:11:03 +0000
+Authentication-Results: spf=pass (sender IP is 69.169.224.52)
+ smtp.mailfrom=ses-eu.md.getsentry.com; dkim=pass (signature was verified)
+ header.d=md.getsentry.com;dkim=pass (signature was verified)
+ header.d=amazonses.com;dmarc=pass action=none
+ header.from=md.getsentry.com;compauth=pass reason=100
+Received-SPF: Pass (protection.outlook.com: domain of ses-eu.md.getsentry.com
+ designates 69.169.224.52 as permitted sender)
+ receiver=protection.outlook.com; client-ip=69.169.224.52;
+ helo=b224-52.smtp-out.eu-central-1.amazonses.com; pr=C
+Received: from b224-52.smtp-out.eu-central-1.amazonses.com (69.169.224.52) by
+ ML1PEPF0000F179.mail.protection.outlook.com (10.167.241.70) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.360.3
+ via Frontend Transport; Sat, 22 Aug 2026 14:11:01 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=dgiifvxgcpauw74hjvgousmem4wsca6w; d=md.getsentry.com;
+	t=1787407859;
+	h=Content-Type:MIME-Version:Subject:From:To:Date:Message-Id;
+	bh=txXtXjNJNwn9osMV8Wk+gANL2COrJcmv9XaFAZNme5U=;
+	b=VdZeMTjI33LGiN0tsomA6oaR99i7lfreo2d9opHNoYDJkcJ5WZhMqqlVkUnSNULf
+	wjy1TVRxa3ztS9pdnE/24HzKKhkgFTL/X2rmILTpNnspCs20T3etCAL9Ktd4rUSB3mr
+	RlFyRCPf+xTY4V3LLNFPRTf00sh7KsJm+NBstX/zRCjgcGUhB2dicvFqOYW3XmLq/Ig
+	3WRYzuD7rxuA1zyQSmNFlVCgr/rGr9Qw7JaNk7mPqvWuXMTNONj99zpskI+KIK9pNSG
+	ntKcbYGkQ5nC9fkI5UIKKnf4iJK7waYk974b9QlC3fuUw3oxZNuLy5506V+/rlqqhIQ
+	bqr9e64xDg==
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=sokbgaaqhfgd6qjht2wmdajpuuanpimv; d=amazonses.com; t=1787407859;
+	h=Content-Type:MIME-Version:Subject:From:To:Date:Message-Id:Feedback-ID;
+	bh=txXtXjNJNwn9osMV8Wk+gANL2COrJcmv9XaFAZNme5U=;
+	b=gy/orNo2ds9koLP2jqk9yg31I28OgLfiyezmu/FXWvdmVh9DxZrC/zJ+S5gl39Os
+	wd4Fbep1C8BkcRLZGrcSQr9nQF93G2h/EZOC+1pf0mUxiDwxiXBznslanJ2jD6gM7Pe
+	RV8XjmOjI94aDlS5jEb6c3MamCTaO+WTiXSyWO60=
+Content-Type: multipart/alternative;
+ boundary="===============6760071588443804203=="
+Subject: Weekly Report for Navigate Work Digital: August 15th,
+ 2026 - August 22nd, 2026
+From: Sentry <noreply@md.getsentry.com>
+To: james@navigatework.com.au
+Date: Sat, 22 Aug 2026 14:10:59 +0000
+X-SMTPAPI: {"category":"organization_weekly_report"}
+Message-ID: <010701a029cf7ee3-f42b8d97-134f-4176-ae1f-9835aeac8fce-000000@eu-central-1.amazonses.com>
+Feedback-ID: ::1.eu-central-1.EhjBqsUiece89PThycS+jt7e2y7FuoNiVQcBSPfiyuM=:AmazonSES
+X-SES-Outgoing: 2026.08.22-69.169.224.52
+Return-Path: 010701a029cf7ee3-f42b8d97-134f-4176-ae1f-9835aeac8fce-000000@ses-eu.md.getsentry.com
+X-MS-Exchange-Organization-ExpirationStartTime: 22 Aug 2026 14:11:02.7824
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: e6b7dca2-7be2-486b-0400-08df00573302
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: febefc03-2be7-43ba-af66-5490103dee38:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: ML1PEPF0000F179:EE_|ME4P282MB1078:EE_|SY5P282MB4686:EE_
+X-MS-Exchange-Organization-AuthSource: ML1PEPF0000F179.ausprd01.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id: e6b7dca2-7be2-486b-0400-08df00573302
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Antispam: BCL:4;ARA:13230040|12012899012|32142699015|13012899012|1032899013|4092899012|13102899012|2092899012|3072899012|5062899012|3092899012|3109299003|7149299003|7049299003|69100299015|19002099009|10067099003|5063699009|4113699003|57112099003|16102099003|8096899003|4076899003|2066899003|18003699003|13003099007;
+X-Forefront-Antispam-Report: CIP:69.169.224.52;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:b224-52.smtp-out.eu-central-1.amazonses.com;PTR:b224-52.smtp-out.eu-central-1.amazonses.com;CAT:NONE;SFS:(13230040)(12012899012)(32142699015)(13012899012)(1032899013)(4092899012)(13102899012)(2092899012)(3072899012)(5062899012)(3092899012)(3109299003)(7149299003)(7049299003)(69100299015)(19002099009)(10067099003)(5063699009)(4113699003)(57112099003)(16102099003)(8096899003)(4076899003)(2066899003)(18003699003)(13003099007);DIR:INB;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Aug 2026 14:11:01.7299
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e6b7dca2-7be2-486b-0400-08df00573302
+X-MS-Exchange-CrossTenant-Id: febefc03-2be7-43ba-af66-5490103dee38
+X-MS-Exchange-CrossTenant-AuthSource: ML1PEPF0000F179.ausprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ME4P282MB1078
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:03.9475142
+X-MS-Exchange-Processed-By-BccFoldering: 15.21.0339.010
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(910005)(944490095)(944506478)(944626604)(920097)(930201)(20251009189)(140003);
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?VThhT0c0UWNrTUZ1L3lhVzlFRnlyQkJzQzNyMHFJUzFHUEhkcWk4c2JqNEQ3?=
+ =?utf-8?B?UEx1YWtweEVSUDBkdytyNTJuMjF3WFd5ZjdtaC9DVkhFSENLdi80UGc2V2hH?=
+ =?utf-8?B?NUJDbU5lSW02N1RCLzNDMlZQYWtTeDZ1T0o0dStKTS9ia3ZDODE1V2FScEwx?=
+ =?utf-8?B?ODVJZlcwVjBkVEN4cThHQlNHVGY2b3dQZzEwdXk0M1Y0ZkgwdWo3TFViSjMz?=
+ =?utf-8?B?Qm9PR1dKYnpFU21iYStSQ1E0djJsSC9ab3V0emFSNkx5RmNNVW5BWEREMmR2?=
+ =?utf-8?B?TlZLVEx5TmJ2SzZZRlFJamQzbFZyUmtvcFpUc2xZam1nWnVVTnNlVXdRYjNC?=
+ =?utf-8?B?eTlmR2JtL2YvV1RsWk00ellKR2VrSFRVRUVMaUNaR3hCQzIvSWdabjFBVWhN?=
+ =?utf-8?B?Z2wrc3VnWWlaK1FoanZYZkFEL3lFR09oMmZFcXNuK012M3pnK1RHSVdiU3JC?=
+ =?utf-8?B?VDdBVDUraFBKVGJScVpORUdJMHRDZEQ1OWEvWCtXUXJBZ0pmelc5ZUlWbXRk?=
+ =?utf-8?B?VVE5VmtpcGtKN0o5VlJwN0hqeTE1cG1reVc0UUdXdHdZR016TTk1Q3FDNlFP?=
+ =?utf-8?B?bFFCOUdIRFVxQzN1R296U2k4eHhMYUZTSkUvMnZibTQ1b3hVRTdEaWpMSTdm?=
+ =?utf-8?B?TENTZDFIOW4yOW1BcTI1NWdvOEtJTUxGQVliRGtOTmNFNGprTGh5WnZaU01l?=
+ =?utf-8?B?Y0JPRU1QZDdtVHlkaU44WTEwZkpiVVRZMEFTODUwV1VEM1FCMk1pc3NCWjNI?=
+ =?utf-8?B?TDUxeXkvVjBROXVjMU1sUUprNjhNV1VhbzdkZGo2NHVQTUZVcTJaQXVRVnZE?=
+ =?utf-8?B?V2haRTBBY1RRdzlSSFFHWFJJMXJHRThMQ0xjTWU3WGVadEp6Lys3QXFsL2xJ?=
+ =?utf-8?B?Y2lsRlZzWCsrNTRnd25PU3FtMWRUWXh4U2lJYmZJRXc2MTBsSzRveTNTTUZq?=
+ =?utf-8?B?WWVub0tkT0REQ2lSRFdZUHVMZmloRml3Skh5aE8rRk5xTTBlTVBJWVV2aEpo?=
+ =?utf-8?B?RCtCWCtkUElzU0lsZTNTcUcyQzhZNzZSaXJrWk1KZ0I5TXZwa3phT0tpWFls?=
+ =?utf-8?B?aEdJd0VwQ2J1KzJDSHc1UzUyTEh4dkwxb1FGOVBYTU9wL2w5aGNsMW5xTmZK?=
+ =?utf-8?B?UHYrWm1hcFliRWVMYVRhdDdlU3FURWFIaVplVE84UENPWFp6bUV0NVo3ZGJP?=
+ =?utf-8?B?L2xYbHFTOUFBSHovdTNETGtyWGhHcllaMTBvemw4b0txVXhkRnVvRmdUT01V?=
+ =?utf-8?B?VVNsRkJkQ0RNVDBtR1c2Q1V3Q0t3bGpUaUZlSnhHVnNQOHlZcktZTXVoSzVS?=
+ =?utf-8?B?dlBOeVFuTFBnckFtM1hjZkRSS3dHNnJrWENNTzR2WFlPRjNiVk9UQlZiWVBF?=
+ =?utf-8?B?dTV4ZDYwRkdNS1hUTGpESE5yMVZOT2FXaU4rUWQxUGgwbTIrR28wTXNXRDJF?=
+ =?utf-8?B?dUVRSkJZQkcwU0czeFAzMzhDT1pCNXhGbmREcWQvNU83c2hoNVZXbGNxQTNX?=
+ =?utf-8?B?V3RZbTVDQTJvQVZ0UFpVK2ZDNjFRRlNEKzFraTNJcVVIL2RQMUFTajN3eU9k?=
+ =?utf-8?B?NS95N3Z6WitWTTgvR1NTSjAzd1lBMnZNK1MrTzlQOWsrMEdTMEx1bFE4TUNO?=
+ =?utf-8?B?TzVnWTFKMGI1Vi9veE14OXRSVE1OZll4ZE1sN0tUcVdUeVJHM2VHZ2xWcnJE?=
+ =?utf-8?B?NktVOUZtUUtpZG1rU2dXNEZEZ0FKZUtkZk9zZDczZUNzL2NES2M2Wk05Z3ZC?=
+ =?utf-8?B?ZnRQT0pOY1Qxc1B2UFE0NjhSQVo1dUZPY2hGYmsrTUI0aitwd2FTZnhWVkl6?=
+ =?utf-8?B?Q1Bhb0dkR2NPek1qSkJIVlhnMDdTalg0UFlOeEpCVzJPcVYrUThwYm91MXRR?=
+ =?utf-8?B?Vlc3ZVdtS2dYSXpIdnNLL05jejBLNnVqdjl3c2ZkQ2lJd1A1WThWSU85Q0d4?=
+ =?utf-8?B?RDh2THRZcjNPVTQzN0RMRU5sVytwQ0ZydnczTnpNUm03d2ttUVRlUzdmMjU2?=
+ =?utf-8?B?ak8yQjZBSVFLSlJPMEVQMXNVbFJqSms3a25XbGJ0dnRYMEJrbGJ4WGc1NjdG?=
+ =?utf-8?B?d2tZNnY0Tmw2d0dRZXM5NHdmSkpLNGVCY25neWJKd0VraG9oRjFraFkxRG16?=
+ =?utf-8?B?aFFJaDZKaFc0VklPY0crRmErc01oeFpSTzVLU1dUSWRaaUFOcEY5eFFmc1RO?=
+ =?utf-8?B?d2FFYlAyc3A2QUtLUUg1Q1NPVE1Yc2I4cHBKQkw1ODFqb3ZGdVEwNnhrYkxU?=
+ =?utf-8?B?U0VuY01UdncvZG9SaVQrZVhQUEthUFRpdnRVTXM0bnBhRnBwaGZVTE5rSDZS?=
+ =?utf-8?B?RFhkMUdEb3BvOExoc1JpQ0FqVlFHR0FhSCtrdEJxeGZQVEJodG9YWDVXMDEw?=
+ =?utf-8?B?aXFiOGpFejRMYlg1UllEOStJUDJ1VDJQTDRZYTA3SXJkUUNTN0JPeVJYTzFE?=
+ =?utf-8?B?YWYwUC8yNVZRa2U3RDhDSVVQMzFuYUptRkJ3M0dKT1BrYzU1REoyZElHMkM1?=
+ =?utf-8?B?ZE90eWozb1p6d1gvVm5aRlI4TStvLzdWMEhoY3RpbFpHUWJtQktpWUxlc2px?=
+ =?utf-8?B?MDJFN2g2TnM3RStiN2xTOXlxN3FjVEtocVMyTzdSUUxZSjJjT3lHSlI4TXBy?=
+ =?utf-8?B?c2dmMFhMb1ZUMkJ2VmJEcXc3azFNQXlJNEttTWYxd3F1TUc4dWV0QzhEMHV4?=
+ =?utf-8?B?VlgzamZCTFN1SWNnaEZXWjhvZDdiNVNHdXd4cE5pekxjaWNIdldrNE5JcjM0?=
+ =?utf-8?B?M2d3cUdkZUVzalg4MEUvM1UwSVVoRmxPZlZRTUJUaEZpb0U3MFNjekJ1K0hY?=
+ =?utf-8?B?UDlObHJJams5RnpnZmE0Z0pxeVVoOXNLRXlvak02MEVZMVJHUFNXOWgrNi9Y?=
+ =?utf-8?B?dEdkeE94OTRKSkFPaVEwN0lYVlpjNmtUMXZ2aW1JZWh4N2ZOV3VXVVhJcDBB?=
+ =?utf-8?B?c1FQOVRkRHZBQUV6UkRqZTRSdkFHSVFiNTJnSXduRDdldmNVTVRvNlFiWmFv?=
+ =?utf-8?B?d1Z3NSt6MGk1VExZL3ZiU2pOeFRzeTZMT3JwMm1QdzQvYnBveUNZNXFxa1Y1?=
+ =?utf-8?B?dEhFc08xcFVqRkJKZHFJa3ZuMHpyMCtpWk5aRFpzN3JKVkFYNjdZQ2kwcmNW?=
+ =?utf-8?B?UzVwMEh0cnQ0d1RyMHhvVWsvcTFSU1A4TzdLS2FRZz09?=
+MIME-Version: 1.0
+
+--===============6760071588443804203==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html><html style="font-weight: 400"><head style="font-weight: 400">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" style="font-weight: 400">
+
+  
+
+<style type="text/css" style="font-weight: 400">
+  @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+</style>
+
+
+  
+
+  
+
+  <style type="text/css" style="font-weight: 400">
+    @media only screen and (max-device-width: 480px) {
+
+      .mobile-full-width > th,
+      .mobile-full-width > td {
+          display: block;
+          width: 100%;
+      }
+
+      h4 {
+        text-align: center !important;
+      }
+
+      .header td {
+        text-align: center !important;
+      }
+
+      #events-by-issue-type .legend {
+        margin-bottom: 20px !important;
+        text-align: center !important;
+      }
+
+      .legend-inbox {
+        text-align: center !important;
+      }
+
+      #events-by-issue-type .quantity {
+        display: none;
+      }
+    }
+
+  </style>
+
+
+
+</head>
+<body class="" style="font-weight: 400; background-image: url(https://s1.sentry-cdn.com/_static/6494ab2f5d28433315f7884199ee2466/sentry/images/email/sentry-pattern.png); width: 100%; font-size: 16px; font-family: &quot;Lato&quot;, &quot;Helvetica Neue&quot;, helvetica, sans-serif; background-color: #fff; color: #2f2936; -webkit-font-smoothing: antialiased; margin: 0; padding: 0">
+<div class="preheader" style="font-weight: 400; display: none; font-size: 0; max-height: 0; line-height: 0; mso-hide: all; padding: 0"></div>
+<table class="main" style="font-weight: 400; width: 100%; border-collapse: separate; font-size: 16px; font-family: &quot;Lato&quot;, &quot;Helvetica Neue&quot;, helvetica, sans-serif; background-color: #fff; color: #2f2936; -webkit-font-smoothing: antialiased; max-width: 700px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); border-radius: 4px; border: 1px solid #c7d0d4; border-spacing: 0; margin: 15px auto; padding: 0">
+  <tr style="font-weight: 400">
+    <td style="font-weight: 400; text-align: left; margin: 0; padding: 0">
+      <div class="header" style="font-weight: 400; font-size: 14px; border-bottom: 1px solid #dee7eb; padding: 23px 0">
+        <div class="container" style="font-weight: 400; max-width: 600px; text-align: left; min-width: 360px; margin: 0 auto; padding: 18px 20px 10px">
+          
+  <table style="font-weight: 400; margin-bottom: 0; width: 100%; border-collapse: collapse">
+    <tr class="mobile-full-width" style="font-weight: 400">
+      <td width="117px" style="font-weight: 400; text-align: right; font-size: 14px; margin: 0; padding: 0">
+        <h1 style="font-weight: normal; font-size: 38px; line-height: 42px; color: #000; letter-spacing: -1px; margin: 0; padding: 0">
+          <a href="https://sentry.io" style="font-weight: 500; color: #4674ca; text-decoration: none"><img src="https://s1.sentry-cdn.com/_static/6494ab2f5d28433315f7884199ee2466/sentry/images/email/sentry_logo_full.png" width="117px" height="32px" alt="Sentry" style="font-weight: 400"></a>
+        </h1>
+      </td>
+      <td class="align-right" style="font-weight: 400; text-align: right; font-size: 14px; margin: 0; padding: 0">
+        <strong style="font-weight: bold">Weekly Report for Navigate Work Digital</strong><br style="font-weight: 400">
+        August 15th, 2026 – August 22nd, 2026
+      </td>
+    </tr>
+  </table>
+
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr style="font-weight: 400">
+    <td style="font-weight: 400; text-align: left; margin: 0; padding: 0">
+      
+
+<div class="container" style="font-weight: 400; max-width: 600px; text-align: left; min-width: 360px; margin: 0 auto; padding: 18px 20px 10px">
+
+  <div class="project-breakdown" style="font-weight: 400; margin-bottom: 20px">
+    
+    <table class="project-breakdown-graph-deck" style="font-weight: 400; margin-bottom: 20px; width: 100%; border-collapse: collapse; table-layout: fixed; border-spacing: 3px; border-style: hidden"><tbody style="font-weight: 400"><tr style="font-weight: 400">
+
+    <td class="project-breakdown-graph-cell issues" style="font-weight: 400; text-align: left; border: 1px solid #C4C4C4; margin: 0; padding: 0 10px 0 0">
+    <h4 class="total-count-title" style="font-weight: bold; font-size: 18px; margin: 0">Total Issues</h4>
+    <h1 style="font-weight: bold; margin: 0" class="total-count">
+      1
+      
+    </h1>
+    <a href="https://navigate-work-digital.sentry.io/issues/?referrer=weekly_report&amp;notification_uuid=18e7f117-392c-4fb9-b024-5e1f6b6957e7&amp;query=is%3Aunresolved&amp;project=4511307499700304" style="font-weight: bold; color: #4674ca; text-decoration: none; font-size: 12px; margin-bottom: 16px; display: block">View All Issues</a>
+
+    <table class="graph" style="font-weight: 400; width: 100%; border-collapse: collapse; table-layout: fixed; margin: 0">
+      <tr style="font-weight: 400">
+        
+        <td valign="bottom" class="bar" style="font-weight: 400; text-align: left; font-size: 0; border-right: 10px solid #fff; height: 110px; width: 14%; margin: 0; padding: 0">
+            <table class="bar" style="font-weight: 400; margin-bottom: 0; width: 100%; border-collapse: collapse">
+              
+                <tr style="font-weight: 400">
+                  <td height="0" style="font-weight: 400; text-align: left; line-height: 0; font-size: 0; border-right: none; background-color: #7553FF; margin: 0; padding: 0">&nbsp;</td>
+                </tr>
+              
+            </table>
+          </td>
+        
+        <td valign="bottom" class="bar" style="font-weight: 400; text-align: left; font-size: 0; border-right: 10px solid #fff; height: 110px; width: 14%; margin: 0; padding: 0">
+            <table class="bar" style="font-weight: 400; margin-bottom: 0; width: 100%; border-collapse: collapse">
+              
+                <tr style="font-weight: 400">
+                  <td height="0" style="font-weight: 400; text-align: left; line-height: 0; font-size: 0; border-right: none; background-color: #7553FF; margin: 0; padding: 0">&nbsp;</td>
+                </tr>
+              
+            </table>
+          </td>
+        
+        <td valign="bottom" class="bar" style="font-weight: 400; text-align: left; font-size: 0; border-right: 10px solid #fff; height: 110px; width: 14%; margin: 0; padding: 0">
+            <table class="bar" style="font-weight: 400; margin-bottom: 0; width: 100%; border-collapse: collapse">
+              
+                <tr style="font-weight: 400">
+                  <td height="0" style="font-weight: 400; text-align: left; line-height: 0; font-size: 0; border-right: none; background-color: #7553FF; margin: 0; padding: 0">&nbsp;</td>
+                </tr>
+              
+            </table>
+          </td>
+        
+        <td valign="bottom" class="bar" style="font-weight: 400; text-align: left; font-size: 0; border-right: 10px solid #fff; height: 110px; width: 14%; margin: 0; padding: 0">
+            <table class="bar" style="font-weight: 400; margin-bottom: 0; width: 100%; border-collapse: collapse">
+              
+                <tr style="font-weight: 400">
+                  <td height="110" style="font-weight: 400; text-align: left; line-height: 0; font-size: 0; border-right: none; background-color: #7553FF; margin: 0; padding: 0">&nbsp;</td>
+                </tr>
+              
+            </table>
+          </td>
+        
+        <td valign="bottom" class="bar" style="font-weight: 400; text-align: left; font-size: 0; border-right: 10px solid #fff; height: 110px; width: 14%; margin: 0; padding: 0">
+            <table class="bar" style="font-weight: 400; margin-bottom: 0; width: 100%; border-collapse: collapse">
+              
+                <tr style="font-weight: 400">
+                  <td height="0" style="font-weight: 400; text-align: left; line-height: 0; font-size: 0; border-right: none; background-color: #7553FF; margin: 0; padding: 0">&nbsp;</td>
+                </tr>
+              
+            </table>
+          </td>
+        
+        <td valign="bottom" class="bar" style="font-weight: 400; text-align: left; font-size: 0; border-right: 10px solid #fff; height: 110px; width: 14%; margin: 0; padding: 0">
+            <table class="bar" style="font-weight: 400; margin-bottom: 0; width: 100%; border-collapse: collapse">
+              
+                <tr style="font-weight: 400">
+                  <td height="0" style="font-weight: 400; text-align: left; line-height: 0; font-size: 0; border-right: none; background-color: #7553FF; margin: 0; padding: 0">&nbsp;</td>
+                </tr>
+              
+            </table>
+          </td>
+        
+        <td valign="bottom" class="bar" style="font-weight: 400; text-align: left; font-size: 0; border-right: none; height: 110px; width: 14%; margin: 0; padding: 0">
+            <table class="bar" style="font-weight: 400; margin-bottom: 0; width: 100%; border-collapse: collapse">
+              
+                <tr style="font-weight: 400">
+                  <td height="0" style="font-weight: 400; text-align: left; line-height: 0; font-size: 0; border-right: none; background-color: #7553FF; margin: 0; padding: 0">&nbsp;</td>
+                </tr>
+              
+            </table>
+          </td>
+        
+      </tr>
+      <tr style="font-weight: 400">
+        <td class="axis" colspan="7" height="1" style="font-weight: 400; text-align: left; font-size: 0; border-right: none; height: 1px; line-height: 0; background-color: #C0BEC6; margin: 0; padding: 0">&nbsp;</td>
+      </tr>
+      <tr style="font-weight: 400">
+        
+          <td class="label" style="font-weight: 400; text-align: center; font-size: 10px; border-right: 10px solid #fff; color: #000; width: 14%; margin: 0; padding: 10px 0 0">
+            S
+          </td>
+        
+          <td class="label" style="font-weight: 400; text-align: center; font-size: 10px; border-right: 10px solid #fff; color: #000; width: 14%; margin: 0; padding: 10px 0 0">
+            S
+          </td>
+        
+          <td class="label" style="font-weight: 400; text-align: center; font-size: 10px; border-right: 10px solid #fff; color: #000; width: 14%; margin: 0; padding: 10px 0 0">
+            M
+          </td>
+        
+          <td class="label" style="font-weight: 400; text-align: center; font-size: 10px; border-right: 10px solid #fff; color: #000; width: 14%; margin: 0; padding: 10px 0 0">
+            T
+          </td>
+        
+          <td class="label" style="font-weight: 400; text-align: center; font-size: 10px; border-right: 10px solid #fff; color: #000; width: 14%; margin: 0; padding: 10px 0 0">
+            W
+          </td>
+        
+          <td class="label" style="font-weight: 400; text-align: center; font-size: 10px; border-right: 10px solid #fff; color: #000; width: 14%; margin: 0; padding: 10px 0 0">
+            T
+          </td>
+        
+          <td class="label" style="font-weight: 400; text-align: center; font-size: 10px; border-right: none; color: #000; width: 14%; margin: 0; padding: 10px 0 0">
+            F
+          </td>
+        
+      </tr>
+    </table>
+    </td>
+
+    <td class="project-breakdown-graph-cell errors" style="font-weight: 400; text-align: left; border: 1px solid #C4C4C4; margin: 0; padding: 0 0 0 10px">
+    <h4 class="total-count-title" style="font-weight: bold; font-size: 18px; margin: 0">Total Errors</h4>
+    <h1 style="font-weight: bold; margin: 0" class="total-count">
+      1
+      
+    </h1>
+    <a href="https://navigate-work-digital.sentry.io/explore/discover/homepage/?field=title&amp;field=event.type&amp;field=project&amp;field=user.display&amp;field=timestamp&amp;dataset=errors&amp;sort=-timestamp&amp;referrer=weekly_report&amp;notification_uuid=18e7f117-392c-4fb9-b024-5e1f6b6957e7&amp;project=4511307499700304" style="font-weight: bold; color: #4674ca; text-decoration: none; font-size: 12px; margin-bottom: 16px; display: block">View All Errors</a>
+
+    <table class="graph" style="font-weight: 400; width: 100%; border-collapse: collapse; table-layout: fixed; margin: 0">
+      <tr style="font-weight: 400">
+        
+        <td valign="bottom" class="bar" style="font-weight: 400; text-align: left; font-size: 0; border-right: 10px solid #fff; height: 110px; width: 14%; margin: 0; padding: 0">
+            <table class="bar" style="font-weight: 400; margin-bottom: 0; width: 100%; border-collapse: collapse">
+              
+                <tr style="font-weight: 400">
+                  <td height="0" style="font-weight: 400; text-align: left; line-height: 0; font-size: 0; border-right: none; background-color: #7553FF; margin: 0; padding: 0">&nbsp;</td>
+                </tr>
+              
+            </table>
+          </td>
+        
+        <td valign="bottom" class="bar" style="font-weight: 400; text-align: left; font-size: 0; border-right: 10px solid #fff; height: 110px; width: 14%; margin: 0; padding: 0">
+            <table class="bar" style="font-weight: 400; margin-bottom: 0; width: 100%; border-collapse: collapse">
+              
+                <tr style="font-weight: 400">
+                  <td height="0" style="font-weight: 400; text-align: left; line-height: 0; font-size: 0; border-right: none; background-color: #7553FF; margin: 0; padding: 0">&nbsp;</td>
+                </tr>
+              
+            </table>
+          </td>
+        
+        <td valign="bottom" class="bar" style="font-weight: 400; text-align: left; font-size: 0; border-right: 10px solid #fff; height: 110px; width: 14%; margin: 0; padding: 0">
+            <table class="bar" style="font-weight: 400; margin-bottom: 0; width: 100%; border-collapse: collapse">
+              
+                <tr style="font-weight: 400">
+                  <td height="0" style="font-weight: 400; text-align: left; line-height: 0; font-size: 0; border-right: none; background-color: #7553FF; margin: 0; padding: 0">&nbsp;</td>
+                </tr>
+              
+            </table>
+          </td>
+        
+        <td valign="bottom" class="bar" style="font-weight: 400; text-align: left; font-size: 0; border-right: 10px solid #fff; height: 110px; width: 14%; margin: 0; padding: 0">
+            <table class="bar" style="font-weight: 400; margin-bottom: 0; width: 100%; border-collapse: collapse">
+              
+                <tr style="font-weight: 400">
+                  <td height="110" style="font-weight: 400; text-align: left; line-height: 0; font-size: 0; border-right: none; background-color: #7553FF; margin: 0; padding: 0">&nbsp;</td>
+                </tr>
+              
+            </table>
+          </td>
+        
+        <td valign="bottom" class="bar" style="font-weight: 400; text-align: left; font-size: 0; border-right: 10px solid #fff; height: 110px; width: 14%; margin: 0; padding: 0">
+            <table class="bar" style="font-weight: 400; margin-bottom: 0; width: 100%; border-collapse: collapse">
+              
+                <tr style="font-weight: 400">
+                  <td height="0" style="font-weight: 400; text-align: left; line-height: 0; font-size: 0; border-right: none; background-color: #7553FF; margin: 0; padding: 0">&nbsp;</td>
+                </tr>
+              
+            </table>
+          </td>
+        
+        <td valign="bottom" class="bar" style="font-weight: 400; text-align: left; font-size: 0; border-right: 10px solid #fff; height: 110px; width: 14%; margin: 0; padding: 0">
+            <table class="bar" style="font-weight: 400; margin-bottom: 0; width: 100%; border-collapse: collapse">
+              
+                <tr style="font-weight: 400">
+                  <td height="0" style="font-weight: 400; text-align: left; line-height: 0; font-size: 0; border-right: none; background-color: #7553FF; margin: 0; padding: 0">&nbsp;</td>
+                </tr>
+              
+            </table>
+          </td>
+        
+        <td valign="bottom" class="bar" style="font-weight: 400; text-align: left; font-size: 0; border-right: none; height: 110px; width: 14%; margin: 0; padding: 0">
+            <table class="bar" style="font-weight: 400; margin-bottom: 0; width: 100%; border-collapse: collapse">
+              
+                <tr style="font-weight: 400">
+                  <td height="0" style="font-weight: 400; text-align: left; line-height: 0; font-size: 0; border-right: none; background-color: #7553FF; margin: 0; padding: 0">&nbsp;</td>
+                </tr>
+              
+            </table>
+          </td>
+        
+      </tr>
+      <tr style="font-weight: 400">
+        <td class="axis" colspan="7" height="1" style="font-weight: 400; text-align: left; font-size: 0; border-right: none; height: 1px; line-height: 0; background-color: #C0BEC6; margin: 0; padding: 0">&nbsp;</td>
+      </tr>
+      <tr style="font-weight: 400">
+        
+          <td class="label" style="font-weight: 400; text-align: center; font-size: 10px; border-right: 10px solid #fff; color: #000; width: 14%; margin: 0; padding: 10px 0 0">
+            S
+          </td>
+        
+          <td class="label" style="font-weight: 400; text-align: center; font-size: 10px; border-right: 10px solid #fff; color: #000; width: 14%; margin: 0; padding: 10px 0 0">
+            S
+          </td>
+        
+          <td class="label" style="font-weight: 400; text-align: center; font-size: 10px; border-right: 10px solid #fff; color: #000; width: 14%; margin: 0; padding: 10px 0 0">
+            M
+          </td>
+        
+          <td class="label" style="font-weight: 400; text-align: center; font-size: 10px; border-right: 10px solid #fff; color: #000; width: 14%; margin: 0; padding: 10px 0 0">
+            T
+          </td>
+        
+          <td class="label" style="font-weight: 400; text-align: center; font-size: 10px; border-right: 10px solid #fff; color: #000; width: 14%; margin: 0; padding: 10px 0 0">
+            W
+          </td>
+        
+          <td class="label" style="font-weight: 400; text-align: center; font-size: 10px; border-right: 10px solid #fff; color: #000; width: 14%; margin: 0; padding: 10px 0 0">
+            T
+          </td>
+        
+          <td class="label" style="font-weight: 400; text-align: center; font-size: 10px; border-right: none; color: #000; width: 14%; margin: 0; padding: 10px 0 0">
+            F
+          </td>
+        
+      </tr>
+    </table>
+    </td>
+
+    </tr></tbody></table>
+
+    <table class="summary" style="font-weight: 400; margin-bottom: 20px; width: 100%; border-collapse: collapse">
+      <thead style="font-weight: 400">
+        <tr style="font-weight: 400; border-bottom: 1px solid #DEE7EB">
+          <th style="font-weight: 700; text-align: left; font-size: 12px; padding-top: 8px; padding-bottom: 8px; text-transform: uppercase; color: #80708F; width: 2em; padding-right: 0.5em"></th>
+          <th style="font-weight: 700; text-align: left; font-size: 12px; padding-top: 8px; padding-bottom: 8px; text-transform: uppercase; color: #80708F">Project name</th>
+          <th style="font-weight: 700; text-align: right; font-size: 12px; padding-top: 8px; padding-bottom: 8px; text-transform: uppercase; color: #80708F; width: 7em" class="numeric">Errors</th>
+          <th style="font-weight: 700; text-align: right; font-size: 12px; padding-top: 8px; padding-bottom: 8px; text-transform: uppercase; color: #80708F; width: 7em" class="numeric">New<br style="font-weight: 400">Issues</th>
+          <th style="font-weight: 700; text-align: right; font-size: 12px; padding-top: 8px; padding-bottom: 8px; text-transform: uppercase; color: #80708F; width: 8em" class="numeric">Escalating<br style="font-weight: 400">Issues</th>
+          <th style="font-weight: 700; text-align: right; font-size: 12px; padding-top: 8px; padding-bottom: 8px; text-transform: uppercase; color: #80708F; width: 7em" class="numeric">Regressed<br style="font-weight: 400">Issues</th>
+        </tr>
+      </thead>
+      <tbody style="font-weight: 400">
+      
+        <tr style="font-weight: 400; border-bottom: 1px solid #DEE7EB">
+          <td style="font-weight: 400; text-align: left; font-size: 14px; vertical-align: middle; margin: 0; padding: 8px 0">
+              <span style="font-weight: 400; background: #7553FF; display: inline-block; height: 1em; width: 1em">&nbsp;</span>
+          </td>
+          <td style="font-weight: 700; text-align: left; font-size: 14px; vertical-align: middle; margin: 0; padding: 8px 0">
+              <a href="https://navigate-work-digital.sentry.io/issues/?referrer=weekly_report&amp;notification_uuid=18e7f117-392c-4fb9-b024-5e1f6b6957e7&amp;project=4511307499700304" style="font-weight: 700; color: #4674ca; text-decoration: none">javascript-react</a>
+          </td>
+          <td class="numeric" style="font-weight: 400; text-align: right; font-size: 14px; margin: 0; padding: 8px 0">1</td>
+          <td class="numeric" style="font-weight: 400; text-align: right; font-size: 14px; margin: 0; padding: 8px 0"><a href="https://navigate-work-digital.sentry.io/issues/?referrer=weekly_report&amp;notification_uuid=18e7f117-392c-4fb9-b024-5e1f6b6957e7&amp;query=is%3Anew&amp;project=4511307499700304" style="font-weight: 500; color: #4674ca; text-decoration: none">1</a></td>
+          <td class="numeric" style="font-weight: 400; text-align: right; font-size: 14px; margin: 0; padding: 8px 0"><a href="https://navigate-work-digital.sentry.io/issues/?referrer=weekly_report&amp;notification_uuid=18e7f117-392c-4fb9-b024-5e1f6b6957e7&amp;query=is%3Aescalating&amp;project=4511307499700304" style="font-weight: 500; color: #4674ca; text-decoration: none">0</a></td>
+          <td class="numeric" style="font-weight: 400; text-align: right; font-size: 14px; margin: 0; padding: 8px 0"><a href="https://navigate-work-digital.sentry.io/issues/?referrer=weekly_report&amp;notification_uuid=18e7f117-392c-4fb9-b024-5e1f6b6957e7&amp;query=is%3Aregressed&amp;project=4511307499700304" style="font-weight: 500; color: #4674ca; text-decoration: none">0</a></td>
+        </tr>
+      
+      </tbody>
+    </table>
+    
+  </div>
+
+  <div id="events-by-issue-type" style="font-weight: 400">
+
+    
+
+
+    
+    <table class="issue-breakdown" style="font-weight: 400; margin-bottom: 20px; width: 100%; border-collapse: collapse">
+      <tr class="mobile-full-width" style="font-weight: 400">
+        <td style="font-weight: 400; text-align: left; margin: 0; padding: 0">
+          <h4 style="font-weight: 700; font-size: 18px; margin: 20px 0">Issues Breakdown</h4>
+        </td>
+        <td class="legend-inbox" style="font-weight: 400; text-align: right; font-size: 12px; margin: 0; padding: 0 0 8px">
+          <span class="swatch" style="font-weight: 400; width: 14px; height: 14px; vertical-align: bottom; display: inline-block; border-radius: 3px; color: #fff; background-color: #EDCA60; margin: 0 6px"></span>New<span class="quantity" style="font-weight: 400; color: #80708F"> (1)</span>
+          <span class="swatch" style="font-weight: 400; width: 14px; height: 14px; vertical-align: bottom; display: inline-block; border-radius: 3px; color: #fff; background-color: #FF978F; margin: 0 6px"></span>Escalating<span class="quantity" style="font-weight: 400; color: #80708F"> (0)</span>
+          <span class="swatch" style="font-weight: 400; width: 14px; height: 14px; vertical-align: bottom; display: inline-block; border-radius: 3px; color: #fff; background-color: #B7B2FF; margin: 0 6px"></span>Regressed<span class="quantity" style="font-weight: 400; color: #80708F"> (0)</span>
+          <span class="swatch" style="font-weight: 400; width: 14px; height: 14px; vertical-align: bottom; display: inline-block; border-radius: 3px; color: #fff; background-color: #DAD9DE; margin: 0 6px"></span>Ongoing<span class="quantity" style="font-weight: 400; color: #80708F"> (0)</span>
+        </td>
+      </tr>
+      <tr style="font-weight: 400">
+        <td colspan="2" style="font-weight: 400; text-align: left; margin: 0; padding: 0">
+          <table style="font-weight: 400; margin-bottom: 20px; width: 100%; border-collapse: collapse">
+            <tr style="font-weight: 400">
+              <td width="100%" title="New: 1 events" style="font-weight: 400; text-align: left; background-color: #EDCA60; margin: 0; padding: 0">
+                &nbsp;
+              </td>
+              <td width="0%" title="Escalating: 0 events" style="font-weight: 400; text-align: left; background-color: #FF978F; margin: 0; padding: 0">
+                &nbsp;
+              </td>
+              <td width="0%" title="Regressed: 0 events" style="font-weight: 400; text-align: left; background-color: #B7B2FF; margin: 0; padding: 0">
+                &nbsp;
+              </td>
+              <td width="0%" title="Ongoing: 0 events" style="font-weight: 400; text-align: left; background-color: #DAD9DE; margin: 0; padding: 0">
+                &nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    
+
+  </div>
+
+  
+
+  
+  <div id="top-issues" style="font-weight: 400">
+    <h4 style="font-weight: 700; font-size: 18px; margin: 20px 0">Top Issues</h4>
+    
+    <div style="font-weight: 400; display: flex; flex-direction: row; margin-bottom: 8px; align-items: flex-start">
+      <div style="font-weight: 400; font-size: 16px; width: 10%" class="issue-count">1</div>
+      <div style="font-weight: 400; width: 65%; min-width: 0; overflow: hidden">
+        
+        
+        <a title="TypeError" class="issue-title" href="https://navigate-work-digital.sentry.io/issues/141245459/?referrer=weekly_report&amp;notification_uuid=18e7f117-392c-4fb9-b024-5e1f6b6957e7" style="font-weight: 700; color: #4674ca; text-decoration: none; display: block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; font-size: 14px; line-height: 1.2; margin-bottom: 2px">TypeError</a>
+        <div title="'text/html' is not a valid JavaScript MIME type." class="issue-message" style="font-weight: 400; display: block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; max-height: 1.2em; font-size: 14px; color: #80708F; line-height: 1.2; margin-bottom: 2px">'text/html' is not a valid JavaScript MIME type.</div>
+        <div style="font-weight: 400; font-size: 12px; color: #80708F">javascript-react</div>
+      </div>
+      
+      <span style="font-weight: 400; background-color: #F9F0D2; color: #A45200; border-radius: 8px; font-size: 12px; align-self: center; margin-left: auto; text-align: center; line-height: 22px; white-space: nowrap; height: 22px; padding: 0 10px">New</span>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+  <div id="total-spans" style="font-weight: 400; margin-top: 36px; margin-bottom: 20px">
+    <h4 class="total-count-title" style="font-weight: bold; font-size: 18px; margin: 0">Total Spans</h4>
+    <h1 style="font-weight: bold; margin: 0">
+      226
+      
+    </h1>
+    <a href="https://navigate-work-digital.sentry.io/explore/traces/" style="font-weight: bold; color: #4674ca; text-decoration: none; font-size: 12px; margin-bottom: 16px; display: block">View All Spans</a>
+
+    
+    <h4 style="font-weight: 700; font-size: 18px; margin: 20px 0 0">p95 for Top Spans (ms)</h4>
+
+    <div style="font-weight: 400; margin-bottom: 16px">
+      <img src="https://storage.googleapis.com/sentryio-chartcuterie-de/7f5c221d19624825b7bcce455f736f4b.png" width="600" height="200" alt="Top spans p95 chart" style="font-weight: 400; max-width: 100%">
+    </div>
+    
+
+    
+    <table style="font-weight: 400; margin-bottom: 20px; width: 100%; border-collapse: collapse">
+      <thead style="font-weight: 400">
+        <tr style="font-weight: 400; border-bottom: 1px solid #DEE7EB">
+          <th style="font-weight: 400; text-align: left; width: 2em; padding-right: 0.5em"></th>
+          <th style="font-weight: 700; text-align: left; font-size: 12px; text-transform: uppercase; color: #80708F; padding-top: 8px; padding-bottom: 8px">Span Name</th>
+          <th style="font-weight: 700; text-align: left; font-size: 12px; text-transform: uppercase; color: #80708F; padding-top: 8px; padding-bottom: 8px">Project</th>
+          <th style="font-weight: 700; text-align: center; font-size: 12px; text-transform: uppercase; color: #80708F; padding-top: 8px; padding-bottom: 8px">P95 (ms)</th>
+          <th style="font-weight: 700; text-align: right; font-size: 12px; text-transform: uppercase; color: #80708F; padding-top: 8px; padding-bottom: 8px">Total<br style="font-weight: 400">Duration</th>
+        </tr>
+      </thead>
+      <tbody style="font-weight: 400">
+      
+        <tr style="font-weight: 400; border-bottom: 1px solid #DEE7EB">
+          <td style="font-weight: 400; text-align: left; vertical-align: middle; margin: 0; padding: 0">
+            <span style="font-weight: 400; background: #7553FF; display: inline-block; height: 1em; width: 1em">&nbsp;</span>
+          </td>
+          <td style="font-weight: 700; text-align: left; font-size: 14px; vertical-align: middle; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0; padding: 8px 16px 8px 0" title="/"><a href="https://navigate-work-digital.sentry.io/explore/traces/?query=span.name%3A%22%2F%22&amp;project=4511307499700304&amp;visualize=%7B%22yAxes%22%3A%5B%22p95%28span.duration%29%22%2C%22sum%28span.duration%29%22%5D%7D&amp;referrer=weekly_report&amp;notification_uuid=18e7f117-392c-4fb9-b024-5e1f6b6957e7" style="font-weight: 700; color: #4674ca; text-decoration: none">/</a></td>
+          <td style="font-weight: 400; text-align: left; font-size: 14px; vertical-align: middle; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0; padding: 8px 16px 8px 0" title="javascript-react">javascript-react</td>
+          <td style="font-weight: 400; text-align: center; font-size: 14px; margin: 0; padding: 8px 0">30000</td>
+          <td style="font-weight: 400; text-align: right; font-size: 14px; margin: 0; padding: 8px 0">24.4min</td>
+        </tr>
+      
+        <tr style="font-weight: 400; border-bottom: 1px solid #DEE7EB">
+          <td style="font-weight: 400; text-align: left; vertical-align: middle; margin: 0; padding: 0">
+            <span style="font-weight: 400; background: #3A1873; display: inline-block; height: 1em; width: 1em">&nbsp;</span>
+          </td>
+          <td style="font-weight: 700; text-align: left; font-size: 14px; vertical-align: middle; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0; padding: 8px 16px 8px 0" title="/snowy-mountains/"><a href="https://navigate-work-digital.sentry.io/explore/traces/?query=span.name%3A%22%2Fsnowy-mountains%2F%22&amp;project=4511307499700304&amp;visualize=%7B%22yAxes%22%3A%5B%22p95%28span.duration%29%22%2C%22sum%28span.duration%29%22%5D%7D&amp;referrer=weekly_report&amp;notification_uuid=18e7f117-392c-4fb9-b024-5e1f6b6957e7" style="font-weight: 700; color: #4674ca; text-decoration: none">/snowy-mountains/</a></td>
+          <td style="font-weight: 400; text-align: left; font-size: 14px; vertical-align: middle; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0; padding: 8px 16px 8px 0" title="javascript-react">javascript-react</td>
+          <td style="font-weight: 400; text-align: center; font-size: 14px; margin: 0; padding: 8px 0">8758</td>
+          <td style="font-weight: 400; text-align: right; font-size: 14px; margin: 0; padding: 8px 0">1.7min</td>
+        </tr>
+      
+        <tr style="font-weight: 400; border-bottom: 1px solid #DEE7EB">
+          <td style="font-weight: 400; text-align: left; vertical-align: middle; margin: 0; padding: 0">
+            <span style="font-weight: 400; background: #F0369A; display: inline-block; height: 1em; width: 1em">&nbsp;</span>
+          </td>
+          <td style="font-weight: 700; text-align: left; font-size: 14px; vertical-align: middle; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0; padding: 8px 16px 8px 0" title="/victorias-high-country/"><a href="https://navigate-work-digital.sentry.io/explore/traces/?query=span.name%3A%22%2Fvictorias-high-country%2F%22&amp;project=4511307499700304&amp;visualize=%7B%22yAxes%22%3A%5B%22p95%28span.duration%29%22%2C%22sum%28span.duration%29%22%5D%7D&amp;referrer=weekly_report&amp;notification_uuid=18e7f117-392c-4fb9-b024-5e1f6b6957e7" style="font-weight: 700; color: #4674ca; text-decoration: none">/victorias-high-country/</a></td>
+          <td style="font-weight: 400; text-align: left; font-size: 14px; vertical-align: middle; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0; padding: 8px 16px 8px 0" title="javascript-react">javascript-react</td>
+          <td style="font-weight: 400; text-align: center; font-size: 14px; margin: 0; padding: 8px 0">19513</td>
+          <td style="font-weight: 400; text-align: right; font-size: 14px; margin: 0; padding: 8px 0">1.5min</td>
+        </tr>
+      
+        <tr style="font-weight: 400; border-bottom: 1px solid #DEE7EB">
+          <td style="font-weight: 400; text-align: left; vertical-align: middle; margin: 0; padding: 0">
+            <span style="font-weight: 400; background: #FF9838; display: inline-block; height: 1em; width: 1em">&nbsp;</span>
+          </td>
+          <td style="font-weight: 700; text-align: left; font-size: 14px; vertical-align: middle; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0; padding: 8px 16px 8px 0" title="/snowy-mountains/mountain/perisher"><a href="https://navigate-work-digital.sentry.io/explore/traces/?query=span.name%3A%22%2Fsnowy-mountains%2Fmountain%2Fperisher%22&amp;project=4511307499700304&amp;visualize=%7B%22yAxes%22%3A%5B%22p95%28span.duration%29%22%2C%22sum%28span.duration%29%22%5D%7D&amp;referrer=weekly_report&amp;notification_uuid=18e7f117-392c-4fb9-b024-5e1f6b6957e7" style="font-weight: 700; color: #4674ca; text-decoration: none">/snowy-mountains/mountain/perisher</a></td>
+          <td style="font-weight: 400; text-align: left; font-size: 14px; vertical-align: middle; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0; padding: 8px 16px 8px 0" title="javascript-react">javascript-react</td>
+          <td style="font-weight: 400; text-align: center; font-size: 14px; margin: 0; padding: 8px 0">28712</td>
+          <td style="font-weight: 400; text-align: right; font-size: 14px; margin: 0; padding: 8px 0">55.0s</td>
+        </tr>
+      
+        <tr style="font-weight: 400; border-bottom: 1px solid #DEE7EB">
+          <td style="font-weight: 400; text-align: left; vertical-align: middle; margin: 0; padding: 0">
+            <span style="font-weight: 400; background: #FFD00E; display: inline-block; height: 1em; width: 1em">&nbsp;</span>
+          </td>
+          <td style="font-weight: 700; text-align: left; font-size: 14px; vertical-align: middle; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0; padding: 8px 16px 8px 0" title="/admin"><a href="https://navigate-work-digital.sentry.io/explore/traces/?query=span.name%3A%22%2Fadmin%22&amp;project=4511307499700304&amp;visualize=%7B%22yAxes%22%3A%5B%22p95%28span.duration%29%22%2C%22sum%28span.duration%29%22%5D%7D&amp;referrer=weekly_report&amp;notification_uuid=18e7f117-392c-4fb9-b024-5e1f6b6957e7" style="font-weight: 700; color: #4674ca; text-decoration: none">/admin</a></td>
+          <td style="font-weight: 400; text-align: left; font-size: 14px; vertical-align: middle; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0; padding: 8px 16px 8px 0" title="javascript-react">javascript-react</td>
+          <td style="font-weight: 400; text-align: center; font-size: 14px; margin: 0; padding: 8px 0">3007</td>
+          <td style="font-weight: 400; text-align: right; font-size: 14px; margin: 0; padding: 8px 0">30.1s</td>
+        </tr>
+      
+      </tbody>
+    </table>
+    
+  </div>
+  
+
+</div>
+
+      <div class="container" style="font-weight: 400; max-width: 600px; text-align: left; min-width: 360px; margin: 0 auto; padding: 18px 20px 10px">
+        <div class="footer" style="font-weight: 400; border-top: 1px solid #E7EBEE; padding: 35px 0">
+          
+  <a href="https://sentry.io" style="font-weight: 500; color: #687276; text-decoration: none; float: right">Home</a>
+
+  <a href="https://sentry.io/settings/account/notifications/reports/" style="font-weight: 500; color: #687276; text-decoration: none">Notification Settings</a>
+
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
+--===============6760071588443804203==--
