@@ -16,6 +16,16 @@ import {
 } from "./middlewares/clerkProxyMiddleware.js";
 import { setSubscriptionResolver } from "./middlewares/require-entitlement.js";
 import { resolvePromoSubscription } from "./lib/promo.js";
+import { publishedCatalogueRecords, travelRegions } from "@workspace/japan-ski-catalogue/public-runtime";
+
+const CATALOGUE_MOUNTAIN_IDS_BY_REGION = new Map<string, Set<string>>();
+for (const record of publishedCatalogueRecords) {
+  const ids = CATALOGUE_MOUNTAIN_IDS_BY_REGION.get(record.travelRegionId) ?? new Set<string>();
+  ids.add(record.publicId);
+  for (const alias of record.aliases) ids.add(alias);
+  CATALOGUE_MOUNTAIN_IDS_BY_REGION.set(record.travelRegionId, ids);
+}
+const CATALOGUE_TRAVEL_REGION_IDS = new Set(travelRegions.map((region) => region.travelRegionId));
 
 // Entitlement resolver · the soft member gate. During the launch promo every
 // premium feature is free, but only for signed-in members (free email
@@ -709,7 +719,8 @@ if (process.env.NODE_ENV === "production") {
 
     const regionSlug = parts[0];
     const regionData = KNOWN_REGIONS[regionSlug];
-    if (!regionData) return false;               // unknown region → 404
+    const isCatalogueRegion = CATALOGUE_TRAVEL_REGION_IDS.has(regionSlug);
+    if (!regionData && !isCatalogueRegion) return false; // unknown region → 404
 
     if (parts.length === 1) return true;          // /:region home
 
@@ -719,11 +730,19 @@ if (process.env.NODE_ENV === "production") {
     if (VALID_REGION_SUBS.has(sub1)) return true;
 
     // /:region/mountain/:id or /:region/resort/:id
-    if (/^(?:mountain|resort)\/[^/]+$/.test(sub1)) return true;
+    if (/^(?:mountain|resort)\/[^/]+$/.test(sub1)) {
+      // Catalogue-only regions retain strict path validation: a published id
+      // (or its collision-checked safe alias) must belong to this exact region.
+      if (isCatalogueRegion) {
+        const locationId = parts[2];
+        return !!locationId && (CATALOGUE_MOUNTAIN_IDS_BY_REGION.get(regionSlug)?.has(locationId) ?? false);
+      }
+      return true;
+    }
 
     // /:region/:town
     const townSlug = parts[1];
-    if (!regionData.towns[townSlug]) return false; // unknown town → 404
+    if (!regionData || !regionData.towns[townSlug]) return false; // unknown town → 404
 
     if (parts.length === 2) return true;           // /:region/:town home
 

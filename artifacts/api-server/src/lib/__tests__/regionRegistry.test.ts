@@ -23,7 +23,7 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
-import { REGION_IDS, LOCATION_TO_REGION } from "../regions.js";
+import { REGION_IDS, LOCATION_TO_REGION, regionForLocation } from "../regions.js";
 import { WEATHER_LOCATION_IDS } from "../../routes/weather.js";
 
 // Resolve the repo-root openapi spec relative to this test file so the
@@ -89,12 +89,11 @@ test("every region is wired into LOCATION_TO_REGION (roads tile + at least one l
   }
 });
 
-test("every weather-served location id is mapped in LOCATION_TO_REGION", () => {
-  const keys = new Set(Object.keys(LOCATION_TO_REGION));
+test("every weather-served location id resolves to a region", () => {
   for (const id of WEATHER_LOCATION_IDS) {
     assert.ok(
-      keys.has(id),
-      `weather location "${id}" is not present in LOCATION_TO_REGION`,
+      regionForLocation(id),
+      `weather location "${id}" does not resolve to a region`,
     );
   }
 });

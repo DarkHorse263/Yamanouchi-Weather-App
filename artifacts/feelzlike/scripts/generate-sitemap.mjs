@@ -20,7 +20,13 @@
 import { writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { REGIONS, regionFeatures, townFeatures, regionMountains } from "./seo-regions.mjs";
+import {
+  REGIONS,
+  regionFeatures,
+  townFeatures,
+  regionMountains,
+  publishedCatalogueMountainRoutes,
+} from "./seo-regions.mjs";
 
 const SITE_URL = process.env.PUBLIC_ORIGIN || "https://feelzlike.com";
 const NOW = new Date().toISOString().slice(0, 10);
@@ -103,6 +109,17 @@ for (const r of REGIONS) {
   }
 }
 
+// Catalogue-only Japanese regions do not have a supported region/base-town
+// landing page yet, but their published mountain detail URLs are valid.
+// Deduplicate because supported regions are emitted in the loop above.
+const emittedPaths = new Set(dynamicUrls.map(({ path }) => path));
+for (const { path } of publishedCatalogueMountainRoutes) {
+  if (!emittedPaths.has(path)) {
+    dynamicUrls.push(url(path, "daily", "0.7"));
+    emittedPaths.add(path);
+  }
+}
+
 // ── Assemble and write ────────────────────────────────────────────────────
 
 const allUrls = [...staticUrls, ...dynamicUrls];
@@ -117,6 +134,11 @@ ${allUrls
   .join("\n")}
 </urlset>
 `;
+
+if (process.env.ROUTE_MANIFEST_JSON === "1") {
+  process.stdout.write(`${JSON.stringify(allUrls.map(({ path }) => path))}\n`);
+  process.exit(0);
+}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

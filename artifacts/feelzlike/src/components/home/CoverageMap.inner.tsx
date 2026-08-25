@@ -1,10 +1,10 @@
-import { useMemo, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Tooltip, ZoomControl, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useLocation } from "wouter";
 import { track } from "@/lib/analytics";
-import { REGION_BY_ID, REGION_COUNTRY, type CountryCode } from "@/regions";
+import { REGIONS, REGION_BY_ID, REGION_COUNTRY, type CountryCode } from "@/regions";
 import { REGION_DEFAULTS } from "@/regions/region-pins";
 
 import { resolvePinRoute } from "./resolvePinRoute";
@@ -60,6 +60,48 @@ function boundsOf(pins: Array<{ lat: number; lng: number }>): L.LatLngBounds {
   return L.latLngBounds(pins.map((p) => [p.lat, p.lng]));
 }
 
+/**
+ * Region defaults retain deliberately curated town pins. Catalogue mountains
+ * are projected from the same immutable REGIONS registry as search/routing,
+ * so new published regions need no hand-maintained pin table.
+ */
+export const COVERAGE_PINS: CoveragePin[] = (() => {
+  const pins: CoveragePin[] = [];
+  const seen = new Set<string>();
+  const add = (pin: CoveragePin) => {
+    const key = `${pin.lat.toFixed(3)}_${pin.lng.toFixed(3)}`;
+    if (seen.has(key)) return;
+    seen.add(key);
+    pins.push(pin);
+  };
+
+  for (const [regionId, defaults] of Object.entries(REGION_DEFAULTS)) {
+    if (!REGION_BY_ID[regionId]) continue;
+    const country = REGION_COUNTRY[regionId];
+    if (!country) continue;
+    for (const pin of defaults.pins) {
+      add({ ...pin, lng: pacificLng(pin.lng), regionId, country });
+    }
+  }
+  for (const region of REGIONS) {
+    const country = REGION_COUNTRY[region.id];
+    if (!country) continue;
+    for (const mountain of region.mountains ?? []) {
+      if (mountain.lat == null || mountain.lng == null) continue;
+      add({
+        id: mountain.id,
+        name: mountain.name,
+        lat: mountain.lat,
+        lng: pacificLng(mountain.lng),
+        accent: "#f97316",
+        regionId: region.id,
+        country,
+      });
+    }
+  }
+  return pins;
+})();
+
 function FlyTo({ pins, focus }: { pins: CoveragePin[]; focus: CountryCode | "ALL" }) {
   const map = useMap();
   useEffect(() => {
@@ -83,38 +125,7 @@ export default function CoverageMapInner() {
   const [, setLocation] = useLocation();
   const [focus, setFocus] = useState<CountryCode | "ALL">("ALL");
 
-  const allPins = useMemo(() => {
-    // Collect all pins from REGION_DEFAULTS
-    const pins: CoveragePin[] = [];
-
-    // Some regions share identical pins (like Tomamu between Furano and Tomamu regions)
-    // We only want to plot unique locations
-    const seen = new Set<string>();
-
-    for (const [regionId, defaults] of Object.entries(REGION_DEFAULTS)) {
-      // we need to make sure the region is actually in REGIONS (some might be inactive or testing)
-      if (!REGION_BY_ID[regionId]) continue;
-      const country = REGION_COUNTRY[regionId];
-      if (!country) {
-        // Guard against silent pin loss: a region present in REGION_DEFAULTS
-        // but missing from REGION_COUNTRY would otherwise vanish from the map.
-        if (import.meta.env.DEV) {
-          console.warn(`[CoverageMap] region "${regionId}" missing from REGION_COUNTRY - pins dropped`);
-        }
-        continue;
-      }
-
-      for (const p of defaults.pins) {
-        // approximate uniqueness by name/coords to avoid double pins
-        const key = `${p.lat.toFixed(3)}_${p.lng.toFixed(3)}`;
-        if (!seen.has(key)) {
-          seen.add(key);
-          pins.push({ ...p, lng: pacificLng(p.lng), regionId, country });
-        }
-      }
-    }
-    return pins;
-  }, []);
+  const allPins = COVERAGE_PINS;
 
   const handleFocus = (code: CountryCode | "ALL") => {
     setFocus(code);

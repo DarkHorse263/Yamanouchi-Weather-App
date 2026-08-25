@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-08-26",
+  "assignedRecordIds": [
+    "workbook:1a",
+    "workbook:1b",
+    "workbook:1c",
+    "workbook:1d",
+    "workbook:11",
+    "workbook:13"
+  ],
+  "proposals": [
+    {
+      "recordId": "workbook:1a",
+      "fields": {
+        "defensibleElevation": {
+          "value": {
+            "topM": 1308
+          },
+          "sourceUrl": "https://www.niseko.ne.jp/en/wp-content/uploads/2020/08/e2bf6f0e8ac7d142c100ba1dc05f34ad.pdf",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official Niseko United trail map identifies Mt. Niseko Annupuri at elevation 1,308 m, the mapped summit serving Grand HIRAFU. No base elevation is proposed."
+        }
+      },
+      "unresolved": [
+        "coordinates"
+      ],
+      "notes": "No official/operator access map or government facility register with explicit latitude/longitude for the ski-area point was retained."
+    },
+    {
+      "recordId": "workbook:1b",
+      "fields": {
+        "defensibleElevation": {
+          "value": {
+            "topM": 1308
+          },
+          "sourceUrl": "https://www.niseko.ne.jp/en/wp-content/uploads/2020/08/e2bf6f0e8ac7d142c100ba1dc05f34ad.pdf",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official Niseko United trail map identifies Mt. Niseko Annupuri at elevation 1,308 m, the mapped summit serving Niseko Village. No base elevation is proposed."
+        }
+      },
+      "unresolved": [
+        "coordinates"
+      ],
+      "notes": "No official/operator access map or government facility register with explicit latitude/longitude for the ski-area point was retained."
+    },
+    {
+      "recordId": "workbook:1c",
+      "fields": {
+        "defensibleElevation": {
+          "value": {
+            "topM": 1308
+          },
+          "sourceUrl": "https://www.niseko.ne.jp/en/wp-content/uploads/2020/08/e2bf6f0e8ac7d142c100ba1dc05f34ad.pdf",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official Niseko United trail map identifies Mt. Niseko Annupuri at elevation 1,308 m, the mapped summit serving Niseko Annupuri. No base elevation is proposed."
+        }
+      },
+      "unresolved": [
+        "coordinates"
+      ],
+      "notes": "No official/operator access map or government facility register with explicit latitude/longitude for the ski-area point was retained."
+    },
+    {
+      "recordId": "workbook:1d",
+      "fields": {
+        "defensibleElevation": {
+          "value": {
+            "topM": 1308
+          },
+          "sourceUrl": "https://www.niseko.ne.jp/en/wp-content/uploads/2020/08/e2bf6f0e8ac7d142c100ba1dc05f34ad.pdf",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official Niseko United trail map identifies Mt. Niseko Annupuri at elevation 1,308 m, the mapped summit serving Hanazono. No base elevation is proposed."
+        }
+      },
+      "unresolved": [
+        "coordinates"
+      ],
+      "notes": "No official/operator access map or government facility register with explicit latitude/longitude for the ski-area point was retained."
+    },
+    {
+      "recordId": "workbook:11",
+      "fields": {},
+      "unresolved": [
+        "coordinates"
+      ],
+      "notes": "The verified-evidence supplement already supplies the official operator elevation of 760 m base / 1,831 m top. No official/operator access map or government facility register with explicit latitude/longitude for the ski-area point was retained."
+    },
+    {
+      "recordId": "workbook:13",
+      "fields": {
+        "defensibleElevation": {
+          "value": {
+            "topM": 1845
+          },
+          "sourceUrl": "https://www.princehotels.co.jp/ski/kagura/winter/coursemap/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator's Kagura course map identifies the ski area's highest mapped elevation as 1,845 m. No base elevation is proposed; it is not calculated from the separately published 1,225 m vertical."
+        }
+      },
+      "unresolved": [
+        "coordinates"
+      ],
+      "notes": "No official/operator access map or government facility register with explicit latitude/longitude for the ski-area point was retained."
+    }
+  ]
+}

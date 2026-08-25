@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-08-26",
+  "assignedRecordIds": [
+    "workbook:367",
+    "workbook:419",
+    "workbook:426",
+    "workbook:438",
+    "workbook:440",
+    "workbook:444"
+  ],
+  "proposals": [
+    {
+      "recordId": "workbook:367",
+      "fields": {},
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.town.horonobe.lg.jp/www4/section/edu/le009f0000001go7.html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The Town of Horonobe facility page states only a 56 m vertical drop (標高差：56m), not a base and top elevation, and supplies access directions rather than explicit latitude/longitude. Base/top were not inferred from the vertical."
+        }
+      ],
+      "notes": "No eligible coordinate or defensible base/top elevation proposal recovered."
+    },
+    {
+      "recordId": "workbook:419",
+      "fields": {},
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.daisen-resort.jp/4/13.html",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official overall trail-map page lists course lengths and course vertical drops, but does not state ski-area base and top elevations or explicit geographic coordinates. No elevation endpoints were calculated from the listed drops."
+        },
+        {
+          "sourceUrl": "https://x-project.group/daisen-white-resort/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The current designated-manager announcement identifies the resort and its location on Daisen's northwest slope, but provides neither explicit coordinates nor base/top elevation values."
+        }
+      ],
+      "notes": "No eligible coordinate or defensible base/top elevation proposal recovered."
+    },
+    {
+      "recordId": "workbook:426",
+      "fields": {},
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.kunimidaira.com/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official operator site confirms the ski area and operating information, but no official trail-map/PDF or page located in this review supplied explicit coordinates or base and top elevations."
+        },
+        {
+          "sourceUrl": "https://kunimidaira.com/07contents/safetyreport/05anzen_k.pdf",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator's safety report concerns lift safety and does not state base/top elevation or explicit latitude/longitude."
+        }
+      ],
+      "notes": "No eligible coordinate or defensible base/top elevation proposal recovered."
+    },
+    {
+      "recordId": "workbook:438",
+      "fields": {},
+      "unresolved": [
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.town.oketo.hokkaido.jp/kyouiku_bunka/shakai/minamigaokaski/",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The Town of Oketo ski-area page publishes operating information and its official safety-report PDF, but neither provides ski-area base and top elevations. No values were inferred from third-party figures or terrain."
+        },
+        {
+          "sourceUrl": "https://www.town.oketo.hokkaido.jp/file/contents/1679/13392/sakudou.pdf",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The municipal safety report is a lift-safety document and contains no base/top elevation values."
+        }
+      ],
+      "notes": "Coordinates were already resolved before this pass; no eligible defensible base/top elevation proposal recovered."
+    },
+    {
+      "recordId": "workbook:440",
+      "fields": {},
+      "unresolved": [
+        "coordinates"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "http://makubetsu-ski.com/hakugindai/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator's official page gives the facility street address and lift/course specifications but does not publish explicit latitude/longitude or an official access map carrying coordinates. An address was not geocoded."
+        }
+      ],
+      "notes": "Defensible elevation was already resolved before this pass; no eligible coordinate proposal recovered."
+    },
+    {
+      "recordId": "workbook:444",
+      "fields": {},
+      "unresolved": [
+        "coordinates"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "http://matuyama-net.com/ski/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official resort homepage provides operating notice and an official ski-map image, but no explicit latitude/longitude or official access map with coordinates was located. No coordinate was taken from third-party maps."
+        }
+      ],
+      "notes": "Defensible elevation was already resolved before this pass; no eligible coordinate proposal recovered."
+    }
+  ]
+}

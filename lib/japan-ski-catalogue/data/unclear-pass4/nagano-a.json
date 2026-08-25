@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-08-26",
+  "sourceReviewFiles": [
+    "lib/japan-ski-catalogue/data/reviews/nagano.json",
+    "lib/japan-ski-catalogue/data/unclear-pass3/nagano-a.json"
+  ],
+  "assignedRecordIds": [
+    "workbook:10",
+    "workbook:17",
+    "workbook:38",
+    "workbook:41",
+    "workbook:53",
+    "workbook:56",
+    "workbook:65",
+    "workbook:69",
+    "workbook:70",
+    "workbook:85",
+    "workbook:89",
+    "workbook:93",
+    "workbook:101",
+    "workbook:108",
+    "workbook:121",
+    "workbook:123",
+    "workbook:128",
+    "workbook:132",
+    "workbook:142",
+    "workbook:144",
+    "workbook:158",
+    "workbook:174",
+    "workbook:187",
+    "workbook:190"
+  ],
+  "proposals": [
+    {
+      "recordId": "workbook:10",
+      "proposedStatus": "remain_unclear",
+      "notes": "Fourth pass checked the operator's winter landing page, its 2026-27 ski-school notice, Hakuba municipal/area searches, and lift-calendar terms. The school-business notice is not an explicit operator operating calendar or ticket sale, so it cannot support promotion."
+    },
+    {
+      "recordId": "workbook:17",
+      "proposedStatus": "remain_unclear",
+      "notes": "Checked the operator site, 2026-27 NSD Kids Program announcement, Otari/Hakuba facility searches, ticket calendars, and closure terms. The program announcement does not itself explicitly state Tsugaike's operating dates or ticket validity, so no qualifying status evidence was found."
+    },
+    {
+      "recordId": "workbook:38",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Ontake Ski Resort",
+      "officialNameJa": "御嶽スキー場",
+      "officialUrl": "https://ontakeskijo.com/",
+      "statusEvidenceUrl": "https://ontakeskijo.com/",
+      "statusEvidenceQuote": "2026.07.24(金) 26-27シーズン券販売につきまして / 2026.07.31(金) 早割リフト一日券販売開始します。",
+      "evidenceAsOf": "2026-07-31",
+      "notes": "The operator's current site announces 2026-27 season-pass sales and early-discount lift-day-ticket sales. It also identifies the present official name as 御嶽スキー場 and the former name as おんたけ2240."
+    },
+    {
+      "recordId": "workbook:41",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Hakuba Cortina Ski Resort",
+      "officialNameJa": "白馬コルチナスキー場",
+      "officialUrl": "https://www.hgp.co.jp/cortina/ski/",
+      "statusEvidenceUrl": "https://www.hgp.co.jp/cortina/ski/event/event-605/",
+      "statusEvidenceQuote": "【2026-27シーズン】12/12（土）スタート予定！ / 2026-27シーズンの営業は、12/12（土）～3/29（月）を予定しております。",
+      "evidenceAsOf": "2026-07-01",
+      "notes": "Hotel Green Plaza Cortina's operator notice explicitly gives the planned 2026-27 ski-season dates."
+    },
+    {
+      "recordId": "workbook:53",
+      "proposedStatus": "remain_unclear",
+      "notes": "Checked the operator site, Kiso municipal facility material, company notices, and 2025-26/2026-27 ticket, closure, and lift-calendar searches for 開田高原マイア. No dated authoritative operation, closure, or successor notice was located."
+    },
+    {
+      "recordId": "workbook:56",
+      "proposedStatus": "remain_unclear",
+      "notes": "Checked Iizuna Resort's operator material plus Nagano City facility, budget, ticket-calendar, and 休止/営業終了 searches. No explicit dated operator or municipal evidence establishes 2025-26 operation, 2026-27 operation, or closure."
+    },
+    {
+      "recordId": "workbook:65",
+      "proposedStatus": "remain_unclear",
+      "notes": "Checked Norikura operator and Matsumoto municipal facility sources, council/budget terms, and 2025-26/2026-27 calendar, ticket, 休止, and 閉鎖 searches. No qualifying explicit status notice was found."
+    },
+    {
+      "recordId": "workbook:69",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Nomugitoge Ski Resort",
+      "officialNameJa": "松本市野麦峠スキー場",
+      "officialUrl": "http://gakutoresort.jp/",
+      "statusEvidenceUrl": "https://www.city.matsumoto.nagano.jp/uploaded/attachment/118212.pdf",
+      "statusEvidenceQuote": "指定管理者 ... 株式会社 岳都リゾート開発 ... リフト運行(索道事業)、使用許可、使用料徴収、スキー場施設維持管理業",
+      "evidenceAsOf": "2025-08-31",
+      "notes": "Matsumoto's FY2024 designated-manager monitoring PDF confirms the municipal facility, operator, lifts, and then-current management term, but it does not explicitly establish a 2025-26 or 2026-27 operating season. It is identity/context evidence only."
+    },
+    {
+      "recordId": "workbook:70",
+      "proposedStatus": "remain_unclear",
+      "notes": "Checked Yunomaru operator/company materials, local-government facility references, ticket calendars, and explicit closure/休止 searches in Japanese and English. No authoritative dated seasonal operation or closure statement was located."
+    },
+    {
+      "recordId": "workbook:85",
+      "proposedStatus": "remain_unclear",
+      "notes": "Checked operator/company and municipal sources for X-JAM, よませ, 高井富士, and スノーリゾートロマンスの神様, including rename, merger, closure, and season-ticket terms. Branding and area references conflict; no official notice explicitly maps this combined intake record to a current successor."
+    },
+    {
+      "recordId": "workbook:89",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Yabuhara Kogen Ski Resort",
+      "officialNameJa": "やぶはら高原スキー場",
+      "officialUrl": "https://www.yabuhara-kogen.jp/",
+      "statusEvidenceUrl": "https://www.yabuhara-kogen.jp/",
+      "statusEvidenceQuote": "2026年3月29日をもちまして無事に今シーズンの営業を終了することができました。来シーズンも、皆さまとお会いできる日をスタッフ一同、心より楽しみにしております。",
+      "evidenceAsOf": "2026-03-29",
+      "freshnessReviewRequired": true,
+      "notes": "The operator's dated end-of-season message explicitly confirms completion of the 2025-26 season. No 2026-27 operator announcement was located."
+    },
+    {
+      "recordId": "workbook:93",
+      "proposedStatus": "remain_unclear",
+      "notes": "Checked Kurumayama's official winter site, operator notices, municipal-facility references, and 2025-26/2026-27 ticket, trail-map, 休止, and 営業終了 searches. No explicit dated official operation or closure evidence was found."
+    },
+    {
+      "recordId": "workbook:101",
+      "proposedStatus": "remain_unclear",
+      "notes": "Checked White Birch's operator material, Tateshina municipal facility sources, and 2025-26/2026-27 tickets, calendars, and closure terms for Shirakaba 2in1. No source explicitly establishes the intake facility's current/recent operating status."
+    },
+    {
+      "recordId": "workbook:108",
+      "proposedStatus": "remain_unclear",
+      "notes": "Checked Blanche Takayama's operator site, local-government facility material, 2025-26/2026-27 season-pass and trail-map searches, and closure notices. No dated authoritative status statement was confirmed."
+    },
+    {
+      "recordId": "workbook:121",
+      "proposedStatus": "remain_unclear",
+      "notes": "Checked Royal Hill's operator material, Tateshina facility sources, lift/ticket calendars, and 2025-26/2026-27 operation and closure terms. No qualifying explicit seasonal-status notice was located."
+    },
+    {
+      "recordId": "workbook:123",
+      "proposedStatus": "remain_unclear",
+      "notes": "Checked Prince Hotels operator pages, Karuizawa municipal/sports-facility material, 2025-26/2026-27 ticket and calendar pages, and closure notices. The located generic pages do not provide an explicit dated ski-operation statement."
+    },
+    {
+      "recordId": "workbook:128",
+      "proposedStatus": "remain_unclear",
+      "notes": "Checked Fujimi Panorama's operator material, Fujimi municipal facility sources, company notices, ticket calendars, trail-map PDFs, and 2025-26/2026-27 closure terms. No explicit dated authoritative status evidence was located."
+    },
+    {
+      "recordId": "workbook:132",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Rewild Ninja Snow Highland",
+      "officialNameJa": "リワイルド忍者スノーハイランド",
+      "officialUrl": "https://rewild-ninja-snow-highland.com/",
+      "statusEvidenceUrl": "https://rewild-ninja-snow-highland.com/",
+      "statusEvidenceQuote": "25_26カレンダー ... ※貸切営業日・貸切営業予定日・ゲレンデ整備日は一般のお客様は入場できません。",
+      "evidenceAsOf": "2025-11-01",
+      "freshnessReviewRequired": true,
+      "notes": "The operator's 2025-26 calendar and visitor-access restriction explicitly establish a public ski season. No 2026-27 operator notice was found."
+    },
+    {
+      "recordId": "workbook:142",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Chateraise Ski Valley Nobeyama",
+      "officialNameJa": "シャトレーゼスキーバレー野辺山",
+      "officialUrl": "https://nobeyama.chateraiseski.jp/",
+      "statusEvidenceUrl": "https://nobeyama.chateraiseski.jp/news/information/3814.html",
+      "statusEvidenceQuote": "2026-2027シーズン 長野・新潟・富山・石川４県共通シーズン券販売決定！",
+      "evidenceAsOf": "2026-03-02",
+      "notes": "The operator's 2026-27 common-season-pass sales announcement is explicit future-season operation evidence for the ski facility."
+    },
+    {
+      "recordId": "workbook:144",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Yamaboku Wild Snow Park",
+      "officialNameJa": "ヤマボクワイルドスノーパーク",
+      "officialUrl": "https://yamaboku.co.jp/",
+      "statusEvidenceUrl": "https://yamaboku.co.jp/post-8454/",
+      "statusEvidenceQuote": "Season Ticket 2025-2026シーズンチケット ... 今シーズンは2026年3月15日クローズ予定となります。",
+      "evidenceAsOf": "2025-08-15",
+      "freshnessReviewRequired": true,
+      "notes": "The operator's 2025-26 season-ticket sale explicitly states the planned 2026-03-15 close. No 2026-27 operator-season notice was located."
+    },
+    {
+      "recordId": "workbook:158",
+      "proposedStatus": "remain_unclear",
+      "notes": "The historical kijimadaira-ski.com domain now presents スノーリゾートロマンスの神様 and sells a 2026-27 season pass, but no explicit operator or municipal rename/merger notice connecting the former Kijimadaira Ski Resort intake record to that current brand was found. Do not infer a successor from the reused domain."
+    },
+    {
+      "recordId": "workbook:174",
+      "proposedStatus": "remain_unclear",
+      "notes": "Checked Koumi Re-Ex operator/company material, local-government facility references, season-pass and trail-map searches, and explicit 休止/廃止/営業終了 notices. No dated authoritative evidence established current/recent ski operation or closure."
+    },
+    {
+      "recordId": "workbook:187",
+      "proposedStatus": "remain_unclear",
+      "notes": "Checked Saku Parada operator/company materials, Saku municipal sports-facility references, ticket-calendar and trail-map terms, and 2025-26/2026-27 closure notices. No explicit dated official operation or closure source was located."
+    },
+    {
+      "recordId": "workbook:190",
+      "proposedStatus": "remain_unclear",
+      "notes": "Checked Ina Ski Resort operator material, Ina municipal facility/budget terms, 2025-26/2026-27 season-ticket and lift-calendar searches, and 休止/営業終了/閉鎖 notices. No qualifying explicit status evidence was found."
+    }
+  ]
+}

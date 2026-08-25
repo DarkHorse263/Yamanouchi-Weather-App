@@ -1,0 +1,2366 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-08-26",
+  "identities": [
+    {
+      "recordId": "workbook:1a",
+      "publicId": "grand-hirafu",
+      "routeMode": "existing_page",
+      "existingPageId": "page:niseko:grand-hirafu",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:1b",
+      "publicId": "niseko-village",
+      "routeMode": "existing_page",
+      "existingPageId": "page:niseko:niseko-village",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:1c",
+      "publicId": "annupuri",
+      "routeMode": "existing_page",
+      "existingPageId": "page:niseko:annupuri",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:1d",
+      "publicId": "hanazono",
+      "routeMode": "existing_page",
+      "existingPageId": "page:niseko:hanazono",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:2",
+      "publicId": "rusutsu-resort",
+      "routeMode": "existing_page",
+      "existingPageId": "page:rusutsu-kiroro:rusutsu-resort",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:3",
+      "publicId": "furano-ski-resort",
+      "routeMode": "existing_page",
+      "existingPageId": "page:furano:furano-ski-resort",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:4",
+      "publicId": "sahoro",
+      "routeMode": "existing_page",
+      "existingPageId": "page:tomamu-sahoro:sahoro",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:5",
+      "publicId": "shigakogen-mountain-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "Kept separate: the verified Shigakogen Mountain Resort is the whole linked resort, while published Shiga pages represent individual constituent ski areas.",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:7",
+      "publicId": "kiroro-resort",
+      "routeMode": "existing_page",
+      "existingPageId": "page:rusutsu-kiroro:kiroro-resort",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:8",
+      "publicId": "appi",
+      "routeMode": "existing_page",
+      "existingPageId": "page:appi-shizukuishi:appi",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:9",
+      "publicId": "nozawa-onsen",
+      "routeMode": "existing_page",
+      "existingPageId": "page:nozawa-onsen:nozawa-onsen",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:11",
+      "publicId": "happo-one",
+      "routeMode": "existing_page",
+      "existingPageId": "page:hakuba-valley:happo-one",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official site, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:12",
+      "publicId": "zao-onsen-resort",
+      "routeMode": "existing_page",
+      "existingPageId": "page:zao-onsen:zao-onsen-resort",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:13",
+      "publicId": "kagura",
+      "routeMode": "existing_page",
+      "existingPageId": "page:yuzawa:kagura",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official site, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:14",
+      "publicId": "maiko-snow-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:15",
+      "publicId": "tomamu-resort",
+      "routeMode": "existing_page",
+      "existingPageId": "page:tomamu-sahoro:tomamu-resort",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:16",
+      "publicId": "togakushi-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:18",
+      "publicId": "takasu-snow-park",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:19c",
+      "publicId": "ishiuchi-maruyama",
+      "routeMode": "existing_page",
+      "existingPageId": "page:yuzawa:ishiuchi-maruyama",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official site, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:20",
+      "publicId": "aomori-spring",
+      "routeMode": "existing_page",
+      "existingPageId": "page:hakkoda-aomori-spring:aomori-spring",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:26",
+      "publicId": "hakuba-47-goryu",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "Kept separate: the verified official identity combines Hakuba 47 and Goryu; neither individual published page alone is an exact identity match.",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:27",
+      "publicId": "washitopia-washigatake-white-pia-takasu",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:28",
+      "publicId": "dynaland",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:29",
+      "publicId": "sapporo-teine",
+      "routeMode": "existing_page",
+      "existingPageId": "page:sapporo:sapporo-teine",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:30",
+      "publicId": "madarao-kogen-ski-resort-tangram-ski-circus",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "Kept separate: the verified identity is the combined Madarao Kogen / Tangram offering, while the published pages are separate operating-area identities.",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:31",
+      "publicId": "tazawako-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:32",
+      "publicId": "naeba",
+      "routeMode": "existing_page",
+      "existingPageId": "page:yuzawa:naeba",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official site, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:33",
+      "publicId": "kamui",
+      "routeMode": "existing_page",
+      "existingPageId": "page:asahikawa:kamui",
+      "aliases": [],
+      "basis": "Exact English and Japanese names, official domain, and Asahikawa geography identify the published Asahikawa kamui page; the duplicate legacy Furano kamui-ski-links page is not reused.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:34",
+      "publicId": "palcall-tsumagoi-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:35",
+      "publicId": "iwate-kogen-snow-park",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:36",
+      "publicId": "mizuho-highland",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:37",
+      "publicId": "hakodate-nanae-snow-park",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:38",
+      "publicId": "ontake-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:39",
+      "publicId": "shiga-yakebitaiyama",
+      "routeMode": "existing_page",
+      "existingPageId": "page:yamanouchi:shiga-yakebitaiyama",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:40",
+      "publicId": "mount-racey-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:41",
+      "publicId": "hakuba-cortina",
+      "routeMode": "existing_page",
+      "existingPageId": "page:hakuba-valley:hakuba-cortina",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official site, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:42",
+      "publicId": "meiho-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:44",
+      "publicId": "ikenotaira",
+      "routeMode": "existing_page",
+      "existingPageId": "page:myoko:ikenotaira",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official site, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:46",
+      "publicId": "geto-kogen-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:47",
+      "publicId": "shizukuishi-resort",
+      "routeMode": "existing_page",
+      "existingPageId": "page:appi-shizukuishi:shizukuishi-resort",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:48",
+      "publicId": "winghills-shirotori-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:50",
+      "publicId": "minowa-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:51",
+      "publicId": "tenjindaira",
+      "routeMode": "existing_page",
+      "existingPageId": "page:minakami:tenjindaira",
+      "aliases": [],
+      "basis": "Exact operating-area continuity established by the same official domain and geography; the verified Mt.T name is the current rebrand of the published Tanigawadake Tenjindaira page.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:52",
+      "publicId": "sapporo-kokusai",
+      "routeMode": "existing_page",
+      "existingPageId": "page:sapporo:sapporo-kokusai",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:54",
+      "publicId": "togari-onsen",
+      "routeMode": "existing_page",
+      "existingPageId": "page:iiyama:togari-onsen",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official site, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:55",
+      "publicId": "shiga-okushiga-kogen",
+      "routeMode": "existing_page",
+      "existingPageId": "page:yamanouchi:shiga-okushiga-kogen",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:57",
+      "publicId": "davos-taro-sugadaira-kogen",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:58",
+      "publicId": "white-world-oze-iwakura",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:59",
+      "publicId": "charmant-hiuchi-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:60",
+      "publicId": "aizu-kogen-daikura-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:61",
+      "publicId": "chokai-kogen-yashima-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:62",
+      "publicId": "miyagi-zao-eboshi-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:63",
+      "publicId": "aizu-kogen-takatsue-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:64",
+      "publicId": "iox-arosa-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:66",
+      "publicId": "nukabira-gensenkyo-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:67",
+      "publicId": "gunma-minakami-hodaigi-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:68",
+      "publicId": "inawashiro-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:71",
+      "publicId": "grandeco",
+      "routeMode": "existing_page",
+      "existingPageId": "page:bandai:grandeco",
+      "aliases": [],
+      "basis": "Exact operating-area continuity established by the Grandeco name, official resort site, and Bandai geography despite the current EN RESORT branding.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:72",
+      "publicId": "ogna-hotaka-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:73",
+      "publicId": "ani-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:74",
+      "publicId": "hachimantai-panorama",
+      "routeMode": "existing_page",
+      "existingPageId": "page:hachimantai:hachimantai-panorama",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:75",
+      "publicId": "shiga-higashidateyama",
+      "routeMode": "existing_page",
+      "existingPageId": "page:yamanouchi:shiga-higashidateyama",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:76",
+      "publicId": "itoigawa-seaside-valley-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:77",
+      "publicId": "sun-meadows-kiyosato-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:78",
+      "publicId": "yokoteyama-shibutoge",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "Kept separate: the verified official identity combines Yokoteyama and Shibutoge; neither individual published page alone is an exact identity match.",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:79",
+      "publicId": "shiga-nishidateyama",
+      "routeMode": "existing_page",
+      "existingPageId": "page:yamanouchi:shiga-nishidateyama",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official site, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:80",
+      "publicId": "oku-kannabe-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:81",
+      "publicId": "hakuba-sanosaka",
+      "routeMode": "existing_page",
+      "existingPageId": "page:hakuba-valley:hakuba-sanosaka",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official site, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:82",
+      "publicId": "marunuma-kogen-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:83",
+      "publicId": "moiwa",
+      "routeMode": "existing_page",
+      "existingPageId": "page:niseko:moiwa",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:86",
+      "publicId": "kashimayari",
+      "routeMode": "existing_page",
+      "existingPageId": "page:hakuba-valley:kashimayari",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official site, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:87",
+      "publicId": "kurobushi-kogen-snow-park-jangle-jungle",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:89",
+      "publicId": "yabuhara-kogen-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:90",
+      "publicId": "hakuba-norikura",
+      "routeMode": "existing_page",
+      "existingPageId": "page:hakuba-valley:hakuba-norikura",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:91",
+      "publicId": "suhara-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:94",
+      "publicId": "ojiro-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:97",
+      "publicId": "sky-valley-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:98",
+      "publicId": "kusatsu-onsen-resort",
+      "routeMode": "existing_page",
+      "existingPageId": "page:kusatsu-manza:kusatsu-onsen-resort",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:99",
+      "publicId": "hunter-mountain-shiobara",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:100",
+      "publicId": "canmore-ski-village",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:102",
+      "publicId": "ryuoo",
+      "routeMode": "existing_page",
+      "existingPageId": "page:yamanouchi:ryuoo",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official site, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:103",
+      "publicId": "tengendai-kogen",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:104",
+      "publicId": "snow-cruise-onze",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:106",
+      "publicId": "fujiten-snow-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:109",
+      "publicId": "minakami-kogen",
+      "routeMode": "existing_page",
+      "existingPageId": "page:minakami:minakami-kogen",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:110",
+      "publicId": "biwako-valley",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:111",
+      "publicId": "pippu-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:112",
+      "publicId": "shiga-ichinose-family",
+      "routeMode": "existing_page",
+      "existingPageId": "page:yamanouchi:shiga-ichinose-family",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:113",
+      "publicId": "hida-nagareha-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:114",
+      "publicId": "hyper-bowl-tohachi-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:115",
+      "publicId": "grand-snow-okuibuki",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:116",
+      "publicId": "utopia-saioto",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:117",
+      "publicId": "tateyama-sanroku-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:119",
+      "publicId": "hakkoda-kokusai-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "Kept separate: Hakkoda Kokusai has its own official name and operating site; the published Hakkoda page represents the Hakkoda Ropeway area and is not an exact identity match.",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:120",
+      "publicId": "snow-wave-park-shiratori-kogen",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:122",
+      "publicId": "spring-valley-sendai-izumi-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:125",
+      "publicId": "edelweiss-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:129",
+      "publicId": "hiraniwa-kogen-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:130",
+      "publicId": "pine-beak-sugadaira-kogen",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:131",
+      "publicId": "hachimantai-shimokura",
+      "routeMode": "existing_page",
+      "existingPageId": "page:hachimantai:hachimantai-shimokura",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:132",
+      "publicId": "rewild-ninja-snow-highland",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:133",
+      "publicId": "sapporo-moiwa-snow-square-ski-snowboard",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:135",
+      "publicId": "hida-hounoki-daira-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:136",
+      "publicId": "nayoro-piyashiri-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:137",
+      "publicId": "hidaka-kokusai-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:138",
+      "publicId": "aizu-kogen-nango-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:139",
+      "publicId": "owani-onsen-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:140",
+      "publicId": "kawaba-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:141",
+      "publicId": "hirugano-kogen-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:142",
+      "publicId": "chateraise-ski-valley-nobeyama",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:143",
+      "publicId": "manba-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:144",
+      "publicId": "yamaboku-wild-snow-park",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:145",
+      "publicId": "snow-park-oze-tokura",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:146",
+      "publicId": "hida-kawai-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:147",
+      "publicId": "link-station-hills-moya",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:148",
+      "publicId": "miyagi-zao-sumikawa-snow-park",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:149",
+      "publicId": "megahira-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:150",
+      "publicId": "shiga-sun-valley",
+      "routeMode": "existing_page",
+      "existingPageId": "page:yamanouchi:shiga-sun-valley",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official site, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:151",
+      "publicId": "onikoube-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:152",
+      "publicId": "katashina-kogen-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:153",
+      "publicId": "numajiri-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:154",
+      "publicId": "jeunesse-kurikoma-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:156",
+      "publicId": "hyounosen-kokusai-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:159",
+      "publicId": "shiga-tannenomori-okojo",
+      "routeMode": "existing_page",
+      "existingPageId": "page:yamanouchi:shiga-tannenomori-okojo",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official site, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:160",
+      "publicId": "okutone-snow-park",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:161",
+      "publicId": "shiga-hasuike",
+      "routeMode": "existing_page",
+      "existingPageId": "page:yamanouchi:shiga-hasuike",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official site, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:162",
+      "publicId": "jiigatake",
+      "routeMode": "existing_page",
+      "existingPageId": "page:hakuba-valley:jiigatake",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official site, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:164",
+      "publicId": "taiheizan-ski-area-opas",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:165",
+      "publicId": "biwako-hakodateyama-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:166",
+      "publicId": "listel-ski-fantasia",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:168",
+      "publicId": "shiga-kumanoyu",
+      "routeMode": "existing_page",
+      "existingPageId": "page:yamanouchi:shiga-kumanoyu",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:169",
+      "publicId": "asari-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:170",
+      "publicId": "mont-deus-park-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:171",
+      "publicId": "gassan-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:175",
+      "publicId": "budoh-snow-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:176",
+      "publicId": "shiga-terakoya",
+      "routeMode": "existing_page",
+      "existingPageId": "page:yamanouchi:shiga-terakoya",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:177",
+      "publicId": "fu-s-snow-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:180",
+      "publicId": "hakkaisanroku-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:182",
+      "publicId": "shiga-hoppo-bunadaira",
+      "routeMode": "existing_page",
+      "existingPageId": "page:yamanouchi:shiga-hoppo-bunadaira",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official site, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:183",
+      "publicId": "kazawa-snow-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:184",
+      "publicId": "shiga-ichinose-diamond",
+      "routeMode": "existing_page",
+      "existingPageId": "page:yamanouchi:shiga-ichinose-diamond",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:185",
+      "publicId": "kyowa-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:186",
+      "publicId": "taira-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:188",
+      "publicId": "amihari-onsen-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:189",
+      "publicId": "takamagahara-mammoth",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:192",
+      "publicId": "engaru-rock-valley-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:193",
+      "publicId": "iouzan-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:194",
+      "publicId": "yuzawa-park-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:195",
+      "publicId": "otaru-tenguyama-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:196",
+      "publicId": "takamine-mountain-park",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:197",
+      "publicId": "yachiho-kogen-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:198",
+      "publicId": "pilatus-tateshina-snow-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:199",
+      "publicId": "shokanbetsudake-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:200",
+      "publicId": "kamui-misaka-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:201",
+      "publicId": "sakae-club-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:202",
+      "publicId": "kotobiki-forest-park-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:203",
+      "publicId": "norn-minakami",
+      "routeMode": "existing_page",
+      "existingPageId": "page:minakami:norn-minakami",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:204",
+      "publicId": "iwakisan-hyakuzawa-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:208",
+      "publicId": "hanawa-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:209",
+      "publicId": "mineyama-kogen-resort-white-peak",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:210",
+      "publicId": "asahi-shizenkan-snow-park",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:211",
+      "publicId": "yudonosan-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:212",
+      "publicId": "shiga-giant",
+      "routeMode": "existing_page",
+      "existingPageId": "page:yamanouchi:shiga-giant",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:215",
+      "publicId": "snow-park-yeti",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:216",
+      "publicId": "kamafuseyama-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:217",
+      "publicId": "fujiwara-snow-spa-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:218",
+      "publicId": "yogo-kogen-resort-yap",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:220",
+      "publicId": "hirayu-onsen-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:221",
+      "publicId": "minami-furano-national-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:222",
+      "publicId": "haguroyama-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:223",
+      "publicId": "horotachi-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:224",
+      "publicId": "ohana-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:226",
+      "publicId": "karuizawa-snow-park",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:230",
+      "publicId": "ibuki-no-sato-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:231",
+      "publicId": "up-kannabe-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:233",
+      "publicId": "kijima-snow-park",
+      "routeMode": "existing_page",
+      "existingPageId": "page:iiyama:kijima-snow-park",
+      "aliases": [],
+      "basis": "Exact operating-area continuity is supported by the Kijima Snow Park English and Japanese names and the shared Makinoiri Kogen geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:234",
+      "publicId": "takanbo-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:237",
+      "publicId": "awasuno-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:239",
+      "publicId": "haginoyama-civic-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:240",
+      "publicId": "jibuzaka-kogen-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:241",
+      "publicId": "kushibiki-taranokidai-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:243",
+      "publicId": "nagaoka-municipal-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:246",
+      "publicId": "sol-fa-oda-ski-gelande",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:248",
+      "publicId": "chausuyama-kogen-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:249",
+      "publicId": "hokkaido-greenland-white-park-iwamizawa",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:250",
+      "publicId": "kutsuki-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:252",
+      "publicId": "shirakaba-kogen-kokusai-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:253",
+      "publicId": "gokazan-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:255",
+      "publicId": "kuma-ski-land",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:256",
+      "publicId": "tendo-kogen-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:257",
+      "publicId": "consadole-niki-ski-park",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:259",
+      "publicId": "green-valley-kamuro-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:260",
+      "publicId": "matsunoyama-onsen-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:262",
+      "publicId": "akita-hachimantai-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:263",
+      "publicId": "ushidake-onsen-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:264",
+      "publicId": "fairy-land-kaneyama-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:265",
+      "publicId": "okunakayama-kogen-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:267",
+      "publicId": "oirase-keiryu-onsen-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:268",
+      "publicId": "ishizuchi-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:269",
+      "publicId": "uenono-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:270",
+      "publicId": "aizu-kogen-takahata-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:271",
+      "publicId": "tateshina-tokyu-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:272",
+      "publicId": "komagane-kogen-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:273",
+      "publicId": "koshi-kogen-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:274",
+      "publicId": "ikawa-ski-area-kainayama",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:276",
+      "publicId": "shiga-maruike",
+      "routeMode": "existing_page",
+      "existingPageId": "page:yamanouchi:shiga-maruike",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:284",
+      "publicId": "sannokura-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:285",
+      "publicId": "tengamori-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:291",
+      "publicId": "esashi-mikasayama-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:294",
+      "publicId": "shiga-ichinose-yamanokami",
+      "routeMode": "existing_page",
+      "existingPageId": "page:yamanouchi:shiga-ichinose-yamanokami",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:295",
+      "publicId": "muroran-danpara-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:296",
+      "publicId": "matsudai-family-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:299",
+      "publicId": "akan-royal-valley",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:301",
+      "publicId": "yakushi-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:305",
+      "publicId": "oze-hinoemata-onsen-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:308",
+      "publicId": "kamoidake-international-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:311",
+      "publicId": "suishozan-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:312",
+      "publicId": "wakamatsu-citizens-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:314",
+      "publicId": "hida-takayama-municipal-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:315",
+      "publicId": "kyukamura-myoko-runrun-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:317",
+      "publicId": "kutchan-asahigaoka-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:318",
+      "publicId": "tambara-ski-park",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:321",
+      "publicId": "eniwa-citizens-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:322",
+      "publicId": "kyukamura-oku-daisen-kagamiganaru-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:323",
+      "publicId": "tadami-town-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:328",
+      "publicId": "karurusu-onsen-sanlaiva-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:329",
+      "publicId": "yogoshiyama-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:330",
+      "publicId": "senjojiki-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:331",
+      "publicId": "rokkosan-snow-park",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:333",
+      "publicId": "abashiri-lake-view-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:334",
+      "publicId": "manza-onsen-resort",
+      "routeMode": "existing_page",
+      "existingPageId": "page:kusatsu-manza:manza-onsen-resort",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official URL, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:338",
+      "publicId": "yakurai-family-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:339",
+      "publicId": "riverwell-ikawa-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:340",
+      "publicId": "pirika-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:341",
+      "publicId": "namari-onsen-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:342",
+      "publicId": "greenpia-onuma-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:344",
+      "publicId": "yawata-highland-191-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:346",
+      "publicId": "chikusa-kogen-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:348",
+      "publicId": "kisofukushima",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:352",
+      "publicId": "zao-bodaira-liza-world",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:355",
+      "publicId": "banshu-tokura-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:356",
+      "publicId": "akabane-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:358",
+      "publicId": "memuro-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:359",
+      "publicId": "tajima-farm-park-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:360",
+      "publicId": "hiraya-kogen-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:361",
+      "publicId": "zao-sarukura-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:364",
+      "publicId": "asahi-prime-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:367",
+      "publicId": "higashigaoka-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:368",
+      "publicId": "urabandai-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:373",
+      "publicId": "ipponsugi-snow-park",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:380",
+      "publicId": "chisenupuri-cat-ski",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:382",
+      "publicId": "akoyama-ski-ground-snow-pal",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:384",
+      "publicId": "onogawa-onsen-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:385",
+      "publicId": "shigarai-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:386",
+      "publicId": "fujimi-kogen-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:393",
+      "publicId": "makino-kogen-family-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:394",
+      "publicId": "miyagi-zao-shiroishi-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:395",
+      "publicId": "yuda-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:398",
+      "publicId": "kurohime-kogen-snow-park",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:400",
+      "publicId": "okutadami-maruyama-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:403",
+      "publicId": "asahikawa-santa-present-park-maruyama-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:404",
+      "publicId": "yonezawa-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:405",
+      "publicId": "izumigatake-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:408",
+      "publicId": "ohdai-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:409",
+      "publicId": "sapporo-bankei",
+      "routeMode": "existing_page",
+      "existingPageId": "page:sapporo:sapporo-bankei",
+      "aliases": [],
+      "basis": "Exact operating-area match established from the verified English and Japanese names, official site, and geography; the published page identity and route are retained.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:418",
+      "publicId": "ishikari-heigen-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:419",
+      "publicId": "daisen-white-resort",
+      "routeMode": "existing_page",
+      "existingPageId": "page:daisen:daisen-white-resort",
+      "aliases": [],
+      "basis": "Exact operating-area continuity established by the English and Japanese names and Daisen geography; the current operator URL supersedes the published page URL.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:420",
+      "publicId": "wakkanai-komadori-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:423",
+      "publicId": "miyagi-zao-shichikashuku-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:426",
+      "publicId": "kunimidaira-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:438",
+      "publicId": "minamigaoka-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:440",
+      "publicId": "hakugindai-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:444",
+      "publicId": "matsuyama-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:446",
+      "publicId": "midori-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:447",
+      "publicId": "boyodai-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:449",
+      "publicId": "teshio-town-citizens-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:450",
+      "publicId": "heavens-sonohara-snow-world",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:452",
+      "publicId": "shibetsu-city-hinata-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:454",
+      "publicId": "soyumura-229-ski-land",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:459",
+      "publicId": "hanagasa-kogen-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:461",
+      "publicId": "kita-naganuma-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:463",
+      "publicId": "tonami-yumenotaira-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:466",
+      "publicId": "sarufutsu-village-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:487",
+      "publicId": "takino-snow-world",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:489",
+      "publicId": "nikko-yumoto-onsen-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:493",
+      "publicId": "yokone-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official URL, geography, and collision conventions.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:542",
+      "publicId": "okuradake-kogen-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:550",
+      "publicId": "wassamu-higashiyama-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    }
+  ]
+}

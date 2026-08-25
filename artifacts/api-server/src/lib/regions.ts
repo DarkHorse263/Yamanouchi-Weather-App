@@ -3,6 +3,8 @@
  *
  * Matches the canonical region list returned by `/api/regions`.
  */
+import { publishedCatalogueRecords, travelRegions } from "@workspace/japan-ski-catalogue/public-runtime";
+
 // Active region set · keep in sync with `lib/api-spec/openapi.yaml` RegionId
 // enum, `routes/regions.ts` REGIONS list, `routes/weather.ts` LOCATIONS,
 // `jobs/alertEvaluator.ts` REGION_ANCHORS, and the frontend region registry
@@ -128,9 +130,32 @@ export const REGION_IDS = [
   "snowshoe",
 ] as const;
 export type RegionId = (typeof REGION_IDS)[number];
+export type CatalogueTravelRegionId = string;
+
+/**
+ * Catalogue region ids are data-owned. Keep them outside REGION_IDS because
+ * REGION_IDS mirrors the established OpenAPI enum; this set still validates
+ * every published catalogue region without accepting arbitrary path values.
+ */
+export const CATALOGUE_TRAVEL_REGION_IDS: ReadonlySet<string> = new Set(
+  travelRegions.map((region) => region.travelRegionId),
+);
+export const CATALOGUE_TRAVEL_REGIONS_BY_ID = new Map(
+  travelRegions.map((region) => [region.travelRegionId, region] as const),
+);
+export const CATALOGUE_LOCATION_TO_REGION: ReadonlyMap<string, string> = new Map(
+  publishedCatalogueRecords.flatMap((record) => [
+    [record.publicId, record.travelRegionId] as const,
+    ...record.aliases.map((alias) => [alias, record.travelRegionId] as const),
+  ]),
+);
 
 export function isRegionId(value: unknown): value is RegionId {
   return typeof value === "string" && (REGION_IDS as readonly string[]).includes(value);
+}
+
+export function isKnownRegionId(value: unknown): value is RegionId | CatalogueTravelRegionId {
+  return typeof value === "string" && (isRegionId(value) || CATALOGUE_TRAVEL_REGION_IDS.has(value));
 }
 
 /**
@@ -983,8 +1008,8 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "highmount-roads": "highmount",
 };
 
-export function regionForLocation(locationId: string): RegionId | undefined {
-  return LOCATION_TO_REGION[locationId];
+export function regionForLocation(locationId: string): RegionId | CatalogueTravelRegionId | undefined {
+  return LOCATION_TO_REGION[locationId] ?? CATALOGUE_LOCATION_TO_REGION.get(locationId);
 }
 
 /**
@@ -1007,7 +1032,7 @@ export class RegionParamError extends Error {
 
 export function parseRegionParam(
   raw: unknown,
-): RegionId | undefined {
+): RegionId | CatalogueTravelRegionId | undefined {
   if (raw === undefined || raw === null || raw === "") return undefined;
 
   if (Array.isArray(raw)) {
@@ -1022,7 +1047,7 @@ export function parseRegionParam(
     }
     if (values.length === 0) return undefined;
     for (const v of values) {
-      if (!isRegionId(v)) throw new RegionParamError(v);
+      if (!isKnownRegionId(v)) throw new RegionParamError(v);
     }
     if (values.some((v) => v !== values[0])) {
       throw new RegionParamError(values.join(","));
@@ -1031,7 +1056,7 @@ export function parseRegionParam(
   }
 
   if (typeof raw !== "string") throw new RegionParamError(String(raw));
-  if (!isRegionId(raw)) throw new RegionParamError(raw);
+  if (!isKnownRegionId(raw)) throw new RegionParamError(raw);
   return raw;
 }
 
@@ -1041,7 +1066,7 @@ export function parseRegionParam(
  */
 export function locationMatchesRegion(
   locationId: string,
-  region: RegionId | undefined,
+  region: RegionId | CatalogueTravelRegionId | undefined,
 ): boolean {
   if (!region) return true;
   return regionForLocation(locationId) === region;

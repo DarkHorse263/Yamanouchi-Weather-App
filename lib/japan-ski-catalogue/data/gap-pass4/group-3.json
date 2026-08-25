@@ -1,0 +1,164 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-08-26",
+  "assignedRecordIds": [
+    "workbook:454",
+    "workbook:459",
+    "workbook:463",
+    "workbook:487",
+    "workbook:489",
+    "workbook:493"
+  ],
+  "proposals": [
+    {
+      "recordId": "workbook:454",
+      "fields": {
+        "coordinates": {
+          "value": {
+            "lat": 40.3648164,
+            "lng": 141.0717511
+          },
+          "sourceUrl": "https://www.town.takko.lg.jp/index.cfm/11,0,37,164,html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Takko Town's official ski-area page links its official Google access map, whose destination pin is explicitly 40.3648164, 141.0717511."
+        }
+      },
+      "unresolved": [
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.town.takko.lg.jp/index.cfm/11,0,37,164,html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official municipal ski-area page provides an explicit-coordinate access-map link but no base/top elevation values."
+        },
+        {
+          "sourceUrl": "https://www.town.takko.lg.jp/_resources/content/167/20260218-142645.pdf",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The municipal lift safety report concerns the first lift's safety management and does not publish ski-area base and top elevations."
+        }
+      ],
+      "notes": "The coordinate is recovered from the municipal page's explicit access-map pin. No eligible base/top elevation was located."
+    },
+    {
+      "recordId": "workbook:459",
+      "fields": {},
+      "unresolved": [
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.city.obanazawa.yamagata.jp/kanko/hanagasa-kogen/",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Obanazawa City's official ski-area page provides operating information but no ski-area base and top elevation values."
+        },
+        {
+          "sourceUrl": "https://obanazawa-ski.jp/course-price/courses-pricing.html",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator course page gives course lengths and maximum gradients, but no base/top elevations."
+        }
+      ],
+      "notes": "Coordinates were already resolved before this pass; no eligible defensible elevation proposal recovered."
+    },
+    {
+      "recordId": "workbook:463",
+      "fields": {
+        "coordinates": {
+          "value": {
+            "lat": 36.5859507,
+            "lng": 137.0205605
+          },
+          "sourceUrl": "https://ski.yumeno-taira.com/access/index.php",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator's access page links route maps to Tonami Yumenotaira Ski Resort with the explicit destination coordinates 36.5859507, 137.0205605."
+        }
+      },
+      "unresolved": [
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://ski.yumeno-taira.com/slope/index.php",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official slope page identifies the top and intermediate lift unload points and course gradients, but does not state elevations for those points or a base elevation."
+        }
+      ],
+      "notes": "The coordinate is recovered from the operator's explicit access-map destination. No base/top elevation was inferred from course or lift information."
+    },
+    {
+      "recordId": "workbook:487",
+      "fields": {},
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://takinopark.com/news/takinosnowworld/",
+          "sourceType": "national_government_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The national-park operator's Snow World page states the family slope's average 7-degree gradient and activity details, but no base/top elevation or explicit latitude/longitude."
+        },
+        {
+          "sourceUrl": "https://takinopark.com/access/",
+          "sourceType": "national_government_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official park access page supplies route directions, not an explicit-coordinate access map for the Snow World ski slope."
+        }
+      ],
+      "notes": "No eligible coordinate or defensible base/top elevation proposal recovered."
+    },
+    {
+      "recordId": "workbook:489",
+      "fields": {},
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://nikkoyumoto-ski.com/guide.html",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official course guide describes the courses and lift use but does not state ski-area base and top elevations."
+        },
+        {
+          "sourceUrl": "https://nikkoyumoto-ski.com/access.html",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator's access page supplies a map image and directions, but no explicit latitude/longitude."
+        }
+      ],
+      "notes": "No eligible coordinate or defensible base/top elevation proposal recovered."
+    },
+    {
+      "recordId": "workbook:493",
+      "fields": {},
+      "unresolved": [
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.siroimori.co.jp/yokone-ski/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official operator page states only a 129 m vertical drop for the first slope; it does not give base and top elevations, which were not inferred from that drop."
+        },
+        {
+          "sourceUrl": "https://www.siroimori.co.jp/yokone-ski/kannai.html",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator facility-information page repeats the 129 m vertical and lift length, but provides no base/top elevation values."
+        }
+      ],
+      "notes": "Coordinates were already resolved before this pass; no eligible defensible base/top elevation proposal recovered."
+    }
+  ]
+}

@@ -6,7 +6,7 @@ Generated from catalogue snapshot: 2026-08-24T00:00:00.000Z
 
 - **marketingApproved: false**
 - National launch is blocked until every unresolved operating intake candidate is verified and has a weather page.
-- Unresolved operating intake candidates: 522
+- Unresolved operating intake candidates: 236
 
 ## National totals
 
@@ -15,74 +15,92 @@ Generated from catalogue snapshot: 2026-08-24T00:00:00.000Z
 - Temporarily closed: 26
 - Indoor: 11
 - Dry slope: 4
+- Review status — verified operating: 288
+- Review status — temporarily closed: 5
+- Review status — closed: 13
+- Review status — merged into successor: 6
+- Review status — unclear: 210
+- Current verified-operating records: 288
+- Mapped to existing pages: 56
+- Existing-page mappings passing publication lifecycle gate: 49
+- New-page identities: 232
+- Evidence-complete verified-operating records: 263
+- Route-ready new-page candidates: 214
+- Manifest-approved published catalogue records: 214
+- Unapproved route-ready new-page candidates: 0
+- Verified records with unresolved essential gaps: 25
+- Unresolved status records: 210
+- Reviewed closures (including temporary): 18
 - Existing published pages: 82
-- Intake rows with conservative directory evidence: 476
+- Full catalogue JSON bytes: 2695199
+- Public runtime JSON bytes: 212193
+- Intake rows with conservative directory evidence: 478
 - Evidence snapshot directory rows: 527
 - Detail-derived official links: 330
 - Directory rows with merged official coverage: 386
 - Evidence-complete directory rows: 331
 
-Published pages and intake rows remain separate projections. A candidate relationship never
-changes an intake row's lifecycle and is not a silent deduplication.
+Published pages, intake rows, and new-page publication candidates remain separate projections.
+Existing-page reuse is explicit and new-page candidates do not publish runtime routes.
 
 ## Open exact-match readiness
 
 - Open rows with a unique exact directory match: 476
-- Coordinates present: 394
+- Coordinates present: 396
 - Defensible base/top elevation present: 392
-- Japanese name present: 341
-- Official URL present: 357
-- Evidence-complete: 308
-- Evidence-complete but still requiring operating-status and travel-cluster review: 308
+- Japanese name present: 383
+- Official URL present: 390
+- Evidence-complete: 348
+- Evidence-complete but still requiring operating-status and travel-cluster review: 348
 
 ### Missing essentials
 
 | Missing reason | Open exact-match rows |
 | --- | ---: |
-| missing_coordinates | 82 |
+| missing_coordinates | 80 |
 | missing_defensible_elevation | 84 |
-| missing_japanese_name | 135 |
-| missing_official_url | 119 |
+| missing_japanese_name | 93 |
+| missing_official_url | 86 |
 
 ## Prefecture totals
 
-| Prefecture | Open intake | Published pages | Verified intake | Unresolved open |
-| --- | ---: | ---: | ---: | ---: |
-| Aichi | 1 | 0 | 0 | 1 |
-| Akita | 19 | 0 | 0 | 19 |
-| Aomori | 13 | 2 | 0 | 13 |
-| Chiba | 0 | 0 | 0 | 0 |
-| Ehime | 3 | 0 | 0 | 3 |
-| Fukui | 5 | 0 | 0 | 5 |
-| Fukuoka | 0 | 0 | 0 | 0 |
-| Fukushima | 23 | 2 | 0 | 23 |
-| Gifu | 25 | 0 | 0 | 25 |
-| Gunma | 23 | 5 | 0 | 23 |
-| Hiroshima | 15 | 0 | 0 | 15 |
-| Hokkaido | 117 | 17 | 0 | 117 |
-| Hyogo | 14 | 0 | 0 | 14 |
-| Ishikawa | 8 | 0 | 0 | 8 |
-| Iwate | 19 | 4 | 0 | 19 |
-| Kanagawa | 0 | 0 | 0 | 0 |
-| Kochi | 1 | 0 | 0 | 1 |
-| Kumamoto | 1 | 0 | 0 | 1 |
-| Kyoto | 1 | 0 | 0 | 1 |
-| Miyagi | 10 | 0 | 0 | 10 |
-| Miyazaki | 1 | 0 | 0 | 1 |
-| Nagano | 93 | 38 | 0 | 93 |
-| Niigata | 54 | 12 | 0 | 54 |
-| Oita | 1 | 0 | 0 | 1 |
-| Okayama | 6 | 0 | 0 | 6 |
-| Saitama | 0 | 0 | 0 | 0 |
-| Shiga | 10 | 0 | 0 | 10 |
-| Shimane | 5 | 0 | 0 | 5 |
-| Shizuoka | 2 | 0 | 0 | 2 |
-| Tochigi | 8 | 0 | 0 | 8 |
-| Tokushima | 1 | 0 | 0 | 1 |
-| Tottori | 7 | 1 | 0 | 7 |
-| Toyama | 10 | 0 | 0 | 10 |
-| Yamagata | 23 | 1 | 0 | 23 |
-| Yamanashi | 3 | 0 | 0 | 3 |
+| Prefecture | Open intake | Published pages | Verified intake | Unresolved open | Closures/mergers |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Aichi | 1 | 0 | 0 | 0 | 0 |
+| Akita | 19 | 0 | 2 | 6 | 2 |
+| Aomori | 13 | 2 | 0 | 5 | 0 |
+| Chiba | 0 | 0 | 0 | 0 | 0 |
+| Ehime | 3 | 0 | 0 | 0 | 0 |
+| Fukui | 5 | 0 | 0 | 5 | 0 |
+| Fukuoka | 0 | 0 | 0 | 0 | 0 |
+| Fukushima | 23 | 2 | 4 | 5 | 4 |
+| Gifu | 25 | 0 | 1 | 11 | 1 |
+| Gunma | 23 | 5 | 2 | 2 | 2 |
+| Hiroshima | 15 | 0 | 0 | 12 | 0 |
+| Hokkaido | 117 | 17 | 3 | 66 | 3 |
+| Hyogo | 14 | 0 | 0 | 2 | 0 |
+| Ishikawa | 8 | 0 | 0 | 7 | 0 |
+| Iwate | 19 | 4 | 1 | 5 | 1 |
+| Kanagawa | 0 | 0 | 0 | 0 | 0 |
+| Kochi | 1 | 0 | 0 | 1 | 0 |
+| Kumamoto | 1 | 0 | 0 | 1 | 0 |
+| Kyoto | 1 | 0 | 1 | 0 | 1 |
+| Miyagi | 10 | 0 | 1 | 0 | 1 |
+| Miyazaki | 1 | 0 | 1 | 0 | 1 |
+| Nagano | 93 | 38 | 1 | 42 | 1 |
+| Niigata | 54 | 12 | 0 | 36 | 0 |
+| Oita | 1 | 0 | 0 | 1 | 0 |
+| Okayama | 6 | 0 | 0 | 5 | 0 |
+| Saitama | 0 | 0 | 0 | 0 | 0 |
+| Shiga | 10 | 0 | 1 | 1 | 2 |
+| Shimane | 5 | 0 | 0 | 3 | 0 |
+| Shizuoka | 2 | 0 | 0 | 0 | 0 |
+| Tochigi | 8 | 0 | 3 | 3 | 3 |
+| Tokushima | 1 | 0 | 0 | 0 | 0 |
+| Tottori | 7 | 1 | 1 | 5 | 1 |
+| Toyama | 10 | 0 | 0 | 4 | 0 |
+| Yamagata | 23 | 1 | 1 | 8 | 1 |
+| Yamanashi | 3 | 0 | 0 | 0 | 0 |
 
 ## Validation
 

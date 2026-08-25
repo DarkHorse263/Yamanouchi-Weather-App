@@ -1,0 +1,354 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-08-26",
+  "sourceReviewFiles": [
+    "lib/japan-ski-catalogue/data/reviews/hokkaido.json"
+  ],
+  "assignedRecordIds": [
+    "workbook:33", "workbook:40", "workbook:66", "workbook:100", "workbook:111", "workbook:133", "workbook:136", "workbook:163", "workbook:169", "workbook:177", "workbook:192", "workbook:195", "workbook:213", "workbook:221", "workbook:223", "workbook:229", "workbook:236", "workbook:238", "workbook:239", "workbook:244", "workbook:247", "workbook:249", "workbook:253", "workbook:257", "workbook:261", "workbook:280", "workbook:286", "workbook:288", "workbook:291", "workbook:293", "workbook:295", "workbook:297", "workbook:299", "workbook:307"
+  ],
+  "proposals": [
+    {
+      "recordId": "workbook:33",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Kamui Ski Links",
+      "officialNameJa": "カムイスキーリンクス",
+      "officialUrl": "https://www.kamui-skilinks.com/en/",
+      "statusEvidenceUrl": "https://www.kamui-skilinks.com/en/",
+      "statusEvidenceQuote": "2025-2026 Winter Season : 13th Dec 2025 to 31st March 2026",
+      "evidenceAsOf": "2026-08-26",
+      "freshnessReviewRequired": true,
+      "notes": "Operator season and lift-pass page supplies explicit completed-season operation; no 2026-27 notice located."
+    },
+    {
+      "recordId": "workbook:40",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Mount Racey Ski Area",
+      "officialNameJa": "マウントレースイスキーエリア",
+      "officialUrl": "https://yubari-resort.co.jp/",
+      "statusEvidenceUrl": "https://yubari-resort.co.jp/gm_c_guide/",
+      "statusEvidenceQuote": "2025-2026シーズンは、ゴンドラの営業はございません。山頂エリアからの滑走にはハイクアップが必要です。",
+      "evidenceAsOf": "2026-08-26",
+      "freshnessReviewRequired": true,
+      "notes": "Operator's 2025-26 slope guide explicitly describes the season's restricted gondola operation, not a closure."
+    },
+    {
+      "recordId": "workbook:66",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Nukabira Gensenkyo Ski Area",
+      "officialNameJa": "ぬかびら源泉郷スキー場",
+      "officialUrl": "https://ichida54.wixsite.com/nukabiraskijyo",
+      "statusEvidenceUrl": "https://ichida54.wixsite.com/nukabiraskijyo",
+      "statusEvidenceQuote": "2026年3月21日 今シーズンの一般営業終了しました。来シーズンも皆様のお越しを心よりお待ちしております。",
+      "evidenceAsOf": "2026-08-26",
+      "freshnessReviewRequired": true,
+      "notes": "Resort's official site confirms the completed 2025-26 general season and explicitly anticipates next season."
+    },
+    {
+      "recordId": "workbook:100",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Canmore Ski Village",
+      "officialNameJa": "キャンモアスキーヴィレッジ",
+      "officialUrl": "https://www.canmore-ski.jp/",
+      "statusEvidenceUrl": "https://www.canmore-ski.jp/",
+      "statusEvidenceQuote": "2025-2026シーズンは終了しました。See you next season！",
+      "evidenceAsOf": "2026-08-26",
+      "freshnessReviewRequired": true,
+      "notes": "Operator site confirms the completed 2025-26 season; no 2026-27 schedule located."
+    },
+    {
+      "recordId": "workbook:111",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Pippu Ski Resort",
+      "officialNameJa": "ぴっぷスキー場",
+      "officialUrl": "https://pippu.ski/",
+      "statusEvidenceUrl": "https://pippu.ski/",
+      "statusEvidenceQuote": "2026-27シーズン道北エリアローカルスキー場共通シーズン『DIAMOND DUST PASS』",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Operator site advertises a 2026-27 local-ski-area season pass for the resort."
+    },
+    {
+      "recordId": "workbook:133",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Sapporo Moiwa Snow Square Ski & Snowboard",
+      "officialNameJa": "札幌藻岩山スキー場",
+      "officialUrl": "https://sapporo-moiwa.jp/en/",
+      "statusEvidenceUrl": "https://sapporo-moiwa.jp/en/news/2025-2026%E3%82%B7%E3%83%BC%E3%82%BA%E3%83%B3%E3%81%AE%E3%81%94%E6%A1%88%E5%86%85/",
+      "statusEvidenceQuote": "The 2025-2026 season ... is scheduled to start on Saturday, December 20th ... to Sunday, March 15, 2026.",
+      "evidenceAsOf": "2026-08-26",
+      "freshnessReviewRequired": true,
+      "notes": "Operator's season announcement is explicit 2025-26 operation; no 2026-27 notice located."
+    },
+    {
+      "recordId": "workbook:136",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Nayoro Piyashiri Ski Area",
+      "officialNameJa": "名寄ピヤシリスキー場",
+      "officialUrl": "https://www.nayoro.co.jp/piyashiri/",
+      "statusEvidenceUrl": "https://www.nayoro.co.jp/piyashiri/season/",
+      "statusEvidenceQuote": "2026-2027 オープンシーズン Open 2026.12.11(fri)",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Operator publishes a specific 2026-27 opening date."
+    },
+    {
+      "recordId": "workbook:163",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Daisetsuzan Asahidake Ropeway",
+      "officialNameJa": "大雪山旭岳ロープウェイ",
+      "officialUrl": "https://asahidake.hokkaido.jp/en/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched operator Japanese/English pages and 2025-26/2026-27 ski-operation, closure, and ropeway terms. The operator page confirms summer ropeway operation but no authoritative current ski-course season statement was retained; ropeway operation alone was not treated as ski-area operation."
+    },
+    {
+      "recordId": "workbook:169",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Asari Ski Resort",
+      "officialNameJa": "朝里川温泉スキー場",
+      "officialUrl": "https://asari-ski.com/en/",
+      "statusEvidenceUrl": "https://asari-ski.com/en/",
+      "statusEvidenceQuote": "Snowfall Information ... 2026.02.28 ... Purple Lift 9:15-15:20 ... Red Lift 9:00-16:45",
+      "evidenceAsOf": "2026-08-26",
+      "freshnessReviewRequired": true,
+      "notes": "Operator lift-status page records 2025-26 lift operation; no 2026-27 notice located."
+    },
+    {
+      "recordId": "workbook:177",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Fu's Snow Area",
+      "officialNameJa": "フッズスノーエリア",
+      "officialUrl": "https://www.fujino-yagai-sports.jp/winter",
+      "statusEvidenceUrl": "https://www.fujino-yagai-sports.jp/winter",
+      "statusEvidenceQuote": "2026 /03/29 16:00 現在 期間外",
+      "evidenceAsOf": "2026-08-26",
+      "freshnessReviewRequired": true,
+      "notes": "Operator winter-status page identifies this record's successor/current name as Fu's Snow Area and reports the end of the completed winter period; no 2026-27 notice located."
+    },
+    {
+      "recordId": "workbook:192",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Engaru Rock Valley Ski Area",
+      "officialNameJa": "えんがるロックバレースキー場",
+      "officialUrl": "https://engaru-mori-no-okhotsk.jp/skiing/",
+      "statusEvidenceUrl": "https://engaru-mori-no-okhotsk.jp/news/2025/11/13/7822/",
+      "statusEvidenceQuote": "2025-2026 Snowシーズンのえんがるロックバレースキー場は、12／20（土）オープン予定です。",
+      "evidenceAsOf": "2026-08-26",
+      "freshnessReviewRequired": true,
+      "notes": "Operator facility's explicit 2025-26 opening notice; no 2026-27 notice located."
+    },
+    {
+      "recordId": "workbook:195",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Otaru Tenguyama Ski Resort",
+      "officialNameJa": "小樽天狗山スキー場",
+      "officialUrl": "https://tenguyama.ckk.chuo-bus.co.jp/en/",
+      "statusEvidenceUrl": "https://tenguyama.ckk.chuo-bus.co.jp/en/hours-and-fees/",
+      "statusEvidenceQuote": "[Winter] November 28, 2026 (Sat) - March 28, 2027 (Sun)",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Operator publishes 2026-27 winter operating period."
+    },
+    {
+      "recordId": "workbook:213",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Shibetsu City Asahi Ski Area",
+      "officialNameJa": "士別市あさひスキー場",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 士別市あさひスキー場 with 廃止/閉鎖/2026 and municipal domains. A news report indicates abolition, but no municipal or operator closure notice was retained; third-party reporting cannot support promotion to closed."
+    },
+    {
+      "recordId": "workbook:221",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Minami Furano National Ski Resort",
+      "officialNameJa": "国設南ふらのスキー場",
+      "officialUrl": "https://www.town.minamifurano.hokkaido.jp/all-facility/minamifuranoski/",
+      "statusEvidenceUrl": "https://www.town.minamifurano.hokkaido.jp/all-facility/minamifuranoski/",
+      "statusEvidenceQuote": "今シーズンの営業終了は令和８年３月２２日（日）１６時００分をもって終了を予定しております。",
+      "evidenceAsOf": "2026-08-26",
+      "freshnessReviewRequired": true,
+      "notes": "Municipal operator page gives a 2025-26 end date and operational lift/night-ski notices; no 2026-27 notice located."
+    },
+    {
+      "recordId": "workbook:223",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Horotachi Ski Area",
+      "officialNameJa": "ほろたちスキー場",
+      "officialUrl": "https://www.horotachi-horokanai.com/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched the current operator site plus Japanese 2025-26/2026-27 営業, 休業, and 閉鎖 queries. The site describes facilities and skiing but no dated authoritative season-operation notice was retained."
+    },
+    {
+      "recordId": "workbook:229",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Shintokuyama Ski Area",
+      "officialNameJa": "新得山スキー場",
+      "officialUrl": "https://www.shintoku-town.jp/bunka-sports/sports/sports_shisetsu/shintokuyama/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched town and Japanese ski-operation/closure notices. No dated 2025-26 or 2026-27 authoritative operating-status notice was retained."
+    },
+    {
+      "recordId": "workbook:236",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Nakayamatoge Ski Area",
+      "officialNameJa": "中山峠スキー場",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched Japanese/English name variants with 2025-26, 2026-27, 営業, 休業, and 閉鎖. Results were directories and tourism listings only; no operator or municipal status notice was retained."
+    },
+    {
+      "recordId": "workbook:238",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Shibetsu Municipal Kanayama Ski Area",
+      "officialNameJa": "標津町営金山スキー場",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched the Japanese municipal facility name and 2025-26/2026 operation and closure terms. Only third-party directory results were found; no authoritative notice was retained."
+    },
+    {
+      "recordId": "workbook:239",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Haginoyama Civic Ski Area",
+      "officialNameJa": "萩の山市民スキー場",
+      "officialUrl": "https://haginoyama.com/",
+      "statusEvidenceUrl": "https://haginoyama.com/",
+      "statusEvidenceQuote": "2026.2.28 今シーズンの営業終了のお知らせ ... 来シーズンもご利用いただけます。",
+      "evidenceAsOf": "2026-08-26",
+      "freshnessReviewRequired": true,
+      "notes": "Operator confirms 2025-26 operation and weather-driven early season end; no 2026-27 notice located."
+    },
+    {
+      "recordId": "workbook:244",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Katsurazawa Kokusetsu Ski Area",
+      "officialNameJa": "桂沢国設スキー場",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched Japanese/English name variants with municipal/operator, 2025-26, 2026-27, 営業, 休業, and 閉鎖. No authoritative current status notice was retained; directory results were not accepted."
+    },
+    {
+      "recordId": "workbook:247",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Bibai Kokusetsu Ski Area",
+      "officialNameJa": "美唄国設スキー場",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched Japanese name with 美唄市 and 2025-26/2026 operation, closure, and season terms. No operator or municipal dated status source was retained."
+    },
+    {
+      "recordId": "workbook:249",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Hokkaido Greenland White Park Ski Area",
+      "officialNameJa": "北海道グリーンランド ホワイトパークスキー場",
+      "officialUrl": "https://h-greenland.com/ski/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Operator page carried an undated temporary daily closure message, but no date-verifiable current-season or next-season operating statement was retained; silence cannot establish operation."
+    },
+    {
+      "recordId": "workbook:253",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Gokazan Ski Area",
+      "officialNameJa": "五鹿山スキー場",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 湧別町/五鹿山 with 2025-26, 2026-27, 営業, 休業, and 閉鎖. Only directories were located; no municipal or operator status notice was retained."
+    },
+    {
+      "recordId": "workbook:257",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Consadole Niki Ski Park",
+      "officialNameJa": "コンサドーレ仁木スキーパーク",
+      "officialUrl": "https://nikipark.jp/",
+      "statusEvidenceUrl": "https://www.niki-kanko.jp/spot/ski/",
+      "statusEvidenceQuote": "2025年12月よりリニューアルオープン！！ 2023年シーズンより2年間休業し、安全機能を有したペアリフトに変更",
+      "evidenceAsOf": "2026-08-26",
+      "freshnessReviewRequired": true,
+      "notes": "Town tourism authority documents the rename from Niki Town Ski Area and reopening for 2025-26 after two seasons closed."
+    },
+    {
+      "recordId": "workbook:261",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Daisetsuzan Sounkyo Kurodake Ski Area",
+      "officialNameJa": "大雪山層雲峡・黒岳スキー場",
+      "officialUrl": "https://www.rinyu.co.jp/kurodake/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched operator Japanese/English pages for 2025-26/2026-27 ski operation and closure notices. No dated authoritative ski-season statement was retained; third-party planned dates were not accepted."
+    },
+    {
+      "recordId": "workbook:280",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Takinoue Sakuragaoka Ski Area",
+      "officialNameJa": "滝上町桜ヶ丘スキー場",
+      "officialUrl": "https://town.takinoue.hokkaido.jp/kyoikuiinkai/social/shisetsu/sakuragaokaski.html",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched town and Japanese 2025-26/2026-27 operation, closure, and season terms. No dated municipal/operator operating-status statement was retained."
+    },
+    {
+      "recordId": "workbook:286",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "ASHIMOI KANKO Takaho Ski Area",
+      "officialNameJa": "ASHIMOI KANKO高穂スキー場",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched Japanese name and 沼田町 queries with 2025-26/2026-27, 営業, 休業, and 閉鎖. No primary operator or municipal dated status notice was retained."
+    },
+    {
+      "recordId": "workbook:288",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Akan Lake Ski Area Utara",
+      "officialNameJa": "国設阿寒湖畔スキー場【ウタラ】",
+      "officialUrl": "https://akan-ski.com/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched operator Japanese/English pages and 2025-26/2026-27 operating, closure, and lift terms. No dated authoritative current-status statement was retained."
+    },
+    {
+      "recordId": "workbook:291",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Esashi Mikasayama Ski Area",
+      "officialNameJa": "枝幸町三笠山スキー場",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched Japanese name with 枝幸町 and current-season/closure terms. Results did not yield an authoritative 2025-26 or 2026-27 status notice."
+    },
+    {
+      "recordId": "workbook:293",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Anpeizan Ski Area",
+      "officialNameJa": "安平山スキー場",
+      "officialUrl": "https://www.town.abira.lg.jp/midokoro/shisetsu/sport/149",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Town facility page gives a generic December-to-March period but no dated current or next-season notice; operation was not inferred from that evergreen description."
+    },
+    {
+      "recordId": "workbook:295",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Muroran Danpara Ski Area",
+      "officialNameJa": "だんパラスキー場",
+      "officialUrl": "http://www.muroran-resort.sakura.ne.jp/mysite1/index.html",
+      "statusEvidenceUrl": "http://www.muroran-resort.sakura.ne.jp/mysite1/index.html",
+      "statusEvidenceQuote": "2026.3.22 今シーズンの営業は終了致しました。... 来シーズンも皆様にお会い出来るのを楽しみにしております。",
+      "evidenceAsOf": "2026-08-26",
+      "freshnessReviewRequired": true,
+      "notes": "Designated operator confirms completed 2025-26 operation and anticipates next season; no 2026-27 schedule located."
+    },
+    {
+      "recordId": "workbook:297",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Monbetsu Municipal Oyama Ski Area",
+      "officialNameJa": "紋別市営大山スキー場",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 紋別市営大山スキー場 with municipal and 2025-26/2026 operation and closure terms. No authoritative dated status notice was retained; directories were not accepted."
+    },
+    {
+      "recordId": "workbook:299",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Akan Royal Valley",
+      "officialNameJa": "阿寒ロイヤルバレイ",
+      "officialUrl": "https://www.akanroyalvalley.jp/",
+      "statusEvidenceUrl": "https://www.akanroyalvalley.jp/%E3%82%B9%E3%83%8E%E3%83%BC%E3%82%A2%E3%82%AF%E3%83%86%E3%82%A3%E3%83%93%E3%83%86%E3%82%A3",
+      "statusEvidenceQuote": "2025-26シーズンの営業は終了いたしました",
+      "evidenceAsOf": "2026-08-26",
+      "freshnessReviewRequired": true,
+      "notes": "Operator explicitly confirms completed 2025-26 operation; no 2026-27 notice located."
+    },
+    {
+      "recordId": "workbook:307",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Bifuka Ski Area",
+      "officialNameJa": "美深スキー場",
+      "officialUrl": "https://www.town.bifuka.hokkaido.jp/cms/section/kyouiku/qlmcaj0000005my2.html",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched town page and Japanese 2025-26/2026-27 operating, closure, and season terms. The municipal facility description was not a dated current-status notice; no qualifying source was retained."
+    }
+  ]
+}

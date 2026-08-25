@@ -1,0 +1,476 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-08-26",
+  "sourceReviewFiles": [
+    "lib/japan-ski-catalogue/data/unclear-pass3/niigata-hokuriku.json",
+    "lib/japan-ski-catalogue/data/reviews/niigata-hokuriku.json"
+  ],
+  "assignedRecordIds": [
+    "workbook:6",
+    "workbook:19a",
+    "workbook:19b",
+    "workbook:19c",
+    "workbook:21",
+    "workbook:22",
+    "workbook:23",
+    "workbook:43",
+    "workbook:44",
+    "workbook:45",
+    "workbook:49",
+    "workbook:92",
+    "workbook:95",
+    "workbook:96",
+    "workbook:105",
+    "workbook:118",
+    "workbook:127",
+    "workbook:134",
+    "workbook:157",
+    "workbook:167",
+    "workbook:178",
+    "workbook:206",
+    "workbook:219",
+    "workbook:245",
+    "workbook:278",
+    "workbook:281",
+    "workbook:283",
+    "workbook:303",
+    "workbook:304",
+    "workbook:324",
+    "workbook:332",
+    "workbook:351",
+    "workbook:357",
+    "workbook:401",
+    "workbook:415",
+    "workbook:416",
+    "workbook:421",
+    "workbook:427",
+    "workbook:436",
+    "workbook:469",
+    "workbook:473",
+    "workbook:476",
+    "workbook:478",
+    "workbook:480",
+    "workbook:496",
+    "workbook:510",
+    "workbook:514",
+    "workbook:519",
+    "workbook:523",
+    "workbook:524",
+    "workbook:542",
+    "workbook:557"
+  ],
+  "proposals": [
+    {
+      "recordId": "workbook:6",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Myoko Suginohara Ski Resort",
+      "officialNameJa": "妙高杉ノ原スキー場",
+      "officialUrl": "https://www.princehotels.co.jp/ski/myoko/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: the prefectural master directory is not the resort’s operating-status channel, and no operator or municipal 2026-27 operating notice was located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:19a",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "GALA Yuzawa Snow Resort",
+      "officialNameJa": "GALA湯沢スキー場",
+      "officialUrl": "https://gala.co.jp/winter/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: no GALA operator or municipal page explicitly establishing 2026-27 operation was located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:19b",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Yuzawa Kogen Ski Resort",
+      "officialNameJa": "湯沢高原スキー場",
+      "officialUrl": "https://www.yuzawakogen.com/winter/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: no Yuzawa Kogen operator or municipal page explicitly establishing 2026-27 operation was located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:19c",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Ishiuchi Maruyama Ski Resort",
+      "officialNameJa": "石打丸山スキー場",
+      "officialUrl": "https://ishiuchi.or.jp/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: operator-specific 2026-27 season-pass/lift-ticket notice explicitly identifies this ski area and its 2026-27 season; this is current-season operation evidence.",
+      "statusEvidenceUrl": "https://ishiuchi.or.jp/winter/",
+      "statusEvidenceQuote": "2026-2027ウィンターシーズン シーズン券「スーパー早割」販売開始！ 2026年6月30日 News。",
+      "freshnessReviewRequired": false
+    },
+    {
+      "recordId": "workbook:21",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Arai Mountain Resort",
+      "officialNameJa": "アライマウンテンリゾート",
+      "officialUrl": "https://www.lottehotel.com/arai-resort/ja.html",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: the directory establishes only the prior season, and no operator-issued 2026-27 operating notice was located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:22",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "JAM Fukui Katsuyama Mountain Resort",
+      "officialNameJa": "JAM福井勝山マウンテンリゾート",
+      "officialUrl": "https://jamresort.jp/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: the generic government-linked directory is not an operator status channel, and no operator or municipal 2026-27 operating notice was located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:23",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Akakura Onsen Ski Resort",
+      "officialNameJa": "赤倉温泉スキー場",
+      "officialUrl": "https://akakura-ski.com/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: the operator’s 2026-27 early-ticket material is not operating-status evidence, and no explicit 2026-27 operations notice was located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:43",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Joetsu Kokusai Ski Resort",
+      "officialNameJa": "上越国際スキー場",
+      "officialUrl": "https://www.jkokusai.co.jp/ski",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: no operator or municipal 2026-27 operating notice for Joetsu Kokusai was located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:44",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Ikenotaira Onsen Alpen Blick Ski Resort",
+      "officialNameJa": "池の平温泉アルペンブリックスキー場",
+      "officialUrl": "https://alpenblick-resort.com/ski/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: operator-specific 2026-27 season-pass/lift-ticket notice explicitly identifies this ski area and its 2026-27 season; this is current-season operation evidence.",
+      "statusEvidenceUrl": "https://alpenblick-resort.com/ski/26-27-ticket-info",
+      "statusEvidenceQuote": "2026-2027シーズンの池の平温泉アルペンブリックスキー場における、シーズン券・リフト券の販売情報をお知らせします。",
+      "freshnessReviewRequired": false
+    },
+    {
+      "recordId": "workbook:45",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Hakusan Ichirino Onsen Ski Resort",
+      "officialNameJa": "白山一里野温泉スキー場",
+      "officialUrl": "https://www.sam-hakusan.com/ichirino/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: the operator source establishes only the completed 2025-26 season and no 2026-27 operating notice was located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:49",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Iwappara Ski Resort",
+      "officialNameJa": "岩原スキー場",
+      "officialUrl": "https://iwa-ppara.com/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: no operator or municipal page explicitly establishing Iwappara’s 2026-27 operation was located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:92",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Fukui Izumi Ski Resort",
+      "officialNameJa": "福井和泉スキー場",
+      "officialUrl": "https://fukuiizumi.com/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: 2026-27 season-pass sales do not establish operation, and no explicit operator operating notice was located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:95",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Tainai Ski Resort",
+      "officialNameJa": "胎内スキー場",
+      "officialUrl": "https://tainairesort.jp/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: no operator or municipal 2026-27 operating notice for Tainai was located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:96",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Muikamachi Hakkaisan Ski Resort",
+      "officialNameJa": "六日町八海山スキー場",
+      "officialUrl": "https://www.princehotels.co.jp/ski/hakkaisan/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: no operator page explicitly establishing Muikamachi Hakkaisan’s 2026-27 operation was located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:105",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Kandatsu Snow Resort",
+      "officialNameJa": "神立スノーリゾート",
+      "officialUrl": "https://www.kandatsu.com/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: no operator or municipal 2026-27 operating notice for Kandatsu was located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:118",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "NASPA Ski Garden",
+      "officialNameJa": "NASPAスキーガーデン",
+      "officialUrl": "https://www.naspanewotani.com/ski/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: no operator page explicitly establishing NASPA Ski Garden’s 2026-27 operation was located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:127",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "New Greenpia Tsunan Ski Resort",
+      "officialNameJa": "ニュー・グリーンピア津南スキー場",
+      "officialUrl": "https://new-greenpia.com/ski/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: no operator or municipal 2026-27 operating notice for New Greenpia Tsunan was located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:134",
+      "proposedStatus": "remain_unclear",
+      "officialUrl": "https://chateau-shiozawa.jp",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Searched シャトー塩沢スキー場 + 2025-26/営業 and the operator domain; only third-party seasonal listings surfaced, not an official dated calendar. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:157",
+      "proposedStatus": "remain_unclear",
+      "officialUrl": "http://www.itsukamachi.jp/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Searched 五日町スキー場 + 2025-26/営業/閉鎖 and the former operator domain; no current operator or municipal status notice located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:167",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Yuzawa Nakazato Snow Resort",
+      "officialNameJa": "湯沢中里スノーリゾート",
+      "officialUrl": "https://www.yuzawa-nakazato.com/winter/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: current season-pass promotion does not establish slope/lift operation, and no explicit 2026-27 operating notice was located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:178",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Mikawa Onsen Ski Resort",
+      "officialNameJa": "三川温泉スキー場",
+      "officialUrl": "https://www.town.aga.niigata.jp/kanko_rekishi/mikawa_onsenski/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: the prior-season directory record was not replaced by an explicit municipal 2026-27 operating notice. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:206",
+      "proposedStatus": "remain_unclear",
+      "officialUrl": "https://city-hakusan.com/shishiku/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Searched スカイ獅子吼スキー場 + 休業/閉鎖 and Hakusan municipal tourism pages; current ropeway/park material does not establish ski operations. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:219",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Kuzuryu Ski Resort",
+      "officialNameJa": "九頭竜スキー場",
+      "officialUrl": "https://kuzuryu-skiland.com/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: generic tourism-guide hours do not establish a current season, and no operator or municipal 2026-27 operating notice was located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:245",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Koide Ski Resort",
+      "officialNameJa": "小出スキー場",
+      "officialUrl": "https://www.sp-koide.org/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: no operator or municipal 2026-27 operating notice for Koide was located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:278",
+      "proposedStatus": "remain_unclear",
+      "officialUrl": "http://www.city.nanao.ishikawa.jp/yamabiko/home/korosa.html",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Searched 七尾コロサスキー場 + 2025-26/営業/閉鎖 and Nanao municipal sources; no current authoritative status statement found. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:281",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Hakusan Seymour Ski Resort",
+      "officialNameJa": "白山セイモアスキー場",
+      "officialUrl": "https://www.sam-hakusan.com/seymour/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: the area-name label does not establish Seymour operation, and no explicit 2026-27 operator operating notice was located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:283",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Searched 金谷山スキー場 + 2025-26/営業 and Joetsu municipal/tourism pages; no current season page tied unambiguously to this intake row was located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:303",
+      "proposedStatus": "remain_unclear",
+      "officialUrl": "https://www.ludens-village.com/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Searched ルーデンス湯沢 + 2025-26/営業/休業 and Yuzawa municipal sources; reachable lodging material is not ski-operation evidence. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:304",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Shinbo Family Ski Resort",
+      "officialNameJa": "新保ファミリースキー場",
+      "officialUrl": "http://www.ski.ikeda-kibou.com/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: the generic government-linked directory does not establish a current season, and the operator site showed only 2025-26 material. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:324",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Nakazato Snow Wood Ski Resort",
+      "officialNameJa": "中里スノーウッドスキー場",
+      "officialUrl": "https://www.yuzawa-nakazato.com/winter/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: the assigned URL belongs to Yuzawa Nakazato, while no distinct operator or municipal current notice for Nakazato Snow Wood was located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:332",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Muica Snow Resort",
+      "officialNameJa": "ムイカスノーリゾート",
+      "officialUrl": "https://www.muikamachi.com/ski/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: the operator says 2026-27 discounts remain under consideration, which does not explicitly establish operation. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:351",
+      "proposedStatus": "remain_unclear",
+      "officialUrl": "https://city-hakusan.com/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Searched 白峰スキー競技場 + 2025-26/営業/閉鎖 and Hakusan municipal pages; no current official operating or closure decision located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:357",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Searched 浦佐国際スキー場 + 営業終了/閉鎖 and Minamiuonuma/Uonuma municipal sources; no authoritative status notice found. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:401",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Seki Onsen Ski Resort",
+      "officialNameJa": "関温泉スキー場",
+      "officialUrl": "http://sekionsen.jp/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: no operator or municipal 2026-27 operating notice for Seki Onsen was located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:415",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Cupid Valley Ski Resort",
+      "officialNameJa": "キューピットバレイスキー場",
+      "officialUrl": "https://www.yukidaruma-kogen.com/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: 2026-27 season-pass sales do not establish lift/slope operation, and no explicit operating notice was located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:416",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Searched マウンテンパーク津南スキー場 + 営業終了/休業 and Tsunan municipal sources; no current authoritative statement located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:421",
+      "proposedStatus": "remain_unclear",
+      "officialUrl": "https://www.apahotel.com/ja_ja/myoko/?hotel_id=32726",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Searched APA妙高パインバレー + 営業終了/閉鎖 and APA/Myoko sources; the hotel page does not evidence skiing and no ski-status notice was found. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:427",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Searched 小千谷山本山高原スキー場 + 営業終了/閉鎖 and Ojiya municipal sources; no current authoritative status statement found. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:436",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Ninox Snow Park",
+      "officialNameJa": "ニノックススノーパーク",
+      "officialUrl": "https://www.ninox.co.jp/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: the operator’s 2026-27 early-ticket announcement is sales material, not an explicit operating notice. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:469",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Searched 宇奈月温泉スキー場 + 営業終了/閉鎖 and Kurobe municipal/tourism sources; no official closure or current ski calendar located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:473",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Searched 森山高原スキー場 + 営業終了/閉鎖 and Obama/Fukui municipal sources; no current authoritative status statement found. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:476",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Searched アクシオムパーク スキー場 + 営業終了/閉鎖 and Tokamachi municipal sources; no official status notice located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:478",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Searched 関越国際大原スキー場 + 営業終了/閉鎖 and Uonuma municipal sources; no official status notice located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:480",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Searched オムサンタの森スキー場 + 営業終了/閉鎖 and Nanto municipal sources; no current authoritative status statement found. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:496",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Searched とちおファミリースキー場 + 2025-26/営業 and Nagaoka municipal/operator sources; results were not authoritative enough to override the prior unclear review. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:510",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Searched 閑乗寺スキー場 + 営業終了/閉鎖 and Takaoka/Tonami municipal sources; no authoritative current status notice found. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:514",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Searched 大湯温泉スキー場 + 営業終了/閉鎖 and Uonuma municipal sources; no current official status statement found. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:519",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Searched 鳥越高原大日スキー場 + 営業終了/閉鎖 and Hakusan municipal sources; no current authoritative status notice found. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:523",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Searched 安田町民スキー場 + 営業終了/閉鎖 and Agano municipal sources; no current official status statement found. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:524",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Searched 角神スキー場 + 営業終了/閉鎖 and Aga/Agano municipal sources; no current authoritative status notice found. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:542",
+      "proposedStatus": "remain_unclear",
+      "officialNameEn": "Okuradake Kogen Ski Resort",
+      "officialNameJa": "大倉岳高原スキー場",
+      "officialUrl": "https://komatsu-ccf.com/sports/ookuradake_kogen_ski_resort/",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: the generic government-linked directory does not establish a current season, and no municipal 2026-27 operating notice was located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    },
+    {
+      "recordId": "workbook:557",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Pass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Searched 焼山温泉スキー場 + 営業終了/閉鎖 and Itoigawa municipal sources; no current authoritative status notice found. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon."
+    }
+  ]
+}

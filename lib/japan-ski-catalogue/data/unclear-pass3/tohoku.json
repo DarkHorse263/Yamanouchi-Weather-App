@@ -1,0 +1,328 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-08-26",
+  "sourceReviewFiles": [
+    "lib/japan-ski-catalogue/data/reviews/tohoku-north.json",
+    "lib/japan-ski-catalogue/data/reviews/tohoku-south.json"
+  ],
+  "assignedRecordIds": [
+    "workbook:119",
+    "workbook:265",
+    "workbook:267",
+    "workbook:285",
+    "workbook:302",
+    "workbook:319",
+    "workbook:327",
+    "workbook:341",
+    "workbook:356",
+    "workbook:383",
+    "workbook:385",
+    "workbook:395",
+    "workbook:413",
+    "workbook:426",
+    "workbook:429",
+    "workbook:432",
+    "workbook:437",
+    "workbook:454",
+    "workbook:455",
+    "workbook:457",
+    "workbook:458",
+    "workbook:479",
+    "workbook:494",
+    "workbook:527",
+    "workbook:528",
+    "workbook:532",
+    "workbook:292",
+    "workbook:309",
+    "workbook:326",
+    "workbook:375",
+    "workbook:439",
+    "workbook:448",
+    "workbook:453",
+    "workbook:460",
+    "workbook:541",
+    "workbook:547"
+  ],
+  "proposals": [
+    {
+      "recordId": "workbook:119",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Hakkoda Kokusai Ski Area",
+      "officialNameJa": "八甲田国際スキー場",
+      "officialUrl": "https://www.hakkouda-p.com/cn21/pg110.html",
+      "statusEvidenceUrl": "https://www.hakkouda-p.com/cn21/pg110.html",
+      "statusEvidenceQuote": "八甲田国際スキー場（2026-2027シーズン） 2026年6月1日よりリフトシーズン券の販売を開始致します。",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "The ski-area operator page, rather than the ropeway's generic all-season page, explicitly advertises the 2026-27 lift season."
+    },
+    {
+      "recordId": "workbook:265",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Third pass searched 奥中山高原スキー場, 一戸町, 2025-26/2026 営業・営業終了 and the operator ski subpage. The maintained resort site did not provide a dated recent-season operating or closure notice; no status is inferred."
+    },
+    {
+      "recordId": "workbook:267",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Oirase Keiryu Onsen Ski Area",
+      "officialNameJa": "奥入瀬渓流温泉スキー場",
+      "officialUrl": "https://oirase.or.jp/ski/ski.htm",
+      "statusEvidenceUrl": "https://oirase.or.jp/ski/ski.htm",
+      "statusEvidenceQuote": "2026.1.31(土）2.1（日）アルペンスキー大会開催に伴い…第二ゲレンデ及びスノーエスカレーターをご利用願います。",
+      "evidenceAsOf": "2026-08-26",
+      "freshnessReviewRequired": true,
+      "notes": "The operator's own ski-area page records January 2026 ski operations and a competition; no 2026-27 notice was located."
+    },
+    {
+      "recordId": "workbook:285",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Tengamori Ski Area",
+      "officialNameJa": "天下森スキー場",
+      "officialUrl": "https://www.city.yokote.lg.jp/shisetsu/1001526/1002628.html",
+      "statusEvidenceUrl": "https://www.city.yokote.lg.jp/shisetsu/1001526/1002628.html",
+      "statusEvidenceQuote": "2025-26シーズンの営業は終了いたしました。来シーズンも皆様のお越しを心よりお待ちしております！",
+      "evidenceAsOf": "2026-08-26",
+      "freshnessReviewRequired": true,
+      "notes": "Yokote City's current facility page resolves the previous dead candidate domain and confirms the completed season. The intake geography of Akita City is incorrect; the facility is in Yokote."
+    },
+    {
+      "recordId": "workbook:302",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Shichinohe Town Ski Area",
+      "officialNameJa": "七戸町営スキー場",
+      "officialUrl": "https://www.shichinohe-kankou.jp/ski/",
+      "statusEvidenceUrl": "https://www.shichinohe-kankou.jp/category/ski-news/ski-news_572.html",
+      "statusEvidenceQuote": "2026/3/1を持ちまして今季シーズンの営業は終了致します。また来シーズンのご利用をお待ちしております。",
+      "evidenceAsOf": "2026-08-26",
+      "freshnessReviewRequired": true,
+      "notes": "The facility's Shichinohe tourism-association operating notice gives the final 2025-26 operating dates; no 2026-27 notice was found."
+    },
+    {
+      "recordId": "workbook:319",
+      "proposedStatus": "closed",
+      "officialNameEn": "Fujisato Town Ski Area",
+      "officialNameJa": "藤里町営スキー場",
+      "officialUrl": "https://www.town.fujisato.akita.jp/kanko/notices/3201",
+      "statusEvidenceUrl": "https://www.town.fujisato.akita.jp/kanko/notices/3201",
+      "statusEvidenceQuote": "諸般の事情により、令和7年のウインターシーズンを前に事業を終了することとなりました。",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Fujisato Town's 12 December 2025 notice explicitly ends the municipal ski-area business before the 2025 winter season."
+    },
+    {
+      "recordId": "workbook:327",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Third pass searched 横手公園スキー場 and 横手市 with 2025-26/2026 operating and closure terms. The authoritative result concerns the distinct Tengamori Ski Area; it cannot be assigned to this Yokote Park row."
+    },
+    {
+      "recordId": "workbook:341",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Namari Onsen Ski Area",
+      "officialNameJa": "鉛温泉スキー場",
+      "officialUrl": "https://www.city.hanamaki.iwate.jp/ski/index.html",
+      "statusEvidenceUrl": "https://www.city.hanamaki.iwate.jp/ski/index.html",
+      "statusEvidenceQuote": "【25'-26'シーズン営業終了のお知らせ】3月8日（日曜）をもちまして、25'-26シーズンの営業を終了致しました。",
+      "evidenceAsOf": "2026-08-26",
+      "freshnessReviewRequired": true,
+      "notes": "Hanamaki City's current municipal ski-area page confirms operation in the completed 2025-26 season."
+    },
+    {
+      "recordId": "workbook:356",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Third pass searched 赤羽根スキー場 and Ichinoseki municipal sources with current-season and closure terms. No authoritative source resolved this raw name to a ski facility."
+    },
+    {
+      "recordId": "workbook:383",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Third pass searched 大曲スキー場 and Daisen municipal sources. Evidence for the separate Ohdai Ski Area remains insufficient to identify this distinct Omagari row."
+    },
+    {
+      "recordId": "workbook:385",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Shigarai Ski Area",
+      "officialNameJa": "志賀来スキー場",
+      "officialUrl": "https://www.town.nishiwaga.lg.jp/kanko_bunka_sports/sports/1571.html",
+      "statusEvidenceUrl": "https://www.town.nishiwaga.lg.jp/kanko_bunka_sports/sports/1571.html",
+      "statusEvidenceQuote": "2025-2026の湯田スキー場及び志賀来スキー場につきましては、3月8日をもって、今シーズンの営業を終了しました。",
+      "evidenceAsOf": "2026-08-26",
+      "freshnessReviewRequired": true,
+      "notes": "Nishiwaga Town's 2026 municipal notice resolves the intake's garbled name. The intake municipality is incorrect."
+    },
+    {
+      "recordId": "workbook:395",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Yuda Ski Area",
+      "officialNameJa": "湯田スキー場",
+      "officialUrl": "https://www.town.nishiwaga.lg.jp/kanko_bunka_sports/sports/1571.html",
+      "statusEvidenceUrl": "https://www.town.nishiwaga.lg.jp/kanko_bunka_sports/sports/1571.html",
+      "statusEvidenceQuote": "2025-2026の湯田スキー場及び志賀来スキー場につきましては、3月8日をもって、今シーズンの営業を終了しました。",
+      "evidenceAsOf": "2026-08-26",
+      "freshnessReviewRequired": true,
+      "notes": "Nishiwaga Town's current notice explicitly confirms the completed 2025-26 season."
+    },
+    {
+      "recordId": "workbook:413",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Third pass found an Oshu City ordinance establishing 越路スキー場 and a 2023 city report saying it was then suspended, but no current municipal 2025-26/2026 status notice. This does not establish its present closure or operation."
+    },
+    {
+      "recordId": "workbook:426",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Kunimidaira Ski Resort",
+      "officialNameJa": "国見平スキー場",
+      "officialUrl": "https://www.kunimidaira.com/",
+      "statusEvidenceUrl": "https://www.city.oshu.iwate.jp/kanko/osusume/1/2/707.html",
+      "statusEvidenceQuote": "令和8年3月16日をもって、令和7年度シーズンの営業を終了しました。",
+      "evidenceAsOf": "2026-08-26",
+      "freshnessReviewRequired": true,
+      "notes": "Oshu City's 17 March 2026 facility notice confirms the season. The intake geography is incorrect: the city places the area in Oshu."
+    },
+    {
+      "recordId": "workbook:429",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Third pass searched 五城目恋地スキー場 and Gojome Town sources using current-operation, suspension and closure terms. No authoritative current-status notice was located."
+    },
+    {
+      "recordId": "workbook:432",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Third pass searched 小安温泉スキー場, 秋ノ宮スキー場 and Yuzawa City sources. No official source established whether this is a current facility or its relationship to the separate Akinomiya row."
+    },
+    {
+      "recordId": "workbook:437",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Third pass searched 東方スキー場 and Hiranai Town sources with 2025-26/2026 operation and closure terms. The romanized intake name remains unresolved by an authoritative source."
+    },
+    {
+      "recordId": "workbook:454",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Soyumura 229 Ski Land",
+      "officialNameJa": "創遊村229スキーランド",
+      "officialUrl": "https://www.town.takko.lg.jp/index.cfm/11,0,37,164,html",
+      "statusEvidenceUrl": "https://www.town.takko.lg.jp/index.cfm/11,0,37,164,html",
+      "statusEvidenceQuote": "2025-2026 シーズンの営業期間と営業時間…令和８年１月９日（金）から令和８年３月１日（日）まで。",
+      "evidenceAsOf": "2026-08-26",
+      "freshnessReviewRequired": true,
+      "notes": "Takko Town's facility page gives 2025-26 dates. The intake geography is incorrect: the town identifies the facility as being in Takko."
+    },
+    {
+      "recordId": "workbook:455",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Third pass searched 相馬ロマントピアスキー場 and Hirosaki municipal/operator sources with operation, closure and suspension terms. No authoritative current ski-operation or closure notice was located."
+    },
+    {
+      "recordId": "workbook:457",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Third pass searched 岩山パークスキー場 and Morioka City sources. Current municipal park material did not establish a ski-area operation or formal closure, and the intake's Ichinoseki geography conflicts with the name."
+    },
+    {
+      "recordId": "workbook:458",
+      "proposedStatus": "merged_into",
+      "officialNameEn": "Ani Ski Area",
+      "officialNameJa": "阿仁スキー場",
+      "officialUrl": "https://www.aniski.jp/",
+      "statusEvidenceUrl": "https://www.city.kitaakita.akita.jp/archive/p20241204134703",
+      "statusEvidenceQuote": "森吉山「阿仁スキー場」のスキー場開きと安全祈願祭",
+      "evidenceAsOf": "2026-08-26",
+      "mergedIntoOfficialName": "Ani Ski Area",
+      "notes": "The alternate word order matches the official 森吉山阿仁スキー場 identity already represented by workbook:73; this is not a separate area."
+    },
+    {
+      "recordId": "workbook:479",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Third pass searched 田山スキー場 and Hachimantai municipal sources. The name points to Hachimantai rather than the intake's Ichinoseki geography, but no authoritative current-status entity match was established."
+    },
+    {
+      "recordId": "workbook:494",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Third pass searched 岩木山スキー場 with Hirosaki and Hirakawa government sources. The generic name cannot defensibly be assigned to either Aomori Spring or Iwakisan Hyakuzawa."
+    },
+    {
+      "recordId": "workbook:527",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Third pass searched 森吉山森吉スキー場 and 森吉スキー場 with Kitaakita City sources. City material confirms the distinct official 森吉山阿仁スキー場, but not this row as a separate facility or duplicate."
+    },
+    {
+      "recordId": "workbook:528",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Third pass searched 秋ノ宮スキー場, 小安温泉スキー場 and Yuzawa City sources with 2025-26/2026 operation and closure terms. No authoritative result resolved this entity."
+    },
+    {
+      "recordId": "workbook:532",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Third pass searched 盛岡ハイランドスキー場 and Morioka City sources with current operation, closure and suspension terms. No authoritative current ski-facility status source was found."
+    },
+    {
+      "recordId": "workbook:292",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Third pass searched 西川町民スキー場 and Nishikawa Town sources with 2025-26/2026 operation, closure and suspension terms. No authoritative current-status notice was found."
+    },
+    {
+      "recordId": "workbook:309",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Third pass searched 会津坂下町営スキー場 and Aizubange Town sources with current-season and closure terms. No municipal/operator status notice was located."
+    },
+    {
+      "recordId": "workbook:326",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Third pass searched 横向温泉スキー場 and relevant municipal sources with 2025-26/2026 operation and closure terms. Accommodation references do not establish ski-area status."
+    },
+    {
+      "recordId": "workbook:375",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Third pass searched 白鷹町営スキー場 and Shirataka Town sources with current-season and closure terms. No authoritative operating calendar or closure notice was found."
+    },
+    {
+      "recordId": "workbook:439",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Third pass searched 栗子国際スキー場 and Yonezawa municipal sources. Historical closure claims were discovery-only; no authoritative closure decision was located."
+    },
+    {
+      "recordId": "workbook:448",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Third pass searched 昭和村営スキー場 and Showa Village sources. Village ski-club and off-site ski-lesson references do not establish a municipal ski-area operating status."
+    },
+    {
+      "recordId": "workbook:453",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Third pass searched 白河高原スキー場 and Shirakawa-area municipal sources with 2025-26/2026 status terms. No authoritative page resolved this raw name."
+    },
+    {
+      "recordId": "workbook:460",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Third pass searched サンマリーナ玉庭スキーパーク and Kawanishi Town sources with operation and closure terms. No authoritative facility-status source was found."
+    },
+    {
+      "recordId": "workbook:541",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Third pass searched 最上川スキー場 and Shinjo/Mogami government sources. No authoritative source identified the raw-name facility or its current status."
+    },
+    {
+      "recordId": "workbook:547",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Third pass searched 喜多方市五分一スキー場 and Kitakata City sources. Historical directory closure claims were not promoted without an official closure record."
+    }
+  ]
+}

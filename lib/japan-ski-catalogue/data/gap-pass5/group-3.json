@@ -1,0 +1,241 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-08-26",
+  "assignedRecordIds": [
+    "workbook:459",
+    "workbook:461",
+    "workbook:463",
+    "workbook:466",
+    "workbook:487",
+    "workbook:489",
+    "workbook:493",
+    "workbook:550"
+  ],
+  "proposals": [
+    {
+      "recordId": "workbook:459",
+      "fields": {},
+      "unresolved": [
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.city.obanazawa.yamagata.jp/kanko/hanagasa-kogen/",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official Obanazawa City ski-area page provides season and visitor information but no explicit ski-area base or top elevation."
+        },
+        {
+          "sourceUrl": "https://goshozan.net/wp-content/uploads/2024/11/%E3%82%B9%E3%82%AD%E3%83%BC%E5%A0%B4%E3%83%91%E3%83%B3%E3%83%95%E3%83%AC%E3%83%83%E3%83%88%E5%86%85.pdf",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator trail-map brochure labels courses, lifts, lengths, and gradients, but does not label a base or summit elevation."
+        }
+      ],
+      "queriesExhausted": [
+        "site:city.obanazawa.yamagata.jp 花笠高原 スキー場 標高",
+        "site:obanazawa-ski.jp 花笠高原 標高",
+        "花笠高原スキー場 PDF 標高"
+      ],
+      "notes": "Coordinates are already resolved. No explicit official ski-area base/top value was recovered; third-party elevation listings were not used."
+    },
+    {
+      "recordId": "workbook:461",
+      "fields": {},
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://ski-kitanaganuma.com/access/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator access page gives travel times only; it contains no destination map, latitude/longitude, or elevation."
+        },
+        {
+          "sourceUrl": "https://ski-kitanaganuma.com/facility/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official facility page describes courses and facilities but gives no explicit base/top elevations."
+        },
+        {
+          "sourceUrl": "https://naganuma-kanko.com/en/spot/291/",
+          "sourceType": "municipal_tourism",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official Naganuma tourism listing identifies the facility and street address but provides neither facility coordinates nor ski-area base/top elevations."
+        }
+      ],
+      "queriesExhausted": [
+        "site:ski-kitanaganuma.com 北長沼スキー場 標高",
+        "site:maoi.jp 北長沼スキー場 座標",
+        "北長沼スキー場 PDF 標高"
+      ],
+      "notes": "No operator access-map destination embed or government GIS/open-data facility coordinate was found. Third-party coordinate and elevation listings were rejected."
+    },
+    {
+      "recordId": "workbook:463",
+      "fields": {},
+      "unresolved": [
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://ski.yumeno-taira.com/access/index.php",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator access page is the already accepted explicit-coordinate destination source; it does not state ski-area base/top elevations."
+        },
+        {
+          "sourceUrl": "https://ski.yumeno-taira.com/slope/index.php",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official slope page identifies top and intermediate lift unload points and course gradients, but does not state their elevations or a base elevation."
+        }
+      ],
+      "queriesExhausted": [
+        "site:ski.yumeno-taira.com となみ夢の平スキー場 標高",
+        "となみ夢の平スキー場 PDF 標高",
+        "となみ夢の平スキー場 公式 標高"
+      ],
+      "notes": "The verified supplement already retains the operator access-map destination coordinate. No elevation endpoint was inferred from lift or course information."
+    },
+    {
+      "recordId": "workbook:466",
+      "fields": {},
+      "unresolved": [
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.vill.sarufutsu.hokkaido.jp/",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The Village's official public information and ski-season circular trail do not publish explicit ski-area base and top elevations."
+        },
+        {
+          "sourceUrl": "https://www.vill.sarufutsu.hokkaido.jp/kairan/pdf/783_09080316.pdf",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official 2025-26 circular gives operating dates for the village ski area, not elevation endpoints."
+        }
+      ],
+      "queriesExhausted": [
+        "site:vill.sarufutsu.hokkaido.jp 猿払村営スキー場 標高",
+        "site:vill.sarufutsu.hokkaido.jp 猿払村営スキー場 PDF",
+        "猿払村 オープンデータ スキー場"
+      ],
+      "notes": "Coordinates are already resolved. No explicit official ski-area base/top value was recovered."
+    },
+    {
+      "recordId": "workbook:487",
+      "fields": {},
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://takinopark.com/news/takinosnowworld/",
+          "sourceType": "national_government_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The national-park operator's Snow World page describes the family slope and its average 7-degree gradient but has no explicit latitude/longitude or base/top elevation."
+        },
+        {
+          "sourceUrl": "https://takinopark.com/access/",
+          "sourceType": "national_government_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official park access page provides directions and a park map, not a coordinate-bearing destination embed specifically for the Snow World ski slope."
+        },
+        {
+          "sourceUrl": "https://takinopark.com/digital_map",
+          "sourceType": "national_government_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official digital park map locates park amenities but does not explicitly provide a latitude/longitude destination or base/top elevations for the ski area."
+        }
+      ],
+      "queriesExhausted": [
+        "site:takinopark.com 滝野スノーワールド 座標",
+        "site:mlit.go.jp 滝野スノーワールド 座標",
+        "site:takinopark.com 滝野スノーワールド 標高"
+      ],
+      "notes": "No eligible ski-area coordinate or explicit base/top elevation was recovered; park-level and third-party map points were not substituted."
+    },
+    {
+      "recordId": "workbook:489",
+      "fields": {},
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://nikkoyumoto-ski.com/guide.html",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator course guide describes courses and lift use but does not state ski-area base and top elevations."
+        },
+        {
+          "sourceUrl": "https://nikkoyumoto-ski.com/access.html",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator access page supplies directions and a map image, but no explicit latitude/longitude destination value."
+        }
+      ],
+      "queriesExhausted": [
+        "site:nikko.lg.jp 日光湯元温泉スキー場 座標",
+        "site:nikkoyumoto-ski.com 標高",
+        "日光湯元温泉スキー場 公式 PDF 標高"
+      ],
+      "notes": "No operator access-map destination embed or government GIS/open-data facility coordinate was recovered, and no explicit ski-area base/top value was found."
+    },
+    {
+      "recordId": "workbook:493",
+      "fields": {},
+      "unresolved": [
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.siroimori.co.jp/yokone-ski/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official operator page states a 129 m vertical drop and 444 m run length, not base and top elevations."
+        },
+        {
+          "sourceUrl": "https://www.siroimori.co.jp/yokone-ski/kannai.html",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official facility-information page repeats the vertical/drop information but gives no base/top elevation values."
+        }
+      ],
+      "queriesExhausted": [
+        "site:siroimori.co.jp 横根スキー場 標高",
+        "横根スキー場 PDF 標高",
+        "横根スキー場 公式 標高"
+      ],
+      "notes": "Coordinates are already resolved. A base or summit was not calculated from the published vertical drop."
+    },
+    {
+      "recordId": "workbook:550",
+      "fields": {},
+      "unresolved": [
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.town.wassamu.hokkaido.jp/school-board/facility/ski-resort/",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official municipal ski-area page states that the lift ride to the top is about 500 m and the elevation difference is about 120 m, but does not state base and top elevations."
+        }
+      ],
+      "queriesExhausted": [
+        "site:town.wassamu.hokkaido.jp 東山スキー場 標高",
+        "site:town.wassamu.hokkaido.jp 東山スキー場 PDF",
+        "和寒東山スキー場 公式 標高"
+      ],
+      "notes": "Coordinates are already resolved. No elevation endpoint was derived from the published 120 m vertical difference."
+    }
+  ]
+}

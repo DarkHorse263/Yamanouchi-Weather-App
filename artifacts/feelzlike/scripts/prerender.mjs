@@ -30,7 +30,14 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { REGIONS, regionFeatures, townFeatures, regionMountains, regionJapanese } from "./seo-regions.mjs";
+import {
+  REGIONS,
+  regionFeatures,
+  townFeatures,
+  regionMountains,
+  regionJapanese,
+  publishedCatalogueMountainRoutes,
+} from "./seo-regions.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, "..", "dist", "public");
@@ -434,15 +441,29 @@ for (const region of REGIONS) {
   // identical to generate-sitemap.mjs / generate-rewrites.mjs.
   for (const m of regionMountains(region)) {
     const jm = ja?.mountains[m.id] || {};
-    const jaMountainDesc = ja
+    const catalogueMountain = m.catalogueRecord;
+    const mountainNameJa = jm.nameJa || m.nameJa;
+    const jaMountainDesc = catalogueMountain
+      ? `${mountainNameJa || m.name}（${regionNameJa}）の天気予報と現在の気象情報。`
+      : ja
       ? `${jm.nameJa || m.name}（${regionNameJa}）の積雪・天気予報・リフト情報をライブでチェック。${jm.blurbJa ? `${jm.blurbJa}。` : ""}`
       : null;
     addJa(
       `/${region.slug}/mountain/${m.id}`,
-      `${withJaName(m.name, jm.nameJa)} · snow conditions & forecast · ${region.name} · feelzlike`,
-      `Live snow conditions, weather forecast, and lift info for ${m.name} in the ${region.name}.`,
+      catalogueMountain
+        ? `${withJaName(m.name, mountainNameJa)} · weather forecast · ${region.name} · feelzlike`
+        : `${withJaName(m.name, mountainNameJa)} · snow conditions & forecast · ${region.name} · feelzlike`,
+      catalogueMountain
+        ? `Weather forecast and current conditions for ${m.name} in ${region.name}.`
+        : `Live snow conditions, weather forecast, and lift info for ${m.name} in the ${region.name}.`,
       jaMountainDesc,
-      `<main>
+      catalogueMountain
+        ? `<main>
+      <h1>${esc(m.name)} · ${esc(region.name)}</h1>
+      <p>Weather forecast and current conditions for ${esc(m.name)}.</p>
+      <p>Part of the <a href="/${region.slug}">${esc(region.name)}</a>.</p>
+    </main>`
+        : `<main>
       <h1>${esc(m.name)} · ${esc(region.name)}</h1>
       <p>Live snow conditions, weather by elevation, and the extended forecast for ${esc(m.name)}.</p>
       <p>Part of the <a href="/${region.slug}">${esc(region.name)}</a>.</p>
@@ -512,7 +533,33 @@ for (const region of REGIONS) {
   }
 }
 
+// Render every published catalogue mountain route, including records assigned
+// to regions that do not yet have a supported region/base-town frontend page.
+// These intentionally use only generic weather language: publication alone
+// does not establish lift, webcam, road, or transport information.
+const prerenderedPaths = new Set(routes.map(({ path }) => path));
+for (const { path, record } of publishedCatalogueMountainRoutes) {
+  if (prerenderedPaths.has(path)) continue;
+  addJa(
+    path,
+    `${withJaName(record.name, record.nameJa)} · weather forecast · feelzlike`,
+    `Weather forecast and current conditions for ${record.name} in Japan.`,
+    `${record.nameJa || record.name}の天気予報と現在の気象情報。`,
+    `<main>
+      <h1>${esc(record.name)}${record.nameJa ? `（${esc(record.nameJa)}）` : ""}</h1>
+      <p>Weather forecast and current conditions for ${esc(record.name)} in Japan.</p>
+      <p lang="ja">${esc(`${record.nameJa || record.name}の天気予報と現在の気象情報。`)}</p>
+    </main>`,
+  );
+  prerenderedPaths.add(path);
+}
+
 // ── Write prerendered files ───────────────────────────────────────────────
+
+if (process.env.ROUTE_MANIFEST_JSON === "1") {
+  process.stdout.write(`${JSON.stringify(routes.map(({ path }) => path))}\n`);
+  process.exit(0);
+}
 
 let template;
 try {

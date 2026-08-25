@@ -70,6 +70,8 @@ import { motion } from "framer-motion";
 import { format, parseISO } from "date-fns";
 import { getMountainWebcams } from "@/data/webcams";
 import { useEffect, useState } from "react";
+import { getPublishedMountainCapabilities } from "@/regions/japan-catalogue";
+import { mountainPageMetadata } from "@/lib/mountainPageMetadata";
 
 /**
  * Region-agnostic mountain weather page.
@@ -109,6 +111,8 @@ export function MountainDetail() {
   // and so the HEADLINE snow can be derived on-mountain (mid-mountain) rather
   // than at the village. Temp/feels-like/current stay at the village.
   const mountainCfg = region.mountains?.find((m) => m.id === locationId);
+  const publicationCapabilities = getPublishedMountainCapabilities(region.id, locationId);
+  const powderAlertsAvailable = publicationCapabilities?.powderAlertsAvailable ?? true;
   const elevLat = mountainCfg?.lat;
   const elevLng = mountainCfg?.lng;
   const elevSummitM = mountainCfg?.elevationM;
@@ -221,6 +225,13 @@ export function MountainDetail() {
   const hourly = data?.hourly ?? [];
   const location = data?.location;
   const metaName = elevName ?? location?.name ?? locationId;
+  const pageMetadata = mountainPageMetadata({
+    name: metaName,
+    regionName: region.name,
+    regionId: region.id,
+    mountainId: locationId,
+    weatherOnly: publicationCapabilities?.contentMode === "weather-only",
+  });
   const observedTime = data?.lastUpdated;
   const sourceLabel =
     current?.dataSource ??
@@ -351,9 +362,9 @@ export function MountainDetail() {
   return (
     <div className={canvasClass}>
       <PageMeta
-        title={`${metaName} - snow report, weather & lifts`}
-        description={`Live mountain weather for ${metaName} in ${region.name}: on-mountain temperature, snow depth, wind and elevation forecast.`}
-        path={`/${region.id}/mountain/${locationId}`}
+        title={pageMetadata.title}
+        description={pageMetadata.description}
+        path={pageMetadata.path}
         jsonLd={[
           placeSchema({
             name: metaName,
@@ -660,15 +671,17 @@ export function MountainDetail() {
                 source: sourceLabel,
               }}
             />
-            <PremiumFeaturePrompt
-              id="mountain-powder-alerts"
-              title={t("get powder alerts by email", "降雪アラートをメールで受け取る")}
-              blurb={t(
-                "we'll push an alert the moment powder hits the forecast for this mountain.",
-                "この山の予報にパウダーが現れた瞬間にアラートをお送りします。",
-              )}
-              href="/premium"
-            />
+            {powderAlertsAvailable && (
+              <PremiumFeaturePrompt
+                id="mountain-powder-alerts"
+                title={t("get powder alerts by email", "降雪アラートをメールで受け取る")}
+                blurb={t(
+                  "we'll push an alert the moment powder hits the forecast for this mountain.",
+                  "この山の予報にパウダーが現れた瞬間にアラートをお送りします。",
+                )}
+                href="/premium"
+              />
+            )}
           </>
         )}
 
@@ -893,7 +906,7 @@ export function MountainDetail() {
           </PremiumGate>
         )}
 
-        <AlertPromoBanner />
+        {powderAlertsAvailable && <AlertPromoBanner />}
 
         {/* The old reference-only "On the snow" lift card was merged into the
             per-lift wind panel below (Aug 2026) - with no live feed both
@@ -1035,7 +1048,7 @@ export function MountainDetail() {
 
         {/* PREMIUM · Personalised triggers · push when conditions hit.
             Hidden in green season - powder alerts are snow-only. */}
-        {!isGreen && (
+        {!isGreen && powderAlertsAvailable && (
           <PremiumGate
             title="Powder & weather alerts"
             titleJa="降雪・気象アラート"

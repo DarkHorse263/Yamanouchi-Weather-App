@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-08-26",
+  "sourceReviewFiles": [
+    "lib/japan-ski-catalogue/data/reviews/nagano.json",
+    "lib/japan-ski-catalogue/data/unclear-pass4/nagano-a.json"
+  ],
+  "assignedRecordIds": [
+    "workbook:10",
+    "workbook:17",
+    "workbook:53",
+    "workbook:56",
+    "workbook:65",
+    "workbook:69",
+    "workbook:70",
+    "workbook:85",
+    "workbook:93",
+    "workbook:101",
+    "workbook:108",
+    "workbook:121",
+    "workbook:123",
+    "workbook:128",
+    "workbook:158",
+    "workbook:174",
+    "workbook:187",
+    "workbook:190"
+  ],
+  "proposals": [
+    {
+      "recordId": "workbook:10",
+      "proposedStatus": "remain_unclear",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "白馬岩岳スノーフィールド/白馬岩岳マウンテンリゾート/Hakuba Iwatake plus 2025-26, 2026-27, 営業, リフト券, シーズン券, 営業終了, 休止, 閉鎖; operator winter/news pages and Hakuba municipal/area-facility searches.",
+      "notes": "The accessible operator material includes a 2026-27 ski-school activity notice but no directly verifiable operating calendar, lift-ticket sale, or closure notice. Do not promote from the homepage or school notice."
+    },
+    {
+      "recordId": "workbook:17",
+      "proposedStatus": "remain_unclear",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "栂池高原スキー場/白馬つがいけマウンテンリゾート/Tsugaike Kogen plus 2025-26, 2026-27, 営業, リフト券, season pass, 営業終了, 休止, 閉鎖; operator news, Otari municipality, and NSD-program material.",
+      "notes": "The accessible 2026-27 NSD Kids Program item is not an explicit Tsugaike operation calendar or ticket-validity statement. No qualifying operator, municipal, or company notice was found."
+    },
+    {
+      "recordId": "workbook:53",
+      "proposedStatus": "remain_unclear",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "開田高原マイアスキー場/マイアスキーリゾート/MIA Ski Resort plus 2025-26, 2026-27, 営業, シーズン券, 営業終了, 休業, 閉鎖, 廃止; miaski-resort.com, Kiso municipal, and operator-company searches.",
+      "notes": "No accessible authoritative source explicitly states a latest-season operating calendar, ticket sale, suspension, or closure."
+    },
+    {
+      "recordId": "workbook:56",
+      "proposedStatus": "remain_unclear",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "いいづなリゾート/飯綱高原スキー場/Iizuna Resort plus 2025-26, 2026-27, 営業, リフト券, シーズン券, 営業終了, 休止, 閉鎖; iizunaresort.com, Nagano City facility/budget, and operator searches.",
+      "notes": "No directly verifiable operator or local-government statement establishes the record's current/recent ski operation, suspension, or closure."
+    },
+    {
+      "recordId": "workbook:65",
+      "proposedStatus": "remain_unclear",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "乗鞍高原スキー場/乗鞍高原温泉スキー場/Norikura Kogen Ski Resort plus 2025-26, 2026-27, 営業, リフト券, シーズン券, 営業終了, 休止, 閉鎖; Matsumoto municipal facility/budget and operator searches.",
+      "notes": "No qualifying explicit seasonal calendar, ticket sale, operational notice, or closure/abolition notice was accessible."
+    },
+    {
+      "recordId": "workbook:69",
+      "proposedStatus": "remain_unclear",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "officialNameEn": "Nomugitoge Ski Resort",
+      "officialNameJa": "松本市野麦峠スキー場",
+      "officialUrl": "http://gakutoresort.jp/",
+      "statusEvidenceUrl": "https://www.city.matsumoto.nagano.jp/uploaded/attachment/118212.pdf",
+      "statusEvidenceQuote": "指定管理者 ... 株式会社 岳都リゾート開発 ... リフト運行(索道事業)、使用許可、使用料徴収、スキー場施設維持管理業",
+      "evidenceAsOf": "2025-08-31",
+      "exhaustedSearch": "松本市野麦峠スキー場/野麦峠スキー場/Nomugitoge plus 令和7年度, 2025-26, 2026-27, 営業, 指定管理, 予算, 営業終了, 休止, 廃止; Matsumoto City PDFs and operator material.",
+      "notes": "The municipal FY2024 monitoring PDF confirms facility/operator context only. It does not explicitly establish a 2025-26 or 2026-27 season; no newer authoritative seasonal notice was found."
+    },
+    {
+      "recordId": "workbook:70",
+      "proposedStatus": "remain_unclear",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "湯の丸スキー場/湯の丸高原スキー場/Yunomaru Ski Resort plus 2025-26, 2026-27, 営業, シーズン券, リフト券, 営業終了, 休止, 閉鎖, 廃止; yunomaru.co.jp, local-government, and company searches.",
+      "notes": "No accessible operator or municipality source explicitly confirms latest-season operation or an adverse status."
+    },
+    {
+      "recordId": "workbook:85",
+      "proposedStatus": "remain_unclear",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "X-JAM高井富士/X-JAM Takaifuji/よませスキー場/北志賀高原/スノーリゾートロマンスの神様 plus 改称, 統合, 承継, 廃止, 閉鎖, 2025-26, 2026-27; operator, municipality, and company searches.",
+      "notes": "Accessible sources show changing area branding, but no direct official notice maps the combined Yomase/Takaifuji intake identity to a successor or proves current operation. A rename/merger must not be inferred."
+    },
+    {
+      "recordId": "workbook:93",
+      "proposedStatus": "remain_unclear",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "車山高原スキー場/車山高原SKYPARK/Kurumayama Kogen plus 2025-26, 2026-27, 営業, シーズン券, リフト券, 営業終了, 休止, 閉鎖; operator winter pages, Chino/Tateshina facility records, and trail-map searches.",
+      "notes": "No accessible authoritative page states a dated latest-season operation, 2026-27 calendar, or closure/suspension."
+    },
+    {
+      "recordId": "workbook:101",
+      "proposedStatus": "remain_unclear",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "白樺リゾート池の平スキー場/白樺2in1/しらかば2in1/Shirakaba 2in1 plus 2025-26, 2026-27, 営業, シーズン券, 営業終了, 休止, 閉鎖; White Birch operator and Tateshina facility searches.",
+      "notes": "No source explicitly connects a current seasonal operation notice to this specific 2in1 intake facility rather than another White Birch facility."
+    },
+    {
+      "recordId": "workbook:108",
+      "proposedStatus": "remain_unclear",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "ブランシュたかやま/Blanche Takayama plus 2025-26, 2026-27, 営業, シーズン券, リフト券, 営業終了, 休止, 閉鎖; operator, municipal-facility, company, and official trail-map searches.",
+      "notes": "No accessible qualifying source explicitly establishes a recent/current operating season or closure."
+    },
+    {
+      "recordId": "workbook:121",
+      "proposedStatus": "remain_unclear",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "白樺湖ロイヤルヒル/白樺湖ロイヤルヒルスキー場/Shirakabako Royal Hill plus 2025-26, 2026-27, 営業, シーズン券, リフト券, 営業終了, 休止, 閉鎖; operator, municipal, and company searches.",
+      "notes": "No directly verifiable operator or government record was found with an explicit latest-season operating or closure statement."
+    },
+    {
+      "recordId": "workbook:123",
+      "proposedStatus": "remain_unclear",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "軽井沢プリンスホテルスキー場/軽井沢プリンススキー場/Karuizawa Prince Hotel Ski Resort plus 2025-26, 2026-27, 営業, シーズン券, リフト券, 営業終了, 休止, 閉鎖; Prince operator and Karuizawa municipal sources.",
+      "notes": "Generic operator destination pages and discovery results were excluded. No directly accessible dated operating-calendar, ticket-sale, or closure notice was confirmed."
+    },
+    {
+      "recordId": "workbook:128",
+      "proposedStatus": "remain_unclear",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "富士見パノラマリゾート/富士見パノラマスキー場/Fujimi Panorama plus 2025-26, 2026-27, 営業, シーズン券, リフト券, 営業終了, 休止, 閉鎖; operator, Fujimi municipal, company, and trail-map searches.",
+      "notes": "No accessible official source explicitly confirms a latest/current ski-season calendar or closure."
+    },
+    {
+      "recordId": "workbook:158",
+      "proposedStatus": "remain_unclear",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "木島平スキー場/Kijimadaira Ski Resort plus 改称, 統合, 承継, 閉鎖, 廃止, Rewild Ninja, スノーリゾートロマンスの神様, 2025-26, 2026-27; Kijimadaira municipality, legacy domain, and operator/company searches.",
+      "notes": "The legacy domain currently presents スノーリゾートロマンスの神様, but no official rename, merger, or successor notice directly links it to this former Kijimadaira intake record. Domain reuse is insufficient."
+    },
+    {
+      "recordId": "workbook:174",
+      "proposedStatus": "remain_unclear",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "小海リエックス・スキーバレー/小海リエックス/Koumi Re-Ex Ski Valley plus 2025-26, 2026-27, 営業, シーズン券, リフト券, 営業終了, 休止, 閉鎖, 廃止; operator/company, municipality, and trail-map searches.",
+      "notes": "No qualifying directly accessible source establishes latest/current ski operation, suspension, or permanent closure."
+    },
+    {
+      "recordId": "workbook:187",
+      "proposedStatus": "remain_unclear",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "佐久スキーガーデンパラダ/Saku Ski Garden Parada plus 2025-26, 2026-27, 営業, シーズン券, リフト券, 営業終了, 休止, 閉鎖; operator/company, Saku municipality, and official trail-map searches.",
+      "notes": "No accessible authoritative page was found that explicitly supplies a current/recent operating calendar, ticket sale, or closure notice."
+    },
+    {
+      "recordId": "workbook:190",
+      "proposedStatus": "remain_unclear",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "伊那スキーリゾート/Ina Ski Resort plus 2025-26, 2026-27, 営業, シーズン券, リフト券, 営業終了, 休止, 閉鎖, 廃止; inaski.com, Ina municipal facility/budget, company, and trail-map searches.",
+      "notes": "No directly verifiable operator or municipality source explicitly establishes a latest/current operating season or closure."
+    }
+  ]
+}

@@ -115,6 +115,9 @@ importers:
       '@workspace/db':
         specifier: workspace:*
         version: link:../../lib/db
+      '@workspace/japan-ski-catalogue':
+        specifier: workspace:*
+        version: link:../../lib/japan-ski-catalogue
       '@workspace/promo-constants':
         specifier: workspace:*
         version: link:../../lib/promo-constants
@@ -336,6 +339,9 @@ importers:
       '@workspace/feelzlike-shell':
         specifier: workspace:*
         version: link:../../lib/feelzlike-shell
+      '@workspace/japan-ski-catalogue':
+        specifier: workspace:*
+        version: link:../../lib/japan-ski-catalogue
       class-variance-authority:
         specifier: 'catalog:'
         version: 0.7.1

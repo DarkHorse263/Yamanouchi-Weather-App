@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-08-26",
+  "sourceReviewFiles": [
+    "lib/japan-ski-catalogue/data/reviews/hokkaido.json"
+  ],
+  "assignedRecordIds": [
+    "workbook:365",
+    "workbook:366",
+    "workbook:388",
+    "workbook:428",
+    "workbook:434",
+    "workbook:441",
+    "workbook:445",
+    "workbook:456",
+    "workbook:462",
+    "workbook:464"
+  ],
+  "proposals": [
+    {
+      "recordId": "workbook:365",
+      "proposedStatus": "remain_unclear",
+      "officialNameJa": "当別町中小屋スキー場",
+      "officialUrl": "https://www.town.tobetsu.hokkaido.jp/d1w_reiki/H404901010017/H404901010017_j.html",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "Searched 当別町中小屋スキー場, 旧中小屋スキー場, Nakagoya Ski Area with 2026-27/2025-26, 営業, 廃止, 閉鎖, 休止, 予算, 条例, and 指定管理. The accessible Tobetsu ordinance establishes the facility and says use dates are separately set, but supplies neither a current operating calendar nor an abolition notice.",
+      "notes": "Directories and private reports assert historical closure, but were excluded. The current municipal legal register alone cannot establish either operating or closed status."
+    },
+    {
+      "recordId": "workbook:366",
+      "proposedStatus": "remain_unclear",
+      "officialNameJa": "オロフレスキー場",
+      "officialUrl": "https://orofure.web.fc2.com/",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "Searched オロフレスキー場, オロフレリゾート, 壮瞥町弁景スキー場 with 2026-27/2025-26, 営業開始, 営業終了, 休業, 閉鎖, 索道, 予算, and 指定管理; checked Sobetsu municipal and operator-company results.",
+      "notes": "The operator page is descriptive without a dated current-season statement. A regional-news opening report was not used because it is not an operator or municipal facility notice."
+    },
+    {
+      "recordId": "workbook:388",
+      "proposedStatus": "remain_unclear",
+      "officialNameJa": "北大雪スキー場",
+      "officialUrl": "http://tengucat.jp/",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "Searched 北大雪スキー場, 北大雪, 北大雪スキー場ホクダイユキ, Kitataisetsu Ski Area, and tengucat with 2026-27/2025-26, 営業, リフト, 索道, CAT, 廃止, 閉鎖, 休止, successor, municipal, and government-register terms.",
+      "notes": "No accessible operator, municipality, or government evidence connected the legacy record to a current operating facility, CAT successor, or explicit closure. Directory-only results were excluded."
+    },
+    {
+      "recordId": "workbook:428",
+      "proposedStatus": "remain_unclear",
+      "officialNameJa": "伊ノ沢市民スキー場",
+      "officialUrl": "https://www.city.asahikawa.hokkaido.jp/facility00/facility06/d055569.html",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "Searched 伊ノ沢市民スキー場, 伊の沢市民スキー場, Inosawa Citizens Ski Area, and the named Asahikawa DPC operator with 2026-27/2025-26, 営業開始, 営業終了, 休業, 廃止, facility register, and budget terms.",
+      "notes": "The accessible Asahikawa facility page was last updated in 2016 and only states a customary season. No current municipal or operator notice was located, so operation cannot be inferred."
+    },
+    {
+      "recordId": "workbook:434",
+      "proposedStatus": "remain_unclear",
+      "officialNameJa": "厚田村スキー場",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "Searched 厚田村スキー場, 厚田スキー場, Atsuta village ski area, and Ishikari/Atsuta aliases with 2026-27/2025-26, 営業, 廃止, 閉鎖, 休止, 統合, 公共施設等総合管理計画, 予算, and council terms.",
+      "notes": "Ishikari public-facility-plan material was reviewed but did not provide an explicit record-level operation, abolition, merger, or successor statement. Historical directory results were excluded."
+    },
+    {
+      "recordId": "workbook:441",
+      "proposedStatus": "remain_unclear",
+      "officialNameJa": "ウナベツスキー場",
+      "officialUrl": "https://www.town.shari.hokkaido.jp/soshikikarasagasu/shokokankoka/shisetsuannai/406.html",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "Searched ウナベツスキー場, 斜里町ウナベツスキー場, Unabetsu Ski Area with 2026-27/2025-26, 営業開始, 営業終了, リフト運行, 休業, season pass, municipal news, and budget terms.",
+      "notes": "The official Shari facility page was updated in January 2026 and gives normal periods, prices, and lift hours, but contains no explicit statement that the latest season opened or operated. A tourism-association opening post was excluded."
+    },
+    {
+      "recordId": "workbook:445",
+      "proposedStatus": "remain_unclear",
+      "officialNameJa": "浜益村民スキー場",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "Searched 浜益村民スキー場, 浜益スキー場, Hamamasu Sonmin Ski Area, and Ishikari/Hamamasu regional aliases with 2026-27/2025-26, 営業, 廃止, 閉鎖, 休止, 統合, 予算, regional-council, and public-facility-register terms.",
+      "notes": "No accessible Ishikari municipal, operator, ordinance, council, or budget source gave a record-specific operational, closure, or successor status. Historical listings were excluded."
+    },
+    {
+      "recordId": "workbook:456",
+      "proposedStatus": "remain_unclear",
+      "officialNameJa": "白銀スキーハイランド",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "Searched 白銀スキーハイランド, 白金スキーハイランド, 白金スキー場, Shirogane Ski Highland, and Biei aliases with 2026-27/2025-26, 営業, 廃止, 閉鎖, 休止, sports facility, public-facility plan, and budget terms.",
+      "notes": "The current Biei sports-facility register did not establish a status for this legacy-name record, and no operator or explicit abolition source was located."
+    },
+    {
+      "recordId": "workbook:462",
+      "proposedStatus": "remain_unclear",
+      "officialNameJa": "国設日勝スキー場",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "Searched 国設日勝スキー場, 日勝スキー場, Nissho Ski Area, and Shimizu Town aliases with 2026-27/2025-26, 営業, 廃止, 閉鎖, 休止, 国設, 索道, municipal history, facility register, budget, and council terms.",
+      "notes": "No accessible Shimizu municipal, government, or operator source established a current operation, formal closure, suspension, rename, or successor. Third-party history and map listings were excluded."
+    },
+    {
+      "recordId": "workbook:464",
+      "proposedStatus": "remain_unclear",
+      "officialNameJa": "ニヤマ高原スキー場",
+      "officialUrl": "http://niyama.grow8.com/ski/",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "exhaustedSearch": "Searched ニヤマ高原スキー場, 仁山高原スキー場, Niyama Kogen Ski Area, 七飯町, 北斗市, and operator aliases with 2026-27/2025-26, 営業, 営業終了, 休止, 廃止, 予算, facility, and successor terms.",
+      "notes": "The accessible operator page is descriptive only and gives no current-season status. No municipal/government closure, suspension, or resumption notice was located; third-party reports were excluded."
+    }
+  ]
+}

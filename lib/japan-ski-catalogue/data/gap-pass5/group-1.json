@@ -1,0 +1,258 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-08-26",
+  "assignedRecordIds": [
+    "workbook:1a",
+    "workbook:1b",
+    "workbook:1c",
+    "workbook:1d",
+    "workbook:11",
+    "workbook:13",
+    "workbook:19c",
+    "workbook:367",
+    "workbook:419"
+  ],
+  "proposals": [
+    {
+      "recordId": "workbook:1a",
+      "fields": {
+        "defensibleElevation": {
+          "value": {
+            "topM": 1308
+          },
+          "sourceUrl": "https://www.niseko.ne.jp/en/wp-content/uploads/2020/08/e2bf6f0e8ac7d142c100ba1dc05f34ad.pdf",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official Niseko United trail map explicitly labels Mt. Niseko Annupuri, the mapped summit serving Grand HIRAFU, as elevation 1,308 m. No base value is proposed."
+        }
+      },
+      "unresolved": [
+        "coordinates"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.grand-hirafu.jp/en/access/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official access page links a Google Map and shows a static map, but neither retains explicit latitude/longitude in the operator page nor an explicit-coordinate destination URL. The street address was not geocoded."
+        }
+      ],
+      "notes": "Official trail-map and access-map searches exhausted; no eligible ski-area coordinate proposal recovered."
+    },
+    {
+      "recordId": "workbook:1b",
+      "fields": {
+        "defensibleElevation": {
+          "value": {
+            "topM": 1308
+          },
+          "sourceUrl": "https://www.niseko.ne.jp/en/wp-content/uploads/2020/08/e2bf6f0e8ac7d142c100ba1dc05f34ad.pdf",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official Niseko United trail map explicitly labels Mt. Niseko Annupuri, the mapped summit serving Niseko Village, as elevation 1,308 m. No base value is proposed."
+        }
+      },
+      "unresolved": [
+        "coordinates"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.niseko.ne.jp/en/niseko-access/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Niseko United's official access page identifies Niseko Village and provides its address, but the retained map link does not expose explicit latitude/longitude for the Niseko Village ski-area destination. The address was not geocoded."
+        },
+        {
+          "sourceUrl": "https://www.niseko-village.com/en/access/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator's English access URL did not provide a ski-area access-map destination with explicit coordinates."
+        }
+      ],
+      "notes": "Official trail-map and access-map searches exhausted; no eligible ski-area coordinate proposal recovered."
+    },
+    {
+      "recordId": "workbook:1c",
+      "fields": {
+        "defensibleElevation": {
+          "value": {
+            "topM": 1308
+          },
+          "sourceUrl": "https://www.niseko.ne.jp/en/wp-content/uploads/2020/08/e2bf6f0e8ac7d142c100ba1dc05f34ad.pdf",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official Niseko United trail map explicitly labels Mt. Niseko Annupuri, the mapped summit serving Niseko Annupuri, as elevation 1,308 m. No base value is proposed."
+        }
+      },
+      "unresolved": [
+        "coordinates"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.niseko.ne.jp/en/niseko-access/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official access page links a Google Maps search for Niseko Annupuri and includes map-view coordinates, rather than explicit coordinates for the ski-area destination pin. No map-view coordinate was substituted for a destination coordinate."
+        }
+      ],
+      "notes": "Official trail-map and access-map searches exhausted; no eligible ski-area coordinate proposal recovered."
+    },
+    {
+      "recordId": "workbook:1d",
+      "fields": {
+        "defensibleElevation": {
+          "value": {
+            "topM": 1308
+          },
+          "sourceUrl": "https://www.niseko.ne.jp/en/wp-content/uploads/2020/08/e2bf6f0e8ac7d142c100ba1dc05f34ad.pdf",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official Niseko United trail map explicitly labels Mt. Niseko Annupuri, the mapped summit serving Hanazono, as elevation 1,308 m. No base value is proposed."
+        }
+      },
+      "unresolved": [
+        "coordinates"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.niseko.ne.jp/en/niseko-access/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Niseko United's official access page identifies Niseko Hanazono Resort and provides its address, but no explicit latitude/longitude destination was published. The address was not geocoded."
+        },
+        {
+          "sourceUrl": "https://hanazononiseko.com/en/access/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator access URL did not yield an explicit-coordinate ski-area destination."
+        }
+      ],
+      "notes": "Official trail-map and access-map searches exhausted; no eligible ski-area coordinate proposal recovered."
+    },
+    {
+      "recordId": "workbook:11",
+      "fields": {},
+      "unresolved": [
+        "coordinates"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.happo-one.jp/en/access/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official access page supplies a route-map image and transport links, not an explicit-coordinate ski-area destination."
+        },
+        {
+          "sourceUrl": "https://www.happo-one.jp/en/info/pamphlet/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official brochure page supplies route-guide and trail-map PDFs but no explicit latitude/longitude destination. The verified-evidence supplement already supplies the operator's 760 m base / 1,831 m top elevation."
+        }
+      ],
+      "notes": "Official access-map, trail-map, and brochure searches exhausted; no eligible ski-area coordinate proposal recovered."
+    },
+    {
+      "recordId": "workbook:13",
+      "fields": {
+        "coordinates": {
+          "value": {
+            "lat": 36.8930932,
+            "lng": 138.7752226
+          },
+          "sourceUrl": "https://www.princehotels.co.jp/ski/kagura/winter/access/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator's access page links Google Maps for Kagura Ski Resort Mitsumata Station with the explicit destination coordinates 36.8930932, 138.7752226."
+        },
+        "defensibleElevation": {
+          "value": {
+            "topM": 1845
+          },
+          "sourceUrl": "https://www.princehotels.co.jp/ski/kagura/winter/coursemap/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator's Kagura course map explicitly identifies the ski area's highest mapped elevation as 1,845 m. No base elevation is proposed and none was calculated from vertical."
+        }
+      },
+      "unresolved": [],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.princehotels.co.jp/ski/kagura/winter/access/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official access page checked; the Mitsumata Station map destination is explicitly coordinate-bearing and is part of the named Kagura Ski Resort."
+        }
+      ],
+      "notes": "Both outstanding essential fields have eligible operator evidence."
+    },
+    {
+      "recordId": "workbook:19c",
+      "fields": {},
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://ishiuchi.or.jp/winter/access/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator access page gives the ski-area address, access diagram, and entrance/parking information but no explicit latitude/longitude destination. The address was not geocoded."
+        },
+        {
+          "sourceUrl": "https://ishiuchi.or.jp/winter/ski/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official slope information identifies lifts and courses but no explicit ski-area base and top elevation endpoints."
+        }
+      ],
+      "notes": "Official access-map and slope-information searches exhausted; no eligible coordinate or base/top elevation proposal recovered."
+    },
+    {
+      "recordId": "workbook:367",
+      "fields": {},
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.town.horonobe.lg.jp/www4/section/edu/le009f0000001go7.html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The Town of Horonobe facility page states a 56 m vertical drop and gives an address, but does not publish a base/top elevation or explicit latitude/longitude. Elevation endpoints were not inferred from vertical and the address was not geocoded."
+        }
+      ],
+      "notes": "Municipal facility-page, attachment, map, and open-data searches exhausted; no eligible coordinate or base/top elevation proposal recovered."
+    },
+    {
+      "recordId": "workbook:419",
+      "fields": {},
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.daisen-resort.jp/4/13.html",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The former operator's official page now directs visitors to the successor and does not supply explicit geographic coordinates or ski-area base/top endpoints."
+        },
+        {
+          "sourceUrl": "https://x-project.group/daisen-white-resort/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The designated-manager announcement identifies the ski area but supplies neither explicit coordinates nor base/top elevation values."
+        },
+        {
+          "sourceUrl": "https://www.daisen-resort.jp/files/2658.pdf",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The retained official resort pamphlet/trail map provides course and lift material but no explicit ski-area base/top elevation endpoints or coordinate-bearing access-map destination."
+        }
+      ],
+      "notes": "Current and former operator pages, official trail-map material, and successor-site searches exhausted; no eligible coordinate or base/top elevation proposal recovered."
+    }
+  ]
+}

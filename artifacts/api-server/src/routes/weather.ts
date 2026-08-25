@@ -8,10 +8,14 @@ import { dailyConditionLabel } from "../lib/dailyConditionLabel.js";
 import { reconcileBomCondition } from "../lib/bom-obs.js";
 import { reconcileNzMetarDryToWet } from "../lib/metar-nz.js";
 import { partitionHourlySnowfallCm, partitionPrecipByBand, hourCountsByDay } from "../lib/openMeteoElevation.js";
+import {
+  publishedCatalogueRecords,
+  type PublicRuntimeCatalogueRecord,
+} from "@workspace/japan-ski-catalogue/public-runtime";
 
 const router: IRouter = Router();
 
-interface LocationConfig {
+export interface LocationConfig {
   id: string;
   name: string;
   latitude: number;
@@ -779,6 +783,51 @@ const LOCATIONS: LocationConfig[] = [
   { id: "highmount", name: "Highmount", latitude: 42.147, longitude: -74.514, elevation: 536, description: "Catskills base settlement for Belleayre Mountain.", bomStation: "", bomStationId: "", bomWmoId: 0, timezone: "America/New_York", region: "US" },
 ];
 
+/**
+ * Published catalogue entries use only model data: no unverified lift,
+ * base-depth, station, or alert-feed claims are implied by this adapter.
+ */
+function catalogueLocation(record: PublicRuntimeCatalogueRecord): LocationConfig {
+  return {
+    id: record.publicId,
+    name: record.name,
+    latitude: record.coordinates.lat,
+    longitude: record.coordinates.lng,
+    elevation: record.forecastElevationM,
+    description: `${record.name} weather forecast.`,
+    bomStation: "Open-Meteo (catalogue forecast location)",
+    bomStationId: "",
+    bomWmoId: 0,
+    timezone: "Asia/Tokyo",
+    region: "JP",
+  };
+}
+
+const HARD_CODED_LOCATION_IDS = new Set(LOCATIONS.map((location) => location.id));
+const CATALOGUE_LOCATIONS = publishedCatalogueRecords.map(catalogueLocation);
+const CATALOGUE_LOCATION_BY_ID = new Map<string, LocationConfig>();
+
+/**
+ * Builds the public-id/alias index at module load so a catalogue collision
+ * fails boot and tests rather than silently changing an existing location.
+ */
+for (const record of publishedCatalogueRecords) {
+  for (const id of [record.publicId, ...record.aliases]) {
+    if (HARD_CODED_LOCATION_IDS.has(id) || CATALOGUE_LOCATION_BY_ID.has(id)) {
+      throw new Error(`[japan-catalogue] location id/alias collision: "${id}"`);
+    }
+    const location = CATALOGUE_LOCATIONS.find((candidate) => candidate.id === record.publicId);
+    if (!location) throw new Error(`[japan-catalogue] missing location for "${record.publicId}"`);
+    CATALOGUE_LOCATION_BY_ID.set(id, location);
+  }
+}
+
+const ALL_LOCATIONS: readonly LocationConfig[] = [...LOCATIONS, ...CATALOGUE_LOCATIONS];
+
+export function resolveWeatherLocation(locationId: string): LocationConfig | undefined {
+  return LOCATIONS.find((location) => location.id === locationId) ?? CATALOGUE_LOCATION_BY_ID.get(locationId);
+}
+
 const WEATHER_DESCRIPTIONS: Record<number, string> = {
   0: "Clear sky",
   1: "Mainly clear",
@@ -1387,26 +1436,17 @@ async function fetchOpenMeteo(location: LocationConfig) {
 router.get("/weather", async (req, res) => {
   try {
     const region = parseRegionParam(req.query["region"]);
-    const sources = region
-      ? LOCATIONS.filter((loc) => locationMatchesRegion(loc.id, region))
-      : LOCATIONS;
-
-    // Use allSettled so a single Open-Meteo / BOM hiccup at one resort
-    // doesn't take down the entire /weather feed (which the AU dashboard
-    // depends on). Failed locations are dropped from the list and logged.
-    const settled = await Promise.all(
-      sources.map(async (loc) => {
-        try {
-          return await fetchLocationWeather(loc);
-        } catch (err) {
-          console.warn(
-            `[weather] dropping ${loc.id}: ${err instanceof Error ? err.message : String(err)}`,
-          );
-          return null;
-        }
-      }),
-    );
-    const locations = settled.filter((x): x is NonNullable<typeof x> => x !== null);
+    // All in-repo callers provide region. Refuse an accidental global request
+    // instead of starting hundreds of upstream forecasts at once.
+    if (!region) {
+      res.status(400).json({
+        error: "REGION_REQUIRED",
+        message: "Bulk weather requests must include a region.",
+      });
+      return;
+    }
+    const sources = ALL_LOCATIONS.filter((loc) => locationMatchesRegion(loc.id, region));
+    const locations = await fetchBulkWeatherCached(sources);
 
     const result = GetWeatherResponse.parse({
       locations,
@@ -1440,6 +1480,51 @@ const WEATHER_FRESH_MS = 10 * 60 * 1000; // 10 minutes
 const WEATHER_STALE_MS = 6 * 60 * 60 * 1000; // 6 hours
 const weatherCache = new Map<string, WeatherCacheEntry>();
 const weatherInflight = new Map<string, Promise<unknown>>();
+let weatherFetcher: (location: LocationConfig, snowElevationM?: number) => Promise<unknown> =
+  fetchLocationWeather;
+
+// Four cache misses at once keeps region pages responsive without hammering
+// Open-Meteo/BOM. Cache hits and callers joining an in-flight key are cheap,
+// but use the same worker queue for deterministic pressure.
+export const BULK_WEATHER_CONCURRENCY = 4;
+
+async function fetchBulkWeatherCached(locations: readonly LocationConfig[]): Promise<unknown[]> {
+  const results: Array<unknown | null> = new Array(locations.length).fill(null);
+  let nextIndex = 0;
+  const worker = async (): Promise<void> => {
+    while (nextIndex < locations.length) {
+      const index = nextIndex++;
+      const location = locations[index]!;
+      try {
+        results[index] = await getLocationWeatherCached(location);
+      } catch (err) {
+        console.warn(
+          `[weather] dropping ${location.id}: ${err instanceof Error ? err.message : String(err)}`,
+        );
+      }
+    }
+  };
+  await Promise.all(
+    Array.from(
+      { length: Math.min(BULK_WEATHER_CONCURRENCY, locations.length) },
+      () => worker(),
+    ),
+  );
+  return results.filter((result): result is unknown => result !== null);
+}
+
+/** Test seam for cache/coalescing tests; production never replaces the fetcher. */
+export function setWeatherFetcherForTests(
+  fetcher: (location: LocationConfig, snowElevationM?: number) => Promise<unknown>,
+): void {
+  weatherFetcher = fetcher;
+}
+
+export function resetWeatherRuntimeForTests(): void {
+  weatherFetcher = fetchLocationWeather;
+  weatherCache.clear();
+  weatherInflight.clear();
+}
 
 /**
  * Optional on-mountain snow-outlook elevation, in metres. Lenient: an absent
@@ -1468,7 +1553,7 @@ async function getLocationWeatherCached(
   let inflight = weatherInflight.get(cacheKey);
   if (!inflight) {
     inflight = (async () => {
-      const weatherData = await fetchLocationWeather(location, snowElevationM);
+      const weatherData = await weatherFetcher(location, snowElevationM);
       const result = GetLocationWeatherResponse.parse(weatherData);
       weatherCache.set(cacheKey, {
         data: result,
@@ -1497,12 +1582,12 @@ router.get("/weather/:locationId", async (req, res) => {
     // `^[a-z0-9-]+$`). The actual id->location resolution still happens
     // against LOCATIONS below, which is the source of truth.
     const { locationId } = GetLocationWeatherParams.parse(req.params);
-    const location = LOCATIONS.find(l => l.id === locationId);
+    const location = resolveWeatherLocation(locationId);
 
     if (!location) {
       res.status(404).json({
         error: "LOCATION_NOT_FOUND",
-        message: `Location '${locationId}' not found. Valid locations: ${LOCATIONS.map(l => l.id).join(", ")}`
+        message: `Location '${locationId}' not found.`
       });
       return;
     }
@@ -1532,7 +1617,7 @@ router.get("/weather/:locationId/snow-report", async (req, res) => {
   try {
     const { locationId } = GetResortSnowReportParams.parse(req.params);
     // Unknown ids also degrade to null (mirrors the always-200 contract).
-    const location = LOCATIONS.find((l) => l.id === locationId);
+    const location = resolveWeatherLocation(locationId);
     if (!location) {
       res.json({ locationId, report: null });
       return;
@@ -1552,7 +1637,7 @@ router.get("/weather/:locationId/snow-report", async (req, res) => {
 router.get("/forecast/:locationId", async (req, res) => {
   try {
     const locationId = String(req.params.locationId ?? "");
-    const location = LOCATIONS.find(l => l.id === locationId);
+    const location = resolveWeatherLocation(locationId);
     if (!location) {
       res.status(404).json({ error: "LOCATION_NOT_FOUND" });
       return;
@@ -1592,6 +1677,15 @@ router.get("/forecast/:locationId", async (req, res) => {
 
 /** All location ids served by `/weather/:locationId`. Source of truth used
  *  by the boot-time location-id contract validator (lib/validate-locations). */
-export const WEATHER_LOCATION_IDS = LOCATIONS.map((l) => l.id);
+export const WEATHER_LOCATION_IDS = ALL_LOCATIONS.map((l) => l.id);
+export const WEATHER_LOCATION_ALIASES = [...CATALOGUE_LOCATION_BY_ID.keys()].filter(
+  (id) => !CATALOGUE_LOCATIONS.some((location) => location.id === id),
+);
+
+// Catalogue records intentionally remain unavailable to the alert evaluator:
+// its region-anchor pipeline has no per-catalogue-location contract. The
+// catalogue honesty.runtimeIntegrated flag remains false until that pipeline
+// can consume these dynamic locations end-to-end.
+export const CATALOGUE_LOCATION_ALERTS_AVAILABLE = false;
 
 export default router;

@@ -6,6 +6,12 @@ export type OperatingStatus =
   | "dry_slope"
   | "closed"
   | "unknown";
+export type ReviewStatus =
+  | "verified_operating"
+  | "temporarily_closed"
+  | "closed"
+  | "merged_into"
+  | "unclear";
 
 export interface SourceEvidence {
   evidenceId: string;
@@ -15,7 +21,8 @@ export interface SourceEvidence {
     | "openstreetmap"
     | "wikidata"
     | "official_website"
-    | "existing_frontend_projection";
+    | "existing_frontend_projection"
+    | "verified_evidence_supplement";
   sourceRef: string;
   directoryUrl?: string;
   officialUrls?: string[];
@@ -23,12 +30,24 @@ export interface SourceEvidence {
   elevation?: { baseM?: number; topM?: number; verticalM?: number };
   names?: { en?: string; ja?: string };
   externalIds?: { osm?: string; wikidata?: string };
+  sourceUrl?: string;
+  evidenceAsOf?: string;
+  citationSourceType?: string;
+  note?: string;
+  fields?: string[];
 }
 
 export interface IntakeRecord {
   recordId: string;
-  lifecycle: "draft" | "verified";
+  lifecycle: CatalogueLifecycle;
   operatingStatus: OperatingStatus;
+  reviewedOperatingStatus?: "operating" | "temporarily_closed" | "closed" | "merged_into";
+  travelRegionId?: string;
+  baseTownId?: string;
+  publicId?: string;
+  aliases?: string[];
+  routeMode?: "existing_page" | "new_page";
+  existingPageId?: string;
   source: {
     sourceId: "japan-ski-resorts-558";
     rowIdentity: string;
@@ -48,6 +67,22 @@ export interface IntakeRecord {
     rating: number | null;
     notes: string;
   };
+  review?: {
+    reviewBatch: string;
+    reviewedAt: string;
+    reviewStatus: ReviewStatus;
+    officialNameEn?: string;
+    officialNameJa?: string;
+    officialUrl?: string;
+    statusEvidenceUrl?: string;
+    statusEvidenceQuote?: string;
+    evidenceAsOf: string;
+    notes?: string;
+    travelClusterLabelSuggestion: string;
+    baseTownLabelSuggestion: string;
+    clusterConfidence: "high" | "medium" | "low";
+    successor?: { recordId?: string; officialName?: string };
+  };
   evidence: SourceEvidence[];
   directoryRelationship:
     | {
@@ -60,7 +95,7 @@ export interface IntakeRecord {
         reason: string;
       };
   readiness: {
-    basis: "unique_exact_normalized_name" | "unresolved";
+    basis: "unique_exact_normalized_name" | "supplement_only" | "unresolved";
     essentials: {
       coordinates: boolean;
       defensibleElevation: boolean;
@@ -70,6 +105,67 @@ export interface IntakeRecord {
     evidenceComplete: boolean;
     missingReasons: string[];
     requiredReviews: Array<"operating_status" | "travel_cluster">;
+  };
+  publicationReadiness: {
+    publishable: boolean;
+    routeAlreadyPublished?: boolean;
+    missingReasons: string[];
+  };
+  resolved: {
+    name?: string;
+    nameJa?: string;
+    officialUrl?: string;
+    coordinates?: { lat: number; lng: number };
+    elevation?: { baseM?: number; topM?: number; verticalM?: number };
+  };
+}
+
+export interface TravelRegion {
+  travelRegionId: string;
+  name: string;
+  nameJa: string;
+  prefectures: string[];
+  baseTowns: Array<{ baseTownId: string; name: string; nameJa: string }>;
+  recordIds: string[];
+}
+
+export interface PublicationCandidate {
+  recordId: string;
+  publicId: string;
+  aliases: string[];
+  travelRegionId: string;
+  baseTownId: string;
+  route: string;
+  name: string;
+  nameJa: string;
+  coordinates: { lat: number; lng: number };
+  elevation: { baseM: number; topM: number; verticalM?: number };
+  officialUrl: string;
+  evidence: SourceEvidence[];
+}
+
+export interface PublishedCatalogueRecord {
+  recordId: string;
+  publicId: string;
+  aliases: string[];
+  name: string;
+  nameJa: string;
+  coordinates: { lat: number; lng: number };
+  forecastElevationM: number;
+  baseElevationM: number;
+  topElevationM: number;
+  officialUrl: string;
+  travelRegionId: string;
+  baseTownId: string;
+  route: string;
+  prefecture: string;
+  country: "Japan";
+  countryCode: "JP";
+  honesty: {
+    operatingStatusVerified: true;
+    evidenceComplete: true;
+    manifestApproved: true;
+    runtimeIntegrated: true;
   };
 }
 
@@ -131,9 +227,14 @@ export interface JapanSkiCatalogue {
     };
   };
   frontendRegionSources: Array<{ regionId: string; sourcePath: string }>;
+  travelRegions: TravelRegion[];
   intakeRecords: IntakeRecord[];
   publishedPages: PublishedPageRecord[];
+  publicationCandidates: PublicationCandidate[];
+  publishedCatalogueRecords: PublishedCatalogueRecord[];
 }
 
 export declare const japanCatalogue: JapanSkiCatalogue;
+export declare const publishedCatalogueRecords: PublishedCatalogueRecord[];
+export declare const travelRegions: TravelRegion[];
 export { japanCatalogueSchema } from "./schema.js";

@@ -12,13 +12,18 @@
       "types": "./schema.d.ts",
       "default": "./schema.js"
     },
+    "./public-runtime": {
+      "types": "./public-runtime.d.ts",
+      "default": "./public-runtime.js"
+    },
     "./generated/japan-catalogue.json": "./generated/japan-catalogue.json"
   },
   "scripts": {
-    "generate": "node ./scripts/generate.mjs",
-    "generate:check": "node ./scripts/generate.mjs --check",
-    "validate": "node ./scripts/generate.mjs --check && node ./scripts/validate.mjs",
-    "report": "node ./scripts/generate.mjs --check && node ./scripts/validate.mjs --write-report"
+    "generate": "node ./scripts/validate-reviews.mjs && node ./scripts/generate.mjs",
+    "generate:check": "node ./scripts/validate-reviews.mjs && node ./scripts/generate.mjs --check",
+    "validate": "node ./scripts/validate-reviews.mjs && node ./scripts/generate.mjs --check && node ./scripts/validate.mjs",
+    "report": "node ./scripts/validate-reviews.mjs && node ./scripts/generate.mjs --check && node ./scripts/validate.mjs --write-report",
+    "reviews:validate": "node ./scripts/validate-reviews.mjs"
   },
   "devDependencies": {
     "typescript": "~5.9.2"

@@ -651,6 +651,18 @@ from = "/yamanouchi/mountain/kita-shiga-komaruyama/"
 to = "/yamanouchi/mountain/kita-shiga-komaruyama/index.html"
 
 [[services.production.rewrites]]
+from = "/yamanouchi/mountain/shigakogen-mountain-resort/"
+to = "/yamanouchi/mountain/shigakogen-mountain-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/mountain/yokoteyama-shibutoge/"
+to = "/yamanouchi/mountain/yokoteyama-shibutoge/index.html"
+
+[[services.production.rewrites]]
+from = "/yamanouchi/mountain/takamagahara-mammoth/"
+to = "/yamanouchi/mountain/takamagahara-mammoth/index.html"
+
+[[services.production.rewrites]]
 from = "/yamanouchi/yudanaka/"
 to = "/yamanouchi/yudanaka/index.html"
 
@@ -817,6 +829,10 @@ to = "/iiyama/mountain/kijimadaira/index.html"
 [[services.production.rewrites]]
 from = "/iiyama/mountain/kijima-snow-park/"
 to = "/iiyama/mountain/kijima-snow-park/index.html"
+
+[[services.production.rewrites]]
+from = "/iiyama/mountain/madarao-kogen-ski-resort-tangram-ski-circus/"
+to = "/iiyama/mountain/madarao-kogen-ski-resort-tangram-ski-circus/index.html"
 
 [[services.production.rewrites]]
 from = "/iiyama/iiyama/"
@@ -987,6 +1003,10 @@ from = "/hakuba-valley/mountain/jiigatake/"
 to = "/hakuba-valley/mountain/jiigatake/index.html"
 
 [[services.production.rewrites]]
+from = "/hakuba-valley/mountain/hakuba-47-goryu/"
+to = "/hakuba-valley/mountain/hakuba-47-goryu/index.html"
+
+[[services.production.rewrites]]
 from = "/hakuba-valley/hakuba/"
 to = "/hakuba-valley/hakuba/index.html"
 
@@ -1109,6 +1129,10 @@ to = "/myoko/mountain/seki-onsen/index.html"
 [[services.production.rewrites]]
 from = "/myoko/mountain/lotte-arai/"
 to = "/myoko/mountain/lotte-arai/index.html"
+
+[[services.production.rewrites]]
+from = "/myoko/mountain/kyukamura-myoko-runrun-ski-resort/"
+to = "/myoko/mountain/kyukamura-myoko-runrun-ski-resort/index.html"
 
 [[services.production.rewrites]]
 from = "/myoko/akakura/"
@@ -1259,6 +1283,22 @@ from = "/niseko/mountain/moiwa/"
 to = "/niseko/mountain/moiwa/index.html"
 
 [[services.production.rewrites]]
+from = "/niseko/mountain/chisenupuri-cat-ski/"
+to = "/niseko/mountain/chisenupuri-cat-ski/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/mountain/wakkanai-komadori-ski-area/"
+to = "/niseko/mountain/wakkanai-komadori-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/mountain/shibetsu-city-hinata-ski-area/"
+to = "/niseko/mountain/shibetsu-city-hinata-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/niseko/mountain/kutchan-asahigaoka-ski-area/"
+to = "/niseko/mountain/kutchan-asahigaoka-ski-area/index.html"
+
+[[services.production.rewrites]]
 from = "/niseko/hirafu/"
 to = "/niseko/hirafu/index.html"
 
@@ -1371,6 +1411,10 @@ from = "/furano/mountain/tomamu/"
 to = "/furano/mountain/tomamu/index.html"
 
 [[services.production.rewrites]]
+from = "/furano/mountain/minami-furano-national-ski-resort/"
+to = "/furano/mountain/minami-furano-national-ski-resort/index.html"
+
+[[services.production.rewrites]]
 from = "/furano/furano/"
 to = "/furano/furano/index.html"
 
@@ -1453,6 +1497,26 @@ to = "/sapporo/mountain/sapporo-kokusai/index.html"
 [[services.production.rewrites]]
 from = "/sapporo/mountain/sapporo-bankei/"
 to = "/sapporo/mountain/sapporo-bankei/index.html"
+
+[[services.production.rewrites]]
+from = "/sapporo/mountain/snow-cruise-onze/"
+to = "/sapporo/mountain/snow-cruise-onze/index.html"
+
+[[services.production.rewrites]]
+from = "/sapporo/mountain/sapporo-moiwa-snow-square-ski-snowboard/"
+to = "/sapporo/mountain/sapporo-moiwa-snow-square-ski-snowboard/index.html"
+
+[[services.production.rewrites]]
+from = "/sapporo/mountain/asari-ski-resort/"
+to = "/sapporo/mountain/asari-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/sapporo/mountain/otaru-tenguyama-ski-resort/"
+to = "/sapporo/mountain/otaru-tenguyama-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/sapporo/mountain/eniwa-citizens-ski-area/"
+to = "/sapporo/mountain/eniwa-citizens-ski-area/index.html"
 
 [[services.production.rewrites]]
 from = "/sapporo/sapporo/"
@@ -1613,6 +1677,10 @@ to = "/asahikawa/mountain/kamui/index.html"
 [[services.production.rewrites]]
 from = "/asahikawa/mountain/asahidake/"
 to = "/asahikawa/mountain/asahidake/index.html"
+
+[[services.production.rewrites]]
+from = "/asahikawa/mountain/canmore-ski-village/"
+to = "/asahikawa/mountain/canmore-ski-village/index.html"
 
 [[services.production.rewrites]]
 from = "/asahikawa/asahikawa/"
@@ -1779,6 +1847,18 @@ from = "/minakami/mountain/norn-minakami/"
 to = "/minakami/mountain/norn-minakami/index.html"
 
 [[services.production.rewrites]]
+from = "/minakami/mountain/gunma-minakami-hodaigi-ski-resort/"
+to = "/minakami/mountain/gunma-minakami-hodaigi-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/minakami/mountain/okutone-snow-park/"
+to = "/minakami/mountain/okutone-snow-park/index.html"
+
+[[services.production.rewrites]]
+from = "/minakami/mountain/fujiwara-snow-spa-resort/"
+to = "/minakami/mountain/fujiwara-snow-spa-resort/index.html"
+
+[[services.production.rewrites]]
 from = "/minakami/minakami/"
 to = "/minakami/minakami/index.html"
 
@@ -1911,6 +1991,10 @@ from = "/hachimantai/mountain/hachimantai-shimokura/"
 to = "/hachimantai/mountain/hachimantai-shimokura/index.html"
 
 [[services.production.rewrites]]
+from = "/hachimantai/mountain/shigarai-ski-area/"
+to = "/hachimantai/mountain/shigarai-ski-area/index.html"
+
+[[services.production.rewrites]]
 from = "/hachimantai/hachimantai/"
 to = "/hachimantai/hachimantai/index.html"
 
@@ -1977,6 +2061,14 @@ to = "/yuzawa/mountain/kagura/index.html"
 [[services.production.rewrites]]
 from = "/yuzawa/mountain/naeba/"
 to = "/yuzawa/mountain/naeba/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/mountain/yuzawa-park-ski-resort/"
+to = "/yuzawa/mountain/yuzawa-park-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/yuzawa/mountain/ipponsugi-snow-park/"
+to = "/yuzawa/mountain/ipponsugi-snow-park/index.html"
 
 [[services.production.rewrites]]
 from = "/yuzawa/echigo-yuzawa/"
@@ -2083,6 +2175,14 @@ from = "/zao-onsen/mountain/zao-onsen-resort/"
 to = "/zao-onsen/mountain/zao-onsen-resort/index.html"
 
 [[services.production.rewrites]]
+from = "/zao-onsen/mountain/zao-bodaira-liza-world/"
+to = "/zao-onsen/mountain/zao-bodaira-liza-world/index.html"
+
+[[services.production.rewrites]]
+from = "/zao-onsen/mountain/zao-sarukura-ski-resort/"
+to = "/zao-onsen/mountain/zao-sarukura-ski-resort/index.html"
+
+[[services.production.rewrites]]
 from = "/zao-onsen/zao-onsen/"
 to = "/zao-onsen/zao-onsen/index.html"
 
@@ -2133,6 +2233,10 @@ to = "/hakkoda-aomori-spring/mountain/hakkoda/index.html"
 [[services.production.rewrites]]
 from = "/hakkoda-aomori-spring/mountain/aomori-spring/"
 to = "/hakkoda-aomori-spring/mountain/aomori-spring/index.html"
+
+[[services.production.rewrites]]
+from = "/hakkoda-aomori-spring/mountain/hakkoda-kokusai-ski-area/"
+to = "/hakkoda-aomori-spring/mountain/hakkoda-kokusai-ski-area/index.html"
 
 [[services.production.rewrites]]
 from = "/hakkoda-aomori-spring/aomori/"
@@ -2243,6 +2347,10 @@ from = "/appi-shizukuishi/mountain/shizukuishi-resort/"
 to = "/appi-shizukuishi/mountain/shizukuishi-resort/index.html"
 
 [[services.production.rewrites]]
+from = "/appi-shizukuishi/mountain/iwate-kogen-snow-park/"
+to = "/appi-shizukuishi/mountain/iwate-kogen-snow-park/index.html"
+
+[[services.production.rewrites]]
 from = "/appi-shizukuishi/appi-kogen/"
 to = "/appi-shizukuishi/appi-kogen/index.html"
 
@@ -2349,6 +2457,58 @@ to = "/bandai/mountain/nekoma-mountain/index.html"
 [[services.production.rewrites]]
 from = "/bandai/mountain/grandeco/"
 to = "/bandai/mountain/grandeco/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/mountain/minowa-ski-resort/"
+to = "/bandai/mountain/minowa-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/mountain/aizu-kogen-daikura-ski-resort/"
+to = "/bandai/mountain/aizu-kogen-daikura-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/mountain/aizu-kogen-takatsue-ski-resort/"
+to = "/bandai/mountain/aizu-kogen-takatsue-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/mountain/inawashiro-ski-resort/"
+to = "/bandai/mountain/inawashiro-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/mountain/aizu-kogen-nango-ski-resort/"
+to = "/bandai/mountain/aizu-kogen-nango-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/mountain/numajiri-ski-resort/"
+to = "/bandai/mountain/numajiri-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/mountain/listel-ski-fantasia/"
+to = "/bandai/mountain/listel-ski-fantasia/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/mountain/fairy-land-kaneyama-ski-resort/"
+to = "/bandai/mountain/fairy-land-kaneyama-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/mountain/aizu-kogen-takahata-ski-resort/"
+to = "/bandai/mountain/aizu-kogen-takahata-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/mountain/sannokura-ski-resort/"
+to = "/bandai/mountain/sannokura-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/mountain/oze-hinoemata-onsen-ski-resort/"
+to = "/bandai/mountain/oze-hinoemata-onsen-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/mountain/tadami-town-ski-resort/"
+to = "/bandai/mountain/tadami-town-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/bandai/mountain/urabandai-ski-resort/"
+to = "/bandai/mountain/urabandai-ski-resort/index.html"
 
 [[services.production.rewrites]]
 from = "/bandai/inawashiro/"
@@ -8205,6 +8365,702 @@ to = "/vernon/vernon-nj/transport/index.html"
 [[services.production.rewrites]]
 from = "/vernon/vernon-nj/explore/"
 to = "/vernon/vernon-nj/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/nagano-regional/mountain/togakushi-ski-resort/"
+to = "/nagano-regional/mountain/togakushi-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/gifu-aichi/mountain/takasu-snow-park/"
+to = "/gifu-aichi/mountain/takasu-snow-park/index.html"
+
+[[services.production.rewrites]]
+from = "/gifu-aichi/mountain/washitopia-washigatake-white-pia-takasu/"
+to = "/gifu-aichi/mountain/washitopia-washigatake-white-pia-takasu/index.html"
+
+[[services.production.rewrites]]
+from = "/gifu-aichi/mountain/dynaland/"
+to = "/gifu-aichi/mountain/dynaland/index.html"
+
+[[services.production.rewrites]]
+from = "/akita-regional/mountain/tazawako-ski-resort/"
+to = "/akita-regional/mountain/tazawako-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/gunma-regional/mountain/palcall-tsumagoi-resort/"
+to = "/gunma-regional/mountain/palcall-tsumagoi-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/chugoku-ski-areas/mountain/mizuho-highland/"
+to = "/chugoku-ski-areas/mountain/mizuho-highland/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/hakodate-nanae-snow-park/"
+to = "/hokkaido-regional/mountain/hakodate-nanae-snow-park/index.html"
+
+[[services.production.rewrites]]
+from = "/gifu-aichi/mountain/meiho-ski-resort/"
+to = "/gifu-aichi/mountain/meiho-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/iwate-regional/mountain/geto-kogen-ski-resort/"
+to = "/iwate-regional/mountain/geto-kogen-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/gifu-aichi/mountain/winghills-shirotori-resort/"
+to = "/gifu-aichi/mountain/winghills-shirotori-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/nagano-regional/mountain/davos-taro-sugadaira-kogen/"
+to = "/nagano-regional/mountain/davos-taro-sugadaira-kogen/index.html"
+
+[[services.production.rewrites]]
+from = "/gunma-regional/mountain/white-world-oze-iwakura/"
+to = "/gunma-regional/mountain/white-world-oze-iwakura/index.html"
+
+[[services.production.rewrites]]
+from = "/akita-regional/mountain/chokai-kogen-yashima-ski-area/"
+to = "/akita-regional/mountain/chokai-kogen-yashima-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/miyagi-regional/mountain/miyagi-zao-eboshi-resort/"
+to = "/miyagi-regional/mountain/miyagi-zao-eboshi-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/hokuriku/mountain/iox-arosa-ski-resort/"
+to = "/hokuriku/mountain/iox-arosa-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/gunma-regional/mountain/ogna-hotaka-ski-area/"
+to = "/gunma-regional/mountain/ogna-hotaka-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/akita-regional/mountain/ani-ski-area/"
+to = "/akita-regional/mountain/ani-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/fuji-ski-areas/mountain/sun-meadows-kiyosato-ski-resort/"
+to = "/fuji-ski-areas/mountain/sun-meadows-kiyosato-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/hyogo-ski-areas/mountain/oku-kannabe-ski-area/"
+to = "/hyogo-ski-areas/mountain/oku-kannabe-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/gunma-regional/mountain/marunuma-kogen-ski-resort/"
+to = "/gunma-regional/mountain/marunuma-kogen-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/yamagata-regional/mountain/kurobushi-kogen-snow-park-jangle-jungle/"
+to = "/yamagata-regional/mountain/kurobushi-kogen-snow-park-jangle-jungle/index.html"
+
+[[services.production.rewrites]]
+from = "/hyogo-ski-areas/mountain/ojiro-ski-area/"
+to = "/hyogo-ski-areas/mountain/ojiro-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/hyogo-ski-areas/mountain/sky-valley-ski-area/"
+to = "/hyogo-ski-areas/mountain/sky-valley-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/tochigi-ski-areas/mountain/hunter-mountain-shiobara/"
+to = "/tochigi-ski-areas/mountain/hunter-mountain-shiobara/index.html"
+
+[[services.production.rewrites]]
+from = "/yamagata-regional/mountain/tengendai-kogen/"
+to = "/yamagata-regional/mountain/tengendai-kogen/index.html"
+
+[[services.production.rewrites]]
+from = "/fuji-ski-areas/mountain/fujiten-snow-resort/"
+to = "/fuji-ski-areas/mountain/fujiten-snow-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/shiga-ski-areas/mountain/biwako-valley/"
+to = "/shiga-ski-areas/mountain/biwako-valley/index.html"
+
+[[services.production.rewrites]]
+from = "/gifu-aichi/mountain/hida-nagareha-ski-area/"
+to = "/gifu-aichi/mountain/hida-nagareha-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/hyogo-ski-areas/mountain/hyper-bowl-tohachi-ski-area/"
+to = "/hyogo-ski-areas/mountain/hyper-bowl-tohachi-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/shiga-ski-areas/mountain/grand-snow-okuibuki/"
+to = "/shiga-ski-areas/mountain/grand-snow-okuibuki/index.html"
+
+[[services.production.rewrites]]
+from = "/chugoku-ski-areas/mountain/utopia-saioto/"
+to = "/chugoku-ski-areas/mountain/utopia-saioto/index.html"
+
+[[services.production.rewrites]]
+from = "/hokuriku/mountain/tateyama-sanroku-ski-resort/"
+to = "/hokuriku/mountain/tateyama-sanroku-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/gifu-aichi/mountain/snow-wave-park-shiratori-kogen/"
+to = "/gifu-aichi/mountain/snow-wave-park-shiratori-kogen/index.html"
+
+[[services.production.rewrites]]
+from = "/miyagi-regional/mountain/spring-valley-sendai-izumi-ski-resort/"
+to = "/miyagi-regional/mountain/spring-valley-sendai-izumi-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/tochigi-ski-areas/mountain/edelweiss-ski-resort/"
+to = "/tochigi-ski-areas/mountain/edelweiss-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/iwate-regional/mountain/hiraniwa-kogen-ski-area/"
+to = "/iwate-regional/mountain/hiraniwa-kogen-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/gifu-aichi/mountain/hida-hounoki-daira-ski-area/"
+to = "/gifu-aichi/mountain/hida-hounoki-daira-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/hidaka-kokusai-ski-area/"
+to = "/hokkaido-regional/mountain/hidaka-kokusai-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/aomori-regional/mountain/owani-onsen-ski-area/"
+to = "/aomori-regional/mountain/owani-onsen-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/gunma-regional/mountain/kawaba-ski-resort/"
+to = "/gunma-regional/mountain/kawaba-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/gifu-aichi/mountain/hirugano-kogen-ski-area/"
+to = "/gifu-aichi/mountain/hirugano-kogen-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/hyogo-ski-areas/mountain/manba-ski-area/"
+to = "/hyogo-ski-areas/mountain/manba-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/gunma-regional/mountain/snow-park-oze-tokura/"
+to = "/gunma-regional/mountain/snow-park-oze-tokura/index.html"
+
+[[services.production.rewrites]]
+from = "/gifu-aichi/mountain/hida-kawai-ski-area/"
+to = "/gifu-aichi/mountain/hida-kawai-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/aomori-regional/mountain/link-station-hills-moya/"
+to = "/aomori-regional/mountain/link-station-hills-moya/index.html"
+
+[[services.production.rewrites]]
+from = "/miyagi-regional/mountain/miyagi-zao-sumikawa-snow-park/"
+to = "/miyagi-regional/mountain/miyagi-zao-sumikawa-snow-park/index.html"
+
+[[services.production.rewrites]]
+from = "/chugoku-ski-areas/mountain/megahira-ski-resort/"
+to = "/chugoku-ski-areas/mountain/megahira-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/miyagi-regional/mountain/onikoube-ski-resort/"
+to = "/miyagi-regional/mountain/onikoube-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/gunma-regional/mountain/katashina-kogen-ski-area/"
+to = "/gunma-regional/mountain/katashina-kogen-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/akita-regional/mountain/jeunesse-kurikoma-ski-area/"
+to = "/akita-regional/mountain/jeunesse-kurikoma-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/hyogo-ski-areas/mountain/hyounosen-kokusai-ski-area/"
+to = "/hyogo-ski-areas/mountain/hyounosen-kokusai-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/akita-regional/mountain/taiheizan-ski-area-opas/"
+to = "/akita-regional/mountain/taiheizan-ski-area-opas/index.html"
+
+[[services.production.rewrites]]
+from = "/shiga-ski-areas/mountain/biwako-hakodateyama-ski-area/"
+to = "/shiga-ski-areas/mountain/biwako-hakodateyama-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/gifu-aichi/mountain/mont-deus-park-ski-area/"
+to = "/gifu-aichi/mountain/mont-deus-park-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/yamagata-regional/mountain/gassan-ski-resort/"
+to = "/yamagata-regional/mountain/gassan-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/gunma-regional/mountain/kazawa-snow-area/"
+to = "/gunma-regional/mountain/kazawa-snow-area/index.html"
+
+[[services.production.rewrites]]
+from = "/akita-regional/mountain/kyowa-ski-area/"
+to = "/akita-regional/mountain/kyowa-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/hokuriku/mountain/taira-ski-resort/"
+to = "/hokuriku/mountain/taira-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/iwate-regional/mountain/amihari-onsen-ski-area/"
+to = "/iwate-regional/mountain/amihari-onsen-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/gunma-regional/mountain/takamine-mountain-park/"
+to = "/gunma-regional/mountain/takamine-mountain-park/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/shokanbetsudake-ski-area/"
+to = "/hokkaido-regional/mountain/shokanbetsudake-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/chugoku-ski-areas/mountain/kotobiki-forest-park-ski-area/"
+to = "/chugoku-ski-areas/mountain/kotobiki-forest-park-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/aomori-regional/mountain/iwakisan-hyakuzawa-ski-area/"
+to = "/aomori-regional/mountain/iwakisan-hyakuzawa-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/akita-regional/mountain/hanawa-ski-area/"
+to = "/akita-regional/mountain/hanawa-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/hyogo-ski-areas/mountain/mineyama-kogen-resort-white-peak/"
+to = "/hyogo-ski-areas/mountain/mineyama-kogen-resort-white-peak/index.html"
+
+[[services.production.rewrites]]
+from = "/yamagata-regional/mountain/asahi-shizenkan-snow-park/"
+to = "/yamagata-regional/mountain/asahi-shizenkan-snow-park/index.html"
+
+[[services.production.rewrites]]
+from = "/yamagata-regional/mountain/yudonosan-ski-resort/"
+to = "/yamagata-regional/mountain/yudonosan-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/fuji-ski-areas/mountain/snow-park-yeti/"
+to = "/fuji-ski-areas/mountain/snow-park-yeti/index.html"
+
+[[services.production.rewrites]]
+from = "/aomori-regional/mountain/kamafuseyama-ski-area/"
+to = "/aomori-regional/mountain/kamafuseyama-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/shiga-ski-areas/mountain/yogo-kogen-resort-yap/"
+to = "/shiga-ski-areas/mountain/yogo-kogen-resort-yap/index.html"
+
+[[services.production.rewrites]]
+from = "/gifu-aichi/mountain/hirayu-onsen-ski-area/"
+to = "/gifu-aichi/mountain/hirayu-onsen-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/yamagata-regional/mountain/haguroyama-ski-resort/"
+to = "/yamagata-regional/mountain/haguroyama-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/shiga-ski-areas/mountain/ohana-resort/"
+to = "/shiga-ski-areas/mountain/ohana-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/gunma-regional/mountain/karuizawa-snow-park/"
+to = "/gunma-regional/mountain/karuizawa-snow-park/index.html"
+
+[[services.production.rewrites]]
+from = "/chugoku-ski-areas/mountain/ibuki-no-sato-ski-area/"
+to = "/chugoku-ski-areas/mountain/ibuki-no-sato-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/hyogo-ski-areas/mountain/up-kannabe-ski-area/"
+to = "/hyogo-ski-areas/mountain/up-kannabe-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/hokuriku/mountain/takanbo-ski-resort/"
+to = "/hokuriku/mountain/takanbo-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/hokuriku/mountain/awasuno-ski-resort/"
+to = "/hokuriku/mountain/awasuno-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/yamagata-regional/mountain/kushibiki-taranokidai-ski-resort/"
+to = "/yamagata-regional/mountain/kushibiki-taranokidai-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/shikoku-kyushu-ski-areas/mountain/sol-fa-oda-ski-gelande/"
+to = "/shikoku-kyushu-ski-areas/mountain/sol-fa-oda-ski-gelande/index.html"
+
+[[services.production.rewrites]]
+from = "/gifu-aichi/mountain/chausuyama-kogen-ski-area/"
+to = "/gifu-aichi/mountain/chausuyama-kogen-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/shiga-ski-areas/mountain/kutsuki-ski-area/"
+to = "/shiga-ski-areas/mountain/kutsuki-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/shikoku-kyushu-ski-areas/mountain/kuma-ski-land/"
+to = "/shikoku-kyushu-ski-areas/mountain/kuma-ski-land/index.html"
+
+[[services.production.rewrites]]
+from = "/yamagata-regional/mountain/tendo-kogen-ski-resort/"
+to = "/yamagata-regional/mountain/tendo-kogen-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/yamagata-regional/mountain/green-valley-kamuro-ski-resort/"
+to = "/yamagata-regional/mountain/green-valley-kamuro-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/niigata-regional/mountain/matsunoyama-onsen-ski-resort/"
+to = "/niigata-regional/mountain/matsunoyama-onsen-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/akita-regional/mountain/akita-hachimantai-ski-area/"
+to = "/akita-regional/mountain/akita-hachimantai-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/hokuriku/mountain/ushidake-onsen-ski-resort/"
+to = "/hokuriku/mountain/ushidake-onsen-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/miyagi-regional/mountain/uenono-ski-resort/"
+to = "/miyagi-regional/mountain/uenono-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/shikoku-kyushu-ski-areas/mountain/ikawa-ski-area-kainayama/"
+to = "/shikoku-kyushu-ski-areas/mountain/ikawa-ski-area-kainayama/index.html"
+
+[[services.production.rewrites]]
+from = "/niigata-regional/mountain/matsudai-family-ski-resort/"
+to = "/niigata-regional/mountain/matsudai-family-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/akita-regional/mountain/suishozan-ski-area/"
+to = "/akita-regional/mountain/suishozan-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/gifu-aichi/mountain/hida-takayama-municipal-ski-area/"
+to = "/gifu-aichi/mountain/hida-takayama-municipal-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/gunma-regional/mountain/tambara-ski-park/"
+to = "/gunma-regional/mountain/tambara-ski-park/index.html"
+
+[[services.production.rewrites]]
+from = "/chugoku-ski-areas/mountain/kyukamura-oku-daisen-kagamiganaru-ski-area/"
+to = "/chugoku-ski-areas/mountain/kyukamura-oku-daisen-kagamiganaru-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/aomori-regional/mountain/yogoshiyama-ski-area/"
+to = "/aomori-regional/mountain/yogoshiyama-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/hyogo-ski-areas/mountain/rokkosan-snow-park/"
+to = "/hyogo-ski-areas/mountain/rokkosan-snow-park/index.html"
+
+[[services.production.rewrites]]
+from = "/miyagi-regional/mountain/yakurai-family-ski-resort/"
+to = "/miyagi-regional/mountain/yakurai-family-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/fuji-ski-areas/mountain/riverwell-ikawa-ski-area/"
+to = "/fuji-ski-areas/mountain/riverwell-ikawa-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/chugoku-ski-areas/mountain/yawata-highland-191-resort/"
+to = "/chugoku-ski-areas/mountain/yawata-highland-191-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/hyogo-ski-areas/mountain/chikusa-kogen-ski-area/"
+to = "/hyogo-ski-areas/mountain/chikusa-kogen-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/nagano-regional/mountain/kisofukushima/"
+to = "/nagano-regional/mountain/kisofukushima/index.html"
+
+[[services.production.rewrites]]
+from = "/hyogo-ski-areas/mountain/banshu-tokura-ski-area/"
+to = "/hyogo-ski-areas/mountain/banshu-tokura-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/hyogo-ski-areas/mountain/tajima-farm-park-ski-area/"
+to = "/hyogo-ski-areas/mountain/tajima-farm-park-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/shiga-ski-areas/mountain/akoyama-ski-ground-snow-pal/"
+to = "/shiga-ski-areas/mountain/akoyama-ski-ground-snow-pal/index.html"
+
+[[services.production.rewrites]]
+from = "/yamagata-regional/mountain/onogawa-onsen-ski-resort/"
+to = "/yamagata-regional/mountain/onogawa-onsen-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/shiga-ski-areas/mountain/makino-kogen-family-ski-area/"
+to = "/shiga-ski-areas/mountain/makino-kogen-family-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/miyagi-regional/mountain/miyagi-zao-shiroishi-ski-resort/"
+to = "/miyagi-regional/mountain/miyagi-zao-shiroishi-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/yamagata-regional/mountain/yonezawa-ski-resort/"
+to = "/yamagata-regional/mountain/yonezawa-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/miyagi-regional/mountain/izumigatake-ski-resort/"
+to = "/miyagi-regional/mountain/izumigatake-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/akita-regional/mountain/ohdai-ski-area/"
+to = "/akita-regional/mountain/ohdai-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/miyagi-regional/mountain/miyagi-zao-shichikashuku-ski-resort/"
+to = "/miyagi-regional/mountain/miyagi-zao-shichikashuku-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/niigata-regional/mountain/maiko-snow-resort/"
+to = "/niigata-regional/mountain/maiko-snow-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/mount-racey-ski-area/"
+to = "/hokkaido-regional/mountain/mount-racey-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/niigata-regional/mountain/charmant-hiuchi-ski-resort/"
+to = "/niigata-regional/mountain/charmant-hiuchi-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/nukabira-gensenkyo-ski-area/"
+to = "/hokkaido-regional/mountain/nukabira-gensenkyo-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/niigata-regional/mountain/itoigawa-seaside-valley-ski-resort/"
+to = "/niigata-regional/mountain/itoigawa-seaside-valley-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/niigata-regional/mountain/suhara-ski-resort/"
+to = "/niigata-regional/mountain/suhara-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/pippu-ski-resort/"
+to = "/hokkaido-regional/mountain/pippu-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/nagano-regional/mountain/pine-beak-sugadaira-kogen/"
+to = "/nagano-regional/mountain/pine-beak-sugadaira-kogen/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/nayoro-piyashiri-ski-area/"
+to = "/hokkaido-regional/mountain/nayoro-piyashiri-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/niigata-regional/mountain/budoh-snow-resort/"
+to = "/niigata-regional/mountain/budoh-snow-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/fu-s-snow-area/"
+to = "/hokkaido-regional/mountain/fu-s-snow-area/index.html"
+
+[[services.production.rewrites]]
+from = "/niigata-regional/mountain/hakkaisanroku-ski-resort/"
+to = "/niigata-regional/mountain/hakkaisanroku-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/engaru-rock-valley-ski-area/"
+to = "/hokkaido-regional/mountain/engaru-rock-valley-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/hokuriku/mountain/iouzan-ski-resort/"
+to = "/hokuriku/mountain/iouzan-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/nagano-regional/mountain/yachiho-kogen-ski-resort/"
+to = "/nagano-regional/mountain/yachiho-kogen-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/nagano-regional/mountain/pilatus-tateshina-snow-resort/"
+to = "/nagano-regional/mountain/pilatus-tateshina-snow-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/fuji-ski-areas/mountain/kamui-misaka-ski-area/"
+to = "/fuji-ski-areas/mountain/kamui-misaka-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/nagano-regional/mountain/sakae-club-ski-resort/"
+to = "/nagano-regional/mountain/sakae-club-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/haginoyama-civic-ski-area/"
+to = "/hokkaido-regional/mountain/haginoyama-civic-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/nagano-regional/mountain/jibuzaka-kogen-ski-resort/"
+to = "/nagano-regional/mountain/jibuzaka-kogen-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/niigata-regional/mountain/nagaoka-municipal-ski-area/"
+to = "/niigata-regional/mountain/nagaoka-municipal-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/nagano-regional/mountain/shirakaba-kogen-kokusai-ski-resort/"
+to = "/nagano-regional/mountain/shirakaba-kogen-kokusai-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/aomori-regional/mountain/oirase-keiryu-onsen-ski-area/"
+to = "/aomori-regional/mountain/oirase-keiryu-onsen-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/shikoku-kyushu-ski-areas/mountain/ishizuchi-ski-area/"
+to = "/shikoku-kyushu-ski-areas/mountain/ishizuchi-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/nagano-regional/mountain/tateshina-tokyu-ski-resort/"
+to = "/nagano-regional/mountain/tateshina-tokyu-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/nagano-regional/mountain/komagane-kogen-ski-resort/"
+to = "/nagano-regional/mountain/komagane-kogen-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/niigata-regional/mountain/koshi-kogen-ski-resort/"
+to = "/niigata-regional/mountain/koshi-kogen-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/akita-regional/mountain/tengamori-ski-area/"
+to = "/akita-regional/mountain/tengamori-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/muroran-danpara-ski-area/"
+to = "/hokkaido-regional/mountain/muroran-danpara-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/akan-royal-valley/"
+to = "/hokkaido-regional/mountain/akan-royal-valley/index.html"
+
+[[services.production.rewrites]]
+from = "/niigata-regional/mountain/yakushi-ski-resort/"
+to = "/niigata-regional/mountain/yakushi-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/wakamatsu-citizens-ski-area/"
+to = "/hokkaido-regional/mountain/wakamatsu-citizens-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/karurusu-onsen-sanlaiva-ski-area/"
+to = "/hokkaido-regional/mountain/karurusu-onsen-sanlaiva-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/nagano-regional/mountain/senjojiki-ski-area/"
+to = "/nagano-regional/mountain/senjojiki-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/abashiri-lake-view-ski-area/"
+to = "/hokkaido-regional/mountain/abashiri-lake-view-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/pirika-ski-area/"
+to = "/hokkaido-regional/mountain/pirika-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/iwate-regional/mountain/namari-onsen-ski-area/"
+to = "/iwate-regional/mountain/namari-onsen-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/greenpia-onuma-ski-area/"
+to = "/hokkaido-regional/mountain/greenpia-onuma-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/memuro-ski-area/"
+to = "/hokkaido-regional/mountain/memuro-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/nagano-regional/mountain/hiraya-kogen-ski-resort/"
+to = "/nagano-regional/mountain/hiraya-kogen-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/nagano-regional/mountain/asahi-prime-ski-resort/"
+to = "/nagano-regional/mountain/asahi-prime-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/nagano-regional/mountain/fujimi-kogen-ski-resort/"
+to = "/nagano-regional/mountain/fujimi-kogen-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/iwate-regional/mountain/yuda-ski-area/"
+to = "/iwate-regional/mountain/yuda-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/niigata-regional/mountain/okutadami-maruyama-ski-resort/"
+to = "/niigata-regional/mountain/okutadami-maruyama-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/asahikawa-santa-present-park-maruyama-ski-area/"
+to = "/hokkaido-regional/mountain/asahikawa-santa-present-park-maruyama-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/nagano-regional/mountain/ontake-ski-resort/"
+to = "/nagano-regional/mountain/ontake-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/nagano-regional/mountain/yabuhara-kogen-ski-resort/"
+to = "/nagano-regional/mountain/yabuhara-kogen-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/nagano-regional/mountain/rewild-ninja-snow-highland/"
+to = "/nagano-regional/mountain/rewild-ninja-snow-highland/index.html"
+
+[[services.production.rewrites]]
+from = "/nagano-regional/mountain/chateraise-ski-valley-nobeyama/"
+to = "/nagano-regional/mountain/chateraise-ski-valley-nobeyama/index.html"
+
+[[services.production.rewrites]]
+from = "/nagano-regional/mountain/yamaboku-wild-snow-park/"
+to = "/nagano-regional/mountain/yamaboku-wild-snow-park/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/horotachi-ski-area/"
+to = "/hokkaido-regional/mountain/horotachi-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/hokkaido-greenland-white-park-iwamizawa/"
+to = "/hokkaido-regional/mountain/hokkaido-greenland-white-park-iwamizawa/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/gokazan-ski-area/"
+to = "/hokkaido-regional/mountain/gokazan-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/consadole-niki-ski-park/"
+to = "/hokkaido-regional/mountain/consadole-niki-ski-park/index.html"
+
+[[services.production.rewrites]]
+from = "/iwate-regional/mountain/okunakayama-kogen-ski-area/"
+to = "/iwate-regional/mountain/okunakayama-kogen-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/esashi-mikasayama-ski-area/"
+to = "/hokkaido-regional/mountain/esashi-mikasayama-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/kamoidake-international-ski-area/"
+to = "/hokkaido-regional/mountain/kamoidake-international-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/iwate-regional/mountain/akabane-ski-area/"
+to = "/iwate-regional/mountain/akabane-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/ishikari-heigen-ski-area/"
+to = "/hokkaido-regional/mountain/ishikari-heigen-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/midori-ski-area/"
+to = "/hokkaido-regional/mountain/midori-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/nagano-regional/mountain/kurohime-kogen-snow-park/"
+to = "/nagano-regional/mountain/kurohime-kogen-snow-park/index.html"
 
 [[services.production.rewrites]]
 from = "/*"

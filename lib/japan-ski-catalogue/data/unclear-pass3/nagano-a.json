@@ -1,0 +1,317 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-08-26",
+  "sourceReviewFiles": [
+    "lib/japan-ski-catalogue/data/reviews/nagano.json"
+  ],
+  "assignedRecordIds": [
+    "workbook:10",
+    "workbook:11",
+    "workbook:17",
+    "workbook:30",
+    "workbook:38",
+    "workbook:41",
+    "workbook:53",
+    "workbook:54",
+    "workbook:56",
+    "workbook:65",
+    "workbook:69",
+    "workbook:70",
+    "workbook:79",
+    "workbook:81",
+    "workbook:85",
+    "workbook:86",
+    "workbook:89",
+    "workbook:93",
+    "workbook:101",
+    "workbook:102",
+    "workbook:108",
+    "workbook:121",
+    "workbook:123",
+    "workbook:128",
+    "workbook:130",
+    "workbook:132",
+    "workbook:142",
+    "workbook:144",
+    "workbook:150",
+    "workbook:158",
+    "workbook:159",
+    "workbook:161",
+    "workbook:162",
+    "workbook:174",
+    "workbook:182",
+    "workbook:187",
+    "workbook:190"
+  ],
+  "proposals": [
+    {
+      "recordId": "workbook:10",
+      "proposedStatus": "remain_unclear",
+      "notes": "Searched the operator domain and Japanese/English queries for 白馬岩岳 2025-26/2026 営業, season, closure, and lift notices. The official resort site establishes identity, but no dated authoritative operating or closure notice was located."
+    },
+    {
+      "recordId": "workbook:11",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Hakuba Happo-one Ski Resort",
+      "officialNameJa": "白馬八方尾根スキー場",
+      "officialUrl": "https://www.happo-one.jp/en/",
+      "statusEvidenceUrl": "https://www.happo-one.jp/en/news/38187/",
+      "statusEvidenceQuote": "ski and snowboard operations for the 2025-2026 season will conclude on Sunday, April 19 ... since our season opening on December 6.",
+      "evidenceAsOf": "2026-04-17",
+      "freshnessReviewRequired": true,
+      "notes": "The operator's dated end-of-season notice explicitly confirms the 2025-26 ski operation and its opening date; no 2026-27 operating notice was found."
+    },
+    {
+      "recordId": "workbook:17",
+      "proposedStatus": "remain_unclear",
+      "notes": "Searched Tsugaike's operator domain plus 栂池高原 2025-26/2026 営業, リフト, season-end, 休業, and closure queries. A regional Hakuba Valley item mentions a closed Tsugaike sub-slope, but it is not sufficiently explicit operator evidence for the whole intake record."
+    },
+    {
+      "recordId": "workbook:30",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Madarao Kogen Ski Resort / Tangram Ski Circus",
+      "officialNameJa": "斑尾高原スキー場／タングラムスキーサーカス",
+      "officialUrl": "https://www.madarao.jp/",
+      "statusEvidenceUrl": "https://www.madarao.jp/13958",
+      "statusEvidenceQuote": "2026-2027共通リフトシーズン券 ... ご利用可能スキー場 ・斑尾高原スキー場 ・タングラムスキーサーカス",
+      "evidenceAsOf": "2026-08-15",
+      "notes": "Madarao's official 2026-27 common-season-pass announcement expressly includes both components of this combined intake record."
+    },
+    {
+      "recordId": "workbook:38",
+      "proposedStatus": "remain_unclear",
+      "notes": "Searched ontakeskijo.com and おんたけスキー場/御嶽 2025-26/2026 営業, リフト, season, 休業, and 閉鎖. The operator site provides identity only; no dated authoritative operation or closure statement was confirmed."
+    },
+    {
+      "recordId": "workbook:41",
+      "proposedStatus": "remain_unclear",
+      "notes": "Searched the Hotel Green Plaza Cortina operator domain and 白馬コルチナ 2025-26/2026 営業, リフト, season-end, 休業, and 閉鎖. No explicit authoritative current/recent-season status notice was located."
+    },
+    {
+      "recordId": "workbook:53",
+      "proposedStatus": "remain_unclear",
+      "notes": "Searched miaski-resort.com and 開田高原マイア/マイアスキー場 2025-26/2026 営業, リフト, 休業, and 閉鎖. The located operator material did not supply a dated explicit operating or closure statement."
+    },
+    {
+      "recordId": "workbook:54",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Togari Onsen Ski Resort",
+      "officialNameJa": "戸狩温泉スキー場",
+      "officialUrl": "https://togari.jp/winter/",
+      "statusEvidenceUrl": "https://togari.jp/winter/",
+      "statusEvidenceQuote": "2026.04.01 シーズン終了後の各施設の営業時間について",
+      "evidenceAsOf": "2026-04-01",
+      "freshnessReviewRequired": true,
+      "notes": "The operator's dated notice explicitly concerns post-season facility hours, supporting completion of the 2025-26 ski season. No 2026-27 notice was found."
+    },
+    {
+      "recordId": "workbook:56",
+      "proposedStatus": "remain_unclear",
+      "notes": "Searched iizunaresort.com and いいづなリゾート 2025-26/2026 営業, リフト, season-end, 休業, and 閉鎖. No dated authoritative operating or closure statement was confirmed."
+    },
+    {
+      "recordId": "workbook:65",
+      "proposedStatus": "remain_unclear",
+      "notes": "Searched Japanese and English for 乗鞍高原スキー場/Norikura Kogen 2025-26/2026 operation, lift, closure, and municipal notices. No operator or local-government statement with an explicit current/recent-season status was located."
+    },
+    {
+      "recordId": "workbook:69",
+      "proposedStatus": "remain_unclear",
+      "notes": "Searched gakutoresort.jp and 野麦峠スキー場/奈川 2025-26/2026 営業, リフト, 休業, and 閉鎖. The located official material did not establish a dated operating or permanent-closure status."
+    },
+    {
+      "recordId": "workbook:70",
+      "proposedStatus": "remain_unclear",
+      "notes": "Searched yunomaru.co.jp and 湯の丸スキー場 2025-26/2026 営業, リフト, season-end, 休業, and 閉鎖. No explicit dated status evidence from the operator or government was confirmed."
+    },
+    {
+      "recordId": "workbook:79",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Nishitateyama Ski Area",
+      "officialNameJa": "西館山スキー場",
+      "officialUrl": "https://www.shigakogen-ski.or.jp/lift/nishitateyma/",
+      "statusEvidenceUrl": "https://shigakogen-ski.or.jp/winter/",
+      "statusEvidenceQuote": "2026-2027 志賀高原リフト券料金・シーズンパスについて / 一の瀬・高天ヶ原・東館山・西館山・発哺ブナ平・タンネの森・寺小屋エリア",
+      "evidenceAsOf": "2026-07-15",
+      "notes": "The Shiga Kogen operator association's 2026-27 lift-product page explicitly includes 西館山 in the operating ticket area. The URL's 'nishitateyma' spelling is retained as the operator's path, not the facility name."
+    },
+    {
+      "recordId": "workbook:81",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "White Resort HAKUBA SANOSAKA",
+      "officialNameJa": "ホワイトリゾート白馬さのさか",
+      "officialUrl": "https://www.sanosaka.jp/",
+      "statusEvidenceUrl": "https://www.hakubavalley.com/info_en/6222/",
+      "statusEvidenceQuote": "White Resort HAKUBA SANOSAKA (Closed March 15)",
+      "evidenceAsOf": "2026-03-23",
+      "freshnessReviewRequired": true,
+      "notes": "Hakuba Valley's official 2025-26 end-of-season notice identifies the current name and records its seasonal closure on March 15; no 2026-27 notice was located."
+    },
+    {
+      "recordId": "workbook:85",
+      "proposedStatus": "remain_unclear",
+      "notes": "Searched X-JAM, よませ, 高井富士, Mt. Kosha, and スノーリゾートロマンスの神様 with 2025-26/2026 operation, rename, closure, and merger terms. Available material indicates changing area branding but no authoritative source was found that explicitly maps this combined intake record to a successor."
+    },
+    {
+      "recordId": "workbook:86",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Kashimayari Snow Resort Family Park",
+      "officialNameJa": "鹿島槍スキー場ファミリーパーク",
+      "officialUrl": "https://www.kashimayari.net/snow/",
+      "statusEvidenceUrl": "https://www.hakubavalley.com/info_en/6222/",
+      "statusEvidenceQuote": "Kashimayari Snow Resort Family Park (Closed March 22)",
+      "evidenceAsOf": "2026-03-23",
+      "freshnessReviewRequired": true,
+      "notes": "Hakuba Valley's official seasonal-close notice confirms operation through the 2025-26 season under the current Family Park name; no 2026-27 notice was found."
+    },
+    {
+      "recordId": "workbook:89",
+      "proposedStatus": "remain_unclear",
+      "notes": "Searched yabuhara-kogen.jp and やぶはら高原 2025-26/2026 営業, リフト, season-end, 休業, and 閉鎖. No dated authoritative status statement was confirmed."
+    },
+    {
+      "recordId": "workbook:93",
+      "proposedStatus": "remain_unclear",
+      "notes": "Searched the Kurumayama winter operator domain and 車山高原 2025-26/2026 営業, lift, season-end, 休業, and closure notices. No explicit dated official status evidence was located."
+    },
+    {
+      "recordId": "workbook:101",
+      "proposedStatus": "remain_unclear",
+      "notes": "Searched whitebirch.co.jp and 白樺リゾート池の平/白樺湖ロイヤルヒル/白樺2in1 2025-26/2026 operating and closure notices. No authoritative item explicitly establishes the 2in1 intake facility's current/recent operating status."
+    },
+    {
+      "recordId": "workbook:102",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Ryuoo Ski Park",
+      "officialNameJa": "竜王スキーパーク",
+      "officialUrl": "https://www.ryuoo.com/",
+      "statusEvidenceUrl": "https://www.madarao.jp/13958",
+      "statusEvidenceQuote": "2026-2027共通リフトシーズン券 ... ご利用可能スキー場 ... 竜王スキーパーク",
+      "evidenceAsOf": "2026-08-15",
+      "notes": "Madarao's official 2026-27 NAGANO 7 season-pass announcement expressly lists Ryuoo Ski Park among the participating ski areas."
+    },
+    {
+      "recordId": "workbook:108",
+      "proposedStatus": "remain_unclear",
+      "notes": "Searched blanche-ski.com and ブランシュたかやま 2025-26/2026 営業, lift, season-end, 休業, and closure notices. No dated authoritative operation or closure statement was confirmed."
+    },
+    {
+      "recordId": "workbook:121",
+      "proposedStatus": "remain_unclear",
+      "notes": "Searched royalhill.co.jp and 白樺湖ロイヤルヒル 2025-26/2026 営業, lift, season-end, 休業, and closure notices. No explicit dated official status evidence was located."
+    },
+    {
+      "recordId": "workbook:123",
+      "proposedStatus": "remain_unclear",
+      "notes": "Searched the Prince Hotels operator domain and 軽井沢プリンスホテルスキー場 2025-26/2026 operation, ticket, season-end, 休業, and closure notices. The generic resort pages are identity/discovery evidence; no explicit dated status notice was confirmed."
+    },
+    {
+      "recordId": "workbook:128",
+      "proposedStatus": "remain_unclear",
+      "notes": "Searched fujimipanorama.com and 富士見パノラマ 2025-26/2026 営業, lift, season-end, 休業, and closure notices. No explicit dated operator or municipal status statement was located."
+    },
+    {
+      "recordId": "workbook:130",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Pine Beak (Sugadaira Kogen)",
+      "officialNameJa": "菅平高原スノーリゾート パインビーク",
+      "officialUrl": "https://sugadaira-snowresort.com/",
+      "statusEvidenceUrl": "https://sugadaira-snowresort.com/wp2/wp-content/uploads/2025/09/hayawari0901.pdf",
+      "statusEvidenceQuote": "2025-2026 SEASON PASS; valid for Davos, Taro and Pine Beak",
+      "evidenceAsOf": "2025-09-01",
+      "freshnessReviewRequired": true,
+      "notes": "The Sugadaira operator's 2025-26 season-pass document explicitly covers Pine Beak. No 2026-27 notice was found."
+    },
+    {
+      "recordId": "workbook:132",
+      "proposedStatus": "remain_unclear",
+      "notes": "Searched rewild-ninja-snow-highland.com and リワイルド忍者スノーハイランド/木島平 2025-26/2026 operation, opening, closure, and rename notices. No dated authoritative statement confirms current/recent ski operation or a successor relationship."
+    },
+    {
+      "recordId": "workbook:142",
+      "proposedStatus": "remain_unclear",
+      "notes": "Searched the Chateraise Resort Yatsugatake operator domain and シャトレーゼスキーバレー野辺山 2025-26/2026 営業, lift, season-end, 休業, and closure notices. Third-party posts were excluded; no qualifying official status notice was confirmed."
+    },
+    {
+      "recordId": "workbook:144",
+      "proposedStatus": "remain_unclear",
+      "notes": "Searched yamaboku.co.jp and 山田牧場/ヤマボク 2025-26/2026 営業, lift, season-end, 休業, and closure notices. No explicit dated authoritative operating or closure statement was located."
+    },
+    {
+      "recordId": "workbook:150",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Sun Valley Ski Area",
+      "officialNameJa": "サンバレースキー場",
+      "officialUrl": "https://www.shigakogen-ski.com/",
+      "statusEvidenceUrl": "https://shigakogen-ski.or.jp/winter/",
+      "statusEvidenceQuote": "2026-2027 志賀高原リフト券料金・シーズンパスについて / サンバレー・丸池・蓮池エリア",
+      "evidenceAsOf": "2026-07-15",
+      "notes": "The Shiga Kogen operator association's 2026-27 lift-product page explicitly scopes Sun Valley within the ticket area."
+    },
+    {
+      "recordId": "workbook:158",
+      "proposedStatus": "remain_unclear",
+      "notes": "Searched kijimadaira-ski.com and 木島平/Mt. Kosha 2025-26/2026 営業, 閉鎖, 統合, and リワイルド忍者 terms. No authoritative notice explicitly proves operation, permanent closure, or a merger/successor mapping for this record."
+    },
+    {
+      "recordId": "workbook:159",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Tannenomori Okojo Ski Area",
+      "officialNameJa": "タンネの森オコジョスキー場",
+      "officialUrl": "https://www.shigakogen-ski.com/",
+      "statusEvidenceUrl": "https://shigakogen-ski.or.jp/winter/",
+      "statusEvidenceQuote": "2026-2027 志賀高原リフト券料金・シーズンパスについて / 一の瀬・高天ヶ原・東館山・西館山・発哺ブナ平・タンネの森・寺小屋エリア",
+      "evidenceAsOf": "2026-07-15",
+      "notes": "The Shiga Kogen operator association's 2026-27 lift-product page explicitly includes タンネの森 in its operating ticket area."
+    },
+    {
+      "recordId": "workbook:161",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Hasuike Ski Area",
+      "officialNameJa": "蓮池スキー場",
+      "officialUrl": "https://www.shigakogen-ski.or.jp/lift/hasuike/",
+      "statusEvidenceUrl": "https://shigakogen-ski.or.jp/winter/",
+      "statusEvidenceQuote": "2026-2027 志賀高原リフト券料金・シーズンパスについて / サンバレー・丸池・蓮池エリア",
+      "evidenceAsOf": "2026-07-15",
+      "notes": "The Shiga Kogen operator association's 2026-27 lift-product page explicitly scopes 蓮池 within the ticket area."
+    },
+    {
+      "recordId": "workbook:162",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Jigatake Snow Resort",
+      "officialNameJa": "爺ガ岳スキー場",
+      "officialUrl": "https://jiigatake.com/",
+      "statusEvidenceUrl": "https://www.hakubavalley.com/info_en/6222/",
+      "statusEvidenceQuote": "Jigatake Snow Resort (Closed March 22)",
+      "evidenceAsOf": "2026-03-23",
+      "freshnessReviewRequired": true,
+      "notes": "Hakuba Valley's official 2025-26 end-of-season notice explicitly records Jigatake's March 22 seasonal closure; no 2026-27 notice was found."
+    },
+    {
+      "recordId": "workbook:174",
+      "proposedStatus": "remain_unclear",
+      "notes": "Searched koumireex-skivalley.com and 小海リエックス/小海リエックス・スキーバレー 2025-26/2026 営業, lift, season-end, 休業, and closure notices. No explicit dated authoritative status evidence was confirmed."
+    },
+    {
+      "recordId": "workbook:182",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Hoppo Bunadaira Ski Area",
+      "officialNameJa": "発哺ブナ平スキー場",
+      "officialUrl": "https://shigakogen.co.jp/highlight/buna",
+      "statusEvidenceUrl": "https://shigakogen-ski.or.jp/winter/",
+      "statusEvidenceQuote": "2026-2027 志賀高原リフト券料金・シーズンパスについて / 一の瀬・高天ヶ原・東館山・西館山・発哺ブナ平・タンネの森・寺小屋エリア",
+      "evidenceAsOf": "2026-07-15",
+      "notes": "The Shiga Kogen operator association's 2026-27 lift-product page explicitly includes 発哺ブナ平 in its operating ticket area."
+    },
+    {
+      "recordId": "workbook:187",
+      "proposedStatus": "remain_unclear",
+      "notes": "Searched saku-parada.jp and 佐久スキーガーデンパラダ 2025-26/2026 営業, lift, season-end, 休業, and closure notices. No explicit dated operator or municipal status statement was located."
+    },
+    {
+      "recordId": "workbook:190",
+      "proposedStatus": "remain_unclear",
+      "notes": "Searched inaski.com and 伊那スキーリゾート 2025-26/2026 営業, lift, season-end, 休業, and closure notices. No dated authoritative operation or closure statement was confirmed."
+    }
+  ]
+}

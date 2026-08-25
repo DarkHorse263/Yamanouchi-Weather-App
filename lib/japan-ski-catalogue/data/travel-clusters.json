@@ -1,0 +1,3654 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-26",
+  "counts": {
+    "regions": 36,
+    "newRegions": 17,
+    "baseTowns": 179,
+    "records": 288
+  },
+  "regions": [
+    {
+      "travelRegionId": "niseko",
+      "name": "Niseko",
+      "nameJa": "Niseko",
+      "prefectures": [
+        "北海道"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "kutchan",
+          "name": "Kutchan",
+          "nameJa": "倶知安"
+        },
+        {
+          "baseTownId": "grand-hirafu",
+          "name": "Niseko Grand Hirafu",
+          "nameJa": "ニセコマウンテンリゾート グラン・ヒラフ"
+        },
+        {
+          "baseTownId": "niseko-rankoshi",
+          "name": "Rankoshi",
+          "nameJa": "蘭越"
+        }
+      ],
+      "recordIds": [
+        "workbook:1a",
+        "workbook:1b",
+        "workbook:1c",
+        "workbook:1d",
+        "workbook:83",
+        "workbook:380",
+        "workbook:420",
+        "workbook:452",
+        "workbook:317"
+      ]
+    },
+    {
+      "travelRegionId": "rusutsu-kiroro",
+      "name": "Rusutsu & Kiroro",
+      "nameJa": "Rusutsu & Kiroro",
+      "prefectures": [
+        "北海道"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "rusutsu-resort",
+          "name": "Rusutsu Resort",
+          "nameJa": "ルスツリゾート"
+        },
+        {
+          "baseTownId": "kiroro",
+          "name": "Kiroro",
+          "nameJa": "キロロ"
+        }
+      ],
+      "recordIds": [
+        "workbook:2",
+        "workbook:7"
+      ]
+    },
+    {
+      "travelRegionId": "furano",
+      "name": "Furano",
+      "nameJa": "Furano",
+      "prefectures": [
+        "北海道"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "furano-ski-resort",
+          "name": "Furano Ski Resort",
+          "nameJa": "富良野スキー場"
+        },
+        {
+          "baseTownId": "furano-minami-furano",
+          "name": "Minami-Furano",
+          "nameJa": "Minami-Furano"
+        }
+      ],
+      "recordIds": [
+        "workbook:3",
+        "workbook:221"
+      ]
+    },
+    {
+      "travelRegionId": "tomamu-sahoro",
+      "name": "Tomamu & Sahoro",
+      "nameJa": "Tomamu & Sahoro",
+      "prefectures": [
+        "北海道"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "shimukappu",
+          "name": "Shimukappu",
+          "nameJa": "占冠"
+        }
+      ],
+      "recordIds": [
+        "workbook:4",
+        "workbook:15"
+      ]
+    },
+    {
+      "travelRegionId": "yamanouchi",
+      "name": "Yamanouchi",
+      "nameJa": "Yamanouchi",
+      "prefectures": [
+        "長野県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "yudanaka",
+          "name": "Yudanaka",
+          "nameJa": "湯田中"
+        }
+      ],
+      "recordIds": [
+        "workbook:5",
+        "workbook:39",
+        "workbook:55",
+        "workbook:75",
+        "workbook:78",
+        "workbook:112",
+        "workbook:168",
+        "workbook:176",
+        "workbook:184",
+        "workbook:189",
+        "workbook:212",
+        "workbook:276",
+        "workbook:294",
+        "workbook:79",
+        "workbook:150",
+        "workbook:159",
+        "workbook:161",
+        "workbook:182"
+      ]
+    },
+    {
+      "travelRegionId": "myoko",
+      "name": "Myoko",
+      "nameJa": "Myoko",
+      "prefectures": [
+        "新潟県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "myoko-suginohara",
+          "name": "Myoko Suginohara",
+          "nameJa": "妙高杉ノ原スキー場"
+        }
+      ],
+      "recordIds": [
+        "workbook:315"
+      ]
+    },
+    {
+      "travelRegionId": "appi-shizukuishi",
+      "name": "Appi & Shizukuishi",
+      "nameJa": "Appi & Shizukuishi",
+      "prefectures": [
+        "岩手県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "appi-kogen",
+          "name": "Appi Kogen",
+          "nameJa": "安比高原"
+        },
+        {
+          "baseTownId": "shizukuishi-resort",
+          "name": "Shizukuishi",
+          "nameJa": "雫石スキー場"
+        }
+      ],
+      "recordIds": [
+        "workbook:8",
+        "workbook:35",
+        "workbook:47",
+        "workbook:74",
+        "workbook:131"
+      ]
+    },
+    {
+      "travelRegionId": "nozawa-onsen",
+      "name": "Nozawa Onsen",
+      "nameJa": "Nozawa Onsen",
+      "prefectures": [
+        "長野県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "nozawa-onsen-village",
+          "name": "Nozawa Onsen",
+          "nameJa": "野沢温泉"
+        }
+      ],
+      "recordIds": [
+        "workbook:9"
+      ]
+    },
+    {
+      "travelRegionId": "zao-onsen",
+      "name": "Zao Onsen",
+      "nameJa": "Zao Onsen",
+      "prefectures": [
+        "山形県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "zao-onsen",
+          "name": "Zao Onsen",
+          "nameJa": "蔵王温泉"
+        }
+      ],
+      "recordIds": [
+        "workbook:12",
+        "workbook:352",
+        "workbook:361"
+      ]
+    },
+    {
+      "travelRegionId": "niigata-regional",
+      "name": "Regional Niigata",
+      "nameJa": "新潟県地方スキーエリア",
+      "prefectures": [
+        "新潟県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "niigata-tokamachi-tokamachi",
+          "name": "Tokamachi",
+          "nameJa": "十日町市"
+        },
+        {
+          "baseTownId": "niigata-regional-ishiuchi",
+          "name": "Ishiuchi",
+          "nameJa": "石打"
+        },
+        {
+          "baseTownId": "niigata-regional-itoigawa",
+          "name": "Itoigawa",
+          "nameJa": "Itoigawa"
+        },
+        {
+          "baseTownId": "niigata-regional-suhara",
+          "name": "Suhara",
+          "nameJa": "Suhara"
+        },
+        {
+          "baseTownId": "niigata-regional-asahi",
+          "name": "Asahi",
+          "nameJa": "Asahi"
+        },
+        {
+          "baseTownId": "niigata-regional-muikamachi",
+          "name": "Muikamachi",
+          "nameJa": "Muikamachi"
+        },
+        {
+          "baseTownId": "niigata-regional-nagaoka",
+          "name": "Nagaoka",
+          "nameJa": "Nagaoka"
+        },
+        {
+          "baseTownId": "niigata-regional-yamakoshi",
+          "name": "Yamakoshi",
+          "nameJa": "Yamakoshi"
+        },
+        {
+          "baseTownId": "niigata-regional-yunotani",
+          "name": "Yunotani",
+          "nameJa": "Yunotani"
+        },
+        {
+          "baseTownId": "niigata-regional-uonuma",
+          "name": "Uonuma",
+          "nameJa": "Uonuma"
+        },
+        {
+          "baseTownId": "ikenotaira-onsen",
+          "name": "Ikenotaira Onsen",
+          "nameJa": "Ikenotaira Onsen"
+        }
+      ],
+      "recordIds": [
+        "workbook:260",
+        "workbook:296",
+        "workbook:14",
+        "workbook:59",
+        "workbook:76",
+        "workbook:91",
+        "workbook:175",
+        "workbook:180",
+        "workbook:243",
+        "workbook:273",
+        "workbook:301",
+        "workbook:400",
+        "workbook:19c",
+        "workbook:44"
+      ]
+    },
+    {
+      "travelRegionId": "nagano-regional",
+      "name": "Regional Nagano",
+      "nameJa": "長野県地方スキーエリア",
+      "prefectures": [
+        "長野県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "nagano-nagano-nagano",
+          "name": "Nagano",
+          "nameJa": "Nagano"
+        },
+        {
+          "baseTownId": "nagano-sugadaira-ueda",
+          "name": "Ueda",
+          "nameJa": "Ueda"
+        },
+        {
+          "baseTownId": "nagano-kiso-kiso",
+          "name": "Kiso",
+          "nameJa": "木曽町"
+        },
+        {
+          "baseTownId": "nagano-regional-shiojiri",
+          "name": "Shiojiri",
+          "nameJa": "Shiojiri"
+        },
+        {
+          "baseTownId": "nagano-regional-ueda",
+          "name": "Ueda",
+          "nameJa": "Ueda"
+        },
+        {
+          "baseTownId": "nagano-regional-sakuho",
+          "name": "Sakuho",
+          "nameJa": "Sakuho"
+        },
+        {
+          "baseTownId": "nagano-regional-tateshina",
+          "name": "Tateshina",
+          "nameJa": "Tateshina"
+        },
+        {
+          "baseTownId": "nagano-regional-sakae",
+          "name": "Sakae",
+          "nameJa": "Sakae"
+        },
+        {
+          "baseTownId": "nagano-regional-tomi",
+          "name": "Tomi",
+          "nameJa": "Tomi"
+        },
+        {
+          "baseTownId": "nagano-regional-chino",
+          "name": "Chino",
+          "nameJa": "Chino"
+        },
+        {
+          "baseTownId": "nagano-regional-komagane",
+          "name": "Komagane",
+          "nameJa": "Komagane"
+        },
+        {
+          "baseTownId": "nagano-regional-anan",
+          "name": "Anan",
+          "nameJa": "Anan"
+        },
+        {
+          "baseTownId": "nagano-regional-matsumoto",
+          "name": "Matsumoto",
+          "nameJa": "Matsumoto"
+        },
+        {
+          "baseTownId": "nagano-regional-fujimi",
+          "name": "Fujimi",
+          "nameJa": "Fujimi"
+        },
+        {
+          "baseTownId": "nagano-regional-nakano",
+          "name": "Nakano",
+          "nameJa": "中野"
+        },
+        {
+          "baseTownId": "nagano-regional-shinano",
+          "name": "Shinano",
+          "nameJa": "信濃町"
+        }
+      ],
+      "recordIds": [
+        "workbook:16",
+        "workbook:57",
+        "workbook:348",
+        "workbook:102",
+        "workbook:130",
+        "workbook:197",
+        "workbook:198",
+        "workbook:201",
+        "workbook:240",
+        "workbook:252",
+        "workbook:271",
+        "workbook:272",
+        "workbook:330",
+        "workbook:360",
+        "workbook:364",
+        "workbook:386",
+        "workbook:38",
+        "workbook:89",
+        "workbook:132",
+        "workbook:142",
+        "workbook:144",
+        "workbook:450",
+        "workbook:398"
+      ]
+    },
+    {
+      "travelRegionId": "gifu-aichi",
+      "name": "Gifu and Aichi",
+      "nameJa": "岐阜・愛知スキーエリア",
+      "prefectures": [
+        "岐阜県",
+        "愛知県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "gifu-gujo-gujo",
+          "name": "Gujo",
+          "nameJa": "郡上市"
+        },
+        {
+          "baseTownId": "gifu-gero-gero",
+          "name": "Gero",
+          "nameJa": "下呂市"
+        },
+        {
+          "baseTownId": "gifu-hida-hida",
+          "name": "Hida",
+          "nameJa": "飛騨市"
+        },
+        {
+          "baseTownId": "gifu-takayama-takayama",
+          "name": "Takayama",
+          "nameJa": "高山市"
+        },
+        {
+          "baseTownId": "aichi-toyone-toyone",
+          "name": "Toyone",
+          "nameJa": "豊根村"
+        }
+      ],
+      "recordIds": [
+        "workbook:18",
+        "workbook:27",
+        "workbook:28",
+        "workbook:42",
+        "workbook:48",
+        "workbook:113",
+        "workbook:120",
+        "workbook:135",
+        "workbook:141",
+        "workbook:146",
+        "workbook:170",
+        "workbook:220",
+        "workbook:248",
+        "workbook:314"
+      ]
+    },
+    {
+      "travelRegionId": "aomori-regional",
+      "name": "Aomori Ski Areas",
+      "nameJa": "青森県スキーエリア",
+      "prefectures": [
+        "青森県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "aomori-nishimeya-nishimeya",
+          "name": "Nishimeya",
+          "nameJa": "西目屋村"
+        },
+        {
+          "baseTownId": "aomori-owani-owani",
+          "name": "Owani",
+          "nameJa": "大鰐町"
+        },
+        {
+          "baseTownId": "aomori-aomori-aomori",
+          "name": "Aomori",
+          "nameJa": "青森市"
+        },
+        {
+          "baseTownId": "aomori-hirakawa-hirakawa",
+          "name": "Hirakawa",
+          "nameJa": "平川市"
+        },
+        {
+          "baseTownId": "aomori-mutsu-mutsu",
+          "name": "Mutsu",
+          "nameJa": "むつ市"
+        },
+        {
+          "baseTownId": "aomori-regional-towada",
+          "name": "Towada",
+          "nameJa": "Towada"
+        },
+        {
+          "baseTownId": "aomori-regional-hachinohe",
+          "name": "Hachinohe",
+          "nameJa": "Hachinohe"
+        }
+      ],
+      "recordIds": [
+        "workbook:20",
+        "workbook:139",
+        "workbook:147",
+        "workbook:204",
+        "workbook:216",
+        "workbook:329",
+        "workbook:267",
+        "workbook:454"
+      ]
+    },
+    {
+      "travelRegionId": "hokuriku",
+      "name": "Hokuriku",
+      "nameJa": "北陸スキーエリア",
+      "prefectures": [
+        "福井県",
+        "石川県",
+        "富山県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "toyama-nanto-nanto",
+          "name": "Nanto",
+          "nameJa": "Nanto"
+        },
+        {
+          "baseTownId": "toyama-tateyama-tateyama",
+          "name": "Tateyama",
+          "nameJa": "立山町"
+        },
+        {
+          "baseTownId": "toyama-tonami-tonami",
+          "name": "Tonami",
+          "nameJa": "砺波市"
+        },
+        {
+          "baseTownId": "hokuriku-kanazawa",
+          "name": "Kanazawa",
+          "nameJa": "Kanazawa"
+        },
+        {
+          "baseTownId": "hokuriku-komatsu",
+          "name": "Komatsu",
+          "nameJa": "小松市"
+        }
+      ],
+      "recordIds": [
+        "workbook:64",
+        "workbook:117",
+        "workbook:186",
+        "workbook:234",
+        "workbook:237",
+        "workbook:263",
+        "workbook:463",
+        "workbook:193",
+        "workbook:542"
+      ]
+    },
+    {
+      "travelRegionId": "hyogo-ski-areas",
+      "name": "Hyogo Ski Areas",
+      "nameJa": "兵庫県スキーエリア",
+      "prefectures": [
+        "兵庫県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "hyogo-yabu-yabu",
+          "name": "Yabu",
+          "nameJa": "養父市"
+        },
+        {
+          "baseTownId": "hyogo-kami-kami",
+          "name": "Kami",
+          "nameJa": "加美町"
+        },
+        {
+          "baseTownId": "hyogo-kobe-rokko-kobe",
+          "name": "Kobe",
+          "nameJa": "神戸市"
+        },
+        {
+          "baseTownId": "hyogo-shiso-shiso",
+          "name": "Shiso",
+          "nameJa": "宍粟市"
+        }
+      ],
+      "recordIds": [
+        "workbook:80",
+        "workbook:94",
+        "workbook:97",
+        "workbook:114",
+        "workbook:143",
+        "workbook:156",
+        "workbook:209",
+        "workbook:231",
+        "workbook:331",
+        "workbook:346",
+        "workbook:355",
+        "workbook:359"
+      ]
+    },
+    {
+      "travelRegionId": "hakuba-valley",
+      "name": "Hakuba Valley",
+      "nameJa": "Hakuba Valley",
+      "prefectures": [
+        "長野県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "happo-one",
+          "name": "Hakuba Happo-One",
+          "nameJa": "白馬八方尾根スキー場"
+        },
+        {
+          "baseTownId": "otari",
+          "name": "Otari",
+          "nameJa": "小谷村"
+        },
+        {
+          "baseTownId": "hakuba",
+          "name": "Hakuba",
+          "nameJa": "白馬"
+        },
+        {
+          "baseTownId": "omachi",
+          "name": "Omachi",
+          "nameJa": "大町"
+        }
+      ],
+      "recordIds": [
+        "workbook:26",
+        "workbook:90",
+        "workbook:11",
+        "workbook:81",
+        "workbook:86",
+        "workbook:162",
+        "workbook:41"
+      ]
+    },
+    {
+      "travelRegionId": "sapporo",
+      "name": "Sapporo",
+      "nameJa": "Sapporo",
+      "prefectures": [
+        "北海道"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "sapporo-teine",
+          "name": "Sapporo Teine",
+          "nameJa": "サッポロテイネ"
+        },
+        {
+          "baseTownId": "sapporo",
+          "name": "Sapporo",
+          "nameJa": "札幌"
+        },
+        {
+          "baseTownId": "sapporo-otaru",
+          "name": "Otaru",
+          "nameJa": "小樽"
+        },
+        {
+          "baseTownId": "sapporo-eniwa",
+          "name": "Eniwa",
+          "nameJa": "恵庭"
+        }
+      ],
+      "recordIds": [
+        "workbook:29",
+        "workbook:52",
+        "workbook:104",
+        "workbook:133",
+        "workbook:169",
+        "workbook:195",
+        "workbook:321",
+        "workbook:409",
+        "workbook:487"
+      ]
+    },
+    {
+      "travelRegionId": "akita-regional",
+      "name": "Akita Ski Areas",
+      "nameJa": "秋田県スキーエリア",
+      "prefectures": [
+        "秋田県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "akita-semboku-semboku",
+          "name": "Semboku",
+          "nameJa": "仙北市"
+        },
+        {
+          "baseTownId": "akita-yurihonjo-yurihonjo",
+          "name": "Yurihonjo",
+          "nameJa": "Yurihonjo"
+        },
+        {
+          "baseTownId": "akita-kitaakita-kitaakita",
+          "name": "Kitaakita",
+          "nameJa": "Kitaakita"
+        },
+        {
+          "baseTownId": "akita-higashinaruse-higashinaruse",
+          "name": "Higashinaruse",
+          "nameJa": "東成瀬村"
+        },
+        {
+          "baseTownId": "akita-akita-akita",
+          "name": "Akita",
+          "nameJa": "秋田市"
+        },
+        {
+          "baseTownId": "akita-daisen-daisen",
+          "name": "Daisen",
+          "nameJa": "大仙市"
+        },
+        {
+          "baseTownId": "akita-kazuno-kazuno",
+          "name": "Kazuno",
+          "nameJa": "鹿角市"
+        },
+        {
+          "baseTownId": "akita-yokote-yokote",
+          "name": "Yokote",
+          "nameJa": "横手市"
+        },
+        {
+          "baseTownId": "akita-regional-akita",
+          "name": "Akita",
+          "nameJa": "Akita"
+        }
+      ],
+      "recordIds": [
+        "workbook:31",
+        "workbook:61",
+        "workbook:73",
+        "workbook:154",
+        "workbook:164",
+        "workbook:185",
+        "workbook:208",
+        "workbook:262",
+        "workbook:311",
+        "workbook:408",
+        "workbook:285"
+      ]
+    },
+    {
+      "travelRegionId": "gunma-regional",
+      "name": "Regional Gunma",
+      "nameJa": "群馬県地方スキーエリア",
+      "prefectures": [
+        "群馬県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "gunma-minakami-gunma-tsumagoi",
+          "name": "Tsumagoi",
+          "nameJa": "嬬恋村"
+        },
+        {
+          "baseTownId": "gunma-minakami-gunma-minakami",
+          "name": "Minakami",
+          "nameJa": "みなかみ町"
+        },
+        {
+          "baseTownId": "gunma-minakami-gunma-katashina",
+          "name": "Katashina",
+          "nameJa": "片品村"
+        },
+        {
+          "baseTownId": "gunma-minakami-gunma-kawaba",
+          "name": "Kawaba",
+          "nameJa": "Kawaba"
+        },
+        {
+          "baseTownId": "gunma-minakami-gunma-karuizawa",
+          "name": "Karuizawa",
+          "nameJa": "Karuizawa"
+        },
+        {
+          "baseTownId": "gunma-minakami-gunma-numata",
+          "name": "Numata",
+          "nameJa": "Numata"
+        }
+      ],
+      "recordIds": [
+        "workbook:34",
+        "workbook:58",
+        "workbook:72",
+        "workbook:82",
+        "workbook:140",
+        "workbook:145",
+        "workbook:152",
+        "workbook:183",
+        "workbook:196",
+        "workbook:226",
+        "workbook:318"
+      ]
+    },
+    {
+      "travelRegionId": "chugoku-ski-areas",
+      "name": "Chugoku Ski Areas",
+      "nameJa": "中国地方スキーエリア",
+      "prefectures": [
+        "島根県",
+        "広島県",
+        "岡山県",
+        "鳥取県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "shimane-nita-nita",
+          "name": "Nita",
+          "nameJa": "奥出雲町"
+        },
+        {
+          "baseTownId": "hiroshima-akitakata-akitakata",
+          "name": "Akitakata",
+          "nameJa": "安芸高田市"
+        },
+        {
+          "baseTownId": "shimane-ochi-ochi",
+          "name": "Ochi",
+          "nameJa": "邑南町"
+        },
+        {
+          "baseTownId": "okayama-maniwa-maniwa",
+          "name": "Maniwa",
+          "nameJa": "真庭市"
+        },
+        {
+          "baseTownId": "tottori-daisen-daisen",
+          "name": "Daisen",
+          "nameJa": "大山町"
+        },
+        {
+          "baseTownId": "tottori-daisen-chizu",
+          "name": "Chizu",
+          "nameJa": "Chizu"
+        }
+      ],
+      "recordIds": [
+        "workbook:36",
+        "workbook:116",
+        "workbook:149",
+        "workbook:202",
+        "workbook:230",
+        "workbook:322",
+        "workbook:344",
+        "workbook:419"
+      ]
+    },
+    {
+      "travelRegionId": "hokkaido-regional",
+      "name": "Regional Hokkaido",
+      "nameJa": "北海道地方スキーエリア",
+      "prefectures": [
+        "北海道"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "hokkaido-nanae-nanae",
+          "name": "Nanae",
+          "nameJa": "七飯町"
+        },
+        {
+          "baseTownId": "hokkaido-hidaka-hidaka",
+          "name": "Hidaka",
+          "nameJa": "日高町"
+        },
+        {
+          "baseTownId": "hokkaido-mashike-mashike",
+          "name": "Mashike",
+          "nameJa": "増毛町"
+        },
+        {
+          "baseTownId": "hokkaido-regional-yubari",
+          "name": "Yubari",
+          "nameJa": "Yubari"
+        },
+        {
+          "baseTownId": "hokkaido-regional-kamishihoro",
+          "name": "Kamishihoro",
+          "nameJa": "Kamishihoro"
+        },
+        {
+          "baseTownId": "hokkaido-regional-pippu",
+          "name": "Pippu",
+          "nameJa": "Pippu"
+        },
+        {
+          "baseTownId": "hokkaido-regional-nayoro",
+          "name": "Nayoro",
+          "nameJa": "Nayoro"
+        },
+        {
+          "baseTownId": "hokkaido-regional-nakatombetsu",
+          "name": "Nakatombetsu",
+          "nameJa": "Nakatombetsu"
+        },
+        {
+          "baseTownId": "hokkaido-regional-engaru",
+          "name": "Engaru",
+          "nameJa": "Engaru"
+        },
+        {
+          "baseTownId": "hokkaido-regional-bibai",
+          "name": "Bibai",
+          "nameJa": "Bibai"
+        },
+        {
+          "baseTownId": "hokkaido-regional-muroran",
+          "name": "Muroran",
+          "nameJa": "Muroran"
+        },
+        {
+          "baseTownId": "hokkaido-regional-akan",
+          "name": "Akan",
+          "nameJa": "Akan"
+        },
+        {
+          "baseTownId": "hokkaido-regional-kitami",
+          "name": "Kitami",
+          "nameJa": "Kitami"
+        },
+        {
+          "baseTownId": "hokkaido-regional-noboribetsu",
+          "name": "Noboribetsu",
+          "nameJa": "Noboribetsu"
+        },
+        {
+          "baseTownId": "hokkaido-regional-abashiri",
+          "name": "Abashiri",
+          "nameJa": "Abashiri"
+        },
+        {
+          "baseTownId": "hokkaido-regional-setana",
+          "name": "Setana",
+          "nameJa": "Setana"
+        },
+        {
+          "baseTownId": "hokkaido-regional-nanae",
+          "name": "Nanae",
+          "nameJa": "Nanae"
+        },
+        {
+          "baseTownId": "hokkaido-regional-memuro",
+          "name": "Memuro",
+          "nameJa": "Memuro"
+        },
+        {
+          "baseTownId": "hokkaido-regional-horonobeecho",
+          "name": "Horonobeecho",
+          "nameJa": "Horonobeecho"
+        },
+        {
+          "baseTownId": "hokkaido-regional-oketo",
+          "name": "Oketo",
+          "nameJa": "Oketo"
+        },
+        {
+          "baseTownId": "hokkaido-regional-tsurui",
+          "name": "Tsurui",
+          "nameJa": "Tsurui"
+        },
+        {
+          "baseTownId": "hokkaido-regional-hobetsu",
+          "name": "Hobetsu",
+          "nameJa": "穂別"
+        },
+        {
+          "baseTownId": "hokkaido-regional-yubetsu",
+          "name": "Yubetsu",
+          "nameJa": "湧別"
+        },
+        {
+          "baseTownId": "hokkaido-regional-niki",
+          "name": "Niki",
+          "nameJa": "仁木"
+        },
+        {
+          "baseTownId": "hokkaido-regional-esashi",
+          "name": "Esashi",
+          "nameJa": "江差"
+        },
+        {
+          "baseTownId": "hokkaido-regional-haboro",
+          "name": "Haboro",
+          "nameJa": "羽幌"
+        },
+        {
+          "baseTownId": "hokkaido-regional-ishikari",
+          "name": "Ishikari",
+          "nameJa": "石狩"
+        },
+        {
+          "baseTownId": "hokkaido-regional-kiyosato",
+          "name": "Kiyosato",
+          "nameJa": "清里"
+        },
+        {
+          "baseTownId": "hokkaido-regional-obira",
+          "name": "Obira",
+          "nameJa": "小平"
+        },
+        {
+          "baseTownId": "hokkaido-regional-teshio",
+          "name": "Teshio",
+          "nameJa": "天塩"
+        },
+        {
+          "baseTownId": "hokkaido-regional-naganuma",
+          "name": "Naganuma",
+          "nameJa": "長沼"
+        },
+        {
+          "baseTownId": "hokkaido-regional-sarobetsu",
+          "name": "Sarobetsu",
+          "nameJa": "サロベツ"
+        },
+        {
+          "baseTownId": "hokkaido-regional-wassamu",
+          "name": "Wassamu",
+          "nameJa": "和寒"
+        }
+      ],
+      "recordIds": [
+        "workbook:37",
+        "workbook:137",
+        "workbook:199",
+        "workbook:40",
+        "workbook:66",
+        "workbook:111",
+        "workbook:136",
+        "workbook:177",
+        "workbook:192",
+        "workbook:239",
+        "workbook:295",
+        "workbook:299",
+        "workbook:312",
+        "workbook:328",
+        "workbook:333",
+        "workbook:340",
+        "workbook:342",
+        "workbook:358",
+        "workbook:367",
+        "workbook:403",
+        "workbook:438",
+        "workbook:440",
+        "workbook:223",
+        "workbook:249",
+        "workbook:253",
+        "workbook:257",
+        "workbook:291",
+        "workbook:308",
+        "workbook:418",
+        "workbook:446",
+        "workbook:447",
+        "workbook:449",
+        "workbook:461",
+        "workbook:466",
+        "workbook:550"
+      ]
+    },
+    {
+      "travelRegionId": "iwate-regional",
+      "name": "Iwate Ski Areas",
+      "nameJa": "岩手県スキーエリア",
+      "prefectures": [
+        "岩手県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "iwate-kitakami-kitakami",
+          "name": "Kitakami",
+          "nameJa": "Kitakami"
+        },
+        {
+          "baseTownId": "iwate-miyako-miyako",
+          "name": "Miyako",
+          "nameJa": "宮古市"
+        },
+        {
+          "baseTownId": "iwate-morioka-morioka",
+          "name": "Morioka",
+          "nameJa": "盛岡市"
+        },
+        {
+          "baseTownId": "iwate-regional-hanamaki",
+          "name": "Hanamaki",
+          "nameJa": "Hanamaki"
+        },
+        {
+          "baseTownId": "iwate-regional-nishiwaga",
+          "name": "Nishiwaga",
+          "nameJa": "Nishiwaga"
+        },
+        {
+          "baseTownId": "iwate-regional-ichinohe",
+          "name": "Ichinohe",
+          "nameJa": "一戸"
+        },
+        {
+          "baseTownId": "iwate-regional-ichinoseki",
+          "name": "Ichinoseki",
+          "nameJa": "一関"
+        }
+      ],
+      "recordIds": [
+        "workbook:46",
+        "workbook:129",
+        "workbook:188",
+        "workbook:341",
+        "workbook:395",
+        "workbook:265",
+        "workbook:356"
+      ]
+    },
+    {
+      "travelRegionId": "bandai",
+      "name": "Bandai",
+      "nameJa": "Bandai",
+      "prefectures": [
+        "福島県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "nekoma-mountain",
+          "name": "Nekoma Mountain",
+          "nameJa": "星野リゾート ネコマ マウンテン"
+        },
+        {
+          "baseTownId": "inawashiro",
+          "name": "Inawashiro",
+          "nameJa": "猪苗代"
+        }
+      ],
+      "recordIds": [
+        "workbook:50",
+        "workbook:60",
+        "workbook:63",
+        "workbook:68",
+        "workbook:71",
+        "workbook:138",
+        "workbook:153",
+        "workbook:166",
+        "workbook:264",
+        "workbook:270",
+        "workbook:284",
+        "workbook:305",
+        "workbook:323",
+        "workbook:368"
+      ]
+    },
+    {
+      "travelRegionId": "minakami",
+      "name": "Minakami",
+      "nameJa": "Minakami",
+      "prefectures": [
+        "群馬県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "minakami-kogen",
+          "name": "Minakami Kogen",
+          "nameJa": "水上高原スキーリゾート"
+        }
+      ],
+      "recordIds": [
+        "workbook:51",
+        "workbook:67",
+        "workbook:109",
+        "workbook:160",
+        "workbook:203",
+        "workbook:217"
+      ]
+    },
+    {
+      "travelRegionId": "miyagi-regional",
+      "name": "Miyagi Ski Areas",
+      "nameJa": "宮城県スキーエリア",
+      "prefectures": [
+        "宮城県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "miyagi-zao-miyagi-zao",
+          "name": "Zao",
+          "nameJa": "蔵王温泉"
+        },
+        {
+          "baseTownId": "miyagi-zao-miyagi-shiroishi",
+          "name": "Shiroishi",
+          "nameJa": "Shiroishi"
+        },
+        {
+          "baseTownId": "miyagi-zao-miyagi-shichikashuku",
+          "name": "Shichikashuku",
+          "nameJa": "Shichikashuku"
+        },
+        {
+          "baseTownId": "miyagi-sendai-sendai",
+          "name": "Sendai",
+          "nameJa": "仙台市"
+        },
+        {
+          "baseTownId": "miyagi-osaki-osaki",
+          "name": "Osaki",
+          "nameJa": "大崎市"
+        },
+        {
+          "baseTownId": "miyagi-kurihara-kurihara",
+          "name": "Kurihara",
+          "nameJa": "栗原市"
+        },
+        {
+          "baseTownId": "miyagi-kami-kami",
+          "name": "Kami",
+          "nameJa": "加美町"
+        }
+      ],
+      "recordIds": [
+        "workbook:62",
+        "workbook:122",
+        "workbook:148",
+        "workbook:151",
+        "workbook:269",
+        "workbook:338",
+        "workbook:394",
+        "workbook:405",
+        "workbook:423"
+      ]
+    },
+    {
+      "travelRegionId": "fuji-ski-areas",
+      "name": "Fuji Ski Areas",
+      "nameJa": "富士山周辺スキーエリア",
+      "prefectures": [
+        "山梨県",
+        "静岡県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "yamanashi-yamanashi-yamanashi",
+          "name": "Yamanashi",
+          "nameJa": "Yamanashi"
+        },
+        {
+          "baseTownId": "yamanashi-narusawa-narusawa",
+          "name": "Narusawa",
+          "nameJa": "Narusawa"
+        },
+        {
+          "baseTownId": "shizuoka-fujinomiya-fujinomiya",
+          "name": "Fujinomiya",
+          "nameJa": "富士宮市"
+        },
+        {
+          "baseTownId": "shizuoka-shizuoka-shizuoka",
+          "name": "Shizuoka",
+          "nameJa": "静岡市"
+        },
+        {
+          "baseTownId": "fuji-ski-areas-isawa-onsen",
+          "name": "Isawa Onsen",
+          "nameJa": "Isawa Onsen"
+        }
+      ],
+      "recordIds": [
+        "workbook:77",
+        "workbook:106",
+        "workbook:215",
+        "workbook:339",
+        "workbook:200"
+      ]
+    },
+    {
+      "travelRegionId": "yamagata-regional",
+      "name": "Yamagata Ski Areas",
+      "nameJa": "山形県スキーエリア",
+      "prefectures": [
+        "山形県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "yamagata-mogami-mogami",
+          "name": "Mogami",
+          "nameJa": "Mogami"
+        },
+        {
+          "baseTownId": "yamagata-nishiokitama-nishiokitama",
+          "name": "Nishiokitama",
+          "nameJa": "Nishiokitama"
+        },
+        {
+          "baseTownId": "yamagata-nishikawa-nishikawa",
+          "name": "Nishikawa",
+          "nameJa": "西川町"
+        },
+        {
+          "baseTownId": "yamagata-asahi-asahi",
+          "name": "Asahi",
+          "nameJa": "朝日村"
+        },
+        {
+          "baseTownId": "yamagata-tsuruoka-tsuruoka",
+          "name": "Tsuruoka",
+          "nameJa": "鶴岡市"
+        },
+        {
+          "baseTownId": "yamagata-tendo-tendo",
+          "name": "Tendo",
+          "nameJa": "天童市"
+        },
+        {
+          "baseTownId": "yamagata-yonezawa-yonezawa",
+          "name": "Yonezawa",
+          "nameJa": "米沢市"
+        },
+        {
+          "baseTownId": "yamagata-yamagata-yamagata",
+          "name": "Yamagata",
+          "nameJa": "山形市"
+        }
+      ],
+      "recordIds": [
+        "workbook:87",
+        "workbook:103",
+        "workbook:171",
+        "workbook:210",
+        "workbook:211",
+        "workbook:222",
+        "workbook:241",
+        "workbook:256",
+        "workbook:259",
+        "workbook:384",
+        "workbook:404",
+        "workbook:444",
+        "workbook:459",
+        "workbook:493"
+      ]
+    },
+    {
+      "travelRegionId": "kusatsu-manza",
+      "name": "Kusatsu & Manza",
+      "nameJa": "Kusatsu & Manza",
+      "prefectures": [
+        "群馬県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "kusatsu-onsen-resort",
+          "name": "Kusatsu Onsen Ski Resort",
+          "nameJa": "草津温泉スキー場"
+        }
+      ],
+      "recordIds": [
+        "workbook:98",
+        "workbook:334"
+      ]
+    },
+    {
+      "travelRegionId": "tochigi-ski-areas",
+      "name": "Tochigi Ski Areas",
+      "nameJa": "栃木県スキーエリア",
+      "prefectures": [
+        "栃木県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "tochigi-nasu-nikko-nasushiobara",
+          "name": "Nasushiobara",
+          "nameJa": "Nasushiobara"
+        },
+        {
+          "baseTownId": "tochigi-nasu-nikko-nikko",
+          "name": "Nikko",
+          "nameJa": "Nikko"
+        }
+      ],
+      "recordIds": [
+        "workbook:99",
+        "workbook:125",
+        "workbook:489"
+      ]
+    },
+    {
+      "travelRegionId": "shiga-ski-areas",
+      "name": "Shiga Ski Areas",
+      "nameJa": "滋賀県スキーエリア",
+      "prefectures": [
+        "滋賀県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "shiga-otsu-otsu",
+          "name": "Otsu",
+          "nameJa": "Otsu"
+        },
+        {
+          "baseTownId": "shiga-maibara-maibara",
+          "name": "Maibara",
+          "nameJa": "Maibara"
+        },
+        {
+          "baseTownId": "shiga-nagahama-nagahama",
+          "name": "Nagahama",
+          "nameJa": "長浜市"
+        },
+        {
+          "baseTownId": "shiga-takashima-takashima",
+          "name": "Takashima",
+          "nameJa": "高島市"
+        }
+      ],
+      "recordIds": [
+        "workbook:110",
+        "workbook:115",
+        "workbook:165",
+        "workbook:218",
+        "workbook:224",
+        "workbook:250",
+        "workbook:382",
+        "workbook:393"
+      ]
+    },
+    {
+      "travelRegionId": "shikoku-kyushu-ski-areas",
+      "name": "Shikoku and Kyushu Ski Areas",
+      "nameJa": "四国・九州スキーエリア",
+      "prefectures": [
+        "愛媛県",
+        "徳島県",
+        "宮崎県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "ehime-oda-oda",
+          "name": "Oda",
+          "nameJa": "内子町"
+        },
+        {
+          "baseTownId": "ehime-kumakogen-kumakogen",
+          "name": "Kumakogen",
+          "nameJa": "久万高原町"
+        },
+        {
+          "baseTownId": "tokushima-miyoshi-miyoshi",
+          "name": "Miyoshi",
+          "nameJa": "三好市"
+        },
+        {
+          "baseTownId": "shikoku-kyushu-ski-areas-saijo",
+          "name": "Saijo",
+          "nameJa": "西条"
+        }
+      ],
+      "recordIds": [
+        "workbook:246",
+        "workbook:255",
+        "workbook:274",
+        "workbook:268"
+      ]
+    },
+    {
+      "travelRegionId": "asahikawa",
+      "name": "Asahikawa",
+      "nameJa": "Asahikawa",
+      "prefectures": [
+        "北海道"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "asahikawa",
+          "name": "Asahikawa",
+          "nameJa": "旭川"
+        },
+        {
+          "baseTownId": "higashikawa",
+          "name": "Higashikawa",
+          "nameJa": "東川"
+        }
+      ],
+      "recordIds": [
+        "workbook:33",
+        "workbook:100"
+      ]
+    },
+    {
+      "travelRegionId": "iiyama",
+      "name": "Iiyama",
+      "nameJa": "Iiyama",
+      "prefectures": [
+        "長野県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "iiyama",
+          "name": "Iiyama",
+          "nameJa": "飯山"
+        },
+        {
+          "baseTownId": "madarao-kogen",
+          "name": "Madarao Kogen",
+          "nameJa": "斑尾高原"
+        },
+        {
+          "baseTownId": "togari-onsen-village",
+          "name": "Togari Onsen",
+          "nameJa": "戸狩温泉"
+        },
+        {
+          "baseTownId": "kijimadaira-village",
+          "name": "Kijimadaira",
+          "nameJa": "木島平"
+        },
+        {
+          "baseTownId": "iiyama-nakano",
+          "name": "Nakano",
+          "nameJa": "中野"
+        }
+      ],
+      "recordIds": [
+        "workbook:30",
+        "workbook:54",
+        "workbook:233"
+      ]
+    },
+    {
+      "travelRegionId": "yuzawa",
+      "name": "Yuzawa",
+      "nameJa": "Yuzawa",
+      "prefectures": [
+        "新潟県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "echigo-yuzawa",
+          "name": "Echigo-Yuzawa",
+          "nameJa": "越後湯沢"
+        },
+        {
+          "baseTownId": "ishiuchi",
+          "name": "Ishiuchi",
+          "nameJa": "石打"
+        },
+        {
+          "baseTownId": "mitsumata",
+          "name": "Mitsumata",
+          "nameJa": "三俣"
+        }
+      ],
+      "recordIds": [
+        "workbook:13",
+        "workbook:32",
+        "workbook:194",
+        "workbook:373"
+      ]
+    },
+    {
+      "travelRegionId": "hakkoda-aomori-spring",
+      "name": "Hakkoda & Aomori Spring",
+      "nameJa": "Hakkoda & Aomori Spring",
+      "prefectures": [
+        "青森県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "aomori",
+          "name": "Aomori",
+          "nameJa": "青森"
+        },
+        {
+          "baseTownId": "sukayu-onsen",
+          "name": "Sukayu Onsen",
+          "nameJa": "酸ヶ湯温泉"
+        },
+        {
+          "baseTownId": "ajigasawa",
+          "name": "Ajigasawa",
+          "nameJa": "鰺ヶ沢"
+        }
+      ],
+      "recordIds": [
+        "workbook:119"
+      ]
+    },
+    {
+      "travelRegionId": "hachimantai",
+      "name": "Hachimantai",
+      "nameJa": "Hachimantai",
+      "prefectures": [
+        "岩手県"
+      ],
+      "baseTowns": [
+        {
+          "baseTownId": "hachimantai",
+          "name": "Hachimantai",
+          "nameJa": "八幡平"
+        }
+      ],
+      "recordIds": [
+        "workbook:385",
+        "workbook:426"
+      ]
+    }
+  ],
+  "assignments": [
+    {
+      "recordId": "workbook:1a",
+      "travelRegionId": "niseko",
+      "baseTownId": "kutchan",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:1b",
+      "travelRegionId": "niseko",
+      "baseTownId": "grand-hirafu",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:1c",
+      "travelRegionId": "niseko",
+      "baseTownId": "grand-hirafu",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:1d",
+      "travelRegionId": "niseko",
+      "baseTownId": "kutchan",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:2",
+      "travelRegionId": "rusutsu-kiroro",
+      "baseTownId": "rusutsu-resort",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:3",
+      "travelRegionId": "furano",
+      "baseTownId": "furano-ski-resort",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:4",
+      "travelRegionId": "tomamu-sahoro",
+      "baseTownId": "shimukappu",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:5",
+      "travelRegionId": "yamanouchi",
+      "baseTownId": "yudanaka",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:7",
+      "travelRegionId": "rusutsu-kiroro",
+      "baseTownId": "kiroro",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:8",
+      "travelRegionId": "appi-shizukuishi",
+      "baseTownId": "appi-kogen",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:9",
+      "travelRegionId": "nozawa-onsen",
+      "baseTownId": "nozawa-onsen-village",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:12",
+      "travelRegionId": "zao-onsen",
+      "baseTownId": "zao-onsen",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:15",
+      "travelRegionId": "tomamu-sahoro",
+      "baseTownId": "shimukappu",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:16",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-nagano-nagano",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:18",
+      "travelRegionId": "gifu-aichi",
+      "baseTownId": "gifu-gujo-gujo",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:20",
+      "travelRegionId": "aomori-regional",
+      "baseTownId": "aomori-nishimeya-nishimeya",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:26",
+      "travelRegionId": "hakuba-valley",
+      "baseTownId": "happo-one",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:27",
+      "travelRegionId": "gifu-aichi",
+      "baseTownId": "gifu-gero-gero",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:28",
+      "travelRegionId": "gifu-aichi",
+      "baseTownId": "gifu-gujo-gujo",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:29",
+      "travelRegionId": "sapporo",
+      "baseTownId": "sapporo-teine",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:31",
+      "travelRegionId": "akita-regional",
+      "baseTownId": "akita-semboku-semboku",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:34",
+      "travelRegionId": "gunma-regional",
+      "baseTownId": "gunma-minakami-gunma-tsumagoi",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:35",
+      "travelRegionId": "appi-shizukuishi",
+      "baseTownId": "appi-kogen",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:36",
+      "travelRegionId": "chugoku-ski-areas",
+      "baseTownId": "shimane-nita-nita",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:37",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-nanae-nanae",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:39",
+      "travelRegionId": "yamanouchi",
+      "baseTownId": "yudanaka",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:42",
+      "travelRegionId": "gifu-aichi",
+      "baseTownId": "gifu-gujo-gujo",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:46",
+      "travelRegionId": "iwate-regional",
+      "baseTownId": "iwate-kitakami-kitakami",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:47",
+      "travelRegionId": "appi-shizukuishi",
+      "baseTownId": "shizukuishi-resort",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:48",
+      "travelRegionId": "gifu-aichi",
+      "baseTownId": "gifu-gujo-gujo",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:50",
+      "travelRegionId": "bandai",
+      "baseTownId": "nekoma-mountain",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:51",
+      "travelRegionId": "minakami",
+      "baseTownId": "minakami-kogen",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:52",
+      "travelRegionId": "sapporo",
+      "baseTownId": "sapporo-teine",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:55",
+      "travelRegionId": "yamanouchi",
+      "baseTownId": "yudanaka",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:57",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-sugadaira-ueda",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:58",
+      "travelRegionId": "gunma-regional",
+      "baseTownId": "gunma-minakami-gunma-minakami",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:60",
+      "travelRegionId": "bandai",
+      "baseTownId": "nekoma-mountain",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:61",
+      "travelRegionId": "akita-regional",
+      "baseTownId": "akita-yurihonjo-yurihonjo",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:62",
+      "travelRegionId": "miyagi-regional",
+      "baseTownId": "miyagi-zao-miyagi-zao",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:63",
+      "travelRegionId": "bandai",
+      "baseTownId": "nekoma-mountain",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:64",
+      "travelRegionId": "hokuriku",
+      "baseTownId": "toyama-nanto-nanto",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:67",
+      "travelRegionId": "minakami",
+      "baseTownId": "minakami-kogen",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:68",
+      "travelRegionId": "bandai",
+      "baseTownId": "inawashiro",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:71",
+      "travelRegionId": "bandai",
+      "baseTownId": "nekoma-mountain",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:72",
+      "travelRegionId": "gunma-regional",
+      "baseTownId": "gunma-minakami-gunma-minakami",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:73",
+      "travelRegionId": "akita-regional",
+      "baseTownId": "akita-kitaakita-kitaakita",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:74",
+      "travelRegionId": "appi-shizukuishi",
+      "baseTownId": "appi-kogen",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:75",
+      "travelRegionId": "yamanouchi",
+      "baseTownId": "yudanaka",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:77",
+      "travelRegionId": "fuji-ski-areas",
+      "baseTownId": "yamanashi-yamanashi-yamanashi",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:78",
+      "travelRegionId": "yamanouchi",
+      "baseTownId": "yudanaka",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:80",
+      "travelRegionId": "hyogo-ski-areas",
+      "baseTownId": "hyogo-yabu-yabu",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:82",
+      "travelRegionId": "gunma-regional",
+      "baseTownId": "gunma-minakami-gunma-katashina",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:83",
+      "travelRegionId": "niseko",
+      "baseTownId": "grand-hirafu",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:87",
+      "travelRegionId": "yamagata-regional",
+      "baseTownId": "yamagata-mogami-mogami",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:90",
+      "travelRegionId": "hakuba-valley",
+      "baseTownId": "otari",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:94",
+      "travelRegionId": "hyogo-ski-areas",
+      "baseTownId": "hyogo-yabu-yabu",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:97",
+      "travelRegionId": "hyogo-ski-areas",
+      "baseTownId": "hyogo-kami-kami",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:98",
+      "travelRegionId": "kusatsu-manza",
+      "baseTownId": "kusatsu-onsen-resort",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:99",
+      "travelRegionId": "tochigi-ski-areas",
+      "baseTownId": "tochigi-nasu-nikko-nasushiobara",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:103",
+      "travelRegionId": "yamagata-regional",
+      "baseTownId": "yamagata-nishiokitama-nishiokitama",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:104",
+      "travelRegionId": "sapporo",
+      "baseTownId": "sapporo",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:106",
+      "travelRegionId": "fuji-ski-areas",
+      "baseTownId": "yamanashi-narusawa-narusawa",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:109",
+      "travelRegionId": "minakami",
+      "baseTownId": "minakami-kogen",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:110",
+      "travelRegionId": "shiga-ski-areas",
+      "baseTownId": "shiga-otsu-otsu",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:112",
+      "travelRegionId": "yamanouchi",
+      "baseTownId": "yudanaka",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:113",
+      "travelRegionId": "gifu-aichi",
+      "baseTownId": "gifu-gero-gero",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:114",
+      "travelRegionId": "hyogo-ski-areas",
+      "baseTownId": "hyogo-yabu-yabu",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:115",
+      "travelRegionId": "shiga-ski-areas",
+      "baseTownId": "shiga-maibara-maibara",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:116",
+      "travelRegionId": "chugoku-ski-areas",
+      "baseTownId": "hiroshima-akitakata-akitakata",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:117",
+      "travelRegionId": "hokuriku",
+      "baseTownId": "toyama-tateyama-tateyama",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:120",
+      "travelRegionId": "gifu-aichi",
+      "baseTownId": "gifu-gujo-gujo",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:122",
+      "travelRegionId": "miyagi-regional",
+      "baseTownId": "miyagi-sendai-sendai",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:125",
+      "travelRegionId": "tochigi-ski-areas",
+      "baseTownId": "tochigi-nasu-nikko-nikko",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:129",
+      "travelRegionId": "iwate-regional",
+      "baseTownId": "iwate-miyako-miyako",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:131",
+      "travelRegionId": "appi-shizukuishi",
+      "baseTownId": "appi-kogen",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:135",
+      "travelRegionId": "gifu-aichi",
+      "baseTownId": "gifu-gujo-gujo",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:137",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-hidaka-hidaka",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:138",
+      "travelRegionId": "bandai",
+      "baseTownId": "nekoma-mountain",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:139",
+      "travelRegionId": "aomori-regional",
+      "baseTownId": "aomori-owani-owani",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:140",
+      "travelRegionId": "gunma-regional",
+      "baseTownId": "gunma-minakami-gunma-kawaba",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:141",
+      "travelRegionId": "gifu-aichi",
+      "baseTownId": "gifu-gujo-gujo",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:143",
+      "travelRegionId": "hyogo-ski-areas",
+      "baseTownId": "hyogo-yabu-yabu",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:145",
+      "travelRegionId": "gunma-regional",
+      "baseTownId": "gunma-minakami-gunma-katashina",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:146",
+      "travelRegionId": "gifu-aichi",
+      "baseTownId": "gifu-hida-hida",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:147",
+      "travelRegionId": "aomori-regional",
+      "baseTownId": "aomori-aomori-aomori",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:148",
+      "travelRegionId": "miyagi-regional",
+      "baseTownId": "miyagi-zao-miyagi-zao",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:149",
+      "travelRegionId": "chugoku-ski-areas",
+      "baseTownId": "hiroshima-akitakata-akitakata",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:151",
+      "travelRegionId": "miyagi-regional",
+      "baseTownId": "miyagi-osaki-osaki",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:152",
+      "travelRegionId": "gunma-regional",
+      "baseTownId": "gunma-minakami-gunma-katashina",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:153",
+      "travelRegionId": "bandai",
+      "baseTownId": "nekoma-mountain",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:154",
+      "travelRegionId": "akita-regional",
+      "baseTownId": "akita-higashinaruse-higashinaruse",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:156",
+      "travelRegionId": "hyogo-ski-areas",
+      "baseTownId": "hyogo-yabu-yabu",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:160",
+      "travelRegionId": "minakami",
+      "baseTownId": "minakami-kogen",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:164",
+      "travelRegionId": "akita-regional",
+      "baseTownId": "akita-akita-akita",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:165",
+      "travelRegionId": "shiga-ski-areas",
+      "baseTownId": "shiga-nagahama-nagahama",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:166",
+      "travelRegionId": "bandai",
+      "baseTownId": "nekoma-mountain",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:168",
+      "travelRegionId": "yamanouchi",
+      "baseTownId": "yudanaka",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:170",
+      "travelRegionId": "gifu-aichi",
+      "baseTownId": "gifu-gero-gero",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:171",
+      "travelRegionId": "yamagata-regional",
+      "baseTownId": "yamagata-nishikawa-nishikawa",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:176",
+      "travelRegionId": "yamanouchi",
+      "baseTownId": "yudanaka",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:183",
+      "travelRegionId": "gunma-regional",
+      "baseTownId": "gunma-minakami-gunma-katashina",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:184",
+      "travelRegionId": "yamanouchi",
+      "baseTownId": "yudanaka",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:185",
+      "travelRegionId": "akita-regional",
+      "baseTownId": "akita-daisen-daisen",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:186",
+      "travelRegionId": "hokuriku",
+      "baseTownId": "toyama-nanto-nanto",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:188",
+      "travelRegionId": "iwate-regional",
+      "baseTownId": "iwate-morioka-morioka",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:189",
+      "travelRegionId": "yamanouchi",
+      "baseTownId": "yudanaka",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:196",
+      "travelRegionId": "gunma-regional",
+      "baseTownId": "gunma-minakami-gunma-tsumagoi",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:199",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-mashike-mashike",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:202",
+      "travelRegionId": "chugoku-ski-areas",
+      "baseTownId": "shimane-ochi-ochi",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:203",
+      "travelRegionId": "minakami",
+      "baseTownId": "minakami-kogen",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:204",
+      "travelRegionId": "aomori-regional",
+      "baseTownId": "aomori-hirakawa-hirakawa",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:208",
+      "travelRegionId": "akita-regional",
+      "baseTownId": "akita-kazuno-kazuno",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:209",
+      "travelRegionId": "hyogo-ski-areas",
+      "baseTownId": "hyogo-yabu-yabu",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:210",
+      "travelRegionId": "yamagata-regional",
+      "baseTownId": "yamagata-asahi-asahi",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:211",
+      "travelRegionId": "yamagata-regional",
+      "baseTownId": "yamagata-tsuruoka-tsuruoka",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:212",
+      "travelRegionId": "yamanouchi",
+      "baseTownId": "yudanaka",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:215",
+      "travelRegionId": "fuji-ski-areas",
+      "baseTownId": "shizuoka-fujinomiya-fujinomiya",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:216",
+      "travelRegionId": "aomori-regional",
+      "baseTownId": "aomori-mutsu-mutsu",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:217",
+      "travelRegionId": "minakami",
+      "baseTownId": "minakami-kogen",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:218",
+      "travelRegionId": "shiga-ski-areas",
+      "baseTownId": "shiga-nagahama-nagahama",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:220",
+      "travelRegionId": "gifu-aichi",
+      "baseTownId": "gifu-takayama-takayama",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:222",
+      "travelRegionId": "yamagata-regional",
+      "baseTownId": "yamagata-tsuruoka-tsuruoka",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:224",
+      "travelRegionId": "shiga-ski-areas",
+      "baseTownId": "shiga-nagahama-nagahama",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:226",
+      "travelRegionId": "gunma-regional",
+      "baseTownId": "gunma-minakami-gunma-karuizawa",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:230",
+      "travelRegionId": "chugoku-ski-areas",
+      "baseTownId": "okayama-maniwa-maniwa",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:231",
+      "travelRegionId": "hyogo-ski-areas",
+      "baseTownId": "hyogo-yabu-yabu",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:234",
+      "travelRegionId": "hokuriku",
+      "baseTownId": "toyama-nanto-nanto",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:237",
+      "travelRegionId": "hokuriku",
+      "baseTownId": "toyama-nanto-nanto",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:241",
+      "travelRegionId": "yamagata-regional",
+      "baseTownId": "yamagata-nishiokitama-nishiokitama",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:246",
+      "travelRegionId": "shikoku-kyushu-ski-areas",
+      "baseTownId": "ehime-oda-oda",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:248",
+      "travelRegionId": "gifu-aichi",
+      "baseTownId": "aichi-toyone-toyone",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:250",
+      "travelRegionId": "shiga-ski-areas",
+      "baseTownId": "shiga-takashima-takashima",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:255",
+      "travelRegionId": "shikoku-kyushu-ski-areas",
+      "baseTownId": "ehime-kumakogen-kumakogen",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:256",
+      "travelRegionId": "yamagata-regional",
+      "baseTownId": "yamagata-tendo-tendo",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:259",
+      "travelRegionId": "yamagata-regional",
+      "baseTownId": "yamagata-nishiokitama-nishiokitama",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:260",
+      "travelRegionId": "niigata-regional",
+      "baseTownId": "niigata-tokamachi-tokamachi",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:262",
+      "travelRegionId": "akita-regional",
+      "baseTownId": "akita-kazuno-kazuno",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:263",
+      "travelRegionId": "hokuriku",
+      "baseTownId": "toyama-nanto-nanto",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:264",
+      "travelRegionId": "bandai",
+      "baseTownId": "nekoma-mountain",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:269",
+      "travelRegionId": "miyagi-regional",
+      "baseTownId": "miyagi-kurihara-kurihara",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:270",
+      "travelRegionId": "bandai",
+      "baseTownId": "nekoma-mountain",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:274",
+      "travelRegionId": "shikoku-kyushu-ski-areas",
+      "baseTownId": "tokushima-miyoshi-miyoshi",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:276",
+      "travelRegionId": "yamanouchi",
+      "baseTownId": "yudanaka",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:284",
+      "travelRegionId": "bandai",
+      "baseTownId": "nekoma-mountain",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:294",
+      "travelRegionId": "yamanouchi",
+      "baseTownId": "yudanaka",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:296",
+      "travelRegionId": "niigata-regional",
+      "baseTownId": "niigata-tokamachi-tokamachi",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:305",
+      "travelRegionId": "bandai",
+      "baseTownId": "nekoma-mountain",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:311",
+      "travelRegionId": "akita-regional",
+      "baseTownId": "akita-kazuno-kazuno",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:314",
+      "travelRegionId": "gifu-aichi",
+      "baseTownId": "gifu-takayama-takayama",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:315",
+      "travelRegionId": "myoko",
+      "baseTownId": "myoko-suginohara",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:318",
+      "travelRegionId": "gunma-regional",
+      "baseTownId": "gunma-minakami-gunma-numata",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:322",
+      "travelRegionId": "chugoku-ski-areas",
+      "baseTownId": "tottori-daisen-chizu",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:323",
+      "travelRegionId": "bandai",
+      "baseTownId": "nekoma-mountain",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:329",
+      "travelRegionId": "aomori-regional",
+      "baseTownId": "aomori-hirakawa-hirakawa",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:331",
+      "travelRegionId": "hyogo-ski-areas",
+      "baseTownId": "hyogo-kobe-rokko-kobe",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:334",
+      "travelRegionId": "kusatsu-manza",
+      "baseTownId": "kusatsu-onsen-resort",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:338",
+      "travelRegionId": "miyagi-regional",
+      "baseTownId": "miyagi-kami-kami",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:339",
+      "travelRegionId": "fuji-ski-areas",
+      "baseTownId": "shizuoka-shizuoka-shizuoka",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:344",
+      "travelRegionId": "chugoku-ski-areas",
+      "baseTownId": "hiroshima-akitakata-akitakata",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:346",
+      "travelRegionId": "hyogo-ski-areas",
+      "baseTownId": "hyogo-shiso-shiso",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:348",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-kiso-kiso",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:352",
+      "travelRegionId": "zao-onsen",
+      "baseTownId": "zao-onsen",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:355",
+      "travelRegionId": "hyogo-ski-areas",
+      "baseTownId": "hyogo-yabu-yabu",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:359",
+      "travelRegionId": "hyogo-ski-areas",
+      "baseTownId": "hyogo-yabu-yabu",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:361",
+      "travelRegionId": "zao-onsen",
+      "baseTownId": "zao-onsen",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:368",
+      "travelRegionId": "bandai",
+      "baseTownId": "nekoma-mountain",
+      "basis": "published_page_candidate",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:382",
+      "travelRegionId": "shiga-ski-areas",
+      "baseTownId": "shiga-nagahama-nagahama",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:384",
+      "travelRegionId": "yamagata-regional",
+      "baseTownId": "yamagata-yonezawa-yonezawa",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:393",
+      "travelRegionId": "shiga-ski-areas",
+      "baseTownId": "shiga-takashima-takashima",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:394",
+      "travelRegionId": "miyagi-regional",
+      "baseTownId": "miyagi-zao-miyagi-shiroishi",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:404",
+      "travelRegionId": "yamagata-regional",
+      "baseTownId": "yamagata-yonezawa-yonezawa",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:405",
+      "travelRegionId": "miyagi-regional",
+      "baseTownId": "miyagi-sendai-sendai",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:408",
+      "travelRegionId": "akita-regional",
+      "baseTownId": "akita-yokote-yokote",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:419",
+      "travelRegionId": "chugoku-ski-areas",
+      "baseTownId": "tottori-daisen-daisen",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:423",
+      "travelRegionId": "miyagi-regional",
+      "baseTownId": "miyagi-zao-miyagi-shichikashuku",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:444",
+      "travelRegionId": "yamagata-regional",
+      "baseTownId": "yamagata-nishiokitama-nishiokitama",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:459",
+      "travelRegionId": "yamagata-regional",
+      "baseTownId": "yamagata-yamagata-yamagata",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:463",
+      "travelRegionId": "hokuriku",
+      "baseTownId": "toyama-tonami-tonami",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:489",
+      "travelRegionId": "tochigi-ski-areas",
+      "baseTownId": "tochigi-nasu-nikko-nikko",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:493",
+      "travelRegionId": "yamagata-regional",
+      "baseTownId": "yamagata-nishiokitama-nishiokitama",
+      "basis": "workbook_geography_consumer_area_municipality",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:33",
+      "travelRegionId": "asahikawa",
+      "baseTownId": "asahikawa",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:40",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-yubari",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:66",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-kamishihoro",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:100",
+      "travelRegionId": "asahikawa",
+      "baseTownId": "higashikawa",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:111",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-pippu",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:133",
+      "travelRegionId": "sapporo",
+      "baseTownId": "sapporo",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:136",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-nayoro",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:169",
+      "travelRegionId": "sapporo",
+      "baseTownId": "sapporo-otaru",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:177",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-nakatombetsu",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:192",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-engaru",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:195",
+      "travelRegionId": "sapporo",
+      "baseTownId": "sapporo-otaru",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:221",
+      "travelRegionId": "furano",
+      "baseTownId": "furano-minami-furano",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:239",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-bibai",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:295",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-muroran",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:299",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-akan",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:312",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-kitami",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:321",
+      "travelRegionId": "sapporo",
+      "baseTownId": "sapporo-eniwa",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:328",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-noboribetsu",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:333",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-abashiri",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:340",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-setana",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:342",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-nanae",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:358",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-memuro",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:367",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-horonobeecho",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:380",
+      "travelRegionId": "niseko",
+      "baseTownId": "niseko-rankoshi",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:403",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-bibai",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:409",
+      "travelRegionId": "sapporo",
+      "baseTownId": "sapporo",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:420",
+      "travelRegionId": "niseko",
+      "baseTownId": "niseko-rankoshi",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:438",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-oketo",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:440",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-tsurui",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:452",
+      "travelRegionId": "niseko",
+      "baseTownId": "niseko-rankoshi",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:487",
+      "travelRegionId": "sapporo",
+      "baseTownId": "sapporo",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:200",
+      "travelRegionId": "fuji-ski-areas",
+      "baseTownId": "fuji-ski-areas-isawa-onsen",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:11",
+      "travelRegionId": "hakuba-valley",
+      "baseTownId": "hakuba",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:30",
+      "travelRegionId": "iiyama",
+      "baseTownId": "madarao-kogen",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:54",
+      "travelRegionId": "iiyama",
+      "baseTownId": "togari-onsen-village",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:79",
+      "travelRegionId": "yamanouchi",
+      "baseTownId": "yudanaka",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:81",
+      "travelRegionId": "hakuba-valley",
+      "baseTownId": "omachi",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:86",
+      "travelRegionId": "hakuba-valley",
+      "baseTownId": "omachi",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:102",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-shiojiri",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:130",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-ueda",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:150",
+      "travelRegionId": "yamanouchi",
+      "baseTownId": "yudanaka",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:159",
+      "travelRegionId": "yamanouchi",
+      "baseTownId": "yudanaka",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:161",
+      "travelRegionId": "yamanouchi",
+      "baseTownId": "yudanaka",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:162",
+      "travelRegionId": "hakuba-valley",
+      "baseTownId": "otari",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:182",
+      "travelRegionId": "yamanouchi",
+      "baseTownId": "yudanaka",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:197",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-sakuho",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:198",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-tateshina",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:201",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-sakae",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:240",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-tomi",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:252",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-chino",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:271",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-tateshina",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:272",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-komagane",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:330",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-komagane",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:360",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-anan",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:364",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-matsumoto",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:386",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-fujimi",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:13",
+      "travelRegionId": "yuzawa",
+      "baseTownId": "mitsumata",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:14",
+      "travelRegionId": "niigata-regional",
+      "baseTownId": "niigata-regional-ishiuchi",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:32",
+      "travelRegionId": "yuzawa",
+      "baseTownId": "echigo-yuzawa",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:59",
+      "travelRegionId": "niigata-regional",
+      "baseTownId": "niigata-regional-itoigawa",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:76",
+      "travelRegionId": "niigata-regional",
+      "baseTownId": "niigata-regional-itoigawa",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:91",
+      "travelRegionId": "niigata-regional",
+      "baseTownId": "niigata-regional-suhara",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:175",
+      "travelRegionId": "niigata-regional",
+      "baseTownId": "niigata-regional-asahi",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:180",
+      "travelRegionId": "niigata-regional",
+      "baseTownId": "niigata-regional-muikamachi",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:193",
+      "travelRegionId": "hokuriku",
+      "baseTownId": "hokuriku-kanazawa",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:194",
+      "travelRegionId": "yuzawa",
+      "baseTownId": "echigo-yuzawa",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:243",
+      "travelRegionId": "niigata-regional",
+      "baseTownId": "niigata-regional-nagaoka",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:273",
+      "travelRegionId": "niigata-regional",
+      "baseTownId": "niigata-regional-yamakoshi",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:301",
+      "travelRegionId": "niigata-regional",
+      "baseTownId": "niigata-regional-yunotani",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:373",
+      "travelRegionId": "yuzawa",
+      "baseTownId": "echigo-yuzawa",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:400",
+      "travelRegionId": "niigata-regional",
+      "baseTownId": "niigata-regional-uonuma",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:119",
+      "travelRegionId": "hakkoda-aomori-spring",
+      "baseTownId": "aomori",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:267",
+      "travelRegionId": "aomori-regional",
+      "baseTownId": "aomori-regional-towada",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:285",
+      "travelRegionId": "akita-regional",
+      "baseTownId": "akita-regional-akita",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:341",
+      "travelRegionId": "iwate-regional",
+      "baseTownId": "iwate-regional-hanamaki",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:385",
+      "travelRegionId": "hachimantai",
+      "baseTownId": "hachimantai",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:395",
+      "travelRegionId": "iwate-regional",
+      "baseTownId": "iwate-regional-nishiwaga",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:426",
+      "travelRegionId": "hachimantai",
+      "baseTownId": "hachimantai",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:454",
+      "travelRegionId": "aomori-regional",
+      "baseTownId": "aomori-regional-hachinohe",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:268",
+      "travelRegionId": "shikoku-kyushu-ski-areas",
+      "baseTownId": "shikoku-kyushu-ski-areas-saijo",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:223",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-hobetsu",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:249",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-yubari",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:253",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-yubetsu",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:257",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-niki",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:291",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-esashi",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:308",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-haboro",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:317",
+      "travelRegionId": "niseko",
+      "baseTownId": "kutchan",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:418",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-ishikari",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:446",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-kiyosato",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:447",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-obira",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:449",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-teshio",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:461",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-naganuma",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:466",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-sarobetsu",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:550",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-wassamu",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:38",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-kiso-kiso",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:41",
+      "travelRegionId": "hakuba-valley",
+      "baseTownId": "otari",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:89",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-kiso-kiso",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:132",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-nagano-nagano",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:142",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-chino",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:144",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-nakano",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:233",
+      "travelRegionId": "iiyama",
+      "baseTownId": "iiyama-nakano",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:450",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-matsumoto",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:19c",
+      "travelRegionId": "niigata-regional",
+      "baseTownId": "niigata-regional-ishiuchi",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:44",
+      "travelRegionId": "niigata-regional",
+      "baseTownId": "ikenotaira-onsen",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:265",
+      "travelRegionId": "iwate-regional",
+      "baseTownId": "iwate-regional-ichinohe",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:356",
+      "travelRegionId": "iwate-regional",
+      "baseTownId": "iwate-regional-ichinoseki",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "low"
+    },
+    {
+      "recordId": "workbook:398",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-shinano",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "medium"
+    },
+    {
+      "recordId": "workbook:542",
+      "travelRegionId": "hokuriku",
+      "baseTownId": "hokuriku-komatsu",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "high"
+    }
+  ]
+}

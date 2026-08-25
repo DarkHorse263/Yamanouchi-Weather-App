@@ -1,0 +1,233 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-08-26",
+  "sourceReviewFiles": [
+    "lib/japan-ski-catalogue/data/reviews/tohoku-north.json",
+    "lib/japan-ski-catalogue/data/reviews/tohoku-south.json"
+  ],
+  "assignedRecordIds": [
+    "workbook:302",
+    "workbook:327",
+    "workbook:383",
+    "workbook:413",
+    "workbook:429",
+    "workbook:432",
+    "workbook:437",
+    "workbook:455",
+    "workbook:457",
+    "workbook:479",
+    "workbook:494",
+    "workbook:527",
+    "workbook:528",
+    "workbook:532",
+    "workbook:292",
+    "workbook:309",
+    "workbook:326",
+    "workbook:375",
+    "workbook:439",
+    "workbook:448",
+    "workbook:453",
+    "workbook:460",
+    "workbook:541",
+    "workbook:547"
+  ],
+  "proposals": [
+    {
+      "recordId": "workbook:302",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Shichinohe Town Ski Area",
+      "officialNameJa": "七戸町営スキー場",
+      "officialUrl": "https://www.shichinohe-kankou.jp/ski/",
+      "statusEvidenceUrl": "https://www.shichinohe-kankou.jp/category/ski-news/ski-news_572.html",
+      "statusEvidenceQuote": "2026/3/1を持ちまして今季シーズンの営業は終了致します。また来シーズンのご利用をお待ちしております。",
+      "evidenceAsOf": "2026-08-26",
+      "freshnessReviewRequired": true,
+      "notes": "The facility's own Shichinohe tourism-association operating notice explicitly records the completed 2025-26 season.",
+      "exhaustedSearch": "Checked the facility page and 2026 operating-end notice; no 2026-27 calendar or ticket sale was published at review."
+    },
+    {
+      "recordId": "workbook:327",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "notes": "No primary municipal abolition notice or current facility-register entry identifies the distinct Yokote Park Ski Area row.",
+      "exhaustedSearch": "Searched 横手公園スキー場, 横手市, 廃止, 閉鎖, 条例, 予算, 教育委員会 and 2025-26/2026; only non-authoritative closure reporting surfaced."
+    },
+    {
+      "recordId": "workbook:383",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "notes": "News reports of a Daisen council abolition vote could not be promoted without the accessible underlying city ordinance, council record, or operator closure notice.",
+      "exhaustedSearch": "Searched 大曲スキー場, 大曲ファミリースキー場, 大仙市, 廃止, 条例, 議会, 令和8年 and the operator site."
+    },
+    {
+      "recordId": "workbook:413",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "notes": "Oshu City's ordinance continues to establish 越路スキー場; its 2023 bulletin only proves suspension in that fiscal year, not the current status.",
+      "exhaustedSearch": "Searched 奥州市越路スキー場, 江刺市営越路スキー場, 営業休止, 廃止, 条例, 予算, 指定管理 and 2025-26/2026 municipal records."
+    },
+    {
+      "recordId": "workbook:429",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "notes": "No official facility operation, suspension, abolition, or successor notice was found.",
+      "exhaustedSearch": "Searched 五城目恋地スキー場, 恋地スキー場, 五城目町, 営業終了, 休止, 閉鎖, 廃止, 条例 and 予算."
+    },
+    {
+      "recordId": "workbook:432",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "notes": "No authoritative source resolved 小安温泉スキー場 as a current, closed, renamed, or merged facility.",
+      "exhaustedSearch": "Searched 小安温泉スキー場, 小安スキー場, 秋ノ宮スキー場, 湯沢市, 営業, 休止, 廃止, 統合 and municipal facility records."
+    },
+    {
+      "recordId": "workbook:437",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "notes": "The romanized intake label remains unresolved by a primary source.",
+      "exhaustedSearch": "Searched 東方スキー場, 東方, 平内町, 営業, 閉鎖, 廃止, 施設台帳, 予算 and 2025-26/2026."
+    },
+    {
+      "recordId": "workbook:455",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "notes": "No current primary ski-operation or formal closure notice was found for Soma Romantopia.",
+      "exhaustedSearch": "Searched 相馬ロマントピアスキー場, 相馬ロマントピア, 弘前市, 指定管理, 営業終了, 閉鎖, 廃止 and 2025-26/2026."
+    },
+    {
+      "recordId": "workbook:457",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "notes": "Morioka park records did not establish a ski-area operation or formal closure, and the intake locality conflicts with the apparent name geography.",
+      "exhaustedSearch": "Searched 岩山パークスキー場, 岩山スキー場, 盛岡市, 一関市, 廃止, 休止, 条例, 公園 and sports-facility records."
+    },
+    {
+      "recordId": "workbook:479",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "notes": "No primary source matched the row to a current or formally discontinued Tayama ski facility.",
+      "exhaustedSearch": "Searched 田山スキー場, 八幡平市田山, 田山, 営業終了, 休止, 廃止, 条例, 予算 and 2025-26/2026."
+    },
+    {
+      "recordId": "workbook:494",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "notes": "The generic Iwakiyama name cannot be safely assigned to a particular official Mount Iwaki ski operator.",
+      "exhaustedSearch": "Searched 岩木山スキー場, 岩木山, 弘前市, 平川市, 営業, 閉鎖, 統合 and official ski-area pages."
+    },
+    {
+      "recordId": "workbook:527",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "notes": "Official sources establish the distinct operating 森吉山阿仁スキー場 but do not establish this raw label as its alias or as another facility.",
+      "exhaustedSearch": "Searched 森吉山森吉スキー場, 森吉スキー場, 森吉山阿仁スキー場, 北秋田市, 統合, 廃止, 休止 and 2025-26/2026."
+    },
+    {
+      "recordId": "workbook:528",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "notes": "No official source resolved the Akinomiya–Ogachi ski-area identity or status.",
+      "exhaustedSearch": "Searched 秋ノ宮スキー場, 小安温泉スキー場, 雄勝スキー場, 湯沢市, 営業, 廃止, 統合, 条例 and facility records."
+    },
+    {
+      "recordId": "workbook:532",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "notes": "No authoritative current-status entity was located for Morioka Highland.",
+      "exhaustedSearch": "Searched 盛岡ハイランドスキー場, 盛岡ハイランド, 盛岡市, 営業終了, 休止, 廃止, 条例 and public-facility registers."
+    },
+    {
+      "recordId": "workbook:292",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "notes": "No Nishikawa Town primary record established the current status of the town-resident ski area.",
+      "exhaustedSearch": "Searched 西川町民スキー場, 西川町, 営業, 休止, 廃止, 閉鎖, 条例, 予算 and sports-facility lists."
+    },
+    {
+      "recordId": "workbook:309",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "notes": "No Aizubange Town municipal/operator record established operation or formal discontinuance.",
+      "exhaustedSearch": "Searched 会津坂下町営スキー場, 会津坂下スキー場, 会津坂下町, 営業終了, 休止, 廃止, 条例 and 予算."
+    },
+    {
+      "recordId": "workbook:326",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "notes": "Accommodation information cannot verify a ski-area status and no primary ski record was found.",
+      "exhaustedSearch": "Searched 横向温泉スキー場, 横向スキー場, 横向温泉, 営業, 休止, 廃止, 閉鎖 and relevant municipal sources."
+    },
+    {
+      "recordId": "workbook:375",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "notes": "No Shirataka Town primary current-status record was located.",
+      "exhaustedSearch": "Searched 白鷹町営スキー場, 白鷹スキー場, 白鷹町, 営業, 休止, 廃止, 閉鎖, 条例 and public-facility records."
+    },
+    {
+      "recordId": "workbook:439",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "notes": "Historical closure claims remain unsupported by an accessible official closure decision.",
+      "exhaustedSearch": "Searched 栗子国際スキー場, 栗子スキー場, 米沢市, 営業終了, 休止, 廃止, 閉鎖, 条例 and council/budget records."
+    },
+    {
+      "recordId": "workbook:448",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "notes": "Official village material only evidences ski-club activities at other facilities, not this municipal ski area.",
+      "exhaustedSearch": "Searched 昭和村営スキー場, 昭和村スキー場, 福島県昭和村, 営業, 休止, 廃止, 閉鎖, 条例 and budget records."
+    },
+    {
+      "recordId": "workbook:453",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "notes": "No primary source resolved the name to a ski facility in the Shirakawa area.",
+      "exhaustedSearch": "Searched 白河高原スキー場, 白河高原, 西白河郡, 白河市, 営業, 休止, 廃止, 閉鎖 and operator variants."
+    },
+    {
+      "recordId": "workbook:460",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "notes": "No primary municipal or operator closure/operation source was located for Sun Marina Tamaniwa.",
+      "exhaustedSearch": "Searched サンマリーナ玉庭スキーパーク, サンマリーナ玉庭スキー場, 川西町, 営業, 休止, 廃止, 閉鎖, 条例 and facility plans."
+    },
+    {
+      "recordId": "workbook:541",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "notes": "No authoritative source identified the raw-name Mogamigawa ski facility or its current status.",
+      "exhaustedSearch": "Searched 最上川スキー場, 国設最上川スキー場, 新庄市, 最上町, 営業, 休止, 廃止, 閉鎖 and public-facility records."
+    },
+    {
+      "recordId": "workbook:547",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "recommendedDisposition": "not_verifiable_pending_authoritative_evidence",
+      "notes": "Historical closure claims could not be supported by an accessible Kitakata City closure record.",
+      "exhaustedSearch": "Searched 喜多方市五分一スキー場, 五分一スキー場, 喜多方市, 営業終了, 休止, 廃止, 閉鎖, 条例 and council archives."
+    }
+  ]
+}

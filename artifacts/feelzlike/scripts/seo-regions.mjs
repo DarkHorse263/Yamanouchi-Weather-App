@@ -18,6 +18,11 @@
  *    (explore requires tourismLinks, which all regions have).
  */
 
+import {
+  publishedCatalogueRecords,
+  travelRegions,
+} from "@workspace/japan-ski-catalogue/public-runtime";
+
 export const REGIONS = [
   // ── Australia ───────────────────────────────────────────────────────────
   {
@@ -1454,6 +1459,58 @@ import { fileURLToPath as _fileURLToPath } from "node:url";
 
 const _here = _dirname(_fileURLToPath(import.meta.url));
 
+// The catalogue is the source of truth for newly published Japanese mountain
+// URLs.  Keep the projection here, rather than re-reading the frontend region
+// modules: the latter are presentation data and can legitimately lag a
+// catalogue publication.  Maps/Sets make the per-region lookups below cheap
+// even though sitemap, prerender and rewrite generation all use this module.
+const legacyRegionSlugs = new Set(REGIONS.map((region) => region.slug));
+const catalogueMountainByRoute = new Map();
+const catalogueMountainsByRegion = new Map();
+const catalogueTravelRegionsById = new Map(
+  travelRegions.map((region) => [region.travelRegionId, region]),
+);
+
+for (const record of publishedCatalogueRecords) {
+  if (catalogueMountainByRoute.has(record.route)) {
+    throw new Error(`[seo-regions] duplicate published catalogue route: ${record.route}`);
+  }
+  catalogueMountainByRoute.set(record.route, record);
+  const mountains = catalogueMountainsByRegion.get(record.travelRegionId) || [];
+  mountains.push({
+    id: record.publicId,
+    name: record.name,
+    nameJa: record.nameJa,
+    route: record.route,
+    catalogueRecord: record,
+  });
+  catalogueMountainsByRegion.set(record.travelRegionId, mountains);
+}
+
+/**
+ * Shared published route projection for build scripts.  This intentionally
+ * includes every catalogue mountain route, including regions whose richer
+ * region/town frontend pages are not available yet.
+ */
+export const publishedCatalogueMountainRoutes = [...catalogueMountainByRoute.values()].map((record) => ({
+  path: record.route,
+  record,
+}));
+
+/**
+ * Region and base-town metadata is only exposed where feelzlike already has
+ * a supported region route.  Catalogue-only regions still receive their
+ * published mountain pages above; we do not invent unsupported landing pages.
+ */
+export const supportedCatalogueRouteMetadata = [...catalogueTravelRegionsById.values()]
+  .filter((region) => legacyRegionSlugs.has(region.travelRegionId))
+  .map((region) => ({
+    slug: region.travelRegionId,
+    name: region.name,
+    nameJa: region.nameJa,
+    baseTowns: region.baseTowns,
+  }));
+
 /**
  * Returns [{ id, name }] for every mountain defined in
  * src/regions/<slug>.ts. Throws (build fails loudly) if the file is missing
@@ -1491,6 +1548,14 @@ export function regionMountains(region) {
     throw new Error(
       `[seo-regions] extracted ${out.length} mountain ids from ${file} but ${region.mountains.length} mountains are listed for ${region.slug} — extraction drifted, fix before shipping the sitemap`,
     );
+  }
+  // Preserve every hand-authored legacy route, then add catalogue records for
+  // this region.  Do not extract catalogue records from src/regions: published
+  // catalogue data above is the sole source for the new route projection.
+  if (region.country !== "JP") return out;
+  const seen = new Set(out.map((mountain) => mountain.id));
+  for (const mountain of catalogueMountainsByRegion.get(region.slug) || []) {
+    if (!seen.has(mountain.id)) out.push(mountain);
   }
   return out;
 }

@@ -7,10 +7,11 @@
     "build": "pnpm run typecheck && pnpm -r --if-present run build",
     "typecheck:libs": "tsc --build",
     "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck",
-    "japan:catalogue:generate": "pnpm --filter @workspace/japan-ski-catalogue run generate",
-    "japan:catalogue:generate:check": "pnpm --filter @workspace/japan-ski-catalogue run generate:check",
-    "japan:catalogue:validate": "pnpm --filter @workspace/japan-ski-catalogue run validate",
-    "japan:catalogue:report": "pnpm --filter @workspace/japan-ski-catalogue run report"
+    "japan:catalogue:generate": "pnpm run japan:reviews:validate && pnpm --filter @workspace/japan-ski-catalogue run generate",
+    "japan:catalogue:generate:check": "pnpm run japan:reviews:validate && pnpm --filter @workspace/japan-ski-catalogue run generate:check",
+    "japan:catalogue:validate": "pnpm run japan:reviews:validate && pnpm --filter @workspace/japan-ski-catalogue run validate",
+    "japan:catalogue:report": "pnpm run japan:reviews:validate && pnpm --filter @workspace/japan-ski-catalogue run report",
+    "japan:reviews:validate": "pnpm --filter @workspace/japan-ski-catalogue run reviews:validate"
   },
   "private": true,
   "devDependencies": {

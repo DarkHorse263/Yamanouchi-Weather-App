@@ -23,7 +23,13 @@
  * then update artifact.toml with the fresh block and re-publish.
  */
 
-import { REGIONS, regionFeatures, townFeatures, regionMountains } from "./seo-regions.mjs";
+import {
+  REGIONS,
+  regionFeatures,
+  townFeatures,
+  regionMountains,
+  publishedCatalogueMountainRoutes,
+} from "./seo-regions.mjs";
 
 const paths = [
   "/countries",
@@ -48,6 +54,10 @@ for (const r of REGIONS) {
     paths.push(`/${r.slug}/${t.id}`);
     for (const f of townFeatures(r)) paths.push(`/${r.slug}/${t.id}/${f}`);
   }
+}
+
+for (const { path } of publishedCatalogueMountainRoutes) {
+  if (!paths.includes(path)) paths.push(path);
 }
 
 const lines = [];

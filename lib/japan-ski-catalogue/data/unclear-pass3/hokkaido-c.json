@@ -1,0 +1,247 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-08-26",
+  "sourceReviewFiles": [
+    "lib/japan-ski-catalogue/data/reviews/hokkaido.json"
+  ],
+  "assignedRecordIds": [
+    "workbook:466",
+    "workbook:472",
+    "workbook:474",
+    "workbook:475",
+    "workbook:484",
+    "workbook:486",
+    "workbook:487",
+    "workbook:490",
+    "workbook:491",
+    "workbook:492",
+    "workbook:495",
+    "workbook:498",
+    "workbook:499",
+    "workbook:501",
+    "workbook:502",
+    "workbook:503",
+    "workbook:504",
+    "workbook:506",
+    "workbook:508",
+    "workbook:515",
+    "workbook:525",
+    "workbook:526",
+    "workbook:530",
+    "workbook:531",
+    "workbook:535",
+    "workbook:538",
+    "workbook:544",
+    "workbook:549",
+    "workbook:550",
+    "workbook:551",
+    "workbook:552",
+    "workbook:555",
+    "workbook:556"
+  ],
+  "proposals": [
+    {
+      "recordId": "workbook:466",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 猿払村営スキー場 / Sarubutsu municipal ski area with 2025-26, 営業, 休業, 廃止, and closure terms. No operator or Sarufutsu municipal current-status notice was located; directory listings were not used as evidence."
+    },
+    {
+      "recordId": "workbook:472",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 当麻町営スキー場 / Toma municipal ski area with 2025-26, 営業, 休業, 廃止, and closure terms. No current authoritative municipal or operator operation notice was located."
+    },
+    {
+      "recordId": "workbook:474",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 端野メビウススキー場 / Tanno Mebius with current-season and closure terms in Japanese and English. No current operator or Kitami municipal status notice was found."
+    },
+    {
+      "recordId": "workbook:475",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 旭川サンバレースキー場 / Asahikawa Sun Valley for 2025-26 operation, closure, and successor information. No authoritative current status statement was located."
+    },
+    {
+      "recordId": "workbook:484",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 上川町営中山スキー場 / Kamikawa municipal Nakayama Ski Area with 2025-26 and 営業・休業・廃止 terms. No current Kamikawa town or operator operating-status page was found."
+    },
+    {
+      "recordId": "workbook:486",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 剣淵町ビバカラススキー場 / Bibakarasu Kenbuchi with current-season and closure terms. No authoritative municipal/operator evidence established whether it operates."
+    },
+    {
+      "recordId": "workbook:487",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Takino Snow World",
+      "officialNameJa": "滝野スノーワールド",
+      "officialUrl": "https://takinopark.com/en/",
+      "statusEvidenceUrl": "https://takinopark.com/en/news/takinosnowworld/",
+      "statusEvidenceQuote": "Regarding various information for FY2026 (ski resort, lift fees, rental fees, etc.), we will provide details around early December. Opening day: 12/23 to 3/31.",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "The official National Takino Suzuran Hillside Park notice explicitly describes the FY2026 winter ski facility and its opening period."
+    },
+    {
+      "recordId": "workbook:490",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 新十津川町そっち岳スキー場 / Shintotsukawa Socchidake for municipal 2025-26 operation and permanent closure notices. No authoritative current-status notice was located."
+    },
+    {
+      "recordId": "workbook:491",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 由仁町民スキー場 / Yuni townspeople's ski area with 2025-26, 営業, 休業, 廃止, and closure terms. No current Yuni municipal or operator evidence was found."
+    },
+    {
+      "recordId": "workbook:492",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 豊富温泉町営スキー場 / Toyotomi Onsen municipal ski area for current operation and closure notices. No authoritative 2025-26 or 2026-27 status statement was located."
+    },
+    {
+      "recordId": "workbook:495",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 美瑛町民スキー場 / Biei townspeople's ski area with current-season and closure terms. No municipal/operator notice sufficient to establish current operation was found."
+    },
+    {
+      "recordId": "workbook:498",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 空知太スキー場 / Sorachibuto Ski Area for municipal/operator 2025-26 operation, suspension, and abolition notices. No authoritative current-status source was located."
+    },
+    {
+      "recordId": "workbook:499",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 中富良野北星スキー場 / Nakafurano Kokusei with current-season and closure terms. No authoritative operator or Nakafurano town status notice was located."
+    },
+    {
+      "recordId": "workbook:501",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 佐呂間町営スキー場 / Saroma municipal ski area with 2025-26 operation and closure terms. No current municipal/operator status evidence was found."
+    },
+    {
+      "recordId": "workbook:502",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 横津岳国際スキー場 / Yokotsudake Kokusai for official closure, merger, and current operation notices. No authoritative document was located to support a status change."
+    },
+    {
+      "recordId": "workbook:503",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 月形町営スキー場 / Tsukigata municipal ski area for 2025-26 operation and closure notices. No current authoritative status statement was found."
+    },
+    {
+      "recordId": "workbook:504",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 中頓別町営寿スキー場 / Nakatonbetsu Kotobuki Ski Area with current-season and closure terms. No authoritative municipal/operator evidence established its current status."
+    },
+    {
+      "recordId": "workbook:506",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 浜頓別天北スキー場 / Hamatonbetsu Tenpoku Ski Area for 2025-26 operation, suspension, and abolition notices. No authoritative current-status source was located."
+    },
+    {
+      "recordId": "workbook:508",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 釧路市鶴丘スキー場 / Kushiro Tsuruoka Ski Area with current-season and closure terms. No current Kushiro municipal/operator operation notice was located."
+    },
+    {
+      "recordId": "workbook:515",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 新得日の出スキー場 / Shintoku Hinode Ski Area for municipal operation, closure, and replacement evidence. No authoritative current-status notice was found."
+    },
+    {
+      "recordId": "workbook:525",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 富良野富士天神山スキー場 / Furano Fuji Tenjinyama for current operation and explicit closure notices. No authoritative source was located to support promotion or closure."
+    },
+    {
+      "recordId": "workbook:526",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 恵庭アスパイア / Aspire Eniwa for current winter operation, dry-slope/indoor classification, and closure notices. No authoritative operator or municipal status statement was located."
+    },
+    {
+      "recordId": "workbook:530",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 壮瞥ことりの村スキー場 / Sobetsu Kotorinomura with 2025-26 and closure terms. No authoritative current operational or abolition notice was found."
+    },
+    {
+      "recordId": "workbook:531",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 津別スキー場 / Tsubetsu Ski Area and 町民スキー場 for current operation, closure, and dry-slope evidence. Only third-party directory material surfaced; it was not accepted."
+    },
+    {
+      "recordId": "workbook:535",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 留萌市神居岩スキー場 / Rumoi Kamuiiwa Ski Area with 2025-26 operation and closure terms. No current Rumoi municipal/operator status source was located."
+    },
+    {
+      "recordId": "workbook:538",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 蘭越こえんスキー場 / Rankoshi Koen Ski Area for current-season, closure, and merger notices. No authoritative current-status evidence was found."
+    },
+    {
+      "recordId": "workbook:544",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 寿都学田スキー場 / Suttsu Gakuden Ski Area for municipal 2025-26 operation and abolition notices. No authoritative current status statement was located."
+    },
+    {
+      "recordId": "workbook:549",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 北広島ノースバレースキー場 / Kitahiroshima North Valley with current-season and closure terms. No authoritative operator or municipal evidence established present status."
+    },
+    {
+      "recordId": "workbook:550",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 和寒東山スキー場 / Wassamu Higashiyama Ski Area with 2025-26, 営業, 休業, and 廃止 terms. No current municipal/operator status notice was found."
+    },
+    {
+      "recordId": "workbook:551",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 蘭越乙藤スキー場 / Rankoshi Otofuji Ski Area for operation, closure, merger, and dry-slope evidence. No authoritative current-status notice was located."
+    },
+    {
+      "recordId": "workbook:552",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 砂川市民スキー場 / Sunagawa municipal ski area with 2025-26 operation and closure terms. No current authoritative municipal/operator source was found."
+    },
+    {
+      "recordId": "workbook:555",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 興部町営スキー場 / Okoppe municipal ski area for current operation, temporary suspension, and abolition notices. No authoritative current-status source was located."
+    },
+    {
+      "recordId": "workbook:556",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Searched 雄武オホーツクスキー場 / Omu Okhotsk Ski Area with 2025-26 operation and closure terms. No authoritative municipal/operator status notice was located."
+    }
+  ]
+}

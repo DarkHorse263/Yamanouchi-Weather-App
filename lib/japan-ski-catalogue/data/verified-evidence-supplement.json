@@ -1,0 +1,1349 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-08-26",
+  "records": [
+    {
+      "recordId": "workbook:1a",
+      "fields": {
+        "japaneseName": {
+          "value": "ニセコ東急 グラン・ヒラフ",
+          "sourceUrl": "https://www.grand-hirafu.jp/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        },
+        "officialUrl": {
+          "value": "https://www.grand-hirafu.jp/",
+          "sourceUrl": "https://www.grand-hirafu.jp/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "notes": "Official trail-map and access-map searches exhausted; no eligible ski-area coordinate proposal recovered.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.grand-hirafu.jp/en/access/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official access page links a Google Map and shows a static map, but neither retains explicit latitude/longitude in the operator page nor an explicit-coordinate destination URL. The street address was not geocoded."
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:1b",
+      "fields": {
+        "japaneseName": {
+          "value": "ニセコビレッジスキーリゾート",
+          "sourceUrl": "https://www.niseko-village.com/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        },
+        "officialUrl": {
+          "value": "https://www.niseko-village.com/",
+          "sourceUrl": "https://www.niseko-village.com/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "notes": "Official trail-map and access-map searches exhausted; no eligible ski-area coordinate proposal recovered.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.niseko.ne.jp/en/niseko-access/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Niseko United's official access page identifies Niseko Village and provides its address, but the retained map link does not expose explicit latitude/longitude for the Niseko Village ski-area destination. The address was not geocoded."
+        },
+        {
+          "sourceUrl": "https://www.niseko-village.com/en/access/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator's English access URL did not provide a ski-area access-map destination with explicit coordinates."
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:1c",
+      "fields": {
+        "japaneseName": {
+          "value": "ニセコアンヌプリ国際スキー場",
+          "sourceUrl": "https://annupuri.info/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        },
+        "officialUrl": {
+          "value": "https://annupuri.info/",
+          "sourceUrl": "https://annupuri.info/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "notes": "Official trail-map and access-map searches exhausted; no eligible ski-area coordinate proposal recovered.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.niseko.ne.jp/en/niseko-access/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official access page links a Google Maps search for Niseko Annupuri and includes map-view coordinates, rather than explicit coordinates for the ski-area destination pin. No map-view coordinate was substituted for a destination coordinate."
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:1d",
+      "fields": {
+        "japaneseName": {
+          "value": "ニセコHANAZONOリゾート",
+          "sourceUrl": "https://hanazononiseko.com/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        },
+        "officialUrl": {
+          "value": "https://hanazononiseko.com/",
+          "sourceUrl": "https://hanazononiseko.com/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "notes": "Official trail-map and access-map searches exhausted; no eligible ski-area coordinate proposal recovered.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.niseko.ne.jp/en/niseko-access/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Niseko United's official access page identifies Niseko Hanazono Resort and provides its address, but no explicit latitude/longitude destination was published. The address was not geocoded."
+        },
+        {
+          "sourceUrl": "https://hanazononiseko.com/en/access/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator access URL did not yield an explicit-coordinate ski-area destination."
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:11",
+      "fields": {
+        "japaneseName": {
+          "value": "白馬八方尾根スキー場",
+          "sourceUrl": "https://www.happo-one.jp/en/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-04-17",
+          "note": "Official page names the ski area."
+        },
+        "officialUrl": {
+          "value": "https://www.happo-one.jp/en/",
+          "sourceUrl": "https://www.happo-one.jp/en/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-04-17",
+          "note": "Official public ski-area page."
+        },
+        "defensibleElevation": {
+          "value": {
+            "baseM": 760,
+            "topM": 1831
+          },
+          "sourceUrl": "https://www.happo-one.jp/en/gelande/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official Mountain Information lists elevation as 760m / 1,831m."
+        }
+      },
+      "unresolved": [
+        "coordinates"
+      ],
+      "notes": "Official access-map, trail-map, and brochure searches exhausted; no eligible ski-area coordinate proposal recovered.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.happo-one.jp/en/access/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official access page supplies a route-map image and transport links, not an explicit-coordinate ski-area destination."
+        },
+        {
+          "sourceUrl": "https://www.happo-one.jp/en/info/pamphlet/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official brochure page supplies route-guide and trail-map PDFs but no explicit latitude/longitude destination. The verified-evidence supplement already supplies the operator's 760 m base / 1,831 m top elevation."
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:13",
+      "fields": {
+        "japaneseName": {
+          "value": "かぐらスキー場",
+          "sourceUrl": "https://www.princehotels.co.jp/ski/kagura/winter/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        },
+        "officialUrl": {
+          "value": "https://www.princehotels.co.jp/ski/kagura/winter/",
+          "sourceUrl": "https://www.princehotels.co.jp/ski/kagura/winter/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        },
+        "coordinates": {
+          "value": {
+            "lat": 36.8930932,
+            "lng": 138.7752226
+          },
+          "sourceUrl": "https://www.princehotels.co.jp/ski/kagura/winter/access/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator access page links Google Maps for Kagura Ski Resort Mitsumata Station with explicit destination coordinates 36.8930932, 138.7752226."
+        },
+        "defensibleElevation": {
+          "value": {
+            "baseM": 620,
+            "topM": 1845
+          },
+          "sourceUrl": "https://www.princehotels.co.jp/ski/kagura/winter/coursemap/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator course map identifies Kagura’s mapped ski-area elevations as 620 m at the lowest point and 1,845 m at the highest point."
+        }
+      },
+      "unresolved": [],
+      "notes": "Official operator access and course-map evidence resolves Kagura coordinates and ski-area elevation."
+    },
+    {
+      "recordId": "workbook:19c",
+      "fields": {
+        "japaneseName": {
+          "value": "石打丸山スキー場",
+          "sourceUrl": "https://ishiuchi.or.jp/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        },
+        "officialUrl": {
+          "value": "https://ishiuchi.or.jp/",
+          "sourceUrl": "https://ishiuchi.or.jp/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "notes": "Official access-map and slope-information searches exhausted; no eligible coordinate or base/top elevation proposal recovered.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://ishiuchi.or.jp/winter/access/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator access page gives the ski-area address, access diagram, and entrance/parking information but no explicit latitude/longitude destination. The address was not geocoded."
+        },
+        {
+          "sourceUrl": "https://ishiuchi.or.jp/winter/ski/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official slope information identifies lifts and courses but no explicit ski-area base and top elevation endpoints."
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:40",
+      "fields": {
+        "japaneseName": {
+          "value": "マウントレースイスキーエリア",
+          "sourceUrl": "https://yubari-resort.co.jp/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:74",
+      "fields": {
+        "japaneseName": {
+          "value": "八幡平リゾート パノラマスキー場",
+          "sourceUrl": "https://www.hachimantai.co.jp/winter/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:129",
+      "fields": {
+        "japaneseName": {
+          "value": "平庭高原スキー場",
+          "sourceUrl": "https://hiraniwa.com/resort/ski/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:131",
+      "fields": {
+        "japaneseName": {
+          "value": "八幡平リゾート 下倉スキー場",
+          "sourceUrl": "https://www.hachimantai.co.jp/winter/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:159",
+      "fields": {
+        "japaneseName": {
+          "value": "タンネの森オコジョスキー場",
+          "sourceUrl": "https://www.shigakogen-ski.com/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-07-15",
+          "note": "Official page names the ski area."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:209",
+      "fields": {
+        "japaneseName": {
+          "value": "峰山高原リゾート ホワイトピーク",
+          "sourceUrl": "https://mineyama-resort.com/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:211",
+      "fields": {
+        "japaneseName": {
+          "value": "湯殿山スキー場",
+          "sourceUrl": "https://yudonosan.com/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:224",
+      "fields": {
+        "japaneseName": {
+          "value": "オハナリゾート",
+          "sourceUrl": "https://ohana-shiga.com/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:241",
+      "fields": {
+        "japaneseName": {
+          "value": "櫛引たらのきだいスキー場",
+          "sourceUrl": "https://www.city.tsuruoka.lg.jp/shisei/shiyakusyo/infomation/kushibiki/kanko/taranokidaiskilift6.html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        },
+        "officialUrl": {
+          "value": "https://www.city.tsuruoka.lg.jp/shisei/shiyakusyo/infomation/kushibiki/kanko/taranokidaiskilift6.html",
+          "sourceUrl": "https://www.city.tsuruoka.lg.jp/shisei/shiyakusyo/infomation/kushibiki/kanko/taranokidaiskilift6.html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:249",
+      "fields": {
+        "japaneseName": {
+          "value": "北海道グリーンランドホワイトパーク岩見沢",
+          "sourceUrl": "https://h-greenland.com/ski/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:253",
+      "fields": {
+        "japaneseName": {
+          "value": "五鹿山スキー場",
+          "sourceUrl": "https://www.town.yubetsu.lg.jp/administration/culture/detail.html?content=271",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        },
+        "officialUrl": {
+          "value": "https://www.town.yubetsu.lg.jp/administration/culture/detail.html?content=271",
+          "sourceUrl": "https://www.town.yubetsu.lg.jp/administration/culture/detail.html?content=271",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:264",
+      "fields": {
+        "japaneseName": {
+          "value": "フェアリーランドかねやまスキー場",
+          "sourceUrl": "https://www.town.kaneyama.fukushima.jp/site/kanko/1222skiii.html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        },
+        "officialUrl": {
+          "value": "https://www.town.kaneyama.fukushima.jp/site/kanko/1222skiii.html",
+          "sourceUrl": "https://www.town.kaneyama.fukushima.jp/site/kanko/1222skiii.html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:267",
+      "fields": {
+        "japaneseName": {
+          "value": "奥入瀬渓流温泉スキー場",
+          "sourceUrl": "https://oirase.or.jp/ski/ski.htm",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:268",
+      "fields": {
+        "japaneseName": {
+          "value": "石鎚スキー場",
+          "sourceUrl": "https://www.ishizuchi.com/ski/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:305",
+      "fields": {
+        "officialUrl": {
+          "value": "https://www.oze-info.jp/spot/hinoemata-ski/",
+          "sourceUrl": "https://www.oze-info.jp/spot/hinoemata-ski/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:328",
+      "fields": {
+        "officialUrl": {
+          "value": "https://sanlaiva.com/",
+          "sourceUrl": "https://sanlaiva.com/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:330",
+      "fields": {
+        "japaneseName": {
+          "value": "千畳敷スキー場",
+          "sourceUrl": "https://www.chuo-alps.com/ski/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:339",
+      "fields": {
+        "japaneseName": {
+          "value": "リバウェル井川スキー場",
+          "sourceUrl": "https://www.city.shizuoka.lg.jp/shisetsu/s0001024.html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:340",
+      "fields": {
+        "officialUrl": {
+          "value": "https://kurplazapirika.net/",
+          "sourceUrl": "https://kurplazapirika.net/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:341",
+      "fields": {
+        "japaneseName": {
+          "value": "鉛温泉スキー場",
+          "sourceUrl": "https://www.city.hanamaki.iwate.jp/ski/index.html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        },
+        "officialUrl": {
+          "value": "https://www.city.hanamaki.iwate.jp/ski/index.html",
+          "sourceUrl": "https://www.city.hanamaki.iwate.jp/ski/index.html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:356",
+      "fields": {
+        "officialUrl": {
+          "value": "https://tono-sks.com/akabane-snowpark/",
+          "sourceUrl": "https://tono-sks.com/akabane-snowpark/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:358",
+      "fields": {
+        "officialUrl": {
+          "value": "https://www.memuro.net/administration/soshiki/miryoku/shin-arashiyama/2025-1112-1623-114.html",
+          "sourceUrl": "https://www.memuro.net/administration/soshiki/miryoku/shin-arashiyama/2025-1112-1623-114.html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:359",
+      "fields": {
+        "japaneseName": {
+          "value": "但馬牧場公園スキー場",
+          "sourceUrl": "https://www.bokujyo.com/winter/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        },
+        "officialUrl": {
+          "value": "https://www.bokujyo.com/winter/",
+          "sourceUrl": "https://www.bokujyo.com/winter/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:367",
+      "fields": {
+        "japaneseName": {
+          "value": "東ヶ丘スキー場",
+          "sourceUrl": "https://www.town.horonobe.lg.jp/www4/section/edu/le009f0000001go7.html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        },
+        "officialUrl": {
+          "value": "https://www.town.horonobe.lg.jp/www4/section/edu/le009f0000001go7.html",
+          "sourceUrl": "https://www.town.horonobe.lg.jp/www4/section/edu/le009f0000001go7.html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "notes": "Municipal facility-page, attachment, map, and open-data searches exhausted; no eligible coordinate or base/top elevation proposal recovered.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.town.horonobe.lg.jp/www4/section/edu/le009f0000001go7.html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The Town of Horonobe facility page states a 56 m vertical drop and gives an address, but does not publish a base/top elevation or explicit latitude/longitude. Elevation endpoints were not inferred from vertical and the address was not geocoded."
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:380",
+      "fields": {
+        "japaneseName": {
+          "value": "チセヌプリCATスキー",
+          "sourceUrl": "https://www.chisenupuri.com/jp",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:385",
+      "fields": {
+        "japaneseName": {
+          "value": "志賀来スキー場",
+          "sourceUrl": "https://www.town.nishiwaga.lg.jp/kanko_bunka_sports/sports/1571.html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:393",
+      "fields": {
+        "japaneseName": {
+          "value": "マキノ高原ファミリースキー場",
+          "sourceUrl": "https://makinokougen.co.jp/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:395",
+      "fields": {
+        "officialUrl": {
+          "value": "https://www.town.nishiwaga.lg.jp/kanko_bunka_sports/sports/1571.html",
+          "sourceUrl": "https://www.town.nishiwaga.lg.jp/kanko_bunka_sports/sports/1571.html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:418",
+      "fields": {
+        "officialUrl": {
+          "value": "https://www.ishikari-heigen-ski.net/",
+          "sourceUrl": "https://www.ishikari-heigen-ski.net/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:419",
+      "fields": {
+        "japaneseName": {
+          "value": "だいせんホワイトリゾート",
+          "sourceUrl": "https://www.daisen-resort.jp/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        },
+        "officialUrl": {
+          "value": "https://x-project.group/daisen-white-resort/",
+          "sourceUrl": "https://x-project.group/daisen-white-resort/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Current operator public ski-area page."
+        }
+      },
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "notes": "Current and former operator pages, official trail-map material, and successor-site searches exhausted; no eligible coordinate or base/top elevation proposal recovered.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.daisen-resort.jp/4/13.html",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The former operator's official page now directs visitors to the successor and does not supply explicit geographic coordinates or ski-area base/top endpoints."
+        },
+        {
+          "sourceUrl": "https://x-project.group/daisen-white-resort/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The designated-manager announcement identifies the ski area but supplies neither explicit coordinates nor base/top elevation values."
+        },
+        {
+          "sourceUrl": "https://www.daisen-resort.jp/files/2658.pdf",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The retained official resort pamphlet/trail map provides course and lift material but no explicit ski-area base/top elevation endpoints or coordinate-bearing access-map destination."
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:426",
+      "fields": {
+        "japaneseName": {
+          "value": "国見平スキー場",
+          "sourceUrl": "https://www.kunimidaira.com/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        },
+        "officialUrl": {
+          "value": "https://www.kunimidaira.com/",
+          "sourceUrl": "https://www.kunimidaira.com/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "notes": "The embedded map viewport was not substituted for a destination coordinate, and no base/top endpoint was inferred from third-party listings or terrain.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.kunimidaira.com/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator homepage embeds a Google map for the named ski area, but its exposed latitude/longitude are map-view coordinates rather than an explicit destination coordinate. It does not state ski-area base/top elevations."
+        },
+        {
+          "sourceUrl": "https://kunimidaira.com/07contents/safetyreport/05anzen_k.pdf",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator safety report concerns lift safety and does not provide ski-area elevation endpoints or an explicit-coordinate destination."
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:438",
+      "fields": {
+        "officialUrl": {
+          "value": "https://www.town.oketo.hokkaido.jp/kyouiku_bunka/shakai/minamigaokaski/",
+          "sourceUrl": "https://www.town.oketo.hokkaido.jp/kyouiku_bunka/shakai/minamigaokaski/",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [
+        "defensibleElevation"
+      ],
+      "notes": "Coordinates are already resolved. No explicit official ski-area base/top value was recovered.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.town.oketo.hokkaido.jp/kyouiku_bunka/shakai/minamigaokaski/",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Oketo Town's ski-area page publishes season and fee information and links the safety report, but states no ski-area base or top elevation."
+        },
+        {
+          "sourceUrl": "https://www.town.oketo.hokkaido.jp/file/contents/1679/13392/sakudou.pdf",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The municipal lift safety report contains safety-management information, not ski-area base/top elevations."
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:440",
+      "fields": {
+        "japaneseName": {
+          "value": "白銀台スキー場",
+          "sourceUrl": "http://makubetsu-ski.com/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        },
+        "officialUrl": {
+          "value": "http://makubetsu-ski.com/",
+          "sourceUrl": "http://makubetsu-ski.com/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [
+        "coordinates"
+      ],
+      "notes": "Defensible elevation is already resolved. No eligible operator destination coordinate or government facility-coordinate record was recovered.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "http://makubetsu-ski.com/hakugindai/page-39/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator access page embeds a Google map for Hakugindai Ski Area, but exposes only map-view coordinates, not explicit coordinates for the destination pin. The map viewport was not used as a ski-area coordinate."
+        },
+        {
+          "sourceUrl": "http://makubetsu-ski.com/hakugindai/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official ski-area page supplies facility and course material but no explicit latitude/longitude destination."
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:444",
+      "fields": {
+        "japaneseName": {
+          "value": "松山スキー場",
+          "sourceUrl": "http://matuyama-net.com/ski/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        },
+        "officialUrl": {
+          "value": "http://matuyama-net.com/ski/",
+          "sourceUrl": "http://matuyama-net.com/ski/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [
+        "coordinates"
+      ],
+      "notes": "Defensible elevation is already resolved. Neither the operator material nor a government facility-coordinate source yielded an eligible coordinate.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "http://matuyama-net.com/ski/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official resort page provides notices and a ski-map image but no explicit latitude/longitude or coordinate-bearing access-map destination."
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:446",
+      "fields": {
+        "officialUrl": {
+          "value": "https://www.town.kiyosato.hokkaido.jp/education/?content=706",
+          "sourceUrl": "https://www.town.kiyosato.hokkaido.jp/education/?content=706",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:447",
+      "fields": {
+        "japaneseName": {
+          "value": "望洋台スキー場",
+          "sourceUrl": "https://www.town.obira.hokkaido.jp/kanko/detail/00001389.html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        },
+        "officialUrl": {
+          "value": "https://www.town.obira.hokkaido.jp/kanko/detail/00001389.html",
+          "sourceUrl": "https://www.town.obira.hokkaido.jp/kanko/detail/00001389.html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "notes": "The address was not geocoded, and no elevation endpoint was inferred from lift length or terrain.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.town.obira.hokkaido.jp/kanko/detail/00001389.html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Obira Town's ski-area page identifies the facility, gives its address, and states a 500 m pair-lift length, but has neither an explicit-coordinate destination nor ski-area base/top elevations."
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:449",
+      "fields": {},
+      "unresolved": [
+        "defensibleElevation"
+      ],
+      "notes": "Coordinates are already resolved. No explicit official ski-area base/top value was recovered.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.teshiotown.hokkaido.jp/?page_id=636",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Teshio Town's facility page identifies the ski area and embeds its access map, but does not publish ski-area base or top elevations."
+        },
+        {
+          "sourceUrl": "https://www.teshiotown.hokkaido.jp/wp-content/uploads/2025/03/4266f1aacf31ec994a889ab37c5579ab.pdf",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The Town's lift safety report is a safety-management document and contains no ski-area base/top elevation values."
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:450",
+      "fields": {
+        "japaneseName": {
+          "value": "ヘブンスそのはら SNOW WORLD",
+          "sourceUrl": "https://mt-heavens.com/winter/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        }
+      },
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "notes": "No operator destination coordinate or explicit ski-area elevation endpoint was recovered; no endpoint was derived from ropeway or vertical information.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://mt-heavens.com/winter/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator's winter-site route is a JavaScript application and did not expose an explicit-coordinate ski-area access destination or explicit ski-area base/top elevation endpoints in its public content."
+        },
+        {
+          "sourceUrl": "https://mt-heavens.com/access",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator's public access material provides travel guidance and maps, not an explicit latitude/longitude destination for the Snow World ski area or ski-area base/top elevation values."
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:452",
+      "fields": {
+        "japaneseName": {
+          "value": "士別市日向スキー場",
+          "sourceUrl": "https://www.city.shibetsu.lg.jp/soshikikarasagasu/gasshukunosato_supotsusuishinka/shiminsupotsukakari/1351.html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        }
+      },
+      "unresolved": [],
+      "notes": "All current essential gaps recovered from cited official sources."
+    },
+    {
+      "recordId": "workbook:454",
+      "fields": {
+        "japaneseName": {
+          "value": "創遊村229スキーランド",
+          "sourceUrl": "https://www.town.takko.lg.jp/index.cfm/11,0,37,164,html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        },
+        "officialUrl": {
+          "value": "https://www.town.takko.lg.jp/index.cfm/11,0,37,164,html",
+          "sourceUrl": "https://www.town.takko.lg.jp/index.cfm/11,0,37,164,html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        },
+        "coordinates": {
+          "value": {
+            "lat": 40.3648164,
+            "lng": 141.0717511
+          },
+          "sourceUrl": "https://www.town.takko.lg.jp/index.cfm/11,0,37,164,html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Takko Town's official ski-area page links its official Google access map, whose destination pin is explicitly 40.3648164, 141.0717511."
+        }
+      },
+      "unresolved": [
+        "defensibleElevation"
+      ],
+      "notes": "The verified-evidence supplement already retains the municipality's explicit access-map destination coordinate. No explicit official ski-area base/top value was recovered.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.town.takko.lg.jp/index.cfm/11,0,37,164,html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Takko Town's official ski-area page is the already accepted explicit-coordinate Google destination source, but does not state ski-area base/top elevations."
+        },
+        {
+          "sourceUrl": "https://www.town.takko.lg.jp/_resources/content/167/20260218-142645.pdf",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The municipal safety report concerns operation of the first lift and contains no ski-area base or top elevation."
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:459",
+      "fields": {
+        "officialUrl": {
+          "value": "https://www.city.obanazawa.yamagata.jp/kanko/hanagasa-kogen/",
+          "sourceUrl": "https://www.city.obanazawa.yamagata.jp/kanko/hanagasa-kogen/",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [
+        "defensibleElevation"
+      ],
+      "notes": "Coordinates are already resolved. No explicit official ski-area base/top value was recovered; third-party elevation listings were not used.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.city.obanazawa.yamagata.jp/kanko/hanagasa-kogen/",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official Obanazawa City ski-area page provides season and visitor information but no explicit ski-area base or top elevation."
+        },
+        {
+          "sourceUrl": "https://goshozan.net/wp-content/uploads/2024/11/%E3%82%B9%E3%82%AD%E3%83%BC%E5%A0%B4%E3%83%91%E3%83%B3%E3%83%95%E3%83%AC%E3%83%83%E3%83%88%E5%86%85.pdf",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator trail-map brochure labels courses, lifts, lengths, and gradients, but does not label a base or summit elevation."
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:461",
+      "fields": {
+        "japaneseName": {
+          "value": "北長沼スキー場",
+          "sourceUrl": "https://ski-kitanaganuma.com/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        },
+        "officialUrl": {
+          "value": "https://ski-kitanaganuma.com/",
+          "sourceUrl": "https://ski-kitanaganuma.com/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "notes": "No operator access-map destination embed or government GIS/open-data facility coordinate was found. Third-party coordinate and elevation listings were rejected.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://ski-kitanaganuma.com/access/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator access page gives travel times only; it contains no destination map, latitude/longitude, or elevation."
+        },
+        {
+          "sourceUrl": "https://ski-kitanaganuma.com/facility/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official facility page describes courses and facilities but gives no explicit base/top elevations."
+        },
+        {
+          "sourceUrl": "https://naganuma-kanko.com/en/spot/291/",
+          "sourceType": "municipal_tourism",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official Naganuma tourism listing identifies the facility and street address but provides neither facility coordinates nor ski-area base/top elevations."
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:463",
+      "fields": {
+        "japaneseName": {
+          "value": "となみ夢の平スキー場",
+          "sourceUrl": "https://ski.yumeno-taira.com/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        },
+        "officialUrl": {
+          "value": "https://ski.yumeno-taira.com/",
+          "sourceUrl": "https://ski.yumeno-taira.com/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        },
+        "coordinates": {
+          "value": {
+            "lat": 36.5859507,
+            "lng": 137.0205605
+          },
+          "sourceUrl": "https://ski.yumeno-taira.com/access/index.php",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator's access page links route maps to Tonami Yumenotaira Ski Resort with the explicit destination coordinates 36.5859507, 137.0205605."
+        }
+      },
+      "unresolved": [
+        "defensibleElevation"
+      ],
+      "notes": "The verified supplement already retains the operator access-map destination coordinate. No elevation endpoint was inferred from lift or course information.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://ski.yumeno-taira.com/access/index.php",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator access page is the already accepted explicit-coordinate destination source; it does not state ski-area base/top elevations."
+        },
+        {
+          "sourceUrl": "https://ski.yumeno-taira.com/slope/index.php",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official slope page identifies top and intermediate lift unload points and course gradients, but does not state their elevations or a base elevation."
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:466",
+      "fields": {},
+      "unresolved": [
+        "defensibleElevation"
+      ],
+      "notes": "Coordinates are already resolved. No explicit official ski-area base/top value was recovered.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.vill.sarufutsu.hokkaido.jp/",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The Village's official public information and ski-season circular trail do not publish explicit ski-area base and top elevations."
+        },
+        {
+          "sourceUrl": "https://www.vill.sarufutsu.hokkaido.jp/kairan/pdf/783_09080316.pdf",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official 2025-26 circular gives operating dates for the village ski area, not elevation endpoints."
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:487",
+      "fields": {
+        "japaneseName": {
+          "value": "滝野スノーワールド",
+          "sourceUrl": "https://takinopark.com/en/",
+          "sourceType": "national_government_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        },
+        "officialUrl": {
+          "value": "https://takinopark.com/en/",
+          "sourceUrl": "https://takinopark.com/en/",
+          "sourceType": "national_government_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official public ski-area page."
+        }
+      },
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "notes": "No eligible ski-area coordinate or explicit base/top elevation was recovered; park-level and third-party map points were not substituted.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://takinopark.com/news/takinosnowworld/",
+          "sourceType": "national_government_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The national-park operator's Snow World page describes the family slope and its average 7-degree gradient but has no explicit latitude/longitude or base/top elevation."
+        },
+        {
+          "sourceUrl": "https://takinopark.com/access/",
+          "sourceType": "national_government_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official park access page provides directions and a park map, not a coordinate-bearing destination embed specifically for the Snow World ski slope."
+        },
+        {
+          "sourceUrl": "https://takinopark.com/digital_map",
+          "sourceType": "national_government_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official digital park map locates park amenities but does not explicitly provide a latitude/longitude destination or base/top elevations for the ski area."
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:489",
+      "fields": {
+        "japaneseName": {
+          "value": "日光湯元温泉スキー場",
+          "sourceUrl": "http://www.nikkoyumoto-ski.com/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official page names the ski area."
+        }
+      },
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "notes": "No operator access-map destination embed or government GIS/open-data facility coordinate was recovered, and no explicit ski-area base/top value was found.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://nikkoyumoto-ski.com/guide.html",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator course guide describes courses and lift use but does not state ski-area base and top elevations."
+        },
+        {
+          "sourceUrl": "https://nikkoyumoto-ski.com/access.html",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator access page supplies directions and a map image, but no explicit latitude/longitude destination value."
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:493",
+      "fields": {},
+      "unresolved": [
+        "defensibleElevation"
+      ],
+      "notes": "Coordinates are already resolved. A base or summit was not calculated from the published vertical drop.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.siroimori.co.jp/yokone-ski/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official operator page states a 129 m vertical drop and 444 m run length, not base and top elevations."
+        },
+        {
+          "sourceUrl": "https://www.siroimori.co.jp/yokone-ski/kannai.html",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official facility-information page repeats the vertical/drop information but gives no base/top elevation values."
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:542",
+      "fields": {},
+      "unresolved": [
+        "defensibleElevation"
+      ],
+      "notes": "Komatsu Community and Culture Foundation official facility page and 2025–26 use-guide PDF checked; neither publishes eligible ski-area base/top or forecast elevation, so no value was inferred.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://komatsu-ccf.com/sports/ookuradake_kogen_ski_resort/",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official Komatsu Community and Culture Foundation facility page identifies the municipal ski area but does not state a base/top or forecast elevation."
+        },
+        {
+          "sourceUrl": "https://komatsu-ccf.com/data_file/20251112070136178efile01.pdf",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Official 2025–26 use-guide PDF provides operating dates but no base/top or forecast elevation."
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:550",
+      "fields": {},
+      "unresolved": [
+        "defensibleElevation"
+      ],
+      "notes": "Coordinates are already resolved. No elevation endpoint was derived from the published 120 m vertical difference.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.town.wassamu.hokkaido.jp/school-board/facility/ski-resort/",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official municipal ski-area page states that the lift ride to the top is about 500 m and the elevation difference is about 120 m, but does not state base and top elevations."
+        }
+      ]
+    }
+  ]
+}

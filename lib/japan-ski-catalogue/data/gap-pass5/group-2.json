@@ -1,0 +1,223 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-08-26",
+  "assignedRecordIds": [
+    "workbook:426",
+    "workbook:438",
+    "workbook:440",
+    "workbook:444",
+    "workbook:447",
+    "workbook:449",
+    "workbook:450",
+    "workbook:454"
+  ],
+  "proposals": [
+    {
+      "recordId": "workbook:426",
+      "fields": {},
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.kunimidaira.com/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator homepage embeds a Google map for the named ski area, but its exposed latitude/longitude are map-view coordinates rather than an explicit destination coordinate. It does not state ski-area base/top elevations."
+        },
+        {
+          "sourceUrl": "https://kunimidaira.com/07contents/safetyreport/05anzen_k.pdf",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator safety report concerns lift safety and does not provide ski-area elevation endpoints or an explicit-coordinate destination."
+        }
+      ],
+      "queriesExhausted": [
+        "site:kunimidaira.com 国見平スキー場 標高",
+        "site:kunimidaira.com 国見平スキー場 PDF",
+        "奥州市 国見平スキー場 座標 標高"
+      ],
+      "notes": "The embedded map viewport was not substituted for a destination coordinate, and no base/top endpoint was inferred from third-party listings or terrain."
+    },
+    {
+      "recordId": "workbook:438",
+      "fields": {},
+      "unresolved": [
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.town.oketo.hokkaido.jp/kyouiku_bunka/shakai/minamigaokaski/",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Oketo Town's ski-area page publishes season and fee information and links the safety report, but states no ski-area base or top elevation."
+        },
+        {
+          "sourceUrl": "https://www.town.oketo.hokkaido.jp/file/contents/1679/13392/sakudou.pdf",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The municipal lift safety report contains safety-management information, not ski-area base/top elevations."
+        }
+      ],
+      "queriesExhausted": [
+        "site:town.oketo.hokkaido.jp 南ケ丘スキー場 標高",
+        "site:town.oketo.hokkaido.jp 南ケ丘スキー場 PDF",
+        "置戸町 南ケ丘スキー場 標高"
+      ],
+      "notes": "Coordinates are already resolved. No explicit official ski-area base/top value was recovered."
+    },
+    {
+      "recordId": "workbook:440",
+      "fields": {},
+      "unresolved": [
+        "coordinates"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "http://makubetsu-ski.com/hakugindai/page-39/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator access page embeds a Google map for Hakugindai Ski Area, but exposes only map-view coordinates, not explicit coordinates for the destination pin. The map viewport was not used as a ski-area coordinate."
+        },
+        {
+          "sourceUrl": "http://makubetsu-ski.com/hakugindai/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official ski-area page supplies facility and course material but no explicit latitude/longitude destination."
+        }
+      ],
+      "queriesExhausted": [
+        "site:makubetsu-ski.com 白銀台スキー場 座標",
+        "site:makubetsu-ski.com 白銀台スキー場 アクセス",
+        "幕別町 白銀台スキー場 オープンデータ 座標"
+      ],
+      "notes": "Defensible elevation is already resolved. No eligible operator destination coordinate or government facility-coordinate record was recovered."
+    },
+    {
+      "recordId": "workbook:444",
+      "fields": {},
+      "unresolved": [
+        "coordinates"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "http://matuyama-net.com/ski/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official resort page provides notices and a ski-map image but no explicit latitude/longitude or coordinate-bearing access-map destination."
+        }
+      ],
+      "queriesExhausted": [
+        "site:matuyama-net.com/ski 松山スキー場 座標",
+        "site:matuyama-net.com/ski 松山スキー場 アクセス",
+        "山形県 松山スキー場 オープンデータ 座標"
+      ],
+      "notes": "Defensible elevation is already resolved. Neither the operator material nor a government facility-coordinate source yielded an eligible coordinate."
+    },
+    {
+      "recordId": "workbook:447",
+      "fields": {},
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.town.obira.hokkaido.jp/kanko/detail/00001389.html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Obira Town's ski-area page identifies the facility, gives its address, and states a 500 m pair-lift length, but has neither an explicit-coordinate destination nor ski-area base/top elevations."
+        }
+      ],
+      "queriesExhausted": [
+        "site:town.obira.hokkaido.jp 望洋台スキー場 座標",
+        "site:town.obira.hokkaido.jp 望洋台スキー場 標高",
+        "小平町 望洋台スキー場 PDF 標高"
+      ],
+      "notes": "The address was not geocoded, and no elevation endpoint was inferred from lift length or terrain."
+    },
+    {
+      "recordId": "workbook:449",
+      "fields": {},
+      "unresolved": [
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.teshiotown.hokkaido.jp/?page_id=636",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Teshio Town's facility page identifies the ski area and embeds its access map, but does not publish ski-area base or top elevations."
+        },
+        {
+          "sourceUrl": "https://www.teshiotown.hokkaido.jp/wp-content/uploads/2025/03/4266f1aacf31ec994a889ab37c5579ab.pdf",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The Town's lift safety report is a safety-management document and contains no ski-area base/top elevation values."
+        }
+      ],
+      "queriesExhausted": [
+        "site:teshiotown.hokkaido.jp 天塩町町民スキー場 標高",
+        "site:teshiotown.hokkaido.jp 天塩町町民スキー場 PDF",
+        "天塩町町民スキー場 標高 公式"
+      ],
+      "notes": "Coordinates are already resolved. No explicit official ski-area base/top value was recovered."
+    },
+    {
+      "recordId": "workbook:450",
+      "fields": {},
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://mt-heavens.com/winter/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator's winter-site route is a JavaScript application and did not expose an explicit-coordinate ski-area access destination or explicit ski-area base/top elevation endpoints in its public content."
+        },
+        {
+          "sourceUrl": "https://mt-heavens.com/access",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The operator's public access material provides travel guidance and maps, not an explicit latitude/longitude destination for the Snow World ski area or ski-area base/top elevation values."
+        }
+      ],
+      "queriesExhausted": [
+        "site:mt-heavens.com ヘブンスそのはら 標高",
+        "site:mt-heavens.com ヘブンスそのはら 座標",
+        "ヘブンスそのはら SNOW WORLD 公式 PDF 標高"
+      ],
+      "notes": "No operator destination coordinate or explicit ski-area elevation endpoint was recovered; no endpoint was derived from ropeway or vertical information."
+    },
+    {
+      "recordId": "workbook:454",
+      "fields": {},
+      "unresolved": [
+        "defensibleElevation"
+      ],
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.town.takko.lg.jp/index.cfm/11,0,37,164,html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Takko Town's official ski-area page is the already accepted explicit-coordinate Google destination source, but does not state ski-area base/top elevations."
+        },
+        {
+          "sourceUrl": "https://www.town.takko.lg.jp/_resources/content/167/20260218-142645.pdf",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The municipal safety report concerns operation of the first lift and contains no ski-area base or top elevation."
+        }
+      ],
+      "queriesExhausted": [
+        "site:town.takko.lg.jp 創遊村229スキーランド 標高",
+        "site:town.takko.lg.jp 創遊村229スキーランド PDF",
+        "創遊村229スキーランド 公式 標高"
+      ],
+      "notes": "The verified-evidence supplement already retains the municipality's explicit access-map destination coordinate. No explicit official ski-area base/top value was recovered."
+    }
+  ]
+}

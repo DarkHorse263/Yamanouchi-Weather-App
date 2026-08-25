@@ -48,6 +48,7 @@
 // route - it is "right now" data and was being served a session stale. Also
 // adds /api/jma-radar/times (JP Official radar frame discovery) network-first
 // (reload) like the BOM/WillyWeather frame lists.
+// v24: published Japan catalogue routes are bundled into the app shell.
 // v18: /api/weather/:id/snow-report gained optional baseMinCm (NZ two-station
 // range reports render "16-38") - bust cached single-figure responses.
 // v19: /api/admin/* excluded from the SW entirely (session-scoped, private,
@@ -69,7 +70,7 @@
 // route AND the response gained liveStatusVerified (Thredbo's official live
 // per-lift feed). Real open/closed lift claims must never be served a session
 // stale from an installed PWA.
-const CACHE_VERSION = "v23";
+const CACHE_VERSION = "v24";
 const STATIC_CACHE = `feelzlike-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `feelzlike-runtime-${CACHE_VERSION}`;
 const DATA_CACHE = `feelzlike-data-${CACHE_VERSION}`;

@@ -1,4 +1,5 @@
 import type { RegionConfig } from "@workspace/feelzlike-shell";
+import { mergeJapanCatalogueRegions } from "./japan-catalogue";
 import { snowyMountainsRegion } from "./snowy-mountains";
 import { yamanouchiRegion } from "./yamanouchi";
 import { victoriasHighCountryRegion } from "./victorias-high-country";
@@ -158,7 +159,7 @@ import { highmountRegion } from "./highmount";
 // Snow, Bromley Mountain, Magic Mountain), Okemo (Okemo Mountain
 // Resort), Jay Peak/Northeast Kingdom (Jay Peak, Burke Mountain). First
 // Eastern-timezone (America/New_York) US regions on this branch.
-export const REGIONS: RegionConfig[] = [
+const AUTHORED_REGIONS: RegionConfig[] = [
   snowyMountainsRegion,
   victoriasHighCountryRegion,
   tasmaniaRegion,
@@ -278,6 +279,8 @@ export const REGIONS: RegionConfig[] = [
   windhamRegion,
   highmountRegion,
 ];
+
+export const REGIONS: RegionConfig[] = mergeJapanCatalogueRegions(AUTHORED_REGIONS);
 
 export const REGION_BY_ID: Record<string, RegionConfig> = Object.fromEntries(
   REGIONS.map((r) => [r.id, r]),
@@ -411,6 +414,11 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "hunter": "US",
   "windham": "US",
   "highmount": "US",
+  ...Object.fromEntries(
+    REGIONS
+      .filter((region) => !AUTHORED_REGIONS.some((authored) => authored.id === region.id))
+      .map((region) => [region.id, "JP" as const]),
+  ),
 };
 export const COUNTRY_META: Record<CountryCode, { name: string; flag: string }> = {
   AU: { name: "Australia", flag: "🇦🇺" },

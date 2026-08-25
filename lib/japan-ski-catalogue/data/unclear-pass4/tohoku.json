@@ -1,0 +1,212 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-08-26",
+  "sourceReviewFiles": [
+    "lib/japan-ski-catalogue/data/reviews/tohoku-north.json",
+    "lib/japan-ski-catalogue/data/reviews/tohoku-south.json"
+  ],
+  "assignedRecordIds": [
+    "workbook:265",
+    "workbook:302",
+    "workbook:327",
+    "workbook:356",
+    "workbook:383",
+    "workbook:413",
+    "workbook:429",
+    "workbook:432",
+    "workbook:437",
+    "workbook:455",
+    "workbook:457",
+    "workbook:479",
+    "workbook:494",
+    "workbook:527",
+    "workbook:528",
+    "workbook:532",
+    "workbook:292",
+    "workbook:309",
+    "workbook:326",
+    "workbook:375",
+    "workbook:439",
+    "workbook:448",
+    "workbook:453",
+    "workbook:460",
+    "workbook:541",
+    "workbook:547"
+  ],
+  "proposals": [
+    {
+      "recordId": "workbook:265",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Okunakayama Kogen Ski Area",
+      "officialNameJa": "奥中山高原スキー場",
+      "officialUrl": "https://www.okunakayamakogen.jp/winter-season/",
+      "statusEvidenceUrl": "https://www.okunakayamakogen.jp/winter-season/lift-status/",
+      "statusEvidenceQuote": "2025⁻2026シーズンの営業は3月29日(日)をもってを終了いたしました。皆様のご来場誠にありがとうございました。",
+      "evidenceAsOf": "2026-08-26",
+      "freshnessReviewRequired": true,
+      "notes": "The operator's live lift-status page explicitly records the completed 2025-26 season. The intake municipality is incorrect: the operator gives Ichinohe."
+    },
+    {
+      "recordId": "workbook:302",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Shichinohe Town Ski Area",
+      "officialNameJa": "七戸町営スキー場",
+      "officialUrl": "https://www.shichinohe-kankou.jp/ski/",
+      "statusEvidenceUrl": "https://www.shichinohe-kankou.jp/category/ski-news/ski-news_572.html",
+      "statusEvidenceQuote": "2026/3/1を持ちまして今季シーズンの営業は終了致します。また来シーズンのご利用をお待ちしております。",
+      "evidenceAsOf": "2026-08-26",
+      "freshnessReviewRequired": true,
+      "notes": "The facility's Shichinohe tourism-association notice gives the 2025-26 final operating dates and anticipates the next season."
+    },
+    {
+      "recordId": "workbook:327",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Fourth pass searched Yokote municipal facility, council and education-committee material for 横手公園スキー場 and 廃止. A third-party page claims abolition, but no primary municipal abolition notice or current facility register identifying this row was located."
+    },
+    {
+      "recordId": "workbook:356",
+      "proposedStatus": "verified_operating",
+      "officialNameEn": "Akabane Ski Area",
+      "officialNameJa": "赤羽根スキー場",
+      "officialUrl": "https://tono-sks.com/akabane-snowpark/",
+      "statusEvidenceUrl": "https://tono-sks.com/akabane-snowpark/",
+      "statusEvidenceQuote": "2025-2026シーズンの営業は終了いたしました。皆様たくさんのご来場、誠にありがとうございました。",
+      "evidenceAsOf": "2026-08-26",
+      "freshnessReviewRequired": true,
+      "notes": "The current operator page supplies a 2026 end-of-season notice. The facility is in Tono, not the intake's Ichinoseki."
+    },
+    {
+      "recordId": "workbook:383",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "A 2026 local-news report says Daisen City Council passed abolition of Oomagari Family Ski Area, but the fourth pass did not locate the underlying city ordinance, council record, or operator closure notice. It is therefore discovery only under the evidence rule."
+    },
+    {
+      "recordId": "workbook:413",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Oshu City's ordinance still establishes 奥州市越路スキー場, while a 2023 city bulletin states it was then suspended. No contemporaneous municipal 2025-26/2026 notice establishes continued suspension, reopening, or abolition."
+    },
+    {
+      "recordId": "workbook:429",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Fourth pass searched Gojome Town facility, budget and notice pages for 五城目恋地スキー場 plus 廃止・閉鎖・休止. No authoritative current-status record was found."
+    },
+    {
+      "recordId": "workbook:432",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Fourth pass searched Yuzawa City records and operator sources for 小安温泉スキー場 and 秋ノ宮スキー場. No official document resolved this row's identity, operation, closure, or relationship to workbook:528."
+    },
+    {
+      "recordId": "workbook:437",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Fourth pass searched Hiranai Town facility registers, budgets and notices for 東方スキー場. No authoritative source resolved the romanized intake name or a ski-facility status."
+    },
+    {
+      "recordId": "workbook:455",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Fourth pass searched Hirosaki municipal facility/council material and operator-company notices for 相馬ロマントピアスキー場. No primary current operation, suspension, or abolition notice was located."
+    },
+    {
+      "recordId": "workbook:457",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Fourth pass searched Morioka City park and sports-facility records for 岩山パークスキー場 and 廃止. No primary record establishes a ski-area operation or closure; the row's Ichinoseki geography also conflicts with the name."
+    },
+    {
+      "recordId": "workbook:479",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Fourth pass searched Hachimantai municipal facility and sports records for 田山スキー場. No authoritative current-status source was located, and the discovery geography conflicts with the intake's Ichinoseki."
+    },
+    {
+      "recordId": "workbook:494",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Fourth pass searched Hirosaki and Hirakawa municipal records for 岩木山スキー場. The generic row cannot be assigned to a particular official Mount Iwaki operator without over-merging."
+    },
+    {
+      "recordId": "workbook:527",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Kitaakita City's 2026 records identify the operating 森吉山阿仁スキー場, but no official document identifies 森吉山森吉スキー場 as either that same facility or a separate current/closed facility."
+    },
+    {
+      "recordId": "workbook:528",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Fourth pass searched Yuzawa City sports, tourism and budget notices for 秋ノ宮スキー場. No primary operation, closure, merger or facility-register evidence was found."
+    },
+    {
+      "recordId": "workbook:532",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Fourth pass searched Morioka City facility registers, plans and notices for 盛岡ハイランドスキー場. No authoritative current-status entity was located."
+    },
+    {
+      "recordId": "workbook:292",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Fourth pass searched Nishikawa Town facility registers, budgets and notices for 西川町民スキー場. No municipal current operation, temporary closure or abolition record was located."
+    },
+    {
+      "recordId": "workbook:309",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Fourth pass searched Aizubange Town facility, council and budget records for 会津坂下町営スキー場. No authoritative status notice was found."
+    },
+    {
+      "recordId": "workbook:326",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Fourth pass searched municipal and operator sources for 横向温泉スキー場. The sources found concern accommodation, not an evidenced ski-area operation, closure, or merger."
+    },
+    {
+      "recordId": "workbook:375",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Fourth pass searched Shirataka Town sports-facility registers, budgets and notices for 白鷹町営スキー場. No authoritative current-status record was found."
+    },
+    {
+      "recordId": "workbook:439",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Fourth pass searched Yonezawa City facility and council material for 栗子国際スキー場. Historical closure claims remain unsupported by a primary closure decision."
+    },
+    {
+      "recordId": "workbook:448",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Fourth pass searched Showa Village facility registers and education/sports notices for 昭和村営スキー場. Ski-club lessons at other facilities do not establish this row's facility status."
+    },
+    {
+      "recordId": "workbook:453",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Fourth pass searched Shirakawa-area municipal records for 白河高原スキー場, including closure and facility-register terms. No official source resolved the entity."
+    },
+    {
+      "recordId": "workbook:460",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Fourth pass searched Kawanishi Town facility plans and notices for サンマリーナ玉庭スキーパーク. Historical abandonment references were not accepted without a municipal/operator closure record."
+    },
+    {
+      "recordId": "workbook:541",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Fourth pass searched Shinjo and Mogami government sports-facility records for 最上川スキー場. No authoritative source identified the raw-name facility or its status."
+    },
+    {
+      "recordId": "workbook:547",
+      "proposedStatus": "remain_unclear",
+      "evidenceAsOf": "2026-08-26",
+      "notes": "Fourth pass searched Kitakata City facility, council and archive material for 五分一スキー場. Historical directory closure statements remain insufficient without an official record."
+    }
+  ]
+}

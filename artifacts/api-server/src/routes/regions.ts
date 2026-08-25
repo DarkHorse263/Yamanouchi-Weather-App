@@ -3,6 +3,7 @@ import { LruTtlCache } from "../lib/lru-cache.js";
 import { fetchOpenWeatherMapAsOpenMeteo } from "../lib/openweathermap.js";
 import { reconcileDryToWet } from "../lib/amedas.js";
 import { reconcileNzMetarDryToWet } from "../lib/metar-nz.js";
+import { publishedCatalogueRecords, travelRegions } from "@workspace/japan-ski-catalogue/public-runtime";
 
 const router: IRouter = Router();
 
@@ -2074,6 +2075,40 @@ const REGIONS: RegionConfig[] = [
   },
 ];
 
+/**
+ * Published catalogue regions that do not yet have a hand-curated regional
+ * headline. These are metadata-only by design: no coordinates means
+ * /api/regions never fan-outs to Open-Meteo once per catalogue record.
+ */
+const CATALOGUE_REGIONS: RegionConfig[] = travelRegions
+  .filter((region) => !REGIONS.some((existing) => existing.id === region.travelRegionId))
+  .map((region) => ({
+    id: region.travelRegionId,
+    name: region.name,
+    country: "Japan",
+    countryCode: "JP",
+    region: region.prefectures.join(", "),
+    status: "live",
+    href: `/${region.travelRegionId}/`,
+    baseTowns: region.baseTowns.map((town) => town.name),
+    mountains: publishedCatalogueRecords
+      .filter((record) => record.travelRegionId === region.travelRegionId)
+      .map((record) => record.name),
+    headlineLabel: region.name,
+    sourceLabel: "Published Japan ski catalogue",
+  }));
+
+const ALL_REGIONS: readonly RegionConfig[] = [...REGIONS, ...CATALOGUE_REGIONS];
+
+/** Published JP travel-region metadata, keyed by the catalogue's shared id. */
+export const CATALOGUE_REGION_METADATA = new Map(
+  travelRegions.map((region) => [region.travelRegionId, {
+    ...region,
+    country: "Japan" as const,
+    countryCode: "JP" as const,
+  }] as const),
+);
+
 const WEATHER_DESCRIPTIONS: Record<number, string> = {
   0: "Clear",
   1: "Mainly clear",
@@ -2343,9 +2378,9 @@ async function fetchHeadlineUpstream(r: RegionConfig): Promise<HeadlineReading |
 router.get("/regions", async (_req, res) => {
   try {
     const headlines = await Promise.all(
-      REGIONS.map((r) => fetchHeadline(r).catch(() => null)),
+      ALL_REGIONS.map((r) => fetchHeadline(r).catch(() => null)),
     );
-    const regions: RegionPayload[] = REGIONS.map((r, i) => {
+    const regions: RegionPayload[] = ALL_REGIONS.map((r, i) => {
       const { lat, lon, model, timezone, ...rest } = r;
       void lat; void lon; void model; void timezone;
       return { ...rest, headline: headlines[i] };
@@ -2377,7 +2412,7 @@ router.get("/regions/_stats", (_req, res) => {
     cache: getCacheStats(),
     fresh_ms: FRESH_MS,
     stale_ms: STALE_MS,
-    regions: REGIONS.map((r) => ({ id: r.id, status: r.status })),
+    regions: ALL_REGIONS.map((r) => ({ id: r.id, status: r.status })),
   });
 });
 
@@ -2443,7 +2478,7 @@ function findNearestRegion(
   lon: number,
 ): { r: RegionConfig; distanceKm: number } | null {
   let best: { r: RegionConfig; distanceKm: number } | null = null;
-  for (const r of REGIONS) {
+  for (const r of ALL_REGIONS) {
     if (r.status !== "live" || r.lat == null || r.lon == null) continue;
     const distanceKm = haversineKm(lat, lon, r.lat, r.lon);
     if (!best || distanceKm < best.distanceKm) best = { r, distanceKm };
@@ -2846,6 +2881,6 @@ router.get("/local-weather", async (req, res) => {
 
 // Region ids · used by routes/engagement.ts to whitelist page labels so
 // page_view_daily cardinality stays finite (unknown labels collapse to "other").
-export const REGION_IDS: ReadonlySet<string> = new Set(REGIONS.map((r) => r.id));
+export const REGION_IDS: ReadonlySet<string> = new Set(ALL_REGIONS.map((r) => r.id));
 
 export default router;
