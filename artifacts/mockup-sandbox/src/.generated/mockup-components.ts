@@ -10,10 +10,10 @@ export const modules: ModuleMap = {
   "./components/mockups/feelzlike-branding/LogoV1.tsx": () => import("../components/mockups/feelzlike-branding/LogoV1.tsx"),
   "./components/mockups/feelzlike-branding/LogoV2.tsx": () => import("../components/mockups/feelzlike-branding/LogoV2.tsx"),
   "./components/mockups/feelzlike-branding/LogoV3.tsx": () => import("../components/mockups/feelzlike-branding/LogoV3.tsx"),
-  "./components/mockups/landing-mobile/LiveDataHero.tsx": () => import("../components/mockups/landing-mobile/LiveDataHero.tsx"),
-  "./components/mockups/landing-mobile/PhotoLed.tsx": () => import("../components/mockups/landing-mobile/PhotoLed.tsx"),
   "./components/mockups/snow-radar/BomCaptainsFlat.tsx": () => import("../components/mockups/snow-radar/BomCaptainsFlat.tsx"),
   "./components/mockups/snow-radar/MeteoblueSnow.tsx": () => import("../components/mockups/snow-radar/MeteoblueSnow.tsx"),
   "./components/mockups/snow-radar/WindyEmbed.tsx": () => import("../components/mockups/snow-radar/WindyEmbed.tsx"),
-  "./components/mockups/snow-radar/ZoomEarthEmbed.tsx": () => import("../components/mockups/snow-radar/ZoomEarthEmbed.tsx")
+  "./components/mockups/snow-radar/ZoomEarthEmbed.tsx": () => import("../components/mockups/snow-radar/ZoomEarthEmbed.tsx"),
+  "./components/mockups/landing-mobile/LiveDataHero.tsx": () => import("../components/mockups/landing-mobile/LiveDataHero.tsx"),
+  "./components/mockups/landing-mobile/PhotoLed.tsx": () => import("../components/mockups/landing-mobile/PhotoLed.tsx")
 };
