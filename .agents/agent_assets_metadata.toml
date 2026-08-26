@@ -948,3 +948,10 @@ uri = "file://exports/video-ads/fb-pack-silent-copy.zip"
 type = "unspecified"
 title = "silent copy-point pack · all markets"
 description = "12 new silent cuts (AU, USA, Japan, Japan-English × landscape, square, vertical) with the app to one side and copy points fading in (33MB)"
+
+[[outputs]]
+id = "Gg22YR3gySRgKb38HVXS0"
+uri = "file://exports/japan-pending-evidence-235.csv"
+type = "table"
+title = "Japan pending-evidence records (235)"
+description = "The 210 unclear-status records and 25 verified operating records missing essential publication evidence, grouped by prefecture and sorted by area name."
