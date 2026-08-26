@@ -773,9 +773,9 @@
           "nameJa": "Oketo"
         },
         {
-          "baseTownId": "hokkaido-regional-tsurui",
-          "name": "Tsurui",
-          "nameJa": "Tsurui"
+          "baseTownId": "hokkaido-regional-churui",
+          "name": "Churui",
+          "nameJa": "忠類"
         },
         {
           "baseTownId": "hokkaido-regional-hobetsu",
@@ -7038,6 +7038,33 @@
       "baseTownId": "nagano-regional-shinano",
       "route": "/nagano-regional/mountain/kurohime-kogen-snow-park",
       "prefecture": "Nagano",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:440",
+      "publicId": "hakugindai-ski-area",
+      "aliases": [],
+      "name": "Hakugindai Ski Area",
+      "nameJa": "白銀台スキー場",
+      "coordinates": {
+        "lat": 42.56293,
+        "lng": 143.31056
+      },
+      "forecastElevationM": 220,
+      "baseElevationM": 95,
+      "topElevationM": 220,
+      "officialUrl": "http://makubetsu-ski.com/",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-churui",
+      "route": "/hokkaido-regional/mountain/hakugindai-ski-area",
+      "prefecture": "Hokkaido",
       "country": "Japan",
       "countryCode": "JP",
       "honesty": {

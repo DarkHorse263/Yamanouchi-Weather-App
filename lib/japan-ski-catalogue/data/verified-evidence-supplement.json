@@ -855,12 +855,20 @@
           "sourceType": "resort_operator",
           "evidenceAsOf": "2026-08-26",
           "note": "Official public ski-area page."
+        },
+        "coordinates": {
+          "value": {
+            "lat": 42.56293,
+            "lng": 143.31056
+          },
+          "sourceUrl": "https://odm.bodik.jp/gl/dataset/010006_227_cc-by/resource/ca1c49f4-e509-4dac-8e61-f6612a86400f",
+          "sourceType": "prefectural_government_open_data",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The Hokkaido Facility Location Database explicitly lists the named Churui Hakugindai ski area at these coordinates."
         }
       },
-      "unresolved": [
-        "coordinates"
-      ],
-      "notes": "Defensible elevation is already resolved. No eligible operator destination coordinate or government facility-coordinate record was recovered.",
+      "unresolved": [],
+      "notes": "The Hokkaido government facility record resolves the coordinate gap; the existing catalogue elevation remains the defensible range.",
       "sourcesChecked": [
         {
           "sourceUrl": "http://makubetsu-ski.com/hakugindai/page-39/",
@@ -937,13 +945,22 @@
           "sourceType": "municipal_government",
           "evidenceAsOf": "2026-08-26",
           "note": "Official public ski-area page."
+        },
+        "coordinates": {
+          "value": {
+            "lat": 44.02801,
+            "lng": 141.6774
+          },
+          "sourceUrl": "https://odm.bodik.jp/gl/dataset/010006_227_cc-by/resource/ca1c49f4-e509-4dac-8e61-f6612a86400f",
+          "sourceType": "prefectural_government_open_data",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The Hokkaido Facility Location Database explicitly lists Obira Town Boyodai Ski Area at these coordinates."
         }
       },
       "unresolved": [
-        "coordinates",
         "defensibleElevation"
       ],
-      "notes": "The address was not geocoded, and no elevation endpoint was inferred from lift length or terrain.",
+      "notes": "The Hokkaido government facility record resolves coordinates. No official base and top elevation pair was recovered, and none was inferred from lift length or terrain.",
       "sourcesChecked": [
         {
           "sourceUrl": "https://www.town.obira.hokkaido.jp/kanko/detail/00001389.html",

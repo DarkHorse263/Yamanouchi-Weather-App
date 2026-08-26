@@ -54,7 +54,7 @@
     {
       "sourceId": "japan-publication-manifest",
       "kind": "runtime_publication_approval",
-      "recordCount": 214,
+      "recordCount": 215,
       "location": "lib/japan-ski-catalogue/data/publication-manifest.json"
     }
   ],
@@ -72,13 +72,13 @@
     "marketingApproved": true,
     "marketingGateReason": "Verified-only evidence-complete coverage is approved; unclear and essential-gap records remain excluded from public coverage.",
     "cleanGate": {
-      "verifiedEvidenceCompleteRecords": 263,
-      "lifecyclePublishedRecords": 263,
-      "routeReadyNewCandidates": 214,
-      "manifestIntegratedNewRecords": 214,
-      "reviewQueueExcludedPendingEvidence": 235,
+      "verifiedEvidenceCompleteRecords": 264,
+      "lifecyclePublishedRecords": 264,
+      "routeReadyNewCandidates": 215,
+      "manifestIntegratedNewRecords": 215,
+      "reviewQueueExcludedPendingEvidence": 234,
       "unclearOrNotVerifiableRecords": 210,
-      "verifiedEssentialGapRecords": 25
+      "verifiedEssentialGapRecords": 24
     }
   },
   "frontendRegionSources": [
@@ -1143,9 +1143,9 @@
           "nameJa": "Oketo"
         },
         {
-          "baseTownId": "hokkaido-regional-tsurui",
-          "name": "Tsurui",
-          "nameJa": "Tsurui"
+          "baseTownId": "hokkaido-regional-churui",
+          "name": "Churui",
+          "nameJa": "忠類"
         },
         {
           "baseTownId": "hokkaido-regional-hobetsu",
@@ -51625,11 +51625,11 @@
     },
     {
       "recordId": "workbook:440",
-      "lifecycle": "draft",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
       "travelRegionId": "hokkaido-regional",
-      "baseTownId": "hokkaido-regional-tsurui",
+      "baseTownId": "hokkaido-regional-churui",
       "publicId": "hakugindai-ski-area",
       "aliases": [],
       "routeMode": "new_page",
@@ -51663,9 +51663,9 @@
         "statusEvidenceQuote": "白銀台スキー場は2025-2026シーズンの営業を終了しました。",
         "evidenceAsOf": "2026-08-26",
         "notes": "No authoritative current operating-status source was confirmed; third-party evidence was not accepted.",
-        "travelClusterLabelSuggestion": "Tsurui ski areas",
-        "baseTownLabelSuggestion": "Tsurui",
-        "clusterConfidence": "low",
+        "travelClusterLabelSuggestion": "Churui ski areas",
+        "baseTownLabelSuggestion": "Churui",
+        "clusterConfidence": "high",
         "successor": {}
       },
       "evidence": [
@@ -51688,6 +51688,18 @@
             "en": "Churuimura Hakugindai"
           },
           "externalIds": {}
+        },
+        {
+          "evidenceId": "supplement:workbook:440:coordinates",
+          "sourceType": "verified_evidence_supplement",
+          "sourceRef": "data/verified-evidence-supplement.json",
+          "sourceUrl": "https://odm.bodik.jp/gl/dataset/010006_227_cc-by/resource/ca1c49f4-e509-4dac-8e61-f6612a86400f",
+          "evidenceAsOf": "2026-08-26",
+          "citationSourceType": "prefectural_government_open_data",
+          "note": "The Hokkaido Facility Location Database explicitly lists the named Churui Hakugindai ski area at these coordinates.",
+          "fields": [
+            "coordinates"
+          ]
         }
       ],
       "directoryRelationship": {
@@ -51698,15 +51710,13 @@
       "readiness": {
         "basis": "unique_exact_normalized_name",
         "essentials": {
-          "coordinates": false,
+          "coordinates": true,
           "defensibleElevation": true,
           "japaneseName": true,
           "officialUrl": true
         },
-        "evidenceComplete": false,
-        "missingReasons": [
-          "missing_coordinates"
-        ],
+        "evidenceComplete": true,
+        "missingReasons": [],
         "requiredReviews": [
           "operating_status",
           "travel_cluster"
@@ -51716,6 +51726,10 @@
         "name": "Hakugindai Ski Area",
         "nameJa": "白銀台スキー場",
         "officialUrl": "http://makubetsu-ski.com/",
+        "coordinates": {
+          "lat": 42.56293,
+          "lng": 143.31056
+        },
         "elevation": {
           "baseM": 95,
           "topM": 220,
@@ -51723,12 +51737,8 @@
         }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "missing_essentials",
-          "missing_coordinates",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -52372,6 +52382,18 @@
             "en": "Obiracho Boyodai"
           },
           "externalIds": {}
+        },
+        {
+          "evidenceId": "supplement:workbook:447:coordinates",
+          "sourceType": "verified_evidence_supplement",
+          "sourceRef": "data/verified-evidence-supplement.json",
+          "sourceUrl": "https://odm.bodik.jp/gl/dataset/010006_227_cc-by/resource/ca1c49f4-e509-4dac-8e61-f6612a86400f",
+          "evidenceAsOf": "2026-08-26",
+          "citationSourceType": "prefectural_government_open_data",
+          "note": "The Hokkaido Facility Location Database explicitly lists Obira Town Boyodai Ski Area at these coordinates.",
+          "fields": [
+            "coordinates"
+          ]
         }
       ],
       "directoryRelationship": {
@@ -52382,14 +52404,13 @@
       "readiness": {
         "basis": "unique_exact_normalized_name",
         "essentials": {
-          "coordinates": false,
+          "coordinates": true,
           "defensibleElevation": false,
           "japaneseName": true,
           "officialUrl": true
         },
         "evidenceComplete": false,
         "missingReasons": [
-          "missing_coordinates",
           "missing_defensible_elevation"
         ],
         "requiredReviews": [
@@ -52401,13 +52422,16 @@
         "name": "Boyodai Ski Area",
         "nameJa": "望洋台スキー場",
         "officialUrl": "https://www.town.obira.hokkaido.jp/kanko/detail/00001389.html",
+        "coordinates": {
+          "lat": 44.02801,
+          "lng": 141.6774
+        },
         "elevation": {}
       },
       "publicationReadiness": {
         "publishable": false,
         "missingReasons": [
           "missing_essentials",
-          "missing_coordinates",
           "missing_defensible_elevation",
           "unverified_lifecycle"
         ]
@@ -77677,6 +77701,60 @@
       ]
     },
     {
+      "recordId": "workbook:440",
+      "publicId": "hakugindai-ski-area",
+      "aliases": [],
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-churui",
+      "route": "/hokkaido-regional/mountain/hakugindai-ski-area",
+      "name": "Hakugindai Ski Area",
+      "nameJa": "白銀台スキー場",
+      "coordinates": {
+        "lat": 42.56293,
+        "lng": 143.31056
+      },
+      "elevation": {
+        "baseM": 95,
+        "topM": 220,
+        "verticalM": 125
+      },
+      "officialUrl": "http://makubetsu-ski.com/",
+      "evidence": [
+        {
+          "evidenceId": "intake:440",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:churuimura-hakugindai",
+          "sourceType": "ski_directory",
+          "sourceRef": "churuimura-hakugindai",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/churuimura-hakugindai/",
+          "elevation": {
+            "baseM": 95,
+            "topM": 220,
+            "verticalM": 125
+          },
+          "names": {
+            "en": "Churuimura Hakugindai"
+          },
+          "externalIds": {}
+        },
+        {
+          "evidenceId": "supplement:workbook:440:coordinates",
+          "sourceType": "verified_evidence_supplement",
+          "sourceRef": "data/verified-evidence-supplement.json",
+          "sourceUrl": "https://odm.bodik.jp/gl/dataset/010006_227_cc-by/resource/ca1c49f4-e509-4dac-8e61-f6612a86400f",
+          "evidenceAsOf": "2026-08-26",
+          "citationSourceType": "prefectural_government_open_data",
+          "note": "The Hokkaido Facility Location Database explicitly lists the named Churui Hakugindai ski area at these coordinates.",
+          "fields": [
+            "coordinates"
+          ]
+        }
+      ]
+    },
+    {
       "recordId": "workbook:446",
       "publicId": "midori-ski-area",
       "aliases": [],
@@ -83545,6 +83623,33 @@
       "baseTownId": "nagano-regional-shinano",
       "route": "/nagano-regional/mountain/kurohime-kogen-snow-park",
       "prefecture": "Nagano",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:440",
+      "publicId": "hakugindai-ski-area",
+      "aliases": [],
+      "name": "Hakugindai Ski Area",
+      "nameJa": "白銀台スキー場",
+      "coordinates": {
+        "lat": 42.56293,
+        "lng": 143.31056
+      },
+      "forecastElevationM": 220,
+      "baseElevationM": 95,
+      "topElevationM": 220,
+      "officialUrl": "http://makubetsu-ski.com/",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-churui",
+      "route": "/hokkaido-regional/mountain/hakugindai-ski-area",
+      "prefecture": "Hokkaido",
       "country": "Japan",
       "countryCode": "JP",
       "honesty": {

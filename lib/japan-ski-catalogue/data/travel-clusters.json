@@ -987,9 +987,9 @@
           "nameJa": "Oketo"
         },
         {
-          "baseTownId": "hokkaido-regional-tsurui",
-          "name": "Tsurui",
-          "nameJa": "Tsurui"
+          "baseTownId": "hokkaido-regional-churui",
+          "name": "Churui",
+          "nameJa": "忠類"
         },
         {
           "baseTownId": "hokkaido-regional-hobetsu",
@@ -3093,9 +3093,9 @@
     {
       "recordId": "workbook:440",
       "travelRegionId": "hokkaido-regional",
-      "baseTownId": "hokkaido-regional-tsurui",
+      "baseTownId": "hokkaido-regional-churui",
       "basis": "audited_review_travel_cluster",
-      "confidence": "low"
+      "confidence": "high"
     },
     {
       "recordId": "workbook:452",

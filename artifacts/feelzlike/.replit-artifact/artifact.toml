@@ -9063,5 +9063,9 @@ from = "/nagano-regional/mountain/kurohime-kogen-snow-park/"
 to = "/nagano-regional/mountain/kurohime-kogen-snow-park/index.html"
 
 [[services.production.rewrites]]
+from = "/hokkaido-regional/mountain/hakugindai-ski-area/"
+to = "/hokkaido-regional/mountain/hakugindai-ski-area/index.html"
+
+[[services.production.rewrites]]
 from = "/*"
 to = "/index.html"

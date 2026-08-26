@@ -187,6 +187,25 @@ test("catalogue-only base town resolves to honest published mountain links", () 
   );
 });
 
+test("Hakugindai is grouped with Churui, not distant Tsurui", () => {
+  const record = publishedCatalogueRecords.find(
+    (candidate) => candidate.publicId === "hakugindai-ski-area",
+  );
+  assert.ok(record);
+  assert.equal(record.travelRegionId, "hokkaido-regional");
+  assert.equal(record.baseTownId, "hokkaido-regional-churui");
+
+  const region = regions.find((candidate) => candidate.id === record.travelRegionId);
+  const town = region?.baseTowns?.find((candidate) => candidate.id === record.baseTownId);
+  assert.ok(town);
+  assert.equal(town.name, "Churui");
+  assert.ok(town.nearbyMountainIds?.includes(record.publicId));
+  assert.equal(
+    region?.baseTowns?.some((candidate) => candidate.id === "hokkaido-regional-tsurui"),
+    false,
+  );
+});
+
 test("shared-region catalogue base town keeps authored town behavior and valid mountain links", () => {
   const region = regions.find((candidate) => candidate.id === "yamanouchi");
   const town = region?.baseTowns?.find((candidate) => candidate.id === "yudanaka");

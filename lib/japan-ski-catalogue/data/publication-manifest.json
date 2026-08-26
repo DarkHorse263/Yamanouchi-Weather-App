@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "approvedAt": "2026-08-26",
   "runtimeIntegrated": true,
-  "approvalBatchStarts": [0, 138, 197, 213],
+  "approvalBatchStarts": [0, 138, 197, 213, 214],
   "purpose": "Explicit approval boundary for publishing route-ready new Japan ski-area runtime records.",
   "recordIds": [
     "workbook:5",
@@ -218,6 +218,7 @@
     "workbook:356",
     "workbook:418",
     "workbook:446",
-    "workbook:398"
+    "workbook:398",
+    "workbook:440"
   ]
 }

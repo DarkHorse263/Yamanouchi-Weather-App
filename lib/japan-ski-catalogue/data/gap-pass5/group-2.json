@@ -69,10 +69,19 @@
     },
     {
       "recordId": "workbook:440",
-      "fields": {},
-      "unresolved": [
-        "coordinates"
-      ],
+      "fields": {
+        "coordinates": {
+          "value": {
+            "lat": 42.56293,
+            "lng": 143.31056
+          },
+          "sourceUrl": "https://odm.bodik.jp/gl/dataset/010006_227_cc-by/resource/ca1c49f4-e509-4dac-8e61-f6612a86400f",
+          "sourceType": "prefectural_government_open_data",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The Hokkaido Facility Location Database explicitly lists the named Churui Hakugindai ski area at these coordinates."
+        }
+      },
+      "unresolved": [],
       "sourcesChecked": [
         {
           "sourceUrl": "http://makubetsu-ski.com/hakugindai/page-39/",
@@ -92,7 +101,7 @@
         "site:makubetsu-ski.com 白銀台スキー場 アクセス",
         "幕別町 白銀台スキー場 オープンデータ 座標"
       ],
-      "notes": "Defensible elevation is already resolved. No eligible operator destination coordinate or government facility-coordinate record was recovered."
+      "notes": "The Hokkaido government facility record resolves the coordinate gap; no address geocoding or map-center substitution was used."
     },
     {
       "recordId": "workbook:444",
@@ -117,9 +126,19 @@
     },
     {
       "recordId": "workbook:447",
-      "fields": {},
+      "fields": {
+        "coordinates": {
+          "value": {
+            "lat": 44.02801,
+            "lng": 141.6774
+          },
+          "sourceUrl": "https://odm.bodik.jp/gl/dataset/010006_227_cc-by/resource/ca1c49f4-e509-4dac-8e61-f6612a86400f",
+          "sourceType": "prefectural_government_open_data",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The Hokkaido Facility Location Database explicitly lists Obira Town Boyodai Ski Area at these coordinates."
+        }
+      },
       "unresolved": [
-        "coordinates",
         "defensibleElevation"
       ],
       "sourcesChecked": [
@@ -135,7 +154,7 @@
         "site:town.obira.hokkaido.jp 望洋台スキー場 標高",
         "小平町 望洋台スキー場 PDF 標高"
       ],
-      "notes": "The address was not geocoded, and no elevation endpoint was inferred from lift length or terrain."
+      "notes": "Government open data resolves coordinates. No official base and top elevation pair was recovered, and none was inferred from lift length or terrain."
     },
     {
       "recordId": "workbook:449",
