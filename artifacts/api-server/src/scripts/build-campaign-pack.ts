@@ -97,7 +97,7 @@ const ADS: Ad[] = [
     label: "what's the feelzlike temperature?",
     theme: "conditions",
     primary:
-      "the thermometer says one thing · the wind says another. see what it actually feelzlike in every snow town and up the mountain, hour by hour.",
+      "the thermometer says one thing · the wind says another. see what it actually feelzlike in the snow towns we cover and up the mountain, hour by hour.",
     headline: "real feels-like forecasts",
     description: "village and summit · hour by hour",
     cta: "Learn more",
@@ -158,7 +158,7 @@ const ADS: Ad[] = [
     label: "hungry?",
     theme: "snow towns",
     primary:
-      "bakeries, pubs and late-night feeds · where to eat in every snow town, sorted.",
+      "bakeries, pubs and late-night feeds · where to eat in the snow towns we cover, sorted.",
     headline: "eat well up there",
     description: "know before you go",
     cta: "Learn more",
@@ -182,7 +182,7 @@ const ADS: Ad[] = [
     label: "explore?",
     theme: "snow towns",
     primary:
-      "rest-day sorted · walks, sights and things to do beyond the slopes in every snow town.",
+      "rest-day sorted · walks, sights and things to do beyond the slopes in the snow towns we cover.",
     headline: "explore the snow towns",
     description: "know before you go",
     cta: "Learn more",
@@ -195,7 +195,7 @@ const ADS: Ad[] = [
     label: "what's it feelzlike in the mountains?",
     theme: "brand",
     primary:
-      "weather, roads, transport, stay and eat for every snow town in australia, new zealand and japan · all in one place, free.",
+      "weather, roads, transport, stay and eat for the snow towns we currently cover across australia, new zealand and japan · all in one place, free.",
     headline: "know before you go",
     description: "real conditions for mountain travel",
     cta: "Learn more",

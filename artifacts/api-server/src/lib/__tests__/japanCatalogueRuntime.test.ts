@@ -9,6 +9,7 @@ import {
   resolveWeatherLocation,
   setWeatherFetcherForTests,
   WEATHER_LOCATION_ALIASES,
+  WEATHER_LOCATION_IDS,
   default as weatherRouter,
 } from "../../routes/weather.js";
 import { regionForLocation } from "../regions.js";
@@ -116,7 +117,7 @@ test("unknown weather id remains a 404", async () => {
   }
 });
 
-test("bulk catalogue weather is cached, coalesced, region-filtered, and concurrency-bounded", async () => {
+test("unfiltered bulk weather includes catalogue locations and is cached, coalesced, and concurrency-bounded", async () => {
   resetWeatherRuntimeForTests();
   let calls = 0;
   let active = 0;
@@ -130,20 +131,13 @@ test("bulk catalogue weather is cached, coalesced, region-filtered, and concurre
     return weatherPayload(location);
   });
 
-  const regionId = "gifu-aichi";
-  const expectedIds = publishedCatalogueRecords
-    .filter((record) => record.travelRegionId === regionId)
-    .map((record) => record.publicId);
-  assert.ok(expectedIds.length > BULK_WEATHER_CONCURRENCY);
+  assert.ok(WEATHER_LOCATION_IDS.length > BULK_WEATHER_CONCURRENCY);
 
   const server = await startWeatherServer();
   try {
     const address = server.address();
     assert.ok(address && typeof address !== "string");
-    const url = `http://127.0.0.1:${address.port}/weather?region=${regionId}`;
-    const unfiltered = await fetch(`http://127.0.0.1:${address.port}/weather`);
-    assert.equal(unfiltered.status, 400);
-    assert.equal(calls, 0, "unfiltered bulk request started upstream work");
+    const url = `http://127.0.0.1:${address.port}/weather`;
 
     // Two simultaneous requests must join the same per-location in-flight
     // work. A subsequent request must be served by the ten-minute cache.
@@ -152,14 +146,28 @@ test("bulk catalogue weather is cached, coalesced, region-filtered, and concurre
     assert.equal(simultaneous.status, 200);
     const firstBody = await first.json() as { locations: Array<{ location: { id: string } }> };
     const secondBody = await simultaneous.json() as { locations: Array<{ location: { id: string } }> };
-    assert.deepEqual(firstBody.locations.map((item) => item.location.id), expectedIds);
-    assert.deepEqual(secondBody.locations.map((item) => item.location.id), expectedIds);
-    assert.equal(calls, expectedIds.length, "simultaneous bulk request duplicated upstream work");
+    assert.deepEqual(firstBody.locations.map((item) => item.location.id), WEATHER_LOCATION_IDS);
+    assert.deepEqual(secondBody.locations.map((item) => item.location.id), WEATHER_LOCATION_IDS);
+    assert.ok(
+      firstBody.locations.some((item) => item.location.id === "togakushi-ski-resort"),
+      "unfiltered response omitted a published catalogue location",
+    );
+    assert.equal(calls, WEATHER_LOCATION_IDS.length, "simultaneous bulk request duplicated upstream work");
     assert.ok(maxActive <= BULK_WEATHER_CONCURRENCY, `observed ${maxActive} simultaneous cache misses`);
 
     const repeated = await fetch(url);
     assert.equal(repeated.status, 200);
-    assert.equal(calls, expectedIds.length, "fresh cache was not reused");
+    assert.equal(calls, WEATHER_LOCATION_IDS.length, "fresh cache was not reused");
+
+    const regionId = "gifu-aichi";
+    const expectedRegionIds = publishedCatalogueRecords
+      .filter((record) => record.travelRegionId === regionId)
+      .map((record) => record.publicId);
+    const filtered = await fetch(`${url}?region=${regionId}`);
+    assert.equal(filtered.status, 200);
+    const filteredBody = await filtered.json() as { locations: Array<{ location: { id: string } }> };
+    assert.deepEqual(filteredBody.locations.map((item) => item.location.id), expectedRegionIds);
+    assert.equal(calls, WEATHER_LOCATION_IDS.length, "region-filtered read did not share the bulk cache");
   } finally {
     resetWeatherRuntimeForTests();
     await new Promise<void>((resolve, reject) => server.close((error) => error ? reject(error) : resolve()));

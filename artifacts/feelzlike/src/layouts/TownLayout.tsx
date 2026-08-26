@@ -10,6 +10,8 @@ import { TownExplore } from "@/pages/town/TownExplore";
 import { TownRoads } from "@/pages/town/TownRoads";
 import { TownTransport } from "@/pages/town/TownTransport";
 import { TownWeather } from "@/pages/town/TownWeather";
+import { CatalogueTownHome } from "@/pages/region/CatalogueTownHome";
+import { isCatalogueMountainLinkTown } from "@/regions/japan-catalogue";
 import { snowyMountainsRouter } from "@/regions/snowy-mountains/router";
 import { yamanouchiRouter } from "@/regions/yamanouchi/router";
 import { victoriasHighCountryRouter } from "@/regions/victorias-high-country/router";
@@ -66,12 +68,22 @@ export function TownLayout() {
   // routes too so a direct URL / old bookmark redirects home instead of landing
   // on an empty "coming soon" page.
   const gate = (path: string) => townNavHasContent(region, townId, path);
+  const isMountainLinkLanding = isCatalogueMountainLinkTown(
+    towns.find((candidate) => candidate.id === townId),
+  );
 
   return (
     <WouterRouter base={`/${townId}`}>
       <Switch>
-        <Route path="/" component={TownHome} />
-        <Route path="/weather" component={TownWeather} />
+        <Route path="/" component={isMountainLinkLanding ? CatalogueTownHome : TownHome} />
+        <Route path="/weather">
+          {isMountainLinkLanding ? <Redirect to="/" /> : <TownWeather />}
+        </Route>
+        {isMountainLinkLanding ? (
+          <Route>
+            <Redirect to="/" />
+          </Route>
+        ) : null}
         <Route path="/roads">
           {gate("/roads") ? <TownRoads /> : <Redirect to="/" />}
         </Route>

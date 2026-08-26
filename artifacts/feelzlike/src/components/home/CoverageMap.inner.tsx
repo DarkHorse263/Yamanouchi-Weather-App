@@ -8,6 +8,7 @@ import { REGIONS, REGION_BY_ID, REGION_COUNTRY, type CountryCode } from "@/regio
 import { REGION_DEFAULTS } from "@/regions/region-pins";
 
 import { resolvePinRoute } from "./resolvePinRoute";
+import { coveragePinKey, dedupeCoveragePins } from "./coveragePinKey";
 
 // The pins: towns (sky #0ea5e9), mountains (orange #f97316).
 // Clicking deep-links to town/mountain page.
@@ -99,7 +100,7 @@ export const COVERAGE_PINS: CoveragePin[] = (() => {
       });
     }
   }
-  return pins;
+  return dedupeCoveragePins(pins);
 })();
 
 function FlyTo({ pins, focus }: { pins: CoveragePin[]; focus: CountryCode | "ALL" }) {
@@ -159,7 +160,7 @@ export default function CoverageMapInner() {
 
           return (
             <Marker
-              key={p.id + p.regionId}
+              key={coveragePinKey(p)}
               position={[p.lat, p.lng]}
               icon={getPinIcon(p.name, p.accent, isClickable)}
               eventHandlers={

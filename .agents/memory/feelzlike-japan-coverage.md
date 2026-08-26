@@ -5,13 +5,13 @@ description: What "complete" means for the published JP areas — lift seeds liv
 
 # Japan area completeness (decided July 2026)
 
-## National completeness gate (decided 24 August 2026)
+## Verified-only national launch gate (updated 26 August 2026)
 
-**Rule:** Do not advertise Japan until every currently operating Japanese ski area has a verified catalogue record. Closed, defunct and suspended areas stay excluded from public coverage.
+**Rule:** Japan marketing may launch only for the evidence-complete verified scope. Public claims must describe published verified coverage and must not imply that every operating Japanese ski area is covered. Closed, defunct, suspended, unclear and essential-gap records stay excluded.
 
-**Why:** The prefecture audit identified at least roughly 276 gaps beyond the current destination coverage, but it also contains unnamed long-tail totals, duplicate/conflicting entries and ambiguous operating statuses. Bulk-importing the PDF as truth would create false coverage.
+**Why:** The owner approved verified-only launch after five authoritative evidence passes. The long tail contains duplicate, conflicting and unprovable entries; allowing those records to block the verified scope indefinitely is not useful, but publishing or claiming them would be dishonest.
 
-**How to apply:** Reconcile the audit against the existing 558-resort workbook and current official/operator or municipal sources. Maintain `draft | verified | published` status, aliases, prefecture, coordinates, defensible forecast elevation, official URL, operating status, source and verification date. Advertising waits until the named national list and automated completeness checks pass; richer lifts/webcams/transport can remain evidence-gated.
+**How to apply:** Maintain `draft | verified | published` status, aliases, prefecture, coordinates, defensible forecast elevation, official URL, operating status, source and verification date. Marketing approval requires every evidence-complete verified record to pass publication lifecycle checks; excluded records remain in the review queue and cannot leak into routes or completeness claims.
 
 ## Exhausted authoritative searches
 
@@ -19,7 +19,7 @@ description: What "complete" means for the published JP areas — lift seeds liv
 
 **Why:** Five nationwide evidence passes found that many long-tail entries have only stale, generic or third-party references. Treating those as proof would make the catalogue look complete by weakening the honesty standard.
 
-**How to apply:** Keep these records unpublished and keep the Japan marketing gate closed. Revisit them only when a current operator/municipal source appears; a newly published season calendar, ticket sale, facility notice, closure ordinance or successor notice can change the status.
+**How to apply:** Keep these records unpublished without closing the verified-only marketing gate. Revisit them only when a current operator/municipal source appears; a newly published season calendar, ticket sale, facility notice, closure ordinance or successor notice can change the status.
 
 - All 11 published JP regions now have curated lift wind-hold seed data. Seeds are split into per-region files `src/data/lifts/<region>.ts` (hakuba-valley, myoko, yuzawa, niseko, furano, rusutsu-kiroro, zao-onsen, hakkoda-aomori-spring) imported and merged in `src/data/lifts.ts`; Yamanouchi + Iiyama arrays remain inline there. Generic MountainDetail auto-renders the panel when `getLiftsForMountain` returns data — no per-region UI wiring needed.
 - Invariant test: `pnpm --filter @workspace/feelzlike test:lifts` (unique ids, enums, elevations, thresholds). It cannot check mountainId membership against region configs (would import `@/regions` PNGs) — verify that in review when adding seeds.

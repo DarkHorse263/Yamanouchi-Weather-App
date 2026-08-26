@@ -1,5 +1,5 @@
 import type { ReactElement } from "react";
-import { Switch, Route, useParams, Redirect, Router as WouterRouter } from "wouter";
+import { Switch, Route, useParams, useRoute, Redirect, Router as WouterRouter } from "wouter";
 import { RegionHome } from "@/pages/region/RegionHome";
 import {
   AppShell,
@@ -19,6 +19,10 @@ import { MountainDetail as GenericMountainDetail } from "@/pages/region/Mountain
 import { snowyMountainsRouter } from "@/regions/snowy-mountains/router";
 import { yamanouchiRouter } from "@/regions/yamanouchi/router";
 import { victoriasHighCountryRouter } from "@/regions/victorias-high-country/router";
+import {
+  isCatalogueMountainLinkTown,
+  mountainDetailRouteMode,
+} from "@/regions/japan-catalogue";
 
 export interface RegionRouter {
   /** Renders /:region/mountain/:id (and /:region/resort/:id for legacy) */
@@ -48,6 +52,29 @@ const REGION_ROUTERS: Record<string, RegionRouter> = {
   "victorias-high-country": victoriasHighCountryRouter,
 };
 
+function RoutedMountainDetail({
+  regionId,
+  bespoke,
+}: {
+  regionId: string;
+  bespoke?: RegionRouter["MountainDetail"];
+}) {
+  const [, mountainParams] = useRoute("/mountain/:id");
+  const [, resortParams] = useRoute("/resort/:id");
+  const mountainId = mountainParams?.id ?? resortParams?.id ?? "";
+  const mode = mountainDetailRouteMode({
+    regionId,
+    mountainId,
+    hasBespokeRouter: Boolean(bespoke),
+  });
+
+  if (mode === "bespoke" && bespoke) {
+    const BespokeMountainDetail = bespoke;
+    return <BespokeMountainDetail />;
+  }
+  return <GenericMountainDetail />;
+}
+
 export function RegionLayout() {
   const params = useParams<{ region: string }>();
   const regionId = params.region;
@@ -66,7 +93,12 @@ export function RegionLayout() {
 
   const inner = (
     <AppShell
-      isTownNavAvailable={(path, townId) => townNavHasContent(region, townId, path)}
+      isTownNavAvailable={(path, townId) => {
+        const town = region.baseTowns?.find((candidate) => candidate.id === townId);
+        return isCatalogueMountainLinkTown(town)
+          ? path === "/"
+          : townNavHasContent(region, townId, path);
+      }}
     >
       <Switch>
         <Route path="/" component={RegionHome} />
@@ -74,17 +106,15 @@ export function RegionLayout() {
         <Route path="/mountains/lifts">
           {routes.LiftsAll ? <routes.LiftsAll /> : <Redirect to="/" />}
         </Route>
-        {/* Custom region routers (snowy-mountains, yamanouchi) ship richer
-            mountain pages with lifts/cams/etc. Regions without one (e.g.
-            VHC) fall back to the generic mountain weather page so tapping
-            a mountain row from a town's "Weather in mountains" panel always
-            lands on real conditions instead of a stub. */}
+        {/* Custom region routers ship richer authored pages. Published
+            weather-only catalogue mountains always bypass them and use the
+            capability-aware generic weather detail. */}
         <Route path="/mountain/:id">
-          {routes.MountainDetail ? <routes.MountainDetail /> : <GenericMountainDetail />}
+          <RoutedMountainDetail regionId={region.id} bespoke={routes.MountainDetail} />
         </Route>
         {/* Legacy URL - keep working during transition */}
         <Route path="/resort/:id">
-          {routes.MountainDetail ? <routes.MountainDetail /> : <GenericMountainDetail />}
+          <RoutedMountainDetail regionId={region.id} bespoke={routes.MountainDetail} />
         </Route>
         {/* /radar folded into /:town/weather (May 2026 v2 reset). Keep the
             URL alive as a redirect so existing bookmarks land on the new

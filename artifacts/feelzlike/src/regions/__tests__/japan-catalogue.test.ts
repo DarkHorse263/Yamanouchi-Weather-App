@@ -3,10 +3,17 @@ import test from "node:test";
 import { publishedCatalogueRecords } from "@workspace/japan-ski-catalogue/public-runtime";
 import type { RegionConfig } from "@workspace/feelzlike-shell";
 import {
+  catalogueTownLandingModel,
   getPublishedMountainCapabilities,
+  isCatalogueMountainLinkTown,
+  mountainDetailRouteMode,
   mergeJapanCatalogueRegions,
 } from "../japan-catalogue";
-import { mountainPageMetadata } from "../../lib/mountainPageMetadata";
+import {
+  mountainDetailCopy,
+  mountainPageMetadata,
+  mountainWindSummary,
+} from "../../lib/mountainPageMetadata";
 
 const authoredYamanouchi: RegionConfig = {
   id: "yamanouchi",
@@ -88,4 +95,120 @@ test("weather-only metadata makes no snow-report or lift claim", () => {
 test("uses the public-runtime package export", async () => {
   const runtime = await import("@workspace/japan-ski-catalogue/public-runtime");
   assert.equal(runtime.publishedCatalogueRecords.length, publishedCatalogueRecords.length);
+});
+
+test("weather-only Yamanouchi records bypass its bespoke resort detail", () => {
+  const publicIds = [
+    "shigakogen-mountain-resort",
+    "yokoteyama-shibutoge",
+    "takamagahara-mammoth",
+  ];
+  for (const publicId of publicIds) {
+    const record = publishedCatalogueRecords.find(
+      (candidate) =>
+        candidate.travelRegionId === "yamanouchi" &&
+        candidate.publicId === publicId,
+    );
+    assert.ok(record, `${publicId} must be in the public runtime`);
+    assert.equal(
+      mountainDetailRouteMode({
+        regionId: "yamanouchi",
+        mountainId: publicId,
+        hasBespokeRouter: true,
+      }),
+      "generic",
+    );
+    assert.deepEqual(getPublishedMountainCapabilities("yamanouchi", publicId), {
+      powderAlertsAvailable: false,
+      contentMode: "weather-only",
+    });
+    const metadata = mountainPageMetadata({
+      name: record.name,
+      regionName: "Yamanouchi",
+      regionId: "yamanouchi",
+      mountainId: publicId,
+      weatherOnly: true,
+    });
+    assert.doesNotMatch(
+      `${metadata.title} ${metadata.description}`,
+      /snow report|lifts|live conditions/i,
+    );
+    const copy = mountainDetailCopy(true);
+    const wind = mountainWindSummary(10, true);
+    assert.doesNotMatch(
+      [
+        copy.sourceBadge.en,
+        copy.scrollCue.en,
+        copy.heroCamAltPrefix,
+        copy.heroCamBadge.en,
+        wind?.en,
+      ].join(" "),
+      /live|lift report|live conditions|fine for lifts/i,
+    );
+  }
+});
+
+test("authored Yamanouchi mountains retain bespoke resort detail", () => {
+  assert.equal(
+    mountainDetailRouteMode({
+      regionId: "yamanouchi",
+      mountainId: "shiga-yakebitaiyama",
+      hasBespokeRouter: true,
+    }),
+    "bespoke",
+  );
+  assert.equal(mountainDetailCopy(false).sourceBadge.en, "Live");
+  assert.equal(mountainDetailCopy(false).scrollCue.en, "Live conditions below");
+  assert.equal(mountainWindSummary(10, false)?.en, "fine for lifts");
+});
+
+test("catalogue-only base town resolves to honest published mountain links", () => {
+  const record = publishedCatalogueRecords.find(
+    (candidate) => candidate.travelRegionId === "nagano-regional",
+  );
+  assert.ok(record);
+  const region = regions.find((candidate) => candidate.id === record.travelRegionId);
+  const town = region?.baseTowns?.find((candidate) => candidate.id === record.baseTownId);
+  assert.ok(region);
+  assert.ok(town);
+  assert.equal(isCatalogueMountainLinkTown(town), true);
+
+  const landing = catalogueTownLandingModel(region, town);
+  assert.ok(landing);
+  assert.ok(landing.mountains.length > 0);
+  for (const mountain of landing.mountains) {
+    assert.ok(region.mountains?.some((candidate) => candidate.id === mountain.id));
+    assert.equal(mountain.href, `/${region.id}/mountain/${mountain.id}`);
+  }
+  assert.match(landing.description, /town weather is not currently published/i);
+  assert.doesNotMatch(
+    `${landing.heading} ${landing.description}`,
+    /lift status|snow report|alerts?.*(delivery|phone|push)|live operational/i,
+  );
+});
+
+test("shared-region catalogue base town keeps authored town behavior and valid mountain links", () => {
+  const region = regions.find((candidate) => candidate.id === "yamanouchi");
+  const town = region?.baseTowns?.find((candidate) => candidate.id === "yudanaka");
+  assert.ok(region);
+  assert.ok(town);
+  assert.equal(isCatalogueMountainLinkTown(town), false);
+  assert.equal(catalogueTownLandingModel(region, town), undefined);
+
+  const catalogueIds = publishedCatalogueRecords
+    .filter(
+      (record) =>
+        record.travelRegionId === "yamanouchi" &&
+        record.baseTownId === "yudanaka",
+    )
+    .map((record) => record.publicId);
+  assert.ok(catalogueIds.length > 0);
+  for (const id of catalogueIds) {
+    assert.ok(town.nearbyMountainIds?.includes(id));
+    assert.ok(region.mountains?.some((mountain) => mountain.id === id));
+    assert.equal(
+      `/${region.id}/mountain/${id}`,
+      publishedCatalogueRecords.find((record) => record.publicId === id)?.route,
+    );
+  }
 });

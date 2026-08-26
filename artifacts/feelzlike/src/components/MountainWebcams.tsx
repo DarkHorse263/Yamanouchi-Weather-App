@@ -12,6 +12,8 @@ interface MountainWebcamsProps {
   t?: (en: string, ja?: string) => string;
   /** Optional fallback page URL surfaced when no curated cams exist. */
   fallbackPageUrl?: string;
+  /** False for weather-only pages that must not imply an operational live feed. */
+  liveLabels?: boolean;
 }
 
 /**
@@ -28,6 +30,7 @@ export function MountainWebcams({
   sectionNumber = "",
   t: tProp,
   fallbackPageUrl,
+  liveLabels = true,
 }: MountainWebcamsProps) {
   const t = tProp ?? ((en: string) => en);
   const u = useUnits();
@@ -55,7 +58,8 @@ export function MountainWebcams({
         <div className="flex items-end justify-between gap-3 mb-4">
           <div>
             <p className="byline text-muted-foreground/70">
-              {sectionNumber ? `${sectionNumber} · ` : ""}{t("Live cams", "ライブカメラ")}
+              {sectionNumber ? `${sectionNumber} · ` : ""}
+              {liveLabels ? t("Live cams", "ライブカメラ") : t("Webcams", "カメラ")}
             </p>
             <h2
               id={headingId}
@@ -76,7 +80,9 @@ export function MountainWebcams({
               <Camera className="w-5 h-5 text-muted-foreground" />
               <div>
                 <p className="font-display font-semibold text-base text-foreground">
-                  {t("View live cams on resort site", "公式サイトでライブカメラを見る")}
+                  {liveLabels
+                    ? t("View live cams on resort site", "公式サイトでライブカメラを見る")
+                    : t("View webcams on resort site", "公式サイトでカメラを見る")}
                 </p>
                 <p className="text-xs text-muted-foreground mt-0.5">
                   {t(
@@ -100,19 +106,28 @@ export function MountainWebcams({
       <div className="flex items-end justify-between gap-3 mb-4 flex-wrap">
         <div>
           <p className="byline text-muted-foreground/70">
-            {sectionNumber ? `${sectionNumber} · ` : ""}{t("Live cams", "ライブカメラ")}
+            {sectionNumber ? `${sectionNumber} · ` : ""}
+            {liveLabels ? t("Live cams", "ライブカメラ") : t("Webcams", "カメラ")}
           </p>
           <h2
             id={headingId}
             className="font-display font-semibold text-2xl tracking-tight"
           >
-            {t(`${cams.length} webcams`, `ライブカメラ ${cams.length}基`)}
+            {t(
+              `${cams.length} webcams`,
+              liveLabels ? `ライブカメラ ${cams.length}基` : `カメラ ${cams.length}基`,
+            )}
           </h2>
           <p className="text-sm text-muted-foreground mt-1">
-            {t(
-              "these cameras are run by the resort · we link you straight to their live feeds",
-              "各カメラはスキー場が運営 · 公式ライブ映像に直接リンクしています",
-            )}
+            {liveLabels
+              ? t(
+                  "these cameras are run by the resort · we link you straight to their live feeds",
+                  "各カメラはスキー場が運営 · 公式ライブ映像に直接リンクしています",
+                )
+              : t(
+                  "these cameras are run by the resort · we link you straight to their webcam pages",
+                  "各カメラはスキー場が運営 · 公式カメラページに直接リンクしています",
+                )}
           </p>
         </div>
         {cams.length > 1 && (
@@ -145,7 +160,7 @@ export function MountainWebcams({
               exit={{ opacity: 0 }}
               transition={{ duration: 0.4 }}
             >
-              <WebcamMedia cam={cams[carouselIdx]} t={t} large />
+              <WebcamMedia cam={cams[carouselIdx]} t={t} liveLabels={liveLabels} large />
             </motion.div>
           </AnimatePresence>
           <div className="flex items-center justify-center gap-1.5 py-3 border-t border-border">
@@ -175,7 +190,7 @@ export function MountainWebcams({
             aria-label={t(`Open ${cam.name}`, `${cam.nameJa ?? cam.name}を開く`)}
           >
             <div className="relative aspect-video bg-secondary overflow-hidden">
-              <WebcamMedia cam={cam} t={t} />
+              <WebcamMedia cam={cam} t={t} liveLabels={liveLabels} />
               {cam.vantage && (
                 <div className="absolute top-2.5 left-2.5 rounded-full bg-white/85 backdrop-blur-md px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider inline-flex items-center gap-1 shadow-sm">
                   <MapPin className="w-3 h-3" />
@@ -206,7 +221,9 @@ export function MountainWebcams({
       <p className="text-[11px] text-muted-foreground/70 mt-3">
         {t(
           "Many resort cams are hotlink-protected - we link out to the source page where embeds fail.",
-          "多くのスキー場ライブカメラは外部参照を制限しています。埋め込みできない場合はソースページへ移動します。",
+          liveLabels
+            ? "多くのスキー場ライブカメラは外部参照を制限しています。埋め込みできない場合はソースページへ移動します。"
+            : "多くのスキー場カメラは外部参照を制限しています。埋め込みできない場合はソースページへ移動します。",
         )}
       </p>
 
@@ -241,7 +258,7 @@ export function MountainWebcams({
               >
                 <X className="w-4 h-4" />
               </button>
-              <WebcamMedia cam={activeCam} t={t} large />
+              <WebcamMedia cam={activeCam} t={t} liveLabels={liveLabels} large />
               <div className="p-5">
                 <h3 className="font-display font-semibold text-xl text-foreground">
                   {t(activeCam.name, activeCam.nameJa ?? activeCam.name)}
@@ -261,7 +278,9 @@ export function MountainWebcams({
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 rounded-lg bg-foreground text-background px-3.5 py-2 text-xs font-semibold hover:bg-foreground/90 transition-colors"
                   >
-                    {t("Open live cam", "ライブカメラを開く")}
+                    {liveLabels
+                      ? t("Open live cam", "ライブカメラを開く")
+                      : t("Open webcam", "カメラを開く")}
                     <ExternalLink className="w-3 h-3" />
                   </a>
                 </div>
@@ -281,10 +300,12 @@ export function MountainWebcams({
 function WebcamMedia({
   cam,
   t,
+  liveLabels,
   large = false,
 }: {
   cam: MountainWebcam;
   t: (en: string, ja?: string) => string;
+  liveLabels: boolean;
   large?: boolean;
 }) {
   const [errored, setErrored] = useState(false);
@@ -351,7 +372,9 @@ function WebcamMedia({
     >
       <Camera className={`${large ? "w-12 h-12" : "w-8 h-8"} text-foreground/30 mb-2`} />
       <p className={`${large ? "text-sm" : "text-[11px]"} font-semibold text-foreground/70`}>
-        {t("Live cam available on resort site", "公式サイトでライブカメラ配信中")}
+        {liveLabels
+          ? t("Live cam available on resort site", "公式サイトでライブカメラ配信中")
+          : t("Webcam available on resort site", "公式サイトでカメラを公開中")}
       </p>
       {large && (
         <a
@@ -361,7 +384,9 @@ function WebcamMedia({
           onClick={(e) => e.stopPropagation()}
           className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-foreground text-background px-4 py-2 text-xs font-semibold hover:bg-foreground/90 transition-colors"
         >
-          {t("Open live cam", "ライブカメラを開く")}
+          {liveLabels
+            ? t("Open live cam", "ライブカメラを開く")
+            : t("Open webcam", "カメラを開く")}
           <ExternalLink className="w-3 h-3" />
         </a>
       )}

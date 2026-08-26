@@ -19,11 +19,16 @@ import { resolvePromoSubscription } from "./lib/promo.js";
 import { publishedCatalogueRecords, travelRegions } from "@workspace/japan-ski-catalogue/public-runtime";
 
 const CATALOGUE_MOUNTAIN_IDS_BY_REGION = new Map<string, Set<string>>();
+const CATALOGUE_BASE_TOWN_IDS_BY_REGION = new Map<string, Set<string>>();
 for (const record of publishedCatalogueRecords) {
   const ids = CATALOGUE_MOUNTAIN_IDS_BY_REGION.get(record.travelRegionId) ?? new Set<string>();
   ids.add(record.publicId);
   for (const alias of record.aliases) ids.add(alias);
   CATALOGUE_MOUNTAIN_IDS_BY_REGION.set(record.travelRegionId, ids);
+
+  const townIds = CATALOGUE_BASE_TOWN_IDS_BY_REGION.get(record.travelRegionId) ?? new Set<string>();
+  townIds.add(record.baseTownId);
+  CATALOGUE_BASE_TOWN_IDS_BY_REGION.set(record.travelRegionId, townIds);
 }
 const CATALOGUE_TRAVEL_REGION_IDS = new Set(travelRegions.map((region) => region.travelRegionId));
 
@@ -733,7 +738,10 @@ if (process.env.NODE_ENV === "production") {
     if (/^(?:mountain|resort)\/[^/]+$/.test(sub1)) {
       // Catalogue-only regions retain strict path validation: a published id
       // (or its collision-checked safe alias) must belong to this exact region.
-      if (isCatalogueRegion) {
+      // Authored regions deliberately retain their existing route ids as well
+      // as accepting catalogue ids; only regions absent from KNOWN_REGIONS are
+      // constrained exclusively to the catalogue registry.
+      if (!regionData && isCatalogueRegion) {
         const locationId = parts[2];
         return !!locationId && (CATALOGUE_MOUNTAIN_IDS_BY_REGION.get(regionSlug)?.has(locationId) ?? false);
       }
@@ -742,11 +750,17 @@ if (process.env.NODE_ENV === "production") {
 
     // /:region/:town
     const townSlug = parts[1];
-    if (!regionData || !regionData.towns[townSlug]) return false; // unknown town → 404
+    const isAuthoredTown = !!regionData?.towns[townSlug];
+    const isCatalogueTown =
+      CATALOGUE_BASE_TOWN_IDS_BY_REGION.get(regionSlug)?.has(townSlug) ?? false;
+    if (!isAuthoredTown && !isCatalogueTown) return false; // unknown town → 404
 
     if (parts.length === 2) return true;           // /:region/:town home
 
     // /:region/:town/:subpath
+    // Catalogue base-town publication currently establishes the town home
+    // route only. Authored towns retain their explicitly supported sub-pages.
+    if (!isAuthoredTown) return false;
     const townSub = parts.slice(2).join("/");
     return VALID_TOWN_SUBS.has(townSub);
   }

@@ -59,6 +59,8 @@
     }
   ],
   "policy": {
+    "launchPolicyId": "verified_evidence_complete_only",
+    "launchPolicyDescription": "Public launch covers only verified-operating, evidence-complete records whose publication lifecycle is published; it does not claim coverage of every operating Japanese ski area.",
     "allowedLifecycles": [
       "draft",
       "verified",
@@ -67,16 +69,16 @@
     "publishableOperatingStatuses": [
       "operating"
     ],
-    "marketingApproved": false,
-    "marketingGateReason": "National launch is blocked until every unresolved operating intake candidate is verified and has a weather page.",
+    "marketingApproved": true,
+    "marketingGateReason": "Verified-only evidence-complete coverage is approved; unclear and essential-gap records remain excluded from public coverage.",
     "cleanGate": {
-      "unresolvedOperatingCandidates": 236,
-      "evidenceCompleteCandidates": 348,
-      "requiredReviews": [
-        "operating_status",
-        "travel_cluster",
-        "weather_page"
-      ]
+      "verifiedEvidenceCompleteRecords": 263,
+      "lifecyclePublishedRecords": 263,
+      "routeReadyNewCandidates": 214,
+      "manifestIntegratedNewRecords": 214,
+      "reviewQueueExcludedPendingEvidence": 235,
+      "unclearOrNotVerifiableRecords": 210,
+      "verifiedEssentialGapRecords": 25
     }
   },
   "frontendRegionSources": [

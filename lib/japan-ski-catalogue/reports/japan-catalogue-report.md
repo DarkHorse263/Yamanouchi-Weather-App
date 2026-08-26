@@ -4,9 +4,17 @@ Generated from catalogue snapshot: 2026-08-24T00:00:00.000Z
 
 ## Launch gate
 
-- **marketingApproved: false**
-- National launch is blocked until every unresolved operating intake candidate is verified and has a weather page.
-- Unresolved operating intake candidates: 236
+- **marketingApproved: true**
+- Launch policy: `verified_evidence_complete_only`
+- Public launch covers only verified-operating, evidence-complete records whose publication lifecycle is published; it does not claim coverage of every operating Japanese ski area.
+- Verified-only evidence-complete coverage is approved; unclear and essential-gap records remain excluded from public coverage.
+- Verified-only published coverage: 263 of 263
+- Review queue excluded pending evidence: 235
+- Unclear/not-verifiable exclusions: 210
+- Verified essential-gap exclusions: 25
+
+This approval covers the verified evidence-complete subset only. It does not claim that every
+operating Japanese ski area is represented or publication-ready.
 
 ## National totals
 
@@ -32,7 +40,7 @@ Generated from catalogue snapshot: 2026-08-24T00:00:00.000Z
 - Unresolved status records: 210
 - Reviewed closures (including temporary): 18
 - Existing published pages: 82
-- Full catalogue JSON bytes: 2695199
+- Full catalogue JSON bytes: 2695584
 - Public runtime JSON bytes: 212193
 - Intake rows with conservative directory evidence: 478
 - Evidence snapshot directory rows: 527
@@ -41,7 +49,7 @@ Generated from catalogue snapshot: 2026-08-24T00:00:00.000Z
 - Evidence-complete directory rows: 331
 
 Published pages, intake rows, and new-page publication candidates remain separate projections.
-Existing-page reuse is explicit and new-page candidates do not publish runtime routes.
+Existing-page reuse and manifest-backed generic runtime publication are both explicit.
 
 ## Open exact-match readiness
 
@@ -64,7 +72,7 @@ Existing-page reuse is explicit and new-page candidates do not publish runtime r
 
 ## Prefecture totals
 
-| Prefecture | Open intake | Published pages | Verified intake | Unresolved open | Closures/mergers |
+| Prefecture | Open intake | Published pages | Verified intake | Review queue excluded | Closures/mergers |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | Aichi | 1 | 0 | 0 | 0 | 0 |
 | Akita | 19 | 0 | 2 | 6 | 2 |
@@ -92,7 +100,7 @@ Existing-page reuse is explicit and new-page candidates do not publish runtime r
 | Oita | 1 | 0 | 0 | 1 | 0 |
 | Okayama | 6 | 0 | 0 | 5 | 0 |
 | Saitama | 0 | 0 | 0 | 0 | 0 |
-| Shiga | 10 | 0 | 1 | 1 | 2 |
+| Shiga | 10 | 0 | 1 | 0 | 2 |
 | Shimane | 5 | 0 | 0 | 3 | 0 |
 | Shizuoka | 2 | 0 | 0 | 0 | 0 |
 | Tochigi | 8 | 0 | 3 | 3 | 3 |

@@ -21,7 +21,7 @@ export function CoverageMap() {
             {regionCount} regions and growing
           </p>
           <p className="mt-1 text-sm text-white/80">
-            every major resort and mountain town across australia, new zealand, japan, canada and the united states.
+            live mountain weather across ski regions and towns in australia, new zealand, japan, canada and the united states.
           </p>
         </div>
         

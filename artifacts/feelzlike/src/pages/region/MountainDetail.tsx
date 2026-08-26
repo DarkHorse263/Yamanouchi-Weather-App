@@ -27,7 +27,6 @@ import {
   Wind,
 } from "lucide-react";
 import {
-  LiveBadge,
   PageHeader,
   PremiumGate,
   UpdateStamp,
@@ -63,7 +62,7 @@ import { PageMeta } from "@/lib/seo/PageMeta";
 import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
 import { AlertPromoBanner } from "@/components/AlertPromoBanner";
 import MountainConditionsSummary from "@/components/weather/MountainConditionsSummary";
-import { snowNext24SoWhat, windSoWhat, freezingLevelSoWhat } from "@/lib/soWhat";
+import { snowNext24SoWhat, freezingLevelSoWhat } from "@/lib/soWhat";
 import { OfficialSiteLink } from "@/components/OfficialSiteLink";
 import { SnowReportLink } from "@/components/SnowReportLink";
 import { motion } from "framer-motion";
@@ -71,7 +70,11 @@ import { format, parseISO } from "date-fns";
 import { getMountainWebcams } from "@/data/webcams";
 import { useEffect, useState } from "react";
 import { getPublishedMountainCapabilities } from "@/regions/japan-catalogue";
-import { mountainPageMetadata } from "@/lib/mountainPageMetadata";
+import {
+  mountainDetailCopy,
+  mountainWindSummary,
+  mountainPageMetadata,
+} from "@/lib/mountainPageMetadata";
 
 /**
  * Region-agnostic mountain weather page.
@@ -112,13 +115,15 @@ export function MountainDetail() {
   // than at the village. Temp/feels-like/current stay at the village.
   const mountainCfg = region.mountains?.find((m) => m.id === locationId);
   const publicationCapabilities = getPublishedMountainCapabilities(region.id, locationId);
+  const isWeatherOnly = publicationCapabilities?.contentMode === "weather-only";
   const powderAlertsAvailable = publicationCapabilities?.powderAlertsAvailable ?? true;
+  const capabilityCopy = mountainDetailCopy(isWeatherOnly);
   const elevLat = mountainCfg?.lat;
   const elevLng = mountainCfg?.lng;
   const elevSummitM = mountainCfg?.elevationM;
   const elevName = mountainCfg?.name;
   const websiteUrl = mountainCfg?.websiteUrl;
-  const snowReportUrl = mountainCfg?.snowReportUrl;
+  const snowReportUrl = isWeatherOnly ? undefined : mountainCfg?.snowReportUrl;
   const snowElevationM = elevSummitM != null ? midMountainElevation(elevSummitM) : undefined;
 
   const q = useGetLocationWeather(
@@ -151,9 +156,9 @@ export function MountainDetail() {
   // Always-200 endpoint - `report` stays null for resorts without a feed
   // adapter and the page keeps showing the model figure.
   const { data: snowReportData } = useGetResortSnowReport(locationId, {
-    query: { enabled: !!locationId } as never,
+    query: { enabled: !!locationId && !isWeatherOnly } as never,
   });
-  const resortReport = snowReportData?.report ?? null;
+  const resortReport = isWeatherOnly ? null : snowReportData?.report ?? null;
   // "course" = official off-resort snow-course measurement (weekly, natural
   // snow only) - captioned by source + reading DATE, and it may never assert
   // "no base" (see skiSeason.ts). Absent kind means "resort" (older cache).
@@ -186,12 +191,14 @@ export function MountainDetail() {
   // Powder medals are judged against country-appropriate thresholds - an
   // AU-calibrated bar would over- or under-award powder days elsewhere.
   const powderThresholds = powderThresholdsForCountry(REGION_COUNTRY[region.id]);
-  const modelDepthTrusted = !seasonOpen;
+  const modelDepthTrusted = isWeatherOnly || !seasonOpen;
 
   // Link ladder mirrors the curated-URL convention: dedicated lift page if
   // authored, else the (curl-verified) snow report page, else official site.
   // Feeds the wind panel's honest banner (single lift surface since Aug 2026).
-  const liftReportUrl = mountainCfg?.liftStatusUrl ?? snowReportUrl ?? websiteUrl;
+  const liftReportUrl = isWeatherOnly
+    ? undefined
+    : mountainCfg?.liftStatusUrl ?? snowReportUrl ?? websiteUrl;
 
   // Back link goes to the BASE TOWN this mountain hangs off (towns-first IA),
   // not the region home. Find the first base town whose nearbyMountainIds
@@ -230,7 +237,7 @@ export function MountainDetail() {
     regionName: region.name,
     regionId: region.id,
     mountainId: locationId,
-    weatherOnly: publicationCapabilities?.contentMode === "weather-only",
+    weatherOnly: isWeatherOnly,
   });
   const observedTime = data?.lastUpdated;
   const sourceLabel =
@@ -266,7 +273,7 @@ export function MountainDetail() {
               value: `${u.wind(current.windSpeed)} ${u.windUnit}${(current as any).windDirectionCompass ? ` ${(current as any).windDirectionCompass}` : ""}`,
               icon: Navigation,
               hint: (() => {
-                const s = windSoWhat(current.windSpeed);
+                const s = mountainWindSummary(current.windSpeed, isWeatherOnly);
                 return s ? t(s.en, s.ja) : null;
               })(),
             }]
@@ -424,11 +431,13 @@ export function MountainDetail() {
             className="flex flex-wrap items-center gap-x-3 gap-y-1.5"
           >
             <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-white/10 text-white border border-white/20">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 animate-ping" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              </span>
-              {t("Live", "ライブ")}
+              {!isWeatherOnly && (
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 animate-ping" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                </span>
+              )}
+              {t(capabilityCopy.sourceBadge.en, capabilityCopy.sourceBadge.ja)}
             </span>
             <span className="byline text-white/70">
               {t("Source", "出典")} · {sourceLabel}
@@ -554,18 +563,20 @@ export function MountainDetail() {
               <span className="relative block w-36 shrink-0 aspect-video overflow-hidden rounded-xl border border-white/15">
                 <img
                   src={heroCam.embedUrl!}
-                  alt={`Live cam · ${t(heroCam.name, heroCam.nameJa ?? heroCam.name)}`}
+                  alt={`${capabilityCopy.heroCamAltPrefix} · ${t(heroCam.name, heroCam.nameJa ?? heroCam.name)}`}
                   loading="lazy"
                   referrerPolicy="no-referrer"
                   onError={() => setHeroCamBroken(true)}
                   className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <span className="absolute top-1.5 left-1.5 inline-flex items-center gap-1 rounded-full bg-black/55 px-1.5 py-0.5 text-[10px] font-semibold text-white">
-                  <span className="relative flex h-1.5 w-1.5">
-                    <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
-                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                  </span>
-                  {t("live", "ライブ")}
+                  {!isWeatherOnly && (
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                    </span>
+                  )}
+                  {t(capabilityCopy.heroCamBadge.en, capabilityCopy.heroCamBadge.ja)}
                 </span>
               </span>
               <span className="byline text-white/70 group-hover:text-white transition-colors">
@@ -633,7 +644,9 @@ export function MountainDetail() {
 
           {/* Scroll cue */}
           <div className="mt-6 md:mt-8 flex items-center gap-2 text-white/60">
-            <span className="byline text-white/60">{t("Live conditions below", "詳細は下へ")}</span>
+            <span className="byline text-white/60">
+              {t(capabilityCopy.scrollCue.en, capabilityCopy.scrollCue.ja)}
+            </span>
             <ArrowDown className="w-3 h-3" />
           </div>
         </div>
@@ -651,17 +664,21 @@ export function MountainDetail() {
               t={t}
               thresholds={powderThresholds}
               sectionNumber=""
-              skiability={{
-                seasonOpen,
-                // In season a model depth is suppressed (null = unknown),
-                // never surfaced as a confident wrong ~0.
-                snowDepthCm: resortReport
-                  ? resortReport.baseCm
-                  : modelDepthTrusted
-                    ? current?.snowDepth
-                    : null,
-                snowDepthSource: resortReport ? reportSource : "model",
-              }}
+              skiability={
+                isWeatherOnly
+                  ? undefined
+                  : {
+                      seasonOpen,
+                      // In season a model depth is suppressed (null = unknown),
+                      // never surfaced as a confident wrong ~0.
+                      snowDepthCm: resortReport
+                        ? resortReport.baseCm
+                        : modelDepthTrusted
+                          ? current?.snowDepth
+                          : null,
+                      snowDepthSource: resortReport ? reportSource : "model",
+                    }
+              }
               snowfallOutlook={{
                 next24hCm: current.snowfallNext24h,
                 next48hCm: current.snowfallNext48h,
@@ -687,7 +704,7 @@ export function MountainDetail() {
 
         {/* SNOWMAKING · honest man-made-snow reality for this resort.
             Self-hides when there is no curated data; winter only. */}
-        {!isGreen && (
+        {!isWeatherOnly && !isGreen && (
           <SnowmakingPanel
             locationId={locationId}
             tempC={current.temperature}
@@ -949,7 +966,7 @@ export function MountainDetail() {
         {/* FREE · one-tap official lift report · kept OUTSIDE the premium
             gate so free visitors don't lose the report link now that the
             old free "On the snow" card is gone (merged Aug 2026). */}
-        {!isGreen && liftReportUrl && (
+        {!isWeatherOnly && !isGreen && liftReportUrl && (
           <a
             href={liftReportUrl}
             target="_blank"
@@ -974,7 +991,7 @@ export function MountainDetail() {
           </a>
         )}
 
-        {hourly.length > 0 && location?.elevation != null && getLiftsForMountain(locationId).length > 0 && (
+        {!isWeatherOnly && hourly.length > 0 && location?.elevation != null && getLiftsForMountain(locationId).length > 0 && (
           <PremiumGate
             title="Per-lift hold forecast"
             titleJa="リフト別ホールド予測"
@@ -1075,6 +1092,7 @@ export function MountainDetail() {
             mountainId={locationId}
             sectionNumber=""
             t={t}
+            liveLabels={!isWeatherOnly}
           />
         </div>
 

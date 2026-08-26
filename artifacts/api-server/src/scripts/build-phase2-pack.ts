@@ -81,7 +81,7 @@ const ADS: Ad[] = [
     label: "what's it feelzlike in the mountains?",
     status: "kept · cheap clicks in phase 1",
     primary:
-      "weather, roads, transport, stay and eat for every snow town in australia, new zealand and japan · all in one place, free.",
+      "weather, roads, transport, stay and eat for the snow towns we currently cover across australia, new zealand and japan · all in one place, free.",
     headline: "know before you go",
     description: "real conditions for mountain travel",
   },
@@ -155,12 +155,12 @@ const POSTS: Post[] = [
     week: "week 3", day: "tuesday", slug: "post-feels-like",
     tile: "4_1784703752742.png",
     imageNote: "use the feels-like temperature tile (4)",
-    text: "the thermometer says one thing · the wind says another. see what it actually feelzlike in every snow town and up the mountain · feelzlike.com",
+    text: "the thermometer says one thing · the wind says another. see what it actually feelzlike in the snow towns we cover and up the mountain · feelzlike.com",
   },
   {
     week: "week 3", day: "saturday", slug: "post-town-tip",
     imageNote: "screenshot a stay or eat page for one snow town",
-    text: "rest day sorted · where to stay, eat and what to do in every snow town, with real drive times to the lifts · feelzlike.com",
+    text: "rest day sorted · where to stay, eat and what to do in the snow towns we cover, with real drive times to the lifts · feelzlike.com",
   },
   {
     week: "week 4", day: "tuesday", slug: "post-add-to-home",

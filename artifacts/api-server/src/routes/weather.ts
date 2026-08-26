@@ -1436,16 +1436,12 @@ async function fetchOpenMeteo(location: LocationConfig) {
 router.get("/weather", async (req, res) => {
   try {
     const region = parseRegionParam(req.query["region"]);
-    // All in-repo callers provide region. Refuse an accidental global request
-    // instead of starting hundreds of upstream forecasts at once.
-    if (!region) {
-      res.status(400).json({
-        error: "REGION_REQUIRED",
-        message: "Bulk weather requests must include a region.",
-      });
-      return;
-    }
-    const sources = ALL_LOCATIONS.filter((loc) => locationMatchesRegion(loc.id, region));
+    // Region is optional in the published API contract. Global and filtered
+    // reads share the same per-location cache/coalescing path and bounded
+    // worker queue, so a global cache miss never becomes an unbounded fan-out.
+    const sources = region
+      ? ALL_LOCATIONS.filter((loc) => locationMatchesRegion(loc.id, region))
+      : ALL_LOCATIONS;
     const locations = await fetchBulkWeatherCached(sources);
 
     const result = GetWeatherResponse.parse({

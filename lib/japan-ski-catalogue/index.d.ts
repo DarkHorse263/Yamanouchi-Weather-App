@@ -216,14 +216,20 @@ export interface JapanSkiCatalogue {
     };
   }>;
   policy: {
+    launchPolicyId: "verified_evidence_complete_only";
+    launchPolicyDescription: string;
     allowedLifecycles: readonly ["draft", "verified", "published"];
     publishableOperatingStatuses: readonly ["operating"];
     marketingApproved: boolean;
     marketingGateReason: string;
     cleanGate: {
-      unresolvedOperatingCandidates: number;
-      evidenceCompleteCandidates: number;
-      requiredReviews: Array<"operating_status" | "travel_cluster" | "weather_page">;
+      verifiedEvidenceCompleteRecords: number;
+      lifecyclePublishedRecords: number;
+      routeReadyNewCandidates: number;
+      manifestIntegratedNewRecords: number;
+      reviewQueueExcludedPendingEvidence: number;
+      unclearOrNotVerifiableRecords: number;
+      verifiedEssentialGapRecords: number;
     };
   };
   frontendRegionSources: Array<{ regionId: string; sourcePath: string }>;

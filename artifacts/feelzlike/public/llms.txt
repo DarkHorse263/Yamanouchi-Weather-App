@@ -7,7 +7,7 @@
 - [Home](https://feelzlike.com/): intro, region picker, and near-you shortcut
 - [Browse by country](https://feelzlike.com/countries): choose Australia, Japan, New Zealand, Canada, or the United States
 - [Australia](https://feelzlike.com/au): all Australian resort regions
-- [Japan](https://feelzlike.com/jp): all Japanese resort regions
+- [Japan](https://feelzlike.com/jp): currently published verified Japan ski regions and mountain weather coverage
 - [New Zealand](https://feelzlike.com/nz): all New Zealand resort regions
 - [Canada](https://feelzlike.com/ca): all Canadian resort regions (BC, Alberta + Québec)
 - [United States](https://feelzlike.com/us): all US resort regions (Colorado, Utah, California, Vermont, Wyoming, Montana, New Mexico, Michigan, Pennsylvania, Massachusetts, Minnesota, Wisconsin, Oregon, Washington, Idaho, New Hampshire, Maine, New York, West Virginia, North Carolina, Virginia, Nevada, Arizona, South Dakota, Alaska, Connecticut, New Jersey)
