@@ -8,10 +8,10 @@ Generated from catalogue snapshot: 2026-08-24T00:00:00.000Z
 - Launch policy: `verified_evidence_complete_only`
 - Public launch covers only verified-operating, evidence-complete records whose publication lifecycle is published; it does not claim coverage of every operating Japanese ski area.
 - Verified-only evidence-complete coverage is approved; unclear and essential-gap records remain excluded from public coverage.
-- Verified-only published coverage: 265 of 265
-- Review queue excluded pending evidence: 233
+- Verified-only published coverage: 266 of 266
+- Review queue excluded pending evidence: 232
 - Unclear/not-verifiable exclusions: 208
-- Verified essential-gap exclusions: 25
+- Verified essential-gap exclusions: 24
 
 This approval covers the verified evidence-complete subset only. It does not claim that every
 operating Japanese ski area is represented or publication-ready.
@@ -32,16 +32,16 @@ operating Japanese ski area is represented or publication-ready.
 - Mapped to existing pages: 56
 - Existing-page mappings passing publication lifecycle gate: 49
 - New-page identities: 234
-- Evidence-complete verified-operating records: 265
-- Route-ready new-page candidates: 216
-- Manifest-approved published catalogue records: 216
+- Evidence-complete verified-operating records: 266
+- Route-ready new-page candidates: 217
+- Manifest-approved published catalogue records: 217
 - Unapproved route-ready new-page candidates: 0
-- Verified records with unresolved essential gaps: 25
+- Verified records with unresolved essential gaps: 24
 - Unresolved status records: 208
 - Reviewed closures (including temporary): 18
 - Existing published pages: 82
-- Full catalogue JSON bytes: 2700366
-- Public runtime JSON bytes: 214184
+- Full catalogue JSON bytes: 2704299
+- Public runtime JSON bytes: 215006
 - Intake rows with conservative directory evidence: 478
 - Evidence snapshot directory rows: 527
 - Detail-derived official links: 330
@@ -54,18 +54,18 @@ Existing-page reuse and manifest-backed generic runtime publication are both exp
 ## Open exact-match readiness
 
 - Open rows with a unique exact directory match: 476
-- Coordinates present: 396
+- Coordinates present: 398
 - Defensible base/top elevation present: 392
 - Japanese name present: 383
 - Official URL present: 390
-- Evidence-complete: 348
-- Evidence-complete but still requiring operating-status and travel-cluster review: 348
+- Evidence-complete: 349
+- Evidence-complete but still requiring operating-status and travel-cluster review: 349
 
 ### Missing essentials
 
 | Missing reason | Open exact-match rows |
 | --- | ---: |
-| missing_coordinates | 80 |
+| missing_coordinates | 78 |
 | missing_defensible_elevation | 84 |
 | missing_japanese_name | 93 |
 | missing_official_url | 86 |
@@ -85,7 +85,7 @@ Existing-page reuse and manifest-backed generic runtime publication are both exp
 | Gifu | 25 | 0 | 1 | 11 | 1 |
 | Gunma | 23 | 5 | 2 | 2 | 2 |
 | Hiroshima | 15 | 0 | 0 | 12 | 0 |
-| Hokkaido | 117 | 17 | 3 | 66 | 3 |
+| Hokkaido | 117 | 17 | 3 | 65 | 3 |
 | Hyogo | 14 | 0 | 0 | 2 | 0 |
 | Ishikawa | 8 | 0 | 0 | 7 | 0 |
 | Iwate | 19 | 4 | 1 | 5 | 1 |

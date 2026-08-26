@@ -19,10 +19,10 @@
     "./generated/japan-catalogue.json": "./generated/japan-catalogue.json"
   },
   "scripts": {
-    "generate": "node ./scripts/validate-reviews.mjs && node ./scripts/generate.mjs && node ./scripts/export-pending-evidence.mjs",
-    "generate:check": "node ./scripts/validate-reviews.mjs && node ./scripts/generate.mjs --check && node ./scripts/export-pending-evidence.mjs --check",
-    "validate": "node ./scripts/validate-reviews.mjs && node ./scripts/generate.mjs --check && node ./scripts/export-pending-evidence.mjs --check && node ./scripts/validate.mjs",
-    "report": "node ./scripts/validate-reviews.mjs && node ./scripts/generate.mjs --check && node ./scripts/export-pending-evidence.mjs --check && node ./scripts/validate.mjs --write-report",
+    "generate": "node ./scripts/validate-reviews.mjs && node ./scripts/generate.mjs && node ./scripts/reconcile-discovery.mjs && node ./scripts/export-pending-evidence.mjs",
+    "generate:check": "node ./scripts/validate-reviews.mjs && node ./scripts/generate.mjs --check && node ./scripts/reconcile-discovery.mjs --check && node ./scripts/export-pending-evidence.mjs --check",
+    "validate": "node ./scripts/validate-reviews.mjs && node ./scripts/generate.mjs --check && node ./scripts/reconcile-discovery.mjs --check && node ./scripts/export-pending-evidence.mjs --check && node ./scripts/validate.mjs",
+    "report": "node ./scripts/validate-reviews.mjs && node ./scripts/generate.mjs --check && node ./scripts/reconcile-discovery.mjs --check && node ./scripts/export-pending-evidence.mjs --check && node ./scripts/validate.mjs --write-report",
     "export:pending-evidence": "node ./scripts/export-pending-evidence.mjs",
     "reviews:validate": "node ./scripts/validate-reviews.mjs"
   },

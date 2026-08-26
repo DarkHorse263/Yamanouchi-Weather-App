@@ -85,3 +85,4 @@
 - [feelzlike engagement counting](feelzlike-engagement-counting.md) — cookieless first-party visitor counts; finite page-label whitelist; fail-closed without secret; dev preview = no data by design.
 - [feelzlike Japanese SEO](feelzlike-ja-seo.md) — JP snapshots get ja-first bilingual descriptions extracted from region TS at build time; re-running prerender without a fresh vite build bakes stale bodies.
 - [feelzlike route rename](feelzlike-route-rename.md) — renaming a top-level route touches ~12 registries; generate-rewrites emits stdout only, artifact.toml must be updated to match.
+- [feelzlike Japan source reconciliation](feelzlike-japan-source-reconciliation.md) — canonical identity keys preserve generic resort words; fuzzy matching may strip them, but must never drive deduplication.

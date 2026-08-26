@@ -315,6 +315,11 @@
           "baseTownId": "nagano-regional-shinano",
           "name": "Shinano",
           "nameJa": "信濃町"
+        },
+        {
+          "baseTownId": "nagano-regional-suwa",
+          "name": "Suwa",
+          "nameJa": "諏訪市"
         }
       ]
     },
@@ -396,6 +401,11 @@
           "baseTownId": "aomori-regional-hachinohe",
           "name": "Hachinohe",
           "nameJa": "Hachinohe"
+        },
+        {
+          "baseTownId": "aomori-regional-shichinohe",
+          "name": "Shichinohe",
+          "nameJa": "七戸町"
         }
       ]
     },
@@ -7011,6 +7021,60 @@
       "baseTownId": "hokkaido-regional-kiyosato",
       "route": "/hokkaido-regional/mountain/midori-ski-area",
       "prefecture": "Hokkaido",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:302",
+      "publicId": "shichinohe-town-ski-area",
+      "aliases": [],
+      "name": "Shichinohe Town Ski Area",
+      "nameJa": "七戸町営スキー場",
+      "coordinates": {
+        "lat": 40.698437,
+        "lng": 141.099681
+      },
+      "forecastElevationM": 194,
+      "baseElevationM": 90,
+      "topElevationM": 194,
+      "officialUrl": "https://www.shichinohe-kankou.jp/ski/",
+      "travelRegionId": "aomori-regional",
+      "baseTownId": "aomori-regional-shichinohe",
+      "route": "/aomori-regional/mountain/shichinohe-town-ski-area",
+      "prefecture": "Aomori",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:369",
+      "publicId": "kirigamine-ski-resort",
+      "aliases": [],
+      "name": "Kirigamine Ski Resort",
+      "nameJa": "ファミリーゲレンデ 霧ヶ峰スキー場",
+      "coordinates": {
+        "lat": 36.097587,
+        "lng": 138.162383
+      },
+      "forecastElevationM": 1650,
+      "baseElevationM": 1600,
+      "topElevationM": 1650,
+      "officialUrl": "https://www.city.suwa.lg.jp/site/enjoy/4445.html",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-suwa",
+      "route": "/nagano-regional/mountain/kirigamine-ski-resort",
+      "prefecture": "Nagano",
       "country": "Japan",
       "countryCode": "JP",
       "honesty": {
