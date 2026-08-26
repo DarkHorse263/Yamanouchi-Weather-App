@@ -21,6 +21,14 @@ description: What "complete" means for the published JP areas — lift seeds liv
 
 **How to apply:** Keep these records unpublished without closing the verified-only marketing gate. Revisit them only when a current operator/municipal source appears; a newly published season calendar, ticket sale, facility notice, closure ordinance or successor notice can change the status.
 
+## Review queue is not a coverage-gap list
+
+**Rule:** Never describe `reviewQueueExcludedPendingEvidence` or its raw records as ski areas missing from the app. Reconcile every intake row against existing authored pages and split/merged successor pages before reporting public coverage gaps.
+
+**Why:** The pending-evidence projection includes existing published resorts whose workbook rows have missing fields, plus alias failures such as Hakuba Iwatake, Tsugaike Kogen and Myoko Suginohara. Combined intake rows such as Yomase/Takaifuji may already be covered by multiple current pages.
+
+**How to apply:** Reports must state both the review status and public coverage status. Existing-page mappings, normalized aliases and one-to-many successor mappings take precedence over raw workbook names when answering whether an area is present in feelzlike.
+
 - All 11 published JP regions now have curated lift wind-hold seed data. Seeds are split into per-region files `src/data/lifts/<region>.ts` (hakuba-valley, myoko, yuzawa, niseko, furano, rusutsu-kiroro, zao-onsen, hakkoda-aomori-spring) imported and merged in `src/data/lifts.ts`; Yamanouchi + Iiyama arrays remain inline there. Generic MountainDetail auto-renders the panel when `getLiftsForMountain` returns data — no per-region UI wiring needed.
 - Invariant test: `pnpm --filter @workspace/feelzlike test:lifts` (unique ids, enums, elevations, thresholds). It cannot check mountainId membership against region configs (would import `@/regions` PNGs) — verify that in review when adding seeds.
 - **Curated eat/stay is GONE everywhere (owner reversed the Yamanouchi exception, late July 2026).** Yamanouchi's Stay route override was removed from `src/regions/yamanouchi/router.tsx` so ALL towns use generic RegionStay/Eat (affiliate platform links + Google Maps launch pad). Curated `regions/yamanouchi/pages/stay.tsx`/`eat.tsx` remain in the folder but are unrouted; do not re-wire them. **Why:** owner wants one consistent format across areas.

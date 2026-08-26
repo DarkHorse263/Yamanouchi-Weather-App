@@ -29,540 +29,630 @@ id = "Dy7O2bK1wO26T_TtA83mD"
 uri = "file://exports/eigomenyu-standalone.tar.gz"
 type = "unspecified"
 title = "Eigomenyu (standalone, ready to drop into a new Repl)"
+logical_id = "d1da83e4-117c-4ae1-97e6-86021f2c4fa1"
 
 [[outputs]]
 id = "-CznUByqPNZfGMdAOg_lH"
 uri = "file://exports/eigomenyu-standalone-v2.tar.gz"
 type = "unspecified"
 title = "Eigomenyu v2 (flash fix)"
+logical_id = "ae913a55-f9e8-4645-aca6-c44b0504231e"
 
 [[outputs]]
 id = "r8dRc46-vwBVfl3sQq4mR"
 uri = "file://attached_assets/screenshots/f00f4d5d-4365-44ba-9092-bb91cd53e665-00-2whixtmda5rp4_pike_replit_dev_api_newsletter_preview.png"
 type = "image"
 title = "feelzlike digest — email view"
+logical_id = "d45a5b84-387f-49b5-bff7-662486b413ec"
 
 [[outputs]]
 id = "mM_UJDhVMiNS_XMLG1Wh_"
 uri = "file://exports/feelzlike-digest-sample.pdf"
 type = "pdf"
 title = "Fortnightly digest (page-safe breaks)"
+logical_id = "1a78aed1-7348-4147-aa31-2d92010ff28e"
 
 [[outputs]]
 id = "3cgUhkeTm1fOZlie7eKB6"
 uri = "file://exports/feelzlike-snowy-winter-outlook.pdf"
 type = "pdf"
 title = "Snowy winter outlook (regression check)"
+logical_id = "de7308e8-9a2d-4282-ad18-1eb96b92a1ce"
 
 [[outputs]]
 id = "6tFX9jfR5I0-AznKl2tFq"
 uri = "file://exports/feelzlike-yamanouchi-winter-outlook.pdf"
 type = "pdf"
 title = "Yamanouchi winter outlook (regrouped: Shiga Kogen + Kita-Shiga, with zones)"
+logical_id = "36e80289-1be6-4384-98bd-c9cbc8141818"
 
 [[outputs]]
 id = "VeAcL6ex75VX8YmNWh9xQ"
 uri = "file://.local/proposed-regions.md"
 type = "text"
 title = "Proposed regions for review (NZ + extra Nagano)"
+logical_id = "48f55606-8ce5-4cbf-a890-41644958c8b0"
 
 [[outputs]]
 id = "FKd5RXBPQeLc9M2gWcRjH"
 uri = "file://exports/feelzlike-user-overview.pdf"
 type = "pdf"
 title = "feelzlike · User overview"
+logical_id = "443bff38-c54b-4f86-ae68-3b0e720f1b80"
 
 [[outputs]]
 id = "oJn_x5HyfY5_j8YIFGAk_"
 uri = "file://exports/feelzlike-investor-overview.pdf"
 type = "pdf"
 title = "feelzlike · Overview (basecamp / basic info)"
+logical_id = "271eac8c-55bc-44d9-9e64-96279b1212c7"
 
 [[outputs]]
 id = "8hwBCvSG8xFpc2yu3Ax44"
 uri = "file://artifacts/feelzlike/public/downloads/feelzlike-user-overview.pdf"
 type = "pdf"
 title = "feelzlike user overview (corrected)"
+logical_id = "7ec9446a-5632-48ed-8a79-d859672c39cb"
 
 [[outputs]]
 id = "0oHBoZAyl8OrYOxcjaSEB"
 uri = "file://artifacts/feelzlike/public/downloads/feelzlike-investor-overview.pdf"
 type = "pdf"
 title = "feelzlike investor overview (corrected)"
+logical_id = "52e445fe-315b-49a7-8503-69ae31459c72"
 
 [[outputs]]
 id = "mpY9qJBrf05ZWG-5v2jRv"
 uri = "file://exports/feelzlike-press-release.pdf"
 type = "pdf"
 title = "Press Release"
+logical_id = "8d212afe-7de8-4401-9de6-e4c7810bb4fb"
 
 [[outputs]]
 id = "JrLysJPT477o-JmotLAOx"
 uri = "file://attached_assets/town_aerials/jindabyne_a_airview.jpg"
 type = "image"
 title = "Jindabyne A · airviewonline aerial · 960x640 · likely watermarked"
+logical_id = "287ec863-4f36-4f93-9b6f-53ec7b4b9e50"
 
 [[outputs]]
 id = "FFvXqCuuZ--ryH1apKYLP"
 uri = "file://attached_assets/town_aerials/jindabyne_b_istock.jpg"
 type = "image"
 title = "Jindabyne B · iStock summer aerial · 612x459 · watermarked"
+logical_id = "48ec9f12-6bac-4bfc-aeb9-a1e5906c5a24"
 
 [[outputs]]
 id = "mXP1HLPIrM7NJB1SeAJAa"
 uri = "file://attached_assets/town_aerials/jindabyne_c_dusk.jpg"
 type = "image"
 title = "Jindabyne C · iStock dusk aerial · 612x459 · watermarked"
+logical_id = "20f3dc0b-2c03-4eea-a8b3-5b64f1f86702"
 
 [[outputs]]
 id = "eAVIlsmrAPs-fyQPlAFKs"
 uri = "file://attached_assets/town_aerials/bright_a_autumn105.jpg"
 type = "image"
 title = "Bright A · autumn aerial · 1500x844 · widescreen, clean"
+logical_id = "ee8080c0-3255-4ee8-9644-598a947e6b61"
 
 [[outputs]]
 id = "6nV-_3jBFbLoyPiV2VCOz"
 uri = "file://attached_assets/town_aerials/bright_b_autumn107.jpg"
 type = "image"
 title = "Bright B · autumn aerial · 1500x1125 · clean"
+logical_id = "947171ef-20df-4801-868f-4a9d7d67e22e"
 
 [[outputs]]
 id = "1Q74KsJo1e51kkc1SAjFr"
 uri = "file://attached_assets/town_aerials/bright_c_autumn98.jpg"
 type = "image"
 title = "Bright C · autumn aerial · 1500x554 · ultra-wide, clean"
+logical_id = "560eb69a-b3bb-4491-af5c-501bb6742ccb"
 
 [[outputs]]
 id = "MClJYXnbFvKPTe2jlcffM"
 uri = "file://attached_assets/town_aerials/yudanaka_a_gaijinpot.jpg"
 type = "image"
 title = "Yudanaka A · gaijinpot aerial · 1024x768 · clean"
+logical_id = "827d8a6b-ebf1-4cd8-96a2-a09f3ce3a5b7"
 
 [[outputs]]
 id = "BxGWiC_CGaOMDe0hmcYte"
 uri = "file://attached_assets/town_aerials/yudanaka_b_shibu.jpg"
 type = "image"
 title = "Yudanaka B · Shibu Onsen aerial · 1024x575 · clean, widescreen"
+logical_id = "33cafc1f-6978-4c68-82d3-d2bae11f5c1f"
 
 [[outputs]]
 id = "_vA_vbFTWBGY2f5Ntv6Du"
 uri = "file://attached_assets/town_aerials/yudanaka_c_yamanouchi.jpg"
 type = "image"
 title = "Yudanaka C · Yamanouchi countryside · 612x408 · watermarked"
+logical_id = "94d21861-e79a-4430-8252-29a26cc4ddf3"
 
 [[outputs]]
 id = "NKe-ma4nqq-6rLtrFkSsy"
 uri = "file://attached_assets/town_aerials/jindabyne_snow_a_turo.jpg"
 type = "image"
 title = "Jindabyne snow A · lake on a snowy winter day · 1024x576 · clean"
+logical_id = "ff8cbad7-d473-4d3b-a587-844a46f55953"
 
 [[outputs]]
 id = "IJ24gV8FaOa0Fezq0obUj"
 uri = "file://attached_assets/town_aerials/jindabyne_snow_b_istock.jpg"
 type = "image"
 title = "Jindabyne snow B · lake during snowfall · 612x405 · iStock (buyable)"
+logical_id = "dd939fef-3fa4-483e-8149-374d05086e9b"
 
 [[outputs]]
 id = "kPwQHDZSbCfDIpbKLdy_x"
 uri = "file://attached_assets/town_aerials/jindabyne_snow_c_snownews.jpg"
 type = "image"
 title = "Jindabyne snow C · snownews.com.au editorial · 1200x800 · some snow"
+logical_id = "32c832dc-ea59-4443-b7e2-d5d98ebecb06"
 
 [[outputs]]
 id = "p-RT3fXJR7ZaGnWxAseVv"
 uri = "file://attached_assets/town_aerials/bright_alt_harrietville.png"
 type = "image"
 title = "Harrietville (next town up the valley from Bright) · snow-capped mountains · 820x456"
+logical_id = "d2c22034-d50b-4118-bed6-86a2ae114f56"
 
 [[outputs]]
 id = "c8F0bP5tQfZkZ5gK-p_SH"
 uri = "file://attached_assets/town_aerials/jindabyne_valley_a_turo.jpg"
 type = "image"
 title = "Jindabyne A · lake on a snowy day, peaks behind · 1024x576"
+logical_id = "1900589b-6001-4083-adff-0104e8720ce4"
 
 [[outputs]]
 id = "v-XYA0t7Csua-Ml6udzyP"
 uri = "file://attached_assets/town_aerials/jindabyne_valley_b_stilwell.jpg"
 type = "image"
 title = "Jindabyne B · from Mt Stilwell looking down on town & lake · 1000x1250 (vertical)"
+logical_id = "b0d46369-79a7-477d-806d-481e221a82e7"
 
 [[outputs]]
 id = "gWNQRFI0SgXUIqboP7QZW"
 uri = "file://attached_assets/town_aerials/bright_valley_a_mtbeauty.jpg"
 type = "image"
 title = "Bright/VHC A · Mount Beauty valley town with snow-capped peaks · 6055x2720 (closest match to Harrietville)"
+logical_id = "71a2ad6b-7b6d-4f34-b489-9a7ddece26e3"
 
 [[outputs]]
 id = "D8r_QOJd-jqqA0pzSDEEl"
 uri = "file://attached_assets/town_aerials/bright_valley_b_towong.png"
 type = "image"
 title = "Bright/VHC B · Towong valley town with snow-capped peaks · 1024x576"
+logical_id = "63b653f6-f07e-4af8-9d2e-2dfcd8010aa5"
 
 [[outputs]]
 id = "Lw9z9huJXq8gLRA5h6YOC"
 uri = "file://attached_assets/town_aerials/bright_valley_c_peakvisor.jpg"
 type = "image"
 title = "Bright/VHC C · Mt Beauty / Kiewa Valley · 1024x683"
+logical_id = "79a2bc6a-2b1d-45a2-973e-1ebcb72e0478"
 
 [[outputs]]
 id = "ujRMeqrByE5ZlaMNP6VBl"
 uri = "file://attached_assets/town_aerials/bright_valley_d_aerial.jpg"
 type = "image"
 title = "Bright/VHC D · high-country town aerial panorama · 1024x432"
+logical_id = "a1a91960-1045-4dad-8887-31dbd5c15bdc"
 
 [[outputs]]
 id = "SkHgiKJuLBebBwJGEKrqY"
 uri = "file://attached_assets/town_aerials/yudanaka_valley_a_shibusnow.jpg"
 type = "image"
 title = "Yudanaka A · Shibu Onsen in winter snow · 1200x800"
+logical_id = "08cfc2a3-2a3b-4fbe-b4b0-51fca3138e77"
 
 [[outputs]]
 id = "22TRk5F5hxmmXj-Kv5w7d"
 uri = "file://attached_assets/town_aerials/yudanaka_valley_b_yamanouchi.jpg"
 type = "image"
 title = "Yudanaka B · Yamanouchi town valley with snow-capped peaks · 808x600 (closest match to Harrietville)"
+logical_id = "68318013-cf29-4f4d-bb74-af6ee15d078f"
 
 [[outputs]]
 id = "y2IhkMj3mNOFC70y_uavk"
 uri = "file://attached_assets/town_aerials/yudanaka_valley_c_shiburiver.jpg"
 type = "image"
 title = "Yudanaka C · snowy river & mountains around Shibu Onsen · 640x427"
+logical_id = "bf0fdebe-6ac2-4d1b-bc69-0a477158b24c"
 
 [[outputs]]
 id = "uYkmQB-jHEV7wxodX2JXs"
 uri = "file://artifacts/feelzlike/public/branding/feelzlike-88x31.png"
 type = "image"
 title = "feelzlike logo - 88x31 PNG (for Awin profile)"
+logical_id = "7d656876-ea67-47c2-be8a-1eee6dd14c2f"
 
 [[outputs]]
 id = "eQuhpTWQmWxeflJ3zpFTx"
 uri = "file://exports/feelzlike-partner-overview.pdf"
 type = "pdf"
 title = "Partner / Industry Overview (closest to a media pack)"
+logical_id = "ca279ec6-a943-4f3a-aeee-677ca9e9d607"
 
 [[outputs]]
 id = "X5JXg-P8zk4RG6DlZdZVA"
 uri = "file://exports/ad-kit/screens/feelzlike-screen-1920x1080.png"
 type = "image"
 title = "In-store screen · landscape 1920×1080 (TV/digital)"
+logical_id = "0693c789-3fe6-4991-8894-edb778b3ba7a"
 
 [[outputs]]
 id = "1k1CWKCry6ZRBiuPmBxMH"
 uri = "file://exports/ad-kit/screens/feelzlike-screen-1080x1920.png"
 type = "image"
 title = "In-store screen · portrait 1080×1920 (signage totem)"
+logical_id = "093353e8-de1e-4723-8a49-aab0109d92d1"
 
 [[outputs]]
 id = "6slX2liEiCfqyJYyMgEzm"
 uri = "file://exports/ad-kit/posters/feelzlike-poster-a4.pdf"
 type = "pdf"
 title = "Poster · A4 (print-ready: bleed + crop marks)"
+logical_id = "e8532c75-337c-41e7-b8fd-1871cba7963f"
 
 [[outputs]]
 id = "z6WYyFwNqKRFPkpTTzfPA"
 uri = "file://exports/ad-kit/posters/feelzlike-poster-a3.pdf"
 type = "pdf"
 title = "Poster · A3 (print-ready: bleed + crop marks)"
+logical_id = "f60a09ad-40b9-4811-83ad-c2888fefd476"
 
 [[outputs]]
 id = "ffaXrn2bf5FG2_TYudzRS"
 uri = "file://exports/ad-kit/posters/feelzlike-poster-a2.pdf"
 type = "pdf"
 title = "Poster · A2 (print-ready: bleed + crop marks)"
+logical_id = "8ed9d111-062a-4547-9d37-55e45b813c29"
 
 [[outputs]]
 id = "GGODE9H_MxI3rDP-XS-zc"
 uri = "file://exports/ad-kit/stickers/feelzlike-sticker-round-95mm.pdf"
 type = "pdf"
 title = "Sticker · round Ø95mm (die-cut, print-ready)"
+logical_id = "3c07125b-d51f-42ba-91f3-2553dc560afa"
 
 [[outputs]]
 id = "o1gyf8SebFIm6TPQxR5D0"
 uri = "file://exports/ad-kit/stickers/feelzlike-sticker-square-95mm.pdf"
 type = "pdf"
 title = "Sticker · square 95mm (print-ready)"
+logical_id = "63009a2a-ecdc-41ae-b067-dc2c73aca1fe"
 
 [[outputs]]
 id = "B1BHuN1M1YcUpNDUjMswB"
 uri = "file://exports/ad-kit/stickers/_preview/feelzlike-sticker-round-95mm-preview.png"
 type = "image"
 title = "Round sticker · design preview"
+logical_id = "41a2411c-0b4f-4997-acf1-25ea0cd6c50d"
 
 [[outputs]]
 id = "wsyivZP7yO2Rfkoyj1Q6C"
 uri = "file://exports/ad-kit/stickers/_preview/feelzlike-sticker-square-95mm-preview.png"
 type = "image"
 title = "Square sticker · design preview"
+logical_id = "84e5d76f-8e4f-44f7-a0d3-2776cc34a6df"
 
 [[outputs]]
 id = "FA888h7ldOLxMq2zMeA9W"
 uri = "file://exports/ad-kit/boards/feelzlike-board-6sheet-portrait-1200x1800mm.pdf"
 type = "pdf"
 title = "Outdoor board · 6-sheet portrait 1200×1800mm"
+logical_id = "1223a2b1-8aeb-484b-b40a-cd2d0d934820"
 
 [[outputs]]
 id = "nvGK3hLfGsJTkOEbNzpUY"
 uri = "file://exports/ad-kit/boards/feelzlike-board-landscape-2400x1200mm.pdf"
 type = "pdf"
 title = "Outdoor board · landscape 2400×1200mm"
+logical_id = "9561d0d3-1072-4ec2-9bcc-eadbd584102b"
 
 [[outputs]]
 id = "c9clsGZEHf0YEVETTAZ9W"
 uri = "file://exports/ad-kit/_explore/feelzlike-explore-dark-landscape.png"
 type = "image"
 title = "Dark · landscape (screens/boards)"
+logical_id = "c725daaf-98d8-40aa-805c-daa222d960a8"
 
 [[outputs]]
 id = "yKE0IRe84geAhmetxUZU0"
 uri = "file://exports/ad-kit/_explore/feelzlike-explore-dark-portrait.png"
 type = "image"
 title = "Dark · portrait (posters/signage)"
+logical_id = "f7016860-3299-4241-b2ba-3c69a366f50e"
 
 [[outputs]]
 id = "IFCmsdX8LsVk4PoKfvpdh"
 uri = "file://exports/ad-kit/_explore/feelzlike-explore-light-landscape.png"
 type = "image"
 title = "Light · landscape (screens/boards)"
+logical_id = "b36f348b-7bf2-4bf5-9fe5-4883e3843558"
 
 [[outputs]]
 id = "zR817cT0L--7CG2ckpayE"
 uri = "file://exports/ad-kit/_explore/feelzlike-explore-light-portrait.png"
 type = "image"
 title = "Light · portrait (posters/signage)"
+logical_id = "5743c311-ffa2-452f-b81a-ea3c1b350966"
 
 [[outputs]]
 id = "5vbCv8BA2BDEYeS4RIbny"
 uri = "file://exports/ad-kit/dark/screens/feelzlike-screen-1920x1080.png"
 type = "image"
 title = "Dark · in-store screen 1920×1080"
+logical_id = "e2cbdb9a-1348-4f17-b0df-9a9715f2a29d"
 
 [[outputs]]
 id = "tSKM21zvR8i7VMFcP5ZiQ"
 uri = "file://exports/ad-kit/dark/screens/feelzlike-screen-1080x1920.png"
 type = "image"
 title = "Dark · in-store screen 1080×1920"
+logical_id = "5f7256e3-a691-4064-9541-16305d3c3fd1"
 
 [[outputs]]
 id = "kyV1rHyb-wvshf0ewYTis"
 uri = "file://exports/ad-kit/dark/posters/feelzlike-poster-a4.pdf"
 type = "pdf"
 title = "Dark · poster A4 (print)"
+logical_id = "b5e79892-b1c5-42b3-ad40-0776160d2807"
 
 [[outputs]]
 id = "UVUENtuDL35dvjBQMccDz"
 uri = "file://exports/ad-kit/dark/posters/feelzlike-poster-a3.pdf"
 type = "pdf"
 title = "Dark · poster A3 (print)"
+logical_id = "b2670146-d1ae-4d31-8152-1a028f9ccce9"
 
 [[outputs]]
 id = "nZ3nD1C-ET3XAAov6OBUn"
 uri = "file://exports/ad-kit/dark/posters/feelzlike-poster-a2.pdf"
 type = "pdf"
 title = "Dark · poster A2 (print)"
+logical_id = "f9c593cd-1c31-4559-84df-a5fa4d24f702"
 
 [[outputs]]
 id = "Ld1ijbGvYlBt8ZnQ9aqX-"
 uri = "file://exports/ad-kit/dark/stickers/feelzlike-sticker-round-95mm.pdf"
 type = "pdf"
 title = "Dark · round sticker Ø95mm (print)"
+logical_id = "40efa343-9757-48a0-bfb4-f6a4b0df6553"
 
 [[outputs]]
 id = "wRze9XU7nY-yZ6lEUNDgl"
 uri = "file://exports/ad-kit/dark/stickers/feelzlike-sticker-square-95mm.pdf"
 type = "pdf"
 title = "Dark · square sticker 95mm (print)"
+logical_id = "d9c94c5f-8294-4d26-a2c9-9dcfa8ad434e"
 
 [[outputs]]
 id = "Jt2pjYV0-FjBTc7P82McV"
 uri = "file://exports/ad-kit/dark/boards/feelzlike-board-6sheet-portrait-1200x1800mm.pdf"
 type = "pdf"
 title = "Dark · 6-sheet portrait board (print)"
+logical_id = "5365c5b8-3652-4b97-a5db-8f1a82c0cf35"
 
 [[outputs]]
 id = "5jBIhDWSUQdyyHr7S6x1b"
 uri = "file://exports/ad-kit/dark/boards/feelzlike-board-landscape-2400x1200mm.pdf"
 type = "pdf"
 title = "Dark · landscape 2:1 board (print)"
+logical_id = "23519a51-3992-44a0-9a64-7c5047007106"
 
 [[outputs]]
 id = "1I2c2Evs7Yd7Y0-g2M89-"
 uri = "file://exports/ad-kit/light/screens/feelzlike-screen-1920x1080.png"
 type = "image"
 title = "Light · in-store screen 1920×1080"
+logical_id = "1f1f209d-c870-4ccc-996b-cee75de6976d"
 
 [[outputs]]
 id = "zbXanyS2Kg98tgU1eqZqF"
 uri = "file://exports/ad-kit/light/screens/feelzlike-screen-1080x1920.png"
 type = "image"
 title = "Light · in-store screen 1080×1920"
+logical_id = "6d4917c4-d37f-4def-a579-7dd894ad0c57"
 
 [[outputs]]
 id = "0A8rdk9QyyYGDKgkAsutJ"
 uri = "file://exports/ad-kit/light/posters/feelzlike-poster-a4.pdf"
 type = "pdf"
 title = "Light · poster A4 (print)"
+logical_id = "08cab99c-7dfa-402d-aa48-eee06324a0b5"
 
 [[outputs]]
 id = "bf7acN9Kk_woevvts_h3a"
 uri = "file://exports/ad-kit/light/posters/feelzlike-poster-a3.pdf"
 type = "pdf"
 title = "Light · poster A3 (print)"
+logical_id = "25357543-6127-40be-ba7f-963088a5bc9e"
 
 [[outputs]]
 id = "k0cBRjTwGhoJO1qr1Ix8V"
 uri = "file://exports/ad-kit/light/posters/feelzlike-poster-a2.pdf"
 type = "pdf"
 title = "Light · poster A2 (print)"
+logical_id = "a7d78d1a-3dc3-4007-9e57-7e60a227404e"
 
 [[outputs]]
 id = "24gFB5PQF2Obfz-DfUxis"
 uri = "file://exports/ad-kit/light/stickers/feelzlike-sticker-round-95mm.pdf"
 type = "pdf"
 title = "Light · round sticker Ø95mm (print)"
+logical_id = "abc2ca41-4b1d-4b93-86f3-7025fe3770bf"
 
 [[outputs]]
 id = "X0ZWi-2JpgGitHX3F1HtL"
 uri = "file://exports/ad-kit/light/stickers/feelzlike-sticker-square-95mm.pdf"
 type = "pdf"
 title = "Light · square sticker 95mm (print)"
+logical_id = "a57db66b-bc76-46a0-aa31-4dd54875b2db"
 
 [[outputs]]
 id = "ymOUwl30Pgh5oQwBn438l"
 uri = "file://exports/ad-kit/light/boards/feelzlike-board-6sheet-portrait-1200x1800mm.pdf"
 type = "pdf"
 title = "Light · 6-sheet portrait board (print)"
+logical_id = "0dd2b63c-5bc1-479e-b3fd-845f972f2db7"
 
 [[outputs]]
 id = "oKbImNrac5rA6UTi97rOa"
 uri = "file://exports/ad-kit/light/boards/feelzlike-board-landscape-2400x1200mm.pdf"
 type = "pdf"
 title = "Light · landscape 2:1 board (print)"
+logical_id = "db54f4ae-265b-4522-b282-18c661b9b613"
 
 [[outputs]]
 id = "w2poVxCuJDsEkn8CWq0d3"
 uri = "file://exports/ad-kit/feelzlike-ad-kit.zip"
 type = "unspecified"
 title = "feelzlike advertising kit — full download (dark + light)"
+logical_id = "f73519ac-2a72-41f9-a148-86230b09d835"
 
 [[outputs]]
 id = "I7xo6KiGDjDQ6EdvpWk_X"
 uri = "file://JAPAN_ROLLOUT.md"
 type = "text"
 title = "feelzlike · Japan rollout one-pager"
+logical_id = "0ec76021-439f-4965-a95d-ea3f9445b101"
 
 [[outputs]]
 id = "LN6cWVExWNYevHJHP7QXH"
 uri = "file://exports/feelzlike-listing-deals-overview.pdf"
 type = "pdf"
 title = "Your playbook · how to respond (private)"
+logical_id = "c51a559f-85e8-40a2-a35f-1e5e8287ca22"
 
 [[outputs]]
 id = "2hNLFUdGfd1JkCLBGR0FI"
 uri = "file://exports/feelzlike-rate-card.pdf"
 type = "pdf"
 title = "Rate card · send to operators"
+logical_id = "3a6de5af-86d1-471b-8574-021438c108a0"
 
 [[outputs]]
 id = "DZd9uyIT0nJmXlQG2lqcy"
 uri = "file://exports/feelzlike-listing-agreement-template.pdf"
 type = "pdf"
 title = "One-page agreement template"
+logical_id = "50b6db78-a193-47a2-b873-a1cde9225489"
 
 [[outputs]]
 id = "SGExbUVPcboTzrpYxWwGZ"
 uri = "file://exports/featured-partner-preview.jpg"
 type = "image"
 title = "Preview · how a featured partner looks in the app"
+logical_id = "bf3c1db3-acf5-424d-9e97-2d7839b6c18f"
 
 [[outputs]]
 id = "3Kd32njipxREwCsWVPQtB"
 uri = "file://exports/town-partner-preview-jindabyne.jpg"
 type = "image"
 title = "Preview · transport partner on the Jindabyne town page"
+logical_id = "1d0aea11-b68c-4306-bac9-a986c9f55a9c"
 
 [[outputs]]
 id = "6RXR4AVzMy4wod8KiUdeV"
 uri = "file://exports/town-partner-preview-madarao.jpg"
 type = "image"
 title = "Preview · Snowball stay partner on the Madarao Kogen town page"
+logical_id = "0bf74ade-94bc-4907-b734-21d0faf36313"
 
 [[outputs]]
 id = "NVXZ_LKVBB610KyKAh07X"
 uri = "file://exports/town-partner-ad-jindabyne.jpg"
 type = "image"
 title = "Preview · dynamic ad banner under the Jindabyne header"
+logical_id = "2e2480be-8ee7-4edf-8e1c-972fbec325b7"
 
 [[outputs]]
 id = "m9rUWsmyvUmxalFhyHp0-"
 uri = "file://exports/town-partner-ad-madarao.jpg"
 type = "image"
 title = "Preview · dynamic ad banner under the Madarao Kogen header"
+logical_id = "e3967f58-3c86-41d8-8174-232a3234754f"
 
 [[outputs]]
 id = "Gq8rUffAA_Z79VRTInAl-"
 uri = "file://exports/town-partner-ad-branded-jindabyne.jpg"
 type = "image"
 title = "Cooma Coaches branded ad · jindabyne page"
+logical_id = "fcadbadf-8dfd-4f73-8d6f-a06f56844ca6"
 
 [[outputs]]
 id = "njBZAfU4qjoZo_O0eZVZN"
 uri = "file://exports/town-partner-ad-branded-madarao.jpg"
 type = "image"
 title = "Snowball Japan branded ad · madarao kogen page"
+logical_id = "300185e7-67fa-4750-83f8-c9697ff47590"
 
 [[outputs]]
 id = "9WI-gctkLB-FbZqu5iiCG"
 uri = "file://exports/feelzlike-business-docs.zip"
 type = "unspecified"
 title = "All business PDFs in one download (open on your computer)"
+logical_id = "6343f5f6-7b2e-43af-b778-6def62b62b2e"
 
 [[outputs]]
 id = "TYMyJnvPJKRXCvH02Q_cN"
 uri = "file://exports/feelzlike-partner-mockups.zip"
 type = "unspecified"
 title = "All partner mockups in one download"
+logical_id = "db38be5c-042c-4048-acab-dda1c706a076"
 
 [[outputs]]
 id = "-GnEM3zq3TffWhUgnl2Vf"
 uri = "file://exports/town-partner-ad-branded-iiyama-snowball.jpg"
 type = "image"
 title = "Snowball Japan featured partner · iiyama page"
+logical_id = "7506edce-0a26-481a-8cc1-b49417b73382"
 
 [[outputs]]
 id = "KEYt-Z6Z7AL-08F9lrtVM"
 uri = "file://exports/town-partner-ad-branded-jindabyne-snoexpress.jpg"
 type = "image"
 title = "Snoexpress featured partner · jindabyne page"
+logical_id = "b97243c0-87c3-48ac-bcbd-59f8e229c718"
 
 [[outputs]]
 id = "M7kqY8fui_2x-Seh5ZcW0"
 uri = "file://exports/region-partner-ad-iiyama-snowball.jpg"
 type = "image"
 title = "Snowball Japan featured partner · iiyama region page"
+logical_id = "f62087f9-142e-4cce-bb96-ce4e560a7a34"
 
 [[outputs]]
 id = "k4xkpoyI0EmZVKKiEkJ1g"
 uri = "file://exports/region-partner-ad-snowy-mountains-snoexpress.jpg"
 type = "image"
 title = "Snoexpress featured partner · snowy mountains region page"
+logical_id = "afd27b23-cd73-40e6-9d03-9b9fad83a77c"
 
 [[outputs]]
 id = "2xoeB72DRUN5saK82iArs"
 uri = "file://exports/feelzlike-facebook-campaign-pack.pdf"
 type = "pdf"
 title = "facebook campaign pack · updated (all buttons = Learn more)"
+logical_id = "8d4cb64d-cd22-4a78-801b-8e388bb16152"
 
 [[outputs]]
 id = "-CUwGynv3vfCsrZvBL9xh"
 uri = "file://exports/powder-alert-email-preview.jpg"
 type = "image"
 title = "powder alert email · what subscribers receive"
+logical_id = "b5658e0e-e675-4333-ad36-79b4e52ec666"
 
 [[outputs]]
 id = "rI3xEcS8bc57tJj9xVJWS"
 uri = "file://exports/confirm-email-preview.jpg"
 type = "image"
 title = "signup confirmation email · what new subscribers receive"
+logical_id = "8a996c50-2156-4f9e-a4e0-23f34d7382b4"
 
 [[outputs]]
 id = "7a6UD9Ob64-IyKiWHy6pN"
@@ -570,6 +660,7 @@ uri = "file://exports/feelzlike-facebook-phase2-pack.pdf"
 type = "pdf"
 title = "facebook phase 2 pack"
 description = "Round-one results readout, the 5 phase-2 ads with paste-ready copy and tracked links, and 4 weeks of Facebook Page posts (2 per week)."
+logical_id = "90d77d0b-67ca-4357-896a-20fd960b9e03"
 
 [[outputs]]
 id = "Yqrt85zMwZvl80aTRhCdO"
@@ -577,6 +668,7 @@ uri = "file://exports/feelzlike-fb-page-hero.png"
 type = "image"
 title = "feelzlike · desktop + phone"
 description = "Home page on desktop and phone, side by side, cookie banner cropped out. Ready to post on the Facebook page."
+logical_id = "fc0cda47-91b2-4400-aef3-432237de471d"
 
 [[outputs]]
 id = "eNRso22-RHGMcKAunqoqg"
@@ -584,6 +676,7 @@ uri = "file://exports/social-ads/feelzlike-ad-overall-story-1080x1920.png"
 type = "image"
 title = "feelzlike ad · overall · story"
 description = "updated with the audience line under the headline"
+logical_id = "216f380b-4ef3-4718-b15f-bb18b035d4e9"
 
 [[outputs]]
 id = "JVcwZl8s9Rdoff-zCohxQ"
@@ -591,6 +684,7 @@ uri = "file://exports/social-ads/feelzlike-ad-japan-story-1080x1920.png"
 type = "image"
 title = "feelzlike ad · japan · story"
 description = "screenshot now shows the feature the callouts describe"
+logical_id = "03332d85-456f-4372-a742-cb2c509cb3b9"
 
 [[outputs]]
 id = "wIxLBo4mj_fADoEkIYmQ7"
@@ -598,6 +692,7 @@ uri = "file://exports/social-ads/feelzlike-ad-australia-story-1080x1920.png"
 type = "image"
 title = "feelzlike ad · australia · story"
 description = "updated with the audience line under the headline"
+logical_id = "a55c1ee7-7b40-4bfc-855a-3ee3ffb4e1da"
 
 [[outputs]]
 id = "He8hUmTlSA-Li5mhSW-ub"
@@ -605,6 +700,7 @@ uri = "file://exports/social-ads/feelzlike-ad-nz-story-1080x1920.png"
 type = "image"
 title = "feelzlike ad · nz · story"
 description = "screenshot now shows the feature the callouts describe"
+logical_id = "11095ea7-48a6-4d42-8d0a-f179e4f05a1b"
 
 [[outputs]]
 id = "S_6tw81H1r224n3Jummpv"
@@ -612,6 +708,7 @@ uri = "file://exports/social-ads/feelzlike-ad-overall-square-1080x1080.png"
 type = "image"
 title = "feelzlike ad · overall · square"
 description = "updated with the audience line under the headline"
+logical_id = "7d019add-8906-4aaa-89c3-8ff7f6fa3b78"
 
 [[outputs]]
 id = "_6i9kcwF2evykckwkF2NC"
@@ -619,6 +716,7 @@ uri = "file://exports/social-ads/feelzlike-ad-japan-square-1080x1080.png"
 type = "image"
 title = "feelzlike ad · japan · square"
 description = "screenshot now shows the feature the callouts describe"
+logical_id = "d7982aa9-044c-4553-a09c-585f4431a004"
 
 [[outputs]]
 id = "JMZChZLFEipLc8PWcAtAe"
@@ -626,6 +724,7 @@ uri = "file://exports/social-ads/feelzlike-ad-australia-square-1080x1080.png"
 type = "image"
 title = "feelzlike ad · australia · square"
 description = "updated with the audience line under the headline"
+logical_id = "56f5624d-d126-4e27-b802-c200af3ac0ba"
 
 [[outputs]]
 id = "hxuVMePmiLYdCMQIhDXPb"
@@ -633,6 +732,7 @@ uri = "file://exports/social-ads/feelzlike-ad-nz-square-1080x1080.png"
 type = "image"
 title = "feelzlike ad · nz · square"
 description = "screenshot now shows the feature the callouts describe"
+logical_id = "702cef25-539e-407c-b5aa-28878f8b5fd3"
 
 [[outputs]]
 id = "lU8TSJBMKg5A7knfuiHtR"
@@ -640,6 +740,7 @@ uri = "file://attached_assets/generated_audio/ad-music-bed.mp3"
 type = "audio"
 title = "feelzlike ad bed"
 description = "Generated music: Uplifting modern indie-pop instrumental ad bed, warm acoustic guitar and soft driving drums building to a bright optimistic finish, energetic but not aggressive, feels like a crisp w…"
+logical_id = "c44b7ff1-e272-4586-90f1-cc1f9b627625"
 
 [[outputs]]
 id = "Wh_fYPlebE1gLITRnQAsY"
@@ -647,6 +748,7 @@ uri = "file://attached_assets/generated_audio/vo-30-1.mp3"
 type = "audio"
 title = "vo-30-1.mp3"
 description = "Text-to-speech audio: fresh snow overnight... so, which mountain today?"
+logical_id = "37259d83-ab5e-49ab-9b51-e7ea07f13e1b"
 
 [[outputs]]
 id = "bLVmAMmXz2k8xgOTjpy4S"
@@ -654,6 +756,7 @@ uri = "file://attached_assets/generated_audio/vo-15-1.mp3"
 type = "audio"
 title = "vo-15-1.mp3"
 description = "Text-to-speech audio: which mountain today?"
+logical_id = "d83837e1-2a68-4d92-9fe9-a9e5951be25b"
 
 [[outputs]]
 id = "DDh5oKU8R_1UPzO6Dj7aQ"
@@ -661,6 +764,7 @@ uri = "file://attached_assets/generated_audio/vo-30-2.mp3"
 type = "audio"
 title = "vo-30-2.mp3"
 description = "Text-to-speech audio: one quick check. snow, roads and transport for the town you're staying in... and every mountain it serves."
+logical_id = "3bfd1c70-8b31-4515-a6cb-c4f8a870078c"
 
 [[outputs]]
 id = "KPX3Ibp5vuB8b5bv9yhro"
@@ -668,6 +772,7 @@ uri = "file://attached_assets/generated_audio/vo-15-3.mp3"
 type = "audio"
 title = "vo-15-3.mp3"
 description = "Text-to-speech audio: feelzlike dot com. free until the thirty-first of december."
+logical_id = "edcbd8b0-78c7-4a0c-ae56-3541e754ce47"
 
 [[outputs]]
 id = "9CgNhSRDaB23i2g8MOuWN"
@@ -675,6 +780,7 @@ uri = "file://attached_assets/generated_audio/vo-30-3.mp3"
 type = "audio"
 title = "vo-30-3.mp3"
 description = "Text-to-speech audio: feelzlike. real conditions for mountain travel. free snow alerts until the thirty-first of december. feelzlike dot com."
+logical_id = "cbc33cb7-b673-4a94-b4c3-063bad1a39ba"
 
 [[outputs]]
 id = "FHB6Gbj1xW2V2wOyqjD5q"
@@ -682,6 +788,7 @@ uri = "file://attached_assets/generated_audio/vo-15-2.mp3"
 type = "audio"
 title = "vo-15-2.mp3"
 description = "Text-to-speech audio: snow, roads and transport... checked in seconds."
+logical_id = "b70d728b-e384-4e36-a350-c6515d4ee638"
 
 [[outputs]]
 id = "o9DsWphjvxLFsxgI2bpNN"
@@ -689,6 +796,7 @@ uri = "file://exports/video-ads/feelzlike-ad-30s.mp4"
 type = "video"
 title = "feelzlike 30s ad (v4)"
 description = "tracked phone screen · right-hand-drive car · feelzlike.com"
+logical_id = "289d79c5-a165-4794-bece-86cd2fc30e94"
 
 [[outputs]]
 id = "L_sUfUACXax28oRXcbHyY"
@@ -696,6 +804,7 @@ uri = "file://exports/video-ads/feelzlike-ad-15s.mp4"
 type = "video"
 title = "feelzlike 15s ad (v4)"
 description = "short cut · tracked phone screen · RHD drive"
+logical_id = "cd55ddd5-4600-420a-8cf1-05ab91c466f9"
 
 [[outputs]]
 id = "4Sa5IDj_IipSnAMAyzJ6Y"
@@ -703,6 +812,7 @@ uri = "file://attached_assets/generated_audio/vo-30-2_2.mp3"
 type = "audio"
 title = "vo-30-2.mp3"
 description = "Text-to-speech audio: staying in a mountain town? feelzlike checks the snow, the roads and the buses for you... all in one place."
+logical_id = "3c464711-5592-4b2a-aae6-ca2b8854d2a8"
 
 [[outputs]]
 id = "ciIjBrjHyAMmY_vQzchbm"
@@ -710,6 +820,7 @@ uri = "file://attached_assets/generated_audio/vo-15-2_2.mp3"
 type = "audio"
 title = "vo-15-2.mp3"
 description = "Text-to-speech audio: staying in a mountain town? check the snow, roads and transport in seconds."
+logical_id = "7883685d-c78d-4547-a214-3929dde174e5"
 
 [[outputs]]
 id = "HzL3C4qCnsS5lLvJE_P8t"
@@ -717,6 +828,7 @@ uri = "file://attached_assets/generated_audio/vo-15-3_2.mp3"
 type = "audio"
 title = "vo-15-3.mp3"
 description = "Text-to-speech audio: go to feelzlike dot com. free until the thirty-first of december."
+logical_id = "d07dccd2-489d-47f5-b9aa-505219bc76b4"
 
 [[outputs]]
 id = "SaByHoq6WzsiwpEOnW432"
@@ -724,6 +836,7 @@ uri = "file://attached_assets/generated_audio/vo-30-3_2.mp3"
 type = "audio"
 title = "vo-30-3.mp3"
 description = "Text-to-speech audio: go to feelzlike dot com. real conditions for mountain travel. free until the thirty-first of december. feelzlike dot com."
+logical_id = "4ceb7542-d108-4b98-a194-5978b4c6e0ed"
 
 [[outputs]]
 id = "204yu8bOd1TKMcPsKvhrT"
@@ -731,6 +844,7 @@ uri = "file://attached_assets/generated_audio/vo-15-close.mp3"
 type = "audio"
 title = "vo-15-close"
 description = "Text-to-speech audio: feelzlike dot com. real conditions for mountain travel."
+logical_id = "5ba4c01e-2516-4317-8c63-d9fb5305bee0"
 
 [[outputs]]
 id = "MeFnLVWqE26aXtNu4WKic"
@@ -738,6 +852,7 @@ uri = "file://attached_assets/generated_audio/vo-30-close.mp3"
 type = "audio"
 title = "vo-30-close"
 description = "Text-to-speech audio: go to feelzlike dot com. real conditions for mountain travel. feelzlike dot com."
+logical_id = "9bc8b33e-565b-4d62-8a4a-71a6dd306ffd"
 
 [[outputs]]
 id = "OI2-xWNqkenq09pA9tOuG"
@@ -745,6 +860,7 @@ uri = "file://attached_assets/generated_audio/vo-anthem-full.mp3"
 type = "audio"
 title = "anthem vo full"
 description = "Text-to-speech audio: One hundred and eighteen mountain regions. Official sources. Updates every ten minutes. And you're still checking a basic weather app before a ski trip? That app doesn't know wh…"
+logical_id = "2e3479ca-02b5-4873-afc7-5e16a2c60283"
 
 [[outputs]]
 id = "k--D8OheDjXHxQmV2oH52"
@@ -752,6 +868,7 @@ uri = "file://attached_assets/generated_audio/ad-anthem-bed.mp3"
 type = "audio"
 title = "anthem ad bed"
 description = "Generated music: Cinematic anthem trailer music bed for a tech ad: building orchestral-electronic hybrid, driving percussion, rising strings and pulsing synth bass, epic and confident but not aggress…"
+logical_id = "1afe7734-7483-4b20-89db-0c4fe06a99fa"
 
 [[outputs]]
 id = "PCLzwsqNnSsPkA8QUfbGL"
@@ -759,6 +876,7 @@ uri = "file://exports/video-ads/feelzlike-anthem-40s.mp4"
 type = "video"
 title = "feelzlike anthem ad (40s)"
 description = "app-only screens · announcer VO · anthem music bed · feelzlike.com"
+logical_id = "7136603d-0966-42fc-9d25-e08f96a4d3c6"
 
 [[outputs]]
 id = "7Oq7txuFvZULqogtatFaP"
@@ -766,6 +884,7 @@ uri = "file://attached_assets/generated_audio/ad-dreamtrance-bed.mp3"
 type = "audio"
 title = "dream trance bed"
 description = "Generated music: Mid-90s dream trance instrumental in the style of classic Italian dream house: iconic emotive solo piano melody over a steady four-on-the-floor trance beat, warm analog pads, gentle …"
+logical_id = "d2fc1326-acb1-4645-acdf-ba99d2439b6b"
 
 [[outputs]]
 id = "07crfhCoCncnHtWXuU0rF"
@@ -773,6 +892,7 @@ uri = "file://attached_assets/generated_audio/vo-anthem-au.mp3"
 type = "audio"
 title = "anthem vo au"
 description = "Text-to-speech audio: One hundred and eighteen mountain regions. Seven official sources. Real-time conditions refreshed every fifteen minutes. Feelzlike covers every major resort across Japan, Canada…"
+logical_id = "ad27c43c-c9a8-49de-9c07-6708503e3448"
 
 [[outputs]]
 id = "0B3rFMeSf56jtDJFfFzBS"
@@ -780,6 +900,7 @@ uri = "file://attached_assets/generated_audio/vo-anthem-us.mp3"
 type = "audio"
 title = "anthem vo us"
 description = "Text-to-speech audio: One hundred and eighteen mountain regions. Seven official sources. Real-time conditions refreshed every fifteen minutes. Feelzlike covers every major resort across Japan, Canada…"
+logical_id = "146839b2-bbab-4ab5-ae8c-258a3fa3a962"
 
 [[outputs]]
 id = "YxLz_QMUa_wWDnP18XvaZ"
@@ -787,6 +908,7 @@ uri = "file://attached_assets/generated_audio/vo-anthem-jp.mp3"
 type = "audio"
 title = "anthem vo jp"
 description = "Text-to-speech audio: One hundred and eighteen mountain regions. Seven official sources. Real-time conditions refreshed every fifteen minutes. Feelzlike covers every major resort across Japan, Canada…"
+logical_id = "e48d408b-6c47-49c1-9ab8-b6cbc25ffb7e"
 
 [[outputs]]
 id = "bOM0gFMxQYveQomFQTVRv"
@@ -794,6 +916,7 @@ uri = "file://exports/video-ads/feelzlike-anthem-au.mp4"
 type = "video"
 title = "feelzlike anthem · australian voice · 34s"
 description = "opener now shows flags + world coverage map"
+logical_id = "fa9f725b-4732-4ab9-bba1-ded5ce254de1"
 
 [[outputs]]
 id = "v9oiZTX4lLRwU242MF2il"
@@ -801,6 +924,7 @@ uri = "file://exports/video-ads/feelzlike-anthem-us.mp4"
 type = "video"
 title = "feelzlike anthem · american voice · 33s"
 description = "opener now shows flags + world coverage map"
+logical_id = "e0b29240-60df-4ebe-b5f8-44326a18ef0b"
 
 [[outputs]]
 id = "OskuCzKteJUAS5SDUz4FV"
@@ -808,6 +932,7 @@ uri = "file://exports/video-ads/feelzlike-anthem-jp.mp4"
 type = "video"
 title = "japan cut · updated with japanese screens"
 description = "grand hirafu and happo-one heroes now fully in japanese"
+logical_id = "eec4f764-d5e1-494a-b9dd-64e7a3d48e5f"
 
 [[outputs]]
 id = "Dhpc1T1vbppayrmbvNmf9"
@@ -815,6 +940,7 @@ uri = "file://attached_assets/generated_audio/vo-anthem-au-jess.mp3"
 type = "audio"
 title = "anthem vo jess au"
 description = "Text-to-speech audio: One hundred and eighteen mountain regions. Seven official sources. Real-time conditions refreshed every fifteen minutes. Feelzlike covers every major resort across Japan, Canada…"
+logical_id = "0b988cc3-e588-41c8-94fd-a6728755d129"
 
 [[outputs]]
 id = "OlqL4hJqPSkMH49ByjUpx"
@@ -822,6 +948,7 @@ uri = "file://attached_assets/generated_audio/vo-anthem-jp-ja.mp3"
 type = "audio"
 title = "anthem vo japanese"
 description = "Text-to-speech audio: 山岳エリア118地域、7つの公式データソース、15分ごとに更新されるリアルタイムのコンディション。feelzlikeは、日本、カナダ、アメリカ、オーストラリア、ニュージーランドの主要リゾートをすべてカバーしています。体感温度、積雪の観測データ、道路状況のチェックから、旅の計画まで。すべてがひとつのウェブアプリに。大雪が近づけば、無料のスノーアラートがメ…"
+logical_id = "46ace02f-8a5f-4e63-8424-f305be97479c"
 
 [[outputs]]
 id = "gCj7E7u49rg7_Al9Z6OV1"
@@ -829,6 +956,7 @@ uri = "file://attached_assets/generated_audio/vo-anthem2-au.mp3"
 type = "audio"
 title = "anthem au v2"
 description = "Text-to-speech audio: 118 mountain regions. 7 official sources. Real-time conditions, refreshed every 15 minutes. feelzlike covers every major resort across Australia, New Zealand, Japan, Canada, and…"
+logical_id = "7955bf5b-dab6-4b1f-83ee-f0e651e197f5"
 
 [[outputs]]
 id = "-iW1vc4AeWMmvI3mkc34r"
@@ -836,6 +964,7 @@ uri = "file://attached_assets/generated_audio/vo-anthem2-jp.mp3"
 type = "audio"
 title = "anthem jp v2"
 description = "Text-to-speech audio: 118の山岳エリア。7つの公式情報源。リアルタイムのコンディションを15分ごとに更新。feelzlikeは、日本、オーストラリア、ニュージーランド、カナダ、アメリカの主要スキー場をすべてカバー。実際の気温、報告された積雪、道路状況をチェックして、旅の計画まで。すべてがひとつのウェブアプリに。大雪が近づいた瞬間、無料のスノーアラートがメールで届きます。f…"
+logical_id = "be13d274-8927-4017-bc14-551b067b42c3"
 
 [[outputs]]
 id = "wbeJzpcUOxoXRvrFxJP5n"
@@ -843,6 +972,7 @@ uri = "file://attached_assets/generated_audio/vo-anthem2-us.mp3"
 type = "audio"
 title = "anthem us v2"
 description = "Text-to-speech audio: 118 mountain regions. 7 official sources. Real-time conditions, refreshed every 15 minutes. feelzlike covers every major resort across the USA, Canada, Australia, New Zealand, a…"
+logical_id = "adddc077-c44d-4a35-a41d-979191b3c3b5"
 
 [[outputs]]
 id = "JE_zT9sv0IPQt-OJpUNTJ"
@@ -850,6 +980,7 @@ uri = "file://attached_assets/generated_audio/vo-anthem3-au.mp3"
 type = "audio"
 title = "anthem au v3"
 description = "Text-to-speech audio: 118 mountain regions. 7 official sources. Real-time conditions, refreshed every 15 minutes. feelzlike covers every major resort across Australia, New Zealand, Japan, Canada, and…"
+logical_id = "d320ef48-318c-40bf-88c5-0345b0d5b2af"
 
 [[outputs]]
 id = "MrrEkfa5WUl88dysUfaFT"
@@ -857,6 +988,7 @@ uri = "file://attached_assets/generated_audio/vo-anthem3-us.mp3"
 type = "audio"
 title = "anthem us v3"
 description = "Text-to-speech audio: 118 mountain regions. 7 official sources. Real-time conditions, refreshed every 15 minutes. feelzlike covers every major resort across the USA, Canada, Australia, New Zealand, a…"
+logical_id = "56b4e0eb-9eb6-4957-a640-7eecdb6867b3"
 
 [[outputs]]
 id = "oY6YZAM7YfLE84zJBrBl8"
@@ -864,6 +996,7 @@ uri = "file://attached_assets/generated_audio/vo-anthem3-jpen.mp3"
 type = "audio"
 title = "anthem jp v3 english"
 description = "Text-to-speech audio: 118 mountain regions. 7 official sources. Real-time conditions, refreshed every 15 minutes. feelzlike covers every major resort across Japan, Australia, New Zealand, Canada, and…"
+logical_id = "478aa113-4c37-4dc7-b476-77fc2775ce5e"
 
 [[outputs]]
 id = "ithpXdXMEiJkfQo-reZUb"
@@ -871,6 +1004,7 @@ uri = "file://attached_assets/generated_audio/vo-anthem3-jp.mp3"
 type = "audio"
 title = "anthem jp v3 japanese"
 description = "Text-to-speech audio: 118の山岳エリア。7つの公式情報源。リアルタイムのコンディションを15分ごとに更新。feelzlikeは、日本、オーストラリア、ニュージーランド、カナダ、アメリカの主要スキー場をすべてカバー。対応エリアはさらに拡大中。実際の気温、報告された積雪、道路状況をチェックして、旅の計画まで。すべてがひとつのウェブアプリに。大雪が近づいた瞬間、無料のスノーアラ…"
+logical_id = "b1a54818-9e87-45b6-b05c-a1da1f613f51"
 
 [[outputs]]
 id = "TtHl0DZIwBb-5fpMIaTMx"
@@ -878,6 +1012,7 @@ uri = "file://exports/video-ads/feelzlike-anthem-jp-english.mp4"
 type = "video"
 title = "feelzlike anthem · japan · australian voice · 35s"
 description = "Madarao leads · flags + map in opener"
+logical_id = "0606bfc2-d113-4f6b-bf08-51c3367b7a61"
 
 [[outputs]]
 id = "_B8SPCO9O2KYDigrDEPMC"
@@ -885,6 +1020,7 @@ uri = "file://attached_assets/generated_audio/vo-anthem4-us.mp3"
 type = "audio"
 title = "us anthem vo v4"
 description = "Text-to-speech audio: One hundred and eighteen mountain regions. Seven official sources. Real-time conditions, refreshed every fifteen minutes. feelzlike covers every major resort across the USA, Can…"
+logical_id = "f5623ecd-c10f-46ad-9769-ebad7b10e4ac"
 
 [[outputs]]
 id = "bO-BAA1-G3z9bx6xEw6iF"
@@ -892,6 +1028,7 @@ uri = "file://attached_assets/generated_audio/vo-anthem4-jpen.mp3"
 type = "audio"
 title = "japan english anthem vo aussie voice"
 description = "Text-to-speech audio: One hundred and eighteen mountain regions. Seven official sources. Real-time conditions, refreshed every fifteen minutes. feelzlike covers every major resort across Japan, Austr…"
+logical_id = "31a31009-f1de-43c1-aa32-fd85798cce95"
 
 [[outputs]]
 id = "7iCJnkLIXy-gurs0BSYIW"
@@ -899,6 +1036,7 @@ uri = "file://exports/video-ads/feelzlike-anthem-au-landscape.mp4"
 type = "video"
 title = "landscape 16:9 sample · australia"
 description = "1920x1080 · phone on blurred brand background"
+logical_id = "3ed5a73e-fb93-4ec5-a1a4-3f5b86e821e3"
 
 [[outputs]]
 id = "eoCnjNUvDbsKYCk1wXgzx"
@@ -906,6 +1044,7 @@ uri = "file://exports/video-ads/feelzlike-anthem-au-square.mp4"
 type = "video"
 title = "square 1000x1000 sample · australia"
 description = "for facebook feed placements"
+logical_id = "3d490dd4-3dd6-4d64-b55f-7bf08aa9360b"
 
 [[outputs]]
 id = "tLEgPLw4-YbtkgqVxa26L"
@@ -913,6 +1052,7 @@ uri = "file://exports/video-ads/feelzlike-anthem-all-formats.zip"
 type = "unspecified"
 title = "all formats · one zip"
 description = "Every cut in every format in a single 102MB zip — use the four smaller packs if this one is slow"
+logical_id = "6bae2d1d-fb9d-4d32-ac36-b91c1d6edca3"
 
 [[outputs]]
 id = "ahKX_btBYHDI0oeFLL0CC"
@@ -920,6 +1060,7 @@ uri = "file://exports/video-ads/fb-pack-australia.zip"
 type = "unspecified"
 title = "fb pack · australia"
 description = "Australian cut · vertical, landscape, square + silent versions (25MB)"
+logical_id = "f438e580-870c-4981-a800-3d6b6e273cfd"
 
 [[outputs]]
 id = "J9J-b9q2ULPmu0zFGA7DF"
@@ -927,6 +1068,7 @@ uri = "file://exports/video-ads/fb-pack-usa.zip"
 type = "unspecified"
 title = "fb pack · usa"
 description = "US cut · vertical, landscape, square + silent versions (22MB)"
+logical_id = "fca8c695-e7cd-44ef-91ef-bea2d52a13e9"
 
 [[outputs]]
 id = "OjhdTCpBvTI9nicXy5xhi"
@@ -934,6 +1076,7 @@ uri = "file://exports/video-ads/fb-pack-japan.zip"
 type = "unspecified"
 title = "fb pack · japan"
 description = "Japanese cut · vertical, landscape, square + silent versions (32MB)"
+logical_id = "4619c5c8-cb11-4ddb-8bde-1383877fcb1e"
 
 [[outputs]]
 id = "86qoQfrcE6neXDjgxMzEd"
@@ -941,6 +1084,7 @@ uri = "file://exports/video-ads/fb-pack-japan-english.zip"
 type = "unspecified"
 title = "fb pack · japan (english)"
 description = "English-language Japan cut · all formats (24MB)"
+logical_id = "6fbd3ca3-8803-4aa7-8b35-00bb5cb3117b"
 
 [[outputs]]
 id = "LiPyuanZWwVfDQamsuYT4"
@@ -948,6 +1092,7 @@ uri = "file://exports/video-ads/fb-pack-silent-copy.zip"
 type = "unspecified"
 title = "silent copy-point pack · all markets"
 description = "12 new silent cuts (AU, USA, Japan, Japan-English × landscape, square, vertical) with the app to one side and copy points fading in (33MB)"
+logical_id = "88a0f39c-5cdf-4479-bf9b-36d16c7cb8ef"
 
 [[outputs]]
 id = "Gg22YR3gySRgKb38HVXS0"
@@ -955,3 +1100,4 @@ uri = "file://exports/japan-pending-evidence-235.csv"
 type = "table"
 title = "Japan pending-evidence records (235)"
 description = "The 210 unclear-status records and 25 verified operating records missing essential publication evidence, grouped by prefecture and sorted by area name."
+logical_id = "495b0dde-5aaa-439a-9ce9-ca6f24bc4a82"
