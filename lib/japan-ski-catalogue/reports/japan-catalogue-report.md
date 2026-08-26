@@ -8,9 +8,9 @@ Generated from catalogue snapshot: 2026-08-24T00:00:00.000Z
 - Launch policy: `verified_evidence_complete_only`
 - Public launch covers only verified-operating, evidence-complete records whose publication lifecycle is published; it does not claim coverage of every operating Japanese ski area.
 - Verified-only evidence-complete coverage is approved; unclear and essential-gap records remain excluded from public coverage.
-- Verified-only published coverage: 263 of 263
-- Review queue excluded pending evidence: 235
-- Unclear/not-verifiable exclusions: 210
+- Verified-only published coverage: 265 of 265
+- Review queue excluded pending evidence: 233
+- Unclear/not-verifiable exclusions: 208
 - Verified essential-gap exclusions: 25
 
 This approval covers the verified evidence-complete subset only. It does not claim that every
@@ -23,25 +23,25 @@ operating Japanese ski area is represented or publication-ready.
 - Temporarily closed: 26
 - Indoor: 11
 - Dry slope: 4
-- Review status — verified operating: 288
+- Review status — verified operating: 290
 - Review status — temporarily closed: 5
 - Review status — closed: 13
 - Review status — merged into successor: 6
-- Review status — unclear: 210
-- Current verified-operating records: 288
+- Review status — unclear: 208
+- Current verified-operating records: 290
 - Mapped to existing pages: 56
 - Existing-page mappings passing publication lifecycle gate: 49
-- New-page identities: 232
-- Evidence-complete verified-operating records: 263
-- Route-ready new-page candidates: 214
-- Manifest-approved published catalogue records: 214
+- New-page identities: 234
+- Evidence-complete verified-operating records: 265
+- Route-ready new-page candidates: 216
+- Manifest-approved published catalogue records: 216
 - Unapproved route-ready new-page candidates: 0
 - Verified records with unresolved essential gaps: 25
-- Unresolved status records: 210
+- Unresolved status records: 208
 - Reviewed closures (including temporary): 18
 - Existing published pages: 82
-- Full catalogue JSON bytes: 2695584
-- Public runtime JSON bytes: 212193
+- Full catalogue JSON bytes: 2700366
+- Public runtime JSON bytes: 214184
 - Intake rows with conservative directory evidence: 478
 - Evidence snapshot directory rows: 527
 - Detail-derived official links: 330
@@ -76,7 +76,7 @@ Existing-page reuse and manifest-backed generic runtime publication are both exp
 | --- | ---: | ---: | ---: | ---: | ---: |
 | Aichi | 1 | 0 | 0 | 0 | 0 |
 | Akita | 19 | 0 | 2 | 6 | 2 |
-| Aomori | 13 | 2 | 0 | 5 | 0 |
+| Aomori | 13 | 2 | 0 | 4 | 0 |
 | Chiba | 0 | 0 | 0 | 0 | 0 |
 | Ehime | 3 | 0 | 0 | 0 | 0 |
 | Fukui | 5 | 0 | 0 | 5 | 0 |
@@ -95,7 +95,7 @@ Existing-page reuse and manifest-backed generic runtime publication are both exp
 | Kyoto | 1 | 0 | 1 | 0 | 1 |
 | Miyagi | 10 | 0 | 1 | 0 | 1 |
 | Miyazaki | 1 | 0 | 1 | 0 | 1 |
-| Nagano | 93 | 38 | 1 | 42 | 1 |
+| Nagano | 93 | 38 | 1 | 41 | 1 |
 | Niigata | 54 | 12 | 0 | 36 | 0 |
 | Oita | 1 | 0 | 0 | 1 | 0 |
 | Okayama | 6 | 0 | 0 | 5 | 0 |

@@ -2361,6 +2361,22 @@
       "aliases": [],
       "basis": "New stable identity derived from the verified official English name; no defensible exact match to a published page was established from names, official site, and geography.",
       "confidence": "high"
+    },
+    {
+      "recordId": "workbook:302",
+      "publicId": "shichinohe-town-ski-area",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English and Japanese names; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:369",
+      "publicId": "kirigamine-ski-resort",
+      "routeMode": "new_page",
+      "aliases": [],
+      "basis": "New stable identity derived from the verified official English and Japanese names; no defensible exact match to a published page was established from names, official site, and geography.",
+      "confidence": "high"
     }
   ]
 }

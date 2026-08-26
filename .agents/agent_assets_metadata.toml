@@ -1095,9 +1095,15 @@ description = "12 new silent cuts (AU, USA, Japan, Japan-English × landscape, s
 logical_id = "88a0f39c-5cdf-4479-bf9b-36d16c7cb8ef"
 
 [[outputs]]
-id = "Gg22YR3gySRgKb38HVXS0"
-uri = "file://exports/japan-pending-evidence-235.csv"
+id = "CAMAczU05FKKR3Q1EZqHa"
+uri = "file://exports/japan-pending-evidence-233.csv"
 type = "table"
-title = "Japan pending-evidence records (235)"
-description = "The 210 unclear-status records and 25 verified operating records missing essential publication evidence, grouped by prefecture and sorted by area name."
-logical_id = "495b0dde-5aaa-439a-9ce9-ca6f24bc4a82"
+title = "Japan pending evidence queue · 233 records"
+description = "Current verified-only exclusion queue: 208 ski areas remain unclear pending authoritative evidence, plus 25 verified-operating records missing essential catalogue fields."
+logical_id = "f7a016de-4779-4320-9426-932a834e1490"
+content_hash = "sha256:909ff34ad7c8f058037467c2678b54a4fd1ad986ab565e1d9d987dd5a62334ca"
+size = 149801
+mtime_ms = 1787707696154
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:f00f4d5d-4365-44ba-9092-bb91cd53e665/f7a016de-4779-4320-9426-932a834e1490/64061848-5870-417a-b5d8-e05f9dc8db1d"
+storage_version_token = "1787707706030303"
+content_type = "text/csv"

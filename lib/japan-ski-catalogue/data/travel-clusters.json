@@ -4,8 +4,8 @@
   "counts": {
     "regions": 36,
     "newRegions": 17,
-    "baseTowns": 179,
-    "records": 288
+    "baseTowns": 181,
+    "records": 290
   },
   "regions": [
     {
@@ -397,6 +397,11 @@
           "baseTownId": "nagano-regional-shinano",
           "name": "Shinano",
           "nameJa": "信濃町"
+        },
+        {
+          "baseTownId": "nagano-regional-suwa",
+          "name": "Suwa",
+          "nameJa": "諏訪市"
         }
       ],
       "recordIds": [
@@ -422,7 +427,8 @@
         "workbook:142",
         "workbook:144",
         "workbook:450",
-        "workbook:398"
+        "workbook:398",
+        "workbook:369"
       ]
     },
     {
@@ -519,6 +525,11 @@
           "baseTownId": "aomori-regional-hachinohe",
           "name": "Hachinohe",
           "nameJa": "Hachinohe"
+        },
+        {
+          "baseTownId": "aomori-regional-shichinohe",
+          "name": "Shichinohe",
+          "nameJa": "七戸町"
         }
       ],
       "recordIds": [
@@ -529,7 +540,8 @@
         "workbook:216",
         "workbook:329",
         "workbook:267",
-        "workbook:454"
+        "workbook:454",
+        "workbook:302"
       ]
     },
     {
@@ -3647,6 +3659,20 @@
       "recordId": "workbook:542",
       "travelRegionId": "hokuriku",
       "baseTownId": "hokuriku-komatsu",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:302",
+      "travelRegionId": "aomori-regional",
+      "baseTownId": "aomori-regional-shichinohe",
+      "basis": "audited_review_travel_cluster",
+      "confidence": "high"
+    },
+    {
+      "recordId": "workbook:369",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-suwa",
       "basis": "audited_review_travel_cluster",
       "confidence": "high"
     }
