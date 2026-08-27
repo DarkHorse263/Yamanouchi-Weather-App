@@ -18,20 +18,36 @@ import { setSubscriptionResolver } from "./middlewares/require-entitlement.js";
 import { resolvePromoSubscription } from "./lib/promo.js";
 import { publishedCatalogueRecords, travelRegions } from "@workspace/japan-ski-catalogue/public-runtime";
 import { publishedRecords as publishedSkiCatalogueRecords, publishedRegions as publishedSkiCatalogueRegions } from "@workspace/ski-catalogue/public-runtime";
+import {
+  publishedCatalogueRecords as publishedCanadaCatalogueRecords,
+  travelRegions as canadaTravelRegions,
+} from "@workspace/canada-ski-catalogue/public-runtime";
 
 const CATALOGUE_MOUNTAIN_IDS_BY_REGION = new Map<string, Set<string>>();
 const CATALOGUE_BASE_TOWN_IDS_BY_REGION = new Map<string, Set<string>>();
-for (const record of publishedCatalogueRecords) {
+
+function canadaLocalityId(regionId: string, locality: string): string {
+  return `${regionId}-${locality.normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`;
+}
+for (const record of [...publishedCatalogueRecords, ...publishedCanadaCatalogueRecords]) {
   const ids = CATALOGUE_MOUNTAIN_IDS_BY_REGION.get(record.travelRegionId) ?? new Set<string>();
   ids.add(record.publicId);
   for (const alias of record.aliases) ids.add(alias);
   CATALOGUE_MOUNTAIN_IDS_BY_REGION.set(record.travelRegionId, ids);
 
   const townIds = CATALOGUE_BASE_TOWN_IDS_BY_REGION.get(record.travelRegionId) ?? new Set<string>();
-  townIds.add(record.baseTownId);
+  townIds.add(
+    "baseTownId" in record
+      ? record.baseTownId
+      : canadaLocalityId(record.travelRegionId, record.locality),
+  );
   CATALOGUE_BASE_TOWN_IDS_BY_REGION.set(record.travelRegionId, townIds);
 }
-const CATALOGUE_TRAVEL_REGION_IDS = new Set(travelRegions.map((region) => region.travelRegionId));
+const CATALOGUE_TRAVEL_REGION_IDS = new Set([
+  ...travelRegions.map((region) => region.travelRegionId),
+  ...canadaTravelRegions.map((region) => region.travelRegionId),
+]);
 for (const record of publishedSkiCatalogueRecords) {
   const ids = CATALOGUE_MOUNTAIN_IDS_BY_REGION.get(record.regionId) ?? new Set<string>();
   ids.add(record.publicId);

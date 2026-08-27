@@ -1,0 +1,469 @@
+{
+  "schemaVersion": 1,
+  "taskId": 138,
+  "researchAsOf": "2026-08-27",
+  "scope": {
+    "provinces": [
+      "British Columbia",
+      "Alberta",
+      "Manitoba",
+      "Saskatchewan"
+    ],
+    "sourceDocument": "attached_assets/Canada_&_USA_—_Missing_Ski_Resorts_by_Region_1787802462500.pdf",
+    "policy": "Public outdoor lift-served downhill skiing only. Operational-risk records are excluded unless current first-party evidence resolves the risk."
+  },
+  "records": [
+    {
+      "sourceName": "Red Mountain Resort — Rossland",
+      "province": "BC",
+      "officialName": "RED Mountain Resort",
+      "classification": "verified_operating",
+      "include": true,
+      "officialUrl": "https://www.redresort.com/",
+      "coordinates": {
+        "latitude": 49.1052,
+        "longitude": -117.8464
+      },
+      "elevationMetres": {
+        "base": 1185,
+        "top": 2075
+      },
+      "nearestLocality": "Rossland",
+      "evidence": {
+        "identity": "https://www.redresort.com/",
+        "operation": "https://www.redresort.com/season-passes/",
+        "officialUrl": "https://www.redresort.com/contact/",
+        "coordinates": "https://www.openstreetmap.org/?mlat=49.1052&mlon=-117.8464#map=15/49.1052/-117.8464",
+        "elevations": "https://www.redresort.com/the-mountain/",
+        "nearestLocality": "https://www.redresort.com/getting-here/"
+      },
+      "notes": "The 2026/27 season-pass sale is current first-party evidence of continuing public downhill operation. No duplicate was found in an authored feelzlike region; the Powder Highway region currently contains Revelstoke, Kicking Horse, Fernie, Whitewater, Kimberley and Panorama."
+    },
+    {
+      "sourceName": "Manning Park Resort — near Hope",
+      "province": "BC",
+      "officialName": "Manning Park Resort",
+      "classification": "verified_operating",
+      "include": true,
+      "officialUrl": "https://manningpark.com/",
+      "coordinates": {
+        "latitude": 49.068,
+        "longitude": -120.914
+      },
+      "elevationMetres": {
+        "base": 1350,
+        "top": 1789
+      },
+      "nearestLocality": "Manning Park",
+      "evidence": {
+        "identity": "https://manningpark.com/",
+        "operation": "https://manningpark.com/winter-activities/",
+        "officialUrl": "https://manningpark.com/contact-us/",
+        "coordinates": "https://www.openstreetmap.org/?mlat=49.0680&mlon=-120.9140#map=15/49.0680/-120.9140",
+        "elevations": "https://www.skiresort.info/ski-resort/manning-park/",
+        "nearestLocality": "https://manningpark.com/getting-here/"
+      },
+      "notes": "The operator advertises 2026/27 season passes. The source's 'near Hope' is a travel description; the ski area is in Manning Park and that is the more accurate locality label."
+    },
+    {
+      "sourceName": "Shames Mountain — Terrace",
+      "province": "BC",
+      "officialName": "Shames Mountain",
+      "classification": "verified_operating",
+      "include": true,
+      "officialUrl": "https://mymountaincoop.ca/",
+      "coordinates": {
+        "latitude": 54.4873,
+        "longitude": -128.9534
+      },
+      "elevationMetres": {
+        "base": 700,
+        "top": 1189
+      },
+      "nearestLocality": "Terrace",
+      "evidence": {
+        "identity": "https://mymountaincoop.ca/about-us/",
+        "operation": "https://mymountaincoop.ca/tickets-passes/",
+        "officialUrl": "https://mymountaincoop.ca/",
+        "coordinates": "https://www.openstreetmap.org/?mlat=54.4873&mlon=-128.9534#map=15/54.4873/-128.9534",
+        "elevations": "https://www.skiresort.info/ski-resort/shames-mountain/",
+        "nearestLocality": "https://mymountaincoop.ca/directions/"
+      },
+      "notes": "My Mountain Co-op is the operator identity; Shames Mountain remains the public-facing ski-area name."
+    },
+    {
+      "sourceName": "Powder King Mountain Resort — Mackenzie",
+      "province": "BC",
+      "officialName": "Powder King Mountain Resort",
+      "classification": "verified_operating",
+      "include": true,
+      "officialUrl": "https://www.powderking.com/",
+      "coordinates": {
+        "latitude": 55.3687,
+        "longitude": -122.6112
+      },
+      "elevationMetres": {
+        "base": 1267,
+        "top": 1838
+      },
+      "nearestLocality": "Mackenzie",
+      "evidence": {
+        "identity": "https://www.powderking.com/contact/about-us",
+        "operation": "https://www.powderking.com/activities/winter",
+        "officialUrl": "https://www.powderking.com/contact/contact",
+        "coordinates": "https://www.openstreetmap.org/?mlat=55.3687&mlon=-122.6112#map=15/55.3687/-122.6112",
+        "elevations": "https://www.powderking.com/contact/amazing-powder",
+        "nearestLocality": "https://www.powderking.com/contact/contact"
+      },
+      "notes": "Operational-risk flag resolved: the official winter page says the 2025/26 season concluded and explicitly anticipates 'next season.' A sale or ownership dispute is not itself a closure."
+    },
+    {
+      "sourceName": "Hemlock (Sasquatch Mountain Resort) — Agassiz",
+      "province": "BC",
+      "officialName": "Sasquatch Mountain Resort",
+      "classification": "verified_operating",
+      "include": true,
+      "officialUrl": "https://sasquatchmountain.ca/",
+      "coordinates": {
+        "latitude": 49.3792,
+        "longitude": -121.9373
+      },
+      "elevationMetres": {
+        "base": 980,
+        "top": 1370
+      },
+      "nearestLocality": "Hemlock Valley",
+      "evidence": {
+        "identity": "https://sasquatchmountain.ca/",
+        "operation": "https://sasquatchmountain.ca/season-passes/",
+        "officialUrl": "https://sasquatchmountain.ca/contact-sasquatch-mountain-resort/",
+        "coordinates": "https://www.openstreetmap.org/?mlat=49.3792&mlon=-121.9373#map=15/49.3792/-121.9373",
+        "elevations": "https://www.skiresort.info/ski-resort/sasquatch-mountain-hemlock-valley/",
+        "nearestLocality": "https://sasquatchmountain.ca/getting-here/"
+      },
+      "notes": "Duplicate/rename check resolved in favour of the current name: Hemlock Valley Resort is the former name, not a second hill. The reduced 2025/26 schedule does not fail the public-operation test because the operator is selling 2026/27 season passes."
+    },
+    {
+      "sourceName": "Castle Mountain Resort — Pincher Creek/Westcastle Valley",
+      "province": "AB",
+      "officialName": "Castle Mountain Resort",
+      "classification": "verified_operating",
+      "include": true,
+      "officialUrl": "https://www.skicastle.ca/",
+      "coordinates": {
+        "latitude": 49.3188,
+        "longitude": -114.4126
+      },
+      "elevationMetres": {
+        "base": 1410,
+        "top": 2273
+      },
+      "nearestLocality": "Westcastle Valley",
+      "evidence": {
+        "identity": "https://www.skicastle.ca/our-story/",
+        "operation": "https://www.skicastle.ca/season-passes/",
+        "officialUrl": "https://www.skicastle.ca/contact-form/",
+        "coordinates": "https://www.openstreetmap.org/?mlat=49.3188&mlon=-114.4126#map=15/49.3188/-114.4126",
+        "elevations": "https://www.skicastle.ca/mountain-stats/",
+        "nearestLocality": "https://www.skicastle.ca/byroad/"
+      },
+      "notes": "No match in the authored Banff/Lake Louise, Canmore or Jasper regions."
+    },
+    {
+      "sourceName": "Asessippi Ski Area & Resort — near Inglis/Russell",
+      "province": "MB",
+      "officialName": "Asessippi Ski Area & Resort",
+      "classification": "verified_operating",
+      "include": true,
+      "officialUrl": "https://asessippi.com/",
+      "coordinates": {
+        "latitude": 50.9511,
+        "longitude": -101.3373
+      },
+      "elevationMetres": {
+        "base": 457,
+        "top": 579
+      },
+      "nearestLocality": "Inglis",
+      "evidence": {
+        "identity": "https://asessippi.com/",
+        "operation": "https://asessippi.com/winter/",
+        "officialUrl": "https://asessippi.com/contact/",
+        "coordinates": "https://www.openstreetmap.org/?mlat=50.9511&mlon=-101.3373#map=15/50.9511/-101.3373",
+        "elevations": "https://www.skiresort.info/ski-resort/asessippi/",
+        "nearestLocality": "https://asessippi.com/contact/"
+      },
+      "notes": "Public winter tickets, rentals and lessons are offered by the operator."
+    },
+    {
+      "sourceName": "Mystery Mountain Winter Park — Thompson",
+      "province": "MB",
+      "officialName": "Mystery Mountain Winter Park",
+      "classification": "verified_operating",
+      "include": true,
+      "officialUrl": "https://www.mysterymountain.ca/",
+      "coordinates": {
+        "latitude": 55.8103,
+        "longitude": -97.8068
+      },
+      "elevationMetres": {
+        "base": 205,
+        "top": 281
+      },
+      "nearestLocality": "Thompson",
+      "evidence": {
+        "identity": "https://www.mysterymountain.ca/",
+        "operation": "https://www.mysterymountain.ca/passes-and-rentals",
+        "officialUrl": "https://www.mysterymountain.ca/",
+        "coordinates": "https://www.openstreetmap.org/?mlat=55.8103&mlon=-97.8068#map=15/55.8103/-97.8068",
+        "elevations": "https://www.skiresort.info/ski-resort/mystery-mountain/",
+        "nearestLocality": "https://www.mysterymountain.ca/contact"
+      },
+      "notes": "The operator's current site advertises lift tickets, rentals and downhill events."
+    },
+    {
+      "sourceName": "Holiday Mountain Resort — La Rivière",
+      "province": "MB",
+      "officialName": "Holiday Mountain Resort",
+      "classification": "verified_operating",
+      "include": true,
+      "officialUrl": "https://www.holidaymountain.ca/",
+      "coordinates": {
+        "latitude": 49.2083,
+        "longitude": -98.5112
+      },
+      "elevationMetres": {
+        "base": 274,
+        "top": 381
+      },
+      "nearestLocality": "La Rivière",
+      "evidence": {
+        "identity": "https://www.holidaymountain.ca/",
+        "operation": "https://www.holidaymountain.ca/ski-snowboard",
+        "officialUrl": "https://www.holidaymountain.ca/contact",
+        "coordinates": "https://www.openstreetmap.org/?mlat=49.2083&mlon=-98.5112#map=15/49.2083/-98.5112",
+        "elevations": "https://www.skiresort.info/ski-resort/holiday-mountain-mb/",
+        "nearestLocality": "https://www.holidaymountain.ca/contact"
+      },
+      "notes": "The current operator presents public lift-served skiing and snowboarding at La Rivière."
+    },
+    {
+      "sourceName": "Stony Mountain Ski Area",
+      "province": "MB",
+      "officialName": "Stony Mountain Ski Area",
+      "classification": "uncertain",
+      "include": false,
+      "officialUrl": "https://skistony.com/",
+      "coordinates": {
+        "latitude": 50.0846,
+        "longitude": -97.2142
+      },
+      "elevationMetres": {
+        "base": 245,
+        "top": 274
+      },
+      "nearestLocality": "Stony Mountain",
+      "evidence": {
+        "identity": "https://skistony.com/",
+        "operation": "https://skistony.com/",
+        "officialUrl": "https://skistony.com/",
+        "coordinates": "https://www.openstreetmap.org/?mlat=50.0846&mlon=-97.2142#map=16/50.0846/-97.2142",
+        "elevations": "https://www.skiresort.info/ski-resort/stony-mountain/",
+        "nearestLocality": "https://www.openstreetmap.org/?mlat=50.0846&mlon=-97.2142#map=13/50.0846/-97.2142"
+      },
+      "notes": "Explicit exclusion. The source reports closure since the 2024/25 season, and the nominal official site supplies no dated 2026/27 reopening, tickets or operating calendar. Fail-closed pending a current operator announcement."
+    },
+    {
+      "sourceName": "Mount Agassiz Ski Resort",
+      "province": "MB",
+      "officialName": "Mount Agassiz Ski Resort",
+      "classification": "closed",
+      "include": false,
+      "officialUrl": null,
+      "coordinates": {
+        "latitude": 50.5719,
+        "longitude": -99.9328
+      },
+      "elevationMetres": {
+        "base": 530,
+        "top": 755
+      },
+      "nearestLocality": "McCreary",
+      "evidence": {
+        "identity": "https://www.skiresort.info/ski-resort/mount-agassiz/",
+        "operation": "https://parks.canada.ca/pn-np/mb/riding",
+        "officialUrl": "https://parks.canada.ca/pn-np/mb/riding",
+        "coordinates": "https://www.openstreetmap.org/?mlat=50.5719&mlon=-99.9328#map=14/50.5719/-99.9328",
+        "elevations": "https://www.skiresort.info/ski-resort/mount-agassiz/",
+        "nearestLocality": "https://parks.canada.ca/pn-np/mb/riding/visit/directions"
+      },
+      "notes": "Explicit exclusion. Parks Canada treats Mount Agassiz as historic infrastructure; there is no current ski operator or official resort URL."
+    },
+    {
+      "sourceName": "Table Mountain — near Battleford",
+      "province": "SK",
+      "officialName": "Table Mountain Regional Park",
+      "classification": "verified_operating",
+      "include": true,
+      "officialUrl": "https://www.facebook.com/TableMountainRegionalPark/",
+      "coordinates": {
+        "latitude": 52.7678,
+        "longitude": -108.6026
+      },
+      "elevationMetres": {
+        "base": 557,
+        "top": 672
+      },
+      "nearestLocality": "North Battleford",
+      "evidence": {
+        "identity": "https://www.tourismsaskatchewan.com/listings/167/table-mountain-regional-park",
+        "operation": "https://www.facebook.com/TableMountainRegionalPark/",
+        "officialUrl": "https://www.facebook.com/TableMountainRegionalPark/",
+        "coordinates": "https://www.openstreetmap.org/?mlat=52.7678&mlon=-108.6026#map=15/52.7678/-108.6026",
+        "elevations": "https://www.skiresort.info/ski-resort/table-mountain/",
+        "nearestLocality": "https://www.tourismsaskatchewan.com/listings/167/table-mountain-regional-park"
+      },
+      "notes": "Use the Regional Park identity and its official social page. The canadaDirectory value https://www.tablemountain.ca is not accepted: it now identifies an unrelated New Brunswick hill and is a link-rot/domain-collision risk."
+    },
+    {
+      "sourceName": "Duck Mountain Ski Area — Kamsack",
+      "province": "SK",
+      "officialName": "Duck Mountain Ski Area",
+      "classification": "verified_operating",
+      "include": true,
+      "officialUrl": "https://skitheduck.com/",
+      "coordinates": {
+        "latitude": 51.5614,
+        "longitude": -101.6077
+      },
+      "elevationMetres": {
+        "base": 577,
+        "top": 716
+      },
+      "nearestLocality": "Kamsack",
+      "evidence": {
+        "identity": "https://skitheduck.com/",
+        "operation": "https://skitheduck.com/lift-tickets/",
+        "officialUrl": "https://skitheduck.com/contact-us/",
+        "coordinates": "https://www.openstreetmap.org/?mlat=51.5614&mlon=-101.6077#map=15/51.5614/-101.6077",
+        "elevations": "https://www.skiresort.info/ski-resort/duck-mountain-kamsack/",
+        "nearestLocality": "https://skitheduck.com/contact-us/"
+      },
+      "notes": "The operator's current public ticket and ski-school pages establish public downhill use."
+    },
+    {
+      "sourceName": "Wapiti Valley Ski Resort",
+      "province": "SK",
+      "officialName": "Wapiti Valley Regional Park",
+      "classification": "verified_operating",
+      "include": true,
+      "officialUrl": "https://www.skiwapiti.com/",
+      "coordinates": {
+        "latitude": 53.1868,
+        "longitude": -104.7792
+      },
+      "elevationMetres": {
+        "base": 432,
+        "top": 511
+      },
+      "nearestLocality": "Melfort",
+      "evidence": {
+        "identity": "https://www.skiwapiti.com/home",
+        "operation": "https://www.skiwapiti.com/lift-tickets",
+        "officialUrl": "https://www.skiwapiti.com/contact",
+        "coordinates": "https://www.openstreetmap.org/?mlat=53.1868&mlon=-104.7792#map=15/53.1868/-104.7792",
+        "elevations": "https://www.skiresort.info/ski-resort/wapiti-valley/",
+        "nearestLocality": "https://www.skiwapiti.com/contact"
+      },
+      "notes": "The regional park is northeast of Melfort; Melfort is the nearest useful consumer locality."
+    },
+    {
+      "sourceName": "Blackstrap Ski Hill",
+      "province": "SK",
+      "officialName": "Mount Blackstrap Ski Area",
+      "classification": "closed",
+      "include": false,
+      "officialUrl": null,
+      "coordinates": {
+        "latitude": 51.765,
+        "longitude": -106.4379
+      },
+      "elevationMetres": {
+        "base": 522,
+        "top": 593
+      },
+      "nearestLocality": "Dundurn",
+      "evidence": {
+        "identity": "https://parks.saskatchewan.ca/blackstrap",
+        "operation": "https://parks.saskatchewan.ca/blackstrap",
+        "officialUrl": "https://parks.saskatchewan.ca/blackstrap",
+        "coordinates": "https://www.openstreetmap.org/?mlat=51.7650&mlon=-106.4379#map=15/51.7650/-106.4379",
+        "elevations": "https://www.skiresort.info/ski-resort/blackstrap/",
+        "nearestLocality": "https://parks.saskatchewan.ca/blackstrap"
+      },
+      "notes": "Explicit exclusion. Blackstrap Provincial Park remains open, but its current official activity listing has no alpine/downhill operation; the former ski hill is closed. Cross-country use does not qualify."
+    }
+  ],
+  "duplicateInspection": {
+    "authoredFeelzlikeRegionsChecked": [
+      "whistler",
+      "powder-highway",
+      "okanagan",
+      "vancouver",
+      "banff-lake-louise",
+      "canmore",
+      "jasper"
+    ],
+    "candidateMatches": [],
+    "renameResolutions": [
+      {
+        "sourceName": "Hemlock",
+        "currentName": "Sasquatch Mountain Resort"
+      }
+    ],
+    "directoryCaveat": "All operating records also appear in canadaDirectory.ts, but that directory is not an authored live weather region and therefore is not classified as existing_live."
+  },
+  "summary": {
+    "totalRecords": 15,
+    "included": 12,
+    "excluded": 3,
+    "byClassification": {
+      "existing_live": 0,
+      "duplicate_or_renamed": 0,
+      "verified_operating": 12,
+      "private_restricted": 0,
+      "uncertain": 1,
+      "closed": 2
+    },
+    "byProvince": {
+      "BC": {
+        "total": 5,
+        "included": 5,
+        "excluded": 0
+      },
+      "AB": {
+        "total": 1,
+        "included": 1,
+        "excluded": 0
+      },
+      "MB": {
+        "total": 5,
+        "included": 3,
+        "excluded": 2
+      },
+      "SK": {
+        "total": 4,
+        "included": 3,
+        "excluded": 1
+      }
+    },
+    "caveats": [
+      "Powder King and Sasquatch were source-document operational risks; current first-party next-season sales or statements resolve both as operating.",
+      "Stony Mountain remains fail-closed because no dated first-party 2026/27 reopening evidence was found.",
+      "Mount Agassiz and Blackstrap are explicit closed exclusions.",
+      "Elevations for small prairie hills are published inconsistently; stored values are whole-metre base/top approximations supported by the cited resort inventory and should not be presented as survey-grade.",
+      "OpenStreetMap permalinks are retained as coordinate evidence; official contact/directions pages independently anchor the locality.",
+      "Table Mountain's old directory domain now represents a New Brunswick operation; the Saskatchewan park's official social URL is used instead."
+    ]
+  }
+}

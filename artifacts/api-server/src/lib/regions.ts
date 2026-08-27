@@ -5,6 +5,10 @@
  */
 import { publishedCatalogueRecords, travelRegions } from "@workspace/japan-ski-catalogue/public-runtime";
 import { publishedRecords as publishedSkiCatalogueRecords, publishedRegions as publishedSkiCatalogueRegions } from "@workspace/ski-catalogue/public-runtime";
+import {
+  publishedCatalogueRecords as publishedCanadaCatalogueRecords,
+  travelRegions as canadaTravelRegions,
+} from "@workspace/canada-ski-catalogue/public-runtime";
 
 // Active region set · keep in sync with `lib/api-spec/openapi.yaml` RegionId
 // enum, `routes/regions.ts` REGIONS list, `routes/weather.ts` LOCATIONS,
@@ -139,16 +143,24 @@ export type CatalogueTravelRegionId = string;
  * every published catalogue region without accepting arbitrary path values.
  */
 export const CATALOGUE_TRAVEL_REGION_IDS: ReadonlySet<string> = new Set(
-  [...travelRegions.map((region) => region.travelRegionId), ...publishedSkiCatalogueRegions.map((region) => region.regionId)],
+  [
+    ...travelRegions.map((region) => region.travelRegionId),
+    ...canadaTravelRegions.map((region) => region.travelRegionId),
+    ...publishedSkiCatalogueRegions.map((region) => region.regionId),
+  ],
 );
 export const CATALOGUE_TRAVEL_REGIONS_BY_ID = new Map(
-  travelRegions.map((region) => [region.travelRegionId, region] as const),
+  [...travelRegions, ...canadaTravelRegions].map((region) => [region.travelRegionId, region] as const),
 );
 export const CATALOGUE_LOCATION_TO_REGION: ReadonlyMap<string, string> = new Map(
   [
     ...publishedCatalogueRecords.flatMap((record) => [
-    [record.publicId, record.travelRegionId] as const,
-    ...record.aliases.map((alias) => [alias, record.travelRegionId] as const),
+      [record.publicId, record.travelRegionId] as const,
+      ...record.aliases.map((alias) => [alias, record.travelRegionId] as const),
+    ]),
+    ...publishedCanadaCatalogueRecords.flatMap((record) => [
+      [record.publicId, record.travelRegionId] as const,
+      ...record.aliases.map((alias) => [alias, record.travelRegionId] as const),
     ]),
     ...publishedSkiCatalogueRecords.flatMap((record) => [
       [record.publicId, record.regionId] as const,

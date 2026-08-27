@@ -1,0 +1,404 @@
+{
+  "task": 138,
+  "region": "Québec",
+  "asOf": "2026-08-27",
+  "scope": {
+    "province": "Québec",
+    "sourceDocument": "attached_assets/Canada_&_USA_—_Missing_Ski_Resorts_by_Region_1787802462500.pdf",
+    "inclusionRule": "All seven Québec missing-resort candidates plus every resort named by the PDF as already covered in the Québec exclusions.",
+    "publicOutdoorDownhillRequired": true
+  },
+  "entries": [
+    {
+      "id": "owls-head",
+      "sourceName": "Owl's Head",
+      "sourceCategory": "candidate",
+      "officialName": "Owl’s Head",
+      "province": "Québec",
+      "classification": "verified_operating",
+      "officialUrl": "https://owlshead.com/",
+      "coordinates": {
+        "latitude": 45.07336,
+        "longitude": -72.29787
+      },
+      "elevationMetres": {
+        "base": 239,
+        "top": 714
+      },
+      "nearestLocality": "Mansonville",
+      "publicOutdoorDownhillStatus": "Public seasonal lift-served ski area. The official site identifies Owl’s Head at its Mansonville address and continues to publish alpine-ski conditions, passes, packages, lessons, and rentals, including 2026-27 products.",
+      "evidence": {
+        "identity": ["https://owlshead.com/"],
+        "currentOperation": ["https://owlshead.com/conditions-de-ski/", "https://owlshead.com/forfaits-et-promotions-ski/"],
+        "officialUrl": ["https://owlshead.com/"],
+        "coordinates": ["https://owlshead.com/", "https://www.skiresort.info/ski-resort/owls-head/"],
+        "elevations": ["https://www.skiresort.info/ski-resort/owls-head/"],
+        "nearestLocality": ["https://owlshead.com/"],
+        "classification": ["https://owlshead.com/conditions-de-ski/", "https://owlshead.com/forfaits-et-promotions-ski/"]
+      }
+    },
+    {
+      "id": "mont-orford",
+      "sourceName": "Mont Orford",
+      "sourceCategory": "candidate",
+      "officialName": "Mont-Orford",
+      "province": "Québec",
+      "classification": "verified_operating",
+      "officialUrl": "https://montorford.com/",
+      "coordinates": {
+        "latitude": 45.31789,
+        "longitude": -72.222
+      },
+      "elevationMetres": {
+        "base": 317,
+        "top": 850
+      },
+      "nearestLocality": "Orford",
+      "publicOutdoorDownhillStatus": "Public seasonal downhill ski area operated by the Corporation Ski & Golf Mont-Orford. Its official site publishes alpine-ski passes, day rates, conditions, lift status, and trail status.",
+      "evidence": {
+        "identity": ["https://montorford.com/", "https://montorford.com/fr-ca/a-propos-de-la-corporation-ski-golf-mont-orford/"],
+        "currentOperation": ["https://montorford.com/fr-ca/hiver/conditions/", "https://montorford.com/fr-ca/hiver/tarifs-journaliers/"],
+        "officialUrl": ["https://montorford.com/"],
+        "coordinates": ["https://www.skiresort.info/ski-resort/mont-orford/"],
+        "elevations": ["https://www.skiresort.info/ski-resort/mont-orford/"],
+        "nearestLocality": ["https://montorford.com/fr-ca/nous-joindre/"],
+        "classification": ["https://montorford.com/fr-ca/hiver/conditions/", "https://montorford.com/fr-ca/hiver/tarifs-journaliers/"]
+      }
+    },
+    {
+      "id": "mont-grand-fonds",
+      "sourceName": "Mont Grand-Fonds",
+      "sourceCategory": "candidate",
+      "officialName": "Mont Grand-Fonds",
+      "alternateNames": ["Le Mont Grand-Fonds"],
+      "province": "Québec",
+      "classification": "verified_operating",
+      "officialUrl": "https://montgrandfonds.com/",
+      "coordinates": {
+        "latitude": 47.77104,
+        "longitude": -70.10219
+      },
+      "elevationMetres": {
+        "base": 400,
+        "top": 735
+      },
+      "nearestLocality": "La Malbaie",
+      "publicOutdoorDownhillStatus": "Public seasonal alpine ski area. The official site publishes live alpine status, public lift tickets, and 2026-27 terms and season products; it states a 735-m summit and 335-m vertical.",
+      "evidence": {
+        "identity": ["https://montgrandfonds.com/", "https://montgrandfonds.com/fr/ski-alpin"],
+        "currentOperation": ["https://montgrandfonds.com/fr/live#skiAlpin", "https://montgrandfonds.com/fr/ski-alpin"],
+        "officialUrl": ["https://montgrandfonds.com/"],
+        "coordinates": ["https://montgrandfonds.com/", "https://www.skiresort.info/ski-resort/le-mont-grand-fonds/"],
+        "elevations": ["https://montgrandfonds.com/", "https://www.skiresort.info/ski-resort/le-mont-grand-fonds/"],
+        "nearestLocality": ["https://montgrandfonds.com/"],
+        "classification": ["https://montgrandfonds.com/fr/live#skiAlpin", "https://montgrandfonds.com/fr/ski-alpin"]
+      }
+    },
+    {
+      "id": "massif-du-sud",
+      "sourceName": "Massif du Sud",
+      "sourceCategory": "candidate",
+      "officialName": "Massif du Sud",
+      "province": "Québec",
+      "classification": "verified_operating",
+      "officialUrl": "https://massifdusud.net/",
+      "coordinates": {
+        "latitude": 46.62074,
+        "longitude": -70.49138
+      },
+      "elevationMetres": {
+        "base": 515,
+        "top": 915
+      },
+      "nearestLocality": "Saint-Philémon",
+      "publicOutdoorDownhillStatus": "Public seasonal lift-served ski area. The operator continues to sell public day tickets and season passes and describes its maintained downhill trail network on the official site.",
+      "evidence": {
+        "identity": ["https://massifdusud.net/", "https://massifdusud.net/en/page/about"],
+        "currentOperation": ["https://massifdusud.net/fr/billets-et-abonnements", "https://massifdusud.net/fr/page/abonnements-de-saison"],
+        "officialUrl": ["https://massifdusud.net/"],
+        "coordinates": ["https://massifdusud.net/en/contact", "https://www.skiresort.info/ski-resort/massif-du-sud/"],
+        "elevations": ["https://www.skiresort.info/ski-resort/massif-du-sud/"],
+        "nearestLocality": ["https://massifdusud.net/en/contact"],
+        "classification": ["https://massifdusud.net/fr/billets-et-abonnements", "https://massifdusud.net/fr/page/abonnements-de-saison"]
+      }
+    },
+    {
+      "id": "val-saint-come",
+      "sourceName": "Val Saint-Côme",
+      "sourceCategory": "candidate",
+      "officialName": "Val Saint-Côme",
+      "province": "Québec",
+      "classification": "verified_operating",
+      "officialUrl": "https://www.valsaintcome.com/",
+      "coordinates": {
+        "latitude": 46.2723,
+        "longitude": -73.871
+      },
+      "elevationMetres": {
+        "base": 300,
+        "top": 600
+      },
+      "nearestLocality": "Saint-Côme",
+      "publicOutdoorDownhillStatus": "Public seasonal ski area. The official site records the 2025-26 season and continues to provide alpine skiing, live conditions, public ticket sales, lessons, and equipment rental.",
+      "evidence": {
+        "identity": ["https://www.valsaintcome.com/"],
+        "currentOperation": ["https://www.valsaintcome.com/activites-en-montagne/", "https://www.valsaintcome.com/conditions-detaillees/", "https://www.valsaintcome.com/billets/"],
+        "officialUrl": ["https://www.valsaintcome.com/"],
+        "coordinates": ["https://www.valsaintcome.com/nous-joindre/", "https://www.skiresort.info/ski-resort/val-saint-come/"],
+        "elevations": ["https://www.skiresort.info/ski-resort/val-saint-come/"],
+        "nearestLocality": ["https://www.valsaintcome.com/nous-joindre/"],
+        "classification": ["https://www.valsaintcome.com/activites-en-montagne/", "https://www.valsaintcome.com/billets/"]
+      }
+    },
+    {
+      "id": "stoneham",
+      "sourceName": "Stoneham",
+      "sourceCategory": "candidate",
+      "officialName": "Station touristique Stoneham",
+      "alternateNames": ["Stoneham Mountain Resort", "Stoneham"],
+      "province": "Québec",
+      "classification": "verified_operating",
+      "officialUrl": "https://ski-stoneham.com/",
+      "coordinates": {
+        "latitude": 47.0272,
+        "longitude": -71.38484
+      },
+      "elevationMetres": {
+        "base": 248,
+        "top": 593
+      },
+      "nearestLocality": "Stoneham-et-Tewkesbury",
+      "publicOutdoorDownhillStatus": "Public seasonal lift-served ski area. The official site publishes day and evening downhill conditions, trail and lift status, winter services, and public products.",
+      "evidence": {
+        "identity": ["https://ski-stoneham.com/"],
+        "currentOperation": ["https://ski-stoneham.com/montagne/conditions/jour/", "https://ski-stoneham.com/montagne/conditions/soir/"],
+        "officialUrl": ["https://ski-stoneham.com/"],
+        "coordinates": ["https://ski-stoneham.com/joindre/", "https://www.skiresort.info/ski-resort/stoneham/"],
+        "elevations": ["https://www.skiresort.info/ski-resort/stoneham/"],
+        "nearestLocality": ["https://ski-stoneham.com/joindre/"],
+        "classification": ["https://ski-stoneham.com/montagne/conditions/jour/", "https://ski-stoneham.com/montagne/conditions/soir/"]
+      }
+    },
+    {
+      "id": "le-relais",
+      "sourceName": "Le Relais",
+      "sourceCategory": "candidate",
+      "officialName": "Le Relais",
+      "alternateNames": ["Centre de ski Le Relais"],
+      "province": "Québec",
+      "classification": "verified_operating",
+      "officialUrl": "https://www.skirelais.com/",
+      "coordinates": {
+        "latitude": 46.94061,
+        "longitude": -71.29983
+      },
+      "elevationMetres": {
+        "base": 205,
+        "top": 429
+      },
+      "nearestLocality": "Lac-Beauport",
+      "publicOutdoorDownhillStatus": "Public seasonal ski area. Its official mountain and winter pages identify downhill skiing and snowboarding and publish 33 day trails, 27 night trails, conditions, rates, lessons, and rentals.",
+      "evidence": {
+        "identity": ["https://www.skirelais.com/", "https://www.skirelais.com/montagne/"],
+        "currentOperation": ["https://www.skirelais.com/hiver/pistes-conditions-de-neige/", "https://www.skirelais.com/hiver/tarifs-horaires/"],
+        "officialUrl": ["https://www.skirelais.com/"],
+        "coordinates": ["https://www.skirelais.com/montagne/", "https://www.skiresort.info/ski-resort/le-relais-lac-beauport/"],
+        "elevations": ["https://www.skiresort.info/ski-resort/le-relais-lac-beauport/"],
+        "nearestLocality": ["https://www.skirelais.com/montagne/"],
+        "classification": ["https://www.skirelais.com/hiver/pistes-conditions-de-neige/", "https://www.skirelais.com/hiver/tarifs-horaires/"]
+      }
+    },
+    {
+      "id": "tremblant",
+      "sourceName": "Tremblant",
+      "sourceCategory": "existing-coverage exclusion",
+      "officialName": "Tremblant",
+      "alternateNames": ["Mont Tremblant Resort"],
+      "province": "Québec",
+      "classification": "existing_live",
+      "officialUrl": "https://www.tremblant.ca/",
+      "coordinates": {
+        "latitude": 46.21,
+        "longitude": -74.585
+      },
+      "elevationMetres": {
+        "base": 230,
+        "top": 875
+      },
+      "nearestLocality": "Mont-Tremblant",
+      "publicOutdoorDownhillStatus": "Already published in the live Laurentians region as Tremblant. The official resort remains a public outdoor downhill operation; this source-document exclusion must not create a duplicate catalogue entry.",
+      "evidence": {
+        "identity": ["https://www.tremblant.ca/"],
+        "currentOperation": ["https://www.tremblant.ca/mountain-village/mountain-report"],
+        "officialUrl": ["https://www.tremblant.ca/"],
+        "coordinates": ["https://www.tremblant.ca/", "https://www.skiresort.info/ski-resort/mont-tremblant/"],
+        "elevations": ["https://www.skiresort.info/ski-resort/mont-tremblant/"],
+        "nearestLocality": ["https://www.tremblant.ca/"],
+        "classification": ["artifacts/feelzlike/src/regions/quebec-laurentians.ts"]
+      },
+      "existingLiveRegion": "quebec-laurentians",
+      "catalogueAction": "Keep the existing live record; do not add a second Tremblant record."
+    },
+    {
+      "id": "mont-sutton",
+      "sourceName": "Mont Sutton",
+      "sourceCategory": "existing-coverage exclusion",
+      "officialName": "Mont SUTTON",
+      "alternateNames": ["Mont Sutton"],
+      "province": "Québec",
+      "classification": "existing_live",
+      "officialUrl": "https://montsutton.com/",
+      "coordinates": {
+        "latitude": 45.085,
+        "longitude": -72.55
+      },
+      "elevationMetres": {
+        "base": 400,
+        "top": 840
+      },
+      "nearestLocality": "Sutton",
+      "publicOutdoorDownhillStatus": "Already published in the live Eastern Townships region. The official site continues to advertise public downhill skiing; the 840-m value is the live catalogue's lift-served top rather than the higher natural summit.",
+      "evidence": {
+        "identity": ["https://montsutton.com/"],
+        "currentOperation": ["https://montsutton.com/en/snow-report/"],
+        "officialUrl": ["https://montsutton.com/"],
+        "coordinates": ["https://montsutton.com/", "https://www.skiresort.info/ski-resort/mont-sutton/"],
+        "elevations": ["https://montsutton.com/", "artifacts/feelzlike/src/regions/quebec-eastern-townships.ts"],
+        "nearestLocality": ["https://montsutton.com/"],
+        "classification": ["artifacts/feelzlike/src/regions/quebec-eastern-townships.ts"]
+      },
+      "existingLiveRegion": "quebec-eastern-townships",
+      "catalogueAction": "Keep the existing live record; do not add a second Mont Sutton record."
+    },
+    {
+      "id": "ski-bromont",
+      "sourceName": "Bromont",
+      "sourceCategory": "existing-coverage exclusion",
+      "officialName": "Bromont, montagne d’expériences",
+      "alternateNames": ["Ski Bromont", "Bromont"],
+      "province": "Québec",
+      "classification": "existing_live",
+      "officialUrl": "https://www.bromontmontagne.com/",
+      "coordinates": {
+        "latitude": 45.2892,
+        "longitude": -72.6378
+      },
+      "elevationMetres": {
+        "base": 185,
+        "top": 553
+      },
+      "nearestLocality": "Bromont",
+      "publicOutdoorDownhillStatus": "Already published as Ski Bromont in the live Eastern Townships region. Its canonical official domain continues to advertise public downhill and night skiing.",
+      "evidence": {
+        "identity": ["https://www.bromontmontagne.com/"],
+        "currentOperation": ["https://www.bromontmontagne.com/en/ski/"],
+        "officialUrl": ["https://www.bromontmontagne.com/"],
+        "coordinates": ["https://www.bromontmontagne.com/", "https://www.skiresort.info/ski-resort/bromont/"],
+        "elevations": ["https://www.skiresort.info/ski-resort/bromont/"],
+        "nearestLocality": ["https://www.bromontmontagne.com/"],
+        "classification": ["artifacts/feelzlike/src/regions/quebec-eastern-townships.ts"]
+      },
+      "existingLiveRegion": "quebec-eastern-townships",
+      "catalogueAction": "Keep the existing live Ski Bromont record; treat PDF shorthand 'Bromont' as the same area."
+    },
+    {
+      "id": "le-massif-de-charlevoix",
+      "sourceName": "Le Massif",
+      "sourceCategory": "existing-coverage exclusion",
+      "officialName": "Le Massif de Charlevoix",
+      "alternateNames": ["Le Massif"],
+      "province": "Québec",
+      "classification": "existing_live",
+      "officialUrl": "https://www.lemassif.com/",
+      "coordinates": {
+        "latitude": 47.2757,
+        "longitude": -70.6257
+      },
+      "elevationMetres": {
+        "base": 36,
+        "top": 806
+      },
+      "nearestLocality": "Petite-Rivière-Saint-François",
+      "publicOutdoorDownhillStatus": "Already published in the live Charlevoix region. The official site continues to publish public winter mountain products and conditions and describes a 770-m lift-served vertical.",
+      "evidence": {
+        "identity": ["https://www.lemassif.com/"],
+        "currentOperation": ["https://www.lemassif.com/fr/montagne/hiver/conditions"],
+        "officialUrl": ["https://www.lemassif.com/"],
+        "coordinates": ["https://www.lemassif.com/", "https://www.skiresort.info/ski-resort/le-massif-de-charlevoix/"],
+        "elevations": ["https://www.lemassif.com/", "https://www.skiresort.info/ski-resort/le-massif-de-charlevoix/"],
+        "nearestLocality": ["https://www.lemassif.com/"],
+        "classification": ["artifacts/feelzlike/src/regions/quebec-charlevoix.ts"]
+      },
+      "existingLiveRegion": "quebec-charlevoix",
+      "catalogueAction": "Keep the existing live record; do not add a second Le Massif record."
+    },
+    {
+      "id": "mont-sainte-anne",
+      "sourceName": "Mont-Sainte-Anne",
+      "sourceCategory": "existing-coverage exclusion",
+      "officialName": "Mont-Sainte-Anne",
+      "province": "Québec",
+      "classification": "existing_live",
+      "officialUrl": "https://mont-sainte-anne.com/",
+      "coordinates": {
+        "latitude": 47.0876,
+        "longitude": -70.9324
+      },
+      "elevationMetres": {
+        "base": 175,
+        "top": 800
+      },
+      "nearestLocality": "Beaupré",
+      "publicOutdoorDownhillStatus": "Already published in the live Charlevoix region. The official mountain domain continues to identify the public ski area and publish winter conditions and products.",
+      "evidence": {
+        "identity": ["https://mont-sainte-anne.com/"],
+        "currentOperation": ["https://mont-sainte-anne.com/hiver/conditions-de-ski/"],
+        "officialUrl": ["https://mont-sainte-anne.com/"],
+        "coordinates": ["https://mont-sainte-anne.com/", "https://www.skiresort.info/ski-resort/mont-sainte-anne/"],
+        "elevations": ["https://www.skiresort.info/ski-resort/mont-sainte-anne/"],
+        "nearestLocality": ["https://mont-sainte-anne.com/"],
+        "classification": ["artifacts/feelzlike/src/regions/quebec-charlevoix.ts"]
+      },
+      "existingLiveRegion": "quebec-charlevoix",
+      "catalogueAction": "Keep the existing live record; do not add a second Mont-Sainte-Anne record."
+    }
+  ],
+  "existingLiveUrlAudit": {
+    "inspectedRegions": [
+      "artifacts/feelzlike/src/regions/quebec-laurentians.ts",
+      "artifacts/feelzlike/src/regions/quebec-charlevoix.ts",
+      "artifacts/feelzlike/src/regions/quebec-eastern-townships.ts"
+    ],
+    "canonicalUrls": [
+      "https://www.tremblant.ca/",
+      "https://montsutton.com/",
+      "https://www.bromontmontagne.com/",
+      "https://www.lemassif.com/",
+      "https://mont-sainte-anne.com/"
+    ],
+    "candidateUrlCollisions": [],
+    "result": "No candidate official URL duplicates a live Québec mountain URL. The five PDF exclusion names map directly to five existing live mountain records."
+  },
+  "summary": {
+    "totalItems": 12,
+    "sourceCandidateCount": 7,
+    "sourceExclusionCount": 5,
+    "classificationCounts": {
+      "existing_live": 5,
+      "duplicate_or_renamed": 0,
+      "verified_operating": 7,
+      "private_restricted": 0,
+      "uncertain": 0,
+      "closed": 0
+    },
+    "newLiveAdmissionCount": 7,
+    "excludedOrMergeCount": 5,
+    "caveats": [
+      "The PDF contains no separately named closed, private, or uncertain Québec resort; its only Québec exclusions are the five already covered mountains named in the section heading.",
+      "Québec ski areas are normally seasonally closed in August. Verified operating means first-party evidence of a completed recent winter operation and/or active 2026-27 public downhill products, not that ski lifts run in summer.",
+      "Base and top values represent the lift-served ski-area endpoints, not necessarily the natural mountain summit. Most operators do not publish both endpoints, so the cited specialist ski-area pages supplement official identity, operating, address, and product evidence.",
+      "Mont Sutton's existing live record uses an 840-m lift-served top; some third-party directories report 860 m. The existing live value is retained pending an operator-published pair of base/top endpoints.",
+      "Display names preserve official French accents and apostrophes; all ids are stable lowercase ASCII kebab-case."
+    ]
+  }
+}

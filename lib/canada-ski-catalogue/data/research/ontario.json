@@ -1,0 +1,651 @@
+{
+  "task": 138,
+  "province": "Ontario",
+  "country": "Canada",
+  "asOf": "2026-08-27",
+  "scope": {
+    "pdfCandidateCount": 33,
+    "pdfExplicitlyExcludedCount": 5,
+    "liveRegionDuplicateCheck": "No Ontario resort occurs in the authored Canadian live regions in artifacts/feelzlike/src/regions/index.ts. Ontario entries in canadaDirectory.ts are directory records, not live-region coverage.",
+    "eligibility": "Currently operating, public, outdoor, lift-served downhill skiing as of August 2026."
+  },
+  "fieldNotes": {
+    "coordinates": "Decimal WGS84 coordinates identify the ski-area base/lodge, not the named municipality centroid.",
+    "elevations": "Base and top are skiable-area elevations in metres. Skiresort.info is retained as the secondary elevation source where an operator does not publish both endpoints.",
+    "nulls": "Null historical elevations mean no sufficiently reliable operator, municipal, or provincial source could be retained; they are not estimates.",
+    "pdfCorrections": "The PDF mislocated Adanac, Antoine, Mount Dufour, Uplands and Trestle Ridge; conflated Kamiskotia with Mount Jamieson; and labelled the former Toronto Centennial Park hill as Windsor."
+  },
+  "candidates": [
+    {
+      "pdfName": "Blue Mountain — Collingwood",
+      "officialName": "Blue Mountain Resort",
+      "classification": "verified_operating",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://www.bluemountain.ca/",
+      "coordinates": { "lat": 44.500756, "lon": -80.317907 },
+      "baseElevationM": 230,
+      "topElevationM": 450,
+      "nearestLocality": "The Blue Mountains (Collingwood area)",
+      "evidence": {
+        "identityStatusUrl": "https://www.bluemountain.ca/things-to-do/skiing-and-snowboarding",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=44.500756&mlon=-80.317907#map=16/44.500756/-80.317907",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/blue-mountain-resort-collingwood/"
+      }
+    },
+    {
+      "pdfName": "Mount St. Louis Moonstone — Coldwater",
+      "officialName": "Mount St. Louis Moonstone",
+      "classification": "verified_operating",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://www.mountstlouis.com/",
+      "coordinates": { "lat": 44.62365, "lon": -79.666698 },
+      "baseElevationM": 215,
+      "topElevationM": 368,
+      "nearestLocality": "Moonstone",
+      "evidence": {
+        "identityStatusUrl": "https://www.mountstlouis.com/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=44.623650&mlon=-79.666698#map=16/44.623650/-79.666698",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/mount-st-louis-moonstone/"
+      }
+    },
+    {
+      "pdfName": "Horseshoe Resort — Barrie",
+      "officialName": "Horseshoe Resort",
+      "classification": "verified_operating",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://horseshoeresort.com/",
+      "coordinates": { "lat": 44.548967, "lon": -79.67367 },
+      "baseElevationM": 309,
+      "topElevationM": 402,
+      "nearestLocality": "Horseshoe Valley",
+      "evidence": {
+        "identityStatusUrl": "https://horseshoeresort.com/ski/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=44.548967&mlon=-79.673670#map=16/44.548967/-79.673670",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/horseshoe-resort/"
+      }
+    },
+    {
+      "pdfName": "Calabogie Peaks — near Ottawa",
+      "officialName": "Calabogie Peaks Resort",
+      "classification": "verified_operating",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://www.calabogie.com/",
+      "coordinates": { "lat": 45.269037, "lon": -76.786902 },
+      "baseElevationM": 154,
+      "topElevationM": 392,
+      "nearestLocality": "Calabogie",
+      "evidence": {
+        "identityStatusUrl": "https://www.calabogie.com/mountain/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=45.269037&mlon=-76.786902#map=16/45.269037/-76.786902",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/calabogie-peaks/"
+      }
+    },
+    {
+      "pdfName": "Searchmont Resort — near Sault Ste. Marie",
+      "officialName": "Searchmont Resort",
+      "classification": "verified_operating",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://searchmont.com/",
+      "coordinates": { "lat": 46.768352, "lon": -84.041554 },
+      "baseElevationM": 233,
+      "topElevationM": 488,
+      "nearestLocality": "Searchmont",
+      "evidence": {
+        "identityStatusUrl": "https://searchmont.com/winter/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=46.768352&mlon=-84.041554#map=16/46.768352/-84.041554",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/searchmont/"
+      }
+    },
+    {
+      "pdfName": "Snow Valley — Barrie",
+      "officialName": "Snow Valley Ski Resort",
+      "classification": "verified_operating",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://www.skisnowvalley.com/",
+      "coordinates": { "lat": 44.410074, "lon": -79.791566 },
+      "baseElevationM": 235,
+      "topElevationM": 320,
+      "nearestLocality": "Minesing (Barrie area)",
+      "evidence": {
+        "identityStatusUrl": "https://www.skisnowvalley.com/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=44.410074&mlon=-79.791566#map=16/44.410074/-79.791566",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/snow-valley-barrie/"
+      }
+    },
+    {
+      "pdfName": "Glen Eden — Milton",
+      "officialName": "Glen Eden",
+      "classification": "verified_operating",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://gleneden.on.ca/",
+      "coordinates": { "lat": 43.504097, "lon": -79.943629 },
+      "baseElevationM": 248,
+      "topElevationM": 320,
+      "nearestLocality": "Milton",
+      "evidence": {
+        "identityStatusUrl": "https://gleneden.on.ca/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=43.504097&mlon=-79.943629#map=16/43.504097/-79.943629",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/glen-eden/"
+      }
+    },
+    {
+      "pdfName": "Hockley Valley — Mono",
+      "officialName": "Hockley Valley Resort",
+      "classification": "verified_operating",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://hockley.com/ski-snowboarding/",
+      "coordinates": { "lat": 43.977659, "lon": -80.047111 },
+      "baseElevationM": 324,
+      "topElevationM": 396,
+      "nearestLocality": "Mono",
+      "evidence": {
+        "identityStatusUrl": "https://hockley.com/ski-snowboarding/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=43.977659&mlon=-80.047111#map=16/43.977659/-80.047111",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/hockley-valley/"
+      }
+    },
+    {
+      "pdfName": "Mount Pakenham — near Ottawa",
+      "officialName": "Mount Pakenham",
+      "classification": "verified_operating",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://www.mountpakenham.com/",
+      "coordinates": { "lat": 45.320122, "lon": -76.338246 },
+      "baseElevationM": 137,
+      "topElevationM": 217,
+      "nearestLocality": "Pakenham",
+      "evidence": {
+        "identityStatusUrl": "https://www.mountpakenham.com/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=45.320122&mlon=-76.338246#map=16/45.320122/-76.338246",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/mount-pakenham/"
+      }
+    },
+    {
+      "pdfName": "Lakeridge Resort — Uxbridge",
+      "officialName": "Lakeridge Ski Resort",
+      "classification": "verified_operating",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://ski-lakeridge.com/",
+      "coordinates": { "lat": 44.02787, "lon": -79.062737 },
+      "baseElevationM": 300,
+      "topElevationM": 375,
+      "nearestLocality": "Uxbridge",
+      "evidence": {
+        "identityStatusUrl": "https://ski-lakeridge.com/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=44.027870&mlon=-79.062737#map=16/44.027870/-79.062737",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/lakeridge-resort/"
+      }
+    },
+    {
+      "pdfName": "Boler Mountain — London",
+      "officialName": "Boler Mountain",
+      "classification": "verified_operating",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://www.bolermountain.com/",
+      "coordinates": { "lat": 42.939433, "lon": -81.340403 },
+      "baseElevationM": 262,
+      "topElevationM": 328,
+      "nearestLocality": "London",
+      "evidence": {
+        "identityStatusUrl": "https://www.bolermountain.com/winter/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=42.939433&mlon=-81.340403#map=16/42.939433/-81.340403",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/boler-mountain-london/"
+      }
+    },
+    {
+      "pdfName": "Caledon Ski Club — Caledon",
+      "officialName": "Caledon Ski Club",
+      "classification": "private_restricted",
+      "publicOutdoorDownhill": false,
+      "officialUrl": "https://caledonskiclub.com/",
+      "coordinates": { "lat": 43.806043, "lon": -80.005988 },
+      "baseElevationM": 334,
+      "topElevationM": 414,
+      "nearestLocality": "Caledon",
+      "evidence": {
+        "identityStatusUrl": "https://caledonskiclub.com/membership/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=43.806043&mlon=-80.005988#map=16/43.806043/-80.005988",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/caledon-ski-club/"
+      }
+    },
+    {
+      "pdfName": "Craigleith Ski Club — Blue Mountains area",
+      "officialName": "Craigleith Ski Club",
+      "classification": "private_restricted",
+      "publicOutdoorDownhill": false,
+      "officialUrl": "https://craigleith.com/",
+      "coordinates": { "lat": 44.514695, "lon": -80.339986 },
+      "baseElevationM": 235,
+      "topElevationM": 446,
+      "nearestLocality": "The Blue Mountains",
+      "evidence": {
+        "identityStatusUrl": "https://craigleith.com/membership/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=44.514695&mlon=-80.339986#map=16/44.514695/-80.339986",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/craigleith-ski-club/"
+      }
+    },
+    {
+      "pdfName": "Georgian Peaks Club — Blue Mountains area",
+      "officialName": "Georgian Peaks Club",
+      "classification": "private_restricted",
+      "publicOutdoorDownhill": false,
+      "officialUrl": "https://www.georgianpeaks.com/",
+      "coordinates": { "lat": 44.530749, "lon": -80.37666 },
+      "baseElevationM": 181,
+      "topElevationM": 430,
+      "nearestLocality": "The Blue Mountains",
+      "evidence": {
+        "identityStatusUrl": "https://www.georgianpeaks.com/membership",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=44.530749&mlon=-80.376660#map=16/44.530749/-80.376660",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/georgian-peaks-club/"
+      }
+    },
+    {
+      "pdfName": "Devil's Glen Country Club — Blue Mountains area",
+      "officialName": "Devil's Glen Country Club",
+      "classification": "private_restricted",
+      "publicOutdoorDownhill": false,
+      "officialUrl": "https://www.devilsglen.com/",
+      "coordinates": { "lat": 44.353204, "lon": -80.203948 },
+      "baseElevationM": 372,
+      "topElevationM": 522,
+      "nearestLocality": "Glen Huron",
+      "evidence": {
+        "identityStatusUrl": "https://www.devilsglen.com/membership",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=44.353204&mlon=-80.203948#map=16/44.353204/-80.203948",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/devils-glen/"
+      }
+    },
+    {
+      "pdfName": "Osler Bluff Ski Club — Blue Mountains area",
+      "officialName": "Osler Bluff Ski Club",
+      "classification": "private_restricted",
+      "publicOutdoorDownhill": false,
+      "officialUrl": "https://www.oslerbluff.com/",
+      "coordinates": { "lat": 44.457386, "lon": -80.284365 },
+      "baseElevationM": 278,
+      "topElevationM": 507,
+      "nearestLocality": "The Blue Mountains",
+      "evidence": {
+        "identityStatusUrl": "https://www.oslerbluff.com/membership/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=44.457386&mlon=-80.284365#map=16/44.457386/-80.284365",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/osler-bluff-ski-club/"
+      }
+    },
+    {
+      "pdfName": "Beaver Valley Ski Club — Kimberley",
+      "officialName": "Beaver Valley Ski Club",
+      "classification": "private_restricted",
+      "publicOutdoorDownhill": false,
+      "officialUrl": "https://www.beavervalley.ca/",
+      "coordinates": { "lat": 44.3544, "lon": -80.551879 },
+      "baseElevationM": 261,
+      "topElevationM": 410,
+      "nearestLocality": "Kimberley",
+      "evidence": {
+        "identityStatusUrl": "https://www.beavervalley.ca/membership",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=44.354400&mlon=-80.551879#map=16/44.354400/-80.551879",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/beaver-valley-ski-club/"
+      }
+    },
+    {
+      "pdfName": "Mansfield Ski Club — Mansfield",
+      "officialName": "Mansfield Ski Club",
+      "classification": "private_restricted",
+      "publicOutdoorDownhill": false,
+      "officialUrl": "https://www.mansfieldskiclub.com/",
+      "coordinates": { "lat": 44.199063, "lon": -80.056977 },
+      "baseElevationM": 264,
+      "topElevationM": 384,
+      "nearestLocality": "Mansfield",
+      "evidence": {
+        "identityStatusUrl": "https://www.mansfieldskiclub.com/membership",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=44.199063&mlon=-80.056977#map=16/44.199063/-80.056977",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/mansfield-ski-club/"
+      }
+    },
+    {
+      "pdfName": "Hidden Valley Highlands — Huntsville",
+      "officialName": "Hidden Valley Highlands Ski Area",
+      "classification": "verified_operating",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://skihiddenvalley.ca/",
+      "coordinates": { "lat": 45.354801, "lon": -79.133851 },
+      "baseElevationM": 280,
+      "topElevationM": 380,
+      "nearestLocality": "Huntsville",
+      "evidence": {
+        "identityStatusUrl": "https://skihiddenvalley.ca/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=45.354801&mlon=-79.133851#map=16/45.354801/-79.133851",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/hidden-valley-highlands/"
+      }
+    },
+    {
+      "pdfName": "Chicopee Ski & Summer Resort — Kitchener",
+      "officialName": "Chicopee",
+      "classification": "verified_operating",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://www.discoverchicopee.com/",
+      "coordinates": { "lat": 43.433833, "lon": -80.419756 },
+      "baseElevationM": 314,
+      "topElevationM": 370,
+      "nearestLocality": "Kitchener",
+      "evidence": {
+        "identityStatusUrl": "https://www.discoverchicopee.com/winter",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=43.433833&mlon=-80.419756#map=16/43.433833/-80.419756",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/chicopee/"
+      }
+    },
+    {
+      "pdfName": "Brimacombe — Orono",
+      "officialName": "Brimacombe",
+      "classification": "verified_operating",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://brimacombe.ca/",
+      "coordinates": { "lat": 44.022585, "lon": -78.577352 },
+      "baseElevationM": 218,
+      "topElevationM": 310,
+      "nearestLocality": "Orono",
+      "evidence": {
+        "identityStatusUrl": "https://brimacombe.ca/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=44.022585&mlon=-78.577352#map=16/44.022585/-78.577352",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/brimacombe-oshawa-ski-club/"
+      }
+    },
+    {
+      "pdfName": "Dagmar Ski Resort — Uxbridge/Blackstock",
+      "officialName": "Dagmar Ski Resort",
+      "classification": "verified_operating",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://www.skidagmar.com/",
+      "coordinates": { "lat": 44.011699, "lon": -79.059664 },
+      "baseElevationM": 120,
+      "topElevationM": 199,
+      "nearestLocality": "Uxbridge",
+      "evidence": {
+        "identityStatusUrl": "https://www.skidagmar.com/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=44.011699&mlon=-79.059664#map=16/44.011699/-79.059664",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/dagmar-ski-resort/"
+      }
+    },
+    {
+      "pdfName": "Sir Sam's Ski/Ride — Haliburton Highlands",
+      "officialName": "Sir Sam's Ski / Ride",
+      "classification": "verified_operating",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://www.sirsams.ca/",
+      "coordinates": { "lat": 45.1305, "lon": -78.5151 },
+      "baseElevationM": 360,
+      "topElevationM": 447,
+      "nearestLocality": "Eagle Lake",
+      "evidence": {
+        "identityStatusUrl": "https://www.sirsams.ca/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=45.130500&mlon=-78.515100#map=16/45.130500/-78.515100",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/sir-sams/"
+      }
+    },
+    {
+      "pdfName": "Mount Chinguacousy — Brampton",
+      "officialName": "Mount Chinguacousy Ski and Snowboard Hill",
+      "classification": "verified_operating",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://www.brampton.ca/EN/residents/Recreation/Chinguacousy-Park/Pages/Mount-Chinguacousy.aspx",
+      "coordinates": { "lat": 43.727787, "lon": -79.724266 },
+      "baseElevationM": 218,
+      "topElevationM": 237,
+      "nearestLocality": "Brampton",
+      "evidence": {
+        "identityStatusUrl": "https://www.brampton.ca/EN/residents/Recreation/Chinguacousy-Park/Pages/Mount-Chinguacousy.aspx",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=43.727787&mlon=-79.724266#map=16/43.727787/-79.724266",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/mt-chinguacousy-brampton/"
+      }
+    },
+    {
+      "pdfName": "Adanac Ski Hill — Sault Ste. Marie",
+      "officialName": "Adanac Ski Hill",
+      "classification": "verified_operating",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://www.greatersudbury.ca/living/leisure/activities/ski-hills/adanac-ski-hill/",
+      "coordinates": { "lat": 46.508877, "lon": -80.959748 },
+      "baseElevationM": 270,
+      "topElevationM": 340,
+      "nearestLocality": "Greater Sudbury",
+      "notes": "PDF locality corrected: Adanac is in Greater Sudbury, not Sault Ste. Marie.",
+      "evidence": {
+        "identityStatusUrl": "https://www.greatersudbury.ca/living/leisure/activities/ski-hills/adanac-ski-hill/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=46.508877&mlon=-80.959748#map=16/46.508877/-80.959748",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/adanac-ski-hill/"
+      }
+    },
+    {
+      "pdfName": "Antoine Mountain — Kenora",
+      "officialName": "Antoine Mountain",
+      "classification": "verified_operating",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://antoinemountain.ca/",
+      "coordinates": { "lat": 46.36496, "lon": -78.738749 },
+      "baseElevationM": 174,
+      "topElevationM": 366,
+      "nearestLocality": "Mattawa",
+      "notes": "PDF locality corrected: Antoine Mountain is near Mattawa, not Kenora.",
+      "evidence": {
+        "identityStatusUrl": "https://antoinemountain.ca/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=46.364960&mlon=-78.738749#map=16/46.364960/-78.738749",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/antoine-mountain/"
+      }
+    },
+    {
+      "pdfName": "Batawa Ski Hill — near Trenton",
+      "officialName": "Batawa Ski Hill",
+      "classification": "verified_operating",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://www.batawaskihill.com/",
+      "coordinates": { "lat": 44.166523, "lon": -77.596864 },
+      "baseElevationM": 30,
+      "topElevationM": 80,
+      "nearestLocality": "Batawa",
+      "evidence": {
+        "identityStatusUrl": "https://www.batawaskihill.com/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=44.166523&mlon=-77.596864#map=16/44.166523/-77.596864",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/batawa-ski-hill/"
+      }
+    },
+    {
+      "pdfName": "Loch Lomond Ski Area — Thunder Bay",
+      "officialName": "Loch Lomond Ski Area",
+      "classification": "verified_operating",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://www.lochlomond.ca/",
+      "coordinates": { "lat": 48.293752, "lon": -89.346922 },
+      "baseElevationM": 251,
+      "topElevationM": 430,
+      "nearestLocality": "Thunder Bay",
+      "evidence": {
+        "identityStatusUrl": "https://www.lochlomond.ca/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=48.293752&mlon=-89.346922#map=16/48.293752/-89.346922",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/loch-lomond/"
+      }
+    },
+    {
+      "pdfName": "Mount Dufour — Thunder Bay",
+      "officialName": "Mount Dufour Ski Area",
+      "classification": "verified_operating",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://www.mountdufour.com/",
+      "coordinates": { "lat": 46.393579, "lon": -82.631838 },
+      "baseElevationM": 314,
+      "topElevationM": 412,
+      "nearestLocality": "Elliot Lake",
+      "notes": "PDF locality corrected: Mount Dufour is in Elliot Lake, not Thunder Bay.",
+      "evidence": {
+        "identityStatusUrl": "https://www.mountdufour.com/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=46.393579&mlon=-82.631838#map=16/46.393579/-82.631838",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/mount-dufour/"
+      }
+    },
+    {
+      "pdfName": "Mount Jamieson — Timmins",
+      "officialName": "Mount Jamieson Resort",
+      "classification": "verified_operating",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://mountjamieson.ca/",
+      "coordinates": { "lat": 48.53634, "lon": -81.541518 },
+      "baseElevationM": 307,
+      "topElevationM": 410,
+      "nearestLocality": "Timmins",
+      "evidence": {
+        "identityStatusUrl": "https://mountjamieson.ca/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=48.536340&mlon=-81.541518#map=16/48.536340/-81.541518",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/mount-jamieson-timmins/"
+      }
+    },
+    {
+      "pdfName": "Kamiskotia Snow Resort — Timmins",
+      "officialName": "Mount Jamieson Resort",
+      "classification": "duplicate_or_renamed",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://mountjamieson.ca/",
+      "coordinates": { "lat": 48.53634, "lon": -81.541518 },
+      "baseElevationM": 307,
+      "topElevationM": 410,
+      "nearestLocality": "Timmins",
+      "notes": "Kamiskotia is the former name of the same hill separately listed by the PDF as Mount Jamieson; it is not a second resort.",
+      "duplicateOfPdfName": "Mount Jamieson — Timmins",
+      "evidence": {
+        "identityStatusUrl": "https://mountjamieson.ca/about-us/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=48.536340&mlon=-81.541518#map=16/48.536340/-81.541518",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/mount-jamieson-timmins/"
+      }
+    },
+    {
+      "pdfName": "Uplands Ski Club — North Bay",
+      "officialName": "Uplands Ski Centre",
+      "classification": "verified_operating",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://golfnorth.ca/uplands/",
+      "coordinates": { "lat": 43.8258, "lon": -79.4577 },
+      "baseElevationM": 170,
+      "topElevationM": 200,
+      "nearestLocality": "Thornhill (Vaughan)",
+      "notes": "PDF identity/locality corrected: the public Uplands Ski Centre is in Vaughan, not North Bay.",
+      "evidence": {
+        "identityStatusUrl": "https://golfnorth.ca/uplands/winter/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=43.825800&mlon=-79.457700#map=16/43.825800/-79.457700",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/uplands-ski-centre/"
+      }
+    },
+    {
+      "pdfName": "Trestle Ridge (Nordica) — Sudbury area",
+      "officialName": "Trestle Ridge Ski Hill",
+      "classification": "verified_operating",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://terrace-bay-ski-hill.square.site/",
+      "coordinates": { "lat": 48.786109, "lon": -87.109831 },
+      "baseElevationM": 260,
+      "topElevationM": 281,
+      "nearestLocality": "Terrace Bay",
+      "notes": "PDF locality corrected: Trestle Ridge, formerly Nordica, is at Terrace Bay, not near Sudbury.",
+      "evidence": {
+        "identityStatusUrl": "https://terrace-bay-ski-hill.square.site/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=48.786109&mlon=-87.109831#map=16/48.786109/-87.109831",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/trestle-ridge-terrace-bay/"
+      }
+    }
+  ],
+  "explicitlyExcluded": [
+    {
+      "pdfName": "Centennial Park (Windsor)",
+      "officialName": "Centennial Park Ski and Snowboard Centre",
+      "classification": "closed",
+      "publicOutdoorDownhill": false,
+      "officialUrl": null,
+      "coordinates": { "lat": 43.6548, "lon": -79.5879 },
+      "baseElevationM": 145,
+      "topElevationM": 170,
+      "nearestLocality": "Etobicoke, Toronto",
+      "notes": "The PDF locality is erroneous. Windsor's Centennial Park is not this former downhill facility; Toronto permanently ceased ski/snowboard operations at Centennial Park after the 2021–22 season.",
+      "evidence": {
+        "identityStatusUrl": "https://www.toronto.ca/news/city-of-toronto-permanently-closing-centennial-park-ski-and-snowboard-centre/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=43.654800&mlon=-79.587900#map=16/43.654800/-79.587900",
+        "elevationsUrl": "https://www.openstreetmap.org/?mlat=43.654800&mlon=-79.587900#map=16/43.654800/-79.587900"
+      }
+    },
+    {
+      "pdfName": "Devil's Elbow Ski Club (Barrie area)",
+      "officialName": "Bethany Ski Resort",
+      "classification": "duplicate_or_renamed",
+      "publicOutdoorDownhill": true,
+      "officialUrl": "https://bethanyskiresort.com/",
+      "coordinates": { "lat": 44.182, "lon": -78.6002 },
+      "baseElevationM": 274,
+      "topElevationM": 362,
+      "nearestLocality": "Bethany",
+      "notes": "The PDF locality is erroneous. The former Devil's Elbow near Bethany reopened under the Bethany Ski Resort identity; the old name should not be added as a separate resort.",
+      "evidence": {
+        "identityStatusUrl": "https://bethanyskiresort.com/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=44.182000&mlon=-78.600200#map=16/44.182000/-78.600200",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/devils-elbow/"
+      }
+    },
+    {
+      "pdfName": "Old Smokey Ski Hill (Huntsville)",
+      "officialName": "Old Smokey Ski Hill",
+      "classification": "closed",
+      "publicOutdoorDownhill": false,
+      "officialUrl": null,
+      "coordinates": { "lat": 45.329, "lon": -79.209 },
+      "baseElevationM": null,
+      "topElevationM": null,
+      "nearestLocality": "Huntsville",
+      "notes": "Historical Huntsville-area hill; no current operator, lift tickets, operating plan, or official downhill web presence could be verified as of August 2026.",
+      "evidence": {
+        "identityStatusUrl": "https://www.huntsville.ca/en/parks-recreation-and-culture/parks-and-trails.aspx",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=45.329000&mlon=-79.209000#map=15/45.329000/-79.209000",
+        "elevationsUrl": null
+      }
+    },
+    {
+      "pdfName": "Skyloft Ski Area (Caledon)",
+      "officialName": "Skyloft Ski Resort",
+      "classification": "closed",
+      "publicOutdoorDownhill": false,
+      "officialUrl": null,
+      "coordinates": { "lat": 44.0008, "lon": -79.0805 },
+      "baseElevationM": 335,
+      "topElevationM": 404,
+      "nearestLocality": "Uxbridge",
+      "notes": "The PDF locality is erroneous: Skyloft was in the Uxbridge ski cluster, not Caledon. It has no current operator or public downhill operation.",
+      "evidence": {
+        "identityStatusUrl": "https://www.skiresort.info/ski-resort/skyloft/",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=44.000800&mlon=-79.080500#map=15/44.000800/-79.080500",
+        "elevationsUrl": "https://www.skiresort.info/ski-resort/skyloft/"
+      }
+    },
+    {
+      "pdfName": "Talisman Resort (Kimberley)",
+      "officialName": "Talisman Mountain Resort",
+      "classification": "closed",
+      "publicOutdoorDownhill": false,
+      "officialUrl": null,
+      "coordinates": { "lat": 44.390972, "lon": -80.547608 },
+      "baseElevationM": null,
+      "topElevationM": null,
+      "nearestLocality": "Kimberley",
+      "notes": "The resort property has had non-ski redevelopment activity, but lift-served public downhill skiing remains closed and no ski operator or ticket sales were verified.",
+      "evidence": {
+        "identityStatusUrl": "https://www.greyhighlands.ca/en/invest-and-build/talisman-lands.aspx",
+        "coordinatesLocalityUrl": "https://www.openstreetmap.org/?mlat=44.390972&mlon=-80.547608#map=16/44.390972/-80.547608",
+        "elevationsUrl": null
+      }
+    }
+  ],
+  "counts": {
+    "existing_live": 0,
+    "duplicate_or_renamed": 2,
+    "verified_operating": 25,
+    "private_restricted": 7,
+    "uncertain": 0,
+    "closed": 4,
+    "total": 38
+  }
+}

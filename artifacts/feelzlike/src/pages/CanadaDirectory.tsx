@@ -4,24 +4,35 @@ import { type CSSProperties } from "react";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { breadcrumbSchema } from "@/lib/seo/jsonLd";
 import {
-  CANADA_DIRECTORY,
   PROVINCE_NAMES,
   PROVINCE_ORDER,
   type CanadaDirectoryEntry,
   type CanadaProvince,
 } from "@/data/canadaDirectory";
+import type { PublishedCanadaSkiRecord } from "@workspace/canada-ski-catalogue";
+import {
+  canadaDirectoryMatchingSummary,
+} from "@/data/canadaDirectoryMatching";
 
 const balance: CSSProperties = { textWrap: "balance" as CSSProperties["textWrap"] };
 const pretty: CSSProperties = { textWrap: "pretty" as CSSProperties["textWrap"] };
 
-const TOTAL = CANADA_DIRECTORY.length;
-const NOTABLE = CANADA_DIRECTORY.filter((e) => e.notable);
+const PROVINCE_CODES: Record<string, CanadaProvince> = {
+  "British Columbia": "BC", Alberta: "AB", Saskatchewan: "SK", Manitoba: "MB",
+  Ontario: "ON", Quebec: "QC", "New Brunswick": "NB", "Nova Scotia": "NS",
+  "Prince Edward Island": "PE", "Newfoundland and Labrador": "NL",
+};
+
+const MATCHED_CANADA_DIRECTORY_RECORDS = canadaDirectoryMatchingSummary.matchedRecords;
+const EXTERNAL_DIRECTORY = canadaDirectoryMatchingSummary.outboundEntries;
+const TOTAL = EXTERNAL_DIRECTORY.length;
+const NOTABLE = EXTERNAL_DIRECTORY.filter((e) => e.notable);
 
 // Group entries by province, preserving the alphabetical order the dataset
 // is already sorted in.
 const BY_PROVINCE: Record<CanadaProvince, CanadaDirectoryEntry[]> =
   PROVINCE_ORDER.reduce((acc, code) => {
-    acc[code] = CANADA_DIRECTORY.filter((e) => e.province === code);
+    acc[code] = EXTERNAL_DIRECTORY.filter((e) => e.province === code);
     return acc;
   }, {} as Record<CanadaProvince, CanadaDirectoryEntry[]>);
 
@@ -49,6 +60,13 @@ function ResortLink({ entry }: { entry: CanadaDirectoryEntry }) {
   );
 }
 
+function LiveWeatherLink({ record }: { record: PublishedCanadaSkiRecord }) {
+  return <a href={record.route} className="inline-flex items-baseline gap-1.5 text-sky-700 hover:text-sky-900 transition-colors">
+    <span className="leading-snug">{record.name}</span>
+    <span className="text-[10px] font-semibold uppercase tracking-[0.14em]">weather</span>
+  </a>;
+}
+
 export default function CanadaDirectory() {
   return (
     <div
@@ -56,14 +74,14 @@ export default function CanadaDirectory() {
       style={{ fontFamily: "'DIN Pro', system-ui, sans-serif", ...pretty }}
     >
       <PageMeta
-        title="feelzlike · every ski hill in canada"
-        description="a directory of every other ski area in canada beyond the regions feelzlike covers live · links out to each hill's own website, grouped by province."
+        title="feelzlike · canada ski area directory"
+        description="verified canadian ski areas with live weather links, plus a broader outbound directory grouped by province."
         path="/ca/all-ski-areas"
         jsonLd={[
           breadcrumbSchema([
             { name: "feelzlike", url: "https://feelzlike.com/" },
             { name: "Canada", url: "https://feelzlike.com/ca" },
-            { name: "every ski hill in canada", url: "https://feelzlike.com/ca/all-ski-areas" },
+            { name: "canada ski area directory", url: "https://feelzlike.com/ca/all-ski-areas" },
           ]),
         ]}
       />
@@ -82,15 +100,15 @@ export default function CanadaDirectory() {
             className="mt-2 text-2xl md:text-4xl font-bold leading-tight text-blue-900"
             style={balance}
           >
-            every ski hill in canada
+            canada ski area directory
           </h1>
           <p className="max-w-2xl text-sm md:text-base leading-relaxed text-slate-700" style={pretty}>
-            the 10 regions above are where feelzlike runs live conditions ·
-            everything below links out to the hill's own site.
+            {MATCHED_CANADA_DIRECTORY_RECORDS.length} verified public additions below have live mountain weather ·
+            the broader directory links out to each hill's own site.
           </p>
           <div className="mt-1 inline-flex w-fit items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-[12px] font-semibold text-sky-800">
             <span className="h-1.5 w-1.5 rounded-full bg-sky-500" />
-            {TOTAL} more ski areas
+            {MATCHED_CANADA_DIRECTORY_RECORDS.length} live weather additions · {TOTAL} outbound listings
           </div>
         </header>
 
@@ -137,7 +155,8 @@ export default function CanadaDirectory() {
         <section className="pb-4">
           {PROVINCE_ORDER.map((code) => {
             const entries = BY_PROVINCE[code];
-            if (entries.length === 0) return null;
+            const liveRecords = MATCHED_CANADA_DIRECTORY_RECORDS.filter((record) => PROVINCE_CODES[record.province] === code);
+            if (entries.length === 0 && liveRecords.length === 0) return null;
             return (
               <div key={code} className="border-t border-slate-100 py-6 first:border-t-0">
                 <div className="flex items-baseline justify-between gap-3">
@@ -145,10 +164,13 @@ export default function CanadaDirectory() {
                     {PROVINCE_NAMES[code]}
                   </h2>
                   <span className="text-xs font-semibold text-sky-800">
-                    {entries.length} {entries.length === 1 ? "area" : "areas"}
+                     {liveRecords.length} live · {entries.length} outbound
                   </span>
                 </div>
                 <ul className="mt-3 grid grid-cols-1 gap-x-8 gap-y-1.5 text-sm sm:grid-cols-2 lg:grid-cols-3">
+                  {liveRecords.map((record) => (
+                    <li key={record.recordId}><LiveWeatherLink record={record} /></li>
+                  ))}
                   {entries.map((entry) => (
                     <li key={entry.infoUrl}>
                       <ResortLink entry={entry} />
@@ -163,8 +185,8 @@ export default function CanadaDirectory() {
         {/* FOOTER NOTE ────────────────────────────────── */}
         <footer className="border-t border-slate-100 py-6 text-xs leading-relaxed text-slate-700" style={pretty}>
           <p>
-            list drawn from skiresort.info · {TOTAL} areas beyond the 10 regions
-            feelzlike covers live. links marked{" "}
+            {MATCHED_CANADA_DIRECTORY_RECORDS.length} verified public catalogue additions have internal weather links. the remaining {TOTAL}
+            listings are drawn from skiresort.info. links marked{" "}
             <span className="font-semibold text-slate-800">info</span> go to the
             resort's skiresort.info page where no official site could be
             confirmed. found a broken or wrong link? that's on us to fix.

@@ -14,7 +14,11 @@
     "japan:reviews:validate": "pnpm --filter @workspace/japan-ski-catalogue run reviews:validate",
     "ski:catalogue:generate": "pnpm --filter @workspace/ski-catalogue run generate",
     "ski:catalogue:validate": "pnpm --filter @workspace/ski-catalogue run validate",
-    "ski:catalogue:test": "pnpm --filter @workspace/ski-catalogue run test"
+    "ski:catalogue:test": "pnpm --filter @workspace/ski-catalogue run test",
+    "canada:catalogue:generate": "pnpm --filter @workspace/canada-ski-catalogue run generate",
+    "canada:catalogue:generate:check": "pnpm --filter @workspace/canada-ski-catalogue run generate:check",
+    "canada:catalogue:validate": "pnpm --filter @workspace/canada-ski-catalogue run validate",
+    "canada:catalogue:report": "pnpm --filter @workspace/canada-ski-catalogue run report"
   },
   "private": true,
   "devDependencies": {

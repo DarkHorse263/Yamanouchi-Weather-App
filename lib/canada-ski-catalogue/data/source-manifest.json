@@ -1,0 +1,314 @@
+{
+  "expectedCandidateCount": 77,
+  "expectedPublishedCount": 56,
+  "sourceCandidates": [
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-blue-mountain-collingwood"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-mount-st-louis-moonstone-coldwater"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-horseshoe-resort-barrie"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-calabogie-peaks-near-ottawa"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-searchmont-resort-near-sault-ste-marie"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-snow-valley-barrie"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-glen-eden-milton"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-hockley-valley-mono"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-mount-pakenham-near-ottawa"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-lakeridge-resort-uxbridge"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-boler-mountain-london"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-caledon-ski-club-caledon"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-craigleith-ski-club-blue-mountains-area"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-georgian-peaks-club-blue-mountains-area"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-devil-s-glen-country-club-blue-mountains-area"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-osler-bluff-ski-club-blue-mountains-area"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-beaver-valley-ski-club-kimberley"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-mansfield-ski-club-mansfield"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-hidden-valley-highlands-huntsville"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-chicopee-ski-and-summer-resort-kitchener"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-brimacombe-orono"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-dagmar-ski-resort-uxbridge-blackstock"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-sir-sam-s-ski-ride-haliburton-highlands"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-mount-chinguacousy-brampton"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-adanac-ski-hill-sault-ste-marie"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-antoine-mountain-kenora"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-batawa-ski-hill-near-trenton"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-loch-lomond-ski-area-thunder-bay"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-mount-dufour-thunder-bay"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-mount-jamieson-timmins"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-kamiskotia-snow-resort-timmins"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-uplands-ski-club-north-bay"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-trestle-ridge-nordica-sudbury-area"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-centennial-park-windsor"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-devil-s-elbow-ski-club-barrie-area"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-old-smokey-ski-hill-huntsville"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-skyloft-ski-area-caledon"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-talisman-resort-kimberley"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "british-columbia-red-mountain-resort-rossland"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "british-columbia-manning-park-resort-near-hope"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "british-columbia-shames-mountain-terrace"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "british-columbia-powder-king-mountain-resort-mackenzie"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "british-columbia-hemlock-sasquatch-mountain-resort-agassiz"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "alberta-castle-mountain-resort-pincher-creek-westcastle-valley"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "manitoba-asessippi-ski-area-and-resort-near-inglis-russell"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "manitoba-mystery-mountain-winter-park-thompson"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "manitoba-holiday-mountain-resort-la-riviere"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "manitoba-stony-mountain-ski-area"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "manitoba-mount-agassiz-ski-resort"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "saskatchewan-table-mountain-near-battleford"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "saskatchewan-duck-mountain-ski-area-kamsack"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "saskatchewan-wapiti-valley-ski-resort"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "saskatchewan-blackstrap-ski-hill"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "quebec-owl-s-head"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "quebec-mont-orford"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "quebec-mont-grand-fonds"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "quebec-massif-du-sud"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "quebec-val-saint-come"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "quebec-stoneham"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "quebec-le-relais"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "quebec-tremblant"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "quebec-mont-sutton"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "quebec-bromont"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "quebec-le-massif"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "quebec-mont-sainte-anne"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "new-brunswick-crabbe-mountain"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "new-brunswick-poley-mountain"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "new-brunswick-sugarloaf-provincial-park"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "new-brunswick-mont-farlagne"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "nova-scotia-ski-wentworth"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "nova-scotia-ski-martock"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "nova-scotia-cape-smokey-ski-cape-smokey"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "nova-scotia-ski-ben-eoin"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "newfoundland-labrador-white-hills-resort"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "newfoundland-labrador-smokey-mountain-ski-club"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "newfoundland-labrador-marble-mountain"
+    },
+    {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "prince-edward-island-mark-arendz-provincial-ski-park-at-brookvale"
+    }
+  ]
+}

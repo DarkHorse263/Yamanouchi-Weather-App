@@ -1,0 +1,1197 @@
+{
+  "schemaVersion": 1,
+  "countryCode": "CA",
+  "generatedAt": "1970-01-01T00:00:00.000Z",
+  "travelRegions": [
+    {
+      "travelRegionId": "canada-ontario",
+      "name": "Ontario",
+      "province": "Ontario"
+    },
+    {
+      "travelRegionId": "canada-british-columbia",
+      "name": "British Columbia",
+      "province": "British Columbia"
+    },
+    {
+      "travelRegionId": "canada-alberta",
+      "name": "Alberta",
+      "province": "Alberta"
+    },
+    {
+      "travelRegionId": "canada-manitoba",
+      "name": "Manitoba",
+      "province": "Manitoba"
+    },
+    {
+      "travelRegionId": "canada-saskatchewan",
+      "name": "Saskatchewan",
+      "province": "Saskatchewan"
+    },
+    {
+      "travelRegionId": "canada-quebec",
+      "name": "Quebec",
+      "province": "Quebec"
+    },
+    {
+      "travelRegionId": "canada-new-brunswick",
+      "name": "New Brunswick",
+      "province": "New Brunswick"
+    },
+    {
+      "travelRegionId": "canada-nova-scotia",
+      "name": "Nova Scotia",
+      "province": "Nova Scotia"
+    },
+    {
+      "travelRegionId": "canada-newfoundland-labrador",
+      "name": "Newfoundland and Labrador",
+      "province": "Newfoundland and Labrador"
+    },
+    {
+      "travelRegionId": "canada-prince-edward-island",
+      "name": "Prince Edward Island",
+      "province": "Prince Edward Island"
+    }
+  ],
+  "publishedCatalogueRecords": [
+    {
+      "recordId": "ca-ontario-blue-mountain-resort",
+      "publicId": "blue-mountain-resort",
+      "aliases": [],
+      "name": "Blue Mountain Resort",
+      "officialUrl": "https://www.bluemountain.ca/",
+      "coordinates": {
+        "lat": 44.500756,
+        "lng": -80.317907
+      },
+      "baseElevationM": 230,
+      "topElevationM": 450,
+      "forecastElevationM": 340,
+      "locality": "The Blue Mountains (Collingwood area)",
+      "province": "Ontario",
+      "travelRegionId": "canada-ontario",
+      "route": "/canada-ontario/mountain/blue-mountain-resort",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-ontario-mount-st-louis-moonstone",
+      "publicId": "mount-st-louis-moonstone",
+      "aliases": [],
+      "name": "Mount St. Louis Moonstone",
+      "officialUrl": "https://www.mountstlouis.com/",
+      "coordinates": {
+        "lat": 44.62365,
+        "lng": -79.666698
+      },
+      "baseElevationM": 215,
+      "topElevationM": 368,
+      "forecastElevationM": 292,
+      "locality": "Moonstone",
+      "province": "Ontario",
+      "travelRegionId": "canada-ontario",
+      "route": "/canada-ontario/mountain/mount-st-louis-moonstone",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-ontario-horseshoe-resort",
+      "publicId": "horseshoe-resort",
+      "aliases": [],
+      "name": "Horseshoe Resort",
+      "officialUrl": "https://horseshoeresort.com/",
+      "coordinates": {
+        "lat": 44.548967,
+        "lng": -79.67367
+      },
+      "baseElevationM": 309,
+      "topElevationM": 402,
+      "forecastElevationM": 356,
+      "locality": "Horseshoe Valley",
+      "province": "Ontario",
+      "travelRegionId": "canada-ontario",
+      "route": "/canada-ontario/mountain/horseshoe-resort",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-ontario-calabogie-peaks-resort",
+      "publicId": "calabogie-peaks-resort",
+      "aliases": [],
+      "name": "Calabogie Peaks Resort",
+      "officialUrl": "https://www.calabogie.com/",
+      "coordinates": {
+        "lat": 45.269037,
+        "lng": -76.786902
+      },
+      "baseElevationM": 154,
+      "topElevationM": 392,
+      "forecastElevationM": 273,
+      "locality": "Calabogie",
+      "province": "Ontario",
+      "travelRegionId": "canada-ontario",
+      "route": "/canada-ontario/mountain/calabogie-peaks-resort",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-ontario-searchmont-resort",
+      "publicId": "searchmont-resort",
+      "aliases": [],
+      "name": "Searchmont Resort",
+      "officialUrl": "https://searchmont.com/",
+      "coordinates": {
+        "lat": 46.768352,
+        "lng": -84.041554
+      },
+      "baseElevationM": 233,
+      "topElevationM": 488,
+      "forecastElevationM": 361,
+      "locality": "Searchmont",
+      "province": "Ontario",
+      "travelRegionId": "canada-ontario",
+      "route": "/canada-ontario/mountain/searchmont-resort",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-ontario-snow-valley-ski-resort",
+      "publicId": "snow-valley-ski-resort",
+      "aliases": [],
+      "name": "Snow Valley Ski Resort",
+      "officialUrl": "https://www.skisnowvalley.com/",
+      "coordinates": {
+        "lat": 44.410074,
+        "lng": -79.791566
+      },
+      "baseElevationM": 235,
+      "topElevationM": 320,
+      "forecastElevationM": 278,
+      "locality": "Minesing (Barrie area)",
+      "province": "Ontario",
+      "travelRegionId": "canada-ontario",
+      "route": "/canada-ontario/mountain/snow-valley-ski-resort",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-ontario-glen-eden",
+      "publicId": "glen-eden",
+      "aliases": [],
+      "name": "Glen Eden",
+      "officialUrl": "https://gleneden.on.ca/",
+      "coordinates": {
+        "lat": 43.504097,
+        "lng": -79.943629
+      },
+      "baseElevationM": 248,
+      "topElevationM": 320,
+      "forecastElevationM": 284,
+      "locality": "Milton",
+      "province": "Ontario",
+      "travelRegionId": "canada-ontario",
+      "route": "/canada-ontario/mountain/glen-eden",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-ontario-hockley-valley-resort",
+      "publicId": "hockley-valley-resort",
+      "aliases": [],
+      "name": "Hockley Valley Resort",
+      "officialUrl": "https://hockley.com/ski-snowboarding/",
+      "coordinates": {
+        "lat": 43.977659,
+        "lng": -80.047111
+      },
+      "baseElevationM": 324,
+      "topElevationM": 396,
+      "forecastElevationM": 360,
+      "locality": "Mono",
+      "province": "Ontario",
+      "travelRegionId": "canada-ontario",
+      "route": "/canada-ontario/mountain/hockley-valley-resort",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-ontario-mount-pakenham",
+      "publicId": "mount-pakenham",
+      "aliases": [],
+      "name": "Mount Pakenham",
+      "officialUrl": "https://www.mountpakenham.com/",
+      "coordinates": {
+        "lat": 45.320122,
+        "lng": -76.338246
+      },
+      "baseElevationM": 137,
+      "topElevationM": 217,
+      "forecastElevationM": 177,
+      "locality": "Pakenham",
+      "province": "Ontario",
+      "travelRegionId": "canada-ontario",
+      "route": "/canada-ontario/mountain/mount-pakenham",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-ontario-lakeridge-ski-resort",
+      "publicId": "lakeridge-ski-resort",
+      "aliases": [],
+      "name": "Lakeridge Ski Resort",
+      "officialUrl": "https://ski-lakeridge.com/",
+      "coordinates": {
+        "lat": 44.02787,
+        "lng": -79.062737
+      },
+      "baseElevationM": 300,
+      "topElevationM": 375,
+      "forecastElevationM": 338,
+      "locality": "Uxbridge",
+      "province": "Ontario",
+      "travelRegionId": "canada-ontario",
+      "route": "/canada-ontario/mountain/lakeridge-ski-resort",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-ontario-boler-mountain",
+      "publicId": "boler-mountain",
+      "aliases": [],
+      "name": "Boler Mountain",
+      "officialUrl": "https://www.bolermountain.com/",
+      "coordinates": {
+        "lat": 42.939433,
+        "lng": -81.340403
+      },
+      "baseElevationM": 262,
+      "topElevationM": 328,
+      "forecastElevationM": 295,
+      "locality": "London",
+      "province": "Ontario",
+      "travelRegionId": "canada-ontario",
+      "route": "/canada-ontario/mountain/boler-mountain",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-ontario-hidden-valley-highlands-ski-area",
+      "publicId": "hidden-valley-highlands-ski-area",
+      "aliases": [],
+      "name": "Hidden Valley Highlands Ski Area",
+      "officialUrl": "https://skihiddenvalley.ca/",
+      "coordinates": {
+        "lat": 45.354801,
+        "lng": -79.133851
+      },
+      "baseElevationM": 280,
+      "topElevationM": 380,
+      "forecastElevationM": 330,
+      "locality": "Huntsville",
+      "province": "Ontario",
+      "travelRegionId": "canada-ontario",
+      "route": "/canada-ontario/mountain/hidden-valley-highlands-ski-area",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-ontario-chicopee",
+      "publicId": "chicopee",
+      "aliases": [],
+      "name": "Chicopee",
+      "officialUrl": "https://www.discoverchicopee.com/",
+      "coordinates": {
+        "lat": 43.433833,
+        "lng": -80.419756
+      },
+      "baseElevationM": 314,
+      "topElevationM": 370,
+      "forecastElevationM": 342,
+      "locality": "Kitchener",
+      "province": "Ontario",
+      "travelRegionId": "canada-ontario",
+      "route": "/canada-ontario/mountain/chicopee",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-ontario-brimacombe",
+      "publicId": "brimacombe",
+      "aliases": [],
+      "name": "Brimacombe",
+      "officialUrl": "https://brimacombe.ca/",
+      "coordinates": {
+        "lat": 44.022585,
+        "lng": -78.577352
+      },
+      "baseElevationM": 218,
+      "topElevationM": 310,
+      "forecastElevationM": 264,
+      "locality": "Orono",
+      "province": "Ontario",
+      "travelRegionId": "canada-ontario",
+      "route": "/canada-ontario/mountain/brimacombe",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-ontario-dagmar-ski-resort",
+      "publicId": "dagmar-ski-resort",
+      "aliases": [],
+      "name": "Dagmar Ski Resort",
+      "officialUrl": "https://www.skidagmar.com/",
+      "coordinates": {
+        "lat": 44.011699,
+        "lng": -79.059664
+      },
+      "baseElevationM": 120,
+      "topElevationM": 199,
+      "forecastElevationM": 160,
+      "locality": "Uxbridge",
+      "province": "Ontario",
+      "travelRegionId": "canada-ontario",
+      "route": "/canada-ontario/mountain/dagmar-ski-resort",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-ontario-sir-sam-s-ski-ride",
+      "publicId": "sir-sam-s-ski-ride",
+      "aliases": [],
+      "name": "Sir Sam's Ski / Ride",
+      "officialUrl": "https://www.sirsams.ca/",
+      "coordinates": {
+        "lat": 45.1305,
+        "lng": -78.5151
+      },
+      "baseElevationM": 360,
+      "topElevationM": 447,
+      "forecastElevationM": 404,
+      "locality": "Eagle Lake",
+      "province": "Ontario",
+      "travelRegionId": "canada-ontario",
+      "route": "/canada-ontario/mountain/sir-sam-s-ski-ride",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-ontario-mount-chinguacousy-ski-and-snowboard-hill",
+      "publicId": "mount-chinguacousy-ski-and-snowboard-hill",
+      "aliases": [],
+      "name": "Mount Chinguacousy Ski and Snowboard Hill",
+      "officialUrl": "https://www.brampton.ca/EN/residents/Recreation/Chinguacousy-Park/Pages/Mount-Chinguacousy.aspx",
+      "coordinates": {
+        "lat": 43.727787,
+        "lng": -79.724266
+      },
+      "baseElevationM": 218,
+      "topElevationM": 237,
+      "forecastElevationM": 228,
+      "locality": "Brampton",
+      "province": "Ontario",
+      "travelRegionId": "canada-ontario",
+      "route": "/canada-ontario/mountain/mount-chinguacousy-ski-and-snowboard-hill",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-ontario-adanac-ski-hill",
+      "publicId": "adanac-ski-hill",
+      "aliases": [],
+      "name": "Adanac Ski Hill",
+      "officialUrl": "https://www.greatersudbury.ca/living/leisure/activities/ski-hills/adanac-ski-hill/",
+      "coordinates": {
+        "lat": 46.508877,
+        "lng": -80.959748
+      },
+      "baseElevationM": 270,
+      "topElevationM": 340,
+      "forecastElevationM": 305,
+      "locality": "Greater Sudbury",
+      "province": "Ontario",
+      "travelRegionId": "canada-ontario",
+      "route": "/canada-ontario/mountain/adanac-ski-hill",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-ontario-antoine-mountain",
+      "publicId": "antoine-mountain",
+      "aliases": [],
+      "name": "Antoine Mountain",
+      "officialUrl": "https://antoinemountain.ca/",
+      "coordinates": {
+        "lat": 46.36496,
+        "lng": -78.738749
+      },
+      "baseElevationM": 174,
+      "topElevationM": 366,
+      "forecastElevationM": 270,
+      "locality": "Mattawa",
+      "province": "Ontario",
+      "travelRegionId": "canada-ontario",
+      "route": "/canada-ontario/mountain/antoine-mountain",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-ontario-batawa-ski-hill",
+      "publicId": "batawa-ski-hill",
+      "aliases": [],
+      "name": "Batawa Ski Hill",
+      "officialUrl": "https://www.batawaskihill.com/",
+      "coordinates": {
+        "lat": 44.166523,
+        "lng": -77.596864
+      },
+      "baseElevationM": 30,
+      "topElevationM": 80,
+      "forecastElevationM": 55,
+      "locality": "Batawa",
+      "province": "Ontario",
+      "travelRegionId": "canada-ontario",
+      "route": "/canada-ontario/mountain/batawa-ski-hill",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-ontario-loch-lomond-ski-area",
+      "publicId": "loch-lomond-ski-area",
+      "aliases": [],
+      "name": "Loch Lomond Ski Area",
+      "officialUrl": "https://www.lochlomond.ca/",
+      "coordinates": {
+        "lat": 48.293752,
+        "lng": -89.346922
+      },
+      "baseElevationM": 251,
+      "topElevationM": 430,
+      "forecastElevationM": 341,
+      "locality": "Thunder Bay",
+      "province": "Ontario",
+      "travelRegionId": "canada-ontario",
+      "route": "/canada-ontario/mountain/loch-lomond-ski-area",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-ontario-mount-dufour-ski-area",
+      "publicId": "mount-dufour-ski-area",
+      "aliases": [],
+      "name": "Mount Dufour Ski Area",
+      "officialUrl": "https://www.mountdufour.com/",
+      "coordinates": {
+        "lat": 46.393579,
+        "lng": -82.631838
+      },
+      "baseElevationM": 314,
+      "topElevationM": 412,
+      "forecastElevationM": 363,
+      "locality": "Elliot Lake",
+      "province": "Ontario",
+      "travelRegionId": "canada-ontario",
+      "route": "/canada-ontario/mountain/mount-dufour-ski-area",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-ontario-mount-jamieson-resort",
+      "publicId": "mount-jamieson-resort",
+      "aliases": [],
+      "name": "Mount Jamieson Resort",
+      "officialUrl": "https://mountjamieson.ca/",
+      "coordinates": {
+        "lat": 48.53634,
+        "lng": -81.541518
+      },
+      "baseElevationM": 307,
+      "topElevationM": 410,
+      "forecastElevationM": 359,
+      "locality": "Timmins",
+      "province": "Ontario",
+      "travelRegionId": "canada-ontario",
+      "route": "/canada-ontario/mountain/mount-jamieson-resort",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-ontario-uplands-ski-centre",
+      "publicId": "uplands-ski-centre",
+      "aliases": [],
+      "name": "Uplands Ski Centre",
+      "officialUrl": "https://golfnorth.ca/uplands/",
+      "coordinates": {
+        "lat": 43.8258,
+        "lng": -79.4577
+      },
+      "baseElevationM": 170,
+      "topElevationM": 200,
+      "forecastElevationM": 185,
+      "locality": "Thornhill (Vaughan)",
+      "province": "Ontario",
+      "travelRegionId": "canada-ontario",
+      "route": "/canada-ontario/mountain/uplands-ski-centre",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-ontario-trestle-ridge-ski-hill",
+      "publicId": "trestle-ridge-ski-hill",
+      "aliases": [],
+      "name": "Trestle Ridge Ski Hill",
+      "officialUrl": "https://terrace-bay-ski-hill.square.site/",
+      "coordinates": {
+        "lat": 48.786109,
+        "lng": -87.109831
+      },
+      "baseElevationM": 260,
+      "topElevationM": 281,
+      "forecastElevationM": 271,
+      "locality": "Terrace Bay",
+      "province": "Ontario",
+      "travelRegionId": "canada-ontario",
+      "route": "/canada-ontario/mountain/trestle-ridge-ski-hill",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-ontario-bethany-ski-resort",
+      "publicId": "bethany-ski-resort",
+      "aliases": [
+        "devil-s-elbow-ski-club"
+      ],
+      "name": "Bethany Ski Resort",
+      "officialUrl": "https://bethanyskiresort.com/",
+      "coordinates": {
+        "lat": 44.182,
+        "lng": -78.6002
+      },
+      "baseElevationM": 274,
+      "topElevationM": 362,
+      "forecastElevationM": 318,
+      "locality": "Bethany",
+      "province": "Ontario",
+      "travelRegionId": "canada-ontario",
+      "route": "/canada-ontario/mountain/bethany-ski-resort",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-british-columbia-red-mountain-resort",
+      "publicId": "red-mountain-resort",
+      "aliases": [],
+      "name": "RED Mountain Resort",
+      "officialUrl": "https://www.redresort.com/",
+      "coordinates": {
+        "lat": 49.1052,
+        "lng": -117.8464
+      },
+      "baseElevationM": 1185,
+      "topElevationM": 2075,
+      "forecastElevationM": 1630,
+      "locality": "Rossland",
+      "province": "British Columbia",
+      "travelRegionId": "canada-british-columbia",
+      "route": "/canada-british-columbia/mountain/red-mountain-resort",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-british-columbia-manning-park-resort",
+      "publicId": "manning-park-resort",
+      "aliases": [],
+      "name": "Manning Park Resort",
+      "officialUrl": "https://manningpark.com/",
+      "coordinates": {
+        "lat": 49.068,
+        "lng": -120.914
+      },
+      "baseElevationM": 1350,
+      "topElevationM": 1789,
+      "forecastElevationM": 1570,
+      "locality": "Manning Park",
+      "province": "British Columbia",
+      "travelRegionId": "canada-british-columbia",
+      "route": "/canada-british-columbia/mountain/manning-park-resort",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-british-columbia-shames-mountain",
+      "publicId": "shames-mountain",
+      "aliases": [],
+      "name": "Shames Mountain",
+      "officialUrl": "https://mymountaincoop.ca/",
+      "coordinates": {
+        "lat": 54.4873,
+        "lng": -128.9534
+      },
+      "baseElevationM": 700,
+      "topElevationM": 1189,
+      "forecastElevationM": 945,
+      "locality": "Terrace",
+      "province": "British Columbia",
+      "travelRegionId": "canada-british-columbia",
+      "route": "/canada-british-columbia/mountain/shames-mountain",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-british-columbia-powder-king-mountain-resort",
+      "publicId": "powder-king-mountain-resort",
+      "aliases": [],
+      "name": "Powder King Mountain Resort",
+      "officialUrl": "https://www.powderking.com/",
+      "coordinates": {
+        "lat": 55.3687,
+        "lng": -122.6112
+      },
+      "baseElevationM": 1267,
+      "topElevationM": 1838,
+      "forecastElevationM": 1553,
+      "locality": "Mackenzie",
+      "province": "British Columbia",
+      "travelRegionId": "canada-british-columbia",
+      "route": "/canada-british-columbia/mountain/powder-king-mountain-resort",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-british-columbia-sasquatch-mountain-resort",
+      "publicId": "sasquatch-mountain-resort",
+      "aliases": [
+        "hemlock",
+        "hemlock-valley-resort"
+      ],
+      "name": "Sasquatch Mountain Resort",
+      "officialUrl": "https://sasquatchmountain.ca/",
+      "coordinates": {
+        "lat": 49.3792,
+        "lng": -121.9373
+      },
+      "baseElevationM": 980,
+      "topElevationM": 1370,
+      "forecastElevationM": 1175,
+      "locality": "Hemlock Valley",
+      "province": "British Columbia",
+      "travelRegionId": "canada-british-columbia",
+      "route": "/canada-british-columbia/mountain/sasquatch-mountain-resort",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-alberta-castle-mountain-resort",
+      "publicId": "castle-mountain-resort",
+      "aliases": [],
+      "name": "Castle Mountain Resort",
+      "officialUrl": "https://www.skicastle.ca/",
+      "coordinates": {
+        "lat": 49.3188,
+        "lng": -114.4126
+      },
+      "baseElevationM": 1410,
+      "topElevationM": 2273,
+      "forecastElevationM": 1842,
+      "locality": "Westcastle Valley",
+      "province": "Alberta",
+      "travelRegionId": "canada-alberta",
+      "route": "/canada-alberta/mountain/castle-mountain-resort",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-manitoba-asessippi-ski-area-and-resort",
+      "publicId": "asessippi-ski-area-and-resort",
+      "aliases": [],
+      "name": "Asessippi Ski Area & Resort",
+      "officialUrl": "https://asessippi.com/",
+      "coordinates": {
+        "lat": 50.9511,
+        "lng": -101.3373
+      },
+      "baseElevationM": 457,
+      "topElevationM": 579,
+      "forecastElevationM": 518,
+      "locality": "Inglis",
+      "province": "Manitoba",
+      "travelRegionId": "canada-manitoba",
+      "route": "/canada-manitoba/mountain/asessippi-ski-area-and-resort",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-manitoba-mystery-mountain-winter-park",
+      "publicId": "mystery-mountain-winter-park",
+      "aliases": [],
+      "name": "Mystery Mountain Winter Park",
+      "officialUrl": "https://www.mysterymountain.ca/",
+      "coordinates": {
+        "lat": 55.8103,
+        "lng": -97.8068
+      },
+      "baseElevationM": 205,
+      "topElevationM": 281,
+      "forecastElevationM": 243,
+      "locality": "Thompson",
+      "province": "Manitoba",
+      "travelRegionId": "canada-manitoba",
+      "route": "/canada-manitoba/mountain/mystery-mountain-winter-park",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-manitoba-holiday-mountain-resort",
+      "publicId": "holiday-mountain-resort",
+      "aliases": [],
+      "name": "Holiday Mountain Resort",
+      "officialUrl": "https://www.holidaymountain.ca/",
+      "coordinates": {
+        "lat": 49.2083,
+        "lng": -98.5112
+      },
+      "baseElevationM": 274,
+      "topElevationM": 381,
+      "forecastElevationM": 328,
+      "locality": "La Rivière",
+      "province": "Manitoba",
+      "travelRegionId": "canada-manitoba",
+      "route": "/canada-manitoba/mountain/holiday-mountain-resort",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-saskatchewan-table-mountain-regional-park",
+      "publicId": "table-mountain-regional-park",
+      "aliases": [],
+      "name": "Table Mountain Regional Park",
+      "officialUrl": "https://www.facebook.com/TableMountainRegionalPark/",
+      "coordinates": {
+        "lat": 52.7678,
+        "lng": -108.6026
+      },
+      "baseElevationM": 557,
+      "topElevationM": 672,
+      "forecastElevationM": 615,
+      "locality": "North Battleford",
+      "province": "Saskatchewan",
+      "travelRegionId": "canada-saskatchewan",
+      "route": "/canada-saskatchewan/mountain/table-mountain-regional-park",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-saskatchewan-duck-mountain-ski-area",
+      "publicId": "duck-mountain-ski-area",
+      "aliases": [],
+      "name": "Duck Mountain Ski Area",
+      "officialUrl": "https://skitheduck.com/",
+      "coordinates": {
+        "lat": 51.5614,
+        "lng": -101.6077
+      },
+      "baseElevationM": 577,
+      "topElevationM": 716,
+      "forecastElevationM": 647,
+      "locality": "Kamsack",
+      "province": "Saskatchewan",
+      "travelRegionId": "canada-saskatchewan",
+      "route": "/canada-saskatchewan/mountain/duck-mountain-ski-area",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-saskatchewan-wapiti-valley-regional-park",
+      "publicId": "wapiti-valley-regional-park",
+      "aliases": [],
+      "name": "Wapiti Valley Regional Park",
+      "officialUrl": "https://www.skiwapiti.com/",
+      "coordinates": {
+        "lat": 53.1868,
+        "lng": -104.7792
+      },
+      "baseElevationM": 432,
+      "topElevationM": 511,
+      "forecastElevationM": 472,
+      "locality": "Melfort",
+      "province": "Saskatchewan",
+      "travelRegionId": "canada-saskatchewan",
+      "route": "/canada-saskatchewan/mountain/wapiti-valley-regional-park",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-quebec-owl-s-head",
+      "publicId": "owl-s-head",
+      "aliases": [],
+      "name": "Owl’s Head",
+      "officialUrl": "https://owlshead.com/",
+      "coordinates": {
+        "lat": 45.07336,
+        "lng": -72.29787
+      },
+      "baseElevationM": 239,
+      "topElevationM": 714,
+      "forecastElevationM": 477,
+      "locality": "Mansonville",
+      "province": "Quebec",
+      "travelRegionId": "canada-quebec",
+      "route": "/canada-quebec/mountain/owl-s-head",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-quebec-mont-orford",
+      "publicId": "mont-orford",
+      "aliases": [],
+      "name": "Mont-Orford",
+      "officialUrl": "https://montorford.com/",
+      "coordinates": {
+        "lat": 45.31789,
+        "lng": -72.222
+      },
+      "baseElevationM": 317,
+      "topElevationM": 850,
+      "forecastElevationM": 584,
+      "locality": "Orford",
+      "province": "Quebec",
+      "travelRegionId": "canada-quebec",
+      "route": "/canada-quebec/mountain/mont-orford",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-quebec-mont-grand-fonds",
+      "publicId": "mont-grand-fonds",
+      "aliases": [
+        "le-mont-grand-fonds"
+      ],
+      "name": "Mont Grand-Fonds",
+      "officialUrl": "https://montgrandfonds.com/",
+      "coordinates": {
+        "lat": 47.77104,
+        "lng": -70.10219
+      },
+      "baseElevationM": 400,
+      "topElevationM": 735,
+      "forecastElevationM": 568,
+      "locality": "La Malbaie",
+      "province": "Quebec",
+      "travelRegionId": "canada-quebec",
+      "route": "/canada-quebec/mountain/mont-grand-fonds",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-quebec-massif-du-sud",
+      "publicId": "massif-du-sud",
+      "aliases": [],
+      "name": "Massif du Sud",
+      "officialUrl": "https://massifdusud.net/",
+      "coordinates": {
+        "lat": 46.62074,
+        "lng": -70.49138
+      },
+      "baseElevationM": 515,
+      "topElevationM": 915,
+      "forecastElevationM": 715,
+      "locality": "Saint-Philémon",
+      "province": "Quebec",
+      "travelRegionId": "canada-quebec",
+      "route": "/canada-quebec/mountain/massif-du-sud",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-quebec-val-saint-come",
+      "publicId": "val-saint-come",
+      "aliases": [],
+      "name": "Val Saint-Côme",
+      "officialUrl": "https://www.valsaintcome.com/",
+      "coordinates": {
+        "lat": 46.2723,
+        "lng": -73.871
+      },
+      "baseElevationM": 300,
+      "topElevationM": 600,
+      "forecastElevationM": 450,
+      "locality": "Saint-Côme",
+      "province": "Quebec",
+      "travelRegionId": "canada-quebec",
+      "route": "/canada-quebec/mountain/val-saint-come",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-quebec-station-touristique-stoneham",
+      "publicId": "station-touristique-stoneham",
+      "aliases": [
+        "stoneham-mountain-resort",
+        "stoneham"
+      ],
+      "name": "Station touristique Stoneham",
+      "officialUrl": "https://ski-stoneham.com/",
+      "coordinates": {
+        "lat": 47.0272,
+        "lng": -71.38484
+      },
+      "baseElevationM": 248,
+      "topElevationM": 593,
+      "forecastElevationM": 421,
+      "locality": "Stoneham-et-Tewkesbury",
+      "province": "Quebec",
+      "travelRegionId": "canada-quebec",
+      "route": "/canada-quebec/mountain/station-touristique-stoneham",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-quebec-le-relais",
+      "publicId": "le-relais",
+      "aliases": [
+        "centre-de-ski-le-relais"
+      ],
+      "name": "Le Relais",
+      "officialUrl": "https://www.skirelais.com/",
+      "coordinates": {
+        "lat": 46.94061,
+        "lng": -71.29983
+      },
+      "baseElevationM": 205,
+      "topElevationM": 429,
+      "forecastElevationM": 317,
+      "locality": "Lac-Beauport",
+      "province": "Quebec",
+      "travelRegionId": "canada-quebec",
+      "route": "/canada-quebec/mountain/le-relais",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-new-brunswick-crabbe-mountain",
+      "publicId": "crabbe-mountain",
+      "aliases": [],
+      "name": "Crabbe Mountain",
+      "officialUrl": "https://www.crabbemountain.com/",
+      "coordinates": {
+        "lat": 46.1179,
+        "lng": -67.104
+      },
+      "baseElevationM": 147,
+      "topElevationM": 390,
+      "forecastElevationM": 269,
+      "locality": "Central Hainesville",
+      "province": "New Brunswick",
+      "travelRegionId": "canada-new-brunswick",
+      "route": "/canada-new-brunswick/mountain/crabbe-mountain",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-new-brunswick-poley-mountain",
+      "publicId": "poley-mountain",
+      "aliases": [],
+      "name": "Poley Mountain",
+      "officialUrl": "https://www.poleymountain.com/",
+      "coordinates": {
+        "lat": 45.67831,
+        "lng": -65.38361
+      },
+      "baseElevationM": 76,
+      "topElevationM": 277,
+      "forecastElevationM": 177,
+      "locality": "Waterford",
+      "province": "New Brunswick",
+      "travelRegionId": "canada-new-brunswick",
+      "route": "/canada-new-brunswick/mountain/poley-mountain",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-new-brunswick-sugarloaf-provincial-park",
+      "publicId": "sugarloaf-provincial-park",
+      "aliases": [],
+      "name": "Sugarloaf Provincial Park",
+      "officialUrl": "https://parcsugarloafpark.ca/winter/",
+      "coordinates": {
+        "lat": 47.98108,
+        "lng": -66.71098
+      },
+      "baseElevationM": 42,
+      "topElevationM": 199,
+      "forecastElevationM": 121,
+      "locality": "Atholville",
+      "province": "New Brunswick",
+      "travelRegionId": "canada-new-brunswick",
+      "route": "/canada-new-brunswick/mountain/sugarloaf-provincial-park",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-new-brunswick-republik-nature",
+      "publicId": "republik-nature",
+      "aliases": [
+        "mont-farlagne"
+      ],
+      "name": "Républik Nature",
+      "officialUrl": "https://republiknature.com/ski/",
+      "coordinates": {
+        "lat": 47.41347,
+        "lng": -68.38133
+      },
+      "baseElevationM": 150,
+      "topElevationM": 338,
+      "forecastElevationM": 244,
+      "locality": "Edmundston",
+      "province": "New Brunswick",
+      "travelRegionId": "canada-new-brunswick",
+      "route": "/canada-new-brunswick/mountain/republik-nature",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-nova-scotia-ski-wentworth",
+      "publicId": "ski-wentworth",
+      "aliases": [],
+      "name": "Ski Wentworth",
+      "officialUrl": "https://www.skiwentworth.ca/",
+      "coordinates": {
+        "lat": 45.61043,
+        "lng": -63.56096
+      },
+      "baseElevationM": 55,
+      "topElevationM": 288,
+      "forecastElevationM": 172,
+      "locality": "Wentworth",
+      "province": "Nova Scotia",
+      "travelRegionId": "canada-nova-scotia",
+      "route": "/canada-nova-scotia/mountain/ski-wentworth",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-nova-scotia-ski-martock",
+      "publicId": "ski-martock",
+      "aliases": [],
+      "name": "Ski Martock",
+      "officialUrl": "https://www.martock.com/",
+      "coordinates": {
+        "lat": 44.93582,
+        "lng": -64.1712
+      },
+      "baseElevationM": 26,
+      "topElevationM": 188,
+      "forecastElevationM": 107,
+      "locality": "Windsor Forks",
+      "province": "Nova Scotia",
+      "travelRegionId": "canada-nova-scotia",
+      "route": "/canada-nova-scotia/mountain/ski-martock",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-nova-scotia-cape-smokey",
+      "publicId": "cape-smokey",
+      "aliases": [
+        "ski-cape-smokey"
+      ],
+      "name": "Cape Smokey",
+      "officialUrl": "https://capesmokey.ca/",
+      "coordinates": {
+        "lat": 46.62759,
+        "lng": -60.42118
+      },
+      "baseElevationM": 15,
+      "topElevationM": 283,
+      "forecastElevationM": 149,
+      "locality": "Ingonish Beach",
+      "province": "Nova Scotia",
+      "travelRegionId": "canada-nova-scotia",
+      "route": "/canada-nova-scotia/mountain/cape-smokey",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-nova-scotia-ski-ben-eoin",
+      "publicId": "ski-ben-eoin",
+      "aliases": [],
+      "name": "Ski Ben Eoin",
+      "officialUrl": "https://skibeneoin.com/",
+      "coordinates": {
+        "lat": 45.9886,
+        "lng": -60.4315
+      },
+      "baseElevationM": 14,
+      "topElevationM": 154,
+      "forecastElevationM": 84,
+      "locality": "Ben Eoin",
+      "province": "Nova Scotia",
+      "travelRegionId": "canada-nova-scotia",
+      "route": "/canada-nova-scotia/mountain/ski-ben-eoin",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-newfoundland-labrador-white-hills-resort",
+      "publicId": "white-hills-resort",
+      "aliases": [],
+      "name": "White Hills Resort",
+      "officialUrl": "https://www.whitehillsresort.com/",
+      "coordinates": {
+        "lat": 48.16248,
+        "lng": -54.04724
+      },
+      "baseElevationM": 147,
+      "topElevationM": 374,
+      "forecastElevationM": 261,
+      "locality": "Clarenville",
+      "province": "Newfoundland and Labrador",
+      "travelRegionId": "canada-newfoundland-labrador",
+      "route": "/canada-newfoundland-labrador/mountain/white-hills-resort",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-newfoundland-labrador-smokey-mountain-ski-club",
+      "publicId": "smokey-mountain-ski-club",
+      "aliases": [],
+      "name": "Smokey Mountain Ski Club",
+      "officialUrl": "https://www.skismokey.ca/",
+      "coordinates": {
+        "lat": 52.94497,
+        "lng": -66.91058
+      },
+      "baseElevationM": 595,
+      "topElevationM": 845,
+      "forecastElevationM": 720,
+      "locality": "Labrador City",
+      "province": "Newfoundland and Labrador",
+      "travelRegionId": "canada-newfoundland-labrador",
+      "route": "/canada-newfoundland-labrador/mountain/smokey-mountain-ski-club",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    {
+      "recordId": "ca-prince-edward-island-mark-arendz-provincial-ski-park-at-brookvale",
+      "publicId": "mark-arendz-provincial-ski-park-at-brookvale",
+      "aliases": [
+        "brookvale-ski-park"
+      ],
+      "name": "Mark Arendz Provincial Ski Park at Brookvale",
+      "officialUrl": "https://www.princeedwardisland.ca/en/information/tourism-pei/mark-arendz-provincial-ski-park",
+      "coordinates": {
+        "lat": 46.28203,
+        "lng": -63.41054
+      },
+      "baseElevationM": 20,
+      "topElevationM": 96,
+      "forecastElevationM": 58,
+      "locality": "Brookvale",
+      "province": "Prince Edward Island",
+      "travelRegionId": "canada-prince-edward-island",
+      "route": "/canada-prince-edward-island/mountain/mark-arendz-provincial-ski-park-at-brookvale",
+      "country": "Canada",
+      "countryCode": "CA"
+    }
+  ]
+}

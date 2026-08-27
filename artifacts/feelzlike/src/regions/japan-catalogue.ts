@@ -8,6 +8,10 @@ import {
   publishedRecords as publishedSkiCatalogueRecords,
   publishedRegions as publishedSkiCatalogueRegions,
 } from "@workspace/ski-catalogue/public-runtime";
+import {
+  publishedCatalogueRecords as publishedCanadaCatalogueRecords,
+  travelRegions as canadaTravelRegions,
+} from "@workspace/canada-ski-catalogue/public-runtime";
 
 /**
  * The catalogue is the publication authority for these records. This adapter
@@ -221,19 +225,26 @@ export interface PublishedMountainCapabilities {
   contentMode: "weather-only";
 }
 
+const ALL_PUBLISHED_MOUNTAINS = [
+  ...publishedCatalogueRecords.map((record) => ({
+    regionId: record.travelRegionId,
+    publicId: record.publicId,
+    aliases: record.aliases,
+  })),
+  ...publishedCanadaCatalogueRecords.map((record) => ({
+    regionId: record.travelRegionId,
+    publicId: record.publicId,
+    aliases: record.aliases,
+  })),
+  ...publishedSkiCatalogueRecords.map((record) => ({
+    regionId: record.regionId,
+    publicId: record.publicId,
+    aliases: record.aliases,
+  })),
+];
+
 const CATALOGUE_CAPABILITIES = new Map(
-  [
-    ...publishedCatalogueRecords.map((record) => ({
-      regionId: record.travelRegionId,
-      publicId: record.publicId,
-      aliases: record.aliases,
-    })),
-    ...publishedSkiCatalogueRecords.map((record) => ({
-      regionId: record.regionId,
-      publicId: record.publicId,
-      aliases: record.aliases,
-    })),
-  ].flatMap((record) =>
+  ALL_PUBLISHED_MOUNTAINS.flatMap((record) =>
     [record.publicId, ...record.aliases].map((id) => [
       `${record.regionId}/${id}`,
       {
@@ -246,10 +257,7 @@ const CATALOGUE_CAPABILITIES = new Map(
 );
 
 const CATALOGUE_REGION_BY_ID = new Map(
-  [
-    ...publishedCatalogueRecords.map((record) => ({ ...record, regionId: record.travelRegionId })),
-    ...publishedSkiCatalogueRecords,
-  ].flatMap((record) =>
+  ALL_PUBLISHED_MOUNTAINS.flatMap((record) =>
     [record.publicId, ...record.aliases].map((id) => [id, record.regionId] as const),
   ),
 );
@@ -259,8 +267,11 @@ export interface PublishedRegionCapabilities {
 }
 
 const CATALOGUE_REGION_CAPABILITIES = new Map(
-  publishedSkiCatalogueRegions.map((region) => [
-    region.regionId,
+  [
+    ...publishedSkiCatalogueRegions.map((region) => region.regionId),
+    ...canadaTravelRegions.map((region) => region.travelRegionId),
+  ].map((regionId) => [
+    regionId,
     { hasAlerts: false } satisfies PublishedRegionCapabilities,
   ]),
 );

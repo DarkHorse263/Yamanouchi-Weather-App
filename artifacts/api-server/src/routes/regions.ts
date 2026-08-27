@@ -8,6 +8,10 @@ import {
   publishedRecords as publishedSkiCatalogueRecords,
   publishedRegions as publishedSkiCatalogueRegions,
 } from "@workspace/ski-catalogue/public-runtime";
+import {
+  publishedCatalogueRecords as publishedCanadaCatalogueRecords,
+  travelRegions as canadaTravelRegions,
+} from "@workspace/canada-ski-catalogue/public-runtime";
 
 const router: IRouter = Router();
 
@@ -2084,22 +2088,21 @@ const REGIONS: RegionConfig[] = [
  * headline. These are metadata-only by design: no coordinates means
  * /api/regions never fan-outs to Open-Meteo once per catalogue record.
  */
-const CATALOGUE_REGIONS: RegionConfig[] = travelRegions
-  .filter((region) => !REGIONS.some((existing) => existing.id === region.travelRegionId))
-  .map((region) => ({
-    id: region.travelRegionId,
-    name: region.name,
-    country: "Japan",
-    countryCode: "JP",
-    region: region.prefectures.join(", "),
+const CATALOGUE_REGIONS: RegionConfig[] = [
+  ...travelRegions.map((region) => ({ region, country: "Japan" as const, countryCode: "JP" as const, area: region.prefectures.join(", "), towns: region.baseTowns.map((town) => town.name), sourceLabel: "Published Japan ski catalogue" })),
+  ...canadaTravelRegions.map((region) => ({ region, country: "Canada" as const, countryCode: "CA" as const, area: region.province, towns: [], sourceLabel: "Published Canada ski catalogue" })),
+]
+  .filter(({ region }) => !REGIONS.some((existing) => existing.id === region.travelRegionId))
+  .map(({ region, country, countryCode, area, towns, sourceLabel }) => ({
+    id: region.travelRegionId, name: region.name, country, countryCode, region: area,
     status: "live",
     href: `/${region.travelRegionId}/`,
-    baseTowns: region.baseTowns.map((town) => town.name),
-    mountains: publishedCatalogueRecords
+    baseTowns: towns,
+    mountains: [...publishedCatalogueRecords, ...publishedCanadaCatalogueRecords]
       .filter((record) => record.travelRegionId === region.travelRegionId)
       .map((record) => record.name),
     headlineLabel: region.name,
-    sourceLabel: "Published Japan ski catalogue",
+    sourceLabel,
   }));
 
 const GENERIC_CATALOGUE_REGIONS: RegionConfig[] = publishedSkiCatalogueRegions
@@ -2138,10 +2141,13 @@ const ALL_REGIONS: readonly RegionConfig[] = [
 
 /** Published JP travel-region metadata, keyed by the catalogue's shared id. */
 export const CATALOGUE_REGION_METADATA = new Map(
-  travelRegions.map((region) => [region.travelRegionId, {
+  [
+    ...travelRegions.map((region) => [region, "Japan" as const, "JP" as const] as const),
+    ...canadaTravelRegions.map((region) => [region, "Canada" as const, "CA" as const] as const),
+  ].map(([region, country, countryCode]) => [region.travelRegionId, {
     ...region,
-    country: "Japan" as const,
-    countryCode: "JP" as const,
+    country,
+    countryCode,
   }] as const),
 );
 

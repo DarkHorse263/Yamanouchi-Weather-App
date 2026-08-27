@@ -160,6 +160,7 @@ import { highmountRegion } from "./highmount";
 // Snow, Bromley Mountain, Magic Mountain), Okemo (Okemo Mountain
 // Resort), Jay Peak/Northeast Kingdom (Jay Peak, Burke Mountain). First
 // Eastern-timezone (America/New_York) US regions on this branch.
+import { mergeCanadaCatalogueRegions } from "./canada-catalogue";
 const AUTHORED_REGIONS: RegionConfig[] = [
   snowyMountainsRegion,
   victoriasHighCountryRegion,
@@ -281,8 +282,9 @@ const AUTHORED_REGIONS: RegionConfig[] = [
   highmountRegion,
 ];
 
+// Catalogue projections are ordered deliberately: Japan first, then Canada.
 export const REGIONS: RegionConfig[] = mergeSkiCatalogueRegions(
-  mergeJapanCatalogueRegions(AUTHORED_REGIONS),
+  mergeCanadaCatalogueRegions(mergeJapanCatalogueRegions(AUTHORED_REGIONS)),
 );
 
 export const REGION_BY_ID: Record<string, RegionConfig> = Object.fromEntries(
@@ -420,7 +422,7 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   ...Object.fromEntries(
     REGIONS
       .filter((region) => !AUTHORED_REGIONS.some((authored) => authored.id === region.id))
-      .map((region) => [region.id, "JP" as const]),
+       .map((region) => [region.id, region.shortTag === "CA" ? "CA" as const : "JP" as const]),
   ),
   ...Object.fromEntries(
     Object.entries(SKI_CATALOGUE_REGION_COUNTRIES)

@@ -26,6 +26,10 @@ import {
   publishedRecords as publishedSkiCatalogueRecords,
   publishedRegions as publishedSkiCatalogueRegions,
 } from "@workspace/ski-catalogue/public-runtime";
+import {
+  publishedCatalogueRecords as publishedCanadaCatalogueRecords,
+  travelRegions as canadaTravelRegions,
+} from "@workspace/canada-ski-catalogue/public-runtime";
 
 export const REGIONS = [
   // ── Australia ───────────────────────────────────────────────────────────
@@ -1438,6 +1442,21 @@ export const REGIONS = [
 
 ];
 
+// Canada catalogue regions are data-owned province projections.  Their
+// mountain routes are appended below from the same published runtime.
+for (const region of canadaTravelRegions) {
+  REGIONS.push({
+    slug: region.travelRegionId,
+    name: region.name,
+    subtitle: `${region.province} · Canada`,
+    country: "CA",
+    hasAlerts: false,
+    hasRoads: false,
+    mountains: [],
+    towns: [],
+  });
+}
+
 /** Region sub-sections that actually render for this region (see gating notes above).
  * /alerts renders for EVERY region since Aug 2026: regions without a custom
  * Alerts page fall back to the generic RegionAlerts (RegionLayout), so the
@@ -1458,7 +1477,7 @@ export function townFeatures(region) {
 // ids here (they'd rot), extract them from the region source file at build
 // time so new mountains and new regions are picked up automatically.
 
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { dirname as _dirname, join as _join } from "node:path";
 import { fileURLToPath as _fileURLToPath } from "node:url";
 
@@ -1473,10 +1492,10 @@ const legacyRegionSlugs = new Set(REGIONS.map((region) => region.slug));
 const catalogueMountainByRoute = new Map();
 const catalogueMountainsByRegion = new Map();
 const catalogueTravelRegionsById = new Map(
-  travelRegions.map((region) => [region.travelRegionId, region]),
+  [...travelRegions, ...canadaTravelRegions].map((region) => [region.travelRegionId, region]),
 );
 
-for (const record of publishedCatalogueRecords) {
+for (const record of [...publishedCatalogueRecords, ...publishedCanadaCatalogueRecords]) {
   if (catalogueMountainByRoute.has(record.route)) {
     throw new Error(`[seo-regions] duplicate published catalogue route: ${record.route}`);
   }
@@ -1616,6 +1635,11 @@ export function groupJapanRegionsByPrefecture(regions = REGIONS.filter((r) => r.
 export function regionMountains(region) {
   if (region.catalogueOnly) return region.mountains;
   const file = _join(_here, "..", "src", "regions", `${region.slug}.ts`);
+  const catalogueMountains = catalogueMountainsByRegion.get(region.slug) || [];
+  if (!existsSync(file)) {
+    if (catalogueMountains.length > 0) return [...catalogueMountains];
+    throw new Error(`[seo-regions] missing region source and catalogue projection for ${region.slug}`);
+  }
   const src = readFileSync(file, "utf8");
   const mountainsMatch = /mountains\s*:\s*\[/.exec(src);
   const start = mountainsMatch?.index ?? -1;
@@ -1647,9 +1671,8 @@ export function regionMountains(region) {
   // Preserve every hand-authored legacy route, then add catalogue records for
   // this region.  Do not extract catalogue records from src/regions: published
   // catalogue data above is the sole source for the new route projection.
-  if (region.country !== "JP") return out;
   const seen = new Set(out.map((mountain) => mountain.id));
-  for (const mountain of catalogueMountainsByRegion.get(region.slug) || []) {
+  for (const mountain of catalogueMountains) {
     if (!seen.has(mountain.id)) out.push(mountain);
   }
   return out;

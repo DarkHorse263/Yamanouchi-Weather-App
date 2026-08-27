@@ -24,6 +24,8 @@ test("production SPA validates authored and catalogue mountain and base-town rou
       { path: "yamanouchi", id: "shigakogen-mountain-resort", expectedStatus: 200 },
       { path: "nagano-regional", id: "togakushi-ski-resort", expectedStatus: 200 },
       { path: "nagano-regional", id: "not-a-published-mountain", expectedStatus: 404 },
+      { path: "canada-ontario", id: "blue-mountain-resort", expectedStatus: 200 },
+      { path: "canada-ontario", id: "not-a-published-mountain", expectedStatus: 404 },
     ] as const;
 
     for (const routeKind of ["mountain", "resort"] as const) {
@@ -42,6 +44,8 @@ test("production SPA validates authored and catalogue mountain and base-town rou
       { path: "niseko/niseko-rankoshi", expectedStatus: 200 },
       { path: "hakuba-valley/hakuba", expectedStatus: 200 },
       { path: "nagano-regional/not-a-published-town", expectedStatus: 404 },
+      { path: "canada-ontario/canada-ontario-the-blue-mountains-collingwood-area", expectedStatus: 200 },
+      { path: "canada-ontario/not-a-published-town", expectedStatus: 404 },
     ] as const;
     for (const routeCase of townCases) {
       const response = await fetch(`${origin}/${routeCase.path}`);

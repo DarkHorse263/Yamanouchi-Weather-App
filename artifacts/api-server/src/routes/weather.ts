@@ -16,6 +16,8 @@ import {
   publishedRecords as publishedSkiCatalogueRecords,
   type PublicCatalogueRecord,
 } from "@workspace/ski-catalogue/public-runtime";
+import { publishedCatalogueRecords as publishedCanadaCatalogueRecords } from "@workspace/canada-ski-catalogue/public-runtime";
+import type { PublishedCanadaSkiRecord } from "@workspace/canada-ski-catalogue";
 
 const router: IRouter = Router();
 
@@ -791,7 +793,25 @@ const LOCATIONS: LocationConfig[] = [
  * Published catalogue entries use only model data: no unverified lift,
  * base-depth, station, or alert-feed claims are implied by this adapter.
  */
-function catalogueLocation(record: PublicRuntimeCatalogueRecord): LocationConfig {
+export function canadaCatalogueTimezone(province: string): string {
+  const timezones: Record<string, string> = {
+    "British Columbia": "America/Vancouver",
+    Alberta: "America/Edmonton",
+    Saskatchewan: "America/Regina",
+    Manitoba: "America/Winnipeg",
+    Ontario: "America/Toronto",
+    Quebec: "America/Toronto",
+    "New Brunswick": "America/Halifax",
+    "Nova Scotia": "America/Halifax",
+    "Prince Edward Island": "America/Halifax",
+    "Newfoundland and Labrador": "America/St_Johns",
+  };
+  const timezone = timezones[province];
+  if (!timezone) throw new Error(`[canada-catalogue] unknown province timezone: "${province}"`);
+  return timezone;
+}
+
+function catalogueLocation(record: PublicRuntimeCatalogueRecord | PublishedCanadaSkiRecord): LocationConfig {
   return {
     id: record.publicId,
     name: record.name,
@@ -802,8 +822,8 @@ function catalogueLocation(record: PublicRuntimeCatalogueRecord): LocationConfig
     bomStation: "Open-Meteo (catalogue forecast location)",
     bomStationId: "",
     bomWmoId: 0,
-    timezone: "Asia/Tokyo",
-    region: "JP",
+    timezone: record.countryCode === "CA" ? canadaCatalogueTimezone(record.province) : "Asia/Tokyo",
+    region: record.countryCode,
   };
 }
 
@@ -824,8 +844,9 @@ function skiCatalogueLocation(record: PublicCatalogueRecord): LocationConfig {
 }
 
 const HARD_CODED_LOCATION_IDS = new Set(LOCATIONS.map((location) => location.id));
+const ALL_CATALOGUE_RECORDS = [...publishedCatalogueRecords, ...publishedCanadaCatalogueRecords];
 const CATALOGUE_LOCATIONS = [
-  ...publishedCatalogueRecords.map(catalogueLocation),
+  ...ALL_CATALOGUE_RECORDS.map(catalogueLocation),
   ...publishedSkiCatalogueRecords.map(skiCatalogueLocation),
 ];
 const CATALOGUE_LOCATION_BY_ID = new Map<string, LocationConfig>();
@@ -834,13 +855,13 @@ const CATALOGUE_LOCATION_BY_ID = new Map<string, LocationConfig>();
  * Builds the public-id/alias index at module load so a catalogue collision
  * fails boot and tests rather than silently changing an existing location.
  */
-for (const record of [...publishedCatalogueRecords, ...publishedSkiCatalogueRecords]) {
+for (const record of [...ALL_CATALOGUE_RECORDS, ...publishedSkiCatalogueRecords]) {
   for (const id of [record.publicId, ...record.aliases]) {
     if (HARD_CODED_LOCATION_IDS.has(id) || CATALOGUE_LOCATION_BY_ID.has(id)) {
-      throw new Error(`[ski-catalogue] location id/alias collision: "${id}"`);
+      throw new Error(`[catalogue] location id/alias collision: "${id}"`);
     }
     const location = CATALOGUE_LOCATIONS.find((candidate) => candidate.id === record.publicId);
-    if (!location) throw new Error(`[ski-catalogue] missing location for "${record.publicId}"`);
+    if (!location) throw new Error(`[catalogue] missing location for "${record.publicId}"`);
     CATALOGUE_LOCATION_BY_ID.set(id, location);
   }
 }

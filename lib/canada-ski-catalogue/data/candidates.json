@@ -1,0 +1,2858 @@
+[
+  {
+    "id": "ca-ontario-blue-mountain-resort",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-blue-mountain-collingwood"
+    },
+    "officialIdentity": "Blue Mountain Resort",
+    "officialUrl": "https://www.bluemountain.ca/",
+    "coordinates": {
+      "lat": 44.500756,
+      "lng": -80.317907
+    },
+    "elevations": {
+      "baseM": 230,
+      "topM": 450,
+      "forecastM": 340
+    },
+    "locality": "The Blue Mountains (Collingwood area)",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "publicId": "blue-mountain-resort",
+    "evidence": {
+      "officialIdentityUrl": "https://www.bluemountain.ca/things-to-do/skiing-and-snowboarding",
+      "officialUrl": "https://www.bluemountain.ca/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=44.500756&mlon=-80.317907#map=16/44.500756/-80.317907",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/blue-mountain-resort-collingwood/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/blue-mountain-resort-collingwood/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/blue-mountain-resort-collingwood/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=44.500756&mlon=-80.317907#map=16/44.500756/-80.317907",
+      "provinceUrl": "https://www.bluemountain.ca/things-to-do/skiing-and-snowboarding"
+    },
+    "notes": "Source name: Blue Mountain — Collingwood."
+  },
+  {
+    "id": "ca-ontario-mount-st-louis-moonstone",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-mount-st-louis-moonstone-coldwater"
+    },
+    "officialIdentity": "Mount St. Louis Moonstone",
+    "officialUrl": "https://www.mountstlouis.com/",
+    "coordinates": {
+      "lat": 44.62365,
+      "lng": -79.666698
+    },
+    "elevations": {
+      "baseM": 215,
+      "topM": 368,
+      "forecastM": 292
+    },
+    "locality": "Moonstone",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "publicId": "mount-st-louis-moonstone",
+    "evidence": {
+      "officialIdentityUrl": "https://www.mountstlouis.com/",
+      "officialUrl": "https://www.mountstlouis.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=44.623650&mlon=-79.666698#map=16/44.623650/-79.666698",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/mount-st-louis-moonstone/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/mount-st-louis-moonstone/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/mount-st-louis-moonstone/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=44.623650&mlon=-79.666698#map=16/44.623650/-79.666698",
+      "provinceUrl": "https://www.mountstlouis.com/"
+    },
+    "notes": "Source name: Mount St. Louis Moonstone — Coldwater."
+  },
+  {
+    "id": "ca-ontario-horseshoe-resort",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-horseshoe-resort-barrie"
+    },
+    "officialIdentity": "Horseshoe Resort",
+    "officialUrl": "https://horseshoeresort.com/",
+    "coordinates": {
+      "lat": 44.548967,
+      "lng": -79.67367
+    },
+    "elevations": {
+      "baseM": 309,
+      "topM": 402,
+      "forecastM": 356
+    },
+    "locality": "Horseshoe Valley",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "publicId": "horseshoe-resort",
+    "evidence": {
+      "officialIdentityUrl": "https://horseshoeresort.com/ski/",
+      "officialUrl": "https://horseshoeresort.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=44.548967&mlon=-79.673670#map=16/44.548967/-79.673670",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/horseshoe-resort/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/horseshoe-resort/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/horseshoe-resort/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=44.548967&mlon=-79.673670#map=16/44.548967/-79.673670",
+      "provinceUrl": "https://horseshoeresort.com/ski/"
+    },
+    "notes": "Source name: Horseshoe Resort — Barrie."
+  },
+  {
+    "id": "ca-ontario-calabogie-peaks-resort",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-calabogie-peaks-near-ottawa"
+    },
+    "officialIdentity": "Calabogie Peaks Resort",
+    "officialUrl": "https://www.calabogie.com/",
+    "coordinates": {
+      "lat": 45.269037,
+      "lng": -76.786902
+    },
+    "elevations": {
+      "baseM": 154,
+      "topM": 392,
+      "forecastM": 273
+    },
+    "locality": "Calabogie",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "publicId": "calabogie-peaks-resort",
+    "evidence": {
+      "officialIdentityUrl": "https://www.calabogie.com/mountain/",
+      "officialUrl": "https://www.calabogie.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=45.269037&mlon=-76.786902#map=16/45.269037/-76.786902",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/calabogie-peaks/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/calabogie-peaks/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/calabogie-peaks/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=45.269037&mlon=-76.786902#map=16/45.269037/-76.786902",
+      "provinceUrl": "https://www.calabogie.com/mountain/"
+    },
+    "notes": "Source name: Calabogie Peaks — near Ottawa."
+  },
+  {
+    "id": "ca-ontario-searchmont-resort",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-searchmont-resort-near-sault-ste-marie"
+    },
+    "officialIdentity": "Searchmont Resort",
+    "officialUrl": "https://searchmont.com/",
+    "coordinates": {
+      "lat": 46.768352,
+      "lng": -84.041554
+    },
+    "elevations": {
+      "baseM": 233,
+      "topM": 488,
+      "forecastM": 361
+    },
+    "locality": "Searchmont",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "publicId": "searchmont-resort",
+    "evidence": {
+      "officialIdentityUrl": "https://searchmont.com/winter/",
+      "officialUrl": "https://searchmont.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=46.768352&mlon=-84.041554#map=16/46.768352/-84.041554",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/searchmont/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/searchmont/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/searchmont/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=46.768352&mlon=-84.041554#map=16/46.768352/-84.041554",
+      "provinceUrl": "https://searchmont.com/winter/"
+    },
+    "notes": "Source name: Searchmont Resort — near Sault Ste. Marie."
+  },
+  {
+    "id": "ca-ontario-snow-valley-ski-resort",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-snow-valley-barrie"
+    },
+    "officialIdentity": "Snow Valley Ski Resort",
+    "officialUrl": "https://www.skisnowvalley.com/",
+    "coordinates": {
+      "lat": 44.410074,
+      "lng": -79.791566
+    },
+    "elevations": {
+      "baseM": 235,
+      "topM": 320,
+      "forecastM": 278
+    },
+    "locality": "Minesing (Barrie area)",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "publicId": "snow-valley-ski-resort",
+    "evidence": {
+      "officialIdentityUrl": "https://www.skisnowvalley.com/",
+      "officialUrl": "https://www.skisnowvalley.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=44.410074&mlon=-79.791566#map=16/44.410074/-79.791566",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/snow-valley-barrie/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/snow-valley-barrie/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/snow-valley-barrie/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=44.410074&mlon=-79.791566#map=16/44.410074/-79.791566",
+      "provinceUrl": "https://www.skisnowvalley.com/"
+    },
+    "notes": "Source name: Snow Valley — Barrie."
+  },
+  {
+    "id": "ca-ontario-glen-eden",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-glen-eden-milton"
+    },
+    "officialIdentity": "Glen Eden",
+    "officialUrl": "https://gleneden.on.ca/",
+    "coordinates": {
+      "lat": 43.504097,
+      "lng": -79.943629
+    },
+    "elevations": {
+      "baseM": 248,
+      "topM": 320,
+      "forecastM": 284
+    },
+    "locality": "Milton",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "publicId": "glen-eden",
+    "evidence": {
+      "officialIdentityUrl": "https://gleneden.on.ca/",
+      "officialUrl": "https://gleneden.on.ca/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=43.504097&mlon=-79.943629#map=16/43.504097/-79.943629",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/glen-eden/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/glen-eden/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/glen-eden/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=43.504097&mlon=-79.943629#map=16/43.504097/-79.943629",
+      "provinceUrl": "https://gleneden.on.ca/"
+    },
+    "notes": "Source name: Glen Eden — Milton."
+  },
+  {
+    "id": "ca-ontario-hockley-valley-resort",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-hockley-valley-mono"
+    },
+    "officialIdentity": "Hockley Valley Resort",
+    "officialUrl": "https://hockley.com/ski-snowboarding/",
+    "coordinates": {
+      "lat": 43.977659,
+      "lng": -80.047111
+    },
+    "elevations": {
+      "baseM": 324,
+      "topM": 396,
+      "forecastM": 360
+    },
+    "locality": "Mono",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "publicId": "hockley-valley-resort",
+    "evidence": {
+      "officialIdentityUrl": "https://hockley.com/ski-snowboarding/",
+      "officialUrl": "https://hockley.com/ski-snowboarding/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=43.977659&mlon=-80.047111#map=16/43.977659/-80.047111",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/hockley-valley/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/hockley-valley/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/hockley-valley/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=43.977659&mlon=-80.047111#map=16/43.977659/-80.047111",
+      "provinceUrl": "https://hockley.com/ski-snowboarding/"
+    },
+    "notes": "Source name: Hockley Valley — Mono."
+  },
+  {
+    "id": "ca-ontario-mount-pakenham",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-mount-pakenham-near-ottawa"
+    },
+    "officialIdentity": "Mount Pakenham",
+    "officialUrl": "https://www.mountpakenham.com/",
+    "coordinates": {
+      "lat": 45.320122,
+      "lng": -76.338246
+    },
+    "elevations": {
+      "baseM": 137,
+      "topM": 217,
+      "forecastM": 177
+    },
+    "locality": "Pakenham",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "publicId": "mount-pakenham",
+    "evidence": {
+      "officialIdentityUrl": "https://www.mountpakenham.com/",
+      "officialUrl": "https://www.mountpakenham.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=45.320122&mlon=-76.338246#map=16/45.320122/-76.338246",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/mount-pakenham/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/mount-pakenham/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/mount-pakenham/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=45.320122&mlon=-76.338246#map=16/45.320122/-76.338246",
+      "provinceUrl": "https://www.mountpakenham.com/"
+    },
+    "notes": "Source name: Mount Pakenham — near Ottawa."
+  },
+  {
+    "id": "ca-ontario-lakeridge-ski-resort",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-lakeridge-resort-uxbridge"
+    },
+    "officialIdentity": "Lakeridge Ski Resort",
+    "officialUrl": "https://ski-lakeridge.com/",
+    "coordinates": {
+      "lat": 44.02787,
+      "lng": -79.062737
+    },
+    "elevations": {
+      "baseM": 300,
+      "topM": 375,
+      "forecastM": 338
+    },
+    "locality": "Uxbridge",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "publicId": "lakeridge-ski-resort",
+    "evidence": {
+      "officialIdentityUrl": "https://ski-lakeridge.com/",
+      "officialUrl": "https://ski-lakeridge.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=44.027870&mlon=-79.062737#map=16/44.027870/-79.062737",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/lakeridge-resort/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/lakeridge-resort/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/lakeridge-resort/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=44.027870&mlon=-79.062737#map=16/44.027870/-79.062737",
+      "provinceUrl": "https://ski-lakeridge.com/"
+    },
+    "notes": "Source name: Lakeridge Resort — Uxbridge."
+  },
+  {
+    "id": "ca-ontario-boler-mountain",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-boler-mountain-london"
+    },
+    "officialIdentity": "Boler Mountain",
+    "officialUrl": "https://www.bolermountain.com/",
+    "coordinates": {
+      "lat": 42.939433,
+      "lng": -81.340403
+    },
+    "elevations": {
+      "baseM": 262,
+      "topM": 328,
+      "forecastM": 295
+    },
+    "locality": "London",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "publicId": "boler-mountain",
+    "evidence": {
+      "officialIdentityUrl": "https://www.bolermountain.com/winter/",
+      "officialUrl": "https://www.bolermountain.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=42.939433&mlon=-81.340403#map=16/42.939433/-81.340403",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/boler-mountain-london/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/boler-mountain-london/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/boler-mountain-london/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=42.939433&mlon=-81.340403#map=16/42.939433/-81.340403",
+      "provinceUrl": "https://www.bolermountain.com/winter/"
+    },
+    "notes": "Source name: Boler Mountain — London."
+  },
+  {
+    "id": "ca-ontario-caledon-ski-club",
+    "lifecycle": "verified",
+    "classification": "private_restricted",
+    "operatingStatus": "operating",
+    "publicAccess": "private",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-caledon-ski-club-caledon"
+    },
+    "officialIdentity": "Caledon Ski Club",
+    "officialUrl": "https://caledonskiclub.com/",
+    "coordinates": {
+      "lat": 43.806043,
+      "lng": -80.005988
+    },
+    "elevations": {
+      "baseM": 334,
+      "topM": 414,
+      "forecastM": 374
+    },
+    "locality": "Caledon",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "evidence": {
+      "officialIdentityUrl": "https://caledonskiclub.com/membership/",
+      "officialUrl": "https://caledonskiclub.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=43.806043&mlon=-80.005988#map=16/43.806043/-80.005988",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/caledon-ski-club/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/caledon-ski-club/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/caledon-ski-club/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=43.806043&mlon=-80.005988#map=16/43.806043/-80.005988",
+      "provinceUrl": "https://caledonskiclub.com/membership/"
+    },
+    "notes": "Source name: Caledon Ski Club — Caledon."
+  },
+  {
+    "id": "ca-ontario-craigleith-ski-club",
+    "lifecycle": "verified",
+    "classification": "private_restricted",
+    "operatingStatus": "operating",
+    "publicAccess": "private",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-craigleith-ski-club-blue-mountains-area"
+    },
+    "officialIdentity": "Craigleith Ski Club",
+    "officialUrl": "https://craigleith.com/",
+    "coordinates": {
+      "lat": 44.514695,
+      "lng": -80.339986
+    },
+    "elevations": {
+      "baseM": 235,
+      "topM": 446,
+      "forecastM": 341
+    },
+    "locality": "The Blue Mountains",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "evidence": {
+      "officialIdentityUrl": "https://craigleith.com/membership/",
+      "officialUrl": "https://craigleith.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=44.514695&mlon=-80.339986#map=16/44.514695/-80.339986",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/craigleith-ski-club/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/craigleith-ski-club/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/craigleith-ski-club/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=44.514695&mlon=-80.339986#map=16/44.514695/-80.339986",
+      "provinceUrl": "https://craigleith.com/membership/"
+    },
+    "notes": "Source name: Craigleith Ski Club — Blue Mountains area."
+  },
+  {
+    "id": "ca-ontario-georgian-peaks-club",
+    "lifecycle": "verified",
+    "classification": "private_restricted",
+    "operatingStatus": "operating",
+    "publicAccess": "private",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-georgian-peaks-club-blue-mountains-area"
+    },
+    "officialIdentity": "Georgian Peaks Club",
+    "officialUrl": "https://www.georgianpeaks.com/",
+    "coordinates": {
+      "lat": 44.530749,
+      "lng": -80.37666
+    },
+    "elevations": {
+      "baseM": 181,
+      "topM": 430,
+      "forecastM": 306
+    },
+    "locality": "The Blue Mountains",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "evidence": {
+      "officialIdentityUrl": "https://www.georgianpeaks.com/membership",
+      "officialUrl": "https://www.georgianpeaks.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=44.530749&mlon=-80.376660#map=16/44.530749/-80.376660",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/georgian-peaks-club/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/georgian-peaks-club/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/georgian-peaks-club/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=44.530749&mlon=-80.376660#map=16/44.530749/-80.376660",
+      "provinceUrl": "https://www.georgianpeaks.com/membership"
+    },
+    "notes": "Source name: Georgian Peaks Club — Blue Mountains area."
+  },
+  {
+    "id": "ca-ontario-devil-s-glen-country-club",
+    "lifecycle": "verified",
+    "classification": "private_restricted",
+    "operatingStatus": "operating",
+    "publicAccess": "private",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-devil-s-glen-country-club-blue-mountains-area"
+    },
+    "officialIdentity": "Devil's Glen Country Club",
+    "officialUrl": "https://www.devilsglen.com/",
+    "coordinates": {
+      "lat": 44.353204,
+      "lng": -80.203948
+    },
+    "elevations": {
+      "baseM": 372,
+      "topM": 522,
+      "forecastM": 447
+    },
+    "locality": "Glen Huron",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "evidence": {
+      "officialIdentityUrl": "https://www.devilsglen.com/membership",
+      "officialUrl": "https://www.devilsglen.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=44.353204&mlon=-80.203948#map=16/44.353204/-80.203948",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/devils-glen/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/devils-glen/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/devils-glen/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=44.353204&mlon=-80.203948#map=16/44.353204/-80.203948",
+      "provinceUrl": "https://www.devilsglen.com/membership"
+    },
+    "notes": "Source name: Devil's Glen Country Club — Blue Mountains area."
+  },
+  {
+    "id": "ca-ontario-osler-bluff-ski-club",
+    "lifecycle": "verified",
+    "classification": "private_restricted",
+    "operatingStatus": "operating",
+    "publicAccess": "private",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-osler-bluff-ski-club-blue-mountains-area"
+    },
+    "officialIdentity": "Osler Bluff Ski Club",
+    "officialUrl": "https://www.oslerbluff.com/",
+    "coordinates": {
+      "lat": 44.457386,
+      "lng": -80.284365
+    },
+    "elevations": {
+      "baseM": 278,
+      "topM": 507,
+      "forecastM": 393
+    },
+    "locality": "The Blue Mountains",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "evidence": {
+      "officialIdentityUrl": "https://www.oslerbluff.com/membership/",
+      "officialUrl": "https://www.oslerbluff.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=44.457386&mlon=-80.284365#map=16/44.457386/-80.284365",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/osler-bluff-ski-club/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/osler-bluff-ski-club/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/osler-bluff-ski-club/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=44.457386&mlon=-80.284365#map=16/44.457386/-80.284365",
+      "provinceUrl": "https://www.oslerbluff.com/membership/"
+    },
+    "notes": "Source name: Osler Bluff Ski Club — Blue Mountains area."
+  },
+  {
+    "id": "ca-ontario-beaver-valley-ski-club",
+    "lifecycle": "verified",
+    "classification": "private_restricted",
+    "operatingStatus": "operating",
+    "publicAccess": "private",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-beaver-valley-ski-club-kimberley"
+    },
+    "officialIdentity": "Beaver Valley Ski Club",
+    "officialUrl": "https://www.beavervalley.ca/",
+    "coordinates": {
+      "lat": 44.3544,
+      "lng": -80.551879
+    },
+    "elevations": {
+      "baseM": 261,
+      "topM": 410,
+      "forecastM": 336
+    },
+    "locality": "Kimberley",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "evidence": {
+      "officialIdentityUrl": "https://www.beavervalley.ca/membership",
+      "officialUrl": "https://www.beavervalley.ca/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=44.354400&mlon=-80.551879#map=16/44.354400/-80.551879",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/beaver-valley-ski-club/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/beaver-valley-ski-club/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/beaver-valley-ski-club/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=44.354400&mlon=-80.551879#map=16/44.354400/-80.551879",
+      "provinceUrl": "https://www.beavervalley.ca/membership"
+    },
+    "notes": "Source name: Beaver Valley Ski Club — Kimberley."
+  },
+  {
+    "id": "ca-ontario-mansfield-ski-club",
+    "lifecycle": "verified",
+    "classification": "private_restricted",
+    "operatingStatus": "operating",
+    "publicAccess": "private",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-mansfield-ski-club-mansfield"
+    },
+    "officialIdentity": "Mansfield Ski Club",
+    "officialUrl": "https://www.mansfieldskiclub.com/",
+    "coordinates": {
+      "lat": 44.199063,
+      "lng": -80.056977
+    },
+    "elevations": {
+      "baseM": 264,
+      "topM": 384,
+      "forecastM": 324
+    },
+    "locality": "Mansfield",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "evidence": {
+      "officialIdentityUrl": "https://www.mansfieldskiclub.com/membership",
+      "officialUrl": "https://www.mansfieldskiclub.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=44.199063&mlon=-80.056977#map=16/44.199063/-80.056977",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/mansfield-ski-club/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/mansfield-ski-club/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/mansfield-ski-club/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=44.199063&mlon=-80.056977#map=16/44.199063/-80.056977",
+      "provinceUrl": "https://www.mansfieldskiclub.com/membership"
+    },
+    "notes": "Source name: Mansfield Ski Club — Mansfield."
+  },
+  {
+    "id": "ca-ontario-hidden-valley-highlands-ski-area",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-hidden-valley-highlands-huntsville"
+    },
+    "officialIdentity": "Hidden Valley Highlands Ski Area",
+    "officialUrl": "https://skihiddenvalley.ca/",
+    "coordinates": {
+      "lat": 45.354801,
+      "lng": -79.133851
+    },
+    "elevations": {
+      "baseM": 280,
+      "topM": 380,
+      "forecastM": 330
+    },
+    "locality": "Huntsville",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "publicId": "hidden-valley-highlands-ski-area",
+    "evidence": {
+      "officialIdentityUrl": "https://skihiddenvalley.ca/",
+      "officialUrl": "https://skihiddenvalley.ca/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=45.354801&mlon=-79.133851#map=16/45.354801/-79.133851",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/hidden-valley-highlands/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/hidden-valley-highlands/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/hidden-valley-highlands/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=45.354801&mlon=-79.133851#map=16/45.354801/-79.133851",
+      "provinceUrl": "https://skihiddenvalley.ca/"
+    },
+    "notes": "Source name: Hidden Valley Highlands — Huntsville."
+  },
+  {
+    "id": "ca-ontario-chicopee",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-chicopee-ski-and-summer-resort-kitchener"
+    },
+    "officialIdentity": "Chicopee",
+    "officialUrl": "https://www.discoverchicopee.com/",
+    "coordinates": {
+      "lat": 43.433833,
+      "lng": -80.419756
+    },
+    "elevations": {
+      "baseM": 314,
+      "topM": 370,
+      "forecastM": 342
+    },
+    "locality": "Kitchener",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "publicId": "chicopee",
+    "evidence": {
+      "officialIdentityUrl": "https://www.discoverchicopee.com/winter",
+      "officialUrl": "https://www.discoverchicopee.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=43.433833&mlon=-80.419756#map=16/43.433833/-80.419756",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/chicopee/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/chicopee/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/chicopee/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=43.433833&mlon=-80.419756#map=16/43.433833/-80.419756",
+      "provinceUrl": "https://www.discoverchicopee.com/winter"
+    },
+    "notes": "Source name: Chicopee Ski & Summer Resort — Kitchener."
+  },
+  {
+    "id": "ca-ontario-brimacombe",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-brimacombe-orono"
+    },
+    "officialIdentity": "Brimacombe",
+    "officialUrl": "https://brimacombe.ca/",
+    "coordinates": {
+      "lat": 44.022585,
+      "lng": -78.577352
+    },
+    "elevations": {
+      "baseM": 218,
+      "topM": 310,
+      "forecastM": 264
+    },
+    "locality": "Orono",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "publicId": "brimacombe",
+    "evidence": {
+      "officialIdentityUrl": "https://brimacombe.ca/",
+      "officialUrl": "https://brimacombe.ca/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=44.022585&mlon=-78.577352#map=16/44.022585/-78.577352",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/brimacombe-oshawa-ski-club/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/brimacombe-oshawa-ski-club/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/brimacombe-oshawa-ski-club/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=44.022585&mlon=-78.577352#map=16/44.022585/-78.577352",
+      "provinceUrl": "https://brimacombe.ca/"
+    },
+    "notes": "Source name: Brimacombe — Orono."
+  },
+  {
+    "id": "ca-ontario-dagmar-ski-resort",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-dagmar-ski-resort-uxbridge-blackstock"
+    },
+    "officialIdentity": "Dagmar Ski Resort",
+    "officialUrl": "https://www.skidagmar.com/",
+    "coordinates": {
+      "lat": 44.011699,
+      "lng": -79.059664
+    },
+    "elevations": {
+      "baseM": 120,
+      "topM": 199,
+      "forecastM": 160
+    },
+    "locality": "Uxbridge",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "publicId": "dagmar-ski-resort",
+    "evidence": {
+      "officialIdentityUrl": "https://www.skidagmar.com/",
+      "officialUrl": "https://www.skidagmar.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=44.011699&mlon=-79.059664#map=16/44.011699/-79.059664",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/dagmar-ski-resort/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/dagmar-ski-resort/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/dagmar-ski-resort/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=44.011699&mlon=-79.059664#map=16/44.011699/-79.059664",
+      "provinceUrl": "https://www.skidagmar.com/"
+    },
+    "notes": "Source name: Dagmar Ski Resort — Uxbridge/Blackstock."
+  },
+  {
+    "id": "ca-ontario-sir-sam-s-ski-ride",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-sir-sam-s-ski-ride-haliburton-highlands"
+    },
+    "officialIdentity": "Sir Sam's Ski / Ride",
+    "officialUrl": "https://www.sirsams.ca/",
+    "coordinates": {
+      "lat": 45.1305,
+      "lng": -78.5151
+    },
+    "elevations": {
+      "baseM": 360,
+      "topM": 447,
+      "forecastM": 404
+    },
+    "locality": "Eagle Lake",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "publicId": "sir-sam-s-ski-ride",
+    "evidence": {
+      "officialIdentityUrl": "https://www.sirsams.ca/",
+      "officialUrl": "https://www.sirsams.ca/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=45.130500&mlon=-78.515100#map=16/45.130500/-78.515100",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/sir-sams/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/sir-sams/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/sir-sams/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=45.130500&mlon=-78.515100#map=16/45.130500/-78.515100",
+      "provinceUrl": "https://www.sirsams.ca/"
+    },
+    "notes": "Source name: Sir Sam's Ski/Ride — Haliburton Highlands."
+  },
+  {
+    "id": "ca-ontario-mount-chinguacousy-ski-and-snowboard-hill",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-mount-chinguacousy-brampton"
+    },
+    "officialIdentity": "Mount Chinguacousy Ski and Snowboard Hill",
+    "officialUrl": "https://www.brampton.ca/EN/residents/Recreation/Chinguacousy-Park/Pages/Mount-Chinguacousy.aspx",
+    "coordinates": {
+      "lat": 43.727787,
+      "lng": -79.724266
+    },
+    "elevations": {
+      "baseM": 218,
+      "topM": 237,
+      "forecastM": 228
+    },
+    "locality": "Brampton",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "publicId": "mount-chinguacousy-ski-and-snowboard-hill",
+    "evidence": {
+      "officialIdentityUrl": "https://www.brampton.ca/EN/residents/Recreation/Chinguacousy-Park/Pages/Mount-Chinguacousy.aspx",
+      "officialUrl": "https://www.brampton.ca/EN/residents/Recreation/Chinguacousy-Park/Pages/Mount-Chinguacousy.aspx",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=43.727787&mlon=-79.724266#map=16/43.727787/-79.724266",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/mt-chinguacousy-brampton/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/mt-chinguacousy-brampton/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/mt-chinguacousy-brampton/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=43.727787&mlon=-79.724266#map=16/43.727787/-79.724266",
+      "provinceUrl": "https://www.brampton.ca/EN/residents/Recreation/Chinguacousy-Park/Pages/Mount-Chinguacousy.aspx"
+    },
+    "notes": "Source name: Mount Chinguacousy — Brampton."
+  },
+  {
+    "id": "ca-ontario-adanac-ski-hill",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-adanac-ski-hill-sault-ste-marie"
+    },
+    "officialIdentity": "Adanac Ski Hill",
+    "officialUrl": "https://www.greatersudbury.ca/living/leisure/activities/ski-hills/adanac-ski-hill/",
+    "coordinates": {
+      "lat": 46.508877,
+      "lng": -80.959748
+    },
+    "elevations": {
+      "baseM": 270,
+      "topM": 340,
+      "forecastM": 305
+    },
+    "locality": "Greater Sudbury",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "publicId": "adanac-ski-hill",
+    "evidence": {
+      "officialIdentityUrl": "https://www.greatersudbury.ca/living/leisure/activities/ski-hills/adanac-ski-hill/",
+      "officialUrl": "https://www.greatersudbury.ca/living/leisure/activities/ski-hills/adanac-ski-hill/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=46.508877&mlon=-80.959748#map=16/46.508877/-80.959748",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/adanac-ski-hill/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/adanac-ski-hill/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/adanac-ski-hill/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=46.508877&mlon=-80.959748#map=16/46.508877/-80.959748",
+      "provinceUrl": "https://www.greatersudbury.ca/living/leisure/activities/ski-hills/adanac-ski-hill/"
+    },
+    "notes": "Source name: Adanac Ski Hill — Sault Ste. Marie. PDF locality corrected: Adanac is in Greater Sudbury, not Sault Ste. Marie."
+  },
+  {
+    "id": "ca-ontario-antoine-mountain",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-antoine-mountain-kenora"
+    },
+    "officialIdentity": "Antoine Mountain",
+    "officialUrl": "https://antoinemountain.ca/",
+    "coordinates": {
+      "lat": 46.36496,
+      "lng": -78.738749
+    },
+    "elevations": {
+      "baseM": 174,
+      "topM": 366,
+      "forecastM": 270
+    },
+    "locality": "Mattawa",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "publicId": "antoine-mountain",
+    "evidence": {
+      "officialIdentityUrl": "https://antoinemountain.ca/",
+      "officialUrl": "https://antoinemountain.ca/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=46.364960&mlon=-78.738749#map=16/46.364960/-78.738749",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/antoine-mountain/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/antoine-mountain/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/antoine-mountain/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=46.364960&mlon=-78.738749#map=16/46.364960/-78.738749",
+      "provinceUrl": "https://antoinemountain.ca/"
+    },
+    "notes": "Source name: Antoine Mountain — Kenora. PDF locality corrected: Antoine Mountain is near Mattawa, not Kenora."
+  },
+  {
+    "id": "ca-ontario-batawa-ski-hill",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-batawa-ski-hill-near-trenton"
+    },
+    "officialIdentity": "Batawa Ski Hill",
+    "officialUrl": "https://www.batawaskihill.com/",
+    "coordinates": {
+      "lat": 44.166523,
+      "lng": -77.596864
+    },
+    "elevations": {
+      "baseM": 30,
+      "topM": 80,
+      "forecastM": 55
+    },
+    "locality": "Batawa",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "publicId": "batawa-ski-hill",
+    "evidence": {
+      "officialIdentityUrl": "https://www.batawaskihill.com/",
+      "officialUrl": "https://www.batawaskihill.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=44.166523&mlon=-77.596864#map=16/44.166523/-77.596864",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/batawa-ski-hill/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/batawa-ski-hill/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/batawa-ski-hill/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=44.166523&mlon=-77.596864#map=16/44.166523/-77.596864",
+      "provinceUrl": "https://www.batawaskihill.com/"
+    },
+    "notes": "Source name: Batawa Ski Hill — near Trenton."
+  },
+  {
+    "id": "ca-ontario-loch-lomond-ski-area",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-loch-lomond-ski-area-thunder-bay"
+    },
+    "officialIdentity": "Loch Lomond Ski Area",
+    "officialUrl": "https://www.lochlomond.ca/",
+    "coordinates": {
+      "lat": 48.293752,
+      "lng": -89.346922
+    },
+    "elevations": {
+      "baseM": 251,
+      "topM": 430,
+      "forecastM": 341
+    },
+    "locality": "Thunder Bay",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "publicId": "loch-lomond-ski-area",
+    "evidence": {
+      "officialIdentityUrl": "https://www.lochlomond.ca/",
+      "officialUrl": "https://www.lochlomond.ca/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=48.293752&mlon=-89.346922#map=16/48.293752/-89.346922",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/loch-lomond/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/loch-lomond/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/loch-lomond/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=48.293752&mlon=-89.346922#map=16/48.293752/-89.346922",
+      "provinceUrl": "https://www.lochlomond.ca/"
+    },
+    "notes": "Source name: Loch Lomond Ski Area — Thunder Bay."
+  },
+  {
+    "id": "ca-ontario-mount-dufour-ski-area",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-mount-dufour-thunder-bay"
+    },
+    "officialIdentity": "Mount Dufour Ski Area",
+    "officialUrl": "https://www.mountdufour.com/",
+    "coordinates": {
+      "lat": 46.393579,
+      "lng": -82.631838
+    },
+    "elevations": {
+      "baseM": 314,
+      "topM": 412,
+      "forecastM": 363
+    },
+    "locality": "Elliot Lake",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "publicId": "mount-dufour-ski-area",
+    "evidence": {
+      "officialIdentityUrl": "https://www.mountdufour.com/",
+      "officialUrl": "https://www.mountdufour.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=46.393579&mlon=-82.631838#map=16/46.393579/-82.631838",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/mount-dufour/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/mount-dufour/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/mount-dufour/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=46.393579&mlon=-82.631838#map=16/46.393579/-82.631838",
+      "provinceUrl": "https://www.mountdufour.com/"
+    },
+    "notes": "Source name: Mount Dufour — Thunder Bay. PDF locality corrected: Mount Dufour is in Elliot Lake, not Thunder Bay."
+  },
+  {
+    "id": "ca-ontario-mount-jamieson-resort",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-mount-jamieson-timmins"
+    },
+    "officialIdentity": "Mount Jamieson Resort",
+    "officialUrl": "https://mountjamieson.ca/",
+    "coordinates": {
+      "lat": 48.53634,
+      "lng": -81.541518
+    },
+    "elevations": {
+      "baseM": 307,
+      "topM": 410,
+      "forecastM": 359
+    },
+    "locality": "Timmins",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "publicId": "mount-jamieson-resort",
+    "evidence": {
+      "officialIdentityUrl": "https://mountjamieson.ca/",
+      "officialUrl": "https://mountjamieson.ca/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=48.536340&mlon=-81.541518#map=16/48.536340/-81.541518",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/mount-jamieson-timmins/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/mount-jamieson-timmins/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/mount-jamieson-timmins/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=48.536340&mlon=-81.541518#map=16/48.536340/-81.541518",
+      "provinceUrl": "https://mountjamieson.ca/"
+    },
+    "notes": "Source name: Mount Jamieson — Timmins."
+  },
+  {
+    "id": "ca-ontario-mount-jamieson-resort-kamiskotia-snow-resort-timmins",
+    "lifecycle": "draft",
+    "classification": "duplicate_or_renamed",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-kamiskotia-snow-resort-timmins"
+    },
+    "officialIdentity": "Mount Jamieson Resort",
+    "officialUrl": "https://mountjamieson.ca/",
+    "coordinates": {
+      "lat": 48.53634,
+      "lng": -81.541518
+    },
+    "elevations": {
+      "baseM": 307,
+      "topM": 410,
+      "forecastM": 359
+    },
+    "locality": "Timmins",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "aliases": [
+      "Kamiskotia Snow Resort — Timmins"
+    ],
+    "evidence": {
+      "officialIdentityUrl": "https://mountjamieson.ca/about-us/",
+      "officialUrl": "https://mountjamieson.ca/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=48.536340&mlon=-81.541518#map=16/48.536340/-81.541518",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/mount-jamieson-timmins/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/mount-jamieson-timmins/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/mount-jamieson-timmins/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=48.536340&mlon=-81.541518#map=16/48.536340/-81.541518",
+      "provinceUrl": "https://mountjamieson.ca/about-us/"
+    },
+    "notes": "Source name: Kamiskotia Snow Resort — Timmins. Kamiskotia is the former name of the same hill separately listed by the PDF as Mount Jamieson; it is not a second resort."
+  },
+  {
+    "id": "ca-ontario-uplands-ski-centre",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-uplands-ski-club-north-bay"
+    },
+    "officialIdentity": "Uplands Ski Centre",
+    "officialUrl": "https://golfnorth.ca/uplands/",
+    "coordinates": {
+      "lat": 43.8258,
+      "lng": -79.4577
+    },
+    "elevations": {
+      "baseM": 170,
+      "topM": 200,
+      "forecastM": 185
+    },
+    "locality": "Thornhill (Vaughan)",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "publicId": "uplands-ski-centre",
+    "evidence": {
+      "officialIdentityUrl": "https://golfnorth.ca/uplands/winter/",
+      "officialUrl": "https://golfnorth.ca/uplands/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=43.825800&mlon=-79.457700#map=16/43.825800/-79.457700",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/uplands-ski-centre/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/uplands-ski-centre/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/uplands-ski-centre/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=43.825800&mlon=-79.457700#map=16/43.825800/-79.457700",
+      "provinceUrl": "https://golfnorth.ca/uplands/winter/"
+    },
+    "notes": "Source name: Uplands Ski Club — North Bay. PDF identity/locality corrected: the public Uplands Ski Centre is in Vaughan, not North Bay."
+  },
+  {
+    "id": "ca-ontario-trestle-ridge-ski-hill",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-trestle-ridge-nordica-sudbury-area"
+    },
+    "officialIdentity": "Trestle Ridge Ski Hill",
+    "officialUrl": "https://terrace-bay-ski-hill.square.site/",
+    "coordinates": {
+      "lat": 48.786109,
+      "lng": -87.109831
+    },
+    "elevations": {
+      "baseM": 260,
+      "topM": 281,
+      "forecastM": 271
+    },
+    "locality": "Terrace Bay",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "publicId": "trestle-ridge-ski-hill",
+    "evidence": {
+      "officialIdentityUrl": "https://terrace-bay-ski-hill.square.site/",
+      "officialUrl": "https://terrace-bay-ski-hill.square.site/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=48.786109&mlon=-87.109831#map=16/48.786109/-87.109831",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/trestle-ridge-terrace-bay/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/trestle-ridge-terrace-bay/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/trestle-ridge-terrace-bay/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=48.786109&mlon=-87.109831#map=16/48.786109/-87.109831",
+      "provinceUrl": "https://terrace-bay-ski-hill.square.site/"
+    },
+    "notes": "Source name: Trestle Ridge (Nordica) — Sudbury area. PDF locality corrected: Trestle Ridge, formerly Nordica, is at Terrace Bay, not near Sudbury."
+  },
+  {
+    "id": "ca-ontario-centennial-park-ski-and-snowboard-centre",
+    "lifecycle": "draft",
+    "classification": "closed",
+    "operatingStatus": "closed",
+    "publicAccess": "unknown",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-centennial-park-windsor"
+    },
+    "officialIdentity": "Centennial Park Ski and Snowboard Centre",
+    "coordinates": {
+      "lat": 43.6548,
+      "lng": -79.5879
+    },
+    "elevations": {
+      "baseM": 145,
+      "topM": 170,
+      "forecastM": 158
+    },
+    "locality": "Etobicoke, Toronto",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "evidence": {
+      "officialIdentityUrl": "https://www.toronto.ca/news/city-of-toronto-permanently-closing-centennial-park-ski-and-snowboard-centre/",
+      "officialUrl": "https://www.toronto.ca/news/city-of-toronto-permanently-closing-centennial-park-ski-and-snowboard-centre/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=43.654800&mlon=-79.587900#map=16/43.654800/-79.587900",
+      "baseElevationUrl": "https://www.openstreetmap.org/?mlat=43.654800&mlon=-79.587900#map=16/43.654800/-79.587900",
+      "topElevationUrl": "https://www.openstreetmap.org/?mlat=43.654800&mlon=-79.587900#map=16/43.654800/-79.587900",
+      "forecastElevationUrl": "https://www.openstreetmap.org/?mlat=43.654800&mlon=-79.587900#map=16/43.654800/-79.587900",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=43.654800&mlon=-79.587900#map=16/43.654800/-79.587900",
+      "provinceUrl": "https://www.toronto.ca/news/city-of-toronto-permanently-closing-centennial-park-ski-and-snowboard-centre/"
+    },
+    "notes": "Source name: Centennial Park (Windsor). The PDF locality is erroneous. Windsor's Centennial Park is not this former downhill facility; Toronto permanently ceased ski/snowboard operations at Centennial Park after the 2021–22 season."
+  },
+  {
+    "id": "ca-ontario-bethany-ski-resort",
+    "lifecycle": "published",
+    "classification": "duplicate_or_renamed",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-devil-s-elbow-ski-club-barrie-area"
+    },
+    "officialIdentity": "Bethany Ski Resort",
+    "officialUrl": "https://bethanyskiresort.com/",
+    "coordinates": {
+      "lat": 44.182,
+      "lng": -78.6002
+    },
+    "elevations": {
+      "baseM": 274,
+      "topM": 362,
+      "forecastM": 318
+    },
+    "locality": "Bethany",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "publicId": "bethany-ski-resort",
+    "aliases": [
+      "Devil's Elbow Ski Club"
+    ],
+    "evidence": {
+      "officialIdentityUrl": "https://bethanyskiresort.com/",
+      "officialUrl": "https://bethanyskiresort.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=44.182000&mlon=-78.600200#map=16/44.182000/-78.600200",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/devils-elbow/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/devils-elbow/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/devils-elbow/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=44.182000&mlon=-78.600200#map=16/44.182000/-78.600200",
+      "provinceUrl": "https://bethanyskiresort.com/"
+    },
+    "notes": "Source name: Devil's Elbow Ski Club (Barrie area). The PDF locality is erroneous. The former Devil's Elbow near Bethany reopened under the Bethany Ski Resort identity; the old name should not be added as a separate resort.",
+    "reconciliationStatus": "verified_operating"
+  },
+  {
+    "id": "ca-ontario-old-smokey-ski-hill",
+    "lifecycle": "draft",
+    "classification": "closed",
+    "operatingStatus": "closed",
+    "publicAccess": "unknown",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-old-smokey-ski-hill-huntsville"
+    },
+    "officialIdentity": "Old Smokey Ski Hill",
+    "coordinates": {
+      "lat": 45.329,
+      "lng": -79.209
+    },
+    "locality": "Huntsville",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "evidence": {
+      "officialIdentityUrl": "https://www.huntsville.ca/en/parks-recreation-and-culture/parks-and-trails.aspx",
+      "officialUrl": "https://www.huntsville.ca/en/parks-recreation-and-culture/parks-and-trails.aspx",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=45.329000&mlon=-79.209000#map=15/45.329000/-79.209000",
+      "baseElevationUrl": "https://www.huntsville.ca/en/parks-recreation-and-culture/parks-and-trails.aspx",
+      "topElevationUrl": "https://www.huntsville.ca/en/parks-recreation-and-culture/parks-and-trails.aspx",
+      "forecastElevationUrl": "https://www.huntsville.ca/en/parks-recreation-and-culture/parks-and-trails.aspx",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=45.329000&mlon=-79.209000#map=15/45.329000/-79.209000",
+      "provinceUrl": "https://www.huntsville.ca/en/parks-recreation-and-culture/parks-and-trails.aspx"
+    },
+    "notes": "Source name: Old Smokey Ski Hill (Huntsville). Historical Huntsville-area hill; no current operator, lift tickets, operating plan, or official downhill web presence could be verified as of August 2026."
+  },
+  {
+    "id": "ca-ontario-skyloft-ski-resort",
+    "lifecycle": "draft",
+    "classification": "closed",
+    "operatingStatus": "closed",
+    "publicAccess": "unknown",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-skyloft-ski-area-caledon"
+    },
+    "officialIdentity": "Skyloft Ski Resort",
+    "coordinates": {
+      "lat": 44.0008,
+      "lng": -79.0805
+    },
+    "elevations": {
+      "baseM": 335,
+      "topM": 404,
+      "forecastM": 370
+    },
+    "locality": "Uxbridge",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "evidence": {
+      "officialIdentityUrl": "https://www.skiresort.info/ski-resort/skyloft/",
+      "officialUrl": "https://www.skiresort.info/ski-resort/skyloft/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=44.000800&mlon=-79.080500#map=15/44.000800/-79.080500",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/skyloft/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/skyloft/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/skyloft/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=44.000800&mlon=-79.080500#map=15/44.000800/-79.080500",
+      "provinceUrl": "https://www.skiresort.info/ski-resort/skyloft/"
+    },
+    "notes": "Source name: Skyloft Ski Area (Caledon). The PDF locality is erroneous: Skyloft was in the Uxbridge ski cluster, not Caledon. It has no current operator or public downhill operation."
+  },
+  {
+    "id": "ca-ontario-talisman-mountain-resort",
+    "lifecycle": "draft",
+    "classification": "closed",
+    "operatingStatus": "closed",
+    "publicAccess": "unknown",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "ontario-talisman-resort-kimberley"
+    },
+    "officialIdentity": "Talisman Mountain Resort",
+    "coordinates": {
+      "lat": 44.390972,
+      "lng": -80.547608
+    },
+    "locality": "Kimberley",
+    "province": "Ontario",
+    "provinceId": "ontario",
+    "evidence": {
+      "officialIdentityUrl": "https://www.greyhighlands.ca/en/invest-and-build/talisman-lands.aspx",
+      "officialUrl": "https://www.greyhighlands.ca/en/invest-and-build/talisman-lands.aspx",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=44.390972&mlon=-80.547608#map=16/44.390972/-80.547608",
+      "baseElevationUrl": "https://www.greyhighlands.ca/en/invest-and-build/talisman-lands.aspx",
+      "topElevationUrl": "https://www.greyhighlands.ca/en/invest-and-build/talisman-lands.aspx",
+      "forecastElevationUrl": "https://www.greyhighlands.ca/en/invest-and-build/talisman-lands.aspx",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=44.390972&mlon=-80.547608#map=16/44.390972/-80.547608",
+      "provinceUrl": "https://www.greyhighlands.ca/en/invest-and-build/talisman-lands.aspx"
+    },
+    "notes": "Source name: Talisman Resort (Kimberley). The resort property has had non-ski redevelopment activity, but lift-served public downhill skiing remains closed and no ski operator or ticket sales were verified."
+  },
+  {
+    "id": "ca-british-columbia-red-mountain-resort",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "british-columbia-red-mountain-resort-rossland"
+    },
+    "officialIdentity": "RED Mountain Resort",
+    "officialUrl": "https://www.redresort.com/",
+    "coordinates": {
+      "lat": 49.1052,
+      "lng": -117.8464
+    },
+    "elevations": {
+      "baseM": 1185,
+      "topM": 2075,
+      "forecastM": 1630
+    },
+    "locality": "Rossland",
+    "province": "British Columbia",
+    "provinceId": "british-columbia",
+    "publicId": "red-mountain-resort",
+    "evidence": {
+      "officialIdentityUrl": "https://www.redresort.com/",
+      "officialUrl": "https://www.redresort.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=49.1052&mlon=-117.8464#map=15/49.1052/-117.8464",
+      "baseElevationUrl": "https://www.redresort.com/the-mountain/",
+      "topElevationUrl": "https://www.redresort.com/the-mountain/",
+      "forecastElevationUrl": "https://www.redresort.com/the-mountain/",
+      "localityUrl": "https://www.redresort.com/getting-here/",
+      "provinceUrl": "https://www.redresort.com/"
+    },
+    "notes": "Source name: Red Mountain Resort — Rossland. The 2026/27 season-pass sale is current first-party evidence of continuing public downhill operation. No duplicate was found in an authored feelzlike region; the Powder Highway region currently contains Revelstoke, Kicking Horse, Fernie, Whitewater, Kimberley and Panorama."
+  },
+  {
+    "id": "ca-british-columbia-manning-park-resort",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "british-columbia-manning-park-resort-near-hope"
+    },
+    "officialIdentity": "Manning Park Resort",
+    "officialUrl": "https://manningpark.com/",
+    "coordinates": {
+      "lat": 49.068,
+      "lng": -120.914
+    },
+    "elevations": {
+      "baseM": 1350,
+      "topM": 1789,
+      "forecastM": 1570
+    },
+    "locality": "Manning Park",
+    "province": "British Columbia",
+    "provinceId": "british-columbia",
+    "publicId": "manning-park-resort",
+    "evidence": {
+      "officialIdentityUrl": "https://manningpark.com/",
+      "officialUrl": "https://manningpark.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=49.0680&mlon=-120.9140#map=15/49.0680/-120.9140",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/manning-park/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/manning-park/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/manning-park/",
+      "localityUrl": "https://manningpark.com/getting-here/",
+      "provinceUrl": "https://manningpark.com/"
+    },
+    "notes": "Source name: Manning Park Resort — near Hope. The operator advertises 2026/27 season passes. The source's 'near Hope' is a travel description; the ski area is in Manning Park and that is the more accurate locality label."
+  },
+  {
+    "id": "ca-british-columbia-shames-mountain",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "british-columbia-shames-mountain-terrace"
+    },
+    "officialIdentity": "Shames Mountain",
+    "officialUrl": "https://mymountaincoop.ca/",
+    "coordinates": {
+      "lat": 54.4873,
+      "lng": -128.9534
+    },
+    "elevations": {
+      "baseM": 700,
+      "topM": 1189,
+      "forecastM": 945
+    },
+    "locality": "Terrace",
+    "province": "British Columbia",
+    "provinceId": "british-columbia",
+    "publicId": "shames-mountain",
+    "evidence": {
+      "officialIdentityUrl": "https://mymountaincoop.ca/about-us/",
+      "officialUrl": "https://mymountaincoop.ca/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=54.4873&mlon=-128.9534#map=15/54.4873/-128.9534",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/shames-mountain/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/shames-mountain/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/shames-mountain/",
+      "localityUrl": "https://mymountaincoop.ca/directions/",
+      "provinceUrl": "https://mymountaincoop.ca/about-us/"
+    },
+    "notes": "Source name: Shames Mountain — Terrace. My Mountain Co-op is the operator identity; Shames Mountain remains the public-facing ski-area name."
+  },
+  {
+    "id": "ca-british-columbia-powder-king-mountain-resort",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "british-columbia-powder-king-mountain-resort-mackenzie"
+    },
+    "officialIdentity": "Powder King Mountain Resort",
+    "officialUrl": "https://www.powderking.com/",
+    "coordinates": {
+      "lat": 55.3687,
+      "lng": -122.6112
+    },
+    "elevations": {
+      "baseM": 1267,
+      "topM": 1838,
+      "forecastM": 1553
+    },
+    "locality": "Mackenzie",
+    "province": "British Columbia",
+    "provinceId": "british-columbia",
+    "publicId": "powder-king-mountain-resort",
+    "evidence": {
+      "officialIdentityUrl": "https://www.powderking.com/contact/about-us",
+      "officialUrl": "https://www.powderking.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=55.3687&mlon=-122.6112#map=15/55.3687/-122.6112",
+      "baseElevationUrl": "https://www.powderking.com/contact/amazing-powder",
+      "topElevationUrl": "https://www.powderking.com/contact/amazing-powder",
+      "forecastElevationUrl": "https://www.powderking.com/contact/amazing-powder",
+      "localityUrl": "https://www.powderking.com/contact/contact",
+      "provinceUrl": "https://www.powderking.com/contact/about-us"
+    },
+    "notes": "Source name: Powder King Mountain Resort — Mackenzie. Operational-risk flag resolved: the official winter page says the 2025/26 season concluded and explicitly anticipates 'next season.' A sale or ownership dispute is not itself a closure."
+  },
+  {
+    "id": "ca-british-columbia-sasquatch-mountain-resort",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "british-columbia-hemlock-sasquatch-mountain-resort-agassiz"
+    },
+    "officialIdentity": "Sasquatch Mountain Resort",
+    "officialUrl": "https://sasquatchmountain.ca/",
+    "coordinates": {
+      "lat": 49.3792,
+      "lng": -121.9373
+    },
+    "elevations": {
+      "baseM": 980,
+      "topM": 1370,
+      "forecastM": 1175
+    },
+    "locality": "Hemlock Valley",
+    "province": "British Columbia",
+    "provinceId": "british-columbia",
+    "publicId": "sasquatch-mountain-resort",
+    "aliases": [
+      "Hemlock",
+      "Hemlock Valley Resort"
+    ],
+    "evidence": {
+      "officialIdentityUrl": "https://sasquatchmountain.ca/",
+      "officialUrl": "https://sasquatchmountain.ca/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=49.3792&mlon=-121.9373#map=15/49.3792/-121.9373",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/sasquatch-mountain-hemlock-valley/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/sasquatch-mountain-hemlock-valley/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/sasquatch-mountain-hemlock-valley/",
+      "localityUrl": "https://sasquatchmountain.ca/getting-here/",
+      "provinceUrl": "https://sasquatchmountain.ca/"
+    },
+    "notes": "Source name: Hemlock (Sasquatch Mountain Resort) — Agassiz. Duplicate/rename check resolved in favour of the current name: Hemlock Valley Resort is the former name, not a second hill. The reduced 2025/26 schedule does not fail the public-operation test because the operator is selling 2026/27 season passes."
+  },
+  {
+    "id": "ca-alberta-castle-mountain-resort",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "alberta-castle-mountain-resort-pincher-creek-westcastle-valley"
+    },
+    "officialIdentity": "Castle Mountain Resort",
+    "officialUrl": "https://www.skicastle.ca/",
+    "coordinates": {
+      "lat": 49.3188,
+      "lng": -114.4126
+    },
+    "elevations": {
+      "baseM": 1410,
+      "topM": 2273,
+      "forecastM": 1842
+    },
+    "locality": "Westcastle Valley",
+    "province": "Alberta",
+    "provinceId": "alberta",
+    "publicId": "castle-mountain-resort",
+    "evidence": {
+      "officialIdentityUrl": "https://www.skicastle.ca/our-story/",
+      "officialUrl": "https://www.skicastle.ca/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=49.3188&mlon=-114.4126#map=15/49.3188/-114.4126",
+      "baseElevationUrl": "https://www.skicastle.ca/mountain-stats/",
+      "topElevationUrl": "https://www.skicastle.ca/mountain-stats/",
+      "forecastElevationUrl": "https://www.skicastle.ca/mountain-stats/",
+      "localityUrl": "https://www.skicastle.ca/byroad/",
+      "provinceUrl": "https://www.skicastle.ca/our-story/"
+    },
+    "notes": "Source name: Castle Mountain Resort — Pincher Creek/Westcastle Valley. No match in the authored Banff/Lake Louise, Canmore or Jasper regions."
+  },
+  {
+    "id": "ca-manitoba-asessippi-ski-area-and-resort",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "manitoba-asessippi-ski-area-and-resort-near-inglis-russell"
+    },
+    "officialIdentity": "Asessippi Ski Area & Resort",
+    "officialUrl": "https://asessippi.com/",
+    "coordinates": {
+      "lat": 50.9511,
+      "lng": -101.3373
+    },
+    "elevations": {
+      "baseM": 457,
+      "topM": 579,
+      "forecastM": 518
+    },
+    "locality": "Inglis",
+    "province": "Manitoba",
+    "provinceId": "manitoba",
+    "publicId": "asessippi-ski-area-and-resort",
+    "evidence": {
+      "officialIdentityUrl": "https://asessippi.com/",
+      "officialUrl": "https://asessippi.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=50.9511&mlon=-101.3373#map=15/50.9511/-101.3373",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/asessippi/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/asessippi/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/asessippi/",
+      "localityUrl": "https://asessippi.com/contact/",
+      "provinceUrl": "https://asessippi.com/"
+    },
+    "notes": "Source name: Asessippi Ski Area & Resort — near Inglis/Russell. Public winter tickets, rentals and lessons are offered by the operator."
+  },
+  {
+    "id": "ca-manitoba-mystery-mountain-winter-park",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "manitoba-mystery-mountain-winter-park-thompson"
+    },
+    "officialIdentity": "Mystery Mountain Winter Park",
+    "officialUrl": "https://www.mysterymountain.ca/",
+    "coordinates": {
+      "lat": 55.8103,
+      "lng": -97.8068
+    },
+    "elevations": {
+      "baseM": 205,
+      "topM": 281,
+      "forecastM": 243
+    },
+    "locality": "Thompson",
+    "province": "Manitoba",
+    "provinceId": "manitoba",
+    "publicId": "mystery-mountain-winter-park",
+    "evidence": {
+      "officialIdentityUrl": "https://www.mysterymountain.ca/",
+      "officialUrl": "https://www.mysterymountain.ca/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=55.8103&mlon=-97.8068#map=15/55.8103/-97.8068",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/mystery-mountain/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/mystery-mountain/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/mystery-mountain/",
+      "localityUrl": "https://www.mysterymountain.ca/contact",
+      "provinceUrl": "https://www.mysterymountain.ca/"
+    },
+    "notes": "Source name: Mystery Mountain Winter Park — Thompson. The operator's current site advertises lift tickets, rentals and downhill events."
+  },
+  {
+    "id": "ca-manitoba-holiday-mountain-resort",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "manitoba-holiday-mountain-resort-la-riviere"
+    },
+    "officialIdentity": "Holiday Mountain Resort",
+    "officialUrl": "https://www.holidaymountain.ca/",
+    "coordinates": {
+      "lat": 49.2083,
+      "lng": -98.5112
+    },
+    "elevations": {
+      "baseM": 274,
+      "topM": 381,
+      "forecastM": 328
+    },
+    "locality": "La Rivière",
+    "province": "Manitoba",
+    "provinceId": "manitoba",
+    "publicId": "holiday-mountain-resort",
+    "evidence": {
+      "officialIdentityUrl": "https://www.holidaymountain.ca/",
+      "officialUrl": "https://www.holidaymountain.ca/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=49.2083&mlon=-98.5112#map=15/49.2083/-98.5112",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/holiday-mountain-mb/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/holiday-mountain-mb/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/holiday-mountain-mb/",
+      "localityUrl": "https://www.holidaymountain.ca/contact",
+      "provinceUrl": "https://www.holidaymountain.ca/"
+    },
+    "notes": "Source name: Holiday Mountain Resort — La Rivière. The current operator presents public lift-served skiing and snowboarding at La Rivière."
+  },
+  {
+    "id": "ca-manitoba-stony-mountain-ski-area",
+    "lifecycle": "draft",
+    "classification": "uncertain",
+    "operatingStatus": "unknown",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "manitoba-stony-mountain-ski-area"
+    },
+    "officialIdentity": "Stony Mountain Ski Area",
+    "officialUrl": "https://skistony.com/",
+    "coordinates": {
+      "lat": 50.0846,
+      "lng": -97.2142
+    },
+    "elevations": {
+      "baseM": 245,
+      "topM": 274,
+      "forecastM": 260
+    },
+    "locality": "Stony Mountain",
+    "province": "Manitoba",
+    "provinceId": "manitoba",
+    "evidence": {
+      "officialIdentityUrl": "https://skistony.com/",
+      "officialUrl": "https://skistony.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=50.0846&mlon=-97.2142#map=16/50.0846/-97.2142",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/stony-mountain/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/stony-mountain/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/stony-mountain/",
+      "localityUrl": "https://www.openstreetmap.org/?mlat=50.0846&mlon=-97.2142#map=13/50.0846/-97.2142",
+      "provinceUrl": "https://skistony.com/"
+    },
+    "notes": "Source name: Stony Mountain Ski Area. Explicit exclusion. The source reports closure since the 2024/25 season, and the nominal official site supplies no dated 2026/27 reopening, tickets or operating calendar. Fail-closed pending a current operator announcement."
+  },
+  {
+    "id": "ca-manitoba-mount-agassiz-ski-resort",
+    "lifecycle": "draft",
+    "classification": "closed",
+    "operatingStatus": "closed",
+    "publicAccess": "unknown",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "manitoba-mount-agassiz-ski-resort"
+    },
+    "officialIdentity": "Mount Agassiz Ski Resort",
+    "coordinates": {
+      "lat": 50.5719,
+      "lng": -99.9328
+    },
+    "elevations": {
+      "baseM": 530,
+      "topM": 755,
+      "forecastM": 643
+    },
+    "locality": "McCreary",
+    "province": "Manitoba",
+    "provinceId": "manitoba",
+    "evidence": {
+      "officialIdentityUrl": "https://www.skiresort.info/ski-resort/mount-agassiz/",
+      "officialUrl": "https://parks.canada.ca/pn-np/mb/riding",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=50.5719&mlon=-99.9328#map=14/50.5719/-99.9328",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/mount-agassiz/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/mount-agassiz/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/mount-agassiz/",
+      "localityUrl": "https://parks.canada.ca/pn-np/mb/riding/visit/directions",
+      "provinceUrl": "https://www.skiresort.info/ski-resort/mount-agassiz/"
+    },
+    "notes": "Source name: Mount Agassiz Ski Resort. Explicit exclusion. Parks Canada treats Mount Agassiz as historic infrastructure; there is no current ski operator or official resort URL."
+  },
+  {
+    "id": "ca-saskatchewan-table-mountain-regional-park",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "saskatchewan-table-mountain-near-battleford"
+    },
+    "officialIdentity": "Table Mountain Regional Park",
+    "officialUrl": "https://www.facebook.com/TableMountainRegionalPark/",
+    "coordinates": {
+      "lat": 52.7678,
+      "lng": -108.6026
+    },
+    "elevations": {
+      "baseM": 557,
+      "topM": 672,
+      "forecastM": 615
+    },
+    "locality": "North Battleford",
+    "province": "Saskatchewan",
+    "provinceId": "saskatchewan",
+    "publicId": "table-mountain-regional-park",
+    "evidence": {
+      "officialIdentityUrl": "https://www.tourismsaskatchewan.com/listings/167/table-mountain-regional-park",
+      "officialUrl": "https://www.facebook.com/TableMountainRegionalPark/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=52.7678&mlon=-108.6026#map=15/52.7678/-108.6026",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/table-mountain/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/table-mountain/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/table-mountain/",
+      "localityUrl": "https://www.tourismsaskatchewan.com/listings/167/table-mountain-regional-park",
+      "provinceUrl": "https://www.tourismsaskatchewan.com/listings/167/table-mountain-regional-park"
+    },
+    "notes": "Source name: Table Mountain — near Battleford. Use the Regional Park identity and its official social page. The canadaDirectory value https://www.tablemountain.ca is not accepted: it now identifies an unrelated New Brunswick hill and is a link-rot/domain-collision risk."
+  },
+  {
+    "id": "ca-saskatchewan-duck-mountain-ski-area",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "saskatchewan-duck-mountain-ski-area-kamsack"
+    },
+    "officialIdentity": "Duck Mountain Ski Area",
+    "officialUrl": "https://skitheduck.com/",
+    "coordinates": {
+      "lat": 51.5614,
+      "lng": -101.6077
+    },
+    "elevations": {
+      "baseM": 577,
+      "topM": 716,
+      "forecastM": 647
+    },
+    "locality": "Kamsack",
+    "province": "Saskatchewan",
+    "provinceId": "saskatchewan",
+    "publicId": "duck-mountain-ski-area",
+    "evidence": {
+      "officialIdentityUrl": "https://skitheduck.com/",
+      "officialUrl": "https://skitheduck.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=51.5614&mlon=-101.6077#map=15/51.5614/-101.6077",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/duck-mountain-kamsack/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/duck-mountain-kamsack/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/duck-mountain-kamsack/",
+      "localityUrl": "https://skitheduck.com/contact-us/",
+      "provinceUrl": "https://skitheduck.com/"
+    },
+    "notes": "Source name: Duck Mountain Ski Area — Kamsack. The operator's current public ticket and ski-school pages establish public downhill use."
+  },
+  {
+    "id": "ca-saskatchewan-wapiti-valley-regional-park",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "saskatchewan-wapiti-valley-ski-resort"
+    },
+    "officialIdentity": "Wapiti Valley Regional Park",
+    "officialUrl": "https://www.skiwapiti.com/",
+    "coordinates": {
+      "lat": 53.1868,
+      "lng": -104.7792
+    },
+    "elevations": {
+      "baseM": 432,
+      "topM": 511,
+      "forecastM": 472
+    },
+    "locality": "Melfort",
+    "province": "Saskatchewan",
+    "provinceId": "saskatchewan",
+    "publicId": "wapiti-valley-regional-park",
+    "evidence": {
+      "officialIdentityUrl": "https://www.skiwapiti.com/home",
+      "officialUrl": "https://www.skiwapiti.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=53.1868&mlon=-104.7792#map=15/53.1868/-104.7792",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/wapiti-valley/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/wapiti-valley/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/wapiti-valley/",
+      "localityUrl": "https://www.skiwapiti.com/contact",
+      "provinceUrl": "https://www.skiwapiti.com/home"
+    },
+    "notes": "Source name: Wapiti Valley Ski Resort. The regional park is northeast of Melfort; Melfort is the nearest useful consumer locality."
+  },
+  {
+    "id": "ca-saskatchewan-mount-blackstrap-ski-area",
+    "lifecycle": "draft",
+    "classification": "closed",
+    "operatingStatus": "closed",
+    "publicAccess": "unknown",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "saskatchewan-blackstrap-ski-hill"
+    },
+    "officialIdentity": "Mount Blackstrap Ski Area",
+    "coordinates": {
+      "lat": 51.765,
+      "lng": -106.4379
+    },
+    "elevations": {
+      "baseM": 522,
+      "topM": 593,
+      "forecastM": 558
+    },
+    "locality": "Dundurn",
+    "province": "Saskatchewan",
+    "provinceId": "saskatchewan",
+    "evidence": {
+      "officialIdentityUrl": "https://parks.saskatchewan.ca/blackstrap",
+      "officialUrl": "https://parks.saskatchewan.ca/blackstrap",
+      "coordinatesUrl": "https://www.openstreetmap.org/?mlat=51.7650&mlon=-106.4379#map=15/51.7650/-106.4379",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/blackstrap/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/blackstrap/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/blackstrap/",
+      "localityUrl": "https://parks.saskatchewan.ca/blackstrap",
+      "provinceUrl": "https://parks.saskatchewan.ca/blackstrap"
+    },
+    "notes": "Source name: Blackstrap Ski Hill. Explicit exclusion. Blackstrap Provincial Park remains open, but its current official activity listing has no alpine/downhill operation; the former ski hill is closed. Cross-country use does not qualify."
+  },
+  {
+    "id": "ca-quebec-owl-s-head",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "quebec-owl-s-head"
+    },
+    "officialIdentity": "Owl’s Head",
+    "officialUrl": "https://owlshead.com/",
+    "coordinates": {
+      "lat": 45.07336,
+      "lng": -72.29787
+    },
+    "elevations": {
+      "baseM": 239,
+      "topM": 714,
+      "forecastM": 477
+    },
+    "locality": "Mansonville",
+    "province": "Quebec",
+    "provinceId": "quebec",
+    "publicId": "owl-s-head",
+    "evidence": {
+      "officialIdentityUrl": "https://owlshead.com/",
+      "officialUrl": "https://owlshead.com/",
+      "coordinatesUrl": "https://owlshead.com/",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/owls-head/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/owls-head/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/owls-head/",
+      "localityUrl": "https://owlshead.com/",
+      "provinceUrl": "https://owlshead.com/"
+    },
+    "notes": "Source name: Owl's Head. Public seasonal lift-served ski area. The official site identifies Owl’s Head at its Mansonville address and continues to publish alpine-ski conditions, passes, packages, lessons, and rentals, including 2026-27 products."
+  },
+  {
+    "id": "ca-quebec-mont-orford",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "quebec-mont-orford"
+    },
+    "officialIdentity": "Mont-Orford",
+    "officialUrl": "https://montorford.com/",
+    "coordinates": {
+      "lat": 45.31789,
+      "lng": -72.222
+    },
+    "elevations": {
+      "baseM": 317,
+      "topM": 850,
+      "forecastM": 584
+    },
+    "locality": "Orford",
+    "province": "Quebec",
+    "provinceId": "quebec",
+    "publicId": "mont-orford",
+    "evidence": {
+      "officialIdentityUrl": "https://montorford.com/",
+      "officialUrl": "https://montorford.com/",
+      "coordinatesUrl": "https://www.skiresort.info/ski-resort/mont-orford/",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/mont-orford/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/mont-orford/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/mont-orford/",
+      "localityUrl": "https://montorford.com/fr-ca/nous-joindre/",
+      "provinceUrl": "https://montorford.com/"
+    },
+    "notes": "Source name: Mont Orford. Public seasonal downhill ski area operated by the Corporation Ski & Golf Mont-Orford. Its official site publishes alpine-ski passes, day rates, conditions, lift status, and trail status."
+  },
+  {
+    "id": "ca-quebec-mont-grand-fonds",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "quebec-mont-grand-fonds"
+    },
+    "officialIdentity": "Mont Grand-Fonds",
+    "officialUrl": "https://montgrandfonds.com/",
+    "coordinates": {
+      "lat": 47.77104,
+      "lng": -70.10219
+    },
+    "elevations": {
+      "baseM": 400,
+      "topM": 735,
+      "forecastM": 568
+    },
+    "locality": "La Malbaie",
+    "province": "Quebec",
+    "provinceId": "quebec",
+    "publicId": "mont-grand-fonds",
+    "aliases": [
+      "Le Mont Grand-Fonds"
+    ],
+    "evidence": {
+      "officialIdentityUrl": "https://montgrandfonds.com/",
+      "officialUrl": "https://montgrandfonds.com/",
+      "coordinatesUrl": "https://montgrandfonds.com/",
+      "baseElevationUrl": "https://montgrandfonds.com/",
+      "topElevationUrl": "https://montgrandfonds.com/",
+      "forecastElevationUrl": "https://montgrandfonds.com/",
+      "localityUrl": "https://montgrandfonds.com/",
+      "provinceUrl": "https://montgrandfonds.com/"
+    },
+    "notes": "Source name: Mont Grand-Fonds. Public seasonal alpine ski area. The official site publishes live alpine status, public lift tickets, and 2026-27 terms and season products; it states a 735-m summit and 335-m vertical."
+  },
+  {
+    "id": "ca-quebec-massif-du-sud",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "quebec-massif-du-sud"
+    },
+    "officialIdentity": "Massif du Sud",
+    "officialUrl": "https://massifdusud.net/",
+    "coordinates": {
+      "lat": 46.62074,
+      "lng": -70.49138
+    },
+    "elevations": {
+      "baseM": 515,
+      "topM": 915,
+      "forecastM": 715
+    },
+    "locality": "Saint-Philémon",
+    "province": "Quebec",
+    "provinceId": "quebec",
+    "publicId": "massif-du-sud",
+    "evidence": {
+      "officialIdentityUrl": "https://massifdusud.net/",
+      "officialUrl": "https://massifdusud.net/",
+      "coordinatesUrl": "https://massifdusud.net/en/contact",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/massif-du-sud/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/massif-du-sud/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/massif-du-sud/",
+      "localityUrl": "https://massifdusud.net/en/contact",
+      "provinceUrl": "https://massifdusud.net/"
+    },
+    "notes": "Source name: Massif du Sud. Public seasonal lift-served ski area. The operator continues to sell public day tickets and season passes and describes its maintained downhill trail network on the official site."
+  },
+  {
+    "id": "ca-quebec-val-saint-come",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "quebec-val-saint-come"
+    },
+    "officialIdentity": "Val Saint-Côme",
+    "officialUrl": "https://www.valsaintcome.com/",
+    "coordinates": {
+      "lat": 46.2723,
+      "lng": -73.871
+    },
+    "elevations": {
+      "baseM": 300,
+      "topM": 600,
+      "forecastM": 450
+    },
+    "locality": "Saint-Côme",
+    "province": "Quebec",
+    "provinceId": "quebec",
+    "publicId": "val-saint-come",
+    "evidence": {
+      "officialIdentityUrl": "https://www.valsaintcome.com/",
+      "officialUrl": "https://www.valsaintcome.com/",
+      "coordinatesUrl": "https://www.valsaintcome.com/nous-joindre/",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/val-saint-come/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/val-saint-come/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/val-saint-come/",
+      "localityUrl": "https://www.valsaintcome.com/nous-joindre/",
+      "provinceUrl": "https://www.valsaintcome.com/"
+    },
+    "notes": "Source name: Val Saint-Côme. Public seasonal ski area. The official site records the 2025-26 season and continues to provide alpine skiing, live conditions, public ticket sales, lessons, and equipment rental."
+  },
+  {
+    "id": "ca-quebec-station-touristique-stoneham",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "quebec-stoneham"
+    },
+    "officialIdentity": "Station touristique Stoneham",
+    "officialUrl": "https://ski-stoneham.com/",
+    "coordinates": {
+      "lat": 47.0272,
+      "lng": -71.38484
+    },
+    "elevations": {
+      "baseM": 248,
+      "topM": 593,
+      "forecastM": 421
+    },
+    "locality": "Stoneham-et-Tewkesbury",
+    "province": "Quebec",
+    "provinceId": "quebec",
+    "publicId": "station-touristique-stoneham",
+    "aliases": [
+      "Stoneham Mountain Resort",
+      "Stoneham"
+    ],
+    "evidence": {
+      "officialIdentityUrl": "https://ski-stoneham.com/",
+      "officialUrl": "https://ski-stoneham.com/",
+      "coordinatesUrl": "https://ski-stoneham.com/joindre/",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/stoneham/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/stoneham/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/stoneham/",
+      "localityUrl": "https://ski-stoneham.com/joindre/",
+      "provinceUrl": "https://ski-stoneham.com/"
+    },
+    "notes": "Source name: Stoneham. Public seasonal lift-served ski area. The official site publishes day and evening downhill conditions, trail and lift status, winter services, and public products."
+  },
+  {
+    "id": "ca-quebec-le-relais",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "quebec-le-relais"
+    },
+    "officialIdentity": "Le Relais",
+    "officialUrl": "https://www.skirelais.com/",
+    "coordinates": {
+      "lat": 46.94061,
+      "lng": -71.29983
+    },
+    "elevations": {
+      "baseM": 205,
+      "topM": 429,
+      "forecastM": 317
+    },
+    "locality": "Lac-Beauport",
+    "province": "Quebec",
+    "provinceId": "quebec",
+    "publicId": "le-relais",
+    "aliases": [
+      "Centre de ski Le Relais"
+    ],
+    "evidence": {
+      "officialIdentityUrl": "https://www.skirelais.com/",
+      "officialUrl": "https://www.skirelais.com/",
+      "coordinatesUrl": "https://www.skirelais.com/montagne/",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/le-relais-lac-beauport/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/le-relais-lac-beauport/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/le-relais-lac-beauport/",
+      "localityUrl": "https://www.skirelais.com/montagne/",
+      "provinceUrl": "https://www.skirelais.com/"
+    },
+    "notes": "Source name: Le Relais. Public seasonal ski area. Its official mountain and winter pages identify downhill skiing and snowboarding and publish 33 day trails, 27 night trails, conditions, rates, lessons, and rentals."
+  },
+  {
+    "id": "ca-quebec-tremblant",
+    "lifecycle": "verified",
+    "classification": "existing",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "quebec-tremblant"
+    },
+    "officialIdentity": "Tremblant",
+    "officialUrl": "https://www.tremblant.ca/",
+    "coordinates": {
+      "lat": 46.21,
+      "lng": -74.585
+    },
+    "elevations": {
+      "baseM": 230,
+      "topM": 875,
+      "forecastM": 553
+    },
+    "locality": "Mont-Tremblant",
+    "province": "Quebec",
+    "provinceId": "quebec",
+    "aliases": [
+      "Mont Tremblant Resort"
+    ],
+    "evidence": {
+      "officialIdentityUrl": "https://www.tremblant.ca/",
+      "officialUrl": "https://www.tremblant.ca/",
+      "coordinatesUrl": "https://www.tremblant.ca/",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/mont-tremblant/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/mont-tremblant/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/mont-tremblant/",
+      "localityUrl": "https://www.tremblant.ca/",
+      "provinceUrl": "https://www.tremblant.ca/"
+    },
+    "notes": "Source name: Tremblant. Already published in the live Laurentians region as Tremblant. The official resort remains a public outdoor downhill operation; this source-document exclusion must not create a duplicate catalogue entry. Keep the existing live record; do not add a second Tremblant record."
+  },
+  {
+    "id": "ca-quebec-mont-sutton",
+    "lifecycle": "verified",
+    "classification": "existing",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "quebec-mont-sutton"
+    },
+    "officialIdentity": "Mont SUTTON",
+    "officialUrl": "https://montsutton.com/",
+    "coordinates": {
+      "lat": 45.085,
+      "lng": -72.55
+    },
+    "elevations": {
+      "baseM": 400,
+      "topM": 840,
+      "forecastM": 620
+    },
+    "locality": "Sutton",
+    "province": "Quebec",
+    "provinceId": "quebec",
+    "aliases": [
+      "Mont Sutton"
+    ],
+    "evidence": {
+      "officialIdentityUrl": "https://montsutton.com/",
+      "officialUrl": "https://montsutton.com/",
+      "coordinatesUrl": "https://montsutton.com/",
+      "baseElevationUrl": "https://montsutton.com/",
+      "topElevationUrl": "https://montsutton.com/",
+      "forecastElevationUrl": "https://montsutton.com/",
+      "localityUrl": "https://montsutton.com/",
+      "provinceUrl": "https://montsutton.com/"
+    },
+    "notes": "Source name: Mont Sutton. Already published in the live Eastern Townships region. The official site continues to advertise public downhill skiing; the 840-m value is the live catalogue's lift-served top rather than the higher natural summit. Keep the existing live record; do not add a second Mont Sutton record."
+  },
+  {
+    "id": "ca-quebec-bromont-montagne-d-experiences",
+    "lifecycle": "verified",
+    "classification": "existing",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "quebec-bromont"
+    },
+    "officialIdentity": "Bromont, montagne d’expériences",
+    "officialUrl": "https://www.bromontmontagne.com/",
+    "coordinates": {
+      "lat": 45.2892,
+      "lng": -72.6378
+    },
+    "elevations": {
+      "baseM": 185,
+      "topM": 553,
+      "forecastM": 369
+    },
+    "locality": "Bromont",
+    "province": "Quebec",
+    "provinceId": "quebec",
+    "aliases": [
+      "Ski Bromont",
+      "Bromont"
+    ],
+    "evidence": {
+      "officialIdentityUrl": "https://www.bromontmontagne.com/",
+      "officialUrl": "https://www.bromontmontagne.com/",
+      "coordinatesUrl": "https://www.bromontmontagne.com/",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/bromont/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/bromont/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/bromont/",
+      "localityUrl": "https://www.bromontmontagne.com/",
+      "provinceUrl": "https://www.bromontmontagne.com/"
+    },
+    "notes": "Source name: Bromont. Already published as Ski Bromont in the live Eastern Townships region. Its canonical official domain continues to advertise public downhill and night skiing. Keep the existing live Ski Bromont record; treat PDF shorthand 'Bromont' as the same area."
+  },
+  {
+    "id": "ca-quebec-le-massif-de-charlevoix",
+    "lifecycle": "verified",
+    "classification": "existing",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "quebec-le-massif"
+    },
+    "officialIdentity": "Le Massif de Charlevoix",
+    "officialUrl": "https://www.lemassif.com/",
+    "coordinates": {
+      "lat": 47.2757,
+      "lng": -70.6257
+    },
+    "elevations": {
+      "baseM": 36,
+      "topM": 806,
+      "forecastM": 421
+    },
+    "locality": "Petite-Rivière-Saint-François",
+    "province": "Quebec",
+    "provinceId": "quebec",
+    "aliases": [
+      "Le Massif"
+    ],
+    "evidence": {
+      "officialIdentityUrl": "https://www.lemassif.com/",
+      "officialUrl": "https://www.lemassif.com/",
+      "coordinatesUrl": "https://www.lemassif.com/",
+      "baseElevationUrl": "https://www.lemassif.com/",
+      "topElevationUrl": "https://www.lemassif.com/",
+      "forecastElevationUrl": "https://www.lemassif.com/",
+      "localityUrl": "https://www.lemassif.com/",
+      "provinceUrl": "https://www.lemassif.com/"
+    },
+    "notes": "Source name: Le Massif. Already published in the live Charlevoix region. The official site continues to publish public winter mountain products and conditions and describes a 770-m lift-served vertical. Keep the existing live record; do not add a second Le Massif record."
+  },
+  {
+    "id": "ca-quebec-mont-sainte-anne",
+    "lifecycle": "verified",
+    "classification": "existing",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "quebec-mont-sainte-anne"
+    },
+    "officialIdentity": "Mont-Sainte-Anne",
+    "officialUrl": "https://mont-sainte-anne.com/",
+    "coordinates": {
+      "lat": 47.0876,
+      "lng": -70.9324
+    },
+    "elevations": {
+      "baseM": 175,
+      "topM": 800,
+      "forecastM": 488
+    },
+    "locality": "Beaupré",
+    "province": "Quebec",
+    "provinceId": "quebec",
+    "evidence": {
+      "officialIdentityUrl": "https://mont-sainte-anne.com/",
+      "officialUrl": "https://mont-sainte-anne.com/",
+      "coordinatesUrl": "https://mont-sainte-anne.com/",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/mont-sainte-anne/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/mont-sainte-anne/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/mont-sainte-anne/",
+      "localityUrl": "https://mont-sainte-anne.com/",
+      "provinceUrl": "https://mont-sainte-anne.com/"
+    },
+    "notes": "Source name: Mont-Sainte-Anne. Already published in the live Charlevoix region. The official mountain domain continues to identify the public ski area and publish winter conditions and products. Keep the existing live record; do not add a second Mont-Sainte-Anne record."
+  },
+  {
+    "id": "ca-new-brunswick-crabbe-mountain",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "new-brunswick-crabbe-mountain"
+    },
+    "officialIdentity": "Crabbe Mountain",
+    "officialUrl": "https://www.crabbemountain.com/",
+    "coordinates": {
+      "lat": 46.1179,
+      "lng": -67.104
+    },
+    "elevations": {
+      "baseM": 147,
+      "topM": 390,
+      "forecastM": 269
+    },
+    "locality": "Central Hainesville",
+    "province": "New Brunswick",
+    "provinceId": "new-brunswick",
+    "publicId": "crabbe-mountain",
+    "evidence": {
+      "officialIdentityUrl": "https://www.crabbemountain.com/",
+      "officialUrl": "https://www.crabbemountain.com/",
+      "coordinatesUrl": "https://www.skiresort.info/ski-resort/crabbe-mountain/",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/crabbe-mountain/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/crabbe-mountain/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/crabbe-mountain/",
+      "localityUrl": "https://www.crabbemountain.com/contact-us",
+      "provinceUrl": "https://www.crabbemountain.com/"
+    },
+    "notes": "Source name: Crabbe Mountain. Seasonal public alpine ski area; the official site identifies the ski resort, publishes lift-ticket/pass products and 2026 operating information."
+  },
+  {
+    "id": "ca-new-brunswick-poley-mountain",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "new-brunswick-poley-mountain"
+    },
+    "officialIdentity": "Poley Mountain",
+    "officialUrl": "https://www.poleymountain.com/",
+    "coordinates": {
+      "lat": 45.67831,
+      "lng": -65.38361
+    },
+    "elevations": {
+      "baseM": 76,
+      "topM": 277,
+      "forecastM": 177
+    },
+    "locality": "Waterford",
+    "province": "New Brunswick",
+    "provinceId": "new-brunswick",
+    "publicId": "poley-mountain",
+    "evidence": {
+      "officialIdentityUrl": "https://www.poleymountain.com/",
+      "officialUrl": "https://www.poleymountain.com/",
+      "coordinatesUrl": "https://www.skiresort.info/ski-resort/poley-mountain/",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/poley-mountain/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/poley-mountain/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/poley-mountain/",
+      "localityUrl": "https://www.poleymountain.com/contact",
+      "provinceUrl": "https://www.poleymountain.com/"
+    },
+    "notes": "Source name: Poley Mountain. Seasonal public ski hill; the official site was updated on 2026-08-26 and advertises 2026-27 winter ski season passes, day tickets, rentals, and public winter operations."
+  },
+  {
+    "id": "ca-new-brunswick-sugarloaf-provincial-park",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "new-brunswick-sugarloaf-provincial-park"
+    },
+    "officialIdentity": "Sugarloaf Provincial Park",
+    "officialUrl": "https://parcsugarloafpark.ca/winter/",
+    "coordinates": {
+      "lat": 47.98108,
+      "lng": -66.71098
+    },
+    "elevations": {
+      "baseM": 42,
+      "topM": 199,
+      "forecastM": 121
+    },
+    "locality": "Atholville",
+    "province": "New Brunswick",
+    "provinceId": "new-brunswick",
+    "publicId": "sugarloaf-provincial-park",
+    "evidence": {
+      "officialIdentityUrl": "https://parcsugarloafpark.ca/",
+      "officialUrl": "https://parcsugarloafpark.ca/winter/",
+      "coordinatesUrl": "https://parcsugarloafpark.ca/winter/",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/sugarloaf-park/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/sugarloaf-park/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/sugarloaf-park/",
+      "localityUrl": "https://parcsugarloafpark.ca/contact/",
+      "provinceUrl": "https://parcsugarloafpark.ca/"
+    },
+    "notes": "Source name: Sugarloaf Provincial Park. Public provincial-park alpine skiing remains advertised on the park's official winter page, including downhill skiing, lifts, snow conditions, and public tickets."
+  },
+  {
+    "id": "ca-new-brunswick-republik-nature",
+    "lifecycle": "published",
+    "classification": "duplicate_or_renamed",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "new-brunswick-mont-farlagne"
+    },
+    "officialIdentity": "Républik Nature",
+    "officialUrl": "https://republiknature.com/ski/",
+    "coordinates": {
+      "lat": 47.41347,
+      "lng": -68.38133
+    },
+    "elevations": {
+      "baseM": 150,
+      "topM": 338,
+      "forecastM": 244
+    },
+    "locality": "Edmundston",
+    "province": "New Brunswick",
+    "provinceId": "new-brunswick",
+    "publicId": "republik-nature",
+    "aliases": [
+      "Mont Farlagne"
+    ],
+    "evidence": {
+      "officialIdentityUrl": "https://republiknature.com/",
+      "officialUrl": "https://republiknature.com/ski/",
+      "coordinatesUrl": "https://www.skiresort.info/ski-resort/mont-farlagne/",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/mont-farlagne/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/mont-farlagne/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/mont-farlagne/",
+      "localityUrl": "https://republiknature.com/contact/",
+      "provinceUrl": "https://republiknature.com/"
+    },
+    "notes": "Source name: Mont Farlagne. The operating ski hill formerly catalogued as Mont Farlagne now presents itself officially as Républik Nature. Its ski page, modified 2026-05-20, advertises maintained alpine runs, woods terrain, tickets, rentals, hours, and live run status. Do not create a separate Mont Farlagne entity; use Républik Nature as the canonical identity and retain Mont Farlagne as an alias.",
+    "reconciliationStatus": "verified_operating"
+  },
+  {
+    "id": "ca-nova-scotia-ski-wentworth",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "nova-scotia-ski-wentworth"
+    },
+    "officialIdentity": "Ski Wentworth",
+    "officialUrl": "https://www.skiwentworth.ca/",
+    "coordinates": {
+      "lat": 45.61043,
+      "lng": -63.56096
+    },
+    "elevations": {
+      "baseM": 55,
+      "topM": 288,
+      "forecastM": 172
+    },
+    "locality": "Wentworth",
+    "province": "Nova Scotia",
+    "provinceId": "nova-scotia",
+    "publicId": "ski-wentworth",
+    "evidence": {
+      "officialIdentityUrl": "https://www.skiwentworth.ca/",
+      "officialUrl": "https://www.skiwentworth.ca/",
+      "coordinatesUrl": "https://www.skiresort.info/ski-resort/wentworth/",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/wentworth/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/wentworth/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/wentworth/",
+      "localityUrl": "https://www.skiwentworth.ca/contact",
+      "provinceUrl": "https://www.skiwentworth.ca/"
+    },
+    "notes": "Source name: Ski Wentworth. Seasonal public lift-served ski area with official downhill trail, ticket, season-pass, lesson, rental, and conditions information."
+  },
+  {
+    "id": "ca-nova-scotia-ski-martock",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "nova-scotia-ski-martock"
+    },
+    "officialIdentity": "Ski Martock",
+    "officialUrl": "https://www.martock.com/",
+    "coordinates": {
+      "lat": 44.93582,
+      "lng": -64.1712
+    },
+    "elevations": {
+      "baseM": 26,
+      "topM": 188,
+      "forecastM": 107
+    },
+    "locality": "Windsor Forks",
+    "province": "Nova Scotia",
+    "provinceId": "nova-scotia",
+    "publicId": "ski-martock",
+    "evidence": {
+      "officialIdentityUrl": "https://www.martock.com/",
+      "officialUrl": "https://www.martock.com/",
+      "coordinatesUrl": "https://www.openstreetmap.org/way/233886400",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/martock/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/martock/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/martock/",
+      "localityUrl": "https://www.martock.com/contact-us/",
+      "provinceUrl": "https://www.martock.com/"
+    },
+    "notes": "Source name: Ski Martock. Seasonal public outdoor ski area whose official site continues to publish downhill tickets, passes, rentals, lessons, trail maps, and snow reporting."
+  },
+  {
+    "id": "ca-nova-scotia-cape-smokey",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "nova-scotia-cape-smokey-ski-cape-smokey"
+    },
+    "officialIdentity": "Cape Smokey",
+    "officialUrl": "https://capesmokey.ca/",
+    "coordinates": {
+      "lat": 46.62759,
+      "lng": -60.42118
+    },
+    "elevations": {
+      "baseM": 15,
+      "topM": 283,
+      "forecastM": 149
+    },
+    "locality": "Ingonish Beach",
+    "province": "Nova Scotia",
+    "provinceId": "nova-scotia",
+    "publicId": "cape-smokey",
+    "aliases": [
+      "Ski Cape Smokey"
+    ],
+    "evidence": {
+      "officialIdentityUrl": "https://capesmokey.ca/",
+      "officialUrl": "https://capesmokey.ca/",
+      "coordinatesUrl": "https://www.skiresort.info/ski-resort/cape-smokey/",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/cape-smokey/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/cape-smokey/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/cape-smokey/",
+      "localityUrl": "https://capesmokey.ca/contact/",
+      "provinceUrl": "https://capesmokey.ca/"
+    },
+    "notes": "Source name: Cape Smokey (Ski Cape Smokey). Public seasonal alpine skiing is an official Cape Smokey activity; the operator publishes ski/snowboard information, winter lift tickets, rentals, and mountain conditions."
+  },
+  {
+    "id": "ca-nova-scotia-ski-ben-eoin",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "nova-scotia-ski-ben-eoin"
+    },
+    "officialIdentity": "Ski Ben Eoin",
+    "officialUrl": "https://skibeneoin.com/",
+    "coordinates": {
+      "lat": 45.9886,
+      "lng": -60.4315
+    },
+    "elevations": {
+      "baseM": 14,
+      "topM": 154,
+      "forecastM": 84
+    },
+    "locality": "Ben Eoin",
+    "province": "Nova Scotia",
+    "provinceId": "nova-scotia",
+    "publicId": "ski-ben-eoin",
+    "evidence": {
+      "officialIdentityUrl": "https://skibeneoin.com/",
+      "officialUrl": "https://skibeneoin.com/",
+      "coordinatesUrl": "https://skibeneoin.com/contact-us/",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/ben-eoin/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/ben-eoin/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/ben-eoin/",
+      "localityUrl": "https://skibeneoin.com/contact-us/",
+      "provinceUrl": "https://skibeneoin.com/"
+    },
+    "notes": "Source name: Ski Ben Eoin. Community-operated public alpine hill. The official site, modified in May 2026, identifies active skiing and snowboarding and publishes tickets, passes, programs, and hill status."
+  },
+  {
+    "id": "ca-newfoundland-labrador-white-hills-resort",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "newfoundland-labrador-white-hills-resort"
+    },
+    "officialIdentity": "White Hills Resort",
+    "officialUrl": "https://www.whitehillsresort.com/",
+    "coordinates": {
+      "lat": 48.16248,
+      "lng": -54.04724
+    },
+    "elevations": {
+      "baseM": 147,
+      "topM": 374,
+      "forecastM": 261
+    },
+    "locality": "Clarenville",
+    "province": "Newfoundland and Labrador",
+    "provinceId": "newfoundland-labrador",
+    "publicId": "white-hills-resort",
+    "evidence": {
+      "officialIdentityUrl": "https://www.whitehillsresort.com/",
+      "officialUrl": "https://www.whitehillsresort.com/",
+      "coordinatesUrl": "https://www.skiresort.info/ski-resort/white-hills/",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/white-hills/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/white-hills/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/white-hills/",
+      "localityUrl": "https://www.whitehillsresort.com/hours-contact",
+      "provinceUrl": "https://www.whitehillsresort.com/"
+    },
+    "notes": "Source name: White Hills Resort. The official site records completion of the 2025-26 winter season, describes 27 downhill trails, publishes public tickets/passes, and says the area will return next winter. Seasonal closure in August is not a resort closure."
+  },
+  {
+    "id": "ca-newfoundland-labrador-smokey-mountain-ski-club",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "newfoundland-labrador-smokey-mountain-ski-club"
+    },
+    "officialIdentity": "Smokey Mountain Ski Club",
+    "officialUrl": "https://www.skismokey.ca/",
+    "coordinates": {
+      "lat": 52.94497,
+      "lng": -66.91058
+    },
+    "elevations": {
+      "baseM": 595,
+      "topM": 845,
+      "forecastM": 720
+    },
+    "locality": "Labrador City",
+    "province": "Newfoundland and Labrador",
+    "provinceId": "newfoundland-labrador",
+    "publicId": "smokey-mountain-ski-club",
+    "evidence": {
+      "officialIdentityUrl": "https://www.skismokey.ca/",
+      "officialUrl": "https://www.skismokey.ca/",
+      "coordinatesUrl": "https://www.skiresort.info/ski-resort/smokey-mountain/",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/smokey-mountain/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/smokey-mountain/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/smokey-mountain/",
+      "localityUrl": "https://www.skismokey.ca/",
+      "provinceUrl": "https://www.skismokey.ca/"
+    },
+    "notes": "Source name: Smokey Mountain Ski Club. Public community ski club with lift-served alpine terrain. The club's official web identity and official social channel continued to publish operations and public access information for the 2025-26 season. The official website intermittently returns an access-control page to automated clients; do not replace its domain based on that behavior."
+  },
+  {
+    "id": "ca-newfoundland-labrador-marble-mountain-resort",
+    "lifecycle": "draft",
+    "classification": "uncertain",
+    "operatingStatus": "unknown",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "newfoundland-labrador-marble-mountain"
+    },
+    "officialIdentity": "Marble Mountain Resort",
+    "officialUrl": "https://skimarble.com/",
+    "coordinates": {
+      "lat": 48.4489,
+      "lng": -58.0704
+    },
+    "elevations": {
+      "baseM": 27,
+      "topM": 546,
+      "forecastM": 287
+    },
+    "locality": "Steady Brook",
+    "province": "Newfoundland and Labrador",
+    "provinceId": "newfoundland-labrador",
+    "evidence": {
+      "officialIdentityUrl": "https://skimarble.com/",
+      "officialUrl": "https://skimarble.com/",
+      "coordinatesUrl": "https://www.skiresort.info/ski-resort/marble-mountain-steady-brook-humber-valley/",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/marble-mountain-steady-brook-humber-valley/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/marble-mountain-steady-brook-humber-valley/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/marble-mountain-steady-brook-humber-valley/",
+      "localityUrl": "https://skimarble.com/contact-us/",
+      "provinceUrl": "https://skimarble.com/"
+    },
+    "notes": "Source name: Marble Mountain. Fail-closed for catalogue admission. The official site confirms the resort identity and a completed seasonal operation, but at the research cutoff it does not resolve the source document's material continuity warning: only one of three chairlifts was reported operating in November 2025 amid repeated unsuccessful government divestment attempts. A normal 2026-27 multi-chair public downhill plan was not found on an official source. Exclude from live operating inventory until current official evidence explicitly confirms a viable 2026-27 public downhill season and lift plan."
+  },
+  {
+    "id": "ca-prince-edward-island-mark-arendz-provincial-ski-park-at-brookvale",
+    "lifecycle": "published",
+    "classification": "verified_operating",
+    "operatingStatus": "operating",
+    "publicAccess": "public",
+    "source": {
+      "pdfId": "canada-usa-missing-ski-resorts-2026-08-25",
+      "candidateId": "prince-edward-island-mark-arendz-provincial-ski-park-at-brookvale"
+    },
+    "officialIdentity": "Mark Arendz Provincial Ski Park at Brookvale",
+    "officialUrl": "https://www.princeedwardisland.ca/en/information/tourism-pei/mark-arendz-provincial-ski-park",
+    "coordinates": {
+      "lat": 46.28203,
+      "lng": -63.41054
+    },
+    "elevations": {
+      "baseM": 20,
+      "topM": 96,
+      "forecastM": 58
+    },
+    "locality": "Brookvale",
+    "province": "Prince Edward Island",
+    "provinceId": "prince-edward-island",
+    "publicId": "mark-arendz-provincial-ski-park-at-brookvale",
+    "aliases": [
+      "Brookvale Ski Park"
+    ],
+    "evidence": {
+      "officialIdentityUrl": "https://www.princeedwardisland.ca/en/information/tourism-pei/mark-arendz-provincial-ski-park",
+      "officialUrl": "https://www.princeedwardisland.ca/en/information/tourism-pei/mark-arendz-provincial-ski-park",
+      "coordinatesUrl": "https://www.skiresort.info/ski-resort/brookvale-ski-park/",
+      "baseElevationUrl": "https://www.skiresort.info/ski-resort/brookvale-ski-park/",
+      "topElevationUrl": "https://www.skiresort.info/ski-resort/brookvale-ski-park/",
+      "forecastElevationUrl": "https://www.skiresort.info/ski-resort/brookvale-ski-park/",
+      "localityUrl": "https://www.princeedwardisland.ca/en/information/tourism-pei/mark-arendz-provincial-ski-park",
+      "provinceUrl": "https://www.princeedwardisland.ca/en/information/tourism-pei/mark-arendz-provincial-ski-park"
+    },
+    "notes": "Source name: Mark Arendz Provincial Ski Park at Brookvale. PEI government-operated public ski park; the official provincial page identifies alpine skiing, public passes/tickets, equipment rental, hours, and hill conditions."
+  }
+]

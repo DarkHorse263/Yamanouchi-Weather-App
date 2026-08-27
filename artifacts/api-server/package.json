@@ -17,6 +17,7 @@
     "@supabase/supabase-js": "^2.99.1",
     "@workspace/api-zod": "workspace:*",
     "@workspace/db": "workspace:*",
+    "@workspace/canada-ski-catalogue": "workspace:*",
     "@workspace/japan-ski-catalogue": "workspace:*",
     "@workspace/ski-catalogue": "workspace:*",
     "@workspace/promo-constants": "workspace:*",

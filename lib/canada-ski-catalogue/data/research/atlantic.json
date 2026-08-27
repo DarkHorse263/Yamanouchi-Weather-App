@@ -1,0 +1,365 @@
+{
+  "task": 138,
+  "region": "Atlantic Canada",
+  "asOf": "2026-08-27",
+  "scope": {
+    "provinces": [
+      "New Brunswick",
+      "Nova Scotia",
+      "Prince Edward Island",
+      "Newfoundland and Labrador"
+    ],
+    "sourceDocument": "attached_assets/Canada_&_USA_—_Missing_Ski_Resorts_by_Region_1787802462500.pdf",
+    "inclusionRule": "Every Atlantic Canada candidate and every item flagged closed, uncertain, private, or operational-risk in the source document.",
+    "publicOutdoorDownhillRequired": true
+  },
+  "entries": [
+    {
+      "sourceName": "Crabbe Mountain",
+      "officialName": "Crabbe Mountain",
+      "province": "New Brunswick",
+      "classification": "verified_operating",
+      "officialUrl": "https://www.crabbemountain.com/",
+      "coordinates": {
+        "latitude": 46.1179,
+        "longitude": -67.104
+      },
+      "elevationMetres": {
+        "base": 147,
+        "top": 390
+      },
+      "nearestLocality": "Central Hainesville",
+      "publicOutdoorDownhillStatus": "Seasonal public alpine ski area; the official site identifies the ski resort, publishes lift-ticket/pass products and 2026 operating information.",
+      "evidence": {
+        "identity": ["https://www.crabbemountain.com/"],
+        "currentOperation": ["https://www.crabbemountain.com/lift-tickets-passes-rentals"],
+        "officialUrl": ["https://www.crabbemountain.com/"],
+        "coordinates": ["https://www.skiresort.info/ski-resort/crabbe-mountain/"],
+        "elevations": ["https://www.skiresort.info/ski-resort/crabbe-mountain/"],
+        "nearestLocality": ["https://www.crabbemountain.com/contact-us"],
+        "classification": ["https://www.crabbemountain.com/lift-tickets-passes-rentals"]
+      }
+    },
+    {
+      "sourceName": "Poley Mountain",
+      "officialName": "Poley Mountain",
+      "province": "New Brunswick",
+      "classification": "verified_operating",
+      "officialUrl": "https://www.poleymountain.com/",
+      "coordinates": {
+        "latitude": 45.67831,
+        "longitude": -65.38361
+      },
+      "elevationMetres": {
+        "base": 76,
+        "top": 277
+      },
+      "nearestLocality": "Waterford",
+      "publicOutdoorDownhillStatus": "Seasonal public ski hill; the official site was updated on 2026-08-26 and advertises 2026-27 winter ski season passes, day tickets, rentals, and public winter operations.",
+      "evidence": {
+        "identity": ["https://www.poleymountain.com/"],
+        "currentOperation": ["https://www.poleymountain.com/winter"],
+        "officialUrl": ["https://www.poleymountain.com/"],
+        "coordinates": ["https://www.skiresort.info/ski-resort/poley-mountain/"],
+        "elevations": ["https://www.skiresort.info/ski-resort/poley-mountain/"],
+        "nearestLocality": ["https://www.poleymountain.com/contact"],
+        "classification": ["https://www.poleymountain.com/winter"]
+      }
+    },
+    {
+      "sourceName": "Sugarloaf Provincial Park",
+      "officialName": "Sugarloaf Provincial Park",
+      "province": "New Brunswick",
+      "classification": "verified_operating",
+      "officialUrl": "https://parcsugarloafpark.ca/winter/",
+      "coordinates": {
+        "latitude": 47.98108,
+        "longitude": -66.71098
+      },
+      "elevationMetres": {
+        "base": 42,
+        "top": 199
+      },
+      "nearestLocality": "Atholville",
+      "publicOutdoorDownhillStatus": "Public provincial-park alpine skiing remains advertised on the park's official winter page, including downhill skiing, lifts, snow conditions, and public tickets.",
+      "evidence": {
+        "identity": ["https://parcsugarloafpark.ca/"],
+        "currentOperation": ["https://parcsugarloafpark.ca/winter/"],
+        "officialUrl": ["https://parcsugarloafpark.ca/winter/"],
+        "coordinates": ["https://parcsugarloafpark.ca/winter/"],
+        "elevations": ["https://www.skiresort.info/ski-resort/sugarloaf-park/"],
+        "nearestLocality": ["https://parcsugarloafpark.ca/contact/"],
+        "classification": ["https://parcsugarloafpark.ca/winter/"]
+      }
+    },
+    {
+      "sourceName": "Mont Farlagne",
+      "officialName": "Républik Nature",
+      "alternateNames": ["Mont Farlagne"],
+      "province": "New Brunswick",
+      "classification": "duplicate_or_renamed",
+      "officialUrl": "https://republiknature.com/ski/",
+      "coordinates": {
+        "latitude": 47.41347,
+        "longitude": -68.38133
+      },
+      "elevationMetres": {
+        "base": 150,
+        "top": 338
+      },
+      "nearestLocality": "Edmundston",
+      "publicOutdoorDownhillStatus": "The operating ski hill formerly catalogued as Mont Farlagne now presents itself officially as Républik Nature. Its ski page, modified 2026-05-20, advertises maintained alpine runs, woods terrain, tickets, rentals, hours, and live run status.",
+      "evidence": {
+        "identity": ["https://republiknature.com/", "https://republiknature.com/ski/"],
+        "currentOperation": ["https://republiknature.com/ski/"],
+        "officialUrl": ["https://republiknature.com/ski/"],
+        "coordinates": ["https://www.skiresort.info/ski-resort/mont-farlagne/"],
+        "elevations": ["https://www.skiresort.info/ski-resort/mont-farlagne/"],
+        "nearestLocality": ["https://republiknature.com/contact/"],
+        "classification": ["https://republiknature.com/", "https://republiknature.com/ski/"]
+      },
+      "catalogueAction": "Do not create a separate Mont Farlagne entity; use Républik Nature as the canonical identity and retain Mont Farlagne as an alias."
+    },
+    {
+      "sourceName": "Ski Wentworth",
+      "officialName": "Ski Wentworth",
+      "province": "Nova Scotia",
+      "classification": "verified_operating",
+      "officialUrl": "https://www.skiwentworth.ca/",
+      "coordinates": {
+        "latitude": 45.61043,
+        "longitude": -63.56096
+      },
+      "elevationMetres": {
+        "base": 55,
+        "top": 288
+      },
+      "nearestLocality": "Wentworth",
+      "publicOutdoorDownhillStatus": "Seasonal public lift-served ski area with official downhill trail, ticket, season-pass, lesson, rental, and conditions information.",
+      "evidence": {
+        "identity": ["https://www.skiwentworth.ca/"],
+        "currentOperation": ["https://www.skiwentworth.ca/mountain-report", "https://www.skiwentworth.ca/tickets-passes"],
+        "officialUrl": ["https://www.skiwentworth.ca/"],
+        "coordinates": ["https://www.skiresort.info/ski-resort/wentworth/"],
+        "elevations": ["https://www.skiresort.info/ski-resort/wentworth/"],
+        "nearestLocality": ["https://www.skiwentworth.ca/contact"],
+        "classification": ["https://www.skiwentworth.ca/tickets-passes"]
+      }
+    },
+    {
+      "sourceName": "Ski Martock",
+      "officialName": "Ski Martock",
+      "province": "Nova Scotia",
+      "classification": "verified_operating",
+      "officialUrl": "https://www.martock.com/",
+      "coordinates": {
+        "latitude": 44.93582,
+        "longitude": -64.1712
+      },
+      "elevationMetres": {
+        "base": 26,
+        "top": 188
+      },
+      "nearestLocality": "Windsor Forks",
+      "publicOutdoorDownhillStatus": "Seasonal public outdoor ski area whose official site continues to publish downhill tickets, passes, rentals, lessons, trail maps, and snow reporting.",
+      "evidence": {
+        "identity": ["https://www.martock.com/"],
+        "currentOperation": ["https://www.martock.com/mountain-conditions/", "https://www.martock.com/lift-tickets/"],
+        "officialUrl": ["https://www.martock.com/"],
+        "coordinates": ["https://www.openstreetmap.org/way/233886400"],
+        "elevations": ["https://www.skiresort.info/ski-resort/martock/"],
+        "nearestLocality": ["https://www.martock.com/contact-us/"],
+        "classification": ["https://www.martock.com/lift-tickets/"]
+      }
+    },
+    {
+      "sourceName": "Cape Smokey (Ski Cape Smokey)",
+      "officialName": "Cape Smokey",
+      "alternateNames": ["Ski Cape Smokey"],
+      "province": "Nova Scotia",
+      "classification": "verified_operating",
+      "officialUrl": "https://capesmokey.ca/",
+      "coordinates": {
+        "latitude": 46.62759,
+        "longitude": -60.42118
+      },
+      "elevationMetres": {
+        "base": 15,
+        "top": 283
+      },
+      "nearestLocality": "Ingonish Beach",
+      "publicOutdoorDownhillStatus": "Public seasonal alpine skiing is an official Cape Smokey activity; the operator publishes ski/snowboard information, winter lift tickets, rentals, and mountain conditions.",
+      "evidence": {
+        "identity": ["https://capesmokey.ca/"],
+        "currentOperation": ["https://capesmokey.ca/winter/", "https://capesmokey.ca/mountain-conditions/"],
+        "officialUrl": ["https://capesmokey.ca/"],
+        "coordinates": ["https://www.skiresort.info/ski-resort/cape-smokey/"],
+        "elevations": ["https://www.skiresort.info/ski-resort/cape-smokey/"],
+        "nearestLocality": ["https://capesmokey.ca/contact/"],
+        "classification": ["https://capesmokey.ca/winter/"]
+      }
+    },
+    {
+      "sourceName": "Ski Ben Eoin",
+      "officialName": "Ski Ben Eoin",
+      "province": "Nova Scotia",
+      "classification": "verified_operating",
+      "officialUrl": "https://skibeneoin.com/",
+      "coordinates": {
+        "latitude": 45.9886,
+        "longitude": -60.4315
+      },
+      "elevationMetres": {
+        "base": 14,
+        "top": 154
+      },
+      "nearestLocality": "Ben Eoin",
+      "publicOutdoorDownhillStatus": "Community-operated public alpine hill. The official site, modified in May 2026, identifies active skiing and snowboarding and publishes tickets, passes, programs, and hill status.",
+      "evidence": {
+        "identity": ["https://skibeneoin.com/"],
+        "currentOperation": ["https://skibeneoin.com/hill-status/", "https://skibeneoin.com/rates/"],
+        "officialUrl": ["https://skibeneoin.com/"],
+        "coordinates": ["https://skibeneoin.com/contact-us/"],
+        "elevations": ["https://www.skiresort.info/ski-resort/ben-eoin/"],
+        "nearestLocality": ["https://skibeneoin.com/contact-us/"],
+        "classification": ["https://skibeneoin.com/rates/"]
+      }
+    },
+    {
+      "sourceName": "White Hills Resort",
+      "officialName": "White Hills Resort",
+      "province": "Newfoundland and Labrador",
+      "classification": "verified_operating",
+      "officialUrl": "https://www.whitehillsresort.com/",
+      "coordinates": {
+        "latitude": 48.16248,
+        "longitude": -54.04724
+      },
+      "elevationMetres": {
+        "base": 147,
+        "top": 374
+      },
+      "nearestLocality": "Clarenville",
+      "publicOutdoorDownhillStatus": "The official site records completion of the 2025-26 winter season, describes 27 downhill trails, publishes public tickets/passes, and says the area will return next winter. Seasonal closure in August is not a resort closure.",
+      "evidence": {
+        "identity": ["https://www.whitehillsresort.com/"],
+        "currentOperation": ["https://www.whitehillsresort.com/", "https://www.whitehillsresort.com/tickets-season-pass"],
+        "officialUrl": ["https://www.whitehillsresort.com/"],
+        "coordinates": ["https://www.skiresort.info/ski-resort/white-hills/"],
+        "elevations": ["https://www.skiresort.info/ski-resort/white-hills/"],
+        "nearestLocality": ["https://www.whitehillsresort.com/hours-contact"],
+        "classification": ["https://www.whitehillsresort.com/"]
+      }
+    },
+    {
+      "sourceName": "Smokey Mountain Ski Club",
+      "officialName": "Smokey Mountain Ski Club",
+      "province": "Newfoundland and Labrador",
+      "classification": "verified_operating",
+      "officialUrl": "https://www.skismokey.ca/",
+      "coordinates": {
+        "latitude": 52.94497,
+        "longitude": -66.91058
+      },
+      "elevationMetres": {
+        "base": 595,
+        "top": 845
+      },
+      "nearestLocality": "Labrador City",
+      "publicOutdoorDownhillStatus": "Public community ski club with lift-served alpine terrain. The club's official web identity and official social channel continued to publish operations and public access information for the 2025-26 season.",
+      "evidence": {
+        "identity": ["https://www.skismokey.ca/", "https://www.facebook.com/SmokeyMountainSkiClub/"],
+        "currentOperation": ["https://www.facebook.com/SmokeyMountainSkiClub/"],
+        "officialUrl": ["https://www.skismokey.ca/"],
+        "coordinates": ["https://www.skiresort.info/ski-resort/smokey-mountain/"],
+        "elevations": ["https://www.skiresort.info/ski-resort/smokey-mountain/"],
+        "nearestLocality": ["https://www.skismokey.ca/"],
+        "classification": ["https://www.facebook.com/SmokeyMountainSkiClub/"]
+      },
+      "caveat": "The official website intermittently returns an access-control page to automated clients; do not replace its domain based on that behavior."
+    },
+    {
+      "sourceName": "Marble Mountain",
+      "officialName": "Marble Mountain Resort",
+      "province": "Newfoundland and Labrador",
+      "classification": "uncertain",
+      "officialUrl": "https://skimarble.com/",
+      "coordinates": {
+        "latitude": 48.4489,
+        "longitude": -58.0704
+      },
+      "elevationMetres": {
+        "base": 27,
+        "top": 546
+      },
+      "nearestLocality": "Steady Brook",
+      "publicOutdoorDownhillStatus": "Fail-closed for catalogue admission. The official site confirms the resort identity and a completed seasonal operation, but at the research cutoff it does not resolve the source document's material continuity warning: only one of three chairlifts was reported operating in November 2025 amid repeated unsuccessful government divestment attempts. A normal 2026-27 multi-chair public downhill plan was not found on an official source.",
+      "evidence": {
+        "identity": ["https://skimarble.com/"],
+        "currentOperation": ["https://skimarble.com/mountain-report/", "https://skimarble.com/lift-tickets/"],
+        "officialUrl": ["https://skimarble.com/"],
+        "coordinates": ["https://www.skiresort.info/ski-resort/marble-mountain-steady-brook-humber-valley/"],
+        "elevations": ["https://www.skiresort.info/ski-resort/marble-mountain-steady-brook-humber-valley/"],
+        "nearestLocality": ["https://skimarble.com/contact-us/"],
+        "classification": [
+          "https://skimarble.com/mountain-report/",
+          "https://www.gov.nl.ca/releases/2025/ti/1114n01/"
+        ]
+      },
+      "catalogueAction": "Exclude from live operating inventory until current official evidence explicitly confirms a viable 2026-27 public downhill season and lift plan."
+    },
+    {
+      "sourceName": "Mark Arendz Provincial Ski Park at Brookvale",
+      "officialName": "Mark Arendz Provincial Ski Park at Brookvale",
+      "alternateNames": ["Brookvale Ski Park"],
+      "province": "Prince Edward Island",
+      "classification": "verified_operating",
+      "officialUrl": "https://www.princeedwardisland.ca/en/information/tourism-pei/mark-arendz-provincial-ski-park",
+      "coordinates": {
+        "latitude": 46.28203,
+        "longitude": -63.41054
+      },
+      "elevationMetres": {
+        "base": 20,
+        "top": 96
+      },
+      "nearestLocality": "Brookvale",
+      "publicOutdoorDownhillStatus": "PEI government-operated public ski park; the official provincial page identifies alpine skiing, public passes/tickets, equipment rental, hours, and hill conditions.",
+      "evidence": {
+        "identity": ["https://www.princeedwardisland.ca/en/information/tourism-pei/mark-arendz-provincial-ski-park"],
+        "currentOperation": ["https://www.princeedwardisland.ca/en/information/tourism-pei/mark-arendz-provincial-ski-park"],
+        "officialUrl": ["https://www.princeedwardisland.ca/en/information/tourism-pei/mark-arendz-provincial-ski-park"],
+        "coordinates": ["https://www.skiresort.info/ski-resort/brookvale-ski-park/"],
+        "elevations": ["https://www.skiresort.info/ski-resort/brookvale-ski-park/"],
+        "nearestLocality": ["https://www.princeedwardisland.ca/en/information/tourism-pei/mark-arendz-provincial-ski-park"],
+        "classification": ["https://www.princeedwardisland.ca/en/information/tourism-pei/mark-arendz-provincial-ski-park"]
+      }
+    }
+  ],
+  "summary": {
+    "totalItems": 12,
+    "classificationCounts": {
+      "existing_live": 0,
+      "duplicate_or_renamed": 1,
+      "verified_operating": 10,
+      "private_restricted": 0,
+      "uncertain": 1,
+      "closed": 0
+    },
+    "provinceCounts": {
+      "New Brunswick": 4,
+      "Nova Scotia": 4,
+      "Prince Edward Island": 1,
+      "Newfoundland and Labrador": 3
+    },
+    "liveAdmissionCount": 10,
+    "excludedOrMergeCount": 2,
+    "caveats": [
+      "Marble Mountain remains uncertain and excluded under the requested fail-closed rule; an official identity, ticket page, or summer-season closure notice alone does not resolve its lift and ownership continuity risk.",
+      "Mont Farlagne is not a second resort: the operating property is now branded Républik Nature, so the old name should be retained only as an alias.",
+      "Atlantic ski areas are seasonally closed in August. 'Verified operating' means official evidence of the completed 2025-26 season and/or explicit 2026-27 public downhill products, not that lifts turn in summer.",
+      "Base/top elevations and most coordinates use the cited ski-area reference pages where operators do not publish surveyed endpoints; values are rounded to metres and coordinates identify the ski-area footprint rather than a legal parcel centroid.",
+      "No private-restricted or confirmed-closed Atlantic item appears in the source document's four provincial sections."
+    ]
+  }
+}

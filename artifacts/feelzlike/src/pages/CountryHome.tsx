@@ -8,6 +8,7 @@ import { seasonForCountry } from "@/components/home/CountryPicker";
 import { Leaf } from "lucide-react";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { breadcrumbSchema } from "@/lib/seo/jsonLd";
+import { publishedCatalogueRecords as publishedCanadaCatalogueRecords } from "@workspace/canada-ski-catalogue/public-runtime";
 
 interface CountryHomeProps {
   code: CountryCode;
@@ -219,7 +220,7 @@ export default function CountryHome({ code }: CountryHomeProps) {
           </div>
         )}
 
-        {/* Canada · low-key link out to the full directory of every other hill. */}
+        {/* Canada · independently checked additions plus a broader outbound directory. */}
         {code === "CA" && (
           <motion.a
             href="/ca/all-ski-areas"
@@ -233,10 +234,10 @@ export default function CountryHome({ code }: CountryHomeProps) {
             </span>
             <span className="flex-1">
               <span className="block font-semibold text-white transition-colors">
-                every other ski hill in canada · the full list
+                canada ski area directory
               </span>
               <span className="mt-0.5 block text-xs text-white">
-                264 more ski areas across every province · links to each hill's own site
+                {publishedCanadaCatalogueRecords.length} independently checked public additions from the 25 august 2026 gap audit · broader outbound directory
               </span>
             </span>
             <ArrowRight className="h-4 w-4 shrink-0 text-white group-hover:translate-x-0.5 transition-transform" />

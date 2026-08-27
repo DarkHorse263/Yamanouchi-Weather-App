@@ -1,8 +1,12 @@
 ---
 name: feelzlike Canada ski directory
-description: The /ca/all-ski-areas static directory page — dataset rules, link-rot posture, and why its links are excluded from the nightly link check.
+description: Publication and honesty rules for verified Canadian weather coverage and the broader outbound discovery directory.
 ---
-- /ca/all-ski-areas lists every Canadian ski area NOT covered live (264 of skiresort.info's 289), grouped by province with a curated "worth knowing" strip. Dataset = src/data/canadaDirectory.ts (name, province, website|null, infoUrl, notable, blurb).
-- Official-site links were read from each skiresort.info detail page (never guessed — link-rot/hijack hazard); website:null entries link their skiresort.info page labelled "info".
-- **Why excluded from link manifest:** generate-link-manifest.mjs has a SKIP_FILES set for canadaDirectory.ts so the nightly smoke test doesn't hammer ~225 small-town websites. Keep it excluded when regenerating.
-- **How to apply:** if a directory resort gets full coverage later, remove it from the dataset; new static top-level routes must ALSO be added to api-server app.ts KNOWN_TOP_LEVEL or prod deep-links 404.
+
+The Canada directory is intentionally mixed: independently evidenced, published public ski areas get internal weather links; the remaining province-grouped entries are outbound discovery listings, not verified live coverage.
+
+**Why:** broad source lists include private clubs, closed hills, uncertain operators, duplicates, and stale identities. Calling the outbound list complete or verified would overstate the evidence.
+
+**How to apply:** keep publication fail-closed behind draft, verified, and published lifecycle states. Match published records out of the outbound list one-to-one. Keep private, closed, and uncertain records unpublished. Preserve existing authored Canada URLs.
+
+Official links in the broad directory are research aids and carry link-rot risk. Keep that high-volume outbound dataset excluded from automated nightly visits so smoke tests do not hammer small operators.
