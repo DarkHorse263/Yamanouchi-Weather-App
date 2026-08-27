@@ -72,7 +72,7 @@ function HomeAction({
   onClick?: () => void;
 }) {
   const classes =
-    "group flex min-h-[128px] flex-col rounded-2xl border border-white/35 bg-[#0044CC]/35 p-4 text-center transition-all hover:-translate-y-0.5 hover:border-white/70 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80";
+    "home-action group flex min-h-[128px] flex-col rounded-2xl border border-white/35 bg-[#0044CC]/35 p-4 text-center transition-all hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80";
   const contents = (
     <>
       <span className="flex items-center justify-between">
@@ -262,20 +262,20 @@ export function HomeFourWay() {
               )}
             </div>
             {nearest.headline ? (
-              <div className="grid grid-cols-2 border-t border-sky-100 bg-sky-50">
+              <div className="grid grid-cols-2 border-t border-white/20 bg-[#003AAE] text-white">
                 <div className="px-4 py-3">
-                  <span className="block text-[9px] font-bold uppercase tracking-[0.1em] text-slate-500">
+                  <span className="block text-[9px] font-bold uppercase tracking-[0.1em] text-white/70">
                     temperature
                   </span>
-                  <strong className="mt-0.5 block text-sm text-slate-900">
+                  <strong className="mt-0.5 block text-sm text-white">
                     {u.temp(nearest.headline.tempC)}°
                   </strong>
                 </div>
-                <div className="border-l border-sky-100 px-4 py-3">
-                  <span className="block text-[9px] font-bold uppercase tracking-[0.1em] text-slate-500">
+                <div className="border-l border-white/20 px-4 py-3">
+                  <span className="block text-[9px] font-bold uppercase tracking-[0.1em] text-white/70">
                     feelzlike
                   </span>
-                  <strong className="mt-0.5 block text-sm text-slate-900">
+                  <strong className="mt-0.5 block text-sm text-white">
                     {u.temp(nearest.headline.feelsLikeC)}°
                   </strong>
                 </div>

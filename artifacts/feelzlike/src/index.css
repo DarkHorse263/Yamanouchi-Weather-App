@@ -231,3 +231,12 @@ article p, .prose p, li, dd {
 .leaflet-container .radar-fx {
   filter: blur(var(--radar-blur, 0px));
 }
+
+/* Explicit interaction colour avoids generated utility ordering allowing the
+   translucent blue home-action background to win on hover/focus. */
+.home-action:hover,
+.home-action:focus-visible,
+.home-action:active {
+  border-color: #ec008c;
+  background-color: #ec008c;
+}
