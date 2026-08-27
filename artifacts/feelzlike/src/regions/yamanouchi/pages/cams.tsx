@@ -16,9 +16,39 @@ type CamDef = {
   note: string | null;
   noteJa: string | null;
   externalOnly: boolean;
+  location: string;
+  locationJa: string;
+  vantage: "village" | "road" | "mountain";
+  source: string;
+  sourceJa: string;
+  sourceType: "official tourism" | "public authority" | "official resort";
+  verifiedAt: string;
 };
 
+const VERIFIED_AT = "2026-08-27";
+
 const WINTER_CAMS: CamDef[] = [
+  {
+    id: "yudanaka-station",
+    title: "Yudanaka Station · village",
+    titleJa: "湯田中駅前 · 街なか",
+    subtitle: "Live view outside Yudanaka Station · not a ski-slope camera",
+    subtitleJa: "湯田中駅前のライブ映像 · スキー場のカメラではありません",
+    url: "https://www.youtube.com/watch?v=lAWdqnXJ0w0",
+    embedUrl: "https://www.youtube-nocookie.com/embed/lAWdqnXJ0w0?rel=0",
+    icon: Video,
+    color: "from-blue-700 to-sky-600",
+    note: null,
+    noteJa: null,
+    externalOnly: false,
+    location: "Yudanaka Station, Yamanouchi",
+    locationJa: "山ノ内町 湯田中駅前",
+    vantage: "village",
+    source: "Yamanouchi Tourism Bureau",
+    sourceJa: "山ノ内まちづくり観光局",
+    sourceType: "official tourism",
+    verifiedAt: VERIFIED_AT,
+  },
   {
     id: "road",
     title: "Road Cameras",
@@ -32,6 +62,13 @@ const WINTER_CAMS: CamDef[] = [
     note: "Opens Nagano Prefecture's live road camera network covering routes to Yamanouchi and Shiga Kogen.",
     noteJa: "山ノ内・志賀高原へのルートをカバーする長野県道路カメラネットワーク。",
     externalOnly: true,
+    location: "Hokushin, Nagano Prefecture",
+    locationJa: "長野県 北信地域",
+    vantage: "road",
+    source: "Nagano Prefecture",
+    sourceJa: "長野県",
+    sourceType: "public authority",
+    verifiedAt: VERIFIED_AT,
   },
   {
     id: "shiga-live",
@@ -46,6 +83,13 @@ const WINTER_CAMS: CamDef[] = [
     note: null,
     noteJa: null,
     externalOnly: false,
+    location: "Shiga Kogen",
+    locationJa: "志賀高原",
+    vantage: "mountain",
+    source: "Shiga Kogen Tourism Association",
+    sourceJa: "志賀高原観光協会",
+    sourceType: "official tourism",
+    verifiedAt: VERIFIED_AT,
   },
   {
     id: "youtube",
@@ -60,10 +104,38 @@ const WINTER_CAMS: CamDef[] = [
     note: null,
     noteJa: null,
     externalOnly: false,
+    location: "Ryuoo Ski Park",
+    locationJa: "竜王スキーパーク",
+    vantage: "mountain",
+    source: "Ryuoo Ski Park",
+    sourceJa: "竜王スキーパーク",
+    sourceType: "official resort",
+    verifiedAt: VERIFIED_AT,
   },
 ];
 
 const GREEN_CAMS: CamDef[] = [
+  {
+    id: "yudanaka-station",
+    title: "Yudanaka Station · village",
+    titleJa: "湯田中駅前 · 街なか",
+    subtitle: "Live view outside Yudanaka Station · not a mountain camera",
+    subtitleJa: "湯田中駅前のライブ映像 · 山岳カメラではありません",
+    url: "https://www.youtube.com/watch?v=lAWdqnXJ0w0",
+    embedUrl: "https://www.youtube-nocookie.com/embed/lAWdqnXJ0w0?rel=0",
+    icon: Video,
+    color: "from-blue-700 to-sky-600",
+    note: null,
+    noteJa: null,
+    externalOnly: false,
+    location: "Yudanaka Station, Yamanouchi",
+    locationJa: "山ノ内町 湯田中駅前",
+    vantage: "village",
+    source: "Yamanouchi Tourism Bureau",
+    sourceJa: "山ノ内まちづくり観光局",
+    sourceType: "official tourism",
+    verifiedAt: VERIFIED_AT,
+  },
   {
     id: "road",
     title: "Road Cameras",
@@ -77,6 +149,13 @@ const GREEN_CAMS: CamDef[] = [
     note: "Opens Nagano Prefecture's live road camera network covering routes to Yamanouchi and Shiga Kogen.",
     noteJa: "山ノ内・志賀高原へのルートをカバーする長野県道路カメラネットワーク。",
     externalOnly: true,
+    location: "Hokushin, Nagano Prefecture",
+    locationJa: "長野県 北信地域",
+    vantage: "road",
+    source: "Nagano Prefecture",
+    sourceJa: "長野県",
+    sourceType: "public authority",
+    verifiedAt: VERIFIED_AT,
   },
   {
     id: "shiga-live",
@@ -91,6 +170,13 @@ const GREEN_CAMS: CamDef[] = [
     note: null,
     noteJa: null,
     externalOnly: false,
+    location: "Shiga Kogen",
+    locationJa: "志賀高原",
+    vantage: "mountain",
+    source: "Shiga Kogen Tourism Association",
+    sourceJa: "志賀高原観光協会",
+    sourceType: "official tourism",
+    verifiedAt: VERIFIED_AT,
   },
   {
     id: "youtube",
@@ -105,6 +191,13 @@ const GREEN_CAMS: CamDef[] = [
     note: null,
     noteJa: null,
     externalOnly: false,
+    location: "Ryuoo Ski Park",
+    locationJa: "竜王スキーパーク",
+    vantage: "mountain",
+    source: "Ryuoo Ski Park",
+    sourceJa: "竜王スキーパーク",
+    sourceType: "official resort",
+    verifiedAt: VERIFIED_AT,
   },
 ];
 
@@ -189,6 +282,14 @@ export default function Cams() {
                   />
                 </div>
               )}
+                <div className="border-t border-border bg-white px-4 py-3">
+                  <p className="text-xs font-semibold text-slate-800">
+                    {t(cam.location, cam.locationJa)} · {t(cam.vantage, cam.vantage === "village" ? "街なか" : cam.vantage === "road" ? "道路" : "山")}
+                  </p>
+                  <p className="mt-1 text-[11px] leading-relaxed text-slate-700">
+                    {t("Source", "運営")}: {t(cam.source, cam.sourceJa)} · {cam.sourceType} · {t("verified", "確認")} {cam.verifiedAt}
+                  </p>
+                </div>
             </motion.div>
           );
         })}

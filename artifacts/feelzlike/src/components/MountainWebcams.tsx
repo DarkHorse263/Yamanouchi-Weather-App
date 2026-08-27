@@ -121,12 +121,12 @@ export function MountainWebcams({
           <p className="text-sm text-muted-foreground mt-1">
             {liveLabels
               ? t(
-                  "these cameras are run by the resort · we link you straight to their live feeds",
-                  "各カメラはスキー場が運営 · 公式ライブ映像に直接リンクしています",
+                   "curated resort, tourism and public-authority cameras · each source is clearly labelled",
+                   "スキー場・観光団体・公共機関のカメラを厳選 · 各運営元を明記しています",
                 )
               : t(
-                  "these cameras are run by the resort · we link you straight to their webcam pages",
-                  "各カメラはスキー場が運営 · 公式カメラページに直接リンクしています",
+                   "curated resort, tourism and public-authority cameras · each source is clearly labelled",
+                   "スキー場・観光団体・公共機関のカメラを厳選 · 各運営元を明記しています",
                 )}
           </p>
         </div>
