@@ -37,6 +37,7 @@ import {
   regionMountains,
   regionJapanese,
   publishedCatalogueMountainRoutes,
+  groupJapanRegionsByPrefecture,
 } from "./seo-regions.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -224,12 +225,14 @@ addJa(
   "日本のスキーリゾートの町のライブ天気・積雪・道路状況 · 志賀高原、野沢温泉、白馬、妙高、ニセコほか。",
   `<main>
     <h1>Japan · resort town weather</h1>
-    ${BY_COUNTRY("JP").map((r) => `
+    ${groupJapanRegionsByPrefecture().map((prefecture) => `
     <section>
-      <h2><a href="/${r.slug}">${esc(r.name)}</a> · ${esc(r.subtitle)}</h2>
-      <ul>
-        ${regionTownList(r)}
-      </ul>
+      <h2>${esc(prefecture.name)} <span lang="ja">${esc(prefecture.nameJa)}</span></h2>
+      ${prefecture.regions.map((r) => `
+      <article>
+        <h3><a href="/${r.slug}">${esc(r.name)}</a> · ${esc(r.subtitle)}</h3>
+        <ul>${regionTownList(r)}</ul>
+      </article>`).join("\n")}
     </section>`).join("\n")}
   </main>`,
 );

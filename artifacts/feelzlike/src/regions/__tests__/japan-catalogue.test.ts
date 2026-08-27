@@ -11,6 +11,12 @@ import {
   publishedMountainBelongsToRegion,
 } from "../japan-catalogue";
 import {
+  prefecturesForJapanRegion,
+  japanPrefectureOptions,
+  prefectureIdsForJapanPin,
+  primaryPrefectureForJapanRegion,
+} from "../japan-prefectures";
+import {
   mountainDetailCopy,
   mountainPageMetadata,
   mountainWindSummary,
@@ -41,6 +47,42 @@ const mountains = regions.flatMap((region) =>
 test("projects every published Japan catalogue record", () => {
   assert.ok(publishedCatalogueRecords.length > 0);
   assert.equal(mountains.length, publishedCatalogueRecords.length + 1);
+});
+
+test("every catalogue travel region has one deterministic prefecture browse group", async () => {
+  const { travelRegions } = await import("@workspace/japan-ski-catalogue/public-runtime");
+  const grouped = travelRegions.map((region) => ({
+    regionId: region.travelRegionId,
+    prefectureId: primaryPrefectureForJapanRegion(region.travelRegionId).id,
+  }));
+  assert.equal(grouped.length, travelRegions.length);
+  assert.equal(new Set(grouped.map(({ regionId }) => regionId)).size, travelRegions.length);
+  for (const region of travelRegions) {
+    const prefectures = prefecturesForJapanRegion(region.travelRegionId);
+    assert.deepEqual(prefectures.map(({ nameJa }) => nameJa), region.prefectures);
+    assert.ok(prefectures.every(({ name, nameJa }) => name.length > 0 && nameJa.length > 0));
+  }
+  assert.equal(primaryPrefectureForJapanRegion("daisen").name, "Tottori");
+});
+
+test("cross-prefecture map pins use precise mountain membership", () => {
+  const hokkaidoRecord = publishedCatalogueRecords.find(
+    (record) => record.travelRegionId === "hokkaido-regional",
+  );
+  assert.ok(hokkaidoRecord);
+  assert.deepEqual(
+    prefectureIdsForJapanPin("hokkaido-regional", hokkaidoRecord.publicId),
+    ["hokkaido"],
+  );
+  assert.deepEqual(
+    prefectureIdsForJapanPin("gifu-aichi", "authored-town-pin").sort(),
+    ["aichi", "gifu"],
+  );
+  const filterIds = japanPrefectureOptions(["gifu-aichi"]).map(({ id }) => id);
+  assert.deepEqual(filterIds.sort(), ["aichi", "gifu"]);
+  for (const pinPrefectureId of prefectureIdsForJapanPin("gifu-aichi", "authored-town-pin")) {
+    assert.ok(filterIds.includes(pinPrefectureId));
+  }
 });
 
 test("has no duplicate mountain ids or routes", () => {

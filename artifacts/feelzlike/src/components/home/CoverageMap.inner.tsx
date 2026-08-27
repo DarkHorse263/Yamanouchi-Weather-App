@@ -6,6 +6,12 @@ import { useLocation } from "wouter";
 import { track } from "@/lib/analytics";
 import { REGIONS, REGION_BY_ID, REGION_COUNTRY, type CountryCode } from "@/regions";
 import { REGION_DEFAULTS } from "@/regions/region-pins";
+import {
+  japanPrefectureOptions,
+  prefectureIdsForJapanPin,
+  primaryPrefectureForJapanRegion,
+  type JapanPrefecture,
+} from "@/regions/japan-prefectures";
 
 import { resolvePinRoute } from "./resolvePinRoute";
 import { coveragePinKey, dedupeCoveragePins } from "./coveragePinKey";
@@ -55,6 +61,7 @@ interface CoveragePin {
   accent: string;
   regionId: string;
   country: CountryCode;
+  prefectureIds?: string[];
 }
 
 function boundsOf(pins: Array<{ lat: number; lng: number }>): L.LatLngBounds {
@@ -81,7 +88,15 @@ export const COVERAGE_PINS: CoveragePin[] = (() => {
     const country = REGION_COUNTRY[regionId];
     if (!country) continue;
     for (const pin of defaults.pins) {
-      add({ ...pin, lng: pacificLng(pin.lng), regionId, country });
+      add({
+        ...pin,
+        lng: pacificLng(pin.lng),
+        regionId,
+        country,
+        prefectureIds: country === "JP"
+          ? prefectureIdsForJapanPin(regionId, pin.id)
+          : undefined,
+      });
     }
   }
   for (const region of REGIONS) {
@@ -97,6 +112,9 @@ export const COVERAGE_PINS: CoveragePin[] = (() => {
         accent: "#f97316",
         regionId: region.id,
         country,
+        prefectureIds: country === "JP"
+          ? prefectureIdsForJapanPin(region.id, mountain.id)
+          : undefined,
       });
     }
   }
@@ -125,11 +143,20 @@ const COUNTRY_CHIPS: Array<{ code: CountryCode | "ALL"; label: string }> = [
 export default function CoverageMapInner() {
   const [, setLocation] = useLocation();
   const [focus, setFocus] = useState<CountryCode | "ALL">("ALL");
+  const [prefectureId, setPrefectureId] = useState("all");
 
-  const allPins = COVERAGE_PINS;
+  const japanPrefectures = japanPrefectureOptions(
+    REGIONS
+      .filter((region) => REGION_COUNTRY[region.id] === "JP")
+      .map((region) => region.id),
+  );
+  const visiblePins = focus === "JP" && prefectureId !== "all"
+    ? COVERAGE_PINS.filter((pin) => pin.prefectureIds?.includes(prefectureId))
+    : COVERAGE_PINS;
 
   const handleFocus = (code: CountryCode | "ALL") => {
     setFocus(code);
+    if (code !== "JP") setPrefectureId("all");
     track("coverage_map_country_focus", { category: "navigation", data: { country: code } });
   };
 
@@ -153,7 +180,7 @@ export default function CoverageMapInner() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
           maxZoom={12}
         />
-        {allPins.map((p) => {
+        {visiblePins.map((p) => {
           const regionConfig = REGION_BY_ID[p.regionId];
           const route = resolvePinRoute(regionConfig, p.id);
           const isClickable = route !== null;
@@ -184,7 +211,7 @@ export default function CoverageMapInner() {
           );
         })}
         <ZoomControl position="bottomright" />
-        <FlyTo pins={allPins} focus={focus} />
+        <FlyTo pins={visiblePins} focus={focus} />
       </MapContainer>
 
       {/* Country quick-jump chips */}
@@ -209,6 +236,25 @@ export default function CoverageMapInner() {
           </button>
         ))}
       </div>
+
+      {focus === "JP" && (
+        <label className="absolute right-3 top-[76px] z-[1001] rounded-lg bg-white/95 px-2.5 py-2 shadow-sm md:top-3">
+          <span className="sr-only">filter Japan map by prefecture</span>
+          <select
+            value={prefectureId}
+            onChange={(event) => setPrefectureId(event.target.value)}
+            className="max-w-[170px] bg-transparent text-[11px] font-bold text-slate-700 outline-none"
+            aria-label="filter Japan map by prefecture"
+          >
+            <option value="all">all prefectures</option>
+            {japanPrefectures.map((prefecture: JapanPrefecture) => (
+              <option key={prefecture.id} value={prefecture.id}>
+                {prefecture.name} · {prefecture.nameJa}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
 
       {/* Legend */}
       <div className="absolute bottom-3 left-3 z-[1001] flex items-center gap-3 rounded-full bg-white/95 px-3 py-1.5 shadow-sm">

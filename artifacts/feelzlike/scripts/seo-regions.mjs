@@ -1511,6 +1511,61 @@ export const supportedCatalogueRouteMetadata = [...catalogueTravelRegionsById.va
     baseTowns: region.baseTowns,
   }));
 
+const PREFECTURE_ENGLISH = {
+  "北海道": "Hokkaido",
+  "青森県": "Aomori",
+  "岩手県": "Iwate",
+  "宮城県": "Miyagi",
+  "秋田県": "Akita",
+  "山形県": "Yamagata",
+  "福島県": "Fukushima",
+  "栃木県": "Tochigi",
+  "群馬県": "Gunma",
+  "新潟県": "Niigata",
+  "富山県": "Toyama",
+  "石川県": "Ishikawa",
+  "福井県": "Fukui",
+  "山梨県": "Yamanashi",
+  "長野県": "Nagano",
+  "岐阜県": "Gifu",
+  "静岡県": "Shizuoka",
+  "愛知県": "Aichi",
+  "滋賀県": "Shiga",
+  "兵庫県": "Hyogo",
+  "鳥取県": "Tottori",
+  "島根県": "Shimane",
+  "岡山県": "Okayama",
+  "広島県": "Hiroshima",
+  "徳島県": "Tokushima",
+  "愛媛県": "Ehime",
+  "宮崎県": "Miyazaki",
+};
+
+/**
+ * Mirrors the app's presentation-only grouping for the prerendered /jp body.
+ * The catalogue order supplies the reviewed lead prefecture; Daisen is the
+ * sole authored region that predates the catalogue projection.
+ */
+export function groupJapanRegionsByPrefecture(regions = REGIONS.filter((r) => r.country === "JP")) {
+  const groups = new Map();
+  for (const region of regions) {
+    const prefectureJa =
+      catalogueTravelRegionsById.get(region.slug)?.prefectures[0] ??
+      (region.slug === "daisen" ? "鳥取県" : null);
+    if (!prefectureJa) {
+      throw new Error(`[seo-regions] missing prefecture assignment for ${region.slug}`);
+    }
+    const prefecture = PREFECTURE_ENGLISH[prefectureJa];
+    if (!prefecture) {
+      throw new Error(`[seo-regions] missing English prefecture label for ${prefectureJa}`);
+    }
+    const group = groups.get(prefectureJa) ?? { name: prefecture, nameJa: prefectureJa, regions: [] };
+    group.regions.push(region);
+    groups.set(prefectureJa, group);
+  }
+  return [...groups.values()].sort((a, b) => a.name.localeCompare(b.name));
+}
+
 /**
  * Returns [{ id, name }] for every mountain defined in
  * src/regions/<slug>.ts. Throws (build fails loudly) if the file is missing

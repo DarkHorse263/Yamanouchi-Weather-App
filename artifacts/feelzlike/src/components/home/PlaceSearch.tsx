@@ -4,6 +4,7 @@ import { useLocation } from "wouter";
 import { Loader2, Map, MapPin, Mountain, Search, X } from "lucide-react";
 import { track } from "@/lib/analytics";
 import { REGIONS } from "@/regions";
+import { prefecturesForJapanRegion } from "@/regions/japan-prefectures";
 
 // ── server payloads ────────────────────────────────────────────────
 // GET /api/places/search returns locality predictions (no coordinates -
@@ -54,6 +55,8 @@ interface CuratedEntry {
   extraKeys: string[];
   /** Raw japanese search keys (normalizeName strips non-latin chars). */
   jaKeys: string[];
+  /** English and Japanese prefecture aliases, kept separate for mixed result ranking. */
+  prefectureKeys: string[];
 }
 
 const CURATED_ENTRIES: CuratedEntry[] = REGIONS.flatMap((r) => {
@@ -61,6 +64,12 @@ const CURATED_ENTRIES: CuratedEntry[] = REGIONS.flatMap((r) => {
   const townNames = new Set(
     (r.baseTowns ?? []).map((t) => normalizeName(t.name)),
   );
+
+  const prefectures = r.shortTag === "JP"
+    ? prefecturesForJapanRegion(r.id)
+    : [];
+  const prefectureEnglishKeys = prefectures.map((p) => normalizeName(p.name));
+  const prefectureJapaneseKeys = prefectures.map((p) => p.nameJa);
 
   for (const t of r.baseTowns ?? []) {
     const nearby = (r.mountains ?? []).filter((m) =>
@@ -75,10 +84,11 @@ const CURATED_ENTRIES: CuratedEntry[] = REGIONS.flatMap((r) => {
       subtitle: `${r.subtitle} · live conditions`,
       lat: t.lat,
       lng: t.lng,
-      extraKeys: [r.name, ...nearby.map((m) => m.name)].map(normalizeName),
-      jaKeys: [t.nameJa, ...nearby.map((m) => m.nameJa)].filter(
+      extraKeys: [r.name, ...nearby.map((m) => m.name)].map(normalizeName).concat(prefectureEnglishKeys),
+      jaKeys: [t.nameJa, ...nearby.map((m) => m.nameJa), ...prefectureJapaneseKeys].filter(
         (s): s is string => Boolean(s),
       ),
+      prefectureKeys: [...prefectures.map((p) => p.name), ...prefectureJapaneseKeys],
     });
   }
 
@@ -93,8 +103,9 @@ const CURATED_ENTRIES: CuratedEntry[] = REGIONS.flatMap((r) => {
       name: m.name,
       href: `/${r.id}/mountain/${m.id}`,
       subtitle: `${r.subtitle} · mountain forecast`,
-      extraKeys: [r.name].map(normalizeName),
-      jaKeys: m.nameJa ? [m.nameJa] : [],
+      extraKeys: [normalizeName(r.name), ...prefectureEnglishKeys],
+      jaKeys: [...(m.nameJa ? [m.nameJa] : []), ...prefectureJapaneseKeys],
+      prefectureKeys: [...prefectures.map((p) => p.name), ...prefectureJapaneseKeys],
     });
   }
 
@@ -111,8 +122,9 @@ const CURATED_ENTRIES: CuratedEntry[] = REGIONS.flatMap((r) => {
     name: r.name,
     href: `/${r.id}/`,
     subtitle: `${r.subtitle} · pick a town`,
-    extraKeys: [],
-    jaKeys: [],
+    extraKeys: prefectureEnglishKeys,
+    jaKeys: prefectureJapaneseKeys,
+    prefectureKeys: [...prefectures.map((p) => p.name), ...prefectureJapaneseKeys],
   });
 
   return entries;
@@ -150,7 +162,26 @@ function curatedMatchesFor(q: string): CuratedEntry[] {
       KIND_RANK[a.t.kind] - KIND_RANK[b.t.kind] ||
       a.t.name.localeCompare(b.t.name),
   );
-  return scored.slice(0, 4).map((s) => s.t);
+  const prefectureQuery = scored.some(({ t }) =>
+    t.prefectureKeys.some((key) => {
+      const normalizedKey = normalizeName(key);
+      return (nq && normalizedKey.startsWith(nq)) || (raw && key.includes(raw));
+    }),
+  );
+  if (!prefectureQuery) return scored.slice(0, 4).map((s) => s.t);
+
+  // Prefecture discovery should expose the existing hierarchy, not let a long
+  // town list crowd every other destination type out of the four visible rows.
+  const mixed: CuratedEntry[] = [];
+  for (const kind of ["region", "town", "mountain"] as const) {
+    const match = scored.find(({ t }) => t.kind === kind)?.t;
+    if (match) mixed.push(match);
+  }
+  for (const { t } of scored) {
+    if (mixed.length >= 4) break;
+    if (!mixed.includes(t)) mixed.push(t);
+  }
+  return mixed;
 }
 
 function distanceKm(aLat: number, aLng: number, bLat: number, bLng: number): number {
