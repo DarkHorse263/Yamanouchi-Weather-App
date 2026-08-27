@@ -6,6 +6,10 @@ import { track } from "@/lib/analytics";
 import { REGIONS } from "@/regions";
 import { prefecturesForJapanRegion } from "@/regions/japan-prefectures";
 import { usStateForRegion } from "@/regions/us-states";
+import {
+  normalizePlaceSearchText,
+  scoreCuratedEntry,
+} from "./placeSearchRanking";
 
 // ── server payloads ────────────────────────────────────────────────
 // GET /api/places/search returns locality predictions (no coordinates -
@@ -31,7 +35,7 @@ const MIN_CHARS = 3;
 const DEBOUNCE_MS = 350;
 
 function normalizeName(s: string): string {
-  return s.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "");
+  return normalizePlaceSearchText(s);
 }
 
 // Flattened curated index across every region: towns, mountains and the
@@ -150,12 +154,7 @@ function curatedMatchesFor(q: string): CuratedEntry[] {
   const nq = normalizeName(raw);
   const scored: Array<{ t: CuratedEntry; score: number }> = [];
   for (const t of CURATED_ENTRIES) {
-    const nName = normalizeName(t.name);
-    let score: number | null = null;
-    if (nq && nName.startsWith(nq)) score = 0;
-    else if (nq && nName.includes(nq)) score = 1;
-    else if (nq && t.extraKeys.some((k) => k.includes(nq))) score = 2;
-    else if (raw && t.jaKeys.some((k) => k.includes(raw))) score = 0;
+    const score = scoreCuratedEntry(t, raw);
     if (score != null) scored.push({ t, score });
   }
   scored.sort(

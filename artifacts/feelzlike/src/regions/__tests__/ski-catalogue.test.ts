@@ -8,6 +8,7 @@ import {
   regionAlertsAvailable,
 } from "../japan-catalogue";
 import { mergeSkiCatalogueRegions } from "../ski-catalogue";
+import { scoreCuratedEntry } from "../../components/home/placeSearchRanking";
 
 test("generated state towns are mountain-link landings, never synthetic town weather", () => {
   const regions = mergeSkiCatalogueRegions([]);
@@ -43,4 +44,34 @@ test("generated states and mountains cannot expose unsupported alert forms or ro
   // Authored alert-capable regions retain their existing alerts surface.
   assert.equal(regionAlertsAvailable("snowy-mountains"), true);
   assert.equal(regionAlertsAvailable("yamanouchi"), true);
+});
+
+test("published mountains match resort-and-state queries without broadening to the wrong state", () => {
+  const regions = mergeSkiCatalogueRegions([]);
+  const entries = regions.flatMap((region) =>
+    (region.mountains ?? []).map((mountain) => ({
+      kind: "mountain" as const,
+      name: mountain.name,
+      extraKeys: [region.name, region.subtitle, region.shortTag]
+        .filter((value): value is string => Boolean(value))
+        .map((value) => value.toLowerCase().replace(/[^a-z0-9]+/g, "")),
+      jaKeys: [],
+      route: `/${region.id}/mountain/${mountain.id}`,
+    })),
+  );
+
+  const matches = entries.filter(
+    (entry) =>
+      scoreCuratedEntry(entry, "Crystal Mountain Resort, Michigan") != null,
+  );
+  assert.deepEqual(matches.map((entry) => entry.route), [
+    "/us-mi/mountain/crystal-mountain-mi",
+  ]);
+  assert.ok(
+    entries.some(
+      (entry) =>
+        entry.name === "Crystal Mountain Resort" &&
+        scoreCuratedEntry(entry, "Crystal Mountain") === 0,
+    ),
+  );
 });
