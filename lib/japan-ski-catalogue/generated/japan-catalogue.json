@@ -54,7 +54,7 @@
     {
       "sourceId": "japan-publication-manifest",
       "kind": "runtime_publication_approval",
-      "recordCount": 217,
+      "recordCount": 242,
       "location": "lib/japan-ski-catalogue/data/publication-manifest.json"
     }
   ],
@@ -69,13 +69,13 @@
     "publishableOperatingStatuses": [
       "operating"
     ],
-    "marketingApproved": false,
-    "marketingGateReason": "Verified-only coverage is blocked because at least one eligible record is unpublished or ineligible data entered the public projection.",
+    "marketingApproved": true,
+    "marketingGateReason": "Verified-only evidence-complete coverage is approved; unclear and essential-gap records remain excluded from public coverage.",
     "cleanGate": {
       "verifiedEvidenceCompleteRecords": 291,
-      "lifecyclePublishedRecords": 266,
+      "lifecyclePublishedRecords": 291,
       "routeReadyNewCandidates": 242,
-      "manifestIntegratedNewRecords": 217,
+      "manifestIntegratedNewRecords": 242,
       "reviewQueueExcludedPendingEvidence": 207,
       "unclearOrNotVerifiableRecords": 178,
       "verifiedEssentialGapRecords": 29
@@ -198,7 +198,6 @@
         "workbook:420",
         "workbook:452",
         "workbook:317",
-        "workbook:293",
         "workbook:551"
       ]
     },
@@ -301,8 +300,7 @@
         "workbook:150",
         "workbook:159",
         "workbook:161",
-        "workbook:182",
-        "workbook:70"
+        "workbook:182"
       ]
     },
     {
@@ -607,7 +605,10 @@
         "workbook:101",
         "workbook:121",
         "workbook:128",
-        "workbook:187"
+        "workbook:187",
+        "workbook:70",
+        "workbook:108",
+        "workbook:225"
       ]
     },
     {
@@ -911,7 +912,8 @@
         "workbook:195",
         "workbook:321",
         "workbook:409",
-        "workbook:487"
+        "workbook:487",
+        "workbook:293"
       ]
     },
     {
@@ -1822,9 +1824,7 @@
       "recordIds": [
         "workbook:30",
         "workbook:54",
-        "workbook:233",
-        "workbook:108",
-        "workbook:225"
+        "workbook:233"
       ]
     },
     {
@@ -7571,7 +7571,7 @@
     },
     {
       "recordId": "workbook:45",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
       "travelRegionId": "hokuriku",
@@ -8535,7 +8535,7 @@
     },
     {
       "recordId": "workbook:53",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
       "travelRegionId": "nagano-regional",
@@ -8898,7 +8898,7 @@
     },
     {
       "recordId": "workbook:56",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
       "travelRegionId": "nagano-regional",
@@ -10517,11 +10517,11 @@
     },
     {
       "recordId": "workbook:70",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
-      "travelRegionId": "yamanouchi",
-      "baseTownId": "yudanaka",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-tomi",
       "publicId": "yunomaru-ski-resort",
       "aliases": [],
       "routeMode": "new_page",
@@ -13210,7 +13210,7 @@
     },
     {
       "recordId": "workbook:93",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
       "travelRegionId": "nagano-regional",
@@ -14162,7 +14162,7 @@
     },
     {
       "recordId": "workbook:101",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
       "travelRegionId": "nagano-regional",
@@ -14988,11 +14988,11 @@
     },
     {
       "recordId": "workbook:108",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
-      "travelRegionId": "iiyama",
-      "baseTownId": "iiyama",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-tateshina",
       "publicId": "blanche-takayama-ski-resort",
       "aliases": [],
       "routeMode": "new_page",
@@ -16526,7 +16526,7 @@
     },
     {
       "recordId": "workbook:121",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
       "travelRegionId": "nagano-regional",
@@ -17299,7 +17299,7 @@
     },
     {
       "recordId": "workbook:128",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
       "travelRegionId": "nagano-regional",
@@ -22502,7 +22502,7 @@
     },
     {
       "recordId": "workbook:173",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
       "travelRegionId": "chugoku-ski-areas",
@@ -23090,7 +23090,7 @@
     },
     {
       "recordId": "workbook:178",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
       "travelRegionId": "niigata-regional",
@@ -24106,7 +24106,7 @@
     },
     {
       "recordId": "workbook:187",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
       "travelRegionId": "nagano-regional",
@@ -28423,11 +28423,11 @@
     },
     {
       "recordId": "workbook:225",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
-      "travelRegionId": "iiyama",
-      "baseTownId": "iiyama",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-ueda",
       "publicId": "takeshi-banshogahara-ski-area",
       "aliases": [],
       "routeMode": "new_page",
@@ -28795,7 +28795,7 @@
     },
     {
       "recordId": "workbook:229",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
       "travelRegionId": "hokkaido-regional",
@@ -29542,7 +29542,7 @@
     },
     {
       "recordId": "workbook:236",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
       "travelRegionId": "hokkaido-regional",
@@ -34153,7 +34153,7 @@
     },
     {
       "recordId": "workbook:277",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
       "travelRegionId": "chugoku-ski-areas",
@@ -34456,7 +34456,7 @@
     },
     {
       "recordId": "workbook:280",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
       "travelRegionId": "hokkaido-regional",
@@ -35935,11 +35935,11 @@
     },
     {
       "recordId": "workbook:293",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
-      "travelRegionId": "niseko",
-      "baseTownId": "niseko-rankoshi",
+      "travelRegionId": "sapporo",
+      "baseTownId": "sapporo-eniwa",
       "publicId": "anpeizan-ski-area",
       "aliases": [],
       "routeMode": "new_page",
@@ -36754,7 +36754,7 @@
     },
     {
       "recordId": "workbook:300",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
       "travelRegionId": "gifu-aichi",
@@ -37517,7 +37517,7 @@
     },
     {
       "recordId": "workbook:307",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
       "travelRegionId": "hokkaido-regional",
@@ -41587,7 +41587,7 @@
     },
     {
       "recordId": "workbook:343",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
       "travelRegionId": "chugoku-ski-areas",
@@ -43754,7 +43754,7 @@
     },
     {
       "recordId": "workbook:363",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
       "travelRegionId": "chugoku-ski-areas",
@@ -44621,7 +44621,7 @@
     },
     {
       "recordId": "workbook:371",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
       "travelRegionId": "gunma-regional",
@@ -47298,7 +47298,7 @@
     },
     {
       "recordId": "workbook:397",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
       "travelRegionId": "chugoku-ski-areas",
@@ -48268,7 +48268,7 @@
     },
     {
       "recordId": "workbook:406",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
       "travelRegionId": "chugoku-ski-areas",
@@ -68459,9 +68459,9 @@
       "recordId": "workbook:70",
       "publicId": "yunomaru-ski-resort",
       "aliases": [],
-      "travelRegionId": "yamanouchi",
-      "baseTownId": "yudanaka",
-      "route": "/yamanouchi/mountain/yunomaru-ski-resort",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-tomi",
+      "route": "/nagano-regional/mountain/yunomaru-ski-resort",
       "name": "Yunomaru Ski Resort",
       "nameJa": "湯の丸スキー場",
       "coordinates": {
@@ -69532,9 +69532,9 @@
       "recordId": "workbook:108",
       "publicId": "blanche-takayama-ski-resort",
       "aliases": [],
-      "travelRegionId": "iiyama",
-      "baseTownId": "iiyama",
-      "route": "/iiyama/mountain/blanche-takayama-ski-resort",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-tateshina",
+      "route": "/nagano-regional/mountain/blanche-takayama-ski-resort",
       "name": "Blanche Takayama Ski Resort",
       "nameJa": "ブランシュたかやまスキーリゾート",
       "coordinates": {
@@ -73843,9 +73843,9 @@
       "recordId": "workbook:225",
       "publicId": "takeshi-banshogahara-ski-area",
       "aliases": [],
-      "travelRegionId": "iiyama",
-      "baseTownId": "iiyama",
-      "route": "/iiyama/mountain/takeshi-banshogahara-ski-area",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-ueda",
+      "route": "/nagano-regional/mountain/takeshi-banshogahara-ski-area",
       "name": "Takeshi Banshogahara Ski Area",
       "nameJa": "武石番所ヶ原スキー場",
       "coordinates": {
@@ -75919,9 +75919,9 @@
       "recordId": "workbook:293",
       "publicId": "anpeizan-ski-area",
       "aliases": [],
-      "travelRegionId": "niseko",
-      "baseTownId": "niseko-rankoshi",
-      "route": "/niseko/mountain/anpeizan-ski-area",
+      "travelRegionId": "sapporo",
+      "baseTownId": "sapporo-eniwa",
+      "route": "/sapporo/mountain/anpeizan-ski-area",
       "name": "Anpeizan Ski Area",
       "nameJa": "安平山 スキー場",
       "coordinates": {
@@ -85301,6 +85301,681 @@
       "baseTownId": "hokkaido-regional-churui",
       "route": "/hokkaido-regional/mountain/hakugindai-ski-area",
       "prefecture": "Hokkaido",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:45",
+      "publicId": "hakusan-ichirino-onsen-ski-resort",
+      "aliases": [],
+      "name": "Hakusan Ichirino Onsen Ski Resort",
+      "nameJa": "白山一里野温泉スキー場",
+      "coordinates": {
+        "lat": 36.268277,
+        "lng": 136.712547
+      },
+      "forecastElevationM": 1050,
+      "baseElevationM": 550,
+      "topElevationM": 1050,
+      "officialUrl": "https://sam-hakusan.com/ichirino/",
+      "travelRegionId": "hokuriku",
+      "baseTownId": "hokuriku-ichirino-onsen",
+      "route": "/hokuriku/mountain/hakusan-ichirino-onsen-ski-resort",
+      "prefecture": "Ishikawa",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:53",
+      "publicId": "kaida-kogen-mia-ski-resort",
+      "aliases": [],
+      "name": "Kaida Kogen MIA Ski Resort",
+      "nameJa": "開田高原マイアスキー場",
+      "coordinates": {
+        "lat": 35.930714,
+        "lng": 137.52952
+      },
+      "forecastElevationM": 2120,
+      "baseElevationM": 1557,
+      "topElevationM": 2120,
+      "officialUrl": "https://miaski-resort.com/",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-kiso-kiso",
+      "route": "/nagano-regional/mountain/kaida-kogen-mia-ski-resort",
+      "prefecture": "Nagano",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:56",
+      "publicId": "iizuna-resort-ski-area",
+      "aliases": [],
+      "name": "Iizuna Resort Ski Area",
+      "nameJa": "いいづなリゾートスキー場",
+      "coordinates": {
+        "lat": 36.738802,
+        "lng": 138.171291
+      },
+      "forecastElevationM": 1500,
+      "baseElevationM": 900,
+      "topElevationM": 1500,
+      "officialUrl": "https://iizunaresort.com/",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-nagano-nagano",
+      "route": "/nagano-regional/mountain/iizuna-resort-ski-area",
+      "prefecture": "Nagano",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:70",
+      "publicId": "yunomaru-ski-resort",
+      "aliases": [],
+      "name": "Yunomaru Ski Resort",
+      "nameJa": "湯の丸スキー場",
+      "coordinates": {
+        "lat": 36.42622,
+        "lng": 138.42305
+      },
+      "forecastElevationM": 1965,
+      "baseElevationM": 1730,
+      "topElevationM": 1965,
+      "officialUrl": "https://yunomaru.co.jp/",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-tomi",
+      "route": "/nagano-regional/mountain/yunomaru-ski-resort",
+      "prefecture": "Nagano",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:93",
+      "publicId": "kurumayama-kogen-skypark-ski-resort",
+      "aliases": [],
+      "name": "Kurumayama Kogen SKYPARK Ski Resort",
+      "nameJa": "車山高原SKYPARKスキー場",
+      "coordinates": {
+        "lat": 36.101751,
+        "lng": 138.213372
+      },
+      "forecastElevationM": 1907,
+      "baseElevationM": 1570,
+      "topElevationM": 1907,
+      "officialUrl": "https://winter.kurumayama-skypark.com/",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-tateshina",
+      "route": "/nagano-regional/mountain/kurumayama-kogen-skypark-ski-resort",
+      "prefecture": "Nagano",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:101",
+      "publicId": "shirakaba-2in1-ski-resort",
+      "aliases": [],
+      "name": "Shirakaba 2in1 Ski Resort",
+      "nameJa": "白樺2in1スキー場",
+      "coordinates": {
+        "lat": 36.096131,
+        "lng": 138.262125
+      },
+      "forecastElevationM": 1822,
+      "baseElevationM": 1564,
+      "topElevationM": 1822,
+      "officialUrl": "https://whitebirch.co.jp/shirakaba2in1/",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-tateshina",
+      "route": "/nagano-regional/mountain/shirakaba-2in1-ski-resort",
+      "prefecture": "Nagano",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:108",
+      "publicId": "blanche-takayama-ski-resort",
+      "aliases": [],
+      "name": "Blanche Takayama Ski Resort",
+      "nameJa": "ブランシュたかやまスキーリゾート",
+      "coordinates": {
+        "lat": 36.147867,
+        "lng": 138.205448
+      },
+      "forecastElevationM": 1807,
+      "baseElevationM": 1350,
+      "topElevationM": 1807,
+      "officialUrl": "https://blanche-ski.com/winter/",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-tateshina",
+      "route": "/nagano-regional/mountain/blanche-takayama-ski-resort",
+      "prefecture": "Nagano",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:121",
+      "publicId": "shirakabako-royal-hill-ski-resort",
+      "aliases": [],
+      "name": "Shirakabako Royal Hill Ski Resort",
+      "nameJa": "白樺湖ロイヤルヒルスキー場",
+      "coordinates": {
+        "lat": 36.101809,
+        "lng": 138.234652
+      },
+      "forecastElevationM": 1708,
+      "baseElevationM": 1445,
+      "topElevationM": 1708,
+      "officialUrl": "https://royalhill.co.jp/",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-tateshina",
+      "route": "/nagano-regional/mountain/shirakabako-royal-hill-ski-resort",
+      "prefecture": "Nagano",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:128",
+      "publicId": "fujimi-panorama-resort",
+      "aliases": [],
+      "name": "Fujimi Panorama Resort",
+      "nameJa": "富士見パノラマリゾート",
+      "coordinates": {
+        "lat": 35.913096,
+        "lng": 138.204824
+      },
+      "forecastElevationM": 1780,
+      "baseElevationM": 1050,
+      "topElevationM": 1780,
+      "officialUrl": "http://www.fujimipanorama.com",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-fujimi",
+      "route": "/nagano-regional/mountain/fujimi-panorama-resort",
+      "prefecture": "Nagano",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:173",
+      "publicId": "geihoku-kogen-osa-ski-area",
+      "aliases": [],
+      "name": "Geihoku Kogen Osa Ski Area",
+      "nameJa": "芸北高原大佐スキー場",
+      "coordinates": {
+        "lat": 34.747451294971945,
+        "lng": 132.21989889873905
+      },
+      "forecastElevationM": 950,
+      "baseElevationM": 700,
+      "topElevationM": 950,
+      "officialUrl": "https://osaski.co.jp/",
+      "travelRegionId": "chugoku-ski-areas",
+      "baseTownId": "hiroshima-kitahiroshima-kitahiroshima",
+      "route": "/chugoku-ski-areas/mountain/geihoku-kogen-osa-ski-area",
+      "prefecture": "Hiroshima",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:178",
+      "publicId": "mikawa-onsen-ski-resort",
+      "aliases": [],
+      "name": "Mikawa Onsen Ski Resort",
+      "nameJa": "三川温泉スキー場",
+      "coordinates": {
+        "lat": 37.720611,
+        "lng": 139.391522
+      },
+      "forecastElevationM": 416,
+      "baseElevationM": 121,
+      "topElevationM": 416,
+      "officialUrl": "https://www.town.aga.niigata.jp/kanko_rekishi/mikawa_onsenski/index.html",
+      "travelRegionId": "niigata-regional",
+      "baseTownId": "niigata-regional-mikawa-onsen",
+      "route": "/niigata-regional/mountain/mikawa-onsen-ski-resort",
+      "prefecture": "Niigata",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:187",
+      "publicId": "saku-ski-garden-parada",
+      "aliases": [],
+      "name": "Saku Ski Garden Parada",
+      "nameJa": "佐久スキーガーデンパラダ",
+      "coordinates": {
+        "lat": 36.293609,
+        "lng": 138.510667
+      },
+      "forecastElevationM": 1050,
+      "baseElevationM": 780,
+      "topElevationM": 1050,
+      "officialUrl": "https://www.saku-parada.jp/",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-sakuho",
+      "route": "/nagano-regional/mountain/saku-ski-garden-parada",
+      "prefecture": "Nagano",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:225",
+      "publicId": "takeshi-banshogahara-ski-area",
+      "aliases": [],
+      "name": "Takeshi Banshogahara Ski Area",
+      "nameJa": "武石番所ヶ原スキー場",
+      "coordinates": {
+        "lat": 36.26021842437872,
+        "lng": 138.1115520542307
+      },
+      "forecastElevationM": 1400,
+      "baseElevationM": 1200,
+      "topElevationM": 1400,
+      "officialUrl": "https://www.city.ueda.nagano.jp/soshiki/tsangyo/37015.html",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-ueda",
+      "route": "/nagano-regional/mountain/takeshi-banshogahara-ski-area",
+      "prefecture": "Nagano",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:229",
+      "publicId": "shintokuyama-ski-area",
+      "aliases": [],
+      "name": "Shintokuyama Ski Area",
+      "nameJa": "新得山スキー場",
+      "coordinates": {
+        "lat": 43.092156,
+        "lng": 142.831313
+      },
+      "forecastElevationM": 465,
+      "baseElevationM": 190,
+      "topElevationM": 465,
+      "officialUrl": "https://www.shintoku-town.jp/bunka-sports/sports/sports_shisetsu/shintokuyama/",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-shintoku",
+      "route": "/hokkaido-regional/mountain/shintokuyama-ski-area",
+      "prefecture": "Hokkaido",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:236",
+      "publicId": "nakayamatoge-ski-area",
+      "aliases": [],
+      "name": "Nakayamatoge Ski Area",
+      "nameJa": "中山峠スキー場",
+      "coordinates": {
+        "lat": 42.850194,
+        "lng": 141.095472
+      },
+      "forecastElevationM": 941,
+      "baseElevationM": 811,
+      "topElevationM": 941,
+      "officialUrl": "https://nakayama-ski.com/",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-nakagawa",
+      "route": "/hokkaido-regional/mountain/nakayamatoge-ski-area",
+      "prefecture": "Hokkaido",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:277",
+      "publicId": "hiruzen-bear-valley-ski-area",
+      "aliases": [],
+      "name": "Hiruzen Bear Valley Ski Area",
+      "nameJa": "ひるぜんベアバレースキー場",
+      "coordinates": {
+        "lat": 35.261259,
+        "lng": 133.597044
+      },
+      "forecastElevationM": 724,
+      "baseElevationM": 592,
+      "topElevationM": 724,
+      "officialUrl": "https://bear-ski.amebaownd.com/",
+      "travelRegionId": "chugoku-ski-areas",
+      "baseTownId": "okayama-maniwa-maniwa",
+      "route": "/chugoku-ski-areas/mountain/hiruzen-bear-valley-ski-area",
+      "prefecture": "Okayama",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:280",
+      "publicId": "takinoue-sakuragaoka-ski-area",
+      "aliases": [],
+      "name": "Takinoue Sakuragaoka Ski Area",
+      "nameJa": "桜ヶ丘スキー場",
+      "coordinates": {
+        "lat": 44.19063402071252,
+        "lng": 143.10704053583268
+      },
+      "forecastElevationM": 250,
+      "baseElevationM": 120,
+      "topElevationM": 250,
+      "officialUrl": "https://town.takinoue.hokkaido.jp/kyoikuiinkai/social/shisetsu/sakuragaokaski.html",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-takinoue",
+      "route": "/hokkaido-regional/mountain/takinoue-sakuragaoka-ski-area",
+      "prefecture": "Hokkaido",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:293",
+      "publicId": "anpeizan-ski-area",
+      "aliases": [],
+      "name": "Anpeizan Ski Area",
+      "nameJa": "安平山 スキー場",
+      "coordinates": {
+        "lat": 42.863910092603085,
+        "lng": 141.7973787303814
+      },
+      "forecastElevationM": 160,
+      "baseElevationM": 73,
+      "topElevationM": 160,
+      "officialUrl": "https://www.town.abira.lg.jp/midokoro/shisetsu/sport/149",
+      "travelRegionId": "sapporo",
+      "baseTownId": "sapporo-eniwa",
+      "route": "/sapporo/mountain/anpeizan-ski-area",
+      "prefecture": "Hokkaido",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:300",
+      "publicId": "gujo-vacance-mura-ski-area",
+      "aliases": [],
+      "name": "Gujo Vacance Mura Ski Area",
+      "nameJa": "郡上ヴァカンス村スキー場",
+      "coordinates": {
+        "lat": 35.975677,
+        "lng": 136.938253
+      },
+      "forecastElevationM": 1114,
+      "baseElevationM": 1045,
+      "topElevationM": 1114,
+      "officialUrl": "http://www.gujyokogen-hotel.com",
+      "travelRegionId": "gifu-aichi",
+      "baseTownId": "gifu-gujo-gujo",
+      "route": "/gifu-aichi/mountain/gujo-vacance-mura-ski-area",
+      "prefecture": "Gifu",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:307",
+      "publicId": "bifuka-ski-area",
+      "aliases": [],
+      "name": "Bifuka Ski Area",
+      "nameJa": "美深スキー場",
+      "coordinates": {
+        "lat": 44.488152,
+        "lng": 142.358917
+      },
+      "forecastElevationM": 140,
+      "baseElevationM": 83,
+      "topElevationM": 140,
+      "officialUrl": "https://www.town.bifuka.hokkaido.jp/cms/section/kyouiku/qlmcaj0000005my2.html",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-bifuka",
+      "route": "/hokkaido-regional/mountain/bifuka-ski-area",
+      "prefecture": "Hokkaido",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:343",
+      "publicId": "dogoyama-kogen-ski-area",
+      "aliases": [],
+      "name": "Dogoyama Kogen Ski Area",
+      "nameJa": "道後山高原スキー場",
+      "coordinates": {
+        "lat": 35.055094,
+        "lng": 133.201109
+      },
+      "forecastElevationM": 1050,
+      "baseElevationM": 700,
+      "topElevationM": 1050,
+      "officialUrl": "https://www.dogoyamakogen.com/",
+      "travelRegionId": "chugoku-ski-areas",
+      "baseTownId": "hiroshima-shobara-shobara",
+      "route": "/chugoku-ski-areas/mountain/dogoyama-kogen-ski-area",
+      "prefecture": "Hiroshima",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:363",
+      "publicId": "wakasa-hyonosen-ski-area",
+      "aliases": [],
+      "name": "Wakasa Hyonosen Ski Area",
+      "nameJa": "わかさ氷ノ山スキー場",
+      "coordinates": {
+        "lat": 35.353376,
+        "lng": 134.490991
+      },
+      "forecastElevationM": 1172,
+      "baseElevationM": 774,
+      "topElevationM": 1172,
+      "officialUrl": "https://www.hotel-bismarck.com/?utm_source=Skiresort_de&utm_medium=cpc&utm_campaign=Skiresort_de",
+      "travelRegionId": "chugoku-ski-areas",
+      "baseTownId": "tottori-wakasa-wakasa",
+      "route": "/chugoku-ski-areas/mountain/wakasa-hyonosen-ski-area",
+      "prefecture": "Tottori",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:371",
+      "publicId": "akagiyama-daiichi-ski-area-akagiyama-family-slope",
+      "aliases": [],
+      "name": "Akagiyama Daiichi Ski Area (Akagiyama Family Slope)",
+      "nameJa": "赤城山スキー場",
+      "coordinates": {
+        "lat": 36.54555150700627,
+        "lng": 139.18405553572526
+      },
+      "forecastElevationM": 1376,
+      "baseElevationM": 1366,
+      "topElevationM": 1376,
+      "officialUrl": "https://www.oonumasansougroup.com/",
+      "travelRegionId": "gunma-regional",
+      "baseTownId": "gunma-regional-maebashi",
+      "route": "/gunma-regional/mountain/akagiyama-daiichi-ski-area-akagiyama-family-slope",
+      "prefecture": "Gunma",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:397",
+      "publicId": "osorakan-snow-park",
+      "aliases": [],
+      "name": "Osorakan Snow Park",
+      "nameJa": "恐羅漢スノーパーク",
+      "coordinates": {
+        "lat": 34.595914,
+        "lng": 132.146324
+      },
+      "forecastElevationM": 1281,
+      "baseElevationM": 885,
+      "topElevationM": 1281,
+      "officialUrl": "https://www.osorakan.co.jp/",
+      "travelRegionId": "chugoku-ski-areas",
+      "baseTownId": "hiroshima-akiota-akiota",
+      "route": "/chugoku-ski-areas/mountain/osorakan-snow-park",
+      "prefecture": "Hiroshima",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:406",
+      "publicId": "onbara-kogen-ski-area",
+      "aliases": [],
+      "name": "Onbara Kogen Ski Area",
+      "nameJa": "恩原高原スキー場",
+      "coordinates": {
+        "lat": 35.312661,
+        "lng": 133.981231
+      },
+      "forecastElevationM": 946,
+      "baseElevationM": 767,
+      "topElevationM": 946,
+      "officialUrl": "https://www.ombara-kogen.com/ski/",
+      "travelRegionId": "chugoku-ski-areas",
+      "baseTownId": "okayama-kagamino-kagamino",
+      "route": "/chugoku-ski-areas/mountain/onbara-kogen-ski-area",
+      "prefecture": "Okayama",
       "country": "Japan",
       "countryCode": "JP",
       "honesty": {

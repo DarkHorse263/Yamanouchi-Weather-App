@@ -27421,7 +27421,7 @@
       "disposition": "published_directly"
     },
     {
-      "identityId": "workbook:300",
+      "identityId": "catalogue:workbook:300",
       "canonicalName": "Gujo Vacance Mura Ski Area",
       "normalizedIdentity": "gujokogen",
       "prefecture": "Gifu",
@@ -27444,10 +27444,14 @@
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
-        "routes": [],
-        "pageIds": []
+        "routes": [
+          "/gifu-aichi/mountain/gujo-vacance-mura-ski-area"
+        ],
+        "pageIds": [
+          "catalogue:workbook:300"
+        ]
       },
-      "disposition": "genuinely_missing"
+      "disposition": "published_directly"
     },
     {
       "identityId": "Gifu:harayamacityskiarea",
@@ -28455,7 +28459,7 @@
       "disposition": "unresolved"
     },
     {
-      "identityId": "workbook:371",
+      "identityId": "catalogue:workbook:371",
       "canonicalName": "Akagiyama Daiichi Ski Area (Akagiyama Family Slope)",
       "normalizedIdentity": "akagiyama",
       "prefecture": "Gunma",
@@ -28478,10 +28482,14 @@
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
-        "routes": [],
-        "pageIds": []
+        "routes": [
+          "/gunma-regional/mountain/akagiyama-daiichi-ski-area-akagiyama-family-slope"
+        ],
+        "pageIds": [
+          "catalogue:workbook:371"
+        ]
       },
-      "disposition": "genuinely_missing"
+      "disposition": "published_directly"
     },
     {
       "identityId": "workbook:266",
@@ -29473,7 +29481,7 @@
       "disposition": "unresolved"
     },
     {
-      "identityId": "workbook:343",
+      "identityId": "catalogue:workbook:343",
       "canonicalName": "Dogoyama Kogen Ski Area",
       "normalizedIdentity": "dogoyamakogen",
       "prefecture": "Hiroshima",
@@ -29496,10 +29504,14 @@
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
-        "routes": [],
-        "pageIds": []
+        "routes": [
+          "/chugoku-ski-areas/mountain/dogoyama-kogen-ski-area"
+        ],
+        "pageIds": [
+          "catalogue:workbook:343"
+        ]
       },
-      "disposition": "genuinely_missing"
+      "disposition": "published_directly"
     },
     {
       "identityId": "Hiroshima:geihokubunkaland",
@@ -29524,7 +29536,7 @@
       "disposition": "unresolved"
     },
     {
-      "identityId": "workbook:173",
+      "identityId": "catalogue:workbook:173",
       "canonicalName": "Geihoku Kogen Osa Ski Area",
       "normalizedIdentity": "osa",
       "prefecture": "Hiroshima",
@@ -29547,10 +29559,14 @@
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
-        "routes": [],
-        "pageIds": []
+        "routes": [
+          "/chugoku-ski-areas/mountain/geihoku-kogen-osa-ski-area"
+        ],
+        "pageIds": [
+          "catalogue:workbook:173"
+        ]
       },
-      "disposition": "genuinely_missing"
+      "disposition": "published_directly"
     },
     {
       "identityId": "workbook:316",
@@ -29683,7 +29699,7 @@
       "disposition": "unresolved"
     },
     {
-      "identityId": "workbook:397",
+      "identityId": "catalogue:workbook:397",
       "canonicalName": "Osorakan Snow Park",
       "normalizedIdentity": "osorakan",
       "prefecture": "Hiroshima",
@@ -29706,10 +29722,14 @@
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
-        "routes": [],
-        "pageIds": []
+        "routes": [
+          "/chugoku-ski-areas/mountain/osorakan-snow-park"
+        ],
+        "pageIds": [
+          "catalogue:workbook:397"
+        ]
       },
-      "disposition": "genuinely_missing"
+      "disposition": "published_directly"
     },
     {
       "identityId": "Hiroshima:pineridgeresortsgeihoku",
@@ -30128,7 +30148,7 @@
       "disposition": "published_directly"
     },
     {
-      "identityId": "workbook:293",
+      "identityId": "catalogue:workbook:293",
       "canonicalName": "Anpeizan Ski Area",
       "normalizedIdentity": "choeianpeizan",
       "prefecture": "Hokkaido",
@@ -30151,10 +30171,14 @@
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
-        "routes": [],
-        "pageIds": []
+        "routes": [
+          "/sapporo/mountain/anpeizan-ski-area"
+        ],
+        "pageIds": [
+          "catalogue:workbook:293"
+        ]
       },
-      "disposition": "genuinely_missing"
+      "disposition": "published_directly"
     },
     {
       "identityId": "workbook:310",
@@ -30518,7 +30542,7 @@
       "disposition": "unresolved"
     },
     {
-      "identityId": "workbook:307",
+      "identityId": "catalogue:workbook:307",
       "canonicalName": "Bifuka Ski Area",
       "normalizedIdentity": "bifuka",
       "prefecture": "Hokkaido",
@@ -30541,10 +30565,14 @@
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
-        "routes": [],
-        "pageIds": []
+        "routes": [
+          "/hokkaido-regional/mountain/bifuka-ski-area"
+        ],
+        "pageIds": [
+          "catalogue:workbook:307"
+        ]
       },
-      "disposition": "genuinely_missing"
+      "disposition": "published_directly"
     },
     {
       "identityId": "Hokkaido:biraoskiarea",
@@ -32603,7 +32631,7 @@
       "disposition": "unresolved"
     },
     {
-      "identityId": "workbook:236",
+      "identityId": "catalogue:workbook:236",
       "canonicalName": "Nakayamatoge Ski Area",
       "normalizedIdentity": "nakayamatogekogen",
       "prefecture": "Hokkaido",
@@ -32626,10 +32654,14 @@
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
-        "routes": [],
-        "pageIds": []
+        "routes": [
+          "/hokkaido-regional/mountain/nakayamatoge-ski-area"
+        ],
+        "pageIds": [
+          "catalogue:workbook:236"
+        ]
       },
-      "disposition": "genuinely_missing"
+      "disposition": "published_directly"
     },
     {
       "identityId": "catalogue:workbook:136",
@@ -33910,7 +33942,7 @@
       "disposition": "unresolved"
     },
     {
-      "identityId": "workbook:229",
+      "identityId": "catalogue:workbook:229",
       "canonicalName": "Shintokuyama Ski Area",
       "normalizedIdentity": "shintokuyama",
       "prefecture": "Hokkaido",
@@ -33933,10 +33965,14 @@
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
-        "routes": [],
-        "pageIds": []
+        "routes": [
+          "/hokkaido-regional/mountain/shintokuyama-ski-area"
+        ],
+        "pageIds": [
+          "catalogue:workbook:229"
+        ]
       },
-      "disposition": "genuinely_missing"
+      "disposition": "published_directly"
     },
     {
       "identityId": "Hokkaido:shintotsukawatownsocchidakeskiarea",
@@ -34192,7 +34228,7 @@
       "disposition": "genuinely_missing"
     },
     {
-      "identityId": "workbook:280",
+      "identityId": "catalogue:workbook:280",
       "canonicalName": "Takinoue Sakuragaoka Ski Area",
       "normalizedIdentity": "takinouechosakuragaoka",
       "prefecture": "Hokkaido",
@@ -34215,10 +34251,14 @@
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
-        "routes": [],
-        "pageIds": []
+        "routes": [
+          "/hokkaido-regional/mountain/takinoue-sakuragaoka-ski-area"
+        ],
+        "pageIds": [
+          "catalogue:workbook:280"
+        ]
       },
-      "disposition": "genuinely_missing"
+      "disposition": "published_directly"
     },
     {
       "identityId": "workbook:474",
@@ -35414,7 +35454,7 @@
       "disposition": "unresolved"
     },
     {
-      "identityId": "workbook:45",
+      "identityId": "catalogue:workbook:45",
       "canonicalName": "Hakusan Ichirino Onsen Ski Resort",
       "normalizedIdentity": "hakusanichirinoonsen",
       "prefecture": "Ishikawa",
@@ -35437,10 +35477,14 @@
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
-        "routes": [],
-        "pageIds": []
+        "routes": [
+          "/hokuriku/mountain/hakusan-ichirino-onsen-ski-resort"
+        ],
+        "pageIds": [
+          "catalogue:workbook:45"
+        ]
       },
-      "disposition": "genuinely_missing"
+      "disposition": "published_directly"
     },
     {
       "identityId": "Ishikawa:hakusansemekogenskiarea",
@@ -37381,7 +37425,7 @@
       "disposition": "unresolved"
     },
     {
-      "identityId": "workbook:108",
+      "identityId": "catalogue:workbook:108",
       "canonicalName": "Blanche Takayama Ski Resort",
       "normalizedIdentity": "blanchetakayama",
       "prefecture": "Nagano",
@@ -37404,10 +37448,14 @@
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
-        "routes": [],
-        "pageIds": []
+        "routes": [
+          "/nagano-regional/mountain/blanche-takayama-ski-resort"
+        ],
+        "pageIds": [
+          "catalogue:workbook:108"
+        ]
       },
-      "disposition": "genuinely_missing"
+      "disposition": "published_directly"
     },
     {
       "identityId": "Nagano:chateraiseskiresortyatsugadake",
@@ -37593,7 +37641,7 @@
       "disposition": "published_directly"
     },
     {
-      "identityId": "workbook:128",
+      "identityId": "catalogue:workbook:128",
       "canonicalName": "Fujimi Panorama Resort",
       "normalizedIdentity": "fujimipanorama",
       "prefecture": "Nagano",
@@ -37616,10 +37664,14 @@
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
-        "routes": [],
-        "pageIds": []
+        "routes": [
+          "/nagano-regional/mountain/fujimi-panorama-resort"
+        ],
+        "pageIds": [
+          "catalogue:workbook:128"
+        ]
       },
-      "disposition": "genuinely_missing"
+      "disposition": "published_directly"
     },
     {
       "identityId": "page:yamanouchi:shiga-giant",
@@ -38431,7 +38483,7 @@
       "disposition": "unresolved"
     },
     {
-      "identityId": "workbook:56",
+      "identityId": "catalogue:workbook:56",
       "canonicalName": "Iizuna Resort Ski Area",
       "normalizedIdentity": "iizunaresort",
       "prefecture": "Nagano",
@@ -38456,10 +38508,14 @@
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
-        "routes": [],
-        "pageIds": []
+        "routes": [
+          "/nagano-regional/mountain/iizuna-resort-ski-area"
+        ],
+        "pageIds": [
+          "catalogue:workbook:56"
+        ]
       },
-      "disposition": "genuinely_missing"
+      "disposition": "published_directly"
     },
     {
       "identityId": "workbook:190",
@@ -38552,7 +38608,7 @@
       "disposition": "published_directly"
     },
     {
-      "identityId": "workbook:53",
+      "identityId": "catalogue:workbook:53",
       "canonicalName": "Kaida Kogen MIA Ski Resort",
       "normalizedIdentity": "kaidakogenmia",
       "prefecture": "Nagano",
@@ -38575,10 +38631,14 @@
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
-        "routes": [],
-        "pageIds": []
+        "routes": [
+          "/nagano-regional/mountain/kaida-kogen-mia-ski-resort"
+        ],
+        "pageIds": [
+          "catalogue:workbook:53"
+        ]
       },
-      "disposition": "genuinely_missing"
+      "disposition": "published_directly"
     },
     {
       "identityId": "workbook:123",
@@ -39131,7 +39191,7 @@
       "disposition": "published_directly"
     },
     {
-      "identityId": "workbook:93",
+      "identityId": "catalogue:workbook:93",
       "canonicalName": "Kurumayama Kogen SKYPARK Ski Resort",
       "normalizedIdentity": "kurumayamakogen",
       "prefecture": "Nagano",
@@ -39154,10 +39214,14 @@
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
-        "routes": [],
-        "pageIds": []
+        "routes": [
+          "/nagano-regional/mountain/kurumayama-kogen-skypark-ski-resort"
+        ],
+        "pageIds": [
+          "catalogue:workbook:93"
+        ]
       },
-      "disposition": "genuinely_missing"
+      "disposition": "published_directly"
     },
     {
       "identityId": "catalogue:workbook:30",
@@ -39972,7 +40036,7 @@
       "disposition": "published_directly"
     },
     {
-      "identityId": "workbook:187",
+      "identityId": "catalogue:workbook:187",
       "canonicalName": "Saku Ski Garden Parada",
       "normalizedIdentity": "sakuskigardenparada",
       "prefecture": "Nagano",
@@ -39995,10 +40059,14 @@
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
-        "routes": [],
-        "pageIds": []
+        "routes": [
+          "/nagano-regional/mountain/saku-ski-garden-parada"
+        ],
+        "pageIds": [
+          "catalogue:workbook:187"
+        ]
       },
-      "disposition": "genuinely_missing"
+      "disposition": "published_directly"
     },
     {
       "identityId": "catalogue:workbook:330",
@@ -40157,7 +40225,7 @@
       "disposition": "unresolved"
     },
     {
-      "identityId": "workbook:101",
+      "identityId": "catalogue:workbook:101",
       "canonicalName": "Shirakaba 2in1 Ski Resort",
       "normalizedIdentity": "shirakaba2in1",
       "prefecture": "Nagano",
@@ -40180,10 +40248,14 @@
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
-        "routes": [],
-        "pageIds": []
+        "routes": [
+          "/nagano-regional/mountain/shirakaba-2in1-ski-resort"
+        ],
+        "pageIds": [
+          "catalogue:workbook:101"
+        ]
       },
-      "disposition": "genuinely_missing"
+      "disposition": "published_directly"
     },
     {
       "identityId": "catalogue:workbook:252",
@@ -40221,7 +40293,7 @@
       "disposition": "published_directly"
     },
     {
-      "identityId": "workbook:121",
+      "identityId": "catalogue:workbook:121",
       "canonicalName": "Shirakabako Royal Hill Ski Resort",
       "normalizedIdentity": "shirakabakoroyalhill",
       "prefecture": "Nagano",
@@ -40244,10 +40316,14 @@
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
-        "routes": [],
-        "pageIds": []
+        "routes": [
+          "/nagano-regional/mountain/shirakabako-royal-hill-ski-resort"
+        ],
+        "pageIds": [
+          "catalogue:workbook:121"
+        ]
       },
-      "disposition": "genuinely_missing"
+      "disposition": "published_directly"
     },
     {
       "identityId": "workbook:512",
@@ -40415,7 +40491,7 @@
       "exception": "Legacy duplicate public routes for the same resort are preserved because existing public URLs must remain unchanged."
     },
     {
-      "identityId": "workbook:225",
+      "identityId": "catalogue:workbook:225",
       "canonicalName": "Takeshi Banshogahara Ski Area",
       "normalizedIdentity": "banshogahara",
       "prefecture": "Nagano",
@@ -40438,10 +40514,14 @@
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
-        "routes": [],
-        "pageIds": []
+        "routes": [
+          "/nagano-regional/mountain/takeshi-banshogahara-ski-area"
+        ],
+        "pageIds": [
+          "catalogue:workbook:225"
+        ]
       },
-      "disposition": "genuinely_missing"
+      "disposition": "published_directly"
     },
     {
       "identityId": "page:iiyama:tangram",
@@ -41243,7 +41323,7 @@
       "exception": "One discovery identity intentionally reconciles to multiple operating-area pages."
     },
     {
-      "identityId": "workbook:70",
+      "identityId": "catalogue:workbook:70",
       "canonicalName": "Yunomaru Ski Resort",
       "normalizedIdentity": "yunomaru",
       "prefecture": "Nagano",
@@ -41266,10 +41346,14 @@
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
-        "routes": [],
-        "pageIds": []
+        "routes": [
+          "/nagano-regional/mountain/yunomaru-ski-resort"
+        ],
+        "pageIds": [
+          "catalogue:workbook:70"
+        ]
       },
-      "disposition": "genuinely_missing"
+      "disposition": "published_directly"
     },
     {
       "identityId": "Nara:dorogawaskiarea",
@@ -42723,7 +42807,7 @@
       "disposition": "published_directly"
     },
     {
-      "identityId": "workbook:178",
+      "identityId": "catalogue:workbook:178",
       "canonicalName": "Mikawa Onsen Ski Resort",
       "normalizedIdentity": "mikawaonsen",
       "prefecture": "Niigata",
@@ -42746,10 +42830,14 @@
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
-        "routes": [],
-        "pageIds": []
+        "routes": [
+          "/niigata-regional/mountain/mikawa-onsen-ski-resort"
+        ],
+        "pageIds": [
+          "catalogue:workbook:178"
+        ]
       },
-      "disposition": "genuinely_missing"
+      "disposition": "published_directly"
     },
     {
       "identityId": "Niigata:mitsumatakaguratashiromtnaeba",
@@ -44277,7 +44365,7 @@
       "disposition": "unresolved"
     },
     {
-      "identityId": "workbook:277",
+      "identityId": "catalogue:workbook:277",
       "canonicalName": "Hiruzen Bear Valley Ski Area",
       "normalizedIdentity": "hiruzenbearvalley",
       "prefecture": "Okayama",
@@ -44300,10 +44388,14 @@
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
-        "routes": [],
-        "pageIds": []
+        "routes": [
+          "/chugoku-ski-areas/mountain/hiruzen-bear-valley-ski-area"
+        ],
+        "pageIds": [
+          "catalogue:workbook:277"
+        ]
       },
-      "disposition": "genuinely_missing"
+      "disposition": "published_directly"
     },
     {
       "identityId": "catalogue:workbook:230",
@@ -44387,7 +44479,7 @@
       "disposition": "unresolved"
     },
     {
-      "identityId": "workbook:406",
+      "identityId": "catalogue:workbook:406",
       "canonicalName": "Onbara Kogen Ski Area",
       "normalizedIdentity": "onbarakogen",
       "prefecture": "Okayama",
@@ -44410,10 +44502,14 @@
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
-        "routes": [],
-        "pageIds": []
+        "routes": [
+          "/chugoku-ski-areas/mountain/onbara-kogen-ski-area"
+        ],
+        "pageIds": [
+          "catalogue:workbook:406"
+        ]
       },
-      "disposition": "genuinely_missing"
+      "disposition": "published_directly"
     },
     {
       "identityId": "workbook:354",
@@ -45867,7 +45963,7 @@
       "disposition": "unresolved"
     },
     {
-      "identityId": "workbook:363",
+      "identityId": "catalogue:workbook:363",
       "canonicalName": "Wakasa Hyonosen Ski Area",
       "normalizedIdentity": "wakasahyonosen",
       "prefecture": "Tottori",
@@ -45890,10 +45986,14 @@
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
-        "routes": [],
-        "pageIds": []
+        "routes": [
+          "/chugoku-ski-areas/mountain/wakasa-hyonosen-ski-area"
+        ],
+        "pageIds": [
+          "catalogue:workbook:363"
+        ]
       },
-      "disposition": "genuinely_missing"
+      "disposition": "published_directly"
     },
     {
       "identityId": "catalogue:workbook:237",

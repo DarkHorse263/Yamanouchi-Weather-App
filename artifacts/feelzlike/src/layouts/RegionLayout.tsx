@@ -22,7 +22,9 @@ import { victoriasHighCountryRouter } from "@/regions/victorias-high-country/rou
 import {
   isCatalogueMountainLinkTown,
   mountainDetailRouteMode,
+  publishedMountainBelongsToRegion,
 } from "@/regions/japan-catalogue";
+import NotFound from "@/pages/not-found";
 
 export interface RegionRouter {
   /** Renders /:region/mountain/:id (and /:region/resort/:id for legacy) */
@@ -62,6 +64,9 @@ function RoutedMountainDetail({
   const [, mountainParams] = useRoute("/mountain/:id");
   const [, resortParams] = useRoute("/resort/:id");
   const mountainId = mountainParams?.id ?? resortParams?.id ?? "";
+  if (!publishedMountainBelongsToRegion(regionId, mountainId)) {
+    return <NotFound />;
+  }
   const mode = mountainDetailRouteMode({
     regionId,
     mountainId,

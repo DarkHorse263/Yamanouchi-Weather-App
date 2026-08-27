@@ -42,7 +42,6 @@
         "workbook:420",
         "workbook:452",
         "workbook:317",
-        "workbook:293",
         "workbook:551"
       ]
     },
@@ -145,8 +144,7 @@
         "workbook:150",
         "workbook:159",
         "workbook:161",
-        "workbook:182",
-        "workbook:70"
+        "workbook:182"
       ]
     },
     {
@@ -451,7 +449,10 @@
         "workbook:101",
         "workbook:121",
         "workbook:128",
-        "workbook:187"
+        "workbook:187",
+        "workbook:70",
+        "workbook:108",
+        "workbook:225"
       ]
     },
     {
@@ -755,7 +756,8 @@
         "workbook:195",
         "workbook:321",
         "workbook:409",
-        "workbook:487"
+        "workbook:487",
+        "workbook:293"
       ]
     },
     {
@@ -1666,9 +1668,7 @@
       "recordIds": [
         "workbook:30",
         "workbook:54",
-        "workbook:233",
-        "workbook:108",
-        "workbook:225"
+        "workbook:233"
       ]
     },
     {
@@ -3792,14 +3792,14 @@
       "recordId": "workbook:229",
       "travelRegionId": "hokkaido-regional",
       "baseTownId": "hokkaido-regional-shintoku",
-      "basis": "audited_review_travel_cluster",
+      "basis": "publication_geography_audit",
       "confidence": "low"
     },
     {
       "recordId": "workbook:236",
       "travelRegionId": "hokkaido-regional",
       "baseTownId": "hokkaido-regional-nakagawa",
-      "basis": "audited_review_travel_cluster",
+      "basis": "publication_geography_audit",
       "confidence": "low"
     },
     {
@@ -3811,16 +3811,16 @@
     },
     {
       "recordId": "workbook:293",
-      "travelRegionId": "niseko",
-      "baseTownId": "niseko-rankoshi",
-      "basis": "audited_review_travel_cluster",
-      "confidence": "low"
+      "travelRegionId": "sapporo",
+      "baseTownId": "sapporo-eniwa",
+      "basis": "publication_geography_audit",
+      "confidence": "high"
     },
     {
       "recordId": "workbook:307",
       "travelRegionId": "hokkaido-regional",
       "baseTownId": "hokkaido-regional-bifuka",
-      "basis": "audited_review_travel_cluster",
+      "basis": "publication_geography_audit",
       "confidence": "low"
     },
     {
@@ -3834,7 +3834,7 @@
       "recordId": "workbook:371",
       "travelRegionId": "gunma-regional",
       "baseTownId": "gunma-regional-maebashi",
-      "basis": "audited_review_travel_cluster",
+      "basis": "publication_geography_audit",
       "confidence": "medium"
     },
     {
@@ -3853,10 +3853,10 @@
     },
     {
       "recordId": "workbook:70",
-      "travelRegionId": "yamanouchi",
-      "baseTownId": "yudanaka",
-      "basis": "audited_review_travel_cluster",
-      "confidence": "medium"
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-tomi",
+      "basis": "publication_geography_audit",
+      "confidence": "high"
     },
     {
       "recordId": "workbook:93",
@@ -3874,10 +3874,10 @@
     },
     {
       "recordId": "workbook:108",
-      "travelRegionId": "iiyama",
-      "baseTownId": "iiyama",
-      "basis": "audited_review_travel_cluster",
-      "confidence": "medium"
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-tateshina",
+      "basis": "publication_geography_audit",
+      "confidence": "high"
     },
     {
       "recordId": "workbook:121",
@@ -3902,16 +3902,16 @@
     },
     {
       "recordId": "workbook:225",
-      "travelRegionId": "iiyama",
-      "baseTownId": "iiyama",
-      "basis": "audited_review_travel_cluster",
-      "confidence": "medium"
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-ueda",
+      "basis": "publication_geography_audit",
+      "confidence": "high"
     },
     {
       "recordId": "workbook:45",
       "travelRegionId": "hokuriku",
       "baseTownId": "hokuriku-ichirino-onsen",
-      "basis": "audited_review_travel_cluster",
+      "basis": "publication_geography_audit",
       "confidence": "high"
     },
     {
@@ -3953,7 +3953,7 @@
       "recordId": "workbook:173",
       "travelRegionId": "chugoku-ski-areas",
       "baseTownId": "hiroshima-kitahiroshima-kitahiroshima",
-      "basis": "audited_review_travel_cluster",
+      "basis": "publication_geography_audit",
       "confidence": "medium"
     },
     {
@@ -3981,7 +3981,7 @@
       "recordId": "workbook:397",
       "travelRegionId": "chugoku-ski-areas",
       "baseTownId": "hiroshima-akiota-akiota",
-      "basis": "audited_review_travel_cluster",
+      "basis": "publication_geography_audit",
       "confidence": "high"
     },
     {

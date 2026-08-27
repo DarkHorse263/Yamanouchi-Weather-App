@@ -226,6 +226,20 @@ const CATALOGUE_CAPABILITIES = new Map(
   ]),
 );
 
+const CATALOGUE_REGION_BY_ID = new Map(
+  publishedCatalogueRecords.flatMap((record) =>
+    [record.publicId, ...record.aliases].map((id) => [id, record.travelRegionId] as const),
+  ),
+);
+
+export function publishedMountainBelongsToRegion(
+  regionId: string,
+  mountainId: string,
+): boolean {
+  const publishedRegionId = CATALOGUE_REGION_BY_ID.get(mountainId);
+  return publishedRegionId === undefined || publishedRegionId === regionId;
+}
+
 export function getPublishedMountainCapabilities(
   regionId: string,
   mountainId: string,

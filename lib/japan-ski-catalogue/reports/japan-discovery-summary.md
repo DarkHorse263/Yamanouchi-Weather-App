@@ -7,13 +7,13 @@ Public completeness wording remains bounded while unresolved identities remain.
 
 - Source entries: 2294
 - Deduplicated identities: 858
-- published_directly: 282
+- published_directly: 307
 - covered_by_alias: 8
 - covered_by_multiple_pages: 7
 - merged_or_renamed: 5
 - closed: 18
 - out_of_scope: 15
-- genuinely_missing: 47
+- genuinely_missing: 22
 - unresolved: 476
 
 ## Prefecture proof
@@ -28,13 +28,13 @@ Public completeness wording remains bounded while unresolved identities remain.
 | Fukui | 10 | 0 | 0 | 0 | 10 |
 | Fukuoka | 1 | 0 | 1 | 0 | 0 |
 | Fukushima | 32 | 15 | 3 | 0 | 14 |
-| Gifu | 41 | 13 | 2 | 1 | 25 |
-| Gunma | 36 | 19 | 2 | 1 | 14 |
-| Hiroshima | 22 | 3 | 1 | 3 | 15 |
-| Hokkaido | 180 | 56 | 3 | 14 | 107 |
+| Gifu | 41 | 14 | 2 | 0 | 25 |
+| Gunma | 36 | 20 | 2 | 0 | 14 |
+| Hiroshima | 22 | 6 | 1 | 0 | 15 |
+| Hokkaido | 180 | 61 | 3 | 9 | 107 |
 | Hyogo | 25 | 12 | 2 | 0 | 11 |
 | Ibaraki | 1 | 0 | 0 | 0 | 1 |
-| Ishikawa | 17 | 1 | 0 | 2 | 14 |
+| Ishikawa | 17 | 2 | 0 | 1 | 14 |
 | Iwate | 28 | 13 | 1 | 1 | 13 |
 | Kagawa | 1 | 0 | 0 | 0 | 1 |
 | Kanagawa | 2 | 0 | 1 | 0 | 1 |
@@ -44,11 +44,11 @@ Public completeness wording remains bounded while unresolved identities remain.
 | Mie | 1 | 0 | 0 | 0 | 1 |
 | Miyagi | 14 | 9 | 1 | 0 | 4 |
 | Miyazaki | 3 | 0 | 1 | 0 | 2 |
-| Nagano | 148 | 63 | 3 | 11 | 71 |
+| Nagano | 148 | 73 | 3 | 1 | 71 |
 | Nara | 3 | 0 | 0 | 0 | 3 |
-| Niigata | 112 | 28 | 0 | 3 | 81 |
+| Niigata | 112 | 29 | 0 | 2 | 81 |
 | Oita | 2 | 0 | 0 | 0 | 2 |
-| Okayama | 8 | 1 | 0 | 2 | 5 |
+| Okayama | 8 | 3 | 0 | 0 | 5 |
 | Saga | 1 | 0 | 0 | 0 | 1 |
 | Saitama | 2 | 0 | 2 | 0 | 0 |
 | Shiga | 13 | 8 | 2 | 0 | 3 |
@@ -56,7 +56,7 @@ Public completeness wording remains bounded while unresolved identities remain.
 | Shizuoka | 3 | 2 | 0 | 0 | 1 |
 | Tochigi | 12 | 2 | 4 | 1 | 5 |
 | Tokushima | 2 | 1 | 0 | 0 | 1 |
-| Tottori | 14 | 2 | 1 | 1 | 10 |
+| Tottori | 14 | 3 | 1 | 0 | 10 |
 | Toyama | 17 | 6 | 1 | 2 | 8 |
 | Yamagata | 30 | 14 | 1 | 3 | 12 |
 | Yamaguchi | 2 | 0 | 0 | 0 | 2 |

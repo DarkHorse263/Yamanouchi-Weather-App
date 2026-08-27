@@ -8,6 +8,7 @@ import {
   isCatalogueMountainLinkTown,
   mountainDetailRouteMode,
   mergeJapanCatalogueRegions,
+  publishedMountainBelongsToRegion,
 } from "../japan-catalogue";
 import {
   mountainDetailCopy,
@@ -203,6 +204,67 @@ test("Hakugindai is grouped with Churui, not distant Tsurui", () => {
   assert.equal(
     region?.baseTowns?.some((candidate) => candidate.id === "hokkaido-regional-tsurui"),
     false,
+  );
+});
+
+test("publication geography audit keeps the corrected resorts in their local regions", () => {
+  const expectedAssignments = [
+    {
+      publicId: "yunomaru-ski-resort",
+      travelRegionId: "nagano-regional",
+      baseTownId: "nagano-regional-tomi",
+    },
+    {
+      publicId: "blanche-takayama-ski-resort",
+      travelRegionId: "nagano-regional",
+      baseTownId: "nagano-regional-tateshina",
+    },
+    {
+      publicId: "anpeizan-ski-area",
+      travelRegionId: "sapporo",
+      baseTownId: "sapporo-eniwa",
+    },
+    {
+      publicId: "takeshi-banshogahara-ski-area",
+      travelRegionId: "nagano-regional",
+      baseTownId: "nagano-regional-ueda",
+    },
+  ];
+  for (const expected of expectedAssignments) {
+    const record = publishedCatalogueRecords.find(
+      (candidate) => candidate.publicId === expected.publicId,
+    );
+    assert.ok(record, `${expected.publicId} must be in the public runtime`);
+    assert.equal(record.travelRegionId, expected.travelRegionId);
+    assert.equal(record.baseTownId, expected.baseTownId);
+    assert.equal(
+      record.route,
+      `/${expected.travelRegionId}/mountain/${expected.publicId}`,
+    );
+    assert.equal(
+      publishedMountainBelongsToRegion(expected.travelRegionId, expected.publicId),
+      true,
+    );
+  }
+  assert.equal(
+    publishedMountainBelongsToRegion("yamanouchi", "yunomaru-ski-resort"),
+    false,
+  );
+  assert.equal(
+    publishedMountainBelongsToRegion("iiyama", "blanche-takayama-ski-resort"),
+    false,
+  );
+  assert.equal(
+    publishedMountainBelongsToRegion("niseko", "anpeizan-ski-area"),
+    false,
+  );
+  assert.equal(
+    publishedMountainBelongsToRegion("iiyama", "takeshi-banshogahara-ski-area"),
+    false,
+  );
+  assert.equal(
+    publishedMountainBelongsToRegion("yamanouchi", "authored-mountain"),
+    true,
   );
 });
 
