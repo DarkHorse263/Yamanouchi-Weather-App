@@ -65,19 +65,14 @@ function HomeAction({
   icon: Icon,
   title,
   onClick,
-  accent = false,
 }: {
   href?: string;
   icon: typeof Crosshair;
   title: string;
   onClick?: () => void;
-  accent?: boolean;
 }) {
-  const classes = `group flex min-h-[112px] flex-col justify-between rounded-2xl border p-4 text-left transition-all hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 ${
-    accent
-      ? "border-[#EC008C]/80 bg-[#EC008C]/15 hover:bg-[#EC008C]/25"
-      : "border-white/35 bg-[#0044CC]/35 hover:border-white/70 hover:bg-white/10"
-  }`;
+  const classes =
+    "group flex min-h-[128px] flex-col rounded-2xl border border-white/35 bg-[#0044CC]/35 p-4 text-center transition-all hover:-translate-y-0.5 hover:border-white/70 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80";
   const contents = (
     <>
       <span className="flex items-center justify-between">
@@ -87,9 +82,11 @@ function HomeAction({
           aria-hidden
         />
       </span>
-      <strong className="max-w-[125px] text-[17px] font-bold leading-[1.02] tracking-[-0.03em]">
-        {title}
-      </strong>
+      <span className="flex flex-1 items-center justify-center px-2">
+        <strong className="text-[20px] font-bold leading-[1.05] tracking-[-0.03em] md:text-[22px]">
+          {title}
+        </strong>
+      </span>
     </>
   );
 
@@ -203,10 +200,10 @@ export function HomeFourWay() {
           onClick={() => track("welcome_current_location_click", { category: "navigation" })}
         />
         <HomeAction
-          icon={BellRing}
-          title="snow alert sign up"
-          onClick={openSnowAlerts}
-          accent
+          href="/countries"
+          icon={Map}
+          title="choose a region"
+          onClick={() => track("welcome_choose_region_click", { category: "navigation" })}
         />
       </section>
 
@@ -303,10 +300,9 @@ export function HomeFourWay() {
 
       <section className="grid grid-cols-2 gap-3" aria-label="browse and compare">
         <HomeAction
-          href="/countries"
-          icon={Map}
-          title="choose a region"
-          onClick={() => track("welcome_choose_region_click", { category: "navigation" })}
+          icon={BellRing}
+          title="snow alerts + premium"
+          onClick={openSnowAlerts}
         />
         <HomeAction
           href="/compare"

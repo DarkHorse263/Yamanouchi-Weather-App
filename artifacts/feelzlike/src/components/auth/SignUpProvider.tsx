@@ -9,7 +9,7 @@ import { track } from "@/lib/analytics";
  *  - resolves the current account session via Clerk's useUser() hook,
  *  - feeds `{ isAuthenticated, isLoading, promptSignUp }` into the shell's
  *    PremiumAccessProvider so PremiumGate can soft-lock on tap, and
- *  - routes sign-up prompts to Clerk's sign-in page.
+ *  - routes sign-up prompts to Clerk's sign-up page.
  *
  * Gentle by design: nothing here ever opens the prompt on its own · only an
  * explicit tap on a premium surface (or a sign-up button) does.
@@ -42,8 +42,9 @@ export function SignUpProvider({ children }: { children: ReactNode }) {
     (opts?: { email?: string; feature?: string }) => {
       // Non-identifying event · which premium surface triggered the prompt.
       track("signup_prompt_open", { category: "auth", data: { feature: opts?.feature ?? "unknown" } });
-      // Route to Clerk sign-in/sign-up for authentication.
-      setLocation("/sign-in");
+      // This is an acquisition prompt, so start on account creation rather
+      // than presenting returning-member sign-in copy.
+      setLocation("/sign-up");
     },
     [setLocation],
   );

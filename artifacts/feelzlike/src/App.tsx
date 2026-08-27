@@ -330,8 +330,8 @@ function ClerkProviderWithRoutes() {
         },
         signUp: {
           start: {
-            title: "create your account",
-            subtitle: "free · no card needed",
+            title: "snow alerts + premium",
+            subtitle: "free until 30 december · no card needed",
           },
         },
       }}
