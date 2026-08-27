@@ -245,10 +245,10 @@ export function ObservedSnowCard({
   return (
     <section className="mt-4 rounded-2xl border border-border bg-white p-5">
       <div className="flex items-center justify-between gap-3 flex-wrap">
-        <p className="byline text-muted-foreground/70">
+        <p className="byline text-slate-700">
           {t("Observed snow · measured", "積雪観測 · 実測値")}
         </p>
-        <p className="text-[11px] text-muted-foreground/60">
+        <p className="text-xs text-slate-700">
           {t(`at ${fmtTime(obs.observedAt)}`, `${fmtTime(obs.observedAt)}時点`)}
         </p>
       </div>
@@ -264,7 +264,7 @@ export function ObservedSnowCard({
           icon={CloudSnow}
         />
       </div>
-      <p className="text-[11px] text-muted-foreground/60 mt-3">{stationLine}</p>
+      <p className="text-xs text-slate-700 mt-3">{stationLine}</p>
     </section>
   );
 }
@@ -294,8 +294,8 @@ export function WeatherHourly({
   return (
     <section className="mt-4 rounded-2xl border border-border bg-white p-5">
       <div className="flex items-center justify-between">
-        <p className="byline text-muted-foreground/70">{t("Next 24 hours", "24時間予報")}</p>
-        <p className="text-[11px] text-muted-foreground/60">
+        <p className="byline text-slate-700">{t("Next 24 hours", "24時間予報")}</p>
+        <p className="text-xs text-slate-700">
           {u.temp(minT)}° to {u.temp(maxT)}°
         </p>
       </div>
@@ -317,7 +317,7 @@ export function WeatherHourly({
             const pop = h.precipitationProbability ?? 0;
             return (
               <div key={h.time} className="flex flex-col items-center min-w-[44px] flex-1">
-                <p className="text-[10px] text-muted-foreground/70 mb-1">
+                <p className="text-xs text-slate-700 mb-1">
                   {fmtHour(h.time, i)}
                 </p>
                 <Icon className={`w-4 h-4 ${Icon === Snowflake ? "text-snow-accent" : "text-primary/80"}`} strokeWidth={1.5} />
@@ -353,7 +353,7 @@ export function WeatherOutlook({
   if (days.length === 0) return null;
   return (
     <section className="mt-4 rounded-2xl border border-border bg-white p-5">
-      <p className="byline text-muted-foreground/70">{t("Next 6 days", "今後6日間")}</p>
+      <p className="byline text-slate-700">{t("Next 6 days", "今後6日間")}</p>
       <div className="mt-3 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
         {days.map((d) => {
           const Icon = pickIcon(
@@ -382,7 +382,7 @@ export function WeatherOutlook({
                 <span className="font-semibold text-foreground">
                   {u.temp(d.tempMax) ?? "-"}°
                 </span>
-                <span className="text-muted-foreground/70 ml-2">
+                <span className="text-slate-700 ml-2">
                   {u.temp(d.tempMin) ?? "-"}°
                 </span>
               </p>
@@ -447,7 +447,7 @@ function DayStat({
   const isSnow = Icon === Snowflake || Icon === CloudSnow;
   return (
     <div className="flex items-center justify-between gap-2 text-[11px]">
-      <span className="inline-flex items-center gap-1 text-muted-foreground/70">
+      <span className="inline-flex items-center gap-1 text-slate-700">
         <Icon className={`w-3 h-3 ${isSnow ? "text-snow-accent" : ""}`} strokeWidth={2} /> {label}
       </span>
       <span className={`font-medium truncate ${isSnow ? "text-snow-accent" : "text-foreground"}`}>{value}</span>
@@ -478,14 +478,14 @@ function Stat({
         : "text-foreground";
   return (
     <div className="rounded-2xl border border-border bg-white p-4">
-      <div className="flex items-center gap-1.5 byline text-muted-foreground/70">
+      <div className="flex items-center gap-1.5 byline text-slate-700">
         <Icon className="w-3 h-3" strokeWidth={2} /> {label}
       </div>
       <p className={`mt-2 font-display font-semibold text-2xl tracking-tight ${valueClass}`}>
         {value}
-        <span className="text-sm text-muted-foreground/70 ml-1">{unit}</span>
+        <span className="text-sm text-slate-700 ml-1">{unit}</span>
       </p>
-      {hint && <p className="text-[11px] text-muted-foreground/70 mt-1 line-clamp-1">{hint}</p>}
+      {hint && <p className="text-xs text-slate-700 mt-1 line-clamp-1">{hint}</p>}
     </div>
   );
 }
@@ -502,7 +502,7 @@ function KV({
   const isSnow = Icon === Snowflake || Icon === CloudSnow;
   return (
     <div>
-      <div className="flex items-center gap-1.5 byline text-muted-foreground/70">
+      <div className="flex items-center gap-1.5 byline text-slate-700">
         <Icon className={`w-3 h-3 ${isSnow ? "text-snow-accent" : ""}`} strokeWidth={2} /> {label}
       </div>
       <p className={`mt-1 font-display font-medium text-lg ${isSnow ? "text-snow-accent" : "text-foreground"}`}>{value}</p>

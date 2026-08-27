@@ -72,7 +72,7 @@ export function PowderCalendar({
             {tx("Powder Forecast", "パウダー予報")}
           </h2>
         </div>
-        <p className="byline text-muted-foreground/70 hidden md:block tabular-nums">
+        <p className="byline text-slate-700 hidden md:block tabular-nums">
           {tx(
             `Best window each day · next ${summaries.length} days`,
             `各日のベストウィンドウ · 今後${summaries.length}日間`,
@@ -89,7 +89,7 @@ export function PowderCalendar({
         ))}
       </div>
 
-      <p className="mt-4 text-[11px] text-muted-foreground/80">
+      <p className="mt-4 text-xs text-slate-700">
         {tx(
           "Grade reflects the single best window each day (snow × inverse-wind × duration). Forecast confidence drops past 5 days.",
           "等級は各日のベストウィンドウ（降雪×風速逆数×継続時間）に基づきます。5日以降は予報精度が低下します。",
@@ -128,20 +128,20 @@ function DayPill({ summary, t, u }: { summary: DailyPowderSummary; t: Tx; u: Uni
         tone,
       )}
     >
-      <p className="text-[10px] font-bold uppercase tracking-wider opacity-70">{dayOfWeek}</p>
+      <p className="text-xs font-bold uppercase tracking-wider">{dayOfWeek}</p>
       <p className="font-display text-lg font-semibold tabular-nums leading-none" data-numeric>
         {dayOfMonth}
       </p>
       {best ? (
-        <p className="text-[10px] font-semibold tabular-nums leading-tight text-center mt-1">
+        <p className="text-xs font-semibold tabular-nums leading-tight text-center mt-1">
           {u.snowVal(best.totalSnow)}{u.snowUnit}
         </p>
       ) : daySnow > 0 ? (
-        <p className="text-[10px] tabular-nums leading-tight text-center mt-1 inline-flex items-center gap-0.5 opacity-70">
+        <p className="text-xs tabular-nums leading-tight text-center mt-1 inline-flex items-center gap-0.5">
           <Snowflake className="w-2.5 h-2.5" aria-hidden /> {u.snowVal(daySnow)}{u.snowUnit}
         </p>
       ) : (
-        <p className="text-[10px] opacity-50 mt-1">-</p>
+        <p className="text-xs mt-1" aria-hidden>-</p>
       )}
     </div>
   );

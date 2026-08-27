@@ -62,10 +62,10 @@ export function ElevationBands({ lat, lng, summitElevationM, name }: Props) {
   return (
     <section className="mt-4 rounded-2xl border border-border bg-white p-5">
       <div className="flex items-baseline justify-between flex-wrap gap-2">
-        <p className="byline text-muted-foreground/70">
+        <p className="byline text-slate-700">
           {t("elevation forecast", "標高別予報")}
         </p>
-        <p className="text-[11px] text-muted-foreground/60">
+        <p className="text-xs text-slate-700">
           {t("source · open-meteo", "出典 · open-meteo")}
         </p>
       </div>
@@ -94,7 +94,7 @@ export function ElevationBands({ lat, lng, summitElevationM, name }: Props) {
         <table className="min-w-full text-sm border-separate border-spacing-0 px-2">
           <thead>
             <tr>
-              <th className="text-left text-[11px] uppercase tracking-wider text-muted-foreground/60 font-medium pb-2 pr-3">
+              <th className="text-left text-xs uppercase tracking-wider text-slate-700 font-medium pb-2 pr-3">
                 {t("day", "日")}
               </th>
               <BandHead
@@ -115,7 +115,7 @@ export function ElevationBands({ lat, lng, summitElevationM, name }: Props) {
                 tone="text-sky-700"
                 u={u}
               />
-              <th className="text-right text-[11px] uppercase tracking-wider text-muted-foreground/60 font-medium pb-2 pl-3">
+              <th className="text-right text-xs uppercase tracking-wider text-slate-700 font-medium pb-2 pl-3">
                 <span className="inline-flex items-center gap-1">
                   <Wind className="w-3 h-3" /> {t("wind", "風")}
                 </span>
@@ -132,7 +132,7 @@ export function ElevationBands({ lat, lng, summitElevationM, name }: Props) {
                   <p className="font-display font-semibold text-foreground text-sm">
                     {fmtDay(d.date, i)}
                   </p>
-                  <p className="text-[11px] text-muted-foreground/70 mt-0.5 line-clamp-1">
+                  <p className="text-xs text-slate-700 mt-0.5 line-clamp-1">
                     {(d.weatherDescription || "·").toLowerCase()}
                   </p>
                 </td>
@@ -142,12 +142,12 @@ export function ElevationBands({ lat, lng, summitElevationM, name }: Props) {
                 <td className="py-3 pl-3 border-t border-border/60 text-right">
                   <p className="font-display font-semibold text-foreground text-sm">
                     {d.windMaxKmh != null ? `${u.wind(d.windMaxKmh)}` : "-"}
-                    <span className="text-[11px] text-muted-foreground/70 ml-0.5">
+                    <span className="text-xs text-slate-700 ml-0.5">
                       {u.windUnit}
                     </span>
                   </p>
                   {d.freezingLevelM != null && (
-                    <p className="text-[11px] text-muted-foreground/70 mt-0.5">
+                    <p className="text-xs text-slate-700 mt-0.5">
                       {t("frz", "凍結")} · {u.elev(d.freezingLevelM)}{u.elevUnit}
                     </p>
                   )}
@@ -173,12 +173,12 @@ function BandHead({
   u: Units;
 }) {
   return (
-    <th className="text-center text-[11px] uppercase tracking-wider text-muted-foreground/60 font-medium pb-2 px-2">
+    <th className="text-center text-xs uppercase tracking-wider text-slate-700 font-medium pb-2 px-2">
       <span className={`inline-flex items-center gap-1 ${tone}`}>
         <Mountain className="w-3 h-3" /> {label}
       </span>
       {elevationM != null && (
-        <span className="block text-[10px] text-muted-foreground/50 normal-case tracking-normal mt-0.5">
+        <span className="block text-xs text-slate-700 normal-case tracking-normal mt-0.5">
           {u.elev(elevationM)}{u.elevUnit}
         </span>
       )}
@@ -210,7 +210,7 @@ function BandCell({
       </p>
       <p
         className={`text-[11px] mt-1 inline-flex items-center gap-1 ${
-          hasSnow ? "text-snow-accent font-medium" : "text-muted-foreground/60"
+          hasSnow ? "text-snow-accent font-medium" : "text-slate-700"
         }`}
       >
         {hasSnow ? <Snowflake className="w-2.5 h-2.5" /> : <CloudSnow className="w-2.5 h-2.5" />}

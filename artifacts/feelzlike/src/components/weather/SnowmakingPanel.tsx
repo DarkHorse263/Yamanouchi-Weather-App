@@ -75,7 +75,7 @@ export function SnowmakingPanel({ locationId, tempC, humidity, hourly }: Snowmak
               <p className="text-sm font-semibold text-slate-900">
                 {a.name} · {a.system}
               </p>
-              <p className="byline text-slate-500 mt-1 tabular-nums">
+              <p className="byline text-slate-700 mt-1 tabular-nums">
                 makes snow up to {a.maxTempC}°
                 {a.outputM3PerDay != null ? ` · ${a.outputM3PerDay} m³ per day` : ""}
               </p>
@@ -85,7 +85,7 @@ export function SnowmakingPanel({ locationId, tempC, humidity, hourly }: Snowmak
       )}
 
       <div className="rounded-xl border border-slate-100 bg-slate-50 px-4 py-3">
-        <p className="byline text-slate-500 mb-2">{gunsLabel}</p>
+        <p className="byline text-slate-700 mb-2">{gunsLabel}</p>
         {nowViability ? (
           <div className="flex items-center justify-between gap-3">
             <span
@@ -103,7 +103,7 @@ export function SnowmakingPanel({ locationId, tempC, humidity, hourly }: Snowmak
               {SNOWMAKING_VIABILITY_COPY[nowViability].label} right now
             </span>
             {nowWb != null && (
-              <span className="text-[11px] text-muted-foreground/70 tabular-nums">
+              <span className="text-xs text-slate-700 tabular-nums">
                 wet-bulb {nowWb}°
               </span>
             )}
@@ -112,14 +112,14 @@ export function SnowmakingPanel({ locationId, tempC, humidity, hourly }: Snowmak
           <p className="text-sm text-muted-foreground">waiting on live conditions</p>
         )}
 
-        <p className="text-[12px] text-muted-foreground/70 mt-2 leading-relaxed">
+        <p className="text-xs text-slate-700 mt-2 leading-relaxed">
           {nowViability
             ? SNOWMAKING_VIABILITY_COPY[nowViability].detail
             : "snow guns need cold, dry air"}
         </p>
 
         {win && (
-          <p className="text-[12px] text-slate-500 mt-3 pt-3 border-t border-slate-200 tabular-nums">
+          <p className="text-xs text-slate-700 mt-3 pt-3 border-t border-slate-200 tabular-nums">
             {win.viableHours > 0
               ? `best window · ${formatHour(win.atISO)} · wet-bulb ${win.wetBulbC}° · ${win.viableHours} of next 24h cold enough`
               : "too warm to make snow in the next 24 hours"}

@@ -74,7 +74,7 @@
   --secondary-foreground: 0 0% 100%;
 
   --muted: 210 18% 96%;
-  --muted-foreground: 220 10% 42%;
+  --muted-foreground: 217 33% 28%;
 
   --accent: 324 100% 46%;
   --accent-foreground: 0 0% 100%;
@@ -141,7 +141,7 @@
 @layer components {
   .byline {
     font-family: var(--font-sans);
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;

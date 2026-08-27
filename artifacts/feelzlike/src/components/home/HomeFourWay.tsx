@@ -78,7 +78,7 @@ function HomeAction({
       <span className="flex items-center justify-between">
         <Icon className="h-5 w-5" aria-hidden />
         <ArrowUpRight
-          className="h-4 w-4 text-white/70 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+          className="h-4 w-4 text-white transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
           aria-hidden
         />
       </span>
@@ -208,7 +208,7 @@ export function HomeFourWay() {
       </section>
 
       <section className="relative z-30 py-4" aria-label="search places">
-        <p className="mb-2 ml-1 text-[10px] font-bold uppercase tracking-[0.16em] text-white/70">
+        <p className="mb-2 ml-1 text-xs font-bold uppercase tracking-[0.16em] text-white">
           search a town · mountain · region
         </p>
         <div className="[&>div>div:first-child]:min-h-[56px] [&>div>div:first-child]:rounded-2xl [&>div>div:first-child]:border-0 [&>div>div:first-child]:px-4 [&_input]:text-[15px] [&_input]:font-semibold">
@@ -227,11 +227,11 @@ export function HomeFourWay() {
             </span>
             nearest mountain snapshot
           </div>
-          <span className="text-[10px] font-semibold text-slate-500">current weather</span>
+          <span className="text-xs font-semibold text-slate-700">current weather</span>
         </div>
 
         {checkingLocation || regionsQuery.isLoading ? (
-          <div className="flex min-h-[105px] items-center justify-center gap-2 px-4 text-sm font-semibold text-slate-500">
+          <div className="flex min-h-[105px] items-center justify-center gap-2 px-4 text-sm font-semibold text-slate-700">
             <Loader2 className="h-4 w-4 animate-spin text-[#0055FF]" aria-hidden />
             finding your nearest mountain
           </div>
@@ -246,7 +246,7 @@ export function HomeFourWay() {
                 <h2 className="truncate text-[22px] font-bold leading-none text-slate-900">
                   {nearest.name.toLowerCase()}
                 </h2>
-                <p className="mt-1.5 text-[11px] font-semibold text-slate-500">
+                <p className="mt-1.5 text-xs font-semibold text-slate-700">
                   nearest known mountain region · view conditions
                 </p>
               </div>
@@ -264,7 +264,7 @@ export function HomeFourWay() {
             {nearest.headline ? (
               <div className="grid grid-cols-2 border-t border-white/20 bg-[#003AAE] text-white">
                 <div className="px-4 py-3">
-                  <span className="block text-[9px] font-bold uppercase tracking-[0.1em] text-white/70">
+                  <span className="block text-xs font-bold uppercase tracking-[0.1em] text-white">
                     temperature
                   </span>
                   <strong className="mt-0.5 block text-sm text-white">
@@ -272,7 +272,7 @@ export function HomeFourWay() {
                   </strong>
                 </div>
                 <div className="border-l border-white/20 px-4 py-3">
-                  <span className="block text-[9px] font-bold uppercase tracking-[0.1em] text-white/70">
+                  <span className="block text-xs font-bold uppercase tracking-[0.1em] text-white">
                     feelzlike
                   </span>
                   <strong className="mt-0.5 block text-sm text-white">
@@ -289,7 +289,7 @@ export function HomeFourWay() {
           >
             <div>
               <h2 className="text-lg font-bold text-slate-900">find your nearest mountain</h2>
-              <p className="mt-1 text-[12px] font-semibold text-slate-500">
+              <p className="mt-1 text-xs font-semibold text-slate-700">
                 use your location to see the closest region
               </p>
             </div>

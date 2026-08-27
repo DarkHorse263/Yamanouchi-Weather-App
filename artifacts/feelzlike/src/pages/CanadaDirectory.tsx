@@ -97,7 +97,7 @@ export default function CanadaDirectory() {
         {/* NOTABLE STRIP ──────────────────────────────── */}
         {NOTABLE.length > 0 && (
           <section className="pt-2 pb-6">
-            <h2 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-sky-700/80">
+            <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-800">
               worth knowing
             </h2>
             <div className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
@@ -120,10 +120,10 @@ export default function CanadaDirectory() {
                       </span>
                       <ExternalLink className="h-3.5 w-3.5 shrink-0 translate-y-0.5 text-slate-400 group-hover:text-sky-600 transition-colors" />
                     </div>
-                    <p className="mt-1.5 text-[12px] leading-relaxed text-slate-600" style={pretty}>
+                    <p className="mt-1.5 text-xs leading-relaxed text-slate-700" style={pretty}>
                       {entry.blurb}
                     </p>
-                    <span className="mt-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">
+                    <span className="mt-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-700">
                       {PROVINCE_NAMES[entry.province]}
                     </span>
                   </motion.a>
@@ -144,7 +144,7 @@ export default function CanadaDirectory() {
                   <h2 className="text-lg md:text-xl font-bold text-blue-900">
                     {PROVINCE_NAMES[code]}
                   </h2>
-                  <span className="text-[12px] font-semibold text-sky-700/70">
+                  <span className="text-xs font-semibold text-sky-800">
                     {entries.length} {entries.length === 1 ? "area" : "areas"}
                   </span>
                 </div>
@@ -161,11 +161,11 @@ export default function CanadaDirectory() {
         </section>
 
         {/* FOOTER NOTE ────────────────────────────────── */}
-        <footer className="border-t border-slate-100 py-6 text-[12px] leading-relaxed text-slate-500" style={pretty}>
+        <footer className="border-t border-slate-100 py-6 text-xs leading-relaxed text-slate-700" style={pretty}>
           <p>
             list drawn from skiresort.info · {TOTAL} areas beyond the 10 regions
             feelzlike covers live. links marked{" "}
-            <span className="font-semibold text-slate-600">info</span> go to the
+            <span className="font-semibold text-slate-800">info</span> go to the
             resort's skiresort.info page where no official site could be
             confirmed. found a broken or wrong link? that's on us to fix.
           </p>

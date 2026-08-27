@@ -26,7 +26,7 @@ const COUNTRIES: CountryCode[] = ["AU", "NZ", "JP", "CA", "US"];
 // united states alone has 80+). Show the first few, then a count.
 const MAX_REGION_NAMES = 10;
 
-const eyebrow = "text-[11px] font-bold lowercase tracking-wider text-white/70";
+const eyebrow = "text-xs font-bold lowercase tracking-wider text-white";
 const h2 =
   "mt-2 text-3xl md:text-4xl font-black tracking-tight text-white lowercase";
 
@@ -77,7 +77,7 @@ export function DesktopHome() {
           </a>
         </p>
         <h2 className={h2}>real conditions for mountain travel</h2>
-        <p className="mt-3 max-w-2xl text-[15px] font-bold leading-relaxed text-white/80 lowercase">
+        <p className="mt-3 max-w-2xl text-[15px] font-bold leading-relaxed text-white lowercase">
           you&rsquo;re in town, wondering what it&rsquo;s actually like up the
           mountain. feelzlike pulls together what&rsquo;s happening right now -
           snow, wind, temperature, roads and live cams - so you can make the
@@ -93,14 +93,14 @@ export function DesktopHome() {
               <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#F0F5FF] text-lg font-black text-[#0055FF]">
                 {s.n}
               </span>
-              <p className="mt-5 text-[15px] font-bold leading-relaxed text-slate-500 lowercase">
+              <p className="mt-5 text-[15px] font-bold leading-relaxed text-slate-700 lowercase">
                 {s.text}
               </p>
             </div>
           ))}
         </div>
 
-        <p className="mt-6 max-w-2xl text-[12.5px] font-bold leading-relaxed text-white/60 lowercase">
+        <p className="mt-6 max-w-2xl text-[13px] font-bold leading-relaxed text-white lowercase">
           the numbers come straight from official weather services and live
           observation networks in each country - the bureau of meteorology in
           australia, the japan meteorological agency in japan, and more. every
@@ -119,7 +119,7 @@ export function DesktopHome() {
       >
         <p className={eyebrow}>where we cover</p>
         <h2 className={h2}>five countries, one app</h2>
-        <p className="mt-2 text-sm font-bold text-white/70 lowercase">
+        <p className="mt-2 text-sm font-bold text-white lowercase">
           {COUNTRIES.reduce((n, c) => n + regionsForCountry(c).length, 0)} regions
           and growing · every reading names its source
         </p>
@@ -161,7 +161,7 @@ export function DesktopHome() {
                   <h3 className="mt-4 text-2xl font-black lowercase tracking-tight text-[#0F172A] group-hover:text-[#0055FF]">
                     {meta.name.toLowerCase()}
                   </h3>
-                  <p className="mt-2 flex-1 text-[14px] font-bold leading-relaxed text-slate-500 lowercase">
+                  <p className="mt-2 flex-1 text-[14px] font-bold leading-relaxed text-slate-700 lowercase">
                     {regionNames.join(" · ")}
                   </p>
                   <span className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-black lowercase text-[#0055FF]">
@@ -198,7 +198,7 @@ export function DesktopHome() {
                   <h3 className="text-xl font-black lowercase tracking-tight text-[#0F172A]">
                     {f.title}
                   </h3>
-                  <p className="mt-1.5 text-[14px] font-bold leading-relaxed text-slate-500 lowercase">
+                  <p className="mt-1.5 text-[14px] font-bold leading-relaxed text-slate-700 lowercase">
                     {f.body}
                   </p>
                 </div>
@@ -246,7 +246,7 @@ export function DesktopHome() {
             <h2 className="mt-2 text-3xl font-black lowercase tracking-tight text-[#0F172A]">
               feelzlike is built for your phone
             </h2>
-            <p className="mt-3 max-w-2xl text-[15px] font-bold leading-relaxed text-slate-500 lowercase">
+            <p className="mt-3 max-w-2xl text-[15px] font-bold leading-relaxed text-slate-700 lowercase">
               open feelzlike on your phone&rsquo;s browser and tap &lsquo;add to
               home screen&rsquo; - it opens like an app, loads instantly and
               keeps working even when the signal drops on the mountain.

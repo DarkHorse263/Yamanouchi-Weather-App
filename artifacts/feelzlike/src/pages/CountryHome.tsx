@@ -116,7 +116,7 @@ export default function CountryHome({ code }: CountryHomeProps) {
         <div className="max-w-3xl mx-auto px-5 pt-4 pb-4 md:pt-9 md:pb-6 text-center">
           <a
             href="/countries"
-            className="inline-flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-[0.2em] text-white/70 hover:text-white transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white hover:underline hover:underline-offset-2 transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             All countries
@@ -140,7 +140,7 @@ export default function CountryHome({ code }: CountryHomeProps) {
             >
               {meta.name}
             </h1>
-            <p className="mt-1.5 md:mt-3 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.2em] text-white/70">
+            <p className="mt-1.5 md:mt-3 text-xs font-semibold uppercase tracking-[0.2em] text-white">
               {code === "JP" ? "Choose a prefecture · then a travel region" : "Choose a region"}
             </p>
             {isGreenSeason && (
@@ -200,9 +200,9 @@ export default function CountryHome({ code }: CountryHomeProps) {
                 <section key={prefecture.id} id={`prefecture-${prefecture.id}`} className="scroll-mt-4">
                   <div className="mb-2.5 flex items-baseline justify-between gap-3 px-1">
                     <h2 className="text-xl font-bold text-white">
-                      {prefecture.name} <span lang="ja" className="text-white/70">{prefecture.nameJa}</span>
+                      {prefecture.name} <span lang="ja" className="text-white">{prefecture.nameJa}</span>
                     </h2>
-                    <span className="text-[11px] font-semibold text-white/65">
+                    <span className="text-xs font-semibold text-white">
                       {groupRegions.length} {groupRegions.length === 1 ? "region" : "regions"}
                     </span>
                   </div>
@@ -235,7 +235,7 @@ export default function CountryHome({ code }: CountryHomeProps) {
               <span className="block font-semibold text-white transition-colors">
                 every other ski hill in canada · the full list
               </span>
-              <span className="mt-0.5 block text-[12px] text-white/70">
+              <span className="mt-0.5 block text-xs text-white">
                 264 more ski areas across every province · links to each hill's own site
               </span>
             </span>

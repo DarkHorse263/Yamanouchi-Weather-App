@@ -184,7 +184,7 @@ function DestinationCard({
         {entry?.status === "loading" || entry === undefined ? (
           <div className="h-16 rounded-xl bg-secondary/50 animate-pulse" />
         ) : entry.status === "error" || days.length === 0 ? (
-          <p className="text-[12px] text-muted-foreground/70">
+          <p className="text-xs text-slate-700">
             no reliable outlook for this mountain right now · try again later.
           </p>
         ) : (
@@ -197,7 +197,7 @@ function DestinationCard({
                 <DayCell key={d.date} day={d} u={u} />
               ))}
             </div>
-            <p className="text-[11px] text-muted-foreground/70 mt-2">
+            <p className="text-xs text-slate-700 mt-2">
               fresh snow · daytime temp · next {days.length} days
             </p>
           </>
@@ -239,7 +239,7 @@ function MountainPicker({
     <div className="space-y-4">
       {byRegion.map((group) => (
         <div key={group.id}>
-          <p className="text-xs font-bold text-white/80 uppercase tracking-wider mb-2">
+          <p className="text-xs font-bold text-white uppercase tracking-wider mb-2">
             {group.name}
           </p>
           <div className="flex flex-wrap gap-2">
@@ -268,7 +268,7 @@ function MountainPicker({
           </div>
         </div>
       ))}
-      <p className="text-[11px] text-white/70">
+      <p className="text-xs text-white">
         {full
           ? `that's the max of ${MAX_TRIP_MOUNTAINS} · remove one to add another.`
           : `pick up to ${MAX_TRIP_MOUNTAINS} mountains you're choosing between.`}
@@ -344,7 +344,7 @@ export default function TripPlanner() {
       <div className="max-w-3xl mx-auto px-4 md:px-8 py-6 md:py-10 space-y-6">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 text-sm text-white/70 hover:text-white transition-colors"
+          className="inline-flex items-center gap-1.5 text-sm text-white hover:underline hover:underline-offset-2 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" /> back
         </Link>
@@ -356,7 +356,7 @@ export default function TripPlanner() {
           <h1 className="text-3xl md:text-4xl font-black text-white mt-2 leading-tight">
             compare your mountains.
           </h1>
-          <p className="text-white/80 mt-2 leading-relaxed">
+          <p className="text-white mt-2 leading-relaxed">
             pick the mountains you're choosing between and see the next week of
             fresh snow and daytime temps side by side · a quick snapshot to help
             you decide where to go.
@@ -381,7 +381,7 @@ export default function TripPlanner() {
           {savedMountains.length === 0 ? (
             <div className="rounded-2xl border border-dashed border-white/20 bg-white/5 p-8 text-center">
               <MountainSnow className="w-6 h-6 text-white/50 mx-auto mb-2" />
-              <p className="text-sm text-white/70">
+              <p className="text-sm text-white">
                 pick a mountain above to compare the snow.
               </p>
             </div>
@@ -396,7 +396,7 @@ export default function TripPlanner() {
           />
         </section>
 
-        <p className="text-[11px] text-white/60 text-center pt-2">
+        <p className="text-xs text-white text-center pt-2">
           © 2026 navigate work digital · feelzlike
         </p>
       </div>

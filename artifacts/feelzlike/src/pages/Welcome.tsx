@@ -39,7 +39,7 @@ export default function Welcome() {
             className="h-20 w-auto select-none md:h-24"
             draggable={false}
           />
-          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/70">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white">
             real conditions for mountain travel
           </p>
         </header>

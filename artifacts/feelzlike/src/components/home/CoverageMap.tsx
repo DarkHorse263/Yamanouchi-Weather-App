@@ -58,7 +58,7 @@ class CoverageErrorBoundary extends Component<{ children: ReactNode }, { hasErro
   render(): ReactNode {
     if (this.state.hasError) {
       return (
-        <div className="flex h-[400px] flex-col items-center justify-center bg-slate-50 px-6 text-center text-slate-500 md:h-[480px]">
+        <div className="flex h-[400px] flex-col items-center justify-center bg-slate-50 px-6 text-center text-slate-700 md:h-[480px]">
           <p className="text-sm">map unavailable &middot; connection failed</p>
           <button
             type="button"

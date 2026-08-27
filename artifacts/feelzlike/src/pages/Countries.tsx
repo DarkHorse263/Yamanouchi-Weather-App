@@ -36,7 +36,7 @@ export default function Countries() {
         <header className="flex flex-col items-center gap-3 px-6 pt-5 pb-4 text-center md:pt-8 md:pb-5">
           <a
             href="/"
-            className="inline-flex items-center gap-1.5 self-start text-[12px] font-semibold uppercase tracking-[0.2em] text-white/70 hover:text-white transition-colors"
+            className="inline-flex items-center gap-1.5 self-start text-xs font-semibold uppercase tracking-[0.2em] text-white hover:underline hover:underline-offset-2 transition-colors"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             home
@@ -54,7 +54,7 @@ export default function Countries() {
           <h1 className="mt-2 text-xl font-medium leading-snug text-white md:text-2xl" style={balance}>
             i wonder what it feelzlike&nbsp;in&hellip;
           </h1>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/70">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white">
             pick a country
           </p>
         </header>
