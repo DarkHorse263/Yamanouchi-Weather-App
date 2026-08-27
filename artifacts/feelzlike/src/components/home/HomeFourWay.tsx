@@ -208,7 +208,7 @@ export function HomeFourWay() {
       </section>
 
       <section className="relative z-30 py-4" aria-label="search places">
-        <p className="mb-2 ml-1 text-xs font-bold uppercase tracking-[0.16em] text-white">
+        <p className="mb-2 text-center text-xs font-bold uppercase tracking-[0.16em] text-white">
           search a town · mountain · region
         </p>
         <div className="[&>div>div:first-child]:min-h-[56px] [&>div>div:first-child]:rounded-2xl [&>div>div:first-child]:border-0 [&>div>div:first-child]:px-4 [&_input]:text-[15px] [&_input]:font-semibold">
