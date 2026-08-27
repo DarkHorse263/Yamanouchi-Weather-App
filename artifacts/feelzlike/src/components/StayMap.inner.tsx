@@ -24,14 +24,11 @@ import type { Stay } from "@/types/stayEat";
 type StayType = Stay["type"];
 import { cn } from "@/lib/utils";
 
-// Tile sources. OSM is the default (no key). Cartocdn voyager is what the rest
-// of the app uses elsewhere - same look. Mapbox kicks in if a token is set in
-// VITE_MAPBOX_TOKEN; we never crash if the token is missing - we silently fall
-// back to the OSM voyager tiles.
-const FALLBACK_TILE_URL =
-  "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png";
+// Tile sources. Standard OpenStreetMap is the no-key fallback. Mapbox kicks in
+// if a token is set in VITE_MAPBOX_TOKEN; a missing token never breaks the map.
+const FALLBACK_TILE_URL = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 const FALLBACK_TILE_ATTRIBUTION =
-  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>';
+  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 const MAPBOX_TOKEN: string | undefined =
   (import.meta as { env?: Record<string, string | undefined> }).env
     ?.VITE_MAPBOX_TOKEN ?? undefined;

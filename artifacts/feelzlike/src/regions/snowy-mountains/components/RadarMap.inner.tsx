@@ -1839,26 +1839,13 @@ export default function RadarMapInner({
           <CaptureMap onReady={handleMapReady} />
           <RadarBlur nativeZoom={7} />
 
-          {/* Esri world hillshade · shaded relief gives the map its terrain
-              feel (mountains read as ridges, not flat). Sits at the bottom;
-              the light labelled basemap rides on top. */}
+          {/* Keyless OpenStreetMap basemap · labelled and geographic (towns,
+              roads, water) so the radar remains readable without depending on
+              a third-party map token. */}
           <TileLayer
-            attribution='Hillshade © <a href="https://www.esri.com/">Esri</a>'
-            url="https://server.arcgisonline.com/ArcGIS/rest/services/Elevation/World_Hillshade/MapServer/tile/{z}/{y}/{x}"
-            maxNativeZoom={16}
-          />
-
-          {/* Light basemap (CARTO Voyager, free, no key, CDN-hosted). Light,
-              labelled and geographic (towns, roads, water) so it reads like
-              the BOM / Apple rain maps people compared us to · a clean, simple
-              base the colour radar pops against. Slightly transparent so the
-              hillshade terrain relief still bleeds through underneath. */}
-          <TileLayer
-            attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors · © <a href="https://carto.com/attributions">CARTO</a>'
-            url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-            subdomains={["a", "b", "c", "d"]}
+            attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
             maxNativeZoom={19}
-            opacity={0.92}
           />
 
           {/* Precipitation layers.
@@ -2699,20 +2686,11 @@ function WillyOfficialView({
               bottomright is free now the source bar lives below the map. */}
           <ZoomControl position="bottomright" />
           <StripAttributionPrefix />
-          {/* Same basemap pairing as the Interactive tab so the Official view
-              reads as part of the same product · hillshade under a light
-              labelled base. */}
+          {/* Same keyless labelled basemap as the Interactive tab. */}
           <TileLayer
-            attribution='Hillshade © <a href="https://www.esri.com/">Esri</a>'
-            url="https://server.arcgisonline.com/ArcGIS/rest/services/Elevation/World_Hillshade/MapServer/tile/{z}/{y}/{x}"
-            maxNativeZoom={16}
-          />
-          <TileLayer
-            attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors · © <a href="https://carto.com/attributions">CARTO</a>'
-            url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-            subdomains={["a", "b", "c", "d"]}
+            attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
             maxNativeZoom={19}
-            opacity={0.92}
           />
           {/* Every frame stays mounted (they're small single PNGs, not tile
               pyramids) · animation is an opacity flip so stepping never
@@ -2979,20 +2957,11 @@ function JmaOfficialView({
         >
           <ZoomControl position="bottomright" />
           <StripAttributionPrefix />
-          {/* Same basemap pairing as the Interactive tab so the Official view
-              reads as part of the same product · hillshade under a light
-              labelled base. */}
+          {/* Same keyless labelled basemap as the Interactive tab. */}
           <TileLayer
-            attribution='Hillshade © <a href="https://www.esri.com/">Esri</a>'
-            url="https://server.arcgisonline.com/ArcGIS/rest/services/Elevation/World_Hillshade/MapServer/tile/{z}/{y}/{x}"
-            maxNativeZoom={16}
-          />
-          <TileLayer
-            attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors · © <a href="https://carto.com/attributions">CARTO</a>'
-            url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-            subdomains={["a", "b", "c", "d"]}
+            attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
             maxNativeZoom={19}
-            opacity={0.92}
           />
           {/* Every frame's tile layer stays mounted · animation is an opacity
               flip so stepping never flashes a blank frame while tiles load. */}

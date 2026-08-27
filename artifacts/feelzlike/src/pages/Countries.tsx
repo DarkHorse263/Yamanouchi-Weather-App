@@ -3,6 +3,7 @@ import { ArrowLeft } from "lucide-react";
 import { type CSSProperties } from "react";
 import logoWhite from "/branding/logo-white.png?url";
 import { CountryPicker } from "@/components/home/CountryPicker";
+import { CoverageMap } from "@/components/home/CoverageMap";
 import { HomeFooter } from "@/components/home/HomeFooter";
 import { PlaceSearch } from "@/components/home/PlaceSearch";
 import { PageMeta } from "@/lib/seo/PageMeta";
@@ -73,6 +74,8 @@ export default function Countries() {
         <section className="px-4 pt-4 pb-6 md:px-6">
           <CountryPicker />
         </section>
+
+        <CoverageMap />
 
         <HomeFooter />
       </div>

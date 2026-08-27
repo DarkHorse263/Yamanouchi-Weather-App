@@ -30,7 +30,7 @@ const GREEN_TABS: { key: MapLayer; label: string; labelJa: string }[] = [
   { key: "rain",   label: "Rain",      labelJa: "降水" },
 ];
 
-const BASE_TILE = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png";
+const BASE_TILE = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 
 interface RainViewerData {
   host: string;
