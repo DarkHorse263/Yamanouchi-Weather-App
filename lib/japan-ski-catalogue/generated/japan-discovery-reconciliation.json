@@ -25805,7 +25805,7 @@
     },
     {
       "identityId": "workbook:455",
-      "canonicalName": "Soma Romantopia",
+      "canonicalName": "Soma Romantopia Ski Area",
       "normalizedIdentity": "somaromantopia",
       "prefecture": "Aomori",
       "sourceMembership": [
@@ -25821,7 +25821,8 @@
         "wikipedia-worldwide-japan:122"
       ],
       "operatingEvidence": {
-        "status": "unclear",
+        "status": "verified_operating",
+        "evidenceUrl": "https://www.hyakuzawa-ski.com/5831.html",
         "evidenceAsOf": "2026-08-26",
         "sourceType": "operator_or_public_authority_review"
       },
@@ -25829,7 +25830,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "workbook:454",
@@ -25854,7 +25855,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "Aomori:takko229skiland",
@@ -27421,7 +27422,7 @@
     },
     {
       "identityId": "workbook:300",
-      "canonicalName": "Gujo Kogen",
+      "canonicalName": "Gujo Vacance Mura Ski Area",
       "normalizedIdentity": "gujokogen",
       "prefecture": "Gifu",
       "sourceMembership": [
@@ -27437,7 +27438,8 @@
         "wikipedia-worldwide-japan:491"
       ],
       "operatingEvidence": {
-        "status": "unclear",
+        "status": "verified_operating",
+        "evidenceUrl": "https://www.city.gujo.gifu.jp/life/docs/262_04.pdf",
         "evidenceAsOf": "2026-08-26",
         "sourceType": "operator_or_public_authority_review"
       },
@@ -27445,7 +27447,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "Gifu:harayamacityskiarea",
@@ -28454,7 +28456,7 @@
     },
     {
       "identityId": "workbook:371",
-      "canonicalName": "Akagiyama",
+      "canonicalName": "Akagiyama Daiichi Ski Area (Akagiyama Family Slope)",
       "normalizedIdentity": "akagiyama",
       "prefecture": "Gunma",
       "sourceMembership": [
@@ -28470,8 +28472,8 @@
         "wikipedia-worldwide-japan:221"
       ],
       "operatingEvidence": {
-        "status": "unclear",
-        "evidenceUrl": "https://www.oonumasansougroup.com/",
+        "status": "verified_operating",
+        "evidenceUrl": "https://www.maebashi-cvb.com/spot/8261",
         "evidenceAsOf": "2026-08-26",
         "sourceType": "operator_or_public_authority_review"
       },
@@ -28479,7 +28481,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "workbook:266",
@@ -29472,7 +29474,7 @@
     },
     {
       "identityId": "workbook:343",
-      "canonicalName": "Dogoyama Kogen",
+      "canonicalName": "Dogoyama Kogen Ski Area",
       "normalizedIdentity": "dogoyamakogen",
       "prefecture": "Hiroshima",
       "sourceMembership": [
@@ -29488,7 +29490,8 @@
         "wikipedia-worldwide-japan:575"
       ],
       "operatingEvidence": {
-        "status": "unclear",
+        "status": "verified_operating",
+        "evidenceUrl": "https://www.dogoyamakogen.com/",
         "evidenceAsOf": "2026-08-26",
         "sourceType": "operator_or_public_authority_review"
       },
@@ -29496,7 +29499,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "Hiroshima:geihokubunkaland",
@@ -29519,6 +29522,35 @@
         "pageIds": []
       },
       "disposition": "unresolved"
+    },
+    {
+      "identityId": "workbook:173",
+      "canonicalName": "Geihoku Kogen Osa Ski Area",
+      "normalizedIdentity": "osa",
+      "prefecture": "Hiroshima",
+      "sourceMembership": [
+        "japan-ski-resorts-558",
+        "skiresort-japan-directory",
+        "wikipedia-japan-specific",
+        "wikipedia-worldwide-japan"
+      ],
+      "sourceEntryIds": [
+        "workbook:173",
+        "skiresort:osa",
+        "wikipedia-japan-specific:579",
+        "wikipedia-worldwide-japan:579"
+      ],
+      "operatingEvidence": {
+        "status": "verified_operating",
+        "evidenceUrl": "http://osaski.co.jp/5728/",
+        "evidenceAsOf": "2026-08-26",
+        "sourceType": "operator_or_public_authority_review"
+      },
+      "publicCoverage": {
+        "routes": [],
+        "pageIds": []
+      },
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "workbook:316",
@@ -29651,36 +29683,8 @@
       "disposition": "unresolved"
     },
     {
-      "identityId": "workbook:173",
-      "canonicalName": "Osa",
-      "normalizedIdentity": "osa",
-      "prefecture": "Hiroshima",
-      "sourceMembership": [
-        "japan-ski-resorts-558",
-        "skiresort-japan-directory",
-        "wikipedia-japan-specific",
-        "wikipedia-worldwide-japan"
-      ],
-      "sourceEntryIds": [
-        "workbook:173",
-        "skiresort:osa",
-        "wikipedia-japan-specific:579",
-        "wikipedia-worldwide-japan:579"
-      ],
-      "operatingEvidence": {
-        "status": "unclear",
-        "evidenceAsOf": "2026-08-26",
-        "sourceType": "operator_or_public_authority_review"
-      },
-      "publicCoverage": {
-        "routes": [],
-        "pageIds": []
-      },
-      "disposition": "unresolved"
-    },
-    {
       "identityId": "workbook:397",
-      "canonicalName": "Osorakan",
+      "canonicalName": "Osorakan Snow Park",
       "normalizedIdentity": "osorakan",
       "prefecture": "Hiroshima",
       "sourceMembership": [
@@ -29696,7 +29700,8 @@
         "wikipedia-worldwide-japan:580"
       ],
       "operatingEvidence": {
-        "status": "unclear",
+        "status": "verified_operating",
+        "evidenceUrl": "https://osorakan.co.jp/winter/2026/03/28/%e4%bb%8a%e3%82%b7%e3%83%bc%e3%82%ba%e3%83%b3%e3%81%ae%e5%96%b6%e6%a5%ad%e7%b5%82%e4%ba%86%e6%97%a5%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6/",
         "evidenceAsOf": "2026-08-26",
         "sourceType": "operator_or_public_authority_review"
       },
@@ -29704,7 +29709,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "Hiroshima:pineridgeresortsgeihoku",
@@ -30140,7 +30145,8 @@
         "wikipedia-worldwide-japan:101"
       ],
       "operatingEvidence": {
-        "status": "unclear",
+        "status": "verified_operating",
+        "evidenceUrl": "https://www.town.abira.lg.jp/oshirase/35/20186",
         "evidenceAsOf": "2026-08-26",
         "sourceType": "operator_or_public_authority_review"
       },
@@ -30148,7 +30154,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "workbook:310",
@@ -30529,7 +30535,8 @@
         "wikipedia-worldwide-japan:12"
       ],
       "operatingEvidence": {
-        "status": "unclear",
+        "status": "verified_operating",
+        "evidenceUrl": "https://www.town.bifuka.hokkaido.jp/cms/section/kyouiku/qlmcaj0000005my2.html",
         "evidenceAsOf": "2026-08-26",
         "sourceType": "operator_or_public_authority_review"
       },
@@ -30537,7 +30544,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "Hokkaido:biraoskiarea",
@@ -30584,7 +30591,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "catalogue:workbook:100",
@@ -31302,7 +31309,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "workbook:515",
@@ -31912,7 +31919,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "workbook:388",
@@ -32309,7 +32316,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "Hokkaido:mitsuigreenlandwhitepark",
@@ -32613,7 +32620,8 @@
         "wikipedia-worldwide-japan:87"
       ],
       "operatingEvidence": {
-        "status": "unclear",
+        "status": "verified_operating",
+        "evidenceUrl": "https://nakayama-ski.com/",
         "evidenceAsOf": "2026-08-26",
         "sourceType": "operator_or_public_authority_review"
       },
@@ -32621,7 +32629,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "catalogue:workbook:136",
@@ -33287,7 +33295,7 @@
     },
     {
       "identityId": "workbook:551",
-      "canonicalName": "Otoifuji",
+      "canonicalName": "Otoifuji Ski Area",
       "normalizedIdentity": "otoifuji",
       "prefecture": "Hokkaido",
       "sourceMembership": [
@@ -33303,7 +33311,8 @@
         "wikipedia-worldwide-japan:23"
       ],
       "operatingEvidence": {
-        "status": "unclear",
+        "status": "verified_operating",
+        "evidenceUrl": "https://www.vill.otoineppu.hokkaido.jp/kakuka/sangyoushinkou/syoukougyou/skizyou.html",
         "evidenceAsOf": "2026-08-26",
         "sourceType": "operator_or_public_authority_review"
       },
@@ -33311,7 +33320,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "catalogue:workbook:111",
@@ -33766,7 +33775,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "Hokkaido:shakotantownoutdoorsportsforestskiarea",
@@ -33918,7 +33927,8 @@
         "wikipedia-worldwide-japan:55"
       ],
       "operatingEvidence": {
-        "status": "unclear",
+        "status": "verified_operating",
+        "evidenceUrl": "https://www.shintoku-town.jp/bunka-sports/sports/sports_shisetsu/shintokuyama/",
         "evidenceAsOf": "2026-08-26",
         "sourceType": "operator_or_public_authority_review"
       },
@@ -33926,7 +33936,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "Hokkaido:shintotsukawatownsocchidakeskiarea",
@@ -34179,7 +34189,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "workbook:280",
@@ -34199,7 +34209,8 @@
         "wikipedia-worldwide-japan:44"
       ],
       "operatingEvidence": {
-        "status": "unclear",
+        "status": "verified_operating",
+        "evidenceUrl": "https://www.town.takinoue.hokkaido.jp/kyoikuiinkai/social/20260302-01.html",
         "evidenceAsOf": "2026-08-26",
         "sourceType": "operator_or_public_authority_review"
       },
@@ -34207,7 +34218,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "workbook:474",
@@ -34282,7 +34293,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "Hokkaido:teshiotownskiarea",
@@ -34614,7 +34625,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "Hokkaido:windsorsnowvillage",
@@ -35420,7 +35431,7 @@
         "wikipedia-worldwide-japan:358"
       ],
       "operatingEvidence": {
-        "status": "unclear",
+        "status": "verified_operating",
         "evidenceUrl": "https://www.sam-hakusan-en.com/ichirino.html",
         "evidenceAsOf": "2026-08-26",
         "sourceType": "operator_or_public_authority_review"
@@ -35429,7 +35440,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "Ishikawa:hakusansemekogenskiarea",
@@ -35700,7 +35711,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "Ishikawa:shishikukogenskiarea",
@@ -36229,7 +36240,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "Iwate:matsurubesnowpark",
@@ -37370,36 +37381,8 @@
       "disposition": "unresolved"
     },
     {
-      "identityId": "workbook:225",
-      "canonicalName": "Banshogahara",
-      "normalizedIdentity": "banshogahara",
-      "prefecture": "Nagano",
-      "sourceMembership": [
-        "japan-ski-resorts-558",
-        "skiresort-japan-directory",
-        "wikipedia-japan-specific",
-        "wikipedia-worldwide-japan"
-      ],
-      "sourceEntryIds": [
-        "workbook:225",
-        "skiresort:banshogahara",
-        "wikipedia-japan-specific:386",
-        "wikipedia-worldwide-japan:386"
-      ],
-      "operatingEvidence": {
-        "status": "unclear",
-        "evidenceAsOf": "2026-08-26",
-        "sourceType": "operator_or_public_authority_review"
-      },
-      "publicCoverage": {
-        "routes": [],
-        "pageIds": []
-      },
-      "disposition": "unresolved"
-    },
-    {
       "identityId": "workbook:108",
-      "canonicalName": "Blanche Takayama",
+      "canonicalName": "Blanche Takayama Ski Resort",
       "normalizedIdentity": "blanchetakayama",
       "prefecture": "Nagano",
       "sourceMembership": [
@@ -37415,15 +37398,16 @@
         "wikipedia-worldwide-japan:387"
       ],
       "operatingEvidence": {
-        "status": "unclear",
-        "evidenceAsOf": "2026-08-26",
+        "status": "verified_operating",
+        "evidenceUrl": "https://blanche-ski.com/winter/accomodation/%e7%8f%be%e5%9c%a8%e3%81%ae%e3%82%b3%e3%83%bc%e3%82%b9%e7%8a%b6%e6%b3%81/",
+        "evidenceAsOf": "2026-03-29",
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "Nagano:chateraiseskiresortyatsugadake",
@@ -37610,7 +37594,7 @@
     },
     {
       "identityId": "workbook:128",
-      "canonicalName": "Fujimi Panorama",
+      "canonicalName": "Fujimi Panorama Resort",
       "normalizedIdentity": "fujimipanorama",
       "prefecture": "Nagano",
       "sourceMembership": [
@@ -37626,15 +37610,16 @@
         "wikipedia-worldwide-japan:392"
       ],
       "operatingEvidence": {
-        "status": "unclear",
-        "evidenceAsOf": "2026-08-26",
+        "status": "verified_operating",
+        "evidenceUrl": "https://www.fujimipanorama.com/snow/40%e5%91%a8%e5%b9%b4%e8%a8%98%e5%bf%b5%e3%80%81%e5%86%ac%e5%ad%a326%e2%80%9027%e3%82%b7%e3%83%bc%e3%82%ba%e3%83%b3%e8%b6%85%e6%97%a9%e5%89%b2%e5%88%b8%e3%82%928%e6%9c%88%e9%99%90%e5%ae%9a%e8%b2%a9/",
+        "evidenceAsOf": "2026-07-27",
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "page:yamanouchi:shiga-giant",
@@ -38083,7 +38068,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "page:yamanouchi:shiga-higashidateyama",
@@ -38447,7 +38432,7 @@
     },
     {
       "identityId": "workbook:56",
-      "canonicalName": "Iizuna Resort",
+      "canonicalName": "Iizuna Resort Ski Area",
       "normalizedIdentity": "iizunaresort",
       "prefecture": "Nagano",
       "sourceMembership": [
@@ -38465,7 +38450,8 @@
         "wikipedia-worldwide-japan:407"
       ],
       "operatingEvidence": {
-        "status": "unclear",
+        "status": "verified_operating",
+        "evidenceUrl": "https://iizunaresort.com/reservation/",
         "evidenceAsOf": "2026-08-26",
         "sourceType": "operator_or_public_authority_review"
       },
@@ -38473,7 +38459,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "workbook:190",
@@ -38567,7 +38553,7 @@
     },
     {
       "identityId": "workbook:53",
-      "canonicalName": "Kaida Kogen Mia",
+      "canonicalName": "Kaida Kogen MIA Ski Resort",
       "normalizedIdentity": "kaidakogenmia",
       "prefecture": "Nagano",
       "sourceMembership": [
@@ -38583,15 +38569,16 @@
         "wikipedia-worldwide-japan:410"
       ],
       "operatingEvidence": {
-        "status": "unclear",
-        "evidenceAsOf": "2026-08-26",
+        "status": "verified_operating",
+        "evidenceUrl": "https://miaski-resort.com/",
+        "evidenceAsOf": "2026-03-29",
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "workbook:123",
@@ -39145,7 +39132,7 @@
     },
     {
       "identityId": "workbook:93",
-      "canonicalName": "Kurumayama Kogen",
+      "canonicalName": "Kurumayama Kogen SKYPARK Ski Resort",
       "normalizedIdentity": "kurumayamakogen",
       "prefecture": "Nagano",
       "sourceMembership": [
@@ -39161,15 +39148,16 @@
         "wikipedia-worldwide-japan:421"
       ],
       "operatingEvidence": {
-        "status": "unclear",
-        "evidenceAsOf": "2026-08-26",
+        "status": "verified_operating",
+        "evidenceUrl": "https://winter.kurumayama-skypark.com/archives/4472",
+        "evidenceAsOf": "2026-04-01",
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "catalogue:workbook:30",
@@ -40001,15 +39989,16 @@
         "wikipedia-worldwide-japan:438"
       ],
       "operatingEvidence": {
-        "status": "unclear",
-        "evidenceAsOf": "2026-08-26",
+        "status": "verified_operating",
+        "evidenceUrl": "https://www.saku-parada.jp/ski/news/detail.php?CN=432398",
+        "evidenceAsOf": "2026-08-23",
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "catalogue:workbook:330",
@@ -40169,7 +40158,7 @@
     },
     {
       "identityId": "workbook:101",
-      "canonicalName": "Shirakaba 2in1",
+      "canonicalName": "Shirakaba 2in1 Ski Resort",
       "normalizedIdentity": "shirakaba2in1",
       "prefecture": "Nagano",
       "sourceMembership": [
@@ -40185,15 +40174,16 @@
         "wikipedia-worldwide-japan:466"
       ],
       "operatingEvidence": {
-        "status": "unclear",
-        "evidenceAsOf": "2026-08-26",
+        "status": "verified_operating",
+        "evidenceUrl": "https://whitebirch.co.jp/news/%e3%81%97%e3%82%89%e3%81%8b%e3%81%b02in1%e4%bb%8a%e3%82%b7%e3%83%bc%e3%82%ba%e3%83%b3%e5%96%b6%e6%a5%ad%e7%b5%82%e4%ba%86%e3%81%ae%e3%81%8a%e3%81%97%e3%82%89%e3%81%9b/",
+        "evidenceAsOf": "2026-04-10",
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "catalogue:workbook:252",
@@ -40232,7 +40222,7 @@
     },
     {
       "identityId": "workbook:121",
-      "canonicalName": "Shirakabako Royal Hill",
+      "canonicalName": "Shirakabako Royal Hill Ski Resort",
       "normalizedIdentity": "shirakabakoroyalhill",
       "prefecture": "Nagano",
       "sourceMembership": [
@@ -40248,15 +40238,16 @@
         "wikipedia-worldwide-japan:469"
       ],
       "operatingEvidence": {
-        "status": "unclear",
-        "evidenceAsOf": "2026-08-26",
+        "status": "verified_operating",
+        "evidenceUrl": "https://royalhill.co.jp/gelande/",
+        "evidenceAsOf": "2026-03-31",
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "workbook:512",
@@ -40422,6 +40413,35 @@
       },
       "disposition": "covered_by_multiple_pages",
       "exception": "Legacy duplicate public routes for the same resort are preserved because existing public URLs must remain unchanged."
+    },
+    {
+      "identityId": "workbook:225",
+      "canonicalName": "Takeshi Banshogahara Ski Area",
+      "normalizedIdentity": "banshogahara",
+      "prefecture": "Nagano",
+      "sourceMembership": [
+        "japan-ski-resorts-558",
+        "skiresort-japan-directory",
+        "wikipedia-japan-specific",
+        "wikipedia-worldwide-japan"
+      ],
+      "sourceEntryIds": [
+        "workbook:225",
+        "skiresort:banshogahara",
+        "wikipedia-japan-specific:386",
+        "wikipedia-worldwide-japan:386"
+      ],
+      "operatingEvidence": {
+        "status": "verified_operating",
+        "evidenceUrl": "https://www.city.ueda.nagano.jp/soshiki/tsangyo/37015.html",
+        "evidenceAsOf": "2026-03-24",
+        "sourceType": "operator_or_public_authority_review"
+      },
+      "publicCoverage": {
+        "routes": [],
+        "pageIds": []
+      },
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "page:iiyama:tangram",
@@ -41224,7 +41244,7 @@
     },
     {
       "identityId": "workbook:70",
-      "canonicalName": "Yunomaru",
+      "canonicalName": "Yunomaru Ski Resort",
       "normalizedIdentity": "yunomaru",
       "prefecture": "Nagano",
       "sourceMembership": [
@@ -41240,7 +41260,8 @@
         "wikipedia-worldwide-japan:488"
       ],
       "operatingEvidence": {
-        "status": "unclear",
+        "status": "verified_operating",
+        "evidenceUrl": "https://yunomaru.co.jp/wp-content/uploads/2025/10/25-26_season.pdf",
         "evidenceAsOf": "2026-08-26",
         "sourceType": "operator_or_public_authority_review"
       },
@@ -41248,7 +41269,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "Nara:dorogawaskiarea",
@@ -42719,8 +42740,8 @@
         "wikipedia-worldwide-japan:282"
       ],
       "operatingEvidence": {
-        "status": "unclear",
-        "evidenceUrl": "https://niigata-kankou.or.jp/ski",
+        "status": "verified_operating",
+        "evidenceUrl": "https://www.town.aga.niigata.jp/kanko_rekishi/mikawa_onsenski/",
         "evidenceAsOf": "2026-08-26",
         "sourceType": "operator_or_public_authority_review"
       },
@@ -42728,7 +42749,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "Niigata:mitsumatakaguratashiromtnaeba",
@@ -43290,8 +43311,8 @@
         "wikipedia-worldwide-japan:318"
       ],
       "operatingEvidence": {
-        "status": "unclear",
-        "evidenceUrl": "https://niigata-kankou.or.jp/ski",
+        "status": "verified_operating",
+        "evidenceUrl": "https://www.ninox.co.jp/information/2026-27%e3%82%b7%e3%83%bc%e3%82%ba%e3%83%b3%e3%80%80%e6%97%a9%e5%89%b2%e3%83%aa%e3%83%95%e3%83%88%e5%88%b8%e8%b2%a9%e5%a3%b2%e9%96%8b%e5%a7%8b%ef%bc%81/",
         "evidenceAsOf": "2026-08-26",
         "sourceType": "operator_or_public_authority_review"
       },
@@ -43299,7 +43320,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "Niigata:ojiyaskiarea",
@@ -43611,7 +43632,7 @@
     },
     {
       "identityId": "workbook:496",
-      "canonicalName": "Tochio Family Resort",
+      "canonicalName": "Tochio Family Ski Resort",
       "normalizedIdentity": "tochiofamilyresort",
       "prefecture": "Niigata",
       "sourceMembership": [
@@ -43627,7 +43648,8 @@
         "wikipedia-worldwide-japan:326"
       ],
       "operatingEvidence": {
-        "status": "unclear",
+        "status": "verified_operating",
+        "evidenceUrl": "https://www.city.nagaoka.niigata.jp/shisetsu/sports/t-hiroba.html",
         "evidenceAsOf": "2026-08-26",
         "sourceType": "operator_or_public_authority_review"
       },
@@ -43635,7 +43657,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "Niigata:tokamachicitymatsudaifamilyskiarea",
@@ -44256,7 +44278,7 @@
     },
     {
       "identityId": "workbook:277",
-      "canonicalName": "Hiruzen Bear Valley",
+      "canonicalName": "Hiruzen Bear Valley Ski Area",
       "normalizedIdentity": "hiruzenbearvalley",
       "prefecture": "Okayama",
       "sourceMembership": [
@@ -44272,7 +44294,8 @@
         "wikipedia-worldwide-japan:571"
       ],
       "operatingEvidence": {
-        "status": "unclear",
+        "status": "verified_operating",
+        "evidenceUrl": "https://bear-ski.amebaownd.com/",
         "evidenceAsOf": "2026-08-26",
         "sourceType": "operator_or_public_authority_review"
       },
@@ -44280,7 +44303,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "catalogue:workbook:230",
@@ -44365,7 +44388,7 @@
     },
     {
       "identityId": "workbook:406",
-      "canonicalName": "Onbara Kogen",
+      "canonicalName": "Onbara Kogen Ski Area",
       "normalizedIdentity": "onbarakogen",
       "prefecture": "Okayama",
       "sourceMembership": [
@@ -44381,7 +44404,8 @@
         "wikipedia-worldwide-japan:573"
       ],
       "operatingEvidence": {
-        "status": "unclear",
+        "status": "verified_operating",
+        "evidenceUrl": "https://www.ombara-kogen.com/ski/post1046/",
         "evidenceAsOf": "2026-08-26",
         "sourceType": "operator_or_public_authority_review"
       },
@@ -44389,7 +44413,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "workbook:354",
@@ -45422,7 +45446,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "workbook:553",
@@ -45844,7 +45868,7 @@
     },
     {
       "identityId": "workbook:363",
-      "canonicalName": "Wakasa Hyonosen",
+      "canonicalName": "Wakasa Hyonosen Ski Area",
       "normalizedIdentity": "wakasahyonosen",
       "prefecture": "Tottori",
       "sourceMembership": [
@@ -45860,7 +45884,8 @@
         "wikipedia-worldwide-japan:563"
       ],
       "operatingEvidence": {
-        "status": "unclear",
+        "status": "verified_operating",
+        "evidenceUrl": "https://hyounosen-ski.jp/archives/917",
         "evidenceAsOf": "2026-08-26",
         "sourceType": "operator_or_public_authority_review"
       },
@@ -45868,7 +45893,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "catalogue:workbook:237",
@@ -46218,7 +46243,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "workbook:389",
@@ -46244,7 +46269,7 @@
     },
     {
       "identityId": "workbook:469",
-      "canonicalName": "Unazuki Onsen",
+      "canonicalName": "Unazuki Snow Park",
       "normalizedIdentity": "unazukionsen",
       "prefecture": "Toyama",
       "sourceMembership": [
@@ -46260,7 +46285,8 @@
         "wikipedia-worldwide-japan:354"
       ],
       "operatingEvidence": {
-        "status": "unclear",
+        "status": "verified_operating",
+        "evidenceUrl": "https://www.unazuki-snowpark.com/2026/03/01/%e5%96%b6%e6%a5%ad%e7%b5%82%e4%ba%86%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b/",
         "evidenceAsOf": "2026-08-26",
         "sourceType": "operator_or_public_authority_review"
       },
@@ -46268,7 +46294,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "catalogue:workbook:263",
@@ -46524,7 +46550,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "workbook:439",
@@ -46637,7 +46663,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "workbook:541",
@@ -46968,7 +46994,7 @@
         "routes": [],
         "pageIds": []
       },
-      "disposition": "unresolved"
+      "disposition": "genuinely_missing"
     },
     {
       "identityId": "catalogue:workbook:404",

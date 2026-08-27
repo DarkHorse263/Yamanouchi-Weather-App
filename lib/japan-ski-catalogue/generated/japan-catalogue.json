@@ -36,13 +36,13 @@
     {
       "sourceId": "japan-travel-clusters",
       "kind": "verified_travel_assignments",
-      "recordCount": 290,
+      "recordCount": 320,
       "location": "lib/japan-ski-catalogue/data/travel-clusters.json"
     },
     {
       "sourceId": "japan-public-identities",
       "kind": "verified_public_identities",
-      "recordCount": 290,
+      "recordCount": 320,
       "location": "lib/japan-ski-catalogue/data/public-identities.json"
     },
     {
@@ -69,16 +69,16 @@
     "publishableOperatingStatuses": [
       "operating"
     ],
-    "marketingApproved": true,
-    "marketingGateReason": "Verified-only evidence-complete coverage is approved; unclear and essential-gap records remain excluded from public coverage.",
+    "marketingApproved": false,
+    "marketingGateReason": "Verified-only coverage is blocked because at least one eligible record is unpublished or ineligible data entered the public projection.",
     "cleanGate": {
-      "verifiedEvidenceCompleteRecords": 266,
+      "verifiedEvidenceCompleteRecords": 291,
       "lifecyclePublishedRecords": 266,
-      "routeReadyNewCandidates": 217,
+      "routeReadyNewCandidates": 242,
       "manifestIntegratedNewRecords": 217,
-      "reviewQueueExcludedPendingEvidence": 232,
-      "unclearOrNotVerifiableRecords": 208,
-      "verifiedEssentialGapRecords": 24
+      "reviewQueueExcludedPendingEvidence": 207,
+      "unclearOrNotVerifiableRecords": 178,
+      "verifiedEssentialGapRecords": 29
     }
   },
   "frontendRegionSources": [
@@ -197,7 +197,9 @@
         "workbook:380",
         "workbook:420",
         "workbook:452",
-        "workbook:317"
+        "workbook:317",
+        "workbook:293",
+        "workbook:551"
       ]
     },
     {
@@ -299,7 +301,8 @@
         "workbook:150",
         "workbook:159",
         "workbook:161",
-        "workbook:182"
+        "workbook:182",
+        "workbook:70"
       ]
     },
     {
@@ -447,6 +450,16 @@
           "baseTownId": "ikenotaira-onsen",
           "name": "Ikenotaira Onsen",
           "nameJa": "Ikenotaira Onsen"
+        },
+        {
+          "baseTownId": "niigata-regional-mikawa-onsen",
+          "name": "Mikawa Onsen",
+          "nameJa": "三川温泉"
+        },
+        {
+          "baseTownId": "niigata-regional-shibata",
+          "name": "Shibata",
+          "nameJa": "新発田市"
         }
       ],
       "recordIds": [
@@ -463,7 +476,10 @@
         "workbook:301",
         "workbook:400",
         "workbook:19c",
-        "workbook:44"
+        "workbook:44",
+        "workbook:178",
+        "workbook:436",
+        "workbook:496"
       ]
     },
     {
@@ -584,7 +600,14 @@
         "workbook:144",
         "workbook:450",
         "workbook:398",
-        "workbook:369"
+        "workbook:369",
+        "workbook:53",
+        "workbook:56",
+        "workbook:93",
+        "workbook:101",
+        "workbook:121",
+        "workbook:128",
+        "workbook:187"
       ]
     },
     {
@@ -636,7 +659,8 @@
         "workbook:170",
         "workbook:220",
         "workbook:248",
-        "workbook:314"
+        "workbook:314",
+        "workbook:300"
       ]
     },
     {
@@ -686,6 +710,11 @@
           "baseTownId": "aomori-regional-shichinohe",
           "name": "Shichinohe",
           "nameJa": "七戸町"
+        },
+        {
+          "baseTownId": "aomori-regional-hirosaki",
+          "name": "Hirosaki",
+          "nameJa": "弘前市"
         }
       ],
       "recordIds": [
@@ -697,7 +726,8 @@
         "workbook:329",
         "workbook:267",
         "workbook:454",
-        "workbook:302"
+        "workbook:302",
+        "workbook:455"
       ]
     },
     {
@@ -734,6 +764,16 @@
           "baseTownId": "hokuriku-komatsu",
           "name": "Komatsu",
           "nameJa": "小松市"
+        },
+        {
+          "baseTownId": "hokuriku-ichirino-onsen",
+          "name": "Ichirino Onsen",
+          "nameJa": "一里野温泉"
+        },
+        {
+          "baseTownId": "hokuriku-kurobe",
+          "name": "Kurobe",
+          "nameJa": "黒部市"
         }
       ],
       "recordIds": [
@@ -745,7 +785,9 @@
         "workbook:263",
         "workbook:463",
         "workbook:193",
-        "workbook:542"
+        "workbook:542",
+        "workbook:45",
+        "workbook:469"
       ]
     },
     {
@@ -977,6 +1019,11 @@
           "baseTownId": "gunma-minakami-gunma-numata",
           "name": "Numata",
           "nameJa": "Numata"
+        },
+        {
+          "baseTownId": "gunma-regional-maebashi",
+          "name": "Maebashi",
+          "nameJa": "前橋市"
         }
       ],
       "recordIds": [
@@ -990,7 +1037,8 @@
         "workbook:183",
         "workbook:196",
         "workbook:226",
-        "workbook:318"
+        "workbook:318",
+        "workbook:371"
       ]
     },
     {
@@ -1033,6 +1081,31 @@
           "baseTownId": "tottori-daisen-chizu",
           "name": "Chizu",
           "nameJa": "Chizu"
+        },
+        {
+          "baseTownId": "hiroshima-kitahiroshima-kitahiroshima",
+          "name": "Kitahiroshima",
+          "nameJa": "北広島町"
+        },
+        {
+          "baseTownId": "hiroshima-shobara-shobara",
+          "name": "Shobara",
+          "nameJa": "庄原市"
+        },
+        {
+          "baseTownId": "tottori-wakasa-wakasa",
+          "name": "Wakasa",
+          "nameJa": "若桜町"
+        },
+        {
+          "baseTownId": "hiroshima-akiota-akiota",
+          "name": "Akiota",
+          "nameJa": "安芸太田町"
+        },
+        {
+          "baseTownId": "okayama-kagamino-kagamino",
+          "name": "Kagamino",
+          "nameJa": "鏡野町"
         }
       ],
       "recordIds": [
@@ -1043,7 +1116,13 @@
         "workbook:230",
         "workbook:322",
         "workbook:344",
-        "workbook:419"
+        "workbook:419",
+        "workbook:173",
+        "workbook:277",
+        "workbook:343",
+        "workbook:363",
+        "workbook:397",
+        "workbook:406"
       ]
     },
     {
@@ -1218,6 +1297,26 @@
           "baseTownId": "hokkaido-regional-wassamu",
           "name": "Wassamu",
           "nameJa": "和寒"
+        },
+        {
+          "baseTownId": "hokkaido-regional-shintoku",
+          "name": "Shintoku",
+          "nameJa": "新得町"
+        },
+        {
+          "baseTownId": "hokkaido-regional-nakagawa",
+          "name": "Nakagawa",
+          "nameJa": "中川町"
+        },
+        {
+          "baseTownId": "hokkaido-regional-takinoue",
+          "name": "Takinoue",
+          "nameJa": "滝上町"
+        },
+        {
+          "baseTownId": "hokkaido-regional-bifuka",
+          "name": "Bifuka",
+          "nameJa": "美深町"
         }
       ],
       "recordIds": [
@@ -1255,7 +1354,11 @@
         "workbook:449",
         "workbook:461",
         "workbook:466",
-        "workbook:550"
+        "workbook:550",
+        "workbook:229",
+        "workbook:236",
+        "workbook:280",
+        "workbook:307"
       ]
     },
     {
@@ -1719,7 +1822,9 @@
       "recordIds": [
         "workbook:30",
         "workbook:54",
-        "workbook:233"
+        "workbook:233",
+        "workbook:108",
+        "workbook:225"
       ]
     },
     {
@@ -7466,8 +7571,14 @@
     },
     {
       "recordId": "workbook:45",
-      "lifecycle": "draft",
+      "lifecycle": "verified",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "hokuriku",
+      "baseTownId": "hokuriku-ichirino-onsen",
+      "publicId": "hakusan-ichirino-onsen-ski-resort",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "45",
@@ -7490,14 +7601,14 @@
       "review": {
         "reviewBatch": "niigata-hokuriku.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
+        "reviewStatus": "verified_operating",
         "officialNameEn": "Hakusan Ichirino Onsen Ski Resort",
         "officialNameJa": "白山一里野温泉スキー場",
         "officialUrl": "https://www.sam-hakusan.com/ichirino/",
         "statusEvidenceUrl": "https://www.sam-hakusan-en.com/ichirino.html",
-        "statusEvidenceQuote": "Thank you for another snowy, fun white season 2025-2026!",
+        "statusEvidenceQuote": "Thank you for another snowy, fun white season 2025-2026! See you next year...",
         "evidenceAsOf": "2026-08-26",
-        "notes": "Official operator English page explicitly records the completed 2025-26 season.\n\nPass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: the operator source establishes only the completed 2025-26 season and no 2026-27 operating notice was located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon.",
+        "notes": "The official operator page records completion of the 2025-26 ski season and explicitly says the resort will see guests next year.",
         "travelClusterLabelSuggestion": "Hakusan / Ichirino",
         "baseTownLabelSuggestion": "Ichirino Onsen",
         "clusterConfidence": "high",
@@ -7574,15 +7685,8 @@
         }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "unresolved_status",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -8431,8 +8535,14 @@
     },
     {
       "recordId": "workbook:53",
-      "lifecycle": "draft",
+      "lifecycle": "verified",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-kiso-kiso",
+      "publicId": "kaida-kogen-mia-ski-resort",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "53",
@@ -8455,10 +8565,14 @@
       "review": {
         "reviewBatch": "nagano.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
+        "reviewStatus": "verified_operating",
+        "officialNameEn": "Kaida Kogen MIA Ski Resort",
+        "officialNameJa": "開田高原マイアスキー場",
         "officialUrl": "https://miaski-resort.com/",
-        "evidenceAsOf": "2026-08-26",
-        "notes": "No explicit current/recent-season operating statement was confirmed from an official source; any URL retained is identity/discovery evidence only.\n\nPass 4: Checked the operator site, Kiso municipal facility material, company notices, and 2025-26/2026-27 ticket, closure, and lift-calendar searches for 開田高原マイア. No dated authoritative operation, closure, or successor notice was located.",
+        "statusEvidenceUrl": "https://miaski-resort.com/",
+        "statusEvidenceQuote": "更新日時 2026/3/29 AM06:00 / 第一クワッドリフト 〇 / 第二高速ペアリフト 〇",
+        "evidenceAsOf": "2026-03-29",
+        "notes": "The operator's dated snow report explicitly shows both principal lifts operating on 29 March 2026.",
         "travelClusterLabelSuggestion": "Kiso & Matsumoto — Kiso",
         "baseTownLabelSuggestion": "Kiso",
         "clusterConfidence": "medium",
@@ -8517,7 +8631,7 @@
         ]
       },
       "resolved": {
-        "name": "Kaida Kogen Mia",
+        "name": "Kaida Kogen MIA Ski Resort",
         "nameJa": "開田高原マイアスキー場",
         "officialUrl": "https://miaski-resort.com/",
         "coordinates": {
@@ -8531,15 +8645,8 @@
         }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "unresolved_status",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -8791,8 +8898,14 @@
     },
     {
       "recordId": "workbook:56",
-      "lifecycle": "draft",
+      "lifecycle": "verified",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-nagano-nagano",
+      "publicId": "iizuna-resort-ski-area",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "56",
@@ -8815,10 +8928,14 @@
       "review": {
         "reviewBatch": "nagano.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
+        "reviewStatus": "verified_operating",
+        "officialNameEn": "Iizuna Resort Ski Area",
+        "officialNameJa": "いいづなリゾートスキー場",
         "officialUrl": "https://iizunaresort.com/",
+        "statusEvidenceUrl": "https://iizunaresort.com/reservation/",
+        "statusEvidenceQuote": "スキー場営業期間：2025年12/20（土）〜2026年3/15（日）予定 / 営業期間：デイタイム 8:30〜16:00／ナイター 18:00〜22:00",
         "evidenceAsOf": "2026-08-26",
-        "notes": "No explicit current/recent-season operating statement was confirmed from an official source; any URL retained is identity/discovery evidence only.\n\nPass 4: Checked Iizuna Resort's operator material plus Nagano City facility, budget, ticket-calendar, and 休止/営業終了 searches. No explicit dated operator or municipal evidence establishes 2025-26 operation, 2026-27 operation, or closure.",
+        "notes": "The operator's ticket page explicitly provides the 2025-26 ski-area operating period and hours.",
         "travelClusterLabelSuggestion": "Nagano ski areas",
         "baseTownLabelSuggestion": "Nagano",
         "clusterConfidence": "medium",
@@ -8877,7 +8994,7 @@
         ]
       },
       "resolved": {
-        "name": "Iizuna Resort",
+        "name": "Iizuna Resort Ski Area",
         "nameJa": "いいづなリゾートスキー場",
         "officialUrl": "https://iizunaresort.com/",
         "coordinates": {
@@ -8891,15 +9008,8 @@
         }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "unresolved_status",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -10407,8 +10517,14 @@
     },
     {
       "recordId": "workbook:70",
-      "lifecycle": "draft",
+      "lifecycle": "verified",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "yamanouchi",
+      "baseTownId": "yudanaka",
+      "publicId": "yunomaru-ski-resort",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "70",
@@ -10431,10 +10547,14 @@
       "review": {
         "reviewBatch": "nagano.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
+        "reviewStatus": "verified_operating",
+        "officialNameEn": "Yunomaru Ski Resort",
+        "officialNameJa": "湯の丸スキー場",
         "officialUrl": "https://yunomaru.co.jp/",
+        "statusEvidenceUrl": "https://yunomaru.co.jp/wp-content/uploads/2025/10/25-26_season.pdf",
+        "statusEvidenceQuote": "2025-2026 シーズン券申込書 / 湯の丸観光開発株式会社 湯の丸スキー場シーズン券係",
         "evidenceAsOf": "2026-08-26",
-        "notes": "No explicit current/recent-season operating statement was confirmed from an official source; any URL retained is identity/discovery evidence only.\n\nPass 4: Checked Yunomaru operator/company materials, local-government facility references, ticket calendars, and explicit closure/休止 searches in Japanese and English. No authoritative dated seasonal operation or closure statement was located.",
+        "notes": "The operator-hosted 2025-26 season-pass application explicitly identifies Yunomaru Ski Resort and its operating company.",
         "travelClusterLabelSuggestion": "Yamanouchi ski areas",
         "baseTownLabelSuggestion": "Yamanouchi",
         "clusterConfidence": "medium",
@@ -10493,7 +10613,7 @@
         ]
       },
       "resolved": {
-        "name": "Yunomaru",
+        "name": "Yunomaru Ski Resort",
         "nameJa": "湯の丸スキー場",
         "officialUrl": "https://yunomaru.co.jp/",
         "coordinates": {
@@ -10507,15 +10627,8 @@
         }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "unresolved_status",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -13097,8 +13210,14 @@
     },
     {
       "recordId": "workbook:93",
-      "lifecycle": "draft",
+      "lifecycle": "verified",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-tateshina",
+      "publicId": "kurumayama-kogen-skypark-ski-resort",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "93",
@@ -13121,10 +13240,14 @@
       "review": {
         "reviewBatch": "nagano.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
+        "reviewStatus": "verified_operating",
+        "officialNameEn": "Kurumayama Kogen SKYPARK Ski Resort",
+        "officialNameJa": "車山高原SKYPARKスキー場",
         "officialUrl": "https://winter.kurumayama-skypark.com/",
-        "evidenceAsOf": "2026-08-26",
-        "notes": "No explicit current/recent-season operating statement was confirmed from an official source; any URL retained is identity/discovery evidence only.\n\nPass 4: Checked Kurumayama's official winter site, operator notices, municipal-facility references, and 2025-26/2026-27 ticket, trail-map, 休止, and 営業終了 searches. No explicit dated official operation or closure evidence was found.",
+        "statusEvidenceUrl": "https://winter.kurumayama-skypark.com/archives/4472",
+        "statusEvidenceQuote": "予定どおり3月31日をもちまして、車山高原SKYPARKスキー場2026シーズンの営業を終了いたしました。来シーズンは、12月12日（土）に雪の上で会いましょう！",
+        "evidenceAsOf": "2026-04-01",
+        "notes": "The operator's dated season-end notice confirms the completed 2026 season and announces the next planned opening.",
         "travelClusterLabelSuggestion": "Yatsugatake & Tateshina — Tateshina",
         "baseTownLabelSuggestion": "Tateshina",
         "clusterConfidence": "medium",
@@ -13188,7 +13311,7 @@
         ]
       },
       "resolved": {
-        "name": "Kurumayama Kogen",
+        "name": "Kurumayama Kogen SKYPARK Ski Resort",
         "nameJa": "車山高原SKYPARKスキー場",
         "officialUrl": "https://winter.kurumayama-skypark.com/",
         "coordinates": {
@@ -13202,15 +13325,8 @@
         }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "unresolved_status",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -14046,8 +14162,14 @@
     },
     {
       "recordId": "workbook:101",
-      "lifecycle": "draft",
+      "lifecycle": "verified",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-tateshina",
+      "publicId": "shirakaba-2in1-ski-resort",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "101",
@@ -14070,10 +14192,14 @@
       "review": {
         "reviewBatch": "nagano.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
+        "reviewStatus": "verified_operating",
+        "officialNameEn": "Shirakaba 2in1 Ski Resort",
+        "officialNameJa": "しらかば2in1スキー場",
         "officialUrl": "https://whitebirch.co.jp/shirakaba2in1/",
-        "evidenceAsOf": "2026-08-26",
-        "notes": "No explicit current/recent-season operating statement was confirmed from an official source; any URL retained is identity/discovery evidence only.\n\nPass 4: Checked White Birch's operator material, Tateshina municipal facility sources, and 2025-26/2026-27 tickets, calendars, and closure terms for Shirakaba 2in1. No source explicitly establishes the intake facility's current/recent operating status.",
+        "statusEvidenceUrl": "https://whitebirch.co.jp/news/%e3%81%97%e3%82%89%e3%81%8b%e3%81%b02in1%e4%bb%8a%e3%82%b7%e3%83%bc%e3%82%ba%e3%83%b3%e5%96%b6%e6%a5%ad%e7%b5%82%e4%ba%86%e3%81%ae%e3%81%8a%e3%81%97%e3%82%89%e3%81%9b/",
+        "statusEvidenceQuote": "しらかば2in1は2026年4月10日をもちまして25-26シーズンの営業を終了 / 来シーズンのしらかば2in1オープン予定は2026年11月下旬頃",
+        "evidenceAsOf": "2026-04-10",
+        "notes": "The operator's dated notice confirms the completed 2025-26 season and the planned November 2026 reopening.",
         "travelClusterLabelSuggestion": "Yatsugatake & Tateshina — Tateshina",
         "baseTownLabelSuggestion": "Tateshina",
         "clusterConfidence": "medium",
@@ -14134,7 +14260,7 @@
         ]
       },
       "resolved": {
-        "name": "Shirakaba 2in1",
+        "name": "Shirakaba 2in1 Ski Resort",
         "nameJa": "白樺2in1スキー場",
         "officialUrl": "https://whitebirch.co.jp/shirakaba2in1/",
         "coordinates": {
@@ -14148,15 +14274,8 @@
         }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "unresolved_status",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -14869,8 +14988,14 @@
     },
     {
       "recordId": "workbook:108",
-      "lifecycle": "draft",
+      "lifecycle": "verified",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "iiyama",
+      "baseTownId": "iiyama",
+      "publicId": "blanche-takayama-ski-resort",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "108",
@@ -14893,10 +15018,14 @@
       "review": {
         "reviewBatch": "nagano.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
+        "reviewStatus": "verified_operating",
+        "officialNameEn": "Blanche Takayama Ski Resort",
+        "officialNameJa": "ブランシュたかやまスキーリゾート",
         "officialUrl": "https://blanche-ski.com/winter/",
-        "evidenceAsOf": "2026-08-26",
-        "notes": "No explicit current/recent-season operating statement was confirmed from an official source; any URL retained is identity/discovery evidence only.\n\nPass 4: Checked Blanche Takayama's operator site, local-government facility material, 2025-26/2026-27 season-pass and trail-map searches, and closure notices. No dated authoritative status statement was confirmed.",
+        "statusEvidenceUrl": "https://blanche-ski.com/winter/accomodation/%e7%8f%be%e5%9c%a8%e3%81%ae%e3%82%b3%e3%83%bc%e3%82%b9%e7%8a%b6%e6%b3%81/",
+        "statusEvidenceQuote": "今シーズンの営業は本日（3/29）が最終日！ / コースは９本中8本、最長3.7ｋｍ滑走できます。",
+        "evidenceAsOf": "2026-03-29",
+        "notes": "The operator's final-day slope report explicitly confirms operation of eight courses on 29 March 2026.",
         "travelClusterLabelSuggestion": "Yatsugatake & Tateshina — Iiyama",
         "baseTownLabelSuggestion": "Iiyama",
         "clusterConfidence": "medium",
@@ -14957,7 +15086,7 @@
         ]
       },
       "resolved": {
-        "name": "Blanche Takayama",
+        "name": "Blanche Takayama Ski Resort",
         "nameJa": "ブランシュたかやまスキーリゾート",
         "officialUrl": "https://blanche-ski.com/winter/",
         "coordinates": {
@@ -14971,15 +15100,8 @@
         }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "unresolved_status",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -16404,8 +16526,14 @@
     },
     {
       "recordId": "workbook:121",
-      "lifecycle": "draft",
+      "lifecycle": "verified",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-tateshina",
+      "publicId": "shirakabako-royal-hill-ski-resort",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "121",
@@ -16428,10 +16556,14 @@
       "review": {
         "reviewBatch": "nagano.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
+        "reviewStatus": "verified_operating",
+        "officialNameEn": "Shirakabako Royal Hill Ski Resort",
+        "officialNameJa": "白樺湖ロイヤルヒルスキー場",
         "officialUrl": "https://royalhill.co.jp/",
-        "evidenceAsOf": "2026-08-26",
-        "notes": "No explicit current/recent-season operating statement was confirmed from an official source; any URL retained is identity/discovery evidence only.\n\nPass 4: Checked Royal Hill's operator material, Tateshina facility sources, lift/ticket calendars, and 2025-26/2026-27 operation and closure terms. No qualifying explicit seasonal-status notice was located.",
+        "statusEvidenceUrl": "https://royalhill.co.jp/gelande/",
+        "statusEvidenceQuote": "UPDATE:2026/03/31 16:30 / 25-26シーズンの営業を本日16：00に終了しました。明日より26-27シーズンに向け、始動して参ります。",
+        "evidenceAsOf": "2026-03-31",
+        "notes": "The operator's dated slope page confirms completion of the 2025-26 operating season and preparation for 2026-27.",
         "travelClusterLabelSuggestion": "Yatsugatake & Tateshina — Tateshina",
         "baseTownLabelSuggestion": "Tateshina",
         "clusterConfidence": "medium",
@@ -16492,7 +16624,7 @@
         ]
       },
       "resolved": {
-        "name": "Shirakabako Royal Hill",
+        "name": "Shirakabako Royal Hill Ski Resort",
         "nameJa": "白樺湖ロイヤルヒルスキー場",
         "officialUrl": "https://royalhill.co.jp/",
         "coordinates": {
@@ -16506,15 +16638,8 @@
         }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "unresolved_status",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -17174,8 +17299,14 @@
     },
     {
       "recordId": "workbook:128",
-      "lifecycle": "draft",
+      "lifecycle": "verified",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-fujimi",
+      "publicId": "fujimi-panorama-resort",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "128",
@@ -17198,10 +17329,14 @@
       "review": {
         "reviewBatch": "nagano.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
-        "officialUrl": "http://www.fujimipanorama.com",
-        "evidenceAsOf": "2026-08-26",
-        "notes": "No explicit current/recent-season operating statement was confirmed from an official source; any URL retained is identity/discovery evidence only.\n\nPass 4: Checked Fujimi Panorama's operator material, Fujimi municipal facility sources, company notices, ticket calendars, trail-map PDFs, and 2025-26/2026-27 closure terms. No explicit dated authoritative status evidence was located.",
+        "reviewStatus": "verified_operating",
+        "officialNameEn": "Fujimi Panorama Resort",
+        "officialNameJa": "富士見パノラマリゾート",
+        "officialUrl": "https://www.fujimipanorama.com/snow/",
+        "statusEvidenceUrl": "https://www.fujimipanorama.com/snow/40%e5%91%a8%e5%b9%b4%e8%a8%98%e5%bf%b5%e3%80%81%e5%86%ac%e5%ad%a326%e2%80%9027%e3%82%b7%e3%83%bc%e3%82%ba%e3%83%b3%e8%b6%85%e6%97%a9%e5%89%b2%e5%88%b8%e3%82%928%e6%9c%88%e9%99%90%e5%ae%9a%e8%b2%a9/",
+        "statusEvidenceQuote": "富士見パノラマリゾートは、2026-27シーズンに開業40周年を迎えます。オープンは2026年12月12日(土)を予定しています。",
+        "evidenceAsOf": "2026-07-27",
+        "notes": "The operator's dated 40th-anniversary notice announces the planned 2026-27 opening and sells season-valid lift tickets.",
         "travelClusterLabelSuggestion": "Fujimi ski areas",
         "baseTownLabelSuggestion": "Fujimi",
         "clusterConfidence": "medium",
@@ -17263,7 +17398,7 @@
         ]
       },
       "resolved": {
-        "name": "Fujimi Panorama",
+        "name": "Fujimi Panorama Resort",
         "nameJa": "富士見パノラマリゾート",
         "officialUrl": "http://www.fujimipanorama.com",
         "coordinates": {
@@ -17277,15 +17412,8 @@
         }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "unresolved_status",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -22374,8 +22502,14 @@
     },
     {
       "recordId": "workbook:173",
-      "lifecycle": "draft",
+      "lifecycle": "verified",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "chugoku-ski-areas",
+      "baseTownId": "hiroshima-kitahiroshima-kitahiroshima",
+      "publicId": "geihoku-kogen-osa-ski-area",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "173",
@@ -22398,10 +22532,14 @@
       "review": {
         "reviewBatch": "west-south.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
+        "reviewStatus": "verified_operating",
+        "officialNameEn": "Geihoku Kogen Osa Ski Area",
+        "officialNameJa": "芸北高原大佐スキー場",
         "officialUrl": "https://osaski.co.jp/",
+        "statusEvidenceUrl": "http://osaski.co.jp/5728/",
+        "statusEvidenceQuote": "急遽決定‼２/１５　たのしい冬フェス　ガラポン抽選大会開催決定！",
         "evidenceAsOf": "2026-08-26",
-        "notes": "An operator domain exists, but current/recent operation could not be established from an operator or municipal notice.\n\nPass 4: Rechecked operator-company notices, ticket/calendar pages, and Hiroshima municipal sources; no qualifying current dated operation notice was found.",
+        "notes": "The operator's dated 2026-02-13 event notice confirms an on-snow event at the ski area on 2026-02-15.",
         "travelClusterLabelSuggestion": "Kitahiroshima snow resorts",
         "baseTownLabelSuggestion": "Kitahiroshima",
         "clusterConfidence": "medium",
@@ -22461,7 +22599,7 @@
         ]
       },
       "resolved": {
-        "name": "",
+        "name": "Geihoku Kogen Osa Ski Area",
         "nameJa": "芸北高原大佐スキー場",
         "officialUrl": "https://osaski.co.jp/",
         "coordinates": {
@@ -22475,15 +22613,8 @@
         }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "unresolved_status",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -22959,8 +23090,14 @@
     },
     {
       "recordId": "workbook:178",
-      "lifecycle": "draft",
+      "lifecycle": "verified",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "niigata-regional",
+      "baseTownId": "niigata-regional-mikawa-onsen",
+      "publicId": "mikawa-onsen-ski-resort",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "178",
@@ -22983,14 +23120,14 @@
       "review": {
         "reviewBatch": "niigata-hokuriku.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
+        "reviewStatus": "verified_operating",
         "officialNameEn": "Mikawa Onsen Ski Resort",
         "officialNameJa": "三川温泉スキー場",
         "officialUrl": "https://www.town.aga.niigata.jp/kanko_rekishi/mikawa_onsenski/",
-        "statusEvidenceUrl": "https://niigata-kankou.or.jp/ski",
-        "statusEvidenceQuote": "2026年1月10日（土曜日）オープン / 2026年3月上旬クローズ予定",
+        "statusEvidenceUrl": "https://www.town.aga.niigata.jp/kanko_rekishi/mikawa_onsenski/",
+        "statusEvidenceQuote": "オープン後は、3月8日（日曜）までの58日間休むこと無く営業することができました。明日から、来シーズンの準備がスタートします。",
         "evidenceAsOf": "2026-08-26",
-        "notes": "Niigata Prefecture’s official tourism ski page published 2025-26 opening and closing information.\n\nPass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: the prior-season directory record was not replaced by an explicit municipal 2026-27 operating notice. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon.",
+        "notes": "Aga Town's official ski-area page states that the resort operated continuously for 58 days through March 8, 2026 and that preparations for next season begin the following day.",
         "travelClusterLabelSuggestion": "Aga / Mikawa Onsen",
         "baseTownLabelSuggestion": "Mikawa Onsen",
         "clusterConfidence": "high",
@@ -23065,15 +23202,8 @@
         }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "unresolved_status",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -23976,8 +24106,14 @@
     },
     {
       "recordId": "workbook:187",
-      "lifecycle": "draft",
+      "lifecycle": "verified",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-sakuho",
+      "publicId": "saku-ski-garden-parada",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "187",
@@ -24000,10 +24136,14 @@
       "review": {
         "reviewBatch": "nagano.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
-        "officialUrl": "https://www.saku-parada.jp/",
-        "evidenceAsOf": "2026-08-26",
-        "notes": "No explicit current/recent-season operating statement was confirmed from an official source; any URL retained is identity/discovery evidence only.\n\nPass 4: Checked Saku Parada operator/company materials, Saku municipal sports-facility references, ticket-calendar and trail-map terms, and 2025-26/2026-27 closure notices. No explicit dated official operation or closure source was located.",
+        "reviewStatus": "verified_operating",
+        "officialNameEn": "Saku Ski Garden Parada",
+        "officialNameJa": "佐久スキーガーデン「パラダ」",
+        "officialUrl": "https://www.saku-parada.jp/ski/",
+        "statusEvidenceUrl": "https://www.saku-parada.jp/ski/news/detail.php?CN=432398",
+        "statusEvidenceQuote": "2026-2027シーズンの超早割チケットを、9月1日（火）より販売開始します！ / 2026-2027シーズンも、パラダで冬を思いっきり楽しもう！",
+        "evidenceAsOf": "2026-08-23",
+        "notes": "The operator's dated announcement sells 2026-27 season passes and lift day tickets.",
         "travelClusterLabelSuggestion": "Saku ski areas",
         "baseTownLabelSuggestion": "Saku",
         "clusterConfidence": "medium",
@@ -24078,15 +24218,8 @@
         }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "unresolved_status",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -28290,8 +28423,14 @@
     },
     {
       "recordId": "workbook:225",
-      "lifecycle": "draft",
+      "lifecycle": "verified",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "iiyama",
+      "baseTownId": "iiyama",
+      "publicId": "takeshi-banshogahara-ski-area",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "225",
@@ -28314,9 +28453,14 @@
       "review": {
         "reviewBatch": "nagano.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
-        "evidenceAsOf": "2026-08-26",
-        "notes": "No explicit current/recent-season operating statement was confirmed from an official source; any URL retained is identity/discovery evidence only.\n\nPass 4: Searched 万座ヶ原/Banshogahara with municipal, prefectural, operator, closure and lift-register terms. Results instead identify Gunma's distinct Manza Onsen Ski Resort; no authoritative identity for this Nagano intake row was established.",
+        "reviewStatus": "verified_operating",
+        "officialNameEn": "Takeshi Banshogahara Ski Area",
+        "officialNameJa": "武石番所ヶ原スキー場",
+        "officialUrl": "https://www.city.ueda.nagano.jp/soshiki/tsangyo/37015.html",
+        "statusEvidenceUrl": "https://www.city.ueda.nagano.jp/soshiki/tsangyo/37015.html",
+        "statusEvidenceQuote": "営業期間／令和7年12月20日(土曜日）～令和8年3月29日（日曜日）（予定） / 第1リフト 乗り場から中間駅 12月20日(土曜日)から滑走可能",
+        "evidenceAsOf": "2026-03-24",
+        "notes": "Ueda City's updated facility page identifies Takeshi Banshogahara Ski Area and explicitly provides its 2025-26 operating period and skiable lift-served area.",
         "travelClusterLabelSuggestion": "Northern Nagano — Iiyama",
         "baseTownLabelSuggestion": "Iiyama",
         "clusterConfidence": "medium",
@@ -28358,23 +28502,20 @@
         "essentials": {
           "coordinates": true,
           "defensibleElevation": true,
-          "japaneseName": false,
-          "officialUrl": false
+          "japaneseName": true,
+          "officialUrl": true
         },
-        "evidenceComplete": false,
-        "missingReasons": [
-          "missing_japanese_name",
-          "missing_official_url"
-        ],
+        "evidenceComplete": true,
+        "missingReasons": [],
         "requiredReviews": [
           "operating_status",
           "travel_cluster"
         ]
       },
       "resolved": {
-        "name": "Banshogahara",
-        "nameJa": null,
-        "officialUrl": null,
+        "name": "Takeshi Banshogahara Ski Area",
+        "nameJa": "武石番所ヶ原スキー場",
+        "officialUrl": "https://www.city.ueda.nagano.jp/soshiki/tsangyo/37015.html",
         "coordinates": {
           "lat": 36.26021842437872,
           "lng": 138.1115520542307
@@ -28386,18 +28527,8 @@
         }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "unresolved_status",
-          "missing_essentials",
-          "missing_japanese_name",
-          "missing_official_url",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -28664,8 +28795,14 @@
     },
     {
       "recordId": "workbook:229",
-      "lifecycle": "draft",
+      "lifecycle": "verified",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-shintoku",
+      "publicId": "shintokuyama-ski-area",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "229",
@@ -28688,12 +28825,14 @@
       "review": {
         "reviewBatch": "hokkaido.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
+        "reviewStatus": "verified_operating",
         "officialNameEn": "Shintokuyama Ski Area",
         "officialNameJa": "新得山スキー場",
         "officialUrl": "https://www.shintoku-town.jp/bunka-sports/sports/sports_shisetsu/shintokuyama/",
+        "statusEvidenceUrl": "https://www.shintoku-town.jp/bunka-sports/sports/sports_shisetsu/shintokuyama/",
+        "statusEvidenceQuote": "☆令和7年度シーズン情報☆【2/26（木）現在】今シーズンの営業は終了しました。今シーズンもご利用ありがとうございました。",
         "evidenceAsOf": "2026-08-26",
-        "notes": "Candidate official URL found, but no sufficiently current operating-status statement was confirmed.\n\nPass 4: A fourth search of Shintoku Town facility pages, council/season terms, and Japanese 令和8年 営業・休止・廃止 queries did not retain a dated operator or municipal operating-status notice.",
+        "notes": "Task 133 evidence pass: Shintoku Town's dated FY2025 season update confirms the completed 2025-26 season.",
         "travelClusterLabelSuggestion": "Shintoku ski areas",
         "baseTownLabelSuggestion": "Shintoku",
         "clusterConfidence": "low",
@@ -28766,15 +28905,8 @@
         }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "unresolved_status",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -29410,8 +29542,14 @@
     },
     {
       "recordId": "workbook:236",
-      "lifecycle": "draft",
+      "lifecycle": "verified",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-nakagawa",
+      "publicId": "nakayamatoge-ski-area",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "236",
@@ -29434,11 +29572,14 @@
       "review": {
         "reviewBatch": "hokkaido.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
+        "reviewStatus": "verified_operating",
         "officialNameEn": "Nakayamatoge Ski Area",
         "officialNameJa": "中山峠スキー場",
+        "officialUrl": "https://nakayama-ski.com/",
+        "statusEvidenceUrl": "https://nakayama-ski.com/",
+        "statusEvidenceQuote": "中山峠スキー場はコンディション不良の為、本日5/6(祝)をもちまして2026年の営業を終了させて頂きます。",
         "evidenceAsOf": "2026-08-26",
-        "notes": "No authoritative current operating-status source was confirmed; third-party evidence was not accepted.\n\nPass 4: Searched Kimobetsu municipal sources, operator/company notices, and Japanese 2025-26/2026-27 operating, closure, and lift-calendar terms. Only directory or tourism-discovery results were found.",
+        "notes": "Task 133 evidence pass: The current operator homepage confirms operation through May 6, 2026.",
         "travelClusterLabelSuggestion": "Nakagawa ski areas",
         "baseTownLabelSuggestion": "Nakagawa",
         "clusterConfidence": "low",
@@ -29484,12 +29625,10 @@
           "coordinates": true,
           "defensibleElevation": true,
           "japaneseName": true,
-          "officialUrl": false
+          "officialUrl": true
         },
-        "evidenceComplete": false,
-        "missingReasons": [
-          "missing_official_url"
-        ],
+        "evidenceComplete": true,
+        "missingReasons": [],
         "requiredReviews": [
           "operating_status",
           "travel_cluster"
@@ -29498,7 +29637,7 @@
       "resolved": {
         "name": "Nakayamatoge Ski Area",
         "nameJa": "中山峠スキー場",
-        "officialUrl": null,
+        "officialUrl": "https://nakayama-ski.com/",
         "coordinates": {
           "lat": 42.850194,
           "lng": 141.095472
@@ -29510,17 +29649,8 @@
         }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "unresolved_status",
-          "missing_essentials",
-          "missing_official_url",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -34023,8 +34153,14 @@
     },
     {
       "recordId": "workbook:277",
-      "lifecycle": "draft",
+      "lifecycle": "verified",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "chugoku-ski-areas",
+      "baseTownId": "okayama-maniwa-maniwa",
+      "publicId": "hiruzen-bear-valley-ski-area",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "277",
@@ -34047,10 +34183,14 @@
       "review": {
         "reviewBatch": "west-south.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
+        "reviewStatus": "verified_operating",
+        "officialNameEn": "Hiruzen Bear Valley Ski Area",
+        "officialNameJa": "ひるぜんベアバレースキー場",
         "officialUrl": "https://bear-ski.amebaownd.com/",
+        "statusEvidenceUrl": "https://bear-ski.amebaownd.com/",
+        "statusEvidenceQuote": "3月1日(日)を持ちまして2025-2026シーズンの営業を終了させていただきます。…来シーズンもよろしくお願いいたします。",
         "evidenceAsOf": "2026-08-26",
-        "notes": "An operator page exists, but no dated recent official operation notice was located.\n\nPass 4: Rechecked operator calendar/ticket pages and Maniwa/Okayama public sources; no qualifying dated official ski-operation notice was found.",
+        "notes": "The operator's season-end announcement confirms 2025-26 operation and anticipates the next season.",
         "travelClusterLabelSuggestion": "Hiruzen snow areas",
         "baseTownLabelSuggestion": "Maniwa",
         "clusterConfidence": "high",
@@ -34110,7 +34250,7 @@
         ]
       },
       "resolved": {
-        "name": "",
+        "name": "Hiruzen Bear Valley Ski Area",
         "nameJa": "ひるぜんベアバレースキー場",
         "officialUrl": "https://bear-ski.amebaownd.com/",
         "coordinates": {
@@ -34124,15 +34264,8 @@
         }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "unresolved_status",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -34323,8 +34456,14 @@
     },
     {
       "recordId": "workbook:280",
-      "lifecycle": "draft",
+      "lifecycle": "verified",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-takinoue",
+      "publicId": "takinoue-sakuragaoka-ski-area",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "280",
@@ -34347,12 +34486,14 @@
       "review": {
         "reviewBatch": "hokkaido.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
+        "reviewStatus": "verified_operating",
         "officialNameEn": "Takinoue Sakuragaoka Ski Area",
         "officialNameJa": "滝上町桜ヶ丘スキー場",
         "officialUrl": "https://town.takinoue.hokkaido.jp/kyoikuiinkai/social/shisetsu/sakuragaokaski.html",
+        "statusEvidenceUrl": "https://www.town.takinoue.hokkaido.jp/kyoikuiinkai/social/20260302-01.html",
+        "statusEvidenceQuote": "ロープトウについては通常通り営業いたします。スキー場の営業終了は、３月中旬の予定です。",
         "evidenceAsOf": "2026-08-26",
-        "notes": "Candidate official URL found, but no sufficiently current operating-status statement was confirmed.\n\nPass 4: Searched Takinoue municipal facility and budget/council materials plus Japanese 令和8年 営業・休止・廃止 terms. No dated authoritative season-operation notice was retained.",
+        "notes": "Task 133 evidence pass: Takinoue Town's March 2026 operations notice confirms lift and rope-tow operation during the completed 2025-26 season.",
         "travelClusterLabelSuggestion": "Takinoue ski areas",
         "baseTownLabelSuggestion": "Takinoue",
         "clusterConfidence": "low",
@@ -34425,15 +34566,8 @@
         }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "unresolved_status",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -35801,8 +35935,14 @@
     },
     {
       "recordId": "workbook:293",
-      "lifecycle": "draft",
+      "lifecycle": "verified",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "niseko",
+      "baseTownId": "niseko-rankoshi",
+      "publicId": "anpeizan-ski-area",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "293",
@@ -35825,12 +35965,14 @@
       "review": {
         "reviewBatch": "hokkaido.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
+        "reviewStatus": "verified_operating",
         "officialNameEn": "Anpeizan Ski Area",
         "officialNameJa": "安平山スキー場",
         "officialUrl": "https://www.town.abira.lg.jp/midokoro/shisetsu/sport/149",
+        "statusEvidenceUrl": "https://www.town.abira.lg.jp/oshirase/35/20186",
+        "statusEvidenceQuote": "安平山スキー場のオープンが決定しましたのでお知らせします。〇オープン日 令和８年１月17日",
         "evidenceAsOf": "2026-08-26",
-        "notes": "Candidate official URL found, but no sufficiently current operating-status statement was confirmed.\n\nPass 4: The town facility register remains an evergreen description (including a generic December-to-March period), not dated season evidence. Municipal/council and 令和8年 searches found no qualifying current notice.",
+        "notes": "Task 133 evidence pass: Abira Town's current-season notice confirms a January 17, 2026 opening.",
         "travelClusterLabelSuggestion": "Rankoshi ski areas",
         "baseTownLabelSuggestion": "Rankoshi",
         "clusterConfidence": "low",
@@ -35903,15 +36045,8 @@
         }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "unresolved_status",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -36619,8 +36754,14 @@
     },
     {
       "recordId": "workbook:300",
-      "lifecycle": "draft",
+      "lifecycle": "verified",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "gifu-aichi",
+      "baseTownId": "gifu-gujo-gujo",
+      "publicId": "gujo-vacance-mura-ski-area",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "300",
@@ -36643,10 +36784,14 @@
       "review": {
         "reviewBatch": "central-kansai.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
+        "reviewStatus": "verified_operating",
+        "officialNameEn": "Gujo Vacance Mura Ski Area",
+        "officialNameJa": "郡上ヴァカンス村スキー場",
         "officialUrl": "http://www.gujyokogen-hotel.com/",
+        "statusEvidenceUrl": "https://www.city.gujo.gifu.jp/life/docs/262_04.pdf",
+        "statusEvidenceQuote": "オープン日（予定含） 郡上ヴァカンス村スキー場 12月20日(土)",
         "evidenceAsOf": "2026-08-26",
-        "notes": "The operator hotel page describes skiing but did not provide a dated 2025-26 or 2026-27 operating notice; the prior evidence was a generic tourism listing.\n\nPass 4: Rechecked hotel operator pages, ticket/calendar terms, and Gujo public sources; skiing description remains undated.",
+        "notes": "Gujo City's December 2025 bulletin lists the current Gujo Vacance Mura name, includes it in the municipal lift-ticket program, and gives its 2025-26 scheduled opening date.",
         "travelClusterLabelSuggestion": "Gujo ski areas",
         "baseTownLabelSuggestion": "Gujo",
         "clusterConfidence": "high",
@@ -36706,7 +36851,7 @@
         ]
       },
       "resolved": {
-        "name": "Gujo Kogen",
+        "name": "Gujo Vacance Mura Ski Area",
         "nameJa": "郡上ヴァカンス村スキー場",
         "officialUrl": "http://www.gujyokogen-hotel.com",
         "coordinates": {
@@ -36720,15 +36865,8 @@
         }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "unresolved_status",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -37379,8 +37517,14 @@
     },
     {
       "recordId": "workbook:307",
-      "lifecycle": "draft",
+      "lifecycle": "verified",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-bifuka",
+      "publicId": "bifuka-ski-area",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "307",
@@ -37403,12 +37547,14 @@
       "review": {
         "reviewBatch": "hokkaido.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
+        "reviewStatus": "verified_operating",
         "officialNameEn": "Bifuka Ski Area",
         "officialNameJa": "美深スキー場",
         "officialUrl": "https://www.town.bifuka.hokkaido.jp/cms/section/kyouiku/qlmcaj0000005my2.html",
+        "statusEvidenceUrl": "https://www.town.bifuka.hokkaido.jp/cms/section/kyouiku/qlmcaj0000005my2.html",
+        "statusEvidenceQuote": "開業期間 令和7年12月29日（月）～令和8年3月8日（日）",
         "evidenceAsOf": "2026-08-26",
-        "notes": "Candidate official URL found, but no sufficiently current operating-status statement was confirmed.\n\nPass 4: Searched Bifuka Town sport-facility register and Japanese 令和7-8/令和8年 season, lift, closure, and ticket terms. No dated primary season-status source was retained.",
+        "notes": "Task 133 evidence pass: Bifuka Town's season page gives explicit 2025-26 opening and closing dates.",
         "travelClusterLabelSuggestion": "Bifuka ski areas",
         "baseTownLabelSuggestion": "Bifuka",
         "clusterConfidence": "low",
@@ -37482,15 +37628,8 @@
         }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "unresolved_status",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -41448,8 +41587,14 @@
     },
     {
       "recordId": "workbook:343",
-      "lifecycle": "draft",
+      "lifecycle": "verified",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "chugoku-ski-areas",
+      "baseTownId": "hiroshima-shobara-shobara",
+      "publicId": "dogoyama-kogen-ski-area",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "343",
@@ -41472,10 +41617,14 @@
       "review": {
         "reviewBatch": "west-south.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
+        "reviewStatus": "verified_operating",
+        "officialNameEn": "Dogoyama Kogen Ski Area",
+        "officialNameJa": "道後山高原スキー場",
         "officialUrl": "https://www.dogoyamakogen.com/",
+        "statusEvidenceUrl": "https://www.dogoyamakogen.com/",
+        "statusEvidenceQuote": "OPEN-2025/12.27 ～CLOSED-2026/3.8…【2/22】ゲレンデ状況の悪化のため、本日２月22日をもちまして、今シーズンの営業を終了いたします。",
         "evidenceAsOf": "2026-08-26",
-        "notes": "The operator domain and tourism listings identify the ski area, but no dated recent operator/municipal operation notice was found. Intake Akitakata location is inconsistent with Shobara.\n\nPass 4: Rechecked operator company pages and Shobara municipal sources; no dated official ski operation or closure notice was found.",
+        "notes": "The operator homepage confirms the 2025-26 season and its early end on 2026-02-22. Intake Akitakata location is inconsistent with Shobara.",
         "travelClusterLabelSuggestion": "Shobara snow areas",
         "baseTownLabelSuggestion": "Shobara",
         "clusterConfidence": "medium",
@@ -41536,7 +41685,7 @@
         ]
       },
       "resolved": {
-        "name": "",
+        "name": "Dogoyama Kogen Ski Area",
         "nameJa": "道後山高原スキー場",
         "officialUrl": "https://www.dogoyamakogen.com/",
         "coordinates": {
@@ -41550,15 +41699,8 @@
         }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "unresolved_status",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -43612,8 +43754,14 @@
     },
     {
       "recordId": "workbook:363",
-      "lifecycle": "draft",
+      "lifecycle": "verified",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "chugoku-ski-areas",
+      "baseTownId": "tottori-wakasa-wakasa",
+      "publicId": "wakasa-hyonosen-ski-area",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "363",
@@ -43636,10 +43784,14 @@
       "review": {
         "reviewBatch": "west-south.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
-        "officialUrl": "http://www.hyounosen.or.jp/",
+        "reviewStatus": "verified_operating",
+        "officialNameEn": "Wakasa Hyonosen Ski Area",
+        "officialNameJa": "わかさ氷ノ山スキー場",
+        "officialUrl": "https://hyounosen-ski.jp/",
+        "statusEvidenceUrl": "https://hyounosen-ski.jp/archives/917",
+        "statusEvidenceQuote": "今シーズン通常営業は3/15終了。以降も一部リフト運行予定あり、最長22日まで",
         "evidenceAsOf": "2026-08-26",
-        "notes": "Wakasa Town maintains the ski-facility ordinance, but no dated recent operator or municipal operating notice was located.\n\nPass 4: Rechecked Wakasa Town facility material, ordinances, and operator-calendar terms; no dated operating or closure notice was found.",
+        "notes": "The operator's 2026-03-09 notice confirms 2025-26 operation and an extension of some lift operations through as late as 2026-03-22.",
         "travelClusterLabelSuggestion": "Wakasa Hyonosen",
         "baseTownLabelSuggestion": "Wakasa",
         "clusterConfidence": "high",
@@ -43700,7 +43852,7 @@
         ]
       },
       "resolved": {
-        "name": "",
+        "name": "Wakasa Hyonosen Ski Area",
         "nameJa": "わかさ氷ノ山スキー場",
         "officialUrl": "https://www.hotel-bismarck.com/?utm_source=Skiresort_de&utm_medium=cpc&utm_campaign=Skiresort_de",
         "coordinates": {
@@ -43714,15 +43866,8 @@
         }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "unresolved_status",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -44476,8 +44621,14 @@
     },
     {
       "recordId": "workbook:371",
-      "lifecycle": "draft",
+      "lifecycle": "verified",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "gunma-regional",
+      "baseTownId": "gunma-regional-maebashi",
+      "publicId": "akagiyama-daiichi-ski-area-akagiyama-family-slope",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "371",
@@ -44500,12 +44651,14 @@
       "review": {
         "reviewBatch": "kanto.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
-        "officialUrl": "https://www.oonumasansougroup.com/",
-        "statusEvidenceUrl": "https://www.oonumasansougroup.com/",
-        "statusEvidenceQuote": "The local operator page was found, but no explicit official 2025-26 or 2026-27 ski operating statement was located.",
+        "reviewStatus": "verified_operating",
+        "officialNameEn": "Akagiyama Daiichi Ski Area (Akagiyama Family Slope)",
+        "officialNameJa": "赤城山第１スキー場（赤城山ファミリーゲレンデ）",
+        "officialUrl": "https://www.maebashi-cvb.com/spot/8261",
+        "statusEvidenceUrl": "https://www.maebashi-cvb.com/spot/8261",
+        "statusEvidenceQuote": "2025-2026シーズンの営業は雪不足のため、2/19を以て終了しました。ご利用いただいた皆さま、ありがとうございました。来シーズンもお待ちしております。",
         "evidenceAsOf": "2026-08-26",
-        "notes": "Likely refers to Akagiyama Daiichi Ski Area, but third-party current-season listings are insufficient under this review standard.\n\nPass 4: Rechecked Maebashi public facility material and operator-company sources for Akagiyama; no dated authoritative ski status was found.",
+        "notes": "Maebashi Convention & Visitors Bureau's current facility page records operation in 2025-26, an early weather-related close, and intent to return next season.",
         "travelClusterLabelSuggestion": "Maebashi City / Mount Akagi snow area",
         "baseTownLabelSuggestion": "Maebashi",
         "clusterConfidence": "medium",
@@ -44565,7 +44718,7 @@
         ]
       },
       "resolved": {
-        "name": "Akagiyama",
+        "name": "Akagiyama Daiichi Ski Area (Akagiyama Family Slope)",
         "nameJa": "赤城山スキー場",
         "officialUrl": "https://www.oonumasansougroup.com/",
         "coordinates": {
@@ -44579,15 +44732,8 @@
         }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "unresolved_status",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -47152,8 +47298,14 @@
     },
     {
       "recordId": "workbook:397",
-      "lifecycle": "draft",
+      "lifecycle": "verified",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "chugoku-ski-areas",
+      "baseTownId": "hiroshima-akiota-akiota",
+      "publicId": "osorakan-snow-park",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "397",
@@ -47176,10 +47328,14 @@
       "review": {
         "reviewBatch": "west-south.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
+        "reviewStatus": "verified_operating",
+        "officialNameEn": "Osorakan Snow Park",
+        "officialNameJa": "恐羅漢スノーパーク",
         "officialUrl": "https://www.osorakan.co.jp/winter/",
+        "statusEvidenceUrl": "https://osorakan.co.jp/winter/2026/03/28/%e4%bb%8a%e3%82%b7%e3%83%bc%e3%82%ba%e3%83%b3%e3%81%ae%e5%96%b6%e6%a5%ad%e7%b5%82%e4%ba%86%e6%97%a5%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6/",
+        "statusEvidenceQuote": "今シーズンの営業は3月29日までとなります。たくさんのご来場、ありがとうございます。",
         "evidenceAsOf": "2026-08-26",
-        "notes": "The operator maintains a winter site, but no dated recent opening/operation notice was captured. Intake Kitahiroshima location is inconsistent with Akiota.\n\nPass 4: Rechecked operator winter pages, ticket/calendar terms, and Akiota public sources; no qualifying dated operation notice was found.",
+        "notes": "The operator's 2026-03-28 notice confirms operation through 2026-03-29. Intake Kitahiroshima location is inconsistent with Akiota.",
         "travelClusterLabelSuggestion": "Akiota snow resorts",
         "baseTownLabelSuggestion": "Akiota",
         "clusterConfidence": "high",
@@ -47241,7 +47397,7 @@
         ]
       },
       "resolved": {
-        "name": "",
+        "name": "Osorakan Snow Park",
         "nameJa": "恐羅漢スノーパーク",
         "officialUrl": "https://www.osorakan.co.jp/",
         "coordinates": {
@@ -47255,15 +47411,8 @@
         }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "unresolved_status",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -48119,8 +48268,14 @@
     },
     {
       "recordId": "workbook:406",
-      "lifecycle": "draft",
+      "lifecycle": "verified",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "chugoku-ski-areas",
+      "baseTownId": "okayama-kagamino-kagamino",
+      "publicId": "onbara-kogen-ski-area",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "406",
@@ -48143,10 +48298,14 @@
       "review": {
         "reviewBatch": "west-south.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
+        "reviewStatus": "verified_operating",
+        "officialNameEn": "Onbara Kogen Ski Area",
+        "officialNameJa": "恩原高原スキー場",
         "officialUrl": "https://www.ombara-kogen.com/ski/",
+        "statusEvidenceUrl": "https://www.ombara-kogen.com/ski/post1046/",
+        "statusEvidenceQuote": "今シーズンの営業は３月１日をもちまして終了いたしました。…また、来シーズン、元気にお会いできる日をスタッフ一同楽しみにしております。",
         "evidenceAsOf": "2026-08-26",
-        "notes": "A dedicated ski page exists, but no dated recent operator/municipal operation notice was found. Intake Nagi location is inconsistent with Kagamino.\n\nPass 4: Rechecked operator calendar/ticket pages and Kagamino public sources; no dated official ski operation or closure notice was found.",
+        "notes": "The operator's 2026-03-01 season-end notice confirms 2025-26 operation and anticipates the next season. Intake Nagi location is inconsistent with Kagamino.",
         "travelClusterLabelSuggestion": "Kagamino snow areas",
         "baseTownLabelSuggestion": "Kagamino",
         "clusterConfidence": "high",
@@ -48207,7 +48366,7 @@
         ]
       },
       "resolved": {
-        "name": "",
+        "name": "Onbara Kogen Ski Area",
         "nameJa": "恩原高原スキー場",
         "officialUrl": "https://www.ombara-kogen.com/ski/",
         "coordinates": {
@@ -48221,15 +48380,8 @@
         }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "unresolved_status",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -51235,6 +51387,12 @@
       "recordId": "workbook:436",
       "lifecycle": "draft",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "niigata-regional",
+      "baseTownId": "niigata-regional-shibata",
+      "publicId": "ninox-snow-park",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "436",
@@ -51257,14 +51415,14 @@
       "review": {
         "reviewBatch": "niigata-hokuriku.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
+        "reviewStatus": "verified_operating",
         "officialNameEn": "Ninox Snow Park",
         "officialNameJa": "ニノックススノーパーク",
         "officialUrl": "https://www.ninox.co.jp/",
-        "statusEvidenceUrl": "https://niigata-kankou.or.jp/ski",
-        "statusEvidenceQuote": "2025年12月28日（日曜日）オープン / 2026年3月22日（日曜日）クローズ予定",
+        "statusEvidenceUrl": "https://www.ninox.co.jp/information/2026-27%e3%82%b7%e3%83%bc%e3%82%ba%e3%83%b3%e3%80%80%e6%97%a9%e5%89%b2%e3%83%aa%e3%83%95%e3%83%88%e5%88%b8%e8%b2%a9%e5%a3%b2%e9%96%8b%e5%a7%8b%ef%bc%81/",
+        "statusEvidenceQuote": "2026-27シーズンの早割リフト券を9月1日より販売開始！ 今年の冬は、ニノックスで思いっきり雪を楽しもう！",
         "evidenceAsOf": "2026-08-26",
-        "notes": "Official prefectural listing documents 2025-26 operation and places the resort in Shibata City; the intake municipality “Ojiya” is inconsistent.\n\nPass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Downgraded after source audit: the operator’s 2026-27 early-ticket announcement is sales material, not an explicit operating notice. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon.",
+        "notes": "The operator's August 21, 2026 notice announces Ninox-specific 2026-27 lift tickets, gives the sale period and ticket products, and explicitly invites guests to enjoy Ninox this winter. The intake municipality “Ojiya” is inconsistent; the resort is in Shibata City.",
         "travelClusterLabelSuggestion": "Shibata / Tainai",
         "baseTownLabelSuggestion": "Shibata",
         "clusterConfidence": "high",
@@ -51323,14 +51481,9 @@
       "publicationReadiness": {
         "publishable": false,
         "missingReasons": [
-          "unresolved_status",
           "missing_essentials",
           "missing_coordinates",
           "missing_defensible_elevation",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
           "unverified_lifecycle"
         ]
       }
@@ -53199,6 +53352,12 @@
       "recordId": "workbook:455",
       "lifecycle": "draft",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "aomori-regional",
+      "baseTownId": "aomori-regional-hirosaki",
+      "publicId": "soma-romantopia-ski-area",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "455",
@@ -53221,9 +53380,14 @@
       "review": {
         "reviewBatch": "tohoku-north.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
+        "reviewStatus": "verified_operating",
+        "officialNameEn": "Soma Romantopia Ski Area",
+        "officialNameJa": "そうまロマントピアスキー場",
+        "officialUrl": "https://www.hyakuzawa-ski.com/soma.html",
+        "statusEvidenceUrl": "https://www.hyakuzawa-ski.com/5831.html",
+        "statusEvidenceQuote": "２０２５・２６シーズンの営業は終了いたしました; 今シーズンの営業は３月８日（日）をもって終了いたしました。",
         "evidenceAsOf": "2026-08-26",
-        "notes": "No authoritative current-season operating evidence was located; Soma is a former locality now associated with Hirosaki.\n\nPass 4: Fourth pass searched Hirosaki municipal facility/council material and operator-company notices for 相馬ロマントピアスキー場. No primary current operation, suspension, or abolition notice was located.",
+        "notes": "The current ski-area operator site explicitly records completion of the 2025-26 season on 8 March 2026. Soma is a former locality now associated with Hirosaki.",
         "travelClusterLabelSuggestion": "Hirosaki and Mount Iwaki ski areas",
         "baseTownLabelSuggestion": "Hirosaki",
         "clusterConfidence": "low",
@@ -53257,15 +53421,13 @@
         "essentials": {
           "coordinates": false,
           "defensibleElevation": false,
-          "japaneseName": false,
-          "officialUrl": false
+          "japaneseName": true,
+          "officialUrl": true
         },
         "evidenceComplete": false,
         "missingReasons": [
           "missing_coordinates",
-          "missing_defensible_elevation",
-          "missing_japanese_name",
-          "missing_official_url"
+          "missing_defensible_elevation"
         ],
         "requiredReviews": [
           "operating_status",
@@ -53273,24 +53435,17 @@
         ]
       },
       "resolved": {
-        "name": "Soma Romantopia",
-        "nameJa": null,
-        "officialUrl": null,
+        "name": "Soma Romantopia Ski Area",
+        "nameJa": "そうまロマントピアスキー場",
+        "officialUrl": "https://www.hyakuzawa-ski.com/soma.html",
         "elevation": {}
       },
       "publicationReadiness": {
         "publishable": false,
         "missingReasons": [
-          "unresolved_status",
           "missing_essentials",
           "missing_coordinates",
           "missing_defensible_elevation",
-          "missing_japanese_name",
-          "missing_official_url",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
           "unverified_lifecycle"
         ]
       }
@@ -54562,6 +54717,12 @@
       "recordId": "workbook:469",
       "lifecycle": "draft",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "hokuriku",
+      "baseTownId": "hokuriku-kurobe",
+      "publicId": "unazuki-snow-park",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "469",
@@ -54584,13 +54745,17 @@
       "review": {
         "reviewBatch": "niigata-hokuriku.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
-        "statusEvidenceQuote": "No current official operating-status statement located.",
+        "reviewStatus": "verified_operating",
+        "officialNameEn": "Unazuki Snow Park",
+        "officialNameJa": "宇奈月スノーパーク",
+        "officialUrl": "https://www.unazuki-snowpark.com/",
+        "statusEvidenceUrl": "https://www.unazuki-snowpark.com/2026/03/01/%e5%96%b6%e6%a5%ad%e7%b5%82%e4%ba%86%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b/",
+        "statusEvidenceQuote": "宇奈月スノーパークは、2026年3月1日をもちまして今シーズンの営業を終了いたしました。来シーズンも、より安全で快適にお楽しみいただけるスキー場を目指してまいります。",
         "evidenceAsOf": "2026-08-26",
-        "notes": "No current/recent official season calendar or explicit official closure statement was located. Historical and third-party directory claims were not accepted as operating-status proof.\n\nPass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Searched 宇奈月温泉スキー場 + 営業終了/閉鎖 and Kurobe municipal/tourism sources; no official closure or current ski calendar located. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon.",
+        "notes": "The operator's dated notice states that Unazuki Snow Park completed its season on March 1, 2026 and expresses its intention to welcome guests next season.",
         "travelClusterLabelSuggestion": "Kurobe / Toyama",
         "baseTownLabelSuggestion": "Kurobe",
-        "clusterConfidence": "low",
+        "clusterConfidence": "high",
         "successor": {}
       },
       "evidence": [
@@ -54621,15 +54786,13 @@
         "essentials": {
           "coordinates": false,
           "defensibleElevation": false,
-          "japaneseName": false,
-          "officialUrl": false
+          "japaneseName": true,
+          "officialUrl": true
         },
         "evidenceComplete": false,
         "missingReasons": [
           "missing_coordinates",
-          "missing_defensible_elevation",
-          "missing_japanese_name",
-          "missing_official_url"
+          "missing_defensible_elevation"
         ],
         "requiredReviews": [
           "operating_status",
@@ -54637,23 +54800,17 @@
         ]
       },
       "resolved": {
-        "name": "Unazuki Onsen",
-        "officialUrl": "",
+        "name": "Unazuki Snow Park",
+        "nameJa": "宇奈月スノーパーク",
+        "officialUrl": "https://www.unazuki-snowpark.com/",
         "elevation": {}
       },
       "publicationReadiness": {
         "publishable": false,
         "missingReasons": [
-          "unresolved_status",
           "missing_essentials",
           "missing_coordinates",
           "missing_defensible_elevation",
-          "missing_japanese_name",
-          "missing_official_url",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
           "unverified_lifecycle"
         ]
       }
@@ -57174,6 +57331,12 @@
       "recordId": "workbook:496",
       "lifecycle": "draft",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "niigata-regional",
+      "baseTownId": "niigata-regional-nagaoka",
+      "publicId": "tochio-family-ski-resort",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "496",
@@ -57196,13 +57359,17 @@
       "review": {
         "reviewBatch": "niigata-hokuriku.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
-        "statusEvidenceQuote": "No current official operating-status statement located.",
+        "reviewStatus": "verified_operating",
+        "officialNameEn": "Tochio Family Ski Resort",
+        "officialNameJa": "とちおファミリースキー場",
+        "officialUrl": "https://www.city.nagaoka.niigata.jp/shisetsu/sports/t-hiroba.html",
+        "statusEvidenceUrl": "https://www.city.nagaoka.niigata.jp/shisetsu/sports/t-hiroba.html",
+        "statusEvidenceQuote": "ウィンターシーズン（12月～3月）：日曜日、土曜日、祝日 9時～17時（※平日は学校授業のみ）。ナイター営業、土曜日17時から21時まで。",
         "evidenceAsOf": "2026-08-26",
-        "notes": "No current/recent official season calendar or explicit official closure statement was located. Historical and third-party directory claims were not accepted as operating-status proof.\n\nPass 4: searched municipal facility registers, council/budget notices, operator-company pages, ticket/lift calendars and Japanese terms 廃止/閉鎖/休止/営業終了/統合. Pass 3: checked the operator/municipal source where available and searched Japanese facility name with 2025-26, 営業, 休業, 廃止, 閉鎖. Searched とちおファミリースキー場 + 2025-26/営業 and Nagaoka municipal/operator sources; results were not authoritative enough to override the prior unclear review. No additional dated authoritative notice established operation, closure, merger, or rename; generic directories were not relied upon.",
+        "notes": "Nagaoka City's official public-facility page identifies the ski area and publishes its winter daytime and night operating schedule. The operator also publishes a 2026 ropeway safety report for the resort's first pair lift.",
         "travelClusterLabelSuggestion": "Nagaoka / Niigata",
         "baseTownLabelSuggestion": "Nagaoka",
-        "clusterConfidence": "low",
+        "clusterConfidence": "high",
         "successor": {}
       },
       "evidence": [
@@ -57241,12 +57408,11 @@
           "coordinates": true,
           "defensibleElevation": false,
           "japaneseName": true,
-          "officialUrl": false
+          "officialUrl": true
         },
         "evidenceComplete": false,
         "missingReasons": [
-          "missing_defensible_elevation",
-          "missing_official_url"
+          "missing_defensible_elevation"
         ],
         "requiredReviews": [
           "operating_status",
@@ -57254,9 +57420,9 @@
         ]
       },
       "resolved": {
-        "name": "Tochio Family Resort",
+        "name": "Tochio Family Ski Resort",
         "nameJa": "栃尾ファミリースキー場",
-        "officialUrl": "",
+        "officialUrl": "https://www.city.nagaoka.niigata.jp/shisetsu/sports/t-hiroba.html",
         "coordinates": {
           "lat": 37.4374279,
           "lng": 139.039527
@@ -57266,14 +57432,8 @@
       "publicationReadiness": {
         "publishable": false,
         "missingReasons": [
-          "unresolved_status",
           "missing_essentials",
           "missing_defensible_elevation",
-          "missing_official_url",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
           "unverified_lifecycle"
         ]
       }
@@ -62467,6 +62627,12 @@
       "recordId": "workbook:551",
       "lifecycle": "draft",
       "operatingStatus": "operating",
+      "reviewedOperatingStatus": "operating",
+      "travelRegionId": "niseko",
+      "baseTownId": "niseko-rankoshi",
+      "publicId": "otoifuji-ski-area",
+      "aliases": [],
+      "routeMode": "new_page",
       "source": {
         "sourceId": "japan-ski-resorts-558",
         "rowIdentity": "551",
@@ -62489,9 +62655,14 @@
       "review": {
         "reviewBatch": "hokkaido.json",
         "reviewedAt": "2026-08-26",
-        "reviewStatus": "unclear",
+        "reviewStatus": "verified_operating",
+        "officialNameEn": "Otoifuji Ski Area",
+        "officialNameJa": "音威富士スキー場",
+        "officialUrl": "https://www.vill.otoineppu.hokkaido.jp/kakuka/sangyoushinkou/syoukougyou/skizyou.html",
+        "statusEvidenceUrl": "https://www.vill.otoineppu.hokkaido.jp/kakuka/sangyoushinkou/syoukougyou/skizyou.html",
+        "statusEvidenceQuote": "2025-2026年シーズンの営業は、12月19日（金）から3月下旬までです。",
         "evidenceAsOf": "2026-08-26",
-        "notes": "No authoritative current operating-status source was confirmed; third-party evidence was not accepted.\n\nPass 4: Searched Rankoshi municipal facility/council sources for 乙藤スキー場 operation, closure, merger, and dry-slope evidence. No authoritative current-status notice was located.",
+        "notes": "Task 133 evidence pass: The Otoineppu Village ski-area page resolves the workbook's Otoifuji identity as 音威富士スキー場 and confirms its 2025-26 season.",
         "travelClusterLabelSuggestion": "Rankoshi ski areas",
         "baseTownLabelSuggestion": "Rankoshi",
         "clusterConfidence": "low",
@@ -62525,15 +62696,13 @@
         "essentials": {
           "coordinates": false,
           "defensibleElevation": false,
-          "japaneseName": false,
-          "officialUrl": false
+          "japaneseName": true,
+          "officialUrl": true
         },
         "evidenceComplete": false,
         "missingReasons": [
           "missing_coordinates",
-          "missing_defensible_elevation",
-          "missing_japanese_name",
-          "missing_official_url"
+          "missing_defensible_elevation"
         ],
         "requiredReviews": [
           "operating_status",
@@ -62541,24 +62710,17 @@
         ]
       },
       "resolved": {
-        "name": "Otoifuji",
-        "nameJa": null,
-        "officialUrl": null,
+        "name": "Otoifuji Ski Area",
+        "nameJa": "音威富士スキー場",
+        "officialUrl": "https://www.vill.otoineppu.hokkaido.jp/kakuka/sangyoushinkou/syoukougyou/skizyou.html",
         "elevation": {}
       },
       "publicationReadiness": {
         "publishable": false,
         "missingReasons": [
-          "unresolved_status",
           "missing_essentials",
           "missing_coordinates",
           "missing_defensible_elevation",
-          "missing_japanese_name",
-          "missing_official_url",
-          "missing_travelRegionId",
-          "missing_baseTownId",
-          "missing_publicId",
-          "not_operating",
           "unverified_lifecycle"
         ]
       }
@@ -67377,6 +67539,62 @@
       ]
     },
     {
+      "recordId": "workbook:45",
+      "publicId": "hakusan-ichirino-onsen-ski-resort",
+      "aliases": [],
+      "travelRegionId": "hokuriku",
+      "baseTownId": "hokuriku-ichirino-onsen",
+      "route": "/hokuriku/mountain/hakusan-ichirino-onsen-ski-resort",
+      "name": "Hakusan Ichirino Onsen Ski Resort",
+      "nameJa": "白山一里野温泉スキー場",
+      "coordinates": {
+        "lat": 36.268277,
+        "lng": 136.712547
+      },
+      "elevation": {
+        "baseM": 550,
+        "topM": 1050,
+        "verticalM": 500
+      },
+      "officialUrl": "https://sam-hakusan.com/ichirino/",
+      "evidence": [
+        {
+          "evidenceId": "intake:45",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:hakusan-ichirino-onsen",
+          "sourceType": "ski_directory",
+          "sourceRef": "hakusan-ichirino-onsen",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/hakusan-ichirino-onsen/",
+          "officialUrls": [
+            "https://sam-hakusan.com/ichirino/",
+            "https://www.hotel-bismarck.com/?utm_source=Skiresort_de&utm_medium=cpc&utm_campaign=Skiresort_de",
+            "http://www.sam-hakusan.com/",
+            "https://www.sam-hakusan.com/ichirino/"
+          ],
+          "coordinates": {
+            "lat": 36.268277,
+            "lng": 136.712547
+          },
+          "elevation": {
+            "baseM": 550,
+            "topM": 1050,
+            "verticalM": 500
+          },
+          "names": {
+            "en": "Hakusan Ichirino Onsen",
+            "ja": "白山一里野温泉スキー場"
+          },
+          "externalIds": {
+            "osm": "way/1202438976",
+            "wikidata": "Q11579546"
+          }
+        }
+      ]
+    },
+    {
       "recordId": "workbook:46",
       "publicId": "geto-kogen-ski-resort",
       "aliases": [],
@@ -67534,6 +67752,110 @@
           "externalIds": {
             "osm": "way/322328454",
             "wikidata": "Q11603148"
+          }
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:53",
+      "publicId": "kaida-kogen-mia-ski-resort",
+      "aliases": [],
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-kiso-kiso",
+      "route": "/nagano-regional/mountain/kaida-kogen-mia-ski-resort",
+      "name": "Kaida Kogen MIA Ski Resort",
+      "nameJa": "開田高原マイアスキー場",
+      "coordinates": {
+        "lat": 35.930714,
+        "lng": 137.52952
+      },
+      "elevation": {
+        "baseM": 1557,
+        "topM": 2120,
+        "verticalM": 563
+      },
+      "officialUrl": "https://miaski-resort.com/",
+      "evidence": [
+        {
+          "evidenceId": "intake:53",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:kaida-kogen-mia",
+          "sourceType": "ski_directory",
+          "sourceRef": "kaida-kogen-mia",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/kaida-kogen-mia/",
+          "officialUrls": [
+            "https://miaski-resort.com/"
+          ],
+          "coordinates": {
+            "lat": 35.930714,
+            "lng": 137.52952
+          },
+          "elevation": {
+            "baseM": 1557,
+            "topM": 2120,
+            "verticalM": 563
+          },
+          "names": {
+            "en": "Kaida Kogen Mia",
+            "ja": "開田高原マイアスキー場"
+          },
+          "externalIds": {
+            "wikidata": "Q11655281"
+          }
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:56",
+      "publicId": "iizuna-resort-ski-area",
+      "aliases": [],
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-nagano-nagano",
+      "route": "/nagano-regional/mountain/iizuna-resort-ski-area",
+      "name": "Iizuna Resort Ski Area",
+      "nameJa": "いいづなリゾートスキー場",
+      "coordinates": {
+        "lat": 36.738802,
+        "lng": 138.171291
+      },
+      "elevation": {
+        "baseM": 900,
+        "topM": 1500,
+        "verticalM": 600
+      },
+      "officialUrl": "https://iizunaresort.com/",
+      "evidence": [
+        {
+          "evidenceId": "intake:56",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:iizuna-resort",
+          "sourceType": "ski_directory",
+          "sourceRef": "iizuna-resort",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/iizuna-resort/",
+          "officialUrls": [
+            "https://iizunaresort.com/"
+          ],
+          "coordinates": {
+            "lat": 36.738802,
+            "lng": 138.171291
+          },
+          "elevation": {
+            "baseM": 900,
+            "topM": 1500,
+            "verticalM": 600
+          },
+          "names": {
+            "en": "Iizuna Resort",
+            "ja": "いいづなリゾートスキー場"
+          },
+          "externalIds": {
+            "wikidata": "Q11258950"
           }
         }
       ]
@@ -68134,6 +68456,58 @@
       ]
     },
     {
+      "recordId": "workbook:70",
+      "publicId": "yunomaru-ski-resort",
+      "aliases": [],
+      "travelRegionId": "yamanouchi",
+      "baseTownId": "yudanaka",
+      "route": "/yamanouchi/mountain/yunomaru-ski-resort",
+      "name": "Yunomaru Ski Resort",
+      "nameJa": "湯の丸スキー場",
+      "coordinates": {
+        "lat": 36.42622,
+        "lng": 138.42305
+      },
+      "elevation": {
+        "baseM": 1730,
+        "topM": 1965,
+        "verticalM": 235
+      },
+      "officialUrl": "https://yunomaru.co.jp/",
+      "evidence": [
+        {
+          "evidenceId": "intake:70",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:yunomaru",
+          "sourceType": "ski_directory",
+          "sourceRef": "yunomaru",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/yunomaru/",
+          "officialUrls": [
+            "https://yunomaru.co.jp/"
+          ],
+          "coordinates": {
+            "lat": 36.42622,
+            "lng": 138.42305
+          },
+          "elevation": {
+            "baseM": 1730,
+            "topM": 1965,
+            "verticalM": 235
+          },
+          "names": {
+            "en": "Yunomaru",
+            "ja": "湯の丸スキー場"
+          },
+          "externalIds": {
+            "wikidata": "Q11563406"
+          }
+        }
+      ]
+    },
+    {
       "recordId": "workbook:72",
       "publicId": "ogna-hotaka-ski-area",
       "aliases": [],
@@ -68669,6 +69043,63 @@
       ]
     },
     {
+      "recordId": "workbook:93",
+      "publicId": "kurumayama-kogen-skypark-ski-resort",
+      "aliases": [],
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-tateshina",
+      "route": "/nagano-regional/mountain/kurumayama-kogen-skypark-ski-resort",
+      "name": "Kurumayama Kogen SKYPARK Ski Resort",
+      "nameJa": "車山高原SKYPARKスキー場",
+      "coordinates": {
+        "lat": 36.101751,
+        "lng": 138.213372
+      },
+      "elevation": {
+        "baseM": 1570,
+        "topM": 1907,
+        "verticalM": 337
+      },
+      "officialUrl": "https://winter.kurumayama-skypark.com/",
+      "evidence": [
+        {
+          "evidenceId": "intake:93",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:kurumayama-kogen",
+          "sourceType": "ski_directory",
+          "sourceRef": "kurumayama-kogen",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/kurumayama-kogen/",
+          "officialUrls": [
+            "https://winter.kurumayama-skypark.com/",
+            "https://kurumayama.com/",
+            "https://www.kurumayama.com/korean/winter.html",
+            "https://www.kurumayama.com/english/winter.html",
+            "https://www.kurumayama.com/chinese/winter.html"
+          ],
+          "coordinates": {
+            "lat": 36.101751,
+            "lng": 138.213372
+          },
+          "elevation": {
+            "baseM": 1570,
+            "topM": 1907,
+            "verticalM": 337
+          },
+          "names": {
+            "en": "Kurumayama Kogen",
+            "ja": "車山高原SKYPARKスキー場"
+          },
+          "externalIds": {
+            "osm": "way/664620348",
+            "wikidata": "Q11637301"
+          }
+        }
+      ]
+    },
+    {
       "recordId": "workbook:94",
       "publicId": "ojiro-ski-area",
       "aliases": [],
@@ -68883,6 +69314,60 @@
       ]
     },
     {
+      "recordId": "workbook:101",
+      "publicId": "shirakaba-2in1-ski-resort",
+      "aliases": [],
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-tateshina",
+      "route": "/nagano-regional/mountain/shirakaba-2in1-ski-resort",
+      "name": "Shirakaba 2in1 Ski Resort",
+      "nameJa": "白樺2in1スキー場",
+      "coordinates": {
+        "lat": 36.096131,
+        "lng": 138.262125
+      },
+      "elevation": {
+        "baseM": 1564,
+        "topM": 1822,
+        "verticalM": 258
+      },
+      "officialUrl": "https://whitebirch.co.jp/shirakaba2in1/",
+      "evidence": [
+        {
+          "evidenceId": "intake:101",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:shirakaba-2in1",
+          "sourceType": "ski_directory",
+          "sourceRef": "shirakaba-2in1",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/shirakaba-2in1/",
+          "officialUrls": [
+            "https://whitebirch.co.jp/shirakaba2in1/",
+            "2in1.jp"
+          ],
+          "coordinates": {
+            "lat": 36.096131,
+            "lng": 138.262125
+          },
+          "elevation": {
+            "baseM": 1564,
+            "topM": 1822,
+            "verticalM": 258
+          },
+          "names": {
+            "en": "Shirakaba 2in1",
+            "ja": "白樺2in1スキー場"
+          },
+          "externalIds": {
+            "osm": "way/664637989",
+            "wikidata": "Q11579880"
+          }
+        }
+      ]
+    },
+    {
       "recordId": "workbook:103",
       "publicId": "tengendai-kogen",
       "aliases": [],
@@ -69039,6 +69524,60 @@
           "externalIds": {
             "osm": "way/1178492476",
             "wikidata": "Q17230084"
+          }
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:108",
+      "publicId": "blanche-takayama-ski-resort",
+      "aliases": [],
+      "travelRegionId": "iiyama",
+      "baseTownId": "iiyama",
+      "route": "/iiyama/mountain/blanche-takayama-ski-resort",
+      "name": "Blanche Takayama Ski Resort",
+      "nameJa": "ブランシュたかやまスキーリゾート",
+      "coordinates": {
+        "lat": 36.147867,
+        "lng": 138.205448
+      },
+      "elevation": {
+        "baseM": 1350,
+        "topM": 1807,
+        "verticalM": 457
+      },
+      "officialUrl": "https://blanche-ski.com/winter/",
+      "evidence": [
+        {
+          "evidenceId": "intake:108",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:blanche-takayama",
+          "sourceType": "ski_directory",
+          "sourceRef": "blanche-takayama",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/blanche-takayama/",
+          "officialUrls": [
+            "https://blanche-ski.com/winter/",
+            "https://www.blanche-ski.com/"
+          ],
+          "coordinates": {
+            "lat": 36.147867,
+            "lng": 138.205448
+          },
+          "elevation": {
+            "baseM": 1350,
+            "topM": 1807,
+            "verticalM": 457
+          },
+          "names": {
+            "en": "Blanche Takayama",
+            "ja": "ブランシュたかやまスキーリゾート"
+          },
+          "externalIds": {
+            "osm": "way/664629851",
+            "wikidata": "Q18339186"
           }
         }
       ]
@@ -69519,6 +70058,60 @@
       ]
     },
     {
+      "recordId": "workbook:121",
+      "publicId": "shirakabako-royal-hill-ski-resort",
+      "aliases": [],
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-tateshina",
+      "route": "/nagano-regional/mountain/shirakabako-royal-hill-ski-resort",
+      "name": "Shirakabako Royal Hill Ski Resort",
+      "nameJa": "白樺湖ロイヤルヒルスキー場",
+      "coordinates": {
+        "lat": 36.101809,
+        "lng": 138.234652
+      },
+      "elevation": {
+        "baseM": 1445,
+        "topM": 1708,
+        "verticalM": 263
+      },
+      "officialUrl": "https://royalhill.co.jp/",
+      "evidence": [
+        {
+          "evidenceId": "intake:121",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:shirakabako-royal-hill",
+          "sourceType": "ski_directory",
+          "sourceRef": "shirakabako-royal-hill",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/shirakabako-royal-hill/",
+          "officialUrls": [
+            "https://royalhill.co.jp/",
+            "https://royalhill.co.jp/english/"
+          ],
+          "coordinates": {
+            "lat": 36.101809,
+            "lng": 138.234652
+          },
+          "elevation": {
+            "baseM": 1445,
+            "topM": 1708,
+            "verticalM": 263
+          },
+          "names": {
+            "en": "Shirakabako Royal Hill",
+            "ja": "白樺湖ロイヤルヒルスキー場"
+          },
+          "externalIds": {
+            "osm": "way/664637993",
+            "wikidata": "Q7374280"
+          }
+        }
+      ]
+    },
+    {
       "recordId": "workbook:122",
       "publicId": "spring-valley-sendai-izumi-ski-resort",
       "aliases": [],
@@ -69620,6 +70213,61 @@
           "externalIds": {
             "osm": "way/1458424098",
             "wikidata": "Q11291582"
+          }
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:128",
+      "publicId": "fujimi-panorama-resort",
+      "aliases": [],
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-fujimi",
+      "route": "/nagano-regional/mountain/fujimi-panorama-resort",
+      "name": "Fujimi Panorama Resort",
+      "nameJa": "富士見パノラマリゾート",
+      "coordinates": {
+        "lat": 35.913096,
+        "lng": 138.204824
+      },
+      "elevation": {
+        "baseM": 1050,
+        "topM": 1780,
+        "verticalM": 730
+      },
+      "officialUrl": "http://www.fujimipanorama.com",
+      "evidence": [
+        {
+          "evidenceId": "intake:128",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:fujimi-panorama",
+          "sourceType": "ski_directory",
+          "sourceRef": "fujimi-panorama",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/fujimi-panorama/",
+          "officialUrls": [
+            "http://www.fujimipanorama.com",
+            "https://www.fujimipanorama.com/",
+            "https://www.fujimipanorama.com/snow/"
+          ],
+          "coordinates": {
+            "lat": 35.913096,
+            "lng": 138.204824
+          },
+          "elevation": {
+            "baseM": 1050,
+            "topM": 1780,
+            "verticalM": 730
+          },
+          "names": {
+            "en": "Fujimi Panorama",
+            "ja": "富士見パノラマリゾート"
+          },
+          "externalIds": {
+            "osm": "way/953872291",
+            "wikidata": "Q11456151"
           }
         }
       ]
@@ -71273,6 +71921,59 @@
       ]
     },
     {
+      "recordId": "workbook:173",
+      "publicId": "geihoku-kogen-osa-ski-area",
+      "aliases": [],
+      "travelRegionId": "chugoku-ski-areas",
+      "baseTownId": "hiroshima-kitahiroshima-kitahiroshima",
+      "route": "/chugoku-ski-areas/mountain/geihoku-kogen-osa-ski-area",
+      "name": "Geihoku Kogen Osa Ski Area",
+      "nameJa": "芸北高原大佐スキー場",
+      "coordinates": {
+        "lat": 34.747451294971945,
+        "lng": 132.21989889873905
+      },
+      "elevation": {
+        "baseM": 700,
+        "topM": 950,
+        "verticalM": 250
+      },
+      "officialUrl": "https://osaski.co.jp/",
+      "evidence": [
+        {
+          "evidenceId": "intake:173",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:osa",
+          "sourceType": "ski_directory",
+          "sourceRef": "osa",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/osa/",
+          "officialUrls": [
+            "https://osaski.co.jp/"
+          ],
+          "coordinates": {
+            "lat": 34.747451294971945,
+            "lng": 132.21989889873905
+          },
+          "elevation": {
+            "baseM": 700,
+            "topM": 950,
+            "verticalM": 250
+          },
+          "names": {
+            "en": "Osa",
+            "ja": "芸北高原大佐スキー場"
+          },
+          "externalIds": {
+            "osm": "way/1188627524",
+            "wikidata": "Q11615894"
+          }
+        }
+      ]
+    },
+    {
       "recordId": "workbook:175",
       "publicId": "budoh-snow-resort",
       "aliases": [],
@@ -71374,6 +72075,60 @@
           },
           "externalIds": {
             "wikidata": "Q11333345"
+          }
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:178",
+      "publicId": "mikawa-onsen-ski-resort",
+      "aliases": [],
+      "travelRegionId": "niigata-regional",
+      "baseTownId": "niigata-regional-mikawa-onsen",
+      "route": "/niigata-regional/mountain/mikawa-onsen-ski-resort",
+      "name": "Mikawa Onsen Ski Resort",
+      "nameJa": "三川温泉スキー場",
+      "coordinates": {
+        "lat": 37.720611,
+        "lng": 139.391522
+      },
+      "elevation": {
+        "baseM": 121,
+        "topM": 416,
+        "verticalM": 295
+      },
+      "officialUrl": "https://www.town.aga.niigata.jp/kanko_rekishi/mikawa_onsenski/index.html",
+      "evidence": [
+        {
+          "evidenceId": "intake:178",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:mikawa-onsen",
+          "sourceType": "ski_directory",
+          "sourceRef": "mikawa-onsen",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/mikawa-onsen/",
+          "officialUrls": [
+            "https://www.town.aga.niigata.jp/kanko_rekishi/mikawa_onsenski/index.html",
+            "https://www.town.aga.niigata.jp/kanko_rekishi/mikawa_onsenski/"
+          ],
+          "coordinates": {
+            "lat": 37.720611,
+            "lng": 139.391522
+          },
+          "elevation": {
+            "baseM": 121,
+            "topM": 416,
+            "verticalM": 295
+          },
+          "names": {
+            "en": "Mikawa Onsen",
+            "ja": "三川温泉スキー場"
+          },
+          "externalIds": {
+            "osm": "way/1208478420",
+            "wikidata": "Q63178877"
           }
         }
       ]
@@ -71589,6 +72344,60 @@
           },
           "externalIds": {
             "wikidata": "Q11270746"
+          }
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:187",
+      "publicId": "saku-ski-garden-parada",
+      "aliases": [],
+      "travelRegionId": "nagano-regional",
+      "baseTownId": "nagano-regional-sakuho",
+      "route": "/nagano-regional/mountain/saku-ski-garden-parada",
+      "name": "Saku Ski Garden Parada",
+      "nameJa": "佐久スキーガーデンパラダ",
+      "coordinates": {
+        "lat": 36.293609,
+        "lng": 138.510667
+      },
+      "elevation": {
+        "baseM": 780,
+        "topM": 1050,
+        "verticalM": 270
+      },
+      "officialUrl": "https://www.saku-parada.jp/",
+      "evidence": [
+        {
+          "evidenceId": "intake:187",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:saku-ski-garden-parada",
+          "sourceType": "ski_directory",
+          "sourceRef": "saku-ski-garden-parada",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/saku-ski-garden-parada/",
+          "officialUrls": [
+            "https://www.saku-parada.jp/",
+            "https://www.hotel-bismarck.com/?utm_source=Skiresort_de&utm_medium=cpc&utm_campaign=Skiresort_de"
+          ],
+          "coordinates": {
+            "lat": 36.293609,
+            "lng": 138.510667
+          },
+          "elevation": {
+            "baseM": 780,
+            "topM": 1050,
+            "verticalM": 270
+          },
+          "names": {
+            "en": "Saku Ski Garden Parada",
+            "ja": "佐久スキーガーデンパラダ"
+          },
+          "externalIds": {
+            "osm": "way/1202441820",
+            "wikidata": "Q11382598"
           }
         }
       ]
@@ -73031,6 +73840,52 @@
       ]
     },
     {
+      "recordId": "workbook:225",
+      "publicId": "takeshi-banshogahara-ski-area",
+      "aliases": [],
+      "travelRegionId": "iiyama",
+      "baseTownId": "iiyama",
+      "route": "/iiyama/mountain/takeshi-banshogahara-ski-area",
+      "name": "Takeshi Banshogahara Ski Area",
+      "nameJa": "武石番所ヶ原スキー場",
+      "coordinates": {
+        "lat": 36.26021842437872,
+        "lng": 138.1115520542307
+      },
+      "elevation": {
+        "baseM": 1200,
+        "topM": 1400,
+        "verticalM": 200
+      },
+      "officialUrl": "https://www.city.ueda.nagano.jp/soshiki/tsangyo/37015.html",
+      "evidence": [
+        {
+          "evidenceId": "intake:225",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:banshogahara",
+          "sourceType": "ski_directory",
+          "sourceRef": "banshogahara",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/banshogahara/",
+          "coordinates": {
+            "lat": 36.26021842437872,
+            "lng": 138.1115520542307
+          },
+          "elevation": {
+            "baseM": 1200,
+            "topM": 1400,
+            "verticalM": 200
+          },
+          "names": {
+            "en": "Banshogahara"
+          },
+          "externalIds": {}
+        }
+      ]
+    },
+    {
       "recordId": "workbook:226",
       "publicId": "karuizawa-snow-park",
       "aliases": [],
@@ -73080,6 +73935,58 @@
           "externalIds": {
             "osm": "way/914531708",
             "wikidata": "Q17990251"
+          }
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:229",
+      "publicId": "shintokuyama-ski-area",
+      "aliases": [],
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-shintoku",
+      "route": "/hokkaido-regional/mountain/shintokuyama-ski-area",
+      "name": "Shintokuyama Ski Area",
+      "nameJa": "新得山スキー場",
+      "coordinates": {
+        "lat": 43.092156,
+        "lng": 142.831313
+      },
+      "elevation": {
+        "baseM": 190,
+        "topM": 465,
+        "verticalM": 275
+      },
+      "officialUrl": "https://www.shintoku-town.jp/bunka-sports/sports/sports_shisetsu/shintokuyama/",
+      "evidence": [
+        {
+          "evidenceId": "intake:229",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:shintokuyama",
+          "sourceType": "ski_directory",
+          "sourceRef": "shintokuyama",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/shintokuyama/",
+          "officialUrls": [
+            "https://www.shintoku-town.jp/bunka-sports/sports/sports_shisetsu/shintokuyama/"
+          ],
+          "coordinates": {
+            "lat": 43.092156,
+            "lng": 142.831313
+          },
+          "elevation": {
+            "baseM": 190,
+            "topM": 465,
+            "verticalM": 275
+          },
+          "names": {
+            "en": "Shintokuyama",
+            "ja": "新得山スキー場"
+          },
+          "externalIds": {
+            "osm": "way/934296801"
           }
         }
       ]
@@ -73239,6 +74146,55 @@
           },
           "externalIds": {
             "wikidata": "Q11316000"
+          }
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:236",
+      "publicId": "nakayamatoge-ski-area",
+      "aliases": [],
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-nakagawa",
+      "route": "/hokkaido-regional/mountain/nakayamatoge-ski-area",
+      "name": "Nakayamatoge Ski Area",
+      "nameJa": "中山峠スキー場",
+      "coordinates": {
+        "lat": 42.850194,
+        "lng": 141.095472
+      },
+      "elevation": {
+        "baseM": 811,
+        "topM": 941,
+        "verticalM": 130
+      },
+      "officialUrl": "https://nakayama-ski.com/",
+      "evidence": [
+        {
+          "evidenceId": "intake:236",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:nakayamatoge-kogen",
+          "sourceType": "ski_directory",
+          "sourceRef": "nakayamatoge-kogen",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/nakayamatoge-kogen/",
+          "coordinates": {
+            "lat": 42.850194,
+            "lng": 141.095472
+          },
+          "elevation": {
+            "baseM": 811,
+            "topM": 941,
+            "verticalM": 130
+          },
+          "names": {
+            "en": "Nakayamatoge Kogen",
+            "ja": "中山峠スキー場"
+          },
+          "externalIds": {
+            "wikidata": "Q11364149"
           }
         }
       ]
@@ -74698,6 +75654,111 @@
       ]
     },
     {
+      "recordId": "workbook:277",
+      "publicId": "hiruzen-bear-valley-ski-area",
+      "aliases": [],
+      "travelRegionId": "chugoku-ski-areas",
+      "baseTownId": "okayama-maniwa-maniwa",
+      "route": "/chugoku-ski-areas/mountain/hiruzen-bear-valley-ski-area",
+      "name": "Hiruzen Bear Valley Ski Area",
+      "nameJa": "ひるぜんベアバレースキー場",
+      "coordinates": {
+        "lat": 35.261259,
+        "lng": 133.597044
+      },
+      "elevation": {
+        "baseM": 592,
+        "topM": 724,
+        "verticalM": 132
+      },
+      "officialUrl": "https://bear-ski.amebaownd.com/",
+      "evidence": [
+        {
+          "evidenceId": "intake:277",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:hiruzen-bear-valley",
+          "sourceType": "ski_directory",
+          "sourceRef": "hiruzen-bear-valley",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/hiruzen-bear-valley/",
+          "officialUrls": [
+            "https://bear-ski.amebaownd.com/"
+          ],
+          "coordinates": {
+            "lat": 35.261259,
+            "lng": 133.597044
+          },
+          "elevation": {
+            "baseM": 592,
+            "topM": 724,
+            "verticalM": 132
+          },
+          "names": {
+            "en": "Hiruzen Bear Valley",
+            "ja": "ひるぜんベアバレースキー場"
+          },
+          "externalIds": {
+            "osm": "way/1345106617",
+            "wikidata": "Q11276694"
+          }
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:280",
+      "publicId": "takinoue-sakuragaoka-ski-area",
+      "aliases": [],
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-takinoue",
+      "route": "/hokkaido-regional/mountain/takinoue-sakuragaoka-ski-area",
+      "name": "Takinoue Sakuragaoka Ski Area",
+      "nameJa": "桜ヶ丘スキー場",
+      "coordinates": {
+        "lat": 44.19063402071252,
+        "lng": 143.10704053583268
+      },
+      "elevation": {
+        "baseM": 120,
+        "topM": 250,
+        "verticalM": 130
+      },
+      "officialUrl": "https://town.takinoue.hokkaido.jp/kyoikuiinkai/social/shisetsu/sakuragaokaski.html",
+      "evidence": [
+        {
+          "evidenceId": "intake:280",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:takinouecho-sakuragaoka",
+          "sourceType": "ski_directory",
+          "sourceRef": "takinouecho-sakuragaoka",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/takinouecho-sakuragaoka/",
+          "officialUrls": [
+            "https://town.takinoue.hokkaido.jp/kyoikuiinkai/social/shisetsu/sakuragaokaski.html"
+          ],
+          "coordinates": {
+            "lat": 44.19063402071252,
+            "lng": 143.10704053583268
+          },
+          "elevation": {
+            "baseM": 120,
+            "topM": 250,
+            "verticalM": 130
+          },
+          "names": {
+            "en": "Takinouecho Sakuragaoka",
+            "ja": "桜ヶ丘スキー場"
+          },
+          "externalIds": {
+            "osm": "way/1408480314"
+          }
+        }
+      ]
+    },
+    {
       "recordId": "workbook:284",
       "publicId": "sannokura-ski-resort",
       "aliases": [],
@@ -74850,6 +75911,58 @@
           },
           "externalIds": {
             "osm": "way/1392906868"
+          }
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:293",
+      "publicId": "anpeizan-ski-area",
+      "aliases": [],
+      "travelRegionId": "niseko",
+      "baseTownId": "niseko-rankoshi",
+      "route": "/niseko/mountain/anpeizan-ski-area",
+      "name": "Anpeizan Ski Area",
+      "nameJa": "安平山 スキー場",
+      "coordinates": {
+        "lat": 42.863910092603085,
+        "lng": 141.7973787303814
+      },
+      "elevation": {
+        "baseM": 73,
+        "topM": 160,
+        "verticalM": 87
+      },
+      "officialUrl": "https://www.town.abira.lg.jp/midokoro/shisetsu/sport/149",
+      "evidence": [
+        {
+          "evidenceId": "intake:293",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:choei-anpeizan",
+          "sourceType": "ski_directory",
+          "sourceRef": "choei-anpeizan",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/choei-anpeizan/",
+          "officialUrls": [
+            "https://www.town.abira.lg.jp/midokoro/shisetsu/sport/149"
+          ],
+          "coordinates": {
+            "lat": 42.863910092603085,
+            "lng": 141.7973787303814
+          },
+          "elevation": {
+            "baseM": 73,
+            "topM": 160,
+            "verticalM": 87
+          },
+          "names": {
+            "en": "Choei Anpeizan",
+            "ja": "安平山 スキー場"
+          },
+          "externalIds": {
+            "osm": "way/1056648118"
           }
         }
       ]
@@ -75013,6 +76126,59 @@
       ]
     },
     {
+      "recordId": "workbook:300",
+      "publicId": "gujo-vacance-mura-ski-area",
+      "aliases": [],
+      "travelRegionId": "gifu-aichi",
+      "baseTownId": "gifu-gujo-gujo",
+      "route": "/gifu-aichi/mountain/gujo-vacance-mura-ski-area",
+      "name": "Gujo Vacance Mura Ski Area",
+      "nameJa": "郡上ヴァカンス村スキー場",
+      "coordinates": {
+        "lat": 35.975677,
+        "lng": 136.938253
+      },
+      "elevation": {
+        "baseM": 1045,
+        "topM": 1114,
+        "verticalM": 69
+      },
+      "officialUrl": "http://www.gujyokogen-hotel.com",
+      "evidence": [
+        {
+          "evidenceId": "intake:300",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:gujo-kogen",
+          "sourceType": "ski_directory",
+          "sourceRef": "gujo-kogen",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/gujo-kogen/",
+          "officialUrls": [
+            "http://www.gujyokogen-hotel.com",
+            "http://www.gujyokogen-hotel.com/"
+          ],
+          "coordinates": {
+            "lat": 35.975677,
+            "lng": 136.938253
+          },
+          "elevation": {
+            "baseM": 1045,
+            "topM": 1114,
+            "verticalM": 69
+          },
+          "names": {
+            "en": "Gujo Kogen",
+            "ja": "郡上ヴァカンス村スキー場"
+          },
+          "externalIds": {
+            "osm": "way/1221232880"
+          }
+        }
+      ]
+    },
+    {
       "recordId": "workbook:301",
       "publicId": "yakushi-ski-resort",
       "aliases": [],
@@ -75159,6 +76325,59 @@
           },
           "externalIds": {
             "osm": "way/319879036"
+          }
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:307",
+      "publicId": "bifuka-ski-area",
+      "aliases": [],
+      "travelRegionId": "hokkaido-regional",
+      "baseTownId": "hokkaido-regional-bifuka",
+      "route": "/hokkaido-regional/mountain/bifuka-ski-area",
+      "name": "Bifuka Ski Area",
+      "nameJa": "美深スキー場",
+      "coordinates": {
+        "lat": 44.488152,
+        "lng": 142.358917
+      },
+      "elevation": {
+        "baseM": 83,
+        "topM": 140,
+        "verticalM": 57
+      },
+      "officialUrl": "https://www.town.bifuka.hokkaido.jp/cms/section/kyouiku/qlmcaj0000005my2.html",
+      "evidence": [
+        {
+          "evidenceId": "intake:307",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:bifuka",
+          "sourceType": "ski_directory",
+          "sourceRef": "bifuka",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/bifuka/",
+          "officialUrls": [
+            "https://www.town.bifuka.hokkaido.jp/cms/section/kyouiku/qlmcaj0000005my2.html",
+            "http://www.town.bifuka.hokkaido.jp/cms/section/kyouiku/qlmcaj0000005my2.html"
+          ],
+          "coordinates": {
+            "lat": 44.488152,
+            "lng": 142.358917
+          },
+          "elevation": {
+            "baseM": 83,
+            "topM": 140,
+            "verticalM": 57
+          },
+          "names": {
+            "en": "Bifuka",
+            "ja": "美深スキー場"
+          },
+          "externalIds": {
+            "osm": "way/1392908822"
           }
         }
       ]
@@ -76199,6 +77418,60 @@
       ]
     },
     {
+      "recordId": "workbook:343",
+      "publicId": "dogoyama-kogen-ski-area",
+      "aliases": [],
+      "travelRegionId": "chugoku-ski-areas",
+      "baseTownId": "hiroshima-shobara-shobara",
+      "route": "/chugoku-ski-areas/mountain/dogoyama-kogen-ski-area",
+      "name": "Dogoyama Kogen Ski Area",
+      "nameJa": "道後山高原スキー場",
+      "coordinates": {
+        "lat": 35.055094,
+        "lng": 133.201109
+      },
+      "elevation": {
+        "baseM": 700,
+        "topM": 1050,
+        "verticalM": 350
+      },
+      "officialUrl": "https://www.dogoyamakogen.com/",
+      "evidence": [
+        {
+          "evidenceId": "intake:343",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:dogoyama-kogen",
+          "sourceType": "ski_directory",
+          "sourceRef": "dogoyama-kogen",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/dogoyama-kogen/",
+          "officialUrls": [
+            "https://www.dogoyamakogen.com/",
+            "https://www.hotel-bismarck.com/?utm_source=Skiresort_de&utm_medium=cpc&utm_campaign=Skiresort_de"
+          ],
+          "coordinates": {
+            "lat": 35.055094,
+            "lng": 133.201109
+          },
+          "elevation": {
+            "baseM": 700,
+            "topM": 1050,
+            "verticalM": 350
+          },
+          "names": {
+            "en": "Dogoyama Kogen",
+            "ja": "道後山高原スキー場"
+          },
+          "externalIds": {
+            "osm": "way/1201627496",
+            "wikidata": "Q11641710"
+          }
+        }
+      ]
+    },
+    {
       "recordId": "workbook:344",
       "publicId": "yawata-highland-191-resort",
       "aliases": [],
@@ -76713,6 +77986,60 @@
       ]
     },
     {
+      "recordId": "workbook:363",
+      "publicId": "wakasa-hyonosen-ski-area",
+      "aliases": [],
+      "travelRegionId": "chugoku-ski-areas",
+      "baseTownId": "tottori-wakasa-wakasa",
+      "route": "/chugoku-ski-areas/mountain/wakasa-hyonosen-ski-area",
+      "name": "Wakasa Hyonosen Ski Area",
+      "nameJa": "わかさ氷ノ山スキー場",
+      "coordinates": {
+        "lat": 35.353376,
+        "lng": 134.490991
+      },
+      "elevation": {
+        "baseM": 774,
+        "topM": 1172,
+        "verticalM": 398
+      },
+      "officialUrl": "https://www.hotel-bismarck.com/?utm_source=Skiresort_de&utm_medium=cpc&utm_campaign=Skiresort_de",
+      "evidence": [
+        {
+          "evidenceId": "intake:363",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:wakasa-hyonosen",
+          "sourceType": "ski_directory",
+          "sourceRef": "wakasa-hyonosen",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/wakasa-hyonosen/",
+          "officialUrls": [
+            "https://www.hotel-bismarck.com/?utm_source=Skiresort_de&utm_medium=cpc&utm_campaign=Skiresort_de",
+            "http://www.hyounosen.co.jp/"
+          ],
+          "coordinates": {
+            "lat": 35.353376,
+            "lng": 134.490991
+          },
+          "elevation": {
+            "baseM": 774,
+            "topM": 1172,
+            "verticalM": 398
+          },
+          "names": {
+            "en": "Wakasa Hyonosen",
+            "ja": "わかさ氷ノ山スキー場"
+          },
+          "externalIds": {
+            "osm": "way/673656706",
+            "wikidata": "Q17216179"
+          }
+        }
+      ]
+    },
+    {
       "recordId": "workbook:364",
       "publicId": "asahi-prime-ski-resort",
       "aliases": [],
@@ -76866,6 +78193,59 @@
           },
           "externalIds": {
             "osm": "way/1463884606"
+          }
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:371",
+      "publicId": "akagiyama-daiichi-ski-area-akagiyama-family-slope",
+      "aliases": [],
+      "travelRegionId": "gunma-regional",
+      "baseTownId": "gunma-regional-maebashi",
+      "route": "/gunma-regional/mountain/akagiyama-daiichi-ski-area-akagiyama-family-slope",
+      "name": "Akagiyama Daiichi Ski Area (Akagiyama Family Slope)",
+      "nameJa": "赤城山スキー場",
+      "coordinates": {
+        "lat": 36.54555150700627,
+        "lng": 139.18405553572526
+      },
+      "elevation": {
+        "baseM": 1366,
+        "topM": 1376,
+        "verticalM": 10
+      },
+      "officialUrl": "https://www.oonumasansougroup.com/",
+      "evidence": [
+        {
+          "evidenceId": "intake:371",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:akagiyama",
+          "sourceType": "ski_directory",
+          "sourceRef": "akagiyama",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/akagiyama/",
+          "officialUrls": [
+            "https://www.oonumasansougroup.com/"
+          ],
+          "coordinates": {
+            "lat": 36.54555150700627,
+            "lng": 139.18405553572526
+          },
+          "elevation": {
+            "baseM": 1366,
+            "topM": 1376,
+            "verticalM": 10
+          },
+          "names": {
+            "en": "Akagiyama",
+            "ja": "赤城山スキー場"
+          },
+          "externalIds": {
+            "osm": "way/1084136464",
+            "wikidata": "Q11635458"
           }
         }
       ]
@@ -77335,6 +78715,61 @@
       ]
     },
     {
+      "recordId": "workbook:397",
+      "publicId": "osorakan-snow-park",
+      "aliases": [],
+      "travelRegionId": "chugoku-ski-areas",
+      "baseTownId": "hiroshima-akiota-akiota",
+      "route": "/chugoku-ski-areas/mountain/osorakan-snow-park",
+      "name": "Osorakan Snow Park",
+      "nameJa": "恐羅漢スノーパーク",
+      "coordinates": {
+        "lat": 34.595914,
+        "lng": 132.146324
+      },
+      "elevation": {
+        "baseM": 885,
+        "topM": 1281,
+        "verticalM": 396
+      },
+      "officialUrl": "https://www.osorakan.co.jp/",
+      "evidence": [
+        {
+          "evidenceId": "intake:397",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:osorakan",
+          "sourceType": "ski_directory",
+          "sourceRef": "osorakan",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/osorakan/",
+          "officialUrls": [
+            "https://www.osorakan.co.jp/",
+            "https://www.osorakan.co.jp/winter/",
+            "https://www.osorakan.co.jp/winter.html"
+          ],
+          "coordinates": {
+            "lat": 34.595914,
+            "lng": 132.146324
+          },
+          "elevation": {
+            "baseM": 885,
+            "topM": 1281,
+            "verticalM": 396
+          },
+          "names": {
+            "en": "Osorakan",
+            "ja": "恐羅漢スノーパーク"
+          },
+          "externalIds": {
+            "osm": "way/1188622733",
+            "wikidata": "Q11492197"
+          }
+        }
+      ]
+    },
+    {
       "recordId": "workbook:398",
       "publicId": "kurohime-kogen-snow-park",
       "aliases": [],
@@ -77599,6 +79034,60 @@
           "externalIds": {
             "osm": "way/484213337",
             "wikidata": "Q11554699"
+          }
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:406",
+      "publicId": "onbara-kogen-ski-area",
+      "aliases": [],
+      "travelRegionId": "chugoku-ski-areas",
+      "baseTownId": "okayama-kagamino-kagamino",
+      "route": "/chugoku-ski-areas/mountain/onbara-kogen-ski-area",
+      "name": "Onbara Kogen Ski Area",
+      "nameJa": "恩原高原スキー場",
+      "coordinates": {
+        "lat": 35.312661,
+        "lng": 133.981231
+      },
+      "elevation": {
+        "baseM": 767,
+        "topM": 946,
+        "verticalM": 179
+      },
+      "officialUrl": "https://www.ombara-kogen.com/ski/",
+      "evidence": [
+        {
+          "evidenceId": "intake:406",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:onbara-kogen",
+          "sourceType": "ski_directory",
+          "sourceRef": "onbara-kogen",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/onbara-kogen/",
+          "officialUrls": [
+            "https://www.ombara-kogen.com/ski/",
+            "https://www.landal.de/parks/bergresort-winterberg?_gl=1*13rl805*_up*MQ..*_ga*MTAzNjg0NTEwMC4xNzgzOTM5MTMw*_ga_R2BJVLL7N3*czE3ODM5MzkxMjkkbzEkZzAkdDE3ODM5MzkyMjIkajYwJGwwJGgw",
+            "https://www.hotel-bismarck.com/?utm_source=Skiresort_de&utm_medium=cpc&utm_campaign=Skiresort_de"
+          ],
+          "coordinates": {
+            "lat": 35.312661,
+            "lng": 133.981231
+          },
+          "elevation": {
+            "baseM": 767,
+            "topM": 946,
+            "verticalM": 179
+          },
+          "names": {
+            "en": "Onbara Kogen",
+            "ja": "恩原高原スキー場"
+          },
+          "externalIds": {
+            "osm": "node/3523617545"
           }
         }
       ]

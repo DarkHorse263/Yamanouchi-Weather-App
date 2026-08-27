@@ -225,6 +225,16 @@
           "baseTownId": "ikenotaira-onsen",
           "name": "Ikenotaira Onsen",
           "nameJa": "Ikenotaira Onsen"
+        },
+        {
+          "baseTownId": "niigata-regional-mikawa-onsen",
+          "name": "Mikawa Onsen",
+          "nameJa": "三川温泉"
+        },
+        {
+          "baseTownId": "niigata-regional-shibata",
+          "name": "Shibata",
+          "nameJa": "新発田市"
         }
       ]
     },
@@ -406,6 +416,11 @@
           "baseTownId": "aomori-regional-shichinohe",
           "name": "Shichinohe",
           "nameJa": "七戸町"
+        },
+        {
+          "baseTownId": "aomori-regional-hirosaki",
+          "name": "Hirosaki",
+          "nameJa": "弘前市"
         }
       ]
     },
@@ -443,6 +458,16 @@
           "baseTownId": "hokuriku-komatsu",
           "name": "Komatsu",
           "nameJa": "小松市"
+        },
+        {
+          "baseTownId": "hokuriku-ichirino-onsen",
+          "name": "Ichirino Onsen",
+          "nameJa": "一里野温泉"
+        },
+        {
+          "baseTownId": "hokuriku-kurobe",
+          "name": "Kurobe",
+          "nameJa": "黒部市"
         }
       ]
     },
@@ -628,6 +653,11 @@
           "baseTownId": "gunma-minakami-gunma-numata",
           "name": "Numata",
           "nameJa": "Numata"
+        },
+        {
+          "baseTownId": "gunma-regional-maebashi",
+          "name": "Maebashi",
+          "nameJa": "前橋市"
         }
       ]
     },
@@ -671,6 +701,31 @@
           "baseTownId": "tottori-daisen-chizu",
           "name": "Chizu",
           "nameJa": "Chizu"
+        },
+        {
+          "baseTownId": "hiroshima-kitahiroshima-kitahiroshima",
+          "name": "Kitahiroshima",
+          "nameJa": "北広島町"
+        },
+        {
+          "baseTownId": "hiroshima-shobara-shobara",
+          "name": "Shobara",
+          "nameJa": "庄原市"
+        },
+        {
+          "baseTownId": "tottori-wakasa-wakasa",
+          "name": "Wakasa",
+          "nameJa": "若桜町"
+        },
+        {
+          "baseTownId": "hiroshima-akiota-akiota",
+          "name": "Akiota",
+          "nameJa": "安芸太田町"
+        },
+        {
+          "baseTownId": "okayama-kagamino-kagamino",
+          "name": "Kagamino",
+          "nameJa": "鏡野町"
         }
       ]
     },
@@ -846,6 +901,26 @@
           "baseTownId": "hokkaido-regional-wassamu",
           "name": "Wassamu",
           "nameJa": "和寒"
+        },
+        {
+          "baseTownId": "hokkaido-regional-shintoku",
+          "name": "Shintoku",
+          "nameJa": "新得町"
+        },
+        {
+          "baseTownId": "hokkaido-regional-nakagawa",
+          "name": "Nakagawa",
+          "nameJa": "中川町"
+        },
+        {
+          "baseTownId": "hokkaido-regional-takinoue",
+          "name": "Takinoue",
+          "nameJa": "滝上町"
+        },
+        {
+          "baseTownId": "hokkaido-regional-bifuka",
+          "name": "Bifuka",
+          "nameJa": "美深町"
         }
       ]
     },

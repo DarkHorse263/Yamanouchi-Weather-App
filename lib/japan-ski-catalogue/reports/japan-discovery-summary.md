@@ -13,8 +13,8 @@ Public completeness wording remains bounded while unresolved identities remain.
 - merged_or_renamed: 5
 - closed: 18
 - out_of_scope: 15
-- genuinely_missing: 0
-- unresolved: 523
+- genuinely_missing: 47
+- unresolved: 476
 
 ## Prefecture proof
 
@@ -22,20 +22,20 @@ Public completeness wording remains bounded while unresolved identities remain.
 | --- | ---: | ---: | ---: | ---: | ---: |
 | Aichi | 2 | 1 | 1 | 0 | 0 |
 | Akita | 24 | 11 | 2 | 0 | 11 |
-| Aomori | 22 | 9 | 0 | 0 | 13 |
+| Aomori | 22 | 9 | 0 | 2 | 11 |
 | Chiba | 1 | 0 | 1 | 0 | 0 |
 | Ehime | 6 | 3 | 1 | 0 | 2 |
 | Fukui | 10 | 0 | 0 | 0 | 10 |
 | Fukuoka | 1 | 0 | 1 | 0 | 0 |
 | Fukushima | 32 | 15 | 3 | 0 | 14 |
-| Gifu | 41 | 13 | 2 | 0 | 26 |
-| Gunma | 36 | 19 | 2 | 0 | 15 |
-| Hiroshima | 22 | 3 | 1 | 0 | 18 |
-| Hokkaido | 180 | 56 | 3 | 0 | 121 |
+| Gifu | 41 | 13 | 2 | 1 | 25 |
+| Gunma | 36 | 19 | 2 | 1 | 14 |
+| Hiroshima | 22 | 3 | 1 | 3 | 15 |
+| Hokkaido | 180 | 56 | 3 | 14 | 107 |
 | Hyogo | 25 | 12 | 2 | 0 | 11 |
 | Ibaraki | 1 | 0 | 0 | 0 | 1 |
-| Ishikawa | 17 | 1 | 0 | 0 | 16 |
-| Iwate | 28 | 13 | 1 | 0 | 14 |
+| Ishikawa | 17 | 1 | 0 | 2 | 14 |
+| Iwate | 28 | 13 | 1 | 1 | 13 |
 | Kagawa | 1 | 0 | 0 | 0 | 1 |
 | Kanagawa | 2 | 0 | 1 | 0 | 1 |
 | Kochi | 1 | 0 | 0 | 0 | 1 |
@@ -44,21 +44,21 @@ Public completeness wording remains bounded while unresolved identities remain.
 | Mie | 1 | 0 | 0 | 0 | 1 |
 | Miyagi | 14 | 9 | 1 | 0 | 4 |
 | Miyazaki | 3 | 0 | 1 | 0 | 2 |
-| Nagano | 148 | 63 | 3 | 0 | 82 |
+| Nagano | 148 | 63 | 3 | 11 | 71 |
 | Nara | 3 | 0 | 0 | 0 | 3 |
-| Niigata | 112 | 28 | 0 | 0 | 84 |
+| Niigata | 112 | 28 | 0 | 3 | 81 |
 | Oita | 2 | 0 | 0 | 0 | 2 |
-| Okayama | 8 | 1 | 0 | 0 | 7 |
+| Okayama | 8 | 1 | 0 | 2 | 5 |
 | Saga | 1 | 0 | 0 | 0 | 1 |
 | Saitama | 2 | 0 | 2 | 0 | 0 |
 | Shiga | 13 | 8 | 2 | 0 | 3 |
 | Shimane | 7 | 2 | 0 | 0 | 5 |
 | Shizuoka | 3 | 2 | 0 | 0 | 1 |
-| Tochigi | 12 | 2 | 4 | 0 | 6 |
+| Tochigi | 12 | 2 | 4 | 1 | 5 |
 | Tokushima | 2 | 1 | 0 | 0 | 1 |
-| Tottori | 14 | 2 | 1 | 0 | 11 |
-| Toyama | 17 | 6 | 1 | 0 | 10 |
-| Yamagata | 30 | 14 | 1 | 0 | 15 |
+| Tottori | 14 | 2 | 1 | 1 | 10 |
+| Toyama | 17 | 6 | 1 | 2 | 8 |
+| Yamagata | 30 | 14 | 1 | 3 | 12 |
 | Yamaguchi | 2 | 0 | 0 | 0 | 2 |
 | Yamanashi | 5 | 3 | 0 | 0 | 2 |
 

@@ -7,11 +7,11 @@ description: What "complete" means for the published JP areas — lift seeds liv
 
 ## Verified-only national launch gate (updated 26 August 2026)
 
-**Rule:** Japan marketing may launch only for the evidence-complete verified scope. Public claims must describe published verified coverage and must not imply that every operating Japanese ski area is covered. Closed, defunct, suspended, unclear and essential-gap records stay excluded.
+**Rule:** Japan marketing may launch only for the evidence-complete verified and manifest-published scope. A verified-operating area may remain unpublished and must then reconcile as `genuinely_missing`, never `unresolved` or silently covered. Public claims must describe published verified coverage and must not imply that every operating Japanese ski area is covered. Closed, defunct, suspended, unclear and essential-gap records stay excluded.
 
 **Why:** The owner approved verified-only launch after five authoritative evidence passes. The long tail contains duplicate, conflicting and unprovable entries; allowing those records to block the verified scope indefinitely is not useful, but publishing or claiming them would be dishonest.
 
-**How to apply:** Maintain `draft | verified | published` status, aliases, prefecture, coordinates, defensible forecast elevation, official URL, operating status, source and verification date. Marketing approval requires every evidence-complete verified record to pass publication lifecycle checks; excluded records remain in the review queue and cannot leak into routes or completeness claims.
+**How to apply:** Maintain `draft | verified | published` status, aliases, prefecture, coordinates, defensible forecast elevation, official URL, operating status, source and verification date. The publication manifest may be a strict subset of route-ready verified candidates, but marketing approval must remain false while any candidate is unintegrated. Verified-but-unpublished areas belong in the coverage-gap count, while unclear and essential-gap records remain in the review queue.
 
 ## Exhausted authoritative searches
 
