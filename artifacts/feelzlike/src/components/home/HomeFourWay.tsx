@@ -241,8 +241,8 @@ export function HomeFourWay() {
             onClick={() => track("welcome_nearest_snapshot_click", { category: "navigation" })}
             className="group block"
           >
-            <div className="flex items-end justify-between gap-4 px-4 pb-4">
-              <div className="min-w-0">
+            <div className="grid grid-cols-[1fr_auto] items-center gap-4 px-4 pb-4">
+              <div className="min-w-0 text-center">
                 <h2 className="truncate text-[22px] font-bold leading-none text-slate-900">
                   {nearest.name.toLowerCase()}
                 </h2>
@@ -252,35 +252,20 @@ export function HomeFourWay() {
               </div>
               {nearest.headline ? (
                 <div className="flex shrink-0 items-center gap-2 text-[#0055FF]">
-                  <CloudSun className="h-6 w-6" aria-hidden />
-                  <span className="text-[30px] font-bold leading-none tabular-nums">
-                    {u.temp(nearest.headline.tempC)}°
-                  </span>
+                  <CloudSun className="h-7 w-7" aria-hidden />
+                  <div className="text-center">
+                    <span className="block text-[30px] font-bold leading-none tabular-nums">
+                      {u.temp(nearest.headline.tempC)}°
+                    </span>
+                    <span className="mt-1 block text-xs font-bold leading-none text-slate-700">
+                      feelzlike {u.temp(nearest.headline.feelsLikeC)}°
+                    </span>
+                  </div>
                 </div>
               ) : (
                 <MountainSnow className="h-8 w-8 shrink-0 text-[#0055FF]" aria-hidden />
               )}
             </div>
-            {nearest.headline ? (
-              <div className="grid grid-cols-2 border-t border-white/20 bg-[#003AAE] text-white">
-                <div className="px-4 py-3">
-                  <span className="block text-xs font-bold uppercase tracking-[0.1em] text-white">
-                    temperature
-                  </span>
-                  <strong className="mt-0.5 block text-sm text-white">
-                    {u.temp(nearest.headline.tempC)}°
-                  </strong>
-                </div>
-                <div className="border-l border-white/20 px-4 py-3">
-                  <span className="block text-xs font-bold uppercase tracking-[0.1em] text-white">
-                    feelzlike
-                  </span>
-                  <strong className="mt-0.5 block text-sm text-white">
-                    {u.temp(nearest.headline.feelsLikeC)}°
-                  </strong>
-                </div>
-              </div>
-            ) : null}
           </Link>
         ) : (
           <Link
