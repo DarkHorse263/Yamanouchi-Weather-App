@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { useEffect, useState, type CSSProperties } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { primaryPrefectureForJapanRegion } from "@/regions/japan-prefectures";
 
 // ─── types ─────────────────────────────────────────
 type RegionStatus = "live" | "soon";
@@ -358,6 +359,42 @@ export function CountryPicker() {
           const dot = isWinter ? "bg-sky-500" : "bg-emerald-500";
           const seasonLabel = isWinter ? "snow season" : "green season";
           const isOpen = openCountry === country.code;
+          const groupedRegions = country.code === "JP"
+            ? country.regions.map((region) => {
+                const prefecture = primaryPrefectureForJapanRegion(region.id);
+                return {
+                  groupId: prefecture.id,
+                  groupLabel: `${prefecture.name} · ${prefecture.nameJa}`,
+                  region,
+                };
+              })
+            : country.code === "CA" || country.code === "US"
+              ? country.regions.map((region) => ({
+                  groupId: region.region.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+                  groupLabel: region.region,
+                  region,
+                }))
+              : null;
+          const regionGroups = groupedRegions
+            ? [...groupedRegions.reduce((groups, entry) => {
+                const current = groups.get(entry.groupId);
+                if (current) {
+                  current.regions.push(entry.region);
+                } else {
+                  groups.set(entry.groupId, {
+                    id: entry.groupId,
+                    label: entry.groupLabel,
+                    regions: [entry.region],
+                  });
+                }
+                return groups;
+              }, new Map<string, { id: string; label: string; regions: Region[] }>()).values()]
+                .sort((a, b) => a.label.localeCompare(b.label))
+                .map((group) => ({
+                  ...group,
+                  regions: [...group.regions].sort((a, b) => a.name.localeCompare(b.name)),
+                }))
+            : [{ id: country.code, label: null, regions: country.regions }];
 
           return (
             <motion.div
@@ -396,37 +433,48 @@ export function CountryPicker() {
 
               {isOpen && (
                 <div className="border-t border-slate-100 px-4 pb-4">
-                  <ul className="mt-3 space-y-1 text-sm leading-relaxed">
-                    {country.regions.map((r) => {
-                      const town = PRIMARY_TOWN[r.id] ?? r.headlineLabel ?? r.baseTowns[0];
-                      const temp = r.headline?.tempC;
-                      // Drop the trailing town if it duplicates the region
-                      // name (e.g. "Nozawa Onsen · Nozawa Onsen").
-                      const showTown = town && town.toLowerCase() !== r.name.toLowerCase();
-                      return (
-                        <li key={r.id}>
-                          <a
-                            href={r.href}
-                            className="flex items-baseline justify-between gap-3 rounded-lg px-2 py-1.5 -mx-2 hover:bg-sky-50"
-                          >
-                            <span className="min-w-0 truncate text-slate-700">
-                              <span className="font-semibold text-slate-900">{r.name}</span>
-                              {showTown && (
-                                <>
-                                  <span className="text-slate-400"> &middot; </span>
-                                  {town}
-                                </>
-                              )}
-                            </span>
-                            {typeof temp === "number" && (
-                              <span className="shrink-0 text-base font-bold tabular-nums text-sky-900">
-                                {Math.round(temp)}&deg;C
-                              </span>
-                            )}
-                          </a>
-                        </li>
-                      );
-                    })}
+                  <ul className="mt-3 space-y-3 text-sm leading-relaxed">
+                    {regionGroups.map((group) => (
+                      <li key={group.id}>
+                        {group.label && (
+                          <p className="mb-1 border-b border-slate-200 pb-1 text-xs font-bold uppercase tracking-[0.12em] text-sky-800">
+                            {group.label}
+                          </p>
+                        )}
+                        <ul className="space-y-1">
+                          {group.regions.map((r) => {
+                            const town = PRIMARY_TOWN[r.id] ?? r.headlineLabel ?? r.baseTowns[0];
+                            const temp = r.headline?.tempC;
+                            // Drop the trailing town if it duplicates the region
+                            // name (e.g. "Nozawa Onsen · Nozawa Onsen").
+                            const showTown = town && town.toLowerCase() !== r.name.toLowerCase();
+                            return (
+                              <li key={r.id}>
+                                <a
+                                  href={r.href}
+                                  className="flex items-baseline justify-between gap-3 rounded-lg px-2 py-1.5 -mx-2 hover:bg-sky-50"
+                                >
+                                  <span className="min-w-0 truncate text-slate-700">
+                                    <span className="font-semibold text-slate-900">{r.name}</span>
+                                    {showTown && (
+                                      <>
+                                        <span className="text-slate-500"> &middot; </span>
+                                        {town}
+                                      </>
+                                    )}
+                                  </span>
+                                  {typeof temp === "number" && (
+                                    <span className="shrink-0 text-base font-bold tabular-nums text-sky-900">
+                                      {Math.round(temp)}&deg;C
+                                    </span>
+                                  )}
+                                </a>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </li>
+                    ))}
                   </ul>
 
                   <a
