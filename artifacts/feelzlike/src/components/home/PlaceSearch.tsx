@@ -5,6 +5,7 @@ import { Loader2, Map, MapPin, Mountain, Search, X } from "lucide-react";
 import { track } from "@/lib/analytics";
 import { REGIONS } from "@/regions";
 import { prefecturesForJapanRegion } from "@/regions/japan-prefectures";
+import { usStateForRegion } from "@/regions/us-states";
 
 // ── server payloads ────────────────────────────────────────────────
 // GET /api/places/search returns locality predictions (no coordinates -
@@ -70,6 +71,7 @@ const CURATED_ENTRIES: CuratedEntry[] = REGIONS.flatMap((r) => {
     : [];
   const prefectureEnglishKeys = prefectures.map((p) => normalizeName(p.name));
   const prefectureJapaneseKeys = prefectures.map((p) => p.nameJa);
+  const stateKeys = usStateForRegion(r) ? [normalizeName(usStateForRegion(r)!)] : [];
 
   for (const t of r.baseTowns ?? []) {
     const nearby = (r.mountains ?? []).filter((m) =>
@@ -84,7 +86,7 @@ const CURATED_ENTRIES: CuratedEntry[] = REGIONS.flatMap((r) => {
       subtitle: `${r.subtitle} · live conditions`,
       lat: t.lat,
       lng: t.lng,
-      extraKeys: [r.name, ...nearby.map((m) => m.name)].map(normalizeName).concat(prefectureEnglishKeys),
+      extraKeys: [r.name, ...nearby.map((m) => m.name)].map(normalizeName).concat(prefectureEnglishKeys, stateKeys),
       jaKeys: [t.nameJa, ...nearby.map((m) => m.nameJa), ...prefectureJapaneseKeys].filter(
         (s): s is string => Boolean(s),
       ),
@@ -103,7 +105,7 @@ const CURATED_ENTRIES: CuratedEntry[] = REGIONS.flatMap((r) => {
       name: m.name,
       href: `/${r.id}/mountain/${m.id}`,
       subtitle: `${r.subtitle} · mountain forecast`,
-      extraKeys: [normalizeName(r.name), ...prefectureEnglishKeys],
+      extraKeys: [normalizeName(r.name), ...prefectureEnglishKeys, ...stateKeys],
       jaKeys: [...(m.nameJa ? [m.nameJa] : []), ...prefectureJapaneseKeys],
       prefectureKeys: [...prefectures.map((p) => p.name), ...prefectureJapaneseKeys],
     });
@@ -122,7 +124,7 @@ const CURATED_ENTRIES: CuratedEntry[] = REGIONS.flatMap((r) => {
     name: r.name,
     href: `/${r.id}/`,
     subtitle: `${r.subtitle} · pick a town`,
-    extraKeys: prefectureEnglishKeys,
+    extraKeys: [...prefectureEnglishKeys, ...stateKeys],
     jaKeys: prefectureJapaneseKeys,
     prefectureKeys: [...prefectures.map((p) => p.name), ...prefectureJapaneseKeys],
   });

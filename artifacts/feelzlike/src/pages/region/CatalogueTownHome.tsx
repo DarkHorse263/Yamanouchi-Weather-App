@@ -2,7 +2,7 @@ import { ArrowUpRight, Mountain } from "lucide-react";
 import { Link } from "wouter";
 import { PageHeader, useBaseTown, useLanguage, useRegion } from "@workspace/feelzlike-shell";
 import { PageMeta } from "@/lib/seo/PageMeta";
-import { catalogueTownLandingModel } from "@/regions/japan-catalogue";
+import { catalogueTownLandingModel } from "@/regions/catalogue";
 
 export function CatalogueTownHome() {
   const { region } = useRegion();

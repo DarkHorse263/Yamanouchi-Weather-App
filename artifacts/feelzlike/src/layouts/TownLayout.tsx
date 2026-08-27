@@ -11,7 +11,7 @@ import { TownRoads } from "@/pages/town/TownRoads";
 import { TownTransport } from "@/pages/town/TownTransport";
 import { TownWeather } from "@/pages/town/TownWeather";
 import { CatalogueTownHome } from "@/pages/region/CatalogueTownHome";
-import { isCatalogueMountainLinkTown } from "@/regions/japan-catalogue";
+import { isCatalogueMountainLinkTown } from "@/regions/catalogue";
 import { snowyMountainsRouter } from "@/regions/snowy-mountains/router";
 import { yamanouchiRouter } from "@/regions/yamanouchi/router";
 import { victoriasHighCountryRouter } from "@/regions/victorias-high-country/router";

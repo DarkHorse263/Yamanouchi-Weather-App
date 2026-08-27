@@ -22,6 +22,10 @@ import {
   publishedCatalogueRecords as publishedCanadaCatalogueRecords,
   travelRegions as canadaTravelRegions,
 } from "@workspace/canada-ski-catalogue/public-runtime";
+import {
+  publishedCatalogueRecords as publishedWesternUsCatalogueRecords,
+  regions as westernUsCatalogueRegions,
+} from "@workspace/western-us-ski-catalogue/public-runtime";
 
 const CATALOGUE_MOUNTAIN_IDS_BY_REGION = new Map<string, Set<string>>();
 const CATALOGUE_BASE_TOWN_IDS_BY_REGION = new Map<string, Set<string>>();
@@ -47,6 +51,7 @@ for (const record of [...publishedCatalogueRecords, ...publishedCanadaCatalogueR
 const CATALOGUE_TRAVEL_REGION_IDS = new Set([
   ...travelRegions.map((region) => region.travelRegionId),
   ...canadaTravelRegions.map((region) => region.travelRegionId),
+  ...westernUsCatalogueRegions.map((region) => region.regionId),
 ]);
 for (const record of publishedSkiCatalogueRecords) {
   const ids = CATALOGUE_MOUNTAIN_IDS_BY_REGION.get(record.regionId) ?? new Set<string>();
@@ -57,7 +62,13 @@ for (const record of publishedSkiCatalogueRecords) {
   towns.add(record.localityId);
   CATALOGUE_BASE_TOWN_IDS_BY_REGION.set(record.regionId, towns);
 }
-for (const region of publishedSkiCatalogueRegions) CATALOGUE_TRAVEL_REGION_IDS.add(region.regionId);
+for (const record of publishedWesternUsCatalogueRecords) {
+  const ids = CATALOGUE_MOUNTAIN_IDS_BY_REGION.get(record.regionId) ?? new Set<string>();
+  ids.add(record.publicId); for (const alias of record.aliases) ids.add(alias);
+  CATALOGUE_MOUNTAIN_IDS_BY_REGION.set(record.regionId, ids);
+  const towns = CATALOGUE_BASE_TOWN_IDS_BY_REGION.get(record.regionId) ?? new Set<string>();
+  towns.add(record.baseTownId); CATALOGUE_BASE_TOWN_IDS_BY_REGION.set(record.regionId, towns);
+}
 
 // Entitlement resolver · the soft member gate. During the launch promo every
 // premium feature is free, but only for signed-in members (free email

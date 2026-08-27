@@ -127,6 +127,9 @@ importers:
       '@workspace/ski-catalogue':
         specifier: workspace:*
         version: link:../../lib/ski-catalogue
+      '@workspace/western-us-ski-catalogue':
+        specifier: workspace:*
+        version: link:../../lib/western-us-ski-catalogue
       cors:
         specifier: ^2
         version: 2.8.6
@@ -354,6 +357,9 @@ importers:
       '@workspace/ski-catalogue':
         specifier: workspace:*
         version: link:../../lib/ski-catalogue
+      '@workspace/western-us-ski-catalogue':
+        specifier: workspace:*
+        version: link:../../lib/western-us-ski-catalogue
       class-variance-authority:
         specifier: 'catalog:'
         version: 0.7.1
@@ -735,6 +741,8 @@ importers:
         version: 5.9.3
 
   lib/ski-catalogue: {}
+
+  lib/western-us-ski-catalogue: {}
 
   scripts:
     devDependencies:

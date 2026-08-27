@@ -14,7 +14,7 @@ import { DailyPick } from "@/components/DailyPick";
 import { REGION_PARTNERS } from "@/data/townPartners";
 import { TownPartnerAd } from "@/components/TownPartnerAd";
 import { TownPartnerCard } from "@/components/TownPartnerCard";
-import { isCatalogueMountainLinkTown } from "@/regions/japan-catalogue";
+import { isCatalogueMountainLinkTown } from "@/regions/catalogue";
 
 /**
  * Region landing - the second hop in the Country > Region > Town flow.

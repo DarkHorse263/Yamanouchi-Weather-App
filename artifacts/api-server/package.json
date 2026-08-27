@@ -20,6 +20,7 @@
     "@workspace/canada-ski-catalogue": "workspace:*",
     "@workspace/japan-ski-catalogue": "workspace:*",
     "@workspace/ski-catalogue": "workspace:*",
+    "@workspace/western-us-ski-catalogue": "workspace:*",
     "@workspace/promo-constants": "workspace:*",
     "cors": "^2",
     "drizzle-orm": "catalog:",

@@ -80,6 +80,7 @@
     "@workspace/canada-ski-catalogue": "workspace:*",
     "@workspace/japan-ski-catalogue": "workspace:*",
     "@workspace/ski-catalogue": "workspace:*",
+    "@workspace/western-us-ski-catalogue": "workspace:*",
 
     "class-variance-authority": "catalog:",
     "clsx": "catalog:",
@@ -106,6 +107,7 @@
     "wouter": "^3.3.5",
     "zod": "catalog:"
   },
+
   "dependencies": {
     "@clerk/react": "^6.13.1",
     "@clerk/themes": "^2.4.57",

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "states": [
+    { "stateCode": "AK", "name": "Alaska" },
+    { "stateCode": "AZ", "name": "Arizona" },
+    { "stateCode": "CA", "name": "California" },
+    { "stateCode": "CO", "name": "Colorado" },
+    { "stateCode": "ID", "name": "Idaho" },
+    { "stateCode": "MT", "name": "Montana" },
+    { "stateCode": "NM", "name": "New Mexico" },
+    { "stateCode": "NV", "name": "Nevada" },
+    { "stateCode": "OR", "name": "Oregon" },
+    { "stateCode": "UT", "name": "Utah" },
+    { "stateCode": "WA", "name": "Washington" },
+    { "stateCode": "WY", "name": "Wyoming" }
+  ]
+}

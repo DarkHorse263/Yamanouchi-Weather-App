@@ -12,6 +12,11 @@ import {
   publishedCatalogueRecords as publishedCanadaCatalogueRecords,
   travelRegions as canadaTravelRegions,
 } from "@workspace/canada-ski-catalogue/public-runtime";
+import {
+  publishedCatalogueRecords as publishedWesternUsCatalogueRecords,
+  regions as westernUsCatalogueRegions,
+  states as westernUsCatalogueStates,
+} from "@workspace/western-us-ski-catalogue/public-runtime";
 
 const router: IRouter = Router();
 
@@ -2083,35 +2088,103 @@ const REGIONS: RegionConfig[] = [
   },
 ];
 
-/**
- * Published catalogue regions that do not yet have a hand-curated regional
- * headline. These are metadata-only by design: no coordinates means
- * /api/regions never fan-outs to Open-Meteo once per catalogue record.
- */
-const CATALOGUE_REGIONS: RegionConfig[] = [
-  ...travelRegions.map((region) => ({ region, country: "Japan" as const, countryCode: "JP" as const, area: region.prefectures.join(", "), towns: region.baseTowns.map((town) => town.name), sourceLabel: "Published Japan ski catalogue" })),
-  ...canadaTravelRegions.map((region) => ({ region, country: "Canada" as const, countryCode: "CA" as const, area: region.province, towns: [], sourceLabel: "Published Canada ski catalogue" })),
-]
-  .filter(({ region }) => !REGIONS.some((existing) => existing.id === region.travelRegionId))
-  .map(({ region, country, countryCode, area, towns, sourceLabel }) => ({
-    id: region.travelRegionId, name: region.name, country, countryCode, region: area,
-    status: "live",
-    href: `/${region.travelRegionId}/`,
-    baseTowns: towns,
-    mountains: [...publishedCatalogueRecords, ...publishedCanadaCatalogueRecords]
-      .filter((record) => record.travelRegionId === region.travelRegionId)
-      .map((record) => record.name),
-    headlineLabel: region.name,
-    sourceLabel,
-  }));
+function canadaCatalogueTimezone(province: string): string {
+  const timezones: Record<string, string> = {
+    "British Columbia": "America/Vancouver",
+    Alberta: "America/Edmonton",
+    Saskatchewan: "America/Regina",
+    Manitoba: "America/Winnipeg",
+    Ontario: "America/Toronto",
+    Quebec: "America/Toronto",
+    "New Brunswick": "America/Halifax",
+    "Nova Scotia": "America/Halifax",
+    "Prince Edward Island": "America/Halifax",
+    "Newfoundland and Labrador": "America/St_Johns",
+  };
+  const timezone = timezones[province];
+  if (!timezone) throw new Error(`[canada-catalogue] unknown province timezone: "${province}"`);
+  return timezone;
+}
 
+/** Published Japan and Canada catalogue regions without a hand-curated headline. */
+const CATALOGUE_REGIONS: RegionConfig[] = [
+  ...travelRegions
+    .filter((region) => !REGIONS.some((existing) => existing.id === region.travelRegionId))
+    .flatMap((region) => {
+      const records = publishedCatalogueRecords
+        .filter((record) => record.travelRegionId === region.travelRegionId)
+        .sort((left, right) => left.publicId.localeCompare(right.publicId));
+      const headlineRecord = records[0];
+      if (!headlineRecord) return [];
+      return [{
+        id: region.travelRegionId,
+        name: region.name,
+        country: "Japan",
+        countryCode: "JP" as const,
+        region: region.prefectures.join(", "),
+        status: "live" as const,
+        href: `/${region.travelRegionId}/`,
+        baseTowns: region.baseTowns.map((town) => town.name),
+        mountains: records.map((record) => record.name),
+        headlineLabel: headlineRecord.name,
+        lat: headlineRecord.coordinates.lat,
+        lon: headlineRecord.coordinates.lng,
+        elevation: headlineRecord.forecastElevationM,
+        timezone: "Asia/Tokyo",
+        sourceLabel: "Open-Meteo · Published Japan ski catalogue",
+      }];
+    }),
+  ...canadaTravelRegions
+    .filter((region) => !REGIONS.some((existing) => existing.id === region.travelRegionId))
+    .flatMap((region) => {
+      const records = publishedCanadaCatalogueRecords
+        .filter((record) => record.travelRegionId === region.travelRegionId)
+        .sort((left, right) => left.publicId.localeCompare(right.publicId));
+      const headlineRecord = records[0];
+      if (!headlineRecord) return [];
+      return [{
+        id: region.travelRegionId,
+        name: region.name,
+        country: "Canada",
+        countryCode: "CA" as const,
+        region: region.province,
+        status: "live" as const,
+        href: `/${region.travelRegionId}/`,
+        baseTowns: [...new Set(records.map((record) => record.locality))],
+        mountains: records.map((record) => record.name),
+        headlineLabel: headlineRecord.name,
+        lat: headlineRecord.coordinates.lat,
+        lon: headlineRecord.coordinates.lng,
+        elevation: headlineRecord.forecastElevationM,
+        timezone: canadaCatalogueTimezone(region.province),
+        sourceLabel: "Open-Meteo · Published Canada ski catalogue",
+      }];
+    }),
+];
+
+const WESTERN_CATALOGUE_RECORDS_BY_REGION = new Map(
+  westernUsCatalogueRegions.map((region) => [
+    region.regionId,
+    publishedWesternUsCatalogueRecords
+      .filter((record) => record.regionId === region.regionId)
+      .sort((left, right) => left.publicId.localeCompare(right.publicId)),
+  ] as const),
+);
 const GENERIC_CATALOGUE_REGIONS: RegionConfig[] = publishedSkiCatalogueRegions
   .filter((region) =>
     !REGIONS.some((existing) => existing.id === region.regionId) &&
     !CATALOGUE_REGIONS.some((existing) => existing.id === region.regionId),
   )
   .map((region) => {
-    const records = publishedSkiCatalogueRecords.filter((record) => record.regionId === region.regionId);
+    // Stable public-id ordering makes the representative forecast
+    // deterministic while keeping it within the published region.
+    const records = publishedSkiCatalogueRecords
+      .filter((record) => record.regionId === region.regionId)
+      .sort((left, right) => left.publicId.localeCompare(right.publicId));
+    const headlineRecord = records[0];
+    if (!headlineRecord) {
+      throw new Error(`[catalogue] published region "${region.regionId}" has no published records`);
+    }
     return {
       id: region.regionId,
       name: region.name,
@@ -2122,14 +2195,48 @@ const GENERIC_CATALOGUE_REGIONS: RegionConfig[] = publishedSkiCatalogueRegions
       href: `/${region.regionId}/`,
       baseTowns: region.localities.map((locality) => locality.name),
       mountains: records.map((record) => record.name),
-      headlineLabel: region.name,
-      sourceLabel: "Published ski catalogue",
+      headlineLabel: headlineRecord.name,
+      lat: headlineRecord.coordinates.lat,
+      lon: headlineRecord.coordinates.lng,
+      elevation: headlineRecord.forecastElevationM,
+      timezone: headlineRecord.timezone,
+      sourceLabel: "Open-Meteo · Published ski catalogue",
     };
   });
 
-const BASE_REGIONS: readonly RegionConfig[] = [...REGIONS, ...CATALOGUE_REGIONS];
+const REGIONS_WITH_WESTERN_CATALOGUE: readonly RegionConfig[] = REGIONS.map((region) => {
+  const records = WESTERN_CATALOGUE_RECORDS_BY_REGION.get(region.id);
+  return records?.length
+    ? { ...region, mountains: [...region.mountains, ...records.map((record) => record.name)] }
+    : region;
+});
+const WESTERN_CATALOGUE_REGIONS: RegionConfig[] = westernUsCatalogueRegions
+  .filter((region) => !REGIONS_WITH_WESTERN_CATALOGUE.some((existing) => existing.id === region.regionId))
+  .flatMap((region) => {
+    const records = WESTERN_CATALOGUE_RECORDS_BY_REGION.get(region.regionId) ?? [];
+    const headlineRecord = records[0];
+    if (!headlineRecord) return [];
+    return [{
+      id: region.regionId,
+      name: region.name,
+      country: "United States",
+      countryCode: "US" as const,
+      region: westernUsCatalogueStates.find((state) => state.stateCode === region.stateCode)?.name ?? region.stateCode,
+      status: "live" as const,
+      href: `/${region.regionId}/`,
+      baseTowns: region.baseTowns.map((town) => town.name),
+      mountains: records.map((record) => record.name),
+      headlineLabel: headlineRecord.name,
+      lat: headlineRecord.coordinates.lat,
+      lon: headlineRecord.coordinates.lng,
+      elevation: headlineRecord.forecastElevationM,
+      timezone: headlineRecord.timezone,
+      sourceLabel: "Open-Meteo · Published Western US ski catalogue",
+    }];
+  });
+
 const ALL_REGIONS: readonly RegionConfig[] = [
-  ...BASE_REGIONS.map((region) => {
+  ...[...REGIONS_WITH_WESTERN_CATALOGUE, ...CATALOGUE_REGIONS].map((region) => {
     const additions = publishedSkiCatalogueRecords
       .filter((record) => record.regionId === region.id)
       .map((record) => record.name)
@@ -2137,8 +2244,11 @@ const ALL_REGIONS: readonly RegionConfig[] = [
     return additions.length ? { ...region, mountains: [...region.mountains, ...additions] } : region;
   }),
   ...GENERIC_CATALOGUE_REGIONS,
+  ...WESTERN_CATALOGUE_REGIONS,
 ];
 
+/** Public `/api/regions` projection. Catalogue intake and evidence never enter it. */
+export const API_REGION_CONFIGS: readonly RegionConfig[] = ALL_REGIONS;
 /** Published JP travel-region metadata, keyed by the catalogue's shared id. */
 export const CATALOGUE_REGION_METADATA = new Map(
   [
@@ -2230,7 +2340,7 @@ let cacheStats = { hits: 0, staleServed: 0, upstreamCalls: 0, upstreamFails: 0, 
 export function getCacheStats() { return { ...cacheStats, entries: cache.size, inFlight: inFlight.size }; }
 
 async function fetchHeadline(r: RegionConfig): Promise<HeadlineReading | null> {
-  if (r.status === "soon" || !r.lat || !r.lon) return null;
+  if (r.status === "soon" || !Number.isFinite(r.lat) || !Number.isFinite(r.lon)) return null;
 
   const cacheKey = r.id;
   const now = Date.now();
@@ -2291,11 +2401,28 @@ async function fetchHeadline(r: RegionConfig): Promise<HeadlineReading | null> {
   return refresh;
 }
 
-async function fetchHeadlineUpstream(r: RegionConfig): Promise<HeadlineReading | null> {
-  const params = new URLSearchParams({
+export function buildHeadlineQueryParams(
+  r: Pick<RegionConfig, "lat" | "lon" | "elevation" | "timezone" | "model"> & { id?: string },
+): URLSearchParams {
+  if (!Number.isFinite(r.lat) || !Number.isFinite(r.lon)) {
+    throw new Error(`[regions] headline region "${r.id ?? "unknown"}" coordinates must be finite`);
+  }
+  if (r.elevation !== undefined && (!Number.isFinite(r.elevation) || r.elevation <= 0)) {
+    throw new Error(`[regions] headline region "${r.id ?? "unknown"}" elevation must be a positive finite number`);
+  }
+  if (r.timezone !== undefined && r.timezone.length === 0) {
+    throw new Error(`[regions] headline region "${r.id ?? "unknown"}" timezone must not be empty`);
+  }
+  if (r.elevation !== undefined && (!Number.isFinite(r.elevation) || r.elevation <= 0)) {
+    throw new Error(`[regions] headline region "${r.id}" elevation must be a positive finite number`);
+  }
+  if (r.timezone !== undefined && r.timezone.length === 0) {
+    throw new Error(`[regions] headline region "${r.id}" timezone must not be empty`);
+  }
+  return new URLSearchParams({
     latitude: String(r.lat),
     longitude: String(r.lon),
-    elevation: String(r.elevation ?? ""),
+    ...(r.elevation !== undefined ? { elevation: String(r.elevation) } : {}),
     current: "temperature_2m,apparent_temperature,wind_speed_10m,wind_direction_10m,weather_code,snowfall",
     daily: "temperature_2m_max,temperature_2m_min,precipitation_sum,snowfall_sum,weather_code",
     hourly: "snowfall",
@@ -2304,6 +2431,9 @@ async function fetchHeadlineUpstream(r: RegionConfig): Promise<HeadlineReading |
     timezone: r.timezone ?? "auto",
     ...(r.model ? { models: r.model } : {}),
   });
+}
+async function fetchHeadlineUpstream(r: RegionConfig): Promise<HeadlineReading | null> {
+  const params = buildHeadlineQueryParams(r);
 
   try {
     // Open-Meteo asks all integrators to identify themselves so they can reach

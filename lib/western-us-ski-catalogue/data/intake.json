@@ -1,0 +1,3120 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "recordId": "alaska-arctic-valley-ski-area",
+      "publicId": "arctic-valley-ski-area",
+      "name": "Arctic Valley Ski Area",
+      "aliases": [
+        "Arctic Valley (Anchorage Ski Club)"
+      ],
+      "stateCode": "AK",
+      "regionId": "girdwood",
+      "baseTownId": "anchorage",
+      "routeMode": "new_page",
+      "route": "/girdwood/mountain/arctic-valley-ski-area",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://arcticvalley.org/",
+      "coordinates": {
+        "lat": 61.2467,
+        "lng": -149.5344
+      },
+      "elevation": {
+        "baseM": 762,
+        "topM": 1188
+      },
+      "forecastElevationM": 762,
+      "evidence": [
+        {
+          "sourceUrl": "https://arcticvalley.org/conditions/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official conditions page checked 2026-08-27 says “Thanks for a great season” and retains the live webcam; a 2026-01-09 official-season news update documented the snow-delayed opening, supporting seasonal rather than permanent closure.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "alaska-hilltop-ski-area-and-bike-park",
+      "publicId": "hilltop-ski-area-and-bike-park",
+      "name": "Hilltop Ski Area and Bike Park",
+      "aliases": [
+        "Hilltop Ski Area"
+      ],
+      "stateCode": "AK",
+      "regionId": "girdwood",
+      "baseTownId": "anchorage",
+      "routeMode": "new_page",
+      "route": "/girdwood/mountain/hilltop-ski-area-and-bike-park",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.hilltopskiarea.org/",
+      "coordinates": {
+        "lat": 61.0984,
+        "lng": -149.7447
+      },
+      "elevation": {
+        "baseM": 75,
+        "topM": 179
+      },
+      "forecastElevationM": 75,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.hilltopskiarea.org/hours-and-location",
+          "checkedAt": "2026-08-27",
+          "quote": "Official hours page checked 2026-08-27 lists winter lift-service hours and says lift service is closed for the season, an ordinary seasonal status; it also gives the 7015 Abbott Road address.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "alaska-moose-mountain-ski-resort",
+      "publicId": "moose-mountain-ski-resort",
+      "name": "Moose Mountain Ski Resort",
+      "aliases": [
+        "Moose Mountain"
+      ],
+      "stateCode": "AK",
+      "regionId": "fairbanks",
+      "baseTownId": "fairbanks",
+      "routeMode": "new_page",
+      "route": "/fairbanks/mountain/moose-mountain-ski-resort",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://shredthemoose.com/",
+      "coordinates": {
+        "lat": 64.9415,
+        "lng": -147.9925
+      },
+      "elevation": {
+        "baseM": 213,
+        "topM": 606
+      },
+      "forecastElevationM": 213,
+      "evidence": [
+        {
+          "sourceUrl": "https://shredthemoose.com/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official site checked 2026-08-27 identifies an active Fairbanks ski and snowboard area and markets visits, tickets and winter operations.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "alaska-ski-land",
+      "publicId": "ski-land",
+      "name": "Ski Land",
+      "aliases": [
+        "Mt. Aurora Skiland"
+      ],
+      "stateCode": "AK",
+      "regionId": "fairbanks",
+      "baseTownId": "fairbanks",
+      "routeMode": "new_page",
+      "route": "/fairbanks/mountain/ski-land",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://skilandfairbanks.com/",
+      "coordinates": {
+        "lat": 65.0546,
+        "lng": -147.4107
+      },
+      "elevation": {
+        "baseM": 396,
+        "topM": 741
+      },
+      "forecastElevationM": 396,
+      "evidence": [
+        {
+          "sourceUrl": "https://skilandfairbanks.com/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official site checked 2026-08-27 advertises 2026/27 passes and Friday–Monday winter hours (first chair 11:00, last chair 17:00), direct forward-season evidence. “Mt. Aurora Skiland” is a legacy/colloquial form, not the current brand.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "alaska-mt-eyak-ski-area",
+      "publicId": "mt-eyak-ski-area",
+      "name": "Mt. Eyak Ski Area",
+      "aliases": [
+        "Mount Eyak"
+      ],
+      "stateCode": "AK",
+      "regionId": "cordova",
+      "baseTownId": "cordova",
+      "routeMode": "new_page",
+      "route": "/cordova/mountain/mt-eyak-ski-area",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.mteyak.org/",
+      "coordinates": {
+        "lat": 60.5494,
+        "lng": -145.7508
+      },
+      "elevation": {
+        "baseM": 15,
+        "topM": 366
+      },
+      "forecastElevationM": 15,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.mteyak.org/latest-info",
+          "checkedAt": "2026-08-27",
+          "quote": "Sheridan Alpine Association official pages checked 2026-08-27 describe current lift-served skiing above Cordova and maintain a current “Latest Info” operations channel; operation remains snow- and volunteer-dependent.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "washington-49-degrees-north-mountain-resort",
+      "publicId": "49-degrees-north-mountain-resort",
+      "name": "49° North Mountain Resort",
+      "aliases": [
+        "49 Degrees North"
+      ],
+      "stateCode": "WA",
+      "regionId": "spokane",
+      "baseTownId": "chewelah",
+      "routeMode": "new_page",
+      "route": "/spokane/mountain/49-degrees-north-mountain-resort",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.ski49n.com/",
+      "coordinates": {
+        "lat": 48.3011,
+        "lng": -117.5628
+      },
+      "elevation": {
+        "baseM": 1195,
+        "topM": 1768
+      },
+      "forecastElevationM": 1195,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.ski49n.com/mountain-info/trail-status",
+          "checkedAt": "2026-08-27",
+          "quote": "Official trail-status page reports a last update of 2026-04-06 and the official home page says “Thank you for a great season” with next-season passes on sale.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "washington-mission-ridge-ski-board-resort",
+      "publicId": "mission-ridge-ski-board-resort",
+      "name": "Mission Ridge Ski & Board Resort",
+      "aliases": [
+        "Mission Ridge"
+      ],
+      "stateCode": "WA",
+      "regionId": "wenatchee",
+      "baseTownId": "wenatchee",
+      "routeMode": "new_page",
+      "route": "/wenatchee/mountain/mission-ridge-ski-board-resort",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.missionridge.com/",
+      "coordinates": {
+        "lat": 47.2925,
+        "lng": -120.3997
+      },
+      "elevation": {
+        "baseM": 1399,
+        "topM": 2079
+      },
+      "forecastElevationM": 1399,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.missionridge.com/news/12-20-25-operations-update/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official 2025-12-20 update announced a 2025-12-21 lift reopening; official site checked 2026-08-27 sells 2026/27 passes.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "washington-white-pass-ski-area",
+      "publicId": "white-pass-ski-area",
+      "name": "White Pass Ski Area",
+      "aliases": [
+        "White Pass"
+      ],
+      "stateCode": "WA",
+      "regionId": "white-pass",
+      "baseTownId": "yakima",
+      "routeMode": "new_page",
+      "route": "/white-pass/mountain/white-pass-ski-area",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://skiwhitepass.com/",
+      "coordinates": {
+        "lat": 46.6377,
+        "lng": -121.3912
+      },
+      "elevation": {
+        "baseM": 1372,
+        "topM": 1981
+      },
+      "forecastElevationM": 1372,
+      "evidence": [
+        {
+          "sourceUrl": "https://skiwhitepass.com/the-mountain/hours-and-lifts",
+          "checkedAt": "2026-08-27",
+          "quote": "Official hours page checked 2026-08-27 states daily operation through 2026-04-12 followed by weekend-only operation; 2025/26 pass benefits also remain published.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "washington-mt-spokane-ski-snowboard-park",
+      "publicId": "mt-spokane-ski-snowboard-park",
+      "name": "Mt. Spokane Ski & Snowboard Park",
+      "aliases": [
+        "Mt. Spokane"
+      ],
+      "stateCode": "WA",
+      "regionId": "spokane",
+      "baseTownId": "spokane",
+      "routeMode": "new_page",
+      "route": "/spokane/mountain/mt-spokane-ski-snowboard-park",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.mtspokane.com/",
+      "coordinates": {
+        "lat": 47.9214,
+        "lng": -117.0962
+      },
+      "elevation": {
+        "baseM": 1274,
+        "topM": 1793
+      },
+      "forecastElevationM": 1274,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.mtspokane.com/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official nonprofit mountain site checked 2026-08-27 actively presents winter lift tickets, passes, lessons and the operating mountain report.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "washington-loup-loup-ski-bowl",
+      "publicId": "loup-loup-ski-bowl",
+      "name": "Loup Loup Ski Bowl",
+      "aliases": [],
+      "stateCode": "WA",
+      "regionId": "methow-valley",
+      "baseTownId": "twisp",
+      "routeMode": "new_page",
+      "route": "/methow-valley/mountain/loup-loup-ski-bowl",
+      "lifecycle": "draft",
+      "operatingStatus": "unknown",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://skitheloup.org/",
+      "coordinates": {
+        "lat": 48.3958,
+        "lng": -119.9117
+      },
+      "elevation": {
+        "baseM": 1220,
+        "topM": 1615
+      },
+      "forecastElevationM": 1220,
+      "evidence": [
+        {
+          "sourceUrl": "https://skitheloup.org/mountain/conditions-weather/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official conditions page checked 2026-08-27 says closed for the season and the nonprofit still markets winter skiing, but no lift days occurred in 2025/26 because of inadequate snow and a firm 2026/27 opening schedule was not found. Retain as uncertain, not permanently closed.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "uncertain",
+      "candidateDisposition": "uncertain"
+    },
+    {
+      "recordId": "washington-hurricane-ridge-ski-snowboard-area",
+      "publicId": "hurricane-ridge-ski-snowboard-area",
+      "name": "Hurricane Ridge Ski & Snowboard Area",
+      "aliases": [
+        "Hurricane Ridge"
+      ],
+      "stateCode": "WA",
+      "regionId": "olympic-peninsula",
+      "baseTownId": "port-angeles",
+      "routeMode": "new_page",
+      "route": "/olympic-peninsula/mountain/hurricane-ridge-ski-snowboard-area",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.hurricaneridge.com/",
+      "coordinates": {
+        "lat": 47.9702,
+        "lng": -123.4958
+      },
+      "elevation": {
+        "baseM": 1463,
+        "topM": 1676
+      },
+      "forecastElevationM": 1463,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.hurricaneridge.com/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official nonprofit site checked 2026-08-27 says “Closed For The season,” identifies active lift-served winter use, and links current operations; seasonal access remains subject to Olympic National Park road openings.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "oregon-anthony-lakes-mountain-resort",
+      "publicId": "anthony-lakes-mountain-resort",
+      "name": "Anthony Lakes Mountain Resort",
+      "aliases": [
+        "Anthony Lakes"
+      ],
+      "stateCode": "OR",
+      "regionId": "eastern-oregon",
+      "baseTownId": "baker-city",
+      "routeMode": "new_page",
+      "route": "/eastern-oregon/mountain/anthony-lakes-mountain-resort",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://anthonylakes.com/",
+      "coordinates": {
+        "lat": 44.9636,
+        "lng": -118.2356
+      },
+      "elevation": {
+        "baseM": 2164,
+        "topM": 2438
+      },
+      "forecastElevationM": 2164,
+      "evidence": [
+        {
+          "sourceUrl": "https://anthonylakes.com/operating-schedule-events-calendar/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official operating calendar checked 2026-08-27 remains current and the resort site sells winter products alongside dated 2026 seasonal updates.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "oregon-hoodoo-ski-area",
+      "publicId": "hoodoo-ski-area",
+      "name": "Hoodoo Ski Area",
+      "aliases": [],
+      "stateCode": "OR",
+      "regionId": "bend",
+      "baseTownId": "sisters",
+      "routeMode": "new_page",
+      "route": "/bend/mountain/hoodoo-ski-area",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://hoodoo.com/",
+      "coordinates": {
+        "lat": 44.4081,
+        "lng": -121.8714
+      },
+      "elevation": {
+        "baseM": 1427,
+        "topM": 1737
+      },
+      "forecastElevationM": 1427,
+      "evidence": [
+        {
+          "sourceUrl": "https://hoodoo.com/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official site checked 2026-08-27 actively sells lift tickets and season products and presents current winter mountain operations.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "oregon-mt-ashland-ski-area",
+      "publicId": "mt-ashland-ski-area",
+      "name": "Mt. Ashland Ski Area",
+      "aliases": [
+        "Mount Ashland"
+      ],
+      "stateCode": "OR",
+      "regionId": "southern-oregon",
+      "baseTownId": "ashland",
+      "routeMode": "new_page",
+      "route": "/southern-oregon/mountain/mt-ashland-ski-area",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.mtashland.com/",
+      "coordinates": {
+        "lat": 42.0817,
+        "lng": -122.7048
+      },
+      "elevation": {
+        "baseM": 1938,
+        "topM": 2296
+      },
+      "forecastElevationM": 1938,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.mtashland.com/mountain-report/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official mountain report checked 2026-08-27 shows the completed winter transition to summer operations and the official site publishes dated 2026 events and next-season products.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "oregon-willamette-pass-resort",
+      "publicId": "willamette-pass-resort",
+      "name": "Willamette Pass Resort",
+      "aliases": [
+        "Willamette Pass"
+      ],
+      "stateCode": "OR",
+      "regionId": "willamette-pass",
+      "baseTownId": "oakridge",
+      "routeMode": "new_page",
+      "route": "/willamette-pass/mountain/willamette-pass-resort",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.willamettepass.ski/",
+      "coordinates": {
+        "lat": 43.6003,
+        "lng": -122.0364
+      },
+      "elevation": {
+        "baseM": 1561,
+        "topM": 2036
+      },
+      "forecastElevationM": 1561,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.willamettepass.ski/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official site checked 2026-08-27 sells 2026/27 season passes and publishes current operating products, direct next-season evidence.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "oregon-cooper-spur-ski-area",
+      "publicId": "cooper-spur-ski-area",
+      "name": "Cooper Spur Ski Area",
+      "aliases": [
+        "Cooper Spur"
+      ],
+      "stateCode": "OR",
+      "regionId": "mt-hood",
+      "baseTownId": "hood-river",
+      "routeMode": "new_page",
+      "route": "/mt-hood/mountain/cooper-spur-ski-area",
+      "lifecycle": "draft",
+      "operatingStatus": "unknown",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://cooperspur.com/",
+      "coordinates": {
+        "lat": 45.415,
+        "lng": -121.6052
+      },
+      "elevation": {
+        "baseM": 1219,
+        "topM": 1676
+      },
+      "forecastElevationM": 1219,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.fs.usda.gov/r06/mthood/recreation/cooper-spur-mountain-resort",
+          "checkedAt": "2026-08-27",
+          "quote": "US Forest Service official recreation listing checked 2026-08-27 confirms the permitted ski area and operator, but the operator's current site emphasizes lodging/dining and no sufficiently clear dated 2025/26 or 2026/27 lift schedule was found.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "uncertain",
+      "candidateDisposition": "uncertain"
+    },
+    {
+      "recordId": "california-mountain-high-resorts",
+      "publicId": "mountain-high-resorts",
+      "name": "Mountain High Resorts",
+      "aliases": [
+        "Mountain High"
+      ],
+      "stateCode": "CA",
+      "regionId": "wrightwood",
+      "baseTownId": "wrightwood",
+      "routeMode": "new_page",
+      "route": "/wrightwood/mountain/mountain-high-resorts",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.mthigh.com/site",
+      "coordinates": {
+        "lat": 34.3769,
+        "lng": -117.691
+      },
+      "elevation": {
+        "baseM": 2012,
+        "topM": 2500
+      },
+      "forecastElevationM": 2012,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.mthigh.com/site/connect/connect/videos/youtubevideo378/index.html",
+          "checkedAt": "2026-08-27",
+          "quote": "Official dated post says “Mountain High Is Open For The 25/26 Season” on 2025-11-24; official site checked 2026-08-27 remains active.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "california-china-peak-mountain-resort",
+      "publicId": "china-peak-mountain-resort",
+      "name": "China Peak Mountain Resort",
+      "aliases": [
+        "China Peak"
+      ],
+      "stateCode": "CA",
+      "regionId": "fresno-china-peak",
+      "baseTownId": "fresno",
+      "routeMode": "new_page",
+      "route": "/fresno-china-peak/mountain/china-peak-mountain-resort",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.skichinapeak.com/",
+      "coordinates": {
+        "lat": 37.2368,
+        "lng": -119.157
+      },
+      "elevation": {
+        "baseM": 2149,
+        "topM": 2652
+      },
+      "forecastElevationM": 2149,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.skichinapeak.com/conditions",
+          "checkedAt": "2026-08-27",
+          "quote": "Official conditions/lift-status page checked 2026-08-27 supplies current mountain reporting and the official resort site continues winter ticket/pass sales.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "california-dodge-ridge-mountain-resort",
+      "publicId": "dodge-ridge-mountain-resort",
+      "name": "Dodge Ridge Mountain Resort",
+      "aliases": [
+        "Dodge Ridge"
+      ],
+      "stateCode": "CA",
+      "regionId": "sonora-dodge-ridge",
+      "baseTownId": "pinecrest",
+      "routeMode": "new_page",
+      "route": "/sonora-dodge-ridge/mountain/dodge-ridge-mountain-resort",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://dodgeridge.com/",
+      "coordinates": {
+        "lat": 38.189,
+        "lng": -119.9568
+      },
+      "elevation": {
+        "baseM": 2012,
+        "topM": 2499
+      },
+      "forecastElevationM": 2012,
+      "evidence": [
+        {
+          "sourceUrl": "https://dodgeridge.com/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official site checked 2026-08-27 advertises 2026/27 winter season passes, direct forward-season operating evidence.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "california-mt-baldy-resort",
+      "publicId": "mt-baldy-resort",
+      "name": "Mt Baldy Resort",
+      "aliases": [
+        "Mt. Baldy"
+      ],
+      "stateCode": "CA",
+      "regionId": "san-gabriel-mountains",
+      "baseTownId": "mt-baldy",
+      "routeMode": "new_page",
+      "route": "/san-gabriel-mountains/mountain/mt-baldy-resort",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.mtbaldyresort.com/",
+      "coordinates": {
+        "lat": 34.2701,
+        "lng": -117.6217
+      },
+      "elevation": {
+        "baseM": 1981,
+        "topM": 2621
+      },
+      "forecastElevationM": 1981,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.mtbaldyresort.com/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official operator storefront checked 2026-08-27 actively offers lift products under “The Lifts @ Mt Baldy”; operation is highly snow-dependent but no closure evidence exists.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "california-snow-valley-mountain-resort",
+      "publicId": "snow-valley-mountain-resort",
+      "name": "Snow Valley Mountain Resort",
+      "aliases": [
+        "Snow Valley"
+      ],
+      "stateCode": "CA",
+      "regionId": "big-bear",
+      "baseTownId": "running-springs",
+      "routeMode": "new_page",
+      "route": "/big-bear/mountain/snow-valley-mountain-resort",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.bigbearmountainresort.com/mountains/snow-valley",
+      "coordinates": {
+        "lat": 34.2249,
+        "lng": -117.036
+      },
+      "elevation": {
+        "baseM": 2073,
+        "topM": 2393
+      },
+      "forecastElevationM": 2073,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.bigbearmountainresort.com/hours",
+          "checkedAt": "2026-08-27",
+          "quote": "Big Bear Mountain Resort's official hours page checked 2026-08-27 explicitly provides Snow Valley's current operating schedule. It is commonly managed with Bear Mountain/Snow Summit but remains a distinct ski mountain, not a duplicate.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "california-badger-pass-ski-area",
+      "publicId": "badger-pass-ski-area",
+      "name": "Badger Pass Ski Area",
+      "aliases": [
+        "Badger Pass"
+      ],
+      "stateCode": "CA",
+      "regionId": "yosemite",
+      "baseTownId": "yosemite-valley",
+      "routeMode": "new_page",
+      "route": "/yosemite/mountain/badger-pass-ski-area",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.travelyosemite.com/winter/badger-pass-ski-area/",
+      "coordinates": {
+        "lat": 37.6626,
+        "lng": -119.6634
+      },
+      "elevation": {
+        "baseM": 2195,
+        "topM": 2377
+      },
+      "forecastElevationM": 2195,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.travelyosemite.com/winter/badger-pass-ski-area/",
+          "checkedAt": "2026-08-27",
+          "quote": "Yosemite's official concessioner page checked 2026-08-27 continues to list downhill skiing, lessons, rentals and winter access for Badger Pass; seasonal opening is snow-dependent.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "california-boreal-mountain-california",
+      "publicId": "boreal-mountain-california",
+      "name": "Boreal Mountain California",
+      "aliases": [
+        "Boreal Mountain"
+      ],
+      "stateCode": "CA",
+      "regionId": "north-lake-tahoe",
+      "baseTownId": "truckee",
+      "routeMode": "new_page",
+      "route": "/north-lake-tahoe/mountain/boreal-mountain-california",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.rideboreal.com/",
+      "coordinates": {
+        "lat": 39.3317,
+        "lng": -120.3493
+      },
+      "elevation": {
+        "baseM": 2195,
+        "topM": 2347
+      },
+      "forecastElevationM": 2195,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.rideboreal.com/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official Boreal/Woodward site checked 2026-08-27 remains active with winter passes, lift tickets and mountain operations, while currently displaying its dated summer schedule.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "california-soda-springs-mountain-resort",
+      "publicId": "soda-springs-mountain-resort",
+      "name": "Soda Springs Mountain Resort",
+      "aliases": [
+        "Soda Springs"
+      ],
+      "stateCode": "CA",
+      "regionId": "north-lake-tahoe",
+      "baseTownId": "truckee",
+      "routeMode": "new_page",
+      "route": "/north-lake-tahoe/mountain/soda-springs-mountain-resort",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.skisodasprings.com/",
+      "coordinates": {
+        "lat": 39.3213,
+        "lng": -120.3803
+      },
+      "elevation": {
+        "baseM": 2042,
+        "topM": 2241
+      },
+      "forecastElevationM": 2042,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.skisodasprings.com/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official site checked 2026-08-27 continues to market lift tickets, Planet Kids and Tube Town as an active winter resort; no closure notice was found.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "california-tahoe-donner-downhill-ski-resort",
+      "publicId": "tahoe-donner-downhill-ski-resort",
+      "name": "Tahoe Donner Downhill Ski Resort",
+      "aliases": [
+        "Tahoe Donner Downhill"
+      ],
+      "stateCode": "CA",
+      "regionId": "north-lake-tahoe",
+      "baseTownId": "truckee",
+      "routeMode": "new_page",
+      "route": "/north-lake-tahoe/mountain/tahoe-donner-downhill-ski-resort",
+      "lifecycle": "draft",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "private"
+      },
+      "officialUrl": "https://www.tahoedonner.com/amenities/amenities/downhill-ski/",
+      "coordinates": {
+        "lat": 39.3542,
+        "lng": -120.258
+      },
+      "elevation": {
+        "baseM": 2057,
+        "topM": 2255
+      },
+      "forecastElevationM": 2057,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.tahoedonner.com/amenities/amenities/downhill-ski/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official page checked 2026-08-27 labels it “Private Amenity Closed for Season” and advertises 2026/27 programs. The amenity exists and operates, but catalogue inclusion should disclose association/private-amenity access rules.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "private/restricted",
+      "candidateDisposition": "private_restricted"
+    },
+    {
+      "recordId": "california-donner-ski-ranch",
+      "publicId": "donner-ski-ranch",
+      "name": "Donner Ski Ranch",
+      "aliases": [],
+      "stateCode": "CA",
+      "regionId": "north-lake-tahoe",
+      "baseTownId": "truckee",
+      "routeMode": "new_page",
+      "route": "/north-lake-tahoe/mountain/donner-ski-ranch",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.donnerskiranch.com/",
+      "coordinates": {
+        "lat": 39.3183,
+        "lng": -120.3301
+      },
+      "elevation": {
+        "baseM": 2143,
+        "topM": 2442
+      },
+      "forecastElevationM": 2143,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.donnerskiranch.com/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official family-owned resort site checked 2026-08-27 remains active and presents the ski resort, mountain products and Donner Summit operation; no closure notice was found.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "california-granlibakken-tahoe-ski-snowboard-hill",
+      "publicId": "granlibakken-tahoe-ski-snowboard-hill",
+      "name": "Granlibakken Tahoe Ski & Snowboard Hill",
+      "aliases": [
+        "Granlibakken"
+      ],
+      "stateCode": "CA",
+      "regionId": "north-lake-tahoe",
+      "baseTownId": "tahoe-city",
+      "routeMode": "new_page",
+      "route": "/north-lake-tahoe/mountain/granlibakken-tahoe-ski-snowboard-hill",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.granlibakken.com/",
+      "coordinates": {
+        "lat": 39.1518,
+        "lng": -120.1547
+      },
+      "elevation": {
+        "baseM": 1951,
+        "topM": 2015
+      },
+      "forecastElevationM": 1951,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.granlibakken.com/experiences/ski-and-snowboard-hill",
+          "checkedAt": "2026-08-27",
+          "quote": "Official page checked 2026-08-27 states that its historic, fully groomed family ski and snowboard hill offers skiing, snowboarding and lessons; it is a very small resort hill but not described as members-only.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "california-alta-sierra-ski-resort-and-terrain-park",
+      "publicId": "alta-sierra-ski-resort-and-terrain-park",
+      "name": "Alta Sierra Ski Resort and Terrain Park",
+      "aliases": [
+        "Alta Sierra"
+      ],
+      "stateCode": "CA",
+      "regionId": "kern-river",
+      "baseTownId": "wofford-heights",
+      "routeMode": "new_page",
+      "route": "/kern-river/mountain/alta-sierra-ski-resort-and-terrain-park",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.altasierra.com/v2/about.aspx",
+      "coordinates": {
+        "lat": 35.7107,
+        "lng": -118.559
+      },
+      "elevation": {
+        "baseM": 1981,
+        "topM": 2161
+      },
+      "forecastElevationM": 1981,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.altasierra.com/v2/about.aspx",
+          "checkedAt": "2026-08-27",
+          "quote": "Official page checked 2026-08-27 confirms the active canonical name and former Shirley Meadows name. The area reopened for lift service in February 2026 after two seasons without operation; treat as operating but exceptionally snow-dependent.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "california-palisades-tahoe-alpine",
+      "publicId": "palisades-tahoe-alpine",
+      "name": "Palisades Tahoe – Alpine",
+      "aliases": [
+        "Alpine Meadows"
+      ],
+      "stateCode": "CA",
+      "regionId": "north-lake-tahoe",
+      "baseTownId": "olympic-valley",
+      "routeMode": "existing_page",
+      "route": "/mountain/palisades-tahoe",
+      "lifecycle": "verified",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.palisadestahoe.com/",
+      "coordinates": {
+        "lat": 39.1647,
+        "lng": -120.2386
+      },
+      "elevation": {
+        "baseM": 2085,
+        "topM": 2637
+      },
+      "forecastElevationM": 2085,
+      "evidence": [
+        {
+          "sourceUrl": "https://blog.palisadestahoe.com/press/palisades-tahoe-chosen-as-new-name-for-legendary-california-ski-resort/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official 2021-09-13 announcement states that the combined Squaw Valley Alpine Meadows resort became Palisades Tahoe. Alpine remains one base/mountain side of the already-authored Palisades Tahoe entry, so a second resort record would duplicate it.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "duplicate/renamed",
+      "candidateDisposition": "duplicate_renamed"
+    },
+    {
+      "recordId": "nevada-lee-canyon",
+      "publicId": "lee-canyon",
+      "name": "Lee Canyon",
+      "aliases": [],
+      "stateCode": "NV",
+      "regionId": "las-vegas-lee-canyon",
+      "baseTownId": "las-vegas",
+      "routeMode": "new_page",
+      "route": "/las-vegas-lee-canyon/mountain/lee-canyon",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.leecanyonlv.com/",
+      "coordinates": {
+        "lat": 36.3032,
+        "lng": -115.6792
+      },
+      "elevation": {
+        "baseM": 2640,
+        "topM": 2856
+      },
+      "forecastElevationM": 2640,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.leecanyonlv.com/season-pass/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official page retrieved 2026-08-27 advertises 2026/27 winter season passes; its search record is dated 2026-03-18. The official home page also says summer operations are open daily and to lock in Winter 26/27.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "idaho-silver-mountain-resort",
+      "publicId": "silver-mountain-resort",
+      "name": "Silver Mountain Resort",
+      "aliases": [],
+      "stateCode": "ID",
+      "regionId": "silver-valley",
+      "baseTownId": "kellogg",
+      "routeMode": "new_page",
+      "route": "/silver-valley/mountain/silver-mountain-resort",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://silvermt.com/",
+      "coordinates": {
+        "lat": 47.5403,
+        "lng": -116.1335
+      },
+      "elevation": {
+        "baseM": 1250,
+        "topM": 1920
+      },
+      "forecastElevationM": 1250,
+      "evidence": [
+        {
+          "sourceUrl": "https://new.silvermt.com/ski-ride/season-passes",
+          "checkedAt": "2026-08-27",
+          "quote": "Official page retrieved 2026-08-27 says 2026/2027 season passes are now on sale; the official site simultaneously advertises current lift-served summer activities.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "idaho-lookout-pass-ski-and-recreation-area",
+      "publicId": "lookout-pass-ski-and-recreation-area",
+      "name": "Lookout Pass Ski and Recreation Area",
+      "aliases": [
+        "Lookout Pass Ski & Recreation Area"
+      ],
+      "stateCode": "ID",
+      "regionId": "silver-valley",
+      "baseTownId": "wallace-mullan",
+      "routeMode": "new_page",
+      "route": "/silver-valley/mountain/lookout-pass-ski-and-recreation-area",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://skilookout.com/",
+      "coordinates": {
+        "lat": 47.4562,
+        "lng": -115.6972
+      },
+      "elevation": {
+        "baseM": 1372,
+        "topM": 1875
+      },
+      "forecastElevationM": 1372,
+      "evidence": [
+        {
+          "sourceUrl": "https://skilookout.com/season-pass/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official page retrieved 2026-08-27 sells 2026/27 season passes. The official home page says the prior season is closed and promotes the 26/27 sale, making the closure seasonal rather than permanent.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "idaho-pebble-creek-ski-area",
+      "publicId": "pebble-creek-ski-area",
+      "name": "Pebble Creek Ski Area",
+      "aliases": [],
+      "stateCode": "ID",
+      "regionId": "pocatello-southeast-idaho",
+      "baseTownId": "pocatello-inkom",
+      "routeMode": "new_page",
+      "route": "/pocatello-southeast-idaho/mountain/pebble-creek-ski-area",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://pebblecreekskiarea.com/",
+      "coordinates": {
+        "lat": 42.7784,
+        "lng": -112.1591
+      },
+      "elevation": {
+        "baseM": 1939,
+        "topM": 2609
+      },
+      "forecastElevationM": 1939,
+      "evidence": [
+        {
+          "sourceUrl": "https://pebblecreekskiarea.com/tickets-passes/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official page retrieved 2026-08-27 says closed for the season and documents 2025/26 tickets and passes. In addition, Indy Pass lists Pebble Creek as a newly added 2026/27 resort, corroborating continued operation: https://www.indyskipass.com/our-resorts/pebble-creek-ski-area.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "idaho-soldier-mountain",
+      "publicId": "soldier-mountain",
+      "name": "Soldier Mountain",
+      "aliases": [],
+      "stateCode": "ID",
+      "regionId": "sun-valley",
+      "baseTownId": "fairfield",
+      "routeMode": "new_page",
+      "route": "/sun-valley/mountain/soldier-mountain",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://soldiermountain.com/",
+      "coordinates": {
+        "lat": 43.4856,
+        "lng": -114.8295
+      },
+      "elevation": {
+        "baseM": 1754,
+        "topM": 2188
+      },
+      "forecastElevationM": 1754,
+      "evidence": [
+        {
+          "sourceUrl": "https://estore.soldiermountain.com/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official store retrieved 2026-08-27 offers season passes and 2025/26 day tickets; the official home page carries a current Summer 2026 schedule. The Forest Service also identifies it as an active permitted ski resort.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "idaho-pomerelle-mountain-resort",
+      "publicId": "pomerelle-mountain-resort",
+      "name": "Pomerelle Mountain Resort",
+      "aliases": [],
+      "stateCode": "ID",
+      "regionId": "southern-idaho-magic-valley",
+      "baseTownId": "burley-albion",
+      "routeMode": "new_page",
+      "route": "/southern-idaho-magic-valley/mountain/pomerelle-mountain-resort",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.pomerelle.com/",
+      "coordinates": {
+        "lat": 42.3182,
+        "lng": -113.6082
+      },
+      "elevation": {
+        "baseM": 2366,
+        "topM": 2671
+      },
+      "forecastElevationM": 2366,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.pomerelle.com/reload2",
+          "checkedAt": "2026-08-27",
+          "quote": "Official ticket page retrieved 2026-08-27 says 'CLOSED—Thank you! Ski ya next season!', expressly identifying a seasonal closure and next season. The official contact page still publishes normal day and night ski hours.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "idaho-kelly-canyon-resort",
+      "publicId": "kelly-canyon-resort",
+      "name": "Kelly Canyon Resort",
+      "aliases": [
+        "Kelly Canyon"
+      ],
+      "stateCode": "ID",
+      "regionId": "idaho-falls-kelly-canyon",
+      "baseTownId": "idaho-falls-ririe",
+      "routeMode": "new_page",
+      "route": "/idaho-falls-kelly-canyon/mountain/kelly-canyon-resort",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.kellycanyonresort.com/",
+      "coordinates": {
+        "lat": 43.6464,
+        "lng": -111.6304
+      },
+      "elevation": {
+        "baseM": 1707,
+        "topM": 2012
+      },
+      "forecastElevationM": 1707,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.kellycanyonresort.com/season-passes-new/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official page dated 2026-02-11 and retrieved 2026-08-27 says 26/27 winter season passes are on sale and describes unlimited skiing and snowboarding. 'Kelly Canyon Resort' is the current branding, not a duplicate catalogue entry.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "montana-montana-snowbowl",
+      "publicId": "montana-snowbowl",
+      "name": "Montana Snowbowl",
+      "aliases": [],
+      "stateCode": "MT",
+      "regionId": "missoula",
+      "baseTownId": "missoula",
+      "routeMode": "new_page",
+      "route": "/missoula/mountain/montana-snowbowl",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.montanasnowbowl.com/",
+      "coordinates": {
+        "lat": 47.0145,
+        "lng": -113.9994
+      },
+      "elevation": {
+        "baseM": 1524,
+        "topM": 2316
+      },
+      "forecastElevationM": 1524,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.montanasnowbowl.com/season-passes-2/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official page retrieved 2026-08-27 advertises a Summer Sale for 2026/27 season passes through 2026-08-31. A linked official spring-pass form is explicitly dated 2026.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "montana-discovery-ski-area",
+      "publicId": "discovery-ski-area",
+      "name": "Discovery Ski Area",
+      "aliases": [],
+      "stateCode": "MT",
+      "regionId": "southwest-montana-discovery",
+      "baseTownId": "philipsburg-anaconda",
+      "routeMode": "new_page",
+      "route": "/southwest-montana-discovery/mountain/discovery-ski-area",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.skidiscovery.com/",
+      "coordinates": {
+        "lat": 46.2494,
+        "lng": -113.2411
+      },
+      "elevation": {
+        "baseM": 1759,
+        "topM": 2484
+      },
+      "forecastElevationM": 1759,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.skidiscovery.com/march-season-pass-sale/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official season-pass sale page is dated 2026-02-26 and remained live when retrieved 2026-08-27; the official site also retains an active ticket store and current snow/terrain reporting framework.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "montana-blacktail-mountain-ski-area",
+      "publicId": "blacktail-mountain-ski-area",
+      "name": "Blacktail Mountain Ski Area",
+      "aliases": [
+        "Blacktail Mountain"
+      ],
+      "stateCode": "MT",
+      "regionId": "whitefish",
+      "baseTownId": "lakeside-kalispell",
+      "routeMode": "new_page",
+      "route": "/whitefish/mountain/blacktail-mountain-ski-area",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://blacktailmountain.com/",
+      "coordinates": {
+        "lat": 48.0132,
+        "lng": -114.3692
+      },
+      "elevation": {
+        "baseM": 1628,
+        "topM": 2067
+      },
+      "forecastElevationM": 1628,
+      "evidence": [
+        {
+          "sourceUrl": "https://blacktailmountain.com/grateful-for-another-great-season-on-the-mountain/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official post reported 2026-03-29 says the 2025/26 season had concluded and gives April 2026 dates for both renewal and general 2026/27 pass sales.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "montana-great-divide-ski-area",
+      "publicId": "great-divide-ski-area",
+      "name": "Great Divide Ski Area",
+      "aliases": [
+        "Great Divide"
+      ],
+      "stateCode": "MT",
+      "regionId": "helena-great-divide",
+      "baseTownId": "helena",
+      "routeMode": "new_page",
+      "route": "/helena-great-divide/mountain/great-divide-ski-area",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.skigd.com/",
+      "coordinates": {
+        "lat": 46.7511,
+        "lng": -112.3139
+      },
+      "elevation": {
+        "baseM": 1777,
+        "topM": 2234
+      },
+      "forecastElevationM": 1777,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.skigd.com/season-passes.nextseason",
+          "checkedAt": "2026-08-27",
+          "quote": "Official page retrieved 2026-08-27 sells 2026/27 passes. The official hours page says the 2025/26 season ended and the area is preparing for 2026/27; the official site metadata was published 2026-08-05.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "montana-showdown-montana",
+      "publicId": "showdown-montana",
+      "name": "Showdown Montana",
+      "aliases": [],
+      "stateCode": "MT",
+      "regionId": "great-falls-showdown",
+      "baseTownId": "great-falls-neihart",
+      "routeMode": "new_page",
+      "route": "/great-falls-showdown/mountain/showdown-montana",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.showdownmontana.com/",
+      "coordinates": {
+        "lat": 46.8382,
+        "lng": -110.7022
+      },
+      "elevation": {
+        "baseM": 2073,
+        "topM": 2499
+      },
+      "forecastElevationM": 2073,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.showdownmontana.com/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official home page retrieved 2026-08-27 says the 2025/26 season is over and publishes a 2026/27 pass-sale schedule including the then-current 2026-04-13 through 2026-08-31 summer-sale period.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "montana-maverick-mountain",
+      "publicId": "maverick-mountain",
+      "name": "Maverick Mountain",
+      "aliases": [],
+      "stateCode": "MT",
+      "regionId": "southwest-montana-dillon",
+      "baseTownId": "dillon-polaris",
+      "routeMode": "new_page",
+      "route": "/southwest-montana-dillon/mountain/maverick-mountain",
+      "lifecycle": "draft",
+      "operatingStatus": "unknown",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.skimaverick.com/",
+      "coordinates": {
+        "lat": 45.4342,
+        "lng": -113.1282
+      },
+      "elevation": {
+        "baseM": 1981,
+        "topM": 2597
+      },
+      "forecastElevationM": 1981,
+      "evidence": [
+        {
+          "sourceUrl": "https://montanafreepress.org/2026/08/17/sand-creek-fire-maverick-mountain-resort-spared/",
+          "checkedAt": "2026-08-27",
+          "quote": "Current exception: on 2026-08-17 Montana Free Press directly quoted co-owner Erik Borge saying the sole chairlift had extensive Sand Creek Fire damage and would 'most likely be inoperable' for 2026/27. The resort's own live site still shows ordinary operating hours but no post-fire reopening commitment. As of research on 2026-08-27, this is not enough to call it permanently closed, but it cannot be verified operating for the coming winter.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "uncertain",
+      "candidateDisposition": "uncertain"
+    },
+    {
+      "recordId": "montana-turner-mountain-ski-area",
+      "publicId": "turner-mountain-ski-area",
+      "name": "Turner Mountain Ski Area",
+      "aliases": [
+        "Turner Mountain"
+      ],
+      "stateCode": "MT",
+      "regionId": "libby-northwest-montana",
+      "baseTownId": "libby",
+      "routeMode": "new_page",
+      "route": "/libby-northwest-montana/mountain/turner-mountain-ski-area",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://skiturner.com/",
+      "coordinates": {
+        "lat": 48.6032,
+        "lng": -115.6585
+      },
+      "elevation": {
+        "baseM": 1171,
+        "topM": 1814
+      },
+      "forecastElevationM": 1171,
+      "evidence": [
+        {
+          "sourceUrl": "https://skiturner.com/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official site retrieved 2026-08-27 reports 'Closed for the Season', not permanently closed, and continues to offer mountain/ticket information. Dated corroboration: local reporting records its 2026-01-10 opening and 2026-02-25 reopening after a low-snow pause: https://thewesternnews.com/news/2026/jan/09/skiers-rejoice-turner-mountain-opens-saturday/ and https://nbcmontana.com/news/local/ski-area-near-libby-reopens-after-month-long-closure.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "verified operating",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "montana-yellowstone-club",
+      "publicId": "yellowstone-club",
+      "name": "Yellowstone Club",
+      "aliases": [],
+      "stateCode": "MT",
+      "regionId": "big-sky",
+      "baseTownId": "big-sky",
+      "routeMode": "new_page",
+      "route": "/big-sky/mountain/yellowstone-club",
+      "lifecycle": "draft",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "private"
+      },
+      "officialUrl": "https://yellowstoneclub.com/",
+      "coordinates": {
+        "lat": 45.2314,
+        "lng": -111.4515
+      },
+      "elevation": {
+        "baseM": 2182,
+        "topM": 3005
+      },
+      "forecastElevationM": 2182,
+      "evidence": [
+        {
+          "sourceUrl": "https://yellowstoneclub.com/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official site retrieved 2026-08-27 describes 15,200 acres of 'Private Powder' skiing and presents Yellowstone Club as a private residential community. The official ski page documents its operating ski terrain, but ordinary public lift-ticket access is not offered: https://yellowstoneclub.com/ski/.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "private/restricted",
+      "candidateDisposition": "private_restricted"
+    },
+    {
+      "recordId": "wy-snow-king-mountain",
+      "publicId": "snow-king-mountain",
+      "name": "Snow King Mountain",
+      "aliases": [],
+      "stateCode": "WY",
+      "regionId": "jackson-hole",
+      "baseTownId": "jackson",
+      "routeMode": "existing_page",
+      "route": "/mountain/snow-king-mountain",
+      "lifecycle": "verified",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://snowkingmountain.com/",
+      "coordinates": {
+        "lat": 43.4783,
+        "lng": -110.7581
+      },
+      "elevation": {
+        "baseM": 1901,
+        "topM": 2380
+      },
+      "forecastElevationM": 1901,
+      "evidence": [
+        {
+          "sourceUrl": "https://snowkingmountain.com/mountain/hours-of-operations/",
+          "checkedAt": "2026-08-27",
+          "quote": "Checked 2026-08-27: the official hours page says the ski lifts are closed for the season and publishes winter operating hours; the home page calls it Jackson Hole's original ski resort. This is a seasonal closure, not a defunct area.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "operating-public-duplicate-already-in-code",
+      "candidateDisposition": "existing"
+    },
+    {
+      "recordId": "wy-antelope-butte-mountain-recreation-area",
+      "publicId": "antelope-butte-mountain-recreation-area",
+      "name": "Antelope Butte Mountain Recreation Area",
+      "aliases": [],
+      "stateCode": "WY",
+      "regionId": "bighorn-mountains",
+      "baseTownId": "shell",
+      "routeMode": "new_page",
+      "route": "/bighorn-mountains/mountain/antelope-butte-mountain-recreation-area",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.skiantelopebutte.com/",
+      "coordinates": {
+        "lat": 44.6136,
+        "lng": -107.5142
+      },
+      "elevation": {
+        "baseM": 2560,
+        "topM": 2865
+      },
+      "forecastElevationM": 2560,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.skiantelopebutte.com/",
+          "checkedAt": "2026-08-27",
+          "quote": "Checked 2026-08-27: the nonprofit operator thanks guests for the completed season, says it will reopen in December, and is selling 2026-27 passes. The official map page lists three lifts, 30+ trails, an 8,400 ft base and 9,400 ft lift summit; the USFS also lists it as a winter recreation area.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "operating-public-nonprofit",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "wy-meadowlark",
+      "publicId": "meadowlark",
+      "name": "Meadowlark",
+      "aliases": [
+        "Meadowlark Ski Lodge"
+      ],
+      "stateCode": "WY",
+      "regionId": "bighorn-mountains",
+      "baseTownId": "ten-sleep",
+      "routeMode": "new_page",
+      "route": "/bighorn-mountains/mountain/meadowlark",
+      "lifecycle": "draft",
+      "operatingStatus": "planned",
+      "classification": {
+        "facilityType": "unknown",
+        "snowSurface": "snow",
+        "publicAccess": "unknown"
+      },
+      "officialUrl": "https://www.meadowlarklodge.com/",
+      "coordinates": {
+        "lat": 44.1748,
+        "lng": -107.2164
+      },
+      "elevation": {
+        "baseM": 2591,
+        "topM": 2896
+      },
+      "forecastElevationM": 2591,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.meadowlarklodge.com/",
+          "checkedAt": "2026-08-27",
+          "quote": "Checked 2026-08-27: the official site says Meadowlark is under new ownership, will reopen in winter 2026-27, and is selling 2026-27 season passes. It should not be represented as presently open in summer or as having operated in 2025-26; the current operating brand is simply 'Meadowlark'.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "temporarily-closed-announced-reopening",
+      "candidateDisposition": "uncertain"
+    },
+    {
+      "recordId": "wy-white-pine-resort",
+      "publicId": "white-pine-resort",
+      "name": "White Pine Resort",
+      "aliases": [
+        "White Pine Ski Area"
+      ],
+      "stateCode": "WY",
+      "regionId": "pinedale",
+      "baseTownId": "pinedale",
+      "routeMode": "new_page",
+      "route": "/pinedale/mountain/white-pine-resort",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.whitepineresort.com/",
+      "coordinates": {
+        "lat": 42.9777,
+        "lng": -109.7582
+      },
+      "elevation": {
+        "baseM": 2560,
+        "topM": 2896
+      },
+      "forecastElevationM": 2560,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.whitepineresort.com/plan",
+          "checkedAt": "2026-08-27",
+          "quote": "Checked 2026-08-27: the official plan page gives a completed 2025-26 season of 20 December 2025 through 22 March 2026 and Thursday-Sunday lift hours. Use the site's current 'White Pine Resort' name rather than the PDF's older 'White Pine Ski Area'.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "operating-public-renamed",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "wy-hogadon-basin-ski-area",
+      "publicId": "hogadon-basin-ski-area",
+      "name": "Hogadon Basin Ski Area",
+      "aliases": [],
+      "stateCode": "WY",
+      "regionId": "casper",
+      "baseTownId": "casper",
+      "routeMode": "new_page",
+      "route": "/casper/mountain/hogadon-basin-ski-area",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://hogadon.net/",
+      "coordinates": {
+        "lat": 42.7448,
+        "lng": -106.3386
+      },
+      "elevation": {
+        "baseM": 2256,
+        "topM": 2438
+      },
+      "forecastElevationM": 2256,
+      "evidence": [
+        {
+          "sourceUrl": "https://hogadon.net/",
+          "checkedAt": "2026-08-27",
+          "quote": "Checked 2026-08-27: the City of Casper-operated official site publishes a 13 December 2025 opening, December-April season, Wednesday-Sunday hours, and named lift hours. It is a current municipal ski area.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "operating-public-municipal",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "wy-snowy-range-ski-area",
+      "publicId": "snowy-range-ski-area",
+      "name": "Snowy Range Ski Area",
+      "aliases": [
+        "Snowy Range Ski & Recreation Area"
+      ],
+      "stateCode": "WY",
+      "regionId": "laramie-snowy-range",
+      "baseTownId": "centennial",
+      "routeMode": "new_page",
+      "route": "/laramie-snowy-range/mountain/snowy-range-ski-area",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://snowyrangeski.com/",
+      "coordinates": {
+        "lat": 41.3415,
+        "lng": -106.1834
+      },
+      "elevation": {
+        "baseM": 2682,
+        "topM": 2945
+      },
+      "forecastElevationM": 2682,
+      "evidence": [
+        {
+          "sourceUrl": "https://snowyrangeski.com/snow-report/",
+          "checkedAt": "2026-08-27",
+          "quote": "Checked 2026-08-27: the official site remains an active lift-ticket, season-pass, snow-report and winter-vacation site and describes the area in Medicine Bow National Forest. Canonical site branding is 'Snowy Range Ski Area', not the longer PDF form.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "operating-public",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "wy-sleeping-giant-ski-area",
+      "publicId": "sleeping-giant-ski-area",
+      "name": "Sleeping Giant Ski Area",
+      "aliases": [],
+      "stateCode": "WY",
+      "regionId": "cody",
+      "baseTownId": "cody",
+      "routeMode": "new_page",
+      "route": "/cody/mountain/sleeping-giant-ski-area",
+      "lifecycle": "draft",
+      "operatingStatus": "closed",
+      "classification": {
+        "facilityType": "unknown",
+        "snowSurface": "snow",
+        "publicAccess": "unknown"
+      },
+      "officialUrl": "https://skisg.com/",
+      "coordinates": {
+        "lat": 44.4933,
+        "lng": -109.9397
+      },
+      "elevation": {
+        "baseM": 2017,
+        "topM": 2264
+      },
+      "forecastElevationM": 2017,
+      "evidence": [
+        {
+          "sourceUrl": "https://skisg.com/",
+          "checkedAt": "2026-08-27",
+          "quote": "Checked 2026-08-27: the official site's latest winter notice says it decided not to open for the 2024-25 season and provides no later reopening commitment or current pass/ticket sales. Despite old hours remaining on a contact page, it cannot be verified as operating and must be excluded or visibly marked closed pending a new official announcement.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "closed-no-announced-reopening",
+      "candidateDisposition": "closed"
+    },
+    {
+      "recordId": "ut-brian-head-resort",
+      "publicId": "brian-head-resort",
+      "name": "Brian Head Resort",
+      "aliases": [],
+      "stateCode": "UT",
+      "regionId": "southern-utah",
+      "baseTownId": "brian-head",
+      "routeMode": "new_page",
+      "route": "/southern-utah/mountain/brian-head-resort",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.brianhead.com/",
+      "coordinates": {
+        "lat": 37.7024,
+        "lng": -112.8499
+      },
+      "elevation": {
+        "baseM": 2926,
+        "topM": 3344
+      },
+      "forecastElevationM": 2926,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.brianhead.com/winter/",
+          "checkedAt": "2026-08-27",
+          "quote": "Checked 2026-08-27: the official resort site actively markets winter lift tickets, lessons, rentals and season passes for the next winter. It remains a conventional public lift-served resort.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "operating-public",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "ut-eagle-point-resort",
+      "publicId": "eagle-point-resort",
+      "name": "Eagle Point Resort",
+      "aliases": [],
+      "stateCode": "UT",
+      "regionId": "southern-utah",
+      "baseTownId": "beaver",
+      "routeMode": "new_page",
+      "route": "/southern-utah/mountain/eagle-point-resort",
+      "lifecycle": "draft",
+      "operatingStatus": "temporarily_closed",
+      "classification": {
+        "facilityType": "unknown",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.eaglepointresort.com/",
+      "coordinates": {
+        "lat": 38.3208,
+        "lng": -112.3834
+      },
+      "elevation": {
+        "baseM": 2774,
+        "topM": 3231
+      },
+      "forecastElevationM": 2774,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.eaglepointresort.com/",
+          "checkedAt": "2026-08-27",
+          "quote": "Checked 2026-08-27: the official site continues to market the ski resort but says summer operations are temporarily paused because of the Cottonwood Fire. Treat that as a hazard closure, not a defunct resort; verify the fire notice before publishing a live open state.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "operating-public-temporary-fire-pause",
+      "candidateDisposition": "uncertain"
+    },
+    {
+      "recordId": "ut-woodward-park-city",
+      "publicId": "woodward-park-city",
+      "name": "Woodward Park City",
+      "aliases": [],
+      "stateCode": "UT",
+      "regionId": "park-city",
+      "baseTownId": "park-city",
+      "routeMode": "new_page",
+      "route": "/park-city/mountain/woodward-park-city",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.woodwardparkcity.com/",
+      "coordinates": {
+        "lat": 40.7555,
+        "lng": -111.5853
+      },
+      "elevation": {
+        "baseM": 1981,
+        "topM": 2134
+      },
+      "forecastElevationM": 1981,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.woodwardparkcity.com/explore/mountain-park-winter/",
+          "checkedAt": "2026-08-27",
+          "quote": "Checked 2026-08-27: official pages advertise the winter Mountain Park, lift/trail report, webcam and Mountain Park season pass. It is a genuine lift-served snow venue, but should be classified as an action-sports/terrain-park and tubing facility rather than presented as a full destination ski resort.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "operating-public-specialty-mountain-park",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "co-monarch-mountain",
+      "publicId": "monarch-mountain",
+      "name": "Monarch Mountain",
+      "aliases": [],
+      "stateCode": "CO",
+      "regionId": "salida-monarch",
+      "baseTownId": "salida",
+      "routeMode": "new_page",
+      "route": "/salida-monarch/mountain/monarch-mountain",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://skimonarch.com/",
+      "coordinates": {
+        "lat": 38.5122,
+        "lng": -106.3317
+      },
+      "elevation": {
+        "baseM": 3290,
+        "topM": 3630
+      },
+      "forecastElevationM": 3290,
+      "evidence": [
+        {
+          "sourceUrl": "https://skimonarch.com/hours-stats/",
+          "checkedAt": "2026-08-27",
+          "quote": "Checked 2026-08-27: the official hours-and-stats page publishes daily in-season lift hours, and the official site sells lift tickets and passes. The official site also documented opening for 2025-26.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "operating-public",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "co-wolf-creek-ski-area",
+      "publicId": "wolf-creek-ski-area",
+      "name": "Wolf Creek Ski Area",
+      "aliases": [],
+      "stateCode": "CO",
+      "regionId": "pagosa-wolf-creek",
+      "baseTownId": "pagosa-springs",
+      "routeMode": "new_page",
+      "route": "/pagosa-wolf-creek/mountain/wolf-creek-ski-area",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://wolfcreekski.com/",
+      "coordinates": {
+        "lat": 37.4722,
+        "lng": -106.7935
+      },
+      "elevation": {
+        "baseM": 3139,
+        "topM": 3628
+      },
+      "forecastElevationM": 3139,
+      "evidence": [
+        {
+          "sourceUrl": "https://wolfcreekski.com/home/",
+          "checkedAt": "2026-08-27",
+          "quote": "Checked 2026-08-27: the official 2025-26 home/snow-report site and current mountain pages verify continuing operations. Official stats list 1,600 acres, a 10,300 ft base and 11,904 ft summit.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "operating-public",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "co-sunlight-mountain-resort",
+      "publicId": "sunlight-mountain-resort",
+      "name": "Sunlight Mountain Resort",
+      "aliases": [],
+      "stateCode": "CO",
+      "regionId": "glenwood-springs",
+      "baseTownId": "glenwood-springs",
+      "routeMode": "new_page",
+      "route": "/glenwood-springs/mountain/sunlight-mountain-resort",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://sunlightmtn.com/",
+      "coordinates": {
+        "lat": 39.3998,
+        "lng": -107.3388
+      },
+      "elevation": {
+        "baseM": 2403,
+        "topM": 3016
+      },
+      "forecastElevationM": 2403,
+      "evidence": [
+        {
+          "sourceUrl": "https://sunlightmtn.com/mountain-information/weather-lift-report",
+          "checkedAt": "2026-08-27",
+          "quote": "Checked 2026-08-27: the official resort maintains its mountain/lift report, winter products and a current lift-replacement project page. It remains an operating public ski resort serving Glenwood Springs.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "operating-public",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "co-powderhorn-mountain-resort",
+      "publicId": "powderhorn-mountain-resort",
+      "name": "Powderhorn Mountain Resort",
+      "aliases": [],
+      "stateCode": "CO",
+      "regionId": "grand-mesa",
+      "baseTownId": "mesa",
+      "routeMode": "new_page",
+      "route": "/grand-mesa/mountain/powderhorn-mountain-resort",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.powderhorn.com/",
+      "coordinates": {
+        "lat": 39.0695,
+        "lng": -108.1507
+      },
+      "elevation": {
+        "baseM": 2499,
+        "topM": 3002
+      },
+      "forecastElevationM": 2499,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.powderhorn.com/explore/conditions/mountain-report.html",
+          "checkedAt": "2026-08-27",
+          "quote": "Checked 2026-08-27: the official site has a current mountain report, ski/snowboard products, 2026 summer operations and active lift construction updates. The resort describes 1,600 acres and 1,650 ft vertical on Grand Mesa.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "operating-public",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "co-silverton-mountain",
+      "publicId": "silverton-mountain",
+      "name": "Silverton Mountain",
+      "aliases": [],
+      "stateCode": "CO",
+      "regionId": "durango",
+      "baseTownId": "silverton",
+      "routeMode": "new_page",
+      "route": "/durango/mountain/silverton-mountain",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://silvertonmountain.com/",
+      "coordinates": {
+        "lat": 37.8847,
+        "lng": -107.6653
+      },
+      "elevation": {
+        "baseM": 3170,
+        "topM": 4111
+      },
+      "forecastElevationM": 3170,
+      "evidence": [
+        {
+          "sourceUrl": "https://silvertonmountain.com/mountain/schedule/",
+          "checkedAt": "2026-08-27",
+          "quote": "Checked 2026-08-27: the official site says the 2025-26 season is closed but is taking next-season bookings; its 2026-27 schedule lists heli and lift-served guided operations beginning 31 December 2026. This is a highly specialized, expert-oriented operation with limited days, not a conventional daily family resort.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "operating-public-expert-guided-limited-schedule",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "co-cooper",
+      "publicId": "cooper",
+      "name": "Cooper",
+      "aliases": [
+        "Ski Cooper"
+      ],
+      "stateCode": "CO",
+      "regionId": "summit-county",
+      "baseTownId": "leadville",
+      "routeMode": "new_page",
+      "route": "/summit-county/mountain/cooper",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.skicooper.com/",
+      "coordinates": {
+        "lat": 39.3603,
+        "lng": -106.3022
+      },
+      "elevation": {
+        "baseM": 3200,
+        "topM": 3566
+      },
+      "forecastElevationM": 3200,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.skicooper.com/season-passes/",
+          "checkedAt": "2026-08-27",
+          "quote": "Checked 2026-08-27: the official site brands the ski area as 'Cooper' (with the skicooper.com domain), is selling unrestricted 2026-27 passes, and documented an early 22 March 2026 close. Use 'Cooper' as display name and retain 'Ski Cooper' as a search alias.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "operating-public-official-brand-differs",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "co-echo-mountain",
+      "publicId": "echo-mountain",
+      "name": "Echo Mountain",
+      "aliases": [],
+      "stateCode": "CO",
+      "regionId": "boulder-front-range",
+      "baseTownId": "idaho-springs",
+      "routeMode": "new_page",
+      "route": "/boulder-front-range/mountain/echo-mountain",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://echomtn.com/",
+      "coordinates": {
+        "lat": 39.6849,
+        "lng": -105.5193
+      },
+      "elevation": {
+        "baseM": 3063,
+        "topM": 3246
+      },
+      "forecastElevationM": 3063,
+      "evidence": [
+        {
+          "sourceUrl": "https://echomtn.com/hours",
+          "checkedAt": "2026-08-27",
+          "quote": "Checked 2026-08-27: the official hours page publishes 2025-26 ski and night-skiing hours, while the home page sells 2026-27 passes. It is an active public ski area 36 miles from Denver.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "operating-public",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "nm-ski-apache",
+      "publicId": "ski-apache",
+      "name": "Ski Apache",
+      "aliases": [],
+      "stateCode": "NM",
+      "regionId": "ruidoso",
+      "baseTownId": "ruidoso",
+      "routeMode": "new_page",
+      "route": "/ruidoso/mountain/ski-apache",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.skiapache.com/",
+      "coordinates": {
+        "lat": 33.397455,
+        "lng": -105.789198
+      },
+      "elevation": {
+        "baseM": 2926,
+        "topM": 3475
+      },
+      "forecastElevationM": 2926,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.skiapache.com/mountain-info/",
+          "checkedAt": "2026-08-27",
+          "quote": "Live check 2026-08-27: official page lists the Alto address, weekend lift/gondola hours, 9,600/11,400-ft mountain elevations, and current mountain activities. Live check 2026-08-27: official live report had winter lifts closed in the summer reporting state; this is seasonal closure, not evidence of abandonment. Live check 2026-08-27: operator was advertising 2026/27 ski passes and summer weekend operations.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "active-seasonal",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "nm-sipapu-ski-summer-resort",
+      "publicId": "sipapu-ski-summer-resort",
+      "name": "Sipapu Ski & Summer Resort",
+      "aliases": [],
+      "stateCode": "NM",
+      "regionId": "taos",
+      "baseTownId": "taos",
+      "routeMode": "new_page",
+      "route": "/taos/mountain/sipapu-ski-summer-resort",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.sipapu.ski/",
+      "coordinates": {
+        "lat": 36.152,
+        "lng": -105.55
+      },
+      "elevation": {
+        "baseM": 2499,
+        "topM": 2821
+      },
+      "forecastElevationM": 2499,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.sipapu.ski/snow-report/",
+          "checkedAt": "2026-08-27",
+          "quote": "Live check 2026-08-27: official report says the 2025/26 ski season is complete, reports 60 inches season total, and promotes the 2026/27 Power Pass; this is a normal seasonal closure. Published 2025-08-13: official winter operations calendar establishes the 2025/26 operating season. Live check 2026-08-27: official stats list 215 acres, 43 trails, six lifts, 8,200-ft base and 9,255-ft peak. Live check 2026-08-27: Carson National Forest still lists Sipapu Ski Area, its Vadito contact, lift operation, and coordinates.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "active-seasonal",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "nm-red-river-ski-summer-area",
+      "publicId": "red-river-ski-summer-area",
+      "name": "Red River Ski & Summer Area",
+      "aliases": [
+        "Red River Ski Area"
+      ],
+      "stateCode": "NM",
+      "regionId": "red-river",
+      "baseTownId": "red-river",
+      "routeMode": "new_page",
+      "route": "/red-river/mountain/red-river-ski-summer-area",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.redriverskiarea.com/",
+      "coordinates": {
+        "lat": 36.7076,
+        "lng": -105.4168
+      },
+      "elevation": {
+        "baseM": 2667,
+        "topM": 3155
+      },
+      "forecastElevationM": 2667,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.redriverskiarea.com/winter/winter-mountain/snow-report/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official report updated 2026-03-23 at 07:10 says the mountain closed after a 63-inch 2025/26 season; it reports seven lifts and 64 trails. Live check 2026-08-27: official store page is selling 2026/27 winter lift tickets. Live check 2026-08-27: operator says skiing opens the day before Thanksgiving, becomes daily in December, and runs through late March. USFS page dated 2025-04-24 and live-checked 2026-08-27 lists the ski area, coordinates, elevations, Red River contact and lift hours.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "active-seasonal",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "nm-pajarito-mountain-ski-area",
+      "publicId": "pajarito-mountain-ski-area",
+      "name": "Pajarito Mountain Ski Area",
+      "aliases": [
+        "Pajarito Mountain"
+      ],
+      "stateCode": "NM",
+      "regionId": "los-alamos-pajarito",
+      "baseTownId": "los-alamos",
+      "routeMode": "new_page",
+      "route": "/los-alamos-pajarito/mountain/pajarito-mountain-ski-area",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.pajarito.ski/",
+      "coordinates": {
+        "lat": 35.895,
+        "lng": -106.392
+      },
+      "elevation": {
+        "baseM": 2743,
+        "topM": 3182
+      },
+      "forecastElevationM": 2743,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.pajarito.ski/season-passes/",
+          "checkedAt": "2026-08-27",
+          "quote": "Page dated 2026-03-18 and live-checked 2026-08-27 sells Pajarito 2026/27 ski passes. Official update dated 2026-07-16 describes multimillion-dollar work for winter 2026/27 after a dry winter. Live check 2026-08-27: lifts are marked closed for the season, consistent with the operator's forthcoming-winter sales and construction updates. Live check 2026-08-27: official page says the public ski area is five miles west of Los Alamos and lists 280 acres, 53 trails, six lifts, and 9,000/10,440-ft elevations.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "active-seasonal",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "nm-ski-cloudcroft",
+      "publicId": "ski-cloudcroft",
+      "name": "Ski Cloudcroft",
+      "aliases": [],
+      "stateCode": "NM",
+      "regionId": "cloudcroft",
+      "baseTownId": "cloudcroft",
+      "routeMode": "new_page",
+      "route": "/cloudcroft/mountain/ski-cloudcroft",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://skicloudcroft.net/",
+      "coordinates": {
+        "lat": 32.950708,
+        "lng": -105.707242
+      },
+      "elevation": {
+        "baseM": 2560,
+        "topM": 2774
+      },
+      "forecastElevationM": 2560,
+      "evidence": [
+        {
+          "sourceUrl": "https://skicloudcroft.net/",
+          "checkedAt": "2026-08-27",
+          "quote": "Official update dated 2026-03-07 says warm weather and lack of snow ended the season and thanks 2025/26 visitors; this is direct evidence that it operated that winter. Live check 2026-08-27: official page retains 2025/26 lift, rental, tubing and lesson rates. Live check 2026-08-27: official contact page lists 1920 1/2 US Highway 82, Cloudcroft, NM 88317.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "active-seasonal",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "az-mount-lemmon-ski-valley",
+      "publicId": "mount-lemmon-ski-valley",
+      "name": "Mount Lemmon Ski Valley",
+      "aliases": [],
+      "stateCode": "AZ",
+      "regionId": "tucson-mount-lemmon",
+      "baseTownId": "tucson",
+      "routeMode": "new_page",
+      "route": "/tucson-mount-lemmon/mountain/mount-lemmon-ski-valley",
+      "lifecycle": "published",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.skithelemmon.com/",
+      "coordinates": {
+        "lat": 32.44472222,
+        "lng": -110.7797222
+      },
+      "elevation": {
+        "baseM": 2529,
+        "topM": 2791
+      },
+      "forecastElevationM": 2529,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.fs.usda.gov/r03/coronado/recreation/mount-lemmon-ski-valley",
+          "checkedAt": "2026-08-27",
+          "quote": "USFS page dated 2025-11-04 and live-checked 2026-08-27 says Ski Valley is open year-round, winter ski runs usually operate mid-December to early April depending on snow, and the chairlift runs year-round. Live check 2026-08-27: operator lists the 10300 Ski Run Road address and Thursday-through-Monday restaurant and Sky Ride operations. Live check 2026-08-27: official conditions page distinguishes current restaurant/Sky Ride hours from snow-dependent skiing; lack of summer skiing is not closure of the area.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "active-seasonal",
+      "candidateDisposition": "verified_operating"
+    },
+    {
+      "recordId": "az-elk-ridge-ski-area",
+      "publicId": "elk-ridge-ski-area",
+      "name": "Elk Ridge Ski Area",
+      "aliases": [
+        "Elk Ridge Ski Area (PDF says confirmed closed)",
+        "Williams Ski Area"
+      ],
+      "stateCode": "AZ",
+      "regionId": "az",
+      "baseTownId": "williams",
+      "routeMode": "new_page",
+      "route": "/az/mountain/elk-ridge-ski-area",
+      "lifecycle": "draft",
+      "operatingStatus": "closed",
+      "classification": {
+        "facilityType": "unknown",
+        "snowSurface": "snow",
+        "publicAccess": "unknown"
+      },
+      "officialUrl": null,
+      "coordinates": {
+        "lat": 35.21057,
+        "lng": -112.19239
+      },
+      "elevation": {
+        "baseM": 2306,
+        "topM": 2452
+      },
+      "forecastElevationM": 2306,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.fs.usda.gov/Internet/FSE_DOCUMENTS/fseprd746999.pdf",
+          "checkedAt": "2026-08-27",
+          "quote": "Official Kaibab National Forest release dated 2020-06-04 said a term permit would be issued to Elk Ridge Recreation I LLC to allow operation. This is historical authorization, not evidence that the area subsequently opened. Live check 2026-08-27: the former operator URL was not a functioning current resort site and no tickets, snow report, season calendar, or future operating announcement could be verified. Live check 2026-08-27: current place listing marks the former area permanently closed. This is non-official corroboration because no later Forest Service closure notice was located.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "closed-exclude",
+      "candidateDisposition": "closed"
+    },
+    {
+      "recordId": "ut-nordic-valley",
+      "publicId": "nordic-valley",
+      "name": "Nordic Valley",
+      "aliases": [
+        "Nordic Valley (Eden)"
+      ],
+      "stateCode": "UT",
+      "regionId": "ut",
+      "baseTownId": "ut",
+      "routeMode": "existing_page",
+      "route": "/mountain/nordic-valley",
+      "lifecycle": "verified",
+      "operatingStatus": "operating",
+      "classification": {
+        "facilityType": "ski_area",
+        "snowSurface": "snow",
+        "publicAccess": "public"
+      },
+      "officialUrl": "https://www.nordicvalley.ski/",
+      "coordinates": {
+        "lat": 41.3311,
+        "lng": -111.8497
+      },
+      "elevation": {
+        "baseM": 1635,
+        "topM": 1636
+      },
+      "forecastElevationM": 1635,
+      "evidence": [
+        {
+          "sourceUrl": "https://www.nordicvalley.ski/nordic-valley-weather-conditions-webcams/",
+          "checkedAt": "2026-08-27",
+          "quote": "Checked 2026-08-27: retain as an existing Ogden Valley resort, but continue to flag season status as uncertain unless the official site posts a reliable 2026-27 opening. The PDF correctly labels it 'Not a gap'.",
+          "fields": [
+            "identity",
+            "operatingStatus",
+            "officialUrl",
+            "coordinates",
+            "elevation"
+          ]
+        }
+      ],
+      "researchClassification": "already-in-code-not-a-pdf-gap",
+      "candidateDisposition": "existing"
+    }
+  ]
+}

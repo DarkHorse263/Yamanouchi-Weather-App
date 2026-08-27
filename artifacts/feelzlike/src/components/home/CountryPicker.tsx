@@ -6,6 +6,7 @@ import { primaryPrefectureForJapanRegion } from "@/regions/japan-prefectures";
 import { COUNTRY_META, REGIONS, REGION_COUNTRY } from "@/regions";
 
 // ─── types ─────────────────────────────────────────
+import { publishedCatalogueRecords, regions as westernRegions, states as westernStates } from "@workspace/western-us-ski-catalogue/public-runtime";
 type RegionStatus = "live" | "soon";
 
 interface HeadlineReading {
@@ -176,8 +177,19 @@ const FALLBACK_REGIONS: Region[] = [
   { id: "highmount", name: "Highmount", country: "United States", countryCode: "US", region: "New York", status: "live", href: "/highmount/", baseTowns: ["Highmount"], mountains: ["Belleayre Mountain"], headlineLabel: "Highmount", headline: null },
 ];
 
-// Map a region to the base town we surface in the country card. This is
-// the town a visitor most likely stays in for that region.
+const WESTERN_FALLBACK_REGIONS: Region[] = westernRegions.map((region) => ({
+  id: region.regionId,
+  name: region.name,
+  country: "United States",
+  countryCode: "US",
+  region: westernStates.find((state) => state.stateCode === region.stateCode)?.name ?? region.stateCode,
+  status: "live",
+  href: `/${region.regionId}/`,
+  baseTowns: region.baseTowns.map((town) => town.name),
+  mountains: publishedCatalogueRecords.filter((record) => record.regionId === region.regionId).map((record) => record.name),
+  headlineLabel: region.name,
+  headline: null,
+}));
 const PRIMARY_TOWN: Record<string, string> = {
   "snowy-mountains":         "Jindabyne",
   "victorias-high-country":  "Mount Beauty",
@@ -313,7 +325,7 @@ const balance: CSSProperties = { textWrap: "balance" as CSSProperties["textWrap"
  * directly below the visitor's local conditions. Reads the same ["regions"]
  * query cache the landing already warms, so it never costs an extra request.
  */
-export function CountryPicker() {
+function CountryPickerEasternFallback() {
   const [openCountry, setOpenCountry] = useState<Country["code"] | null>(null);
   const [now, setNow] = useState(() => Date.now());
   void now;
@@ -524,3 +536,212 @@ export function CountryPicker() {
     </>
   );
 }
+/* Incoming implementation retains the combined country picker. */
+/**
+ * Country / region picker body · the AU + JP + NZ country cards (each listing
+ * its live regions with current temps) plus the trust line. Shared between the
+ * standalone /countries page and the location-first landing, so the "choose a
+ * region" step reads identically whether it opens on its own or continues
+ * directly below the visitor's local conditions. Reads the same ["regions"]
+ * query cache the landing already warms, so it never costs an extra request.
+ */
+export function CountryPicker() {
+  const [openCountry, setOpenCountry] = useState<Country["code"] | null>(null);
+  const [now, setNow] = useState(() => Date.now());
+  void now;
+
+  useEffect(() => {
+    const id = window.setInterval(() => setNow(Date.now()), 30_000);
+    return () => window.clearInterval(id);
+  }, []);
+
+  const { data } = useQuery<RegionsResponse>({
+    queryKey: ["regions"],
+    queryFn: async () => {
+      const res = await fetch("/api/regions");
+      if (!res.ok) throw new Error("Failed to load regions");
+      return res.json();
+    },
+    staleTime: 5 * 60 * 1000,
+    refetchInterval: 10 * 60 * 1000,
+    refetchOnWindowFocus: true,
+  });
+
+  const regions = data?.regions ?? SAFE_FALLBACK_REGIONS;
+  const liveCount = regions.filter((r) => r.status === "live").length;
+
+  type Country = { code: "AU" | "JP" | "NZ" | "CA" | "US"; name: string; flag: string; regions: Region[] };
+  const COUNTRIES: Country[] = ([
+    // Season-first ordering: Australia + New Zealand (jun-oct season) before
+    // Japan, Canada and the United States (dec-mar).
+    { code: "AU" as const, name: "Australia",   flag: "\u{1F1E6}\u{1F1FA}", regions: regions.filter((r) => r.countryCode === "AU") },
+    { code: "NZ" as const, name: "New Zealand", flag: "\u{1F1F3}\u{1F1FF}", regions: regions.filter((r) => r.countryCode === "NZ") },
+    { code: "JP" as const, name: "Japan",       flag: "\u{1F1EF}\u{1F1F5}", regions: regions.filter((r) => r.countryCode === "JP") },
+    { code: "CA" as const, name: "Canada",      flag: "\u{1F1E8}\u{1F1E6}", regions: regions.filter((r) => r.countryCode === "CA") },
+    { code: "US" as const, name: "United States", flag: "\u{1F1FA}\u{1F1F8}", regions: regions.filter((r) => r.countryCode === "US") },
+  ] satisfies Country[]).filter((c) => c.regions.length > 0);
+
+  return (
+    <>
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+        {COUNTRIES.map((country, idx) => {
+          const season = seasonForCountry(country.code);
+          const isWinter = season === "winter";
+          const ring = isWinter ? "ring-sky-400/70" : "ring-emerald-400/70";
+          const pillText = isWinter ? "text-sky-700" : "text-emerald-700";
+          const dot = isWinter ? "bg-sky-500" : "bg-emerald-500";
+          const seasonLabel = isWinter ? "snow season" : "green season";
+          const isOpen = openCountry === country.code;
+          const groupedRegions = country.code === "JP"
+            ? country.regions.map((region) => {
+                const prefecture = primaryPrefectureForJapanRegion(region.id);
+                return {
+                  groupId: prefecture.id,
+                  groupLabel: `${prefecture.name} · ${prefecture.nameJa}`,
+                  region,
+                };
+              })
+            : country.code === "CA" || country.code === "US"
+              ? country.regions.map((region) => ({
+                  groupId: region.region.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+                  groupLabel: region.region,
+                  region,
+                }))
+              : null;
+          const regionGroups = groupedRegions
+            ? [...groupedRegions.reduce((groups, entry) => {
+                const current = groups.get(entry.groupId);
+                if (current) {
+                  current.regions.push(entry.region);
+                } else {
+                  groups.set(entry.groupId, {
+                    id: entry.groupId,
+                    label: entry.groupLabel,
+                    regions: [entry.region],
+                  });
+                }
+                return groups;
+              }, new Map<string, { id: string; label: string; regions: Region[] }>()).values()]
+                .sort((a, b) => a.label.localeCompare(b.label))
+                .map((group) => ({
+                  ...group,
+                  regions: [...group.regions].sort((a, b) => a.name.localeCompare(b.name)),
+                }))
+            : [{ id: country.code, label: null, regions: country.regions }];
+
+          return (
+            <motion.div
+              key={country.code}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.1 + idx * 0.08 }}
+              className={`rounded-2xl bg-white shadow-[0_8px_30px_rgb(15,23,42,0.08)] ring-2 ${ring}`}
+            >
+              <h3 className="m-0">
+                <button
+                  type="button"
+                  aria-expanded={isOpen}
+                  onClick={() => setOpenCountry(isOpen ? null : country.code)}
+                  className="flex w-full items-center gap-3 rounded-2xl p-4 text-left"
+                >
+                  <span aria-hidden className="text-3xl leading-none">{country.flag}</span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-lg font-bold leading-tight tracking-tight text-sky-900">
+                      {country.name}
+                    </span>
+                    <span className={`mt-0.5 inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider ${pillText}`}>
+                      <span className="relative inline-flex h-1.5 w-1.5">
+                        <span className={`absolute inline-flex h-full w-full animate-ping rounded-full ${dot} opacity-60`} />
+                        <span className={`relative inline-flex h-1.5 w-1.5 rounded-full ${dot}`} />
+                      </span>
+                      {seasonLabel} &middot; {country.regions.length} {country.regions.length === 1 ? "region" : "regions"}
+                    </span>
+                  </span>
+                  <ChevronDown
+                    aria-hidden
+                    className={`h-5 w-5 shrink-0 text-sky-700 transition-transform ${isOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
+              </h3>
+
+              {isOpen && (
+                <div className="border-t border-slate-100 px-4 pb-4">
+                  <ul className="mt-3 space-y-3 text-sm leading-relaxed">
+                    {regionGroups.map((group) => (
+                      <li key={group.id}>
+                        {group.label && (
+                          <p className="mb-1 border-b border-slate-200 pb-1 text-xs font-bold uppercase tracking-[0.12em] text-sky-800">
+                            {group.label}
+                          </p>
+                        )}
+                        <ul className="space-y-1">
+                          {group.regions.map((r) => {
+                            const town = PRIMARY_TOWN[r.id] ?? r.headlineLabel ?? r.baseTowns[0];
+                            const temp = r.headline?.tempC;
+                            // Drop the trailing town if it duplicates the region
+                            // name (e.g. "Nozawa Onsen · Nozawa Onsen").
+                            const showTown = town && town.toLowerCase() !== r.name.toLowerCase();
+                            return (
+                              <li key={r.id}>
+                                <a
+                                  href={r.href}
+                                  className="flex items-baseline justify-between gap-3 rounded-lg px-2 py-1.5 -mx-2 hover:bg-sky-50"
+                                >
+                                  <span className="min-w-0 truncate text-slate-700">
+                                    <span className="font-semibold text-slate-900">{r.name}</span>
+                                    {showTown && (
+                                      <>
+                                        <span className="text-slate-500"> &middot; </span>
+                                        {town}
+                                      </>
+                                    )}
+                                  </span>
+                                  {typeof temp === "number" && (
+                                    <span className="shrink-0 text-base font-bold tabular-nums text-sky-900">
+                                      {Math.round(temp)}&deg;C
+                                    </span>
+                                  )}
+                                </a>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <a
+                    href={`/${country.code.toLowerCase()}/`}
+                    className="mt-3 inline-flex items-center text-xs font-semibold tracking-wide text-sky-700 hover:text-sky-900"
+                  >
+                    explore {country.name.toLowerCase()}
+                    <ArrowRight className="ml-1 h-3.5 w-3.5" />
+                  </a>
+                </div>
+              )}
+            </motion.div>
+          );
+        })}
+      </div>
+
+      {/* TRUST LINE */}
+      <p
+        className="mx-auto mt-6 max-w-md text-center text-xs font-medium leading-relaxed text-slate-700"
+        style={balance}
+      >
+        {liveCount} {liveCount === 1 ? "region" : "regions"} live &middot;{" "}
+        <span className="tabular-nums">{data?.sourceCount ?? 7}</span> official sources &middot;{" "}
+        weather every <span className="tabular-nums">{data?.refreshIntervalMin ?? 15}</span>&nbsp;min &middot;{" "}
+        snow depth + cams when resorts publish
+      </p>
+    </>
+  );
+}
+
+const SAFE_FALLBACK_REGIONS = [
+  ...FALLBACK_REGIONS.map((region) => {
+    const addition = WESTERN_FALLBACK_REGIONS.find((candidate) => candidate.id === region.id);
+    return addition ? { ...region, mountains: [...region.mountains, ...addition.mountains] } : region;
+  }),
+  ...WESTERN_FALLBACK_REGIONS.filter((addition) => !FALLBACK_REGIONS.some((region) => region.id === addition.id)),
+];

@@ -69,7 +69,7 @@ import { motion } from "framer-motion";
 import { format, parseISO } from "date-fns";
 import { getMountainWebcams } from "@/data/webcams";
 import { useEffect, useState } from "react";
-import { getPublishedMountainCapabilities } from "@/regions/japan-catalogue";
+import { getPublishedMountainCapabilities } from "@/regions/catalogue";
 import {
   mountainDetailCopy,
   mountainWindSummary,

@@ -9,6 +9,10 @@ import {
   publishedCatalogueRecords as publishedCanadaCatalogueRecords,
   travelRegions as canadaTravelRegions,
 } from "@workspace/canada-ski-catalogue/public-runtime";
+import {
+  publishedCatalogueRecords as publishedWesternUsCatalogueRecords,
+  regions as westernUsCatalogueRegions,
+} from "@workspace/western-us-ski-catalogue/public-runtime";
 
 // Active region set · keep in sync with `lib/api-spec/openapi.yaml` RegionId
 // enum, `routes/regions.ts` REGIONS list, `routes/weather.ts` LOCATIONS,
@@ -147,10 +151,22 @@ export const CATALOGUE_TRAVEL_REGION_IDS: ReadonlySet<string> = new Set(
     ...travelRegions.map((region) => region.travelRegionId),
     ...canadaTravelRegions.map((region) => region.travelRegionId),
     ...publishedSkiCatalogueRegions.map((region) => region.regionId),
+    ...westernUsCatalogueRegions.map((region) => region.regionId),
   ],
 );
-export const CATALOGUE_TRAVEL_REGIONS_BY_ID = new Map(
-  [...travelRegions, ...canadaTravelRegions].map((region) => [region.travelRegionId, region] as const),
+export const CATALOGUE_TRAVEL_REGIONS_BY_ID = new Map<
+  string,
+  | (typeof travelRegions)[number]
+  | (typeof canadaTravelRegions)[number]
+  | (typeof publishedSkiCatalogueRegions)[number]
+  | (typeof westernUsCatalogueRegions)[number]
+>(
+  [
+    ...travelRegions.map((region) => [region.travelRegionId, region] as const),
+    ...canadaTravelRegions.map((region) => [region.travelRegionId, region] as const),
+    ...publishedSkiCatalogueRegions.map((region) => [region.regionId, region] as const),
+    ...westernUsCatalogueRegions.map((region) => [region.regionId, region] as const),
+  ],
 );
 export const CATALOGUE_LOCATION_TO_REGION: ReadonlyMap<string, string> = new Map(
   [
@@ -163,6 +179,10 @@ export const CATALOGUE_LOCATION_TO_REGION: ReadonlyMap<string, string> = new Map
       ...record.aliases.map((alias) => [alias, record.travelRegionId] as const),
     ]),
     ...publishedSkiCatalogueRecords.flatMap((record) => [
+      [record.publicId, record.regionId] as const,
+      ...record.aliases.map((alias) => [alias, record.regionId] as const),
+    ]),
+    ...publishedWesternUsCatalogueRecords.flatMap((record) => [
       [record.publicId, record.regionId] as const,
       ...record.aliases.map((alias) => [alias, record.regionId] as const),
     ]),

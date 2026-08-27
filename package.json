@@ -18,7 +18,10 @@
     "canada:catalogue:generate": "pnpm --filter @workspace/canada-ski-catalogue run generate",
     "canada:catalogue:generate:check": "pnpm --filter @workspace/canada-ski-catalogue run generate:check",
     "canada:catalogue:validate": "pnpm --filter @workspace/canada-ski-catalogue run validate",
-    "canada:catalogue:report": "pnpm --filter @workspace/canada-ski-catalogue run report"
+    "canada:catalogue:report": "pnpm --filter @workspace/canada-ski-catalogue run report",
+    "western-us:catalogue:generate": "pnpm --filter @workspace/western-us-ski-catalogue run generate",
+    "western-us:catalogue:generate:check": "pnpm --filter @workspace/western-us-ski-catalogue run generate:check",
+    "western-us:catalogue:validate": "pnpm --filter @workspace/western-us-ski-catalogue run validate"
   },
   "private": true,
   "devDependencies": {

@@ -1,0 +1,2060 @@
+{
+  "schemaVersion": 1,
+  "countryCode": "US",
+  "generatedAt": "2026-08-27T00:00:00.000Z",
+  "states": [
+    {
+      "stateCode": "AK",
+      "name": "Alaska"
+    },
+    {
+      "stateCode": "AZ",
+      "name": "Arizona"
+    },
+    {
+      "stateCode": "CA",
+      "name": "California"
+    },
+    {
+      "stateCode": "CO",
+      "name": "Colorado"
+    },
+    {
+      "stateCode": "ID",
+      "name": "Idaho"
+    },
+    {
+      "stateCode": "MT",
+      "name": "Montana"
+    },
+    {
+      "stateCode": "NM",
+      "name": "New Mexico"
+    },
+    {
+      "stateCode": "NV",
+      "name": "Nevada"
+    },
+    {
+      "stateCode": "OR",
+      "name": "Oregon"
+    },
+    {
+      "stateCode": "UT",
+      "name": "Utah"
+    },
+    {
+      "stateCode": "WA",
+      "name": "Washington"
+    },
+    {
+      "stateCode": "WY",
+      "name": "Wyoming"
+    }
+  ],
+  "regions": [
+    {
+      "regionId": "girdwood",
+      "name": "Girdwood & Anchorage",
+      "stateCode": "AK",
+      "baseTowns": [
+        {
+          "baseTownId": "anchorage",
+          "name": "Anchorage"
+        }
+      ],
+      "timezone": "America/Anchorage"
+    },
+    {
+      "regionId": "fairbanks",
+      "name": "Fairbanks",
+      "stateCode": "AK",
+      "baseTowns": [
+        {
+          "baseTownId": "fairbanks",
+          "name": "Fairbanks"
+        }
+      ],
+      "timezone": "America/Anchorage"
+    },
+    {
+      "regionId": "cordova",
+      "name": "Cordova",
+      "stateCode": "AK",
+      "baseTowns": [
+        {
+          "baseTownId": "cordova",
+          "name": "Cordova"
+        }
+      ],
+      "timezone": "America/Anchorage"
+    },
+    {
+      "regionId": "spokane",
+      "name": "Spokane & Northeast Washington",
+      "stateCode": "WA",
+      "baseTowns": [
+        {
+          "baseTownId": "chewelah",
+          "name": "Chewelah"
+        },
+        {
+          "baseTownId": "spokane",
+          "name": "Spokane"
+        }
+      ],
+      "timezone": "America/Los_Angeles"
+    },
+    {
+      "regionId": "wenatchee",
+      "name": "Wenatchee",
+      "stateCode": "WA",
+      "baseTowns": [
+        {
+          "baseTownId": "wenatchee",
+          "name": "Wenatchee"
+        }
+      ],
+      "timezone": "America/Los_Angeles"
+    },
+    {
+      "regionId": "white-pass",
+      "name": "White Pass & Yakima",
+      "stateCode": "WA",
+      "baseTowns": [
+        {
+          "baseTownId": "yakima",
+          "name": "Yakima"
+        }
+      ],
+      "timezone": "America/Los_Angeles"
+    },
+    {
+      "regionId": "olympic-peninsula",
+      "name": "Olympic Peninsula",
+      "stateCode": "WA",
+      "baseTowns": [
+        {
+          "baseTownId": "port-angeles",
+          "name": "Port Angeles"
+        }
+      ],
+      "timezone": "America/Los_Angeles"
+    },
+    {
+      "regionId": "eastern-oregon",
+      "name": "Baker City & Eastern Oregon",
+      "stateCode": "OR",
+      "baseTowns": [
+        {
+          "baseTownId": "baker-city",
+          "name": "Baker City"
+        }
+      ],
+      "timezone": "America/Los_Angeles"
+    },
+    {
+      "regionId": "bend",
+      "name": "Bend & Central Oregon",
+      "stateCode": "OR",
+      "baseTowns": [
+        {
+          "baseTownId": "sisters",
+          "name": "Sisters"
+        }
+      ],
+      "timezone": "America/Los_Angeles"
+    },
+    {
+      "regionId": "southern-oregon",
+      "name": "Southern Oregon",
+      "stateCode": "OR",
+      "baseTowns": [
+        {
+          "baseTownId": "ashland",
+          "name": "Ashland"
+        }
+      ],
+      "timezone": "America/Los_Angeles"
+    },
+    {
+      "regionId": "willamette-pass",
+      "name": "Eugene & Willamette Pass",
+      "stateCode": "OR",
+      "baseTowns": [
+        {
+          "baseTownId": "oakridge",
+          "name": "Oakridge"
+        }
+      ],
+      "timezone": "America/Los_Angeles"
+    },
+    {
+      "regionId": "wrightwood",
+      "name": "Wrightwood",
+      "stateCode": "CA",
+      "baseTowns": [
+        {
+          "baseTownId": "wrightwood",
+          "name": "Wrightwood"
+        }
+      ],
+      "timezone": "America/Los_Angeles"
+    },
+    {
+      "regionId": "fresno-china-peak",
+      "name": "Fresno & China Peak",
+      "stateCode": "CA",
+      "baseTowns": [
+        {
+          "baseTownId": "fresno",
+          "name": "Fresno"
+        }
+      ],
+      "timezone": "America/Los_Angeles"
+    },
+    {
+      "regionId": "sonora-dodge-ridge",
+      "name": "Sonora & Dodge Ridge",
+      "stateCode": "CA",
+      "baseTowns": [
+        {
+          "baseTownId": "pinecrest",
+          "name": "Pinecrest"
+        }
+      ],
+      "timezone": "America/Los_Angeles"
+    },
+    {
+      "regionId": "san-gabriel-mountains",
+      "name": "San Gabriel Mountains",
+      "stateCode": "CA",
+      "baseTowns": [
+        {
+          "baseTownId": "mt-baldy",
+          "name": "Mt Baldy"
+        }
+      ],
+      "timezone": "America/Los_Angeles"
+    },
+    {
+      "regionId": "big-bear",
+      "name": "Big Bear",
+      "stateCode": "CA",
+      "baseTowns": [
+        {
+          "baseTownId": "running-springs",
+          "name": "Running Springs"
+        }
+      ],
+      "timezone": "America/Los_Angeles"
+    },
+    {
+      "regionId": "yosemite",
+      "name": "Yosemite",
+      "stateCode": "CA",
+      "baseTowns": [
+        {
+          "baseTownId": "yosemite-valley",
+          "name": "Yosemite Valley"
+        }
+      ],
+      "timezone": "America/Los_Angeles"
+    },
+    {
+      "regionId": "north-lake-tahoe",
+      "name": "North Lake Tahoe",
+      "stateCode": "CA",
+      "baseTowns": [
+        {
+          "baseTownId": "truckee",
+          "name": "Truckee"
+        },
+        {
+          "baseTownId": "tahoe-city",
+          "name": "Tahoe City"
+        },
+        {
+          "baseTownId": "olympic-valley",
+          "name": "Olympic Valley"
+        }
+      ],
+      "timezone": "America/Los_Angeles"
+    },
+    {
+      "regionId": "kern-river",
+      "name": "Kern River & Lake Isabella",
+      "stateCode": "CA",
+      "baseTowns": [
+        {
+          "baseTownId": "wofford-heights",
+          "name": "Wofford Heights"
+        }
+      ],
+      "timezone": "America/Los_Angeles"
+    },
+    {
+      "regionId": "las-vegas-lee-canyon",
+      "name": "Las Vegas & Lee Canyon",
+      "stateCode": "NV",
+      "baseTowns": [
+        {
+          "baseTownId": "las-vegas",
+          "name": "Las Vegas"
+        }
+      ],
+      "timezone": "America/Los_Angeles"
+    },
+    {
+      "regionId": "silver-valley",
+      "name": "Silver Valley",
+      "stateCode": "ID",
+      "baseTowns": [
+        {
+          "baseTownId": "kellogg",
+          "name": "Kellogg"
+        },
+        {
+          "baseTownId": "wallace-mullan",
+          "name": "Wallace Mullan"
+        }
+      ],
+      "timezone": "America/Los_Angeles"
+    },
+    {
+      "regionId": "pocatello-southeast-idaho",
+      "name": "Pocatello & Southeast Idaho",
+      "stateCode": "ID",
+      "baseTowns": [
+        {
+          "baseTownId": "pocatello-inkom",
+          "name": "Pocatello Inkom"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "sun-valley",
+      "name": "Sun Valley",
+      "stateCode": "ID",
+      "baseTowns": [
+        {
+          "baseTownId": "fairfield",
+          "name": "Fairfield"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "southern-idaho-magic-valley",
+      "name": "Southern Idaho & Magic Valley",
+      "stateCode": "ID",
+      "baseTowns": [
+        {
+          "baseTownId": "burley-albion",
+          "name": "Burley Albion"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "idaho-falls-kelly-canyon",
+      "name": "Idaho Falls & Kelly Canyon",
+      "stateCode": "ID",
+      "baseTowns": [
+        {
+          "baseTownId": "idaho-falls-ririe",
+          "name": "Idaho Falls Ririe"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "missoula",
+      "name": "Missoula",
+      "stateCode": "MT",
+      "baseTowns": [
+        {
+          "baseTownId": "missoula",
+          "name": "Missoula"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "southwest-montana-discovery",
+      "name": "Southwest Montana & Discovery",
+      "stateCode": "MT",
+      "baseTowns": [
+        {
+          "baseTownId": "philipsburg-anaconda",
+          "name": "Philipsburg Anaconda"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "whitefish",
+      "name": "Whitefish & Flathead Lake",
+      "stateCode": "MT",
+      "baseTowns": [
+        {
+          "baseTownId": "lakeside-kalispell",
+          "name": "Lakeside Kalispell"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "helena-great-divide",
+      "name": "Helena & Great Divide",
+      "stateCode": "MT",
+      "baseTowns": [
+        {
+          "baseTownId": "helena",
+          "name": "Helena"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "great-falls-showdown",
+      "name": "Great Falls & Showdown",
+      "stateCode": "MT",
+      "baseTowns": [
+        {
+          "baseTownId": "great-falls-neihart",
+          "name": "Great Falls Neihart"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "libby-northwest-montana",
+      "name": "Libby & Northwest Montana",
+      "stateCode": "MT",
+      "baseTowns": [
+        {
+          "baseTownId": "libby",
+          "name": "Libby"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "bighorn-mountains",
+      "name": "Bighorn Mountains",
+      "stateCode": "WY",
+      "baseTowns": [
+        {
+          "baseTownId": "shell",
+          "name": "Shell"
+        },
+        {
+          "baseTownId": "ten-sleep",
+          "name": "Ten Sleep"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "pinedale",
+      "name": "Pinedale",
+      "stateCode": "WY",
+      "baseTowns": [
+        {
+          "baseTownId": "pinedale",
+          "name": "Pinedale"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "casper",
+      "name": "Casper",
+      "stateCode": "WY",
+      "baseTowns": [
+        {
+          "baseTownId": "casper",
+          "name": "Casper"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "laramie-snowy-range",
+      "name": "Laramie & Snowy Range",
+      "stateCode": "WY",
+      "baseTowns": [
+        {
+          "baseTownId": "centennial",
+          "name": "Centennial"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "southern-utah",
+      "name": "Southern Utah",
+      "stateCode": "UT",
+      "baseTowns": [
+        {
+          "baseTownId": "brian-head",
+          "name": "Brian Head"
+        },
+        {
+          "baseTownId": "beaver",
+          "name": "Beaver"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "park-city",
+      "name": "Park City",
+      "stateCode": "UT",
+      "baseTowns": [
+        {
+          "baseTownId": "park-city",
+          "name": "Park City"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "salida-monarch",
+      "name": "Salida & Monarch",
+      "stateCode": "CO",
+      "baseTowns": [
+        {
+          "baseTownId": "salida",
+          "name": "Salida"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "pagosa-wolf-creek",
+      "name": "Pagosa Springs & Wolf Creek",
+      "stateCode": "CO",
+      "baseTowns": [
+        {
+          "baseTownId": "pagosa-springs",
+          "name": "Pagosa Springs"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "glenwood-springs",
+      "name": "Glenwood Springs",
+      "stateCode": "CO",
+      "baseTowns": [
+        {
+          "baseTownId": "glenwood-springs",
+          "name": "Glenwood Springs"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "grand-mesa",
+      "name": "Grand Mesa",
+      "stateCode": "CO",
+      "baseTowns": [
+        {
+          "baseTownId": "mesa",
+          "name": "Mesa"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "durango",
+      "name": "Durango",
+      "stateCode": "CO",
+      "baseTowns": [
+        {
+          "baseTownId": "silverton",
+          "name": "Silverton"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "summit-county",
+      "name": "Summit County",
+      "stateCode": "CO",
+      "baseTowns": [
+        {
+          "baseTownId": "leadville",
+          "name": "Leadville"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "boulder-front-range",
+      "name": "Boulder & Front Range",
+      "stateCode": "CO",
+      "baseTowns": [
+        {
+          "baseTownId": "idaho-springs",
+          "name": "Idaho Springs"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "ruidoso",
+      "name": "Ruidoso",
+      "stateCode": "NM",
+      "baseTowns": [
+        {
+          "baseTownId": "ruidoso",
+          "name": "Ruidoso"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "taos",
+      "name": "Taos",
+      "stateCode": "NM",
+      "baseTowns": [
+        {
+          "baseTownId": "taos",
+          "name": "Taos"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "red-river",
+      "name": "Red River",
+      "stateCode": "NM",
+      "baseTowns": [
+        {
+          "baseTownId": "red-river",
+          "name": "Red River"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "los-alamos-pajarito",
+      "name": "Los Alamos",
+      "stateCode": "NM",
+      "baseTowns": [
+        {
+          "baseTownId": "los-alamos",
+          "name": "Los Alamos"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "cloudcroft",
+      "name": "Cloudcroft",
+      "stateCode": "NM",
+      "baseTowns": [
+        {
+          "baseTownId": "cloudcroft",
+          "name": "Cloudcroft"
+        }
+      ],
+      "timezone": "America/Denver"
+    },
+    {
+      "regionId": "tucson-mount-lemmon",
+      "name": "Tucson & Mount Lemmon",
+      "stateCode": "AZ",
+      "baseTowns": [
+        {
+          "baseTownId": "tucson",
+          "name": "Tucson"
+        }
+      ],
+      "timezone": "America/Phoenix"
+    }
+  ],
+  "publishedCatalogueRecords": [
+    {
+      "recordId": "alaska-arctic-valley-ski-area",
+      "publicId": "arctic-valley-ski-area",
+      "aliases": [
+        "Arctic Valley (Anchorage Ski Club)"
+      ],
+      "name": "Arctic Valley Ski Area",
+      "coordinates": {
+        "lat": 61.2467,
+        "lng": -149.5344
+      },
+      "forecastElevationM": 762,
+      "baseElevationM": 762,
+      "topElevationM": 1188,
+      "officialUrl": "https://arcticvalley.org/",
+      "stateCode": "AK",
+      "regionId": "girdwood",
+      "timezone": "America/Anchorage",
+      "baseTownId": "anchorage",
+      "route": "/girdwood/mountain/arctic-valley-ski-area",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "alaska-hilltop-ski-area-and-bike-park",
+      "publicId": "hilltop-ski-area-and-bike-park",
+      "aliases": [
+        "Hilltop Ski Area"
+      ],
+      "name": "Hilltop Ski Area and Bike Park",
+      "coordinates": {
+        "lat": 61.0984,
+        "lng": -149.7447
+      },
+      "forecastElevationM": 75,
+      "baseElevationM": 75,
+      "topElevationM": 179,
+      "officialUrl": "https://www.hilltopskiarea.org/",
+      "stateCode": "AK",
+      "regionId": "girdwood",
+      "timezone": "America/Anchorage",
+      "baseTownId": "anchorage",
+      "route": "/girdwood/mountain/hilltop-ski-area-and-bike-park",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "alaska-moose-mountain-ski-resort",
+      "publicId": "moose-mountain-ski-resort",
+      "aliases": [
+        "Moose Mountain"
+      ],
+      "name": "Moose Mountain Ski Resort",
+      "coordinates": {
+        "lat": 64.9415,
+        "lng": -147.9925
+      },
+      "forecastElevationM": 213,
+      "baseElevationM": 213,
+      "topElevationM": 606,
+      "officialUrl": "https://shredthemoose.com/",
+      "stateCode": "AK",
+      "regionId": "fairbanks",
+      "timezone": "America/Anchorage",
+      "baseTownId": "fairbanks",
+      "route": "/fairbanks/mountain/moose-mountain-ski-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "alaska-ski-land",
+      "publicId": "ski-land",
+      "aliases": [
+        "Mt. Aurora Skiland"
+      ],
+      "name": "Ski Land",
+      "coordinates": {
+        "lat": 65.0546,
+        "lng": -147.4107
+      },
+      "forecastElevationM": 396,
+      "baseElevationM": 396,
+      "topElevationM": 741,
+      "officialUrl": "https://skilandfairbanks.com/",
+      "stateCode": "AK",
+      "regionId": "fairbanks",
+      "timezone": "America/Anchorage",
+      "baseTownId": "fairbanks",
+      "route": "/fairbanks/mountain/ski-land",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "alaska-mt-eyak-ski-area",
+      "publicId": "mt-eyak-ski-area",
+      "aliases": [
+        "Mount Eyak"
+      ],
+      "name": "Mt. Eyak Ski Area",
+      "coordinates": {
+        "lat": 60.5494,
+        "lng": -145.7508
+      },
+      "forecastElevationM": 15,
+      "baseElevationM": 15,
+      "topElevationM": 366,
+      "officialUrl": "https://www.mteyak.org/",
+      "stateCode": "AK",
+      "regionId": "cordova",
+      "timezone": "America/Anchorage",
+      "baseTownId": "cordova",
+      "route": "/cordova/mountain/mt-eyak-ski-area",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "washington-49-degrees-north-mountain-resort",
+      "publicId": "49-degrees-north-mountain-resort",
+      "aliases": [
+        "49 Degrees North"
+      ],
+      "name": "49° North Mountain Resort",
+      "coordinates": {
+        "lat": 48.3011,
+        "lng": -117.5628
+      },
+      "forecastElevationM": 1195,
+      "baseElevationM": 1195,
+      "topElevationM": 1768,
+      "officialUrl": "https://www.ski49n.com/",
+      "stateCode": "WA",
+      "regionId": "spokane",
+      "timezone": "America/Los_Angeles",
+      "baseTownId": "chewelah",
+      "route": "/spokane/mountain/49-degrees-north-mountain-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "washington-mission-ridge-ski-board-resort",
+      "publicId": "mission-ridge-ski-board-resort",
+      "aliases": [
+        "Mission Ridge"
+      ],
+      "name": "Mission Ridge Ski & Board Resort",
+      "coordinates": {
+        "lat": 47.2925,
+        "lng": -120.3997
+      },
+      "forecastElevationM": 1399,
+      "baseElevationM": 1399,
+      "topElevationM": 2079,
+      "officialUrl": "https://www.missionridge.com/",
+      "stateCode": "WA",
+      "regionId": "wenatchee",
+      "timezone": "America/Los_Angeles",
+      "baseTownId": "wenatchee",
+      "route": "/wenatchee/mountain/mission-ridge-ski-board-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "washington-white-pass-ski-area",
+      "publicId": "white-pass-ski-area",
+      "aliases": [
+        "White Pass"
+      ],
+      "name": "White Pass Ski Area",
+      "coordinates": {
+        "lat": 46.6377,
+        "lng": -121.3912
+      },
+      "forecastElevationM": 1372,
+      "baseElevationM": 1372,
+      "topElevationM": 1981,
+      "officialUrl": "https://skiwhitepass.com/",
+      "stateCode": "WA",
+      "regionId": "white-pass",
+      "timezone": "America/Los_Angeles",
+      "baseTownId": "yakima",
+      "route": "/white-pass/mountain/white-pass-ski-area",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "washington-mt-spokane-ski-snowboard-park",
+      "publicId": "mt-spokane-ski-snowboard-park",
+      "aliases": [
+        "Mt. Spokane"
+      ],
+      "name": "Mt. Spokane Ski & Snowboard Park",
+      "coordinates": {
+        "lat": 47.9214,
+        "lng": -117.0962
+      },
+      "forecastElevationM": 1274,
+      "baseElevationM": 1274,
+      "topElevationM": 1793,
+      "officialUrl": "https://www.mtspokane.com/",
+      "stateCode": "WA",
+      "regionId": "spokane",
+      "timezone": "America/Los_Angeles",
+      "baseTownId": "spokane",
+      "route": "/spokane/mountain/mt-spokane-ski-snowboard-park",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "washington-hurricane-ridge-ski-snowboard-area",
+      "publicId": "hurricane-ridge-ski-snowboard-area",
+      "aliases": [
+        "Hurricane Ridge"
+      ],
+      "name": "Hurricane Ridge Ski & Snowboard Area",
+      "coordinates": {
+        "lat": 47.9702,
+        "lng": -123.4958
+      },
+      "forecastElevationM": 1463,
+      "baseElevationM": 1463,
+      "topElevationM": 1676,
+      "officialUrl": "https://www.hurricaneridge.com/",
+      "stateCode": "WA",
+      "regionId": "olympic-peninsula",
+      "timezone": "America/Los_Angeles",
+      "baseTownId": "port-angeles",
+      "route": "/olympic-peninsula/mountain/hurricane-ridge-ski-snowboard-area",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "oregon-anthony-lakes-mountain-resort",
+      "publicId": "anthony-lakes-mountain-resort",
+      "aliases": [
+        "Anthony Lakes"
+      ],
+      "name": "Anthony Lakes Mountain Resort",
+      "coordinates": {
+        "lat": 44.9636,
+        "lng": -118.2356
+      },
+      "forecastElevationM": 2164,
+      "baseElevationM": 2164,
+      "topElevationM": 2438,
+      "officialUrl": "https://anthonylakes.com/",
+      "stateCode": "OR",
+      "regionId": "eastern-oregon",
+      "timezone": "America/Los_Angeles",
+      "baseTownId": "baker-city",
+      "route": "/eastern-oregon/mountain/anthony-lakes-mountain-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "oregon-hoodoo-ski-area",
+      "publicId": "hoodoo-ski-area",
+      "aliases": [],
+      "name": "Hoodoo Ski Area",
+      "coordinates": {
+        "lat": 44.4081,
+        "lng": -121.8714
+      },
+      "forecastElevationM": 1427,
+      "baseElevationM": 1427,
+      "topElevationM": 1737,
+      "officialUrl": "https://hoodoo.com/",
+      "stateCode": "OR",
+      "regionId": "bend",
+      "timezone": "America/Los_Angeles",
+      "baseTownId": "sisters",
+      "route": "/bend/mountain/hoodoo-ski-area",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "oregon-mt-ashland-ski-area",
+      "publicId": "mt-ashland-ski-area",
+      "aliases": [
+        "Mount Ashland"
+      ],
+      "name": "Mt. Ashland Ski Area",
+      "coordinates": {
+        "lat": 42.0817,
+        "lng": -122.7048
+      },
+      "forecastElevationM": 1938,
+      "baseElevationM": 1938,
+      "topElevationM": 2296,
+      "officialUrl": "https://www.mtashland.com/",
+      "stateCode": "OR",
+      "regionId": "southern-oregon",
+      "timezone": "America/Los_Angeles",
+      "baseTownId": "ashland",
+      "route": "/southern-oregon/mountain/mt-ashland-ski-area",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "oregon-willamette-pass-resort",
+      "publicId": "willamette-pass-resort",
+      "aliases": [
+        "Willamette Pass"
+      ],
+      "name": "Willamette Pass Resort",
+      "coordinates": {
+        "lat": 43.6003,
+        "lng": -122.0364
+      },
+      "forecastElevationM": 1561,
+      "baseElevationM": 1561,
+      "topElevationM": 2036,
+      "officialUrl": "https://www.willamettepass.ski/",
+      "stateCode": "OR",
+      "regionId": "willamette-pass",
+      "timezone": "America/Los_Angeles",
+      "baseTownId": "oakridge",
+      "route": "/willamette-pass/mountain/willamette-pass-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "california-mountain-high-resorts",
+      "publicId": "mountain-high-resorts",
+      "aliases": [
+        "Mountain High"
+      ],
+      "name": "Mountain High Resorts",
+      "coordinates": {
+        "lat": 34.3769,
+        "lng": -117.691
+      },
+      "forecastElevationM": 2012,
+      "baseElevationM": 2012,
+      "topElevationM": 2500,
+      "officialUrl": "https://www.mthigh.com/site",
+      "stateCode": "CA",
+      "regionId": "wrightwood",
+      "timezone": "America/Los_Angeles",
+      "baseTownId": "wrightwood",
+      "route": "/wrightwood/mountain/mountain-high-resorts",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "california-china-peak-mountain-resort",
+      "publicId": "china-peak-mountain-resort",
+      "aliases": [
+        "China Peak"
+      ],
+      "name": "China Peak Mountain Resort",
+      "coordinates": {
+        "lat": 37.2368,
+        "lng": -119.157
+      },
+      "forecastElevationM": 2149,
+      "baseElevationM": 2149,
+      "topElevationM": 2652,
+      "officialUrl": "https://www.skichinapeak.com/",
+      "stateCode": "CA",
+      "regionId": "fresno-china-peak",
+      "timezone": "America/Los_Angeles",
+      "baseTownId": "fresno",
+      "route": "/fresno-china-peak/mountain/china-peak-mountain-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "california-dodge-ridge-mountain-resort",
+      "publicId": "dodge-ridge-mountain-resort",
+      "aliases": [
+        "Dodge Ridge"
+      ],
+      "name": "Dodge Ridge Mountain Resort",
+      "coordinates": {
+        "lat": 38.189,
+        "lng": -119.9568
+      },
+      "forecastElevationM": 2012,
+      "baseElevationM": 2012,
+      "topElevationM": 2499,
+      "officialUrl": "https://dodgeridge.com/",
+      "stateCode": "CA",
+      "regionId": "sonora-dodge-ridge",
+      "timezone": "America/Los_Angeles",
+      "baseTownId": "pinecrest",
+      "route": "/sonora-dodge-ridge/mountain/dodge-ridge-mountain-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "california-mt-baldy-resort",
+      "publicId": "mt-baldy-resort",
+      "aliases": [
+        "Mt. Baldy"
+      ],
+      "name": "Mt Baldy Resort",
+      "coordinates": {
+        "lat": 34.2701,
+        "lng": -117.6217
+      },
+      "forecastElevationM": 1981,
+      "baseElevationM": 1981,
+      "topElevationM": 2621,
+      "officialUrl": "https://www.mtbaldyresort.com/",
+      "stateCode": "CA",
+      "regionId": "san-gabriel-mountains",
+      "timezone": "America/Los_Angeles",
+      "baseTownId": "mt-baldy",
+      "route": "/san-gabriel-mountains/mountain/mt-baldy-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "california-snow-valley-mountain-resort",
+      "publicId": "snow-valley-mountain-resort",
+      "aliases": [
+        "Snow Valley"
+      ],
+      "name": "Snow Valley Mountain Resort",
+      "coordinates": {
+        "lat": 34.2249,
+        "lng": -117.036
+      },
+      "forecastElevationM": 2073,
+      "baseElevationM": 2073,
+      "topElevationM": 2393,
+      "officialUrl": "https://www.bigbearmountainresort.com/mountains/snow-valley",
+      "stateCode": "CA",
+      "regionId": "big-bear",
+      "timezone": "America/Los_Angeles",
+      "baseTownId": "running-springs",
+      "route": "/big-bear/mountain/snow-valley-mountain-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "california-badger-pass-ski-area",
+      "publicId": "badger-pass-ski-area",
+      "aliases": [
+        "Badger Pass"
+      ],
+      "name": "Badger Pass Ski Area",
+      "coordinates": {
+        "lat": 37.6626,
+        "lng": -119.6634
+      },
+      "forecastElevationM": 2195,
+      "baseElevationM": 2195,
+      "topElevationM": 2377,
+      "officialUrl": "https://www.travelyosemite.com/winter/badger-pass-ski-area/",
+      "stateCode": "CA",
+      "regionId": "yosemite",
+      "timezone": "America/Los_Angeles",
+      "baseTownId": "yosemite-valley",
+      "route": "/yosemite/mountain/badger-pass-ski-area",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "california-boreal-mountain-california",
+      "publicId": "boreal-mountain-california",
+      "aliases": [
+        "Boreal Mountain"
+      ],
+      "name": "Boreal Mountain California",
+      "coordinates": {
+        "lat": 39.3317,
+        "lng": -120.3493
+      },
+      "forecastElevationM": 2195,
+      "baseElevationM": 2195,
+      "topElevationM": 2347,
+      "officialUrl": "https://www.rideboreal.com/",
+      "stateCode": "CA",
+      "regionId": "north-lake-tahoe",
+      "timezone": "America/Los_Angeles",
+      "baseTownId": "truckee",
+      "route": "/north-lake-tahoe/mountain/boreal-mountain-california",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "california-soda-springs-mountain-resort",
+      "publicId": "soda-springs-mountain-resort",
+      "aliases": [
+        "Soda Springs"
+      ],
+      "name": "Soda Springs Mountain Resort",
+      "coordinates": {
+        "lat": 39.3213,
+        "lng": -120.3803
+      },
+      "forecastElevationM": 2042,
+      "baseElevationM": 2042,
+      "topElevationM": 2241,
+      "officialUrl": "https://www.skisodasprings.com/",
+      "stateCode": "CA",
+      "regionId": "north-lake-tahoe",
+      "timezone": "America/Los_Angeles",
+      "baseTownId": "truckee",
+      "route": "/north-lake-tahoe/mountain/soda-springs-mountain-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "california-donner-ski-ranch",
+      "publicId": "donner-ski-ranch",
+      "aliases": [],
+      "name": "Donner Ski Ranch",
+      "coordinates": {
+        "lat": 39.3183,
+        "lng": -120.3301
+      },
+      "forecastElevationM": 2143,
+      "baseElevationM": 2143,
+      "topElevationM": 2442,
+      "officialUrl": "https://www.donnerskiranch.com/",
+      "stateCode": "CA",
+      "regionId": "north-lake-tahoe",
+      "timezone": "America/Los_Angeles",
+      "baseTownId": "truckee",
+      "route": "/north-lake-tahoe/mountain/donner-ski-ranch",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "california-granlibakken-tahoe-ski-snowboard-hill",
+      "publicId": "granlibakken-tahoe-ski-snowboard-hill",
+      "aliases": [
+        "Granlibakken"
+      ],
+      "name": "Granlibakken Tahoe Ski & Snowboard Hill",
+      "coordinates": {
+        "lat": 39.1518,
+        "lng": -120.1547
+      },
+      "forecastElevationM": 1951,
+      "baseElevationM": 1951,
+      "topElevationM": 2015,
+      "officialUrl": "https://www.granlibakken.com/",
+      "stateCode": "CA",
+      "regionId": "north-lake-tahoe",
+      "timezone": "America/Los_Angeles",
+      "baseTownId": "tahoe-city",
+      "route": "/north-lake-tahoe/mountain/granlibakken-tahoe-ski-snowboard-hill",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "california-alta-sierra-ski-resort-and-terrain-park",
+      "publicId": "alta-sierra-ski-resort-and-terrain-park",
+      "aliases": [
+        "Alta Sierra"
+      ],
+      "name": "Alta Sierra Ski Resort and Terrain Park",
+      "coordinates": {
+        "lat": 35.7107,
+        "lng": -118.559
+      },
+      "forecastElevationM": 1981,
+      "baseElevationM": 1981,
+      "topElevationM": 2161,
+      "officialUrl": "https://www.altasierra.com/v2/about.aspx",
+      "stateCode": "CA",
+      "regionId": "kern-river",
+      "timezone": "America/Los_Angeles",
+      "baseTownId": "wofford-heights",
+      "route": "/kern-river/mountain/alta-sierra-ski-resort-and-terrain-park",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "nevada-lee-canyon",
+      "publicId": "lee-canyon",
+      "aliases": [],
+      "name": "Lee Canyon",
+      "coordinates": {
+        "lat": 36.3032,
+        "lng": -115.6792
+      },
+      "forecastElevationM": 2640,
+      "baseElevationM": 2640,
+      "topElevationM": 2856,
+      "officialUrl": "https://www.leecanyonlv.com/",
+      "stateCode": "NV",
+      "regionId": "las-vegas-lee-canyon",
+      "timezone": "America/Los_Angeles",
+      "baseTownId": "las-vegas",
+      "route": "/las-vegas-lee-canyon/mountain/lee-canyon",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "idaho-silver-mountain-resort",
+      "publicId": "silver-mountain-resort",
+      "aliases": [],
+      "name": "Silver Mountain Resort",
+      "coordinates": {
+        "lat": 47.5403,
+        "lng": -116.1335
+      },
+      "forecastElevationM": 1250,
+      "baseElevationM": 1250,
+      "topElevationM": 1920,
+      "officialUrl": "https://silvermt.com/",
+      "stateCode": "ID",
+      "regionId": "silver-valley",
+      "timezone": "America/Los_Angeles",
+      "baseTownId": "kellogg",
+      "route": "/silver-valley/mountain/silver-mountain-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "idaho-lookout-pass-ski-and-recreation-area",
+      "publicId": "lookout-pass-ski-and-recreation-area",
+      "aliases": [
+        "Lookout Pass Ski & Recreation Area"
+      ],
+      "name": "Lookout Pass Ski and Recreation Area",
+      "coordinates": {
+        "lat": 47.4562,
+        "lng": -115.6972
+      },
+      "forecastElevationM": 1372,
+      "baseElevationM": 1372,
+      "topElevationM": 1875,
+      "officialUrl": "https://skilookout.com/",
+      "stateCode": "ID",
+      "regionId": "silver-valley",
+      "timezone": "America/Los_Angeles",
+      "baseTownId": "wallace-mullan",
+      "route": "/silver-valley/mountain/lookout-pass-ski-and-recreation-area",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "idaho-pebble-creek-ski-area",
+      "publicId": "pebble-creek-ski-area",
+      "aliases": [],
+      "name": "Pebble Creek Ski Area",
+      "coordinates": {
+        "lat": 42.7784,
+        "lng": -112.1591
+      },
+      "forecastElevationM": 1939,
+      "baseElevationM": 1939,
+      "topElevationM": 2609,
+      "officialUrl": "https://pebblecreekskiarea.com/",
+      "stateCode": "ID",
+      "regionId": "pocatello-southeast-idaho",
+      "timezone": "America/Denver",
+      "baseTownId": "pocatello-inkom",
+      "route": "/pocatello-southeast-idaho/mountain/pebble-creek-ski-area",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "idaho-soldier-mountain",
+      "publicId": "soldier-mountain",
+      "aliases": [],
+      "name": "Soldier Mountain",
+      "coordinates": {
+        "lat": 43.4856,
+        "lng": -114.8295
+      },
+      "forecastElevationM": 1754,
+      "baseElevationM": 1754,
+      "topElevationM": 2188,
+      "officialUrl": "https://soldiermountain.com/",
+      "stateCode": "ID",
+      "regionId": "sun-valley",
+      "timezone": "America/Denver",
+      "baseTownId": "fairfield",
+      "route": "/sun-valley/mountain/soldier-mountain",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "idaho-pomerelle-mountain-resort",
+      "publicId": "pomerelle-mountain-resort",
+      "aliases": [],
+      "name": "Pomerelle Mountain Resort",
+      "coordinates": {
+        "lat": 42.3182,
+        "lng": -113.6082
+      },
+      "forecastElevationM": 2366,
+      "baseElevationM": 2366,
+      "topElevationM": 2671,
+      "officialUrl": "https://www.pomerelle.com/",
+      "stateCode": "ID",
+      "regionId": "southern-idaho-magic-valley",
+      "timezone": "America/Denver",
+      "baseTownId": "burley-albion",
+      "route": "/southern-idaho-magic-valley/mountain/pomerelle-mountain-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "idaho-kelly-canyon-resort",
+      "publicId": "kelly-canyon-resort",
+      "aliases": [
+        "Kelly Canyon"
+      ],
+      "name": "Kelly Canyon Resort",
+      "coordinates": {
+        "lat": 43.6464,
+        "lng": -111.6304
+      },
+      "forecastElevationM": 1707,
+      "baseElevationM": 1707,
+      "topElevationM": 2012,
+      "officialUrl": "https://www.kellycanyonresort.com/",
+      "stateCode": "ID",
+      "regionId": "idaho-falls-kelly-canyon",
+      "timezone": "America/Denver",
+      "baseTownId": "idaho-falls-ririe",
+      "route": "/idaho-falls-kelly-canyon/mountain/kelly-canyon-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "montana-montana-snowbowl",
+      "publicId": "montana-snowbowl",
+      "aliases": [],
+      "name": "Montana Snowbowl",
+      "coordinates": {
+        "lat": 47.0145,
+        "lng": -113.9994
+      },
+      "forecastElevationM": 1524,
+      "baseElevationM": 1524,
+      "topElevationM": 2316,
+      "officialUrl": "https://www.montanasnowbowl.com/",
+      "stateCode": "MT",
+      "regionId": "missoula",
+      "timezone": "America/Denver",
+      "baseTownId": "missoula",
+      "route": "/missoula/mountain/montana-snowbowl",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "montana-discovery-ski-area",
+      "publicId": "discovery-ski-area",
+      "aliases": [],
+      "name": "Discovery Ski Area",
+      "coordinates": {
+        "lat": 46.2494,
+        "lng": -113.2411
+      },
+      "forecastElevationM": 1759,
+      "baseElevationM": 1759,
+      "topElevationM": 2484,
+      "officialUrl": "https://www.skidiscovery.com/",
+      "stateCode": "MT",
+      "regionId": "southwest-montana-discovery",
+      "timezone": "America/Denver",
+      "baseTownId": "philipsburg-anaconda",
+      "route": "/southwest-montana-discovery/mountain/discovery-ski-area",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "montana-blacktail-mountain-ski-area",
+      "publicId": "blacktail-mountain-ski-area",
+      "aliases": [
+        "Blacktail Mountain"
+      ],
+      "name": "Blacktail Mountain Ski Area",
+      "coordinates": {
+        "lat": 48.0132,
+        "lng": -114.3692
+      },
+      "forecastElevationM": 1628,
+      "baseElevationM": 1628,
+      "topElevationM": 2067,
+      "officialUrl": "https://blacktailmountain.com/",
+      "stateCode": "MT",
+      "regionId": "whitefish",
+      "timezone": "America/Denver",
+      "baseTownId": "lakeside-kalispell",
+      "route": "/whitefish/mountain/blacktail-mountain-ski-area",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "montana-great-divide-ski-area",
+      "publicId": "great-divide-ski-area",
+      "aliases": [
+        "Great Divide"
+      ],
+      "name": "Great Divide Ski Area",
+      "coordinates": {
+        "lat": 46.7511,
+        "lng": -112.3139
+      },
+      "forecastElevationM": 1777,
+      "baseElevationM": 1777,
+      "topElevationM": 2234,
+      "officialUrl": "https://www.skigd.com/",
+      "stateCode": "MT",
+      "regionId": "helena-great-divide",
+      "timezone": "America/Denver",
+      "baseTownId": "helena",
+      "route": "/helena-great-divide/mountain/great-divide-ski-area",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "montana-showdown-montana",
+      "publicId": "showdown-montana",
+      "aliases": [],
+      "name": "Showdown Montana",
+      "coordinates": {
+        "lat": 46.8382,
+        "lng": -110.7022
+      },
+      "forecastElevationM": 2073,
+      "baseElevationM": 2073,
+      "topElevationM": 2499,
+      "officialUrl": "https://www.showdownmontana.com/",
+      "stateCode": "MT",
+      "regionId": "great-falls-showdown",
+      "timezone": "America/Denver",
+      "baseTownId": "great-falls-neihart",
+      "route": "/great-falls-showdown/mountain/showdown-montana",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "montana-turner-mountain-ski-area",
+      "publicId": "turner-mountain-ski-area",
+      "aliases": [
+        "Turner Mountain"
+      ],
+      "name": "Turner Mountain Ski Area",
+      "coordinates": {
+        "lat": 48.6032,
+        "lng": -115.6585
+      },
+      "forecastElevationM": 1171,
+      "baseElevationM": 1171,
+      "topElevationM": 1814,
+      "officialUrl": "https://skiturner.com/",
+      "stateCode": "MT",
+      "regionId": "libby-northwest-montana",
+      "timezone": "America/Denver",
+      "baseTownId": "libby",
+      "route": "/libby-northwest-montana/mountain/turner-mountain-ski-area",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "wy-antelope-butte-mountain-recreation-area",
+      "publicId": "antelope-butte-mountain-recreation-area",
+      "aliases": [],
+      "name": "Antelope Butte Mountain Recreation Area",
+      "coordinates": {
+        "lat": 44.6136,
+        "lng": -107.5142
+      },
+      "forecastElevationM": 2560,
+      "baseElevationM": 2560,
+      "topElevationM": 2865,
+      "officialUrl": "https://www.skiantelopebutte.com/",
+      "stateCode": "WY",
+      "regionId": "bighorn-mountains",
+      "timezone": "America/Denver",
+      "baseTownId": "shell",
+      "route": "/bighorn-mountains/mountain/antelope-butte-mountain-recreation-area",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "wy-white-pine-resort",
+      "publicId": "white-pine-resort",
+      "aliases": [
+        "White Pine Ski Area"
+      ],
+      "name": "White Pine Resort",
+      "coordinates": {
+        "lat": 42.9777,
+        "lng": -109.7582
+      },
+      "forecastElevationM": 2560,
+      "baseElevationM": 2560,
+      "topElevationM": 2896,
+      "officialUrl": "https://www.whitepineresort.com/",
+      "stateCode": "WY",
+      "regionId": "pinedale",
+      "timezone": "America/Denver",
+      "baseTownId": "pinedale",
+      "route": "/pinedale/mountain/white-pine-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "wy-hogadon-basin-ski-area",
+      "publicId": "hogadon-basin-ski-area",
+      "aliases": [],
+      "name": "Hogadon Basin Ski Area",
+      "coordinates": {
+        "lat": 42.7448,
+        "lng": -106.3386
+      },
+      "forecastElevationM": 2256,
+      "baseElevationM": 2256,
+      "topElevationM": 2438,
+      "officialUrl": "https://hogadon.net/",
+      "stateCode": "WY",
+      "regionId": "casper",
+      "timezone": "America/Denver",
+      "baseTownId": "casper",
+      "route": "/casper/mountain/hogadon-basin-ski-area",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "wy-snowy-range-ski-area",
+      "publicId": "snowy-range-ski-area",
+      "aliases": [
+        "Snowy Range Ski & Recreation Area"
+      ],
+      "name": "Snowy Range Ski Area",
+      "coordinates": {
+        "lat": 41.3415,
+        "lng": -106.1834
+      },
+      "forecastElevationM": 2682,
+      "baseElevationM": 2682,
+      "topElevationM": 2945,
+      "officialUrl": "https://snowyrangeski.com/",
+      "stateCode": "WY",
+      "regionId": "laramie-snowy-range",
+      "timezone": "America/Denver",
+      "baseTownId": "centennial",
+      "route": "/laramie-snowy-range/mountain/snowy-range-ski-area",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "ut-brian-head-resort",
+      "publicId": "brian-head-resort",
+      "aliases": [],
+      "name": "Brian Head Resort",
+      "coordinates": {
+        "lat": 37.7024,
+        "lng": -112.8499
+      },
+      "forecastElevationM": 2926,
+      "baseElevationM": 2926,
+      "topElevationM": 3344,
+      "officialUrl": "https://www.brianhead.com/",
+      "stateCode": "UT",
+      "regionId": "southern-utah",
+      "timezone": "America/Denver",
+      "baseTownId": "brian-head",
+      "route": "/southern-utah/mountain/brian-head-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "ut-woodward-park-city",
+      "publicId": "woodward-park-city",
+      "aliases": [],
+      "name": "Woodward Park City",
+      "coordinates": {
+        "lat": 40.7555,
+        "lng": -111.5853
+      },
+      "forecastElevationM": 1981,
+      "baseElevationM": 1981,
+      "topElevationM": 2134,
+      "officialUrl": "https://www.woodwardparkcity.com/",
+      "stateCode": "UT",
+      "regionId": "park-city",
+      "timezone": "America/Denver",
+      "baseTownId": "park-city",
+      "route": "/park-city/mountain/woodward-park-city",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "co-monarch-mountain",
+      "publicId": "monarch-mountain",
+      "aliases": [],
+      "name": "Monarch Mountain",
+      "coordinates": {
+        "lat": 38.5122,
+        "lng": -106.3317
+      },
+      "forecastElevationM": 3290,
+      "baseElevationM": 3290,
+      "topElevationM": 3630,
+      "officialUrl": "https://skimonarch.com/",
+      "stateCode": "CO",
+      "regionId": "salida-monarch",
+      "timezone": "America/Denver",
+      "baseTownId": "salida",
+      "route": "/salida-monarch/mountain/monarch-mountain",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "co-wolf-creek-ski-area",
+      "publicId": "wolf-creek-ski-area",
+      "aliases": [],
+      "name": "Wolf Creek Ski Area",
+      "coordinates": {
+        "lat": 37.4722,
+        "lng": -106.7935
+      },
+      "forecastElevationM": 3139,
+      "baseElevationM": 3139,
+      "topElevationM": 3628,
+      "officialUrl": "https://wolfcreekski.com/",
+      "stateCode": "CO",
+      "regionId": "pagosa-wolf-creek",
+      "timezone": "America/Denver",
+      "baseTownId": "pagosa-springs",
+      "route": "/pagosa-wolf-creek/mountain/wolf-creek-ski-area",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "co-sunlight-mountain-resort",
+      "publicId": "sunlight-mountain-resort",
+      "aliases": [],
+      "name": "Sunlight Mountain Resort",
+      "coordinates": {
+        "lat": 39.3998,
+        "lng": -107.3388
+      },
+      "forecastElevationM": 2403,
+      "baseElevationM": 2403,
+      "topElevationM": 3016,
+      "officialUrl": "https://sunlightmtn.com/",
+      "stateCode": "CO",
+      "regionId": "glenwood-springs",
+      "timezone": "America/Denver",
+      "baseTownId": "glenwood-springs",
+      "route": "/glenwood-springs/mountain/sunlight-mountain-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "co-powderhorn-mountain-resort",
+      "publicId": "powderhorn-mountain-resort",
+      "aliases": [],
+      "name": "Powderhorn Mountain Resort",
+      "coordinates": {
+        "lat": 39.0695,
+        "lng": -108.1507
+      },
+      "forecastElevationM": 2499,
+      "baseElevationM": 2499,
+      "topElevationM": 3002,
+      "officialUrl": "https://www.powderhorn.com/",
+      "stateCode": "CO",
+      "regionId": "grand-mesa",
+      "timezone": "America/Denver",
+      "baseTownId": "mesa",
+      "route": "/grand-mesa/mountain/powderhorn-mountain-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "co-silverton-mountain",
+      "publicId": "silverton-mountain",
+      "aliases": [],
+      "name": "Silverton Mountain",
+      "coordinates": {
+        "lat": 37.8847,
+        "lng": -107.6653
+      },
+      "forecastElevationM": 3170,
+      "baseElevationM": 3170,
+      "topElevationM": 4111,
+      "officialUrl": "https://silvertonmountain.com/",
+      "stateCode": "CO",
+      "regionId": "durango",
+      "timezone": "America/Denver",
+      "baseTownId": "silverton",
+      "route": "/durango/mountain/silverton-mountain",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "co-cooper",
+      "publicId": "cooper",
+      "aliases": [
+        "Ski Cooper"
+      ],
+      "name": "Cooper",
+      "coordinates": {
+        "lat": 39.3603,
+        "lng": -106.3022
+      },
+      "forecastElevationM": 3200,
+      "baseElevationM": 3200,
+      "topElevationM": 3566,
+      "officialUrl": "https://www.skicooper.com/",
+      "stateCode": "CO",
+      "regionId": "summit-county",
+      "timezone": "America/Denver",
+      "baseTownId": "leadville",
+      "route": "/summit-county/mountain/cooper",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "co-echo-mountain",
+      "publicId": "echo-mountain",
+      "aliases": [],
+      "name": "Echo Mountain",
+      "coordinates": {
+        "lat": 39.6849,
+        "lng": -105.5193
+      },
+      "forecastElevationM": 3063,
+      "baseElevationM": 3063,
+      "topElevationM": 3246,
+      "officialUrl": "https://echomtn.com/",
+      "stateCode": "CO",
+      "regionId": "boulder-front-range",
+      "timezone": "America/Denver",
+      "baseTownId": "idaho-springs",
+      "route": "/boulder-front-range/mountain/echo-mountain",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "nm-ski-apache",
+      "publicId": "ski-apache",
+      "aliases": [],
+      "name": "Ski Apache",
+      "coordinates": {
+        "lat": 33.397455,
+        "lng": -105.789198
+      },
+      "forecastElevationM": 2926,
+      "baseElevationM": 2926,
+      "topElevationM": 3475,
+      "officialUrl": "https://www.skiapache.com/",
+      "stateCode": "NM",
+      "regionId": "ruidoso",
+      "timezone": "America/Denver",
+      "baseTownId": "ruidoso",
+      "route": "/ruidoso/mountain/ski-apache",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "nm-sipapu-ski-summer-resort",
+      "publicId": "sipapu-ski-summer-resort",
+      "aliases": [],
+      "name": "Sipapu Ski & Summer Resort",
+      "coordinates": {
+        "lat": 36.152,
+        "lng": -105.55
+      },
+      "forecastElevationM": 2499,
+      "baseElevationM": 2499,
+      "topElevationM": 2821,
+      "officialUrl": "https://www.sipapu.ski/",
+      "stateCode": "NM",
+      "regionId": "taos",
+      "timezone": "America/Denver",
+      "baseTownId": "taos",
+      "route": "/taos/mountain/sipapu-ski-summer-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "nm-red-river-ski-summer-area",
+      "publicId": "red-river-ski-summer-area",
+      "aliases": [
+        "Red River Ski Area"
+      ],
+      "name": "Red River Ski & Summer Area",
+      "coordinates": {
+        "lat": 36.7076,
+        "lng": -105.4168
+      },
+      "forecastElevationM": 2667,
+      "baseElevationM": 2667,
+      "topElevationM": 3155,
+      "officialUrl": "https://www.redriverskiarea.com/",
+      "stateCode": "NM",
+      "regionId": "red-river",
+      "timezone": "America/Denver",
+      "baseTownId": "red-river",
+      "route": "/red-river/mountain/red-river-ski-summer-area",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "nm-pajarito-mountain-ski-area",
+      "publicId": "pajarito-mountain-ski-area",
+      "aliases": [
+        "Pajarito Mountain"
+      ],
+      "name": "Pajarito Mountain Ski Area",
+      "coordinates": {
+        "lat": 35.895,
+        "lng": -106.392
+      },
+      "forecastElevationM": 2743,
+      "baseElevationM": 2743,
+      "topElevationM": 3182,
+      "officialUrl": "https://www.pajarito.ski/",
+      "stateCode": "NM",
+      "regionId": "los-alamos-pajarito",
+      "timezone": "America/Denver",
+      "baseTownId": "los-alamos",
+      "route": "/los-alamos-pajarito/mountain/pajarito-mountain-ski-area",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "nm-ski-cloudcroft",
+      "publicId": "ski-cloudcroft",
+      "aliases": [],
+      "name": "Ski Cloudcroft",
+      "coordinates": {
+        "lat": 32.950708,
+        "lng": -105.707242
+      },
+      "forecastElevationM": 2560,
+      "baseElevationM": 2560,
+      "topElevationM": 2774,
+      "officialUrl": "https://skicloudcroft.net/",
+      "stateCode": "NM",
+      "regionId": "cloudcroft",
+      "timezone": "America/Denver",
+      "baseTownId": "cloudcroft",
+      "route": "/cloudcroft/mountain/ski-cloudcroft",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    },
+    {
+      "recordId": "az-mount-lemmon-ski-valley",
+      "publicId": "mount-lemmon-ski-valley",
+      "aliases": [],
+      "name": "Mount Lemmon Ski Valley",
+      "coordinates": {
+        "lat": 32.44472222,
+        "lng": -110.7797222
+      },
+      "forecastElevationM": 2529,
+      "baseElevationM": 2529,
+      "topElevationM": 2791,
+      "officialUrl": "https://www.skithelemmon.com/",
+      "stateCode": "AZ",
+      "regionId": "tucson-mount-lemmon",
+      "timezone": "America/Phoenix",
+      "baseTownId": "tucson",
+      "route": "/tucson-mount-lemmon/mountain/mount-lemmon-ski-valley",
+      "country": "United States",
+      "countryCode": "US",
+      "lifecycle": "published",
+      "operatingStatus": "operating"
+    }
+  ]
+}

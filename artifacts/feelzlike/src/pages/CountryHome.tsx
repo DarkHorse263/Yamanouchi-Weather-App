@@ -9,6 +9,7 @@ import { Leaf } from "lucide-react";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { breadcrumbSchema } from "@/lib/seo/jsonLd";
 import { publishedCatalogueRecords as publishedCanadaCatalogueRecords } from "@workspace/canada-ski-catalogue/public-runtime";
+import { usStateForRegion } from "@/regions/us-states";
 
 interface CountryHomeProps {
   code: CountryCode;
@@ -20,6 +21,7 @@ export default function CountryHome({ code }: CountryHomeProps) {
   const isGreenSeason = seasonForCountry(code) === "green";
   const snowReturnsMonth = code === "AU" || code === "NZ" ? "june" : "december";
   const [selectedPrefecture, setSelectedPrefecture] = useState("all");
+  const [selectedState, setSelectedState] = useState("all");
   const prefectureGroups = useMemo(() => {
     if (code !== "JP") return [];
     const grouped = new Map<string, {
@@ -39,6 +41,16 @@ export default function CountryHome({ code }: CountryHomeProps) {
   const visibleGroups = selectedPrefecture === "all"
     ? prefectureGroups
     : prefectureGroups.filter(({ prefecture }) => prefecture.id === selectedPrefecture);
+  const stateGroups = useMemo(() => {
+    if (code !== "US") return [];
+    const grouped = new Map<string, typeof regions>();
+    for (const region of regions) {
+      const state = usStateForRegion(region) ?? "Other United States";
+      grouped.set(state, [...(grouped.get(state) ?? []), region]);
+    }
+    return [...grouped].map(([state, regions]) => ({ state, regions })).sort((a, b) => a.state.localeCompare(b.state));
+  }, [code, regions]);
+  const visibleStateGroups = selectedState === "all" ? stateGroups : stateGroups.filter((group) => group.state === selectedState);
 
   const compactLabels = (labels: string[]) => {
     const shown = labels.slice(0, 3);
@@ -142,7 +154,7 @@ export default function CountryHome({ code }: CountryHomeProps) {
               {meta.name}
             </h1>
             <p className="mt-1.5 md:mt-3 text-xs font-semibold uppercase tracking-[0.2em] text-white">
-              {code === "JP" ? "Choose a prefecture · then a travel region" : "Choose a region"}
+              {code === "JP" ? "Choose a prefecture · then a travel region" : code === "US" ? "Choose a state · then a travel region" : "Choose a region"}
             </p>
             {isGreenSeason && (
               <p
@@ -164,7 +176,7 @@ export default function CountryHome({ code }: CountryHomeProps) {
               source={`country_${code.toLowerCase()}`}
               placeholder={code === "JP"
                 ? "search a prefecture · town · resort · region"
-                : "search a town · resort · region"}
+                : code === "US" ? "search a state · town · resort · region" : "search a town · resort · region"}
             />
           </motion.div>
         </div>
@@ -210,6 +222,23 @@ export default function CountryHome({ code }: CountryHomeProps) {
                   <div className="grid grid-cols-1 gap-2.5 md:grid-cols-2 md:gap-4">
                     {groupRegions.map(renderRegionCard)}
                   </div>
+                </section>
+              ))}
+            </div>
+          </>
+        ) : code === "US" ? (
+          <>
+            <div className="mx-auto mb-5 flex max-w-3xl gap-2 overflow-x-auto pb-2" aria-label="filter by state">
+              <button type="button" onClick={() => setSelectedState("all")} className={`shrink-0 rounded-full px-3.5 py-2 text-[12px] font-bold ${selectedState === "all" ? "bg-white text-[#0055FF]" : "bg-white/15 text-white"}`}>all states</button>
+              {stateGroups.map(({ state }) => (
+                <button key={state} type="button" onClick={() => setSelectedState(state)} className={`shrink-0 rounded-full px-3.5 py-2 text-[12px] font-bold ${selectedState === state ? "bg-white text-[#0055FF]" : "bg-white/15 text-white"}`}>{state}</button>
+              ))}
+            </div>
+            <div className="mx-auto max-w-3xl space-y-7">
+              {visibleStateGroups.map(({ state, regions: groupRegions }) => (
+                <section key={state}>
+                  <div className="mb-2.5 flex items-baseline justify-between gap-3 px-1"><h2 className="text-xl font-bold text-white">{state}</h2><span className="text-xs font-semibold text-white">{groupRegions.length} {groupRegions.length === 1 ? "region" : "regions"}</span></div>
+                  <div className="grid grid-cols-1 gap-2.5 md:grid-cols-2 md:gap-4">{groupRegions.map(renderRegionCard)}</div>
                 </section>
               ))}
             </div>

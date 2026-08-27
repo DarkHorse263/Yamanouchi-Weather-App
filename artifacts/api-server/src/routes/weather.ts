@@ -18,6 +18,10 @@ import {
 } from "@workspace/ski-catalogue/public-runtime";
 import { publishedCatalogueRecords as publishedCanadaCatalogueRecords } from "@workspace/canada-ski-catalogue/public-runtime";
 import type { PublishedCanadaSkiRecord } from "@workspace/canada-ski-catalogue";
+import {
+  publishedCatalogueRecords as publishedWesternUsCatalogueRecords,
+  type WesternUsPublishedRecord,
+} from "@workspace/western-us-ski-catalogue/public-runtime";
 
 const router: IRouter = Router();
 
@@ -848,6 +852,7 @@ const ALL_CATALOGUE_RECORDS = [...publishedCatalogueRecords, ...publishedCanadaC
 const CATALOGUE_LOCATIONS = [
   ...ALL_CATALOGUE_RECORDS.map(catalogueLocation),
   ...publishedSkiCatalogueRecords.map(skiCatalogueLocation),
+  ...publishedWesternUsCatalogueRecords.map(westernUsCatalogueLocation),
 ];
 const CATALOGUE_LOCATION_BY_ID = new Map<string, LocationConfig>();
 
@@ -855,7 +860,7 @@ const CATALOGUE_LOCATION_BY_ID = new Map<string, LocationConfig>();
  * Builds the public-id/alias index at module load so a catalogue collision
  * fails boot and tests rather than silently changing an existing location.
  */
-for (const record of [...ALL_CATALOGUE_RECORDS, ...publishedSkiCatalogueRecords]) {
+for (const record of [...ALL_CATALOGUE_RECORDS, ...publishedSkiCatalogueRecords, ...publishedWesternUsCatalogueRecords]) {
   for (const id of [record.publicId, ...record.aliases]) {
     if (HARD_CODED_LOCATION_IDS.has(id) || CATALOGUE_LOCATION_BY_ID.has(id)) {
       throw new Error(`[catalogue] location id/alias collision: "${id}"`);
@@ -865,7 +870,6 @@ for (const record of [...ALL_CATALOGUE_RECORDS, ...publishedSkiCatalogueRecords]
     CATALOGUE_LOCATION_BY_ID.set(id, location);
   }
 }
-
 const ALL_LOCATIONS: readonly LocationConfig[] = [...LOCATIONS, ...CATALOGUE_LOCATIONS];
 
 export function resolveWeatherLocation(locationId: string): LocationConfig | undefined {
@@ -1621,7 +1625,7 @@ router.get("/weather/:locationId", async (req, res) => {
     // Validate the path-param shape via the generated zod schema (regex
     // `^[a-z0-9-]+$`). The actual id->location resolution still happens
     // against LOCATIONS below, which is the source of truth.
-    const { locationId } = GetLocationWeatherParams.parse(req.params);
+    const { locationId } = GetResortSnowReportParams.parse(req.params);
     const location = resolveWeatherLocation(locationId);
 
     if (!location) {
@@ -1729,3 +1733,19 @@ export const WEATHER_LOCATION_ALIASES = [...CATALOGUE_LOCATION_BY_ID.keys()].fil
 export const CATALOGUE_LOCATION_ALERTS_AVAILABLE = false;
 
 export default router;
+
+function westernUsCatalogueLocation(record: WesternUsPublishedRecord): LocationConfig {
+  return {
+    id: record.publicId,
+    name: record.name,
+    latitude: record.coordinates.lat,
+    longitude: record.coordinates.lng,
+    elevation: record.forecastElevationM,
+    description: `${record.name} weather forecast.`,
+    bomStation: "Open-Meteo (catalogue forecast location)",
+    bomStationId: "",
+    bomWmoId: 0,
+    timezone: record.timezone,
+    region: "US",
+  };
+}

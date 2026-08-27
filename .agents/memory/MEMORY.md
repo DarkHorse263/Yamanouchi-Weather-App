@@ -87,3 +87,4 @@
 - [feelzlike route rename](feelzlike-route-rename.md) — renaming a top-level route touches ~12 registries; generate-rewrites emits stdout only, artifact.toml must be updated to match.
 - [feelzlike Japan source reconciliation](feelzlike-japan-source-reconciliation.md) — canonical identity keys preserve generic resort words; fuzzy matching may strip them, but must never drive deduplication.
 - [feelzlike webcam sourcing](feelzlike-webcam-sourcing.md) — prefer official and public cameras; label exact vantage/operator; village and road cams must never imply slope conditions.
+- [feelzlike catalogue-owned mountain runtime](feelzlike-catalogue-mountain-runtime.md) — publishing a catalogue mountain requires weather projection, explicit timezone, and link-only generated towns unless town weather is real.

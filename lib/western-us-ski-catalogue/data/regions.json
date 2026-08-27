@@ -1,0 +1,727 @@
+{
+  "schemaVersion": 1,
+  "timezoneByRegion": {
+    "girdwood": "America/Anchorage",
+    "fairbanks": "America/Anchorage",
+    "cordova": "America/Anchorage",
+    "spokane": "America/Los_Angeles",
+    "wenatchee": "America/Los_Angeles",
+    "white-pass": "America/Los_Angeles",
+    "methow-valley": "America/Los_Angeles",
+    "olympic-peninsula": "America/Los_Angeles",
+    "eastern-oregon": "America/Los_Angeles",
+    "bend": "America/Los_Angeles",
+    "southern-oregon": "America/Los_Angeles",
+    "willamette-pass": "America/Los_Angeles",
+    "mt-hood": "America/Los_Angeles",
+    "wrightwood": "America/Los_Angeles",
+    "fresno-china-peak": "America/Los_Angeles",
+    "sonora-dodge-ridge": "America/Los_Angeles",
+    "san-gabriel-mountains": "America/Los_Angeles",
+    "big-bear": "America/Los_Angeles",
+    "yosemite": "America/Los_Angeles",
+    "north-lake-tahoe": "America/Los_Angeles",
+    "kern-river": "America/Los_Angeles",
+    "las-vegas-lee-canyon": "America/Los_Angeles",
+    "silver-valley": "America/Los_Angeles",
+    "pocatello-southeast-idaho": "America/Denver",
+    "sun-valley": "America/Denver",
+    "southern-idaho-magic-valley": "America/Denver",
+    "idaho-falls-kelly-canyon": "America/Denver",
+    "missoula": "America/Denver",
+    "southwest-montana-discovery": "America/Denver",
+    "whitefish": "America/Denver",
+    "helena-great-divide": "America/Denver",
+    "great-falls-showdown": "America/Denver",
+    "southwest-montana-dillon": "America/Denver",
+    "libby-northwest-montana": "America/Denver",
+    "big-sky": "America/Denver",
+    "jackson-hole": "America/Denver",
+    "bighorn-mountains": "America/Denver",
+    "pinedale": "America/Denver",
+    "casper": "America/Denver",
+    "laramie-snowy-range": "America/Denver",
+    "cody": "America/Denver",
+    "southern-utah": "America/Denver",
+    "park-city": "America/Denver",
+    "salida-monarch": "America/Denver",
+    "pagosa-wolf-creek": "America/Denver",
+    "glenwood-springs": "America/Denver",
+    "grand-mesa": "America/Denver",
+    "durango": "America/Denver",
+    "summit-county": "America/Denver",
+    "boulder-front-range": "America/Denver",
+    "ruidoso": "America/Denver",
+    "taos": "America/Denver",
+    "red-river": "America/Denver",
+    "los-alamos-pajarito": "America/Denver",
+    "cloudcroft": "America/Denver",
+    "tucson-mount-lemmon": "America/Phoenix",
+    "az": "America/Phoenix",
+    "ut": "America/Denver"
+  },
+  "regions": [
+    {
+      "regionId": "girdwood",
+      "name": "Girdwood & Anchorage",
+      "stateCode": "AK",
+      "baseTowns": [
+        {
+          "baseTownId": "anchorage",
+          "name": "Anchorage"
+        }
+      ]
+    },
+    {
+      "regionId": "fairbanks",
+      "name": "Fairbanks",
+      "stateCode": "AK",
+      "baseTowns": [
+        {
+          "baseTownId": "fairbanks",
+          "name": "Fairbanks"
+        }
+      ]
+    },
+    {
+      "regionId": "cordova",
+      "name": "Cordova",
+      "stateCode": "AK",
+      "baseTowns": [
+        {
+          "baseTownId": "cordova",
+          "name": "Cordova"
+        }
+      ]
+    },
+    {
+      "regionId": "spokane",
+      "name": "Spokane & Northeast Washington",
+      "stateCode": "WA",
+      "baseTowns": [
+        {
+          "baseTownId": "chewelah",
+          "name": "Chewelah"
+        },
+        {
+          "baseTownId": "spokane",
+          "name": "Spokane"
+        }
+      ]
+    },
+    {
+      "regionId": "wenatchee",
+      "name": "Wenatchee",
+      "stateCode": "WA",
+      "baseTowns": [
+        {
+          "baseTownId": "wenatchee",
+          "name": "Wenatchee"
+        }
+      ]
+    },
+    {
+      "regionId": "white-pass",
+      "name": "White Pass & Yakima",
+      "stateCode": "WA",
+      "baseTowns": [
+        {
+          "baseTownId": "yakima",
+          "name": "Yakima"
+        }
+      ]
+    },
+    {
+      "regionId": "methow-valley",
+      "name": "Methow Valley",
+      "stateCode": "WA",
+      "baseTowns": [
+        {
+          "baseTownId": "twisp",
+          "name": "Twisp"
+        }
+      ]
+    },
+    {
+      "regionId": "olympic-peninsula",
+      "name": "Olympic Peninsula",
+      "stateCode": "WA",
+      "baseTowns": [
+        {
+          "baseTownId": "port-angeles",
+          "name": "Port Angeles"
+        }
+      ]
+    },
+    {
+      "regionId": "eastern-oregon",
+      "name": "Baker City & Eastern Oregon",
+      "stateCode": "OR",
+      "baseTowns": [
+        {
+          "baseTownId": "baker-city",
+          "name": "Baker City"
+        }
+      ]
+    },
+    {
+      "regionId": "bend",
+      "name": "Bend & Central Oregon",
+      "stateCode": "OR",
+      "baseTowns": [
+        {
+          "baseTownId": "sisters",
+          "name": "Sisters"
+        }
+      ]
+    },
+    {
+      "regionId": "southern-oregon",
+      "name": "Southern Oregon",
+      "stateCode": "OR",
+      "baseTowns": [
+        {
+          "baseTownId": "ashland",
+          "name": "Ashland"
+        }
+      ]
+    },
+    {
+      "regionId": "willamette-pass",
+      "name": "Eugene & Willamette Pass",
+      "stateCode": "OR",
+      "baseTowns": [
+        {
+          "baseTownId": "oakridge",
+          "name": "Oakridge"
+        }
+      ]
+    },
+    {
+      "regionId": "mt-hood",
+      "name": "Mt. Hood",
+      "stateCode": "OR",
+      "baseTowns": [
+        {
+          "baseTownId": "hood-river",
+          "name": "Hood River"
+        }
+      ]
+    },
+    {
+      "regionId": "wrightwood",
+      "name": "Wrightwood",
+      "stateCode": "CA",
+      "baseTowns": [
+        {
+          "baseTownId": "wrightwood",
+          "name": "Wrightwood"
+        }
+      ]
+    },
+    {
+      "regionId": "fresno-china-peak",
+      "name": "Fresno & China Peak",
+      "stateCode": "CA",
+      "baseTowns": [
+        {
+          "baseTownId": "fresno",
+          "name": "Fresno"
+        }
+      ]
+    },
+    {
+      "regionId": "sonora-dodge-ridge",
+      "name": "Sonora & Dodge Ridge",
+      "stateCode": "CA",
+      "baseTowns": [
+        {
+          "baseTownId": "pinecrest",
+          "name": "Pinecrest"
+        }
+      ]
+    },
+    {
+      "regionId": "san-gabriel-mountains",
+      "name": "San Gabriel Mountains",
+      "stateCode": "CA",
+      "baseTowns": [
+        {
+          "baseTownId": "mt-baldy",
+          "name": "Mt Baldy"
+        }
+      ]
+    },
+    {
+      "regionId": "big-bear",
+      "name": "Big Bear",
+      "stateCode": "CA",
+      "baseTowns": [
+        {
+          "baseTownId": "running-springs",
+          "name": "Running Springs"
+        }
+      ]
+    },
+    {
+      "regionId": "yosemite",
+      "name": "Yosemite",
+      "stateCode": "CA",
+      "baseTowns": [
+        {
+          "baseTownId": "yosemite-valley",
+          "name": "Yosemite Valley"
+        }
+      ]
+    },
+    {
+      "regionId": "north-lake-tahoe",
+      "name": "North Lake Tahoe",
+      "stateCode": "CA",
+      "baseTowns": [
+        {
+          "baseTownId": "truckee",
+          "name": "Truckee"
+        },
+        {
+          "baseTownId": "tahoe-city",
+          "name": "Tahoe City"
+        },
+        {
+          "baseTownId": "olympic-valley",
+          "name": "Olympic Valley"
+        }
+      ]
+    },
+    {
+      "regionId": "kern-river",
+      "name": "Kern River & Lake Isabella",
+      "stateCode": "CA",
+      "baseTowns": [
+        {
+          "baseTownId": "wofford-heights",
+          "name": "Wofford Heights"
+        }
+      ]
+    },
+    {
+      "regionId": "las-vegas-lee-canyon",
+      "name": "Las Vegas & Lee Canyon",
+      "stateCode": "NV",
+      "baseTowns": [
+        {
+          "baseTownId": "las-vegas",
+          "name": "Las Vegas"
+        }
+      ]
+    },
+    {
+      "regionId": "silver-valley",
+      "name": "Silver Valley",
+      "stateCode": "ID",
+      "baseTowns": [
+        {
+          "baseTownId": "kellogg",
+          "name": "Kellogg"
+        },
+        {
+          "baseTownId": "wallace-mullan",
+          "name": "Wallace Mullan"
+        }
+      ]
+    },
+    {
+      "regionId": "pocatello-southeast-idaho",
+      "name": "Pocatello & Southeast Idaho",
+      "stateCode": "ID",
+      "baseTowns": [
+        {
+          "baseTownId": "pocatello-inkom",
+          "name": "Pocatello Inkom"
+        }
+      ]
+    },
+    {
+      "regionId": "sun-valley",
+      "name": "Sun Valley",
+      "stateCode": "ID",
+      "baseTowns": [
+        {
+          "baseTownId": "fairfield",
+          "name": "Fairfield"
+        }
+      ]
+    },
+    {
+      "regionId": "southern-idaho-magic-valley",
+      "name": "Southern Idaho & Magic Valley",
+      "stateCode": "ID",
+      "baseTowns": [
+        {
+          "baseTownId": "burley-albion",
+          "name": "Burley Albion"
+        }
+      ]
+    },
+    {
+      "regionId": "idaho-falls-kelly-canyon",
+      "name": "Idaho Falls & Kelly Canyon",
+      "stateCode": "ID",
+      "baseTowns": [
+        {
+          "baseTownId": "idaho-falls-ririe",
+          "name": "Idaho Falls Ririe"
+        }
+      ]
+    },
+    {
+      "regionId": "missoula",
+      "name": "Missoula",
+      "stateCode": "MT",
+      "baseTowns": [
+        {
+          "baseTownId": "missoula",
+          "name": "Missoula"
+        }
+      ]
+    },
+    {
+      "regionId": "southwest-montana-discovery",
+      "name": "Southwest Montana & Discovery",
+      "stateCode": "MT",
+      "baseTowns": [
+        {
+          "baseTownId": "philipsburg-anaconda",
+          "name": "Philipsburg Anaconda"
+        }
+      ]
+    },
+    {
+      "regionId": "whitefish",
+      "name": "Whitefish & Flathead Lake",
+      "stateCode": "MT",
+      "baseTowns": [
+        {
+          "baseTownId": "lakeside-kalispell",
+          "name": "Lakeside Kalispell"
+        }
+      ]
+    },
+    {
+      "regionId": "helena-great-divide",
+      "name": "Helena & Great Divide",
+      "stateCode": "MT",
+      "baseTowns": [
+        {
+          "baseTownId": "helena",
+          "name": "Helena"
+        }
+      ]
+    },
+    {
+      "regionId": "great-falls-showdown",
+      "name": "Great Falls & Showdown",
+      "stateCode": "MT",
+      "baseTowns": [
+        {
+          "baseTownId": "great-falls-neihart",
+          "name": "Great Falls Neihart"
+        }
+      ]
+    },
+    {
+      "regionId": "southwest-montana-dillon",
+      "name": "Southwest Montana & Dillon",
+      "stateCode": "MT",
+      "baseTowns": [
+        {
+          "baseTownId": "dillon-polaris",
+          "name": "Dillon Polaris"
+        }
+      ]
+    },
+    {
+      "regionId": "libby-northwest-montana",
+      "name": "Libby & Northwest Montana",
+      "stateCode": "MT",
+      "baseTowns": [
+        {
+          "baseTownId": "libby",
+          "name": "Libby"
+        }
+      ]
+    },
+    {
+      "regionId": "big-sky",
+      "name": "Big Sky",
+      "stateCode": "MT",
+      "baseTowns": [
+        {
+          "baseTownId": "big-sky",
+          "name": "Big Sky"
+        }
+      ]
+    },
+    {
+      "regionId": "jackson-hole",
+      "name": "Jackson Hole",
+      "stateCode": "WY",
+      "baseTowns": [
+        {
+          "baseTownId": "jackson",
+          "name": "Jackson"
+        }
+      ]
+    },
+    {
+      "regionId": "bighorn-mountains",
+      "name": "Bighorn Mountains",
+      "stateCode": "WY",
+      "baseTowns": [
+        {
+          "baseTownId": "shell",
+          "name": "Shell"
+        },
+        {
+          "baseTownId": "ten-sleep",
+          "name": "Ten Sleep"
+        }
+      ]
+    },
+    {
+      "regionId": "pinedale",
+      "name": "Pinedale",
+      "stateCode": "WY",
+      "baseTowns": [
+        {
+          "baseTownId": "pinedale",
+          "name": "Pinedale"
+        }
+      ]
+    },
+    {
+      "regionId": "casper",
+      "name": "Casper",
+      "stateCode": "WY",
+      "baseTowns": [
+        {
+          "baseTownId": "casper",
+          "name": "Casper"
+        }
+      ]
+    },
+    {
+      "regionId": "laramie-snowy-range",
+      "name": "Laramie & Snowy Range",
+      "stateCode": "WY",
+      "baseTowns": [
+        {
+          "baseTownId": "centennial",
+          "name": "Centennial"
+        }
+      ]
+    },
+    {
+      "regionId": "cody",
+      "name": "Cody & North Fork",
+      "stateCode": "WY",
+      "baseTowns": [
+        {
+          "baseTownId": "cody",
+          "name": "Cody"
+        }
+      ]
+    },
+    {
+      "regionId": "southern-utah",
+      "name": "Southern Utah",
+      "stateCode": "UT",
+      "baseTowns": [
+        {
+          "baseTownId": "brian-head",
+          "name": "Brian Head"
+        },
+        {
+          "baseTownId": "beaver",
+          "name": "Beaver"
+        }
+      ]
+    },
+    {
+      "regionId": "park-city",
+      "name": "Park City",
+      "stateCode": "UT",
+      "baseTowns": [
+        {
+          "baseTownId": "park-city",
+          "name": "Park City"
+        }
+      ]
+    },
+    {
+      "regionId": "salida-monarch",
+      "name": "Salida & Monarch",
+      "stateCode": "CO",
+      "baseTowns": [
+        {
+          "baseTownId": "salida",
+          "name": "Salida"
+        }
+      ]
+    },
+    {
+      "regionId": "pagosa-wolf-creek",
+      "name": "Pagosa Springs & Wolf Creek",
+      "stateCode": "CO",
+      "baseTowns": [
+        {
+          "baseTownId": "pagosa-springs",
+          "name": "Pagosa Springs"
+        }
+      ]
+    },
+    {
+      "regionId": "glenwood-springs",
+      "name": "Glenwood Springs",
+      "stateCode": "CO",
+      "baseTowns": [
+        {
+          "baseTownId": "glenwood-springs",
+          "name": "Glenwood Springs"
+        }
+      ]
+    },
+    {
+      "regionId": "grand-mesa",
+      "name": "Grand Mesa",
+      "stateCode": "CO",
+      "baseTowns": [
+        {
+          "baseTownId": "mesa",
+          "name": "Mesa"
+        }
+      ]
+    },
+    {
+      "regionId": "durango",
+      "name": "Durango",
+      "stateCode": "CO",
+      "baseTowns": [
+        {
+          "baseTownId": "silverton",
+          "name": "Silverton"
+        }
+      ]
+    },
+    {
+      "regionId": "summit-county",
+      "name": "Summit County",
+      "stateCode": "CO",
+      "baseTowns": [
+        {
+          "baseTownId": "leadville",
+          "name": "Leadville"
+        }
+      ]
+    },
+    {
+      "regionId": "boulder-front-range",
+      "name": "Boulder & Front Range",
+      "stateCode": "CO",
+      "baseTowns": [
+        {
+          "baseTownId": "idaho-springs",
+          "name": "Idaho Springs"
+        }
+      ]
+    },
+    {
+      "regionId": "ruidoso",
+      "name": "Ruidoso",
+      "stateCode": "NM",
+      "baseTowns": [
+        {
+          "baseTownId": "ruidoso",
+          "name": "Ruidoso"
+        }
+      ]
+    },
+    {
+      "regionId": "taos",
+      "name": "Taos",
+      "stateCode": "NM",
+      "baseTowns": [
+        {
+          "baseTownId": "taos",
+          "name": "Taos"
+        }
+      ]
+    },
+    {
+      "regionId": "red-river",
+      "name": "Red River",
+      "stateCode": "NM",
+      "baseTowns": [
+        {
+          "baseTownId": "red-river",
+          "name": "Red River"
+        }
+      ]
+    },
+    {
+      "regionId": "los-alamos-pajarito",
+      "name": "Los Alamos",
+      "stateCode": "NM",
+      "baseTowns": [
+        {
+          "baseTownId": "los-alamos",
+          "name": "Los Alamos"
+        }
+      ]
+    },
+    {
+      "regionId": "cloudcroft",
+      "name": "Cloudcroft",
+      "stateCode": "NM",
+      "baseTowns": [
+        {
+          "baseTownId": "cloudcroft",
+          "name": "Cloudcroft"
+        }
+      ]
+    },
+    {
+      "regionId": "tucson-mount-lemmon",
+      "name": "Tucson & Mount Lemmon",
+      "stateCode": "AZ",
+      "baseTowns": [
+        {
+          "baseTownId": "tucson",
+          "name": "Tucson"
+        }
+      ]
+    },
+    {
+      "regionId": "az",
+      "name": "Arizona",
+      "stateCode": "AZ",
+      "baseTowns": [
+        {
+          "baseTownId": "williams",
+          "name": "Williams"
+        }
+      ]
+    },
+    {
+      "regionId": "ut",
+      "name": "Utah",
+      "stateCode": "UT",
+      "baseTowns": [
+        {
+          "baseTownId": "ut",
+          "name": "Ut"
+        }
+      ]
+    }
+  ]
+}

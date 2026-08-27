@@ -13,6 +13,12 @@ import {
   travelRegions as canadaTravelRegions,
 } from "@workspace/canada-ski-catalogue/public-runtime";
 
+export {
+  catalogueTownLandingModel,
+  isCatalogueMountainLinkTown,
+  type CatalogueTownLandingItem,
+  type CatalogueTownLandingModel,
+} from "./catalogue-towns";
 /**
  * The catalogue is the publication authority for these records. This adapter
  * deliberately only projects fields it publishes into the UI's existing
@@ -49,60 +55,6 @@ function townFor(
     catalogueContentMode: "mountain-links",
   } as BaseTown & { catalogueContentMode: "mountain-links" };
 }
-
-export interface CatalogueTownLandingItem {
-  id: string;
-  name: string;
-  nameJa?: string;
-  href: string;
-}
-
-export interface CatalogueTownLandingModel {
-  heading: string;
-  description: string;
-  mountains: CatalogueTownLandingItem[];
-}
-
-export function isCatalogueMountainLinkTown(town: BaseTown | undefined): boolean {
-  return (town as (BaseTown & { catalogueContentMode?: string }) | undefined)
-    ?.catalogueContentMode === "mountain-links";
-}
-
-/**
- * Generated catalogue towns use mountain coordinates only as a deterministic
- * map centroid. They must never pass that centroid to town-weather and label
- * the result as town conditions. Their honest destination is a list of the
- * published nearby mountain-weather routes.
- */
-export function catalogueTownLandingModel(
-  region: RegionConfig,
-  town: BaseTown,
-): CatalogueTownLandingModel | undefined {
-  if (!isCatalogueMountainLinkTown(town)) return undefined;
-  const mountainsById = new Map((region.mountains ?? []).map((mountain) => [mountain.id, mountain]));
-  const mountains = (town.nearbyMountainIds ?? []).map((id) => {
-    const mountain = mountainsById.get(id);
-    if (!mountain) {
-      throw new Error(`Catalogue base town references missing mountain: ${region.id}/${town.id}/${id}`);
-    }
-    return {
-      id,
-      name: mountain.name,
-      nameJa: mountain.nameJa,
-      href: `/${region.id}/mountain/${id}`,
-    };
-  });
-  if (mountains.length === 0) {
-    throw new Error(`Catalogue base town has no published mountains: ${region.id}/${town.id}`);
-  }
-  return {
-    heading: "Published mountain weather nearby",
-    description:
-      "Town weather is not currently published for this base. Choose a nearby mountain for its weather and forecast.",
-    mountains,
-  };
-}
-
 function assertUniqueRoutes(regions: RegionConfig[]) {
   const mountainIds = new Set<string>();
   const routes = new Set<string>();

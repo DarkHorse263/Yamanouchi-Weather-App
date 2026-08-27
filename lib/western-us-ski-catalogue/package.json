@@ -1,0 +1,26 @@
+{
+  "name": "@workspace/western-us-ski-catalogue",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    },
+    "./schema": {
+      "types": "./schema.d.ts",
+      "default": "./schema.js"
+    },
+    "./public-runtime": {
+      "types": "./public-runtime.d.ts",
+      "default": "./public-runtime.js"
+    }
+  },
+  "scripts": {
+    "generate": "node ./scripts/generate.mjs",
+    "generate:check": "node ./scripts/generate.mjs --check",
+    "validate": "node ./scripts/generate.mjs --check && node ./scripts/validate.mjs",
+    "test": "node --test ./scripts/catalogue.test.mjs"
+  }
+}
