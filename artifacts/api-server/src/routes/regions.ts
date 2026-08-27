@@ -4,6 +4,10 @@ import { fetchOpenWeatherMapAsOpenMeteo } from "../lib/openweathermap.js";
 import { reconcileDryToWet } from "../lib/amedas.js";
 import { reconcileNzMetarDryToWet } from "../lib/metar-nz.js";
 import { publishedCatalogueRecords, travelRegions } from "@workspace/japan-ski-catalogue/public-runtime";
+import {
+  publishedRecords as publishedSkiCatalogueRecords,
+  publishedRegions as publishedSkiCatalogueRegions,
+} from "@workspace/ski-catalogue/public-runtime";
 
 const router: IRouter = Router();
 
@@ -2098,7 +2102,39 @@ const CATALOGUE_REGIONS: RegionConfig[] = travelRegions
     sourceLabel: "Published Japan ski catalogue",
   }));
 
-const ALL_REGIONS: readonly RegionConfig[] = [...REGIONS, ...CATALOGUE_REGIONS];
+const GENERIC_CATALOGUE_REGIONS: RegionConfig[] = publishedSkiCatalogueRegions
+  .filter((region) =>
+    !REGIONS.some((existing) => existing.id === region.regionId) &&
+    !CATALOGUE_REGIONS.some((existing) => existing.id === region.regionId),
+  )
+  .map((region) => {
+    const records = publishedSkiCatalogueRecords.filter((record) => record.regionId === region.regionId);
+    return {
+      id: region.regionId,
+      name: region.name,
+      country: region.country,
+      countryCode: region.countryCode as RegionConfig["countryCode"],
+      region: region.stateOrProvince,
+      status: "live",
+      href: `/${region.regionId}/`,
+      baseTowns: region.localities.map((locality) => locality.name),
+      mountains: records.map((record) => record.name),
+      headlineLabel: region.name,
+      sourceLabel: "Published ski catalogue",
+    };
+  });
+
+const BASE_REGIONS: readonly RegionConfig[] = [...REGIONS, ...CATALOGUE_REGIONS];
+const ALL_REGIONS: readonly RegionConfig[] = [
+  ...BASE_REGIONS.map((region) => {
+    const additions = publishedSkiCatalogueRecords
+      .filter((record) => record.regionId === region.id)
+      .map((record) => record.name)
+      .filter((name) => !region.mountains.includes(name));
+    return additions.length ? { ...region, mountains: [...region.mountains, ...additions] } : region;
+  }),
+  ...GENERIC_CATALOGUE_REGIONS,
+];
 
 /** Published JP travel-region metadata, keyed by the catalogue's shared id. */
 export const CATALOGUE_REGION_METADATA = new Map(

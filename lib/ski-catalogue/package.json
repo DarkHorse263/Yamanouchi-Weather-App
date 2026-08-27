@@ -1,0 +1,23 @@
+{
+  "name": "@workspace/ski-catalogue",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    },
+    "./public-runtime": {
+      "types": "./public-runtime.d.ts",
+      "default": "./public-runtime.js"
+    }
+  },
+  "scripts": {
+    "enrich:forecast-evidence": "node ./scripts/enrich-forecast-evidence.mjs",
+    "generate": "node ./scripts/generate.mjs",
+    "generate:check": "node ./scripts/generate.mjs --check",
+    "validate": "node ./scripts/generate.mjs --check && node ./scripts/validate.mjs",
+    "test": "node --test ./test/*.test.mjs"
+  }
+}

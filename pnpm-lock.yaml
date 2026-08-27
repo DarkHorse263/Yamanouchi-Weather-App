@@ -121,6 +121,9 @@ importers:
       '@workspace/promo-constants':
         specifier: workspace:*
         version: link:../../lib/promo-constants
+      '@workspace/ski-catalogue':
+        specifier: workspace:*
+        version: link:../../lib/ski-catalogue
       cors:
         specifier: ^2
         version: 2.8.6
@@ -342,6 +345,9 @@ importers:
       '@workspace/japan-ski-catalogue':
         specifier: workspace:*
         version: link:../../lib/japan-ski-catalogue
+      '@workspace/ski-catalogue':
+        specifier: workspace:*
+        version: link:../../lib/ski-catalogue
       class-variance-authority:
         specifier: 'catalog:'
         version: 0.7.1
@@ -725,6 +731,8 @@ importers:
       '@types/react':
         specifier: 'catalog:'
         version: 19.2.14
+
+  lib/ski-catalogue: {}
 
   scripts:
     devDependencies:

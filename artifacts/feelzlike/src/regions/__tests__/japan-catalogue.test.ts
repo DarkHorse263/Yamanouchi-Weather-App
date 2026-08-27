@@ -116,6 +116,7 @@ test("catalogue mountains expose no powder-alert CTA capability", () => {
     "togakushi-ski-resort",
   );
   assert.deepEqual(capabilities, {
+    hasAlerts: false,
     powderAlertsAvailable: false,
     contentMode: "weather-only",
   });
@@ -162,6 +163,7 @@ test("weather-only Yamanouchi records bypass its bespoke resort detail", () => {
       "generic",
     );
     assert.deepEqual(getPublishedMountainCapabilities("yamanouchi", publicId), {
+      hasAlerts: false,
       powderAlertsAvailable: false,
       contentMode: "weather-only",
     });

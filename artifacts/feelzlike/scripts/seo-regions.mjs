@@ -22,6 +22,10 @@ import {
   publishedCatalogueRecords,
   travelRegions,
 } from "@workspace/japan-ski-catalogue/public-runtime";
+import {
+  publishedRecords as publishedSkiCatalogueRecords,
+  publishedRegions as publishedSkiCatalogueRegions,
+} from "@workspace/ski-catalogue/public-runtime";
 
 export const REGIONS = [
   // ── Australia ───────────────────────────────────────────────────────────
@@ -1439,11 +1443,12 @@ export const REGIONS = [
  * Alerts page fall back to the generic RegionAlerts (RegionLayout), so the
  * hasAlerts flag no longer gates the route. */
 export function regionFeatures(region) {
-  return ["mountains", "alerts", "stay"];
+  return ["mountains", ...(region.catalogueOnly ? [] : ["alerts"]), "stay"];
 }
 
 /** Town sub-sections that actually render for this region's towns. */
 export function townFeatures(region) {
+  if (region.catalogueOnly) return [];
   return ["weather", "stay", "eat", ...(region.hasRoads ? ["roads"] : []), "transport", "explore"];
 }
 
@@ -1485,6 +1490,40 @@ for (const record of publishedCatalogueRecords) {
     catalogueRecord: record,
   });
   catalogueMountainsByRegion.set(record.travelRegionId, mountains);
+}
+
+// State catalogue routes are data-owned and have no hand-authored region file.
+// Add their complete public route projection to the same manifest used by both
+// sitemap generation and prerendering.
+const skiCatalogueMountainsByRegion = new Map();
+for (const record of publishedSkiCatalogueRecords) {
+  if (catalogueMountainByRoute.has(record.route)) {
+    throw new Error(`[seo-regions] duplicate published catalogue route: ${record.route}`);
+  }
+  catalogueMountainByRoute.set(record.route, record);
+  const mountains = skiCatalogueMountainsByRegion.get(record.regionId) || [];
+  mountains.push({ id: record.publicId, name: record.name, route: record.route, catalogueRecord: record });
+  skiCatalogueMountainsByRegion.set(record.regionId, mountains);
+}
+for (const region of publishedSkiCatalogueRegions) {
+  if (legacyRegionSlugs.has(region.regionId)) {
+    throw new Error(`[seo-regions] generated/authored region collision: ${region.regionId}`);
+  }
+  REGIONS.push({
+    slug: region.regionId,
+    name: region.name,
+    subtitle: `${region.stateOrProvince} · ${region.country}`,
+    country: region.countryCode,
+    hasAlerts: false,
+    hasRoads: false,
+    catalogueOnly: true,
+    mountains: skiCatalogueMountainsByRegion.get(region.regionId) || [],
+    towns: region.localities.map((town) => ({
+      id: town.localityId,
+      name: town.name,
+      blurb: "Choose a nearby published mountain for its weather and forecast.",
+    })),
+  });
 }
 
 /**
@@ -1575,6 +1614,7 @@ export function groupJapanRegionsByPrefecture(regions = REGIONS.filter((r) => r.
  * @param {{ slug: string, mountains: Array<unknown> }} region
  */
 export function regionMountains(region) {
+  if (region.catalogueOnly) return region.mountains;
   const file = _join(_here, "..", "src", "regions", `${region.slug}.ts`);
   const src = readFileSync(file, "utf8");
   const mountainsMatch = /mountains\s*:\s*\[/.exec(src);

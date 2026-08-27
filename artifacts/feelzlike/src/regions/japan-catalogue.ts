@@ -4,6 +4,10 @@ import {
   travelRegions,
   type PublicRuntimeCatalogueRecord,
 } from "@workspace/japan-ski-catalogue/public-runtime";
+import {
+  publishedRecords as publishedSkiCatalogueRecords,
+  publishedRegions as publishedSkiCatalogueRegions,
+} from "@workspace/ski-catalogue/public-runtime";
 
 /**
  * The catalogue is the publication authority for these records. This adapter
@@ -212,25 +216,65 @@ export function mergeJapanCatalogueRegions(existingRegions: RegionConfig[]): Reg
 }
 
 export interface PublishedMountainCapabilities {
+  hasAlerts: false;
   powderAlertsAvailable: false;
   contentMode: "weather-only";
 }
 
 const CATALOGUE_CAPABILITIES = new Map(
-  publishedCatalogueRecords.map((record) => [
-    `${record.travelRegionId}/${record.publicId}`,
-    {
-      powderAlertsAvailable: false,
-      contentMode: "weather-only",
-    } satisfies PublishedMountainCapabilities,
-  ]),
+  [
+    ...publishedCatalogueRecords.map((record) => ({
+      regionId: record.travelRegionId,
+      publicId: record.publicId,
+      aliases: record.aliases,
+    })),
+    ...publishedSkiCatalogueRecords.map((record) => ({
+      regionId: record.regionId,
+      publicId: record.publicId,
+      aliases: record.aliases,
+    })),
+  ].flatMap((record) =>
+    [record.publicId, ...record.aliases].map((id) => [
+      `${record.regionId}/${id}`,
+      {
+        hasAlerts: false,
+        powderAlertsAvailable: false,
+        contentMode: "weather-only",
+      } satisfies PublishedMountainCapabilities,
+    ] as const),
+  ),
 );
 
 const CATALOGUE_REGION_BY_ID = new Map(
-  publishedCatalogueRecords.flatMap((record) =>
-    [record.publicId, ...record.aliases].map((id) => [id, record.travelRegionId] as const),
+  [
+    ...publishedCatalogueRecords.map((record) => ({ ...record, regionId: record.travelRegionId })),
+    ...publishedSkiCatalogueRecords,
+  ].flatMap((record) =>
+    [record.publicId, ...record.aliases].map((id) => [id, record.regionId] as const),
   ),
 );
+
+export interface PublishedRegionCapabilities {
+  hasAlerts: false;
+}
+
+const CATALOGUE_REGION_CAPABILITIES = new Map(
+  publishedSkiCatalogueRegions.map((region) => [
+    region.regionId,
+    { hasAlerts: false } satisfies PublishedRegionCapabilities,
+  ]),
+);
+
+/** Generic state catalogue regions intentionally have no alert backend yet. */
+export function getPublishedRegionCapabilities(
+  regionId: string,
+): PublishedRegionCapabilities | undefined {
+  return CATALOGUE_REGION_CAPABILITIES.get(regionId);
+}
+
+export function regionAlertsAvailable(regionId: string): boolean {
+  return getPublishedRegionCapabilities(regionId)?.hasAlerts ?? true;
+}
 
 export function publishedMountainBelongsToRegion(
   regionId: string,

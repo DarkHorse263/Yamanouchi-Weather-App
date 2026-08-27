@@ -23,6 +23,7 @@ import {
   isCatalogueMountainLinkTown,
   mountainDetailRouteMode,
   publishedMountainBelongsToRegion,
+  regionAlertsAvailable,
 } from "@/regions/japan-catalogue";
 import NotFound from "@/pages/not-found";
 
@@ -137,7 +138,9 @@ export function RegionLayout() {
             richer subscribe surface; every other region gets the generic
             alerts page (the subscription form is region-agnostic). */}
         <Route path="/alerts">
-          {routes.Alerts ? <routes.Alerts /> : <RegionAlerts />}
+          {!regionAlertsAvailable(region.id)
+            ? <Redirect to="/" />
+            : routes.Alerts ? <routes.Alerts /> : <RegionAlerts />}
         </Route>
         <Route path="/stay">
           {routes.Stay ? <routes.Stay /> : <RegionStay />}

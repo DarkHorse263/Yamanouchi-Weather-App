@@ -1,5 +1,6 @@
 import type { RegionConfig } from "@workspace/feelzlike-shell";
 import { mergeJapanCatalogueRegions } from "./japan-catalogue";
+import { mergeSkiCatalogueRegions, SKI_CATALOGUE_REGION_COUNTRIES } from "./ski-catalogue";
 import { snowyMountainsRegion } from "./snowy-mountains";
 import { yamanouchiRegion } from "./yamanouchi";
 import { victoriasHighCountryRegion } from "./victorias-high-country";
@@ -280,7 +281,9 @@ const AUTHORED_REGIONS: RegionConfig[] = [
   highmountRegion,
 ];
 
-export const REGIONS: RegionConfig[] = mergeJapanCatalogueRegions(AUTHORED_REGIONS);
+export const REGIONS: RegionConfig[] = mergeSkiCatalogueRegions(
+  mergeJapanCatalogueRegions(AUTHORED_REGIONS),
+);
 
 export const REGION_BY_ID: Record<string, RegionConfig> = Object.fromEntries(
   REGIONS.map((r) => [r.id, r]),
@@ -418,6 +421,12 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
     REGIONS
       .filter((region) => !AUTHORED_REGIONS.some((authored) => authored.id === region.id))
       .map((region) => [region.id, "JP" as const]),
+  ),
+  ...Object.fromEntries(
+    Object.entries(SKI_CATALOGUE_REGION_COUNTRIES)
+      .filter((entry): entry is [string, CountryCode] =>
+        ["AU", "JP", "NZ", "CA", "US"].includes(entry[1]),
+      ),
   ),
 };
 export const COUNTRY_META: Record<CountryCode, { name: string; flag: string }> = {

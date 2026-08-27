@@ -1,0 +1,3387 @@
+{
+  "batchVersion": 1,
+  "batchId": "us-new-england",
+  "records": [
+    {
+      "recordId": "mount-sunapee",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "mount-sunapee",
+        "name": "Mount Sunapee Resort",
+        "aliases": [
+          "Mount Sunapee"
+        ]
+      },
+      "coordinates": {
+        "lat": 43.332,
+        "lng": -72.0802
+      },
+      "elevations": {
+        "baseM": 375,
+        "topM": 836,
+        "forecastM": 388
+      },
+      "locality": {
+        "regionId": "us-nh",
+        "regionName": "New Hampshire",
+        "stateOrProvince": "New Hampshire",
+        "localityId": "newbury",
+        "localityName": "Newbury"
+      },
+      "officialUrl": "https://www.mountsunapee.com/",
+      "evidence": [
+        {
+          "url": "https://www.mountsunapee.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The operator's official site identifies Mount Sunapee as an active ski resort and provides current mountain information and ticketing.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "mount-sunapee",
+                "name": "Mount Sunapee Resort",
+                "aliases": [
+                  "Mount Sunapee"
+                ]
+              },
+              "citation": "The operator's official site identifies Mount Sunapee as an active ski resort and provides current mountain information and ticketing."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The operator's official site identifies Mount Sunapee as an active ski resort and provides current mountain information and ticketing."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.mountsunapee.com/",
+              "citation": "The operator's official site identifies Mount Sunapee as an active ski resort and provides current mountain information and ticketing."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-nh",
+                "regionName": "New Hampshire",
+                "stateOrProvince": "New Hampshire",
+                "localityId": "newbury",
+                "localityName": "Newbury"
+              },
+              "citation": "The operator's official site identifies Mount Sunapee as an active ski resort and provides current mountain information and ticketing."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=43.332&mlon=-72.0802#map=16/43.332/-72.0802",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 43.332,
+                "lng": -72.0802
+              },
+              "citation": "Map marker at 43.332, -72.0802."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-72.0802&y=43.332&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 388,
+              "citation": "EPQS returned an elevation rounded to 388 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "pats-peak",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "pats-peak",
+        "name": "Pats Peak",
+        "aliases": [
+          "Pats Peak Ski Area"
+        ]
+      },
+      "coordinates": {
+        "lat": 43.164,
+        "lng": -71.7968
+      },
+      "elevations": {
+        "baseM": 210,
+        "topM": 445,
+        "forecastM": 174
+      },
+      "locality": {
+        "regionId": "us-nh",
+        "regionName": "New Hampshire",
+        "stateOrProvince": "New Hampshire",
+        "localityId": "henniker",
+        "localityName": "Henniker"
+      },
+      "officialUrl": "https://www.patspeak.com/",
+      "evidence": [
+        {
+          "url": "https://www.patspeak.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The operator's official site offers current skiing, snowboarding, lessons, tickets, and operating information for Pats Peak.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "pats-peak",
+                "name": "Pats Peak",
+                "aliases": [
+                  "Pats Peak Ski Area"
+                ]
+              },
+              "citation": "The operator's official site offers current skiing, snowboarding, lessons, tickets, and operating information for Pats Peak."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The operator's official site offers current skiing, snowboarding, lessons, tickets, and operating information for Pats Peak."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.patspeak.com/",
+              "citation": "The operator's official site offers current skiing, snowboarding, lessons, tickets, and operating information for Pats Peak."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-nh",
+                "regionName": "New Hampshire",
+                "stateOrProvince": "New Hampshire",
+                "localityId": "henniker",
+                "localityName": "Henniker"
+              },
+              "citation": "The operator's official site offers current skiing, snowboarding, lessons, tickets, and operating information for Pats Peak."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=43.164&mlon=-71.7968#map=16/43.164/-71.7968",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 43.164,
+                "lng": -71.7968
+              },
+              "citation": "Map marker at 43.164, -71.7968."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-71.7968&y=43.164&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 174,
+              "citation": "EPQS returned an elevation rounded to 174 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "ragged-mountain-nh",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "ragged-mountain-nh",
+        "name": "Ragged Mountain Resort",
+        "aliases": [
+          "Ragged Mountain"
+        ]
+      },
+      "coordinates": {
+        "lat": 43.4853,
+        "lng": -71.842
+      },
+      "elevations": {
+        "baseM": 305,
+        "topM": 686,
+        "forecastM": 340
+      },
+      "locality": {
+        "regionId": "us-nh",
+        "regionName": "New Hampshire",
+        "stateOrProvince": "New Hampshire",
+        "localityId": "danbury",
+        "localityName": "Danbury"
+      },
+      "officialUrl": "https://www.raggedmountainresort.com/",
+      "evidence": [
+        {
+          "url": "https://www.raggedmountainresort.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The operator's official site presents Ragged Mountain as an operating skiing and snowboarding resort in Danbury.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "ragged-mountain-nh",
+                "name": "Ragged Mountain Resort",
+                "aliases": [
+                  "Ragged Mountain"
+                ]
+              },
+              "citation": "The operator's official site presents Ragged Mountain as an operating skiing and snowboarding resort in Danbury."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The operator's official site presents Ragged Mountain as an operating skiing and snowboarding resort in Danbury."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.raggedmountainresort.com/",
+              "citation": "The operator's official site presents Ragged Mountain as an operating skiing and snowboarding resort in Danbury."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-nh",
+                "regionName": "New Hampshire",
+                "stateOrProvince": "New Hampshire",
+                "localityId": "danbury",
+                "localityName": "Danbury"
+              },
+              "citation": "The operator's official site presents Ragged Mountain as an operating skiing and snowboarding resort in Danbury."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=43.4853&mlon=-71.842#map=16/43.4853/-71.842",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 43.4853,
+                "lng": -71.842
+              },
+              "citation": "Map marker at 43.4853, -71.842."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-71.842&y=43.4853&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 340,
+              "citation": "EPQS returned an elevation rounded to 340 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "black-mountain-nh",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "black-mountain-nh",
+        "name": "Black Mountain",
+        "aliases": [
+          "Black Mountain Ski Area"
+        ]
+      },
+      "coordinates": {
+        "lat": 44.1667,
+        "lng": -71.1636
+      },
+      "elevations": {
+        "baseM": 381,
+        "topM": 716,
+        "forecastM": 384
+      },
+      "locality": {
+        "regionId": "us-nh",
+        "regionName": "New Hampshire",
+        "stateOrProvince": "New Hampshire",
+        "localityId": "jackson",
+        "localityName": "Jackson"
+      },
+      "officialUrl": "https://www.blackmt.com/",
+      "evidence": [
+        {
+          "url": "https://www.blackmt.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Black Mountain's official site provides current lift-ticket, conditions, and ski-area information for its Jackson operation.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "black-mountain-nh",
+                "name": "Black Mountain",
+                "aliases": [
+                  "Black Mountain Ski Area"
+                ]
+              },
+              "citation": "Black Mountain's official site provides current lift-ticket, conditions, and ski-area information for its Jackson operation."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Black Mountain's official site provides current lift-ticket, conditions, and ski-area information for its Jackson operation."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.blackmt.com/",
+              "citation": "Black Mountain's official site provides current lift-ticket, conditions, and ski-area information for its Jackson operation."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-nh",
+                "regionName": "New Hampshire",
+                "stateOrProvince": "New Hampshire",
+                "localityId": "jackson",
+                "localityName": "Jackson"
+              },
+              "citation": "Black Mountain's official site provides current lift-ticket, conditions, and ski-area information for its Jackson operation."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=44.1667&mlon=-71.1636#map=16/44.1667/-71.1636",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 44.1667,
+                "lng": -71.1636
+              },
+              "citation": "Map marker at 44.1667, -71.1636."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-71.1636&y=44.1667&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 384,
+              "citation": "EPQS returned an elevation rounded to 384 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "king-pine",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "king-pine",
+        "name": "King Pine Ski Area",
+        "aliases": [
+          "King Pine"
+        ]
+      },
+      "coordinates": {
+        "lat": 43.8685,
+        "lng": -71.0888
+      },
+      "elevations": {
+        "baseM": 152,
+        "topM": 259,
+        "forecastM": 147
+      },
+      "locality": {
+        "regionId": "us-nh",
+        "regionName": "New Hampshire",
+        "stateOrProvince": "New Hampshire",
+        "localityId": "east-madison",
+        "localityName": "East Madison"
+      },
+      "officialUrl": "https://www.kingpine.com/",
+      "evidence": [
+        {
+          "url": "https://www.kingpine.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The official operator site identifies King Pine as an active ski area in East Madison and publishes skiing and lodging information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "king-pine",
+                "name": "King Pine Ski Area",
+                "aliases": [
+                  "King Pine"
+                ]
+              },
+              "citation": "The official operator site identifies King Pine as an active ski area in East Madison and publishes skiing and lodging information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official operator site identifies King Pine as an active ski area in East Madison and publishes skiing and lodging information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.kingpine.com/",
+              "citation": "The official operator site identifies King Pine as an active ski area in East Madison and publishes skiing and lodging information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-nh",
+                "regionName": "New Hampshire",
+                "stateOrProvince": "New Hampshire",
+                "localityId": "east-madison",
+                "localityName": "East Madison"
+              },
+              "citation": "The official operator site identifies King Pine as an active ski area in East Madison and publishes skiing and lodging information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=43.8685&mlon=-71.0888#map=16/43.8685/-71.0888",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 43.8685,
+                "lng": -71.0888
+              },
+              "citation": "Map marker at 43.8685, -71.0888."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-71.0888&y=43.8685&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 147,
+              "citation": "EPQS returned an elevation rounded to 147 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "crotched-mountain",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "crotched-mountain",
+        "name": "Crotched Mountain",
+        "aliases": [
+          "Crotched Mountain Resort"
+        ]
+      },
+      "coordinates": {
+        "lat": 43.012,
+        "lng": -71.8787
+      },
+      "elevations": {
+        "baseM": 320,
+        "topM": 625,
+        "forecastM": 320
+      },
+      "locality": {
+        "regionId": "us-nh",
+        "regionName": "New Hampshire",
+        "stateOrProvince": "New Hampshire",
+        "localityId": "bennington",
+        "localityName": "Bennington"
+      },
+      "officialUrl": "https://www.crotchedmtn.com/",
+      "evidence": [
+        {
+          "url": "https://www.crotchedmtn.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The official Vail Resorts property site publishes current tickets, passes, conditions, and mountain information for Crotched Mountain.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "crotched-mountain",
+                "name": "Crotched Mountain",
+                "aliases": [
+                  "Crotched Mountain Resort"
+                ]
+              },
+              "citation": "The official Vail Resorts property site publishes current tickets, passes, conditions, and mountain information for Crotched Mountain."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Vail Resorts property site publishes current tickets, passes, conditions, and mountain information for Crotched Mountain."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.crotchedmtn.com/",
+              "citation": "The official Vail Resorts property site publishes current tickets, passes, conditions, and mountain information for Crotched Mountain."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-nh",
+                "regionName": "New Hampshire",
+                "stateOrProvince": "New Hampshire",
+                "localityId": "bennington",
+                "localityName": "Bennington"
+              },
+              "citation": "The official Vail Resorts property site publishes current tickets, passes, conditions, and mountain information for Crotched Mountain."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=43.012&mlon=-71.8787#map=16/43.012/-71.8787",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 43.012,
+                "lng": -71.8787
+              },
+              "citation": "Map marker at 43.012, -71.8787."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-71.8787&y=43.012&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 320,
+              "citation": "EPQS returned an elevation rounded to 320 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "dartmouth-skiway",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "dartmouth-skiway",
+        "name": "Dartmouth Skiway",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 43.7878,
+        "lng": -72.0995
+      },
+      "elevations": {
+        "baseM": 297,
+        "topM": 592,
+        "forecastM": 294
+      },
+      "locality": {
+        "regionId": "us-nh",
+        "regionName": "New Hampshire",
+        "stateOrProvince": "New Hampshire",
+        "localityId": "lyme",
+        "localityName": "Lyme"
+      },
+      "officialUrl": "https://dartmouthskiway.com/",
+      "evidence": [
+        {
+          "url": "https://dartmouthskiway.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Dartmouth's official Skiway site publishes current alpine-skiing, ticket, lesson, and conditions information for the Lyme facility.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "dartmouth-skiway",
+                "name": "Dartmouth Skiway",
+                "aliases": []
+              },
+              "citation": "Dartmouth's official Skiway site publishes current alpine-skiing, ticket, lesson, and conditions information for the Lyme facility."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Dartmouth's official Skiway site publishes current alpine-skiing, ticket, lesson, and conditions information for the Lyme facility."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://dartmouthskiway.com/",
+              "citation": "Dartmouth's official Skiway site publishes current alpine-skiing, ticket, lesson, and conditions information for the Lyme facility."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-nh",
+                "regionName": "New Hampshire",
+                "stateOrProvince": "New Hampshire",
+                "localityId": "lyme",
+                "localityName": "Lyme"
+              },
+              "citation": "Dartmouth's official Skiway site publishes current alpine-skiing, ticket, lesson, and conditions information for the Lyme facility."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=43.7878&mlon=-72.0995#map=16/43.7878/-72.0995",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 43.7878,
+                "lng": -72.0995
+              },
+              "citation": "Map marker at 43.7878, -72.0995."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-72.0995&y=43.7878&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 294,
+              "citation": "EPQS returned an elevation rounded to 294 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "tenney-mountain",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "tenney-mountain",
+        "name": "Tenney Mountain Resort",
+        "aliases": [
+          "Tenney Mountain Ski Resort",
+          "Tenney Mountain"
+        ]
+      },
+      "coordinates": {
+        "lat": 43.737,
+        "lng": -71.778
+      },
+      "elevations": {
+        "baseM": 229,
+        "topM": 655,
+        "forecastM": 604
+      },
+      "locality": {
+        "regionId": "us-nh",
+        "regionName": "New Hampshire",
+        "stateOrProvince": "New Hampshire",
+        "localityId": "plymouth",
+        "localityName": "Plymouth"
+      },
+      "officialUrl": "https://skitenney.com/",
+      "evidence": [
+        {
+          "url": "https://skitenney.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Tenney Mountain's official site presents current ski-resort operations, passes, tickets, and mountain information in Plymouth.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "tenney-mountain",
+                "name": "Tenney Mountain Resort",
+                "aliases": [
+                  "Tenney Mountain Ski Resort",
+                  "Tenney Mountain"
+                ]
+              },
+              "citation": "Tenney Mountain's official site presents current ski-resort operations, passes, tickets, and mountain information in Plymouth."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Tenney Mountain's official site presents current ski-resort operations, passes, tickets, and mountain information in Plymouth."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://skitenney.com/",
+              "citation": "Tenney Mountain's official site presents current ski-resort operations, passes, tickets, and mountain information in Plymouth."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-nh",
+                "regionName": "New Hampshire",
+                "stateOrProvince": "New Hampshire",
+                "localityId": "plymouth",
+                "localityName": "Plymouth"
+              },
+              "citation": "Tenney Mountain's official site presents current ski-resort operations, passes, tickets, and mountain information in Plymouth."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=43.737&mlon=-71.778#map=16/43.737/-71.778",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 43.737,
+                "lng": -71.778
+              },
+              "citation": "Map marker at 43.737, -71.778."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-71.778&y=43.737&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 604,
+              "citation": "EPQS returned an elevation rounded to 604 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "whaleback-mountain",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "whaleback-mountain",
+        "name": "Whaleback Mountain",
+        "aliases": [
+          "Whaleback"
+        ]
+      },
+      "coordinates": {
+        "lat": 43.6015,
+        "lng": -72.1807
+      },
+      "elevations": {
+        "baseM": 335,
+        "topM": 549,
+        "forecastM": 348
+      },
+      "locality": {
+        "regionId": "us-nh",
+        "regionName": "New Hampshire",
+        "stateOrProvince": "New Hampshire",
+        "localityId": "enfield",
+        "localityName": "Enfield"
+      },
+      "officialUrl": "https://www.whaleback.com/",
+      "evidence": [
+        {
+          "url": "https://www.whaleback.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The nonprofit operator's official site publishes current lift tickets, programs, conditions, and ski-area information for Whaleback.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "whaleback-mountain",
+                "name": "Whaleback Mountain",
+                "aliases": [
+                  "Whaleback"
+                ]
+              },
+              "citation": "The nonprofit operator's official site publishes current lift tickets, programs, conditions, and ski-area information for Whaleback."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The nonprofit operator's official site publishes current lift tickets, programs, conditions, and ski-area information for Whaleback."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.whaleback.com/",
+              "citation": "The nonprofit operator's official site publishes current lift tickets, programs, conditions, and ski-area information for Whaleback."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-nh",
+                "regionName": "New Hampshire",
+                "stateOrProvince": "New Hampshire",
+                "localityId": "enfield",
+                "localityName": "Enfield"
+              },
+              "citation": "The nonprofit operator's official site publishes current lift tickets, programs, conditions, and ski-area information for Whaleback."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=43.6015&mlon=-72.1807#map=16/43.6015/-72.1807",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 43.6015,
+                "lng": -72.1807
+              },
+              "citation": "Map marker at 43.6015, -72.1807."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-72.1807&y=43.6015&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 348,
+              "citation": "EPQS returned an elevation rounded to 348 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "granite-gorge",
+      "lifecycle": "draft",
+      "lifecycleHistory": [
+        "draft"
+      ],
+      "classification": "uncertain",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "granite-gorge",
+        "name": "Granite Gorge",
+        "aliases": [
+          "Granite Gorge Mountain Park"
+        ]
+      },
+      "coordinates": {
+        "lat": 42.9706,
+        "lng": -72.2125
+      },
+      "elevations": null,
+      "locality": {
+        "regionId": "us-nh",
+        "regionName": "New Hampshire",
+        "stateOrProvince": "New Hampshire",
+        "localityId": "roxbury",
+        "localityName": "Roxbury"
+      },
+      "officialUrl": null,
+      "evidence": [],
+      "timezone": "America/New_York"
+    },
+    {
+      "recordId": "the-balsams-wilderness",
+      "lifecycle": "verified",
+      "lifecycleHistory": [
+        "draft",
+        "verified"
+      ],
+      "classification": "closed",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "the-balsams-wilderness",
+        "name": "The Balsams Wilderness",
+        "aliases": [
+          "The Balsams",
+          "Balsams Wilderness Ski Resort"
+        ]
+      },
+      "coordinates": {
+        "lat": 44.8706,
+        "lng": -71.3065
+      },
+      "elevations": null,
+      "locality": {
+        "regionId": "us-nh",
+        "regionName": "New Hampshire",
+        "stateOrProvince": "New Hampshire",
+        "localityId": "dixville-notch",
+        "localityName": "Dixville Notch"
+      },
+      "officialUrl": "https://thebalsamsresort.com/",
+      "evidence": [
+        {
+          "url": "https://thebalsamsresort.com/",
+          "retrievedAt": "2026-08-27",
+          "supports": [
+            "identity",
+            "status",
+            "officialUrl"
+          ],
+          "claim": "The owner's official site describes a proposed resort renaissance and redevelopment rather than a currently operating public ski area, corroborating the PDF's long-term-closed note."
+        }
+      ],
+      "timezone": "America/New_York"
+    },
+    {
+      "recordId": "nashoba-valley",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "nashoba-valley",
+        "name": "Nashoba Valley Ski Area",
+        "aliases": [
+          "Nashoba Valley"
+        ]
+      },
+      "coordinates": {
+        "lat": 42.5423,
+        "lng": -71.4448
+      },
+      "elevations": {
+        "baseM": 61,
+        "topM": 134,
+        "forecastM": 60
+      },
+      "locality": {
+        "regionId": "us-ma",
+        "regionName": "Massachusetts",
+        "stateOrProvince": "Massachusetts",
+        "localityId": "westford",
+        "localityName": "Westford"
+      },
+      "officialUrl": "https://skinashoba.com/",
+      "evidence": [
+        {
+          "url": "https://skinashoba.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The official site publishes current skiing, snowboarding, lesson, rental, tubing, ticket, and conditions information for Nashoba Valley.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "nashoba-valley",
+                "name": "Nashoba Valley Ski Area",
+                "aliases": [
+                  "Nashoba Valley"
+                ]
+              },
+              "citation": "The official site publishes current skiing, snowboarding, lesson, rental, tubing, ticket, and conditions information for Nashoba Valley."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official site publishes current skiing, snowboarding, lesson, rental, tubing, ticket, and conditions information for Nashoba Valley."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://skinashoba.com/",
+              "citation": "The official site publishes current skiing, snowboarding, lesson, rental, tubing, ticket, and conditions information for Nashoba Valley."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-ma",
+                "regionName": "Massachusetts",
+                "stateOrProvince": "Massachusetts",
+                "localityId": "westford",
+                "localityName": "Westford"
+              },
+              "citation": "The official site publishes current skiing, snowboarding, lesson, rental, tubing, ticket, and conditions information for Nashoba Valley."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=42.5423&mlon=-71.4448#map=16/42.5423/-71.4448",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 42.5423,
+                "lng": -71.4448
+              },
+              "citation": "Map marker at 42.5423, -71.4448."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-71.4448&y=42.5423&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 60,
+              "citation": "EPQS returned an elevation rounded to 60 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "ski-ward",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "ski-ward",
+        "name": "Ski Ward",
+        "aliases": [
+          "Ward Hill Ski Area"
+        ]
+      },
+      "coordinates": {
+        "lat": 42.3018,
+        "lng": -71.6827
+      },
+      "elevations": {
+        "baseM": 128,
+        "topM": 191,
+        "forecastM": 106
+      },
+      "locality": {
+        "regionId": "us-ma",
+        "regionName": "Massachusetts",
+        "stateOrProvince": "Massachusetts",
+        "localityId": "shrewsbury",
+        "localityName": "Shrewsbury"
+      },
+      "officialUrl": "https://skiward.com/",
+      "evidence": [
+        {
+          "url": "https://skiward.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Ski Ward's official site offers current lift tickets, lessons, rentals, and winter ski-area information in Shrewsbury.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "ski-ward",
+                "name": "Ski Ward",
+                "aliases": [
+                  "Ward Hill Ski Area"
+                ]
+              },
+              "citation": "Ski Ward's official site offers current lift tickets, lessons, rentals, and winter ski-area information in Shrewsbury."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Ski Ward's official site offers current lift tickets, lessons, rentals, and winter ski-area information in Shrewsbury."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://skiward.com/",
+              "citation": "Ski Ward's official site offers current lift tickets, lessons, rentals, and winter ski-area information in Shrewsbury."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-ma",
+                "regionName": "Massachusetts",
+                "stateOrProvince": "Massachusetts",
+                "localityId": "shrewsbury",
+                "localityName": "Shrewsbury"
+              },
+              "citation": "Ski Ward's official site offers current lift tickets, lessons, rentals, and winter ski-area information in Shrewsbury."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=42.3018&mlon=-71.6827#map=16/42.3018/-71.6827",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 42.3018,
+                "lng": -71.6827
+              },
+              "citation": "Map marker at 42.3018, -71.6827."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-71.6827&y=42.3018&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 106,
+              "citation": "EPQS returned an elevation rounded to 106 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "blue-hills-ski-area",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "blue-hills-ski-area",
+        "name": "Blue Hills Ski Area",
+        "aliases": [
+          "Blue Hills"
+        ]
+      },
+      "coordinates": {
+        "lat": 42.2159,
+        "lng": -71.1191
+      },
+      "elevations": {
+        "baseM": 107,
+        "topM": 194,
+        "forecastM": 82
+      },
+      "locality": {
+        "regionId": "us-ma",
+        "regionName": "Massachusetts",
+        "stateOrProvince": "Massachusetts",
+        "localityId": "canton",
+        "localityName": "Canton"
+      },
+      "officialUrl": "https://bluehillsboston.com/",
+      "evidence": [
+        {
+          "url": "https://bluehillsboston.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The official operator site publishes current tickets, lessons, rentals, hours, and snow-condition information for Blue Hills Ski Area.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "blue-hills-ski-area",
+                "name": "Blue Hills Ski Area",
+                "aliases": [
+                  "Blue Hills"
+                ]
+              },
+              "citation": "The official operator site publishes current tickets, lessons, rentals, hours, and snow-condition information for Blue Hills Ski Area."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official operator site publishes current tickets, lessons, rentals, hours, and snow-condition information for Blue Hills Ski Area."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://bluehillsboston.com/",
+              "citation": "The official operator site publishes current tickets, lessons, rentals, hours, and snow-condition information for Blue Hills Ski Area."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-ma",
+                "regionName": "Massachusetts",
+                "stateOrProvince": "Massachusetts",
+                "localityId": "canton",
+                "localityName": "Canton"
+              },
+              "citation": "The official operator site publishes current tickets, lessons, rentals, hours, and snow-condition information for Blue Hills Ski Area."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=42.2159&mlon=-71.1191#map=16/42.2159/-71.1191",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 42.2159,
+                "lng": -71.1191
+              },
+              "citation": "Map marker at 42.2159, -71.1191."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-71.1191&y=42.2159&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 82,
+              "citation": "EPQS returned an elevation rounded to 82 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "bousquet-mountain",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "bousquet-mountain",
+        "name": "Bousquet Mountain",
+        "aliases": [
+          "Bousquet Ski Area"
+        ]
+      },
+      "coordinates": {
+        "lat": 42.4193,
+        "lng": -73.2766
+      },
+      "elevations": {
+        "baseM": 343,
+        "topM": 552,
+        "forecastM": 342
+      },
+      "locality": {
+        "regionId": "us-ma",
+        "regionName": "Massachusetts",
+        "stateOrProvince": "Massachusetts",
+        "localityId": "pittsfield",
+        "localityName": "Pittsfield"
+      },
+      "officialUrl": "https://bousquetmountain.com/",
+      "evidence": [
+        {
+          "url": "https://bousquetmountain.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The official operator site identifies Bousquet as an operating Berkshires ski resort and provides current winter tickets and mountain information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "bousquet-mountain",
+                "name": "Bousquet Mountain",
+                "aliases": [
+                  "Bousquet Ski Area"
+                ]
+              },
+              "citation": "The official operator site identifies Bousquet as an operating Berkshires ski resort and provides current winter tickets and mountain information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official operator site identifies Bousquet as an operating Berkshires ski resort and provides current winter tickets and mountain information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://bousquetmountain.com/",
+              "citation": "The official operator site identifies Bousquet as an operating Berkshires ski resort and provides current winter tickets and mountain information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-ma",
+                "regionName": "Massachusetts",
+                "stateOrProvince": "Massachusetts",
+                "localityId": "pittsfield",
+                "localityName": "Pittsfield"
+              },
+              "citation": "The official operator site identifies Bousquet as an operating Berkshires ski resort and provides current winter tickets and mountain information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=42.4193&mlon=-73.2766#map=16/42.4193/-73.2766",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 42.4193,
+                "lng": -73.2766
+              },
+              "citation": "Map marker at 42.4193, -73.2766."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-73.2766&y=42.4193&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 342,
+              "citation": "EPQS returned an elevation rounded to 342 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "otis-ridge",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "otis-ridge",
+        "name": "Otis Ridge Ski Area",
+        "aliases": [
+          "Otis Ridge"
+        ]
+      },
+      "coordinates": {
+        "lat": 42.1964,
+        "lng": -73.0984
+      },
+      "elevations": {
+        "baseM": 381,
+        "topM": 518,
+        "forecastM": 379
+      },
+      "locality": {
+        "regionId": "us-ma",
+        "regionName": "Massachusetts",
+        "stateOrProvince": "Massachusetts",
+        "localityId": "otis",
+        "localityName": "Otis"
+      },
+      "officialUrl": "https://otisridge.com/",
+      "evidence": [
+        {
+          "url": "https://otisridge.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Otis Ridge's official site publishes current ski-area, lift-ticket, lesson, rental, and group information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "otis-ridge",
+                "name": "Otis Ridge Ski Area",
+                "aliases": [
+                  "Otis Ridge"
+                ]
+              },
+              "citation": "Otis Ridge's official site publishes current ski-area, lift-ticket, lesson, rental, and group information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Otis Ridge's official site publishes current ski-area, lift-ticket, lesson, rental, and group information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://otisridge.com/",
+              "citation": "Otis Ridge's official site publishes current ski-area, lift-ticket, lesson, rental, and group information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-ma",
+                "regionName": "Massachusetts",
+                "stateOrProvince": "Massachusetts",
+                "localityId": "otis",
+                "localityName": "Otis"
+              },
+              "citation": "Otis Ridge's official site publishes current ski-area, lift-ticket, lesson, rental, and group information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=42.1964&mlon=-73.0984#map=16/42.1964/-73.0984",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 42.1964,
+                "lng": -73.0984
+              },
+              "citation": "Map marker at 42.1964, -73.0984."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-73.0984&y=42.1964&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 379,
+              "citation": "EPQS returned an elevation rounded to 379 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "ski-bradford",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "ski-bradford",
+        "name": "Ski Bradford",
+        "aliases": [
+          "Bradford Ski Area"
+        ]
+      },
+      "coordinates": {
+        "lat": 42.7449,
+        "lng": -71.0567
+      },
+      "elevations": {
+        "baseM": 15,
+        "topM": 83,
+        "forecastM": 14
+      },
+      "locality": {
+        "regionId": "us-ma",
+        "regionName": "Massachusetts",
+        "stateOrProvince": "Massachusetts",
+        "localityId": "haverhill",
+        "localityName": "Haverhill"
+      },
+      "officialUrl": "https://skibradford.com/",
+      "evidence": [
+        {
+          "url": "https://skibradford.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The official Ski Bradford site publishes current skiing, snowboarding, ticket, lesson, rental, and conditions information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "ski-bradford",
+                "name": "Ski Bradford",
+                "aliases": [
+                  "Bradford Ski Area"
+                ]
+              },
+              "citation": "The official Ski Bradford site publishes current skiing, snowboarding, ticket, lesson, rental, and conditions information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Ski Bradford site publishes current skiing, snowboarding, ticket, lesson, rental, and conditions information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://skibradford.com/",
+              "citation": "The official Ski Bradford site publishes current skiing, snowboarding, ticket, lesson, rental, and conditions information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-ma",
+                "regionName": "Massachusetts",
+                "stateOrProvince": "Massachusetts",
+                "localityId": "haverhill",
+                "localityName": "Haverhill"
+              },
+              "citation": "The official Ski Bradford site publishes current skiing, snowboarding, ticket, lesson, rental, and conditions information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=42.7449&mlon=-71.0567#map=16/42.7449/-71.0567",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 42.7449,
+                "lng": -71.0567
+              },
+              "citation": "Map marker at 42.7449, -71.0567."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-71.0567&y=42.7449&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 14,
+              "citation": "EPQS returned an elevation rounded to 14 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "ski-sundown",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "ski-sundown",
+        "name": "Ski Sundown",
+        "aliases": [
+          "Ski Sundown CT"
+        ]
+      },
+      "coordinates": {
+        "lat": 41.8847,
+        "lng": -72.9463
+      },
+      "elevations": {
+        "baseM": 137,
+        "topM": 328,
+        "forecastM": 152
+      },
+      "locality": {
+        "regionId": "us-ct",
+        "regionName": "Connecticut",
+        "stateOrProvince": "Connecticut",
+        "localityId": "new-hartford",
+        "localityName": "New Hartford"
+      },
+      "officialUrl": "https://skisundown.com/",
+      "evidence": [
+        {
+          "url": "https://skisundown.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Ski Sundown's official site offers current lift tickets, ski packages, lessons, conditions, and mountain information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "ski-sundown",
+                "name": "Ski Sundown",
+                "aliases": [
+                  "Ski Sundown CT"
+                ]
+              },
+              "citation": "Ski Sundown's official site offers current lift tickets, ski packages, lessons, conditions, and mountain information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Ski Sundown's official site offers current lift tickets, ski packages, lessons, conditions, and mountain information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://skisundown.com/",
+              "citation": "Ski Sundown's official site offers current lift tickets, ski packages, lessons, conditions, and mountain information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-ct",
+                "regionName": "Connecticut",
+                "stateOrProvince": "Connecticut",
+                "localityId": "new-hartford",
+                "localityName": "New Hartford"
+              },
+              "citation": "Ski Sundown's official site offers current lift tickets, ski packages, lessons, conditions, and mountain information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=41.8847&mlon=-72.9463#map=16/41.8847/-72.9463",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 41.8847,
+                "lng": -72.9463
+              },
+              "citation": "Map marker at 41.8847, -72.9463."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-72.9463&y=41.8847&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 152,
+              "citation": "EPQS returned an elevation rounded to 152 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "mount-southington",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "mount-southington",
+        "name": "Mount Southington Ski Area",
+        "aliases": [
+          "Mount Southington"
+        ]
+      },
+      "coordinates": {
+        "lat": 41.5826,
+        "lng": -72.9242
+      },
+      "elevations": {
+        "baseM": 46,
+        "topM": 160,
+        "forecastM": 60
+      },
+      "locality": {
+        "regionId": "us-ct",
+        "regionName": "Connecticut",
+        "stateOrProvince": "Connecticut",
+        "localityId": "southington",
+        "localityName": "Southington"
+      },
+      "officialUrl": "https://mountsouthington.com/",
+      "evidence": [
+        {
+          "url": "https://mountsouthington.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The official site publishes current tickets, passes, lessons, rentals, trail status, and winter operations for Mount Southington.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "mount-southington",
+                "name": "Mount Southington Ski Area",
+                "aliases": [
+                  "Mount Southington"
+                ]
+              },
+              "citation": "The official site publishes current tickets, passes, lessons, rentals, trail status, and winter operations for Mount Southington."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official site publishes current tickets, passes, lessons, rentals, trail status, and winter operations for Mount Southington."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://mountsouthington.com/",
+              "citation": "The official site publishes current tickets, passes, lessons, rentals, trail status, and winter operations for Mount Southington."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-ct",
+                "regionName": "Connecticut",
+                "stateOrProvince": "Connecticut",
+                "localityId": "southington",
+                "localityName": "Southington"
+              },
+              "citation": "The official site publishes current tickets, passes, lessons, rentals, trail status, and winter operations for Mount Southington."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=41.5826&mlon=-72.9242#map=16/41.5826/-72.9242",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 41.5826,
+                "lng": -72.9242
+              },
+              "citation": "Map marker at 41.5826, -72.9242."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-72.9242&y=41.5826&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 60,
+              "citation": "EPQS returned an elevation rounded to 60 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "powder-ridge-ct",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "powder-ridge-ct",
+        "name": "Powder Ridge Mountain Park & Resort",
+        "aliases": [
+          "Powder Ridge Ski Area",
+          "Powder Ridge"
+        ]
+      },
+      "coordinates": {
+        "lat": 41.5017,
+        "lng": -72.7369
+      },
+      "elevations": {
+        "baseM": 46,
+        "topM": 168,
+        "forecastM": 116
+      },
+      "locality": {
+        "regionId": "us-ct",
+        "regionName": "Connecticut",
+        "stateOrProvince": "Connecticut",
+        "localityId": "middlefield",
+        "localityName": "Middlefield"
+      },
+      "officialUrl": "https://powderridgepark.com/",
+      "evidence": [
+        {
+          "url": "https://powderridgepark.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The resort's official site presents current skiing, snowboarding, tubing, tickets, lessons, and mountain operations at Powder Ridge.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "powder-ridge-ct",
+                "name": "Powder Ridge Mountain Park & Resort",
+                "aliases": [
+                  "Powder Ridge Ski Area",
+                  "Powder Ridge"
+                ]
+              },
+              "citation": "The resort's official site presents current skiing, snowboarding, tubing, tickets, lessons, and mountain operations at Powder Ridge."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The resort's official site presents current skiing, snowboarding, tubing, tickets, lessons, and mountain operations at Powder Ridge."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://powderridgepark.com/",
+              "citation": "The resort's official site presents current skiing, snowboarding, tubing, tickets, lessons, and mountain operations at Powder Ridge."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-ct",
+                "regionName": "Connecticut",
+                "stateOrProvince": "Connecticut",
+                "localityId": "middlefield",
+                "localityName": "Middlefield"
+              },
+              "citation": "The resort's official site presents current skiing, snowboarding, tubing, tickets, lessons, and mountain operations at Powder Ridge."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=41.5017&mlon=-72.7369#map=16/41.5017/-72.7369",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 41.5017,
+                "lng": -72.7369
+              },
+              "citation": "Map marker at 41.5017, -72.7369."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-72.7369&y=41.5017&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 116,
+              "citation": "EPQS returned an elevation rounded to 116 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "mount-abram",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "mount-abram",
+        "name": "Mt. Abram",
+        "aliases": [
+          "Mount Abram",
+          "Mt. Abram Ski Area"
+        ]
+      },
+      "coordinates": {
+        "lat": 44.3798,
+        "lng": -70.7069
+      },
+      "elevations": {
+        "baseM": 290,
+        "topM": 610,
+        "forecastM": 289
+      },
+      "locality": {
+        "regionId": "us-me",
+        "regionName": "Maine",
+        "stateOrProvince": "Maine",
+        "localityId": "greenwood",
+        "localityName": "Greenwood"
+      },
+      "officialUrl": "https://mtabram.com/",
+      "evidence": [
+        {
+          "url": "https://mtabram.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The official operator site identifies Mt. Abram as an active Greenwood skiing and snowboarding area and publishes current tickets and conditions.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "mount-abram",
+                "name": "Mt. Abram",
+                "aliases": [
+                  "Mount Abram",
+                  "Mt. Abram Ski Area"
+                ]
+              },
+              "citation": "The official operator site identifies Mt. Abram as an active Greenwood skiing and snowboarding area and publishes current tickets and conditions."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official operator site identifies Mt. Abram as an active Greenwood skiing and snowboarding area and publishes current tickets and conditions."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://mtabram.com/",
+              "citation": "The official operator site identifies Mt. Abram as an active Greenwood skiing and snowboarding area and publishes current tickets and conditions."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-me",
+                "regionName": "Maine",
+                "stateOrProvince": "Maine",
+                "localityId": "greenwood",
+                "localityName": "Greenwood"
+              },
+              "citation": "The official operator site identifies Mt. Abram as an active Greenwood skiing and snowboarding area and publishes current tickets and conditions."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=44.3798&mlon=-70.7069#map=16/44.3798/-70.7069",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 44.3798,
+                "lng": -70.7069
+              },
+              "citation": "Map marker at 44.3798, -70.7069."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-70.7069&y=44.3798&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 289,
+              "citation": "EPQS returned an elevation rounded to 289 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "bigrock-mountain",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "bigrock-mountain",
+        "name": "BigRock Mountain",
+        "aliases": [
+          "Big Rock",
+          "Big Rock Ski Area"
+        ]
+      },
+      "coordinates": {
+        "lat": 46.5205,
+        "lng": -67.8336
+      },
+      "elevations": {
+        "baseM": 206,
+        "topM": 487,
+        "forecastM": 168
+      },
+      "locality": {
+        "regionId": "us-me",
+        "regionName": "Maine",
+        "stateOrProvince": "Maine",
+        "localityId": "mars-hill",
+        "localityName": "Mars Hill"
+      },
+      "officialUrl": "https://www.bigrockmaine.com/",
+      "evidence": [
+        {
+          "url": "https://www.bigrockmaine.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "BigRock Mountain's official nonprofit site publishes current skiing, snowboarding, conditions, ticket, and mountain information for Mars Hill.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "bigrock-mountain",
+                "name": "BigRock Mountain",
+                "aliases": [
+                  "Big Rock",
+                  "Big Rock Ski Area"
+                ]
+              },
+              "citation": "BigRock Mountain's official nonprofit site publishes current skiing, snowboarding, conditions, ticket, and mountain information for Mars Hill."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "BigRock Mountain's official nonprofit site publishes current skiing, snowboarding, conditions, ticket, and mountain information for Mars Hill."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.bigrockmaine.com/",
+              "citation": "BigRock Mountain's official nonprofit site publishes current skiing, snowboarding, conditions, ticket, and mountain information for Mars Hill."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-me",
+                "regionName": "Maine",
+                "stateOrProvince": "Maine",
+                "localityId": "mars-hill",
+                "localityName": "Mars Hill"
+              },
+              "citation": "BigRock Mountain's official nonprofit site publishes current skiing, snowboarding, conditions, ticket, and mountain information for Mars Hill."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.5205&mlon=-67.8336#map=16/46.5205/-67.8336",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.5205,
+                "lng": -67.8336
+              },
+              "citation": "Map marker at 46.5205, -67.8336."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-67.8336&y=46.5205&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 168,
+              "citation": "EPQS returned an elevation rounded to 168 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "black-mountain-of-maine",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "black-mountain-of-maine",
+        "name": "Black Mountain of Maine",
+        "aliases": [
+          "Black Mountain Maine"
+        ]
+      },
+      "coordinates": {
+        "lat": 44.578,
+        "lng": -70.613
+      },
+      "elevations": {
+        "baseM": 183,
+        "topM": 488,
+        "forecastM": 292
+      },
+      "locality": {
+        "regionId": "us-me",
+        "regionName": "Maine",
+        "stateOrProvince": "Maine",
+        "localityId": "rumford",
+        "localityName": "Rumford"
+      },
+      "officialUrl": "https://skiblackmountain.org/",
+      "evidence": [
+        {
+          "url": "https://skiblackmountain.org/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The nonprofit operator's official site publishes current alpine and Nordic skiing, lift-ticket, event, and conditions information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "black-mountain-of-maine",
+                "name": "Black Mountain of Maine",
+                "aliases": [
+                  "Black Mountain Maine"
+                ]
+              },
+              "citation": "The nonprofit operator's official site publishes current alpine and Nordic skiing, lift-ticket, event, and conditions information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The nonprofit operator's official site publishes current alpine and Nordic skiing, lift-ticket, event, and conditions information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://skiblackmountain.org/",
+              "citation": "The nonprofit operator's official site publishes current alpine and Nordic skiing, lift-ticket, event, and conditions information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-me",
+                "regionName": "Maine",
+                "stateOrProvince": "Maine",
+                "localityId": "rumford",
+                "localityName": "Rumford"
+              },
+              "citation": "The nonprofit operator's official site publishes current alpine and Nordic skiing, lift-ticket, event, and conditions information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=44.578&mlon=-70.613#map=16/44.578/-70.613",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 44.578,
+                "lng": -70.613
+              },
+              "citation": "Map marker at 44.578, -70.613."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-70.613&y=44.578&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 292,
+              "citation": "EPQS returned an elevation rounded to 292 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "camden-snow-bowl",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "camden-snow-bowl",
+        "name": "Camden Snow Bowl",
+        "aliases": [
+          "Camden Snowbowl",
+          "Ragged Mountain Recreation Area"
+        ]
+      },
+      "coordinates": {
+        "lat": 44.217,
+        "lng": -69.134
+      },
+      "elevations": {
+        "baseM": 33,
+        "topM": 329,
+        "forecastM": 70
+      },
+      "locality": {
+        "regionId": "us-me",
+        "regionName": "Maine",
+        "stateOrProvince": "Maine",
+        "localityId": "camden",
+        "localityName": "Camden"
+      },
+      "officialUrl": "https://camdensnowbowl.com/",
+      "evidence": [
+        {
+          "url": "https://camdensnowbowl.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The municipally owned Snow Bowl's official site publishes current alpine-skiing, lift-ticket, lesson, rental, and conditions information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "camden-snow-bowl",
+                "name": "Camden Snow Bowl",
+                "aliases": [
+                  "Camden Snowbowl",
+                  "Ragged Mountain Recreation Area"
+                ]
+              },
+              "citation": "The municipally owned Snow Bowl's official site publishes current alpine-skiing, lift-ticket, lesson, rental, and conditions information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The municipally owned Snow Bowl's official site publishes current alpine-skiing, lift-ticket, lesson, rental, and conditions information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://camdensnowbowl.com/",
+              "citation": "The municipally owned Snow Bowl's official site publishes current alpine-skiing, lift-ticket, lesson, rental, and conditions information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-me",
+                "regionName": "Maine",
+                "stateOrProvince": "Maine",
+                "localityId": "camden",
+                "localityName": "Camden"
+              },
+              "citation": "The municipally owned Snow Bowl's official site publishes current alpine-skiing, lift-ticket, lesson, rental, and conditions information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=44.217&mlon=-69.134#map=16/44.217/-69.134",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 44.217,
+                "lng": -69.134
+              },
+              "citation": "Map marker at 44.217, -69.134."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-69.134&y=44.217&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 70,
+              "citation": "EPQS returned an elevation rounded to 70 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "pleasant-mountain",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "pleasant-mountain",
+        "name": "Pleasant Mountain",
+        "aliases": [
+          "Shawnee Peak",
+          "Pleasant Mountain Ski Area"
+        ]
+      },
+      "coordinates": {
+        "lat": 44.0592,
+        "lng": -70.8153
+      },
+      "elevations": {
+        "baseM": 137,
+        "topM": 579,
+        "forecastM": 159
+      },
+      "locality": {
+        "regionId": "us-me",
+        "regionName": "Maine",
+        "stateOrProvince": "Maine",
+        "localityId": "bridgton",
+        "localityName": "Bridgton"
+      },
+      "officialUrl": "https://www.pleasantmountain.com/",
+      "evidence": [
+        {
+          "url": "https://www.pleasantmountain.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The operator's official site presents Pleasant Mountain as the active Bridgton ski resort and confirms the current name replacing Shawnee Peak.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "pleasant-mountain",
+                "name": "Pleasant Mountain",
+                "aliases": [
+                  "Shawnee Peak",
+                  "Pleasant Mountain Ski Area"
+                ]
+              },
+              "citation": "The operator's official site presents Pleasant Mountain as the active Bridgton ski resort and confirms the current name replacing Shawnee Peak."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The operator's official site presents Pleasant Mountain as the active Bridgton ski resort and confirms the current name replacing Shawnee Peak."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.pleasantmountain.com/",
+              "citation": "The operator's official site presents Pleasant Mountain as the active Bridgton ski resort and confirms the current name replacing Shawnee Peak."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-me",
+                "regionName": "Maine",
+                "stateOrProvince": "Maine",
+                "localityId": "bridgton",
+                "localityName": "Bridgton"
+              },
+              "citation": "The operator's official site presents Pleasant Mountain as the active Bridgton ski resort and confirms the current name replacing Shawnee Peak."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=44.0592&mlon=-70.8153#map=16/44.0592/-70.8153",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 44.0592,
+                "lng": -70.8153
+              },
+              "citation": "Map marker at 44.0592, -70.8153."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-70.8153&y=44.0592&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 159,
+              "citation": "EPQS returned an elevation rounded to 159 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "lost-valley",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "lost-valley",
+        "name": "Lost Valley",
+        "aliases": [
+          "Lost Valley Ski Area"
+        ]
+      },
+      "coordinates": {
+        "lat": 44.1359,
+        "lng": -70.2829
+      },
+      "elevations": {
+        "baseM": 76,
+        "topM": 152,
+        "forecastM": 117
+      },
+      "locality": {
+        "regionId": "us-me",
+        "regionName": "Maine",
+        "stateOrProvince": "Maine",
+        "localityId": "auburn",
+        "localityName": "Auburn"
+      },
+      "officialUrl": "https://www.lostvalleyski.com/",
+      "evidence": [
+        {
+          "url": "https://www.lostvalleyski.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Lost Valley's official site publishes current ski-area tickets, lessons, rentals, racing, and winter operations in Auburn.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "lost-valley",
+                "name": "Lost Valley",
+                "aliases": [
+                  "Lost Valley Ski Area"
+                ]
+              },
+              "citation": "Lost Valley's official site publishes current ski-area tickets, lessons, rentals, racing, and winter operations in Auburn."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Lost Valley's official site publishes current ski-area tickets, lessons, rentals, racing, and winter operations in Auburn."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.lostvalleyski.com/",
+              "citation": "Lost Valley's official site publishes current ski-area tickets, lessons, rentals, racing, and winter operations in Auburn."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-me",
+                "regionName": "Maine",
+                "stateOrProvince": "Maine",
+                "localityId": "auburn",
+                "localityName": "Auburn"
+              },
+              "citation": "Lost Valley's official site publishes current ski-area tickets, lessons, rentals, racing, and winter operations in Auburn."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=44.1359&mlon=-70.2829#map=16/44.1359/-70.2829",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 44.1359,
+                "lng": -70.2829
+              },
+              "citation": "Map marker at 44.1359, -70.2829."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-70.2829&y=44.1359&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 117,
+              "citation": "EPQS returned an elevation rounded to 117 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "big-moose-mountain",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "big-moose-mountain",
+        "name": "Big Moose Mountain",
+        "aliases": [
+          "Big Squaw Mountain",
+          "Squaw Mountain"
+        ]
+      },
+      "coordinates": {
+        "lat": 45.474,
+        "lng": -69.704
+      },
+      "elevations": {
+        "baseM": null,
+        "topM": null,
+        "forecastM": 513
+      },
+      "locality": {
+        "regionId": "us-me",
+        "regionName": "Maine",
+        "stateOrProvince": "Maine",
+        "localityId": "greenville",
+        "localityName": "Greenville"
+      },
+      "officialUrl": "https://www.skibigmoose.com/",
+      "evidence": [
+        {
+          "url": "https://www.skibigmoose.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The community nonprofit operator's official site presents current volunteer-run skiing and ticket information at Big Moose Mountain.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "big-moose-mountain",
+                "name": "Big Moose Mountain",
+                "aliases": [
+                  "Big Squaw Mountain",
+                  "Squaw Mountain"
+                ]
+              },
+              "citation": "The community nonprofit operator's official site presents current volunteer-run skiing and ticket information at Big Moose Mountain."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The community nonprofit operator's official site presents current volunteer-run skiing and ticket information at Big Moose Mountain."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.skibigmoose.com/",
+              "citation": "The community nonprofit operator's official site presents current volunteer-run skiing and ticket information at Big Moose Mountain."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-me",
+                "regionName": "Maine",
+                "stateOrProvince": "Maine",
+                "localityId": "greenville",
+                "localityName": "Greenville"
+              },
+              "citation": "The community nonprofit operator's official site presents current volunteer-run skiing and ticket information at Big Moose Mountain."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.474&mlon=-69.704#map=16/45.474/-69.704",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.474,
+                "lng": -69.704
+              },
+              "citation": "Map marker at 45.474, -69.704."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-69.704&y=45.474&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 513,
+              "citation": "EPQS returned an elevation rounded to 513 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "titcomb-mountain",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "titcomb-mountain",
+        "name": "Titcomb Mountain",
+        "aliases": [
+          "Titcomb Mountain Ski Area"
+        ]
+      },
+      "coordinates": {
+        "lat": 44.6497,
+        "lng": -70.1707
+      },
+      "elevations": {
+        "baseM": 127,
+        "topM": 229,
+        "forecastM": 123
+      },
+      "locality": {
+        "regionId": "us-me",
+        "regionName": "Maine",
+        "stateOrProvince": "Maine",
+        "localityId": "farmington",
+        "localityName": "Farmington"
+      },
+      "officialUrl": "https://www.titcombmountain.com/",
+      "evidence": [
+        {
+          "url": "https://www.titcombmountain.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The official community ski area's site publishes current alpine and Nordic skiing, tickets, programs, and conditions for Titcomb Mountain.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "titcomb-mountain",
+                "name": "Titcomb Mountain",
+                "aliases": [
+                  "Titcomb Mountain Ski Area"
+                ]
+              },
+              "citation": "The official community ski area's site publishes current alpine and Nordic skiing, tickets, programs, and conditions for Titcomb Mountain."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official community ski area's site publishes current alpine and Nordic skiing, tickets, programs, and conditions for Titcomb Mountain."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.titcombmountain.com/",
+              "citation": "The official community ski area's site publishes current alpine and Nordic skiing, tickets, programs, and conditions for Titcomb Mountain."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-me",
+                "regionName": "Maine",
+                "stateOrProvince": "Maine",
+                "localityId": "farmington",
+                "localityName": "Farmington"
+              },
+              "citation": "The official community ski area's site publishes current alpine and Nordic skiing, tickets, programs, and conditions for Titcomb Mountain."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=44.6497&mlon=-70.1707#map=16/44.6497/-70.1707",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 44.6497,
+                "lng": -70.1707
+              },
+              "citation": "Map marker at 44.6497, -70.1707."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-70.1707&y=44.6497&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 123,
+              "citation": "EPQS returned an elevation rounded to 123 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "bolton-valley",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "bolton-valley",
+        "name": "Bolton Valley Resort",
+        "aliases": [
+          "Bolton Valley"
+        ]
+      },
+      "coordinates": {
+        "lat": 44.4213,
+        "lng": -72.8494
+      },
+      "elevations": {
+        "baseM": 439,
+        "topM": 960,
+        "forecastM": 647
+      },
+      "locality": {
+        "regionId": "us-vt",
+        "regionName": "Vermont",
+        "stateOrProvince": "Vermont",
+        "localityId": "bolton-valley",
+        "localityName": "Bolton Valley"
+      },
+      "officialUrl": "https://www.boltonvalley.com/",
+      "evidence": [
+        {
+          "url": "https://www.boltonvalley.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Bolton Valley's official site publishes current alpine and Nordic skiing, tickets, conditions, lodging, and resort information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "bolton-valley",
+                "name": "Bolton Valley Resort",
+                "aliases": [
+                  "Bolton Valley"
+                ]
+              },
+              "citation": "Bolton Valley's official site publishes current alpine and Nordic skiing, tickets, conditions, lodging, and resort information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Bolton Valley's official site publishes current alpine and Nordic skiing, tickets, conditions, lodging, and resort information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.boltonvalley.com/",
+              "citation": "Bolton Valley's official site publishes current alpine and Nordic skiing, tickets, conditions, lodging, and resort information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-vt",
+                "regionName": "Vermont",
+                "stateOrProvince": "Vermont",
+                "localityId": "bolton-valley",
+                "localityName": "Bolton Valley"
+              },
+              "citation": "Bolton Valley's official site publishes current alpine and Nordic skiing, tickets, conditions, lodging, and resort information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=44.4213&mlon=-72.8494#map=16/44.4213/-72.8494",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 44.4213,
+                "lng": -72.8494
+              },
+              "citation": "Map marker at 44.4213, -72.8494."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-72.8494&y=44.4213&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 647,
+              "citation": "EPQS returned an elevation rounded to 647 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "middlebury-snowbowl",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "middlebury-snowbowl",
+        "name": "Middlebury Snowbowl",
+        "aliases": [
+          "Middlebury College Snow Bowl",
+          "Middlebury College Snowbowl"
+        ]
+      },
+      "coordinates": {
+        "lat": 43.9394,
+        "lng": -72.957
+      },
+      "elevations": {
+        "baseM": 439,
+        "topM": 820,
+        "forecastM": 558
+      },
+      "locality": {
+        "regionId": "us-vt",
+        "regionName": "Vermont",
+        "stateOrProvince": "Vermont",
+        "localityId": "hancock",
+        "localityName": "Hancock"
+      },
+      "officialUrl": "https://middleburysnowbowl.com/",
+      "evidence": [
+        {
+          "url": "https://middleburysnowbowl.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The official site presents the operating ski area under the current Middlebury Snowbowl name; Middlebury College Snow Bowl is retained as its historical alias, and the site publishes tickets, conditions, and mountain information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "middlebury-snowbowl",
+                "name": "Middlebury Snowbowl",
+                "aliases": [
+                  "Middlebury College Snow Bowl",
+                  "Middlebury College Snowbowl"
+                ]
+              },
+              "citation": "The official site presents the operating ski area under the current Middlebury Snowbowl name; Middlebury College Snow Bowl is retained as its historical alias, and the site publishes tickets, conditions, and mountain information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official site presents the operating ski area under the current Middlebury Snowbowl name; Middlebury College Snow Bowl is retained as its historical alias, and the site publishes tickets, conditions, and mountain information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://middleburysnowbowl.com/",
+              "citation": "The official site presents the operating ski area under the current Middlebury Snowbowl name; Middlebury College Snow Bowl is retained as its historical alias, and the site publishes tickets, conditions, and mountain information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-vt",
+                "regionName": "Vermont",
+                "stateOrProvince": "Vermont",
+                "localityId": "hancock",
+                "localityName": "Hancock"
+              },
+              "citation": "The official site presents the operating ski area under the current Middlebury Snowbowl name; Middlebury College Snow Bowl is retained as its historical alias, and the site publishes tickets, conditions, and mountain information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=43.9394&mlon=-72.957#map=16/43.9394/-72.957",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 43.9394,
+                "lng": -72.957
+              },
+              "citation": "Map marker at 43.9394, -72.957."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-72.957&y=43.9394&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 558,
+              "citation": "EPQS returned an elevation rounded to 558 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "saskadena-six",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "saskadena-six",
+        "name": "Saskadena Six",
+        "aliases": [
+          "Suicide Six",
+          "S6"
+        ]
+      },
+      "coordinates": {
+        "lat": 43.665,
+        "lng": -72.543
+      },
+      "elevations": {
+        "baseM": 244,
+        "topM": 396,
+        "forecastM": 221
+      },
+      "locality": {
+        "regionId": "us-vt",
+        "regionName": "Vermont",
+        "stateOrProvince": "Vermont",
+        "localityId": "south-pomfret",
+        "localityName": "South Pomfret"
+      },
+      "officialUrl": "https://www.saskadenasix.com/",
+      "evidence": [
+        {
+          "url": "https://www.saskadenasix.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The official operator site presents Saskadena Six as the active South Pomfret ski area under its current name; Suicide Six is retained as its former name, and the site publishes winter operations.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "saskadena-six",
+                "name": "Saskadena Six",
+                "aliases": [
+                  "Suicide Six",
+                  "S6"
+                ]
+              },
+              "citation": "The official operator site presents Saskadena Six as the active South Pomfret ski area under its current name; Suicide Six is retained as its former name, and the site publishes winter operations."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official operator site presents Saskadena Six as the active South Pomfret ski area under its current name; Suicide Six is retained as its former name, and the site publishes winter operations."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.saskadenasix.com/",
+              "citation": "The official operator site presents Saskadena Six as the active South Pomfret ski area under its current name; Suicide Six is retained as its former name, and the site publishes winter operations."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-vt",
+                "regionName": "Vermont",
+                "stateOrProvince": "Vermont",
+                "localityId": "south-pomfret",
+                "localityName": "South Pomfret"
+              },
+              "citation": "The official operator site presents Saskadena Six as the active South Pomfret ski area under its current name; Suicide Six is retained as its former name, and the site publishes winter operations."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=43.665&mlon=-72.543#map=16/43.665/-72.543",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 43.665,
+                "lng": -72.543
+              },
+              "citation": "Map marker at 43.665, -72.543."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-72.543&y=43.665&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 221,
+              "citation": "EPQS returned an elevation rounded to 221 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "ascutney-outdoors",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "ascutney-outdoors",
+        "name": "Ascutney Outdoors",
+        "aliases": [
+          "Ascutney Outdoors Center",
+          "Mount Ascutney"
+        ]
+      },
+      "coordinates": {
+        "lat": 43.4602,
+        "lng": -72.4644
+      },
+      "elevations": {
+        "baseM": null,
+        "topM": null,
+        "forecastM": 328
+      },
+      "locality": {
+        "regionId": "us-vt",
+        "regionName": "Vermont",
+        "stateOrProvince": "Vermont",
+        "localityId": "brownsville",
+        "localityName": "Brownsville"
+      },
+      "officialUrl": "https://www.ascutneyoutdoors.org/",
+      "evidence": [
+        {
+          "url": "https://www.ascutneyoutdoors.org/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The nonprofit's official site documents its public community ski hill, rope tow, winter trails, conditions, and programs in Brownsville.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "ascutney-outdoors",
+                "name": "Ascutney Outdoors",
+                "aliases": [
+                  "Ascutney Outdoors Center",
+                  "Mount Ascutney"
+                ]
+              },
+              "citation": "The nonprofit's official site documents its public community ski hill, rope tow, winter trails, conditions, and programs in Brownsville."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The nonprofit's official site documents its public community ski hill, rope tow, winter trails, conditions, and programs in Brownsville."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.ascutneyoutdoors.org/",
+              "citation": "The nonprofit's official site documents its public community ski hill, rope tow, winter trails, conditions, and programs in Brownsville."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-vt",
+                "regionName": "Vermont",
+                "stateOrProvince": "Vermont",
+                "localityId": "brownsville",
+                "localityName": "Brownsville"
+              },
+              "citation": "The nonprofit's official site documents its public community ski hill, rope tow, winter trails, conditions, and programs in Brownsville."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=43.4602&mlon=-72.4644#map=16/43.4602/-72.4644",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 43.4602,
+                "lng": -72.4644
+              },
+              "citation": "Map marker at 43.4602, -72.4644."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-72.4644&y=43.4602&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 328,
+              "citation": "EPQS returned an elevation rounded to 328 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "cochrans-ski-area",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "cochrans-ski-area",
+        "name": "Cochran's Ski Area",
+        "aliases": [
+          "Cochran Ski Area",
+          "Cochran's"
+        ]
+      },
+      "coordinates": {
+        "lat": 44.396,
+        "lng": -72.982
+      },
+      "elevations": {
+        "baseM": 122,
+        "topM": 274,
+        "forecastM": 109
+      },
+      "locality": {
+        "regionId": "us-vt",
+        "regionName": "Vermont",
+        "stateOrProvince": "Vermont",
+        "localityId": "richmond",
+        "localityName": "Richmond"
+      },
+      "officialUrl": "https://cochranskiarea.com/",
+      "evidence": [
+        {
+          "url": "https://cochranskiarea.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Cochran's official nonprofit site publishes current public skiing, tickets, lessons, programs, and ski-area information in Richmond.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "cochrans-ski-area",
+                "name": "Cochran's Ski Area",
+                "aliases": [
+                  "Cochran Ski Area",
+                  "Cochran's"
+                ]
+              },
+              "citation": "Cochran's official nonprofit site publishes current public skiing, tickets, lessons, programs, and ski-area information in Richmond."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Cochran's official nonprofit site publishes current public skiing, tickets, lessons, programs, and ski-area information in Richmond."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://cochranskiarea.com/",
+              "citation": "Cochran's official nonprofit site publishes current public skiing, tickets, lessons, programs, and ski-area information in Richmond."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-vt",
+                "regionName": "Vermont",
+                "stateOrProvince": "Vermont",
+                "localityId": "richmond",
+                "localityName": "Richmond"
+              },
+              "citation": "Cochran's official nonprofit site publishes current public skiing, tickets, lessons, programs, and ski-area information in Richmond."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=44.396&mlon=-72.982#map=16/44.396/-72.982",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 44.396,
+                "lng": -72.982
+              },
+              "citation": "Map marker at 44.396, -72.982."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-72.982&y=44.396&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 109,
+              "citation": "EPQS returned an elevation rounded to 109 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    }
+  ]
+}

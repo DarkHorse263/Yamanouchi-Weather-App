@@ -3,6 +3,7 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import { useEffect, useState, type CSSProperties } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { primaryPrefectureForJapanRegion } from "@/regions/japan-prefectures";
+import { COUNTRY_META, REGIONS, REGION_COUNTRY } from "@/regions";
 
 // ─── types ─────────────────────────────────────────
 type RegionStatus = "live" | "soon";
@@ -334,7 +335,26 @@ export function CountryPicker() {
     refetchOnWindowFocus: true,
   });
 
-  const regions = data?.regions ?? FALLBACK_REGIONS;
+  // The generated catalogue ships with the client, so state-first US additions
+  // remain discoverable when the regions API is unavailable.
+  const offlineRegions: Region[] = REGIONS.map((region) => {
+    const countryCode = REGION_COUNTRY[region.id];
+    const country = COUNTRY_META[countryCode];
+    return {
+      id: region.id,
+      name: region.name,
+      country: country.name,
+      countryCode,
+      region: region.subtitle.split(" · ")[0] ?? region.name,
+      status: "live",
+      href: `/${region.id}/`,
+      baseTowns: (region.baseTowns ?? []).map((town) => town.name),
+      mountains: (region.mountains ?? []).map((mountain) => mountain.name),
+      headlineLabel: region.name,
+      headline: null,
+    };
+  });
+  const regions = data?.regions ?? (offlineRegions.length > 0 ? offlineRegions : FALLBACK_REGIONS);
   const liveCount = regions.filter((r) => r.status === "live").length;
 
   type Country = { code: "AU" | "JP" | "NZ" | "CA" | "US"; name: string; flag: string; regions: Region[] };

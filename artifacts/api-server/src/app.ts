@@ -17,6 +17,7 @@ import {
 import { setSubscriptionResolver } from "./middlewares/require-entitlement.js";
 import { resolvePromoSubscription } from "./lib/promo.js";
 import { publishedCatalogueRecords, travelRegions } from "@workspace/japan-ski-catalogue/public-runtime";
+import { publishedRecords as publishedSkiCatalogueRecords, publishedRegions as publishedSkiCatalogueRegions } from "@workspace/ski-catalogue/public-runtime";
 
 const CATALOGUE_MOUNTAIN_IDS_BY_REGION = new Map<string, Set<string>>();
 const CATALOGUE_BASE_TOWN_IDS_BY_REGION = new Map<string, Set<string>>();
@@ -31,6 +32,16 @@ for (const record of publishedCatalogueRecords) {
   CATALOGUE_BASE_TOWN_IDS_BY_REGION.set(record.travelRegionId, townIds);
 }
 const CATALOGUE_TRAVEL_REGION_IDS = new Set(travelRegions.map((region) => region.travelRegionId));
+for (const record of publishedSkiCatalogueRecords) {
+  const ids = CATALOGUE_MOUNTAIN_IDS_BY_REGION.get(record.regionId) ?? new Set<string>();
+  ids.add(record.publicId);
+  for (const alias of record.aliases) ids.add(alias);
+  CATALOGUE_MOUNTAIN_IDS_BY_REGION.set(record.regionId, ids);
+  const towns = CATALOGUE_BASE_TOWN_IDS_BY_REGION.get(record.regionId) ?? new Set<string>();
+  towns.add(record.localityId);
+  CATALOGUE_BASE_TOWN_IDS_BY_REGION.set(record.regionId, towns);
+}
+for (const region of publishedSkiCatalogueRegions) CATALOGUE_TRAVEL_REGION_IDS.add(region.regionId);
 
 // Entitlement resolver · the soft member gate. During the launch promo every
 // premium feature is free, but only for signed-in members (free email

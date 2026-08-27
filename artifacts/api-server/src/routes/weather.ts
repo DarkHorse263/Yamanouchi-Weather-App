@@ -12,6 +12,10 @@ import {
   publishedCatalogueRecords,
   type PublicRuntimeCatalogueRecord,
 } from "@workspace/japan-ski-catalogue/public-runtime";
+import {
+  publishedRecords as publishedSkiCatalogueRecords,
+  type PublicCatalogueRecord,
+} from "@workspace/ski-catalogue/public-runtime";
 
 const router: IRouter = Router();
 
@@ -803,21 +807,40 @@ function catalogueLocation(record: PublicRuntimeCatalogueRecord): LocationConfig
   };
 }
 
+function skiCatalogueLocation(record: PublicCatalogueRecord): LocationConfig {
+  return {
+    id: record.publicId,
+    name: record.name,
+    latitude: record.coordinates.lat,
+    longitude: record.coordinates.lng,
+    elevation: record.forecastElevationM,
+    description: `${record.name} weather forecast.`,
+    bomStation: "Open-Meteo (catalogue forecast location)",
+    bomStationId: "",
+    bomWmoId: 0,
+    timezone: record.timezone,
+    region: record.countryCode as LocationConfig["region"],
+  };
+}
+
 const HARD_CODED_LOCATION_IDS = new Set(LOCATIONS.map((location) => location.id));
-const CATALOGUE_LOCATIONS = publishedCatalogueRecords.map(catalogueLocation);
+const CATALOGUE_LOCATIONS = [
+  ...publishedCatalogueRecords.map(catalogueLocation),
+  ...publishedSkiCatalogueRecords.map(skiCatalogueLocation),
+];
 const CATALOGUE_LOCATION_BY_ID = new Map<string, LocationConfig>();
 
 /**
  * Builds the public-id/alias index at module load so a catalogue collision
  * fails boot and tests rather than silently changing an existing location.
  */
-for (const record of publishedCatalogueRecords) {
+for (const record of [...publishedCatalogueRecords, ...publishedSkiCatalogueRecords]) {
   for (const id of [record.publicId, ...record.aliases]) {
     if (HARD_CODED_LOCATION_IDS.has(id) || CATALOGUE_LOCATION_BY_ID.has(id)) {
-      throw new Error(`[japan-catalogue] location id/alias collision: "${id}"`);
+      throw new Error(`[ski-catalogue] location id/alias collision: "${id}"`);
     }
     const location = CATALOGUE_LOCATIONS.find((candidate) => candidate.id === record.publicId);
-    if (!location) throw new Error(`[japan-catalogue] missing location for "${record.publicId}"`);
+    if (!location) throw new Error(`[ski-catalogue] missing location for "${record.publicId}"`);
     CATALOGUE_LOCATION_BY_ID.set(id, location);
   }
 }
