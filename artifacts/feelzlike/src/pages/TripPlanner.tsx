@@ -96,7 +96,7 @@ function CountrySwitcher({
 }) {
   if (countries.length < 2) return null;
   return (
-    <div className="inline-flex items-center rounded-full border border-border p-0.5 bg-white">
+    <div className="grid w-full grid-cols-2 gap-1 rounded-2xl border border-border bg-white p-1 sm:inline-grid sm:w-auto sm:grid-cols-5 sm:rounded-full">
       {countries.map((c) => {
         const active = c === current;
         return (
@@ -105,7 +105,7 @@ function CountrySwitcher({
             type="button"
             onClick={() => onChange(c)}
             aria-pressed={active}
-            className={`px-3.5 py-1.5 rounded-full text-sm font-semibold transition-colors ${
+            className={`min-w-0 rounded-xl px-2.5 py-2 text-center text-sm font-semibold leading-tight transition-colors sm:rounded-full sm:px-3.5 sm:py-1.5 ${
               active
                 ? "bg-foreground text-background"
                 : "text-muted-foreground hover:text-foreground"
@@ -220,9 +220,13 @@ function MountainPicker({
 }) {
   const catalog = useMemo(() => tripPlannerCatalog(country), [country]);
   const byRegion = useMemo(() => {
-    const groups = new Map<string, { name: string; mountains: CatalogMountain[] }>();
+    const groups = new Map<string, { id: string; name: string; mountains: CatalogMountain[] }>();
     for (const m of catalog) {
-      const g = groups.get(m.regionId) ?? { name: m.regionName, mountains: [] };
+      const g = groups.get(m.regionId) ?? {
+        id: m.regionId,
+        name: m.regionName,
+        mountains: [],
+      };
       g.mountains.push(m);
       groups.set(m.regionId, g);
     }
@@ -234,7 +238,7 @@ function MountainPicker({
   return (
     <div className="space-y-4">
       {byRegion.map((group) => (
-        <div key={group.name}>
+        <div key={group.id}>
           <p className="text-xs font-bold text-white/80 uppercase tracking-wider mb-2">
             {group.name}
           </p>

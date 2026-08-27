@@ -95,27 +95,12 @@ export function AdminLayout({ children, active }: Props) {
   return (
     <div className="min-h-screen bg-slate-50">
       <header className="border-b bg-white">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-6">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-4 sm:px-6">
+          <div className="flex min-w-0 items-center gap-4 sm:gap-6">
             <Link href="/" className="flex items-center gap-2.5">
               <img src={wordmark} alt="feelzlike" className="h-7 w-auto" />
               <span className="text-sm font-semibold lowercase text-slate-500">· admin</span>
             </Link>
-            <nav className="flex items-center gap-1 text-sm">
-              {TABS.map((t) => (
-                <Link
-                  key={t.key}
-                  href={t.href}
-                  className={`px-3 py-1.5 rounded-md transition-colors ${
-                    active === t.key
-                      ? "bg-sky-100 text-sky-900 font-medium"
-                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
-                  }`}
-                >
-                  {t.label}
-                </Link>
-              ))}
-            </nav>
           </div>
           <div className="flex items-center gap-3 text-xs text-muted-foreground">
             <span className="hidden sm:inline">{user?.primaryEmailAddress?.emailAddress}</span>
@@ -126,9 +111,24 @@ export function AdminLayout({ children, active }: Props) {
               sign out
             </button>
           </div>
+          <nav className="-mx-1 flex w-[calc(100%+0.5rem)] items-center gap-1 overflow-x-auto px-1 pb-1 text-sm [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {TABS.map((t) => (
+              <Link
+                key={t.key}
+                href={t.href}
+                className={`shrink-0 rounded-md px-3 py-1.5 transition-colors ${
+                  active === t.key
+                    ? "bg-sky-100 text-sky-900 font-medium"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                }`}
+              >
+                {t.label}
+              </Link>
+            ))}
+          </nav>
         </div>
       </header>
-      <main className="max-w-6xl mx-auto px-6 py-6">{children}</main>
+      <main className="mx-auto max-w-6xl px-4 py-6 sm:px-6">{children}</main>
     </div>
   );
 }
