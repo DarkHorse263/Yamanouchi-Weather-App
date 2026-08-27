@@ -7887,6 +7887,33 @@
         "manifestApproved": true,
         "runtimeIntegrated": true
       }
+    },
+    {
+      "recordId": "workbook:496",
+      "publicId": "tochio-family-ski-resort",
+      "aliases": [],
+      "name": "Tochio Family Ski Resort",
+      "nameJa": "栃尾ファミリースキー場",
+      "coordinates": {
+        "lat": 37.4374279,
+        "lng": 139.039527
+      },
+      "forecastElevationM": 223,
+      "baseElevationM": 171,
+      "topElevationM": 223,
+      "officialUrl": "https://www.city.nagaoka.niigata.jp/shisetsu/sports/t-hiroba.html",
+      "travelRegionId": "niigata-regional",
+      "baseTownId": "niigata-regional-nagaoka",
+      "route": "/niigata-regional/mountain/tochio-family-ski-resort",
+      "prefecture": "Niigata",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
     }
   ]
 }

@@ -54,7 +54,7 @@
     {
       "sourceId": "japan-publication-manifest",
       "kind": "runtime_publication_approval",
-      "recordCount": 242,
+      "recordCount": 243,
       "location": "lib/japan-ski-catalogue/data/publication-manifest.json"
     }
   ],
@@ -69,13 +69,13 @@
     "publishableOperatingStatuses": [
       "operating"
     ],
-    "marketingApproved": false,
-    "marketingGateReason": "Verified-only coverage is blocked because at least one eligible record is unpublished or ineligible data entered the public projection.",
+    "marketingApproved": true,
+    "marketingGateReason": "Verified-only evidence-complete coverage is approved; unclear and essential-gap records remain excluded from public coverage.",
     "cleanGate": {
       "verifiedEvidenceCompleteRecords": 292,
-      "lifecyclePublishedRecords": 291,
+      "lifecyclePublishedRecords": 292,
       "routeReadyNewCandidates": 243,
-      "manifestIntegratedNewRecords": 242,
+      "manifestIntegratedNewRecords": 243,
       "reviewQueueExcludedPendingEvidence": 206,
       "unclearOrNotVerifiableRecords": 178,
       "verifiedEssentialGapRecords": 28
@@ -57396,7 +57396,7 @@
     },
     {
       "recordId": "workbook:496",
-      "lifecycle": "verified",
+      "lifecycle": "published",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
       "travelRegionId": "niigata-regional",
@@ -86120,6 +86120,33 @@
       "baseTownId": "okayama-kagamino-kagamino",
       "route": "/chugoku-ski-areas/mountain/onbara-kogen-ski-area",
       "prefecture": "Okayama",
+      "country": "Japan",
+      "countryCode": "JP",
+      "honesty": {
+        "operatingStatusVerified": true,
+        "evidenceComplete": true,
+        "manifestApproved": true,
+        "runtimeIntegrated": true
+      }
+    },
+    {
+      "recordId": "workbook:496",
+      "publicId": "tochio-family-ski-resort",
+      "aliases": [],
+      "name": "Tochio Family Ski Resort",
+      "nameJa": "栃尾ファミリースキー場",
+      "coordinates": {
+        "lat": 37.4374279,
+        "lng": 139.039527
+      },
+      "forecastElevationM": 223,
+      "baseElevationM": 171,
+      "topElevationM": 223,
+      "officialUrl": "https://www.city.nagaoka.niigata.jp/shisetsu/sports/t-hiroba.html",
+      "travelRegionId": "niigata-regional",
+      "baseTownId": "niigata-regional-nagaoka",
+      "route": "/niigata-regional/mountain/tochio-family-ski-resort",
+      "prefecture": "Niigata",
       "country": "Japan",
       "countryCode": "JP",
       "honesty": {

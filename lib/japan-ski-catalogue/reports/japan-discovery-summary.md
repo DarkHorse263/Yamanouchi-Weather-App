@@ -7,13 +7,13 @@ Public completeness wording remains bounded while unresolved identities remain.
 
 - Source entries: 2294
 - Deduplicated identities: 858
-- published_directly: 307
+- published_directly: 308
 - covered_by_alias: 8
 - covered_by_multiple_pages: 7
 - merged_or_renamed: 5
 - closed: 18
 - out_of_scope: 15
-- genuinely_missing: 22
+- genuinely_missing: 21
 - unresolved: 476
 
 ## Prefecture proof
@@ -46,7 +46,7 @@ Public completeness wording remains bounded while unresolved identities remain.
 | Miyazaki | 3 | 0 | 1 | 0 | 2 |
 | Nagano | 148 | 73 | 3 | 1 | 71 |
 | Nara | 3 | 0 | 0 | 0 | 3 |
-| Niigata | 112 | 29 | 0 | 2 | 81 |
+| Niigata | 112 | 30 | 0 | 1 | 81 |
 | Oita | 2 | 0 | 0 | 0 | 2 |
 | Okayama | 8 | 3 | 0 | 0 | 5 |
 | Saga | 1 | 0 | 0 | 0 | 1 |

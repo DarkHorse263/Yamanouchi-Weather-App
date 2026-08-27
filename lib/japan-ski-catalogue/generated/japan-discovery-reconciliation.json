@@ -43719,7 +43719,7 @@
       "disposition": "unresolved"
     },
     {
-      "identityId": "workbook:496",
+      "identityId": "catalogue:workbook:496",
       "canonicalName": "Tochio Family Ski Resort",
       "normalizedIdentity": "tochiofamilyresort",
       "prefecture": "Niigata",
@@ -43742,10 +43742,14 @@
         "sourceType": "operator_or_public_authority_review"
       },
       "publicCoverage": {
-        "routes": [],
-        "pageIds": []
+        "routes": [
+          "/niigata-regional/mountain/tochio-family-ski-resort"
+        ],
+        "pageIds": [
+          "catalogue:workbook:496"
+        ]
       },
-      "disposition": "genuinely_missing"
+      "disposition": "published_directly"
     },
     {
       "identityId": "Niigata:tokamachicitymatsudaifamilyskiarea",
