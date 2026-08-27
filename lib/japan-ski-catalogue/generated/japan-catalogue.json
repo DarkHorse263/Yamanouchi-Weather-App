@@ -48,7 +48,7 @@
     {
       "sourceId": "japan-verified-evidence-supplement",
       "kind": "official_field_supplements",
-      "recordCount": 56,
+      "recordCount": 61,
       "location": "lib/japan-ski-catalogue/data/verified-evidence-supplement.json"
     },
     {
@@ -69,16 +69,16 @@
     "publishableOperatingStatuses": [
       "operating"
     ],
-    "marketingApproved": true,
-    "marketingGateReason": "Verified-only evidence-complete coverage is approved; unclear and essential-gap records remain excluded from public coverage.",
+    "marketingApproved": false,
+    "marketingGateReason": "Verified-only coverage is blocked because at least one eligible record is unpublished or ineligible data entered the public projection.",
     "cleanGate": {
-      "verifiedEvidenceCompleteRecords": 291,
+      "verifiedEvidenceCompleteRecords": 292,
       "lifecyclePublishedRecords": 291,
-      "routeReadyNewCandidates": 242,
+      "routeReadyNewCandidates": 243,
       "manifestIntegratedNewRecords": 242,
-      "reviewQueueExcludedPendingEvidence": 207,
+      "reviewQueueExcludedPendingEvidence": 206,
       "unclearOrNotVerifiableRecords": 178,
-      "verifiedEssentialGapRecords": 29
+      "verifiedEssentialGapRecords": 28
     }
   },
   "frontendRegionSources": [
@@ -44273,6 +44273,18 @@
             "en": "Horonobecho Higashiyama"
           },
           "externalIds": {}
+        },
+        {
+          "evidenceId": "supplement:workbook:367:coordinates",
+          "sourceType": "verified_evidence_supplement",
+          "sourceRef": "data/verified-evidence-supplement.json",
+          "sourceUrl": "https://odm.bodik.jp/gl/dataset/010006_227_cc-by/resource/ca1c49f4-e509-4dac-8e61-f6612a86400f",
+          "evidenceAsOf": "2026-08-27",
+          "citationSourceType": "prefectural_government_open_data",
+          "note": "The Hokkaido Facility Location Database explicitly names Higashigaoka Ski Area and supplies these coordinates.",
+          "fields": [
+            "coordinates"
+          ]
         }
       ],
       "directoryRelationship": {
@@ -44283,14 +44295,13 @@
       "readiness": {
         "basis": "unique_exact_normalized_name",
         "essentials": {
-          "coordinates": false,
+          "coordinates": true,
           "defensibleElevation": false,
           "japaneseName": true,
           "officialUrl": true
         },
         "evidenceComplete": false,
         "missingReasons": [
-          "missing_coordinates",
           "missing_defensible_elevation"
         ],
         "requiredReviews": [
@@ -44302,13 +44313,16 @@
         "name": "Higashigaoka Ski Area",
         "nameJa": "東ヶ丘スキー場",
         "officialUrl": "https://www.town.horonobe.lg.jp/www4/section/edu/le009f0000001go7.html",
+        "coordinates": {
+          "lat": 45.02071,
+          "lng": 141.85569
+        },
         "elevation": {}
       },
       "publicationReadiness": {
         "publishable": false,
         "missingReasons": [
           "missing_essentials",
-          "missing_coordinates",
           "missing_defensible_elevation",
           "unverified_lifecycle"
         ]
@@ -51447,6 +51461,18 @@
             "en": "Ninohji Snow Park Ninox"
           },
           "externalIds": {}
+        },
+        {
+          "evidenceId": "supplement:workbook:436:defensibleElevation",
+          "sourceType": "verified_evidence_supplement",
+          "sourceRef": "data/verified-evidence-supplement.json",
+          "sourceUrl": "https://www.ninox.co.jp/course/",
+          "evidenceAsOf": "2026-08-27",
+          "citationSourceType": "resort_operator",
+          "note": "The operator course data explicitly labels the currently mapped ski-area endpoints as 317 m at the foot and 533 m at the summit.",
+          "fields": [
+            "defensibleElevation"
+          ]
         }
       ],
       "directoryRelationship": {
@@ -51458,14 +51484,13 @@
         "basis": "unique_exact_normalized_name",
         "essentials": {
           "coordinates": false,
-          "defensibleElevation": false,
+          "defensibleElevation": true,
           "japaneseName": true,
           "officialUrl": true
         },
         "evidenceComplete": false,
         "missingReasons": [
-          "missing_coordinates",
-          "missing_defensible_elevation"
+          "missing_coordinates"
         ],
         "requiredReviews": [
           "operating_status",
@@ -51476,14 +51501,16 @@
         "name": "Ninox Snow Park",
         "nameJa": "ニノックススノーパーク",
         "officialUrl": "https://www.ninox.co.jp/",
-        "elevation": {}
+        "elevation": {
+          "baseM": 317,
+          "topM": 533
+        }
       },
       "publicationReadiness": {
         "publishable": false,
         "missingReasons": [
           "missing_essentials",
           "missing_coordinates",
-          "missing_defensible_elevation",
           "unverified_lifecycle"
         ]
       }
@@ -52771,6 +52798,18 @@
           "externalIds": {
             "osm": "way/1350904514"
           }
+        },
+        {
+          "evidenceId": "supplement:workbook:449:coordinates",
+          "sourceType": "verified_evidence_supplement",
+          "sourceRef": "data/verified-evidence-supplement.json",
+          "sourceUrl": "https://odm.bodik.jp/gl/dataset/010006_227_cc-by/resource/ca1c49f4-e509-4dac-8e61-f6612a86400f",
+          "evidenceAsOf": "2026-08-27",
+          "citationSourceType": "prefectural_government_open_data",
+          "note": "The Hokkaido Facility Location Database explicitly names Teshio Town Residents Ski Area and supplies these coordinates.",
+          "fields": [
+            "coordinates"
+          ]
         }
       ],
       "directoryRelationship": {
@@ -52800,8 +52839,8 @@
         "nameJa": "天塩町町民スキー場",
         "officialUrl": "https://www.teshiotown.hokkaido.jp/?page_id=636",
         "coordinates": {
-          "lat": 44.9039322,
-          "lng": 141.8301971
+          "lat": 44.90301,
+          "lng": 141.83148
         },
         "elevation": {}
       },
@@ -53986,6 +54025,18 @@
           "evidenceId": "intake:461",
           "sourceType": "national_intake_workbook",
           "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "supplement:workbook:461:coordinates",
+          "sourceType": "verified_evidence_supplement",
+          "sourceRef": "data/verified-evidence-supplement.json",
+          "sourceUrl": "https://odm.bodik.jp/gl/dataset/010006_227_cc-by/resource/ca1c49f4-e509-4dac-8e61-f6612a86400f",
+          "evidenceAsOf": "2026-08-27",
+          "citationSourceType": "prefectural_government_open_data",
+          "note": "The Hokkaido Facility Location Database lists Naganuma Ski Area at the same address used by the current Kita-Naganuma operator, supplying this explicit facility coordinate.",
+          "fields": [
+            "coordinates"
+          ]
         }
       ],
       "directoryRelationship": {
@@ -53995,14 +54046,13 @@
       "readiness": {
         "basis": "supplement_only",
         "essentials": {
-          "coordinates": false,
+          "coordinates": true,
           "defensibleElevation": false,
           "japaneseName": true,
           "officialUrl": true
         },
         "evidenceComplete": false,
         "missingReasons": [
-          "missing_coordinates",
           "missing_defensible_elevation"
         ],
         "requiredReviews": [
@@ -54013,13 +54063,16 @@
       "resolved": {
         "name": "Kita Naganuma Ski Area",
         "nameJa": "北長沼スキー場",
-        "officialUrl": "https://ski-kitanaganuma.com/"
+        "officialUrl": "https://ski-kitanaganuma.com/",
+        "coordinates": {
+          "lat": 43.03763,
+          "lng": 141.74219
+        }
       },
       "publicationReadiness": {
         "publishable": false,
         "missingReasons": [
           "missing_essentials",
-          "missing_coordinates",
           "missing_defensible_elevation",
           "unverified_lifecycle"
         ]
@@ -56479,6 +56532,18 @@
             "en": "Takino Snowpark"
           },
           "externalIds": {}
+        },
+        {
+          "evidenceId": "supplement:workbook:487:coordinates",
+          "sourceType": "verified_evidence_supplement",
+          "sourceRef": "data/verified-evidence-supplement.json",
+          "sourceUrl": "https://firestore.googleapis.com/v1/projects/stage-takino-park/databases/(default)/documents/spots/spot_29",
+          "evidenceAsOf": "2026-08-26",
+          "citationSourceType": "national_government_operator",
+          "note": "The official park digital map's named Family Slope record explicitly stores this GeoPoint for the ski and snowboard slope.",
+          "fields": [
+            "coordinates"
+          ]
         }
       ],
       "directoryRelationship": {
@@ -56489,14 +56554,13 @@
       "readiness": {
         "basis": "unique_exact_normalized_name",
         "essentials": {
-          "coordinates": false,
+          "coordinates": true,
           "defensibleElevation": false,
           "japaneseName": true,
           "officialUrl": true
         },
         "evidenceComplete": false,
         "missingReasons": [
-          "missing_coordinates",
           "missing_defensible_elevation"
         ],
         "requiredReviews": [
@@ -56508,13 +56572,16 @@
         "name": "Takino Snow World",
         "nameJa": "滝野スノーワールド",
         "officialUrl": "https://takinopark.com/en/",
+        "coordinates": {
+          "lat": 42.918274,
+          "lng": 141.387418
+        },
         "elevation": {}
       },
       "publicationReadiness": {
         "publishable": false,
         "missingReasons": [
           "missing_essentials",
-          "missing_coordinates",
           "missing_defensible_elevation",
           "unverified_lifecycle"
         ]
@@ -57329,7 +57396,7 @@
     },
     {
       "recordId": "workbook:496",
-      "lifecycle": "draft",
+      "lifecycle": "verified",
       "operatingStatus": "operating",
       "reviewedOperatingStatus": "operating",
       "travelRegionId": "niigata-regional",
@@ -57395,6 +57462,18 @@
           "externalIds": {
             "osm": "node/416024333"
           }
+        },
+        {
+          "evidenceId": "supplement:workbook:496:defensibleElevation",
+          "sourceType": "verified_evidence_supplement",
+          "sourceRef": "data/verified-evidence-supplement.json",
+          "sourceUrl": "https://nagaoka-navi.or.jp/spot/10721",
+          "evidenceAsOf": "2026-08-27",
+          "citationSourceType": "municipal_tourism",
+          "note": "Nagaoka's official tourism page explicitly states the ski-area elevation range as 171–223 m.",
+          "fields": [
+            "defensibleElevation"
+          ]
         }
       ],
       "directoryRelationship": {
@@ -57406,14 +57485,12 @@
         "basis": "unique_exact_normalized_name",
         "essentials": {
           "coordinates": true,
-          "defensibleElevation": false,
+          "defensibleElevation": true,
           "japaneseName": true,
           "officialUrl": true
         },
-        "evidenceComplete": false,
-        "missingReasons": [
-          "missing_defensible_elevation"
-        ],
+        "evidenceComplete": true,
+        "missingReasons": [],
         "requiredReviews": [
           "operating_status",
           "travel_cluster"
@@ -57427,15 +57504,14 @@
           "lat": 37.4374279,
           "lng": 139.039527
         },
-        "elevation": {}
+        "elevation": {
+          "baseM": 171,
+          "topM": 223
+        }
       },
       "publicationReadiness": {
-        "publishable": false,
-        "missingReasons": [
-          "missing_essentials",
-          "missing_defensible_elevation",
-          "unverified_lifecycle"
-        ]
+        "publishable": true,
+        "missingReasons": []
       }
     },
     {
@@ -62580,6 +62656,18 @@
           "externalIds": {
             "osm": "way/291469633"
           }
+        },
+        {
+          "evidenceId": "supplement:workbook:550:coordinates",
+          "sourceType": "verified_evidence_supplement",
+          "sourceRef": "data/verified-evidence-supplement.json",
+          "sourceUrl": "https://www.google.com/maps/d/kml?mid=1jGbQLcZwLrEOBvyFcT6g7bZS3I8&forcekml=1",
+          "evidenceAsOf": "2026-08-26",
+          "citationSourceType": "municipal_government",
+          "note": "Wassamu Town's embedded municipal tourism-map KML has a named Higashiyama Ski Area placemark with these explicit destination coordinates.",
+          "fields": [
+            "coordinates"
+          ]
         }
       ],
       "directoryRelationship": {
@@ -62609,8 +62697,8 @@
         "nameJa": "和寒東山スキー場",
         "officialUrl": "https://www.facebook.com/wassamuski1979/",
         "coordinates": {
-          "lat": 44.0368197,
-          "lng": 142.4174784
+          "lat": 44.036332,
+          "lng": 142.418604
         },
         "elevation": {}
       },
@@ -79446,6 +79534,62 @@
             "en": "Hinata"
           },
           "externalIds": {}
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:496",
+      "publicId": "tochio-family-ski-resort",
+      "aliases": [],
+      "travelRegionId": "niigata-regional",
+      "baseTownId": "niigata-regional-nagaoka",
+      "route": "/niigata-regional/mountain/tochio-family-ski-resort",
+      "name": "Tochio Family Ski Resort",
+      "nameJa": "栃尾ファミリースキー場",
+      "coordinates": {
+        "lat": 37.4374279,
+        "lng": 139.039527
+      },
+      "elevation": {
+        "baseM": 171,
+        "topM": 223
+      },
+      "officialUrl": "https://www.city.nagaoka.niigata.jp/shisetsu/sports/t-hiroba.html",
+      "evidence": [
+        {
+          "evidenceId": "intake:496",
+          "sourceType": "national_intake_workbook",
+          "sourceRef": "Japan_Ski_Resorts_558_1783900482697.xlsx"
+        },
+        {
+          "evidenceId": "directory:tochio-family-resort",
+          "sourceType": "ski_directory",
+          "sourceRef": "tochio-family-resort",
+          "directoryUrl": "https://www.skiresort.com/en/ski-resort/tochio-family-resort/",
+          "coordinates": {
+            "lat": 37.4374279,
+            "lng": 139.039527
+          },
+          "elevation": {},
+          "names": {
+            "en": "Tochio Family Resort",
+            "ja": "栃尾ファミリースキー場"
+          },
+          "externalIds": {
+            "osm": "node/416024333"
+          }
+        },
+        {
+          "evidenceId": "supplement:workbook:496:defensibleElevation",
+          "sourceType": "verified_evidence_supplement",
+          "sourceRef": "data/verified-evidence-supplement.json",
+          "sourceUrl": "https://nagaoka-navi.or.jp/spot/10721",
+          "evidenceAsOf": "2026-08-27",
+          "citationSourceType": "municipal_tourism",
+          "note": "Nagaoka's official tourism page explicitly states the ski-area elevation range as 171–223 m.",
+          "fields": [
+            "defensibleElevation"
+          ]
         }
       ]
     }

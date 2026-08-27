@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-08-26",
+  "reviewedAt": "2026-08-27",
   "records": [
     {
       "recordId": "workbook:1a",
@@ -641,13 +641,22 @@
           "sourceType": "municipal_government",
           "evidenceAsOf": "2026-08-26",
           "note": "Official public ski-area page."
+        },
+        "coordinates": {
+          "value": {
+            "lat": 45.02071,
+            "lng": 141.85569
+          },
+          "sourceUrl": "https://odm.bodik.jp/gl/dataset/010006_227_cc-by/resource/ca1c49f4-e509-4dac-8e61-f6612a86400f",
+          "sourceType": "prefectural_government_open_data",
+          "evidenceAsOf": "2026-08-27",
+          "note": "The Hokkaido Facility Location Database explicitly names Higashigaoka Ski Area and supplies these coordinates."
         }
       },
       "unresolved": [
-        "coordinates",
         "defensibleElevation"
       ],
-      "notes": "Municipal facility-page, attachment, map, and open-data searches exhausted; no eligible coordinate or base/top elevation proposal recovered.",
+      "notes": "Hokkaido government open data resolves the ski-area destination coordinate. Horonobe Town publishes only a 56 m vertical difference, so base/top elevation remains unresolved.",
       "sourcesChecked": [
         {
           "sourceUrl": "https://www.town.horonobe.lg.jp/www4/section/edu/le009f0000001go7.html",
@@ -806,6 +815,33 @@
           "sourceType": "resort_operator",
           "evidenceAsOf": "2026-08-26",
           "note": "The operator safety report concerns lift safety and does not provide ski-area elevation endpoints or an explicit-coordinate destination."
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:436",
+      "fields": {
+        "defensibleElevation": {
+          "value": {
+            "baseM": 317,
+            "topM": 533
+          },
+          "sourceUrl": "https://www.ninox.co.jp/course/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-27",
+          "note": "The operator course data explicitly labels the currently mapped ski-area endpoints as 317 m at the foot and 533 m at the summit."
+        }
+      },
+      "unresolved": [
+        "coordinates"
+      ],
+      "notes": "The operator course page resolves base/top elevation. The access page gives routes and an address but no explicit destination coordinates, so no geocoding was performed.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.ninox.co.jp/access/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-27",
+          "note": "The operator access page provides routes and an address but no explicit ski-area latitude/longitude destination."
         }
       ]
     },
@@ -972,7 +1008,18 @@
     },
     {
       "recordId": "workbook:449",
-      "fields": {},
+      "fields": {
+        "coordinates": {
+          "value": {
+            "lat": 44.90301,
+            "lng": 141.83148
+          },
+          "sourceUrl": "https://odm.bodik.jp/gl/dataset/010006_227_cc-by/resource/ca1c49f4-e509-4dac-8e61-f6612a86400f",
+          "sourceType": "prefectural_government_open_data",
+          "evidenceAsOf": "2026-08-27",
+          "note": "The Hokkaido Facility Location Database explicitly names Teshio Town Residents Ski Area and supplies these coordinates."
+        }
+      },
       "unresolved": [
         "defensibleElevation"
       ],
@@ -1085,6 +1132,35 @@
       ]
     },
     {
+      "recordId": "workbook:455",
+      "fields": {},
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "notes": "Official operator access, course, and 2025–26 brochure material does not publish an explicit ski-area destination coordinate or base/top elevation endpoints.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.hyakuzawa-ski.com/soma/soma-access.html",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-27",
+          "note": "The operator access page embeds a map with viewport coordinates only, not an explicit destination pin, so those values were rejected."
+        },
+        {
+          "sourceUrl": "https://www.hyakuzawa-ski.com/soma/soma-course.html",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-27",
+          "note": "The official course page describes courses and lift length but gives no base or top elevation."
+        },
+        {
+          "sourceUrl": "https://www.hyakuzawa-ski.com/wp-content/uploads/2026/01/pamphlet_2025-26.pdf",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-27",
+          "note": "The official season brochure shows the course layout but no explicit destination coordinates or elevation endpoints."
+        }
+      ]
+    },
+    {
       "recordId": "workbook:459",
       "fields": {
         "officialUrl": {
@@ -1130,13 +1206,22 @@
           "sourceType": "resort_operator",
           "evidenceAsOf": "2026-08-26",
           "note": "Official public ski-area page."
+        },
+        "coordinates": {
+          "value": {
+            "lat": 43.03763,
+            "lng": 141.74219
+          },
+          "sourceUrl": "https://odm.bodik.jp/gl/dataset/010006_227_cc-by/resource/ca1c49f4-e509-4dac-8e61-f6612a86400f",
+          "sourceType": "prefectural_government_open_data",
+          "evidenceAsOf": "2026-08-27",
+          "note": "The Hokkaido Facility Location Database lists Naganuma Ski Area at the same address used by the current Kita-Naganuma operator, supplying this explicit facility coordinate."
         }
       },
       "unresolved": [
-        "coordinates",
         "defensibleElevation"
       ],
-      "notes": "No operator access-map destination embed or government GIS/open-data facility coordinate was found. Third-party coordinate and elevation listings were rejected.",
+      "notes": "Hokkaido government open data resolves coordinates after an identity cross-check against the current operator address. No official base/top elevation was recovered.",
       "sourcesChecked": [
         {
           "sourceUrl": "https://ski-kitanaganuma.com/access/",
@@ -1228,6 +1313,35 @@
       ]
     },
     {
+      "recordId": "workbook:469",
+      "fields": {},
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "notes": "Official operator and municipal sports-body pages provide address, access, and lift information but no explicit ski-area coordinates or base/top elevations.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.unazuki-snowpark.com/access/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-27",
+          "note": "The operator access page gives an address and directions, not explicit latitude/longitude; the address was not geocoded."
+        },
+        {
+          "sourceUrl": "https://www.unazuki-snowpark.com/price/",
+          "sourceType": "resort_operator",
+          "evidenceAsOf": "2026-08-27",
+          "note": "The operator page provides lift and ticket details but no ski-area base/top elevations."
+        },
+        {
+          "sourceUrl": "https://www.kurobe-taikyo.jp/facility/dtl.html?r_id=16&t_id=12",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-27",
+          "note": "The municipal sports-body facility page does not publish explicit coordinates or ski-area elevation endpoints; conflicting third-party ranges were rejected."
+        }
+      ]
+    },
+    {
       "recordId": "workbook:487",
       "fields": {
         "japaneseName": {
@@ -1243,13 +1357,22 @@
           "sourceType": "national_government_operator",
           "evidenceAsOf": "2026-08-26",
           "note": "Official public ski-area page."
+        },
+        "coordinates": {
+          "value": {
+            "lat": 42.918274,
+            "lng": 141.387418
+          },
+          "sourceUrl": "https://firestore.googleapis.com/v1/projects/stage-takino-park/databases/(default)/documents/spots/spot_29",
+          "sourceType": "national_government_operator",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official park digital map's named Family Slope record explicitly stores this GeoPoint for the ski and snowboard slope."
         }
       },
       "unresolved": [
-        "coordinates",
         "defensibleElevation"
       ],
-      "notes": "No eligible ski-area coordinate or explicit base/top elevation was recovered; park-level and third-party map points were not substituted.",
+      "notes": "The national-government park's official digital map resolves the named ski-slope coordinate. No explicit base/top elevations were published.",
       "sourcesChecked": [
         {
           "sourceUrl": "https://takinopark.com/news/takinosnowworld/",
@@ -1325,6 +1448,23 @@
       ]
     },
     {
+      "recordId": "workbook:496",
+      "fields": {
+        "defensibleElevation": {
+          "value": {
+            "baseM": 171,
+            "topM": 223
+          },
+          "sourceUrl": "https://nagaoka-navi.or.jp/spot/10721",
+          "sourceType": "municipal_tourism",
+          "evidenceAsOf": "2026-08-27",
+          "note": "Nagaoka's official tourism page explicitly states the ski-area elevation range as 171–223 m."
+        }
+      },
+      "unresolved": [],
+      "notes": "The official municipal tourism elevation range resolves the remaining essential gap."
+    },
+    {
       "recordId": "workbook:542",
       "fields": {},
       "unresolved": [
@@ -1348,7 +1488,18 @@
     },
     {
       "recordId": "workbook:550",
-      "fields": {},
+      "fields": {
+        "coordinates": {
+          "value": {
+            "lat": 44.036332,
+            "lng": 142.418604
+          },
+          "sourceUrl": "https://www.google.com/maps/d/kml?mid=1jGbQLcZwLrEOBvyFcT6g7bZS3I8&forcekml=1",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "Wassamu Town's embedded municipal tourism-map KML has a named Higashiyama Ski Area placemark with these explicit destination coordinates."
+        }
+      },
       "unresolved": [
         "defensibleElevation"
       ],
@@ -1359,6 +1510,41 @@
           "sourceType": "municipal_government",
           "evidenceAsOf": "2026-08-26",
           "note": "The official municipal ski-area page states that the lift ride to the top is about 500 m and the elevation difference is about 120 m, but does not state base and top elevations."
+        }
+      ]
+    },
+    {
+      "recordId": "workbook:551",
+      "fields": {},
+      "unresolved": [
+        "coordinates",
+        "defensibleElevation"
+      ],
+      "notes": "Village and prefectural material provides the ski-area address, lift lengths, and course layout but no explicit ski-area coordinates or base/top elevations.",
+      "sourcesChecked": [
+        {
+          "sourceUrl": "https://www.vill.otoineppu.hokkaido.jp/kakuka/sangyoushinkou/syoukougyou/skizyou.html",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The village ski-area page gives an address and lift information, not explicit latitude/longitude or elevation endpoints."
+        },
+        {
+          "sourceUrl": "https://www.vill.otoineppu.hokkaido.jp/kakuka/sangyoushinkou/syoukougyou/images/gerendemap.png",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The official course map labels lift lengths and layout but no base/top elevations or coordinates."
+        },
+        {
+          "sourceUrl": "https://www.vill.otoineppu.hokkaido.jp/kakuka/sangyoushinkou/syoukougyou/files/panfuallpege.pdf",
+          "sourceType": "municipal_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The brochure's latitude, longitude, and 40 m elevation describe Otoineppu Village generally, not the ski area, so they were rejected."
+        },
+        {
+          "sourceUrl": "https://www.kamikawa.pref.hokkaido.lg.jp/fs/1/2/0/5/3/6/3/1/_/%E3%82%B9%E3%82%AD%E3%83%BC%E5%A0%B4.pdf",
+          "sourceType": "prefectural_government",
+          "evidenceAsOf": "2026-08-26",
+          "note": "The prefectural facility sheet gives address and equipment information only; no field was inferred from address or map-derived positioning."
         }
       ]
     }
