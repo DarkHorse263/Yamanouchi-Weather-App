@@ -3,7 +3,7 @@ import { z } from "zod";
 import { db, usersTable, alertSubscribersTable } from "@workspace/db";
 import { eq } from "drizzle-orm";
 import { getAuth, clerkClient } from "@clerk/express";
-import { REGION_IDS, isRegionId } from "../lib/regions.js";
+import { isRegionId, normaliseAlertDestinations } from "../lib/regions.js";
 import { requireAuth } from "../middlewares/requireAuth.js";
 import { sendEmail } from "../lib/emailSender.js";
 import { accountDeletedEmail } from "../lib/emailTemplates.js";
@@ -157,16 +157,11 @@ router.put("/account/alerts", requireAuth, async (req, res): Promise<void> => {
     return;
   }
   const body = parsed.data;
-  const regions = (Array.isArray(body.regions) ? body.regions : []).filter(
-    (v): v is string => typeof v === "string" && (REGION_IDS as readonly string[]).includes(v),
-  );
-  if (regions.length === 0) {
-    res.status(400).json({ error: "MISSING_REGIONS", message: "Pick at least one region." });
+  const { regions, mountains } = normaliseAlertDestinations(body.regions, body.mountains);
+  if (regions.length === 0 && mountains.length === 0) {
+    res.status(400).json({ error: "MISSING_DESTINATIONS", message: "Pick at least one region or mountain." });
     return;
   }
-  const mountains = (Array.isArray(body.mountains) ? body.mountains : []).filter(
-    (v): v is string => typeof v === "string" && /^[a-z0-9-]{1,80}$/.test(v),
-  );
   const thresholdRaw = Number(body.snowfallThresholdCm);
   const snowfallThresholdCm = Number.isFinite(thresholdRaw)
     ? Math.max(5, Math.min(50, Math.round(thresholdRaw)))

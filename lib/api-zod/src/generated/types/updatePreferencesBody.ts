@@ -9,9 +9,8 @@ import type { UpdatePreferencesBodyDelivery } from "./updatePreferencesBodyDeliv
 import type { UpdatePreferencesBodyHorizonHours } from "./updatePreferencesBodyHorizonHours";
 
 export interface UpdatePreferencesBody {
-  /** @minItems 1 */
   regions: string[];
-  mountains?: string[];
+  mountains: string[];
   /**
    * @minimum 5
    * @maximum 50

@@ -141,6 +141,61 @@ export const REGION_IDS = [
 export type RegionId = (typeof REGION_IDS)[number];
 export type CatalogueTravelRegionId = string;
 
+export interface CatalogueAlertTarget {
+  id: string;
+  name: string;
+  latitude: number;
+  longitude: number;
+  elevation: number;
+  timezone: string;
+  route: string;
+  regionId: string;
+  modelRegion: "OTHER";
+}
+
+/**
+ * Alertable catalogue mountains come from the generated public runtime only.
+ * The generation pipeline has already excluded private, uncertain, closed,
+ * and duplicate-only source records.
+ */
+export const CATALOGUE_ALERT_TARGETS: ReadonlyMap<string, CatalogueAlertTarget> = new Map(
+  publishedSkiCatalogueRecords.map((record) => [
+    record.publicId,
+    {
+      id: record.publicId,
+      name: record.name,
+      latitude: record.coordinates.lat,
+      longitude: record.coordinates.lng,
+      elevation: record.forecastElevationM,
+      timezone: record.timezone,
+      route: record.route,
+      regionId: record.regionId,
+      modelRegion: "OTHER",
+    },
+  ]),
+);
+
+export function resolveCatalogueAlertTarget(mountainId: string): CatalogueAlertTarget | undefined {
+  return CATALOGUE_ALERT_TARGETS.get(mountainId);
+}
+
+export function normaliseAlertDestinations(
+  regionValues: unknown,
+  mountainValues: unknown,
+): { regions: RegionId[]; mountains: string[] } {
+  const regions = Array.isArray(regionValues)
+    ? [...new Set(regionValues.filter(
+      (value): value is RegionId => typeof value === "string" && isRegionId(value),
+    ))]
+    : [];
+  const mountains = Array.isArray(mountainValues)
+    ? [...new Set(mountainValues.filter(
+      (value): value is string => typeof value === "string" && resolveCatalogueAlertTarget(value) !== undefined,
+    ))]
+    : [];
+  return { regions, mountains };
+}
+
 /**
  * Catalogue region ids are data-owned. Keep them outside REGION_IDS because
  * REGION_IDS mirrors the established OpenAPI enum; this set still validates

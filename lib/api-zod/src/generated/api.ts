@@ -315,14 +315,13 @@ export const GetPowderAlertsResponse = zod.object({
  * Creates (or updates) a powder-alert subscription for the given email and sends a verification email. Idempotent — re-submitting with the same email updates preferences.
  * @summary Subscribe to powder alerts
  */
-
 export const subscribeToAlertsBodySnowfallThresholdCmMin = 5;
 export const subscribeToAlertsBodySnowfallThresholdCmMax = 50;
 
 export const SubscribeToAlertsBody = zod.object({
   email: zod.string().email(),
-  regions: zod.array(zod.string()).min(1),
-  mountains: zod.array(zod.string()).optional(),
+  regions: zod.array(zod.string()),
+  mountains: zod.array(zod.string()),
   snowfallThresholdCm: zod
     .number()
     .min(subscribeToAlertsBodySnowfallThresholdCmMin)
@@ -400,8 +399,8 @@ export const updateAlertPreferencesBodySnowfallThresholdCmMin = 5;
 export const updateAlertPreferencesBodySnowfallThresholdCmMax = 50;
 
 export const UpdateAlertPreferencesBody = zod.object({
-  regions: zod.array(zod.string()).min(1),
-  mountains: zod.array(zod.string()).optional(),
+  regions: zod.array(zod.string()),
+  mountains: zod.array(zod.string()),
   snowfallThresholdCm: zod
     .number()
     .min(updateAlertPreferencesBodySnowfallThresholdCmMin)
@@ -526,13 +525,12 @@ token needed. 404 when the email has no subscription yet.
 
  * @summary Update the signed-in member's powder-alert subscription
  */
-
 export const updateAccountAlertsBodySnowfallThresholdCmMin = 5;
 export const updateAccountAlertsBodySnowfallThresholdCmMax = 50;
 
 export const UpdateAccountAlertsBody = zod.object({
-  regions: zod.array(zod.string()).min(1),
-  mountains: zod.array(zod.string()).optional(),
+  regions: zod.array(zod.string()),
+  mountains: zod.array(zod.string()),
   snowfallThresholdCm: zod
     .number()
     .min(updateAccountAlertsBodySnowfallThresholdCmMin)

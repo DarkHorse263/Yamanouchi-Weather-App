@@ -31,16 +31,16 @@ test("every generated published record has its state-first mountain route", () =
   }
 });
 
-test("generated states and mountains cannot expose unsupported alert forms or routes", () => {
+test("generated eastern US states and mountains expose catalogue-backed alerts", () => {
   const record = publishedRecords[0];
   assert.ok(record);
   assert.deepEqual(getPublishedMountainCapabilities(record.regionId, record.publicId), {
-    hasAlerts: false,
-    powderAlertsAvailable: false,
+    hasAlerts: true,
+    powderAlertsAvailable: true,
     contentMode: "weather-only",
   });
-  assert.deepEqual(getPublishedRegionCapabilities(record.regionId), { hasAlerts: false });
-  assert.equal(regionAlertsAvailable(record.regionId), false);
+  assert.deepEqual(getPublishedRegionCapabilities(record.regionId), { hasAlerts: true });
+  assert.equal(regionAlertsAvailable(record.regionId), true);
   // Authored alert-capable regions retain their existing alerts surface.
   assert.equal(regionAlertsAvailable("snowy-mountains"), true);
   assert.equal(regionAlertsAvailable("yamanouchi"), true);

@@ -23,8 +23,16 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
-import { REGION_IDS, LOCATION_TO_REGION, regionForLocation } from "../regions.js";
-import { WEATHER_LOCATION_IDS } from "../../routes/weather.js";
+import { publishedRecords } from "@workspace/ski-catalogue/public-runtime";
+import {
+  CATALOGUE_ALERT_TARGETS,
+  REGION_IDS,
+  LOCATION_TO_REGION,
+  normaliseAlertDestinations,
+  regionForLocation,
+  resolveCatalogueAlertTarget,
+} from "../regions.js";
+import { WEATHER_LOCATION_IDS, resolveWeatherLocation } from "../../routes/weather.js";
 
 // Resolve the repo-root openapi spec relative to this test file so the
 // test is location-independent (works from any cwd).
@@ -103,5 +111,52 @@ test("weather-served location ids are unique", () => {
     new Set(WEATHER_LOCATION_IDS).size,
     WEATHER_LOCATION_IDS.length,
     "duplicate id in the weather LOCATIONS table",
+  );
+});
+
+test("catalogue alert targets exactly match published eastern US mountains", () => {
+  assert.equal(CATALOGUE_ALERT_TARGETS.size, publishedRecords.length);
+  assert.deepEqual(
+    new Set(CATALOGUE_ALERT_TARGETS.keys()),
+    new Set(publishedRecords.map((record) => record.publicId)),
+  );
+});
+
+test("catalogue alerts use the same runtime metadata and route as weather pages", () => {
+  for (const record of publishedRecords) {
+    const target = resolveCatalogueAlertTarget(record.publicId);
+    const weather = resolveWeatherLocation(record.publicId);
+    assert.ok(target, `missing alert target for "${record.publicId}"`);
+    assert.ok(weather, `missing weather location for "${record.publicId}"`);
+    assert.deepEqual(
+      {
+        latitude: target.latitude,
+        longitude: target.longitude,
+        elevation: target.elevation,
+        timezone: target.timezone,
+      },
+      {
+        latitude: weather.latitude,
+        longitude: weather.longitude,
+        elevation: weather.elevation,
+        timezone: weather.timezone,
+      },
+    );
+    assert.equal(target.route, record.route);
+    assert.equal(target.route, `/${record.regionId}/mountain/${record.publicId}`);
+  }
+  assert.equal(resolveCatalogueAlertTarget("private-or-unknown-mountain"), undefined);
+});
+
+test("alert destination validation supports catalogue-mountain-only preferences", () => {
+  const record = publishedRecords[0];
+  assert.ok(record);
+  assert.deepEqual(
+    normaliseAlertDestinations([], [record.publicId, record.publicId, "private-or-unknown-mountain"]),
+    { regions: [], mountains: [record.publicId] },
+  );
+  assert.deepEqual(
+    normaliseAlertDestinations(["snowy-mountains", "not-a-region"], []),
+    { regions: ["snowy-mountains"], mountains: [] },
   );
 });

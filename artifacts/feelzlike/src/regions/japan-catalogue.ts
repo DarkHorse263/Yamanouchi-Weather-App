@@ -172,8 +172,8 @@ export function mergeJapanCatalogueRegions(existingRegions: RegionConfig[]): Reg
 }
 
 export interface PublishedMountainCapabilities {
-  hasAlerts: false;
-  powderAlertsAvailable: false;
+  hasAlerts: boolean;
+  powderAlertsAvailable: boolean;
   contentMode: "weather-only";
 }
 
@@ -200,8 +200,8 @@ const CATALOGUE_CAPABILITIES = new Map(
     [record.publicId, ...record.aliases].map((id) => [
       `${record.regionId}/${id}`,
       {
-        hasAlerts: false,
-        powderAlertsAvailable: false,
+        hasAlerts: publishedSkiCatalogueRecords.some((mountain) => mountain.publicId === record.publicId),
+        powderAlertsAvailable: publishedSkiCatalogueRecords.some((mountain) => mountain.publicId === record.publicId),
         contentMode: "weather-only",
       } satisfies PublishedMountainCapabilities,
     ] as const),
@@ -215,7 +215,7 @@ const CATALOGUE_REGION_BY_ID = new Map(
 );
 
 export interface PublishedRegionCapabilities {
-  hasAlerts: false;
+  hasAlerts: boolean;
 }
 
 const CATALOGUE_REGION_CAPABILITIES = new Map(
@@ -224,7 +224,9 @@ const CATALOGUE_REGION_CAPABILITIES = new Map(
     ...canadaTravelRegions.map((region) => region.travelRegionId),
   ].map((regionId) => [
     regionId,
-    { hasAlerts: false } satisfies PublishedRegionCapabilities,
+    {
+      hasAlerts: publishedSkiCatalogueRegions.some((region) => region.regionId === regionId),
+    } satisfies PublishedRegionCapabilities,
   ]),
 );
 

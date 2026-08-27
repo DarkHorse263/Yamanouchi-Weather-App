@@ -5,6 +5,8 @@ import { BellRing, Mail, Snowflake, Loader2, CheckCircle2, Sparkles } from "luci
 import { RegionCountryPicker } from "@/components/RegionCountryPicker";
 import { track } from "@/lib/analytics";
 import { classifyGateError, extractErrorMessage } from "@/lib/gateErrors";
+import { publishedRecords as alertCatalogueMountains } from "@workspace/ski-catalogue/public-runtime";
+import { CatalogueMountainPicker } from "@/components/CatalogueMountainPicker";
 
 /**
  * Powder-alert subscription form. Mounts inside any region's Alerts page.
@@ -156,9 +158,10 @@ const HORIZONS: Array<{ value: 24 | 48 | 72; label: string; labelJa: string }> =
 
 interface Props {
   defaultRegion?: string;
+  defaultMountain?: string;
 }
 
-export function AlertSubscribeForm({ defaultRegion }: Props) {
+export function AlertSubscribeForm({ defaultRegion, defaultMountain }: Props) {
   const { t } = useLanguage();
   const { isPromoPeriod, promoEndsAt } = usePremium();
   const { promptSignUp } = usePremiumAccess();
@@ -168,7 +171,14 @@ export function AlertSubscribeForm({ defaultRegion }: Props) {
   }, []);
 
   const [email, setEmail] = useState("");
-  const [regions, setRegions] = useState<string[]>(defaultRegion ? [defaultRegion] : []);
+  const [regions, setRegions] = useState<string[]>(
+    defaultRegion && ALERT_REGIONS.some((region) => region.id === defaultRegion) ? [defaultRegion] : [],
+  );
+  const [mountains, setMountains] = useState<string[]>(
+    defaultMountain && alertCatalogueMountains.some((record) => record.publicId === defaultMountain)
+      ? [defaultMountain]
+      : [],
+  );
   const [threshold, setThreshold] = useState(15);
   const [horizon, setHorizon] = useState<24 | 48 | 72>(48);
   const [consent, setConsent] = useState(false);
@@ -179,16 +189,19 @@ export function AlertSubscribeForm({ defaultRegion }: Props) {
   const toggleRegion = (id: string) => {
     setRegions((prev) => prev.includes(id) ? prev.filter((r) => r !== id) : [...prev, id]);
   };
+  const toggleMountain = (id: string) => {
+    setMountains((prev) => prev.includes(id) ? prev.filter((mountain) => mountain !== id) : [...prev, id]);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || regions.length === 0 || !consent) return;
+    if (!email || (regions.length === 0 && mountains.length === 0) || !consent) return;
     try {
       const result = await mutation.mutateAsync({
         data: {
           email,
           regions,
-          mountains: [],
+          mountains,
           snowfallThresholdCm: threshold,
           horizonHours: horizon,
           delivery: "email",
@@ -207,6 +220,7 @@ export function AlertSubscribeForm({ defaultRegion }: Props) {
         data: {
           region_count: regions.length,
           regions: regions.join(","),
+          mountain_count: mountains.length,
           threshold_cm: threshold,
           horizon_hours: horizon,
         },
@@ -238,7 +252,7 @@ export function AlertSubscribeForm({ defaultRegion }: Props) {
   const authRequired = gateError === "auth";
   const paymentRequired = gateError === "payment";
   const errMessage = gateError === "other" ? extractErrorMessage(mutation.error) : null;
-  const canSubmit = !!email && regions.length > 0 && consent && !mutation.isPending;
+  const canSubmit = !!email && (regions.length > 0 || mountains.length > 0) && consent && !mutation.isPending;
 
   return (
     <form id={formId} onSubmit={handleSubmit} className="rounded-2xl glass border border-border p-6 space-y-4">
@@ -282,6 +296,9 @@ export function AlertSubscribeForm({ defaultRegion }: Props) {
         </span>
         <div className="mt-1.5">
           <RegionCountryPicker selected={regions} onToggle={toggleRegion} variant="glass" />
+        </div>
+        <div className="mt-2">
+          <CatalogueMountainPicker selected={mountains} onToggle={toggleMountain} variant="glass" />
         </div>
       </div>
 

@@ -10,9 +10,8 @@ import type { SubscribeRequestHorizonHours } from "./subscribeRequestHorizonHour
 
 export interface SubscribeRequest {
   email: string;
-  /** @minItems 1 */
   regions: string[];
-  mountains?: string[];
+  mountains: string[];
   /**
    * @minimum 5
    * @maximum 50

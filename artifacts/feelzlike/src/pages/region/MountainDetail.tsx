@@ -1079,7 +1079,7 @@ export function MountainDetail() {
                   {t("Personalised triggers", "パーソナライズされたトリガー")}
                 </h2>
               </div>
-              <AlertSubscribeForm defaultRegion={region.id as any} />
+              <AlertSubscribeForm defaultRegion={region.id} defaultMountain={locationId} />
             </div>
           </PremiumGate>
         )}

@@ -6,7 +6,7 @@ import { issueToken, verifyToken, isTokenStillValid } from "../lib/alertTokens.j
 import { sendEmail } from "../lib/emailSender.js";
 import { verificationEmail } from "../lib/emailTemplates.js";
 import { getAppPublicUrl } from "../lib/appUrl.js";
-import { REGION_IDS, type RegionId } from "../lib/regions.js";
+import { normaliseAlertDestinations } from "../lib/regions.js";
 import { requireEntitlement } from "../middlewares/require-entitlement.js";
 
 const router: IRouter = Router();
@@ -20,14 +20,6 @@ const MAX_HORIZON = 72;
 
 function isValidEmail(s: unknown): s is string {
   return typeof s === "string" && s.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
-}
-function asRegions(value: unknown): RegionId[] {
-  if (!Array.isArray(value)) return [];
-  return value.filter((v): v is RegionId => typeof v === "string" && (REGION_IDS as readonly string[]).includes(v));
-}
-function asMountains(value: unknown): string[] {
-  if (!Array.isArray(value)) return [];
-  return value.filter((v): v is string => typeof v === "string" && /^[a-z0-9-]{1,80}$/.test(v));
 }
 function asThreshold(v: unknown): number {
   const n = Number(v);
@@ -128,9 +120,9 @@ router.post("/alerts/subscribe", requireEntitlement("alerts.snow"), async (req, 
     return;
   }
   const email = normaliseEmail(body["email"]);
-  const regions = asRegions(body["regions"]);
-  if (regions.length === 0) {
-    res.status(400).json({ error: "MISSING_REGIONS", message: "Pick at least one region." });
+  const { regions, mountains } = normaliseAlertDestinations(body["regions"], body["mountains"]);
+  if (regions.length === 0 && mountains.length === 0) {
+    res.status(400).json({ error: "MISSING_DESTINATIONS", message: "Pick at least one region or mountain." });
     return;
   }
   if (body["consent"] !== true) {
@@ -141,7 +133,7 @@ router.post("/alerts/subscribe", requireEntitlement("alerts.snow"), async (req, 
   const payload = {
     email,
     regions,
-    mountains: asMountains(body["mountains"]),
+    mountains,
     snowfallThresholdCm: asThreshold(body["snowfallThresholdCm"]),
     horizonHours: asHorizon(body["horizonHours"]),
     delivery: asDelivery(body["delivery"]),
@@ -291,14 +283,14 @@ router.put("/alerts/manage", async (req, res): Promise<void> => {
     return;
   }
   const body = schema.data as Record<string, unknown>;
-  const regions = asRegions(body["regions"]);
-  if (regions.length === 0) {
-    res.status(400).json({ error: "MISSING_REGIONS", message: "Pick at least one region." });
+  const { regions, mountains } = normaliseAlertDestinations(body["regions"], body["mountains"]);
+  if (regions.length === 0 && mountains.length === 0) {
+    res.status(400).json({ error: "MISSING_DESTINATIONS", message: "Pick at least one region or mountain." });
     return;
   }
   const update = {
     regions,
-    mountains: asMountains(body["mountains"]),
+    mountains,
     snowfallThresholdCm: asThreshold(body["snowfallThresholdCm"]),
     horizonHours: asHorizon(body["horizonHours"]),
     delivery: asDelivery(body["delivery"]),

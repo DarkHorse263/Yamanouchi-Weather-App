@@ -396,9 +396,8 @@ export const SubscribeRequestDelivery = {
 
 export interface SubscribeRequest {
   email: string;
-  /** @minItems 1 */
   regions: string[];
-  mountains?: string[];
+  mountains: string[];
   /**
    * @minimum 5
    * @maximum 50
@@ -483,9 +482,8 @@ export const UpdatePreferencesBodyDelivery = {
 } as const;
 
 export interface UpdatePreferencesBody {
-  /** @minItems 1 */
   regions: string[];
-  mountains?: string[];
+  mountains: string[];
   /**
    * @minimum 5
    * @maximum 50

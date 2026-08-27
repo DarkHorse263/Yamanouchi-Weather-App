@@ -1902,7 +1902,6 @@ components:
           type: array
           items:
             type: string
-          minItems: 1
         mountains:
           type: array
           items:
@@ -1925,6 +1924,7 @@ components:
       required:
         - email
         - regions
+        - mountains
         - consent
 
     SubscribeResponse:
@@ -2019,7 +2019,6 @@ components:
           type: array
           items:
             type: string
-          minItems: 1
         mountains:
           type: array
           items:
@@ -2038,6 +2037,7 @@ components:
           type: string
       required:
         - regions
+        - mountains
 
     UnsubscribeBody:
       type: object

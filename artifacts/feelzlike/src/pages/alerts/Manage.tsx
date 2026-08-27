@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useGetAlertPreferences, useUpdateAlertPreferences, useUnsubscribeFromAlerts } from "@workspace/api-client-react";
 import { Loader2, AlertTriangle, Save, Trash2, CheckCircle2, BellRing, BellOff } from "lucide-react";
 import { ensurePushSubscription, disablePushSubscription, pushSupportStatus, explainStatus } from "@/lib/pushSubscribe";
+import { CatalogueMountainPicker } from "@/components/CatalogueMountainPicker";
 
 /**
  * Subscription management page. Reached from the link in every alert email:
@@ -35,6 +36,7 @@ export default function Manage() {
   const unsub = useUnsubscribeFromAlerts();
 
   const [regions, setRegions] = useState<string[]>([]);
+  const [mountains, setMountains] = useState<string[]>([]);
   const [threshold, setThreshold] = useState(15);
   const [horizon, setHorizon] = useState<24 | 48 | 72>(48);
   const [delivery, setDelivery] = useState<"email" | "push" | "both">("email");
@@ -76,6 +78,7 @@ export default function Manage() {
   useEffect(() => {
     if (data?.subscriber) {
       setRegions(data.subscriber.regions);
+      setMountains(data.subscriber.mountains);
       setThreshold(data.subscriber.snowfallThresholdCm);
       setHorizon(data.subscriber.horizonHours as 24 | 48 | 72);
       setDelivery(data.subscriber.delivery as "email" | "push" | "both");
@@ -112,13 +115,13 @@ export default function Manage() {
   };
 
   const handleSave = async () => {
-    if (regions.length === 0) return;
+    if (regions.length === 0 && mountains.length === 0) return;
     try {
       await update.mutateAsync({
         params: { token },
         data: {
           regions,
-          mountains: sub.mountains,
+          mountains,
           snowfallThresholdCm: threshold,
           horizonHours: horizon,
           delivery,
@@ -164,6 +167,14 @@ export default function Manage() {
               );
             })}
           </div>
+        </Section>
+
+        <Section title="Mountains">
+          <CatalogueMountainPicker
+            selected={mountains}
+            onToggle={(id) => setMountains((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id])}
+            variant="glass"
+          />
         </Section>
 
         <Section title="Snowfall threshold" trailing={<span className="text-sm font-black text-primary tabular-nums">{threshold} cm</span>}>
@@ -227,7 +238,7 @@ export default function Manage() {
         <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-border">
           <button
             onClick={handleSave}
-            disabled={regions.length === 0 || update.isPending}
+            disabled={(regions.length === 0 && mountains.length === 0) || update.isPending}
             className="flex-1 rounded-lg bg-primary text-primary-foreground font-bold text-sm py-3 hover:bg-primary/90 disabled:opacity-50 flex items-center justify-center gap-2"
           >
             {update.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}

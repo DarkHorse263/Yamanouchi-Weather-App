@@ -24,6 +24,7 @@ import type { AccountResponse } from "@workspace/api-client-react";
 import { useAuthAccount } from "@/components/auth/SignUpProvider";
 import { ALERT_REGIONS } from "@/components/AlertSubscribeForm";
 import { RegionCountryPicker } from "@/components/RegionCountryPicker";
+import { CatalogueMountainPicker } from "@/components/CatalogueMountainPicker";
 
 function SignOutButton() {
   const { signOut } = useClerk();
@@ -408,6 +409,7 @@ function AlertsCard({ subscription, onChanged }: { subscription: Subscription; o
   const sub = subscription && typeof subscription === "object" ? subscription : null;
 
   const [regions, setRegions] = useState<string[]>(sub?.regions ?? []);
+  const [mountains, setMountains] = useState<string[]>(sub?.mountains ?? []);
   const [threshold, setThreshold] = useState<number>(sub?.snowfallThresholdCm ?? 15);
   const [horizon, setHorizon] = useState<24 | 48 | 72>((sub?.horizonHours as 24 | 48 | 72) ?? 48);
   const [savedAt, setSavedAt] = useState<number | null>(null);
@@ -446,12 +448,12 @@ function AlertsCard({ subscription, onChanged }: { subscription: Subscription; o
   };
 
   const handleSave = async () => {
-    if (regions.length === 0) return;
+    if (regions.length === 0 && mountains.length === 0) return;
     try {
       await update.mutateAsync({
         data: {
           regions,
-          mountains: sub.mountains,
+          mountains,
           snowfallThresholdCm: threshold,
           horizonHours: horizon,
           delivery: sub.delivery,
@@ -481,6 +483,15 @@ function AlertsCard({ subscription, onChanged }: { subscription: Subscription; o
       <div>
         <p className="text-sm font-bold text-foreground mb-2">regions</p>
         <RegionCountryPicker selected={regions} onToggle={toggleRegion} variant="light" />
+      </div>
+
+      <div>
+        <p className="text-sm font-bold text-foreground mb-2">mountains</p>
+        <CatalogueMountainPicker
+          selected={mountains}
+          onToggle={(id) => setMountains((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id])}
+          variant="light"
+        />
       </div>
 
       <div>
@@ -530,7 +541,7 @@ function AlertsCard({ subscription, onChanged }: { subscription: Subscription; o
         <button
           type="button"
           onClick={handleSave}
-          disabled={regions.length === 0 || update.isPending}
+          disabled={(regions.length === 0 && mountains.length === 0) || update.isPending}
           className="rounded-lg bg-primary text-primary-foreground font-bold text-sm px-4 py-2.5 hover:bg-primary/90 disabled:opacity-50 inline-flex items-center gap-2"
         >
           {update.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
