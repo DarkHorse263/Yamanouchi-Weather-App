@@ -812,7 +812,7 @@ const USA: Record<string, MountainWebcam[]> = {
     { id: "mt-shasta-ski-park-official", mountainId: "mt-shasta-ski-park", name: "Mt. Shasta mountain cams", description: "Official winter mountain cams.", embedType: "external", pageUrl: "https://www.skipark.com/winter/mountain-cams", source: "Mt. Shasta Ski Park", verifiedAt: USA_VERIFIED },
   ],
   "alyeska-resort": [
-    { id: "alyeska-resort-official", mountainId: "alyeska-resort", name: "Alyeska live cams", description: "Official cams from the hotel to the upper tram.", embedType: "external", pageUrl: "https://www.alyeskaresort.com/live-cams/", source: "Alyeska Resort", verifiedAt: USA_VERIFIED },
+    { id: "alyeska-resort-official", mountainId: "alyeska-resort", name: "Alyeska live cams", description: "Official cams from the hotel to the upper tram.", embedType: "external", pageUrl: "https://www.alyeskaresort.com/webcams/", source: "Alyeska Resort", verifiedAt: USA_VERIFIED },
   ],
   "eaglecrest-ski-area": [
     { id: "eaglecrest-official", mountainId: "eaglecrest-ski-area", name: "Eaglecrest conditions & cams", description: "Official cams on the conditions page.", embedType: "external", pageUrl: "https://skieaglecrest.com/conditions/", source: "Eaglecrest Ski Area", verifiedAt: USA_VERIFIED },

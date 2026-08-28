@@ -1,0 +1,407 @@
+Received: from ME0P282MB4423.AUSP282.PROD.OUTLOOK.COM (2603:10c6:220:220::19)
+ by SY5P282MB4686.AUSP282.PROD.OUTLOOK.COM with HTTPS; Fri, 28 Aug 2026
+ 20:06:03 +0000
+Received: from SY4P282CA0002.AUSP282.PROD.OUTLOOK.COM (2603:10c6:10:a0::12) by
+ ME0P282MB4423.AUSP282.PROD.OUTLOOK.COM (2603:10c6:220:220::19) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.360.11; Fri, 28 Aug 2026 20:06:00 +0000
+Received: from SY3PEPF0000A725.ausprd01.prod.outlook.com
+ (2603:10c6:10:a0:cafe::ad) by SY4P282CA0002.outlook.office365.com
+ (2603:10c6:10:a0::12) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.360.11 via Frontend Transport; Fri,
+ 28 Aug 2026 20:06:00 +0000
+Authentication-Results: spf=pass (sender IP is 23.251.234.56)
+ smtp.mailfrom=send.feelzlike.com; dkim=pass (signature was verified)
+ header.d=feelzlike.com;dkim=pass (signature was verified)
+ header.d=amazonses.com;dmarc=pass action=none
+ header.from=feelzlike.com;compauth=pass reason=100
+Received-SPF: Pass (protection.outlook.com: domain of send.feelzlike.com
+ designates 23.251.234.56 as permitted sender)
+ receiver=protection.outlook.com; client-ip=23.251.234.56;
+ helo=e234-56.smtp-out.ap-northeast-1.amazonses.com; pr=C
+Received: from e234-56.smtp-out.ap-northeast-1.amazonses.com (23.251.234.56)
+ by SY3PEPF0000A725.mail.protection.outlook.com (10.167.241.21) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.382.8
+ via Frontend Transport; Fri, 28 Aug 2026 20:05:59 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; s=resend;
+	d=feelzlike.com; t=1787947557;
+	h=From:To:Reply-To:Subject:Message-ID:Date:MIME-Version:Content-Type;
+	bh=iihMDvCdr5BXYIpWkZHT0H53xaK3n3eAnkqNtDDhPaY=;
+	b=I4x6UNg/8j/FVeNWcK1n25nvPxtYKueAYrThtf6+HJk2Z+UERjTboEEFD39Ssjoh
+	j+QkzjPg9pit66Mw+Xe2+/IfjdlvliwCTddRpT9mQ4JVAiuPWNGJ3U8A1R8i6P+b+3A
+	B2lUnWAQbw53qkGOrM/AxxB8+fP2SAw4NmZTFczM=
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=zh4gjftm6etwoq6afzugpky45synznly; d=amazonses.com; t=1787947557;
+	h=From:To:Reply-To:Subject:Message-ID:Date:MIME-Version:Content-Type:Feedback-ID;
+	bh=iihMDvCdr5BXYIpWkZHT0H53xaK3n3eAnkqNtDDhPaY=;
+	b=SmMA3uawwqNZxY7TE8aW2L8AIe2S2sXWl6UROWcXjb7BwoyZ7yeERYS/TdxZnmUb
+	M5hrkQgBdqKrSc7iqzdVMXITs5wtCa1lzGccbbrWE3xztJTJpEULOolPzB8GhmWQV/x
+	7TnyMxoO4zZ1RJBOzeBcJV/UR75xhZ42cuCNZOic=
+From: feelzlike <info@feelzlike.com>
+To: james@navigatework.com.au
+Reply-To: info@feelzlike.com
+Subject: =?UTF-8?Q?feelzlike_daily_check_=C2=B7_437_problem?=
+ =?UTF-8?Q?s_found?=
+Message-ID: <010601a049faa237-617e2f29-aefc-45df-b0ef-f29a76671dd2-000000@ap-northeast-1.amazonses.com>
+Date: Fri, 28 Aug 2026 20:05:57 +0000
+Content-Type: multipart/alternative;
+ boundary="--_NmP-647735401e477c14-Part_1"
+Feedback-ID: :1.ap-northeast-1.rJqblb2iiX4g90ekhj071PGlKr4Rq1tDgsmgGXn+kyRER5FNqbzLLE2wvhuLcBtUCGkSbZuHyzEd23ZWQPLRCTbD+e6Y2o4Nmrd8W8/LZLhZGW2OiQrKc9JZLumem3RLOmQ9jDX7Ic1/Owf8jvk+NumZBEUfAbEdz+MOwk7cO9Vn62y/ZPOD8Ic+VjH+pyoh:1.ap-northeast-1.RirEgqlsQndpFdi8TUL4OAg2i1Pw380m+rTe2cbKEVU=:AmazonSES
+X-SES-Outgoing: 2026.08.28-23.251.234.56
+Return-Path: 010601a049faa237-617e2f29-aefc-45df-b0ef-f29a76671dd2-000000@send.feelzlike.com
+X-MS-Exchange-Organization-ExpirationStartTime: 28 Aug 2026 20:05:59.8199
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: c8f4b42c-15db-46a3-89f5-08df053fc782
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: febefc03-2be7-43ba-af66-5490103dee38:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SY3PEPF0000A725:EE_|ME0P282MB4423:EE_|SY5P282MB4686:EE_
+X-MS-Exchange-Organization-AuthSource: SY3PEPF0000A725.ausprd01.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id: c8f4b42c-15db-46a3-89f5-08df053fc782
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Antispam: BCL:0;ARA:13230040|704161211799003|7049299003|3109299003|69100299015|32142699015|7149299003|4113699003|18002099003|57112099003|5023799004|13003099007|5063699009|8096899003|4076899003|19002099009|10067099003|43062017;
+X-Forefront-Antispam-Report: CIP:23.251.234.56;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:e234-56.smtp-out.ap-northeast-1.amazonses.com;PTR:e234-56.smtp-out.ap-northeast-1.amazonses.com;CAT:NONE;SFS:(13230040)(704161211799003)(7049299003)(3109299003)(69100299015)(32142699015)(7149299003)(4113699003)(18002099003)(57112099003)(5023799004)(13003099007)(5063699009)(8096899003)(4076899003)(19002099009)(10067099003)(43062017);DIR:INB;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Aug 2026 20:05:59.3792
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c8f4b42c-15db-46a3-89f5-08df053fc782
+X-MS-Exchange-CrossTenant-Id: febefc03-2be7-43ba-af66-5490103dee38
+X-MS-Exchange-CrossTenant-AuthSource: SY3PEPF0000A725.ausprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ME0P282MB4423
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:03.7515548
+X-MS-Exchange-Processed-By-BccFoldering: 15.21.0360.006
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(910005)(944506478)(944626604)(920097)(930201)(20251009189)(140003);
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?TmRmek1GOGE0NWFSVEo0c21aZ0dJdUtqVWp4bUhFVWJBcmZRcnBoZi93dStG?=
+ =?utf-8?B?YjhlbEl3SGNQWlN0OUxwOG9lQStkMG82VlFVdEZDN3ZUNTFkVE9qbU1iZ2dh?=
+ =?utf-8?B?LzExOCtFYnh1amdjN3VIY1cvRmM1aGRxdHNqVUUrNXBnL0doWGpnM0NqWmRK?=
+ =?utf-8?B?b0FPTXY2bzJPRU1uZUNJZm95UC9SYytnVmVONDlCMHpCVlppY0pidGwxNWd6?=
+ =?utf-8?B?UEhmMFlRK25mY2wzazNIcnZoZ2ptYXVtT3RrNXFYdUtwOUk2OGpIZm9aZkpW?=
+ =?utf-8?B?b0VCQlVJeVpVWnVCVGkwaFdzTkdiY29KdTB1U1RhZzhFU2tqMytkNDkrT3lR?=
+ =?utf-8?B?NFp1akR6RlB1cU9ldm1nVm1qQTd3OTBYd1RXMmJEMEcxNi9tZDZPc3NkdWdv?=
+ =?utf-8?B?eGhVYVdrTTRtOVpVUTUwL2pFMzRkeXZjcUJDTlhaMW5YYWlRLzY3Z25ZMElr?=
+ =?utf-8?B?TFVNNmtpaXNzRnQ0UmtqaSt5bHkrcjNOUjFqUDgzdHJGbGVzWHRkYTR5ejR3?=
+ =?utf-8?B?VzIzTzd5VERGVVFPQ1gySkZhYkFnSDdCZXV2M0dnQjFxaC84TDZ1TGxJd0JK?=
+ =?utf-8?B?N0UzL2VUdEdwbkxxS0U3bUZyV1VRUk5VMUZWTzl5VVdSZEtnZGUvVHFCZm4v?=
+ =?utf-8?B?Q2NxaVBtSzNFTitEQWFZMnFvcUc2aVJBdGhzanZwWmlxLzhRR1hUcytyVEJN?=
+ =?utf-8?B?eWw2M01GcGF1SjI1L1NIa3MrNit0SjhEOW9DK2JvRC8zSWpML3JsSlFHNm9q?=
+ =?utf-8?B?YnhCMzgyMVd6ZGJVblJzZURLUzRIeVR6Ni9WWFJoZHc2TjBUaUNTSXFLOTRR?=
+ =?utf-8?B?bXVMb1c1R1VGUXl0MkRNSnM0MDZBNHlwUDlNRjZzTHJvRVhiZ0ZyN25vamJS?=
+ =?utf-8?B?cHRIbVgrZWtPWkJqMzVwS3JzZTJYK2RMQVNKRmdjNlRHVEw3eUppL0JkR0oz?=
+ =?utf-8?B?dDU1NjVrZ2NlTGVQRml4NS9ZcTQzVHhwSmlkd1dJSTBhbFZDYzM2TlVPTExZ?=
+ =?utf-8?B?eEF3ZmZMa3JGdkZOSFF3VlJzUmlSOUlKZ3VnNzlOWUxiSlVtNDB6RndZcjRK?=
+ =?utf-8?B?STAzTW9LSEEydTc4K1Z1V25aZEZqSDBsRk4xVlVJemowUGZraU0rQ1ZMZ3NC?=
+ =?utf-8?B?ckVYMGEyM3J5djRPeWJrZHIvOUl1V0NOUXVETkJZeERRSkxoVEROY2ZORG1a?=
+ =?utf-8?B?QzhnVXlxS0R3WWpCTmFLTkF0cTl1Wi9acXlaUCtCcEhpQW45QUcyRzZrM3Bk?=
+ =?utf-8?B?Vk14eDFlaWZjMFdqK0xHSXZ4OXlLSHgvTEJzRXVCazdVNW1EQzl5OU1ETkt4?=
+ =?utf-8?B?c3hMbmk1L2QrQ28yM211YkhlY1oycXRhbExHbkJMeDZvemFwSU1ybDhjaVMv?=
+ =?utf-8?B?dHgzRUZpOHJLZFI2ZkxDRWVxUFlWazNQUnMvY1diMk94YkJVNk1DNXVwQitY?=
+ =?utf-8?B?UzhvWE1mUE82OUtNNnovUWsrdUo2V0Q4bHV5RVBTQzRMVUY5T0FJbnc4dits?=
+ =?utf-8?B?c1VRYzJjZ1pJMlRhdEJDYlFBZW1ua2szZmhueXRVUGxFL01sWFNHKzVUL2xE?=
+ =?utf-8?B?NUF4WFdhNE9WQ3RmZnlmVU9DRDkwcW9rZkdPUEZCZDRhNWx3cmZ3Qjg5dGl3?=
+ =?utf-8?B?ZE54OXFOSnRkb1BXS0pYTEpUYWppaUtrMjFxU1NDRmw5WWRhZmVCWExHNFRG?=
+ =?utf-8?B?SWl2WUp1WnpEc3VKOFRqZGlnWTk4eEVUSURHYTVWb3RITWc5K3dPVzdJTS9L?=
+ =?utf-8?B?THNnU1Ywb3FFQklhVXA0UE40N0Z4VnBVc09USG9pN3hTKzczYVNQZmYzSjhi?=
+ =?utf-8?Q?MYG+LCVwKvR6ebuhhrrCkvUP+GXuTgBPeADKo=3D?=
+MIME-Version: 1.0
+
+----_NmP-647735401e477c14-Part_1
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+this morning's automated check of feelzlike.com found 437 problems.
+
+pages serving the wrong content (435):
+  https://feelzlike.=
+com/canada-ontario/ - canonical points at https://feelzlike.com/ - page is =
+being served the wrong snapshot (rewrite regression)
+  https://feelzlike.com/canada-ontario/mountains/ - canonical points at =
+https://feelzlike.com/ - page is being served the wrong snapshot (rewrite =
+regression)
+  https://feelzlike.com/canada-ontario/alerts/ - canonical =
+points at https://feelzlike.com/ - page is being served the wrong snapshot =
+(rewrite regression)
+  https://feelzlike.com/canada-ontario/mountain/blue-m=
+ountain-resort/ - canonical points at https://feelzlike.com/ - page is =
+being served the wrong snapshot (rewrite regression)
+  https://feelzlike.com/canada-ontario/mountain/mount-st-louis-moonstone/ -=
+ canonical points at https://feelzlike.com/ - page is being served the =
+wrong snapshot (rewrite regression)
+  https://feelzlike.=
+com/canada-ontario/mountain/searchmont-resort/ - canonical points at =
+https://feelzlike.com/ - page is being served the wrong snapshot (rewrite =
+regression)
+  https://feelzlike.com/canada-ontario/mountain/horseshoe-resor=
+t/ - canonical points at https://feelzlike.com/ - page is being served the =
+wrong snapshot (rewrite regression)
+  https://feelzlike.=
+com/canada-ontario/stay/ - canonical points at https://feelzlike.com/ - =
+page is being served the wrong snapshot (rewrite regression)
+  https://feelzlike.com/canada-ontario/mountain/snow-valley-ski-resort/ - =
+canonical points at https://feelzlike.com/ - page is being served the wrong=
+ snapshot (rewrite regression)
+  https://feelzlike.com/canada-ontario/mount=
+ain/calabogie-peaks-resort/ - canonical points at https://feelzlike.com/ - =
+page is being served the wrong snapshot (rewrite regression)
+  https://feelzlike.com/canada-ontario/mountain/hockley-valley-resort/ - =
+canonical points at https://feelzlike.com/ - page is being served the wrong=
+ snapshot (rewrite regression)
+  https://feelzlike.com/canada-ontario/mount=
+ain/mount-pakenham/ - canonical points at https://feelzlike.com/ - page is =
+being served the wrong snapshot (rewrite regression)
+  https://feelzlike.com/canada-ontario/mountain/lakeridge-ski-resort/ - =
+canonical points at https://feelzlike.com/ - page is being served the wrong=
+ snapshot (rewrite regression)
+  https://feelzlike.com/canada-ontario/mount=
+ain/boler-mountain/ - canonical points at https://feelzlike.com/ - page is =
+being served the wrong snapshot (rewrite regression)
+  https://feelzlike.com/canada-ontario/mountain/glen-eden/ - canonical =
+points at https://feelzlike.com/ - page is being served the wrong snapshot =
+(rewrite regression)
+  https://feelzlike.com/canada-ontario/mountain/chicop=
+ee/ - canonical points at https://feelzlike.com/ - page is being served the=
+ wrong snapshot (rewrite regression)
+  https://feelzlike.=
+com/canada-ontario/mountain/hidden-valley-highlands-ski-area/ - canonical =
+points at https://feelzlike.com/ - page is being served the wrong snapshot =
+(rewrite regression)
+  https://feelzlike.com/canada-ontario/mountain/sir-sa=
+m-s-ski-ride/ - canonical points at https://feelzlike.com/ - page is being =
+served the wrong snapshot (rewrite regression)
+  https://feelzlike.=
+com/canada-ontario/mountain/antoine-mountain/ - canonical points at =
+https://feelzlike.com/ - page is being served the wrong snapshot (rewrite =
+regression)
+  https://feelzlike.com/canada-ontario/mountain/brimacombe/ - =
+canonical points at https://feelzlike.com/ - page is being served the wrong=
+ snapshot (rewrite regression)
+  https://feelzlike.com/canada-ontario/mount=
+ain/dagmar-ski-resort/ - canonical points at https://feelzlike.com/ - page =
+is being served the wrong snapshot (rewrite regression)
+  https://feelzlike.com/canada-ontario/mountain/mount-chinguacousy-ski-and-=
+snowboard-hill/ - canonical points at https://feelzlike.com/ - page is =
+being served the wrong snapshot (rewrite regression)
+  https://feelzlike.com/canada-ontario/mountain/adanac-ski-hill/ - =
+canonical points at https://feelzlike.com/ - page is being served the wrong=
+ snapshot (rewrite regression)
+  https://feelzlike.com/canada-ontario/mount=
+ain/loch-lomond-ski-area/ - canonical points at https://feelzlike.com/ - =
+page is being served the wrong snapshot (rewrite regression)
+  https://feelzlike.com/canada-ontario/mountain/batawa-ski-hill/ - =
+canonical points at https://feelzlike.com/ - page is being served the wrong=
+ snapshot (rewrite regression)
+  ...and 410 more
+
+unreachable outbound =
+links (1):
+  https://tourismjasper.com/ - fetch failed (ECONNRESET) (failed=
+ twice)
+
+dead outbound links (1):
+  https://www.alyeskaresort.=
+com/live-cams/ - HTTP 404 (failed twice)
+
+
+----_NmP-647735401e477c14-Part_1
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html><html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8"><m=
+eta name=3D"viewport" content=3D"width=3Ddevice-width,initial-scale=3D1"><t=
+itle>daily site check =C2=B7 problems found</title></head>
+<body style=3D"margin:0;padding:0;background:#f0f6fc;font-family:-apple-sys=
+tem,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#=
+0a1628;">
+  <span style=3D"display:none!important;visibility:hidden;opacity:0;color:t=
+ransparent;height:0;width:0;font-size:1px;line-height:1px;">437 problems fo=
+und on feelzlike.com</span>
+  <table role=3D"presentation" cellpadding=3D"0" cellspacing=3D"0" border=
+=3D"0" width=3D"100%" style=3D"background:#f0f6fc;padding:24px 0;">
+    <tr><td align=3D"center">
+      <table role=3D"presentation" cellpadding=3D"0" cellspacing=3D"0" bord=
+er=3D"0" width=3D"560" style=3D"max-width:560px;background:#fff;border-radi=
+us:12px;overflow:hidden;box-shadow:0 1px 3px rgba(10,22,40,0.06);">
+        <tr><td align=3D"center" style=3D"background:#ffffff;padding:28px 3=
+2px 20px 32px;">
+          <img src=3D"https://feelzlike.com/branding/wordmark-inline.png" w=
+idth=3D"190" height=3D"46" alt=3D"feelzlike" style=3D"display:block;width:1=
+90px;height:auto;border:0;">
+          <div style=3D"font-family:-apple-system,BlinkMacSystemFont,'Segoe=
+ UI',Roboto,Helvetica,Arial,sans-serif;font-size:11px;color:#64748b;text-tr=
+ansform:lowercase;letter-spacing:0.14em;margin-top:10px;">real conditions f=
+or mountain travel</div>
+        </td></tr>
+        <tr><td style=3D"padding:0;font-size:0;line-height:0;">
+          <table role=3D"presentation" cellpadding=3D"0" cellspacing=3D"0" =
+border=3D"0" width=3D"100%"><tr>
+            <td width=3D"70%" style=3D"height:4px;background:#0c75df;font-s=
+ize:0;line-height:0;">&nbsp;</td>
+            <td width=3D"30%" style=3D"height:4px;background:#ec008c;font-s=
+ize:0;line-height:0;">&nbsp;</td>
+          </tr></table>
+        </td></tr>
+        <tr><td style=3D"padding:32px;">
+          <h1 style=3D"font-family:-apple-system,BlinkMacSystemFont,'Segoe =
+UI',Roboto,Helvetica,Arial,sans-serif;font-size:22px;font-weight:800;color:=
+#0a1628;margin:0 0 16px 0;line-height:1.25;text-transform:lowercase;">daily=
+ site check =C2=B7 problems found</h1>
+          <div style=3D"font-size:15px;line-height:1.6;color:#334155;"><p>t=
+his morning's automated check of <strong>feelzlike.com</strong> found 437 p=
+roblems. everything else passed (2723 pages, 1113 outbound links checked).<=
+/p><h3 style=3D"font-size:14px;text-transform:lowercase;margin:20px 0 8px 0=
+;">pages serving the wrong content (435)</h3><ul style=3D"margin:0;padding-=
+left:18px;"><li style=3D"margin:4px 0;word-break:break-all;"><a href=3D"htt=
+ps://feelzlike.com/canada-ontario/" style=3D"color:#0c75df;">https://feelzl=
+ike.com/canada-ontario/</a> - canonical points at https://feelzlike.com/ - =
+page is being served the wrong snapshot (rewrite regression)</li><li style=
+=3D"margin:4px 0;word-break:break-all;"><a href=3D"https://feelzlike.com/ca=
+nada-ontario/mountains/" style=3D"color:#0c75df;">https://feelzlike.com/can=
+ada-ontario/mountains/</a> - canonical points at https://feelzlike.com/ - p=
+age is being served the wrong snapshot (rewrite regression)</li><li style=
+=3D"margin:4px 0;word-break:break-all;"><a href=3D"https://feelzlike.com/ca=
+nada-ontario/alerts/" style=3D"color:#0c75df;">https://feelzlike.com/canada=
+-ontario/alerts/</a> - canonical points at https://feelzlike.com/ - page is=
+ being served the wrong snapshot (rewrite regression)</li><li style=3D"marg=
+in:4px 0;word-break:break-all;"><a href=3D"https://feelzlike.com/canada-ont=
+ario/mountain/blue-mountain-resort/" style=3D"color:#0c75df;">https://feelz=
+like.com/canada-ontario/mountain/blue-mountain-resort/</a> - canonical poin=
+ts at https://feelzlike.com/ - page is being served the wrong snapshot (rew=
+rite regression)</li><li style=3D"margin:4px 0;word-break:break-all;"><a hr=
+ef=3D"https://feelzlike.com/canada-ontario/mountain/mount-st-louis-moonston=
+e/" style=3D"color:#0c75df;">https://feelzlike.com/canada-ontario/mountain/=
+mount-st-louis-moonstone/</a> - canonical points at https://feelzlike.com/ =
+- page is being served the wrong snapshot (rewrite regression)</li><li styl=
+e=3D"margin:4px 0;word-break:break-all;"><a href=3D"https://feelzlike.com/c=
+anada-ontario/mountain/searchmont-resort/" style=3D"color:#0c75df;">https:/=
+/feelzlike.com/canada-ontario/mountain/searchmont-resort/</a> - canonical p=
+oints at https://feelzlike.com/ - page is being served the wrong snapshot (=
+rewrite regression)</li><li style=3D"margin:4px 0;word-break:break-all;"><a=
+ href=3D"https://feelzlike.com/canada-ontario/mountain/horseshoe-resort/" s=
+tyle=3D"color:#0c75df;">https://feelzlike.com/canada-ontario/mountain/horse=
+shoe-resort/</a> - canonical points at https://feelzlike.com/ - page is bei=
+ng served the wrong snapshot (rewrite regression)</li><li style=3D"margin:4=
+px 0;word-break:break-all;"><a href=3D"https://feelzlike.com/canada-ontario=
+/stay/" style=3D"color:#0c75df;">https://feelzlike.com/canada-ontario/stay/=
+</a> - canonical points at https://feelzlike.com/ - page is being served th=
+e wrong snapshot (rewrite regression)</li><li style=3D"margin:4px 0;word-br=
+eak:break-all;"><a href=3D"https://feelzlike.com/canada-ontario/mountain/sn=
+ow-valley-ski-resort/" style=3D"color:#0c75df;">https://feelzlike.com/canad=
+a-ontario/mountain/snow-valley-ski-resort/</a> - canonical points at https:=
+//feelzlike.com/ - page is being served the wrong snapshot (rewrite regress=
+ion)</li><li style=3D"margin:4px 0;word-break:break-all;"><a href=3D"https:=
+//feelzlike.com/canada-ontario/mountain/calabogie-peaks-resort/" style=3D"c=
+olor:#0c75df;">https://feelzlike.com/canada-ontario/mountain/calabogie-peak=
+s-resort/</a> - canonical points at https://feelzlike.com/ - page is being =
+served the wrong snapshot (rewrite regression)</li><li style=3D"margin:4px =
+0;word-break:break-all;"><a href=3D"https://feelzlike.com/canada-ontario/mo=
+untain/hockley-valley-resort/" style=3D"color:#0c75df;">https://feelzlike.c=
+om/canada-ontario/mountain/hockley-valley-resort/</a> - canonical points at=
+ https://feelzlike.com/ - page is being served the wrong snapshot (rewrite =
+regression)</li><li style=3D"margin:4px 0;word-break:break-all;"><a href=3D=
+"https://feelzlike.com/canada-ontario/mountain/mount-pakenham/" style=3D"co=
+lor:#0c75df;">https://feelzlike.com/canada-ontario/mountain/mount-pakenham/=
+</a> - canonical points at https://feelzlike.com/ - page is being served th=
+e wrong snapshot (rewrite regression)</li><li style=3D"margin:4px 0;word-br=
+eak:break-all;"><a href=3D"https://feelzlike.com/canada-ontario/mountain/la=
+keridge-ski-resort/" style=3D"color:#0c75df;">https://feelzlike.com/canada-=
+ontario/mountain/lakeridge-ski-resort/</a> - canonical points at https://fe=
+elzlike.com/ - page is being served the wrong snapshot (rewrite regression)=
+</li><li style=3D"margin:4px 0;word-break:break-all;"><a href=3D"https://fe=
+elzlike.com/canada-ontario/mountain/boler-mountain/" style=3D"color:#0c75df=
+;">https://feelzlike.com/canada-ontario/mountain/boler-mountain/</a> - cano=
+nical points at https://feelzlike.com/ - page is being served the wrong sna=
+pshot (rewrite regression)</li><li style=3D"margin:4px 0;word-break:break-a=
+ll;"><a href=3D"https://feelzlike.com/canada-ontario/mountain/glen-eden/" s=
+tyle=3D"color:#0c75df;">https://feelzlike.com/canada-ontario/mountain/glen-=
+eden/</a> - canonical points at https://feelzlike.com/ - page is being serv=
+ed the wrong snapshot (rewrite regression)</li><li style=3D"margin:4px 0;wo=
+rd-break:break-all;"><a href=3D"https://feelzlike.com/canada-ontario/mounta=
+in/chicopee/" style=3D"color:#0c75df;">https://feelzlike.com/canada-ontario=
+/mountain/chicopee/</a> - canonical points at https://feelzlike.com/ - page=
+ is being served the wrong snapshot (rewrite regression)</li><li style=3D"m=
+argin:4px 0;word-break:break-all;"><a href=3D"https://feelzlike.com/canada-=
+ontario/mountain/hidden-valley-highlands-ski-area/" style=3D"color:#0c75df;=
+">https://feelzlike.com/canada-ontario/mountain/hidden-valley-highlands-ski=
+-area/</a> - canonical points at https://feelzlike.com/ - page is being ser=
+ved the wrong snapshot (rewrite regression)</li><li style=3D"margin:4px 0;w=
+ord-break:break-all;"><a href=3D"https://feelzlike.com/canada-ontario/mount=
+ain/sir-sam-s-ski-ride/" style=3D"color:#0c75df;">https://feelzlike.com/can=
+ada-ontario/mountain/sir-sam-s-ski-ride/</a> - canonical points at https://=
+feelzlike.com/ - page is being served the wrong snapshot (rewrite regressio=
+n)</li><li style=3D"margin:4px 0;word-break:break-all;"><a href=3D"https://=
+feelzlike.com/canada-ontario/mountain/antoine-mountain/" style=3D"color:#0c=
+75df;">https://feelzlike.com/canada-ontario/mountain/antoine-mountain/</a> =
+- canonical points at https://feelzlike.com/ - page is being served the wro=
+ng snapshot (rewrite regression)</li><li style=3D"margin:4px 0;word-break:b=
+reak-all;"><a href=3D"https://feelzlike.com/canada-ontario/mountain/brimaco=
+mbe/" style=3D"color:#0c75df;">https://feelzlike.com/canada-ontario/mountai=
+n/brimacombe/</a> - canonical points at https://feelzlike.com/ - page is be=
+ing served the wrong snapshot (rewrite regression)</li><li style=3D"margin:=
+4px 0;word-break:break-all;"><a href=3D"https://feelzlike.com/canada-ontari=
+o/mountain/dagmar-ski-resort/" style=3D"color:#0c75df;">https://feelzlike.c=
+om/canada-ontario/mountain/dagmar-ski-resort/</a> - canonical points at htt=
+ps://feelzlike.com/ - page is being served the wrong snapshot (rewrite regr=
+ession)</li><li style=3D"margin:4px 0;word-break:break-all;"><a href=3D"htt=
+ps://feelzlike.com/canada-ontario/mountain/mount-chinguacousy-ski-and-snowb=
+oard-hill/" style=3D"color:#0c75df;">https://feelzlike.com/canada-ontario/m=
+ountain/mount-chinguacousy-ski-and-snowboard-hill/</a> - canonical points a=
+t https://feelzlike.com/ - page is being served the wrong snapshot (rewrite=
+ regression)</li><li style=3D"margin:4px 0;word-break:break-all;"><a href=
+=3D"https://feelzlike.com/canada-ontario/mountain/adanac-ski-hill/" style=
+=3D"color:#0c75df;">https://feelzlike.com/canada-ontario/mountain/adanac-sk=
+i-hill/</a> - canonical points at https://feelzlike.com/ - page is being se=
+rved the wrong snapshot (rewrite regression)</li><li style=3D"margin:4px 0;=
+word-break:break-all;"><a href=3D"https://feelzlike.com/canada-ontario/moun=
+tain/loch-lomond-ski-area/" style=3D"color:#0c75df;">https://feelzlike.com/=
+canada-ontario/mountain/loch-lomond-ski-area/</a> - canonical points at htt=
+ps://feelzlike.com/ - page is being served the wrong snapshot (rewrite regr=
+ession)</li><li style=3D"margin:4px 0;word-break:break-all;"><a href=3D"htt=
+ps://feelzlike.com/canada-ontario/mountain/batawa-ski-hill/" style=3D"color=
+:#0c75df;">https://feelzlike.com/canada-ontario/mountain/batawa-ski-hill/</=
+a> - canonical points at https://feelzlike.com/ - page is being served the =
+wrong snapshot (rewrite regression)</li><li style=3D"margin:4px 0;color:#64=
+748b;">=E2=80=A6and 410 more</li></ul><h3 style=3D"font-size:14px;text-tran=
+sform:lowercase;margin:20px 0 8px 0;">unreachable outbound links (1)</h3><u=
+l style=3D"margin:0;padding-left:18px;"><li style=3D"margin:4px 0;word-brea=
+k:break-all;"><a href=3D"https://tourismjasper.com/" style=3D"color:#0c75df=
+;">https://tourismjasper.com/</a> - fetch failed (ECONNRESET) (failed twice=
+) <span style=3D"color:#64748b;">=C2=B7 used in src/regions/jasper.ts</span=
+></li></ul><h3 style=3D"font-size:14px;text-transform:lowercase;margin:20px=
+ 0 8px 0;">dead outbound links (1)</h3><ul style=3D"margin:0;padding-left:1=
+8px;"><li style=3D"margin:4px 0;word-break:break-all;"><a href=3D"https://w=
+ww.alyeskaresort.com/live-cams/" style=3D"color:#0c75df;">https://www.alyes=
+karesort.com/live-cams/</a> - HTTP 404 (failed twice) <span style=3D"color:=
+#64748b;">=C2=B7 used in src/data/webcams.ts</span></li></ul><p style=3D"ma=
+rgin-top:20px;color:#64748b;font-size:13px;">dead links usually mean a prov=
+ider changed their website. fixing them is a data edit, not an outage - but=
+ pages not loading or api problems mean visitors are affected right now.</p=
+></div>
+          <table role=3D"presentation" cellpadding=3D"0" cellspacing=3D"0" =
+style=3D"margin:24px 0;">
+         <tr><td style=3D"border-radius:8px;background:#0c75df;">
+           <a href=3D"https://feelzlike.com/" style=3D"display:inline-block=
+;padding:14px 28px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',=
+Roboto,Helvetica,Arial,sans-serif;font-size:15px;font-weight:700;color:#fff=
+;text-decoration:none;letter-spacing:0.02em;">open feelzlike</a>
+         </td></tr>
+       </table>
+        </td></tr>
+        <tr><td style=3D"padding:20px 32px;border-top:1px solid #e2e8f0;fon=
+t-size:12px;color:#64748b;line-height:1.5;">
+          automated daily smoke test =C2=B7 sent only when something needs =
+attention =C2=B7 recipient is set by SMOKE_ALERT_EMAIL / ADMIN_EMAILS
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body></html>=
+
+----_NmP-647735401e477c14-Part_1--

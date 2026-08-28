@@ -8371,6 +8371,1742 @@ from = "/vernon/vernon-nj/explore/"
 to = "/vernon/vernon-nj/explore/index.html"
 
 [[services.production.rewrites]]
+from = "/canada-ontario/"
+to = "/canada-ontario/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountains/"
+to = "/canada-ontario/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/alerts/"
+to = "/canada-ontario/alerts/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/stay/"
+to = "/canada-ontario/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountain/blue-mountain-resort/"
+to = "/canada-ontario/mountain/blue-mountain-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountain/mount-st-louis-moonstone/"
+to = "/canada-ontario/mountain/mount-st-louis-moonstone/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountain/horseshoe-resort/"
+to = "/canada-ontario/mountain/horseshoe-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountain/calabogie-peaks-resort/"
+to = "/canada-ontario/mountain/calabogie-peaks-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountain/searchmont-resort/"
+to = "/canada-ontario/mountain/searchmont-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountain/snow-valley-ski-resort/"
+to = "/canada-ontario/mountain/snow-valley-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountain/glen-eden/"
+to = "/canada-ontario/mountain/glen-eden/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountain/hockley-valley-resort/"
+to = "/canada-ontario/mountain/hockley-valley-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountain/mount-pakenham/"
+to = "/canada-ontario/mountain/mount-pakenham/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountain/lakeridge-ski-resort/"
+to = "/canada-ontario/mountain/lakeridge-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountain/boler-mountain/"
+to = "/canada-ontario/mountain/boler-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountain/hidden-valley-highlands-ski-area/"
+to = "/canada-ontario/mountain/hidden-valley-highlands-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountain/chicopee/"
+to = "/canada-ontario/mountain/chicopee/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountain/brimacombe/"
+to = "/canada-ontario/mountain/brimacombe/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountain/dagmar-ski-resort/"
+to = "/canada-ontario/mountain/dagmar-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountain/sir-sam-s-ski-ride/"
+to = "/canada-ontario/mountain/sir-sam-s-ski-ride/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountain/mount-chinguacousy-ski-and-snowboard-hill/"
+to = "/canada-ontario/mountain/mount-chinguacousy-ski-and-snowboard-hill/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountain/adanac-ski-hill/"
+to = "/canada-ontario/mountain/adanac-ski-hill/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountain/antoine-mountain/"
+to = "/canada-ontario/mountain/antoine-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountain/batawa-ski-hill/"
+to = "/canada-ontario/mountain/batawa-ski-hill/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountain/loch-lomond-ski-area/"
+to = "/canada-ontario/mountain/loch-lomond-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountain/mount-dufour-ski-area/"
+to = "/canada-ontario/mountain/mount-dufour-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountain/mount-jamieson-resort/"
+to = "/canada-ontario/mountain/mount-jamieson-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountain/uplands-ski-centre/"
+to = "/canada-ontario/mountain/uplands-ski-centre/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountain/trestle-ridge-ski-hill/"
+to = "/canada-ontario/mountain/trestle-ridge-ski-hill/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-ontario/mountain/bethany-ski-resort/"
+to = "/canada-ontario/mountain/bethany-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-british-columbia/"
+to = "/canada-british-columbia/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-british-columbia/mountains/"
+to = "/canada-british-columbia/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-british-columbia/alerts/"
+to = "/canada-british-columbia/alerts/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-british-columbia/stay/"
+to = "/canada-british-columbia/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-british-columbia/mountain/red-mountain-resort/"
+to = "/canada-british-columbia/mountain/red-mountain-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-british-columbia/mountain/manning-park-resort/"
+to = "/canada-british-columbia/mountain/manning-park-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-british-columbia/mountain/shames-mountain/"
+to = "/canada-british-columbia/mountain/shames-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-british-columbia/mountain/powder-king-mountain-resort/"
+to = "/canada-british-columbia/mountain/powder-king-mountain-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-british-columbia/mountain/sasquatch-mountain-resort/"
+to = "/canada-british-columbia/mountain/sasquatch-mountain-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-alberta/"
+to = "/canada-alberta/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-alberta/mountains/"
+to = "/canada-alberta/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-alberta/alerts/"
+to = "/canada-alberta/alerts/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-alberta/stay/"
+to = "/canada-alberta/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-alberta/mountain/castle-mountain-resort/"
+to = "/canada-alberta/mountain/castle-mountain-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-manitoba/"
+to = "/canada-manitoba/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-manitoba/mountains/"
+to = "/canada-manitoba/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-manitoba/alerts/"
+to = "/canada-manitoba/alerts/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-manitoba/stay/"
+to = "/canada-manitoba/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-manitoba/mountain/asessippi-ski-area-and-resort/"
+to = "/canada-manitoba/mountain/asessippi-ski-area-and-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-manitoba/mountain/mystery-mountain-winter-park/"
+to = "/canada-manitoba/mountain/mystery-mountain-winter-park/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-manitoba/mountain/holiday-mountain-resort/"
+to = "/canada-manitoba/mountain/holiday-mountain-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-saskatchewan/"
+to = "/canada-saskatchewan/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-saskatchewan/mountains/"
+to = "/canada-saskatchewan/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-saskatchewan/alerts/"
+to = "/canada-saskatchewan/alerts/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-saskatchewan/stay/"
+to = "/canada-saskatchewan/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-saskatchewan/mountain/table-mountain-regional-park/"
+to = "/canada-saskatchewan/mountain/table-mountain-regional-park/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-saskatchewan/mountain/duck-mountain-ski-area/"
+to = "/canada-saskatchewan/mountain/duck-mountain-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-saskatchewan/mountain/wapiti-valley-regional-park/"
+to = "/canada-saskatchewan/mountain/wapiti-valley-regional-park/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-quebec/"
+to = "/canada-quebec/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-quebec/mountains/"
+to = "/canada-quebec/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-quebec/alerts/"
+to = "/canada-quebec/alerts/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-quebec/stay/"
+to = "/canada-quebec/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-quebec/mountain/owl-s-head/"
+to = "/canada-quebec/mountain/owl-s-head/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-quebec/mountain/mont-orford/"
+to = "/canada-quebec/mountain/mont-orford/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-quebec/mountain/mont-grand-fonds/"
+to = "/canada-quebec/mountain/mont-grand-fonds/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-quebec/mountain/massif-du-sud/"
+to = "/canada-quebec/mountain/massif-du-sud/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-quebec/mountain/val-saint-come/"
+to = "/canada-quebec/mountain/val-saint-come/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-quebec/mountain/station-touristique-stoneham/"
+to = "/canada-quebec/mountain/station-touristique-stoneham/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-quebec/mountain/le-relais/"
+to = "/canada-quebec/mountain/le-relais/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-new-brunswick/"
+to = "/canada-new-brunswick/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-new-brunswick/mountains/"
+to = "/canada-new-brunswick/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-new-brunswick/alerts/"
+to = "/canada-new-brunswick/alerts/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-new-brunswick/stay/"
+to = "/canada-new-brunswick/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-new-brunswick/mountain/crabbe-mountain/"
+to = "/canada-new-brunswick/mountain/crabbe-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-new-brunswick/mountain/poley-mountain/"
+to = "/canada-new-brunswick/mountain/poley-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-new-brunswick/mountain/sugarloaf-provincial-park/"
+to = "/canada-new-brunswick/mountain/sugarloaf-provincial-park/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-new-brunswick/mountain/republik-nature/"
+to = "/canada-new-brunswick/mountain/republik-nature/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-nova-scotia/"
+to = "/canada-nova-scotia/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-nova-scotia/mountains/"
+to = "/canada-nova-scotia/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-nova-scotia/alerts/"
+to = "/canada-nova-scotia/alerts/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-nova-scotia/stay/"
+to = "/canada-nova-scotia/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-nova-scotia/mountain/ski-wentworth/"
+to = "/canada-nova-scotia/mountain/ski-wentworth/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-nova-scotia/mountain/ski-martock/"
+to = "/canada-nova-scotia/mountain/ski-martock/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-nova-scotia/mountain/cape-smokey/"
+to = "/canada-nova-scotia/mountain/cape-smokey/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-nova-scotia/mountain/ski-ben-eoin/"
+to = "/canada-nova-scotia/mountain/ski-ben-eoin/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-newfoundland-labrador/"
+to = "/canada-newfoundland-labrador/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-newfoundland-labrador/mountains/"
+to = "/canada-newfoundland-labrador/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-newfoundland-labrador/alerts/"
+to = "/canada-newfoundland-labrador/alerts/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-newfoundland-labrador/stay/"
+to = "/canada-newfoundland-labrador/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-newfoundland-labrador/mountain/white-hills-resort/"
+to = "/canada-newfoundland-labrador/mountain/white-hills-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-newfoundland-labrador/mountain/smokey-mountain-ski-club/"
+to = "/canada-newfoundland-labrador/mountain/smokey-mountain-ski-club/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-prince-edward-island/"
+to = "/canada-prince-edward-island/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-prince-edward-island/mountains/"
+to = "/canada-prince-edward-island/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-prince-edward-island/alerts/"
+to = "/canada-prince-edward-island/alerts/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-prince-edward-island/stay/"
+to = "/canada-prince-edward-island/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/canada-prince-edward-island/mountain/mark-arendz-provincial-ski-park-at-brookvale/"
+to = "/canada-prince-edward-island/mountain/mark-arendz-provincial-ski-park-at-brookvale/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wv/"
+to = "/us-wv/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wv/mountains/"
+to = "/us-wv/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wv/stay/"
+to = "/us-wv/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wv/mountain/winterplace-ski-resort/"
+to = "/us-wv/mountain/winterplace-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wv/mountain/oglebay-ski-area/"
+to = "/us-wv/mountain/oglebay-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wv/ghent/"
+to = "/us-wv/ghent/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wv/wheeling/"
+to = "/us-wv/wheeling/index.html"
+
+[[services.production.rewrites]]
+from = "/us-va/"
+to = "/us-va/index.html"
+
+[[services.production.rewrites]]
+from = "/us-va/mountains/"
+to = "/us-va/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/us-va/stay/"
+to = "/us-va/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/us-va/mountain/bryce-resort/"
+to = "/us-va/mountain/bryce-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/us-va/mountain/the-omni-homestead-ski-area/"
+to = "/us-va/mountain/the-omni-homestead-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/us-va/basye/"
+to = "/us-va/basye/index.html"
+
+[[services.production.rewrites]]
+from = "/us-va/hot-springs/"
+to = "/us-va/hot-springs/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nc/"
+to = "/us-nc/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nc/mountains/"
+to = "/us-nc/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nc/stay/"
+to = "/us-nc/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nc/mountain/appalachian-ski-mountain/"
+to = "/us-nc/mountain/appalachian-ski-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nc/mountain/hatley-pointe/"
+to = "/us-nc/mountain/hatley-pointe/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nc/blowing-rock/"
+to = "/us-nc/blowing-rock/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nc/mars-hill/"
+to = "/us-nc/mars-hill/index.html"
+
+[[services.production.rewrites]]
+from = "/us-sd/"
+to = "/us-sd/index.html"
+
+[[services.production.rewrites]]
+from = "/us-sd/mountains/"
+to = "/us-sd/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/us-sd/stay/"
+to = "/us-sd/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/us-sd/mountain/great-bear-ski-valley/"
+to = "/us-sd/mountain/great-bear-ski-valley/index.html"
+
+[[services.production.rewrites]]
+from = "/us-sd/sioux-falls/"
+to = "/us-sd/sioux-falls/index.html"
+
+[[services.production.rewrites]]
+from = "/us-md/"
+to = "/us-md/index.html"
+
+[[services.production.rewrites]]
+from = "/us-md/mountains/"
+to = "/us-md/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/us-md/stay/"
+to = "/us-md/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/us-md/mountain/wisp-resort/"
+to = "/us-md/mountain/wisp-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/us-md/mchenry/"
+to = "/us-md/mchenry/index.html"
+
+[[services.production.rewrites]]
+from = "/us-oh/"
+to = "/us-oh/index.html"
+
+[[services.production.rewrites]]
+from = "/us-oh/mountains/"
+to = "/us-oh/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/us-oh/stay/"
+to = "/us-oh/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/us-oh/mountain/mad-river-mountain/"
+to = "/us-oh/mountain/mad-river-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/us-oh/mountain/snow-trails/"
+to = "/us-oh/mountain/snow-trails/index.html"
+
+[[services.production.rewrites]]
+from = "/us-oh/mountain/boston-mills-brandywine/"
+to = "/us-oh/mountain/boston-mills-brandywine/index.html"
+
+[[services.production.rewrites]]
+from = "/us-oh/mountain/alpine-valley-ohio/"
+to = "/us-oh/mountain/alpine-valley-ohio/index.html"
+
+[[services.production.rewrites]]
+from = "/us-oh/zanesfield/"
+to = "/us-oh/zanesfield/index.html"
+
+[[services.production.rewrites]]
+from = "/us-oh/mansfield/"
+to = "/us-oh/mansfield/index.html"
+
+[[services.production.rewrites]]
+from = "/us-oh/peninsula/"
+to = "/us-oh/peninsula/index.html"
+
+[[services.production.rewrites]]
+from = "/us-oh/chesterland/"
+to = "/us-oh/chesterland/index.html"
+
+[[services.production.rewrites]]
+from = "/us-tn/"
+to = "/us-tn/index.html"
+
+[[services.production.rewrites]]
+from = "/us-tn/mountains/"
+to = "/us-tn/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/us-tn/stay/"
+to = "/us-tn/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/us-tn/mountain/ober-mountain/"
+to = "/us-tn/mountain/ober-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/us-tn/gatlinburg/"
+to = "/us-tn/gatlinburg/index.html"
+
+[[services.production.rewrites]]
+from = "/us-in/"
+to = "/us-in/index.html"
+
+[[services.production.rewrites]]
+from = "/us-in/mountains/"
+to = "/us-in/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/us-in/stay/"
+to = "/us-in/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/us-in/mountain/perfect-north-slopes/"
+to = "/us-in/mountain/perfect-north-slopes/index.html"
+
+[[services.production.rewrites]]
+from = "/us-in/mountain/paoli-peaks/"
+to = "/us-in/mountain/paoli-peaks/index.html"
+
+[[services.production.rewrites]]
+from = "/us-in/lawrenceburg/"
+to = "/us-in/lawrenceburg/index.html"
+
+[[services.production.rewrites]]
+from = "/us-in/paoli/"
+to = "/us-in/paoli/index.html"
+
+[[services.production.rewrites]]
+from = "/us-il/"
+to = "/us-il/index.html"
+
+[[services.production.rewrites]]
+from = "/us-il/mountains/"
+to = "/us-il/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/us-il/stay/"
+to = "/us-il/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/us-il/mountain/chestnut-mountain-resort/"
+to = "/us-il/mountain/chestnut-mountain-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/us-il/mountain/villa-olivia/"
+to = "/us-il/mountain/villa-olivia/index.html"
+
+[[services.production.rewrites]]
+from = "/us-il/galena/"
+to = "/us-il/galena/index.html"
+
+[[services.production.rewrites]]
+from = "/us-il/bartlett/"
+to = "/us-il/bartlett/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ia/"
+to = "/us-ia/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ia/mountains/"
+to = "/us-ia/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ia/stay/"
+to = "/us-ia/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ia/mountain/sundown-mountain-resort/"
+to = "/us-ia/mountain/sundown-mountain-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ia/mountain/mt-crescent-ski-area/"
+to = "/us-ia/mountain/mt-crescent-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ia/mountain/seven-oaks-recreation/"
+to = "/us-ia/mountain/seven-oaks-recreation/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ia/dubuque/"
+to = "/us-ia/dubuque/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ia/crescent/"
+to = "/us-ia/crescent/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ia/boone/"
+to = "/us-ia/boone/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/"
+to = "/us-mi/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountains/"
+to = "/us-mi/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/stay/"
+to = "/us-mi/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/crystal-mountain-mi/"
+to = "/us-mi/mountain/crystal-mountain-mi/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/caberfae-peaks/"
+to = "/us-mi/mountain/caberfae-peaks/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/shanty-creek-resorts/"
+to = "/us-mi/mountain/shanty-creek-resorts/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/big-powderhorn-mountain/"
+to = "/us-mi/mountain/big-powderhorn-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/snowriver-mountain-resort/"
+to = "/us-mi/mountain/snowriver-mountain-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/ski-brule/"
+to = "/us-mi/mountain/ski-brule/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/marquette-mountain/"
+to = "/us-mi/mountain/marquette-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/pine-mountain-resort-mi/"
+to = "/us-mi/mountain/pine-mountain-resort-mi/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/porcupine-mountains-ski-area/"
+to = "/us-mi/mountain/porcupine-mountains-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/mont-ripley/"
+to = "/us-mi/mountain/mont-ripley/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/the-homestead-mi/"
+to = "/us-mi/mountain/the-homestead-mi/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/treetops-resort/"
+to = "/us-mi/mountain/treetops-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/otsego-resort/"
+to = "/us-mi/mountain/otsego-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/mount-holly/"
+to = "/us-mi/mountain/mount-holly/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/mount-brighton/"
+to = "/us-mi/mountain/mount-brighton/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/pine-knob-ski-resort/"
+to = "/us-mi/mountain/pine-knob-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/alpine-valley-mi/"
+to = "/us-mi/mountain/alpine-valley-mi/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/mount-zion-ski-hill/"
+to = "/us-mi/mountain/mount-zion-ski-hill/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/bittersweet-ski-resort/"
+to = "/us-mi/mountain/bittersweet-ski-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/cannonsburg-ski-area/"
+to = "/us-mi/mountain/cannonsburg-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/timber-ridge-ski-area-mi/"
+to = "/us-mi/mountain/timber-ridge-ski-area-mi/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/swiss-valley/"
+to = "/us-mi/mountain/swiss-valley/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/snow-snake/"
+to = "/us-mi/mountain/snow-snake/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/hickory-hills/"
+to = "/us-mi/mountain/hickory-hills/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/mount-holiday/"
+to = "/us-mi/mountain/mount-holiday/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/mount-mcsauba/"
+to = "/us-mi/mountain/mount-mcsauba/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/mountain/petoskey-winter-sports-park/"
+to = "/us-mi/mountain/petoskey-winter-sports-park/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/thompsonville/"
+to = "/us-mi/thompsonville/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/cadillac/"
+to = "/us-mi/cadillac/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/bellaire/"
+to = "/us-mi/bellaire/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/bessemer/"
+to = "/us-mi/bessemer/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/wakefield/"
+to = "/us-mi/wakefield/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/iron-river/"
+to = "/us-mi/iron-river/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/marquette/"
+to = "/us-mi/marquette/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/iron-mountain/"
+to = "/us-mi/iron-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/silver-city/"
+to = "/us-mi/silver-city/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/houghton/"
+to = "/us-mi/houghton/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/glen-arbor/"
+to = "/us-mi/glen-arbor/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/gaylord/"
+to = "/us-mi/gaylord/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/holly/"
+to = "/us-mi/holly/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/brighton/"
+to = "/us-mi/brighton/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/clarkston/"
+to = "/us-mi/clarkston/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/white-lake/"
+to = "/us-mi/white-lake/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/ironwood/"
+to = "/us-mi/ironwood/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/otsego/"
+to = "/us-mi/otsego/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/cannonsburg/"
+to = "/us-mi/cannonsburg/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/gobles/"
+to = "/us-mi/gobles/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/jones/"
+to = "/us-mi/jones/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/harrison/"
+to = "/us-mi/harrison/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/traverse-city/"
+to = "/us-mi/traverse-city/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/charlevoix/"
+to = "/us-mi/charlevoix/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/petoskey/"
+to = "/us-mi/petoskey/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/"
+to = "/us-ny/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/mountains/"
+to = "/us-ny/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/stay/"
+to = "/us-ny/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/mountain/holiday-valley/"
+to = "/us-ny/mountain/holiday-valley/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/mountain/bristol-mountain/"
+to = "/us-ny/mountain/bristol-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/mountain/greek-peak/"
+to = "/us-ny/mountain/greek-peak/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/mountain/kissing-bridge/"
+to = "/us-ny/mountain/kissing-bridge/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/mountain/titus-mountain/"
+to = "/us-ny/mountain/titus-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/mountain/snow-ridge/"
+to = "/us-ny/mountain/snow-ridge/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/mountain/plattekill-mountain/"
+to = "/us-ny/mountain/plattekill-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/mountain/west-mountain/"
+to = "/us-ny/mountain/west-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/mountain/catamount-mountain-resort/"
+to = "/us-ny/mountain/catamount-mountain-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/mountain/labrador-mountain/"
+to = "/us-ny/mountain/labrador-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/mountain/peek-n-peak/"
+to = "/us-ny/mountain/peek-n-peak/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/mountain/song-mountain/"
+to = "/us-ny/mountain/song-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/mountain/swain-resort/"
+to = "/us-ny/mountain/swain-resort/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/mountain/willard-mountain/"
+to = "/us-ny/mountain/willard-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/mountain/mccauley-mountain/"
+to = "/us-ny/mountain/mccauley-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/mountain/thunder-ridge/"
+to = "/us-ny/mountain/thunder-ridge/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/mountain/mount-peter/"
+to = "/us-ny/mountain/mount-peter/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/mountain/holiday-mountain-ny/"
+to = "/us-ny/mountain/holiday-mountain-ny/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/ellicottville/"
+to = "/us-ny/ellicottville/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/south-bristol/"
+to = "/us-ny/south-bristol/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/virgil/"
+to = "/us-ny/virgil/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/glenwood/"
+to = "/us-ny/glenwood/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/malone/"
+to = "/us-ny/malone/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/turin/"
+to = "/us-ny/turin/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/roxbury/"
+to = "/us-ny/roxbury/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/queensbury/"
+to = "/us-ny/queensbury/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/hillsdale/"
+to = "/us-ny/hillsdale/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/truxton/"
+to = "/us-ny/truxton/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/clymer/"
+to = "/us-ny/clymer/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/tully/"
+to = "/us-ny/tully/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/swain/"
+to = "/us-ny/swain/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/greenwich/"
+to = "/us-ny/greenwich/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/old-forge/"
+to = "/us-ny/old-forge/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/patterson/"
+to = "/us-ny/patterson/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/warwick/"
+to = "/us-ny/warwick/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ny/monticello/"
+to = "/us-ny/monticello/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nh/"
+to = "/us-nh/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nh/mountains/"
+to = "/us-nh/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nh/stay/"
+to = "/us-nh/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nh/mountain/mount-sunapee/"
+to = "/us-nh/mountain/mount-sunapee/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nh/mountain/pats-peak/"
+to = "/us-nh/mountain/pats-peak/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nh/mountain/ragged-mountain-nh/"
+to = "/us-nh/mountain/ragged-mountain-nh/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nh/mountain/black-mountain-nh/"
+to = "/us-nh/mountain/black-mountain-nh/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nh/mountain/king-pine/"
+to = "/us-nh/mountain/king-pine/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nh/mountain/crotched-mountain/"
+to = "/us-nh/mountain/crotched-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nh/mountain/dartmouth-skiway/"
+to = "/us-nh/mountain/dartmouth-skiway/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nh/mountain/tenney-mountain/"
+to = "/us-nh/mountain/tenney-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nh/mountain/whaleback-mountain/"
+to = "/us-nh/mountain/whaleback-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nh/newbury/"
+to = "/us-nh/newbury/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nh/henniker/"
+to = "/us-nh/henniker/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nh/danbury/"
+to = "/us-nh/danbury/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nh/jackson/"
+to = "/us-nh/jackson/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nh/east-madison/"
+to = "/us-nh/east-madison/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nh/bennington/"
+to = "/us-nh/bennington/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nh/lyme/"
+to = "/us-nh/lyme/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nh/plymouth/"
+to = "/us-nh/plymouth/index.html"
+
+[[services.production.rewrites]]
+from = "/us-nh/enfield/"
+to = "/us-nh/enfield/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ma/"
+to = "/us-ma/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ma/mountains/"
+to = "/us-ma/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ma/stay/"
+to = "/us-ma/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ma/mountain/nashoba-valley/"
+to = "/us-ma/mountain/nashoba-valley/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ma/mountain/ski-ward/"
+to = "/us-ma/mountain/ski-ward/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ma/mountain/blue-hills-ski-area/"
+to = "/us-ma/mountain/blue-hills-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ma/mountain/bousquet-mountain/"
+to = "/us-ma/mountain/bousquet-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ma/mountain/otis-ridge/"
+to = "/us-ma/mountain/otis-ridge/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ma/mountain/ski-bradford/"
+to = "/us-ma/mountain/ski-bradford/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ma/westford/"
+to = "/us-ma/westford/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ma/shrewsbury/"
+to = "/us-ma/shrewsbury/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ma/canton/"
+to = "/us-ma/canton/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ma/pittsfield/"
+to = "/us-ma/pittsfield/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ma/otis/"
+to = "/us-ma/otis/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ma/haverhill/"
+to = "/us-ma/haverhill/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ct/"
+to = "/us-ct/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ct/mountains/"
+to = "/us-ct/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ct/stay/"
+to = "/us-ct/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ct/mountain/ski-sundown/"
+to = "/us-ct/mountain/ski-sundown/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ct/mountain/mount-southington/"
+to = "/us-ct/mountain/mount-southington/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ct/mountain/powder-ridge-ct/"
+to = "/us-ct/mountain/powder-ridge-ct/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ct/new-hartford/"
+to = "/us-ct/new-hartford/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ct/southington/"
+to = "/us-ct/southington/index.html"
+
+[[services.production.rewrites]]
+from = "/us-ct/middlefield/"
+to = "/us-ct/middlefield/index.html"
+
+[[services.production.rewrites]]
+from = "/us-me/"
+to = "/us-me/index.html"
+
+[[services.production.rewrites]]
+from = "/us-me/mountains/"
+to = "/us-me/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/us-me/stay/"
+to = "/us-me/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/us-me/mountain/mount-abram/"
+to = "/us-me/mountain/mount-abram/index.html"
+
+[[services.production.rewrites]]
+from = "/us-me/mountain/bigrock-mountain/"
+to = "/us-me/mountain/bigrock-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/us-me/mountain/black-mountain-of-maine/"
+to = "/us-me/mountain/black-mountain-of-maine/index.html"
+
+[[services.production.rewrites]]
+from = "/us-me/mountain/camden-snow-bowl/"
+to = "/us-me/mountain/camden-snow-bowl/index.html"
+
+[[services.production.rewrites]]
+from = "/us-me/mountain/pleasant-mountain/"
+to = "/us-me/mountain/pleasant-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/us-me/mountain/lost-valley/"
+to = "/us-me/mountain/lost-valley/index.html"
+
+[[services.production.rewrites]]
+from = "/us-me/mountain/big-moose-mountain/"
+to = "/us-me/mountain/big-moose-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/us-me/mountain/titcomb-mountain/"
+to = "/us-me/mountain/titcomb-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/us-me/greenwood/"
+to = "/us-me/greenwood/index.html"
+
+[[services.production.rewrites]]
+from = "/us-me/mars-hill/"
+to = "/us-me/mars-hill/index.html"
+
+[[services.production.rewrites]]
+from = "/us-me/rumford/"
+to = "/us-me/rumford/index.html"
+
+[[services.production.rewrites]]
+from = "/us-me/camden/"
+to = "/us-me/camden/index.html"
+
+[[services.production.rewrites]]
+from = "/us-me/bridgton/"
+to = "/us-me/bridgton/index.html"
+
+[[services.production.rewrites]]
+from = "/us-me/auburn/"
+to = "/us-me/auburn/index.html"
+
+[[services.production.rewrites]]
+from = "/us-me/greenville/"
+to = "/us-me/greenville/index.html"
+
+[[services.production.rewrites]]
+from = "/us-me/farmington/"
+to = "/us-me/farmington/index.html"
+
+[[services.production.rewrites]]
+from = "/us-vt/"
+to = "/us-vt/index.html"
+
+[[services.production.rewrites]]
+from = "/us-vt/mountains/"
+to = "/us-vt/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/us-vt/stay/"
+to = "/us-vt/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/us-vt/mountain/bolton-valley/"
+to = "/us-vt/mountain/bolton-valley/index.html"
+
+[[services.production.rewrites]]
+from = "/us-vt/mountain/middlebury-snowbowl/"
+to = "/us-vt/mountain/middlebury-snowbowl/index.html"
+
+[[services.production.rewrites]]
+from = "/us-vt/mountain/saskadena-six/"
+to = "/us-vt/mountain/saskadena-six/index.html"
+
+[[services.production.rewrites]]
+from = "/us-vt/mountain/ascutney-outdoors/"
+to = "/us-vt/mountain/ascutney-outdoors/index.html"
+
+[[services.production.rewrites]]
+from = "/us-vt/mountain/cochrans-ski-area/"
+to = "/us-vt/mountain/cochrans-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/us-vt/bolton-valley/"
+to = "/us-vt/bolton-valley/index.html"
+
+[[services.production.rewrites]]
+from = "/us-vt/hancock/"
+to = "/us-vt/hancock/index.html"
+
+[[services.production.rewrites]]
+from = "/us-vt/south-pomfret/"
+to = "/us-vt/south-pomfret/index.html"
+
+[[services.production.rewrites]]
+from = "/us-vt/brownsville/"
+to = "/us-vt/brownsville/index.html"
+
+[[services.production.rewrites]]
+from = "/us-vt/richmond/"
+to = "/us-vt/richmond/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/"
+to = "/us-pa/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/mountains/"
+to = "/us-pa/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/stay/"
+to = "/us-pa/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/mountain/jack-frost-pa/"
+to = "/us-pa/mountain/jack-frost-pa/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/mountain/big-boulder-pa/"
+to = "/us-pa/mountain/big-boulder-pa/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/mountain/elk-mountain-pa/"
+to = "/us-pa/mountain/elk-mountain-pa/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/mountain/montage-mountain-pa/"
+to = "/us-pa/mountain/montage-mountain-pa/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/mountain/whitetail-resort-pa/"
+to = "/us-pa/mountain/whitetail-resort-pa/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/mountain/bear-creek-mountain-resort-pa/"
+to = "/us-pa/mountain/bear-creek-mountain-resort-pa/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/mountain/liberty-mountain-resort-pa/"
+to = "/us-pa/mountain/liberty-mountain-resort-pa/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/mountain/hidden-valley-resort-pa/"
+to = "/us-pa/mountain/hidden-valley-resort-pa/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/mountain/laurel-mountain-ski-resort-pa/"
+to = "/us-pa/mountain/laurel-mountain-ski-resort-pa/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/mountain/roundtop-mountain-resort-pa/"
+to = "/us-pa/mountain/roundtop-mountain-resort-pa/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/mountain/tussey-mountain-pa/"
+to = "/us-pa/mountain/tussey-mountain-pa/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/mountain/ski-big-bear-pa/"
+to = "/us-pa/mountain/ski-big-bear-pa/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/mountain/ski-sawmill-pa/"
+to = "/us-pa/mountain/ski-sawmill-pa/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/mountain/spring-mountain-adventures-pa/"
+to = "/us-pa/mountain/spring-mountain-adventures-pa/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/mountain/boyce-park-ski-area-pa/"
+to = "/us-pa/mountain/boyce-park-ski-area-pa/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/blakeslee/"
+to = "/us-pa/blakeslee/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/lake-harmony/"
+to = "/us-pa/lake-harmony/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/union-dale/"
+to = "/us-pa/union-dale/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/scranton/"
+to = "/us-pa/scranton/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/mercersburg/"
+to = "/us-pa/mercersburg/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/macungie/"
+to = "/us-pa/macungie/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/carroll-valley/"
+to = "/us-pa/carroll-valley/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/hidden-valley/"
+to = "/us-pa/hidden-valley/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/ligonier/"
+to = "/us-pa/ligonier/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/lewisberry/"
+to = "/us-pa/lewisberry/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/boalsburg/"
+to = "/us-pa/boalsburg/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/lackawaxen/"
+to = "/us-pa/lackawaxen/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/morris/"
+to = "/us-pa/morris/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/schwenksville/"
+to = "/us-pa/schwenksville/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/plum/"
+to = "/us-pa/plum/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/"
+to = "/us-wi/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/mountains/"
+to = "/us-wi/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/stay/"
+to = "/us-wi/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/mountain/whitecap-mountains-resort-wi/"
+to = "/us-wi/mountain/whitecap-mountains-resort-wi/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/mountain/devils-head-resort-wi/"
+to = "/us-wi/mountain/devils-head-resort-wi/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/mountain/wilmot-mountain-wi/"
+to = "/us-wi/mountain/wilmot-mountain-wi/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/mountain/alpine-valley-resort-wi/"
+to = "/us-wi/mountain/alpine-valley-resort-wi/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/mountain/christmas-mountain-village-wi/"
+to = "/us-wi/mountain/christmas-mountain-village-wi/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/mountain/trollhaugen-wi/"
+to = "/us-wi/mountain/trollhaugen-wi/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/mountain/tyrol-basin-wi/"
+to = "/us-wi/mountain/tyrol-basin-wi/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/mountain/mount-ashwabay-wi/"
+to = "/us-wi/mountain/mount-ashwabay-wi/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/mountain/mount-la-crosse-wi/"
+to = "/us-wi/mountain/mount-la-crosse-wi/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/mountain/sunburst-winter-sports-park-wi/"
+to = "/us-wi/mountain/sunburst-winter-sports-park-wi/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/mountain/mountain-top-at-grand-geneva-wi/"
+to = "/us-wi/mountain/mountain-top-at-grand-geneva-wi/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/mountain/little-switzerland-wi/"
+to = "/us-wi/mountain/little-switzerland-wi/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/mountain/nordic-mountain-wi/"
+to = "/us-wi/mountain/nordic-mountain-wi/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/mountain/christie-mountain-wi/"
+to = "/us-wi/mountain/christie-mountain-wi/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/mountain/bruce-mound-wi/"
+to = "/us-wi/mountain/bruce-mound-wi/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/mountain/mont-du-lac-resort-wi/"
+to = "/us-wi/mountain/mont-du-lac-resort-wi/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/upson/"
+to = "/us-wi/upson/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/merrimac/"
+to = "/us-wi/merrimac/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/wilmot/"
+to = "/us-wi/wilmot/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/east-troy/"
+to = "/us-wi/east-troy/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/wisconsin-dells/"
+to = "/us-wi/wisconsin-dells/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/dresser/"
+to = "/us-wi/dresser/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/mount-horeb/"
+to = "/us-wi/mount-horeb/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/bayfield/"
+to = "/us-wi/bayfield/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/la-crosse/"
+to = "/us-wi/la-crosse/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/kewaskum/"
+to = "/us-wi/kewaskum/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/lake-geneva/"
+to = "/us-wi/lake-geneva/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/slinger/"
+to = "/us-wi/slinger/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/mount-morris/"
+to = "/us-wi/mount-morris/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/bruce/"
+to = "/us-wi/bruce/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/merrillan/"
+to = "/us-wi/merrillan/index.html"
+
+[[services.production.rewrites]]
+from = "/us-wi/superior/"
+to = "/us-wi/superior/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/"
+to = "/us-mn/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/mountains/"
+to = "/us-mn/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/stay/"
+to = "/us-mn/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/mountain/afton-alps-mn/"
+to = "/us-mn/mountain/afton-alps-mn/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/mountain/spirit-mountain-mn/"
+to = "/us-mn/mountain/spirit-mountain-mn/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/mountain/giants-ridge-mn/"
+to = "/us-mn/mountain/giants-ridge-mn/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/mountain/welch-village-mn/"
+to = "/us-mn/mountain/welch-village-mn/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/mountain/buck-hill-mn/"
+to = "/us-mn/mountain/buck-hill-mn/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/mountain/wild-mountain-mn/"
+to = "/us-mn/mountain/wild-mountain-mn/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/mountain/mount-kato-mn/"
+to = "/us-mn/mountain/mount-kato-mn/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/mountain/andes-tower-hills-mn/"
+to = "/us-mn/mountain/andes-tower-hills-mn/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/mountain/coffee-mill-ski-area-mn/"
+to = "/us-mn/mountain/coffee-mill-ski-area-mn/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/mountain/hyland-hills-ski-area-mn/"
+to = "/us-mn/mountain/hyland-hills-ski-area-mn/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/mountain/powder-ridge-mn/"
+to = "/us-mn/mountain/powder-ridge-mn/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/mountain/detroit-mountain-mn/"
+to = "/us-mn/mountain/detroit-mountain-mn/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/mountain/buena-vista-ski-area-mn/"
+to = "/us-mn/mountain/buena-vista-ski-area-mn/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/hastings/"
+to = "/us-mn/hastings/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/duluth/"
+to = "/us-mn/duluth/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/biwabik/"
+to = "/us-mn/biwabik/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/welch/"
+to = "/us-mn/welch/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/burnsville/"
+to = "/us-mn/burnsville/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/taylors-falls/"
+to = "/us-mn/taylors-falls/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/mankato/"
+to = "/us-mn/mankato/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/kensington/"
+to = "/us-mn/kensington/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/wabasha/"
+to = "/us-mn/wabasha/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/bloomington/"
+to = "/us-mn/bloomington/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/kimball/"
+to = "/us-mn/kimball/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/detroit-lakes/"
+to = "/us-mn/detroit-lakes/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mn/bemidji/"
+to = "/us-mn/bemidji/index.html"
+
+[[services.production.rewrites]]
 from = "/nagano-regional/mountain/togakushi-ski-resort/"
 to = "/nagano-regional/mountain/togakushi-ski-resort/index.html"
 
@@ -9173,6 +10909,10 @@ to = "/chugoku-ski-areas/mountain/osorakan-snow-park/index.html"
 [[services.production.rewrites]]
 from = "/chugoku-ski-areas/mountain/onbara-kogen-ski-area/"
 to = "/chugoku-ski-areas/mountain/onbara-kogen-ski-area/index.html"
+
+[[services.production.rewrites]]
+from = "/niigata-regional/mountain/tochio-family-ski-resort/"
+to = "/niigata-regional/mountain/tochio-family-ski-resort/index.html"
 
 [[services.production.rewrites]]
 from = "/*"
