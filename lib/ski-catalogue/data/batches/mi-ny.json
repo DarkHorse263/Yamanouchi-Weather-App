@@ -850,11 +850,13 @@
     },
     {
       "recordId": "norway-mountain",
-      "lifecycle": "draft",
+      "lifecycle": "published",
       "lifecycleHistory": [
-        "draft"
+        "draft",
+        "verified",
+        "published"
       ],
-      "classification": "uncertain",
+      "classification": "verified_operating",
       "country": "United States",
       "countryCode": "US",
       "identity": {
@@ -864,8 +866,15 @@
           "Norway Mountain Ski and Snowboard Resort"
         ]
       },
-      "coordinates": null,
-      "elevations": null,
+      "coordinates": {
+        "lat": 45.7913534,
+        "lng": -87.8679665
+      },
+      "elevations": {
+        "baseM": 255,
+        "topM": 407,
+        "forecastM": 364
+      },
       "locality": {
         "regionId": "us-mi",
         "regionName": "Michigan",
@@ -876,24 +885,68 @@
       "officialUrl": "https://norwaymt.com/",
       "evidence": [
         {
-          "url": "https://norwaymt.com/",
-          "retrievedAt": "2026-08-27",
-          "claim": "A current operator-branded website exists, but its public page contains no independently verifiable lift schedule, tickets, conditions, or current-season operating notice.",
+          "url": "https://norwaymt.com/winter",
+          "retrievedAt": "2026-08-29",
+          "claim": "Norway Mountain's current official winter page says the ski area is closed for the season and links to lift tickets, a snow report, ski school, tubing, and winter events, establishing seasonal operation rather than a reopening proposal.",
           "fields": [
             {
               "field": "identity",
-              "value": "Norway Mountain",
-              "citation": "A current operator-branded website exists, but its public page contains no independently verifiable lift schedule, tickets, conditions, or current-season operating notice."
+              "value": {
+                "publicId": "norway-mountain",
+                "name": "Norway Mountain",
+                "aliases": [
+                  "Norway Mountain Ski and Snowboard Resort"
+                ]
+              },
+              "citation": "The current operator site identifies the facility as Norway Mountain."
             },
             {
               "field": "status",
-              "value": "uncertain",
-              "citation": "A current operator-branded website exists, but its public page contains no independently verifiable lift schedule, tickets, conditions, or current-season operating notice."
+              "value": "verified_operating",
+              "citation": "The official winter page says the area is closed for the season and links to lift tickets and a snow report, which establishes seasonal ski operation."
             },
             {
               "field": "officialUrl",
               "value": "https://norwaymt.com/",
-              "citation": "This is the operator or public-agency URL cited above."
+              "citation": "This is the operator website hosting the current winter information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-mi",
+                "regionName": "Michigan",
+                "stateOrProvince": "Michigan",
+                "localityId": "norway",
+                "localityName": "Norway"
+              },
+              "citation": "The operator identifies the facility as Norway Mountain in Michigan."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.7913534&mlon=-87.8679665#map=16/45.7913534/-87.8679665",
+          "retrievedAt": "2026-08-29",
+          "claim": "OpenStreetMap identifies Norway Mountain Ski Resort at the stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.7913534,
+                "lng": -87.8679665
+              },
+              "citation": "OpenStreetMap winter-sports feature for Norway Mountain Ski Resort."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-87.8679665&y=45.7913534&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-29",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 364,
+              "citation": "EPQS returned 364.352 metres, rounded to 364 metres."
             }
           ]
         }
@@ -2511,9 +2564,7 @@
       "identity": {
         "publicId": "hickory-hills",
         "name": "Hickory Hills Ski Area",
-        "aliases": [
-          "Hickory Hills / Mt. Holiday PDF candidate"
-        ]
+        "aliases": []
       },
       "coordinates": {
         "lat": 44.75,
@@ -2543,9 +2594,7 @@
               "value": {
                 "publicId": "hickory-hills",
                 "name": "Hickory Hills Ski Area",
-                "aliases": [
-                  "Hickory Hills / Mt. Holiday PDF candidate"
-                ]
+                "aliases": []
               },
               "citation": "Traverse City operates Hickory Hills as a public ski area; official hill information is the source for this reconciled PDF candidate."
             },
@@ -2617,9 +2666,7 @@
       "identity": {
         "publicId": "mount-holiday",
         "name": "Mt. Holiday",
-        "aliases": [
-          "Hickory Hills / Mt. Holiday PDF candidate"
-        ]
+        "aliases": []
       },
       "coordinates": {
         "lat": 44.732,
@@ -2649,9 +2696,7 @@
               "value": {
                 "publicId": "mount-holiday",
                 "name": "Mt. Holiday",
-                "aliases": [
-                  "Hickory Hills / Mt. Holiday PDF candidate"
-                ]
+                "aliases": []
               },
               "citation": "Mt. Holiday is a separately operated public ski area, not an alternate name for Hickory Hills; its operator site is the source for this reconciled PDF candidate."
             },
@@ -4406,7 +4451,13 @@
         "localityName": "Fabius"
       },
       "officialUrl": null,
-      "evidence": [],
+      "evidence": [
+        {
+          "url": "https://ag.ny.gov/press-release/2024/attorney-general-james-wins-trial-against-ski-resort-owner-shutting-down",
+          "retrievedAt": "2026-08-29",
+          "claim": "The New York Attorney General states that Toggenburg Mountain was purchased and shut down; later interest or proposed sales do not establish that it has resumed ski operations."
+        }
+      ],
       "timezone": "America/New_York"
     },
     {
@@ -4943,7 +4994,7 @@
       "lifecycleHistory": [
         "draft"
       ],
-      "classification": "uncertain",
+      "classification": "closed",
       "country": "United States",
       "countryCode": "US",
       "identity": {
@@ -4964,7 +5015,13 @@
         "localityName": "Tupper Lake"
       },
       "officialUrl": null,
-      "evidence": [],
+      "evidence": [
+        {
+          "url": "https://www.tupperlake.com/story/2015/12/big-tupper-ski-area",
+          "retrievedAt": "2026-08-29",
+          "claim": "The destination's historical account describes Big Tupper as a former ski area; no current operator, lift tickets, snow report, or current-season operating notice establishes resumed downhill operation."
+        }
+      ],
       "timezone": "America/New_York"
     }
   ]

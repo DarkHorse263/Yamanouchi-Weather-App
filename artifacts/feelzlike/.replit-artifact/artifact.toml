@@ -9191,6 +9191,10 @@ from = "/us-mi/mountain/pine-mountain-resort-mi/"
 to = "/us-mi/mountain/pine-mountain-resort-mi/index.html"
 
 [[services.production.rewrites]]
+from = "/us-mi/mountain/norway-mountain/"
+to = "/us-mi/mountain/norway-mountain/index.html"
+
+[[services.production.rewrites]]
 from = "/us-mi/mountain/porcupine-mountains-ski-area/"
 to = "/us-mi/mountain/porcupine-mountains-ski-area/index.html"
 
@@ -9297,6 +9301,10 @@ to = "/us-mi/marquette/index.html"
 [[services.production.rewrites]]
 from = "/us-mi/iron-mountain/"
 to = "/us-mi/iron-mountain/index.html"
+
+[[services.production.rewrites]]
+from = "/us-mi/norway/"
+to = "/us-mi/norway/index.html"
 
 [[services.production.rewrites]]
 from = "/us-mi/silver-city/"
@@ -10067,6 +10075,10 @@ from = "/us-pa/mountain/boyce-park-ski-area-pa/"
 to = "/us-pa/mountain/boyce-park-ski-area-pa/index.html"
 
 [[services.production.rewrites]]
+from = "/us-pa/mountain/mount-pleasant-of-edinboro/"
+to = "/us-pa/mountain/mount-pleasant-of-edinboro/index.html"
+
+[[services.production.rewrites]]
 from = "/us-pa/blakeslee/"
 to = "/us-pa/blakeslee/index.html"
 
@@ -10125,6 +10137,10 @@ to = "/us-pa/schwenksville/index.html"
 [[services.production.rewrites]]
 from = "/us-pa/plum/"
 to = "/us-pa/plum/index.html"
+
+[[services.production.rewrites]]
+from = "/us-pa/edinboro/"
+to = "/us-pa/edinboro/index.html"
 
 [[services.production.rewrites]]
 from = "/us-wi/"

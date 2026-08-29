@@ -7,20 +7,19 @@
     "oneToOne": 172,
     "splits": 2,
     "byLifecycle": {
-      "draft": 13,
-      "published": 157,
-      "verified": 6
+      "draft": 12,
+      "published": 159,
+      "verified": 5
     },
     "byClassification": {
-      "closed": 5,
-      "duplicate_renamed": 1,
+      "closed": 6,
       "excluded_backcountry": 1,
       "gateway_town": 1,
       "heli_only": 1,
       "no_lift_field": 1,
       "private_restricted": 4,
-      "uncertain": 5,
-      "verified_operating": 157
+      "uncertain": 3,
+      "verified_operating": 159
     }
   },
   "candidates": [
@@ -356,7 +355,7 @@
         "big-tupper"
       ],
       "handling": "one_to_one",
-      "classification": "uncertain",
+      "classification": "closed",
       "lifecycle": "draft"
     },
     {
@@ -587,8 +586,8 @@
         "norway-mountain"
       ],
       "handling": "one_to_one",
-      "classification": "uncertain",
-      "lifecycle": "draft"
+      "classification": "verified_operating",
+      "lifecycle": "published"
     },
     {
       "candidateId": "us-mi-ny:otsego-resort",
@@ -1511,9 +1510,9 @@
         "mountain-view-at-edinboro-pa"
       ],
       "handling": "one_to_one",
-      "classification": "duplicate_renamed",
-      "lifecycle": "verified",
-      "note": "Explicitly retained internally but not publishable under the verified-operating gate."
+      "classification": "verified_operating",
+      "lifecycle": "published",
+      "note": "Published once under the current Mount Pleasant of Edinboro identity; the source name is retained only as an alias."
     },
     {
       "candidateId": "us-pa-wi-mn:nordic-mountain-wi",
