@@ -1,0 +1,1772 @@
+{
+  "ledgerVersion": 1,
+  "description": "Complete candidate universe transcribed from the task 140 review batches and the independently classified New Zealand task 148 candidate set. Each candidate maps to exactly one record or an explicit split.",
+  "expectedCounts": {
+    "candidates": 174,
+    "records": 176,
+    "oneToOne": 172,
+    "splits": 2,
+    "byLifecycle": {
+      "draft": 13,
+      "published": 157,
+      "verified": 6
+    },
+    "byClassification": {
+      "closed": 5,
+      "duplicate_renamed": 1,
+      "excluded_backcountry": 1,
+      "gateway_town": 1,
+      "heli_only": 1,
+      "no_lift_field": 1,
+      "private_restricted": 4,
+      "uncertain": 5,
+      "verified_operating": 157
+    }
+  },
+  "candidates": [
+    {
+      "candidateId": "source-pdf:hickory-hills-mt-holiday",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "Hickory Hills / Mt. Holiday",
+      "recordIds": [
+        "hickory-hills",
+        "mount-holiday"
+      ],
+      "handling": "split",
+      "classification": "verified_operating",
+      "lifecycle": "published",
+      "note": "One conflated source PDF row explicitly split into two independently verified operating identities."
+    },
+    {
+      "candidateId": "source-pdf:jack-frost-big-boulder",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "Jack Frost Big Boulder",
+      "recordIds": [
+        "jack-frost-pa",
+        "big-boulder-pa"
+      ],
+      "handling": "split",
+      "classification": "verified_operating",
+      "lifecycle": "published",
+      "note": "One source PDF row explicitly split into the two separately published ski-area records."
+    },
+    {
+      "candidateId": "source-pdf:sky-valley",
+      "sourceBatch": "us-east-south-central",
+      "sourceCandidateId": "Sky Valley",
+      "recordIds": [
+        "sky-valley-ski-resort"
+      ],
+      "handling": "one_to_one",
+      "classification": "closed",
+      "lifecycle": "draft",
+      "note": "Closed after the 2004 purchase; current identity is Sky Valley Country Club."
+    },
+    {
+      "candidateId": "us-east-south-central:alpine-valley-ohio",
+      "sourceBatch": "us-east-south-central",
+      "sourceCandidateId": "alpine-valley-ohio",
+      "recordIds": [
+        "alpine-valley-ohio"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-east-south-central:appalachian-ski-mountain",
+      "sourceBatch": "us-east-south-central",
+      "sourceCandidateId": "appalachian-ski-mountain",
+      "recordIds": [
+        "appalachian-ski-mountain"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-east-south-central:big-creek-ski-area",
+      "sourceBatch": "us-east-south-central",
+      "sourceCandidateId": "big-creek-ski-area",
+      "recordIds": [
+        "big-creek-ski-area"
+      ],
+      "handling": "one_to_one",
+      "classification": "private_restricted",
+      "lifecycle": "verified"
+    },
+    {
+      "candidateId": "us-east-south-central:boston-mills-brandywine",
+      "sourceBatch": "us-east-south-central",
+      "sourceCandidateId": "boston-mills-brandywine",
+      "recordIds": [
+        "boston-mills-brandywine"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-east-south-central:bryce-resort",
+      "sourceBatch": "us-east-south-central",
+      "sourceCandidateId": "bryce-resort",
+      "recordIds": [
+        "bryce-resort"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-east-south-central:chestnut-mountain-resort",
+      "sourceBatch": "us-east-south-central",
+      "sourceCandidateId": "chestnut-mountain-resort",
+      "recordIds": [
+        "chestnut-mountain-resort"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-east-south-central:deer-mountain-village",
+      "sourceBatch": "us-east-south-central",
+      "sourceCandidateId": "deer-mountain-village",
+      "recordIds": [
+        "deer-mountain-village"
+      ],
+      "handling": "one_to_one",
+      "classification": "private_restricted",
+      "lifecycle": "verified"
+    },
+    {
+      "candidateId": "us-east-south-central:great-bear-ski-valley",
+      "sourceBatch": "us-east-south-central",
+      "sourceCandidateId": "great-bear-ski-valley",
+      "recordIds": [
+        "great-bear-ski-valley"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-east-south-central:hatley-pointe",
+      "sourceBatch": "us-east-south-central",
+      "sourceCandidateId": "hatley-pointe",
+      "recordIds": [
+        "hatley-pointe"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-east-south-central:mad-river-mountain",
+      "sourceBatch": "us-east-south-central",
+      "sourceCandidateId": "mad-river-mountain",
+      "recordIds": [
+        "mad-river-mountain"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-east-south-central:mt-crescent-ski-area",
+      "sourceBatch": "us-east-south-central",
+      "sourceCandidateId": "mt-crescent-ski-area",
+      "recordIds": [
+        "mt-crescent-ski-area"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-east-south-central:ober-mountain",
+      "sourceBatch": "us-east-south-central",
+      "sourceCandidateId": "ober-mountain",
+      "recordIds": [
+        "ober-mountain"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-east-south-central:oglebay-ski-area",
+      "sourceBatch": "us-east-south-central",
+      "sourceCandidateId": "oglebay-ski-area",
+      "recordIds": [
+        "oglebay-ski-area"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-east-south-central:paoli-peaks",
+      "sourceBatch": "us-east-south-central",
+      "sourceCandidateId": "paoli-peaks",
+      "recordIds": [
+        "paoli-peaks"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-east-south-central:perfect-north-slopes",
+      "sourceBatch": "us-east-south-central",
+      "sourceCandidateId": "perfect-north-slopes",
+      "recordIds": [
+        "perfect-north-slopes"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-east-south-central:raging-buffalo-snowboard-ski-park",
+      "sourceBatch": "us-east-south-central",
+      "sourceCandidateId": "raging-buffalo-snowboard-ski-park",
+      "recordIds": [
+        "raging-buffalo-snowboard-ski-park"
+      ],
+      "handling": "one_to_one",
+      "classification": "uncertain",
+      "lifecycle": "draft"
+    },
+    {
+      "candidateId": "us-east-south-central:sapphire-valley-ski-area",
+      "sourceBatch": "us-east-south-central",
+      "sourceCandidateId": "sapphire-valley-ski-area",
+      "recordIds": [
+        "sapphire-valley-ski-area"
+      ],
+      "handling": "one_to_one",
+      "classification": "private_restricted",
+      "lifecycle": "verified"
+    },
+    {
+      "candidateId": "us-east-south-central:seven-oaks-recreation",
+      "sourceBatch": "us-east-south-central",
+      "sourceCandidateId": "seven-oaks-recreation",
+      "recordIds": [
+        "seven-oaks-recreation"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-east-south-central:snow-trails",
+      "sourceBatch": "us-east-south-central",
+      "sourceCandidateId": "snow-trails",
+      "recordIds": [
+        "snow-trails"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-east-south-central:sundown-mountain-resort",
+      "sourceBatch": "us-east-south-central",
+      "sourceCandidateId": "sundown-mountain-resort",
+      "recordIds": [
+        "sundown-mountain-resort"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-east-south-central:the-omni-homestead-ski-area",
+      "sourceBatch": "us-east-south-central",
+      "sourceCandidateId": "the-omni-homestead-ski-area",
+      "recordIds": [
+        "the-omni-homestead-ski-area"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-east-south-central:villa-olivia",
+      "sourceBatch": "us-east-south-central",
+      "sourceCandidateId": "villa-olivia",
+      "recordIds": [
+        "villa-olivia"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-east-south-central:winterplace-ski-resort",
+      "sourceBatch": "us-east-south-central",
+      "sourceCandidateId": "winterplace-ski-resort",
+      "recordIds": [
+        "winterplace-ski-resort"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-east-south-central:wisp-resort",
+      "sourceBatch": "us-east-south-central",
+      "sourceCandidateId": "wisp-resort",
+      "recordIds": [
+        "wisp-resort"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:alpine-valley-mi",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "alpine-valley-mi",
+      "recordIds": [
+        "alpine-valley-mi"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:big-powderhorn-mountain",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "big-powderhorn-mountain",
+      "recordIds": [
+        "big-powderhorn-mountain"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:big-tupper",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "big-tupper",
+      "recordIds": [
+        "big-tupper"
+      ],
+      "handling": "one_to_one",
+      "classification": "uncertain",
+      "lifecycle": "draft"
+    },
+    {
+      "candidateId": "us-mi-ny:bittersweet-ski-resort",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "bittersweet-ski-resort",
+      "recordIds": [
+        "bittersweet-ski-resort"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:bristol-mountain",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "bristol-mountain",
+      "recordIds": [
+        "bristol-mountain"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:caberfae-peaks",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "caberfae-peaks",
+      "recordIds": [
+        "caberfae-peaks"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:cannonsburg-ski-area",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "cannonsburg-ski-area",
+      "recordIds": [
+        "cannonsburg-ski-area"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:catamount-mountain-resort",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "catamount-mountain-resort",
+      "recordIds": [
+        "catamount-mountain-resort"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:crystal-mountain-mi",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "crystal-mountain-mi",
+      "recordIds": [
+        "crystal-mountain-mi"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:greek-peak",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "greek-peak",
+      "recordIds": [
+        "greek-peak"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:holiday-mountain-ny",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "holiday-mountain-ny",
+      "recordIds": [
+        "holiday-mountain-ny"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:holiday-valley",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "holiday-valley",
+      "recordIds": [
+        "holiday-valley"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:holimont",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "holimont",
+      "recordIds": [
+        "holimont"
+      ],
+      "handling": "one_to_one",
+      "classification": "private_restricted",
+      "lifecycle": "verified"
+    },
+    {
+      "candidateId": "us-mi-ny:kissing-bridge",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "kissing-bridge",
+      "recordIds": [
+        "kissing-bridge"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:labrador-mountain",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "labrador-mountain",
+      "recordIds": [
+        "labrador-mountain"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:marquette-mountain",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "marquette-mountain",
+      "recordIds": [
+        "marquette-mountain"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:mccauley-mountain",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "mccauley-mountain",
+      "recordIds": [
+        "mccauley-mountain"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:mont-ripley",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "mont-ripley",
+      "recordIds": [
+        "mont-ripley"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:mount-brighton",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "mount-brighton",
+      "recordIds": [
+        "mount-brighton"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:mount-holly",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "mount-holly",
+      "recordIds": [
+        "mount-holly"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:mount-mcsauba",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "mount-mcsauba",
+      "recordIds": [
+        "mount-mcsauba"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:mount-peter",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "mount-peter",
+      "recordIds": [
+        "mount-peter"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:mount-zion-ski-hill",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "mount-zion-ski-hill",
+      "recordIds": [
+        "mount-zion-ski-hill"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:norway-mountain",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "norway-mountain",
+      "recordIds": [
+        "norway-mountain"
+      ],
+      "handling": "one_to_one",
+      "classification": "uncertain",
+      "lifecycle": "draft"
+    },
+    {
+      "candidateId": "us-mi-ny:otsego-resort",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "otsego-resort",
+      "recordIds": [
+        "otsego-resort"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:peek-n-peak",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "peek-n-peak",
+      "recordIds": [
+        "peek-n-peak"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:petoskey-winter-sports-park",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "petoskey-winter-sports-park",
+      "recordIds": [
+        "petoskey-winter-sports-park"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:pine-knob-ski-resort",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "pine-knob-ski-resort",
+      "recordIds": [
+        "pine-knob-ski-resort"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:pine-mountain-resort-mi",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "pine-mountain-resort-mi",
+      "recordIds": [
+        "pine-mountain-resort-mi"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:plattekill-mountain",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "plattekill-mountain",
+      "recordIds": [
+        "plattekill-mountain"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:porcupine-mountains-ski-area",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "porcupine-mountains-ski-area",
+      "recordIds": [
+        "porcupine-mountains-ski-area"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:shanty-creek-resorts",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "shanty-creek-resorts",
+      "recordIds": [
+        "shanty-creek-resorts"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:ski-brule",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "ski-brule",
+      "recordIds": [
+        "ski-brule"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:snow-ridge",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "snow-ridge",
+      "recordIds": [
+        "snow-ridge"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:snow-snake",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "snow-snake",
+      "recordIds": [
+        "snow-snake"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:snowriver-mountain-resort",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "snowriver-mountain-resort",
+      "recordIds": [
+        "snowriver-mountain-resort"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:song-mountain",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "song-mountain",
+      "recordIds": [
+        "song-mountain"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:sugar-loaf-mi",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "sugar-loaf-mi",
+      "recordIds": [
+        "sugar-loaf-mi"
+      ],
+      "handling": "one_to_one",
+      "classification": "closed",
+      "lifecycle": "draft"
+    },
+    {
+      "candidateId": "us-mi-ny:swain-resort",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "swain-resort",
+      "recordIds": [
+        "swain-resort"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:swiss-valley",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "swiss-valley",
+      "recordIds": [
+        "swiss-valley"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:the-homestead-mi",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "the-homestead-mi",
+      "recordIds": [
+        "the-homestead-mi"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:thunder-ridge",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "thunder-ridge",
+      "recordIds": [
+        "thunder-ridge"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:timber-ridge-ski-area-mi",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "timber-ridge-ski-area-mi",
+      "recordIds": [
+        "timber-ridge-ski-area-mi"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:titus-mountain",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "titus-mountain",
+      "recordIds": [
+        "titus-mountain"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:toggenburg-mountain",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "toggenburg-mountain",
+      "recordIds": [
+        "toggenburg-mountain"
+      ],
+      "handling": "one_to_one",
+      "classification": "closed",
+      "lifecycle": "draft"
+    },
+    {
+      "candidateId": "us-mi-ny:treetops-resort",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "treetops-resort",
+      "recordIds": [
+        "treetops-resort"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:west-mountain",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "west-mountain",
+      "recordIds": [
+        "west-mountain"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-mi-ny:willard-mountain",
+      "sourceBatch": "us-mi-ny",
+      "sourceCandidateId": "willard-mountain",
+      "recordIds": [
+        "willard-mountain"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:ascutney-outdoors",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "ascutney-outdoors",
+      "recordIds": [
+        "ascutney-outdoors"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:big-moose-mountain",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "big-moose-mountain",
+      "recordIds": [
+        "big-moose-mountain"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:bigrock-mountain",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "bigrock-mountain",
+      "recordIds": [
+        "bigrock-mountain"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:black-mountain-nh",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "black-mountain-nh",
+      "recordIds": [
+        "black-mountain-nh"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:black-mountain-of-maine",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "black-mountain-of-maine",
+      "recordIds": [
+        "black-mountain-of-maine"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:blue-hills-ski-area",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "blue-hills-ski-area",
+      "recordIds": [
+        "blue-hills-ski-area"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:bolton-valley",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "bolton-valley",
+      "recordIds": [
+        "bolton-valley"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:bousquet-mountain",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "bousquet-mountain",
+      "recordIds": [
+        "bousquet-mountain"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:camden-snow-bowl",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "camden-snow-bowl",
+      "recordIds": [
+        "camden-snow-bowl"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:cochrans-ski-area",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "cochrans-ski-area",
+      "recordIds": [
+        "cochrans-ski-area"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:crotched-mountain",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "crotched-mountain",
+      "recordIds": [
+        "crotched-mountain"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:dartmouth-skiway",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "dartmouth-skiway",
+      "recordIds": [
+        "dartmouth-skiway"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:granite-gorge",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "granite-gorge",
+      "recordIds": [
+        "granite-gorge"
+      ],
+      "handling": "one_to_one",
+      "classification": "uncertain",
+      "lifecycle": "draft"
+    },
+    {
+      "candidateId": "us-new-england:king-pine",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "king-pine",
+      "recordIds": [
+        "king-pine"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:lost-valley",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "lost-valley",
+      "recordIds": [
+        "lost-valley"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:middlebury-snowbowl",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "middlebury-snowbowl",
+      "recordIds": [
+        "middlebury-snowbowl"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:mount-abram",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "mount-abram",
+      "recordIds": [
+        "mount-abram"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:mount-southington",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "mount-southington",
+      "recordIds": [
+        "mount-southington"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:mount-sunapee",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "mount-sunapee",
+      "recordIds": [
+        "mount-sunapee"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:nashoba-valley",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "nashoba-valley",
+      "recordIds": [
+        "nashoba-valley"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:otis-ridge",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "otis-ridge",
+      "recordIds": [
+        "otis-ridge"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:pats-peak",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "pats-peak",
+      "recordIds": [
+        "pats-peak"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:pleasant-mountain",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "pleasant-mountain",
+      "recordIds": [
+        "pleasant-mountain"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:powder-ridge-ct",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "powder-ridge-ct",
+      "recordIds": [
+        "powder-ridge-ct"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:ragged-mountain-nh",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "ragged-mountain-nh",
+      "recordIds": [
+        "ragged-mountain-nh"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:saskadena-six",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "saskadena-six",
+      "recordIds": [
+        "saskadena-six"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:ski-bradford",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "ski-bradford",
+      "recordIds": [
+        "ski-bradford"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:ski-sundown",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "ski-sundown",
+      "recordIds": [
+        "ski-sundown"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:ski-ward",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "ski-ward",
+      "recordIds": [
+        "ski-ward"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:tenney-mountain",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "tenney-mountain",
+      "recordIds": [
+        "tenney-mountain"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:the-balsams-wilderness",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "the-balsams-wilderness",
+      "recordIds": [
+        "the-balsams-wilderness"
+      ],
+      "handling": "one_to_one",
+      "classification": "closed",
+      "lifecycle": "verified"
+    },
+    {
+      "candidateId": "us-new-england:titcomb-mountain",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "titcomb-mountain",
+      "recordIds": [
+        "titcomb-mountain"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-new-england:whaleback-mountain",
+      "sourceBatch": "us-new-england",
+      "sourceCandidateId": "whaleback-mountain",
+      "recordIds": [
+        "whaleback-mountain"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:afton-alps-mn",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "afton-alps-mn",
+      "recordIds": [
+        "afton-alps-mn"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:alpine-valley-resort-wi",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "alpine-valley-resort-wi",
+      "recordIds": [
+        "alpine-valley-resort-wi"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:andes-tower-hills-mn",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "andes-tower-hills-mn",
+      "recordIds": [
+        "andes-tower-hills-mn"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:bear-creek-mountain-resort-pa",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "bear-creek-mountain-resort-pa",
+      "recordIds": [
+        "bear-creek-mountain-resort-pa"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:boyce-park-ski-area-pa",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "boyce-park-ski-area-pa",
+      "recordIds": [
+        "boyce-park-ski-area-pa"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:bruce-mound-wi",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "bruce-mound-wi",
+      "recordIds": [
+        "bruce-mound-wi"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:buck-hill-mn",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "buck-hill-mn",
+      "recordIds": [
+        "buck-hill-mn"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:buena-vista-ski-area-mn",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "buena-vista-ski-area-mn",
+      "recordIds": [
+        "buena-vista-ski-area-mn"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:christie-mountain-wi",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "christie-mountain-wi",
+      "recordIds": [
+        "christie-mountain-wi"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:christmas-mountain-village-wi",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "christmas-mountain-village-wi",
+      "recordIds": [
+        "christmas-mountain-village-wi"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:coffee-mill-ski-area-mn",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "coffee-mill-ski-area-mn",
+      "recordIds": [
+        "coffee-mill-ski-area-mn"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:detroit-mountain-mn",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "detroit-mountain-mn",
+      "recordIds": [
+        "detroit-mountain-mn"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:devils-head-resort-wi",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "devils-head-resort-wi",
+      "recordIds": [
+        "devils-head-resort-wi"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:elk-mountain-pa",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "elk-mountain-pa",
+      "recordIds": [
+        "elk-mountain-pa"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:giants-ridge-mn",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "giants-ridge-mn",
+      "recordIds": [
+        "giants-ridge-mn"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:hidden-valley-resort-pa",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "hidden-valley-resort-pa",
+      "recordIds": [
+        "hidden-valley-resort-pa"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:hyland-hills-ski-area-mn",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "hyland-hills-ski-area-mn",
+      "recordIds": [
+        "hyland-hills-ski-area-mn"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:laurel-mountain-ski-resort-pa",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "laurel-mountain-ski-resort-pa",
+      "recordIds": [
+        "laurel-mountain-ski-resort-pa"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:liberty-mountain-resort-pa",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "liberty-mountain-resort-pa",
+      "recordIds": [
+        "liberty-mountain-resort-pa"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:little-switzerland-wi",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "little-switzerland-wi",
+      "recordIds": [
+        "little-switzerland-wi"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:mont-du-lac-resort-wi",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "mont-du-lac-resort-wi",
+      "recordIds": [
+        "mont-du-lac-resort-wi"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:montage-mountain-pa",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "montage-mountain-pa",
+      "recordIds": [
+        "montage-mountain-pa"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:mount-ashwabay-wi",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "mount-ashwabay-wi",
+      "recordIds": [
+        "mount-ashwabay-wi"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:mount-kato-mn",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "mount-kato-mn",
+      "recordIds": [
+        "mount-kato-mn"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:mount-la-crosse-wi",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "mount-la-crosse-wi",
+      "recordIds": [
+        "mount-la-crosse-wi"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:mountain-top-at-grand-geneva-wi",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "mountain-top-at-grand-geneva-wi",
+      "recordIds": [
+        "mountain-top-at-grand-geneva-wi"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:mountain-view-at-edinboro-pa",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "mountain-view-at-edinboro-pa",
+      "recordIds": [
+        "mountain-view-at-edinboro-pa"
+      ],
+      "handling": "one_to_one",
+      "classification": "duplicate_renamed",
+      "lifecycle": "verified",
+      "note": "Explicitly retained internally but not publishable under the verified-operating gate."
+    },
+    {
+      "candidateId": "us-pa-wi-mn:nordic-mountain-wi",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "nordic-mountain-wi",
+      "recordIds": [
+        "nordic-mountain-wi"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:powder-ridge-mn",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "powder-ridge-mn",
+      "recordIds": [
+        "powder-ridge-mn"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:roundtop-mountain-resort-pa",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "roundtop-mountain-resort-pa",
+      "recordIds": [
+        "roundtop-mountain-resort-pa"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:ski-big-bear-pa",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "ski-big-bear-pa",
+      "recordIds": [
+        "ski-big-bear-pa"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:ski-denton-pa",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "ski-denton-pa",
+      "recordIds": [
+        "ski-denton-pa"
+      ],
+      "handling": "one_to_one",
+      "classification": "uncertain",
+      "lifecycle": "draft"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:ski-sawmill-pa",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "ski-sawmill-pa",
+      "recordIds": [
+        "ski-sawmill-pa"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:spirit-mountain-mn",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "spirit-mountain-mn",
+      "recordIds": [
+        "spirit-mountain-mn"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:spring-mountain-adventures-pa",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "spring-mountain-adventures-pa",
+      "recordIds": [
+        "spring-mountain-adventures-pa"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:sunburst-winter-sports-park-wi",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "sunburst-winter-sports-park-wi",
+      "recordIds": [
+        "sunburst-winter-sports-park-wi"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:trollhaugen-wi",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "trollhaugen-wi",
+      "recordIds": [
+        "trollhaugen-wi"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:tussey-mountain-pa",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "tussey-mountain-pa",
+      "recordIds": [
+        "tussey-mountain-pa"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:tyrol-basin-wi",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "tyrol-basin-wi",
+      "recordIds": [
+        "tyrol-basin-wi"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:welch-village-mn",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "welch-village-mn",
+      "recordIds": [
+        "welch-village-mn"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:whitecap-mountains-resort-wi",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "whitecap-mountains-resort-wi",
+      "recordIds": [
+        "whitecap-mountains-resort-wi"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:whitetail-resort-pa",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "whitetail-resort-pa",
+      "recordIds": [
+        "whitetail-resort-pa"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:wild-mountain-mn",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "wild-mountain-mn",
+      "recordIds": [
+        "wild-mountain-mn"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "us-pa-wi-mn:wilmot-mountain-wi",
+      "sourceBatch": "us-pa-wi-mn",
+      "sourceCandidateId": "wilmot-mountain-wi",
+      "recordIds": [
+        "wilmot-mountain-wi"
+      ],
+      "handling": "one_to_one",
+      "classification": "verified_operating",
+      "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:craigieburn-valley", "sourceBatch": "nz-task-148", "sourceCandidateId": "craigieburn-valley", "recordIds": ["nz-craigieburn-valley"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:broken-river", "sourceBatch": "nz-task-148", "sourceCandidateId": "broken-river", "recordIds": ["nz-broken-river"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:mt-olympus", "sourceBatch": "nz-task-148", "sourceCandidateId": "mt-olympus", "recordIds": ["nz-mt-olympus"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:temple-basin", "sourceBatch": "nz-task-148", "sourceCandidateId": "temple-basin", "recordIds": ["nz-temple-basin"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:porters", "sourceBatch": "nz-task-148", "sourceCandidateId": "porters", "recordIds": ["nz-porters"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:mt-cheeseman", "sourceBatch": "nz-task-148", "sourceCandidateId": "mt-cheeseman", "recordIds": ["nz-mt-cheeseman"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:mt-lyford", "sourceBatch": "nz-task-148", "sourceCandidateId": "mt-lyford", "recordIds": ["nz-mt-lyford"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:mt-dobson", "sourceBatch": "nz-task-148", "sourceCandidateId": "mt-dobson", "recordIds": ["nz-mt-dobson"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:fox-peak", "sourceBatch": "nz-task-148", "sourceCandidateId": "fox-peak", "recordIds": ["nz-fox-peak"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:roundhill", "sourceBatch": "nz-task-148", "sourceCandidateId": "roundhill", "recordIds": ["nz-roundhill"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:ohau", "sourceBatch": "nz-task-148", "sourceCandidateId": "ohau", "recordIds": ["nz-ohau"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:awakino", "sourceBatch": "nz-task-148", "sourceCandidateId": "awakino", "recordIds": ["nz-awakino"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:rainbow", "sourceBatch": "nz-task-148", "sourceCandidateId": "rainbow", "recordIds": ["nz-rainbow"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:snow-farm", "sourceBatch": "nz-task-148", "sourceCandidateId": "snow-farm", "recordIds": ["nz-snow-farm"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:tukino", "sourceBatch": "nz-task-148", "sourceCandidateId": "tukino", "recordIds": ["nz-tukino"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:manganui", "sourceBatch": "nz-task-148", "sourceCandidateId": "manganui", "recordIds": ["nz-manganui"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:snowplanet", "sourceBatch": "nz-task-148", "sourceCandidateId": "snowplanet", "recordIds": ["nz-snowplanet"], "handling": "one_to_one", "classification": "verified_operating", "lifecycle": "published"
+    },
+    {
+      "candidateId": "nz-task-148:hanmer-springs", "sourceBatch": "nz-task-148", "sourceCandidateId": "hanmer-springs", "recordIds": ["nz-hanmer-springs"], "handling": "one_to_one", "classification": "gateway_town", "lifecycle": "draft"
+    },
+    {
+      "candidateId": "nz-task-148:invincible-snowfields", "sourceBatch": "nz-task-148", "sourceCandidateId": "invincible-snowfields", "recordIds": ["nz-invincible-snowfields"], "handling": "one_to_one", "classification": "heli_only", "lifecycle": "draft"
+    },
+    {
+      "candidateId": "nz-task-148:mt-robert", "sourceBatch": "nz-task-148", "sourceCandidateId": "mt-robert", "recordIds": ["nz-mt-robert"], "handling": "one_to_one", "classification": "no_lift_field", "lifecycle": "draft"
+    },
+    {
+      "candidateId": "nz-task-148:snow-park-nz", "sourceBatch": "nz-task-148", "sourceCandidateId": "snow-park-nz", "recordIds": ["nz-snow-park"], "handling": "one_to_one", "classification": "closed", "lifecycle": "draft"
+    },
+    {
+      "candidateId": "nz-task-148:mt-potts-erewhon", "sourceBatch": "nz-task-148", "sourceCandidateId": "mt-potts-erewhon", "recordIds": ["nz-mt-potts-erewhon"], "handling": "one_to_one", "classification": "excluded_backcountry", "lifecycle": "draft"
+    }
+  ]
+}

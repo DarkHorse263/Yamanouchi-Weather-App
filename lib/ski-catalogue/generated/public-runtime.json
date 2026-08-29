@@ -1,0 +1,5244 @@
+{
+  "schemaVersion": 1,
+  "batches": [
+    "catalogue",
+    "us-east-south-central",
+    "us-mi-ny",
+    "us-new-england",
+    "nz-task-148",
+    "us-pa-wi-mn"
+  ],
+  "publishedRegions": [
+    {
+      "regionId": "us-wv",
+      "name": "West Virginia",
+      "stateOrProvince": "West Virginia",
+      "country": "United States",
+      "countryCode": "US",
+      "localities": [
+        {
+          "localityId": "ghent",
+          "name": "Ghent"
+        },
+        {
+          "localityId": "wheeling",
+          "name": "Wheeling"
+        }
+      ]
+    },
+    {
+      "regionId": "us-va",
+      "name": "Virginia",
+      "stateOrProvince": "Virginia",
+      "country": "United States",
+      "countryCode": "US",
+      "localities": [
+        {
+          "localityId": "basye",
+          "name": "Basye"
+        },
+        {
+          "localityId": "hot-springs",
+          "name": "Hot Springs"
+        }
+      ]
+    },
+    {
+      "regionId": "us-nc",
+      "name": "North Carolina",
+      "stateOrProvince": "North Carolina",
+      "country": "United States",
+      "countryCode": "US",
+      "localities": [
+        {
+          "localityId": "blowing-rock",
+          "name": "Blowing Rock"
+        },
+        {
+          "localityId": "mars-hill",
+          "name": "Mars Hill"
+        }
+      ]
+    },
+    {
+      "regionId": "us-sd",
+      "name": "South Dakota",
+      "stateOrProvince": "South Dakota",
+      "country": "United States",
+      "countryCode": "US",
+      "localities": [
+        {
+          "localityId": "sioux-falls",
+          "name": "Sioux Falls"
+        }
+      ]
+    },
+    {
+      "regionId": "us-md",
+      "name": "Maryland",
+      "stateOrProvince": "Maryland",
+      "country": "United States",
+      "countryCode": "US",
+      "localities": [
+        {
+          "localityId": "mchenry",
+          "name": "McHenry"
+        }
+      ]
+    },
+    {
+      "regionId": "us-oh",
+      "name": "Ohio",
+      "stateOrProvince": "Ohio",
+      "country": "United States",
+      "countryCode": "US",
+      "localities": [
+        {
+          "localityId": "zanesfield",
+          "name": "Zanesfield"
+        },
+        {
+          "localityId": "mansfield",
+          "name": "Mansfield"
+        },
+        {
+          "localityId": "peninsula",
+          "name": "Peninsula"
+        },
+        {
+          "localityId": "chesterland",
+          "name": "Chesterland"
+        }
+      ]
+    },
+    {
+      "regionId": "us-tn",
+      "name": "Tennessee",
+      "stateOrProvince": "Tennessee",
+      "country": "United States",
+      "countryCode": "US",
+      "localities": [
+        {
+          "localityId": "gatlinburg",
+          "name": "Gatlinburg"
+        }
+      ]
+    },
+    {
+      "regionId": "us-in",
+      "name": "Indiana",
+      "stateOrProvince": "Indiana",
+      "country": "United States",
+      "countryCode": "US",
+      "localities": [
+        {
+          "localityId": "lawrenceburg",
+          "name": "Lawrenceburg"
+        },
+        {
+          "localityId": "paoli",
+          "name": "Paoli"
+        }
+      ]
+    },
+    {
+      "regionId": "us-il",
+      "name": "Illinois",
+      "stateOrProvince": "Illinois",
+      "country": "United States",
+      "countryCode": "US",
+      "localities": [
+        {
+          "localityId": "galena",
+          "name": "Galena"
+        },
+        {
+          "localityId": "bartlett",
+          "name": "Bartlett"
+        }
+      ]
+    },
+    {
+      "regionId": "us-ia",
+      "name": "Iowa",
+      "stateOrProvince": "Iowa",
+      "country": "United States",
+      "countryCode": "US",
+      "localities": [
+        {
+          "localityId": "dubuque",
+          "name": "Dubuque"
+        },
+        {
+          "localityId": "crescent",
+          "name": "Crescent"
+        },
+        {
+          "localityId": "boone",
+          "name": "Boone"
+        }
+      ]
+    },
+    {
+      "regionId": "us-mi",
+      "name": "Michigan",
+      "stateOrProvince": "Michigan",
+      "country": "United States",
+      "countryCode": "US",
+      "localities": [
+        {
+          "localityId": "thompsonville",
+          "name": "Thompsonville"
+        },
+        {
+          "localityId": "cadillac",
+          "name": "Cadillac"
+        },
+        {
+          "localityId": "bellaire",
+          "name": "Bellaire"
+        },
+        {
+          "localityId": "bessemer",
+          "name": "Bessemer"
+        },
+        {
+          "localityId": "wakefield",
+          "name": "Wakefield"
+        },
+        {
+          "localityId": "iron-river",
+          "name": "Iron River"
+        },
+        {
+          "localityId": "marquette",
+          "name": "Marquette"
+        },
+        {
+          "localityId": "iron-mountain",
+          "name": "Iron Mountain"
+        },
+        {
+          "localityId": "silver-city",
+          "name": "Silver City"
+        },
+        {
+          "localityId": "houghton",
+          "name": "Houghton"
+        },
+        {
+          "localityId": "glen-arbor",
+          "name": "Glen Arbor"
+        },
+        {
+          "localityId": "gaylord",
+          "name": "Gaylord"
+        },
+        {
+          "localityId": "holly",
+          "name": "Holly"
+        },
+        {
+          "localityId": "brighton",
+          "name": "Brighton"
+        },
+        {
+          "localityId": "clarkston",
+          "name": "Clarkston"
+        },
+        {
+          "localityId": "white-lake",
+          "name": "White Lake"
+        },
+        {
+          "localityId": "ironwood",
+          "name": "Ironwood"
+        },
+        {
+          "localityId": "otsego",
+          "name": "Otsego"
+        },
+        {
+          "localityId": "cannonsburg",
+          "name": "Cannonsburg"
+        },
+        {
+          "localityId": "gobles",
+          "name": "Gobles"
+        },
+        {
+          "localityId": "jones",
+          "name": "Jones"
+        },
+        {
+          "localityId": "harrison",
+          "name": "Harrison"
+        },
+        {
+          "localityId": "traverse-city",
+          "name": "Traverse City"
+        },
+        {
+          "localityId": "charlevoix",
+          "name": "Charlevoix"
+        },
+        {
+          "localityId": "petoskey",
+          "name": "Petoskey"
+        }
+      ]
+    },
+    {
+      "regionId": "us-ny",
+      "name": "New York",
+      "stateOrProvince": "New York",
+      "country": "United States",
+      "countryCode": "US",
+      "localities": [
+        {
+          "localityId": "ellicottville",
+          "name": "Ellicottville"
+        },
+        {
+          "localityId": "south-bristol",
+          "name": "South Bristol"
+        },
+        {
+          "localityId": "virgil",
+          "name": "Virgil"
+        },
+        {
+          "localityId": "glenwood",
+          "name": "Glenwood"
+        },
+        {
+          "localityId": "malone",
+          "name": "Malone"
+        },
+        {
+          "localityId": "turin",
+          "name": "Turin"
+        },
+        {
+          "localityId": "roxbury",
+          "name": "Roxbury"
+        },
+        {
+          "localityId": "queensbury",
+          "name": "Queensbury"
+        },
+        {
+          "localityId": "hillsdale",
+          "name": "Hillsdale"
+        },
+        {
+          "localityId": "truxton",
+          "name": "Truxton"
+        },
+        {
+          "localityId": "clymer",
+          "name": "Clymer"
+        },
+        {
+          "localityId": "tully",
+          "name": "Tully"
+        },
+        {
+          "localityId": "swain",
+          "name": "Swain"
+        },
+        {
+          "localityId": "greenwich",
+          "name": "Greenwich"
+        },
+        {
+          "localityId": "old-forge",
+          "name": "Old Forge"
+        },
+        {
+          "localityId": "patterson",
+          "name": "Patterson"
+        },
+        {
+          "localityId": "warwick",
+          "name": "Warwick"
+        },
+        {
+          "localityId": "monticello",
+          "name": "Monticello"
+        }
+      ]
+    },
+    {
+      "regionId": "us-nh",
+      "name": "New Hampshire",
+      "stateOrProvince": "New Hampshire",
+      "country": "United States",
+      "countryCode": "US",
+      "localities": [
+        {
+          "localityId": "newbury",
+          "name": "Newbury"
+        },
+        {
+          "localityId": "henniker",
+          "name": "Henniker"
+        },
+        {
+          "localityId": "danbury",
+          "name": "Danbury"
+        },
+        {
+          "localityId": "jackson",
+          "name": "Jackson"
+        },
+        {
+          "localityId": "east-madison",
+          "name": "East Madison"
+        },
+        {
+          "localityId": "bennington",
+          "name": "Bennington"
+        },
+        {
+          "localityId": "lyme",
+          "name": "Lyme"
+        },
+        {
+          "localityId": "plymouth",
+          "name": "Plymouth"
+        },
+        {
+          "localityId": "enfield",
+          "name": "Enfield"
+        }
+      ]
+    },
+    {
+      "regionId": "us-ma",
+      "name": "Massachusetts",
+      "stateOrProvince": "Massachusetts",
+      "country": "United States",
+      "countryCode": "US",
+      "localities": [
+        {
+          "localityId": "westford",
+          "name": "Westford"
+        },
+        {
+          "localityId": "shrewsbury",
+          "name": "Shrewsbury"
+        },
+        {
+          "localityId": "canton",
+          "name": "Canton"
+        },
+        {
+          "localityId": "pittsfield",
+          "name": "Pittsfield"
+        },
+        {
+          "localityId": "otis",
+          "name": "Otis"
+        },
+        {
+          "localityId": "haverhill",
+          "name": "Haverhill"
+        }
+      ]
+    },
+    {
+      "regionId": "us-ct",
+      "name": "Connecticut",
+      "stateOrProvince": "Connecticut",
+      "country": "United States",
+      "countryCode": "US",
+      "localities": [
+        {
+          "localityId": "new-hartford",
+          "name": "New Hartford"
+        },
+        {
+          "localityId": "southington",
+          "name": "Southington"
+        },
+        {
+          "localityId": "middlefield",
+          "name": "Middlefield"
+        }
+      ]
+    },
+    {
+      "regionId": "us-me",
+      "name": "Maine",
+      "stateOrProvince": "Maine",
+      "country": "United States",
+      "countryCode": "US",
+      "localities": [
+        {
+          "localityId": "greenwood",
+          "name": "Greenwood"
+        },
+        {
+          "localityId": "mars-hill",
+          "name": "Mars Hill"
+        },
+        {
+          "localityId": "rumford",
+          "name": "Rumford"
+        },
+        {
+          "localityId": "camden",
+          "name": "Camden"
+        },
+        {
+          "localityId": "bridgton",
+          "name": "Bridgton"
+        },
+        {
+          "localityId": "auburn",
+          "name": "Auburn"
+        },
+        {
+          "localityId": "greenville",
+          "name": "Greenville"
+        },
+        {
+          "localityId": "farmington",
+          "name": "Farmington"
+        }
+      ]
+    },
+    {
+      "regionId": "us-vt",
+      "name": "Vermont",
+      "stateOrProvince": "Vermont",
+      "country": "United States",
+      "countryCode": "US",
+      "localities": [
+        {
+          "localityId": "bolton-valley",
+          "name": "Bolton Valley"
+        },
+        {
+          "localityId": "hancock",
+          "name": "Hancock"
+        },
+        {
+          "localityId": "south-pomfret",
+          "name": "South Pomfret"
+        },
+        {
+          "localityId": "brownsville",
+          "name": "Brownsville"
+        },
+        {
+          "localityId": "richmond",
+          "name": "Richmond"
+        }
+      ]
+    },
+    {
+      "regionId": "canterbury",
+      "name": "Canterbury",
+      "stateOrProvince": "Canterbury",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "localities": [
+        {
+          "localityId": "springfield-nz",
+          "name": "Springfield"
+        },
+        {
+          "localityId": "windwhistle",
+          "name": "Windwhistle"
+        },
+        {
+          "localityId": "arthurs-pass",
+          "name": "Arthur's Pass"
+        },
+        {
+          "localityId": "hanmer-springs",
+          "name": "Hanmer Springs"
+        }
+      ]
+    },
+    {
+      "regionId": "mackenzie-south-canterbury",
+      "name": "Mackenzie & South Canterbury",
+      "stateOrProvince": "Canterbury",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "localities": [
+        {
+          "localityId": "fairlie",
+          "name": "Fairlie"
+        },
+        {
+          "localityId": "lake-tekapo",
+          "name": "Lake Tekapo"
+        },
+        {
+          "localityId": "twizel",
+          "name": "Twizel"
+        },
+        {
+          "localityId": "kurow",
+          "name": "Kurow"
+        }
+      ]
+    },
+    {
+      "regionId": "nelson-lakes",
+      "name": "Nelson Lakes",
+      "stateOrProvince": "Tasman",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "localities": [
+        {
+          "localityId": "st-arnaud-nz",
+          "name": "St Arnaud"
+        }
+      ]
+    },
+    {
+      "regionId": "wanaka",
+      "name": "Wanaka",
+      "stateOrProvince": "Otago",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "localities": [
+        {
+          "localityId": "wanaka",
+          "name": "Wanaka"
+        }
+      ]
+    },
+    {
+      "regionId": "ruapehu",
+      "name": "Ruapehu",
+      "stateOrProvince": "Manawatū-Whanganui",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "localities": [
+        {
+          "localityId": "ohakune",
+          "name": "Ohakune"
+        }
+      ]
+    },
+    {
+      "regionId": "taranaki",
+      "name": "Taranaki",
+      "stateOrProvince": "Taranaki",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "localities": [
+        {
+          "localityId": "new-plymouth",
+          "name": "New Plymouth"
+        }
+      ]
+    },
+    {
+      "regionId": "auckland",
+      "name": "Auckland",
+      "stateOrProvince": "Auckland",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "localities": [
+        {
+          "localityId": "silverdale",
+          "name": "Silverdale"
+        }
+      ]
+    },
+    {
+      "regionId": "us-pa",
+      "name": "Pennsylvania",
+      "stateOrProvince": "Pennsylvania",
+      "country": "United States",
+      "countryCode": "US",
+      "localities": [
+        {
+          "localityId": "blakeslee",
+          "name": "Blakeslee"
+        },
+        {
+          "localityId": "lake-harmony",
+          "name": "Lake Harmony"
+        },
+        {
+          "localityId": "union-dale",
+          "name": "Union Dale"
+        },
+        {
+          "localityId": "scranton",
+          "name": "Scranton"
+        },
+        {
+          "localityId": "mercersburg",
+          "name": "Mercersburg"
+        },
+        {
+          "localityId": "macungie",
+          "name": "Macungie"
+        },
+        {
+          "localityId": "carroll-valley",
+          "name": "Carroll Valley"
+        },
+        {
+          "localityId": "hidden-valley",
+          "name": "Hidden Valley"
+        },
+        {
+          "localityId": "ligonier",
+          "name": "Ligonier"
+        },
+        {
+          "localityId": "lewisberry",
+          "name": "Lewisberry"
+        },
+        {
+          "localityId": "boalsburg",
+          "name": "Boalsburg"
+        },
+        {
+          "localityId": "lackawaxen",
+          "name": "Lackawaxen"
+        },
+        {
+          "localityId": "morris",
+          "name": "Morris"
+        },
+        {
+          "localityId": "schwenksville",
+          "name": "Schwenksville"
+        },
+        {
+          "localityId": "plum",
+          "name": "Plum"
+        }
+      ]
+    },
+    {
+      "regionId": "us-wi",
+      "name": "Wisconsin",
+      "stateOrProvince": "Wisconsin",
+      "country": "United States",
+      "countryCode": "US",
+      "localities": [
+        {
+          "localityId": "upson",
+          "name": "Upson"
+        },
+        {
+          "localityId": "merrimac",
+          "name": "Merrimac"
+        },
+        {
+          "localityId": "wilmot",
+          "name": "Wilmot"
+        },
+        {
+          "localityId": "east-troy",
+          "name": "East Troy"
+        },
+        {
+          "localityId": "wisconsin-dells",
+          "name": "Wisconsin Dells"
+        },
+        {
+          "localityId": "dresser",
+          "name": "Dresser"
+        },
+        {
+          "localityId": "mount-horeb",
+          "name": "Mount Horeb"
+        },
+        {
+          "localityId": "bayfield",
+          "name": "Bayfield"
+        },
+        {
+          "localityId": "la-crosse",
+          "name": "La Crosse"
+        },
+        {
+          "localityId": "kewaskum",
+          "name": "Kewaskum"
+        },
+        {
+          "localityId": "lake-geneva",
+          "name": "Lake Geneva"
+        },
+        {
+          "localityId": "slinger",
+          "name": "Slinger"
+        },
+        {
+          "localityId": "mount-morris",
+          "name": "Mount Morris"
+        },
+        {
+          "localityId": "bruce",
+          "name": "Bruce"
+        },
+        {
+          "localityId": "merrillan",
+          "name": "Merrillan"
+        },
+        {
+          "localityId": "superior",
+          "name": "Superior"
+        }
+      ]
+    },
+    {
+      "regionId": "us-mn",
+      "name": "Minnesota",
+      "stateOrProvince": "Minnesota",
+      "country": "United States",
+      "countryCode": "US",
+      "localities": [
+        {
+          "localityId": "hastings",
+          "name": "Hastings"
+        },
+        {
+          "localityId": "duluth",
+          "name": "Duluth"
+        },
+        {
+          "localityId": "biwabik",
+          "name": "Biwabik"
+        },
+        {
+          "localityId": "welch",
+          "name": "Welch"
+        },
+        {
+          "localityId": "burnsville",
+          "name": "Burnsville"
+        },
+        {
+          "localityId": "taylors-falls",
+          "name": "Taylors Falls"
+        },
+        {
+          "localityId": "mankato",
+          "name": "Mankato"
+        },
+        {
+          "localityId": "kensington",
+          "name": "Kensington"
+        },
+        {
+          "localityId": "wabasha",
+          "name": "Wabasha"
+        },
+        {
+          "localityId": "bloomington",
+          "name": "Bloomington"
+        },
+        {
+          "localityId": "kimball",
+          "name": "Kimball"
+        },
+        {
+          "localityId": "detroit-lakes",
+          "name": "Detroit Lakes"
+        },
+        {
+          "localityId": "bemidji",
+          "name": "Bemidji"
+        }
+      ]
+    }
+  ],
+  "publishedRecords": [
+    {
+      "recordId": "winterplace-ski-resort",
+      "publicId": "winterplace-ski-resort",
+      "aliases": [],
+      "name": "Winterplace Ski Resort",
+      "coordinates": {
+        "lat": 37.5967,
+        "lng": -81.1194
+      },
+      "forecastElevationM": 963,
+      "officialUrl": "https://www.winterplace.com/",
+      "regionId": "us-wv",
+      "regionName": "West Virginia",
+      "stateOrProvince": "West Virginia",
+      "localityId": "ghent",
+      "localityName": "Ghent",
+      "route": "/us-wv/mountain/winterplace-ski-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Winterplace Ski Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "oglebay-ski-area",
+      "publicId": "oglebay-ski-area",
+      "aliases": [
+        "Oglebay Resort",
+        "Nutting Winter Sports Complex"
+      ],
+      "name": "Oglebay Ski Area",
+      "coordinates": {
+        "lat": 40.1037,
+        "lng": -80.6587
+      },
+      "forecastElevationM": 343,
+      "officialUrl": "https://oglebay.com/activities/skiing-snowboarding/",
+      "regionId": "us-wv",
+      "regionName": "West Virginia",
+      "stateOrProvince": "West Virginia",
+      "localityId": "wheeling",
+      "localityName": "Wheeling",
+      "route": "/us-wv/mountain/oglebay-ski-area",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Oglebay Ski Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "bryce-resort",
+      "publicId": "bryce-resort",
+      "aliases": [
+        "Bryce Mountain"
+      ],
+      "name": "Bryce Resort",
+      "coordinates": {
+        "lat": 38.8176,
+        "lng": -78.7651
+      },
+      "forecastElevationM": 383,
+      "officialUrl": "https://bryceresort.com/",
+      "regionId": "us-va",
+      "regionName": "Virginia",
+      "stateOrProvince": "Virginia",
+      "localityId": "basye",
+      "localityName": "Basye",
+      "route": "/us-va/mountain/bryce-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Bryce Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "the-omni-homestead-ski-area",
+      "publicId": "the-omni-homestead-ski-area",
+      "aliases": [
+        "The Homestead",
+        "Homestead Ski Area"
+      ],
+      "name": "The Omni Homestead Ski Area",
+      "coordinates": {
+        "lat": 37.9986,
+        "lng": -79.8306
+      },
+      "forecastElevationM": 686,
+      "officialUrl": "https://www.omnihotels.com/hotels/homestead-virginia/things-to-do/ski",
+      "regionId": "us-va",
+      "regionName": "Virginia",
+      "stateOrProvince": "Virginia",
+      "localityId": "hot-springs",
+      "localityName": "Hot Springs",
+      "route": "/us-va/mountain/the-omni-homestead-ski-area",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "The Omni Homestead Ski Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "appalachian-ski-mountain",
+      "publicId": "appalachian-ski-mountain",
+      "aliases": [],
+      "name": "Appalachian Ski Mountain",
+      "coordinates": {
+        "lat": 36.1741,
+        "lng": -81.6626
+      },
+      "forecastElevationM": 1114,
+      "officialUrl": "https://appskimtn.com/",
+      "regionId": "us-nc",
+      "regionName": "North Carolina",
+      "stateOrProvince": "North Carolina",
+      "localityId": "blowing-rock",
+      "localityName": "Blowing Rock",
+      "route": "/us-nc/mountain/appalachian-ski-mountain",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Appalachian Ski Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "hatley-pointe",
+      "publicId": "hatley-pointe",
+      "aliases": [
+        "Wolf Ridge Ski Resort",
+        "Wolf Laurel Ski Area"
+      ],
+      "name": "Hatley Pointe",
+      "coordinates": {
+        "lat": 35.9559,
+        "lng": -82.5094
+      },
+      "forecastElevationM": 1215,
+      "officialUrl": "https://hatleypointe.com/",
+      "regionId": "us-nc",
+      "regionName": "North Carolina",
+      "stateOrProvince": "North Carolina",
+      "localityId": "mars-hill",
+      "localityName": "Mars Hill",
+      "route": "/us-nc/mountain/hatley-pointe",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Hatley Pointe is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "great-bear-ski-valley",
+      "publicId": "great-bear-ski-valley",
+      "aliases": [
+        "Great Bear Recreation Park"
+      ],
+      "name": "Great Bear Ski Valley",
+      "coordinates": {
+        "lat": 43.5782,
+        "lng": -96.6648
+      },
+      "forecastElevationM": 416,
+      "officialUrl": "https://www.greatbearpark.com/",
+      "regionId": "us-sd",
+      "regionName": "South Dakota",
+      "stateOrProvince": "South Dakota",
+      "localityId": "sioux-falls",
+      "localityName": "Sioux Falls",
+      "route": "/us-sd/mountain/great-bear-ski-valley",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Great Bear Ski Valley is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "wisp-resort",
+      "publicId": "wisp-resort",
+      "aliases": [
+        "Wisp Ski Resort"
+      ],
+      "name": "Wisp Resort",
+      "coordinates": {
+        "lat": 39.5577,
+        "lng": -79.3637
+      },
+      "forecastElevationM": 771,
+      "officialUrl": "https://www.wispresort.com/",
+      "regionId": "us-md",
+      "regionName": "Maryland",
+      "stateOrProvince": "Maryland",
+      "localityId": "mchenry",
+      "localityName": "McHenry",
+      "route": "/us-md/mountain/wisp-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Wisp Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "mad-river-mountain",
+      "publicId": "mad-river-mountain",
+      "aliases": [],
+      "name": "Mad River Mountain",
+      "coordinates": {
+        "lat": 40.3169,
+        "lng": -83.6777
+      },
+      "forecastElevationM": 359,
+      "officialUrl": "https://www.skimadriver.com/",
+      "regionId": "us-oh",
+      "regionName": "Ohio",
+      "stateOrProvince": "Ohio",
+      "localityId": "zanesfield",
+      "localityName": "Zanesfield",
+      "route": "/us-oh/mountain/mad-river-mountain",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Mad River Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "snow-trails",
+      "publicId": "snow-trails",
+      "aliases": [],
+      "name": "Snow Trails",
+      "coordinates": {
+        "lat": 40.6733,
+        "lng": -82.5014
+      },
+      "forecastElevationM": 376,
+      "officialUrl": "https://www.snowtrails.com/",
+      "regionId": "us-oh",
+      "regionName": "Ohio",
+      "stateOrProvince": "Ohio",
+      "localityId": "mansfield",
+      "localityName": "Mansfield",
+      "route": "/us-oh/mountain/snow-trails",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Snow Trails is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "boston-mills-brandywine",
+      "publicId": "boston-mills-brandywine",
+      "aliases": [
+        "Boston Mills/Brandywine Ski Resort",
+        "Boston Mills",
+        "Brandywine"
+      ],
+      "name": "Boston Mills Brandywine",
+      "coordinates": {
+        "lat": 41.2644,
+        "lng": -81.5631
+      },
+      "forecastElevationM": 201,
+      "officialUrl": "https://www.bmbw.com/",
+      "regionId": "us-oh",
+      "regionName": "Ohio",
+      "stateOrProvince": "Ohio",
+      "localityId": "peninsula",
+      "localityName": "Peninsula",
+      "route": "/us-oh/mountain/boston-mills-brandywine",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Boston Mills Brandywine is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "alpine-valley-ohio",
+      "publicId": "alpine-valley-ohio",
+      "aliases": [
+        "Alpine Valley Ski Area"
+      ],
+      "name": "Alpine Valley",
+      "coordinates": {
+        "lat": 41.5285,
+        "lng": -81.2598
+      },
+      "forecastElevationM": 348,
+      "officialUrl": "https://www.alpinevalleyohio.com/",
+      "regionId": "us-oh",
+      "regionName": "Ohio",
+      "stateOrProvince": "Ohio",
+      "localityId": "chesterland",
+      "localityName": "Chesterland",
+      "route": "/us-oh/mountain/alpine-valley-ohio",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Alpine Valley is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "ober-mountain",
+      "publicId": "ober-mountain",
+      "aliases": [
+        "Ober Gatlinburg",
+        "Ober Gatlinburg Ski Resort"
+      ],
+      "name": "Ober Mountain",
+      "coordinates": {
+        "lat": 35.7089,
+        "lng": -83.521
+      },
+      "forecastElevationM": 408,
+      "officialUrl": "https://obermountain.com/",
+      "regionId": "us-tn",
+      "regionName": "Tennessee",
+      "stateOrProvince": "Tennessee",
+      "localityId": "gatlinburg",
+      "localityName": "Gatlinburg",
+      "route": "/us-tn/mountain/ober-mountain",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Ober Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "perfect-north-slopes",
+      "publicId": "perfect-north-slopes",
+      "aliases": [],
+      "name": "Perfect North Slopes",
+      "coordinates": {
+        "lat": 39.1483,
+        "lng": -84.8858
+      },
+      "forecastElevationM": 156,
+      "officialUrl": "https://perfectnorth.com/",
+      "regionId": "us-in",
+      "regionName": "Indiana",
+      "stateOrProvince": "Indiana",
+      "localityId": "lawrenceburg",
+      "localityName": "Lawrenceburg",
+      "route": "/us-in/mountain/perfect-north-slopes",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Indiana/Indianapolis",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Perfect North Slopes is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "paoli-peaks",
+      "publicId": "paoli-peaks",
+      "aliases": [],
+      "name": "Paoli Peaks",
+      "coordinates": {
+        "lat": 38.5562,
+        "lng": -86.5121
+      },
+      "forecastElevationM": 245,
+      "officialUrl": "https://www.paolipeaks.com/",
+      "regionId": "us-in",
+      "regionName": "Indiana",
+      "stateOrProvince": "Indiana",
+      "localityId": "paoli",
+      "localityName": "Paoli",
+      "route": "/us-in/mountain/paoli-peaks",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Indiana/Indianapolis",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Paoli Peaks is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "chestnut-mountain-resort",
+      "publicId": "chestnut-mountain-resort",
+      "aliases": [
+        "Chestnut Mountain"
+      ],
+      "name": "Chestnut Mountain Resort",
+      "coordinates": {
+        "lat": 42.3184,
+        "lng": -90.3931
+      },
+      "forecastElevationM": 311,
+      "officialUrl": "https://www.chestnutmtn.com/",
+      "regionId": "us-il",
+      "regionName": "Illinois",
+      "stateOrProvince": "Illinois",
+      "localityId": "galena",
+      "localityName": "Galena",
+      "route": "/us-il/mountain/chestnut-mountain-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Chestnut Mountain Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "villa-olivia",
+      "publicId": "villa-olivia",
+      "aliases": [
+        "Villa Olivia Ski Area"
+      ],
+      "name": "Villa Olivia",
+      "coordinates": {
+        "lat": 42.0135,
+        "lng": -88.2209
+      },
+      "forecastElevationM": 252,
+      "officialUrl": "https://villaolivia.com/",
+      "regionId": "us-il",
+      "regionName": "Illinois",
+      "stateOrProvince": "Illinois",
+      "localityId": "bartlett",
+      "localityName": "Bartlett",
+      "route": "/us-il/mountain/villa-olivia",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Villa Olivia is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "sundown-mountain-resort",
+      "publicId": "sundown-mountain-resort",
+      "aliases": [
+        "Sundown Mountain"
+      ],
+      "name": "Sundown Mountain Resort",
+      "coordinates": {
+        "lat": 42.5163,
+        "lng": -90.8184
+      },
+      "forecastElevationM": 348,
+      "officialUrl": "https://www.sundownmtn.com/",
+      "regionId": "us-ia",
+      "regionName": "Iowa",
+      "stateOrProvince": "Iowa",
+      "localityId": "dubuque",
+      "localityName": "Dubuque",
+      "route": "/us-ia/mountain/sundown-mountain-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Sundown Mountain Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "mt-crescent-ski-area",
+      "publicId": "mt-crescent-ski-area",
+      "aliases": [
+        "Mount Crescent Ski Area",
+        "Mt. Crescent"
+      ],
+      "name": "Mt. Crescent Ski Area",
+      "coordinates": {
+        "lat": 41.3944,
+        "lng": -95.8596
+      },
+      "forecastElevationM": 330,
+      "officialUrl": "https://www.skicrescent.com/",
+      "regionId": "us-ia",
+      "regionName": "Iowa",
+      "stateOrProvince": "Iowa",
+      "localityId": "crescent",
+      "localityName": "Crescent",
+      "route": "/us-ia/mountain/mt-crescent-ski-area",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Mt. Crescent Ski Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "seven-oaks-recreation",
+      "publicId": "seven-oaks-recreation",
+      "aliases": [
+        "Seven Oaks Snow Ski Area",
+        "Seven Oaks Ski Area"
+      ],
+      "name": "Seven Oaks Recreation",
+      "coordinates": {
+        "lat": 42.0317,
+        "lng": -93.9279
+      },
+      "forecastElevationM": 264,
+      "officialUrl": "https://sevenoaksrec.com/",
+      "regionId": "us-ia",
+      "regionName": "Iowa",
+      "stateOrProvince": "Iowa",
+      "localityId": "boone",
+      "localityName": "Boone",
+      "route": "/us-ia/mountain/seven-oaks-recreation",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Seven Oaks Recreation is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "crystal-mountain-mi",
+      "publicId": "crystal-mountain-mi",
+      "aliases": [
+        "Crystal Mountain Resort & Spa"
+      ],
+      "name": "Crystal Mountain Resort",
+      "coordinates": {
+        "lat": 44.52,
+        "lng": -85.999
+      },
+      "forecastElevationM": 297,
+      "officialUrl": "https://www.crystalmountain.com/",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "thompsonville",
+      "localityName": "Thompsonville",
+      "route": "/us-mi/mountain/crystal-mountain-mi",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Crystal Mountain Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "caberfae-peaks",
+      "publicId": "caberfae-peaks",
+      "aliases": [
+        "Caberfae Peaks Ski & Golf Resort"
+      ],
+      "name": "Caberfae Peaks",
+      "coordinates": {
+        "lat": 44.242,
+        "lng": -85.72
+      },
+      "forecastElevationM": 375,
+      "officialUrl": "https://caberfaepeaks.com/",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "cadillac",
+      "localityName": "Cadillac",
+      "route": "/us-mi/mountain/caberfae-peaks",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Caberfae Peaks is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "shanty-creek-resorts",
+      "publicId": "shanty-creek-resorts",
+      "aliases": [
+        "Shanty Creek",
+        "Schuss Mountain"
+      ],
+      "name": "Shanty Creek Resorts",
+      "coordinates": {
+        "lat": 44.965,
+        "lng": -85.207
+      },
+      "forecastElevationM": 181,
+      "officialUrl": "https://www.shantycreek.com/",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "bellaire",
+      "localityName": "Bellaire",
+      "route": "/us-mi/mountain/shanty-creek-resorts",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Shanty Creek Resorts is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "big-powderhorn-mountain",
+      "publicId": "big-powderhorn-mountain",
+      "aliases": [
+        "Big Powderhorn"
+      ],
+      "name": "Big Powderhorn Mountain Resort",
+      "coordinates": {
+        "lat": 46.505,
+        "lng": -90.097
+      },
+      "forecastElevationM": 453,
+      "officialUrl": "https://bigpowderhorn.net/",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "bessemer",
+      "localityName": "Bessemer",
+      "route": "/us-mi/mountain/big-powderhorn-mountain",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Big Powderhorn Mountain Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "snowriver-mountain-resort",
+      "publicId": "snowriver-mountain-resort",
+      "aliases": [
+        "Big Snow Resort",
+        "Indianhead Mountain",
+        "Blackjack Mountain"
+      ],
+      "name": "Snowriver Mountain Resort",
+      "coordinates": {
+        "lat": 46.498,
+        "lng": -90.179
+      },
+      "forecastElevationM": 389,
+      "officialUrl": "https://www.snowriver.com/",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "wakefield",
+      "localityName": "Wakefield",
+      "route": "/us-mi/mountain/snowriver-mountain-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Snowriver Mountain Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "ski-brule",
+      "publicId": "ski-brule",
+      "aliases": [],
+      "name": "Ski Brule",
+      "coordinates": {
+        "lat": 46.08,
+        "lng": -88.7
+      },
+      "forecastElevationM": 501,
+      "officialUrl": "https://skibrule.com/",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "iron-river",
+      "localityName": "Iron River",
+      "route": "/us-mi/mountain/ski-brule",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Ski Brule is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "marquette-mountain",
+      "publicId": "marquette-mountain",
+      "aliases": [
+        "Marquette Mountain"
+      ],
+      "name": "Marquette Mountain Resort",
+      "coordinates": {
+        "lat": 46.515,
+        "lng": -87.378
+      },
+      "forecastElevationM": 183,
+      "officialUrl": "https://marquettemountain.com/",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "marquette",
+      "localityName": "Marquette",
+      "route": "/us-mi/mountain/marquette-mountain",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Marquette Mountain Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "pine-mountain-resort-mi",
+      "publicId": "pine-mountain-resort-mi",
+      "aliases": [],
+      "name": "Pine Mountain Resort",
+      "coordinates": {
+        "lat": 45.812,
+        "lng": -88.114
+      },
+      "forecastElevationM": 344,
+      "officialUrl": "https://www.pinemountainresort.com/",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "iron-mountain",
+      "localityName": "Iron Mountain",
+      "route": "/us-mi/mountain/pine-mountain-resort-mi",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Pine Mountain Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "porcupine-mountains-ski-area",
+      "publicId": "porcupine-mountains-ski-area",
+      "aliases": [
+        "The Porkies Ski Area",
+        "Porcupine Mountains Wilderness State Park Ski Area"
+      ],
+      "name": "Porcupine Mountains Ski Area",
+      "coordinates": {
+        "lat": 46.818,
+        "lng": -89.579
+      },
+      "forecastElevationM": 199,
+      "officialUrl": "https://www.michigan.gov/dnr/places/state-parks/porcupine-mountains",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "silver-city",
+      "localityName": "Silver City",
+      "route": "/us-mi/mountain/porcupine-mountains-ski-area",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Porcupine Mountains Ski Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "mont-ripley",
+      "publicId": "mont-ripley",
+      "aliases": [
+        "Mont Ripley Ski Resort"
+      ],
+      "name": "Mont Ripley Ski Area",
+      "coordinates": {
+        "lat": 47.168,
+        "lng": -88.631
+      },
+      "forecastElevationM": 242,
+      "officialUrl": "https://www.mtu.edu/mont-ripley/",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "houghton",
+      "localityName": "Houghton",
+      "route": "/us-mi/mountain/mont-ripley",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Mont Ripley Ski Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "the-homestead-mi",
+      "publicId": "the-homestead-mi",
+      "aliases": [
+        "The Homestead Resort"
+      ],
+      "name": "The Homestead",
+      "coordinates": {
+        "lat": 44.884,
+        "lng": -85.957
+      },
+      "forecastElevationM": 182,
+      "officialUrl": "https://www.thehomesteadresort.com/play/winter-activities/the-homestead-ski-pure-michigan/",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "glen-arbor",
+      "localityName": "Glen Arbor",
+      "route": "/us-mi/mountain/the-homestead-mi",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "The Homestead is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "treetops-resort",
+      "publicId": "treetops-resort",
+      "aliases": [],
+      "name": "Treetops Resort",
+      "coordinates": {
+        "lat": 45.013,
+        "lng": -84.596
+      },
+      "forecastElevationM": 400,
+      "officialUrl": "https://www.treetops.com/",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "gaylord",
+      "localityName": "Gaylord",
+      "route": "/us-mi/mountain/treetops-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Treetops Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "otsego-resort",
+      "publicId": "otsego-resort",
+      "aliases": [
+        "Otsego Club",
+        "Otsego Club & Resort"
+      ],
+      "name": "Otsego Resort",
+      "coordinates": {
+        "lat": 45.022,
+        "lng": -84.678
+      },
+      "forecastElevationM": 408,
+      "officialUrl": "https://otsegoclub.com/winter/",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "gaylord",
+      "localityName": "Gaylord",
+      "route": "/us-mi/mountain/otsego-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Otsego Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "mount-holly",
+      "publicId": "mount-holly",
+      "aliases": [
+        "Mt. Holly Ski and Snowboard Resort",
+        "Mount Holly"
+      ],
+      "name": "Mt. Holly Ski Resort",
+      "coordinates": {
+        "lat": 42.747,
+        "lng": -83.618
+      },
+      "forecastElevationM": 302,
+      "officialUrl": "https://skimtholly.com/",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "holly",
+      "localityName": "Holly",
+      "route": "/us-mi/mountain/mount-holly",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Mt. Holly Ski Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "mount-brighton",
+      "publicId": "mount-brighton",
+      "aliases": [
+        "Mt. Brighton Ski Resort",
+        "Mount Brighton"
+      ],
+      "name": "Mt Brighton",
+      "coordinates": {
+        "lat": 42.529,
+        "lng": -83.781
+      },
+      "forecastElevationM": 281,
+      "officialUrl": "https://www.mtbrighton.com/",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "brighton",
+      "localityName": "Brighton",
+      "route": "/us-mi/mountain/mount-brighton",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Mt Brighton is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "pine-knob-ski-resort",
+      "publicId": "pine-knob-ski-resort",
+      "aliases": [
+        "Pine Knob"
+      ],
+      "name": "Pine Knob Ski Resort",
+      "coordinates": {
+        "lat": 42.746,
+        "lng": -83.374
+      },
+      "forecastElevationM": 326,
+      "officialUrl": "https://www.skipineknob.com/",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "clarkston",
+      "localityName": "Clarkston",
+      "route": "/us-mi/mountain/pine-knob-ski-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Pine Knob Ski Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "alpine-valley-mi",
+      "publicId": "alpine-valley-mi",
+      "aliases": [
+        "Alpine Valley"
+      ],
+      "name": "Alpine Valley Ski Area",
+      "coordinates": {
+        "lat": 42.563,
+        "lng": -83.518
+      },
+      "forecastElevationM": 280,
+      "officialUrl": "https://www.skialpinevalley.com/",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "white-lake",
+      "localityName": "White Lake",
+      "route": "/us-mi/mountain/alpine-valley-mi",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Alpine Valley Ski Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "mount-zion-ski-hill",
+      "publicId": "mount-zion-ski-hill",
+      "aliases": [
+        "Mt. Zion Ski Area",
+        "Mount Zion"
+      ],
+      "name": "Mt. Zion Ski Hill",
+      "coordinates": {
+        "lat": 46.475,
+        "lng": -90.154
+      },
+      "forecastElevationM": 453,
+      "officialUrl": "https://www.gogebic.edu/community/mtzion.html",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "ironwood",
+      "localityName": "Ironwood",
+      "route": "/us-mi/mountain/mount-zion-ski-hill",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Mt. Zion Ski Hill is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "bittersweet-ski-resort",
+      "publicId": "bittersweet-ski-resort",
+      "aliases": [
+        "Bittersweet"
+      ],
+      "name": "Bittersweet Ski Resort",
+      "coordinates": {
+        "lat": 42.452,
+        "lng": -85.652
+      },
+      "forecastElevationM": 216,
+      "officialUrl": "https://www.skibittersweet.com/",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "otsego",
+      "localityName": "Otsego",
+      "route": "/us-mi/mountain/bittersweet-ski-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Bittersweet Ski Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "cannonsburg-ski-area",
+      "publicId": "cannonsburg-ski-area",
+      "aliases": [
+        "Cannonsburg"
+      ],
+      "name": "Cannonsburg Ski Area",
+      "coordinates": {
+        "lat": 43.055,
+        "lng": -85.489
+      },
+      "forecastElevationM": 226,
+      "officialUrl": "https://cannonsburg.com/",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "cannonsburg",
+      "localityName": "Cannonsburg",
+      "route": "/us-mi/mountain/cannonsburg-ski-area",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Cannonsburg Ski Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "timber-ridge-ski-area-mi",
+      "publicId": "timber-ridge-ski-area-mi",
+      "aliases": [
+        "Timber Ridge"
+      ],
+      "name": "Timber Ridge Ski Area",
+      "coordinates": {
+        "lat": 42.402,
+        "lng": -85.65
+      },
+      "forecastElevationM": 248,
+      "officialUrl": "https://timberridgeski.com/",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "gobles",
+      "localityName": "Gobles",
+      "route": "/us-mi/mountain/timber-ridge-ski-area-mi",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Timber Ridge Ski Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "swiss-valley",
+      "publicId": "swiss-valley",
+      "aliases": [
+        "Swiss Valley"
+      ],
+      "name": "Swiss Valley Ski & Snowboard Area",
+      "coordinates": {
+        "lat": 41.819,
+        "lng": -85.822
+      },
+      "forecastElevationM": 277,
+      "officialUrl": "https://www.skiswissvalley.com/",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "jones",
+      "localityName": "Jones",
+      "route": "/us-mi/mountain/swiss-valley",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Swiss Valley Ski & Snowboard Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "snow-snake",
+      "publicId": "snow-snake",
+      "aliases": [
+        "Snow Snake"
+      ],
+      "name": "Snow Snake Ski & Golf",
+      "coordinates": {
+        "lat": 44.038,
+        "lng": -84.789
+      },
+      "forecastElevationM": 349,
+      "officialUrl": "https://snowsnake.net/",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "harrison",
+      "localityName": "Harrison",
+      "route": "/us-mi/mountain/snow-snake",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Snow Snake Ski & Golf is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "hickory-hills",
+      "publicId": "hickory-hills",
+      "aliases": [],
+      "name": "Hickory Hills Ski Area",
+      "coordinates": {
+        "lat": 44.75,
+        "lng": -85.625
+      },
+      "forecastElevationM": 187,
+      "officialUrl": "https://www.traversecitymi.gov/government/city-departments/parks-and-recreation/hickory-hills.html",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "traverse-city",
+      "localityName": "Traverse City",
+      "route": "/us-mi/mountain/hickory-hills",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Hickory Hills Ski Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "mount-holiday",
+      "publicId": "mount-holiday",
+      "aliases": [],
+      "name": "Mt. Holiday",
+      "coordinates": {
+        "lat": 44.732,
+        "lng": -85.635
+      },
+      "forecastElevationM": 219,
+      "officialUrl": "https://mt-holiday.com/",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "traverse-city",
+      "localityName": "Traverse City",
+      "route": "/us-mi/mountain/mount-holiday",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Mt. Holiday is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "mount-mcsauba",
+      "publicId": "mount-mcsauba",
+      "aliases": [
+        "Mount McSauba",
+        "Mt. McSauba Ski Hill"
+      ],
+      "name": "Mt. McSauba Recreation Area",
+      "coordinates": {
+        "lat": 45.314,
+        "lng": -85.27
+      },
+      "forecastElevationM": 188,
+      "officialUrl": "https://www.charlevoixmi.gov/244/Mt-McSauba-Recreation-Area",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "charlevoix",
+      "localityName": "Charlevoix",
+      "route": "/us-mi/mountain/mount-mcsauba",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Mt. McSauba Recreation Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "petoskey-winter-sports-park",
+      "publicId": "petoskey-winter-sports-park",
+      "aliases": [
+        "Winter Sports Park"
+      ],
+      "name": "Petoskey Winter Sports Park",
+      "coordinates": {
+        "lat": 45.366,
+        "lng": -84.958
+      },
+      "forecastElevationM": 222,
+      "officialUrl": "https://www.petoskey.us/departments/parks___recreation/index.php",
+      "regionId": "us-mi",
+      "regionName": "Michigan",
+      "stateOrProvince": "Michigan",
+      "localityId": "petoskey",
+      "localityName": "Petoskey",
+      "route": "/us-mi/mountain/petoskey-winter-sports-park",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Detroit",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Petoskey Winter Sports Park is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "holiday-valley",
+      "publicId": "holiday-valley",
+      "aliases": [
+        "Holiday Valley Resort"
+      ],
+      "name": "Holiday Valley",
+      "coordinates": {
+        "lat": 42.263,
+        "lng": -78.668
+      },
+      "forecastElevationM": 488,
+      "officialUrl": "https://holidayvalley.com/",
+      "regionId": "us-ny",
+      "regionName": "New York",
+      "stateOrProvince": "New York",
+      "localityId": "ellicottville",
+      "localityName": "Ellicottville",
+      "route": "/us-ny/mountain/holiday-valley",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Holiday Valley is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "bristol-mountain",
+      "publicId": "bristol-mountain",
+      "aliases": [
+        "Bristol Mountain Ski Resort"
+      ],
+      "name": "Bristol Mountain",
+      "coordinates": {
+        "lat": 42.743,
+        "lng": -77.407
+      },
+      "forecastElevationM": 346,
+      "officialUrl": "https://www.bristolmountain.com/",
+      "regionId": "us-ny",
+      "regionName": "New York",
+      "stateOrProvince": "New York",
+      "localityId": "south-bristol",
+      "localityName": "South Bristol",
+      "route": "/us-ny/mountain/bristol-mountain",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Bristol Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "greek-peak",
+      "publicId": "greek-peak",
+      "aliases": [
+        "Greek Peak"
+      ],
+      "name": "Greek Peak Mountain Resort",
+      "coordinates": {
+        "lat": 42.509,
+        "lng": -76.146
+      },
+      "forecastElevationM": 410,
+      "officialUrl": "https://www.greekpeak.net/",
+      "regionId": "us-ny",
+      "regionName": "New York",
+      "stateOrProvince": "New York",
+      "localityId": "virgil",
+      "localityName": "Virgil",
+      "route": "/us-ny/mountain/greek-peak",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Greek Peak Mountain Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "kissing-bridge",
+      "publicId": "kissing-bridge",
+      "aliases": [
+        "Kissing Bridge Snow Sports"
+      ],
+      "name": "Kissing Bridge",
+      "coordinates": {
+        "lat": 42.496,
+        "lng": -78.62
+      },
+      "forecastElevationM": 375,
+      "officialUrl": "https://www.kbski.com/",
+      "regionId": "us-ny",
+      "regionName": "New York",
+      "stateOrProvince": "New York",
+      "localityId": "glenwood",
+      "localityName": "Glenwood",
+      "route": "/us-ny/mountain/kissing-bridge",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Kissing Bridge is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "titus-mountain",
+      "publicId": "titus-mountain",
+      "aliases": [
+        "Titus Mountain"
+      ],
+      "name": "Titus Mountain Family Ski Center",
+      "coordinates": {
+        "lat": 44.908,
+        "lng": -74.255
+      },
+      "forecastElevationM": 166,
+      "officialUrl": "https://www.titusmountain.com/",
+      "regionId": "us-ny",
+      "regionName": "New York",
+      "stateOrProvince": "New York",
+      "localityId": "malone",
+      "localityName": "Malone",
+      "route": "/us-ny/mountain/titus-mountain",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Titus Mountain Family Ski Center is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "snow-ridge",
+      "publicId": "snow-ridge",
+      "aliases": [
+        "Snow Ridge"
+      ],
+      "name": "Snow Ridge Ski Resort",
+      "coordinates": {
+        "lat": 43.676,
+        "lng": -75.514
+      },
+      "forecastElevationM": 581,
+      "officialUrl": "https://snowridge.com/",
+      "regionId": "us-ny",
+      "regionName": "New York",
+      "stateOrProvince": "New York",
+      "localityId": "turin",
+      "localityName": "Turin",
+      "route": "/us-ny/mountain/snow-ridge",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Snow Ridge Ski Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "plattekill-mountain",
+      "publicId": "plattekill-mountain",
+      "aliases": [
+        "Plattekill"
+      ],
+      "name": "Plattekill Mountain",
+      "coordinates": {
+        "lat": 42.3,
+        "lng": -74.653
+      },
+      "forecastElevationM": 737,
+      "officialUrl": "https://plattekill.com/",
+      "regionId": "us-ny",
+      "regionName": "New York",
+      "stateOrProvince": "New York",
+      "localityId": "roxbury",
+      "localityName": "Roxbury",
+      "route": "/us-ny/mountain/plattekill-mountain",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Plattekill Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "west-mountain",
+      "publicId": "west-mountain",
+      "aliases": [
+        "West Mountain Ski Area"
+      ],
+      "name": "West Mountain",
+      "coordinates": {
+        "lat": 43.31,
+        "lng": -73.642
+      },
+      "forecastElevationM": 104,
+      "officialUrl": "https://westmountain.com/",
+      "regionId": "us-ny",
+      "regionName": "New York",
+      "stateOrProvince": "New York",
+      "localityId": "queensbury",
+      "localityName": "Queensbury",
+      "route": "/us-ny/mountain/west-mountain",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "West Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "catamount-mountain-resort",
+      "publicId": "catamount-mountain-resort",
+      "aliases": [
+        "Catamount Ski Area",
+        "Catamount"
+      ],
+      "name": "Catamount Mountain Resort",
+      "coordinates": {
+        "lat": 42.216,
+        "lng": -73.476
+      },
+      "forecastElevationM": 322,
+      "officialUrl": "https://catamountski.com/",
+      "regionId": "us-ny",
+      "regionName": "New York",
+      "stateOrProvince": "New York",
+      "localityId": "hillsdale",
+      "localityName": "Hillsdale",
+      "route": "/us-ny/mountain/catamount-mountain-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Catamount Mountain Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "labrador-mountain",
+      "publicId": "labrador-mountain",
+      "aliases": [],
+      "name": "Labrador Mountain",
+      "coordinates": {
+        "lat": 42.741,
+        "lng": -76.054
+      },
+      "forecastElevationM": 470,
+      "officialUrl": "https://www.skicny.com/labrador-mountain",
+      "regionId": "us-ny",
+      "regionName": "New York",
+      "stateOrProvince": "New York",
+      "localityId": "truxton",
+      "localityName": "Truxton",
+      "route": "/us-ny/mountain/labrador-mountain",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Labrador Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "peek-n-peak",
+      "publicId": "peek-n-peak",
+      "aliases": [
+        "Peek'n Peak"
+      ],
+      "name": "Peek'n Peak Resort",
+      "coordinates": {
+        "lat": 42.066,
+        "lng": -79.736
+      },
+      "forecastElevationM": 430,
+      "officialUrl": "https://www.pknpk.com/",
+      "regionId": "us-ny",
+      "regionName": "New York",
+      "stateOrProvince": "New York",
+      "localityId": "clymer",
+      "localityName": "Clymer",
+      "route": "/us-ny/mountain/peek-n-peak",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Peek'n Peak Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "song-mountain",
+      "publicId": "song-mountain",
+      "aliases": [],
+      "name": "Song Mountain",
+      "coordinates": {
+        "lat": 42.786,
+        "lng": -76.109
+      },
+      "forecastElevationM": 386,
+      "officialUrl": "https://www.skicny.com/song-mountain",
+      "regionId": "us-ny",
+      "regionName": "New York",
+      "stateOrProvince": "New York",
+      "localityId": "tully",
+      "localityName": "Tully",
+      "route": "/us-ny/mountain/song-mountain",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Song Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "swain-resort",
+      "publicId": "swain-resort",
+      "aliases": [
+        "Swain Ski Resort"
+      ],
+      "name": "Swain Resort",
+      "coordinates": {
+        "lat": 42.473,
+        "lng": -77.875
+      },
+      "forecastElevationM": 556,
+      "officialUrl": "https://swain.com/",
+      "regionId": "us-ny",
+      "regionName": "New York",
+      "stateOrProvince": "New York",
+      "localityId": "swain",
+      "localityName": "Swain",
+      "route": "/us-ny/mountain/swain-resort",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Swain Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "willard-mountain",
+      "publicId": "willard-mountain",
+      "aliases": [],
+      "name": "Willard Mountain",
+      "coordinates": {
+        "lat": 43.218,
+        "lng": -73.928
+      },
+      "forecastElevationM": 569,
+      "officialUrl": "https://www.willardmountain.com/",
+      "regionId": "us-ny",
+      "regionName": "New York",
+      "stateOrProvince": "New York",
+      "localityId": "greenwich",
+      "localityName": "Greenwich",
+      "route": "/us-ny/mountain/willard-mountain",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Willard Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "mccauley-mountain",
+      "publicId": "mccauley-mountain",
+      "aliases": [
+        "McCauley Mountain"
+      ],
+      "name": "McCauley Mountain Ski Area",
+      "coordinates": {
+        "lat": 43.711,
+        "lng": -74.974
+      },
+      "forecastElevationM": 530,
+      "officialUrl": "https://www.mccauleyny.com/",
+      "regionId": "us-ny",
+      "regionName": "New York",
+      "stateOrProvince": "New York",
+      "localityId": "old-forge",
+      "localityName": "Old Forge",
+      "route": "/us-ny/mountain/mccauley-mountain",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "McCauley Mountain Ski Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "thunder-ridge",
+      "publicId": "thunder-ridge",
+      "aliases": [
+        "Thunder Ridge"
+      ],
+      "name": "Thunder Ridge Ski Area",
+      "coordinates": {
+        "lat": 41.562,
+        "lng": -73.584
+      },
+      "forecastElevationM": 193,
+      "officialUrl": "https://thunderridgeski.com/",
+      "regionId": "us-ny",
+      "regionName": "New York",
+      "stateOrProvince": "New York",
+      "localityId": "patterson",
+      "localityName": "Patterson",
+      "route": "/us-ny/mountain/thunder-ridge",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Thunder Ridge Ski Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "mount-peter",
+      "publicId": "mount-peter",
+      "aliases": [
+        "Mt. Peter Ski Area",
+        "Mount Peter"
+      ],
+      "name": "Mount Peter Ski Area",
+      "coordinates": {
+        "lat": 41.262,
+        "lng": -74.485
+      },
+      "forecastElevationM": 210,
+      "officialUrl": "https://mtpeter.com/",
+      "regionId": "us-ny",
+      "regionName": "New York",
+      "stateOrProvince": "New York",
+      "localityId": "warwick",
+      "localityName": "Warwick",
+      "route": "/us-ny/mountain/mount-peter",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Mount Peter Ski Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "holiday-mountain-ny",
+      "publicId": "holiday-mountain-ny",
+      "aliases": [
+        "Holiday Mountain Ski & Fun Park"
+      ],
+      "name": "Holiday Mountain",
+      "coordinates": {
+        "lat": 41.666,
+        "lng": -74.683
+      },
+      "forecastElevationM": 448,
+      "officialUrl": "https://holidaymtn.com/",
+      "regionId": "us-ny",
+      "regionName": "New York",
+      "stateOrProvince": "New York",
+      "localityId": "monticello",
+      "localityName": "Monticello",
+      "route": "/us-ny/mountain/holiday-mountain-ny",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Holiday Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "mount-sunapee",
+      "publicId": "mount-sunapee",
+      "aliases": [
+        "Mount Sunapee"
+      ],
+      "name": "Mount Sunapee Resort",
+      "coordinates": {
+        "lat": 43.332,
+        "lng": -72.0802
+      },
+      "forecastElevationM": 388,
+      "officialUrl": "https://www.mountsunapee.com/",
+      "regionId": "us-nh",
+      "regionName": "New Hampshire",
+      "stateOrProvince": "New Hampshire",
+      "localityId": "newbury",
+      "localityName": "Newbury",
+      "route": "/us-nh/mountain/mount-sunapee",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Mount Sunapee Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "pats-peak",
+      "publicId": "pats-peak",
+      "aliases": [
+        "Pats Peak Ski Area"
+      ],
+      "name": "Pats Peak",
+      "coordinates": {
+        "lat": 43.164,
+        "lng": -71.7968
+      },
+      "forecastElevationM": 174,
+      "officialUrl": "https://www.patspeak.com/",
+      "regionId": "us-nh",
+      "regionName": "New Hampshire",
+      "stateOrProvince": "New Hampshire",
+      "localityId": "henniker",
+      "localityName": "Henniker",
+      "route": "/us-nh/mountain/pats-peak",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Pats Peak is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "ragged-mountain-nh",
+      "publicId": "ragged-mountain-nh",
+      "aliases": [
+        "Ragged Mountain"
+      ],
+      "name": "Ragged Mountain Resort",
+      "coordinates": {
+        "lat": 43.4853,
+        "lng": -71.842
+      },
+      "forecastElevationM": 340,
+      "officialUrl": "https://www.raggedmountainresort.com/",
+      "regionId": "us-nh",
+      "regionName": "New Hampshire",
+      "stateOrProvince": "New Hampshire",
+      "localityId": "danbury",
+      "localityName": "Danbury",
+      "route": "/us-nh/mountain/ragged-mountain-nh",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Ragged Mountain Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "black-mountain-nh",
+      "publicId": "black-mountain-nh",
+      "aliases": [
+        "Black Mountain Ski Area"
+      ],
+      "name": "Black Mountain",
+      "coordinates": {
+        "lat": 44.1667,
+        "lng": -71.1636
+      },
+      "forecastElevationM": 384,
+      "officialUrl": "https://www.blackmt.com/",
+      "regionId": "us-nh",
+      "regionName": "New Hampshire",
+      "stateOrProvince": "New Hampshire",
+      "localityId": "jackson",
+      "localityName": "Jackson",
+      "route": "/us-nh/mountain/black-mountain-nh",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Black Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "king-pine",
+      "publicId": "king-pine",
+      "aliases": [
+        "King Pine"
+      ],
+      "name": "King Pine Ski Area",
+      "coordinates": {
+        "lat": 43.8685,
+        "lng": -71.0888
+      },
+      "forecastElevationM": 147,
+      "officialUrl": "https://www.kingpine.com/",
+      "regionId": "us-nh",
+      "regionName": "New Hampshire",
+      "stateOrProvince": "New Hampshire",
+      "localityId": "east-madison",
+      "localityName": "East Madison",
+      "route": "/us-nh/mountain/king-pine",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "King Pine Ski Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "crotched-mountain",
+      "publicId": "crotched-mountain",
+      "aliases": [
+        "Crotched Mountain Resort"
+      ],
+      "name": "Crotched Mountain",
+      "coordinates": {
+        "lat": 43.012,
+        "lng": -71.8787
+      },
+      "forecastElevationM": 320,
+      "officialUrl": "https://www.crotchedmtn.com/",
+      "regionId": "us-nh",
+      "regionName": "New Hampshire",
+      "stateOrProvince": "New Hampshire",
+      "localityId": "bennington",
+      "localityName": "Bennington",
+      "route": "/us-nh/mountain/crotched-mountain",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Crotched Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "dartmouth-skiway",
+      "publicId": "dartmouth-skiway",
+      "aliases": [],
+      "name": "Dartmouth Skiway",
+      "coordinates": {
+        "lat": 43.7878,
+        "lng": -72.0995
+      },
+      "forecastElevationM": 294,
+      "officialUrl": "https://dartmouthskiway.com/",
+      "regionId": "us-nh",
+      "regionName": "New Hampshire",
+      "stateOrProvince": "New Hampshire",
+      "localityId": "lyme",
+      "localityName": "Lyme",
+      "route": "/us-nh/mountain/dartmouth-skiway",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Dartmouth Skiway is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "tenney-mountain",
+      "publicId": "tenney-mountain",
+      "aliases": [
+        "Tenney Mountain Ski Resort",
+        "Tenney Mountain"
+      ],
+      "name": "Tenney Mountain Resort",
+      "coordinates": {
+        "lat": 43.737,
+        "lng": -71.778
+      },
+      "forecastElevationM": 604,
+      "officialUrl": "https://skitenney.com/",
+      "regionId": "us-nh",
+      "regionName": "New Hampshire",
+      "stateOrProvince": "New Hampshire",
+      "localityId": "plymouth",
+      "localityName": "Plymouth",
+      "route": "/us-nh/mountain/tenney-mountain",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Tenney Mountain Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "whaleback-mountain",
+      "publicId": "whaleback-mountain",
+      "aliases": [
+        "Whaleback"
+      ],
+      "name": "Whaleback Mountain",
+      "coordinates": {
+        "lat": 43.6015,
+        "lng": -72.1807
+      },
+      "forecastElevationM": 348,
+      "officialUrl": "https://www.whaleback.com/",
+      "regionId": "us-nh",
+      "regionName": "New Hampshire",
+      "stateOrProvince": "New Hampshire",
+      "localityId": "enfield",
+      "localityName": "Enfield",
+      "route": "/us-nh/mountain/whaleback-mountain",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Whaleback Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "nashoba-valley",
+      "publicId": "nashoba-valley",
+      "aliases": [
+        "Nashoba Valley"
+      ],
+      "name": "Nashoba Valley Ski Area",
+      "coordinates": {
+        "lat": 42.5423,
+        "lng": -71.4448
+      },
+      "forecastElevationM": 60,
+      "officialUrl": "https://skinashoba.com/",
+      "regionId": "us-ma",
+      "regionName": "Massachusetts",
+      "stateOrProvince": "Massachusetts",
+      "localityId": "westford",
+      "localityName": "Westford",
+      "route": "/us-ma/mountain/nashoba-valley",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Nashoba Valley Ski Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "ski-ward",
+      "publicId": "ski-ward",
+      "aliases": [
+        "Ward Hill Ski Area"
+      ],
+      "name": "Ski Ward",
+      "coordinates": {
+        "lat": 42.3018,
+        "lng": -71.6827
+      },
+      "forecastElevationM": 106,
+      "officialUrl": "https://skiward.com/",
+      "regionId": "us-ma",
+      "regionName": "Massachusetts",
+      "stateOrProvince": "Massachusetts",
+      "localityId": "shrewsbury",
+      "localityName": "Shrewsbury",
+      "route": "/us-ma/mountain/ski-ward",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Ski Ward is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "blue-hills-ski-area",
+      "publicId": "blue-hills-ski-area",
+      "aliases": [
+        "Blue Hills"
+      ],
+      "name": "Blue Hills Ski Area",
+      "coordinates": {
+        "lat": 42.2159,
+        "lng": -71.1191
+      },
+      "forecastElevationM": 82,
+      "officialUrl": "https://bluehillsboston.com/",
+      "regionId": "us-ma",
+      "regionName": "Massachusetts",
+      "stateOrProvince": "Massachusetts",
+      "localityId": "canton",
+      "localityName": "Canton",
+      "route": "/us-ma/mountain/blue-hills-ski-area",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Blue Hills Ski Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "bousquet-mountain",
+      "publicId": "bousquet-mountain",
+      "aliases": [
+        "Bousquet Ski Area"
+      ],
+      "name": "Bousquet Mountain",
+      "coordinates": {
+        "lat": 42.4193,
+        "lng": -73.2766
+      },
+      "forecastElevationM": 342,
+      "officialUrl": "https://bousquetmountain.com/",
+      "regionId": "us-ma",
+      "regionName": "Massachusetts",
+      "stateOrProvince": "Massachusetts",
+      "localityId": "pittsfield",
+      "localityName": "Pittsfield",
+      "route": "/us-ma/mountain/bousquet-mountain",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Bousquet Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "otis-ridge",
+      "publicId": "otis-ridge",
+      "aliases": [
+        "Otis Ridge"
+      ],
+      "name": "Otis Ridge Ski Area",
+      "coordinates": {
+        "lat": 42.1964,
+        "lng": -73.0984
+      },
+      "forecastElevationM": 379,
+      "officialUrl": "https://otisridge.com/",
+      "regionId": "us-ma",
+      "regionName": "Massachusetts",
+      "stateOrProvince": "Massachusetts",
+      "localityId": "otis",
+      "localityName": "Otis",
+      "route": "/us-ma/mountain/otis-ridge",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Otis Ridge Ski Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "ski-bradford",
+      "publicId": "ski-bradford",
+      "aliases": [
+        "Bradford Ski Area"
+      ],
+      "name": "Ski Bradford",
+      "coordinates": {
+        "lat": 42.7449,
+        "lng": -71.0567
+      },
+      "forecastElevationM": 14,
+      "officialUrl": "https://skibradford.com/",
+      "regionId": "us-ma",
+      "regionName": "Massachusetts",
+      "stateOrProvince": "Massachusetts",
+      "localityId": "haverhill",
+      "localityName": "Haverhill",
+      "route": "/us-ma/mountain/ski-bradford",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Ski Bradford is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "ski-sundown",
+      "publicId": "ski-sundown",
+      "aliases": [
+        "Ski Sundown CT"
+      ],
+      "name": "Ski Sundown",
+      "coordinates": {
+        "lat": 41.8847,
+        "lng": -72.9463
+      },
+      "forecastElevationM": 152,
+      "officialUrl": "https://skisundown.com/",
+      "regionId": "us-ct",
+      "regionName": "Connecticut",
+      "stateOrProvince": "Connecticut",
+      "localityId": "new-hartford",
+      "localityName": "New Hartford",
+      "route": "/us-ct/mountain/ski-sundown",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Ski Sundown is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "mount-southington",
+      "publicId": "mount-southington",
+      "aliases": [
+        "Mount Southington"
+      ],
+      "name": "Mount Southington Ski Area",
+      "coordinates": {
+        "lat": 41.5826,
+        "lng": -72.9242
+      },
+      "forecastElevationM": 60,
+      "officialUrl": "https://mountsouthington.com/",
+      "regionId": "us-ct",
+      "regionName": "Connecticut",
+      "stateOrProvince": "Connecticut",
+      "localityId": "southington",
+      "localityName": "Southington",
+      "route": "/us-ct/mountain/mount-southington",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Mount Southington Ski Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "powder-ridge-ct",
+      "publicId": "powder-ridge-ct",
+      "aliases": [
+        "Powder Ridge Ski Area",
+        "Powder Ridge"
+      ],
+      "name": "Powder Ridge Mountain Park & Resort",
+      "coordinates": {
+        "lat": 41.5017,
+        "lng": -72.7369
+      },
+      "forecastElevationM": 116,
+      "officialUrl": "https://powderridgepark.com/",
+      "regionId": "us-ct",
+      "regionName": "Connecticut",
+      "stateOrProvince": "Connecticut",
+      "localityId": "middlefield",
+      "localityName": "Middlefield",
+      "route": "/us-ct/mountain/powder-ridge-ct",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Powder Ridge Mountain Park & Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "mount-abram",
+      "publicId": "mount-abram",
+      "aliases": [
+        "Mount Abram",
+        "Mt. Abram Ski Area"
+      ],
+      "name": "Mt. Abram",
+      "coordinates": {
+        "lat": 44.3798,
+        "lng": -70.7069
+      },
+      "forecastElevationM": 289,
+      "officialUrl": "https://mtabram.com/",
+      "regionId": "us-me",
+      "regionName": "Maine",
+      "stateOrProvince": "Maine",
+      "localityId": "greenwood",
+      "localityName": "Greenwood",
+      "route": "/us-me/mountain/mount-abram",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Mt. Abram is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "bigrock-mountain",
+      "publicId": "bigrock-mountain",
+      "aliases": [
+        "Big Rock",
+        "Big Rock Ski Area"
+      ],
+      "name": "BigRock Mountain",
+      "coordinates": {
+        "lat": 46.5205,
+        "lng": -67.8336
+      },
+      "forecastElevationM": 168,
+      "officialUrl": "https://www.bigrockmaine.com/",
+      "regionId": "us-me",
+      "regionName": "Maine",
+      "stateOrProvince": "Maine",
+      "localityId": "mars-hill",
+      "localityName": "Mars Hill",
+      "route": "/us-me/mountain/bigrock-mountain",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "BigRock Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "black-mountain-of-maine",
+      "publicId": "black-mountain-of-maine",
+      "aliases": [
+        "Black Mountain Maine"
+      ],
+      "name": "Black Mountain of Maine",
+      "coordinates": {
+        "lat": 44.578,
+        "lng": -70.613
+      },
+      "forecastElevationM": 292,
+      "officialUrl": "https://skiblackmountain.org/",
+      "regionId": "us-me",
+      "regionName": "Maine",
+      "stateOrProvince": "Maine",
+      "localityId": "rumford",
+      "localityName": "Rumford",
+      "route": "/us-me/mountain/black-mountain-of-maine",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Black Mountain of Maine is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "camden-snow-bowl",
+      "publicId": "camden-snow-bowl",
+      "aliases": [
+        "Camden Snowbowl",
+        "Ragged Mountain Recreation Area"
+      ],
+      "name": "Camden Snow Bowl",
+      "coordinates": {
+        "lat": 44.217,
+        "lng": -69.134
+      },
+      "forecastElevationM": 70,
+      "officialUrl": "https://camdensnowbowl.com/",
+      "regionId": "us-me",
+      "regionName": "Maine",
+      "stateOrProvince": "Maine",
+      "localityId": "camden",
+      "localityName": "Camden",
+      "route": "/us-me/mountain/camden-snow-bowl",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Camden Snow Bowl is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "pleasant-mountain",
+      "publicId": "pleasant-mountain",
+      "aliases": [
+        "Shawnee Peak",
+        "Pleasant Mountain Ski Area"
+      ],
+      "name": "Pleasant Mountain",
+      "coordinates": {
+        "lat": 44.0592,
+        "lng": -70.8153
+      },
+      "forecastElevationM": 159,
+      "officialUrl": "https://www.pleasantmountain.com/",
+      "regionId": "us-me",
+      "regionName": "Maine",
+      "stateOrProvince": "Maine",
+      "localityId": "bridgton",
+      "localityName": "Bridgton",
+      "route": "/us-me/mountain/pleasant-mountain",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Pleasant Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "lost-valley",
+      "publicId": "lost-valley",
+      "aliases": [
+        "Lost Valley Ski Area"
+      ],
+      "name": "Lost Valley",
+      "coordinates": {
+        "lat": 44.1359,
+        "lng": -70.2829
+      },
+      "forecastElevationM": 117,
+      "officialUrl": "https://www.lostvalleyski.com/",
+      "regionId": "us-me",
+      "regionName": "Maine",
+      "stateOrProvince": "Maine",
+      "localityId": "auburn",
+      "localityName": "Auburn",
+      "route": "/us-me/mountain/lost-valley",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Lost Valley is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "big-moose-mountain",
+      "publicId": "big-moose-mountain",
+      "aliases": [
+        "Big Squaw Mountain",
+        "Squaw Mountain"
+      ],
+      "name": "Big Moose Mountain",
+      "coordinates": {
+        "lat": 45.474,
+        "lng": -69.704
+      },
+      "forecastElevationM": 513,
+      "officialUrl": "https://www.skibigmoose.com/",
+      "regionId": "us-me",
+      "regionName": "Maine",
+      "stateOrProvince": "Maine",
+      "localityId": "greenville",
+      "localityName": "Greenville",
+      "route": "/us-me/mountain/big-moose-mountain",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Big Moose Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "titcomb-mountain",
+      "publicId": "titcomb-mountain",
+      "aliases": [
+        "Titcomb Mountain Ski Area"
+      ],
+      "name": "Titcomb Mountain",
+      "coordinates": {
+        "lat": 44.6497,
+        "lng": -70.1707
+      },
+      "forecastElevationM": 123,
+      "officialUrl": "https://www.titcombmountain.com/",
+      "regionId": "us-me",
+      "regionName": "Maine",
+      "stateOrProvince": "Maine",
+      "localityId": "farmington",
+      "localityName": "Farmington",
+      "route": "/us-me/mountain/titcomb-mountain",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Titcomb Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "bolton-valley",
+      "publicId": "bolton-valley",
+      "aliases": [
+        "Bolton Valley"
+      ],
+      "name": "Bolton Valley Resort",
+      "coordinates": {
+        "lat": 44.4213,
+        "lng": -72.8494
+      },
+      "forecastElevationM": 647,
+      "officialUrl": "https://www.boltonvalley.com/",
+      "regionId": "us-vt",
+      "regionName": "Vermont",
+      "stateOrProvince": "Vermont",
+      "localityId": "bolton-valley",
+      "localityName": "Bolton Valley",
+      "route": "/us-vt/mountain/bolton-valley",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Bolton Valley Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "middlebury-snowbowl",
+      "publicId": "middlebury-snowbowl",
+      "aliases": [
+        "Middlebury College Snow Bowl",
+        "Middlebury College Snowbowl"
+      ],
+      "name": "Middlebury Snowbowl",
+      "coordinates": {
+        "lat": 43.9394,
+        "lng": -72.957
+      },
+      "forecastElevationM": 558,
+      "officialUrl": "https://middleburysnowbowl.com/",
+      "regionId": "us-vt",
+      "regionName": "Vermont",
+      "stateOrProvince": "Vermont",
+      "localityId": "hancock",
+      "localityName": "Hancock",
+      "route": "/us-vt/mountain/middlebury-snowbowl",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Middlebury Snowbowl is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "saskadena-six",
+      "publicId": "saskadena-six",
+      "aliases": [
+        "Suicide Six",
+        "S6"
+      ],
+      "name": "Saskadena Six",
+      "coordinates": {
+        "lat": 43.665,
+        "lng": -72.543
+      },
+      "forecastElevationM": 221,
+      "officialUrl": "https://www.saskadenasix.com/",
+      "regionId": "us-vt",
+      "regionName": "Vermont",
+      "stateOrProvince": "Vermont",
+      "localityId": "south-pomfret",
+      "localityName": "South Pomfret",
+      "route": "/us-vt/mountain/saskadena-six",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Saskadena Six is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "ascutney-outdoors",
+      "publicId": "ascutney-outdoors",
+      "aliases": [
+        "Ascutney Outdoors Center",
+        "Mount Ascutney"
+      ],
+      "name": "Ascutney Outdoors",
+      "coordinates": {
+        "lat": 43.4602,
+        "lng": -72.4644
+      },
+      "forecastElevationM": 328,
+      "officialUrl": "https://www.ascutneyoutdoors.org/",
+      "regionId": "us-vt",
+      "regionName": "Vermont",
+      "stateOrProvince": "Vermont",
+      "localityId": "brownsville",
+      "localityName": "Brownsville",
+      "route": "/us-vt/mountain/ascutney-outdoors",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Ascutney Outdoors is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "cochrans-ski-area",
+      "publicId": "cochrans-ski-area",
+      "aliases": [
+        "Cochran Ski Area",
+        "Cochran's"
+      ],
+      "name": "Cochran's Ski Area",
+      "coordinates": {
+        "lat": 44.396,
+        "lng": -72.982
+      },
+      "forecastElevationM": 109,
+      "officialUrl": "https://cochranskiarea.com/",
+      "regionId": "us-vt",
+      "regionName": "Vermont",
+      "stateOrProvince": "Vermont",
+      "localityId": "richmond",
+      "localityName": "Richmond",
+      "route": "/us-vt/mountain/cochrans-ski-area",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Cochran's Ski Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "nz-craigieburn-valley",
+      "publicId": "craigieburn-valley",
+      "aliases": [
+        "Craigieburn"
+      ],
+      "name": "Craigieburn Valley Ski Area",
+      "coordinates": {
+        "lat": -43.114,
+        "lng": 171.716
+      },
+      "forecastElevationM": 1560,
+      "officialUrl": "https://www.craigieburn.co.nz/",
+      "regionId": "canterbury",
+      "regionName": "Canterbury",
+      "stateOrProvince": "Canterbury",
+      "localityId": "springfield-nz",
+      "localityName": "Springfield",
+      "route": "/canterbury/mountain/craigieburn-valley",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "club_field",
+      "accessModel": "Public club field; tow-belt ability and mountain-road preparation are required.",
+      "publicCopy": "A volunteer-rooted Canterbury club field with rope tows, a steep access road and no resort-village gloss. Check the club's access and operating report before leaving Springfield.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "nz-broken-river",
+      "publicId": "broken-river",
+      "aliases": [],
+      "name": "Broken River Ski Area",
+      "coordinates": {
+        "lat": -43.111,
+        "lng": 171.658
+      },
+      "forecastElevationM": 1620,
+      "officialUrl": "https://brokenriver.co.nz/",
+      "regionId": "canterbury",
+      "regionName": "Canterbury",
+      "stateOrProvince": "Canterbury",
+      "localityId": "springfield-nz",
+      "localityName": "Springfield",
+      "route": "/canterbury/mountain/broken-river",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "club_field",
+      "accessModel": "Public club field reached by mountain road and inclinator; rope-tow skills are recommended.",
+      "publicCopy": "A Canterbury club field where the trip includes a mountain road, an inclinator and nutcracker rope tows. Read the day's access report and arrive self-sufficient.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "nz-mt-olympus",
+      "publicId": "mt-olympus-nz",
+      "aliases": [
+        "Mount Olympus NZ"
+      ],
+      "name": "Mt Olympus Ski Area",
+      "coordinates": {
+        "lat": -43.205,
+        "lng": 171.604
+      },
+      "forecastElevationM": 1655,
+      "officialUrl": "https://www.mtolympus.co.nz/",
+      "regionId": "canterbury",
+      "regionName": "Canterbury",
+      "stateOrProvince": "Canterbury",
+      "localityId": "windwhistle",
+      "localityName": "Windwhistle",
+      "route": "/canterbury/mountain/mt-olympus-nz",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "club_field",
+      "accessModel": "Public club field via an exposed unsealed access road; rope-tow skills and chains may be required.",
+      "publicCopy": "A high, south-facing club field at the end of a serious Canterbury access road. It runs rope tows rather than chairlifts, so check road, tow and opening advice first.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "nz-temple-basin",
+      "publicId": "temple-basin",
+      "aliases": [],
+      "name": "Temple Basin Ski Area",
+      "coordinates": {
+        "lat": -42.903,
+        "lng": 171.586
+      },
+      "forecastElevationM": 1540,
+      "officialUrl": "https://templebasin.co.nz/",
+      "regionId": "canterbury",
+      "regionName": "Canterbury",
+      "stateOrProvince": "Canterbury",
+      "localityId": "arthurs-pass",
+      "localityName": "Arthur's Pass",
+      "route": "/canterbury/mountain/temple-basin",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "hike_in_club_field",
+      "accessModel": "Public club field reached only by a steep walk from the Arthur's Pass highway; freight lift carries gear, not passengers.",
+      "publicCopy": "Temple Basin is a hike-in club field, not a drive-to resort. Allow for the steep walk from the highway; the goods lift moves packs while guests walk to the lodges and rope tows.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "nz-porters",
+      "publicId": "porters",
+      "aliases": [
+        "Porters Ski Area"
+      ],
+      "name": "Porters Alpine Resort",
+      "coordinates": {
+        "lat": -43.273,
+        "lng": 171.647
+      },
+      "forecastElevationM": 1640,
+      "officialUrl": "https://www.portersalpineresort.com/",
+      "regionId": "canterbury",
+      "regionName": "Canterbury",
+      "stateOrProvince": "Canterbury",
+      "localityId": "springfield-nz",
+      "localityName": "Springfield",
+      "route": "/canterbury/mountain/porters",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "alpine",
+      "accessModel": "Public commercial ski area reached by an alpine access road.",
+      "publicCopy": "A public Canterbury ski area with chairlift and surface-lift terrain. Check the official mountain-road report before driving up from Springfield.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "nz-mt-cheeseman",
+      "publicId": "mt-cheeseman",
+      "aliases": [
+        "Mount Cheeseman"
+      ],
+      "name": "Mt Cheeseman Ski Area",
+      "coordinates": {
+        "lat": -43.154,
+        "lng": 171.663
+      },
+      "forecastElevationM": 1690,
+      "officialUrl": "https://www.mtcheeseman.co.nz/",
+      "regionId": "canterbury",
+      "regionName": "Canterbury",
+      "stateOrProvince": "Canterbury",
+      "localityId": "springfield-nz",
+      "localityName": "Springfield",
+      "route": "/canterbury/mountain/mt-cheeseman",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "club_field",
+      "accessModel": "Public, family-oriented club field with an unsealed mountain road and surface tows.",
+      "publicCopy": "A public Canterbury club field with T-bars and lodge culture rather than a commercial-resort setup. Check the access road and club operating notice before travel.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "nz-mt-lyford",
+      "publicId": "mt-lyford",
+      "aliases": [
+        "Mount Lyford"
+      ],
+      "name": "Mt Lyford Ski Area",
+      "coordinates": {
+        "lat": -42.45,
+        "lng": 173.086
+      },
+      "forecastElevationM": 1500,
+      "officialUrl": "https://www.mtlyford.co.nz/",
+      "regionId": "canterbury",
+      "regionName": "Canterbury",
+      "stateOrProvince": "Canterbury",
+      "localityId": "hanmer-springs",
+      "localityName": "Hanmer Springs",
+      "route": "/canterbury/mountain/mt-lyford",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "alpine",
+      "accessModel": "Public family ski area via an unsealed alpine road; chains and suitable vehicles may be required.",
+      "publicCopy": "A compact public ski area above the Mt Lyford village. The alpine road is part of the day, so use the operator's current access advice rather than treating Hanmer Springs as the field itself.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "nz-mt-dobson",
+      "publicId": "mt-dobson",
+      "aliases": [
+        "Mount Dobson"
+      ],
+      "name": "Mt Dobson Ski Area",
+      "coordinates": {
+        "lat": -44.264,
+        "lng": 170.632
+      },
+      "forecastElevationM": 1860,
+      "officialUrl": "https://www.mtdobson.co.nz/",
+      "regionId": "mackenzie-south-canterbury",
+      "regionName": "Mackenzie & South Canterbury",
+      "stateOrProvince": "Canterbury",
+      "localityId": "fairlie",
+      "localityName": "Fairlie",
+      "route": "/mackenzie-south-canterbury/mountain/mt-dobson",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "alpine",
+      "accessModel": "Public family-operated field via a long unsealed access road.",
+      "publicCopy": "A family-operated South Canterbury field with broad open terrain. Check the official road report before committing to the climb from Fairlie.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "nz-fox-peak",
+      "publicId": "fox-peak",
+      "aliases": [],
+      "name": "Fox Peak Ski Area",
+      "coordinates": {
+        "lat": -44.029,
+        "lng": 170.579
+      },
+      "forecastElevationM": 1525,
+      "officialUrl": "https://www.foxpeak.co.nz/",
+      "regionId": "mackenzie-south-canterbury",
+      "regionName": "Mackenzie & South Canterbury",
+      "stateOrProvince": "Canterbury",
+      "localityId": "fairlie",
+      "localityName": "Fairlie",
+      "route": "/mackenzie-south-canterbury/mountain/fox-peak",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "club_field",
+      "accessModel": "Public volunteer club field, natural-snow dependent, with rope tows and an unsealed access road.",
+      "publicCopy": "A volunteer South Canterbury club field that opens when natural snow and staffing align. Rope-tow know-how and a road check matter more here than resort assumptions.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "nz-roundhill",
+      "publicId": "roundhill-nz",
+      "aliases": [
+        "Roundhill"
+      ],
+      "name": "Roundhill Ski Area",
+      "coordinates": {
+        "lat": -43.831,
+        "lng": 170.56
+      },
+      "forecastElevationM": 1742,
+      "officialUrl": "https://www.roundhill.co.nz/",
+      "regionId": "mackenzie-south-canterbury",
+      "regionName": "Mackenzie & South Canterbury",
+      "stateOrProvince": "Canterbury",
+      "localityId": "lake-tekapo",
+      "localityName": "Lake Tekapo",
+      "route": "/mackenzie-south-canterbury/mountain/roundhill-nz",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "alpine",
+      "accessModel": "Public commercial ski area reached by an unsealed mountain road.",
+      "publicCopy": "A public Lake Tekapo ski area with family slopes and the long Heritage Express rope tow for experts. Check road and tow status on the official report.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "nz-ohau",
+      "publicId": "ohau-snow-fields",
+      "aliases": [
+        "Ohau Snow Fields",
+        "Ohau"
+      ],
+      "name": "Ōhau Snow Fields",
+      "coordinates": {
+        "lat": -44.231,
+        "lng": 169.777
+      },
+      "forecastElevationM": 1625,
+      "officialUrl": "https://www.ohau.co.nz/snow-fields/",
+      "regionId": "mackenzie-south-canterbury",
+      "regionName": "Mackenzie & South Canterbury",
+      "stateOrProvince": "Canterbury",
+      "localityId": "twizel",
+      "localityName": "Twizel",
+      "route": "/mackenzie-south-canterbury/mountain/ohau-snow-fields",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "alpine",
+      "accessModel": "Public commercial ski area via an alpine gravel road.",
+      "publicCopy": "A compact public field above Lake Ōhau with a chairlift and high-country views. Use the official road and field report before the drive from Twizel.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "nz-awakino",
+      "publicId": "awakino",
+      "aliases": [],
+      "name": "Awakino Ski Area",
+      "coordinates": {
+        "lat": -44.754,
+        "lng": 170.392
+      },
+      "forecastElevationM": 1696,
+      "officialUrl": "https://www.skiawakino.com/",
+      "regionId": "mackenzie-south-canterbury",
+      "regionName": "Mackenzie & South Canterbury",
+      "stateOrProvince": "Canterbury",
+      "localityId": "kurow",
+      "localityName": "Kurow",
+      "route": "/mackenzie-south-canterbury/mountain/awakino",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "club_field",
+      "accessModel": "Public volunteer club field, natural-snow and staffing dependent, accessed by a private alpine road.",
+      "publicCopy": "A small North Otago club field that operates when snow, volunteers and road conditions permit. Check directly with the club before travelling from Kurow.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "nz-rainbow",
+      "publicId": "rainbow-ski-area",
+      "aliases": [
+        "Rainbow"
+      ],
+      "name": "Rainbow Ski Area",
+      "coordinates": {
+        "lat": -41.873,
+        "lng": 172.859
+      },
+      "forecastElevationM": 1654,
+      "officialUrl": "https://www.skirainbow.co.nz/",
+      "regionId": "nelson-lakes",
+      "regionName": "Nelson Lakes",
+      "stateOrProvince": "Tasman",
+      "localityId": "st-arnaud-nz",
+      "localityName": "St Arnaud",
+      "route": "/nelson-lakes/mountain/rainbow-ski-area",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "club_field",
+      "accessModel": "Public community-owned field via a steep alpine access road.",
+      "publicCopy": "A community-owned field above Nelson Lakes with surface lifts and a serious mountain road. Check access, chains and opening status before leaving St Arnaud.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "nz-snow-farm",
+      "publicId": "snow-farm",
+      "aliases": [
+        "Snow Farm NZ",
+        "Waiorau Snow Farm"
+      ],
+      "name": "Snow Farm NZ / Waiorau",
+      "coordinates": {
+        "lat": -44.878,
+        "lng": 169.082
+      },
+      "forecastElevationM": 1570,
+      "officialUrl": "https://snowfarmnz.com/",
+      "regionId": "wanaka",
+      "regionName": "Wanaka",
+      "stateOrProvince": "Otago",
+      "localityId": "wanaka",
+      "localityName": "Wanaka",
+      "route": "/wanaka/mountain/snow-farm",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "nordic",
+      "accessModel": "Public Nordic cross-country ski area via the Pisa Range access road; no downhill chairlift ski field.",
+      "publicCopy": "Snow Farm is a Nordic and cross-country facility on the Pisa Range, not a downhill resort. This page describes outdoor weather for its groomed trail network; check trail and road status with the operator.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "nz-tukino",
+      "publicId": "tukino",
+      "aliases": [],
+      "name": "Tukino Ski Field",
+      "coordinates": {
+        "lat": -39.284,
+        "lng": 175.653
+      },
+      "forecastElevationM": 1860,
+      "officialUrl": "https://tukino.org/",
+      "regionId": "ruapehu",
+      "regionName": "Ruapehu",
+      "stateOrProvince": "Manawatū-Whanganui",
+      "localityId": "ohakune",
+      "localityName": "Ohakune",
+      "route": "/ruapehu/mountain/tukino",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "club_field",
+      "accessModel": "Public club field on Ruapehu's eastern side; four-wheel-drive alpine-road access and tow capability may be required.",
+      "publicCopy": "A remote club field on Ruapehu's eastern flank with surface tows and no resort village. Follow Tukino's current 4WD road, booking and operating advice.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "nz-manganui",
+      "publicId": "manganui",
+      "aliases": [],
+      "name": "Manganui Ski Area",
+      "coordinates": {
+        "lat": -39.296,
+        "lng": 174.104
+      },
+      "forecastElevationM": 1470,
+      "officialUrl": "https://www.skimanganui.co.nz/",
+      "regionId": "taranaki",
+      "regionName": "Taranaki",
+      "stateOrProvince": "Taranaki",
+      "localityId": "new-plymouth",
+      "localityName": "New Plymouth",
+      "route": "/taranaki/mountain/manganui",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "club_field",
+      "accessModel": "Public volunteer club field in Egmont National Park; natural-snow and staffing dependent with a walk from the car park.",
+      "publicCopy": "A volunteer club field on Taranaki that opens when natural snow and staffing line up. Expect a walk from the road end and check the club report before leaving New Plymouth.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "nz-snowplanet",
+      "publicId": "snowplanet",
+      "aliases": [],
+      "name": "Snowplanet",
+      "coordinates": {
+        "lat": -36.619,
+        "lng": 174.676
+      },
+      "forecastElevationM": 35,
+      "officialUrl": "https://snowplanet.co.nz/",
+      "regionId": "auckland",
+      "regionName": "Auckland",
+      "stateOrProvince": "Auckland",
+      "localityId": "silverdale",
+      "localityName": "Silverdale",
+      "route": "/auckland/mountain/snowplanet",
+      "country": "New Zealand",
+      "countryCode": "NZ",
+      "timezone": "Pacific/Auckland",
+      "facilityType": "indoor",
+      "accessModel": "Ticketed indoor snow dome beside State Highway 1; climate-controlled and not dependent on mountain weather.",
+      "publicCopy": "Snowplanet is an indoor, climate-controlled snow dome in Auckland — not an outdoor mountain. No mountain forecast, powder alert or natural outdoor-condition claim is provided for this facility.",
+      "weatherEligible": false,
+      "alertEligible": false
+    },
+    {
+      "recordId": "jack-frost-pa",
+      "publicId": "jack-frost-pa",
+      "aliases": [],
+      "name": "Jack Frost",
+      "coordinates": {
+        "lat": 40.948,
+        "lng": -75.625
+      },
+      "forecastElevationM": 489,
+      "officialUrl": "https://www.jfbb.com/",
+      "regionId": "us-pa",
+      "regionName": "Pennsylvania",
+      "stateOrProvince": "Pennsylvania",
+      "localityId": "blakeslee",
+      "localityName": "Blakeslee",
+      "route": "/us-pa/mountain/jack-frost-pa",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Jack Frost is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "big-boulder-pa",
+      "publicId": "big-boulder-pa",
+      "aliases": [],
+      "name": "Big Boulder",
+      "coordinates": {
+        "lat": 41.05,
+        "lng": -75.62
+      },
+      "forecastElevationM": 582,
+      "officialUrl": "https://www.jfbb.com/",
+      "regionId": "us-pa",
+      "regionName": "Pennsylvania",
+      "stateOrProvince": "Pennsylvania",
+      "localityId": "lake-harmony",
+      "localityName": "Lake Harmony",
+      "route": "/us-pa/mountain/big-boulder-pa",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Big Boulder is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "elk-mountain-pa",
+      "publicId": "elk-mountain-pa",
+      "aliases": [
+        "Elk Mountain Ski Resort"
+      ],
+      "name": "Elk Mountain",
+      "coordinates": {
+        "lat": 41.71857,
+        "lng": -75.48077
+      },
+      "forecastElevationM": 491,
+      "officialUrl": "https://www.elkskier.com/",
+      "regionId": "us-pa",
+      "regionName": "Pennsylvania",
+      "stateOrProvince": "Pennsylvania",
+      "localityId": "union-dale",
+      "localityName": "Union Dale",
+      "route": "/us-pa/mountain/elk-mountain-pa",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Elk Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "montage-mountain-pa",
+      "publicId": "montage-mountain-pa",
+      "aliases": [
+        "Montage Mountain Ski Resort",
+        "Montage Mountain"
+      ],
+      "name": "Montage Mountain Resorts",
+      "coordinates": {
+        "lat": 41.34779,
+        "lng": -75.6499
+      },
+      "forecastElevationM": 602,
+      "officialUrl": "https://www.montagemountainresorts.com/",
+      "regionId": "us-pa",
+      "regionName": "Pennsylvania",
+      "stateOrProvince": "Pennsylvania",
+      "localityId": "scranton",
+      "localityName": "Scranton",
+      "route": "/us-pa/mountain/montage-mountain-pa",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Montage Mountain Resorts is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "whitetail-resort-pa",
+      "publicId": "whitetail-resort-pa",
+      "aliases": [
+        "Whitetail Ski Resort",
+        "Whitetail Mountain Resort"
+      ],
+      "name": "Whitetail Resort",
+      "coordinates": {
+        "lat": 39.74179,
+        "lng": -77.9334
+      },
+      "forecastElevationM": 262,
+      "officialUrl": "https://www.skiwhitetail.com/",
+      "regionId": "us-pa",
+      "regionName": "Pennsylvania",
+      "stateOrProvince": "Pennsylvania",
+      "localityId": "mercersburg",
+      "localityName": "Mercersburg",
+      "route": "/us-pa/mountain/whitetail-resort-pa",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Whitetail Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "bear-creek-mountain-resort-pa",
+      "publicId": "bear-creek-mountain-resort-pa",
+      "aliases": [
+        "Bear Creek"
+      ],
+      "name": "Bear Creek Mountain Resort",
+      "coordinates": {
+        "lat": 40.47609,
+        "lng": -75.62521
+      },
+      "forecastElevationM": 217,
+      "officialUrl": "https://www.bcmountainresort.com/",
+      "regionId": "us-pa",
+      "regionName": "Pennsylvania",
+      "stateOrProvince": "Pennsylvania",
+      "localityId": "macungie",
+      "localityName": "Macungie",
+      "route": "/us-pa/mountain/bear-creek-mountain-resort-pa",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Bear Creek Mountain Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "liberty-mountain-resort-pa",
+      "publicId": "liberty-mountain-resort-pa",
+      "aliases": [
+        "Ski Liberty",
+        "Liberty Mountain"
+      ],
+      "name": "Liberty Mountain Resort",
+      "coordinates": {
+        "lat": 39.76064,
+        "lng": -77.36853
+      },
+      "forecastElevationM": 258,
+      "officialUrl": "https://www.libertymountainresort.com/",
+      "regionId": "us-pa",
+      "regionName": "Pennsylvania",
+      "stateOrProvince": "Pennsylvania",
+      "localityId": "carroll-valley",
+      "localityName": "Carroll Valley",
+      "route": "/us-pa/mountain/liberty-mountain-resort-pa",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Liberty Mountain Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "hidden-valley-resort-pa",
+      "publicId": "hidden-valley-resort-pa",
+      "aliases": [
+        "Hidden Valley Four Seasons Resort",
+        "Hidden Valley Ski Resort"
+      ],
+      "name": "Hidden Valley Resort",
+      "coordinates": {
+        "lat": 40.05903,
+        "lng": -79.25288
+      },
+      "forecastElevationM": 788,
+      "officialUrl": "https://www.hiddenvalleyresort.com/",
+      "regionId": "us-pa",
+      "regionName": "Pennsylvania",
+      "stateOrProvince": "Pennsylvania",
+      "localityId": "hidden-valley",
+      "localityName": "Hidden Valley",
+      "route": "/us-pa/mountain/hidden-valley-resort-pa",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Hidden Valley Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "laurel-mountain-ski-resort-pa",
+      "publicId": "laurel-mountain-ski-resort-pa",
+      "aliases": [
+        "Laurel Mountain"
+      ],
+      "name": "Laurel Mountain Ski Resort",
+      "coordinates": {
+        "lat": 40.16676,
+        "lng": -79.16852
+      },
+      "forecastElevationM": 760,
+      "officialUrl": "https://www.laurelmountainski.com/",
+      "regionId": "us-pa",
+      "regionName": "Pennsylvania",
+      "stateOrProvince": "Pennsylvania",
+      "localityId": "ligonier",
+      "localityName": "Ligonier",
+      "route": "/us-pa/mountain/laurel-mountain-ski-resort-pa",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Laurel Mountain Ski Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "roundtop-mountain-resort-pa",
+      "publicId": "roundtop-mountain-resort-pa",
+      "aliases": [
+        "Ski Roundtop",
+        "Roundtop"
+      ],
+      "name": "Roundtop Mountain Resort",
+      "coordinates": {
+        "lat": 40.10837,
+        "lng": -76.92867
+      },
+      "forecastElevationM": 293,
+      "officialUrl": "https://www.skiroundtop.com/",
+      "regionId": "us-pa",
+      "regionName": "Pennsylvania",
+      "stateOrProvince": "Pennsylvania",
+      "localityId": "lewisberry",
+      "localityName": "Lewisberry",
+      "route": "/us-pa/mountain/roundtop-mountain-resort-pa",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Roundtop Mountain Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "tussey-mountain-pa",
+      "publicId": "tussey-mountain-pa",
+      "aliases": [
+        "Tussey Mountain Ski Area"
+      ],
+      "name": "Tussey Mountain",
+      "coordinates": {
+        "lat": 40.7685,
+        "lng": -77.75057
+      },
+      "forecastElevationM": 461,
+      "officialUrl": "https://tusseymountain.com/",
+      "regionId": "us-pa",
+      "regionName": "Pennsylvania",
+      "stateOrProvince": "Pennsylvania",
+      "localityId": "boalsburg",
+      "localityName": "Boalsburg",
+      "route": "/us-pa/mountain/tussey-mountain-pa",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Tussey Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "ski-big-bear-pa",
+      "publicId": "ski-big-bear-pa",
+      "aliases": [
+        "Ski Big Bear",
+        "Big Bear at Masthope Mountain"
+      ],
+      "name": "Ski Big Bear at Masthope Mountain",
+      "coordinates": {
+        "lat": 41.52336,
+        "lng": -75.02456
+      },
+      "forecastElevationM": 392,
+      "officialUrl": "https://ski-bigbear.com/",
+      "regionId": "us-pa",
+      "regionName": "Pennsylvania",
+      "stateOrProvince": "Pennsylvania",
+      "localityId": "lackawaxen",
+      "localityName": "Lackawaxen",
+      "route": "/us-pa/mountain/ski-big-bear-pa",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Ski Big Bear at Masthope Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "ski-sawmill-pa",
+      "publicId": "ski-sawmill-pa",
+      "aliases": [
+        "Ski Sawmill"
+      ],
+      "name": "Ski Sawmill Family Resort",
+      "coordinates": {
+        "lat": 41.52327,
+        "lng": -77.29057
+      },
+      "forecastElevationM": 506,
+      "officialUrl": "https://skisawmill.com/",
+      "regionId": "us-pa",
+      "regionName": "Pennsylvania",
+      "stateOrProvince": "Pennsylvania",
+      "localityId": "morris",
+      "localityName": "Morris",
+      "route": "/us-pa/mountain/ski-sawmill-pa",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Ski Sawmill Family Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "spring-mountain-adventures-pa",
+      "publicId": "spring-mountain-adventures-pa",
+      "aliases": [
+        "Spring Mountain",
+        "Spring Mountain Ski Area"
+      ],
+      "name": "Spring Mountain Adventures",
+      "coordinates": {
+        "lat": 40.278,
+        "lng": -75.458
+      },
+      "forecastElevationM": 62,
+      "officialUrl": "https://springmountainadventures.com/",
+      "regionId": "us-pa",
+      "regionName": "Pennsylvania",
+      "stateOrProvince": "Pennsylvania",
+      "localityId": "schwenksville",
+      "localityName": "Schwenksville",
+      "route": "/us-pa/mountain/spring-mountain-adventures-pa",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Spring Mountain Adventures is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "boyce-park-ski-area-pa",
+      "publicId": "boyce-park-ski-area-pa",
+      "aliases": [
+        "Boyce Park"
+      ],
+      "name": "Boyce Park Ski Area",
+      "coordinates": {
+        "lat": 40.46002,
+        "lng": -79.74877
+      },
+      "forecastElevationM": 350,
+      "officialUrl": "https://www.alleghenycounty.us/Parks-and-Events/Activities/Skiing-and-Snowboarding",
+      "regionId": "us-pa",
+      "regionName": "Pennsylvania",
+      "stateOrProvince": "Pennsylvania",
+      "localityId": "plum",
+      "localityName": "Plum",
+      "route": "/us-pa/mountain/boyce-park-ski-area-pa",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/New_York",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Boyce Park Ski Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "whitecap-mountains-resort-wi",
+      "publicId": "whitecap-mountains-resort-wi",
+      "aliases": [
+        "Whitecap Mountains"
+      ],
+      "name": "Whitecap Mountains Resort",
+      "coordinates": {
+        "lat": 46.472,
+        "lng": -90.33
+      },
+      "forecastElevationM": 410,
+      "officialUrl": "https://whitecapresort.com/",
+      "regionId": "us-wi",
+      "regionName": "Wisconsin",
+      "stateOrProvince": "Wisconsin",
+      "localityId": "upson",
+      "localityName": "Upson",
+      "route": "/us-wi/mountain/whitecap-mountains-resort-wi",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Whitecap Mountains Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "devils-head-resort-wi",
+      "publicId": "devils-head-resort-wi",
+      "aliases": [
+        "Devils Head Resort",
+        "Devil's Head"
+      ],
+      "name": "Devil's Head Resort",
+      "coordinates": {
+        "lat": 43.41861,
+        "lng": -89.62243
+      },
+      "forecastElevationM": 282,
+      "officialUrl": "https://www.devilsheadresort.com/",
+      "regionId": "us-wi",
+      "regionName": "Wisconsin",
+      "stateOrProvince": "Wisconsin",
+      "localityId": "merrimac",
+      "localityName": "Merrimac",
+      "route": "/us-wi/mountain/devils-head-resort-wi",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Devil's Head Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "wilmot-mountain-wi",
+      "publicId": "wilmot-mountain-wi",
+      "aliases": [],
+      "name": "Wilmot Mountain",
+      "coordinates": {
+        "lat": 42.49985,
+        "lng": -88.19043
+      },
+      "forecastElevationM": 249,
+      "officialUrl": "https://www.wilmotmountain.com/",
+      "regionId": "us-wi",
+      "regionName": "Wisconsin",
+      "stateOrProvince": "Wisconsin",
+      "localityId": "wilmot",
+      "localityName": "Wilmot",
+      "route": "/us-wi/mountain/wilmot-mountain-wi",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Wilmot Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "alpine-valley-resort-wi",
+      "publicId": "alpine-valley-resort-wi",
+      "aliases": [
+        "Alpine Valley Ski Resort"
+      ],
+      "name": "Alpine Valley Resort",
+      "coordinates": {
+        "lat": 42.73819,
+        "lng": -88.42921
+      },
+      "forecastElevationM": 260,
+      "officialUrl": "https://www.alpinevalleyresort.com/",
+      "regionId": "us-wi",
+      "regionName": "Wisconsin",
+      "stateOrProvince": "Wisconsin",
+      "localityId": "east-troy",
+      "localityName": "East Troy",
+      "route": "/us-wi/mountain/alpine-valley-resort-wi",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Alpine Valley Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "christmas-mountain-village-wi",
+      "publicId": "christmas-mountain-village-wi",
+      "aliases": [
+        "Christmas Mountain"
+      ],
+      "name": "Christmas Mountain Village",
+      "coordinates": {
+        "lat": 43.60896,
+        "lng": -89.8609
+      },
+      "forecastElevationM": 315,
+      "officialUrl": "https://christmasmountainvillage.co/",
+      "regionId": "us-wi",
+      "regionName": "Wisconsin",
+      "stateOrProvince": "Wisconsin",
+      "localityId": "wisconsin-dells",
+      "localityName": "Wisconsin Dells",
+      "route": "/us-wi/mountain/christmas-mountain-village-wi",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Christmas Mountain Village is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "trollhaugen-wi",
+      "publicId": "trollhaugen-wi",
+      "aliases": [
+        "Trollhaugen Outdoor Recreation Area"
+      ],
+      "name": "Trollhaugen",
+      "coordinates": {
+        "lat": 45.34955,
+        "lng": -92.62024
+      },
+      "forecastElevationM": 329,
+      "officialUrl": "https://trollhaugen.com/",
+      "regionId": "us-wi",
+      "regionName": "Wisconsin",
+      "stateOrProvince": "Wisconsin",
+      "localityId": "dresser",
+      "localityName": "Dresser",
+      "route": "/us-wi/mountain/trollhaugen-wi",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Trollhaugen is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "tyrol-basin-wi",
+      "publicId": "tyrol-basin-wi",
+      "aliases": [],
+      "name": "Tyrol Basin",
+      "coordinates": {
+        "lat": 43.04608,
+        "lng": -89.78501
+      },
+      "forecastElevationM": 289,
+      "officialUrl": "https://tyrolbasin.com/",
+      "regionId": "us-wi",
+      "regionName": "Wisconsin",
+      "stateOrProvince": "Wisconsin",
+      "localityId": "mount-horeb",
+      "localityName": "Mount Horeb",
+      "route": "/us-wi/mountain/tyrol-basin-wi",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Tyrol Basin is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "mount-ashwabay-wi",
+      "publicId": "mount-ashwabay-wi",
+      "aliases": [
+        "Mount Ashwabay"
+      ],
+      "name": "Mt. Ashwabay",
+      "coordinates": {
+        "lat": 46.78105,
+        "lng": -90.91241
+      },
+      "forecastElevationM": 404,
+      "officialUrl": "https://www.mtashwabay.org/",
+      "regionId": "us-wi",
+      "regionName": "Wisconsin",
+      "stateOrProvince": "Wisconsin",
+      "localityId": "bayfield",
+      "localityName": "Bayfield",
+      "route": "/us-wi/mountain/mount-ashwabay-wi",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Mt. Ashwabay is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "mount-la-crosse-wi",
+      "publicId": "mount-la-crosse-wi",
+      "aliases": [
+        "Mount La Crosse"
+      ],
+      "name": "Mt. La Crosse",
+      "coordinates": {
+        "lat": 43.784,
+        "lng": -91.203
+      },
+      "forecastElevationM": 205,
+      "officialUrl": "https://www.mtlacrosse.com/",
+      "regionId": "us-wi",
+      "regionName": "Wisconsin",
+      "stateOrProvince": "Wisconsin",
+      "localityId": "la-crosse",
+      "localityName": "La Crosse",
+      "route": "/us-wi/mountain/mount-la-crosse-wi",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Mt. La Crosse is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "sunburst-winter-sports-park-wi",
+      "publicId": "sunburst-winter-sports-park-wi",
+      "aliases": [
+        "Sunburst Ski Area",
+        "Sunburst"
+      ],
+      "name": "Sunburst Winter Sports Park",
+      "coordinates": {
+        "lat": 43.49406,
+        "lng": -88.22411
+      },
+      "forecastElevationM": 321,
+      "officialUrl": "https://skisunburst.com/",
+      "regionId": "us-wi",
+      "regionName": "Wisconsin",
+      "stateOrProvince": "Wisconsin",
+      "localityId": "kewaskum",
+      "localityName": "Kewaskum",
+      "route": "/us-wi/mountain/sunburst-winter-sports-park-wi",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Sunburst Winter Sports Park is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "mountain-top-at-grand-geneva-wi",
+      "publicId": "mountain-top-at-grand-geneva-wi",
+      "aliases": [
+        "The Mountain Top",
+        "Grand Geneva Ski Resort"
+      ],
+      "name": "The Mountain Top at Grand Geneva Resort",
+      "coordinates": {
+        "lat": 42.61159,
+        "lng": -88.3864
+      },
+      "forecastElevationM": 258,
+      "officialUrl": "https://www.grandgeneva.com/ski-snow-sports",
+      "regionId": "us-wi",
+      "regionName": "Wisconsin",
+      "stateOrProvince": "Wisconsin",
+      "localityId": "lake-geneva",
+      "localityName": "Lake Geneva",
+      "route": "/us-wi/mountain/mountain-top-at-grand-geneva-wi",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "The Mountain Top at Grand Geneva Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "little-switzerland-wi",
+      "publicId": "little-switzerland-wi",
+      "aliases": [
+        "Little Switzerland Ski Area"
+      ],
+      "name": "Little Switzerland",
+      "coordinates": {
+        "lat": 43.33791,
+        "lng": -88.27905
+      },
+      "forecastElevationM": 333,
+      "officialUrl": "https://www.littleswitz.com/",
+      "regionId": "us-wi",
+      "regionName": "Wisconsin",
+      "stateOrProvince": "Wisconsin",
+      "localityId": "slinger",
+      "localityName": "Slinger",
+      "route": "/us-wi/mountain/little-switzerland-wi",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Little Switzerland is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "nordic-mountain-wi",
+      "publicId": "nordic-mountain-wi",
+      "aliases": [],
+      "name": "Nordic Mountain",
+      "coordinates": {
+        "lat": 44.12032,
+        "lng": -89.18198
+      },
+      "forecastElevationM": 293,
+      "officialUrl": "https://www.nordicmountain.com/",
+      "regionId": "us-wi",
+      "regionName": "Wisconsin",
+      "stateOrProvince": "Wisconsin",
+      "localityId": "mount-morris",
+      "localityName": "Mount Morris",
+      "route": "/us-wi/mountain/nordic-mountain-wi",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Nordic Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "christie-mountain-wi",
+      "publicId": "christie-mountain-wi",
+      "aliases": [],
+      "name": "Christie Mountain",
+      "coordinates": {
+        "lat": 45.50917,
+        "lng": -91.3813
+      },
+      "forecastElevationM": 403,
+      "officialUrl": "https://www.christiemountain.com/",
+      "regionId": "us-wi",
+      "regionName": "Wisconsin",
+      "stateOrProvince": "Wisconsin",
+      "localityId": "bruce",
+      "localityName": "Bruce",
+      "route": "/us-wi/mountain/christie-mountain-wi",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Christie Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "bruce-mound-wi",
+      "publicId": "bruce-mound-wi",
+      "aliases": [
+        "Bruce Mound"
+      ],
+      "name": "Bruce Mound Winter Sports Area",
+      "coordinates": {
+        "lat": 44.44385,
+        "lng": -90.79237
+      },
+      "forecastElevationM": 407,
+      "officialUrl": "https://www.clarkcountywi.gov/brucemound",
+      "regionId": "us-wi",
+      "regionName": "Wisconsin",
+      "stateOrProvince": "Wisconsin",
+      "localityId": "merrillan",
+      "localityName": "Merrillan",
+      "route": "/us-wi/mountain/bruce-mound-wi",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Bruce Mound Winter Sports Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "mont-du-lac-resort-wi",
+      "publicId": "mont-du-lac-resort-wi",
+      "aliases": [
+        "Mont Du Lac Resort",
+        "Mont du Lac"
+      ],
+      "name": "Mont du Lac Resort",
+      "coordinates": {
+        "lat": 46.65017,
+        "lng": -92.28364
+      },
+      "forecastElevationM": 223,
+      "officialUrl": "https://mdlresort.com/",
+      "regionId": "us-wi",
+      "regionName": "Wisconsin",
+      "stateOrProvince": "Wisconsin",
+      "localityId": "superior",
+      "localityName": "Superior",
+      "route": "/us-wi/mountain/mont-du-lac-resort-wi",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Mont du Lac Resort is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "afton-alps-mn",
+      "publicId": "afton-alps-mn",
+      "aliases": [],
+      "name": "Afton Alps",
+      "coordinates": {
+        "lat": 44.85759,
+        "lng": -92.78789
+      },
+      "forecastElevationM": 221,
+      "officialUrl": "https://www.aftonalps.com/",
+      "regionId": "us-mn",
+      "regionName": "Minnesota",
+      "stateOrProvince": "Minnesota",
+      "localityId": "hastings",
+      "localityName": "Hastings",
+      "route": "/us-mn/mountain/afton-alps-mn",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Afton Alps is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "spirit-mountain-mn",
+      "publicId": "spirit-mountain-mn",
+      "aliases": [
+        "Spirit Mountain Recreation Area"
+      ],
+      "name": "Spirit Mountain",
+      "coordinates": {
+        "lat": 46.71764,
+        "lng": -92.21238
+      },
+      "forecastElevationM": 287,
+      "officialUrl": "https://www.spiritmt.com/",
+      "regionId": "us-mn",
+      "regionName": "Minnesota",
+      "stateOrProvince": "Minnesota",
+      "localityId": "duluth",
+      "localityName": "Duluth",
+      "route": "/us-mn/mountain/spirit-mountain-mn",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Spirit Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "giants-ridge-mn",
+      "publicId": "giants-ridge-mn",
+      "aliases": [
+        "Giants Ridge Recreation Area"
+      ],
+      "name": "Giants Ridge",
+      "coordinates": {
+        "lat": 47.548,
+        "lng": -92.146
+      },
+      "forecastElevationM": 461,
+      "officialUrl": "https://www.giantsridge.com/",
+      "regionId": "us-mn",
+      "regionName": "Minnesota",
+      "stateOrProvince": "Minnesota",
+      "localityId": "biwabik",
+      "localityName": "Biwabik",
+      "route": "/us-mn/mountain/giants-ridge-mn",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Giants Ridge is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "welch-village-mn",
+      "publicId": "welch-village-mn",
+      "aliases": [
+        "Welch Village Ski Area"
+      ],
+      "name": "Welch Village",
+      "coordinates": {
+        "lat": 44.55458,
+        "lng": -92.73078
+      },
+      "forecastElevationM": 306,
+      "officialUrl": "https://www.welchvillage.com/",
+      "regionId": "us-mn",
+      "regionName": "Minnesota",
+      "stateOrProvince": "Minnesota",
+      "localityId": "welch",
+      "localityName": "Welch",
+      "route": "/us-mn/mountain/welch-village-mn",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Welch Village is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "buck-hill-mn",
+      "publicId": "buck-hill-mn",
+      "aliases": [
+        "Buck Hill Ski Area"
+      ],
+      "name": "Buck Hill",
+      "coordinates": {
+        "lat": 44.72408,
+        "lng": -93.28389
+      },
+      "forecastElevationM": 300,
+      "officialUrl": "https://buckhill.com/",
+      "regionId": "us-mn",
+      "regionName": "Minnesota",
+      "stateOrProvince": "Minnesota",
+      "localityId": "burnsville",
+      "localityName": "Burnsville",
+      "route": "/us-mn/mountain/buck-hill-mn",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Buck Hill is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "wild-mountain-mn",
+      "publicId": "wild-mountain-mn",
+      "aliases": [
+        "Wild Mountain Ski Area"
+      ],
+      "name": "Wild Mountain",
+      "coordinates": {
+        "lat": 45.4888,
+        "lng": -92.70527
+      },
+      "forecastElevationM": 237,
+      "officialUrl": "https://www.wildmountain.com/",
+      "regionId": "us-mn",
+      "regionName": "Minnesota",
+      "stateOrProvince": "Minnesota",
+      "localityId": "taylors-falls",
+      "localityName": "Taylors Falls",
+      "route": "/us-mn/mountain/wild-mountain-mn",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Wild Mountain is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "mount-kato-mn",
+      "publicId": "mount-kato-mn",
+      "aliases": [
+        "Mt. Kato"
+      ],
+      "name": "Mount Kato",
+      "coordinates": {
+        "lat": 44.13128,
+        "lng": -94.03582
+      },
+      "forecastElevationM": 305,
+      "officialUrl": "https://www.mountkato.com/",
+      "regionId": "us-mn",
+      "regionName": "Minnesota",
+      "stateOrProvince": "Minnesota",
+      "localityId": "mankato",
+      "localityName": "Mankato",
+      "route": "/us-mn/mountain/mount-kato-mn",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Mount Kato is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "andes-tower-hills-mn",
+      "publicId": "andes-tower-hills-mn",
+      "aliases": [
+        "Andes Tower Hills Ski Area"
+      ],
+      "name": "Andes Tower Hills",
+      "coordinates": {
+        "lat": 45.85054,
+        "lng": -95.6303
+      },
+      "forecastElevationM": 439,
+      "officialUrl": "https://www.andestowerhills.com/",
+      "regionId": "us-mn",
+      "regionName": "Minnesota",
+      "stateOrProvince": "Minnesota",
+      "localityId": "kensington",
+      "localityName": "Kensington",
+      "route": "/us-mn/mountain/andes-tower-hills-mn",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Andes Tower Hills is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "coffee-mill-ski-area-mn",
+      "publicId": "coffee-mill-ski-area-mn",
+      "aliases": [
+        "Coffee Mill"
+      ],
+      "name": "Coffee Mill Ski Area",
+      "coordinates": {
+        "lat": 44.36022,
+        "lng": -92.04387
+      },
+      "forecastElevationM": 255,
+      "officialUrl": "https://www.coffeemillski.com/",
+      "regionId": "us-mn",
+      "regionName": "Minnesota",
+      "stateOrProvince": "Minnesota",
+      "localityId": "wabasha",
+      "localityName": "Wabasha",
+      "route": "/us-mn/mountain/coffee-mill-ski-area-mn",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Coffee Mill Ski Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "hyland-hills-ski-area-mn",
+      "publicId": "hyland-hills-ski-area-mn",
+      "aliases": [
+        "Hyland Ski and Snowboard Area",
+        "Hyland Hills"
+      ],
+      "name": "Hyland Hills Ski Area",
+      "coordinates": {
+        "lat": 44.84345,
+        "lng": -93.36444
+      },
+      "forecastElevationM": 266,
+      "officialUrl": "https://www.threeriversparks.org/location/hyland-hills-ski-area",
+      "regionId": "us-mn",
+      "regionName": "Minnesota",
+      "stateOrProvince": "Minnesota",
+      "localityId": "bloomington",
+      "localityName": "Bloomington",
+      "route": "/us-mn/mountain/hyland-hills-ski-area-mn",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Hyland Hills Ski Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "powder-ridge-mn",
+      "publicId": "powder-ridge-mn",
+      "aliases": [
+        "Powder Ridge Winter Recreation Area"
+      ],
+      "name": "Powder Ridge",
+      "coordinates": {
+        "lat": 45.34408,
+        "lng": -94.30785
+      },
+      "forecastElevationM": 380,
+      "officialUrl": "https://www.powderridge.com/",
+      "regionId": "us-mn",
+      "regionName": "Minnesota",
+      "stateOrProvince": "Minnesota",
+      "localityId": "kimball",
+      "localityName": "Kimball",
+      "route": "/us-mn/mountain/powder-ridge-mn",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Powder Ridge is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "detroit-mountain-mn",
+      "publicId": "detroit-mountain-mn",
+      "aliases": [
+        "Detroit Mountain"
+      ],
+      "name": "Detroit Mountain Recreation Area",
+      "coordinates": {
+        "lat": 46.81617,
+        "lng": -95.78353
+      },
+      "forecastElevationM": 499,
+      "officialUrl": "https://detroitmountain.com/",
+      "regionId": "us-mn",
+      "regionName": "Minnesota",
+      "stateOrProvince": "Minnesota",
+      "localityId": "detroit-lakes",
+      "localityName": "Detroit Lakes",
+      "route": "/us-mn/mountain/detroit-mountain-mn",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Detroit Mountain Recreation Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    },
+    {
+      "recordId": "buena-vista-ski-area-mn",
+      "publicId": "buena-vista-ski-area-mn",
+      "aliases": [
+        "Buena Vista"
+      ],
+      "name": "Buena Vista Ski Area",
+      "coordinates": {
+        "lat": 47.65822,
+        "lng": -94.8766
+      },
+      "forecastElevationM": 452,
+      "officialUrl": "https://www.bvskiarea.com/",
+      "regionId": "us-mn",
+      "regionName": "Minnesota",
+      "stateOrProvince": "Minnesota",
+      "localityId": "bemidji",
+      "localityName": "Bemidji",
+      "route": "/us-mn/mountain/buena-vista-ski-area-mn",
+      "country": "United States",
+      "countryCode": "US",
+      "timezone": "America/Chicago",
+      "facilityType": "alpine",
+      "accessModel": "Public lift-served ski area.",
+      "publicCopy": "Buena Vista Ski Area is an outdoor lift-served ski area.",
+      "weatherEligible": true,
+      "alertEligible": true
+    }
+  ]
+}

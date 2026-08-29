@@ -1,0 +1,4788 @@
+{
+  "batchVersion": 1,
+  "batchId": "us-pa-wi-mn",
+  "records": [
+    {
+      "recordId": "jack-frost-pa",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "jack-frost-pa",
+        "name": "Jack Frost",
+        "aliases": [
+          "Jack Frost Big Boulder",
+          "JFBB"
+        ]
+      },
+      "coordinates": {
+        "lat": 40.948,
+        "lng": -75.625
+      },
+      "elevations": {
+        "baseM": 427,
+        "topM": 610,
+        "forecastM": 489
+      },
+      "locality": {
+        "regionId": "us-pa",
+        "regionName": "Pennsylvania",
+        "stateOrProvince": "Pennsylvania",
+        "localityId": "blakeslee",
+        "localityName": "Blakeslee"
+      },
+      "officialUrl": "https://www.jfbb.com/",
+      "evidence": [
+        {
+          "url": "https://www.jfbb.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The operator's official site presents Jack Frost as an active ski area and publishes current mountain information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "jack-frost-pa",
+                "name": "Jack Frost",
+                "aliases": [
+                  "Jack Frost Big Boulder",
+                  "JFBB"
+                ]
+              },
+              "citation": "The operator's official site presents Jack Frost as an active ski area and publishes current mountain information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The operator's official site presents Jack Frost as an active ski area and publishes current mountain information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.jfbb.com/",
+              "citation": "The operator's official site presents Jack Frost as an active ski area and publishes current mountain information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-pa",
+                "regionName": "Pennsylvania",
+                "stateOrProvince": "Pennsylvania",
+                "localityId": "blakeslee",
+                "localityName": "Blakeslee"
+              },
+              "citation": "The operator's official site presents Jack Frost as an active ski area and publishes current mountain information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=40.948&mlon=-75.625#map=16/40.948/-75.625",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 40.948,
+                "lng": -75.625
+              },
+              "citation": "Map marker at 40.948, -75.625."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-75.625&y=40.948&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 489,
+              "citation": "EPQS returned an elevation rounded to 489 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "big-boulder-pa",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "big-boulder-pa",
+        "name": "Big Boulder",
+        "aliases": [
+          "Jack Frost Big Boulder",
+          "JFBB"
+        ]
+      },
+      "coordinates": {
+        "lat": 41.05,
+        "lng": -75.62
+      },
+      "elevations": {
+        "baseM": 518,
+        "topM": 663,
+        "forecastM": 582
+      },
+      "locality": {
+        "regionId": "us-pa",
+        "regionName": "Pennsylvania",
+        "stateOrProvince": "Pennsylvania",
+        "localityId": "lake-harmony",
+        "localityName": "Lake Harmony"
+      },
+      "officialUrl": "https://www.jfbb.com/",
+      "evidence": [
+        {
+          "url": "https://www.jfbb.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The operator's official site presents Big Boulder as an active ski area and publishes current mountain information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "big-boulder-pa",
+                "name": "Big Boulder",
+                "aliases": [
+                  "Jack Frost Big Boulder",
+                  "JFBB"
+                ]
+              },
+              "citation": "The operator's official site presents Big Boulder as an active ski area and publishes current mountain information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The operator's official site presents Big Boulder as an active ski area and publishes current mountain information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.jfbb.com/",
+              "citation": "The operator's official site presents Big Boulder as an active ski area and publishes current mountain information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-pa",
+                "regionName": "Pennsylvania",
+                "stateOrProvince": "Pennsylvania",
+                "localityId": "lake-harmony",
+                "localityName": "Lake Harmony"
+              },
+              "citation": "The operator's official site presents Big Boulder as an active ski area and publishes current mountain information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=41.05&mlon=-75.62#map=16/41.05/-75.62",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 41.05,
+                "lng": -75.62
+              },
+              "citation": "Map marker at 41.05, -75.62."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-75.62&y=41.05&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 582,
+              "citation": "EPQS returned an elevation rounded to 582 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "elk-mountain-pa",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "elk-mountain-pa",
+        "name": "Elk Mountain",
+        "aliases": [
+          "Elk Mountain Ski Resort"
+        ]
+      },
+      "coordinates": {
+        "lat": 41.71857,
+        "lng": -75.48077
+      },
+      "elevations": {
+        "baseM": 518,
+        "topM": 821,
+        "forecastM": 491
+      },
+      "locality": {
+        "regionId": "us-pa",
+        "regionName": "Pennsylvania",
+        "stateOrProvince": "Pennsylvania",
+        "localityId": "union-dale",
+        "localityName": "Union Dale"
+      },
+      "officialUrl": "https://www.elkskier.com/",
+      "evidence": [
+        {
+          "url": "https://www.elkskier.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Elk Mountain's official operator site publishes skiing, tickets, conditions, and visitor information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "elk-mountain-pa",
+                "name": "Elk Mountain",
+                "aliases": [
+                  "Elk Mountain Ski Resort"
+                ]
+              },
+              "citation": "Elk Mountain's official operator site publishes skiing, tickets, conditions, and visitor information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Elk Mountain's official operator site publishes skiing, tickets, conditions, and visitor information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.elkskier.com/",
+              "citation": "Elk Mountain's official operator site publishes skiing, tickets, conditions, and visitor information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-pa",
+                "regionName": "Pennsylvania",
+                "stateOrProvince": "Pennsylvania",
+                "localityId": "union-dale",
+                "localityName": "Union Dale"
+              },
+              "citation": "Elk Mountain's official operator site publishes skiing, tickets, conditions, and visitor information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=41.71857&mlon=-75.48077#map=16/41.71857/-75.48077",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 41.71857,
+                "lng": -75.48077
+              },
+              "citation": "Map marker at 41.71857, -75.48077."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-75.48077&y=41.71857&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 491,
+              "citation": "EPQS returned an elevation rounded to 491 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "montage-mountain-pa",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "montage-mountain-pa",
+        "name": "Montage Mountain Resorts",
+        "aliases": [
+          "Montage Mountain Ski Resort",
+          "Montage Mountain"
+        ]
+      },
+      "coordinates": {
+        "lat": 41.34779,
+        "lng": -75.6499
+      },
+      "elevations": {
+        "baseM": 293,
+        "topM": 597,
+        "forecastM": 602
+      },
+      "locality": {
+        "regionId": "us-pa",
+        "regionName": "Pennsylvania",
+        "stateOrProvince": "Pennsylvania",
+        "localityId": "scranton",
+        "localityName": "Scranton"
+      },
+      "officialUrl": "https://www.montagemountainresorts.com/",
+      "evidence": [
+        {
+          "url": "https://www.montagemountainresorts.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The resort's official site identifies Montage Mountain as an operating ski resort and publishes winter products and mountain information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "montage-mountain-pa",
+                "name": "Montage Mountain Resorts",
+                "aliases": [
+                  "Montage Mountain Ski Resort",
+                  "Montage Mountain"
+                ]
+              },
+              "citation": "The resort's official site identifies Montage Mountain as an operating ski resort and publishes winter products and mountain information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The resort's official site identifies Montage Mountain as an operating ski resort and publishes winter products and mountain information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.montagemountainresorts.com/",
+              "citation": "The resort's official site identifies Montage Mountain as an operating ski resort and publishes winter products and mountain information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-pa",
+                "regionName": "Pennsylvania",
+                "stateOrProvince": "Pennsylvania",
+                "localityId": "scranton",
+                "localityName": "Scranton"
+              },
+              "citation": "The resort's official site identifies Montage Mountain as an operating ski resort and publishes winter products and mountain information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=41.34779&mlon=-75.6499#map=16/41.34779/-75.6499",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 41.34779,
+                "lng": -75.6499
+              },
+              "citation": "Map marker at 41.34779, -75.6499."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-75.6499&y=41.34779&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 602,
+              "citation": "EPQS returned an elevation rounded to 602 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "whitetail-resort-pa",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "whitetail-resort-pa",
+        "name": "Whitetail Resort",
+        "aliases": [
+          "Whitetail Ski Resort",
+          "Whitetail Mountain Resort"
+        ]
+      },
+      "coordinates": {
+        "lat": 39.74179,
+        "lng": -77.9334
+      },
+      "elevations": {
+        "baseM": 264,
+        "topM": 549,
+        "forecastM": 262
+      },
+      "locality": {
+        "regionId": "us-pa",
+        "regionName": "Pennsylvania",
+        "stateOrProvince": "Pennsylvania",
+        "localityId": "mercersburg",
+        "localityName": "Mercersburg"
+      },
+      "officialUrl": "https://www.skiwhitetail.com/",
+      "evidence": [
+        {
+          "url": "https://www.skiwhitetail.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Vail Resorts' official Whitetail site publishes current skiing, lift ticket, and mountain information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "whitetail-resort-pa",
+                "name": "Whitetail Resort",
+                "aliases": [
+                  "Whitetail Ski Resort",
+                  "Whitetail Mountain Resort"
+                ]
+              },
+              "citation": "Vail Resorts' official Whitetail site publishes current skiing, lift ticket, and mountain information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Vail Resorts' official Whitetail site publishes current skiing, lift ticket, and mountain information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.skiwhitetail.com/",
+              "citation": "Vail Resorts' official Whitetail site publishes current skiing, lift ticket, and mountain information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-pa",
+                "regionName": "Pennsylvania",
+                "stateOrProvince": "Pennsylvania",
+                "localityId": "mercersburg",
+                "localityName": "Mercersburg"
+              },
+              "citation": "Vail Resorts' official Whitetail site publishes current skiing, lift ticket, and mountain information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=39.74179&mlon=-77.9334#map=16/39.74179/-77.9334",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 39.74179,
+                "lng": -77.9334
+              },
+              "citation": "Map marker at 39.74179, -77.9334."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-77.9334&y=39.74179&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 262,
+              "citation": "EPQS returned an elevation rounded to 262 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "bear-creek-mountain-resort-pa",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "bear-creek-mountain-resort-pa",
+        "name": "Bear Creek Mountain Resort",
+        "aliases": [
+          "Bear Creek"
+        ]
+      },
+      "coordinates": {
+        "lat": 40.47609,
+        "lng": -75.62521
+      },
+      "elevations": {
+        "baseM": 180,
+        "topM": 335,
+        "forecastM": 217
+      },
+      "locality": {
+        "regionId": "us-pa",
+        "regionName": "Pennsylvania",
+        "stateOrProvince": "Pennsylvania",
+        "localityId": "macungie",
+        "localityName": "Macungie"
+      },
+      "officialUrl": "https://www.bcmountainresort.com/",
+      "evidence": [
+        {
+          "url": "https://www.bcmountainresort.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The operator's official resort site publishes current skiing, snowboarding, passes, and winter operations information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "bear-creek-mountain-resort-pa",
+                "name": "Bear Creek Mountain Resort",
+                "aliases": [
+                  "Bear Creek"
+                ]
+              },
+              "citation": "The operator's official resort site publishes current skiing, snowboarding, passes, and winter operations information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The operator's official resort site publishes current skiing, snowboarding, passes, and winter operations information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.bcmountainresort.com/",
+              "citation": "The operator's official resort site publishes current skiing, snowboarding, passes, and winter operations information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-pa",
+                "regionName": "Pennsylvania",
+                "stateOrProvince": "Pennsylvania",
+                "localityId": "macungie",
+                "localityName": "Macungie"
+              },
+              "citation": "The operator's official resort site publishes current skiing, snowboarding, passes, and winter operations information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=40.47609&mlon=-75.62521#map=16/40.47609/-75.62521",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 40.47609,
+                "lng": -75.62521
+              },
+              "citation": "Map marker at 40.47609, -75.62521."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-75.62521&y=40.47609&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 217,
+              "citation": "EPQS returned an elevation rounded to 217 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "liberty-mountain-resort-pa",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "liberty-mountain-resort-pa",
+        "name": "Liberty Mountain Resort",
+        "aliases": [
+          "Ski Liberty",
+          "Liberty Mountain"
+        ]
+      },
+      "coordinates": {
+        "lat": 39.76064,
+        "lng": -77.36853
+      },
+      "elevations": {
+        "baseM": 174,
+        "topM": 363,
+        "forecastM": 258
+      },
+      "locality": {
+        "regionId": "us-pa",
+        "regionName": "Pennsylvania",
+        "stateOrProvince": "Pennsylvania",
+        "localityId": "carroll-valley",
+        "localityName": "Carroll Valley"
+      },
+      "officialUrl": "https://www.libertymountainresort.com/",
+      "evidence": [
+        {
+          "url": "https://www.libertymountainresort.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Vail Resorts' official Liberty site publishes current skiing, lift ticket, and mountain information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "liberty-mountain-resort-pa",
+                "name": "Liberty Mountain Resort",
+                "aliases": [
+                  "Ski Liberty",
+                  "Liberty Mountain"
+                ]
+              },
+              "citation": "Vail Resorts' official Liberty site publishes current skiing, lift ticket, and mountain information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Vail Resorts' official Liberty site publishes current skiing, lift ticket, and mountain information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.libertymountainresort.com/",
+              "citation": "Vail Resorts' official Liberty site publishes current skiing, lift ticket, and mountain information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-pa",
+                "regionName": "Pennsylvania",
+                "stateOrProvince": "Pennsylvania",
+                "localityId": "carroll-valley",
+                "localityName": "Carroll Valley"
+              },
+              "citation": "Vail Resorts' official Liberty site publishes current skiing, lift ticket, and mountain information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=39.76064&mlon=-77.36853#map=16/39.76064/-77.36853",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 39.76064,
+                "lng": -77.36853
+              },
+              "citation": "Map marker at 39.76064, -77.36853."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-77.36853&y=39.76064&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 258,
+              "citation": "EPQS returned an elevation rounded to 258 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "hidden-valley-resort-pa",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "hidden-valley-resort-pa",
+        "name": "Hidden Valley Resort",
+        "aliases": [
+          "Hidden Valley Four Seasons Resort",
+          "Hidden Valley Ski Resort"
+        ]
+      },
+      "coordinates": {
+        "lat": 40.05903,
+        "lng": -79.25288
+      },
+      "elevations": {
+        "baseM": 707,
+        "topM": 876,
+        "forecastM": 788
+      },
+      "locality": {
+        "regionId": "us-pa",
+        "regionName": "Pennsylvania",
+        "stateOrProvince": "Pennsylvania",
+        "localityId": "hidden-valley",
+        "localityName": "Hidden Valley"
+      },
+      "officialUrl": "https://www.hiddenvalleyresort.com/",
+      "evidence": [
+        {
+          "url": "https://www.hiddenvalleyresort.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Vail Resorts' official Hidden Valley site publishes current skiing, lift ticket, and mountain information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "hidden-valley-resort-pa",
+                "name": "Hidden Valley Resort",
+                "aliases": [
+                  "Hidden Valley Four Seasons Resort",
+                  "Hidden Valley Ski Resort"
+                ]
+              },
+              "citation": "Vail Resorts' official Hidden Valley site publishes current skiing, lift ticket, and mountain information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Vail Resorts' official Hidden Valley site publishes current skiing, lift ticket, and mountain information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.hiddenvalleyresort.com/",
+              "citation": "Vail Resorts' official Hidden Valley site publishes current skiing, lift ticket, and mountain information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-pa",
+                "regionName": "Pennsylvania",
+                "stateOrProvince": "Pennsylvania",
+                "localityId": "hidden-valley",
+                "localityName": "Hidden Valley"
+              },
+              "citation": "Vail Resorts' official Hidden Valley site publishes current skiing, lift ticket, and mountain information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=40.05903&mlon=-79.25288#map=16/40.05903/-79.25288",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 40.05903,
+                "lng": -79.25288
+              },
+              "citation": "Map marker at 40.05903, -79.25288."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-79.25288&y=40.05903&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 788,
+              "citation": "EPQS returned an elevation rounded to 788 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "laurel-mountain-ski-resort-pa",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "laurel-mountain-ski-resort-pa",
+        "name": "Laurel Mountain Ski Resort",
+        "aliases": [
+          "Laurel Mountain"
+        ]
+      },
+      "coordinates": {
+        "lat": 40.16676,
+        "lng": -79.16852
+      },
+      "elevations": {
+        "baseM": 683,
+        "topM": 884,
+        "forecastM": 760
+      },
+      "locality": {
+        "regionId": "us-pa",
+        "regionName": "Pennsylvania",
+        "stateOrProvince": "Pennsylvania",
+        "localityId": "ligonier",
+        "localityName": "Ligonier"
+      },
+      "officialUrl": "https://www.laurelmountainski.com/",
+      "evidence": [
+        {
+          "url": "https://www.laurelmountainski.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Vail Resorts' official Laurel Mountain site publishes skiing, tickets, conditions, and mountain information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "laurel-mountain-ski-resort-pa",
+                "name": "Laurel Mountain Ski Resort",
+                "aliases": [
+                  "Laurel Mountain"
+                ]
+              },
+              "citation": "Vail Resorts' official Laurel Mountain site publishes skiing, tickets, conditions, and mountain information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Vail Resorts' official Laurel Mountain site publishes skiing, tickets, conditions, and mountain information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.laurelmountainski.com/",
+              "citation": "Vail Resorts' official Laurel Mountain site publishes skiing, tickets, conditions, and mountain information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-pa",
+                "regionName": "Pennsylvania",
+                "stateOrProvince": "Pennsylvania",
+                "localityId": "ligonier",
+                "localityName": "Ligonier"
+              },
+              "citation": "Vail Resorts' official Laurel Mountain site publishes skiing, tickets, conditions, and mountain information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=40.16676&mlon=-79.16852#map=16/40.16676/-79.16852",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 40.16676,
+                "lng": -79.16852
+              },
+              "citation": "Map marker at 40.16676, -79.16852."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-79.16852&y=40.16676&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 760,
+              "citation": "EPQS returned an elevation rounded to 760 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "roundtop-mountain-resort-pa",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "roundtop-mountain-resort-pa",
+        "name": "Roundtop Mountain Resort",
+        "aliases": [
+          "Ski Roundtop",
+          "Roundtop"
+        ]
+      },
+      "coordinates": {
+        "lat": 40.10837,
+        "lng": -76.92867
+      },
+      "elevations": {
+        "baseM": 230,
+        "topM": 407,
+        "forecastM": 293
+      },
+      "locality": {
+        "regionId": "us-pa",
+        "regionName": "Pennsylvania",
+        "stateOrProvince": "Pennsylvania",
+        "localityId": "lewisberry",
+        "localityName": "Lewisberry"
+      },
+      "officialUrl": "https://www.skiroundtop.com/",
+      "evidence": [
+        {
+          "url": "https://www.skiroundtop.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Vail Resorts' official Roundtop site publishes current skiing, lift ticket, and mountain information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "roundtop-mountain-resort-pa",
+                "name": "Roundtop Mountain Resort",
+                "aliases": [
+                  "Ski Roundtop",
+                  "Roundtop"
+                ]
+              },
+              "citation": "Vail Resorts' official Roundtop site publishes current skiing, lift ticket, and mountain information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Vail Resorts' official Roundtop site publishes current skiing, lift ticket, and mountain information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.skiroundtop.com/",
+              "citation": "Vail Resorts' official Roundtop site publishes current skiing, lift ticket, and mountain information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-pa",
+                "regionName": "Pennsylvania",
+                "stateOrProvince": "Pennsylvania",
+                "localityId": "lewisberry",
+                "localityName": "Lewisberry"
+              },
+              "citation": "Vail Resorts' official Roundtop site publishes current skiing, lift ticket, and mountain information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=40.10837&mlon=-76.92867#map=16/40.10837/-76.92867",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 40.10837,
+                "lng": -76.92867
+              },
+              "citation": "Map marker at 40.10837, -76.92867."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-76.92867&y=40.10837&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 293,
+              "citation": "EPQS returned an elevation rounded to 293 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "tussey-mountain-pa",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "tussey-mountain-pa",
+        "name": "Tussey Mountain",
+        "aliases": [
+          "Tussey Mountain Ski Area"
+        ]
+      },
+      "coordinates": {
+        "lat": 40.7685,
+        "lng": -77.75057
+      },
+      "elevations": {
+        "baseM": 402,
+        "topM": 555,
+        "forecastM": 461
+      },
+      "locality": {
+        "regionId": "us-pa",
+        "regionName": "Pennsylvania",
+        "stateOrProvince": "Pennsylvania",
+        "localityId": "boalsburg",
+        "localityName": "Boalsburg"
+      },
+      "officialUrl": "https://tusseymountain.com/",
+      "evidence": [
+        {
+          "url": "https://tusseymountain.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Tussey Mountain's official site publishes ski-area hours, tickets, lessons, and winter activity information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "tussey-mountain-pa",
+                "name": "Tussey Mountain",
+                "aliases": [
+                  "Tussey Mountain Ski Area"
+                ]
+              },
+              "citation": "Tussey Mountain's official site publishes ski-area hours, tickets, lessons, and winter activity information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Tussey Mountain's official site publishes ski-area hours, tickets, lessons, and winter activity information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://tusseymountain.com/",
+              "citation": "Tussey Mountain's official site publishes ski-area hours, tickets, lessons, and winter activity information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-pa",
+                "regionName": "Pennsylvania",
+                "stateOrProvince": "Pennsylvania",
+                "localityId": "boalsburg",
+                "localityName": "Boalsburg"
+              },
+              "citation": "Tussey Mountain's official site publishes ski-area hours, tickets, lessons, and winter activity information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=40.7685&mlon=-77.75057#map=16/40.7685/-77.75057",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 40.7685,
+                "lng": -77.75057
+              },
+              "citation": "Map marker at 40.7685, -77.75057."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-77.75057&y=40.7685&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 461,
+              "citation": "EPQS returned an elevation rounded to 461 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "ski-big-bear-pa",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "ski-big-bear-pa",
+        "name": "Ski Big Bear at Masthope Mountain",
+        "aliases": [
+          "Ski Big Bear",
+          "Big Bear at Masthope Mountain"
+        ]
+      },
+      "coordinates": {
+        "lat": 41.52336,
+        "lng": -75.02456
+      },
+      "elevations": {
+        "baseM": 183,
+        "topM": 381,
+        "forecastM": 392
+      },
+      "locality": {
+        "regionId": "us-pa",
+        "regionName": "Pennsylvania",
+        "stateOrProvince": "Pennsylvania",
+        "localityId": "lackawaxen",
+        "localityName": "Lackawaxen"
+      },
+      "officialUrl": "https://ski-bigbear.com/",
+      "evidence": [
+        {
+          "url": "https://ski-bigbear.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The official Ski Big Bear site publishes tickets, lessons, snow reports, and current ski-area information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "ski-big-bear-pa",
+                "name": "Ski Big Bear at Masthope Mountain",
+                "aliases": [
+                  "Ski Big Bear",
+                  "Big Bear at Masthope Mountain"
+                ]
+              },
+              "citation": "The official Ski Big Bear site publishes tickets, lessons, snow reports, and current ski-area information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The official Ski Big Bear site publishes tickets, lessons, snow reports, and current ski-area information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://ski-bigbear.com/",
+              "citation": "The official Ski Big Bear site publishes tickets, lessons, snow reports, and current ski-area information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-pa",
+                "regionName": "Pennsylvania",
+                "stateOrProvince": "Pennsylvania",
+                "localityId": "lackawaxen",
+                "localityName": "Lackawaxen"
+              },
+              "citation": "The official Ski Big Bear site publishes tickets, lessons, snow reports, and current ski-area information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=41.52336&mlon=-75.02456#map=16/41.52336/-75.02456",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 41.52336,
+                "lng": -75.02456
+              },
+              "citation": "Map marker at 41.52336, -75.02456."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-75.02456&y=41.52336&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 392,
+              "citation": "EPQS returned an elevation rounded to 392 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "ski-sawmill-pa",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "ski-sawmill-pa",
+        "name": "Ski Sawmill Family Resort",
+        "aliases": [
+          "Ski Sawmill"
+        ]
+      },
+      "coordinates": {
+        "lat": 41.52327,
+        "lng": -77.29057
+      },
+      "elevations": {
+        "baseM": 518,
+        "topM": 675,
+        "forecastM": 506
+      },
+      "locality": {
+        "regionId": "us-pa",
+        "regionName": "Pennsylvania",
+        "stateOrProvince": "Pennsylvania",
+        "localityId": "morris",
+        "localityName": "Morris"
+      },
+      "officialUrl": "https://skisawmill.com/",
+      "evidence": [
+        {
+          "url": "https://skisawmill.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The resort's official site publishes skiing, snowboarding, tubing, lodging, and conditions information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "ski-sawmill-pa",
+                "name": "Ski Sawmill Family Resort",
+                "aliases": [
+                  "Ski Sawmill"
+                ]
+              },
+              "citation": "The resort's official site publishes skiing, snowboarding, tubing, lodging, and conditions information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The resort's official site publishes skiing, snowboarding, tubing, lodging, and conditions information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://skisawmill.com/",
+              "citation": "The resort's official site publishes skiing, snowboarding, tubing, lodging, and conditions information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-pa",
+                "regionName": "Pennsylvania",
+                "stateOrProvince": "Pennsylvania",
+                "localityId": "morris",
+                "localityName": "Morris"
+              },
+              "citation": "The resort's official site publishes skiing, snowboarding, tubing, lodging, and conditions information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=41.52327&mlon=-77.29057#map=16/41.52327/-77.29057",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 41.52327,
+                "lng": -77.29057
+              },
+              "citation": "Map marker at 41.52327, -77.29057."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-77.29057&y=41.52327&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 506,
+              "citation": "EPQS returned an elevation rounded to 506 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "spring-mountain-adventures-pa",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "spring-mountain-adventures-pa",
+        "name": "Spring Mountain Adventures",
+        "aliases": [
+          "Spring Mountain",
+          "Spring Mountain Ski Area"
+        ]
+      },
+      "coordinates": {
+        "lat": 40.278,
+        "lng": -75.458
+      },
+      "elevations": {
+        "baseM": 30,
+        "topM": 161,
+        "forecastM": 62
+      },
+      "locality": {
+        "regionId": "us-pa",
+        "regionName": "Pennsylvania",
+        "stateOrProvince": "Pennsylvania",
+        "localityId": "schwenksville",
+        "localityName": "Schwenksville"
+      },
+      "officialUrl": "https://springmountainadventures.com/",
+      "evidence": [
+        {
+          "url": "https://springmountainadventures.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The operator's official site publishes ski, snowboard, tubing, lesson, and ticket information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "spring-mountain-adventures-pa",
+                "name": "Spring Mountain Adventures",
+                "aliases": [
+                  "Spring Mountain",
+                  "Spring Mountain Ski Area"
+                ]
+              },
+              "citation": "The operator's official site publishes ski, snowboard, tubing, lesson, and ticket information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The operator's official site publishes ski, snowboard, tubing, lesson, and ticket information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://springmountainadventures.com/",
+              "citation": "The operator's official site publishes ski, snowboard, tubing, lesson, and ticket information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-pa",
+                "regionName": "Pennsylvania",
+                "stateOrProvince": "Pennsylvania",
+                "localityId": "schwenksville",
+                "localityName": "Schwenksville"
+              },
+              "citation": "The operator's official site publishes ski, snowboard, tubing, lesson, and ticket information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=40.278&mlon=-75.458#map=16/40.278/-75.458",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 40.278,
+                "lng": -75.458
+              },
+              "citation": "Map marker at 40.278, -75.458."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-75.458&y=40.278&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 62,
+              "citation": "EPQS returned an elevation rounded to 62 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "boyce-park-ski-area-pa",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "boyce-park-ski-area-pa",
+        "name": "Boyce Park Ski Area",
+        "aliases": [
+          "Boyce Park"
+        ]
+      },
+      "coordinates": {
+        "lat": 40.46002,
+        "lng": -79.74877
+      },
+      "elevations": {
+        "baseM": 274,
+        "topM": 376,
+        "forecastM": 350
+      },
+      "locality": {
+        "regionId": "us-pa",
+        "regionName": "Pennsylvania",
+        "stateOrProvince": "Pennsylvania",
+        "localityId": "plum",
+        "localityName": "Plum"
+      },
+      "officialUrl": "https://www.alleghenycounty.us/Parks-and-Events/Activities/Skiing-and-Snowboarding",
+      "evidence": [
+        {
+          "url": "https://www.alleghenycounty.us/Parks-and-Events/Activities/Skiing-and-Snowboarding",
+          "retrievedAt": "2026-08-27",
+          "claim": "Allegheny County's official parks site identifies Boyce Park's public downhill skiing and snowboarding operation.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "boyce-park-ski-area-pa",
+                "name": "Boyce Park Ski Area",
+                "aliases": [
+                  "Boyce Park"
+                ]
+              },
+              "citation": "Allegheny County's official parks site identifies Boyce Park's public downhill skiing and snowboarding operation."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Allegheny County's official parks site identifies Boyce Park's public downhill skiing and snowboarding operation."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.alleghenycounty.us/Parks-and-Events/Activities/Skiing-and-Snowboarding",
+              "citation": "Allegheny County's official parks site identifies Boyce Park's public downhill skiing and snowboarding operation."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-pa",
+                "regionName": "Pennsylvania",
+                "stateOrProvince": "Pennsylvania",
+                "localityId": "plum",
+                "localityName": "Plum"
+              },
+              "citation": "Allegheny County's official parks site identifies Boyce Park's public downhill skiing and snowboarding operation."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=40.46002&mlon=-79.74877#map=16/40.46002/-79.74877",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 40.46002,
+                "lng": -79.74877
+              },
+              "citation": "Map marker at 40.46002, -79.74877."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-79.74877&y=40.46002&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 350,
+              "citation": "EPQS returned an elevation rounded to 350 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/New_York",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "ski-denton-pa",
+      "lifecycle": "draft",
+      "lifecycleHistory": [
+        "draft"
+      ],
+      "classification": "uncertain",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "ski-denton-pa",
+        "name": "Denton",
+        "aliases": [
+          "Ski Denton",
+          "Denton Hill Ski Area",
+          "Denton Go"
+        ]
+      },
+      "coordinates": null,
+      "elevations": null,
+      "locality": {
+        "regionId": "us-pa",
+        "regionName": "Pennsylvania",
+        "stateOrProvince": "Pennsylvania",
+        "localityId": "coudersport",
+        "localityName": "Coudersport"
+      },
+      "officialUrl": "https://www.dentongo.com/",
+      "evidence": [
+        {
+          "url": "https://www.pa.gov/agencies/dcnr/recreation/where-to-go/state-parks/find-a-park/denton-hill-state-park",
+          "retrievedAt": "2026-08-27",
+          "supports": [
+            "identity",
+            "status",
+            "coordinates",
+            "elevations",
+            "locality",
+            "officialUrl"
+          ],
+          "claim": "Pennsylvania DCNR identifies Denton Hill as a state park under redevelopment rather than a currently operating public downhill ski area."
+        },
+        {
+          "url": "https://www.dentongo.com/",
+          "retrievedAt": "2026-08-27",
+          "supports": [
+            "identity",
+            "status",
+            "coordinates",
+            "elevations",
+            "locality",
+            "officialUrl"
+          ],
+          "claim": "The selected operator markets the project as Denton and describes reopening plans, but does not establish completed current ski operations."
+        }
+      ],
+      "timezone": "America/New_York"
+    },
+    {
+      "recordId": "mountain-view-at-edinboro-pa",
+      "lifecycle": "verified",
+      "lifecycleHistory": [
+        "draft",
+        "verified"
+      ],
+      "classification": "duplicate_renamed",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "mountain-view-at-edinboro-pa",
+        "name": "Mount Pleasant of Edinboro",
+        "aliases": [
+          "Mountain View at Edinboro",
+          "Mount Pleasant"
+        ]
+      },
+      "coordinates": {
+        "lat": 41.85105,
+        "lng": -80.07435
+      },
+      "elevations": {
+        "baseM": 372,
+        "topM": 427,
+        "forecastM": 427
+      },
+      "locality": {
+        "regionId": "us-pa",
+        "regionName": "Pennsylvania",
+        "stateOrProvince": "Pennsylvania",
+        "localityId": "edinboro",
+        "localityName": "Edinboro"
+      },
+      "officialUrl": "https://www.skimountpleasant.com/",
+      "evidence": [
+        {
+          "url": "https://www.skimountpleasant.com/",
+          "retrievedAt": "2026-08-27",
+          "supports": [
+            "identity",
+            "status",
+            "coordinates",
+            "elevations",
+            "locality",
+            "officialUrl"
+          ],
+          "claim": "The current operator uses the name Mount Pleasant of Edinboro and publishes active family snow-sports information; Mountain View at Edinboro is an obsolete name for this area."
+        }
+      ],
+      "timezone": "America/New_York"
+    },
+    {
+      "recordId": "whitecap-mountains-resort-wi",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "whitecap-mountains-resort-wi",
+        "name": "Whitecap Mountains Resort",
+        "aliases": [
+          "Whitecap Mountains"
+        ]
+      },
+      "coordinates": {
+        "lat": 46.472,
+        "lng": -90.33
+      },
+      "elevations": {
+        "baseM": 395,
+        "topM": 533,
+        "forecastM": 410
+      },
+      "locality": {
+        "regionId": "us-wi",
+        "regionName": "Wisconsin",
+        "stateOrProvince": "Wisconsin",
+        "localityId": "upson",
+        "localityName": "Upson"
+      },
+      "officialUrl": "https://whitecapresort.com/",
+      "evidence": [
+        {
+          "url": "https://whitecapresort.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Whitecap's official site publishes ski tickets, lodging, trail, and current resort information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "whitecap-mountains-resort-wi",
+                "name": "Whitecap Mountains Resort",
+                "aliases": [
+                  "Whitecap Mountains"
+                ]
+              },
+              "citation": "Whitecap's official site publishes ski tickets, lodging, trail, and current resort information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Whitecap's official site publishes ski tickets, lodging, trail, and current resort information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://whitecapresort.com/",
+              "citation": "Whitecap's official site publishes ski tickets, lodging, trail, and current resort information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-wi",
+                "regionName": "Wisconsin",
+                "stateOrProvince": "Wisconsin",
+                "localityId": "upson",
+                "localityName": "Upson"
+              },
+              "citation": "Whitecap's official site publishes ski tickets, lodging, trail, and current resort information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.472&mlon=-90.33#map=16/46.472/-90.33",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.472,
+                "lng": -90.33
+              },
+              "citation": "Map marker at 46.472, -90.33."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-90.33&y=46.472&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 410,
+              "citation": "EPQS returned an elevation rounded to 410 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "devils-head-resort-wi",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "devils-head-resort-wi",
+        "name": "Devil's Head Resort",
+        "aliases": [
+          "Devils Head Resort",
+          "Devil's Head"
+        ]
+      },
+      "coordinates": {
+        "lat": 43.41861,
+        "lng": -89.62243
+      },
+      "elevations": {
+        "baseM": 303,
+        "topM": 456,
+        "forecastM": 282
+      },
+      "locality": {
+        "regionId": "us-wi",
+        "regionName": "Wisconsin",
+        "stateOrProvince": "Wisconsin",
+        "localityId": "merrimac",
+        "localityName": "Merrimac"
+      },
+      "officialUrl": "https://www.devilsheadresort.com/",
+      "evidence": [
+        {
+          "url": "https://www.devilsheadresort.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The resort's official site publishes skiing, snowboarding, lift ticket, and lodging information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "devils-head-resort-wi",
+                "name": "Devil's Head Resort",
+                "aliases": [
+                  "Devils Head Resort",
+                  "Devil's Head"
+                ]
+              },
+              "citation": "The resort's official site publishes skiing, snowboarding, lift ticket, and lodging information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The resort's official site publishes skiing, snowboarding, lift ticket, and lodging information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.devilsheadresort.com/",
+              "citation": "The resort's official site publishes skiing, snowboarding, lift ticket, and lodging information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-wi",
+                "regionName": "Wisconsin",
+                "stateOrProvince": "Wisconsin",
+                "localityId": "merrimac",
+                "localityName": "Merrimac"
+              },
+              "citation": "The resort's official site publishes skiing, snowboarding, lift ticket, and lodging information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=43.41861&mlon=-89.62243#map=16/43.41861/-89.62243",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 43.41861,
+                "lng": -89.62243
+              },
+              "citation": "Map marker at 43.41861, -89.62243."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-89.62243&y=43.41861&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 282,
+              "citation": "EPQS returned an elevation rounded to 282 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "wilmot-mountain-wi",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "wilmot-mountain-wi",
+        "name": "Wilmot Mountain",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 42.49985,
+        "lng": -88.19043
+      },
+      "elevations": {
+        "baseM": 213,
+        "topM": 271,
+        "forecastM": 249
+      },
+      "locality": {
+        "regionId": "us-wi",
+        "regionName": "Wisconsin",
+        "stateOrProvince": "Wisconsin",
+        "localityId": "wilmot",
+        "localityName": "Wilmot"
+      },
+      "officialUrl": "https://www.wilmotmountain.com/",
+      "evidence": [
+        {
+          "url": "https://www.wilmotmountain.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Vail Resorts' official Wilmot Mountain site publishes current skiing, lift ticket, and mountain information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "wilmot-mountain-wi",
+                "name": "Wilmot Mountain",
+                "aliases": []
+              },
+              "citation": "Vail Resorts' official Wilmot Mountain site publishes current skiing, lift ticket, and mountain information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Vail Resorts' official Wilmot Mountain site publishes current skiing, lift ticket, and mountain information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.wilmotmountain.com/",
+              "citation": "Vail Resorts' official Wilmot Mountain site publishes current skiing, lift ticket, and mountain information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-wi",
+                "regionName": "Wisconsin",
+                "stateOrProvince": "Wisconsin",
+                "localityId": "wilmot",
+                "localityName": "Wilmot"
+              },
+              "citation": "Vail Resorts' official Wilmot Mountain site publishes current skiing, lift ticket, and mountain information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=42.49985&mlon=-88.19043#map=16/42.49985/-88.19043",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 42.49985,
+                "lng": -88.19043
+              },
+              "citation": "Map marker at 42.49985, -88.19043."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-88.19043&y=42.49985&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 249,
+              "citation": "EPQS returned an elevation rounded to 249 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "alpine-valley-resort-wi",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "alpine-valley-resort-wi",
+        "name": "Alpine Valley Resort",
+        "aliases": [
+          "Alpine Valley Ski Resort"
+        ]
+      },
+      "coordinates": {
+        "lat": 42.73819,
+        "lng": -88.42921
+      },
+      "elevations": {
+        "baseM": 250,
+        "topM": 384,
+        "forecastM": 260
+      },
+      "locality": {
+        "regionId": "us-wi",
+        "regionName": "Wisconsin",
+        "stateOrProvince": "Wisconsin",
+        "localityId": "east-troy",
+        "localityName": "East Troy"
+      },
+      "officialUrl": "https://www.alpinevalleyresort.com/",
+      "evidence": [
+        {
+          "url": "https://www.alpinevalleyresort.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The resort's official site publishes skiing, snowboarding, snow report, and lift-ticket information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "alpine-valley-resort-wi",
+                "name": "Alpine Valley Resort",
+                "aliases": [
+                  "Alpine Valley Ski Resort"
+                ]
+              },
+              "citation": "The resort's official site publishes skiing, snowboarding, snow report, and lift-ticket information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The resort's official site publishes skiing, snowboarding, snow report, and lift-ticket information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.alpinevalleyresort.com/",
+              "citation": "The resort's official site publishes skiing, snowboarding, snow report, and lift-ticket information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-wi",
+                "regionName": "Wisconsin",
+                "stateOrProvince": "Wisconsin",
+                "localityId": "east-troy",
+                "localityName": "East Troy"
+              },
+              "citation": "The resort's official site publishes skiing, snowboarding, snow report, and lift-ticket information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=42.73819&mlon=-88.42921#map=16/42.73819/-88.42921",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 42.73819,
+                "lng": -88.42921
+              },
+              "citation": "Map marker at 42.73819, -88.42921."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-88.42921&y=42.73819&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 260,
+              "citation": "EPQS returned an elevation rounded to 260 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "christmas-mountain-village-wi",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "christmas-mountain-village-wi",
+        "name": "Christmas Mountain Village",
+        "aliases": [
+          "Christmas Mountain"
+        ]
+      },
+      "coordinates": {
+        "lat": 43.60896,
+        "lng": -89.8609
+      },
+      "elevations": {
+        "baseM": 283,
+        "topM": 381,
+        "forecastM": 315
+      },
+      "locality": {
+        "regionId": "us-wi",
+        "regionName": "Wisconsin",
+        "stateOrProvince": "Wisconsin",
+        "localityId": "wisconsin-dells",
+        "localityName": "Wisconsin Dells"
+      },
+      "officialUrl": "https://christmasmountainvillage.co/",
+      "evidence": [
+        {
+          "url": "https://christmasmountainvillage.co/ski-3",
+          "retrievedAt": "2026-08-27",
+          "claim": "The resort's official site publishes downhill skiing, tubing, lift ticket, and winter recreation information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "christmas-mountain-village-wi",
+                "name": "Christmas Mountain Village",
+                "aliases": [
+                  "Christmas Mountain"
+                ]
+              },
+              "citation": "The resort's official site publishes downhill skiing, tubing, lift ticket, and winter recreation information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The resort's official site publishes downhill skiing, tubing, lift ticket, and winter recreation information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://christmasmountainvillage.co/",
+              "citation": "The resort's official site publishes downhill skiing, tubing, lift ticket, and winter recreation information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-wi",
+                "regionName": "Wisconsin",
+                "stateOrProvince": "Wisconsin",
+                "localityId": "wisconsin-dells",
+                "localityName": "Wisconsin Dells"
+              },
+              "citation": "The resort's official site publishes downhill skiing, tubing, lift ticket, and winter recreation information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=43.60896&mlon=-89.8609#map=16/43.60896/-89.8609",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 43.60896,
+                "lng": -89.8609
+              },
+              "citation": "Map marker at 43.60896, -89.8609."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-89.8609&y=43.60896&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 315,
+              "citation": "EPQS returned an elevation rounded to 315 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "trollhaugen-wi",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "trollhaugen-wi",
+        "name": "Trollhaugen",
+        "aliases": [
+          "Trollhaugen Outdoor Recreation Area"
+        ]
+      },
+      "coordinates": {
+        "lat": 45.34955,
+        "lng": -92.62024
+      },
+      "elevations": {
+        "baseM": 280,
+        "topM": 366,
+        "forecastM": 329
+      },
+      "locality": {
+        "regionId": "us-wi",
+        "regionName": "Wisconsin",
+        "stateOrProvince": "Wisconsin",
+        "localityId": "dresser",
+        "localityName": "Dresser"
+      },
+      "officialUrl": "https://trollhaugen.com/",
+      "evidence": [
+        {
+          "url": "https://trollhaugen.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Trollhaugen's official site publishes current skiing, snowboarding, tubing, trail, and ticket information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "trollhaugen-wi",
+                "name": "Trollhaugen",
+                "aliases": [
+                  "Trollhaugen Outdoor Recreation Area"
+                ]
+              },
+              "citation": "Trollhaugen's official site publishes current skiing, snowboarding, tubing, trail, and ticket information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Trollhaugen's official site publishes current skiing, snowboarding, tubing, trail, and ticket information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://trollhaugen.com/",
+              "citation": "Trollhaugen's official site publishes current skiing, snowboarding, tubing, trail, and ticket information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-wi",
+                "regionName": "Wisconsin",
+                "stateOrProvince": "Wisconsin",
+                "localityId": "dresser",
+                "localityName": "Dresser"
+              },
+              "citation": "Trollhaugen's official site publishes current skiing, snowboarding, tubing, trail, and ticket information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.34955&mlon=-92.62024#map=16/45.34955/-92.62024",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.34955,
+                "lng": -92.62024
+              },
+              "citation": "Map marker at 45.34955, -92.62024."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-92.62024&y=45.34955&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 329,
+              "citation": "EPQS returned an elevation rounded to 329 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "tyrol-basin-wi",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "tyrol-basin-wi",
+        "name": "Tyrol Basin",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 43.04608,
+        "lng": -89.78501
+      },
+      "elevations": {
+        "baseM": 265,
+        "topM": 354,
+        "forecastM": 289
+      },
+      "locality": {
+        "regionId": "us-wi",
+        "regionName": "Wisconsin",
+        "stateOrProvince": "Wisconsin",
+        "localityId": "mount-horeb",
+        "localityName": "Mount Horeb"
+      },
+      "officialUrl": "https://tyrolbasin.com/",
+      "evidence": [
+        {
+          "url": "https://tyrolbasin.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Tyrol Basin's official site publishes current skiing, snowboarding, passes, lessons, and conditions information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "tyrol-basin-wi",
+                "name": "Tyrol Basin",
+                "aliases": []
+              },
+              "citation": "Tyrol Basin's official site publishes current skiing, snowboarding, passes, lessons, and conditions information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Tyrol Basin's official site publishes current skiing, snowboarding, passes, lessons, and conditions information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://tyrolbasin.com/",
+              "citation": "Tyrol Basin's official site publishes current skiing, snowboarding, passes, lessons, and conditions information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-wi",
+                "regionName": "Wisconsin",
+                "stateOrProvince": "Wisconsin",
+                "localityId": "mount-horeb",
+                "localityName": "Mount Horeb"
+              },
+              "citation": "Tyrol Basin's official site publishes current skiing, snowboarding, passes, lessons, and conditions information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=43.04608&mlon=-89.78501#map=16/43.04608/-89.78501",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 43.04608,
+                "lng": -89.78501
+              },
+              "citation": "Map marker at 43.04608, -89.78501."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-89.78501&y=43.04608&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 289,
+              "citation": "EPQS returned an elevation rounded to 289 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "mount-ashwabay-wi",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "mount-ashwabay-wi",
+        "name": "Mt. Ashwabay",
+        "aliases": [
+          "Mount Ashwabay"
+        ]
+      },
+      "coordinates": {
+        "lat": 46.78105,
+        "lng": -90.91241
+      },
+      "elevations": {
+        "baseM": 213,
+        "topM": 305,
+        "forecastM": 404
+      },
+      "locality": {
+        "regionId": "us-wi",
+        "regionName": "Wisconsin",
+        "stateOrProvince": "Wisconsin",
+        "localityId": "bayfield",
+        "localityName": "Bayfield"
+      },
+      "officialUrl": "https://www.mtashwabay.org/",
+      "evidence": [
+        {
+          "url": "https://www.mtashwabay.org/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The nonprofit operator's official site publishes downhill skiing, Nordic skiing, passes, and snow-condition information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "mount-ashwabay-wi",
+                "name": "Mt. Ashwabay",
+                "aliases": [
+                  "Mount Ashwabay"
+                ]
+              },
+              "citation": "The nonprofit operator's official site publishes downhill skiing, Nordic skiing, passes, and snow-condition information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The nonprofit operator's official site publishes downhill skiing, Nordic skiing, passes, and snow-condition information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.mtashwabay.org/",
+              "citation": "The nonprofit operator's official site publishes downhill skiing, Nordic skiing, passes, and snow-condition information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-wi",
+                "regionName": "Wisconsin",
+                "stateOrProvince": "Wisconsin",
+                "localityId": "bayfield",
+                "localityName": "Bayfield"
+              },
+              "citation": "The nonprofit operator's official site publishes downhill skiing, Nordic skiing, passes, and snow-condition information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.78105&mlon=-90.91241#map=16/46.78105/-90.91241",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.78105,
+                "lng": -90.91241
+              },
+              "citation": "Map marker at 46.78105, -90.91241."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-90.91241&y=46.78105&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 404,
+              "citation": "EPQS returned an elevation rounded to 404 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "mount-la-crosse-wi",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "mount-la-crosse-wi",
+        "name": "Mt. La Crosse",
+        "aliases": [
+          "Mount La Crosse"
+        ]
+      },
+      "coordinates": {
+        "lat": 43.784,
+        "lng": -91.203
+      },
+      "elevations": {
+        "baseM": 181,
+        "topM": 338,
+        "forecastM": 205
+      },
+      "locality": {
+        "regionId": "us-wi",
+        "regionName": "Wisconsin",
+        "stateOrProvince": "Wisconsin",
+        "localityId": "la-crosse",
+        "localityName": "La Crosse"
+      },
+      "officialUrl": "https://www.mtlacrosse.com/",
+      "evidence": [
+        {
+          "url": "https://www.mtlacrosse.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The ski area's official site publishes tickets, passes, trail, lesson, and conditions information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "mount-la-crosse-wi",
+                "name": "Mt. La Crosse",
+                "aliases": [
+                  "Mount La Crosse"
+                ]
+              },
+              "citation": "The ski area's official site publishes tickets, passes, trail, lesson, and conditions information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The ski area's official site publishes tickets, passes, trail, lesson, and conditions information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.mtlacrosse.com/",
+              "citation": "The ski area's official site publishes tickets, passes, trail, lesson, and conditions information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-wi",
+                "regionName": "Wisconsin",
+                "stateOrProvince": "Wisconsin",
+                "localityId": "la-crosse",
+                "localityName": "La Crosse"
+              },
+              "citation": "The ski area's official site publishes tickets, passes, trail, lesson, and conditions information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=43.784&mlon=-91.203#map=16/43.784/-91.203",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 43.784,
+                "lng": -91.203
+              },
+              "citation": "Map marker at 43.784, -91.203."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-91.203&y=43.784&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 205,
+              "citation": "EPQS returned an elevation rounded to 205 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "sunburst-winter-sports-park-wi",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "sunburst-winter-sports-park-wi",
+        "name": "Sunburst Winter Sports Park",
+        "aliases": [
+          "Sunburst Ski Area",
+          "Sunburst"
+        ]
+      },
+      "coordinates": {
+        "lat": 43.49406,
+        "lng": -88.22411
+      },
+      "elevations": {
+        "baseM": 250,
+        "topM": 315,
+        "forecastM": 321
+      },
+      "locality": {
+        "regionId": "us-wi",
+        "regionName": "Wisconsin",
+        "stateOrProvince": "Wisconsin",
+        "localityId": "kewaskum",
+        "localityName": "Kewaskum"
+      },
+      "officialUrl": "https://skisunburst.com/",
+      "evidence": [
+        {
+          "url": "https://skisunburst.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Sunburst's official site publishes current skiing, snowboarding, tubing, ticket, and conditions information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "sunburst-winter-sports-park-wi",
+                "name": "Sunburst Winter Sports Park",
+                "aliases": [
+                  "Sunburst Ski Area",
+                  "Sunburst"
+                ]
+              },
+              "citation": "Sunburst's official site publishes current skiing, snowboarding, tubing, ticket, and conditions information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Sunburst's official site publishes current skiing, snowboarding, tubing, ticket, and conditions information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://skisunburst.com/",
+              "citation": "Sunburst's official site publishes current skiing, snowboarding, tubing, ticket, and conditions information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-wi",
+                "regionName": "Wisconsin",
+                "stateOrProvince": "Wisconsin",
+                "localityId": "kewaskum",
+                "localityName": "Kewaskum"
+              },
+              "citation": "Sunburst's official site publishes current skiing, snowboarding, tubing, ticket, and conditions information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=43.49406&mlon=-88.22411#map=16/43.49406/-88.22411",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 43.49406,
+                "lng": -88.22411
+              },
+              "citation": "Map marker at 43.49406, -88.22411."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-88.22411&y=43.49406&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 321,
+              "citation": "EPQS returned an elevation rounded to 321 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "mountain-top-at-grand-geneva-wi",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "mountain-top-at-grand-geneva-wi",
+        "name": "The Mountain Top at Grand Geneva Resort",
+        "aliases": [
+          "The Mountain Top",
+          "Grand Geneva Ski Resort"
+        ]
+      },
+      "coordinates": {
+        "lat": 42.61159,
+        "lng": -88.3864
+      },
+      "elevations": {
+        "baseM": 262,
+        "topM": 331,
+        "forecastM": 258
+      },
+      "locality": {
+        "regionId": "us-wi",
+        "regionName": "Wisconsin",
+        "stateOrProvince": "Wisconsin",
+        "localityId": "lake-geneva",
+        "localityName": "Lake Geneva"
+      },
+      "officialUrl": "https://www.grandgeneva.com/ski-snow-sports",
+      "evidence": [
+        {
+          "url": "https://www.grandgeneva.com/ski-snow-sports",
+          "retrievedAt": "2026-08-27",
+          "claim": "Grand Geneva's official site identifies The Mountain Top and publishes downhill skiing, snowboarding, and ticket information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "mountain-top-at-grand-geneva-wi",
+                "name": "The Mountain Top at Grand Geneva Resort",
+                "aliases": [
+                  "The Mountain Top",
+                  "Grand Geneva Ski Resort"
+                ]
+              },
+              "citation": "Grand Geneva's official site identifies The Mountain Top and publishes downhill skiing, snowboarding, and ticket information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Grand Geneva's official site identifies The Mountain Top and publishes downhill skiing, snowboarding, and ticket information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.grandgeneva.com/ski-snow-sports",
+              "citation": "Grand Geneva's official site identifies The Mountain Top and publishes downhill skiing, snowboarding, and ticket information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-wi",
+                "regionName": "Wisconsin",
+                "stateOrProvince": "Wisconsin",
+                "localityId": "lake-geneva",
+                "localityName": "Lake Geneva"
+              },
+              "citation": "Grand Geneva's official site identifies The Mountain Top and publishes downhill skiing, snowboarding, and ticket information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=42.61159&mlon=-88.3864#map=16/42.61159/-88.3864",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 42.61159,
+                "lng": -88.3864
+              },
+              "citation": "Map marker at 42.61159, -88.3864."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-88.3864&y=42.61159&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 258,
+              "citation": "EPQS returned an elevation rounded to 258 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "little-switzerland-wi",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "little-switzerland-wi",
+        "name": "Little Switzerland",
+        "aliases": [
+          "Little Switzerland Ski Area"
+        ]
+      },
+      "coordinates": {
+        "lat": 43.33791,
+        "lng": -88.27905
+      },
+      "elevations": {
+        "baseM": 314,
+        "topM": 375,
+        "forecastM": 333
+      },
+      "locality": {
+        "regionId": "us-wi",
+        "regionName": "Wisconsin",
+        "stateOrProvince": "Wisconsin",
+        "localityId": "slinger",
+        "localityName": "Slinger"
+      },
+      "officialUrl": "https://www.littleswitz.com/",
+      "evidence": [
+        {
+          "url": "https://www.littleswitz.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The ski area's official site publishes current skiing, snowboarding, tubing, ticket, and conditions information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "little-switzerland-wi",
+                "name": "Little Switzerland",
+                "aliases": [
+                  "Little Switzerland Ski Area"
+                ]
+              },
+              "citation": "The ski area's official site publishes current skiing, snowboarding, tubing, ticket, and conditions information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The ski area's official site publishes current skiing, snowboarding, tubing, ticket, and conditions information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.littleswitz.com/",
+              "citation": "The ski area's official site publishes current skiing, snowboarding, tubing, ticket, and conditions information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-wi",
+                "regionName": "Wisconsin",
+                "stateOrProvince": "Wisconsin",
+                "localityId": "slinger",
+                "localityName": "Slinger"
+              },
+              "citation": "The ski area's official site publishes current skiing, snowboarding, tubing, ticket, and conditions information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=43.33791&mlon=-88.27905#map=16/43.33791/-88.27905",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 43.33791,
+                "lng": -88.27905
+              },
+              "citation": "Map marker at 43.33791, -88.27905."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-88.27905&y=43.33791&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 333,
+              "citation": "EPQS returned an elevation rounded to 333 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "nordic-mountain-wi",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "nordic-mountain-wi",
+        "name": "Nordic Mountain",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 44.12032,
+        "lng": -89.18198
+      },
+      "elevations": {
+        "baseM": 274,
+        "topM": 355,
+        "forecastM": 293
+      },
+      "locality": {
+        "regionId": "us-wi",
+        "regionName": "Wisconsin",
+        "stateOrProvince": "Wisconsin",
+        "localityId": "mount-morris",
+        "localityName": "Mount Morris"
+      },
+      "officialUrl": "https://www.nordicmountain.com/",
+      "evidence": [
+        {
+          "url": "https://www.nordicmountain.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Nordic Mountain's official site publishes skiing, snowboarding, tubing, tickets, and current mountain information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "nordic-mountain-wi",
+                "name": "Nordic Mountain",
+                "aliases": []
+              },
+              "citation": "Nordic Mountain's official site publishes skiing, snowboarding, tubing, tickets, and current mountain information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Nordic Mountain's official site publishes skiing, snowboarding, tubing, tickets, and current mountain information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.nordicmountain.com/",
+              "citation": "Nordic Mountain's official site publishes skiing, snowboarding, tubing, tickets, and current mountain information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-wi",
+                "regionName": "Wisconsin",
+                "stateOrProvince": "Wisconsin",
+                "localityId": "mount-morris",
+                "localityName": "Mount Morris"
+              },
+              "citation": "Nordic Mountain's official site publishes skiing, snowboarding, tubing, tickets, and current mountain information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=44.12032&mlon=-89.18198#map=16/44.12032/-89.18198",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 44.12032,
+                "lng": -89.18198
+              },
+              "citation": "Map marker at 44.12032, -89.18198."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-89.18198&y=44.12032&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 293,
+              "citation": "EPQS returned an elevation rounded to 293 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "christie-mountain-wi",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "christie-mountain-wi",
+        "name": "Christie Mountain",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 45.50917,
+        "lng": -91.3813
+      },
+      "elevations": {
+        "baseM": 366,
+        "topM": 472,
+        "forecastM": 403
+      },
+      "locality": {
+        "regionId": "us-wi",
+        "regionName": "Wisconsin",
+        "stateOrProvince": "Wisconsin",
+        "localityId": "bruce",
+        "localityName": "Bruce"
+      },
+      "officialUrl": "https://www.christiemountain.com/",
+      "evidence": [
+        {
+          "url": "https://www.christiemountain.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Christie Mountain's official site publishes skiing, snowboarding, tubing, tickets, and snow-report information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "christie-mountain-wi",
+                "name": "Christie Mountain",
+                "aliases": []
+              },
+              "citation": "Christie Mountain's official site publishes skiing, snowboarding, tubing, tickets, and snow-report information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Christie Mountain's official site publishes skiing, snowboarding, tubing, tickets, and snow-report information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.christiemountain.com/",
+              "citation": "Christie Mountain's official site publishes skiing, snowboarding, tubing, tickets, and snow-report information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-wi",
+                "regionName": "Wisconsin",
+                "stateOrProvince": "Wisconsin",
+                "localityId": "bruce",
+                "localityName": "Bruce"
+              },
+              "citation": "Christie Mountain's official site publishes skiing, snowboarding, tubing, tickets, and snow-report information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.50917&mlon=-91.3813#map=16/45.50917/-91.3813",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.50917,
+                "lng": -91.3813
+              },
+              "citation": "Map marker at 45.50917, -91.3813."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-91.3813&y=45.50917&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 403,
+              "citation": "EPQS returned an elevation rounded to 403 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "bruce-mound-wi",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "bruce-mound-wi",
+        "name": "Bruce Mound Winter Sports Area",
+        "aliases": [
+          "Bruce Mound"
+        ]
+      },
+      "coordinates": {
+        "lat": 44.44385,
+        "lng": -90.79237
+      },
+      "elevations": {
+        "baseM": 274,
+        "topM": 389,
+        "forecastM": 407
+      },
+      "locality": {
+        "regionId": "us-wi",
+        "regionName": "Wisconsin",
+        "stateOrProvince": "Wisconsin",
+        "localityId": "merrillan",
+        "localityName": "Merrillan"
+      },
+      "officialUrl": "https://www.clarkcountywi.gov/brucemound",
+      "evidence": [
+        {
+          "url": "https://www.clarkcountywi.gov/brucemound",
+          "retrievedAt": "2026-08-27",
+          "claim": "Clark County's official site identifies Bruce Mound as its public winter sports area and publishes skiing and visitor information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "bruce-mound-wi",
+                "name": "Bruce Mound Winter Sports Area",
+                "aliases": [
+                  "Bruce Mound"
+                ]
+              },
+              "citation": "Clark County's official site identifies Bruce Mound as its public winter sports area and publishes skiing and visitor information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Clark County's official site identifies Bruce Mound as its public winter sports area and publishes skiing and visitor information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.clarkcountywi.gov/brucemound",
+              "citation": "Clark County's official site identifies Bruce Mound as its public winter sports area and publishes skiing and visitor information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-wi",
+                "regionName": "Wisconsin",
+                "stateOrProvince": "Wisconsin",
+                "localityId": "merrillan",
+                "localityName": "Merrillan"
+              },
+              "citation": "Clark County's official site identifies Bruce Mound as its public winter sports area and publishes skiing and visitor information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=44.44385&mlon=-90.79237#map=16/44.44385/-90.79237",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 44.44385,
+                "lng": -90.79237
+              },
+              "citation": "Map marker at 44.44385, -90.79237."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-90.79237&y=44.44385&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 407,
+              "citation": "EPQS returned an elevation rounded to 407 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "mont-du-lac-resort-wi",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "mont-du-lac-resort-wi",
+        "name": "Mont du Lac Resort",
+        "aliases": [
+          "Mont Du Lac Resort",
+          "Mont du Lac"
+        ]
+      },
+      "coordinates": {
+        "lat": 46.65017,
+        "lng": -92.28364
+      },
+      "elevations": {
+        "baseM": 213,
+        "topM": 311,
+        "forecastM": 223
+      },
+      "locality": {
+        "regionId": "us-wi",
+        "regionName": "Wisconsin",
+        "stateOrProvince": "Wisconsin",
+        "localityId": "superior",
+        "localityName": "Superior"
+      },
+      "officialUrl": "https://mdlresort.com/",
+      "evidence": [
+        {
+          "url": "https://mdlresort.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The resort's official site publishes skiing, snowboarding, tubing, passes, and current winter information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "mont-du-lac-resort-wi",
+                "name": "Mont du Lac Resort",
+                "aliases": [
+                  "Mont Du Lac Resort",
+                  "Mont du Lac"
+                ]
+              },
+              "citation": "The resort's official site publishes skiing, snowboarding, tubing, passes, and current winter information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The resort's official site publishes skiing, snowboarding, tubing, passes, and current winter information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://mdlresort.com/",
+              "citation": "The resort's official site publishes skiing, snowboarding, tubing, passes, and current winter information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-wi",
+                "regionName": "Wisconsin",
+                "stateOrProvince": "Wisconsin",
+                "localityId": "superior",
+                "localityName": "Superior"
+              },
+              "citation": "The resort's official site publishes skiing, snowboarding, tubing, passes, and current winter information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.65017&mlon=-92.28364#map=16/46.65017/-92.28364",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.65017,
+                "lng": -92.28364
+              },
+              "citation": "Map marker at 46.65017, -92.28364."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-92.28364&y=46.65017&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 223,
+              "citation": "EPQS returned an elevation rounded to 223 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "afton-alps-mn",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "afton-alps-mn",
+        "name": "Afton Alps",
+        "aliases": []
+      },
+      "coordinates": {
+        "lat": 44.85759,
+        "lng": -92.78789
+      },
+      "elevations": {
+        "baseM": 213,
+        "topM": 320,
+        "forecastM": 221
+      },
+      "locality": {
+        "regionId": "us-mn",
+        "regionName": "Minnesota",
+        "stateOrProvince": "Minnesota",
+        "localityId": "hastings",
+        "localityName": "Hastings"
+      },
+      "officialUrl": "https://www.aftonalps.com/",
+      "evidence": [
+        {
+          "url": "https://www.aftonalps.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Vail Resorts' official Afton Alps site publishes current skiing, lift ticket, and mountain information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "afton-alps-mn",
+                "name": "Afton Alps",
+                "aliases": []
+              },
+              "citation": "Vail Resorts' official Afton Alps site publishes current skiing, lift ticket, and mountain information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Vail Resorts' official Afton Alps site publishes current skiing, lift ticket, and mountain information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.aftonalps.com/",
+              "citation": "Vail Resorts' official Afton Alps site publishes current skiing, lift ticket, and mountain information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-mn",
+                "regionName": "Minnesota",
+                "stateOrProvince": "Minnesota",
+                "localityId": "hastings",
+                "localityName": "Hastings"
+              },
+              "citation": "Vail Resorts' official Afton Alps site publishes current skiing, lift ticket, and mountain information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=44.85759&mlon=-92.78789#map=16/44.85759/-92.78789",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 44.85759,
+                "lng": -92.78789
+              },
+              "citation": "Map marker at 44.85759, -92.78789."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-92.78789&y=44.85759&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 221,
+              "citation": "EPQS returned an elevation rounded to 221 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "spirit-mountain-mn",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "spirit-mountain-mn",
+        "name": "Spirit Mountain",
+        "aliases": [
+          "Spirit Mountain Recreation Area"
+        ]
+      },
+      "coordinates": {
+        "lat": 46.71764,
+        "lng": -92.21238
+      },
+      "elevations": {
+        "baseM": 189,
+        "topM": 402,
+        "forecastM": 287
+      },
+      "locality": {
+        "regionId": "us-mn",
+        "regionName": "Minnesota",
+        "stateOrProvince": "Minnesota",
+        "localityId": "duluth",
+        "localityName": "Duluth"
+      },
+      "officialUrl": "https://www.spiritmt.com/",
+      "evidence": [
+        {
+          "url": "https://www.spiritmt.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Spirit Mountain's official site publishes current skiing, snowboarding, lift tickets, passes, and conditions information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "spirit-mountain-mn",
+                "name": "Spirit Mountain",
+                "aliases": [
+                  "Spirit Mountain Recreation Area"
+                ]
+              },
+              "citation": "Spirit Mountain's official site publishes current skiing, snowboarding, lift tickets, passes, and conditions information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Spirit Mountain's official site publishes current skiing, snowboarding, lift tickets, passes, and conditions information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.spiritmt.com/",
+              "citation": "Spirit Mountain's official site publishes current skiing, snowboarding, lift tickets, passes, and conditions information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-mn",
+                "regionName": "Minnesota",
+                "stateOrProvince": "Minnesota",
+                "localityId": "duluth",
+                "localityName": "Duluth"
+              },
+              "citation": "Spirit Mountain's official site publishes current skiing, snowboarding, lift tickets, passes, and conditions information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.71764&mlon=-92.21238#map=16/46.71764/-92.21238",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.71764,
+                "lng": -92.21238
+              },
+              "citation": "Map marker at 46.71764, -92.21238."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-92.21238&y=46.71764&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 287,
+              "citation": "EPQS returned an elevation rounded to 287 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "giants-ridge-mn",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "giants-ridge-mn",
+        "name": "Giants Ridge",
+        "aliases": [
+          "Giants Ridge Recreation Area"
+        ]
+      },
+      "coordinates": {
+        "lat": 47.548,
+        "lng": -92.146
+      },
+      "elevations": {
+        "baseM": 448,
+        "topM": 601,
+        "forecastM": 461
+      },
+      "locality": {
+        "regionId": "us-mn",
+        "regionName": "Minnesota",
+        "stateOrProvince": "Minnesota",
+        "localityId": "biwabik",
+        "localityName": "Biwabik"
+      },
+      "officialUrl": "https://www.giantsridge.com/",
+      "evidence": [
+        {
+          "url": "https://www.giantsridge.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Giants Ridge's official site publishes downhill skiing, snowboarding, Nordic skiing, ticket, and conditions information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "giants-ridge-mn",
+                "name": "Giants Ridge",
+                "aliases": [
+                  "Giants Ridge Recreation Area"
+                ]
+              },
+              "citation": "Giants Ridge's official site publishes downhill skiing, snowboarding, Nordic skiing, ticket, and conditions information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Giants Ridge's official site publishes downhill skiing, snowboarding, Nordic skiing, ticket, and conditions information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.giantsridge.com/",
+              "citation": "Giants Ridge's official site publishes downhill skiing, snowboarding, Nordic skiing, ticket, and conditions information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-mn",
+                "regionName": "Minnesota",
+                "stateOrProvince": "Minnesota",
+                "localityId": "biwabik",
+                "localityName": "Biwabik"
+              },
+              "citation": "Giants Ridge's official site publishes downhill skiing, snowboarding, Nordic skiing, ticket, and conditions information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.548&mlon=-92.146#map=16/47.548/-92.146",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.548,
+                "lng": -92.146
+              },
+              "citation": "Map marker at 47.548, -92.146."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-92.146&y=47.548&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 461,
+              "citation": "EPQS returned an elevation rounded to 461 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "welch-village-mn",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "welch-village-mn",
+        "name": "Welch Village",
+        "aliases": [
+          "Welch Village Ski Area"
+        ]
+      },
+      "coordinates": {
+        "lat": 44.55458,
+        "lng": -92.73078
+      },
+      "elevations": {
+        "baseM": 213,
+        "topM": 323,
+        "forecastM": 306
+      },
+      "locality": {
+        "regionId": "us-mn",
+        "regionName": "Minnesota",
+        "stateOrProvince": "Minnesota",
+        "localityId": "welch",
+        "localityName": "Welch"
+      },
+      "officialUrl": "https://www.welchvillage.com/",
+      "evidence": [
+        {
+          "url": "https://www.welchvillage.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Welch Village's official site publishes lift tickets, passes, lessons, trail maps, and current ski-area information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "welch-village-mn",
+                "name": "Welch Village",
+                "aliases": [
+                  "Welch Village Ski Area"
+                ]
+              },
+              "citation": "Welch Village's official site publishes lift tickets, passes, lessons, trail maps, and current ski-area information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Welch Village's official site publishes lift tickets, passes, lessons, trail maps, and current ski-area information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.welchvillage.com/",
+              "citation": "Welch Village's official site publishes lift tickets, passes, lessons, trail maps, and current ski-area information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-mn",
+                "regionName": "Minnesota",
+                "stateOrProvince": "Minnesota",
+                "localityId": "welch",
+                "localityName": "Welch"
+              },
+              "citation": "Welch Village's official site publishes lift tickets, passes, lessons, trail maps, and current ski-area information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=44.55458&mlon=-92.73078#map=16/44.55458/-92.73078",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 44.55458,
+                "lng": -92.73078
+              },
+              "citation": "Map marker at 44.55458, -92.73078."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-92.73078&y=44.55458&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 306,
+              "citation": "EPQS returned an elevation rounded to 306 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "buck-hill-mn",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "buck-hill-mn",
+        "name": "Buck Hill",
+        "aliases": [
+          "Buck Hill Ski Area"
+        ]
+      },
+      "coordinates": {
+        "lat": 44.72408,
+        "lng": -93.28389
+      },
+      "elevations": {
+        "baseM": 290,
+        "topM": 373,
+        "forecastM": 300
+      },
+      "locality": {
+        "regionId": "us-mn",
+        "regionName": "Minnesota",
+        "stateOrProvince": "Minnesota",
+        "localityId": "burnsville",
+        "localityName": "Burnsville"
+      },
+      "officialUrl": "https://buckhill.com/",
+      "evidence": [
+        {
+          "url": "https://buckhill.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Buck Hill's official site publishes skiing, snowboarding, tubing, tickets, lessons, and current conditions.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "buck-hill-mn",
+                "name": "Buck Hill",
+                "aliases": [
+                  "Buck Hill Ski Area"
+                ]
+              },
+              "citation": "Buck Hill's official site publishes skiing, snowboarding, tubing, tickets, lessons, and current conditions."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Buck Hill's official site publishes skiing, snowboarding, tubing, tickets, lessons, and current conditions."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://buckhill.com/",
+              "citation": "Buck Hill's official site publishes skiing, snowboarding, tubing, tickets, lessons, and current conditions."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-mn",
+                "regionName": "Minnesota",
+                "stateOrProvince": "Minnesota",
+                "localityId": "burnsville",
+                "localityName": "Burnsville"
+              },
+              "citation": "Buck Hill's official site publishes skiing, snowboarding, tubing, tickets, lessons, and current conditions."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=44.72408&mlon=-93.28389#map=16/44.72408/-93.28389",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 44.72408,
+                "lng": -93.28389
+              },
+              "citation": "Map marker at 44.72408, -93.28389."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-93.28389&y=44.72408&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 300,
+              "citation": "EPQS returned an elevation rounded to 300 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "wild-mountain-mn",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "wild-mountain-mn",
+        "name": "Wild Mountain",
+        "aliases": [
+          "Wild Mountain Ski Area"
+        ]
+      },
+      "coordinates": {
+        "lat": 45.4888,
+        "lng": -92.70527
+      },
+      "elevations": {
+        "baseM": 239,
+        "topM": 334,
+        "forecastM": 237
+      },
+      "locality": {
+        "regionId": "us-mn",
+        "regionName": "Minnesota",
+        "stateOrProvince": "Minnesota",
+        "localityId": "taylors-falls",
+        "localityName": "Taylors Falls"
+      },
+      "officialUrl": "https://www.wildmountain.com/",
+      "evidence": [
+        {
+          "url": "https://www.wildmountain.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Wild Mountain's official site publishes skiing, snowboarding, tubing, tickets, and current snow information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "wild-mountain-mn",
+                "name": "Wild Mountain",
+                "aliases": [
+                  "Wild Mountain Ski Area"
+                ]
+              },
+              "citation": "Wild Mountain's official site publishes skiing, snowboarding, tubing, tickets, and current snow information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Wild Mountain's official site publishes skiing, snowboarding, tubing, tickets, and current snow information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.wildmountain.com/",
+              "citation": "Wild Mountain's official site publishes skiing, snowboarding, tubing, tickets, and current snow information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-mn",
+                "regionName": "Minnesota",
+                "stateOrProvince": "Minnesota",
+                "localityId": "taylors-falls",
+                "localityName": "Taylors Falls"
+              },
+              "citation": "Wild Mountain's official site publishes skiing, snowboarding, tubing, tickets, and current snow information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.4888&mlon=-92.70527#map=16/45.4888/-92.70527",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.4888,
+                "lng": -92.70527
+              },
+              "citation": "Map marker at 45.4888, -92.70527."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-92.70527&y=45.4888&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 237,
+              "citation": "EPQS returned an elevation rounded to 237 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "mount-kato-mn",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "mount-kato-mn",
+        "name": "Mount Kato",
+        "aliases": [
+          "Mt. Kato"
+        ]
+      },
+      "coordinates": {
+        "lat": 44.13128,
+        "lng": -94.03582
+      },
+      "elevations": {
+        "baseM": 216,
+        "topM": 305,
+        "forecastM": 305
+      },
+      "locality": {
+        "regionId": "us-mn",
+        "regionName": "Minnesota",
+        "stateOrProvince": "Minnesota",
+        "localityId": "mankato",
+        "localityName": "Mankato"
+      },
+      "officialUrl": "https://www.mountkato.com/",
+      "evidence": [
+        {
+          "url": "https://www.mountkato.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Mount Kato's official site publishes skiing, snowboarding, tubing, tickets, lessons, and snow-report information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "mount-kato-mn",
+                "name": "Mount Kato",
+                "aliases": [
+                  "Mt. Kato"
+                ]
+              },
+              "citation": "Mount Kato's official site publishes skiing, snowboarding, tubing, tickets, lessons, and snow-report information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Mount Kato's official site publishes skiing, snowboarding, tubing, tickets, lessons, and snow-report information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.mountkato.com/",
+              "citation": "Mount Kato's official site publishes skiing, snowboarding, tubing, tickets, lessons, and snow-report information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-mn",
+                "regionName": "Minnesota",
+                "stateOrProvince": "Minnesota",
+                "localityId": "mankato",
+                "localityName": "Mankato"
+              },
+              "citation": "Mount Kato's official site publishes skiing, snowboarding, tubing, tickets, lessons, and snow-report information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=44.13128&mlon=-94.03582#map=16/44.13128/-94.03582",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 44.13128,
+                "lng": -94.03582
+              },
+              "citation": "Map marker at 44.13128, -94.03582."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-94.03582&y=44.13128&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 305,
+              "citation": "EPQS returned an elevation rounded to 305 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "andes-tower-hills-mn",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "andes-tower-hills-mn",
+        "name": "Andes Tower Hills",
+        "aliases": [
+          "Andes Tower Hills Ski Area"
+        ]
+      },
+      "coordinates": {
+        "lat": 45.85054,
+        "lng": -95.6303
+      },
+      "elevations": {
+        "baseM": 405,
+        "topM": 494,
+        "forecastM": 439
+      },
+      "locality": {
+        "regionId": "us-mn",
+        "regionName": "Minnesota",
+        "stateOrProvince": "Minnesota",
+        "localityId": "kensington",
+        "localityName": "Kensington"
+      },
+      "officialUrl": "https://www.andestowerhills.com/",
+      "evidence": [
+        {
+          "url": "https://www.andestowerhills.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "The ski area's official site publishes downhill skiing, snowboarding, tubing, passes, tickets, and conditions.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "andes-tower-hills-mn",
+                "name": "Andes Tower Hills",
+                "aliases": [
+                  "Andes Tower Hills Ski Area"
+                ]
+              },
+              "citation": "The ski area's official site publishes downhill skiing, snowboarding, tubing, passes, tickets, and conditions."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "The ski area's official site publishes downhill skiing, snowboarding, tubing, passes, tickets, and conditions."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.andestowerhills.com/",
+              "citation": "The ski area's official site publishes downhill skiing, snowboarding, tubing, passes, tickets, and conditions."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-mn",
+                "regionName": "Minnesota",
+                "stateOrProvince": "Minnesota",
+                "localityId": "kensington",
+                "localityName": "Kensington"
+              },
+              "citation": "The ski area's official site publishes downhill skiing, snowboarding, tubing, passes, tickets, and conditions."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.85054&mlon=-95.6303#map=16/45.85054/-95.6303",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.85054,
+                "lng": -95.6303
+              },
+              "citation": "Map marker at 45.85054, -95.6303."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-95.6303&y=45.85054&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 439,
+              "citation": "EPQS returned an elevation rounded to 439 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "coffee-mill-ski-area-mn",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "coffee-mill-ski-area-mn",
+        "name": "Coffee Mill Ski Area",
+        "aliases": [
+          "Coffee Mill"
+        ]
+      },
+      "coordinates": {
+        "lat": 44.36022,
+        "lng": -92.04387
+      },
+      "elevations": {
+        "baseM": 204,
+        "topM": 311,
+        "forecastM": 255
+      },
+      "locality": {
+        "regionId": "us-mn",
+        "regionName": "Minnesota",
+        "stateOrProvince": "Minnesota",
+        "localityId": "wabasha",
+        "localityName": "Wabasha"
+      },
+      "officialUrl": "https://www.coffeemillski.com/",
+      "evidence": [
+        {
+          "url": "https://www.coffeemillski.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Coffee Mill's official site publishes skiing, snowboarding, lift ticket, lesson, and conditions information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "coffee-mill-ski-area-mn",
+                "name": "Coffee Mill Ski Area",
+                "aliases": [
+                  "Coffee Mill"
+                ]
+              },
+              "citation": "Coffee Mill's official site publishes skiing, snowboarding, lift ticket, lesson, and conditions information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Coffee Mill's official site publishes skiing, snowboarding, lift ticket, lesson, and conditions information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.coffeemillski.com/",
+              "citation": "Coffee Mill's official site publishes skiing, snowboarding, lift ticket, lesson, and conditions information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-mn",
+                "regionName": "Minnesota",
+                "stateOrProvince": "Minnesota",
+                "localityId": "wabasha",
+                "localityName": "Wabasha"
+              },
+              "citation": "Coffee Mill's official site publishes skiing, snowboarding, lift ticket, lesson, and conditions information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=44.36022&mlon=-92.04387#map=16/44.36022/-92.04387",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 44.36022,
+                "lng": -92.04387
+              },
+              "citation": "Map marker at 44.36022, -92.04387."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-92.04387&y=44.36022&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 255,
+              "citation": "EPQS returned an elevation rounded to 255 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "hyland-hills-ski-area-mn",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "hyland-hills-ski-area-mn",
+        "name": "Hyland Hills Ski Area",
+        "aliases": [
+          "Hyland Ski and Snowboard Area",
+          "Hyland Hills"
+        ]
+      },
+      "coordinates": {
+        "lat": 44.84345,
+        "lng": -93.36444
+      },
+      "elevations": {
+        "baseM": 250,
+        "topM": 303,
+        "forecastM": 266
+      },
+      "locality": {
+        "regionId": "us-mn",
+        "regionName": "Minnesota",
+        "stateOrProvince": "Minnesota",
+        "localityId": "bloomington",
+        "localityName": "Bloomington"
+      },
+      "officialUrl": "https://www.threeriversparks.org/location/hyland-hills-ski-area",
+      "evidence": [
+        {
+          "url": "https://www.threeriversparks.org/location/hyland-hills-ski-area",
+          "retrievedAt": "2026-08-27",
+          "claim": "Three Rivers Park District's official site identifies Hyland Hills as a public ski area and publishes tickets, lessons, and visitor information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "hyland-hills-ski-area-mn",
+                "name": "Hyland Hills Ski Area",
+                "aliases": [
+                  "Hyland Ski and Snowboard Area",
+                  "Hyland Hills"
+                ]
+              },
+              "citation": "Three Rivers Park District's official site identifies Hyland Hills as a public ski area and publishes tickets, lessons, and visitor information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Three Rivers Park District's official site identifies Hyland Hills as a public ski area and publishes tickets, lessons, and visitor information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.threeriversparks.org/location/hyland-hills-ski-area",
+              "citation": "Three Rivers Park District's official site identifies Hyland Hills as a public ski area and publishes tickets, lessons, and visitor information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-mn",
+                "regionName": "Minnesota",
+                "stateOrProvince": "Minnesota",
+                "localityId": "bloomington",
+                "localityName": "Bloomington"
+              },
+              "citation": "Three Rivers Park District's official site identifies Hyland Hills as a public ski area and publishes tickets, lessons, and visitor information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=44.84345&mlon=-93.36444#map=16/44.84345/-93.36444",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 44.84345,
+                "lng": -93.36444
+              },
+              "citation": "Map marker at 44.84345, -93.36444."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-93.36444&y=44.84345&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 266,
+              "citation": "EPQS returned an elevation rounded to 266 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "powder-ridge-mn",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "powder-ridge-mn",
+        "name": "Powder Ridge",
+        "aliases": [
+          "Powder Ridge Winter Recreation Area"
+        ]
+      },
+      "coordinates": {
+        "lat": 45.34408,
+        "lng": -94.30785
+      },
+      "elevations": {
+        "baseM": 290,
+        "topM": 381,
+        "forecastM": 380
+      },
+      "locality": {
+        "regionId": "us-mn",
+        "regionName": "Minnesota",
+        "stateOrProvince": "Minnesota",
+        "localityId": "kimball",
+        "localityName": "Kimball"
+      },
+      "officialUrl": "https://www.powderridge.com/",
+      "evidence": [
+        {
+          "url": "https://www.powderridge.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Powder Ridge's official site publishes skiing, snowboarding, tubing, tickets, passes, and current conditions.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "powder-ridge-mn",
+                "name": "Powder Ridge",
+                "aliases": [
+                  "Powder Ridge Winter Recreation Area"
+                ]
+              },
+              "citation": "Powder Ridge's official site publishes skiing, snowboarding, tubing, tickets, passes, and current conditions."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Powder Ridge's official site publishes skiing, snowboarding, tubing, tickets, passes, and current conditions."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.powderridge.com/",
+              "citation": "Powder Ridge's official site publishes skiing, snowboarding, tubing, tickets, passes, and current conditions."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-mn",
+                "regionName": "Minnesota",
+                "stateOrProvince": "Minnesota",
+                "localityId": "kimball",
+                "localityName": "Kimball"
+              },
+              "citation": "Powder Ridge's official site publishes skiing, snowboarding, tubing, tickets, passes, and current conditions."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=45.34408&mlon=-94.30785#map=16/45.34408/-94.30785",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 45.34408,
+                "lng": -94.30785
+              },
+              "citation": "Map marker at 45.34408, -94.30785."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-94.30785&y=45.34408&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 380,
+              "citation": "EPQS returned an elevation rounded to 380 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "detroit-mountain-mn",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "detroit-mountain-mn",
+        "name": "Detroit Mountain Recreation Area",
+        "aliases": [
+          "Detroit Mountain"
+        ]
+      },
+      "coordinates": {
+        "lat": 46.81617,
+        "lng": -95.78353
+      },
+      "elevations": {
+        "baseM": 408,
+        "topM": 479,
+        "forecastM": 499
+      },
+      "locality": {
+        "regionId": "us-mn",
+        "regionName": "Minnesota",
+        "stateOrProvince": "Minnesota",
+        "localityId": "detroit-lakes",
+        "localityName": "Detroit Lakes"
+      },
+      "officialUrl": "https://detroitmountain.com/",
+      "evidence": [
+        {
+          "url": "https://detroitmountain.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Detroit Mountain's official site publishes skiing, snowboarding, Nordic skiing, tubing, ticket, and trail information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "detroit-mountain-mn",
+                "name": "Detroit Mountain Recreation Area",
+                "aliases": [
+                  "Detroit Mountain"
+                ]
+              },
+              "citation": "Detroit Mountain's official site publishes skiing, snowboarding, Nordic skiing, tubing, ticket, and trail information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Detroit Mountain's official site publishes skiing, snowboarding, Nordic skiing, tubing, ticket, and trail information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://detroitmountain.com/",
+              "citation": "Detroit Mountain's official site publishes skiing, snowboarding, Nordic skiing, tubing, ticket, and trail information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-mn",
+                "regionName": "Minnesota",
+                "stateOrProvince": "Minnesota",
+                "localityId": "detroit-lakes",
+                "localityName": "Detroit Lakes"
+              },
+              "citation": "Detroit Mountain's official site publishes skiing, snowboarding, Nordic skiing, tubing, ticket, and trail information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=46.81617&mlon=-95.78353#map=16/46.81617/-95.78353",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 46.81617,
+                "lng": -95.78353
+              },
+              "citation": "Map marker at 46.81617, -95.78353."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-95.78353&y=46.81617&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 499,
+              "citation": "EPQS returned an elevation rounded to 499 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    },
+    {
+      "recordId": "buena-vista-ski-area-mn",
+      "lifecycle": "published",
+      "lifecycleHistory": [
+        "draft",
+        "verified",
+        "published"
+      ],
+      "classification": "verified_operating",
+      "country": "United States",
+      "countryCode": "US",
+      "identity": {
+        "publicId": "buena-vista-ski-area-mn",
+        "name": "Buena Vista Ski Area",
+        "aliases": [
+          "Buena Vista"
+        ]
+      },
+      "coordinates": {
+        "lat": 47.65822,
+        "lng": -94.8766
+      },
+      "elevations": {
+        "baseM": 390,
+        "topM": 460,
+        "forecastM": 452
+      },
+      "locality": {
+        "regionId": "us-mn",
+        "regionName": "Minnesota",
+        "stateOrProvince": "Minnesota",
+        "localityId": "bemidji",
+        "localityName": "Bemidji"
+      },
+      "officialUrl": "https://www.bvskiarea.com/",
+      "evidence": [
+        {
+          "url": "https://www.bvskiarea.com/",
+          "retrievedAt": "2026-08-27",
+          "claim": "Buena Vista's official site publishes downhill skiing, snowboarding, tubing, tickets, lessons, and current area information.",
+          "fields": [
+            {
+              "field": "identity",
+              "value": {
+                "publicId": "buena-vista-ski-area-mn",
+                "name": "Buena Vista Ski Area",
+                "aliases": [
+                  "Buena Vista"
+                ]
+              },
+              "citation": "Buena Vista's official site publishes downhill skiing, snowboarding, tubing, tickets, lessons, and current area information."
+            },
+            {
+              "field": "status",
+              "value": "verified_operating",
+              "citation": "Buena Vista's official site publishes downhill skiing, snowboarding, tubing, tickets, lessons, and current area information."
+            },
+            {
+              "field": "officialUrl",
+              "value": "https://www.bvskiarea.com/",
+              "citation": "Buena Vista's official site publishes downhill skiing, snowboarding, tubing, tickets, lessons, and current area information."
+            },
+            {
+              "field": "locality",
+              "value": {
+                "regionId": "us-mn",
+                "regionName": "Minnesota",
+                "stateOrProvince": "Minnesota",
+                "localityId": "bemidji",
+                "localityName": "Bemidji"
+              },
+              "citation": "Buena Vista's official site publishes downhill skiing, snowboarding, tubing, tickets, lessons, and current area information."
+            }
+          ]
+        },
+        {
+          "url": "https://www.openstreetmap.org/?mlat=47.65822&mlon=-94.8766#map=16/47.65822/-94.8766",
+          "retrievedAt": "2026-08-27",
+          "claim": "OpenStreetMap marker at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "coordinates",
+              "value": {
+                "lat": 47.65822,
+                "lng": -94.8766
+              },
+              "citation": "Map marker at 47.65822, -94.8766."
+            }
+          ]
+        },
+        {
+          "url": "https://epqs.nationalmap.gov/v1/json?x=-94.8766&y=47.65822&units=Meters&wkid=4326&includeDate=false",
+          "retrievedAt": "2026-08-27",
+          "claim": "USGS Elevation Point Query Service result at the exact stored forecast point.",
+          "fields": [
+            {
+              "field": "forecastElevation",
+              "value": 452,
+              "citation": "EPQS returned an elevation rounded to 452 metres."
+            }
+          ]
+        }
+      ],
+      "timezone": "America/Chicago",
+      "evidenceSchemaVersion": 2
+    }
+  ]
+}
