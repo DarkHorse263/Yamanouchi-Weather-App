@@ -5,8 +5,7 @@ import { eq } from "drizzle-orm";
 import { getAuth, clerkClient } from "@clerk/express";
 import { isRegionId, normaliseAlertDestinations } from "../lib/regions.js";
 import { requireAuth } from "../middlewares/requireAuth.js";
-import { sendEmail } from "../lib/emailSender.js";
-import { accountDeletedEmail } from "../lib/emailTemplates.js";
+import { sendAccountDeletionReceipt } from "../lib/accountDeletionReceipt.js";
 
 /**
  * Clerk-authorised account surface for signed-in members. Backs /account:
@@ -258,16 +257,7 @@ router.delete("/account", requireAuth, async (req, res): Promise<void> => {
     // member. Deliberately AFTER the deletes and never awaited into the
     // response path · a send failure must not fail (or slow) the deletion.
     if (user.email) {
-      const receipt = accountDeletedEmail();
-      void sendEmail({
-        to: user.email,
-        subject: receipt.subject,
-        html: receipt.html,
-        text: receipt.text,
-        tag: "account-deleted",
-      }).catch((mailErr: unknown) => {
-        console.error("[/account DELETE] deletion receipt send failed (non-fatal):", mailErr);
-      });
+      sendAccountDeletionReceipt(user.email);
     }
 
     res.json({ ok: true });
