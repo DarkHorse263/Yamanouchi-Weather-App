@@ -66,6 +66,7 @@ export const REGIONS = [
       { name: "Mt Stirling",     blurb: "VIC · cross-country & backcountry sister to Buller" },
       { name: "Lake Mountain",   blurb: "VIC · nordic & snow play · closest snow to Melbourne" },
       { name: "Mt Donna Buang",  blurb: "VIC · free snow play summit · 1.5 hrs from Melbourne" },
+      { name: "Mt Baw Baw",      blurb: "VIC · alpine village · 7 lifts · downhill, nordic & snow play" },
     ],
     towns: [
       { id: "mansfield",    name: "Mansfield",    blurb: "Cattle country gateway · 50 min to Buller & Stirling" },
@@ -76,6 +77,7 @@ export const REGIONS = [
       { id: "marysville",   name: "Marysville",   blurb: "Yarra Ranges gateway · 20 min to Lake Mountain" },
       { id: "warburton",    name: "Warburton",    blurb: "Yarra Valley town · closest base to Mt Donna Buang" },
       { id: "omeo",         name: "Omeo",         blurb: "Southern Great Alpine Road · gateway to Hotham from Gippsland" },
+      { id: "rawson",       name: "Rawson",       blurb: "Gippsland gateway · access town below Mt Baw Baw's alpine village" },
     ],
   },
   {
@@ -87,11 +89,27 @@ export const REGIONS = [
     hasRoads: false,
     mountains: [
       { name: "Ben Lomond", blurb: "Tasmania's only commercial chairlift · weather-dependent, short windows reward locals" },
+      { name: "Mount Mawson", blurb: "Volunteer club field · public access · natural-snow and conditions dependent" },
     ],
     towns: [
       { id: "ben-lomond-base", name: "Ben Lomond Base", blurb: "Tasmania's only chairlift operation · on-mountain village at the foot of the lifts" },
       { id: "launceston",      name: "Launceston",      blurb: "Closest city base for Ben Lomond · ~90 min drive via Jacobs Ladder" },
       { id: "hobart",          name: "Hobart",          blurb: "Tasmania's capital · long day-trips when conditions deliver" },
+      { id: "maydena",         name: "Maydena",         blurb: "Derwent Valley gateway · nearest town to Mt Field and Mount Mawson" },
+    ],
+  },
+  {
+    slug: "australian-capital-territory",
+    name: "Australian Capital Territory",
+    subtitle: "ACT · Australia",
+    country: "AU",
+    hasAlerts: false,
+    hasRoads: false,
+    mountains: [
+      { name: "Corin Forest", blurb: "Small snowmaking-led snow-play and learn-to-ski facility · natural snowfall is rare" },
+    ],
+    towns: [
+      { id: "canberra", name: "Canberra", blurb: "Capital-city base · about 45 min to Corin Forest" },
     ],
   },
 

@@ -69,7 +69,10 @@ import { motion } from "framer-motion";
 import { format, parseISO } from "date-fns";
 import { getMountainWebcams } from "@/data/webcams";
 import { useEffect, useState } from "react";
-import { getPublishedMountainCapabilities } from "@/regions/catalogue";
+import {
+  getPublishedMountainCapabilities,
+  regionAlertsAvailable,
+} from "@/regions/catalogue";
 import {
   mountainDetailCopy,
   mountainWindSummary,
@@ -116,7 +119,8 @@ export function MountainDetail() {
   const mountainCfg = region.mountains?.find((m) => m.id === locationId);
   const publicationCapabilities = getPublishedMountainCapabilities(region.id, locationId);
   const isWeatherOnly = publicationCapabilities?.contentMode === "weather-only";
-  const powderAlertsAvailable = publicationCapabilities?.powderAlertsAvailable ?? true;
+  const mountainAlertsAvailable = publicationCapabilities?.powderAlertsAvailable ?? false;
+  const powderAlertsAvailable = regionAlertsAvailable(region.id);
   const capabilityCopy = mountainDetailCopy(isWeatherOnly);
   const elevLat = mountainCfg?.lat;
   const elevLng = mountainCfg?.lng;
@@ -693,8 +697,12 @@ export function MountainDetail() {
                 id="mountain-powder-alerts"
                 title={t("get powder alerts by email", "降雪アラートをメールで受け取る")}
                 blurb={t(
-                  "we'll push an alert the moment powder hits the forecast for this mountain.",
-                  "この山の予報にパウダーが現れた瞬間にアラートをお送りします。",
+                  mountainAlertsAvailable
+                    ? "we'll email when powder hits the forecast for this mountain."
+                    : `we'll email when powder hits the forecast for the ${region.name} region.`,
+                  mountainAlertsAvailable
+                    ? "この山の予報にパウダーが現れたときにメールでお知らせします。"
+                    : `${region.name}地域の予報にパウダーが現れたときにメールでお知らせします。`,
                 )}
                 href="/premium"
               />
@@ -1079,7 +1087,11 @@ export function MountainDetail() {
                   {t("Personalised triggers", "パーソナライズされたトリガー")}
                 </h2>
               </div>
-              <AlertSubscribeForm defaultRegion={region.id} defaultMountain={locationId} />
+              <AlertSubscribeForm
+                key={`${region.id}/${locationId}`}
+                defaultRegion={region.id}
+                defaultMountain={mountainAlertsAvailable ? locationId : undefined}
+              />
             </div>
           </PremiumGate>
         )}

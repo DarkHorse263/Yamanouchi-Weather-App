@@ -107,6 +107,15 @@ const REGION_CONFIG: Record<RegionKey, RegionConfig> = {
       attribution: "Bureau of Meteorology · IDR762 · 256 km",
     },
   },
+  "australian-capital-territory": {
+    windy: { lat: -35.53, lon: 149.00, zoom: 9 },
+    official: {
+      label: "BOM Captain's Flat",
+      imageUrl: "https://www.bom.gov.au/radar/IDR403.gif",
+      href: "https://www.bom.gov.au/products/IDR403.loop.shtml",
+      attribution: "Bureau of Meteorology · IDR403 · 128 km",
+    },
+  },
   yamanouchi: {
     windy: { lat: 36.74, lon: 138.42, zoom: 9 },
     official: {
@@ -946,6 +955,7 @@ const REGION_COUNTRY: Record<RegionKey, MapCountry> = {
   "snowy-mountains": "AU",
   "victorias-high-country": "AU",
   tasmania: "AU",
+  "australian-capital-territory": "AU",
   yamanouchi: "JP",
   "nozawa-onsen": "JP",
   iiyama: "JP",
@@ -1067,6 +1077,7 @@ const REGION_LABEL: Record<RegionKey, string> = {
   "snowy-mountains": "snowy mountains",
   "victorias-high-country": "victoria's high country",
   tasmania: "tasmania",
+  "australian-capital-territory": "australian capital territory",
   yamanouchi: "yamanouchi",
   "nozawa-onsen": "nozawa onsen",
   iiyama: "iiyama",

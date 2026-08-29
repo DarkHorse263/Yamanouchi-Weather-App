@@ -70,8 +70,8 @@ const REGIONS: RegionConfig[] = [
     region: "Victoria",
     status: "live",
     href: "/victorias-high-country/",
-    baseTowns: ["Mansfield", "Bright", "Mount Beauty", "Harrietville", "Dinner Plain", "Omeo", "Marysville", "Warburton"],
-    mountains: ["Mt Buller", "Falls Creek", "Mt Hotham", "Mt Stirling", "Lake Mountain", "Mt Donna Buang"],
+    baseTowns: ["Mansfield", "Bright", "Mount Beauty", "Harrietville", "Dinner Plain", "Omeo", "Marysville", "Warburton", "Rawson"],
+    mountains: ["Mt Buller", "Falls Creek", "Mt Hotham", "Mt Stirling", "Lake Mountain", "Mt Donna Buang", "Mt Baw Baw"],
     // Headline reading is for Mount Beauty (~357m) - closest sealed-road
     // town to Falls Creek and the most-stayed base for Victoria's High
     // Country off-mountain visitors. Per-mountain peak forecasts live on
@@ -90,8 +90,8 @@ const REGIONS: RegionConfig[] = [
     region: "Tasmania",
     status: "live",
     href: "/tasmania/",
-    baseTowns: ["Ben Lomond Base", "Launceston", "Hobart"],
-    mountains: ["Ben Lomond"],
+    baseTowns: ["Ben Lomond Base", "Launceston", "Maydena", "Hobart"],
+    mountains: ["Ben Lomond", "Mount Mawson"],
     // Headline reading from Launceston (~30m) · closest city base and
     // where most visiting skiers actually arrive. Ben Lomond summit
     // forecast lives on the dedicated mountain page.
@@ -99,6 +99,22 @@ const REGIONS: RegionConfig[] = [
     lat: -41.4332,
     lon: 147.1442,
     timezone: "Australia/Hobart",
+    sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
+  },
+  {
+    id: "australian-capital-territory",
+    name: "Australian Capital Territory",
+    country: "Australia",
+    countryCode: "AU",
+    region: "Australian Capital Territory",
+    status: "live",
+    href: "/australian-capital-territory/",
+    baseTowns: ["Canberra"],
+    mountains: ["Corin Forest"],
+    headlineLabel: "Canberra",
+    lat: -35.2809,
+    lon: 149.1300,
+    timezone: "Australia/Sydney",
     sourceLabel: "Open-Meteo · ECMWF + GFS + ICON",
   },
   {

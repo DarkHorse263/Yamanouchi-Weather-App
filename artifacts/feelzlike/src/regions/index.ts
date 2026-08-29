@@ -24,6 +24,7 @@ import { minakamiRegion } from "./minakami";
 import { kusatsuManzaRegion } from "./kusatsu-manza";
 import { hachimantaiRegion } from "./hachimantai";
 import { tasmaniaRegion } from "./tasmania";
+import { australianCapitalTerritoryRegion } from "./australian-capital-territory";
 import { queenstownRegion } from "./queenstown";
 import { wanakaRegion } from "./wanaka";
 import { mtHuttRegion } from "./mt-hutt";
@@ -167,6 +168,7 @@ const AUTHORED_REGIONS: RegionConfig[] = [
   snowyMountainsRegion,
   victoriasHighCountryRegion,
   tasmaniaRegion,
+  australianCapitalTerritoryRegion,
   yamanouchiRegion,
   nozawaOnsenRegion,
   iiyamaRegion,
@@ -306,6 +308,7 @@ export const REGION_COUNTRY: Record<string, CountryCode> = {
   "snowy-mountains": "AU",
   "victorias-high-country": "AU",
   "tasmania": "AU",
+  "australian-capital-territory": "AU",
   "yamanouchi": "JP",
   "nozawa-onsen": "JP",
   "iiyama": "JP",
@@ -441,6 +444,7 @@ const incomingWesternRegionCountryEntries: Record<string, CountryCode> = {
   "snowy-mountains": "AU",
   "victorias-high-country": "AU",
   "tasmania": "AU",
+  "australian-capital-territory": "AU",
   "yamanouchi": "JP",
   "nozawa-onsen": "JP",
   "iiyama": "JP",

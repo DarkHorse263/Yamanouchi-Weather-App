@@ -2,6 +2,7 @@ import {
   getPublishedMountainCapabilities as getJapanCapabilities,
   mountainDetailRouteMode as japanRouteMode,
   publishedMountainBelongsToRegion as japanMountainBelongsToRegion,
+  regionAlertsAvailable,
   type PublishedMountainCapabilities,
 } from "./japan-catalogue";
 import {
@@ -14,6 +15,7 @@ export {
   type CatalogueTownLandingItem,
   type CatalogueTownLandingModel,
 } from "./catalogue-towns";
+export { regionAlertsAvailable };
 
 
 export function publishedMountainBelongsToRegion(regionId: string, mountainId: string): boolean {

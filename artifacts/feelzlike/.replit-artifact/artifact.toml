@@ -231,6 +231,10 @@ from = "/victorias-high-country/mountain/mt-donna-buang/"
 to = "/victorias-high-country/mountain/mt-donna-buang/index.html"
 
 [[services.production.rewrites]]
+from = "/victorias-high-country/mountain/mt-baw-baw/"
+to = "/victorias-high-country/mountain/mt-baw-baw/index.html"
+
+[[services.production.rewrites]]
 from = "/victorias-high-country/mansfield/"
 to = "/victorias-high-country/mansfield/index.html"
 
@@ -455,6 +459,34 @@ from = "/victorias-high-country/omeo/explore/"
 to = "/victorias-high-country/omeo/explore/index.html"
 
 [[services.production.rewrites]]
+from = "/victorias-high-country/rawson/"
+to = "/victorias-high-country/rawson/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/rawson/weather/"
+to = "/victorias-high-country/rawson/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/rawson/stay/"
+to = "/victorias-high-country/rawson/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/rawson/eat/"
+to = "/victorias-high-country/rawson/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/rawson/roads/"
+to = "/victorias-high-country/rawson/roads/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/rawson/transport/"
+to = "/victorias-high-country/rawson/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/victorias-high-country/rawson/explore/"
+to = "/victorias-high-country/rawson/explore/index.html"
+
+[[services.production.rewrites]]
 from = "/tasmania/"
 to = "/tasmania/index.html"
 
@@ -473,6 +505,10 @@ to = "/tasmania/stay/index.html"
 [[services.production.rewrites]]
 from = "/tasmania/mountain/ben-lomond/"
 to = "/tasmania/mountain/ben-lomond/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/mountain/mount-mawson/"
+to = "/tasmania/mountain/mount-mawson/index.html"
 
 [[services.production.rewrites]]
 from = "/tasmania/ben-lomond-base/"
@@ -545,6 +581,74 @@ to = "/tasmania/hobart/transport/index.html"
 [[services.production.rewrites]]
 from = "/tasmania/hobart/explore/"
 to = "/tasmania/hobart/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/maydena/"
+to = "/tasmania/maydena/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/maydena/weather/"
+to = "/tasmania/maydena/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/maydena/stay/"
+to = "/tasmania/maydena/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/maydena/eat/"
+to = "/tasmania/maydena/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/maydena/transport/"
+to = "/tasmania/maydena/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/tasmania/maydena/explore/"
+to = "/tasmania/maydena/explore/index.html"
+
+[[services.production.rewrites]]
+from = "/australian-capital-territory/"
+to = "/australian-capital-territory/index.html"
+
+[[services.production.rewrites]]
+from = "/australian-capital-territory/mountains/"
+to = "/australian-capital-territory/mountains/index.html"
+
+[[services.production.rewrites]]
+from = "/australian-capital-territory/alerts/"
+to = "/australian-capital-territory/alerts/index.html"
+
+[[services.production.rewrites]]
+from = "/australian-capital-territory/stay/"
+to = "/australian-capital-territory/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/australian-capital-territory/mountain/corin-forest/"
+to = "/australian-capital-territory/mountain/corin-forest/index.html"
+
+[[services.production.rewrites]]
+from = "/australian-capital-territory/canberra/"
+to = "/australian-capital-territory/canberra/index.html"
+
+[[services.production.rewrites]]
+from = "/australian-capital-territory/canberra/weather/"
+to = "/australian-capital-territory/canberra/weather/index.html"
+
+[[services.production.rewrites]]
+from = "/australian-capital-territory/canberra/stay/"
+to = "/australian-capital-territory/canberra/stay/index.html"
+
+[[services.production.rewrites]]
+from = "/australian-capital-territory/canberra/eat/"
+to = "/australian-capital-territory/canberra/eat/index.html"
+
+[[services.production.rewrites]]
+from = "/australian-capital-territory/canberra/transport/"
+to = "/australian-capital-territory/canberra/transport/index.html"
+
+[[services.production.rewrites]]
+from = "/australian-capital-territory/canberra/explore/"
+to = "/australian-capital-territory/canberra/explore/index.html"
 
 [[services.production.rewrites]]
 from = "/yamanouchi/"

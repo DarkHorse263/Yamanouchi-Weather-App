@@ -22,6 +22,7 @@ export const REGION_IDS = [
   "snowy-mountains",
   "victorias-high-country",
   "tasmania",
+  "australian-capital-territory",
   "yamanouchi",
   "nozawa-onsen",
   "iiyama",
@@ -272,6 +273,7 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "mt-hotham": "victorias-high-country",
   "lake-mountain": "victorias-high-country",
   "mt-donna-buang": "victorias-high-country",
+  "mt-baw-baw": "victorias-high-country",
   "mansfield": "victorias-high-country",
   "bright": "victorias-high-country",
   "mount-beauty": "victorias-high-country",
@@ -280,15 +282,22 @@ export const LOCATION_TO_REGION: Record<string, RegionId> = {
   "omeo": "victorias-high-country",
   "marysville": "victorias-high-country",
   "warburton": "victorias-high-country",
+  "rawson": "victorias-high-country",
   "victorias-high-country-roads": "victorias-high-country",
 
-  // Tasmania, AU · 1 mountain (Ben Lomond · only commercial chairlift),
-  // 3 base towns (on-mountain village + Launceston + Hobart).
+  // Tasmania, AU · commercial Ben Lomond plus volunteer/public Mount Mawson.
   "ben-lomond": "tasmania",
+  "mount-mawson": "tasmania",
+  "maydena": "tasmania",
   "ben-lomond-base": "tasmania",
   "launceston": "tasmania",
   "hobart": "tasmania",
   "tasmania-roads": "tasmania",
+
+  // ACT, AU · compact snowmaking-led learner slope and snow-play facility.
+  "corin-forest": "australian-capital-territory",
+  "canberra": "australian-capital-territory",
+  "australian-capital-territory-roads": "australian-capital-territory",
 
   // Yamanouchi, JP · 22 entries: 18 Shiga Kogen sub-areas + 4 Kita-Shiga resorts (ryuoo, xjam-takaifuji, yomase-onsen, kita-shiga-komaruyama).
   "shiga-sun-valley": "yamanouchi",

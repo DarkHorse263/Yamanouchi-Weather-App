@@ -125,7 +125,7 @@ const LOCATIONS: LocationConfig[] = [
   },
 
   // ─── Victoria's High Country (VIC, Australia) ────────────
-  // 6 mountains + 7 base towns. BOM AWS coverage in the VIC alpine
+  // 7 mountains + 9 base towns. BOM AWS coverage in the VIC alpine
   // is patchy and the verified station IDs aren't in this file's
   // canonical list yet, so every VHC entry uses Open-Meteo as the
   // truthful primary source (elevation-corrected) - same conservative
@@ -137,6 +137,7 @@ const LOCATIONS: LocationConfig[] = [
   { id: "mt-hotham",       name: "Mt Hotham",       latitude: -36.9779, longitude: 147.1361, elevation: 1862, description: "Highest VIC resort - the steep one. Hotham Airport for direct fly-in. Dinner Plain alpine village 10 min away.",                              bomStation: "Mount Hotham AWS", bomStationId: "", bomWmoId: 94906, bomProduct: "IDV60801", timezone: "Australia/Melbourne", region: "AU" },
   { id: "lake-mountain",   name: "Lake Mountain",   latitude: -37.5181, longitude: 145.8983, elevation: 1480, description: "Nordic and snow play only - no chairlift downhill. The closest snow to Melbourne (~2 hrs via Marysville).",                                    bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
   { id: "mt-donna-buang", name: "Mt Donna Buang",   latitude: -37.6961, longitude: 145.6989, elevation: 1250, description: "Free public snow play summit run by Parks Victoria / Yarra Ranges - no resort, no lifts, just toboggans on the day.",                          bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
+  { id: "mt-baw-baw",     name: "Mt Baw Baw",       latitude: -37.8383, longitude: 146.2747, elevation: 1567, description: "Compact public alpine resort with seven lifts, downhill and cross-country skiing, snow play and an on-mountain village.",                    bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
   { id: "mansfield",       name: "Mansfield",       latitude: -37.0539, longitude: 146.0894, elevation: 320,  description: "Cattle country gateway town - 50 min drive to Mt Buller and Mt Stirling.",                                                                     bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
   { id: "bright",          name: "Bright",          latitude: -36.7300, longitude: 146.9617, elevation: 309,  description: "Great Alpine Road hub - gateway to both Falls Creek and Mt Hotham.",                                                                            bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
   { id: "mount-beauty",    name: "Mount Beauty",    latitude: -36.7327, longitude: 147.1696, elevation: 357,  description: "Closest sealed-road town to Falls Creek - 30 min up the mountain road.",                                                                       bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
@@ -144,15 +145,24 @@ const LOCATIONS: LocationConfig[] = [
   { id: "dinner-plain",    name: "Dinner Plain",    latitude: -36.9276, longitude: 147.2400, elevation: 1550, description: "Alpine village 10 min from Mt Hotham - ski-in feel without the resort prices.",                                                                bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
   { id: "marysville",      name: "Marysville",      latitude: -37.5128, longitude: 145.7497, elevation: 320,  description: "Yarra Ranges gateway town - 20 min drive to Lake Mountain.",                                                                                   bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
   { id: "warburton",       name: "Warburton",       latitude: -37.7553, longitude: 145.6906, elevation: 175,  description: "Yarra Valley town - closest base to Mt Donna Buang.",                                                                                          bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
+  { id: "rawson",          name: "Rawson",          latitude: -37.9570, longitude: 146.3990, elevation: 470,  description: "Gippsland access town below Mt Baw Baw's on-mountain village.",                                                                               bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Melbourne", region: "AU" },
 
   // ─── Tasmania (TAS, Australia) ───────────────────────────
-  // 1 mountain (Ben Lomond · the only commercial chairlift) across 3 base
-  // towns (on-mountain village + Launceston + Hobart). No BOM AWS at the
-  // resort · Open-Meteo elevation-corrected is the primary source.
+  // Two operating fields: commercial Ben Lomond and volunteer/public Mount
+  // Mawson, plus their honest gateway towns. No BOM AWS at either field;
+  // elevation-corrected Open-Meteo is the primary source.
   { id: "ben-lomond",      name: "Ben Lomond",      latitude: -41.5378, longitude: 147.6736, elevation: 1572, description: "Tasmania's only commercial chairlift operation · Legges Tor summit, weather-dependent and short windows reward locals.",                bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Hobart", region: "AU" },
+  { id: "mount-mawson",    name: "Mount Mawson",    latitude: -42.6830, longitude: 146.5860, elevation: 1250, description: "Volunteer-staffed public club field in Mt Field National Park · natural-snow and conditions dependent.",                              bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Hobart", region: "AU" },
+  { id: "maydena",         name: "Maydena",         latitude: -42.7573, longitude: 146.6262, elevation: 280,  description: "Derwent Valley gateway and nearest town to Mt Field National Park and Mount Mawson.",                                                    bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Hobart", region: "AU" },
   { id: "ben-lomond-base", name: "Ben Lomond Base", latitude: -41.5392, longitude: 147.6486, elevation: 1450, description: "On-mountain village at the foot of the lifts · Carr Villa / Creek Inn precinct.",                                                       bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Hobart", region: "AU" },
   { id: "launceston",      name: "Launceston",      latitude: -41.4332, longitude: 147.1442, elevation: 30,   description: "Closest city base for Ben Lomond · ~90 min drive via Jacobs Ladder.",                                                                    bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Hobart", region: "AU" },
   { id: "hobart",          name: "Hobart",          latitude: -42.8821, longitude: 147.3272, elevation: 19,   description: "Tasmania's capital · long day-trips (~3 hrs each way) to Ben Lomond when conditions deliver.",                                           bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Hobart", region: "AU" },
+
+  // ─── Australian Capital Territory ─────────────────────────
+  // Corin Forest is a small snowmaking-led snow-play and learner facility,
+  // not a conventional alpine resort. Natural snowfall is rare.
+  { id: "corin-forest", name: "Corin Forest", latitude: -35.5294, longitude: 148.9915, elevation: 1200, description: "Small snowmaking-led snow-play and learn-to-ski facility with a beginner slope and magic carpet; natural snowfall is rare.", bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Sydney", region: "AU" },
+  { id: "canberra", name: "Canberra", latitude: -35.2809, longitude: 149.1300, elevation: 578, description: "Capital-city base about 45 minutes from Corin Forest.", bomStation: "Open-Meteo (no BOM AWS mapped)", bomStationId: "", bomWmoId: 0, timezone: "Australia/Sydney", region: "AU" },
 
   // ─── Yamanouchi (Nagano, Japan) ──────────────────────────
   // 22 individually-tracked mountains. Shiga Kogen is one Ikon-Pass connected

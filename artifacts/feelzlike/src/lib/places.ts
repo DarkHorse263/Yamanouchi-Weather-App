@@ -172,7 +172,7 @@ export type CountryCode = string;
 // AU regions carry STATE tags (NSW / VIC / TAS, never "AU") while Canadian
 // regions carry PROVINCE tags (AB / BC / QC, never "CA" - "CA" is California).
 // Same trap as the Expedia domain switch below: match the real tags.
-const AU_TAGS = ["AU", "AUS", "Australia", "NSW", "VIC", "TAS"];
+const AU_TAGS = ["AU", "AUS", "Australia", "NSW", "VIC", "TAS", "ACT"];
 const NZ_TAGS = ["NZ", "NZL", "New Zealand"];
 const CANADA_TAGS = ["AB", "BC", "QC"];
 // US region shortTags are STATE codes (like AU's NSW/VIC/TAS). This is every

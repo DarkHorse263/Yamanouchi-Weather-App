@@ -58,8 +58,9 @@ interface RegionsResponse {
 // ─── fallback (matches landing) ────────────────────
 const FALLBACK_REGIONS: Region[] = [
   { id: "snowy-mountains",        name: "Snowy Mountains",                country: "Australia", countryCode: "AU", region: "New South Wales", status: "live", href: "/snowy-mountains/",        baseTowns: ["Jindabyne", "Berridale", "Cooma"],                            mountains: ["Perisher", "Thredbo", "Selwyn", "Charlotte's Pass"],          headlineLabel: "Jindabyne",     headline: null },
-  { id: "victorias-high-country", name: "Victoria\u2019s High Country",   country: "Australia", countryCode: "AU", region: "Victoria",        status: "live", href: "/victorias-high-country/", baseTowns: ["Mount Beauty", "Bright", "Mansfield", "Harrietville", "Dinner Plain"], mountains: ["Mt Buller", "Mt Stirling", "Falls Creek", "Mt Hotham"], headlineLabel: "Mount Beauty", headline: null },
-  { id: "tasmania",               name: "Tasmania",                       country: "Australia", countryCode: "AU", region: "Tasmania",        status: "live", href: "/tasmania/",              baseTowns: ["Ben Lomond Base", "Launceston", "Hobart"],                    mountains: ["Ben Lomond"],                                                headlineLabel: "Launceston",   headline: null },
+  { id: "victorias-high-country", name: "Victoria\u2019s High Country",   country: "Australia", countryCode: "AU", region: "Victoria",        status: "live", href: "/victorias-high-country/", baseTowns: ["Mount Beauty", "Bright", "Mansfield", "Harrietville", "Dinner Plain", "Rawson"], mountains: ["Mt Buller", "Mt Stirling", "Falls Creek", "Mt Hotham", "Mt Baw Baw"], headlineLabel: "Mount Beauty", headline: null },
+  { id: "tasmania",               name: "Tasmania",                       country: "Australia", countryCode: "AU", region: "Tasmania",        status: "live", href: "/tasmania/",              baseTowns: ["Ben Lomond Base", "Launceston", "Maydena", "Hobart"],         mountains: ["Ben Lomond", "Mount Mawson"],                                headlineLabel: "Launceston",   headline: null },
+  { id: "australian-capital-territory", name: "Australian Capital Territory", country: "Australia", countryCode: "AU", region: "ACT", status: "live", href: "/australian-capital-territory/", baseTowns: ["Canberra"], mountains: ["Corin Forest"], headlineLabel: "Canberra", headline: null },
   { id: "yamanouchi",             name: "Yamanouchi Town",                country: "Japan",     countryCode: "JP", region: "Nagano",          status: "live", href: "/yamanouchi/",             baseTowns: ["Yudanaka", "Shibu Onsen", "Yomase"],                          mountains: ["Shiga Kogen", "Ryuoo", "X-Jam", "Yomase"],                   headlineLabel: "Yudanaka",     headline: null },
   { id: "nozawa-onsen",           name: "Nozawa Onsen",                   country: "Japan",     countryCode: "JP", region: "Nagano",          status: "live", href: "/nozawa-onsen/",           baseTowns: ["Nozawa Onsen"],                                              mountains: ["Nozawa Onsen"],                                              headlineLabel: "Nozawa Onsen", headline: null },
   { id: "iiyama",                 name: "Iiyama",                         country: "Japan",     countryCode: "JP", region: "Nagano",          status: "live", href: "/iiyama/",                 baseTowns: ["Iiyama", "Madarao Kogen", "Togari Onsen", "Kijimadaira"],     mountains: ["Madarao", "Tangram", "Togari Onsen", "Kijima Snow Park"],     headlineLabel: "Iiyama",       headline: null },
@@ -193,6 +194,8 @@ const WESTERN_FALLBACK_REGIONS: Region[] = westernRegions.map((region) => ({
 const PRIMARY_TOWN: Record<string, string> = {
   "snowy-mountains":         "Jindabyne",
   "victorias-high-country":  "Mount Beauty",
+  "tasmania":                "Launceston",
+  "australian-capital-territory": "Canberra",
   "yamanouchi":              "Yudanaka",
   "nozawa-onsen":            "Nozawa Onsen",
   "iiyama":                  "Iiyama",

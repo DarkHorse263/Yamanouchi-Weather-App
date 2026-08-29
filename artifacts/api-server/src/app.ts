@@ -283,11 +283,16 @@ if (process.env.NODE_ENV === "production") {
         marysville: "Marysville",
         warburton: "Warburton",
         omeo: "Omeo",
+        rawson: "Rawson",
       },
     },
     "tasmania": {
       name: "Tasmania",
-      towns: { "ben-lomond-base": "Ben Lomond Base", launceston: "Launceston", hobart: "Hobart" },
+      towns: { "ben-lomond-base": "Ben Lomond Base", launceston: "Launceston", maydena: "Maydena", hobart: "Hobart" },
+    },
+    "australian-capital-territory": {
+      name: "Australian Capital Territory",
+      towns: { canberra: "Canberra" },
     },
     // Japan
     "yamanouchi": {

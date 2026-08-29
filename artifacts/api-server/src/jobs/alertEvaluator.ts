@@ -45,6 +45,7 @@ const REGION_ANCHORS: Record<RegionId, {
   // Tasmania · anchor on Ben Lomond summit (Legges Tor, the highest
   // skiable point and the island's only commercial chairlift area).
   "tasmania": { lat: -41.5378, lon: 147.6736, elevation: 1572, region: "AU", displayName: "Tasmania" },
+  "australian-capital-territory": { lat: -35.5294, lon: 148.9915, elevation: 1200, region: "AU", displayName: "Australian Capital Territory" },
   "yamanouchi": { lat: 36.738, lon: 138.508, elevation: 1500, region: "JP", displayName: "Yamanouchi" },
   // Nozawa Onsen · single resort, anchor on Mt Kenashi summit.
   "nozawa-onsen": { lat: 36.9290, lon: 138.4500, elevation: 1650, region: "JP", displayName: "Nozawa Onsen" },

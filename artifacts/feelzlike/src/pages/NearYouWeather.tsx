@@ -42,6 +42,7 @@ const RADAR_REGION_KEYS: RadarRegionKey[] = [
   "snowy-mountains",
   "victorias-high-country",
   "tasmania",
+  "australian-capital-territory",
   "yamanouchi",
   "nozawa-onsen",
   "iiyama",

@@ -244,9 +244,18 @@ export const SNOWMAKING_CAPABILITY: Record<string, SnowmakingCapability> = {
     type: "conventional",
     headline: "conventional snowmaking",
     summary:
-      "ben lomond is tasmania's only lift-served ski resort · four snowmakers top up the natural snow across the summit and beginner areas, with more guns going in for 2026.",
+      "ben lomond is tasmania's only commercial lift-served ski resort · four snowmakers top up the natural snow across the summit and beginner areas, with more guns going in for 2026.",
     areas: [],
     source: "ben lomond",
+  },
+  // ─── australia · australian capital territory ─────────────────────────
+  "corin-forest": {
+    type: "conventional",
+    headline: "snowmaking-led cover",
+    summary:
+      "natural snowfall is rare at corin forest · snow guns make the winter cover for its small snow-play area and beginner ski and snowboard slope.",
+    areas: [],
+    source: "corin forest",
   },
   // ─── new zealand · queenstown ─────────────────────────────────────────
   "coronet-peak": {
