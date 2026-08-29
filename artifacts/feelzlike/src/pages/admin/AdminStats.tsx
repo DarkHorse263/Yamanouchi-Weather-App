@@ -16,11 +16,12 @@ interface DailyPoint {
   newsletter: number;
 }
 interface PromoBucket {
-  total: number;
+  last30d: number;
   last7d: number;
 }
 interface StatsPayload {
   promoFunnel?: Record<string, PromoBucket>;
+  alertSubscriptions30d?: number;
   alerts: SubsBucket;
   newsletter?: SubsBucket;
   newsletterSources?: Array<{ source: string; count: number }>;
@@ -218,14 +219,39 @@ function EmailIncidentsCard({ incidents }: { incidents: EmailIncident[] }) {
  * ones like the GA mirror does; expect these to read higher than GA).
  * "subscribed" is verified powder-alert subscribers from our own database.
  */
-function PromoFunnelCard({ alerts, promo }: { alerts: SubsBucket; promo?: Record<string, PromoBucket> }) {
+function PromoFunnelCard({
+  promo,
+  subscribed30d,
+}: {
+  promo?: Record<string, PromoBucket>;
+  subscribed30d?: number;
+}) {
   const fmt = (b?: PromoBucket) =>
-    b ? `${b.total}` : "0";
+    b ? `${b.last30d}` : "0";
   const sub7 = (b?: PromoBucket) => `+${b?.last7d ?? 0} last 7d`;
+  const gaHref = "https://analytics.google.com/analytics/web/#/p544105028/reports/explorer?params=_u..nav%3Dmaui&r=all-events";
+  if (!promo || subscribed30d === undefined) {
+    return (
+      <div className="rounded-lg border bg-white p-5">
+        <h3 className="text-sm font-semibold mb-1 lowercase">snow-alert prompt · funnel</h3>
+        <p className="text-sm text-muted-foreground">
+          first-party shown and clicked counts are unavailable right now ·{" "}
+          <a
+            href={gaHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-sky-700 hover:underline"
+          >
+            check GA events <ExternalLink className="w-3 h-3" />
+          </a>
+        </p>
+      </div>
+    );
+  }
   const steps = [
     { label: "shown", sub: `banner appeared · ${sub7(promo?.shown)}`, value: fmt(promo?.shown) },
     { label: "clicked", sub: `tapped set up alerts · ${sub7(promo?.clicked)}`, value: fmt(promo?.clicked) },
-    { label: "subscribed", sub: "confirmed a powder-alert email", value: String(alerts.verified) },
+    { label: "subscribed", sub: "confirmed a powder-alert email", value: String(subscribed30d) },
     { label: "dismissed", sub: `closed the banner · ${sub7(promo?.dismissed)}`, value: fmt(promo?.dismissed) },
   ];
   return (
@@ -233,7 +259,7 @@ function PromoFunnelCard({ alerts, promo }: { alerts: SubsBucket; promo?: Record
       <div className="flex items-baseline justify-between gap-3 mb-1">
         <h3 className="text-sm font-semibold lowercase">snow-alert prompt · funnel</h3>
         <a
-          href="https://analytics.google.com/analytics/web/#/p544105028/reports/explorer?params=_u..nav%3Dmaui&r=all-events"
+          href={gaHref}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1 text-xs text-sky-700 hover:underline whitespace-nowrap"
@@ -242,7 +268,7 @@ function PromoFunnelCard({ alerts, promo }: { alerts: SubsBucket; promo?: Record
         </a>
       </div>
       <p className="text-xs text-muted-foreground mb-3">
-        real first-party counts from every visitor (not consent-gated, so they'll read higher
+        last 30 days · real first-party counts from every visitor (not consent-gated, so they'll read higher
         than GA) · shown → clicked → subscribed tells you if the prompt converts.
       </p>
       <div className="flex items-stretch gap-2">
@@ -492,7 +518,10 @@ export default function AdminStats() {
 
           {stats.data.daily && stats.data.daily.length > 0 ? <TrendStrip daily={stats.data.daily} /> : null}
 
-          <PromoFunnelCard alerts={stats.data.alerts} promo={stats.data.promoFunnel} />
+          <PromoFunnelCard
+            promo={stats.data.promoFunnel}
+            subscribed30d={stats.data.alertSubscriptions30d}
+          />
 
           <div className="grid lg:grid-cols-2 gap-4">
             <SubsCard title="powder-alert subscribers" b={stats.data.alerts} />

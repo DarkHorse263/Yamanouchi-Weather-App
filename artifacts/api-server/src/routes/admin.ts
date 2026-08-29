@@ -152,6 +152,10 @@ router.get("/stats", async (_req: Request, res: Response) => {
     const since30d = new Date();
     since30d.setUTCHours(0, 0, 0, 0);
     since30d.setUTCDate(since30d.getUTCDate() - 29);
+    const [alertSubscriptions30dRow] = await db
+      .select({ c: count() })
+      .from(alertSubscribersTable)
+      .where(gte(alertSubscribersTable.verifiedAt, since30d));
     const alertDayExpr = sql<string>`to_char(${alertSubscribersTable.createdAt} AT TIME ZONE 'UTC', 'YYYY-MM-DD')`;
     const alertDaily = await db
       .select({ day: alertDayExpr, c: count() })
@@ -180,26 +184,36 @@ router.get("/stats", async (_req: Request, res: Response) => {
     }
 
     // Promo-funnel counters (first-party shown/clicked/dismissed tallies
-    // recorded by POST /api/promo/event). Totals are all-time; 7d mirrors
-    // the subscriber "new7d" window so the funnel reads consistently.
+    // recorded by POST /api/promo/event). Keep this query fail-soft: these
+    // vanity counters must not take down the rest of the admin stats page.
     const since7dDay = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
       .toISOString()
       .slice(0, 10);
-    const promoRows = await db
-      .select({
-        event: promoFunnelDailyTable.event,
-        total: sql<number>`sum(${promoFunnelDailyTable.count})`,
-        last7d: sql<number>`sum(${promoFunnelDailyTable.count}) filter (where ${promoFunnelDailyTable.day} >= ${since7dDay})`,
-      })
-      .from(promoFunnelDailyTable)
-      .groupBy(promoFunnelDailyTable.event);
-    const promoFunnel: Record<string, { total: number; last7d: number }> = {};
-    for (const r of promoRows) {
-      promoFunnel[r.event] = { total: Number(r.total ?? 0), last7d: Number(r.last7d ?? 0) };
+    const since30dDay = since30d.toISOString().slice(0, 10);
+    let promoFunnel: Record<string, { last30d: number; last7d: number }> | undefined;
+    try {
+      const promoRows = await db
+        .select({
+          event: promoFunnelDailyTable.event,
+          last30d: sql<number>`sum(${promoFunnelDailyTable.count}) filter (where ${promoFunnelDailyTable.day} >= ${since30dDay})`,
+          last7d: sql<number>`sum(${promoFunnelDailyTable.count}) filter (where ${promoFunnelDailyTable.day} >= ${since7dDay})`,
+        })
+        .from(promoFunnelDailyTable)
+        .groupBy(promoFunnelDailyTable.event);
+      promoFunnel = {};
+      for (const r of promoRows) {
+        promoFunnel[r.event] = {
+          last30d: Number(r.last30d ?? 0),
+          last7d: Number(r.last7d ?? 0),
+        };
+      }
+    } catch (err) {
+      console.error("[admin] failed to load promo funnel counters", err);
     }
 
     res.json({
       promoFunnel,
+      alertSubscriptions30d: alertSubscriptions30dRow?.c ?? 0,
       alerts: {
         total: alTotalRow?.c ?? 0,
         verified: alVerifiedRow?.c ?? 0,
