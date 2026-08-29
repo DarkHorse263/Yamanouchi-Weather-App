@@ -3,6 +3,7 @@ import { useEffect, type CSSProperties } from "react";
 import { markLandingVisited } from "@/lib/favouriteRegion";
 import logoWhite from "/branding/logo-white.png?url";
 import { HomeFourWay } from "@/components/home/HomeFourWay";
+import { HomeRegionCard } from "@/components/home/HomeRegionCard";
 import { HomeFooter } from "@/components/home/HomeFooter";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { websiteSchema, organizationSchema } from "@/lib/seo/jsonLd";
@@ -43,6 +44,8 @@ export default function Welcome() {
             real conditions for mountain travel
           </p>
         </header>
+
+        <HomeRegionCard />
 
         <HomeFourWay />
 
