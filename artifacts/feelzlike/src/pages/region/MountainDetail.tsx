@@ -891,6 +891,8 @@ export function MountainDetail() {
           </motion.div>
         )}
 
+        {powderAlertsAvailable && <AlertPromoBanner />}
+
         {/* PREMIUM · Extended outlook · the 5-day strip above is free; this
             gates whatever the region's forecast window extends to (14 days
             for AU, shorter elsewhere). Skipped entirely when the payload has
@@ -984,8 +986,6 @@ export function MountainDetail() {
             <PowderCalendar hourly={hourly as any} t={t} thresholds={powderThresholds} sectionNumber="" />
           </PremiumGate>
         )}
-
-        {powderAlertsAvailable && <AlertPromoBanner />}
 
         {/* The old reference-only "On the snow" lift card was merged into the
             per-lift wind panel below (Aug 2026) - with no live feed both
