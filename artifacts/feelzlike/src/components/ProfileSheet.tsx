@@ -15,6 +15,7 @@ import {
   DISCIPLINE_LABELS,
   PRIORITY_LABELS,
   RISK_LABELS,
+  riskHint,
   SKILL_LEVEL_LABELS,
   type Discipline,
   type Priority,
@@ -23,6 +24,7 @@ import {
   type UserProfile,
 } from "@/types/profile";
 import { useLanguage } from "@workspace/feelzlike-shell";
+import { useUnits } from "@/components/auth/UserPrefsProvider";
 
 /**
  * ProfileSheet - combined onboarding + edit experience for the UserProfile.
@@ -51,6 +53,7 @@ export function ProfileSheet({
 }) {
   const { profile, setProfile, resetProfile } = useProfile();
   const { t } = useLanguage();
+  const u = useUnits();
   const [draft, setDraft] = useState<UserProfile>(profile);
   const [step, setStep] = useState(0);
 
@@ -134,6 +137,7 @@ export function ProfileSheet({
       options={(Object.keys(RISK_LABELS) as RiskTolerance[]).map((k) => ({
         value: k,
         label: t(RISK_LABELS[k].en, RISK_LABELS[k].ja),
+        hint: riskHint(k, u.units),
       }))}
     />
   );
@@ -293,7 +297,7 @@ function SegmentedField<T extends string>({
   label: string;
   value: T;
   onChange: (v: T) => void;
-  options: Array<{ value: T; label: string }>;
+  options: Array<{ value: T; label: string; hint?: string }>;
 }) {
   // Use radiogroup semantics so screen readers announce the current
   // selection + that the user can move between siblings.
@@ -326,7 +330,12 @@ function SegmentedField<T extends string>({
                   : "border-border bg-white text-foreground hover:border-foreground/30"
               )}
             >
-              {o.label}
+              <span className="block">{o.label}</span>
+              {o.hint && (
+                <span className="mt-1 block text-xs font-normal leading-snug text-muted-foreground">
+                  {o.hint}
+                </span>
+              )}
             </button>
           );
         })}

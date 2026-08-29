@@ -29,6 +29,8 @@
     "test:snowmaking": "tsx --test src/lib/__tests__/snowmaking.test.ts",
     "test:gateErrors": "tsx --test src/lib/__tests__/gateErrors.test.ts",
     "test:unitsFormat": "tsx --test src/lib/__tests__/unitsFormat.test.ts",
+    "test:profileRiskHint": "tsx --test src/lib/__tests__/profileRiskHint.test.ts",
+    "test:powderThresholdText": "tsx --test src/lib/__tests__/powderThresholdText.test.ts",
     "test:promoImpression": "tsx --test src/lib/__tests__/promoImpression.test.ts",
     "test:mountainSummary": "tsx --test src/lib/__tests__/mountainSummary.test.ts",
     "test:catalogueRouteParity": "node scripts/validate-catalogue-route-parity.mjs",

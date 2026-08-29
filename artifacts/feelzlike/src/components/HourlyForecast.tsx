@@ -20,7 +20,6 @@ import {
 import { cn } from "@/lib/utils";
 import {
   detectPowderWindows,
-  POWDER_THRESHOLDS_DEFAULT,
   type HourlyForecast as HourlyForecastT,
   type PowderGrade,
   type PowderThresholds,
@@ -33,6 +32,7 @@ import {
 } from "@/lib/skiSeason";
 import { SnowfallOutlook, type SnowfallOutlookProps } from "@workspace/feelzlike-dashboard";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
+import { powderThresholdText } from "@/lib/powderThresholdText";
 
 /** Bound display-edge unit formatters from useUnits(). */
 type Units = ReturnType<typeof useUnits>;
@@ -603,11 +603,7 @@ function PowderDetail({
   const style = GRADE_STYLES[window.grade];
   // Render the explainer from the ACTUAL thresholds in play - country sets
   // differ (AU 0.5, NZ/CA 0.75, JP 1cm/hr), so no hardcoded two-way text.
-  const eff = { ...POWDER_THRESHOLDS_DEFAULT, ...thresholds };
-  const snowIn = (Math.round((eff.minSnowfall / 2.54) * 10) / 10).toFixed(1);
-  const windMph = Math.round(eff.maxWind * 0.621371);
-  const maxTempF = Math.round(eff.maxTemp * 1.8 + 32);
-  const maxTempC = eff.maxTemp > 0 ? `+${eff.maxTemp}` : `${eff.maxTemp}`;
+  const thresholdCopy = powderThresholdText(thresholds, u.units);
 
   return (
     <motion.div
@@ -655,15 +651,7 @@ function PowderDetail({
         />
       </div>
       <p className="mt-3 text-xs opacity-80 leading-relaxed">
-        {u.units === "imperial"
-          ? t(
-              `Thresholds: snowfall ≥${snowIn}in/hr, wind <${windMph}mph, ≥${eff.minDuration} consecutive hours, ≤${maxTempF}°F.`,
-              `基準: 降雪${snowIn}in/時以上、風速${windMph}mph未満、${eff.minDuration}時間以上連続、${maxTempF}°F以下。`,
-            )
-          : t(
-              `Thresholds: snowfall ≥${eff.minSnowfall}cm/hr, wind <${eff.maxWind}km/h, ≥${eff.minDuration} consecutive hours, ≤${maxTempC}°C.`,
-              `基準: 降雪${eff.minSnowfall}cm/時以上、風速${eff.maxWind}km/時未満、${eff.minDuration}時間以上連続、${maxTempC}℃以下。`,
-            )}
+        {t(thresholdCopy.en, thresholdCopy.ja)}
       </p>
     </motion.div>
   );

@@ -11,6 +11,8 @@
  * copy nudges users to set their own).
  */
 
+import { elevationRounded, windRounded, type UnitsPref } from "@/lib/unitsFormat";
+
 export type SkillLevel = "beginner" | "intermediate" | "advanced" | "expert";
 
 export type Discipline = "ski" | "snowboard" | "both";
@@ -72,11 +74,26 @@ export const PRIORITY_LABELS: Record<Priority, { en: string; ja: string; hint: s
   crowds:      { en: "Avoid crowds", ja: "混雑回避",        hint: "Penalise weekends + storm-day proxy crowds" },
 };
 
-export const RISK_LABELS: Record<RiskTolerance, { en: string; ja: string; hint: string }> = {
-  low:    { en: "Cautious",     ja: "慎重",     hint: "Harshly penalise wind > 35km/h and visibility < 200m" },
-  medium: { en: "Balanced",     ja: "バランス", hint: "Default thresholds" },
-  high:   { en: "Send it",      ja: "攻める",   hint: "Soften wind/visibility penalties" },
+export const RISK_LABELS: Record<RiskTolerance, { en: string; ja: string }> = {
+  low:    { en: "Cautious", ja: "慎重" },
+  medium: { en: "Balanced", ja: "バランス" },
+  high:   { en: "Send it",  ja: "攻める" },
 };
+
+const CAUTIOUS_WIND_THRESHOLD_KMH = 35;
+const CAUTIOUS_VISIBILITY_THRESHOLD_M = 200;
+
+export function riskHint(risk: RiskTolerance, units: UnitsPref): string {
+  if (risk === "medium") return "Default thresholds";
+  if (risk === "high") return "Soften wind/visibility penalties";
+
+  const wind = windRounded(CAUTIOUS_WIND_THRESHOLD_KMH, units);
+  const visibility = elevationRounded(CAUTIOUS_VISIBILITY_THRESHOLD_M, units);
+  const windUnit = units === "imperial" ? "mph" : "km/h";
+  const visibilityUnit = units === "imperial" ? "ft" : "m";
+
+  return `Harshly penalise wind > ${wind}${windUnit} and visibility < ${visibility}${visibilityUnit}`;
+}
 
 /** Tags that can be applied to a mountain to enable profile-aware bonuses
  * and penalties. All optional; absence is treated as "not applicable". */
