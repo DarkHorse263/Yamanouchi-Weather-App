@@ -1205,22 +1205,61 @@ interface CountryPin extends PinSpec {
 // you can browse Mt Buller while sitting on a Snowy Mountains page) and
 // frame the whole country via the "show all" control.
 // Some resorts appear in two regions on purpose (furano keeps Tomamu and
-// Kamui as day trips while they also have dedicated areas). On the shared
-// country-wide map the tiny display nudge isn't enough separation, so we
-// suppress the day-trip duplicate and keep only the dedicated-area pin,
-// which links through to the fuller region page.
-const DUPLICATE_COUNTRY_PINS: Partial<Record<RegionKey, string[]>> = {
-  furano: ["tomamu", "kamui-ski-links"],
-};
+// Kamui as day trips while they also anchor dedicated areas). Keep one pin
+// country-wide, preferring the current region's version when it owns one and
+// the dedicated-area version everywhere else.
+const DUPLICATE_COUNTRY_PIN_GROUPS = [
+  {
+    entries: [
+      { region: "furano", pinId: "tomamu" },
+      { region: "tomamu-sahoro", pinId: "tomamu-resort" },
+    ],
+    defaultRegion: "tomamu-sahoro",
+  },
+  {
+    entries: [
+      { region: "furano", pinId: "kamui-ski-links" },
+      { region: "asahikawa", pinId: "kamui" },
+    ],
+    defaultRegion: "asahikawa",
+  },
+] as const satisfies ReadonlyArray<{
+  entries: ReadonlyArray<{ region: RegionKey; pinId: string }>;
+  defaultRegion: RegionKey;
+}>;
+
+function suppressedCountryPinIds(
+  pinRegion: RegionKey,
+  currentRegion: RegionKey,
+): ReadonlySet<string> {
+  const suppressed = new Set<string>();
+
+  for (const group of DUPLICATE_COUNTRY_PIN_GROUPS) {
+    const currentRegionOwnsPin = group.entries.some(
+      (entry) => entry.region === currentRegion,
+    );
+    const preferredRegion = currentRegionOwnsPin
+      ? currentRegion
+      : group.defaultRegion;
+
+    for (const entry of group.entries) {
+      if (entry.region === pinRegion && entry.region !== preferredRegion) {
+        suppressed.add(entry.pinId);
+      }
+    }
+  }
+
+  return suppressed;
+}
 
 function countryPinsFor(region: RegionKey): CountryPin[] {
   const country = REGION_COUNTRY[region];
   return (Object.keys(REGION_DEFAULTS) as RegionKey[])
     .filter((key) => REGION_COUNTRY[key] === country)
     .flatMap((key) => {
-      const suppressed = DUPLICATE_COUNTRY_PINS[key] ?? [];
+      const suppressed = suppressedCountryPinIds(key, region);
       return REGION_DEFAULTS[key].pins
-        .filter((p) => !suppressed.includes(p.id))
+        .filter((p) => !suppressed.has(p.id))
         .map((p) => ({
           ...p,
           region: key,
