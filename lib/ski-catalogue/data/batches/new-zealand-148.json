@@ -62,6 +62,11 @@
             "url": "https://www.craigieburn.co.nz/",
             "citation": "Officially published 1308–1811 m elevation range; forecastM 1560 m is the rounded midpoint of that operator range."
           },
+          "baseElevation": {
+            "value": 1308,
+            "url": "https://www.craigieburn.co.nz/",
+            "citation": "Officially published base elevation 1308 m, the lower bound of the operator's 1308–1811 m elevation range."
+          },
           "locality": {
             "url": "https://www.craigieburn.co.nz/",
             "citation": "The operator publishes access from the Springfield/Craigieburn Forest approach."
@@ -132,6 +137,11 @@
           "forecastElevation": {
             "url": "https://brokenriver.co.nz/",
             "citation": "Officially published 1420–1820 m elevation range; forecastM 1620 m is the rounded midpoint of that operator range."
+          },
+          "baseElevation": {
+            "value": 1420,
+            "url": "https://brokenriver.co.nz/",
+            "citation": "Officially published base elevation 1420 m, the lower bound of the operator's 1420–1820 m elevation range."
           },
           "locality": {
             "url": "https://brokenriver.co.nz/",
@@ -206,6 +216,11 @@
             "url": "https://www.mtolympus.co.nz/",
             "citation": "Officially published 1430–1880 m elevation range; forecastM 1655 m is the rounded midpoint of that operator range."
           },
+          "baseElevation": {
+            "value": 1430,
+            "url": "https://www.mtolympus.co.nz/",
+            "citation": "Officially published base elevation 1430 m, the lower bound of the operator's 1430–1880 m elevation range."
+          },
           "locality": {
             "url": "https://www.mtolympus.co.nz/",
             "citation": "The operator’s access advice describes the approach via Windwhistle and the Mt Olympus road."
@@ -276,6 +291,11 @@
           "forecastElevation": {
             "url": "https://templebasin.co.nz/",
             "citation": "Officially published 1326–1753 m elevation range; forecastM 1540 m is the rounded midpoint of that operator range."
+          },
+          "baseElevation": {
+            "value": 1326,
+            "url": "https://templebasin.co.nz/",
+            "citation": "Officially published base elevation 1326 m, the lower bound of the operator's 1326–1753 m elevation range."
           },
           "locality": {
             "url": "https://templebasin.co.nz/",
@@ -350,6 +370,11 @@
             "url": "https://www.portersalpineresort.com/",
             "citation": "Officially published 1300–1980 m elevation range; forecastM 1640 m is the rounded midpoint of that operator range."
           },
+          "baseElevation": {
+            "value": 1300,
+            "url": "https://www.portersalpineresort.com/",
+            "citation": "Officially published base elevation 1300 m, the lower bound of the operator's 1300–1980 m elevation range."
+          },
           "locality": {
             "url": "https://www.portersalpineresort.com/",
             "citation": "The operator’s directions describe the Porters Pass/State Highway 73 approach from Springfield."
@@ -422,6 +447,11 @@
           "forecastElevation": {
             "url": "https://www.mtcheeseman.co.nz/",
             "citation": "Officially published 1540–1840 m elevation range; forecastM 1690 m is the rounded midpoint of that operator range."
+          },
+          "baseElevation": {
+            "value": 1540,
+            "url": "https://www.mtcheeseman.co.nz/",
+            "citation": "Officially published base elevation 1540 m, the lower bound of the operator's 1540–1840 m elevation range."
           },
           "locality": {
             "url": "https://www.mtcheeseman.co.nz/",
@@ -496,6 +526,11 @@
             "url": "https://www.mtlyford.co.nz/",
             "citation": "Officially published 1249–1750 m elevation range; forecastM 1500 m is the rounded midpoint of that operator range."
           },
+          "baseElevation": {
+            "value": 1249,
+            "url": "https://www.mtlyford.co.nz/",
+            "citation": "Officially published base elevation 1249 m, the lower bound of the operator's 1249–1750 m elevation range."
+          },
           "locality": {
             "url": "https://www.mtlyford.co.nz/",
             "citation": "The operator’s visitor directions identify Hanmer Springs as the practical nearby gateway."
@@ -569,6 +604,11 @@
             "url": "https://www.mtdobson.co.nz/",
             "citation": "Officially published 1690–2030 m elevation range; forecastM 1860 m is the rounded midpoint of that operator range."
           },
+          "baseElevation": {
+            "value": 1690,
+            "url": "https://www.mtdobson.co.nz/",
+            "citation": "Officially published base elevation 1690 m, the lower bound of the operator's 1690–2030 m elevation range."
+          },
           "locality": {
             "url": "https://www.mtdobson.co.nz/",
             "citation": "The operator’s access directions identify Fairlie and the unsealed ski-field road approach."
@@ -639,6 +679,11 @@
           "forecastElevation": {
             "url": "https://www.foxpeak.co.nz/",
             "citation": "Officially published 1200–1850 m elevation range; forecastM 1525 m is the rounded midpoint of that operator range."
+          },
+          "baseElevation": {
+            "value": 1200,
+            "url": "https://www.foxpeak.co.nz/",
+            "citation": "Officially published base elevation 1200 m, the lower bound of the operator's 1200–1850 m elevation range."
           },
           "locality": {
             "url": "https://www.foxpeak.co.nz/",
@@ -712,6 +757,11 @@
           "forecastElevation": {
             "url": "https://www.roundhill.co.nz/",
             "citation": "Officially published 1350–2133 m elevation range; forecastM 1742 m is the rounded midpoint of that operator range."
+          },
+          "baseElevation": {
+            "value": 1350,
+            "url": "https://www.roundhill.co.nz/",
+            "citation": "Officially published base elevation 1350 m, the lower bound of the operator's 1350–2133 m elevation range."
           },
           "locality": {
             "url": "https://www.roundhill.co.nz/",
@@ -787,6 +837,11 @@
             "url": "https://www.ohau.co.nz/snow-fields/",
             "citation": "Officially published 1425–1825 m elevation range; forecastM 1625 m is the rounded midpoint of that operator range."
           },
+          "baseElevation": {
+            "value": 1425,
+            "url": "https://www.ohau.co.nz/snow-fields/",
+            "citation": "Officially published base elevation 1425 m, the lower bound of the operator's 1425–1825 m elevation range."
+          },
           "locality": {
             "url": "https://www.ohau.co.nz/snow-fields/",
             "citation": "The operator’s snow-fields information identifies the Lake Ōhau/Twizel approach."
@@ -857,6 +912,11 @@
           "forecastElevation": {
             "url": "https://www.skiawakino.com/",
             "citation": "Officially published 1450–1942 m elevation range; forecastM 1696 m is the rounded midpoint of that operator range."
+          },
+          "baseElevation": {
+            "value": 1450,
+            "url": "https://www.skiawakino.com/",
+            "citation": "Officially published base elevation 1450 m, the lower bound of the operator's 1450–1942 m elevation range."
           },
           "locality": {
             "url": "https://www.skiawakino.com/",
@@ -930,6 +990,11 @@
           "forecastElevation": {
             "url": "https://www.skirainbow.co.nz/",
             "citation": "Officially published 1540–1768 m elevation range; forecastM 1654 m is the rounded midpoint of that operator range."
+          },
+          "baseElevation": {
+            "value": 1540,
+            "url": "https://www.skirainbow.co.nz/",
+            "citation": "Officially published base elevation 1540 m, the lower bound of the operator's 1540–1768 m elevation range."
           },
           "locality": {
             "url": "https://www.skirainbow.co.nz/",
@@ -1005,6 +1070,11 @@
             "url": "https://snowfarmnz.com/",
             "citation": "Officially published 1520–1620 m elevation range; forecastM 1570 m is the rounded midpoint of that operator range."
           },
+          "baseElevation": {
+            "value": 1520,
+            "url": "https://snowfarmnz.com/",
+            "citation": "Officially published base elevation 1520 m, the lower bound of the operator's 1520–1620 m elevation range."
+          },
           "locality": {
             "url": "https://snowfarmnz.com/",
             "citation": "The operator’s visitor information identifies the Pisa Range access road and Wānaka gateway."
@@ -1076,6 +1146,11 @@
             "url": "https://tukino.org/",
             "citation": "Officially published 1700–2020 m elevation range; forecastM 1860 m is the rounded midpoint of that operator range."
           },
+          "baseElevation": {
+            "value": 1700,
+            "url": "https://tukino.org/",
+            "citation": "Officially published base elevation 1700 m, the lower bound of the operator's 1700–2020 m elevation range."
+          },
           "locality": {
             "url": "https://tukino.org/",
             "citation": "The operator’s directions identify the eastern Ruapehu/Ohakune access context and 4WD road requirements."
@@ -1146,6 +1221,11 @@
           "forecastElevation": {
             "url": "https://www.skimanganui.co.nz/",
             "citation": "Officially published 1260–1680 m elevation range; forecastM 1470 m is the rounded midpoint of that operator range."
+          },
+          "baseElevation": {
+            "value": 1260,
+            "url": "https://www.skimanganui.co.nz/",
+            "citation": "Officially published base elevation 1260 m, the lower bound of the operator's 1260–1680 m elevation range."
           },
           "locality": {
             "url": "https://www.skimanganui.co.nz/",
@@ -1220,6 +1300,11 @@
             "url": "https://snowplanet.co.nz/",
             "citation": "Snowplanet is an indoor dome; 35 m is its mapped ground reference and is deliberately excluded from weather queries."
           },
+          "baseElevation": {
+            "value": 35,
+            "url": "https://snowplanet.co.nz/",
+            "citation": "Snowplanet's published base elevation is the 35 m mapped ground reference for its indoor dome."
+          },
           "locality": {
             "url": "https://snowplanet.co.nz/",
             "citation": "The official visitor location identifies Silverdale beside State Highway 1."
@@ -1289,6 +1374,11 @@
             "url": "https://www.visithanmersprings.co.nz/",
             "citation": "Officially published 338–338 m elevation range; forecastM 338 m is the rounded midpoint of that operator range."
           },
+          "baseElevation": {
+            "value": 338,
+            "url": "https://www.visithanmersprings.co.nz/",
+            "citation": "Officially published base elevation 338 m, the lower bound of the destination's 338–338 m elevation range."
+          },
           "locality": {
             "url": "https://www.visithanmersprings.co.nz/",
             "citation": "The official destination site identifies Hanmer Springs as the town/gateway name."
@@ -1356,6 +1446,11 @@
           "forecastElevation": {
             "url": "https://www.invincible.co.nz/",
             "citation": "Officially published 1500–2200 m elevation range; forecastM 1850 m is the rounded midpoint of that operator range."
+          },
+          "baseElevation": {
+            "value": 1500,
+            "url": "https://www.invincible.co.nz/",
+            "citation": "Officially published base elevation 1500 m, the lower bound of the operator's 1500–2200 m elevation range."
           },
           "locality": {
             "url": "https://www.invincible.co.nz/",
@@ -1427,6 +1522,11 @@
             "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/nelson-tasman/places/nelson-lakes-national-park/",
             "citation": "Officially published 880–1421 m elevation range; forecastM 1150 m is the rounded midpoint of that operator range."
           },
+          "baseElevation": {
+            "value": 880,
+            "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/nelson-tasman/places/nelson-lakes-national-park/",
+            "citation": "Officially published base elevation 880 m, the lower bound of DOC's 880–1421 m elevation range."
+          },
           "locality": {
             "url": "https://www.doc.govt.nz/parks-and-recreation/places-to-go/nelson-tasman/places/nelson-lakes-national-park/",
             "citation": "DOC identifies St Arnaud as the Nelson Lakes visitor gateway."
@@ -1494,6 +1594,11 @@
           "forecastElevation": {
             "url": "https://www.snowparknz.com/",
             "citation": "Officially published 1510–1600 m elevation range; forecastM 1555 m is the rounded midpoint of that operator range."
+          },
+          "baseElevation": {
+            "value": 1510,
+            "url": "https://www.snowparknz.com/",
+            "citation": "Officially published base elevation 1510 m, the lower bound of the former operator's 1510–1600 m elevation range."
           },
           "locality": {
             "url": "https://www.snowparknz.com/",
@@ -1567,6 +1672,11 @@
           "forecastElevation": {
             "url": "https://www.mtpotts.co.nz/",
             "citation": "Officially published 700–1950 m elevation range; forecastM 1325 m is the rounded midpoint of that operator range."
+          },
+          "baseElevation": {
+            "value": 700,
+            "url": "https://www.mtpotts.co.nz/",
+            "citation": "Officially published base elevation 700 m, the lower bound of the operator's 700–1950 m elevation range."
           },
           "locality": {
             "url": "https://www.mtpotts.co.nz/",

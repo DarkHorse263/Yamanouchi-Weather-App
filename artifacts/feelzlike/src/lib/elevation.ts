@@ -31,3 +31,16 @@ export function baseBandElevation(summitM: number): number {
   const lowerDrop = Math.min(600, Math.round(summit * 0.3));
   return Math.max(50, summit - lowerDrop);
 }
+
+/**
+ * Prefer a resort's real village / base-area elevation when configured.
+ * Resorts without one retain the lower-band estimate used before real base
+ * elevations were supported.
+ */
+export function resolveVillageElevation(
+  baseElevationM?: number | null,
+  summitM?: number | null,
+): number | undefined {
+  if (baseElevationM != null) return baseElevationM;
+  return summitM != null ? baseBandElevation(summitM) : undefined;
+}

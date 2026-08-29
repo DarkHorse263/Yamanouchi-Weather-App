@@ -13,6 +13,7 @@ export interface PublicCatalogueRecord {
   name: string;
   coordinates: { lat: number; lng: number };
   forecastElevationM: number;
+  baseElevationM?: number;
   officialUrl: string;
   regionId: string;
   regionName: string;

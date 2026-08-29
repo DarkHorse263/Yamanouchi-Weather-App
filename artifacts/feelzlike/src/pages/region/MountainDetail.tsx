@@ -52,7 +52,7 @@ import { REGION_COUNTRY } from "@/regions";
 import { MountainWebcams } from "@/components/MountainWebcams";
 import { ForecastChart } from "@/components/weather/ForecastChart";
 import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
-import { baseBandElevation, midMountainElevation } from "@/lib/elevation";
+import { midMountainElevation, resolveVillageElevation } from "@/lib/elevation";
 import { getLiftsForMountain } from "@/data/lifts";
 import { cn } from "@/lib/utils";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
@@ -597,7 +597,10 @@ export function MountainDetail() {
             reportedBaseSource={resortReport ? reportSource : undefined}
             trustedModelBaseCm={modelDepthTrusted ? current.snowDepth : undefined}
             freezingLevelM={current.freezingLevel}
-            villageElevationM={elevSummitM != null ? baseBandElevation(elevSummitM) : undefined}
+            villageElevationM={resolveVillageElevation(
+              mountainCfg?.baseElevationM,
+              elevSummitM,
+            )}
             midElevationM={elevSummitM != null ? midMountainElevation(elevSummitM) : undefined}
           />
 

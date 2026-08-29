@@ -3594,6 +3594,7 @@
         "lng": 171.716
       },
       "forecastElevationM": 1560,
+      "baseElevationM": 1308,
       "officialUrl": "https://www.craigieburn.co.nz/",
       "regionId": "canterbury",
       "regionName": "Canterbury",
@@ -3620,6 +3621,7 @@
         "lng": 171.658
       },
       "forecastElevationM": 1620,
+      "baseElevationM": 1420,
       "officialUrl": "https://brokenriver.co.nz/",
       "regionId": "canterbury",
       "regionName": "Canterbury",
@@ -3648,6 +3650,7 @@
         "lng": 171.604
       },
       "forecastElevationM": 1655,
+      "baseElevationM": 1430,
       "officialUrl": "https://www.mtolympus.co.nz/",
       "regionId": "canterbury",
       "regionName": "Canterbury",
@@ -3674,6 +3677,7 @@
         "lng": 171.586
       },
       "forecastElevationM": 1540,
+      "baseElevationM": 1326,
       "officialUrl": "https://templebasin.co.nz/",
       "regionId": "canterbury",
       "regionName": "Canterbury",
@@ -3702,6 +3706,7 @@
         "lng": 171.647
       },
       "forecastElevationM": 1640,
+      "baseElevationM": 1300,
       "officialUrl": "https://www.portersalpineresort.com/",
       "regionId": "canterbury",
       "regionName": "Canterbury",
@@ -3730,6 +3735,7 @@
         "lng": 171.663
       },
       "forecastElevationM": 1690,
+      "baseElevationM": 1540,
       "officialUrl": "https://www.mtcheeseman.co.nz/",
       "regionId": "canterbury",
       "regionName": "Canterbury",
@@ -3758,6 +3764,7 @@
         "lng": 173.086
       },
       "forecastElevationM": 1500,
+      "baseElevationM": 1249,
       "officialUrl": "https://www.mtlyford.co.nz/",
       "regionId": "canterbury",
       "regionName": "Canterbury",
@@ -3786,6 +3793,7 @@
         "lng": 170.632
       },
       "forecastElevationM": 1860,
+      "baseElevationM": 1690,
       "officialUrl": "https://www.mtdobson.co.nz/",
       "regionId": "mackenzie-south-canterbury",
       "regionName": "Mackenzie & South Canterbury",
@@ -3812,6 +3820,7 @@
         "lng": 170.579
       },
       "forecastElevationM": 1525,
+      "baseElevationM": 1200,
       "officialUrl": "https://www.foxpeak.co.nz/",
       "regionId": "mackenzie-south-canterbury",
       "regionName": "Mackenzie & South Canterbury",
@@ -3840,6 +3849,7 @@
         "lng": 170.56
       },
       "forecastElevationM": 1742,
+      "baseElevationM": 1350,
       "officialUrl": "https://www.roundhill.co.nz/",
       "regionId": "mackenzie-south-canterbury",
       "regionName": "Mackenzie & South Canterbury",
@@ -3869,6 +3879,7 @@
         "lng": 169.777
       },
       "forecastElevationM": 1625,
+      "baseElevationM": 1425,
       "officialUrl": "https://www.ohau.co.nz/snow-fields/",
       "regionId": "mackenzie-south-canterbury",
       "regionName": "Mackenzie & South Canterbury",
@@ -3895,6 +3906,7 @@
         "lng": 170.392
       },
       "forecastElevationM": 1696,
+      "baseElevationM": 1450,
       "officialUrl": "https://www.skiawakino.com/",
       "regionId": "mackenzie-south-canterbury",
       "regionName": "Mackenzie & South Canterbury",
@@ -3923,6 +3935,7 @@
         "lng": 172.859
       },
       "forecastElevationM": 1654,
+      "baseElevationM": 1540,
       "officialUrl": "https://www.skirainbow.co.nz/",
       "regionId": "nelson-lakes",
       "regionName": "Nelson Lakes",
@@ -3952,6 +3965,7 @@
         "lng": 169.082
       },
       "forecastElevationM": 1570,
+      "baseElevationM": 1520,
       "officialUrl": "https://snowfarmnz.com/",
       "regionId": "wanaka",
       "regionName": "Wanaka",
@@ -3978,6 +3992,7 @@
         "lng": 175.653
       },
       "forecastElevationM": 1860,
+      "baseElevationM": 1700,
       "officialUrl": "https://tukino.org/",
       "regionId": "ruapehu",
       "regionName": "Ruapehu",
@@ -4004,6 +4019,7 @@
         "lng": 174.104
       },
       "forecastElevationM": 1470,
+      "baseElevationM": 1260,
       "officialUrl": "https://www.skimanganui.co.nz/",
       "regionId": "taranaki",
       "regionName": "Taranaki",
@@ -4030,6 +4046,7 @@
         "lng": 174.676
       },
       "forecastElevationM": 35,
+      "baseElevationM": 35,
       "officialUrl": "https://snowplanet.co.nz/",
       "regionId": "auckland",
       "regionName": "Auckland",

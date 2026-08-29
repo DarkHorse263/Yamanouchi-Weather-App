@@ -10,6 +10,7 @@ function mountainFor(record: PublishedCanadaSkiRecord): MountainLink {
     id: record.publicId,
     name: record.name,
     elevationM: record.forecastElevationM,
+    baseElevationM: record.baseElevationM,
     lat: record.coordinates.lat,
     lng: record.coordinates.lng,
     websiteUrl: record.officialUrl,

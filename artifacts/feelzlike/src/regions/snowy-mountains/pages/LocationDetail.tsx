@@ -3,7 +3,7 @@ import { useRegion } from "@workspace/feelzlike-shell";
 import { useGetLocationWeather, useGetLocationWebcams, useGetLocationLiftStatus, useGetResortSnowReport } from "@workspace/api-client-react";
 import { MountainSnapshot } from "@workspace/feelzlike-dashboard";
 import { ElevationBands } from "@/components/weather/ElevationBands";
-import { baseBandElevation, midMountainElevation } from "@/lib/elevation";
+import { midMountainElevation, resolveVillageElevation } from "@/lib/elevation";
 import { PageMeta } from "@/lib/seo/PageMeta";
 import { placeSchema, breadcrumbSchema } from "@/lib/seo/jsonLd";
 import { OfficialSiteLink } from "@/components/OfficialSiteLink";
@@ -151,8 +151,9 @@ export default function LocationDetail() {
   // snow falls higher up, so the village figure understates what riders see.
   // Summit lives in the region config; everything else (temp, feels-like,
   // current conditions) stays at the village.
-  const summitElevationM = region.mountains?.find((m) => m.id === locationId)?.elevationM;
-  const mountainWebsiteUrl = region.mountains?.find((m) => m.id === locationId)?.websiteUrl;
+  const mountain = region.mountains?.find((m) => m.id === locationId);
+  const summitElevationM = mountain?.elevationM;
+  const mountainWebsiteUrl = mountain?.websiteUrl;
   const snowElevationM = summitElevationM != null ? midMountainElevation(summitElevationM) : undefined;
 
   const { data: weatherData, isLoading: weatherLoading, error: weatherError, refetch: weatherRefetch } = useGetLocationWeather(
@@ -468,7 +469,10 @@ export default function LocationDetail() {
             reportedBaseSource={resortReport ? reportSource : undefined}
             trustedModelBaseCm={modelDepthTrusted ? current.snowDepth : undefined}
             freezingLevelM={current.freezingLevel}
-            villageElevationM={summitElevationM != null ? baseBandElevation(summitElevationM) : undefined}
+            villageElevationM={resolveVillageElevation(
+              mountain?.baseElevationM,
+              summitElevationM,
+            )}
             midElevationM={snowElevationM}
           />
 

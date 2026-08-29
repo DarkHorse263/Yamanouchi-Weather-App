@@ -21,7 +21,9 @@ test("projects the 56 published Canada records into province-first CA regions", 
     const region = regions.find((candidate) => candidate.id === record.travelRegionId);
     assert.ok(region);
     assert.equal(region.shortTag, "CA");
-    assert.ok(region.mountains?.some((mountain) => mountain.id === record.publicId));
+    const mountain = region.mountains?.find((candidate) => candidate.id === record.publicId);
+    assert.ok(mountain);
+    assert.equal(mountain.baseElevationM, record.baseElevationM);
     assert.equal(record.route, `/${region.id}/mountain/${record.publicId}`);
   }
   assert.deepEqual(regions.slice(1).map((region) => region.id), travelRegions.map((region) => region.travelRegionId));

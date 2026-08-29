@@ -47,6 +47,14 @@ const mountains = regions.flatMap((region) =>
 test("projects every published Japan catalogue record", () => {
   assert.ok(publishedCatalogueRecords.length > 0);
   assert.equal(mountains.length, publishedCatalogueRecords.length + 1);
+  for (const record of publishedCatalogueRecords) {
+    const projected = mountains.find(
+      ({ regionId, mountain }) =>
+        regionId === record.travelRegionId && mountain.id === record.publicId,
+    )?.mountain;
+    assert.ok(projected);
+    assert.equal(projected.baseElevationM, record.baseElevationM);
+  }
 });
 
 test("every catalogue travel region has one deterministic prefecture browse group", async () => {

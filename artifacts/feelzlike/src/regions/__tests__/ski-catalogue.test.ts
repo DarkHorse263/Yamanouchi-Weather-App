@@ -24,12 +24,28 @@ test("generated state towns are mountain-link landings, never synthetic town wea
 
 test("every generated published record has its state-first mountain route", () => {
   const regions = mergeSkiCatalogueRegions([]);
+  let realBaseCount = 0;
   for (const record of publishedRecords) {
     const region = regions.find((candidate) => candidate.id === record.regionId);
     assert.ok(region);
-    assert.ok(region.mountains?.some((mountain) => mountain.id === record.publicId));
+    const mountain = region.mountains?.find((candidate) => candidate.id === record.publicId);
+    assert.ok(mountain);
+    assert.equal(mountain.baseElevationM, record.baseElevationM);
+    if (record.baseElevationM != null) realBaseCount += 1;
     assert.equal(record.route, `/${record.regionId}/mountain/${record.publicId}`);
   }
+  assert.equal(realBaseCount, 17);
+  assert.ok(publishedRecords
+    .filter((record) => record.baseElevationM != null)
+    .every((record) => record.countryCode === "NZ"));
+  assert.equal(
+    publishedRecords.find((record) => record.publicId === "craigieburn-valley")?.baseElevationM,
+    1308,
+  );
+  assert.equal(
+    publishedRecords.find((record) => record.countryCode === "US")?.baseElevationM,
+    undefined,
+  );
 });
 
 test("generated eastern US states and mountains expose catalogue-backed alerts", () => {

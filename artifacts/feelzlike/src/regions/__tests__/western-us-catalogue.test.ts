@@ -35,7 +35,6 @@ const published: WesternUsPublishedRecord = {
   name: "Fixture Mountain",
   coordinates: { lat: 43.5, lng: -110.8 },
   forecastElevationM: 2000,
-  baseElevationM: 2000,
   topElevationM: 2500,
   officialUrl: "https://example.com",
   stateCode: "WY",
@@ -66,6 +65,10 @@ test("published records augment an authored region without duplicating it", () =
     "snow-king-mountain",
     "fixture-mountain",
   ]);
+  assert.equal(
+    merged.mountains?.find((mountain) => mountain.id === "fixture-mountain")?.baseElevationM,
+    published.baseElevationM,
+  );
   assert.equal(merged.resorts[0]?.path, "/mountain/snow-king-mountain");
 });
 

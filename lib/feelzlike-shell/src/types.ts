@@ -27,8 +27,10 @@ export interface MountainLink {
   id: string;
   name: string;
   nameJa?: string;
-  /** Optional summit/base elevation for card display */
+  /** Optional summit / upper-mountain elevation for card display and forecast bands */
   elevationM?: number;
+  /** Optional real resort village / base-area elevation */
+  baseElevationM?: number;
   /** Short tagline shown on the region overview card */
   blurb?: string;
   blurbJa?: string;

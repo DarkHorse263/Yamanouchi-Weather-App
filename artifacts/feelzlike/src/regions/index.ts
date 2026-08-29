@@ -163,6 +163,7 @@ import { highmountRegion } from "./highmount";
 // Eastern-timezone (America/New_York) US regions on this branch.
 import { mergeCanadaCatalogueRegions } from "./canada-catalogue";
 import { mergeWesternUsCatalogueRegions } from "./western-us-catalogue";
+import { applyVerifiedVillageElevations } from "./verified-village-elevations";
 import { regions as westernUsCatalogueRegions } from "@workspace/western-us-ski-catalogue/public-runtime";
 const AUTHORED_REGIONS: RegionConfig[] = [
   snowyMountainsRegion,
@@ -288,7 +289,12 @@ const AUTHORED_REGIONS: RegionConfig[] = [
 
 // Catalogue projections are ordered deliberately: Japan first, then Canada.
 export const REGIONS: RegionConfig[] = mergeWesternUsCatalogueRegions(
-  mergeSkiCatalogueRegions(mergeCanadaCatalogueRegions(mergeJapanCatalogueRegions(AUTHORED_REGIONS))),
+  mergeSkiCatalogueRegions(
+    mergeCanadaCatalogueRegions(mergeJapanCatalogueRegions(applyVerifiedVillageElevations(AUTHORED_REGIONS, {
+      strict: true,
+      completeInventory: true,
+    }))),
+  ),
 );
 
 export const REGION_BY_ID: Record<string, RegionConfig> = Object.fromEntries(

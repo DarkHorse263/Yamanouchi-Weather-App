@@ -45,7 +45,7 @@ import { REGION_COUNTRY } from "@/regions";
 import { getLiftsForMountain } from "@/data/lifts";
 import { ForecastChart } from "@/components/weather/ForecastChart";
 import { AlertSubscribeForm } from "@/components/AlertSubscribeForm";
-import { baseBandElevation, midMountainElevation } from "@/lib/elevation";
+import { midMountainElevation, resolveVillageElevation } from "@/lib/elevation";
 import { cn } from "@/lib/utils";
 import { useUnits } from "@/components/auth/UserPrefsProvider";
 import MountainConditionsSummary from "@/components/weather/MountainConditionsSummary";
@@ -384,7 +384,10 @@ export default function ResortDetail() {
             !isLiftSeasonOpen(REGION_COUNTRY[region.id]) ? current.snowDepth : undefined
           }
           freezingLevelM={current.freezingLevel}
-          villageElevationM={mountain?.elevationM != null ? baseBandElevation(mountain.elevationM) : undefined}
+          villageElevationM={resolveVillageElevation(
+            mountain?.baseElevationM,
+            mountain?.elevationM,
+          )}
           midElevationM={snowElevationM}
         />
         <LiveConditions stats={stats} />
